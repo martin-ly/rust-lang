@@ -1,0 +1,15 @@
+[package]
+name = "c01_own_borrow_scope"
+version = "0.1.0"
+edition = "2024"
+#resolver = "3"
+
+[dependencies]
+
+[lib]
+name = "c01_own_borrow_scope"
+path = "src/lib.rs"
+
+[[bin]]
+name = "obs"
+path = "src/main.rs"

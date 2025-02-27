@@ -1,0 +1,17 @@
+[package]
+name = "c02_type_system"
+version = "0.1.0"
+edition = "2024"
+#resolver = "3"
+
+
+[lib]
+name = "c02_type_system"
+path = "src/lib.rs"
+
+[[bin]]
+name = "ts"
+path = "src/bin/main.rs"
+
+[dependencies]
+c01_own_borrow_scope = { path = "../c01_own_borrow_scope" }

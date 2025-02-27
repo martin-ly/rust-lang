@@ -1,0 +1,14 @@
+[package]
+name = "c03_control_fn"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+[lib]
+name = "c03_control_fn"
+path = "src/lib.rs"
+
+[[bin]]
+name = "cf"
+path = "src/bin/main.rs"
