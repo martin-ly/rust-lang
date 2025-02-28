@@ -12,7 +12,9 @@
     1.1 reference relative relationship lifetime syntax model: include { variable } 
     1.2 resource defination and organization,lifecycle RAII model: include { type system }
     1.3 runtime behavior Semantic model: include { control_flow }
-        
+
+[memory](docs/memory.md)
+
 ### 2. variable syntax model: include { own, borrow, scope }
 
     2.1 Ownership concept for human inference,Compiler Syntax Semantic check: include { Copy Semantic, Clone Semantic, Move Semantic }, 
@@ -23,7 +25,9 @@
     2.6 Static check on move Semantic in Compiling time,variable's validate,Ownership's linear moving: include { visibility, shadow, scope ,only one owner},
     2.7 Runtime check on move Semantic in Compiling time or runtime,
     2.8 Scope and visibility semantic model: include { global, local, static,function,closure,expression }
-         
+
+[variable](docs/variable.md)
+
 ### 3. type system model: include { primitive_type, compound_type, generic_type, trait_type }
 
     3.1 primitive_type: include{ number, boolean,etc internal Types}
@@ -41,9 +45,9 @@
     4.3 expression: include{ expression,match, expression_value }
     4.4 statement: include{ statement,if,else,while,for,label,loop,match,return,break,continue,yield,gen,async,await,macro }
 
-[variable](docs/variable.md)
-
 ## 1. own_borrow_scope  
+
+[ref_refmut](docs/ref_refmut.md)
 
 ## 2. type_system
 

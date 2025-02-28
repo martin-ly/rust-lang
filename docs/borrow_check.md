@@ -213,17 +213,17 @@
     示例：
 
     ```rust
-        fn main() {
-            let mut x = 5;
-            let r1 = &x as *const i32; // 创建一个不可变原始指针
-            let r2 = &mut x as *mut i32; // 创建一个可变原始指针
+    fn main() {
+        let mut x = 5;
+        let r1 = &x as *const i32; // 创建一个不可变原始指针
+        let r2 = &mut x as *mut i32; // 创建一个可变原始指针
 
-            unsafe {
-                println!("r1 is: {}", *r1); // 解引用原始指针
-                *r2 += 1; // 修改原始指针指向的值
-                println!("r2 is: {}", *r2);
-            }
+        unsafe {
+            println!("r1 is: {}", *r1); // 解引用原始指针
+            *r2 += 1; // 修改原始指针指向的值
+            println!("r2 is: {}", *r2);
         }
+    }
     ```
     注意：
         在 unsafe 块中，程序员需要手动保证内存安全。如果操作不当，可能会导致未定义行为。
@@ -236,14 +236,14 @@
     示例：
 
     ```rust
-        use std::cell::Cell;
+    use std::cell::Cell;
 
-        fn main() {
-            let x = Cell::new(5);
-            let y = x.get(); // 获取值的副本
-            x.set(y + 1); // 修改值
-            println!("x is: {}", x.get());
-        }
+    fn main() {
+        let x = Cell::new(5);
+        let y = x.get(); // 获取值的副本
+        x.set(y + 1); // 修改值
+        println!("x is: {}", x.get());
+    }
     ```
     注意：
         Cell<T> 和 RefCell<T> 通过运行时检查来确保内存安全，但它们的性能开销比编译时检查要高。
@@ -256,9 +256,9 @@
     示例：
 
     ```rust
-        fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-            if x.len() > y.len() { x } else { y }
-        }
+    fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+        if x.len() > y.len() { x } else { y }
+    }
 
     fn main() {
         let string1 = String::from("abcd");
@@ -303,18 +303,18 @@
     示例：
     
     ```rust
-        use std::ptr;
+    use std::ptr;
 
-        fn main() {
-            let mut x = 5;
-            let r1 = &x as *const i32;
-            let r2 = &mut x as *mut i32;
+    fn main() {
+        let mut x = 5;
+        let r1 = &x as *const i32;
+        let r2 = &mut x as *mut i32;
 
-            unsafe {
-                ptr::copy(r1, r2, 1); // 将 r1 的值复制到 r2
-                println!("x is: {}", x);
-            }
+        unsafe {
+            ptr::copy(r1, r2, 1); // 将 r1 的值复制到 r2
+            println!("x is: {}", x);
         }
+    }
     ```
 
     注意：
