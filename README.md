@@ -75,7 +75,13 @@
 
 ## 8. algorithms
 
+[algorithms_01](docs/algorithms_01.md)
+[algorithms_02](docs/algorithms_02.md)
+
 ## 9. design_pattern
+
+[design_pattern_01](docs/design_pattern_01.md)
+[design_pattern_02](docs/design_pattern_02.md)
 
 ## 10. networks
 

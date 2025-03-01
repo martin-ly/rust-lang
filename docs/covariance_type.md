@@ -64,9 +64,8 @@
 
             ```rust
             // 定义一个类型导出为 `dyn Any`的函数
-            // 定义一个类型导出为 `dyn Any`的函数
             fn example<T: ?Sized>(t: &T) -> &dyn std::any::Any {
-            t as &dyn std::any::Any
+                t as &dyn std::any::Any
             }
             ```
 
