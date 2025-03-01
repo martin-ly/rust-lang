@@ -27,6 +27,7 @@
     2.8 Scope and visibility semantic model: include { global, local, static,function,closure,expression }
 
 [variable](docs/variable.md)
+[ref_mut_reason](docs/ref_mut_reason.md)
 
 ### 3. type system model: include { primitive_type, compound_type, generic_type, trait_type }
 
@@ -37,13 +38,24 @@
     3.5 generic_type: include{ generic_function, generic_struct, generic_enum, generic_trait,generic_impl}
     3.6 async_type: include{ async_function, async_trait }
     3.7 type_transform: include{ type_cast: as, into, from,try_into, try_from }
-    
+    3.8 type_variance: include{ invariant_type, covariant_type, contravariance_type }
+
+[variant](docs/variant.md)
+[variant_reason](docs/variant_reason.md)
+[invariant_type](docs/invariant_type.md)
+[covariant_type](docs/covariant_type.md)
+[contravariance_type](docs/contravariance_type.md)
+
 ### 4. control_flow model: include { function, closure, expression, statement }
 
     4.1 function: include{ function_define, function_call, function_signature }
     4.2 closure: include{ closure_define, closure_call }
     4.3 expression: include{ expression,match, expression_value }
     4.4 statement: include{ statement,if,else,while,for,label,loop,match,return,break,continue,yield,gen,async,await,macro }
+
+### 5. package and engineer
+
+[package_mod](docs/cargo_package_mod.md)
 
 ## 1. own_borrow_scope  
 
