@@ -3,9 +3,9 @@
 
 ## rust programming language learning - pre-knowledge
 
-[rust-cpp-lang](docs/rust_cpp.md)
-[rust-lang-model](docs/ownership_borrow_lifetime.md)
-[rust-borrow-checker](docs/borrow_check.md)
+[rust-cpp-lang](docs/lang-compare/rust_cpp.md)
+[rust-lang-model](docs/own-borrow-scope/ownership_borrow_lifetime.md)
+[rust-borrow-checker](docs/own-borrow-scope/borrow_check.md)
 
 ### 1. Programming language model: include { variable, type system, control_flow }
 
@@ -26,8 +26,8 @@
     2.7 Runtime check on move Semantic in Compiling time or runtime,
     2.8 Scope and visibility semantic model: include { global, local, static,function,closure,expression }
 
-[variable](docs/variable.md)
-[ref_mut_reason](docs/ref_mut_reason.md)
+[variable](docs/type-system/variable.md)
+[ref_mut_reason](docs/own-borrow-scope/ref_mut_reason.md)
 
 ### 3. type system model: include { primitive_type, compound_type, generic_type, trait_type }
 
@@ -40,11 +40,11 @@
     3.7 type_transform: include{ type_cast: as, into, from,try_into, try_from }
     3.8 type_variance: include{ invariant_type, covariant_type, contravariance_type }
 
-[variant](docs/variant.md)
-[variant_reason](docs/variant_reason.md)
-[invariant_type](docs/invariant_type.md)
-[covariant_type](docs/covariant_type.md)
-[contravariance_type](docs/contravariance_type.md)
+[variant](docs/type-system/variant.md)
+[variant_reason](docs/type-system/variant_reason.md)
+[invariant_type](docs/type-system/invariant_type.md)
+[covariant_type](docs/type-system/covariant_type.md)
+[contravariance_type](docs/type-system/contravariance_type.md)
 
 ### 4. control_flow model: include { function, closure, expression, statement }
 
@@ -55,11 +55,11 @@
 
 ### 5. package and engineer
 
-[package_mod](docs/cargo_package_mod.md)
+[package_mod](docs/lang-compare/cargo_package_mod.md)
 
 ## 1. own_borrow_scope  
 
-[ref_refmut](docs/ref_refmut.md)
+[ref_refmut](docs/own-borrow-scope/ref_refmut.md)
 
 ## 2. type_system
 
@@ -75,13 +75,13 @@
 
 ## 8. algorithms
 
-[algorithms_01](docs/algorithms_01.md)
-[algorithms_02](docs/algorithms_02.md)
+[algorithms_01](docs/algorithms/algorithms_01.md)
+[algorithms_02](docs/algorithms/algorithms_02.md)
 
 ## 9. design_pattern
 
-[design_pattern_01](docs/design_pattern_01.md)
-[design_pattern_02](docs/design_pattern_02.md)
+[design_pattern_01](docs/design-pattern/design_pattern_01.md)
+[design_pattern_02](docs/design-pattern/design_pattern_02.md)
 
 ## 10. networks
 

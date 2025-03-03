@@ -1127,14 +1127,11 @@ struct Segment<K, V> {
     entries: Mutex<HashMap<K, V>>,
 }
 
-impl<K, V> ConcurrentHashMap<K, V>
-where
-    K: Eq + Hash + Clone,
-    V: Clone,
-{
+```text
 <think>
 I need to continue writing the implementation of the ConcurrentHashMap and then proceed with more content about Rust's ability to express various algorithms and data structures. Let me continue with implementing the ConcurrentHashMap and then add more content.
 </think>
+```
 
 ```rust
 impl<K, V> ConcurrentHashMap<K, V>
