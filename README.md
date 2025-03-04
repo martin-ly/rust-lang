@@ -44,11 +44,11 @@
     3.7 type_transform: include{ type_cast: as, into, from,try_into, try_from }
     3.8 type_variance: include{ invariant_type, covariant_type, contravariance_type }
 
-[variant](docs/type-system/variant.md)
-[variant_reason](docs/type-system/variant_reason.md)
-[invariant_type](docs/type-system/invariant_type.md)
-[covariant_type](docs/type-system/covariant_type.md)
-[contravariance_type](docs/type-system/contravariance_type.md)
+[variant](docs/type-system/variant/variant.md)
+[variant_reason](docs/type-system/variant/variant_reason.md)
+[invariant_type](docs/type-system/variant/invariance_type.md)
+[covariant_type](docs/type-system/variant/covariance_type.md)
+[contravariance_type](docs/type-system/variant/contravariance_type.md)
 
 ### 4. control_flow model: include { function, closure, expression, statement }
 

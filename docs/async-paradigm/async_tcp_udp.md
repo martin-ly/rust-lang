@@ -138,7 +138,9 @@ async fn main() -> Result<()> {
 
 ## 4. 进阶：基于 Codec 的定制协议
 
-如果需要处理复杂的 TCP 协议（例如拆包粘包问题），可以使用 [`tokio_util::codec`](https://docs.rs/tokio-util/latest/tokio_util/codec/) 模块提供的 `Framed` 接口结合自定义的 `Decoder` 和 `Encoder` 来处理消息边界。其思想是将原始的字节流包装成一个个完整的消息，然后在业务逻辑中直接对消息进行处理，而不必手动实现数据切分。
+如果需要处理复杂的 TCP 协议（例如拆包粘包问题），
+可以使用 [`tokio_util::codec`](https://docs.rs/tokio-util/latest/tokio_util/codec/) 模块提供的 `Framed` 接口结合自定义的 `Decoder` 和 `Encoder` 来处理消息边界。
+其思想是将原始的字节流包装成一个个完整的消息，然后在业务逻辑中直接对消息进行处理，而不必手动实现数据切分。
 
 > **提示：** 根据具体协议要求，可选择现有的编码器例如 `LengthDelimitedCodec`（基于长度字段）或者自己实现。
 

@@ -56,9 +56,9 @@ while let Some(value) = async_gen.next().await {
 }
 ```
 
-### *2. 高级特性组合
+## *2. 高级特性组合
 
-#### *与泛型结合
+### *与泛型结合
 
 ```rust
 fn generic_generator<T>(items: Vec<T>) -> impl Iterator<Item = T> {
@@ -93,9 +93,9 @@ fn bounded_generator<T: Clone>(item: T) -> impl Iterator<Item = T> {
 }
 ```
 
-### *3. 异步编程模式
+## *3. 异步编程模式
 
-#### *异步流处理
+### *异步流处理
 
 ```rust
 async fn process_stream<T: AsyncRead>(reader: T) -> impl Stream<Item = Result<Vec<u8>, io::Error>> {
@@ -112,7 +112,7 @@ async fn process_stream<T: AsyncRead>(reader: T) -> impl Stream<Item = Result<Ve
 }
 ```
 
-#### *并发控制
+### *并发控制
 
 ```rust
 async fn controlled_stream<T>(
@@ -134,9 +134,9 @@ async fn controlled_stream<T>(
 }
 ```
 
-### *4. 函数式编程模式
+## *4. 函数式编程模式
 
-#### *映射和过滤
+### *映射和过滤
 
 ```rust
 fn transform_stream<T, U>(
@@ -171,9 +171,9 @@ fn combine_streams<T>(
 }
 ```
 
-### *5. 错误处理模式
+## *5. 错误处理模式
 
-#### *Result 处理
+ *Result 处理
 
 ```rust
 fn fallible_generator() -> impl Iterator<Item = Result<i32, Error>> {
@@ -188,7 +188,7 @@ fn fallible_generator() -> impl Iterator<Item = Result<i32, Error>> {
 }
 ```
 
-#### *Option 处理
+### *Option 处理
 
 ```rust
 fn optional_generator() -> impl Iterator<Item = Option<i32>> {
@@ -204,9 +204,9 @@ fn optional_generator() -> impl Iterator<Item = Option<i32>> {
 }
 ```
 
-### *6. 资源管理模式
+## *6. 资源管理模式
 
-#### *RAII 模式
+### *RAII 模式
 
 ```rust
 struct ManagedResource<T> {
@@ -223,7 +223,7 @@ impl<T> ManagedResource<T> {
 }
 ```
 
-#### *异步资源管理
+### *异步资源管理
 
 ```rust
 async fn managed_async_stream() -> impl Stream<Item = Result<Data, Error>> {
@@ -237,7 +237,7 @@ async fn managed_async_stream() -> impl Stream<Item = Result<Data, Error>> {
 }
 ```
 
-### *7. 最佳实践建议
+## *7. 最佳实践建议
 
 1. **保持生成器函数简单且单一职责**：避免在生成器中持有过多状态。
 2. **适当使用类型注解提高代码可读性**：有助于理解生成器的输入和输出类型。

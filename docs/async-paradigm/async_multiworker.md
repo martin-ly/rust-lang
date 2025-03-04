@@ -11,13 +11,15 @@
 ### 1.1 核心原理
 
 - **Future 与状态机转换**  
-  当你编写 `async fn` 时，编译器会把它转换为状态机，实现 [`Future`](https://doc.rust-lang.org/std/future/trait.Future.html) trait。每次通过 `poll` 推进状态，该状态机逐步完成任务。
+  当你编写 `async fn` 时，编译器会把它转换为状态机，实现 [`Future`](https://doc.rust-lang.org/std/future/trait.Future.html) trait。
+  每次通过 `poll` 推进状态，该状态机逐步完成任务。
 
 - **协作式调度**  
   任务在遇到 `.await` 时主动挂起，让出执行权，这样运行时（Executor）便能调度其他任务，避免长时间阻塞。
 
 - **多线程调度与执行器**  
-  异步任务本身不负责调度，由运行时（如 Tokio 或 async-std）统一调度。运行时内部有任务队列与多线程池（常采用工作窃取算法）实现并发执行。
+  异步任务本身不负责调度，由运行时（如 Tokio 或 async-std）统一调度。
+  运行时内部有任务队列与多线程池（常采用工作窃取算法）实现并发执行。
 
 - **内存安全与数据共享**  
   通过 Rust 的所有权、借用系统以及显式限制（`Send`/`Sync`），使用 `Arc`（原子引用计数）与 `Mutex`（锁）保护共享数据，保证多任务下数据一致性和内存安全。
@@ -32,7 +34,8 @@
   - 返回的 `JoinHandle` 可通过 `.await` 获取任务返回值，类似于等待任务结束。
 
 - **select! 宏**  
-  提供并发等待多个 Future 中任意一个完成的能力，可实现超时、竞速逻辑。Tokio 内置 `tokio::select!`，而 async-std 可通过 [futures::select!](https://docs.rs/futures/latest/futures/macro.select.html) 实现类似操作。
+  提供并发等待多个 Future 中任意一个完成的能力，可实现超时、竞速逻辑。
+  Tokio 内置 `tokio::select!`，而 async-std 可通过 [futures::select!](https://docs.rs/futures/latest/futures/macro.select.html) 实现类似操作。
 
 - **scopeguard / defer!**  
   使用 [`scopeguard`](https://crates.io/crates/scopeguard) 或 `defer!` 宏，在作用域退出时自动执行资源释放或清理逻辑，类似于 Go 的 `defer`。
@@ -62,12 +65,12 @@
 - **适用场景**  
   - 小型项目、命令行工具、原型开发或 I/O 密集型中小规模应用。
 
-| 特性       | Tokio                                       | async-std                      |
-| ---------- | ------------------------------------------- | ------------------------------ |
-| 调度策略   | 多线程池 + 工作窃取，支持 spawn_blocking      | 内置简单调度，接近标准库风格     |
-| API        | 丰富、功能强大，内置 select!                 | 简洁易用                       |
-| 生态系统   | 成熟且扩展性强                               | 适合轻量级应用                 |
-| 使用场景   | 高并发、复杂网络应用                         | 小型与中型项目，快速原型开发     |
+| 特性 | Tokio | async-std |
+| :----: | :----: | :----: |
+| 调度策略 | 多线程池 + 工作窃取，支持 spawn_blocking  | 内置简单调度，接近标准库风格 |
+| API        | 丰富、功能强大，内置 select! | 简洁易用 |
+| 生态系统   | 成熟且扩展性强 | 适合轻量级应用 |
+| 使用场景   | 高并发、复杂网络应用 | 小型与中型项目，快速原型开发 |
 
 ---
 

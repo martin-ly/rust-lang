@@ -27,7 +27,7 @@ let async_gen = gen async {
 };
 ```
 
-#### `yield` 关键字
+### `yield` 关键字
 
 - **定义**: `yield` 用于从生成器中返回一个值，并暂停生成器的执行。
 - **用法**: 在生成器体内使用，返回一个值给调用者。
@@ -40,7 +40,7 @@ let numbers = gen {
 };
 ```
 
-#### `next` 方法
+### `next` 方法
 
 - **定义**: `next` 是一个方法，用于从生成器中获取下一个值。
 - **用法**: 对于同步生成器，直接调用；对于异步生成器，使用 `.await`。
@@ -57,9 +57,9 @@ while let Some(value) = async_gen.next().await {
 }
 ```
 
-### 2. 高级特性组合
+## 2. 高级特性组合
 
-#### 与泛型结合
+### 与泛型结合
 
 ```rust
 fn generic_generator<T>(items: Vec<T>) -> impl Iterator<Item = T> {
@@ -71,7 +71,7 @@ fn generic_generator<T>(items: Vec<T>) -> impl Iterator<Item = T> {
 }
 ```
 
-#### 与生命周期结合
+### 与生命周期结合
 
 ```rust
 fn borrowed_generator<'a>(data: &'a [i32]) -> impl Iterator<Item = &'a i32> {
@@ -83,7 +83,7 @@ fn borrowed_generator<'a>(data: &'a [i32]) -> impl Iterator<Item = &'a i32> {
 }
 ```
 
-#### 与 trait bounds 结合
+### 与 trait bounds 结合
 
 ```rust
 fn bounded_generator<T: Clone>(item: T) -> impl Iterator<Item = T> {
@@ -94,9 +94,9 @@ fn bounded_generator<T: Clone>(item: T) -> impl Iterator<Item = T> {
 }
 ```
 
-### 3. 异步编程模式
+## 3. 异步编程模式
 
-#### 异步流处理
+### 异步流处理
 
 ```rust
 async fn process_stream<T: AsyncRead>(reader: T) -> impl Stream<Item = Result<Vec<u8>, io::Error>> {
@@ -113,7 +113,7 @@ async fn process_stream<T: AsyncRead>(reader: T) -> impl Stream<Item = Result<Ve
 }
 ```
 
-#### 并发控制
+### 并发控制
 
 ```rust
 async fn controlled_stream<T>(
@@ -135,9 +135,9 @@ async fn controlled_stream<T>(
 }
 ```
 
-### 4. 函数式编程模式
+## 4. 函数式编程模式
 
-#### 映射和过滤
+### 映射和过滤
 
 ```rust
 fn transform_stream<T, U>(
@@ -154,7 +154,7 @@ fn transform_stream<T, U>(
 }
 ```
 
-#### 组合器模式
+### 组合器模式
 
 ```rust
 fn combine_streams<T>(
@@ -172,9 +172,9 @@ fn combine_streams<T>(
 }
 ```
 
-### 5. 错误处理模式
+## 5. 错误处理模式
 
-#### Result 处理
+### Result 处理
 
 ```rust
 fn fallible_generator() -> impl Iterator<Item = Result<i32, Error>> {
@@ -189,7 +189,7 @@ fn fallible_generator() -> impl Iterator<Item = Result<i32, Error>> {
 }
 ```
 
-#### Option 处理
+### Option 处理
 
 ```rust
 fn optional_generator() -> impl Iterator<Item = Option<i32>> {
@@ -205,9 +205,9 @@ fn optional_generator() -> impl Iterator<Item = Option<i32>> {
 }
 ```
 
-### 6. 资源管理模式
+## 6. 资源管理模式
 
-#### RAII 模式
+### RAII 模式
 
 ```rust
 struct ManagedResource<T> {
@@ -224,7 +224,7 @@ impl<T> ManagedResource<T> {
 }
 ```
 
-#### 异步资源管理
+### 异步资源管理
 
 ```rust
 async fn managed_async_stream() -> impl Stream<Item = Result<Data, Error>> {
@@ -238,7 +238,7 @@ async fn managed_async_stream() -> impl Stream<Item = Result<Data, Error>> {
 }
 ```
 
-### 7. 最佳实践建议
+## 7. 最佳实践建议
 
 1. **保持生成器函数简单且单一职责**：避免在生成器中持有过多状态。
 2. **适当使用类型注解提高代码可读性**：有助于理解生成器的输入和输出类型。
@@ -249,14 +249,14 @@ async fn managed_async_stream() -> impl Stream<Item = Result<Data, Error>> {
 7. **考虑并发安全性**：在多线程环境中使用生成器时要小心。
 8. **适当使用测试验证生成器行为**：确保生成器按预期工作。
 
-### 8. 与 Tokio 等异步库的兼容性
+## 8. 与 Tokio 等异步库的兼容性
 
-#### 匹配与兼容
+### 匹配与兼容
 
 - **异步生成器与 Tokio**: `gen async` 可以与 Tokio 的异步运行时无缝集成，生成的异步流可以在 Tokio 的任务中使用。
 - **流与 Future**: 生成器生成的流可以与 Tokio 的 `Stream` 和 `Future` 结合使用，支持异步数据处理。
 
-#### 潜在的错误使用
+### 潜在的错误使用
 
 1. **阻塞操作**: 在异步生成器中使用阻塞操作会导致性能问题，应使用异步版本的操作。
 2. **未处理的错误**: 在生成器中未处理的错误可能会导致未定义的行为，应使用 `Result` 或 `Option` 进行错误处理。

@@ -12,7 +12,8 @@
 ### 1.1 基于传统日志接口
 
 - **log crate + 后端实现**  
-  使用 [`log`](https://crates.io/crates/log) 统一管理日志输出，再配合例如 [env_logger](https://crates.io/crates/env_logger) 或 [pretty_env_logger](https://crates.io/crates/pretty_env_logger) 来作为日志后端。  
+  使用 [`log`](https://crates.io/crates/log) 统一管理日志输出，再配合例如 [env_logger](https://crates.io/crates/env_logger) 
+  或 [pretty_env_logger](https://crates.io/crates/pretty_env_logger) 来作为日志后端。  
   **特点：** 操作简单，但不具备自动化的上下文追踪和函数调用关系记录，且对于异步场景中跨 await 边界的日志串联支持较弱。
 
 ### 1.2 基于结构化日志与追踪
@@ -104,7 +105,8 @@
 ### 3.1 使用 Span
 
 - **Span 的作用**  
-  通过在函数开始时创建 span，记录进入函数、离开函数以及期间发生的事件，能够将整个函数调用过程“围起来”。当函数内有 await 调用时，该 span 依然存续，从而保证日志记录对应到函数调用的完整语义。
+  通过在函数开始时创建 span，记录进入函数、离开函数以及期间发生的事件，能够将整个函数调用过程“围起来”。
+  当函数内有 await 调用时，该 span 依然存续，从而保证日志记录对应到函数调用的完整语义。
 
 ### 3.2 #[instrument] 属性宏
 
@@ -164,7 +166,8 @@ flowchart TD
 ## 5. 总结
 
 1. **开源堆栈选择：**  
-   推荐在异步程序中优先使用 `tracing` 生态，利用 `tracing-subscriber` 进行结构化记录；同时可结合 `tracing-appender` 实现基于时间的滚动存储。若需要同时具备内置压缩、日期 tag 等特性，则可考虑使用 `flexi_logger`（注意根据项目场景权衡其异步适配能力）。
+   推荐在异步程序中优先使用 `tracing` 生态，利用 `tracing-subscriber` 进行结构化记录；同时可结合 `tracing-appender` 实现基于时间的滚动存储。
+   若需要同时具备内置压缩、日期 tag 等特性，则可考虑使用 `flexi_logger`（注意根据项目场景权衡其异步适配能力）。
 
 2. **日志滚动与存储：**  
    - 使用 `tracing-appender` 可实现每日滚动，文件自动放在指定目录中。  

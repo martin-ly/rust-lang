@@ -13,6 +13,7 @@ members = [ "c01_own_borrow_scope",
             "c09_design_pattern", 
             "c10_networks",  
             "c11_frameworks", 
-            "c12_middlewares"]
+            "c12_middlewares", 
+            "c13_microservice"]
 
 
