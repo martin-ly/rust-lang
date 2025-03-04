@@ -1,6 +1,6 @@
 # Rust2024-gen
 
-让我详细解析 Rust 2024 edition 中的 `gen` 关键字带来的创新：
+详细解析 Rust 2024 edition 中的 `gen` 关键字带来的创新：
 
 ## 1. Gen 关键字基础概念
 

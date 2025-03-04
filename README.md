@@ -1,6 +1,10 @@
 
 # rust-lang
 
+## Rust是一种系统编程语言，以其安全性、并发性和性能而闻名
+
+[rust-lang](docs/rust_paradiam.md)
+
 ## rust programming language learning - pre-knowledge
 
 [rust-cpp-lang](docs/lang-compare/rust_cpp.md)
