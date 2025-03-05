@@ -1,15 +1,12 @@
 
 # rust-lang
 
-## Rust是一种系统编程语言，以其安全性、并发性和性能而闻名
-
+[rust-lang-philosophy](docs/rust_core_philosophy.md)
 [rust-lang](docs/rust_paradiam.md)
 
 ## rust programming language learning - pre-knowledge
 
 [rust-cpp-lang](docs/lang-compare/rust_cpp.md)
-[rust-lang-model](docs/own-borrow-scope/ownership_borrow_lifetime.md)
-[rust-borrow-checker](docs/own-borrow-scope/borrow_check.md)
 
 ### 1. Programming language model: include { variable, type system, control_flow }
 
@@ -18,6 +15,7 @@
     1.3 runtime behavior Semantic model: include { control_flow }
 
 [memory](docs/memory.md)
+[rust-lang-model](docs/own-borrow-scope/ownership_borrow_lifetime.md)
 
 ### 2. variable syntax model: include { own, borrow, scope }
 
@@ -30,6 +28,7 @@
     2.7 Runtime check on move Semantic in Compiling time or runtime,
     2.8 Scope and visibility semantic model: include { global, local, static,function,closure,expression }
 
+[rust-borrow-checker](docs/own-borrow-scope/borrow_check.md)
 [variable](docs/type-system/variable.md)
 [ref_mut_reason](docs/own-borrow-scope/ref_mut_reason.md)
 
@@ -92,3 +91,5 @@
 ## 11. frameworks
 
 ## 12. middlewares
+
+## 13. microservice

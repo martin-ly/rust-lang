@@ -5,7 +5,8 @@ Rust 提供了 `thread_local!` 宏来实现这一功能。以下是如何设计�
 
 ## 1. 使用 `thread_local!` 宏
 
-`thread_local!` 宏用于声明线程局部存储变量。每个线程都有其独立的副本，这意味着当你在一个线程中修改该变量时，其他线程不会受到影响。
+`thread_local!` 宏用于声明线程局部存储变量。
+每个线程都有其独立的副本，这意味着当你在一个线程中修改该变量时，其他线程不会受到影响。
 
 ### 示例代码
 
@@ -53,7 +54,9 @@ FOO.with(|f| {
 
 ### 3. 线程局部存储的生命周期
 
-线程局部存储的生命周期与线程的生命周期相同。当线程结束时，线程局部存储中的数据会被自动释放。这意味着你不需要手动管理线程局部存储的生命周期。
+线程局部存储的生命周期与线程的生命周期相同。
+当线程结束时，线程局部存储中的数据会被自动释放。
+这意味着你不需要手动管理线程局部存储的生命周期。
 
 ### 4. 线程局部存储的优势
 
@@ -74,11 +77,13 @@ FOO.with(|f| {
 
 ### 7. 第三方库支持
 
-除了标准库的 `thread_local!` 宏，还有一些第三方库提供了更灵活的线程局部存储实现，如 `thread_local` crate。这些库允许每个对象拥有独立的线程局部存储，而不是仅限于静态线程局部存储。
+除了标准库的 `thread_local!` 宏，还有一些第三方库提供了更灵活的线程局部存储实现，如 `thread_local` crate。
+这些库允许每个对象拥有独立的线程局部存储，而不是仅限于静态线程局部存储。
 
 ### 总结
 
-Rust 的 `thread_local!` 宏提供了一种简单而有效的方式来实现线程局部存储。通过使用 `thread_local!`，你可以为每个线程创建独立的数据副本，避免线程间的数据竞争和锁的开销。这对于需要在线程级别保持状态的场景非常有用。
+Rust 的 `thread_local!` 宏提供了一种简单而有效的方式来实现线程局部存储。
+通过使用 `thread_local!`，你可以为每个线程创建独立的数据副本，避免线程间的数据竞争和锁的开销。这对于需要在线程级别保持状态的场景非常有用。
 
 在 Rust 中，`PoisonError` 是一种特殊的错误类型，用于处理在多线程环境中由于线程 `panic` 导致的锁中毒问题。
 当一个线程在持有 `Mutex` 或 `RwLock` 时发生 `panic`，该锁会被标记为“中毒”。
@@ -224,7 +229,8 @@ Rust 提供了几种方法来处理 `PoisonError`：
 
 通过这些方法，可以有效地处理和避免 `PoisonError`，确保多线程程序的健壮性和安全性。
 
-在 Rust 中，线程锁（如 `Mutex` 或 `RwLock`）是用于在多线程环境中安全地共享和修改数据的同步原语。它们确保在任意时刻只有一个线程可以访问共享数据，从而防止数据竞争和其他并发问题。以下是如何设计和使用线程锁的详细说明：
+在 Rust 中，线程锁（如 `Mutex` 或 `RwLock`）是用于在多线程环境中安全地共享和修改数据的同步原语。
+它们确保在任意时刻只有一个线程可以访问共享数据，从而防止数据竞争和其他并发问题。以下是如何设计和使用线程锁的详细说明：
 
 ### 1. 使用 `Mutex` 保证数据一致性
 
@@ -369,7 +375,8 @@ fn main() {
 
 通过这些设计和使用方法，可以有效地在 Rust 中实现线程安全的共享状态，确保程序的健壮性和安全性。
 
-在 Rust 中，线程之间共享状态时，如果发生 `panic`，可能会导致程序出现意外行为。为了避免这些问题，可以采取以下设计策略和利用 Rust 的保护性机制：
+在 Rust 中，线程之间共享状态时，如果发生 `panic`，可能会导致程序出现意外行为。
+为了避免这些问题，可以采取以下设计策略和利用 Rust 的保护性机制：
 
 ### 设计策略
 
@@ -548,8 +555,8 @@ fn main() {
 - 如果程序无法恢复，应该显式地处理 `Result` 和 `Option` 类型，避免不必要的 `panic`。
 
 理解 Rust 中的 `panic` 行为有助于编写更健壮和容错的程序。
-
-在 Rust 中，`panic` 发生的原因通常是由于程序运行时出现了无法恢复的错误，比如未处理的 `unwrap` 或对 `None` 的解引用等。为了避免 `panic`，可以采用以下几种方法：
+在 Rust 中，`panic` 发生的原因通常是由于程序运行时出现了无法恢复的错误，比如未处理的 `unwrap` 或对 `None` 的解引用等。
+为了避免 `panic`，可以采用以下几种方法：
 
 ### 1. 使用 `Result` 和 `Option`
 
@@ -766,7 +773,8 @@ tokio = { version = "1.0", features = ["full"] }
 
 ### -总结
 
-避免 `panic` 的关键是采用安全的编程实践，如使用 `Result` 和 `Option`、避免直接调用 `unwrap` 和 `expect`、编写单元测试和使用封装等。通过这些方法，可以确保代码更加鲁棒和安全。
+避免 `panic` 的关键是采用安全的编程实践，如使用 `Result` 和 `Option`、避免直接调用 `unwrap` 和 `expect`、编写单元测试和使用封装等。
+通过这些方法，可以确保代码更加鲁棒和安全。
 
 ### Rust 错误处理惯用法
 
@@ -776,7 +784,8 @@ tokio = { version = "1.0", features = ["full"] }
 
 #### 解释
 
-`unwrap_or` 是一个方法，用于处理 `Option` 类型的值。当 `Option` 的值为 `Some` 时，`unwrap_or` 会返回该值；当值为 `None` 时，`unwrap_or` 会返回一个默认值。
+`unwrap_or` 是一个方法，用于处理 `Option` 类型的值。当 `Option` 的值为 `Some` 时，`unwrap_or` 会返回该值；
+当值为 `None` 时，`unwrap_or` 会返回一个默认值。
 
 #### -示例
 
@@ -794,13 +803,16 @@ fn main() {
 }
 ```
 
-在这个示例中，`get_config_value` 函数返回一个 `Option<String>`。如果函数返回 `Some("value")`，`unwrap_or` 会返回 `"value"`；如果返回 `None`，`unwrap_or` 会返回 `"default_value"`。
+在这个示例中，`get_config_value` 函数返回一个 `Option<String>`。如果函数返回 `Some("value")`，`unwrap_or` 会返回 `"value"`；
+如果返回 `None`，`unwrap_or` 会返回 `"default_value"`。
 
 ### `unwrap_or_else` 的解释和示例
 
 #### -解释
 
-`unwrap_or_else` 是一个方法，用于处理 `Option` 类型的值。当 `Option` 的值为 `Some` 时，`unwrap_or_else` 会返回该值；当值为 `None` 时，`unwrap_or_else` 会调用一个闭包来生成一个默认值。
+`unwrap_or_else` 是一个方法，用于处理 `Option` 类型的值。
+当 `Option` 的值为 `Some` 时，`unwrap_or_else` 会返回该值；
+当值为 `None` 时，`unwrap_or_else` 会调用一个闭包来生成一个默认值。
 
 #### --示例
 
@@ -820,7 +832,9 @@ fn main() {
 }
 ```
 
-在这个示例中，`get_data_from_system` 函数返回一个 `Option<String>`。如果函数返回 `Some("Data from system")`，`unwrap_or_else` 会返回 `"Data from system"`；如果返回 `None`，`unwrap_or_else` 会调用闭包生成 `"default_data"`。
+在这个示例中，`get_data_from_system` 函数返回一个 `Option<String>`。
+如果函数返回 `Some("Data from system")`，`unwrap_or_else` 会返回 `"Data from system"`；
+如果返回 `None`，`unwrap_or_else` 会调用闭包生成 `"default_data"`。
 
 ### `match` 的解释和示例
 

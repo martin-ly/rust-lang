@@ -18,4 +18,8 @@
 
 ## Compound Data Types in Rust
 
+    array, tuple, enum
+
 ## Composite Data Types in Rust
+
+    struct
