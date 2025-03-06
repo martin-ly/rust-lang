@@ -1,6 +1,8 @@
+# 基于 Rust 2024 + Generator 的 GraphQL API 与多数据库集成项目
+
 我将为您展示一个基于 Rust 2024 + Generator 的 GraphQL API 与多数据库集成项目。
 
-### 1. 项目配置
+## 1. 项目配置
 
 ```toml
 [dependencies]
@@ -21,7 +23,7 @@ tracing = "0.1"
 thiserror = "1.0"
 ```
 
-### 2. GraphQL Schema 生成器
+## 2. GraphQL Schema 生成器
 
 ```rust
 use async_graphql::*;
@@ -129,7 +131,7 @@ impl SchemaGenerator {
 }
 ```
 
-### 3. 数据库模型生成器
+## 3. 数据库模型生成器
 
 ```rust
 /// 数据库模型生成器
@@ -243,7 +245,7 @@ impl DatabaseModelGenerator {
 }
 ```
 
-### 4. 查询解析器生成器
+## 4. 查询解析器生成器
 
 ```rust
 /// 查询解析器生成器
@@ -322,7 +324,7 @@ impl<'a> QueryResolverGenerator<'a> {
 }
 ```
 
-### 5. 数据库连接池管理器
+## 5. 数据库连接池管理器
 
 ```rust
 /// 数据库连接池管理器
@@ -400,7 +402,7 @@ impl DatabasePoolManager {
 }
 ```
 
-### 6. 实体关系管理器
+## 6. 实体关系管理器
 
 ```rust
 /// 实体关系管理器
@@ -449,7 +451,7 @@ impl EntityRelationManager {
 }
 ```
 
-### 7. 使用示例
+## 7. 使用示例
 
 ```rust
 #[tokio::main]
@@ -589,6 +591,7 @@ async fn main() -> Result<()> {
    - 查询优化
 
 这个系统可以用于构建：
+
 - API 服务器
 - 数据查询服务
 - 后端系统
@@ -596,11 +599,9 @@ async fn main() -> Result<()> {
 
 所有实现都使用了 Rust 的生成器特性，提供了灵活和高效的代码生成和查询处理能力。
 
-
-
 我将为您展示一个完整的 Rust 2024 GraphQL API 实现，支持关系型数据库的 JSON 类型和 NoSQL 数据库。
 
-### 1. 项目配置
+## 1.  项目配置
 
 ```toml
 [dependencies]
@@ -626,7 +627,7 @@ chrono = { version = "0.4", features = ["serde"] }
 tracing = "0.1"
 ```
 
-### 2. 数据模型定义
+## 2. 数据模型定义
 
 ```rust
 use serde::{Deserialize, Serialize};
@@ -675,7 +676,7 @@ pub enum PostStatus {
 }
 ```
 
-### 3. 数据库连接管理器
+## 3. 数据库连接管理器
 
 ```rust
 use std::sync::Arc;
@@ -764,7 +765,7 @@ impl DatabaseManager {
 }
 ```
 
-### 4. GraphQL 查询解析器
+## 4. GraphQL 查询解析器
 
 ```rust
 use async_graphql::*;
@@ -890,7 +891,7 @@ impl QueryRoot {
 }
 ```
 
-### 5. GraphQL 变更解析器
+## 5. GraphQL 变更解析器
 
 ```rust
 pub struct MutationRoot;
@@ -1013,7 +1014,7 @@ impl MutationRoot {
 }
 ```
 
-### 6. 数据库迁移生成器
+## 6. 数据库迁移生成器
 
 ```rust
 pub struct DatabaseMigrationGenerator {
@@ -1102,7 +1103,7 @@ impl DatabaseMigrationGenerator {
 }
 ```
 
-### 7. 使用示例
+## 7.  使用示例
 
 ```rust
 #[tokio::main]
@@ -1201,11 +1202,10 @@ async fn main() -> Result<()> {
    - 索引管理
 
 这个系统适用于：
+
 - 现代 Web API
 - 数据密集型应用
 - 微服务架构
 - 实时数据处理
 
 所有实现都使用了 Rust 2024 的生成器特性，提供了高效的异步数据处理能力。
-
-

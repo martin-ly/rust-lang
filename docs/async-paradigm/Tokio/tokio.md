@@ -84,17 +84,17 @@ fn main() {
 use tokio::runtime::Builder;
 
 fn main() {
-	let rt = Builder::new_multi_thread()
-	.worker_threads(4) // 指定工作线程数
-	.enable_all() // 启用所有特性
-	.build()
-	.unwrap();
+    let rt = Builder::new_multi_thread()
+        .worker_threads(4) // 指定工作线程数
+        .enable_all() // 启用所有特性
+        .build()
+        .unwrap();
 
-	rt.block_on(async {
-	println!("Running in multi-threaded runtime");
-	tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
-	println!("Task completed");
-	});
+        rt.block_on(async {
+        println!("Running in multi-threaded runtime");
+        tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
+        println!("Task completed");
+        });
 }
 ```
 

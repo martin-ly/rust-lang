@@ -1,8 +1,9 @@
+# 使用 Rust 2024 版本中的 `gen` 与 Tokio 结合使用
 
+下面详细介绍 Rust 2024 版本中 `gen` 与 Tokio 的结合使用方法。
+我们将通过多个场景和示例来展示其功能和用法。
 
-下面详细介绍 Rust 2024 版本中 `gen` 与 Tokio 的结合使用方法。我们将通过多个场景和示例来展示其功能和用法。
-
-### 1. 基础配置
+## 1. 基础配置
 
 首先在 `Cargo.toml` 中添加必要的依赖：
 
@@ -14,7 +15,7 @@ async-stream = "0.3"
 pin-project = "1.0"
 ```
 
-### 2. 基本的 Generator 实现
+## 2. 基本的 Generator 实现
 
 ```rust
 #![feature(gen_blocks)]
@@ -42,7 +43,7 @@ fn main() {
 }
 ```
 
-### 3. 结合 Tokio 的异步 Generator
+## 3. 结合 Tokio 的异步 Generator
 
 ```rust
 use tokio::time::{sleep, Duration};
@@ -91,7 +92,7 @@ async fn main() {
 }
 ```
 
-### 4. 异步流生成器
+## 4. 异步流生成器
 
 ```rust
 use async_stream::stream;
@@ -117,7 +118,7 @@ async fn main() {
 }
 ```
 
-### 5. 带状态的异步生成器
+## 5. 带状态的异步生成器
 
 ```rust
 struct StateGenerator {
@@ -151,7 +152,7 @@ async fn main() {
 }
 ```
 
-### 6. 错误处理与生成器
+## 6. 错误处理与生成器
 
 ```rust
 use std::error::Error;
@@ -184,7 +185,7 @@ async fn main() {
 }
 ```
 
-### 7. 并发生成器
+## 7. 并发生成器
 
 ```rust
 use tokio::sync::mpsc;
@@ -222,7 +223,7 @@ async fn main() {
 }
 ```
 
-### 8. 资源管理生成器
+## 8. 资源管理生成器
 
 ```rust
 struct Resource {
@@ -261,7 +262,7 @@ async fn main() {
 }
 ```
 
-### 9. 带超时的生成器
+## 9. 带超时的生成器
 
 ```rust
 use tokio::time::timeout;
@@ -289,7 +290,7 @@ async fn main() {
 }
 ```
 
-### 10. 可取消的生成器
+## 10. 可取消的生成器
 
 ```rust
 use tokio::select;
@@ -325,7 +326,7 @@ async fn main() {
 }
 ```
 
-### 11. 组合多个生成器
+## 11. 组合多个生成器
 
 ```rust
 use futures::stream::select;

@@ -1,6 +1,8 @@
+# Rust 2024 + Generator 实现的 AsyncAPI 与多消息队列集成项目
+
 我将为您展示一个基于 Rust 2024 + Generator 的 AsyncAPI 与多消息队列集成项目。
 
-### 1. 项目配置
+## 1. 项目配置
 
 ```toml
 [dependencies]
@@ -24,7 +26,7 @@ tracing = "0.1"
 thiserror = "1.0"
 ```
 
-### 2. AsyncAPI 规范解析器
+## 2. AsyncAPI 规范解析器
 
 ```rust
 use serde::{Deserialize, Serialize};
@@ -98,7 +100,7 @@ impl AsyncApiGenerator {
 }
 ```
 
-### 3. 消息队列集成层
+## 3. 消息队列集成层
 
 ```rust
 /// 消息队列抽象特征
@@ -226,7 +228,7 @@ impl MessageQueue for MqttMessageQueue {
 }
 ```
 
-### 4. 消息处理器生成器
+## 4. 消息处理器生成器
 
 ```rust
 /// 消息处理器生成器
@@ -270,7 +272,7 @@ impl<T: MessageQueue> MessageHandlerGenerator<T> {
 }
 ```
 
-### 5. 消息转换和验证
+## 5. 消息转换和验证
 
 ```rust
 /// 消息转换生成器
@@ -324,7 +326,7 @@ impl MessageValidationGenerator {
 }
 ```
 
-### 6. 错误处理和重试机制
+## 6. 错误处理和重试机制
 
 ```rust
 /// 错误处理生成器
@@ -365,7 +367,7 @@ impl ErrorHandlingGenerator {
 }
 ```
 
-### 7. 主程序实现
+## 7. 主程序实现
 
 ```rust
 #[tokio::main]
@@ -461,6 +463,7 @@ async fn main() -> Result<()> {
    - 消息验证
 
 这个系统可以用于构建：
+
 - 事件驱动系统
 - 消息处理服务
 - 数据流处理

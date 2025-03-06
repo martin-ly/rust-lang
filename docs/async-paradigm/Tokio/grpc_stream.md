@@ -1,8 +1,10 @@
+# 基于 Rust 2024 + Generator 的 gRPC 流式处理与多数据库集成项目
+
 我将展示如何使用 Rust、tokio 和 gRPC 实现一个完整的分布式微服务系统示例。我们将使用 `tonic` 作为 gRPC 框架。
 
 首先创建项目并设置依赖：
 
-```toml:Cargo.toml
+```toml
 [package]
 name = "grpc-microservice"
 version = "0.1.0"
@@ -381,12 +383,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 要运行这个示例：
 
-1. 编译 proto 文件：
+   1. 编译 proto 文件：
+
 ```bash
 cargo build
 ```
 
-2. 运行服务：
+   1. 运行服务：
+
 ```bash
 cargo run
 ```
@@ -417,15 +421,11 @@ cargo run
 
 这个示例提供了一个良好的起点，您可以根据实际需求进行扩展和定制。
 
-
-
-
-
 我将展示一个更完整的分布式微服务系统示例，包含多个服务、中间件集成和更多高级特性。
 
 首先是项目结构：
 
-```toml:Cargo.toml
+```toml
 [package]
 name = "microservices-system"
 version = "0.1.0"
@@ -853,6 +853,7 @@ metrics:
 要运行这个系统：
 
 1. 启动依赖服务：
+
 ```bash
 # PostgreSQL
 docker run -d --name postgres -e POSTGRES_PASSWORD=password -p 5432:5432 postgres
@@ -865,15 +866,16 @@ docker run -d --name jaeger -p 16686:16686 -p 6831:6831/udp jaegertracing/all-in
 ```
 
 2. 初始化数据库：
+
 ```bash
 sqlx database create
 sqlx migrate run
 ```
 
 3. 运行服务：
+
 ```bash
 cargo run
 ```
 
 这个示例提供了一个完整的微服务系统框架，您可以根据实际需求进行扩展和定制。
-

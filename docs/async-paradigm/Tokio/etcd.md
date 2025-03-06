@@ -1,8 +1,11 @@
-我来帮您展示如何使用 Rust 和 tokio 与 etcd 进行交互的详细示例。我们将使用 `etcd-client` crate 来实现。
+# etcd 分布式键值存储
+
+我来帮您展示如何使用 Rust 和 tokio 与 etcd 进行交互的详细示例。
+我们将使用 `etcd-client` crate 来实现。
 
 首先创建一个新的 Rust 项目并添加必要的依赖：
 
-```toml:Cargo.toml
+```toml
 [package]
 name = "etcd-example"
 version = "0.1.0"
@@ -17,7 +20,7 @@ futures = "0.3"
 
 以下是一个完整的示例，展示了 etcd 的主要功能：
 
-```rust:src/main.rs
+```rust
 use etcd_client::{Client, ConnectOptions, WatchOptions, EventType};
 use std::time::Duration;
 

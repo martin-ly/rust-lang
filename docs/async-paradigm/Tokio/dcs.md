@@ -1,8 +1,10 @@
+# 分布式控制系统(DCS)
+
 我将展示一个使用 Rust 和 tokio 实现的分布式控制系统(DCS)。这个系统包含控制器节点、执行器节点、传感器节点等组件。
 
-首先是项目依赖配置：
+## 首先是项目依赖配置
 
-```toml:Cargo.toml
+```toml
 [package]
 name = "distributed-control-system"
 version = "0.1.0"
@@ -31,7 +33,7 @@ deadpool = "0.9"
 tokio-modbus = "0.8"
 ```
 
-下面是主要实现代码：
+## 下面是主要实现代码
 
 ```rust:src/main.rs
 use std::sync::Arc;
@@ -385,7 +387,7 @@ async fn main() -> Result<(), DCSError> {
 }
 ```
 
-这个实现包含以下主要特性：
+### 这个实现包含以下主要特性
 
 1. **系统架构**：
    - 分布式节点管理
@@ -445,20 +447,23 @@ async fn main() -> Result<(), DCSError> {
 
 要运行这个系统：
 
-1. 配置环境：
+### 1. 配置环境
+
 ```bash
 # 设置环境变量
 export DATABASE_URL="postgres://user:password@localhost/dcs"
 export REDIS_URL="redis://localhost"
 ```
 
-2. 初始化数据库：
+### 2. 初始化数据库
+
 ```bash
 sqlx database create
 sqlx migrate run
 ```
 
-3. 运行系统：
+### 3. 运行系统
+
 ```bash
 cargo run
 ```
@@ -474,9 +479,8 @@ cargo run
 
 这个实现提供了一个基础的分布式控制系统框架，可以根据具体需求进行扩展和优化。
 
-
-
-下面是一个使用 Rust 和 tokio 实现的自适应系统的示例。这个系统将包含基本的网络通信、状态监控、动态调整和错误处理等功能。
+下面是一个使用 Rust 和 tokio 实现的自适应系统的示例。
+这个系统将包含基本的网络通信、状态监控、动态调整和错误处理等功能。
 
 ### 项目依赖配置
 
@@ -782,9 +786,10 @@ async fn main() -> Result<(), AdaptiveError> {
    - 设置数据库连接和其他配置。
 
 2. **运行系统**：
-   ```bash
-   cargo run
-   ```
+
+```bash
+cargo run
+```
 
 这个实现提供了一个基础的自适应系统框架，您可以根据具体需求进行扩展和优化。建议关注：
 
@@ -794,4 +799,3 @@ async fn main() -> Result<(), AdaptiveError> {
 - 用户界面集成
 
 通过这些功能，您可以构建一个更完整的自适应系统。
-

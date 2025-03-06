@@ -1,8 +1,8 @@
-
+# 生成器算法和数据结构实现
 
 我将为您展示一个纯 Rust 2024 标准库 + Generator 实现的算法和数据结构集合。
 
-### 1. 生成器基础实现
+## 1. 生成器基础实现
 
 ```rust
 use std::pin::Pin;
@@ -36,7 +36,7 @@ impl<G: Generator> Future for GenWrapper<G> {
 }
 ```
 
-### 2. 排序算法实现
+## 2. 排序算法实现
 
 ```rust
 /// 快速排序生成器
@@ -128,7 +128,7 @@ impl<T: Ord> QuickSortGen<T> {
 }
 ```
 
-### 3. 二叉树实现
+## 3. 二叉树实现
 
 ```rust
 /// 二叉树节点
@@ -196,7 +196,7 @@ impl<T: Clone> Generator for TreeTraversalGen<T> {
 }
 ```
 
-### 4. 图算法实现
+## 4. 图算法实现
 
 ```rust
 /// 图结构
@@ -303,7 +303,7 @@ impl<T> DijkstraGen<T> {
 }
 ```
 
-### 5. 搜索算法实现
+## 5. 搜索算法实现
 
 ```rust
 /// 二分查找生成器
@@ -356,7 +356,7 @@ impl<T: Ord> Generator for BinarySearchGen<T> {
 }
 ```
 
-### 6. 堆实现
+## 6. 堆实现
 
 ```rust
 /// 最大堆生成器
@@ -421,7 +421,7 @@ impl<T: Ord> MaxHeapGen<T> {
 }
 ```
 
-### 7. 使用示例
+## 7. 使用示例
 
 ```rust
 fn main() {
