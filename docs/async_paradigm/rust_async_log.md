@@ -1,9 +1,8 @@
 # rust_async_log
 
 下面介绍如何在 Rust 异步编程中集成可追踪日志的方案，
-包括常用的开源堆栈、如何实现按照日期打 tag、输出到本地并滚动存储（有时还需要对旧日志进行压缩），以及如何通过内置机制将日志与函数调用的语义顺序关联起来。
-
----
+包括常用的开源堆栈、如何实现按照日期打 tag、输出到本地并滚动存储（有时还需要对旧日志进行压缩），
+以及如何通过内置机制将日志与函数调用的语义顺序关联起来。
 
 ## 1. 开源日志堆栈
 
@@ -12,7 +11,7 @@
 ### 1.1 基于传统日志接口
 
 - **log crate + 后端实现**  
-  使用 [`log`](https://crates.io/crates/log) 统一管理日志输出，再配合例如 [env_logger](https://crates.io/crates/env_logger) 
+  使用 [`log`](https://crates.io/crates/log) 统一管理日志输出，再配合例如 [env_logger](https://crates.io/crates/env_logger)
   或 [pretty_env_logger](https://crates.io/crates/pretty_env_logger) 来作为日志后端。  
   **特点：** 操作简单，但不具备自动化的上下文追踪和函数调用关系记录，且对于异步场景中跨 await 边界的日志串联支持较弱。
 
@@ -30,12 +29,11 @@
     例如 [`tracing-subscriber`](https://crates.io/crates/tracing-subscriber) 负责编排、格式化以及输出追踪数据。  
   
 - **扩展：分布式追踪**  
-  如果需要跨服务的追踪，还可以结合 [tracing-opentelemetry](https://crates.io/crates/tracing-opentelemetry) 和 [opentelemetry-rust](https://crates.io/crates/opentelemetry) 将日志和追踪信息上报到 Jaeger、Zipkin 等系统。
+  如果需要跨服务的追踪，还可以结合 [tracing-opentelemetry](https://crates.io/crates/tracing-opentelemetry) 和
+  [opentelemetry-rust](https://crates.io/crates/opentelemetry) 将日志和追踪信息上报到 Jaeger、Zipkin 等系统。
 
 - **其它方案：**  
   [slog](https://crates.io/crates/slog) 也是一种结构化日志系统，但在异步场景和自动上下文传播上，当前业内更推荐使用 tracing。
-
----
 
 ## 2. 按照日期打 Tag、输出压缩文件、本地滚动存储
 
@@ -96,8 +94,6 @@
 
   *注意：* flexi_logger 可直接与 log 宏联用，对于一些简单的异步场景也能满足要求，但对于复杂的异步追踪，上面提到的 tracing 体系通常是首选。
 
----
-
 ## 3. 日志与函数调用语义顺序关联机制
 
 在异步代码中，由于存在多次 await、任务切换等问题，要准确反映函数调用的语义顺序，可以依靠以下机制：
@@ -132,8 +128,6 @@
 - **层级化显示**  
   配置 `tracing-subscriber` 时，可以选择合适的输出格式（例如树形结构），使得每个 span 的开始和结束能以层级关系显示，便于追踪调用链。
 
----
-
 ## 4. 思维导图总结
 
 下面给出一个 Mermaid 思维导图，总结了 Rust async 中日志集成、滚动和函数调用语义关联机制：
@@ -160,8 +154,6 @@ flowchart TD
     D --> D2[#[instrument] 自动生成 Span]
     D --> D3[Subscriber 格式化显示层级调用关系]
 ```
-
----
 
 ## 5. 总结
 

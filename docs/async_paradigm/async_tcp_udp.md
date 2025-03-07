@@ -1,20 +1,22 @@
 # Rust异步 TCP/UDP 协议定制处理
 
-下面给出一个较为详细的说明，介绍如何利用 Rust 的 async 机制实现 TCP 与 UDP 协议的定制处理，从基本的异步 I/O 操作、协议解析到一些常见问题的分析，最后附上代码示例。
-
----
+下面给出一个较为详细的说明，介绍如何利用 Rust 的 async 机制实现 TCP 与 UDP 协议的定制处理，
+从基本的异步 I/O 操作、协议解析到一些常见问题的分析，最后附上代码示例。
 
 ## 1. 实现思路概述
 
-在 Rust 的 async 编程中，基于 Tokio 或 async-std 等运行时，可以使用其提供的网络模块对 TCP 与 UDP 进行异步处理。定制处理协议时主要涉及以下几个方面：
+在 Rust 的 async 编程中，基于 Tokio 或 async-std 等运行时，可以使用其提供的网络模块对 TCP 与 UDP 进行异步处理。\
+定制处理协议时主要涉及以下几个方面：
 
 - **异步 I/O 读取与写入**  
-  使用 [`TcpListener`](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html) 与 [`TcpStream`](https://docs.rs/tokio/latest/tokio/net/struct.TcpStream.html) 实现 TCP 连接的监听、接收、处理和数据回复。  
+  使用 [`TcpListener`](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html) 与
+  [`TcpStream`](https://docs.rs/tokio/latest/tokio/net/struct.TcpStream.html) 实现 TCP 连接的监听、接收、处理和数据回复。  
   对于 UDP，则使用 [`UdpSocket`](https://docs.rs/tokio/latest/tokio/net/struct.UdpSocket.html) 来接收和发送数据报。
 
 - **自定义协议解析**  
   在 TCP 连接中常常需要解决“粘包”或“拆包”问题，可以采用诸如基于消息长度、特定分隔符或固定长度等机制实现数据帧的分割。  
-  如果需要更高级的处理，可以使用 [`tokio_util::codec`](https://docs.rs/tokio-util/latest/tokio_util/codec/index.html) 来编写或使用现成的编解码器（例如基于长度字段的 `LengthDelimitedCodec`）。
+  如果需要更高级的处理，可以使用 [`tokio_util::codec`](https://docs.rs/tokio-util/latest/tokio_util/codec/index.html)
+  来编写或使用现成的编解码器（例如基于长度字段的 `LengthDelimitedCodec`）。
 
 - **异步任务调度**  
   对于每个新连接或接收到的 UDP 数据包，可以将其交由独立的 async 任务处理（例如 `tokio::spawn`），确保不会阻塞整体的运行时。
@@ -41,8 +43,8 @@ use tokio::net::{TcpListener, TcpStream};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use std::io::Result;
 
-/// 模拟自定义协议处理：
-/// 读取数据后，将所有字节转换为大写，作为处理结果返回
+// 模拟自定义协议处理：
+// 读取数据后，将所有字节转换为大写，作为处理结果返回
 async fn process_tcp(mut stream: TcpStream) -> Result<()> {
     let mut buf = [0u8; 1024];
     loop {
@@ -86,7 +88,8 @@ async fn main() -> Result<()> {
 
 **说明：**  
 
-- 这里通过简单示例演示了如何读取数据、进行处理后写回。实际情况中可以在 `process_tcp` 函数内加入更复杂的协议解析逻辑（例如根据自定义头部解析消息长、校验和等）。
+这里通过简单示例演示了如何读取数据、进行处理后写回。
+实际情况中可以在 `process_tcp` 函数内加入更复杂的协议解析逻辑（例如根据自定义头部解析消息长、校验和等）。
 
 ---
 
@@ -132,7 +135,8 @@ async fn main() -> Result<()> {
 
 **说明：**  
 
-- UDP 协议本身是无连接的，因此每个数据包都是独立处理。对于复杂协议，可能需要在数据包内封装更多结构信息（例如序列号、校验码等）以便实现可靠传输、排序、重传等机制。
+UDP 协议本身是无连接的，因此每个数据包都是独立处理。
+对于复杂协议，可能需要在数据包内封装更多结构信息（例如序列号、校验码等）以便实现可靠传输、排序、重传等机制。
 
 ---
 
@@ -142,9 +146,7 @@ async fn main() -> Result<()> {
 可以使用 [`tokio_util::codec`](https://docs.rs/tokio-util/latest/tokio_util/codec/) 模块提供的 `Framed` 接口结合自定义的 `Decoder` 和 `Encoder` 来处理消息边界。
 其思想是将原始的字节流包装成一个个完整的消息，然后在业务逻辑中直接对消息进行处理，而不必手动实现数据切分。
 
-> **提示：** 根据具体协议要求，可选择现有的编码器例如 `LengthDelimitedCodec`（基于长度字段）或者自己实现。
-
----
+**提示：** 根据具体协议要求，可选择现有的编码器例如 `LengthDelimitedCodec`（基于长度字段）或者自己实现。
 
 ## 5. 小结
 

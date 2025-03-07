@@ -68,9 +68,9 @@
 | 特性 | Tokio | async-std |
 | :----: | :----: | :----: |
 | 调度策略 | 多线程池 + 工作窃取，支持 spawn_blocking  | 内置简单调度，接近标准库风格 |
-| API        | 丰富、功能强大，内置 select! | 简洁易用 |
-| 生态系统   | 成熟且扩展性强 | 适合轻量级应用 |
-| 使用场景   | 高并发、复杂网络应用 | 小型与中型项目，快速原型开发 |
+| API     | 丰富、功能强大，内置 select! | 简洁易用 |
+| 生态系统 | 成熟且扩展性强 | 适合轻量级应用 |
+| 使用场景 | 高并发、复杂网络应用 | 小型与中型项目，快速原型开发 |
 
 ---
 
@@ -211,7 +211,8 @@ async fn main() {
 
 #### 3.3.1 异步取消（类似 Go 的 context）
 
-Rust 没有内置的 `context`，但可使用共享信号或 CancellationToken 实现。下面示例利用 [tokio-util](https://docs.rs/tokio-util/latest/tokio_util/sync/struct.CancellationToken.html) 提供的 CancellationToken 来模拟取消信号。
+Rust 没有内置的 `context`，但可使用共享信号或 CancellationToken 实现。
+下面示例利用 [tokio-util](https://docs.rs/tokio-util/latest/tokio_util/sync/struct.CancellationToken.html) 提供的 CancellationToken 来模拟取消信号。
 
 **文件路径：** `src/tokio_cancellation.rs`
 
@@ -254,10 +255,13 @@ async fn main() {
 #### 3.3.2 类似 WaitGroup、Chan、Select 和 Goroutine 池化
 
 - **WaitGroup**  
-  Go 的 WaitGroup 用于等待一组 goroutine 完成。在 Rust 中你可以收集所有 `JoinHandle` 并调用 `.await` 来等待它们结束，或使用类似 [`futures::join!`](https://docs.rs/futures/latest/futures/macro.join.html) 宏同步等待多个 Future。
+  Go 的 WaitGroup 用于等待一组 goroutine 完成。
+  在 Rust 中你可以收集所有 `JoinHandle` 并调用 `.await` 来等待它们结束，
+  或使用类似 [`futures::join!`](https://docs.rs/futures/latest/futures/macro.join.html) 宏同步等待多个 Future。
 
 - **Channel 与 Select**  
-  Rust 提供多种异步 channel（如 `tokio::sync::mpsc`、`async_channel` 等），可以配合 `select!` 宏实现多路复用（类似 Go 的 `select`）。例如：
+  Rust 提供多种异步 channel（如 `tokio::sync::mpsc`、`async_channel` 等），
+  可以配合 `select!` 宏实现多路复用（类似 Go 的 `select`）。例如：
 
   ```rust
   use tokio::sync::mpsc;
@@ -289,7 +293,10 @@ async fn main() {
   ```
 
 - **Goroutine 池化**  
-  Go 可以通过 Goroutine 池减少创建开销。Rust async 任务在运行时内部已经通过线程池调度；此外，也可以使用第三方 crate（如 [`async-task`](https://crates.io/crates/async-task) 或自定义池化机制）控制任务并发数，从而达到类似效果。
+  Go 可以通过 Goroutine 池减少创建开销。
+  Rust async 任务在运行时内部已经通过线程池调度；
+  此外，也可以使用第三方 crate（如 [`async-task`](https://crates.io/crates/async-task) 或自定义池化机制）
+  控制任务并发数，从而达到类似效果。
 
 ---
 
@@ -297,14 +304,14 @@ async fn main() {
 
 ### 4.1 相似点
 
-| 功能         | Golang                                            | Rust async                                         |
-| ------------ | ------------------------------------------------- | -------------------------------------------------- |
-| 多任务调度   | goroutine，通过运行时调度，多任务并发             | async/await，将 async 函数转为 Future，通过 Executor 调度 |
-| 异步取消     | context 传递取消信号                               | CancellationToken / 共享标志或通道                   |
-| 信道通信     | 内置 chan，select 多路等待                         | 异步 channel（如 tokio::sync::mpsc），select!        |
-| 资源清理     | defer                                             | scopeguard / defer!                                |
-| 等待组       | WaitGroup                                         | 收集 JoinHandle 或使用 futures::join!             |
-| 任务池化     | Goroutine 池化                                    | 运行时线程池，或手工实现控制并发任务数               |
+| 功能  | Golang | Rust async |
+| :----: | :---- | :----: |
+| 多任务调度 | goroutine，通过运行时调度，多任务并发 | async/await，将 async 函数转为 Future，通过 Executor 调度 |
+| 异步取消   | context 传递取消信号                | CancellationToken / 共享标志或通道                   |
+| 信道通信   | 内置 chan，select 多路等待          | 异步 channel（如 tokio::sync::mpsc），select!        |
+| 资源清理   | defer                              | scopeguard / defer!                                |
+| 等待组     | WaitGroup                          | 收集 JoinHandle 或使用 futures::join!             |
+| 任务池化   | Goroutine 池化                     | 运行时线程池，或手工实现控制并发任务数               |
 
 ### 4.2 不同点及优缺点
 
@@ -318,9 +325,8 @@ async fn main() {
 
 - **异步取消与并发控制**  
   - *Golang*：通过 context、WaitGroup 和内置 channel 组合实现；取消和并发控制较为直观。  
-  - *Rust async*：需要依赖第三方库（如 tokio-util 的 CancellationToken）和明确的 async/await 写法，提供更细粒度的控制和更严格的类型安全，但实现上显得稍复杂。
-
----
+  - *Rust async*：需要依赖第三方库（如 tokio-util 的 CancellationToken）和明确的 async/await 写法，
+提供更细粒度的控制和更严格的类型安全，但实现上显得稍复杂。
 
 ## 5. 思维导图总结
 
@@ -365,7 +371,8 @@ flowchart TD
 ## 6. 总结
 
 1. **Rust async 机制**  
-   利用 async/await 将任务编译为状态机，通过协作式调度和多线程 Executor 实现高效且安全的多任务调度。关键组件（spawn、JoinHandle、select!、Arc/Mutex 和 scopeguard）构建了一个严格类型检查、内存安全的并发体系。
+   利用 async/await 将任务编译为状态机，通过协作式调度和多线程 Executor 实现高效且安全的多任务调度。
+   关键组件（spawn、JoinHandle、select!、Arc/Mutex 和 scopeguard）构建了一个严格类型检查、内存安全的并发体系。
 
 2. **运行时对比**  
    - **Tokio**：功能强大、配置灵活，适合高并发和复杂应用；提供了诸如 spawn_blocking 和内置 select! 的高级特性。  
@@ -373,6 +380,8 @@ flowchart TD
 
 3. **与 Golang 并发模型的对比**  
    - Go 内置的 goroutine、channel、select、context、WaitGroup 和 defer 实现了直观且简洁的并发模型；  
-   - Rust async 则提供了同等功能（异步任务、通道、多路选择、资源清理与取消机制），但基于编译期的内存与类型检查，具备更高的性能与内存安全性，缺点是编码相对复杂、学习曲线更高。
+   - Rust async 则提供了同等功能（异步任务、通道、多路选择、资源清理与取消机制），
+但基于编译期的内存与类型检查，具备更高的性能与内存安全性，缺点是编码相对复杂、学习曲线更高。
 
-以上为 Rust async 全面支持多任务调度机制、示例代码、运行时对比、类似 Golang 并行机制实现以及与 Go 并发模型优缺点的详细分析与思维导图总结。
+以上为 Rust async 全面支持多任务调度机制、示例代码、运行时对比、
+类似 Golang 并行机制实现以及与 Go 并发模型优缺点的详细分析与思维导图总结。

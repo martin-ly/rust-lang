@@ -15,5 +15,3 @@ members = [ "c01_own_borrow_scope",
             "c11_frameworks", 
             "c12_middlewares", 
             "c13_microservice"]
-
-
