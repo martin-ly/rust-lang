@@ -5,7 +5,7 @@
 
 ## 1. 实现思路概述
 
-在 Rust 的 async 编程中，基于 Tokio 或 async-std 等运行时，可以使用其提供的网络模块对 TCP 与 UDP 进行异步处理。\
+在 Rust 的 async 编程中，基于 Tokio 或 async-std 等运行时，可以使用其提供的网络模块对 TCP 与 UDP 进行异步处理。
 定制处理协议时主要涉及以下几个方面：
 
 - **异步 I/O 读取与写入**  
