@@ -1,6 +1,9 @@
+
+# Trait 和 Interface
+
 Rust 的 trait 和 Go 的 interface 在设计上都旨在提供一种形式的多态性，但它们在实现和使用上有一些关键的区别和联系：
 
-### 区别
+## *区别*
 
 1. **定义方式**：
    - **Rust Trait**：通过 `trait` 关键字定义，可以包含方法签名和默认实现。
@@ -27,7 +30,7 @@ Rust 的 trait 和 Go 的 interface 在设计上都旨在提供一种形式的�
    - **Rust Trait**：可以与泛型结合使用，允许 trait 绑定限定特定类型或类型特征。
    - **Go Interface**：不支持泛型，直到 Go 1.18 引入泛型，但即使如此，接口的使用方式与 Rust trait 仍有不同。
 
-### 联系
+## *联系*
 
 1. **多态性**：两者都支持多态性，允许通过 trait 或 interface 引用调用具体实现的方法。
 
@@ -39,9 +42,10 @@ Rust 的 trait 和 Go 的 interface 在设计上都旨在提供一种形式的�
 
 5. **实现检查**：在 Rust 中，可以使用 `as` 关键字将对象转换为 trait 对象；在 Go 中，任何类型都可以通过接口进行断言来实现接口。
 
-### 示例
+## *示例*
 
 Rust 中的 trait 实现示例：
+
 ```rust
 trait Animal {
     fn make_sound(&self);
@@ -57,6 +61,7 @@ impl Animal for Dog {
 ```
 
 Go 中的 interface 实现示例：
+
 ```go
 type Animal interface {
     MakeSound()
@@ -69,4 +74,5 @@ func (d Dog) MakeSound() {
 }
 ```
 
-在这两个示例中，`Animal` 是 Rust 中的 trait 和 Go 中的 interface，`Dog` 是实现了 `Animal` 接口的具体类型。尽管实现细节不同，但它们的基本目的是相似的：定义一个可以由多种类型实现的行为集合。
+在这两个示例中，`Animal` 是 Rust 中的 trait 和 Go 中的 interface，`Dog` 是实现了 `Animal` 接口的具体类型。
+尽管实现细节不同，但它们的基本目的是相似的：定义一个可以由多种类型实现的行为集合。
