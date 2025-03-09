@@ -49,7 +49,8 @@ let data = Box::new(42);
 let non_null: NonNull<i32> = unsafe { NonNull::new_unchecked(Box::into_raw(data)) };
 ```
 
-在这个例子中，我们使用 `Box::into_raw` 将 `Box` 转换为裸指针，然后使用 `NonNull::new_unchecked` 来创建 `NonNull` 实例。这个过程是 `unsafe` 的，因为需要保证指针非空。
+在这个例子中，我们使用 `Box::into_raw` 将 `Box` 转换为裸指针，然后使用 `NonNull::new_unchecked` 来创建 `NonNull` 实例。
+这个过程是 `unsafe` 的，因为需要保证指针非空。
 
 ### 使用 `NonNull`
 
