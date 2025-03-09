@@ -2,8 +2,6 @@
 
 下面详细介绍一下 Rust 中的**类型转换**，包括不同转换方式的原理、用途以及代码示例。
 
----
-
 ## 1. Rust 中类型转换的基本概念
 
 Rust 中的类型转换主要有以下几种方式：
@@ -22,9 +20,8 @@ Rust 中的类型转换主要有以下几种方式：
     主要用于引用转换，比如将 `String` 转换为 `&str`，这种转换通常是零开销的借用转换。
 
 - **自动解引用（Deref Coercion）**  
-  利用 [`Deref`](https://doc.rust-lang.org/std/ops/trait.Deref.html) 特性，可以在一定程度上自动将智能指针转换为借用引用，使得用户无需显式调用解引用操作。
-
----
+  利用 [`Deref`](https://doc.rust-lang.org/std/ops/trait.Deref.html) 特性，
+  可以在一定程度上自动将智能指针转换为借用引用，使得用户无需显式调用解引用操作。
 
 ## 2. 使用 `as` 关键字进行直接类型转换
 
@@ -50,8 +47,6 @@ fn main() {
     println!("Color::Green as i32: {}", c_int);
 }
 ```
-
----
 
 ## 3. 基于 `From` / `Into` Trait 的转换
 
@@ -80,11 +75,10 @@ fn main() {
 }
 ```
 
----
-
 ## 4. 基于 `TryFrom` / `TryInto` Trait 的转换
 
-当转换可能失败时（例如数值超限、格式错误等），应使用 `TryFrom` 和 `TryInto`，它们返回 `Result` 类型，方便错误处理。
+当转换可能失败时（例如数值超限、格式错误等），
+应使用 `TryFrom` 和 `TryInto`，它们返回 `Result` 类型，方便错误处理。
 
 ```rust:src/try_from.rs
 use std::convert::TryFrom;
@@ -99,8 +93,6 @@ fn main() {
     }
 }
 ```
-
----
 
 ## 5. `AsRef` / `AsMut` 的引用转换
 
@@ -123,11 +115,10 @@ fn main() {
 }
 ```
 
----
-
 ## 6. 自动解引用（Deref Coercion）
 
-Rust 的 [`Deref`](https://doc.rust-lang.org/std/ops/trait.Deref.html) 机制允许智能指针（如 `Box<T>`, `Rc<T>` 等）自动转换为引用。
+Rust 的 [`Deref`](https://doc.rust-lang.org/std/ops/trait.Deref.html)
+机制允许智能指针（如 `Box<T>`, `Rc<T>` 等）自动转换为引用。
 这在使用 API 时不用显式地调用 `*` 运算符，非常方便。
 
 ```rust:src/deref_coercion.rs
@@ -148,8 +139,6 @@ fn main() {
 }
 ```
 
----
-
 ## 7. 总结
 
 - **直接转换 (`as`)**：适用于简单原语类型之间的转换，使用方便但缺乏安全检查。
@@ -158,4 +147,5 @@ fn main() {
 - **`AsRef`/`AsMut`**：用于引用转换，主要提供零成本的借用视图转换。
 - **Deref Coercion**：智能指针自动解引用，提高代码的简洁性与可读性。
 
-通过上述多种方式，Rust 为类型转换提供了一套既安全又灵活的机制，满足了各类编程场景对转换需求的同时，又保证了内存安全与错误处理。
+通过上述多种方式，Rust 为类型转换提供了一套既安全又灵活的机制，
+满足了各类编程场景对转换需求的同时，又保证了内存安全与错误处理。

@@ -17,7 +17,8 @@ pub trait From<T> {
 
 ## 2. `Into` Trait
 
-`Into` Trait 是 `From` Trait 的逆操作，允许你定义如何将一种类型转换为另一种类型。它的定义如下：
+`Into` Trait 是 `From` Trait 的逆操作，允许你定义如何将一种类型转换为另一种类型。
+它的定义如下：
 
 ```rust
 pub trait Into<T> {
