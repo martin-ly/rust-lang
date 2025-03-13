@@ -1,4 +1,7 @@
-下面介绍下 Rust 中的 `Any` 类型（其实就是 [`std::any::Any`](https://doc.rust-lang.org/std/any/trait.Any.html) trait）与显式类型转换（explicit type conversion）的基本概念、用途以及示例代码，帮助大家理解这两者在 Rust 类型系统中的应用场景。
+# Any 类型与显式类型转换
+
+下面介绍下 Rust 中的 `Any` 类型（其实就是 [`std::any::Any`](https://doc.rust-lang.org/std/any/trait.Any.html) trait）
+与显式类型转换（explicit type conversion）的基本概念、用途以及示例代码，帮助大家理解这两者在 Rust 类型系统中的应用场景。
 
 ---
 
@@ -148,7 +151,6 @@ fn main() {
 
 通过理解 `Any` 类型和各种显式转换方法，开发者可以在 Rust 中灵活地处理类型转换问题，同时保证类型安全和代码的可维护性。
 
-
 下面给出 `std::any::Any` trait 中 `downcast_ref` 方法的定义及其工作原理。需要注意的是，这里的代码示例展示的是其逻辑实现（实际实现可能会因标准库版本略有不同，但基本思想一致）。
 
 ```rust:src/downcast_ref_definition.rs
@@ -188,4 +190,3 @@ pub trait Any: 'static {
   如果类型匹配，则返回 `Some(&T)`，否则返回 `None`，实现了动态下转型（downcasting）的功能。
 
 通过这种方式，可以在运行时根据对象的真实类型获取其具体的引用，从而实现如动态类型检查、类型转换等应用场景。
-
