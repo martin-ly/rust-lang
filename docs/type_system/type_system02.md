@@ -122,8 +122,9 @@
 
 **Rust**：
     结合了静态类型系统、强类型系统和仿射类型系统的特性，以实现内存安全和高性能。
-    Rust的类型系统预先定义变量类型的基本内存安全语义model-
-    {moving semantic, borrowing semantic:{ref, ref mut,ref_mut_rule}, lifetimes}，并由编译器强制执行推理和检查。
+    Rust的类型系统预先定义变量类型的基本内存安全语义
+    model-{moving semantic, borrowing semantic:{ref, ref mut,ref_mut_rule}, lifetimes}，
+    并由编译器强制执行推理和检查。
     在此基础之上，Rust的类型系统支持泛型、trait、生命周期、模式匹配等更多的高级特性。
     兼顾内存,多线程的编程安全性和性能。
 
@@ -132,7 +133,7 @@
 
 **JavaScript**：
     动态类型系统和弱类型系统，适合 Web 开发，
-但需要额外的类型检查工具（如 TypeScript）来弥补类型安全的不足。
+    但需要额外的类型检查工具（如 TypeScript）来弥补类型安全的不足。
 
 理解不同类型系统的分类和特点，
 可以帮助你更好地选择适合特定任务的编程语言，
