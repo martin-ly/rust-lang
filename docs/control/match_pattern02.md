@@ -363,14 +363,16 @@ Rust 的模式匹配在项目中应用广泛，主要用于以下场景：
 
 在 Rust 中，解构语法主要用于匹配和解构数据结构，例如枚举、结构体等。
 然而，对于 trait object，解构语法并不能直接用于匹配，因为 trait object 的具体类型在编译时是未知的。
-trait object 是一种动态类型，其具体类型信息在运行时才确定。因此，不能直接使用解构语法来匹配 trait object。
+trait object 是一种动态类型，其具体类型信息在运行时才确定。
+因此，不能直接使用解构语法来匹配 trait object。
 
 ### 解释
 
 #### Trait Object 的定义和使用
 
 Trait object 是一种动态类型，用于表示实现了特定 trait 的任何类型。
-Trait object 通常通过 `dyn` 关键字来定义，例如 `dyn Trait`。Trait object 的主要用途是实现多态，即在编译时不知道具体类型的情况下，调用 trait 中定义的方法。
+Trait object 通常通过 `dyn` 关键字来定义，例如 `dyn Trait`。
+Trait object 的主要用途是实现多态，即在编译时不知道具体类型的情况下，调用 trait 中定义的方法。
 
 ```rust
 trait Draw {
@@ -414,7 +416,8 @@ fn main() {
 #### 解构语法的限制
 
 Rust 的解构语法主要用于匹配和解构数据结构，例如枚举、结构体等。
-对于 trait object，由于其具体类型在编译时是未知的，解构语法不能直接用于匹配 trait object。例如，以下代码是无效的：
+对于 trait object，由于其具体类型在编译时是未知的，解构语法不能直接用于匹配 trait object。
+例如，以下代码是无效的：
 
 ```rust
 match x {
