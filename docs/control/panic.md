@@ -28,7 +28,8 @@ fn main() {
 
 ## 2. 栈展开（Stack Unwinding）
 
-默认情况下（尤其是在调试模式下），Rust 采用**栈展开**的策略来处理 panic。具体表现为：
+默认情况下（尤其是在调试模式下），Rust 采用**栈展开**的策略来处理 panic。
+具体表现为：
 
 - **调用 panic hook**  
   当 panic 发生时，首先会调用一个预设的 **panic hook**（可以通过 `std::panic::set_hook` 自定义），这个 hook 负责输出 panic 的信息（例如出错位置、堆栈跟踪等）。
@@ -47,7 +48,8 @@ fn main() {
 
 ## 3. panic=abort 策略
 
-可以通过修改编译器选项（例如在 Cargo.toml 中设置 `panic = "abort"`）来改变 panic 的行为，使其直接中止程序而不进行栈展开。其特点是：
+可以通过修改编译器选项（例如在 Cargo.toml 中设置 `panic = "abort"`）来改变 panic 的行为，使其直接中止程序而不进行栈展开。
+其特点是：
 
 - **立即终止程序**  
   发生 panic 后，不调用任何析构函数，整个程序会立刻中止。
@@ -63,7 +65,8 @@ panic = "abort"
 
 ## 4. 捕获 panic
 
-Rust 提供了 `std::panic::catch_unwind` 函数，可以在一个闭包中捕获 panic，从而防止 panic 迅速向上传播终止线程。示例如下：
+Rust 提供了 `std::panic::catch_unwind` 函数，可以在一个闭包中捕获 panic，从而防止 panic 迅速向上传播终止线程。
+示例如下：
 
 ```rust:src/main.rs
 use std::panic;
