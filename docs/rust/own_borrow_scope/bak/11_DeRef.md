@@ -1,5 +1,7 @@
-在 Rust 中，解引用是通过 `Deref` trait 来实现的。`
-Deref` trait 允许一个类型表现得像引用，这样当一个值需要被当作引用处理时，编译器会自动调用 `Deref` trait 的 `deref` 方法来进行解引用。
+# de-ref
+
+在 Rust 中，解引用是通过 `Deref` trait 来实现的。
+`Deref` trait 允许一个类型表现得像引用，这样当一个值需要被当作引用处理时，编译器会自动调用 `Deref` trait 的 `deref` 方法来进行解引用。
 
 以下是 `Deref` trait 的定义：
 
@@ -13,9 +15,11 @@ pub trait Deref {
 - `Target` 关联类型表示解引用后的目标类型。
 - `deref` 方法返回 `&Self::Target` 类型的引用。
 
-### 如何实现解引用
+## 如何实现解引用
 
-1. **智能指针的解引用**: 许多智能指针类型，如 `Box`, `Rc`, `Arc` 等，都实现了 `Deref` trait，允许它们被当作它们持有的值的引用。
+1. **智能指针的解引用**:
+   许多智能指针类型，如 `Box`, `Rc`, `Arc` 等，
+   都实现了 `Deref` trait，允许它们被当作它们持有的值的引用。
 
     ```rust
     use std::rc::Rc;
@@ -24,61 +28,62 @@ pub trait Deref {
     let y: &i32 = &*x; // 手动解引用，`&*` 从 `Rc<i32>` 到 `i32`
     ```
 
-2. **自动解引用**: Rust 编译器会自动应用 `Deref` trait 来解引用，这称为自动解引用或解引用强制。
-当你尝试将实现了 `Deref` 的类型的值放在期望其 `Target` 类型引用的上下文中时，编译器会自动调用 `deref` 方法。
+2. **自动解引用**:
+   Rust 编译器会自动应用 `Deref` trait 来解引用，这称为自动解引用或解引用强制。
+当你尝试将实现了 `Deref` 的类型的值放在期望其 `Target` 类型引用的上下文中时，
+编译器会自动调用 `deref` 方法。
 
     ```rust
     let x = Rc::new(10);
     let y = &x; // 自动解引用，`&Rc<i32>` 转换为 `&i32`
     ```
 
-3. **多级解引用**: 你可以使用多级解引用操作符 `*` 来手动解引用。
-
+ **多级解引用**: 你可以使用多级解引用操作符 `*` 来手动解引用。
     ```rust
     let x = Box::new(10);
     let y = *x; // 手动解引用，从 `Box<i32>` 到 `i32`
     ```
 
-4. **显式实现 `Deref`**: 你可以为自定义类型显式实现 `Deref` trait，以自定义解引用行为。
+ **显式实现 `Deref`**: 你可以为自定义类型显式实现 `Deref` trait，以自定义解引用行为。
 
-    ```rust
-    use std::ops::Deref;
+```rust
+use std::ops::Deref;
+struct MyBox<T>(T);
 
-    struct MyBox<T>(T);
-
-    impl<T> Deref for MyBox<T> {
-        type Target = T;
-        fn deref(&self) -> &Self::Target {
-            &self.0
-        }
+impl<T> Deref for MyBox<T> {
+    type Target = T;
+    fn deref(&self) -> &Self::Target {
+        &self.0
     }
+}
 
-    let x = MyBox(10);
-    let y: &i32 = &x; // 自动解引用，通过 `Deref` 实现
-    ```
+let x = MyBox(10);
+let y: &i32 = &x; // 自动解引用，通过 `Deref` 实现
+```
 
-5. **可变解引用**: 类似地，`Deref` trait 也可以用于可变解引用。
+**可变解引用**: 类似地，`Deref` trait 也可以用于可变解引用。
 Rust 还提供了 `DerefMut` trait，用于可变地解引用。
 
-    ```rust
-    use std::ops::{Deref, DerefMut};
+```rust
+use std::ops::{Deref, DerefMut};
 
-    impl Deref for MyBox {
-        // ... 不变解引用实现
+impl Deref for MyBox {
+    // ... 不变解引用实现
+}
+
+impl DerefMut for MyBox {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.0
     }
+}
+```
 
-    impl DerefMut for MyBox {
-        fn deref_mut(&mut self) -> &mut Self::Target {
-            &mut self.0
-        }
-    }
-    ```
-
-通过 `Deref` trait，Rust 能够在需要时自动将智能指针转换为引用，从而使得智能指针的使用更加自然和透明。
+通过 `Deref` trait，Rust 能够在需要时自动将智能指针转换为引用，
+从而使得智能指针的使用更加自然和透明。
 这是 Rust 类型系统和内存安全特性的一个重要组成部分。
 
-
-在 Rust 中，`Deref` trait 是一个核心特性，它允许某种类型的值表现得像引用一样。`Deref` trait 的定义如下：
+在 Rust 中，`Deref` trait 是一个核心特性，它允许某种类型的值表现得像引用一样。
+`Deref` trait 的定义如下：
 
 ```rust
 pub trait Deref {
@@ -87,9 +92,10 @@ pub trait Deref {
 }
 ```
 
-这里的 `Target` 是 `Deref` 所返回引用的类型，`?Sized` 表示 `Target` 可以是任何大小的类型，包括那些不固定大小的类型，如 trait 对象。
+这里的 `Target` 是 `Deref` 所返回引用的类型，
+`?Sized` 表示 `Target` 可以是任何大小的类型，包括那些不固定大小的类型，如 trait 对象。
 
-### 联系和解释：
+## 联系和解释
 
 1. **解引用操作**：
    - `Deref` trait 允许类型实现自定义的解引用行为。这意味着当你对实现了 `Deref` 的类型的实例进行解引用操作（`*`）时，`deref` 方法会被调用。
@@ -118,5 +124,5 @@ pub trait Deref {
 9. **所有权和借用规则**：
    - `Deref` 的实现必须遵守 Rust 的所有权和借用规则，确保在解引用时不会违反这些规则。
 
-`Deref` trait 是 Rust 中实现类型透明性和智能指针功能的关键，它使得智能指针的使用既安全又方便，同时还保持了 Rust 的内存安全保证。
-
+`Deref` trait 是 Rust 中实现类型透明性和智能指针功能的关键，
+它使得智能指针的使用既安全又方便，同时还保持了 Rust 的内存安全保证。

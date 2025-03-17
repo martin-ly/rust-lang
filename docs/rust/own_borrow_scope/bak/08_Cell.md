@@ -1,4 +1,7 @@
-在 Rust 中，`std::cell` 模块提供了几种 trait，它们定义了 `Cell` 和 `RefCell` 等类型的操作方式。
+# Cell 和 RefCell
+
+在 Rust 中，`std::cell` 模块提供了几种 trait，
+它们定义了 `Cell` 和 `RefCell` 等类型的操作方式。
 以下是这些 trait 的定义、联系以及它们如何与 `Cell` 和 `RefCell` 相关联的解释：
 
 1. **`Cell` trait**:
@@ -31,11 +34,11 @@
 10. **`UnwindSafe` 和 `RefUnwindSafe`**:
     - 这些 trait 与 panic 安全性有关。`UnwindSafe` 表示类型在 panic 时是安全的，而 `RefUnwindSafe` 表示类型在 panic 时可以安全地持有可变引用。`Cell` 和 `RefCell` 通常不实现这些 trait，因为它们在 panic 时可能持有对数据的借用。
 
-`Cell` 和 `RefCell` 都提供了对内部数据的访问和修改方式，但它们的主要区别在于 `Cell` 提供的是编译时借用检查，而 `RefCell` 提供的是运行时借用检查。这意味着 `RefCell` 可以在存在不可变借用的情况下提供可变访问，但这样做的代价是可能在运行时 panic。相比之下，`Cell` 的 `get` 和 `set` 方法在编译时就已经确定，不会导致运行时错误。
+`Cell` 和 `RefCell` 都提供了对内部数据的访问和修改方式，但它们的主要区别在于 `Cell` 提供的是编译时借用检查，而 `RefCell` 提供的是运行时借用检查。
+这意味着 `RefCell` 可以在存在不可变借用的情况下提供可变访问，但这样做的代价是可能在运行时 panic。相比之下，`Cell` 的 `get` 和 `set` 方法在编译时就已经确定，不会导致运行时错误。
 
-
-
-在 Rust 中，`std::cell` 模块提供了几种 trait，它们与 `Cell` 和 `RefCell` 等类型相关，用于实现不同类型的可变性。以下是一些与 `Cell` 和 `RefCell` 相关的主要 trait：
+在 Rust 中，`std::cell` 模块提供了几种 trait，它们与 `Cell` 和 `RefCell` 等类型相关，用于实现不同类型的可变性。
+以下是一些与 `Cell` 和 `RefCell` 相关的主要 trait：
 
 1. **`Borrow`**:
    - 这个 trait 允许获取一个值的不可变引用。
@@ -78,4 +81,3 @@
 
 这些 trait 定义了 `Cell` 和 `RefCell` 如何与 Rust 的借用规则和所有权模型交互。
 `Cell` 提供了值的不可变性，而 `RefCell` 允许在运行时借用检查的基础上进行内部可变性。使用这些类型时，开发者需要理解它们的行为和限制，以确保代码的安全性和正确性。
-
