@@ -1,3 +1,4 @@
+
 fn main() {
     borrow_scope();
     println!("main exit!");

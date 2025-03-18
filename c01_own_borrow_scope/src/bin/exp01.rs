@@ -1,5 +1,16 @@
+// 使用 crate::copy_move::factory::*; 来导入模块
+// use crate::copy_move::factory::*;
+
+use c01_own_borrow_scope::copy_move::factory::*;
+
 fn main() {
-    println!("Hello, world!");
+    let factory = Factory;
+
+    let product1 = factory.create_product(1); // 创建产品 1
+    let product2 = factory.create_product(2); // 创建产品 2
+
+    println!("Product 1 ID: {}", product1.get_id()); // 输出 1
+    println!("Product 2 ID: {}", product2.get_id()); // 输出 2
 }
 
 

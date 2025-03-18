@@ -1,6 +1,7 @@
 
-mod copy_move;
-mod expression;
-mod function;
-mod scope;
-mod variable;
+pub mod copy_move;
+
+pub mod expression;
+pub mod function;
+pub mod scope;
+pub mod variable;
