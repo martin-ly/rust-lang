@@ -121,6 +121,75 @@ fn main() {
 Rust 的 `enum` 支持泛型，可以通过定义泛型类型参数来创建泛型化的枚举。
 此外，`enum` 的变体可以接受 `impl Trait` 类型的值，但需要满足特定的语法和上下文要求。
 
+## `enum` 的变体成员能否是 trait 类型？
+
+在 Rust 中，`enum` 的变体成员确实只能是具体的数据类型，而不能直接是 trait 类型。这是因为 Rust 的类型系统要求在编译时能够确定每个变体的具体类型。
+
+然而，你可以通过使用 trait 对象（trait objects）来实现类似的多态性。具体来说，你可以使用 `Box<dyn Trait>` 或 `Rc<dyn Trait>` 等智能指针来存储实现了某个 trait 的类型的实例。这样，你可以在 `enum` 的变体中使用 trait 对象，从而实现多态。
+
+### **示例
+
+以下是一个示例，展示了如何在 `enum` 的变体中使用 trait 对象：
+
+```rust
+// 定义一个 trait
+trait Shape {
+    fn area(&self) -> f64; // 定义一个计算面积的方法
+}
+
+// 定义两个结构体，实现 Shape trait
+struct Circle {
+    radius: f64,
+}
+
+struct Rectangle {
+    width: f64,
+    height: f64,
+}
+
+// 为 Circle 实现 Shape trait
+impl Shape for Circle {
+    fn area(&self) -> f64 {
+        std::f64::consts::PI * self.radius * self.radius
+    }
+}
+
+// 为 Rectangle 实现 Shape trait
+impl Shape for Rectangle {
+    fn area(&self) -> f64 {
+        self.width * self.height
+    }
+}
+
+// 定义一个枚举，包含 trait 对象作为变体
+enum MyShape {
+    Shape(Box<dyn Shape>), // 变体 Shape，包含一个实现了 Shape trait 的 trait 对象
+}
+
+fn main() {
+    let circle = MyShape::Shape(Box::new(Circle { radius: 5.0 }));
+    let rectangle = MyShape::Shape(Box::new(Rectangle { width: 4.0, height: 6.0 }));
+
+    // 使用 trait 方法
+    match circle {
+        MyShape::Shape(ref shape) => println!("Circle area: {}", shape.area()),
+    }
+
+    match rectangle {
+        MyShape::Shape(ref shape) => println!("Rectangle area: {}", shape.area()),
+    }
+}
+```
+
+### 关键点
+
+1. **trait 定义**：定义一个 trait，例如 `Shape`，其中包含一个方法 `area`。
+2. **结构体实现**：定义两个结构体 `Circle` 和 `Rectangle`，并为它们实现 `Shape` trait。
+3. **枚举定义**：定义一个枚举 `MyShape`，其中的变体使用 `Box<dyn Shape>` 来存储实现了 `Shape` trait 的类型的实例。
+4. **使用 trait 对象**：在 `main` 函数中，创建 `MyShape` 的实例，并通过 trait 对象调用 `area` 方法。
+
+通过这种方式，你可以在 Rust 的 `enum` 中实现多态性，尽管变体本身不能直接是 trait 类型。
+
 ## Rust 的 Enum 支持泛型吗？
 
 **是的！**
