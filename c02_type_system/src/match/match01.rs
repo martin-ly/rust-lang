@@ -105,10 +105,11 @@ fn main() {
 
 #[allow(dead_code)]
 pub fn base_type01() {
-    let x = 1;
+    let x = 10;
     match x {
         1 => println!("x is 1"),
         2 => println!("x is 2"),
+        3..=10 => println!("x is 3 to 10"),
         _ => println!("x is other"),
     }
 }
@@ -138,7 +139,9 @@ pub fn base_type03() {
  
     let point = Point { x: 10, y: 20 };
     match point {
-        Point { x, y } => println!("Point is at ({}, {})", x, y),
+        Point { x, y: 0 } => println!("On the x-axis at {}", x),
+        Point { x: 0, y } => println!("On the y-axis at {}", y),
+        Point { x, y } => println!("Point at ({}, {})", x, y),
     }
 }
 
@@ -216,3 +219,23 @@ pub fn base_type07() {
     具体来说，原始类型和未实现必要 trait 的类型不能直接解构。
 */
 
+#[allow(dead_code)]
+pub enum Message {
+    Hello { id: i32 },
+    Goodbye { id: i32 },
+}
+
+#[allow(dead_code)]
+pub fn process_message(msg: Message) {
+    match msg {
+        Message::Hello { id: id @ 1..=10 } => {
+            println!("Hello message with id: {}", id);
+        }
+        Message::Goodbye { id } => {
+            println!("Goodbye message with id: {}", id);
+        }
+        _ => {
+            println!("Other message");
+        }
+    }
+}
