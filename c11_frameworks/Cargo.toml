@@ -5,3 +5,8 @@ edition = "2024"
 resolver = "3"
 
 [dependencies]
+thiserror = "2.0.12"
+anyhow = "1.0.97"
+diesel = { version = "2.2.8", features = ["sqlite"] }
+serde = { version = "1.0.219", features = ["derive"] }
+tokio = { version = "1.41.1", features = ["full"] }
