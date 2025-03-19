@@ -5,3 +5,12 @@ edition = "2024"
 resolver = "3"
 
 [dependencies]
+
+
+[lib]
+name = "c05_threads"
+path = "src/lib.rs"
+
+[[bin]]
+name = "c05_threads"
+path = "src/bin/main.rs"

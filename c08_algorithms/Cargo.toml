@@ -5,3 +5,13 @@ edition = "2024"
 resolver = "3"
 
 [dependencies]
+
+
+
+[lib]
+name = "c08_algorithms"
+path = "src/lib.rs"
+
+[[bin]]
+name = "c08_algorithms"
+path = "src/bin/main.rs"

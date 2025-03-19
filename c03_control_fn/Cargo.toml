@@ -11,5 +11,5 @@ name = "c03_control_fn"
 path = "src/lib.rs"
 
 [[bin]]
-name = "cf"
+name = "c03_control_fn"
 path = "src/bin/main.rs"
