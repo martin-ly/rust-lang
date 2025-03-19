@@ -5,3 +5,7 @@ edition = "2024"
 resolver = "3"
 
 [dependencies]
+tokio = { version = "1.44.1", features = ["full"] }
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
