@@ -1,4 +1,4 @@
-
+use c02_type_system::type_decomposition::r#match::match01::*;
 
 #[allow(dead_code)]
 pub fn describe_number(num: i32) {
@@ -44,4 +44,12 @@ fn main() {
     describe(Some(2)); // 输出: Two
     describe(Some(3)); // 输出: Other
     describe(None); // 输出: None
+
+    println!("{}", fizz_buzz(15)); // 输出: FizzBuzz
+    println!("{}", fizz_buzz(3)); // 输出: Fizz
+    println!("{}", fizz_buzz(5)); // 输出: Buzz
+    println!("{}", fizz_buzz(7)); // 输出: 7
+
+    match_guard(10); // 输出: Even
+    match_guard(11); // 输出: Odd
 }

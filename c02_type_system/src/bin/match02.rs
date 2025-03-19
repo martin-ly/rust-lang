@@ -1,4 +1,4 @@
-use c02_type_system::r#match::match02::*;
+use c02_type_system::type_decomposition::r#match::match02::*;
 
 fn main() {
     // 创建不同类型的图形

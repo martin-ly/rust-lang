@@ -239,3 +239,26 @@ pub fn process_message(msg: Message) {
         }
     }
 }
+
+
+#[allow(dead_code)]
+pub fn fizz_buzz(n: u32) -> String {
+    match (n % 3, n % 5) {
+        (0, 0) => "FizzBuzz".to_string(),
+        (0, _) => "Fizz".to_string(),
+        (_, 0) => "Buzz".to_string(),
+        (_, _) => n.to_string(),
+    }
+}
+
+
+#[allow(dead_code)]
+pub fn match_guard(x: u32) {
+    match x {
+        x if x % 2 == 0 => println!("Even"),
+        x if x % 2 != 0 => println!("Odd"),
+        _ => println!("Other"),
+    }
+}
+
+
