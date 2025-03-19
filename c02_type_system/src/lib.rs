@@ -7,4 +7,5 @@ pub mod type_decomposition;
 pub mod type_transformation;
 pub mod type_variance;
 pub mod type_operation;
+pub mod r#unsafe;
 
