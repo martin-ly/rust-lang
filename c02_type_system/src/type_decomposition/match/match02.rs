@@ -6,7 +6,7 @@ trait Shape {
 }
 
 // 定义一个圆形结构体
-#[allow(dead_code)]
+#[allow(unused)]
 pub struct Circle {
     pub radius: f64,
 }
@@ -22,7 +22,7 @@ impl Shape for Circle {
 }
 
 // 定义一个矩形结构体
-#[allow(dead_code)]
+#[allow(unused)]
 pub struct Rectangle {
     pub width: f64,
     pub height: f64,
@@ -39,7 +39,7 @@ impl Shape for Rectangle {
 }
 
 // 定义一个枚举，用于存储不同类型的图形
-#[allow(dead_code)]
+#[allow(unused)]
 pub enum ShapeEnum {
     Circle(Circle),
     Rectangle(Rectangle),

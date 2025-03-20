@@ -103,7 +103,7 @@ fn main() {
 
 //match 解构类型
 
-#[allow(dead_code)]
+#[allow(unused)]
 pub fn base_type01() {
     let x = 10;
     match x {
@@ -114,7 +114,7 @@ pub fn base_type01() {
     }
 }
 
-#[allow(dead_code)]
+#[allow(unused)]
 pub fn base_type02() {
     enum Color {
         Red,
@@ -130,7 +130,7 @@ pub fn base_type02() {
     }
 }
 
-#[allow(dead_code)]
+#[allow(unused)]
 pub fn base_type03() {
     struct Point {
         x: i32,
@@ -146,7 +146,7 @@ pub fn base_type03() {
 }
 
 
-#[allow(dead_code)]
+#[allow(unused)]
 pub fn base_type04() {
     let tuple = (1, 2);
     match tuple {
@@ -155,7 +155,7 @@ pub fn base_type04() {
 }
 
 
-#[allow(dead_code)]
+#[allow(unused)]
 pub fn base_type05() {
     let array = [1, 2, 3];
     match array {
@@ -169,7 +169,7 @@ pub fn base_type05() {
 }
 
 
-#[allow(dead_code)]
+#[allow(unused)]
 pub fn base_type06() {
     let some_value: Option<i32> = Some(10);
     match some_value {
@@ -178,7 +178,7 @@ pub fn base_type06() {
     }
 }
 
-#[allow(dead_code)]
+#[allow(unused)]
 pub fn base_type07() {
 
     #[derive(PartialEq)] // 自动实现 PartialEq
