@@ -56,17 +56,20 @@ pub fn test_closure01() {
     // Fn 闭包
     let fn_closure = || println!("Fn closure: {}", x);
     call_fn(fn_closure);
+    call_fn(fn_closure);
 
     // FnMut 闭包
     let mut y = 5;
-    let mut fn_mut_closure = || {
+    let fn_mut_closure = || {
         y += 1;
         println!("FnMut closure: {}", y);
     };
     call_fn_mut(fn_mut_closure);
+    //call_fn_mut(fn_mut_closure); // 错误：`fn_mut_closure` 已经移动
 
     // FnOnce 闭包
     let s = String::from("Hello");
-    let fn_once_closure = move || println!("FnOnce closure: {}", s);
+    let fn_once_closure  = move || println!("FnOnce closure: {}", s);
     call_fn_once(fn_once_closure);
+    //call_fn_once(fn_once_closure); // 错误：`fn_once_closure` 已经移动
 }

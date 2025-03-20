@@ -21,7 +21,7 @@ pub fn test_pattern_match() {
 /*
 模式匹配（Pattern Matching）与控制结构（Control Structure）：
 组合关系：
-    模式匹配是一种特殊的控制结构，它允许根据数据的形状和内容进行分支。
+    模式匹配是一种特殊的控制结构，它允许根据数据的结构和内容进行分支。
     它可以看作是对控制流的扩展，提供更强大的条件判断能力。
 形式：
     例如，使用模式匹配：
@@ -34,8 +34,5 @@ pub fn test_pattern_match_2() -> () {
         None => println!("No value"), // 控制结构
     }
 }
-
-
-
 
 
