@@ -219,13 +219,13 @@ pub fn base_type07() {
     具体来说，原始类型和未实现必要 trait 的类型不能直接解构。
 */
 
-#[allow(dead_code)]
+#[allow(unused)]
 pub enum Message {
     Hello { id: i32 },
     Goodbye { id: i32 },
 }
 
-#[allow(dead_code)]
+#[allow(unused)]
 pub fn process_message(msg: Message) {
     match msg {
         Message::Hello { id: id @ 1..=10 } => {
@@ -241,7 +241,7 @@ pub fn process_message(msg: Message) {
 }
 
 
-#[allow(dead_code)]
+#[allow(unused)]
 pub fn fizz_buzz(n: u32) -> String {
     match (n % 3, n % 5) {
         (0, 0) => "FizzBuzz".to_string(),
@@ -252,7 +252,7 @@ pub fn fizz_buzz(n: u32) -> String {
 }
 
 
-#[allow(dead_code)]
+#[allow(unused)]
 pub fn match_guard(x: u32) {
     match x {
         x if x % 2 == 0 => println!("Even"),
