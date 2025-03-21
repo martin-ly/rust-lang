@@ -6,3 +6,5 @@ pub mod hash_set;
 pub mod linked_list;
 pub mod vec;
 pub mod slice;
+pub mod vec_deque;
+pub mod binary_heap;
