@@ -4,5 +4,3 @@ fn main() {
     string_operation();
     string_operation_2();
 }
-
-
