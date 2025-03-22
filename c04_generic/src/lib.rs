@@ -5,3 +5,5 @@ pub mod polymorphism;
 pub mod associated_type;
 pub mod natural_transformation;
 pub mod type_inference;
+
+pub mod generic_define;
