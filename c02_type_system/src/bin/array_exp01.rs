@@ -1,4 +1,11 @@
 use    c02_type_system::primitive_types::compound_types::array::define::*;
+#[cfg(not(target_env = "msvc"))]
+use jemallocator::Jemalloc;
+
+#[cfg(not(target_env = "msvc"))]
+#[global_allocator]
+static GLOBAL: Jemalloc = Jemalloc;
+
 
 fn main() {
     test_array();
