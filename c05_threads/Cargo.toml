@@ -5,7 +5,7 @@ edition = "2024"
 resolver = "3"
 
 [dependencies]
-
+crossbeam = "0.8.1"
 
 [lib]
 name = "c05_threads"
