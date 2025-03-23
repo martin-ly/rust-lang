@@ -1,4 +1,4 @@
-use c02_type_system::type_decomposition::r#match::match01::*;
+use c02_type_system::type_decomposition::r#match::decomposition::*;
 
 #[allow(dead_code)]
 pub fn describe_number(num: i32) {
@@ -52,4 +52,17 @@ fn main() {
 
     match_guard(10); // 输出: Even
     match_guard(11); // 输出: Odd
+
+    // 创建不同类型的图形
+    let shapes: Vec<ShapeEnum> = vec![
+        ShapeEnum::Circle(Circle { radius: 5.0 }),
+        ShapeEnum::Rectangle(Rectangle { width: 4.0, height: 3.0 }),
+    ];
+
+    // 遍历图形并调用方法
+    for shape in shapes {
+        shape.draw();
+        println!("Area: {}", shape.area());
+    }
+
 }
