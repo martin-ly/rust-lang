@@ -2,7 +2,7 @@
 resolver = "3"
 
 # 在这里添加工作空间的成员项目
-members = [ "c01_own_borrow_scope", 
+members = [ "c01_ownership_borrow_scope", 
             "c02_type_system", 
             "c03_control_fn",
             "c04_generic", 

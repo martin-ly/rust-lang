@@ -1,4 +1,4 @@
-use c01_own_borrow_scope::copy_move::r#struct::*;
+use c01_ownership_borrow_scope::copy_move::r#struct::*;
 
 fn main() {
     let mut group = ShapeGroup::new();

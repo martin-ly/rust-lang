@@ -1,4 +1,4 @@
-use c01_own_borrow_scope::copy_move::strategy::*;
+use c01_ownership_borrow_scope::copy_move::strategy::*;
 
 fn main() {
     let strategy_a = Box::new(ConcreteStrategyA);
