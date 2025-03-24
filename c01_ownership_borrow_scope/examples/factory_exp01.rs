@@ -1,6 +1,3 @@
-// 使用 crate::copy_move::factory::*; 来导入模块
-// use crate::copy_move::factory::*;
-
 use c01_ownership_borrow_scope::copy_move::factory::*;
 
 fn main() {
