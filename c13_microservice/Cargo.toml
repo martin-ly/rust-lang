@@ -1,11 +1,10 @@
 [package]
 name = "c13_microservice"
 version = "0.1.0"
-edition = "2024"
-resolver = "3"
+edition = "2021"
 
 [dependencies]
-
+tokio = { version = ">=1.44.1", features = ["full"] }
 
 
 [lib]
@@ -15,3 +14,7 @@ path = "src/lib.rs"
 [[bin]]
 name = "c13_microservice"
 path = "src/bin/main.rs"
+
+[[example]]
+name = "optl_exp01"
+path = "examples/optl_exp01.rs"
