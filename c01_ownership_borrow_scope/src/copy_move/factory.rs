@@ -1,10 +1,10 @@
-#[allow(dead_code)]
+#[allow(unused)]
 #[derive(Copy, Clone)]
 pub struct Product {
     id: i32,
 }
 
-#[allow(dead_code)]
+#[allow(unused)]
 impl Product {
     pub fn new(id: i32) -> Self {
         Product { id }
@@ -15,10 +15,10 @@ impl Product {
     }
 }
 
-#[allow(dead_code)]
+#[allow(unused)]
 pub struct Factory;
 
-#[allow(dead_code)]
+#[allow(unused)]
 impl Factory {
     pub fn create_product(&self, id: i32) -> Product {
         Product::new(id) // 使用 Move 语义返回新创建的产品
