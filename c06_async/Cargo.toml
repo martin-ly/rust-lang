@@ -13,7 +13,9 @@ tokio-console = ">=0.1.11"
 futures = ">=0.3.31"
 crossterm = { version = ">=0.28", features = ["event-stream"] }
 
-actix-web = ">=4"
+actix-web = ">=4.10"
+actix = ">=0.11"  # 或者您需要的其他版本
+actix-rt = ">=2.5"  # 用于运行时
 
 axum = ">=0.8" 
 
