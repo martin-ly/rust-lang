@@ -14,8 +14,8 @@
     1.2 resource defination and organization,lifecycle RAII model: include { type system }
     1.3 runtime behavior Semantic model: include { control_flow }
 
-[memory](docs/memory.md)
-[rust-lang-model](docs/own_borrow_scope/ownership_borrow_lifetime.md)
+[memory](docs/view_type_theory/type_control_memory.md)
+[rust-lang-model](docs/view_type_control/type_variable_control03.md)
 
 ### 2. variable syntax model: include { own, borrow, scope }
 
@@ -28,9 +28,9 @@
     2.7 Runtime check on move Semantic in Compiling time or runtime,
     2.8 Scope and visibility semantic model: include { global, local, static,function,closure,expression }
 
-[rust-borrow-checker](docs/own_borrow_scope/borrow_check.md)
-[variable](docs/type_system/variable.md)
-[ref_mut_reason](docs/own_borrow_scope/ref_mut_reason.md)
+[rust-borrow-checker](docs/rust/own_borrow_scope/borrow_check_inference.md)
+[variable](docs/rust/control/control_flow_rust.md)
+[ref_mut_reason](docs/rust/own_borrow_scope/ref_mut_reason.md)
 
 ### 3. type system model: include { primitive_type, compound_type, generic_type, trait_type }
 
@@ -43,11 +43,12 @@
     3.7 type_transform: include{ type_cast: as, into, from,try_into, try_from }
     3.8 type_variance: include{ invariant_type, covariant_type, contravariance_type }
 
-[variant](docs/type_system/variant/variant.md)
-[variant_reason](docs/type_system/variant/variant_reason.md)
-[invariant_type](docs/type_system/variant/invariance_type.md)
-[covariant_type](docs/type_system/variant/covariance_type.md)
-[contravariance_type](docs/type_system/variant/contravariance_type.md)
+[variant](docs/view_type_theory/type_variant/variant.md)
+[variant_reason](docs/view_type_theory/type_variant/variant_reason.md)
+[invariant_type](docs/view_type_theory/type_variant/invariance_type.md)
+[covariant_type](docs/view_type_theory/type_variant/covariance_type.md)
+[contravariance_type](docs/view_type_theory/type_variant/contravariance_type.md)
+[variable](docs/view_type_theory/type_variant/mutability_rust.md)
 
 ### 4. control_flow model: include { function, closure, expression, statement }
 
@@ -58,11 +59,11 @@
 
 ### 5. package and engineer
 
-[package_mod](docs/lang_compare/cargo_package_mod.md)
+[package_mod](docs/rust/cargo_package_mod.md)
 
 ## 1. own_borrow_scope  
 
-[ref_refmut](docs/own_borrow_scope/ref_refmut.md)
+[ref_refmut](docs/rust/own_borrow_scope/ref_mut_reason.md)
 
 ## 2. type_system
 
@@ -78,13 +79,11 @@
 
 ## 8. algorithms
 
-[algorithms_01](docs/algorithms/algorithms_01.md)
-[algorithms_02](docs/algorithms/algorithms_02.md)
+[algorithms](docs/rust/algorithms)
 
 ## 9. design_pattern
 
-[design_pattern_01](docs/design_pattern/design_pattern_01.md)
-[design_pattern_02](docs/design_pattern/design_pattern_02.md)
+[design_pattern](docs/design_pattern)
 
 ## 10. networks
 
