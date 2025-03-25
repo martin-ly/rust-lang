@@ -5,6 +5,6 @@ pub mod prototype;
 pub mod simple_factory;
 pub mod singleton;
 pub mod object_pool;
-
+pub mod static_creation_method;
 
 
