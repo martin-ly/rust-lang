@@ -70,7 +70,8 @@ fn refcell_threads() {
     // 读取最终值
     let data01 = data.lock().unwrap();
     let final_value = data01.value.borrow();
-    println!("Final Value: {}", final_value); // 输出: Final Value: 10
+    // 输出: Final Value: 10
+    println!("Final Value: {}", final_value); 
 }
 
 #[cfg(test)]

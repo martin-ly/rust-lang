@@ -64,7 +64,8 @@ fn refcell_test() {
     
     if let Shape::Circle(point) = circle {
         let (x, y) = point.get_position();
-        println!("Circle Position: ({}, {})", x, y); // 输出: Circle Position: (5, 5)
+        // 输出: Circle Position: (5, 5)
+        println!("Circle Position: ({}, {})", x, y); 
     }
 }
 
