@@ -49,6 +49,33 @@ pub fn thread_test() {
 
 }
 
+
+#[allow(unused)]
+struct Data {
+    value: RefCell<i32>,
+}
+
+#[allow(unused)]
+impl Data {
+    fn new(value: i32) -> Self {
+        Data {
+            value: RefCell::new(value),
+        }
+    }
+
+    fn increment(&self) {
+        // 通过RefCell获取可变引用
+        *self.value.borrow_mut() += 1;
+    }
+}
+
+#[allow(unused)]
+fn thread_test02() {
+    let data = Data::new(5);
+    data.increment();
+    println!("Value: {}", *data.value.borrow()); // 输出: Value: 6
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -56,6 +83,7 @@ mod tests {
     #[test]
     fn test_thread01() {
         thread_test();
+        thread_test02();
     }
 }
 
