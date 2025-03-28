@@ -1,7 +1,9 @@
+# NonNull
+
 在 Rust 中，`NonNull` 是一个智能指针类型，它提供了对非空裸指针的安全封装。
 `NonNull` 位于 `std::ptr` 模块中，主要用于确保指针非空，并且可以安全地转换为 `&T` 或 `&mut T` 类型的引用。
 
-### 定义
+## 定义
 
 `NonNull` 定义如下：
 
@@ -14,7 +16,7 @@ pub struct NonNull<T> {
 这里，`NonNull<T>` 包含一个 `pointer` 字段，它是一个指向 `T` 类型的不可变引用的裸指针。
     `NonNull` 保证这个指针不是空指针（null）。
 
-### 解释
+## 解释
 
 `NonNull` 的设计有几个关键点：
 

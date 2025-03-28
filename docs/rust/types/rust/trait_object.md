@@ -1,5 +1,15 @@
 # Trait Object
 
+## 目录
+
+- [Trait Object](#trait-object)
+  - [目录](#目录)
+  - [1. 使用 `dyn` 关键字和 `Any` trait](#1-使用-dyn-关键字和-any-trait)
+  - [2. 使用枚举](#2-使用枚举)
+  - [3. 使用泛型](#3-使用泛型)
+  - [4. 使用 `async-trait` crate](#4-使用-async-trait-crate)
+  - [总结](#总结)
+
 在 Rust 中，trait object 是一种动态类型，用于实现多态。
 由于 trait object 的具体类型在编译时是未知的，因此不能直接使用解构语法来匹配 trait object。
 不过，Rust 提供了其他方法来处理 trait object，以下是几种替代解构语法处理 trait object 的方法：

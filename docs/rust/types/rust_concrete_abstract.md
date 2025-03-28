@@ -1,5 +1,23 @@
 # Rust 中的具体类型和抽象类型
 
+## 目录
+
+- [Rust 中的具体类型和抽象类型](#rust-中的具体类型和抽象类型)
+  - [目录](#目录)
+  - [1. 具体类型（Concrete Types）](#1-具体类型concrete-types)
+  - [2. 抽象类型（Abstract Types）](#2-抽象类型abstract-types)
+  - [总结](#总结)
+    - [1. 类型别名（Type Alias）](#1-类型别名type-alias)
+      - [示例](#示例)
+    - [2. 新类型（Newtype）](#2-新类型newtype)
+      - [2.1 示例](#21-示例)
+    - [3 总结](#3-总结)
+    - [1. `impl Trait` 是抽象类型](#1-impl-trait-是抽象类型)
+      - [1.1 示例](#11-示例)
+    - [2. `impl Trait` 是否可以用于类型别名](#2-impl-trait-是否可以用于类型别名)
+      - [2.1 *示例*](#21-示例-1)
+    - [3 *总结*](#3-总结-1)
+
 在 Rust 中，类型可以分为两大类：具体类型（concrete types）和抽象类型（abstract types）。
 以下是对这两类类型的定义、解释和示例：
 

@@ -1,5 +1,19 @@
 # rust type transform
 
+## 目录
+
+- [rust type transform](#rust-type-transform)
+  - [目录](#目录)
+  - [1. Rust 中类型转换的基本概念](#1-rust-中类型转换的基本概念)
+  - [2. 使用 `as` 关键字进行直接类型转换](#2-使用-as-关键字进行直接类型转换)
+  - [3. 基于 `From` / `Into` Trait 的转换](#3-基于-from--into-trait-的转换)
+    - [示例一：使用 `From` 进行转换](#示例一使用-from-进行转换)
+    - [示例二：使用 `Into` 进行转换](#示例二使用-into-进行转换)
+  - [4. 基于 `TryFrom` / `TryInto` Trait 的转换](#4-基于-tryfrom--tryinto-trait-的转换)
+  - [5. `AsRef` / `AsMut` 的引用转换](#5-asref--asmut-的引用转换)
+  - [6. 自动解引用（Deref Coercion）](#6-自动解引用deref-coercion)
+  - [7. 总结](#7-总结)
+  
 下面详细介绍一下 Rust 中的**类型转换**，包括不同转换方式的原理、用途以及代码示例。
 
 ## 1. Rust 中类型转换的基本概念

@@ -6,11 +6,13 @@
 
 - **定义**：  
   `AsRef` 是一个用于不可变引用转换的通用 trait，其定义大致如下：
+
   ```rust:src/as_ref_trait_example.rs
   pub trait AsRef<T: ?Sized> {
       fn as_ref(&self) -> &T;
   }
   ```
+
 - **用途**：  
   当你需要将一个类型的引用转换为另外一种引用时（而不发生数据拷贝或转移所有权），可以使用 `AsRef`。例如，可以将 `String` 转换成 `&str`，或将 `Vec<T>` 转换成 `&[T]`。
 - **特点**：  
@@ -23,11 +25,13 @@
 
 - **定义**：  
   `AsMut` 与 `AsRef` 类似，不过它用于返回可变引用，其定义大致如下：
+
   ```rust:src/as_mut_trait_example.rs
   pub trait AsMut<T: ?Sized> {
       fn as_mut(&mut self) -> &mut T;
   }
   ```
+
 - **用途**：  
   当你需要将一个可变引用转换为另一种可变引用时使用。如将一个可变的 `String` 转换成 `&mut str`，或者将 `Vec<T>` 转换为 `&mut [T]`。
 - **特点**：  
@@ -40,11 +44,13 @@
 
 - **定义**：  
   `Borrow` trait 用于提供一种安全的借用接口，通常用于集合（例如 `HashMap` 或 `BTreeMap`）中，以允许使用另一种视图来进行查找。它的定义大致如下：
+
   ```rust:src/borrow_trait_example.rs
   pub trait Borrow<Borrowed: ?Sized> where Borrowed: Eq + Hash {
       fn borrow(&self) -> &Borrowed;
   }
   ```
+
 - **用途**：  
   - `Borrow` 用于从一个拥有所有权的类型转换为其借用的、不可变的视图。
   - 常见例子是 `String` 实现了 `Borrow<str>`，这样可以用 `&str` 来索引 `HashMap<String, V>` 中的键。

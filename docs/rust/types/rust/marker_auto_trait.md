@@ -1,3 +1,5 @@
+# Marker Trait 与 Auto Trait
+
 下面给出一个基于 Rust 源代码分析、梳理和解释 `Sized` 类型如何自动实现 `Send` 和 `Sync` 特性的说明。这里主要涉及以下几个方面：
 
 1. **定义层面：Marker Trait 与 Auto Trait**  
@@ -34,6 +36,7 @@ pub unsafe auto trait Sync { }
 ```
 
 **说明：**  
+
 - **Auto Trait：** Rust 通过编译器内置的自动 trait 系统，对标记 trait（如 Send/Sync）进行自动推导，而不是用户手动写出实现代码。  
 - **unsafe 标记：** 这两个 trait 的实现都带有 `unsafe` 关键字，表示编译器在自动推导过程中已经假设被标记类型满足多线程安全条件，而用户在手动实现时必须保证这一点。
 
@@ -81,11 +84,11 @@ Rust 编译器有专门的部分负责“自动实现”（auto trait impl）的
 
 2. **利用 Negative Impl 表示安全例外：**  
    某些类型会明确写上负实现，例如：
-   
+
    ```rust:src/not_send.rs
    impl !Send for SomeNonThreadSafeType {}
    ```
-   
+
    这告诉编译器：即使自动推导可能认为类型内部成员满足条件，也不允许 T 实现 `Send`。
 
 3. **内置算法的关键点：**  
