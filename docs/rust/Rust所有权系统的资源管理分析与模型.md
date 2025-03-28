@@ -2215,8 +2215,7 @@ fn borrowing_splitting() {
 如果 $T$ 是可分割类型，$t$ 是 $T$ 的实例，
 $A$ 和 $B$ 是 $t$ 的不重叠部分，则：
 
-$$\frac{\text{disjoint}(A, B)}
-{\&\text{mut } A, \&\text{mut } B \text{ can coexist}}$$
+$$\frac{\text{disjoint}(A, B)}{\&\text{mut } A, \&\text{mut } B \text{ can coexist}}$$
 
 借用分割的关键原则：
 - 可变引用必须指向不重叠的内存区域
@@ -2299,8 +2298,7 @@ fn temporary_ownership() {
 
 如果 $o_1$ 是资源 $r$ 的初始所有者，$o_2$ 是临时所有者，则：
 
-$$\text{temp\_ownership}(r, o_1, o_2) \Rightarrow
-\text{owner}(r) : o_1 \to o_2 \to o_1$$
+$$\text{temp\_ownership}(r, o_1, o_2) \Rightarrow\text{owner}(r) : o_1 \to o_2 \to o_1$$
 
 临时所有权模式的特点：
 - 函数接受值的所有权并返回
@@ -2419,8 +2417,7 @@ fn shared_ownership() {
 
 对于共享资源 $r$ 和多个所有者 $\{o_1, o_2, ..., o_n\}$：
 
-$$\text{shared\_ownership}(r) \Rightarrow
- \text{owners}(r) = \{o_1, o_2, ..., o_n\}$$
+$$\text{shared\_ownership}(r) \Rightarrow \text{owners}(r) = \{o_1, o_2, ..., o_n\}$$
 
 引用计数跟踪共享所有权：
 
@@ -2650,15 +2647,13 @@ fn type_state_pattern() {
 
 类型状态模式的形式化表述：
 
-如果 $S_1, S_2, ..., S_n$ 是状态类型，
-$T<S>$ 是参数化类型，则状态转换可表示为：
+如果 $S_1, S_2, ..., S_n$ 是状态类型，$T<S>$ 是参数化类型，则状态转换可表示为：
 
 $$T<S_i> \xrightarrow{transition} T<S_j>$$
 
 该转换满足：
 
-$$\frac{\Gamma \vdash t : T<S_i> \quad \text{valid\_transition}
-(S_i \to S_j)}{\Gamma \vdash \text{transition}(t) : T<S_j>}$$
+$$\frac{\Gamma \vdash t : T<S_i> \quad \text{valid\_transition}(S_i \to S_j)}{\Gamma \vdash \text{transition}(t) : T<S_j>}$$
 
 类型状态模式的特点：
 - 使用类型参数编码对象状态
@@ -2783,10 +2778,8 @@ fn resource_pool() {
 
 如果 $P$ 是资源池，$R$ 是资源类型，则：
 
-$$\text{borrow}(P, R) = r \Rightarrow
- r \in P \land \text{borrowed}(r)$$
-$$\text{return}(P, r) \Rightarrow
- r \in P \land \lnot\text{borrowed}(r)$$
+$$\text{borrow}(P, R) = r \Rightarrow r \in P \land \text{borrowed}(r)$$
+$$\text{return}(P, r) \Rightarrow r \in P \land \lnot\text{borrowed}(r)$$
 
 资源池利用借用规则确保：
 - 资源在使用时被借用而非消费
@@ -2820,8 +2813,7 @@ Rust所有权系统下的设计模式具有特殊的对称性特征：
 
 对于设计模式 $P$，其对称操作集合 $\{op_1, op_2, ..., op_n\}$，满足：
 
-$$\forall \text{resource } r \text{ used in } P,
- \sum_{i} \text{effect}(op_i, r) = 0$$
+$$\forall \text{resource } r \text{ used in } P, \sum_{i} \text{effect}(op_i, r) = 0$$
 
 其中 $\text{effect}(op, r)$ 表示操作 $op$ 对资源 $r$ 状态的影响，
 总和为零表示最终状态回到初始状态。
@@ -2910,14 +2902,11 @@ fn ownership_and_concurrency() {
 
 并发安全性由所有权规则保证：
 
-$$\forall \text{threads } t_1, t_2, \forall \text{resource } r,
- \text{access}(t_1, r) \land \text{access}(t_2, r) \Rightarrow
- \text{safe\_access}(t_1, t_2, r)$$
+$$\forall \text{threads } t_1, t_2, \forall \text{resource } r, \text{access}(t_1, r) \land \text{access}(t_2, r) \Rightarrow \text{safe\_access}(t_1, t_2, r)$$
 
 其中，安全访问条件为：
 
-$$\text{safe\_access}(t_1, t_2, r) \iff (\text{read\_only}(t_1, r)
-\land \text{read\_only}(t_2, r)) \lor \text{disjoint}(t_1.r, t_2.r)$$
+$$\text{safe\_access}(t_1, t_2, r) \iff (\text{read\_only}(t_1, r)\land \text{read\_only}(t_2, r)) \lor \text{disjoint}(t_1.r, t_2.r)$$
 
 这确保了线程要么只读取共享数据，要么访问不同的数据部分，从而防止数据竞争。
 
@@ -2983,10 +2972,8 @@ fn send_sync_traits() {
 
 对于类型 $T$：
 
-$$T : \text{Send} \iff \text{safe to transfer
- ownership between threads}$$
-$$T : \text{Sync} \iff \forall \text{reference } \&T,
- \&T : \text{Send}$$
+$$T : \text{Send} \iff \text{safe to transfer ownership between threads}$$
+$$T : \text{Sync} \iff \forall \text{reference } \&T, \&T : \text{Send}$$
 
 `Send`和`Sync`构成了Rust并发安全的基础：
 - `Send`: 类型的所有权可以安全地在线程间转移
@@ -3079,15 +3066,12 @@ fn mutex_and_ownership() {
 
 互斥锁提供了对资源的互斥访问：
 
-$$\text{Mutex}<T> \Rightarrow \forall \text{threads } t_1, t_2,
- \text{locked}(t_1) \land \text{locked}(t_2) \Rightarrow t_1 = t_2$$
+$$\text{Mutex}<T> \Rightarrow \forall \text{threads } t_1, t_2, \text{locked}(t_1) \land \text{locked}(t_2) \Rightarrow t_1 = t_2$$
 
 锁的RAII模式保证：
 
-$$\text{acquire\_lock}(t, \text{Mutex}<T>) \Rightarrow
- \text{MutexGuard}<T>$$
-$$\text{scope}(\text{MutexGuard}<T>) \text{ ends} \Rightarrow
- \text{release\_lock}(t, \text{Mutex}<T>)$$
+$$\text{acquire\_lock}(t, \text{Mutex}<T>) \Rightarrow \text{MutexGuard}<T>$$
+$$\text{scope}(\text{MutexGuard}<T>) \text{ ends} \Rightarrow \text{release\_lock}(t, \text{Mutex}<T>)$$
 
 互斥锁与所有权结合的特点：
 - 通过RAII确保锁的正确释放
@@ -3180,10 +3164,8 @@ fn channels_and_ownership() {
 
 发送端和接收端的所有权关系：
 
-$$\text{send}(tx, v) \Rightarrow \text{owner}(v) :
- \text{sender} \to \text{channel}$$
-$$\text{recv}(rx) \Rightarrow v, \text{owner}(v) :
- \text{channel} \to \text{receiver}$$
+$$\text{send}(tx, v) \Rightarrow \text{owner}(v) : \text{sender} \to \text{channel}$$
+$$\text{recv}(rx) \Rightarrow v, \text{owner}(v) : \text{channel} \to \text{receiver}$$
 
 通道与所有权系统结合的特点：
 - 发送操作转移值的所有权
@@ -3266,13 +3248,11 @@ fn atomics_and_interior_mutability() {
 
 原子操作提供了线程安全的内部可变性：
 
-$$\text{atomic\_op}(a, op, \text{ordering}) \Rightarrow
- \text{thread\_safe\_mutation}(a)$$
+$$\text{atomic\_op}(a, op, \text{ordering}) \Rightarrow \text{thread\_safe\_mutation}(a)$$
 
 其中，内存顺序决定了操作的可见性保证：
 
-$$\text{ordering} \in \{\text{Relaxed}, \text{Release},
- \text{Acquire}, \text{AcqRel}, \text{SeqCst}\}$$
+$$\text{ordering} \in \{\text{Relaxed}, \text{Release}, \text{Acquire}, \text{AcqRel}, \text{SeqCst}\}$$
 
 原子类型的特点：
 - 无需互斥锁的线程安全变量
@@ -3377,13 +3357,11 @@ async fn self_referential_async() {
 
 异步上下文中的所有权流转满足：
 
-$$\text{async } \{ ... \text{expr} ... \} \Rightarrow
- \text{Future}<\text{Output} = \text{result\_type}(\text{expr})>$$
+$$\text{async } \{ ... \text{expr} ... \} \Rightarrow \text{Future}<\text{Output} = \text{result\_type}(\text{expr})>$$
 
 其中，`Future`捕获了表达式环境的所有权：
 
-$$\text{captures}(\text{async } \{ \text{body} \}) =
- \text{captures}(\text{body})$$
+$$\text{captures}(\text{async } \{ \text{body} \}) = \text{captures}(\text{body})$$
 
 异步所有权流转的特点：
 - Future捕获环境中的值（类似闭包）
@@ -3514,23 +3492,19 @@ $$\text{thread\_safe}(T) \iff T : \text{Send} \lor T : \text{Sync}$$
 
 1. 不可变共享：
 
-   $$\frac{T : \text{Sync}}{\text{Arc}<T> : \text{Send}
-    \land \text{Arc}<T> : \text{Sync}}$$
+   $$\frac{T : \text{Sync}}{\text{Arc}<T> : \text{Send} \land \text{Arc}<T> : \text{Sync}}$$
 
 2. 互斥共享：
 
-   $$\frac{T : \text{Send}}{\text{Mutex}<T> : \text{Send}
-    \land \text{Mutex}<T> : \text{Sync}}$$
+   $$\frac{T : \text{Send}}{\text{Mutex}<T> : \text{Send} \land \text{Mutex}<T> : \text{Sync}}$$
 
 3. 所有权转移：
 
-   $$\frac{T : \text{Send}}{\text{Channel}<T> \text
-   { is thread-safe}}$$
+   $$\frac{T : \text{Send}}{\text{Channel}<T> \text { is thread-safe}}$$
 
 4. 借用分割：
 
-   $$\frac{\forall i \neq j, \text{disjoint}(S_i, S_j)}
-   {\text{parallel\_process}(S_1, S_2, ..., S_n) \text{ is safe}}$$
+   $$\frac{\forall i \neq j, \text{disjoint}(S_i, S_j)} {\text{parallel\_process}(S_1, S_2, ..., S_n) \text{ is safe}}$$
 
 这些形式化验证确保了Rust程序在并发环境中的安全性，
 证明了所有权系统如何从根本上解决并发编程中的常见问题。
@@ -3669,8 +3643,7 @@ fn region_based_memory() {
 
 区域 $r$ 是一组内存位置，具有相同的生命周期：
 
-$$\text{region } r = \{ \text{location } l \mid
-\text{lifetime}(l) = \text{lifetime}(r) \}$$
+$$\text{region } r = \{ \text{location } l \mid \text{lifetime}(l) = \text{lifetime}(r) \}$$
 
 生命周期之间的关系：
 - 包含关系：$'a : 'b$ 表示生命周期 $'a$ 至少与 $'b$ 一样长
@@ -3826,19 +3799,16 @@ fn ownership_logic() {
 
 所有权逻辑扩展了线性逻辑，添加了资源所有权的概念：
 
-$$\frac{\Gamma \vdash x : T \quad \text{owns}(x, r)}
-{\Gamma \vdash \text{access}(x, r) \text{ is valid}}$$
+$$\frac{\Gamma \vdash x : T \quad \text{owns}(x, r)}{\Gamma \vdash \text{access}(x, r) \text{ is valid}}$$
 
 所有权逻辑的推理规则：
 
 1. 所有权转移：
-   $\text{owns}(x, r) \Rightarrow
-   \lnot\text{owns}(x, r) \land \text{owns}(y, r)$
-2. 借用规则：
+   $\text{owns}(x, r) \Rightarrow \lnot\text{owns}(x, r) \land \text{owns}(y, r)$
+1. 借用规则：
    $\text{owns}(x, r) \Rightarrow \text{can\_borrow}(x, r)$
-3. 生命周期约束：
-   $\text{borrowed}(r, l) \Rightarrow \text{lifetime}(l)
-    \subseteq \text{lifetime}(r)$
+2. 生命周期约束：
+   $\text{borrowed}(r, l) \Rightarrow \text{lifetime}(l) \subseteq \text{lifetime}(r)$
 
 程序验证技术：
 - 符号执行：分析所有可能执行路径
@@ -3910,8 +3880,7 @@ fn borrow_checking_theory() {
 
 借用检查可以表示为关于程序点的约束：
 
-$$\forall \text{point } p, \forall x, \text{borrows}(x, p)
- \text{ is consistent}$$
+$$\forall \text{point } p, \forall x, \text{borrows}(x, p) \text{ is consistent}$$
 
 其中一致性要求：
 - 不同时存在可变借用和其他借用
@@ -4629,8 +4598,7 @@ fn future_research() {
 
 这些研究方向可以形式化为扩展的研究领域：
 
-$$\text{ownership\_research} = \text{theory} \times \text{applications}
- \times \text{implementations} \times \text{verification}$$
+$$\text{ownership\_research} = \text{theory} \times \text{applications} \times \text{implementations} \times \text{verification}$$
 
 所有权系统的研究将继续深化和拓展，应用到新的计算模型和问题领域，推动安全系统编程的进步。
 
