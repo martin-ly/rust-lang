@@ -1,24 +1,5 @@
 # Rust所有权系统的资源管理视角分析01
 
-```text
-<think>
-
-Focusing on three main aspects:
-
-1. Ownership and type system design principles, patterns, analysis, argumentation, and formal proofs
-2. Ownership and control flow design principles, patterns, analysis, argumentation, and formal proofs
-3. Ownership and variable design principles, patterns, analysis, argumentation, and formal proofs
-
-discuss whether there are common symmetry principles across these aspects,
-and core formal patterns/models for handling asymmetric cases.
-
-this in a systematic, comprehensive analysis in markdown format with a table of contents.
-And according to the custom instructions, I should respond in Chinese.
-
-This is a complex academic/technical question about Rust's ownership system. 
-</think>
-```
-
 ## 目录
 
 - [Rust所有权系统的资源管理视角分析01](#rust所有权系统的资源管理视角分析01)
@@ -100,9 +81,10 @@ Rust所有权与类型系统的形式化基础可以通过以下理论进行证�
 
 关键形式证明：
 
-$$
-\[ \frac{\Gamma \vdash e_1 : \tau_1 \quad \tau_1 \text{ is not Copy} \quad x : \tau_1 \in \Gamma}{\Gamma, y : \tau_1 \vdash [x \mapsto y]e_2 : \tau_2} \text{(Move)} \]
-$$
+\[ \frac{\Gamma \vdash e_1 : \tau_1 \quad \tau_1
+\text{ is not Copy} \quad x : \tau_1 \in \Gamma}
+{\Gamma, y : \tau_1 \vdash [x \mapsto y]e_2 : \tau_2}
+\text{(Move)} \]
 
 ## 2. 所有权与控制流
 
@@ -175,11 +157,12 @@ Rust所有权系统在控制流上的设计原则包括：
 
 关键形式证明：
 
-$$
-\[ \frac{\Gamma \vdash e_1 : \text{bool} \quad \Gamma_1 \vdash e_2 : \tau \quad \Gamma_1 \vdash e_3 : \tau}{\Gamma \vdash \text{if } e_1 \text{ then } e_2 \text{ else } e_3 : \tau} \text{(If-Consistent-Ownership)} \]
+\[ \frac{\Gamma \vdash e_1 : \text{bool}
+\quad \Gamma_1 \vdash e_2 : \tau \quad \Gamma_1 \vdash e_3 : \tau}
+{\Gamma \vdash \text{if } e_1 \text{ then } e_2 \text{ else }
+e_3 : \tau} \text{(If-Consistent-Ownership)} \]
 
 其中\(\Gamma_1\)表示分支执行后环境中的所有权状态必须一致。
-$$
 
 ## 3. 所有权与变量
 
@@ -246,11 +229,9 @@ Rust所有权系统对变量管理的设计原则：
 
 关键形式证明：
 
-$$
 \[ \frac{\Gamma, x : \tau_1 \vdash e : \tau_2}{\Gamma \vdash \lambda x:\tau_1.e : \tau_1 \multimap \tau_2} \text{(Linear-Fun)} \]
 
 其中\(\multimap\)表示线性函数类型，保证参数被精确使用一次。
-$$
 
 ## 4. 共性对称性法则与非对称性处理
 
@@ -266,9 +247,7 @@ Rust所有权系统中的核心对称性原则：
 
 这些对称性可以用代数结构表达：
 
-$$
 \[ \text{Ownership} \cong \text{Creation} \xrightarrow{\text{Transfer}} \text{Usage} \xrightarrow{\text{Destruction}} \text{End} \]
-$$
 
 ### 4.2 非对称性处理模式
 
@@ -320,16 +299,15 @@ Rust所有权系统可以通过以下统一模型形式化：
 
 这一统一模型可表示为以下形式化结构：
 
-$$
 \[ \mathcal{S} = (\mathcal{T}, \mathcal{O}, \mathcal{F}, \mathcal{R}) \]
 
 其中：
+
 - \(\mathcal{T}\) 是类型集合
 - \(\mathcal{O}\) 是所有权操作集合（移动、借用、释放）
 - \(\mathcal{F}\) 是控制流操作集合
 - \(\mathcal{R}\) 是规约规则集合，定义操作语义
 
 Rust的类型检查和借用检查可以视为验证程序状态转换是否遵循\(\mathcal{R}\)中定义的规则。
-$$
 
 这一形式模型统一了前面讨论的三个方面（类型系统、控制流、变量），并能够处理对称和非对称情况，为Rust所有权提供了严格的数学基础。
