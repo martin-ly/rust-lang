@@ -1,17 +1,16 @@
 [workspace]
 resolver = "3"
 
-# 在这里添加工作空间的成员项目
-members = [ "c01_ownership_borrow_scope", 
-            "c02_type_system", 
-            "c03_control_fn",
-            "c04_generic", 
-            "c05_threads", 
-            "c06_async", 
-            "c07_process", 
-            "c08_algorithms", 
-            "c09_design_pattern", 
-            "c10_networks",  
-            "c11_frameworks", 
-            "c12_middlewares", 
-            "c13_microservice"]
+members = [ "crates/c01_ownership_borrow_scope", 
+            "crates/c02_type_system", 
+            "crates/c03_control_fn",
+            "crates/c04_generic", 
+            "crates/c05_threads", 
+            "crates/c06_async", 
+            "crates/c07_process", 
+            "crates/c08_algorithms", 
+            "crates/c09_design_pattern", 
+            "crates/c10_networks",  
+            "crates/c11_frameworks", 
+            "crates/c12_middlewares", 
+            "crates/c13_microservice"]
