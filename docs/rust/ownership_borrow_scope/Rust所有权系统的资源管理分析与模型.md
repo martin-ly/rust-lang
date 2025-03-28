@@ -1068,9 +1068,7 @@ fn destructuring_and_ownership() {
 
 对于模式`P`和表达式`e`：
 
-$$\frac{\Gamma \vdash e : T \quad P \text{ matches } T}
-{\Gamma \vdash \text{let } P = e;
-\Rightarrow \text{bind\_components}(P, \text{components}(e))}$$
+$$\frac{\Gamma \vdash e : T \quad P \text{ matches } T}{\Gamma \vdash \text{let } P = e;\Rightarrow \text{bind\_components}(P, \text{components}(e))}$$
 
 解构时所有权的处理方式：
 
@@ -1136,23 +1134,19 @@ fn partial_moves() {
 
 如果复合值 $v$ 有组件 $\{c_1, c_2, ..., c_n\}$，部分移动后的状态可表示为：
 
-$$\text{partial\_move}(v, c_i) \Rightarrow \begin{cases}
-\text{moved}(c_i) = \text{true} \\
-\forall j \neq i, \text{moved}(c_j) = \text{false}
-\end{cases}$$
+$$\text{partial\_move}(v, c_i) \Rightarrow \begin{cases} \text{moved}(c_i) = \text{true} \\ \forall j \neq i, \text{moved}(c_j) = \text{false} \end{cases}$$
 
 部分移动后的使用限制：
 
 $$\text{use}(v) \text{ is invalid}$$
-$$\forall j, \text{moved}(c_j) = \text{false}
-\Rightarrow \text{use}(c_j) \text{ is valid}$$
+$$\forall j, \text{moved}(c_j) = \text{false} \Rightarrow \text{use}(c_j) \text{ is valid}$$
 
 部分移动是Rust所有权系统的一个微妙方面，
 编译器会跟踪复合值中每个组件的移动状态，
 阻止使用部分移动的整体，
 但允许访问未移动的部分。
 
-###  4.7 静态变量与全局资源
+### 4.7 静态变量与全局资源
 
 静态变量和全局资源在所有权模型中有特殊地位：
 
@@ -1212,10 +1206,10 @@ fn static_and_globals() {
    $$\text{lifetime}(x) = \text{entire program execution}$$
 
 3. 可变静态变量的安全约束：
-   $$\text{modify}(x) \text{ where } x : \text{static mut } T \Rightarrow
- \text{within unsafe block}$$
+   $$\text{modify}(x) \text{ where } x : \text{static mut } T \Rightarrow \text{within unsafe block}$$
 
 全局资源管理的特点：
+
 - 静态生命周期：存在于整个程序执行期间
 - 单一实例：全局仅有一个实例
 - 线程安全考虑：必须处理并发访问问题
@@ -1478,9 +1472,7 @@ fn ownership_path_integrity() {
 对于资源 $r$ 和程序中的控制流图 $G$，
 如果 $\text{paths}(G)$ 表示所有可能的执行路径，则：
 
-$$\forall p \in \text{paths}(G),
- \forall r \in \text{resources}(p),
- \text{owner}(r) \text{ is well-defined throughout } p$$
+$$\forall p \in \text{paths}(G), \forall r \in \text{resources}(p), \text{owner}(r) \text{ is well-defined throughout } p$$
 
 这意味着在任何执行路径中，
 资源的所有权状态必须明确定义，
@@ -1488,8 +1480,8 @@ $$\forall p \in \text{paths}(G),
 这一特性保证了：
 
 **1. 不同控制流路径上的所有权处理必须一致**
-**2. 每个资源在每条路径上都有唯一的释放点**
-**3. 不存在资源泄漏的可能性**
+**1. 每个资源在每条路径上都有唯一的释放点**
+**1. 不存在资源泄漏的可能性**
 
 所有权路径完整性是Rust借用检查器的核心任务，
 它分析所有可能的执行路径，确保所有权规则在每条路径上都得到满足。
@@ -1664,15 +1656,14 @@ fn interior_mutability() {
 
 内部可变性打破了标准借用规则，可以形式化为：
 
-$$\text{Interior}<T> : \text{shared reference}
- \to \text{mutable access}$$
+$$\text{Interior}<T> : \text{shared reference} \to \text{mutable access}$$
 
 在形式上：
 
-$$\frac{\Gamma \vdash r : \&\text{Interior}<T>}
-{\Gamma \vdash \text{mutate through }r \text{ is valid}}$$
+$$\frac{\Gamma \vdash r : \&\text{Interior}<T>}{\Gamma \vdash \text{mutate through }r \text{ is valid}}$$
 
 内部可变性的类型实现了借用检查的不同策略：
+
 - `Cell<T>`: 通过值替换实现，限制为`Copy`类型
 - `RefCell<T>`: 运行时借用检查，违反规则时panic
 - `Mutex<T>`, `RwLock<T>`: 线程安全的运行时借用检查
@@ -1812,10 +1803,10 @@ fn unsafe_code() {
 
 `unsafe`代码块可以表示为放松了某些约束的上下文：
 
-$$\frac{\Gamma \vdash e : T \text{ with unsafe operations}}
-{\Gamma \vdash \text{unsafe } \{ e \} : T \text{ is valid}}$$
+$$\frac{\Gamma \vdash e : T \text{ with unsafe operations}}{\Gamma \vdash \text{unsafe } \{ e \} : T \text{ is valid}}$$
 
 在`unsafe`块中允许的操作：
+
 1. 解引用原始指针
 2. 调用`unsafe`函数
 3. 访问或修改可变静态变量
@@ -1823,6 +1814,7 @@ $$\frac{\Gamma \vdash e : T \text{ with unsafe operations}}
 5. 访问联合体字段
 
 `unsafe`代码的安全边界原则：
+
 - 不安全代码必须封装在安全接口后面
 - 定义并维护安全不变量
 - 文档化所有安全假设
@@ -1895,10 +1887,10 @@ fn pin_and_self_referential() {
 
 `Pin<P<T>>`表示通过指针`P`指向的`T`被固定在内存中，不能移动：
 
-$$\text{Pin}<P<T>> \Rightarrow \text{memory\_location}(T)
- \text{ is fixed}$$
+$$\text{Pin}<P<T>> \Rightarrow \text{memory\_location}(T) \text{ is fixed}$$
 
 `Pin`的安全保证：
+
 - 被`Pin`固定的值不能被移动
 - `!Unpin`类型的引用只能通过`Pin<&mut T>`获取
 - `Pin`的API确保只有在安全的情况下才能获取`&mut T`
@@ -1976,13 +1968,12 @@ fn external_resources() {
 如果 $R$ 是外部资源，$h_R$ 是其句柄，
 $\text{own}(h_R)$ 表示所有权关系，则：
 
-$$\frac{\text{acquire}(R) \Rightarrow h_R}
-{\text{own}(h_R) \text{ is established}}$$
+$$\frac{\text{acquire}(R) \Rightarrow h_R} {\text{own}(h_R) \text{ is established}}$$
 
-$$\frac{\text{scope}(\text{own}(h_R)) \text{ ends}}
-{\text{release}(h_R) \text{ is called}}$$
+$$\frac{\text{scope}(\text{own}(h_R)) \text{ ends}} {\text{release}(h_R) \text{ is called}}$$
 
 外部资源所有权的核心原则：
+
 - 每个外部资源由一个Rust值唯一表示
 - 资源的获取和释放与值的创建和销毁绑定
 - `Drop` trait实现确保资源释放
@@ -2057,18 +2048,16 @@ fn asymmetric_patterns() {
 非对称结构的形式化表述：
 
 1. 和类型(Sum Types):
-   $$T = A + B \Rightarrow \text{value}(T) \in
-   \{\text{Left}(a) | a \in A\} \cup \{\text{Right}(b) | b \in B\}$$
+   $$T = A + B \Rightarrow \text{value}(T) \in \{\text{Left}(a) | a \in A\} \cup \{\text{Right}(b) | b \in B\}$$
 
 2. 乘类型(Product Types):
-   $$T = A \times B \Rightarrow \text{value}(T) = (a, b)
-   \text{ where } a \in A, b \in B$$
+   $$T = A \times B \Rightarrow \text{value}(T) = (a, b) \text{ where } a \in A, b \in B$$
 
 3. 存在类型(Existential Types):
-   $$T = \exists X. F(X) \Rightarrow \text{value}(T) = \text{pack}
-   (t, v) \text{ where } t \text{ is a type, } v : F(t)$$
+   $$T = \exists X. F(X) \Rightarrow \text{value}(T) = \text{pack} (t, v) \text{ where } t \text{ is a type, } v : F(t)$$
 
 非对称结构的处理策略：
+
 - 枚举类型封装不同可能性
 - 特征对象处理运行时类型差异
 - 泛型代码处理类型参数化
@@ -2149,6 +2138,7 @@ $$\text{initialize}(v_R) \Rightarrow \text{acquire}(R)$$
 $$\text{scope}(v_R) \text{ ends} \Rightarrow \text{release}(R)$$
 
 RAII的核心特性：
+
 - 资源的生命周期与变量绑定
 - 资源的创建和构造合为一体
 - 资源的销毁和释放合为一体
@@ -2218,6 +2208,7 @@ $A$ 和 $B$ 是 $t$ 的不重叠部分，则：
 $$\frac{\text{disjoint}(A, B)}{\&\text{mut } A, \&\text{mut } B \text{ can coexist}}$$
 
 借用分割的关键原则：
+
 - 可变引用必须指向不重叠的内存区域
 - 编译器通过指针算术和索引分析判断不重叠性
 - 数据结构可以设计为便于分割借用
@@ -2301,6 +2292,7 @@ fn temporary_ownership() {
 $$\text{temp\_ownership}(r, o_1, o_2) \Rightarrow\text{owner}(r) : o_1 \to o_2 \to o_1$$
 
 临时所有权模式的特点：
+
 - 函数接受值的所有权并返回
 - 闭包捕获变量后返回引用
 - 链式借用传递可变性
@@ -2425,6 +2417,7 @@ $$\text{rc\_count}(r) = |\text{owners}(r)|$$
 $$\text{rc\_count}(r) = 0 \Rightarrow \text{deallocate}(r)$$
 
 所有权共享机制的特点：
+
 - `Rc<T>`: 单线程共享所有权
 - `Arc<T>`: 线程安全的共享所有权
 - `RefCell<T>`/`Mutex<T>`: 共享可变性
@@ -2522,6 +2515,7 @@ $$P \xrightarrow{produce} d \xrightarrow{consume} C$$
 $$\text{owner}(d) : P \to \text{channel} \to C$$
 
 生产者消费者模式的特点：
+
 - 数据所有权从生产者转移到消费者
 - 中间环节可能有临时所有权
 - 通道确保数据安全传递
@@ -2656,6 +2650,7 @@ $$T<S_i> \xrightarrow{transition} T<S_j>$$
 $$\frac{\Gamma \vdash t : T<S_i> \quad \text{valid\_transition}(S_i \to S_j)}{\Gamma \vdash \text{transition}(t) : T<S_j>}$$
 
 类型状态模式的特点：
+
 - 使用类型参数编码对象状态
 - 只有当前状态的方法可用
 - 状态转换通过所有权转移实现
@@ -2782,6 +2777,7 @@ $$\text{borrow}(P, R) = r \Rightarrow r \in P \land \text{borrowed}(r)$$
 $$\text{return}(P, r) \Rightarrow r \in P \land \lnot\text{borrowed}(r)$$
 
 资源池利用借用规则确保：
+
 - 资源在使用时被借用而非消费
 - 资源使用完毕后自动返回池
 - 不同借用者获得不同资源的可变引用
@@ -2976,6 +2972,7 @@ $$T : \text{Send} \iff \text{safe to transfer ownership between threads}$$
 $$T : \text{Sync} \iff \forall \text{reference } \&T, \&T : \text{Send}$$
 
 `Send`和`Sync`构成了Rust并发安全的基础：
+
 - `Send`: 类型的所有权可以安全地在线程间转移
 - `Sync`: 类型的引用可以安全地在线程间共享
 - `T: Sync` 等价于 `&T: Send`
@@ -3074,6 +3071,7 @@ $$\text{acquire\_lock}(t, \text{Mutex}<T>) \Rightarrow \text{MutexGuard}<T>$$
 $$\text{scope}(\text{MutexGuard}<T>) \text{ ends} \Rightarrow \text{release\_lock}(t, \text{Mutex}<T>)$$
 
 互斥锁与所有权结合的特点：
+
 - 通过RAII确保锁的正确释放
 - 锁守卫类型提供对数据的安全访问
 - `Arc<Mutex<T>>`实现了线程间的共享可变状态
@@ -3168,6 +3166,7 @@ $$\text{send}(tx, v) \Rightarrow \text{owner}(v) : \text{sender} \to \text{chann
 $$\text{recv}(rx) \Rightarrow v, \text{owner}(v) : \text{channel} \to \text{receiver}$$
 
 通道与所有权系统结合的特点：
+
 - 发送操作转移值的所有权
 - 接收操作获取值的所有权
 - 发送者无法再使用已发送的值
@@ -3255,6 +3254,7 @@ $$\text{atomic\_op}(a, op, \text{ordering}) \Rightarrow \text{thread\_safe\_muta
 $$\text{ordering} \in \{\text{Relaxed}, \text{Release}, \text{Acquire}, \text{AcqRel}, \text{SeqCst}\}$$
 
 原子类型的特点：
+
 - 无需互斥锁的线程安全变量
 - 适用于计数器、标志等简单共享状态
 - 通过内存顺序控制操作的同步强度
@@ -3364,6 +3364,7 @@ $$\text{async } \{ ... \text{expr} ... \} \Rightarrow \text{Future}<\text{Output
 $$\text{captures}(\text{async } \{ \text{body} \}) = \text{captures}(\text{body})$$
 
 异步所有权流转的特点：
+
 - Future捕获环境中的值（类似闭包）
 - `.await`点暂停执行但保持所有权
 - 恢复执行时所有权状态不变
@@ -3565,11 +3566,13 @@ fn linear_types() {
 $$\forall \text{value } v, \text{uses}(v) = 1$$
 
 线性类型规则：
+
 - 变量不能被丢弃（必须被使用）
 - 变量不能被复制（除非显式克隆）
 - 资源必须恰好消费一次
 
 Rust通过以下方式放宽了严格的线性类型规则：
+
 - `Copy` trait允许隐式复制
 - `drop`函数允许显式丢弃
 - 借用系统允许临时共享访问
@@ -3646,10 +3649,12 @@ fn region_based_memory() {
 $$\text{region } r = \{ \text{location } l \mid \text{lifetime}(l) = \text{lifetime}(r) \}$$
 
 生命周期之间的关系：
+
 - 包含关系：$'a : 'b$ 表示生命周期 $'a$ 至少与 $'b$ 一样长
 - 相交关系：$'a \cap 'b$ 表示两个生命周期的交集
 
 区域型系统的特点：
+
 - 内存分配与释放绑定到区域（作用域）
 - 区域可以嵌套
 - 引用的有效性受限于区域
@@ -3712,6 +3717,7 @@ fn substructural_typing() {
 4. 非限制（Unrestricted）：$\text{uses}(v) \in \{0, 1, 2, ...\}$
 
 Rust所有权系统在亚结构类型系统中的位置：
+
 - 默认情况下，类型是仿射的（可丢弃但不可复制）
 - `Copy` trait将类型变为非限制的
 - 借用系统通过引用放宽了线性约束
@@ -3807,10 +3813,11 @@ $$\frac{\Gamma \vdash x : T \quad \text{owns}(x, r)}{\Gamma \vdash \text{access}
    $\text{owns}(x, r) \Rightarrow \lnot\text{owns}(x, r) \land \text{owns}(y, r)$
 1. 借用规则：
    $\text{owns}(x, r) \Rightarrow \text{can\_borrow}(x, r)$
-2. 生命周期约束：
+1. 生命周期约束：
    $\text{borrowed}(r, l) \Rightarrow \text{lifetime}(l) \subseteq \text{lifetime}(r)$
 
 程序验证技术：
+
 - 符号执行：分析所有可能执行路径
 - 分离逻辑：验证资源不重叠
 - 类型系统证明：通过类型规则证明安全性
@@ -3883,17 +3890,20 @@ fn borrow_checking_theory() {
 $$\forall \text{point } p, \forall x, \text{borrows}(x, p) \text{ is consistent}$$
 
 其中一致性要求：
+
 - 不同时存在可变借用和其他借用
 - 借用不超过资源生命周期
 - 无效变量不能被借用
 
 借用检查算法的关键组件：
+
 1. 控制流图（CFG）：表示程序执行的可能路径
 2. 变量活跃度分析：确定变量在哪些程序点有效
 3. 借用区间分析：计算每个借用有效的程序区间
 4. 冲突检测：识别违反借用规则的情况
 
 非词法生命周期（NLL）优化：
+
 - 将借用的生命周期精确化到实际使用区间
 - 允许借用在最后使用后立即结束
 - 提高了代码的灵活性和表达能力
@@ -4005,19 +4015,19 @@ fn type_systems_comparison() {
    - 低开销 vs. 运行时开销
    - 类型附加所有权语义 vs. 类型与内存管理分离
 
-2. Rust vs. C/C++：
+1. Rust vs. C/C++：
    - 编译时强制所有权规则 vs. 约定俗成的规则
    - 借用系统 vs. 原始指针
    - 类型系统集成的安全性 vs. 手动内存管理
    - 无悬垂指针保证 vs. 未定义行为风险
 
-3. Rust vs. 函数式语言：
+1. Rust vs. 函数式语言：
    - 可变性与不可变性结合 vs. 主要不可变
    - 所有权追踪 vs. 持久数据结构
    - 显式生命周期 vs. 隐式生命周期
    - 资源管理精确控制 vs. 依赖垃圾回收
 
-4. Rust vs. 依赖类型系统：
+1. Rust vs. 依赖类型系统：
    - 生命周期参数化 vs. 值级类型依赖
    - 借用检查器 vs. 定理证明器
    - 实用性平衡 vs. 形式化完备性
