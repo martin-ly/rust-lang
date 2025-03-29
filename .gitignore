@@ -21,6 +21,21 @@ Cargo.lock
 #.idea/
 
 # Added by cargo
-
 /target
 Cargo.lock
+
+# 忽略所有exe文件
+**/*.exe
+
+# 忽略所有dll文件
+**/*.dll
+
+# 忽略所有lib文件
+**/*.lib
+
+# 忽略所有pdb文件
+**/*.pdb
+
+# 忽略所有obj文件
+**/*.obj
+
