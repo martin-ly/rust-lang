@@ -28,9 +28,9 @@
     2.7 Runtime check on move Semantic in Compiling time or runtime,
     2.8 Scope and visibility semantic model: include { global, local, static,function,closure,expression }
 
-[rust-borrow-checker](docs/rust/own_borrow_scope/borrow_check_inference.md)
+[rust-borrow-checker](docs/rust/ownership_borrow_scope/borrow_check_inference.md)
 [variable](docs/rust/control/control_flow_rust.md)
-[ref_mut_reason](docs/rust/own_borrow_scope/ref_mut_reason.md)
+[ref_mut_reason](docs/rust/ownership_borrow_scope/ref_mut_reason.md)
 
 ### 3. type system model: include { primitive_type, compound_type, generic_type, trait_type }
 
@@ -63,7 +63,7 @@
 
 ## 1. own_borrow_scope  
 
-[ref_refmut](docs/rust/own_borrow_scope/ref_mut_reason.md)
+[ref_refmut](docs/rust/ownership_borrow_scope/ref_mut_reason.md)
 
 ## 2. type_system
 
