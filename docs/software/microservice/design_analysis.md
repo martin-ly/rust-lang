@@ -1771,9 +1771,6 @@ impl OrderWorkflow {
                         }
                     } else {
                         // 执行false分支
-                        for false_op in &cond.false_branch
-<think>I need to continue the code example about the component relationship between workflow and microservices. I was in the middle of showing a conditional execution in a workflow definition. Let me finish that and then continue with the aggregate relationship section.</think>```rust
-                        // 执行false分支
                         for false_op in &cond.false_branch {
                             let service = context.get_service(&false_op.service_name)?;
                             service.call(&false_op.operation_name, context).await?;
@@ -2296,7 +2293,9 @@ fn transform_workflow<F: Functor<DomainCategory, ImplementationCategory>>(
 
 **形式化表达**：
 
-设 \(F, G: \mathcal{C} \rightarrow \mathcal{D}\) 是两个函子，自然变换 \(\eta: F \Rightarrow G\) 为每个对象 \(C \in \mathcal{C}\) 赋予一个态射 \(\eta_C: F(C) \rightarrow G(C)\)，满足自然性条件。
+设 \(F, G: \mathcal{C} \rightarrow \mathcal{D}\) 是两个函子，
+自然变换 \(\eta: F \Rightarrow G\) 为每个对象 \(C \in \mathcal{C}\) 
+赋予一个态射 \(\eta_C: F(C) \rightarrow G(C)\)，满足自然性条件。
 
 **示例**：
 
@@ -2771,8 +2770,6 @@ impl WorkflowExecutor {
         
         // 执行工作流直到完成、失败或等待事件
         loop {
-            let current_node = definition.get_
-<think>我需要继续上一段代码，它被截断在`let current_node = definition.get_`处。让我完成这个工作流执行器的实现，然后继续剩余部分的内容。</think>```rust
             let current_node = definition.get_node(&state.current_node)
                 .ok_or_else(|| EngineError::NodeNotFound(state.current_node.clone()))?;
                 
@@ -3830,7 +3827,6 @@ impl OrderProcessingWorkflow {
         let order_service = self.order_service.clone();
         let payment_service = self.payment_service.clone();
         let inventory_service = self.inventory_service.clone();
-<think>我需要继续完成正在编写的代码示例，这是关于基于Rust实现的订单处理工作流。上一部分代码停在注册任务函数的开始处，我应该继续完成任务注册和工作流定义的代码。</think>```rust
         let order_service = self.order_service.clone();
         let payment_service = self.payment_service.clone();
         let inventory_service = self.inventory_service.clone();
