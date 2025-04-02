@@ -13,4 +13,6 @@ members = [ "crates/c01_ownership_borrow_scope",
             "crates/c10_networks",  
             "crates/c11_frameworks", 
             "crates/c12_middlewares", 
-            "crates/c13_microservice"]
+            "crates/c13_microservice", 
+            "crates/c14_workflow", 
+            "crates/c15_blockchain"]
