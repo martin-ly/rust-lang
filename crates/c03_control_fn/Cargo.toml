@@ -6,6 +6,7 @@ resolver = "3"
 
 [dependencies]
 tokio = { version = ">=1.44.1", features = ["full"] }
+fastrace = { version = ">=0.7.0", features = ["enable"] }
 
 [lib]
 name = "c03_control_fn"
