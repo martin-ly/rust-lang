@@ -3831,14 +3831,6 @@ pub mod industrial_control {
             // 添加TLS配置（如果需要）
             if let Some(tls_config) = &config.tls_config {
                 // 实际应用中这里会加载证书等
-                log::info!("为控制
-# 分布式工作流执行引擎的扩展与应用场景分析（续）
-
-## 3. 结合MQTT和边缘计算的行业应用场景（续）
-
-### 3.2 工业控制与安全监控应用场景（续）
-
-```rust
                 log::info!("为控制系统客户端配置TLS");
                 // 加载证书和私钥
                 if let Some(cert_path) = &tls_config.client_cert_path {
@@ -6034,14 +6026,6 @@ pub mod edge_computing {
             // 在实际实现中，应该执行实际的同步操作
             // 1. 同步工作流定义
             // 2. 同步执行状态
-            // 3. 同步日志和
-# 分布式工作流执行引擎的扩展与应用场景分析（续）
-
-## 3. 结合MQTT和边缘计算的行业应用场景（续）
-
-### 3.3 边缘计算工作流引擎实现（续）
-
-```rust
             // 3. 同步日志和统计数据
             
             // 模拟同步工作流定义
