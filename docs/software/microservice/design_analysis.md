@@ -2294,7 +2294,7 @@ fn transform_workflow<F: Functor<DomainCategory, ImplementationCategory>>(
 **形式化表达**：
 
 设 \(F, G: \mathcal{C} \rightarrow \mathcal{D}\) 是两个函子，
-自然变换 \(\eta: F \Rightarrow G\) 为每个对象 \(C \in \mathcal{C}\) 
+自然变换 \(\eta: F \Rightarrow G\) 为每个对象 \(C \in \mathcal{C}\)
 赋予一个态射 \(\eta_C: F(C) \rightarrow G(C)\)，满足自然性条件。
 
 **示例**：
