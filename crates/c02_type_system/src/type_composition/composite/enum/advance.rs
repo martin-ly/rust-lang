@@ -1,4 +1,4 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 /*
 在Rust中，枚举的高级应用可以通过多种方式实现，
@@ -28,7 +28,7 @@ pub fn advance_enum01() {
         Yellow,
         Green,
     }
-    
+
     impl TrafficLight {
         fn next(&self) -> TrafficLight {
             match self {
@@ -45,7 +45,6 @@ pub fn advance_enum01() {
     println!("Next light: {:?}", next_light);
 }
 
-
 /*
 2. 枚举的组合与嵌套
     枚举可以嵌套其他枚举或结构体，以构建复杂的数据结构。
@@ -60,14 +59,14 @@ pub fn advance_enum02() {
         Circle(f64),
         Rectangle(f64, f64),
     }
-    
+
     #[allow(unused)]
     #[derive(Debug)]
     enum ShapeType {
         Basic(Shape),
         Complex(Vec<ShapeType>),
     }
-    
+
     let circle = ShapeType::Basic(Shape::Circle(2.0));
     let rectangle = ShapeType::Basic(Shape::Rectangle(3.0, 4.0));
     let complex_shape = ShapeType::Complex(vec![circle, rectangle]);
@@ -99,7 +98,7 @@ pub fn advance_enum03() {
         ChangeColor(i32, i32, i32),
         Move { x: i32, y: i32 },
     }
-    
+
     fn process_message(msg: Message) {
         match msg {
             Message::Quit => println!("Quit message received."),
@@ -111,7 +110,7 @@ pub fn advance_enum03() {
             }
         }
     }
-    
+
     let msg1 = Message::Quit;
     let msg2 = Message::ChangeColor(255, 0, 0);
     let msg3 = Message::Move { x: 10, y: 20 };
@@ -119,7 +118,6 @@ pub fn advance_enum03() {
     process_message(msg1);
     process_message(msg2);
     process_message(msg3);
-
 }
 
 /*
@@ -130,7 +128,7 @@ pub fn advance_enum03() {
 #[allow(unused)]
 pub fn advance_enum04() {
     println!("4. 枚举的可序列化与反序列化");
-    
+
     #[allow(unused)]
     #[derive(Serialize, Deserialize, Debug)]
     enum Command {
@@ -149,7 +147,6 @@ pub fn advance_enum04() {
     println!("Deserialized: {:?}", deserialized_command);
 }
 
-
 /*
 5. 枚举的错误处理
     枚举常用于错误处理，特别是通过Result和Option类型来表示操作的成功或失败。
@@ -158,14 +155,14 @@ pub fn advance_enum04() {
 #[allow(unused)]
 pub fn advance_enum05() {
     println!("5. 枚举的错误处理");
-    
+
     #[allow(unused)]
     #[derive(Debug)]
     enum MyError {
         NotFound,
         PermissionDenied,
     }
-    
+
     fn find_item(id: i32) -> Result<String, MyError> {
         if id == 1 {
             Ok(String::from("Item found"))
@@ -173,13 +170,12 @@ pub fn advance_enum05() {
             Err(MyError::NotFound)
         }
     }
-    
+
     match find_item(1) {
         Ok(item) => println!("{}", item),
         Err(MyError::NotFound) => println!("Item not found."),
         Err(MyError::PermissionDenied) => println!("Permission denied."),
     }
-    
 }
 
 /*
@@ -210,6 +206,4 @@ pub fn advance_enum06() {
         Option::Some(value) => println!("Value: {}", value),
         Option::None => println!("No value"),
     }
-    
 }
-

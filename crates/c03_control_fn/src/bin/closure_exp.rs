@@ -4,5 +4,3 @@ fn main() {
     test_closure01();
     test_filter_and_map();
 }
-
-

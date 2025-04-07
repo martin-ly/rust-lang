@@ -188,7 +188,7 @@ fn identity<T>(value: T) -> T {
 - **匿名函数**：
   在Rust中，匿名函数（或称为函数字面量）是没有名称的函数，可以直接定义并使用。
   它们通常用于临时的、一次性的操作。
-  
+
 - **闭包**：
   闭包是可以捕获其环境中的变量的匿名函数。
   闭包不仅可以接受参数并返回值，还可以访问其定义时的上下文状态。
@@ -406,12 +406,12 @@ match shape {
 这种结构化的方式使得 Rust 的控制流既灵活又强大，能够有效地处理各种编程场景。
 */
 
-pub mod items;
+pub mod closure;
+pub mod control_struct;
+pub mod coroutine;
+pub mod error_handling;
 pub mod expressions;
 pub mod generator;
-pub mod statements;
-pub mod control_struct;
+pub mod items;
 pub mod pattern_matching;
-pub mod closure;
-pub mod error_handling;
-pub mod coroutine;
+pub mod statements;

@@ -36,5 +36,3 @@ mod tests {
         parallel_reduction_test();
     }
 }
-
-

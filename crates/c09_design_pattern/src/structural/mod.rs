@@ -5,4 +5,3 @@ pub mod decorator;
 pub mod facade;
 pub mod flyweight;
 pub mod proxy;
-

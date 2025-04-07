@@ -15,7 +15,6 @@
 
 // 所有权和借用的示例：
 
-
 fn main() {
     let s1 = String::from("Hello"); // s1是一个可变的字符串
     let s2 = s1; // 移动语义：s1的所有权被转移到s2，s1不再有效
@@ -40,7 +39,7 @@ fn change(s: &mut String) {
 
 // 所有权和借用的示例 冲突
 fn scope() {
-    let mut x  =5;
+    let mut x = 5;
     let y = &mut x;
 
     // 这里会报错，因为x已经被借用，不能再次被借用

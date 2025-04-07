@@ -4,5 +4,3 @@ use c06_async::tokio::sync::mpsc::oneshot::exp::*;
 async fn main() {
     oneshot_test01().await;
 }
-
-

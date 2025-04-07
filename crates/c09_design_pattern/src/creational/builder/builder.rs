@@ -47,14 +47,20 @@ pub fn test_builder() {
         .age(30) // 可选设置年龄
         .build();
 
-    println!("用户名: {}, 邮箱: {}, 年龄: {:?}", user.username, user.email, user.age);
+    println!(
+        "用户名: {}, 邮箱: {}, 年龄: {:?}",
+        user.username, user.email, user.age
+    );
 
-        // 使用Builder模式创建User实例，年龄为String类型
-        let user2 = UserBuilder::new("Bob", "bob@example.com")
+    // 使用Builder模式创建User实例，年龄为String类型
+    let user2 = UserBuilder::new("Bob", "bob@example.com")
         .age("未知".to_string()) // 设置年龄为String
         .build();
 
-    println!("用户名: {}, 邮箱: {}, 年龄: {:?}", user2.username, user2.email, user2.age);
+    println!(
+        "用户名: {}, 邮箱: {}, 年龄: {:?}",
+        user2.username, user2.email, user2.age
+    );
 }
 
 #[cfg(test)]

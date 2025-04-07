@@ -29,12 +29,12 @@ pub fn char_operation() {
 
     // 字符转换为 Unicode 值
     let unicode_value = letter as u32; // 将字符转换为 Unicode 值
-    println!("Unicode value of '{}' is: {:X}", letter, unicode_value); 
+    println!("Unicode value of '{}' is: {:X}", letter, unicode_value);
     // 打印: Unicode value of 'R' is: 52
     let emoji_unicode = emoji as u32; // 将 emoji 转换为 Unicode 值
-    println!("Unicode value of '{}' is: {:X}", emoji, emoji_unicode); 
+    println!("Unicode value of '{}' is: {:X}", emoji, emoji_unicode);
     // 打印: Unicode value of '😊' is: 1F60A
-    
+
     // 字符比较
     let another_letter: char = 'R';
     if letter == another_letter {
@@ -59,7 +59,7 @@ Character in string: l
 Character in string: l
 Character in string: o
 Character in string: ,
-Character in string:  
+Character in string:
 Character in string: 世
 Character in string: 界
 Character in string: !

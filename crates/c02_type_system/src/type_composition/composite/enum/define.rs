@@ -30,7 +30,7 @@ pub fn define_enum() {
         Left,
         Right,
     }
-    
+
     let move_direction = Direction::Up;
 
     match move_direction {
@@ -39,30 +39,28 @@ pub fn define_enum() {
         Direction::Left => println!("Moving left!"),
         Direction::Right => println!("Moving right!"),
     }
-
 }
 
 pub fn define_enum_2() {
     println!("2. 枚举包含数据");
     #[allow(unused)]
     enum Shape {
-        Circle(f64),          // 半径
-        Rectangle(f64, f64),  // 宽度和高度
+        Circle(f64),         // 半径
+        Rectangle(f64, f64), // 宽度和高度
     }
-    
+
     fn area(shape: &Shape) -> f64 {
         match shape {
             Shape::Circle(radius) => std::f64::consts::PI * radius * radius,
             Shape::Rectangle(width, height) => width * height,
         }
     }
-    
+
     let circle = Shape::Circle(2.0);
     let rectangle = Shape::Rectangle(3.0, 4.0);
 
     println!("Circle area: {}", area(&circle)); // 输出: Circle area: 12.566370614359172
     println!("Rectangle area: {}", area(&rectangle)); // 输出: Rectangle area: 12
-
 }
 
 pub fn define_enum_3() {
@@ -74,7 +72,7 @@ pub fn define_enum_3() {
         Multiply(i32, i32),
         Divide(i32, i32),
     }
-    
+
     fn calculate(operation: Operation) -> f32 {
         match operation {
             Operation::Add(a, b) => (a + b) as f32,
@@ -89,8 +87,7 @@ pub fn define_enum_3() {
             }
         }
     }
-    
-  
+
     let add = Operation::Add(5, 3);
     let subtract = Operation::Subtract(10, 4);
     let multiply = Operation::Multiply(2, 6);
@@ -100,7 +97,6 @@ pub fn define_enum_3() {
     println!("10 - 4 = {}", calculate(subtract)); // 输出: 10 - 4 = 6
     println!("2 * 6 = {}", calculate(multiply)); // 输出: 2 * 6 = 12
     println!("8 / 2 = {}", calculate(divide)); // 输出: 8 / 2 = 4
-
 }
 
 /*
@@ -114,14 +110,14 @@ pub fn define_enum_4() {
     trait Shape {
         fn area(&self) -> f64;
     }
-    
+
     #[allow(unused)]
     #[derive(Debug)]
     enum MyShape {
         Circle(f64),
         Rectangle(f64, f64),
     }
-    
+
     impl Shape for MyShape {
         fn area(&self) -> f64 {
             match self {
@@ -130,17 +126,12 @@ pub fn define_enum_4() {
             }
         }
     }
-    
 
-    let shapes: Vec<MyShape> = vec![
-        MyShape::Circle(2.0),
-        MyShape::Rectangle(3.0, 4.0),
-    ];
+    let shapes: Vec<MyShape> = vec![MyShape::Circle(2.0), MyShape::Rectangle(3.0, 4.0)];
 
     for shape in shapes {
         println!("Area: {}", shape.area());
     }
-  
 }
 
 /*
@@ -162,5 +153,4 @@ pub fn define_enum_5() {
 
     let color: Color = Default::default();
     println!("Default color: {:?}", color); // 输出: Default color: Unknown
-    
 }

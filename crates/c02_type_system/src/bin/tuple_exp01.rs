@@ -4,4 +4,3 @@ fn main() {
     test_tuple_string();
     test_tuple_clone();
 }
-

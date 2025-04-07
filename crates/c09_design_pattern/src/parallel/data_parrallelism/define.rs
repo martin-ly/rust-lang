@@ -3,7 +3,7 @@ use rayon::prelude::*;
 // 定义一个泛型函数，处理数据并行
 fn parallel_process<T, F>(data: &mut [T], process_fn: F)
 where
-    T: Send + Sync, // 确保 T 可以在多个线程中安全使用
+    T: Send + Sync,   // 确保 T 可以在多个线程中安全使用
     F: Fn(&T) + Sync, // 处理函数需要是线程安全的
 {
     data.par_iter().for_each(|item| {
@@ -34,5 +34,3 @@ mod tests {
         parallel_process_test();
     }
 }
-
-

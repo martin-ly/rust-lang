@@ -46,8 +46,12 @@ pub fn test_bridge() {
     let implementor_a = ConcreteImplementorA;
     let implementor_b = ConcreteImplementorB;
 
-    let abstraction_a = RefinedAbstraction { implementor: implementor_a };
-    let abstraction_b = RefinedAbstraction { implementor: implementor_b };
+    let abstraction_a = RefinedAbstraction {
+        implementor: implementor_a,
+    };
+    let abstraction_b = RefinedAbstraction {
+        implementor: implementor_b,
+    };
 
     println!("{}", abstraction_a.operation());
     println!("{}", abstraction_b.operation());
@@ -62,4 +66,3 @@ mod tests {
         test_bridge();
     }
 }
-

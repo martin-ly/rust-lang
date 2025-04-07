@@ -1,4 +1,3 @@
-
 /*
 从范畴论的视角来看，
 Rust的泛型可以被视为一种类型的态射（morphism），
@@ -92,12 +91,12 @@ Rust的泛型是一种类型的态射，
 
 */
 
-pub mod type_constructor;
-pub mod type_parameter;
-pub mod trait_bound;
-pub mod polymorphism;
 pub mod associated_type;
 pub mod natural_transformation;
+pub mod polymorphism;
+pub mod trait_bound;
+pub mod type_constructor;
 pub mod type_inference;
+pub mod type_parameter;
 
 pub mod generic_define;

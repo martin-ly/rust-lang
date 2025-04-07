@@ -42,7 +42,6 @@ pub async fn channel_exp01() {
     }
 }
 
-
 #[allow(unused)]
 pub async fn channel_exp02() {
     println!("channel_exp02");
@@ -69,7 +68,6 @@ pub async fn channel_exp02() {
     // 当所有发送者都被丢弃后，接收者将会收到 None
     println!("Channel closed");
 }
-
 
 #[allow(unused)]
 pub async fn channel_exp03() {
@@ -99,7 +97,6 @@ pub async fn channel_exp03() {
     }
 }
 
-
 #[allow(unused)]
 pub async fn channel_exp04() {
     println!("channel_exp04");
@@ -128,14 +125,12 @@ pub async fn channel_exp04() {
 
     // 等待一段时间以观察阻塞情况
     tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
-
 }
-
 
 #[allow(unused)]
 pub async fn channel_exp05() {
     println!("channel_exp05");
-    
+
     let (tx, mut rx) = mpsc::channel(32);
 
     // 启动接收者

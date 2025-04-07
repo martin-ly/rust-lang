@@ -16,9 +16,9 @@ Rust 的异步运行时（如 Tokio 或 async-std）会在适当的时候调用 
 
 */
 
+use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
-use std::future::Future;
 use std::time::Duration;
 
 #[allow(unused)]
@@ -52,4 +52,3 @@ impl Future for MyFuture {
         }
     }
 }
-

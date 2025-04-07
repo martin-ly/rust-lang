@@ -12,7 +12,10 @@ struct ConcreteFlyweight<T> {
 
 impl<T: std::fmt::Display> Flyweight for ConcreteFlyweight<T> {
     fn operation(&self, extrinsic_state: &str) {
-        println!("Intrinsic State: {}, Extrinsic State: {}", self.intrinsic_state, extrinsic_state);
+        println!(
+            "Intrinsic State: {}, Extrinsic State: {}",
+            self.intrinsic_state, extrinsic_state
+        );
     }
 }
 
@@ -33,7 +36,8 @@ impl<T: std::hash::Hash + Eq + std::fmt::Display> FlyweightFactory<T> {
     #[allow(unused)]
     fn get_flyweight(&mut self, key: &str, intrinsic_state: T) -> &ConcreteFlyweight<T> {
         if !self.flyweights.contains_key(key) {
-            self.flyweights.insert(key.to_string(), ConcreteFlyweight { intrinsic_state });
+            self.flyweights
+                .insert(key.to_string(), ConcreteFlyweight { intrinsic_state });
         }
         self.flyweights.get(key).unwrap()
     }
@@ -63,4 +67,3 @@ mod tests {
         test_flyweight();
     }
 }
-

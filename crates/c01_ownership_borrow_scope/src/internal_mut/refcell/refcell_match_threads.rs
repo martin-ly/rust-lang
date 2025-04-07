@@ -11,7 +11,6 @@ RefCell是实现内部可变性的一种方式，但并不是唯一的解决方�
     无论是使用RefCell、Mutex还是RwLock，你都可以在match中处理这些类型的值。
 */
 
-
 struct Point {
     x: RefCell<i32>,
     y: RefCell<i32>,
@@ -99,11 +98,14 @@ fn refcell_match_threads() {
     let thread_safe_circle_positions = thread_safe_circle.get_shape_position();
 
     // 输出: Circle Position: [(5, 5)]
-    println!("Circle Position: {:?}", circle_positions); 
+    println!("Circle Position: {:?}", circle_positions);
     // 输出: Rectangle Positions: [(3, 3), (5, 5)]
-    println!("Rectangle Positions: {:?}", rectangle_positions); 
+    println!("Rectangle Positions: {:?}", rectangle_positions);
     // 输出: Thread Safe Circle Position: [(3, 3)]
-    println!("Thread Safe Circle Position: {:?}", thread_safe_circle_positions); 
+    println!(
+        "Thread Safe Circle Position: {:?}",
+        thread_safe_circle_positions
+    );
 }
 
 #[cfg(test)]

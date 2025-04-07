@@ -24,7 +24,10 @@ struct Rectangle {
 #[allow(unused)]
 impl Shape for Rectangle {
     fn draw(&self) {
-        println!("Drawing a Rectangle with width: {} and height: {}", self.width, self.height);
+        println!(
+            "Drawing a Rectangle with width: {} and height: {}",
+            self.width, self.height
+        );
     }
 }
 
@@ -49,7 +52,10 @@ struct RectangleFactory;
 #[allow(unused)]
 impl ShapeFactory<Rectangle> for RectangleFactory {
     fn create_shape(&self) -> Rectangle {
-        Rectangle { width: 4.0, height: 3.0 }
+        Rectangle {
+            width: 4.0,
+            height: 3.0,
+        }
     }
 }
 

@@ -8,8 +8,6 @@
 闭包可以被视为态射的高阶形式，它们可以接受其他态射作为参数。
 */
 
-
-
 #[allow(unused)]
 pub fn test_closure() {
     let x = 5;
@@ -32,7 +30,6 @@ pub fn test_closure_2() -> () {
     let result = add(2, 3); // 表达式
     println!("result is {}", result);
 }
-
 
 #[allow(unused)]
 fn call_fn<F: Fn()>(f: F) {
@@ -69,7 +66,7 @@ pub fn test_closure01() {
 
     // FnOnce 闭包
     let s = String::from("Hello");
-    let fn_once_closure  = move || println!("FnOnce closure: {}", s);
+    let fn_once_closure = move || println!("FnOnce closure: {}", s);
     call_fn_once(fn_once_closure);
     //call_fn_once(fn_once_closure); // 错误：`fn_once_closure` 已经移动
 }

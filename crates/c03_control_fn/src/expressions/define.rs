@@ -4,8 +4,6 @@
     表达式可以被视为态射，它们将输入（如变量、常量）映射到输出（计算结果）。
 */
 
-
-
 #[allow(unused)]
 // 表达式定义
 pub fn test_expression() -> () {
@@ -27,4 +25,3 @@ pub fn test_expression_2() -> () {
     let z = x + y; // 表达式
     println!("z is {}", z); // 表达式
 }
-

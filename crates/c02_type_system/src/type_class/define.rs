@@ -33,16 +33,16 @@ pub fn define_trait_01() {
             println!("I am a default speaker.");
         }
     }
-    
+
     struct Dog;
     struct Cat;
-    
+
     impl Speak for Dog {
         fn speak(&self) {
             println!("Woof!");
         }
     }
-    
+
     impl Speak for Cat {} // 使用默认实现
 
     let dog = Dog;
@@ -50,7 +50,6 @@ pub fn define_trait_01() {
 
     dog.speak(); // 输出: Woof!
     cat.speak(); // 输出: I am a default speaker.
-
 }
 
 /*
@@ -64,15 +63,15 @@ pub fn define_trait_02() {
     fn print_area<T: Shape>(shape: T) {
         println!("Area: {}", shape.area());
     }
-    
+
     trait Shape {
         fn area(&self) -> f64;
     }
-    
+
     struct Circle {
         radius: f64,
     }
-    
+
     impl Shape for Circle {
         fn area(&self) -> f64 {
             std::f64::consts::PI * self.radius * self.radius
@@ -81,7 +80,6 @@ pub fn define_trait_02() {
     println!("2. 特征约束");
     let circle = Circle { radius: 2.0 };
     print_area(circle); // 输出: Area: 12.566370614359172
-
 }
 
 /*
@@ -95,30 +93,30 @@ pub fn define_trait_03() {
     trait Shape {
         fn area(&self) -> f64;
     }
-    
+
     trait Color {
         fn color(&self) -> &str;
     }
-    
+
     #[allow(unused)]
     trait ColoredShape: Shape + Color {}
-    
+
     struct Circle {
         radius: f64,
     }
-    
+
     impl Shape for Circle {
         fn area(&self) -> f64 {
             std::f64::consts::PI * self.radius * self.radius
         }
     }
-    
+
     impl Color for Circle {
         fn color(&self) -> &str {
             "Red"
         }
     }
-    
+
     impl ColoredShape for Circle {}
 
     println!("3. 特征组合继承");
@@ -131,29 +129,29 @@ pub fn define_trait_03() {
 4. 特征对象（Trait Objects）
     特征对象允许在运行时使用不同类型的对象，只要它们实现了相同的特征。这使得动态调度成为可能。
     特征对象可以用于处理不同类型，但需要确保类型实现了所需的特征。
-*/  
+*/
 
 #[allow(unused)]
-pub fn define_trait_04(){
+pub fn define_trait_04() {
     trait Speak {
         fn speak(&self);
     }
-    
+
     struct Dog;
     struct Cat;
-    
+
     impl Speak for Dog {
         fn speak(&self) {
             println!("Woof!");
         }
     }
-    
+
     impl Speak for Cat {
         fn speak(&self) {
             println!("Meow!");
         }
     }
-    
+
     fn make_speak(speaker: &dyn Speak) {
         speaker.speak();
     }
@@ -164,9 +162,7 @@ pub fn define_trait_04(){
 
     make_speak(&dog); // 输出: Woof!
     make_speak(&cat); // 输出: Meow!
-
 }
-
 
 /*
 5. 关联类型（Associated Types）
@@ -175,21 +171,21 @@ pub fn define_trait_04(){
 */
 
 #[allow(unused)]
-pub fn define_trait_05(){
+pub fn define_trait_05() {
     #[allow(unused)]
     trait Container {
         type Item;
-    
+
         fn add(&mut self, item: Self::Item);
     }
-    
+
     struct Bag {
         items: Vec<String>,
     }
-    
+
     impl Container for Bag {
         type Item = String;
-    
+
         fn add(&mut self, item: Self::Item) {
             self.items.push(item);
         }
@@ -200,7 +196,6 @@ pub fn define_trait_05(){
     bag.add("Banana".to_string());
 
     println!("{:?}", bag.items); // 输出: ["Apple", "Banana"]
-    
 }
 
 /*
@@ -209,7 +204,7 @@ pub fn define_trait_05(){
 */
 
 #[allow(unused)]
-pub fn define_trait_06(){
+pub fn define_trait_06() {
     #[allow(unused)]
     trait Shape {
         fn area(&self) -> f64;
@@ -219,7 +214,7 @@ pub fn define_trait_06(){
     fn print_shape<T: Shape>(shape: T) {
         println!("Area: {}", shape.area());
     }
-    
+
     #[allow(unused)]
     fn print_shape_dynamic(shape: &dyn Shape) {
         println!("Area: {}", shape.area());
@@ -234,25 +229,24 @@ pub fn define_trait_06(){
 */
 
 #[allow(unused)]
-pub fn define_trait_07(){
+pub fn define_trait_07() {
     trait Summable {
         fn sum(&self) -> i32;
     }
-    
+
     impl Summable for Vec<i32> {
         fn sum(&self) -> i32 {
             self.iter().sum()
         }
     }
-    
+
     fn total<T: Summable>(items: T) -> i32 {
         items.sum()
     }
-    
+
     println!("7. 泛型与特征");
     let numbers = vec![1, 2, 3, 4, 5];
     println!("Total: {}", total(numbers)); // 输出: Total: 15
-    
 }
 
 /*
@@ -261,28 +255,27 @@ pub fn define_trait_07(){
 */
 
 #[allow(unused)]
-pub fn define_trait_08(){
+pub fn define_trait_08() {
     trait Describable {
         fn describe(&self) -> String;
     }
-    
+
     impl Describable for i32 {
         fn describe(&self) -> String {
             format!("This is an integer: {}", self)
         }
     }
-    
+
     impl Describable for String {
         fn describe(&self) -> String {
             format!("This is a string: {}", self)
         }
     }
-    
+
     println!("8. 条件实现");
     let number: i32 = 42;
     let text: String = String::from("Hello");
 
     println!("{}", number.describe()); // 输出: This is an integer: 42
-    println!("{}", text.describe());    // 输出: This is a string: Hello
-
+    println!("{}", text.describe()); // 输出: This is a string: Hello
 }

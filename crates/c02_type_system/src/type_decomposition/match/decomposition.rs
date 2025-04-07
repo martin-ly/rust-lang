@@ -35,7 +35,6 @@ Rust的`match`语句与类型系统的结合确实可以被视为一种解构的
     也为编程语言的类型系统和控制流结构提供了更广泛的理论基础。
 */
 
-
 //match 解构类型
 /*
 match 表达式可以解构多种类型
@@ -76,7 +75,7 @@ pub fn base_type02() {
         Green,
         Blue,
     }
- 
+
     let color = Color::Green;
     match color {
         Color::Red => println!("Red"),
@@ -91,7 +90,7 @@ pub fn base_type03() {
         x: i32,
         y: i32,
     }
- 
+
     let point = Point { x: 10, y: 20 };
     match point {
         Point { x, y: 0 } => println!("On the x-axis at {}", x),
@@ -100,7 +99,6 @@ pub fn base_type03() {
     }
 }
 
-
 #[allow(unused)]
 pub fn base_type04() {
     let tuple = (1, 2);
@@ -108,7 +106,6 @@ pub fn base_type04() {
         (x, y) => println!("x: {}, y: {}", x, y),
     }
 }
-
 
 #[allow(unused)]
 pub fn base_type05() {
@@ -123,7 +120,6 @@ pub fn base_type05() {
     }
 }
 
-
 #[allow(unused)]
 pub fn base_type06() {
     let some_value: Option<i32> = Some(10);
@@ -135,19 +131,17 @@ pub fn base_type06() {
 
 #[allow(unused)]
 pub fn base_type07() {
-
     #[derive(PartialEq)] // 自动实现 PartialEq
     struct MyStruct {
         value: i32,
     }
-    
+
     // 注意：没有实现 PartialEq trait
     impl MyStruct {
         fn new(value: i32) -> Self {
             MyStruct { value }
         }
     }
-    
 
     let my_instance = MyStruct::new(10);
 
@@ -158,8 +152,6 @@ pub fn base_type07() {
     // error[E0277]: the trait bound `MyStruct: PartialEq` is not satisfied
     // 解决方法：实现 PartialEq trait
 }
-
-
 
 #[allow(unused)]
 pub enum Message {
@@ -182,7 +174,6 @@ pub fn process_message(msg: Message) {
     }
 }
 
-
 #[allow(unused)]
 pub fn fizz_buzz(n: u32) -> String {
     match (n % 3, n % 5) {
@@ -193,7 +184,6 @@ pub fn fizz_buzz(n: u32) -> String {
     }
 }
 
-
 #[allow(unused)]
 pub fn match_guard(x: u32) {
     match x {
@@ -202,9 +192,6 @@ pub fn match_guard(x: u32) {
         _ => println!("Other"),
     }
 }
-
-
-
 
 // 定义一个 Trait，表示图形
 trait Shape {
@@ -241,7 +228,10 @@ impl Shape for Rectangle {
     }
 
     fn draw(&self) {
-        println!("Drawing a Rectangle with width: {} and height: {}", self.width, self.height);
+        println!(
+            "Drawing a Rectangle with width: {} and height: {}",
+            self.width, self.height
+        );
     }
 }
 
@@ -260,13 +250,10 @@ impl ShapeEnum {
         }
     }
 
-   pub  fn draw(&self) {
+    pub fn draw(&self) {
         match self {
             ShapeEnum::Circle(circle) => circle.draw(),
             ShapeEnum::Rectangle(rectangle) => rectangle.draw(),
         }
     }
 }
-
-
-

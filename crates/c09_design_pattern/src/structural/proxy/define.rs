@@ -46,6 +46,3 @@ mod tests {
         test_proxy();
     }
 }
-
-
-

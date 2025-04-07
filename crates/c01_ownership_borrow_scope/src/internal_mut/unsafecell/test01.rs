@@ -1,6 +1,5 @@
 use std::cell::UnsafeCell;
 
-
 /*
 UnsafeCell 是一个不安全的类型，
 它允许在安全上下文中进行不安全的操作。
@@ -21,7 +20,9 @@ struct MyCell<T> {
 #[allow(unused)]
 impl<T> MyCell<T> {
     fn new(value: T) -> Self {
-        MyCell { value: UnsafeCell::new(value) }
+        MyCell {
+            value: UnsafeCell::new(value),
+        }
     }
 
     fn get(&self) -> &T {
@@ -29,16 +30,18 @@ impl<T> MyCell<T> {
     }
 
     fn set(&self, value: T) {
-        unsafe { *self.value.get() = value; }
+        unsafe {
+            *self.value.get() = value;
+        }
     }
 }
 
 #[allow(unused)]
 fn unsafecell_test() {
     let cell = MyCell::new(5);
-    println!("Value: {}", *cell.get());  // 输出: Value: 5
+    println!("Value: {}", *cell.get()); // 输出: Value: 5
     cell.set(10);
-    println!("New value: {}", *cell.get());  // 输出: New value: 10
+    println!("New value: {}", *cell.get()); // 输出: New value: 10
 }
 
 #[cfg(test)]
@@ -50,4 +53,3 @@ mod tests {
         unsafecell_test();
     }
 }
-

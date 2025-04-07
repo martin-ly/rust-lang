@@ -1,5 +1,4 @@
-use serde::{Serialize, Deserialize};
-
+use serde::{Deserialize, Serialize};
 
 /*
 在Rust中，结构体（struct）的高级应用可以通过多种方式实现，
@@ -22,7 +21,6 @@ use serde::{Serialize, Deserialize};
 14. 泛型：使用泛型提高结构体的灵活性和重用性。
 15. 自定义方法与链式调用：定义自定义方法并支持链式调用。
 */
-
 
 /*
 1. 结构体方法
@@ -48,11 +46,13 @@ impl Rectangle {
 #[allow(unused)]
 pub fn advance_struct01() {
     println!("1. 结构体方法");
-    let rect = Rectangle { width: 10, height: 5 };
+    let rect = Rectangle {
+        width: 10,
+        height: 5,
+    };
     println!("Area: {}", rect.area()); // 输出: Area: 50
     println!("Is square: {}", rect.is_square()); // 输出: Is square: false
 }
-
 
 /*
 2. 结构体与特征结合
@@ -65,27 +65,27 @@ pub fn advance_struct02() {
     trait Shape {
         fn area(&self) -> f64;
     }
-    
+
     struct Circle {
         radius: f64,
     }
-    
+
     struct Square {
         side: f64,
     }
-    
+
     impl Shape for Circle {
         fn area(&self) -> f64 {
             std::f64::consts::PI * self.radius * self.radius
         }
     }
-    
+
     impl Shape for Square {
         fn area(&self) -> f64 {
             self.side * self.side
         }
     }
-    
+
     fn print_area<T: Shape>(shape: T) {
         println!("Area: {}", shape.area());
     }
@@ -108,7 +108,7 @@ pub fn advance_struct03() {
     struct Engine {
         horsepower: u32,
     }
-    
+
     struct Car {
         model: String,
         year: u32,
@@ -122,12 +122,11 @@ pub fn advance_struct03() {
         engine,
     };
 
-    println!("Car Model: {}, Year: {}, Horsepower: {}", 
-             car.model, 
-             car.year, 
-             car.engine.horsepower);
+    println!(
+        "Car Model: {}, Year: {}, Horsepower: {}",
+        car.model, car.year, car.engine.horsepower
+    );
 }
-
 
 /*
 4. 元组结构体和单元结构体
@@ -160,17 +159,16 @@ pub fn advance_struct05() {
     struct Counter {
         count: u32,
     }
-    
+
     impl Counter {
         fn increment(&mut self) {
             self.count += 1;
         }
     }
-    
+
     let mut counter = Counter { count: 0 };
     counter.increment();
     println!("Count: {}", counter.count); // 输出: Count: 1
-    
 }
 
 /*
@@ -186,8 +184,7 @@ pub fn advance_struct06() {
         title: &'a str,
         author: &'a str,
     }
-    
-    
+
     let title = String::from("1984");
     let author = String::from("George Orwell");
 
@@ -195,13 +192,13 @@ pub fn advance_struct06() {
         title: &title,
         author: &author,
     };
-    
+
     println!("Book: {}, Author: {}", book.title, book.author);
 }
 
 /*
 7. 结构体的默认值
-    可以为结构体实现Default特征，以便为结构体提供默认值。   
+    可以为结构体实现Default特征，以便为结构体提供默认值。
 */
 
 #[allow(unused)]
@@ -225,7 +222,6 @@ pub fn advance_struct07() {
 
     let config: Config = Default::default(); // 使用默认值
     println!("Host: {}, Port: {}", config.host, config.port); // 输出: Host: , Port: 0
-
 }
 
 /*
@@ -254,7 +250,6 @@ pub fn advance_struct08() {
     // 反序列化
     let deserialized_user: User = serde_json::from_str(&json).unwrap();
     println!("Deserialized: {:?}", deserialized_user);
-
 }
 
 /*
@@ -268,26 +263,25 @@ pub fn advance_struct09() {
     struct Engine {
         horsepower: u32,
     }
-    
+
     struct Wheels {
         count: u32,
     }
-    
+
     struct Car {
         engine: Engine,
         wheels: Wheels,
     }
-    
 
     let car = Car {
         engine: Engine { horsepower: 300 },
         wheels: Wheels { count: 4 },
     };
 
-    println!("Car has {} horsepower and {} wheels.", 
-                car.engine.horsepower, 
-                car.wheels.count);
-    
+    println!(
+        "Car has {} horsepower and {} wheels.",
+        car.engine.horsepower, car.wheels.count
+    );
 }
 
 /*
@@ -302,7 +296,7 @@ pub fn advance_struct10() {
         x: i32,
         y: i32,
     }
-        
+
     let mut point = Point { x: 0, y: 0 };
     point.x = 10; // 修改可变字段
     point.y = 20;
@@ -321,18 +315,17 @@ pub fn advance_struct11() {
     struct Counter {
         count: u32,
     }
-    
+
     impl Counter {
         fn increment(&mut self) {
             self.count += 1;
         }
-    
+
         fn get_count(&self) -> u32 {
             self.count
         }
     }
-    
- 
+
     let mut counter = Counter { count: 0 };
 
     {
@@ -342,9 +335,7 @@ pub fn advance_struct11() {
 
     let immut_ref = &counter; // 不可变借用
     println!("Count: {}", immut_ref.get_count()); // 输出: Count: 1
-
 }
-
 
 /*
 12. 结构体的模式匹配
@@ -359,7 +350,7 @@ pub fn advance_struct12() {
         x: i32,
         y: i32,
     }
-    
+
     fn print_point(point: Point) {
         match point {
             Point { x, y } => println!("Point is at ({}, {})", x, y),
@@ -368,7 +359,6 @@ pub fn advance_struct12() {
 
     let point = Point { x: 10, y: 20 };
     print_point(point); // 输出: Point is at (10, 20)
-    
 }
 
 /*
@@ -384,7 +374,7 @@ pub fn advance_struct13() {
         username: String,
         email: String,
     }
-    
+
     let user1 = User {
         username: String::from("alice"),
         email: String::from("alice@example.com"),
@@ -412,18 +402,20 @@ pub fn advance_struct14() {
         first: T,
         second: U,
     }
-    
+
     impl<T, U> Pair<T, U> {
         fn new(first: T, second: U) -> Self {
             Pair { first, second }
         }
     }
 
-    let pair = Pair { first: 1, second: "one" };
+    let pair = Pair {
+        first: 1,
+        second: "one",
+    };
     let pair2 = Pair::new(1, "one");
     println!("pair: First: {}, Second: {}", pair.first, pair.second);
     println!("pair2: First: {}, Second: {}", pair2.first, pair2.second);
-
 }
 
 /*
@@ -435,36 +427,31 @@ pub fn advance_struct14() {
 #[allow(unused)]
 pub fn advance_struct15() {
     println!("15. 结构体的自定义方法与链式调用");
-    #[derive(Debug,Clone)]
+    #[derive(Debug, Clone)]
     struct Builder {
         value: String,
     }
-    
+
     impl Builder {
         fn new() -> Self {
             Builder {
                 value: String::new(),
             }
         }
-    
+
         fn append(&mut self, text: &str) -> &mut Self {
             self.value.push_str(text);
             self // 返回可变引用以支持链式调用
         }
-    
+
         fn build(&mut self) -> &String {
             &self.value
         }
     }
-    
+
     // 使用链式调用
     let mut builder = Builder::new();
-    let result = builder
-        .append("Hello, ")
-        .append("World!")
-        .build();
+    let result = builder.append("Hello, ").append("World!").build();
 
     println!("{}", result); // 输出: Hello, World!
-    
 }
-

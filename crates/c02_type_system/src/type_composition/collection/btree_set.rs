@@ -7,11 +7,10 @@ BTreeSet 是 Rust 标准库中 std::collections 模块的一部分。
       T 是集合中元素的类型，必须实现 Ord trait，以便能够进行排序。
 */
 
+use std::cmp::Ordering;
 use std::collections::{BTreeMap, BTreeSet};
 use std::sync::{Arc, Mutex};
-use std::cmp::Ordering;
 use std::thread;
-
 
 #[allow(unused)]
 pub fn btree_set_demo01() {
@@ -47,7 +46,6 @@ pub fn btree_set_demo01() {
     }
 }
 
-
 #[allow(unused)]
 pub fn btree_set_demo02() {
     println!("btree_set_demo02");
@@ -72,9 +70,7 @@ pub fn btree_set_demo02() {
     // 差集
     let difference: BTreeSet<_> = set1.difference(&set2).cloned().collect();
     println!("差集: {:?}", difference);
-
 }
-
 
 #[allow(unused)]
 pub fn btree_set_demo03() {
@@ -104,7 +100,6 @@ pub fn btree_set_demo03() {
     }
 }
 
-
 #[allow(unused)]
 pub fn btree_set_demo04() {
     println!("btree_set_demo04");
@@ -113,32 +108,41 @@ pub fn btree_set_demo04() {
         name: String,
         age: u32,
     }
-    
+
     impl Ord for Person {
         fn cmp(&self, other: &Self) -> Ordering {
-            self.age.cmp(&other.age).then_with(|| self.name.cmp(&other.name))
+            self.age
+                .cmp(&other.age)
+                .then_with(|| self.name.cmp(&other.name))
         }
     }
-    
+
     impl PartialOrd for Person {
         fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
             Some(self.cmp(other))
         }
     }
-    
+
     let mut people = BTreeSet::new();
-    people.insert(Person { name: "Alice".to_string(), age: 30 });
-    people.insert(Person { name: "Bob".to_string(), age: 25 });
-    people.insert(Person { name: "Charlie".to_string(), age: 30 });
+    people.insert(Person {
+        name: "Alice".to_string(),
+        age: 30,
+    });
+    people.insert(Person {
+        name: "Bob".to_string(),
+        age: 25,
+    });
+    people.insert(Person {
+        name: "Charlie".to_string(),
+        age: 30,
+    });
 
     // 打印所有人
     println!("BTreeSet 中的人:");
     for person in &people {
         println!("{:?}", person);
     }
-    
 }
-
 
 #[allow(unused)]
 pub fn btree_set_demo05() {
@@ -150,32 +154,34 @@ pub fn btree_set_demo05() {
     println!("去重后的有序集合: {:?}", unique_sorted);
 }
 
-
 #[allow(unused)]
 pub fn btree_set_demo06() {
     println!("btree_set_demo06");
     struct Graph {
         edges: BTreeMap<String, BTreeSet<String>>,
     }
-    
+
     impl Graph {
         fn new() -> Self {
             Graph {
                 edges: BTreeMap::new(),
             }
         }
-    
+
         fn add_edge(&mut self, from: String, to: String) {
-            self.edges.entry(from).or_insert_with(BTreeSet::new).insert(to);
+            self.edges
+                .entry(from)
+                .or_insert_with(BTreeSet::new)
+                .insert(to);
         }
-    
+
         fn display(&self) {
             for (node, neighbors) in &self.edges {
                 println!("{} -> {:?}", node, neighbors);
             }
         }
     }
-    
+
     let mut graph = Graph::new();
     graph.add_edge("A".to_string(), "B".to_string());
     graph.add_edge("A".to_string(), "C".to_string());
@@ -183,9 +189,7 @@ pub fn btree_set_demo06() {
 
     // 打印图的结构
     graph.display();
-
 }
-
 
 #[allow(unused)]
 pub fn btree_set_demo07() {
@@ -195,18 +199,25 @@ pub fn btree_set_demo07() {
         time: u32,
         description: String,
     }
-    
 
     let mut events = BTreeSet::new();
 
-    events.insert(Event { time: 10, description: "Event 1".to_string() });
-    events.insert(Event { time: 5, description: "Event 2".to_string() });
-    events.insert(Event { time: 15, description: "Event 3".to_string() });
+    events.insert(Event {
+        time: 10,
+        description: "Event 1".to_string(),
+    });
+    events.insert(Event {
+        time: 5,
+        description: "Event 2".to_string(),
+    });
+    events.insert(Event {
+        time: 15,
+        description: "Event 3".to_string(),
+    });
 
     // 打印按时间排序的事件
     println!("按时间排序的事件:");
     for event in &events {
         println!("{:?}", event);
     }
-    
 }

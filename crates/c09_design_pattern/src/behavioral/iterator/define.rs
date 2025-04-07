@@ -30,16 +30,15 @@ impl<T> IteratorTrait<T> for Collection<T> {
     }
 }
 
-
 /*
 说明
-    IteratorTrait: 
+    IteratorTrait:
         定义了一个泛型迭代器 trait，包含一个 next 方法。
-    Collection: 
+    Collection:
         定义了一个集合结构体，内部使用 Vec<T> 存储元素。
-    实现 IteratorTrait: 
+    实现 IteratorTrait:
         为 Collection 实现了 IteratorTrait，使其能够返回集合中的下一个元素。
-    使用示例: 
+    使用示例:
         在 main 函数中创建一个 Collection 实例，添加元素并迭代输出。
 */
 #[allow(unused)]
@@ -63,4 +62,3 @@ mod tests {
         iterator();
     }
 }
-

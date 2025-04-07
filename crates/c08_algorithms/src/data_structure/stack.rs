@@ -1,9 +1,7 @@
-
-
 #[allow(unused)]
 fn is_valid(s: String) -> bool {
     let mut stack = Vec::new(); // 创建一个栈用于存储开括号
-    
+
     for c in s.chars() {
         match c {
             '(' | '[' | '{' => stack.push(c), // 遇到开括号就入栈
@@ -12,21 +10,21 @@ fn is_valid(s: String) -> bool {
                 if stack.pop() != Some('(') {
                     return false;
                 }
-            },
+            }
             ']' => {
                 if stack.pop() != Some('[') {
                     return false;
                 }
-            },
+            }
             '}' => {
                 if stack.pop() != Some('{') {
                     return false;
                 }
-            },
+            }
             _ => return false, // 遇到其他字符，返回 false
         }
     }
-    
+
     stack.is_empty() // 如果栈为空，说明所有括号都匹配
 }
 
@@ -48,5 +46,3 @@ mod tests {
         assert_eq!(is_valid("((()".to_string()), false); // 无效
     }
 }
-
-

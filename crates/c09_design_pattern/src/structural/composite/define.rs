@@ -72,5 +72,3 @@ mod tests {
         test_composite();
     }
 }
-
-

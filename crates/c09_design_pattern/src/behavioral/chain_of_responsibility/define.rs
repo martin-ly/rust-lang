@@ -146,4 +146,3 @@ mod tests {
         chain_of_responsibility();
     }
 }
-

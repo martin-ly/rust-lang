@@ -61,11 +61,11 @@ impl Shape {
 fn refcell_test() {
     let mut circle = Shape::Circle(Point::new(0, 0));
     circle.move_shape(5, 5);
-    
+
     if let Shape::Circle(point) = circle {
         let (x, y) = point.get_position();
         // 输出: Circle Position: (5, 5)
-        println!("Circle Position: ({}, {})", x, y); 
+        println!("Circle Position: ({}, {})", x, y);
     }
 }
 
@@ -78,4 +78,3 @@ mod tests {
         refcell_test();
     }
 }
-

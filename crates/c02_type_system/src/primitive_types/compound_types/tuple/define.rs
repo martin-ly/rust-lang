@@ -46,31 +46,35 @@ pub fn test_tuple() -> () {
 
     // 解构元组
     let (p_age, p_height, p_name) = person;
-    println!("Destructured - Name: {}, Age: {}, Height: {}", p_name, p_age, p_height);
+    println!(
+        "Destructured - Name: {}, Age: {}, Height: {}",
+        p_name, p_age, p_height
+    );
 }
-
-
 
 #[allow(unused)]
 pub fn test_tuple_string() -> () {
-       // 定义一个元组，包含一个字符串、一个整数和一个浮点数
-       let person: (String, i32, f64) = (String::from("Alice"), 30, 5.9);
+    // 定义一个元组，包含一个字符串、一个整数和一个浮点数
+    let person: (String, i32, f64) = (String::from("Alice"), 30, 5.9);
 
-       // 访问元组的元素
-       let name = &person.0; // 访问第一个元素（字符串）
-       let age = person.1;   // 访问第二个元素（整数）
-       let height = person.2; // 访问第三个元素（浮点数）
-   
-       println!("Name: {}, Age: {}, Height: {}", name, age, height);
-   
-       // 解构元组
-       let (ref p_name, p_age, p_height) = person;
-       println!("Destructured - Name: {}, Age: {}, Height: {}", p_name, p_age, p_height);
-       
-       println!("{:?}",person); //不加 ref 就会报错? String 是moving 语义
+    // 访问元组的元素
+    let name = &person.0; // 访问第一个元素（字符串）
+    let age = person.1; // 访问第二个元素（整数）
+    let height = person.2; // 访问第三个元素（浮点数）
+
+    println!("Name: {}, Age: {}, Height: {}", name, age, height);
+
+    // 解构元组
+    let (ref p_name, p_age, p_height) = person;
+    println!(
+        "Destructured - Name: {}, Age: {}, Height: {}",
+        p_name, p_age, p_height
+    );
+
+    println!("{:?}", person); //不加 ref 就会报错? String 是moving 语义
 }
 
-#[allow(unused)]    
+#[allow(unused)]
 pub fn test_tuple_copy() -> () {
     let tuple1 = (1, 2.5); // 包含 Copy 类型的元组
     let tuple2 = tuple1; // 这里发生的是复制，而不是移动
@@ -79,15 +83,11 @@ pub fn test_tuple_copy() -> () {
     println!("{:?}", tuple2); // 打印 tuple2: (1, 2.5)
 }
 
-
-
 #[allow(unused)]
 pub fn test_tuple_clone() -> () {
-    let tuple1 = (String::from("Hello"), 42);// 包含 String 类型的元组
+    let tuple1 = (String::from("Hello"), 42); // 包含 String 类型的元组
     let tuple2 = tuple1.clone(); // 克隆 tuple1，tuple2 拥有 tuple1 的副本
 
-    println!("tuple1: {:?}", tuple1);// 打印 tuple1: ("Hello", 42)
-    println!("tuple2: {:?}", tuple2);// 打印 tuple2: ("Hello", 42)
+    println!("tuple1: {:?}", tuple1); // 打印 tuple1: ("Hello", 42)
+    println!("tuple2: {:?}", tuple2); // 打印 tuple2: ("Hello", 42)
 }
-
-

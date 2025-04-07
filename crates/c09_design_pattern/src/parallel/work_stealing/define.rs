@@ -1,6 +1,6 @@
+use std::collections::VecDeque;
 use std::sync::{Arc, Mutex};
 use std::thread;
-use std::collections::VecDeque;
 
 struct Worker {
     id: usize,
@@ -8,7 +8,10 @@ struct Worker {
 }
 
 impl Worker {
-    fn new(id: usize, task_queue: Arc<Mutex<VecDeque<Box<dyn FnOnce() + Send + 'static>>>>) -> Self {
+    fn new(
+        id: usize,
+        task_queue: Arc<Mutex<VecDeque<Box<dyn FnOnce() + Send + 'static>>>>,
+    ) -> Self {
         Worker { id, task_queue }
     }
 
@@ -50,7 +53,10 @@ impl ThreadPool {
             workers.push(worker);
         }
 
-        ThreadPool { workers: Arc::new(workers), task_queue }
+        ThreadPool {
+            workers: Arc::new(workers),
+            task_queue,
+        }
     }
 
     fn execute<F>(&self, task: F)

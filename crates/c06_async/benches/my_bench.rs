@@ -1,5 +1,5 @@
 // benches/my_bench.rs
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, black_box, criterion_group, criterion_main};
 
 fn bench_example(c: &mut Criterion) {
     c.bench_function("example", |b| b.iter(|| black_box(42)));

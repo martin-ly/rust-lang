@@ -46,9 +46,7 @@ pub fn thread_test() {
 
     // 读取值
     // println!("Value: {}", my_struct.borrow().value);
-
 }
-
 
 #[allow(unused)]
 struct Data {
@@ -86,4 +84,3 @@ mod tests {
         thread_test02();
     }
 }
-

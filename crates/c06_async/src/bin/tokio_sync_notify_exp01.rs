@@ -4,4 +4,3 @@ use c06_async::tokio::sync::notify::*;
 async fn main() {
     notify_test01().await;
 }
-

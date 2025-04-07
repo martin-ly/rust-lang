@@ -46,14 +46,14 @@ impl From<Fahrenheit> for Celsius {
 fn main() {
     // 创建一个Celsius实例
     let celsius = Celsius(25.0);
-    
+
     // 使用From特征进行转换
     let fahrenheit: Fahrenheit = Fahrenheit::from(celsius);
     println!("Celsius: {}, Fahrenheit: {}", 25.0, fahrenheit.0); // 输出: Celsius: 25, Fahrenheit: 77
 
     // 创建一个Fahrenheit实例
     let fahrenheit = Fahrenheit(77.0);
-    
+
     // 使用From特征进行转换
     let celsius: Celsius = Celsius::from(fahrenheit);
     println!("Fahrenheit: {}, Celsius: {}", 77.0, celsius.0); // 输出: Fahrenheit: 77, Celsius: 25

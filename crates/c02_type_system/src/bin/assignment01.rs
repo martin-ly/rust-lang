@@ -12,7 +12,7 @@ struct Point {
 
 fn main() {
     //1. 解构结构体
-    let point = Point { x: 10, y: 20 };    
+    let point = Point { x: 10, y: 20 };
     // 解构赋值
     let Point { x, y } = point;
     println!("x: {}, y: {}", x, y); // 输出: x: 10, y: 20
@@ -35,7 +35,7 @@ fn main() {
         Message::Move { x, y } => println!("Move to ({}, {})", x, y),
         Message::Write(s) => println!("Write: {}", s),
     }
-    
+
     #[allow(dead_code)]
     enum Shape {
         Circle(f64),
@@ -52,26 +52,32 @@ fn main() {
     match complex {
         (a, (b, c), d) => println!("a: {}, b: {}, c: {}, d: {}", a, b, c, d),
     }
-    
+
     struct Rectangle {
         width: u32,
         height: u32,
     }
-    
+
     struct Shape0 {
         rect: Rectangle,
         color: String,
     }
 
     let shape = Shape0 {
-        rect: Rectangle { width: 10, height: 20 },
+        rect: Rectangle {
+            width: 10,
+            height: 20,
+        },
         color: "red".to_string(),
     };
-    
-    // 嵌套解构
-    let Shape0 { rect: Rectangle { width, height }, color } = shape;
 
-    println!("Width: {}, Height: {}, Color: {}", width, height, color); 
+    // 嵌套解构
+    let Shape0 {
+        rect: Rectangle { width, height },
+        color,
+    } = shape;
+
+    println!("Width: {}, Height: {}, Color: {}", width, height, color);
     // 输出: Width: 10, Height: 20, Color: red
 
     //5. 部分解构
@@ -93,26 +99,26 @@ fn main() {
         age: 30,
         city: String::from("Wonderland"),
     };
-    
+
     // 部分解构
     let Person { name, .. } = person;
-    
+
     println!("Name: {}", name); // 输出: Name: Alice
-    let Person {age: a, .. } = person;
+    let Person { age: a, .. } = person;
     println!("Age: {}", a); // 输出: Age: 30
-    let Person {city: ct, .. } = person;
+    let Person { city: ct, .. } = person;
     println!("City: {}", ct); // 输出: City: Wonderland
-    
+
     //6. 忽略值
-    let (_, _, third, _,_) = numbers;
+    let (_, _, third, _, _) = numbers;
     println!("Third: {}", third); // 输出: Third: 3
-    
+
     //7.在函数参数中解构
     struct Point {
         x: i32,
         y: i32,
     }
-    
+
     fn print_point(Point { x, y }: Point) {
         println!("Point is at ({}, {})", x, y);
     }
@@ -128,7 +134,7 @@ fn main() {
         host: String,
         port: u16,
     }
-    
+
     impl Default for Config {
         fn default() -> Self {
             Config {
@@ -137,10 +143,9 @@ fn main() {
             }
         }
     }
-    
+
     let config = Config::default();
     // 解构赋值
     let Config { host, port } = config;
     println!("Host: {}, Port: {}", host, port); // 输出: Host: localhost, Port: 8080
-
 }

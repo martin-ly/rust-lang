@@ -21,8 +21,8 @@ RwLock 适用于读多写少的场景，因为它允许多个并发的读取操�
 在需要对共享数据进行频繁读取的情况下，使用 RwLock 可以减少锁的竞争。
 */
 
-use tokio::sync::RwLock;
 use std::sync::Arc;
+use tokio::sync::RwLock;
 
 #[allow(unused)]
 pub async fn rwlock_test01() {
@@ -49,7 +49,8 @@ pub async fn rwlock_test01() {
     });
 
     // 等待所有任务完成
-    let _ = tokio::join!(write_handle,  
+    let _ = tokio::join!(
+        write_handle,
         // 等待所有读取任务完成
         futures::future::join_all(read_handles)
     );

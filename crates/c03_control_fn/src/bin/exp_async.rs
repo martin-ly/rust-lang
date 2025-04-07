@@ -2,7 +2,6 @@ use c03_control_fn::closure::r#async::*;
 use std::time::Duration;
 use tokio::time::sleep;
 
-
 #[tokio::main]
 async fn main() {
     // 使用 FnOnce 的闭包
@@ -21,9 +20,7 @@ async fn main() {
     async_fn_mut(mut_closure).await;
 
     // 使用 Fn 的闭包
-    let fn_closure = || {
-        100
-    };
+    let fn_closure = || 100;
     async_fn(fn_closure).await;
 
     // 模拟异步操作

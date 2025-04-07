@@ -13,8 +13,8 @@ BinaryHeap 是无序的，但可以快速访问最大元素。
     优先级队列: 适用于需要按优先级处理元素的场景。
 */
 
-use std::collections::BinaryHeap;
 use std::cmp::Ordering;
+use std::collections::BinaryHeap;
 
 #[allow(unused)]
 pub fn binary_heap_demo01() {
@@ -60,15 +60,23 @@ pub fn binary_heap_demo02() {
 
     let mut heap = BinaryHeap::new();
 
-    heap.push(Person { name: "Alice".to_string(), age: 30 });
-    heap.push(Person { name: "Bob".to_string(), age: 25 });
-    heap.push(Person { name: "Charlie".to_string(), age: 35 });
+    heap.push(Person {
+        name: "Alice".to_string(),
+        age: 30,
+    });
+    heap.push(Person {
+        name: "Bob".to_string(),
+        age: 25,
+    });
+    heap.push(Person {
+        name: "Charlie".to_string(),
+        age: 35,
+    });
 
     println!("BinaryHeap 中的人员（按年龄优先级顺序）:");
     while let Some(person) = heap.pop() {
         println!("{:?}", person);
     }
-
 }
 
 #[allow(unused)]
@@ -79,32 +87,39 @@ pub fn binary_heap_demo03() {
         priority: u32,
         description: String,
     }
-    
+
     impl Ord for Task {
         fn cmp(&self, other: &Self) -> Ordering {
             // 按优先级降序排序
             other.priority.cmp(&self.priority)
         }
     }
-    
+
     impl PartialOrd for Task {
         fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
             Some(self.cmp(other))
         }
     }
-    
-    
+
     let mut task_queue = BinaryHeap::new();
 
-    task_queue.push(Task { priority: 2, description: "Do laundry".to_string() });
-    task_queue.push(Task { priority: 1, description: "Write report".to_string() });
-    task_queue.push(Task { priority: 3, description: "Prepare presentation".to_string() });
+    task_queue.push(Task {
+        priority: 2,
+        description: "Do laundry".to_string(),
+    });
+    task_queue.push(Task {
+        priority: 1,
+        description: "Write report".to_string(),
+    });
+    task_queue.push(Task {
+        priority: 3,
+        description: "Prepare presentation".to_string(),
+    });
 
     println!("任务调度队列（按优先级顺序）:");
     while let Some(task) = task_queue.pop() {
         println!("优先级 {}: {}", task.priority, task.description);
     }
-    
 }
 
 #[allow(unused)]

@@ -25,7 +25,7 @@
     在 Rust 中，切片之间的赋值是将一个切片的引用赋值给另一个切片。
     不可变切片和可变切片之间的赋值都遵循相同的规则，
     切片引用的数据不会被复制，而是共享相同的内存。
-    
+
     在 Rust 中，切片之间的赋值并不违反可变引用的规则，
     因为在任何时刻，只有一个可变引用是有效的。
     当你将一个可变切片赋值给另一个可变切片时，
@@ -122,7 +122,7 @@ pub fn test_slice_assign() -> () {
     println!("slice1: {:?}", slice1);
 
     // 赋值给另一个不可变切片 类似copy语义
-    let slice2: &[i32] = slice1; 
+    let slice2: &[i32] = slice1;
     println!("slice1: {:?}", slice1);
     println!("slice2: {:?}", slice2);
 
@@ -146,7 +146,7 @@ pub fn test_mut_slice_assign() -> () {
 
     // 在这里，slice_mut1 是唯一的可变引用
     // 赋值给另一个可变切片
-    let slice_mut2: &mut [i32] = slice_mut1; 
+    let slice_mut2: &mut [i32] = slice_mut1;
     // slice_mut2 现在引用与 slice_mut1 相同的数据
     // slice_mut1 是move语义 到 slice_mut2
     //println!("slice_mut1: {:?}", slice_mut1);
@@ -161,29 +161,28 @@ pub fn test_mut_slice_assign() -> () {
     println!("Modified array: {:?}", arr); // 打印: Modified array: [10, 20, 35, 45, 55]
 }
 
-
 #[allow(unused)]
 pub fn test_slice_to_vec() -> () {
-   // 定义一个向量
-   let vec = vec![1, 2, 3, 4, 5];
-   println!("Original vector: {:?}", vec);
+    // 定义一个向量
+    let vec = vec![1, 2, 3, 4, 5];
+    println!("Original vector: {:?}", vec);
 
-   // 创建一个切片，引用向量的前 3 个元素
-   let slice: &[i32] = &vec[0..3];
+    // 创建一个切片，引用向量的前 3 个元素
+    let slice: &[i32] = &vec[0..3];
 
-   // 打印原始切片
-   println!("Original slice: {:?}", slice); 
-   // 打印: Original slice: [1, 2, 3]
+    // 打印原始切片
+    println!("Original slice: {:?}", slice);
+    // 打印: Original slice: [1, 2, 3]
 
-   // 将切片转换为向量并修改数据
-   let mut modified_data = slice.to_vec();
-   modified_data.push(6);
-   println!("Modified cloned data: {:?}", modified_data); 
-   // 打印: Modified cloned data: [1, 2, 3, 6]
+    // 将切片转换为向量并修改数据
+    let mut modified_data = slice.to_vec();
+    modified_data.push(6);
+    println!("Modified cloned data: {:?}", modified_data);
+    // 打印: Modified cloned data: [1, 2, 3, 6]
 
-   // 原始向量保持不变
-   println!("Original vector: {:?}", vec); 
-   // 打印: Original vector: [1, 2, 3, 4, 5]
+    // 原始向量保持不变
+    println!("Original vector: {:?}", vec);
+    // 打印: Original vector: [1, 2, 3, 4, 5]
 }
 
 #[allow(unused)]

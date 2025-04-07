@@ -56,14 +56,17 @@ Rust 提供了多种整数类型，位操作可以应用于这些类型。整数
 
 #[allow(unused)]
 pub fn test_bit_operation() -> () {
-    let a: u8 = 5;  // 二进制: 0000 0101
-    let b: u8 = 3;  // 二进制: 0000 0011
+    let a: u8 = 5; // 二进制: 0000 0101
+    let b: u8 = 3; // 二进制: 0000 0011
     println!("--------------------------------");
     println!("a: {:08b}", a);
     println!("b: {:08b}", b);
     // 按位与
     let and_result = a & b; // 结果: 0000 0001 (1)
-    println!("{} & {} = {} (binary: {:08b})", a, b, and_result, and_result);
+    println!(
+        "{} & {} = {} (binary: {:08b})",
+        a, b, and_result, and_result
+    );
 
     // 按位或
     let or_result = a | b; // 结果: 0000 0111 (7)
@@ -71,7 +74,10 @@ pub fn test_bit_operation() -> () {
 
     // 按位异或
     let xor_result = a ^ b; // 结果: 0000 0110 (6)
-    println!("{} ^ {} = {} (binary: {:08b})", a, b, xor_result, xor_result);
+    println!(
+        "{} ^ {} = {} (binary: {:08b})",
+        a, b, xor_result, xor_result
+    );
 
     // 按位取反
     let not_result = !a; // 结果: 1111 1010 (对于 u8 来说是 250)
@@ -79,11 +85,17 @@ pub fn test_bit_operation() -> () {
 
     // 左移
     let left_shift_result = a << 1; // 结果: 0000 1010 (10)
-    println!("{} << 1 = {} (binary: {:08b})", a, left_shift_result, left_shift_result);
+    println!(
+        "{} << 1 = {} (binary: {:08b})",
+        a, left_shift_result, left_shift_result
+    );
 
     // 右移
     let right_shift_result = a >> 1; // 结果: 0000 0010 (2)
-    println!("{} >> 1 = {} (binary: {:08b})", a, right_shift_result, right_shift_result);
+    println!(
+        "{} >> 1 = {} (binary: {:08b})",
+        a, right_shift_result, right_shift_result
+    );
 
     println!("--------------------------------");
 }
@@ -109,14 +121,23 @@ pub fn test_bit_operation_2() -> () {
     let unsigned_not = !unsigned; // 结果: 250
 
     println!("Signed NOT: {} (binary: {:08b})", signed_not, signed_not);
-    println!("Unsigned NOT: {} (binary: {:08b})", unsigned_not, unsigned_not);
+    println!(
+        "Unsigned NOT: {} (binary: {:08b})",
+        unsigned_not, unsigned_not
+    );
 
     // 右移
     let signed_right_shift = signed >> 1; // 结果: 2
     let unsigned_right_shift = unsigned >> 1; // 结果: 2
 
-    println!("Signed >>1: {}, (binary: {:08b})", signed_right_shift, signed_right_shift);
-    println!("Unsigned >>1: {}, (binary: {:08b})", unsigned_right_shift, unsigned_right_shift);
+    println!(
+        "Signed >>1: {}, (binary: {:08b})",
+        signed_right_shift, signed_right_shift
+    );
+    println!(
+        "Unsigned >>1: {}, (binary: {:08b})",
+        unsigned_right_shift, unsigned_right_shift
+    );
     println!("--------------------------------");
 }
 

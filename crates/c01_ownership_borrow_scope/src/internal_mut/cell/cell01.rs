@@ -34,7 +34,9 @@ struct Counter {
 #[allow(unused)]
 impl Counter {
     fn new() -> Self {
-        Counter { count: Cell::new(0) }
+        Counter {
+            count: Cell::new(0),
+        }
     }
 
     fn increment(&self) {
@@ -52,7 +54,7 @@ fn cell_test() {
     counter.increment();
     counter.increment();
     // 输出: Count: 2
-    println!("Count: {}", counter.get_count()); 
+    println!("Count: {}", counter.get_count());
 }
 
 #[cfg(test)]

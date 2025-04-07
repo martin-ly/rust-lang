@@ -15,7 +15,6 @@ struct ConcretePrototype {
     name: String,
 }
 
-
 // 实现 Prototype trait
 impl Prototype<ConcretePrototype> for ConcretePrototype {
     fn Clone(&self) -> ConcretePrototype {

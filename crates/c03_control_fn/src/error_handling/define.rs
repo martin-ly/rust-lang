@@ -30,7 +30,6 @@ pub fn test_error_handling_2() -> () {
     let result: Result<i32, &str> = Ok(10);
     match result {
         Ok(value) => println!("Value is: {}", value), // 控制结构
-        Err(e) => println!("Error: {}", e), // 控制结构
+        Err(e) => println!("Error: {}", e),           // 控制结构
     }
 }
-

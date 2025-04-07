@@ -102,5 +102,3 @@ mod tests {
         visitor_test();
     }
 }
-
-

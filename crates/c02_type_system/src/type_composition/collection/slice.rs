@@ -79,7 +79,7 @@ pub fn test_slice02() {
     let slice = &mut numbers[1..4]; // [3, 1, 4]
     slice.sort(); // 对切片进行排序
     println!("{:?}", numbers); // 输出: [5, 1, 3, 4, 2]
-    
+
     //Rust中的字符串切片（&str）是对字符串的不可变视图，允许你处理字符串的一部分。
     let s = String::from("Hello, world!");
     let slice = &s[0..5]; // 切片包含 "Hello"
@@ -90,35 +90,34 @@ pub fn test_slice02() {
     let slice = &s[0..5]; // 切片包含 "Hello"
     let string_slice = slice.to_string(); // 将切片转换为字符串
     println!("{}", string_slice); // 输出: Hello
-
 }
 
 #[allow(unused)]
 pub fn test_slice03() {
     let text = "The quick brown fox jumps over the lazy dog";
-    
+
     // 创建字符串切片
-    let slice = &text[16..19]; 
+    let slice = &text[16..19];
     // 切片包含 "fox"
-    println!("Slice: {}", slice); 
+    println!("Slice: {}", slice);
     // 输出: Slice: fox
 
     // 统计单词数量
     let words: Vec<&str> = text.split_whitespace().collect();
-    println!("Words: {:?}", words); 
+    println!("Words: {:?}", words);
     // 输出: Words: ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"]
 
     // 使用切片进行分析
-    let first_word = words[0]; 
+    let first_word = words[0];
     // 获取第一个单词
-    let last_word = words[words.len() - 1]; 
+    let last_word = words[words.len() - 1];
     // 获取最后一个单词
-    println!("First word: {}, Last word: {}", first_word, last_word); 
+    println!("First word: {}, Last word: {}", first_word, last_word);
     // 输出: First word: The, Last word: dog
 
     // 反转单词
     let reversed_words: Vec<&str> = words.iter().rev().cloned().collect();
-    println!("Reversed words: {:?}", reversed_words); 
+    println!("Reversed words: {:?}", reversed_words);
     // 输出: Reversed words: ["dog", "lazy", "the", "over", "jumps", "fox", "brown", "quick", "The"]
     println!("Reversed words: {}", reversed_words.join(" "));
     // 输出: Reversed words: dog lazy the over jumps fox brown quick The
@@ -126,4 +125,3 @@ pub fn test_slice03() {
     println!("Words: {}", words.join(" "));
     // 输出: Words: The quick brown fox jumps over the lazy dog
 }
-

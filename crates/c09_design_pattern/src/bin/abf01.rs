@@ -3,4 +3,3 @@ use c09_design_pattern::creational::abstract_factory::enum_trait::test_abstract_
 fn main() {
     test_abstract_factory();
 }
-

@@ -1,3 +1,2 @@
-pub mod interger;
 pub mod float;
-
+pub mod interger;

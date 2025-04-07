@@ -10,12 +10,12 @@ fn main() {
     println!("Before transfer:");
     println!("Source: {:?}", source);
     println!("Destination: {:?}", destination);
-    
+
     // 转移元素
     transfer_elements(&mut source, &mut destination);
 
     println!("After transfer:");
-    println!("Source: {:?}", source);       // source 现在为空
+    println!("Source: {:?}", source); // source 现在为空
     println!("Destination: {:?}", destination); // destination 包含转移的元素
 }
 

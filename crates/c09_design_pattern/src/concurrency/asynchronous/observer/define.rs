@@ -1,6 +1,6 @@
-use tokio::sync::mpsc;
-use tokio::time::{sleep, Duration};
 use tokio::signal;
+use tokio::sync::mpsc;
+use tokio::time::{Duration, sleep};
 
 #[allow(unused)]
 #[derive(Debug)]
@@ -63,8 +63,6 @@ async fn observer_pattern() {
     sleep(Duration::from_secs(1)).await;
     subject.change_state("状态2").await;
 
-
-
     // 等待观察者完成
     let _ = tokio::join!(observer1, observer2, signal_handle);
     println!("主线程退出。");
@@ -79,4 +77,3 @@ mod tests {
         observer_pattern().await;
     }
 }
-

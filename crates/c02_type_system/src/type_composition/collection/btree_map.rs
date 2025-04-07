@@ -73,7 +73,6 @@ pub fn btree_map_demo02() {
     println!("清空后的 BTreeMap: {:?}", map);
 }
 
-
 #[allow(unused)]
 pub fn btree_map_demo03() {
     println!("btree_map_demo03");
@@ -81,7 +80,7 @@ pub fn btree_map_demo03() {
     let mut map1 = BTreeMap::new();
     map1.insert("apple", 3);
     map1.insert("banana", 2);
-    
+
     let mut map2 = BTreeMap::new();
     map2.insert("kiwi", 5);
     map2.insert("grape", 4);
@@ -96,7 +95,8 @@ pub fn btree_map_demo03() {
     }
 
     // 使用迭代器进行过滤
-    let filtered: Vec<_> = map1.iter()
+    let filtered: Vec<_> = map1
+        .iter()
         .filter(|&(_, &v)| v > 3) // 只保留值大于 3 的项
         .collect();
 
@@ -105,7 +105,6 @@ pub fn btree_map_demo03() {
         println!("{}: {}", key, value);
     }
 }
-
 
 #[allow(unused)]
 pub fn btree_map_demo04() {
@@ -124,7 +123,6 @@ pub fn btree_map_demo04() {
         println!("{}: {}", word, count);
     }
 }
-
 
 #[allow(unused)]
 pub fn btree_map_demo05() {
@@ -156,7 +154,6 @@ pub fn btree_map_demo05() {
     }
 }
 
-
 #[allow(unused)]
 pub fn btree_map_demo06() {
     println!("btree_map_demo06");
@@ -177,7 +174,6 @@ pub fn btree_map_demo06() {
     }
 }
 
-
 #[allow(unused)]
 pub fn btree_map_demo07() {
     println!("btree_map_demo07");
@@ -185,25 +181,24 @@ pub fn btree_map_demo07() {
     struct Graph {
         edges: BTreeMap<String, Vec<String>>,
     }
-    
+
     impl Graph {
         fn new() -> Self {
             Graph {
                 edges: BTreeMap::new(),
             }
         }
-    
+
         fn add_edge(&mut self, from: String, to: String) {
             self.edges.entry(from).or_insert_with(Vec::new).push(to);
         }
-    
+
         fn display(&self) {
             for (node, neighbors) in &self.edges {
                 println!("{} -> {:?}", node, neighbors);
             }
         }
     }
-    
 
     let mut graph = Graph::new();
     graph.add_edge("A".to_string(), "B".to_string());
@@ -212,9 +207,7 @@ pub fn btree_map_demo07() {
 
     // 打印图的结构
     graph.display();
-
 }
-
 
 #[allow(unused)]
 pub fn btree_map_demo08() {

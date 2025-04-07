@@ -45,7 +45,7 @@ pub fn vec_deque_demo01() {
     println!("删除尾部元素后的 VecDeque:");
     for value in &deque {
         println!("{}", value);
-    }   
+    }
 }
 
 #[allow(unused)]
@@ -62,7 +62,7 @@ pub fn vec_deque_demo02() {
 
     // 创建一个新的 VecDeque 来存储结果
     let mut new_deque = VecDeque::new();
-    
+
     for (i, &value) in deque.iter().enumerate() {
         if i == index {
             new_deque.push_back(value_to_insert); // 插入新元素
@@ -111,7 +111,7 @@ pub fn vec_deque_demo03() {
         capacity: usize,
         data: VecDeque<i32>,
     }
-    
+
     impl Cache {
         fn new(capacity: usize) -> Self {
             Cache {
@@ -119,14 +119,14 @@ pub fn vec_deque_demo03() {
                 data: VecDeque::new(),
             }
         }
-    
+
         fn insert(&mut self, value: i32) {
             if self.data.len() == self.capacity {
                 self.data.pop_front(); // 移除最旧的元素
             }
             self.data.push_back(value); // 添加新元素
         }
-    
+
         fn display(&self) {
             println!("缓存中的元素:");
             for value in &self.data {
@@ -134,7 +134,7 @@ pub fn vec_deque_demo03() {
             }
         }
     }
-    
+
     let mut cache = Cache::new(3);
     cache.insert(1);
     cache.insert(2);
@@ -144,7 +144,6 @@ pub fn vec_deque_demo03() {
     cache.insert(4); // 这将移除 1
     cache.display();
 }
-
 
 #[allow(unused)]
 pub fn vec_deque_demo04() {

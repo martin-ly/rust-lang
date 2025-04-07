@@ -80,16 +80,16 @@ fn interpreter() {
     // 表达式：x + y - 3
     let expression: Box<dyn Expression<i32>> = Box::new(Subtract {
         left: Box::new(Add {
-            left: Box::new(Variable{
+            left: Box::new(Variable {
                 name: "x".to_string(),
                 _marker: PhantomData,
             }),
-            right: Box::new(Variable{
+            right: Box::new(Variable {
                 name: "y".to_string(),
                 _marker: PhantomData,
             }),
         }),
-        right: Box::new(Constant::<i32> { value: 3}),
+        right: Box::new(Constant::<i32> { value: 3 }),
     });
 
     // 解释表达式

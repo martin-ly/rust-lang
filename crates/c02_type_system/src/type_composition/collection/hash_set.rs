@@ -1,4 +1,4 @@
-/* 
+/*
 
 在 Rust 中，HashSet 是一个基于哈希表的数据结构，提供了无序的唯一元素集合。
 它的主要特点是能够在平均常数时间内进行插入、删除和查找操作。
@@ -43,7 +43,6 @@ pub fn hash_set_demo01() {
     for value in &set {
         println!("{}", value);
     }
-
 }
 
 #[allow(unused)]
@@ -80,31 +79,39 @@ pub fn hash_set_demo03() {
         name: String,
         age: u32,
     }
-    
+
     impl Hash for Person {
         fn hash<H: Hasher>(&self, state: &mut H) {
             self.name.hash(state);
             self.age.hash(state);
         }
     }
-    
+
     impl PartialEq for Person {
         fn eq(&self, other: &Self) -> bool {
             self.name == other.name && self.age == other.age
         }
     }
-    
+
     let mut people = HashSet::new();
-    people.insert(Person { name: "Alice".to_string(), age: 30 });
-    people.insert(Person { name: "Bob".to_string(), age: 25 });
-    people.insert(Person { name: "Alice".to_string(), age: 30 }); // 重复的元素不会被插入
+    people.insert(Person {
+        name: "Alice".to_string(),
+        age: 30,
+    });
+    people.insert(Person {
+        name: "Bob".to_string(),
+        age: 25,
+    });
+    people.insert(Person {
+        name: "Alice".to_string(),
+        age: 30,
+    }); // 重复的元素不会被插入
 
     // 打印所有人
     println!("HashSet 中的人:");
     for person in &people {
         println!("{:?}", person);
     }
-
 }
 
 #[allow(unused)]
@@ -123,25 +130,28 @@ pub fn hash_set_demo05() {
     struct Graph {
         edges: HashMap<String, HashSet<String>>,
     }
-    
+
     impl Graph {
         fn new() -> Self {
             Graph {
                 edges: HashMap::new(),
             }
         }
-    
+
         fn add_edge(&mut self, from: String, to: String) {
-            self.edges.entry(from).or_insert_with(HashSet::new).insert(to);
+            self.edges
+                .entry(from)
+                .or_insert_with(HashSet::new)
+                .insert(to);
         }
-    
+
         fn display(&self) {
             for (node, neighbors) in &self.edges {
                 println!("{} -> {:?}", node, neighbors);
             }
         }
     }
-    
+
     let mut graph = Graph::new();
     graph.add_edge("A".to_string(), "B".to_string());
     graph.add_edge("A".to_string(), "C".to_string());
@@ -149,7 +159,6 @@ pub fn hash_set_demo05() {
 
     // 打印图的结构
     graph.display();
-
 }
 
 #[allow(unused)]

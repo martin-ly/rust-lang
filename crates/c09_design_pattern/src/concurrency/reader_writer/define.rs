@@ -34,32 +34,30 @@ fn reader_writer() {
     let shared_data = Arc::new(SharedData::new(0));
 
     let writers: Vec<_> = (0..3)
-    .map(|i| {
-        let shared_data = Arc::clone(&shared_data);
-        thread::spawn(move || {
-            // loop {
+        .map(|i| {
+            let shared_data = Arc::clone(&shared_data);
+            thread::spawn(move || {
+                // loop {
                 shared_data.write_data(i);
                 println!("Writer wrote: {}", i);
                 thread::sleep(Duration::from_millis(100));
-            // }
+                // }
+            })
         })
-    })
-    .collect();
+        .collect();
 
     let readers: Vec<_> = (0..3)
         .map(|_| {
             let shared_data = Arc::clone(&shared_data);
             thread::spawn(move || {
                 // loop {
-                    let data = shared_data.read_data();
-                    println!("Reader read: {}", data);
-                    thread::sleep(Duration::from_millis(100));
+                let data = shared_data.read_data();
+                println!("Reader read: {}", data);
+                thread::sleep(Duration::from_millis(100));
                 // }
             })
         })
         .collect();
-
-
 
     for reader in readers {
         reader.join().unwrap();
@@ -79,4 +77,3 @@ mod tests {
         reader_writer();
     }
 }
-

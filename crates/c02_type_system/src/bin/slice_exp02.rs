@@ -5,4 +5,3 @@ fn main() {
     test_slice02();
     test_slice03();
 }
-

@@ -29,9 +29,7 @@ pub struct ShapeGroup {
 
 impl ShapeGroup {
     pub fn new() -> Self {
-        ShapeGroup {
-            shapes: Vec::new(),
-        }
+        ShapeGroup { shapes: Vec::new() }
     }
 
     pub fn add_shape(&mut self, shape: Box<dyn Shape>) {
@@ -42,4 +40,3 @@ impl ShapeGroup {
         self.shapes.iter().map(|shape| shape.area()).sum()
     }
 }
-

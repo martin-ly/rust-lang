@@ -6,4 +6,3 @@ fn main() {
     binary_heap::binary_heap_demo03();
     binary_heap::binary_heap_demo04();
 }
-

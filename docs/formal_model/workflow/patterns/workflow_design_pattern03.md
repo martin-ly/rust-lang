@@ -137,6 +137,7 @@ $$WF = (S, s_0, A, \delta, F)$$
 
 多层持久化策略的决策过程可以形式化为函数：
 
+```math
 $$\text{persistence\_tier}(w) =
 \begin{cases}
 \text{memory}, & \text{if } \text{hotness}(w) > \theta_{hot} \\
@@ -145,6 +146,7 @@ $$\text{persistence\_tier}(w) =
 \end{cases}$$
 
 其中$\text{hotness}$是衡量工作流访问频率的函数，$\theta_{hot}$和$\theta_{warm}$是热度阈值。
+```
 
 **论证**：
   这种分层存储策略实现了时间和空间复杂度的平衡，热工作流的查询复杂度为$O(1)$，
@@ -159,6 +161,7 @@ $$\text{persistence\_tier}(w) =
 $$\max \sum_{i} w_i \cdot U_i$$
 
 其中：
+
 - $w_i$ 是工作流$i$的权重（基于优先级）
 - $U_i$ 是工作流$i$的效用函数，当工作流在截止时间前完成时为1，否则为0
 
@@ -168,11 +171,13 @@ $$\max \sum_{i} w_i \cdot U_i$$
 
 一致性哈希算法可以形式化定义为：
 
+```math
 $$h: K \times V \rightarrow [0, 1)$$
 
 其中K是键空间，V是节点空间。对于新增节点v，影响的键比例不超过：
 
 $$\frac{1}{|V|}$$
+```
 
 **论证**：通过一致性哈希，当集群节点发生变化时，工作流的重新分配量最小化，减少了系统震荡。
 
@@ -193,7 +198,7 @@ $$\Lambda(O) = \frac{P(O|H_1)}{P(O|H_0)}$$
 
 ## 4. 架构思维导图与知识要点
 
-```
+```text
 Rust工作流架构
 │
 ├── 理论基础

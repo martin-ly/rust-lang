@@ -6,7 +6,6 @@
 
 */
 
-
 #[allow(unused)]
 // 函数定义
 pub fn test_fn() {
@@ -21,13 +20,11 @@ pub struct TestStruct {
     y: i32,
 }
 
-
 // 枚举定义
 pub enum TestEnum {
     X(i32),
     Y(i32),
 }
-
 
 // 模块定义
 pub mod test_module {
@@ -42,13 +39,11 @@ pub const TEST_CONST: i32 = 10;
 // 静态变量定义
 pub static TEST_STATIC: i32 = 20;
 
-
 // 类型定义
 pub type TestType = i32;
 
 // 别名定义
 pub type TestAlias = i32;
-
 
 #[allow(unused)]
 // 宏定义
@@ -57,4 +52,3 @@ macro_rules! test_macro {
         println!("x is {}", $x);
     };
 }
-

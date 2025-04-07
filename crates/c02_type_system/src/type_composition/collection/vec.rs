@@ -73,7 +73,6 @@ pub fn test_vec02() {
     numbers.remove(2); // 删除索引2的元素
     println!("{:?}", numbers); // 输出: [1, 2, 4]
 
-
     let numbers = vec![1, 2, 3, 4];
     if let Some(pos) = numbers.iter().position(|&x| x == 3) {
         println!("Found 3 at index: {}", pos); // 输出: Found 3 at index: 2
@@ -84,7 +83,6 @@ pub fn test_vec02() {
     let mut numbers = vec![4, 2, 3, 1];
     numbers.sort(); // 对 Vec 进行排序
     println!("{:?}", numbers); // 输出: [1, 2, 3, 4]
-
 
     let mut numbers = vec![1, 2, 3, 4];
     numbers.reverse(); // 反转 Vec
@@ -116,7 +114,4 @@ pub fn test_vec02() {
         *number *= 2; // 将每个元素乘以2
     }
     println!("{:?}", numbers); // 输出: [2, 4, 6, 8, 10]
-
-
 }
-

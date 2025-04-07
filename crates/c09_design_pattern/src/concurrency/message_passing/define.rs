@@ -52,7 +52,6 @@ fn message_passing() {
     println!("Channel closed.");
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::*;

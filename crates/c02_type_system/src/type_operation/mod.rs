@@ -1,4 +1,3 @@
-
 /*
 
 从范畴论的角度来看，Rust的类型操作（如定义、等价、新类型、类型别名和类型相等）
@@ -13,7 +12,7 @@
 这些定义为程序提供了新的数据结构和操作方式。
 
 - **结构体和枚举**：定义新的类型，组合原生类型，形成更复杂的结构。
-  
+
   ```rust
   struct Point {
       x: f64,
@@ -86,9 +85,8 @@ Rust的类型操作（如定义、等价、新类型、类型别名和类型相�
 
 pub mod newtype;
 pub mod subtype_relation;
-pub mod type_conversion;
-pub mod type_equality;
-pub mod type_definition;
-pub mod type_equivalence;
 pub mod type_composition;
-
+pub mod type_conversion;
+pub mod type_definition;
+pub mod type_equality;
+pub mod type_equivalence;

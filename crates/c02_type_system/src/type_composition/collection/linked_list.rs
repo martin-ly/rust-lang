@@ -41,7 +41,7 @@ pub fn linked_list_demo01() {
     println!("删除尾部元素后的链表:");
     for value in &list {
         println!("{}", value);
-    }    
+    }
 }
 
 #[allow(unused)]
@@ -91,7 +91,7 @@ pub fn linked_list_demo02() {
     println!("删除元素后的链表:");
     for value in &list {
         println!("{}", value);
-    }    
+    }
 }
 
 #[allow(unused)]
@@ -100,39 +100,38 @@ pub fn linked_list_demo03() {
     struct Queue<T> {
         list: LinkedList<T>,
     }
-    
+
     impl<T> Queue<T> {
         fn new() -> Self {
             Queue {
                 list: LinkedList::new(),
             }
         }
-    
+
         fn enqueue(&mut self, item: T) {
             self.list.push_back(item);
         }
-    
+
         fn dequeue(&mut self) -> Option<T> {
             self.list.pop_front()
         }
-    
+
         fn is_empty(&self) -> bool {
             self.list.is_empty()
         }
     }
-    
+
     let mut queue = Queue::new();
     queue.enqueue(1);
     queue.enqueue(2);
     queue.enqueue(3);
-    
+
     println!("队列中的元素:");
     while !queue.is_empty() {
         if let Some(value) = queue.dequeue() {
             println!("{}", value);
         }
     }
-
 }
 
 #[allow(unused)]
@@ -140,7 +139,7 @@ pub fn linked_list_demo04() {
     println!("linked_list_demo04");
     let mut vec = Vec::new();
     let mut linked_list = LinkedList::new();
-    
+
     let data: Vec<i32> = (1..=1_000_000).collect();
 
     // 测试 Vec 的插入性能
@@ -178,25 +177,28 @@ pub fn linked_list_demo05() {
     struct Graph {
         edges: HashMap<String, LinkedList<String>>,
     }
-    
+
     impl Graph {
         fn new() -> Self {
             Graph {
                 edges: HashMap::new(),
             }
         }
-    
+
         fn add_edge(&mut self, from: String, to: String) {
-            self.edges.entry(from).or_insert_with(LinkedList::new).push_back(to);
+            self.edges
+                .entry(from)
+                .or_insert_with(LinkedList::new)
+                .push_back(to);
         }
-    
+
         fn display(&self) {
             for (node, neighbors) in &self.edges {
                 println!("{} -> {:?}", node, neighbors);
             }
         }
     }
-    
+
     let mut graph = Graph::new();
     graph.add_edge("A".to_string(), "B".to_string());
     graph.add_edge("A".to_string(), "C".to_string());
@@ -204,7 +206,6 @@ pub fn linked_list_demo05() {
 
     // 打印图的结构
     graph.display();
-
 }
 
 #[allow(unused)]
@@ -213,27 +214,26 @@ pub fn linked_list_demo06() {
     struct Queue<T> {
         list: LinkedList<T>,
     }
-    
+
     impl<T> Queue<T> {
         fn new() -> Self {
             Queue {
                 list: LinkedList::new(),
             }
         }
-    
+
         fn enqueue(&mut self, item: T) {
             self.list.push_back(item);
         }
-    
+
         fn dequeue(&mut self) -> Option<T> {
             self.list.pop_front()
         }
-    
+
         fn is_empty(&self) -> bool {
             self.list.is_empty()
         }
     }
-    
 
     let mut queue = Queue::new();
     queue.enqueue(1);
@@ -246,5 +246,4 @@ pub fn linked_list_demo06() {
             println!("{}", value);
         }
     }
-
 }

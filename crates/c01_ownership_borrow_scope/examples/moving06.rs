@@ -21,13 +21,9 @@ fn main() {
     let data2 = Data::new(20);
 
     // 创建线程并移动数据到线程中
-    let handle1 = thread::spawn(move || {
-        data1.process()
-    });
+    let handle1 = thread::spawn(move || data1.process());
 
-    let handle2 = thread::spawn(move || {
-        data2.process()
-    });
+    let handle2 = thread::spawn(move || data2.process());
 
     // 等待线程完成并获取结果
     let result1 = handle1.join().unwrap();

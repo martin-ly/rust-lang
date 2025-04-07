@@ -22,7 +22,10 @@ struct Rectangle {
 
 impl Shape for Rectangle {
     fn draw(&self) {
-        println!("Drawing a Rectangle with width: {} and height: {}", self.width, self.height);
+        println!(
+            "Drawing a Rectangle with width: {} and height: {}",
+            self.width, self.height
+        );
     }
 }
 
@@ -45,7 +48,10 @@ struct RectangleFactory;
 
 impl ShapeFactory for RectangleFactory {
     fn create_shape(&self) -> Box<dyn Shape> {
-        Box::new(Rectangle { width: 4.0, height: 3.0 })
+        Box::new(Rectangle {
+            width: 4.0,
+            height: 3.0,
+        })
     }
 }
 

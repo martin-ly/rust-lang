@@ -89,9 +89,9 @@ fn refcell_match() {
     let rectangle_positions = rectangle.get_shape_position();
 
     // 输出: Circle Position: [(5, 5)]
-    println!("Circle Position: {:?}", circle_positions); 
+    println!("Circle Position: {:?}", circle_positions);
     // 输出: Rectangle Positions: [(3, 3), (5, 5)]
-    println!("Rectangle Positions: {:?}", rectangle_positions); 
+    println!("Rectangle Positions: {:?}", rectangle_positions);
 }
 
 #[cfg(test)]

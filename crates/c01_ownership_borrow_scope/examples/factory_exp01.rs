@@ -9,7 +9,3 @@ fn main() {
     println!("Product 1 ID: {}", product1.get_id()); // 输出 1
     println!("Product 2 ID: {}", product2.get_id()); // 输出 2
 }
-
-
-
-

@@ -25,7 +25,7 @@
    - **泛型（Generics）**：
    Rust的泛型允许在编译时定义函数和数据结构，使其能够处理不同类型的数据。
    通过使用泛型，Rust能够在编译时生成特定类型的代码，从而实现静态多态。
-    
+
      ```rust
      fn print_value<T: std::fmt::Display>(value: T) {
          println!("{}", value);
@@ -37,7 +37,7 @@
    Rust的特征提供了一种动态多态的机制。
    特征定义了一组方法的接口，任何实现了该特征的类型都可以被视为该特征的类型。
    通过使用特征对象（trait objects），可以在运行时实现动态分发。
-   
+
      ```rust
      trait Shape {
          fn area(&self) -> f64;
@@ -68,7 +68,7 @@
 4. **枚举（Enums）**：
    - Rust的枚举类型可以包含不同类型的值，这也可以被视为一种多态。
    通过模式匹配，可以在运行时处理不同的枚举变体。
-   
+
      ```rust
      enum Shape {
          Circle(f64),
@@ -86,5 +86,5 @@
 这些多态的分类使得Rust在处理不同类型和实现时具有灵活性和强大的表达能力。
 */
 
-pub mod trait_object;
 pub mod generic_trait;
+pub mod trait_object;

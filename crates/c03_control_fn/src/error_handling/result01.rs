@@ -21,7 +21,6 @@ impl fmt::Display for MyError {
 // 实现 std::error::Error trait
 impl std::error::Error for MyError {}
 
-
 #[allow(unused)]
 // 计算除法
 fn divide(numerator: f64, denominator: f64) -> Result<f64, MyError> {

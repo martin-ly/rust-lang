@@ -93,5 +93,3 @@ mod tests {
         template_method_test();
     }
 }
-
-

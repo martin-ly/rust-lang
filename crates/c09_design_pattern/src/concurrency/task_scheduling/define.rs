@@ -1,6 +1,6 @@
-use tokio::time::{sleep, Duration};
-use std::sync::{Arc, Mutex};
 use std::collections::VecDeque;
+use std::sync::{Arc, Mutex};
+use tokio::time::{Duration, sleep};
 
 #[allow(unused)]
 #[derive(Debug)]
@@ -58,10 +58,18 @@ async fn task_scheduling() {
     });
 
     // 添加任务
-    scheduler.add_task(Task::HighPriority("任务 1".to_string())).await;
-    scheduler.add_task(Task::LowPriority("任务 2".to_string())).await;
-    scheduler.add_task(Task::HighPriority("任务 3".to_string())).await;
-    scheduler.add_task(Task::LowPriority("任务 4".to_string())).await;
+    scheduler
+        .add_task(Task::HighPriority("任务 1".to_string()))
+        .await;
+    scheduler
+        .add_task(Task::LowPriority("任务 2".to_string()))
+        .await;
+    scheduler
+        .add_task(Task::HighPriority("任务 3".to_string()))
+        .await;
+    scheduler
+        .add_task(Task::LowPriority("任务 4".to_string()))
+        .await;
 
     // 等待一段时间后关闭
     sleep(Duration::from_secs(10)).await;

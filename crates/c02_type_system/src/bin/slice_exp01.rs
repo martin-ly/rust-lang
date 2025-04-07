@@ -6,5 +6,3 @@ fn main() {
     test_mut_slice_assign();
     test_slice_iter();
 }
-
-

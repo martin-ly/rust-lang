@@ -8,10 +8,9 @@ HashMap 是 Rust 标准库中 std::collections 模块的一部分。
         V 是值的类型，可以是任何类型。
 */
 
-use std::collections::{HashMap, BTreeMap, HashSet};
+use std::collections::{BTreeMap, HashMap, HashSet};
 use std::hash::Hash;
 use std::time::Instant;
-
 
 #[allow(unused)]
 pub fn hash_map_demo01() {
@@ -45,7 +44,6 @@ pub fn hash_map_demo01() {
     }
 }
 
-
 #[allow(unused)]
 pub fn hash_map_demo02() {
     println!("hash_map_demo02");
@@ -64,7 +62,6 @@ pub fn hash_map_demo02() {
     }
 }
 
-
 #[allow(unused)]
 pub fn hash_map_demo03() {
     println!("hash_map_demo03");
@@ -75,17 +72,27 @@ pub fn hash_map_demo03() {
     }
 
     let mut people = HashMap::new();
-    people.insert(Person { name: "Alice".to_string(), age: 30 }, "Engineer");
-    people.insert(Person { name: "Bob".to_string(), age: 25 }, "Designer");
+    people.insert(
+        Person {
+            name: "Alice".to_string(),
+            age: 30,
+        },
+        "Engineer",
+    );
+    people.insert(
+        Person {
+            name: "Bob".to_string(),
+            age: 25,
+        },
+        "Designer",
+    );
 
     // 打印所有人及其职业
     println!("HashMap 中的人及其职业:");
     for (person, job) in &people {
         println!("{:?}: {}", person, job);
     }
-    
 }
-
 
 #[allow(unused)]
 pub fn hash_map_demo04() {
@@ -109,7 +116,7 @@ pub fn hash_map_demo05() {
     println!("hash_map_demo05");
     let mut hash_map = HashMap::new();
     let mut btree_map = BTreeMap::new();
-    
+
     let data: Vec<i32> = (1..=1_000_000).collect();
 
     // 测试 HashMap 的插入性能
@@ -142,34 +149,36 @@ pub fn hash_map_demo05() {
         btree_map.get(&value);
     }
     let duration = start.elapsed();
-    println!("BTreeMap 查找时间: {:?}", duration); 
+    println!("BTreeMap 查找时间: {:?}", duration);
 }
-
 
 #[allow(unused)]
 pub fn hash_map_demo06() {
     struct Graph {
         edges: HashMap<String, HashSet<String>>,
     }
-    
+
     impl Graph {
         fn new() -> Self {
             Graph {
                 edges: HashMap::new(),
             }
         }
-    
+
         fn add_edge(&mut self, from: String, to: String) {
-            self.edges.entry(from).or_insert_with(HashSet::new).insert(to);
+            self.edges
+                .entry(from)
+                .or_insert_with(HashSet::new)
+                .insert(to);
         }
-    
+
         fn display(&self) {
             for (node, neighbors) in &self.edges {
                 println!("{} -> {:?}", node, neighbors);
             }
         }
     }
-    
+
     println!("hash_map_demo06");
     let mut graph = Graph::new();
     graph.add_edge("A".to_string(), "B".to_string());
@@ -178,7 +187,4 @@ pub fn hash_map_demo06() {
 
     // 打印图的结构
     graph.display();
-    
 }
-
-

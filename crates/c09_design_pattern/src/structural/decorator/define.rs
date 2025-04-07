@@ -46,5 +46,3 @@ mod tests {
         test_decorator();
     }
 }
-
-

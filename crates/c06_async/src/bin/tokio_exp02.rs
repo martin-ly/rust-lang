@@ -1,5 +1,5 @@
-use tokio::time::{sleep, Duration};
 use std::error::Error;
+use tokio::time::{Duration, sleep};
 
 async fn async_task_with_error(id: u32) -> Result<(), Box<dyn Error>> {
     if id == 2 {
@@ -13,7 +13,11 @@ async fn async_task_with_error(id: u32) -> Result<(), Box<dyn Error>> {
 
 #[tokio::main]
 async fn main() {
-    let tasks = vec![async_task_with_error(1), async_task_with_error(2), async_task_with_error(3)];
+    let tasks = vec![
+        async_task_with_error(1),
+        async_task_with_error(2),
+        async_task_with_error(3),
+    ];
 
     for task in tasks {
         match task.await {

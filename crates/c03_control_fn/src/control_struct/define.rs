@@ -2,12 +2,11 @@
     控制结构是编程语言中用于控制程序流程的结构。
     Rust 中的控制结构包括条件语句、循环、函数等。
     包括条件语句（如 if、match）、循环（如 for、while）等。
-    
+
     控制结构可以被视为组合态射，它们根据条件选择不同的执行路径，
     将输入（如变量、常量）映射到输出（如程序流程）。
 
 */
-
 
 #[allow(unused)]
 pub fn test_control_struct() {
@@ -18,8 +17,7 @@ pub fn test_control_struct() {
     } else {
         println!("x is negative");
     }
-}  
-
+}
 
 /*
 控制结构（Control Structure）与表达式（Expression）：
@@ -35,7 +33,3 @@ pub fn test_control_struct_2() {
     let result = if condition { 1 } else { 0 }; // 控制结构作为表达式
     println!("result is {}", result);
 }
-
-
-
-

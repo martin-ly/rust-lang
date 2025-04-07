@@ -72,6 +72,3 @@ pub fn string_operation_2() {
     new_string.clear();
     println!("After clear: {}", new_string); // 输出: After clear: 
 }
-
-
-

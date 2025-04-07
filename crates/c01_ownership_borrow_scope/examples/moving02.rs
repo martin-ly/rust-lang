@@ -7,7 +7,7 @@ fn main() {
     let mut numbers = vec![1, 2, 3, 4, 5, 3, 6];
 
     println!("Before removal: {:?}", numbers);
-    
+
     // 删除所有值为 3 的元素
     remove_item(&mut numbers, 3);
 

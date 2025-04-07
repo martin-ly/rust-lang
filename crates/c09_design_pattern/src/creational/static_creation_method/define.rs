@@ -66,4 +66,3 @@ mod tests {
         test_static_creation_method();
     }
 }
-

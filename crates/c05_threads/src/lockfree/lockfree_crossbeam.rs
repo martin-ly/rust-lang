@@ -1,5 +1,3 @@
-
-
 use crossbeam::queue::ArrayQueue;
 // use crossbeam::atomic::AtomicCell;
 // use crossbeam::epoch::{Atomic, Owned, Shared};
@@ -30,7 +28,4 @@ pub fn lockfree_crossbeam_demo01() {
 #[allow(unused)]
 pub fn lockfree_crossbeam_demo02() {
     println!("lockfree_crossbeam_demo02");
-
-
 }
-

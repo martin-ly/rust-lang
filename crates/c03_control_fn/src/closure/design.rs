@@ -8,8 +8,8 @@ where
 {
     data.into_iter()
         .filter(filter_fn) // 使用闭包进行过滤
-        .map(map_fn)      // 使用闭包进行映射
-        .collect()        // 收集结果
+        .map(map_fn) // 使用闭包进行映射
+        .collect() // 收集结果
 }
 
 #[allow(unused)]

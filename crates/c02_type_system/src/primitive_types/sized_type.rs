@@ -1,4 +1,3 @@
-
 /*
 
 Sized trait 是 Rust 中的一个 trait，用于限制类型的大小。
@@ -17,7 +16,7 @@ Sized trait 是 Rust 中的一个 trait，用于限制类型的大小。
         例如，i32、f64、bool 和 char 都是固定大小的类型，因此它们都实现了 Sized trait。
     使用 Sized Trait：
         在 Rust 中，许多函数和数据结构要求其类型实现 Sized trait。
-        这意味着你可以安全地使用标量类型作为函数参数、返回值或存储在数据结构中。  
+        这意味着你可以安全地使用标量类型作为函数参数、返回值或存储在数据结构中。
 
 标量类型（Scalar Types）
 定义：
@@ -33,26 +32,32 @@ Rust 中的标量类型主要包括：
 
 */
 
-use std::fmt::Debug;
 use std::any::type_name;
+use std::fmt::Debug;
 use std::mem::size_of_val;
 
 #[allow(unused)]
 pub fn print_sized_value<T: Sized + Debug>(value: T, type_name: &str) {
     // 这里 T 必须实现 Sized trait
-    println!("sized-type: Size of Value: {:?} bytes,Type: {}", size_of_val(&value), type_name);
+    println!(
+        "sized-type: Size of Value: {:?} bytes,Type: {}",
+        size_of_val(&value),
+        type_name
+    );
     println!("sized-type: Value: {:?}, Type: {}", value, type_name);
     println!("--------------------------------");
 }
 
-
 #[allow(unused)]
 pub fn print_unsized_value<T: ?Sized + Debug>(value: &T, type_name: &str) {
-    println!("unsized-type: Size of Value: {:?} bytes,Type: {}", size_of_val(value), type_name);
+    println!(
+        "unsized-type: Size of Value: {:?} bytes,Type: {}",
+        size_of_val(value),
+        type_name
+    );
     println!("unsized-type: Value: {:?}, Type: {}", value, type_name);
     println!("--------------------------------");
 }
-
 
 #[allow(unused)]
 pub fn test_sized_type() -> () {
@@ -84,4 +89,3 @@ pub fn test_unsized_type() -> () {
     print_unsized_value(b, type_name::<&[i32]>());
     print_unsized_value(c, type_name::<&String>());
 }
-

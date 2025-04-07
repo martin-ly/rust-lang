@@ -1,6 +1,6 @@
-use tokio::sync::Semaphore;
-use tokio::time::{sleep, Duration};
 use std::sync::Arc;
+use tokio::sync::Semaphore;
+use tokio::time::{Duration, sleep};
 
 async fn limited_task(id: u32, semaphore: Arc<Semaphore>) {
     let _permit = semaphore.acquire().await.unwrap(); // 获取许可

@@ -20,7 +20,7 @@ pub fn test_statement() {
     // 条件语句
     if x > 0 {
         println!("x is positive");
-    } else{
+    } else {
         println!("x is negative");
     }
 }
@@ -38,7 +38,8 @@ pub fn test_statement() {
 #[allow(unused)]
 pub fn test_statement_2() {
     let x = 5; // 语句，包含表达式
-    let y = { // 语句，包含块表达式
+    let y = {
+        // 语句，包含块表达式
         let temp = x + 2; // 表达式
         temp * 2 // 表达式
     };

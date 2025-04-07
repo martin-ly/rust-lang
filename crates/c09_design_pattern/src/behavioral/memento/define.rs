@@ -12,8 +12,8 @@ struct Originator<T> {
     state: T,
 }
 
-impl<T> Originator<T> 
-where 
+impl<T> Originator<T>
+where
     T: Clone, // 确保 T 可以克隆
 {
     fn new(state: T) -> Self {
@@ -44,7 +44,9 @@ struct Caretaker<T> {
 
 impl<T> Caretaker<T> {
     fn new() -> Self {
-        Caretaker { mementos: Vec::new() }
+        Caretaker {
+            mementos: Vec::new(),
+        }
     }
 
     fn add_memento(&mut self, memento: Memento<T>) {

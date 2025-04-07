@@ -1,10 +1,10 @@
 use crossterm::{
-    event::{self, KeyCode, EnableMouseCapture, DisableMouseCapture},
+    event::{self, DisableMouseCapture, EnableMouseCapture, KeyCode},
     execute,
     terminal::{self, ClearType},
 };
 use std::io::{self};
-use tokio::time::{sleep, Duration};
+use tokio::time::{Duration, sleep};
 
 #[tokio::main]
 async fn main() -> io::Result<()> {

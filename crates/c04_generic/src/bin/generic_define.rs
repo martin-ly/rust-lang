@@ -1,4 +1,3 @@
-
 use c04_generic::generic_define::*;
 
 fn main() {
@@ -16,7 +15,6 @@ fn main() {
     println!("The largest number is {}", largest);
     println!("numbers: {:?}", numbers);
 
-
     let string1 = String::from("long string");
     let string2 = String::from("short");
 
@@ -25,7 +23,7 @@ fn main() {
 
     // 生命周期参数 不匹配
     // 错误：`string4` 在 `result` 的生存期结束之前就已经被释放了
-    /* 
+    /*
     let string3 = String::from("long string is long");
     let result;
     {
@@ -35,12 +33,10 @@ fn main() {
     println!("The longest string is {}", result);
     */
 
-
     let dog = Dog {
         name: String::from("Buddy"),
     };
     print_description(dog);
 
     hashmap_test();
-    
 }

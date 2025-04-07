@@ -168,6 +168,5 @@ fn main() {
 
 **/
 
-
-pub mod composite;
 pub mod collection;
+pub mod composite;

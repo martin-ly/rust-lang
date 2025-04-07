@@ -1,5 +1,3 @@
-
-
 /*
 1. 终对象 (Terminal Object)
 定义:

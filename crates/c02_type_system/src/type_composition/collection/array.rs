@@ -70,7 +70,6 @@ pub fn test_array05() {
     println!("{:?}", matrix); // 输出: [[1, 2, 3], [4, 5, 6]]
 }
 
-
 //Rust允许直接比较两个数组，前提是它们的类型和长度相同
 #[allow(unused)]
 pub fn test_array06() {
@@ -80,5 +79,3 @@ pub fn test_array06() {
     println!("{}", arr1 == arr2); // 输出: true
     println!("{}", arr1 != arr3); // 输出: true
 }
-
-

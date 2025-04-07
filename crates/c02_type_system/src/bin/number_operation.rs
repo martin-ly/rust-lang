@@ -1,5 +1,5 @@
-use c02_type_system::primitive_types::scalar_types::number::interger::*;
 use c02_type_system::primitive_types::scalar_types::number::float::*;
+use c02_type_system::primitive_types::scalar_types::number::interger::*;
 
 fn main() {
     interger_operation();

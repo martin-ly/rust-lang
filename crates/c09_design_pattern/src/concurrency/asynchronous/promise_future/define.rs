@@ -1,8 +1,8 @@
-use tokio::time::{sleep, Duration};
 use std::sync::{Arc, Mutex};
+use tokio::time::{Duration, sleep};
 
 #[allow(unused)]
-#[derive(Debug,Clone)]
+#[derive(Debug, Clone)]
 struct Promise<T> {
     result: Arc<Mutex<Option<T>>>,
 }
@@ -54,10 +54,12 @@ async fn promise_future() {
     });
 
     // 使用 then 方法处理结果
-    let result = promise.then(|value| {
-        println!("处理结果: {}", value);
-        value + 1 // 处理后的结果
-    }).await;
+    let result = promise
+        .then(|value| {
+            println!("处理结果: {}", value);
+            value + 1 // 处理后的结果
+        })
+        .await;
 
     if let Some(res) = result {
         println!("最终结果: {}", res);

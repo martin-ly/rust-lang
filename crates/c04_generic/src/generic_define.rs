@@ -27,8 +27,6 @@ Rust 的泛型机制是其强大类型系统的重要组成部分，允许开发
 */
 use std::collections::HashMap;
 
-
-
 #[allow(unused)]
 // 定义一个泛型结构体
 pub struct Point<T> {
@@ -70,11 +68,7 @@ pub fn largest<T: PartialOrd>(list: &[T]) -> &T {
 #[allow(unused)]
 // 定义一个带有生命周期参数的函数
 pub fn longest<'a>(s1: &'a str, s2: &'a str) -> &'a str {
-    if s1.len() > s2.len() {
-        s1
-    } else {
-        s2
-    }
+    if s1.len() > s2.len() { s1 } else { s2 }
 }
 
 // 定义一个特征
@@ -99,9 +93,9 @@ pub fn print_description<T: Describable>(item: T) {
     println!("{}", item.describe());
 }
 
-//泛型集合类型 
+//泛型集合类型
 #[allow(unused)]
-pub fn hashmap_test()->(){
+pub fn hashmap_test() -> () {
     let mut scores: HashMap<String, i32> = HashMap::new();
     scores.insert(String::from("Alice"), 50);
     scores.insert(String::from("Bob"), 70);

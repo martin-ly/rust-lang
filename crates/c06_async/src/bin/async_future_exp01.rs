@@ -12,4 +12,3 @@ async fn main() {
     let result = my_future.await; // 等待 Future 完成
     println!("Future 完成，结果: {}", result);
 }
-

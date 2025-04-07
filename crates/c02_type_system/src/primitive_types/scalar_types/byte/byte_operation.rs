@@ -1,4 +1,4 @@
-/* 
+/*
 在 Rust 中，`byte` 通常指的是一个字节（8 位），用于表示原始数据。
 Rust 提供了多种与字节相关的类型和操作，最常用的类型是 `u8`，
 它是一个无符号的 8 位整数，范围从 0 到 255。
@@ -13,8 +13,6 @@ Rust 提供了多种与字节相关的类型和操作，最常用的类型是 `u
 - **原始数据**：字节常用于处理原始数据，如文件 I/O、网络通信、图像处理等。
 - **字符编码**：字节也可以用于表示字符的 UTF-8 编码，尤其是在处理字符串时。
 */
-
-
 
 #[allow(unused)]
 pub fn test_byte_operation() -> () {
@@ -59,7 +57,7 @@ pub fn test_byte_operation() -> () {
     println!("Byte representation of 'A': {}", char_byte); // 打印: Byte representation of 'A': 65
 }
 
-/* 
+/*
 Byte value: 255
 Sum: 150
 Byte array: [1, 2, 3, 4, 5]

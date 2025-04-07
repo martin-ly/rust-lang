@@ -57,4 +57,3 @@ pub fn test_boolean_operation() -> () {
     let xnor_result = !(a ^ b); // 结果: false
     println!("!({} ^ {}) = {}", a, b, xnor_result); // 打印: !(true ^ false) = false
 }
-

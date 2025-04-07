@@ -1,4 +1,3 @@
-
 /*
 1. 初始对象 (Initial Object)
 定义:

@@ -36,4 +36,3 @@ mod tests {
         task_decomposition_test();
     }
 }
-

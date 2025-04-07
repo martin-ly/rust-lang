@@ -1,5 +1,5 @@
-use std::thread;
 use crossbeam::channel;
+use std::thread;
 // 使用示例
 #[allow(unused)]
 pub fn parallel_pipeline_test() {
@@ -50,5 +50,3 @@ mod tests {
         parallel_pipeline_test();
     }
 }
-
-

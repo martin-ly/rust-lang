@@ -4,4 +4,3 @@ fn main() {
     let runtime = tokio::runtime::Runtime::new().unwrap();
     runtime.block_on(process());
 }
-

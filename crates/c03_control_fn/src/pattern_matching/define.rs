@@ -10,7 +10,6 @@ match允许根据数据值的结构进行分支。
 */
 #[allow(unused)]
 pub fn test_pattern_match() {
-
     //可以使用|符号来匹配多个模式。
     fn describe_number01(num: i32) -> &'static str {
         match num {
@@ -55,10 +54,9 @@ pub fn test_pattern_match_2() -> () {
     let value = Some(10);
     match value {
         Some(x) => println!("Value is: {}", x), // 控制结构
-        None => println!("No value"), // 控制结构
+        None => println!("No value"),           // 控制结构
     }
 }
-
 
 /*
 match可以用来解构元组、结构体和枚举等复杂数据类型。
@@ -69,24 +67,22 @@ pub fn test_pattern_match_3() -> () {
         Circle(f64),
         Rectangle(f64, f64),
     }
-    
+
     enum Message {
         Shape(Shape),
         Quit,
     }
-    
+
     let msg = Message::Shape(Shape::Circle(3.0));
     fn process_message(msg: Message) {
         match msg {
             Message::Quit => println!("退出"),
-            Message::Shape(shape) => {
-                match shape {
-                    Shape::Circle(radius) => println!("圆的半径: {}", radius),
-                    Shape::Rectangle(width, height) => {
-                        println!("矩形的宽度: {}, 高度: {}", width, height);
-                    }
+            Message::Shape(shape) => match shape {
+                Shape::Circle(radius) => println!("圆的半径: {}", radius),
+                Shape::Rectangle(width, height) => {
+                    println!("矩形的宽度: {}, 高度: {}", width, height);
                 }
-            }
+            },
         }
     }
 
@@ -131,4 +127,3 @@ pub fn test_pattern_match_4() -> () {
     let none_value: Option<&str> = Option::None;
     describe_option(none_value);
 }
-

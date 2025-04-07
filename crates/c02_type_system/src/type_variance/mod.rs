@@ -91,7 +91,6 @@ fn main() {
 类型变异的概念在处理生命周期、泛型和函数类型时尤为重要。
 */
 
-pub mod covariance;
 pub mod contravariance;
+pub mod covariance;
 pub mod invariance;
-

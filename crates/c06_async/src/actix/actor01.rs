@@ -5,8 +5,6 @@ use actix::prelude::*;
 // use actix::System;
 // use actix::Context;
 
-
-
 #[allow(unused)]
 // 定义消息
 struct Ping;
@@ -38,7 +36,7 @@ impl Handler<Ping> for MyActor {
 #[allow(unused)]
 pub async fn actor_exp01() {
     // 启动 Actix 系统
-   // let system = System::new();
+    // let system = System::new();
 
     // 创建 Actor 实例
     let addr = MyActor.start();

@@ -70,5 +70,3 @@ mod tests {
         strategy_test();
     }
 }
-
-

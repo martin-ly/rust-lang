@@ -1,2 +1,2 @@
-pub mod oneshot;
 pub mod channel;
+pub mod oneshot;

@@ -39,7 +39,6 @@ value1, value2, ..., valueN 是数组的初始值。
 
 */
 
-
 #[allow(unused)]
 pub fn test_array() -> () {
     // 定义一个包含 5 个整数的数组
@@ -59,7 +58,6 @@ pub fn test_array() -> () {
         println!("{}", number); // 打印数组中的每个元素
     }
     println!("array: {:?}", numbers); // 打印? 可以打印数组 i32 是copy语义   
-
 
     // 定义一个数组并使用相同的值初始化
     let repeated: [i32; 4] = [0; 4]; // 创建一个包含 4 个 0 的数组
@@ -88,8 +86,8 @@ pub fn test_array_str() -> () {
 
 #[allow(unused)]
 pub fn test_array_string() -> () {
-     // 定义一个包含 3 个 String 类型的数组
-     let mut fruits: [String; 3] = [
+    // 定义一个包含 3 个 String 类型的数组
+    let mut fruits: [String; 3] = [
         String::from("Apple"),
         String::from("Banana"),
         String::from("Cherry"),
@@ -125,7 +123,6 @@ pub fn test_array_copy() -> () {
     println!("{:?}", arr2); // 打印 arr2: [1, 2, 3]
 }
 
-
 #[allow(unused)]
 pub fn test_array_clone() -> () {
     let arr1 = [1, 2, 3]; // 定义一个数组
@@ -135,11 +132,10 @@ pub fn test_array_clone() -> () {
     println!("{:?}", arr2); // 打印 arr2: [1, 2, 3]
 }
 
-
 #[allow(unused)]
 pub fn test_array_clone_str() -> () {
     let arr1 = ["Apple", "Banana", "Cherry"];
-    let arr2 = arr1.clone(); 
+    let arr2 = arr1.clone();
 
     println!("{:?}", arr1); // arr1 仍然有效: ["Apple", "Banana", "Cherry"]
     println!("{:?}", arr2); // 打印 arr2: ["Apple", "Banana", "Cherry"]
@@ -147,15 +143,14 @@ pub fn test_array_clone_str() -> () {
 
 #[allow(unused)]
 pub fn test_array_clone_string() -> () {
-    let arr1 = [String::from("Apple"), 
-                            String::from("Banana"), 
-                            String::from("Cherry")]; 
-    
-    let arr2 = arr1.clone(); 
+    let arr1 = [
+        String::from("Apple"),
+        String::from("Banana"),
+        String::from("Cherry"),
+    ];
+
+    let arr2 = arr1.clone();
 
     println!("{:?}", arr1); // arr1 仍然有效: ["Apple", "Banana", "Cherry"]
     println!("{:?}", arr2); // 打印 arr2: ["Apple", "Banana", "Cherry"]
 }
-
-
-

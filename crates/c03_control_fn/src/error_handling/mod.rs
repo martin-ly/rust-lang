@@ -19,6 +19,5 @@ Option：
     语法：Option<T>，其中T是值的类型。
 */
 
-
 pub mod define;
 pub mod result01;

@@ -1,5 +1,5 @@
 use tokio::sync::mpsc;
-use tokio::time::{sleep, Duration};
+use tokio::time::{Duration, sleep};
 
 #[allow(unused)]
 #[derive(Debug)]
@@ -22,7 +22,11 @@ async fn event_handler(mut rx: mpsc::Receiver<Event>) {
 }
 
 async fn user_input(tx: mpsc::Sender<Event>) {
-    let inputs = vec!["事件1".to_string(), "事件2".to_string(), "事件3".to_string()];
+    let inputs = vec![
+        "事件1".to_string(),
+        "事件2".to_string(),
+        "事件3".to_string(),
+    ];
 
     for input in inputs {
         tx.send(Event::UserInput(input)).await.unwrap();
@@ -58,4 +62,3 @@ mod tests {
         event_driven().await;
     }
 }
-

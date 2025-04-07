@@ -1,4 +1,4 @@
-use tokio::time::{sleep, Duration};
+use tokio::time::{Duration, sleep};
 
 // 定义一个异步函数
 async fn async_task(id: u32) {

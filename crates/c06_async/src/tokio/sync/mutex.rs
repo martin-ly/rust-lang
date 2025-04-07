@@ -1,6 +1,5 @@
-
-use tokio::sync::Mutex;
 use std::sync::Arc;
+use tokio::sync::Mutex;
 
 #[allow(unused)]
 pub async fn mutex_test01() {

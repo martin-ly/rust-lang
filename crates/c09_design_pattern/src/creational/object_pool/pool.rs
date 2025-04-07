@@ -6,7 +6,6 @@ struct ObjectPool<T> {
     pool: VecDeque<T>,
 }
 
-
 impl<T> ObjectPool<T> {
     // 创建一个新的对象池
     fn new() -> Self {
@@ -69,4 +68,3 @@ mod tests {
         test_object_pool();
     }
 }
-

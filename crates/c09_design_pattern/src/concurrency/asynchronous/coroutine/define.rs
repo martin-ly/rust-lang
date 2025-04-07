@@ -1,5 +1,5 @@
 use tokio::sync::mpsc;
-use tokio::time::{sleep, Duration};
+use tokio::time::{Duration, sleep};
 
 #[allow(unused)]
 #[derive(Debug)]

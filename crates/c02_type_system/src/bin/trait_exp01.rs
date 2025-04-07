@@ -1,4 +1,3 @@
-
 use c02_type_system::type_class::*;
 
 fn main() {
@@ -19,5 +18,4 @@ fn main() {
     advance::advance_trait_06();
     advance::advance_trait_07();
     advance::advance_trait_08();
-    
 }
