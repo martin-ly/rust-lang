@@ -70,7 +70,7 @@ Refine Language: Use precise terms. Distinguish between static structure and run
 **数据流 (Data Flow - Structural):**
     **主要体现:**
     `CellDefinition_S` 中的 `InT`, `OutT` 类型定义，
-    以及 `connectable_S` 规则 (R1) 中的类型相等检查 ` OutT =_T InT`。
+    以及 `connectable_S` 规则 (R1) 中的类型相等检查 `OutT =_T InT`。
     **含义:**
     它定义了在潜在的控制流路径上，**什么类型的数据可以流动**。
     类型的匹配是数据得以流动的结构性前提。
@@ -133,7 +133,7 @@ Refine Language: Use precise terms. Distinguish between static structure and run
     **结构层联系:**
     `Data -> Execution`:
     正确类型的数据 (`InT`) 是 Cell `LogicRef` (执行流代码) 得以执行的前提（类型安全）。
-    Effect 请求 (`ReqT`) 和响应 (`ResT`/`ErrT`) 的类型 (`EffectType_S`) 
+    Effect 请求 (`ReqT`) 和响应 (`ResT`/`ErrT`) 的类型 (`EffectType_S`)
     约束了 Handler (`HandlerImpl_S`) 的接口 (`HandlerSigT`) 和实现。
     `Execution -> Data`:
     Cell 的执行 (`LogicRef`) **产生**了特定类型的数据 (`OutT`)；

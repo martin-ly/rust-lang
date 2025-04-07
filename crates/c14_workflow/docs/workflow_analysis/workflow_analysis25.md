@@ -200,7 +200,7 @@ AI 可以基于这一层理解系统的结构图、依赖关系和类型流。
     `PostCond_S`: 公式 ∈ `L` (描述成功执行后 `WSM` 的状态变化或属性)。
     `PostCond_F`: 公式 ∈ `L` (描述失败执行后 `WSM` 的状态变化或属性)。
     `OntologyLink_E?`: 可选，指向 `Ont` 中对应概念的链接。
-`CellDefinition_Sem`: 
+`CellDefinition_Sem`:
 定义为一个元组 `C_Sem = <C_S, AbstractState, StateInv, LogicSpec_Sem, OntologyLink_C?>`
     `C_S`: 对应的 `CellDefinition_S`。
     `AbstractState`: `Set<StateVar>` (该 Cell 内部状态中与全局 `WSM` 或逻辑推理相关的部分)。
@@ -208,7 +208,7 @@ AI 可以基于这一层理解系统的结构图、依赖关系和类型流。
     `LogicSpec_Sem`: 对 `C_S::LogicRef` 指向的逻辑的**形式化规范**。
     例如，使用 Hoare 三元组 `{P} logic {Q_S | Q_F}`，其中 P 是输入和初始状态的条件，Q_S/Q_F 是输出、最终状态和产生的 Effect 请求集合的后置条件。
     `OntologyLink_C?`: 可选，指向 `Ont` 中对应业务能力或流程步骤的链接。
-`DeploymentConfig_Sem`: 
+`DeploymentConfig_Sem`:
     `D_Sem = <DeployedCells_Sem, DeployedHandlers_Sem, StaticTopology_Sem, InitialWorldStateSpec>`
     包含语义增强的对象集合。
     `InitialWorldStateSpec`: 对系统启动时 `WSM` 的初始状态的规范。
