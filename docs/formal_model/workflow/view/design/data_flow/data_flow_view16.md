@@ -9743,9 +9743,6 @@ impl MappingBestPractices {
     pub fn select_strategy_for_scenario(scenario: &MappingScenario) -> &'static str {
         match scenario {
             MappingScenario::SimpleDtoMapping => "宏生成或代码生成是效率最高的选择，因为这些映射通常是直接的字段对应。",
-            MappingScenario::ComplexDomainMapping => "手动映射
-
-```rust
             MappingScenario::ComplexDomainMapping => "手动映射提供最好的控制性和明确性，对于复杂的领域逻辑转换至关重要。",
             MappingScenario::ExternalSystemIntegration => "使用特征框架结合防腐层模式，隔离外部系统变化，便于适配和测试。",
             MappingScenario::HighPerformanceMapping => "手动映射配合性能优化技术，如懒加载、批处理和缓存，针对热点路径定制。",
@@ -10039,7 +10036,8 @@ pub fn mapping_implementation_guide() -> String {
 
 ## 总结
 
-本文全面探讨了概念模型到实现代码的映射问题，从理论基础到实践策略，涵盖了不同层次和场景下的映射挑战与解决方案。通过Rust语言示例，展示了类型系统如何有效地表达领域概念，以及映射过程中需要注意的各种细节与优化策略。
+本文全面探讨了概念模型到实现代码的映射问题，从理论基础到实践策略，涵盖了不同层次和场景下的映射挑战与解决方案。
+通过Rust语言示例，展示了类型系统如何有效地表达领域概念，以及映射过程中需要注意的各种细节与优化策略。
 
 核心要点包括：
 
@@ -10053,4 +10051,5 @@ pub fn mapping_implementation_guide() -> String {
 
 5. **领域特定实践**：根据不同业务领域（金融、医疗、电商、物联网等）调整映射策略，满足特定需求。
 
-这些指导原则和最佳实践可以帮助开发者在设计映射时做出更明智的决策，实现概念模型到代码实现的高质量转换，同时保持系统的灵活性、可测试性和性能。
+这些指导原则和最佳实践可以帮助开发者在设计映射时做出更明智的决策，实现概念模型到代码实现的高质量转换，
+同时保持系统的灵活性、可测试性和性能。
