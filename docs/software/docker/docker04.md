@@ -52,9 +52,9 @@
     - [4.4 动态模块组合的形式化证明](#44-动态模块组合的形式化证明)
       - [4.4.1 定义(模块组合)](#441-定义模块组合)
       - [4.4.2 模块交互模型](#442-模块交互模型)
-      - [4.4.3 定理(模块接口稳定性)](#443-定理模块接口稳定性)
+      - [4.4.3 定理-模块接口稳定性](#443-定理-模块接口稳定性)
       - [4.4.4 热插拔形式化模型](#444-热插拔形式化模型)
-      - [4.4.5 定理(热插拔一致性)](#445-定理热插拔一致性)
+      - [4.4.5 定理-热插拔一致性](#445-定理-热插拔一致性)
   - [5. 资源隔离机制形式化分析](#5-资源隔离机制形式化分析)
     - [5.1 命名空间机制形式化定义](#51-命名空间机制形式化定义)
       - [5.1.1 定义(命名空间)](#511-定义命名空间)
@@ -69,6 +69,10 @@
       - [5.2.4 资源限制形式化表示](#524-资源限制形式化表示)
       - [5.2.5 定理(资源消耗上限)](#525-定理资源消耗上限)
     - [5.3 能力系统(Capabilities)形式化分析](#53-能力系统capabilities形式化分析)
+      - [5.3.1 定义(能力)](#531-定义能力)
+      - [5.3.2 能力集分类](#532-能力集分类)
+      - [5.3.3 定理(最小特权原则)](#533-定理最小特权原则)
+      - [5.3.4 能力转移规则](#534-能力转移规则)
     - [5.4 安全增强机制理论基础](#54-安全增强机制理论基础)
   - [6. 调度子系统数学模型](#6-调度子系统数学模型)
     - [6.1 完全公平调度器形式化定义](#61-完全公平调度器形式化定义)
@@ -786,7 +790,7 @@ $$I(M_1, M_2) = \{(s_1, s_2) | s_1 \in exports(M_1), s_2 \in imports(M_2)\} \cup
 
 其中 $exports(M)$ 是模块 $M$ 导出的符号集合，$imports(M)$ 是模块 $M$ 导入的符号集合。
 
-#### 4.4.3 定理(模块接口稳定性)
+#### 4.4.3 定理-模块接口稳定性
 
 如果在不同内核版本中模块 $M$ 的接口保持不变，则模块的兼容性更好:
 $$\forall K_1, K_2 \in Kernels: interface(M, K_1) = interface(M, K_2) \Rightarrow compatible(M, K_1) \land compatible(M, K_2)$$
@@ -809,14 +813,12 @@ $$\forall K_1, K_2 \in Kernels: interface(M, K_1) = interface(M, K_2) \Rightarro
 
 热插拔操作可表示为系统状态转换:
 
-$$\begin{align}
-hotplug: S \times M \rightarrow S' \\
-hotunplug: S \times M \rightarrow S''
-\end{align}$$
+$$\begin{align}hotplug: S \times M \rightarrow S' \\hotunplug: S \times M\rightarrow S''\end{align}$$
 
-其中 $hotplug(S, M)$ 表示在系统状态 $S$ 中热插入模块 $M$，$hotunplug(S, M)$ 表示在系统状态 $S$ 中热移除模块 $M$。
+其中 $hotplug(S, M)$ 表示在系统状态 $S$ 中热插入模块 $M$，
+$hotunplug(S, M)$ 表示在系统状态 $S$ 中热移除模块 $M$。
 
-#### 4.4.5 定理(热插拔一致性)
+#### 4.4.5 定理-热插拔一致性
 
 对于一个良好设计的模块 $M$，热插拔操作具有一致性:
 $$hotunplug(hotplug(S, M), M) \approx S$$
@@ -902,6 +904,7 @@ $$Controllers = \{cpu, memory, io, devices, pids, freezer, ...\}$$
 #### 5.2.3 定理(Cgroup层次结构属性)
 
 Cgroup层次结构具有以下属性:
+
 1. 每个层次结构可以附加一个或多个控制器
 2. 单个控制器可以附加到多个层次结构（在cgroup v1中）
 3. 进程只属于每个层次结构中的一个cgroup
@@ -932,22 +935,29 @@ $$\forall r \in resources: \sum_{p \in processes(cg)} usage(p, r) \leq limit(cg,
 
 ### 5.3 能力系统(Capabilities)形式化分析
 
-**定义 5.3.1 (能力)** Linux能力系统将传统的超级用户特权分解为细粒度的能力，形式化定义为:
+#### 5.3.1 定义(能力)
+
+Linux能力系统将传统的超级用户特权分解为细粒度的能力，形式化定义为:
 $$Capability = \{cap_1, cap_2, ..., cap_n\}$$
 
 其中每个 $cap_i$ 代表一项特定的权限，如网络管理、原始套接字访问等。
 
-**能力集分类 5.3.2** 进程的能力分为三个集合:
-$$\begin{align}
-CapSet = \{Permitted, Effective, Inheritable\}
-\end{align}$$
+#### 5.3.2 能力集分类
 
-其中 $Permitted$ 是进程可以使用的能力集，$Effective$ 是当前有效的能力集，$Inheritable$ 是可以传递给子进程的能力集。
+进程的能力分为三个集合:
+$$\begin{align}CapSet = \{Permitted, Effective, Inheritable\}\end{align}$$
 
-**定理 5.3.3 (最小特权原则)** 能力系统实现了最小特权原则，即每个进程只拥有完成其任务所需的最小权限集:
+其中 $Permitted$ 是进程可以使用的能力集，
+$Effective$ 是当前有效的能力集，$Inheritable$ 是可以传递给子进程的能力集。
+
+#### 5.3.3 定理(最小特权原则)
+
+能力系统实现了最小特权原则，即每个进程只拥有完成其任务所需的最小权限集:
 $$\forall p \in Processes: Effective(p) \subseteq Permitted(p) \land Effective(p) \subseteq MinRequired(p)$$
 
-其中 $Effective(p)$ 是进程 $p$ 的有效能力集，$Permitted(p)$ 是允许能力集，$MinRequired(p)$ 是进程完成任务所需的最小能力集。
+其中 $Effective(p)$ 是进程 $p$ 的有效能力集，
+$Permitted(p)$ 是允许能力集，
+$MinRequired(p)$ 是进程完成任务所需的最小能力集。
 
 **证明:** Linux能力系统通过以下机制实现最小特权原则:
 
@@ -958,14 +968,14 @@ $$\forall p \in Processes: Effective(p) \subseteq Permitted(p) \land Effective(p
 
 这些机制确保了进程只能获得并使用它所需的特定权限，而非传统root模型中的全部特权，显著降低了安全风险。
 
-**能力转移规则 5.3.4** 在执行新程序时，进程能力的转移规则可表示为:
-$$\begin{align}
-P' &= (P \cap I) \cup F_{permitted} \\
-E' &= F_{effective} ? P' : \emptyset \\
-I' &= I \cap F_{inheritable}
-\end{align}$$
+#### 5.3.4 能力转移规则
 
-其中 $P$、$E$、$I$ 分别是原进程的permitted、effective和inheritable能力集，$P'$、$E'$、$I'$ 是执行新程序后的相应能力集，$F_{permitted}$、$F_{effective}$、$F_{inheritable}$ 是文件的能力集。
+在执行新程序时，进程能力的转移规则可表示为:
+$$\begin{align}P' &= (P \cap I) \cup F_{permitted} \\E' &= F_{effective} ? P' : \emptyset \\I' &= I \cap F_{inheritable}\end{align}$$
+
+其中 $P$、$E$、$I$ 分别是原进程的permitted、effective和inheritable能力集，
+$P'$、$E'$、$I'$ 是执行新程序后的相应能力集，
+$F_{permitted}$、$F_{effective}$、$F_{inheritable}$ 是文件的能力集。
 
 **定理 5.3.5 (能力安全边界)** 在没有CAP_SETPCAP能力的情况下，进程无法增加其bounding集中没有的能力，这形成了安全边界:
 $$\forall p \in Processes: CAP\_SETPCAP \notin Effective(p) \Rightarrow Permitted(p) \subseteq Bounding(p)$$
@@ -1033,8 +1043,6 @@ $$\lim_{T \to \infty} \frac{CPU\_time(p_i, T)}{CPU\_time(p_j, T)} = \frac{weight
 **证明:** CFS调度器基于虚拟运行时间(vruntime)概念，它会跟踪每个进程运行的时间，并对该时间除以进程的权重进行标准化。这确保了:
 
 1. 高优先级(高权重)进程的vruntime增长较慢
-2. 低优先级(低权重)进程
-
 2. 低优先级(低权重)进程的vruntime增长较快
 3. CFS总是选择vruntime最小的进程运行
 
@@ -1153,6 +1161,7 @@ $$\forall p_i, p_j \in RT\_Processes, priority(p_i) > priority(p_j) \Rightarrow 
 3. 在下一个调度点或者立即（如果允许抢占），高优先级的实时进程会被调度执行
 
 Linux内核中有几个机制确保这种抢占能够及时发生:
+
 - 周期性调度器检查
 - 中断和系统调用返回时的抢占检查
 - 显式的抢占点
@@ -1171,6 +1180,7 @@ $$\left(\sum_{i=1}^{n} \frac{budget_i}{period_i} \leq 1 \land \forall i: exec\_t
 **证明:** 截止时间调度（SCHED_DEADLINE）基于最早截止时间优先（EDF）算法和常数带宽服务器（CBS）。根据实时调度理论，特别是EDF的最优性定理，如果任务集的总利用率不超过处理器容量（即总利用率 $\leq 1$），则EDF可以成功调度所有任务。
 
 Linux的SCHED_DEADLINE实现通过以下方式保证这一点:
+
 1. 在接受新任务前执行准入控制（可调度性测试）
 2. 使用CBS确保每个任务不会超过其声明的预算
 3. 使用EDF策略选择下一个要执行的任务，始终选择截止时间最早的任务
@@ -1206,6 +1216,7 @@ $$\forall fs \in FileSystemTypes, \exists mapping: fs \rightarrow VFS\_Objects$$
 3. **数据结构扩展**: 通过在核心结构末尾添加特定于文件系统的数据结构，允许自定义状态
 
 这种设计使得VFS能够表示极其不同的文件系统类型:
+
 - **磁盘文件系统** (如ext4、XFS): 通过将物理磁盘块映射到inode和数据块
 - **网络文件系统** (如NFS、CIFS): 通过将远程操作翻译为本地VFS调用
 - **特殊文件系统** (如proc、sysfs): 通过生成虚拟文件表示内核数据结构
@@ -1248,11 +1259,7 @@ $$\forall op \in MetadataOps, \forall crash \in Crashes: after\_recovery(execute
 因此，无论何时发生崩溃，恢复后文件系统都会处于一致状态，证明了日志文件系统的一致性保证。
 
 **同步操作形式化 7.2.3** 文件同步操作可表示为:
-$$\begin{align}
-fsync(fd) &: 同步文件描述符fd指向的文件的所有数据和元数据 \\
-fdatasync(fd) &: 同步文件描述符fd指向的文件的数据以及足够的元数据 \\
-sync() &: 同步所有缓冲区到存储设备
-\end{align}$$
+$$\begin{align}fsync(fd) &: 同步文件描述符fd指向的文件的所有数据和元数据 \\fdatasync(fd) &: 同步文件描述符fd指向的文件的数据以及足够的元数据 \\sync() &: 同步所有缓冲区到存储设备\end{align}$$
 
 **定理 7.2.4 (同步语义的可组合性)** 在正确使用同步操作的情况下，应用程序可以构建任意粒度的一致性保证:
 $$\forall op\_sequence, \exists sync\_strategy: consistency\_guarantee(op\_sequence, sync\_strategy) = required\_guarantee$$
@@ -1267,10 +1274,7 @@ $$Caches = \{page\_cache, dentry\_cache, inode\_cache, buffer\_cache, ...\}$$
 每种缓存存储不同类型的文件系统数据。
 
 **缓存读取模型 7.3.2** 文件读取操作首先检查缓存，然后再访问底层存储:
-$$read(file, offset, size) = \begin{cases}
-cache\_read(file, offset, size), & \text{if } cached(file, offset, size) \\
-storage\_read(file, offset, size), & \text{otherwise}
-\end{cases}$$
+$$read(file, offset, size) = \begin{cases}cache\_read(file, offset, size), & \text{if } cached(file, offset, size) \\storage\_read(file, offset, size), & \text{otherwise}\end{cases}$$
 
 **定理 7.3.3 (缓存一致性)** 在没有直接I/O的情况下，文件系统确保缓存中的数据与底层存储的数据最终一致:
 $$\forall file, offset, size, \exists t > t_0: cache\_read(file, offset, size, t) = storage\_read(file, offset, size, t)$$
@@ -1329,10 +1333,7 @@ $$\forall p \in Processes, \forall mp \in MountPoints: visible(mp, p) \iff \neg 
 因此，挂载点对进程的可见性取决于该进程是否在一个隐藏了该挂载点的命名空间中。
 
 **路径解析算法 7.4.4** 路径解析过程可表示为递归函数:
-$$resolve\_path(path) = \begin{cases}
-dentry(path), & \text{if } path \text{ is simple} \\
-resolve\_path(parent(path)) + lookup(basename(path)), & \text{otherwise}
-\end{cases}$$
+$$resolve\_path(path) = \begin{cases}dentry(path), & \text{if } path \text{ is simple} \\resolve\_path(parent(path)) + lookup(basename(path)), & \text{otherwise}\end{cases}$$
 
 其中 $dentry(path)$ 是路径 $path$ 对应的目录项，$parent(path)$ 是路径的父目录，$basename(path)$ 是路径的最后一个组件。
 
@@ -1506,6 +1507,7 @@ $$\forall f \in Files, \forall l_i, l_j \in Layers, i > j: content(f, l_i) \neq 
 3. **查找算法**: 当访问文件时，从上到下查找各层，返回找到的第一个匹配
 
 这确保了:
+
 - 对文件的修改只影响容器或上层，不会改变下层或基础镜像
 - 不同容器可以共享相同的基础层，节省存储空间
 - 对于同名文件，上层的版本会遮蔽下层的版本
@@ -1540,8 +1542,7 @@ $$Container\_Evolution = \{(container_i, capabilities_i, t_i) | i \in \mathbb{N}
 其中 $container_i$ 是容器技术版本，$capabilities_i$ 是该版本支持的能力集合。
 
 **定理 9.1.4 (协同演化关系)** Linux内核与容器技术之间存在协同演化关系，容器技术的发展依赖于内核特性的发展:
-$$\forall (container_i, capabilities_i, t_i) \in Container\_Evolution, \exists (kernel_j, features_j, t_j) \in Linux\_Evolution: \\
-t_j \leq t_i \land dependencies(capabilities_i) \subseteq features_j$$
+$$\forall (container_i, capabilities_i, t_i) \in Container\_Evolution, \exists (kernel_j, features_j, t_j) \in Linux\_Evolution: \\t_j \leq t_i \land dependencies(capabilities_i) \subseteq features_j$$
 
 其中 $dependencies(capabilities_i)$ 是实现容器能力 $capabilities_i$ 所需的内核特性集合。
 
@@ -1673,8 +1674,7 @@ $$total\_debt(t) = \sum_{i} cost_i \times (1 + interest\_rate_i)^{t-t_i}$$
 其中 $t_i$ 是引入决策 $decision_i$ 的时间。
 
 **定理 9.4.3 (容器与内核之间的技术债务传播)** 容器技术中的技术债务可能源于其对特定Linux内核特性的依赖，并且可能在两个方向上传播:
-$$debt(container) \cap dependency(container, kernel) \neq \emptyset \implies \\
-(debt(container) \rightarrow potential\_debt(kernel)) \lor (debt(kernel) \rightarrow amplified\_debt(container))$$
+$$debt(container) \cap dependency(container, kernel) \neq \emptyset \implies \\(debt(container) \rightarrow potential\_debt(kernel)) \lor (debt(kernel) \rightarrow amplified\_debt(container))$$
 
 **证明:** 技术债务在容器和内核技术栈之间的传播可以通过几个具体案例观察:
 
@@ -1737,6 +1737,7 @@ $$\forall phenomenon \in Domain: \exists explanation \in Theoretical\_Framework$
    - 技术债务传播(第9.4节)
 
 这个框架能够解释从低层技术实现到高层生态系统动态的广泛现象，例如:
+
 - 为什么容器隔离不如VM完全(定理8.2.4)
 - 文件系统抽象如何实现多样性支持(定理7.1.3)
 - 调度系统如何平衡延迟和吞吐量(定理6.2.2)
@@ -1765,8 +1766,7 @@ $$Research\_Challenges = \{challenge_i | importance(challenge_i) > threshold\}$$
 $$Challenge\_Areas = \{Security, Performance, Compatibility, Abstraction\_Leakage, ...\}$$
 
 **定理 10.2.3 (挑战的根本性)** 某些挑战是根本性的，源于系统设计的基本权衡:
-$$\exists challenges \subset Research\_Challenges: fundamental(challenges) \land \\
-\forall solution: addresses(solution, challenges) \implies creates(solution, new\_challenges)$$
+$$\exists challenges \subset Research\_Challenges: fundamental(challenges) \land \\\forall solution: addresses(solution, challenges) \implies creates(solution, new\_challenges)$$
 
 其中 $fundamental(challenges)$ 表示挑战集合 $challenges$ 是根本性的，$addresses(solution, challenges)$ 表示解决方案 $solution$ 解决了挑战 $challenges$，$creates(solution, new\_challenges)$ 表示解决方案创造了新挑战 $new\_challenges$。
 
@@ -1890,9 +1890,7 @@ $$value(system, t) \propto adaptability(system) \times optimization(system)^{\al
 
 ## 11. 思维导图
 
-**Linux操作系统架构与Docker关系思维导图**
-
-```
+```text
 Linux操作系统与Docker
 ├── Linux内核架构
 │   ├── 内核空间
