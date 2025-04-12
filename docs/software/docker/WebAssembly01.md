@@ -144,12 +144,15 @@ $S; L; \sigma \vdash e \Rightarrow S'; L'; \sigma'$
 WebAssembly的类型系统包括：
 
 **值类型**：
+
 - $t ::= i32 \mid i64 \mid f32 \mid f64 \mid \text{externref} \mid \text{funcref}$
 
 **函数类型**：
+
 - $ft ::= t_1^* \rightarrow t_2^*$（参数类型列表映射到结果类型列表）
 
 **子类型关系**：
+
 - 反身性：$t <: t$
 - 传递性：如果 $t_1 <: t_2$ 且 $t_2 <: t_3$ 则 $t_1 <: t_3$
 - 函数子类型：如果 $t_1' <: t_1$ 且 $t_2 <: t_2'$ 则 $(t_1 \rightarrow t_2) <: (t_1' \rightarrow t_2')$
@@ -161,11 +164,13 @@ WebAssembly的类型系统包括：
 目前WebAssembly执行环境主要分为以下几类：
 
 **浏览器引擎**：
+
 - **V8** (Chrome, Edge, Node.js)：基于TurboFan编译器
 - **SpiderMonkey** (Firefox)：分层编译策略
 - **JavaScriptCore** (Safari)：集成B3 JIT编译器
 
 **独立运行时**：
+
 - **Wasmtime**：基于Cranelift代码生成器，专注于安全和WASI支持
 - **Wasmer**：注重跨平台和嵌入能力
 - **WAMR** (WebAssembly Micro Runtime)：为IoT设备优化的轻量级运行时
@@ -174,11 +179,13 @@ WebAssembly的类型系统包括：
 ### 3.2 编译工具链
 
 **LLVM后端**：
+
 - Clang/LLVM提供将C/C++编译到Wasm的路径
 - 支持optimizations和link-time optimizations
 - Binaryen提供了wasm优化和转换工具
 
 **语言特定工具**：
+
 - **Emscripten**：C/C++到WebAssembly的完整工具链
 - **wasm-pack**：Rust Wasm构建工具
 - **AssemblyScript**：TypeScript子集到WebAssembly编译器
@@ -186,6 +193,7 @@ WebAssembly的类型系统包括：
 ### 3.3 语言支持
 
 **一级支持**（原生编译到WebAssembly）：
+
 - **Rust**：通过wasm-bindgen提供完整支持
 - **C/C++**：通过Emscripten和Clang
 - **AssemblyScript**：专为WebAssembly设计的TypeScript子集
@@ -193,6 +201,7 @@ WebAssembly的类型系统包括：
 - **Go**：1.11版本后提供编译到WebAssembly支持
 
 **二级支持**（通过中间层编译）：
+
 - **Python**：PyScript, Pyodide通过编译CPython
 - **Ruby**：Ruby.wasm项目
 - **Java**：TeaVM, JWebAssembly将Java字节码转换为Wasm
@@ -274,11 +283,13 @@ WebAssembly组件模型是一项重要扩展，提供模块化和跨语言互操
 - **语言无关**：适用于所有编译到WebAssembly的语言
 
 近期重点（1-2年）：
+
 - 组件模型标准化
 - 垃圾回收接口
 - 异常处理机制
 
 中期发展（2-4年）：
+
 - 并发与线程扩展
 - SIMD扩展增强
 - 安全性增强
