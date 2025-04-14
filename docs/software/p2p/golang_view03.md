@@ -6418,20 +6418,7 @@ func (sa *SymbioticArchitecture) RegisterSubsystem(
     if err != nil {
         return nil, fmt.Errorf("failed to create interoperability adapters: %v", err)
     }
-    
-    // 分配资源
-    resourceAllocations, err := sa.resourceCoordinator.AllocateResources(
-        subsystem.ID, subsystem.ResourceRequ
 
-```go
-// 注册子系统 (续)
-func (sa *SymbioticArchitecture) RegisterSubsystem(
-    ctx context.Context,
-    subsystem Subsystem,
-    options RegistrationOptions,
-) (*SubsystemRegistrationResult, error) {
-    // [前面部分省略]
-    
     // 分配资源
     resourceAllocations, err := sa.resourceCoordinator.AllocateResources(
         subsystem.ID, subsystem.ResourceRequirements, options.ResourceOptions)
