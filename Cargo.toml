@@ -19,3 +19,7 @@ members = [ "crates/c01_ownership_borrow_scope",
             "crates/c16_webassembly", 
             "crates/c17_iot", 
             "crates/c18_model"]
+
+[profile.release]
+lto = "fat"
+codegen-units = 1

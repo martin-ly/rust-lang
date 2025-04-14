@@ -13,3 +13,4 @@ path = "src/lib.rs"
 [[bin]]
 name = "obs"
 path = "src/bin/main.rs"
+
