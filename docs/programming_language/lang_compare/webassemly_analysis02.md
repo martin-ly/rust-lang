@@ -638,7 +638,9 @@ async function fetchData(url: string): Promise<string> {
 )
 ```
 
-这个伪代码展示了 `async` 函数如何被分解为状态 (`$fetchData_state`) 和基于状态的跳转。每次 `await`（对应于调用 `$start_fetch` 或 `$start_response_text`）后，函数保存状态并返回，等待宿主在未来某个时刻带着结果调用 `$fetchData_resume` 来继续执行。
+这个伪代码展示了 `async` 函数如何被分解为状态 (`$fetchData_state`) 和基于状态的跳转。
+每次 `await`（对应于调用 `$start_fetch` 或 `$start_response_text`）后，
+函数保存状态并返回，等待宿主在未来某个时刻带着结果调用 `$fetchData_resume` 来继续执行。
 
 ## 4. 综合论证与结论
 
