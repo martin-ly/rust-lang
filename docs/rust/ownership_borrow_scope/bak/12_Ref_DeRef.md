@@ -35,6 +35,7 @@ pub trait Deref {
     fn deref(&self) -> &Self::Target;
 }
 ```
+
 `Deref` trait 的 `deref` 方法返回一个对 `Target` 类型的引用。
 
 **应用**：

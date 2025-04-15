@@ -3,6 +3,37 @@
 在 Rust 中，不变（Invariance）是一种类型变体（Variance）特性，表示如果类型 `A` 是类型 `B` 的子类型（`A <: B`），则泛型类型 `F<A>` 和 `F<B>` 之间没有子类型关系。
 这意味着不能将 `F<A>` 隐式转换为 `F<B>`，也不能将 `F<B>` 隐式转换为 `F<A>`。
 
+## 目录
+
+- [Rust 中不变（Invariance）的特性](#rust-中不变invariance的特性)
+  - [目录](#目录)
+  - [常见情况与示例](#常见情况与示例)
+    - [1. **`Cell<T>` 和 `UnsafeCell<T>` 的不变性**](#1-cellt-和-unsafecellt-的不变性)
+    - [2. **`PhantomData<T>` 的不变性**](#2-phantomdatat-的不变性)
+    - [1. 定义](#1-定义)
+    - [2. 示例](#2-示例)
+      - [协变（Covariance）参数](#协变covariance参数)
+      - [逆变（Contravariance）参数](#逆变contravariance参数)
+      - [不变（Invariance）参数](#不变invariance参数)
+    - [3. 影响](#3-影响)
+  - [Rust 中的可变性、协变、逆变和不变性](#rust-中的可变性协变逆变和不变性)
+  - [可变性 (Mutability)](#可变性-mutability)
+  - [协变 (Covariance)](#协变-covariance)
+  - [逆变 (Contravariance)](#逆变-contravariance)
+  - [不变性 (Invariance)](#不变性-invariance)
+  - [实际示例](#实际示例)
+  - [为什么这些概念很重要？](#为什么这些概念很重要)
+  - [Rust 中的类型变体性：可变性、协变、逆变和不变性](#rust-中的类型变体性可变性协变逆变和不变性)
+    - [一、可变性 (Mutability)](#一可变性-mutability)
+      - [定义](#定义)
+      - [概念解释](#概念解释)
+      - [示例](#示例)
+    - [二、协变 (Covariance)](#二协变-covariance)
+    - [三、逆变 (Contravariance)](#三逆变-contravariance)
+    - [四、不变性 (Invariance)](#四不变性-invariance)
+    - [五、综合示例](#五综合示例)
+    - [六、为什么这些概念很重要？](#六为什么这些概念很重要)
+
 ## 常见情况与示例
 
 ### 1. **`Cell<T>` 和 `UnsafeCell<T>` 的不变性**
