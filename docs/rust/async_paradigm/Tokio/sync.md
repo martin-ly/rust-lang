@@ -5,6 +5,16 @@ Tokio 同步机制
 Tokio 提供了多种同步机制，用于在异步任务之间进行同步和通信。
 这些机制包括互斥锁（Mutex）、信号量（Semaphore）、屏障（Barrier）、通道（Channel）、通知（Notify）等。
 
+## 目录
+
+- [rust Tokio 同步机制](#rust-tokio-同步机制)
+  - [目录](#目录)
+  - [1. 互斥锁（Mutex）](#1-互斥锁mutex)
+  - [2. 信号量（Semaphore）](#2-信号量semaphore)
+  - [3. 屏障（Barrier）](#3-屏障barrier)
+  - [4. 通道（Channel）](#4-通道channel)
+  - [5. 通知（Notify）](#5-通知notify)
+
 ## 1. 互斥锁（Mutex）
 
 互斥锁用于保护共享资源，确保同一时间只有一个任务可以访问该资源。

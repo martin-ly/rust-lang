@@ -865,14 +865,14 @@ docker run -d --name redis -p 6379:6379 redis
 docker run -d --name jaeger -p 16686:16686 -p 6831:6831/udp jaegertracing/all-in-one
 ```
 
-2. 初始化数据库：
+1. 初始化数据库：
 
 ```bash
 sqlx database create
 sqlx migrate run
 ```
 
-3. 运行服务：
+1. 运行服务：
 
 ```bash
 cargo run
