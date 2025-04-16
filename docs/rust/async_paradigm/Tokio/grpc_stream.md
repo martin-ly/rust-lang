@@ -1,6 +1,7 @@
 # 基于 Rust 2024 + Generator 的 gRPC 流式处理与多数据库集成项目
 
-我将展示如何使用 Rust、tokio 和 gRPC 实现一个完整的分布式微服务系统示例。我们将使用 `tonic` 作为 gRPC 框架。
+我将展示如何使用 Rust、tokio 和 gRPC 实现一个完整的分布式微服务系统示例。
+我们将使用 `tonic` 作为 gRPC 框架。
 
 首先创建项目并设置依赖：
 

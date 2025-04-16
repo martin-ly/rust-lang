@@ -1,7 +1,5 @@
 # 基于 Rust 2024 + Generator 的 GraphQL API 与多数据库集成项目
 
-我将为您展示一个基于 Rust 2024 + Generator 的 GraphQL API 与多数据库集成项目。
-
 ## 目录
 
 - [基于 Rust 2024 + Generator 的 GraphQL API 与多数据库集成项目](#基于-rust-2024--generator-的-graphql-api-与多数据库集成项目)
