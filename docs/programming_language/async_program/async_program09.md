@@ -27,6 +27,13 @@
   - [20. 速率限制/节流模式 (Rate Limiting / Throttling)](#20-速率限制节流模式-rate-limiting--throttling)
   - [21. 超时模式 (Timeout)](#21-超时模式-timeout)
   - [21. 可观察性 (Observability) - 跨模式的关键考量](#21-可观察性-observability---跨模式的关键考量)
+  - [22. 优雅停机 (Graceful Shutdown)](#22-优雅停机-graceful-shutdown)
+  - [23. 健康检查 (Health Checks)](#23-健康检查-health-checks)
+  - [24. 配置管理 (Configuration Management)](#24-配置管理-configuration-management)
+  - [25. 异步状态管理 (Asynchronous State Management)](#25-异步状态管理-asynchronous-state-management)
+  - [26. 异步测试策略 (Asynchronous Testing Strategies)](#26-异步测试策略-asynchronous-testing-strategies)
+  - [27. 异步错误处理深度探讨 (Error Handling Deep Dive)](#27-异步错误处理深度探讨-error-handling-deep-dive)
+  - [28. 性能考量与优化 (Performance Considerations \& Optimization)](#28-性能考量与优化-performance-considerations--optimization)
 
 ## 思维导图 (Text 格式)
 
@@ -670,3 +677,703 @@ trait AsyncProcessor {
 
 我们还可以继续探讨诸如配置管理、健康检查、优雅停机（graceful shutdown）等在异步服务中的实现，
 或者深入比较 Tokio 与其他异步运行时的设计哲学（如 `async-std`, `smol`），如果你感兴趣的话。
+
+## 22. 优雅停机 (Graceful Shutdown)
+
+当应用程序需要停止时（例如，接收到 SIGINT/SIGTERM 信号，或者部署新版本时），理想情况下它应该完成正在处理的请求，释放资源，然后干净地退出，而不是被强制终止。这就是优雅停机。
+
+- **模式描述:**
+    1. **监听停止信号:** 应用程序需要监听来自操作系统（如 `SIGINT`, `SIGTERM`）或管理接口的停止指令。
+    2. **停止接收新工作:** 一旦收到信号，应用程序应立即停止接受新的连接或任务（例如，关闭 TCP 监听器，停止从队列拉取新作业）。
+    3. **等待进行中任务完成:** 允许已经在处理中的任务继续运行直到完成，但通常会设置一个最终的超时时间。
+    4. **资源清理:** 关闭数据库连接池、刷新日志缓冲区、通知其他系统等。
+    5. **退出:** 所有任务完成后或达到最终超时后，应用程序退出。
+- **异步优势:**
+  - **协作式调度:** 异步任务的协作式调度使得通知它们停止并等待它们自然完成（到达下一个 `.await` 点检查停止标志）成为可能。
+  - **事件驱动:** 可以将停止信号本身作为一个事件来处理。
+- **Rust/Tokio 实现:**
+  - **监听信号:** 使用 `tokio::signal` 模块监听 OS 信号。
+
+  ```rust
+  #[cfg(unix)]
+  async fn shutdown_signal() {
+      use tokio::signal::unix::{signal, SignalKind};
+      let mut sigint = signal(SignalKind::interrupt()).expect("Failed to install SIGINT handler");
+      let mut sigterm = signal(SignalKind::terminate()).expect("Failed to install SIGTERM handler");
+
+      tokio::select! {
+          _ = sigint.recv() => println!("Received SIGINT"),
+          _ = sigterm.recv() => println!("Received SIGTERM"),
+      }
+  }
+  #[cfg(windows)]
+  async fn shutdown_signal() {
+        tokio::signal::ctrl_c().await.expect("Failed to install Ctrl+C handler");
+        println!("Received Ctrl+C");
+  }
+  ```
+
+  - **通知机制:** 使用 `tokio::sync::watch` channel 或 `tokio::sync::Notify` 在主任务和工作任务之间广播停止信号。主任务在接收到 OS 信号后，通过 channel/notify 通知所有工作任务。
+  - **任务配合:** 工作任务需要在其主循环或关键 `.await` 点检查停止信号。
+
+  ```rust
+  async fn worker_task(shutdown_rx: tokio::sync::watch::Receiver<bool>) {
+      loop {
+          tokio::select! {
+              // 偏向检查停止信号
+              biased;
+              _= shutdown_rx.changed() => {
+                  if *shutdown_rx.borrow() { // 检查是否是停止信号
+                      println!("Worker: Received shutdown signal, exiting loop.");
+                      break;
+                  }
+              }
+              // 处理正常工作
+              result = process_item() => {
+                  if let Err(e) = result {
+                      eprintln!("Worker error: {}", e);
+                      // 可能需要根据错误类型决定是否继续
+                  }
+              }
+          }
+      }
+        println!("Worker: Cleaning up...");
+      // 执行清理逻辑
+        println!("Worker: Finished.");
+  }
+
+  async fn process_item() -> Result<(), String> {
+      // 模拟处理工作
+      tokio::time::sleep(Duration::from_secs(1)).await;
+      println!("Worker: Processed an item.");
+      Ok(())
+  }
+  ```
+
+  - **管理任务:** 使用 `JoinSet` 或手动管理 `JoinHandle`，在收到停止信号后，等待所有任务完成（可能带超时）。Web 框架如 Axum 通常内置了优雅停机支持。
+
+```rust
+#[tokio::main]
+async fn main() {
+    let (shutdown_tx, shutdown_rx) = tokio::sync::watch::channel(false);
+    let mut tasks = tokio::task::JoinSet::new();
+
+    for i in 0..3 {
+          let rx = shutdown_rx.clone();
+          tasks.spawn(async move {
+              println!("Worker {} started", i);
+              worker_task(rx).await;
+              println!("Worker {} finished", i);
+          });
+    }
+    // 等待 OS 信号 或 其他停止条件
+    shutdown_signal().await;
+    println!("Main: Initiating shutdown...");
+
+    // 发送停止信号
+    shutdown_tx.send(true).expect("Failed to send shutdown signal");
+
+    // 等待所有任务完成 (带超时)
+    let shutdown_timeout = Duration::from_secs(10);
+      match tokio::time::timeout(shutdown_timeout, async {
+          while let Some(res) = tasks.join_next().await {
+            if let Err(e) = res {
+                  eprintln!("Main: Task panicked or was cancelled: {:?}", e);
+            }
+          }
+      }).await {
+          Ok(_) => println!("Main: All workers finished gracefully."),
+          Err(_) => eprintln!("Main: Shutdown timed out, some tasks may not have finished."),
+      }
+      println!("Main: Exiting.");
+}
+```
+
+- **考虑因素:** 最终超时时间的设定、如何处理在超时后仍未完成的任务、清理步骤的幂等性、确保所有衍生的子任务也能正确响应停止信号。
+
+## 23. 健康检查 (Health Checks)
+
+提供一个端点或机制，让外部监控系统（如 Kubernetes、负载均衡器）了解应用程序实例的健康状况。
+
+- **模式描述:**
+  - **存活探针 (Liveness Probe):** 检查应用程序进程是否仍在运行且未死锁。通常只需要简单地响应 HTTP 请求即可。如果失败，监控系统可能会重启应用实例。
+  - **就绪探针 (Readiness Probe):** 检查应用程序是否准备好接收流量/处理工作。这可能涉及检查数据库连接、依赖服务的可用性、内部状态是否正常等。如果失败，监控系统会暂时将流量从该实例移走，但不会重启它。
+- **异步优势:**
+  - **非阻塞检查:** 健康检查逻辑本身通常涉及 I/O（如 ping 数据库），异步执行可以避免阻塞处理真实请求的工作线程。
+  - **并发检查:** 可以并行执行多个依赖检查。
+- **Rust/Tokio 实现:**
+  - **HTTP 端点:** 最常见的方式。在 Web 框架中添加特定的路由（如 `/healthz` 用于 Liveness，`/readyz` 用于 Readiness）。
+  - **检查逻辑:**
+    - Liveness: 通常只需要返回 HTTP 200 OK。
+    - Readiness: 实现一个 `async fn`，检查必要的依赖项。
+      - 检查数据库连接池是否能获取连接 (`pool.acquire().await` 或类似方法）。
+      - Ping 依赖的关键外部服务（可能使用断路器的状态）。
+      - 检查内部关键组件（如消息队列消费者）是否正常运行。
+      - 如果所有检查通过，返回 HTTP 200 OK；否则返回 HTTP 503 Service Unavailable 或其他合适的错误码，并可能在响应体中包含失败详情。
+  - **状态共享:** 可能需要从应用的其他部分（如数据库连接池、断路器状态）安全地访问状态信息来进行检查。可以使用 `Arc<Mutex<T>>` 或更专门的状态管理机制。
+
+```rust
+use axum::{routing::get, Router, http::StatusCode};
+use std::sync::{Arc, atomic::{AtomicBool, Ordering}};
+use tokio::sync::Mutex; // 或者使用 std::sync::Mutex 如果状态只读或内部同步
+
+struct AppState {
+    db_pool: DbPool, // 假设的数据库连接池类型
+    is_initialized: AtomicBool,
+    // ... 其他状态
+}
+
+async fn liveness_check() -> StatusCode {
+    StatusCode::OK // 进程活着就行
+}
+
+async fn readiness_check(axum::extract::State(state): axum::extract::State<Arc<AppState>>) -> StatusCode {
+    if !state.is_initialized.load(Ordering::Relaxed) {
+        return StatusCode::SERVICE_UNAVAILABLE; // 还没初始化完成
+    }
+    // 异步检查数据库连接
+    // 注意：实际检查可能需要更复杂的方式，避免频繁真实连接
+    let can_connect_db = match state.db_pool.ping().await { // 假设 pool 有 ping 方法
+        Ok(_) => true,
+        Err(_) => false,
+    };
+
+      if can_connect_db /* && check_other_dependencies().await */ {
+          StatusCode::OK
+      } else {
+          StatusCode::SERVICE_UNAVAILABLE
+      }
+}
+
+#[tokio::main]
+async fn main() {
+    let shared_state = Arc::new(AppState {
+          /* ... initialize ... */
+          is_initialized: AtomicBool::new(false), // 假设在启动后某个时刻会设为 true
+          db_pool: create_db_pool().await,
+    });
+
+    // 模拟初始化完成
+    // shared_state.is_initialized.store(true, Ordering::Relaxed);
+
+    let app = Router::new()
+        .route("/healthz", get(liveness_check))
+        .route("/readyz", get(readiness_check))
+        // ... 其他业务路由 ...
+        .with_state(shared_state);
+
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
+    axum::serve(listener, app)
+          // 添加优雅停机支持
+          .with_graceful_shutdown(shutdown_signal())
+          .await
+          .unwrap();
+}
+// 假设的辅助函数
+async fn create_db_pool() -> DbPool { /* ... */ panic!() }
+struct DbPool;
+impl DbPool { async fn ping(&self) -> Result<(),()> { Ok(()) } } // 假设实现
+#[cfg(unix)] async fn shutdown_signal() { /* ... as before ... */ }
+#[cfg(windows)] async fn shutdown_signal() { /* ... as before ... */ }
+```
+
+- **考虑因素:** 检查的频率与开销、避免健康检查本身给系统带来过大负载、检查逻辑的可靠性、区分瞬时失败和持续失败。
+
+## 24. 配置管理 (Configuration Management)
+
+如何在异步应用程序中加载、访问和可能地动态更新配置。
+
+- **模式描述:**
+  - **加载:** 从文件（JSON, YAML, TOML, .env）、环境变量或配置服务（如 Consul, etcd）中读取配置信息。通常在应用启动时进行。
+  - **访问:** 让应用的不同部分能够方便且安全地访问配置值。
+  - **动态更新 (可选):** 允许在不重启应用的情况下更新部分配置。
+- **异步挑战与对策:**
+  - **异步加载:** 如果配置来源需要异步 I/O（如从网络配置服务加载），则加载过程需要是异步的。
+  - **并发访问:** 配置数据通常需要被多个异步任务并发访问，必须保证线程安全。
+  - **动态更新通知:** 如果配置可以动态更新，需要一种机制通知应用程序的各个部分配置已变更，以便它们能获取新值。
+- **Rust/Tokio 实现:**
+  - **库:** `config` crate 是一个流行的选择，支持从多种来源（文件、环境变量、自定义源）合并配置，并可以反序列化到 Rust 结构体中。`figment` 是另一个强大的选择。
+  - **数据结构:** 将配置加载到强类型的 Rust 结构体中（使用 `serde` 进行反序列化）。
+  - **访问:**
+    - **启动时加载:** 在 `main` 函数开始处（可能是异步的，如果需要异步加载源）加载配置。
+    - **共享:** 将加载的配置结构体包装在 `Arc` 中，使其可以在任务间安全共享。如果配置是只读的，`Arc<ConfigStruct>` 就足够了。
+    - **注入:** 通过函数参数、状态管理（如 Axum 的 `State` extractor）或专门的依赖注入框架将 `Arc<ConfigStruct>` 传递给需要它的组件。
+  - **动态更新 (较复杂):**
+    - **监听变更:** 需要一个机制来监听配置源的变化（例如，监听文件系统事件，轮询配置服务）。
+    - **原子更新:** 使用 `ArcSwap` (来自 `arc-swap` crate) 或 `tokio::sync::watch` channel 来原子地替换共享的配置实例。`ArcSwap` 允许多个读者无锁地访问当前配置快照，而写者可以原子地更新指针。`watch` channel 则可以显式地通知等待者配置已更新。
+
+        ```rust
+        use arc_swap::ArcSwap;
+        use std::sync::Arc;
+        use serde::Deserialize;
+        use tokio::time::{sleep, Duration};
+
+        #[derive(Debug, Deserialize, Clone)] // Clone 很重要，用于更新
+        struct AppConfig {
+            database_url: String,
+            timeout_ms: u64,
+        }
+
+        // 伪代码加载函数
+        fn load_config_from_source() -> Result<AppConfig, String> {
+             // 实际中会从文件/环境变量等加载
+            Ok(AppConfig {
+                database_url: "initial_db_url".to_string(),
+                timeout_ms: 500,
+            })
+        }
+
+        #[tokio::main]
+        async fn main() {
+            let initial_config = load_config_from_source().expect("Failed to load initial config");
+            let config = Arc::new(ArcSwap::from_pointee(initial_config));
+
+            // 模拟配置更新线程/任务
+            let config_updater = config.clone();
+            tokio::spawn(async move {
+                loop {
+                    sleep(Duration::from_secs(30)).await; // 每 30 秒检查一次更新
+                    match load_config_from_source() { // 尝试重新加载
+                        Ok(new_config_data) => {
+                            println!("Detected config change, updating...");
+                             // 使用 store 原子地替换内部的 Arc
+                            config_updater.store(Arc::new(new_config_data));
+                        }
+                        Err(e) => eprintln!("Failed to reload config: {}", e),
+                    }
+                }
+            });
+
+            // 模拟工作任务访问配置
+            let config_reader = config.clone();
+            tokio::spawn(async move {
+                 loop {
+                     // 使用 load() 获取当前配置的 Arc 快照，这是无锁且快速的
+                     let current_config = config_reader.load();
+                     println!("Worker using timeout: {}", current_config.timeout_ms);
+                     sleep(Duration::from_secs(5)).await;
+                     // 注意：current_config 是一个快照，在它的生命周期内值不变
+                     // 下次循环 load() 时可能会获取到更新后的配置
+                 }
+            });
+
+            // 让程序运行一段时间
+            sleep(Duration::from_secs(120)).await;
+        }
+        ```
+
+- **考虑因素:** 配置格式选择、敏感信息处理（如密码，避免硬编码或明文存储）、配置校验、不同环境（开发、测试、生产）的配置管理、动态更新的一致性（应用的不同部分可能在短时间内使用不同版本的配置）。
+
+掌握优雅停机、健康检查和配置管理对于将异步 Rust 应用从“能跑”提升到“生产就绪”至关重要。接下来，我们可以探讨异步状态管理或测试策略。
+
+好的，我们继续深入探讨构建生产级异步 Rust 应用的另外几个关键方面：异步状态管理和测试策略。
+
+## 25. 异步状态管理 (Asynchronous State Management)
+
+在并发应用中，如何安全、高效地管理和访问共享的可变状态是一个核心挑战。异步环境由于任务切换的存在，使得这个问题更加复杂。
+
+- **挑战:**
+  - **数据竞争:** 多个异步任务并发读写同一块内存区域，可能导致未定义行为（Rust 的所有权和借用系统在编译期防止了大部分数据竞争，但逻辑上的竞争仍需关注）。
+  - **死锁:** 任务 A 持有锁 L1 并等待锁 L2，而任务 B 持有锁 L2 并等待锁 L1。
+  - **锁争用:** 大量任务频繁竞争同一个锁，导致性能瓶颈。
+  - **`await` 持有锁:** 在持有普通（同步）`std::sync::Mutex` 或 `RwLock` 的保护区域内执行 `.await` 是危险的，可能导致死锁，因为持有锁的任务可能会让出控制权，而其他任务可能需要获取同一个锁才能唤醒它。
+
+- **常见策略:**
+  - **不可变共享状态 (`Arc<T>`):** 最简单的情况。如果状态初始化后不再改变，直接用 `Arc` 共享即可，无需任何锁，非常高效且安全。
+  - **通道 (`tokio::sync::mpsc`, `watch`, `broadcast`):** 通过消息传递来共享信息或协调状态变化，而不是直接共享内存。这是 Actor 模型的核心思想，可以有效避免锁。适用于状态更新不频繁，或者需要将状态处理逻辑封装在特定任务中的场景。
+  - **异步锁 (`tokio::sync::Mutex`, `tokio::sync::RwLock`):**
+    - **特点:** 这些是 `async`-aware 的锁。当一个任务尝试获取一个已被持有的 `tokio::sync::Mutex` 时，它会返回一个 `Future`。调用 `.await` 会让任务进入睡眠状态，直到锁可用时再被唤醒。**关键在于，它在等待锁时不会阻塞整个线程**，允许线程执行其他任务。
+    - **适用场景:** 当确实需要直接共享可变状态，并且访问模式涉及异步操作时（例如，在锁内部需要 `.await` 访问数据库或网络）。
+    - **注意:** 即使是异步锁，也应尽量减小持有锁的临界区范围，并且要警惕潜在的死锁逻辑。`RwLock` 允许多个读者并发访问，但写者是独占的，适用于读多写少的场景。
+
+```rust
+use tokio::sync::Mutex;
+use std::sync::Arc;
+use tokio::time::{sleep, Duration};
+
+struct SharedState {
+    counter: i32,
+}
+
+async fn worker(id: i32, state: Arc<Mutex<SharedState>>) {
+    println!("Worker {}: Trying to acquire lock...", id);
+    // 异步获取锁
+    let mut locked_state = state.lock().await;
+    println!("Worker {}: Lock acquired.", id);
+    // 在持有锁的情况下执行操作 (这里是同步的)
+    locked_state.counter += 1;
+    let current_count = locked_state.counter;
+    // 模拟一些工作
+    // !!! 警告：如果在锁内执行长时间或可能阻塞的 .await 操作，仍需谨慎 !!!
+    // 虽然 tokio::Mutex 允许，但这可能长时间持有锁，影响其他任务
+    // sleep(Duration::from_millis(100)).await; // 假设这是必要的异步操作
+    println!("Worker {}: Incremented counter to {}. Releasing lock.", id, current_count);
+    // 锁在 locked_state 离开作用域时自动释放
+}
+
+#[tokio::main]
+async fn main() {
+    let shared_state = Arc::new(Mutex::new(SharedState { counter: 0 }));
+    let mut tasks = vec![];
+    for i in 0..5 {
+        let state_clone = shared_state.clone();
+        tasks.push(tokio::spawn(worker(i, state_clone)));
+    }
+    futures::future::join_all(tasks).await;
+    println!("Final counter value: {}", shared_state.lock().await.counter);
+}
+```
+
+- **原子类型 (`std::sync::atomic`):** 对于简单的计数器、标志位或基本类型的状态，原子类型（如 `AtomicUsize`, `AtomicBool`, `AtomicPtr`）提供了无锁的原子操作（CAS - Compare-and-Swap 等）。它们非常高效，且可以在异步代码中安全使用，因为它们的操作不会阻塞。
+- **分区/分片 (Partitioning/Sharding):** 将状态分割成多个独立的部分，每个部分由一个单独的锁或 Actor 管理。任务根据其需要访问的数据路由到对应的分区。这可以显著减少锁争用。例如，一个管理用户状态的系统可以按用户 ID 的哈希值分片。
+- **写时复制 (Copy-on-Write):** 使用 `ArcSwap` 或类似机制。读取者可以无锁地访问当前状态的快照 (`Arc`)。当需要写入时，克隆当前状态，修改克隆体，然后原子地将共享指针切换到新的克隆体。适用于读操作远多于写操作，且状态克隆成本可接受的场景。
+
+- **选择策略的考虑因素:** 状态的类型和复杂度、读写频率、争用程度、是否需要在持有状态时执行异步操作、对性能的要求。通常倾向于优先使用无锁或消息传递的方式，仅在必要时使用异步锁。
+
+## 26. 异步测试策略 (Asynchronous Testing Strategies)
+
+测试异步代码比测试同步代码更具挑战性，因为需要处理运行时、并发和时间。
+
+- **核心工具:**
+  - **`#[tokio::test]` 宏:** 这是最基本的方式。它会将你的 `async fn` 测试函数包装在一个小的 Tokio 运行时实例中执行。
+
+```rust
+#[tokio::test]
+async fn my_async_test() {
+    let result = my_async_function().await;
+    assert_eq!(result, 42);
+}
+
+async fn my_async_function() -> u32 {
+      tokio::time::sleep(Duration::from_millis(10)).await; // 模拟异步工作
+      42
+}
+```
+
+- **手动创建运行时:** 对于更复杂的场景（例如，需要精确控制运行时类型或配置），可以在测试函数内部手动创建和管理运行时实例（如 `tokio::runtime::Runtime` 或 `Builder`）。
+
+```rust
+#[test]
+fn my_manual_runtime_test() {
+    let rt = tokio::runtime::Builder::new_current_thread()
+        .enable_all() // 启用 I/O 和时间驱动
+        .build()
+        .unwrap();
+
+    rt.block_on(async {
+        let result = my_async_function().await;
+        assert_eq!(result, 42);
+    });
+}
+```
+
+- **测试并发:**
+  - **`tokio::spawn` 和 `join_all`:** 可以在测试中启动多个并发任务，然后等待它们全部完成，以测试并发交互逻辑。
+        ```rust
+        #[tokio::test]
+        async fn test_concurrent_access() {
+            let state = Arc::new(Mutex::new(SharedState { counter: 0 }));
+            let mut tasks = vec![];
+            for i in 0..10 {
+                let state_clone = state.clone();
+                tasks.push(tokio::spawn(worker(i, state_clone))); // 使用之前的 worker 函数
+            }
+            futures::future::join_all(tasks).await;
+            assert_eq!(state.lock().await.counter, 10);
+        }
+        ```
+
+- **处理时间 (`tokio::time`):**
+  - **自动推进时间 (`#[tokio::test(start_paused = true)]`):** Tokio 的测试宏可以启动一个时间被“暂停”的运行时。`sleep` 调用会立即完成，但时间点会记录下来。`tokio::time::advance(duration)` 可以手动推进时间。这对于测试超时、节流等与时间相关的逻辑非常有用，无需实际等待。
+
+```rust
+use tokio::time::{timeout, sleep, advance, Duration};
+
+#[tokio::test(start_paused = true)] // 时间从暂停开始
+async fn test_timeout_with_paused_time() {
+    let long_task = async {
+          println!("Task: Sleeping for 5s...");
+          sleep(Duration::from_secs(5)).await; // 实际上不会等待 5 秒
+          println!("Task: Finished sleeping.");
+          "done"
+    };
+
+    let timeout_duration = Duration::from_secs(3);
+    let res = timeout(timeout_duration, long_task).await;
+
+    // 此时时间还没推进，timeout 不会触发
+    assert!(!res.is_err());
+      println!("Main: Advancing time by 4s...");
+      advance(Duration::from_secs(4)).await; // 手动推进时间超过超时阈值
+
+    // 再次轮询 Future (tokio test 会自动做)，现在应该超时了
+    // 注意：实际测试中需要确保 Future 在 advance 后被再次轮询
+    // 通常 select! 或 join! 结构会处理这个
+    // 为了简单演示，我们这里假设测试框架会重试
+    // 更健壮的方式可能是将 timeout 放入 select!
+    let res_after_advance = timeout(timeout_duration, async {
+          sleep(Duration::from_secs(5)).await; "done" // 重新创建 future 来测试
+    }).await;
+    // 实际测试中可能需要结合 select! 和 advance 来精确控制
+    // assert!(res_after_advance.is_err()); // 这句在简单场景下可能不精确
+
+    // 另一种方式：直接看 sleep 是否完成
+    let sleep_fut = sleep(Duration::from_secs(6));
+    tokio::pin!(sleep_fut); // 固定 Future
+
+    let poll_res = futures::poll!(&mut sleep_fut); // 初始 poll, 应该是 Pending
+    assert!(poll_res.is_pending());
+
+    advance(Duration::from_secs(7)).await; // 推进时间超过 sleep 时长
+
+    let poll_res_after = futures::poll!(sleep_fut); // 再次 poll
+    assert!(poll_res_after.is_ready()); // 现在应该完成了
+
+    println!("Main: Test finished.");
+}
+```
+
+- **缺点:** 精确控制时间的推进和 Future 的轮询可能比较棘手，需要仔细设计测试逻辑。
+
+- **模拟/桩 (Mocking/Stubbing):**
+  - **Trait-based Mocking:** 如果你的异步代码依赖于 trait 定义的接口，可以使用 `mockall` 或 `async_trait` + `mockall` 来创建模拟实现。
+
+```rust
+use async_trait::async_trait;
+use mockall::automock;
+
+#[automock]
+#[async_trait]
+trait DataFetcher {
+    async fn fetch(&self, key: &str) -> Result<String, String>;
+}
+
+async fn process_data(fetcher: &impl DataFetcher) -> String {
+    match fetcher.fetch("my_key").await {
+        Ok(data) => format!("Processed: {}", data),
+        Err(e) => format!("Error: {}", e),
+    }
+}
+
+#[tokio::test]
+async fn test_processing_with_mock() {
+    let mut mock_fetcher = MockDataFetcher::new();
+    // 设置期望：当以 "my_key" 调用 fetch 时，返回 Ok("mock_data")
+    mock_fetcher.expect_fetch()
+        .with(mockall::predicate::eq("my_key"))
+        .times(1) // 期望被调用一次
+        .returning(|_| Box::pin(async { Ok("mock_data".to_string()) })); // 注意 Box::pin
+
+    let result = process_data(&mock_fetcher).await;
+    assert_eq!(result, "Processed: mock_data");
+}
+```
+
+- **网络模拟:** 对于需要模拟 HTTP 请求或 TCP 连接的测试，可以使用 `wiremock` (启动真实 HTTP 服务器进行模拟) 或 `mockito` (同上)，或者更轻量级的基于 trait 的模拟。
+- **依赖注入:** 设计代码时考虑可测试性，将依赖项（如数据库连接池、外部客户端）通过参数或构造函数注入，以便在测试中可以替换为模拟实现。
+
+- **集成测试:** 除了单元测试，还需要进行集成测试，将多个异步组件组合起来进行测试。这通常涉及启动应用的子集（例如，不启动完整的 Web 服务器，但测试请求处理逻辑和数据库交互），可能需要真实的数据库或外部服务的测试实例（或使用 testcontainers）。
+
+- **考虑因素:** 测试的隔离性（一个测试不应影响另一个）、测试运行时间（特别是涉及真实 I/O 或未暂停时间的测试）、并发测试中的非确定性（可能需要重试或寻找更稳定的断言方式）、清理测试资源（确保数据库状态、文件等被正确重置）。
+
+有效地测试异步代码需要结合使用 Tokio 提供的测试工具、模拟库以及良好的代码设计（如依赖注入）。虽然比同步代码测试复杂，但投入是值得的，可以确保异步系统的正确性和健壮性。
+
+好的，我们继续探讨构建生产级异步 Rust 应用的更多方面。这次我们聚焦于**错误处理的最佳实践**和**性能考量与优化**。
+
+## 27. 异步错误处理深度探讨 (Error Handling Deep Dive)
+
+虽然之前提到了 `Result` 和 `?`，但在复杂的异步系统中，错误处理需要更细致的策略。
+
+- **统一错误类型:**
+  - **问题:** 在一个应用中，不同的库（数据库、HTTP 客户端、内部逻辑）会返回各自不同的错误类型。直接用 `?` 传播会导致函数签名需要包含所有可能的错误类型，变得臃肿且难以管理。
+  - **解决方案 1 (`anyhow::Error`):** `anyhow` crate 提供了一个 `anyhow::Error` 类型，它是一个动态类型的错误封装器，可以包含任何实现了 `std::error::Error` 的错误。它还提供了 `Context` trait，方便添加上下文信息。
+
+  ```rust
+  use anyhow::{Context, Result}; // anyhow::Result 是 Result<T, anyhow::Error> 的别名
+
+  async fn operation_a() -> Result<()> {
+      // ... 可能返回 std::io::Error ...
+      std::fs::read_to_string("nonexistent.txt").context("Failed to read config file")?;
+      Ok(())
+  }
+
+  async fn operation_b() -> Result<()> {
+      // ... 可能返回 reqwest::Error ...
+      reqwest::get("invalid-url").await.context("Failed to fetch data")?;
+      Ok(())
+  }
+
+  async fn main_logic() -> Result<()> {
+      operation_a().await.context("Error in operation A")?;
+      operation_b().await.context("Error in operation B")?;
+      Ok(())
+  }
+  // main_logic 的返回类型是简单的 Result<()>, 内部可以用 ? 传播各种错误
+  // 错误链包含了所有添加的上下文信息，便于追踪
+  ```
+
+    **优点:** 非常方便，快速开发。
+    **缺点:** 失去了编译期的错误类型信息，难以在调用点根据具体错误类型做不同的处理（需要向下转型）。
+
+  - **解决方案 2 (`thiserror`):** `thiserror` crate 帮助你轻松创建自定义的、枚举式的错误类型。你可以为应用或模块定义一个包含所有可能失败情况的 `enum`，并使用 `#[from]` 属性自动实现 `From` trait，使得 `?` 操作符可以无缝地将底层错误转换为你的自定义错误类型。
+
+    ```rust
+    use thiserror::Error;
+    use std::path::PathBuf;
+
+    #[derive(Error, Debug)]
+    enum MyAppError {
+        #[error("I/O error accessing {path}: {source}")] // 错误消息格式化
+        IoError { path: PathBuf, #[source] source: std::io::Error }, // 包含源错误
+
+        #[error("Network request failed: {0}")] // {0} 引用第一个字段
+        NetworkError(#[from] reqwest::Error), // 自动从 reqwest::Error 转换
+
+        #[error("Configuration error: {0}")]
+        ConfigError(String),
+
+        #[error("Database error: {0}")]
+        DatabaseError(#[source] sqlx::Error), // 假设使用 sqlx
+    }
+
+    // 使用自定义错误类型
+    async fn operation_a(path: &PathBuf) -> Result<(), MyAppError> {
+        // std::io::Error 会被自动转换为 MyAppError::IoError
+          std::fs::read_to_string(path)
+              .map_err(|e| MyAppError::IoError { path: path.clone(), source: e })?;
+        Ok(())
+    }
+
+    async fn operation_b() -> Result<(), MyAppError> {
+          // reqwest::Error 会被自动转换为 MyAppError::NetworkError
+          reqwest::get("...").await?;
+          Ok(())
+    }
+      // sqlx::Error 会被自动转换为 MyAppError::DatabaseError
+      async fn query_db(pool: &sqlx::PgPool) -> Result<(), MyAppError> {
+        sqlx::query("...").fetch_one(pool).await.map_err(MyAppError::DatabaseError)?;
+        Ok(())
+      }
+
+
+    async fn main_logic(pool: &sqlx::PgPool) -> Result<(), MyAppError> {
+          let path = PathBuf::from("config.toml");
+          operation_a(&path).await?;
+          operation_b().await?;
+          query_db(pool).await?;
+          Ok(())
+    }
+    // main_logic 的返回类型是 Result<(), MyAppError>
+    // 调用者可以 match 具体的错误变体来做不同处理
+    ```
+
+      **优点:** 保留了编译期的类型信息，允许精确的错误匹配和处理，错误类型定义清晰。
+      **缺点:** 需要预先定义所有可能的错误变体，稍微繁琐一些。
+  - **选择:** 对于库，推荐使用 `thiserror` 定义具体的错误类型。对于应用程序顶层或快速原型开发，`anyhow` 非常方便。也可以结合使用，例如在应用内部使用 `thiserror` 定义的错误，在最外层（如 `main` 函数）将其转换为 `anyhow::Error` 进行报告。
+
+- **错误传播跨任务边界 (`tokio::spawn`):**
+  - `tokio::spawn` 启动的任务是独立运行的。如果任务内部发生 panic，该 panic 不会传播到调用 `spawn` 的任务，而是会导致 `spawn` 返回的 `JoinHandle` 在 `.await` 时返回一个 `Err(JoinError)`，其中 `JoinError::is_panic()` 为 true。
+  - 如果任务正常完成并返回 `Result::Err(E)`，`JoinHandle` 在 `.await` 时会返回 `Ok(Err(E))`。你需要解开两层 `Result`。
+  - **最佳实践:** 尽量避免任务内部 panic（除非是不可恢复的逻辑错误）。让任务返回 `Result<T, E>`，并在 `spawn` 的调用点处理 `JoinHandle` 返回的 `Result<Result<T, E>, JoinError>`。
+
+  ```rust
+  use anyhow::{Result, anyhow};
+
+  async fn fallible_task(should_fail: bool) -> Result<i32> {
+      if should_fail {
+          Err(anyhow!("Task failed intentionally"))
+      } else {
+          Ok(42)
+      }
+  }
+
+  #[tokio::main]
+  async fn main() {
+      let handle_ok = tokio::spawn(fallible_task(false));
+      let handle_err = tokio::spawn(fallible_task(true));
+      // let handle_panic = tokio::spawn(async { panic!("Task panicked!") });
+
+      match handle_ok.await {
+            Ok(Ok(value)) => println!("Task OK succeeded with: {}", value), // Ok(Ok(T))
+            Ok(Err(e)) => eprintln!("Task OK failed logically: {}", e),      // Ok(Err(E))
+            Err(e) => eprintln!("Task OK join error (e.g., panic): {}", e), // Err(JoinError)
+      }
+
+        match handle_err.await {
+            Ok(Ok(value)) => println!("Task Err succeeded with: {}", value),
+            Ok(Err(e)) => eprintln!("Task Err failed logically: {}", e), // 预期路径
+            Err(e) => eprintln!("Task Err join error: {}", e),
+      }
+      // match handle_panic.await { ... } // 会进入 Err(JoinError) 分支
+  }
+  ```
+
+- **错误处理与流 (`Stream`):**
+  - 流可以产生 `Result<Item, Error>`。`StreamExt` 提供的很多适配器（如 `map`, `filter_map`）允许你在处理元素时进行错误处理。
+  - `try_for_each`, `try_collect`, `try_filter` 等方法会在遇到第一个 `Err` 时停止处理流并返回该错误。
+  - 如果希望处理流中的所有元素，即使部分元素处理失败，可以使用 `filter_map` 保留 `Ok` 值，或者使用 `for_each` 手动处理每个 `Result`。
+
+- **错误恢复:** 有时你可能不想因为一个可恢复的错误就完全停止操作。可以使用 `Result::ok()`, `Result::err()`, `match` 或组合子（如 `futures::TryFutureExt::unwrap_or_else`）来处理错误并提供默认值或执行备用逻辑。
+
+## 28. 性能考量与优化 (Performance Considerations & Optimization)
+
+虽然 Rust 和 Tokio 的目标是零成本抽象和高性能，但仍然存在一些常见的性能陷阱和优化点。
+
+- **避免在异步代码中执行阻塞操作:**
+  - **陷阱:** 在 `async fn` 或 `Future::poll` 中执行 CPU 密集计算、调用同步阻塞的 I/O 函数（如 `std::fs::read_to_string`, `std::thread::sleep`）或持有 `std::sync::Mutex` 过长时间，都会阻塞 Tokio 的工作线程，阻止它运行其他任务，严重影响并发性能和响应性。
+  - **对策:**
+    - **使用异步 API:** 优先使用 Tokio 或其他异步库提供的非阻塞 API（`tokio::fs`, `tokio::net`, `tokio::time::sleep`, `tokio::sync::Mutex` 等）。
+    - **`tokio::task::spawn_blocking`:** 对于无法避免的 CPU 密集计算或必须使用的同步阻塞库，将其包裹在 `spawn_blocking` 中。这会将该阻塞操作移交给一个专门用于运行阻塞任务的线程池（由 Tokio 管理），从而释放异步工作线程去处理其他任务。
+            ```rust
+            async fn compute_intensive_task() -> Result<usize> {
+                // 假设这是一个耗时的同步计算
+                let result = tokio::task::spawn_blocking(|| {
+                    let mut sum = 0;
+                    for i in 0..1_000_000_000 { // 非常耗时的计算
+                        sum = sum.wrapping_add(i);
+                    }
+                    sum
+                }).await?; // .await JoinHandle
+                Ok(result)
+            }
+            ```
+    - **细粒度任务:** 将大的计算任务分解成更小的步骤，在步骤之间插入 `.await` 点（例如 `tokio::task::yield_now().await`），允许调度器切换任务。但这通常不如 `spawn_blocking` 清晰。
+
+- **锁的性能:**
+  - **同步锁的危险 (`std::sync::Mutex`):** 如前所述，在 `.await` 时持有同步锁可能导致死锁或阻塞工作线程。应避免在持有 `std::sync::Mutex` 的临界区内 `.await`。
+  - **异步锁的开销 (`tokio::sync::Mutex`):** 虽然异步锁解决了阻塞问题，但它们相比同步锁和原子操作有更高的开销（涉及到任务唤醒机制）。
+  - **减少锁争用:** 尽量减小锁的临界区。使用 `RwLock` 替代 `Mutex`（如果读多写少）。考虑无锁数据结构（如 `crossbeam-channel`, `flume`, 原子类型）或分区策略。
+
+- **不必要的分配:**
+  - 在热路径（频繁执行的代码段）中频繁分配内存（如 `String`, `Vec`, `Box`）会影响性能。
+  - **对策:**
+    - **重用缓冲区:** 对于网络或文件 I/O，尽可能重用缓冲区。
+    - **`Bytes` crate:** `Bytes` 类型提供了一种高效的字节数组抽象，支持廉价的克隆（共享底层内存）和切片，非常适合网络编程。
+    - **Arena 分配 / Bump Allocators:** 对于生命周期明确的短期分配，可以考虑使用 bump allocator（如 `bumpalo`）。
+    - **分析:** 使用 `heaptrack` 或其他内存分析工具识别热点分配。
+
+- **轮询 (Polling) 效率:**
+  - `Future` 的核心是 `poll` 方法。如果 `poll` 方法本身做了过多工作，或者唤醒过于频繁（Spurious Wakeups），会影响性能。
+  - **优化:** 通常这是库开发者需要关心的，但作为使用者，选择高效的异步库很重要。理解 `Waker` 机制有助于理解底层原理。避免创建不必要地频繁唤醒自身的 Future。
+
+- **任务开销 (`tokio::spawn`):**
+  - 虽然 Tokio 的任务比 OS 线程轻量得多，但每个任务仍然有状态和调度开销。启动大量极短生命周期的任务可能不如将工作合并到较少任务中高效。
+  - **对策:** 平衡任务的粒度。对于非常小的、可以快速完成的异步操作，直接 `.await` 可能比 `spawn` 更高效。
+
+- **缓冲与背压 (Buffering & Backpressure):**
+  - 在数据管道或生产者-消费者模式中，如果生产者速度远快于消费者，中间的缓冲区可能会无限增长，耗尽内存。
+  - **对策:**
+    - **有界通道:** 使用 `tokio::sync::mpsc::channel(buffer_size)` 创建有界 MPSC 通道。
+    当缓冲区满时，`sender.send(..).await` 会异步地等待，直到有空间可用，从而实现背压。
+    - **流控制:** 在流处理中，消费者可以通过控制向上游请求数据的速率来实现背压。
+    - **速率限制:** 对生产者进行速率限制。
+
+- **分析工具:**
+  - **`tokio-console`:** 一个诊断和调试 Tokio 应用的利器。
+        它可以实时显示任务列表、任务耗时、任务调度、资源使用情况等，对于发现阻塞操作、高唤醒率任务等非常有帮助。
+        需要应用程序集成 `console-subscriber`。
+  - **Profiling (e.g., `perf`, `flamegraph`):** 使用系统级的性能分析工具 `perf` (Linux) 结合 `flamegraph` 可以生成 CPU 火焰图，找出 CPU 密集的热点。
+  - **Tracing (`tracing` crate):** 配置 `tracing` 记录详细的 span 进入/退出和事件信息，有助于理解代码执行流程和定位耗时操作。
+
+优化是一个持续的过程，通常遵循“测量-识别瓶颈-优化-再测量”的循环。在没有明确证据表明存在性能问题时，过早优化可能会引入不必要的复杂性。
+优先编写清晰、正确的代码，然后根据性能分析结果进行针对性优化。
