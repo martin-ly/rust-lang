@@ -101,7 +101,7 @@
 
 1. 单态射 ⇔ 单射：
    设 \(f: A \to B\) 是函数。
-   - (⇒) 假设 \(f\) 是单态射，对于任意 \(a, a' \in A\)，若 \(f(a) = f(a')\)，考虑两个函数 \(g, h: \{*\} \to A\)，其中 \(g(*) = a\)，\(h(*) = a'\)。由于 \(f \circ g = f \circ h\)，由单态射性质得 \(g = h\)，因此 \(a = a'\)，所以 \(f\) 是单射。
+   - (⇒) 假设 \(f\) 是单态射，对于任意 \(a, a' \in A\)，若 \(f(a) = f(a')\)，考虑两个函数 \(g, h: \{\*\} \to A\)，其中 \(g(\*) = a\)，\(h(\*) = a'\)。由于 \(f \circ g = f \circ h\)，由单态射性质得 \(g = h\)，因此 \(a = a'\)，所以 \(f\) 是单射。
 
    - (⇐) 假设 \(f\) 是单射，对于任意函数 \(g, h: Z \to A\)，若 \(f \circ g = f \circ h\)，则对任意 \(z \in Z\)，有 \(f(g(z)) = f(h(z))\)。由 \(f\) 的单射性得 \(g(z) = h(z)\)，因此 \(g = h\)，所以 \(f\) 是单态射。
 
@@ -197,7 +197,7 @@
 
 **定义 2.4.1**：对于范畴 \(\mathcal{C}\) 中的对象 \(A\)，共变Hom函子 \(\text{Hom}_{\mathcal{C}}(A, -): \mathcal{C} \to \mathbf{Set}\) 将每个对象 \(B\) 映射到集合 \(\text{Hom}_{\mathcal{C}}(A, B)\)，将态射 \(f: B \to C\) 映射到函数 \(f_*: \text{Hom}_{\mathcal{C}}(A, B) \to \text{Hom}_{\mathcal{C}}(A, C)\)，其中 \(f_*(g) = f \circ g\)。
 
-**定义 2.4.2**：对于范畴 \(\mathcal{C}\) 中的对象 \(B\)，反变Hom函子 \(\text{Hom}_{\mathcal{C}}(-, B): \mathcal{C}^{op} \to \mathbf{Set}\) 将每个对象 \(A\) 映射到集合 \(\text{Hom}_{\mathcal{C}}(A, B)\)，将态射 \(f: A \to C\) 映射到函数 \(f^*: \text{Hom}_{\mathcal{C}}(C, B) \to \text{Hom}_{\mathcal{C}}(A, B)\)，其中 \(f^*(g) = g \circ f\)。
+**定义 2.4.2**：对于范畴 \(\mathcal{C}\) 中的对象 \(B\)，反变Hom函子 \(\text{Hom}_{\mathcal{C}}(-, B): \mathcal{C}^{op} \to \mathbf{Set}\) 将每个对象 \(A\) 映射到集合 \(\text{Hom}_{\mathcal{C}}(A, B)\)，将态射 \(f: A \to C\) 映射到函数 \(f^\*: \text{Hom}_{\mathcal{C}}(C, B) \to \text{Hom}_{\mathcal{C}}(A, B)\)，其中 \(f^*(g) = g \circ f\)。
 
 **定义 2.4.3**：函子 \(F: \mathcal{C} \to \mathbf{Set}\) 是可表示的（representable），如果存在 \(\mathcal{C}\) 中的对象 \(A\)，使得 \(F \cong \text{Hom}_{\mathcal{C}}(A, -)\)。
 
@@ -241,9 +241,9 @@ F(B) @>>{\alpha_B}> G(B)
 
 **定义 3.4.1**：给定自然变换 \(\alpha: F \Rightarrow G\) 和 \(\beta: G \Rightarrow H\)，其中 \(F, G, H: \mathcal{C} \to \mathcal{D}\)，它们的垂直组合 \(\beta \circ \alpha: F \Rightarrow H\) 定义为 \((\beta \circ \alpha)_A = \beta_A \circ \alpha_A\)。
 
-**定义 3.4.2**：给定自然变换 \(\alpha: F \Rightarrow G\)，其中 \(F, G: \mathcal{C} \to \mathcal{D}\)，和 \(\beta: H \Rightarrow K\)，其中 \(H, K: \mathcal{D} \to \mathcal{E}\)，它们的水平组合 \(\beta * \alpha: H \circ F \Rightarrow K \circ G\) 定义为 \((\beta * \alpha)_A = \beta_{G(A)} \circ H(\alpha_A) = K(\alpha_A) \circ \beta_{F(A)}\)。
+**定义 3.4.2**：给定自然变换 \(\alpha: F \Rightarrow G\)，其中 \(F, G: \mathcal{C} \to \mathcal{D}\)，和 \(\beta: H \Rightarrow K\)，其中 \(H, K: \mathcal{D} \to \mathcal{E}\)，它们的水平组合 \(\beta \* \alpha: H \circ F \Rightarrow K \circ G\) 定义为 \((\beta \* \alpha)_A = \beta_{G(A)} \circ H(\alpha_A) = K(\alpha_A) \circ \beta_{F(A)}\)。
 
-**定理 3.4.3**（交换定律）：水平组合和垂直组合满足交换律：\((\beta' \circ \beta) * (\alpha' \circ \alpha) = (\beta' * \alpha') \circ (\beta * \alpha)\)。
+**定理 3.4.3**（交换定律）：水平组合和垂直组合满足交换律：\((\beta' \circ \beta) \* (\alpha' \circ \alpha) = (\beta' \* \alpha') \circ (\beta \* \alpha)\)。
 
 **证明**：通过分量级别的计算，跟踪态射组合并验证等式。
 
