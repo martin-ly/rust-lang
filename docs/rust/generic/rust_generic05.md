@@ -934,10 +934,7 @@ impl<T: Display> Tree<T> {
 
 递归函数可以表示为：
 
-$$f(n) = \begin{cases}
-  \text{base}(n) & \text{if } \text{is\_base}(n) \\
-  \text{combine}(n, f(\text{reduce}(n))) & \text{otherwise}
-\end{cases}$$
+$$f(n) = \begin{cases}\text{base}(n) & \text{if } \text{is\_base}(n) \\\text{combine}(n, f(\text{reduce}(n))) & \text{otherwise}\end{cases}$$
 
 迭代函数可以表示为：
 
@@ -951,10 +948,7 @@ $$f_{\text{iter}}(n) = \text{fold}(\text{init}, \text{sequence}(n), \text{operat
 
 1. **尾递归优化**：将递归调用作为函数的最后一个操作
 
-   $$f_{\text{tail}}(n, \text{acc}) = \begin{cases}
-     \text{acc} & \text{if } \text{is\_base}(n) \\
-     f_{\text{tail}}(\text{reduce}(n), \text{update}(\text{acc}, n)) & \text{otherwise}
-   \end{cases}$$
+   $$f_{\text{tail}}(n, \text{acc}) = \begin{cases}\text{acc} & \text{if } \text{is\_base}(n) \\f_{\text{tail}}(\text{reduce}(n), \text{update}(\text{acc}, n)) & \text{otherwise}\end{cases}$$
 
 2. **显式栈**：使用数据结构模拟调用栈
 
@@ -1086,10 +1080,12 @@ $$P_S \vdash P_T \text{ via } m_{S \to T}$$
 **状态转换的可达性分析**：
 
 类型状态模式定义了一个有向图 $G = (V, E)$，其中：
+
 - 顶点集 $V$ 是所有可能的状态
 - 边集 $E$ 是所有可能的状态转换
 
 这允许我们应用图论算法分析状态机属性：
+
 - 可达性：状态 $T$ 是否可从状态 $S$ 到达
 - 活跃性：是否存在死锁状态
 - 安全性：是否所有危险操作都受到保护
@@ -1170,7 +1166,7 @@ $$\text{Kilometers} = \text{Tag}_{\text{Kilometers}} \times \mathbb{R}$$
 
 **幽灵数据的形式化语义**：
 
-PhantomData<T> 的各种用法对应于不同的语义注释：
+`PhantomData<T>`的各种用法对应于不同的语义注释：
 
 1. `PhantomData<T>` - 表示逻辑上拥有类型 T
 2. `PhantomData<&'a T>` - 表示逻辑上借用了类型 T
@@ -1527,6 +1523,7 @@ where
 $$P(A) = w_c \times C(A) + w_m \times M(A) + w_t \times T(A) + w_l \times L(A)$$
 
 其中：
+
 - $C(A)$ 是理解成本
 - $M(A)$ 是维护成本
 - $T(A)$ 是编译时间成本

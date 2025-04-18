@@ -1,4 +1,15 @@
-# Rust **ad-hoc 多态**（Ad-hoc Polymorphism）的机制，包括其基本原理、实现方式、具体示例以及在设计中的作用
+# Rust **ad-hoc 多态**（Ad-hoc Polymorphism）
+
+的机制，包括其基本原理、实现方式、具体示例以及在设计中的作用
+
+## 目录
+
+- [Rust **ad-hoc 多态**（Ad-hoc Polymorphism）](#rust-ad-hoc-多态-Ad-hoc Polymorphism)
+  - [目录](#目录)
+  - [1. 什么是 ad-hoc 多态](#1-什么是-ad-hoc-多态)
+  - [2. Rust 中 ad-hoc 多态的实现机制](#2-rust-中-ad-hoc-多态的实现机制)
+    -[2.1 Trait 定义与实现](#21-trait-定义与实现)
+  - [3. ad-hoc 多态的优势与设计思路](#3-ad-hoc-多态的优势与设计思路)
 
 ## 1. 什么是 ad-hoc 多态
 
