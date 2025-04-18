@@ -71,7 +71,8 @@
 
 **定义**：量子计算的基本信息单位，区别于经典比特，量子比特可以处于|0⟩、|1⟩或两者的叠加态。
 
-**数学表示**：单个量子比特状态可表示为 $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$，其中 $|\alpha|^2 + |\beta|^2 = 1$
+**数学表示**：单个量子比特状态可表示为
+$|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$，其中 $|\alpha|^2 + |\beta|^2 = 1$
 
 ### 2.2 量子叠加态（Superposition）
 
@@ -84,7 +85,8 @@ $|\psi\rangle = \sum_{i=0}^{2^n-1} \alpha_i |i\rangle$，其中$\sum_{i=0}^{2^n-
 
 **定义**：两个或多个量子比特的状态无法独立描述，必须作为整体考虑。
 
-**示例**：Bell态 $|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$
+**示例**：
+Bell态 $|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$
 
 ### 2.4 量子测量（Measurement）
 
