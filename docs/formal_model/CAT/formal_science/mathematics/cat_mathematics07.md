@@ -78,13 +78,7 @@
 
 **定义 1.1.3** (自然变换)：给定函子 $F, G: \mathcal{C} \rightarrow \mathcal{D}$，自然变换 $\eta: F \Rightarrow G$ 是一族态射 $\{\eta_A: F(A) \rightarrow G(A) | A \in Obj(\mathcal{C})\}$，使得对任意 $\mathcal{C}$ 中的态射 $f: A \rightarrow B$，下图交换：
 
-\[
-\begin{CD}
-F(A) @>F(f)>> F(B)\\
-@V\eta_AV V @VV\eta_BV\\
-G(A) @>>G(f)> G(B)
-\end{CD}
-\]
+\[\begin{CD}F(A) @>F(f)>> F(B)\\@V\eta_AV V @VV\eta_BV\\G(A) @>>G(f)> G(B)\end{CD}\]
 
 ### 1.2 现实世界到数学形式世界的函子映射
 
@@ -121,13 +115,7 @@ G(A) @>>G(f)> G(B)
 *证明*：
 对于每个现实对象 $r \in Obj(\mathcal{R})$，定义 $\eta_r: \Phi_1(r) \rightarrow \Phi_2(r)$ 为两种认知方式下形式化结果之间的转换。
 对于任意现实关系 $f: r \rightarrow s$，我们需证明下图交换：
-\[
-\begin{CD}
-\Phi_1(r) @>\Phi_1(f)>> \Phi_1(s)\\
-@V\eta_rV V @VV\eta_sV\\
-\Phi_2(r) @>>\Phi_2(f)> \Phi_2(s)
-\end{CD}
-\]
+\[\begin{CD}\Phi_1(r) @>\Phi_1(f)>> \Phi_1(s)\\@V\eta_rV V @VV\eta_sV\\\Phi_2(r) @>>\Phi_2(f)> \Phi_2(s)\end{CD}\]
 
 这等价于 $\eta_s \circ \Phi_1(f) = \Phi_2(f) \circ \eta_r$，意味着不同认知方式的差异是系统性的，而非随机的。这一性质在科学认识史上有丰富例证：如欧几里得几何与非欧几何、牛顿力学与相对论之间存在明确的翻译关系。$\square$
 

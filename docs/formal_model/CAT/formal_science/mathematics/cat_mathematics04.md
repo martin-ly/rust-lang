@@ -27,6 +27,57 @@
 - </think>
 ```
 
+## 目录
+
+- [范畴论视角下的数学关联网络：理论间的形式化桥梁](#范畴论视角下的数学关联网络理论间的形式化桥梁)
+  - [目录](#目录)
+  - [1. 理论交织的范畴视角](#1-理论交织的范畴视角)
+    - [1.1 关联网络的数学形式化](#11-关联网络的数学形式化)
+    - [1.2 数学思想迁移的机制](#12-数学思想迁移的机制)
+  - [2. 代数与几何的范畴联结](#2-代数与几何的范畴联结)
+    - [2.1 代数几何的关联性原理](#21-代数几何的关联性原理)
+    - [2.2 代数拓扑的互操作框架](#22-代数拓扑的互操作框架)
+  - [3. 代数与逻辑的范畴镜像](#3-代数与逻辑的范畴镜像)
+    - [3.1 逻辑-代数对应性定理](#31-逻辑-代数对应性定理)
+    - [3.2 代数结构与类型系统的同构](#32-代数结构与类型系统的同构)
+  - [4. 几何与分析的范畴结合](#4-几何与分析的范畴结合)
+    - [4.1 微分几何的范畴化](#41-微分几何的范畴化)
+    - [4.2 泛函分析的范畴桥梁](#42-泛函分析的范畴桥梁)
+  - [5. 数论与代数几何的范畴网络](#5-数论与代数几何的范畴网络)
+    - [5.1 数论几何化的函子框架](#51-数论几何化的函子框架)
+    - [5.2 Langlands纲领的范畴解释](#52-langlands纲领的范畴解释)
+  - [6. 拓扑学与同伦论的范畴联结](#6-拓扑学与同伦论的范畴联结)
+    - [6.1 同伦理论的函子框架](#61-同伦理论的函子框架)
+    - [6.2 高阶范畴的互操作性](#62-高阶范畴的互操作性)
+  - [7. 分析与代数的范畴交融](#7-分析与代数的范畴交融)
+    - [7.1 泛函分析与代数结构](#71-泛函分析与代数结构)
+    - [7.2 分析学中的范畴结构](#72-分析学中的范畴结构)
+  - [8. 逻辑与计算的范畴关联](#8-逻辑与计算的范畴关联)
+    - [8.1 类型论与程序语言的对应](#81-类型论与程序语言的对应)
+    - [8.2 证明理论与范畴逻辑](#82-证明理论与范畴逻辑)
+  - [9. 量子理论的范畴框架](#9-量子理论的范畴框架)
+    - [9.1 量子力学的范畴解释](#91-量子力学的范畴解释)
+    - [9.2 量子场论与高维范畴](#92-量子场论与高维范畴)
+  - [10. 数学物理中的范畴交融](#10-数学物理中的范畴交融)
+    - [10.1 弦理论的范畴镜像对称](#101-弦理论的范畴镜像对称)
+    - [10.2 量子场论的范畴化重构](#102-量子场论的范畴化重构)
+  - [11. 高阶结构与关联网络](#11-高阶结构与关联网络)
+    - [11.1 高阶范畴的互操作性](#111-高阶范畴的互操作性)
+    - [11.2 关系网络的形式表达](#112-关系网络的形式表达)
+  - [12. 统计与概率的范畴基础](#12-统计与概率的范畴基础)
+    - [12.1 概率范畴的函子结构](#121-概率范畴的函子结构)
+    - [12.2 贝叶斯推断的范畴框架](#122-贝叶斯推断的范畴框架)
+  - [13. 计算理论的范畴网络](#13-计算理论的范畴网络)
+    - [13.1 计算模型的范畴等价](#131-计算模型的范畴等价)
+    - [13.2 程序语义的范畴对应](#132-程序语义的范畴对应)
+  - [14. 数学关联网络的Rust实现](#14-数学关联网络的rust实现)
+    - [14.1 范畴理论基础结构的Rust实现](#141-范畴理论基础结构的rust实现)
+    - [14.2 数学关联网络的Rust表示](#142-数学关联网络的rust表示)
+  - [15. 关联网络的整体模式](#15-关联网络的整体模式)
+    - [15.1 范畴网络的宏观结构](#151-范畴网络的宏观结构)
+    - [15.2 关联演化的历史模式](#152-关联演化的历史模式)
+  - [16. 总结：关联网络的意义](#16-总结关联网络的意义)
+
 ## 1. 理论交织的范畴视角
 
 ### 1.1 关联网络的数学形式化
@@ -45,8 +96,7 @@
 
 ### 1.2 数学思想迁移的机制
 
-**定理 1.2.1**（伴随函子的思想迁移原理）：若函子 $F: \mathcal{C} \to \mathcal{D}$ 有右伴随 $G: \mathcal{D} \to \mathcal{C}$，则对任意 $C \in \mathcal{C}$ 和 $D \in \mathcal{D}$，存在自然双射：
-$$\text{Hom}_{\mathcal{D}}(F(C), D) \cong \text{Hom}_{\mathcal{C}}(C, G(D))$$
+**定理 1.2.1**（伴随函子的思想迁移原理）：若函子 $F: \mathcal{C} \to \mathcal{D}$ 有右伴随 $G: \mathcal{D} \to \mathcal{C}$，则对任意 $C \in \mathcal{C}$ 和 $D \in \mathcal{D}$，存在自然双射：$$\text{Hom}_{\mathcal{D}}(F(C), D) \cong \text{Hom}_{\mathcal{C}}(C, G(D))$$
 
 这建立了两个范畴（理论）之间系统性的概念翻译机制。
 
@@ -54,36 +104,29 @@ $$\text{Hom}_{\mathcal{D}}(F(C), D) \cong \text{Hom}_{\mathcal{C}}(C, G(D))$$
 
 **定理 1.2.2**（Kan扩张的知识泛化原理）：设 $F: \mathcal{A} \to \mathcal{C}$ 和 $K: \mathcal{A} \to \mathcal{B}$ 是函子，表示从知识域 $\mathcal{A}$ 到领域 $\mathcal{C}$ 和 $\mathcal{B}$ 的映射。则左Kan扩张 $\text{Lan}_K F: \mathcal{B} \to \mathcal{C}$ 提供了基于现有知识 $F$ 对新领域 $\mathcal{B}$ 的最佳扩展。
 
-**证明**：左Kan扩张 $\text{Lan}_K F$ 由普遍性质定义：对任意函子 $G: \mathcal{B} \to \mathcal{C}$，
+**证明**：
+左Kan扩张 $\text{Lan}_K F$ 由普遍性质定义：对任意函子 $G: \mathcal{B} \to \mathcal{C}$，
 $$\text{Nat}(\text{Lan}_K F, G) \cong \text{Nat}(F, G \circ K)$$
 这表明 $\text{Lan}_K F$ 是使得下图交换的"最佳近似"：
-$$\begin{CD}
-\mathcal{A} @>F>> \mathcal{C}\\
-@V{K}VV @|\\
-\mathcal{B} @>{\text{Lan}_K F}>> \mathcal{C}
-\end{CD}$$
+$$\begin{CD}\mathcal{A} @>F>> \mathcal{C}\\@V{K}VV @|\\\mathcal{B} @>{\text{Lan}_K F}>> \mathcal{C}\end{CD}$$
 
 ## 2. 代数与几何的范畴联结
 
 ### 2.1 代数几何的关联性原理
 
-**定理 2.1.1**（代数-几何对偶的形式化）：仿射概形范畴 $\text{AffSch}$ 与交换环范畴 $\text{CRing}^{\text{op}}$ 之间存在范畴等价：
-$$\text{AffSch} \simeq \text{CRing}^{\text{op}}$$
+**定理 2.1.1**（代数-几何对偶的形式化）：仿射概形范畴 $\text{AffSch}$ 与交换环范畴 $\text{CRing}^{\text{op}}$ 之间存在范畴等价：$$\text{AffSch} \simeq \text{CRing}^{\text{op}}$$
 这形式化了代数方程与几何形状之间的本质对应。
 
 **证明**：定义函子 $\text{Spec}: \text{CRing}^{\text{op}} \to \text{AffSch}$ 将环 $R$ 映射到其素谱 $\text{Spec}(R)$，以及函子 $\Gamma: \text{AffSch} \to \text{CRing}^{\text{op}}$ 将概形 $X$ 映射到其整体函数环 $\Gamma(X, \mathcal{O}_X)$。可以验证这两个函子构成拟逆：$\Gamma \circ \text{Spec} \cong \text{Id}_{\text{CRing}^{\text{op}}}$ 和 $\text{Spec} \circ \Gamma \cong \text{Id}_{\text{AffSch}}$。
 
 **定理 2.1.2**（代数簇-紧复流形-黎曼面的关联三角）：存在以下范畴间的关系网络，连接代数、分析和几何：
+
 1. 光滑射影代数簇范畴 $\text{ProjVar}_{\mathbb{C}}$
 2. 紧Riemann面范畴 $\text{CompRiem}$
 3. 紧复流形范畴 $\text{CompMan}$
 
 它们通过以下函子联系：
-$$\begin{CD}
-\text{ProjVar}_{\mathbb{C}} @>{\text{An}}>> \text{CompMan}\\
-@V{\text{Curve}}VV @VV{\text{Dim}_1}V\\
-\text{ProjCurve}_{\mathbb{C}} @>{\simeq}>> \text{CompRiem}
-\end{CD}$$
+$$\begin{CD}\text{ProjVar}_{\mathbb{C}} @>{\text{An}}>> \text{CompMan}\\@V{\text{Curve}}VV @VV{\text{Dim}_1}V\\\text{ProjCurve}_{\mathbb{C}} @>{\simeq}>> \text{CompRiem}\end{CD}$$
 
 **证明**：函子 $\text{An}$ 是解析化函子，将代数簇视为复流形；$\text{Curve}$ 和 $\text{Dim}_1$ 分别是限制到一维情况的函子。这一关系网络形式化了GAGA原理，即代数几何和复分析几何之间的深层联系。
 
@@ -112,11 +155,7 @@ $$\text{Bool} \simeq \text{PropClas}$$
 **证明**：定义函子 $F: \text{PropClas} \to \text{Bool}$ 将命题理论 $T$ 映射到其Lindenbaum-Tarski代数 $F(T)$，即公式模 $T$-可证等价关系的商集。定义反向函子 $G: \text{Bool} \to \text{PropClas}$ 将布尔代数 $B$ 映射到由 $B$ 元素作为命题变量的理论。验证这两个函子构成等价。
 
 **定理 3.1.2**（Curry-Howard-Lambek对应的三角等价）：存在以下范畴等价三角：
-$$\begin{CD}
-\text{CCC} @>{\simeq}>> \lambda\\
-@A{\simeq}AA @AA{\simeq}A\\
-\text{IPL}
-\end{CD}$$
+$$\begin{CD}\text{CCC} @>{\simeq}>> \lambda\\@A{\simeq}AA @AA{\simeq}A\\\text{IPL}\end{CD}$$
 其中 $\text{CCC}$ 是笛卡尔闭范畴，$\lambda$ 是简单类型 $\lambda$ 演算范畴，$\text{IPL}$ 是直觉命题逻辑范畴。
 
 **证明要点**：建立三个等价函子，分别连接这三个范畴，验证从逻辑到类型再到范畴的映射保持了核心结构，如蕴含对应函数类型对应指数对象。
@@ -124,6 +163,7 @@ $$\begin{CD}
 ### 3.2 代数结构与类型系统的同构
 
 **定理 3.2.1**（代数理论-范畴-类型系统三角关联）：对于代数理论 $\mathbb{T}$，以下三个范畴等价：
+
 1. $\mathbb{T}$-模型范畴 $\text{Mod}(\mathbb{T})$
 2. $\mathbb{T}$ 的Lawvere代数理论范畴 $\mathcal{L}_{\mathbb{T}}$ 上的有限积保持函子范畴 $[\mathcal{L}_{\mathbb{T}}, \text{Set}]_{\times}$
 3. 带有 $\mathbb{T}$ 对应类型规则的依赖类型系统 $\text{Type}(\mathbb{T})$
@@ -131,6 +171,7 @@ $$\begin{CD}
 **证明**：构造函子 $F: \text{Mod}(\mathbb{T}) \to [\mathcal{L}_{\mathbb{T}}, \text{Set}]_{\times}$ 将模型 $M$ 映射到函子 $F_M$，其中 $F_M(n) = M^n$。构造函子 $G: [\mathcal{L}_{\mathbb{T}}, \text{Set}]_{\times} \to \text{Type}(\mathbb{T})$ 将函子映射到其对应的类型表达式，验证这些函子构成等价。
 
 **定理 3.2.2**（代数-计算对应的单子桥接）：单子范畴 $\text{Mon}(\mathcal{C})$ 建立了代数结构与计算效应之间的系统对应。具体而言，以下三个结构同构：
+
 1. 范畴 $\mathcal{C}$ 上的单子 $T$
 2. 单子代数结构 $(T, \eta, \mu)$
 3. 可计算效应结构，如状态、异常、非确定性
@@ -142,11 +183,7 @@ $$\begin{CD}
 ### 4.1 微分几何的范畴化
 
 **定理 4.1.1**（流形-切丛-微分形式的函子三角）：存在以下函子网络：
-$$\begin{CD}
-\text{Man} @>{T}>> \text{VectBund}\\
-@V{\Omega^*}VV @VV{\Gamma}V\\
-\text{DGAlg}^{\text{op}} @<{\text{forms}}<< \text{VectField}
-\end{CD}$$
+$$\begin{CD}\text{Man} @>{T}>> \text{VectBund}\\@V{\Omega^*}VV @VV{\Gamma}V\\\text{DGAlg}^{\text{op}} @<{\text{forms}}<< \text{VectField}\end{CD}$$
 
 其中 $\text{Man}$ 是光滑流形范畴，$T$ 是切丛函子，$\Omega^*$ 是微分形式函子，$\Gamma$ 是截面函子，形成了几何与代数分析之间的双向映射网络。
 
@@ -161,15 +198,12 @@ $$\text{Symp} \xrightarrow{\mathcal{C}^{\infty}} \text{Poisson} \xrightarrow{\te
 ### 4.2 泛函分析的范畴桥梁
 
 **定理 4.2.1**（拓扑向量空间-算子代数-测度论的三角关系）：存在以下函子网络：
-$$\begin{CD}
-\text{TVS} @>{\text{Op}}>> \text{OpAlg}\\
-@V{\text{Meas}}VV @VV{\text{Spec}}V\\
-\text{MeasSp} @>{\text{Int}}>> \text{C*Alg}^{\text{op}}
-\end{CD}$$
+$$\begin{CD}\text{TVS} @>{\text{Op}}>> \text{OpAlg}\\@V{\text{Meas}}VV @VV{\text{Spec}}V\\\text{MeasSp} @>{\text{Int}}>> \text{C*Alg}^{\text{op}}\end{CD}$$
 
 **证明**：函子 $\text{Op}$ 将拓扑向量空间映射到其线性算子代数，$\text{Meas}$ 将拓扑向量空间映射到其上的测度空间，$\text{Spec}$ 是谱映射，$\text{Int}$ 是积分映射。验证这些函子之间的自然关系，形成了分析几个分支之间的互译网络。
 
 **定理 4.2.2**（分析学中的伴随函子对网络）：在分析学中存在以下关键伴随函子对，连接不同结构：
+
 1. 完备化-遗忘：$\text{Completion} \dashv \text{Forget}: \text{Complete} \to \text{Metric}$
 2. 测度-积分：$\text{Meas} \dashv \text{Int}: \text{MeasSp} \to \text{TopSp}$
 3. 希尔伯特化-遗忘：$\text{Hilbert} \dashv \text{Forget}: \text{Hilb} \to \text{InnerProd}$
@@ -181,11 +215,7 @@ $$\begin{CD}
 ### 5.1 数论几何化的函子框架
 
 **定理 5.1.1**（数论-几何等价的形式化）：存在函子网络连接数论和代数几何：
-$$\begin{CD}
-\text{NumFields} @>{\text{Spec}}>> \text{Curves}\\
-@V{\text{Adeles}}VV @VV{\text{Pic}}V\\
-\text{AdeleCl} @>{\sim}>> \text{PicGrp}
-\end{CD}$$
+$$\begin{CD}\text{NumFields} @>{\text{Spec}}>> \text{Curves}\\@V{\text{Adeles}}VV @VV{\text{Pic}}V\\\text{AdeleCl} @>{\sim}>> \text{PicGrp}\end{CD}$$
 
 实现了数域与代数曲线，腺群类与Picard群之间的系统对应。
 
@@ -216,11 +246,7 @@ $$D^b(\text{Bun}_G) \simeq D^b(\text{QCoh}(\text{LocSys}_{^LG}))$$
 ### 6.1 同伦理论的函子框架
 
 **定理 6.1.1**（同伦-同调函子网络）：存在以下函子网络，连接同伦论和同调论：
-$$\begin{CD}
-\text{hTop} @>{K}>> \text{Spectra}\\
-@V{\pi_*}VV @VV{H_*}V\\
-\text{GrAb} @<{\text{Free}}<< \text{GrAb}
-\end{CD}$$
+$$\begin{CD}\text{hTop} @>{K}>> \text{Spectra}\\@V{\pi_*}VV @VV{H_*}V\\\text{GrAb} @<{\text{Free}}<< \text{GrAb}\end{CD}$$
 
 其中 $K$ 是K-理论谱函子，$\pi_*$ 计算同伦群，$H_*$ 计算同调群，将拓扑同伦理论与代数同调理论联系起来。
 
@@ -235,11 +261,7 @@ $$\text{Top} \xrightarrow{Ho} \text{hTop} \xrightarrow{\text{Sing}} \text{Ho(sSe
 ### 6.2 高阶范畴的互操作性
 
 **定理 6.2.1**（$(\infty,1)$-范畴网络）：存在以下$(\infty,1)$-范畴之间的函子网络：
-$$\begin{CD}
-\text{Top}_{\infty} @>{\simeq}>> \text{sSet}_{\infty}\\
-@V{\text{Sing}}VV @VV{\text{N}}V\\
-\text{sCat}_{\infty} @>{\simeq}>> \text{dg-Cat}_{\infty}
-\end{CD}$$
+$$\begin{CD}\text{Top}_{\infty} @>{\simeq}>> \text{sSet}_{\infty}\\@V{\text{Sing}}VV @VV{\text{N}}V\\\text{sCat}_{\infty} @>{\simeq}>> \text{dg-Cat}_{\infty}\end{CD}$$
 
 其中各范畴分别是拓扑空间、简单集合、简单范畴和微分分级范畴的$(\infty,1)$-版本，建立了拓扑学和高阶代数结构之间的等价。
 
@@ -270,11 +292,7 @@ $$\text{vN} \xrightarrow{\text{Proj}} \text{OML} \xrightarrow{\text{CL}} \text{M
 ### 7.2 分析学中的范畴结构
 
 **定理 7.2.1**（分析范畴的单子-余单子网络）：分析学中的关键结构可以通过以下单子-余单子网络联系：
-$$\begin{CD}
-\text{CompHaus} @<{U}<< \text{Prob}\\
-@V{P}VV @AA{G}A\\
-\text{ConvComp} @>>{U'}> \text{Meas}
-\end{CD}$$
+$$\begin{CD}\text{CompHaus} @<{U}<< \text{Prob}\\@V{P}VV @AA{G}A\\\text{ConvComp} @>>{U'}> \text{Meas}\end{CD}$$
 
 其中 $P$ 是概率单子，$G$ 是Giry单子，$U$ 和 $U'$ 是遗忘函子。
 
@@ -297,11 +315,7 @@ $$\text{DTT} \simeq \text{ElemTopos}$$
 **证明**：构造函子将依赖类型系统映射到其项范畴，证明这形成初等拓扑斯。反之，对任意初等拓扑斯，构造其内部语言形成依赖类型系统。验证这两个过程互为逆，建立等价。
 
 **定理 8.1.2**（程序语言语义的范畴网络）：存在以下函子网络，连接不同语义模型：
-$$\begin{CD}
-\text{OperSem} @>{\text{CPS}}>> \text{ContSem}\\
-@V{\text{Dens}}VV @VV{\text{Clos}}V\\
-\text{DenSem} @>{\text{Abs}}>> \text{DomSem}
-\end{CD}$$
+$$\begin{CD}\text{OperSem} @>{\text{CPS}}>> \text{ContSem}\\@V{\text{Dens}}VV @VV{\text{Clos}}V\\\text{DenSem} @>{\text{Abs}}>> \text{DomSem}\end{CD}$$
 
 其中包括操作语义、延续传递语义、指称语义和域语义，形成了程序语言语义的相互转换网络。
 
@@ -310,6 +324,7 @@ $$\begin{CD}
 ### 8.2 证明理论与范畴逻辑
 
 **定理 8.2.1**（证明范畴与多阶逻辑的对应）：以下三个范畴等价：
+
 1. 高阶直觉主义逻辑的证明范畴 $\text{Prf(IHOL)}$
 2. 笛卡尔闭范畴上的纤维化 $\text{Fib(CCC)}$
 3. 多态类型系统的语法范畴 $\text{Syn(System F)}$
@@ -325,6 +340,7 @@ $$\begin{CD}
 ### 9.1 量子力学的范畴解释
 
 **定理 9.1.1**（量子理论的范畴公理化）：量子理论可以公理化为带有特定结构的函子 $F: \text{FinHilb} \to \text{Set}$，满足以下条件：
+
 1. $F$ 保持有限直和（对应于系统的分离状态）
 2. $F$ 保持张量积（对应于复合系统）
 3. $F$ 满足特定概率公理
@@ -338,11 +354,12 @@ $$\begin{CD}
 ### 9.2 量子场论与高维范畴
 
 **定理 9.2.1**（TQFT作为单子函子）：$n$-维拓扑量子场论等价于单子函
-<think>我需要继续前面的内容，这是关于范畴论对数学各个领域关联性的详细分析。我刚才的内容在"9.2 量子场论与高维范畴"的"定理 9.2.1"中被截断了，正在讨论TQFT作为单子函子的表示。我应该从这里继续，然后完成剩余的部分，包括剩余的量子场论与高维范畴内容，并可能添加更多的章节来涵盖其他数学领域之间的关联。</think>**定理 9.2.1**（TQFT作为单子函子）：$n$-维拓扑量子场论等价于单子函子
+**定理 9.2.1**（TQFT作为单子函子）：$n$-维拓扑量子场论等价于单子函子
 $$Z: (\text{Bord}_n, \sqcup, \emptyset) \to (\text{Vect}, \otimes, \mathbb{K})$$
 从带曲面粘合的流形范畴到带张量积的向量空间范畴，保持张量结构。
 
 **证明**：验证拓扑量子场论的公理如何等价于单子函子的性质：
+
 1. $Z(M_1 \sqcup M_2) \cong Z(M_1) \otimes Z(M_2)$ 对应于单子函子保持张量结构
 2. $Z(\emptyset) \cong \mathbb{K}$ 对应于单位保持
 3. $Z(\Sigma \times [0,1]) \cong \text{id}_{Z(\Sigma)}$ 体现了拓扑不变性
@@ -378,6 +395,7 @@ $$\mathcal{A}: \mathcal{C} \to \text{C*-Alg}$$
 满足因果局部性和时空协变性公理。
 
 **证明**：验证这一函子框架如何捕获量子场论的基本性质：
+
 1. 因果局部性：若区域 $O_1$ 和 $O_2$ 空间相离，则 $[\mathcal{A}(O_1), \mathcal{A}(O_2)] = 0$
 2. 时空协变性：对任意 Poincaré 变换 $g$，存在函子自然同构 $\alpha_g: \mathcal{A} \to \mathcal{A} \circ g$
 
@@ -390,11 +408,7 @@ $$\mathcal{A}: \mathcal{C} \to \text{C*-Alg}$$
 ### 11.1 高阶范畴的互操作性
 
 **定理 11.1.1**（高阶范畴之间的函子网络）：存在$(\infty,n)$-范畴之间的网络映射：
-$$\begin{CD}
-(\infty,0)\text{-Cat} @>{\Sigma}>> (\infty,1)\text{-Cat} @>{\Sigma}>> (\infty,2)\text{-Cat} @>{\Sigma}>> \cdots\\
-@AAA @AAA @AAA \\
-\text{Set} @>{\tau_{\leq 0}}>> \text{Cat} @>{\tau_{\leq 1}}>> 2\text{-Cat} @>{\tau_{\leq 2}}>> \cdots
-\end{CD}$$
+$$\begin{CD}(\infty,0)\text{-Cat} @>{\Sigma}>> (\infty,1)\text{-Cat} @>{\Sigma}>> (\infty,2)\text{-Cat} @>{\Sigma}>> \cdots\\@AAA @AAA @AAA \\\text{Set} @>{\tau_{\leq 0}}>> \text{Cat} @>{\tau_{\leq 1}}>> 2\text{-Cat} @>{\tau_{\leq 2}}>> \cdots\end{CD}$$
 
 其中 $\Sigma$ 是悬挂函子，$\tau_{\leq n}$ 是截断函子，建立了不同维度范畴理论之间的系统关联。
 
@@ -425,6 +439,7 @@ $$C(v_i) = \frac{1}{\lambda} \sum_{j} A_{ij} C(v_j)$$
 **定理 12.1.1**（Giry单子与概率函子）：Giry单子定义了概率函子 $P: \text{Meas} \to \text{Meas}$，其中 $P(X)$ 是 $X$ 上概率测度的空间，带有单元 $\delta: X \to P(X)$ 和乘法 $\mu: P(P(X)) \to P(X)$，满足单子公理。
 
 **证明**：
+
 1. 单元 $\delta$ 将点 $x$ 映射到狄拉克测度 $\delta_x$
 2. 乘法 $\mu$ 对 $\Phi \in P(P(X))$ 定义为 $\mu(\Phi)(A) = \int_{P(X)} \nu(A) d\Phi(\nu)$
 3. 验证单位律：$\mu \circ P(\delta) = \mu \circ \delta_P = \text{id}_P$
@@ -437,21 +452,13 @@ $$C(v_i) = \frac{1}{\lambda} \sum_{j} A_{ij} C(v_j)$$
 ### 12.2 贝叶斯推断的范畴框架
 
 **定理 12.2.1**（贝叶斯推断作为态射反演）：在概率范畴中，贝叶斯推断对应于特定图形的态射反演：
-$$\begin{CD}
-\Theta @>{p}>> P(\Theta)\\
-@V{\ell}VV @AA{p(-|x)}A\\
-P(X) @<<{p(x|-)}< X
-\end{CD}$$
+$$\begin{CD}\Theta @>{p}>> P(\Theta)\\@V{\ell}VV @AA{p(-|x)}A\\P(X) @<<{p(x|-)}< X\end{CD}$$
 其中 $\Theta$ 是参数空间，$X$ 是观测空间，$p$ 是先验，$\ell$ 是似然，$p(x|-)$ 是采样，$p(-|x)$ 是后验。
 
 **证明**：验证贝叶斯规则 $p(\theta|x) \propto p(x|\theta)p(\theta)$ 如何对应于上述图形中态射的合成关系，展示范畴框架如何形式化统计推断的核心原理。
 
 **定理 12.2.2**（贝叶斯更新的函子解释）：存在函子 $\text{Update}: \text{StatMod} \to \text{BayesProc}$，将统计模型映射到贝叶斯过程，满足自然性条件：
-$$\begin{CD}
-\text{StatMod} @>{\text{Update}}>> \text{BayesProc}\\
-@V{F}VV @VV{G}V\\
-\text{StatMod}' @>>{\text{Update}'}> \text{BayesProc}'
-\end{CD}$$
+$$\begin{CD}\text{StatMod} @>{\text{Update}}>> \text{BayesProc}\\@V{F}VV @VV{G}V\\\text{StatMod}' @>>{\text{Update}'}> \text{BayesProc}'\end{CD}$$
 
 **证明**：构造函子 $\text{Update}$ 将模型 $(P, X, \ell)$ 映射到贝叶斯过程，验证贝叶斯更新操作的函子性质，解释这如何形式化了统计学中模型之间的一致性条件。
 
@@ -460,11 +467,7 @@ $$\begin{CD}
 ### 13.1 计算模型的范畴等价
 
 **定理 13.1.1**（计算模型的范畴等价网络）：存在以下计算模型之间的范畴等价：
-$$\begin{CD}
-\lambda \text{-Calc} @>{\simeq}>> \text{RecFunc}\\
-@V{\simeq}VV @VV{\simeq}V\\
-\text{TurMach} @>{\simeq}>> \text{PostSys}
-\end{CD}$$
+$$\begin{CD}\lambda \text{-Calc} @>{\simeq}>> \text{RecFunc}\\@V{\simeq}VV @VV{\simeq}V\\\text{TurMach} @>{\simeq}>> \text{PostSys}\end{CD}$$
 
 其中 $\lambda \text{-Calc}$ 是 $\lambda$-演算范畴，$\text{RecFunc}$ 是递归函数范畴，$\text{TurMach}$ 是图灵机范畴，$\text{PostSys}$ 是Post系统范畴。
 
@@ -479,11 +482,7 @@ $$\text{Comp} \underset{R}{\overset{C}{\rightleftarrows}} \text{Complex}$$
 ### 13.2 程序语义的范畴对应
 
 **定理 13.2.1**（程序语义的范畴三角）：以下三种程序语义范畴之间存在函子三角：
-$$\begin{CD}
-\text{OpSem} @>{F}>> \text{DenSem}\\
-@A{H}AA @VV{G}V\\
-\text{AxSem}
-\end{CD}$$
+$$\begin{CD}\text{OpSem} @>{F}>> \text{DenSem}\\@A{H}AA @VV{G}V\\\text{AxSem}\end{CD}$$
 
 其中 $\text{OpSem}$ 是操作语义范畴，$\text{DenSem}$ 是指称语义范畴，$\text{AxSem}$ 是公理语义范畴。
 
