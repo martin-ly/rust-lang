@@ -1277,7 +1277,7 @@ $$AdaptiveSystem = (Monitor, Analyze, Plan, Execute, Knowledge)$$
 
 ```math
 Sensors → StateEstimation → ControlLaw → Actuators → System
-    ↑                                                   |
+    ↑                                                 |
     └───────────────────── Feedback ──────────────────┘
 ```
 
@@ -1377,7 +1377,7 @@ $$QuantumAI = (QuantumData, QuantumAlgorithms, QuantumCommunication)$$
 │   │   ├── 数据复制         │   ├── CI/CD与DevOps
 │   │   ├── AI辅助分区       │   └── 资源编排
 │   │   └── 自愈系统         │
-│   │                        │
+│   │                       │
 │   └── 人机协同 ───────────┘
 │       ├── 交互模型
 │       ├── 混合决策
