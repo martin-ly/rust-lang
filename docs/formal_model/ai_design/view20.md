@@ -2749,10 +2749,6 @@ mod resilience_framework {
         }
         
         pub fn get_state(&self) -> CircuitState {
-            *self.state.lock().
-
-```rust
-        pub fn get_state(&self) -> CircuitState {
             *self.state.lock().unwrap()
         }
     }
@@ -6732,9 +6728,7 @@ mod edge_ai_system {
                     let local_confidence = self.local_engine.get_estimated_confidence(request);
                     let cloud_confidence = self.cloud_engine.as_ref()
                         .map_or(0.0, |e| e.get_estimated_confidence(request));
-                    
 
-```rust
                     // 在线状态下的策略决定
                     if local_confidence >= request.min_confidence {
                         if cloud_confidence > local_confidence + 0.1 {
@@ -7168,7 +7162,8 @@ mod edge_ai_system {
 
 ### 8.1 技术选型决策树
 
-在设计分布式系统时，技术选型是最关键的决策之一。以下是一个结构化的决策树，帮助工程师根据需求特点选择合适的技术栈。
+在设计分布式系统时，技术选型是最关键的决策之一。
+以下是一个结构化的决策树，帮助工程师根据需求特点选择合适的技术栈。
 
 -**决策树 8.1: 数据一致性技术选择**
 
@@ -7538,13 +7533,15 @@ fn share_data() {
    - 部署周期长，区域限制严格
    - 系统负全部责任
 
-现实中多数公司采用渐进式策略：从人机协同开始（特斯拉方法），收集数据和经验，逐步向更高级别的自动化过渡（Waymo方法）。这表明在高风险领域，人机协同通常是走向纯自动化的必要过渡阶段。
+现实中多数公司采用渐进式策略：从人机协同开始（特斯拉方法），收集数据和经验，逐步向更高级别的自动化过渡（Waymo方法）。
+这表明在高风险领域，人机协同通常是走向纯自动化的必要过渡阶段。
 
 ## 10. 结论与未来方向
 
 ### 10.1 方法论综合评价
 
-本文提出的多层次分析框架将分布式系统设计从抽象的元理论层次逐步具体化到实际工程实践，提供了一种全面而系统的方法来理解和构建复杂的分布式系统，特别是那些集成了AI与人机协同的系统。
+本文提出的多层次分析框架将分布式系统设计从抽象的元理论层次逐步具体化到实际工程实践，
+提供了一种全面而系统的方法来理解和构建复杂的分布式系统，特别是那些集成了AI与人机协同的系统。
 
 **方法论的主要贡献**:
 
