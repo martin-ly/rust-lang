@@ -45,7 +45,10 @@
 
 ## 1. TypeScript与JavaScript的等价转换关系
 
-TypeScript与JavaScript之间存在一种特殊的关系：TypeScript是JavaScript的超集，这意味着所有合法的JavaScript代码都是合法的TypeScript代码，但反之则不然。
+TypeScript与JavaScript之间存在一种特殊的关系：
+TypeScript是JavaScript的超集，
+这意味着所有合法的JavaScript代码都是合法的TypeScript代码，
+但反之则不然。
 
 **转换关系**：
 
@@ -508,11 +511,16 @@ class Subject {
 
 ## 6. 总结
 
-TypeScript通过为JavaScript添加静态类型系统，成功地解决了JavaScript在大型应用程序开发中的许多痛点。它保持了JavaScript的灵活性和表达力，同时增加了类型安全和工具支持。
+TypeScript通过为JavaScript添加静态类型系统，成功地解决了JavaScript在大型应用程序开发中的许多痛点。
+它保持了JavaScript的灵活性和表达力，同时增加了类型安全和工具支持。
 
-从理论角度看，TypeScript结合了实用主义和类型论的原则，创建了一个既能适应JavaScript生态系统，又能提供类型安全保障的语言。它的类型系统融合了函数式编程和面向对象编程的概念，使开发者能够选择最适合问题域的编程范式。
+从理论角度看，TypeScript结合了实用主义和类型论的原则，
+创建了一个既能适应JavaScript生态系统，又能提供类型安全保障的语言。
+它的类型系统融合了函数式编程和面向对象编程的概念，
+使开发者能够选择最适合问题域的编程范式。
 
-TypeScript的成功在于它找到了在类型安全和JavaScript兼容性之间的平衡点，使其成为前端开发的主流选择，并逐渐扩展到全栈开发领域。
+TypeScript的成功在于它找到了在类型安全和JavaScript兼容性之间的平衡点，
+使其成为前端开发的主流选择，并逐渐扩展到全栈开发领域。
 
 ## 7. 思维导图
 

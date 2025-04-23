@@ -55,7 +55,8 @@ TypeScript与JavaScript关系
 
 ## 1. 类型、变量与垃圾回收
 
-从同伦类型论角度看，TypeScript类型系统与JavaScript运行时系统构成了一种层级关系，类型检查时期和运行时期分别对应不同的抽象层级。
+从同伦类型论角度看，TypeScript类型系统与JavaScript运行时系统构成了一种层级关系，
+类型检查时期和运行时期分别对应不同的抽象层级。
 
 ### 类型擦除与同伦等价
 
@@ -110,7 +111,8 @@ console.log(counter()); // 1
 console.log(counter()); // 2
 ```
 
-此例中，`count`变量通过闭包被捕获，垃圾回收器需要追踪这种引用关系。形式化地说，这构成了一个引用图，只有当节点不再可达时才会被回收。
+此例中，`count`变量通过闭包被捕获，垃圾回收器需要追踪这种引用关系。
+形式化地说，这构成了一个引用图，只有当节点不再可达时才会被回收。
 
 ## 2. 类型系统的分类与关系
 
@@ -198,7 +200,8 @@ class Dog extends Animal {
 // 编译到JavaScript后，转换为原型继承
 ```
 
-这种双层抽象可以用范畴论中的纤维化(fibration)理论来解释：TypeScript的类型系统是JavaScript运行时系统上的一个纤维空间。
+这种双层抽象可以用范畴论中的纤维化(fibration)理论来解释：
+  TypeScript的类型系统是JavaScript运行时系统上的一个纤维空间。
 
 ### 控制流与类型安全
 
@@ -283,7 +286,8 @@ type Distribute<T, U> = T extends any ? U : never;
 type Result = Distribute<'a' | 'b', number>; // number | number，即number
 ```
 
-这些运算对应于命题逻辑中的操作，可以用Curry-Howard同构(Curry-Howard isomorphism)来理解：类型对应于命题，程序对应于证明。
+这些运算对应于命题逻辑中的操作，可以用Curry-Howard同构(Curry-Howard isomorphism)来理解：
+  类型对应于命题，程序对应于证明。
 
 ## 5. 控制流的同构关系
 
@@ -331,8 +335,14 @@ async function asyncOperation(x: number): Promise<number> {
 }
 ```
 
-这种同构关系保证了程序逻辑的本质不变，只是执行模型发生了变化，这也可以用范畴论中的自然变换(natural transformation)来解释。
+这种同构关系保证了程序逻辑的本质不变，只是执行模型发生了变化，
+这也可以用范畴论中的自然变换(natural transformation)来解释。
 
 ## 总结
 
-TypeScript与JavaScript之间的关系可以通过同伦类型论、范畴论和控制论等视角进行深入分析。TypeScript的类型系统作为JavaScript的静态验证层，既保持了程序的计算本质不变（同伦等价），又提供了额外的安全保障（控制论反馈）。从范畴论视角，两者之间的转换关系可以用各种范畴构造如函子、自然变换等来形式化描述，为我们理解这两种语言的关系提供了理论基础。
+TypeScript与JavaScript之间的关系可以通过同伦类型论、范畴论和控制论等视角进行深入分析。
+TypeScript的类型系统作为JavaScript的静态验证层，既保持了程序的计算本质不变（同伦等价），
+又提供了额外的安全保障（控制论反馈）。
+
+从范畴论视角，两者之间的转换关系可以用各种范畴构造如函子、自然变换等来形式化描述，
+为我们理解这两种语言的关系提供了理论基础。
