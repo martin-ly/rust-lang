@@ -76,6 +76,6 @@ pub fn test_array06() {
     let arr1 = [1, 2, 3];
     let arr2 = [1, 2, 3];
     let arr3 = [4, 5, 6];
-    println!("{}", arr1 == arr2); // 输出: true
-    println!("{}", arr1 != arr3); // 输出: true
+    println!("{}", (arr1 == arr2)); // 输出: true
+    println!("{}", (arr1 != arr3)); // 输出: true
 }
