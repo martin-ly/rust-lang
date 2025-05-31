@@ -109,7 +109,9 @@
 
 ### A.1. 什么是抽象代数 (What is Abstract Algebra)?
 
-抽象代数是研究代数结构的数学分支。一个**代数结构 (Algebraic Structure)** 通常指的是一个集合，连同其上定义的一个或多个**二元运算 (binary operations)** 或**一元运算 (unary operations)**，并且这些运算满足一定的**公理 (axioms)**。
+抽象代数是研究代数结构的数学分支。一个**代数结构 (Algebraic Structure)** 通常指的是一个集合，
+连同其上定义的一个或多个**二元运算 (binary operations)** 或**一元运算 (unary operations)**，
+并且这些运算满足一定的**公理 (axioms)**。
 它的目标是研究这些结构的共同性质，而不依赖于这些结构中元素的具体性质。
 
 ### A.2. 基本构成要素 (Basic Building Blocks)
@@ -160,7 +162,8 @@
 ### A.5. 子结构与商结构 (Substructures and Quotient Structures)
 
 - **子结构 (Substructure)**：原代数结构的一个子集，它关于原结构的运算也构成一个（同类型的）代数结构。例如，子群、子环、子空间。
-- **商结构 (Quotient Structure / Factor Structure)**：通过在原结构上定义一个合适的等价关系（通常由一个特殊的子结构，如群的正规子群或环的理想，来诱导），将等价类作为新结构的元素而形成的结构。例如，商群、商环。
+- **商结构 (Quotient Structure / Factor Structure)**：通过在原结构上定义一个合适的等价关系（通常由一个特殊的子结构，如群的正规子群或环的理想，来诱导），将等价类作为新结构的元素而形成的结构。
+- 例如，商群、商环。
 
 这些核心概念为我们后续深入探讨抽象代数的各个分支奠定了基础。
 
