@@ -1932,7 +1932,7 @@ TDA可以从数据表示的“形状”和“连通性”角度来审视对抗�
 
 - **组合规则：**
   - **态射的顺序组合 (Sequential Composition \(\circ\))：** 通过将一个方框的输出弦直接连接到另一个方框的输入弦来实现。如果 \(f: A \rightarrow B\) 和 \(g: B \rightarrow C\)，那么 \(g \circ f\) 就是将 \(f\) 的输出弦（类型为B）连接到 \(g\) 的输入弦（类型也为B）。
-        ```
+        ```text
           A             A
           |             |
          [f]  g o f =  [f]
@@ -1944,7 +1944,7 @@ TDA可以从数据表示的“形状”和“连通性”角度来审视对抗�
           C             C
         ```
   - **态射的并行组合 (Parallel Composition / Tensor Product \(\otimes\))：** 通过将两个（或多个）方框并排放置来实现。如果 \(f: A \rightarrow B\) 和 \(g: C \rightarrow D\)，那么 \(f \otimes g: A \otimes C \rightarrow B \otimes D\) 就是将 \(f\) 和 \(g\) 并列放置。
-        ```
+        ```text
         A   C             A---[f]---B
         |   |
        [f] [g]  f tensor g =
@@ -1953,7 +1953,7 @@ TDA可以从数据表示的“形状”和“连通性”角度来审视对抗�
         ```
   - **单位对象 \(I\):** 通常表示为“没有弦”或画布的空白区域。与单位对象的张量积 \(A \otimes I\) 就是弦 \(A\) 单独存在。
   - **对称/交换 \(\sigma_{A,B}: A \otimes B \rightarrow B \otimes A\):** 在对称幺半范畴中，这通常表示为两根弦的交叉。
-        ```
+        ```text
         A--- ---B
             X
         B--- ---A
