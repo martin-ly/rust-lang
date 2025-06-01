@@ -140,23 +140,57 @@
       - [5.6.4 **本节小结与关联性分析 | Section Summary and Relevance Analysis**](#564-本节小结与关联性分析--section-summary-and-relevance-analysis)
   - [6. 数学、认知与现实的关联性分析 (综合论证)](#6-数学认知与现实的关联性分析-综合论证)
     - [6.1 数学作为理解和描述现实的工具](#61-数学作为理解和描述现实的工具)
+      - [6.1.1 **定义与理论基础 | Definition and Theoretical Foundation**](#611-定义与理论基础--definition-and-theoretical-foundation)
+      - [6.1.2 **理论阐述与应用 | Theoretical Elaboration and Applications**](#612-理论阐述与应用--theoretical-elaboration-and-applications)
+      - [6.1.3 **局限性与批判性视角 | Limitations and Critical Perspectives**](#613-局限性与批判性视角--limitations-and-critical-perspectives)
+      - [6.1.4 **案例分析 | Case Analysis**](#614-案例分析--case-analysis)
+      - [6.1.5 **本节小结与关联性分析 | Section Summary and Relevance Analysis**](#615-本节小结与关联性分析--section-summary-and-relevance-analysis)
     - [6.2 人脑认知结构如何通过数学把握现实](#62-人脑认知结构如何通过数学把握现实)
+      - [6.2.1 **定义与理论基础 | Definition and Theoretical Foundation**](#621-定义与理论基础--definition-and-theoretical-foundation)
+      - [6.2.2 **认知机制与工具 | Cognitive Mechanisms and Tools**](#622-认知机制与工具--cognitive-mechanisms-and-tools)
+      - [6.2.3 **阶段与案例 | Stages and Case Analysis**](#623-阶段与案例--stages-and-case-analysis)
+      - [6.2.4 **实证研究 | Empirical Research**](#624-实证研究--empirical-research)
+      - [6.2.5 **本节小结与关联性分析 | Section Summary and Relevance Analysis**](#625-本节小结与关联性分析--section-summary-and-relevance-analysis)
     - [6.3 数学理论与思维层次的关系](#63-数学理论与思维层次的关系)
+      - [6.3.1 **定义与理论基础 | Definition and Theoretical Foundation**](#631-定义与理论基础--definition-and-theoretical-foundation)
+      - [6.3.2 **理论层级与思维类型 | Theoretical Hierarchies and Types of Thinking**](#632-理论层级与思维类型--theoretical-hierarchies-and-types-of-thinking)
+      - [6.3.4 **教育启示与案例分析 | Educational Implications and Case Analysis**](#634-教育启示与案例分析--educational-implications-and-case-analysis)
+      - [6.3.5 **本节小结与关联性分析 | Section Summary and Relevance Analysis**](#635-本节小结与关联性分析--section-summary-and-relevance-analysis)
     - [6.4 批判性分析：当前理解的不足、开放性问题与未来研究方向](#64-批判性分析当前理解的不足开放性问题与未来研究方向)
+      - [6.4.1 **理论局限与应用挑战 | Theoretical Limitations and Application Challenges**](#641-理论局限与应用挑战--theoretical-limitations-and-application-challenges)
+      - [6.4.2 **开放性问题与未来展望 | Open Questions and Future Prospects**](#642-开放性问题与未来展望--open-questions-and-future-prospects)
+      - [6.4.3 **本节小结与关联性分析 | Section Summary and Relevance Analysis**](#643-本节小结与关联性分析--section-summary-and-relevance-analysis)
   - [7. 结论](#7-结论)
     - [7.1 对核心问题的总结性回答](#71-对核心问题的总结性回答)
+      - [7.1.1 **总结与提升 | Summary and Enhancement**](#711-总结与提升--summary-and-enhancement)
+      - [7.1.2 **本节小结与关联性分析 | Section Summary and Relevance Analysis**](#712-本节小结与关联性分析--section-summary-and-relevance-analysis)
     - [7.2 理论意义与实践启示](#72-理论意义与实践启示)
+      - [7.2.1 **理论意义 | Theoretical Significance**](#721-理论意义--theoretical-significance)
+      - [7.2.2 **实践启示 | Practical Implications**](#722-实践启示--practical-implications)
+      - [7.2.3 **本节小结与关联性分析 | Section Summary and Relevance Analysis**](#723-本节小结与关联性分析--section-summary-and-relevance-analysis)
   - [8. 参考文献](#8-参考文献)
+    - [8.0 **引用说明 | Citation Notes**](#80-引用说明--citation-notes)
     - [8.1 认知科学基础 | Foundations of Cognitive Science](#81-认知科学基础--foundations-of-cognitive-science)
     - [8.2 数学基础 | Foundations of Mathematics](#82-数学基础--foundations-of-mathematics)
     - [8.3 认知与数学教育 | Cognition and Mathematics Education](#83-认知与数学教育--cognition-and-mathematics-education)
     - [8.4 应用研究 | Applied Research](#84-应用研究--applied-research)
+    - [8.5 **本节小结与关联性分析 | Section Summary and Relevance Analysis**](#85-本节小结与关联性分析--section-summary-and-relevance-analysis)
   - [附录](#附录)
     - [A. 主要数学理论分支与典型模型表 | Main Branches of Mathematical Theory and Typical Models](#a-主要数学理论分支与典型模型表--main-branches-of-mathematical-theory-and-typical-models)
+      - [A.1 **表格说明 | Table Explanation**](#a1-表格说明--table-explanation)
+      - [A.2 **本节小结 | Section Summary**](#a2-本节小结--section-summary)
     - [B. 认知科学常用实验方法简表 | Common Experimental Methods in Cognitive Science](#b-认知科学常用实验方法简表--common-experimental-methods-in-cognitive-science)
+      - [B.1 **表格说明 | Table Explanation**](#b1-表格说明--table-explanation)
+      - [B.2 **本节小结 | Section Summary**](#b2-本节小结--section-summary)
     - [C. 主要术语表 | Glossary of Key Terms](#c-主要术语表--glossary-of-key-terms)
+      - [C.1 **表格说明 | Table Explanation**](#c1-表格说明--table-explanation)
+      - [c.2 **本节小结 | Section Summary**](#c2-本节小结--section-summary)
     - [D. 研究工具与数据资源清单 | List of Research Tools and Data Resources](#d-研究工具与数据资源清单--list-of-research-tools-and-data-resources)
+      - [D.1 **内容说明 | Content Explanation**](#d1-内容说明--content-explanation)
+      - [D.2 **本节小结 | Section Summary**](#d2-本节小结--section-summary)
     - [E. 相关数学符号与定义 | Mathematical Symbols and Definitions](#e-相关数学符号与定义--mathematical-symbols-and-definitions)
+      - [E.1 **表格说明 | Table Explanation**](#e1-表格说明--table-explanation)
+      - [E.2 **本节小结 | Section Summary**](#e2-本节小结--section-summary)
   - [索引](#索引)
     - [索引结构示意 | Index Structure Diagram](#索引结构示意--index-structure-diagram)
   - [致谢 | Acknowledgements](#致谢--acknowledgements)
@@ -1055,13 +1089,13 @@ Understanding the cognitive demands of different mathematical theories helps opt
 
 ### 6.1 数学作为理解和描述现实的工具
 
-**定义与理论基础 | Definition and Theoretical Foundation**
+#### 6.1.1 **定义与理论基础 | Definition and Theoretical Foundation**
 
 数学作为工具（Mathematics as a Tool）是指利用数学的抽象、逻辑和结构性来理解、描述和预测现实世界的现象和规律。
 
 Mathematics as a tool refers to the use of mathematical abstraction, logic, and structure to understand, describe, and predict phenomena and laws of the real world.
 
-**理论阐述与应用 | Theoretical Elaboration and Applications**
+#### 6.1.2 **理论阐述与应用 | Theoretical Elaboration and Applications**
 
 - 数学通过形式化建模、逻辑推导和定量分析，为自然规律、社会现象和工程系统提供统一的表达和预测能力。
 - Through formal modeling, logical deduction, and quantitative analysis, mathematics provides a unified means of expression and prediction for natural laws, social phenomena, and engineering systems.
@@ -1072,7 +1106,7 @@ Mathematics as a tool refers to the use of mathematical abstraction, logic, and 
 - 微积分、概率统计、优化方法等工具广泛应用于科学与工程实践。
 - Tools such as calculus, probability and statistics, and optimization methods are widely used in science and engineering practice.
 
-**局限性与批判性视角 | Limitations and Critical Perspectives**
+#### 6.1.3 **局限性与批判性视角 | Limitations and Critical Perspectives**
 
 - 数学模型的有效性受限于假设、简化和数据质量。现实世界的复杂性、非线性和不确定性常常超出现有数学工具的表达能力。
 - The effectiveness of mathematical models is limited by assumptions, simplifications, and data quality. The complexity, nonlinearity, and uncertainty of the real world often exceed the expressive power of existing mathematical tools.
@@ -1080,12 +1114,12 @@ Mathematics as a tool refers to the use of mathematical abstraction, logic, and 
 - 数学的"非理性有效性"引发哲学争议，既有柏拉图主义的理想化，也有工具主义的实用取向。
 - The "unreasonable effectiveness" of mathematics has sparked philosophical debates, including Platonic idealism and instrumentalist pragmatism.
 
-**案例分析 | Case Analysis**
+#### 6.1.4 **案例分析 | Case Analysis**
 
 - 气象预测、金融建模、人工智能算法等领域均依赖复杂的数学工具。
 - Fields such as weather forecasting, financial modeling, and artificial intelligence algorithms all rely on complex mathematical tools.
 
-**本节小结与关联性分析 | Section Summary and Relevance Analysis**
+#### 6.1.5 **本节小结与关联性分析 | Section Summary and Relevance Analysis**
 
 数学作为理解和描述现实的工具，连接了认知结构与现实世界，是科学建模和技术创新的基础。
 
@@ -1095,13 +1129,13 @@ Mathematics, as a tool for understanding and describing reality, connects cognit
 
 ### 6.2 人脑认知结构如何通过数学把握现实
 
-**定义与理论基础 | Definition and Theoretical Foundation**
+#### 6.2.1 **定义与理论基础 | Definition and Theoretical Foundation**
 
 人脑认知结构通过感知、抽象、推理和应用等多阶段过程，将数学作为工具把握现实。
 
 The human cognitive structure uses mathematics as a tool to grasp reality through multi-stage processes such as perception, abstraction, reasoning, and application.
 
-**认知机制与工具 | Cognitive Mechanisms and Tools**
+#### 6.2.2 **认知机制与工具 | Cognitive Mechanisms and Tools**
 
 - 感知阶段依赖数据收集和模式识别，理解阶段通过概念抽象和理论建模，应用阶段包括问题解决和预测验证。
 - The perception stage relies on data collection and pattern recognition; the understanding stage involves conceptual abstraction and theoretical modeling; the application stage includes problem solving and prediction verification.
@@ -1109,17 +1143,17 @@ The human cognitive structure uses mathematics as a tool to grasp reality throug
 - 符号系统、公理体系、推理规则、计算工具（如算法、模拟）、分析工具（如统计、优化）共同提升认知结构对现实的把握能力。
 - Symbolic systems, axiomatic frameworks, rules of inference, computational tools (such as algorithms and simulations), and analytical tools (such as statistics and optimization) collectively enhance the cognitive structure's ability to grasp reality.
 
-**阶段与案例 | Stages and Case Analysis**
+#### 6.2.3 **阶段与案例 | Stages and Case Analysis**
 
 - 物理学中的建模过程、工程中的系统分析、社会科学中的数据建模，均体现了认知结构与数学工具的协同作用。
 - The modeling process in physics, systems analysis in engineering, and data modeling in social sciences all reflect the synergy between cognitive structures and mathematical tools.
 
-**实证研究 | Empirical Research**
+#### 6.2.4 **实证研究 | Empirical Research**
 
 - 认知科学表明，数学能力的发展与大脑结构、神经机制和学习经验密切相关。
 - Cognitive science shows that the development of mathematical ability is closely related to brain structure, neural mechanisms, and learning experience.
 
-**本节小结与关联性分析 | Section Summary and Relevance Analysis**
+#### 6.2.5 **本节小结与关联性分析 | Section Summary and Relevance Analysis**
 
 认知结构通过数学工具实现对现实的系统把握，是科学思维和创新能力的核心。
 
@@ -1129,13 +1163,13 @@ Cognitive structures achieve a systematic grasp of reality through mathematical 
 
 ### 6.3 数学理论与思维层次的关系
 
-**定义与理论基础 | Definition and Theoretical Foundation**
+#### 6.3.1 **定义与理论基础 | Definition and Theoretical Foundation**
 
 思维层次（Levels of Thinking）包括具体思维、抽象思维和形式思维。数学理论的发展推动了思维层次的提升。
 
 Levels of thinking include concrete, abstract, and formal thinking. The development of mathematical theory promotes the advancement of thinking levels.
 
-**理论层级与思维类型 | Theoretical Hierarchies and Types of Thinking**
+#### 6.3.2 **理论层级与思维类型 | Theoretical Hierarchies and Types of Thinking**
 
 - 基础理论（如数论、代数、几何）适合具体和抽象思维。
 - Basic theories (such as number theory, algebra, geometry) are suitable for concrete and abstract thinking.
@@ -1143,7 +1177,7 @@ Levels of thinking include concrete, abstract, and formal thinking. The developm
 - 应用理论（如分析学、概率论）和现代理论（如拓扑学、信息论）要求更高层次的抽象和形式思维。
 - Applied theories (such as analysis, probability theory) and modern theories (such as topology, information theory) require higher levels of abstraction and formal thinking.
 
-**教育启示与案例分析 | Educational Implications and Case Analysis**
+#### 6.3.4 **教育启示与案例分析 | Educational Implications and Case Analysis**
 
 - 数学教育应关注思维层次的培养，促进学生从具体到抽象、从直观到形式的认知发展。
 - Mathematics education should focus on cultivating levels of thinking, promoting students' cognitive development from concrete to abstract and from intuitive to formal.
@@ -1151,7 +1185,7 @@ Levels of thinking include concrete, abstract, and formal thinking. The developm
 - 小学算术到高等数学的学习路径，体现了思维层次的逐步提升。
 - The learning path from elementary arithmetic to advanced mathematics reflects the gradual elevation of thinking levels.
 
-**本节小结与关联性分析 | Section Summary and Relevance Analysis**
+#### 6.3.5 **本节小结与关联性分析 | Section Summary and Relevance Analysis**
 
 数学理论的发展与思维层次的提升相互促进，为创新能力和科学素养的培养提供理论基础。
 
@@ -1161,7 +1195,7 @@ The development of mathematical theory and the advancement of thinking levels pr
 
 ### 6.4 批判性分析：当前理解的不足、开放性问题与未来研究方向
 
-**理论局限与应用挑战 | Theoretical Limitations and Application Challenges**
+#### 6.4.1 **理论局限与应用挑战 | Theoretical Limitations and Application Challenges**
 
 - 形式化方法的边界、证明体系的局限、模型构建的复杂性。
 - The boundaries of formal methods, limitations of proof systems, and complexity of model construction.
@@ -1172,7 +1206,7 @@ The development of mathematical theory and the advancement of thinking levels pr
 - 认知理解的深度、抽象能力、应用范围、发展潜力。
 - Depth of cognitive understanding, abstraction ability, scope of application, and development potential.
 
-**开放性问题与未来展望 | Open Questions and Future Prospects**
+#### 6.4.2 **开放性问题与未来展望 | Open Questions and Future Prospects**
 
 - 数学本质的进一步澄清、认知机制的深入揭示、现实关系的多维建模。
 - Further clarification of the essence of mathematics, deeper revelation of cognitive mechanisms, and multidimensional modeling of the relationship with reality.
@@ -1180,7 +1214,7 @@ The development of mathematical theory and the advancement of thinking levels pr
 - 理论深化（基础、应用、交叉）、应用拓展（教育、技术、跨领域）、方法创新（实验、数据、模型验证）。
 - Theoretical deepening (foundational, applied, interdisciplinary), application expansion (education, technology, cross-domain), and methodological innovation (experiments, data, model validation).
 
-**本节小结与关联性分析 | Section Summary and Relevance Analysis**
+#### 6.4.3 **本节小结与关联性分析 | Section Summary and Relevance Analysis**
 
 批判性分析有助于推动理论创新和实践改进，为认知科学、数学和现实世界的协同发展指明方向。
 
@@ -1192,7 +1226,7 @@ Critical analysis helps promote theoretical innovation and practical improvement
 
 ### 7.1 对核心问题的总结性回答
 
-**总结与提升 | Summary and Enhancement**
+#### 7.1.1 **总结与提升 | Summary and Enhancement**
 
 本研究系统梳理了人脑认知结构、现实世界本质与数学理论之间的复杂关系，围绕核心问题进行了深入分析。
 
@@ -1216,7 +1250,7 @@ This study systematically reviews the complex relationships among human cognitiv
 - 认知通过数学工具深化对现实的理解，现实世界的复杂性推动了数学理论和认知机制的不断创新，而数学的发展又为认知能力的提升和现实问题的解决提供了坚实基础。
 - Cognition deepens the understanding of reality through mathematical tools; the complexity of the real world drives continuous innovation in mathematical theory and cognitive mechanisms; and the development of mathematics provides a solid foundation for the improvement of cognitive abilities and the solution of real-world problems.
 
-**本节小结与关联性分析 | Section Summary and Relevance Analysis**
+#### 7.1.2 **本节小结与关联性分析 | Section Summary and Relevance Analysis**
 
 本章总结了全文的核心观点，强调了认知结构、数学理论与现实世界三者之间的动态互动和相互促进，为后续理论深化和实践应用提供了理论基础。
 
@@ -1226,7 +1260,7 @@ This chapter summarizes the core viewpoints of the entire text, emphasizes the d
 
 ### 7.2 理论意义与实践启示
 
-**理论意义 | Theoretical Significance**
+#### 7.2.1 **理论意义 | Theoretical Significance**
 
 - 本研究在理论上深化了对认知结构、数学本质和现实关系的理解，提出了系统的分析框架和多维度的理论视角。
 - Theoretically, this study deepens the understanding of cognitive structures, the essence of mathematics, and the relationship with reality, and proposes a systematic analytical framework and multi-dimensional theoretical perspectives.
@@ -1234,7 +1268,7 @@ This chapter summarizes the core viewpoints of the entire text, emphasizes the d
 - 通过批判性分析和综合方法论，揭示了认知机制、数学理论和现实世界之间的内在联系和互动机制，为认知科学、数学基础理论和科学哲学等领域提供了理论支持。
 - Through critical analysis and comprehensive methodology, it reveals the internal connections and interaction mechanisms among cognitive mechanisms, mathematical theory, and the real world, providing theoretical support for fields such as cognitive science, mathematical foundations, and philosophy of science.
 
-**实践启示 | Practical Implications**
+#### 7.2.2 **实践启示 | Practical Implications**
 
 - 研究成果对数学教育、科学建模、人工智能等领域具有重要启示意义。
 - The research results have important implications for mathematics education, scientific modeling, artificial intelligence, and other fields.
@@ -1248,7 +1282,7 @@ This chapter summarizes the core viewpoints of the entire text, emphasizes the d
 - 人工智能和数据科学领域，研究成果为智能系统的认知建模和算法优化提供了理论基础。
 - In artificial intelligence and data science, the research results provide a theoretical basis for cognitive modeling and algorithm optimization of intelligent systems.
 
-**本节小结与关联性分析 | Section Summary and Relevance Analysis**
+#### 7.2.3 **本节小结与关联性分析 | Section Summary and Relevance Analysis**
 
 本节总结了理论与实践的双重意义，强调了理论创新与应用转化的协同发展。
 
@@ -1258,7 +1292,7 @@ This section summarizes the dual significance of theory and practice, emphasizin
 
 ## 8. 参考文献
 
-**引用说明 | Citation Notes**
+### 8.0 **引用说明 | Citation Notes**
 
 本节汇集了本研究涉及的主要中英文文献，涵盖认知科学、数学哲学、数学教育、科学建模等领域，为理论分析和案例研究提供了坚实的文献基础。
 
@@ -1311,7 +1345,7 @@ This section compiles the main Chinese and English references involved in this s
 - 陈希孺. (2010). 数学建模基础. 高等教育出版社。
 - 王元. (2008). 数学的应用与建模. 科学出版社。
 
-**本节小结与关联性分析 | Section Summary and Relevance Analysis**
+### 8.5 **本节小结与关联性分析 | Section Summary and Relevance Analysis**
 
 本节为全文提供了权威的理论和实证依据，支撑了各章节的论证和案例分析。参考文献的多元性和国际化有助于提升研究的学术深度和广度。
 
@@ -1323,7 +1357,7 @@ This section provides authoritative theoretical and empirical support for the en
 
 ### A. 主要数学理论分支与典型模型表 | Main Branches of Mathematical Theory and Typical Models
 
-**表格说明 | Table Explanation**
+#### A.1 **表格说明 | Table Explanation**
 
 本表系统梳理了主要数学分支及其典型模型，便于理解各分支的核心内容和结构特征。
 
@@ -1340,7 +1374,7 @@ This table systematically reviews the main branches of mathematics and their typ
 | 概率论 Probability    | 随机性、分布 Randomness, Distribution         | 概率空间、随机过程 Probability Space, Stochastic Process |
 | 逻辑 Logic            | 命题、证明、模型 Proposition, Proof, Model    | 命题逻辑、模型论 Propositional Logic, Model Theory |
 
-**本节小结 | Section Summary**
+#### A.2 **本节小结 | Section Summary**
 
 本表有助于梳理数学理论的整体结构，为跨学科研究和认知映射提供基础。
 
@@ -1350,7 +1384,7 @@ This table helps clarify the overall structure of mathematical theory and provid
 
 ### B. 认知科学常用实验方法简表 | Common Experimental Methods in Cognitive Science
 
-**表格说明 | Table Explanation**
+#### B.1 **表格说明 | Table Explanation**
 
 本表列举了认知科学常用的实验方法及其典型工具，便于理解不同方法的适用场景和技术手段。
 
@@ -1364,7 +1398,7 @@ This table lists common experimental methods in cognitive science and their typi
 | 问卷调查 Questionnaire            | 态度与能力评估 Attitude and Ability Assessment   | 结构化问卷 Structured Questionnaire         |
 | 计算建模 Computational Modeling   | 认知机制模拟 Cognitive Mechanism Simulation      | 神经网络、贝叶斯模型 Neural Network, Bayesian Model |
 
-**本节小结 | Section Summary**
+#### B.2 **本节小结 | Section Summary**
 
 本表为认知科学实验设计和方法选择提供参考。
 
@@ -1374,7 +1408,7 @@ This table provides a reference for experimental design and method selection in 
 
 ### C. 主要术语表 | Glossary of Key Terms
 
-**表格说明 | Table Explanation**
+#### C.1 **表格说明 | Table Explanation**
 
 本表对文中出现的核心术语进行中英文对照和简要解释，便于查阅和理解。
 
@@ -1389,7 +1423,7 @@ This table provides Chinese-English comparison and brief explanations of key ter
 | 形式化 Formalization            | 用符号和规则严格表达理论的过程 Strict expression of theory using symbols and rules |
 | 发展性评价 Developmental Assessment | 关注学生成长过程和潜力的评价方式 Assessment focusing on students' growth process and potential |
 
-**本节小结 | Section Summary**
+#### c.2 **本节小结 | Section Summary**
 
 术语表有助于统一概念理解，提升学术交流效率。
 
@@ -1399,7 +1433,7 @@ The glossary helps unify conceptual understanding and improve the efficiency of 
 
 ### D. 研究工具与数据资源清单 | List of Research Tools and Data Resources
 
-**内容说明 | Content Explanation**
+#### D.1 **内容说明 | Content Explanation**
 
 本节列举了常用的数学建模、统计分析、脑成像分析等研究工具及数据资源，便于学术研究和实践应用。
 
@@ -1410,7 +1444,7 @@ This section lists commonly used research tools and data resources for mathemati
 - 脑成像分析 Brain Imaging Analysis: SPM, FSL, BrainVoyager
 - 数据资源 Data Resources: OpenNeuro, MathWorld, arXiv, CNKI
 
-**本节小结 | Section Summary**
+#### D.2 **本节小结 | Section Summary**
 
 工具与资源清单为研究设计和数据分析提供支持。
 
@@ -1420,7 +1454,7 @@ The list of tools and resources supports research design and data analysis.
 
 ### E. 相关数学符号与定义 | Mathematical Symbols and Definitions
 
-**表格说明 | Table Explanation**
+#### E.1 **表格说明 | Table Explanation**
 
 本表列举了常用数学符号及其定义，便于查阅和标准化表达。
 
@@ -1437,7 +1471,7 @@ This table lists commonly used mathematical symbols and their definitions for ea
 | ℕ           | 自然数集合 Set of Natural Numbers | {0,1,2,...}              |
 | ℝ           | 实数集合 Set of Real Numbers     | 所有实数 All real numbers |
 
-**本节小结 | Section Summary**
+#### E.2 **本节小结 | Section Summary**
 
 符号表有助于规范表达和学术写作。
 
@@ -1449,7 +1483,7 @@ The symbol table helps standardize expression and academic writing.
 
 ### 索引结构示意 | Index Structure Diagram
 
-**结构说明 | Structure Explanation**
+-**结构说明 | Structure Explanation**
 
 本节通过思维导图和结构化索引，梳理全文的核心术语、理论、模型和方法，便于快速查找和系统理解。
 
@@ -1463,14 +1497,14 @@ graph TD
   A --> E[方法 Methods]
 ```
 
-**索引内容举例 | Example Index Entries**
+-**索引内容举例 | Example Index Entries**
 
 - 术语 Terms: 认知结构、数学模型、公理系统、元认知、形式化、发展性评价
 - Theories: 皮亚杰发生认识论、信息加工理论、集合论、概率论、模型论
 - Models: 康托尔集合、欧氏空间、概率空间、神经网络模型
 - Methods: 行为实验、脑成像、计算建模、极限过程、结构定理
 
-**本节小结与关联性分析 | Section Summary and Relevance Analysis**
+-**本节小结与关联性分析 | Section Summary and Relevance Analysis**
 
 索引部分有助于提升文档的可用性和检索效率，支持跨章节、跨主题的系统查阅和知识整合。
 
@@ -1480,31 +1514,31 @@ The index section improves the usability and retrieval efficiency of the documen
 
 ## 致谢 | Acknowledgements
 
-**学术指导与团队协作 | Academic Guidance and Teamwork**
+-**学术指导与团队协作 | Academic Guidance and Teamwork**
 
 本研究得到了多位学者和专家的悉心指导，相关合作团队在资料收集、数据分析和案例研究等方面给予了大力支持。
 
 This research has benefited from the careful guidance of many scholars and experts. The collaborative teams provided strong support in data collection, analysis, and case studies.
 
-**资助与资源支持 | Funding and Resource Support**
+-**资助与资源支持 | Funding and Resource Support**
 
 感谢各资助机构为本项目提供的经费和资源保障。
 
 We thank all funding agencies for providing financial and resource support for this project.
 
-**同行评议与学术交流 | Peer Review and Academic Exchange**
+-**同行评议与学术交流 | Peer Review and Academic Exchange**
 
 同行评议专家的宝贵意见极大提升了文稿的学术质量。学术会议和交流活动为研究工作的完善提供了重要平台。
 
 The valuable comments from peer reviewers have greatly improved the academic quality of this manuscript. Academic conferences and exchanges have provided important platforms for the refinement of this research.
 
-**家人和朋友的支持 | Support from Family and Friends**
+-**家人和朋友的支持 | Support from Family and Friends**
 
 家人和朋友的理解与支持为研究工作的顺利推进提供了坚实后盾。
 
 The understanding and support from family and friends have provided a solid foundation for the smooth progress of this research.
 
-**本节小结 | Section Summary**
+-**本节小结 | Section Summary**
 
 在此一并致以诚挚谢意，感谢所有为本研究做出贡献的个人和机构。
 
