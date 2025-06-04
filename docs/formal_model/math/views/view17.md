@@ -1236,7 +1236,7 @@ System = new req_chan . new reply_chan .
   - 我们之前在向量安全索引 `get` 的例子中提到过 `Fin n` 类型，它表示小于 `n` 的自然数集合 \(\{0, 1, ..., n-1\}\)。
   - 定义回顾 (类似 Agda/Idris 风格):
         ```
-        data Fin : Nat → Type where
+    data Fin : Nat → Type where
           FZ : (n : Nat) → Fin (Suc n)  -- Zero is the first element for any non-empty Fin type
           FS : (n : Nat) → Fin n → Fin (Suc n) -- If k is in Fin n, then Suc k is in Fin (Suc n)
         ```
@@ -1245,7 +1245,7 @@ System = new req_chan . new reply_chan .
 - **b) 具有精确维度的矩阵 (Matrices with Dimensions)**：
   - 类似于向量，我们可以定义矩阵类型，其类型包含行数和列数。
         ```
-        data Matrix (A : Type) : Nat → Nat → Type where
+    data Matrix (A : Type) : Nat → Nat → Type where
           -- 构造子的具体定义会更复杂，通常基于嵌套向量或函数
           -- 但关键是类型签名依赖于维度 m 和 n
           MkMatrix : (m n : Nat) → ((i : Fin m) → (j : Fin n) → A) → Matrix A m n
@@ -1253,7 +1253,7 @@ System = new req_chan . new reply_chan .
         ```
   - 有了这样的类型，矩阵运算可以具有更安全的类型签名。例如，矩阵乘法：
         ```
-        matrix_multiply : (m n p : Nat) → Matrix A m n → Matrix A n p → Matrix A m p
+    matrix_multiply : (m n p : Nat) → Matrix A m n → Matrix A n p → Matrix A m p
         ```
         这个类型签名静态地保证了只有当第一个矩阵的列数 `n` 等于第二个矩阵的行数 `n` 时，乘法才被允许，并且结果矩阵的维度是 `m` 行 `p` 列。任何不匹配维度的尝试都会导致编译时类型错误。
 
@@ -1261,7 +1261,7 @@ System = new req_chan . new reply_chan .
   - 可以定义一个列表或树的类型，其类型本身就保证了元素是根据某个顺序排列的。
   - 这通常需要更复杂的依赖类型，可能涉及在类型中嵌入一个排序关系的“证明”。
         ```
-        -- 极度简化的概念
+    -- 极度简化的概念
         data SortedList (le : A → A → Bool) : List A → Type where
           SortedNil : SortedList le []
           SortedCons : (x : A) → (xs : List A) → SortedList le xs → isSorted (x :: xs) le → SortedList le (x :: xs)
