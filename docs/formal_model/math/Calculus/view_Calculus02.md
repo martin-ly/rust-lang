@@ -46,7 +46,9 @@ Introduction: Beyond the Formal Veil
 
 Mathematics is often presented as a pristine, eternal realm of absolute truths, a self-contained universe of axioms, theorems, and proofs. While this formal perspective is crucial for its internal consistency and power, it can obscure the rich, complex, and deeply *human* story of mathematics. This exploration seeks to pull back that formal veil and re-examine mathematics through a series of interconnected lenses, from the wiring of our brains to the vastness of the cosmos.
 
-数学通常被描绘成一个纯净、永恒、充满绝对真理的领域，一个由公理、定理和证明构成的自洽宇宙。尽管这种形式化视角对其内部一致性和力量至关重要，但它可能掩盖了数学丰富、复杂且深具*人性*的故事。本探讨旨在揭开那层形式的面纱，通过一系列相互关联的视角——从我们大脑的构造到宇宙的浩瀚——重新审视数学。
+数学通常被描绘成一个纯净、永恒、充满绝对真理的领域，一个由公理、定理和证明构成的自洽宇宙。
+尽管这种形式化视角对其内部一致性和力量至关重要，但它可能掩盖了数学丰富、复杂且深具*人性*的故事。
+本探讨旨在揭开那层形式的面纱，通过一系列相互关联的视角——从我们大脑的构造到宇宙的浩瀚——重新审视数学。
 
 ### 数学：超越符号之上
 
@@ -73,7 +75,13 @@ We will consider mathematics not just as a collection of abstract objects and lo
 The Interwoven Perspectives
 
 These perspectives are not isolated. Our cognitive abilities influence the kind of mathematics we create; the social dynamics of mathematicians determine what gets recognized as "true"; societal needs drive mathematical development; scientific and philosophical questions push its boundaries; and the nature of the universe itself seems to offer up patterns that mathematics can capture. This essay is a critical analysis of these interwoven layers, seeking to understand mathematics in its full, dynamic, and sometimes paradoxical richness.
-这些视角并非孤立存在。我们的认知能力影响着我们创造的数学类型；数学家群体的社会动态决定了什么被认作“真理”；社会需求驱动着数学的发展；科学和哲学问题推动其边界的拓展；而宇宙本身的性质似乎也提供了数学能够捕捉的模式。本文是对这些交织层面的批判性分析，旨在理解数学的完整、动态，甚至时而矛盾的丰富性。
+这些视角并非孤立存在。我们的认知能力影响着我们创造的数学类型；
+数学家群体的社会动态决定了什么被认作“真理”；
+社会需求驱动着数学的发展；
+科学和哲学问题推动其边界的拓展；
+而宇宙本身的性质似乎也提供了数学能够捕捉的模式。
+
+本文是对这些交织层面的批判性分析，旨在理解数学的完整、动态，甚至时而矛盾的丰富性。
 
 ## 2. 认知矩阵：人脑中的数学
 
