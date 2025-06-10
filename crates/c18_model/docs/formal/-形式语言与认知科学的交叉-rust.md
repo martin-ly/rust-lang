@@ -1960,5 +1960,6 @@ impl FormalVerifier {
     }
 }
 ```
-These examples demonstrate how formal language theory concepts are applied in Rust to create robust, safe, and verifiable systems. From parsers and type systems to formal verification and proof systems, these theoretical foundations provide the basis for advanced software engineering practices.
 
+These examples demonstrate how formal language theory concepts are applied in Rust to create robust, safe, and verifiable systems.
+From parsers and type systems to formal verification and proof systems, these theoretical foundations provide the basis for advanced software engineering practices.
