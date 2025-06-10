@@ -140,7 +140,7 @@ fn natural_transform<T>(opt: Option<T>) -> Result<T, &'static str> {
 
 #### 1. 操作语义与类型规则
 
-```math
+```text
 // 所有权转移的操作语义规则
            Γ ⊢ x : T
 -------------------------------
@@ -156,7 +156,7 @@ fn natural_transform<T>(opt: Option<T>) -> Result<T, &'static str> {
 
 #### 2. 去糖化转换的形式化表示
 
-```math
+```text
 // for循环的去糖化规则
 for x in iterator {
     body(x)
