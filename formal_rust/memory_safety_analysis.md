@@ -39,12 +39,14 @@
 
 **定义 1.1** (线性类型)
 线性类型系统区分：
+
 - 线性类型 $A$：必须恰好使用一次
 - 仿射类型 $A^\circ$：最多使用一次
 - 指数类型 $!A$：可以任意次使用
 
 **定义 1.2** (线性逻辑连接词)
 线性逻辑的连接词：
+
 - 乘法连接词：$\otimes$ (张量积), $\&$ (与)
 - 加法连接词：$\oplus$ (直和), $\oplus$ (或)
 - 指数连接词：$!$ (必然), $?$ (可能)
@@ -54,11 +56,13 @@
 
 **定理 1.1** (Rust线性类型映射)
 Rust的所有权系统实现线性逻辑：
+
 - `T` 对应线性类型 $T$
 - `&T` 对应指数类型 $!T$
 - `&mut T` 对应线性类型 $T$
 
 **证明**：
+
 1. 移动语义：确保线性使用
 2. 借用检查：实现指数类型
 3. 生命周期：管理资源使用
@@ -69,11 +73,13 @@ Rust的所有权系统实现线性逻辑：
 
 **定义 1.3** (霍尔三元组)
 霍尔三元组 $\{P\} C \{Q\}$ 表示：
+
 - 前置条件 $P$
 - 程序 $C$
 - 后置条件 $Q$
 
 **定义 1.4** (霍尔逻辑规则)
+
 ```
 {P} skip {P}                    (Skip)
 {P[x := E]} x := E {P}          (Assignment)
@@ -92,6 +98,7 @@ Rust的所有权系统实现线性逻辑：
 
 **定理 1.2** (Rust内存安全霍尔逻辑)
 Rust程序满足内存安全霍尔逻辑：
+
 ```
 {valid_ptr(p)} *p {true}
 {valid_mut_ptr(p)} *p = v {*p = v}
@@ -107,18 +114,21 @@ Rust程序满足内存安全霍尔逻辑：
 
 **定义 2.1** (内存状态)
 内存状态 $\mu$ 是地址到值的映射：
+
 ```
 μ: \text{Addr} \to \text{Val} \cup \{\bot\}
 ```
 
 **定义 2.2** (有效地址)
 地址 $a$ 在状态 $\mu$ 中有效：
+
 ```
 \text{valid}(a, \mu)  ⟺  \mu(a) \neq \bot
 ```
 
 **定义 2.3** (内存配置)
 内存配置 $C = \langle M, \sigma, \mu \rangle$ 包含：
+
 - 程序项 $M$
 - 栈 $\sigma$
 - 堆 $\mu$
@@ -126,21 +136,25 @@ Rust程序满足内存安全霍尔逻辑：
 #### 1.2 内存操作
 
 **定义 2.4** (内存读取)
+
 ```
 \text{read}(a, \mu) = \mu(a)
 ```
 
 **定义 2.5** (内存写入)
+
 ```
 \text{write}(a, v, \mu) = \mu[a \mapsto v]
 ```
 
 **定义 2.6** (内存分配)
+
 ```
 \text{alloc}(size, \mu) = (a, \mu')  \text{ where } a \text{ is fresh}
 ```
 
 **定义 2.7** (内存释放)
+
 ```
 \text{free}(a, \mu) = \mu[a \mapsto \bot]
 ```
@@ -151,6 +165,7 @@ Rust程序满足内存安全霍尔逻辑：
 
 **定义 2.8** (内存安全)
 程序 $P$ 是内存安全的，如果对于所有执行路径：
+
 1. 不访问无效地址
 2. 不释放已释放的内存
 3. 不重复释放内存
@@ -158,6 +173,7 @@ Rust程序满足内存安全霍尔逻辑：
 
 **定义 2.9** (内存错误)
 内存错误包括：
+
 - 空指针解引用
 - 悬垂指针访问
 - 缓冲区溢出
@@ -182,12 +198,14 @@ Rust程序满足内存安全霍尔逻辑：
 
 **定义 3.1** (所有权关系)
 所有权关系 $\owns$ 是类型和值之间的二元关系：
+
 ```
 T \owns v  ⟺  v 是类型 T 的所有者
 ```
 
 **定义 3.2** (借用关系)
 借用关系 $\borrows$ 定义临时访问：
+
 ```
 &T \borrows v  ⟺  v 被不可变借用
 &mut T \borrows v  ⟺  v 被可变借用
@@ -195,6 +213,7 @@ T \owns v  ⟺  v 是类型 T 的所有者
 
 **定义 3.3** (移动关系)
 移动关系 $\moves$ 定义所有权转移：
+
 ```
 x \moves y  ⟺  x 的所有权转移到 y
 ```
@@ -203,16 +222,19 @@ x \moves y  ⟺  x 的所有权转移到 y
 
 **规则 3.1** (唯一所有权)
 对于任意值 $v$ 和类型 $T$：
+
 ```
 T \owns v  ⟹  \exists! x. x \owns v
 ```
 
 **规则 3.2** (借用兼容性)
+
 ```
 T \owns v  ∧  &T \borrows v  ⟹  \neg(&mut T \borrows v)
 ```
 
 **规则 3.3** (移动后失效)
+
 ```
 x \moves y  ⟹  \neg(\text{valid}(x))
 ```
@@ -223,19 +245,22 @@ x \moves y  ⟹  \neg(\text{valid}(x))
 
 **定义 3.4** (所有权图)
 所有权图 $G = (V, E)$ 其中：
+
 - $V$：变量集合
 - $E$：所有权关系集合
 
 **定义 3.5** (所有权状态)
 所有权状态 $\mathcal{O}$ 是变量到所有权类型的映射：
-```
+
+```text
 \mathcal{O}: \text{Var} \to \{\text{Owned}, \text{Borrowed}, \text{Moved}\}
 ```
 
 #### 2.2 所有权检查算法
 
 **算法 3.1** (所有权检查)
-```
+
+```rust
 function check_ownership(G, O, x, operation):
     match operation:
         case move(y):
@@ -264,6 +289,7 @@ function check_ownership(G, O, x, operation):
 所有权系统保证内存安全。
 
 **证明**：
+
 1. **唯一性**：防止多次释放
 2. **借用检查**：防止数据竞争
 3. **生命周期**：防止悬垂指针
@@ -274,6 +300,7 @@ function check_ownership(G, O, x, operation):
 所有权系统保证正确的资源管理。
 
 **证明**：
+
 1. RAII模式自动管理资源
 2. 所有权转移确保唯一责任人
 3. 析构函数自动清理资源
@@ -288,29 +315,34 @@ function check_ownership(G, O, x, operation):
 
 **定义 4.1** (借用图)
 借用图 $G = (V, E)$ 其中：
+
 - $V$：变量集合
 - $E$：借用关系集合
 
 **定义 4.2** (借用状态)
 借用状态 $\mathcal{B}$ 是变量到借用类型的映射：
-```
+
+```text
 \mathcal{B}: \text{Var} \to \{\text{Owned}, \text{Borrowed}, \text{MutBorrowed}\}
 ```
 
 #### 1.2 借用规则
 
 **规则 4.1** (不可变借用)
-```
+
+```text
 T \owns v  ⟹  \exists n \geq 0. &T \borrows v \text{ (n times)}
 ```
 
 **规则 4.2** (可变借用)
-```
+
+```text
 T \owns v  ⟹  \exists! &mut T \borrows v
 ```
 
 **规则 4.3** (借用互斥)
-```
+
+```text
 &T \borrows v  ∧  &mut T \borrows v  ⟹  \bot
 ```
 
@@ -319,7 +351,8 @@ T \owns v  ⟹  \exists! &mut T \borrows v
 #### 2.1 借用检查算法
 
 **算法 4.1** (借用检查)
-```
+
+```rust
 function check_borrow(G, B, x, borrow_type):
     if B[x] = Owned:
         B[x] := borrow_type
@@ -333,7 +366,8 @@ function check_borrow(G, B, x, borrow_type):
 #### 2.2 借用冲突检测
 
 **算法 4.2** (借用冲突检测)
-```
+
+```text
 function detect_conflicts(G, B):
     conflicts := []
     for (x, y) in E:
@@ -352,6 +386,7 @@ function detect_conflicts(G, B):
 借用检查器正确实现借用规则。
 
 **证明**：
+
 1. **完备性**：所有违反借用规则的程序被拒绝
 2. **正确性**：通过检查的程序满足借用规则
 
@@ -361,6 +396,7 @@ function detect_conflicts(G, B):
 借用检查防止数据竞争。
 
 **证明**：
+
 1. 可变借用排他性
 2. 借用检查器静态分析
 3. 生命周期约束
@@ -378,20 +414,23 @@ function detect_conflicts(G, B):
 
 **定义 5.2** (生命周期关系)
 生命周期关系 $\subseteq$ 定义包含关系：
-```
+
+```text
 'a \subseteq 'b  ⟺  \text{duration}('a) \subseteq \text{duration}('b)
 ```
 
 **定义 5.3** (生命周期约束)
 生命周期约束是生命周期之间的关系：
-```
+
+```text
 'a: 'b  ⟺  'a \subseteq 'b
 ```
 
 #### 1.2 生命周期推断
 
 **算法 5.1** (生命周期推断)
-```
+
+```rust
 function infer_lifetimes(expr):
     match expr:
         case &x:
@@ -409,7 +448,8 @@ function infer_lifetimes(expr):
 #### 2.1 生命周期检查算法
 
 **算法 5.2** (生命周期检查)
-```
+
+```rust
 function check_lifetimes(expr, constraints):
     for constraint in constraints:
         if not satisfies(constraint):
@@ -420,7 +460,8 @@ function check_lifetimes(expr, constraints):
 #### 2.2 生命周期约束求解
 
 **算法 5.3** (生命周期约束求解)
-```
+
+```rust
 function solve_lifetimes(constraints):
     graph := build_constraint_graph(constraints)
     return topological_sort(graph)
@@ -434,6 +475,7 @@ function solve_lifetimes(constraints):
 生命周期系统防止悬垂指针。
 
 **证明**：
+
 1. 借用检查确保引用生命周期有效
 2. 所有权系统确保资源不被提前释放
 3. 生命周期推断产生最小生命周期
@@ -444,6 +486,7 @@ function solve_lifetimes(constraints):
 生命周期系统保证内存安全。
 
 **证明**：
+
 1. 生命周期约束确保引用有效性
 2. 借用检查器验证生命周期
 3. 所有权系统管理资源生命周期
@@ -468,12 +511,14 @@ function solve_lifetimes(constraints):
 Rust类型系统防止空指针解引用。
 
 **证明**：
+
 1. `Option<T>` 类型强制显式处理空值
 2. 非空指针类型不包含空值
 3. 类型检查确保正确的空值处理
 
 **形式化证明**：
-```
+
+```text
 ∀p: *T. p ≠ null ⟹ safe_deref(p)
 ```
 
@@ -493,12 +538,14 @@ Rust类型系统防止空指针解引用。
 生命周期系统防止悬垂指针。
 
 **证明**：
+
 1. 借用检查确保引用生命周期有效
 2. 所有权系统确保资源不被提前释放
 3. 生命周期推断产生最小生命周期
 
 **形式化证明**：
-```
+
+```text
 ∀r: &'a T. 'a ⊆ lifetime(r) ⟹ ¬dangling(r)
 ```
 
@@ -518,12 +565,14 @@ Rust类型系统防止空指针解引用。
 Rust数组访问防止缓冲区溢出。
 
 **证明**：
+
 1. 编译时边界检查
 2. 运行时边界检查
 3. 类型系统保证数组长度
 
 **形式化证明**：
-```
+
+```text
 ∀arr: [T; N], i: usize. i < N ⟹ safe_access(arr, i)
 ```
 
@@ -543,12 +592,14 @@ Rust数组访问防止缓冲区溢出。
 Rust的所有权系统防止内存泄漏。
 
 **证明**：
+
 1. RAII模式自动管理资源
 2. 所有权转移确保唯一责任人
 3. 析构函数自动清理资源
 
 **形式化证明**：
-```
+
+```text
 ∀x: T. owns(x) ⟹ ∃d. drop(x) = d
 ```
 
@@ -562,18 +613,21 @@ Rust的所有权系统防止内存泄漏。
 
 **定义 7.1** (并发程序)
 并发程序 $P$ 是线程集合：
-```
+
+```text
 P = \{T_1, T_2, \ldots, T_n\}
 ```
 
 **定义 7.2** (执行历史)
 执行历史 $H$ 是操作序列：
-```
+
+```text
 H = [op_1, op_2, \ldots, op_m]
 ```
 
 **定义 7.3** (并发状态)
 并发状态 $S = \langle \mu, \sigma_1, \ldots, \sigma_n \rangle$ 包含：
+
 - 共享内存 $\mu$
 - 线程栈 $\sigma_i$
 
@@ -584,7 +638,8 @@ H = [op_1, op_2, \ldots, op_m]
 
 **定义 7.5** (无数据竞争)
 程序无数据竞争：
-```
+
+```text
 \forall H. \neg \text{race}(H)
 ```
 
@@ -596,6 +651,7 @@ H = [op_1, op_2, \ldots, op_m]
 借用检查防止数据竞争。
 
 **证明**：
+
 1. 可变借用排他性
 2. 借用检查器静态分析
 3. 生命周期约束
@@ -604,7 +660,8 @@ H = [op_1, op_2, \ldots, op_m]
 
 **定义 7.6** (互斥锁)
 互斥锁 $M$ 提供排他访问：
-```
+
+```text
 \text{lock}(M) \cdot \text{unlock}(M) = \text{id}
 ```
 
@@ -617,13 +674,15 @@ H = [op_1, op_2, \ldots, op_m]
 
 **定义 7.7** (异步类型)
 异步类型表示未来值：
-```
+
+```text
 \text{Async}(T) = \text{Future} \langle T \rangle
 ```
 
 **定义 7.8** (异步函数)
 异步函数类型：
-```
+
+```text
 \text{async fn} f() \to T = \text{impl Future} \langle \text{Output} = T \rangle
 ```
 
@@ -633,6 +692,7 @@ H = [op_1, op_2, \ldots, op_m]
 Rust的异步系统保证内存安全。
 
 **证明**：
+
 1. 异步函数不跨越线程边界
 2. 借用检查器处理异步上下文
 3. 生命周期系统管理异步引用
@@ -650,14 +710,16 @@ Rust的异步系统保证内存安全。
 
 **定义 8.2** (状态转换)
 状态转换关系 $\rightarrow$ 定义程序执行：
-```
+
+```text
 S \rightarrow S'  ⟺  S' \text{ is reachable from } S
 ```
 
 #### 1.2 模型检查算法
 
 **算法 8.1** (模型检查)
-```
+
+```text
 function model_check(initial_state, property):
     visited := {}
     queue := [initial_state]
@@ -683,6 +745,7 @@ function model_check(initial_state, property):
 使用霍尔逻辑证明程序正确性。
 
 **证明方法**：
+
 1. 前置条件分析
 2. 后置条件推导
 3. 不变式维护
@@ -693,6 +756,7 @@ function model_check(initial_state, property):
 使用类型系统表达和证明程序性质。
 
 **证明方法**：
+
 1. 依赖类型
 2. 类型级函数
 3. 类型级约束
@@ -710,7 +774,8 @@ function model_check(initial_state, property):
 #### 3.2 抽象解释算法
 
 **算法 8.2** (抽象解释)
-```
+
+```rust
 function abstract_interpretation(program, domain):
     abstract_state := top
     for statement in program:
@@ -787,11 +852,13 @@ Rust和Haskell提供不同级别的安全保证。
 #### 1.1 形式化验证工具
 
 **研究目标**：
+
 - 自动内存安全证明
 - 模型检查技术
 - 抽象解释优化
 
 **技术方法**：
+
 - SMT求解器集成
 - 符号执行
 - 程序分析
@@ -799,11 +866,13 @@ Rust和Haskell提供不同级别的安全保证。
 #### 1.2 并发安全扩展
 
 **研究目标**：
+
 - 高级并发原语
 - 并发安全模式
 - 死锁检测
 
 **应用领域**：
+
 - 分布式系统
 - 实时系统
 - 安全关键系统
@@ -813,11 +882,13 @@ Rust和Haskell提供不同级别的安全保证。
 #### 2.1 编译时优化
 
 **研究目标**：
+
 - 零成本抽象优化
 - 内存布局优化
 - 缓存友好设计
 
 **技术方法**：
+
 - 常量折叠
 - 死代码消除
 - 内联优化
@@ -825,11 +896,13 @@ Rust和Haskell提供不同级别的安全保证。
 #### 2.2 运行时优化
 
 **研究目标**：
+
 - 内存分配优化
 - 垃圾回收优化
 - 并发性能提升
 
 **技术方法**：
+
 - 内存池
 - 锁消除
 - 缓存预取
@@ -839,11 +912,13 @@ Rust和Haskell提供不同级别的安全保证。
 #### 3.1 量子计算
 
 **研究目标**：
+
 - 量子内存模型
 - 量子并发安全
 - 量子错误纠正
 
 **技术挑战**：
+
 - 量子态管理
 - 量子并发控制
 - 量子错误检测
@@ -851,11 +926,13 @@ Rust和Haskell提供不同级别的安全保证。
 #### 3.2 人工智能
 
 **研究目标**：
+
 - 张量内存管理
 - 神经网络安全
 - 机器学习优化
 
 **应用场景**：
+
 - 深度学习框架
 - 张量计算库
 - 模型推理引擎
@@ -869,6 +946,7 @@ Rust和Haskell提供不同级别的安全保证。
 #### 1.1 形式化基础
 
 Rust内存安全系统提供了：
+
 - 严格的形式化理论基础
 - 完整的内存安全保证
 - 高效的并发安全机制
@@ -877,6 +955,7 @@ Rust内存安全系统提供了：
 #### 1.2 创新特性
 
 创新特性包括：
+
 - 所有权和借用系统
 - 生命周期管理
 - 零成本抽象
@@ -887,6 +966,7 @@ Rust内存安全系统提供了：
 #### 2.1 系统编程
 
 Rust在系统编程中：
+
 - 提供零成本抽象
 - 保证内存安全
 - 支持高性能计算
@@ -895,6 +975,7 @@ Rust在系统编程中：
 #### 2.2 应用开发
 
 Rust在应用开发中：
+
 - 提供类型安全
 - 支持并发编程
 - 实现跨平台部署
@@ -905,6 +986,7 @@ Rust在应用开发中：
 #### 3.1 理论发展
 
 未来理论发展方向：
+
 - 高级内存安全
 - 形式化验证工具
 - 程序合成技术
@@ -913,6 +995,7 @@ Rust在应用开发中：
 #### 3.2 应用扩展
 
 未来应用扩展方向：
+
 - 量子计算
 - 人工智能
 - 分布式系统
@@ -932,4 +1015,4 @@ Rust内存安全系统通过严格的形式化理论基础，实现了内存安�
 
 *最后更新时间：2025年1月*
 *版本：1.0*
-*维护者：Rust内存安全研究团队* 
+*维护者：Rust内存安全研究团队*
