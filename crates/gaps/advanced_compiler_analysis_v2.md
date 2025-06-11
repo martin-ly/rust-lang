@@ -33,6 +33,7 @@
 编译期计算（Compile-Time Computation）在编译阶段执行计算，减少运行时开销。
 
 **形式化定义**：
+
 ```text
 Compile-Time Computation ::= ∀x. Compute(x) ∧ Compile(x) ⇒ Runtime(x) = 0
 ```
@@ -785,4 +786,4 @@ Rust的编译器已经相当成熟，但在高级优化方面仍有提升空间�
 
 *最后更新时间：2025年1月*
 *版本：2.0*
-*维护者：Rust社区* 
+*维护者：Rust社区*
