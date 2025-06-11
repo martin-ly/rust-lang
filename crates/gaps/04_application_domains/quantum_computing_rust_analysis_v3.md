@@ -2,16 +2,58 @@
 
 ## 目录
 
-- [概述](#概述)
-- [量子编程模型 (Quantum Programming Model)](#量子编程模型-quantum-programming-model)
-- [量子类型系统 (Quantum Type System)](#量子类型系统-quantum-type-system)
-- [量子算法框架 (Quantum Algorithm Framework)](#量子算法框架-quantum-algorithm-framework)
-- [混合计算模型 (Hybrid Computing Model)](#混合计算模型-hybrid-computing-model)
-- [量子错误纠正 (Quantum Error Correction)](#量子错误纠正-quantum-error-correction)
-- [形式化理论基础](#形式化理论基础)
-- [实际应用示例](#实际应用示例)
-- [最新发展与前沿](#最新发展与前沿)
-- [总结与展望](#总结与展望)
+- [量子计算与Rust深度分析 - 2025版](#量子计算与rust深度分析---2025版)
+  - [目录](#目录)
+  - [概述](#概述)
+    - [核心概念](#核心概念)
+  - [量子编程模型 (Quantum Programming Model)](#量子编程模型-quantum-programming-model)
+    - [概念定义](#概念定义)
+    - [形式化定义](#形式化定义)
+    - [理论基础](#理论基础)
+    - [Rust实现](#rust实现)
+    - [2025年最新发展](#2025年最新发展)
+  - [量子类型系统 (Quantum Type System)](#量子类型系统-quantum-type-system)
+    - [概念定义1](#概念定义1)
+    - [形式化定义1](#形式化定义1)
+    - [理论基础](#理论基础-1)
+    - [Rust实现](#rust实现-1)
+    - [2025年最新发展](#2025年最新发展-1)
+  - [量子算法框架 (Quantum Algorithm Framework)](#量子算法框架-quantum-algorithm-framework)
+    - [概念定义](#概念定义-1)
+    - [形式化定义](#形式化定义-1)
+    - [理论基础](#理论基础-2)
+    - [Rust实现](#rust实现-2)
+    - [2025年最新发展](#2025年最新发展-2)
+  - [混合计算模型 (Hybrid Computing Model)](#混合计算模型-hybrid-computing-model)
+    - [概念定义](#概念定义-2)
+    - [形式化定义](#形式化定义-2)
+    - [理论基础](#理论基础-3)
+    - [Rust实现](#rust实现-3)
+    - [2025年最新发展](#2025年最新发展-3)
+  - [量子错误纠正 (Quantum Error Correction)](#量子错误纠正-quantum-error-correction)
+    - [概念定义](#概念定义-3)
+    - [形式化定义](#形式化定义-3)
+    - [理论基础](#理论基础-4)
+    - [Rust实现](#rust实现-4)
+    - [2025年最新发展](#2025年最新发展-4)
+  - [形式化理论基础](#形式化理论基础)
+    - [量子力学基础](#量子力学基础)
+    - [量子信息理论](#量子信息理论)
+    - [量子算法理论](#量子算法理论)
+  - [实际应用示例](#实际应用示例)
+    - [量子模拟](#量子模拟)
+    - [量子机器学习](#量子机器学习)
+    - [量子优化](#量子优化)
+  - [最新发展与前沿](#最新发展与前沿)
+    - [2025年量子计算发展](#2025年量子计算发展)
+    - [Rust在量子计算中的优势](#rust在量子计算中的优势)
+    - [未来发展方向](#未来发展方向)
+  - [总结与展望](#总结与展望)
+    - [关键成果](#关键成果)
+    - [技术挑战](#技术挑战)
+    - [未来展望](#未来展望)
+    - [实施建议](#实施建议)
+  - [参考文献](#参考文献)
 
 ---
 
@@ -182,11 +224,11 @@ impl QuantumCircuit {
 
 ## 量子类型系统 (Quantum Type System)
 
-### 概念定义
+### 概念定义1
 
 量子类型系统为量子计算提供类型安全保证，包括量子态类型、量子门类型和量子电路类型。
 
-### 形式化定义
+### 形式化定义1
 
 ```text
 QuantumType ::= Qubit | QuantumState<n> | QuantumGate | QuantumCircuit
