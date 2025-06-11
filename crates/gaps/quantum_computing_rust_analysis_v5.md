@@ -35,6 +35,7 @@
 量子编程模型为量子计算提供高级抽象，支持量子态、量子门和量子测量的操作。
 
 **形式化定义**：
+
 ```text
 Quantum Programming Model:
 Qubit ::= |ψ⟩ ∈ ℂ²
@@ -322,6 +323,7 @@ impl QuantumSearch {
 量子类型系统为量子计算提供类型安全保证，确保量子操作的正确性。
 
 **形式化定义**：
+
 ```text
 Quantum Type System:
 QubitType ::= Qubit
@@ -850,6 +852,7 @@ trait QuantumOptimizer {
 量子错误纠正通过编码和检测来保护量子信息免受噪声影响。
 
 **形式化定义**：
+
 ```text
 Quantum Error Correction:
 Code Space ::= {|ψ⟩: S|ψ⟩ = |ψ⟩ for all S ∈ Stabilizers}
@@ -1169,4 +1172,4 @@ Rust的量子计算支持正在快速发展，但在高级量子概念方面仍�
 
 *最后更新时间：2025年1月*
 *版本：5.0*
-*维护者：Rust社区* 
+*维护者：Rust社区*

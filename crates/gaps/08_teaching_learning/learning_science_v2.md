@@ -33,6 +33,7 @@
 个性化学习路径根据学习者的知识水平、学习风格和进度需求，动态调整学习内容和路径。
 
 **形式化定义**：
+
 ```text
 Personalized Learning Path:
 PLP ::= f(LearnerProfile, LearningObjectives, Progress) → LearningSequence
@@ -1147,4 +1148,4 @@ Rust的学习科学支持正在快速发展，但在高级学习概念方面仍�
 
 *最后更新时间：2025年1月*
 *版本：2.0*
-*维护者：Rust社区* 
+*维护者：Rust社区*

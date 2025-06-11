@@ -33,6 +33,7 @@
 一致性协议确保分布式系统中的数据一致性，包括强一致性、最终一致性和因果一致性。
 
 **形式化定义**：
+
 ```text
 Consistency Models:
 - Strong Consistency: ∀i,j. Read(i) < Write(j) ⇒ Read(i) = Write(j)
@@ -1105,4 +1106,4 @@ Rust的分布式系统支持正在快速发展，但在高级分布式概念方�
 
 *最后更新时间：2025年1月*
 *版本：2.0*
-*维护者：Rust社区* 
+*维护者：Rust社区*
