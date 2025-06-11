@@ -9,18 +9,21 @@
 ### 核心技术栈
 
 #### 医疗框架
+
 - **医疗标准**: `hl7-rs`, `dicom-rs`, `fhir-rs`
 - **数据安全**: `ring`, `rustls`, `aes-gcm`
 - **实时处理**: `tokio`, `async-std`, `actix-web`
 - **数据库**: `diesel`, `sqlx`, `postgres`
 
 #### 医疗设备集成
+
 - **设备通信**: `modbus-rs`, `opc-ua-rs`, `mqtt`
 - **传感器**: `embedded-hal`, `i2c-rs`, `spi-rs`
 - **实时监控**: `influxdb-rust`, `timescaledb-rust`
 - **报警系统**: `alertmanager-rs`
 
 #### 人工智能/机器学习
+
 - **医学影像**: `opencv-rust`, `image-rs`, `tch-rs`
 - **自然语言处理**: `rust-bert`, `tokenizers`
 - **数据分析**: `polars`, `ndarray`, `statrs`
@@ -29,6 +32,7 @@
 ### 架构模式
 
 #### 医疗微服务架构
+
 ```rust
 use actix_web::{web, App, HttpServer, middleware};
 use serde::{Deserialize, Serialize};
@@ -99,6 +103,7 @@ pub enum Gender {
 ```
 
 #### 事件驱动医疗架构
+
 ```rust
 use tokio::sync::mpsc;
 use serde::{Deserialize, Serialize};
@@ -178,6 +183,7 @@ impl EventDrivenHealthcare {
 ### 核心领域模型
 
 #### 患者管理
+
 ```rust
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Patient {
@@ -226,6 +232,7 @@ pub struct Insurance {
 ```
 
 #### 临床数据
+
 ```rust
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ClinicalRecord {
@@ -293,6 +300,7 @@ pub enum AbnormalFlag {
 ```
 
 #### 药物管理
+
 ```rust
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Medication {
@@ -373,6 +381,7 @@ pub enum Route {
 ### 医疗数据存储
 
 #### 加密患者数据存储
+
 ```rust
 use ring::aead::{self, BoundKey, Nonce, OpeningKey, SealingKey, UnboundKey};
 use ring::rand::{SecureRandom, SystemRandom};
@@ -455,6 +464,7 @@ impl EncryptedPatientStorage {
 ```
 
 #### HL7消息处理
+
 ```rust
 use hl7::Message;
 
@@ -515,6 +525,7 @@ impl HL7MessageProcessor {
 ```
 
 #### DICOM影像处理
+
 ```rust
 use dicom::object::File;
 use image::{ImageBuffer, Rgb};
@@ -570,6 +581,7 @@ impl DICOMProcessor {
 ### 临床工作流程
 
 #### 患者入院流程
+
 ```rust
 pub struct PatientAdmissionWorkflow {
     patient_service: PatientService,
@@ -618,6 +630,7 @@ impl PatientAdmissionWorkflow {
 ```
 
 #### 药物管理流程
+
 ```rust
 pub struct MedicationManagementWorkflow {
     pharmacy_service: PharmacyService,
@@ -678,6 +691,7 @@ impl MedicationManagementWorkflow {
 ### 核心医疗组件
 
 #### 实时患者监控系统
+
 ```rust
 use tokio::sync::broadcast;
 use std::collections::HashMap;
@@ -756,6 +770,7 @@ impl AlertEngine {
 ```
 
 #### 医疗影像分析系统
+
 ```rust
 use image::{ImageBuffer, Rgb};
 use tch::{Tensor, Device};
@@ -850,6 +865,7 @@ impl AIModel {
 ### 医疗系统监控
 
 #### 医疗指标监控
+
 ```rust
 use prometheus::{Counter, Histogram, Gauge};
 use std::sync::Arc;
@@ -960,6 +976,7 @@ impl HealthcareMetrics {
 ```
 
 #### 医疗数据备份和恢复
+
 ```rust
 use aws_sdk_s3::Client as S3Client;
 use tokio::fs;
@@ -1039,6 +1056,7 @@ impl HealthcareDataBackup {
 ### 合规性管理
 
 #### HIPAA合规检查
+
 ```rust
 pub struct HIPAAComplianceChecker {
     privacy_rules: Vec<PrivacyRule>,
@@ -1106,4 +1124,4 @@ impl HIPAAComplianceChecker {
 4. **互操作性**: HL7、DICOM、FHIR标准支持
 5. **合规性**: 医疗法规、审计日志、隐私保护
 
-通过合理运用Rust的内存安全和性能特性，可以构建安全、可靠、高性能的医疗健康系统。 
+通过合理运用Rust的内存安全和性能特性，可以构建安全、可靠、高性能的医疗健康系统。

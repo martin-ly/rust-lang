@@ -7,6 +7,7 @@
 ## 1. 内存安全
 
 ### 避免不安全代码
+
 ```rust
 // 不安全的代码 - 避免使用
 unsafe fn dangerous_function(ptr: *mut i32) {
@@ -40,6 +41,7 @@ impl SafeData {
 ```
 
 ### 边界检查
+
 ```rust
 // 安全的数组访问
 pub fn safe_array_access(arr: &[i32], index: usize) -> Option<&i32> {
@@ -64,6 +66,7 @@ pub fn safe_conversion(value: i64) -> Option<i32> {
 ## 2. 密码学安全
 
 ### 加密实现
+
 ```rust
 use ring::aead;
 use ring::rand::SystemRandom;
@@ -127,6 +130,7 @@ impl CryptoService {
 ```
 
 ### 哈希和签名
+
 ```rust
 use ring::digest;
 use ring::signature::{self, Ed25519KeyPair, KeyPair};
@@ -172,6 +176,7 @@ pub fn secure_hash(data: &[u8]) -> Vec<u8> {
 ## 3. 输入验证
 
 ### 数据验证
+
 ```rust
 use validator::{Validate, ValidationError};
 use serde::{Deserialize, Serialize};
@@ -210,6 +215,7 @@ impl UserInput {
 ```
 
 ### SQL注入防护
+
 ```rust
 use sqlx::{PgPool, Row};
 
@@ -250,6 +256,7 @@ impl UserRepository {
 ## 4. 认证和授权
 
 ### JWT认证
+
 ```rust
 use jsonwebtoken::{decode, encode, DecodingKey, EncodingKey, Header, Validation};
 use serde::{Deserialize, Serialize};
@@ -305,6 +312,7 @@ impl AuthService {
 ```
 
 ### 基于角色的访问控制
+
 ```rust
 use std::collections::HashMap;
 
@@ -361,6 +369,7 @@ impl RBACService {
 ## 5. 网络安全
 
 ### HTTPS配置
+
 ```rust
 use tokio_rustls::TlsAcceptor;
 use rustls::{ServerConfig, PrivateKey, Certificate};
@@ -418,6 +427,7 @@ impl SecureServer {
 ```
 
 ### 请求限流
+
 ```rust
 use std::collections::HashMap;
 use std::time::{Duration, Instant};
@@ -464,6 +474,7 @@ impl RateLimiter {
 ## 6. 安全配置
 
 ### 环境变量管理
+
 ```rust
 use config::{Config, ConfigError, Environment, File};
 use serde::Deserialize;
@@ -495,6 +506,7 @@ impl SecurityConfig {
 ```
 
 ### 安全中间件
+
 ```rust
 use actix_web::{middleware, web, App, HttpServer};
 use actix_web::middleware::{Logger, DefaultHeaders};
@@ -531,6 +543,7 @@ pub fn create_secure_app() -> App<()> {
 ## 7. 安全测试
 
 ### 单元测试
+
 ```rust
 #[cfg(test)]
 mod tests {
@@ -577,6 +590,7 @@ fn sanitize_input(input: &str) -> String {
 ```
 
 ### 集成测试
+
 ```rust
 #[cfg(test)]
 mod integration_tests {
@@ -609,6 +623,7 @@ mod integration_tests {
 ## 8. 安全监控
 
 ### 安全日志
+
 ```rust
 use tracing::{info, warn, error, instrument};
 use serde_json::json;
@@ -657,6 +672,7 @@ impl SecurityLogger {
 ```
 
 ### 异常检测
+
 ```rust
 use std::collections::HashMap;
 use std::time::{Duration, Instant};
@@ -715,4 +731,4 @@ impl AnomalyDetector {
 4. **持续监控**: 实时监控安全事件
 5. **定期审计**: 定期安全评估
 
-通过遵循这些安全最佳实践，可以构建出安全可靠的Rust应用程序。 
+通过遵循这些安全最佳实践，可以构建出安全可靠的Rust应用程序。

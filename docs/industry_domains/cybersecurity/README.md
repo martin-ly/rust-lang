@@ -9,18 +9,21 @@
 ### 核心技术栈
 
 #### 安全框架
+
 - **加密**: `ring`, `rustls`, `openssl`, `crypto`
 - **网络**: `tokio`, `mio`, `netfilter`, `pcap`
 - **恶意软件分析**: `pe-rs`, `elf-rs`, `yara-rs`
 - **威胁情报**: `stix-rs`, `misp-rs`
 
 #### 安全工具
+
 - **漏洞扫描**: `nmap-rs`, `masscan-rs`
 - **入侵检测**: `snort-rs`, `suricata-rs`
 - **防火墙**: `iptables-rs`, `nftables-rs`
 - **SIEM**: `elasticsearch-rs`, `splunk-rs`
 
 #### 身份认证
+
 - **OAuth/OIDC**: `oauth2`, `openidconnect`
 - **多因子认证**: `totp`, `webauthn-rs`
 - **证书管理**: `rustls`, `x509-rs`
@@ -29,6 +32,7 @@
 ### 架构模式
 
 #### 零信任架构
+
 ```rust
 use std::sync::Arc;
 use tokio::sync::RwLock;
@@ -82,6 +86,7 @@ impl ZeroTrustArchitecture {
 ```
 
 #### 深度防御架构
+
 ```rust
 pub struct DefenseInDepth {
     perimeter_defense: PerimeterDefense,
@@ -129,6 +134,7 @@ impl DefenseInDepth {
 ### 核心领域模型
 
 #### 威胁模型
+
 ```rust
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ThreatModel {
@@ -181,6 +187,7 @@ pub struct Mitigation {
 ```
 
 #### 安全事件
+
 ```rust
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SecurityEvent {
@@ -245,6 +252,7 @@ pub enum IndicatorType {
 ```
 
 #### 安全策略
+
 ```rust
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SecurityPolicy {
@@ -324,6 +332,7 @@ pub enum ActionType {
 ### 安全数据存储
 
 #### 加密存储引擎
+
 ```rust
 use ring::aead::{self, BoundKey, Nonce, OpeningKey, SealingKey, UnboundKey};
 use ring::rand::{SecureRandom, SystemRandom};
@@ -425,6 +434,7 @@ impl EncryptedStorage {
 ```
 
 #### 威胁情报数据库
+
 ```rust
 use sqlx::{PgPool, Row};
 use serde::{Deserialize, Serialize};
@@ -535,6 +545,7 @@ impl ThreatIntelligenceDB {
 ### 安全事件响应流程
 
 #### 事件响应引擎
+
 ```rust
 pub struct IncidentResponseEngine {
     event_classifier: EventClassifier,
@@ -603,6 +614,7 @@ impl IncidentResponseEngine {
 ```
 
 #### 威胁狩猎流程
+
 ```rust
 pub struct ThreatHuntingEngine {
     data_sources: Vec<Box<dyn DataSource>>,
@@ -677,6 +689,7 @@ impl ThreatHuntingEngine {
 ### 核心安全组件
 
 #### 入侵检测系统
+
 ```rust
 use tokio::net::TcpListener;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
@@ -765,6 +778,7 @@ impl AnomalyDetector {
 ```
 
 #### 漏洞扫描器
+
 ```rust
 pub struct VulnerabilityScanner {
     scan_engine: ScanEngine,
@@ -858,6 +872,7 @@ impl ScanEngine {
 ### 安全监控
 
 #### 安全指标监控
+
 ```rust
 use prometheus::{Counter, Histogram, Gauge};
 use std::sync::Arc;
@@ -941,6 +956,7 @@ impl SecurityMetrics {
 ```
 
 #### 安全日志聚合
+
 ```rust
 use elasticsearch::{Elasticsearch, IndexParts};
 use serde_json::json;
@@ -1013,6 +1029,7 @@ impl SecurityLogAggregator {
 ### 安全配置管理
 
 #### 配置验证器
+
 ```rust
 pub struct SecurityConfigValidator {
     rules: Vec<ConfigValidationRule>,
@@ -1087,4 +1104,4 @@ pub struct PasswordPolicy {
 4. **威胁检测**: 签名检测、异常检测、机器学习
 5. **合规性**: 安全策略、审计日志、合规检查
 
-通过合理运用Rust的内存安全和性能特性，可以构建高性能、高安全的网络安全系统。 
+通过合理运用Rust的内存安全和性能特性，可以构建高性能、高安全的网络安全系统。
