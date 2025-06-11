@@ -9,6 +9,7 @@
 ### 1.1 核心业务概念
 
 #### 设备聚合根
+
 ```rust
 #[derive(Debug, Clone)]
 pub struct Device {
@@ -124,6 +125,7 @@ impl Device {
 ```
 
 #### 传感器数据聚合根
+
 ```rust
 #[derive(Debug, Clone)]
 pub struct SensorData {
@@ -186,6 +188,7 @@ impl SensorData {
 ```
 
 #### 告警聚合根
+
 ```rust
 #[derive(Debug, Clone)]
 pub struct Alert {
@@ -363,6 +366,7 @@ pub enum AlertSeverity {
 ### 2.1 数据库设计
 
 #### 设备表
+
 ```sql
 -- 设备表
 CREATE TABLE devices (
@@ -416,6 +420,7 @@ CREATE INDEX idx_devices_last_seen ON devices(last_seen);
 ```
 
 #### 传感器数据表
+
 ```sql
 -- 传感器数据表
 CREATE TABLE sensor_data (
@@ -457,6 +462,7 @@ CREATE TABLE sensor_data_2024_02 PARTITION OF sensor_data_partitioned
 ```
 
 #### 告警表
+
 ```sql
 -- 告警表
 CREATE TABLE alerts (
@@ -1212,4 +1218,4 @@ pub enum Action {
 4. **安全性**: 保护设备和数据安全
 5. **可维护性**: 支持远程设备管理和维护
 
-通过这种详细的业务建模，可以为Rust IoT架构设计提供坚实的业务基础，确保物联网系统能够稳定、高效地运行。 
+通过这种详细的业务建模，可以为Rust IoT架构设计提供坚实的业务基础，确保物联网系统能够稳定、高效地运行。

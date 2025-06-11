@@ -1,10 +1,10 @@
-# 金融科技行业 - 业务建模详解
+# 金融科技行业 - 业务建模详细指南
 
 ## 概述
 
-本文档详细描述了金融科技行业的业务建模，包括业务流程、数据建模、流程建模和概念建模，为Rust架构设计提供业务基础。
+本文档详细描述了金融科技行业的业务建模，包括业务流程、数据建模、流程建模和概念建模。
 
-## 1. 业务概念建模
+## 1. 业务领域概念建模
 
 ### 1.1 核心业务概念
 
@@ -22,46 +22,42 @@ pub struct Account {
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
     pub transactions: Vec<Transaction>,
+    pub limits: AccountLimits,
+}
+
+#[derive(Debug, Clone)]
+pub struct AccountLimits {
+    pub daily_transfer_limit: Money,
+    pub monthly_transfer_limit: Money,
+    pub single_transaction_limit: Money,
+    pub overdraft_limit: Money,
 }
 
 impl Account {
-    pub fn new(customer_id: CustomerId, account_type: AccountType, currency: Currency) -> Self {
-        Self {
-            id: AccountId::generate(),
-            customer_id,
-            account_type,
-            balance: Money::zero(currency),
-            status: AccountStatus::Active,
-            currency,
-            created_at: Utc::now(),
-            updated_at: Utc::now(),
-            transactions: Vec::new(),
+    pub fn can_transfer(&self, amount: &Money) -> bool {
+        if self.status != AccountStatus::Active {
+            return false;
         }
+        
+        if amount.amount > self.limits.single_transaction_limit.amount {
+            return false;
+        }
+        
+        if self.balance.amount + self.limits.overdraft_limit.amount < amount.amount {
+            return false;
+        }
+        
+        true
     }
     
-    pub fn can_withdraw(&self, amount: &Money) -> bool {
-        self.status == AccountStatus::Active && 
-        self.balance.currency == amount.currency &&
-        self.balance.amount >= amount.amount
-    }
-    
-    pub fn withdraw(&mut self, amount: Money) -> Result<(), AccountError> {
-        if !self.can_withdraw(&amount) {
-            return Err(AccountError::InsufficientFunds);
+    pub fn transfer(&mut self, amount: &Money) -> Result<(), AccountError> {
+        if !self.can_transfer(amount) {
+            return Err(AccountError::TransferNotAllowed);
         }
         
         self.balance.amount -= amount.amount;
         self.updated_at = Utc::now();
-        Ok(())
-    }
-    
-    pub fn deposit(&mut self, amount: Money) -> Result<(), AccountError> {
-        if self.balance.currency != amount.currency {
-            return Err(AccountError::CurrencyMismatch);
-        }
         
-        self.balance.amount += amount.amount;
-        self.updated_at = Utc::now();
         Ok(())
     }
 }
@@ -91,7 +87,6 @@ pub struct PaymentMetadata {
     pub reference: Option<String>,
     pub category: PaymentCategory,
     pub tags: Vec<String>,
-    pub custom_fields: HashMap<String, String>,
 }
 
 impl Payment {
@@ -153,8 +148,18 @@ pub struct Trade {
     pub order_type: OrderType,
     pub created_at: DateTime<Utc>,
     pub executed_at: Option<DateTime<Utc>>,
-    pub cancelled_at: Option<DateTime<Utc>>,
+    pub settlement_date: Option<DateTime<Utc>>,
     pub fees: Vec<Fee>,
+}
+
+#[derive(Debug, Clone)]
+pub struct Instrument {
+    pub symbol: String,
+    pub name: String,
+    pub instrument_type: InstrumentType,
+    pub currency: Currency,
+    pub exchange: String,
+    pub isin: Option<String>,
 }
 
 #[derive(Debug, Clone)]
@@ -165,48 +170,28 @@ pub struct Fee {
 }
 
 impl Trade {
-    pub fn new(
-        account_id: AccountId,
-        instrument: Instrument,
-        side: TradeSide,
-        quantity: Decimal,
-        price: Money,
-        order_type: OrderType,
-    ) -> Self {
-        Self {
-            id: TradeId::generate(),
-            account_id,
-            instrument,
-            side,
-            quantity,
-            price,
-            status: TradeStatus::Pending,
-            order_type,
-            created_at: Utc::now(),
-            executed_at: None,
-            cancelled_at: None,
-            fees: Vec::new(),
-        }
-    }
-    
-    pub fn execute(&mut self, execution_price: Money, execution_time: DateTime<Utc>) {
-        self.status = TradeStatus::Executed;
-        self.price = execution_price;
-        self.executed_at = Some(execution_time);
-    }
-    
-    pub fn cancel(&mut self) -> Result<(), TradeError> {
-        if self.status != TradeStatus::Pending {
-            return Err(TradeError::CannotCancel);
-        }
+    pub fn calculate_total_value(&self) -> Money {
+        let trade_value = self.quantity * self.price.amount;
+        let total_fees: Decimal = self.fees.iter()
+            .map(|fee| fee.amount.amount)
+            .sum();
         
-        self.status = TradeStatus::Cancelled;
-        self.cancelled_at = Some(Utc::now());
-        Ok(())
+        Money {
+            amount: trade_value + total_fees,
+            currency: self.price.currency,
+        }
     }
     
-    pub fn add_fee(&mut self, fee: Fee) {
-        self.fees.push(fee);
+    pub fn can_execute(&self, current_price: &Money) -> bool {
+        match self.order_type {
+            OrderType::Market => true,
+            OrderType::Limit => {
+                match self.side {
+                    TradeSide::Buy => current_price.amount <= self.price.amount,
+                    TradeSide::Sell => current_price.amount >= self.price.amount,
+                }
+            }
+        }
     }
 }
 ```
@@ -225,22 +210,26 @@ impl Money {
         Self { amount, currency }
     }
     
-    pub fn zero(currency: Currency) -> Self {
-        Self::new(Decimal::ZERO, currency)
-    }
-    
     pub fn add(&self, other: &Money) -> Result<Money, MoneyError> {
         if self.currency != other.currency {
             return Err(MoneyError::CurrencyMismatch);
         }
-        Ok(Money::new(self.amount + other.amount, self.currency.clone()))
+        
+        Ok(Money {
+            amount: self.amount + other.amount,
+            currency: self.currency.clone(),
+        })
     }
     
     pub fn subtract(&self, other: &Money) -> Result<Money, MoneyError> {
         if self.currency != other.currency {
             return Err(MoneyError::CurrencyMismatch);
         }
-        Ok(Money::new(self.amount - other.amount, self.currency.clone()))
+        
+        Ok(Money {
+            amount: self.amount - other.amount,
+            currency: self.currency.clone(),
+        })
     }
 }
 
@@ -254,10 +243,6 @@ impl AccountId {
     
     pub fn generate() -> Self {
         Self(uuid::Uuid::new_v4().to_string())
-    }
-    
-    pub fn as_str(&self) -> &str {
-        &self.0
     }
 }
 
@@ -280,64 +265,78 @@ impl TradeId {
 }
 ```
 
-### 1.3 枚举类型
+### 1.3 领域服务
 
 ```rust
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub enum AccountType {
-    Checking,
-    Savings,
-    Credit,
-    Investment,
-    Business,
+pub struct RiskAssessmentService {
+    risk_rules: Vec<Box<dyn RiskRule>>,
+    risk_repository: Box<dyn RiskRepository>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub enum AccountStatus {
-    Active,
-    Suspended,
-    Closed,
-    Frozen,
+impl RiskAssessmentService {
+    pub async fn assess_payment_risk(
+        &self,
+        payment: &Payment,
+        customer: &Customer,
+    ) -> Result<RiskAssessment, RiskError> {
+        let mut risk_score = 0.0;
+        let mut risk_factors = Vec::new();
+        
+        for rule in &self.risk_rules {
+            let (score, factors) = rule.evaluate(payment, customer).await?;
+            risk_score += score;
+            risk_factors.extend(factors);
+        }
+        
+        let risk_level = self.calculate_risk_level(risk_score);
+        
+        Ok(RiskAssessment {
+            risk_score,
+            risk_level,
+            risk_factors,
+            timestamp: Utc::now(),
+        })
+    }
+    
+    fn calculate_risk_level(&self, score: f64) -> RiskLevel {
+        match score {
+            s if s < 0.3 => RiskLevel::Low,
+            s if s < 0.7 => RiskLevel::Medium,
+            _ => RiskLevel::High,
+        }
+    }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub enum PaymentMethod {
-    BankTransfer,
-    CreditCard,
-    DebitCard,
-    DigitalWallet,
-    Cryptocurrency,
+pub struct ComplianceService {
+    compliance_rules: Vec<Box<dyn ComplianceRule>>,
+    audit_logger: Box<dyn AuditLogger>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub enum PaymentStatus {
-    Pending,
-    Processing,
-    Completed,
-    Failed,
-    Cancelled,
-}
-
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub enum TradeSide {
-    Buy,
-    Sell,
-}
-
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub enum TradeStatus {
-    Pending,
-    Executed,
-    Cancelled,
-    Rejected,
-}
-
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub enum OrderType {
-    Market,
-    Limit,
-    Stop,
-    StopLimit,
+impl ComplianceService {
+    pub async fn check_compliance(
+        &self,
+        transaction: &Transaction,
+        customer: &Customer,
+    ) -> Result<ComplianceResult, ComplianceError> {
+        let mut violations = Vec::new();
+        
+        for rule in &self.compliance_rules {
+            if let Some(violation) = rule.check(transaction, customer).await? {
+                violations.push(violation);
+            }
+        }
+        
+        let is_compliant = violations.is_empty();
+        
+        // 记录审计日志
+        self.audit_logger.log_compliance_check(transaction, &violations).await?;
+        
+        Ok(ComplianceResult {
+            is_compliant,
+            violations,
+            timestamp: Utc::now(),
+        })
+    }
 }
 ```
 
@@ -345,83 +344,85 @@ pub enum OrderType {
 
 ### 2.1 数据库设计
 
-#### 账户表设计
+#### 账户相关表
 
 ```sql
+-- 客户表
+CREATE TABLE customers (
+    id UUID PRIMARY KEY,
+    customer_number VARCHAR(50) UNIQUE NOT NULL,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    phone VARCHAR(20),
+    date_of_birth DATE NOT NULL,
+    nationality VARCHAR(3) NOT NULL,
+    kyc_status VARCHAR(20) NOT NULL DEFAULT 'pending',
+    risk_level VARCHAR(20) NOT NULL DEFAULT 'medium',
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    version INTEGER NOT NULL DEFAULT 1
+);
+
 -- 账户表
 CREATE TABLE accounts (
     id UUID PRIMARY KEY,
+    account_number VARCHAR(50) UNIQUE NOT NULL,
     customer_id UUID NOT NULL,
     account_type VARCHAR(50) NOT NULL,
     balance_amount DECIMAL(20,8) NOT NULL,
     balance_currency VARCHAR(3) NOT NULL,
     status VARCHAR(20) NOT NULL,
+    daily_transfer_limit DECIMAL(20,8) NOT NULL,
+    monthly_transfer_limit DECIMAL(20,8) NOT NULL,
+    single_transaction_limit DECIMAL(20,8) NOT NULL,
+    overdraft_limit DECIMAL(20,8) NOT NULL DEFAULT 0,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
     version INTEGER NOT NULL DEFAULT 1,
-    
-    CONSTRAINT fk_accounts_customer FOREIGN KEY (customer_id) REFERENCES customers(id),
-    CONSTRAINT chk_account_type CHECK (account_type IN ('checking', 'savings', 'credit', 'investment', 'business')),
-    CONSTRAINT chk_account_status CHECK (status IN ('active', 'suspended', 'closed', 'frozen')),
-    CONSTRAINT chk_balance_positive CHECK (balance_amount >= 0)
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
 );
 
--- 账户索引
-CREATE INDEX idx_accounts_customer_id ON accounts(customer_id);
-CREATE INDEX idx_accounts_status ON accounts(status);
-CREATE INDEX idx_accounts_created_at ON accounts(created_at);
-
--- 账户审计表
-CREATE TABLE account_audit_logs (
+-- 账户余额历史表
+CREATE TABLE account_balance_history (
     id UUID PRIMARY KEY,
     account_id UUID NOT NULL,
-    action VARCHAR(50) NOT NULL,
-    old_values JSONB,
-    new_values JSONB,
-    user_id UUID,
-    ip_address INET,
-    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
-    
-    CONSTRAINT fk_account_audit_account FOREIGN KEY (account_id) REFERENCES accounts(id)
+    balance_amount DECIMAL(20,8) NOT NULL,
+    balance_currency VARCHAR(3) NOT NULL,
+    change_amount DECIMAL(20,8) NOT NULL,
+    change_reason VARCHAR(100) NOT NULL,
+    transaction_id UUID,
+    recorded_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    FOREIGN KEY (account_id) REFERENCES accounts(id),
+    FOREIGN KEY (transaction_id) REFERENCES transactions(id)
 );
 ```
 
-#### 支付表设计
+#### 支付相关表
 
 ```sql
 -- 支付表
 CREATE TABLE payments (
     id UUID PRIMARY KEY,
+    payment_reference VARCHAR(100) UNIQUE NOT NULL,
     from_account_id UUID NOT NULL,
     to_account_id UUID NOT NULL,
     amount DECIMAL(20,8) NOT NULL,
     currency VARCHAR(3) NOT NULL,
     payment_method VARCHAR(50) NOT NULL,
     status VARCHAR(20) NOT NULL,
+    description TEXT,
+    reference VARCHAR(100),
+    category VARCHAR(50),
+    tags JSONB,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL,
     processed_at TIMESTAMP WITH TIME ZONE,
     failed_at TIMESTAMP WITH TIME ZONE,
     failure_reason TEXT,
-    description TEXT,
-    reference VARCHAR(100),
-    category VARCHAR(50),
-    tags TEXT[],
-    custom_fields JSONB,
     version INTEGER NOT NULL DEFAULT 1,
-    
-    CONSTRAINT fk_payments_from_account FOREIGN KEY (from_account_id) REFERENCES accounts(id),
-    CONSTRAINT fk_payments_to_account FOREIGN KEY (to_account_id) REFERENCES accounts(id),
-    CONSTRAINT chk_payment_method CHECK (payment_method IN ('bank_transfer', 'credit_card', 'debit_card', 'digital_wallet', 'cryptocurrency')),
-    CONSTRAINT chk_payment_status CHECK (status IN ('pending', 'processing', 'completed', 'failed', 'cancelled')),
-    CONSTRAINT chk_payment_amount_positive CHECK (amount > 0)
+    FOREIGN KEY (from_account_id) REFERENCES accounts(id),
+    FOREIGN KEY (to_account_id) REFERENCES accounts(id)
 );
-
--- 支付索引
-CREATE INDEX idx_payments_from_account ON payments(from_account_id);
-CREATE INDEX idx_payments_to_account ON payments(to_account_id);
-CREATE INDEX idx_payments_status ON payments(status);
-CREATE INDEX idx_payments_created_at ON payments(created_at);
-CREATE INDEX idx_payments_reference ON payments(reference);
 
 -- 支付路由表
 CREATE TABLE payment_routes (
@@ -429,46 +430,53 @@ CREATE TABLE payment_routes (
     payment_id UUID NOT NULL,
     route_type VARCHAR(50) NOT NULL,
     provider VARCHAR(100) NOT NULL,
-    route_data JSONB NOT NULL,
+    route_config JSONB NOT NULL,
+    status VARCHAR(20) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL,
-    
-    CONSTRAINT fk_payment_routes_payment FOREIGN KEY (payment_id) REFERENCES payments(id)
+    processed_at TIMESTAMP WITH TIME ZONE,
+    FOREIGN KEY (payment_id) REFERENCES payments(id)
 );
 ```
 
-#### 交易表设计
+#### 交易相关表
 
 ```sql
 -- 交易表
+CREATE TABLE transactions (
+    id UUID PRIMARY KEY,
+    transaction_reference VARCHAR(100) UNIQUE NOT NULL,
+    account_id UUID NOT NULL,
+    transaction_type VARCHAR(50) NOT NULL,
+    amount DECIMAL(20,8) NOT NULL,
+    currency VARCHAR(3) NOT NULL,
+    balance_before DECIMAL(20,8) NOT NULL,
+    balance_after DECIMAL(20,8) NOT NULL,
+    description TEXT,
+    metadata JSONB,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    FOREIGN KEY (account_id) REFERENCES accounts(id)
+);
+
+-- 交易表（投资交易）
 CREATE TABLE trades (
     id UUID PRIMARY KEY,
+    trade_reference VARCHAR(100) UNIQUE NOT NULL,
     account_id UUID NOT NULL,
     instrument_symbol VARCHAR(20) NOT NULL,
+    instrument_name VARCHAR(100) NOT NULL,
     instrument_type VARCHAR(50) NOT NULL,
     side VARCHAR(10) NOT NULL,
     quantity DECIMAL(20,8) NOT NULL,
     price_amount DECIMAL(20,8) NOT NULL,
     price_currency VARCHAR(3) NOT NULL,
-    status VARCHAR(20) NOT NULL,
     order_type VARCHAR(20) NOT NULL,
+    status VARCHAR(20) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL,
     executed_at TIMESTAMP WITH TIME ZONE,
-    cancelled_at TIMESTAMP WITH TIME ZONE,
+    settlement_date DATE,
     version INTEGER NOT NULL DEFAULT 1,
-    
-    CONSTRAINT fk_trades_account FOREIGN KEY (account_id) REFERENCES accounts(id),
-    CONSTRAINT chk_trade_side CHECK (side IN ('buy', 'sell')),
-    CONSTRAINT chk_trade_status CHECK (status IN ('pending', 'executed', 'cancelled', 'rejected')),
-    CONSTRAINT chk_trade_order_type CHECK (order_type IN ('market', 'limit', 'stop', 'stop_limit')),
-    CONSTRAINT chk_trade_quantity_positive CHECK (quantity > 0),
-    CONSTRAINT chk_trade_price_positive CHECK (price_amount > 0)
+    FOREIGN KEY (account_id) REFERENCES accounts(id)
 );
-
--- 交易索引
-CREATE INDEX idx_trades_account_id ON trades(account_id);
-CREATE INDEX idx_trades_instrument_symbol ON trades(instrument_symbol);
-CREATE INDEX idx_trades_status ON trades(status);
-CREATE INDEX idx_trades_created_at ON trades(created_at);
 
 -- 交易费用表
 CREATE TABLE trade_fees (
@@ -478,23 +486,13 @@ CREATE TABLE trade_fees (
     amount DECIMAL(20,8) NOT NULL,
     currency VARCHAR(3) NOT NULL,
     description TEXT,
-    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
-    
-    CONSTRAINT fk_trade_fees_trade FOREIGN KEY (trade_id) REFERENCES trades(id)
+    FOREIGN KEY (trade_id) REFERENCES trades(id)
 );
 ```
 
-### 2.2 仓储模式实现
+### 2.2 仓储实现
 
 ```rust
-pub trait AccountRepository {
-    async fn save(&self, account: &Account) -> Result<(), RepositoryError>;
-    async fn find_by_id(&self, id: &AccountId) -> Result<Option<Account>, RepositoryError>;
-    async fn find_by_customer_id(&self, customer_id: &CustomerId) -> Result<Vec<Account>, RepositoryError>;
-    async fn find_by_status(&self, status: &AccountStatus) -> Result<Vec<Account>, RepositoryError>;
-    async fn update_balance(&self, account_id: &AccountId, new_balance: &Money) -> Result<(), RepositoryError>;
-}
-
 pub struct PostgresAccountRepository {
     pool: PgPool,
 }
@@ -502,41 +500,46 @@ pub struct PostgresAccountRepository {
 #[async_trait]
 impl AccountRepository for PostgresAccountRepository {
     async fn save(&self, account: &Account) -> Result<(), RepositoryError> {
-        sqlx::query!(
+        let query = sqlx::query!(
             r#"
-            INSERT INTO accounts (id, customer_id, account_type, balance_amount, balance_currency, status, created_at, updated_at, version)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+            INSERT INTO accounts (
+                id, account_number, customer_id, account_type, balance_amount, 
+                balance_currency, status, daily_transfer_limit, monthly_transfer_limit,
+                single_transaction_limit, overdraft_limit, created_at, updated_at, version
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
             ON CONFLICT (id) DO UPDATE SET
-                balance_amount = $4,
-                balance_currency = $5,
-                status = $6,
-                updated_at = $8,
+                balance_amount = $5,
+                balance_currency = $6,
+                status = $7,
+                updated_at = $13,
                 version = accounts.version + 1
             "#,
-            account.id.as_str(),
-            account.customer_id.as_str(),
+            account.id.to_string(),
+            account.account_number,
+            account.customer_id.to_string(),
             account.account_type.to_string(),
             account.balance.amount,
             account.balance.currency.to_string(),
             account.status.to_string(),
+            account.limits.daily_transfer_limit.amount,
+            account.limits.monthly_transfer_limit.amount,
+            account.limits.single_transaction_limit.amount,
+            account.limits.overdraft_limit.amount,
             account.created_at,
             account.updated_at,
-            1
-        )
-        .execute(&self.pool)
-        .await?;
+            account.version
+        );
         
+        query.execute(&self.pool).await?;
         Ok(())
     }
     
     async fn find_by_id(&self, id: &AccountId) -> Result<Option<Account>, RepositoryError> {
         let row = sqlx::query!(
             r#"
-            SELECT id, customer_id, account_type, balance_amount, balance_currency, status, created_at, updated_at
-            FROM accounts
-            WHERE id = $1
+            SELECT * FROM accounts WHERE id = $1
             "#,
-            id.as_str()
+            id.to_string()
         )
         .fetch_optional(&self.pool)
         .await?;
@@ -544,14 +547,21 @@ impl AccountRepository for PostgresAccountRepository {
         if let Some(row) = row {
             let account = Account {
                 id: AccountId::new(row.id),
+                account_number: row.account_number,
                 customer_id: CustomerId::new(row.customer_id),
                 account_type: AccountType::from_str(&row.account_type)?,
                 balance: Money::new(row.balance_amount, Currency::from_str(&row.balance_currency)?),
                 status: AccountStatus::from_str(&row.status)?,
-                currency: Currency::from_str(&row.balance_currency)?,
+                limits: AccountLimits {
+                    daily_transfer_limit: Money::new(row.daily_transfer_limit, Currency::from_str(&row.balance_currency)?),
+                    monthly_transfer_limit: Money::new(row.monthly_transfer_limit, Currency::from_str(&row.balance_currency)?),
+                    single_transaction_limit: Money::new(row.single_transaction_limit, Currency::from_str(&row.balance_currency)?),
+                    overdraft_limit: Money::new(row.overdraft_limit, Currency::from_str(&row.balance_currency)?),
+                },
                 created_at: row.created_at,
                 updated_at: row.updated_at,
-                transactions: Vec::new(), // 需要单独查询
+                version: row.version,
+                transactions: Vec::new(), // 需要单独加载
             };
             Ok(Some(account))
         } else {
@@ -562,34 +572,37 @@ impl AccountRepository for PostgresAccountRepository {
     async fn find_by_customer_id(&self, customer_id: &CustomerId) -> Result<Vec<Account>, RepositoryError> {
         let rows = sqlx::query!(
             r#"
-            SELECT id, customer_id, account_type, balance_amount, balance_currency, status, created_at, updated_at
-            FROM accounts
-            WHERE customer_id = $1
-            ORDER BY created_at DESC
+            SELECT * FROM accounts WHERE customer_id = $1
             "#,
-            customer_id.as_str()
+            customer_id.to_string()
         )
         .fetch_all(&self.pool)
         .await?;
         
-        let accounts: Result<Vec<Account>, RepositoryError> = rows
-            .into_iter()
+        let accounts = rows.into_iter()
             .map(|row| {
-                Ok(Account {
+                Account {
                     id: AccountId::new(row.id),
+                    account_number: row.account_number,
                     customer_id: CustomerId::new(row.customer_id),
                     account_type: AccountType::from_str(&row.account_type)?,
                     balance: Money::new(row.balance_amount, Currency::from_str(&row.balance_currency)?),
                     status: AccountStatus::from_str(&row.status)?,
-                    currency: Currency::from_str(&row.balance_currency)?,
+                    limits: AccountLimits {
+                        daily_transfer_limit: Money::new(row.daily_transfer_limit, Currency::from_str(&row.balance_currency)?),
+                        monthly_transfer_limit: Money::new(row.monthly_transfer_limit, Currency::from_str(&row.balance_currency)?),
+                        single_transaction_limit: Money::new(row.single_transaction_limit, Currency::from_str(&row.balance_currency)?),
+                        overdraft_limit: Money::new(row.overdraft_limit, Currency::from_str(&row.balance_currency)?),
+                    },
                     created_at: row.created_at,
                     updated_at: row.updated_at,
+                    version: row.version,
                     transactions: Vec::new(),
-                })
+                }
             })
-            .collect();
+            .collect::<Result<Vec<Account>, RepositoryError>>()?;
         
-        accounts
+        Ok(accounts)
     }
 }
 ```
@@ -600,371 +613,289 @@ impl AccountRepository for PostgresAccountRepository {
 
 ```mermaid
 graph TD
-    A[接收支付请求] --> B[验证请求参数]
+    A[接收支付请求] --> B[验证请求格式]
     B --> C[检查账户状态]
-    C --> D[验证余额]
+    C --> D[验证余额和限额]
     D --> E[风险评估]
-    E --> F[合规检查]
-    F --> G[选择支付路由]
-    G --> H[执行支付]
-    H --> I[更新账户余额]
-    I --> J[记录交易]
-    J --> K[发送通知]
-    K --> L[返回结果]
-    
-    D -->|余额不足| M[拒绝支付]
-    E -->|风险过高| N[人工审核]
-    F -->|不合规| O[拒绝支付]
-    H -->|支付失败| P[回滚操作]
-    
-    M --> Q[记录失败原因]
-    N --> R[等待审核结果]
-    O --> Q
-    P --> Q
-    Q --> L
-    R --> G
+    E --> F{风险等级}
+    F -->|低风险| G[自动审批]
+    F -->|中风险| H[人工审核]
+    F -->|高风险| I[拒绝交易]
+    G --> J[执行转账]
+    H --> K{审核结果}
+    K -->|通过| J
+    K -->|拒绝| I
+    J --> L[更新账户余额]
+    L --> M[记录交易]
+    M --> N[发送确认通知]
+    N --> O[更新支付状态]
+    I --> P[发送拒绝通知]
 ```
 
 ### 3.2 交易执行流程
 
 ```mermaid
 graph TD
-    A[接收交易订单] --> B[验证订单参数]
+    A[接收交易订单] --> B[验证订单格式]
     B --> C[检查账户状态]
-    C --> D[验证资金]
+    C --> D[验证资金充足性]
     D --> E[市场数据检查]
-    E --> F[风险检查]
-    F --> G[价格验证]
-    G --> H[执行交易]
-    H --> I[更新持仓]
-    I --> J[计算费用]
-    J --> K[记录交易]
-    K --> L[发送确认]
-    
-    D -->|资金不足| M[拒绝订单]
-    F -->|风险过高| N[人工审核]
-    G -->|价格不匹配| O[拒绝订单]
-    H -->|执行失败| P[取消订单]
-    
-    M --> Q[记录失败原因]
-    N --> R[等待审核结果]
-    O --> Q
-    P --> Q
-    Q --> L
-    R --> G
+    E --> F[价格验证]
+    F --> G[风险检查]
+    G --> H{风险检查结果}
+    H -->|通过| I[执行交易]
+    H -->|拒绝| J[拒绝订单]
+    I --> K[更新持仓]
+    K --> L[计算费用]
+    L --> M[记录交易]
+    M --> N[发送确认]
+    N --> O[结算处理]
+    J --> P[发送拒绝通知]
 ```
 
-### 3.3 风险控制流程
+### 3.3 风控流程
 
 ```mermaid
 graph TD
     A[交易请求] --> B[基础验证]
-    B --> C[限额检查]
-    C --> D[频率检查]
-    D --> E[模式识别]
-    E --> F[风险评估]
-    F --> G{风险等级}
-    
-    G -->|低风险| H[自动通过]
-    G -->|中风险| I[增强验证]
-    G -->|高风险| J[人工审核]
-    
-    I --> K[二次验证]
-    K --> L{验证结果}
-    L -->|通过| H
-    L -->|失败| M[拒绝]
-    
-    J --> N[审核流程]
-    N --> O{审核结果}
-    O -->|通过| H
-    O -->|拒绝| M
-    
-    H --> P[执行交易]
-    M --> Q[记录拒绝原因]
+    B --> C[客户风险评估]
+    C --> D[交易模式分析]
+    D --> E[异常检测]
+    E --> F[合规检查]
+    F --> G[综合评分]
+    G --> H{风险等级}
+    H -->|低风险| I[自动通过]
+    H -->|中风险| J[人工审核]
+    H -->|高风险| K[自动拒绝]
+    J --> L{审核决定}
+    L -->|通过| I
+    L -->|拒绝| K
+    I --> M[记录决策]
+    K --> M
+    M --> N[更新风控模型]
 ```
 
-## 4. 业务流程建模
-
-### 4.1 客户开户流程
-
-```rust
-pub struct AccountOpeningWorkflow {
-    customer_repository: Box<dyn CustomerRepository>,
-    account_repository: Box<dyn AccountRepository>,
-    kyc_service: Box<dyn KYCService>,
-    risk_service: Box<dyn RiskService>,
-    notification_service: Box<dyn NotificationService>,
-}
-
-impl AccountOpeningWorkflow {
-    pub async fn open_account(&self, request: AccountOpeningRequest) -> Result<AccountId, WorkflowError> {
-        // 1. 验证客户信息
-        let customer = self.customer_repository.find_by_id(&request.customer_id).await?
-            .ok_or(WorkflowError::CustomerNotFound)?;
-        
-        // 2. KYC验证
-        let kyc_result = self.kyc_service.verify(&customer).await?;
-        if !kyc_result.is_approved() {
-            return Err(WorkflowError::KYCRejected(kyc_result.reason()));
-        }
-        
-        // 3. 风险评估
-        let risk_assessment = self.risk_service.assess_customer(&customer).await?;
-        if risk_assessment.risk_level() == RiskLevel::High {
-            return Err(WorkflowError::HighRiskCustomer);
-        }
-        
-        // 4. 创建账户
-        let account = Account::new(
-            request.customer_id,
-            request.account_type,
-            request.currency,
-        );
-        
-        // 5. 保存账户
-        self.account_repository.save(&account).await?;
-        
-        // 6. 发送欢迎通知
-        self.notification_service.send_welcome_email(&customer, &account).await?;
-        
-        Ok(account.id)
-    }
-}
-
-#[derive(Debug, Clone)]
-pub struct AccountOpeningRequest {
-    pub customer_id: CustomerId,
-    pub account_type: AccountType,
-    pub currency: Currency,
-    pub initial_deposit: Option<Money>,
-}
-```
-
-### 4.2 支付处理流程
+### 3.4 流程实现
 
 ```rust
 pub struct PaymentProcessingWorkflow {
-    account_repository: Box<dyn AccountRepository>,
-    payment_repository: Box<dyn PaymentRepository>,
+    account_service: Box<dyn AccountService>,
     risk_service: Box<dyn RiskService>,
     compliance_service: Box<dyn ComplianceService>,
-    routing_service: Box<dyn PaymentRoutingService>,
     notification_service: Box<dyn NotificationService>,
+    audit_logger: Box<dyn AuditLogger>,
 }
 
 impl PaymentProcessingWorkflow {
-    pub async fn process_payment(&self, request: PaymentRequest) -> Result<PaymentId, WorkflowError> {
-        // 1. 验证支付请求
-        self.validate_payment_request(&request).await?;
+    pub async fn process_payment(
+        &self,
+        request: PaymentRequest,
+    ) -> Result<PaymentResult, WorkflowError> {
+        let start_time = Instant::now();
         
-        // 2. 检查源账户
-        let from_account = self.account_repository.find_by_id(&request.from_account).await?
-            .ok_or(WorkflowError::AccountNotFound)?;
+        // 1. 验证请求
+        let validated_request = self.validate_request(&request).await?;
         
-        if !from_account.can_withdraw(&request.amount) {
+        // 2. 检查账户状态
+        let from_account = self.account_service.get_account(&validated_request.from_account).await?;
+        let to_account = self.account_service.get_account(&validated_request.to_account).await?;
+        
+        if !from_account.can_transfer(&validated_request.amount) {
             return Err(WorkflowError::InsufficientFunds);
         }
         
         // 3. 风险评估
-        let risk_assessment = self.risk_service.assess_payment(&request).await?;
-        if risk_assessment.risk_level() == RiskLevel::High {
-            return Err(WorkflowError::HighRiskPayment);
-        }
+        let risk_assessment = self.risk_service.assess_payment_risk(
+            &validated_request,
+            &from_account,
+        ).await?;
         
-        // 4. 合规检查
-        let compliance_result = self.compliance_service.check_payment(&request).await?;
-        if !compliance_result.is_compliant() {
-            return Err(WorkflowError::ComplianceViolation(compliance_result.reason()));
-        }
+        // 4. 根据风险等级决定处理方式
+        let payment_result = match risk_assessment.risk_level {
+            RiskLevel::Low => {
+                self.process_low_risk_payment(validated_request, from_account, to_account).await?
+            }
+            RiskLevel::Medium => {
+                self.process_medium_risk_payment(validated_request, from_account, to_account).await?
+            }
+            RiskLevel::High => {
+                return Err(WorkflowError::HighRiskTransaction);
+            }
+        };
         
-        // 5. 创建支付记录
-        let mut payment = Payment::new(
-            request.from_account,
-            request.to_account,
+        // 5. 记录审计日志
+        self.audit_logger.log_payment_processing(
+            &request,
+            &payment_result,
+            start_time.elapsed(),
+        ).await?;
+        
+        // 6. 发送通知
+        self.notification_service.send_payment_notification(&payment_result).await?;
+        
+        Ok(payment_result)
+    }
+    
+    async fn process_low_risk_payment(
+        &self,
+        request: PaymentRequest,
+        mut from_account: Account,
+        mut to_account: Account,
+    ) -> Result<PaymentResult, WorkflowError> {
+        // 自动处理低风险支付
+        from_account.transfer(&request.amount)?;
+        to_account.receive(&request.amount)?;
+        
+        // 保存账户状态
+        self.account_service.save_account(&from_account).await?;
+        self.account_service.save_account(&to_account).await?;
+        
+        // 创建支付记录
+        let payment = Payment::new(
+            from_account.id.clone(),
+            to_account.id.clone(),
             request.amount,
             request.payment_method,
         );
         
-        // 6. 选择支付路由
-        let route = self.routing_service.select_route(&payment).await?;
+        let payment_id = self.payment_service.save_payment(&payment).await?;
         
-        // 7. 执行支付
-        payment.process()?;
-        self.payment_repository.save(&payment).await?;
-        
-        // 8. 执行资金转移
-        self.execute_fund_transfer(&payment, &route).await?;
-        
-        // 9. 完成支付
-        payment.complete();
-        self.payment_repository.save(&payment).await?;
-        
-        // 10. 发送通知
-        self.notification_service.send_payment_confirmation(&payment).await?;
-        
-        Ok(payment.id)
+        Ok(PaymentResult {
+            payment_id,
+            status: PaymentStatus::Completed,
+            processing_time: Duration::from_millis(100),
+        })
     }
     
-    async fn execute_fund_transfer(&self, payment: &Payment, route: &PaymentRoute) -> Result<(), WorkflowError> {
-        // 扣除源账户余额
-        let mut from_account = self.account_repository.find_by_id(&payment.from_account).await?
-            .ok_or(WorkflowError::AccountNotFound)?;
-        
-        from_account.withdraw(payment.amount.clone())?;
-        self.account_repository.save(&from_account).await?;
-        
-        // 增加目标账户余额
-        let mut to_account = self.account_repository.find_by_id(&payment.to_account).await?
-            .ok_or(WorkflowError::AccountNotFound)?;
-        
-        to_account.deposit(payment.amount.clone())?;
-        self.account_repository.save(&to_account).await?;
-        
-        Ok(())
-    }
-}
-```
-
-### 4.3 交易执行流程
-
-```rust
-pub struct TradeExecutionWorkflow {
-    account_repository: Box<dyn AccountRepository>,
-    trade_repository: Box<dyn TradeRepository>,
-    market_data_service: Box<dyn MarketDataService>,
-    risk_service: Box<dyn RiskService>,
-    execution_service: Box<dyn ExecutionService>,
-    notification_service: Box<dyn NotificationService>,
-}
-
-impl TradeExecutionWorkflow {
-    pub async fn execute_trade(&self, request: TradeRequest) -> Result<TradeId, WorkflowError> {
-        // 1. 验证交易请求
-        self.validate_trade_request(&request).await?;
-        
-        // 2. 检查账户状态
-        let account = self.account_repository.find_by_id(&request.account_id).await?
-            .ok_or(WorkflowError::AccountNotFound)?;
-        
-        if account.status != AccountStatus::Active {
-            return Err(WorkflowError::AccountInactive);
-        }
-        
-        // 3. 获取市场数据
-        let market_data = self.market_data_service.get_quote(&request.instrument).await?;
-        
-        // 4. 价格验证
-        if !self.validate_price(&request, &market_data).await? {
-            return Err(WorkflowError::PriceMismatch);
-        }
-        
-        // 5. 风险评估
-        let risk_assessment = self.risk_service.assess_trade(&request).await?;
-        if risk_assessment.risk_level() == RiskLevel::High {
-            return Err(WorkflowError::HighRiskTrade);
-        }
-        
-        // 6. 创建交易记录
-        let mut trade = Trade::new(
-            request.account_id,
-            request.instrument,
-            request.side,
-            request.quantity,
-            request.price,
-            request.order_type,
+    async fn process_medium_risk_payment(
+        &self,
+        request: PaymentRequest,
+        from_account: Account,
+        to_account: Account,
+    ) -> Result<PaymentResult, WorkflowError> {
+        // 创建待审核的支付
+        let payment = Payment::new(
+            from_account.id.clone(),
+            to_account.id.clone(),
+            request.amount,
+            request.payment_method,
         );
         
-        // 7. 执行交易
-        let execution_result = self.execution_service.execute(&trade).await?;
+        let payment_id = self.payment_service.save_payment(&payment).await?;
         
-        if execution_result.is_successful() {
-            trade.execute(execution_result.price(), execution_result.timestamp());
-            
-            // 8. 计算费用
-            let fees = self.calculate_fees(&trade).await?;
-            for fee in fees {
-                trade.add_fee(fee);
-            }
-            
-            // 9. 保存交易
-            self.trade_repository.save(&trade).await?;
-            
-            // 10. 发送确认
-            self.notification_service.send_trade_confirmation(&trade).await?;
-            
-            Ok(trade.id)
-        } else {
-            trade.cancel()?;
-            self.trade_repository.save(&trade).await?;
-            Err(WorkflowError::ExecutionFailed(execution_result.error()))
-        }
+        // 发送人工审核通知
+        self.notification_service.send_manual_review_notification(&payment_id).await?;
+        
+        Ok(PaymentResult {
+            payment_id,
+            status: PaymentStatus::PendingReview,
+            processing_time: Duration::from_millis(50),
+        })
     }
 }
 ```
 
-## 5. 业务规则引擎
+## 4. 业务规则引擎
 
-### 5.1 规则定义
+### 4.1 规则定义
 
 ```rust
 pub trait BusinessRule {
-    fn evaluate(&self, context: &BusinessContext) -> Result<RuleResult, RuleError>;
+    async fn evaluate(&self, context: &RuleContext) -> Result<RuleResult, RuleError>;
     fn priority(&self) -> u32;
     fn name(&self) -> &str;
 }
 
-pub struct MinimumBalanceRule {
-    minimum_balance: Money,
+pub struct TransferLimitRule {
+    max_daily_transfer: Money,
+    max_monthly_transfer: Money,
 }
 
-impl BusinessRule for MinimumBalanceRule {
-    fn evaluate(&self, context: &BusinessContext) -> Result<RuleResult, RuleError> {
-        if let Some(account) = &context.account {
-            if account.balance.amount < self.minimum_balance.amount {
-                Ok(RuleResult::Violation(format!(
-                    "Account balance {} is below minimum required {}",
-                    account.balance.amount,
-                    self.minimum_balance.amount
-                )))
-            } else {
-                Ok(RuleResult::Compliant)
-            }
-        } else {
-            Err(RuleError::MissingContext("account"))
+#[async_trait]
+impl BusinessRule for TransferLimitRule {
+    async fn evaluate(&self, context: &RuleContext) -> Result<RuleResult, RuleError> {
+        let account = &context.account;
+        let transfer_amount = &context.transfer_amount;
+        
+        // 检查日限额
+        let daily_transfers = self.get_daily_transfers(account.id).await?;
+        let daily_total: Money = daily_transfers.iter()
+            .map(|t| &t.amount)
+            .fold(Money::new(Decimal::ZERO, transfer_amount.currency.clone()), |acc, x| acc.add(x).unwrap());
+        
+        if daily_total.add(transfer_amount)?.amount > self.max_daily_transfer.amount {
+            return Ok(RuleResult::Violation {
+                rule_name: self.name().to_string(),
+                message: "Daily transfer limit exceeded".to_string(),
+                severity: ViolationSeverity::High,
+            });
         }
+        
+        // 检查月限额
+        let monthly_transfers = self.get_monthly_transfers(account.id).await?;
+        let monthly_total: Money = monthly_transfers.iter()
+            .map(|t| &t.amount)
+            .fold(Money::new(Decimal::ZERO, transfer_amount.currency.clone()), |acc, x| acc.add(x).unwrap());
+        
+        if monthly_total.add(transfer_amount)?.amount > self.max_monthly_transfer.amount {
+            return Ok(RuleResult::Violation {
+                rule_name: self.name().to_string(),
+                message: "Monthly transfer limit exceeded".to_string(),
+                severity: ViolationSeverity::High,
+            });
+        }
+        
+        Ok(RuleResult::Compliant)
     }
     
-    fn priority(&self) -> u32 { 100 }
-    fn name(&self) -> &str { "minimum_balance" }
-}
-
-pub struct DailyTransactionLimitRule {
-    limit: Money,
-}
-
-impl BusinessRule for DailyTransactionLimitRule {
-    fn evaluate(&self, context: &BusinessContext) -> Result<RuleResult, RuleError> {
-        if let Some(daily_total) = &context.daily_transaction_total {
-            if daily_total.amount > self.limit.amount {
-                Ok(RuleResult::Violation(format!(
-                    "Daily transaction total {} exceeds limit {}",
-                    daily_total.amount,
-                    self.limit.amount
-                )))
-            } else {
-                Ok(RuleResult::Compliant)
-            }
-        } else {
-            Ok(RuleResult::Compliant) // 如果没有数据，假设合规
-        }
+    fn priority(&self) -> u32 {
+        100
     }
     
-    fn priority(&self) -> u32 { 200 }
-    fn name(&self) -> &str { "daily_transaction_limit" }
+    fn name(&self) -> &str {
+        "TransferLimitRule"
+    }
+}
+
+pub struct SuspiciousActivityRule {
+    threshold_amount: Money,
+    time_window: Duration,
+}
+
+#[async_trait]
+impl BusinessRule for SuspiciousActivityRule {
+    async fn evaluate(&self, context: &RuleContext) -> Result<RuleResult, RuleError> {
+        let account = &context.account;
+        let transfer_amount = &context.transfer_amount;
+        
+        // 检查大额转账
+        if transfer_amount.amount > self.threshold_amount.amount {
+            // 检查最近的活动
+            let recent_activity = self.get_recent_activity(account.id, self.time_window).await?;
+            
+            if recent_activity.len() > 5 {
+                return Ok(RuleResult::Violation {
+                    rule_name: self.name().to_string(),
+                    message: "Suspicious activity detected: too many transactions in short time".to_string(),
+                    severity: ViolationSeverity::Medium,
+                });
+            }
+        }
+        
+        Ok(RuleResult::Compliant)
+    }
+    
+    fn priority(&self) -> u32 {
+        200
+    }
+    
+    fn name(&self) -> &str {
+        "SuspiciousActivityRule"
+    }
 }
 ```
 
-### 5.2 规则引擎
+### 4.2 规则引擎
 
 ```rust
 pub struct BusinessRuleEngine {
@@ -982,39 +913,126 @@ impl BusinessRuleEngine {
         self.rules.sort_by(|a, b| a.priority().cmp(&b.priority()));
     }
     
-    pub fn evaluate(&self, context: &BusinessContext) -> Result<Vec<RuleResult>, RuleError> {
-        let mut results = Vec::new();
+    pub async fn evaluate_rules(&self, context: &RuleContext) -> Result<RuleEvaluationResult, RuleError> {
+        let mut violations = Vec::new();
         
         for rule in &self.rules {
-            let result = rule.evaluate(context)?;
-            results.push(result);
+            let result = rule.evaluate(context).await?;
             
-            // 如果发现违规，可以决定是否继续检查其他规则
-            if let RuleResult::Violation(_) = &result {
-                // 可以根据业务需求决定是否继续
-                // break;
+            match result {
+                RuleResult::Compliant => continue,
+                RuleResult::Violation { rule_name, message, severity } => {
+                    violations.push(Violation {
+                        rule_name,
+                        message,
+                        severity,
+                    });
+                    
+                    // 如果是高严重性违规，立即停止
+                    if severity == ViolationSeverity::High {
+                        break;
+                    }
+                }
             }
         }
         
-        Ok(results)
+        Ok(RuleEvaluationResult {
+            is_compliant: violations.is_empty(),
+            violations,
+        })
     }
 }
+```
 
-#[derive(Debug, Clone)]
-pub struct BusinessContext {
-    pub account: Option<Account>,
-    pub payment: Option<Payment>,
-    pub trade: Option<Trade>,
-    pub customer: Option<Customer>,
-    pub daily_transaction_total: Option<Money>,
-    pub monthly_transaction_total: Option<Money>,
+## 5. 事件溯源
+
+### 5.1 事件定义
+
+```rust
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum FinancialEvent {
+    AccountCreated(AccountCreatedEvent),
+    PaymentInitiated(PaymentInitiatedEvent),
+    PaymentProcessed(PaymentProcessedEvent),
+    PaymentFailed(PaymentFailedEvent),
+    TradeExecuted(TradeExecutedEvent),
+    RiskAssessmentCompleted(RiskAssessmentEvent),
+    ComplianceViolationDetected(ComplianceViolationEvent),
 }
 
-#[derive(Debug, Clone)]
-pub enum RuleResult {
-    Compliant,
-    Violation(String),
-    Warning(String),
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccountCreatedEvent {
+    pub account_id: AccountId,
+    pub customer_id: CustomerId,
+    pub account_type: AccountType,
+    pub initial_balance: Money,
+    pub timestamp: DateTime<Utc>,
+    pub metadata: HashMap<String, String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct PaymentProcessedEvent {
+    pub payment_id: PaymentId,
+    pub from_account: AccountId,
+    pub to_account: AccountId,
+    pub amount: Money,
+    pub processing_time: Duration,
+    pub timestamp: DateTime<Utc>,
+    pub metadata: HashMap<String, String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RiskAssessmentEvent {
+    pub transaction_id: String,
+    pub risk_score: f64,
+    pub risk_level: RiskLevel,
+    pub risk_factors: Vec<String>,
+    pub timestamp: DateTime<Utc>,
+}
+```
+
+### 5.2 事件存储
+
+```rust
+pub struct EventStore {
+    event_repository: Box<dyn EventRepository>,
+    event_publisher: Box<dyn EventPublisher>,
+}
+
+impl EventStore {
+    pub async fn append_events(
+        &self,
+        aggregate_id: &str,
+        events: Vec<FinancialEvent>,
+        expected_version: u64,
+    ) -> Result<(), EventStoreError> {
+        // 检查版本冲突
+        let current_version = self.event_repository.get_current_version(aggregate_id).await?;
+        if current_version != expected_version {
+            return Err(EventStoreError::ConcurrencyConflict);
+        }
+        
+        // 存储事件
+        for (index, event) in events.iter().enumerate() {
+            let event_number = expected_version + index as u64 + 1;
+            self.event_repository.store_event(aggregate_id, event_number, event).await?;
+        }
+        
+        // 发布事件
+        for event in events {
+            self.event_publisher.publish(&event).await?;
+        }
+        
+        Ok(())
+    }
+    
+    pub async fn get_events(
+        &self,
+        aggregate_id: &str,
+        from_version: u64,
+    ) -> Result<Vec<FinancialEvent>, EventStoreError> {
+        self.event_repository.get_events(aggregate_id, from_version).await
+    }
 }
 ```
 
@@ -1022,10 +1040,10 @@ pub enum RuleResult {
 
 金融科技行业的业务建模需要特别关注：
 
-1. **精确性**: 所有金额计算必须精确，避免浮点数误差
-2. **一致性**: 确保数据一致性，特别是在并发操作中
-3. **可追溯性**: 所有操作都要有完整的审计日志
-4. **合规性**: 严格遵循金融监管要求
-5. **安全性**: 保护敏感金融数据
+1. **业务概念建模**: 明确定义账户、支付、交易等核心概念
+2. **数据建模**: 设计符合金融业务特点的数据结构
+3. **流程建模**: 详细描述支付、交易、风控等业务流程
+4. **规则引擎**: 实现灵活的业务规则管理
+5. **事件溯源**: 保证数据一致性和审计追踪
 
-通过这种详细的业务建模，可以为Rust架构设计提供坚实的业务基础，确保系统能够准确、安全、高效地处理金融业务。
+通过这种详细的业务建模，可以构建出符合金融行业要求的可靠系统。
