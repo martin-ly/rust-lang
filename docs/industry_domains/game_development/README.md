@@ -15,6 +15,7 @@
 ## 技术栈选型
 
 ### 核心框架
+
 ```toml
 [dependencies]
 # 游戏引擎
@@ -48,6 +49,7 @@ bincode = "1.3"
 ```
 
 ### 行业特定库
+
 ```toml
 [dependencies]
 # 数学库
@@ -71,6 +73,7 @@ perf-event = "0.4"
 ## 架构模式
 
 ### 1. ECS架构 (Entity-Component-System)
+
 ```rust
 use bevy::prelude::*;
 
@@ -125,6 +128,7 @@ fn main() {
 ```
 
 ### 2. 客户端-服务器架构
+
 ```rust
 // 客户端
 pub struct GameClient {
@@ -188,6 +192,7 @@ impl GameServer {
 ```
 
 ### 3. 状态同步模式
+
 ```rust
 // 游戏状态
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -217,6 +222,7 @@ pub trait StateSynchronizer {
 ## 业务领域建模
 
 ### 核心游戏概念
+
 ```rust
 // 游戏世界
 pub struct GameWorld {
@@ -259,6 +265,7 @@ pub enum Action {
 ```
 
 ### 游戏逻辑组件
+
 ```rust
 // 玩家组件
 #[derive(Component)]
@@ -294,6 +301,7 @@ pub struct Skill {
 ## 数据建模
 
 ### 游戏数据存储
+
 ```rust
 // 存档系统
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -326,6 +334,7 @@ pub struct GameAsset {
 ```
 
 ### 网络数据模型
+
 ```rust
 // 网络消息
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -347,6 +356,7 @@ pub trait NetworkProtocol {
 ## 流程建模
 
 ### 游戏主循环
+
 ```mermaid
 graph TD
     A[初始化] --> B[加载资源]
@@ -365,6 +375,7 @@ graph TD
 ```
 
 ### 多人游戏流程
+
 ```mermaid
 graph TD
     A[玩家连接] --> B[身份验证]
@@ -386,6 +397,7 @@ graph TD
 ## 组件建模
 
 ### 渲染系统
+
 ```rust
 // 渲染器
 pub struct Renderer {
@@ -468,6 +480,7 @@ impl Renderer {
 ```
 
 ### 音频系统
+
 ```rust
 // 音频管理器
 pub struct AudioManager {
@@ -515,6 +528,7 @@ impl AudioManager {
 ```
 
 ### 物理系统
+
 ```rust
 // 物理引擎
 pub struct PhysicsEngine {
@@ -579,6 +593,7 @@ impl PhysicsEngine {
 ## 性能优化
 
 ### 内存管理
+
 ```rust
 // 对象池
 pub struct ObjectPool<T> {
@@ -659,6 +674,7 @@ impl SpatialHashGrid {
 ```
 
 ### 渲染优化
+
 ```rust
 // 批处理渲染
 pub struct BatchRenderer {
@@ -728,6 +744,7 @@ impl FrustumCuller {
 ## 网络优化
 
 ### 预测和回滚
+
 ```rust
 // 客户端预测
 pub struct ClientPrediction {
@@ -818,6 +835,7 @@ impl Interpolation {
 ## 测试策略
 
 ### 单元测试
+
 ```rust
 #[cfg(test)]
 mod tests {
@@ -863,6 +881,7 @@ mod tests {
 ```
 
 ### 性能测试
+
 ```rust
 #[cfg(test)]
 mod performance_tests {
@@ -912,6 +931,7 @@ mod performance_tests {
 ## 部署和发布
 
 ### 构建配置
+
 ```toml
 # Cargo.toml
 [package]
@@ -937,6 +957,7 @@ criterion = "0.5"
 ```
 
 ### 跨平台构建
+
 ```rust
 // 平台特定代码
 #[cfg(target_os = "windows")]
@@ -973,4 +994,4 @@ mod platform {
 4. **网络**: 低延迟、高吞吐量、可靠传输
 5. **跨平台**: 统一API、平台抽象、资源管理
 
-通过遵循这些设计原则和最佳实践，可以构建出高性能、低延迟的游戏系统。 
+通过遵循这些设计原则和最佳实践，可以构建出高性能、低延迟的游戏系统。
