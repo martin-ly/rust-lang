@@ -9,6 +9,7 @@
 ### 1.1 核心业务概念
 
 #### 数据集聚合根
+
 ```rust
 #[derive(Debug, Clone)]
 pub struct Dataset {
@@ -85,6 +86,7 @@ impl Dataset {
 ```
 
 #### 特征集聚合根
+
 ```rust
 #[derive(Debug, Clone)]
 pub struct FeatureSet {
@@ -189,6 +191,7 @@ impl FeatureSet {
 ```
 
 #### 模型聚合根
+
 ```rust
 #[derive(Debug, Clone)]
 pub struct Model {
@@ -264,6 +267,7 @@ impl Model {
 ```
 
 ### 1.2 值对象
+
 ```rust
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct DatasetId(String);
@@ -342,6 +346,7 @@ impl PredictionValue {
 ### 2.1 数据库设计
 
 #### 数据集相关表
+
 ```sql
 -- 数据集表
 CREATE TABLE datasets (
@@ -384,6 +389,7 @@ CREATE TABLE dataset_quality_checks (
 ```
 
 #### 特征集相关表
+
 ```sql
 -- 特征集表
 CREATE TABLE feature_sets (
@@ -423,6 +429,7 @@ CREATE TABLE feature_store (
 ```
 
 #### 模型相关表
+
 ```sql
 -- 模型表
 CREATE TABLE models (
@@ -467,6 +474,7 @@ CREATE TABLE model_deployments (
 ```
 
 #### 预测记录表
+
 ```sql
 -- 预测请求表
 CREATE TABLE prediction_requests (
@@ -503,6 +511,7 @@ CREATE TABLE model_performance (
 ```
 
 ### 2.2 特征存储实现
+
 ```rust
 pub struct RedisFeatureStore {
     client: redis::Client,
@@ -560,6 +569,7 @@ impl FeatureStore for RedisFeatureStore {
 ## 3. 流程建模
 
 ### 3.1 模型训练流程
+
 ```mermaid
 graph TD
     A[数据准备] --> B[特征工程]
@@ -577,6 +587,7 @@ graph TD
 ```
 
 ### 3.2 推理服务流程
+
 ```mermaid
 graph TD
     A[接收请求] --> B[请求验证]
@@ -590,6 +601,7 @@ graph TD
 ```
 
 ### 3.3 特征工程流程
+
 ```mermaid
 graph TD
     A[原始数据] --> B[数据清洗]
@@ -603,6 +615,7 @@ graph TD
 ```
 
 ### 3.4 流程实现
+
 ```rust
 pub struct ModelTrainingWorkflow {
     data_service: Box<dyn DataService>,
@@ -717,6 +730,7 @@ impl ModelTrainingWorkflow {
 ## 4. 模型服务
 
 ### 4.1 推理服务
+
 ```rust
 pub struct InferenceService {
     model_loader: ModelLoader,
@@ -772,6 +786,7 @@ impl InferenceService {
 ```
 
 ### 4.2 模型监控
+
 ```rust
 pub struct ModelMonitoringService {
     performance_repository: Box<dyn PerformanceRepository>,
@@ -857,6 +872,7 @@ impl ModelMonitoringService {
 ## 5. 事件系统
 
 ### 5.1 事件定义
+
 ```rust
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum AIEvent {
@@ -897,6 +913,7 @@ pub struct DriftEvent {
 ```
 
 ### 5.2 事件处理器
+
 ```rust
 pub struct ModelLifecycleEventHandler {
     model_registry: Box<dyn ModelRegistry>,
@@ -978,4 +995,4 @@ AI/ML行业的业务建模需要特别关注：
 4. **模型管理**: 实现模型版本控制和生命周期管理
 5. **事件系统**: 支持MLOps和自动化流程
 
-通过这种详细的业务建模，可以构建出高效、可靠的AI/ML系统。 
+通过这种详细的业务建模，可以构建出高效、可靠的AI/ML系统。
