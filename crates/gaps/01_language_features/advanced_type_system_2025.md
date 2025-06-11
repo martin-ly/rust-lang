@@ -750,4 +750,4 @@ impl<T, E> Monad<Result<T, E>> for Result<T, E> {
 
 *最后更新时间：2025年1月*
 *版本：1.0*
-*维护者：Rust社区* 
+*维护者：Rust社区*
