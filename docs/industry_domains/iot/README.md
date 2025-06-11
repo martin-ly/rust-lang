@@ -16,6 +16,7 @@
 ## 技术栈选型
 
 ### 核心框架
+
 ```toml
 [dependencies]
 # 异步运行时
@@ -54,6 +55,7 @@ log = "0.4"
 ```
 
 ### 行业特定库
+
 ```toml
 [dependencies]
 # 硬件抽象
@@ -80,7 +82,8 @@ moka = "0.12"
 ## 架构模式
 
 ### 1. 分层架构
-```
+
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                    应用层 (Application Layer)                │
 │  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐           │
@@ -108,6 +111,7 @@ moka = "0.12"
 ```
 
 ### 2. 边缘计算架构
+
 ```rust
 // 边缘节点
 pub struct EdgeNode {
@@ -172,6 +176,7 @@ impl CloudService {
 ```
 
 ### 3. 事件驱动架构
+
 ```rust
 // 事件定义
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -220,6 +225,7 @@ impl EventBus {
 ## 业务领域建模
 
 ### 核心领域概念
+
 ```rust
 // 设备聚合根
 #[derive(Debug, Clone)]
@@ -273,6 +279,7 @@ pub struct Alert {
 ```
 
 ### 值对象
+
 ```rust
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct DeviceId(String);
@@ -304,6 +311,7 @@ pub struct DeviceConfiguration {
 ## 数据建模
 
 ### 数据库设计
+
 ```sql
 -- 设备表
 CREATE TABLE devices (
@@ -362,6 +370,7 @@ CREATE TABLE alerts (
 ```
 
 ### 时间序列数据存储
+
 ```rust
 // 时间序列数据库接口
 pub trait TimeSeriesDB {
@@ -432,6 +441,7 @@ impl TimeSeriesDB for InfluxDB {
 ## 流程建模
 
 ### 设备注册流程
+
 ```mermaid
 graph TD
     A[设备启动] --> B[生成设备ID]
@@ -445,6 +455,7 @@ graph TD
 ```
 
 ### 数据处理流程
+
 ```mermaid
 graph TD
     A[传感器采集] --> B[数据预处理]
@@ -463,6 +474,7 @@ graph TD
 ## 组件建模
 
 ### 设备管理器
+
 ```rust
 pub struct DeviceManager {
     devices: HashMap<DeviceId, Device>,
@@ -523,6 +535,7 @@ impl DeviceManager {
 ```
 
 ### 数据处理引擎
+
 ```rust
 pub struct DataProcessor {
     filters: Vec<Box<dyn DataFilter>>,
@@ -582,6 +595,7 @@ impl DataFilter for OutlierFilter {
 ```
 
 ### 规则引擎
+
 ```rust
 pub struct RuleEngine {
     rules: Vec<Rule>,
@@ -650,6 +664,7 @@ impl RuleEngine {
 ## 通信协议
 
 ### MQTT客户端
+
 ```rust
 pub struct MQTTClient {
     client: rumqttc::AsyncClient,
@@ -717,6 +732,7 @@ impl MQTTClient {
 ```
 
 ### CoAP客户端
+
 ```rust
 pub struct CoAPClient {
     client: coap::CoAPClient,
@@ -757,6 +773,7 @@ impl CoAPClient {
 ## 安全机制
 
 ### 设备认证
+
 ```rust
 pub struct DeviceAuthenticator {
     certificate_store: CertificateStore,
@@ -792,6 +809,7 @@ impl DeviceAuthenticator {
 ```
 
 ### 数据加密
+
 ```rust
 pub struct DataEncryptor {
     encryption_key: Vec<u8>,
@@ -837,6 +855,7 @@ impl DataEncryptor {
 ## 性能优化
 
 ### 数据压缩
+
 ```rust
 use flate2::write::GzEncoder;
 use flate2::Compression;
@@ -863,6 +882,7 @@ impl DataCompressor {
 ```
 
 ### 批量处理
+
 ```rust
 pub struct BatchProcessor {
     batch_size: usize,
@@ -900,6 +920,7 @@ impl BatchProcessor {
 ## 测试策略
 
 ### 单元测试
+
 ```rust
 #[cfg(test)]
 mod tests {
@@ -937,6 +958,7 @@ mod tests {
 ```
 
 ### 集成测试
+
 ```rust
 #[cfg(test)]
 mod integration_tests {
@@ -964,6 +986,7 @@ mod integration_tests {
 ## 部署和运维
 
 ### 容器化部署
+
 ```dockerfile
 # Dockerfile for IoT Edge Node
 FROM rust:1.75 as builder
@@ -985,6 +1008,7 @@ CMD ["./iot-edge-node"]
 ```
 
 ### 配置管理
+
 ```toml
 # config.toml
 [device]
@@ -1024,4 +1048,4 @@ sampling_rate_seconds = 1
 4. **安全性**: 设备认证、数据加密、安全更新
 5. **性能优化**: 低资源消耗、批量处理、缓存策略
 
-通过遵循这些设计原则和最佳实践，可以构建出高效、安全、可靠的物联网系统。 
+通过遵循这些设计原则和最佳实践，可以构建出高效、安全、可靠的物联网系统。

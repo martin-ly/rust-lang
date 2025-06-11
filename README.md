@@ -1,8 +1,23 @@
-
 # rust-lang
 
 [rust-lang-philosophy](docs/rust_core_philosophy.md)
 [rust-lang](docs/rust_paradiam.md)
+
+## 🏭 行业领域知识库
+
+[软件行业领域知识库 - Rust架构与设计指南](docs/industry_domains/README.md)
+
+### 已完成的行业指南
+- [金融科技 (FinTech)](docs/industry_domains/fintech/README.md) - 支付系统、银行核心、风控系统
+- [游戏开发 (Game Development)](docs/industry_domains/game_development/README.md) - 游戏引擎、网络服务器、实时渲染
+- [物联网 (IoT)](docs/industry_domains/iot/README.md) - 设备管理、数据采集、边缘计算
+- [人工智能/机器学习 (AI/ML)](docs/industry_domains/ai_ml/README.md) - 模型训练、推理服务、MLOps
+- [区块链/Web3](docs/industry_domains/blockchain_web3/README.md) - 智能合约、去中心化应用、共识机制
+
+### 通用指南
+- [通用架构模式](docs/industry_domains/common_patterns/README.md) - 微服务、事件驱动、CQRS等模式
+- [性能优化指南](docs/industry_domains/performance_guide/README.md) - 内存优化、并发优化、算法优化
+- [安全指南](docs/industry_domains/security_guide/README.md) - 内存安全、密码学、网络安全
 
 ## rust programming language learning - pre-knowledge
 
@@ -30,7 +45,7 @@
 
 [rust-borrow-checker](docs/rust/ownership_borrow_scope/borrow_check_inference.md)
 [variable](docs/rust/control/control_flow_rust.md)
-[ref_mut_reason](docs/rust/ownership_borrow_scope/ref_mut_reason.md)
+[ref_refmut](docs/rust/ownership_borrow_scope/ref_mut_reason.md)
 
 ### 3. type system model: include { primitive_type, compound_type, generic_type, trait_type }
 
