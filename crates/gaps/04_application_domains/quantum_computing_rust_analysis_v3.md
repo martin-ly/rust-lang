@@ -1266,4 +1266,4 @@ fn solve_max_cut(graph: &Graph) -> Vec<bool> {
 
 *最后更新时间：2025年1月*
 *版本：3.0*
-*维护者：Rust量子计算工作组* 
+*维护者：Rust量子计算工作组*

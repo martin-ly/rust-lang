@@ -570,4 +570,4 @@ trait AdvancedContainer<T, const N: usize> {
 2. Type Theory and Functional Programming
 3. Category Theory in Context
 4. The Rust Programming Language Book
-5. Rust RFCs and Design Documents 
+5. Rust RFCs and Design Documents
