@@ -33,6 +33,7 @@
 异步类型系统为异步计算提供类型安全保证，确保异步操作的组合和错误处理。
 
 **形式化定义**：
+
 ```
 Async<T> ::= Future<Output = T>
 async fn f() -> T ::= impl Future<Output = T>
@@ -209,6 +210,7 @@ impl<T, U> AsyncPipeline<T, U> {
 并发安全模式确保多线程环境下的数据安全，提供无锁数据结构和原子操作。
 
 **形式化定义**：
+
 ```
 ConcurrentSafe<T> ::= { data: T, lock: Mutex<T> }
 LockFree<T> ::= { data: T, atomic: AtomicPtr<T> }
@@ -360,6 +362,7 @@ impl<T> AtomicRc<T> {
 无锁数据结构不使用传统锁机制，通过原子操作实现并发安全。
 
 **形式化定义**：
+
 ```
 LockFree<T> ::= { data: T, atomic: AtomicPtr<T> }
 WaitFree<T> ::= { data: T, atomic: AtomicPtr<T>, progress: Progress }
@@ -623,6 +626,7 @@ impl<K: Eq + Hash, V> LockFreeHashMap<K, V> {
 内存模型定义并发内存访问的语义，确保程序行为的可预测性。
 
 **形式化定义**：
+
 ```
 MemoryModel ::= { operations: Set<Operation>, ordering: Ordering }
 Operation ::= Read | Write | Fence
@@ -814,6 +818,7 @@ impl MemoryBarrier {
 并发控制原语提供高级并发控制机制，如信号量、条件变量等。
 
 **形式化定义**：
+
 ```
 Semaphore ::= { permits: AtomicUsize, waiters: Queue<Waiter> }
 ConditionVariable ::= { waiters: Queue<Waiter>, mutex: Mutex<()> }
@@ -1058,6 +1063,7 @@ impl<T> ReadWriteLock<T> {
 形式化验证使用数学方法证明并发程序的正确性。
 
 **形式化定义**：
+
 ```
 Verified<T> ::= { x: T | P(x) }
 where P is a predicate that x satisfies
@@ -1436,4 +1442,4 @@ impl<K: Eq + Hash + Clone, V: Clone> ConcurrentCache<K, V> {
 2. **工具链**：并发编程工具
 3. **社区**：并发编程社区
 
-通过系统性的努力，Rust可以建立世界上最先进的并发编程系统，为高并发应用提供无与伦比的性能和安全性。 
+通过系统性的努力，Rust可以建立世界上最先进的并发编程系统，为高并发应用提供无与伦比的性能和安全性。
