@@ -1,6 +1,7 @@
 # 分布式系统深度分析
 
 ## 目录
+
 - [概念概述](#概念概述)
 - [定义与内涵](#定义与内涵)
 - [理论基础](#理论基础)
@@ -31,6 +32,7 @@
 ### 分布式系统定义
 
 **形式化定义**：
+
 ```text
 DistributedSystem ::= {Node₁, Node₂, ..., Nodeₙ} × Network × Protocol
 where:
@@ -46,6 +48,7 @@ where:
 **定义**：确保分布式系统中数据一致性的协议机制
 
 **分类**：
+
 - **强一致性**：线性化 (Linearizability)
 - **最终一致性**：因果一致性 (Causal Consistency)
 - **弱一致性**：读写一致性 (Read-Your-Writes)
@@ -55,6 +58,7 @@ where:
 **定义**：为分布式计算提供类型安全保证的类型系统
 
 **特性**：
+
 - 位置透明性 (Location Transparency)
 - 故障类型 (Fault Types)
 - 网络类型 (Network Types)
@@ -64,6 +68,7 @@ where:
 **定义**：系统在部分组件故障时仍能正常工作的能力
 
 **策略**：
+
 - 复制 (Replication)
 - 重试 (Retry)
 - 熔断 (Circuit Breaker)
@@ -78,6 +83,7 @@ where:
 **定理**：在分布式系统中，一致性(Consistency)、可用性(Availability)、分区容错性(Partition Tolerance)三者最多只能同时满足两个。
 
 **形式化表述**：
+
 ```text
 ∀System. ¬(C ∧ A ∧ P)
 where:
@@ -91,11 +97,13 @@ where:
 #### Raft算法
 
 **核心概念**：
+
 - **领导者选举**：通过投票机制选择领导者
 - **日志复制**：领导者将日志条目复制到所有跟随者
 - **安全性**：确保已提交的日志条目不会被覆盖
 
 **Rust实现**：
+
 ```rust
 #[derive(Debug, Clone, PartialEq)]
 pub enum RaftState {
@@ -150,6 +158,7 @@ impl RaftNode {
 #### Paxos算法
 
 **核心概念**：
+
 - **提议阶段**：提议者向接受者发送提议
 - **接受阶段**：接受者接受或拒绝提议
 - **学习阶段**：学习者学习已接受的提议
@@ -159,6 +168,7 @@ impl RaftNode {
 #### 两阶段提交 (2PC)
 
 **阶段1 - 准备阶段**：
+
 ```rust
 pub enum TwoPhaseCommitState {
     Initial,
@@ -224,6 +234,7 @@ impl<T> TwoPhaseCommit<T> {
 **定义**：如果操作的历史是线性的，那么系统就是线性化的。
 
 **形式化定义**：
+
 ```text
 Linearizable(History) ≡ ∃LinearOrder. ∀op₁, op₂ ∈ History.
   (op₁ → op₂) ∧ (op₁.end < op₂.start) ⇒ LinearOrder(op₁) < LinearOrder(op₂)
@@ -234,6 +245,7 @@ Linearizable(History) ≡ ∃LinearOrder. ∀op₁, op₂ ∈ History.
 **定义**：如果两个操作之间存在因果关系，那么它们必须按因果顺序执行。
 
 **形式化定义**：
+
 ```text
 CausalConsistency(History) ≡ ∀op₁, op₂ ∈ History.
   op₁ → op₂ ⇒ ∀node. op₁ ∈ node.history ⇒ op₂ ∈ node.history
@@ -242,6 +254,7 @@ CausalConsistency(History) ≡ ∀op₁, op₂ ∈ History.
 ### 3. 分布式类型系统
 
 **类型规则**：
+
 ```text
 Γ ⊢ e : T
 Γ ⊢ network_send(e, node) : NetworkAction<T>
@@ -639,4 +652,4 @@ Rust在分布式系统领域已经取得了显著进展：
 
 *最后更新时间：2025年1月*
 *版本：1.0*
-*维护者：Rust分布式系统工作组* 
+*维护者：Rust分布式系统工作组*

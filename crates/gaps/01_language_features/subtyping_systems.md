@@ -1,6 +1,7 @@
 # 子类型系统深度分析
 
 ## 目录
+
 - [概念概述](#概念概述)
 - [定义与内涵](#定义与内涵)
 - [理论基础](#理论基础)
@@ -31,12 +32,14 @@
 ### 子类型定义
 
 **形式化定义**：
+
 ```text
 Subtype(T₁, T₂) ≡ ∀e. e : T₁ ⇒ e : T₂
 where e is an expression and : denotes type membership
 ```
 
 **核心性质**：
+
 - **自反性**：T <: T
 - **传递性**：T₁ <: T₂ ∧ T₂ <: T₃ ⇒ T₁ <: T₃
 - **反对称性**：T₁ <: T₂ ∧ T₂ <: T₁ ⇒ T₁ = T₂
@@ -48,6 +51,7 @@ where e is an expression and : denotes type membership
 **定义**：类型之间的包含关系
 
 **类型**：
+
 - **结构子类型**：基于结构相似性
 - **名义子类型**：基于显式声明
 - **行为子类型**：基于行为兼容性
@@ -57,6 +61,7 @@ where e is an expression and : denotes type membership
 **定义**：类型构造器的变异性
 
 **分类**：
+
 - **协变**：保持子类型关系方向
 - **逆变**：反转子类型关系方向
 - **不变**：不保持子类型关系
@@ -66,6 +71,7 @@ where e is an expression and : denotes type membership
 **定义**：确保类型使用的正确性
 
 **保证**：
+
 - **类型检查**：编译时类型检查
 - **运行时安全**：运行时类型安全
 - **内存安全**：内存访问安全
@@ -77,6 +83,7 @@ where e is an expression and : denotes type membership
 ### 1. 子类型理论
 
 **核心公理**：
+
 ```text
 Reflexivity:    T <: T
 Transitivity:   T₁ <: T₂ ∧ T₂ <: T₃ ⇒ T₁ <: T₃
@@ -84,6 +91,7 @@ Antisymmetry:   T₁ <: T₂ ∧ T₂ <: T₁ ⇒ T₁ = T₂
 ```
 
 **函数子类型**：
+
 ```text
 T₁' <: T₁    T₂ <: T₂'
 ───────────────────────
@@ -91,6 +99,7 @@ T₁ → T₂ <: T₁' → T₂'
 ```
 
 **Rust实现**：
+
 ```rust
 #[derive(Debug, Clone, PartialEq)]
 pub struct SubtypeRelation {
@@ -157,6 +166,7 @@ impl SubtypeRelation {
 **定义**：类型构造器的变异性
 
 **形式化定义**：
+
 ```rust
 #[derive(Debug, Clone, PartialEq)]
 pub enum Variance {
@@ -203,6 +213,7 @@ impl TypeConstructor for Cell {
 ### 3. 类型安全理论
 
 **安全规则**：
+
 ```rust
 pub struct TypeSafetyChecker {
     subtype_checker: SubtypeChecker,
@@ -244,6 +255,7 @@ impl TypeSafetyChecker {
 ### 1. 子类型推导
 
 **推导规则**：
+
 ```text
 Γ ⊢ e : T₁    T₁ <: T₂
 ──────────────────────
@@ -255,6 +267,7 @@ impl TypeSafetyChecker {
 ```
 
 **Rust实现**：
+
 ```rust
 pub struct SubtypeInference {
     type_environment: TypeEnvironment,
@@ -333,6 +346,7 @@ impl SubtypeInference {
 ### 2. 变异性检查
 
 **检查算法**：
+
 ```rust
 pub struct VarianceChecker {
     variance_rules: HashMap<TypeConstructor, Variance>,
@@ -379,6 +393,7 @@ pub enum UseSite {
 ### 3. 类型安全证明
 
 **安全证明系统**：
+
 ```rust
 pub struct TypeSafetyProver {
     proof_assistant: ProofAssistant,
@@ -929,4 +944,4 @@ Rust的子类型系统已经相当成熟：
 
 *最后更新时间：2025年1月*
 *版本：1.0*
-*维护者：Rust类型系统工作组* 
+*维护者：Rust类型系统工作组*

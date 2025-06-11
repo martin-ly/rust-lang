@@ -1,6 +1,7 @@
 # 线性类型系统深度分析
 
 ## 目录
+
 - [概念概述](#概念概述)
 - [定义与内涵](#定义与内涵)
 - [理论基础](#理论基础)
@@ -31,12 +32,14 @@
 ### 线性类型定义
 
 **形式化定义**：
+
 ```text
 LinearType ::= ∀α. α → α
 where α is a type variable and each value of type α must be used exactly once
 ```
 
 **核心性质**：
+
 - **唯一性**：每个值只能有一个所有者
 - **移动语义**：值传递时所有权转移
 - **生命周期**：值的生命周期由所有者决定
@@ -48,6 +51,7 @@ where α is a type variable and each value of type α must be used exactly once
 **定义**：每个值都有一个所有者，所有者负责值的生命周期管理
 
 **规则**：
+
 - 每个值只有一个所有者
 - 当所有者离开作用域时，值被丢弃
 - 所有权可以通过移动转移
@@ -57,6 +61,7 @@ where α is a type variable and each value of type α must be used exactly once
 **定义**：临时借用值的引用，不转移所有权
 
 **类型**：
+
 - **不可变借用**：`&T` - 可以同时存在多个
 - **可变借用**：`&mut T` - 同时只能存在一个
 
@@ -65,6 +70,7 @@ where α is a type variable and each value of type α must be used exactly once
 **定义**：引用有效的时间范围
 
 **作用**：
+
 - 确保引用不会悬空
 - 防止使用已释放的内存
 - 支持复杂的借用模式
@@ -78,6 +84,7 @@ where α is a type variable and each value of type α must be used exactly once
 **核心思想**：每个资源只能使用一次
 
 **公理**：
+
 ```text
 A ⊗ B ⊢ A, B          (Tensor introduction)
 A, B ⊢ A ⊗ B          (Tensor elimination)
@@ -85,6 +92,7 @@ A ⊢ A                  (Identity)
 ```
 
 **Rust对应**：
+
 ```rust
 // Tensor introduction - 创建拥有两个值的元组
 let (a, b) = (String::new(), String::new());
@@ -103,10 +111,12 @@ let y = x; // x 移动到 y，x 不再可用
 **定义**：允许值被使用零次或一次的类型系统
 
 **与线性类型的区别**：
+
 - **线性类型**：值必须使用一次
 - **仿射类型**：值最多使用一次
 
 **Rust实现**：
+
 ```rust
 // Rust 使用仿射类型系统
 fn example() {
@@ -121,6 +131,7 @@ fn example() {
 **定义**：为内存区域分配类型，确保内存安全
 
 **核心概念**：
+
 ```rust
 #[derive(Debug)]
 pub struct Region<'a> {
@@ -151,6 +162,7 @@ impl<'a> Region<'a> {
 ### 1. 类型推导规则
 
 **移动规则**：
+
 ```text
 Γ ⊢ e : T
 Γ, x : T ⊢ e' : T'
@@ -159,6 +171,7 @@ impl<'a> Region<'a> {
 ```
 
 **借用规则**：
+
 ```text
 Γ ⊢ e : T
 ─────────────────
@@ -170,6 +183,7 @@ impl<'a> Region<'a> {
 ```
 
 **生命周期规则**：
+
 ```text
 Γ ⊢ e : &'a T
 Γ ⊢ 'a : 'b
@@ -180,6 +194,7 @@ impl<'a> Region<'a> {
 ### 2. 所有权传递
 
 **形式化定义**：
+
 ```rust
 pub trait Owned {
     type Borrowed<'a>;
@@ -204,6 +219,7 @@ impl<T> Owned for T {
 ### 3. 生命周期约束
 
 **约束系统**：
+
 ```rust
 pub struct LifetimeConstraints {
     constraints: Vec<LifetimeConstraint>,
@@ -712,4 +728,4 @@ Rust的线性类型系统已经相当成熟：
 
 *最后更新时间：2025年1月*
 *版本：1.0*
-*维护者：Rust类型系统工作组* 
+*维护者：Rust类型系统工作组*

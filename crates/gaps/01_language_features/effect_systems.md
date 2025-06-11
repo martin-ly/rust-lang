@@ -1,6 +1,7 @@
 # 效应系统深度分析
 
 ## 目录
+
 - [概念概述](#概念概述)
 - [定义与内涵](#定义与内涵)
 - [理论基础](#理论基础)
@@ -31,6 +32,7 @@
 ### 效应系统定义
 
 **形式化定义**：
+
 ```text
 EffectSystem ::= (Type, Effect, EffectInference, EffectSafety)
 where:
@@ -47,6 +49,7 @@ where:
 **定义**：表示函数或表达式可能产生的副作用类型
 
 **分类**：
+
 - **I/O效应**：文件操作、网络通信
 - **异常效应**：可能抛出异常
 - **资源效应**：资源获取和释放
@@ -58,6 +61,7 @@ where:
 **定义**：自动推导函数或表达式的效应类型
 
 **方法**：
+
 - **语法导向**：基于语法结构推断效应
 - **类型导向**：基于类型信息推断效应
 - **流敏感**：考虑控制流路径的效应
@@ -67,6 +71,7 @@ where:
 **定义**：确保效应使用符合安全约束
 
 **检查项**：
+
 - **效应传播**：效应在调用链中的正确传播
 - **效应隔离**：不同效应之间的隔离
 - **效应消除**：效应的正确消除和处理
@@ -80,6 +85,7 @@ where:
 **核心思想**：将效应作为类型系统的一部分
 
 **类型规则**：
+
 ```text
 Γ ⊢ e : T ! E
 where:
@@ -88,6 +94,7 @@ where:
 ```
 
 **效应组合**：
+
 ```rust
 #[derive(Debug, Clone, PartialEq)]
 pub struct EffectSet {
@@ -135,6 +142,7 @@ impl EffectSet {
 ### 2. 效应推断算法
 
 **算法框架**：
+
 ```rust
 pub struct EffectInference {
     type_environment: TypeEnvironment,
@@ -194,6 +202,7 @@ impl EffectInference {
 ### 3. 效应安全检查
 
 **安全规则**：
+
 ```rust
 pub struct EffectSafetyChecker {
     safety_rules: Vec<SafetyRule>,
@@ -269,6 +278,7 @@ impl EffectSafetyChecker {
 ### 1. 效应类型推导
 
 **类型规则**：
+
 ```text
 Γ ⊢ e₁ : T₁ ! E₁    Γ ⊢ e₂ : T₂ ! E₂
 ─────────────────────────────────────
@@ -286,6 +296,7 @@ impl EffectSafetyChecker {
 ### 2. 效应传播
 
 **传播规则**：
+
 ```rust
 pub struct EffectPropagation {
     propagation_rules: HashMap<Effect, PropagationRule>,
@@ -359,6 +370,7 @@ impl EffectPropagation {
 ### 3. 效应消除
 
 **消除规则**：
+
 ```rust
 pub struct EffectElimination {
     elimination_rules: HashMap<Effect, EliminationRule>,
@@ -978,4 +990,4 @@ Rust的效应系统正在发展中：
 
 *最后更新时间：2025年1月*
 *版本：1.0*
-*维护者：Rust效应系统工作组* 
+*维护者：Rust效应系统工作组*
