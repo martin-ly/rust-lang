@@ -2,546 +2,682 @@
 
 ## 概述
 
-窗口处理是事件流处理中的关键技术，用于对有限时间或数量范围内的事件进行聚合分析。
-本节将建立窗口处理的形式化模型，并提供Rust实现。
+窗口处理是事件流处理中的关键技术，用于对有限时间或数量范围内的事件进行聚合和分析。本节将建立窗口处理的形式化模型，并提供Rust实现。
 
 ## 形式化定义
 
 ### 4.2.1.2.1 窗口定义
 
 **定义 4.2.1.2.1** (时间窗口)
-时间窗口是一个时间区间 $W_t = [t_{start}, t_{end}]$，其中 $t_{start} \leq t_{end}$。
+时间窗口是一个时间区间 $W_t = [t_{start}, t_{end}]$，其中 $t_{start} < t_{end}$。
 
 **定义 4.2.1.2.2** (计数窗口)
-计数窗口是一个事件数量区间 $W_c = [c_{start}, c_{end}]$，其中 $c_{start} \leq c_{end}$。
+计数窗口是一个事件数量区间 $W_c = [c_{start}, c_{end}]$，其中 $c_{start} < c_{end}$。
 
 **定义 4.2.1.2.3** (滑动窗口)
 滑动窗口是一个动态窗口，满足：
 
-$$W_{slide}(t) = [t - \Delta t, t]$$
-
-其中 $\Delta t$ 是窗口大小，$t$ 是当前时间。
+- 窗口大小固定：$|W| = size$
+- 滑动步长固定：$step = slide$
+- 窗口重叠：$overlap = size - step$
 
 **定义 4.2.1.2.4** (跳跃窗口)
-跳跃窗口是一个固定步长的窗口序列：
+跳跃窗口是一个非重叠窗口，满足：
 
-$$W_{hop}(t) = [t - \Delta t + k \cdot \Delta hop, t + k \cdot \Delta hop]$$
+- 窗口大小固定：$|W| = size$
+- 滑动步长等于窗口大小：$step = size$
+- 无重叠：$overlap = 0$
 
-其中 $\Delta hop$ 是跳跃步长，$k$ 是窗口索引。
+### 4.2.1.2.2 窗口函数定义
 
-**定义 4.2.1.2.5** (会话窗口)
-会话窗口是基于事件间隔的动态窗口：
+**定义 4.2.1.2.5** (窗口函数)
+窗口函数是一个映射 $f_w: \mathcal{P}(E) \rightarrow R$，其中 $E$ 是事件集合，$R$ 是结果类型。
 
-$$W_{session}(e_i) = [e_i.timestamp, e_i.timestamp + \Delta session]$$
+**定义 4.2.1.2.6** (聚合窗口函数)
+聚合窗口函数包括：
 
-其中 $\Delta session$ 是会话超时时间。
+1. **计数函数**: $count(W) = |W|$
+2. **求和函数**: $sum(W) = \sum_{e \in W} value(e)$
+3. **平均值函数**: $avg(W) = \frac{sum(W)}{count(W)}$
+4. **最大值函数**: $max(W) = \max_{e \in W} value(e)$
+5. **最小值函数**: $min(W) = \min_{e \in W} value(e)$
 
-### 4.2.1.2.2 窗口操作符
+**定义 4.2.1.2.7** (窗口处理器)
+窗口处理器是一个三元组 $(W, f_w, trigger)$，其中：
 
-**定义 4.2.1.2.6** (窗口操作符)
-窗口操作符是一个函数 $W: \mathcal{P}(E) \times \mathbb{R} \rightarrow \mathcal{P}(\mathcal{P}(E))$，将事件流分割为窗口集合。
-
-**定义 4.2.1.2.7** (窗口聚合)
-窗口聚合是一个函数 $agg: \mathcal{P}(E) \rightarrow E'$，对窗口内的事件进行聚合。
-
-**定义 4.2.1.2.8** (窗口函数)
-窗口函数定义为：
-
-$$window\_function(stream, t) = agg(W(stream, t))$$
+- $W$ 是窗口定义
+- $f_w$ 是窗口函数
+- $trigger$ 是触发条件
 
 ## 核心定理
 
-### 定理 4.2.1.2.1 (窗口覆盖性)
+### 定理 4.2.1.2.1 (窗口单调性)
 
-**定理**: 对于任意时间点 $t$，滑动窗口满足：
+**定理**: 对于单调递增的窗口函数 $f_w$，如果 $W_1 \subseteq W_2$，则：
 
-$$\bigcup_{i \in \mathbb{Z}} W_{slide}(t + i \cdot \Delta t) = \mathbb{R}$$
-
-**证明**:
-
-对于任意时间点 $t' \in \mathbb{R}$，存在整数 $i$ 使得：
-
-$$t' \in [t + i \cdot \Delta t - \Delta t, t + i \cdot \Delta t]$$
-
-因此 $t' \in W_{slide}(t + i \cdot \Delta t)$，覆盖性成立。
-
-### 定理 4.2.1.2.2 (窗口重叠性)
-
-**定理**: 相邻滑动窗口的重叠度为：
-
-$$overlap(W_{slide}(t), W_{slide}(t + \Delta t)) = \Delta t - \Delta hop$$
+$$f_w(W_1) \leq f_w(W_2)$$
 
 **证明**:
 
-相邻窗口分别为：
+由于 $f_w$ 是单调递增的，对于任意 $W_1 \subseteq W_2$：
 
-- $W_1 = [t - \Delta t, t]$
-- $W_2 = [t + \Delta hop - \Delta t, t + \Delta hop]$
+$$f_w(W_1) \leq f_w(W_2)$$
 
-重叠区间为 $[t + \Delta hop - \Delta t, t]$，长度为 $\Delta t - \Delta hop$。
+这适用于计数、求和、最大值等单调函数。
+
+### 定理 4.2.1.2.2 (滑动窗口重叠性)
+
+**定理**: 对于滑动窗口，相邻窗口的重叠大小为：
+
+$$overlap = size - step$$
+
+**证明**:
+
+设当前窗口为 $W_i = [t_i, t_i + size]$，下一个窗口为 $W_{i+1} = [t_i + step, t_i + step + size]$。
+
+重叠区间为：
+$$W_i \cap W_{i+1} = [t_i + step, t_i + size]$$
+
+重叠大小为：
+$$|W_i \cap W_{i+1}| = (t_i + size) - (t_i + step) = size - step$$
 
 ### 定理 4.2.1.2.3 (窗口处理复杂度)
 
 **定理**: 窗口处理的时间复杂度为：
 
-$$T_{window} = O(n \cdot \log w)$$
+$$T_{window} = O(n \cdot f_w(n))$$
 
-其中 $n$ 是事件总数，$w$ 是窗口大小。
+其中 $n$ 是窗口内事件数量，$f_w(n)$ 是窗口函数的计算复杂度。
 
 **证明**:
 
-每个事件需要插入到窗口数据结构中，使用平衡树或堆结构，插入时间为 $O(\log w)$。总共有 $n$ 个事件，因此总时间为 $O(n \cdot \log w)$。
+窗口处理需要：
+
+1. 维护窗口状态：$O(n)$
+2. 应用窗口函数：$O(f_w(n))$
+3. 触发处理：$O(1)$
+
+总复杂度为 $O(n \cdot f_w(n))$。
 
 ## Rust实现
 
-### 4.2.1.2.1 窗口类型定义
+### 4.2.1.2.1 窗口定义实现
 
 ```rust
-use std::collections::{BTreeMap, VecDeque};
+use std::collections::VecDeque;
 use std::time::{Duration, Instant};
 use serde::{Deserialize, Serialize};
 
 /// 窗口类型
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum WindowType {
-    /// 时间窗口
     Time(Duration),
-    /// 计数窗口
     Count(usize),
-    /// 滑动窗口
-    Sliding { size: Duration, hop: Duration },
-    /// 跳跃窗口
-    Hopping { size: Duration, hop: Duration },
-    /// 会话窗口
-    Session { timeout: Duration },
+    Sliding { size: Duration, step: Duration },
+    Tumbling { size: Duration },
 }
 
-/// 窗口
+/// 窗口状态
 #[derive(Debug, Clone)]
 pub struct Window {
     pub id: String,
+    pub window_type: WindowType,
+    pub events: VecDeque<Event>,
     pub start_time: Instant,
     pub end_time: Instant,
-    pub events: Vec<Event>,
-    pub window_type: WindowType,
+    pub is_active: bool,
 }
 
-/// 窗口管理器
-pub struct WindowManager {
-    windows: BTreeMap<String, Window>,
-    window_type: WindowType,
-    event_buffer: VecDeque<Event>,
-}
-
-impl WindowManager {
+impl Window {
     pub fn new(window_type: WindowType) -> Self {
+        let now = Instant::now();
         Self {
-            windows: BTreeMap::new(),
+            id: uuid::Uuid::new_v4().to_string(),
             window_type,
-            event_buffer: VecDeque::new(),
+            events: VecDeque::new(),
+            start_time: now,
+            end_time: now,
+            is_active: true,
         }
     }
     
     /// 添加事件到窗口
-    pub fn add_event(&mut self, event: Event) -> Result<Vec<Window>, WindowError> {
+    pub fn add_event(&mut self, event: Event) -> bool {
         match &self.window_type {
-            WindowType::Time(duration) => self.add_to_time_window(event, *duration),
-            WindowType::Count(count) => self.add_to_count_window(event, *count),
-            WindowType::Sliding { size, hop } => self.add_to_sliding_window(event, *size, *hop),
-            WindowType::Hopping { size, hop } => self.add_to_hopping_window(event, *size, *hop),
-            WindowType::Session { timeout } => self.add_to_session_window(event, *timeout),
-        }
-    }
-    
-    /// 时间窗口处理
-    fn add_to_time_window(&mut self, event: Event, duration: Duration) -> Result<Vec<Window>, WindowError> {
-        let current_time = Instant::now();
-        let window_start = current_time - duration;
-        
-        // 创建新窗口
-        let window_id = format!("time_window_{}", current_time.as_nanos());
-        let window = Window {
-            id: window_id.clone(),
-            start_time: window_start,
-            end_time: current_time,
-            events: vec![event],
-            window_type: WindowType::Time(duration),
-        };
-        
-        self.windows.insert(window_id, window.clone());
-        
-        // 清理过期窗口
-        self.cleanup_expired_windows(current_time);
-        
-        Ok(vec![window])
-    }
-    
-    /// 计数窗口处理
-    fn add_to_count_window(&mut self, event: Event, count: usize) -> Result<Vec<Window>, WindowError> {
-        self.event_buffer.push_back(event);
-        
-        if self.event_buffer.len() >= count {
-            let window_id = format!("count_window_{}", Instant::now().as_nanos());
-            let events: Vec<Event> = self.event_buffer.drain(..count).collect();
-            
-            let window = Window {
-                id: window_id.clone(),
-                start_time: events.first().unwrap().timestamp,
-                end_time: events.last().unwrap().timestamp,
-                events,
-                window_type: WindowType::Count(count),
-            };
-            
-            self.windows.insert(window_id, window.clone());
-            Ok(vec![window])
-        } else {
-            Ok(vec![])
-        }
-    }
-    
-    /// 滑动窗口处理
-    fn add_to_sliding_window(&mut self, event: Event, size: Duration, hop: Duration) -> Result<Vec<Window>, WindowError> {
-        let current_time = Instant::now();
-        let mut completed_windows = Vec::new();
-        
-        // 计算当前窗口
-        let window_start = current_time - size;
-        let window_end = current_time;
-        
-        // 创建滑动窗口
-        let window_id = format!("sliding_window_{}", current_time.as_nanos());
-        let window = Window {
-            id: window_id.clone(),
-            start_time: window_start,
-            end_time: window_end,
-            events: vec![event.clone()],
-            window_type: WindowType::Sliding { size, hop },
-        };
-        
-        self.windows.insert(window_id.clone(), window.clone());
-        completed_windows.push(window);
-        
-        // 清理过期窗口
-        self.cleanup_expired_windows(current_time);
-        
-        Ok(completed_windows)
-    }
-    
-    /// 跳跃窗口处理
-    fn add_to_hopping_window(&mut self, event: Event, size: Duration, hop: Duration) -> Result<Vec<Window>, WindowError> {
-        let current_time = Instant::now();
-        let mut completed_windows = Vec::new();
-        
-        // 计算跳跃窗口
-        let window_index = (current_time.as_nanos() / hop.as_nanos()) as i64;
-        let window_start = Instant::now() + Duration::from_nanos((window_index * size.as_nanos() as i64) as u64);
-        let window_end = window_start + size;
-        
-        let window_id = format!("hopping_window_{}_{}", window_index, current_time.as_nanos());
-        let window = Window {
-            id: window_id.clone(),
-            start_time: window_start,
-            end_time: window_end,
-            events: vec![event],
-            window_type: WindowType::Hopping { size, hop },
-        };
-        
-        self.windows.insert(window_id.clone(), window.clone());
-        completed_windows.push(window);
-        
-        Ok(completed_windows)
-    }
-    
-    /// 会话窗口处理
-    fn add_to_session_window(&mut self, event: Event, timeout: Duration) -> Result<Vec<Window>, WindowError> {
-        let current_time = Instant::now();
-        let mut completed_windows = Vec::new();
-        
-        // 查找现有会话窗口
-        let mut found_session = false;
-        for (window_id, window) in &mut self.windows {
-            if let WindowType::Session { .. } = window.window_type {
-                if current_time.duration_since(window.end_time) <= timeout {
-                    // 扩展现有会话
-                    window.events.push(event.clone());
-                    window.end_time = current_time;
-                    found_session = true;
-                    break;
+            WindowType::Time(duration) => {
+                if event.timestamp.duration_since(self.start_time) <= *duration {
+                    self.events.push_back(event);
+                    true
+                } else {
+                    false
+                }
+            }
+            WindowType::Count(max_count) => {
+                if self.events.len() < *max_count {
+                    self.events.push_back(event);
+                    true
+                } else {
+                    false
+                }
+            }
+            WindowType::Sliding { size, step: _ } => {
+                if event.timestamp.duration_since(self.start_time) <= *size {
+                    self.events.push_back(event);
+                    true
+                } else {
+                    false
+                }
+            }
+            WindowType::Tumbling { size } => {
+                if event.timestamp.duration_since(self.start_time) <= *size {
+                    self.events.push_back(event);
+                    true
+                } else {
+                    false
                 }
             }
         }
-        
-        if !found_session {
-            // 创建新会话窗口
-            let window_id = format!("session_window_{}", current_time.as_nanos());
-            let window = Window {
-                id: window_id.clone(),
-                start_time: current_time,
-                end_time: current_time,
-                events: vec![event],
-                window_type: WindowType::Session { timeout },
-            };
-            
-            self.windows.insert(window_id.clone(), window.clone());
-            completed_windows.push(window);
-        }
-        
-        // 清理过期会话
-        self.cleanup_expired_windows(current_time);
-        
-        Ok(completed_windows)
     }
     
-    /// 清理过期窗口
-    fn cleanup_expired_windows(&mut self, current_time: Instant) {
-        let expired_windows: Vec<String> = self.windows
-            .iter()
-            .filter(|(_, window)| current_time.duration_since(window.end_time) > Duration::from_secs(3600))
-            .map(|(id, _)| id.clone())
-            .collect();
-        
-        for window_id in expired_windows {
-            self.windows.remove(&window_id);
+    /// 检查窗口是否应该触发
+    pub fn should_trigger(&self) -> bool {
+        match &self.window_type {
+            WindowType::Time(duration) => {
+                Instant::now().duration_since(self.start_time) >= *duration
+            }
+            WindowType::Count(max_count) => {
+                self.events.len() >= *max_count
+            }
+            WindowType::Sliding { size, step } => {
+                let elapsed = Instant::now().duration_since(self.start_time);
+                elapsed >= *step
+            }
+            WindowType::Tumbling { size } => {
+                Instant::now().duration_since(self.start_time) >= *size
+            }
         }
     }
     
-    /// 获取当前窗口
-    pub fn get_current_windows(&self) -> Vec<&Window> {
-        self.windows.values().collect()
+    /// 获取窗口内事件数量
+    pub fn count(&self) -> usize {
+        self.events.len()
     }
     
-    /// 获取窗口统计信息
-    pub fn get_window_stats(&self) -> WindowStats {
-        let total_windows = self.windows.len();
-        let total_events: usize = self.windows.values().map(|w| w.events.len()).sum();
-        let avg_events_per_window = if total_windows > 0 {
-            total_events as f64 / total_windows as f64
-        } else {
-            0.0
-        };
-        
-        WindowStats {
-            total_windows,
-            total_events,
-            avg_events_per_window,
-        }
+    /// 清空窗口
+    pub fn clear(&mut self) {
+        self.events.clear();
+        self.start_time = Instant::now();
     }
 }
+```
 
-/// 窗口统计信息
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct WindowStats {
-    pub total_windows: usize,
-    pub total_events: usize,
-    pub avg_events_per_window: f64,
-}
+### 4.2.1.2.2 窗口函数实现
 
-/// 窗口错误
-#[derive(Debug, thiserror::Error)]
-pub enum WindowError {
-    #[error("Invalid window configuration")]
-    InvalidConfiguration,
-    #[error("Window processing failed")]
-    ProcessingFailed,
-    #[error("Window timeout")]
-    Timeout,
-}
-
-/// 窗口聚合器
-pub trait WindowAggregator: Send + Sync {
+```rust
+/// 窗口函数特征
+pub trait WindowFunction: Send + Sync {
     type Input;
     type Output;
     
-    /// 聚合窗口内的事件
-    fn aggregate(&self, window: &Window) -> Result<Self::Output, WindowError>;
+    /// 应用窗口函数
+    fn apply(&self, events: &[Event]) -> Result<Self::Output, WindowError>;
+    
+    /// 函数名称
+    fn name(&self) -> &str;
 }
 
-/// 计数聚合器
-pub struct CountAggregator;
+/// 计数窗口函数
+pub struct CountWindowFunction;
 
-impl WindowAggregator for CountAggregator {
+impl WindowFunction for CountWindowFunction {
     type Input = Event;
     type Output = usize;
     
-    fn aggregate(&self, window: &Window) -> Result<Self::Output, WindowError> {
-        Ok(window.events.len())
+    fn apply(&self, events: &[Event]) -> Result<Self::Output, WindowError> {
+        Ok(events.len())
+    }
+    
+    fn name(&self) -> &str {
+        "count"
     }
 }
 
-/// 平均值聚合器
-pub struct AverageAggregator {
-    field: String,
+/// 求和窗口函数
+pub struct SumWindowFunction {
+    field_name: String,
 }
 
-impl AverageAggregator {
-    pub fn new(field: String) -> Self {
-        Self { field }
+impl SumWindowFunction {
+    pub fn new(field_name: String) -> Self {
+        Self { field_name }
     }
 }
 
-impl WindowAggregator for AverageAggregator {
+impl WindowFunction for SumWindowFunction {
     type Input = Event;
     type Output = f64;
     
-    fn aggregate(&self, window: &Window) -> Result<Self::Output, WindowError> {
+    fn apply(&self, events: &[Event]) -> Result<Self::Output, WindowError> {
         let mut sum = 0.0;
-        let mut count = 0;
-        
-        for event in &window.events {
-            if let Some(value) = event.data.get(&self.field) {
+        for event in events {
+            if let Some(value) = event.data.get(&self.field_name) {
                 if let Some(num) = value.as_f64() {
                     sum += num;
-                    count += 1;
+                } else {
+                    return Err(WindowError::InvalidDataType);
                 }
+            } else {
+                return Err(WindowError::FieldNotFound);
             }
         }
-        
-        if count > 0 {
-            Ok(sum / count as f64)
-        } else {
-            Ok(0.0)
-        }
+        Ok(sum)
+    }
+    
+    fn name(&self) -> &str {
+        "sum"
     }
 }
 
-/// 最大值聚合器
-pub struct MaxAggregator {
-    field: String,
+/// 平均值窗口函数
+pub struct AverageWindowFunction {
+    field_name: String,
 }
 
-impl MaxAggregator {
-    pub fn new(field: String) -> Self {
-        Self { field }
+impl AverageWindowFunction {
+    pub fn new(field_name: String) -> Self {
+        Self { field_name }
     }
 }
 
-impl WindowAggregator for MaxAggregator {
+impl WindowFunction for AverageWindowFunction {
     type Input = Event;
     type Output = f64;
     
-    fn aggregate(&self, window: &Window) -> Result<Self::Output, WindowError> {
-        let mut max_value = f64::NEG_INFINITY;
-        
-        for event in &window.events {
-            if let Some(value) = event.data.get(&self.field) {
-                if let Some(num) = value.as_f64() {
-                    max_value = max_value.max(num);
-                }
-            }
+    fn apply(&self, events: &[Event]) -> Result<Self::Output, WindowError> {
+        if events.is_empty() {
+            return Err(WindowError::EmptyWindow);
         }
         
-        if max_value == f64::NEG_INFINITY {
-            Err(WindowError::ProcessingFailed)
-        } else {
-            Ok(max_value)
-        }
+        let sum_func = SumWindowFunction::new(self.field_name.clone());
+        let sum = sum_func.apply(events)?;
+        Ok(sum / events.len() as f64)
+    }
+    
+    fn name(&self) -> &str {
+        "average"
     }
 }
 
-/// 窗口处理管道
-pub struct WindowPipeline {
-    window_manager: WindowManager,
-    aggregator: Box<dyn WindowAggregator<Input = Event, Output = serde_json::Value>>,
+/// 最大值窗口函数
+pub struct MaxWindowFunction {
+    field_name: String,
 }
 
-impl WindowPipeline {
-    pub fn new(window_type: WindowType, aggregator: Box<dyn WindowAggregator<Input = Event, Output = serde_json::Value>>) -> Self {
+impl MaxWindowFunction {
+    pub fn new(field_name: String) -> Self {
+        Self { field_name }
+    }
+}
+
+impl WindowFunction for MaxWindowFunction {
+    type Input = Event;
+    type Output = f64;
+    
+    fn apply(&self, events: &[Event]) -> Result<Self::Output, WindowError> {
+        if events.is_empty() {
+            return Err(WindowError::EmptyWindow);
+        }
+        
+        let mut max_value = f64::NEG_INFINITY;
+        for event in events {
+            if let Some(value) = event.data.get(&self.field_name) {
+                if let Some(num) = value.as_f64() {
+                    max_value = max_value.max(num);
+                } else {
+                    return Err(WindowError::InvalidDataType);
+                }
+            } else {
+                return Err(WindowError::FieldNotFound);
+            }
+        }
+        Ok(max_value)
+    }
+    
+    fn name(&self) -> &str {
+        "max"
+    }
+}
+
+/// 最小值窗口函数
+pub struct MinWindowFunction {
+    field_name: String,
+}
+
+impl MinWindowFunction {
+    pub fn new(field_name: String) -> Self {
+        Self { field_name }
+    }
+}
+
+impl WindowFunction for MinWindowFunction {
+    type Input = Event;
+    type Output = f64;
+    
+    fn apply(&self, events: &[Event]) -> Result<Self::Output, WindowError> {
+        if events.is_empty() {
+            return Err(WindowError::EmptyWindow);
+        }
+        
+        let mut min_value = f64::INFINITY;
+        for event in events {
+            if let Some(value) = event.data.get(&self.field_name) {
+                if let Some(num) = value.as_f64() {
+                    min_value = min_value.min(num);
+                } else {
+                    return Err(WindowError::InvalidDataType);
+                }
+            } else {
+                return Err(WindowError::FieldNotFound);
+            }
+        }
+        Ok(min_value)
+    }
+    
+    fn name(&self) -> &str {
+        "min"
+    }
+}
+```
+
+### 4.2.1.2.3 窗口处理器实现
+
+```rust
+/// 窗口处理器
+pub struct WindowProcessor<F>
+where
+    F: WindowFunction<Input = Event>,
+{
+    window: Window,
+    function: F,
+    trigger_condition: TriggerCondition,
+}
+
+/// 触发条件
+#[derive(Debug, Clone)]
+pub enum TriggerCondition {
+    OnWindowClose,
+    OnEventCount(usize),
+    OnTimeInterval(Duration),
+    Manual,
+}
+
+impl<F> WindowProcessor<F>
+where
+    F: WindowFunction<Input = Event>,
+{
+    pub fn new(window: Window, function: F, trigger_condition: TriggerCondition) -> Self {
         Self {
-            window_manager: WindowManager::new(window_type),
-            aggregator,
+            window,
+            function,
+            trigger_condition,
         }
     }
     
     /// 处理事件
-    pub fn process_event(&mut self, event: Event) -> Result<Vec<serde_json::Value>, WindowError> {
-        let windows = self.window_manager.add_event(event)?;
-        let mut results = Vec::new();
-        
-        for window in windows {
-            let result = self.aggregator.aggregate(&window)?;
-            results.push(result);
+    pub fn process_event(&mut self, event: Event) -> Result<Option<F::Output>, WindowError> {
+        // 添加事件到窗口
+        if !self.window.add_event(event) {
+            return Ok(None);
         }
         
-        Ok(results)
-    }
-    
-    /// 获取窗口统计
-    pub fn get_stats(&self) -> WindowStats {
-        self.window_manager.get_window_stats()
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use std::collections::HashMap;
-    
-    #[test]
-    fn test_time_window() {
-        let mut manager = WindowManager::new(WindowType::Time(Duration::from_secs(10)));
-        let event = Event {
-            id: "test".to_string(),
-            event_type: "test".to_string(),
-            data: serde_json::json!({"value": 42}),
-            timestamp: Instant::now(),
-            metadata: HashMap::new(),
-        };
-        
-        let result = manager.add_event(event);
-        assert!(result.is_ok());
-    }
-    
-    #[test]
-    fn test_count_window() {
-        let mut manager = WindowManager::new(WindowType::Count(3));
-        
-        for i in 0..3 {
-            let event = Event {
-                id: format!("test_{}", i),
-                event_type: "test".to_string(),
-                data: serde_json::json!({"value": i}),
-                timestamp: Instant::now(),
-                metadata: HashMap::new(),
-            };
+        // 检查是否应该触发
+        if self.should_trigger() {
+            let events: Vec<Event> = self.window.events.iter().cloned().collect();
+            let result = self.function.apply(&events)?;
             
-            let result = manager.add_event(event);
-            if i == 2 {
-                assert!(result.is_ok());
-                assert_eq!(result.unwrap().len(), 1);
-            } else {
-                assert_eq!(result.unwrap().len(), 0);
+            // 根据窗口类型更新窗口
+            self.update_window();
+            
+            Ok(Some(result))
+        } else {
+            Ok(None)
+        }
+    }
+    
+    /// 检查是否应该触发
+    fn should_trigger(&self) -> bool {
+        match &self.trigger_condition {
+            TriggerCondition::OnWindowClose => self.window.should_trigger(),
+            TriggerCondition::OnEventCount(count) => self.window.count() >= *count,
+            TriggerCondition::OnTimeInterval(interval) => {
+                Instant::now().duration_since(self.window.start_time) >= *interval
+            }
+            TriggerCondition::Manual => false,
+        }
+    }
+    
+    /// 手动触发
+    pub fn trigger(&mut self) -> Result<F::Output, WindowError> {
+        let events: Vec<Event> = self.window.events.iter().cloned().collect();
+        let result = self.function.apply(&events)?;
+        self.update_window();
+        Ok(result)
+    }
+    
+    /// 更新窗口
+    fn update_window(&mut self) {
+        match &self.window.window_type {
+            WindowType::Time(_) | WindowType::Count(_) => {
+                self.window.clear();
+            }
+            WindowType::Sliding { size, step } => {
+                let new_start = self.window.start_time + *step;
+                self.window.start_time = new_start;
+                self.window.end_time = new_start + *size;
+                
+                // 移除过期事件
+                self.window.events.retain(|event| {
+                    event.timestamp >= new_start
+                });
+            }
+            WindowType::Tumbling { size } => {
+                self.window.clear();
             }
         }
     }
     
-    #[test]
-    fn test_count_aggregator() {
-        let aggregator = CountAggregator;
-        let window = Window {
-            id: "test".to_string(),
-            start_time: Instant::now(),
-            end_time: Instant::now(),
-            events: vec![
-                Event {
-                    id: "1".to_string(),
-                    event_type: "test".to_string(),
-                    data: serde_json::json!({}),
-                    timestamp: Instant::now(),
-                    metadata: HashMap::new(),
-                },
-                Event {
-                    id: "2".to_string(),
-                    event_type: "test".to_string(),
-                    data: serde_json::json!({}),
-                    timestamp: Instant::now(),
-                    metadata: HashMap::new(),
-                },
-            ],
-            window_type: WindowType::Count(2),
+    /// 获取窗口状态
+    pub fn get_window_state(&self) -> WindowState {
+        WindowState {
+            window_id: self.window.id.clone(),
+            event_count: self.window.count(),
+            start_time: self.window.start_time,
+            end_time: self.window.end_time,
+            is_active: self.window.is_active,
+        }
+    }
+}
+
+/// 窗口状态
+#[derive(Debug, Clone)]
+pub struct WindowState {
+    pub window_id: String,
+    pub event_count: usize,
+    pub start_time: Instant,
+    pub end_time: Instant,
+    pub is_active: bool,
+}
+```
+
+### 4.2.1.2.4 错误处理
+
+```rust
+/// 窗口处理错误
+#[derive(Debug, thiserror::Error)]
+pub enum WindowError {
+    #[error("Empty window")]
+    EmptyWindow,
+    
+    #[error("Field not found: {0}")]
+    FieldNotFound(String),
+    
+    #[error("Invalid data type")]
+    InvalidDataType,
+    
+    #[error("Window overflow")]
+    WindowOverflow,
+    
+    #[error("Invalid window configuration")]
+    InvalidConfiguration,
+    
+    #[error("Processing error: {0}")]
+    ProcessingError(String),
+}
+```
+
+## 应用示例
+
+### 4.2.1.2.1 实时统计示例
+
+```rust
+use std::time::Duration;
+
+/// 实时统计系统
+pub struct RealTimeStatistics {
+    window_processor: WindowProcessor<AverageWindowFunction>,
+}
+
+impl RealTimeStatistics {
+    pub fn new() -> Self {
+        let window = Window::new(WindowType::Time(Duration::from_secs(60)));
+        let function = AverageWindowFunction::new("value".to_string());
+        let processor = WindowProcessor::new(
+            window,
+            function,
+            TriggerCondition::OnTimeInterval(Duration::from_secs(10))
+        );
+        
+        Self {
+            window_processor: processor,
+        }
+    }
+    
+    /// 处理数据点
+    pub fn process_data_point(&mut self, value: f64) -> Result<Option<f64>, WindowError> {
+        let event = Event {
+            id: uuid::Uuid::new_v4().to_string(),
+            event_type: "data_point".to_string(),
+            data: serde_json::json!({ "value": value }),
+            timestamp: Instant::now(),
+            metadata: HashMap::new(),
         };
         
-        let result = aggregator.aggregate(&window);
-        assert_eq!(result.unwrap(), 2);
+        self.window_processor.process_event(event)
+    }
+    
+    /// 获取当前统计
+    pub fn get_current_average(&mut self) -> Result<f64, WindowError> {
+        self.window_processor.trigger()
+    }
+}
+
+/// 使用示例
+pub fn real_time_statistics_example() {
+    let mut stats = RealTimeStatistics::new();
+    
+    // 模拟数据流
+    for i in 1..=100 {
+        let value = i as f64;
+        match stats.process_data_point(value) {
+            Ok(Some(average)) => {
+                println!("Window average: {:.2}", average);
+            }
+            Ok(None) => {
+                // 窗口未满，继续收集数据
+            }
+            Err(e) => {
+                eprintln!("Error: {}", e);
+            }
+        }
+        
+        std::thread::sleep(Duration::from_millis(100));
+    }
+}
+```
+
+### 4.2.1.2.2 滑动窗口聚合示例
+
+```rust
+/// 滑动窗口聚合器
+pub struct SlidingWindowAggregator {
+    processors: Vec<WindowProcessor<SumWindowFunction>>,
+}
+
+impl SlidingWindowAggregator {
+    pub fn new(window_sizes: Vec<Duration>) -> Self {
+        let mut processors = Vec::new();
+        
+        for size in window_sizes {
+            let window = Window::new(WindowType::Sliding {
+                size,
+                step: Duration::from_secs(1),
+            });
+            let function = SumWindowFunction::new("amount".to_string());
+            let processor = WindowProcessor::new(
+                window,
+                function,
+                TriggerCondition::OnTimeInterval(Duration::from_secs(1))
+            );
+            processors.push(processor);
+        }
+        
+        Self { processors }
+    }
+    
+    /// 处理交易事件
+    pub fn process_transaction(&mut self, amount: f64) -> Result<Vec<f64>, WindowError> {
+        let event = Event {
+            id: uuid::Uuid::new_v4().to_string(),
+            event_type: "transaction".to_string(),
+            data: serde_json::json!({ "amount": amount }),
+            timestamp: Instant::now(),
+            metadata: HashMap::new(),
+        };
+        
+        let mut results = Vec::new();
+        for processor in &mut self.processors {
+            if let Ok(Some(sum)) = processor.process_event(event.clone()) {
+                results.push(sum);
+            }
+        }
+        
+        Ok(results)
+    }
+}
+
+/// 使用示例
+pub fn sliding_window_example() {
+    let window_sizes = vec![
+        Duration::from_secs(60),   // 1分钟
+        Duration::from_secs(300),  // 5分钟
+        Duration::from_secs(3600), // 1小时
+    ];
+    
+    let mut aggregator = SlidingWindowAggregator::new(window_sizes);
+    
+    // 模拟交易流
+    for i in 1..=1000 {
+        let amount = (i % 100) as f64;
+        match aggregator.process_transaction(amount) {
+            Ok(sums) => {
+                println!("Window sums: {:?}", sums);
+            }
+            Err(e) => {
+                eprintln!("Error: {}", e);
+            }
+        }
+        
+        std::thread::sleep(Duration::from_millis(100));
     }
 }
 ```
@@ -550,51 +686,103 @@ mod tests {
 
 ### 4.2.1.2.1 时间复杂度分析
 
-1. **时间窗口**: $O(1)$ 创建，$O(n)$ 清理
-2. **计数窗口**: $O(1)$ 添加，$O(1)$ 创建
-3. **滑动窗口**: $O(1)$ 创建，$O(n)$ 清理
-4. **跳跃窗口**: $O(1)$ 创建
-5. **会话窗口**: $O(w)$ 查找，$O(1)$ 创建
+**定理 4.2.1.2.4** (窗口处理最优复杂度)
 
-其中 $n$ 是事件总数，$w$ 是窗口数量。
+对于大小为 $n$ 的窗口，最优处理复杂度为：
+
+$$T_{optimal} = O(\log n)$$
+
+**证明**:
+
+使用高效的数据结构（如红黑树或跳表）维护窗口内事件，可以实现：
+
+- 插入：$O(\log n)$
+- 删除：$O(\log n)$
+- 查询：$O(\log n)$
 
 ### 4.2.1.2.2 空间复杂度分析
 
-1. **事件存储**: $O(n)$
-2. **窗口索引**: $O(w)$
-3. **聚合结果**: $O(r)$
+**定理 4.2.1.2.5** (窗口存储复杂度)
 
-其中 $r$ 是结果数量。
+窗口存储的空间复杂度为：
 
-### 4.2.1.2.3 内存管理
+$$S_{window} = O(n)$$
 
-- 自动清理过期窗口
-- 使用引用计数管理事件
-- 实现内存池优化
+其中 $n$ 是窗口内最大事件数量。
 
-## 应用场景
+### 4.2.1.2.3 内存优化策略
 
-### 4.2.1.2.1 实时数据分析
+```rust
+/// 内存优化的窗口处理器
+pub struct OptimizedWindowProcessor<F>
+where
+    F: WindowFunction<Input = Event>,
+{
+    window: Window,
+    function: F,
+    max_memory: usize,
+    current_memory: usize,
+}
 
-- 股票价格趋势分析
-- 网络流量监控
-- 用户行为分析
-
-### 4.2.1.2.2 异常检测
-
-- 系统性能监控
-- 安全事件检测
-- 业务异常识别
-
-### 4.2.1.2.3 聚合计算
-
-- 统计指标计算
-- 趋势分析
-- 模式识别
+impl<F> OptimizedWindowProcessor<F>
+where
+    F: WindowFunction<Input = Event>,
+{
+    pub fn new(window: Window, function: F, max_memory: usize) -> Self {
+        Self {
+            window,
+            function,
+            max_memory,
+            current_memory: 0,
+        }
+    }
+    
+    /// 内存感知的事件处理
+    pub fn process_event(&mut self, event: Event) -> Result<Option<F::Output>, WindowError> {
+        let event_size = std::mem::size_of_val(&event);
+        
+        // 检查内存限制
+        if self.current_memory + event_size > self.max_memory {
+            // 触发窗口处理以释放内存
+            if let Ok(result) = self.trigger() {
+                return Ok(Some(result));
+            }
+        }
+        
+        // 添加事件
+        if self.window.add_event(event.clone()) {
+            self.current_memory += event_size;
+            Ok(None)
+        } else {
+            Ok(None)
+        }
+    }
+    
+    /// 触发处理并清理内存
+    pub fn trigger(&mut self) -> Result<F::Output, WindowError> {
+        let events: Vec<Event> = self.window.events.iter().cloned().collect();
+        let result = self.function.apply(&events)?;
+        
+        // 清理内存
+        self.current_memory = 0;
+        self.window.clear();
+        
+        Ok(result)
+    }
+}
+```
 
 ## 总结
 
-窗口处理是事件流处理的核心技术，提供了对有限时间或数量范围内事件进行聚合分析的能力。通过形式化定义和Rust实现，我们建立了完整的窗口处理框架，支持多种窗口类型和聚合操作，为实时数据处理提供了强大的工具。
+本节建立了窗口处理的完整形式化模型，包括：
+
+1. **形式化定义**: 时间窗口、计数窗口、滑动窗口、跳跃窗口的定义
+2. **核心定理**: 窗口单调性、滑动窗口重叠性、处理复杂度分析
+3. **Rust实现**: 完整的窗口处理器、窗口函数、错误处理机制
+4. **应用示例**: 实时统计、滑动窗口聚合的实际应用
+5. **性能分析**: 时间复杂度和空间复杂度分析，内存优化策略
+
+窗口处理为事件流处理提供了强大的聚合和分析能力，支持实时数据处理的各种场景。
 
 ---
 
