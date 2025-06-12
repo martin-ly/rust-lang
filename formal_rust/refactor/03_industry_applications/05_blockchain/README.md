@@ -60,6 +60,7 @@
 **定理 5.2.1** (区块链一致性) 对于任意区块链系统 $\mathcal{B} = (N, T, B, C, S, P)$，如果共识机制 $C$ 满足拜占庭容错条件，则系统可以保证最终一致性。
 
 **证明**:
+
 1. 拜占庭容错：$3f + 1 \leq n$，其中 $f$ 是故障节点数，$n$ 是总节点数
 2. 共识算法：所有诚实节点最终达成相同状态
 3. 网络同步：消息最终传递到所有节点
@@ -68,6 +69,7 @@
 **定理 5.2.2** (交易原子性) 对于任意交易 $t \in T$，如果交易验证通过，则交易执行是原子的。
 
 **证明**:
+
 1. 交易验证：$V(t) = \text{true} \iff \text{valid}(t)$
 2. 状态转换：$S_{i+1} = \delta(S_i, t)$
 3. 原子性：要么全部执行，要么全部回滚
@@ -76,6 +78,7 @@
 **定理 5.2.3** (密码学安全) 对于任意交易 $t = (from, to, value, data, signature)$，如果签名验证通过，则交易来源可信。
 
 **证明**:
+
 1. 签名生成：$s = \text{Sign}(H(t), K_{priv})$
 2. 签名验证：$\text{Verify}(H(t), s, K_{pub}) = \text{true}$
 3. 私钥安全：只有私钥持有者能生成有效签名
@@ -815,6 +818,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 **定理 5.4.1** (PoW安全性) 工作量证明机制在诚实节点控制超过50%算力时是安全的。
 
 **证明**:
+
 1. 攻击者需要控制超过50%算力才能进行51%攻击
 2. 诚实节点可以快速生成更长的链
 3. 网络遵循最长链规则
@@ -825,6 +829,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 **定理 5.5.1** (PoS效率) 权益证明机制比工作量证明更节能。
 
 **证明**:
+
 1. PoS不需要大量计算：$E_{PoS} \ll E_{PoW}$
 2. 验证者基于权益选择：$P(select) \propto stake$
 3. 减少能源消耗：$E_{total} = E_{validation} + E_{network}$
@@ -835,6 +840,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 **定理 5.6.1** (BFT容错) 拜占庭容错算法可以容忍 $f < \frac{n}{3}$ 个故障节点。
 
 **证明**:
+
 1. 总节点数：$n = 3f + 1$
 2. 诚实节点数：$h = n - f = 2f + 1$
 3. 故障节点数：$f < \frac{n}{3}$
@@ -847,6 +853,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 **定理 5.7.1** (椭圆曲线安全) 使用椭圆曲线数字签名算法(ECDSA)可以保证交易安全。
 
 **证明**:
+
 1. 离散对数问题：在椭圆曲线上求解离散对数是困难的
 2. 签名生成：$s = k^{-1}(H(m) + r \cdot d) \bmod n$
 3. 签名验证：$u_1 = H(m) \cdot s^{-1} \bmod n, u_2 = r \cdot s^{-1} \bmod n$
@@ -857,6 +864,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 **定理 5.8.1** (合约验证) 通过形式化验证可以保证智能合约的正确性。
 
 **证明**:
+
 1. 形式化规范：$\phi \models \psi$
 2. 模型检查：$M \models \phi$
 3. 定理证明：$\vdash \phi \rightarrow \psi$
@@ -869,6 +877,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 **定理 5.9.1** (分片扩展性) 分片技术可以将区块链吞吐量提高 $n$ 倍。
 
 **证明**:
+
 1. 分片数量：$n$ 个分片并行处理
 2. 每个分片吞吐量：$T_{shard}$
 3. 总吞吐量：$T_{total} = n \cdot T_{shard}$
@@ -879,6 +888,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 **定理 5.10.1** (状态通道效率) 状态通道可以将交易延迟降低到毫秒级。
 
 **证明**:
+
 1. 链下处理：交易在通道内快速处理
 2. 链上结算：只在通道关闭时上链
 3. 延迟减少：$L_{channel} \ll L_{onchain}$
@@ -901,4 +911,4 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 **文档版本**: 1.0  
 **最后更新**: 2024-12-19  
 **作者**: AI Assistant  
-**状态**: 已完成 
+**状态**: 已完成
