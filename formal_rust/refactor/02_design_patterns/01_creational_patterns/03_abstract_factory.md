@@ -72,7 +72,7 @@ $$\text{Interface}(p_1) \cap \text{Interface}(p_2) \neq \emptyset$$
 
 ### 3.1 产品族一致性定理 (Product Family Consistency Theorem)
 
-**定理 3.1.1 (产品族一致性)**
+-**定理 3.1.1 (产品族一致性)**
 
 对于任意抽象工厂模式 $AF$，同一工厂创建的产品是兼容的。
 
@@ -83,7 +83,7 @@ $$\text{Interface}(p_1) \cap \text{Interface}(p_2) \neq \emptyset$$
 
 因此，$f$ 创建的所有产品都满足兼容性约束。
 
-**定理 3.1.2 (工厂抽象性)**
+-**定理 3.1.2 (工厂抽象性)**
 
 抽象工厂模式满足依赖倒置原则。
 

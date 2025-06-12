@@ -15,7 +15,7 @@
 
 ### 1.1 建造者模式六元组 (Builder Pattern Sextuple)
 
-**定义 1.1.1 (建造者模式)**
+-**定义 1.1.1 (建造者模式)**
 
 设 $B = (N, I, S, R, C, O)$ 为建造者模式，其中：
 
@@ -28,13 +28,13 @@
 
 ### 1.2 构建过程定义 (Construction Process Definition)
 
-**定义 1.2.1 (构建步骤序列)**
+-**定义 1.2.1 (构建步骤序列)**
 
 设 $\mathcal{S} = \langle s_1, s_2, \ldots, s_n \rangle$ 为构建步骤序列，满足：
 
 $$\forall i < j, \text{Step}(s_i) \prec \text{Step}(s_j)$$
 
-**定义 1.2.2 (构建结果)**
+-**定义 1.2.2 (构建结果)**
 
 设 $P$ 为最终产品，满足：
 
@@ -46,13 +46,13 @@ $$P = \text{Result}(\text{Execute}(\mathcal{S}))$$
 
 ### 2.1 构建顺序理论 (Construction Order Theory)
 
-**定义 2.1.1 (步骤依赖关系)**
+-**定义 2.1.1 (步骤依赖关系)**
 
 步骤 $s_i$ 依赖于步骤 $s_j$，记作 $s_i \prec s_j$，当且仅当：
 
 $$\text{Input}(s_i) \cap \text{Output}(s_j) \neq \emptyset$$
 
-**定义 2.1.2 (构建完整性)**
+-**定义 2.1.2 (构建完整性)**
 
 构建过程是完整的，当且仅当：
 
@@ -60,7 +60,7 @@ $$\forall \text{required\_part} \in \text{Product}, \exists s \in \mathcal{S} : 
 
 ### 2.2 构建一致性理论 (Construction Consistency Theory)
 
-**定义 2.2.1 (步骤一致性)**
+-**定义 2.2.1 (步骤一致性)**
 
 构建步骤是一致的，当且仅当：
 
@@ -72,7 +72,7 @@ $$\forall s_i, s_j \in \mathcal{S}, \text{Compatible}(\text{Output}(s_i), \text{
 
 ### 3.1 构建顺序定理 (Construction Order Theorem)
 
-**定理 3.1.1 (构建顺序正确性)**
+-**定理 3.1.1 (构建顺序正确性)**
 
 对于任意建造者模式 $B$，构建步骤的执行顺序是正确的。
 
@@ -83,7 +83,7 @@ $$\forall s_i, s_j \in \mathcal{S}, \text{Compatible}(\text{Output}(s_i), \text{
 
 因此，构建顺序满足依赖关系约束。
 
-**定理 3.1.2 (构建完整性)**
+-**定理 3.1.2 (构建完整性)**
 
 建造者模式保证构建过程的完整性。
 
@@ -94,7 +94,7 @@ $$\forall s_i, s_j \in \mathcal{S}, \text{Compatible}(\text{Output}(s_i), \text{
 
 因此，构建过程是完整的。
 
-**定理 3.1.3 (构建一致性)**
+-**定理 3.1.3 (构建一致性)**
 
 建造者模式保证构建步骤的一致性。
 
@@ -107,7 +107,7 @@ $$\forall s_i, s_j \in \mathcal{S}, \text{Compatible}(\text{Output}(s_i), \text{
 
 ### 3.2 复杂度分析定理 (Complexity Analysis Theorem)
 
-**定理 3.2.1 (构建时间复杂度)**
+-**定理 3.2.1 (构建时间复杂度)**
 
 建造者模式的构建时间复杂度为 $O(n)$，其中 $n$ 是构建步骤的数量。
 
@@ -118,7 +118,7 @@ $$\forall s_i, s_j \in \mathcal{S}, \text{Compatible}(\text{Output}(s_i), \text{
 
 因此，总构建时间为 $O(n)$。
 
-**定理 3.2.2 (空间复杂度)**
+-**定理 3.2.2 (空间复杂度)**
 
 建造者模式的空间复杂度为 $O(1)$。
 
@@ -726,26 +726,31 @@ pub struct AppConfig {
 ### 6.1 时间复杂度分析
 
 **构建步骤执行**: $O(n)$
+
 - 每个构建步骤的执行时间为常数时间
 - 总构建时间为步骤数量的线性函数
 
 **内存分配**: $O(1)$
+
 - 建造者模式使用固定的内存空间
 - 不随构建步骤数量增加而增加额外空间
 
 ### 6.2 空间复杂度分析
 
 **中间状态存储**: $O(1)$
+
 - 建造者维护固定的产品状态
 - 状态大小不随构建过程变化
 
 **方法调用栈**: $O(1)$
+
 - 方法调用深度固定
 - 不产生递归调用
 
 ### 6.3 性能优化策略
 
-**1. 对象池模式**
+-**1. 对象池模式**
+
 ```rust
 pub struct BuilderPool {
     builders: Vec<ConcreteBuilder>,
@@ -772,7 +777,8 @@ impl BuilderPool {
 }
 ```
 
-**2. 缓存机制**
+-**2. 缓存机制**
+
 ```rust
 pub struct CachedBuilder {
     cache: HashMap<String, Product>,
@@ -811,9 +817,10 @@ impl CachedBuilder {
 建造者模式通过分步构建复杂对象，提供了灵活的对象创建机制。其形式化模型确保了构建过程的正确性、完整性和一致性，而Rust实现展示了模式在实际应用中的强大能力。
 
 该模式特别适用于：
+
 - 复杂对象的创建过程
 - 需要控制构建步骤的场景
 - 支持不同构建配置的应用
 - 需要验证构建过程的系统
 
-通过形式化分析和Rust实现，建造者模式展现了其在软件架构中的重要价值。 
+通过形式化分析和Rust实现，建造者模式展现了其在软件架构中的重要价值。

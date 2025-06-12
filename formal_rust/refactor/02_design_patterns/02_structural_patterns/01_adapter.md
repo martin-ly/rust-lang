@@ -15,7 +15,7 @@
 
 ### 1.1 适配器模式五元组 (Adapter Pattern Quintuple)
 
-**定义 1.1.1 (适配器模式)**
+-**定义 1.1.1 (适配器模式)**
 
 设 $A = (N, I, S, R, C)$ 为适配器模式，其中：
 
@@ -27,13 +27,13 @@
 
 ### 1.2 接口适配定义 (Interface Adaptation Definition)
 
-**定义 1.2.1 (接口映射)**
+-**定义 1.2.1 (接口映射)**
 
 设 $\mathcal{M}$ 为接口映射函数，满足：
 
 $$\mathcal{M}: \text{TargetInterface} \rightarrow \text{AdapteeInterface}$$
 
-**定义 1.2.2 (功能等价性)**
+-**定义 1.2.2 (功能等价性)**
 
 适配器 $A$ 满足功能等价性，当且仅当：
 
@@ -45,13 +45,13 @@ $$\forall f \in \text{TargetInterface}, \text{Behavior}(f) = \text{Behavior}(\ma
 
 ### 2.1 接口兼容性理论 (Interface Compatibility Theory)
 
-**定义 2.1.1 (接口兼容性)**
+-**定义 2.1.1 (接口兼容性)**
 
 两个接口 $I_1, I_2$ 是兼容的，当且仅当存在适配器 $A$ 使得：
 
 $$\text{Client}(I_1) \equiv \text{Client}(A(I_2))$$
 
-**定义 2.1.2 (适配器正确性)**
+-**定义 2.1.2 (适配器正确性)**
 
 适配器 $A$ 是正确的，当且仅当：
 
@@ -59,7 +59,7 @@ $$\forall \text{input}, \text{output} = A(\text{input}) \Rightarrow \text{Expect
 
 ### 2.2 功能保持理论 (Function Preservation Theory)
 
-**定义 2.2.1 (功能保持)**
+-**定义 2.2.1 (功能保持)**
 
 适配器保持功能，当且仅当：
 
@@ -71,7 +71,7 @@ $$\forall \text{operation}, \text{Result}(\text{operation}) = \text{Result}(A(\t
 
 ### 3.1 适配器正确性定理 (Adapter Correctness Theorem)
 
-**定理 3.1.1 (接口适配正确性)**
+-**定理 3.1.1 (接口适配正确性)**
 
 对于任意适配器模式 $A$，适配器正确地将目标接口适配到被适配者接口。
 
@@ -82,7 +82,7 @@ $$\forall \text{operation}, \text{Result}(\text{operation}) = \text{Result}(A(\t
 
 因此，适配器正确地将接口进行适配。
 
-**定理 3.1.2 (功能保持性)**
+-**定理 3.1.2 (功能保持性)**
 
 适配器模式保持原有功能的完整性。
 
@@ -93,7 +93,7 @@ $$\forall \text{operation}, \text{Result}(\text{operation}) = \text{Result}(A(\t
 
 因此，适配器保持功能的完整性。
 
-**定理 3.1.3 (客户端透明性)**
+-**定理 3.1.3 (客户端透明性)**
 
 适配器模式对客户端是透明的。
 
@@ -106,7 +106,7 @@ $$\forall \text{operation}, \text{Result}(\text{operation}) = \text{Result}(A(\t
 
 ### 3.2 性能分析定理 (Performance Analysis Theorem)
 
-**定理 3.2.1 (适配器时间复杂度)**
+-**定理 3.2.1 (适配器时间复杂度)**
 
 适配器的时间复杂度为 $O(1)$，其中包含接口转换的开销。
 
@@ -117,7 +117,7 @@ $$\forall \text{operation}, \text{Result}(\text{operation}) = \text{Result}(A(\t
 
 因此，时间复杂度为 $O(1)$。
 
-**定理 3.2.2 (适配器空间复杂度)**
+-**定理 3.2.2 (适配器空间复杂度)**
 
 适配器的空间复杂度为 $O(1)$。
 
@@ -616,28 +616,35 @@ impl HttpProtocol for HttpToWebSocketAdapter {
 ### 6.1 时间复杂度分析
 
 **接口转换**: $O(1)$
+
 - 适配器主要进行接口转换，时间为常数
 
 **数据转换**: $O(n)$
+
 - 数据格式转换可能需要遍历数据结构
 
 **协议转换**: $O(1)$
+
 - 协议适配通常是常数时间操作
 
 ### 6.2 空间复杂度分析
 
 **对象适配器**: $O(1)$
+
 - 只需要存储被适配者的引用
 
 **类适配器**: $O(1)$
+
 - 通过继承实现，空间开销最小
 
 **数据适配器**: $O(n)$
+
 - 可能需要额外的数据结构来存储转换后的数据
 
 ### 6.3 性能优化策略
 
 **1. 缓存适配结果**
+
 ```rust
 use std::collections::HashMap;
 
@@ -667,6 +674,7 @@ impl CachedAdapter {
 ```
 
 **2. 延迟适配**
+
 ```rust
 pub struct LazyAdapter {
     adaptee: Option<Box<dyn Target>>,
@@ -700,9 +708,10 @@ impl LazyAdapter {
 适配器模式通过提供统一的接口，使不兼容的组件能够协同工作。其形式化模型确保了接口适配的正确性和功能保持性，而Rust实现展示了模式在实际应用中的灵活性和实用性。
 
 该模式特别适用于：
+
 - 集成第三方库和组件
 - 处理不同数据格式的转换
 - 协议适配和通信接口统一
 - 遗留系统的现代化改造
 
-通过形式化分析和Rust实现，适配器模式展现了其在软件架构中的重要价值，特别是在系统集成和接口统一方面。 
+通过形式化分析和Rust实现，适配器模式展现了其在软件架构中的重要价值，特别是在系统集成和接口统一方面。
