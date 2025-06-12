@@ -150,10 +150,12 @@ $$\mathcal{H}_{practice} = \mathcal{P}_1 \prec \mathcal{P}_2 \prec \mathcal{P}_3
 **定义 3.3.1** (依赖矩阵)
 依赖矩阵 $D = [d_{ij}]$ 定义为：
 
+```text
 $$d_{ij} = \begin{cases}
 1 & \text{if } v_i \text{ depends on } v_j \\
 0 & \text{otherwise}
 \end{cases}$$
+```
 
 **性质 3.3.1** (无环性)
 依赖矩阵对应的图是无环有向图(DAG)。
@@ -231,6 +233,7 @@ $$\mathcal{P}_{learn} = \langle c_1, c_2, \ldots, c_n \rangle$$
 存在最优学习路径，使得总学习成本最小。
 
 **证明**:
+
 - 依赖关系形成DAG
 - DAG的拓扑排序给出最优路径
 - 每个概念只在其依赖概念之后学习
@@ -261,6 +264,7 @@ graph LR
 $$\mathcal{U} : \mathcal{K} \times \mathcal{I} \rightarrow \mathcal{K}'$$
 
 其中：
+
 - $\mathcal{K}$ 是当前知识状态
 - $\mathcal{I}$ 是输入信息
 - $\mathcal{K}'$ 是更新后的知识状态
@@ -277,6 +281,7 @@ $$\mathcal{U} : \mathcal{K} \times \mathcal{I} \rightarrow \mathcal{K}'$$
 $$\mathcal{C}_{cons} = \frac{|\text{ConsistentConcepts}|}{|\text{TotalConcepts}|}$$
 
 **检查规则**:
+
 1. 概念定义唯一性
 2. 术语使用一致性
 3. 符号表示统一性
@@ -289,6 +294,7 @@ $$\mathcal{C}_{cons} = \frac{|\text{ConsistentConcepts}|}{|\text{TotalConcepts}|
 $$\mathcal{R}_{cons} = \frac{|\text{ConsistentRelations}|}{|\text{TotalRelations}|}$$
 
 **检查规则**:
+
 1. 关系类型正确性
 2. 关系方向一致性
 3. 循环依赖检测
@@ -301,6 +307,7 @@ $$\mathcal{R}_{cons} = \frac{|\text{ConsistentRelations}|}{|\text{TotalRelations
 $$\mathcal{I}_{comp} = \frac{|\text{DefinedConcepts}|}{|\text{ReferencedConcepts}|}$$
 
 **检查规则**:
+
 1. 所有引用概念都有定义
 2. 所有依赖关系都有说明
 3. 所有路径都有终点
@@ -308,6 +315,7 @@ $$\mathcal{I}_{comp} = \frac{|\text{DefinedConcepts}|}{|\text{ReferencedConcepts
 ### 6.4 一致性验证算法
 
 **算法 6.4.1** (一致性验证)
+
 ```python
 def consistency_check(knowledge_graph):
     # 1. 概念一致性检查
