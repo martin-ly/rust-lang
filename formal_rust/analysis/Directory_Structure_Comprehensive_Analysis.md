@@ -339,7 +339,7 @@
 
 ### 8.1 依赖关系
 
-```
+```text
 核心理论文件
 ├── 综合理论分析
 │   ├── rust_formal_theory_comprehensive_analysis_2025.md
