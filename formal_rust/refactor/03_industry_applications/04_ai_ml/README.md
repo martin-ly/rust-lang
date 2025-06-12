@@ -101,22 +101,26 @@ $$\|\theta_{t+1} - \theta^*\|^2 \leq \|\theta_t - \theta^*\|^2 - 2\eta_t(L(\thet
 **文件**: [01_model_training_platform.md](01_model_training_platform.md)
 
 **核心功能**:
+
 - 分布式训练算法
 - 超参数优化
 - 模型版本管理
 - 训练监控
 
 **形式化定义**:
+
 - 训练平台七元组 $\mathcal{T} = (D, M, A, H, S, V, C)$
 - 分布式训练函数 $T_{dist}: \mathcal{P}(D) \times \Theta \times H \times N \rightarrow \Theta$
 - 超参数优化函数 $O: H \times S \times \mathcal{P}(D) \rightarrow H^*$
 
 **核心定理**:
+
 - **分布式训练收敛性**: 以 $O(\frac{1}{T})$ 速率收敛
 - **超参数优化复杂度**: $O(d \log \frac{1}{\epsilon})$ 次评估
 - **版本管理正确性**: 版本唯一性和继承性
 
 **Rust实现**:
+
 - `TrainingPlatform`: 完整的训练平台
 - `BayesianOptimizer`: 贝叶斯优化器
 - `ModelRegistry`: 模型版本管理
@@ -127,22 +131,26 @@ $$\|\theta_{t+1} - \theta^*\|^2 \leq \|\theta_t - \theta^*\|^2 - 2\eta_t(L(\thet
 **文件**: [02_inference_service_architecture.md](02_inference_service_architecture.md)
 
 **核心功能**:
+
 - 模型部署和加载
 - 负载均衡
 - 缓存策略
 - 性能监控
 
 **形式化定义**:
+
 - 推理服务六元组 $\mathcal{I} = (M, L, B, C, S, P)$
 - 负载均衡函数 $L: \mathcal{P}(M) \times \mathbb{R}^+ \rightarrow M$
 - 缓存策略函数 $C: X \times Y \times \mathbb{R}^+ \rightarrow \{0, 1\}$
 
 **核心定理**:
+
 - **推理延迟**: $\text{latency}(x) = h \cdot t_c + (1-h) \cdot t_m = O(n)$
 - **负载均衡最优性**: 一致性哈希最小化方差
 - **缓存效率**: $h \geq \frac{K}{n} \cdot \alpha$
 
 **Rust实现**:
+
 - `InferenceService`: 完整的推理服务
 - `ConsistentHashLoadBalancer`: 一致性哈希负载均衡
 - `CacheManager`: LRU缓存管理
@@ -153,22 +161,26 @@ $$\|\theta_{t+1} - \theta^*\|^2 \leq \|\theta_t - \theta^*\|^2 - 2\eta_t(L(\thet
 **文件**: [03_data_processing_pipeline.md](03_data_processing_pipeline.md)
 
 **核心功能**:
+
 - 流处理和批处理
 - 特征工程
 - 数据质量检查
 - 数据转换
 
 **形式化定义**:
+
 - 数据处理管道八元组 $\mathcal{P} = (S, T, F, Q, V, E, C, M)$
 - 流处理函数 $P_{stream}: \mathbb{R}^+ \times D \rightarrow D'$
 - 特征工程函数 $F_{eng}: X \times \mathcal{F} \rightarrow X'$
 
 **核心定理**:
+
 - **流处理延迟**: $\text{latency} = O(\frac{B}{R})$
 - **特征工程有效性**: $\text{performance}(M(F_{eng}(X))) \geq \text{performance}(M(X))$
 - **数据质量保证**: $Q(D) \geq \min(\alpha, \beta, \gamma)$
 
 **Rust实现**:
+
 - `DataProcessingPipeline`: 完整的处理管道
 - `DataCleaningTransformer`: 数据清洗转换器
 - `NumericalFeatureEngineer`: 数值特征工程器
@@ -179,22 +191,26 @@ $$\|\theta_{t+1} - \theta^*\|^2 \leq \|\theta_t - \theta^*\|^2 - 2\eta_t(L(\thet
 **文件**: [04_mlops_framework.md](04_mlops_framework.md)
 
 **核心功能**:
+
 - 持续集成/持续部署
 - 模型监控
 - 自动化运维
 - 版本管理
 
 **形式化定义**:
+
 - MLOps框架九元组 $\mathcal{M} = (C, D, M, V, T, S, P, A, R)$
 - 持续集成函数 $CI: \mathcal{P}(M) \times \mathcal{P}(D) \times T \rightarrow \{0, 1\}$
 - 持续部署函数 $CD: M \times E \times S \rightarrow \{0, 1\}$
 
 **核心定理**:
+
 - **CI/CD正确性**: $P(CI = 1) \geq \alpha \cdot \beta$
 - **部署可靠性**: $P(CD = 1) \geq \gamma \cdot \delta$
 - **监控有效性**: $\text{effectiveness}(M) = \alpha \cdot \beta \cdot \frac{1}{\tau}$
 
 **Rust实现**:
+
 - `MLOpsFramework`: 完整的MLOps框架
 - `ModelRegistry`: 模型注册表
 - `DeploymentManager`: 部署管理器
