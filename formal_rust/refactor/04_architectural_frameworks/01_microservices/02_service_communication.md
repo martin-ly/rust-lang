@@ -1,6 +1,7 @@
 # 4.1.2 服务间通信 (Service Communication)
 
 ## 目录
+
 1. [4.1.2.1 通信模式](#4121-通信模式)
 2. [4.1.2.2 同步通信](#4122-同步通信)
 3. [4.1.2.3 异步通信](#4123-异步通信)
@@ -11,26 +12,31 @@
 ## 4.1.2.1 通信模式
 
 ### 定义 4.1.2.1 (服务通信)
+
 服务通信是微服务之间交换信息和协调行为的机制：
 $$Communication(S_i, S_j) = \{(m, p, t) | m \in Messages, p \in Protocols, t \in Time\}$$
 
 ### 定义 4.1.2.2 (通信协议)
+
 通信协议定义了服务间交互的规则和格式：
 $$Protocol = (Syntax, Semantics, Timing)$$
 
 ### 定义 4.1.2.3 (通信模式)
+
 通信模式是服务间交互的标准模式：
 $$Pattern = \{Request-Response, Publish-Subscribe, Event-Driven, Message-Queue\}$$
 
 ## 4.1.2.2 同步通信
 
 ### 模式 4.1.2.1 (请求-响应模式)
+
 服务直接调用另一个服务的接口并等待响应：
 
 **形式化定义**：
 $$RequestResponse(S_i, S_j) = \{(req, resp) | req \in Request(S_i), resp \in Response(S_j)\}$$
 
 **Rust实现**：
+
 ```rust
 pub trait SynchronousCommunication {
     type Request;
@@ -131,9 +137,11 @@ impl UserService for UserServiceClient {
 ```
 
 ### 模式 4.1.2.2 (RPC模式)
+
 远程过程调用，提供类似本地函数调用的体验：
 
 **Rust实现**：
+
 ```rust
 pub trait RpcService {
     type Method;
@@ -170,12 +178,14 @@ impl RpcService for GrpcCommunication {
 ## 4.1.2.3 异步通信
 
 ### 模式 4.1.2.3 (发布-订阅模式)
+
 服务发布事件，其他服务订阅并处理这些事件：
 
 **形式化定义**：
 $$PublishSubscribe = \{(Publisher, Event, Subscribers) | Event \in Events, Subscribers \subseteq Services\}$$
 
 **Rust实现**：
+
 ```rust
 pub trait EventPublisher {
     type Event;
@@ -269,12 +279,14 @@ impl EventSubscriber for UserCreatedEventHandler {
 ## 4.1.2.4 消息传递
 
 ### 模式 4.1.2.4 (消息队列模式)
+
 使用消息队列进行可靠的消息传递：
 
 **形式化定义**：
 $$MessageQueue = \{(Producer, Queue, Consumer) | Queue \in Queues, Producer \rightarrow Queue \rightarrow Consumer\}$$
 
 **Rust实现**：
+
 ```rust
 pub trait MessageProducer {
     type Message;
@@ -387,7 +399,9 @@ impl OrderCreatedMessageHandler {
 ## 4.1.2.5 形式化模型
 
 ### 定理 4.1.2.1 (通信可靠性)
+
 如果通信系统满足：
+
 1. 消息持久化
 2. 重试机制
 3. 死信队列
@@ -402,7 +416,9 @@ impl OrderCreatedMessageHandler {
 因此 $C$ 是可靠的。$\square$
 
 ### 定理 4.1.2.2 (通信一致性)
+
 如果异步通信满足：
+
 1. 消息顺序性
 2. 幂等性
 3. 事务性
@@ -418,6 +434,7 @@ impl OrderCreatedMessageHandler {
 ## 4.1.2.6 实现策略
 
 ### 策略 4.1.2.1 (混合通信模式)
+
 ```rust
 pub struct HybridCommunication {
     sync_communication: HttpCommunication,
@@ -441,6 +458,7 @@ impl HybridCommunication {
 ```
 
 ### 策略 4.1.2.2 (通信模式选择)
+
 ```rust
 pub enum CommunicationPattern {
     Synchronous,
@@ -469,6 +487,7 @@ impl CommunicationPatternSelector {
 ## 持续上下文管理
 
 ### 进度跟踪
+
 - [x] 通信模式定义
 - [x] 同步通信实现
 - [x] 异步通信实现
@@ -477,10 +496,12 @@ impl CommunicationPatternSelector {
 - [x] 实现策略
 
 ### 下一步计划
+
 1. 完成数据一致性策略
 2. 实现服务发现机制
 3. 构建容错与弹性设计
 4. 建立监控和可观测性
 
 ### 中断恢复点
-当前状态：服务间通信内容已完成，准备开始数据一致性策略的内容编写。 
+
+当前状态：服务间通信内容已完成，准备开始数据一致性策略的内容编写。
