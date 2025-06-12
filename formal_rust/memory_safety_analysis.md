@@ -80,7 +80,7 @@ Rust的所有权系统实现线性逻辑：
 
 **定义 1.4** (霍尔逻辑规则)
 
-```
+```text
 {P} skip {P}                    (Skip)
 {P[x := E]} x := E {P}          (Assignment)
 
@@ -99,7 +99,7 @@ Rust的所有权系统实现线性逻辑：
 **定理 1.2** (Rust内存安全霍尔逻辑)
 Rust程序满足内存安全霍尔逻辑：
 
-```
+```text
 {valid_ptr(p)} *p {true}
 {valid_mut_ptr(p)} *p = v {*p = v}
 ```
@@ -115,14 +115,14 @@ Rust程序满足内存安全霍尔逻辑：
 **定义 2.1** (内存状态)
 内存状态 $\mu$ 是地址到值的映射：
 
-```
+```text
 μ: \text{Addr} \to \text{Val} \cup \{\bot\}
 ```
 
 **定义 2.2** (有效地址)
 地址 $a$ 在状态 $\mu$ 中有效：
 
-```
+```text
 \text{valid}(a, \mu)  ⟺  \mu(a) \neq \bot
 ```
 
@@ -137,25 +137,25 @@ Rust程序满足内存安全霍尔逻辑：
 
 **定义 2.4** (内存读取)
 
-```
+```text
 \text{read}(a, \mu) = \mu(a)
 ```
 
 **定义 2.5** (内存写入)
 
-```
+```text
 \text{write}(a, v, \mu) = \mu[a \mapsto v]
 ```
 
 **定义 2.6** (内存分配)
 
-```
+```text
 \text{alloc}(size, \mu) = (a, \mu')  \text{ where } a \text{ is fresh}
 ```
 
 **定义 2.7** (内存释放)
 
-```
+```text
 \text{free}(a, \mu) = \mu[a \mapsto \bot]
 ```
 
@@ -199,14 +199,14 @@ Rust程序满足内存安全霍尔逻辑：
 **定义 3.1** (所有权关系)
 所有权关系 $\owns$ 是类型和值之间的二元关系：
 
-```
+```text
 T \owns v  ⟺  v 是类型 T 的所有者
 ```
 
 **定义 3.2** (借用关系)
 借用关系 $\borrows$ 定义临时访问：
 
-```
+```text
 &T \borrows v  ⟺  v 被不可变借用
 &mut T \borrows v  ⟺  v 被可变借用
 ```
@@ -214,7 +214,7 @@ T \owns v  ⟺  v 是类型 T 的所有者
 **定义 3.3** (移动关系)
 移动关系 $\moves$ 定义所有权转移：
 
-```
+```text
 x \moves y  ⟺  x 的所有权转移到 y
 ```
 
@@ -223,19 +223,19 @@ x \moves y  ⟺  x 的所有权转移到 y
 **规则 3.1** (唯一所有权)
 对于任意值 $v$ 和类型 $T$：
 
-```
+```text
 T \owns v  ⟹  \exists! x. x \owns v
 ```
 
 **规则 3.2** (借用兼容性)
 
-```
+```text
 T \owns v  ∧  &T \borrows v  ⟹  \neg(&mut T \borrows v)
 ```
 
 **规则 3.3** (移动后失效)
 
-```
+```text
 x \moves y  ⟹  \neg(\text{valid}(x))
 ```
 
