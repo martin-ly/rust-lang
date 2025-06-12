@@ -62,7 +62,7 @@ $$F(t) = 1 - e^{-\lambda t}$$
 
 ## Rust实现
 
-### 2.1 共识机制基础
+### 2.1 共识机制基础1
 
 ```rust
 use std::collections::HashMap;
@@ -106,7 +106,7 @@ impl Participant {
 }
 ```
 
-### 2.2 工作量证明 (PoW)
+### 2.2 工作量证明 (PoW)1
 
 ```rust
 use sha2::{Sha256, Digest};
@@ -274,7 +274,7 @@ impl PoWMiner {
 }
 ```
 
-### 2.3 权益证明 (PoS)
+### 2.3 权益证明 (PoS)1
 
 ```rust
 use std::collections::BTreeMap;
