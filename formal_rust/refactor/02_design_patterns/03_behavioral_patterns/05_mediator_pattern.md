@@ -153,7 +153,7 @@ use std::fmt;
 use std::collections::HashMap;
 
 // 消息类型
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Message {
     pub from: String,
     pub to: String,
@@ -161,7 +161,7 @@ pub struct Message {
     pub message_type: MessageType,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub enum MessageType {
     Text,
     File,
@@ -222,11 +222,11 @@ impl Mediator for ChatRoom {
         if let Some(colleague) = self.colleagues.get(&message.to) {
             // 检查接收者是否能处理该消息类型
             if colleague.can_handle_message(&message.message_type) {
-                println!("[{}] {} -> {}: {}", 
+                println!("[{}] {} -> {}: {}",
                     self.name, message.from, message.to, message.content);
                 true
             } else {
-                println!("[{}] {} cannot handle message type", 
+                println!("[{}] {} cannot handle message type",
                     self.name, message.to);
                 false
             }
@@ -298,7 +298,7 @@ impl Colleague for User {
             content.to_string(),
             message_type,
         );
-        
+
         if mediator.send_message(&message) {
             println!("[{}] Message sent successfully", self.name);
             true
@@ -310,7 +310,7 @@ impl Colleague for User {
 
     fn receive_message(&mut self, message: &Message) {
         self.message_history.push(message.clone());
-        println!("[{}] Received message from {}: {}", 
+        println!("[{}] Received message from {}: {}",
             self.name, message.from, message.content);
     }
 
@@ -369,7 +369,7 @@ impl Colleague for Bot {
             content.to_string(),
             message_type,
         );
-        
+
         if mediator.send_message(&message) {
             println!("[{}] Command sent successfully", self.name);
             true
@@ -380,9 +380,9 @@ impl Colleague for Bot {
     }
 
     fn receive_message(&mut self, message: &Message) {
-        println!("[{}] Received message from {}: {}", 
+        println!("[{}] Received message from {}: {}",
             self.name, message.from, message.content);
-        
+
         // 处理命令
         if let MessageType::Command = message.message_type {
             if self.commands.contains(&message.content) {
@@ -409,7 +409,7 @@ pub struct FileTransferSystem {
     file_transfers: Vec<FileTransfer>,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct FileTransfer {
     from: String,
     to: String,
@@ -418,7 +418,7 @@ pub struct FileTransfer {
     status: TransferStatus,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub enum TransferStatus {
     Pending,
     InProgress,
@@ -451,11 +451,11 @@ impl Mediator for FileTransferSystem {
             if colleague.can_handle_message(&message.message_type) {
                 match message.message_type {
                     MessageType::File => {
-                        println!("[FileTransfer] File transfer initiated: {} -> {}", 
+                        println!("[FileTransfer] File transfer initiated: {} -> {}",
                             message.from, message.to);
                     }
                     _ => {
-                        println!("[FileTransfer] Message sent: {} -> {}", 
+                        println!("[FileTransfer] Message sent: {} -> {}",
                             message.from, message.to);
                     }
                 }
@@ -495,7 +495,7 @@ use std::fmt;
 use std::collections::HashMap;
 
 // 泛型消息
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct GenericMessage<T> {
     pub from: String,
     pub to: String,
@@ -503,7 +503,7 @@ pub struct GenericMessage<T> {
     pub message_type: GenericMessageType,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub enum GenericMessageType {
     Data,
     Control,
@@ -603,7 +603,7 @@ use std::collections::HashMap;
 use async_trait::async_trait;
 
 // 异步消息
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct AsyncMessage {
     pub from: String,
     pub to: String,
@@ -611,7 +611,7 @@ pub struct AsyncMessage {
     pub message_type: AsyncMessageType,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub enum AsyncMessageType {
     Async,
     Sync,
@@ -631,7 +631,7 @@ impl AsyncMessage {
 }
 
 // 异步中介者trait
-#[async_trait]
+# [async_trait]
 pub trait AsyncMediator: fmt::Display + Send + Sync {
     async fn send_message(&self, message: &AsyncMessage) -> bool;
     async fn register_colleague(&mut self, colleague: Box<dyn AsyncColleague>);
@@ -640,7 +640,7 @@ pub trait AsyncMediator: fmt::Display + Send + Sync {
 }
 
 // 异步同事trait
-#[async_trait]
+# [async_trait]
 pub trait AsyncColleague: fmt::Display + Send + Sync {
     fn get_id(&self) -> &str;
     async fn send_message(&self, mediator: &dyn AsyncMediator, to: &str, content: &str, message_type: AsyncMessageType) -> bool;
@@ -669,14 +669,14 @@ impl fmt::Display for AsyncMediatorImpl {
     }
 }
 
-#[async_trait]
+# [async_trait]
 impl AsyncMediator for AsyncMediatorImpl {
     async fn send_message(&self, message: &AsyncMessage) -> bool {
         if let Some(colleague) = self.colleagues.get(&message.to) {
             if colleague.can_handle_message(&message.message_type) {
                 // 模拟异步处理
                 tokio::time::sleep(tokio::time::Duration::from_millis(10)).await;
-                println!("[{}] Async message sent: {} -> {}", 
+                println!("[{}] Async message sent: {} -> {}",
                     self.name, message.from, message.to);
                 true
             } else {
@@ -727,7 +727,7 @@ pub struct AirTrafficControl {
     weather_conditions: WeatherCondition,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub enum WeatherCondition {
     Clear,
     Cloudy,
@@ -855,7 +855,7 @@ impl Colleague for Aircraft {
             content.to_string(),
             message_type,
         );
-        
+
         if mediator.send_message(&message) {
             println!("[{}] Message sent successfully", self.callsign);
             true
@@ -866,9 +866,9 @@ impl Colleague for Aircraft {
     }
 
     fn receive_message(&mut self, message: &Message) {
-        println!("[{}] Received message from {}: {}", 
+        println!("[{}] Received message from {}: {}",
             self.callsign, message.from, message.content);
-        
+
         match message.message_type {
             MessageType::Command => {
                 if message.content.contains("land") {
@@ -954,14 +954,14 @@ impl Mediator for MultiLevelMediator {
         if self.primary_mediator.send_message(message) {
             return true;
         }
-        
+
         // 再尝试次级中介者
         for mediator in &self.secondary_mediators {
             if mediator.send_message(message) {
                 return true;
             }
         }
-        
+
         false
     }
 
@@ -1015,7 +1015,7 @@ impl Mediator for EventDrivenMediator {
                 }
             }
         }
-        
+
         // 默认消息传递
         if let Some(colleague) = self.colleagues.get(&message.to) {
             colleague.can_handle_message(&message.message_type)
@@ -1070,4 +1070,4 @@ impl Mediator for EventDrivenMediator {
 3. **可扩展性**：易于添加新的对象和交互
 4. **可维护性**：交互逻辑易于维护和修改
 
-通过形式化的数学理论和完整的Rust实现，我们建立了中介者模式的完整理论体系，为实际应用提供了坚实的理论基础和实现指导。 
+通过形式化的数学理论和完整的Rust实现，我们建立了中介者模式的完整理论体系，为实际应用提供了坚实的理论基础和实现指导。

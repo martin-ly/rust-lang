@@ -138,7 +138,7 @@ $$\text{Pass}(r, C) = (h_1, h_2, ..., h_k)$$
 use std::fmt;
 
 // 请求类型
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Request {
     pub id: u32,
     pub content: String,
@@ -152,7 +152,7 @@ impl Request {
 }
 
 // 响应类型
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Response {
     pub success: bool,
     pub message: String,
@@ -369,7 +369,7 @@ impl HandlerExt for AbstractHandler {
 use std::fmt;
 
 // 泛型请求
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct GenericRequest<T> {
     pub id: u32,
     pub data: T,
@@ -383,7 +383,7 @@ impl<T> GenericRequest<T> {
 }
 
 // 泛型响应
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct GenericResponse<T> {
     pub success: bool,
     pub result: Option<T>,
@@ -460,7 +460,7 @@ use std::fmt;
 use async_trait::async_trait;
 
 // 异步请求
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct AsyncRequest {
     pub id: u32,
     pub content: String,
@@ -474,7 +474,7 @@ impl AsyncRequest {
 }
 
 // 异步响应
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct AsyncResponse {
     pub success: bool,
     pub message: String,
@@ -488,7 +488,7 @@ impl AsyncResponse {
 }
 
 // 异步处理者trait
-#[async_trait]
+# [async_trait]
 pub trait AsyncHandler: fmt::Display + Send + Sync {
     async fn handle(&self, request: &AsyncRequest) -> Option<AsyncResponse>;
     fn set_next(&mut self, next: Box<dyn AsyncHandler>);
@@ -518,7 +518,7 @@ impl fmt::Display for AsyncAbstractHandler {
     }
 }
 
-#[async_trait]
+# [async_trait]
 impl AsyncHandler for AsyncAbstractHandler {
     async fn handle(&self, request: &AsyncRequest) -> Option<AsyncResponse> {
         if self.can_handle(request).await {
@@ -558,7 +558,7 @@ pub struct LogRequest {
     pub timestamp: std::time::SystemTime,
 }
 
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub enum LogLevel {
     Debug = 1,
     Info = 2,
@@ -797,4 +797,4 @@ pub trait ConditionalHandler: Handler {
 3. **灵活性**：支持动态调整处理链
 4. **单一职责**：每个处理者只关注自己的职责
 
-通过形式化的数学理论和完整的Rust实现，我们建立了责任链模式的完整理论体系，为实际应用提供了坚实的理论基础和实现指导。 
+通过形式化的数学理论和完整的Rust实现，我们建立了责任链模式的完整理论体系，为实际应用提供了坚实的理论基础和实现指导。
