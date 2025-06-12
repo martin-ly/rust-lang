@@ -31,7 +31,7 @@
 
 ### 1.3 模式结构
 
-```
+```text
 Component (Component)
 ├── ConcreteComponent (ConcreteComponent)
 └── Decorator (Decorator)

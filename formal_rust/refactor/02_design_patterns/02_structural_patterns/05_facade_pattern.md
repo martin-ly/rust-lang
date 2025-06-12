@@ -31,7 +31,7 @@
 
 ### 1.3 模式结构
 
-```
+```text
 Client (Client)
 ├── Facade (Facade)
 └── Subsystem (Subsystem)
