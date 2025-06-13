@@ -1,998 +1,710 @@
-# 装饰器模式形式化重构 (Decorator Pattern Formal Refactoring)
+# 装饰器模式 (Decorator Pattern) - 形式化重构
 
-## 目录
+## 1. 形式化定义 (Formal Definition)
 
-1. [概述](#1-概述)
-2. [形式化定义](#2-形式化定义)
-3. [数学理论](#3-数学理论)
-4. [核心定理](#4-核心定理)
-5. [Rust实现](#5-rust实现)
-6. [应用场景](#6-应用场景)
-7. [变体模式](#7-变体模式)
-8. [性能分析](#8-性能分析)
-9. [总结](#9-总结)
+### 1.1 装饰器模式五元组
 
----
+设装饰器模式为五元组 $D = (C, I, W, O, R)$，其中：
 
-## 1. 概述
+- $C$ 是组件接口集合 (Component Interface)
+- $I$ 是具体组件集合 (Concrete Components)
+- $W$ 是装饰器包装器集合 (Wrapper Decorators)
+- $O$ 是操作集合 (Operations)
+- $R$ 是装饰关系集合 (Decoration Relations)
 
-### 1.1 模式定义
+### 1.2 数学关系定义
 
-装饰器模式（Decorator Pattern）是一种结构型设计模式，允许动态地给一个对象添加一些额外的职责。就增加功能来说，装饰器模式相比生成子类更为灵活。
+**定义1.2.1 (装饰关系)**
+对于任意组件 $c \in C$ 和装饰器 $w \in W$，定义装饰关系 $R \subseteq C \times W$：
+- 如果装饰器 $w$ 包装组件 $c$，则 $(c, w) \in R$
+- 装饰器 $w$ 实现组件接口 $C$
 
-### 1.2 核心思想
+**定义1.2.2 (操作组合)**
+对于操作 $o \in O$ 和装饰器 $w \in W$，定义操作组合函数 $F: W \times O \rightarrow O$：
+- $F(w, o) = w.pre(o) \circ o \circ w.post(o)$
+- 其中 $\circ$ 是操作组合运算符
 
-装饰器模式的核心思想是：
+## 2. 数学理论 (Mathematical Theory)
 
-- **动态扩展**：在运行时动态地扩展对象的功能
-- **组合优于继承**：通过组合而非继承来扩展功能
-- **单一职责**：每个装饰器只负责一个特定的功能
-- **透明性**：装饰器与被装饰对象实现相同的接口
+### 2.1 动态扩展理论 (Dynamic Extension Theory)
 
-### 1.3 模式结构
+**公理2.1.1 (动态扩展公理)**
+1. **接口一致性**: 装饰器实现与被装饰组件相同的接口
+2. **行为扩展**: 装饰器可以在不修改原组件的情况下扩展行为
+3. **组合性**: 装饰器可以任意组合，形成装饰链
 
-```text
-Component (Component)
-├── ConcreteComponent (ConcreteComponent)
-└── Decorator (Decorator)
-    ├── component: Component
-    └── ConcreteDecorator (ConcreteDecorator)
-```
-
----
-
-## 2. 形式化定义
-
-### 2.1 装饰器模式五元组
-
-**定义2.1 (装饰器模式五元组)**
-设 $D = (C, W, O, R, E)$ 为装饰器模式，其中：
-
-- $C$ 是组件集合 (Component Set)
-- $W$ 是包装器集合 (Wrapper Set)
-- $O$ 是操作集合 (Operation Set)
-- $R$ 是关系映射集合 (Relation Mapping Set)
-- $E$ 是扩展功能集合 (Extension Function Set)
-
-**定义2.2 (组件接口)**
-组件接口 $I$ 定义为：
-$$I = \{op: C \rightarrow O\}$$
-
-**定义2.3 (装饰器关系)**
-装饰器关系 $R$ 定义为：
-$$R = \{(w, c) \in W \times C | w \text{ 装饰 } c\}$$
-
-**定义2.4 (装饰链)**
-装饰链 $L$ 定义为：
-$$L = \{c_1 \xrightarrow{w_1} c_2 \xrightarrow{w_2} ... \xrightarrow{w_n} c_{n+1}\}$$
-其中 $c_i \in C, w_i \in W$
-
-### 2.2 操作语义 (Operational Semantics)
-
-**定义2.5 (基础操作)**
-对于组件 $c \in C$，基础操作定义为：
-$$op(c) = f_c$$
-
-**定义2.6 (装饰操作)**
-对于装饰器 $w \in W$ 装饰的组件 $c \in C$，装饰操作定义为：
-$$op(w(c)) = f_w \circ f_c \circ e_w$$
-其中：
-
-- $f_w$ 是装饰器的核心功能
-- $f_c$ 是组件的核心功能
-- $e_w$ 是装饰器的扩展功能
-
----
-
-## 3. 数学理论
-
-### 3.1 函数组合理论
-
-**定理3.1.1 (装饰器组合性)**
-装饰器模式满足函数组合的传递性：
-$$\forall w_1, w_2 \in W, \forall c \in C: op(w_2(w_1(c))) = op(w_2) \circ op(w_1) \circ op(c)$$
+**定理2.1.1 (装饰器正确性)**
+如果装饰器模式 $D$ 满足动态扩展公理，则：
+- 装饰器与被装饰组件类型兼容
+- 装饰器可以动态添加和移除
+- 装饰器组合满足结合律
 
 **证明**:
+1. 由接口一致性公理，装饰器实现相同接口
+2. 由行为扩展公理，装饰器可以扩展行为
+3. 由组合性公理，装饰器可以任意组合
 
-1. 根据定义2.6，$op(w_1(c)) = f_{w_1} \circ f_c \circ e_{w_1}$
-2. 再次应用装饰器 $w_2$：$op(w_2(w_1(c))) = f_{w_2} \circ f_{w_1} \circ f_c \circ e_{w_1} \circ e_{w_2}$
-3. 由于函数组合满足结合律，可以重新排列为：$op(w_2) \circ op(w_1) \circ op(c)$
+### 2.2 包装器理论 (Wrapper Theory)
 
-**定理3.1.2 (装饰器可交换性)**
-对于某些装饰器，满足可交换性：
-$$\exists w_1, w_2 \in W: op(w_1(w_2(c))) = op(w_2(w_1(c)))$$
+**公理2.2.1 (包装器公理)**
+对于任意装饰器 $w \in W$ 和组件 $c \in C$：
+- 装饰器 $w$ 持有对组件 $c$ 的引用
+- 装饰器 $w$ 可以调用组件 $c$ 的操作
+- 装饰器 $w$ 可以在调用前后添加额外行为
 
-**证明**: 当装饰器的扩展功能 $e_w$ 不相互影响时，装饰器可以交换顺序。
+**定理2.2.1 (包装器正确性)**
+如果装饰器 $w$ 满足包装器公理，则：
+- 装饰器可以透明地包装组件
+- 装饰器可以拦截和修改操作调用
+- 装饰器可以添加新的功能
 
-### 3.2 接口一致性理论
+### 2.3 操作组合理论 (Operation Composition Theory)
 
-**定理3.2.1 (接口保持性)**
-装饰器保持被装饰组件的接口：
-$$\forall w \in W, \forall c \in C: interface(w(c)) = interface(c)$$
+**定义2.3.1 (操作组合)**
+对于操作序列 $o_1, o_2, ..., o_n \in O$，操作组合定义为：
+- $o_1 \circ o_2 \circ ... \circ o_n = o_n(o_{n-1}(...o_1(...)))$
 
-**证明**: 装饰器实现相同的接口，只是扩展了功能。
+**定理2.3.1 (操作组合正确性)**
+对于任意操作序列：
+- 操作组合满足结合律：$(o_1 \circ o_2) \circ o_3 = o_1 \circ (o_2 \circ o_3)$
+- 操作组合满足单位元：$id \circ o = o \circ id = o$
+- 操作组合满足交换律（当操作独立时）
 
-**定理3.2.2 (类型安全性)**
-装饰器模式保证类型安全：
-$$\forall w \in W, \forall c \in C: type(w(c)) = type(c)$$
+## 3. 核心定理 (Core Theorems)
 
-**证明**: 装饰器与被装饰组件具有相同的类型签名。
+### 3.1 装饰器模式正确性定理
 
-### 3.3 动态扩展理论
+**定理3.1.1 (接口一致性)**
+对于装饰器模式 $D = (C, I, W, O, R)$，如果满足：
+1. 所有装饰器实现接口 $C$
+2. 装饰器可以包装任何实现 $C$ 的组件
+3. 装饰器组合后仍实现接口 $C$
 
-**定理3.3.1 (动态装饰)**
-装饰器可以在运行时动态添加和移除：
-$$\forall c \in C, \forall w \in W: \exists c' = w(c) \land \exists c'' = remove_w(c')$$
-
-**证明**: 装饰器模式支持运行时的功能扩展和收缩。
-
-**定理3.3.2 (扩展独立性)**
-不同的装饰器可以独立扩展功能：
-$$\forall w_1, w_2 \in W, w_1 \neq w_2: e_{w_1} \cap e_{w_2} = \emptyset$$
-
-**证明**: 每个装饰器提供独立的功能扩展。
-
----
-
-## 4. 核心定理
-
-### 4.1 装饰器正确性定理
-
-**定理4.1.1 (装饰器正确性)**
-对于装饰器模式 $D = (C, W, O, R, E)$：
-$$\forall w \in W, \forall c \in C: op(w(c)) \supseteq op(c)$$
-
-**证明**: 装饰器扩展了原组件的功能，包含原组件的所有操作。
-
-### 4.2 装饰器组合定理
-
-**定理4.2.1 (装饰器组合正确性)**
-对于装饰器链 $L = c_1 \xrightarrow{w_1} c_2 \xrightarrow{w_2} ... \xrightarrow{w_n} c_{n+1}$：
-$$op(c_{n+1}) = \bigcirc_{i=1}^{n} op(w_i) \circ op(c_1)$$
-
-**证明**: 通过数学归纳法，每个装饰器都扩展前一个组件的功能。
-
-### 4.3 装饰器性能定理
-
-**定理4.3.1 (装饰器性能)**
-对于包含 $n$ 个装饰器的装饰链：
-
-- **时间复杂度**: $O(n)$
-- **空间复杂度**: $O(n)$
+则装饰器模式接口一致。
 
 **证明**:
+1. 由定义1.2.1，装饰器实现组件接口
+2. 由公理2.1.1，装饰器与被装饰组件类型兼容
+3. 由组合性公理，装饰器组合后仍实现相同接口
 
-- 时间复杂度：需要依次调用每个装饰器
-- 空间复杂度：需要存储每个装饰器的状态
+### 3.2 行为扩展定理
 
-### 4.4 装饰器唯一性定理
+**定理3.2.1 (行为扩展完整性)**
+对于任意组件 $c \in C$ 和装饰器 $w \in W$：
+- 装饰器 $w$ 可以扩展组件 $c$ 的行为
+- 扩展的行为不会破坏原有功能
+- 扩展的行为可以动态添加和移除
 
-**定理4.4.1 (装饰器唯一性)**
-对于任意组件 $c \in C$ 和装饰器 $w \in W$，装饰结果唯一：
-$$\forall w_1, w_2 \in W, w_1 = w_2 \Rightarrow op(w_1(c)) = op(w_2(c))$$
+**证明**:
+1. 由公理2.2.1，装饰器可以添加额外行为
+2. 由包装器公理，装饰器持有原组件引用
+3. 由动态扩展公理，装饰器可以动态添加和移除
 
-**证明**: 相同的装饰器对相同组件产生相同的装饰效果。
+### 3.3 组合性定理
 
----
+**定理3.3.1 (装饰器组合性)**
+对于装饰器序列 $w_1, w_2, ..., w_n \in W$：
+- 装饰器可以任意顺序组合
+- 组合结果与组合顺序无关（当装饰器独立时）
+- 组合后的装饰器仍满足装饰器公理
 
-## 5. Rust实现
+**证明**:
+1. 由组合性公理，装饰器可以任意组合
+2. 由操作组合理论，操作组合满足结合律
+3. 由包装器公理，每个装饰器都实现相同接口
 
-### 5.1 基础实现
+### 3.4 复杂度分析定理
+
+**定理3.4.1 (装饰器复杂度)**
+对于装饰器模式 $D$ 中的操作 $o$：
+- 时间复杂度：$O(n)$，其中 $n$ 是装饰器数量
+- 空间复杂度：$O(n)$，其中 $n$ 是装饰器数量
+
+**证明**:
+1. 每个装饰器最多被调用一次
+2. 每个装饰器需要存储对被装饰组件的引用
+3. 因此复杂度分析成立
+
+## 4. Rust实现 (Rust Implementation)
+
+### 4.1 基础实现
 
 ```rust
-/// 组件 trait - 定义基础接口
+// 组件接口
 pub trait Component {
     fn operation(&self) -> String;
 }
 
-/// 具体组件
+// 具体组件
 pub struct ConcreteComponent {
     name: String,
 }
 
 impl ConcreteComponent {
     pub fn new(name: String) -> Self {
-        ConcreteComponent { name }
+        Self { name }
     }
 }
 
 impl Component for ConcreteComponent {
     fn operation(&self) -> String {
-        format!("ConcreteComponent: {}", self.name)
+        format!("ConcreteComponent[{}]", self.name)
     }
 }
 
-/// 装饰器基类
-pub struct Decorator {
-    component: Box<dyn Component>,
+// 装饰器基类
+pub struct Decorator<T: Component> {
+    component: T,
 }
 
-impl Decorator {
-    pub fn new(component: Box<dyn Component>) -> Self {
-        Decorator { component }
+impl<T: Component> Decorator<T> {
+    pub fn new(component: T) -> Self {
+        Self { component }
     }
 }
 
-impl Component for Decorator {
+impl<T: Component> Component for Decorator<T> {
     fn operation(&self) -> String {
         self.component.operation()
     }
 }
 
-/// 具体装饰器A
-pub struct ConcreteDecoratorA {
-    decorator: Decorator,
+// 具体装饰器A
+pub struct ConcreteDecoratorA<T: Component> {
+    decorator: Decorator<T>,
 }
 
-impl ConcreteDecoratorA {
-    pub fn new(component: Box<dyn Component>) -> Self {
-        ConcreteDecoratorA {
+impl<T: Component> ConcreteDecoratorA<T> {
+    pub fn new(component: T) -> Self {
+        Self {
             decorator: Decorator::new(component),
         }
     }
 }
 
-impl Component for ConcreteDecoratorA {
+impl<T: Component> Component for ConcreteDecoratorA<T> {
     fn operation(&self) -> String {
-        let base_result = self.decorator.operation();
-        format!("[DecoratorA] {}", base_result)
+        let base_operation = self.decorator.operation();
+        format!("ConcreteDecoratorA[{}]", base_operation)
     }
 }
 
-/// 具体装饰器B
-pub struct ConcreteDecoratorB {
-    decorator: Decorator,
+// 具体装饰器B
+pub struct ConcreteDecoratorB<T: Component> {
+    decorator: Decorator<T>,
 }
 
-impl ConcreteDecoratorB {
-    pub fn new(component: Box<dyn Component>) -> Self {
-        ConcreteDecoratorB {
+impl<T: Component> ConcreteDecoratorB<T> {
+    pub fn new(component: T) -> Self {
+        Self {
             decorator: Decorator::new(component),
         }
     }
 }
 
-impl Component for ConcreteDecoratorB {
+impl<T: Component> Component for ConcreteDecoratorB<T> {
     fn operation(&self) -> String {
-        let base_result = self.decorator.operation();
-        format!("[DecoratorB] {}", base_result)
+        let base_operation = self.decorator.operation();
+        format!("ConcreteDecoratorB[{}]", base_operation)
     }
-}
-
-/// 客户端代码
-pub fn demonstrate_decorator() {
-    // 创建基础组件
-    let component = Box::new(ConcreteComponent::new("test".to_string()));
-    println!("Original: {}", component.operation());
-    
-    // 添加装饰器A
-    let decorated_a = Box::new(ConcreteDecoratorA::new(component));
-    println!("With A: {}", decorated_a.operation());
-    
-    // 添加装饰器B
-    let decorated_b = Box::new(ConcreteDecoratorB::new(decorated_a));
-    println!("With A and B: {}", decorated_b.operation());
 }
 ```
 
-### 5.2 泛型实现
+### 4.2 泛型实现
 
 ```rust
 use std::fmt::Display;
 
-/// 泛型组件 trait
-pub trait GenericComponent<T: Display> {
+// 泛型组件接口
+pub trait GenericComponent<T: Display + Clone> {
     fn operation(&self) -> T;
 }
 
-/// 泛型装饰器
-pub struct GenericDecorator<T: Display, F: Fn(T) -> T> {
-    component: Box<dyn GenericComponent<T>>,
-    decorator_fn: F,
-}
-
-impl<T: Display, F: Fn(T) -> T> GenericDecorator<T, F> {
-    pub fn new(component: Box<dyn GenericComponent<T>>, decorator_fn: F) -> Self {
-        GenericDecorator {
-            component,
-            decorator_fn,
-        }
-    }
-}
-
-impl<T: Display, F: Fn(T) -> T> GenericComponent<T> for GenericDecorator<T, F> {
-    fn operation(&self) -> T {
-        let base_result = self.component.operation();
-        (self.decorator_fn)(base_result)
-    }
-}
-
-/// 泛型具体组件
-pub struct GenericConcreteComponent<T: Display> {
+// 泛型具体组件
+pub struct GenericConcreteComponent<T: Display + Clone> {
     value: T,
 }
 
-impl<T: Display> GenericConcreteComponent<T> {
+impl<T: Display + Clone> GenericConcreteComponent<T> {
     pub fn new(value: T) -> Self {
-        GenericConcreteComponent { value }
+        Self { value }
     }
 }
 
-impl<T: Display> GenericComponent<T> for GenericConcreteComponent<T> {
+impl<T: Display + Clone> GenericComponent<T> for GenericConcreteComponent<T> {
     fn operation(&self) -> T {
         self.value.clone()
     }
 }
 
-/// 泛型装饰器示例
-pub fn demonstrate_generic_decorator() {
-    // 创建基础组件
-    let component = Box::new(GenericConcreteComponent::new(42));
-    
-    // 创建装饰器函数
-    let double_decorator = |x: i32| x * 2;
-    let add_one_decorator = |x: i32| x + 1;
-    
-    // 应用装饰器
-    let decorated = Box::new(GenericDecorator::new(component, double_decorator));
-    let final_result = Box::new(GenericDecorator::new(decorated, add_one_decorator));
-    
-    println!("Result: {}", final_result.operation()); // 输出: Result: 85
-}
-```
-
-### 5.3 异步实现
-
-```rust
-use async_trait::async_trait;
-use tokio::time::{sleep, Duration};
-
-/// 异步组件 trait
-#[async_trait]
-pub trait AsyncComponent {
-    async fn operation(&self) -> String;
+// 泛型装饰器基类
+pub struct GenericDecorator<T: Display + Clone, C: GenericComponent<T>> {
+    component: C,
+    transform_fn: Box<dyn Fn(&T) -> T>,
 }
 
-/// 异步具体组件
-pub struct AsyncConcreteComponent {
-    name: String,
-    processing_time: Duration,
-}
-
-impl AsyncConcreteComponent {
-    pub fn new(name: String, processing_time: Duration) -> Self {
-        AsyncConcreteComponent {
-            name,
-            processing_time,
-        }
-    }
-}
-
-#[async_trait]
-impl AsyncComponent for AsyncConcreteComponent {
-    async fn operation(&self) -> String {
-        sleep(self.processing_time).await;
-        format!("AsyncComponent: {}", self.name)
-    }
-}
-
-/// 异步装饰器
-pub struct AsyncDecorator {
-    component: Box<dyn AsyncComponent + Send>,
-    decorator_name: String,
-    additional_time: Duration,
-}
-
-impl AsyncDecorator {
-    pub fn new(component: Box<dyn AsyncComponent + Send>, decorator_name: String, additional_time: Duration) -> Self {
-        AsyncDecorator {
+impl<T: Display + Clone, C: GenericComponent<T>> GenericDecorator<T, C> {
+    pub fn new<F>(component: C, transform_fn: F) -> Self 
+    where 
+        F: Fn(&T) -> T + 'static 
+    {
+        Self {
             component,
-            decorator_name,
-            additional_time,
+            transform_fn: Box::new(transform_fn),
         }
     }
 }
 
-#[async_trait]
-impl AsyncComponent for AsyncDecorator {
-    async fn operation(&self) -> String {
-        let base_result = self.component.operation().await;
-        sleep(self.additional_time).await;
-        format!("[{}] {}", self.decorator_name, base_result)
+impl<T: Display + Clone, C: GenericComponent<T>> GenericComponent<T> for GenericDecorator<T, C> {
+    fn operation(&self) -> T {
+        let base_value = self.component.operation();
+        (self.transform_fn)(&base_value)
     }
 }
 
-/// 异步客户端代码
-pub async fn demonstrate_async_decorator() {
-    let component = Box::new(AsyncConcreteComponent::new(
-        "test".to_string(),
-        Duration::from_millis(100),
-    ));
-    
-    let decorated = Box::new(AsyncDecorator::new(
-        component,
-        "AsyncDecorator".to_string(),
-        Duration::from_millis(50),
-    ));
-    
-    let result = decorated.operation().await;
-    println!("Async result: {}", result);
+// 泛型装饰器链
+pub struct GenericDecoratorChain<T: Display + Clone> {
+    component: Box<dyn GenericComponent<T>>,
+    decorators: Vec<Box<dyn Fn(&T) -> T>>,
+}
+
+impl<T: Display + Clone> GenericDecoratorChain<T> {
+    pub fn new(component: Box<dyn GenericComponent<T>>) -> Self {
+        Self {
+            component,
+            decorators: Vec::new(),
+        }
+    }
+
+    pub fn add_decorator<F>(&mut self, decorator: F) 
+    where 
+        F: Fn(&T) -> T + 'static 
+    {
+        self.decorators.push(Box::new(decorator));
+    }
+}
+
+impl<T: Display + Clone> GenericComponent<T> for GenericDecoratorChain<T> {
+    fn operation(&self) -> T {
+        let mut value = self.component.operation();
+        for decorator in &self.decorators {
+            value = decorator(&value);
+        }
+        value
+    }
 }
 ```
 
----
-
-## 6. 应用场景
-
-### 6.1 咖啡店系统
+### 4.3 异步实现
 
 ```rust
-/// 咖啡 trait
-pub trait Coffee {
-    fn cost(&self) -> u32;
-    fn description(&self) -> String;
+use std::future::Future;
+use std::pin::Pin;
+
+// 异步组件接口
+#[async_trait::async_trait]
+pub trait AsyncComponent<T: Send + Sync + Clone> {
+    async fn operation(&self) -> T;
 }
 
-/// 基础咖啡
-pub struct SimpleCoffee;
-
-impl Coffee for SimpleCoffee {
-    fn cost(&self) -> u32 {
-        10
-    }
-    
-    fn description(&self) -> String {
-        "Simple Coffee".to_string()
-    }
+// 异步具体组件
+pub struct AsyncConcreteComponent<T: Send + Sync + Clone> {
+    value: T,
 }
 
-/// 牛奶装饰器
-pub struct MilkDecorator {
-    coffee: Box<dyn Coffee>,
-}
-
-impl MilkDecorator {
-    pub fn new(coffee: Box<dyn Coffee>) -> Self {
-        MilkDecorator { coffee }
+impl<T: Send + Sync + Clone> AsyncConcreteComponent<T> {
+    pub fn new(value: T) -> Self {
+        Self { value }
     }
 }
 
-impl Coffee for MilkDecorator {
-    fn cost(&self) -> u32 {
-        self.coffee.cost() + 2
-    }
-    
-    fn description(&self) -> String {
-        format!("{}, Milk", self.coffee.description())
-    }
-}
-
-/// 糖装饰器
-pub struct SugarDecorator {
-    coffee: Box<dyn Coffee>,
-}
-
-impl SugarDecorator {
-    pub fn new(coffee: Box<dyn Coffee>) -> Self {
-        SugarDecorator { coffee }
+#[async_trait::async_trait]
+impl<T: Send + Sync + Clone> AsyncComponent<T> for AsyncConcreteComponent<T> {
+    async fn operation(&self) -> T {
+        // 模拟异步操作
+        tokio::time::sleep(tokio::time::Duration::from_millis(10)).await;
+        self.value.clone()
     }
 }
 
-impl Coffee for SugarDecorator {
-    fn cost(&self) -> u32 {
-        self.coffee.cost() + 1
-    }
-    
-    fn description(&self) -> String {
-        format!("{}, Sugar", self.coffee.description())
+// 异步装饰器基类
+pub struct AsyncDecorator<T: Send + Sync + Clone, C: AsyncComponent<T> + Send + Sync> {
+    component: C,
+    transform_fn: Box<dyn Fn(&T) -> Pin<Box<dyn Future<Output = T> + Send>> + Send + Sync>,
+}
+
+impl<T: Send + Sync + Clone, C: AsyncComponent<T> + Send + Sync> AsyncDecorator<T, C> {
+    pub fn new<F, Fut>(component: C, transform_fn: F) -> Self 
+    where 
+        F: Fn(&T) -> Fut + Send + Sync + 'static,
+        Fut: Future<Output = T> + Send + 'static
+    {
+        Self {
+            component,
+            transform_fn: Box::new(move |value| {
+                let fut = transform_fn(value);
+                Box::pin(fut)
+            }),
+        }
     }
 }
 
-/// 咖啡店客户端
-pub fn demonstrate_coffee_shop() {
-    // 基础咖啡
-    let simple_coffee: Box<dyn Coffee> = Box::new(SimpleCoffee);
-    println!("Coffee: {}, Cost: {}", simple_coffee.description(), simple_coffee.cost());
-    
-    // 加牛奶
-    let milk_coffee = Box::new(MilkDecorator::new(simple_coffee));
-    println!("Coffee: {}, Cost: {}", milk_coffee.description(), milk_coffee.cost());
-    
-    // 加糖
-    let milk_sugar_coffee = Box::new(SugarDecorator::new(milk_coffee));
-    println!("Coffee: {}, Cost: {}", milk_sugar_coffee.description(), milk_sugar_coffee.cost());
+#[async_trait::async_trait]
+impl<T: Send + Sync + Clone, C: AsyncComponent<T> + Send + Sync> AsyncComponent<T> for AsyncDecorator<T, C> {
+    async fn operation(&self) -> T {
+        let base_value = self.component.operation().await;
+        (self.transform_fn)(&base_value).await
+    }
+}
+
+// 异步装饰器链
+pub struct AsyncDecoratorChain<T: Send + Sync + Clone> {
+    component: Box<dyn AsyncComponent<T> + Send + Sync>,
+    decorators: Vec<Box<dyn Fn(&T) -> Pin<Box<dyn Future<Output = T> + Send>> + Send + Sync>>,
+}
+
+impl<T: Send + Sync + Clone> AsyncDecoratorChain<T> {
+    pub fn new(component: Box<dyn AsyncComponent<T> + Send + Sync>) -> Self {
+        Self {
+            component,
+            decorators: Vec::new(),
+        }
+    }
+
+    pub fn add_decorator<F, Fut>(&mut self, decorator: F) 
+    where 
+        F: Fn(&T) -> Fut + Send + Sync + 'static,
+        Fut: Future<Output = T> + Send + 'static
+    {
+        self.decorators.push(Box::new(move |value| {
+            let fut = decorator(value);
+            Box::pin(fut)
+        }));
+    }
+}
+
+#[async_trait::async_trait]
+impl<T: Send + Sync + Clone> AsyncComponent<T> for AsyncDecoratorChain<T> {
+    async fn operation(&self) -> T {
+        let mut value = self.component.operation().await;
+        for decorator in &self.decorators {
+            value = decorator(&value).await;
+        }
+        value
+    }
 }
 ```
 
-### 6.2 日志系统
+## 5. 应用场景 (Application Scenarios)
+
+### 5.1 日志装饰器
 
 ```rust
 use std::time::{SystemTime, UNIX_EPOCH};
 
-/// 日志记录器 trait
-pub trait Logger {
-    fn log(&self, message: &str);
+// 日志装饰器
+pub struct LoggingDecorator<T: Component> {
+    component: T,
+    logger: Box<dyn Fn(&str) + Send + Sync>,
 }
 
-/// 基础日志记录器
-pub struct BaseLogger;
-
-impl Logger for BaseLogger {
-    fn log(&self, message: &str) {
-        println!("{}", message);
+impl<T: Component> LoggingDecorator<T> {
+    pub fn new(component: T) -> Self {
+        Self {
+            component,
+            logger: Box::new(|msg| println!("[LOG] {}: {}", 
+                SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs(), 
+                msg)),
+        }
     }
 }
 
-/// 时间戳装饰器
-pub struct TimestampLogger {
-    logger: Box<dyn Logger>,
-}
-
-impl TimestampLogger {
-    pub fn new(logger: Box<dyn Logger>) -> Self {
-        TimestampLogger { logger }
-    }
-}
-
-impl Logger for TimestampLogger {
-    fn log(&self, message: &str) {
-        let timestamp = SystemTime::now()
-            .duration_since(UNIX_EPOCH)
-            .unwrap()
-            .as_secs();
-        let timestamped_message = format!("[{}] {}", timestamp, message);
-        self.logger.log(&timestamped_message);
-    }
-}
-
-/// 级别装饰器
-pub struct LevelLogger {
-    logger: Box<dyn Logger>,
-    level: String,
-}
-
-impl LevelLogger {
-    pub fn new(logger: Box<dyn Logger>, level: String) -> Self {
-        LevelLogger { logger, level }
-    }
-}
-
-impl Logger for LevelLogger {
-    fn log(&self, message: &str) {
-        let leveled_message = format!("[{}] {}", self.level, message);
-        self.logger.log(&leveled_message);
-    }
-}
-
-/// 文件装饰器
-pub struct FileLogger {
-    logger: Box<dyn Logger>,
-    filename: String,
-}
-
-impl FileLogger {
-    pub fn new(logger: Box<dyn Logger>, filename: String) -> Self {
-        FileLogger { logger, filename }
-    }
-}
-
-impl Logger for FileLogger {
-    fn log(&self, message: &str) {
-        // 在实际实现中，这里会写入文件
-        let file_message = format!("[FILE: {}] {}", self.filename, message);
-        self.logger.log(&file_message);
+impl<T: Component> Component for LoggingDecorator<T> {
+    fn operation(&self) -> String {
+        let start_msg = "Operation started";
+        (self.logger)(start_msg);
+        
+        let result = self.component.operation();
+        
+        let end_msg = &format!("Operation completed: {}", result);
+        (self.logger)(end_msg);
+        
+        result
     }
 }
 ```
 
-### 6.3 HTTP中间件
+### 5.2 缓存装饰器
 
 ```rust
 use std::collections::HashMap;
+use std::sync::Mutex;
 
-/// HTTP请求
-pub struct HttpRequest {
-    method: String,
-    path: String,
-    headers: HashMap<String, String>,
-    body: String,
+// 缓存装饰器
+pub struct CachingDecorator<T: Component> {
+    component: T,
+    cache: Mutex<HashMap<String, String>>,
 }
 
-impl HttpRequest {
-    pub fn new(method: String, path: String) -> Self {
-        HttpRequest {
-            method,
-            path,
-            headers: HashMap::new(),
-            body: String::new(),
+impl<T: Component> CachingDecorator<T> {
+    pub fn new(component: T) -> Self {
+        Self {
+            component,
+            cache: Mutex::new(HashMap::new()),
         }
     }
-    
-    pub fn add_header(&mut self, key: String, value: String) {
-        self.headers.insert(key, value);
-    }
-    
-    pub fn set_body(&mut self, body: String) {
-        self.body = body;
-    }
 }
 
-/// HTTP响应
-pub struct HttpResponse {
-    status_code: u16,
-    headers: HashMap<String, String>,
-    body: String,
-}
-
-impl HttpResponse {
-    pub fn new(status_code: u16) -> Self {
-        HttpResponse {
-            status_code,
-            headers: HashMap::new(),
-            body: String::new(),
-        }
-    }
-    
-    pub fn add_header(&mut self, key: String, value: String) {
-        self.headers.insert(key, value);
-    }
-    
-    pub fn set_body(&mut self, body: String) {
-        self.body = body;
-    }
-}
-
-/// HTTP处理器 trait
-pub trait HttpHandler {
-    fn handle(&self, request: &HttpRequest) -> HttpResponse;
-}
-
-/// 基础处理器
-pub struct BaseHandler;
-
-impl HttpHandler for BaseHandler {
-    fn handle(&self, request: &HttpRequest) -> HttpResponse {
-        let mut response = HttpResponse::new(200);
-        response.set_body(format!("Handled: {} {}", request.method, request.path));
-        response
-    }
-}
-
-/// 认证装饰器
-pub struct AuthHandler {
-    handler: Box<dyn HttpHandler>,
-}
-
-impl AuthHandler {
-    pub fn new(handler: Box<dyn HttpHandler>) -> Self {
-        AuthHandler { handler }
-    }
-}
-
-impl HttpHandler for AuthHandler {
-    fn handle(&self, request: &HttpRequest) -> HttpResponse {
-        // 检查认证头
-        if let Some(auth_header) = request.headers.get("Authorization") {
-            if auth_header.starts_with("Bearer ") {
-                // 认证成功，继续处理
-                let mut response = self.handler.handle(request);
-                response.add_header("X-Auth-Status".to_string(), "authenticated".to_string());
-                return response;
+impl<T: Component> Component for CachingDecorator<T> {
+    fn operation(&self) -> String {
+        let cache_key = "operation_result";
+        
+        // 检查缓存
+        if let Ok(cache) = self.cache.lock() {
+            if let Some(cached_result) = cache.get(cache_key) {
+                return cached_result.clone();
             }
         }
         
-        // 认证失败
-        let mut response = HttpResponse::new(401);
-        response.set_body("Unauthorized".to_string());
-        response
-    }
-}
-
-/// 日志装饰器
-pub struct LoggingHandler {
-    handler: Box<dyn HttpHandler>,
-}
-
-impl LoggingHandler {
-    pub fn new(handler: Box<dyn HttpHandler>) -> Self {
-        LoggingHandler { handler }
-    }
-}
-
-impl HttpHandler for LoggingHandler {
-    fn handle(&self, request: &HttpRequest) -> HttpResponse {
-        println!("Request: {} {}", request.method, request.path);
+        // 执行操作
+        let result = self.component.operation();
         
-        let response = self.handler.handle(request);
-        
-        println!("Response: {}", response.status_code);
-        response
-    }
-}
-```
-
----
-
-## 7. 变体模式
-
-### 7.1 链式装饰器
-
-```rust
-/// 链式装饰器 trait
-pub trait ChainableDecorator {
-    fn chain<D: Decorator + 'static>(self, decorator: D) -> ChainedDecorator<Self, D>
-    where
-        Self: Sized + Decorator + 'static,
-    {
-        ChainedDecorator::new(self, decorator)
-    }
-}
-
-/// 装饰器 trait
-pub trait Decorator {
-    fn decorate(&self, input: String) -> String;
-}
-
-/// 链式装饰器实现
-pub struct ChainedDecorator<D1: Decorator, D2: Decorator> {
-    first: D1,
-    second: D2,
-}
-
-impl<D1: Decorator, D2: Decorator> ChainedDecorator<D1, D2> {
-    pub fn new(first: D1, second: D2) -> Self {
-        ChainedDecorator { first, second }
-    }
-}
-
-impl<D1: Decorator, D2: Decorator> Decorator for ChainedDecorator<D1, D2> {
-    fn decorate(&self, input: String) -> String {
-        let intermediate = self.first.decorate(input);
-        self.second.decorate(intermediate)
-    }
-}
-
-impl<D: Decorator> ChainableDecorator for D {}
-
-/// 具体装饰器
-pub struct UppercaseDecorator;
-
-impl Decorator for UppercaseDecorator {
-    fn decorate(&self, input: String) -> String {
-        input.to_uppercase()
-    }
-}
-
-pub struct ExclamationDecorator;
-
-impl Decorator for ExclamationDecorator {
-    fn decorate(&self, input: String) -> String {
-        format!("{}!", input)
-    }
-}
-
-/// 链式装饰器示例
-pub fn demonstrate_chainable_decorator() {
-    let decorator = UppercaseDecorator
-        .chain(ExclamationDecorator)
-        .chain(UppercaseDecorator);
-    
-    let result = decorator.decorate("hello world".to_string());
-    println!("Result: {}", result); // 输出: HELLO WORLD!
-}
-```
-
-### 7.2 条件装饰器
-
-```rust
-/// 条件装饰器
-pub struct ConditionalDecorator<F: Fn(&str) -> bool> {
-    condition: F,
-    decorator: Box<dyn Decorator>,
-}
-
-impl<F: Fn(&str) -> bool> ConditionalDecorator<F> {
-    pub fn new(condition: F, decorator: Box<dyn Decorator>) -> Self {
-        ConditionalDecorator { condition, decorator }
-    }
-}
-
-impl<F: Fn(&str) -> bool> Decorator for ConditionalDecorator<F> {
-    fn decorate(&self, input: String) -> String {
-        if (self.condition)(&input) {
-            self.decorator.decorate(input)
-        } else {
-            input
+        // 更新缓存
+        if let Ok(mut cache) = self.cache.lock() {
+            cache.insert(cache_key.to_string(), result.clone());
         }
+        
+        result
     }
-}
-
-/// 条件装饰器示例
-pub fn demonstrate_conditional_decorator() {
-    let condition = |input: &str| input.len() > 5;
-    let uppercase_decorator = Box::new(UppercaseDecorator);
-    
-    let conditional_decorator = ConditionalDecorator::new(condition, uppercase_decorator);
-    
-    println!("Short: {}", conditional_decorator.decorate("hi".to_string()));
-    println!("Long: {}", conditional_decorator.decorate("hello world".to_string()));
 }
 ```
 
-### 7.3 参数化装饰器
+### 5.3 性能监控装饰器
 
 ```rust
-/// 参数化装饰器
-pub struct ParameterizedDecorator {
-    prefix: String,
-    suffix: String,
+use std::time::Instant;
+
+// 性能监控装饰器
+pub struct PerformanceDecorator<T: Component> {
+    component: T,
+    metrics: Mutex<Vec<f64>>,
 }
 
-impl ParameterizedDecorator {
-    pub fn new(prefix: String, suffix: String) -> Self {
-        ParameterizedDecorator { prefix, suffix }
-    }
-}
-
-impl Decorator for ParameterizedDecorator {
-    fn decorate(&self, input: String) -> String {
-        format!("{}{}{}", self.prefix, input, self.suffix)
-    }
-}
-
-/// 参数化装饰器示例
-pub fn demonstrate_parameterized_decorator() {
-    let decorator = ParameterizedDecorator::new(
-        "[START] ".to_string(),
-        " [END]".to_string(),
-    );
-    
-    let result = decorator.decorate("hello".to_string());
-    println!("Result: {}", result); // 输出: [START] hello [END]
-}
-```
-
----
-
-## 8. 性能分析
-
-### 8.1 时间复杂度分析
-
-**定理8.1 (装饰器时间复杂度)**
-对于包含 $n$ 个装饰器的装饰器链，时间复杂度为：
-
-1. **操作时间**：$O(n)$ - 每个装饰器增加常数时间开销
-2. **创建时间**：$O(n)$ - 需要创建 $n$ 个装饰器对象
-3. **内存分配**：$O(n)$ - 每个装饰器需要内存分配
-
-**证明**：
-
-- 操作时间：每个装饰器调用被装饰对象，形成线性链
-- 创建时间：需要依次创建每个装饰器
-- 内存分配：每个装饰器都需要存储被装饰对象的引用
-
-### 8.2 空间复杂度分析
-
-**定理8.2 (装饰器空间复杂度)**
-装饰器模式的空间复杂度为：
-
-1. **存储空间**：$O(n)$ - 每个装饰器需要存储
-2. **调用栈**：$O(n)$ - 递归调用栈深度
-3. **对象引用**：$O(n)$ - 每个装饰器持有被装饰对象的引用
-
-**证明**：
-
-- 存储空间：每个装饰器都需要内存存储
-- 调用栈：递归调用深度等于装饰器链长度
-- 对象引用：每个装饰器都持有被装饰对象的引用
-
-### 8.3 内存优化
-
-```rust
-/// 内存优化的装饰器
-pub struct OptimizedDecorator {
-    component: Box<dyn Component>,
-    cache: Option<String>, // 操作结果缓存
-    decorator_id: u64,     // 装饰器唯一标识
-}
-
-impl OptimizedDecorator {
-    pub fn new(component: Box<dyn Component>, decorator_id: u64) -> Self {
-        OptimizedDecorator {
+impl<T: Component> PerformanceDecorator<T> {
+    pub fn new(component: T) -> Self {
+        Self {
             component,
-            cache: None,
-            decorator_id,
+            metrics: Mutex::new(Vec::new()),
         }
     }
     
-    pub fn clear_cache(&mut self) {
-        self.cache = None;
-    }
-    
-    pub fn get_decorator_id(&self) -> u64 {
-        self.decorator_id
+    pub fn get_average_time(&self) -> f64 {
+        if let Ok(metrics) = self.metrics.lock() {
+            if metrics.is_empty() {
+                return 0.0;
+            }
+            metrics.iter().sum::<f64>() / metrics.len() as f64
+        } else {
+            0.0
+        }
     }
 }
 
-impl Component for OptimizedDecorator {
+impl<T: Component> Component for PerformanceDecorator<T> {
     fn operation(&self) -> String {
-        // 使用缓存优化性能
-        if let Some(ref cached) = self.cache {
-            return cached.clone();
+        let start = Instant::now();
+        
+        let result = self.component.operation();
+        
+        let duration = start.elapsed().as_millis() as f64;
+        
+        if let Ok(mut metrics) = self.metrics.lock() {
+            metrics.push(duration);
         }
         
-        let base_result = self.component.operation();
-        let decorated_result = format!("装饰器 {}: {}", self.decorator_id, base_result);
-        
-        // 注意：这里需要可变引用来设置缓存，但trait方法不允许
-        // 实际实现中可以使用内部可变性
-        decorated_result
-    }
-}
-
-/// 装饰器池 - 重用装饰器实例
-pub struct DecoratorPool {
-    decorators: HashMap<u64, Box<dyn Component>>,
-}
-
-impl DecoratorPool {
-    pub fn new() -> Self {
-        DecoratorPool {
-            decorators: HashMap::new(),
-        }
-    }
-    
-    pub fn get_decorator(&self, id: u64) -> Option<&Box<dyn Component>> {
-        self.decorators.get(&id)
-    }
-    
-    pub fn add_decorator(&mut self, id: u64, decorator: Box<dyn Component>) {
-        self.decorators.insert(id, decorator);
-    }
-    
-    pub fn remove_decorator(&mut self, id: u64) {
-        self.decorators.remove(&id);
+        result
     }
 }
 ```
 
----
+### 5.4 加密装饰器
 
-## 9. 总结
+```rust
+// 加密装饰器
+pub struct EncryptionDecorator<T: Component> {
+    component: T,
+    key: String,
+}
 
-### 9.1 模式优势
+impl<T: Component> EncryptionDecorator<T> {
+    pub fn new(component: T, key: String) -> Self {
+        Self { component, key }
+    }
+    
+    fn encrypt(&self, data: &str) -> String {
+        // 简单的异或加密
+        data.chars()
+            .zip(self.key.chars().cycle())
+            .map(|(c, k)| (c as u8 ^ k as u8) as char)
+            .collect()
+    }
+    
+    fn decrypt(&self, data: &str) -> String {
+        self.encrypt(data) // 异或加密是对称的
+    }
+}
 
-1. **动态扩展**：可以在运行时动态添加或移除功能
-2. **单一职责**：每个装饰器只负责一个特定的功能
-3. **开闭原则**：对扩展开放，对修改封闭
-4. **组合优于继承**：通过组合而非继承来扩展功能
-5. **透明性**：装饰器与被装饰对象实现相同接口
+impl<T: Component> Component for EncryptionDecorator<T> {
+    fn operation(&self) -> String {
+        let result = self.component.operation();
+        self.encrypt(&result)
+    }
+}
+```
 
-### 9.2 模式劣势
+## 6. 变体模式 (Variant Patterns)
 
-1. **性能开销**：每个装饰器都会增加一定的性能开销
-2. **内存使用**：装饰器链会占用额外的内存空间
-3. **复杂性**：过多的装饰器可能增加代码复杂性
-4. **调试困难**：装饰器链可能使调试变得困难
+### 6.1 链式装饰器
 
-### 9.3 最佳实践
+```rust
+// 链式装饰器
+pub struct ChainDecorator<T: Component> {
+    component: T,
+    decorators: Vec<Box<dyn Fn(&str) -> String>>,
+}
 
-1. **合理设计接口**：确保装饰器与被装饰对象接口一致
-2. **控制装饰器数量**：避免过长的装饰器链
-3. **使用组合而非继承**：优先使用组合来扩展功能
-4. **保持单一职责**：每个装饰器只负责一个功能
-5. **文档化**：清晰记录装饰器的功能和用法
+impl<T: Component> ChainDecorator<T> {
+    pub fn new(component: T) -> Self {
+        Self {
+            component,
+            decorators: Vec::new(),
+        }
+    }
+    
+    pub fn add_decorator<F>(mut self, decorator: F) -> Self 
+    where 
+        F: Fn(&str) -> String + 'static 
+    {
+        self.decorators.push(Box::new(decorator));
+        self
+    }
+}
 
-### 9.4 形式化验证
+impl<T: Component> Component for ChainDecorator<T> {
+    fn operation(&self) -> String {
+        let mut result = self.component.operation();
+        for decorator in &self.decorators {
+            result = decorator(&result);
+        }
+        result
+    }
+}
+```
 
-通过形式化方法，我们证明了装饰器模式的：
+### 6.2 条件装饰器
 
-1. **正确性**：模式满足设计目标
-2. **完整性**：覆盖了所有必要的功能
-3. **一致性**：接口和行为保持一致
-4. **可扩展性**：支持新功能的动态添加
+```rust
+// 条件装饰器
+pub struct ConditionalDecorator<T: Component> {
+    component: T,
+    condition: Box<dyn Fn(&str) -> bool>,
+    decorator: Box<dyn Fn(&str) -> String>,
+}
 
-装饰器模式为动态扩展对象功能提供了强大而灵活的工具，通过形式化方法的应用，我们确保了其理论基础的正确性和实现的可靠性。
+impl<T: Component> ConditionalDecorator<T> {
+    pub fn new<C, D>(component: T, condition: C, decorator: D) -> Self 
+    where 
+        C: Fn(&str) -> bool + 'static,
+        D: Fn(&str) -> String + 'static
+    {
+        Self {
+            component,
+            condition: Box::new(condition),
+            decorator: Box::new(decorator),
+        }
+    }
+}
+
+impl<T: Component> Component for ConditionalDecorator<T> {
+    fn operation(&self) -> String {
+        let result = self.component.operation();
+        if (self.condition)(&result) {
+            (self.decorator)(&result)
+        } else {
+            result
+        }
+    }
+}
+```
+
+### 6.3 装饰器工厂
+
+```rust
+// 装饰器工厂
+pub struct DecoratorFactory;
+
+impl DecoratorFactory {
+    pub fn create_logging_decorator<T: Component>(component: T) -> LoggingDecorator<T> {
+        LoggingDecorator::new(component)
+    }
+    
+    pub fn create_caching_decorator<T: Component>(component: T) -> CachingDecorator<T> {
+        CachingDecorator::new(component)
+    }
+    
+    pub fn create_performance_decorator<T: Component>(component: T) -> PerformanceDecorator<T> {
+        PerformanceDecorator::new(component)
+    }
+    
+    pub fn create_encryption_decorator<T: Component>(component: T, key: String) -> EncryptionDecorator<T> {
+        EncryptionDecorator::new(component, key)
+    }
+}
+```
+
+## 7. 质量属性分析 (Quality Attributes Analysis)
+
+### 7.1 可维护性
+
+**定义7.1.1 (装饰器模式可维护性)**
+装饰器模式的可维护性定义为：
+$$\text{Maintainability}(D) = \frac{|O|}{|C|} \cdot \frac{1}{\text{Complexity}(D)}$$
+
+**定理7.1.1 (可维护性上界)**
+对于装饰器模式 $D$，可维护性满足：
+$$\text{Maintainability}(D) \leq \frac{|O|}{|I| + |W|} \cdot \frac{1}{\log(|D|)}$$
+
+### 7.2 可扩展性
+
+**定义7.2.1 (装饰器模式可扩展性)**
+装饰器模式的可扩展性定义为：
+$$\text{Extensibility}(D) = \frac{|W|}{|C|} \cdot \frac{1}{|R|}$$
+
+**定理7.2.1 (可扩展性下界)**
+对于装饰器模式 $D$，可扩展性满足：
+$$\text{Extensibility}(D) \geq \frac{|W|}{|I| + |W|} \cdot \frac{1}{|R|}$$
+
+### 7.3 性能
+
+**定义7.3.1 (装饰器模式性能)**
+装饰器模式的性能定义为：
+$$\text{Performance}(D) = \frac{1}{\text{Complexity}(D)}$$
+
+**定理7.3.1 (性能下界)**
+对于装饰器模式 $D$，性能满足：
+$$\text{Performance}(D) \geq \frac{1}{|W| \cdot \log(|W|)}$$
+
+## 8. 总结 (Summary)
+
+装饰器模式通过动态包装和组合，实现了功能的灵活扩展。其形式化模型建立了完整的数学理论基础，包括动态扩展理论、包装器理论和操作组合理论。Rust实现提供了基础、泛型和异步三种实现方式，支持日志记录、缓存、性能监控、加密等多种应用场景。
+
+装饰器模式的核心优势在于：
+1. **动态扩展**: 可以在运行时动态添加和移除功能
+2. **透明包装**: 装饰器对客户端透明，不影响原有接口
+3. **灵活组合**: 装饰器可以任意组合，形成功能链
+4. **单一职责**: 每个装饰器只负责一个特定功能
+
+通过形式化重构，装饰器模式的理论基础更加坚实，实现更加规范，为功能扩展提供了强有力的支持。
 
 ---
 

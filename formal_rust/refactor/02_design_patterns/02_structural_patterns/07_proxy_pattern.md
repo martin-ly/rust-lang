@@ -47,346 +47,309 @@
 
 ### 2.1 代理模式五元组
 
-**定义2.1 (代理模式五元组)**
-设 $P = (N, I, S, R, C)$ 为代理模式，其中：
+设代理模式为五元组 $P = (S, P, I, O, C)$，其中：
 
-- $N = \{\text{Subject}, \text{RealSubject}, \text{Proxy}, \text{Client}\}$
-- $I = \{\text{访问控制}, \text{延迟加载}, \text{缓存优化}, \text{远程访问}\}$
-- $S = \{S_{subject}, S_{real}, S_{proxy}, S_{client}\}$
-- $R = \{R_{access}, R_{control}, R_{delegate}\}$
-- $C = \{C_{interface}, C_{transparency}, C_{performance}\}$
+- $S$ 是主体集合 (Subject)
+- $P$ 是代理集合 (Proxy)
+- $I$ 是接口集合 (Interface)
+- $O$ 是操作集合 (Operations)
+- $C$ 是控制策略集合 (Control Strategies)
 
-其中：
+### 2.2 数学关系定义
 
-- $S_{subject}$ 是主题接口集合
-- $S_{real}$ 是真实主题集合
-- $S_{proxy}$ 是代理对象集合
-- $S_{client}$ 是客户端集合
-- $R_{access}$ 是访问关系
-- $R_{control}$ 是控制关系
-- $R_{delegate}$ 是委托关系
-- $C_{interface}$ 是接口一致性约束
-- $C_{transparency}$ 是透明性约束
-- $C_{performance}$ 是性能约束
+**定义1.2.1 (代理关系)**
+对于主体 $s \in S$ 和代理 $p \in P$，定义代理关系 $R \subseteq S \times P$：
+- $(s, p) \in R$ 表示代理 $p$ 代表主体 $s$
 
-### 2.2 访问控制理论
+**定义1.2.2 (接口映射)**
+对于接口 $i \in I$，定义接口映射函数 $M: I \rightarrow (S \cup P)$：
+- $M(i) = x$ 表示接口 $i$ 由 $x$ 实现
 
-**定义2.2 (访问控制)**
-对于代理 $p$ 和真实主题 $r$，访问控制定义为：
-
-$$p.control(r, request) = \begin{cases}
-\text{allow} & \text{if } p.validate(request) \\
-\text{deny} & \text{otherwise}
-\end{cases}$$
-
-其中 $p.validate(request)$ 是访问验证函数。
+**定义1.2.3 (操作拦截)**
+对于操作 $o \in O$ 和代理 $p \in P$，定义拦截函数 $I: P \times O \rightarrow O$：
+- $I(p, o) = p.pre(o) \circ o \circ p.post(o)$
 
 ## 3. 数学理论
 
-### 3.1 代理关系理论
+### 3.1 代理控制理论
 
-**定义3.1 (代理关系)**
-设 $P$ 为代理集合，$R$ 为真实主题集合，则代理关系定义为：
+**公理2.1.1 (代理控制公理)**
+1. **接口一致性**: 代理与主体实现相同的接口
+2. **透明性**: 客户端无法区分代理和主体
+3. **控制性**: 代理可以控制对主体的访问
 
-$$R_{proxy} = \{(p, r) \in P \times R | p.delegates(r)\}$$
+**定理2.1.1 (代理控制正确性)**
+如果代理模式 $P$ 满足代理控制公理，则：
+- 代理可以透明地替代主体
+- 代理可以控制访问策略
+- 代理可以添加额外功能
 
-**性质3.1 (代理传递性)**
-代理关系具有传递性：
-$$(p_1, r_1) \in R_{proxy} \land (p_2, r_2) \in R_{proxy} \Rightarrow (p_1, p_2) \in R_{proxy}$$
+**证明**:
+1. 由接口一致性公理，代理实现相同接口
+2. 由透明性公理，客户端无法区分
+3. 由控制性公理，代理可以控制访问
 
 ### 3.2 访问控制理论
 
-**定义3.2 (访问控制矩阵)**
-设 $U$ 为用户集合，$O$ 为对象集合，$A$ 为操作集合，则访问控制矩阵为：
+**公理2.2.1 (访问控制公理)**
+对于代理 $p \in P$ 和主体 $s \in S$：
+- 代理可以验证访问权限
+- 代理可以记录访问日志
+- 代理可以限制访问频率
 
-$$ACM: U \times O \times A \rightarrow \{\text{allow}, \text{deny}\}$$
-
-**定理3.1 (访问控制一致性)**
-如果代理 $p$ 正确实现访问控制，则：
-
-$$\forall u \in U, o \in O, a \in A: p.control(u, o, a) = ACM(u, o, a)$$
+**定理2.2.1 (访问控制正确性)**
+如果代理 $p$ 满足访问控制公理，则：
+- 访问控制是安全的
+- 访问日志是完整的
+- 访问限制是有效的
 
 ### 3.3 延迟加载理论
 
-**定义3.3 (延迟加载函数)**
-延迟加载函数定义为：
+**定义2.3.1 (延迟加载)**
+对于主体 $s \in S$，延迟加载函数 $L: S \rightarrow S$ 定义为：
+- $L(s) = s'$ 其中 $s'$ 是延迟加载的主体
 
-$$L_{lazy}(request) = \begin{cases}
-\text{load} & \text{if } \text{not loaded} \\
-\text{use} & \text{if } \text{already loaded}
-\end{cases}$$
-
-**定理3.2 (延迟加载优化)**
-延迟加载的时间复杂度为：
-
-$$\text{TimeComplexity}_{lazy} = O(1) + \text{loadTime} \cdot \text{loadProbability}$$
+**定理2.3.1 (延迟加载正确性)**
+对于任意主体 $s \in S$：
+- 延迟加载是透明的
+- 延迟加载是高效的
+- 延迟加载是安全的
 
 ## 4. 核心定理
 
-### 4.1 代理正确性定理
+### 4.1 代理模式正确性定理
 
-**定理4.1 (代理正确性)**
-如果代理 $p$ 正确实现，则对于任意请求 $request$：
+**定理3.1.1 (接口一致性)**
+对于代理模式 $P = (S, P, I, O, C)$，如果满足：
+1. 代理与主体实现相同接口
+2. 代理可以透明替代主体
+3. 代理可以控制访问策略
 
-$$p.request(request) \equiv r.request(request)$$
+则代理模式接口一致。
 
-其中 $r$ 是代理的真实主题。
+**证明**:
+1. 由定义1.2.1，代理关系定义正确
+2. 由公理2.1.1，代理控制公理成立
+3. 由定义1.2.2，接口映射定义正确
 
-**证明**：
-1. 根据代理定义，代理必须实现与真实主题相同的接口
-2. 代理将请求委托给真实主题处理
-3. 因此代理的请求结果与真实主题的请求结果等价
+### 4.2 访问控制定理
 
-### 4.2 访问控制安全性定理
+**定理3.2.1 (访问控制完整性)**
+对于代理 $p \in P$ 和操作 $o \in O$：
+- 代理可以验证访问权限
+- 代理可以记录访问日志
+- 代理可以限制访问频率
 
-**定理4.2 (访问控制安全性)**
-如果代理 $p$ 实现访问控制，则：
+**证明**:
+1. 由公理2.2.1，访问控制公理成立
+2. 由定义1.2.3，操作拦截定义正确
+3. 因此访问控制完整
 
-$$\forall request: p.control(request) = \text{deny} \Rightarrow \text{no access to real subject}$$
+### 4.3 性能优化定理
 
-**证明**：
-1. 当代理拒绝访问时，请求不会传递给真实主题
-2. 因此真实主题不会收到被拒绝的请求
-3. 访问控制安全性得到保证
+**定理3.3.1 (代理性能)**
+对于代理模式 $P$ 中的操作：
+- 缓存命中：$O(1)$ 访问时间
+- 缓存未命中：$O(1)$ 代理开销 + 主体操作时间
+- 内存使用：$O(|P| + |S|)$
 
-### 4.3 延迟加载正确性定理
+**证明**:
+1. 缓存命中是直接访问
+2. 缓存未命中需要代理处理
+3. 内存使用包括代理和主体
 
-**定理4.3 (延迟加载正确性)**
-对于延迟加载代理 $p$：
+### 4.4 安全性定理
 
-$$p.request(request) = \begin{cases}
-\text{load then request} & \text{if } \text{not loaded} \\
-\text{direct request} & \text{if } \text{already loaded}
-\end{cases}$$
+**定理3.4.1 (代理安全性)**
+对于代理模式 $P$：
+- 代理可以验证访问权限
+- 代理可以记录所有访问
+- 代理可以防止未授权访问
 
-**证明**：
-1. 如果真实主题未加载，代理先加载再处理请求
-2. 如果真实主题已加载，代理直接处理请求
-3. 延迟加载的正确性得到保证
-
-### 4.4 代理性能定理
-
-**定理4.4 (代理性能)**
-代理模式的性能满足：
-
-$$\text{Performance}_{proxy} = \text{Performance}_{real} + \text{Overhead}_{proxy}$$
-
-其中 $\text{Overhead}_{proxy}$ 是代理的开销。
-
-**证明**：
-1. 代理需要额外的处理步骤（访问控制、缓存等）
-2. 这些步骤增加了处理时间
-3. 因此代理性能 = 真实主题性能 + 代理开销
+**证明**:
+1. 由访问控制公理，权限验证成立
+2. 由操作拦截定义，访问记录成立
+3. 由控制策略，安全防护成立
 
 ## 5. Rust实现
 
 ### 5.1 基础实现
 
 ```rust
-// 主题接口
-trait Subject {
-    fn request(&self, data: &str) -> String;
+// 主体接口
+pub trait Subject {
+    fn request(&self) -> String;
 }
 
-// 真实主题
-struct RealSubject;
+// 具体主体
+pub struct RealSubject {
+    name: String,
+}
 
 impl RealSubject {
-    fn new() -> Self {
-        RealSubject
+    pub fn new(name: String) -> Self {
+        Self { name }
     }
 }
 
 impl Subject for RealSubject {
-    fn request(&self, data: &str) -> String {
-        println!("RealSubject: Processing request with data: {}", data);
-        format!("Processed: {}", data)
+    fn request(&self) -> String {
+        format!("RealSubject[{}]: Handling request", self.name)
     }
 }
 
 // 代理
-struct Proxy {
+pub struct Proxy {
     real_subject: Option<RealSubject>,
+    name: String,
 }
 
 impl Proxy {
-    fn new() -> Self {
-        Proxy {
+    pub fn new(name: String) -> Self {
+        Self {
             real_subject: None,
+            name,
         }
     }
-
+    
     fn lazy_init(&mut self) {
         if self.real_subject.is_none() {
-            println!("Proxy: Initializing RealSubject");
-            self.real_subject = Some(RealSubject::new());
+            self.real_subject = Some(RealSubject::new(self.name.clone()));
         }
     }
 }
 
 impl Subject for Proxy {
-    fn request(&self, data: &str) -> String {
-        // 延迟初始化
-        let mut proxy = Proxy {
-            real_subject: self.real_subject.clone(),
-        };
-        proxy.lazy_init();
+    fn request(&self) -> String {
+        // 这里需要可变引用，但trait方法不允许
+        // 实际实现中可以使用内部可变性
+        format!("Proxy[{}]: Request intercepted", self.name)
+    }
+}
 
-        // 访问控制
-        if !self.check_access(data) {
-            return "Access denied".to_string();
+// 使用内部可变性的代理
+use std::cell::RefCell;
+
+pub struct SmartProxy {
+    real_subject: RefCell<Option<RealSubject>>,
+    name: String,
+}
+
+impl SmartProxy {
+    pub fn new(name: String) -> Self {
+        Self {
+            real_subject: RefCell::new(None),
+            name,
         }
+    }
+    
+    fn lazy_init(&self) {
+        let mut subject = self.real_subject.borrow_mut();
+        if subject.is_none() {
+            *subject = Some(RealSubject::new(self.name.clone()));
+        }
+    }
+}
 
-        // 委托给真实主题
-        if let Some(ref real_subject) = proxy.real_subject {
-            real_subject.request(data)
+impl Subject for SmartProxy {
+    fn request(&self) -> String {
+        self.lazy_init();
+        
+        let subject = self.real_subject.borrow();
+        if let Some(ref real_subject) = *subject {
+            format!("SmartProxy[{}]: {}", self.name, real_subject.request())
         } else {
-            "Error: RealSubject not initialized".to_string()
+            format!("SmartProxy[{}]: No subject available", self.name)
         }
     }
-}
-
-impl Proxy {
-    fn check_access(&self, data: &str) -> bool {
-        // 简单的访问控制逻辑
-        !data.contains("forbidden")
-    }
-}
-
-// 客户端
-struct Client;
-
-impl Client {
-    fn new() -> Self {
-        Client
-    }
-
-    fn execute_request(&self, subject: &dyn Subject, data: &str) {
-        let result = subject.request(data);
-        println!("Client: Received result: {}", result);
-    }
-}
-
-fn main() {
-    let client = Client::new();
-    let mut proxy = Proxy::new();
-
-    // 使用代理
-    client.execute_request(&proxy, "Hello, World!");
-    client.execute_request(&proxy, "forbidden content");
-
-    // 直接使用真实主题
-    let real_subject = RealSubject::new();
-    client.execute_request(&real_subject, "Direct access");
 }
 ```
 
 ### 5.2 泛型实现
 
 ```rust
-use std::collections::HashMap;
-use std::sync::{Arc, RwLock};
+use std::cell::RefCell;
+use std::fmt::Display;
 
-// 泛型主题接口
-trait GenericSubject<T, R> {
-    fn request(&self, data: T) -> R;
+// 泛型主体接口
+pub trait GenericSubject<T: Display + Clone> {
+    fn request(&self, data: T) -> String;
 }
 
-// 泛型真实主题
-struct GenericRealSubject<T, R> {
-    _phantom: std::marker::PhantomData<(T, R)>,
+// 泛型具体主体
+pub struct GenericRealSubject<T: Display + Clone> {
+    name: String,
+    _phantom: std::marker::PhantomData<T>,
 }
 
-impl<T, R> GenericRealSubject<T, R> {
-    fn new() -> Self {
-        GenericRealSubject {
+impl<T: Display + Clone> GenericRealSubject<T> {
+    pub fn new(name: String) -> Self {
+        Self {
+            name,
             _phantom: std::marker::PhantomData,
         }
     }
 }
 
-impl<T, R> GenericSubject<T, R> for GenericRealSubject<T, R>
-where
-    T: Clone + std::fmt::Display,
-    R: From<String>,
-{
-    fn request(&self, data: T) -> R {
-        println!("GenericRealSubject: Processing {}", data);
-        format!("Processed: {}", data).into()
+impl<T: Display + Clone> GenericSubject<T> for GenericRealSubject<T> {
+    fn request(&self, data: T) -> String {
+        format!("GenericRealSubject[{}]: Handling request with data: {}", 
+                self.name, data)
     }
 }
 
 // 泛型代理
-struct GenericProxy<T, R> {
-    real_subject: Option<Arc<dyn GenericSubject<T, R>>>,
-    cache: Arc<RwLock<HashMap<String, R>>>,
+pub struct GenericProxy<T: Display + Clone> {
+    real_subject: RefCell<Option<GenericRealSubject<T>>>,
+    name: String,
+    cache: RefCell<std::collections::HashMap<T, String>>,
 }
 
-impl<T, R> GenericProxy<T, R>
-where
-    T: Clone + std::fmt::Display + std::hash::Hash + Eq,
-    R: Clone,
-{
-    fn new() -> Self {
-        GenericProxy {
-            real_subject: None,
-            cache: Arc::new(RwLock::new(HashMap::new())),
+impl<T: Display + Clone + std::hash::Hash + Eq> GenericProxy<T> {
+    pub fn new(name: String) -> Self {
+        Self {
+            real_subject: RefCell::new(None),
+            name,
+            cache: RefCell::new(std::collections::HashMap::new()),
         }
     }
-
-    fn lazy_init(&mut self) {
-        if self.real_subject.is_none() {
-            self.real_subject = Some(Arc::new(GenericRealSubject::new()));
+    
+    fn lazy_init(&self) {
+        let mut subject = self.real_subject.borrow_mut();
+        if subject.is_none() {
+            *subject = Some(GenericRealSubject::new(self.name.clone()));
         }
-    }
-
-    fn check_access(&self, data: &T) -> bool {
-        // 访问控制逻辑
-        true
     }
 }
 
-impl<T, R> GenericSubject<T, R> for GenericProxy<T, R>
-where
-    T: Clone + std::fmt::Display + std::hash::Hash + Eq,
-    R: Clone,
-{
-    fn request(&self, data: T) -> R {
+impl<T: Display + Clone + std::hash::Hash + Eq> GenericSubject<T> for GenericProxy<T> {
+    fn request(&self, data: T) -> String {
         // 检查缓存
-        let cache_key = format!("{:?}", data);
         {
-            let cache = self.cache.read().unwrap();
-            if let Some(cached_result) = cache.get(&cache_key) {
-                println!("Proxy: Returning cached result");
-                return cached_result.clone();
+            let cache = self.cache.borrow();
+            if let Some(cached_result) = cache.get(&data) {
+                return format!("GenericProxy[{}]: Cached result: {}", 
+                              self.name, cached_result);
             }
         }
-
-        // 访问控制
-        if !self.check_access(&data) {
-            panic!("Access denied");
-        }
-
+        
         // 延迟初始化
-        let mut proxy = GenericProxy {
-            real_subject: self.real_subject.clone(),
-            cache: Arc::clone(&self.cache),
-        };
-        proxy.lazy_init();
-
-        // 委托给真实主题
-        if let Some(ref real_subject) = proxy.real_subject {
+        self.lazy_init();
+        
+        // 执行请求
+        let subject = self.real_subject.borrow();
+        if let Some(ref real_subject) = *subject {
             let result = real_subject.request(data.clone());
-
+            
             // 缓存结果
             {
-                let mut cache = self.cache.write().unwrap();
-                cache.insert(cache_key, result.clone());
+                let mut cache = self.cache.borrow_mut();
+                cache.insert(data, result.clone());
             }
-
-            result
+            
+            format!("GenericProxy[{}]: {}", self.name, result)
         } else {
-            panic!("RealSubject not initialized");
+            format!("GenericProxy[{}]: No subject available", self.name)
         }
     }
 }
@@ -395,52 +358,106 @@ where
 ### 5.3 虚拟代理实现
 
 ```rust
+use std::path::PathBuf;
 use std::sync::{Arc, Mutex};
 
-// 虚拟代理 - 用于延迟加载大对象
-struct VirtualProxy {
-    real_subject: Arc<Mutex<Option<Arc<HeavyObject>>>>,
+// 图片接口
+trait Image {
+    fn display(&self);
+    fn get_size(&self) -> (u32, u32);
 }
 
-struct HeavyObject {
-    data: Vec<u8>,
+// 真实图片
+struct RealImage {
+    filename: String,
+    width: u32,
+    height: u32,
+    loaded: bool,
 }
 
-impl HeavyObject {
-    fn new(size: usize) -> Self {
-        println!("Creating heavy object with size: {}", size);
-        HeavyObject {
-            data: vec![0; size],
+impl RealImage {
+    fn new(filename: String) -> Self {
+        println!("Loading image: {}", filename);
+        // 模拟图片加载
+        RealImage {
+            filename,
+            width: 1920,
+            height: 1080,
+            loaded: true,
+        }
+    }
+}
+
+impl Image for RealImage {
+    fn display(&self) {
+        println!("Displaying image: {} ({}x{})", self.filename, self.width, self.height);
+    }
+
+    fn get_size(&self) -> (u32, u32) {
+        (self.width, self.height)
+    }
+}
+
+// 图片代理
+struct ImageProxy {
+    filename: String,
+    real_image: Arc<Mutex<Option<RealImage>>>,
+}
+
+impl ImageProxy {
+    fn new(filename: String) -> Self {
+        ImageProxy {
+            filename,
+            real_image: Arc::new(Mutex::new(None)),
         }
     }
 
-    fn process(&self, input: &str) -> String {
-        println!("HeavyObject: Processing '{}' with {} bytes", input, self.data.len());
-        format!("Processed by heavy object: {}", input)
-    }
-}
-
-impl VirtualProxy {
-    fn new() -> Self {
-        VirtualProxy {
-            real_subject: Arc::new(Mutex::new(None)),
-        }
-    }
-
-    fn get_real_subject(&self) -> Arc<HeavyObject> {
-        let mut guard = self.real_subject.lock().unwrap();
+    fn load_image(&self) {
+        let mut guard = self.real_image.lock().unwrap();
         if guard.is_none() {
-            println!("VirtualProxy: Creating heavy object on demand");
-            *guard = Some(Arc::new(HeavyObject::new(1_000_000))); // 1MB
+            *guard = Some(RealImage::new(self.filename.clone()));
         }
-        Arc::clone(guard.as_ref().unwrap())
     }
 }
 
-impl Subject for VirtualProxy {
-    fn request(&self, data: &str) -> String {
-        let real_subject = self.get_real_subject();
-        real_subject.process(data)
+impl Image for ImageProxy {
+    fn display(&self) {
+        self.load_image();
+        if let Some(ref image) = *self.real_image.lock().unwrap() {
+            image.display();
+        }
+    }
+
+    fn get_size(&self) -> (u32, u32) {
+        self.load_image();
+        if let Some(ref image) = *self.real_image.lock().unwrap() {
+            image.get_size()
+        } else {
+            (0, 0)
+        }
+    }
+}
+
+// 图片查看器
+struct ImageViewer {
+    images: Vec<Arc<dyn Image>>,
+}
+
+impl ImageViewer {
+    fn new() -> Self {
+        ImageViewer {
+            images: Vec::new(),
+        }
+    }
+
+    fn add_image(&mut self, image: Arc<dyn Image>) {
+        self.images.push(image);
+    }
+
+    fn display_all(&self) {
+        for image in &self.images {
+            image.display();
+        }
     }
 }
 ```
