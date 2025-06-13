@@ -116,6 +116,23 @@
   - 核心定理证明
   - Rust实现
 
+#### 7. 分布式系统理论重构 🔄
+
+- [x] 12_distributed_systems_theory/ - 目录创建
+- [x] 01_consistency_theory_formalization.md ✅
+  - CAP定理形式化
+  - 一致性模型理论
+  - 共识算法理论
+  - 核心定理证明
+  - Rust实现
+- [x] 02_fault_tolerance_formalization.md ✅
+  - 故障模型理论
+  - 恢复策略理论
+  - 可靠性保证理论
+  - 核心定理证明
+  - Rust实现
+- [ ] 负载均衡理论形式化
+
 ### 下一步计划
 
 #### 优先级1: 扩展应用领域
