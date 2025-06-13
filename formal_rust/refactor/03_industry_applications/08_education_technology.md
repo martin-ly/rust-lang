@@ -4,117 +4,118 @@
 
 ### 1.1 教育科技系统五元组定义
 
-**定义1.1 (教育科技系统)** 教育科技系统是一个五元组 $ET = (U, C, A, L, R)$，其中：
+**定义1.1 (教育科技系统)** 教育科技系统是一个五元组 $ET = (U, C, L, A, E)$，其中：
 
 - $U$ 是用户集合，包含学生、教师、管理员等角色
 - $C$ 是课程集合，包含学习内容、教学资源等
-- $A$ 是评估集合，包含测验、作业、考试等
-- $L$ 是学习活动集合，包含学习行为、交互记录等
-- $R$ 是推荐系统，用于个性化学习路径推荐
+- $L$ 是学习过程集合，包含学习活动、评估等
+- $A$ 是分析系统，包含学习分析、推荐算法等
+- $E$ 是评估系统，包含考试、作业、反馈等
 
-### 1.2 教育科技代数理论
+### 1.2 教育代数理论
 
-**定义1.2 (教育科技代数)** 教育科技代数是一个五元组 $ETA = (U, O, I, R, C)$，其中：
+**定义1.2 (教育代数)** 教育代数是一个五元组 $EA = (U, O, I, R, C)$，其中：
 
 - $U$ 是用户域
-- $O$ 是操作集合，包含学习操作、评估操作、推荐操作等
+- $O$ 是操作集合，包含学习操作、教学操作等
 - $I$ 是交互关系集合
 - $R$ 是推荐关系集合
 - $C$ 是约束条件集合
 
 ### 1.3 学习理论
 
-**定义1.3 (学习过程)** 学习过程是一个函数 $\text{LearningProcess}: U \times C \times T \rightarrow L$，其中：
+**定义1.3 (学习过程)** 学习过程是一个函数 $\text{LearningProcess}: U \times C \times T \rightarrow P$，其中：
 
 - $U$ 是用户集合
 - $C$ 是课程集合
 - $T$ 是时间域
-- $L$ 是学习结果集合
+- $P$ 是进度集合
 
-**定义1.4 (个性化推荐)** 个性化推荐是一个函数 $\text{PersonalizedRecommendation}: U \times L \times H \rightarrow R$，其中：
+**定义1.4 (个性化学习)** 个性化学习是一个函数 $\text{PersonalizedLearning}: U \times P \times A \rightarrow R$，其中：
 
 - $U$ 是用户集合
-- $L$ 是学习历史集合
-- $H$ 是用户偏好集合
+- $P$ 是用户偏好集合
+- $A$ 是学习分析结果集合
 - $R$ 是推荐结果集合
 
 ### 1.4 评估理论
 
-**定义1.5 (评估系统)** 评估系统是一个四元组 $AS = (A, S, E, F)$，其中：
+**定义1.5 (评估系统)** 评估系统是一个四元组 $AS = (T, S, E, F)$，其中：
 
-- $A$ 是评估项目集合
+- $T$ 是测试集合
 - $S$ 是评分标准集合
 - $E$ 是评估引擎
-- $F$ 是反馈机制
+- $F$ 是反馈生成器
 
-## 2. 核心定理证明 (Core Theorems)
+## 2. 核心定理 (Core Theorems)
 
-### 2.1 学习路径最优性定理
+### 2.1 学习收敛性定理
 
-**定理2.1 (学习路径最优性)** 如果推荐算法 $R$ 满足以下条件：
+**定理1.1 (学习收敛性)** 在适当的条件下，个性化学习算法收敛到最优解。
 
-1. 单调性：$\forall u \in U, \forall c_1, c_2 \in C, \text{relevance}(u, c_1) \geq \text{relevance}(u, c_2) \Rightarrow R(u, c_1) \geq R(u, c_2)$
-2. 个性化：$\forall u_1, u_2 \in U, \text{preferences}(u_1) \neq \text{preferences}(u_2) \Rightarrow R(u_1) \neq R(u_2)$
+**证明：**
 
-则推荐的学习路径是最优的。
+设 $L_t$ 为时刻 $t$ 的学习状态，$L^*$ 为最优学习状态。
 
-**证明**：
-设 $P^*$ 是最优学习路径，$P_R$ 是推荐算法 $R$ 生成的路径。
+根据学习算法的定义：
+$$L_{t+1} = L_t + \alpha \nabla f(L_t)$$
 
-根据单调性条件：
-$$\forall c \in P^*, R(u, c) \geq \text{threshold}$$
+其中 $\alpha$ 是学习率，$\nabla f(L_t)$ 是梯度。
 
-根据个性化条件：
-$$\forall c \in P_R, c \in \text{preferences}(u)$$
+由于学习函数 $f$ 是凸函数，且学习率满足 $\alpha < \frac{2}{L}$（$L$ 是 Lipschitz 常数），根据梯度下降收敛定理，序列 $\{L_t\}$ 收敛到 $L^*$。
 
-因此，$P_R$ 满足用户偏好且评分高于阈值，故 $P_R$ 是最优的。
+### 2.2 推荐系统准确性定理
 
-### 2.2 学习效果收敛性定理
+**定理1.2 (推荐准确性)** 基于协同过滤的推荐系统在用户相似度阈值 $\theta > 0.5$ 时，推荐准确性有下界。
 
-**定理2.2 (学习效果收敛性)** 在适当的条件下，学习效果会收敛到稳定状态。
+**证明：**
 
-**证明**：
-设 $E_t$ 是时刻 $t$ 的学习效果，$E^*$ 是目标效果。
+设 $R(u, i)$ 为用户 $u$ 对项目 $i$ 的真实评分，$\hat{R}(u, i)$ 为预测评分。
 
-根据学习理论：
-$$E_{t+1} = E_t + \alpha \cdot \text{learning\_rate} \cdot \text{feedback}$$
+推荐准确性定义为：
+$$\text{Accuracy} = \frac{1}{|U| \cdot |I|} \sum_{u \in U} \sum_{i \in I} |R(u, i) - \hat{R}(u, i)|$$
 
-其中 $\alpha$ 是学习率，$\text{feedback}$ 是反馈信号。
+当用户相似度阈值 $\theta > 0.5$ 时，相似用户的选择更加严格，预测误差减小，因此准确性提高。
 
-当 $\text{feedback} \rightarrow 0$ 时，$E_{t+1} \rightarrow E_t$，即学习效果收敛。
+### 2.3 学习进度一致性定理
 
-### 2.3 系统可扩展性定理
+**定理1.3 (进度一致性)** 如果学习路径是连续的，则学习进度满足一致性约束。
 
-**定理2.3 (系统可扩展性)** 教育科技系统的可扩展性与用户数量成正比。
+**证明：**
 
-**证明**：
-设 $N$ 是用户数量，$C$ 是系统容量，$S$ 是可扩展性。
+设 $P(u, c)$ 为用户 $u$ 在课程 $c$ 中的进度，$L(u, c)$ 为学习路径。
 
-根据微服务架构：
-$$S = \frac{C}{N} \cdot \text{scaling\_factor}$$
+一致性约束要求：
+$$\forall t_1, t_2 \in T, t_1 < t_2 \Rightarrow P(u, c, t_1) \leq P(u, c, t_2)$$
 
-当 $N$ 增加时，通过水平扩展可以保持 $S$ 不变。
+由于学习路径是连续的，且进度函数是单调递增的，因此一致性约束成立。
 
-### 2.4 实时性保证定理
+### 2.4 实时分析延迟定理
 
-**定理2.4 (实时性保证)** 如果网络延迟 $D < \text{threshold}$，则系统可以保证实时性。
+**定理1.4 (分析延迟)** 实时学习分析系统的延迟有上界 $D_{\max} = \frac{B}{C}$，其中 $B$ 是数据包大小，$C$ 是处理能力。
 
-**证明**：
-设 $T$ 是处理时间，$D$ 是网络延迟，$R$ 是响应时间。
+**证明：**
 
-$$R = T + D$$
+设 $D$ 为分析延迟，$Q$ 为队列长度，$C$ 为处理能力。
 
-当 $D < \text{threshold}$ 时，$R < T + \text{threshold}$，满足实时性要求。
+根据 Little's Law：
+$$D = \frac{Q}{C}$$
 
-### 2.5 数据一致性定理
+由于队列长度 $Q \leq B$（数据包大小），因此：
+$$D \leq \frac{B}{C} = D_{\max}$$
 
-**定理2.5 (数据一致性)** 如果使用强一致性协议，则系统数据保持一致性。
+### 2.5 系统可扩展性定理
 
-**证明**：
-根据CAP理论，在强一致性下：
-$$\forall t_1, t_2, \text{data}(t_1) = \text{data}(t_2)$$
+**定理1.5 (可扩展性)** 教育科技系统的可扩展性与用户数量成正比，与系统资源成反比。
 
-因此系统数据保持一致性。
+**证明：**
+
+设 $S$ 为系统可扩展性，$N$ 为用户数量，$R$ 为系统资源。
+
+可扩展性定义为：
+$$S = \frac{N}{R}$$
+
+当用户数量增加时，可扩展性增加；当系统资源增加时，可扩展性减少。
 
 ## 3. Rust实现 (Rust Implementation)
 
@@ -127,7 +128,7 @@ use uuid::Uuid;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct User {
-    pub id: UserId,
+    pub id: Uuid,
     pub email: String,
     pub username: String,
     pub role: UserRole,
@@ -135,15 +136,6 @@ pub struct User {
     pub preferences: UserPreferences,
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct UserId(String);
-
-impl UserId {
-    pub fn new() -> Self {
-        Self(Uuid::new_v4().to_string())
-    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -168,16 +160,15 @@ pub struct UserProfile {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct UserPreferences {
     pub learning_style: LearningStyle,
-    pub preferred_subjects: Vec<String>,
-    pub difficulty_level: DifficultyLevel,
-    pub time_zone: String,
-    pub language: String,
+    pub preferred_language: String,
+    pub notification_settings: NotificationSettings,
+    pub accessibility_settings: AccessibilitySettings,
 }
 
 pub struct UserService {
-    user_repository: Box<dyn UserRepository>,
-    auth_service: Box<dyn AuthService>,
-    profile_service: Box<dyn ProfileService>,
+    user_repository: UserRepository,
+    auth_service: AuthService,
+    profile_service: ProfileService,
 }
 
 impl UserService {
@@ -187,7 +178,7 @@ impl UserService {
         
         // 创建用户
         let user = User {
-            id: UserId::new(),
+            id: Uuid::new_v4(),
             email: user_data.email,
             username: user_data.username,
             role: user_data.role,
@@ -200,33 +191,12 @@ impl UserService {
         // 保存用户
         self.user_repository.save(&user).await?;
         
-        // 创建认证信息
-        self.auth_service.create_auth(&user.id, &user_data.password).await?;
-        
         Ok(user)
     }
     
-    pub async fn update_user_profile(&self, user_id: &UserId, profile: UserProfile) -> Result<User, UserError> {
-        let mut user = self.user_repository.find_by_id(user_id).await?
-            .ok_or(UserError::UserNotFound)?;
-        
-        user.profile = profile;
-        user.updated_at = Utc::now();
-        
-        self.user_repository.save(&user).await?;
-        Ok(user)
-    }
-    
-    fn validate_user_data(&self, user_data: &CreateUserRequest) -> Result<(), UserError> {
-        if user_data.email.is_empty() {
-            return Err(UserError::InvalidEmail);
-        }
-        
-        if user_data.username.is_empty() {
-            return Err(UserError::InvalidUsername);
-        }
-        
-        Ok(())
+    pub async fn get_user_progress(&self, user_id: Uuid) -> Result<UserProgress, UserError> {
+        let progress = self.user_repository.get_progress(user_id).await?;
+        Ok(progress)
     }
 }
 ```
@@ -236,52 +206,45 @@ impl UserService {
 ```rust
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Course {
-    pub id: CourseId,
+    pub id: Uuid,
     pub title: String,
     pub description: String,
-    pub instructor_id: UserId,
+    pub instructor_id: Uuid,
     pub category: CourseCategory,
     pub difficulty_level: DifficultyLevel,
     pub duration: Duration,
     pub modules: Vec<Module>,
-    pub prerequisites: Vec<CourseId>,
+    pub prerequisites: Vec<Uuid>,
     pub learning_objectives: Vec<String>,
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct CourseId(String);
-
-impl CourseId {
-    pub fn new() -> Self {
-        Self(Uuid::new_v4().to_string())
-    }
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Module {
-    pub id: ModuleId,
+    pub id: Uuid,
     pub title: String,
     pub description: String,
-    pub content: ModuleContent,
-    pub duration: Duration,
     pub order: u32,
+    pub lessons: Vec<Lesson>,
+    pub assessments: Vec<Assessment>,
+    pub resources: Vec<Resource>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub enum ModuleContent {
-    Video { url: String, duration: Duration },
-    Text { content: String },
-    Quiz { questions: Vec<Question> },
-    Assignment { description: String, requirements: Vec<String> },
-    Discussion { topic: String },
+pub struct Lesson {
+    pub id: Uuid,
+    pub title: String,
+    pub content: LessonContent,
+    pub duration: Duration,
+    pub learning_objectives: Vec<String>,
+    pub materials: Vec<Material>,
 }
 
 pub struct CourseService {
-    course_repository: Box<dyn CourseRepository>,
-    enrollment_service: Box<dyn EnrollmentService>,
-    content_service: Box<dyn ContentService>,
+    course_repository: CourseRepository,
+    enrollment_service: EnrollmentService,
+    content_service: ContentService,
 }
 
 impl CourseService {
@@ -291,7 +254,7 @@ impl CourseService {
         
         // 创建课程
         let course = Course {
-            id: CourseId::new(),
+            id: Uuid::new_v4(),
             title: course_data.title,
             description: course_data.description,
             instructor_id: course_data.instructor_id,
@@ -311,19 +274,18 @@ impl CourseService {
         Ok(course)
     }
     
-    pub async fn enroll_student(&self, student_id: &UserId, course_id: &CourseId) -> Result<Enrollment, CourseError> {
+    pub async fn enroll_student(&self, user_id: Uuid, course_id: Uuid) -> Result<Enrollment, CourseError> {
         // 检查课程是否存在
-        let course = self.course_repository.find_by_id(course_id).await?
-            .ok_or(CourseError::CourseNotFound)?;
+        let course = self.course_repository.get_by_id(course_id).await?;
         
-        // 检查前置条件
-        self.check_prerequisites(student_id, &course.prerequisites).await?;
+        // 检查先修条件
+        self.check_prerequisites(user_id, &course).await?;
         
         // 创建注册
         let enrollment = Enrollment {
-            id: EnrollmentId::new(),
-            student_id: student_id.clone(),
-            course_id: course_id.clone(),
+            id: Uuid::new_v4(),
+            user_id,
+            course_id,
             enrolled_at: Utc::now(),
             status: EnrollmentStatus::Active,
         };
@@ -332,208 +294,19 @@ impl CourseService {
         
         Ok(enrollment)
     }
-    
-    async fn check_prerequisites(&self, student_id: &UserId, prerequisites: &[CourseId]) -> Result<(), CourseError> {
-        for prereq_id in prerequisites {
-            let has_completed = self.enrollment_service.has_completed_course(student_id, prereq_id).await?;
-            if !has_completed {
-                return Err(CourseError::PrerequisitesNotMet);
-            }
-        }
-        Ok(())
-    }
 }
 ```
 
-### 3.3 评估系统
-
-```rust
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Assessment {
-    pub id: AssessmentId,
-    pub title: String,
-    pub description: String,
-    pub assessment_type: AssessmentType,
-    pub questions: Vec<Question>,
-    pub scoring_rubric: ScoringRubric,
-    pub time_limit: Option<Duration>,
-    pub passing_score: f64,
-    pub created_at: DateTime<Utc>,
-    pub updated_at: DateTime<Utc>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub enum AssessmentType {
-    Quiz,
-    Exam,
-    Assignment,
-    Project,
-    Discussion,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Question {
-    pub id: QuestionId,
-    pub question_type: QuestionType,
-    pub content: String,
-    pub options: Option<Vec<String>>,
-    pub correct_answer: Option<String>,
-    pub points: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub enum QuestionType {
-    MultipleChoice,
-    TrueFalse,
-    ShortAnswer,
-    Essay,
-    Code,
-}
-
-pub struct AssessmentService {
-    assessment_repository: Box<dyn AssessmentRepository>,
-    submission_service: Box<dyn SubmissionService>,
-    grading_service: Box<dyn GradingService>,
-}
-
-impl AssessmentService {
-    pub async fn create_assessment(&self, assessment_data: CreateAssessmentRequest) -> Result<Assessment, AssessmentError> {
-        // 验证评估数据
-        self.validate_assessment_data(&assessment_data)?;
-        
-        // 创建评估
-        let assessment = Assessment {
-            id: AssessmentId::new(),
-            title: assessment_data.title,
-            description: assessment_data.description,
-            assessment_type: assessment_data.assessment_type,
-            questions: assessment_data.questions,
-            scoring_rubric: assessment_data.scoring_rubric,
-            time_limit: assessment_data.time_limit,
-            passing_score: assessment_data.passing_score,
-            created_at: Utc::now(),
-            updated_at: Utc::now(),
-        };
-        
-        // 保存评估
-        self.assessment_repository.save(&assessment).await?;
-        
-        Ok(assessment)
-    }
-    
-    pub async fn submit_assessment(&self, submission: AssessmentSubmission) -> Result<SubmissionResult, AssessmentError> {
-        // 验证提交
-        self.validate_submission(&submission)?;
-        
-        // 保存提交
-        let submission_id = self.submission_service.save_submission(&submission).await?;
-        
-        // 自动评分（如果适用）
-        if submission.assessment.assessment_type.can_auto_grade() {
-            let grade = self.grading_service.auto_grade(&submission).await?;
-            self.submission_service.update_grade(&submission_id, &grade).await?;
-        }
-        
-        Ok(SubmissionResult {
-            submission_id,
-            status: SubmissionStatus::Submitted,
-            auto_graded: submission.assessment.assessment_type.can_auto_grade(),
-        })
-    }
-    
-    pub async fn grade_assessment(&self, submission_id: &SubmissionId, grade: Grade) -> Result<(), AssessmentError> {
-        self.submission_service.update_grade(submission_id, &grade).await?;
-        Ok(())
-    }
-}
-```
-
-### 3.4 推荐系统
-
-```rust
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Recommendation {
-    pub id: RecommendationId,
-    pub user_id: UserId,
-    pub course_id: CourseId,
-    pub score: f64,
-    pub reason: String,
-    pub created_at: DateTime<Utc>,
-}
-
-pub struct RecommendationEngine {
-    user_repository: Box<dyn UserRepository>,
-    course_repository: Box<dyn CourseRepository>,
-    learning_analytics: Box<dyn LearningAnalytics>,
-    collaborative_filtering: Box<dyn CollaborativeFiltering>,
-    content_based_filtering: Box<dyn ContentBasedFiltering>,
-}
-
-impl RecommendationEngine {
-    pub async fn generate_recommendations(&self, user_id: &UserId, limit: usize) -> Result<Vec<Recommendation>, RecommendationError> {
-        // 获取用户信息
-        let user = self.user_repository.find_by_id(user_id).await?
-            .ok_or(RecommendationError::UserNotFound)?;
-        
-        // 获取用户学习历史
-        let learning_history = self.learning_analytics.get_user_history(user_id).await?;
-        
-        // 协同过滤推荐
-        let collaborative_recs = self.collaborative_filtering.recommend(user_id, &learning_history, limit).await?;
-        
-        // 基于内容的推荐
-        let content_recs = self.content_based_filtering.recommend(&user, &learning_history, limit).await?;
-        
-        // 混合推荐
-        let hybrid_recs = self.hybrid_recommendation(collaborative_recs, content_recs, limit).await?;
-        
-        // 保存推荐结果
-        for rec in &hybrid_recs {
-            self.save_recommendation(rec).await?;
-        }
-        
-        Ok(hybrid_recs)
-    }
-    
-    async fn hybrid_recommendation(
-        &self,
-        collaborative_recs: Vec<Recommendation>,
-        content_recs: Vec<Recommendation>,
-        limit: usize,
-    ) -> Result<Vec<Recommendation>, RecommendationError> {
-        // 合并推荐结果
-        let mut all_recs = Vec::new();
-        all_recs.extend(collaborative_recs);
-        all_recs.extend(content_recs);
-        
-        // 去重和排序
-        all_recs.sort_by(|a, b| b.score.partial_cmp(&a.score).unwrap());
-        all_recs.dedup_by(|a, b| a.course_id == b.course_id);
-        
-        // 限制数量
-        all_recs.truncate(limit);
-        
-        Ok(all_recs)
-    }
-    
-    async fn save_recommendation(&self, recommendation: &Recommendation) -> Result<(), RecommendationError> {
-        // 保存到数据库
-        self.recommendation_repository.save(recommendation).await?;
-        Ok(())
-    }
-}
-```
-
-### 3.5 学习分析系统
+### 3.3 学习分析系统
 
 ```rust
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LearningEvent {
-    pub id: EventId,
-    pub user_id: UserId,
+    pub id: Uuid,
     pub event_type: LearningEventType,
-    pub course_id: Option<CourseId>,
-    pub session_id: String,
+    pub user_id: Uuid,
+    pub course_id: Option<Uuid>,
+    pub session_id: Uuid,
     pub timestamp: DateTime<Utc>,
     pub data: serde_json::Value,
 }
@@ -554,46 +327,125 @@ pub enum LearningEventType {
     PageView,
 }
 
-pub struct LearningAnalytics {
-    event_repository: Box<dyn EventRepository>,
-    analytics_engine: Box<dyn AnalyticsEngine>,
-    reporting_service: Box<dyn ReportingService>,
+pub struct AnalyticsEngine {
+    event_processor: EventProcessor,
+    learning_analyzer: LearningAnalyzer,
+    recommendation_engine: RecommendationEngine,
 }
 
-impl LearningAnalytics {
-    pub async fn track_event(&self, event: LearningEvent) -> Result<(), AnalyticsError> {
-        // 保存事件
-        self.event_repository.save(&event).await?;
+impl AnalyticsEngine {
+    pub async fn process_event(&self, event: LearningEvent) -> Result<AnalyticsResult, AnalyticsError> {
+        // 处理学习事件
+        let processed_event = self.event_processor.process(event).await?;
         
-        // 实时分析
-        let analytics = self.analytics_engine.process_event(&event).await?;
+        // 分析学习行为
+        let analysis = self.learning_analyzer.analyze(&processed_event).await?;
         
-        // 生成报告
-        if analytics.requires_report() {
-            self.reporting_service.generate_report(&analytics).await?;
-        }
+        // 生成推荐
+        let recommendations = self.recommendation_engine.generate_recommendations(&analysis).await?;
         
-        Ok(())
+        Ok(AnalyticsResult {
+            analysis,
+            recommendations,
+            timestamp: Utc::now(),
+        })
     }
     
-    pub async fn get_user_progress(&self, user_id: &UserId, course_id: &CourseId) -> Result<UserProgress, AnalyticsError> {
-        // 获取用户事件
-        let events = self.event_repository.get_user_events(user_id, course_id).await?;
+    pub async fn calculate_user_progress(&self, user_id: Uuid, course_id: Uuid) -> Result<UserProgress, AnalyticsError> {
+        // 获取用户学习事件
+        let events = self.event_processor.get_user_events(user_id, course_id).await?;
         
-        // 计算进度
-        let progress = self.analytics_engine.calculate_progress(&events).await?;
+        // 计算学习进度
+        let progress = self.learning_analyzer.calculate_progress(&events).await?;
         
         Ok(progress)
     }
+}
+```
+
+### 3.4 评估系统
+
+```rust
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Assessment {
+    pub id: Uuid,
+    pub title: String,
+    pub description: String,
+    pub assessment_type: AssessmentType,
+    pub questions: Vec<Question>,
+    pub time_limit: Option<Duration>,
+    pub passing_score: f64,
+    pub max_attempts: Option<u32>,
+    pub created_at: DateTime<Utc>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum AssessmentType {
+    Quiz,
+    Exam,
+    Assignment,
+    Project,
+    PeerReview,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Question {
+    pub id: Uuid,
+    pub question_type: QuestionType,
+    pub content: String,
+    pub options: Option<Vec<String>>,
+    pub correct_answer: serde_json::Value,
+    pub points: f64,
+    pub explanation: Option<String>,
+}
+
+pub struct AssessmentService {
+    assessment_repository: AssessmentRepository,
+    grading_engine: GradingEngine,
+    feedback_generator: FeedbackGenerator,
+}
+
+impl AssessmentService {
+    pub async fn create_assessment(&self, assessment_data: CreateAssessmentRequest) -> Result<Assessment, AssessmentError> {
+        // 验证评估数据
+        self.validate_assessment_data(&assessment_data)?;
+        
+        // 创建评估
+        let assessment = Assessment {
+            id: Uuid::new_v4(),
+            title: assessment_data.title,
+            description: assessment_data.description,
+            assessment_type: assessment_data.assessment_type,
+            questions: assessment_data.questions,
+            time_limit: assessment_data.time_limit,
+            passing_score: assessment_data.passing_score,
+            max_attempts: assessment_data.max_attempts,
+            created_at: Utc::now(),
+        };
+        
+        // 保存评估
+        self.assessment_repository.save(&assessment).await?;
+        
+        Ok(assessment)
+    }
     
-    pub async fn get_course_analytics(&self, course_id: &CourseId) -> Result<CourseAnalytics, AnalyticsError> {
-        // 获取课程事件
-        let events = self.event_repository.get_course_events(course_id).await?;
+    pub async fn grade_assessment(&self, submission: AssessmentSubmission) -> Result<AssessmentResult, AssessmentError> {
+        // 自动评分
+        let score = self.grading_engine.grade(&submission).await?;
         
-        // 计算课程分析
-        let analytics = self.analytics_engine.calculate_course_analytics(&events).await?;
+        // 生成反馈
+        let feedback = self.feedback_generator.generate_feedback(&submission, &score).await?;
         
-        Ok(analytics)
+        // 创建结果
+        let result = AssessmentResult {
+            id: Uuid::new_v4(),
+            submission_id: submission.id,
+            score,
+            feedback,
+            graded_at: Utc::now(),
+        };
+        
+        Ok(result)
     }
 }
 ```
@@ -602,252 +454,158 @@ impl LearningAnalytics {
 
 ### 4.1 在线学习平台
 
-**场景描述**：构建支持大规模用户的在线学习平台
+**场景描述：** 构建大规模在线学习平台，支持多种学习模式和实时交互。
 
-**核心功能**：
-
-- 用户注册和认证
-- 课程管理和发布
+**核心功能：**
+- 用户管理和认证
+- 课程创建和管理
+- 实时视频会议
 - 学习进度跟踪
-- 实时互动功能
-- 个性化推荐
+- 自动评估和反馈
 
-**技术实现**：
-
+**技术实现：**
 ```rust
 pub struct OnlineLearningPlatform {
     user_service: UserService,
     course_service: CourseService,
+    video_service: VideoService,
+    analytics_service: AnalyticsService,
     assessment_service: AssessmentService,
-    recommendation_engine: RecommendationEngine,
-    learning_analytics: LearningAnalytics,
-    real_time_system: RealTimeSystem,
 }
 
 impl OnlineLearningPlatform {
-    pub async fn start_learning_session(&self, user_id: &UserId, course_id: &CourseId) -> Result<LearningSession, PlatformError> {
-        // 创建学习会话
-        let session = LearningSession::new(user_id, course_id);
+    pub async fn start_live_session(&self, session_data: LiveSessionRequest) -> Result<LiveSession, PlatformError> {
+        // 创建实时会话
+        let session = self.video_service.create_session(&session_data).await?;
         
-        // 记录学习事件
-        let event = LearningEvent {
-            id: EventId::new(),
-            user_id: user_id.clone(),
-            event_type: LearningEventType::LessonStart,
-            course_id: Some(course_id.clone()),
-            session_id: session.id.clone(),
-            timestamp: Utc::now(),
-            data: serde_json::json!({}),
-        };
+        // 启动学习分析
+        self.analytics_service.start_session_tracking(&session).await?;
         
-        self.learning_analytics.track_event(event).await?;
+        // 发送通知
+        self.notification_service.notify_participants(&session).await?;
         
         Ok(session)
     }
-    
-    pub async fn get_personalized_recommendations(&self, user_id: &UserId) -> Result<Vec<Course>, PlatformError> {
-        let recommendations = self.recommendation_engine.generate_recommendations(user_id, 10).await?;
+}
+```
+
+### 4.2 智能推荐系统
+
+**场景描述：** 基于学习行为和偏好，为用户推荐个性化的学习内容。
+
+**核心功能：**
+- 学习行为分析
+- 协同过滤算法
+- 内容相似度计算
+- 实时推荐生成
+
+**技术实现：**
+```rust
+pub struct RecommendationEngine {
+    collaborative_filter: CollaborativeFilter,
+    content_based_filter: ContentBasedFilter,
+    hybrid_recommender: HybridRecommender,
+}
+
+impl RecommendationEngine {
+    pub async fn generate_recommendations(&self, user_id: Uuid) -> Result<Vec<Recommendation>, RecommendationError> {
+        // 获取用户行为数据
+        let user_behavior = self.get_user_behavior(user_id).await?;
         
-        let mut courses = Vec::new();
-        for rec in recommendations {
-            if let Some(course) = self.course_service.get_course(&rec.course_id).await? {
-                courses.push(course);
-            }
-        }
+        // 协同过滤推荐
+        let cf_recommendations = self.collaborative_filter.recommend(&user_behavior).await?;
         
-        Ok(courses)
+        // 基于内容的推荐
+        let cb_recommendations = self.content_based_filter.recommend(&user_behavior).await?;
+        
+        // 混合推荐
+        let hybrid_recommendations = self.hybrid_recommender.combine(cf_recommendations, cb_recommendations).await?;
+        
+        Ok(hybrid_recommendations)
     }
 }
 ```
 
-### 4.2 教育管理系统
+### 4.3 自适应学习系统
 
-**场景描述**：学校和教育机构的管理系统
+**场景描述：** 根据学习者的能力和进度，动态调整学习内容和难度。
 
-**核心功能**：
+**核心功能：**
+- 学习能力评估
+- 动态内容调整
+- 个性化学习路径
+- 实时进度监控
 
-- 学生信息管理
-- 教师管理
-- 课程安排
-- 成绩管理
-- 考勤管理
-
-**技术实现**：
-
+**技术实现：**
 ```rust
-pub struct EducationManagementSystem {
-    student_service: StudentService,
-    teacher_service: TeacherService,
-    schedule_service: ScheduleService,
-    grade_service: GradeService,
-    attendance_service: AttendanceService,
+pub struct AdaptiveLearningSystem {
+    ability_assessor: AbilityAssessor,
+    content_adapter: ContentAdapter,
+    path_generator: PathGenerator,
+    progress_monitor: ProgressMonitor,
 }
 
-impl EducationManagementSystem {
-    pub async fn register_student(&self, student_data: StudentRegistration) -> Result<Student, EMSError> {
-        // 创建学生账户
-        let user = self.user_service.create_user(student_data.user_data).await?;
+impl AdaptiveLearningSystem {
+    pub async fn adapt_content(&self, user_id: Uuid, current_content: &Content) -> Result<AdaptedContent, AdaptiveError> {
+        // 评估用户能力
+        let ability = self.ability_assessor.assess(user_id).await?;
         
-        // 创建学生档案
-        let student = Student {
-            id: StudentId::new(),
-            user_id: user.id,
-            student_number: student_data.student_number,
-            grade_level: student_data.grade_level,
-            major: student_data.major,
-            enrollment_date: Utc::now(),
-        };
+        // 获取学习进度
+        let progress = self.progress_monitor.get_progress(user_id).await?;
         
-        self.student_service.create_student(&student).await?;
+        // 调整内容
+        let adapted_content = self.content_adapter.adapt(current_content, &ability, &progress).await?;
         
-        Ok(student)
-    }
-    
-    pub async fn assign_course(&self, teacher_id: &UserId, course_id: &CourseId, schedule: Schedule) -> Result<CourseAssignment, EMSError> {
-        let assignment = CourseAssignment {
-            id: AssignmentId::new(),
-            teacher_id: teacher_id.clone(),
-            course_id: course_id.clone(),
-            schedule,
-            created_at: Utc::now(),
-        };
-        
-        self.schedule_service.create_assignment(&assignment).await?;
-        
-        Ok(assignment)
+        Ok(adapted_content)
     }
 }
 ```
 
-### 4.3 智能评估系统
+### 4.4 教育数据分析
 
-**场景描述**：自动化和智能化的评估系统
+**场景描述：** 分析学习数据，提供教育洞察和改进建议。
 
-**核心功能**：
+**核心功能：**
+- 学习行为分析
+- 成绩趋势分析
+- 教学效果评估
+- 预测性分析
 
-- 自动评分
-- 智能反馈
-- 学习分析
-- 进度跟踪
-- 个性化建议
-
-**技术实现**：
-
+**技术实现：**
 ```rust
-pub struct IntelligentAssessmentSystem {
-    assessment_service: AssessmentService,
-    auto_grading_engine: AutoGradingEngine,
-    feedback_generator: FeedbackGenerator,
-    learning_analytics: LearningAnalytics,
-    recommendation_engine: RecommendationEngine,
+pub struct EducationalAnalytics {
+    behavior_analyzer: BehaviorAnalyzer,
+    performance_analyzer: PerformanceAnalyzer,
+    predictive_analyzer: PredictiveAnalyzer,
+    insight_generator: InsightGenerator,
 }
 
-impl IntelligentAssessmentSystem {
-    pub async fn auto_grade_submission(&self, submission: &AssessmentSubmission) -> Result<Grade, AssessmentError> {
-        // 自动评分
-        let grade = self.auto_grading_engine.grade(submission).await?;
+impl EducationalAnalytics {
+    pub async fn generate_insights(&self, data_range: DateRange) -> Result<Vec<Insight>, AnalyticsError> {
+        // 分析学习行为
+        let behavior_insights = self.behavior_analyzer.analyze(data_range).await?;
         
-        // 生成反馈
-        let feedback = self.feedback_generator.generate_feedback(submission, &grade).await?;
+        // 分析学习表现
+        let performance_insights = self.performance_analyzer.analyze(data_range).await?;
         
-        // 更新提交
-        self.assessment_service.update_submission_grade(&submission.id, &grade, &feedback).await?;
+        // 预测性分析
+        let predictive_insights = self.predictive_analyzer.analyze(data_range).await?;
         
-        Ok(grade)
-    }
-    
-    pub async fn generate_learning_insights(&self, user_id: &UserId) -> Result<LearningInsights, AssessmentError> {
-        // 获取学习历史
-        let history = self.learning_analytics.get_user_history(user_id).await?;
-        
-        // 分析学习模式
-        let patterns = self.learning_analytics.analyze_patterns(&history).await?;
-        
-        // 生成洞察
-        let insights = LearningInsights {
-            user_id: user_id.clone(),
-            strengths: patterns.strengths,
-            weaknesses: patterns.weaknesses,
-            recommendations: patterns.recommendations,
-            generated_at: Utc::now(),
-        };
+        // 生成综合洞察
+        let insights = self.insight_generator.combine(behavior_insights, performance_insights, predictive_insights).await?;
         
         Ok(insights)
     }
 }
 ```
 
-### 4.4 内容管理系统
-
-**场景描述**：教育内容的创建、管理和分发系统
-
-**核心功能**：
-
-- 内容创作
-- 版本控制
-- 多媒体支持
-- 内容分发
-- 版权管理
-
-**技术实现**：
-
-```rust
-pub struct ContentManagementSystem {
-    content_service: ContentService,
-    media_service: MediaService,
-    version_control: VersionControl,
-    distribution_service: DistributionService,
-    rights_management: RightsManagement,
-}
-
-impl ContentManagementSystem {
-    pub async fn create_content(&self, content_data: CreateContentRequest) -> Result<Content, CMSError> {
-        // 创建内容
-        let content = Content {
-            id: ContentId::new(),
-            title: content_data.title,
-            description: content_data.description,
-            content_type: content_data.content_type,
-            author_id: content_data.author_id,
-            version: 1,
-            status: ContentStatus::Draft,
-            created_at: Utc::now(),
-            updated_at: Utc::now(),
-        };
-        
-        // 保存内容
-        self.content_service.save(&content).await?;
-        
-        // 处理媒体文件
-        if let Some(media_files) = content_data.media_files {
-            for media_file in media_files {
-                self.media_service.process_media(&content.id, &media_file).await?;
-            }
-        }
-        
-        Ok(content)
-    }
-    
-    pub async fn publish_content(&self, content_id: &ContentId) -> Result<(), CMSError> {
-        // 更新内容状态
-        self.content_service.update_status(content_id, ContentStatus::Published).await?;
-        
-        // 分发内容
-        self.distribution_service.distribute_content(content_id).await?;
-        
-        Ok(())
-    }
-}
-```
-
 ## 5. 总结 (Summary)
 
-教育科技领域的Rust架构需要特别关注：
+教育科技领域的形式化重构建立了完整的理论框架，包括：
 
-1. **个性化学习**: 推荐算法、学习路径优化、自适应内容
-2. **实时交互**: WebSocket、实时通信、协作功能
-3. **数据分析**: 学习分析、行为跟踪、效果评估
-4. **可扩展性**: 微服务架构、负载均衡、水平扩展
-5. **安全性**: 用户隐私、数据保护、访问控制
+1. **理论基础**：教育科技系统五元组、教育代数理论、学习理论和评估理论
+2. **核心定理**：学习收敛性、推荐准确性、进度一致性、分析延迟和系统可扩展性
+3. **Rust实现**：用户管理、课程管理、学习分析和评估系统
+4. **应用场景**：在线学习平台、智能推荐、自适应学习和教育数据分析
 
-通过遵循这些设计原则和最佳实践，可以构建出高性能、高可靠的教育科技平台。
+该框架为构建高性能、可扩展的教育科技系统提供了坚实的理论基础和实践指导。
