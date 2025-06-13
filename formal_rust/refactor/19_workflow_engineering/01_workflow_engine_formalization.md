@@ -1,15 +1,17 @@
-# 1. 工作流引擎形式化理论 (Workflow Engine Formalization)
+# 1. 工作流引擎形式化理论
+
+ (Workflow Engine Formalization)
 
 ## 目录
 
-1. [1. 工作流引擎形式化理论](#1-工作流引擎形式化理论)
-   1. [1.1. 理论基础](#11-理论基础)
-   2. [1.2. 工作流引擎架构](#12-工作流引擎架构)
-   3. [1.3. 执行模型](#13-执行模型)
-   4. [1.4. 状态管理](#14-状态管理)
-   5. [1.5. 核心定理证明](#15-核心定理证明)
-   6. [1.6. Rust实现](#16-rust实现)
-   7. [1.7. 性能分析](#17-性能分析)
+[1. 工作流引擎形式化理论](#1-工作流引擎形式化理论)
+   [1.1. 理论基础](#11-理论基础)
+   [1.2. 工作流引擎架构](#12-工作流引擎架构)
+   [1.3. 执行模型](#13-执行模型)
+   [1.4. 状态管理](#14-状态管理)
+   [1.5. 核心定理证明](#15-核心定理证明)
+   [1.6. Rust实现](#16-rust实现)
+   [1.7. 性能分析](#17-性能分析)
 
 ---
 
@@ -106,6 +108,7 @@ $$\text{consistent}(c_1, c_2) \iff \text{state}(c_1) \equiv \text{state}(c_2)$$
 - $n_{i+1}$ 是下一个节点
 
 **算法 1.3.1** (工作流执行)
+
 ```rust
 fn execute_workflow(workflow: &Workflow, instance: &mut WorkflowInstance) -> Result<(), Error> {
     let mut current_node = workflow.get_start_node();
@@ -159,6 +162,7 @@ $$\text{persist}: \mathcal{S} \rightarrow \mathcal{D}$$
 其中 $\mathcal{D}$ 是持久化数据格式。
 
 **算法 1.4.1** (状态恢复)
+
 ```rust
 fn restore_state(instance_id: &str, storage: &Storage) -> Result<WorkflowInstance, Error> {
     let data = storage.load(instance_id)?;
@@ -675,4 +679,4 @@ mod tests {
 6. **Rust实现**: 提供了完整的工作流引擎实现
 7. **性能分析**: 分析了时间复杂度和空间复杂度
 
-这些理论为工作流引擎提供了严格的数学基础，确保了执行的正确性和性能保证。 
+这些理论为工作流引擎提供了严格的数学基础，确保了执行的正确性和性能保证。
