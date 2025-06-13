@@ -9,18 +9,21 @@
 ### 核心技术栈
 
 #### 电商框架
+
 - **Web框架**: `actix-web`, `axum`, `rocket`, `warp`
 - **数据库**: `diesel`, `sqlx`, `seaorm`, `redis-rs`
 - **搜索引擎**: `elasticsearch-rs`, `meilisearch-rs`
 - **消息队列**: `kafka-rust`, `rabbitmq-rs`, `redis-streams`
 
 #### 支付和金融
+
 - **支付处理**: `stripe-rs`, `paypal-rs`, `alipay-rs`
 - **加密**: `ring`, `rustls`, `aes-gcm`
 - **合规**: `pci-dss-rs`, `gdpr-rs`
 - **风控**: `fraud-detection-rs`, `risk-assessment`
 
 #### 推荐和AI
+
 - **推荐系统**: `collaborative-filtering`, `content-based-rs`
 - **机器学习**: `tch-rs`, `burn`, `candle`
 - **数据分析**: `polars`, `ndarray`, `statrs`
@@ -29,6 +32,7 @@
 ### 架构模式
 
 #### 微服务电商架构
+
 ```rust
 use actix_web::{web, App, HttpServer, middleware};
 use serde::{Deserialize, Serialize};
@@ -137,6 +141,7 @@ pub struct Product {
 ```
 
 #### 事件驱动电商架构
+
 ```rust
 use tokio::sync::broadcast;
 use serde::{Deserialize, Serialize};
@@ -218,6 +223,7 @@ impl EventDrivenECommerce {
 ### 核心领域模型
 
 #### 订单管理系统
+
 ```rust
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Order {
@@ -291,6 +297,7 @@ pub struct OrderTotals {
 ```
 
 #### 库存管理系统
+
 ```rust
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Inventory {
@@ -351,6 +358,7 @@ pub struct WarehouseCapacity {
 ```
 
 #### 推荐系统
+
 ```rust
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RecommendationEngine {
@@ -425,6 +433,7 @@ pub enum BehaviorType {
 ### 电商数据存储
 
 #### 分布式缓存系统
+
 ```rust
 use redis::AsyncCommands;
 use std::collections::HashMap;
@@ -529,6 +538,7 @@ pub enum EvictionPolicy {
 ```
 
 #### 搜索引擎集成
+
 ```rust
 use elasticsearch::{Elasticsearch, SearchParts};
 use serde_json::json;
@@ -676,6 +686,7 @@ impl ProductSearchEngine {
 ### 电商业务流程
 
 #### 订单处理流程
+
 ```rust
 pub struct OrderProcessingWorkflow {
     order_service: OrderService,
@@ -740,6 +751,7 @@ impl OrderProcessingWorkflow {
 ```
 
 #### 支付处理流程
+
 ```rust
 pub struct PaymentProcessingWorkflow {
     payment_gateway: PaymentGateway,
@@ -843,6 +855,7 @@ impl PaymentProcessingWorkflow {
 ### 核心电商组件
 
 #### 购物车系统
+
 ```rust
 use std::collections::HashMap;
 use tokio::sync::RwLock;
@@ -973,6 +986,7 @@ impl ShoppingCartSystem {
 ```
 
 #### 推荐引擎
+
 ```rust
 use std::collections::HashMap;
 
@@ -1073,6 +1087,7 @@ impl CollaborativeFilter {
 ### 电商平台监控
 
 #### 业务指标监控
+
 ```rust
 use prometheus::{Counter, Histogram, Gauge};
 use std::sync::Arc;
@@ -1204,6 +1219,7 @@ impl ECommerceMetrics {
 ```
 
 #### 性能监控
+
 ```rust
 pub struct PerformanceMonitor {
     response_time_tracker: ResponseTimeTracker,
@@ -1277,4 +1293,4 @@ impl PerformanceMonitor {
 4. **可扩展性**: 微服务架构、水平扩展、负载均衡
 5. **用户体验**: 个性化推荐、实时库存、快速搜索
 
-通过合理运用Rust的性能和内存安全特性，可以构建高性能、高可靠、高安全的电子商务平台。 
+通过合理运用Rust的性能和内存安全特性，可以构建高性能、高可靠、高安全的电子商务平台。

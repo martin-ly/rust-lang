@@ -66,6 +66,7 @@ $$\forall i, j \in \{1, 2, \ldots, n\}, \text{Consistency}(S_i, S_j) \Rightarrow
 **证明：**
 
 设 $f(n) = g(n) + h(n)$ 为A*算法的评估函数，其中：
+
 - $g(n)$ 是从起始点到节点 $n$ 的实际代价
 - $h(n)$ 是从节点 $n$ 到目标点的启发式估计
 
@@ -457,6 +458,7 @@ impl PIDController {
 **场景描述：** 构建完全自动驾驶的汽车系统，实现从感知到控制的完整闭环。
 
 **核心功能：**
+
 - 多传感器融合感知
 - 高精度定位导航
 - 智能路径规划
@@ -464,6 +466,7 @@ impl PIDController {
 - 安全监控系统
 
 **技术实现：**
+
 ```rust
 pub struct AutonomousVehicle {
     driving_system: AutonomousDrivingSystem,
@@ -492,6 +495,7 @@ impl AutonomousVehicle {
 **场景描述：** 构建ADAS系统，为驾驶员提供辅助功能。
 
 **核心功能：**
+
 - 车道保持辅助
 - 自适应巡航控制
 - 自动紧急制动
@@ -499,6 +503,7 @@ impl AutonomousVehicle {
 - 停车辅助
 
 **技术实现：**
+
 ```rust
 pub struct ADASSystem {
     lane_detection: LaneDetection,
@@ -538,6 +543,7 @@ impl ADASSystem {
 **场景描述：** 构建车联网系统，实现车辆与基础设施的通信。
 
 **核心功能：**
+
 - V2V通信
 - V2I通信
 - 交通信息共享
@@ -545,6 +551,7 @@ impl ADASSystem {
 - 智能交通管理
 
 **技术实现：**
+
 ```rust
 pub struct V2XSystem {
     v2v_communication: V2VCommunication,
@@ -584,6 +591,7 @@ impl V2XSystem {
 **场景描述：** 构建智能交通系统，优化交通流量和安全。
 
 **核心功能：**
+
 - 交通流量监控
 - 信号灯优化
 - 事故检测
@@ -591,6 +599,7 @@ impl V2XSystem {
 - 交通预测
 
 **技术实现：**
+
 ```rust
 pub struct IntelligentTrafficSystem {
     traffic_monitor: TrafficMonitor,
