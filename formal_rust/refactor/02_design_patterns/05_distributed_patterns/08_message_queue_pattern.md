@@ -148,7 +148,7 @@ use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 /// 消息优先级
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+# [derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum MessagePriority {
     Low,
     Normal,
@@ -157,7 +157,7 @@ pub enum MessagePriority {
 }
 
 /// 消息状态
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+# [derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum MessageStatus {
     Pending,
     Processing,
@@ -166,7 +166,7 @@ pub enum MessageStatus {
 }
 
 /// 消息
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Message {
     pub id: String,
     pub payload: String,
@@ -367,7 +367,7 @@ pub struct MessageQueueManager {
 impl MessageQueueManager {
     pub fn new() -> Self {
         let (message_sender, message_receiver) = mpsc::channel(1000);
-        
+
         Self {
             queues: Arc::new(RwLock::new(HashMap::new())),
             producers: Arc::new(RwLock::new(HashMap::new())),
@@ -392,10 +392,10 @@ impl MessageQueueManager {
     /// 创建生产者
     pub fn create_producer(&self, id: String) -> Producer {
         let producer = Producer::new(id.clone(), self.message_sender.clone());
-        
+
         let mut producers = self.producers.write().unwrap();
         producers.insert(id, producer.clone());
-        
+
         producer
     }
 
@@ -405,7 +405,7 @@ impl MessageQueueManager {
         F: Fn(Message) -> Result<(), String> + Send + Sync + 'static,
     {
         let (consumer_sender, consumer_receiver) = mpsc::channel(100);
-        
+
         let consumer = Consumer::new(
             id.clone(),
             consumer_receiver,
@@ -423,7 +423,7 @@ impl MessageQueueManager {
 
         let mut consumers = self.consumers.write().unwrap();
         consumers.insert(id, consumer.clone());
-        
+
         consumer
     }
 
@@ -482,7 +482,7 @@ impl MessageQueueManager {
     /// 清理过期消息
     pub fn cleanup_expired_messages(&self) {
         let mut queues = self.queues.write().unwrap();
-        
+
         for queue in queues.values_mut() {
             let mut i = 0;
             while i < queue.messages.len() {
@@ -497,7 +497,7 @@ impl MessageQueueManager {
 }
 
 /// 队列统计信息
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct QueueStats {
     pub name: String,
     pub size: usize,
@@ -714,7 +714,7 @@ pub struct AsyncMessageQueueManager {
 impl AsyncMessageQueueManager {
     pub fn new() -> Self {
         let (message_sender, message_receiver) = mpsc::channel(1000);
-        
+
         Self {
             queues: Arc::new(TokioRwLock::new(HashMap::new())),
             producers: Arc::new(TokioRwLock::new(HashMap::new())),
@@ -739,10 +739,10 @@ impl AsyncMessageQueueManager {
     /// 异步创建生产者
     pub async fn create_producer(&self, id: String) -> Producer {
         let producer = Producer::new(id.clone(), self.message_sender.clone());
-        
+
         let mut producers = self.producers.write().await;
         producers.insert(id, producer.clone());
-        
+
         producer
     }
 
@@ -752,7 +752,7 @@ impl AsyncMessageQueueManager {
         F: Fn(Message) -> Result<(), String> + Send + Sync + 'static,
     {
         let (consumer_sender, consumer_receiver) = mpsc::channel(100);
-        
+
         let consumer = Consumer::new(
             id.clone(),
             consumer_receiver,
@@ -770,7 +770,7 @@ impl AsyncMessageQueueManager {
 
         let mut consumers = self.consumers.write().await;
         consumers.insert(id, consumer.clone());
-        
+
         consumer
     }
 
@@ -827,7 +827,7 @@ impl AsyncMessageQueueManager {
     /// 异步清理过期消息
     pub async fn cleanup_expired_messages(&self) {
         let mut queues = self.queues.write().await;
-        
+
         for queue in queues.values_mut() {
             let mut i = 0;
             while i < queue.messages.len() {
@@ -868,10 +868,10 @@ impl TaskQueue {
     /// 处理任务
     pub async fn process_task(&self, task: Message) -> Result<(), String> {
         println!("Processing task: {}", task.payload);
-        
+
         // 模拟任务处理
         tokio::time::sleep(Duration::from_millis(100)).await;
-        
+
         println!("Task completed: {}", task.payload);
         Ok(())
     }
@@ -921,7 +921,7 @@ impl EventBus {
         F: Fn(Message) -> Result<(), String> + Send + Sync + 'static,
     {
         let consumer_id = format!("event_consumer_{}", event_type);
-        
+
         let mut consumer = self.queue_manager.create_consumer(
             consumer_id,
             "normal".to_string(),
@@ -939,26 +939,26 @@ impl EventBus {
     /// 处理用户注册事件
     pub async fn handle_user_registered(&self, message: Message) -> Result<(), String> {
         println!("Handling user registration event: {}", message.payload);
-        
+
         // 发送欢迎邮件
         self.publish_event("email", "welcome").await?;
-        
+
         // 创建用户配置文件
         self.publish_event("profile", "create").await?;
-        
+
         Ok(())
     }
 
     /// 处理订单创建事件
     pub async fn handle_order_created(&self, message: Message) -> Result<(), String> {
         println!("Handling order creation event: {}", message.payload);
-        
+
         // 发送确认邮件
         self.publish_event("email", "order_confirmation").await?;
-        
+
         // 更新库存
         self.publish_event("inventory", "update").await?;
-        
+
         Ok(())
     }
 }
@@ -980,7 +980,7 @@ pub struct PriorityQueue {
 }
 
 /// 优先级消息
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct PriorityMessage {
     pub message: Message,
     pub priority: u32,
@@ -1126,4 +1126,4 @@ impl DelayQueue {
 4. **应用广泛性**: 适用于任务队列、事件总线、异步处理等场景
 5. **解耦性**: 通过异步消息传递实现组件解耦
 
-该模式为分布式系统的异步通信和任务处理提供了理论基础和实践指导，是构建可扩展、高性能分布式系统的重要组件。 
+该模式为分布式系统的异步通信和任务处理提供了理论基础和实践指导，是构建可扩展、高性能分布式系统的重要组件。

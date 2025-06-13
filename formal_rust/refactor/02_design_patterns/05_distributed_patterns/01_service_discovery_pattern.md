@@ -61,6 +61,7 @@ $$discover(c, r, service\_type) = \{s \in r.registry | s.meta.type = service\_ty
 
 **证明**：
 设 $S_{healthy} = \{s \in r.registry | s.status = healthy\}$，则：
+
 1. 如果 $S_{healthy} \neq \emptyset$，则 $discover(c, r, service\_type) \subseteq S_{healthy}$
 2. 由于 $discover$ 函数过滤条件为 $s.status = healthy$，所以返回的集合只包含健康实例
 3. 因此，如果存在健康服务实例，函数返回非空集合。
@@ -174,7 +175,7 @@ use tokio::time::interval;
 use serde::{Deserialize, Serialize};
 
 /// 服务实例状态
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+# [derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum ServiceStatus {
     Healthy,
     Unhealthy,
@@ -182,7 +183,7 @@ pub enum ServiceStatus {
 }
 
 /// 服务实例
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ServiceInstance {
     pub id: String,
     pub address: String,
@@ -283,7 +284,7 @@ impl LoadBalancer for RoundRobinBalancer {
         if instances.is_empty() {
             return None;
         }
-        
+
         let current = self.current.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
         let index = current % instances.len();
         instances.get(index)
@@ -321,7 +322,7 @@ use std::time::{Duration, Instant};
 use serde::{Deserialize, Serialize};
 
 /// 泛型服务实例
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GenericServiceInstance<T> {
     pub id: String,
     pub address: String,
@@ -489,7 +490,7 @@ impl AsyncServiceRegistry {
 }
 
 /// 异步负载均衡器
-#[async_trait::async_trait]
+# [async_trait::async_trait]
 pub trait AsyncLoadBalancer: Send + Sync {
     async fn select(&self, instances: &[ServiceInstance]) -> Option<&ServiceInstance>;
 }
@@ -507,13 +508,13 @@ impl AsyncRoundRobinBalancer {
     }
 }
 
-#[async_trait::async_trait]
+# [async_trait::async_trait]
 impl AsyncLoadBalancer for AsyncRoundRobinBalancer {
     async fn select(&self, instances: &[ServiceInstance]) -> Option<&ServiceInstance> {
         if instances.is_empty() {
             return None;
         }
-        
+
         let current = self.current.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
         let index = current % instances.len();
         instances.get(index)
@@ -619,12 +620,12 @@ impl ContainerOrchestrator {
                 status: ServiceStatus::Healthy,
                 last_heartbeat: Instant::now(),
             };
-            
+
             // 注册服务实例
             // 这里应该调用实际的容器编排API
             println!("Deployed service instance: {}", instance.id);
         }
-        
+
         Ok(())
     }
 
@@ -633,7 +634,7 @@ impl ContainerOrchestrator {
         // 获取当前服务实例
         let current_instances = self.service_discovery.registry.discover(service_name);
         let current_count = current_instances.len() as u32;
-        
+
         if target_replicas > current_count {
             // 扩容
             let additional = target_replicas - current_count;
@@ -644,7 +645,7 @@ impl ContainerOrchestrator {
             // 这里应该调用实际的容器编排API来删除实例
             println!("Scaling down service {} by {} instances", service_name, to_remove);
         }
-        
+
         Ok(())
     }
 }
@@ -669,19 +670,19 @@ impl CloudNativeApp {
     pub async fn integrate_service_mesh(&self) -> Result<(), Box<dyn std::error::Error>> {
         // 集成服务网格
         let services = vec!["auth-service", "payment-service", "notification-service"];
-        
+
         for service_name in services {
             if let Some(instance) = self.service_discovery.discover_service(service_name) {
                 // 配置服务网格代理
                 println!("Configuring service mesh proxy for: {}", instance.id);
-                
+
                 // 设置路由规则
                 // 设置重试策略
                 // 设置熔断器
                 // 设置监控
             }
         }
-        
+
         Ok(())
     }
 
@@ -689,14 +690,14 @@ impl CloudNativeApp {
     pub async fn multi_cluster_discovery(&self) -> Result<(), Box<dyn std::error::Error>> {
         // 多集群服务发现
         let clusters = vec!["cluster-1", "cluster-2", "cluster-3"];
-        
+
         for cluster in clusters {
             // 从不同集群发现服务
             if let Some(instance) = self.service_discovery.discover_service("global-service") {
                 println!("Found service in cluster {}: {}", cluster, instance.id);
             }
         }
-        
+
         Ok(())
     }
 }
@@ -767,7 +768,7 @@ impl ThirdPartyRegistration {
     pub async fn register_service(&self, service_config: &str) -> Result<(), Box<dyn std::error::Error>> {
         // 解析服务配置
         let config: serde_json::Value = serde_json::from_str(service_config)?;
-        
+
         // 创建服务实例
         let instance = ServiceInstance {
             id: config["id"].as_str().unwrap().to_string(),
@@ -781,10 +782,10 @@ impl ThirdPartyRegistration {
             status: ServiceStatus::Healthy,
             last_heartbeat: Instant::now(),
         };
-        
+
         // 注册服务
         self.registrar.register(instance);
-        
+
         Ok(())
     }
 }
@@ -832,16 +833,16 @@ impl CachedServiceDiscoveryClient {
                 }
             }
         }
-        
+
         // 从注册中心获取
         let instances = self.registry.discover(service_type);
-        
+
         // 更新缓存
         {
             let mut cache = self.cache.write().unwrap();
             cache.insert(service_type.to_string(), (instances.clone(), Instant::now()));
         }
-        
+
         self.load_balancer.select(&instances).cloned()
     }
 
@@ -894,16 +895,16 @@ impl AsyncCachedServiceDiscoveryClient {
                 }
             }
         }
-        
+
         // 从注册中心获取
         let instances = self.registry.discover(service_type).await;
-        
+
         // 更新缓存
         {
             let mut cache = self.cache.write().await;
             cache.insert(service_type.to_string(), (instances.clone(), Instant::now()));
         }
-        
+
         self.load_balancer.select(&instances).await.cloned()
     }
 
@@ -928,4 +929,4 @@ impl AsyncCachedServiceDiscoveryClient {
 4. **应用广泛性**: 适用于微服务、容器编排、云原生等场景
 5. **性能优化**: 通过缓存和异步机制提供高性能实现
 
-该模式为分布式系统的服务发现提供了理论基础和实践指导，是构建可扩展、高可用分布式系统的重要组件。 
+该模式为分布式系统的服务发现提供了理论基础和实践指导，是构建可扩展、高可用分布式系统的重要组件。

@@ -133,7 +133,7 @@ use std::time::{Duration, Instant};
 use tokio::time::sleep;
 
 /// 熔断器状态
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub enum CircuitBreakerState {
     Closed,
     Open,
@@ -141,7 +141,7 @@ pub enum CircuitBreakerState {
 }
 
 /// 熔断器配置
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct CircuitBreakerConfig {
     pub failure_threshold: u32,
     pub success_threshold: u32,
@@ -182,7 +182,7 @@ impl CircuitBreaker {
     {
         // 检查当前状态
         let current_state = self.get_state().await;
-        
+
         match current_state {
             CircuitBreakerState::Closed => {
                 // 关闭状态：执行请求并统计结果
@@ -207,7 +207,7 @@ impl CircuitBreaker {
     /// 获取当前状态
     async fn get_state(&self) -> CircuitBreakerState {
         let mut state = self.state.lock().unwrap();
-        
+
         // 检查是否需要状态转换
         match *state {
             CircuitBreakerState::Open => {
@@ -222,7 +222,7 @@ impl CircuitBreaker {
             }
             _ => {}
         }
-        
+
         *state
     }
 
@@ -268,7 +268,7 @@ impl CircuitBreaker {
         let mut success_count = self.success_count.lock().unwrap();
         let mut failure_count = self.failure_count.lock().unwrap();
         let mut last_success_time = self.last_success_time.lock().unwrap();
-        
+
         *success_count += 1;
         *failure_count = 0;
         *last_success_time = Some(Instant::now());
@@ -293,7 +293,7 @@ impl CircuitBreaker {
     async fn on_failure(&self) {
         let mut failure_count = self.failure_count.lock().unwrap();
         let mut last_failure_time = self.last_failure_time.lock().unwrap();
-        
+
         *failure_count += 1;
         *last_failure_time = Some(Instant::now());
 
@@ -350,7 +350,7 @@ impl CircuitBreaker {
 }
 
 /// 熔断器错误
-#[derive(Debug)]
+# [derive(Debug)]
 pub enum CircuitBreakerError<E> {
     CircuitOpen,
     Timeout,
@@ -398,7 +398,7 @@ impl<T, E> GenericCircuitBreaker<T, E> {
     {
         // 实现与基础版本相同
         let current_state = self.get_state().await;
-        
+
         match current_state {
             CircuitBreakerState::Closed => {
                 self.execute_request(operation).await
@@ -420,7 +420,7 @@ impl<T, E> GenericCircuitBreaker<T, E> {
     // 其他方法与基础版本相同
     async fn get_state(&self) -> CircuitBreakerState {
         let mut state = self.state.lock().unwrap();
-        
+
         match *state {
             CircuitBreakerState::Open => {
                 if self.should_attempt_reset().await {
@@ -434,7 +434,7 @@ impl<T, E> GenericCircuitBreaker<T, E> {
             }
             _ => {}
         }
-        
+
         *state
     }
 
@@ -473,7 +473,7 @@ impl<T, E> GenericCircuitBreaker<T, E> {
         let mut success_count = self.success_count.lock().unwrap();
         let mut failure_count = self.failure_count.lock().unwrap();
         let mut last_success_time = self.last_success_time.lock().unwrap();
-        
+
         *success_count += 1;
         *failure_count = 0;
         *last_success_time = Some(Instant::now());
@@ -495,7 +495,7 @@ impl<T, E> GenericCircuitBreaker<T, E> {
     async fn on_failure(&self) {
         let mut failure_count = self.failure_count.lock().unwrap();
         let mut last_failure_time = self.last_failure_time.lock().unwrap();
-        
+
         *failure_count += 1;
         *last_failure_time = Some(Instant::now());
 
@@ -569,7 +569,7 @@ impl MicroserviceClient {
                 .body(request.to_string())
                 .send()
                 .await?;
-            
+
             let result = response.text().await?;
             Ok(result)
         }).await
@@ -597,7 +597,7 @@ impl DatabaseClient {
         self.circuit_breaker.call(|| async {
             // 模拟数据库查询
             tokio::time::sleep(Duration::from_millis(100)).await;
-            
+
             if query.contains("error") {
                 Err(sqlx::Error::RowNotFound)
             } else {
@@ -642,7 +642,7 @@ impl SlidingWindowCircuitBreaker {
         Fut: std::future::Future<Output = Result<T, E>>,
     {
         let current_state = self.get_state().await;
-        
+
         match current_state {
             CircuitBreakerState::Closed => {
                 self.execute_request(operation).await
@@ -730,7 +730,7 @@ impl SlidingWindowCircuitBreaker {
 
     async fn get_state(&self) -> CircuitBreakerState {
         let mut state = self.state.lock().unwrap();
-        
+
         match *state {
             CircuitBreakerState::Open => {
                 if self.should_attempt_reset().await {
@@ -739,7 +739,7 @@ impl SlidingWindowCircuitBreaker {
             }
             _ => {}
         }
-        
+
         *state
     }
 
@@ -782,4 +782,4 @@ impl SlidingWindowCircuitBreaker {
 4. **应用广泛性**: 适用于微服务调用、数据库连接、外部API调用等场景
 5. **自动恢复**: 通过半开状态实现自动恢复机制
 
-该模式为分布式系统的故障隔离和自动恢复提供了理论基础和实践指导，是构建高可用分布式系统的重要组件。 
+该模式为分布式系统的故障隔离和自动恢复提供了理论基础和实践指导，是构建高可用分布式系统的重要组件。

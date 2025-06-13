@@ -145,7 +145,7 @@ use tokio::time::{Duration, Instant};
 use uuid::Uuid;
 
 /// 事务状态
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+# [derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum TransactionState {
     Pending,
     Running,
@@ -155,7 +155,7 @@ pub enum TransactionState {
 }
 
 /// 本地事务
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct LocalTransaction {
     pub id: String,
     pub service: String,
@@ -188,7 +188,7 @@ impl LocalTransaction {
     /// 执行事务
     pub async fn execute(&mut self) -> Result<(), Box<dyn std::error::Error>> {
         self.state = TransactionState::Running;
-        
+
         match (self.operation)() {
             Ok(()) => {
                 self.state = TransactionState::Completed;
@@ -204,7 +204,7 @@ impl LocalTransaction {
     /// 执行补偿
     pub async fn compensate(&mut self) -> Result<(), Box<dyn std::error::Error>> {
         self.state = TransactionState::Compensating;
-        
+
         match (self.compensation)() {
             Ok(()) => {
                 self.state = TransactionState::Completed;
@@ -219,7 +219,7 @@ impl LocalTransaction {
 }
 
 /// Saga事件
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SagaEvent {
     pub id: String,
     pub saga_id: String,
@@ -262,10 +262,10 @@ impl SagaCoordinator {
     /// 执行Saga
     pub async fn execute_saga(&self, saga_id: &str) -> Result<(), Box<dyn std::error::Error>> {
         let mut sagas = self.sagas.write().unwrap();
-        
+
         if let Some(saga) = sagas.get_mut(saga_id) {
             saga.state = TransactionState::Running;
-            
+
             // 顺序执行事务
             for transaction in &mut saga.transactions {
                 match transaction.execute().await {
@@ -276,14 +276,14 @@ impl SagaCoordinator {
                     Err(error) => {
                         // 记录失败事件
                         self.record_event(saga_id, &transaction.id, "failed", &error.to_string()).await;
-                        
+
                         // 执行补偿
                         self.compensate_saga(saga).await?;
                         return Err(error);
                     }
                 }
             }
-            
+
             saga.state = TransactionState::Completed;
             Ok(())
         } else {
@@ -307,7 +307,7 @@ impl SagaCoordinator {
                 }
             }
         }
-        
+
         Ok(())
     }
 
@@ -344,7 +344,7 @@ impl SagaCoordinator {
 }
 
 /// Saga
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Saga {
     pub id: String,
     pub transactions: Vec<LocalTransaction>,
@@ -395,7 +395,7 @@ impl<T, E> GenericLocalTransaction<T, E> {
     /// 执行事务
     pub async fn execute(&mut self) -> Result<T, E> {
         self.state = TransactionState::Running;
-        
+
         match (self.operation)() {
             Ok(result) => {
                 self.state = TransactionState::Completed;
@@ -411,7 +411,7 @@ impl<T, E> GenericLocalTransaction<T, E> {
     /// 执行补偿
     pub async fn compensate(&mut self) -> Result<(), E> {
         self.state = TransactionState::Compensating;
-        
+
         match (self.compensation)() {
             Ok(()) => {
                 self.state = TransactionState::Completed;
@@ -461,11 +461,11 @@ impl<T, E> GenericSagaCoordinator<T, E> {
     /// 执行泛型Saga
     pub async fn execute_saga(&self, saga_id: &str) -> Result<Vec<T>, E> {
         let mut sagas = self.sagas.write().unwrap();
-        
+
         if let Some(saga) = sagas.get_mut(saga_id) {
             saga.state = TransactionState::Running;
             let mut results = Vec::new();
-            
+
             // 顺序执行事务
             for transaction in &mut saga.transactions {
                 match transaction.execute().await {
@@ -475,14 +475,14 @@ impl<T, E> GenericSagaCoordinator<T, E> {
                     }
                     Err(error) => {
                         self.record_event(saga_id, &transaction.id, "failed", "").await;
-                        
+
                         // 执行补偿
                         self.compensate_saga(saga).await?;
                         return Err(error);
                     }
                 }
             }
-            
+
             saga.state = TransactionState::Completed;
             Ok(results)
         } else {
@@ -506,7 +506,7 @@ impl<T, E> GenericSagaCoordinator<T, E> {
                 }
             }
         }
-        
+
         Ok(())
     }
 
@@ -580,10 +580,10 @@ impl AsyncSagaCoordinator {
     /// 异步执行Saga
     pub async fn execute_saga(&self, saga_id: &str) -> Result<(), Box<dyn std::error::Error>> {
         let mut sagas = self.sagas.write().await;
-        
+
         if let Some(saga) = sagas.get_mut(saga_id) {
             saga.state = TransactionState::Running;
-            
+
             // 顺序执行事务
             for transaction in &mut saga.transactions {
                 match transaction.execute().await {
@@ -592,14 +592,14 @@ impl AsyncSagaCoordinator {
                     }
                     Err(error) => {
                         self.record_event(saga_id, &transaction.id, "failed", &error.to_string()).await;
-                        
+
                         // 执行补偿
                         self.compensate_saga(saga).await?;
                         return Err(error);
                     }
                 }
             }
-            
+
             saga.state = TransactionState::Completed;
             Ok(())
         } else {
@@ -623,7 +623,7 @@ impl AsyncSagaCoordinator {
                 }
             }
         }
-        
+
         Ok(())
     }
 
@@ -724,7 +724,7 @@ impl EcommerceOrderSaga {
     /// 处理订单
     pub async fn process_order(&self, order_id: &str, user_id: &str, amount: f64) -> Result<(), Box<dyn std::error::Error>> {
         let saga_id = self.create_order_saga(order_id, user_id, amount);
-        
+
         match self.coordinator.execute_saga(&saga_id).await {
             Ok(()) => {
                 println!("Order processed successfully: {}", order_id);
@@ -801,7 +801,7 @@ impl BankTransferSaga {
     /// 执行转账
     pub async fn transfer(&self, from_account: &str, to_account: &str, amount: f64) -> Result<(), Box<dyn std::error::Error>> {
         let saga_id = self.create_transfer_saga(from_account, to_account, amount);
-        
+
         match self.coordinator.execute_saga(&saga_id).await {
             Ok(()) => {
                 println!("Transfer completed successfully");
@@ -833,7 +833,7 @@ pub struct EventDrivenSaga {
 impl EventDrivenSaga {
     pub fn new(coordinator: Arc<SagaCoordinator>) -> Self {
         let (event_sender, mut event_receiver) = mpsc::channel(100);
-        
+
         // 启动事件处理器
         let coordinator_clone = coordinator.clone();
         tokio::spawn(async move {
@@ -930,4 +930,4 @@ Saga模式是分布式事务管理的重要模式，通过形式化的数学理�
 4. **应用广泛性**: 适用于电商、银行、微服务等场景
 5. **最终一致性**: 通过补偿操作保证分布式系统的最终一致性
 
-该模式为分布式事务管理提供了理论基础和实践指导，是构建高可用、强一致性分布式系统的重要组件。 
+该模式为分布式事务管理提供了理论基础和实践指导，是构建高可用、强一致性分布式系统的重要组件。

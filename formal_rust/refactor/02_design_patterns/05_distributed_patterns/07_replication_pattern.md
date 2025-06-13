@@ -146,14 +146,14 @@ use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 /// 节点类型
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+# [derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum NodeType {
     Primary,
     Replica,
 }
 
 /// 节点状态
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+# [derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum NodeState {
     Active,
     Inactive,
@@ -161,7 +161,7 @@ pub enum NodeState {
 }
 
 /// 一致性级别
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+# [derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum ConsistencyLevel {
     One,
     Quorum,
@@ -169,7 +169,7 @@ pub enum ConsistencyLevel {
 }
 
 /// 节点
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Node {
     pub id: String,
     pub node_type: NodeType,
@@ -234,7 +234,7 @@ pub struct ReplicationManager {
 impl ReplicationManager {
     pub fn new(consistency_level: ConsistencyLevel, sync_interval: Duration) -> Self {
         let primary = Node::new("primary".to_string(), NodeType::Primary);
-        
+
         Self {
             primary: Arc::new(RwLock::new(primary)),
             replicas: Arc::new(RwLock::new(Vec::new())),
@@ -372,7 +372,7 @@ impl ReplicationManager {
         let mut health_status = Vec::new();
 
         for replica in replicas.iter() {
-            let is_healthy = replica.state == NodeState::Active 
+            let is_healthy = replica.state == NodeState::Active
                 && replica.last_sync.elapsed() < Duration::from_secs(30);
             health_status.push((replica.id.clone(), is_healthy));
         }
@@ -383,13 +383,13 @@ impl ReplicationManager {
     /// 故障转移
     pub async fn failover(&self, new_primary_id: &str) -> Result<(), String> {
         let mut replicas = self.replicas.write().unwrap();
-        
+
         // 找到新的主节点
         if let Some(new_primary_index) = replicas.iter().position(|r| r.id == new_primary_id) {
             // 将新主节点从副本列表中移除
             let mut new_primary = replicas.remove(new_primary_index);
             new_primary.node_type = NodeType::Primary;
-            
+
             // 更新主节点
             {
                 let mut primary = self.primary.write().unwrap();
@@ -426,7 +426,7 @@ impl ReplicationManager {
 }
 
 /// 复制统计信息
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct ReplicationStats {
     pub total_replicas: usize,
     pub active_replicas: usize,
@@ -510,7 +510,7 @@ pub struct GenericReplicationManager<K, V> {
 impl<K, V> GenericReplicationManager<K, V> {
     pub fn new(consistency_level: ConsistencyLevel, sync_interval: Duration) -> Self {
         let primary = GenericNode::new("primary".to_string(), NodeType::Primary);
-        
+
         Self {
             primary: Arc::new(RwLock::new(primary)),
             replicas: Arc::new(RwLock::new(Vec::new())),
@@ -649,7 +649,7 @@ pub struct AsyncReplicationManager {
 impl AsyncReplicationManager {
     pub fn new(consistency_level: ConsistencyLevel, sync_interval: Duration) -> Self {
         let primary = Node::new("primary".to_string(), NodeType::Primary);
-        
+
         Self {
             primary: Arc::new(TokioRwLock::new(primary)),
             replicas: Arc::new(TokioRwLock::new(Vec::new())),
@@ -784,7 +784,7 @@ impl AsyncReplicationManager {
         let mut health_status = Vec::new();
 
         for replica in replicas.iter() {
-            let is_healthy = replica.state == NodeState::Active 
+            let is_healthy = replica.state == NodeState::Active
                 && replica.last_sync.elapsed() < Duration::from_secs(30);
             health_status.push((replica.id.clone(), is_healthy));
         }
@@ -795,13 +795,13 @@ impl AsyncReplicationManager {
     /// 异步故障转移
     pub async fn failover(&self, new_primary_id: &str) -> Result<(), String> {
         let mut replicas = self.replicas.write().await;
-        
+
         // 找到新的主节点
         if let Some(new_primary_index) = replicas.iter().position(|r| r.id == new_primary_id) {
             // 将新主节点从副本列表中移除
             let mut new_primary = replicas.remove(new_primary_index);
             new_primary.node_type = NodeType::Primary;
-            
+
             // 更新主节点
             {
                 let mut primary = self.primary.write().await;
@@ -922,7 +922,7 @@ impl CacheReplication {
         } else {
             value.to_string()
         };
-        
+
         self.replication_manager.write(key.to_string(), cache_value).await
     }
 
@@ -976,7 +976,7 @@ pub struct MasterSlaveReplication {
 impl MasterSlaveReplication {
     pub fn new() -> Self {
         let master = Node::new("master".to_string(), NodeType::Primary);
-        
+
         Self {
             master: Arc::new(RwLock::new(master)),
             slaves: Arc::new(RwLock::new(Vec::new())),
@@ -1012,21 +1012,21 @@ impl MasterSlaveReplication {
     /// 从从节点读取
     pub async fn read_from_slave(&self, key: &str) -> Option<String> {
         let slaves = self.slaves.read().unwrap();
-        
+
         // 轮询从节点
         for slave in slaves.iter() {
             if let Some(value) = slave.read(key) {
                 return Some(value.clone());
             }
         }
-        
+
         None
     }
 
     /// 复制到从节点
     async fn replicate_to_slaves(&self, key: &str, value: &str) {
         let mut slaves = self.slaves.write().unwrap();
-        
+
         for slave in slaves.iter_mut() {
             if slave.state == NodeState::Active {
                 let _ = slave.write(key.to_string(), value.to_string());
@@ -1104,13 +1104,13 @@ impl MultiMasterReplication {
     /// 从任意主节点读取
     pub async fn read_from_any_master(&self, key: &str) -> Option<String> {
         let masters = self.masters.read().unwrap();
-        
+
         for master in masters.iter() {
             if let Some(value) = master.read(key) {
                 return Some(value.clone());
             }
         }
-        
+
         None
     }
 
@@ -1129,7 +1129,7 @@ impl MultiMasterReplication {
         // 如果有多个不同的值，解决冲突
         if values.len() > 1 && values.iter().collect::<std::collections::HashSet<_>>().len() > 1 {
             let resolved_value = self.conflict_resolver.resolve(key, &values);
-            
+
             // 将解决后的值写回所有主节点
             drop(masters); // 释放读锁
             self.write_to_all_masters(key.to_string(), resolved_value).await?;
@@ -1150,4 +1150,4 @@ impl MultiMasterReplication {
 4. **应用广泛性**: 适用于分布式数据库、缓存、存储等场景
 5. **高可用性**: 通过复制提高系统可用性和容错能力
 
-该模式为分布式系统的数据复制和高可用性提供了理论基础和实践指导，是构建可靠、高性能分布式系统的重要组件。 
+该模式为分布式系统的数据复制和高可用性提供了理论基础和实践指导，是构建可靠、高性能分布式系统的重要组件。
