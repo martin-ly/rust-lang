@@ -18,6 +18,7 @@
 
 **定义1.1 (对象)**
 对象 $O = (S, M, I)$ 包含：
+
 - $S$: 状态集合
 - $M$: 方法集合
 - $I$: 接口集合
@@ -349,7 +350,7 @@ pub struct SingletonInstance {
 }
 
 /// 单例状态枚举
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub enum SingletonState {
     Uninitialized,
     Initialized,
@@ -461,7 +462,7 @@ where
 }
 
 /// 产品定义
-#[derive(Debug, Clone, Default)]
+# [derive(Debug, Clone, Default)]
 pub struct Product {
     name: String,
     properties: Vec<String>,
@@ -553,7 +554,7 @@ where
 }
 
 /// 产品族定义
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct ProductFamily {
     products: Vec<Box<dyn Product>>,
 }
@@ -608,7 +609,7 @@ pub trait BuildStep<P> {
 }
 
 /// 建造者状态
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub enum BuilderState {
     Initial,
     Building,
@@ -709,7 +710,7 @@ pub struct PrototypeAlgebra<P> {
 }
 
 /// 克隆操作类型
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub enum CloneOperation {
     Shallow,
     Deep,
@@ -723,7 +724,7 @@ pub trait Prototype: Clone {
 }
 
 /// 具体原型对象
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct PrototypeObject {
     data: String,
     references: Vec<String>,
@@ -822,4 +823,4 @@ impl PrototypeRelationValidation for PrototypeAlgebra<PrototypeObject> {
 - **类型安全**：充分利用Rust的类型系统保证安全性
 - **可验证性**：所有性质都可以通过定理证明验证
 
-通过这种形式化重构，创建型设计模式从经验性的设计原则转变为可证明的数学理论，为软件工程提供了坚实的理论基础。 
+通过这种形式化重构，创建型设计模式从经验性的设计原则转变为可证明的数学理论，为软件工程提供了坚实的理论基础。

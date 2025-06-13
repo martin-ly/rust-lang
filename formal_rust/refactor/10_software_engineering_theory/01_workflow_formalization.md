@@ -18,6 +18,7 @@
 
 **定义1.1 (工作流)**
 工作流 $W = (A, T, D, R, C)$ 包含：
+
 - $A$: 活动集合
 - $T$: 转移关系集合
 - $D$: 数据对象集合
@@ -26,12 +27,14 @@
 
 **定义1.2 (活动)**
 活动 $a \in A$ 是一个三元组 $(I, P, O)$ 包含：
+
 - $I$: 输入条件集合
 - $P$: 处理逻辑
 - $O$: 输出结果集合
 
 **定义1.3 (转移关系)**
 转移关系 $t \in T$ 是一个四元组 $(a_1, a_2, g, f)$ 包含：
+
 - $a_1, a_2 \in A$: 源活动和目标活动
 - $g$: 转移条件
 - $f$: 数据转换函数
@@ -40,12 +43,14 @@
 
 **定义1.4 (工作流实例)**
 工作流实例 $I = (W, S, E)$ 包含：
+
 - $W$: 工作流定义
 - $S$: 当前状态
 - $E$: 执行历史
 
 **定义1.5 (执行状态)**
 执行状态 $S = (M, D, R)$ 包含：
+
 - $M$: 活动标记
 - $D$: 数据状态
 - $R$: 资源分配
@@ -92,6 +97,7 @@
 
 **定义3.1 (Petri网)**
 Petri网 $PN = (P, T, F, W, M_0)$ 包含：
+
 - $P$: 库所集合
 - $T$: 变迁集合
 - $F \subseteq (P \times T) \cup (T \times P)$: 流关系
@@ -100,6 +106,7 @@ Petri网 $PN = (P, T, F, W, M_0)$ 包含：
 
 **定义3.2 (工作流Petri网)**
 工作流Petri网 $WF-net = (PN, i, o)$ 满足：
+
 - $\bullet i = \emptyset$ (唯一源库所)
 - $o \bullet = \emptyset$ (唯一汇库所)
 - 每个节点都在从 $i$ 到 $o$ 的路径上
@@ -124,12 +131,14 @@ $$\text{Bounded}(p, M) = \exists k \in \mathbb{N}: \forall M' \in \text{Reach}(M
 
 **定义4.1 (过程代数)**
 过程代数 $PA = (P, \Sigma, \rightarrow)$ 包含：
+
 - $P$: 过程集合
 - $\Sigma$: 动作集合
 - $\rightarrow \subseteq P \times \Sigma \times P$: 转移关系
 
 **定义4.2 (基本算子)**
 过程代数基本算子：
+
 - 顺序组合: $P \cdot Q$
 - 选择组合: $P + Q$
 - 并行组合: $P \parallel Q$
@@ -151,6 +160,7 @@ $$\text{Compose}(P_1, P_2, op) = P_1 \text{ op } P_2$$
 
 **定义5.1 (状态机)**
 状态机 $SM = (S, E, T, I, F)$ 包含：
+
 - $S$: 状态集合
 - $E$: 事件集合
 - $T: S \times E \rightarrow S$: 转移函数
@@ -159,6 +169,7 @@ $$\text{Compose}(P_1, P_2, op) = P_1 \text{ op } P_2$$
 
 **定义5.2 (工作流状态机)**
 工作流状态机 $WSM = (SM, A, D, R)$ 包含：
+
 - $SM$: 基础状态机
 - $A$: 活动映射
 - $D$: 数据映射
@@ -237,11 +248,13 @@ $$\text{Throughput}(W) = \frac{\text{CompletedInstances}(W)}{\text{Time}(W)}$$
 设 $W$ 为满足健全性条件的工作流Petri网。
 
 根据Petri网健全性定义：
+
 1. **可达性**: 从初始状态可达最终状态
 2. **活性**: 不存在死锁
 3. **有界性**: 资源使用有限制
 
 这意味着：
+
 - 所有工作流实例都能正确完成
 - 不会出现死锁或活锁
 - 资源使用在合理范围内
@@ -272,10 +285,12 @@ $$\text{Throughput}(W) = \frac{\text{CompletedInstances}(W)}{\text{Time}(W)}$$
 设 $W$ 为所有活动都有明确输入输出条件的工作流。
 
 对于任意活动 $a \in A$：
+
 - 输入条件 $I(a)$ 明确定义了执行前提
 - 输出条件 $O(a)$ 明确定义了执行结果
 
 这确保了：
+
 1. 活动只在条件满足时执行
 2. 活动执行后状态是确定的
 3. 不会出现未定义的行为
@@ -294,6 +309,7 @@ $$\text{Throughput}(W) = \frac{\text{CompletedInstances}(W)}{\text{Time}(W)}$$
 $$\forall t \in T, \forall M \in \text{Reach}(M_0): \exists M': M[\sigma\rangle M' \land t \in \sigma$$
 
 这意味着：
+
 1. 所有变迁都能在某个时刻被触发
 2. 不存在永远无法执行的变迁
 3. 工作流不会陷入死锁状态
@@ -312,6 +328,7 @@ $$\forall t \in T, \forall M \in \text{Reach}(M_0): \exists M': M[\sigma\rangle 
 $$\text{Parallel}([a_1, a_2, \ldots, a_n]) = a_1 \parallel a_2 \parallel \ldots \parallel a_n$$
 
 这意味着：
+
 1. 多个活动可以同时执行
 2. 总执行时间不会超过最长的串行路径
 3. 资源利用率提高
@@ -896,4 +913,4 @@ impl StateMachineWorkflow {
 
 ---
 
-**结论**: 工作流理论通过严格的形式化定义和实现，为业务流程的建模、执行和验证提供了理论基础，确保了工作流系统的正确性和可靠性。 
+**结论**: 工作流理论通过严格的形式化定义和实现，为业务流程的建模、执行和验证提供了理论基础，确保了工作流系统的正确性和可靠性。
