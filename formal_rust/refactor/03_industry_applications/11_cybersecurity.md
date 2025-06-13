@@ -463,6 +463,7 @@ pub struct DigitalSignature {
 **场景描述：** 构建实时入侵检测系统，监控网络流量和系统行为。
 
 **核心功能：**
+
 - 网络流量监控
 - 异常行为检测
 - 威胁情报匹配
@@ -470,6 +471,7 @@ pub struct DigitalSignature {
 - 事件响应
 
 **技术实现：**
+
 ```rust
 pub struct IntrusionDetectionSystem {
     network_monitor: NetworkMonitor,
@@ -517,6 +519,7 @@ impl IntrusionDetectionSystem {
 **场景描述：** 构建SIEM系统，集中收集、分析和关联安全事件。
 
 **核心功能：**
+
 - 日志收集
 - 事件关联
 - 威胁分析
@@ -524,6 +527,7 @@ impl IntrusionDetectionSystem {
 - 可视化展示
 
 **技术实现：**
+
 ```rust
 pub struct SIEMSystem {
     log_collector: LogCollector,
@@ -563,6 +567,7 @@ impl SIEMSystem {
 **场景描述：** 构建自动化漏洞扫描系统，发现和评估系统漏洞。
 
 **核心功能：**
+
 - 端口扫描
 - 服务识别
 - 漏洞检测
@@ -570,6 +575,7 @@ impl SIEMSystem {
 - 修复建议
 
 **技术实现：**
+
 ```rust
 pub struct VulnerabilityScanner {
     port_scanner: PortScanner,
@@ -614,6 +620,7 @@ impl VulnerabilityScanner {
 **场景描述：** 构建多因子身份认证系统，提供安全的用户认证。
 
 **核心功能：**
+
 - 多因子认证
 - 生物识别
 - 单点登录
@@ -621,6 +628,7 @@ impl VulnerabilityScanner {
 - 权限控制
 
 **技术实现：**
+
 ```rust
 pub struct IdentityAuthenticationSystem {
     password_authenticator: PasswordAuthenticator,
