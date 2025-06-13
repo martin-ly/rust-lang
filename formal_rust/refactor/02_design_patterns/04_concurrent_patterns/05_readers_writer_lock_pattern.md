@@ -36,135 +36,121 @@
 
 ### 2.1 读写锁模式五元组
 
-**定义2.1 (读写锁模式五元组)**
-设 $RWL = (R, W, S, L, T)$ 为一个读写锁模式，其中：
+设读写锁模式为五元组 $R = (S, R, W, Q, L)$，其中：
 
+- $S$ 是共享资源集合
 - $R$ 是读者集合
-- $W$ 是写者集合
-- $S$ 是共享资源
-- $L$ 是锁状态
-- $T$ 是时间戳集合
+- $W$ 是写者集合  
+- $Q$ 是等待队列集合
+- $L$ 是锁状态集合
 
-### 2.2 锁状态定义
+### 2.2 状态定义
 
-**定义2.2 (锁状态)**
-设 $L = (readers, writers, waiting\_readers, waiting\_writers)$ 为锁状态，其中：
+**定义1.2.1 (锁状态)**
+锁状态 $l \in L$ 定义为：
+$$l = (r, w, q_r, q_w)$$
+其中：
+- $r \in \mathbb{N}$ 是当前读者数量
+- $w \in \{0, 1\}$ 是当前写者数量
+- $q_r \in \mathbb{N}$ 是等待读者数量
+- $q_w \in \mathbb{N}$ 是等待写者数量
 
-- $readers$ 是当前活跃读者数量
-- $writers$ 是当前活跃写者数量
-- $waiting\_readers$ 是等待读者数量
-- $waiting\_writers$ 是等待写者数量
-
-### 2.3 访问规则定义
-
-**定义2.3 (访问规则)**
-访问规则定义为：
-
-$$\text{can\_read} = (writers = 0) \land (waiting\_writers = 0)$$
-
-$$\text{can\_write} = (readers = 0) \land (writers = 0)$$
+**定义1.2.2 (有效状态)**
+状态 $l = (r, w, q_r, q_w)$ 是有效的，当且仅当：
+$$(r = 0 \lor w = 0) \land (r \geq 0) \land (w \geq 0) \land (q_r \geq 0) \land (q_w \geq 0)$$
 
 ## 3. 数学理论
 
-### 3.1 并发访问理论
+### 3.1 读写分离理论
 
-**定义3.1 (并发访问)**
-并发访问定义为：
+**公理2.1.1 (读写互斥)**
+对于任意时刻 $t$，如果存在写者访问资源，则不允许读者访问：
+$$\forall t: w(t) > 0 \implies r(t) = 0$$
 
-$$\text{concurrent\_readers} = \{r_1, r_2, \ldots, r_n\} \text{ where } n \geq 1$$
+**公理2.1.2 (读者并发)**
+多个读者可以同时访问资源：
+$$\forall t: w(t) = 0 \implies r(t) \geq 0$$
 
-**定理3.1.1 (读者并发性)**
-多个读者可以并发访问，当且仅当：
+**公理2.1.3 (写者独占)**
+写者必须独占访问资源：
+$$\forall t: w(t) > 0 \implies r(t) = 0 \land w(t) = 1$$
 
-$$\forall r_i, r_j \in \text{concurrent\_readers}: \text{overlap}(r_i, r_j)$$
+### 3.2 公平性理论
 
-**证明**：
-当没有写者访问时，多个读者可以同时访问共享资源。
+**定义2.2.1 (读者饥饿)**
+读者饥饿是指读者无限期等待的情况：
+$$\text{ReaderStarvation} = \exists t_0: \forall t > t_0: q_r(t) > 0 \land w(t) > 0$$
 
-### 3.2 互斥理论
+**定义2.2.2 (写者饥饿)**
+写者饥饿是指写者无限期等待的情况：
+$$\text{WriterStarvation} = \exists t_0: \forall t > t_0: q_w(t) > 0 \land r(t) > 0$$
 
-**定义3.2 (读写互斥)**
-读写互斥定义为：
+### 3.3 性能理论
 
-$$\text{read\_write\_mutex} = \neg(\text{active\_readers} \land \text{active\_writers})$$
+**定义2.3.1 (吞吐量)**
+吞吐量定义为单位时间内完成的读写操作数量：
+$$\text{Throughput} = \frac{\text{Completed Operations}}{\text{Time Period}}$$
 
-**定理3.2.1 (读写互斥保证)**
-读写锁保证读写互斥，当且仅当：
-
-$$\forall t: \text{readers}(t) \cdot \text{writers}(t) = 0$$
-
-**证明**：
-通过锁状态管理确保读者和写者不能同时访问。
-
-### 3.3 公平性理论
-
-**定义3.3 (公平性)**
-公平性定义为：
-
-$$\text{fairness} = \text{no\_starvation}(\text{readers}) \land \text{no\_starvation}(\text{writers})$$
-
-**定理3.3.1 (公平性保证)**
-读写锁是公平的，当且仅当：
-
-$$\forall t: \text{waiting\_time}(t) < \infty$$
-
-**证明**：
-通过优先级策略或时间片轮转避免饥饿。
+**定义2.3.2 (等待时间)**
+平均等待时间定义为：
+$$\text{AverageWaitTime} = \frac{\sum_{i=1}^{n} \text{WaitTime}_i}{n}$$
 
 ## 4. 核心定理
 
-### 4.1 读写锁正确性定理
+### 4.1 正确性定理
 
-**定理4.1.1 (读写锁正确性)**
-读写锁模式是正确的，当且仅当：
+**定理3.1.1 (读写互斥保证)**
+读写锁模式保证读写操作的互斥性。
 
-1. **读者并发性**：$\forall r_1, r_2 \in R: \text{can\_concurrent}(r_1, r_2)$
-2. **写者独占性**：$\forall w_1, w_2 \in W: \text{mutual\_exclusive}(w_1, w_2)$
-3. **读写互斥性**：$\forall r \in R, w \in W: \text{mutual\_exclusive}(r, w)$
-4. **数据一致性**：$\text{consistent}(S)$
+**证明：**
+根据公理2.1.1和公理2.1.3，当写者访问资源时，读者数量必须为0，反之亦然。因此读写操作是互斥的。
 
-**证明**：
+**定理3.1.2 (读者并发保证)**
+读写锁模式允许多个读者并发访问。
 
-- 读者并发性：通过读者计数实现
-- 写者独占性：通过写者标志实现
-- 读写互斥性：通过状态检查实现
-- 数据一致性：通过互斥访问保证
+**证明：**
+根据公理2.1.2，当没有写者访问时，读者数量可以大于0，允许多个读者并发访问。
 
-### 4.2 性能定理
+### 4.2 公平性定理
 
-**定理4.2.1 (并发度)**
-最大并发度为：
+**定理3.2.1 (写者优先公平性)**
+写者优先策略可以防止读者饥饿。
 
-$$\text{concurrency} = \begin{cases}
-\infty & \text{if only readers} \\
-1 & \text{if any writer}
-\end{cases}$$
+**证明：**
+在写者优先策略下，当有写者等待时，新读者必须等待。这确保了写者不会被无限期阻塞。
 
-**定理4.2.2 (吞吐量)**
-吞吐量为：
+**定理3.2.2 (读者优先公平性)**
+读者优先策略可以防止写者饥饿。
 
-$$\text{throughput} = \text{read\_throughput} + \text{write\_throughput}$$
+**证明：**
+在读者优先策略下，当有读者等待时，写者必须等待所有读者完成。这确保了读者不会被无限期阻塞。
 
-其中：
-$$\text{read\_throughput} = \text{concurrent\_readers} \times \text{read\_rate}$$
-$$\text{write\_throughput} = \text{write\_rate}$$
+### 4.3 性能定理
 
-**定理4.2.3 (延迟)**
-平均延迟为：
+**定理3.3.1 (并发度上界)**
+最大并发度等于读者数量：
+$$\text{MaxConcurrency} = r$$
 
-$$\text{latency} = \frac{\text{read\_latency} \times \text{read\_ratio} + \text{write\_latency} \times \text{write\_ratio}}{\text{total\_operations}}$$
+**证明：**
+根据定义1.2.2，当没有写者时，并发度等于读者数量。
 
-### 4.3 饥饿预防定理
+**定理3.3.2 (等待时间上界)**
+在公平调度下，等待时间有明确上界：
+$$\text{WaitTime} \leq \max(q_r, q_w) \cdot \text{OperationTime}$$
 
-**定理4.3.1 (饥饿预防)**
-读写锁可以预防饥饿，当且仅当：
+### 4.4 复杂度定理
 
-1. **读者优先**：写者等待所有读者完成
-2. **写者优先**：读者等待写者完成
-3. **公平策略**：按到达顺序服务
+**定理3.4.1 (时间复杂度)**
+读写锁操作的时间复杂度为 $O(1)$。
 
-**证明**：
-通过优先级策略或时间片轮转避免无限等待。
+**证明：**
+锁的获取和释放操作都是常数时间操作。
+
+**定理3.4.2 (空间复杂度)**
+读写锁的空间复杂度为 $O(1)$。
+
+**证明：**
+锁状态只需要常数空间存储。
 
 ## 5. Rust实现
 
