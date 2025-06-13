@@ -17,6 +17,7 @@
 $$Optimize(Throughput, Latency, Resource\_Usage)$$
 
 **定义 1.1.2** (性能指标)
+
 - 吞吐量：$Throughput = \frac{Operations}{Time}$
 - 延迟：$Latency = \frac{Time}{Operation}$
 - 资源利用率：$Utilization = \frac{Used\_Resources}{Total\_Resources}$
@@ -555,4 +556,4 @@ mod tests {
 **文档版本**: 1.0
 **创建时间**: 2025-06-14
 **理论完整性**: 100%
-**实现完整性**: 100% 
+**实现完整性**: 100%
