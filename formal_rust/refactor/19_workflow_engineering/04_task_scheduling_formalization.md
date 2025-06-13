@@ -3,13 +3,21 @@
 ## 目录 (Table of Contents)
 
 ### 1. 引言 (Introduction)
+
 ### 2. 任务调度基础理论 (Task Scheduling Foundation Theory)
+
 ### 3. 工作流任务调度形式化定义 (Workflow Task Scheduling Formal Definition)
+
 ### 4. 调度算法理论 (Scheduling Algorithm Theory)
+
 ### 5. 资源分配理论 (Resource Allocation Theory)
+
 ### 6. 核心定理证明 (Core Theorems Proof)
+
 ### 7. Rust实现 (Rust Implementation)
+
 ### 8. 应用示例 (Application Examples)
+
 ### 9. 总结 (Summary)
 
 ---
@@ -42,6 +50,7 @@
 
 **定义 2.1** (任务)
 任务是一个四元组 $T = (id, duration, priority, resources)$，其中：
+
 - $id \in \mathbb{N}$ 是任务唯一标识符
 - $duration \in \mathbb{R}^+$ 是任务执行时间
 - $priority \in \mathbb{N}$ 是任务优先级
@@ -49,6 +58,7 @@
 
 **定义 2.2** (资源)
 资源是一个三元组 $R = (id, capacity, cost)$，其中：
+
 - $id \in \mathbb{N}$ 是资源唯一标识符
 - $capacity \in \mathbb{R}^+$ 是资源容量
 - $cost \in \mathbb{R}^+$ 是资源使用成本
@@ -63,6 +73,7 @@
 $$f(S) = \alpha \cdot \text{makespan}(S) + \beta \cdot \text{cost}(S) + \gamma \cdot \text{fairness}(S)$$
 
 其中：
+
 - $\text{makespan}(S)$ 是总执行时间
 - $\text{cost}(S)$ 是总成本
 - $\text{fairness}(S)$ 是公平性指标
@@ -76,6 +87,7 @@ $$f(S) = \alpha \cdot \text{makespan}(S) + \beta \cdot \text{cost}(S) + \gamma \
 
 **定义 3.1** (工作流任务)
 工作流任务是一个六元组 $W = (T, D, C, P, R, L)$，其中：
+
 - $T$ 是任务集合
 - $D$ 是任务依赖关系图
 - $C$ 是任务约束集合
@@ -85,11 +97,13 @@ $$f(S) = \alpha \cdot \text{makespan}(S) + \beta \cdot \text{cost}(S) + \gamma \
 
 **定义 3.2** (任务依赖关系)
 任务依赖关系图 $D = (T, E)$ 是一个有向无环图，其中：
+
 - $T$ 是任务集合
 - $E \subseteq T \times T$ 是依赖关系集合
 
 **定义 3.3** (任务约束)
 任务约束 $C$ 包含：
+
 1. **时间约束**: $t_{start}(T_i) + duration(T_i) \leq t_{start}(T_j)$
 2. **资源约束**: $\sum_{T \in \text{active}(t)} resources(T) \leq \text{capacity}(R)$
 3. **依赖约束**: $T_i \rightarrow T_j \Rightarrow t_{start}(T_i) + duration(T_i) \leq t_{start}(T_j)$
@@ -212,6 +226,7 @@ $$\forall R \in \mathcal{R}: \text{utilization}(R) = \text{optimal\_utilization}
 
 **定理 6.3** (调度最优性条件)
 调度 $S$ 是最优的，当且仅当：
+
 1. 满足所有约束条件
 2. 资源利用率达到最优
 3. 负载均衡达到最优
@@ -1132,4 +1147,4 @@ fn test_complex_workflow_scheduling() {
 **创建日期**: 2025-06-14
 **最后更新**: 2025-06-14
 **作者**: AI Assistant
-**状态**: 完成 ✅ 
+**状态**: 完成 ✅
