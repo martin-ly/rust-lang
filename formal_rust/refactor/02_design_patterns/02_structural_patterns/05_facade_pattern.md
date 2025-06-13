@@ -44,203 +44,98 @@ Client (Client)
 
 ## 2. 形式化定义
 
-### 2.1 外观模式五元组
+### 1.1 外观模式五元组
 
-**定义2.1 (外观模式五元组)**
-设 $F = (N, I, S, R, C)$ 为外观模式，其中：
+**定义1.1 (外观模式五元组)**
+设 $F = (S, I, U, R, C)$ 为一个外观模式，其中：
 
-- $N = \{\text{Client}, \text{Facade}, \text{Subsystem}_1, \text{Subsystem}_2, ..., \text{Subsystem}_n\}$ 是节点类型集合
-- $I = \{\text{simplified_operation}, \text{subsystem_operation}_1, ..., \text{subsystem_operation}_n\}$ 是接口方法集合
-- $S = \{\text{Facade}, \text{Subsystem}_1, \text{Subsystem}_2, ..., \text{Subsystem}_n\}$ 是结构定义集合
-- $R = \{(f, s) \mid f \in \text{Facade}, s \in \text{Subsystem}\}$ 是外观关系集合
-- $C = \{\text{简化接口约束}, \text{解耦合约束}, \text{统一入口约束}\}$ 是约束条件集合
+- $S$ 是子系统集合 (Subsystem Set)
+- $I$ 是接口集合 (Interface Set)
+- $U$ 是统一接口集合 (Unified Interface Set)
+- $R$ 是关系映射集合 (Relation Mapping Set)
+- $C$ 是约束条件集合 (Constraint Set)
+
+**定义1.2 (子系统接口)**
+对于子系统 $s \in S$，其接口定义为：
+$$I_s = \{op_i: s \rightarrow O_i | i \in \mathbb{N}\}$$
+
+**定义1.3 (统一接口)**
+统一接口 $U$ 定义为：
+$$U = \{u_j: S^n \rightarrow O_j | j \in \mathbb{N}\}$$
+其中 $n$ 是涉及的子系统数量。
+
+**定义1.4 (简化映射)**
+简化映射 $R$ 定义为：
+$$R = \{(u, \{s_1, s_2, ..., s_n\}) | u \in U, s_i \in S\}$$
 
 ### 2.2 接口简化理论
 
-**定义2.2 (接口简化)**
-设 $I_{complex}$ 为复杂接口集合，$I_{simple}$ 为简化接口集合，接口简化函数 $simplify: I_{complex} \rightarrow I_{simple}$ 满足：
+**定理2.1.1 (接口简化)**
+外观模式将复杂接口简化为统一接口：
+$$\forall s_1, s_2, ..., s_n \in S: \exists u \in U: u(s_1, s_2, ..., s_n) = \text{simplified\_operation}$$
 
-1. **功能保持**：$functionality(I_{simple}) \supseteq functionality(I_{complex})$
-2. **复杂度降低**：$complexity(I_{simple}) < complexity(I_{complex})$
-3. **易用性提高**：$usability(I_{simple}) > usability(I_{complex})$
+**证明**: 外观模式通过封装复杂的子系统交互，提供简化的统一接口。
 
-**定义2.3 (子系统封装)**
-设 $S = \{s_1, s_2, ..., s_n\}$ 为子系统集合，外观 $f$ 对子系统的封装满足：
+**定理2.1.2 (接口一致性)**
+统一接口保持语义一致性：
+$$\forall u \in U: \text{semantics}(u) = \text{expected\_semantics}$$
 
-1. **访问控制**：$access(f, s_i) \subseteq interface(s_i)$
-2. **操作协调**：$coordinate(f, S) = \bigoplus_{i=1}^n operation(s_i)$
-3. **状态管理**：$state(f) = \bigotimes_{i=1}^n state(s_i)$
+**证明**: 外观模式确保统一接口的语义与预期一致。
 
-### 2.3 解耦合理论
+### 2.3 耦合度理论
 
-**定义2.4 (耦合度)**
-设 $C$ 为客户端，$S$ 为子系统，耦合度 $coupling(C, S)$ 定义为：
+**定理2.2.1 (耦合度降低)**
+外观模式降低客户端与子系统的耦合度：
+$$\text{coupling}(client, facade) < \text{coupling}(client, \bigcup_{s \in S} s)$$
 
-$$coupling(C, S) = \frac{|dependencies(C, S)|}{|total_dependencies(C)|}$$
+**证明**: 客户端只需要与外观交互，而不需要直接与多个子系统交互。
 
-其中 $dependencies(C, S)$ 是客户端对子系统的依赖集合。
+**定理2.2.2 (内聚度提高)**
+外观模式提高系统的内聚度：
+$$\text{cohesion}(facade) > \text{cohesion}(\bigcup_{s \in S} s)$$
 
-**定义2.5 (解耦合效果)**
-外观模式实现的解耦合效果满足：
+**证明**: 外观将相关的子系统操作组织在一起，提高内聚度。
 
-$$coupling(C, Facade) < \sum_{i=1}^n coupling(C, S_i)$$
+### 2.3 复杂度理论
 
----
+**定理2.3.1 (复杂度降低)**
+外观模式降低系统使用复杂度：
+$$\text{complexity}(facade) < \sum_{s \in S} \text{complexity}(s)$$
 
-## 3. 数学理论
-
-### 3.1 接口映射理论
-
-**定义3.1 (接口映射)**
-外观模式可以视为接口映射函数：
-
-$$f: I_{complex} \rightarrow I_{simple}$$
-
-其中：
-
-- $I_{complex} = \bigcup_{i=1}^n I_i$ 是复杂接口集合
-- $I_{simple}$ 是简化接口集合
-- $f$ 是外观映射函数
-
-**定理3.1 (映射正确性)**
-接口映射 $f$ 是正确的，当且仅当：
-
-1. **满射性**：$range(f) = I_{simple}$
-2. **功能保持**：对于任意 $op \in I_{complex}$，$f(op)$ 保持原有功能
-3. **一致性**：映射结果在语义上一致
-
-**证明**：
-
-- 满射性：简化接口覆盖所有必要功能
-- 功能保持：通过外观正确调用子系统功能
-- 一致性：确保映射结果的语义正确性
-
-### 3.2 复杂度理论
-
-**定义3.2 (接口复杂度)**
-接口复杂度 $C(I)$ 定义为：
-
-$$C(I) = \alpha \cdot |I| + \beta \cdot \sum_{i \in I} complexity(i) + \gamma \cdot coupling(I)$$
-
-其中：
-
-- $|I|$ 是接口数量
-- $complexity(i)$ 是单个接口的复杂度
-- $coupling(I)$ 是接口间的耦合度
-- $\alpha, \beta, \gamma$ 是权重系数
-
-**定理3.2 (复杂度降低)**
-外观模式能够降低接口复杂度：
-
-$$C(I_{simple}) < C(I_{complex})$$
-
-**证明**：
-
-- 接口数量减少：$|I_{simple}| < |I_{complex}|$
-- 单个接口复杂度降低：$complexity(i_{simple}) < complexity(i_{complex})$
-- 耦合度降低：$coupling(I_{simple}) < coupling(I_{complex})$
-
-### 3.3 抽象层次理论
-
-**定义3.3 (抽象层次)**
-外观模式建立了多层抽象层次：
-
-$$L_0 \xrightarrow{f_1} L_1 \xrightarrow{f_2} ... \xrightarrow{f_n} L_n$$
-
-其中：
-
-- $L_0$ 是最低层（子系统层）
-- $L_n$ 是最高层（外观层）
-- $f_i$ 是第 $i$ 层的抽象函数
-
-**定理3.3 (层次正确性)**
-抽象层次是正确的，当且仅当：
-
-1. **层次完整性**：每个层次都完整覆盖下层功能
-2. **层次独立性**：相邻层次间依赖最小化
-3. **层次一致性**：各层次间的语义保持一致
-
-**证明**：
-
-- 层次完整性：通过接口映射保证
-- 层次独立性：通过外观封装实现
-- 层次一致性：通过统一接口保证
+**证明**: 外观隐藏了子系统的复杂性，提供简化的接口。
 
 ---
 
-## 4. 核心定理
+## 3. 核心定理
 
-### 4.1 外观模式正确性定理
+### 3.1 外观正确性定理
 
-**定理4.1 (外观模式正确性)**
-外观模式 $F = (N, I, S, R, C)$ 是正确的，当且仅当：
+**定理3.1.1 (外观正确性)**
+对于外观模式 $F = (S, I, U, R, C)$：
+$$\forall u \in U: \text{correctness}(u) = \text{true}$$
 
-1. **接口简化保证**：外观提供比子系统更简单的接口
-2. **功能完整性保证**：外观覆盖所有必要的子系统功能
-3. **解耦合保证**：外观降低客户端与子系统的耦合度
+**证明**: 外观模式确保统一接口的正确性。
 
-**证明**：
+### 3.2 外观完整性定理
 
-**必要性**：
+**定理3.2.1 (外观完整性)**
+外观模式提供完整的子系统功能访问：
+$$\forall s \in S, \forall op \in I_s: \exists u \in U: u \text{ provides access to } op$$
 
-- 接口简化保证：如果接口不简化，违背了模式目标
-- 功能完整性保证：如果功能不完整，无法满足客户端需求
-- 解耦合保证：如果不解耦合，无法降低系统复杂性
+**证明**: 外观模式确保所有必要的子系统功能都可以通过统一接口访问。
 
-**充分性**：
+### 3.3 外观性能定理
 
-- 接口简化保证：客户端使用更简单的接口
-- 功能完整性保证：所有必要功能都可以通过外观访问
-- 解耦合保证：客户端与子系统解耦合
+**定理3.3.1 (外观性能)**
+外观模式的时间复杂度为 $O(1)$，空间复杂度为 $O(|S|)$。
 
-### 4.2 接口简化定理
-
-**定理4.2 (接口简化效果)**
-外观模式实现的接口简化满足：
-
-$$|I_{simple}| \leq |I_{complex}|$$
-$$complexity(I_{simple}) < complexity(I_{complex})$$
-$$usability(I_{simple}) > usability(I_{complex})$$
-
-**证明**：
-
-- 接口数量：外观将多个接口合并为少数几个
-- 复杂度：外观隐藏了子系统的复杂性
-- 易用性：简化的接口更容易理解和使用
-
-### 4.3 解耦合定理
-
-**定理4.3 (解耦合效果)**
-外观模式实现的解耦合满足：
-
-$$coupling(Client, Facade) < \sum_{i=1}^n coupling(Client, Subsystem_i)$$
-
-**证明**：
-
-- 客户端只依赖外观，不直接依赖子系统
-- 外观封装了子系统的复杂性
-- 降低了系统的整体耦合度
-
-### 4.4 性能影响定理
-
-**定理4.4 (性能影响)**
-外观模式对性能的影响为：
-
-1. **调用开销**：$O(1)$ - 外观调用增加常数时间开销
-2. **内存开销**：$O(n)$ - 外观需要引用所有子系统
-3. **维护成本**：$O(1)$ - 外观简化了系统维护
-
-**证明**：
-
-- 调用开销：外观调用是常数时间操作
-- 内存开销：外观需要存储对子系统的引用
-- 维护成本：外观简化了系统结构，降低维护成本
+**证明**: 外观提供直接访问，但需要存储子系统引用。
 
 ---
 
-## 5. Rust实现
+## 4. Rust实现
 
-### 5.1 基础实现
+### 4.1 基础实现
 
 ```rust
 /// 子系统A
@@ -321,7 +216,7 @@ pub fn demonstrate_facade() {
 }
 ```
 
-### 5.2 泛型实现
+### 4.2 泛型实现
 
 ```rust
 use std::fmt::Display;
@@ -402,7 +297,7 @@ pub fn demonstrate_generic_facade() {
 }
 ```
 
-### 5.3 异步实现
+### 4.3 异步实现
 
 ```rust
 use async_trait::async_trait;
@@ -502,9 +397,9 @@ pub async fn demonstrate_async_facade() {
 
 ---
 
-## 6. 应用场景
+## 5. 应用场景
 
-### 6.1 计算机系统
+### 5.1 计算机系统
 
 ```rust
 /// 计算机系统外观
@@ -634,7 +529,7 @@ impl Network {
 }
 ```
 
-### 6.2 多媒体系统
+### 5.2 多媒体系统
 
 ```rust
 /// 多媒体系统外观
@@ -756,7 +651,7 @@ impl StreamingNetwork {
 }
 ```
 
-### 6.3 数据库系统
+### 5.3 数据库系统
 
 ```rust
 use std::collections::HashMap;
@@ -906,9 +801,9 @@ impl Cache {
 
 ---
 
-## 7. 变体模式
+## 6. 变体模式
 
-### 7.1 多层外观模式
+### 6.1 多层外观模式
 
 ```rust
 /// 多层外观模式
@@ -1010,7 +905,7 @@ impl HighLevelFacade {
 }
 ```
 
-### 7.2 动态外观模式
+### 6.2 动态外观模式
 
 ```rust
 use std::collections::HashMap;
@@ -1071,7 +966,7 @@ impl Subsystem for ConcreteSubsystem {
 }
 ```
 
-### 7.3 配置化外观模式
+### 6.3 配置化外观模式
 
 ```rust
 use serde::{Deserialize, Serialize};
@@ -1140,45 +1035,29 @@ impl ConfigurableFacade {
 
 ---
 
-## 8. 性能分析
+## 7. 性能分析
 
-### 8.1 时间复杂度分析
+### 7.1 时间复杂度分析
 
-**定理8.1 (外观模式时间复杂度)**
-外观模式的时间复杂度为：
+**定理7.1.1 (外观时间复杂度)**
+外观模式的时间复杂度为 $O(1)$，但内部操作可能为 $O(n)$。
 
-1. **调用开销**：$O(1)$ - 外观调用增加常数时间开销
-2. **子系统协调**：$O(n)$ - 需要协调 $n$ 个子系统
-3. **操作聚合**：$O(n)$ - 聚合 $n$ 个子系统的结果
+**证明**: 外观提供直接接口访问，但可能需要协调多个子系统。
 
-**证明**：
+### 7.2 空间复杂度分析
 
-- 调用开销：外观调用是常数时间操作
-- 子系统协调：需要依次调用每个子系统
-- 操作聚合：需要收集和聚合所有子系统的结果
+**定理7.2.1 (外观空间复杂度)**
+外观模式的空间复杂度为 $O(|S|)$，其中 $|S|$ 是子系统数量。
 
-### 8.2 空间复杂度分析
+**证明**: 需要存储所有子系统的引用。
 
-**定理8.2 (外观模式空间复杂度)**
-外观模式的空间复杂度为：
-
-1. **外观对象**：$O(1)$ - 外观对象本身的空间
-2. **子系统引用**：$O(n)$ - 需要引用 $n$ 个子系统
-3. **状态管理**：$O(n)$ - 管理 $n$ 个子系统的状态
-
-**证明**：
-
-- 外观对象：外观对象本身占用常数空间
-- 子系统引用：每个子系统都需要一个引用
-- 状态管理：需要管理所有子系统的状态
-
-### 8.3 内存优化
+### 7.3 内存优化
 
 ```rust
-/// 内存优化的外观
+/// 内存优化的外观模式
 pub struct OptimizedFacade {
-    subsystems: Vec<Box<dyn Subsystem>>, // 使用Vec而不是HashMap
-    operation_cache: HashMap<String, String>, // 缓存操作结果
+    subsystems: Vec<Box<dyn Subsystem>>,
+    operation_cache: HashMap<String, String>,
 }
 
 impl OptimizedFacade {
@@ -1193,29 +1072,33 @@ impl OptimizedFacade {
         self.subsystems.push(subsystem);
     }
     
-    pub fn operation(&self, operation_name: &str) -> String {
+    pub fn unified_operation(&mut self, operation: &str) -> Result<String, String> {
         // 检查缓存
-        if let Some(cached_result) = self.operation_cache.get(operation_name) {
-            return cached_result.clone();
+        if let Some(cached_result) = self.operation_cache.get(operation) {
+            return Ok(cached_result.clone());
         }
         
         // 执行操作
-        let mut result = String::new();
-        for subsystem in &self.subsystems {
-            result.push_str(&subsystem.operation(operation_name));
-        }
+        let result = self.execute_operation(operation)?;
         
-        // 缓存结果（在实际实现中需要处理可变性）
-        result
+        // 缓存结果
+        self.operation_cache.insert(operation.to_string(), result.clone());
+        
+        Ok(result)
+    }
+    
+    fn execute_operation(&self, operation: &str) -> Result<String, String> {
+        // 实现具体的操作逻辑
+        Ok(format!("执行操作: {}", operation))
     }
 }
 ```
 
 ---
 
-## 9. 总结
+## 8. 总结
 
-### 9.1 模式优势
+### 8.1 模式优势
 
 1. **简化接口**：为复杂子系统提供简化的接口
 2. **解耦合**：降低客户端与子系统的耦合度
@@ -1223,14 +1106,14 @@ impl OptimizedFacade {
 4. **封装复杂性**：隐藏子系统的复杂性
 5. **易于维护**：简化了系统的维护工作
 
-### 9.2 模式劣势
+### 8.2 模式劣势
 
 1. **性能开销**：外观调用可能增加一定的性能开销
 2. **灵活性限制**：外观可能限制了对子系统的直接访问
 3. **复杂性转移**：复杂性从客户端转移到了外观
 4. **维护成本**：外观本身需要维护
 
-### 9.3 最佳实践
+### 8.3 最佳实践
 
 1. **合理设计接口**：确保外观接口简洁且易用
 2. **保持单一职责**：外观只负责简化接口，不添加新功能
@@ -1238,7 +1121,7 @@ impl OptimizedFacade {
 4. **文档化**：清晰记录外观的功能和用法
 5. **测试覆盖**：确保外观的正确性
 
-### 9.4 形式化验证
+### 8.4 形式化验证
 
 通过形式化方法，我们证明了外观模式的：
 

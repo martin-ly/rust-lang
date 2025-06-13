@@ -1,602 +1,1074 @@
-# 组合模式 (Composite Pattern) - 形式化重构
+# 组合模式形式化重构 (Composite Pattern Formal Refactoring)
 
 ## 1. 形式化定义 (Formal Definition)
 
-### 1.1 组合模式五元组
+### 1.1 组合模式五元组 (Composite Pattern Quintuple)
 
-设组合模式 $C = (N, I, S, R, C)$，其中：
+**定义1.1 (组合模式五元组)**
+设 $C = (T, L, N, O, R)$ 为一个组合模式，其中：
 
-- $N = \{\text{Composite Pattern}\}$ - 模式名称
-- $I = \{\text{将对象组合成树形结构以表示"部分-整体"的层次结构}\}$ - 意图
-- $S = \{\text{Component}, \text{Leaf}, \text{Composite}\}$ - 结构组件
-- $R = \{\text{继承关系}, \text{组合关系}, \text{聚合关系}\}$ - 关系映射
-- $C = \{\text{类型安全}, \text{递归结构}, \text{统一接口}\}$ - 约束条件
+- $T$ 是树形结构集合 (Tree Structure Set)
+- $L$ 是叶子节点集合 (Leaf Node Set)
+- $N$ 是复合节点集合 (Composite Node Set)
+- $O$ 是操作集合 (Operation Set)
+- $R$ 是关系映射集合 (Relation Mapping Set)
 
-### 1.2 数学理论 (Mathematical Theory)
+**定义1.2 (树形结构)**
+树形结构 $T$ 定义为：
+$$T = (V, E, r)$$
+其中：
 
-#### 1.2.1 树形结构理论 (Tree Structure Theory)
+- $V = L \cup N$ 是节点集合
+- $E \subseteq V \times V$ 是边集合
+- $r \in V$ 是根节点
 
-**定义1.1 (树形结构)**
-设 $T = (V, E)$ 为一个有向树，其中：
-- $V$ 是节点集合，$V = \{\text{Component}, \text{Leaf}, \text{Composite}\}$
-- $E$ 是边集合，表示继承和组合关系
+**定义1.3 (节点类型)**
+对于任意节点 $v \in V$：
 
-**定义1.2 (递归结构)**
-对于任意节点 $v \in V$，其子树 $T_v$ 定义为：
-$$T_v = \{v\} \cup \bigcup_{u \in \text{children}(v)} T_u$$
+- 如果 $v \in L$，则 $v$ 是叶子节点
+- 如果 $v \in N$，则 $v$ 是复合节点
 
-#### 1.2.2 统一接口理论 (Unified Interface Theory)
+### 1.2 操作语义 (Operational Semantics)
 
-**定义1.3 (统一接口)**
-设 $I$ 为接口集合，对于任意组件 $c \in \text{Component}$：
-$$\forall i \in I, c \text{ implements } i$$
+**定义1.4 (统一操作接口)**
+对于任意节点 $v \in V$，存在操作函数：
+$$op: V \rightarrow O$$
 
-#### 1.2.3 递归操作理论 (Recursive Operation Theory)
+**定义1.5 (复合操作)**
+对于复合节点 $n \in N$，其操作定义为：
+$$op(n) = \bigoplus_{c \in children(n)} op(c)$$
+其中 $\bigoplus$ 是操作组合函数。
 
-**定义1.4 (递归操作)**
-对于任意操作 $op$ 和组件 $c$：
-$$op(c) = \begin{cases}
-\text{leaf\_operation}(c) & \text{if } c \text{ is Leaf} \\
-\text{composite\_operation}(c) \circ \bigcirc_{child \in \text{children}(c)} op(child) & \text{if } c \text{ is Composite}
-\end{cases}$$
+## 2. 数学理论 (Mathematical Theory)
 
-## 2. 核心定理 (Core Theorems)
+### 2.1 树形结构理论 (Tree Structure Theory)
 
-### 2.1 结构完整性定理
+**定理2.1.1 (树形结构完整性)**
+对于任意组合模式 $C = (T, L, N, O, R)$，其树形结构 $T = (V, E, r)$ 满足：
 
-**定理2.1.1 (结构完整性)**
-组合模式保证树形结构的完整性：
-$$\forall c \in \text{Composite}, \text{children}(c) \subseteq \text{Component}$$
+1. **连通性**: 从根节点到任意节点都存在路径
+2. **无环性**: 图中不存在环
+3. **层次性**: 节点具有明确的层次关系
 
-**证明：**
-1. 根据定义，Composite 继承自 Component
-2. 根据组合关系，children 必须是 Component 类型
-3. 因此 $\text{children}(c) \subseteq \text{Component}$ 成立
+**证明**:
 
-### 2.2 递归操作正确性定理
+1. **连通性证明**: 由于 $r$ 是根节点，对于任意 $v \in V$，存在路径 $r \rightarrow v$
+2. **无环性证明**: 假设存在环 $v_1 \rightarrow v_2 \rightarrow ... \rightarrow v_n \rightarrow v_1$，这与树的定义矛盾
+3. **层次性证明**: 通过边集合 $E$ 定义父子关系，形成层次结构
 
-**定理2.2.1 (递归操作正确性)**
-对于任意递归操作 $op$，如果满足：
-1. 基础情况：对于 Leaf 节点，$op$ 正确执行
-2. 递归情况：对于 Composite 节点，$op$ 正确组合子操作
+**定理2.1.2 (节点唯一性)**
+对于任意节点 $v \in V$，其在树中的位置是唯一的。
 
-则 $op$ 在整个树形结构上正确执行。
+**证明**: 假设节点 $v$ 在树中有两个不同位置，则存在两条从根到 $v$ 的不同路径，这与树的无环性矛盾。
 
-**证明：**
-使用数学归纳法：
-- **基础情况**：对于叶子节点，操作直接执行
-- **归纳假设**：假设对于深度为 $k$ 的子树，操作正确执行
-- **归纳步骤**：对于深度为 $k+1$ 的节点，操作正确组合子操作
+### 2.2 统一接口理论 (Unified Interface Theory)
 
-### 2.3 类型安全定理
+**定理2.2.1 (接口一致性)**
+对于任意节点 $v \in V$，无论 $v \in L$ 还是 $v \in N$，都支持相同的操作接口。
 
-**定理2.3.1 (类型安全)**
-组合模式保证类型安全：
-$$\forall c_1, c_2 \in \text{Component}, \text{type}(c_1) = \text{type}(c_2) \Rightarrow \text{compatible}(c_1, c_2)$$
+**证明**: 根据定义1.4，所有节点都实现相同的操作函数 $op: V \rightarrow O$。
 
-### 2.4 性能复杂度定理
+**定理2.2.2 (操作传递性)**
+对于复合节点 $n \in N$，其操作会传递给所有子节点。
 
-**定理2.4.1 (遍历复杂度)**
-对于包含 $n$ 个节点的树形结构，遍历操作的复杂度为：
-$$\text{Complexity}(op) = O(n)$$
+**证明**: 根据定义1.5，复合节点的操作是子节点操作的组合。
 
-**定理2.4.2 (内存复杂度)**
-组合模式的内存复杂度为：
-$$\text{Memory}(C) = O(n)$$
+### 2.3 递归结构理论 (Recursive Structure Theory)
 
-## 3. Rust 实现 (Rust Implementation)
+**定理2.3.1 (递归定义)**
+组合模式支持递归定义，复合节点可以包含其他复合节点。
 
-### 3.1 基础实现
+**证明**: 由于 $N \subseteq V$，复合节点可以作为其他复合节点的子节点。
+
+**定理2.3.2 (递归操作)**
+递归操作在有限步骤内终止。
+
+**证明**: 由于树是有限的，递归深度有上界，操作必然终止。
+
+## 3. 核心定理 (Core Theorems)
+
+### 3.1 结构完整性定理
+
+**定理3.1.1 (树形结构完整性)**
+对于组合模式 $C = (T, L, N, O, R)$，其树形结构满足：
+$$\forall v \in V, \exists path(r, v) \land \neg \exists cycle(T)$$
+
+**证明**:
+
+1. 连通性：从根节点 $r$ 到任意节点 $v$ 都存在路径
+2. 无环性：树形结构中不存在环
+3. 层次性：节点具有明确的父子关系
+
+### 3.2 操作一致性定理
+
+**定理3.2.1 (操作接口一致性)**
+对于任意节点 $v \in V$：
+$$op(v) \in O \land \forall v_1, v_2 \in V, op(v_1) \equiv op(v_2)$$
+
+**证明**: 所有节点都实现相同的操作接口，操作语义一致。
+
+### 3.3 递归操作定理
+
+**定理3.3.1 (递归操作正确性)**
+对于复合节点 $n \in N$：
+$$op(n) = \bigoplus_{c \in children(n)} op(c)$$
+
+**证明**: 复合节点的操作是其子节点操作的组合。
+
+### 3.4 性能分析定理
+
+**定理3.4.1 (操作复杂度)**
+对于树形结构 $T = (V, E, r)$：
+
+- **时间复杂度**: $O(|V|)$
+- **空间复杂度**: $O(|V|)$
+
+**证明**:
+
+- 时间复杂度：需要访问所有节点
+- 空间复杂度：需要存储所有节点
+
+## 4. Rust实现 (Rust Implementation)
+
+### 4.1 基础实现 (Basic Implementation)
 
 ```rust
 use std::collections::HashMap;
 
-// 组件接口
-trait Component {
+/// 组合模式组件接口
+pub trait Component {
+    /// 获取组件名称
+    fn name(&self) -> &str;
+    
+    /// 执行操作
     fn operation(&self) -> String;
-    fn add(&mut self, component: Box<dyn Component>);
-    fn remove(&mut self, component: &str);
-    fn get_child(&self, name: &str) -> Option<&Box<dyn Component>>;
-    fn get_children(&self) -> Vec<&Box<dyn Component>>;
+    
+    /// 添加子组件
+    fn add(&mut self, component: Box<dyn Component>) -> Result<(), &'static str> {
+        Err("不支持添加子组件")
+    }
+    
+    /// 移除子组件
+    fn remove(&mut self, name: &str) -> Result<(), &'static str> {
+        Err("不支持移除子组件")
+    }
+    
+    /// 获取子组件
+    fn get_child(&self, name: &str) -> Option<&Box<dyn Component>> {
+        None
+    }
+    
+    /// 获取所有子组件
+    fn get_children(&self) -> Vec<&Box<dyn Component>> {
+        Vec::new()
+    }
 }
 
-// 叶子节点
-struct Leaf {
+/// 叶子组件
+#[derive(Debug, Clone)]
+pub struct Leaf {
     name: String,
-    value: String,
 }
 
 impl Leaf {
-    fn new(name: String, value: String) -> Self {
-        Leaf { name, value }
+    /// 创建新的叶子组件
+    pub fn new(name: impl Into<String>) -> Self {
+        Leaf { name: name.into() }
     }
 }
 
 impl Component for Leaf {
+    fn name(&self) -> &str {
+        &self.name
+    }
+    
     fn operation(&self) -> String {
-        format!("Leaf[{}]: {}", self.name, self.value)
-    }
-
-    fn add(&mut self, _component: Box<dyn Component>) {
-        // 叶子节点不支持添加子组件
-    }
-
-    fn remove(&mut self, _name: &str) {
-        // 叶子节点不支持删除子组件
-    }
-
-    fn get_child(&self, _name: &str) -> Option<&Box<dyn Component>> {
-        None
-    }
-
-    fn get_children(&self) -> Vec<&Box<dyn Component>> {
-        Vec::new()
+        format!("叶子 {} 的操作", self.name)
     }
 }
 
-// 复合节点
-struct Composite {
+/// 复合组件
+#[derive(Debug)]
+pub struct Composite {
     name: String,
-    children: HashMap<String, Box<dyn Component>>,
+    children: Vec<Box<dyn Component>>,
 }
 
 impl Composite {
-    fn new(name: String) -> Self {
+    /// 创建新的复合组件
+    pub fn new(name: impl Into<String>) -> Self {
         Composite {
-            name,
-            children: HashMap::new(),
+            name: name.into(),
+            children: Vec::new(),
         }
+    }
+    
+    /// 获取子组件数量
+    pub fn child_count(&self) -> usize {
+        self.children.len()
+    }
+    
+    /// 检查是否为叶子节点
+    pub fn is_leaf(&self) -> bool {
+        self.children.is_empty()
     }
 }
 
 impl Component for Composite {
+    fn name(&self) -> &str {
+        &self.name
+    }
+    
     fn operation(&self) -> String {
-        let mut result = format!("Composite[{}]: ", self.name);
-        for child in self.children.values() {
-            result.push_str(&format!("({})", child.operation()));
+        let mut result = format!("组合 {} 的操作:\n", self.name);
+        for child in &self.children {
+            result.push_str(&format!("  - {}\n", child.operation()));
         }
         result
     }
-
-    fn add(&mut self, component: Box<dyn Component>) {
-        // 这里需要获取组件名称，简化实现
-        let name = format!("child_{}", self.children.len());
-        self.children.insert(name, component);
+    
+    fn add(&mut self, component: Box<dyn Component>) -> Result<(), &'static str> {
+        self.children.push(component);
+        Ok(())
     }
-
-    fn remove(&mut self, name: &str) {
-        self.children.remove(name);
+    
+    fn remove(&mut self, name: &str) -> Result<(), &'static str> {
+        if let Some(index) = self.children.iter().position(|c| c.name() == name) {
+            self.children.remove(index);
+            Ok(())
+        } else {
+            Err("未找到子组件")
+        }
     }
-
+    
     fn get_child(&self, name: &str) -> Option<&Box<dyn Component>> {
-        self.children.get(name)
+        self.children.iter().find(|c| c.name() == name)
     }
-
+    
     fn get_children(&self) -> Vec<&Box<dyn Component>> {
-        self.children.values().collect()
+        self.children.iter().collect()
     }
 }
 ```
 
-### 3.2 泛型实现
+### 4.2 泛型实现 (Generic Implementation)
 
 ```rust
 use std::collections::HashMap;
+use std::fmt::Display;
 
-// 泛型组件接口
-trait GenericComponent<T> {
+/// 泛型组合模式组件接口
+pub trait GenericComponent<T: Display + Clone> {
+    /// 获取组件名称
+    fn name(&self) -> &str;
+    
+    /// 执行操作
     fn operation(&self) -> T;
-    fn add(&mut self, component: Box<dyn GenericComponent<T>>);
-    fn remove(&mut self, name: &str);
-    fn get_child(&self, name: &str) -> Option<&Box<dyn GenericComponent<T>>>;
-    fn get_children(&self) -> Vec<&Box<dyn GenericComponent<T>>>;
+    
+    /// 添加子组件
+    fn add(&mut self, component: Box<dyn GenericComponent<T>>) -> Result<(), &'static str> {
+        Err("不支持添加子组件")
+    }
+    
+    /// 移除子组件
+    fn remove(&mut self, name: &str) -> Result<(), &'static str> {
+        Err("不支持移除子组件")
+    }
+    
+    /// 获取子组件
+    fn get_child(&self, name: &str) -> Option<&Box<dyn GenericComponent<T>>> {
+        None
+    }
 }
 
-// 泛型叶子节点
-struct GenericLeaf<T> {
+/// 泛型叶子组件
+#[derive(Debug, Clone)]
+pub struct GenericLeaf<T: Display + Clone> {
     name: String,
     value: T,
 }
 
-impl<T> GenericLeaf<T> {
-    fn new(name: String, value: T) -> Self {
-        GenericLeaf { name, value }
+impl<T: Display + Clone> GenericLeaf<T> {
+    /// 创建新的泛型叶子组件
+    pub fn new(name: impl Into<String>, value: T) -> Self {
+        GenericLeaf {
+            name: name.into(),
+            value,
+        }
     }
 }
 
-impl<T: Clone + std::fmt::Display> GenericComponent<T> for GenericLeaf<T> {
+impl<T: Display + Clone> GenericComponent<T> for GenericLeaf<T> {
+    fn name(&self) -> &str {
+        &self.name
+    }
+    
     fn operation(&self) -> T {
         self.value.clone()
     }
-
-    fn add(&mut self, _component: Box<dyn GenericComponent<T>>) {
-        // 叶子节点不支持添加子组件
-    }
-
-    fn remove(&mut self, _name: &str) {
-        // 叶子节点不支持删除子组件
-    }
-
-    fn get_child(&self, _name: &str) -> Option<&Box<dyn GenericComponent<T>>> {
-        None
-    }
-
-    fn get_children(&self) -> Vec<&Box<dyn GenericComponent<T>>> {
-        Vec::new()
-    }
 }
 
-// 泛型复合节点
-struct GenericComposite<T> {
+/// 泛型复合组件
+#[derive(Debug)]
+pub struct GenericComposite<T: Display + Clone> {
     name: String,
-    children: HashMap<String, Box<dyn GenericComponent<T>>>,
-    combine_fn: fn(Vec<T>) -> T,
+    children: Vec<Box<dyn GenericComponent<T>>>,
+    operation_fn: Box<dyn Fn(&[T]) -> T>,
 }
 
-impl<T> GenericComposite<T> {
-    fn new(name: String, combine_fn: fn(Vec<T>) -> T) -> Self {
+impl<T: Display + Clone> GenericComposite<T> {
+    /// 创建新的泛型复合组件
+    pub fn new<F>(name: impl Into<String>, operation_fn: F) -> Self 
+    where
+        F: Fn(&[T]) -> T + 'static,
+    {
         GenericComposite {
-            name,
-            children: HashMap::new(),
-            combine_fn,
+            name: name.into(),
+            children: Vec::new(),
+            operation_fn: Box::new(operation_fn),
         }
     }
 }
 
-impl<T: Clone> GenericComponent<T> for GenericComposite<T> {
+impl<T: Display + Clone> GenericComponent<T> for GenericComposite<T> {
+    fn name(&self) -> &str {
+        &self.name
+    }
+    
     fn operation(&self) -> T {
-        let values: Vec<T> = self.children.values()
-            .map(|child| child.operation())
-            .collect();
-        (self.combine_fn)(values)
+        let values: Vec<T> = self.children.iter().map(|c| c.operation()).collect();
+        (self.operation_fn)(&values)
     }
-
-    fn add(&mut self, component: Box<dyn GenericComponent<T>>) {
-        let name = format!("child_{}", self.children.len());
-        self.children.insert(name, component);
+    
+    fn add(&mut self, component: Box<dyn GenericComponent<T>>) -> Result<(), &'static str> {
+        self.children.push(component);
+        Ok(())
     }
-
-    fn remove(&mut self, name: &str) {
-        self.children.remove(name);
+    
+    fn remove(&mut self, name: &str) -> Result<(), &'static str> {
+        if let Some(index) = self.children.iter().position(|c| c.name() == name) {
+            self.children.remove(index);
+            Ok(())
+        } else {
+            Err("未找到子组件")
+        }
     }
-
+    
     fn get_child(&self, name: &str) -> Option<&Box<dyn GenericComponent<T>>> {
-        self.children.get(name)
-    }
-
-    fn get_children(&self) -> Vec<&Box<dyn GenericComponent<T>>> {
-        self.children.values().collect()
+        self.children.iter().find(|c| c.name() == name)
     }
 }
 ```
 
-### 3.3 异步实现
+### 4.3 异步实现 (Async Implementation)
 
 ```rust
 use std::collections::HashMap;
-use async_trait::async_trait;
+use std::future::Future;
+use std::pin::Pin;
+use tokio::sync::RwLock;
 
-#[async_trait]
-trait AsyncComponent {
+/// 异步组合模式组件接口
+#[async_trait::async_trait]
+pub trait AsyncComponent {
+    /// 获取组件名称
+    fn name(&self) -> &str;
+    
+    /// 异步执行操作
     async fn operation(&self) -> String;
-    async fn add(&mut self, component: Box<dyn AsyncComponent + Send>);
-    async fn remove(&mut self, name: &str);
-    async fn get_child(&self, name: &str) -> Option<&Box<dyn AsyncComponent + Send>>;
-    async fn get_children(&self) -> Vec<&Box<dyn AsyncComponent + Send>>;
-}
-
-struct AsyncLeaf {
-    name: String,
-    value: String,
-}
-
-#[async_trait]
-impl AsyncComponent for AsyncLeaf {
-    async fn operation(&self) -> String {
-        format!("AsyncLeaf[{}]: {}", self.name, self.value)
+    
+    /// 异步添加子组件
+    async fn add(&mut self, component: Box<dyn AsyncComponent>) -> Result<(), &'static str> {
+        Err("不支持添加子组件")
     }
-
-    async fn add(&mut self, _component: Box<dyn AsyncComponent + Send>) {
-        // 叶子节点不支持添加子组件
+    
+    /// 异步移除子组件
+    async fn remove(&mut self, name: &str) -> Result<(), &'static str> {
+        Err("不支持移除子组件")
     }
-
-    async fn remove(&mut self, _name: &str) {
-        // 叶子节点不支持删除子组件
-    }
-
-    async fn get_child(&self, _name: &str) -> Option<&Box<dyn AsyncComponent + Send>> {
+    
+    /// 异步获取子组件
+    async fn get_child(&self, name: &str) -> Option<Box<dyn AsyncComponent>> {
         None
     }
+}
 
-    async fn get_children(&self) -> Vec<&Box<dyn AsyncComponent + Send>> {
-        Vec::new()
+/// 异步叶子组件
+#[derive(Debug)]
+pub struct AsyncLeaf {
+    name: String,
+}
+
+impl AsyncLeaf {
+    /// 创建新的异步叶子组件
+    pub fn new(name: impl Into<String>) -> Self {
+        AsyncLeaf { name: name.into() }
     }
 }
 
-struct AsyncComposite {
-    name: String,
-    children: HashMap<String, Box<dyn AsyncComponent + Send>>,
+#[async_trait::async_trait]
+impl AsyncComponent for AsyncLeaf {
+    fn name(&self) -> &str {
+        &self.name
+    }
+    
+    async fn operation(&self) -> String {
+        // 模拟异步操作
+        tokio::time::sleep(tokio::time::Duration::from_millis(10)).await;
+        format!("异步叶子 {} 的操作", self.name)
+    }
 }
 
-#[async_trait]
-impl AsyncComponent for AsyncComposite {
-    async fn operation(&self) -> String {
-        let mut result = format!("AsyncComposite[{}]: ", self.name);
-        for child in self.children.values() {
-            result.push_str(&format!("({})", child.operation().await));
+/// 异步复合组件
+#[derive(Debug)]
+pub struct AsyncComposite {
+    name: String,
+    children: RwLock<Vec<Box<dyn AsyncComponent>>>,
+}
+
+impl AsyncComposite {
+    /// 创建新的异步复合组件
+    pub fn new(name: impl Into<String>) -> Self {
+        AsyncComposite {
+            name: name.into(),
+            children: RwLock::new(Vec::new()),
         }
+    }
+}
+
+#[async_trait::async_trait]
+impl AsyncComponent for AsyncComposite {
+    fn name(&self) -> &str {
+        &self.name
+    }
+    
+    async fn operation(&self) -> String {
+        let children = self.children.read().await;
+        let mut result = format!("异步组合 {} 的操作:\n", self.name);
+        
+        let mut operations = Vec::new();
+        for child in children.iter() {
+            operations.push(child.operation());
+        }
+        
+        // 并发执行所有子组件的操作
+        let results = futures::future::join_all(operations).await;
+        
+        for (i, op_result) in results.into_iter().enumerate() {
+            result.push_str(&format!("  - {}\n", op_result));
+        }
+        
         result
     }
-
-    async fn add(&mut self, component: Box<dyn AsyncComponent + Send>) {
-        let name = format!("child_{}", self.children.len());
-        self.children.insert(name, component);
+    
+    async fn add(&mut self, component: Box<dyn AsyncComponent>) -> Result<(), &'static str> {
+        let mut children = self.children.write().await;
+        children.push(component);
+        Ok(())
     }
-
-    async fn remove(&mut self, name: &str) {
-        self.children.remove(name);
+    
+    async fn remove(&mut self, name: &str) -> Result<(), &'static str> {
+        let mut children = self.children.write().await;
+        if let Some(index) = children.iter().position(|c| c.name() == name) {
+            children.remove(index);
+            Ok(())
+        } else {
+            Err("未找到子组件")
+        }
     }
-
-    async fn get_child(&self, name: &str) -> Option<&Box<dyn AsyncComponent + Send>> {
-        self.children.get(name)
-    }
-
-    async fn get_children(&self) -> Vec<&Box<dyn AsyncComponent + Send>> {
-        self.children.values().collect()
+    
+    async fn get_child(&self, name: &str) -> Option<Box<dyn AsyncComponent>> {
+        let children = self.children.read().await;
+        children.iter().find(|c| c.name() == name).cloned()
     }
 }
 ```
 
-### 3.4 应用场景实现
+### 4.4 使用示例 (Usage Examples)
 
 ```rust
-// 文件系统示例
-struct FileSystemComponent {
+/// 组合模式使用示例
+pub fn composite_example() {
+    println!("=== 组合模式基础示例 ===");
+    
+    // 创建叶子节点
+    let leaf1 = Box::new(Leaf::new("叶子1"));
+    let leaf2 = Box::new(Leaf::new("叶子2"));
+    let leaf3 = Box::new(Leaf::new("叶子3"));
+    let leaf4 = Box::new(Leaf::new("叶子4"));
+    
+    // 创建复合节点
+    let mut composite1 = Composite::new("组合1");
+    composite1.add(leaf1).unwrap();
+    composite1.add(leaf2).unwrap();
+    
+    let mut composite2 = Composite::new("组合2");
+    composite2.add(leaf3).unwrap();
+    composite2.add(leaf4).unwrap();
+    
+    // 创建根节点
+    let mut root = Composite::new("根");
+    root.add(Box::new(composite1)).unwrap();
+    root.add(Box::new(composite2)).unwrap();
+    
+    // 打印整个树结构
+    println!("{}", root.operation());
+    
+    // 访问特定节点
+    if let Some(comp1) = root.get_child("组合1") {
+        println!("找到: {}", comp1.name());
+    }
+}
+
+/// 泛型组合模式示例
+pub fn generic_composite_example() {
+    println!("\n=== 泛型组合模式示例 ===");
+    
+    // 创建数值叶子节点
+    let leaf1 = Box::new(GenericLeaf::new("数值1", 10));
+    let leaf2 = Box::new(GenericLeaf::new("数值2", 20));
+    let leaf3 = Box::new(GenericLeaf::new("数值3", 30));
+    
+    // 创建求和复合节点
+    let mut sum_composite = GenericComposite::new("求和", |values| {
+        values.iter().sum()
+    });
+    sum_composite.add(leaf1).unwrap();
+    sum_composite.add(leaf2).unwrap();
+    
+    // 创建求积复合节点
+    let mut product_composite = GenericComposite::new("求积", |values| {
+        values.iter().product()
+    });
+    product_composite.add(leaf3).unwrap();
+    
+    // 创建根节点
+    let mut root = GenericComposite::new("根", |values| {
+        values.iter().sum()
+    });
+    root.add(Box::new(sum_composite)).unwrap();
+    root.add(Box::new(product_composite)).unwrap();
+    
+    println!("根节点操作结果: {}", root.operation());
+}
+
+/// 异步组合模式示例
+pub async fn async_composite_example() {
+    println!("\n=== 异步组合模式示例 ===");
+    
+    // 创建异步叶子节点
+    let leaf1 = Box::new(AsyncLeaf::new("异步叶子1"));
+    let leaf2 = Box::new(AsyncLeaf::new("异步叶子2"));
+    
+    // 创建异步复合节点
+    let mut composite = AsyncComposite::new("异步组合");
+    composite.add(leaf1).await.unwrap();
+    composite.add(leaf2).await.unwrap();
+    
+    // 执行异步操作
+    let result = composite.operation().await;
+    println!("{}", result);
+}
+```
+
+## 5. 应用场景 (Application Scenarios)
+
+### 5.1 文件系统 (File System)
+
+```rust
+/// 文件系统组件
+pub trait FileSystemComponent {
+    fn name(&self) -> &str;
+    fn size(&self) -> u64;
+    fn display(&self, indent: usize) -> String;
+}
+
+/// 文件
+pub struct File {
     name: String,
     size: u64,
-    children: HashMap<String, Box<dyn FileSystemComponent>>,
-    is_file: bool,
 }
 
-impl FileSystemComponent {
-    fn new_file(name: String, size: u64) -> Self {
-        FileSystemComponent {
-            name,
+impl File {
+    pub fn new(name: impl Into<String>, size: u64) -> Self {
+        File {
+            name: name.into(),
             size,
-            children: HashMap::new(),
-            is_file: true,
         }
     }
+}
 
-    fn new_directory(name: String) -> Self {
-        FileSystemComponent {
-            name,
-            size: 0,
-            children: HashMap::new(),
-            is_file: false,
-        }
-    }
-
-    fn add_child(&mut self, child: Box<dyn FileSystemComponent>) {
-        if !self.is_file {
-            self.children.insert(child.get_name().clone(), child);
-        }
-    }
-
-    fn get_name(&self) -> &String {
+impl FileSystemComponent for File {
+    fn name(&self) -> &str {
         &self.name
     }
-
-    fn get_size(&self) -> u64 {
-        if self.is_file {
-            self.size
-        } else {
-            self.children.values().map(|child| child.get_size()).sum()
-        }
+    
+    fn size(&self) -> u64 {
+        self.size
     }
-
-    fn list_contents(&self) -> Vec<String> {
-        if self.is_file {
-            vec![format!("{} ({})", self.name, self.size)]
-        } else {
-            let mut contents = vec![format!("{} (dir)", self.name)];
-            for child in self.children.values() {
-                contents.extend(child.list_contents().iter().map(|s| format!("  {}", s)));
-            }
-            contents
-        }
+    
+    fn display(&self, indent: usize) -> String {
+        format!("{}{} ({} bytes)", "  ".repeat(indent), self.name, self.size)
     }
 }
 
-// 图形界面示例
-trait UIComponent {
-    fn render(&self) -> String;
-    fn add_child(&mut self, child: Box<dyn UIComponent>);
-    fn remove_child(&mut self, name: &str);
-    fn get_name(&self) -> &String;
-}
-
-struct UIWindow {
+/// 目录
+pub struct Directory {
     name: String,
-    title: String,
-    children: HashMap<String, Box<dyn UIComponent>>,
+    children: Vec<Box<dyn FileSystemComponent>>,
 }
 
-impl UIWindow {
-    fn new(name: String, title: String) -> Self {
-        UIWindow {
-            name,
-            title,
-            children: HashMap::new(),
+impl Directory {
+    pub fn new(name: impl Into<String>) -> Self {
+        Directory {
+            name: name.into(),
+            children: Vec::new(),
         }
+    }
+    
+    pub fn add(&mut self, component: Box<dyn FileSystemComponent>) {
+        self.children.push(component);
     }
 }
 
-impl UIComponent for UIWindow {
-    fn render(&self) -> String {
-        let mut result = format!("Window: {}\n", self.title);
-        for child in self.children.values() {
-            result.push_str(&format!("  {}\n", child.render()));
+impl FileSystemComponent for Directory {
+    fn name(&self) -> &str {
+        &self.name
+    }
+    
+    fn size(&self) -> u64 {
+        self.children.iter().map(|c| c.size()).sum()
+    }
+    
+    fn display(&self, indent: usize) -> String {
+        let mut result = format!("{}{}/ ({} bytes)\n", "  ".repeat(indent), self.name, self.size());
+        for child in &self.children {
+            result.push_str(&format!("{}\n", child.display(indent + 1)));
         }
         result
     }
+}
+```
 
-    fn add_child(&mut self, child: Box<dyn UIComponent>) {
-        self.children.insert(child.get_name().clone(), child);
-    }
+### 5.2 图形界面 (Graphical User Interface)
 
-    fn remove_child(&mut self, name: &str) {
-        self.children.remove(name);
-    }
-
-    fn get_name(&self) -> &String {
-        &self.name
+```rust
+/// GUI组件
+pub trait GUIComponent {
+    fn name(&self) -> &str;
+    fn render(&self) -> String;
+    fn add(&mut self, component: Box<dyn GUIComponent>) -> Result<(), &'static str> {
+        Err("不支持添加子组件")
     }
 }
 
-struct UIButton {
+/// 按钮
+pub struct Button {
     name: String,
     text: String,
 }
 
-impl UIButton {
-    fn new(name: String, text: String) -> Self {
-        UIButton { name, text }
+impl Button {
+    pub fn new(name: impl Into<String>, text: impl Into<String>) -> Self {
+        Button {
+            name: name.into(),
+            text: text.into(),
+        }
     }
 }
 
-impl UIComponent for UIButton {
-    fn render(&self) -> String {
-        format!("Button: {}", self.text)
-    }
-
-    fn add_child(&mut self, _child: Box<dyn UIComponent>) {
-        // 按钮不支持子组件
-    }
-
-    fn remove_child(&mut self, _name: &str) {
-        // 按钮不支持子组件
-    }
-
-    fn get_name(&self) -> &String {
+impl GUIComponent for Button {
+    fn name(&self) -> &str {
         &self.name
+    }
+    
+    fn render(&self) -> String {
+        format!("<button>{}</button>", self.text)
+    }
+}
+
+/// 面板
+pub struct Panel {
+    name: String,
+    children: Vec<Box<dyn GUIComponent>>,
+}
+
+impl Panel {
+    pub fn new(name: impl Into<String>) -> Self {
+        Panel {
+            name: name.into(),
+            children: Vec::new(),
+        }
+    }
+}
+
+impl GUIComponent for Panel {
+    fn name(&self) -> &str {
+        &self.name
+    }
+    
+    fn render(&self) -> String {
+        let mut result = format!("<panel name=\"{}\">\n", self.name);
+        for child in &self.children {
+            result.push_str(&format!("  {}\n", child.render()));
+        }
+        result.push_str("</panel>");
+        result
+    }
+    
+    fn add(&mut self, component: Box<dyn GUIComponent>) -> Result<(), &'static str> {
+        self.children.push(component);
+        Ok(())
     }
 }
 ```
 
-## 4. 应用场景 (Application Scenarios)
+### 5.3 组织架构 (Organization Structure)
 
-### 4.1 文件系统 (File System)
+```rust
+/// 组织成员
+pub trait OrganizationMember {
+    fn name(&self) -> &str;
+    fn role(&self) -> &str;
+    fn display(&self, indent: usize) -> String;
+}
 
-**场景描述：**
-文件系统是组合模式的经典应用，目录可以包含文件和子目录，形成树形结构。
+/// 员工
+pub struct Employee {
+    name: String,
+    role: String,
+}
 
-**优势：**
-- 统一处理文件和目录
-- 递归遍历文件系统
-- 计算目录大小等操作
+impl Employee {
+    pub fn new(name: impl Into<String>, role: impl Into<String>) -> Self {
+        Employee {
+            name: name.into(),
+            role: role.into(),
+        }
+    }
+}
 
-### 4.2 图形用户界面 (GUI)
+impl OrganizationMember for Employee {
+    fn name(&self) -> &str {
+        &self.name
+    }
+    
+    fn role(&self) -> &str {
+        &self.role
+    }
+    
+    fn display(&self, indent: usize) -> String {
+        format!("{}{} - {}", "  ".repeat(indent), self.name, self.role)
+    }
+}
 
-**场景描述：**
-GUI框架中，窗口可以包含按钮、面板等组件，面板又可以包含其他组件。
+/// 部门
+pub struct Department {
+    name: String,
+    members: Vec<Box<dyn OrganizationMember>>,
+}
 
-**优势：**
-- 统一渲染接口
-- 递归布局计算
-- 事件传播机制
+impl Department {
+    pub fn new(name: impl Into<String>) -> Self {
+        Department {
+            name: name.into(),
+            members: Vec::new(),
+        }
+    }
+    
+    pub fn add_member(&mut self, member: Box<dyn OrganizationMember>) {
+        self.members.push(member);
+    }
+}
 
-### 4.3 组织架构 (Organization Structure)
+impl OrganizationMember for Department {
+    fn name(&self) -> &str {
+        &self.name
+    }
+    
+    fn role(&self) -> &str {
+        "部门"
+    }
+    
+    fn display(&self, indent: usize) -> String {
+        let mut result = format!("{}{} (部门)\n", "  ".repeat(indent), self.name);
+        for member in &self.members {
+            result.push_str(&format!("{}\n", member.display(indent + 1)));
+        }
+        result
+    }
+}
+```
 
-**场景描述：**
-公司组织架构中，部门可以包含员工和子部门。
+## 6. 变体模式 (Variant Patterns)
 
-**优势：**
-- 统一管理接口
-- 递归统计功能
-- 权限控制机制
+### 6.1 安全组合模式 (Safe Composite Pattern)
 
-### 4.4 数学表达式 (Mathematical Expressions)
+```rust
+/// 安全组合模式 - 区分叶子节点和复合节点
+pub trait SafeComponent {
+    fn name(&self) -> &str;
+    fn operation(&self) -> String;
+}
 
-**场景描述：**
-数学表达式可以表示为树形结构，操作符是复合节点，数字是叶子节点。
+/// 叶子节点
+pub trait LeafComponent: SafeComponent {}
 
-**优势：**
-- 统一计算接口
-- 递归求值
-- 表达式优化
+/// 复合节点
+pub trait CompositeComponent: SafeComponent {
+    fn add(&mut self, component: Box<dyn SafeComponent>) -> Result<(), &'static str>;
+    fn remove(&mut self, name: &str) -> Result<(), &'static str>;
+    fn get_child(&self, name: &str) -> Option<&Box<dyn SafeComponent>>;
+}
 
-## 5. 变体模式 (Variant Patterns)
+/// 安全叶子组件
+pub struct SafeLeaf {
+    name: String,
+}
 
-### 5.1 安全组合模式 (Safe Composite Pattern)
+impl SafeLeaf {
+    pub fn new(name: impl Into<String>) -> Self {
+        SafeLeaf { name: name.into() }
+    }
+}
 
-**特点：**
-- 在 Component 接口中不定义 add/remove 方法
-- 只在 Composite 类中定义这些方法
-- 提供类型安全保证
+impl SafeComponent for SafeLeaf {
+    fn name(&self) -> &str {
+        &self.name
+    }
+    
+    fn operation(&self) -> String {
+        format!("安全叶子 {} 的操作", self.name)
+    }
+}
 
-### 5.2 透明组合模式 (Transparent Composite Pattern)
+impl LeafComponent for SafeLeaf {}
 
-**特点：**
-- 在 Component 接口中定义 add/remove 方法
-- Leaf 类提供空实现
-- 提供统一接口
+/// 安全复合组件
+pub struct SafeComposite {
+    name: String,
+    children: Vec<Box<dyn SafeComponent>>,
+}
 
-### 5.3 父引用组合模式 (Parent Reference Composite Pattern)
+impl SafeComposite {
+    pub fn new(name: impl Into<String>) -> Self {
+        SafeComposite {
+            name: name.into(),
+            children: Vec::new(),
+        }
+    }
+}
 
-**特点：**
-- 每个组件维护对父组件的引用
-- 支持向上遍历
-- 简化删除操作
+impl SafeComponent for SafeComposite {
+    fn name(&self) -> &str {
+        &self.name
+    }
+    
+    fn operation(&self) -> String {
+        let mut result = format!("安全组合 {} 的操作:\n", self.name);
+        for child in &self.children {
+            result.push_str(&format!("  - {}\n", child.operation()));
+        }
+        result
+    }
+}
 
-### 5.4 缓存组合模式 (Cached Composite Pattern)
+impl CompositeComponent for SafeComposite {
+    fn add(&mut self, component: Box<dyn SafeComponent>) -> Result<(), &'static str> {
+        self.children.push(component);
+        Ok(())
+    }
+    
+    fn remove(&mut self, name: &str) -> Result<(), &'static str> {
+        if let Some(index) = self.children.iter().position(|c| c.name() == name) {
+            self.children.remove(index);
+            Ok(())
+        } else {
+            Err("未找到子组件")
+        }
+    }
+    
+    fn get_child(&self, name: &str) -> Option<&Box<dyn SafeComponent>> {
+        self.children.iter().find(|c| c.name() == name)
+    }
+}
+```
 
-**特点：**
-- 缓存计算结果
-- 避免重复计算
-- 提高性能
+### 6.2 访问者组合模式 (Visitor Composite Pattern)
 
-## 6. 质量属性分析 (Quality Attributes Analysis)
+```rust
+/// 访问者接口
+pub trait Visitor {
+    fn visit_leaf(&self, leaf: &Leaf) -> String;
+    fn visit_composite(&self, composite: &Composite) -> String;
+}
 
-### 6.1 可维护性 (Maintainability)
+/// 打印访问者
+pub struct PrintVisitor;
 
-**评分：** ⭐⭐⭐⭐⭐
+impl Visitor for PrintVisitor {
+    fn visit_leaf(&self, leaf: &Leaf) -> String {
+        format!("访问叶子: {}", leaf.name())
+    }
+    
+    fn visit_composite(&self, composite: &Composite) -> String {
+        format!("访问组合: {} ({} 个子组件)", composite.name(), composite.child_count())
+    }
+}
 
-**分析：**
-- 统一接口简化维护
-- 递归结构清晰
-- 易于扩展新组件类型
+/// 统计访问者
+pub struct StatisticsVisitor;
 
-### 6.2 可扩展性 (Extensibility)
+impl Visitor for StatisticsVisitor {
+    fn visit_leaf(&self, _leaf: &Leaf) -> String {
+        "叶子节点".to_string()
+    }
+    
+    fn visit_composite(&self, composite: &Composite) -> String {
+        format!("复合节点，包含 {} 个子组件", composite.child_count())
+    }
+}
 
-**评分：** ⭐⭐⭐⭐⭐
+/// 扩展组件接口以支持访问者
+pub trait VisitableComponent {
+    fn accept(&self, visitor: &dyn Visitor) -> String;
+}
 
-**分析：**
-- 支持动态添加组件
-- 支持新组件类型
-- 支持新操作类型
+impl VisitableComponent for Leaf {
+    fn accept(&self, visitor: &dyn Visitor) -> String {
+        visitor.visit_leaf(self)
+    }
+}
 
-### 6.3 可重用性 (Reusability)
+impl VisitableComponent for Composite {
+    fn accept(&self, visitor: &dyn Visitor) -> String {
+        visitor.visit_composite(self)
+    }
+}
+```
 
-**评分：** ⭐⭐⭐⭐⭐
+## 7. 性能分析 (Performance Analysis)
 
-**分析：**
-- 组件高度可重用
-- 操作可应用于不同结构
-- 接口标准化
+### 7.1 时间复杂度分析
 
-### 6.4 性能 (Performance)
+**定理7.1.1 (操作时间复杂度)**
+对于包含 $n$ 个节点的组合模式：
 
-**评分：** ⭐⭐⭐⭐
+- **单个操作**: $O(1)$
+- **遍历所有节点**: $O(n)$
+- **查找特定节点**: $O(n)$ 最坏情况
 
-**分析：**
-- 遍历复杂度 $O(n)$
-- 内存使用合理
-- 支持缓存优化
+**证明**:
 
-## 7. 总结 (Summary)
+1. 单个操作：直接访问节点，常数时间
+2. 遍历所有节点：需要访问每个节点一次
+3. 查找特定节点：可能需要遍历整个树
 
-组合模式通过树形结构实现了"部分-整体"的层次结构，提供了统一的操作接口。其数学理论基础扎实，Rust实现灵活多样，应用场景广泛。该模式在文件系统、GUI框架、组织架构等领域都有重要应用，是面向对象设计中的核心模式之一。
+### 7.2 空间复杂度分析
+
+**定理7.2.1 (空间复杂度)**
+组合模式的空间复杂度为 $O(n)$，其中 $n$ 是节点总数。
+
+**证明**: 需要存储所有节点及其关系。
+
+### 7.3 内存管理
+
+```rust
+/// 内存优化的组合模式
+pub struct OptimizedComposite {
+    name: String,
+    children: Vec<Box<dyn Component>>,
+    cache: Option<String>, // 操作结果缓存
+}
+
+impl OptimizedComposite {
+    pub fn new(name: impl Into<String>) -> Self {
+        OptimizedComposite {
+            name: name.into(),
+            children: Vec::new(),
+            cache: None,
+        }
+    }
+    
+    /// 清除缓存
+    pub fn clear_cache(&mut self) {
+        self.cache = None;
+    }
+}
+
+impl Component for OptimizedComposite {
+    fn name(&self) -> &str {
+        &self.name
+    }
+    
+    fn operation(&self) -> String {
+        // 使用缓存优化性能
+        if let Some(ref cached) = self.cache {
+            return cached.clone();
+        }
+        
+        let mut result = format!("优化组合 {} 的操作:\n", self.name);
+        for child in &self.children {
+            result.push_str(&format!("  - {}\n", child.operation()));
+        }
+        
+        // 注意：这里需要可变引用来设置缓存，但trait方法不允许
+        // 实际实现中可以使用内部可变性
+        result
+    }
+    
+    fn add(&mut self, component: Box<dyn Component>) -> Result<(), &'static str> {
+        self.children.push(component);
+        self.clear_cache(); // 清除缓存
+        Ok(())
+    }
+    
+    fn remove(&mut self, name: &str) -> Result<(), &'static str> {
+        if let Some(index) = self.children.iter().position(|c| c.name() == name) {
+            self.children.remove(index);
+            self.clear_cache(); // 清除缓存
+            Ok(())
+        } else {
+            Err("未找到子组件")
+        }
+    }
+    
+    fn get_child(&self, name: &str) -> Option<&Box<dyn Component>> {
+        self.children.iter().find(|c| c.name() == name)
+    }
+    
+    fn get_children(&self) -> Vec<&Box<dyn Component>> {
+        self.children.iter().collect()
+    }
+}
+```
+
+## 8. 总结 (Summary)
+
+组合模式通过统一接口将单个对象和组合对象统一处理，建立了清晰的层次结构。其形式化定义和数学理论为模式的应用提供了坚实的理论基础，而Rust的实现展示了模式在实际编程中的灵活性和强大功能。
+
+### 8.1 核心优势
+
+1. **统一接口**: 叶子节点和复合节点使用相同的接口
+2. **递归结构**: 支持任意深度的嵌套结构
+3. **灵活扩展**: 易于添加新的组件类型
+4. **类型安全**: Rust的类型系统确保编译时安全
+
+### 8.2 应用领域
+
+1. **文件系统**: 文件和目录的层次结构
+2. **图形界面**: GUI组件的嵌套结构
+3. **组织架构**: 部门和员工的层次关系
+4. **数据结构**: 树形数据结构的实现
+
+### 8.3 设计原则
+
+1. **开闭原则**: 对扩展开放，对修改封闭
+2. **单一职责**: 每个组件只负责自己的操作
+3. **里氏替换**: 子类可以替换父类
+4. **接口隔离**: 提供最小化的接口
+
+组合模式是面向对象设计中处理层次结构的经典模式，通过形式化的数学理论和Rust的类型安全实现，为复杂系统的构建提供了可靠的基础。
 
 ---
 

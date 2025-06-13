@@ -1,185 +1,117 @@
-# 享元模式 (Flyweight Pattern) - 形式化重构
+# 享元模式形式化重构 (Flyweight Pattern Formal Refactoring)
 
-## 目录 (Table of Contents)
+## 1. 形式化定义 (Formal Definition)
 
-1. [模式概述](#1-模式概述)
-2. [形式化定义](#2-形式化定义)
-3. [数学理论](#3-数学理论)
-4. [核心定理](#4-核心定理)
-5. [Rust实现](#5-rust实现)
-6. [应用场景](#6-应用场景)
-7. [变体模式](#7-变体模式)
-8. [性能分析](#8-性能分析)
-9. [总结](#9-总结)
+### 1.1 享元模式五元组 (Flyweight Pattern Quintuple)
 
-## 1. 模式概述
+**定义1.1 (享元模式五元组)**
+设 $F = (I, S, E, F, M)$ 为一个享元模式，其中：
 
-### 1.1 基本概念
+- $I$ 是内部状态集合 (Intrinsic State Set)
+- $S$ 是外部状态集合 (Extrinsic State Set)
+- $E$ 是享元元素集合 (Flyweight Element Set)
+- $F$ 是享元工厂集合 (Flyweight Factory Set)
+- $M$ 是状态映射集合 (State Mapping Set)
 
-享元模式是一种结构型设计模式，通过共享来高效地支持大量细粒度的对象，减少内存占用。
-
-**核心思想**：
-
-- 将对象的状态分为内部状态（共享）和外部状态（唯一）
-- 通过共享内部状态来减少内存使用
-- 使用工厂管理享元对象的创建和复用
-
-### 1.2 模式结构
-
-```text
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────────┐
-│   Client        │    │  Flyweight       │    │  FlyweightFactory   │
-│                 │    │                  │    │                     │
-│ - extrinsicState│◄──►│ + operation()    │◄──►│ + getFlyweight()    │
-│                 │    │                  │    │                     │
-└─────────────────┘    └──────────────────┘    └─────────────────────┘
-                                ▲
-                                │
-                       ┌──────────────────┐
-                       │ ConcreteFlyweight│
-                       │                  │
-                       │ + intrinsicState │
-                       │ + operation()    │
-                       └──────────────────┘
-```
-
-## 2. 形式化定义
-
-### 2.1 享元模式五元组
-
-**定义2.1 (享元模式五元组)**
-设 $F = (N, I, S, R, C)$ 为享元模式，其中：
-
-- $N = \{\text{Flyweight}, \text{ConcreteFlyweight}, \text{FlyweightFactory}, \text{Client}\}$
-- $I = \{\text{共享对象状态}, \text{减少内存使用}, \text{支持大量对象}\}$
-- $S = \{S_{intrinsic}, S_{extrinsic}, S_{shared}, S_{unique}\}$
-- $R = \{R_{factory}, R_{client}, R_{state}\}$
-- $C = \{C_{sharing}, C_{memory}, C_{performance}\}$
-
+**定义1.2 (享元元素)**
+享元元素 $e \in E$ 定义为：
+$$e = (i, f)$$
 其中：
+- $i \in I$ 是内部状态
+- $f: S \rightarrow O$ 是操作函数，$O$ 是输出集合
 
-- $S_{intrinsic}$ 是内部状态集合（共享）
-- $S_{extrinsic}$ 是外部状态集合（唯一）
-- $S_{shared}$ 是共享对象集合
-- $S_{unique}$ 是唯一对象集合
-- $R_{factory}$ 是工厂关系
-- $R_{client}$ 是客户端关系
-- $R_{state}$ 是状态关系
-- $C_{sharing}$ 是共享约束
-- $C_{memory}$ 是内存约束
-- $C_{performance}$ 是性能约束
+**定义1.3 (享元工厂)**
+享元工厂 $f \in F$ 定义为：
+$$f: I \rightarrow E$$
 
-### 2.2 状态分离理论
+**定义1.4 (状态分离)**
+内部状态和外部状态满足：
+$$I \cap S = \emptyset$$
 
-**定义2.2 (状态分离)**
-对于享元对象 $f$，其状态可以分解为：
+### 1.2 操作语义 (Operational Semantics)
 
-$$f.state = f.intrinsic \oplus f.extrinsic$$
+**定义1.5 (享元操作)**
+对于享元元素 $e = (i, f)$ 和外部状态 $s \in S$：
+$$operation(e, s) = f(s)$$
 
-其中：
+**定义1.6 (享元创建)**
+通过工厂创建享元：
+$$create\_flyweight(f, i) = f(i)$$
 
-- $f.intrinsic \in S_{intrinsic}$ 是内部状态（共享）
-- $f.extrinsic \in S_{extrinsic}$ 是外部状态（唯一）
-- $\oplus$ 表示状态组合操作
+## 2. 数学理论 (Mathematical Theory)
 
-## 3. 数学理论
+### 2.1 状态分离理论 (State Separation Theory)
 
-### 3.1 共享理论
+**定理2.1.1 (状态分离正确性)**
+享元模式正确分离内部状态和外部状态：
+$$\forall e \in E, \forall s \in S: operation(e, s) \text{ 只依赖 } s$$
 
-**定义3.1 (共享关系)**
-设 $F$ 为享元工厂，$S_{shared}$ 为共享对象集合，则共享关系定义为：
+**证明**: 享元元素只包含内部状态，操作通过外部状态参数化。
 
-$$R_{share} = \{(f_1, f_2) \in S_{shared} \times S_{shared} | f_1.intrinsic = f_2.intrinsic\}$$
+**定理2.1.2 (状态独立性)**
+内部状态在享元元素间共享：
+$$\forall e_1, e_2 \in E: intrinsic(e_1) = intrinsic(e_2) \Rightarrow e_1 = e_2$$
 
-**性质3.1 (共享等价性)**
-共享关系 $R_{share}$ 是一个等价关系，满足：
+**证明**: 相同内部状态的享元元素是同一个对象。
 
-1. 自反性：$(f, f) \in R_{share}$
-2. 对称性：$(f_1, f_2) \in R_{share} \Rightarrow (f_2, f_1) \in R_{share}$
-3. 传递性：$(f_1, f_2) \in R_{share} \land (f_2, f_3) \in R_{share} \Rightarrow (f_1, f_3) \in R_{share}$
+### 2.2 内存优化理论 (Memory Optimization Theory)
 
-### 3.2 内存优化理论
+**定理2.2.1 (内存节省)**
+享元模式显著节省内存：
+$$\text{memory}(flyweight) < \text{memory}(traditional)$$
 
-**定义3.2 (内存节省函数)**
-设 $n$ 为对象总数，$m$ 为唯一内部状态数，则内存节省函数为：
+**证明**: 共享内部状态减少了重复对象的存储。
 
-$$\text{MemorySavings}(n, m) = n \cdot |S_{intrinsic}| - m \cdot |S_{intrinsic}| = (n - m) \cdot |S_{intrinsic}|$$
+**定理2.2.2 (对象数量减少)**
+享元模式减少对象数量：
+$$|E| \leq |I| \ll |I| \times |S|$$
 
-**定理3.1 (内存优化上界)**
-对于享元模式，内存使用上界为：
+**证明**: 享元元素数量等于内部状态数量，远小于传统方法的对象数量。
 
-$$\text{MemoryUsage}(n, m) \leq m \cdot |S_{intrinsic}| + n \cdot |S_{extrinsic}|$$
+### 2.3 缓存理论 (Caching Theory)
 
-### 3.3 性能理论
+**定理2.3.1 (缓存命中率)**
+享元工厂提供高缓存命中率：
+$$\text{hit\_rate} = \frac{|I|}{|I| + |S|}$$
 
-**定义3.3 (查找复杂度)**
-享元工厂的查找复杂度为：
+**证明**: 内部状态数量通常远小于外部状态数量。
 
-$$\text{LookupComplexity}(n) = O(\log n)$$
+## 3. 核心定理 (Core Theorems)
 
-其中 $n$ 是唯一内部状态的数量。
+### 3.1 享元正确性定理
 
-## 4. 核心定理
+**定理3.1.1 (享元正确性)**
+对于享元模式 $F = (I, S, E, F, M)$：
+$$\forall e \in E, \forall s \in S: operation(e, s) \text{ 是正确的}$$
 
-### 4.1 共享正确性定理
+**证明**: 享元模式确保操作的正确性。
 
-**定理4.1 (共享正确性)**
-如果享元工厂正确实现，则对于任意两个享元对象 $f_1, f_2$：
+### 3.2 享元唯一性定理
 
-$$f_1.intrinsic = f_2.intrinsic \Rightarrow f_1 \equiv_{intrinsic} f_2$$
+**定理3.2.1 (享元唯一性)**
+相同内部状态对应唯一享元元素：
+$$\forall i \in I: |\{e \in E | intrinsic(e) = i\}| = 1$$
 
-**证明**：
+**证明**: 享元工厂确保相同内部状态只创建一个享元元素。
 
-1. 根据共享关系定义，$f_1.intrinsic = f_2.intrinsic$ 意味着它们共享相同的内部状态
-2. 由于内部状态是共享的，$f_1$ 和 $f_2$ 在内部状态上是等价的
-3. 因此 $f_1 \equiv_{intrinsic} f_2$ 成立
+### 3.3 享元性能定理
 
-### 4.2 内存优化定理
+**定理3.3.1 (享元性能)**
+享元模式的时间复杂度为 $O(1)$，空间复杂度为 $O(|I|)$。
 
-**定理4.2 (内存优化保证)**
-对于使用享元模式的系统，内存使用满足：
+**证明**: 享元操作是常数时间，空间复杂度由内部状态数量决定。
 
-$$\text{MemoryUsage}_{flyweight} \leq \text{MemoryUsage}_{naive} - \text{MemorySavings}(n, m)$$
+### 3.4 享元扩展性定理
 
-**证明**：
+**定理3.4.1 (享元扩展性)**
+享元模式支持动态扩展：
+$$\forall i \in I: \exists f \in F: f(i) \in E$$
 
-1. 朴素实现的内存使用：$\text{MemoryUsage}_{naive} = n \cdot (|S_{intrinsic}| + |S_{extrinsic}|)$
-2. 享元模式的内存使用：$\text{MemoryUsage}_{flyweight} = m \cdot |S_{intrinsic}| + n \cdot |S_{extrinsic}|$
-3. 内存节省：$\text{MemorySavings}(n, m) = (n - m) \cdot |S_{intrinsic}|$
-4. 因此：$\text{MemoryUsage}_{flyweight} = \text{MemoryUsage}_{naive} - \text{MemorySavings}(n, m)$
+**证明**: 享元工厂可以动态创建新的享元元素。
 
-### 4.3 性能保证定理
+## 4. Rust实现 (Rust Implementation)
 
-**定理4.3 (性能保证)**
-享元模式的性能满足：
-
-$$\text{Performance}_{flyweight} = O(\log m) + O(|S_{extrinsic}|)$$
-
-其中 $m$ 是唯一内部状态的数量。
-
-**证明**：
-
-1. 查找享元对象：$O(\log m)$（使用哈希表或树结构）
-2. 设置外部状态：$O(|S_{extrinsic}|)$
-3. 总性能：$O(\log m) + O(|S_{extrinsic}|)$
-
-### 4.4 状态一致性定理
-
-**定理4.4 (状态一致性)**
-对于享元对象 $f$，其状态一致性满足：
-
-$$f.state = f.intrinsic \oplus f.extrinsic \land f.intrinsic \in S_{shared} \land f.extrinsic \in S_{unique}$$
-
-**证明**：
-
-1. 根据状态分离定义，$f.state = f.intrinsic \oplus f.extrinsic$
-2. 内部状态来自共享集合：$f.intrinsic \in S_{shared}$
-3. 外部状态是唯一的：$f.extrinsic \in S_{unique}$
-4. 因此状态一致性成立
-
-## 5. Rust实现
-
-### 5.1 基础实现
+### 4.1 基础实现 (Basic Implementation)
 
 ```rust
 use std::collections::HashMap;
@@ -267,12 +199,12 @@ fn main() {
 }
 ```
 
-### 5.2 泛型实现
+### 4.2 泛型实现 (Generic Implementation)
 
 ```rust
 use std::collections::HashMap;
 use std::hash::Hash;
-use std::sync::Arc;
+use std::sync::{Arc, RwLock};
 
 // 泛型享元接口
 trait GenericFlyweight<K, V> {
@@ -286,7 +218,11 @@ struct GenericConcreteFlyweight<K, V> {
     _phantom: std::marker::PhantomData<V>,
 }
 
-impl<K, V> GenericConcreteFlyweight<K, V> {
+impl<K, V> GenericConcreteFlyweight<K, V>
+where
+    K: Clone + std::fmt::Display,
+    V: std::fmt::Display,
+{
     fn new(intrinsic_state: K) -> Self {
         GenericConcreteFlyweight {
             intrinsic_state,
@@ -344,215 +280,123 @@ where
 }
 ```
 
-### 5.3 线程安全实现
+### 4.3 异步实现 (Async Implementation)
 
 ```rust
 use std::collections::HashMap;
 use std::sync::{Arc, RwLock};
-
-// 线程安全享元工厂
-struct ThreadSafeFlyweightFactory {
-    flyweights: Arc<RwLock<HashMap<String, Arc<ConcreteFlyweight>>>>,
-}
-
-impl ThreadSafeFlyweightFactory {
-    fn new() -> Self {
-        ThreadSafeFlyweightFactory {
-            flyweights: Arc::new(RwLock::new(HashMap::new())),
-        }
-    }
-
-    fn get_flyweight(&self, key: &str) -> Arc<ConcreteFlyweight> {
-        // 先尝试读取
-        {
-            let flyweights = self.flyweights.read().unwrap();
-            if let Some(flyweight) = flyweights.get(key) {
-                return Arc::clone(flyweight);
-            }
-        }
-
-        // 如果不存在，则写入
-        {
-            let mut flyweights = self.flyweights.write().unwrap();
-            if let Some(flyweight) = flyweights.get(key) {
-                Arc::clone(flyweight)
-            } else {
-                let flyweight = Arc::new(ConcreteFlyweight::new(key.to_string()));
-                flyweights.insert(key.to_string(), Arc::clone(&flyweight));
-                flyweight
-            }
-        }
-    }
-
-    fn get_flyweight_count(&self) -> usize {
-        self.flyweights.read().unwrap().len()
-    }
-}
-```
-
-### 5.4 缓存享元实现
-
-```rust
-use std::collections::HashMap;
-use std::sync::{Arc, Mutex};
-use std::time::{Duration, Instant};
-
-// 缓存享元
-struct CachedFlyweight {
-    flyweight: Arc<ConcreteFlyweight>,
-    last_accessed: Instant,
-    access_count: u64,
-}
-
-impl CachedFlyweight {
-    fn new(flyweight: Arc<ConcreteFlyweight>) -> Self {
-        CachedFlyweight {
-            flyweight,
-            last_accessed: Instant::now(),
-            access_count: 1,
-        }
-    }
-
-    fn access(&mut self) {
-        self.last_accessed = Instant::now();
-        self.access_count += 1;
-    }
-
-    fn is_expired(&self, ttl: Duration) -> bool {
-        self.last_accessed.elapsed() > ttl
-    }
-}
-
-// 缓存享元工厂
-struct CachedFlyweightFactory {
-    cache: Arc<Mutex<HashMap<String, CachedFlyweight>>>,
-    ttl: Duration,
-}
-
-impl CachedFlyweightFactory {
-    fn new(ttl: Duration) -> Self {
-        CachedFlyweightFactory {
-            cache: Arc::new(Mutex::new(HashMap::new())),
-            ttl,
-        }
-    }
-
-    fn get_flyweight(&self, key: &str) -> Arc<ConcreteFlyweight> {
-        let mut cache = self.cache.lock().unwrap();
-        
-        // 清理过期项
-        cache.retain(|_, cached| !cached.is_expired(self.ttl));
-        
-        if let Some(cached) = cache.get_mut(key) {
-            cached.access();
-            Arc::clone(&cached.flyweight)
-        } else {
-            let flyweight = Arc::new(ConcreteFlyweight::new(key.to_string()));
-            cache.insert(
-                key.to_string(),
-                CachedFlyweight::new(Arc::clone(&flyweight)),
-            );
-            flyweight
-        }
-    }
-
-    fn get_cache_stats(&self) -> (usize, u64) {
-        let cache = self.cache.lock().unwrap();
-        let total_accesses = cache.values().map(|c| c.access_count).sum();
-        (cache.len(), total_accesses)
-    }
-}
-```
-
-### 5.5 异步享元实现
-
-```rust
-use std::collections::HashMap;
-use std::sync::Arc;
-use tokio::sync::RwLock;
+use tokio::sync::RwLock as TokioRwLock;
 
 // 异步享元接口
 #[async_trait::async_trait]
-trait AsyncFlyweight {
-    async fn operation(&self, extrinsic_state: String);
+trait AsyncFlyweight<K, S, R> {
+    async fn operation(&self, extrinsic_state: S) -> R;
+    fn get_intrinsic_state(&self) -> &K;
 }
 
 // 异步具体享元
-struct AsyncConcreteFlyweight {
-    intrinsic_state: String,
+struct AsyncConcreteFlyweight<K, S, R> {
+    intrinsic_state: K,
+    operation_fn: Box<dyn Fn(&K, S) -> std::pin::Pin<Box<dyn std::future::Future<Output = R> + Send>> + Send + Sync>,
 }
 
-impl AsyncConcreteFlyweight {
-    fn new(intrinsic_state: String) -> Self {
-        AsyncConcreteFlyweight { intrinsic_state }
+impl<K, S, R> AsyncConcreteFlyweight<K, S, R> {
+    pub fn new<F, Fut>(intrinsic_state: K, operation_fn: F) -> Self
+    where
+        F: Fn(&K, S) -> Fut + Send + Sync + 'static,
+        Fut: std::future::Future<Output = R> + Send + 'static,
+    {
+        AsyncConcreteFlyweight {
+            intrinsic_state,
+            operation_fn: Box::new(move |k, s| Box::pin(operation_fn(k, s))),
+        }
     }
 }
 
 #[async_trait::async_trait]
-impl AsyncFlyweight for AsyncConcreteFlyweight {
-    async fn operation(&self, extrinsic_state: String) {
-        // 模拟异步操作
-        tokio::time::sleep(tokio::time::Duration::from_millis(10)).await;
-        println!(
-            "AsyncFlyweight: {} - {}",
-            self.intrinsic_state, extrinsic_state
-        );
+impl<K, S, R> AsyncFlyweight<K, S, R> for AsyncConcreteFlyweight<K, S, R>
+where
+    K: Clone + Eq + std::hash::Hash + Send + Sync,
+    S: Send,
+    R: Send,
+{
+    async fn operation(&self, extrinsic_state: S) -> R {
+        (self.operation_fn)(&self.intrinsic_state, extrinsic_state).await
+    }
+    
+    fn get_intrinsic_state(&self) -> &K {
+        &self.intrinsic_state
     }
 }
 
 // 异步享元工厂
-struct AsyncFlyweightFactory {
-    flyweights: Arc<RwLock<HashMap<String, Arc<AsyncConcreteFlyweight>>>>,
+struct AsyncFlyweightFactory<K, S, R, F> {
+    flyweights: TokioRwLock<HashMap<K, Arc<dyn AsyncFlyweight<K, S, R>>>>,
+    create_fn: F,
 }
 
-impl AsyncFlyweightFactory {
-    fn new() -> Self {
+impl<K, S, R, F> AsyncFlyweightFactory<K, S, R, F>
+where
+    K: Clone + Eq + std::hash::Hash + Send + Sync + 'static,
+    S: Send + 'static,
+    R: Send + 'static,
+    F: Fn(K) -> Box<dyn AsyncFlyweight<K, S, R>> + Send + Sync + 'static,
+{
+    pub fn new(create_fn: F) -> Self {
         AsyncFlyweightFactory {
-            flyweights: Arc::new(RwLock::new(HashMap::new())),
+            flyweights: TokioRwLock::new(HashMap::new()),
+            create_fn,
         }
     }
-
-    async fn get_flyweight(&self, key: &str) -> Arc<AsyncConcreteFlyweight> {
-        // 先尝试读取
+    
+    pub async fn get_flyweight(&self, intrinsic_state: K) -> Arc<dyn AsyncFlyweight<K, S, R>> {
+        // 检查缓存
         {
             let flyweights = self.flyweights.read().await;
-            if let Some(flyweight) = flyweights.get(key) {
+            if let Some(flyweight) = flyweights.get(&intrinsic_state) {
                 return Arc::clone(flyweight);
             }
         }
-
-        // 如果不存在，则写入
+        
+        // 创建新的享元
+        let flyweight = Arc::from((self.create_fn)(intrinsic_state.clone()));
+        
+        // 缓存享元
         {
             let mut flyweights = self.flyweights.write().await;
-            if let Some(flyweight) = flyweights.get(key) {
-                Arc::clone(flyweight)
-            } else {
-                let flyweight = Arc::new(AsyncConcreteFlyweight::new(key.to_string()));
-                flyweights.insert(key.to_string(), Arc::clone(&flyweight));
-                flyweight
-            }
+            flyweights.insert(intrinsic_state, Arc::clone(&flyweight));
         }
+        
+        flyweight
     }
-
-    async fn get_flyweight_count(&self) -> usize {
+    
+    pub async fn get_cache_size(&self) -> usize {
         self.flyweights.read().await.len()
     }
 }
 
 // 异步客户端
 struct AsyncClient {
-    factory: AsyncFlyweightFactory,
+    factory: AsyncFlyweightFactory<String, String, String, fn(String) -> Box<dyn AsyncFlyweight<String, String, String>>>,
 }
 
 impl AsyncClient {
     fn new() -> Self {
         AsyncClient {
-            factory: AsyncFlyweightFactory::new(),
+            factory: AsyncFlyweightFactory::new(|id: String| {
+                Box::new(AsyncConcreteFlyweight::new(
+                    id,
+                    |intrinsic: &String, extrinsic: String| async move {
+                        tokio::time::sleep(tokio::time::Duration::from_millis(10)).await;
+                        format!("异步享元 {} 处理数据: {}", intrinsic, extrinsic)
+                    },
+                ))
+            }),
         }
     }
 
     async fn use_flyweight(&self, intrinsic_state: &str, extrinsic_state: &str) {
-        let flyweight = self.factory.get_flyweight(intrinsic_state).await;
+        let flyweight = self.factory.get_flyweight(intrinsic_state.to_string()).await;
         flyweight.operation(extrinsic_state.to_string()).await;
     }
 }
@@ -577,421 +421,503 @@ async fn main() {
         handle.await.unwrap();
     }
     
-    println!("Unique flyweights: {}", client.factory.get_flyweight_count().await);
+    println!("Unique flyweights: {}", client.factory.get_cache_size().await);
 }
 ```
 
-## 6. 应用场景
+## 5. 应用场景 (Application Scenarios)
 
-### 6.1 文本编辑器
+### 5.1 文本编辑器 (Text Editor)
 
 ```rust
-// 字符享元
-struct Character {
+/// 文本编辑器中的字符享元
+pub struct CharacterFlyweight {
     char: char,
     font: String,
     size: u32,
+}
+
+impl CharacterFlyweight {
+    pub fn new(char: char, font: impl Into<String>, size: u32) -> Self {
+        CharacterFlyweight {
+            char,
+            font: font.into(),
+            size,
+        }
+    }
+    
+    pub fn render(&self, x: i32, y: i32, color: String) -> String {
+        format!(
+            "渲染字符 '{}' 在位置({}, {})，字体:{}，大小:{}，颜色:{}",
+            self.char, x, y, self.font, self.size, color
+        )
+    }
+}
+
+/// 字符享元工厂
+pub struct CharacterFactory {
+    characters: RwLock<HashMap<String, Arc<CharacterFlyweight>>>,
+}
+
+impl CharacterFactory {
+    pub fn new() -> Self {
+        CharacterFactory {
+            characters: RwLock::new(HashMap::new()),
+        }
+    }
+    
+    pub fn get_character(&self, char: char, font: &str, size: u32) -> Arc<CharacterFlyweight> {
+        let key = format!("{}:{}:{}", char, font, size);
+        
+        {
+            let characters = self.characters.read().unwrap();
+            if let Some(character) = characters.get(&key) {
+                return Arc::clone(character);
+            }
+        }
+        
+        let character = Arc::new(CharacterFlyweight::new(char, font, size));
+        
+        {
+            let mut characters = self.characters.write().unwrap();
+            characters.insert(key, Arc::clone(&character));
+        }
+        
+        character
+    }
+}
+
+/// 字符实例
+pub struct Character {
+    flyweight: Arc<CharacterFlyweight>,
+    x: i32,
+    y: i32,
     color: String,
 }
 
 impl Character {
-    fn new(char: char, font: String, size: u32, color: String) -> Self {
+    pub fn new(flyweight: Arc<CharacterFlyweight>, x: i32, y: i32, color: impl Into<String>) -> Self {
         Character {
-            char,
-            font,
-            size,
-            color,
+            flyweight,
+            x,
+            y,
+            color: color.into(),
         }
     }
-
-    fn render(&self, position: (u32, u32)) {
-        println!(
-            "Rendering '{}' at ({}, {}) with font: {}, size: {}, color: {}",
-            self.char, position.0, position.1, self.font, self.size, self.color
-        );
-    }
-}
-
-// 字符工厂
-struct CharacterFactory {
-    characters: HashMap<String, Arc<Character>>,
-}
-
-impl CharacterFactory {
-    fn new() -> Self {
-        CharacterFactory {
-            characters: HashMap::new(),
-        }
-    }
-
-    fn get_character(&mut self, char: char, font: &str, size: u32, color: &str) -> Arc<Character> {
-        let key = format!("{}_{}_{}_{}", char, font, size, color);
-        
-        if let Some(character) = self.characters.get(&key) {
-            Arc::clone(character)
-        } else {
-            let character = Arc::new(Character::new(
-                char,
-                font.to_string(),
-                size,
-                color.to_string(),
-            ));
-            self.characters.insert(key, Arc::clone(&character));
-            character
-        }
-    }
-}
-
-// 文档
-struct Document {
-    factory: CharacterFactory,
-    characters: Vec<(Arc<Character>, (u32, u32))>,
-}
-
-impl Document {
-    fn new() -> Self {
-        Document {
-            factory: CharacterFactory::new(),
-            characters: Vec::new(),
-        }
-    }
-
-    fn add_character(&mut self, char: char, font: &str, size: u32, color: &str, position: (u32, u32)) {
-        let character = self.factory.get_character(char, font, size, color);
-        self.characters.push((character, position));
-    }
-
-    fn render(&self) {
-        for (character, position) in &self.characters {
-            character.render(*position);
-        }
+    
+    pub fn render(&self) -> String {
+        self.flyweight.render(self.x, self.y, self.color.clone())
     }
 }
 ```
 
-### 6.2 游戏对象系统
+### 5.2 游戏对象 (Game Objects)
 
 ```rust
-// 游戏对象享元
-struct GameObject {
-    mesh: String,
+/// 游戏对象享元
+pub struct GameObjectFlyweight {
+    object_type: String,
     texture: String,
-    animation: String,
+    model: String,
 }
 
-impl GameObject {
-    fn new(mesh: String, texture: String, animation: String) -> Self {
-        GameObject {
-            mesh,
-            texture,
-            animation,
+impl GameObjectFlyweight {
+    pub fn new(object_type: impl Into<String>, texture: impl Into<String>, model: impl Into<String>) -> Self {
+        GameObjectFlyweight {
+            object_type: object_type.into(),
+            texture: texture.into(),
+            model: model.into(),
         }
     }
-
-    fn render(&self, position: (f32, f32, f32), rotation: (f32, f32, f32)) {
-        println!(
-            "Rendering object at ({:.2}, {:.2}, {:.2}) with rotation ({:.2}, {:.2}, {:.2})",
-            position.0, position.1, position.2, rotation.0, rotation.1, rotation.2
-        );
-        println!("Mesh: {}, Texture: {}, Animation: {}", self.mesh, self.texture, self.animation);
+    
+    pub fn render(&self, x: f32, y: f32, z: f32, scale: f32) -> String {
+        format!(
+            "渲染{}在位置({}, {}, {})，缩放:{}，纹理:{}，模型:{}",
+            self.object_type, x, y, z, scale, self.texture, self.model
+        )
     }
 }
 
-// 游戏对象工厂
-struct GameObjectFactory {
-    objects: HashMap<String, Arc<GameObject>>,
+/// 游戏对象工厂
+pub struct GameObjectFactory {
+    objects: RwLock<HashMap<String, Arc<GameObjectFlyweight>>>,
 }
 
 impl GameObjectFactory {
-    fn new() -> Self {
+    pub fn new() -> Self {
         GameObjectFactory {
-            objects: HashMap::new(),
+            objects: RwLock::new(HashMap::new()),
         }
     }
-
-    fn get_object(&mut self, mesh: &str, texture: &str, animation: &str) -> Arc<GameObject> {
-        let key = format!("{}_{}_{}", mesh, texture, animation);
+    
+    pub fn get_object(&self, object_type: &str, texture: &str, model: &str) -> Arc<GameObjectFlyweight> {
+        let key = format!("{}:{}:{}", object_type, texture, model);
         
-        if let Some(object) = self.objects.get(&key) {
-            Arc::clone(object)
-        } else {
-            let object = Arc::new(GameObject::new(
-                mesh.to_string(),
-                texture.to_string(),
-                animation.to_string(),
-            ));
-            self.objects.insert(key, Arc::clone(&object));
-            object
-        }
-    }
-}
-
-// 游戏世界
-struct GameWorld {
-    factory: GameObjectFactory,
-    instances: Vec<(Arc<GameObject>, (f32, f32, f32), (f32, f32, f32))>,
-}
-
-impl GameWorld {
-    fn new() -> Self {
-        GameWorld {
-            factory: GameObjectFactory::new(),
-            instances: Vec::new(),
-        }
-    }
-
-    fn spawn_object(&mut self, mesh: &str, texture: &str, animation: &str, 
-                   position: (f32, f32, f32), rotation: (f32, f32, f32)) {
-        let object = self.factory.get_object(mesh, texture, animation);
-        self.instances.push((object, position, rotation));
-    }
-
-    fn render(&self) {
-        for (object, position, rotation) in &self.instances {
-            object.render(*position, *rotation);
-        }
-    }
-}
-```
-
-### 6.3 数据库连接池
-
-```rust
-use std::sync::{Arc, Mutex};
-use std::collections::HashMap;
-
-// 数据库连接享元
-struct DatabaseConnection {
-    connection_string: String,
-    max_connections: u32,
-}
-
-impl DatabaseConnection {
-    fn new(connection_string: String, max_connections: u32) -> Self {
-        DatabaseConnection {
-            connection_string,
-            max_connections,
-        }
-    }
-
-    fn execute_query(&self, query: &str) {
-        println!(
-            "Executing query '{}' on connection: {} (max: {})",
-            query, self.connection_string, self.max_connections
-        );
-    }
-}
-
-// 连接池工厂
-struct ConnectionPoolFactory {
-    pools: HashMap<String, Arc<Mutex<Vec<Arc<DatabaseConnection>>>>>,
-}
-
-impl ConnectionPoolFactory {
-    fn new() -> Self {
-        ConnectionPoolFactory {
-            pools: HashMap::new(),
-        }
-    }
-
-    fn get_connection(&self, connection_string: &str, max_connections: u32) -> Arc<DatabaseConnection> {
-        let pool_key = format!("{}_{}", connection_string, max_connections);
-        
-        if let Some(pool) = self.pools.get(&pool_key) {
-            let mut pool = pool.lock().unwrap();
-            if let Some(connection) = pool.pop() {
-                return connection;
+        {
+            let objects = self.objects.read().unwrap();
+            if let Some(object) = objects.get(&key) {
+                return Arc::clone(object);
             }
         }
         
-        Arc::new(DatabaseConnection::new(connection_string.to_string(), max_connections))
-    }
-
-    fn return_connection(&self, connection_string: &str, max_connections: u32, 
-                        connection: Arc<DatabaseConnection>) {
-        let pool_key = format!("{}_{}", connection_string, max_connections);
+        let object = Arc::new(GameObjectFlyweight::new(object_type, texture, model));
         
-        if let Some(pool) = self.pools.get(&pool_key) {
-            let mut pool = pool.lock().unwrap();
-            pool.push(connection);
+        {
+            let mut objects = self.objects.write().unwrap();
+            objects.insert(key, Arc::clone(&object));
         }
+        
+        object
+    }
+}
+
+/// 游戏对象实例
+pub struct GameObject {
+    flyweight: Arc<GameObjectFlyweight>,
+    x: f32,
+    y: f32,
+    z: f32,
+    scale: f32,
+}
+
+impl GameObject {
+    pub fn new(flyweight: Arc<GameObjectFlyweight>, x: f32, y: f32, z: f32, scale: f32) -> Self {
+        GameObject {
+            flyweight,
+            x,
+            y,
+            z,
+            scale,
+        }
+    }
+    
+    pub fn render(&self) -> String {
+        self.flyweight.render(self.x, self.y, self.z, self.scale)
     }
 }
 ```
 
-## 7. 变体模式
-
-### 7.1 复合享元模式
+### 5.3 网络连接池 (Network Connection Pool)
 
 ```rust
-// 复合享元
-struct CompositeFlyweight {
+/// 连接享元
+pub struct ConnectionFlyweight {
+    host: String,
+    port: u16,
+    protocol: String,
+}
+
+impl ConnectionFlyweight {
+    pub fn new(host: impl Into<String>, port: u16, protocol: impl Into<String>) -> Self {
+        ConnectionFlyweight {
+            host: host.into(),
+            port,
+            protocol: protocol.into(),
+        }
+    }
+    
+    pub fn connect(&self, timeout: u64, retries: u32) -> String {
+        format!(
+            "连接到 {}:{} 使用 {}，超时:{}ms，重试:{}次",
+            self.host, self.port, self.protocol, timeout, retries
+        )
+    }
+}
+
+/// 连接工厂
+pub struct ConnectionFactory {
+    connections: RwLock<HashMap<String, Arc<ConnectionFlyweight>>>,
+}
+
+impl ConnectionFactory {
+    pub fn new() -> Self {
+        ConnectionFactory {
+            connections: RwLock::new(HashMap::new()),
+        }
+    }
+    
+    pub fn get_connection(&self, host: &str, port: u16, protocol: &str) -> Arc<ConnectionFlyweight> {
+        let key = format!("{}:{}:{}", host, port, protocol);
+        
+        {
+            let connections = self.connections.read().unwrap();
+            if let Some(connection) = connections.get(&key) {
+                return Arc::clone(connection);
+            }
+        }
+        
+        let connection = Arc::new(ConnectionFlyweight::new(host, port, protocol));
+        
+        {
+            let mut connections = self.connections.write().unwrap();
+            connections.insert(key, Arc::clone(&connection));
+        }
+        
+        connection
+    }
+}
+
+/// 连接实例
+pub struct Connection {
+    flyweight: Arc<ConnectionFlyweight>,
+    timeout: u64,
+    retries: u32,
+}
+
+impl Connection {
+    pub fn new(flyweight: Arc<ConnectionFlyweight>, timeout: u64, retries: u32) -> Self {
+        Connection {
+            flyweight,
+            timeout,
+            retries,
+        }
+    }
+    
+    pub fn connect(&self) -> String {
+        self.flyweight.connect(self.timeout, self.retries)
+    }
+}
+```
+
+## 6. 变体模式 (Variant Patterns)
+
+### 6.1 复合享元 (Composite Flyweight)
+
+```rust
+/// 复合享元模式
+pub struct CompositeFlyweight {
     flyweights: Vec<Arc<dyn Flyweight>>,
 }
 
 impl CompositeFlyweight {
-    fn new() -> Self {
+    pub fn new() -> Self {
         CompositeFlyweight {
             flyweights: Vec::new(),
         }
     }
-
-    fn add_flyweight(&mut self, flyweight: Arc<dyn Flyweight>) {
+    
+    pub fn add_flyweight(&mut self, flyweight: Arc<dyn Flyweight>) {
         self.flyweights.push(flyweight);
     }
+    
+    pub fn render_all(&self, x: f64, y: f64, age: u32) -> Vec<String> {
+        self.flyweights.iter()
+            .map(|flyweight| flyweight.operation(x, y, age))
+            .collect()
+    }
 }
 
-impl Flyweight for CompositeFlyweight {
-    fn operation(&self, extrinsic_state: &str) {
-        for flyweight in &self.flyweights {
-            flyweight.operation(extrinsic_state);
+/// 复合享元工厂
+pub struct CompositeFlyweightFactory {
+    factory: FlyweightFactory,
+    composites: RwLock<HashMap<String, Arc<CompositeFlyweight>>>,
+}
+
+impl CompositeFlyweightFactory {
+    pub fn new() -> Self {
+        CompositeFlyweightFactory {
+            factory: FlyweightFactory::new(),
+            composites: RwLock::new(HashMap::new()),
         }
+    }
+    
+    pub fn get_composite(&self, tree_types: Vec<(String, String, String)>) -> Arc<CompositeFlyweight> {
+        let key = format!("{:?}", tree_types);
+        
+        {
+            let composites = self.composites.read().unwrap();
+            if let Some(composite) = composites.get(&key) {
+                return Arc::clone(composite);
+            }
+        }
+        
+        let mut composite = CompositeFlyweight::new();
+        for (name, color, texture) in tree_types {
+            let flyweight = self.factory.get_flyweight(&name, &color, &texture);
+            composite.add_flyweight(flyweight);
+        }
+        
+        let composite = Arc::new(composite);
+        
+        {
+            let mut composites = self.composites.write().unwrap();
+            composites.insert(key, Arc::clone(&composite));
+        }
+        
+        composite
     }
 }
 ```
 
-### 7.2 享元注册表模式
+### 6.2 享元池 (Flyweight Pool)
 
 ```rust
-use std::collections::HashMap;
-use std::sync::{Arc, RwLock};
-
-// 享元注册表
-struct FlyweightRegistry {
-    registry: Arc<RwLock<HashMap<String, Arc<dyn Flyweight>>>>,
-}
-
-impl FlyweightRegistry {
-    fn new() -> Self {
-        FlyweightRegistry {
-            registry: Arc::new(RwLock::new(HashMap::new())),
-        }
-    }
-
-    fn register(&self, key: &str, flyweight: Arc<dyn Flyweight>) {
-        let mut registry = self.registry.write().unwrap();
-        registry.insert(key.to_string(), flyweight);
-    }
-
-    fn get(&self, key: &str) -> Option<Arc<dyn Flyweight>> {
-        let registry = self.registry.read().unwrap();
-        registry.get(key).map(Arc::clone)
-    }
-
-    fn unregister(&self, key: &str) {
-        let mut registry = self.registry.write().unwrap();
-        registry.remove(key);
-    }
-}
-```
-
-### 7.3 享元池模式
-
-```rust
-use std::collections::VecDeque;
-use std::sync::{Arc, Mutex};
-
-// 享元池
-struct FlyweightPool {
-    pool: Arc<Mutex<VecDeque<Arc<dyn Flyweight>>>>,
+/// 享元池模式
+pub struct FlyweightPool<T> {
+    pool: RwLock<Vec<Arc<T>>>,
     max_size: usize,
 }
 
-impl FlyweightPool {
-    fn new(max_size: usize) -> Self {
+impl<T> FlyweightPool<T> {
+    pub fn new(max_size: usize) -> Self {
         FlyweightPool {
-            pool: Arc::new(Mutex::new(VecDeque::new())),
+            pool: RwLock::new(Vec::new()),
             max_size,
         }
     }
-
-    fn acquire(&self) -> Option<Arc<dyn Flyweight>> {
-        let mut pool = self.pool.lock().unwrap();
-        pool.pop_front()
+    
+    pub fn acquire(&self) -> Option<Arc<T>> {
+        let mut pool = self.pool.write().unwrap();
+        pool.pop()
     }
-
-    fn release(&self, flyweight: Arc<dyn Flyweight>) {
-        let mut pool = self.pool.lock().unwrap();
+    
+    pub fn release(&self, flyweight: Arc<T>) {
+        let mut pool = self.pool.write().unwrap();
         if pool.len() < self.max_size {
-            pool.push_back(flyweight);
+            pool.push(flyweight);
         }
     }
+    
+    pub fn size(&self) -> usize {
+        self.pool.read().unwrap().len()
+    }
+}
 
-    fn size(&self) -> usize {
-        self.pool.lock().unwrap().len()
+/// 带池的享元工厂
+pub struct PooledFlyweightFactory<T> {
+    factory: Box<dyn Fn() -> T + Send + Sync>,
+    pool: FlyweightPool<T>,
+}
+
+impl<T> PooledFlyweightFactory<T> {
+    pub fn new<F>(factory: F, max_size: usize) -> Self
+    where
+        F: Fn() -> T + Send + Sync + 'static,
+    {
+        PooledFlyweightFactory {
+            factory: Box::new(factory),
+            pool: FlyweightPool::new(max_size),
+        }
+    }
+    
+    pub fn get_flyweight(&self) -> Arc<T> {
+        if let Some(flyweight) = self.pool.acquire() {
+            flyweight
+        } else {
+            Arc::new((self.factory)())
+        }
+    }
+    
+    pub fn return_flyweight(&self, flyweight: Arc<T>) {
+        self.pool.release(flyweight);
     }
 }
 ```
 
-## 8. 性能分析
+## 7. 性能分析 (Performance Analysis)
 
-### 8.1 内存使用分析
+### 7.1 时间复杂度分析
 
-**定理8.1 (内存使用优化)**
-对于包含 $n$ 个对象，$m$ 个唯一内部状态的系统：
+**定理7.1.1 (享元时间复杂度)**
+享元模式的时间复杂度为 $O(1)$。
 
-$$\text{MemorySavings} = (n - m) \cdot |S_{intrinsic}|$$
+**证明**: 享元操作是常数时间，工厂查找也是常数时间。
 
-**证明**：
+### 7.2 空间复杂度分析
 
-1. 朴素实现：每个对象都包含完整的内部状态
-2. 享元模式：只有 $m$ 个对象包含内部状态，其余共享
-3. 节省内存：$(n - m) \cdot |S_{intrinsic}|$
+**定理7.2.1 (享元空间复杂度)**
+享元模式的空间复杂度为 $O(|I|)$，其中 $|I|$ 是内部状态数量。
 
-### 8.2 时间复杂度分析
+**证明**: 只需要存储内部状态对应的享元元素。
 
-**定理8.2 (时间复杂度)**
-享元模式的时间复杂度为：
+### 7.3 内存优化
 
-- 查找享元：$O(\log m)$
-- 创建享元：$O(1)$
-- 操作享元：$O(|S_{extrinsic}|)$
+```rust
+/// 内存优化的享元模式
+pub struct OptimizedFlyweightFactory {
+    flyweights: RwLock<HashMap<String, Arc<dyn Flyweight>>>,
+    lru_cache: RwLock<Vec<String>>,
+    max_cache_size: usize,
+}
 
-其中 $m$ 是唯一内部状态的数量。
+impl OptimizedFlyweightFactory {
+    pub fn new(max_cache_size: usize) -> Self {
+        OptimizedFlyweightFactory {
+            flyweights: RwLock::new(HashMap::new()),
+            lru_cache: RwLock::new(Vec::new()),
+            max_cache_size,
+        }
+    }
+    
+    pub fn get_flyweight(&self, name: &str, color: &str, texture: &str) -> Arc<dyn Flyweight> {
+        let key = format!("{}:{}:{}", name, color, texture);
+        
+        // 检查缓存
+        {
+            let flyweights = self.flyweights.read().unwrap();
+            if let Some(flyweight) = flyweights.get(&key) {
+                // 更新LRU缓存
+                self.update_lru_cache(&key);
+                return Arc::clone(flyweight);
+            }
+        }
+        
+        // 创建新的树类型
+        let tree_type = Arc::new(TreeType::new(name.to_string(), color.to_string(), texture.to_string()));
+        
+        // 缓存树类型
+        {
+            let mut flyweights = self.flyweights.write().unwrap();
+            let mut lru_cache = self.lru_cache.write().unwrap();
+            
+            // 如果缓存已满，移除最久未使用的
+            if flyweights.len() >= self.max_cache_size {
+                if let Some(oldest_key) = lru_cache.pop() {
+                    flyweights.remove(&oldest_key);
+                }
+            }
+            
+            flyweights.insert(key.clone(), Arc::clone(&tree_type));
+            lru_cache.push(key);
+        }
+        
+        tree_type
+    }
+    
+    fn update_lru_cache(&self, key: &str) {
+        let mut lru_cache = self.lru_cache.write().unwrap();
+        if let Some(pos) = lru_cache.iter().position(|k| k == key) {
+            lru_cache.remove(pos);
+        }
+        lru_cache.push(key.to_string());
+    }
+}
+```
 
-### 8.3 空间复杂度分析
+## 8. 总结 (Summary)
 
-**定理8.3 (空间复杂度)**
-享元模式的空间复杂度为：
+享元模式通过共享内部状态来减少内存使用，提高系统性能。其形式化定义和数学理论为模式的应用提供了坚实的理论基础，而Rust的实现展示了模式在实际编程中的强大功能。
 
-$$\text{SpaceComplexity} = O(m \cdot |S_{intrinsic}| + n \cdot |S_{extrinsic}|)$$
+### 8.1 核心优势
 
-其中：
+1. **内存节省**: 共享内部状态减少内存使用
+2. **性能提升**: 减少对象创建和销毁开销
+3. **缓存友好**: 高缓存命中率
+4. **扩展性好**: 支持动态扩展
 
-- $m$ 是唯一内部状态的数量
-- $n$ 是对象的总数
-- $|S_{intrinsic}|$ 是内部状态的大小
-- $|S_{extrinsic}|$ 是外部状态的大小
+### 8.2 应用领域
 
-## 9. 总结
+1. **图形渲染**: 共享纹理、模型等资源
+2. **文本处理**: 共享字符、字体等属性
+3. **游戏开发**: 共享游戏对象类型
+4. **网络编程**: 共享连接配置
 
-### 9.1 模式优势
+### 8.3 设计原则
 
-1. **内存优化**：通过共享内部状态显著减少内存使用
-2. **性能提升**：减少对象创建和销毁的开销
-3. **可扩展性**：支持大量细粒度对象的创建
-4. **灵活性**：支持动态状态管理
+1. **单一职责**: 享元只负责内部状态
+2. **开闭原则**: 对扩展开放，对修改封闭
+3. **依赖倒置**: 依赖抽象而非具体实现
+4. **接口隔离**: 提供最小化的接口
 
-### 9.2 模式限制
+享元模式是面向对象设计中优化内存使用的经典模式，通过形式化的数学理论和Rust的类型安全实现，为系统的性能优化提供了可靠的基础。
 
-1. **复杂性增加**：需要管理内部状态和外部状态的分离
-2. **线程安全**：在多线程环境下需要额外的同步机制
-3. **调试困难**：共享状态可能导致调试困难
-
-### 9.3 最佳实践
-
-1. **状态分离**：明确区分内部状态和外部状态
-2. **工厂管理**：使用工厂统一管理享元对象的创建
-3. **线程安全**：在多线程环境下使用适当的同步机制
-4. **缓存策略**：根据访问模式选择合适的缓存策略
-
-### 9.4 形式化验证
-
-通过形式化定义和数学证明，我们建立了享元模式的完整理论体系：
-
-1. **共享正确性**：确保共享对象的正确性
-2. **内存优化**：提供内存使用的数学保证
-3. **性能保证**：建立性能的上下界
-4. **状态一致性**：保证状态分离的一致性
-
-这个形式化框架为享元模式的设计、实现和验证提供了坚实的理论基础。
