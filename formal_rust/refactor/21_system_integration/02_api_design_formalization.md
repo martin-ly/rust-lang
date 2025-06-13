@@ -16,6 +16,7 @@
 API设计是定义系统间接口的过程，满足：
 $$API = (E, P, R, V, C)$$
 其中：
+
 - $E$ 是端点集合
 - $P$ 是参数规范
 - $R$ 是响应格式
@@ -24,6 +25,7 @@ $$API = (E, P, R, V, C)$$
 
 **定义 1.1.2** (RESTful API)
 RESTful API满足以下约束：
+
 - 无状态性：$State(t) = f(Request(t))$
 - 可缓存性：$Cache(Response) = Valid(Response, TTL)$
 - 分层系统：$Layer_i = f(Layer_{i-1})$
