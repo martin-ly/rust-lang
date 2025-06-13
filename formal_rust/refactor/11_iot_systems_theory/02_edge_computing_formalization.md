@@ -167,6 +167,7 @@ $$\text{WeightedAllocation}(r, [n_1, n_2, \ldots, n_k], w) = \text{WeightedAssig
 $$\text{OptimalNode}(t, [n_1, n_2, \ldots, n_k]) \Rightarrow \text{MinimalCost}(t)$$
 
 **证明**：
+
 1. 最优节点选择基于最小成本
 2. 最小成本意味着最优性能
 3. 最优性能意味着卸载最优性
@@ -177,6 +178,7 @@ $$\text{OptimalNode}(t, [n_1, n_2, \ldots, n_k]) \Rightarrow \text{MinimalCost}(
 $$\text{FairAllocation}(A) \Rightarrow \text{HighUtilization}(A)$$
 
 **证明**：
+
 1. 公平分配确保资源均匀分布
 2. 均匀分布减少资源浪费
 3. 减少浪费意味着高利用率
@@ -393,4 +395,4 @@ pub struct AllocationResult {
 4. **核心定理**：证明了边缘计算的关键性质
 5. **Rust实现**：提供了完整的边缘计算实现
 
-所有内容都遵循严格的数学规范，为IoT边缘计算系统设计提供了坚实的理论基础。 
+所有内容都遵循严格的数学规范，为IoT边缘计算系统设计提供了坚实的理论基础。

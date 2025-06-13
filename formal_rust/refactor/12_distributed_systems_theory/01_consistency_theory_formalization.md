@@ -103,6 +103,7 @@ $$\text{PartitionTolerance}(ds) = \forall P \in \text{Partitions}: \text{SystemO
 $$\forall DS: \neg(\text{Consistency}(DS) \land \text{Availability}(DS) \land \text{PartitionTolerance}(DS))$$
 
 **证明**：
+
 1. 假设存在分布式系统 $DS$ 同时满足 $C$、$A$、$P$
 2. 当网络分区发生时，节点间无法通信
 3. 如果选择可用性，不同节点可能返回不同值，违反一致性
@@ -269,7 +270,7 @@ use std::sync::{Arc, RwLock};
 use serde::{Deserialize, Serialize};
 use tokio::sync::mpsc;
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DistributedNode {
     pub id: String,
     pub state: Arc<RwLock<HashMap<String, String>>>,
@@ -277,7 +278,7 @@ pub struct DistributedNode {
     pub message_queue: Arc<RwLock<Vec<Message>>>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub enum ConsistencyLevel {
     Strong,
     Eventual,
@@ -285,7 +286,7 @@ pub enum ConsistencyLevel {
     Session,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Message {
     pub id: String,
     pub source: String,
@@ -294,7 +295,7 @@ pub struct Message {
     pub timestamp: u64,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub enum Operation {
     Read { key: String },
     Write { key: String, value: String },
@@ -392,13 +393,13 @@ impl DistributedNode {
             operation: Operation::Write { key, value },
             timestamp: chrono::Utc::now().timestamp_millis() as u64,
         };
-        
+
         let mut queue = self.message_queue.write().unwrap();
         queue.push(message);
     }
 }
 
-#[derive(Debug)]
+# [derive(Debug)]
 pub enum ConsistencyError {
     NetworkError,
     TimeoutError,
@@ -414,7 +415,7 @@ pub struct CAPSystem {
     strategy: CAPStrategy,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub enum CAPStrategy {
     CP, // 一致性 + 分区容忍性
     AP, // 可用性 + 分区容忍性
@@ -490,14 +491,14 @@ impl CAPSystem {
         // 多数派读取
         let mut responses = Vec::new();
         let mut node_count = 0;
-        
+
         for node in self.nodes.values() {
             if let Ok(value) = node.read(key).await {
                 responses.push(value);
                 node_count += 1;
             }
         }
-        
+
         if node_count > self.nodes.len() / 2 {
             // 多数派响应，返回最新值
             Ok(Response::Read {
@@ -511,13 +512,13 @@ impl CAPSystem {
     async fn quorum_write(&self, key: &str, value: &str) -> Result<Response, CAPError> {
         // 多数派写入
         let mut success_count = 0;
-        
+
         for node in self.nodes.values() {
             if node.write(key.to_string(), value.to_string()).await.is_ok() {
                 success_count += 1;
             }
         }
-        
+
         if success_count > self.nodes.len() / 2 {
             Ok(Response::Write { success: true })
         } else {
@@ -567,20 +568,20 @@ impl CAPSystem {
     }
 }
 
-#[derive(Debug)]
+# [derive(Debug)]
 pub struct Request {
     pub operation: Operation,
     pub client_id: String,
 }
 
-#[derive(Debug)]
+# [derive(Debug)]
 pub enum Response {
     Read { value: String },
     Write { success: bool },
     Delete { success: bool },
 }
 
-#[derive(Debug)]
+# [derive(Debug)]
 pub enum CAPError {
     QuorumNotReached,
     NoNodeAvailable,
@@ -596,7 +597,7 @@ pub enum CAPError {
 use std::collections::HashMap;
 use tokio::sync::mpsc;
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct RaftNode {
     pub id: String,
     pub state: RaftState,
@@ -607,14 +608,14 @@ pub struct RaftNode {
     pub last_applied: usize,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub enum RaftState {
     Follower,
     Candidate,
     Leader,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct LogEntry {
     pub term: u64,
     pub index: usize,
@@ -638,10 +639,10 @@ impl RaftNode {
         self.current_term += 1;
         self.state = RaftState::Candidate;
         self.voted_for = Some(self.id.clone());
-        
+
         // 发送投票请求
         self.request_votes().await?;
-        
+
         Ok(())
     }
 
@@ -674,7 +675,7 @@ impl RaftNode {
     }
 }
 
-#[derive(Debug)]
+# [derive(Debug)]
 pub enum RaftError {
     ElectionTimeout,
     VoteRejected,
@@ -725,7 +726,7 @@ impl ConsensusSystem {
     }
 }
 
-#[derive(Debug)]
+# [derive(Debug)]
 pub enum ConsensusError {
     NoLeader,
     NetworkError,
@@ -745,4 +746,4 @@ pub enum ConsensusError {
 6. **核心定理**：证明了一致性系统的关键性质
 7. **Rust实现**：提供了完整的一致性系统实现
 
-所有内容都遵循严格的数学规范，为分布式系统设计提供了坚实的理论基础。 
+所有内容都遵循严格的数学规范，为分布式系统设计提供了坚实的理论基础。

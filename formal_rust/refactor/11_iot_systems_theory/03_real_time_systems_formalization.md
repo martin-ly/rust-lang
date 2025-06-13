@@ -201,6 +201,7 @@ $$\text{AverageCaseAnalysis}([t_1, t_2, \ldots, t_n]) = \text{CalculateAverageCa
 $$\text{Schedulable}([t_1, t_2, \ldots, t_n]) \Rightarrow \text{EDF}([t_1, t_2, \ldots, t_n]) \text{ is optimal}$$
 
 **证明**：
+
 1. EDF总是选择截止时间最早的任务
 2. 最早截止时间意味着最高优先级
 3. 最高优先级确保最优调度
@@ -211,6 +212,7 @@ $$\text{Schedulable}([t_1, t_2, \ldots, t_n]) \Rightarrow \text{EDF}([t_1, t_2, 
 $$\text{Utilization}([t_1, t_2, \ldots, t_n]) \leq n(2^{1/n} - 1) \Rightarrow \text{RMSchedulable}([t_1, t_2, \ldots, t_n])$$
 
 **证明**：
+
 1. RM调度按周期排序
 2. 利用率界限确保可调度性
 3. 可调度性意味着满足截止时间
@@ -223,6 +225,7 @@ $$\text{Utilization}([t_1, t_2, \ldots, t_n]) \leq n(2^{1/n} - 1) \Rightarrow \t
 $$\text{Schedulable}(t) \Rightarrow \text{TimeGuarantee}(t)$$
 
 **证明**：
+
 1. 可调度意味着满足截止时间
 2. 满足截止时间意味着时间保证
 3. 时间保证确保实时性
@@ -494,4 +497,4 @@ pub struct PerformanceReport {
 4. **核心定理**：证明了实时系统的关键性质
 5. **Rust实现**：提供了完整的实时系统实现
 
-所有内容都遵循严格的数学规范，为IoT实时系统设计提供了坚实的理论基础。 
+所有内容都遵循严格的数学规范，为IoT实时系统设计提供了坚实的理论基础。
