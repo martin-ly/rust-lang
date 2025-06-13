@@ -362,7 +362,7 @@ $$\text{Lifetime}(r) \subseteq \text{Lifetime}(\text{Value}(r))$$
 
 ```rust
 /// 基础类型枚举
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub enum BasicType {
     Integer(IntegerType),
     Float(FloatType),
@@ -372,14 +372,14 @@ pub enum BasicType {
 }
 
 /// 整数类型
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub enum IntegerType {
     I8, I16, I32, I64, I128, ISize,
     U8, U16, U32, U64, U128, USize,
 }
 
 /// 浮点类型
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub enum FloatType {
     F32, F64,
 }
@@ -412,7 +412,7 @@ impl BasicType {
 
 ```rust
 /// 复合类型枚举
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub enum CompoundType {
     Array(Box<Type>, usize),
     Tuple(Vec<Type>),
@@ -421,28 +421,28 @@ pub enum CompoundType {
 }
 
 /// 枚举类型
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub struct EnumType {
     pub name: String,
     pub variants: Vec<EnumVariant>,
 }
 
 /// 枚举变体
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub struct EnumVariant {
     pub name: String,
     pub data_type: Option<Type>,
 }
 
 /// 结构体类型
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub struct StructType {
     pub name: String,
     pub fields: Vec<StructField>,
 }
 
 /// 结构体字段
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub struct StructField {
     pub name: String,
     pub field_type: Type,
@@ -456,7 +456,7 @@ impl CompoundType {
             _ => None,
         }
     }
-    
+
     /// 获取数组长度
     pub fn array_length(&self) -> Option<usize> {
         match self {
@@ -464,7 +464,7 @@ impl CompoundType {
             _ => None,
         }
     }
-    
+
     /// 获取元组字段类型
     pub fn tuple_field_types(&self) -> Option<&Vec<Type>> {
         match self {
@@ -479,7 +479,7 @@ impl CompoundType {
 
 ```rust
 /// 泛型类型
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub struct GenericType {
     pub type_params: Vec<TypeParam>,
     pub constraints: Vec<TypeConstraint>,
@@ -487,28 +487,28 @@ pub struct GenericType {
 }
 
 /// 类型参数
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub struct TypeParam {
     pub name: String,
     pub bounds: Vec<TraitBound>,
 }
 
 /// 类型约束
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub struct TypeConstraint {
     pub param: String,
     pub trait_bound: TraitBound,
 }
 
 /// Trait约束
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub struct TraitBound {
     pub trait_name: String,
     pub associated_types: Vec<AssociatedType>,
 }
 
 /// 关联类型
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub struct AssociatedType {
     pub name: String,
     pub bound: Option<Type>,
@@ -520,24 +520,24 @@ impl GenericType {
         if type_args.len() != self.type_params.len() {
             return Err(TypeError::TypeArgCountMismatch);
         }
-        
+
         // 创建类型替换映射
         let mut substitutions = HashMap::new();
         for (param, arg) in self.type_params.iter().zip(type_args.iter()) {
             substitutions.insert(param.name.clone(), arg.clone());
         }
-        
+
         // 应用替换到基础类型
         self.base_type.substitute(&substitutions)
     }
-    
+
     /// 检查类型约束
     pub fn check_constraints(&self, type_args: &[Type]) -> Result<(), TypeError> {
         for constraint in &self.constraints {
             let arg = type_args.iter()
                 .find(|arg| arg.name() == constraint.param)
                 .ok_or(TypeError::TypeParamNotFound)?;
-            
+
             if !arg.implements_trait(&constraint.trait_bound.trait_name) {
                 return Err(TypeError::TraitConstraintViolation);
             }
@@ -551,7 +551,7 @@ impl GenericType {
 
 ```rust
 /// Trait定义
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub struct Trait {
     pub name: String,
     pub methods: Vec<TraitMethod>,
@@ -559,28 +559,28 @@ pub struct Trait {
 }
 
 /// Trait方法
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub struct TraitMethod {
     pub name: String,
     pub signature: FunctionSignature,
 }
 
 /// 函数签名
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub struct FunctionSignature {
     pub params: Vec<Type>,
     pub return_type: Type,
 }
 
 /// 关联类型定义
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub struct AssociatedTypeDef {
     pub name: String,
     pub bound: Option<Type>,
 }
 
 /// Trait实现
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub struct TraitImpl {
     pub trait_name: String,
     pub for_type: Type,
@@ -589,14 +589,14 @@ pub struct TraitImpl {
 }
 
 /// 方法实现
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub struct MethodImpl {
     pub name: String,
     pub implementation: FunctionBody,
 }
 
 /// 关联类型实现
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub struct AssociatedTypeImpl {
     pub name: String,
     pub type_value: Type,
@@ -610,19 +610,19 @@ impl Trait {
             let impl_method = impl_block.methods.iter()
                 .find(|m| m.name == method.name)
                 .ok_or(TraitError::MissingMethod(method.name.clone()))?;
-            
+
             // 检查方法签名匹配
             if impl_method.implementation.signature != method.signature {
                 return Err(TraitError::SignatureMismatch(method.name.clone()));
             }
         }
-        
+
         // 检查所有关联类型都已实现
         for assoc_type in &self.associated_types {
             let impl_assoc_type = impl_block.associated_types.iter()
                 .find(|at| at.name == assoc_type.name)
                 .ok_or(TraitError::MissingAssociatedType(assoc_type.name.clone()))?;
-            
+
             // 检查关联类型约束
             if let Some(bound) = &assoc_type.bound {
                 if !impl_assoc_type.type_value.satisfies_constraint(bound) {
@@ -630,7 +630,7 @@ impl Trait {
                 }
             }
         }
-        
+
         Ok(())
     }
 }
@@ -668,7 +668,7 @@ impl TypeInferrer {
             },
         }
     }
-    
+
     /// 推断字面量类型
     fn infer_literal_type(&self, lit: &Literal) -> Type {
         match lit {
@@ -679,19 +679,19 @@ impl TypeInferrer {
             Literal::Character(_) => Type::Basic(BasicType::Character),
         }
     }
-    
+
     /// 推断二元操作类型
     fn infer_binary_op_type(&mut self, op: &BinaryOp, left: &Expression, right: &Expression) -> Result<Type, TypeError> {
         let left_type = self.infer_type(left)?;
         let right_type = self.infer_type(right)?;
-        
+
         // 添加类型约束
         self.constraints.push(TypeConstraint {
             left: left_type.clone(),
             right: right_type.clone(),
             constraint: ConstraintKind::Equal,
         });
-        
+
         // 根据操作符推断返回类型
         match op {
             BinaryOp::Add | BinaryOp::Sub | BinaryOp::Mul | BinaryOp::Div => {
@@ -717,7 +717,7 @@ impl TypeInferrer {
             },
         }
     }
-    
+
     /// 统一数值类型
     fn unify_numeric_types(&self, t1: &Type, t2: &Type) -> Type {
         // 实现数值类型统一逻辑
@@ -754,4 +754,4 @@ impl TypeInferrer {
 
 ---
 
-**结论**: Rust类型系统通过严格的形式化定义和类型检查，确保了程序的安全性和正确性，体现了现代编程语言类型理论的深度和严谨性。 
+**结论**: Rust类型系统通过严格的形式化定义和类型检查，确保了程序的安全性和正确性，体现了现代编程语言类型理论的深度和严谨性。
