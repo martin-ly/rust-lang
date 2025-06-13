@@ -80,6 +80,7 @@ $$\forall \text{输入 } x: \text{exec}(P_1, x) = \text{exec}(P_2, x)$$
 $$P_{bp} = (\{P, C, B\}, \{R_{flow}, R_{control}\}, \{C_{rate}, C_{buffer}\})$$
 
 其中：
+
 - $P$ 是生产者
 - $C$ 是消费者
 - $B$ 是缓冲区
@@ -89,6 +90,7 @@ $$P_{bp} = (\{P, C, B\}, \{R_{flow}, R_{control}\}, \{C_{rate}, C_{buffer}\})$$
 - $C_{buffer}$ 是缓冲区约束
 
 **定理 3.1.1 (背压稳定性)** 如果背压模式 $P_{bp}$ 满足：
+
 1. 缓冲区大小有限
 2. 生产者速率可调节
 3. 消费者处理能力稳定
@@ -105,6 +107,7 @@ $$P_{bp} = (\{P, C, B\}, \{R_{flow}, R_{control}\}, \{C_{rate}, C_{buffer}\})$$
 $$P_{cb} = (\{C, T, R\}, \{R_{state}, R_{threshold}\}, \{C_{timeout}, C_{failure}\})$$
 
 其中：
+
 - $C$ 是熔断器状态机
 - $T$ 是阈值函数
 - $R$ 是恢复函数
@@ -116,6 +119,7 @@ $$P_{cb} = (\{C, T, R\}, \{R_{state}, R_{threshold}\}, \{C_{timeout}, C_{failure
 **定义 3.2.2 (熔断器状态)** 熔断器状态 $s \in \{\text{closed}, \text{open}, \text{half-open}\}$
 
 **状态转换规则**:
+
 1. $\text{closed} \xrightarrow{\text{failure > threshold}} \text{open}$
 2. $\text{open} \xrightarrow{\text{timeout}} \text{half-open}$
 3. $\text{half-open} \xrightarrow{\text{success}} \text{closed}$
@@ -145,6 +149,7 @@ $$P_{retry} = (\{T, R, S\}, \{R_{attempt}, R_{delay}\}, \{C_{max}, C_{timeout}\}
 4. **抖动退避**: $d(i) = \text{base} \times 2^i + \text{random}()$
 
 **定理 3.3.1 (重试收敛性)** 如果重试策略满足：
+
 1. 延迟函数单调递增
 2. 最大重试次数有限
 3. 失败概率小于1
@@ -204,6 +209,7 @@ $$P_{batch} = (\{B, P, T\}, \{R_{size}, R_{time}\}, \{C_{memory}, C_{latency}\})
 ### 4.2 调度算法
 
 **算法 4.2.1 (优先级调度)**
+
 ```
 输入: 任务队列 Q, 优先级函数 P
 输出: 执行序列 σ
@@ -217,6 +223,7 @@ $$P_{batch} = (\{B, P, T\}, \{R_{size}, R_{time}\}, \{C_{memory}, C_{latency}\})
 ```
 
 **算法 4.2.2 (公平调度)**
+
 ```
 输入: 任务队列 Q, 时间片 T
 输出: 执行序列 σ
@@ -230,6 +237,7 @@ $$P_{batch} = (\{B, P, T\}, \{R_{size}, R_{time}\}, \{C_{memory}, C_{latency}\})
 ```
 
 **算法 4.2.3 (工作窃取调度)**
+
 ```
 输入: 任务队列集合 {Q₁, Q₂, ..., Qₙ}
 输出: 执行序列 σ
@@ -305,16 +313,19 @@ $$R_{degrade} = (\text{fallback}, \text{reduction}, \text{graceful})$$
 ### 6.2 优化策略
 
 **策略 6.2.1 (内存优化)** 内存优化策略包括：
+
 1. 对象池模式
 2. 内存预分配
 3. 垃圾回收优化
 
 **策略 6.2.2 (CPU优化)** CPU优化策略包括：
+
 1. 任务调度优化
 2. 缓存友好设计
 3. 向量化优化
 
 **策略 6.2.3 (I/O优化)** I/O优化策略包括：
+
 1. 异步I/O
 2. 批量处理
 3. 预读取
@@ -339,7 +350,8 @@ $$L = \lambda W$$
 
 **定理 7.1.1 (模式组合保持性)** 如果模式 $P_1$ 和 $P_2$ 都是正确的，则 $P_1 \circ P_2$ 也是正确的。
 
-**证明**: 
+**证明**:
+
 1. 结构保持: $S_1 \cup S_2$ 保持各自的结构
 2. 规则兼容: $R_1 \cup R_2$ 在约束 $C_1 \cap C_2$ 下兼容
 3. 约束满足: 所有约束都被满足
@@ -1131,4 +1143,4 @@ async fn process_batch(batch: Vec<String>) -> Result<(), Box<dyn std::error::Err
 **文档版本**: 1.0
 **最后更新**: 2025-06-14
 **作者**: AI Assistant
-**状态**: 完成 ✅ 
+**状态**: 完成 ✅

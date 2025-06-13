@@ -1,17 +1,40 @@
-# 3. 并行模式形式化理论 (Parallel Patterns Formalization)
+# 3. 并行模式形式化理论
+
+ (Parallel Patterns Formalization)
 
 ## 目录
 
-1. [3. 并行模式形式化理论](#3-并行模式形式化理论)
-   1. [3.1. 理论基础](#31-理论基础)
-   2. [3.2. 数据并行模式](#32-数据并行模式)
-   3. [3.3. 任务并行模式](#33-任务并行模式)
-   4. [3.4. 流水线模式](#34-流水线模式)
-   5. [3.5. 分治模式](#35-分治模式)
-   6. [3.6. 核心定理证明](#36-核心定理证明)
-   7. [3.7. Rust实现](#37-rust实现)
-   8. [3.8. 性能分析](#38-性能分析)
-
+- [3. 并行模式形式化理论](#3-并行模式形式化理论)
+  - [目录](#目录)
+  - [3.1. 理论基础](#31-理论基础)
+    - [3.1.1. 并行计算模型](#311-并行计算模型)
+    - [3.1.2. 并行度](#312-并行度)
+  - [3.2. 数据并行模式](#32-数据并行模式)
+    - [3.2.1. 数据并行模型](#321-数据并行模型)
+    - [3.2.2. Map-Reduce模式](#322-map-reduce模式)
+  - [3.3. 任务并行模式](#33-任务并行模式)
+    - [3.3.1. 任务并行模型](#331-任务并行模型)
+    - [3.3.2. 任务调度算法](#332-任务调度算法)
+  - [3.4. 流水线模式](#34-流水线模式)
+    - [3.4.1. 流水线模型](#341-流水线模型)
+    - [3.4.2. 流水线实现](#342-流水线实现)
+  - [3.5. 分治模式](#35-分治模式)
+    - [3.5.1. 分治模型](#351-分治模型)
+    - [3.5.2. 并行分治](#352-并行分治)
+  - [3.6. 核心定理证明](#36-核心定理证明)
+    - [3.6.1. 并行加速比定理](#361-并行加速比定理)
+    - [3.6.2. 并行效率定理](#362-并行效率定理)
+    - [3.6.3. 负载均衡定理](#363-负载均衡定理)
+  - [3.7. Rust实现](#37-rust实现)
+    - [3.7.1. 并行迭代器](#371-并行迭代器)
+    - [3.7.2. 并行数据结构](#372-并行数据结构)
+    - [3.7.3. 并行算法库](#373-并行算法库)
+  - [3.8. 性能分析](#38-性能分析)
+    - [3.8.1. 时间复杂度分析](#381-时间复杂度分析)
+    - [3.8.2. 空间复杂度分析](#382-空间复杂度分析)
+    - [3.8.3. 性能基准](#383-性能基准)
+  - [总结](#总结)
+  
 ---
 
 ## 3.1. 理论基础
@@ -70,6 +93,7 @@ Map-Reduce是一个三元组 $\text{MapReduce}(D, \text{map}, \text{reduce})$，
 - $\text{reduce}: K \times [V] \rightarrow V'$ 是归约函数
 
 **算法 3.2.1** (Map-Reduce实现)
+
 ```rust
 async fn map_reduce<D, K, V, V2>(
     data: Vec<D>,
@@ -129,6 +153,7 @@ $$t_1 \rightarrow t_2 \iff \text{output}(t_2) \cap \text{input}(t_1) \neq \empty
 ### 3.3.2. 任务调度算法
 
 **算法 3.3.1** (贪心调度)
+
 ```rust
 fn greedy_schedule(tasks: &[Task], processors: &[Processor]) -> HashMap<TaskId, ProcessorId> {
     let mut schedule = HashMap::new();
@@ -152,6 +177,7 @@ fn greedy_schedule(tasks: &[Task], processors: &[Processor]) -> HashMap<TaskId, 
 ```
 
 **算法 3.3.2** (关键路径调度)
+
 ```rust
 fn critical_path_schedule(tasks: &[Task], dependencies: &[(TaskId, TaskId)]) -> Vec<TaskId> {
     // 构建依赖图
@@ -224,6 +250,7 @@ $$\text{throughput}(\mathcal{P}) = \frac{1}{\max_{s \in S} \tau(s)}$$
 ### 3.4.2. 流水线实现
 
 **算法 3.4.1** (流水线构建)
+
 ```rust
 pub struct Pipeline<I, O> {
     stages: Vec<Box<dyn PipelineStage>>,
@@ -278,6 +305,7 @@ pub trait PipelineStage: Send + Sync {
 ```
 
 **算法 3.4.2** (流水线调度)
+
 ```rust
 pub struct PipelineScheduler {
     stages: Vec<Arc<dyn PipelineStage>>,
@@ -359,10 +387,13 @@ impl PipelineScheduler {
 
 **定义 3.5.2** (分治执行)
 分治执行定义为：
+
+```latex
 $$\text{divide\_and\_conquer}(p) = \begin{cases}
 \text{solve}(p) & \text{if } B(p) \\
 M(\text{map}(\text{divide\_and\_conquer}, C(p))) & \text{otherwise}
 \end{cases}$$
+```
 
 ### 3.5.2. 并行分治
 
@@ -375,15 +406,15 @@ where
     if data.len() <= 1 {
         return data;
     }
-    
+
     let mid = data.len() / 2;
     let (left, right) = data.split_at(mid);
-    
+
     let (left_sorted, right_sorted) = rayon::join(
         || parallel_merge_sort(left.to_vec()),
         || parallel_merge_sort(right.to_vec()),
     );
-    
+
     merge(left_sorted, right_sorted)
 }
 
@@ -396,7 +427,7 @@ where
     let mut right_iter = right.into_iter();
     let mut left_peek = left_iter.next();
     let mut right_peek = right_iter.next();
-    
+
     loop {
         match (left_peek, right_peek) {
             (Some(l), Some(r)) => {
@@ -421,7 +452,7 @@ where
             (None, None) => break,
         }
     }
-    
+
     result
 }
 ```
@@ -435,7 +466,7 @@ where
     if data.len() <= 1 {
         return data;
     }
-    
+
     let pivot = data[0].clone();
     let (less, equal, greater): (Vec<_>, Vec<_>, Vec<_>) = data
         .into_iter()
@@ -447,12 +478,12 @@ where
             }
             acc
         });
-    
+
     let (less_sorted, greater_sorted) = rayon::join(
         || parallel_quick_sort(less),
         || parallel_quick_sort(greater),
     );
-    
+
     let mut result = less_sorted;
     result.extend(equal);
     result.extend(greater_sorted);
@@ -520,12 +551,12 @@ impl<T> ParallelIterator<T> {
             chunk_size: 1000,
         }
     }
-    
+
     pub fn with_chunk_size(mut self, chunk_size: usize) -> Self {
         self.chunk_size = chunk_size;
         self
     }
-    
+
     pub fn map<F, R>(self, f: F) -> ParallelIterator<R>
     where
         T: Send + Sync,
@@ -536,13 +567,13 @@ impl<T> ParallelIterator<T> {
             .into_par_iter()
             .map(f)
             .collect();
-        
+
         ParallelIterator {
             data: results,
             chunk_size: self.chunk_size,
         }
     }
-    
+
     pub fn filter<F>(self, f: F) -> ParallelIterator<T>
     where
         T: Send + Sync,
@@ -552,13 +583,13 @@ impl<T> ParallelIterator<T> {
             .into_par_iter()
             .filter(f)
             .collect();
-        
+
         ParallelIterator {
             data: results,
             chunk_size: self.chunk_size,
         }
     }
-    
+
     pub fn reduce<F>(self, f: F) -> Option<T>
     where
         T: Send + Sync,
@@ -566,7 +597,7 @@ impl<T> ParallelIterator<T> {
     {
         self.data.into_par_iter().reduce(f)
     }
-    
+
     pub fn collect(self) -> Vec<T> {
         self.data
     }
@@ -583,30 +614,30 @@ impl<I, O> ParallelPipeline<I, O> {
             stages: Vec::new(),
         }
     }
-    
+
     pub fn add_stage<S>(&mut self, stage: S)
     where
         S: PipelineStage<I, O> + 'static,
     {
         self.stages.push(Box::new(stage));
     }
-    
+
     pub fn process(&self, input: Vec<I>) -> Vec<O>
     where
         I: Send + Sync + Clone,
         O: Send + Sync,
     {
         let mut current_data = input;
-        
+
         for stage in &self.stages {
             current_data = stage.process_parallel(current_data);
         }
-        
+
         current_data
     }
 }
 
-#[async_trait::async_trait]
+# [async_trait::async_trait]
 pub trait PipelineStage<I, O>: Send + Sync {
     fn process_parallel(&self, input: Vec<I>) -> Vec<O>;
 }
@@ -690,27 +721,27 @@ where
             inner: Arc::new(RwLock::new(HashMap::new())),
         }
     }
-    
+
     pub fn insert(&self, key: K, value: V) -> Option<V> {
         let mut map = self.inner.write().unwrap();
         map.insert(key, value)
     }
-    
+
     pub fn get(&self, key: &K) -> Option<V> {
         let map = self.inner.read().unwrap();
         map.get(key).cloned()
     }
-    
+
     pub fn remove(&self, key: &K) -> Option<V> {
         let mut map = self.inner.write().unwrap();
         map.remove(key)
     }
-    
+
     pub fn len(&self) -> usize {
         let map = self.inner.read().unwrap();
         map.len()
     }
-    
+
     pub fn is_empty(&self) -> bool {
         let map = self.inner.read().unwrap();
         map.is_empty()
@@ -731,27 +762,27 @@ where
             inner: Arc::new(RwLock::new(Vec::new())),
         }
     }
-    
+
     pub fn push(&self, value: T) {
         let mut vec = self.inner.write().unwrap();
         vec.push(value);
     }
-    
+
     pub fn pop(&self) -> Option<T> {
         let mut vec = self.inner.write().unwrap();
         vec.pop()
     }
-    
+
     pub fn len(&self) -> usize {
         let vec = self.inner.read().unwrap();
         vec.len()
     }
-    
+
     pub fn is_empty(&self) -> bool {
         let vec = self.inner.read().unwrap();
         vec.is_empty()
     }
-    
+
     pub fn parallel_map<F, R>(&self, f: F) -> ParallelVector<R>
     where
         F: Fn(T) -> R + Send + Sync,
@@ -759,7 +790,7 @@ where
     {
         let vec = self.inner.read().unwrap();
         let results: Vec<R> = vec.par_iter().map(|x| f(x.clone())).collect();
-        
+
         ParallelVector {
             inner: Arc::new(RwLock::new(results)),
         }
@@ -788,7 +819,7 @@ impl ParallelAlgorithms {
             .find_any(|(_, item)| predicate(item))
             .map(|(index, _)| index)
     }
-    
+
     /// 并行计数
     pub fn parallel_count<T, F>(data: &[T], predicate: F) -> usize
     where
@@ -799,7 +830,7 @@ impl ParallelAlgorithms {
             .filter(|item| predicate(item))
             .count()
     }
-    
+
     /// 并行最大值
     pub fn parallel_max<T>(data: &[T]) -> Option<&T>
     where
@@ -807,7 +838,7 @@ impl ParallelAlgorithms {
     {
         data.par_iter().max()
     }
-    
+
     /// 并行最小值
     pub fn parallel_min<T>(data: &[T]) -> Option<&T>
     where
@@ -815,7 +846,7 @@ impl ParallelAlgorithms {
     {
         data.par_iter().min()
     }
-    
+
     /// 并行求和
     pub fn parallel_sum<T>(data: &[T]) -> T
     where
@@ -823,7 +854,7 @@ impl ParallelAlgorithms {
     {
         data.par_iter().sum()
     }
-    
+
     /// 并行乘积
     pub fn parallel_product<T>(data: &[T]) -> T
     where
@@ -831,7 +862,7 @@ impl ParallelAlgorithms {
     {
         data.par_iter().product()
     }
-    
+
     /// 并行去重
     pub fn parallel_dedup<T>(data: Vec<T>) -> Vec<T>
     where
@@ -842,7 +873,7 @@ impl ParallelAlgorithms {
             .filter(|item| seen.insert(item.clone()))
             .collect()
     }
-    
+
     /// 并行排序
     pub fn parallel_sort<T>(mut data: Vec<T>) -> Vec<T>
     where
@@ -851,7 +882,7 @@ impl ParallelAlgorithms {
         data.par_sort();
         data
     }
-    
+
     /// 并行分组
     pub fn parallel_group_by<T, K, F>(data: Vec<T>, key_fn: F) -> HashMap<K, Vec<T>>
     where
@@ -906,7 +937,7 @@ $$S(n, p) = O(n + p)$$
 ### 3.8.3. 性能基准
 
 ```rust
-#[cfg(test)]
+# [cfg(test)]
 mod tests {
     use super::*;
     use std::time::Instant;
@@ -914,18 +945,18 @@ mod tests {
     #[test]
     fn test_parallel_sort_performance() {
         let data: Vec<i32> = (0..1000000).rev().collect();
-        
+
         // 串行排序
         let start = Instant::now();
         let mut serial_data = data.clone();
         serial_data.sort();
         let serial_time = start.elapsed();
-        
+
         // 并行排序
         let start = Instant::now();
         let parallel_data = parallel_merge_sort(data);
         let parallel_time = start.elapsed();
-        
+
         assert_eq!(serial_data, parallel_data);
         println!("Serial sort: {:?}", serial_time);
         println!("Parallel sort: {:?}", parallel_time);
@@ -935,17 +966,17 @@ mod tests {
     #[test]
     fn test_parallel_map_performance() {
         let data: Vec<i32> = (0..1000000).collect();
-        
+
         // 串行映射
         let start = Instant::now();
         let serial_result: Vec<i32> = data.iter().map(|x| x * 2).collect();
         let serial_time = start.elapsed();
-        
+
         // 并行映射
         let start = Instant::now();
         let parallel_result: Vec<i32> = data.par_iter().map(|x| x * 2).collect();
         let parallel_time = start.elapsed();
-        
+
         assert_eq!(serial_result, parallel_result);
         println!("Serial map: {:?}", serial_time);
         println!("Parallel map: {:?}", parallel_time);
@@ -955,17 +986,17 @@ mod tests {
     #[test]
     fn test_parallel_reduce_performance() {
         let data: Vec<i32> = (0..1000000).collect();
-        
+
         // 串行归约
         let start = Instant::now();
         let serial_result: i32 = data.iter().sum();
         let serial_time = start.elapsed();
-        
+
         // 并行归约
         let start = Instant::now();
         let parallel_result: i32 = data.par_iter().sum();
         let parallel_time = start.elapsed();
-        
+
         assert_eq!(serial_result, parallel_result);
         println!("Serial reduce: {:?}", serial_time);
         println!("Parallel reduce: {:?}", parallel_time);
@@ -989,4 +1020,4 @@ mod tests {
 7. **Rust实现**: 提供了完整的并行算法实现
 8. **性能分析**: 分析了时间复杂度和空间复杂度
 
-这些理论为并行编程提供了严格的数学基础，确保了算法的正确性和性能。 
+这些理论为并行编程提供了严格的数学基础，确保了算法的正确性和性能。

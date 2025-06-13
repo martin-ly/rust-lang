@@ -71,6 +71,7 @@ $$\text{Pattern}_1 \otimes \text{Pattern}_2 = \text{Pattern}(C_1 \cup C_2, R_1 \
 ### 4.2.2. 服务发现
 
 **算法 4.2.1** (服务注册)
+
 ```rust
 pub struct ServiceRegistry {
     services: Arc<RwLock<HashMap<String, ServiceInfo>>>,
@@ -143,6 +144,7 @@ impl ServiceRegistry {
 ### 4.2.3. 负载均衡
 
 **算法 4.2.2** (轮询负载均衡)
+
 ```rust
 pub struct RoundRobinLoadBalancer {
     services: Arc<RwLock<Vec<ServiceInfo>>>,
@@ -175,6 +177,7 @@ impl RoundRobinLoadBalancer {
 ```
 
 **算法 4.2.3** (最少连接负载均衡)
+
 ```rust
 pub struct LeastConnectionLoadBalancer {
     services: Arc<RwLock<Vec<ServiceInfo>>>,
@@ -256,6 +259,7 @@ $$\text{Stream} = \langle e_1, e_2, \ldots, e_n \rangle$$
 ### 4.3.2. 事件总线
 
 **算法 4.3.1** (事件总线实现)
+
 ```rust
 use tokio::sync::broadcast;
 use serde::{Serialize, Deserialize};
@@ -307,6 +311,7 @@ impl EventBus {
 ### 4.3.3. 事件处理器
 
 **算法 4.3.2** (事件处理器)
+
 ```rust
 #[async_trait::async_trait]
 pub trait EventHandler: Send + Sync {
@@ -387,6 +392,7 @@ $$\text{backpressure}(p, s) = \frac{\text{rate}(p)}{\text{capacity}(s)}$$
 ### 4.4.2. 响应式流实现
 
 **算法 4.4.1** (响应式流实现)
+
 ```rust
 use tokio::sync::mpsc;
 use std::sync::Arc;
@@ -465,6 +471,7 @@ where
 ### 4.4.3. 背压控制
 
 **算法 4.4.2** (背压控制实现)
+
 ```rust
 pub struct BackpressureController {
     max_buffer_size: usize,
@@ -558,6 +565,7 @@ impl RateLimiter {
 ### 4.5.2. 流处理实现
 
 **算法 4.5.1** (流处理引擎)
+
 ```rust
 use tokio::sync::mpsc;
 use std::collections::HashMap;
@@ -653,6 +661,7 @@ pub trait StreamSink<T>: Send + Sync {
 ### 4.5.3. 时间窗口处理
 
 **算法 4.5.2** (滑动窗口实现)
+
 ```rust
 pub struct SlidingWindow<T> {
     window_size: Duration,
@@ -1033,4 +1042,4 @@ mod tests {
 7. **Rust实现**: 提供了完整的异步架构实现
 8. **性能分析**: 分析了时间复杂度和空间复杂度
 
-这些理论为异步架构设计提供了严格的数学基础，确保了系统的正确性和性能。 
+这些理论为异步架构设计提供了严格的数学基础，确保了系统的正确性和性能。

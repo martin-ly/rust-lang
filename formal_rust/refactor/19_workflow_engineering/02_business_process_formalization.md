@@ -60,6 +60,7 @@ BPMN元素集合包含：
 - $\text{SequenceFlow}$: 顺序流
 
 **算法 2.2.1** (BPMN解析器)
+
 ```rust
 use serde::{Deserialize, Serialize};
 
@@ -119,6 +120,7 @@ impl BPMNParser {
 ### 2.2.2. 流程验证
 
 **算法 2.2.2** (流程验证器)
+
 ```rust
 pub struct ProcessValidator;
 
@@ -271,6 +273,7 @@ impl ValidationResult {
 - $E$ 是执行环境
 
 **算法 2.3.1** (规则引擎实现)
+
 ```rust
 use serde::{Deserialize, Serialize};
 
@@ -467,6 +470,7 @@ impl RuleEngine {
 - $\delta: C \times R \rightarrow V$ 是决策函数
 
 **算法 2.4.1** (决策表实现)
+
 ```rust
 #[derive(Debug, Clone)]
 pub struct DecisionTable {
@@ -774,4 +778,4 @@ $$S(n) = O(n + d)$$
 6. **Rust实现**: 提供了完整的业务流程引擎
 7. **性能分析**: 分析了时间复杂度和空间复杂度
 
-这些理论为业务流程管理提供了严格的数学基础，确保了流程的正确性和效率。 
+这些理论为业务流程管理提供了严格的数学基础，确保了流程的正确性和效率。

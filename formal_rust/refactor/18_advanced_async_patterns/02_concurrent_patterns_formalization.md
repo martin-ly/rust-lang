@@ -65,6 +65,7 @@ $$\text{safe}(\mathcal{C}) \iff \neg \exists \text{race}(\mathcal{C})$$
 ### 2.2.2. 调度策略
 
 **算法 2.2.1** (FIFO调度)
+
 ```rust
 fn fifo_schedule(queue: &mut VecDeque<Task>) -> Option<Task> {
     queue.pop_front()
@@ -72,6 +73,7 @@ fn fifo_schedule(queue: &mut VecDeque<Task>) -> Option<Task> {
 ```
 
 **算法 2.2.2** (优先级调度)
+
 ```rust
 fn priority_schedule(queue: &mut BinaryHeap<Task>) -> Option<Task> {
     queue.pop()
@@ -79,6 +81,7 @@ fn priority_schedule(queue: &mut BinaryHeap<Task>) -> Option<Task> {
 ```
 
 **算法 2.2.3** (负载均衡调度)
+
 ```rust
 fn load_balance_schedule(workers: &[Worker], task: Task) -> Worker {
     workers.iter()
@@ -148,6 +151,7 @@ $$\text{state}(a_1) \cap \text{state}(a_2) = \emptyset$$
 - $r$ 是接收者
 
 **算法 2.4.1** (同步发送)
+
 ```rust
 fn sync_send<T>(sender: &Actor, message: T, receiver: &Actor) -> Result<(), Error> {
     let channel = get_channel(sender, receiver);
@@ -167,6 +171,7 @@ fn sync_send<T>(sender: &Actor, message: T, receiver: &Actor) -> Result<(), Erro
 - $f$ 是回调函数
 
 **算法 2.4.2** (异步发送)
+
 ```rust
 fn async_send<T, F>(sender: &Actor, message: T, receiver: &Actor, callback: F) 
 where 
@@ -190,6 +195,7 @@ where
 - $R$ 是接收者集合
 
 **算法 2.4.3** (广播实现)
+
 ```rust
 fn broadcast<T>(sender: &Actor, message: T, receivers: &[Actor]) {
     for receiver in receivers {
@@ -215,6 +221,7 @@ fn broadcast<T>(sender: &Actor, message: T, receivers: &[Actor]) {
 - $U: \text{Locked} \rightarrow \text{Unlocked}$ 是解锁操作
 
 **算法 2.5.1** (互斥锁实现)
+
 ```rust
 use std::sync::{Arc, Mutex};
 
@@ -246,6 +253,7 @@ impl<T> MutexLock<T> {
 - $\text{count}$ 是当前计数
 
 **算法 2.5.2** (信号量实现)
+
 ```rust
 use std::sync::{Arc, Mutex, Condvar};
 
@@ -298,6 +306,7 @@ impl Semaphore {
 - $N$ 是通知操作
 
 **算法 2.5.3** (条件变量实现)
+
 ```rust
 use std::sync::{Arc, Mutex, Condvar};
 
@@ -874,4 +883,4 @@ mod tests {
 7. **Rust实现**: 提供了完整的并发模式实现
 8. **性能分析**: 分析了时间复杂度和空间复杂度
 
-这些理论为并发编程提供了严格的数学基础，确保了程序的正确性和性能。 
+这些理论为并发编程提供了严格的数学基础，确保了程序的正确性和性能。

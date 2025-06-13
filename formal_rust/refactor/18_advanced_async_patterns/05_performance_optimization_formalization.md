@@ -62,6 +62,7 @@ $$\text{improvement} = \frac{\text{performance}_{\text{after}} - \text{performan
 - $A$ 是算法选择
 
 **算法 5.2.1** (动态规划优化)
+
 ```rust
 pub struct DynamicProgrammingOptimizer {
     cache: HashMap<String, i32>,
@@ -115,6 +116,7 @@ impl DynamicProgrammingOptimizer {
 ### 5.2.2. 空间复杂度优化
 
 **算法 5.2.2** (内存优化算法)
+
 ```rust
 pub struct MemoryOptimizedAlgorithm;
 
@@ -152,6 +154,7 @@ impl MemoryOptimizedAlgorithm {
 ### 5.2.3. 算法选择优化
 
 **算法 5.2.3** (自适应算法选择)
+
 ```rust
 pub struct AdaptiveAlgorithmSelector {
     performance_history: HashMap<String, Vec<f64>>,
@@ -226,6 +229,7 @@ impl AdaptiveAlgorithmSelector {
 - $C$ 是缓存友好性
 
 **算法 5.3.1** (内存布局优化)
+
 ```rust
 use std::mem;
 
@@ -305,6 +309,7 @@ where
 ### 5.3.2. 缓存优化
 
 **算法 5.3.2** (缓存友好算法)
+
 ```rust
 /// 缓存友好的矩阵乘法
 pub struct CacheOptimizedMatrix {
@@ -379,6 +384,7 @@ impl CacheOptimizedMatrix {
 ### 5.3.3. 垃圾回收优化
 
 **算法 5.3.3** (手动内存管理)
+
 ```rust
 use std::ptr;
 
@@ -443,6 +449,7 @@ impl Drop for ManualMemoryManager {
 ### 5.4.1. 线程池优化
 
 **算法 5.4.1** (自适应线程池)
+
 ```rust
 use std::sync::{Arc, Mutex};
 use std::thread;
@@ -629,6 +636,7 @@ impl LoadMonitor {
 ### 5.4.2. 锁优化
 
 **算法 5.4.2** (无锁数据结构)
+
 ```rust
 use std::sync::atomic::{AtomicPtr, AtomicUsize, Ordering};
 
@@ -781,6 +789,7 @@ where
 ### 5.5.1. 异步I/O
 
 **算法 5.5.1** (异步文件操作)
+
 ```rust
 use tokio::fs::{File, OpenOptions};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
@@ -833,6 +842,7 @@ impl AsyncFileManager {
 ### 5.5.2. 缓冲I/O
 
 **算法 5.5.2** (缓冲I/O实现)
+
 ```rust
 use std::io::{BufRead, BufReader, BufWriter};
 use tokio::io::{BufReader as TokioBufReader, BufWriter as TokioBufWriter};
@@ -879,6 +889,7 @@ impl BufferedIOManager {
 ### 5.5.3. 批量I/O
 
 **算法 5.5.3** (批量I/O操作)
+
 ```rust
 pub struct BatchIOManager;
 
@@ -1261,4 +1272,4 @@ mod tests {
 7. **Rust实现**: 提供了完整的性能优化实现
 8. **性能分析**: 分析了优化效果和性能基准
 
-这些理论为性能优化提供了严格的数学基础，确保了优化的正确性和有效性。 
+这些理论为性能优化提供了严格的数学基础，确保了优化的正确性和有效性。
