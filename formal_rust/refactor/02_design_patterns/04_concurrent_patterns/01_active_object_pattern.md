@@ -1,779 +1,565 @@
-# 活动对象模式 (Active Object Pattern) - 形式化重构
+# 活动对象模式形式化重构 (Active Object Pattern Formal Refactoring)
 
-## 目录
+## 概述
 
-1. [模式概述](#1-模式概述)
-2. [形式化定义](#2-形式化定义)
-3. [数学理论](#3-数学理论)
-4. [核心定理](#4-核心定理)
-5. [Rust实现](#5-rust实现)
-6. [应用场景](#6-应用场景)
-7. [变体模式](#7-变体模式)
-8. [性能分析](#8-性能分析)
-9. [总结](#9-总结)
+活动对象模式是一种并发设计模式，它将方法调用与执行分离，通过消息队列和独立线程来实现异步执行。该模式提供了线程安全的接口，同时避免了显式的同步操作。
 
-## 1. 模式概述
+## 形式化定义
 
-### 1.1 定义
+### 定义1.1 (活动对象模式五元组)
 
-活动对象模式是一种并发设计模式，它将方法调用与执行分离，通过消息传递机制实现异步处理。
+设 $A = (I, Q, T, M, S)$ 为一个活动对象模式，其中：
 
-### 1.2 核心思想
+- $I$ 是接口定义集合
+- $Q$ 是消息队列集合
+- $T$ 是执行线程集合
+- $M$ 是方法调用集合
+- $S$ 是调度器集合
 
-- **方法调用与执行分离**：客户端调用方法时立即返回，实际执行在独立线程中进行
-- **消息传递机制**：通过消息队列传递方法调用请求
-- **异步处理**：支持非阻塞的方法调用
-- **线程安全**：确保多线程环境下的安全性
+### 定义1.2 (消息队列)
 
-### 1.3 适用场景
+设 $Q = (M, O, P)$ 为一个消息队列，其中：
 
-- 需要异步处理的方法调用
-- 长时间运行的操作
-- 需要避免阻塞主线程的场景
-- 需要控制并发访问的场景
+- $M$ 是消息集合
+- $O$ 是操作集合
+- $P$ 是优先级函数
 
-## 2. 形式化定义
+### 定义1.3 (方法调用)
 
-### 2.1 活动对象模式五元组
+设 $m = (i, p, r, f) \in M$ 为一个方法调用，其中：
 
-**定义2.1 (活动对象模式五元组)**
-设 $AO = (O, M, Q, S, T)$ 为一个活动对象模式，其中：
+- $i$ 是调用标识符
+- $p$ 是参数列表
+- $r$ 是返回类型
+- $f$ 是执行函数
 
-- $O$ 是对象集合，包含活动对象和客户端对象
-- $M$ 是方法集合，包含所有可调用的方法
-- $Q$ 是消息队列，用于存储待执行的方法调用
-- $S$ 是调度器，负责从队列中取出方法并执行
-- $T$ 是线程集合，包含执行线程
+## 数学理论
 
-### 2.2 消息结构定义
+### 1. 异步执行理论
 
-**定义2.2 (方法调用消息)**
-设 $msg = (id, method, args, future)$ 为一个方法调用消息，其中：
+**定义2.1 (异步执行关系)**
 
-- $id$ 是消息唯一标识符
-- $method$ 是方法名称
-- $args$ 是方法参数列表
-- $future$ 是用于获取结果的Future对象
+对于任意方法调用 $m_1, m_2 \in M$，异步执行关系定义为：
 
-### 2.3 活动对象状态定义
+$$m_1 \parallel m_2 \iff \text{exec}(m_1) \cap \text{exec}(m_2) = \emptyset$$
 
-**定义2.3 (活动对象状态)**
-设 $state = (queue, scheduler, running)$ 为活动对象状态，其中：
+其中 $\text{exec}(m)$ 表示方法 $m$ 的执行时间区间。
 
-- $queue$ 是消息队列状态
-- $scheduler$ 是调度器状态
-- $running$ 是执行状态
+**定理2.1 (异步执行正确性)**
 
-## 3. 数学理论
+对于活动对象模式 $A$，如果满足：
 
-### 3.1 异步执行理论
+1. $\forall m \in M: \text{queue}(m) \in Q$ (所有方法调用都进入队列)
+2. $\forall q \in Q: \text{process}(q) \in T$ (所有队列都有处理线程)
+3. $\forall t \in T: \text{mutex}(t)$ (所有线程都是互斥的)
 
-**定义3.1 (异步执行)**
-对于方法调用 $call(m, args)$，异步执行定义为：
-
-$$async\_exec(m, args) = \lambda f. \text{enqueue}(msg(m, args, f))$$
-
-其中 $f$ 是Future对象，用于获取执行结果。
-
-**定理3.1.1 (异步执行正确性)**
-异步执行满足以下性质：
-
-1. **非阻塞性**：$call(m, args)$ 立即返回
-2. **顺序性**：方法按调用顺序执行
-3. **完整性**：所有方法调用最终被执行
+则 $A$ 的异步执行是正确的。
 
 **证明**：
 
-- 非阻塞性：由于方法调用只是将消息加入队列，因此立即返回
-- 顺序性：队列的FIFO特性保证了执行顺序
-- 完整性：调度器会持续从队列中取出消息执行
+设 $m_1, m_2 \in M$ 为任意两个方法调用。
 
-### 3.2 消息传递理论
+1. 由于 $m_1, m_2$ 都进入队列 $Q$，且队列是线程安全的
+2. 处理线程 $T$ 按顺序处理队列中的消息
+3. 因此 $\text{exec}(m_1) \cap \text{exec}(m_2) = \emptyset$
+4. 即 $m_1 \parallel m_2$ 成立
 
-**定义3.2 (消息传递)**
-消息传递函数定义为：
+### 2. 线程安全理论
 
-$$\text{send}(msg) = \text{enqueue}(msg)$$
+**定义2.2 (线程安全条件)**
 
-**定理3.2.1 (消息传递安全性)**
-消息传递是线程安全的，当且仅当：
+活动对象模式 $A$ 是线程安全的，当且仅当：
 
-$$\forall msg_1, msg_2 \in Q: \text{enqueue}(msg_1) \land \text{enqueue}(msg_2) \Rightarrow \text{order}(msg_1, msg_2)$$
+$$\forall m_1, m_2 \in M: \text{race\_condition}(m_1, m_2) = \text{false}$$
 
-**证明**：
-使用互斥锁保护队列操作，确保消息的原子性加入。
+**定理2.2 (线程安全保证)**
 
-### 3.3 调度理论
-
-**定义3.3 (调度策略)**
-调度策略定义为：
-
-$$\text{schedule}() = \text{dequeue}() \rightarrow \text{execute}()$$
-
-**定理3.3.1 (调度公平性)**
-调度策略是公平的，当且仅当：
-
-$$\forall msg \in Q: \text{wait\_time}(msg) < \infty$$
-
-**证明**：
-由于调度器持续运行，每个消息最终都会被处理。
-
-## 4. 核心定理
-
-### 4.1 活动对象正确性定理
-
-**定理4.1.1 (活动对象正确性)**
-活动对象模式是正确的，当且仅当：
-
-1. **方法调用非阻塞**：$\forall m \in M: \text{call}(m) \rightarrow \text{immediate\_return}$
-2. **执行顺序保证**：$\forall msg_1, msg_2: \text{enqueue}(msg_1) < \text{enqueue}(msg_2) \Rightarrow \text{execute}(msg_1) < \text{execute}(msg_2)$
-3. **线程安全保证**：$\forall t_1, t_2 \in T: \text{thread\_safe}(t_1, t_2)$
+对于活动对象模式 $A$，如果使用消息队列进行通信，则 $A$ 是线程安全的。
 
 **证明**：
 
-- 方法调用非阻塞：通过消息队列实现
-- 执行顺序保证：队列的FIFO特性
-- 线程安全保证：互斥锁保护共享资源
+1. 所有方法调用都通过消息队列 $Q$ 进行
+2. 消息队列 $Q$ 是线程安全的
+3. 执行线程 $T$ 按顺序处理消息
+4. 因此不存在数据竞争
+5. 即 $\text{race\_condition}(m_1, m_2) = \text{false}$
 
-### 4.2 性能定理
+### 3. 性能理论
 
-**定理4.2.1 (调用复杂度)**
-方法调用时间复杂度为 $O(1)$。
+**定义2.3 (吞吐量)**
+
+活动对象模式的吞吐量定义为：
+
+$$\text{Throughput}(A) = \frac{|M|}{T_{\text{total}}}$$
+
+其中 $T_{\text{total}}$ 是总执行时间。
+
+**定理2.3 (吞吐量上界)**
+
+对于活动对象模式 $A$，吞吐量上界为：
+
+$$\text{Throughput}(A) \leq \frac{|T| \cdot \text{CPU\_speed}}{\text{avg\_exec\_time}}$$
 
 **证明**：
-方法调用只是将消息加入队列，队列操作是常数时间。
 
-**定理4.2.2 (执行复杂度)**
-方法执行时间复杂度取决于具体方法实现。
+1. 每个线程 $t \in T$ 的处理能力为 $\text{CPU\_speed}$
+2. 总处理能力为 $|T| \cdot \text{CPU\_speed}$
+3. 平均执行时间为 $\text{avg\_exec\_time}$
+4. 因此吞吐量上界为 $\frac{|T| \cdot \text{CPU\_speed}}{\text{avg\_exec\_time}}$
 
-**定理4.2.3 (空间复杂度)**
-空间复杂度为 $O(n)$，其中 $n$ 是队列中的消息数量。
+## 核心定理
 
-### 4.3 并发性定理
+### 定理3.1 (活动对象正确性)
 
-**定理4.3.1 (并发安全性)**
-活动对象模式在多线程环境下是安全的。
+对于活动对象模式 $A$，如果满足：
+
+1. **消息完整性**: $\forall m \in M: \text{enqueue}(m) \implies \text{dequeue}(m)$
+2. **执行顺序性**: $\forall m_1, m_2 \in M: \text{enqueue}(m_1) < \text{enqueue}(m_2) \implies \text{exec}(m_1) < \text{exec}(m_2)$
+3. **线程安全性**: $\forall t_1, t_2 \in T: \text{mutex}(t_1, t_2)$
+
+则 $A$ 是正确的活动对象模式。
 
 **证明**：
 
-- 消息队列使用互斥锁保护
-- 调度器在独立线程中运行
-- 方法执行是隔离的
+1. **消息完整性保证**：所有入队的消息都会被处理
+2. **执行顺序性保证**：消息按FIFO顺序执行
+3. **线程安全性保证**：不存在数据竞争
 
-## 5. Rust实现
+### 定理3.2 (活动对象性能)
 
-### 5.1 基础实现
+对于活动对象模式 $A$，性能指标满足：
+
+1. **延迟**: $\text{Latency}(A) = O(\frac{|Q|}{|T|})$
+2. **吞吐量**: $\text{Throughput}(A) = O(|T|)$
+3. **资源使用**: $\text{Resource}(A) = O(|T| + |Q|)$
+
+**证明**：
+
+1. **延迟分析**：队列长度除以线程数
+2. **吞吐量分析**：与线程数成正比
+3. **资源分析**：线程开销加队列开销
+
+### 定理3.3 (活动对象可扩展性)
+
+对于活动对象模式 $A$，可扩展性定义为：
+
+$$\text{Scalability}(A) = \lim_{|T| \to \infty} \frac{\text{Throughput}(A)}{|T|}$$
+
+当 $|T| \to \infty$ 时，$\text{Scalability}(A) = \text{CPU\_speed} / \text{avg\_exec\_time}$
+
+### 定理3.4 (活动对象复杂度)
+
+活动对象模式的复杂度为：
+
+$$\text{Complexity}(A) = |T| \cdot \log(|Q|) + |M| \cdot \log(|I|)$$
+
+## Rust实现
+
+### 1. 基础实现
 
 ```rust
 use std::collections::VecDeque;
 use std::sync::{Arc, Mutex, Condvar};
 use std::thread;
-use std::future::Future;
-use std::pin::Pin;
-use std::task::{Context, Poll};
+use std::time::Duration;
 
-// 方法调用消息
+/// 活动对象trait
+pub trait ActiveObject {
+    type Input;
+    type Output;
+    
+    fn process(&self, input: Self::Input) -> Result<Self::Output, Box<dyn std::error::Error>>;
+}
+
+/// 消息结构
 #[derive(Debug, Clone)]
-struct MethodCall {
+pub struct Message<I, O> {
     id: u64,
-    method_name: String,
-    args: Vec<String>,
+    input: I,
+    callback: Box<dyn FnOnce(Result<O, Box<dyn std::error::Error>>) + Send>,
 }
 
-// Future包装器
-struct MethodFuture {
-    id: u64,
-    result: Arc<Mutex<Option<String>>>,
-    condvar: Arc<Condvar>,
+/// 活动对象实现
+pub struct ActiveObjectImpl<I, O, T>
+where
+    T: ActiveObject<Input = I, Output = O> + Send + 'static,
+    I: Send + 'static,
+    O: Send + 'static,
+{
+    queue: Arc<Mutex<VecDeque<Message<I, O>>>>,
+    condition: Arc<Condvar>,
+    thread: Option<thread::JoinHandle<()>>,
+    processor: Arc<T>,
 }
 
-impl Future for MethodFuture {
-    type Output = String;
-
-    fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
-        let mut result = self.result.lock().unwrap();
-        if let Some(value) = result.take() {
-            Poll::Ready(value)
-        } else {
-            Poll::Pending
-        }
-    }
-}
-
-// 活动对象
-struct ActiveObject {
-    queue: Arc<Mutex<VecDeque<MethodCall>>>,
-    results: Arc<Mutex<std::collections::HashMap<u64, Arc<Mutex<Option<String>>>>>>,
-    condvar: Arc<Condvar>,
-    thread_handle: Option<thread::JoinHandle<()>>,
-}
-
-impl ActiveObject {
-    fn new() -> Self {
+impl<I, O, T> ActiveObjectImpl<I, O, T>
+where
+    T: ActiveObject<Input = I, Output = O> + Send + 'static,
+    I: Send + 'static,
+    O: Send + 'static,
+{
+    /// 创建新的活动对象
+    pub fn new(processor: T) -> Self {
         let queue = Arc::new(Mutex::new(VecDeque::new()));
-        let results = Arc::new(Mutex::new(std::collections::HashMap::new()));
-        let condvar = Arc::new(Condvar::new());
+        let condition = Arc::new(Condvar::new());
+        let processor = Arc::new(processor);
         
         let queue_clone = queue.clone();
-        let results_clone = results.clone();
-        let condvar_clone = condvar.clone();
+        let condition_clone = condition.clone();
+        let processor_clone = processor.clone();
         
-        let thread_handle = thread::spawn(move || {
-            loop {
-                let method_call = {
-                    let mut queue = queue_clone.lock().unwrap();
-                    while queue.is_empty() {
-                        queue = condvar_clone.wait(queue).unwrap();
-                    }
-                    queue.pop_front().unwrap()
-                };
-                
-                // 执行方法
-                let result = Self::execute_method(&method_call);
-                
-                // 存储结果
-                let mut results = results_clone.lock().unwrap();
-                if let Some(result_arc) = results.get(&method_call.id) {
-                    *result_arc.lock().unwrap() = Some(result);
-                }
-            }
+        let thread = thread::spawn(move || {
+            Self::process_loop(queue_clone, condition_clone, processor_clone);
         });
         
         Self {
             queue,
-            results,
-            condvar,
-            thread_handle: Some(thread_handle),
+            condition,
+            thread: Some(thread),
+            processor,
         }
     }
     
-    fn call_method(&self, method_name: String, args: Vec<String>) -> MethodFuture {
-        let id = rand::random::<u64>();
-        let method_call = MethodCall {
-            id,
-            method_name,
-            args,
-        };
-        
-        // 创建Future
-        let result_arc = Arc::new(Mutex::new(None));
-        let condvar = self.condvar.clone();
-        
-        // 存储结果引用
-        {
-            let mut results = self.results.lock().unwrap();
-            results.insert(id, result_arc.clone());
-        }
-        
-        // 加入队列
-        {
-            let mut queue = self.queue.lock().unwrap();
-            queue.push_back(method_call);
-        }
-        self.condvar.notify_one();
-        
-        MethodFuture {
-            id,
-            result: result_arc,
-            condvar,
-        }
-    }
-    
-    fn execute_method(call: &MethodCall) -> String {
-        match call.method_name.as_str() {
-            "add" => {
-                let a: i32 = call.args[0].parse().unwrap();
-                let b: i32 = call.args[1].parse().unwrap();
-                format!("{}", a + b)
-            }
-            "multiply" => {
-                let a: i32 = call.args[0].parse().unwrap();
-                let b: i32 = call.args[1].parse().unwrap();
-                format!("{}", a * b)
-            }
-            _ => "Unknown method".to_string(),
-        }
-    }
-}
-
-impl Drop for ActiveObject {
-    fn drop(&mut self) {
-        if let Some(handle) = self.thread_handle.take() {
-            handle.join().unwrap();
-        }
-    }
-}
-```
-
-### 5.2 泛型实现
-
-```rust
-use std::collections::VecDeque;
-use std::sync::{Arc, Mutex, Condvar};
-use std::thread;
-use std::future::Future;
-use std::pin::Pin;
-use std::task::{Context, Poll};
-
-// 泛型方法调用消息
-#[derive(Debug, Clone)]
-struct GenericMethodCall<T> {
-    id: u64,
-    method_name: String,
-    args: T,
-}
-
-// 泛型Future包装器
-struct GenericMethodFuture<T> {
-    id: u64,
-    result: Arc<Mutex<Option<T>>>,
-    condvar: Arc<Condvar>,
-}
-
-impl<T> Future for GenericMethodFuture<T> {
-    type Output = T;
-
-    fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
-        let mut result = self.result.lock().unwrap();
-        if let Some(value) = result.take() {
-            Poll::Ready(value)
-        } else {
-            Poll::Pending
-        }
-    }
-}
-
-// 泛型活动对象
-struct GenericActiveObject<T, R> {
-    queue: Arc<Mutex<VecDeque<GenericMethodCall<T>>>>,
-    results: Arc<Mutex<std::collections::HashMap<u64, Arc<Mutex<Option<R>>>>>>,
-    condvar: Arc<Condvar>,
-    thread_handle: Option<thread::JoinHandle<()>>,
-    executor: Box<dyn Fn(String, T) -> R + Send + Sync>,
-}
-
-impl<T: Clone + Send + 'static, R: Clone + Send + 'static> GenericActiveObject<T, R> {
-    fn new<F>(executor: F) -> Self 
-    where 
-        F: Fn(String, T) -> R + Send + Sync + 'static,
+    /// 异步处理消息
+    pub fn process_async<F>(&self, input: I, callback: F) -> Result<(), Box<dyn std::error::Error>>
+    where
+        F: FnOnce(Result<O, Box<dyn std::error::Error>>) + Send + 'static,
     {
-        let queue = Arc::new(Mutex::new(VecDeque::new()));
-        let results = Arc::new(Mutex::new(std::collections::HashMap::new()));
-        let condvar = Arc::new(Condvar::new());
+        let message = Message {
+            id: self.generate_id(),
+            input,
+            callback: Box::new(callback),
+        };
         
-        let queue_clone = queue.clone();
-        let results_clone = results.clone();
-        let condvar_clone = condvar.clone();
-        let executor = Box::new(executor);
-        let executor_clone = executor.clone();
+        {
+            let mut queue = self.queue.lock().map_err(|e| format!("Lock error: {}", e))?;
+            queue.push_back(message);
+        }
         
-        let thread_handle = thread::spawn(move || {
-            loop {
-                let method_call = {
-                    let mut queue = queue_clone.lock().unwrap();
-                    while queue.is_empty() {
-                        queue = condvar_clone.wait(queue).unwrap();
-                    }
-                    queue.pop_front().unwrap()
-                };
-                
-                // 执行方法
-                let result = executor_clone(method_call.method_name, method_call.args);
-                
-                // 存储结果
-                let mut results = results_clone.lock().unwrap();
-                if let Some(result_arc) = results.get(&method_call.id) {
-                    *result_arc.lock().unwrap() = Some(result);
+        self.condition.notify_one();
+        Ok(())
+    }
+    
+    /// 处理循环
+    fn process_loop(
+        queue: Arc<Mutex<VecDeque<Message<I, O>>>>,
+        condition: Arc<Condvar>,
+        processor: Arc<T>,
+    ) {
+        loop {
+            let message = {
+                let mut queue = queue.lock().unwrap();
+                while queue.is_empty() {
+                    queue = condition.wait(queue).unwrap();
+                }
+                queue.pop_front().unwrap()
+            };
+            
+            let result = processor.process(message.input);
+            (message.callback)(result);
+        }
+    }
+    
+    /// 生成唯一ID
+    fn generate_id(&self) -> u64 {
+        use std::sync::atomic::{AtomicU64, Ordering};
+        static COUNTER: AtomicU64 = AtomicU64::new(0);
+        COUNTER.fetch_add(1, Ordering::SeqCst)
+    }
+}
+
+impl<I, O, T> Drop for ActiveObjectImpl<I, O, T>
+where
+    T: ActiveObject<Input = I, Output = O> + Send + 'static,
+    I: Send + 'static,
+    O: Send + 'static,
+{
+    fn drop(&mut self) {
+        if let Some(thread) = self.thread.take() {
+            thread.join().unwrap();
+        }
+    }
+}
+```
+
+### 2. 泛型实现
+
+```rust
+/// 泛型活动对象
+pub struct GenericActiveObject<I, O, F>
+where
+    F: Fn(I) -> Result<O, Box<dyn std::error::Error>> + Send + 'static,
+    I: Send + 'static,
+    O: Send + 'static,
+{
+    processor: F,
+}
+
+impl<I, O, F> GenericActiveObject<I, O, F>
+where
+    F: Fn(I) -> Result<O, Box<dyn std::error::Error>> + Send + 'static,
+    I: Send + 'static,
+    O: Send + 'static,
+{
+    pub fn new(processor: F) -> Self {
+        Self { processor }
+    }
+}
+
+impl<I, O, F> ActiveObject for GenericActiveObject<I, O, F>
+where
+    F: Fn(I) -> Result<O, Box<dyn std::error::Error>> + Send + 'static,
+    I: Send + 'static,
+    O: Send + 'static,
+{
+    type Input = I;
+    type Output = O;
+    
+    fn process(&self, input: Self::Input) -> Result<Self::Output, Box<dyn std::error::Error>> {
+        (self.processor)(input)
+    }
+}
+```
+
+### 3. 异步实现
+
+```rust
+use tokio::sync::mpsc;
+use tokio::task;
+
+/// 异步活动对象
+pub struct AsyncActiveObject<I, O, T>
+where
+    T: ActiveObject<Input = I, Output = O> + Send + 'static,
+    I: Send + 'static,
+    O: Send + 'static,
+{
+    sender: mpsc::UnboundedSender<Message<I, O>>,
+    processor: Arc<T>,
+}
+
+impl<I, O, T> AsyncActiveObject<I, O, T>
+where
+    T: ActiveObject<Input = I, Output = O> + Send + 'static,
+    I: Send + 'static,
+    O: Send + 'static,
+{
+    /// 创建异步活动对象
+    pub fn new(processor: T) -> Self {
+        let (sender, mut receiver) = mpsc::unbounded_channel();
+        let processor = Arc::new(processor);
+        let processor_clone = processor.clone();
+        
+        task::spawn(async move {
+            while let Some(message) = receiver.recv().await {
+                let result = processor_clone.process(message.input);
+                (message.callback)(result);
+            }
+        });
+        
+        Self { sender, processor }
+    }
+    
+    /// 异步处理
+    pub async fn process_async<F>(
+        &self,
+        input: I,
+        callback: F,
+    ) -> Result<(), Box<dyn std::error::Error>>
+    where
+        F: FnOnce(Result<O, Box<dyn std::error::Error>>) + Send + 'static,
+    {
+        let message = Message {
+            id: self.generate_id(),
+            input,
+            callback: Box::new(callback),
+        };
+        
+        self.sender.send(message).map_err(|e| format!("Send error: {}", e))?;
+        Ok(())
+    }
+    
+    /// 生成唯一ID
+    fn generate_id(&self) -> u64 {
+        use std::sync::atomic::{AtomicU64, Ordering};
+        static COUNTER: AtomicU64 = AtomicU64::new(0);
+        COUNTER.fetch_add(1, Ordering::SeqCst)
+    }
+}
+```
+
+### 4. 应用场景
+
+```rust
+/// 计算服务示例
+pub struct Calculator;
+
+impl ActiveObject for Calculator {
+    type Input = (f64, f64, char);
+    type Output = f64;
+    
+    fn process(&self, input: Self::Input) -> Result<Self::Output, Box<dyn std::error::Error>> {
+        let (a, b, op) = input;
+        match op {
+            '+' => Ok(a + b),
+            '-' => Ok(a - b),
+            '*' => Ok(a * b),
+            '/' => {
+                if b == 0.0 {
+                    Err("Division by zero".into())
+                } else {
+                    Ok(a / b)
                 }
             }
-        });
-        
-        Self {
-            queue,
-            results,
-            condvar,
-            thread_handle: Some(thread_handle),
-            executor,
+            _ => Err("Unknown operation".into()),
         }
     }
+}
+
+/// 使用示例
+pub fn calculator_example() {
+    let calculator = ActiveObjectImpl::new(Calculator);
     
-    fn call_method(&self, method_name: String, args: T) -> GenericMethodFuture<R> {
-        let id = rand::random::<u64>();
-        let method_call = GenericMethodCall {
-            id,
-            method_name,
-            args,
-        };
-        
-        // 创建Future
-        let result_arc = Arc::new(Mutex::new(None));
-        let condvar = self.condvar.clone();
-        
-        // 存储结果引用
-        {
-            let mut results = self.results.lock().unwrap();
-            results.insert(id, result_arc.clone());
-        }
-        
-        // 加入队列
-        {
-            let mut queue = self.queue.lock().unwrap();
-            queue.push_back(method_call);
-        }
-        self.condvar.notify_one();
-        
-        GenericMethodFuture {
-            id,
-            result: result_arc,
-            condvar,
-        }
-    }
-}
-
-impl<T, R> Drop for GenericActiveObject<T, R> {
-    fn drop(&mut self) {
-        if let Some(handle) = self.thread_handle.take() {
-            handle.join().unwrap();
-        }
-    }
-}
-```
-
-### 5.3 异步实现
-
-```rust
-use tokio::sync::{mpsc, Mutex};
-use std::collections::VecDeque;
-use std::future::Future;
-use std::pin::Pin;
-use std::task::{Context, Poll};
-
-// 异步方法调用消息
-#[derive(Debug, Clone)]
-struct AsyncMethodCall {
-    id: u64,
-    method_name: String,
-    args: Vec<String>,
-    sender: tokio::sync::oneshot::Sender<String>,
-}
-
-// 异步活动对象
-struct AsyncActiveObject {
-    sender: mpsc::UnboundedSender<AsyncMethodCall>,
-}
-
-impl AsyncActiveObject {
-    fn new() -> Self {
-        let (sender, mut receiver) = mpsc::unbounded_channel();
-        
-        // 启动异步任务处理消息
-        tokio::spawn(async move {
-            while let Some(method_call) = receiver.recv().await {
-                // 执行方法
-                let result = Self::execute_method(&method_call).await;
-                
-                // 发送结果
-                let _ = method_call.sender.send(result);
+    // 异步计算
+    calculator
+        .process_async((10.0, 5.0, '+'), |result| {
+            match result {
+                Ok(value) => println!("Result: {}", value),
+                Err(e) => println!("Error: {}", e),
             }
-        });
-        
-        Self { sender }
-    }
+        })
+        .unwrap();
     
-    fn call_method(&self, method_name: String, args: Vec<String>) -> impl Future<Output = String> {
-        let (tx, rx) = tokio::sync::oneshot::channel();
-        let method_call = AsyncMethodCall {
-            id: rand::random::<u64>(),
-            method_name,
-            args,
-            sender: tx,
-        };
-        
-        let sender = self.sender.clone();
-        
-        async move {
-            let _ = sender.send(method_call);
-            rx.await.unwrap_or_else(|_| "Error".to_string())
-        }
-    }
-    
-    async fn execute_method(call: &AsyncMethodCall) -> String {
-        // 模拟异步执行
-        tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
-        
-        match call.method_name.as_str() {
-            "add" => {
-                let a: i32 = call.args[0].parse().unwrap();
-                let b: i32 = call.args[1].parse().unwrap();
-                format!("{}", a + b)
-            }
-            "multiply" => {
-                let a: i32 = call.args[0].parse().unwrap();
-                let b: i32 = call.args[1].parse().unwrap();
-                format!("{}", a * b)
-            }
-            _ => "Unknown method".to_string(),
-        }
+    // 多个并发计算
+    for i in 0..10 {
+        let a = i as f64;
+        let b = (i + 1) as f64;
+        calculator
+            .process_async((a, b, '*'), move |result| {
+                match result {
+                    Ok(value) => println!("{} * {} = {}", a, b, value),
+                    Err(e) => println!("Error: {}", e),
+                }
+            })
+            .unwrap();
     }
 }
 ```
 
-## 6. 应用场景
-
-### 6.1 网络服务
+### 5. 变体模式
 
 ```rust
-// 网络请求处理
-struct NetworkService {
-    active_object: ActiveObject,
+/// 多线程活动对象
+pub struct MultiThreadedActiveObject<I, O, T>
+where
+    T: ActiveObject<Input = I, Output = O> + Send + 'static,
+    I: Send + 'static,
+    O: Send + 'static,
+{
+    threads: Vec<thread::JoinHandle<()>>,
+    queue: Arc<Mutex<VecDeque<Message<I, O>>>>,
+    condition: Arc<Condvar>,
+    processor: Arc<T>,
 }
 
-impl NetworkService {
-    fn new() -> Self {
-        Self {
-            active_object: ActiveObject::new(),
-        }
-    }
-    
-    async fn handle_request(&self, request: HttpRequest) -> HttpResponse {
-        let future = self.active_object.call_method(
-            "process_request".to_string(),
-            vec![request.to_string()],
-        );
-        
-        // 等待结果
-        let result = future.await;
-        HttpResponse::from_string(result)
-    }
-}
-```
-
-### 6.2 文件处理
-
-```rust
-// 文件处理服务
-struct FileProcessor {
-    active_object: ActiveObject,
-}
-
-impl FileProcessor {
-    fn new() -> Self {
-        Self {
-            active_object: ActiveObject::new(),
-        }
-    }
-    
-    async fn process_file(&self, file_path: String) -> ProcessingResult {
-        let future = self.active_object.call_method(
-            "process_file".to_string(),
-            vec![file_path],
-        );
-        
-        let result = future.await;
-        ProcessingResult::from_string(result)
-    }
-}
-```
-
-### 6.3 数据库操作
-
-```rust
-// 数据库服务
-struct DatabaseService {
-    active_object: ActiveObject,
-}
-
-impl DatabaseService {
-    fn new() -> Self {
-        Self {
-            active_object: ActiveObject::new(),
-        }
-    }
-    
-    async fn execute_query(&self, query: String) -> QueryResult {
-        let future = self.active_object.call_method(
-            "execute_query".to_string(),
-            vec![query],
-        );
-        
-        let result = future.await;
-        QueryResult::from_string(result)
-    }
-}
-```
-
-## 7. 变体模式
-
-### 7.1 多线程活动对象
-
-```rust
-// 多线程活动对象
-struct MultiThreadedActiveObject {
-    queue: Arc<Mutex<VecDeque<MethodCall>>>,
-    results: Arc<Mutex<std::collections::HashMap<u64, Arc<Mutex<Option<String>>>>>>,
-    condvar: Arc<Condvar>,
-    thread_pool: Vec<thread::JoinHandle<()>>,
-}
-
-impl MultiThreadedActiveObject {
-    fn new(thread_count: usize) -> Self {
+impl<I, O, T> MultiThreadedActiveObject<I, O, T>
+where
+    T: ActiveObject<Input = I, Output = O> + Send + 'static,
+    I: Send + 'static,
+    O: Send + 'static,
+{
+    pub fn new(processor: T, thread_count: usize) -> Self {
         let queue = Arc::new(Mutex::new(VecDeque::new()));
-        let results = Arc::new(Mutex::new(std::collections::HashMap::new()));
-        let condvar = Arc::new(Condvar::new());
+        let condition = Arc::new(Condvar::new());
+        let processor = Arc::new(processor);
         
-        let mut thread_pool = Vec::new();
+        let mut threads = Vec::new();
         
         for _ in 0..thread_count {
             let queue_clone = queue.clone();
-            let results_clone = results.clone();
-            let condvar_clone = condvar.clone();
+            let condition_clone = condition.clone();
+            let processor_clone = processor.clone();
             
-            let handle = thread::spawn(move || {
-                loop {
-                    let method_call = {
-                        let mut queue = queue_clone.lock().unwrap();
-                        while queue.is_empty() {
-                            queue = condvar_clone.wait(queue).unwrap();
-                        }
-                        queue.pop_front().unwrap()
-                    };
-                    
-                    // 执行方法
-                    let result = Self::execute_method(&method_call);
-                    
-                    // 存储结果
-                    let mut results = results_clone.lock().unwrap();
-                    if let Some(result_arc) = results.get(&method_call.id) {
-                        *result_arc.lock().unwrap() = Some(result);
-                    }
-                }
+            let thread = thread::spawn(move || {
+                Self::process_loop(queue_clone, condition_clone, processor_clone);
             });
             
-            thread_pool.push(handle);
+            threads.push(thread);
         }
         
         Self {
+            threads,
             queue,
-            results,
-            condvar,
-            thread_pool,
+            condition,
+            processor,
         }
     }
     
-    // 其他方法实现...
-}
-```
-
-### 7.2 优先级活动对象
-
-```rust
-// 优先级活动对象
-struct PriorityActiveObject {
-    high_priority_queue: Arc<Mutex<VecDeque<MethodCall>>>,
-    normal_priority_queue: Arc<Mutex<VecDeque<MethodCall>>>,
-    results: Arc<Mutex<std::collections::HashMap<u64, Arc<Mutex<Option<String>>>>>>,
-    condvar: Arc<Condvar>,
-    thread_handle: Option<thread::JoinHandle<()>>,
-}
-
-impl PriorityActiveObject {
-    fn new() -> Self {
-        let high_priority_queue = Arc::new(Mutex::new(VecDeque::new()));
-        let normal_priority_queue = Arc::new(Mutex::new(VecDeque::new()));
-        let results = Arc::new(Mutex::new(std::collections::HashMap::new()));
-        let condvar = Arc::new(Condvar::new());
-        
-        let high_queue_clone = high_priority_queue.clone();
-        let normal_queue_clone = normal_priority_queue.clone();
-        let results_clone = results.clone();
-        let condvar_clone = condvar.clone();
-        
-        let thread_handle = thread::spawn(move || {
-            loop {
-                let method_call = {
-                    let mut high_queue = high_queue_clone.lock().unwrap();
-                    let mut normal_queue = normal_queue_clone.lock().unwrap();
-                    
-                    // 优先处理高优先级队列
-                    if let Some(call) = high_queue.pop_front() {
-                        call
-                    } else if let Some(call) = normal_queue.pop_front() {
-                        call
-                    } else {
-                        // 等待新消息
-                        drop(high_queue);
-                        drop(normal_queue);
-                        let mut high_queue = high_queue_clone.lock().unwrap();
-                        while high_queue.is_empty() && normal_queue_clone.lock().unwrap().is_empty() {
-                            high_queue = condvar_clone.wait(high_queue).unwrap();
-                        }
-                        if let Some(call) = high_queue.pop_front() {
-                            call
-                        } else {
-                            normal_queue_clone.lock().unwrap().pop_front().unwrap()
-                        }
-                    }
-                };
-                
-                // 执行方法
-                let result = Self::execute_method(&method_call);
-                
-                // 存储结果
-                let mut results = results_clone.lock().unwrap();
-                if let Some(result_arc) = results.get(&method_call.id) {
-                    *result_arc.lock().unwrap() = Some(result);
+    fn process_loop(
+        queue: Arc<Mutex<VecDeque<Message<I, O>>>>,
+        condition: Arc<Condvar>,
+        processor: Arc<T>,
+    ) {
+        loop {
+            let message = {
+                let mut queue = queue.lock().unwrap();
+                while queue.is_empty() {
+                    queue = condition.wait(queue).unwrap();
                 }
-            }
-        });
-        
-        Self {
-            high_priority_queue,
-            normal_priority_queue,
-            results,
-            condvar,
-            thread_handle: Some(thread_handle),
+                queue.pop_front().unwrap()
+            };
+            
+            let result = processor.process(message.input);
+            (message.callback)(result);
         }
-    }
-    
-    fn call_method_high_priority(&self, method_name: String, args: Vec<String>) -> MethodFuture {
-        // 实现高优先级方法调用
-        // ...
-    }
-    
-    fn call_method_normal_priority(&self, method_name: String, args: Vec<String>) -> MethodFuture {
-        // 实现普通优先级方法调用
-        // ...
     }
 }
 ```
 
-## 8. 性能分析
+## 性能分析
 
-### 8.1 时间复杂度分析
+### 1. 时间复杂度分析
 
-- **方法调用**: $O(1)$ - 只是将消息加入队列
-- **消息处理**: $O(1)$ - 从队列中取出消息
-- **方法执行**: 取决于具体方法实现
+- **消息入队**: $O(1)$ 平均时间复杂度
+- **消息出队**: $O(1)$ 平均时间复杂度
+- **消息处理**: $O(f(n))$ 其中 $f(n)$ 是处理函数的复杂度
+- **线程调度**: $O(\log n)$ 最坏时间复杂度
 
-### 8.2 空间复杂度分析
+### 2. 空间复杂度分析
 
-- **队列空间**: $O(n)$ - 其中 $n$ 是队列中的消息数量
-- **结果存储**: $O(n)$ - 存储所有Future的结果
-- **线程开销**: $O(1)$ - 固定数量的线程
+- **队列存储**: $O(n)$ 其中 $n$ 是队列长度
+- **线程开销**: $O(t)$ 其中 $t$ 是线程数量
+- **消息开销**: $O(m)$ 其中 $m$ 是消息数量
 
-### 8.3 并发性能
+### 3. 资源使用分析
 
-- **吞吐量**: 高 - 支持并发方法调用
-- **延迟**: 低 - 方法调用立即返回
-- **资源利用率**: 高 - 充分利用多核处理器
+- **CPU使用**: 与线程数成正比
+- **内存使用**: 与队列长度成正比
+- **线程开销**: 每个线程约1MB栈空间
 
-## 9. 总结
+## 最佳实践
 
-活动对象模式通过将方法调用与执行分离，实现了异步处理和并发控制。该模式具有以下特点：
+### 1. 设计原则
 
-1. **非阻塞调用**: 方法调用立即返回，不阻塞调用线程
-2. **顺序执行**: 保证方法按调用顺序执行
-3. **线程安全**: 通过消息队列和互斥锁保证线程安全
-4. **易于扩展**: 支持多种变体和优化
+1. **单一职责**: 每个活动对象只处理一种类型的任务
+2. **接口隔离**: 提供清晰的异步接口
+3. **资源管理**: 合理控制线程数量和队列大小
+4. **错误处理**: 正确处理异步错误
 
-通过形式化定义和数学证明，我们建立了活动对象模式的完整理论体系，为实际应用提供了可靠的理论基础。
+### 2. 实现原则
+
+1. **线程安全**: 确保所有共享数据都是线程安全的
+2. **内存管理**: 正确管理消息的生命周期
+3. **性能优化**: 避免不必要的内存分配
+4. **监控**: 监控队列长度和线程状态
+
+### 3. 使用原则
+
+1. **适用场景**: 适用于CPU密集型任务
+2. **避免场景**: 避免用于I/O密集型任务
+3. **配置参数**: 根据负载调整线程数
+4. **测试**: 进行并发测试和压力测试
+
+## 总结
+
+活动对象模式通过将方法调用与执行分离，提供了线程安全的异步执行机制。通过形式化分析和Rust实现，我们建立了完整的理论体系和实践框架。该模式适用于需要高并发处理的场景，能够有效提高系统的吞吐量和响应性。

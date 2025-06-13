@@ -1,775 +1,580 @@
-# 管程模式 (Monitor Pattern) - 形式化重构
+# 管程模式形式化重构 (Monitor Pattern Formal Refactoring)
 
-## 目录
+## 概述
 
-1. [模式概述](#1-模式概述)
-2. [形式化定义](#2-形式化定义)
-3. [数学理论](#3-数学理论)
-4. [核心定理](#4-核心定理)
-5. [Rust实现](#5-rust实现)
-6. [应用场景](#6-应用场景)
-7. [变体模式](#7-变体模式)
-8. [性能分析](#8-性能分析)
-9. [总结](#9-总结)
+管程模式是一种同步机制，它封装了共享数据和相关的操作，确保在任意时刻只有一个线程能够访问管程内的数据。管程提供了互斥访问和条件同步的能力。
 
-## 1. 模式概述
+## 形式化定义
 
-### 1.1 定义
+### 定义1.1 (管程模式五元组)
 
-管程模式是一种并发控制模式，它封装了共享数据和相关的操作，确保在任意时刻只有一个线程可以访问管程内的数据。
-
-### 1.2 核心思想
-
-- **互斥访问**：确保同一时刻只有一个线程可以访问管程
-- **条件变量**：支持线程间的同步和通信
-- **数据封装**：将共享数据和操作封装在一起
-- **自动同步**：提供自动的同步机制
-
-### 1.3 适用场景
-
-- 需要保护共享资源的场景
-- 生产者-消费者问题
-- 读者-写者问题
-- 需要条件同步的场景
-
-## 2. 形式化定义
-
-### 2.1 管程模式五元组
-
-**定义2.1 (管程模式五元组)**
-设 $M = (D, O, C, L, S)$ 为一个管程模式，其中：
+设 $M = (D, O, C, Q, L)$ 为一个管程模式，其中：
 
 - $D$ 是共享数据集合
-- $O$ 是操作集合，包含所有对数据的操作
-- $C$ 是条件变量集合，用于线程同步
-- $L$ 是锁机制，确保互斥访问
-- $S$ 是状态集合，表示管程的当前状态
+- $O$ 是操作集合
+- $C$ 是条件变量集合
+- $Q$ 是等待队列集合
+- $L$ 是锁机制集合
 
-### 2.2 条件变量定义
+### 定义1.2 (条件变量)
 
-**定义2.2 (条件变量)**
-设 $cv = (waiting, signal, broadcast)$ 为一个条件变量，其中：
+设 $c = (q, s, w) \in C$ 为一个条件变量，其中：
 
-- $waiting$ 是等待队列
-- $signal$ 是信号操作
-- $broadcast$ 是广播操作
+- $q$ 是等待队列
+- $s$ 是信号状态
+- $w$ 是等待条件
 
-### 2.3 管程状态定义
+### 定义1.3 (操作)
 
-**定义2.3 (管程状态)**
-设 $state = (locked, owner, waiting\_threads)$ 为管程状态，其中：
+设 $o = (n, p, r, g) \in O$ 为一个操作，其中：
 
-- $locked$ 是锁状态
-- $owner$ 是当前拥有锁的线程
-- $waiting\_threads$ 是等待锁的线程集合
+- $n$ 是操作名称
+- $p$ 是参数列表
+- $r$ 是返回类型
+- $g$ 是前置条件
 
-## 3. 数学理论
+## 数学理论
 
-### 3.1 互斥理论
+### 1. 互斥理论
 
-**定义3.1 (互斥访问)**
-对于任意时刻 $t$，管程的互斥性定义为：
+**定义2.1 (互斥访问)**
 
-$$\forall t: |\text{active\_threads}(t)| \leq 1$$
+对于管程 $M$，互斥访问定义为：
 
-其中 $\text{active\_threads}(t)$ 是在时刻 $t$ 访问管程的线程集合。
+$$\text{Mutex}(M) = \forall t_1, t_2 \in T: \text{enter}(t_1, M) \land \text{enter}(t_2, M) \implies t_1 = t_2$$
 
-**定理3.1.1 (互斥保证)**
-管程模式保证互斥访问，当且仅当：
+其中 $T$ 是线程集合，$\text{enter}(t, M)$ 表示线程 $t$ 进入管程 $M$。
 
-$$\forall t_1, t_2: \text{access}(t_1) \land \text{access}(t_2) \Rightarrow t_1 = t_2$$
+**定理2.1 (互斥保证)**
 
-**证明**：
-通过锁机制确保同一时刻只有一个线程可以获得锁，从而保证互斥访问。
-
-### 3.2 条件同步理论
-
-**定义3.2 (条件等待)**
-条件等待操作定义为：
-
-$$\text{wait}(cv) = \text{release\_lock}() \land \text{enqueue}(cv.waiting) \land \text{sleep}()$$
-
-**定义3.3 (条件通知)**
-条件通知操作定义为：
-
-$$\text{signal}(cv) = \text{dequeue}(cv.waiting) \land \text{wakeup}()$$
-
-**定理3.2.1 (条件同步正确性)**
-条件同步操作满足以下性质：
-
-1. **等待原子性**：wait操作是原子的
-2. **通知完整性**：signal操作会唤醒一个等待线程
-3. **广播完整性**：broadcast操作会唤醒所有等待线程
+对于管程模式 $M$，如果使用锁机制 $L$，则 $M$ 保证互斥访问。
 
 **证明**：
 
-- 等待原子性：wait操作在释放锁和进入等待状态之间是原子的
-- 通知完整性：signal操作从等待队列中取出一个线程并唤醒
-- 广播完整性：broadcast操作遍历等待队列并唤醒所有线程
+1. 锁机制 $L$ 确保同一时刻只有一个线程持有锁
+2. 进入管程必须先获得锁
+3. 因此同一时刻只有一个线程在管程内
+4. 即 $\text{Mutex}(M)$ 成立
 
-### 3.3 死锁预防理论
+### 2. 条件同步理论
 
-**定义3.4 (死锁条件)**
-死锁的四个必要条件：
+**定义2.2 (条件等待)**
 
-1. **互斥条件**：资源不能被多个线程同时使用
-2. **占有和等待条件**：线程持有资源并等待其他资源
-3. **非抢占条件**：资源不能被强制抢占
-4. **循环等待条件**：存在循环等待链
+对于条件变量 $c \in C$，条件等待定义为：
 
-**定理3.3.1 (管程死锁预防)**
-管程模式通过以下机制预防死锁：
+$$\text{Wait}(c) = \text{release\_lock} \land \text{block\_thread} \land \text{enqueue}(c.q)$$
 
-1. **单一锁**：只使用一个锁，避免循环等待
-2. **条件变量**：通过条件变量避免不必要的等待
-3. **原子操作**：wait和signal操作是原子的
+**定义2.3 (条件通知)**
+
+对于条件变量 $c \in C$，条件通知定义为：
+
+$$\text{Signal}(c) = \text{dequeue}(c.q) \land \text{unblock\_thread} \land \text{acquire\_lock}$$
+
+**定理2.2 (条件同步正确性)**
+
+对于管程模式 $M$，如果满足：
+
+1. $\forall c \in C: \text{Wait}(c) \implies \text{Signal}(c)$ (每个等待都有对应的通知)
+2. $\forall c \in C: \text{Signal}(c) \implies \text{Wait}(c)$ (每个通知都有对应的等待)
+
+则 $M$ 的条件同步是正确的。
+
+### 3. 死锁预防理论
+
+**定义2.4 (死锁条件)**
+
+管程模式 $M$ 存在死锁，当且仅当：
+
+$$\exists T' \subseteq T: \text{circular\_wait}(T') \land \text{resource\_hold}(T')$$
+
+**定理2.3 (死锁预防)**
+
+对于管程模式 $M$，如果满足：
+
+1. **互斥条件**: 资源不能被多个线程同时访问
+2. **占有等待**: 线程在等待其他资源时不释放已占有的资源
+3. **非抢占**: 资源不能被强制剥夺
+4. **循环等待**: 存在循环等待链
+
+则 $M$ 可能发生死锁。
+
+**定理2.4 (死锁避免)**
+
+通过以下策略可以避免死锁：
+
+1. **资源排序**: 对所有资源进行排序，按顺序申请
+2. **超时机制**: 设置资源申请超时
+3. **死锁检测**: 定期检测死锁并恢复
+
+## 核心定理
+
+### 定理3.1 (管程正确性)
+
+对于管程模式 $M$，如果满足：
+
+1. **互斥性**: $\text{Mutex}(M)$
+2. **条件同步**: $\forall c \in C: \text{Wait}(c) \iff \text{Signal}(c)$
+3. **操作完整性**: $\forall o \in O: \text{pre}(o) \implies \text{post}(o)$
+
+则 $M$ 是正确的管程模式。
 
 **证明**：
 
-- 单一锁：消除了循环等待的可能性
-- 条件变量：线程只在条件满足时才等待
-- 原子操作：避免了竞态条件
+1. **互斥性保证**：同一时刻只有一个线程在管程内
+2. **条件同步保证**：等待和通知正确配对
+3. **操作完整性保证**：所有操作都满足前置和后置条件
 
-## 4. 核心定理
+### 定理3.2 (管程性能)
 
-### 4.1 管程正确性定理
+对于管程模式 $M$，性能指标满足：
 
-**定理4.1.1 (管程正确性)**
-管程模式是正确的，当且仅当：
-
-1. **互斥性**：$\forall t: |\text{active\_threads}(t)| \leq 1$
-2. **安全性**：$\forall d \in D: \text{consistent}(d)$
-3. **活跃性**：$\forall t: \text{waiting}(t) \Rightarrow \text{eventually\_wakeup}(t)$
+1. **进入时间**: $\text{EnterTime}(M) = O(1)$
+2. **等待时间**: $\text{WaitTime}(M) = O(|Q|)$
+3. **通知时间**: $\text{SignalTime}(M) = O(1)$
 
 **证明**：
 
-- 互斥性：通过锁机制保证
-- 安全性：通过条件变量保证数据一致性
-- 活跃性：通过signal/broadcast操作保证
+1. **进入时间**：锁操作是常数时间
+2. **等待时间**：与等待队列长度成正比
+3. **通知时间**：队列操作是常数时间
 
-### 4.2 性能定理
+### 定理3.3 (管程公平性)
 
-**定理4.2.1 (访问复杂度)**
-管程访问时间复杂度为 $O(1)$。
+对于管程模式 $M$，公平性定义为：
 
-**证明**：
-获取锁和释放锁都是常数时间操作。
+$$\text{Fairness}(M) = \forall t_1, t_2 \in T: \text{wait}(t_1) < \text{wait}(t_2) \implies \text{signal}(t_1) \leq \text{signal}(t_2)$$
 
-**定理4.2.2 (等待复杂度)**
-条件等待时间复杂度为 $O(1)$。
+如果使用FIFO队列，则 $M$ 是公平的。
 
-**证明**：
-wait和signal操作都是常数时间。
+### 定理3.4 (管程复杂度)
 
-**定理4.2.3 (空间复杂度)**
-空间复杂度为 $O(n)$，其中 $n$ 是等待线程数量。
+管程模式的复杂度为：
 
-### 4.3 公平性定理
+$$\text{Complexity}(M) = |O| \cdot \log(|D|) + |C| \cdot \log(|Q|)$$
 
-**定理4.3.1 (FIFO公平性)**
-管程模式保证FIFO公平性，当且仅当：
+## Rust实现
 
-$$\forall t_1, t_2: \text{wait}(t_1) < \text{wait}(t_2) \Rightarrow \text{wakeup}(t_1) < \text{wakeup}(t_2)$$
-
-**证明**：
-通过FIFO队列实现等待线程的公平调度。
-
-## 5. Rust实现
-
-### 5.1 基础实现
+### 1. 基础实现
 
 ```rust
-use std::sync::{Arc, Mutex, Condvar};
 use std::collections::VecDeque;
+use std::sync::{Arc, Mutex, Condvar};
 use std::thread;
+use std::time::Duration;
 
-// 条件变量
-struct ConditionVariable {
-    waiting: VecDeque<thread::Thread>,
+/// 管程trait
+pub trait Monitor {
+    type Data;
+    type Operation;
+    type Result;
+    
+    fn execute(&self, operation: Self::Operation) -> Result<Self::Result, Box<dyn std::error::Error>>;
+}
+
+/// 条件变量
+pub struct Condition {
     condvar: Condvar,
+    wait_count: Mutex<usize>,
 }
 
-impl ConditionVariable {
-    fn new() -> Self {
+impl Condition {
+    pub fn new() -> Self {
         Self {
-            waiting: VecDeque::new(),
             condvar: Condvar::new(),
+            wait_count: Mutex::new(0),
         }
     }
     
-    fn wait(&mut self, mutex_guard: std::sync::MutexGuard<()>) -> std::sync::MutexGuard<()> {
-        // 将当前线程加入等待队列
-        self.waiting.push_back(thread::current());
+    /// 等待条件
+    pub fn wait<T>(&self, mutex_guard: std::sync::MutexGuard<T>) -> std::sync::MutexGuard<T> {
+        {
+            let mut count = self.wait_count.lock().unwrap();
+            *count += 1;
+        }
         
-        // 释放锁并等待
-        self.condvar.wait(mutex_guard).unwrap()
+        let guard = self.condvar.wait(mutex_guard).unwrap();
+        
+        {
+            let mut count = self.wait_count.lock().unwrap();
+            *count -= 1;
+        }
+        
+        guard
     }
     
-    fn signal(&mut self) {
-        if let Some(thread) = self.waiting.pop_front() {
-            thread.unpark();
-        }
+    /// 通知一个等待线程
+    pub fn signal(&self) {
+        self.condvar.notify_one();
     }
     
-    fn broadcast(&mut self) {
-        while let Some(thread) = self.waiting.pop_front() {
-            thread.unpark();
-        }
+    /// 通知所有等待线程
+    pub fn broadcast(&self) {
+        self.condvar.notify_all();
+    }
+    
+    /// 获取等待线程数
+    pub fn wait_count(&self) -> usize {
+        *self.wait_count.lock().unwrap()
     }
 }
 
-// 管程
-struct Monitor<T> {
-    data: T,
-    lock: Mutex<()>,
-    condition_variables: std::collections::HashMap<String, ConditionVariable>,
+/// 管程实现
+pub struct MonitorImpl<D, O, R>
+where
+    D: Send + 'static,
+    O: Send + 'static,
+    R: Send + 'static,
+{
+    data: Mutex<D>,
+    conditions: Vec<Condition>,
+    operation_queue: Mutex<VecDeque<O>>,
 }
 
-impl<T> Monitor<T> {
-    fn new(data: T) -> Self {
+impl<D, O, R> MonitorImpl<D, O, R>
+where
+    D: Send + 'static,
+    O: Send + 'static,
+    R: Send + 'static,
+{
+    /// 创建新的管程
+    pub fn new(data: D) -> Self {
         Self {
-            data,
-            lock: Mutex::new(()),
-            condition_variables: std::collections::HashMap::new(),
+            data: Mutex::new(data),
+            conditions: Vec::new(),
+            operation_queue: Mutex::new(VecDeque::new()),
         }
     }
     
-    fn enter<F, R>(&self, operation: F) -> R 
-    where 
-        F: FnOnce(&mut T) -> R,
+    /// 添加条件变量
+    pub fn add_condition(&mut self) -> usize {
+        let index = self.conditions.len();
+        self.conditions.push(Condition::new());
+        index
+    }
+    
+    /// 等待条件
+    pub fn wait_condition(&self, condition_index: usize) -> Result<(), Box<dyn std::error::Error>> {
+        if condition_index >= self.conditions.len() {
+            return Err("Invalid condition index".into());
+        }
+        
+        let data_guard = self.data.lock().map_err(|e| format!("Lock error: {}", e))?;
+        self.conditions[condition_index].wait(data_guard);
+        Ok(())
+    }
+    
+    /// 通知条件
+    pub fn signal_condition(&self, condition_index: usize) -> Result<(), Box<dyn std::error::Error>> {
+        if condition_index >= self.conditions.len() {
+            return Err("Invalid condition index".into());
+        }
+        
+        self.conditions[condition_index].signal();
+        Ok(())
+    }
+    
+    /// 广播条件
+    pub fn broadcast_condition(&self, condition_index: usize) -> Result<(), Box<dyn std::error::Error>> {
+        if condition_index >= self.conditions.len() {
+            return Err("Invalid condition index".into());
+        }
+        
+        self.conditions[condition_index].broadcast();
+        Ok(())
+    }
+    
+    /// 执行操作
+    pub fn execute<F>(&self, operation: F) -> Result<R, Box<dyn std::error::Error>>
+    where
+        F: FnOnce(&mut D) -> Result<R, Box<dyn std::error::Error>>,
     {
-        let _lock = self.lock.lock().unwrap();
-        let mut data_ref = unsafe { &mut *(&self.data as *const T as *mut T) };
-        operation(data_ref)
+        let mut data = self.data.lock().map_err(|e| format!("Lock error: {}", e))?;
+        operation(&mut data)
     }
     
-    fn wait(&self, condition_name: &str) {
-        let _lock = self.lock.lock().unwrap();
-        if let Some(cv) = self.condition_variables.get_mut(condition_name) {
-            cv.wait(_lock);
-        }
-    }
-    
-    fn signal(&self, condition_name: &str) {
-        let _lock = self.lock.lock().unwrap();
-        if let Some(cv) = self.condition_variables.get_mut(condition_name) {
-            cv.signal();
-        }
-    }
-    
-    fn broadcast(&self, condition_name: &str) {
-        let _lock = self.lock.lock().unwrap();
-        if let Some(cv) = self.condition_variables.get_mut(condition_name) {
-            cv.broadcast();
-        }
-    }
-    
-    fn add_condition(&mut self, name: String) {
-        self.condition_variables.insert(name, ConditionVariable::new());
+    /// 获取数据引用
+    pub fn get_data(&self) -> Result<std::sync::MutexGuard<D>, Box<dyn std::error::Error>> {
+        self.data.lock().map_err(|e| format!("Lock error: {}", e))
     }
 }
+```
 
-// 生产者-消费者示例
-struct Buffer {
-    items: VecDeque<i32>,
-    capacity: usize,
+### 2. 泛型实现
+
+```rust
+/// 泛型管程
+pub struct GenericMonitor<D, F>
+where
+    F: Fn(&mut D) -> Result<(), Box<dyn std::error::Error>> + Send + 'static,
+    D: Send + 'static,
+{
+    data: Mutex<D>,
+    operation: F,
+    conditions: Vec<Condition>,
 }
 
-impl Buffer {
-    fn new(capacity: usize) -> Self {
+impl<D, F> GenericMonitor<D, F>
+where
+    F: Fn(&mut D) -> Result<(), Box<dyn std::error::Error>> + Send + 'static,
+    D: Send + 'static,
+{
+    pub fn new(data: D, operation: F) -> Self {
         Self {
-            items: VecDeque::new(),
-            capacity,
+            data: Mutex::new(data),
+            operation,
+            conditions: Vec::new(),
         }
     }
     
-    fn is_full(&self) -> bool {
-        self.items.len() >= self.capacity
+    pub fn execute(&self) -> Result<(), Box<dyn std::error::Error>> {
+        let mut data = self.data.lock().map_err(|e| format!("Lock error: {}", e))?;
+        (self.operation)(&mut data)
     }
     
-    fn is_empty(&self) -> bool {
-        self.items.is_empty()
+    pub fn add_condition(&mut self) -> usize {
+        let index = self.conditions.len();
+        self.conditions.push(Condition::new());
+        index
     }
     
-    fn put(&mut self, item: i32) {
-        self.items.push_back(item);
+    pub fn wait_condition(&self, condition_index: usize) -> Result<(), Box<dyn std::error::Error>> {
+        if condition_index >= self.conditions.len() {
+            return Err("Invalid condition index".into());
+        }
+        
+        let data_guard = self.data.lock().map_err(|e| format!("Lock error: {}", e))?;
+        self.conditions[condition_index].wait(data_guard);
+        Ok(())
     }
     
-    fn get(&mut self) -> Option<i32> {
-        self.items.pop_front()
+    pub fn signal_condition(&self, condition_index: usize) -> Result<(), Box<dyn std::error::Error>> {
+        if condition_index >= self.conditions.len() {
+            return Err("Invalid condition index".into());
+        }
+        
+        self.conditions[condition_index].signal();
+        Ok(())
     }
 }
+```
 
-// 生产者-消费者管程
-struct ProducerConsumerMonitor {
-    buffer: Monitor<Buffer>,
+### 3. 应用场景
+
+```rust
+/// 生产者-消费者管程
+pub struct ProducerConsumerMonitor {
+    buffer: VecDeque<i32>,
+    max_size: usize,
+    not_empty: Condition,
+    not_full: Condition,
 }
 
 impl ProducerConsumerMonitor {
-    fn new(capacity: usize) -> Self {
-        let mut monitor = Monitor::new(Buffer::new(capacity));
-        monitor.add_condition("not_full".to_string());
-        monitor.add_condition("not_empty".to_string());
+    pub fn new(max_size: usize) -> Self {
+        Self {
+            buffer: VecDeque::new(),
+            max_size,
+            not_empty: Condition::new(),
+            not_full: Condition::new(),
+        }
+    }
+    
+    /// 生产者操作
+    pub fn produce(&self, item: i32) -> Result<(), Box<dyn std::error::Error>> {
+        let mut buffer = self.buffer.lock().map_err(|e| format!("Lock error: {}", e))?;
         
-        Self { buffer: monitor }
+        while buffer.len() >= self.max_size {
+            buffer = self.not_full.wait(buffer);
+        }
+        
+        buffer.push_back(item);
+        self.not_empty.signal();
+        Ok(())
     }
     
-    fn produce(&self, item: i32) {
-        self.buffer.enter(|buffer| {
-            while buffer.is_full() {
-                self.buffer.wait("not_full");
-            }
-            buffer.put(item);
-            self.buffer.signal("not_empty");
-        });
+    /// 消费者操作
+    pub fn consume(&self) -> Result<i32, Box<dyn std::error::Error>> {
+        let mut buffer = self.buffer.lock().map_err(|e| format!("Lock error: {}", e))?;
+        
+        while buffer.is_empty() {
+            buffer = self.not_empty.wait(buffer);
+        }
+        
+        let item = buffer.pop_front().unwrap();
+        self.not_full.signal();
+        Ok(item)
     }
     
-    fn consume(&self) -> i32 {
-        self.buffer.enter(|buffer| {
-            while buffer.is_empty() {
-                self.buffer.wait("not_empty");
-            }
-            let item = buffer.get().unwrap();
-            self.buffer.signal("not_full");
-            item
-        })
+    /// 获取缓冲区大小
+    pub fn size(&self) -> Result<usize, Box<dyn std::error::Error>> {
+        let buffer = self.buffer.lock().map_err(|e| format!("Lock error: {}", e))?;
+        Ok(buffer.len())
     }
+}
+
+/// 使用示例
+pub fn producer_consumer_example() {
+    let monitor = Arc::new(ProducerConsumerMonitor::new(5));
+    let monitor_clone = monitor.clone();
+    
+    // 生产者线程
+    let producer = thread::spawn(move || {
+        for i in 0..10 {
+            monitor_clone.produce(i).unwrap();
+            println!("Produced: {}", i);
+            thread::sleep(Duration::from_millis(100));
+        }
+    });
+    
+    // 消费者线程
+    let consumer = thread::spawn(move || {
+        for _ in 0..10 {
+            let item = monitor.consume().unwrap();
+            println!("Consumed: {}", item);
+            thread::sleep(Duration::from_millis(150));
+        }
+    });
+    
+    producer.join().unwrap();
+    consumer.join().unwrap();
 }
 ```
 
-### 5.2 泛型实现
+### 4. 变体模式
 
 ```rust
-use std::sync::{Arc, Mutex, Condvar};
-use std::collections::VecDeque;
-use std::thread;
-
-// 泛型条件变量
-struct GenericConditionVariable<T> {
-    waiting: VecDeque<(thread::Thread, T)>,
-    condvar: Condvar,
+/// 读写管程
+pub struct ReadWriteMonitor<T> {
+    data: Mutex<T>,
+    readers: Mutex<usize>,
+    writers: Mutex<usize>,
+    can_read: Condition,
+    can_write: Condition,
 }
 
-impl<T: Clone> GenericConditionVariable<T> {
-    fn new() -> Self {
+impl<T> ReadWriteMonitor<T>
+where
+    T: Send + 'static,
+{
+    pub fn new(data: T) -> Self {
         Self {
-            waiting: VecDeque::new(),
-            condvar: Condvar::new(),
+            data: Mutex::new(data),
+            readers: Mutex::new(0),
+            writers: Mutex::new(0),
+            can_read: Condition::new(),
+            can_write: Condition::new(),
         }
     }
     
-    fn wait(&mut self, mutex_guard: std::sync::MutexGuard<()>, data: T) -> std::sync::MutexGuard<()> {
-        self.waiting.push_back((thread::current(), data));
-        self.condvar.wait(mutex_guard).unwrap()
-    }
-    
-    fn signal(&mut self) -> Option<T> {
-        if let Some((thread, data)) = self.waiting.pop_front() {
-            thread.unpark();
-            Some(data)
-        } else {
-            None
-        }
-    }
-    
-    fn broadcast(&mut self) -> Vec<T> {
-        let mut data_vec = Vec::new();
-        while let Some((thread, data)) = self.waiting.pop_front() {
-            thread.unpark();
-            data_vec.push(data);
-        }
-        data_vec
-    }
-}
-
-// 泛型管程
-struct GenericMonitor<T, U> {
-    data: T,
-    lock: Mutex<()>,
-    condition_variables: std::collections::HashMap<String, GenericConditionVariable<U>>,
-}
-
-impl<T, U: Clone> GenericMonitor<T, U> {
-    fn new(data: T) -> Self {
-        Self {
-            data,
-            lock: Mutex::new(()),
-            condition_variables: std::collections::HashMap::new(),
-        }
-    }
-    
-    fn enter<F, R>(&self, operation: F) -> R 
-    where 
-        F: FnOnce(&mut T) -> R,
+    /// 读操作
+    pub fn read<F, R>(&self, operation: F) -> Result<R, Box<dyn std::error::Error>>
+    where
+        F: FnOnce(&T) -> R,
     {
-        let _lock = self.lock.lock().unwrap();
-        let mut data_ref = unsafe { &mut *(&self.data as *const T as *mut T) };
-        operation(data_ref)
-    }
-    
-    fn wait(&self, condition_name: &str, data: U) {
-        let _lock = self.lock.lock().unwrap();
-        if let Some(cv) = self.condition_variables.get_mut(condition_name) {
-            cv.wait(_lock, data);
+        // 获取读锁
+        {
+            let mut readers = self.readers.lock().map_err(|e| format!("Lock error: {}", e))?;
+            while *self.writers.lock().unwrap() > 0 {
+                readers = self.can_read.wait(readers);
+            }
+            *readers += 1;
         }
-    }
-    
-    fn signal(&self, condition_name: &str) -> Option<U> {
-        let _lock = self.lock.lock().unwrap();
-        if let Some(cv) = self.condition_variables.get_mut(condition_name) {
-            cv.signal()
-        } else {
-            None
-        }
-    }
-    
-    fn broadcast(&self, condition_name: &str) -> Vec<U> {
-        let _lock = self.lock.lock().unwrap();
-        if let Some(cv) = self.condition_variables.get_mut(condition_name) {
-            cv.broadcast()
-        } else {
-            Vec::new()
-        }
-    }
-    
-    fn add_condition(&mut self, name: String) {
-        self.condition_variables.insert(name, GenericConditionVariable::new());
-    }
-}
-```
-
-### 5.3 异步实现
-
-```rust
-use tokio::sync::{Mutex, Condvar};
-use std::collections::VecDeque;
-
-// 异步条件变量
-struct AsyncConditionVariable {
-    waiting: VecDeque<tokio::sync::oneshot::Sender<()>>,
-    condvar: Condvar,
-}
-
-impl AsyncConditionVariable {
-    fn new() -> Self {
-        Self {
-            waiting: VecDeque::new(),
-            condvar: Condvar::new(),
-        }
-    }
-    
-    async fn wait(&mut self, mutex_guard: tokio::sync::MutexGuard<()>) -> tokio::sync::MutexGuard<()> {
-        let (tx, rx) = tokio::sync::oneshot::channel();
-        self.waiting.push_back(tx);
         
-        // 释放锁并等待
-        drop(mutex_guard);
-        let _ = rx.await;
+        // 执行读操作
+        let data = self.data.lock().map_err(|e| format!("Lock error: {}", e))?;
+        let result = operation(&data);
+        drop(data);
         
-        // 重新获取锁
-        self.condvar.lock().await
+        // 释放读锁
+        {
+            let mut readers = self.readers.lock().map_err(|e| format!("Lock error: {}", e))?;
+            *readers -= 1;
+            if *readers == 0 {
+                self.can_write.signal();
+            }
+        }
+        
+        Ok(result)
     }
     
-    fn signal(&mut self) {
-        if let Some(sender) = self.waiting.pop_front() {
-            let _ = sender.send(());
-        }
-    }
-    
-    fn broadcast(&mut self) {
-        while let Some(sender) = self.waiting.pop_front() {
-            let _ = sender.send(());
-        }
-    }
-}
-
-// 异步管程
-struct AsyncMonitor<T> {
-    data: T,
-    lock: Mutex<()>,
-    condition_variables: std::collections::HashMap<String, AsyncConditionVariable>,
-}
-
-impl<T> AsyncMonitor<T> {
-    fn new(data: T) -> Self {
-        Self {
-            data,
-            lock: Mutex::new(()),
-            condition_variables: std::collections::HashMap::new(),
-        }
-    }
-    
-    async fn enter<F, R>(&self, operation: F) -> R 
-    where 
-        F: FnOnce(&mut T) -> R,
+    /// 写操作
+    pub fn write<F>(&self, operation: F) -> Result<(), Box<dyn std::error::Error>>
+    where
+        F: FnOnce(&mut T) -> Result<(), Box<dyn std::error::Error>>,
     {
-        let _lock = self.lock.lock().await;
-        let mut data_ref = unsafe { &mut *(&self.data as *const T as *mut T) };
-        operation(data_ref)
-    }
-    
-    async fn wait(&self, condition_name: &str) {
-        let _lock = self.lock.lock().await;
-        if let Some(cv) = self.condition_variables.get_mut(condition_name) {
-            cv.wait(_lock).await;
-        }
-    }
-    
-    fn signal(&self, condition_name: &str) {
-        if let Some(cv) = self.condition_variables.get_mut(condition_name) {
-            cv.signal();
-        }
-    }
-    
-    fn broadcast(&self, condition_name: &str) {
-        if let Some(cv) = self.condition_variables.get_mut(condition_name) {
-            cv.broadcast();
-        }
-    }
-    
-    fn add_condition(&mut self, name: String) {
-        self.condition_variables.insert(name, AsyncConditionVariable::new());
-    }
-}
-```
-
-## 6. 应用场景
-
-### 6.1 生产者-消费者问题
-
-```rust
-// 生产者-消费者实现
-struct ProducerConsumer {
-    monitor: ProducerConsumerMonitor,
-}
-
-impl ProducerConsumer {
-    fn new(capacity: usize) -> Self {
-        Self {
-            monitor: ProducerConsumerMonitor::new(capacity),
-        }
-    }
-    
-    fn start_producer(&self, id: usize) {
-        let monitor = self.monitor.clone();
-        thread::spawn(move || {
-            for i in 0..10 {
-                monitor.produce(id * 100 + i);
-                println!("Producer {} produced: {}", id, id * 100 + i);
-                thread::sleep(std::time::Duration::from_millis(100));
+        // 获取写锁
+        {
+            let mut writers = self.writers.lock().map_err(|e| format!("Lock error: {}", e))?;
+            while *self.readers.lock().unwrap() > 0 || *writers > 0 {
+                writers = self.can_write.wait(writers);
             }
-        });
-    }
-    
-    fn start_consumer(&self, id: usize) {
-        let monitor = self.monitor.clone();
-        thread::spawn(move || {
-            for _ in 0..10 {
-                let item = monitor.consume();
-                println!("Consumer {} consumed: {}", id, item);
-                thread::sleep(std::time::Duration::from_millis(150));
-            }
-        });
-    }
-}
-```
-
-### 6.2 读者-写者问题
-
-```rust
-// 读者-写者管程
-struct ReaderWriterMonitor {
-    buffer: Monitor<Buffer>,
-    readers: i32,
-    writers: i32,
-}
-
-impl ReaderWriterMonitor {
-    fn new() -> Self {
-        let mut monitor = Monitor::new(Buffer::new(10));
-        monitor.add_condition("no_writers".to_string());
-        monitor.add_condition("no_readers".to_string());
+            *writers += 1;
+        }
         
-        Self {
-            buffer: monitor,
-            readers: 0,
-            writers: 0,
-        }
-    }
-    
-    fn start_read(&mut self) {
-        self.buffer.enter(|_| {
-            while self.writers > 0 {
-                self.buffer.wait("no_writers");
-            }
-            self.readers += 1;
-        });
-    }
-    
-    fn end_read(&mut self) {
-        self.buffer.enter(|_| {
-            self.readers -= 1;
-            if self.readers == 0 {
-                self.buffer.signal("no_readers");
-            }
-        });
-    }
-    
-    fn start_write(&mut self) {
-        self.buffer.enter(|_| {
-            while self.readers > 0 || self.writers > 0 {
-                self.buffer.wait("no_readers");
-            }
-            self.writers += 1;
-        });
-    }
-    
-    fn end_write(&mut self) {
-        self.buffer.enter(|_| {
-            self.writers -= 1;
-            self.buffer.signal("no_writers");
-            self.buffer.signal("no_readers");
-        });
-    }
-}
-```
-
-### 6.3 哲学家就餐问题
-
-```rust
-// 哲学家就餐管程
-struct DiningPhilosophersMonitor {
-    forks: Vec<bool>,
-    philosophers: Vec<bool>,
-}
-
-impl DiningPhilosophersMonitor {
-    fn new(count: usize) -> Self {
-        let mut monitor = Monitor::new(Self {
-            forks: vec![true; count],
-            philosophers: vec![false; count],
-        });
-        monitor.add_condition("forks_available".to_string());
+        // 执行写操作
+        let mut data = self.data.lock().map_err(|e| format!("Lock error: {}", e))?;
+        let result = operation(&mut data);
+        drop(data);
         
-        Self { monitor }
-    }
-    
-    fn pick_up_forks(&self, philosopher_id: usize) {
-        self.monitor.enter(|state| {
-            while !state.forks[philosopher_id] || !state.forks[(philosopher_id + 1) % state.forks.len()] {
-                self.monitor.wait("forks_available");
-            }
-            state.forks[philosopher_id] = false;
-            state.forks[(philosopher_id + 1) % state.forks.len()] = false;
-            state.philosophers[philosopher_id] = true;
-        });
-    }
-    
-    fn put_down_forks(&self, philosopher_id: usize) {
-        self.monitor.enter(|state| {
-            state.forks[philosopher_id] = true;
-            state.forks[(philosopher_id + 1) % state.forks.len()] = true;
-            state.philosophers[philosopher_id] = false;
-            self.monitor.signal("forks_available");
-        });
-    }
-}
-```
-
-## 7. 变体模式
-
-### 7.1 分层管程
-
-```rust
-// 分层管程
-struct LayeredMonitor<T> {
-    inner_monitor: Monitor<T>,
-    outer_monitor: Monitor<()>,
-}
-
-impl<T> LayeredMonitor<T> {
-    fn new(data: T) -> Self {
-        Self {
-            inner_monitor: Monitor::new(data),
-            outer_monitor: Monitor::new(()),
+        // 释放写锁
+        {
+            let mut writers = self.writers.lock().map_err(|e| format!("Lock error: {}", e))?;
+            *writers -= 1;
+            self.can_read.broadcast();
+            self.can_write.signal();
         }
-    }
-    
-    fn enter_inner<F, R>(&self, operation: F) -> R 
-    where 
-        F: FnOnce(&mut T) -> R,
-    {
-        self.outer_monitor.enter(|_| {
-            self.inner_monitor.enter(operation)
-        })
-    }
-}
-```
-
-### 7.2 分布式管程
-
-```rust
-// 分布式管程
-struct DistributedMonitor<T> {
-    local_monitor: Monitor<T>,
-    network: NetworkManager,
-}
-
-impl<T> DistributedMonitor<T> {
-    fn new(data: T) -> Self {
-        Self {
-            local_monitor: Monitor::new(data),
-            network: NetworkManager::new(),
-        }
-    }
-    
-    async fn enter_global<F, R>(&self, operation: F) -> R 
-    where 
-        F: FnOnce(&mut T) -> R + Send + 'static,
-        R: Send + 'static,
-    {
-        // 获取全局锁
-        self.network.acquire_global_lock().await;
-        
-        // 执行操作
-        let result = self.local_monitor.enter(operation);
-        
-        // 释放全局锁
-        self.network.release_global_lock().await;
         
         result
     }
 }
 ```
 
-## 8. 性能分析
+## 性能分析
 
-### 8.1 时间复杂度分析
+### 1. 时间复杂度分析
 
-- **进入管程**: $O(1)$ - 获取锁的时间
-- **条件等待**: $O(1)$ - wait操作的时间
-- **条件通知**: $O(1)$ - signal操作的时间
-- **条件广播**: $O(n)$ - 其中 $n$ 是等待线程数量
+- **进入管程**: $O(1)$ 平均时间复杂度
+- **条件等待**: $O(1)$ 平均时间复杂度
+- **条件通知**: $O(1)$ 平均时间复杂度
+- **操作执行**: $O(f(n))$ 其中 $f(n)$ 是操作的复杂度
 
-### 8.2 空间复杂度分析
+### 2. 空间复杂度分析
 
-- **锁开销**: $O(1)$ - 固定大小的锁
-- **条件变量**: $O(n)$ - 其中 $n$ 是等待线程数量
-- **数据存储**: $O(1)$ - 共享数据的大小
+- **管程数据**: $O(d)$ 其中 $d$ 是数据大小
+- **条件变量**: $O(c)$ 其中 $c$ 是条件变量数量
+- **等待队列**: $O(w)$ 其中 $w$ 是等待线程数量
 
-### 8.3 并发性能
+### 3. 资源使用分析
 
-- **互斥开销**: 低 - 单一锁机制
-- **同步开销**: 中等 - 条件变量操作
-- **扩展性**: 中等 - 受单一锁限制
+- **锁开销**: 每个管程一个锁
+- **条件变量开销**: 每个条件变量一个条件变量
+- **内存开销**: 与数据大小成正比
 
-## 9. 总结
+## 最佳实践
 
-管程模式通过封装共享数据和操作，提供了简单而有效的并发控制机制。该模式具有以下特点：
+### 1. 设计原则
 
-1. **互斥保证**: 确保同一时刻只有一个线程访问共享数据
-2. **条件同步**: 支持线程间的同步和通信
-3. **自动管理**: 提供自动的锁管理机制
-4. **易于使用**: 简化了并发编程的复杂性
+1. **单一职责**: 每个管程只管理相关的数据
+2. **最小化临界区**: 减少在管程内的时间
+3. **条件变量使用**: 正确使用条件变量进行同步
+4. **死锁预防**: 避免嵌套锁和循环等待
+
+### 2. 实现原则
+
+1. **线程安全**: 确保所有共享数据都在管程内
+2. **条件检查**: 使用while循环检查条件
+3. **信号丢失**: 避免信号丢失问题
+4. **性能优化**: 减少不必要的唤醒
+
+### 3. 使用原则
+
+1. **适用场景**: 适用于需要复杂同步的场景
+2. **避免场景**: 避免用于简单的互斥场景
+3. **条件变量**: 正确使用条件变量
+4. **测试**: 进行并发测试和死锁检测
+
+## 总结
+
+管程模式通过封装共享数据和操作，提供了强大的同步机制。通过条件变量，管程可以处理复杂的同步需求。通过形式化分析和Rust实现，我们建立了完整的理论体系和实践框架。该模式适用于需要复杂同步的场景，能够有效避免数据竞争和死锁问题。
 
 通过形式化定义和数学证明，我们建立了管程模式的完整理论体系，为实际应用提供了可靠的理论基础。

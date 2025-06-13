@@ -1,748 +1,732 @@
-# 生产者-消费者模式 (Producer-Consumer Pattern) - 形式化重构
+# 生产者-消费者模式形式化重构 (Producer-Consumer Pattern Formal Refactoring)
 
-## 目录
+## 概述
 
-1. [模式概述](#1-模式概述)
-2. [形式化定义](#2-形式化定义)
-3. [数学理论](#3-数学理论)
-4. [核心定理](#4-核心定理)
-5. [Rust实现](#5-rust实现)
-6. [应用场景](#6-应用场景)
-7. [变体模式](#7-变体模式)
-8. [性能分析](#8-性能分析)
-9. [总结](#9-总结)
+生产者-消费者模式是一种并发设计模式，它通过共享缓冲区协调生产者和消费者之间的数据传递。生产者生成数据并放入缓冲区，消费者从缓冲区取出数据进行处理。
 
-## 1. 模式概述
+## 形式化定义
 
-### 1.1 定义
+### 定义1.1 (生产者-消费者模式五元组)
 
-生产者-消费者模式是一种并发设计模式，它通过共享缓冲区协调生产者和消费者线程，实现数据的异步处理。
+设 $P = (B, Pr, Co, Q, S)$ 为一个生产者-消费者模式，其中：
 
-### 1.2 核心思想
+- $B$ 是缓冲区集合
+- $Pr$ 是生产者集合
+- $Co$ 是消费者集合
+- $Q$ 是同步队列集合
+- $S$ 是同步机制集合
 
-- **解耦生产消费**：生产者和消费者通过缓冲区解耦
-- **异步处理**：生产者可以持续生产，消费者可以持续消费
-- **缓冲管理**：通过缓冲区平衡生产和消费速度
-- **同步控制**：确保线程安全和数据一致性
+### 定义1.2 (缓冲区)
 
-### 1.3 适用场景
+设 $b = (c, s, f, e) \in B$ 为一个缓冲区，其中：
 
-- 数据流处理
-- 消息队列系统
-- 图像/视频处理管道
-- 日志处理系统
+- $c$ 是容量
+- $s$ 是当前大小
+- $f$ 是满条件
+- $e$ 是空条件
 
-## 2. 形式化定义
+### 定义1.3 (数据项)
 
-### 2.1 生产者-消费者模式五元组
+设 $d = (i, v, t, p) \in D$ 为一个数据项，其中：
 
-**定义2.1 (生产者-消费者模式五元组)**
-设 $PC = (P, C, B, S, T)$ 为一个生产者-消费者模式，其中：
+- $i$ 是标识符
+- $v$ 是值
+- $t$ 是时间戳
+- $p$ 是优先级
 
-- $P$ 是生产者集合
-- $C$ 是消费者集合
-- $B$ 是缓冲区
-- $S$ 是同步机制
-- $T$ 是数据项集合
+## 数学理论
 
-### 2.2 缓冲区定义
+### 1. 缓冲区管理理论
 
-**定义2.2 (缓冲区)**
-设 $B = (items, capacity, head, tail)$ 为一个缓冲区，其中：
+**定义2.1 (缓冲区状态)**
 
-- $items$ 是存储的数据项数组
-- $capacity$ 是缓冲区容量
-- $head$ 是生产位置指针
-- $tail$ 是消费位置指针
+缓冲区的状态定义为：
 
-### 2.3 同步状态定义
+$$\text{State}(b) = \begin{cases}
+\text{Empty} & \text{if } s = 0 \\
+\text{Partial} & \text{if } 0 < s < c \\
+\text{Full} & \text{if } s = c
+\end{cases}$$
 
-**定义2.3 (同步状态)**
-设 $state = (empty, full, mutex)$ 为同步状态，其中：
+**定理2.1 (缓冲区不变性)**
 
-- $empty$ 是空缓冲区信号量
-- $full$ 是满缓冲区信号量
-- $mutex$ 是互斥锁
+对于缓冲区 $b$，始终满足：
 
-## 3. 数学理论
-
-### 3.1 缓冲区理论
-
-**定义3.1 (缓冲区操作)**
-缓冲区操作定义为：
-
-$$\text{produce}(item) = \text{wait}(empty) \land \text{wait}(mutex) \land \text{enqueue}(item) \land \text{signal}(mutex) \land \text{signal}(full)$$
-
-$$\text{consume}() = \text{wait}(full) \land \text{wait}(mutex) \land \text{dequeue}() \land \text{signal}(mutex) \land \text{signal}(empty)$$
-
-**定理3.1.1 (缓冲区正确性)**
-缓冲区操作是正确的，当且仅当：
-
-1. **互斥性**：$\forall t: |\text{active\_access}(t)| \leq 1$
-2. **顺序性**：$\text{FIFO}(items)$
-3. **完整性**：$\text{no\_data\_loss}$
+$$0 \leq s \leq c$$
 
 **证明**：
 
-- 互斥性：通过mutex保证
-- 顺序性：通过FIFO队列保证
-- 完整性：通过信号量控制
+1. 生产者只能在缓冲区未满时添加数据
+2. 消费者只能在缓冲区非空时取出数据
+3. 因此 $0 \leq s \leq c$ 始终成立
 
-### 3.2 流量控制理论
+### 2. 同步理论
 
-**定义3.2 (流量控制)**
-流量控制定义为：
+**定义2.2 (生产者同步)**
 
-$$\text{flow\_control} = \text{rate}(P) \leq \text{rate}(C) + \text{capacity}(B)$$
+生产者 $p \in Pr$ 的同步条件为：
 
-**定理3.2.1 (流量平衡)**
-系统是平衡的，当且仅当：
+$$\text{Produce}(p, b) = \text{wait}(b.f) \land \text{add}(b, d) \land \text{signal}(b.e)$$
 
-$$\text{arrival\_rate} \leq \text{service\_rate} + \text{buffer\_capacity}$$
+**定义2.3 (消费者同步)**
 
-**证明**：
-当到达率小于等于服务率加缓冲区容量时，系统稳定。
+消费者 $c \in Co$ 的同步条件为：
 
-### 3.3 死锁预防理论
+$$\text{Consume}(c, b) = \text{wait}(b.e) \land \text{remove}(b, d) \land \text{signal}(b.f)$$
 
-**定义3.3 (死锁条件)**
-生产者-消费者模式中的死锁条件：
+**定理2.2 (同步正确性)**
 
-1. **缓冲区满**：生产者等待空间
-2. **缓冲区空**：消费者等待数据
-3. **资源竞争**：多个线程竞争缓冲区
+对于生产者-消费者模式 $P$，如果满足：
 
-**定理3.3.1 (死锁预防)**
-通过以下机制预防死锁：
+1. $\forall p \in Pr: \text{Produce}(p, b)$ 使用正确的同步
+2. $\forall c \in Co: \text{Consume}(c, b)$ 使用正确的同步
+3. $\text{mutex}(b)$ 保证缓冲区的互斥访问
 
-1. **信号量顺序**：先等待资源信号量，再等待互斥锁
-2. **资源释放**：先释放互斥锁，再释放资源信号量
-3. **超时机制**：设置等待超时
+则 $P$ 的同步是正确的。
 
-**证明**：
-通过固定的资源获取顺序避免循环等待。
+### 3. 性能理论
 
-## 4. 核心定理
+**定义2.4 (吞吐量)**
 
-### 4.1 生产者-消费者正确性定理
+生产者-消费者模式的吞吐量定义为：
 
-**定理4.1.1 (模式正确性)**
-生产者-消费者模式是正确的，当且仅当：
+$$\text{Throughput}(P) = \min(\text{Throughput}(Pr), \text{Throughput}(Co))$$
 
-1. **数据完整性**：$\forall item: \text{produced}(item) \Rightarrow \text{consumed}(item)$
-2. **顺序保持**：$\text{order}(produce) = \text{order}(consume)$
-3. **无数据丢失**：$\text{no\_loss}(items)$
-4. **无重复消费**：$\text{no\_duplicate}(consume)$
+**定理2.3 (吞吐量上界)**
+
+对于生产者-消费者模式 $P$，吞吐量上界为：
+
+$$\text{Throughput}(P) \leq \frac{\text{Buffer Size}}{\text{Avg Processing Time}}$$
 
 **证明**：
 
-- 数据完整性：通过信号量控制保证
-- 顺序保持：通过FIFO队列保证
-- 无数据丢失：通过互斥锁和信号量保证
-- 无重复消费：通过原子操作保证
+1. 缓冲区大小限制了并发处理的数据量
+2. 平均处理时间决定了处理速度
+3. 因此吞吐量上界为 $\frac{\text{Buffer Size}}{\text{Avg Processing Time}}$
 
-### 4.2 性能定理
+## 核心定理
 
-**定理4.2.1 (吞吐量)**
-系统吞吐量为：
+### 定理3.1 (生产者-消费者正确性)
 
-$$\text{throughput} = \min(\text{producer\_rate}, \text{consumer\_rate})$$
+对于生产者-消费者模式 $P$，如果满足：
 
-**定理4.2.2 (延迟)**
-平均延迟为：
+1. **数据完整性**: $\forall d \in D: \text{produce}(d) \implies \text{consume}(d)$
+2. **顺序保持**: $\forall d_1, d_2 \in D: \text{produce}(d_1) < \text{produce}(d_2) \implies \text{consume}(d_1) \leq \text{consume}(d_2)$
+3. **无丢失**: $\forall d \in D: \text{produce}(d) \implies \exists c \in Co: \text{consume}(d, c)$
 
-$$\text{latency} = \frac{\text{buffer\_size}}{\text{consumer\_rate}}$$
-
-**定理4.2.3 (缓冲区利用率)**
-缓冲区利用率为：
-
-$$\text{utilization} = \frac{\text{current\_size}}{\text{capacity}}$$
-
-### 4.3 稳定性定理
-
-**定理4.3.1 (系统稳定性)**
-系统是稳定的，当且仅当：
-
-$$\text{producer\_rate} \leq \text{consumer\_rate} + \frac{\text{buffer\_capacity}}{\text{time\_window}}$$
+则 $P$ 是正确的生产者-消费者模式。
 
 **证明**：
-当生产者速率不超过消费者速率加缓冲区容量时，系统不会溢出。
 
-## 5. Rust实现
+1. **数据完整性保证**：所有生产的数据都会被消费
+2. **顺序保持保证**：FIFO顺序得到保持
+3. **无丢失保证**：没有数据丢失
 
-### 5.1 基础实现
+### 定理3.2 (生产者-消费者性能)
+
+对于生产者-消费者模式 $P$，性能指标满足：
+
+1. **延迟**: $\text{Latency}(P) = O(\frac{|B|}{|Co|})$
+2. **吞吐量**: $\text{Throughput}(P) = O(\min(|Pr|, |Co|))$
+3. **资源使用**: $\text{Resource}(P) = O(|B| + |Pr| + |Co|)$
+
+**证明**：
+
+1. **延迟分析**：缓冲区大小除以消费者数量
+2. **吞吐量分析**：受限于生产者和消费者的最小值
+3. **资源分析**：缓冲区、生产者、消费者的总和
+
+### 定理3.3 (生产者-消费者公平性)
+
+对于生产者-消费者模式 $P$，公平性定义为：
+
+$$\text{Fairness}(P) = \forall p_1, p_2 \in Pr: \text{produce}(p_1) < \text{produce}(p_2) \implies \text{consume}(p_1) \leq \text{consume}(p_2)$$
+
+如果使用FIFO队列，则 $P$ 是公平的。
+
+### 定理3.4 (生产者-消费者复杂度)
+
+生产者-消费者模式的复杂度为：
+
+$$\text{Complexity}(P) = |Pr| \cdot \log(|B|) + |Co| \cdot \log(|B|) + |B| \cdot \log(|D|)$$
+
+## Rust实现
+
+### 1. 基础实现
 
 ```rust
-use std::sync::{Arc, Mutex, Condvar};
 use std::collections::VecDeque;
+use std::sync::{Arc, Mutex, Condvar};
 use std::thread;
+use std::time::Duration;
 
-// 缓冲区
-struct Buffer<T> {
-    items: VecDeque<T>,
+/// 数据项
+# [derive(Debug, Clone)]
+pub struct DataItem<T> {
+    id: u64,
+    value: T,
+    timestamp: std::time::Instant,
+    priority: u32,
+}
+
+impl<T> DataItem<T> {
+    pub fn new(value: T, priority: u32) -> Self {
+        Self {
+            id: Self::generate_id(),
+            value,
+            timestamp: std::time::Instant::now(),
+            priority,
+        }
+    }
+
+    fn generate_id() -> u64 {
+        use std::sync::atomic::{AtomicU64, Ordering};
+        static COUNTER: AtomicU64 = AtomicU64::new(0);
+        COUNTER.fetch_add(1, Ordering::SeqCst)
+    }
+}
+
+/// 缓冲区
+pub struct Buffer<T> {
     capacity: usize,
-    mutex: Mutex<()>,
-    not_empty: Condvar,
+    data: VecDeque<DataItem<T>>,
     not_full: Condvar,
+    not_empty: Condvar,
 }
 
 impl<T> Buffer<T> {
-    fn new(capacity: usize) -> Self {
+    pub fn new(capacity: usize) -> Self {
         Self {
-            items: VecDeque::new(),
             capacity,
-            mutex: Mutex::new(()),
-            not_empty: Condvar::new(),
+            data: VecDeque::new(),
             not_full: Condvar::new(),
+            not_empty: Condvar::new(),
         }
     }
-    
-    fn produce(&self, item: T) {
-        let mut items = self.mutex.lock().unwrap();
-        
-        // 等待缓冲区有空间
-        while self.items.len() >= self.capacity {
-            items = self.not_full.wait(items).unwrap();
+
+    /// 添加数据项
+    pub fn add(&self, item: DataItem<T>) -> Result<(), Box<dyn std::error::Error>> {
+        let mut data = self.data.lock().map_err(|e| format!("Lock error: {}", e))?;
+
+        while data.len() >= self.capacity {
+            data = self.not_full.wait(data).map_err(|e| format!("Wait error: {}", e))?;
         }
-        
-        self.items.push_back(item);
+
+        data.push_back(item);
         self.not_empty.notify_one();
+        Ok(())
     }
-    
-    fn consume(&self) -> T {
-        let mut items = self.mutex.lock().unwrap();
-        
-        // 等待缓冲区有数据
-        while self.items.is_empty() {
-            items = self.not_empty.wait(items).unwrap();
+
+    /// 移除数据项
+    pub fn remove(&self) -> Result<DataItem<T>, Box<dyn std::error::Error>> {
+        let mut data = self.data.lock().map_err(|e| format!("Lock error: {}", e))?;
+
+        while data.is_empty() {
+            data = self.not_empty.wait(data).map_err(|e| format!("Wait error: {}", e))?;
         }
-        
-        let item = self.items.pop_front().unwrap();
+
+        let item = data.pop_front().unwrap();
         self.not_full.notify_one();
-        item
+        Ok(item)
     }
-    
-    fn size(&self) -> usize {
-        let items = self.mutex.lock().unwrap();
-        self.items.len()
+
+    /// 获取缓冲区大小
+    pub fn size(&self) -> Result<usize, Box<dyn std::error::Error>> {
+        let data = self.data.lock().map_err(|e| format!("Lock error: {}", e))?;
+        Ok(data.len())
+    }
+
+    /// 获取缓冲区容量
+    pub fn capacity(&self) -> usize {
+        self.capacity
+    }
+
+    /// 检查缓冲区是否为空
+    pub fn is_empty(&self) -> Result<bool, Box<dyn std::error::Error>> {
+        let data = self.data.lock().map_err(|e| format!("Lock error: {}", e))?;
+        Ok(data.is_empty())
+    }
+
+    /// 检查缓冲区是否已满
+    pub fn is_full(&self) -> Result<bool, Box<dyn std::error::Error>> {
+        let data = self.data.lock().map_err(|e| format!("Lock error: {}", e))?;
+        Ok(data.len() >= self.capacity)
     }
 }
 
-// 生产者
-struct Producer<T> {
+/// 生产者
+pub struct Producer<T> {
     id: usize,
     buffer: Arc<Buffer<T>>,
 }
 
-impl<T> Producer<T> {
-    fn new(id: usize, buffer: Arc<Buffer<T>>) -> Self {
+impl<T> Producer<T>
+where
+    T: Send + 'static,
+{
+    pub fn new(id: usize, buffer: Arc<Buffer<T>>) -> Self {
         Self { id, buffer }
     }
-    
-    fn run(&self, items: Vec<T>) {
-        for item in items {
-            println!("Producer {} producing: {:?}", self.id, item);
-            self.buffer.produce(item);
-            thread::sleep(std::time::Duration::from_millis(100));
-        }
-    }
-}
 
-// 消费者
-struct Consumer<T> {
-    id: usize,
-    buffer: Arc<Buffer<T>>,
-}
-
-impl<T> Consumer<T> {
-    fn new(id: usize, buffer: Arc<Buffer<T>>) -> Self {
-        Self { id, buffer }
+    /// 生产数据
+    pub fn produce(&self, value: T, priority: u32) -> Result<(), Box<dyn std::error::Error>> {
+        let item = DataItem::new(value, priority);
+        self.buffer.add(item)?;
+        println!("Producer {} produced item {}", self.id, item.id);
+        Ok(())
     }
-    
-    fn run(&self) {
+
+    /// 持续生产
+    pub fn run<F>(&self, mut generator: F) -> Result<(), Box<dyn std::error::Error>>
+    where
+        F: FnMut() -> (T, u32),
+    {
         loop {
-            let item = self.buffer.consume();
-            println!("Consumer {} consuming: {:?}", self.id, item);
-            thread::sleep(std::time::Duration::from_millis(150));
+            let (value, priority) = generator();
+            self.produce(value, priority)?;
+            thread::sleep(Duration::from_millis(100));
         }
     }
 }
 
-// 生产者-消费者系统
-struct ProducerConsumerSystem<T> {
+/// 消费者
+pub struct Consumer<T> {
+    id: usize,
+    buffer: Arc<Buffer<T>>,
+}
+
+impl<T> Consumer<T>
+where
+    T: Send + 'static,
+{
+    pub fn new(id: usize, buffer: Arc<Buffer<T>>) -> Self {
+        Self { id, buffer }
+    }
+
+    /// 消费数据
+    pub fn consume(&self) -> Result<DataItem<T>, Box<dyn std::error::Error>> {
+        let item = self.buffer.remove()?;
+        println!("Consumer {} consumed item {}", self.id, item.id);
+        Ok(item)
+    }
+
+    /// 持续消费
+    pub fn run<F>(&self, mut processor: F) -> Result<(), Box<dyn std::error::Error>>
+    where
+        F: FnMut(DataItem<T>) -> Result<(), Box<dyn std::error::Error>>,
+    {
+        loop {
+            let item = self.consume()?;
+            processor(item)?;
+            thread::sleep(Duration::from_millis(150));
+        }
+    }
+}
+
+/// 生产者-消费者系统
+pub struct ProducerConsumerSystem<T> {
     buffer: Arc<Buffer<T>>,
     producers: Vec<Producer<T>>,
     consumers: Vec<Consumer<T>>,
 }
 
-impl<T: Clone + Send + 'static> ProducerConsumerSystem<T> {
-    fn new(capacity: usize, num_producers: usize, num_consumers: usize) -> Self {
+impl<T> ProducerConsumerSystem<T>
+where
+    T: Send + 'static,
+{
+    pub fn new(capacity: usize, producer_count: usize, consumer_count: usize) -> Self {
         let buffer = Arc::new(Buffer::new(capacity));
-        
-        let mut producers = Vec::new();
-        for i in 0..num_producers {
-            producers.push(Producer::new(i, Arc::clone(&buffer)));
-        }
-        
-        let mut consumers = Vec::new();
-        for i in 0..num_consumers {
-            consumers.push(Consumer::new(i, Arc::clone(&buffer)));
-        }
-        
+
+        let producers = (0..producer_count)
+            .map(|id| Producer::new(id, buffer.clone()))
+            .collect();
+
+        let consumers = (0..consumer_count)
+            .map(|id| Consumer::new(id, buffer.clone()))
+            .collect();
+
         Self {
             buffer,
             producers,
             consumers,
         }
     }
-    
-    fn start(&self, producer_data: Vec<Vec<T>>) {
-        // 启动生产者
-        for (i, producer) in self.producers.iter().enumerate() {
-            let data = producer_data[i].clone();
+
+    /// 启动系统
+    pub fn start<F, G>(
+        &self,
+        producer_generator: F,
+        consumer_processor: G,
+    ) -> Result<(), Box<dyn std::error::Error>>
+    where
+        F: Fn() -> (T, u32) + Send + 'static,
+        G: Fn(DataItem<T>) -> Result<(), Box<dyn std::error::Error>> + Send + 'static,
+    {
+        let mut producer_threads = Vec::new();
+        let mut consumer_threads = Vec::new();
+
+        // 启动生产者线程
+        for producer in &self.producers {
             let producer = producer.clone();
-            thread::spawn(move || {
-                producer.run(data);
+            let generator = producer_generator.clone();
+
+            let thread = thread::spawn(move || {
+                producer.run(generator).unwrap();
             });
+
+            producer_threads.push(thread);
         }
-        
-        // 启动消费者
+
+        // 启动消费者线程
         for consumer in &self.consumers {
             let consumer = consumer.clone();
-            thread::spawn(move || {
-                consumer.run();
+            let processor = consumer_processor.clone();
+
+            let thread = thread::spawn(move || {
+                consumer.run(processor).unwrap();
             });
+
+            consumer_threads.push(thread);
         }
-    }
-}
-```
 
-### 5.2 泛型实现
-
-```rust
-use std::sync::{Arc, Mutex, Condvar};
-use std::collections::VecDeque;
-use std::thread;
-
-// 泛型缓冲区
-struct GenericBuffer<T> {
-    items: VecDeque<T>,
-    capacity: usize,
-    mutex: Mutex<()>,
-    not_empty: Condvar,
-    not_full: Condvar,
-}
-
-impl<T> GenericBuffer<T> {
-    fn new(capacity: usize) -> Self {
-        Self {
-            items: VecDeque::new(),
-            capacity,
-            mutex: Mutex::new(()),
-            not_empty: Condvar::new(),
-            not_full: Condvar::new(),
+        // 等待所有线程完成
+        for thread in producer_threads {
+            thread.join().map_err(|e| format!("Join error: {:?}", e))?;
         }
-    }
-    
-    fn try_produce(&self, item: T) -> Result<(), T> {
-        let mut items = self.mutex.lock().unwrap();
-        
-        if self.items.len() >= self.capacity {
-            return Err(item);
+
+        for thread in consumer_threads {
+            thread.join().map_err(|e| format!("Join error: {:?}", e))?;
         }
-        
-        self.items.push_back(item);
-        self.not_empty.notify_one();
+
         Ok(())
     }
-    
-    fn try_consume(&self) -> Option<T> {
-        let mut items = self.mutex.lock().unwrap();
-        
-        if self.items.is_empty() {
-            return None;
-        }
-        
-        let item = self.items.pop_front().unwrap();
-        self.not_full.notify_one();
-        Some(item)
+
+    /// 获取系统状态
+    pub fn status(&self) -> Result<SystemStatus, Box<dyn std::error::Error>> {
+        Ok(SystemStatus {
+            buffer_size: self.buffer.size()?,
+            buffer_capacity: self.buffer.capacity(),
+            producer_count: self.producers.len(),
+            consumer_count: self.consumers.len(),
+        })
     }
-    
-    fn produce_with_timeout(&self, item: T, timeout: std::time::Duration) -> Result<(), T> {
-        let start = std::time::Instant::now();
-        let mut items = self.mutex.lock().unwrap();
-        
-        while self.items.len() >= self.capacity {
-            if start.elapsed() >= timeout {
-                return Err(item);
-            }
-            
-            items = self.not_full.wait_timeout(items, timeout - start.elapsed()).unwrap().0;
-        }
-        
-        self.items.push_back(item);
-        self.not_empty.notify_one();
-        Ok(())
-    }
-    
-    fn consume_with_timeout(&self, timeout: std::time::Duration) -> Option<T> {
-        let start = std::time::Instant::now();
-        let mut items = self.mutex.lock().unwrap();
-        
-        while self.items.is_empty() {
-            if start.elapsed() >= timeout {
-                return None;
-            }
-            
-            items = self.not_empty.wait_timeout(items, timeout - start.elapsed()).unwrap().0;
-        }
-        
-        let item = self.items.pop_front().unwrap();
-        self.not_full.notify_one();
-        Some(item)
-    }
+}
+
+/// 系统状态
+# [derive(Debug)]
+pub struct SystemStatus {
+    pub buffer_size: usize,
+    pub buffer_capacity: usize,
+    pub producer_count: usize,
+    pub consumer_count: usize,
 }
 ```
 
-### 5.3 异步实现
+### 2. 泛型实现
 
 ```rust
-use tokio::sync::{mpsc, Mutex};
-use std::collections::VecDeque;
-use std::future::Future;
-
-// 异步缓冲区
-struct AsyncBuffer<T> {
-    items: VecDeque<T>,
-    capacity: usize,
-    mutex: Mutex<()>,
-    producer_sender: mpsc::UnboundedSender<T>,
-    consumer_receiver: mpsc::UnboundedReceiver<T>,
+/// 泛型生产者-消费者
+pub struct GenericProducerConsumer<T, F, G>
+where
+    F: Fn() -> T + Send + 'static,
+    G: Fn(T) -> Result<(), Box<dyn std::error::Error>> + Send + 'static,
+    T: Send + 'static,
+{
+    buffer: Arc<Buffer<T>>,
+    producer_generator: F,
+    consumer_processor: G,
 }
 
-impl<T: Clone + Send + 'static> AsyncBuffer<T> {
-    fn new(capacity: usize) -> Self {
-        let (producer_sender, mut producer_receiver) = mpsc::unbounded_channel();
-        let (consumer_sender, consumer_receiver) = mpsc::unbounded_channel();
-        
-        let items = VecDeque::new();
-        let mutex = Mutex::new(());
-        
-        // 启动异步处理任务
-        tokio::spawn(async move {
-            let mut buffer = VecDeque::new();
-            
-            loop {
-                tokio::select! {
-                    // 接收生产者数据
-                    Some(item) = producer_receiver.recv() => {
-                        if buffer.len() < capacity {
-                            buffer.push_back(item);
-                        }
-                    }
-                    
-                    // 发送数据给消费者
-                    _ = consumer_sender.closed() => {
-                        break;
-                    }
-                }
-                
-                // 发送可用数据给消费者
-                while let Some(item) = buffer.pop_front() {
-                    if consumer_sender.send(item).is_err() {
-                        break;
-                    }
-                }
-            }
-        });
-        
-        Self {
-            items,
-            capacity,
-            mutex,
-            producer_sender,
-            consumer_receiver,
-        }
-    }
-    
-    async fn produce(&self, item: T) -> Result<(), T> {
-        if self.producer_sender.send(item).is_err() {
-            return Err(item);
-        }
-        Ok(())
-    }
-    
-    async fn consume(&mut self) -> Option<T> {
-        self.consumer_receiver.recv().await
-    }
-}
-
-// 异步生产者
-struct AsyncProducer<T> {
-    id: usize,
-    buffer: Arc<AsyncBuffer<T>>,
-}
-
-impl<T: Clone + Send + 'static> AsyncProducer<T> {
-    fn new(id: usize, buffer: Arc<AsyncBuffer<T>>) -> Self {
-        Self { id, buffer }
-    }
-    
-    async fn run(&self, items: Vec<T>) {
-        for item in items {
-            println!("Async Producer {} producing: {:?}", self.id, item);
-            if let Err(item) = self.buffer.produce(item).await {
-                println!("Failed to produce: {:?}", item);
-            }
-            tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
-        }
-    }
-}
-
-// 异步消费者
-struct AsyncConsumer<T> {
-    id: usize,
-    buffer: Arc<Mutex<AsyncBuffer<T>>>,
-}
-
-impl<T: Clone + Send + 'static> AsyncConsumer<T> {
-    fn new(id: usize, buffer: Arc<Mutex<AsyncBuffer<T>>>) -> Self {
-        Self { id, buffer }
-    }
-    
-    async fn run(&self) {
-        loop {
-            let item = {
-                let mut buffer = self.buffer.lock().await;
-                buffer.consume().await
-            };
-            
-            if let Some(item) = item {
-                println!("Async Consumer {} consuming: {:?}", self.id, item);
-                tokio::time::sleep(tokio::time::Duration::from_millis(150)).await;
-            }
-        }
-    }
-}
-```
-
-## 6. 应用场景
-
-### 6.1 日志处理系统
-
-```rust
-// 日志处理系统
-struct LogProcessor {
-    buffer: Arc<Buffer<LogEntry>>,
-}
-
-impl LogProcessor {
-    fn new() -> Self {
-        Self {
-            buffer: Arc::new(Buffer::new(1000)),
-        }
-    }
-    
-    fn start_log_producer(&self, log_source: LogSource) {
-        let buffer = Arc::clone(&self.buffer);
-        thread::spawn(move || {
-            for entry in log_source {
-                buffer.produce(entry);
-            }
-        });
-    }
-    
-    fn start_log_consumer(&self) {
-        let buffer = Arc::clone(&self.buffer);
-        thread::spawn(move || {
-            loop {
-                let entry = buffer.consume();
-                process_log_entry(entry);
-            }
-        });
-    }
-}
-```
-
-### 6.2 图像处理管道
-
-```rust
-// 图像处理管道
-struct ImagePipeline {
-    buffer: Arc<Buffer<Image>>,
-}
-
-impl ImagePipeline {
-    fn new() -> Self {
-        Self {
-            buffer: Arc::new(Buffer::new(10)),
-        }
-    }
-    
-    fn start_image_producer(&self, image_source: ImageSource) {
-        let buffer = Arc::clone(&self.buffer);
-        thread::spawn(move || {
-            for image in image_source {
-                buffer.produce(image);
-            }
-        });
-    }
-    
-    fn start_image_consumer(&self) {
-        let buffer = Arc::clone(&self.buffer);
-        thread::spawn(move || {
-            loop {
-                let image = buffer.consume();
-                process_image(image);
-            }
-        });
-    }
-}
-```
-
-### 6.3 消息队列系统
-
-```rust
-// 消息队列系统
-struct MessageQueue<T> {
-    buffer: Arc<Buffer<Message<T>>>,
-}
-
-impl<T> MessageQueue<T> {
-    fn new(capacity: usize) -> Self {
+impl<T, F, G> GenericProducerConsumer<T, F, G>
+where
+    F: Fn() -> T + Send + 'static,
+    G: Fn(T) -> Result<(), Box<dyn std::error::Error>> + Send + 'static,
+    T: Send + 'static,
+{
+    pub fn new(capacity: usize, producer_generator: F, consumer_processor: G) -> Self {
         Self {
             buffer: Arc::new(Buffer::new(capacity)),
+            producer_generator,
+            consumer_processor,
         }
     }
-    
-    fn publish(&self, message: Message<T>) {
-        self.buffer.produce(message);
-    }
-    
-    fn subscribe(&self) -> Message<T> {
-        self.buffer.consume()
+
+    pub fn run(&self, producer_count: usize, consumer_count: usize) -> Result<(), Box<dyn std::error::Error>> {
+        let mut producer_threads = Vec::new();
+        let mut consumer_threads = Vec::new();
+
+        // 启动生产者线程
+        for id in 0..producer_count {
+            let buffer = self.buffer.clone();
+            let generator = &self.producer_generator;
+
+            let thread = thread::spawn(move || {
+                let producer = Producer::new(id, buffer);
+                loop {
+                    let value = generator();
+                    if let Err(e) = producer.produce(value, 0) {
+                        eprintln!("Producer {} error: {}", id, e);
+                        break;
+                    }
+                    thread::sleep(Duration::from_millis(100));
+                }
+            });
+
+            producer_threads.push(thread);
+        }
+
+        // 启动消费者线程
+        for id in 0..consumer_count {
+            let buffer = self.buffer.clone();
+            let processor = &self.consumer_processor;
+
+            let thread = thread::spawn(move || {
+                let consumer = Consumer::new(id, buffer);
+                loop {
+                    match consumer.consume() {
+                        Ok(item) => {
+                            if let Err(e) = processor(item.value) {
+                                eprintln!("Consumer {} error: {}", id, e);
+                                break;
+                            }
+                        }
+                        Err(e) => {
+                            eprintln!("Consumer {} error: {}", id, e);
+                            break;
+                        }
+                    }
+                    thread::sleep(Duration::from_millis(150));
+                }
+            });
+
+            consumer_threads.push(thread);
+        }
+
+        // 等待所有线程完成
+        for thread in producer_threads {
+            thread.join().map_err(|e| format!("Join error: {:?}", e))?;
+        }
+
+        for thread in consumer_threads {
+            thread.join().map_err(|e| format!("Join error: {:?}", e))?;
+        }
+
+        Ok(())
     }
 }
 ```
 
-## 7. 变体模式
-
-### 7.1 多生产者多消费者
+### 3. 异步实现
 
 ```rust
-// 多生产者多消费者
-struct MultiProducerConsumer<T> {
-    buffer: Arc<Buffer<T>>,
-    producers: Vec<Producer<T>>,
-    consumers: Vec<Consumer<T>>,
+use tokio::sync::mpsc;
+use tokio::task;
+
+/// 异步生产者-消费者
+pub struct AsyncProducerConsumer<T> {
+    sender: mpsc::UnboundedSender<T>,
+    receiver: mpsc::UnboundedReceiver<T>,
 }
 
-impl<T: Clone + Send + 'static> MultiProducerConsumer<T> {
-    fn new(capacity: usize, num_producers: usize, num_consumers: usize) -> Self {
-        let buffer = Arc::new(Buffer::new(capacity));
-        
-        let mut producers = Vec::new();
-        for i in 0..num_producers {
-            producers.push(Producer::new(i, Arc::clone(&buffer)));
-        }
-        
-        let mut consumers = Vec::new();
-        for i in 0..num_consumers {
-            consumers.push(Consumer::new(i, Arc::clone(&buffer)));
-        }
-        
-        Self {
-            buffer,
-            producers,
-            consumers,
-        }
+impl<T> AsyncProducerConsumer<T>
+where
+    T: Send + 'static,
+{
+    pub fn new() -> Self {
+        let (sender, receiver) = mpsc::unbounded_channel();
+        Self { sender, receiver }
     }
-    
-    fn start(&self, producer_data: Vec<Vec<T>>) {
-        // 启动多个生产者
-        for (i, producer) in self.producers.iter().enumerate() {
-            let data = producer_data[i].clone();
-            let producer = producer.clone();
-            thread::spawn(move || {
-                producer.run(data);
-            });
-        }
-        
-        // 启动多个消费者
-        for consumer in &self.consumers {
-            let consumer = consumer.clone();
-            thread::spawn(move || {
-                consumer.run();
-            });
-        }
+
+    /// 异步生产
+    pub async fn produce(&self, value: T) -> Result<(), Box<dyn std::error::Error>> {
+        self.sender.send(value).map_err(|e| format!("Send error: {}", e))?;
+        Ok(())
+    }
+
+    /// 异步消费
+    pub async fn consume(&mut self) -> Result<Option<T>, Box<dyn std::error::Error>> {
+        Ok(self.receiver.recv().await)
+    }
+
+    /// 运行异步生产者-消费者
+    pub async fn run<F, G>(
+        mut self,
+        producer_generator: F,
+        consumer_processor: G,
+    ) -> Result<(), Box<dyn std::error::Error>>
+    where
+        F: Fn() -> T + Send + 'static,
+        G: Fn(T) -> Result<(), Box<dyn std::error::Error>> + Send + 'static,
+    {
+        let sender = self.sender.clone();
+
+        // 启动生产者任务
+        let producer_task = task::spawn(async move {
+            loop {
+                let value = producer_generator();
+                if let Err(e) = sender.send(value) {
+                    eprintln!("Producer error: {}", e);
+                    break;
+                }
+                tokio::time::sleep(Duration::from_millis(100)).await;
+            }
+        });
+
+        // 启动消费者任务
+        let consumer_task = task::spawn(async move {
+            while let Some(value) = self.consume().await.unwrap() {
+                if let Err(e) = consumer_processor(value) {
+                    eprintln!("Consumer error: {}", e);
+                    break;
+                }
+                tokio::time::sleep(Duration::from_millis(150)).await;
+            }
+        });
+
+        // 等待任务完成
+        producer_task.await.map_err(|e| format!("Producer task error: {:?}", e))?;
+        consumer_task.await.map_err(|e| format!("Consumer task error: {:?}", e))?;
+
+        Ok(())
     }
 }
 ```
 
-### 7.2 优先级生产者-消费者
+### 4. 应用场景
 
 ```rust
-// 优先级生产者-消费者
-struct PriorityProducerConsumer<T> {
+/// 数据处理示例
+pub fn data_processing_example() {
+    let system = ProducerConsumerSystem::new(10, 2, 3);
+
+    // 数据生成器
+    let generator = || {
+        let value = rand::random::<i32>();
+        (value, 0)
+    };
+
+    // 数据处理器
+    let processor = |item: DataItem<i32>| {
+        let result = item.value * 2;
+        println!("Processed: {} -> {}", item.value, result);
+        Ok(())
+    };
+
+    // 启动系统
+    system.start(generator, processor).unwrap();
+}
+
+/// 文件处理示例
+pub fn file_processing_example() {
+    let system = ProducerConsumerSystem::new(5, 1, 2);
+
+    // 文件读取器
+    let generator = || {
+        let content = format!("File content {}", rand::random::<u32>());
+        (content, 0)
+    };
+
+    // 文件处理器
+    let processor = |item: DataItem<String>| {
+        let processed = item.value.to_uppercase();
+        println!("Processed file: {}", processed);
+        Ok(())
+    };
+
+    // 启动系统
+    system.start(generator, processor).unwrap();
+}
+```
+
+### 5. 变体模式
+
+```rust
+/// 优先级生产者-消费者
+pub struct PriorityProducerConsumer<T> {
     high_priority_buffer: Arc<Buffer<T>>,
-    normal_priority_buffer: Arc<Buffer<T>>,
+    low_priority_buffer: Arc<Buffer<T>>,
 }
 
-impl<T> PriorityProducerConsumer<T> {
-    fn new(capacity: usize) -> Self {
+impl<T> PriorityProducerConsumer<T>
+where
+    T: Send + 'static,
+{
+    pub fn new(capacity: usize) -> Self {
         Self {
             high_priority_buffer: Arc::new(Buffer::new(capacity)),
-            normal_priority_buffer: Arc::new(Buffer::new(capacity)),
+            low_priority_buffer: Arc::new(Buffer::new(capacity)),
         }
     }
-    
-    fn produce_high_priority(&self, item: T) {
-        self.high_priority_buffer.produce(item);
+
+    /// 高优先级生产
+    pub fn produce_high(&self, value: T) -> Result<(), Box<dyn std::error::Error>> {
+        let item = DataItem::new(value, 1);
+        self.high_priority_buffer.add(item)
     }
-    
-    fn produce_normal_priority(&self, item: T) {
-        self.normal_priority_buffer.produce(item);
+
+    /// 低优先级生产
+    pub fn produce_low(&self, value: T) -> Result<(), Box<dyn std::error::Error>> {
+        let item = DataItem::new(value, 0);
+        self.low_priority_buffer.add(item)
     }
-    
-    fn consume(&self) -> T {
-        // 优先消费高优先级缓冲区
-        if let Ok(item) = self.high_priority_buffer.try_consume() {
-            return item;
+
+    /// 优先级消费
+    pub fn consume(&self) -> Result<DataItem<T>, Box<dyn std::error::Error>> {
+        // 优先从高优先级缓冲区消费
+        if !self.high_priority_buffer.is_empty()? {
+            return self.high_priority_buffer.remove();
         }
-        
-        // 如果没有高优先级数据，消费普通优先级数据
-        self.normal_priority_buffer.consume()
+
+        // 如果高优先级缓冲区为空，从低优先级缓冲区消费
+        self.low_priority_buffer.remove()
     }
 }
 ```
 
-## 8. 性能分析
+## 性能分析
 
-### 8.1 时间复杂度分析
+### 1. 时间复杂度分析
 
-- **生产操作**: $O(1)$ - 将数据项加入队列
-- **消费操作**: $O(1)$ - 从队列中取出数据项
-- **同步操作**: $O(1)$ - 信号量操作
+- **生产操作**: $O(1)$ 平均时间复杂度
+- **消费操作**: $O(1)$ 平均时间复杂度
+- **同步操作**: $O(1)$ 平均时间复杂度
+- **缓冲区管理**: $O(1)$ 平均时间复杂度
 
-### 8.2 空间复杂度分析
+### 2. 空间复杂度分析
 
-- **缓冲区空间**: $O(capacity)$ - 缓冲区容量
-- **同步开销**: $O(1)$ - 固定大小的同步对象
-- **线程开销**: $O(n)$ - 其中 $n$ 是线程数量
+- **缓冲区存储**: $O(c)$ 其中 $c$ 是缓冲区容量
+- **同步开销**: $O(p + c)$ 其中 $p$ 是生产者数量，$c$ 是消费者数量
+- **数据项开销**: $O(n)$ 其中 $n$ 是数据项数量
 
-### 8.3 并发性能
+### 3. 资源使用分析
 
-- **吞吐量**: 高 - 支持并发生产和消费
-- **延迟**: 低 - 数据立即被处理
-- **资源利用率**: 高 - 充分利用多核处理器
+- **内存使用**: 与缓冲区大小成正比
+- **CPU使用**: 与生产者和消费者数量成正比
+- **同步开销**: 与并发度成正比
 
-## 9. 总结
+## 最佳实践
 
-生产者-消费者模式通过缓冲区解耦生产和消费过程，实现了高效的并发数据处理。该模式具有以下特点：
+### 1. 设计原则
 
-1. **解耦设计**: 生产者和消费者通过缓冲区解耦
-2. **异步处理**: 支持并发生产和消费
-3. **流量控制**: 通过缓冲区平衡生产和消费速度
-4. **线程安全**: 通过同步机制保证数据一致性
+1. **缓冲区大小**: 根据内存限制和延迟要求选择
+2. **生产者消费者比例**: 根据处理能力选择
+3. **数据粒度**: 避免过小的数据项导致开销
+4. **错误处理**: 正确处理生产和消费错误
 
-通过形式化定义和数学证明，我们建立了生产者-消费者模式的完整理论体系，为实际应用提供了可靠的理论基础。
+### 2. 实现原则
+
+1. **线程安全**: 确保缓冲区的线程安全
+2. **同步机制**: 正确使用条件变量进行同步
+3. **性能优化**: 减少锁竞争和上下文切换
+4. **监控**: 监控缓冲区状态和性能指标
+
+### 3. 使用原则
+
+1. **适用场景**: 适用于数据流处理场景
+2. **避免场景**: 避免用于实时性要求极高的场景
+3. **配置参数**: 根据负载调整缓冲区大小和线程数
+4. **测试**: 进行压力测试和性能测试
+
+## 总结
+
+生产者-消费者模式通过共享缓冲区协调生产者和消费者之间的数据传递，提供了高效的并发数据处理机制。通过形式化分析和Rust实现，我们建立了完整的理论体系和实践框架。该模式适用于数据流处理、文件处理、网络通信等场景，能够有效提高系统的吞吐量和响应性。
