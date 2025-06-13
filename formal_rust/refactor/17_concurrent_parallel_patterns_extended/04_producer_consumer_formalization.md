@@ -37,6 +37,7 @@
 
 **定义 2.1** (生产者-消费者系统)
 生产者-消费者系统是一个六元组 $PC = (P, C, B, \pi, \gamma, \delta)$，其中：
+
 - $P \subseteq \mathcal{P}$ 是生产者集合
 - $C \subseteq \mathcal{C}$ 是消费者集合
 - $B \in \mathcal{B}$ 是缓冲区
@@ -46,6 +47,7 @@
 
 **定义 2.2** (生产者)
 生产者是一个四元组 $Prod = (id, rate, data_gen, buffer)$，其中：
+
 - $id$ 是生产者标识符
 - $rate$ 是生产速率
 - $data_gen$ 是数据生成函数
@@ -53,6 +55,7 @@
 
 **定义 2.3** (消费者)
 消费者是一个四元组 $Cons = (id, rate, data_proc, buffer)$，其中：
+
 - $id$ 是消费者标识符
 - $rate$ 是消费速率
 - $data_proc$ 是数据处理函数
@@ -60,6 +63,7 @@
 
 **定义 2.4** (缓冲区)
 缓冲区是一个三元组 $Buf = (capacity, items, mutex)$，其中：
+
 - $capacity$ 是缓冲区容量
 - $items$ 是存储的数据项集合
 - $mutex$ 是互斥锁
@@ -182,7 +186,7 @@ use std::thread;
 use std::time::Duration;
 
 // 数据项类型
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 struct DataItem {
     id: u32,
     content: String,
@@ -209,39 +213,39 @@ impl BoundedBuffer {
 
     fn produce(&self, item: DataItem) {
         let mut buffer = self.buffer.lock().unwrap();
-        
+
         // 等待缓冲区未满
         while buffer.len() == self.capacity {
             println!("Producer: Buffer full, waiting...");
             buffer = self.not_full.wait(buffer).unwrap();
         }
-        
+
         // 生产数据
         println!("Producer: Adding item {}. Buffer size: {}", item.id, buffer.len());
         buffer.push_back(item);
         println!("Producer: Item added. Buffer size: {}", buffer.len());
-        
+
         // 通知消费者
         self.not_empty.notify_one();
     }
 
     fn consume(&self) -> Option<DataItem> {
         let mut buffer = self.buffer.lock().unwrap();
-        
+
         // 等待缓冲区非空
         while buffer.is_empty() {
             println!("Consumer: Buffer empty, waiting...");
             buffer = self.not_empty.wait(buffer).unwrap();
         }
-        
+
         // 消费数据
         println!("Consumer: Removing item. Buffer size: {}", buffer.len());
         let item = buffer.pop_front();
         println!("Consumer: Item removed. Buffer size: {}", buffer.len());
-        
+
         // 通知生产者
         self.not_full.notify_one();
-        
+
         item
     }
 
@@ -271,10 +275,10 @@ impl Producer {
                 content: format!("Data from producer {}", self.id),
                 timestamp: std::time::Instant::now(),
             };
-            
+
             self.buffer.produce(item);
             counter += 1;
-            
+
             thread::sleep(self.rate);
         }
     }
@@ -295,9 +299,9 @@ impl Consumer {
     fn run(&self) {
         loop {
             if let Some(item) = self.buffer.consume() {
-                println!("Consumer {}: Processing item {} - {}", 
+                println!("Consumer {}: Processing item {} - {}",
                     self.id, item.id, item.content);
-                
+
                 // 模拟数据处理时间
                 thread::sleep(self.rate);
             }
@@ -308,26 +312,26 @@ impl Consumer {
 // 测试程序
 fn main() {
     let buffer = BoundedBuffer::new(5);
-    
+
     // 创建生产者
     let producer1 = Producer::new(1, Duration::from_millis(100), buffer.clone());
     let producer2 = Producer::new(2, Duration::from_millis(150), buffer.clone());
-    
+
     // 创建消费者
     let consumer1 = Consumer::new(1, Duration::from_millis(200), buffer.clone());
     let consumer2 = Consumer::new(2, Duration::from_millis(250), buffer.clone());
-    
+
     // 启动生产者线程
     let p1_handle = thread::spawn(move || producer1.run());
     let p2_handle = thread::spawn(move || producer2.run());
-    
+
     // 启动消费者线程
     let c1_handle = thread::spawn(move || consumer1.run());
     let c2_handle = thread::spawn(move || consumer2.run());
-    
+
     // 运行一段时间
     thread::sleep(Duration::from_secs(10));
-    
+
     println!("Final buffer size: {}", buffer.size());
 }
 ```
@@ -427,4 +431,4 @@ $\square$
 
 **版本**: 1.0
 **最后更新**: 2025-01-27
-**作者**: AI Assistant 
+**作者**: AI Assistant

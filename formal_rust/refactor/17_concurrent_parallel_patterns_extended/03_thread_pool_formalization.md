@@ -37,6 +37,7 @@
 
 **定义 2.1** (线程池)
 线程池是一个六元组 $TP = (W, Q, S, \mu, \gamma, \delta)$，其中：
+
 - $W \subseteq \mathcal{W}$ 是工作线程集合
 - $Q \subseteq \mathcal{Q}$ 是任务队列
 - $S$ 是线程池状态
@@ -46,12 +47,14 @@
 
 **定义 2.2** (任务)
 任务是一个三元组 $T = (id, func, args)$，其中：
+
 - $id$ 是任务标识符
 - $func$ 是执行函数
 - $args$ 是函数参数
 
 **定义 2.3** (工作线程)
 工作线程是一个四元组 $WT = (id, state, current_task, pool)$，其中：
+
 - $id$ 是线程标识符
 - $state \in \{idle, busy, terminated\}$ 是线程状态
 - $current_task$ 是当前执行的任务
@@ -206,7 +209,7 @@ impl Worker {
                     let mut queue = receiver.lock().unwrap();
                     queue.pop_front()
                 };
-                
+
                 match task {
                     Some(task) => {
                         println!("Worker {} executing task", id);
@@ -219,7 +222,7 @@ impl Worker {
                 }
             }
         });
-        
+
         Worker {
             id,
             thread: Some(thread),
@@ -236,17 +239,17 @@ pub struct ThreadPool {
 impl ThreadPool {
     pub fn new(size: usize) -> ThreadPool {
         assert!(size > 0);
-        
+
         let (sender, receiver) = std::sync::mpsc::channel();
         let receiver = Arc::new(Mutex::new(VecDeque::new()));
-        
+
         let mut workers = Vec::with_capacity(size);
-        
+
         // 启动工作线程
         for id in 0..size {
             workers.push(Worker::new(id, Arc::clone(&receiver)));
         }
-        
+
         // 启动任务分发线程
         let receiver_clone = receiver.clone();
         thread::spawn(move || {
@@ -263,10 +266,10 @@ impl ThreadPool {
                 }
             }
         });
-        
+
         ThreadPool { workers, sender }
     }
-    
+
     pub fn execute<F>(&self, f: F) -> Result<(), std::sync::mpsc::SendError<Task>>
     where
         F: FnOnce() + Send + 'static,
@@ -279,7 +282,7 @@ impl ThreadPool {
 impl Drop for ThreadPool {
     fn drop(&mut self) {
         println!("Shutting down thread pool");
-        
+
         // 等待所有工作线程完成
         for worker in &mut self.workers {
             if let Some(thread) = worker.thread.take() {
@@ -292,7 +295,7 @@ impl Drop for ThreadPool {
 // 测试程序
 fn main() {
     let pool = ThreadPool::new(4);
-    
+
     // 提交多个任务
     for i in 0..8 {
         pool.execute(move || {
@@ -300,7 +303,7 @@ fn main() {
             thread::sleep(Duration::from_millis(100));
         }).unwrap();
     }
-    
+
     // 等待一段时间让任务完成
     thread::sleep(Duration::from_millis(1000));
     println!("All tasks completed");
@@ -403,4 +406,4 @@ $$n_{opt} = N_{CPU} \cdot (1 + \frac{t_{wait}}{t_{compute}})$$
 
 **版本**: 1.0
 **最后更新**: 2025-01-27
-**作者**: AI Assistant 
+**作者**: AI Assistant

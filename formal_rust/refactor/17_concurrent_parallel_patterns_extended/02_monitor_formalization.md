@@ -37,6 +37,7 @@
 
 **定义 2.1** (管程)
 管程是一个七元组 $M = (S, L, C, Q_e, Q_w, \mu, \gamma)$，其中：
+
 - $S \in \mathcal{S}$ 是共享状态
 - $L$ 是互斥锁
 - $C: \mathcal{C} \rightarrow 2^{\mathcal{T}}$ 是条件变量映射
@@ -47,6 +48,7 @@
 
 **定义 2.2** (管程操作)
 管程操作包括：
+
 - $enter(M, t)$: 线程 $t$ 进入管程
 - $exit(M, t)$: 线程 $t$ 退出管程
 - $wait(M, t, c)$: 线程 $t$ 在条件 $c$ 上等待
@@ -193,18 +195,18 @@ impl<T: Send + 'static> BoundedBuffer<T> {
     // 生产者操作
     fn produce(&self, item: T) {
         let mut buffer = self.buffer.lock().unwrap();
-        
+
         // 等待缓冲区未满
         while buffer.len() == self.capacity {
             println!("Producer: Buffer full, waiting...");
             buffer = self.not_full.wait(buffer).unwrap();
         }
-        
+
         // 生产数据
         println!("Producer: Adding item. Buffer size: {}", buffer.len());
         buffer.push_back(item);
         println!("Producer: Item added. Buffer size: {}", buffer.len());
-        
+
         // 通知消费者
         self.not_empty.notify_one();
     }
@@ -212,21 +214,21 @@ impl<T: Send + 'static> BoundedBuffer<T> {
     // 消费者操作
     fn consume(&self) -> Option<T> {
         let mut buffer = self.buffer.lock().unwrap();
-        
+
         // 等待缓冲区非空
         while buffer.is_empty() {
             println!("Consumer: Buffer empty, waiting...");
             buffer = self.not_empty.wait(buffer).unwrap();
         }
-        
+
         // 消费数据
         println!("Consumer: Removing item. Buffer size: {}", buffer.len());
         let item = buffer.pop_front();
         println!("Consumer: Item removed. Buffer size: {}", buffer.len());
-        
+
         // 通知生产者
         self.not_full.notify_one();
-        
+
         item
     }
 
@@ -263,7 +265,7 @@ fn main() {
 
     producer.join().unwrap();
     consumer.join().unwrap();
-    
+
     println!("Final buffer size: {}", buffer.size());
 }
 ```
@@ -365,4 +367,4 @@ $$T_{batch} = \frac{k}{t_{exec} + \frac{t_{sync}}{k}} = \frac{k^2}{k \cdot t_{ex
 
 **版本**: 1.0
 **最后更新**: 2025-01-27
-**作者**: AI Assistant 
+**作者**: AI Assistant
