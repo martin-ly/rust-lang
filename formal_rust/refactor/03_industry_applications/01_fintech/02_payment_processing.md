@@ -68,6 +68,7 @@ $$\text{TransitionRules}: S \times E \times \text{Conditions} \rightarrow S$$
 $$\text{PaymentFlow}: P \times A \times A \times M \rightarrow P \times Status$$
 
 其中：
+
 - $P$ 是支付集合
 - $A$ 是账户集合
 - $M$ 是货币集合
@@ -98,6 +99,7 @@ $$PM = \{BankTransfer, Card, DigitalWallet, Cryptocurrency\}$$
 $$PA = (P, +, -, \times, \div, \leq)$$
 
 其中：
+
 - $+$ 是支付合并操作
 - $-$ 是支付分割操作
 - $\times$ 是支付复制操作
@@ -124,6 +126,7 @@ $$\text{PaymentConsistency}: \forall p \in P: \text{Atomic}(p) \land \text{Isola
 $$\forall p \in P: \text{ACID}(p)$$
 
 **证明**：
+
 1. **原子性**: 支付要么完全成功，要么完全失败
 2. **一致性**: 支付前后系统状态一致
 3. **隔离性**: 并发支付互不干扰
@@ -150,6 +153,7 @@ $$\forall p \in P: \text{Safe}(p)$$
 $$\forall p \in P: \text{Consistent}(p) \Rightarrow \text{Consistent}(\text{Update}(p, event))$$
 
 **证明**：
+
 1. **基础情况**: 初始支付状态一致
 2. **归纳步骤**: 每次事件后状态一致
 3. **结论**: 系统保持一致性
@@ -859,4 +863,4 @@ impl SmartContractPayment {
 **文档版本**: 1.0
 **最后更新**: 2024-12-19
 **作者**: AI Assistant
-**状态**: 开发中 
+**状态**: 开发中
