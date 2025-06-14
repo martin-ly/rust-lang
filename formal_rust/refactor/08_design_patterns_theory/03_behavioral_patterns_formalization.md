@@ -1,200 +1,315 @@
-# 行为型设计模式形式化重构
+# 行为型设计模式形式化理论 (Behavioral Design Patterns Formalization Theory)
 
-## 目录
+## 📋 目录 (Table of Contents)
 
-1. [理论基础](#1-理论基础)
-2. [行为型模式十一元组定义](#2-行为型模式十一元组定义)
-3. [责任链模式形式化理论](#3-责任链模式形式化理论)
-4. [命令模式形式化理论](#4-命令模式形式化理论)
-5. [解释器模式形式化理论](#5-解释器模式形式化理论)
-6. [迭代器模式形式化理论](#6-迭代器模式形式化理论)
-7. [中介者模式形式化理论](#7-中介者模式形式化理论)
-8. [备忘录模式形式化理论](#8-备忘录模式形式化理论)
-9. [观察者模式形式化理论](#9-观察者模式形式化理论)
-10. [状态模式形式化理论](#10-状态模式形式化理论)
-11. [策略模式形式化理论](#11-策略模式形式化理论)
-12. [模板方法模式形式化理论](#12-模板方法模式形式化理论)
-13. [访问者模式形式化理论](#13-访问者模式形式化理论)
-14. [核心定理证明](#14-核心定理证明)
-15. [Rust实现](#15-rust实现)
+### 1. 理论基础 (Theoretical Foundation)
 
-## 1. 理论基础
+1.1 行为关系基础 (Behavioral Relation Foundation)
+1.2 状态转换理论 (State Transition Theory)
 
-### 1.1 行为关系基础
+### 2. 行为型模式十一元组定义 (Behavioral Pattern Undecuple Definition)
 
-**定义1.1 (行为关系)**
+2.1 责任链模式系统 (Chain of Responsibility Pattern System)
+2.2 命令模式系统 (Command Pattern System)
+2.3 解释器模式系统 (Interpreter Pattern System)
+2.4 迭代器模式系统 (Iterator Pattern System)
+2.5 中介者模式系统 (Mediator Pattern System)
+2.6 备忘录模式系统 (Memento Pattern System)
+2.7 观察者模式系统 (Observer Pattern System)
+2.8 状态模式系统 (State Pattern System)
+2.9 策略模式系统 (Strategy Pattern System)
+2.10 模板方法模式系统 (Template Method Pattern System)
+2.11 访问者模式系统 (Visitor Pattern System)
+
+### 3. 责任链模式形式化理论 (Chain of Responsibility Pattern Formalization Theory)
+
+3.1 责任链代数理论 (Chain of Responsibility Algebraic Theory)
+3.2 请求传递理论 (Request Passing Theory)
+3.3 处理能力理论 (Processing Capability Theory)
+
+### 4. 命令模式形式化理论 (Command Pattern Formalization Theory)
+
+4.1 命令代数理论 (Command Algebraic Theory)
+4.2 撤销机制理论 (Undo Mechanism Theory)
+4.3 命令历史理论 (Command History Theory)
+
+### 5. 解释器模式形式化理论 (Interpreter Pattern Formalization Theory)
+
+5.1 解释器代数理论 (Interpreter Algebraic Theory)
+5.2 语法解析理论 (Grammar Parsing Theory)
+5.3 语义解释理论 (Semantic Interpretation Theory)
+
+### 6. 迭代器模式形式化理论 (Iterator Pattern Formalization Theory)
+
+6.1 迭代器代数理论 (Iterator Algebraic Theory)
+6.2 集合访问理论 (Collection Access Theory)
+6.3 遍历算法理论 (Traversal Algorithm Theory)
+
+### 7. 中介者模式形式化理论 (Mediator Pattern Formalization Theory)
+
+7.1 中介者代数理论 (Mediator Algebraic Theory)
+7.2 交互协调理论 (Interaction Coordination Theory)
+7.3 解耦机制理论 (Decoupling Mechanism Theory)
+
+### 8. 备忘录模式形式化理论 (Memento Pattern Formalization Theory)
+
+8.1 备忘录代数理论 (Memento Algebraic Theory)
+8.2 状态保存理论 (State Preservation Theory)
+8.3 恢复机制理论 (Recovery Mechanism Theory)
+
+### 9. 观察者模式形式化理论 (Observer Pattern Formalization Theory)
+
+9.1 观察者代数理论 (Observer Algebraic Theory)
+9.2 通知机制理论 (Notification Mechanism Theory)
+9.3 更新逻辑理论 (Update Logic Theory)
+
+### 10. 状态模式形式化理论 (State Pattern Formalization Theory)
+
+10.1 状态代数理论 (State Algebraic Theory)
+10.2 状态转换理论 (State Transition Theory)
+10.3 行为定义理论 (Behavior Definition Theory)
+
+### 11. 策略模式形式化理论 (Strategy Pattern Formalization Theory)
+
+11.1 策略代数理论 (Strategy Algebraic Theory)
+11.2 策略选择理论 (Strategy Selection Theory)
+11.3 执行环境理论 (Execution Environment Theory)
+
+### 12. 模板方法模式形式化理论 (Template Method Pattern Formalization Theory)
+
+12.1 模板方法代数理论 (Template Method Algebraic Theory)
+12.2 算法框架理论 (Algorithm Framework Theory)
+12.3 钩子方法理论 (Hook Method Theory)
+
+### 13. 访问者模式形式化理论 (Visitor Pattern Formalization Theory)
+
+13.1 访问者代数理论 (Visitor Algebraic Theory)
+13.2 双重分发理论 (Double Dispatch Theory)
+13.3 操作分离理论 (Operation Separation Theory)
+
+### 14. 核心定理证明 (Core Theorems Proof)
+
+14.1 行为型模式正确性定理 (Behavioral Pattern Correctness Theorems)
+14.2 行为型模式一致性定理 (Behavioral Pattern Consistency Theorems)
+14.3 行为型模式最优性定理 (Behavioral Pattern Optimality Theorems)
+
+### 15. Rust实现 (Rust Implementation)
+
+15.1 责任链模式实现 (Chain of Responsibility Pattern Implementation)
+15.2 命令模式实现 (Command Pattern Implementation)
+15.3 解释器模式实现 (Interpreter Pattern Implementation)
+15.4 迭代器模式实现 (Iterator Pattern Implementation)
+15.5 中介者模式实现 (Mediator Pattern Implementation)
+15.6 备忘录模式实现 (Memento Pattern Implementation)
+15.7 观察者模式实现 (Observer Pattern Implementation)
+15.8 状态模式实现 (State Pattern Implementation)
+15.9 策略模式实现 (Strategy Pattern Implementation)
+15.10 模板方法模式实现 (Template Method Pattern Implementation)
+15.11 访问者模式实现 (Visitor Pattern Implementation)
+
+---
+
+## 1. 理论基础 (Theoretical Foundation)
+
+### 1.1 行为关系基础 (Behavioral Relation Foundation)
+
+#### 定义 1.1.1 (行为关系)
+
 行为关系 $BR = (A, I, C, T)$ 包含：
-- $A$: 行为主体集合
-- $I$: 交互关系集合
-- $C$: 通信机制集合
-- $T$: 时序关系集合
+- $A$: 行为主体集合 (Behavior Agent Set)
+- $I$: 交互关系集合 (Interaction Relation Set)
+- $C$: 通信机制集合 (Communication Mechanism Set)
+- $T$: 时序关系集合 (Temporal Relation Set)
 
-**定义1.2 (行为模式)**
+#### 定义 1.1.2 (行为模式)
+
 行为模式 $\text{BehaviorPattern}: \text{Context} \times \text{Stimulus} \rightarrow \text{Response}$ 定义为：
 $$\text{BehaviorPattern}(ctx, stim) = resp \text{ where } resp \text{ is the response to } stim \text{ in context } ctx$$
 
-**定义1.3 (交互协议)**
+#### 定义 1.1.3 (交互协议)
+
 交互协议 $\text{InteractionProtocol}: \text{Agent} \times \text{Agent} \times \text{Message} \rightarrow \text{Response}$ 定义为：
 $$\text{InteractionProtocol}(a_1, a_2, msg) = resp \text{ where } resp \text{ is } a_2\text{'s response to } msg \text{ from } a_1$$
 
-### 1.2 状态转换理论
+### 1.2 状态转换理论 (State Transition Theory)
 
-**定义1.4 (状态转换)**
+#### 定义 1.2.1 (状态转换)
+
 状态转换 $\text{StateTransition}: \text{State} \times \text{Event} \rightarrow \text{State}$ 定义为：
 $$\text{StateTransition}(s, e) = s' \text{ where } s' \text{ is the new state after event } e$$
 
-**定义1.5 (行为序列)**
+#### 定义 1.2.2 (行为序列)
+
 行为序列 $\text{BehaviorSequence}: [\text{Action}] \times \text{Context} \rightarrow \text{Result}$ 定义为：
 $$\text{BehaviorSequence}([a_1, a_2, \ldots, a_n], ctx) = a_n \circ a_{n-1} \circ \ldots \circ a_1(ctx)$$
 
-## 2. 行为型模式十一元组定义
+---
 
-**定义2.1 (行为型模式系统)**
+## 2. 行为型模式十一元组定义 (Behavioral Pattern Undecuple Definition)
+
+#### 定义 2.1.1 (行为型模式系统)
+
 行为型模式系统 $BPS = (C, M, I, T, S, O, V, P, A, D, F)$ 包含：
 
 - **C (Chain of Responsibility)**: 责任链模式系统 $C = (H, R, P, T)$
-  - $H$: 处理器链
-  - $R$: 请求传递
-  - $P$: 处理逻辑
-  - $T$: 终止条件
+  - $H$: 处理器链 (Handler Chain)
+  - $R$: 请求传递 (Request Passing)
+  - $P$: 处理逻辑 (Processing Logic)
+  - $T$: 终止条件 (Termination Condition)
 
 - **M (Command)**: 命令模式系统 $M = (I, E, R, U)$
-  - $I$: 命令接口
-  - $E$: 执行器
-  - $R$: 接收者
-  - $U$: 撤销机制
+  - $I$: 命令接口 (Command Interface)
+  - $E$: 执行器 (Executor)
+  - $R$: 接收者 (Receiver)
+  - $U$: 撤销机制 (Undo Mechanism)
 
 - **I (Interpreter)**: 解释器模式系统 $I = (G, P, E, C)$
-  - $G$: 语法规则
-  - $P$: 解析器
-  - $E$: 表达式
-  - $C$: 上下文
+  - $G$: 语法规则 (Grammar Rules)
+  - $P$: 解析器 (Parser)
+  - $E$: 表达式 (Expression)
+  - $C$: 上下文 (Context)
 
 - **T (Iterator)**: 迭代器模式系统 $T = (C, I, A, N)$
-  - $C$: 集合接口
-  - $I$: 迭代器
-  - $A$: 访问方法
-  - $N$: 导航逻辑
+  - $C$: 集合接口 (Collection Interface)
+  - $I$: 迭代器 (Iterator)
+  - $A$: 访问方法 (Access Method)
+  - $N$: 导航逻辑 (Navigation Logic)
 
 - **S (Mediator)**: 中介者模式系统 $S = (M, C, I, D)$
-  - $M$: 中介者
-  - $C$: 同事对象
-  - $I$: 交互协调
-  - $D$: 解耦机制
+  - $M$: 中介者 (Mediator)
+  - $C$: 同事对象 (Colleague Objects)
+  - $I$: 交互协调 (Interaction Coordination)
+  - $D$: 解耦机制 (Decoupling Mechanism)
 
 - **O (Observer)**: 观察者模式系统 $O = (S, O, N, U)$
-  - $S$: 主题
-  - $O$: 观察者
-  - $N$: 通知机制
-  - $U$: 更新逻辑
+  - $S$: 主题 (Subject)
+  - $O$: 观察者 (Observer)
+  - $N$: 通知机制 (Notification Mechanism)
+  - $U$: 更新逻辑 (Update Logic)
 
 - **V (State)**: 状态模式系统 $V = (C, S, T, B)$
-  - $C$: 上下文
-  - $S$: 状态对象
-  - $T$: 转换规则
-  - $B$: 行为定义
+  - $C$: 上下文 (Context)
+  - $S$: 状态对象 (State Object)
+  - $T$: 转换规则 (Transition Rules)
+  - $B$: 行为定义 (Behavior Definition)
 
 - **P (Strategy)**: 策略模式系统 $P = (C, S, S, E)$
-  - $C$: 上下文
-  - $S$: 策略接口
-  - $S$: 具体策略
-  - $E$: 执行环境
+  - $C$: 上下文 (Context)
+  - $S$: 策略接口 (Strategy Interface)
+  - $S$: 具体策略 (Concrete Strategy)
+  - $E$: 执行环境 (Execution Environment)
 
 - **A (Template Method)**: 模板方法模式系统 $A = (T, S, H, I)$
-  - $T$: 模板框架
-  - $S$: 具体步骤
-  - $H$: 钩子方法
-  - $I$: 不变部分
+  - $T$: 模板框架 (Template Framework)
+  - $S$: 具体步骤 (Concrete Steps)
+  - $H$: 钩子方法 (Hook Methods)
+  - $I$: 不变部分 (Invariant Part)
 
 - **D (Visitor)**: 访问者模式系统 $D = (E, V, O, D)$
-  - $E$: 元素接口
-  - $V$: 访问者
-  - $O$: 操作分离
-  - $D$: 双重分发
+  - $E$: 元素接口 (Element Interface)
+  - $V$: 访问者 (Visitor)
+  - $O$: 操作分离 (Operation Separation)
+  - $D$: 双重分发 (Double Dispatch)
 
 - **F (Memento)**: 备忘录模式系统 $F = (O, M, C, R)$
-  - $O$: 原发器
-  - $M$: 备忘录
-  - $C$: 保管者
-  - $R$: 恢复机制
+  - $O$: 原发器 (Originator)
+  - $M$: 备忘录 (Memento)
+  - $C$: 保管者 (Caretaker)
+  - $R$: 恢复机制 (Recovery Mechanism)
 
-## 3. 责任链模式形式化理论
+---
 
-### 3.1 责任链代数理论
+## 3. 责任链模式形式化理论 (Chain of Responsibility Pattern Formalization Theory)
 
-**定义3.1 (责任链代数)**
+### 3.1 责任链代数理论 (Chain of Responsibility Algebraic Theory)
+
+#### 定义 3.1.1 (责任链代数)
+
 责任链代数 $CA = (H, R, P, T, S)$ 包含：
 
-- **H (Handler)**: 处理器
-- **R (Request)**: 请求
-- **P (Process)**: 处理逻辑
-- **T (Termination)**: 终止条件
-- **S (Successor)**: 后继者
+- **H (Handler)**: 处理器 (Handler)
+- **R (Request)**: 请求 (Request)
+- **P (Process)**: 处理逻辑 (Processing Logic)
+- **T (Termination)**: 终止条件 (Termination Condition)
+- **S (Successor)**: 后继者 (Successor)
 
-**定义3.2 (处理器链)**
+#### 定义 3.1.2 (处理器链)
+
 处理器链 $\text{HandlerChain}: [\text{Handler}] \times \text{Request} \rightarrow \text{Response}$ 定义为：
 $$\text{HandlerChain}([h_1, h_2, \ldots, h_n], req) = h_n \circ h_{n-1} \circ \ldots \circ h_1(req)$$
 
-### 3.2 请求传递理论
+### 3.2 请求传递理论 (Request Passing Theory)
 
-**定义3.3 (请求传递)**
+#### 定义 3.2.1 (请求传递)
+
 请求传递 $\text{RequestPassing}: \text{Handler} \times \text{Request} \rightarrow \text{Response}$ 定义为：
 $$\text{RequestPassing}(h, req) = \begin{cases}
 \text{Process}(h, req) & \text{if } \text{CanHandle}(h, req) \\
 \text{PassToSuccessor}(h, req) & \text{otherwise}
 \end{cases}$$
 
-**定义3.4 (处理能力)**
+#### 定义 3.2.2 (处理能力)
+
 处理能力 $\text{CanHandle}: \text{Handler} \times \text{Request} \rightarrow \text{Boolean}$ 定义为：
 $$\text{CanHandle}(h, req) = \begin{cases}
 \text{true} & \text{if } h \text{ can process } req \\
 \text{false} & \text{otherwise}
 \end{cases}$$
 
-## 4. 命令模式形式化理论
+---
 
-### 4.1 命令代数理论
+## 4. 命令模式形式化理论 (Command Pattern Formalization Theory)
 
-**定义4.1 (命令代数)**
+### 4.1 命令代数理论 (Command Algebraic Theory)
+
+#### 定义 4.1.1 (命令代数)
+
 命令代数 $MA = (I, E, R, U, P)$ 包含：
 
-- **I (Interface)**: 命令接口
-- **E (Executor)**: 执行器
-- **R (Receiver)**: 接收者
-- **U (Undo)**: 撤销机制
-- **P (Parameters)**: 参数
+- **I (Interface)**: 命令接口 (Command Interface)
+- **E (Executor)**: 执行器 (Executor)
+- **R (Receiver)**: 接收者 (Receiver)
+- **U (Undo)**: 撤销机制 (Undo Mechanism)
+- **P (Parameters)**: 参数 (Parameters)
 
-**定义4.2 (命令执行)**
+#### 定义 4.1.2 (命令执行)
+
 命令执行 $\text{CommandExecution}: \text{Command} \times \text{Context} \rightarrow \text{Result}$ 定义为：
 $$\text{CommandExecution}(cmd, ctx) = \text{Execute}(cmd, \text{Receiver}(cmd), ctx)$$
 
-### 4.2 撤销机制理论
+### 4.2 撤销机制理论 (Undo Mechanism Theory)
 
-**定义4.3 (撤销操作)**
+#### 定义 4.2.1 (撤销操作)
+
 撤销操作 $\text{UndoOperation}: \text{Command} \times \text{Context} \rightarrow \text{Result}$ 定义为：
 $$\text{UndoOperation}(cmd, ctx) = \text{Inverse}(\text{CommandExecution}(cmd, ctx))$$
 
-**定义4.4 (命令历史)**
+#### 定义 4.2.2 (命令历史)
+
 命令历史 $\text{CommandHistory}: [\text{Command}] \times \text{Operation} \rightarrow \text{Result}$ 定义为：
 $$\text{CommandHistory}([cmd_1, cmd_2, \ldots, cmd_n], op) = \begin{cases}
 \text{Execute}(cmd_n) & \text{if } op = \text{Redo} \\
 \text{Undo}(cmd_n) & \text{if } op = \text{Undo}
 \end{cases}$$
 
-## 5. 解释器模式形式化理论
+---
 
-### 5.1 解释器代数理论
+## 5. 解释器模式形式化理论 (Interpreter Pattern Formalization Theory)
 
-**定义5.1 (解释器代数)**
+### 5.1 解释器代数理论 (Interpreter Algebraic Theory)
+
+#### 定义 5.1.1 (解释器代数)
+
 解释器代数 $IA = (G, P, E, C, S)$ 包含：
 
-- **G (Grammar)**: 语法规则
-- **P (Parser)**: 解析器
-- **E (Expression)**: 表达式
-- **C (Context)**: 上下文
-- **S (Semantics)**: 语义
+- **G (Grammar)**: 语法规则 (Grammar Rules)
+- **P (Parser)**: 解析器 (Parser)
+- **E (Expression)**: 表达式 (Expression)
+- **C (Context)**: 上下文 (Context)
+- **S (Semantics)**: 语义 (Semantics)
 
-**定义5.2 (语法解析)**
+#### 定义 5.1.2 (语法解析)
+
 语法解析 $\text{GrammarParsing}: \text{Input} \times \text{Grammar} \rightarrow \text{AbstractSyntaxTree}$ 定义为：
 $$\text{GrammarParsing}(input, grammar) = \text{Parse}(input, \text{Rules}(grammar))$$
 
