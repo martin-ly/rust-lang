@@ -1,33 +1,85 @@
-# 创建型设计模式形式化重构
+# 创建型设计模式形式化理论 (Creational Design Patterns Formalization Theory)
 
-## 目录
+## 📋 目录 (Table of Contents)
 
-1. [理论基础](#1-理论基础)
-2. [创建型模式五元组定义](#2-创建型模式五元组定义)
-3. [单例模式形式化理论](#3-单例模式形式化理论)
-4. [工厂方法模式形式化理论](#4-工厂方法模式形式化理论)
-5. [抽象工厂模式形式化理论](#5-抽象工厂模式形式化理论)
-6. [建造者模式形式化理论](#6-建造者模式形式化理论)
-7. [原型模式形式化理论](#7-原型模式形式化理论)
-8. [核心定理证明](#8-核心定理证明)
-9. [Rust实现](#9-rust实现)
+### 1. 理论基础 (Theoretical Foundation)
 
-## 1. 理论基础
+1.1 对象创建基础 (Object Creation Foundation)
+1.2 创建模式基础 (Creation Pattern Foundation)
 
-### 1.1 对象创建基础
+### 2. 创建型模式五元组定义 (Creational Pattern Quintuple Definition)
 
-**定义1.1 (对象)**
+2.1 单例模式系统 (Singleton Pattern System)
+2.2 工厂方法系统 (Factory Method System)
+2.3 抽象工厂系统 (Abstract Factory System)
+2.4 建造者系统 (Builder System)
+2.5 原型系统 (Prototype System)
+
+### 3. 单例模式形式化理论 (Singleton Pattern Formalization Theory)
+
+3.1 单例代数理论 (Singleton Algebraic Theory)
+3.2 单例状态理论 (Singleton State Theory)
+3.3 单例访问理论 (Singleton Access Theory)
+
+### 4. 工厂方法模式形式化理论 (Factory Method Pattern Formalization Theory)
+
+4.1 工厂方法代数理论 (Factory Method Algebraic Theory)
+4.2 工厂方法类型理论 (Factory Method Type Theory)
+4.3 工厂方法规则理论 (Factory Method Rule Theory)
+
+### 5. 抽象工厂模式形式化理论 (Abstract Factory Pattern Formalization Theory)
+
+5.1 抽象工厂代数理论 (Abstract Factory Algebraic Theory)
+5.2 产品族理论 (Product Family Theory)
+5.3 工厂族关系理论 (Factory Family Relation Theory)
+
+### 6. 建造者模式形式化理论 (Builder Pattern Formalization Theory)
+
+6.1 建造者代数理论 (Builder Algebraic Theory)
+6.2 构建步骤理论 (Build Steps Theory)
+6.3 构建控制理论 (Build Control Theory)
+
+### 7. 原型模式形式化理论 (Prototype Pattern Formalization Theory)
+
+7.1 原型代数理论 (Prototype Algebraic Theory)
+7.2 克隆操作理论 (Clone Operation Theory)
+7.3 深度复制理论 (Deep Copy Theory)
+
+### 8. 核心定理证明 (Core Theorems Proof)
+
+8.1 创建型模式正确性定理 (Creational Pattern Correctness Theorems)
+8.2 创建型模式一致性定理 (Creational Pattern Consistency Theorems)
+8.3 创建型模式最优性定理 (Creational Pattern Optimality Theorems)
+
+### 9. Rust实现 (Rust Implementation)
+
+9.1 单例模式实现 (Singleton Pattern Implementation)
+9.2 工厂方法模式实现 (Factory Method Pattern Implementation)
+9.3 抽象工厂模式实现 (Abstract Factory Pattern Implementation)
+9.4 建造者模式实现 (Builder Pattern Implementation)
+9.5 原型模式实现 (Prototype Pattern Implementation)
+
+---
+
+## 1. 理论基础 (Theoretical Foundation)
+
+### 1.1 对象创建基础 (Object Creation Foundation)
+
+#### 定义 1.1.1 (对象)
+
 对象 $O = (S, M, I)$ 包含：
 
-- $S$: 状态集合
-- $M$: 方法集合
-- $I$: 接口集合
+- $S$: 状态集合 (State Set)
+- $M$: 方法集合 (Method Set)
+- $I$: 接口集合 (Interface Set)
 
-**定义1.2 (对象创建)**
+#### 定义 1.1.2 (对象创建)
+
 对象创建函数 $\text{Create}: \text{Class} \times \text{Args} \rightarrow \text{Object}$ 定义为：
 $$\text{Create}(C, args) = O \text{ where } O \text{ is an instance of } C$$
 
-**定义1.3 (对象生命周期)**
+#### 定义 1.1.3 (对象生命周期)
+
 对象生命周期 $\text{Lifecycle}: \text{Object} \times \text{Time} \rightarrow \text{State}$ 定义为：
 $$\text{Lifecycle}(O, t) = \begin{cases}
 \text{Created} & \text{if } t = t_{\text{create}} \\
@@ -35,178 +87,198 @@ $$\text{Lifecycle}(O, t) = \begin{cases}
 \text{Destroyed} & \text{if } t \geq t_{\text{destroy}}
 \end{cases}$$
 
-### 1.2 创建模式基础
+### 1.2 创建模式基础 (Creation Pattern Foundation)
 
-**定义1.4 (创建模式)**
+#### 定义 1.2.1 (创建模式)
+
 创建模式 $CP = (F, C, I, R)$ 包含：
-- $F$: 工厂函数集合
-- $C$: 创建约束集合
-- $I$: 初始化规则集合
-- $R$: 资源管理规则集合
+- $F$: 工厂函数集合 (Factory Function Set)
+- $C$: 创建约束集合 (Creation Constraint Set)
+- $I$: 初始化规则集合 (Initialization Rule Set)
+- $R$: 资源管理规则集合 (Resource Management Rule Set)
 
-**定义1.5 (创建约束)**
+#### 定义 1.2.2 (创建约束)
+
 创建约束 $\text{CreationConstraint}: \text{Class} \times \text{Context} \rightarrow \text{Boolean}$ 定义为：
 $$\text{CreationConstraint}(C, ctx) = \begin{cases}
 \text{true} & \text{if creation is allowed in context } ctx \\
 \text{false} & \text{otherwise}
 \end{cases}$$
 
-## 2. 创建型模式五元组定义
+---
 
-**定义2.1 (创建型模式系统)**
+## 2. 创建型模式五元组定义 (Creational Pattern Quintuple Definition)
+
+#### 定义 2.1.1 (创建型模式系统)
+
 创建型模式系统 $CPS = (S, F, A, B, P)$ 包含：
 
 - **S (Singleton)**: 单例模式系统 $S = (I, A, L, T)$
-  - $I$: 实例管理
-  - $A$: 访问控制
-  - $L$: 生命周期管理
-  - $T$: 线程安全
+  - $I$: 实例管理 (Instance Management)
+  - $A$: 访问控制 (Access Control)
+  - $L$: 生命周期管理 (Lifecycle Management)
+  - $T$: 线程安全 (Thread Safety)
 
 - **F (Factory Method)**: 工厂方法系统 $F = (I, C, P, D)$
-  - $I$: 工厂接口
-  - $C$: 具体工厂
-  - $P$: 产品定义
-  - $D$: 延迟创建
+  - $I$: 工厂接口 (Factory Interface)
+  - $C$: 具体工厂 (Concrete Factory)
+  - $P$: 产品定义 (Product Definition)
+  - $D$: 延迟创建 (Deferred Creation)
 
 - **A (Abstract Factory)**: 抽象工厂系统 $A = (F, P, C, R)$
-  - $F$: 工厂族
-  - $P$: 产品族
-  - $C$: 创建协调
-  - $R$: 关系管理
+  - $F$: 工厂族 (Factory Family)
+  - $P$: 产品族 (Product Family)
+  - $C$: 创建协调 (Creation Coordination)
+  - $R$: 关系管理 (Relation Management)
 
 - **B (Builder)**: 建造者系统 $B = (S, P, C, F)$
-  - $S$: 构建步骤
-  - $P$: 产品构建
-  - $C$: 构建控制
-  - $F$: 最终产品
+  - $S$: 构建步骤 (Build Steps)
+  - $P$: 产品构建 (Product Building)
+  - $C$: 构建控制 (Build Control)
+  - $F$: 最终产品 (Final Product)
 
 - **P (Prototype)**: 原型系统 $P = (O, C, D, R)$
-  - $O$: 原型对象
-  - $C$: 克隆操作
-  - $D$: 深度复制
-  - $R$: 复制关系
+  - $O$: 原型对象 (Prototype Object)
+  - $C$: 克隆操作 (Clone Operation)
+  - $D$: 深度复制 (Deep Copy)
+  - $R$: 复制关系 (Copy Relation)
 
-## 3. 单例模式形式化理论
+---
 
-### 3.1 单例代数理论
+## 3. 单例模式形式化理论 (Singleton Pattern Formalization Theory)
 
-**定义3.1 (单例代数)**
+### 3.1 单例代数理论 (Singleton Algebraic Theory)
+
+#### 定义 3.1.1 (单例代数)
+
 单例代数 $SA = (I, A, L, T, C)$ 包含：
 
-- **I (Instance)**: 实例管理
-- **A (Access)**: 访问控制
-- **L (Lifecycle)**: 生命周期管理
-- **T (Threading)**: 线程安全
-- **C (Constraints)**: 约束条件
+- **I (Instance)**: 实例管理 (Instance Management)
+- **A (Access)**: 访问控制 (Access Control)
+- **L (Lifecycle)**: 生命周期管理 (Lifecycle Management)
+- **T (Threading)**: 线程安全 (Thread Safety)
+- **C (Constraints)**: 约束条件 (Constraints)
 
-**定义3.2 (单例约束)**
+#### 定义 3.1.2 (单例约束)
+
 单例约束集合 $SC = \{SC_1, SC_2, SC_3\}$ 定义为：
 
 1. **唯一性约束**: $\forall t \in \text{Time}, \exists! i \in \text{Instance}: \text{Active}(i, t)$
 2. **全局访问约束**: $\forall p \in \text{Process}, \text{CanAccess}(p, i)$
 3. **生命周期约束**: $\text{Lifecycle}(i) = [t_{\text{start}}, \infty)$
 
-### 3.2 单例状态理论
+### 3.2 单例状态理论 (Singleton State Theory)
 
-**定义3.3 (单例状态)**
+#### 定义 3.2.1 (单例状态)
+
 单例状态函数 $\text{SingletonState}: \text{Time} \rightarrow \text{State}$ 定义为：
 $$\text{SingletonState}(t) = \begin{cases}
 \text{Uninitialized} & \text{if } t < t_{\text{init}} \\
 \text{Initialized} & \text{if } t \geq t_{\text{init}}
 \end{cases}$$
 
-**定义3.4 (单例访问)**
+#### 定义 3.2.2 (单例访问)
+
 单例访问函数 $\text{SingletonAccess}: \text{Process} \times \text{Time} \rightarrow \text{Instance}$ 定义为：
 $$\text{SingletonAccess}(p, t) = i \text{ where } \text{Active}(i, t) \land \text{CanAccess}(p, i)$$
 
-## 4. 工厂方法模式形式化理论
+---
 
-### 4.1 工厂方法代数理论
+## 4. 工厂方法模式形式化理论 (Factory Method Pattern Formalization Theory)
 
-**定义4.1 (工厂方法代数)**
+### 4.1 工厂方法代数理论 (Factory Method Algebraic Theory)
+
+#### 定义 4.1.1 (工厂方法代数)
+
 工厂方法代数 $FMA = (I, C, P, D, R)$ 包含：
 
-- **I (Interface)**: 工厂接口
-- **C (Concrete)**: 具体工厂
-- **P (Product)**: 产品定义
-- **D (Defer)**: 延迟创建
-- **R (Rules)**: 创建规则
+- **I (Interface)**: 工厂接口 (Factory Interface)
+- **C (Concrete)**: 具体工厂 (Concrete Factory)
+- **P (Product)**: 产品定义 (Product Definition)
+- **D (Defer)**: 延迟创建 (Deferred Creation)
+- **R (Rules)**: 创建规则 (Creation Rules)
 
-**定义4.2 (工厂方法规则)**
+#### 定义 4.1.2 (工厂方法规则)
+
 工厂方法规则集合 $FMR = \{FMR_1, FMR_2, FMR_3\}$ 定义为：
 
 1. **接口定义规则**: $\forall f \in \text{Factory}, \exists i \in \text{Interface}: \text{Implements}(f, i)$
 2. **产品创建规则**: $\text{Create}(f, args) \rightarrow p \text{ where } p \in \text{Product}$
 3. **延迟创建规则**: $\text{Create}(f, args) = \text{Defer}(\text{CreateProduct}, args)$
 
-### 4.2 工厂方法类型理论
+### 4.2 工厂方法类型理论 (Factory Method Type Theory)
 
-**定义4.3 (工厂类型)**
+#### 定义 4.2.1 (工厂类型)
+
 工厂类型 $FT = \text{Factory} \rightarrow \text{Product}$ 定义为：
 $$FT = \{\lambda args. \text{CreateProduct}(args) \mid \text{CreateProduct} \in \text{ProductCreators}\}$$
 
-**定义4.4 (产品类型)**
+#### 定义 4.2.2 (产品类型)
+
 产品类型 $PT = \text{Product} \times \text{Methods}$ 定义为：
 $$PT = \{(p, m) \mid p \in \text{Product}, m \in \text{Methods}(p)\}$$
 
-## 5. 抽象工厂模式形式化理论
+---
 
-### 5.1 抽象工厂代数理论
+## 5. 抽象工厂模式形式化理论 (Abstract Factory Pattern Formalization Theory)
 
-**定义5.1 (抽象工厂代数)**
+### 5.1 抽象工厂代数理论 (Abstract Factory Algebraic Theory)
+
+#### 定义 5.1.1 (抽象工厂代数)
+
 抽象工厂代数 $AFA = (F, P, C, R, I)$ 包含：
 
-- **F (Factory Family)**: 工厂族
-- **P (Product Family)**: 产品族
-- **C (Creation)**: 创建协调
-- **R (Relations)**: 关系管理
-- **I (Interface)**: 接口定义
+- **F (Factory Family)**: 工厂族 (Factory Family)
+- **P (Product Family)**: 产品族 (Product Family)
+- **C (Creation)**: 创建协调 (Creation Coordination)
+- **R (Relations)**: 关系管理 (Relation Management)
+- **I (Interface)**: 接口定义 (Interface Definition)
 
-**定义5.2 (工厂族关系)**
+#### 定义 5.1.2 (工厂族关系)
+
 工厂族关系 $\text{FactoryFamily}: \text{Factory} \times \text{Product} \rightarrow \text{Boolean}$ 定义为：
 $$\text{FactoryFamily}(f, p) = \begin{cases}
 \text{true} & \text{if } f \text{ can create } p \\
 \text{false} & \text{otherwise}
 \end{cases}$$
 
-### 5.2 产品族理论
+### 5.2 产品族理论 (Product Family Theory)
 
-**定义5.3 (产品族)**
+#### 定义 5.2.1 (产品族)
+
 产品族 $PF = \{P_1, P_2, \ldots, P_n\}$ 定义为：
 $$PF = \{\text{Product} \mid \text{Compatible}(\text{Product})\}$$
 
-**定义5.4 (产品兼容性)**
+#### 定义 5.2.2 (产品兼容性)
+
 产品兼容性 $\text{Compatible}: \text{Product} \times \text{Product} \rightarrow \text{Boolean}$ 定义为：
 $$\text{Compatible}(p_1, p_2) = \begin{cases}
 \text{true} & \text{if } p_1, p_2 \text{ can work together} \\
 \text{false} & \text{otherwise}
 \end{cases}$$
 
-## 6. 建造者模式形式化理论
+---
 
-### 6.1 建造者代数理论
+## 6. 建造者模式形式化理论 (Builder Pattern Formalization Theory)
 
-**定义6.1 (建造者代数)**
+### 6.1 建造者代数理论 (Builder Algebraic Theory)
+
+#### 定义 6.1.1 (建造者代数)
+
 建造者代数 $BA = (S, P, C, F, R)$ 包含：
 
-- **S (Steps)**: 构建步骤
-- **P (Product)**: 产品构建
-- **C (Control)**: 构建控制
-- **F (Final)**: 最终产品
-- **R (Rules)**: 构建规则
+- **S (Steps)**: 构建步骤 (Build Steps)
+- **P (Product)**: 产品构建 (Product Building)
+- **C (Control)**: 构建控制 (Build Control)
+- **F (Final)**: 最终产品 (Final Product)
+- **R (Rules)**: 构建规则 (Build Rules)
 
-**定义6.2 (构建步骤)**
+#### 定义 6.1.2 (构建步骤)
+
 构建步骤序列 $\text{BuildSteps}: \text{Builder} \rightarrow [\text{Step}]$ 定义为：
 $$\text{BuildSteps}(b) = [s_1, s_2, \ldots, s_n] \text{ where } s_i \in \text{Steps}$$
 
-**定义6.3 (步骤依赖)**
-步骤依赖关系 $\text{StepDependency}: \text{Step} \times \text{Step} \rightarrow \text{Boolean}$ 定义为：
-$$\text{StepDependency}(s_1, s_2) = \begin{cases}
-\text{true} & \text{if } s_2 \text{ depends on } s_1 \\
-\text{false} & \text{otherwise}
-\end{cases}$$
-
-### 6.2 构建过程理论
+### 6.2 构建过程理论 (Build Process Theory)
 
 **定义6.3 (构建过程)**
 构建过程 $\text{BuildProcess}: \text{Builder} \times \text{Args} \rightarrow \text{Product}$ 定义为：
@@ -216,7 +288,7 @@ $$\text{BuildProcess}(b, args) = \text{ExecuteSteps}(\text{BuildSteps}(b), args)
 步骤执行函数 $\text{ExecuteSteps}: [\text{Step}] \times \text{Args} \rightarrow \text{Product}$ 定义为：
 $$\text{ExecuteSteps}([s_1, s_2, \ldots, s_n], args) = s_n \circ s_{n-1} \circ \ldots \circ s_1(args)$$
 
-### 6.3 建造者状态理论
+### 6.3 建造者状态理论 (Builder State Theory)
 
 **定义6.5 (建造者状态)**
 建造者状态 $\text{BuilderState}: \text{Builder} \times \text{Time} \rightarrow \text{State}$ 定义为：
@@ -226,45 +298,54 @@ $$\text{BuilderState}(b, t) = \begin{cases}
 \text{Complete} & \text{if } t \geq t_{\text{complete}}
 \end{cases}$$
 
-## 7. 原型模式形式化理论
+---
 
-### 7.1 原型代数理论
+## 7. 原型模式形式化理论 (Prototype Pattern Formalization Theory)
 
-**定义7.1 (原型代数)**
+### 7.1 原型代数理论 (Prototype Algebraic Theory)
+
+#### 定义 7.1.1 (原型代数)
+
 原型代数 $PA = (O, C, D, R, T)$ 包含：
 
-- **O (Original)**: 原型对象
-- **C (Clone)**: 克隆操作
-- **D (Deep)**: 深度复制
-- **R (Reference)**: 引用关系
-- **T (Type)**: 类型系统
+- **O (Original)**: 原型对象 (Prototype Object)
+- **C (Clone)**: 克隆操作 (Clone Operation)
+- **D (Deep)**: 深度复制 (Deep Copy)
+- **R (Reference)**: 引用关系 (Reference Relation)
+- **T (Type)**: 类型系统 (Type System)
 
-**定义7.2 (克隆操作)**
+#### 定义 7.1.2 (克隆操作)
+
 克隆操作 $\text{Clone}: \text{Object} \rightarrow \text{Object}$ 定义为：
 $$\text{Clone}(o) = o' \text{ where } \text{IsCopy}(o, o') \land \text{Independent}(o, o')$$
 
-### 7.2 复制深度理论
+### 7.2 复制深度理论 (Copy Depth Theory)
 
-**定义7.3 (浅复制)**
+#### 定义 7.2.1 (浅复制)
+
 浅复制 $\text{ShallowCopy}: \text{Object} \rightarrow \text{Object}$ 定义为：
 $$\text{ShallowCopy}(o) = o' \text{ where } \text{CopyState}(o, o') \land \text{ShareReferences}(o, o')$$
 
-**定义7.4 (深复制)**
+#### 定义 7.2.2 (深复制)
+
 深复制 $\text{DeepCopy}: \text{Object} \rightarrow \text{Object}$ 定义为：
 $$\text{DeepCopy}(o) = o' \text{ where } \text{CopyState}(o, o') \land \text{CopyReferences}(o, o')$$
 
-### 7.3 原型关系理论
+### 7.3 原型关系理论 (Prototype Relation Theory)
 
-**定义7.5 (原型关系)**
+#### 定义 7.3.1 (原型关系)
+
 原型关系 $\text{PrototypeRelation}: \text{Object} \times \text{Object} \rightarrow \text{Boolean}$ 定义为：
 $$\text{PrototypeRelation}(p, c) = \begin{cases}
 \text{true} & \text{if } c \text{ is cloned from } p \\
 \text{false} & \text{otherwise}
 \end{cases}$$
 
-## 8. 核心定理证明
+---
 
-### 8.1 单例唯一性定理
+## 8. 核心定理证明 (Core Theorems Proof)
+
+### 8.1 单例唯一性定理 (Singleton Uniqueness Theorem)
 
 **定理8.1 (单例唯一性)**
 对于任意时间 $t$，系统中最多存在一个单例实例。
@@ -275,7 +356,7 @@ $$\forall t \in \text{Time}, \exists! i \in \text{Instance}: \text{Active}(i, t)
 
 这意味着在任意时间 $t$，只能有一个活跃实例，与假设矛盾。因此，单例实例是唯一的。
 
-### 8.2 工厂方法类型安全定理
+### 8.2 工厂方法类型安全定理 (Factory Method Type Safety Theorem)
 
 **定理8.2 (工厂方法类型安全)**
 工厂方法创建的产品类型与工厂类型一致。
@@ -289,7 +370,7 @@ $$\text{TypeOf}(\text{Create}(f, args)) = \text{Product}$$
 
 因此，工厂方法创建的产品类型与工厂类型一致。
 
-### 8.3 抽象工厂兼容性定理
+### 8.3 抽象工厂兼容性定理 (Abstract Factory Compatibility Theorem)
 
 **定理8.3 (抽象工厂兼容性)**
 同一工厂族创建的产品族中的产品相互兼容。
@@ -304,7 +385,7 @@ $$\text{Compatible}(p_1, p_2) = \begin{cases}
 对于同一工厂族 $f$ 创建的产品 $p_1, p_2$，根据工厂族关系：
 $$\text{FactoryFamily}(f, p_1) \land \text{FactoryFamily}(f, p_2) \Rightarrow \text{Compatible}(p_1, p_2)$$
 
-### 8.4 建造者完整性定理
+### 8.4 建造者完整性定理 (Builder Completeness Theorem)
 
 **定理8.4 (建造者完整性)**
 建造者模式能够构建完整的产品。
@@ -318,7 +399,7 @@ $$\text{ExecuteSteps}([s_1, s_2, \ldots, s_n], args) = s_n \circ s_{n-1} \circ \
 
 这确保了所有必要的构建步骤都被执行，从而构建出完整的产品。
 
-### 8.5 原型独立性定理
+### 8.5 原型独立性定理 (Prototype Independence Theorem)
 
 **定理8.5 (原型独立性)**
 克隆的对象与原对象相互独立。
@@ -329,9 +410,11 @@ $$\text{Clone}(o) = o' \text{ where } \text{IsCopy}(o, o') \land \text{Independe
 
 这意味着克隆对象 $o'$ 与原对象 $o$ 是独立的，对其中一个对象的修改不会影响另一个对象。
 
-## 9. Rust实现
+---
 
-### 9.1 单例模式实现
+## 9. Rust实现 (Rust Implementation)
+
+### 9.1 单例模式实现 (Singleton Pattern Implementation)
 
 ```rust
 use std::sync::{Mutex, Once, ONCE_INIT};
@@ -427,7 +510,7 @@ impl SingletonConstraints for SingletonAlgebra {
 }
 ```
 
-### 9.2 工厂方法模式实现
+### 9.2 工厂方法模式实现 (Factory Method Pattern Implementation)
 
 ```rust
 /// 工厂方法代数实现
@@ -518,7 +601,7 @@ where
 }
 ```
 
-### 9.3 抽象工厂模式实现
+### 9.3 抽象工厂模式实现 (Abstract Factory Pattern Implementation)
 
 ```rust
 /// 抽象工厂代数实现
@@ -593,7 +676,7 @@ impl ProductFamilyCompatibility for ProductFamily {
 }
 ```
 
-### 9.4 建造者模式实现
+### 9.4 建造者模式实现 (Builder Pattern Implementation)
 
 ```rust
 /// 建造者代数实现
@@ -700,7 +783,7 @@ impl BuildProcessValidation for ProductBuilder {
 }
 ```
 
-### 9.5 原型模式实现
+### 9.5 原型模式实现 (Prototype Pattern Implementation)
 
 ```rust
 /// 原型代数实现

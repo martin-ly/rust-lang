@@ -13,14 +13,17 @@
 ### 1.1 并发优化目标 (Concurrency Optimization Goals)
 
 **定义 1.1.1** (并发优化)
+
 并发优化是在多线程环境中最大化系统性能的过程，目标函数为：
 $$Optimize(Throughput, Latency, Resource\_Usage)$$
 
 **定义 1.1.2** (性能指标)
 
+```latex
 - 吞吐量：$Throughput = \frac{Operations}{Time}$
 - 延迟：$Latency = \frac{Time}{Operation}$
 - 资源利用率：$Utilization = \frac{Used\_Resources}{Total\_Resources}$
+```
 
 ### 1.2 优化策略 (Optimization Strategies)
 
@@ -53,14 +56,21 @@ $$Optimize(Throughput, Latency, Resource\_Usage)$$
 ### 3.1 优化定理 (Optimization Theorems)
 
 **定理 3.1.1** (并发优化上界)
+
+```latex
 并发优化的性能上界为：
 $$Performance_{max} = \frac{1}{1 + \frac{Contention}{Parallelism} + \frac{Overhead}{Work}}$$
+```
 
 **定理 3.1.2** (资源优化定理)
+
+```latex
 资源优化的效率为：
 $$Efficiency = \frac{1}{1 + \frac{Resource\_Contention}{Resource\_Capacity}}$$
+```
 
 **定理 3.1.3** (负载均衡定理)
+
 最优负载均衡度：$LB_{optimal} = 1 + \frac{Variance}{Mean}$
 
 ## 4. Rust实现 (Rust Implementation)
