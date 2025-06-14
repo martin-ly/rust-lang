@@ -2,7 +2,7 @@
 
 ## 目录结构
 
-```
+```text
 20_concurrent_parallel_advanced/
 ├── README.md                           # 本文件
 ├── 01_concurrent_models_formalization.md # 并发模型形式化理论
