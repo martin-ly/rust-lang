@@ -2,7 +2,7 @@
 
 ## 目录
 
-- [语言哲学形式化理论](#语言哲学形式化理论)
+- [语言哲学形式化理论 (Language Philosophy Formalization Theory)](#语言哲学形式化理论-language-philosophy-formalization-theory)
   - [目录](#目录)
   - [1. 理论基础](#1-理论基础)
     - [1.1 语言哲学基本概念](#11-语言哲学基本概念)
@@ -27,6 +27,8 @@
   - [6. 定理与证明](#6-定理与证明)
   - [7. Rust实现](#7-rust实现)
   - [8. 应用与展望](#8-应用与展望)
+    - [8.1 应用领域](#81-应用领域)
+    - [8.2 未来展望](#82-未来展望)
 
 ---
 
@@ -39,12 +41,14 @@
 
 **定义 1.1.2** (形式化语言)
 形式化语言是一个三元组 $\mathcal{L} = (\Sigma, \mathcal{R}, \mathcal{S})$，其中：
+
 - $\Sigma$ 是字母表（符号集合）
 - $\mathcal{R}$ 是规则集合
 - $\mathcal{S}$ 是语义解释
 
 **定义 1.1.3** (语言模型)
 语言模型是一个四元组 $\mathcal{M} = (\mathcal{L}, \mathcal{T}, \mathcal{I}, \mathcal{V})$，其中：
+
 - $\mathcal{L}$ 是形式化语言
 - $\mathcal{T}$ 是类型系统
 - $\mathcal{I}$ 是解释函数
@@ -57,6 +61,7 @@
 $$\mathcal{S} = \langle \mathcal{S}_s, \mathcal{S}_t, \mathcal{S}_r \rangle$$
 
 其中：
+
 - $\mathcal{S}_s$ 是语法结构
 - $\mathcal{S}_t$ 是类型结构  
 - $\mathcal{S}_r$ 是语义结构
@@ -66,6 +71,7 @@ $$\mathcal{S} = \langle \mathcal{S}_s, \mathcal{S}_t, \mathcal{S}_r \rangle$$
 $$\mathcal{I}: \mathcal{E} \times \mathcal{C} \rightarrow \mathcal{V}$$
 
 其中：
+
 - $\mathcal{E}$ 是表达式集合
 - $\mathcal{C}$ 是上下文集合
 - $\mathcal{V}$ 是值集合
@@ -92,6 +98,7 @@ $$\mathcal{I}: \mathcal{E} \times \mathcal{C} \rightarrow \mathcal{V}$$
 
 **证明**：
 设 $\Sigma$ 是一个非空符号集合，定义：
+
 - $\mathcal{R} = \{\epsilon \rightarrow \sigma | \sigma \in \Sigma\}$
 - $\mathcal{S}(w) = w$ 对于 $w \in \Sigma^*$
 
@@ -110,6 +117,7 @@ $$\mathcal{I}: \mathcal{E} \times \mathcal{C} \rightarrow \mathcal{V}$$
 $$\mathcal{S}_s = (V, \Sigma, P, S)$$
 
 其中：
+
 - $V$ 是非终结符集合
 - $\Sigma$ 是终结符集合
 - $P$ 是产生式规则集合
@@ -120,6 +128,7 @@ $$\mathcal{S}_s = (V, \Sigma, P, S)$$
 $$\mathcal{S}_t = (\mathcal{T}, \mathcal{R}_t, \mathcal{I}_t)$$
 
 其中：
+
 - $\mathcal{T}$ 是类型集合
 - $\mathcal{R}_t$ 是类型规则
 - $\mathcal{I}_t$ 是类型解释
@@ -143,6 +152,7 @@ $$\mathcal{L}_{i+1} = \mathcal{E}(\mathcal{L}_i, \mathcal{C}_i)$$
 $$\mathcal{C} = (\mathcal{K}, \mathcal{P}, \mathcal{R}, \mathcal{I}, \mathcal{V})$$
 
 其中：
+
 - $\mathcal{K}$ 是知识库
 - $\mathcal{P}$ 是处理函数
 - $\mathcal{R}$ 是推理规则
@@ -214,6 +224,7 @@ Rust所有权系统 $\mathcal{O}$ 定义为：
 $$\mathcal{O} = (\mathcal{R}, \mathcal{B}, \mathcal{T})$$
 
 其中：
+
 - $\mathcal{R}$ 是资源集合
 - $\mathcal{B}$ 是借用规则
 - $\mathcal{T}$ 是转移规则
@@ -231,6 +242,7 @@ Rust类型系统 $\mathcal{T}_r$ 定义为：
 $$\mathcal{T}_r = (\mathcal{T}, \mathcal{S}, \mathcal{I})$$
 
 其中：
+
 - $\mathcal{T}$ 是类型集合
 - $\mathcal{S}$ 是子类型关系
 - $\mathcal{I}$ 是类型推断
@@ -245,6 +257,7 @@ Rust并发模型 $\mathcal{C}_r$ 定义为：
 $$\mathcal{C}_r = (\mathcal{T}, \mathcal{M}, \mathcal{S})$$
 
 其中：
+
 - $\mathcal{T}$ 是线程集合
 - $\mathcal{M}$ 是内存模型
 - $\mathcal{S}$ 是同步原语
@@ -258,6 +271,7 @@ $$\mathcal{C}_r = (\mathcal{T}, \mathcal{M}, \mathcal{S})$$
 
 **证明**：
 通过归纳法证明：
+
 1. 基础情况：对于基本语言构造，理论能够解释
 2. 归纳步骤：对于复杂语言构造，通过组合基本构造得到
 3. 结论：理论能够解释所有语言现象
@@ -451,4 +465,4 @@ mod tests {
 **文档版本**: 1.0
 **创建时间**: 2025-06-14
 **作者**: AI Assistant
-**状态**: 完成 
+**状态**: 完成

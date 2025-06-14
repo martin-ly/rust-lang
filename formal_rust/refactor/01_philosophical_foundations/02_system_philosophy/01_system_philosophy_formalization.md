@@ -2,7 +2,7 @@
 
 ## 目录
 
-- [系统哲学形式化理论](#系统哲学形式化理论)
+- [系统哲学形式化理论 (System Philosophy Formalization Theory)](#系统哲学形式化理论-system-philosophy-formalization-theory)
   - [目录](#目录)
   - [1. 理论基础](#1-理论基础)
     - [1.1 系统哲学基本概念](#11-系统哲学基本概念)
@@ -27,6 +27,8 @@
   - [6. 定理与证明](#6-定理与证明)
   - [7. Rust实现](#7-rust实现)
   - [8. 应用与展望](#8-应用与展望)
+    - [8.1 应用领域](#81-应用领域)
+    - [8.2 未来展望](#82-未来展望)
 
 ---
 
@@ -39,6 +41,7 @@
 
 **定义 1.1.2** (形式化系统)
 形式化系统是一个四元组 $\mathcal{S} = (\mathcal{E}, \mathcal{R}, \mathcal{F}, \mathcal{I})$，其中：
+
 - $\mathcal{E}$ 是元素集合
 - $\mathcal{R}$ 是关系集合
 - $\mathcal{F}$ 是功能集合
@@ -46,6 +49,7 @@
 
 **定义 1.1.3** (系统模型)
 系统模型是一个五元组 $\mathcal{M} = (\mathcal{S}, \mathcal{T}, \mathcal{B}, \mathcal{C}, \mathcal{V})$，其中：
+
 - $\mathcal{S}$ 是形式化系统
 - $\mathcal{T}$ 是时间模型
 - $\mathcal{B}$ 是行为模型
@@ -59,6 +63,7 @@
 $$\mathcal{S}_s = \langle \mathcal{E}, \mathcal{R}, \mathcal{H} \rangle$$
 
 其中：
+
 - $\mathcal{E}$ 是元素集合
 - $\mathcal{R}$ 是关系集合
 - $\mathcal{H}$ 是层次结构
@@ -68,6 +73,7 @@ $$\mathcal{S}_s = \langle \mathcal{E}, \mathcal{R}, \mathcal{H} \rangle$$
 $$\mathcal{B}: \mathcal{S} \times \mathcal{T} \times \mathcal{I} \rightarrow \mathcal{O}$$
 
 其中：
+
 - $\mathcal{S}$ 是系统状态
 - $\mathcal{T}$ 是时间
 - $\mathcal{I}$ 是输入
@@ -95,6 +101,7 @@ $$\mathcal{B}: \mathcal{S} \times \mathcal{T} \times \mathcal{I} \rightarrow \ma
 
 **证明**：
 设 $\mathcal{E}$ 是一个非空元素集合，定义：
+
 - $\mathcal{R} = \{(e, e) | e \in \mathcal{E}\}$ (自反关系)
 - $\mathcal{F} = \{\text{id}\}$ (恒等函数)
 - $\mathcal{I} = \emptyset$ (空接口)
@@ -140,6 +147,7 @@ $$\mathcal{S}_{i+1} = \mathcal{E}_v(\mathcal{S}_i, \mathcal{C}_i)$$
 $$\mathcal{C} = (\mathcal{K}, \mathcal{P}, \mathcal{R}, \mathcal{I}, \mathcal{V}, \mathcal{L})$$
 
 其中：
+
 - $\mathcal{K}$ 是知识库
 - $\mathcal{P}$ 是处理函数
 - $\mathcal{R}$ 是推理规则
@@ -214,6 +222,7 @@ $$\mathcal{V}: \mathcal{S} \times \mathcal{P} \rightarrow \mathbb{B}$$
 $$\mathcal{S}_w = (\mathcal{C}, \mathcal{D}, \mathcal{I}, \mathcal{O})$$
 
 其中：
+
 - $\mathcal{C}$ 是代码集合
 - $\mathcal{D}$ 是数据结构集合
 - $\mathcal{I}$ 是接口集合
@@ -252,6 +261,7 @@ $$\mathcal{D}_w: \mathcal{R} \times \mathcal{C} \rightarrow \mathcal{S}_w$$
 
 **证明**：
 通过归纳法证明：
+
 1. 基础情况：对于基本系统构造，理论能够解释
 2. 归纳步骤：对于复杂系统构造，通过组合基本构造得到
 3. 结论：理论能够解释所有系统现象
@@ -506,4 +516,4 @@ mod tests {
 **文档版本**: 1.0
 **创建时间**: 2025-06-14
 **作者**: AI Assistant
-**状态**: 完成 
+**状态**: 完成

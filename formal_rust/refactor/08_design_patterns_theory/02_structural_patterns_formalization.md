@@ -1,81 +1,102 @@
-# 结构型设计模式形式化理论 (Structural Design Patterns Formalization Theory)
+# 结构型设计模式形式化理论
 
-## 📋 目录 (Table of Contents)
+(Structural Design Patterns Formalization Theory)
 
-### 1. 理论基础 (Theoretical Foundation)
+## 目录
 
-1.1 结构关系基础 (Structural Relation Foundation)
-1.2 组合关系理论 (Composition Relation Theory)
-
-### 2. 结构型模式七元组定义 (Structural Pattern Septuple Definition)
-
-2.1 适配器模式系统 (Adapter Pattern System)
-2.2 桥接模式系统 (Bridge Pattern System)
-2.3 组合模式系统 (Composite Pattern System)
-2.4 装饰器模式系统 (Decorator Pattern System)
-2.5 外观模式系统 (Facade Pattern System)
-2.6 享元模式系统 (Flyweight Pattern System)
-2.7 代理模式系统 (Proxy Pattern System)
-
-### 3. 适配器模式形式化理论 (Adapter Pattern Formalization Theory)
-
-3.1 适配器代数理论 (Adapter Algebraic Theory)
-3.2 适配器转换理论 (Adapter Transformation Theory)
-3.3 适配器正确性理论 (Adapter Correctness Theory)
-
-### 4. 桥接模式形式化理论 (Bridge Pattern Formalization Theory)
-
-4.1 桥接代数理论 (Bridge Algebraic Theory)
-4.2 桥接关系理论 (Bridge Relation Theory)
-4.3 桥接解耦理论 (Bridge Decoupling Theory)
-
-### 5. 组合模式形式化理论 (Composite Pattern Formalization Theory)
-
-5.1 组合代数理论 (Composite Algebraic Theory)
-5.2 组合结构理论 (Composite Structure Theory)
-5.3 组合操作理论 (Composite Operation Theory)
-
-### 6. 装饰器模式形式化理论 (Decorator Pattern Formalization Theory)
-
-6.1 装饰器代数理论 (Decorator Algebraic Theory)
-6.2 装饰器包装理论 (Decorator Wrapping Theory)
-6.3 装饰器扩展理论 (Decorator Extension Theory)
-
-### 7. 外观模式形式化理论 (Facade Pattern Formalization Theory)
-
-7.1 外观代数理论 (Facade Algebraic Theory)
-7.2 外观简化理论 (Facade Simplification Theory)
-7.3 外观封装理论 (Facade Encapsulation Theory)
-
-### 8. 享元模式形式化理论 (Flyweight Pattern Formalization Theory)
-
-8.1 享元代数理论 (Flyweight Algebraic Theory)
-8.2 享元共享理论 (Flyweight Sharing Theory)
-8.3 享元缓存理论 (Flyweight Caching Theory)
-
-### 9. 代理模式形式化理论 (Proxy Pattern Formalization Theory)
-
-9.1 代理代数理论 (Proxy Algebraic Theory)
-9.2 代理控制理论 (Proxy Control Theory)
-9.3 代理行为理论 (Proxy Behavior Theory)
-
-### 10. 核心定理证明 (Core Theorems Proof)
-
-10.1 结构型模式正确性定理 (Structural Pattern Correctness Theorems)
-10.2 结构型模式一致性定理 (Structural Pattern Consistency Theorems)
-10.3 结构型模式最优性定理 (Structural Pattern Optimality Theorems)
-
-### 11. Rust实现 (Rust Implementation)
-
-11.1 适配器模式实现 (Adapter Pattern Implementation)
-11.2 桥接模式实现 (Bridge Pattern Implementation)
-11.3 组合模式实现 (Composite Pattern Implementation)
-11.4 装饰器模式实现 (Decorator Pattern Implementation)
-11.5 外观模式实现 (Facade Pattern Implementation)
-11.6 享元模式实现 (Flyweight Pattern Implementation)
-11.7 代理模式实现 (Proxy Pattern Implementation)
-
----
+- [结构型设计模式形式化理论](#结构型设计模式形式化理论)
+  - [目录](#目录)
+  - [1. 理论基础 (Theoretical Foundation)](#1-理论基础-theoretical-foundation)
+    - [1.1 结构关系基础 (Structural Relation Foundation)](#11-结构关系基础-structural-relation-foundation)
+      - [定义 1.1.1 (结构关系)](#定义-111-结构关系)
+      - [定义 1.1.2 (接口兼容性)](#定义-112-接口兼容性)
+      - [定义 1.1.3 (结构变换)](#定义-113-结构变换)
+    - [1.2 组合关系理论 (Composition Relation Theory)](#12-组合关系理论-composition-relation-theory)
+      - [定义 1.2.1 (组合关系)](#定义-121-组合关系)
+      - [定义 1.2.2 (层次结构)](#定义-122-层次结构)
+  - [2. 结构型模式七元组定义 (Structural Pattern Septuple Definition)](#2-结构型模式七元组定义-structural-pattern-septuple-definition)
+      - [定义 2.1.1 (结构型模式系统)](#定义-211-结构型模式系统)
+  - [3. 适配器模式形式化理论 (Adapter Pattern Formalization Theory)](#3-适配器模式形式化理论-adapter-pattern-formalization-theory)
+    - [3.1 适配器代数理论 (Adapter Algebraic Theory)](#31-适配器代数理论-adapter-algebraic-theory)
+      - [定义 3.1.1 (适配器代数)](#定义-311-适配器代数)
+      - [定义 3.1.2 (接口适配)](#定义-312-接口适配)
+    - [3.2 适配器转换理论 (Adapter Transformation Theory)](#32-适配器转换理论-adapter-transformation-theory)
+      - [定义 3.2.1 (方法映射)](#定义-321-方法映射)
+      - [定义 3.2.2 (参数转换)](#定义-322-参数转换)
+    - [3.3 适配器正确性理论 (Adapter Correctness Theory)](#33-适配器正确性理论-adapter-correctness-theory)
+      - [定义 3.3.1 (适配正确性)](#定义-331-适配正确性)
+  - [4. 桥接模式形式化理论 (Bridge Pattern Formalization Theory)](#4-桥接模式形式化理论-bridge-pattern-formalization-theory)
+    - [4.1 桥接代数理论 (Bridge Algebraic Theory)](#41-桥接代数理论-bridge-algebraic-theory)
+      - [定义 4.1.1 (桥接代数)](#定义-411-桥接代数)
+      - [定义 4.1.2 (抽象实现分离)](#定义-412-抽象实现分离)
+    - [4.2 桥接关系理论 (Bridge Relation Theory)](#42-桥接关系理论-bridge-relation-theory)
+      - [定义 4.2.1 (桥接关系)](#定义-421-桥接关系)
+      - [定义 4.2.2 (实现替换)](#定义-422-实现替换)
+  - [5. 组合模式形式化理论 (Composite Pattern Formalization Theory)](#5-组合模式形式化理论-composite-pattern-formalization-theory)
+    - [5.1 组合代数理论 (Composite Algebraic Theory)](#51-组合代数理论-composite-algebraic-theory)
+      - [定义 5.1.1 (组合代数)](#定义-511-组合代数)
+      - [定义 5.1.2 (组件操作)](#定义-512-组件操作)
+    - [5.2 组合结构理论 (Composite Structure Theory)](#52-组合结构理论-composite-structure-theory)
+      - [定义 5.2.1 (组合结构)](#定义-521-组合结构)
+    - [5.3 组合操作理论 (Composite Operation Theory)](#53-组合操作理论-composite-operation-theory)
+      - [定义 5.3.1 (递归操作)](#定义-531-递归操作)
+  - [6. 装饰器模式形式化理论 (Decorator Pattern Formalization Theory)](#6-装饰器模式形式化理论-decorator-pattern-formalization-theory)
+    - [6.1 装饰器代数理论 (Decorator Algebraic Theory)](#61-装饰器代数理论-decorator-algebraic-theory)
+      - [定义 6.1.1 (装饰器代数)](#定义-611-装饰器代数)
+      - [定义 6.1.2 (装饰器链)](#定义-612-装饰器链)
+    - [6.2 装饰器包装理论 (Decorator Wrapping Theory)](#62-装饰器包装理论-decorator-wrapping-theory)
+      - [定义 6.2.1 (装饰器行为)](#定义-621-装饰器行为)
+      - [定义 6.2.2 (功能组合)](#定义-622-功能组合)
+    - [6.3 装饰器扩展理论 (Decorator Extension Theory)](#63-装饰器扩展理论-decorator-extension-theory)
+      - [定义 6.3.1 (装饰器扩展性)](#定义-631-装饰器扩展性)
+  - [7. 外观模式形式化理论 (Facade Pattern Formalization Theory)](#7-外观模式形式化理论-facade-pattern-formalization-theory)
+    - [7.1 外观代数理论 (Facade Algebraic Theory)](#71-外观代数理论-facade-algebraic-theory)
+      - [定义 7.1.1 (外观代数)](#定义-711-外观代数)
+      - [定义 7.1.2 (外观接口)](#定义-712-外观接口)
+    - [7.2 外观简化理论 (Facade Simplification Theory)](#72-外观简化理论-facade-simplification-theory)
+      - [定义 7.2.1 (复杂性隐藏)](#定义-721-复杂性隐藏)
+      - [定义 7.2.2 (接口简化)](#定义-722-接口简化)
+    - [7.3 外观封装理论 (Facade Encapsulation Theory)](#73-外观封装理论-facade-encapsulation-theory)
+      - [定义 7.3.1 (外观封装)](#定义-731-外观封装)
+  - [8. 享元模式形式化理论 (Flyweight Pattern Formalization Theory)](#8-享元模式形式化理论-flyweight-pattern-formalization-theory)
+    - [8.1 享元代数理论 (Flyweight Algebraic Theory)](#81-享元代数理论-flyweight-algebraic-theory)
+      - [定义 8.1.1 (享元代数)](#定义-811-享元代数)
+      - [定义 8.1.2 (享元对象)](#定义-812-享元对象)
+    - [8.2 享元共享理论 (Flyweight Sharing Theory)](#82-享元共享理论-flyweight-sharing-theory)
+      - [定义 8.2.1 (状态分离)](#定义-821-状态分离)
+      - [定义 8.2.2 (共享管理)](#定义-822-共享管理)
+    - [8.3 享元缓存理论 (Flyweight Caching Theory)](#83-享元缓存理论-flyweight-caching-theory)
+      - [定义 8.3.1 (享元优化)](#定义-831-享元优化)
+  - [9. 代理模式形式化理论 (Proxy Pattern Formalization Theory)](#9-代理模式形式化理论-proxy-pattern-formalization-theory)
+    - [9.1 代理代数理论 (Proxy Algebraic Theory)](#91-代理代数理论-proxy-algebraic-theory)
+      - [定义 9.1.1 (代理代数)](#定义-911-代理代数)
+      - [定义 9.1.2 (代理关系)](#定义-912-代理关系)
+    - [9.2 代理控制理论 (Proxy Control Theory)](#92-代理控制理论-proxy-control-theory)
+      - [定义 9.2.1 (访问控制)](#定义-921-访问控制)
+    - [9.3 代理行为理论 (Proxy Behavior Theory)](#93-代理行为理论-proxy-behavior-theory)
+      - [定义 9.3.1 (代理行为)](#定义-931-代理行为)
+  - [10. 核心定理证明 (Core Theorems Proof)](#10-核心定理证明-core-theorems-proof)
+    - [10.1 结构型模式正确性定理 (Structural Pattern Correctness Theorems)](#101-结构型模式正确性定理-structural-pattern-correctness-theorems)
+      - [定理 10.1.1 (适配器兼容性)](#定理-1011-适配器兼容性)
+      - [定理 10.1.2 (桥接解耦)](#定理-1012-桥接解耦)
+      - [定理 10.1.3 (组合统一性)](#定理-1013-组合统一性)
+      - [定理 10.1.4 (装饰器扩展性)](#定理-1014-装饰器扩展性)
+      - [定理 10.1.5 (外观简化)](#定理-1015-外观简化)
+      - [定理 10.1.6 (享元优化)](#定理-1016-享元优化)
+      - [定理 10.1.7 (代理控制)](#定理-1017-代理控制)
+    - [10.2 结构型模式一致性定理 (Structural Pattern Consistency Theorems)](#102-结构型模式一致性定理-structural-pattern-consistency-theorems)
+      - [定理 10.2.1 (组合一致性)](#定理-1021-组合一致性)
+    - [10.3 结构型模式最优性定理 (Structural Pattern Optimality Theorems)](#103-结构型模式最优性定理-structural-pattern-optimality-theorems)
+      - [定理 10.3.1 (装饰器扩展性)](#定理-1031-装饰器扩展性)
+  - [11. Rust实现 (Rust Implementation)](#11-rust实现-rust-implementation)
+    - [11.1 适配器模式实现 (Adapter Pattern Implementation)](#111-适配器模式实现-adapter-pattern-implementation)
+    - [11.2 桥接模式实现 (Bridge Pattern Implementation)](#112-桥接模式实现-bridge-pattern-implementation)
+    - [11.3 组合模式实现 (Composite Pattern Implementation)](#113-组合模式实现-composite-pattern-implementation)
+    - [11.4 装饰器模式实现 (Decorator Pattern Implementation)](#114-装饰器模式实现-decorator-pattern-implementation)
+    - [11.5 外观模式实现 (Facade Pattern Implementation)](#115-外观模式实现-facade-pattern-implementation)
+    - [11.6 享元模式实现 (Flyweight Pattern Implementation)](#116-享元模式实现-flyweight-pattern-implementation)
+    - [11.7 代理模式实现 (Proxy Pattern Implementation)](#117-代理模式实现-proxy-pattern-implementation)
+  - [12. 总结](#12-总结)
 
 ## 1. 理论基础 (Theoretical Foundation)
 
@@ -91,16 +112,20 @@
 
 #### 定义 1.1.2 (接口兼容性)
 
+```latex
 接口兼容性 $\text{Compatible}: \text{Interface} \times \text{Interface} \rightarrow \text{Boolean}$ 定义为：
 $$\text{Compatible}(I_1, I_2) = \begin{cases}
 \text{true} & \text{if } I_1 \text{ and } I_2 \text{ have compatible signatures} \\
 \text{false} & \text{otherwise}
 \end{cases}$$
+```
 
 #### 定义 1.1.3 (结构变换)
 
+```latex
 结构变换 $\text{Transform}: \text{Structure} \times \text{Operation} \rightarrow \text{Structure}$ 定义为：
 $$\text{Transform}(S, op) = S' \text{ where } S' \text{ is the result of applying } op \text{ to } S$$
+```
 
 ### 1.2 组合关系理论 (Composition Relation Theory)
 

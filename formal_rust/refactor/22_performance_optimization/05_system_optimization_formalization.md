@@ -1,55 +1,105 @@
-# 系统优化形式化理论 (System Optimization Formalization Theory)
+# 系统优化形式化理论
 
-## 📋 目录 (Table of Contents)
+(System Optimization Formalization Theory)
 
-### 1. 理论基础 (Theoretical Foundation)
+## 目录
 
-1.1 系统模型基础 (System Model Foundation)
-1.2 资源调度理论 (Resource Scheduling Theory)
-1.3 负载均衡理论 (Load Balancing Theory)
-1.4 性能调优理论 (Performance Tuning Theory)
-
-### 2. 形式化定义 (Formal Definitions)
-
-2.1 系统状态形式化 (System State Formalization)
-2.2 资源模型形式化 (Resource Model Formalization)
-2.3 调度策略形式化 (Scheduling Strategy Formalization)
-2.4 优化目标形式化 (Optimization Objective Formalization)
-
-### 3. 核心定理 (Core Theorems)
-
-3.1 调度最优性定理 (Scheduling Optimality Theorems)
-3.2 负载均衡定理 (Load Balancing Theorems)
-3.3 性能优化定理 (Performance Optimization Theorems)
-3.4 稳定性定理 (Stability Theorems)
-
-### 4. 算法实现 (Algorithm Implementation)
-
-4.1 智能调度算法 (Intelligent Scheduling Algorithm)
-4.2 自适应负载均衡算法 (Adaptive Load Balancing Algorithm)
-4.3 动态资源分配算法 (Dynamic Resource Allocation Algorithm)
-4.4 预测性优化算法 (Predictive Optimization Algorithm)
-
-### 5. Rust实现 (Rust Implementation)
-
-5.1 系统管理器 (System Manager)
-5.2 资源调度器 (Resource Scheduler)
-5.3 负载均衡器 (Load Balancer)
-5.4 性能监控器 (Performance Monitor)
-
-### 6. 性能分析 (Performance Analysis)
-
-6.1 调度性能分析 (Scheduling Performance Analysis)
-6.2 负载均衡分析 (Load Balancing Analysis)
-6.3 资源利用率分析 (Resource Utilization Analysis)
-6.4 系统效率分析 (System Efficiency Analysis)
-
-### 7. 应用场景 (Application Scenarios)
-
-7.1 云计算系统 (Cloud Computing Systems)
-7.2 分布式系统 (Distributed Systems)
-7.3 实时系统 (Real-Time Systems)
-7.4 嵌入式系统 (Embedded Systems)
+- [系统优化形式化理论](#系统优化形式化理论)
+  - [目录](#目录)
+  - [1. 理论基础 (Theoretical Foundation)](#1-理论基础-theoretical-foundation)
+    - [1.1 系统模型基础 (System Model Foundation)](#11-系统模型基础-system-model-foundation)
+      - [定义1.1.1 系统状态 (System State)](#定义111-系统状态-system-state)
+      - [定义1.1.2 资源模型 (Resource Model)](#定义112-资源模型-resource-model)
+      - [定义1.1.3 进程模型 (Process Model)](#定义113-进程模型-process-model)
+      - [定义1.1.4 负载模型 (Load Model)](#定义114-负载模型-load-model)
+    - [1.2 资源调度理论 (Resource Scheduling Theory)](#12-资源调度理论-resource-scheduling-theory)
+      - [定义1.2.1 调度策略 (Scheduling Strategy)](#定义121-调度策略-scheduling-strategy)
+      - [定义1.2.2 调度目标 (Scheduling Objectives)](#定义122-调度目标-scheduling-objectives)
+      - [定义1.2.3 调度约束 (Scheduling Constraints)](#定义123-调度约束-scheduling-constraints)
+      - [定理1.2.1 调度最优性 (Scheduling Optimality)](#定理121-调度最优性-scheduling-optimality)
+    - [1.3 负载均衡理论 (Load Balancing Theory)](#13-负载均衡理论-load-balancing-theory)
+      - [定义1.3.1 负载分布 (Load Distribution)](#定义131-负载分布-load-distribution)
+      - [定义1.3.2 均衡指标 (Balance Metric)](#定义132-均衡指标-balance-metric)
+      - [定义1.3.3 均衡策略 (Balance Strategy)](#定义133-均衡策略-balance-strategy)
+      - [定理1.3.1 负载均衡收敛性 (Load Balancing Convergence)](#定理131-负载均衡收敛性-load-balancing-convergence)
+    - [1.4 性能调优理论 (Performance Tuning Theory)](#14-性能调优理论-performance-tuning-theory)
+      - [定义1.4.1 性能指标 (Performance Metrics)](#定义141-性能指标-performance-metrics)
+      - [定义1.4.2 调优策略 (Tuning Strategy)](#定义142-调优策略-tuning-strategy)
+      - [定义1.4.3 优化目标 (Optimization Objective)](#定义143-优化目标-optimization-objective)
+  - [2. 形式化定义 (Formal Definitions)](#2-形式化定义-formal-definitions)
+    - [2.1 系统状态形式化 (System State Formalization)](#21-系统状态形式化-system-state-formalization)
+      - [定义2.1.1 全局状态 (Global State)](#定义211-全局状态-global-state)
+      - [定义2.1.2 状态转换 (State Transition)](#定义212-状态转换-state-transition)
+      - [定义2.1.3 状态一致性 (State Consistency)](#定义213-状态一致性-state-consistency)
+    - [2.2 资源模型形式化 (Resource Model Formalization)](#22-资源模型形式化-resource-model-formalization)
+      - [定义2.2.1 分层资源 (Hierarchical Resources)](#定义221-分层资源-hierarchical-resources)
+      - [定义2.2.2 动态资源 (Dynamic Resources)](#定义222-动态资源-dynamic-resources)
+      - [定义2.2.3 资源池 (Resource Pool)](#定义223-资源池-resource-pool)
+    - [2.3 调度策略形式化 (Scheduling Strategy Formalization)](#23-调度策略形式化-scheduling-strategy-formalization)
+      - [定义2.3.1 自适应调度 (Adaptive Scheduling)](#定义231-自适应调度-adaptive-scheduling)
+      - [定义2.3.2 预测调度 (Predictive Scheduling)](#定义232-预测调度-predictive-scheduling)
+      - [定义2.3.3 多目标调度 (Multi-Objective Scheduling)](#定义233-多目标调度-multi-objective-scheduling)
+    - [2.4 优化目标形式化 (Optimization Objective Formalization)](#24-优化目标形式化-optimization-objective-formalization)
+      - [定义2.4.1 加权目标 (Weighted Objective)](#定义241-加权目标-weighted-objective)
+      - [定义2.4.2 Pareto最优 (Pareto Optimal)](#定义242-pareto最优-pareto-optimal)
+      - [定义2.4.3 约束优化 (Constrained Optimization)](#定义243-约束优化-constrained-optimization)
+  - [3. 核心定理 (Core Theorems)](#3-核心定理-core-theorems)
+    - [3.1 调度最优性定理 (Scheduling Optimality Theorems)](#31-调度最优性定理-scheduling-optimality-theorems)
+      - [定理3.1.1 调度空间完备性 (Scheduling Space Completeness)](#定理311-调度空间完备性-scheduling-space-completeness)
+      - [定理3.1.2 最优调度存在性 (Optimal Scheduling Existence)](#定理312-最优调度存在性-optimal-scheduling-existence)
+    - [3.2 负载均衡定理 (Load Balancing Theorems)](#32-负载均衡定理-load-balancing-theorems)
+      - [定理3.2.1 均衡状态存在性 (Balance State Existence)](#定理321-均衡状态存在性-balance-state-existence)
+      - [定理3.2.2 均衡算法收敛性 (Balance Algorithm Convergence)](#定理322-均衡算法收敛性-balance-algorithm-convergence)
+    - [3.3 性能优化定理 (Performance Optimization Theorems)](#33-性能优化定理-performance-optimization-theorems)
+      - [定理3.3.1 性能提升上界 (Performance Improvement Upper Bound)](#定理331-性能提升上界-performance-improvement-upper-bound)
+      - [定理3.3.2 优化稳定性 (Optimization Stability)](#定理332-优化稳定性-optimization-stability)
+    - [3.4 稳定性定理 (Stability Theorems)](#34-稳定性定理-stability-theorems)
+      - [定理3.4.1 系统稳定性 (System Stability)](#定理341-系统稳定性-system-stability)
+      - [定理3.4.2 负载稳定性 (Load Stability)](#定理342-负载稳定性-load-stability)
+  - [4. 算法实现 (Algorithm Implementation)](#4-算法实现-algorithm-implementation)
+    - [4.1 智能调度算法 (Intelligent Scheduling Algorithm)](#41-智能调度算法-intelligent-scheduling-algorithm)
+    - [4.2 自适应负载均衡算法 (Adaptive Load Balancing Algorithm)](#42-自适应负载均衡算法-adaptive-load-balancing-algorithm)
+    - [4.3 动态资源分配算法 (Dynamic Resource Allocation Algorithm)](#43-动态资源分配算法-dynamic-resource-allocation-algorithm)
+    - [4.4 预测性优化算法 (Predictive Optimization Algorithm)](#44-预测性优化算法-predictive-optimization-algorithm)
+  - [5. Rust实现 (Rust Implementation)](#5-rust实现-rust-implementation)
+    - [5.1 系统管理器 (System Manager)](#51-系统管理器-system-manager)
+    - [5.2 资源调度器 (Resource Scheduler)](#52-资源调度器-resource-scheduler)
+    - [5.3 负载均衡器 (Load Balancer)](#53-负载均衡器-load-balancer)
+    - [5.4 性能监控器 (Performance Monitor)](#54-性能监控器-performance-monitor)
+  - [6. 性能分析 (Performance Analysis)](#6-性能分析-performance-analysis)
+    - [6.1 调度性能分析 (Scheduling Performance Analysis)](#61-调度性能分析-scheduling-performance-analysis)
+      - [调度算法复杂度](#调度算法复杂度)
+      - [调度性能指标](#调度性能指标)
+    - [6.2 负载均衡分析 (Load Balancing Analysis)](#62-负载均衡分析-load-balancing-analysis)
+      - [均衡算法性能](#均衡算法性能)
+      - [均衡效果指标](#均衡效果指标)
+    - [6.3 资源利用率分析 (Resource Utilization Analysis)](#63-资源利用率分析-resource-utilization-analysis)
+      - [资源利用率指标](#资源利用率指标)
+      - [资源优化效果](#资源优化效果)
+    - [6.4 系统效率分析 (System Efficiency Analysis)](#64-系统效率分析-system-efficiency-analysis)
+      - [系统效率指标](#系统效率指标)
+      - [系统优化效果](#系统优化效果)
+  - [7. 应用场景 (Application Scenarios)](#7-应用场景-application-scenarios)
+    - [7.1 云计算系统 (Cloud Computing Systems)](#71-云计算系统-cloud-computing-systems)
+      - [应用特点](#应用特点)
+      - [优化策略](#优化策略)
+      - [性能指标](#性能指标)
+    - [7.2 分布式系统 (Distributed Systems)](#72-分布式系统-distributed-systems)
+      - [7.2.1 应用特点](#721-应用特点)
+      - [7.2.2 优化策略](#722-优化策略)
+      - [7.2.3 性能指标](#723-性能指标)
+    - [7.3 实时系统 (Real-Time Systems)](#73-实时系统-real-time-systems)
+      - [7.3.1 应用特点](#731-应用特点)
+      - [优化策略](#优化策略-1)
+      - [性能指标](#性能指标-1)
+    - [7.4 嵌入式系统 (Embedded Systems)](#74-嵌入式系统-embedded-systems)
+      - [应用特点](#应用特点-1)
+      - [优化策略](#优化策略-2)
+      - [性能指标](#性能指标-2)
+  - [📊 总结 (Summary)](#-总结-summary)
+    - [理论贡献](#理论贡献)
+    - [技术创新](#技术创新)
+    - [应用价值](#应用价值)
 
 ---
 
@@ -1108,21 +1158,21 @@ impl PerformanceMonitor {
 
 ### 7.2 分布式系统 (Distributed Systems)
 
-#### 应用特点
+#### 7.2.1 应用特点
 
 - 多节点部署
 - 网络通信
 - 数据一致性
 - 故障容错
 
-#### 优化策略
+#### 7.2.2 优化策略
 
 - 使用分布式调度
 - 实施一致性协议
 - 启用故障恢复
 - 优化网络通信
 
-#### 性能指标
+#### 7.2.3 性能指标
 
 - 扩展性 > 1000节点
 - 一致性延迟 < 10ms
@@ -1131,7 +1181,7 @@ impl PerformanceMonitor {
 
 ### 7.3 实时系统 (Real-Time Systems)
 
-#### 应用特点
+#### 7.3.1 应用特点
 
 - 严格时间约束
 - 可预测性能

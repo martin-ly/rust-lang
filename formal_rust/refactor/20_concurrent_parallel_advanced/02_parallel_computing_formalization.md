@@ -1,15 +1,39 @@
-# 并行计算形式化理论 (Parallel Computing Formalization Theory)
+# 并行计算形式化理论
 
-## 目录 (Table of Contents)
+(Parallel Computing Formalization Theory)
 
-1. [理论基础](#1-理论基础)
-2. [数学定义](#2-数学定义)
-3. [核心定理](#3-核心定理)
-4. [定理证明](#4-定理证明)
-5. [Rust实现](#5-rust实现)
-6. [性能分析](#6-性能分析)
-7. [应用示例](#7-应用示例)
-8. [总结](#8-总结)
+## 目录
+
+- [并行计算形式化理论](#并行计算形式化理论)
+  - [目录](#目录)
+  - [1. 理论基础 (Theoretical Foundation)](#1-理论基础-theoretical-foundation)
+    - [1.1 并行计算模型 (Parallel Computing Models)](#11-并行计算模型-parallel-computing-models)
+    - [1.2 并行算法分类 (Parallel Algorithm Classification)](#12-并行算法分类-parallel-algorithm-classification)
+  - [2. 数学定义 (Mathematical Definitions)](#2-数学定义-mathematical-definitions)
+    - [2.1 并行计算复杂度 (Parallel Computing Complexity)](#21-并行计算复杂度-parallel-computing-complexity)
+    - [2.2 并行算法正确性 (Parallel Algorithm Correctness)](#22-并行算法正确性-parallel-algorithm-correctness)
+    - [2.3 负载均衡 (Load Balancing)](#23-负载均衡-load-balancing)
+  - [3. 核心定理 (Core Theorems)](#3-核心定理-core-theorems)
+    - [3.1 并行计算基本定理 (Fundamental Theorems)](#31-并行计算基本定理-fundamental-theorems)
+    - [3.2 负载均衡定理 (Load Balancing Theorems)](#32-负载均衡定理-load-balancing-theorems)
+  - [4. 定理证明 (Theorem Proofs)](#4-定理证明-theorem-proofs)
+    - [4.1 Amdahl定律证明 (Proof of Amdahl's Law)](#41-amdahl定律证明-proof-of-amdahls-law)
+    - [4.2 并行计算下界证明 (Proof of Parallel Computing Lower Bound)](#42-并行计算下界证明-proof-of-parallel-computing-lower-bound)
+  - [5. Rust实现 (Rust Implementation)](#5-rust实现-rust-implementation)
+    - [5.1 并行计算框架 (Parallel Computing Framework)](#51-并行计算框架-parallel-computing-framework)
+    - [5.2 性能分析工具 (Performance Analysis Tools)](#52-性能分析工具-performance-analysis-tools)
+  - [6. 性能分析 (Performance Analysis)](#6-性能分析-performance-analysis)
+    - [6.1 理论性能分析 (Theoretical Performance Analysis)](#61-理论性能分析-theoretical-performance-analysis)
+    - [6.2 实际性能测试 (Practical Performance Testing)](#62-实际性能测试-practical-performance-testing)
+  - [7. 应用示例 (Application Examples)](#7-应用示例-application-examples)
+    - [7.1 并行图像处理 (Parallel Image Processing)](#71-并行图像处理-parallel-image-processing)
+    - [7.2 并行机器学习 (Parallel Machine Learning)](#72-并行机器学习-parallel-machine-learning)
+  - [8. 总结 (Summary)](#8-总结-summary)
+    - [8.1 理论贡献 (Theoretical Contributions)](#81-理论贡献-theoretical-contributions)
+    - [8.2 实现贡献 (Implementation Contributions)](#82-实现贡献-implementation-contributions)
+    - [8.3 学术价值 (Academic Value)](#83-学术价值-academic-value)
+    - [8.4 实践价值 (Practical Value)](#84-实践价值-practical-value)
+
 
 ## 1. 理论基础 (Theoretical Foundation)
 
@@ -19,6 +43,7 @@
 
 **定义 1.1.1** (并行计算系统)
 一个并行计算系统是一个五元组 $PCS = (P, M, C, S, T)$，其中：
+
 - $P = \{p_1, p_2, ..., p_n\}$ 是处理器集合
 - $M = \{m_1, m_2, ..., m_k\}$ 是内存模块集合
 - $C$ 是通信网络
@@ -78,6 +103,7 @@ $$S_{max} = \frac{1}{f + \frac{1-f}{p}}$$
 
 **证明**：
 设总计算时间为 $T_1 = T_{serial} + T_{parallel}$，其中：
+
 - $T_{serial} = f \cdot T_1$ 是串行部分
 - $T_{parallel} = (1-f) \cdot T_1$ 是并行部分
 

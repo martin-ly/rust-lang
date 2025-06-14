@@ -19,6 +19,7 @@
 
 **定义 1.1.1** (并发数据结构)
 一个并发数据结构是一个五元组 $CDS = (S, O, I, L, C)$，其中：
+
 - $S$ 是状态空间
 - $O$ 是操作集合
 - $I$ 是初始状态
@@ -39,11 +40,13 @@ $$\forall H: \exists L: H \subseteq L \land L \text{ is sequential}$$
 
 **定义 1.3.1** (互斥锁)
 互斥锁是一个二元组 $Mutex = (locked, owner)$，其中：
+
 - $locked \in \{true, false\}$ 是锁状态
 - $owner \in Thread \cup \{null\}$ 是锁持有者
 
 **定义 1.3.2** (读写锁)
 读写锁是一个三元组 $RWLock = (readers, writers, owner)$，其中：
+
 - $readers \in \mathbb{N}$ 是读者数量
 - $writers \in \{0, 1\}$ 是写者数量
 - $owner \in Thread \cup \{null\}$ 是写锁持有者
@@ -78,7 +81,7 @@ $$\forall e_1, e_2: e_1 \to e_2 \implies e_1 \prec e_2$$
 
 **定义 2.3.1** (比较并交换)
 比较并交换操作 $CAS(addr, expected, new)$ 定义为：
-$$\text{CAS}(addr, expected, new) = 
+$$\text{CAS}(addr, expected, new) =
 \begin{cases}
 true & \text{if } *addr = expected \\
 false & \text{otherwise}
@@ -87,7 +90,7 @@ false & \text{otherwise}
 **定义 2.3.2** (加载链接/存储条件)
 加载链接/存储条件操作定义为：
 $$\text{LL}(addr) = *addr$$
-$$\text{SC}(addr, value) = 
+$$\text{SC}(addr, value) =
 \begin{cases}
 true & \text{if } addr \text{ not modified since LL} \\
 false & \text{otherwise}
@@ -196,7 +199,7 @@ pub struct ConcurrentStack<T> {
 }
 
 /// 栈节点
-#[derive(Debug)]
+# [derive(Debug)]
 pub struct Node<T> {
     data: T,
     next: *mut Node<T>,
@@ -210,20 +213,20 @@ impl<T> ConcurrentStack<T> {
             size: AtomicUsize::new(0),
         }
     }
-    
+
     /// 压入元素
     pub fn push(&self, value: T) {
         let new_node = Box::into_raw(Box::new(Node {
             data: value,
             next: std::ptr::null_mut(),
         }));
-        
+
         loop {
             let current_head = self.head.load(Ordering::Acquire);
             unsafe {
                 (*new_node).next = current_head;
             }
-            
+
             if self.head.compare_exchange_weak(
                 current_head,
                 new_node,
@@ -235,7 +238,7 @@ impl<T> ConcurrentStack<T> {
             }
         }
     }
-    
+
     /// 弹出元素
     pub fn pop(&self) -> Option<T> {
         loop {
@@ -243,7 +246,7 @@ impl<T> ConcurrentStack<T> {
             if current_head.is_null() {
                 return None;
             }
-            
+
             unsafe {
                 let next = (*current_head).next;
                 if self.head.compare_exchange_weak(
@@ -260,12 +263,12 @@ impl<T> ConcurrentStack<T> {
             }
         }
     }
-    
+
     /// 获取大小
     pub fn len(&self) -> usize {
         self.size.load(Ordering::Relaxed)
     }
-    
+
     /// 检查是否为空
     pub fn is_empty(&self) -> bool {
         self.head.load(Ordering::Relaxed).is_null()
@@ -280,11 +283,11 @@ where
         self.push(value);
         Ok(())
     }
-    
+
     fn remove(&self) -> Result<Option<T>, String> {
         Ok(self.pop())
     }
-    
+
     fn contains(&self, value: &T) -> bool {
         let mut current = self.head.load(Ordering::Acquire);
         while !current.is_null() {
@@ -297,7 +300,7 @@ where
         }
         false
     }
-    
+
     fn size(&self) -> usize {
         self.len()
     }
@@ -317,21 +320,21 @@ impl<T> ConcurrentQueue<T> {
             data: unsafe { std::mem::zeroed() },
             next: std::ptr::null_mut(),
         }));
-        
+
         Self {
             head: AtomicPtr::new(dummy),
             tail: AtomicPtr::new(dummy),
             size: AtomicUsize::new(0),
         }
     }
-    
+
     /// 入队
     pub fn enqueue(&self, value: T) {
         let new_node = Box::into_raw(Box::new(Node {
             data: value,
             next: std::ptr::null_mut(),
         }));
-        
+
         loop {
             let current_tail = self.tail.load(Ordering::Acquire);
             unsafe {
@@ -362,13 +365,13 @@ impl<T> ConcurrentQueue<T> {
             }
         }
     }
-    
+
     /// 出队
     pub fn dequeue(&self) -> Option<T> {
         loop {
             let current_head = self.head.load(Ordering::Acquire);
             let current_tail = self.tail.load(Ordering::Acquire);
-            
+
             unsafe {
                 let next = (*current_head).next;
                 if current_head == current_tail {
@@ -397,12 +400,12 @@ impl<T> ConcurrentQueue<T> {
             }
         }
     }
-    
+
     /// 获取大小
     pub fn len(&self) -> usize {
         self.size.load(Ordering::Relaxed)
     }
-    
+
     /// 检查是否为空
     pub fn is_empty(&self) -> bool {
         self.head.load(Ordering::Acquire) == self.tail.load(Ordering::Acquire)
@@ -417,17 +420,17 @@ where
         self.enqueue(value);
         Ok(())
     }
-    
+
     fn remove(&self) -> Result<Option<T>, String> {
         Ok(self.dequeue())
     }
-    
+
     fn contains(&self, value: &T) -> bool {
         let mut current = self.head.load(Ordering::Acquire);
         unsafe {
             current = (*current).next;
         }
-        
+
         while !current.is_null() {
             unsafe {
                 if &(*current).data == value {
@@ -438,7 +441,7 @@ where
         }
         false
     }
-    
+
     fn size(&self) -> usize {
         self.len()
     }
@@ -461,49 +464,49 @@ where
         for _ in 0..bucket_count {
             buckets.push(Arc::new(RwLock::new(HashMap::new())));
         }
-        
+
         Self {
             buckets,
             bucket_count,
         }
     }
-    
+
     /// 插入键值对
     pub fn insert(&self, key: K, value: V) -> Option<V> {
         let bucket_index = self.hash(&key);
         let bucket = &self.buckets[bucket_index];
-        
+
         let mut bucket_guard = bucket.write().unwrap();
         bucket_guard.insert(key, value)
     }
-    
+
     /// 获取值
     pub fn get(&self, key: &K) -> Option<V> {
         let bucket_index = self.hash(key);
         let bucket = &self.buckets[bucket_index];
-        
+
         let bucket_guard = bucket.read().unwrap();
         bucket_guard.get(key).cloned()
     }
-    
+
     /// 删除键值对
     pub fn remove(&self, key: &K) -> Option<V> {
         let bucket_index = self.hash(key);
         let bucket = &self.buckets[bucket_index];
-        
+
         let mut bucket_guard = bucket.write().unwrap();
         bucket_guard.remove(key)
     }
-    
+
     /// 检查是否包含键
     pub fn contains_key(&self, key: &K) -> bool {
         let bucket_index = self.hash(key);
         let bucket = &self.buckets[bucket_index];
-        
+
         let bucket_guard = bucket.read().unwrap();
         bucket_guard.contains_key(key)
     }
-    
+
     /// 获取大小
     pub fn len(&self) -> usize {
         let mut total_size = 0;
@@ -512,7 +515,7 @@ where
         }
         total_size
     }
-    
+
     /// 检查是否为空
     pub fn is_empty(&self) -> bool {
         for bucket in &self.buckets {
@@ -522,12 +525,12 @@ where
         }
         true
     }
-    
+
     /// 哈希函数
     fn hash(&self, key: &K) -> usize {
         use std::collections::hash_map::DefaultHasher;
         use std::hash::{Hash, Hasher};
-        
+
         let mut hasher = DefaultHasher::new();
         key.hash(&mut hasher);
         hasher.finish() as usize % self.bucket_count
@@ -551,20 +554,20 @@ where
             size: AtomicUsize::new(0),
         }
     }
-    
+
     /// 插入元素
     pub fn insert(&self, value: T) {
         let new_node = Box::into_raw(Box::new(Node {
             data: value,
             next: std::ptr::null_mut(),
         }));
-        
+
         loop {
             let current_head = self.head.load(Ordering::Acquire);
             unsafe {
                 (*new_node).next = current_head;
             }
-            
+
             if self.head.compare_exchange_weak(
                 current_head,
                 new_node,
@@ -576,17 +579,17 @@ where
             }
         }
     }
-    
+
     /// 删除元素
     pub fn remove(&self, value: &T) -> bool {
         let mut prev = std::ptr::null_mut();
         let mut current = self.head.load(Ordering::Acquire);
-        
+
         while !current.is_null() {
             unsafe {
                 if &(*current).data == value {
                     let next = (*current).next;
-                    
+
                     if prev.is_null() {
                         // 删除头节点
                         if self.head.compare_exchange_weak(
@@ -617,14 +620,14 @@ where
                 current = (*current).next;
             }
         }
-        
+
         false
     }
-    
+
     /// 查找元素
     pub fn find(&self, value: &T) -> bool {
         let mut current = self.head.load(Ordering::Acquire);
-        
+
         while !current.is_null() {
             unsafe {
                 if &(*current).data == value {
@@ -633,15 +636,15 @@ where
                 current = (*current).next;
             }
         }
-        
+
         false
     }
-    
+
     /// 获取大小
     pub fn len(&self) -> usize {
         self.size.load(Ordering::Relaxed)
     }
-    
+
     /// 检查是否为空
     pub fn is_empty(&self) -> bool {
         self.head.load(Ordering::Acquire).is_null()
@@ -655,7 +658,7 @@ pub struct ConcurrentSkipList<T> {
 }
 
 /// 跳表节点
-#[derive(Debug)]
+# [derive(Debug)]
 pub struct SkipListNode<T> {
     data: Option<T>,
     next: Vec<Arc<RwLock<SkipListNode<T>>>>,
@@ -677,13 +680,13 @@ where
             })); max_level],
             level: max_level,
         }));
-        
+
         Self {
             head,
             max_level,
         }
     }
-    
+
     /// 插入元素
     pub fn insert(&self, value: T) {
         let level = self.random_level();
@@ -696,17 +699,17 @@ where
             })); level + 1],
             level,
         }));
-        
+
         let mut current = Arc::clone(&self.head);
         let mut update: Vec<Arc<RwLock<SkipListNode<T>>>> = vec![Arc::clone(&self.head); self.max_level];
-        
+
         // 找到插入位置
         for i in (0..=level).rev() {
             loop {
                 let current_guard = current.read().unwrap();
                 let next = &current_guard.next[i];
                 let next_guard = next.read().unwrap();
-                
+
                 if let Some(ref next_data) = next_guard.data {
                     if next_data < &value {
                         drop(next_guard);
@@ -715,12 +718,12 @@ where
                         continue;
                     }
                 }
-                
+
                 update[i] = Arc::clone(&current);
                 break;
             }
         }
-        
+
         // 插入节点
         for i in 0..=level {
             let update_guard = update[i].write().unwrap();
@@ -729,19 +732,19 @@ where
             update_guard.next[i] = Arc::clone(&new_node);
         }
     }
-    
+
     /// 删除元素
     pub fn remove(&self, value: &T) -> bool {
         let mut current = Arc::clone(&self.head);
         let mut update: Vec<Arc<RwLock<SkipListNode<T>>>> = vec![Arc::clone(&self.head); self.max_level];
-        
+
         // 找到删除位置
         for i in (0..self.max_level).rev() {
             loop {
                 let current_guard = current.read().unwrap();
                 let next = &current_guard.next[i];
                 let next_guard = next.read().unwrap();
-                
+
                 if let Some(ref next_data) = next_guard.data {
                     if next_data < value {
                         drop(next_guard);
@@ -750,16 +753,16 @@ where
                         continue;
                     }
                 }
-                
+
                 update[i] = Arc::clone(&current);
                 break;
             }
         }
-        
+
         // 删除节点
         let target = &update[0].read().unwrap().next[0];
         let target_guard = target.read().unwrap();
-        
+
         if let Some(ref target_data) = target_guard.data {
             if target_data == value {
                 for i in 0..target_guard.level + 1 {
@@ -769,20 +772,20 @@ where
                 return true;
             }
         }
-        
+
         false
     }
-    
+
     /// 查找元素
     pub fn find(&self, value: &T) -> bool {
         let mut current = Arc::clone(&self.head);
-        
+
         for i in (0..self.max_level).rev() {
             loop {
                 let current_guard = current.read().unwrap();
                 let next = &current_guard.next[i];
                 let next_guard = next.read().unwrap();
-                
+
                 if let Some(ref next_data) = next_guard.data {
                     if next_data < value {
                         drop(next_guard);
@@ -791,22 +794,22 @@ where
                         continue;
                     }
                 }
-                
+
                 break;
             }
         }
-        
+
         let current_guard = current.read().unwrap();
         let next = &current_guard.next[0];
         let next_guard = next.read().unwrap();
-        
+
         if let Some(ref next_data) = next_guard.data {
             next_data == value
         } else {
             false
         }
     }
-    
+
     /// 随机生成层级
     fn random_level(&self) -> usize {
         let mut level = 0;
@@ -832,7 +835,7 @@ impl PerformanceAnalyzer {
     {
         let start = Instant::now();
         let mut handles = vec![];
-        
+
         for _ in 0..thread_count {
             let operation_clone = &operation;
             let handle = thread::spawn(move || {
@@ -842,13 +845,13 @@ impl PerformanceAnalyzer {
             });
             handles.push(handle);
         }
-        
+
         for handle in handles {
             handle.join().unwrap();
         }
-        
+
         let duration = start.elapsed();
-        
+
         PerformanceMetrics {
             total_time: duration.as_secs_f64(),
             throughput: (thread_count * operation_count) as f64 / duration.as_secs_f64(),
@@ -857,7 +860,7 @@ impl PerformanceAnalyzer {
             operation_count,
         }
     }
-    
+
     /// 分析锁竞争
     pub fn analyze_lock_contention<F>(operation: F, thread_count: usize, operation_count: usize) -> ContentionMetrics
     where
@@ -865,20 +868,20 @@ impl PerformanceAnalyzer {
     {
         let mut contention_count = 0;
         let mut total_wait_time = Duration::ZERO;
-        
+
         let operation_with_contention = move || {
             let start = Instant::now();
             operation();
             let duration = start.elapsed();
-            
+
             if duration > Duration::from_micros(100) {
                 contention_count += 1;
                 total_wait_time += duration;
             }
         };
-        
+
         let performance = Self::analyze_concurrent_performance(operation_with_contention, thread_count, operation_count);
-        
+
         ContentionMetrics {
             performance,
             contention_count,
@@ -889,7 +892,7 @@ impl PerformanceAnalyzer {
 }
 
 /// 性能指标
-#[derive(Debug)]
+# [derive(Debug)]
 pub struct PerformanceMetrics {
     pub total_time: f64,
     pub throughput: f64,
@@ -899,7 +902,7 @@ pub struct PerformanceMetrics {
 }
 
 /// 竞争指标
-#[derive(Debug)]
+# [derive(Debug)]
 pub struct ContentionMetrics {
     pub performance: PerformanceMetrics,
     pub contention_count: usize,
@@ -923,16 +926,16 @@ $$Performance = \frac{1}{1 + Retry\_Rate \times Retry\_Cost}$$
 ### 6.2 实际性能测试 (Practical Performance Testing)
 
 ```rust
-#[cfg(test)]
+# [cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_concurrent_stack_performance() {
         let stack = Arc::new(ConcurrentStack::new());
         let thread_count = 8;
         let operation_count = 10000;
-        
+
         let performance = PerformanceAnalyzer::analyze_concurrent_performance(
             || {
                 stack.push(42);
@@ -941,21 +944,21 @@ mod tests {
             thread_count,
             operation_count,
         );
-        
+
         println!("Concurrent Stack Performance:");
         println!("  Total Time: {:.2}s", performance.total_time);
         println!("  Throughput: {:.2} ops/s", performance.throughput);
         println!("  Latency: {:.6}s", performance.latency);
-        
+
         assert!(performance.throughput > 1000.0); // 至少1000 ops/s
     }
-    
+
     #[test]
     fn test_concurrent_queue_performance() {
         let queue = Arc::new(ConcurrentQueue::new());
         let thread_count = 8;
         let operation_count = 10000;
-        
+
         let performance = PerformanceAnalyzer::analyze_concurrent_performance(
             || {
                 queue.enqueue(42);
@@ -964,21 +967,21 @@ mod tests {
             thread_count,
             operation_count,
         );
-        
+
         println!("Concurrent Queue Performance:");
         println!("  Total Time: {:.2}s", performance.total_time);
         println!("  Throughput: {:.2} ops/s", performance.throughput);
         println!("  Latency: {:.6}s", performance.latency);
-        
+
         assert!(performance.throughput > 1000.0);
     }
-    
+
     #[test]
     fn test_concurrent_hashmap_performance() {
         let hashmap = Arc::new(ConcurrentHashMap::new(16));
         let thread_count = 8;
         let operation_count = 1000;
-        
+
         let performance = PerformanceAnalyzer::analyze_concurrent_performance(
             || {
                 let key = rand::random::<u32>();
@@ -988,21 +991,21 @@ mod tests {
             thread_count,
             operation_count,
         );
-        
+
         println!("Concurrent HashMap Performance:");
         println!("  Total Time: {:.2}s", performance.total_time);
         println!("  Throughput: {:.2} ops/s", performance.throughput);
         println!("  Latency: {:.6}s", performance.latency);
-        
+
         assert!(performance.throughput > 100.0);
     }
-    
+
     #[test]
     fn test_lock_free_list_performance() {
         let list = Arc::new(LockFreeList::new());
         let thread_count = 8;
         let operation_count = 1000;
-        
+
         let performance = PerformanceAnalyzer::analyze_concurrent_performance(
             || {
                 let value = rand::random::<u32>();
@@ -1012,21 +1015,21 @@ mod tests {
             thread_count,
             operation_count,
         );
-        
+
         println!("Lock-Free List Performance:");
         println!("  Total Time: {:.2}s", performance.total_time);
         println!("  Throughput: {:.2} ops/s", performance.throughput);
         println!("  Latency: {:.6}s", performance.latency);
-        
+
         assert!(performance.throughput > 100.0);
     }
-    
+
     #[test]
     fn test_lock_contention() {
         let mutex = Arc::new(Mutex::new(0));
         let thread_count = 8;
         let operation_count = 1000;
-        
+
         let contention = PerformanceAnalyzer::analyze_lock_contention(
             || {
                 let mut guard = mutex.lock().unwrap();
@@ -1036,12 +1039,12 @@ mod tests {
             thread_count,
             operation_count,
         );
-        
+
         println!("Lock Contention Analysis:");
         println!("  Contention Rate: {:.2}%", contention.contention_rate * 100.0);
         println!("  Average Wait Time: {:.6}s", contention.average_wait_time);
         println!("  Throughput: {:.2} ops/s", contention.performance.throughput);
-        
+
         assert!(contention.contention_rate > 0.0);
     }
 }
@@ -1060,7 +1063,7 @@ pub struct ConcurrentCache<K, V> {
 }
 
 /// 缓存条目
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct CacheEntry<V> {
     value: V,
     timestamp: Instant,
@@ -1080,7 +1083,7 @@ where
             current_size: AtomicUsize::new(0),
         }
     }
-    
+
     /// 获取值
     pub fn get(&self, key: &K) -> Option<V> {
         if let Some(entry) = self.data.get(key) {
@@ -1090,7 +1093,7 @@ where
             None
         }
     }
-    
+
     /// 设置值
     pub fn set(&self, key: K, value: V) {
         let entry = CacheEntry {
@@ -1098,7 +1101,7 @@ where
             timestamp: Instant::now(),
             access_count: AtomicUsize::new(0),
         };
-        
+
         if self.data.insert(key.clone(), entry).is_none() {
             let current = self.current_size.fetch_add(1, Ordering::Relaxed);
             if current >= self.max_size {
@@ -1106,7 +1109,7 @@ where
             }
         }
     }
-    
+
     /// 删除值
     pub fn remove(&self, key: &K) -> Option<V> {
         if let Some(entry) = self.data.remove(key) {
@@ -1116,7 +1119,7 @@ where
             None
         }
     }
-    
+
     /// LRU淘汰
     fn evict_lru(&self) {
         // 这里简化实现，实际应该遍历所有条目找到最久未使用的
@@ -1126,12 +1129,12 @@ where
                 bucket.read().unwrap().keys().cloned().collect::<Vec<K>>()
             })
             .collect();
-        
+
         if let Some(key) = keys.first() {
             self.remove(key);
         }
     }
-    
+
     /// 获取缓存统计
     pub fn stats(&self) -> CacheStats {
         CacheStats {
@@ -1143,7 +1146,7 @@ where
 }
 
 /// 缓存统计
-#[derive(Debug)]
+# [derive(Debug)]
 pub struct CacheStats {
     pub size: usize,
     pub max_size: usize,
@@ -1180,7 +1183,7 @@ impl Task for SimpleTask {
         thread::sleep(self.work_duration);
         println!("Completed task {}", self.id);
     }
-    
+
     fn priority(&self) -> u32 {
         self.priority
     }
@@ -1191,12 +1194,12 @@ impl ConcurrentTaskScheduler {
     pub fn new(worker_count: usize) -> Self {
         let task_queue = ConcurrentQueue::new();
         let running = AtomicBool::new(true);
-        
+
         let mut worker_threads = vec![];
         for i in 0..worker_count {
             let task_queue_clone = Arc::new(task_queue.clone());
             let running_clone = Arc::new(running.clone());
-            
+
             let handle = thread::spawn(move || {
                 println!("Worker {} started", i);
                 while running_clone.load(Ordering::Relaxed) {
@@ -1208,31 +1211,31 @@ impl ConcurrentTaskScheduler {
                 }
                 println!("Worker {} stopped", i);
             });
-            
+
             worker_threads.push(handle);
         }
-        
+
         Self {
             task_queue,
             worker_threads,
             running,
         }
     }
-    
+
     /// 提交任务
     pub fn submit(&self, task: Box<dyn Task + Send>) {
         self.task_queue.enqueue(task);
     }
-    
+
     /// 停止调度器
     pub fn stop(&self) {
         self.running.store(false, Ordering::Relaxed);
-        
+
         for handle in &self.worker_threads {
             handle.join().unwrap();
         }
     }
-    
+
     /// 获取队列大小
     pub fn queue_size(&self) -> usize {
         self.task_queue.len()
@@ -1276,4 +1279,4 @@ impl ConcurrentTaskScheduler {
 **创建时间**: 2025-06-14
 **理论完整性**: 100%
 **实现完整性**: 100%
-**证明完整性**: 100% 
+**证明完整性**: 100%

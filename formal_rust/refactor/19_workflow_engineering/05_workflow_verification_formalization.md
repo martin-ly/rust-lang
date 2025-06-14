@@ -1,22 +1,37 @@
-# 工作流验证形式化理论 (Workflow Verification Formalization)
+# 工作流验证形式化理论
 
-## 目录 (Table of Contents)
+(Workflow Verification Formalization)
 
-### 1. 引言 (Introduction)
+## 目录
 
-### 2. 工作流验证基础理论 (Workflow Verification Foundation Theory)
-
-### 3. 形式化验证定义 (Formal Verification Definition)
-
-### 4. 验证算法理论 (Verification Algorithm Theory)
-
-### 5. 核心定理证明 (Core Theorems Proof)
-
-### 6. Rust实现 (Rust Implementation)
-
-### 7. 应用示例 (Application Examples)
-
-### 8. 总结 (Summary)
+- [工作流验证形式化理论](#工作流验证形式化理论)
+  - [目录](#目录)
+  - [1. 引言 (Introduction)](#1-引言-introduction)
+    - [1.1 研究背景](#11-研究背景)
+    - [1.2 研究目标](#12-研究目标)
+    - [1.3 理论贡献](#13-理论贡献)
+  - [2. 工作流验证基础理论 (Workflow Verification Foundation Theory)](#2-工作流验证基础理论-workflow-verification-foundation-theory)
+    - [2.1 基本概念](#21-基本概念)
+    - [2.2 验证性质分类](#22-验证性质分类)
+  - [3. 形式化验证定义 (Formal Verification Definition)](#3-形式化验证定义-formal-verification-definition)
+    - [3.1 模型检查](#31-模型检查)
+    - [3.2 性质规范](#32-性质规范)
+  - [4. 验证算法理论 (Verification Algorithm Theory)](#4-验证算法理论-verification-algorithm-theory)
+    - [4.1 可达性分析算法](#41-可达性分析算法)
+    - [4.2 模型检查算法](#42-模型检查算法)
+    - [4.3 死锁检测算法](#43-死锁检测算法)
+  - [5. 核心定理证明 (Core Theorems Proof)](#5-核心定理证明-core-theorems-proof)
+    - [5.1 验证复杂性](#51-验证复杂性)
+    - [5.2 验证完备性](#52-验证完备性)
+  - [6. Rust实现 (Rust Implementation)](#6-rust实现-rust-implementation)
+    - [6.1 工作流验证器核心实现](#61-工作流验证器核心实现)
+  - [7. 应用示例 (Application Examples)](#7-应用示例-application-examples)
+    - [7.1 简单工作流验证示例](#71-简单工作流验证示例)
+  - [8. 总结 (Summary)](#8-总结-summary)
+    - [8.1 理论成果](#81-理论成果)
+    - [8.2 实现成果](#82-实现成果)
+    - [8.3 应用价值](#83-应用价值)
+    - [8.4 未来工作](#84-未来工作)
 
 ---
 
@@ -77,11 +92,14 @@ $$P_{fair}(W) = \forall r \in \text{resources}(W): \text{fair\_allocation}(r)$$
 ### 3.1 模型检查
 
 **定义 3.1** (模型检查)
+
+```latex
 模型检查是验证工作流 $W$ 是否满足性质 $P$ 的过程：
 $$\text{ModelCheck}(W, P) = \begin{cases}
 \text{true} & \text{if } W \models P \\
 \text{false} & \text{otherwise}
 \end{cases}$$
+```
 
 **定义 3.2** (状态空间)
 工作流的状态空间定义为：

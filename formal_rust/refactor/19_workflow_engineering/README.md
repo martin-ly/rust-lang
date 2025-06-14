@@ -2,7 +2,7 @@
 
 ## 目录结构
 
-```
+```text
 19_workflow_engineering/
 ├── README.md                           # 本文件
 ├── 01_workflow_engine_formalization.md # 工作流引擎形式化理论
@@ -34,4 +34,4 @@
 
 - **创建时间**: 2025-06-14
 - **状态**: 进行中
-- **完成度**: 0% 
+- **完成度**: 0%

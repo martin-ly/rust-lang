@@ -1,15 +1,37 @@
-# 读写锁模式形式化理论 (Readers-Writer Lock Pattern Formalization)
+# 读写锁模式形式化理论
+
+(Readers-Writer Lock Pattern Formalization)
 
 ## 目录
 
-1. [理论基础](#1-理论基础)
-2. [形式化定义](#2-形式化定义)
-3. [代数理论](#3-代数理论)
-4. [核心定理](#4-核心定理)
-5. [实现验证](#5-实现验证)
-6. [性能分析](#6-性能分析)
-7. [应用场景](#7-应用场景)
-8. [总结](#8-总结)
+- [读写锁模式形式化理论](#读写锁模式形式化理论)
+  - [目录](#目录)
+  - [1. 理论基础](#1-理论基础)
+    - [1.1 读写锁模式概述](#11-读写锁模式概述)
+    - [1.2 核心概念](#12-核心概念)
+  - [2. 形式化定义](#2-形式化定义)
+    - [2.1 基本集合定义](#21-基本集合定义)
+    - [2.2 操作语义](#22-操作语义)
+  - [3. 代数理论](#3-代数理论)
+    - [3.1 读写锁代数](#31-读写锁代数)
+    - [3.2 代数性质](#32-代数性质)
+  - [4. 核心定理](#4-核心定理)
+    - [4.1 安全性定理](#41-安全性定理)
+    - [4.2 并发度定理](#42-并发度定理)
+    - [4.3 公平性定理](#43-公平性定理)
+  - [5. 实现验证](#5-实现验证)
+    - [5.1 Rust实现](#51-rust实现)
+    - [5.2 正确性验证](#52-正确性验证)
+  - [6. 性能分析](#6-性能分析)
+    - [6.1 时间复杂度](#61-时间复杂度)
+    - [6.2 空间复杂度](#62-空间复杂度)
+    - [6.3 性能优化](#63-性能优化)
+  - [7. 应用场景](#7-应用场景)
+    - [7.1 典型应用](#71-典型应用)
+    - [7.2 设计考虑](#72-设计考虑)
+  - [8. 总结](#8-总结)
+    - [8.1 主要贡献](#81-主要贡献)
+    - [8.2 未来工作](#82-未来工作)
 
 ---
 
@@ -37,6 +59,7 @@
 
 **定义 2.1** (读写锁)
 读写锁是一个七元组 $RWL = (S, R, W, \mu_r, \mu_w, \gamma, \delta)$，其中：
+
 - $S \in \mathcal{S}$ 是共享状态
 - $R \subseteq \mathcal{R}$ 是活跃读者集合
 - $W \subseteq \mathcal{W}$ 是活跃写者集合
@@ -47,6 +70,7 @@
 
 **定义 2.2** (读者)
 读者是一个四元组 $Reader = (id, state, access_time, lock)$，其中：
+
 - $id$ 是读者标识符
 - $state \in \{waiting, reading, finished\}$ 是读者状态
 - $access_time$ 是访问时间
@@ -54,6 +78,7 @@
 
 **定义 2.3** (写者)
 写者是一个四元组 $Writer = (id, state, access_time, lock)$，其中：
+
 - $id$ 是写者标识符
 - $state \in \{waiting, writing, finished\}$ 是写者状态
 - $access_time$ 是访问时间
@@ -62,19 +87,28 @@
 ### 2.2 操作语义
 
 **定义 2.4** (获取读锁)
+
+```latex
 $$acquire_read(rwl, reader) = \begin{cases}
 R \cup \{reader\} \land \gamma(rwl) = shared & \text{if } W = \emptyset \\
 wait(reader) & \text{otherwise}
 \end{cases}$$
+```
 
 **定义 2.5** (释放读锁)
+
+```latex
 $$release_read(rwl, reader) = R \setminus \{reader\} \land \text{if } R = \emptyset \text{ then } \gamma(rwl) = idle$$
+```
 
 **定义 2.6** (获取写锁)
+
+```latex
 $$acquire_write(rwl, writer) = \begin{cases}
 W \cup \{writer\} \land \gamma(rwl) = exclusive & \text{if } R = \emptyset \land W = \emptyset \\
 wait(writer) & \text{otherwise}
 \end{cases}$$
+```
 
 **定义 2.7** (释放写锁)
 $$release_write(rwl, writer) = W \setminus \{writer\} \land \gamma(rwl) = idle$$
@@ -120,6 +154,7 @@ $$rwl \otimes \mathbf{1} = rwl = \mathbf{1} \otimes rwl$$
 
 **定理 4.1** (读写互斥)
 对于读写锁 $RWL = (S, R, W, \mu_r, \mu_w, \gamma, \delta)$，如果：
+
 1. 写者活跃时没有读者活跃
 2. 读者活跃时没有写者活跃
 
@@ -138,13 +173,18 @@ $$acquire_read(rwl, reader) \Rightarrow W = \emptyset$$
 ### 4.2 并发度定理
 
 **定理 4.2** (最大并发度)
+
+```latex
 对于读写锁 $RWL$，其最大并发度 $C_{max}$ 满足：
 $$C_{max} = \begin{cases}
 |R| & \text{if } W = \emptyset \\
 1 & \text{if } W \neq \emptyset
 \end{cases}$$
+```
 
 **证明**：
+
+```latex
 当没有写者时，所有读者可以并发访问：
 $$C_{max} = |R|$$
 
@@ -157,6 +197,7 @@ $$C_{max} = \begin{cases}
 1 & \text{if } W \neq \emptyset
 \end{cases}$$
 $\square$
+```
 
 ### 4.3 公平性定理
 
@@ -165,7 +206,9 @@ $\square$
 $$\forall writer \in W: \exists t: acquire_write(rwl, writer) \text{ at time } t$$
 
 **证明**：
+
 写者优先策略确保：
+
 1. 当写者等待时，新的读者被阻塞
 2. 现有读者完成后，写者获得优先权
 
@@ -221,28 +264,28 @@ impl RwLock {
     // 获取读锁
     pub fn read(&self, reader_id: u32) {
         let mut state = self.state.lock().unwrap();
-        
+
         // 等待没有写者且没有等待的写者
         while state.writers > 0 || !state.waiting_writers.is_empty() {
             println!("Reader {}: Waiting for writers to finish", reader_id);
             state.waiting_readers.push_back(reader_id);
             state = self.not_busy.wait(state).unwrap();
         }
-        
+
         // 获取读锁
         state.readers += 1;
-        println!("Reader {}: Acquired read lock. Active readers: {}", 
+        println!("Reader {}: Acquired read lock. Active readers: {}",
             reader_id, state.readers);
     }
 
     // 释放读锁
     pub fn read_unlock(&self, reader_id: u32) {
         let mut state = self.state.lock().unwrap();
-        
+
         state.readers -= 1;
-        println!("Reader {}: Released read lock. Active readers: {}", 
+        println!("Reader {}: Released read lock. Active readers: {}",
             reader_id, state.readers);
-        
+
         // 如果没有活跃的读者，唤醒等待的写者
         if state.readers == 0 && !state.waiting_writers.is_empty() {
             self.not_busy.notify_one();
@@ -252,14 +295,14 @@ impl RwLock {
     // 获取写锁
     pub fn write(&self, writer_id: u32) {
         let mut state = self.state.lock().unwrap();
-        
+
         // 等待没有活跃的读者和写者
         while state.readers > 0 || state.writers > 0 {
             println!("Writer {}: Waiting for readers/writers to finish", writer_id);
             state.waiting_writers.push_back(writer_id);
             state = self.not_busy.wait(state).unwrap();
         }
-        
+
         // 获取写锁
         state.writers += 1;
         println!("Writer {}: Acquired write lock", writer_id);
@@ -268,10 +311,10 @@ impl RwLock {
     // 释放写锁
     pub fn write_unlock(&self, writer_id: u32) {
         let mut state = self.state.lock().unwrap();
-        
+
         state.writers -= 1;
         println!("Writer {}: Released write lock", writer_id);
-        
+
         // 唤醒等待的线程
         if !state.waiting_writers.is_empty() {
             // 优先唤醒写者
@@ -299,22 +342,22 @@ impl SharedResource {
 
     fn read(&self, reader_id: u32) -> String {
         self.rwlock.read(reader_id);
-        
+
         // 模拟读取时间
         thread::sleep(Duration::from_millis(100));
         let result = self.data.clone();
-        
+
         self.rwlock.read_unlock(reader_id);
         result
     }
 
     fn write(&self, writer_id: u32, new_data: String) {
         self.rwlock.write(writer_id);
-        
+
         // 模拟写入时间
         thread::sleep(Duration::from_millis(200));
         self.data = new_data;
-        
+
         self.rwlock.write_unlock(writer_id);
     }
 }
@@ -322,7 +365,7 @@ impl SharedResource {
 // 测试程序
 fn main() {
     let resource = Arc::new(SharedResource::new());
-    
+
     // 创建多个读者
     let mut reader_handles = vec![];
     for i in 0..5 {
@@ -336,7 +379,7 @@ fn main() {
         });
         reader_handles.push(handle);
     }
-    
+
     // 创建多个写者
     let mut writer_handles = vec![];
     for i in 0..2 {
@@ -351,7 +394,7 @@ fn main() {
         });
         writer_handles.push(handle);
     }
-    
+
     // 等待所有线程完成
     for handle in reader_handles {
         handle.join().unwrap();
@@ -359,7 +402,7 @@ fn main() {
     for handle in writer_handles {
         handle.join().unwrap();
     }
-    
+
     println!("Final data: {}", resource.read(999));
 }
 ```
@@ -453,10 +496,11 @@ $\square$
 ---
 
 **参考文献**:
+
 1. Goetz, B. "Java Concurrency in Practice"
 2. Herlihy, M., Shavit, N. "The Art of Multiprocessor Programming"
 3. Rust Documentation: "Concurrency in Rust"
 
 **版本**: 1.0
 **最后更新**: 2025-01-27
-**作者**: AI Assistant 
+**作者**: AI Assistant
