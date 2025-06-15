@@ -2,7 +2,7 @@
 
 ## 目录结构
 
-```
+```text
 18_advanced_async_patterns/
 ├── README.md                           # 本文件
 ├── 01_async_patterns_formalization.md  # 异步模式形式化理论
