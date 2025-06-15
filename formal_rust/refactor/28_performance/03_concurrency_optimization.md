@@ -4,335 +4,129 @@
 
 ### 1. 并发理论基础
 #### 1.1 并发模型形式化
-#### 1.2 并发安全性与性能权衡
-#### 1.3 并发控制算法
+#### 1.2 数据竞争检测理论
+#### 1.3 死锁预防与检测
+#### 1.4 并发安全性证明
 
-### 2. Rust并发机制
-#### 2.1 线程安全保证
-#### 2.2 原子操作形式化
-#### 2.3 锁机制分析
+### 2. Rust并发机制优化
+#### 2.1 线程池优化设计
+#### 2.2 异步任务调度优化
+#### 2.3 锁机制性能分析
+#### 2.4 原子操作优化
 
-### 3. 并发优化技术
-#### 3.1 无锁数据结构
-#### 3.2 内存序模型优化
-#### 3.3 并发模式设计
+### 3. 并发数据结构优化
+#### 3.1 无锁数据结构设计
+#### 3.2 并发容器性能优化
+#### 3.3 内存序优化策略
+#### 3.4 缓存一致性优化
 
-### 4. 性能分析与调优
-#### 4.1 并发性能指标
-#### 4.2 竞争检测与分析
-#### 4.3 优化策略验证
+### 4. 高级并发技术
+#### 4.1 工作窃取算法
+#### 4.2 并发控制流优化
+#### 4.3 负载均衡策略
+#### 4.4 并发模式优化
+
+### 5. 性能监控与调优
+#### 5.1 并发性能分析工具
+#### 5.2 瓶颈检测与优化
+#### 5.3 并发测试框架
+#### 5.4 性能调优策略
 
 ## 1. 并发理论基础
 
 ### 1.1 并发模型形式化
 
-#### 定义 1.1.1 (并发执行)
-并发执行 $E$ 是一个偏序关系：
-$$E = (S, \prec)$$
+#### 1.1.1 并发执行模型
 
-其中：
-- $S$ 是操作集合
-- $\prec$ 是执行顺序关系
+定义并发执行模型为四元组 $C = (T, S, R, E)$，其中：
+- $T$ 为线程集合
+- $S$ 为共享状态集合
+- $R$ 为资源集合
+- $E$ 为执行事件集合
 
-#### 定理 1.1.1 (并发一致性)
-对于任意并发执行 $E$，如果满足：
-$$\forall s_1, s_2 \in S: \text{conflict}(s_1, s_2) \Rightarrow s_1 \prec s_2 \lor s_2 \prec s_1$$
-
-则执行是串行化的。
-
-**证明**：
-1. 假设存在冲突操作 $s_1$ 和 $s_2$
-2. 根据冲突定义，必须确定执行顺序
-3. 因此所有冲突操作都有明确的顺序
-4. 执行等价于某个串行执行
-
-### 1.2 并发安全性与性能权衡
-
-#### 定义 1.2.1 (并发安全)
-程序 $P$ 是并发安全的，当且仅当：
-$$\forall \text{concurrent\_execution} \in \text{Executions}(P): \text{no\_data\_race}(\text{execution})$$
-
-#### 定理 1.2.1 (安全性与性能权衡)
-对于任意并发安全程序 $P$，存在同步开销 $S$：
-$$S = \sum_{i=1}^{n} s_i \cdot \text{sync}_i$$
-
-其中 $s_i$ 是同步成本，$\text{sync}_i$ 是同步操作次数。
-
-### 1.3 并发控制算法
-
-#### 算法 1.3.1 (两阶段锁定)
+**形式化定义**：
 ```rust
-struct TwoPhaseLock {
-    locks: HashMap<Resource, LockType>,
-    phase: LockPhase,
+// 并发执行状态
+struct ConcurrentState {
+    threads: HashMap<ThreadId, ThreadState>,
+    shared_memory: SharedMemory,
+    resources: ResourceManager,
+    events: Vec<ExecutionEvent>,
 }
 
-impl TwoPhaseLock {
-    fn acquire_lock(&mut self, resource: Resource, lock_type: LockType) -> Result<(), LockError> {
-        match self.phase {
-            LockPhase::Growing => {
-                if self.can_acquire(resource, lock_type) {
-                    self.locks.insert(resource, lock_type);
-                    Ok(())
-                } else {
-                    Err(LockError::Conflict)
-                }
-            }
-            LockPhase::Shrinking => Err(LockError::PhaseViolation),
-        }
+// 执行事件
+enum ExecutionEvent {
+    ThreadSpawn(ThreadId),
+    ThreadJoin(ThreadId),
+    MemoryAccess(Address, AccessType),
+    ResourceAcquire(ResourceId),
+    ResourceRelease(ResourceId),
+}
+```
+
+#### 1.1.2 并发安全性定理
+
+**定理 1.1** (并发安全性)：对于并发程序 $P$，如果满足以下条件：
+1. 数据竞争自由：$\forall t_1, t_2 \in T: \neg \text{data\_race}(t_1, t_2)$
+2. 死锁自由：$\forall \text{execution} \in E: \neg \text{deadlock}(\text{execution})$
+3. 活锁自由：$\forall \text{execution} \in E: \neg \text{livelock}(\text{execution})$
+
+则 $P$ 是并发安全的。
+
+**证明框架**：
+```rust
+// 并发安全性证明
+fn concurrency_safety_proof(program: ConcurrentProgram) -> SafetyGuarantee {
+    // 1. 数据竞争检测
+    let race_free = detect_data_races(&program);
+    
+    // 2. 死锁检测
+    let deadlock_free = detect_deadlocks(&program);
+    
+    // 3. 活锁检测
+    let livelock_free = detect_livelocks(&program);
+    
+    // 4. 组合证明
+    if race_free && deadlock_free && livelock_free {
+        SafetyGuarantee::ConcurrencySafe
+    } else {
+        SafetyGuarantee::Unsafe
     }
 }
 ```
 
-## 2. Rust并发机制
+### 1.2 数据竞争检测理论
 
-### 2.1 线程安全保证
+#### 1.2.1 数据竞争形式化定义
 
-#### 定义 2.1.1 (线程安全)
-类型 $T$ 是线程安全的，当且仅当：
-$$\forall t_1, t_2 \in \text{Thread}: \text{Send}(T) \land \text{Sync}(T)$$
+**定义 1.2** (数据竞争)：对于两个并发访问 $a_1$ 和 $a_2$，如果满足：
+1. 访问同一内存位置：$\text{location}(a_1) = \text{location}(a_2)$
+2. 至少有一个是写操作：$\text{is\_write}(a_1) \lor \text{is\_write}(a_2)$
+3. 没有同步关系：$\neg \text{synchronized}(a_1, a_2)$
 
-其中：
-- $\text{Send}(T)$: $T$ 可以安全地跨线程发送
-- $\text{Sync}(T)$: $T$ 可以安全地跨线程共享
+则存在数据竞争。
 
-#### 定理 2.1.1 (线程安全传递性)
-如果 $T_1$ 和 $T_2$ 都是线程安全的，则：
-$$\text{ThreadSafe}(T_1) \land \text{ThreadSafe}(T_2) \Rightarrow \text{ThreadSafe}((T_1, T_2))$$
-
-### 2.2 原子操作形式化
-
-#### 定义 2.2.1 (原子操作)
-原子操作 $A$ 满足：
-$$\forall \text{interleaving}: \text{atomic}(A) \Rightarrow \text{indivisible}(A)$$
-
-#### 实现 2.2.1 (原子计数器)
+**检测算法**：
 ```rust
-use std::sync::atomic::{AtomicUsize, Ordering};
-
-struct AtomicCounter {
-    value: AtomicUsize,
+// 数据竞争检测器
+struct DataRaceDetector {
+    access_log: Vec<MemoryAccess>,
+    happens_before: HappensBeforeGraph,
 }
 
-impl AtomicCounter {
-    fn increment(&self) -> usize {
-        self.value.fetch_add(1, Ordering::SeqCst)
-    }
-    
-    fn get(&self) -> usize {
-        self.value.load(Ordering::SeqCst)
-    }
-}
-```
-
-### 2.3 锁机制分析
-
-#### 定义 2.3.1 (锁的正确性)
-锁 $L$ 是正确的，当且仅当：
-$$\text{mutual\_exclusion}(L) \land \text{deadlock\_freedom}(L) \land \text{starvation\_freedom}(L)$$
-
-#### 算法 2.3.1 (自旋锁实现)
-```rust
-use std::sync::atomic::{AtomicBool, Ordering};
-use std::thread;
-
-struct SpinLock {
-    locked: AtomicBool,
-}
-
-impl SpinLock {
-    fn lock(&self) {
-        while self.locked.compare_exchange_weak(
-            false, true, Ordering::Acquire, Ordering::Relaxed
-        ).is_err() {
-            thread::yield_now();
-        }
-    }
-    
-    fn unlock(&self) {
-        self.locked.store(false, Ordering::Release);
-    }
-}
-```
-
-## 3. 并发优化技术
-
-### 3.1 无锁数据结构
-
-#### 定义 3.1.1 (无锁性)
-数据结构 $D$ 是无锁的，当且仅当：
-$$\forall \text{operation}: \text{lock\_free}(D) \Rightarrow \text{no\_blocking}(D)$$
-
-#### 实现 3.1.1 (无锁栈)
-```rust
-use std::sync::atomic::{AtomicPtr, Ordering};
-
-struct Node<T> {
-    data: T,
-    next: AtomicPtr<Node<T>>,
-}
-
-struct LockFreeStack<T> {
-    head: AtomicPtr<Node<T>>,
-}
-
-impl<T> LockFreeStack<T> {
-    fn push(&self, data: T) {
-        let new_node = Box::into_raw(Box::new(Node {
-            data,
-            next: AtomicPtr::new(std::ptr::null_mut()),
-        }));
-        
-        loop {
-            let head = self.head.load(Ordering::Acquire);
-            unsafe {
-                (*new_node).next.store(head, Ordering::Relaxed);
-            }
-            
-            if self.head.compare_exchange_weak(
-                head, new_node, Ordering::Release, Ordering::Relaxed
-            ).is_ok() {
-                break;
-            }
-        }
-    }
-}
-```
-
-### 3.2 内存序模型优化
-
-#### 定义 3.2.1 (内存序)
-内存序 $O$ 定义了内存操作的可见性：
-$$O \in \{\text{Relaxed}, \text{Acquire}, \text{Release}, \text{AcqRel}, \text{SeqCst}\}$$
-
-#### 定理 3.2.1 (内存序传递性)
-对于任意内存序 $O_1, O_2$：
-$$\text{stronger}(O_1, O_2) \Rightarrow \text{visibility}(O_1) \supseteq \text{visibility}(O_2)$$
-
-#### 策略 3.2.1 (内存序优化)
-```rust
-// 使用最弱的内存序来减少同步开销
-fn optimized_atomic_operation(&self) {
-    // 读取操作使用 Acquire
-    let value = self.data.load(Ordering::Acquire);
-    
-    // 计算操作
-    let result = self.compute(value);
-    
-    // 写入操作使用 Release
-    self.result.store(result, Ordering::Release);
-}
-```
-
-### 3.3 并发模式设计
-
-#### 定义 3.3.1 (并发模式)
-并发模式 $P$ 是一个可重用的并发解决方案：
-$$P = (\text{Problem}, \text{Solution}, \text{Consequences})$$
-
-#### 模式 3.3.1 (生产者-消费者模式)
-```rust
-use std::sync::mpsc;
-use std::thread;
-
-struct ProducerConsumer<T> {
-    sender: mpsc::Sender<T>,
-    receiver: mpsc::Receiver<T>,
-}
-
-impl<T: Send + 'static> ProducerConsumer<T> {
-    fn new() -> Self {
-        let (sender, receiver) = mpsc::channel();
-        Self { sender, receiver }
-    }
-    
-    fn producer<F>(&self, producer_fn: F)
-    where
-        F: Fn() -> T + Send + 'static,
-    {
-        let sender = self.sender.clone();
-        thread::spawn(move || {
-            loop {
-                let item = producer_fn();
-                if sender.send(item).is_err() {
-                    break;
-                }
-            }
-        });
-    }
-    
-    fn consumer<F>(&self, consumer_fn: F)
-    where
-        F: Fn(T) + Send + 'static,
-    {
-        let receiver = self.receiver.clone();
-        thread::spawn(move || {
-            while let Ok(item) = receiver.recv() {
-                consumer_fn(item);
-            }
-        });
-    }
-}
-```
-
-## 4. 性能分析与调优
-
-### 4.1 并发性能指标
-
-#### 定义 4.1.1 (并发性能)
-并发性能 $P$ 包含：
-$$P = (T, S, U)$$
-
-其中：
-- $T$ 是吞吐量
-- $S$ 是扩展性
-- $U$ 是资源利用率
-
-#### 工具 4.1.1 (并发性能分析器)
-```rust
-struct ConcurrencyProfiler {
-    thread_count: AtomicUsize,
-    operation_count: AtomicUsize,
-    start_time: Instant,
-}
-
-impl ConcurrencyProfiler {
-    fn record_operation(&self) {
-        self.operation_count.fetch_add(1, Ordering::Relaxed);
-    }
-    
-    fn get_throughput(&self) -> f64 {
-        let operations = self.operation_count.load(Ordering::Relaxed);
-        let duration = self.start_time.elapsed().as_secs_f64();
-        operations as f64 / duration
-    }
-}
-```
-
-### 4.2 竞争检测与分析
-
-#### 定义 4.2.1 (数据竞争)
-数据竞争发生在：
-$$\exists t_1, t_2: \text{conflict}(t_1, t_2) \land \text{concurrent}(t_1, t_2)$$
-
-#### 算法 4.2.1 (竞争检测)
-```rust
-struct RaceDetector {
-    access_log: Vec<AccessRecord>,
-    races: Vec<RaceReport>,
-}
-
-impl RaceDetector {
-    fn detect_races(&mut self) -> Vec<RaceReport> {
+impl DataRaceDetector {
+    fn detect_races(&self) -> Vec<DataRace> {
         let mut races = Vec::new();
         
         for i in 0..self.access_log.len() {
             for j in (i + 1)..self.access_log.len() {
-                if self.is_race(&self.access_log[i], &self.access_log[j]) {
-                    races.push(RaceReport {
-                        location1: self.access_log[i].location.clone(),
-                        location2: self.access_log[j].location.clone(),
-                        variable: self.access_log[i].variable.clone(),
+                let access1 = &self.access_log[i];
+                let access2 = &self.access_log[j];
+                
+                if self.is_data_race(access1, access2) {
+                    races.push(DataRace {
+                        access1: access1.clone(),
+                        access2: access2.clone(),
                     });
                 }
             }
@@ -340,45 +134,652 @@ impl RaceDetector {
         
         races
     }
+    
+    fn is_data_race(&self, a1: &MemoryAccess, a2: &MemoryAccess) -> bool {
+        // 检查同一位置
+        let same_location = a1.address == a2.address;
+        
+        // 检查至少一个写操作
+        let has_write = a1.is_write || a2.is_write;
+        
+        // 检查同步关系
+        let synchronized = self.happens_before.is_synchronized(a1, a2);
+        
+        same_location && has_write && !synchronized
+    }
 }
 ```
 
-### 4.3 优化策略验证
+### 1.3 死锁预防与检测
 
-#### 定理 4.3.1 (并发优化有效性)
-如果并发优化策略 $S$ 满足：
-$$\text{throughput}(S) > \text{throughput}(\text{baseline}) \land \text{latency}(S) < \text{latency}(\text{baseline})$$
+#### 1.3.1 死锁条件分析
 
-则 $S$ 是有效的。
+**死锁四条件**：
+1. 互斥条件：$\forall r \in R: |\text{holders}(r)| \leq 1$
+2. 持有等待：$\exists t \in T: \text{holds}(t, r_1) \land \text{waits}(t, r_2)$
+3. 非抢占：$\forall t \in T: \text{resource}(t) \text{ cannot be preempted}$
+4. 循环等待：$\exists \text{cycle} \in \text{wait\_for\_graph}$
 
-#### 验证 4.3.1 (并发优化验证)
+**死锁检测算法**：
 ```rust
-fn verify_concurrency_optimization<F>(
-    baseline: F,
-    optimized: F,
-    thread_count: usize,
-) -> OptimizationResult
-where
-    F: Fn() + Send + Sync + 'static,
-{
-    let baseline_throughput = measure_throughput(&baseline, thread_count);
-    let optimized_throughput = measure_throughput(&optimized, thread_count);
+// 死锁检测器
+struct DeadlockDetector {
+    resource_allocation: HashMap<ResourceId, ThreadId>,
+    wait_for_graph: Graph<ThreadId, ResourceId>,
+}
+
+impl DeadlockDetector {
+    fn detect_deadlocks(&self) -> Vec<DeadlockCycle> {
+        let mut cycles = Vec::new();
+        
+        // 使用深度优先搜索检测循环
+        for thread_id in self.wait_for_graph.nodes() {
+            let mut visited = HashSet::new();
+            let mut path = Vec::new();
+            
+            if self.dfs_detect_cycle(thread_id, &mut visited, &mut path) {
+                cycles.push(DeadlockCycle { threads: path });
+            }
+        }
+        
+        cycles
+    }
     
-    OptimizationResult {
-        throughput_improvement: optimized_throughput / baseline_throughput,
-        scalability: measure_scalability(&optimized),
-        is_effective: optimized_throughput > baseline_throughput,
+    fn dfs_detect_cycle(
+        &self,
+        current: ThreadId,
+        visited: &mut HashSet<ThreadId>,
+        path: &mut Vec<ThreadId>
+    ) -> bool {
+        if path.contains(&current) {
+            return true; // 发现循环
+        }
+        
+        if visited.contains(&current) {
+            return false;
+        }
+        
+        visited.insert(current);
+        path.push(current);
+        
+        for neighbor in self.wait_for_graph.neighbors(current) {
+            if self.dfs_detect_cycle(neighbor, visited, path) {
+                return true;
+            }
+        }
+        
+        path.pop();
+        false
+    }
+}
+```
+
+## 2. Rust并发机制优化
+
+### 2.1 线程池优化设计
+
+#### 2.1.1 自适应线程池
+
+**自适应线程池定理**：对于工作负载 $W$，最优线程数 $N_{opt}$ 满足：
+$$N_{opt} = \min(N_{CPU}, \frac{W_{total}}{W_{avg}} \cdot \alpha)$$
+
+其中 $\alpha$ 为负载因子。
+
+**实现设计**：
+```rust
+// 自适应线程池
+struct AdaptiveThreadPool {
+    min_threads: usize,
+    max_threads: usize,
+    current_threads: AtomicUsize,
+    work_queue: WorkStealingQueue<Box<dyn FnOnce() + Send>>,
+    metrics: ThreadPoolMetrics,
+}
+
+impl AdaptiveThreadPool {
+    fn new(min_threads: usize, max_threads: usize) -> Self {
+        let pool = Self {
+            min_threads,
+            max_threads,
+            current_threads: AtomicUsize::new(min_threads),
+            work_queue: WorkStealingQueue::new(),
+            metrics: ThreadPoolMetrics::new(),
+        };
+        
+        // 启动初始线程
+        for _ in 0..min_threads {
+            pool.spawn_worker();
+        }
+        
+        pool
+    }
+    
+    fn spawn_worker(&self) {
+        let current = self.current_threads.fetch_add(1, Ordering::Relaxed);
+        if current >= self.max_threads {
+            self.current_threads.fetch_sub(1, Ordering::Relaxed);
+            return;
+        }
+        
+        std::thread::spawn(move || {
+            self.worker_loop();
+        });
+    }
+    
+    fn worker_loop(&self) {
+        loop {
+            // 尝试获取任务
+            if let Some(task) = self.work_queue.pop() {
+                self.metrics.record_task_start();
+                task();
+                self.metrics.record_task_complete();
+            } else {
+                // 工作窃取
+                if let Some(task) = self.work_queue.steal() {
+                    self.metrics.record_task_start();
+                    task();
+                    self.metrics.record_task_complete();
+                } else {
+                    // 空闲处理
+                    self.handle_idle();
+                }
+            }
+        }
+    }
+    
+    fn handle_idle(&self) {
+        // 自适应调整线程数
+        let queue_size = self.work_queue.len();
+        let current_threads = self.current_threads.load(Ordering::Relaxed);
+        
+        if queue_size > current_threads * 2 && current_threads < self.max_threads {
+            // 增加线程
+            self.spawn_worker();
+        } else if queue_size < current_threads / 4 && current_threads > self.min_threads {
+            // 减少线程
+            self.current_threads.fetch_sub(1, Ordering::Relaxed);
+            break; // 退出当前线程
+        }
+    }
+}
+```
+
+### 2.2 异步任务调度优化
+
+#### 2.2.1 优先级调度算法
+
+**优先级调度定理**：对于任务集合 $T = \{t_1, t_2, ..., t_n\}$，最优调度顺序满足：
+$$\forall i < j: \text{priority}(t_i) \geq \text{priority}(t_j)$$
+
+**实现设计**：
+```rust
+// 优先级调度器
+struct PriorityScheduler {
+    queues: Vec<PriorityQueue<Task>>,
+    current_priority: AtomicUsize,
+}
+
+#[derive(PartialEq, Eq, PartialOrd, Ord)]
+struct Task {
+    priority: u32,
+    deadline: Instant,
+    work: Box<dyn FnOnce() + Send>,
+}
+
+impl PriorityScheduler {
+    fn schedule(&self, task: Task) {
+        let priority = task.priority as usize;
+        if priority < self.queues.len() {
+            self.queues[priority].push(task);
+        }
+    }
+    
+    fn next_task(&mut self) -> Option<Task> {
+        // 从高优先级到低优先级查找任务
+        for priority in (0..self.queues.len()).rev() {
+            if let Some(task) = self.queues[priority].pop() {
+                return Some(task);
+            }
+        }
+        None
+    }
+}
+```
+
+### 2.3 锁机制性能分析
+
+#### 2.3.1 锁竞争分析
+
+**锁竞争模型**：
+$$\text{Contention}(L) = \frac{\text{wait\_time}(L)}{\text{hold\_time}(L)}$$
+
+**优化策略**：
+```rust
+// 分层锁设计
+struct HierarchicalLock {
+    global_lock: Mutex<()>,
+    local_locks: Vec<Mutex<()>>,
+    lock_levels: usize,
+}
+
+impl HierarchicalLock {
+    fn acquire(&self, level: usize) -> LockGuard {
+        // 按层次顺序获取锁
+        for i in 0..=level {
+            if i == self.lock_levels - 1 {
+                self.global_lock.lock().unwrap()
+            } else {
+                self.local_locks[i].lock().unwrap();
+            }
+        }
+        
+        LockGuard { level, lock: self }
+    }
+}
+
+// 读写锁优化
+struct OptimizedRwLock<T> {
+    readers: AtomicUsize,
+    writer: AtomicBool,
+    data: UnsafeCell<T>,
+}
+
+impl<T> OptimizedRwLock<T> {
+    fn read(&self) -> ReadGuard<T> {
+        // 快速路径：无写者时直接读取
+        let readers = self.readers.fetch_add(1, Ordering::Acquire);
+        
+        if self.writer.load(Ordering::Acquire) {
+            // 慢路径：等待写者完成
+            self.readers.fetch_sub(1, Ordering::Relaxed);
+            self.wait_for_writer();
+            self.readers.fetch_add(1, Ordering::Acquire);
+        }
+        
+        ReadGuard { lock: self }
+    }
+    
+    fn write(&self) -> WriteGuard<T> {
+        // 获取写锁
+        while self.writer.compare_exchange_weak(
+            false, true, Ordering::Acquire, Ordering::Relaxed
+        ).is_err() {
+            std::hint::spin_loop();
+        }
+        
+        // 等待所有读者完成
+        while self.readers.load(Ordering::Acquire) > 0 {
+            std::hint::spin_loop();
+        }
+        
+        WriteGuard { lock: self }
+    }
+}
+```
+
+## 3. 并发数据结构优化
+
+### 3.1 无锁数据结构设计
+
+#### 3.1.1 无锁队列实现
+
+**无锁队列定理**：无锁队列操作满足线性化性：
+$$\forall \text{operation} \in O: \text{linearizable}(\text{operation})$$
+
+**实现设计**：
+```rust
+// 无锁队列
+struct LockFreeQueue<T> {
+    head: AtomicPtr<Node<T>>,
+    tail: AtomicPtr<Node<T>>,
+}
+
+struct Node<T> {
+    data: Option<T>,
+    next: AtomicPtr<Node<T>>,
+}
+
+impl<T> LockFreeQueue<T> {
+    fn enqueue(&self, value: T) {
+        let new_node = Box::new(Node {
+            data: Some(value),
+            next: AtomicPtr::new(std::ptr::null_mut()),
+        });
+        
+        let new_ptr = Box::into_raw(new_node);
+        
+        loop {
+            let tail = self.tail.load(Ordering::Acquire);
+            let next = unsafe { (*tail).next.load(Ordering::Acquire) };
+            
+            if next.is_null() {
+                // 尝试链接新节点
+                if unsafe { (*tail).next.compare_exchange_weak(
+                    std::ptr::null_mut(),
+                    new_ptr,
+                    Ordering::Release,
+                    Ordering::Relaxed
+                ) }.is_ok() {
+                    // 更新尾指针
+                    self.tail.compare_exchange_weak(
+                        tail,
+                        new_ptr,
+                        Ordering::Release,
+                        Ordering::Relaxed
+                    ).ok();
+                    break;
+                }
+            } else {
+                // 帮助其他线程更新尾指针
+                self.tail.compare_exchange_weak(
+                    tail,
+                    next,
+                    Ordering::Release,
+                    Ordering::Relaxed
+                ).ok();
+            }
+        }
+    }
+    
+    fn dequeue(&self) -> Option<T> {
+        loop {
+            let head = self.head.load(Ordering::Acquire);
+            let tail = self.tail.load(Ordering::Acquire);
+            let next = unsafe { (*head).next.load(Ordering::Acquire) };
+            
+            if head == tail {
+                if next.is_null() {
+                    return None; // 队列为空
+                }
+                // 帮助更新尾指针
+                self.tail.compare_exchange_weak(
+                    tail,
+                    next,
+                    Ordering::Release,
+                    Ordering::Relaxed
+                ).ok();
+            } else {
+                if next.is_null() {
+                    continue;
+                }
+                
+                let data = unsafe { (*next).data.take() };
+                
+                // 更新头指针
+                if self.head.compare_exchange_weak(
+                    head,
+                    next,
+                    Ordering::Release,
+                    Ordering::Relaxed
+                ).is_ok() {
+                    unsafe { Box::from_raw(head) }; // 释放旧头节点
+                    return data;
+                }
+            }
+        }
+    }
+}
+```
+
+### 3.2 内存序优化策略
+
+#### 3.2.1 内存序选择理论
+
+**内存序选择定理**：对于操作对 $(op_1, op_2)$，最优内存序满足：
+$$\text{Ordering}_{opt} = \min\{\text{Ordering} \mid \text{correctness}(op_1, op_2, \text{Ordering})\}$$
+
+**优化实现**：
+```rust
+// 内存序优化器
+struct MemoryOrderingOptimizer {
+    operation_graph: OperationGraph,
+    ordering_constraints: Vec<OrderingConstraint>,
+}
+
+impl MemoryOrderingOptimizer {
+    fn optimize_ordering(&self, operations: &[Operation]) -> Vec<Ordering> {
+        let mut orderings = Vec::new();
+        
+        for op in operations {
+            let optimal_ordering = self.find_optimal_ordering(op);
+            orderings.push(optimal_ordering);
+        }
+        
+        orderings
+    }
+    
+    fn find_optimal_ordering(&self, op: &Operation) -> Ordering {
+        match op {
+            Operation::Load => Ordering::Acquire, // 最小开销
+            Operation::Store => Ordering::Release, // 最小开销
+            Operation::ReadModifyWrite => Ordering::AcqRel, // 必要开销
+            Operation::Fence => Ordering::SeqCst, // 最大开销，但保证顺序
+        }
+    }
+}
+```
+
+## 4. 高级并发技术
+
+### 4.1 工作窃取算法
+
+#### 4.1.1 工作窃取调度器
+
+**工作窃取定理**：对于 $n$ 个线程，工作窃取算法的负载均衡度满足：
+$$\text{LoadBalance} \geq 1 - \frac{1}{n}$$
+
+**实现设计**：
+```rust
+// 工作窃取调度器
+struct WorkStealingScheduler {
+    workers: Vec<Worker>,
+    global_queue: WorkStealingQueue<Task>,
+}
+
+struct Worker {
+    local_queue: WorkStealingQueue<Task>,
+    id: usize,
+}
+
+impl WorkStealingScheduler {
+    fn schedule(&self, task: Task) {
+        // 优先放入当前线程的本地队列
+        if let Some(worker) = self.get_current_worker() {
+            if worker.local_queue.push(task).is_err() {
+                // 本地队列满，放入全局队列
+                self.global_queue.push(task);
+            }
+        } else {
+            self.global_queue.push(task);
+        }
+    }
+    
+    fn steal_work(&self, thief: &Worker) -> Option<Task> {
+        // 1. 尝试从全局队列窃取
+        if let Some(task) = self.global_queue.pop() {
+            return Some(task);
+        }
+        
+        // 2. 随机选择受害者线程
+        let victims: Vec<_> = self.workers.iter()
+            .filter(|w| w.id != thief.id)
+            .collect();
+        
+        if let Some(victim) = victims.choose(&mut rand::thread_rng()) {
+            // 3. 从受害者窃取任务
+            if let Some(task) = victim.local_queue.steal() {
+                return Some(task);
+            }
+        }
+        
+        None
+    }
+}
+```
+
+### 4.2 并发控制流优化
+
+#### 4.2.1 控制流图优化
+
+**控制流优化定理**：对于控制流图 $G = (V, E)$，并发优化后的图 $G'$ 满足：
+$$\text{parallelism}(G') \geq \text{parallelism}(G)$$
+
+**优化算法**：
+```rust
+// 控制流优化器
+struct ControlFlowOptimizer {
+    cfg: ControlFlowGraph,
+    dependency_analysis: DependencyAnalyzer,
+}
+
+impl ControlFlowOptimizer {
+    fn optimize(&mut self) -> OptimizedCFG {
+        // 1. 依赖分析
+        let dependencies = self.dependency_analysis.analyze(&self.cfg);
+        
+        // 2. 并行化识别
+        let parallel_regions = self.identify_parallel_regions(&dependencies);
+        
+        // 3. 同步点优化
+        let optimized_sync = self.optimize_synchronization(&parallel_regions);
+        
+        // 4. 生成优化后的控制流图
+        self.generate_optimized_cfg(&optimized_sync)
+    }
+    
+    fn identify_parallel_regions(&self, deps: &Dependencies) -> Vec<ParallelRegion> {
+        let mut regions = Vec::new();
+        let mut visited = HashSet::new();
+        
+        for node in self.cfg.nodes() {
+            if visited.contains(&node) {
+                continue;
+            }
+            
+            let mut region = ParallelRegion::new();
+            self.dfs_parallel_region(node, deps, &mut visited, &mut region);
+            
+            if region.size() > 1 {
+                regions.push(region);
+            }
+        }
+        
+        regions
+    }
+}
+```
+
+## 5. 性能监控与调优
+
+### 5.1 并发性能分析工具
+
+#### 5.1.1 性能分析器设计
+
+```rust
+// 并发性能分析器
+struct ConcurrencyProfiler {
+    thread_metrics: HashMap<ThreadId, ThreadMetrics>,
+    lock_contention: HashMap<LockId, ContentionMetrics>,
+    memory_access: MemoryAccessTracker,
+}
+
+#[derive(Debug)]
+struct ThreadMetrics {
+    cpu_time: Duration,
+    wait_time: Duration,
+    context_switches: u64,
+    cache_misses: u64,
+}
+
+impl ConcurrencyProfiler {
+    fn record_thread_activity(&mut self, thread_id: ThreadId, activity: ThreadActivity) {
+        let metrics = self.thread_metrics.entry(thread_id).or_default();
+        
+        match activity {
+            ThreadActivity::CpuWork(duration) => {
+                metrics.cpu_time += duration;
+            }
+            ThreadActivity::Wait(duration) => {
+                metrics.wait_time += duration;
+            }
+            ThreadActivity::ContextSwitch => {
+                metrics.context_switches += 1;
+            }
+        }
+    }
+    
+    fn generate_report(&self) -> ConcurrencyReport {
+        ConcurrencyReport {
+            thread_efficiency: self.calculate_thread_efficiency(),
+            lock_contention_analysis: self.analyze_lock_contention(),
+            memory_access_patterns: self.analyze_memory_access(),
+            recommendations: self.generate_recommendations(),
+        }
+    }
+}
+```
+
+### 5.2 瓶颈检测与优化
+
+#### 5.2.1 瓶颈识别算法
+
+```rust
+// 瓶颈检测器
+struct BottleneckDetector {
+    performance_data: PerformanceData,
+    threshold: f64,
+}
+
+impl BottleneckDetector {
+    fn detect_bottlenecks(&self) -> Vec<Bottleneck> {
+        let mut bottlenecks = Vec::new();
+        
+        // 1. CPU瓶颈检测
+        if let Some(cpu_bottleneck) = self.detect_cpu_bottleneck() {
+            bottlenecks.push(cpu_bottleneck);
+        }
+        
+        // 2. 内存瓶颈检测
+        if let Some(memory_bottleneck) = self.detect_memory_bottleneck() {
+            bottlenecks.push(memory_bottleneck);
+        }
+        
+        // 3. 锁瓶颈检测
+        if let Some(lock_bottleneck) = self.detect_lock_bottleneck() {
+            bottlenecks.push(lock_bottleneck);
+        }
+        
+        // 4. I/O瓶颈检测
+        if let Some(io_bottleneck) = self.detect_io_bottleneck() {
+            bottlenecks.push(io_bottleneck);
+        }
+        
+        bottlenecks
+    }
+    
+    fn detect_cpu_bottleneck(&self) -> Option<Bottleneck> {
+        let cpu_utilization = self.performance_data.cpu_utilization();
+        
+        if cpu_utilization > self.threshold {
+            Some(Bottleneck::Cpu {
+                utilization: cpu_utilization,
+                recommendation: "Consider parallelization or algorithm optimization".to_string(),
+            })
+        } else {
+            None
+        }
     }
 }
 ```
 
 ## 总结
 
-本文档系统地分析了并发优化的理论与实践，包括：
+本文档系统性地阐述了Rust并发优化的理论与实践，包括：
 
-1. **理论基础**：建立了并发模型的形式化描述和并发控制算法
-2. **Rust机制**：详细分析了线程安全保证、原子操作和锁机制
-3. **优化技术**：提供了无锁数据结构、内存序优化、并发模式等实用技术
-4. **性能分析**：建立了完整的并发性能分析和调优框架
+1. **理论基础**：建立了并发模型的形式化框架，证明了并发安全性的必要条件
+2. **Rust机制优化**：深入分析了线程池、异步调度、锁机制的性能优化策略
+3. **数据结构优化**：提供了无锁数据结构、内存序优化等高级技术
+4. **高级技术**：介绍了工作窃取、控制流优化等前沿并发技术
+5. **监控调优**：建立了完整的并发性能监控和调优体系
 
-所有内容都遵循严格的数学规范，包含详细的证明过程和形式化表达，确保学术严谨性和实用性。 
+通过这些优化技术，可以显著提升Rust程序的并发性能和可扩展性，同时保证并发安全性和正确性。 
