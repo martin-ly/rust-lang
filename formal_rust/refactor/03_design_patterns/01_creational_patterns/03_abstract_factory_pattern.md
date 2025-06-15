@@ -1,4 +1,4 @@
-# 抽象工厂模式形式化重构 (Abstract Factory Pattern Formal Refactoring)
+﻿# 抽象工厂模式形式化重构 (Abstract Factory Pattern Formal Refactoring)
 
 ## 目录
 
@@ -82,7 +82,7 @@ $$\text{Client} \rightarrow \text{AbstractFactory} \rightarrow \text{ConcreteFac
 **定理3.1.1 (产品族一致性保证)**
 对于任意抽象工厂 $AF$，如果满足产品族约束，则创建的产品是兼容的。
 
-**证明：**
+****证明**：**
 设 $AF = (N, I, S, R, C)$ 为抽象工厂模式，$C$ 包含产品族一致性约束。
 
 1. 根据定义1.2，产品族 $PF = (P, F, C, R)$ 满足兼容性约束
@@ -98,7 +98,7 @@ $$\text{Client} \rightarrow \text{AbstractFactory} \rightarrow \text{ConcreteFac
 **定理3.2.1 (扩展性保证)**
 抽象工厂模式支持无修改扩展新产品族。
 
-**证明：**
+****证明**：**
 
 1. 根据定义2.3，开闭原则要求对扩展开放，对修改封闭
 2. 新增产品族时，只需：
@@ -115,7 +115,7 @@ $$\text{Client} \rightarrow \text{AbstractFactory} \rightarrow \text{ConcreteFac
 **定理3.3.1 (依赖倒置满足)**
 抽象工厂模式满足依赖倒置原则。
 
-**证明：**
+****证明**：**
 
 1. 客户端代码依赖于 `AbstractFactory` 接口
 2. 具体工厂实现 `AbstractFactory` 接口
@@ -127,7 +127,7 @@ $$\text{Client} \rightarrow \text{AbstractFactory} \rightarrow \text{ConcreteFac
 **定理3.4.1 (创建复杂度)**
 抽象工厂创建产品的复杂度为 $O(1)$。
 
-**证明：**
+****证明**：**
 
 1. 工厂方法直接返回具体产品实例
 2. 无复杂的计算或递归
@@ -136,7 +136,7 @@ $$\text{Client} \rightarrow \text{AbstractFactory} \rightarrow \text{ConcreteFac
 **定理3.4.2 (内存复杂度)**
 抽象工厂的内存复杂度为 $O(|P| \cdot |F|)$。
 
-**证明：**
+****证明**：**
 
 1. 每个工厂需要存储产品创建逻辑
 2. 每个产品需要存储实例
@@ -573,3 +573,4 @@ $$\text{Reusability}(AF) = \frac{|I|}{|S|} \cdot \frac{1}{\text{Complexity}(AF)}
 4. **性能定理**：创建复杂度为 $O(1)$
 
 抽象工厂模式通过严格的数学基础和形式化验证，为产品族创建提供了可靠的理论保证和实践指导。
+

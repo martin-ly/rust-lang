@@ -1,4 +1,4 @@
-# 迭代器模式 (Iterator Pattern) - 形式化重构
+﻿# 迭代器模式 (Iterator Pattern) - 形式化重构
 
 ## 目录
 
@@ -101,7 +101,7 @@ $$\forall i, j: i < j \Rightarrow \text{position}(e_i) < \text{position}(e_j)$$
 **定理4.1 (遍历完整性)**
 如果迭代器 $I$ 对于聚合对象 $A$ 是完整的，则遍历过程会访问所有元素。
 
-**证明：**
+****证明**：**
 1. 根据定义3.2，$\forall e \in A, \exists i: \text{next}^i(I) = \text{Some}(e)$
 2. 这意味着每个元素都会被访问到
 3. 完整性得证。
@@ -111,7 +111,7 @@ $$\forall i, j: i < j \Rightarrow \text{position}(e_i) < \text{position}(e_j)$$
 **定理4.2 (遍历唯一性)**
 如果迭代器 $I$ 对于聚合对象 $A$ 是唯一的，则每个元素只被访问一次。
 
-**证明：**
+****证明**：**
 1. 根据定义3.3，$\forall e \in A, \exists! i: \text{next}^i(I) = \text{Some}(e)$
 2. 这意味着每个元素只被访问一次
 3. 唯一性得证。
@@ -121,7 +121,7 @@ $$\forall i, j: i < j \Rightarrow \text{position}(e_i) < \text{position}(e_j)$$
 **定理4.3 (遍历终止性)**
 对于有限聚合对象 $A$，迭代器 $I$ 的遍历过程必然终止。
 
-**证明：**
+****证明**：**
 1. 聚合对象 $A$ 是有限的，包含 $n$ 个元素
 2. 每次调用 `next()` 至少前进一个位置
 3. 最多调用 $n$ 次 `next()`
@@ -132,7 +132,7 @@ $$\forall i, j: i < j \Rightarrow \text{position}(e_i) < \text{position}(e_j)$$
 **定理4.4 (遍历复杂度)**
 对于包含 $n$ 个元素的聚合对象，完整遍历的时间复杂度为 $O(n)$。
 
-**证明：**
+****证明**：**
 1. 每个元素需要访问一次
 2. 每次访问需要常数时间
 3. 总复杂度为 $O(n)$

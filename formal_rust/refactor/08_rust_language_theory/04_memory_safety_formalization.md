@@ -1,4 +1,4 @@
-# 内存安全的形式化理论
+﻿# 内存安全的形式化理论
 
 ## 目录
 
@@ -24,29 +24,29 @@
 
 ### 1.1. 内存安全定义
 
-**定义 1.1.1** (内存安全)
+****定义 1**.1.1** (内存安全)
 程序 $P$ 是内存安全的，当且仅当：
 1. **无悬垂引用**: $\forall r \in \text{Refs}(P): \text{valid}(r)$
 2. **无数据竞争**: $\forall t_1, t_2 \in \text{Threads}(P): \neg \text{race}(t_1, t_2)$
 3. **无缓冲区溢出**: $\forall a \in \text{Arrays}(P): \text{in\_bounds}(a)$
 4. **无双重释放**: $\forall m \in \text{Memory}(P): \text{free\_count}(m) \leq 1$
 
-**定义 1.1.2** (内存错误)
+****定义 1**.1.2** (内存错误)
 内存错误集合 $\mathcal{E} = \{\text{dangling}, \text{race}, \text{overflow}, \text{double\_free}\}$
 
-**定义 1.1.3** (安全程序)
+****定义 1**.1.3** (安全程序)
 程序 $P$ 是安全的，当且仅当：
 $$\forall e \in \mathcal{E}: \neg \text{can\_occur}(e, P)$$
 
 ### 1.2. 所有权理论
 
-**定义 1.2.1** (所有权)
+****定义 1**.2.1** (所有权)
 所有权是一个二元关系 $\text{owns} \subseteq \text{Variable} \times \text{Value}$，满足：
 1. **唯一性**: $\forall v \in \text{Value}: |\{x | x \text{ owns } v\}| \leq 1$
 2. **传递性**: 如果 $x \text{ owns } v$ 且 $x$ 被移动给 $y$，则 $y \text{ owns } v$
 3. **生命周期**: 当所有者超出作用域时，值被销毁
 
-**定义 1.2.2** (所有权转移)
+****定义 1**.2.2** (所有权转移)
 所有权转移函数 $\text{move}: \text{Variable} \times \text{Variable} \to \text{State}$ 定义为：
 $$\text{move}(x, y)(\sigma) = \sigma'$$
 其中 $\sigma'$ 是转移后的状态，满足：
@@ -54,23 +54,23 @@ $$\text{move}(x, y)(\sigma) = \sigma'$$
 - $\sigma'(x) = \text{undefined}$
 - $\forall z \neq x, y: \sigma'(z) = \sigma(z)$
 
-**定理 1.2.1** (所有权唯一性)
+****定理 1**.2.1** (所有权唯一性)
 在任何程序状态下，每个值最多有一个所有者：
 $$\forall v \in \text{Value}: |\{x | x \text{ owns } v\}| \leq 1$$
 
 ### 1.3. 借用理论
 
-**定义 1.3.1** (借用)
+****定义 1**.3.1** (借用)
 借用是一个三元关系 $\text{borrows} \subseteq \text{Variable} \times \text{Variable} \times \text{BorrowType}$，其中：
 - $\text{BorrowType} = \{\text{immutable}, \text{mutable}\}$
 
-**定义 1.3.2** (借用规则)
+****定义 1**.3.2** (借用规则)
 借用必须满足以下规则：
 1. **不可变借用**: $\forall x, y: \text{borrows}(x, y, \text{immutable}) \implies \text{valid}(y)$
 2. **可变借用**: $\forall x, y: \text{borrows}(x, y, \text{mutable}) \implies \text{valid}(y) \land \text{unique}(x, y)$
 3. **借用冲突**: $\neg(\text{borrows}(x, y, \text{mutable}) \land \text{borrows}(z, y, \text{immutable}))$
 
-**定义 1.3.3** (借用检查)
+****定义 1**.3.3** (借用检查)
 借用检查函数 $\text{check\_borrow}: \text{State} \times \text{Borrow} \to \text{Bool}$ 定义为：
 $$\text{check\_borrow}(\sigma, b) = \begin{cases}
 \text{true} & \text{if } \text{valid\_borrow}(\sigma, b) \\
@@ -79,13 +79,13 @@ $$\text{check\_borrow}(\sigma, b) = \begin{cases}
 
 ### 1.4. 生命周期理论
 
-**定义 1.4.1** (生命周期)
+****定义 1**.4.1** (生命周期)
 生命周期 $\alpha$ 是一个类型参数，表示引用的有效期间。
 
-**定义 1.4.2** (生命周期约束)
+****定义 1**.4.2** (生命周期约束)
 生命周期约束 $\alpha \leq \beta$ 表示 $\alpha$ 的生命周期不短于 $\beta$。
 
-**定义 1.4.3** (生命周期检查)
+****定义 1**.4.3** (生命周期检查)
 生命周期检查函数 $\text{check\_lifetime}: \text{Reference} \times \text{Scope} \to \text{Bool}$ 定义为：
 $$\text{check\_lifetime}(r, s) = \text{lifetime}(r) \subseteq \text{scope}(s)$$
 
@@ -93,14 +93,14 @@ $$\text{check\_lifetime}(r, s) = \text{lifetime}(r) \subseteq \text{scope}(s)$$
 
 ### 2.1. 内存状态模型
 
-**定义 2.1.1** (内存状态)
+****定义 2**.1.1** (内存状态)
 内存状态 $\sigma = (H, E, O, B)$ 是一个四元组，其中：
 - $H: \text{Address} \to \text{Value}$: 堆映射
 - $E: \text{Variable} \to \text{Address}$: 环境映射
 - $O: \text{Address} \to \text{Variable}$: 所有权映射
 - $B: \text{Address} \to \mathcal{P}(\text{Variable})$: 借用映射
 
-**定义 2.1.2** (状态转换)
+****定义 2**.1.2** (状态转换)
 状态转换函数 $\delta: \text{State} \times \text{Action} \to \text{State}$ 定义为：
 $$\delta(\sigma, a) = \begin{cases}
 \text{allocate}(\sigma, a) & \text{if } a = \text{alloc}(v) \\
@@ -111,7 +111,7 @@ $$\delta(\sigma, a) = \begin{cases}
 
 ### 2.2. 所有权状态机
 
-**定义 2.2.1** (所有权状态机)
+****定义 2**.2.1** (所有权状态机)
 所有权状态机 $OSM = (Q, \Sigma, \delta, q_0, F)$ 其中：
 - $Q = \mathcal{P}(\text{Variable} \times \text{Address})$: 状态集合
 - $\Sigma = \{\text{move}, \text{borrow}, \text{return}, \text{drop}\}$: 动作集合
@@ -127,7 +127,7 @@ $$\delta(\sigma, a) = \begin{cases}
 
 ### 2.3. 借用检查器
 
-**定义 2.3.1** (借用检查器)
+****定义 2**.3.1** (借用检查器)
 借用检查器 $BC = (S, R, C)$ 其中：
 - $S$: 状态集合
 - $R$: 规则集合
@@ -142,36 +142,36 @@ $$\delta(\sigma, a) = \begin{cases}
 
 ### 3.1. 内存安全定理
 
-**定理 3.1.1** (内存安全保证)
+****定理 3**.1.1** (内存安全保证)
 如果程序 $P$ 通过Rust类型检查，则 $P$ 是内存安全的。
 
 **证明**:
 通过结构归纳法证明。对于每种语言构造，证明其满足内存安全条件。
 
-**定理 3.1.2** (所有权安全)
+****定理 3**.1.2** (所有权安全)
 所有权系统保证每个值最多有一个所有者：
 $$\forall \sigma \in \text{States}(P): \text{unique\_ownership}(\sigma)$$
 
 ### 3.2. 数据竞争自由定理
 
-**定理 3.2.1** (数据竞争自由)
+****定理 3**.2.1** (数据竞争自由)
 如果程序 $P$ 通过借用检查，则 $P$ 无数据竞争：
 $$\forall t_1, t_2 \in \text{Threads}(P): \neg \text{race}(t_1, t_2)$$
 
 **证明**:
-通过借用规则证明：
+通过借用规则**证明**：
 1. 可变借用是唯一的
 2. 不可变借用可以共享
 3. 可变借用和不可变借用不能同时存在
 
 ### 3.3. 悬垂引用定理
 
-**定理 3.3.1** (悬垂引用自由)
+****定理 3**.3.1** (悬垂引用自由)
 如果程序 $P$ 通过生命周期检查，则 $P$ 无悬垂引用：
 $$\forall r \in \text{Refs}(P): \text{valid}(r)$$
 
 **证明**:
-通过生命周期约束证明：
+通过生命周期约束**证明**：
 1. 引用的生命周期不超过被引用值的生命周期
 2. 生命周期检查确保引用在有效期内
 
@@ -656,8 +656,7 @@ pub enum LifetimeError {
 本文档提供了内存安全的形式化理论基础和Rust实现方案。通过所有权系统、借用检查和生命周期管理，Rust在编译时保证了内存安全。
 
 关键要点：
-1. **形式化理论**: 基于状态机和图论的严格定义
-2. **所有权系统**: 通过类型系统实现内存管理
+1. **形式化理论**: 基于状态机和图论的严格**定义 2**. **所有权系统**: 通过类型系统实现内存管理
 3. **借用检查**: 防止数据竞争和悬垂引用
 4. **生命周期**: 管理引用的有效期间
 5. **编译时保证**: 在编译时发现内存错误

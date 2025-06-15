@@ -1,4 +1,4 @@
-# 02. 结构型设计模式
+﻿# 02. 结构型设计模式
 
 ## 目录
 
@@ -45,12 +45,12 @@ Rust中的结构型模式包含以下核心概念：
 
 ### 2.1 适配器模式定义
 
-**定义 2.1.1** (适配器)
+****定义 2**.1.1** (适配器)
 ```
 Adapter = {adapt: Incompatible_Interface → Compatible_Interface}
 ```
 
-**定义 2.1.2** (适配器保证)
+****定义 2**.1.2** (适配器保证)
 ```
 Adapter_Guarantee = {
     Interface_Compatibility: ∀i ∈ Incompatible, ∃a ∈ Adapter, Compatible(a(i)),
@@ -138,12 +138,12 @@ impl Target for ClassAdapter {
 
 ### 3.1 桥接模式定义
 
-**定义 3.1.1** (桥接)
+****定义 3**.1.1** (桥接)
 ```
 Bridge = {abstraction: Abstract_Interface, implementation: Implementation_Interface}
 ```
 
-**定义 3.1.2** (桥接关系)
+****定义 3**.1.2** (桥接关系)
 ```
 Bridge_Relationship = {
     Abstraction: {operation: () → Result},
@@ -206,12 +206,12 @@ impl Abstraction for RefinedAbstraction {
 
 ### 4.1 组合模式定义
 
-**定义 4.1.1** (组合)
+****定义 4**.1.1** (组合)
 ```
 Composite = {component: Component, children: Vec<Component>}
 ```
 
-**定义 4.1.2** (组件层次)
+****定义 4**.1.2** (组件层次)
 ```
 Component_Hierarchy = {
     Leaf: Component,
@@ -306,12 +306,12 @@ impl Component for Composite {
 
 ### 5.1 装饰器模式定义
 
-**定义 5.1.1** (装饰器)
+****定义 5**.1.1** (装饰器)
 ```
 Decorator = {component: Component, decorator: Component → Component}
 ```
 
-**定义 5.1.2** (装饰器链)
+****定义 5**.1.2** (装饰器链)
 ```
 Decorator_Chain = {
     Base_Component: Component,
@@ -399,12 +399,12 @@ impl Component for ConcreteDecoratorB {
 
 ### 6.1 外观模式定义
 
-**定义 6.1.1** (外观)
+****定义 6**.1.1** (外观)
 ```
 Facade = {simplify: Complex_Subsystem → Simple_Interface}
 ```
 
-**定义 6.1.2** (子系统封装)
+****定义 6**.1.2** (子系统封装)
 ```
 Subsystem_Encapsulation = {
     Subsystem_1: Complex_Interface_1,
@@ -490,12 +490,12 @@ impl Facade {
 
 ### 7.1 享元模式定义
 
-**定义 7.1.1** (享元)
+****定义 7**.1.1** (享元)
 ```
 Flyweight = {intrinsic: Intrinsic_State, extrinsic: Extrinsic_State}
 ```
 
-**定义 7.1.2** (享元工厂)
+****定义 7**.1.2** (享元工厂)
 ```
 Flyweight_Factory = {
     flyweights: HashMap<Key, Flyweight>,
@@ -564,12 +564,12 @@ impl FlyweightFactory {
 
 ### 8.1 代理模式定义
 
-**定义 8.1.1** (代理)
+****定义 8**.1.1** (代理)
 ```
 Proxy = {subject: Subject, proxy: Subject → Subject}
 ```
 
-**定义 8.1.2** (代理类型)
+****定义 8**.1.2** (代理类型)
 ```
 Proxy_Types = {
     Virtual_Proxy: Lazy_Loading,

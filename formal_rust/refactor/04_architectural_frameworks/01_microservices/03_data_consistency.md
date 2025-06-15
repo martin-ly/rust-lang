@@ -1,4 +1,4 @@
-# 4.1.3 数据一致性策略 (Data Consistency Strategy)
+﻿# 4.1.3 数据一致性策略 (Data Consistency Strategy)
 
 ## 目录
 
@@ -10,29 +10,29 @@
 
 ## 4.1.3.1 一致性模型
 
-### 定义 4.1.3.1 (数据一致性)
+### **定义 4**.1.3.1 (数据一致性)
 
 数据一致性是指分布式系统中多个数据副本之间的一致性状态：
 $$Consistency(S) = \forall i,j \in Nodes: Data_i(t) = Data_j(t)$$
 
-### 定义 4.1.3.2 (强一致性)
+### **定义 4**.1.3.2 (强一致性)
 
 强一致性要求所有节点在任何时刻看到的数据都是相同的：
 $$StrongConsistency = \forall t \in Time, \forall i,j \in Nodes: Data_i(t) = Data_j(t)$$
 
-### 定义 4.1.3.3 (弱一致性)
+### **定义 4**.1.3.3 (弱一致性)
 
 弱一致性允许不同节点在短时间内看到不同的数据：
 $$WeakConsistency = \exists t \in Time, \exists i,j \in Nodes: Data_i(t) \neq Data_j(t)$$
 
-### 定义 4.1.3.4 (最终一致性)
+### **定义 4**.1.3.4 (最终一致性)
 
 最终一致性保证在没有新更新的情况下，所有节点最终会收敛到相同状态：
 $$EventualConsistency = \lim_{t \to \infty} Data_i(t) = \lim_{t \to \infty} Data_j(t)$$
 
 ## 4.1.3.2 CAP定理
 
-### 定理 4.1.3.1 (CAP定理)
+### **定理 4**.1.3.1 (CAP定理)
 
 在分布式系统中，最多只能同时满足以下三个属性中的两个：
 
@@ -57,12 +57,12 @@ $$EventualConsistency = \lim_{t \to \infty} Data_i(t) = \lim_{t \to \infty} Data
 
 ## 4.1.3.3 分布式事务
 
-### 定义 4.1.3.5 (分布式事务)
+### **定义 4**.1.3.5 (分布式事务)
 
 分布式事务是跨越多个服务的原子操作：
 $$DistributedTransaction = \{T_1, T_2, ..., T_n\} \text{ where } T_i \text{ is a local transaction}$$
 
-### 定义 4.1.3.6 (两阶段提交)
+### **定义 4**.1.3.6 (两阶段提交)
 
 两阶段提交是保证分布式事务原子性的协议：
 
@@ -220,7 +220,7 @@ pub enum TransactionError {
 }
 ```
 
-### 定义 4.1.3.7 (Saga模式)
+### **定义 4**.1.3.7 (Saga模式)
 
 Saga模式是处理长事务的补偿模式：
 
@@ -340,12 +340,12 @@ impl SagaStep for ProcessPaymentStep {
 
 ## 4.1.3.4 最终一致性
 
-### 定义 4.1.3.8 (最终一致性模型)
+### **定义 4**.1.3.8 (最终一致性模型)
 
 最终一致性保证在没有新更新的情况下，所有副本最终会收敛：
 $$EventualConsistency = \forall i,j: \lim_{t \to \infty} |Data_i(t) - Data_j(t)| = 0$$
 
-### 定义 4.1.3.9 (向量时钟)
+### **定义 4**.1.3.9 (向量时钟)
 
 向量时钟用于跟踪事件因果关系：
 $$VectorClock = \{Node_1: Clock_1, Node_2: Clock_2, ..., Node_n: Clock_n\}$$
@@ -514,7 +514,7 @@ pub enum ReplicationError {
 
 ## 4.1.3.5 事件溯源
 
-### 定义 4.1.3.10 (事件溯源)
+### **定义 4**.1.3.10 (事件溯源)
 
 事件溯源通过存储事件序列来重建系统状态：
 $$EventSourcing = \{E_1, E_2, ..., E_n\} \text{ where } State = \prod_{i=1}^n E_i(InitialState)$$
@@ -824,3 +824,4 @@ pub enum ConsistencyError {
 ### 中断恢复点
 
 当前状态：数据一致性策略内容已完成，准备开始服务发现与注册的内容编写。
+

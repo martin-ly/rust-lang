@@ -1,4 +1,4 @@
-# 04. 异步错误处理理论
+﻿# 04. 异步错误处理理论
 
 ## 目录
 
@@ -15,7 +15,7 @@
 
 ### 1.1 异步错误定义
 
-**定义 1.1.1** (异步错误)
+****定义 1**.1.1** (异步错误)
 异步错误是在异步操作执行过程中发生的异常情况：
 
 $$\text{AsyncError} = \langle \text{ErrorType}, \text{Context}, \text{Timestamp}, \text{Stack} \rangle$$
@@ -25,7 +25,7 @@ $$\text{ErrorCategory} ::= \text{IOError} \mid \text{TimeoutError} \mid \text{Ne
 
 ### 1.2 错误生命周期
 
-**定义 1.2.1** (错误生命周期)
+****定义 1**.2.1** (错误生命周期)
 错误从发生到处理的完整过程：
 
 $$\text{ErrorLifecycle} ::= \text{Occurrence} \rightarrow \text{Detection} \rightarrow \text{Propagation} \rightarrow \text{Handling} \rightarrow \text{Recovery}$$
@@ -35,7 +35,7 @@ $$\text{error\_lifecycle}(\text{error}) = \text{LifecycleState} \rightarrow \tex
 
 ### 1.3 错误上下文
 
-**定义 1.3.1** (错误上下文)
+****定义 1**.3.1** (错误上下文)
 错误上下文包含错误发生时的环境信息：
 
 $$\text{ErrorContext} = \langle \text{TaskId}, \text{ThreadId}, \text{CallStack}, \text{Environment} \rangle$$
@@ -44,7 +44,7 @@ $$\text{ErrorContext} = \langle \text{TaskId}, \text{ThreadId}, \text{CallStack}
 
 ### 2.1 错误类型层次
 
-**定义 2.1.1** (错误类型层次)
+****定义 2**.1.1** (错误类型层次)
 错误类型形成层次结构，支持错误分类和处理：
 
 $$\text{ErrorHierarchy} ::= \text{BaseError} \mid \text{SpecificError} \mid \text{CompositeError}$$
@@ -54,7 +54,7 @@ $$\text{is\_a}(\text{error}, \text{type}) = \text{bool}$$
 
 ### 2.2 错误包装
 
-**定义 2.2.1** (错误包装)
+****定义 2**.2.1** (错误包装)
 错误包装将底层错误转换为高层错误：
 
 $$\text{ErrorWrapper} = \text{InnerError} \xrightarrow{\text{wrap}} \text{OuterError}$$
@@ -89,7 +89,7 @@ impl Error for NetworkError {
 
 ### 2.3 错误转换
 
-**定义 2.3.1** (错误转换)
+****定义 2**.3.1** (错误转换)
 错误转换将一种错误类型转换为另一种：
 
 $$\text{ErrorConversion} = \text{Error}_A \xrightarrow{\text{convert}} \text{Error}_B$$
@@ -101,7 +101,7 @@ $$\text{convert\_error}(\text{error}, \text{converter}) = \text{converted\_error
 
 ### 3.1 错误传播链
 
-**定义 3.1.1** (错误传播链)
+****定义 3**.1.1** (错误传播链)
 错误在异步调用链中传播的路径：
 
 $$\text{ErrorChain} ::= \text{Error} \xrightarrow{\text{propagate}} \text{Caller} \xrightarrow{\text{propagate}} \cdots$$
@@ -127,7 +127,7 @@ function propagate_error(error, call_stack):
     return error
 ```
 
-**定理 3.2.1** (传播完整性)
+****定理 3**.2.1** (传播完整性)
 错误传播算法保证所有错误都能被正确处理或传播到顶层。
 
 **证明**：
@@ -138,7 +138,7 @@ function propagate_error(error, call_stack):
 
 ### 3.3 错误传播优化
 
-**定义 3.3.1** (传播优化)
+****定义 3**.3.1** (传播优化)
 传播优化减少错误传播的开销：
 
 $$\text{PropagationOpt} = \langle \text{ShortCircuit}, \text{Caching}, \text{Batching} \rangle$$
@@ -153,7 +153,7 @@ $$\text{PropagationOpt} = \langle \text{ShortCircuit}, \text{Caching}, \text{Bat
 
 ### 4.1 重试策略
 
-**定义 4.1.1** (重试策略)
+****定义 4**.1.1** (重试策略)
 重试策略在操作失败时自动重试：
 
 $$\text{RetryStrategy} = \langle \text{MaxAttempts}, \text{BackoffPolicy}, \text{RetryCondition} \rangle$$
@@ -198,7 +198,7 @@ where
 
 ### 4.2 断路器模式
 
-**定义 4.2.1** (断路器)
+****定义 4**.2.1** (断路器)
 断路器在连续失败时暂时停止操作：
 
 $$\text{CircuitBreaker} = \langle \text{State}, \text{FailureCount}, \text{Threshold}, \text{Timeout} \rangle$$
@@ -258,7 +258,7 @@ impl CircuitBreaker {
 
 ### 4.3 降级策略
 
-**定义 4.3.1** (降级策略)
+****定义 4**.3.1** (降级策略)
 降级策略在主要功能失败时提供备用方案：
 
 $$\text{FallbackStrategy} = \langle \text{Primary}, \text{Secondary}, \text{Fallback} \rangle$$
@@ -270,7 +270,7 @@ $$\text{fallback}(\text{primary\_result}) = \text{Result}[\text{T}, \text{Fallba
 
 ### 5.1 错误监控
 
-**定义 5.1.1** (错误监控)
+****定义 5**.1.1** (错误监控)
 错误监控收集和分析错误信息：
 
 $$\text{ErrorMonitoring} = \langle \text{Collector}, \text{Aggregator}, \text{Analyzer}, \text{Alert} \rangle$$
@@ -283,7 +283,7 @@ $$\text{ErrorMonitoring} = \langle \text{Collector}, \text{Aggregator}, \text{An
 
 ### 5.2 错误诊断
 
-**定义 5.2.1** (错误诊断)
+****定义 5**.2.1** (错误诊断)
 错误诊断分析错误原因和影响：
 
 $$\text{ErrorDiagnosis} = \langle \text{RootCause}, \text{Impact}, \text{Recommendation} \rangle$$
@@ -293,7 +293,7 @@ $$\text{diagnose\_error}(\text{error}, \text{context}) = \text{Diagnosis}$$
 
 ### 5.3 错误追踪
 
-**定义 5.3.1** (错误追踪)
+****定义 5**.3.1** (错误追踪)
 错误追踪记录错误的完整传播路径：
 
 $$\text{ErrorTracing} = \langle \text{TraceId}, \text{SpanId}, \text{Events}, \text{Metadata} \rangle$$
@@ -324,7 +324,7 @@ async fn async_operation() -> Result<String, Box<dyn Error>> {
 
 ### 6.1 错误处理装饰器
 
-**定义 6.1.1** (错误处理装饰器)
+****定义 6**.1.1** (错误处理装饰器)
 错误处理装饰器为异步函数添加错误处理逻辑：
 
 $$\text{ErrorDecorator} = \text{AsyncFn} \xrightarrow{\text{decorate}} \text{ProtectedAsyncFn}$$
@@ -352,7 +352,7 @@ where
 
 ### 6.2 错误处理中间件
 
-**定义 6.2.1** (错误处理中间件)
+****定义 6**.2.1** (错误处理中间件)
 错误处理中间件在请求处理链中处理错误：
 
 $$\text{ErrorMiddleware} = \text{Request} \xrightarrow{\text{process}} \text{Response}$$
@@ -362,7 +362,7 @@ $$\text{middleware\_chain} = \text{Middleware}_1 \circ \text{Middleware}_2 \circ
 
 ### 6.3 错误处理策略模式
 
-**定义 6.3.1** (错误处理策略)
+****定义 6**.3.1** (错误处理策略)
 错误处理策略根据错误类型选择不同的处理方式：
 
 $$\text{ErrorStrategy} = \text{Map}[\text{ErrorType}, \text{Handler}]$$
@@ -374,7 +374,7 @@ $$\text{select\_strategy}(\text{error}) = \text{Handler}$$
 
 ### 7.1 错误处理正确性
 
-**定理 7.1.1** (错误处理正确性)
+****定理 7**.1.1** (错误处理正确性)
 正确的错误处理保证程序在错误情况下仍能正常运行。
 
 **证明**：
@@ -385,7 +385,7 @@ $$\text{select\_strategy}(\text{error}) = \text{Handler}$$
 
 ### 7.2 错误处理完整性
 
-**定理 7.2.1** (错误处理完整性)
+****定理 7**.2.1** (错误处理完整性)
 完整的错误处理覆盖所有可能的错误情况。
 
 **证明**：
@@ -396,7 +396,7 @@ $$\text{select\_strategy}(\text{error}) = \text{Handler}$$
 
 ### 7.3 错误处理性能
 
-**定理 7.3.1** (错误处理性能)
+****定理 7**.3.1** (错误处理性能)
 高效的错误处理对正常执行路径影响最小。
 
 **证明**：
@@ -450,3 +450,4 @@ $$\text{select\_strategy}(\text{error}) = \text{Handler}$$
 8. **最佳实践**：设计原则、处理指南、测试方法
 
 该理论体系为异步错误处理的实践和优化提供了系统性的指导。
+

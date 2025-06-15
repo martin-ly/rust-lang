@@ -1,4 +1,4 @@
-# 物联网形式化理论 (IoT Formalization Theory)
+﻿# 物联网形式化理论 (IoT Formalization Theory)
 
 ## 📋 目录 (Table of Contents)
 
@@ -20,7 +20,7 @@
 
 物联网系统的本质在于**物理世界与数字世界的无缝融合**。从哲学角度看，IoT将物理实体抽象为可感知、可控制、可交互的数字对象。
 
-**定义 1.1.1** (IoT系统本体论定义)
+****定义 1**.1.1** (IoT系统本体论定义)
 设 $\mathcal{I}$ 为IoT系统，$\mathcal{P}$ 为物理实体空间，$\mathcal{D}$ 为数字表示空间，$\mathcal{S}$ 为传感器空间，$\mathcal{A}$ 为执行器空间，则：
 $$\mathcal{I} = \langle \mathcal{P}, \mathcal{D}, \mathcal{S}, \mathcal{A}, \phi, \psi, \tau \rangle$$
 
@@ -34,7 +34,7 @@ $$\mathcal{I} = \langle \mathcal{P}, \mathcal{D}, \mathcal{S}, \mathcal{A}, \phi
 
 IoT知识的获取依赖于**多源数据融合**和**实时感知推理**。
 
-**定理 1.1.2** (IoT知识获取定理)
+****定理 1**.1.2** (IoT知识获取定理)
 对于任意IoT系统 $\mathcal{I}$，其知识获取过程满足：
 $$K(\mathcal{I}) = \bigcup_{i=1}^{n} S_i \cup \bigcap_{j=1}^{m} F_j$$
 
@@ -44,7 +44,7 @@ $$K(\mathcal{I}) = \bigcup_{i=1}^{n} S_i \cup \bigcap_{j=1}^{m} F_j$$
 
 #### 1.2.1 传感器网络 (Sensor Network)
 
-**定义 1.2.1** (传感器网络形式化定义)
+****定义 1**.2.1** (传感器网络形式化定义)
 传感器网络是一个六元组 $\mathcal{SN} = \langle N, E, S, C, T, R \rangle$，其中：
 
 - $N$ 为节点集合
@@ -59,7 +59,7 @@ $$\forall n_1, n_2 \in N: \text{Connected}(n_1, n_2) \Rightarrow \text{Reachable
 
 #### 1.2.2 边缘计算 (Edge Computing)
 
-**定义 1.2.2** (边缘计算形式化定义)
+****定义 1**.2.2** (边缘计算形式化定义)
 边缘计算是一个五元组 $\mathcal{EC} = \langle D, P, S, L, M \rangle$，其中：
 
 - $D$ 为设备集合
@@ -74,7 +74,7 @@ $$\forall n_1, n_2 \in N: \text{Connected}(n_1, n_2) \Rightarrow \text{Reachable
 
 ### 2.1 数据流模型 (Data Flow Model)
 
-**定义 2.1.1** (数据流图)
+****定义 2**.1.1** (数据流图)
 数据流图是一个五元组 $\mathcal{DFG} = \langle V, E, F, B, T \rangle$，其中：
 
 - $V$ 为顶点集合（处理节点）
@@ -83,7 +83,7 @@ $$\forall n_1, n_2 \in N: \text{Connected}(n_1, n_2) \Rightarrow \text{Reachable
 - $B$ 为缓冲区集合
 - $T$ 为时间约束
 
-**定理 2.1.1** (数据流正确性定理)
+****定理 2**.1.1** (数据流正确性定理)
 对于任意数据流图 $\mathcal{DFG}$，如果满足以下条件：
 
 1. $\forall e \in E: \text{Valid}(e)$
@@ -98,7 +98,7 @@ $$\forall n_1, n_2 \in N: \text{Connected}(n_1, n_2) \Rightarrow \text{Reachable
 
 ### 2.2 能量管理模型 (Energy Management Model)
 
-**定义 2.2.1** (能量消耗函数)
+****定义 2**.2.1** (能量消耗函数)
 能量消耗函数 $E: \mathcal{T} \times \mathcal{M} \rightarrow \mathbb{R}^+$ 定义为：
 $$E(t, m) = P_{\text{idle}} \cdot t + P_{\text{active}} \cdot m \cdot t$$
 
@@ -109,13 +109,13 @@ $$E(t, m) = P_{\text{idle}} \cdot t + P_{\text{active}} \cdot m \cdot t$$
 - $P_{\text{idle}}$ 为空闲功耗
 - $P_{\text{active}}$ 为活动功耗
 
-**定理 2.2.1** (能量优化定理)
+****定理 2**.2.1** (能量优化定理)
 对于固定任务负载，最小化能量消耗的调度策略为：
 $$\text{Minimize} \sum_{i=1}^{n} E(t_i, m_i)$$
 
 ### 2.3 网络拓扑模型 (Network Topology Model)
 
-**定义 2.3.1** (网络拓扑)
+****定义 2**.3.1** (网络拓扑)
 网络拓扑是一个四元组 $\mathcal{NT} = \langle N, L, C, R \rangle$，其中：
 
 - $N$ 为节点集合
@@ -123,7 +123,7 @@ $$\text{Minimize} \sum_{i=1}^{n} E(t_i, m_i)$$
 - $C$ 为容量函数
 - $R$ 为路由函数
 
-**定理 2.3.1** (网络容量定理)
+****定理 2**.3.1** (网络容量定理)
 网络总容量为：
 $$C_{\text{total}} = \sum_{l \in L} C(l)$$
 
@@ -133,7 +133,7 @@ $$C_{\text{total}} = \sum_{l \in L} C(l)$$
 
 ### 3.1 传感器网络覆盖定理 (Sensor Network Coverage Theorem)
 
-**定理 3.1.1** (传感器网络覆盖定理)
+****定理 3**.1.1** (传感器网络覆盖定理)
 对于包含 $n$ 个传感器的网络，覆盖面积 $A$ 满足：
 $$A \leq \sum_{i=1}^{n} \pi r_i^2$$
 
@@ -145,7 +145,7 @@ $$A \leq \sum_{i=1}^{n} \pi r_i^2$$
 
 ### 3.2 边缘计算延迟定理 (Edge Computing Latency Theorem)
 
-**定理 3.2.1** (边缘计算延迟定理)
+****定理 3**.2.1** (边缘计算延迟定理)
 边缘计算的端到端延迟为：
 $$L = L_{\text{transmission}} + L_{\text{processing}} + L_{\text{response}}$$
 
@@ -980,7 +980,7 @@ mod routing_tests {
 
 ### 6.1 能量优化
 
-**定理 6.1.1** (能量优化定理)
+****定理 6**.1.1** (能量优化定理)
 使用动态电压频率调节可以将能量消耗降低30-50%。
 
 ### 6.2 网络优化
@@ -998,7 +998,7 @@ mod routing_tests {
 
 ### 7.1 安全威胁模型
 
-**定义 7.1.1** (安全威胁)
+****定义 7**.1.1** (安全威胁)
 IoT系统面临的主要威胁包括：
 
 - 数据窃取
@@ -1021,10 +1021,8 @@ IoT系统面临的主要威胁包括：
 
 本文档建立了IoT系统的完整形式化理论框架，包括：
 
-1. **理论基础**: 哲学批判性分析和核心概念定义
-2. **数学形式化**: 严格的数据流模型和能量管理模型
-3. **核心定理**: 传感器网络覆盖定理和边缘计算延迟定理
-4. **Rust实现**: 类型安全的传感器节点和网络路由系统
+1. **理论基础**: 哲学批判性分析和核心概念**定义 2**. **数学形式化**: 严格的数据流模型和能量管理模型
+3. **核心定理**: 传感器网络覆盖定理和边缘计算延迟**定理 4**. **Rust实现**: 类型安全的传感器节点和网络路由系统
 5. **应用案例**: 智能家居和工业IoT系统的架构设计
 6. **性能优化**: 能量优化和网络优化策略
 7. **安全隐私**: 安全威胁模型和防护措施
@@ -1038,3 +1036,4 @@ IoT系统面临的主要威胁包括：
 **最后更新**: 2025-06-14
 **作者**: AI Assistant
 **质量等级**: A+ (优秀)
+

@@ -1,4 +1,4 @@
-# 07. Rust宏系统形式化理论
+﻿# 07. Rust宏系统形式化理论
 
 ## 目录
 
@@ -15,7 +15,7 @@
 
 ### 1.1 宏系统定义
 
-**定义 1.1.1** (宏系统)
+****定义 1**.1.1** (宏系统)
 宏系统是一个编译时元编程机制，允许在编译阶段进行代码生成和转换。
 
 $$\text{MacroSystem} = \langle \mathcal{M}, \mathcal{R}, \mathcal{E}, \vdash_m \rangle$$
@@ -29,7 +29,7 @@ $$\text{MacroSystem} = \langle \mathcal{M}, \mathcal{R}, \mathcal{E}, \vdash_m \
 
 ### 1.2 宏分类
 
-**定义 1.2.1** (宏分类)
+****定义 1**.2.1** (宏分类)
 Rust宏系统包含三种主要类型：
 
 $$\text{MacroType} ::= \text{DeclMacro} \mid \text{ProcMacro} \mid \text{DeriveMacro}$$
@@ -40,7 +40,7 @@ $$\text{MacroType} ::= \text{DeclMacro} \mid \text{ProcMacro} \mid \text{DeriveM
 
 ### 1.3 宏调用语法
 
-**定义 1.3.1** (宏调用)
+****定义 1**.3.1** (宏调用)
 宏调用是使用宏的语法结构：
 
 $$\text{MacroCall} ::= \text{macro\_name}!(\text{args}) \mid \text{macro\_name}![\text{args}] \mid \text{macro\_name}!\{\text{args}\}$$
@@ -56,7 +56,7 @@ vec![1, 2, 3, 4];
 
 ### 2.1 声明宏定义
 
-**定义 2.1.1** (声明宏)
+****定义 2**.1.1** (声明宏)
 声明宏是基于模式匹配的宏定义：
 
 $$\text{DeclMacro} ::= \text{macro\_rules}! \text{macro\_name} \{ \text{rule}_1; \ldots; \text{rule}_n \}$$
@@ -77,7 +77,7 @@ macro_rules! vec {
 
 ### 2.2 宏规则模式
 
-**定义 2.2.1** (宏规则)
+****定义 2**.2.1** (宏规则)
 宏规则包含模式匹配和代码生成：
 
 $$\text{MacroRule} ::= \text{Pattern} \Rightarrow \text{Template}$$
@@ -92,7 +92,7 @@ $$\text{Repetition} ::= \$(\text{Pattern}) \text{Separator} \text{RepetitionOp}$
 
 ### 2.3 模式匹配
 
-**定义 2.3.1** (模式匹配)
+****定义 2**.3.1** (模式匹配)
 模式匹配是将输入token序列与宏模式进行匹配的过程：
 
 $$\text{match}(\text{input}, \text{pattern}) = \text{Option}[\text{Bindings}]$$
@@ -109,7 +109,7 @@ function match_pattern(input, pattern):
         return match_group(input, pattern)
 ```
 
-**定理 2.3.1** (模式匹配确定性)
+****定理 2**.3.1** (模式匹配确定性)
 对于给定的输入和模式，模式匹配结果是确定性的。
 
 **证明**：
@@ -122,7 +122,7 @@ function match_pattern(input, pattern):
 
 ### 3.1 过程宏定义
 
-**定义 3.1.1** (过程宏)
+****定义 3**.1.1** (过程宏)
 过程宏是基于Rust代码的编译时函数，操作抽象语法树：
 
 $$\text{ProcMacro} ::= \text{fn}(\text{TokenStream}) \rightarrow \text{TokenStream}$$
@@ -139,7 +139,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 
 ### 3.2 属性宏
 
-**定义 3.2.1** (属性宏)
+****定义 3**.2.1** (属性宏)
 属性宏是附加到项的编译时注解：
 
 $$\text{AttrMacro} ::= \#[ \text{macro\_name}(\text{args}) ]$$
@@ -156,7 +156,7 @@ struct Point {
 
 ### 3.3 派生宏
 
-**定义 3.3.1** (派生宏)
+****定义 3**.3.1** (派生宏)
 派生宏自动为结构体或枚举实现trait：
 
 $$\text{DeriveMacro} ::= \text{derive}(\text{Trait})$$
@@ -175,7 +175,7 @@ pub fn derive_debug(input: TokenStream) -> TokenStream {
 
 ### 4.1 宏展开定义
 
-**定义 4.1.1** (宏展开)
+****定义 4**.1.1** (宏展开)
 宏展开是将宏调用转换为具体代码的过程：
 
 $$\text{expand}(\text{MacroCall}) = \text{ExpandedCode}$$
@@ -189,7 +189,7 @@ $$\text{expand}(\text{MacroCall}) = \text{ExpandedCode}$$
 
 ### 4.2 递归展开
 
-**定义 4.2.1** (递归展开)
+****定义 4**.2.1** (递归展开)
 递归展开处理嵌套的宏调用：
 
 $$\text{expand\_recursive}(\text{code}) = \text{final\_code}$$
@@ -207,7 +207,7 @@ function expand_recursive(code):
 
 ### 4.3 展开顺序
 
-**定理 4.3.1** (展开顺序)
+****定理 4**.3.1** (展开顺序)
 宏展开遵循确定的顺序，确保结果的一致性。
 
 **证明**：
@@ -221,7 +221,7 @@ function expand_recursive(code):
 
 ### 5.1 卫生性定义
 
-**定义 5.1.1** (卫生宏)
+****定义 5**.1.1** (卫生宏)
 卫生宏是避免变量名冲突的宏系统：
 
 $$\text{HygienicMacro} ::= \text{Macro} \text{ with } \text{ScopeIsolation}$$
@@ -234,7 +234,7 @@ $$\text{HygienicMacro} ::= \text{Macro} \text{ with } \text{ScopeIsolation}$$
 
 ### 5.2 作用域隔离
 
-**定义 5.2.1** (作用域隔离)
+****定义 5**.2.1** (作用域隔离)
 作用域隔离确保宏内部和外部标识符不冲突：
 
 $$\text{isolate\_scope}(\text{macro\_body}) = \text{isolated\_body}$$
@@ -258,7 +258,7 @@ let counter = create_counter!();
 
 ### 5.3 标识符重命名
 
-**定义 5.3.1** (标识符重命名)
+****定义 5**.3.1** (标识符重命名)
 标识符重命名是卫生宏系统的核心机制：
 
 $$\text{rename}(\text{identifier}, \text{scope}) = \text{unique\_identifier}$$
@@ -278,7 +278,7 @@ function rename_identifiers(macro_body, scope):
 
 ### 6.1 编译时计算定义
 
-**定义 6.1.1** (编译时计算)
+****定义 6**.1.1** (编译时计算)
 编译时计算是在编译阶段执行的计算：
 
 $$\text{compile\_time\_compute}(\text{expression}) = \text{constant\_value}$$
@@ -292,7 +292,7 @@ $$\text{compile\_time\_compute}(\text{expression}) = \text{constant\_value}$$
 
 ### 6.2 常量表达式
 
-**定义 6.2.1** (常量表达式)
+****定义 6**.2.1** (常量表达式)
 常量表达式是可以在编译时求值的表达式：
 
 $$\text{ConstExpr} ::= \text{Literal} \mid \text{ConstFn} \mid \text{ConstOp}$$
@@ -313,7 +313,7 @@ const fn factorial(n: u32) -> u32 {
 
 ### 6.3 类型级计算
 
-**定义 6.3.1** (类型级计算)
+****定义 6**.3.1** (类型级计算)
 类型级计算是在类型系统中进行的计算：
 
 $$\text{type\_level\_compute}(\text{TypeExpr}) = \text{ResultType}$$
@@ -336,7 +336,7 @@ type Sum = <i32 as Add<i32>>::Output; // 类型级计算
 
 ### 7.1 代码生成模式
 
-**定义 7.1.1** (代码生成)
+****定义 7**.1.1** (代码生成)
 代码生成是自动生成重复代码的模式：
 
 $$\text{code\_generation}(\text{template}, \text{data}) = \text{generated\_code}$$
@@ -366,7 +366,7 @@ implement_getters!(Point, x: i32, y: i32);
 
 ### 7.2 领域特定语言
 
-**定义 7.2.1** (DSL)
+****定义 7**.2.1** (DSL)
 领域特定语言是使用宏创建的专用语法：
 
 $$\text{DSL} ::= \text{MacroBased} \text{ Language}$$
@@ -389,7 +389,7 @@ let page = html!(html {
 
 ### 7.3 编译时验证
 
-**定义 7.3.1** (编译时验证)
+****定义 7**.3.1** (编译时验证)
 编译时验证是在编译阶段进行的检查：
 
 $$\text{compile\_time\_check}(\text{condition}) = \text{bool}$$
@@ -410,7 +410,7 @@ assert_size!(i32, 4); // 编译时检查 i32 大小为 4 字节
 
 ### 8.1 宏展开正确性
 
-**定理 8.1.1** (宏展开正确性)
+****定理 8**.1.1** (宏展开正确性)
 如果宏定义正确且输入匹配模式，则宏展开结果正确。
 
 **证明**：
@@ -422,7 +422,7 @@ assert_size!(i32, 4); // 编译时检查 i32 大小为 4 字节
 
 ### 8.2 编译时计算终止性
 
-**定理 8.2.1** (编译时计算终止性)
+****定理 8**.2.1** (编译时计算终止性)
 所有编译时计算都会在有限时间内终止。
 
 **证明**：
@@ -434,7 +434,7 @@ assert_size!(i32, 4); // 编译时检查 i32 大小为 4 字节
 
 ### 8.3 元编程安全性
 
-**定理 8.3.1** (元编程安全性)
+****定理 8**.3.1** (元编程安全性)
 Rust的宏系统保证元编程的安全性。
 
 **证明**：
@@ -459,3 +459,4 @@ Rust的宏系统保证元编程的安全性。
 7. **形式化证明**：正确性、终止性、安全性
 
 该理论体系为Rust宏系统的理解、实现和优化提供了坚实的数学基础。
+

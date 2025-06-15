@@ -1,4 +1,4 @@
-# 创建型设计模式形式化理论
+﻿# 创建型设计模式形式化理论
 
 (Creational Design Patterns Formalization Theory)
 
@@ -8,50 +8,50 @@
   - [目录](#目录)
   - [1. 理论基础 (Theoretical Foundation)](#1-理论基础-theoretical-foundation)
     - [1.1 对象创建基础 (Object Creation Foundation)](#11-对象创建基础-object-creation-foundation)
-      - [定义 1.1.1 (对象)](#定义-111-对象)
-      - [定义 1.1.2 (对象创建)](#定义-112-对象创建)
-      - [定义 1.1.3 (对象生命周期)](#定义-113-对象生命周期)
+      - [**定义 1**.1.1 (对象)](#定义-111-对象)
+      - [**定义 1**.1.2 (对象创建)](#定义-112-对象创建)
+      - [**定义 1**.1.3 (对象生命周期)](#定义-113-对象生命周期)
     - [1.2 创建模式基础 (Creation Pattern Foundation)](#12-创建模式基础-creation-pattern-foundation)
-      - [定义 1.2.1 (创建模式)](#定义-121-创建模式)
-      - [定义 1.2.2 (创建约束)](#定义-122-创建约束)
+      - [**定义 1**.2.1 (创建模式)](#定义-121-创建模式)
+      - [**定义 1**.2.2 (创建约束)](#定义-122-创建约束)
   - [2. 创建型模式五元组定义 (Creational Pattern Quintuple Definition)](#2-创建型模式五元组定义-creational-pattern-quintuple-definition)
-    - [定义 2.1.1 (创建型模式系统)](#定义-211-创建型模式系统)
+    - [**定义 2**.1.1 (创建型模式系统)](#定义-211-创建型模式系统)
   - [3. 单例模式形式化理论 (Singleton Pattern Formalization Theory)](#3-单例模式形式化理论-singleton-pattern-formalization-theory)
     - [3.1 单例代数理论 (Singleton Algebraic Theory)](#31-单例代数理论-singleton-algebraic-theory)
-      - [定义 3.1.1 (单例代数)](#定义-311-单例代数)
-      - [定义 3.1.2 (单例约束)](#定义-312-单例约束)
+      - [**定义 3**.1.1 (单例代数)](#定义-311-单例代数)
+      - [**定义 3**.1.2 (单例约束)](#定义-312-单例约束)
     - [3.2 单例状态理论 (Singleton State Theory)](#32-单例状态理论-singleton-state-theory)
-      - [定义 3.2.1 (单例状态)](#定义-321-单例状态)
-      - [定义 3.2.2 (单例访问)](#定义-322-单例访问)
+      - [**定义 3**.2.1 (单例状态)](#定义-321-单例状态)
+      - [**定义 3**.2.2 (单例访问)](#定义-322-单例访问)
   - [4. 工厂方法模式形式化理论 (Factory Method Pattern Formalization Theory)](#4-工厂方法模式形式化理论-factory-method-pattern-formalization-theory)
     - [4.1 工厂方法代数理论 (Factory Method Algebraic Theory)](#41-工厂方法代数理论-factory-method-algebraic-theory)
-      - [定义 4.1.1 (工厂方法代数)](#定义-411-工厂方法代数)
-      - [定义 4.1.2 (工厂方法规则)](#定义-412-工厂方法规则)
+      - [**定义 4**.1.1 (工厂方法代数)](#定义-411-工厂方法代数)
+      - [**定义 4**.1.2 (工厂方法规则)](#定义-412-工厂方法规则)
     - [4.2 工厂方法类型理论 (Factory Method Type Theory)](#42-工厂方法类型理论-factory-method-type-theory)
-      - [定义 4.2.1 (工厂类型)](#定义-421-工厂类型)
-      - [定义 4.2.2 (产品类型)](#定义-422-产品类型)
+      - [**定义 4**.2.1 (工厂类型)](#定义-421-工厂类型)
+      - [**定义 4**.2.2 (产品类型)](#定义-422-产品类型)
   - [5. 抽象工厂模式形式化理论 (Abstract Factory Pattern Formalization Theory)](#5-抽象工厂模式形式化理论-abstract-factory-pattern-formalization-theory)
     - [5.1 抽象工厂代数理论 (Abstract Factory Algebraic Theory)](#51-抽象工厂代数理论-abstract-factory-algebraic-theory)
-      - [定义 5.1.1 (抽象工厂代数)](#定义-511-抽象工厂代数)
-      - [定义 5.1.2 (工厂族关系)](#定义-512-工厂族关系)
+      - [**定义 5**.1.1 (抽象工厂代数)](#定义-511-抽象工厂代数)
+      - [**定义 5**.1.2 (工厂族关系)](#定义-512-工厂族关系)
     - [5.2 产品族理论 (Product Family Theory)](#52-产品族理论-product-family-theory)
-      - [定义 5.2.1 (产品族)](#定义-521-产品族)
-      - [定义 5.2.2 (产品兼容性)](#定义-522-产品兼容性)
+      - [**定义 5**.2.1 (产品族)](#定义-521-产品族)
+      - [**定义 5**.2.2 (产品兼容性)](#定义-522-产品兼容性)
   - [6. 建造者模式形式化理论 (Builder Pattern Formalization Theory)](#6-建造者模式形式化理论-builder-pattern-formalization-theory)
     - [6.1 建造者代数理论 (Builder Algebraic Theory)](#61-建造者代数理论-builder-algebraic-theory)
-      - [定义 6.1.1 (建造者代数)](#定义-611-建造者代数)
-      - [定义 6.1.2 (构建步骤)](#定义-612-构建步骤)
+      - [**定义 6**.1.1 (建造者代数)](#定义-611-建造者代数)
+      - [**定义 6**.1.2 (构建步骤)](#定义-612-构建步骤)
     - [6.2 构建过程理论 (Build Process Theory)](#62-构建过程理论-build-process-theory)
     - [6.3 建造者状态理论 (Builder State Theory)](#63-建造者状态理论-builder-state-theory)
   - [7. 原型模式形式化理论 (Prototype Pattern Formalization Theory)](#7-原型模式形式化理论-prototype-pattern-formalization-theory)
     - [7.1 原型代数理论 (Prototype Algebraic Theory)](#71-原型代数理论-prototype-algebraic-theory)
-      - [定义 7.1.1 (原型代数)](#定义-711-原型代数)
-      - [定义 7.1.2 (克隆操作)](#定义-712-克隆操作)
+      - [**定义 7**.1.1 (原型代数)](#定义-711-原型代数)
+      - [**定义 7**.1.2 (克隆操作)](#定义-712-克隆操作)
     - [7.2 复制深度理论 (Copy Depth Theory)](#72-复制深度理论-copy-depth-theory)
-      - [定义 7.2.1 (浅复制)](#定义-721-浅复制)
-      - [定义 7.2.2 (深复制)](#定义-722-深复制)
+      - [**定义 7**.2.1 (浅复制)](#定义-721-浅复制)
+      - [**定义 7**.2.2 (深复制)](#定义-722-深复制)
     - [7.3 原型关系理论 (Prototype Relation Theory)](#73-原型关系理论-prototype-relation-theory)
-      - [定义 7.3.1 (原型关系)](#定义-731-原型关系)
+      - [**定义 7**.3.1 (原型关系)](#定义-731-原型关系)
   - [8. 核心定理证明 (Core Theorems Proof)](#8-核心定理证明-core-theorems-proof)
     - [8.1 单例唯一性定理 (Singleton Uniqueness Theorem)](#81-单例唯一性定理-singleton-uniqueness-theorem)
     - [8.2 工厂方法类型安全定理 (Factory Method Type Safety Theorem)](#82-工厂方法类型安全定理-factory-method-type-safety-theorem)
@@ -72,7 +72,7 @@
 
 ### 1.1 对象创建基础 (Object Creation Foundation)
 
-#### 定义 1.1.1 (对象)
+#### **定义 1**.1.1 (对象)
 
 对象 $O = (S, M, I)$ 包含：
 
@@ -80,12 +80,12 @@
 - $M$: 方法集合 (Method Set)
 - $I$: 接口集合 (Interface Set)
 
-#### 定义 1.1.2 (对象创建)
+#### **定义 1**.1.2 (对象创建)
 
 对象创建函数 $\text{Create}: \text{Class} \times \text{Args} \rightarrow \text{Object}$ 定义为：
 $$\text{Create}(C, args) = O \text{ where } O \text{ is an instance of } C$$
 
-#### 定义 1.1.3 (对象生命周期)
+#### **定义 1**.1.3 (对象生命周期)
 
 ```latex
 对象生命周期 $\text{Lifecycle}: \text{Object} \times \text{Time} \rightarrow \text{State}$ 定义为：
@@ -98,7 +98,7 @@ $$\text{Lifecycle}(O, t) = \begin{cases}
 
 ### 1.2 创建模式基础 (Creation Pattern Foundation)
 
-#### 定义 1.2.1 (创建模式)
+#### **定义 1**.2.1 (创建模式)
 
 ```latex
 创建模式 $CP = (F, C, I, R)$ 包含：
@@ -108,7 +108,7 @@ $$\text{Lifecycle}(O, t) = \begin{cases}
 - $R$: 资源管理规则集合 (Resource Management Rule Set)
 ```
 
-#### 定义 1.2.2 (创建约束)
+#### **定义 1**.2.2 (创建约束)
 
 ```latex
 创建约束 $\text{CreationConstraint}: \text{Class} \times \text{Context} \rightarrow \text{Boolean}$ 定义为：
@@ -122,7 +122,7 @@ $$\text{CreationConstraint}(C, ctx) = \begin{cases}
 
 ## 2. 创建型模式五元组定义 (Creational Pattern Quintuple Definition)
 
-### 定义 2.1.1 (创建型模式系统)
+### **定义 2**.1.1 (创建型模式系统)
 
 创建型模式系统 $CPS = (S, F, A, B, P)$ 包含：
 
@@ -162,7 +162,7 @@ $$\text{CreationConstraint}(C, ctx) = \begin{cases}
 
 ### 3.1 单例代数理论 (Singleton Algebraic Theory)
 
-#### 定义 3.1.1 (单例代数)
+#### **定义 3**.1.1 (单例代数)
 
 单例代数 $SA = (I, A, L, T, C)$ 包含：
 
@@ -172,7 +172,7 @@ $$\text{CreationConstraint}(C, ctx) = \begin{cases}
 - **T (Threading)**: 线程安全 (Thread Safety)
 - **C (Constraints)**: 约束条件 (Constraints)
 
-#### 定义 3.1.2 (单例约束)
+#### **定义 3**.1.2 (单例约束)
 
 单例约束集合 $SC = \{SC_1, SC_2, SC_3\}$ 定义为：
 
@@ -182,7 +182,7 @@ $$\text{CreationConstraint}(C, ctx) = \begin{cases}
 
 ### 3.2 单例状态理论 (Singleton State Theory)
 
-#### 定义 3.2.1 (单例状态)
+#### **定义 3**.2.1 (单例状态)
 
 ```latex
 单例状态函数 $\text{SingletonState}: \text{Time} \rightarrow \text{State}$ 定义为：
@@ -192,7 +192,7 @@ $$\text{SingletonState}(t) = \begin{cases}
 \end{cases}$$
 ```
 
-#### 定义 3.2.2 (单例访问)
+#### **定义 3**.2.2 (单例访问)
 
 单例访问函数 $\text{SingletonAccess}: \text{Process} \times \text{Time} \rightarrow \text{Instance}$ 定义为：
 $$\text{SingletonAccess}(p, t) = i \text{ where } \text{Active}(i, t) \land \text{CanAccess}(p, i)$$
@@ -203,7 +203,7 @@ $$\text{SingletonAccess}(p, t) = i \text{ where } \text{Active}(i, t) \land \tex
 
 ### 4.1 工厂方法代数理论 (Factory Method Algebraic Theory)
 
-#### 定义 4.1.1 (工厂方法代数)
+#### **定义 4**.1.1 (工厂方法代数)
 
 工厂方法代数 $FMA = (I, C, P, D, R)$ 包含：
 
@@ -213,7 +213,7 @@ $$\text{SingletonAccess}(p, t) = i \text{ where } \text{Active}(i, t) \land \tex
 - **D (Defer)**: 延迟创建 (Deferred Creation)
 - **R (Rules)**: 创建规则 (Creation Rules)
 
-#### 定义 4.1.2 (工厂方法规则)
+#### **定义 4**.1.2 (工厂方法规则)
 
 工厂方法规则集合 $FMR = \{FMR_1, FMR_2, FMR_3\}$ 定义为：
 
@@ -223,12 +223,12 @@ $$\text{SingletonAccess}(p, t) = i \text{ where } \text{Active}(i, t) \land \tex
 
 ### 4.2 工厂方法类型理论 (Factory Method Type Theory)
 
-#### 定义 4.2.1 (工厂类型)
+#### **定义 4**.2.1 (工厂类型)
 
 工厂类型 $FT = \text{Factory} \rightarrow \text{Product}$ 定义为：
 $$FT = \{\lambda args. \text{CreateProduct}(args) \mid \text{CreateProduct} \in \text{ProductCreators}\}$$
 
-#### 定义 4.2.2 (产品类型)
+#### **定义 4**.2.2 (产品类型)
 
 产品类型 $PT = \text{Product} \times \text{Methods}$ 定义为：
 $$PT = \{(p, m) \mid p \in \text{Product}, m \in \text{Methods}(p)\}$$
@@ -239,7 +239,7 @@ $$PT = \{(p, m) \mid p \in \text{Product}, m \in \text{Methods}(p)\}$$
 
 ### 5.1 抽象工厂代数理论 (Abstract Factory Algebraic Theory)
 
-#### 定义 5.1.1 (抽象工厂代数)
+#### **定义 5**.1.1 (抽象工厂代数)
 
 抽象工厂代数 $AFA = (F, P, C, R, I)$ 包含：
 
@@ -249,7 +249,7 @@ $$PT = \{(p, m) \mid p \in \text{Product}, m \in \text{Methods}(p)\}$$
 - **R (Relations)**: 关系管理 (Relation Management)
 - **I (Interface)**: 接口定义 (Interface Definition)
 
-#### 定义 5.1.2 (工厂族关系)
+#### **定义 5**.1.2 (工厂族关系)
 
 ```latex
 工厂族关系 $\text{FactoryFamily}: \text{Factory} \times \text{Product} \rightarrow \text{Boolean}$ 定义为：
@@ -261,12 +261,12 @@ $$\text{FactoryFamily}(f, p) = \begin{cases}
 
 ### 5.2 产品族理论 (Product Family Theory)
 
-#### 定义 5.2.1 (产品族)
+#### **定义 5**.2.1 (产品族)
 
 产品族 $PF = \{P_1, P_2, \ldots, P_n\}$ 定义为：
 $$PF = \{\text{Product} \mid \text{Compatible}(\text{Product})\}$$
 
-#### 定义 5.2.2 (产品兼容性)
+#### **定义 5**.2.2 (产品兼容性)
 
 ```latex
 产品兼容性 $\text{Compatible}: \text{Product} \times \text{Product} \rightarrow \text{Boolean}$ 定义为：
@@ -282,7 +282,7 @@ $$\text{Compatible}(p_1, p_2) = \begin{cases}
 
 ### 6.1 建造者代数理论 (Builder Algebraic Theory)
 
-#### 定义 6.1.1 (建造者代数)
+#### **定义 6**.1.1 (建造者代数)
 
 建造者代数 $BA = (S, P, C, F, R)$ 包含：
 
@@ -292,7 +292,7 @@ $$\text{Compatible}(p_1, p_2) = \begin{cases}
 - **F (Final)**: 最终产品 (Final Product)
 - **R (Rules)**: 构建规则 (Build Rules)
 
-#### 定义 6.1.2 (构建步骤)
+#### **定义 6**.1.2 (构建步骤)
 
 构建步骤序列 $\text{BuildSteps}: \text{Builder} \rightarrow [\text{Step}]$ 定义为：
 $$\text{BuildSteps}(b) = [s_1, s_2, \ldots, s_n] \text{ where } s_i \in \text{Steps}$$
@@ -326,7 +326,7 @@ $$\text{BuilderState}(b, t) = \begin{cases}
 
 ### 7.1 原型代数理论 (Prototype Algebraic Theory)
 
-#### 定义 7.1.1 (原型代数)
+#### **定义 7**.1.1 (原型代数)
 
 原型代数 $PA = (O, C, D, R, T)$ 包含：
 
@@ -336,26 +336,26 @@ $$\text{BuilderState}(b, t) = \begin{cases}
 - **R (Reference)**: 引用关系 (Reference Relation)
 - **T (Type)**: 类型系统 (Type System)
 
-#### 定义 7.1.2 (克隆操作)
+#### **定义 7**.1.2 (克隆操作)
 
 克隆操作 $\text{Clone}: \text{Object} \rightarrow \text{Object}$ 定义为：
 $$\text{Clone}(o) = o' \text{ where } \text{IsCopy}(o, o') \land \text{Independent}(o, o')$$
 
 ### 7.2 复制深度理论 (Copy Depth Theory)
 
-#### 定义 7.2.1 (浅复制)
+#### **定义 7**.2.1 (浅复制)
 
 浅复制 $\text{ShallowCopy}: \text{Object} \rightarrow \text{Object}$ 定义为：
 $$\text{ShallowCopy}(o) = o' \text{ where } \text{CopyState}(o, o') \land \text{ShareReferences}(o, o')$$
 
-#### 定义 7.2.2 (深复制)
+#### **定义 7**.2.2 (深复制)
 
 深复制 $\text{DeepCopy}: \text{Object} \rightarrow \text{Object}$ 定义为：
 $$\text{DeepCopy}(o) = o' \text{ where } \text{CopyState}(o, o') \land \text{CopyReferences}(o, o')$$
 
 ### 7.3 原型关系理论 (Prototype Relation Theory)
 
-#### 定义 7.3.1 (原型关系)
+#### **定义 7**.3.1 (原型关系)
 
 ```latex
 原型关系 $\text{PrototypeRelation}: \text{Object} \times \text{Object} \rightarrow \text{Boolean}$ 定义为：
@@ -935,3 +935,4 @@ impl PrototypeRelationValidation for PrototypeAlgebra<PrototypeObject> {
 - **可验证性**：所有性质都可以通过定理证明验证
 
 通过这种形式化重构，创建型设计模式从经验性的设计原则转变为可证明的数学理论，为软件工程提供了坚实的理论基础。
+

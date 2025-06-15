@@ -1,4 +1,4 @@
-# 工作流任务调度形式化理论 (Workflow Task Scheduling Formalization)
+﻿# 工作流任务调度形式化理论 (Workflow Task Scheduling Formalization)
 
 ## 目录 (Table of Contents)
 
@@ -30,8 +30,7 @@
 
 ### 1.2 研究目标
 
-1. **形式化定义**: 建立任务调度的严格数学定义
-2. **调度算法理论**: 定义各种调度算法的理论基础
+1. **形式化定义**: 建立任务调度的严格数学**定义 2**. **调度算法理论**: 定义各种调度算法的理论基础
 3. **资源分配理论**: 建立资源分配的最优化理论
 4. **实现理论**: 提供高效的Rust实现
 
@@ -48,7 +47,7 @@
 
 ### 2.1 基本概念
 
-**定义 2.1** (任务)
+****定义 2**.1** (任务)
 任务是一个四元组 $T = (id, duration, priority, resources)$，其中：
 
 - $id \in \mathbb{N}$ 是任务唯一标识符
@@ -56,19 +55,19 @@
 - $priority \in \mathbb{N}$ 是任务优先级
 - $resources \subseteq \mathcal{R}$ 是任务所需资源集合
 
-**定义 2.2** (资源)
+****定义 2**.2** (资源)
 资源是一个三元组 $R = (id, capacity, cost)$，其中：
 
 - $id \in \mathbb{N}$ 是资源唯一标识符
 - $capacity \in \mathbb{R}^+$ 是资源容量
 - $cost \in \mathbb{R}^+$ 是资源使用成本
 
-**定义 2.3** (调度)
+****定义 2**.3** (调度)
 调度是一个函数 $S: \mathcal{T} \rightarrow \mathcal{R} \times \mathbb{R}^+$，将任务映射到资源和开始时间。
 
 ### 2.2 调度目标
 
-**定义 2.4** (调度目标)
+****定义 2**.4** (调度目标)
 调度目标函数 $f: \mathcal{S} \rightarrow \mathbb{R}$ 定义为：
 $$f(S) = \alpha \cdot \text{makespan}(S) + \beta \cdot \text{cost}(S) + \gamma \cdot \text{fairness}(S)$$
 
@@ -85,7 +84,7 @@ $$f(S) = \alpha \cdot \text{makespan}(S) + \beta \cdot \text{cost}(S) + \gamma \
 
 ### 3.1 工作流任务定义
 
-**定义 3.1** (工作流任务)
+****定义 3**.1** (工作流任务)
 工作流任务是一个六元组 $W = (T, D, C, P, R, L)$，其中：
 
 - $T$ 是任务集合
@@ -95,13 +94,13 @@ $$f(S) = \alpha \cdot \text{makespan}(S) + \beta \cdot \text{cost}(S) + \gamma \
 - $R$ 是资源集合
 - $L$ 是负载均衡函数
 
-**定义 3.2** (任务依赖关系)
+****定义 3**.2** (任务依赖关系)
 任务依赖关系图 $D = (T, E)$ 是一个有向无环图，其中：
 
 - $T$ 是任务集合
 - $E \subseteq T \times T$ 是依赖关系集合
 
-**定义 3.3** (任务约束)
+****定义 3**.3** (任务约束)
 任务约束 $C$ 包含：
 
 1. **时间约束**: $t_{start}(T_i) + duration(T_i) \leq t_{start}(T_j)$
@@ -110,10 +109,10 @@ $$f(S) = \alpha \cdot \text{makespan}(S) + \beta \cdot \text{cost}(S) + \gamma \
 
 ### 3.2 调度策略定义
 
-**定义 3.4** (调度策略)
+****定义 3**.4** (调度策略)
 调度策略是一个函数 $\sigma: \mathcal{W} \rightarrow \mathcal{S}$，将工作流映射到调度方案。
 
-**定义 3.5** (最优调度)
+****定义 3**.5** (最优调度)
 调度 $S^*$ 是最优的，当且仅当：
 $$S^* = \arg\min_{S \in \mathcal{S}} f(S)$$
 
@@ -133,7 +132,7 @@ $$S^* = \arg\min_{S \in \mathcal{S}} f(S)$$
 5. **更新时间**: $t = t + duration(T_i)$
 6. **重复**: 直到所有任务都被调度
 
-**定理 4.1** (贪心算法近似比)
+****定理 4**.1** (贪心算法近似比)
 贪心调度算法的近似比为 $O(\log n)$，其中 $n$ 是任务数量。
 
 **证明**:
@@ -148,7 +147,7 @@ $$dp[i][j] = \min_{k \in \text{predecessors}(i)} \{dp[k][j] + duration(i)\}$$
 
 其中 $dp[i][j]$ 表示任务 $i$ 在资源 $j$ 上的最早完成时间。
 
-**定理 4.2** (动态规划最优性)
+****定理 4**.2** (动态规划最优性)
 动态规划调度算法能够找到最优调度方案。
 
 **证明**:
@@ -166,7 +165,7 @@ $$dp[i][j] = \min_{k \in \text{predecessors}(i)} \{dp[k][j] + duration(i)\}$$
 5. **变异**: 对方案进行变异操作
 6. **迭代**: 重复步骤2-5直到收敛
 
-**定理 4.3** (遗传算法收敛性)
+****定理 4**.3** (遗传算法收敛性)
 遗传算法调度在有限时间内收敛到局部最优解。
 
 **证明**:
@@ -178,27 +177,27 @@ $$dp[i][j] = \min_{k \in \text{predecessors}(i)} \{dp[k][j] + duration(i)\}$$
 
 ### 5.1 资源分配模型
 
-**定义 5.1** (资源分配)
+****定义 5**.1** (资源分配)
 资源分配是一个函数 $A: \mathcal{T} \times \mathcal{R} \rightarrow \mathbb{R}^+$，表示任务对资源的使用量。
 
-**定义 5.2** (资源利用率)
+****定义 5**.2** (资源利用率)
 资源利用率定义为：
 $$\text{utilization}(R) = \frac{\sum_{T \in \mathcal{T}} A(T, R) \cdot duration(T)}{\text{capacity}(R) \cdot \text{total\_time}}$$
 
-**定义 5.3** (负载均衡)
+****定义 5**.3** (负载均衡)
 负载均衡指标定义为：
 $$\text{balance} = 1 - \frac{\max_{R \in \mathcal{R}} \text{utilization}(R) - \min_{R \in \mathcal{R}} \text{utilization}(R)}{\max_{R \in \mathcal{R}} \text{utilization}(R)}$$
 
 ### 5.2 最优资源分配
 
-**定理 5.1** (资源分配最优性)
+****定理 5**.1** (资源分配最优性)
 最优资源分配满足：
 $$\forall R \in \mathcal{R}: \text{utilization}(R) = \text{optimal\_utilization}$$
 
 **证明**:
 通过拉格朗日乘数法和KKT条件证明。
 
-**定理 5.2** (负载均衡最优性)
+****定理 5**.2** (负载均衡最优性)
 负载均衡最优时，所有资源的利用率相等。
 
 **证明**:
@@ -210,13 +209,13 @@ $$\forall R \in \mathcal{R}: \text{utilization}(R) = \text{optimal\_utilization}
 
 ### 6.1 调度复杂性
 
-**定理 6.1** (调度问题复杂性)
+****定理 6**.1** (调度问题复杂性)
 工作流任务调度问题是NP完全问题。
 
 **证明**:
 通过将调度问题归约到已知的NP完全问题（如3-SAT）来证明。
 
-**定理 6.2** (近似算法存在性)
+****定理 6**.2** (近似算法存在性)
 存在多项式时间的近似算法，近似比为 $O(\log n)$。
 
 **证明**:
@@ -224,7 +223,7 @@ $$\forall R \in \mathcal{R}: \text{utilization}(R) = \text{optimal\_utilization}
 
 ### 6.2 调度最优性
 
-**定理 6.3** (调度最优性条件)
+****定理 6**.3** (调度最优性条件)
 调度 $S$ 是最优的，当且仅当：
 
 1. 满足所有约束条件
@@ -234,7 +233,7 @@ $$\forall R \in \mathcal{R}: \text{utilization}(R) = \text{optimal\_utilization}
 **证明**:
 通过必要性条件和充分性条件分别证明。
 
-**定理 6.4** (调度稳定性)
+****定理 6**.4** (调度稳定性)
 最优调度在资源变化时具有稳定性。
 
 **证明**:
@@ -1113,8 +1112,7 @@ fn test_complex_workflow_scheduling() {
 本文档建立了工作流任务调度的完整形式化理论体系：
 
 1. **基础理论**: 定义了任务、资源、调度的基本概念
-2. **形式化定义**: 建立了工作流任务调度的严格数学定义
-3. **算法理论**: 定义了贪心、动态规划、遗传算法等调度算法
+2. **形式化定义**: 建立了工作流任务调度的严格数学**定义 3**. **算法理论**: 定义了贪心、动态规划、遗传算法等调度算法
 4. **资源分配理论**: 建立了资源分配的最优化理论
 5. **核心定理**: 证明了调度的重要性质和复杂性
 
@@ -1148,3 +1146,4 @@ fn test_complex_workflow_scheduling() {
 **最后更新**: 2025-06-14
 **作者**: AI Assistant
 **状态**: 完成 ✅
+

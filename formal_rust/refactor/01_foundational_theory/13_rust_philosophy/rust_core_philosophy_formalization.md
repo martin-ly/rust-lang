@@ -1,4 +1,4 @@
-# 1.5 Rust核心哲学形式化
+﻿# 1.5 Rust核心哲学形式化
 
 ## 1.5.1 概述
 
@@ -6,7 +6,7 @@
 
 ## 1.5.2 形式化定义
 
-### 定义 1.5.1 (Rust哲学体系)
+### **定义 1**.5.1 (Rust哲学体系)
 
 Rust哲学体系是一个六元组 $\mathcal{RP} = (\mathcal{S}, \mathcal{T}, \mathcal{P}, \mathcal{A}, \mathcal{C}, \mathcal{V})$，其中：
 
@@ -17,7 +17,7 @@ Rust哲学体系是一个六元组 $\mathcal{RP} = (\mathcal{S}, \mathcal{T}, \m
 - $\mathcal{C}$ 是组合性原则集合
 - $\mathcal{V}$ 是验证原则集合
 
-### 定义 1.5.2 (安全优先原则)
+### **定义 1**.5.2 (安全优先原则)
 
 安全优先原则 $\mathcal{S}$ 包含以下公理：
 
@@ -25,7 +25,7 @@ Rust哲学体系是一个六元组 $\mathcal{RP} = (\mathcal{S}, \mathcal{T}, \m
 2. **内存安全**: $\forall p \in \mathcal{P}, \text{如果 } p \text{ 通过编译，则 } p \text{ 不会发生内存错误}$
 3. **并发安全**: $\forall c \in \mathcal{C}, \text{如果 } c \text{ 通过编译，则 } c \text{ 不会发生数据竞争}$
 
-### 定义 1.5.3 (零成本抽象)
+### **定义 1**.5.3 (零成本抽象)
 
 零成本抽象 $\mathcal{A}$ 满足：
 $$\forall a \in \mathcal{A}, \text{性能}(a) = \text{性能}(\text{等价的手写代码})$$
@@ -67,7 +67,7 @@ $$\forall c \in \mathcal{C}, c = \text{组合}(\text{简单组件})$$
 
 ## 1.5.4 数学证明
 
-### 定理 1.5.1 (编译时安全保证)
+### **定理 1**.5.1 (编译时安全保证)
 
 如果程序 $p$ 通过Rust编译器，则 $p$ 满足内存安全性质。
 
@@ -79,7 +79,7 @@ $$\forall c \in \mathcal{C}, c = \text{组合}(\text{简单组件})$$
 4. 根据生命周期系统，所有引用都有明确的有效期
 5. 因此 $p$ 满足内存安全性质
 
-### 定理 1.5.2 (零成本抽象定理)
+### **定理 1**.5.2 (零成本抽象定理)
 
 对于所有Rust抽象 $a$，存在等价的手写代码 $c$，使得性能相同。
 
@@ -91,7 +91,7 @@ $$\forall c \in \mathcal{C}, c = \text{组合}(\text{简单组件})$$
 4. 优化后的代码与手写代码性能等价
 5. 因此零成本抽象成立
 
-### 定理 1.5.3 (类型安全定理)
+### **定理 1**.5.3 (类型安全定理)
 
 如果 $\Gamma \vdash e: \tau$，则 $e$ 不会产生类型错误。
 
@@ -112,7 +112,7 @@ fn ownership_transfer() {
     let x = String::from("hello");  // x: (String, owned, l1)
     let y = x;                      // move(x): (String, owned, l2)
     // 编译器确保 x 不再可用
-    // 形式化证明：所有权唯一性
+    // 形式化**证明**：所有权唯一性
 }
 ```
 
@@ -125,7 +125,7 @@ fn borrowing_rules() {
     let r1 = &x;     // 不可变借用
     let r2 = &x;     // 不可变借用
     // let r3 = &mut x;  // 编译错误：可变借用冲突
-    // 形式化证明：借用互斥性
+    // 形式化**证明**：借用互斥性
 }
 ```
 
@@ -325,3 +325,4 @@ fn type_safety_example() {
 3. Rust Reference - Language Reference
 4. Hoare, C. A. R. (1969). An Axiomatic Basis for Computer Programming
 5. Milner, R. (1978). A Theory of Type Polymorphism in Programming
+

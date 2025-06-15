@@ -1,5 +1,53 @@
 # Rust语言哲学形式化重构
 
+## 📚 相关文档引用
+
+### 🏛️ 理论基础
+
+- [Rust语言哲学基础](../01_foundational_theory/03_rust_language_philosophy.md) - 哲学基础理论
+- [理论基础概述](../01_foundational_theory/00_readme.md) - 理论基础整体框架
+- [哲学基础](../01_foundational_theory/01_philosophical_foundations.md.bak) - 哲学基础详细内容
+- [数学基础](../01_foundational_theory/02_mathematical_foundations.md.bak) - 数学基础详细内容
+
+### 🔄 编程范式
+
+- [异步编程理论](../02_programming_paradigms/02_asynchronous_programming_theory.md) - 异步编程理论基础
+- [工作流形式化](../02_programming_paradigms/03_workflow_formalization.md) - 工作流形式化理论
+- [类型系统形式化](../02_programming_paradigms/05_type_system_formalization.md) - 类型系统形式化理论
+- [架构模式形式化](../02_programming_paradigms/06_architectural_patterns_formalization.md) - 架构模式形式化
+- [设计原则形式化](../02_programming_paradigms/07_design_principles_formalization.md) - 设计原则形式化
+
+### 🦀 Rust语言理论
+
+- [所有权系统形式化](../08_rust_language_theory/01_ownership_system_formalization.md) - 所有权系统详细形式化
+- [所有权借用形式化](../08_rust_language_theory/02_ownership_borrowing_formalization.md) - 所有权借用详细形式化
+- [类型系统形式化](../08_rust_language_theory/03_type_system_formalization.md) - Rust类型系统详细形式化
+- [内存安全形式化](../08_rust_language_theory/04_memory_safety_formalization.md) - 内存安全形式化证明
+- [并发安全形式化](../08_rust_language_theory/06_concurrency_safety_formalization.md) - 并发安全形式化
+- [Trait系统形式化](../08_rust_language_theory/08_trait_system_formalization.md) - Trait系统形式化
+- [泛型系统形式化](../08_rust_language_theory/09_generic_system_formalization.md) - 泛型系统形式化
+
+### 🎨 设计模式
+
+- [基础设计模式](../03_design_patterns/02_fundamental_design_patterns.md) - 基于哲学基础的设计模式
+- [创建型模式形式化](../03_design_patterns/06_creational_patterns_formalization.md) - 创建型模式形式化
+- [结构型模式形式化](../03_design_patterns/07_structural_patterns_formalization.md) - 结构型模式形式化
+- [行为型模式形式化](../03_design_patterns/08_behavioral_patterns_formalization.md) - 行为型模式形式化
+
+### ⚡ 并发模式
+
+- [高级并发形式化](../05_concurrent_patterns/02_advanced_concurrency_formalization.md) - 高级并发形式化理论
+- [Actor模型形式化](../05_concurrent_patterns/14_actor_model_formalization.md) - Actor模型形式化
+- [Future/Promise模式形式化](../05_concurrent_patterns/13_future_promise_pattern_formalization.md) - Future/Promise模式形式化
+
+### 🏭 行业应用
+
+- [金融科技形式化](../04_industry_applications/09_fintech_formalization.md) - 哲学思想在金融科技中的应用
+- [AI/ML形式化](../04_industry_applications/17_ai_ml_formalization.md) - 哲学思想在AI/ML中的应用
+- [区块链形式化](../04_industry_applications/19_blockchain_formalization.md) - 哲学思想在区块链中的应用
+
+---
+
 ## 目录
 
 1. [理论基础](#1-理论基础)
@@ -10,6 +58,8 @@
 6. [核心定理证明](#6-核心定理证明)
 7. [Rust实现](#7-rust实现)
 8. [哲学意义](#8-哲学意义)
+
+---
 
 ## 1. 理论基础
 
@@ -22,6 +72,8 @@
 - $R$: 规则集合
 - $A$: 公理集合
 - $T$: 定理集合
+
+> **理论基础**: 关于形式化系统的哲学基础，请参考 [Rust语言哲学基础](../01_foundational_theory/03_rust_language_philosophy.md) 中的 [形式化系统的哲学意义](#13-形式化系统的哲学意义)。
 
 **定义1.2 (语言模型)**
 编程语言模型 $LM = (L, S, M, E)$ 包含：
@@ -40,12 +92,16 @@ $$\text{ExistenceConstraint}(r, t) = \begin{cases}
 \text{Invalid} & \text{otherwise}
 \end{cases}$$
 
+> **哲学思考**: 关于存在性约束的哲学思考，请参考 [Rust语言哲学基础](../01_foundational_theory/03_rust_language_philosophy.md) 中的 [存在与占有的辩证关系](#21-存在与占有的辩证关系)。
+
 **定义1.4 (所有权关系)**
 所有权关系 $\text{Ownership}: \text{Value} \times \text{Owner} \times \text{Time} \rightarrow \text{Boolean}$ 定义为：
 $$\text{Ownership}(v, o, t) = \begin{cases}
 \text{true} & \text{if } o \text{ owns } v \text{ at time } t \\
 \text{false} & \text{otherwise}
 \end{cases}$$
+
+> **详细理论**: 关于所有权关系的完整形式化理论，请参考 [所有权系统形式化](../08_rust_language_theory/01_ownership_system_formalization.md)。
 
 ## 2. Rust语言哲学五元组定义
 
@@ -58,11 +114,15 @@ Rust语言哲学系统 $RPS = (O, T, B, S, C)$ 包含：
   - $L$: 生命周期集合
   - $T$: 转移规则集合
 
+> **所有权理论**: 关于所有权系统的详细形式化，请参考 [所有权系统形式化](../08_rust_language_theory/01_ownership_system_formalization.md)。
+
 - **T (Type System)**: 类型系统 $T = (T, S, C, I)$
   - $T$: 类型集合
   - $S$: 子类型关系
   - $C$: 类型约束
   - $I$: 类型推断
+
+> **类型系统理论**: 关于类型系统的详细形式化，请参考 [类型系统形式化](../08_rust_language_theory/03_type_system_formalization.md) 和 [Trait系统形式化](../08_rust_language_theory/08_trait_system_formalization.md)。
 
 - **B (Borrowing)**: 借用系统 $B = (R, M, I, E)$
   - $R$: 借用规则
@@ -70,11 +130,15 @@ Rust语言哲学系统 $RPS = (O, T, B, S, C)$ 包含：
   - $I$: 借用检查
   - $E$: 借用扩展
 
+> **借用系统理论**: 关于借用系统的详细形式化，请参考 [所有权借用形式化](../08_rust_language_theory/02_ownership_borrowing_formalization.md)。
+
 - **S (Safety)**: 安全系统 $S = (M, T, C, V)$
   - $M$: 内存安全
   - $T$: 线程安全
   - $C$: 并发安全
   - $V$: 验证机制
+
+> **安全理论**: 关于内存安全和并发安全的详细形式化，请参考 [内存安全形式化](../08_rust_language_theory/04_memory_safety_formalization.md) 和 [并发安全形式化](../08_rust_language_theory/06_concurrency_safety_formalization.md)。
 
 - **C (Control)**: 控制流系统 $C = (F, S, E, P)$
   - $F$: 控制流
@@ -95,12 +159,16 @@ Rust语言哲学系统 $RPS = (O, T, B, S, C)$ 包含：
 - **R (Rules)**: 规则集合
 - **C (Constraints)**: 约束集合
 
+> **深入理解**: 关于所有权代数的详细理论，请参考 [所有权系统形式化](../08_rust_language_theory/01_ownership_system_formalization.md)。
+
 **定义3.2 (所有权规则)**
 所有权规则集合 $OR = \{R_1, R_2, R_3\}$ 定义为：
 
 1. **唯一性规则**: $\forall v \in V, \exists! o \in O: \text{Ownership}(v, o, t)$
 2. **生命周期规则**: $\forall v \in V, \exists l \in L: \text{Lifetime}(v, l)$
 3. **转移规则**: $\text{Transfer}(v, o_1, o_2) \Rightarrow \neg\text{Ownership}(v, o_1, t) \land \text{Ownership}(v, o_2, t)$
+
+> **实践应用**: 关于所有权规则在并发编程中的应用，请参考 [高级并发形式化](../05_concurrent_patterns/02_advanced_concurrency_formalization.md)。
 
 ### 3.2 生命周期理论
 
@@ -111,6 +179,8 @@ $$\text{Lifetime}(v, s) = [t_{\text{start}}, t_{\text{end}}]$$
 **定义3.4 (生命周期约束)**
 生命周期约束 $\text{LifetimeConstraint}: \text{Value} \times \text{Reference} \rightarrow \text{Boolean}$ 定义为：
 $$\text{LifetimeConstraint}(v, r) = \text{Lifetime}(r) \subseteq \text{Lifetime}(v)$$
+
+> **并发应用**: 关于生命周期在并发模式中的应用，请参考 [Actor模型形式化](../05_concurrent_patterns/14_actor_model_formalization.md) 和 [Future/Promise模式形式化](../05_concurrent_patterns/13_future_promise_pattern_formalization.md)。
 
 ## 4. 类型系统形式化理论
 
@@ -125,6 +195,8 @@ $$\text{LifetimeConstraint}(v, r) = \text{Lifetime}(r) \subseteq \text{Lifetime}
 - **I (Inference)**: 类型推断
 - **R (Rules)**: 类型规则
 
+> **类型系统理论**: 关于类型系统的完整理论，请参考 [类型系统形式化](../08_rust_language_theory/03_type_system_formalization.md)。
+
 **定义4.2 (类型关系)**
 类型关系 $\text{TypeRelation}: T \times T \rightarrow \text{Boolean}$ 定义为：
 $$\text{TypeRelation}(t_1, t_2) = \begin{cases}
@@ -138,9 +210,13 @@ $$\text{TypeRelation}(t_1, t_2) = \begin{cases}
 泛型类型 $G = \forall \alpha. T(\alpha)$ 定义为：
 $$G = \{T(\tau) \mid \tau \in \text{Type}\}$$
 
+> **泛型系统**: 关于泛型系统的详细理论，请参考 [泛型系统形式化](../08_rust_language_theory/09_generic_system_formalization.md)。
+
 **定义4.4 (类型参数约束)**
 类型参数约束 $\text{TypeConstraint}: \text{TypeParam} \times \text{Trait} \rightarrow \text{Boolean}$ 定义为：
 $$\text{TypeConstraint}(\alpha, \text{Trait}) = \alpha \text{ implements Trait}$$
+
+> **Trait系统**: 关于Trait系统的详细理论，请参考 [Trait系统形式化](../08_rust_language_theory/08_trait_system_formalization.md)。
 
 ## 5. 借用系统形式化理论
 
@@ -154,6 +230,8 @@ $$\text{TypeConstraint}(\alpha, \text{Trait}) = \alpha \text{ implements Trait}$
 - **I (Invariants)**: 不变量
 - **E (Extensions)**: 借用扩展
 - **C (Constraints)**: 约束
+
+> **借用系统理论**: 关于借用系统的完整理论，请参考 [所有权借用形式化](../08_rust_language_theory/02_ownership_borrowing_formalization.md)。
 
 **定义5.2 (借用规则)**
 借用规则集合 $BR = \{BR_1, BR_2, BR_3\}$ 定义为：
@@ -174,6 +252,8 @@ $$\text{Compatible}(r_1, r_2) = \begin{cases}
 \text{true} & \text{if } r_1, r_2 \text{ can coexist} \\
 \text{false} & \text{otherwise}
 \end{cases}$$
+
+> **设计模式应用**: 关于借用检查在设计模式中的应用，请参考 [基础设计模式](../03_design_patterns/02_fundamental_design_patterns.md) 和 [创建型模式形式化](../03_design_patterns/06_creational_patterns_formalization.md)。
 
 ## 6. 核心定理证明
 
@@ -196,6 +276,8 @@ $$\text{Ownership}(v, o_1, t) \land \text{Ownership}(v, o_2, t)$$
 这与唯一性规则矛盾，因此假设不成立。
 
 **结论**: 每个值在任意时刻最多有一个所有者。$\square$
+
+> **安全理论**: 关于所有权安全性的详细理论，请参考 [内存安全形式化](../08_rust_language_theory/04_memory_safety_formalization.md) 和 [并发安全形式化](../08_rust_language_theory/06_concurrency_safety_formalization.md)。
 
 ### 6.2 内存安全定理
 

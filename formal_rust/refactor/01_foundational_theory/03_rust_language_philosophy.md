@@ -1,5 +1,34 @@
 # 01. Rust语言哲学基础
 
+## 📚 相关文档引用
+
+### 🔗 理论基础
+- [理论基础概述](../01_foundational_theory/00_readme.md) - 理论基础整体框架
+- [哲学基础](../01_foundational_theory/01_philosophical_foundations.md.bak) - 哲学基础详细内容
+- [数学基础](../01_foundational_theory/02_mathematical_foundations.md.bak) - 数学基础详细内容
+
+### 🔄 编程范式
+- [Rust哲学形式化](../02_programming_paradigms/04_rust_philosophy_formalization.md) - Rust哲学的形式化表达
+- [类型系统形式化](../02_programming_paradigms/05_type_system_formalization.md) - 类型系统的形式化理论
+- [设计原则形式化](../02_programming_paradigms/07_design_principles_formalization.md) - 设计原则的形式化
+
+### 🦀 Rust语言理论
+- [所有权系统形式化](../08_rust_language_theory/01_ownership_system_formalization.md) - 所有权系统的形式化理论
+- [所有权借用形式化](../08_rust_language_theory/02_ownership_borrowing_formalization.md) - 所有权借用的形式化
+- [类型系统形式化](../08_rust_language_theory/03_type_system_formalization.md) - Rust类型系统形式化
+- [内存安全形式化](../08_rust_language_theory/04_memory_safety_formalization.md) - 内存安全的形式化证明
+- [并发安全形式化](../08_rust_language_theory/06_concurrency_safety_formalization.md) - 并发安全的形式化
+
+### 🎨 设计模式
+- [基础设计模式](../03_design_patterns/02_fundamental_design_patterns.md) - 基于哲学基础的设计模式
+- [创建型模式形式化](../03_design_patterns/06_creational_patterns_formalization.md) - 创建型模式的形式化
+
+### 🏭 行业应用
+- [金融科技形式化](../04_industry_applications/09_fintech_formalization.md) - 哲学思想在金融科技中的应用
+- [AI/ML形式化](../04_industry_applications/17_ai_ml_formalization.md) - 哲学思想在AI/ML中的应用
+
+---
+
 ## 目录
 
 ### 1. 哲学基础概述
@@ -63,6 +92,8 @@ Rust语言的设计哲学体现了一种独特的世界观，它通过严格的�
 - **P2**: 约束性设计能够产生更强大的表达力
 - **P3**: 形式化系统需要平衡完备性与实用性
 
+> **相关阅读**: 关于形式化系统的哲学意义，请参考 [形式化系统的哲学意义](#13-形式化系统的哲学意义) 和 [类型系统形式化](../08_rust_language_theory/03_type_system_formalization.md)。
+
 ### 1.2 Rust的独特世界观
 
 Rust的设计哲学基于以下核心原则：
@@ -78,6 +109,8 @@ Rust的设计哲学基于以下核心原则：
 Safety = ∀p ∈ Program, ∀s ∈ State | p(s) → Safe(s')
 Performance = ∀p ∈ Program | Cost(p) ≤ Cost(C_equivalent)
 ```
+
+> **深入理解**: 关于内存安全和并发安全的详细形式化，请参考 [内存安全形式化](../08_rust_language_theory/04_memory_safety_formalization.md) 和 [并发安全形式化](../08_rust_language_theory/06_concurrency_safety_formalization.md)。
 
 ### 1.3 形式化系统的哲学意义
 
@@ -96,6 +129,8 @@ Type : Value → Proposition
 Borrow : (Value, Reference) → Permission
 ∀r ∈ Reference, ∃v ∈ Value | Borrow(v, r) ∈ {Read, Write, None}
 ```
+
+> **扩展阅读**: 关于借用检查器的详细理论，请参考 [所有权借用形式化](../08_rust_language_theory/02_ownership_borrowing_formalization.md)。
 
 ---
 
@@ -118,6 +153,8 @@ Axiom 3: ∀x ∈ Value, ∃t ∈ Time | x.created_at ≤ t ≤ x.destroyed_at
 - **排他性**：`∀x, y ∈ Value, x ≠ y → Owner(x) ≠ Owner(y)`
 - **传递性**：`Owns(a, b) ∧ Owns(b, c) → Owns(a, c)`
 - **有限性**：`∀x ∈ Value, |References(x)| < ∞`
+
+> **理论深化**: 关于所有权系统的完整形式化理论，请参考 [所有权系统形式化](../08_rust_language_theory/01_ownership_system_formalization.md)。
 
 ### 2.2 生命周期与时间性
 
@@ -148,6 +185,8 @@ ResourceConstraint : Resource → Boolean
   (r.available ∧ r.exclusive_access ∧ r.finite_lifetime)
 ```
 
+> **实践应用**: 关于资源管理在并发编程中的应用，请参考 [并发模式](../05_concurrent_patterns/00_readme.md) 和 [高级并发形式化](../05_concurrent_patterns/02_advanced_concurrency_formalization.md)。
+
 ---
 
 ## 3. 信息控制世界的进化模型
@@ -171,6 +210,8 @@ Stage 4: Formal Verification (Coq, Agda)
 ConstraintStrength : Language → [0, 1]
 ConstraintStrength(Rust) > ConstraintStrength(Java) > ConstraintStrength(C)
 ```
+
+> **设计模式应用**: 关于约束性设计在模式中的应用，请参考 [基础设计模式](../03_design_patterns/02_fundamental_design_patterns.md) 和 [设计原则形式化](../02_programming_paradigms/07_design_principles_formalization.md)。
 
 ### 3.2 有效形式模型的探索原则
 
@@ -197,6 +238,8 @@ StaticVerification(p) < RuntimeVerification(p)
 SemanticBoundary : Component → Interface
 ∀c ∈ Component, ∃i ∈ Interface | c.implements(i)
 ```
+
+> **行业实践**: 关于这些原则在行业应用中的体现，请参考 [金融科技形式化](../04_industry_applications/09_fintech_formalization.md) 和 [AI/ML形式化](../04_industry_applications/17_ai_ml_formalization.md)。
 
 ### 3.3 复杂系统的涌现属性
 

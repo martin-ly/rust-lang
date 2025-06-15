@@ -1,4 +1,4 @@
-# 线程池模式形式化理论 (Thread Pool Pattern Formalization)
+﻿# 线程池模式形式化理论 (Thread Pool Pattern Formalization)
 
 ## 目录
 
@@ -35,7 +35,7 @@
 
 设 $\mathcal{T}$ 为所有线程的集合，$\mathcal{Q}$ 为所有任务的集合，$\mathcal{W}$ 为所有工作线程的集合。
 
-**定义 2.1** (线程池)
+****定义 2**.1** (线程池)
 线程池是一个六元组 $TP = (W, Q, S, \mu, \gamma, \delta)$，其中：
 
 - $W \subseteq \mathcal{W}$ 是工作线程集合
@@ -45,14 +45,14 @@
 - $\gamma: Q \rightarrow \mathbb{N}$ 是队列大小函数
 - $\delta: W \rightarrow \mathbb{B}$ 是线程状态函数
 
-**定义 2.2** (任务)
+****定义 2**.2** (任务)
 任务是一个三元组 $T = (id, func, args)$，其中：
 
 - $id$ 是任务标识符
 - $func$ 是执行函数
 - $args$ 是函数参数
 
-**定义 2.3** (工作线程)
+****定义 2**.3** (工作线程)
 工作线程是一个四元组 $WT = (id, state, current_task, pool)$，其中：
 
 - $id$ 是线程标识符
@@ -62,19 +62,19 @@
 
 ### 2.2 操作语义
 
-**定义 2.4** (提交任务)
+****定义 2**.4** (提交任务)
 $$submit(TP, task) = \begin{cases}
 enqueue(Q, task) & \text{if } \gamma(Q) < max\_size \\
 reject(task) & \text{otherwise}
 \end{cases}$$
 
-**定义 2.5** (分配任务)
+****定义 2**.5** (分配任务)
 $$assign(TP, worker) = \begin{cases}
 dequeue(Q) \land \mu(worker, task) & \text{if } Q \neq \emptyset \land \delta(worker) = idle \\
 \bot & \text{otherwise}
 \end{cases}$$
 
-**定义 2.6** (执行任务)
+****定义 2**.6** (执行任务)
 $$execute(worker, task) = \begin{cases}
 func(args) & \text{if } \delta(worker) = busy \\
 \bot & \text{otherwise}
@@ -86,7 +86,7 @@ func(args) & \text{if } \delta(worker) = busy \\
 
 ### 3.1 线程池代数
 
-**定义 3.1** (线程池代数)
+****定义 3**.1** (线程池代数)
 线程池代数是一个七元组 $\mathcal{TP} = (TP, \oplus, \otimes, \mathbf{0}, \mathbf{1}, \alpha, \beta)$，其中：
 
 - $TP$ 是线程池集合
@@ -99,15 +99,15 @@ func(args) & \text{if } \delta(worker) = busy \\
 
 ### 3.2 代数性质
 
-**定理 3.1** (结合律)
+****定理 3**.1** (结合律)
 对于任意线程池 $tp_1, tp_2, tp_3 \in TP$：
 $$(tp_1 \oplus tp_2) \oplus tp_3 = tp_1 \oplus (tp_2 \oplus tp_3)$$
 
-**定理 3.2** (分配律)
+****定理 3**.2** (分配律)
 对于任意线程池 $tp_1, tp_2 \in TP$ 和任务 $q \in \mathcal{Q}$：
 $$(tp_1 \oplus tp_2) \otimes q = (tp_1 \otimes q) \oplus (tp_2 \otimes q)$$
 
-**定理 3.3** (单位元)
+****定理 3**.3** (单位元)
 对于任意线程池 $tp \in TP$：
 $$tp \oplus \mathbf{0} = tp = \mathbf{0} \oplus tp$$
 $$tp \otimes \mathbf{1} = tp = \mathbf{1} \otimes tp$$
@@ -118,7 +118,7 @@ $$tp \otimes \mathbf{1} = tp = \mathbf{1} \otimes tp$$
 
 ### 4.1 吞吐量定理
 
-**定理 4.1** (吞吐量上界)
+****定理 4**.1** (吞吐量上界)
 对于线程池 $TP = (W, Q, S, \mu, \gamma, \delta)$，其吞吐量 $T$ 满足：
 $$T \leq \min(|W|, \frac{1}{t_{task}})$$
 
@@ -139,7 +139,7 @@ $\square$
 
 ### 4.2 资源利用率定理
 
-**定理 4.2** (资源利用率)
+****定理 4**.2** (资源利用率)
 对于线程池 $TP$，其资源利用率 $U$ 满足：
 $$U = \frac{\sum_{w \in W} \delta(w) \cdot t_{busy}(w)}{\sum_{w \in W} t_{total}(w)}$$
 
@@ -158,7 +158,7 @@ $\square$
 
 ### 4.3 公平性定理
 
-**定理 4.3** (任务分配公平性)
+****定理 4**.3** (任务分配公平性)
 如果线程池使用FIFO调度策略，则：
 $$\forall t_1, t_2 \in Q: t_1 < t_2 \Rightarrow execute(t_1) \prec execute(t_2)$$
 
@@ -344,7 +344,7 @@ $$drop(pool) \Rightarrow \forall worker \in W: join(worker)$$
 
 ### 6.3 性能优化
 
-**定理 6.1** (最优线程数)
+****定理 6**.1** (最优线程数)
 对于CPU密集型任务，最优线程数 $n_{opt}$ 满足：
 $$n_{opt} = N_{CPU} + 1$$
 
@@ -387,8 +387,7 @@ $$n_{opt} = N_{CPU} \cdot (1 + \frac{t_{wait}}{t_{compute}})$$
 
 1. **形式化理论**: 建立了线程池模式的完整数学理论
 2. **代数结构**: 定义了线程池的代数运算和性质
-3. **定理证明**: 证明了吞吐量、资源利用率和公平性定理
-4. **实现验证**: 提供了类型安全的Rust实现
+3. **定理证明**: 证明了吞吐量、资源利用率和公平性**定理 4**. **实现验证**: 提供了类型安全的Rust实现
 
 ### 8.2 未来工作
 
@@ -407,3 +406,4 @@ $$n_{opt} = N_{CPU} \cdot (1 + \frac{t_{wait}}{t_{compute}})$$
 **版本**: 1.0
 **最后更新**: 2025-01-27
 **作者**: AI Assistant
+

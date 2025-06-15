@@ -1,4 +1,4 @@
-# 03. 行为型设计模式
+﻿# 03. 行为型设计模式
 
 ## 目录
 
@@ -53,12 +53,12 @@ Rust中的行为型模式包含以下核心概念：
 
 ### 2.1 责任链模式定义
 
-**定义 2.1.1** (责任链)
+****定义 2**.1.1** (责任链)
 ```
 Chain_of_Responsibility = {handlers: Vec<Handler>, successor: Handler → Handler}
 ```
 
-**定义 2.1.2** (处理保证)
+****定义 2**.1.2** (处理保证)
 ```
 Handling_Guarantee = {
     Request_Processing: ∀r ∈ Request, ∃h ∈ Handler, Process(h, r),
@@ -147,12 +147,12 @@ impl Handler for ConcreteHandlerB {
 
 ### 3.1 命令模式定义
 
-**定义 3.1.1** (命令)
+****定义 3**.1.1** (命令)
 ```
 Command = {execute: () → Result, undo: () → Result}
 ```
 
-**定义 3.1.2** (命令保证)
+****定义 3**.1.2** (命令保证)
 ```
 Command_Guarantee = {
     Encapsulation: ∀c ∈ Command, Encapsulate(c, Request),
@@ -272,12 +272,12 @@ impl Invoker {
 
 ### 4.1 解释器模式定义
 
-**定义 4.1.1** (解释器)
+****定义 4**.1.1** (解释器)
 ```
 Interpreter = {interpret: Expression → Result}
 ```
 
-**定义 4.1.2** (表达式层次)
+****定义 4**.1.2** (表达式层次)
 ```
 Expression_Hierarchy = {
     Terminal_Expression: Expression,
@@ -374,12 +374,12 @@ impl Expression for SubtractExpression {
 
 ### 5.1 迭代器模式定义
 
-**定义 5.1.1** (迭代器)
+****定义 5**.1.1** (迭代器)
 ```
 Iterator = {next: () → Option<Item>, has_next: () → bool}
 ```
 
-**定义 5.1.2** (迭代器保证)
+****定义 5**.1.2** (迭代器保证)
 ```
 Iterator_Guarantee = {
     Traversal: ∀i ∈ Iterator, Next(i) → Option<Item>,
@@ -466,12 +466,12 @@ impl Iterator for ConcreteIterator {
 
 ### 6.1 中介者模式定义
 
-**定义 6.1.1** (中介者)
+****定义 6**.1.1** (中介者)
 ```
 Mediator = {mediate: Colleague → Colleague → Message}
 ```
 
-**定义 6.1.2** (中介者保证)
+****定义 6**.1.2** (中介者保证)
 ```
 Mediator_Guarantee = {
     Decoupling: ∀c1, c2 ∈ Colleague, ¬Direct_Communication(c1, c2),
@@ -599,12 +599,12 @@ impl Colleague for ConcreteColleagueB {
 
 ### 7.1 备忘录模式定义
 
-**定义 7.1.1** (备忘录)
+****定义 7**.1.1** (备忘录)
 ```
 Memento = {state: State, restore: () → State}
 ```
 
-**定义 7.1.2** (备忘录保证)
+****定义 7**.1.2** (备忘录保证)
 ```
 Memento_Guarantee = {
     State_Preservation: ∀m ∈ Memento, Preserve(m, State),
@@ -687,12 +687,12 @@ impl Caretaker {
 
 ### 8.1 观察者模式定义
 
-**定义 8.1.1** (观察者)
+****定义 8**.1.1** (观察者)
 ```
 Observer = {update: Subject → Notification}
 ```
 
-**定义 8.1.2** (观察者保证)
+****定义 8**.1.2** (观察者保证)
 ```
 Observer_Guarantee = {
     Notification: ∀s ∈ Subject, ∀o ∈ Observer, Notify(s, o),
@@ -810,12 +810,12 @@ impl Observer for ConcreteObserverB {
 
 ### 9.1 状态模式定义
 
-**定义 9.1.1** (状态)
+****定义 9**.1.1** (状态)
 ```
 State = {handle: Context → Result, transition: Context → State}
 ```
 
-**定义 9.1.2** (状态保证)
+****定义 9**.1.2** (状态保证)
 ```
 State_Guarantee = {
     State_Transition: ∀c ∈ Context, ∀s ∈ State, Transition(c, s) → New_State,
@@ -888,12 +888,12 @@ impl State for ConcreteStateB {
 
 ### 10.1 策略模式定义
 
-**定义 10.1.1** (策略)
+****定义 10**.1.1** (策略)
 ```
 Strategy = {algorithm: Input → Output}
 ```
 
-**定义 10.1.2** (策略保证)
+****定义 10**.1.2** (策略保证)
 ```
 Strategy_Guarantee = {
     Algorithm_Selection: ∀s ∈ Strategy, Select(s) → Algorithm(s),
@@ -962,12 +962,12 @@ impl Context {
 
 ### 11.1 模板方法模式定义
 
-**定义 11.1.1** (模板方法)
+****定义 11**.1.1** (模板方法)
 ```
 Template_Method = {template: () → Result, primitive_operations: Vec<Operation>}
 ```
 
-**定义 11.1.2** (模板保证)
+****定义 11**.1.2** (模板保证)
 ```
 Template_Guarantee = {
     Algorithm_Skeleton: ∀t ∈ Template, Skeleton(t) → Fixed_Structure,
@@ -1036,12 +1036,12 @@ impl AbstractClass for ConcreteClassB {
 
 ### 12.1 访问者模式定义
 
-**定义 12.1.1** (访问者)
+****定义 12**.1.1** (访问者)
 ```
 Visitor = {visit: Element → Result}
 ```
 
-**定义 12.1.2** (访问者保证)
+****定义 12**.1.2** (访问者保证)
 ```
 Visitor_Guarantee = {
     Operation_Separation: ∀v ∈ Visitor, ∀e ∈ Element, Separate(v, e),

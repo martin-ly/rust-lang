@@ -1,4 +1,4 @@
-# 状态模式 (State Pattern) - 形式化重构
+﻿# 状态模式 (State Pattern) - 形式化重构
 
 ## 目录
 
@@ -102,7 +102,7 @@ $$\forall e \in E: \text{handle}(s, e) \text{ is deterministic}$$
 
 $$\forall s \in T, e \in E: |f_T(s, e, c)| = 1$$
 
-**证明：**
+****证明**：**
 
 1. 根据定义2.4，状态转换函数是确定性的
 2. 对于给定的状态和事件，只有一个下一个状态
@@ -115,10 +115,9 @@ $$\forall s \in T, e \in E: |f_T(s, e, c)| = 1$$
 
 $$\exists e_1, e_2, ..., e_n \in E: f_T(f_T(...f_T(s_1, e_1), e_2), ..., e_n) = s_2$$
 
-**证明：**
+****证明**：**
 
-1. 根据状态转换函数的定义
-2. 通过事件序列可以到达目标状态
+1. 根据状态转换函数的**定义 2**. 通过事件序列可以到达目标状态
 3. 状态可达性定理得证。
 
 ### 4.3 状态不变性定理
@@ -128,10 +127,9 @@ $$\exists e_1, e_2, ..., e_n \in E: f_T(f_T(...f_T(s_1, e_1), e_2), ..., e_n) = 
 
 $$\text{invariant}(s) \land \text{validTransition}(s, e, s') \Rightarrow \text{invariant}(s')$$
 
-**证明：**
+****证明**：**
 
-1. 根据不变性条件的定义
-2. 有效转换保持不变性
+1. 根据不变性条件的**定义 2**. 有效转换保持不变性
 3. 状态不变性定理得证。
 
 ### 4.4 状态完整性定理
@@ -141,10 +139,9 @@ $$\text{invariant}(s) \land \text{validTransition}(s, e, s') \Rightarrow \text{i
 
 $$\forall s \in \text{possibleStates}: s \in T$$
 
-**证明：**
+****证明**：**
 
-1. 根据状态集合的完整性定义
-2. 所有可能的状态都在状态集合中
+1. 根据状态集合的完整性**定义 2**. 所有可能的状态都在状态集合中
 3. 状态完整性定理得证。
 
 ## 5. Rust实现
@@ -875,3 +872,4 @@ pub trait HierarchicalState: State {
 4. **状态管理**：集中管理状态转换逻辑
 
 通过形式化的数学理论和完整的Rust实现，我们建立了状态模式的完整理论体系，为实际应用提供了坚实的理论基础和实现指导。
+

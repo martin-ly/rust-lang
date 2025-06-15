@@ -1,4 +1,4 @@
-# 4.2 事件驱动架构 (Event-Driven Architecture)
+﻿# 4.2 事件驱动架构 (Event-Driven Architecture)
 
 ## 概述
 
@@ -31,7 +31,7 @@
 
 ### 4.2.1 事件驱动系统定义
 
-**定义 4.2.1** (事件驱动系统)
+****定义 4**.2.1** (事件驱动系统)
 事件驱动系统是一个七元组 $\mathcal{ED} = (E, P, C, R, S, \mathcal{T}, \mathcal{F})$，其中：
 
 - $E$ 是事件集合，$E = \{e_1, e_2, \ldots, e_n\}$
@@ -42,7 +42,7 @@
 - $\mathcal{T}$ 是时间序列，$\mathcal{T} = \{t_1, t_2, \ldots\}$
 - $\mathcal{F}$ 是处理函数集合，$\mathcal{F} = \{f_1, f_2, \ldots, f_l\}$
 
-**定义 4.2.2** (事件)
+****定义 4**.2.2** (事件)
 事件是一个四元组 $e = (id, type, data, timestamp)$，其中：
 
 - $id$ 是事件唯一标识符
@@ -50,19 +50,19 @@
 - $data$ 是事件数据，$data \in \mathcal{D}$
 - $timestamp$ 是事件时间戳，$timestamp \in \mathcal{T}$
 
-**定义 4.2.3** (事件流)
+****定义 4**.2.3** (事件流)
 事件流是一个函数 $stream: \mathcal{T} \rightarrow \mathcal{P}(E)$，表示在时间 $t$ 的所有事件：
 
 $$stream(t) = \{e \in E \mid e.timestamp = t\}$$
 
-**定义 4.2.4** (事件处理)
+****定义 4**.2.4** (事件处理)
 事件处理是一个函数 $process: E \times C \rightarrow \mathcal{P}(E')$，其中 $E'$ 是处理后的事件集合：
 
 $$process(e, c) = \{e' \in E' \mid e' = f(e) \text{ for some } f \in \mathcal{F}\}$$
 
 ## 核心定理
 
-### 定理 4.2.1 (事件驱动系统一致性)
+### **定理 4**.2.1 (事件驱动系统一致性)
 
 **定理**: 对于事件驱动系统 $\mathcal{ED} = (E, P, C, R, S, \mathcal{T}, \mathcal{F})$，如果满足以下条件：
 
@@ -90,7 +90,7 @@ $$\lim_{t \to \infty} C_t = 1$$
 
 因此系统满足最终一致性。
 
-### 定理 4.2.2 (事件处理延迟)
+### **定理 4**.2.2 (事件处理延迟)
 
 **定理**: 事件处理延迟 $T_{processing}$ 满足：
 
@@ -114,7 +114,7 @@ $$T_{processing} \leq T_{routing} + T_{processing} + T_{storage}$$
 
 $$T_{processing} = T_{routing} + T_{processing} + T_{storage}$$
 
-### 定理 4.2.3 (事件流吞吐量)
+### **定理 4**.2.3 (事件流吞吐量)
 
 **定理**: 事件流吞吐量 $T$ 满足：
 
@@ -216,3 +216,4 @@ $$T = \min_{i=1}^{n} T_{effective,i} = \min_{i=1}^{n} T_i \cdot \frac{1}{1 - \rh
 ---
 
 **下一节**: [4.2.1 事件流处理](./01_event_stream_processing/README.md)
+

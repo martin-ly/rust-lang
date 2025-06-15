@@ -1,4 +1,4 @@
-# 1.1 Rust类型系统形式化
+﻿# 1.1 Rust类型系统形式化
 
 ## 1.1.1 概述
 
@@ -6,7 +6,7 @@
 
 ## 1.1.2 基本定义
 
-### 定义 1.1 (类型系统)
+### **定义 1**.1 (类型系统)
 
 Rust类型系统是一个四元组 $\mathcal{TS} = (\mathcal{T}, \mathcal{V}, \mathcal{E}, \mathcal{R})$，其中：
 
@@ -15,7 +15,7 @@ Rust类型系统是一个四元组 $\mathcal{TS} = (\mathcal{T}, \mathcal{V}, \m
 - $\mathcal{E}$ 是表达式集合
 - $\mathcal{R}$ 是类型关系集合
 
-### 定义 1.2 (类型关系)
+### **定义 1**.2 (类型关系)
 
 类型关系 $\mathcal{R}$ 包含以下关系：
 
@@ -39,7 +39,7 @@ $$\frac{\Gamma, x: \tau_1 \vdash e: \tau_2}{\Gamma \vdash \lambda x.e: \tau_1 \r
 
 ## 1.1.4 所有权类型系统
 
-### 定义 1.3 (所有权类型)
+### **定义 1**.3 (所有权类型)
 
 所有权类型是一个三元组 $\tau = (T, o, l)$，其中：
 
@@ -55,11 +55,11 @@ $$\frac{\Gamma \vdash e: (T, owned, l)}{\Gamma \vdash move(e): (T, owned, l')}$$
 
 ## 1.1.5 借用检查器
 
-### 定义 1.4 (借用关系)
+### **定义 1**.4 (借用关系)
 
 借用关系 $\mathcal{B}$ 是一个有向图，节点是变量，边表示借用关系。
 
-### 定理 1.1 (借用检查器正确性)
+### **定理 1**.1 (借用检查器正确性)
 
 如果借用检查器接受程序 $P$，则 $P$ 满足内存安全性质。
 
@@ -72,7 +72,7 @@ $$\frac{\Gamma \vdash e: (T, owned, l)}{\Gamma \vdash move(e): (T, owned, l')}$$
 
 ## 1.1.6 生命周期系统
 
-### 定义 1.5 (生命周期)
+### **定义 1**.5 (生命周期)
 
 生命周期 $l$ 是一个时间区间 $[t_{start}, t_{end}]$，表示引用的有效期间。
 
@@ -82,7 +82,7 @@ $$\frac{\Gamma \vdash r: \&'a T \quad \Gamma \vdash s: \&'b T \quad 'a \subseteq
 
 ## 1.1.7 泛型系统
 
-### 定义 1.6 (泛型类型)
+### **定义 1**.6 (泛型类型)
 
 泛型类型 $\forall \alpha. \tau$ 表示对所有类型 $\alpha$，类型 $\tau$ 都成立。
 
@@ -92,7 +92,7 @@ $$\frac{\Gamma \vdash e: \forall \alpha. \tau \quad \sigma \in \mathcal{T}}{\Gam
 
 ## 1.1.8 特征系统
 
-### 定义 1.7 (特征)
+### **定义 1**.7 (特征)
 
 特征 $Trait$ 是一个类型约束集合，定义了一组相关的方法签名。
 
@@ -102,7 +102,7 @@ $$\frac{\Gamma \vdash T: Trait \quad \Gamma \vdash e: T}{\Gamma \vdash e.method(
 
 ## 1.1.9 类型安全证明
 
-### 定理 1.2 (类型安全)
+### **定理 1**.2 (类型安全)
 
 如果 $\emptyset \vdash e: \tau$，则 $e$ 不会产生类型错误。
 
@@ -143,3 +143,4 @@ graph TD
 1. Pierce, B. C. (2002). Types and Programming Languages
 2. Rustonomicon - The Dark Arts of Advanced and Unsafe Rust Programming
 3. Rust Reference - Type System
+

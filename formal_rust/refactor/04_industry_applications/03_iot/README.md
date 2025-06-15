@@ -1,4 +1,4 @@
-# 物联网 (IoT) 形式化重构
+﻿# 物联网 (IoT) 形式化重构
 
 ## 概述
 
@@ -8,7 +8,7 @@
 
 ### 物联网系统
 
-**定义 3.3.1** (物联网系统)
+****定义 3**.3.1** (物联网系统)
 一个物联网系统是一个六元组 $\mathcal{I} = (D, N, C, P, S, A)$，其中：
 
 - $D$ 是设备集合 (Device Set)
@@ -20,7 +20,7 @@
 
 ### 设备模型
 
-**定义 3.3.2** (设备模型)
+****定义 3**.3.2** (设备模型)
 设备 $d \in D$ 是一个五元组 $d = (id, type, capabilities, state, location)$，其中：
 
 - $id$: 设备标识符
@@ -31,7 +31,7 @@
 
 ### 数据流模型
 
-**定义 3.3.3** (数据流模型)
+****定义 3**.3.3** (数据流模型)
 数据流是一个函数 $F: D \times \mathbb{R} \rightarrow \mathbb{R}^n$，满足：
 
 $$F(d, t) = \text{sensor\_reading}(d, t)$$
@@ -42,7 +42,7 @@ $$F(d, t) = \text{sensor\_reading}(d, t)$$
 
 ### 设备连接性定理
 
-**定理 3.3.1** (设备连接性定理)
+****定理 3**.3.1** (设备连接性定理)
 对于物联网系统 $\mathcal{I}$，如果满足：
 
 1. $\forall d \in D: \text{is\_connected}(d)$
@@ -60,7 +60,7 @@ $$F(d, t) = \text{sensor\_reading}(d, t)$$
 
 ### 数据一致性定理
 
-**定理 3.3.2** (数据一致性定理)
+****定理 3**.3.2** (数据一致性定理)
 如果数据流 $F$ 满足：
 
 $$\forall d_1, d_2 \in D: \text{consistency}(F(d_1, t), F(d_2, t))$$
@@ -69,7 +69,7 @@ $$\forall d_1, d_2 \in D: \text{consistency}(F(d_1, t), F(d_2, t))$$
 
 ### 边缘计算定理
 
-**定理 3.3.3** (边缘计算定理)
+****定理 3**.3.3** (边缘计算定理)
 边缘计算延迟满足：
 
 $$\text{edge\_latency} = \text{processing\_time} + \text{network\_latency} \ll \text{cloud\_latency}$$
@@ -845,7 +845,7 @@ pub enum ProcessingError {
 
 ### 设备连接性能
 
-**定理 3.3.4** (设备连接性能定理)
+****定理 3**.3.4** (设备连接性能定理)
 设备连接性能满足：
 
 $$\text{connection\_time} = O(\log(|D|) \times \text{network\_latency})$$
@@ -854,7 +854,7 @@ $$\text{connection\_time} = O(\log(|D|) \times \text{network\_latency})$$
 
 ### 数据处理性能
 
-**定理 3.3.5** (数据处理性能定理)
+****定理 3**.3.5** (数据处理性能定理)
 边缘数据处理性能满足：
 
 $$\text{processing\_time} = O(|F| + |T| + |A|) \times \text{data\_size}$$
@@ -863,7 +863,7 @@ $$\text{processing\_time} = O(|F| + |T| + |A|) \times \text{data\_size}$$
 
 ### 网络带宽
 
-**定理 3.3.6** (网络带宽定理)
+****定理 3**.3.6** (网络带宽定理)
 网络带宽使用满足：
 
 $$\text{bandwidth} = O(|D| \times \text{data\_rate} \times \text{compression\_ratio})$$
@@ -872,14 +872,14 @@ $$\text{bandwidth} = O(|D| \times \text{data\_rate} \times \text{compression\_ra
 
 ### 设备认证
 
-**定理 3.3.7** (设备认证定理)
+****定理 3**.3.7** (设备认证定理)
 如果使用TLS 1.3和证书认证，则设备认证安全性满足：
 
 $$\text{Pr}[\text{unauthorized\_access}] \leq 2^{-128}$$
 
 ### 数据加密
 
-**定理 3.3.8** (数据加密定理)
+****定理 3**.3.8** (数据加密定理)
 如果使用AES-256-GCM加密，则数据传输安全性满足：
 
 $$\text{Pr}[\text{data\_breach}] \leq 2^{-256}$$
@@ -889,9 +889,9 @@ $$\text{Pr}[\text{data\_breach}] \leq 2^{-256}$$
 本文档建立了物联网系统的完整形式化框架，包括：
 
 1. **严格的数学定义**: 建立了物联网系统、设备、数据流的形式化模型
-2. **完整的定理体系**: 提供了设备连接性、数据一致性、边缘计算等定理
-3. **详细的Rust实现**: 提供了设备抽象、通信协议、边缘计算的完整代码
+2. **完整的定理体系**: 提供了设备连接性、数据一致性、边缘计算等**定理 3**. **详细的Rust实现**: 提供了设备抽象、通信协议、边缘计算的完整代码
 4. **全面的性能分析**: 建立了连接、处理、带宽使用的分析框架
 5. **严格的安全保证**: 提供了设备认证和数据加密的数学保证
 
 这个框架为物联网系统的开发提供了理论基础和实践指导。
+

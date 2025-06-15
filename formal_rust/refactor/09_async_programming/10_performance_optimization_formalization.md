@@ -1,4 +1,4 @@
-# 5. 性能优化形式化理论 (Performance Optimization Formalization)
+﻿# 5. 性能优化形式化理论 (Performance Optimization Formalization)
 
 ## 目录
 
@@ -18,7 +18,7 @@
 
 ### 5.1.1. 性能模型
 
-**定义 5.1.1** (性能模型)
+****定义 5**.1.1** (性能模型)
 性能模型是一个五元组 $\mathcal{P} = (T, M, C, I, \mu)$，其中：
 
 - $T$ 是时间函数
@@ -27,7 +27,7 @@
 - $I$ 是I/O函数
 - $\mu: T \times M \times C \times I \rightarrow \mathbb{R}^+$ 是性能度量函数
 
-**定义 5.1.2** (性能优化)
+****定义 5**.1.2** (性能优化)
 性能优化是一个三元组 $\text{Optimize}(P, C, G)$，其中：
 
 - $P$ 是性能模型
@@ -36,7 +36,7 @@
 
 ### 5.1.2. 优化策略
 
-**定义 5.1.3** (优化策略)
+****定义 5**.1.3** (优化策略)
 优化策略是一个四元组 $\text{Strategy}(A, P, M, E)$，其中：
 
 - $A$ 是算法选择
@@ -44,7 +44,7 @@
 - $M$ 是内存管理
 - $E$ 是执行环境
 
-**定义 5.1.4** (优化效果)
+****定义 5**.1.4** (优化效果)
 优化效果定义为：
 $$\text{improvement} = \frac{\text{performance}_{\text{after}} - \text{performance}_{\text{before}}}{\text{performance}_{\text{before}}}$$
 
@@ -54,7 +54,7 @@ $$\text{improvement} = \frac{\text{performance}_{\text{after}} - \text{performan
 
 ### 5.2.1. 时间复杂度优化
 
-**定义 5.2.1** (算法复杂度)
+****定义 5**.2.1** (算法复杂度)
 算法复杂度是一个三元组 $\mathcal{C} = (T, S, A)$，其中：
 
 - $T$ 是时间复杂度
@@ -220,7 +220,7 @@ impl AdaptiveAlgorithmSelector {
 
 ### 5.3.1. 内存布局优化
 
-**定义 5.3.1** (内存布局)
+****定义 5**.3.1** (内存布局)
 内存布局是一个四元组 $\mathcal{L} = (A, S, P, C)$，其中：
 
 - $A$ 是内存对齐
@@ -931,7 +931,7 @@ impl BatchIOManager {
 
 ### 5.6.1. 性能优化定理
 
-**定理 5.6.1** (算法优化效果)
+****定理 5**.6.1** (算法优化效果)
 如果算法 $A_2$ 是算法 $A_1$ 的优化版本，则：
 $$\text{performance}(A_2) \geq \text{performance}(A_1)$$
 
@@ -940,7 +940,7 @@ $$\text{performance}(A_2) \geq \text{performance}(A_1)$$
 
 ### 5.6.2. 内存优化定理
 
-**定理 5.6.2** (内存优化效果)
+****定理 5**.6.2** (内存优化效果)
 如果内存布局 $L_2$ 比 $L_1$ 更优化，则：
 $$\text{cache\_misses}(L_2) \leq \text{cache\_misses}(L_1)$$
 
@@ -949,7 +949,7 @@ $$\text{cache\_misses}(L_2) \leq \text{cache\_misses}(L_1)$$
 
 ### 5.6.3. 并发优化定理
 
-**定理 5.6.3** (并发优化效果)
+****定理 5**.6.3** (并发优化效果)
 如果并发度 $C_2 > C_1$，则：
 $$\text{throughput}(C_2) \geq \text{throughput}(C_1)$$
 
@@ -1151,7 +1151,7 @@ impl PerformanceProfiler {
 
 ### 5.8.1. 时间复杂度分析
 
-**定理 5.8.1** (优化算法复杂度)
+****定理 5**.8.1** (优化算法复杂度)
 优化后的算法时间复杂度满足：
 $$T_{\text{optimized}}(n) \leq T_{\text{original}}(n)$$
 
@@ -1160,7 +1160,7 @@ $$T_{\text{optimized}}(n) \leq T_{\text{original}}(n)$$
 
 ### 5.8.2. 空间复杂度分析
 
-**定理 5.8.2** (内存优化效果)
+****定理 5**.8.2** (内存优化效果)
 内存优化后的空间复杂度满足：
 $$S_{\text{optimized}}(n) \leq S_{\text{original}}(n)$$
 
@@ -1273,3 +1273,4 @@ mod tests {
 8. **性能分析**: 分析了优化效果和性能基准
 
 这些理论为性能优化提供了严格的数学基础，确保了优化的正确性和有效性。
+

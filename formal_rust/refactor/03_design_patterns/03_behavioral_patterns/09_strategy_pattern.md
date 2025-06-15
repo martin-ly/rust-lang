@@ -1,4 +1,4 @@
-# 策略模式 (Strategy Pattern) - 形式化重构
+﻿# 策略模式 (Strategy Pattern) - 形式化重构
 
 ## 目录
 
@@ -100,7 +100,7 @@ $$\text{Complexity}(a) = O(g(n))$$
 
 $$\text{implements}(s_1, I_{str}) \land \text{implements}(s_2, I_{str}) \Rightarrow \text{replaceable}(s_1, s_2)$$
 
-**证明：**
+****证明**：**
 
 1. 根据定义2.2，两个策略都实现相同的接口
 2. 接口定义了相同的契约
@@ -113,7 +113,7 @@ $$\text{implements}(s_1, I_{str}) \land \text{implements}(s_2, I_{str}) \Rightar
 
 $$\text{precondition}(i) \land f_A(a, i, e) = r \Rightarrow \text{postcondition}(i, r)$$
 
-**证明：**
+****证明**：**
 
 1. 根据前置条件验证输入
 2. 算法执行产生结果
@@ -127,7 +127,7 @@ $$\text{precondition}(i) \land f_A(a, i, e) = r \Rightarrow \text{postcondition}
 
 $$f_S(i, e) = a^* \Rightarrow \forall a \in A: \text{cost}(f_A(a^*, i, e)) \leq \text{cost}(f_A(a, i, e))$$
 
-**证明：**
+****证明**：**
 
 1. 根据定义3.2，最优算法具有最小成本
 2. 策略选择函数选择最优算法
@@ -142,7 +142,7 @@ $$\text{Complexity}(a) \leq O(f(n))$$
 
 其中 $f(n)$ 是复杂度上界函数。
 
-**证明：**
+****证明**：**
 
 1. 根据定义3.4，算法复杂度为 $O(g(n))$
 2. 存在常数 $c$ 使得 $g(n) \leq c \cdot f(n)$
@@ -893,3 +893,4 @@ impl CompositeStrategy {
 4. **单一职责**：每个策略类只负责一个算法
 
 通过形式化的数学理论和完整的Rust实现，我们建立了策略模式的完整理论体系，为实际应用提供了坚实的理论基础和实现指导。
+

@@ -1,4 +1,4 @@
-# 3. 并行模式形式化理论
+﻿# 3. 并行模式形式化理论
 
  (Parallel Patterns Formalization)
 
@@ -41,7 +41,7 @@
 
 ### 3.1.1. 并行计算模型
 
-**定义 3.1.1** (并行计算模型)
+****定义 3**.1.1** (并行计算模型)
 并行计算模型是一个六元组 $\mathcal{P} = (P, M, C, T, \mu, \sigma)$，其中：
 
 - $P$ 是处理器集合
@@ -51,17 +51,17 @@
 - $\mu: T \rightarrow P$ 是任务映射函数
 - $\sigma: P \times P \rightarrow \mathbb{R}^+$ 是通信开销函数
 
-**定义 3.1.2** (并行执行)
+****定义 3**.1.2** (并行执行)
 对于任务集合 $T' \subseteq T$，并行执行定义为：
 $$\text{parallel}(T') = \bigotimes_{t \in T'} \text{execute}(t)$$
 
 ### 3.1.2. 并行度
 
-**定义 3.1.3** (并行度)
+****定义 3**.1.3** (并行度)
 并行度是同时执行的任务数量：
 $$\text{parallelism}(T') = |\{t \in T' \mid \text{active}(t)\}|$$
 
-**定义 3.1.4** (加速比)
+****定义 3**.1.4** (加速比)
 加速比是串行执行时间与并行执行时间的比值：
 $$\text{speedup} = \frac{T_{\text{serial}}}{T_{\text{parallel}}}$$
 
@@ -71,7 +71,7 @@ $$\text{speedup} = \frac{T_{\text{serial}}}{T_{\text{parallel}}}$$
 
 ### 3.2.1. 数据并行模型
 
-**定义 3.2.1** (数据并行)
+****定义 3**.2.1** (数据并行)
 数据并行是一个四元组 $\mathcal{D} = (D, F, P, \pi)$，其中：
 
 - $D$ 是数据集合
@@ -79,13 +79,13 @@ $$\text{speedup} = \frac{T_{\text{serial}}}{T_{\text{parallel}}}$$
 - $P$ 是处理器集合
 - $\pi: D \rightarrow P$ 是数据分布函数
 
-**定义 3.2.2** (数据并行执行)
+****定义 3**.2.2** (数据并行执行)
 数据并行执行定义为：
 $$\text{data\_parallel}(D, f) = \bigotimes_{d \in D} f(d)$$
 
 ### 3.2.2. Map-Reduce模式
 
-**定义 3.2.3** (Map-Reduce)
+****定义 3**.2.3** (Map-Reduce)
 Map-Reduce是一个三元组 $\text{MapReduce}(D, \text{map}, \text{reduce})$，其中：
 
 - $D$ 是输入数据集合
@@ -126,7 +126,7 @@ where
 }
 ```
 
-**定理 3.2.1** (Map-Reduce正确性)
+****定理 3**.2.1** (Map-Reduce正确性)
 如果map和reduce函数都是纯函数，则Map-Reduce的结果是确定的。
 
 **证明**:
@@ -138,7 +138,7 @@ where
 
 ### 3.3.1. 任务并行模型
 
-**定义 3.3.1** (任务并行)
+****定义 3**.3.1** (任务并行)
 任务并行是一个四元组 $\mathcal{T} = (T, D, P, \mu)$，其中：
 
 - $T$ 是任务集合
@@ -146,7 +146,7 @@ where
 - $P$ 是处理器集合
 - $\mu: T \rightarrow P$ 是任务调度函数
 
-**定义 3.3.2** (任务依赖)
+****定义 3**.3.2** (任务依赖)
 任务 $t_1$ 依赖于任务 $t_2$，当且仅当：
 $$t_1 \rightarrow t_2 \iff \text{output}(t_2) \cap \text{input}(t_1) \neq \emptyset$$
 
@@ -234,7 +234,7 @@ fn critical_path_schedule(tasks: &[Task], dependencies: &[(TaskId, TaskId)]) -> 
 
 ### 3.4.1. 流水线模型
 
-**定义 3.4.1** (流水线)
+****定义 3**.4.1** (流水线)
 流水线是一个五元组 $\mathcal{P} = (S, B, F, Q, \tau)$，其中：
 
 - $S$ 是阶段集合
@@ -243,7 +243,7 @@ fn critical_path_schedule(tasks: &[Task], dependencies: &[(TaskId, TaskId)]) -> 
 - $Q$ 是队列集合
 - $\tau: S \rightarrow \mathbb{R}^+$ 是阶段延迟函数
 
-**定义 3.4.2** (流水线吞吐量)
+****定义 3**.4.2** (流水线吞吐量)
 流水线吞吐量定义为：
 $$\text{throughput}(\mathcal{P}) = \frac{1}{\max_{s \in S} \tau(s)}$$
 
@@ -377,7 +377,7 @@ impl PipelineScheduler {
 
 ### 3.5.1. 分治模型
 
-**定义 3.5.1** (分治算法)
+****定义 3**.5.1** (分治算法)
 分治算法是一个四元组 $\mathcal{D} = (P, C, M, B)$，其中：
 
 - $P$ 是问题集合
@@ -385,7 +385,7 @@ impl PipelineScheduler {
 - $M: [P] \rightarrow P$ 是合并函数
 - $B: P \rightarrow \text{bool}$ 是基础情况判断函数
 
-**定义 3.5.2** (分治执行)
+****定义 3**.5.2** (分治执行)
 分治执行定义为：
 
 ```latex
@@ -497,7 +497,7 @@ where
 
 ### 3.6.1. 并行加速比定理
 
-**定理 3.6.1** (Amdahl定律)
+****定理 3**.6.1** (Amdahl定律)
 如果程序中有 $f$ 比例的部分必须串行执行，则最大加速比为：
 $$S_{\max} = \frac{1}{f + \frac{1-f}{p}}$$
 
@@ -513,7 +513,7 @@ $$S = \frac{T}{fT + \frac{(1-f)T}{p}} = \frac{1}{f + \frac{1-f}{p}}$$
 
 ### 3.6.2. 并行效率定理
 
-**定理 3.6.2** (并行效率)
+****定理 3**.6.2** (并行效率)
 并行效率定义为：
 $$E = \frac{S}{p} = \frac{T_{\text{serial}}}{p \cdot T_{\text{parallel}}}$$
 
@@ -522,7 +522,7 @@ $$E = \frac{S}{p} = \frac{T_{\text{serial}}}{p \cdot T_{\text{parallel}}}$$
 
 ### 3.6.3. 负载均衡定理
 
-**定理 3.6.3** (负载均衡)
+****定理 3**.6.3** (负载均衡)
 如果任务均匀分布到所有处理器，则并行效率最大化。
 
 **证明**:
@@ -918,7 +918,7 @@ impl ParallelAlgorithms {
 
 ### 3.8.1. 时间复杂度分析
 
-**定理 3.8.1** (并行算法复杂度)
+****定理 3**.8.1** (并行算法复杂度)
 对于包含 $n$ 个元素的并行算法，使用 $p$ 个处理器：
 $$T(n, p) = O\left(\frac{n}{p} + \log p\right)$$
 
@@ -927,7 +927,7 @@ $$T(n, p) = O\left(\frac{n}{p} + \log p\right)$$
 
 ### 3.8.2. 空间复杂度分析
 
-**定理 3.8.2** (并行算法空间复杂度)
+****定理 3**.8.2** (并行算法空间复杂度)
 并行算法的空间复杂度为：
 $$S(n, p) = O(n + p)$$
 
@@ -1016,8 +1016,8 @@ mod tests {
 3. **任务并行模式**: 提供了任务调度和依赖管理
 4. **流水线模式**: 实现了流水线处理和调度
 5. **分治模式**: 提供了并行分治算法
-6. **核心定理证明**: 证明了Amdahl定律和并行效率定理
-7. **Rust实现**: 提供了完整的并行算法实现
+6. **核心定理证明**: 证明了Amdahl定律和并行效率**定理 7**. **Rust实现**: 提供了完整的并行算法实现
 8. **性能分析**: 分析了时间复杂度和空间复杂度
 
 这些理论为并行编程提供了严格的数学基础，确保了算法的正确性和性能。
+

@@ -1,4 +1,4 @@
-# 并发数据结构形式化理论 (Concurrent Data Structures Formalization Theory)
+﻿# 并发数据结构形式化理论 (Concurrent Data Structures Formalization Theory)
 
 ## 目录 (Table of Contents)
 
@@ -17,7 +17,7 @@
 
 并发数据结构是设计用于在多线程环境中安全访问的数据结构，需要保证线程安全性和正确性。
 
-**定义 1.1.1** (并发数据结构)
+****定义 1**.1.1** (并发数据结构)
 一个并发数据结构是一个五元组 $CDS = (S, O, I, L, C)$，其中：
 
 - $S$ 是状态空间
@@ -28,23 +28,23 @@
 
 ### 1.2 线程安全 (Thread Safety)
 
-**定义 1.2.1** (线程安全)
+****定义 1**.2.1** (线程安全)
 一个数据结构是线程安全的，当且仅当：
 $$\forall op_1, op_2 \in O: op_1 \parallel op_2 \implies op_1 \circ op_2 \equiv op_2 \circ op_1$$
 
-**定义 1.2.2** (线性化性)
+****定义 1**.2.2** (线性化性)
 一个并发数据结构是线性化的，当且仅当：
 $$\forall H: \exists L: H \subseteq L \land L \text{ is sequential}$$
 
 ### 1.3 锁机制 (Locking Mechanisms)
 
-**定义 1.3.1** (互斥锁)
+****定义 1**.3.1** (互斥锁)
 互斥锁是一个二元组 $Mutex = (locked, owner)$，其中：
 
 - $locked \in \{true, false\}$ 是锁状态
 - $owner \in Thread \cup \{null\}$ 是锁持有者
 
-**定义 1.3.2** (读写锁)
+****定义 1**.3.2** (读写锁)
 读写锁是一个三元组 $RWLock = (readers, writers, owner)$，其中：
 
 - $readers \in \mathbb{N}$ 是读者数量
@@ -55,31 +55,31 @@ $$\forall H: \exists L: H \subseteq L \land L \text{ is sequential}$$
 
 ### 2.1 无锁数据结构 (Lock-Free Data Structures)
 
-**定义 2.1.1** (无锁性)
+****定义 2**.1.1** (无锁性)
 一个数据结构是无锁的，当且仅当：
 $$\forall t \in Thread: \text{Progress}(t) \text{ is guaranteed}$$
 
-**定义 2.1.2** (等待自由)
+****定义 2**.1.2** (等待自由)
 一个数据结构是等待自由的，当且仅当：
 $$\forall t \in Thread: \text{Progress}(t) \text{ is bounded}$$
 
-**定义 2.1.3** (无阻塞)
+****定义 2**.1.3** (无阻塞)
 一个数据结构是无阻塞的，当且仅当：
 $$\forall t \in Thread: \text{Progress}(t) \text{ is eventually guaranteed}$$
 
 ### 2.2 内存模型 (Memory Models)
 
-**定义 2.2.1** (顺序一致性)
+****定义 2**.2.1** (顺序一致性)
 顺序一致性要求：
 $$\forall H: \exists L: H \subseteq L \land \forall t: L|t \text{ is sequential}$$
 
-**定义 2.2.2** (因果一致性)
+****定义 2**.2.2** (因果一致性)
 因果一致性要求：
 $$\forall e_1, e_2: e_1 \to e_2 \implies e_1 \prec e_2$$
 
 ### 2.3 原子操作 (Atomic Operations)
 
-**定义 2.3.1** (比较并交换)
+****定义 2**.3.1** (比较并交换)
 比较并交换操作 $CAS(addr, expected, new)$ 定义为：
 $$\text{CAS}(addr, expected, new) =
 \begin{cases}
@@ -87,7 +87,7 @@ true & \text{if } *addr = expected \\
 false & \text{otherwise}
 \end{cases}$$
 
-**定义 2.3.2** (加载链接/存储条件)
+****定义 2**.3.2** (加载链接/存储条件)
 加载链接/存储条件操作定义为：
 $$\text{LL}(addr) = *addr$$
 $$\text{SC}(addr, value) =
@@ -100,7 +100,7 @@ false & \text{otherwise}
 
 ### 3.1 并发数据结构基本定理 (Fundamental Theorems)
 
-**定理 3.1.1** (线性化性定理)
+****定理 3**.1.1** (线性化性定理)
 如果一个并发数据结构是线性化的，那么它是线程安全的。
 
 **证明**：
@@ -108,13 +108,13 @@ false & \text{otherwise}
 由于 $H \subseteq L$ 且 $L$ 是顺序的，所以 $H$ 中的操作可以重排序为顺序执行。
 因此，数据结构是线程安全的。
 
-**定理 3.1.2** (无锁性定理)
+****定理 3**.1.2** (无锁性定理)
 如果一个数据结构是无锁的，那么它不会出现死锁。
 
 **证明**：
 假设存在死锁，那么某些线程无法取得进展，这与无锁性定义矛盾。
 
-**定理 3.1.3** (ABA问题定理)
+****定理 3**.1.3** (ABA问题定理)
 在无锁数据结构中，ABA问题可能导致不正确的结果。
 
 **证明**：
@@ -126,11 +126,11 @@ false & \text{otherwise}
 
 ### 3.2 性能定理 (Performance Theorems)
 
-**定理 3.2.1** (锁竞争定理)
+****定理 3**.2.1** (锁竞争定理)
 锁竞争导致的性能下降为：
 $$Performance = \frac{1}{1 + \frac{Contention}{Parallelism}}$$
 
-**定理 3.2.2** (无锁性能定理)
+****定理 3**.2.2** (无锁性能定理)
 无锁数据结构的性能为：
 $$Performance = \frac{1}{1 + Retry\_Rate \times Retry\_Cost}$$
 
@@ -915,11 +915,11 @@ pub struct ContentionMetrics {
 
 ### 6.1 理论性能分析 (Theoretical Performance Analysis)
 
-**定理 6.1.1** (并发性能上界)
+****定理 6**.1.1** (并发性能上界)
 并发数据结构的性能上界为：
 $$Performance_{max} = \frac{1}{1 + \frac{Contention}{Parallelism}}$$
 
-**定理 6.1.2** (无锁性能定理)
+****定理 6**.1.2** (无锁性能定理)
 无锁数据结构的性能为：
 $$Performance = \frac{1}{1 + Retry\_Rate \times Retry\_Cost}$$
 
@@ -1280,3 +1280,4 @@ impl ConcurrentTaskScheduler {
 **理论完整性**: 100%
 **实现完整性**: 100%
 **证明完整性**: 100%
+

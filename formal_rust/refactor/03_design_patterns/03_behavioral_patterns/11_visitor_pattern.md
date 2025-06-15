@@ -1,4 +1,4 @@
-# 访问者模式 (Visitor Pattern) - 形式化重构
+﻿# 访问者模式 (Visitor Pattern) - 形式化重构
 
 ## 目录
 
@@ -100,7 +100,7 @@ $$\forall e \in E, v \in V: \text{type}(e) \subseteq \text{domain}(v)$$
 
 $$\text{correctDispatch}(e, v) \Rightarrow f_D(e, v) \text{ is deterministic}$$
 
-**证明：**
+****证明**：**
 
 1. 根据定义2.4，双重分发函数是确定的
 2. 元素类型和访问者类型都是确定的
@@ -113,7 +113,7 @@ $$\text{correctDispatch}(e, v) \Rightarrow f_D(e, v) \text{ is deterministic}$$
 
 $$\forall e \in E: \text{hasVisitMethod}(v, e) \Rightarrow \text{complete}(v, E)$$
 
-**证明：**
+****证明**：**
 
 1. 根据定义3.2，访问者完整性要求所有元素都有对应的访问方法
 2. 如果所有元素都有访问方法，则访问是完整的
@@ -126,7 +126,7 @@ $$\forall e \in E: \text{hasVisitMethod}(v, e) \Rightarrow \text{complete}(v, E)
 
 $$\text{separated}(A, E) \Rightarrow \text{extensible}(A)$$
 
-**证明：**
+****证明**：**
 
 1. 根据定义3.3，操作与元素分离
 2. 新操作不依赖于元素结构
@@ -139,7 +139,7 @@ $$\text{separated}(A, E) \Rightarrow \text{extensible}(A)$$
 
 $$\text{typeSafe}(V) \Rightarrow \neg \text{runtimeTypeError}()$$
 
-**证明：**
+****证明**：**
 
 1. 根据定义3.4，类型安全保证类型匹配
 2. 编译时类型检查防止运行时错误
@@ -1112,3 +1112,4 @@ pub trait CompositeVisitor: Visitor {
 4. **类型安全**：编译时类型检查
 
 通过形式化的数学理论和完整的Rust实现，我们建立了访问者模式的完整理论体系，为实际应用提供了坚实的理论基础和实现指导。
+

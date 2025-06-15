@@ -1,4 +1,4 @@
-# 备忘录模式 (Memento Pattern) - 形式化重构
+﻿# 备忘录模式 (Memento Pattern) - 形式化重构
 
 ## 目录
 
@@ -98,7 +98,7 @@ $$\forall i \in [1, n-1]: \text{isValidTransition}(s_i, s_{i+1})$$
 
 $$\text{createMemento}(O) = M \Rightarrow \text{getState}(M) = \text{getState}(O)$$
 
-**证明：**
+****证明**：**
 
 1. 根据定义2.3，`createMemento()` 方法保存当前状态
 2. 根据定义3.1，备忘录状态与原发器状态一致
@@ -111,7 +111,7 @@ $$\text{createMemento}(O) = M \Rightarrow \text{getState}(M) = \text{getState}(O
 
 $$\text{restore}(O, M) \Rightarrow \text{getState}(O) = \text{getState}(M)$$
 
-**证明：**
+****证明**：**
 
 1. 根据定义2.3，`restore()` 方法恢复备忘录状态
 2. 根据定义3.2，恢复后状态一致
@@ -124,7 +124,7 @@ $$\text{restore}(O, M) \Rightarrow \text{getState}(O) = \text{getState}(M)$$
 
 $$\forall s \in S: \text{saved}(s) \Rightarrow \exists h \in H: \text{getState}(h) = s$$
 
-**证明：**
+****证明**：**
 
 1. 根据定义3.3，历史记录包含所有保存的状态
 2. 每次保存操作都会添加到历史记录
@@ -137,7 +137,7 @@ $$\forall s \in S: \text{saved}(s) \Rightarrow \exists h \in H: \text{getState}(
 
 $$\text{isValidSequence}(T_S) \Rightarrow \forall i: \text{isValidState}(s_i)$$
 
-**证明：**
+****证明**：**
 
 1. 根据定义3.4，有效转换序列满足转换约束
 2. 每个状态转换都是有效的
@@ -929,3 +929,4 @@ impl CompressedMemento {
 4. **状态恢复**：支持任意时间点的状态恢复
 
 通过形式化的数学理论和完整的Rust实现，我们建立了备忘录模式的完整理论体系，为实际应用提供了坚实的理论基础和实现指导。
+

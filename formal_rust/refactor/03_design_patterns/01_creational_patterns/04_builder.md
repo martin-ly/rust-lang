@@ -1,4 +1,4 @@
-# 建造者模式 (Builder Pattern) - 形式化重构
+﻿# 建造者模式 (Builder Pattern) - 形式化重构
 
 ## 目录 (Table of Contents)
 
@@ -15,7 +15,7 @@
 
 ### 1.1 建造者模式六元组 (Builder Pattern Sextuple)
 
--**定义 1.1.1 (建造者模式)**
+-****定义 1**.1.1 (建造者模式)**
 
 设 $B = (N, I, S, R, C, O)$ 为建造者模式，其中：
 
@@ -28,13 +28,13 @@
 
 ### 1.2 构建过程定义 (Construction Process Definition)
 
--**定义 1.2.1 (构建步骤序列)**
+-****定义 1**.2.1 (构建步骤序列)**
 
 设 $\mathcal{S} = \langle s_1, s_2, \ldots, s_n \rangle$ 为构建步骤序列，满足：
 
 $$\forall i < j, \text{Step}(s_i) \prec \text{Step}(s_j)$$
 
--**定义 1.2.2 (构建结果)**
+-****定义 1**.2.2 (构建结果)**
 
 设 $P$ 为最终产品，满足：
 
@@ -46,13 +46,13 @@ $$P = \text{Result}(\text{Execute}(\mathcal{S}))$$
 
 ### 2.1 构建顺序理论 (Construction Order Theory)
 
--**定义 2.1.1 (步骤依赖关系)**
+-****定义 2**.1.1 (步骤依赖关系)**
 
 步骤 $s_i$ 依赖于步骤 $s_j$，记作 $s_i \prec s_j$，当且仅当：
 
 $$\text{Input}(s_i) \cap \text{Output}(s_j) \neq \emptyset$$
 
--**定义 2.1.2 (构建完整性)**
+-****定义 2**.1.2 (构建完整性)**
 
 构建过程是完整的，当且仅当：
 
@@ -60,7 +60,7 @@ $$\forall \text{required\_part} \in \text{Product}, \exists s \in \mathcal{S} : 
 
 ### 2.2 构建一致性理论 (Construction Consistency Theory)
 
--**定义 2.2.1 (步骤一致性)**
+-****定义 2**.2.1 (步骤一致性)**
 
 构建步骤是一致的，当且仅当：
 
@@ -72,34 +72,34 @@ $$\forall s_i, s_j \in \mathcal{S}, \text{Compatible}(\text{Output}(s_i), \text{
 
 ### 3.1 构建顺序定理 (Construction Order Theorem)
 
--**定理 3.1.1 (构建顺序正确性)**
+-****定理 3**.1.1 (构建顺序正确性)**
 
 对于任意建造者模式 $B$，构建步骤的执行顺序是正确的。
 
 **证明**:
 设 $\mathcal{S} = \langle s_1, s_2, \ldots, s_n \rangle$ 为构建步骤序列。
 
-根据定义 1.2.1，$\forall i < j, \text{Step}(s_i) \prec \text{Step}(s_j)$。
+根据**定义 1**.2.1，$\forall i < j, \text{Step}(s_i) \prec \text{Step}(s_j)$。
 
 因此，构建顺序满足依赖关系约束。
 
--**定理 3.1.2 (构建完整性)**
+-****定理 3**.1.2 (构建完整性)**
 
 建造者模式保证构建过程的完整性。
 
 **证明**:
-根据定义 2.1.2，构建过程是完整的当且仅当所有必需的部分都被创建。
+根据**定义 2**.1.2，构建过程是完整的当且仅当所有必需的部分都被创建。
 
 在建造者模式中，Director 控制构建过程，确保所有必需步骤都被执行。
 
 因此，构建过程是完整的。
 
--**定理 3.1.3 (构建一致性)**
+-****定理 3**.1.3 (构建一致性)**
 
 建造者模式保证构建步骤的一致性。
 
 **证明**:
-根据定义 2.2.1，构建步骤是一致的当且仅当所有步骤的输入输出兼容。
+根据**定义 2**.2.1，构建步骤是一致的当且仅当所有步骤的输入输出兼容。
 
 在建造者模式中，Builder 接口定义了统一的构建方法，确保步骤兼容性。
 
@@ -107,7 +107,7 @@ $$\forall s_i, s_j \in \mathcal{S}, \text{Compatible}(\text{Output}(s_i), \text{
 
 ### 3.2 复杂度分析定理 (Complexity Analysis Theorem)
 
--**定理 3.2.1 (构建时间复杂度)**
+-****定理 3**.2.1 (构建时间复杂度)**
 
 建造者模式的构建时间复杂度为 $O(n)$，其中 $n$ 是构建步骤的数量。
 
@@ -118,7 +118,7 @@ $$\forall s_i, s_j \in \mathcal{S}, \text{Compatible}(\text{Output}(s_i), \text{
 
 因此，总构建时间为 $O(n)$。
 
--**定理 3.2.2 (空间复杂度)**
+-****定理 3**.2.2 (空间复杂度)**
 
 建造者模式的空间复杂度为 $O(1)$。
 
@@ -824,3 +824,4 @@ impl CachedBuilder {
 - 需要验证构建过程的系统
 
 通过形式化分析和Rust实现，建造者模式展现了其在软件架构中的重要价值。
+

@@ -1,4 +1,4 @@
-# 行为型设计模式形式化理论
+﻿# 行为型设计模式形式化理论
 
  (Behavioral Design Patterns Formalization Theory)
 
@@ -8,32 +8,32 @@
   - [目录](#目录)
   - [1. 理论基础 (Theoretical Foundation)](#1-理论基础-theoretical-foundation)
     - [1.1 行为关系基础 (Behavioral Relation Foundation)](#11-行为关系基础-behavioral-relation-foundation)
-      - [定义 1.1.1 (行为关系)](#定义-111-行为关系)
-      - [定义 1.1.2 (行为模式)](#定义-112-行为模式)
-      - [定义 1.1.3 (交互协议)](#定义-113-交互协议)
+      - [**定义 1**.1.1 (行为关系)](#定义-111-行为关系)
+      - [**定义 1**.1.2 (行为模式)](#定义-112-行为模式)
+      - [**定义 1**.1.3 (交互协议)](#定义-113-交互协议)
     - [1.2 状态转换理论 (State Transition Theory)](#12-状态转换理论-state-transition-theory)
-      - [定义 1.2.1 (状态转换)](#定义-121-状态转换)
-      - [定义 1.2.2 (行为序列)](#定义-122-行为序列)
+      - [**定义 1**.2.1 (状态转换)](#定义-121-状态转换)
+      - [**定义 1**.2.2 (行为序列)](#定义-122-行为序列)
   - [2. 行为型模式十一元组定义(Behavioral Pattern Undecuple Definition)](#2-行为型模式十一元组定义behavioral-pattern-undecuple-definition)
-    - [定义 2.1.1 (行为型模式系统)](#定义-211-行为型模式系统)
+    - [**定义 2**.1.1 (行为型模式系统)](#定义-211-行为型模式系统)
   - [3. 责任链模式形式化理论 (Chain of Responsibility Pattern Formalization Theory)](#3-责任链模式形式化理论-chain-of-responsibility-pattern-formalization-theory)
     - [3.1 责任链代数理论 (Chain of Responsibility Algebraic Theory)](#31-责任链代数理论-chain-of-responsibility-algebraic-theory)
-      - [定义 3.1.1 (责任链代数)](#定义-311-责任链代数)
-      - [定义 3.1.2 (处理器链)](#定义-312-处理器链)
+      - [**定义 3**.1.1 (责任链代数)](#定义-311-责任链代数)
+      - [**定义 3**.1.2 (处理器链)](#定义-312-处理器链)
     - [3.2 请求传递理论 (Request Passing Theory)](#32-请求传递理论-request-passing-theory)
-      - [定义 3.2.1 (请求传递)](#定义-321-请求传递)
-      - [定义 3.2.2 (处理能力)](#定义-322-处理能力)
+      - [**定义 3**.2.1 (请求传递)](#定义-321-请求传递)
+      - [**定义 3**.2.2 (处理能力)](#定义-322-处理能力)
   - [4. 命令模式形式化理论 (Command Pattern Formalization Theory)](#4-命令模式形式化理论-command-pattern-formalization-theory)
     - [4.1 命令代数理论 (Command Algebraic Theory)](#41-命令代数理论-command-algebraic-theory)
-      - [定义 4.1.1 (命令代数)](#定义-411-命令代数)
-      - [定义 4.1.2 (命令执行)](#定义-412-命令执行)
+      - [**定义 4**.1.1 (命令代数)](#定义-411-命令代数)
+      - [**定义 4**.1.2 (命令执行)](#定义-412-命令执行)
     - [4.2 撤销机制理论 (Undo Mechanism Theory)](#42-撤销机制理论-undo-mechanism-theory)
-      - [定义 4.2.1 (撤销操作)](#定义-421-撤销操作)
-      - [定义 4.2.2 (命令历史)](#定义-422-命令历史)
+      - [**定义 4**.2.1 (撤销操作)](#定义-421-撤销操作)
+      - [**定义 4**.2.2 (命令历史)](#定义-422-命令历史)
   - [5. 解释器模式形式化理论 (Interpreter Pattern Formalization Theory)](#5-解释器模式形式化理论-interpreter-pattern-formalization-theory)
     - [5.1 解释器代数理论 (Interpreter Algebraic Theory)](#51-解释器代数理论-interpreter-algebraic-theory)
-      - [定义 5.1.1 (解释器代数)](#定义-511-解释器代数)
-      - [定义 5.1.2 (语法解析)](#定义-512-语法解析)
+      - [**定义 5**.1.1 (解释器代数)](#定义-511-解释器代数)
+      - [**定义 5**.1.2 (语法解析)](#定义-512-语法解析)
     - [5.2 表达式求值理论](#52-表达式求值理论)
   - [6. 迭代器模式形式化理论](#6-迭代器模式形式化理论)
     - [6.1 迭代器代数理论](#61-迭代器代数理论)
@@ -85,7 +85,7 @@
 
 ### 1.1 行为关系基础 (Behavioral Relation Foundation)
 
-#### 定义 1.1.1 (行为关系)
+#### **定义 1**.1.1 (行为关系)
 
 行为关系 $BR = (A, I, C, T)$ 包含：
 
@@ -94,24 +94,24 @@
 - $C$: 通信机制集合 (Communication Mechanism Set)
 - $T$: 时序关系集合 (Temporal Relation Set)
 
-#### 定义 1.1.2 (行为模式)
+#### **定义 1**.1.2 (行为模式)
 
 行为模式 $\text{BehaviorPattern}: \text{Context} \times \text{Stimulus} \rightarrow \text{Response}$ 定义为：
 $$\text{BehaviorPattern}(ctx, stim) = resp \text{ where } resp \text{ is the response to } stim \text{ in context } ctx$$
 
-#### 定义 1.1.3 (交互协议)
+#### **定义 1**.1.3 (交互协议)
 
 交互协议 $\text{InteractionProtocol}: \text{Agent} \times \text{Agent} \times \text{Message} \rightarrow \text{Response}$ 定义为：
 $$\text{InteractionProtocol}(a_1, a_2, msg) = resp \text{ where } resp \text{ is } a_2\text{'s response to } msg \text{ from } a_1$$
 
 ### 1.2 状态转换理论 (State Transition Theory)
 
-#### 定义 1.2.1 (状态转换)
+#### **定义 1**.2.1 (状态转换)
 
 状态转换 $\text{StateTransition}: \text{State} \times \text{Event} \rightarrow \text{State}$ 定义为：
 $$\text{StateTransition}(s, e) = s' \text{ where } s' \text{ is the new state after event } e$$
 
-#### 定义 1.2.2 (行为序列)
+#### **定义 1**.2.2 (行为序列)
 
 行为序列 $\text{BehaviorSequence}: [\text{Action}] \times \text{Context} \rightarrow \text{Result}$ 定义为：
 $$\text{BehaviorSequence}([a_1, a_2, \ldots, a_n], ctx) = a_n \circ a_{n-1} \circ \ldots \circ a_1(ctx)$$
@@ -120,7 +120,7 @@ $$\text{BehaviorSequence}([a_1, a_2, \ldots, a_n], ctx) = a_n \circ a_{n-1} \cir
 
 ## 2. 行为型模式十一元组定义(Behavioral Pattern Undecuple Definition)
 
-### 定义 2.1.1 (行为型模式系统)
+### **定义 2**.1.1 (行为型模式系统)
 
 行为型模式系统 $BPS = (C, M, I, T, S, O, V, P, A, D, F)$ 包含：
 
@@ -196,7 +196,7 @@ $$\text{BehaviorSequence}([a_1, a_2, \ldots, a_n], ctx) = a_n \circ a_{n-1} \cir
 
 ### 3.1 责任链代数理论 (Chain of Responsibility Algebraic Theory)
 
-#### 定义 3.1.1 (责任链代数)
+#### **定义 3**.1.1 (责任链代数)
 
 责任链代数 $CA = (H, R, P, T, S)$ 包含：
 
@@ -206,14 +206,14 @@ $$\text{BehaviorSequence}([a_1, a_2, \ldots, a_n], ctx) = a_n \circ a_{n-1} \cir
 - **T (Termination)**: 终止条件 (Termination Condition)
 - **S (Successor)**: 后继者 (Successor)
 
-#### 定义 3.1.2 (处理器链)
+#### **定义 3**.1.2 (处理器链)
 
 处理器链 $\text{HandlerChain}: [\text{Handler}] \times \text{Request} \rightarrow \text{Response}$ 定义为：
 $$\text{HandlerChain}([h_1, h_2, \ldots, h_n], req) = h_n \circ h_{n-1} \circ \ldots \circ h_1(req)$$
 
 ### 3.2 请求传递理论 (Request Passing Theory)
 
-#### 定义 3.2.1 (请求传递)
+#### **定义 3**.2.1 (请求传递)
 
 ```latex
 请求传递 $\text{RequestPassing}: \text{Handler} \times \text{Request} \rightarrow \text{Response}$ 定义为：
@@ -223,7 +223,7 @@ $$\text{RequestPassing}(h, req) = \begin{cases}
 \end{cases}$$
 ```
 
-#### 定义 3.2.2 (处理能力)
+#### **定义 3**.2.2 (处理能力)
 
 ```latex
 处理能力 $\text{CanHandle}: \text{Handler} \times \text{Request} \rightarrow \text{Boolean}$ 定义为：
@@ -239,7 +239,7 @@ $$\text{CanHandle}(h, req) = \begin{cases}
 
 ### 4.1 命令代数理论 (Command Algebraic Theory)
 
-#### 定义 4.1.1 (命令代数)
+#### **定义 4**.1.1 (命令代数)
 
 命令代数 $MA = (I, E, R, U, P)$ 包含：
 
@@ -249,21 +249,21 @@ $$\text{CanHandle}(h, req) = \begin{cases}
 - **U (Undo)**: 撤销机制 (Undo Mechanism)
 - **P (Parameters)**: 参数 (Parameters)
 
-#### 定义 4.1.2 (命令执行)
+#### **定义 4**.1.2 (命令执行)
 
 命令执行 $\text{CommandExecution}: \text{Command} \times \text{Context} \rightarrow \text{Result}$ 定义为：
 $$\text{CommandExecution}(cmd, ctx) = \text{Execute}(cmd, \text{Receiver}(cmd), ctx)$$
 
 ### 4.2 撤销机制理论 (Undo Mechanism Theory)
 
-#### 定义 4.2.1 (撤销操作)
+#### **定义 4**.2.1 (撤销操作)
 
 ```latex
 撤销操作 $\text{UndoOperation}: \text{Command} \times \text{Context} \rightarrow \text{Result}$ 定义为：
 $$\text{UndoOperation}(cmd, ctx) = \text{Inverse}(\text{CommandExecution}(cmd, ctx))$$
 ```
 
-#### 定义 4.2.2 (命令历史)
+#### **定义 4**.2.2 (命令历史)
 
 ```latex
 命令历史 $\text{CommandHistory}: [\text{Command}] \times \text{Operation} \rightarrow \text{Result}$ 定义为：
@@ -279,7 +279,7 @@ $$\text{CommandHistory}([cmd_1, cmd_2, \ldots, cmd_n], op) = \begin{cases}
 
 ### 5.1 解释器代数理论 (Interpreter Algebraic Theory)
 
-#### 定义 5.1.1 (解释器代数)
+#### **定义 5**.1.1 (解释器代数)
 
 解释器代数 $IA = (G, P, E, C, S)$ 包含：
 
@@ -289,7 +289,7 @@ $$\text{CommandHistory}([cmd_1, cmd_2, \ldots, cmd_n], op) = \begin{cases}
 - **C (Context)**: 上下文 (Context)
 - **S (Semantics)**: 语义 (Semantics)
 
-#### 定义 5.1.2 (语法解析)
+#### **定义 5**.1.2 (语法解析)
 
 语法解析 $\text{GrammarParsing}: \text{Input} \times \text{Grammar} \rightarrow \text{AbstractSyntaxTree}$ 定义为：
 $$\text{GrammarParsing}(input, grammar) = \text{Parse}(input, \text{Rules}(grammar))$$
@@ -1174,3 +1174,4 @@ impl StrategySelection for StrategyAlgebra {
 - **可验证性**：所有性质都可以通过定理证明验证
 
 通过这种形式化重构，行为型设计模式从经验性的设计原则转变为可证明的数学理论，为软件工程提供了坚实的理论基础。
+

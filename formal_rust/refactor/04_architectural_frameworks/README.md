@@ -1,4 +1,4 @@
-# 04. 架构框架 (Architectural Frameworks)
+﻿# 04. 架构框架 (Architectural Frameworks)
 
 ## 目录结构
 
@@ -46,7 +46,7 @@
 
 ### 架构框架的形式化模型
 
-**定义 4.1** (架构框架)
+****定义 4**.1** (架构框架)
 架构框架是一个五元组 $\mathcal{AF} = (S, C, P, R, \mathcal{M})$，其中：
 
 - $S$ 是服务集合
@@ -55,7 +55,7 @@
 - $R$ 是关系集合
 - $\mathcal{M}$ 是映射函数集合
 
-**定理 4.1** (架构一致性)
+****定理 4**.1** (架构一致性)
 对于任意架构框架 $\mathcal{AF}$，如果满足以下条件：
 
 1. $\forall s \in S, \exists c \in C: s \subseteq c$
@@ -171,3 +171,4 @@ impl ArchitecturalFramework for MicroservicesArchitecture {
 ### 4.3 中断恢复点
 
 当前状态：主README文件已创建，准备开始微服务架构的详细内容编写。
+

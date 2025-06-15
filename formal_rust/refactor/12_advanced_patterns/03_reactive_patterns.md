@@ -1,4 +1,4 @@
-# 响应式编程模式理论与实践
+﻿# 响应式编程模式理论与实践
 
 ## 目录
 
@@ -38,7 +38,7 @@
 
 #### 1.1.1 响应式流定义
 
-**定义 1.1** (响应式流)：响应式流 $S$ 是一个四元组：
+****定义 1**.1** (响应式流)：响应式流 $S$ 是一个四元组：
 $$S = (P, S, C, \mathcal{R})$$
 
 其中：
@@ -83,7 +83,7 @@ trait Subscriber<T> {
 
 #### 1.1.2 响应式流定理
 
-**定理 1.1** (响应式流正确性)：响应式流 $S$ 是正确的，当且仅当：
+****定理 1**.1** (响应式流正确性)：响应式流 $S$ 是正确的，当且仅当：
 1. 无数据丢失：$\forall p \in P, s \in S: \text{no\_data\_loss}(p, s)$
 2. 顺序保持：$\forall x, y \in \text{Stream}: x \prec y \Rightarrow \text{order\_preserved}(x, y)$
 3. 背压处理：$\forall \text{backpressure} \in \mathcal{R}: \text{handled}(\text{backpressure})$
@@ -139,7 +139,7 @@ impl<T> ReactiveStreamValidator<T> {
 
 #### 1.2.1 背压形式化定义
 
-**定义 1.2** (背压)：背压 $B$ 是一个三元组：
+****定义 1**.2** (背压)：背压 $B$ 是一个三元组：
 $$B = (\text{source}, \text{sink}, \text{pressure})$$
 
 其中 $\text{pressure} \in [0, 1]$ 表示压力水平。

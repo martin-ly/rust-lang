@@ -1,4 +1,4 @@
-# 活动对象模式形式化理论 (Active Object Pattern Formalization)
+﻿# 活动对象模式形式化理论 (Active Object Pattern Formalization)
 
 ## 目录
 
@@ -35,7 +35,7 @@
 
 设 $\mathcal{U}$ 为所有对象的全集，$\mathcal{T}$ 为所有线程的集合，$\mathcal{M}$ 为所有方法的集合。
 
-**定义 2.1** (活动对象)
+****定义 2**.1** (活动对象)
 活动对象是一个五元组 $AO = (S, P, Q, T, \delta)$，其中：
 
 - $S$ 是状态空间
@@ -44,14 +44,14 @@
 - $T \in \mathcal{T}$ 是执行线程
 - $\delta: Q \times S \rightarrow S$ 是状态转换函数
 
-**定义 2.2** (方法请求)
+****定义 2**.2** (方法请求)
 方法请求是一个三元组 $MR = (m, args, result)$，其中：
 
 - $m \in \mathcal{M}$ 是方法标识符
 - $args$ 是参数列表
 - $result$ 是结果容器
 
-**定义 2.3** (代理)
+****定义 2**.3** (代理)
 代理是一个函数 $P: \mathcal{M} \times Args \rightarrow Future[Result]$，其中：
 
 - $Args$ 是参数类型
@@ -59,7 +59,7 @@
 
 ### 2.2 操作语义
 
-**定义 2.4** (方法调用)
+****定义 2**.4** (方法调用)
 对于活动对象 $AO = (S, P, Q, T, \delta)$，方法调用 $call(m, args)$ 定义为：
 
 $$call(m, args) = \begin{cases}
@@ -67,7 +67,7 @@ enqueue(Q, (m, args, \bot)) & \text{if } Q \text{ not full} \\
 \bot & \text{otherwise}
 \end{cases}$$
 
-**定义 2.5** (方法执行)
+****定义 2**.5** (方法执行)
 方法执行 $execute(AO)$ 定义为：
 
 $$execute(AO) = \begin{cases}
@@ -81,7 +81,7 @@ S & \text{otherwise}
 
 ### 3.1 活动对象代数
 
-**定义 3.1** (活动对象代数)
+****定义 3**.1** (活动对象代数)
 活动对象代数是一个六元组 $\mathcal{A} = (AO, \oplus, \otimes, \mathbf{0}, \mathbf{1}, \alpha)$，其中：
 
 - $AO$ 是活动对象集合
@@ -93,15 +93,15 @@ S & \text{otherwise}
 
 ### 3.2 代数性质
 
-**定理 3.1** (结合律)
+****定理 3**.1** (结合律)
 对于任意活动对象 $a, b, c \in AO$：
 $$(a \oplus b) \oplus c = a \oplus (b \oplus c)$$
 
-**定理 3.2** (分配律)
+****定理 3**.2** (分配律)
 对于任意活动对象 $a, b \in AO$ 和方法 $m \in \mathcal{M}$：
 $$(a \oplus b) \otimes m = (a \otimes m) \oplus (b \otimes m)$$
 
-**定理 3.3** (单位元)
+****定理 3**.3** (单位元)
 对于任意活动对象 $a \in AO$：
 $$a \oplus \mathbf{0} = a = \mathbf{0} \oplus a$$
 $$a \otimes \mathbf{1} = a = \mathbf{1} \otimes a$$
@@ -112,7 +112,7 @@ $$a \otimes \mathbf{1} = a = \mathbf{1} \otimes a$$
 
 ### 4.1 线程安全性定理
 
-**定理 4.1** (线程安全保证)
+****定理 4**.1** (线程安全保证)
 对于活动对象 $AO = (S, P, Q, T, \delta)$，如果：
 1. $Q$ 是线程安全的队列
 2. $\delta$ 是纯函数
@@ -133,7 +133,7 @@ $$\delta(Q.head, s_1) = \delta(Q.head, s_2) \Rightarrow s_1 = s_2$$
 
 ### 4.2 性能定理
 
-**定理 4.2** (吞吐量下界)
+****定理 4**.2** (吞吐量下界)
 对于活动对象 $AO$，其吞吐量 $T$ 满足：
 $$T \geq \frac{1}{t_{exec} + t_{overhead}}$$
 
@@ -149,7 +149,7 @@ $$\frac{1}{t_{exec} + t_{overhead}} \leq T \leq \frac{n}{t_{exec} + t_{overhead}
 
 ### 4.3 公平性定理
 
-**定理 4.3** (公平性保证)
+****定理 4**.3** (公平性保证)
 如果调度器使用FIFO策略，则活动对象保证公平性：
 $$\forall i, j: i < j \Rightarrow execute(MR_i) \prec execute(MR_j)$$
 
@@ -323,7 +323,7 @@ s & \text{if } m = \text{GetValue}
 
 ### 6.3 性能优化
 
-**定理 6.1** (批量处理优化)
+****定理 6**.1** (批量处理优化)
 对于批量操作，吞吐量可以提升为：
 $$T_{batch} = \frac{k}{t_{exec} + t_{overhead}}$$
 
@@ -366,8 +366,7 @@ $$T_{batch} = \frac{k}{t_{exec} + \frac{t_{overhead}}{k}} = \frac{k^2}{k \cdot t
 
 1. **形式化理论**: 建立了活动对象模式的完整数学理论
 2. **代数结构**: 定义了活动对象的代数运算和性质
-3. **定理证明**: 证明了线程安全、性能和公平性定理
-4. **实现验证**: 提供了类型安全的Rust实现
+3. **定理证明**: 证明了线程安全、性能和公平性**定理 4**. **实现验证**: 提供了类型安全的Rust实现
 
 ### 8.2 未来工作
 
@@ -386,3 +385,4 @@ $$T_{batch} = \frac{k}{t_{exec} + \frac{t_{overhead}}{k}} = \frac{k^2}{k \cdot t
 **版本**: 1.0
 **最后更新**: 2025-01-27
 **作者**: AI Assistant
+

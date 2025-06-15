@@ -1,4 +1,4 @@
-# 01. 创建型设计模式
+﻿# 01. 创建型设计模式
 
 ## 目录
 
@@ -42,12 +42,12 @@ Rust中的创建型模式包含以下核心概念：
 
 ### 2.1 单例模式定义
 
-**定义 2.1.1** (单例)
+****定义 2**.1.1** (单例)
 ```
 Singleton = {instance | ∃!instance ∈ Type}
 ```
 
-**定义 2.1.2** (单例保证)
+****定义 2**.1.2** (单例保证)
 ```
 Singleton_Guarantee = {
     Uniqueness: ∀i1, i2 ∈ Instance, i1 = i2,
@@ -87,7 +87,7 @@ fn get_instance() -> &'static Singleton {
 
 ### 2.3 线程安全单例
 
-**定义 2.3.1** (线程安全单例)
+****定义 2**.3.1** (线程安全单例)
 ```
 Thread_Safe_Singleton = {
     Mutex<Singleton>,
@@ -130,12 +130,12 @@ fn get_instance() -> &'static Singleton {
 
 ### 3.1 工厂模式定义
 
-**定义 3.1.1** (工厂)
+****定义 3**.1.1** (工厂)
 ```
 Factory = {f | f: Parameters → Product}
 ```
 
-**定义 3.1.2** (工厂方法)
+****定义 3**.1.2** (工厂方法)
 ```
 Factory_Method = {
     create: Parameters → Product,
@@ -186,7 +186,7 @@ impl SimpleFactory {
 
 ### 3.3 工厂方法模式
 
-**定义 3.3.1** (工厂方法)
+****定义 3**.3.1** (工厂方法)
 ```
 Factory_Method_Pattern = {
     Creator: {create_product: () → Product},
@@ -228,7 +228,7 @@ impl Creator for ConcreteCreatorB {
 
 ### 4.1 抽象工厂定义
 
-**定义 4.1.1** (抽象工厂)
+****定义 4**.1.1** (抽象工厂)
 ```
 Abstract_Factory = {
     create_product_a: () → ProductA,
@@ -237,7 +237,7 @@ Abstract_Factory = {
 }
 ```
 
-**定义 4.1.2** (产品族)
+****定义 4**.1.2** (产品族)
 ```
 Product_Family = {ProductA, ProductB, ProductC}
 ```
@@ -293,7 +293,7 @@ impl AbstractFactory for ConcreteFactory1 {
 
 ### 5.1 建造者模式定义
 
-**定义 5.1.1** (建造者)
+****定义 5**.1.1** (建造者)
 ```
 Builder = {
     build_part_a: () → Builder,
@@ -303,7 +303,7 @@ Builder = {
 }
 ```
 
-**定义 5.1.2** (建造过程)
+****定义 5**.1.2** (建造过程)
 ```
 Build_Process = {
     step1: Builder → Builder,
@@ -415,12 +415,12 @@ impl Builder {
 
 ### 6.1 原型模式定义
 
-**定义 6.1.1** (原型)
+****定义 6**.1.1** (原型)
 ```
 Prototype = {clone: () → Self}
 ```
 
-**定义 6.1.2** (克隆操作)
+****定义 6**.1.2** (克隆操作)
 ```
 Clone_Operation = {
     shallow_clone: Object → Object,
@@ -482,7 +482,7 @@ impl PrototypeRegistry {
 
 ### 7.1 对象池模式定义
 
-**定义 7.1.1** (对象池)
+****定义 7**.1.1** (对象池)
 ```
 Object_Pool = {
     acquire: () → Object,
@@ -491,7 +491,7 @@ Object_Pool = {
 }
 ```
 
-**定义 7.1.2** (池化对象)
+****定义 7**.1.2** (池化对象)
 ```
 Pooled_Object = {
     object: Object,

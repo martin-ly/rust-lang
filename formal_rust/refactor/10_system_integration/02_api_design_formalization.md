@@ -1,4 +1,4 @@
-# API设计形式化理论
+﻿# API设计形式化理论
 
 ## 目录
 
@@ -37,12 +37,12 @@
 
 API（Application Programming Interface）是系统间通信的接口规范。在形式化理论中，我们用以下方式定义：
 
-**定义 1.1.1** (API接口)
+****定义 1**.1.1** (API接口)
 设 $R = \{r_1, r_2, ..., r_n\}$ 为资源集合，$M = \{GET, POST, PUT, DELETE\}$ 为HTTP方法集合，则API接口定义为：
 
 $$API(R, M) = \{(r_i, m_j, f_{ij}) | r_i \in R, m_j \in M, f_{ij}: Input_{ij} \rightarrow Output_{ij}\}$$
 
-**定义 1.1.2** (API端点)
+****定义 1**.1.2** (API端点)
 API端点定义为：
 $$Endpoint = (Path, Method, Handler, Schema)$$
 
@@ -54,17 +54,17 @@ $$Endpoint = (Path, Method, Handler, Schema)$$
 
 ### 1.2 形式化定义
 
-**定义 1.2.1** (API规范)
+****定义 1**.2.1** (API规范)
 API规范定义为：
 $$APISpec = (Endpoints, Schemas, Security, Documentation)$$
 
-**定义 1.2.2** (API一致性)
+****定义 1**.2.2** (API一致性)
 对于任意请求 $req \in Request$，API一致性定义为：
 $$\forall req: validate(req) \land process(req) \Rightarrow response(req) \in ValidResponse$$
 
 ### 1.3 数学基础
 
-**定理 1.3.1** (API完备性)
+****定理 1**.3.1** (API完备性)
 对于有限资源集合 $R$ 和方法集合 $M$，存在完备的API设计。
 
 **证明**：
@@ -77,7 +77,7 @@ $$\forall req: validate(req) \land process(req) \Rightarrow response(req) \in Va
 
 ### 2.1 RESTful API模式
 
-**定义 2.1.1** (RESTful API)
+****定义 2**.1.1** (RESTful API)
 RESTful API模式定义为：
 $$RESTful(R) = \{(r_i, CRUD(r_i)) | r_i \in R\}$$
 
@@ -90,17 +90,17 @@ $$RESTful(R) = \{(r_i, CRUD(r_i)) | r_i \in R\}$$
 
 ### 2.2 GraphQL API模式
 
-**定义 2.2.1** (GraphQL Schema)
+****定义 2**.2.1** (GraphQL Schema)
 GraphQL模式定义为：
 $$GraphQLSchema = (Types, Queries, Mutations, Subscriptions)$$
 
-**定义 2.2.2** (GraphQL查询)
+****定义 2**.2.2** (GraphQL查询)
 GraphQL查询定义为：
 $$Query = (SelectionSet, Variables, OperationName)$$
 
 ### 2.3 gRPC API模式
 
-**定义 2.3.1** (gRPC服务)
+****定义 2**.3.1** (gRPC服务)
 gRPC服务定义为：
 $$gRPCService = (Methods, Messages, Streaming)$$
 
@@ -113,31 +113,31 @@ $$gRPCService = (Methods, Messages, Streaming)$$
 
 ### 3.1 接口规范模型
 
-**定义 3.1.1** (接口类型)
+****定义 3**.1.1** (接口类型)
 接口类型定义为：
 $$InterfaceType = (InputType, OutputType, ErrorType)$$
 
-**定义 3.1.2** (类型安全)
+****定义 3**.1.2** (类型安全)
 类型安全定义为：
 $$\forall req: Type(req) \subseteq InputType \Rightarrow Type(response(req)) \subseteq OutputType$$
 
 ### 3.2 数据模型
 
-**定义 3.2.1** (数据模式)
+****定义 3**.2.1** (数据模式)
 数据模式定义为：
 $$Schema = (Fields, Types, Constraints, Validations)$$
 
-**定义 3.2.2** (数据验证)
+****定义 3**.2.2** (数据验证)
 数据验证定义为：
 $$Validation: Data \rightarrow \{true, false\} \times ErrorSet$$
 
 ### 3.3 状态转换模型
 
-**定义 3.3.1** (状态机)
+****定义 3**.3.1** (状态机)
 API状态机定义为：
 $$StateMachine = (States, Transitions, InitialState, FinalStates)$$
 
-**定义 3.3.2** (状态转换)
+****定义 3**.3.2** (状态转换)
 状态转换定义为：
 $$\delta: States \times Events \rightarrow States$$
 

@@ -1,4 +1,4 @@
-# 管程模式形式化理论 (Monitor Pattern Formalization)
+﻿# 管程模式形式化理论 (Monitor Pattern Formalization)
 
 ## 目录
 
@@ -35,7 +35,7 @@
 
 设 $\mathcal{T}$ 为所有线程的集合，$\mathcal{S}$ 为所有状态的集合，$\mathcal{C}$ 为所有条件的集合。
 
-**定义 2.1** (管程)
+****定义 2**.1** (管程)
 管程是一个七元组 $M = (S, L, C, Q_e, Q_w, \mu, \gamma)$，其中：
 
 - $S \in \mathcal{S}$ 是共享状态
@@ -46,7 +46,7 @@
 - $\mu: S \times \mathcal{T} \rightarrow S$ 是状态更新函数
 - $\gamma: \mathcal{C} \times S \rightarrow \mathbb{B}$ 是条件检查函数
 
-**定义 2.2** (管程操作)
+****定义 2**.2** (管程操作)
 管程操作包括：
 
 - $enter(M, t)$: 线程 $t$ 进入管程
@@ -57,22 +57,22 @@
 
 ### 2.2 操作语义
 
-**定义 2.3** (进入管程)
+****定义 2**.3** (进入管程)
 $$enter(M, t) = \begin{cases}
 acquire(L) \land t \in Q_e & \text{if } L \text{ is locked} \\
 acquire(L) \land t \text{ proceeds} & \text{otherwise}
 \end{cases}$$
 
-**定义 2.4** (退出管程)
+****定义 2**.4** (退出管程)
 $$exit(M, t) = release(L) \land \text{if } Q_e \neq \emptyset \text{ then } wake(Q_e.head)$$
 
-**定义 2.5** (等待条件)
+****定义 2**.5** (等待条件)
 $$wait(M, t, c) = \begin{cases}
 release(L) \land t \in Q_w(c) \land \text{block}(t) & \text{if } \neg \gamma(c, S) \\
 \text{continue} & \text{otherwise}
 \end{cases}$$
 
-**定义 2.6** (唤醒条件)
+****定义 2**.6** (唤醒条件)
 $$signal(M, c) = \begin{cases}
 \text{if } Q_w(c) \neq \emptyset \text{ then } wake(Q_w(c).head) & \text{Signal-and-Continue} \\
 \text{if } Q_w(c) \neq \emptyset \text{ then } wake(Q_w(c).head) \land \text{block}(t) & \text{Signal-and-Wait}
@@ -84,7 +84,7 @@ $$signal(M, c) = \begin{cases}
 
 ### 3.1 管程代数
 
-**定义 3.1** (管程代数)
+****定义 3**.1** (管程代数)
 管程代数是一个八元组 $\mathcal{M} = (M, \oplus, \otimes, \mathbf{0}, \mathbf{1}, \alpha, \beta, \gamma)$，其中：
 
 - $M$ 是管程集合
@@ -98,15 +98,15 @@ $$signal(M, c) = \begin{cases}
 
 ### 3.2 代数性质
 
-**定理 3.1** (结合律)
+****定理 3**.1** (结合律)
 对于任意管程 $m_1, m_2, m_3 \in M$：
 $$(m_1 \oplus m_2) \oplus m_3 = m_1 \oplus (m_2 \oplus m_3)$$
 
-**定理 3.2** (分配律)
+****定理 3**.2** (分配律)
 对于任意管程 $m_1, m_2 \in M$ 和线程 $t \in \mathcal{T}$：
 $$(m_1 \oplus m_2) \otimes t = (m_1 \otimes t) \oplus (m_2 \otimes t)$$
 
-**定理 3.3** (单位元)
+****定理 3**.3** (单位元)
 对于任意管程 $m \in M$：
 $$m \oplus \mathbf{0} = m = \mathbf{0} \oplus m$$
 $$m \otimes \mathbf{1} = m = \mathbf{1} \otimes m$$
@@ -117,7 +117,7 @@ $$m \otimes \mathbf{1} = m = \mathbf{1} \otimes m$$
 
 ### 4.1 互斥性定理
 
-**定理 4.1** (互斥保证)
+****定理 4**.1** (互斥保证)
 对于管程 $M = (S, L, C, Q_e, Q_w, \mu, \gamma)$，如果：
 1. $L$ 是互斥锁
 2. 所有对 $S$ 的访问都通过 $enter(M, t)$ 和 $exit(M, t)$ 进行
@@ -133,7 +133,7 @@ $$acquire(L, t_1) \land acquire(L, t_2) \Rightarrow t_1 = t_2$$
 
 ### 4.2 安全性定理
 
-**定理 4.2** (安全性保证)
+****定理 4**.2** (安全性保证)
 对于管程 $M$，如果所有操作都遵循管程协议，则：
 $$\forall s \in \mathcal{S}: \text{invariant}(s) \Rightarrow \text{invariant}(\mu(s, t))$$
 
@@ -147,7 +147,7 @@ $$\text{invariant}(s) \land \text{invariant}(\mu(s, t)) \Rightarrow \text{invari
 
 ### 4.3 公平性定理
 
-**定理 4.3** (公平性保证)
+****定理 4**.3** (公平性保证)
 如果管程使用FIFO调度策略，则：
 $$\forall t_1, t_2 \in Q_e: t_1 < t_2 \Rightarrow enter(M, t_1) \prec enter(M, t_2)$$
 
@@ -305,7 +305,7 @@ $$wait(condition) \Rightarrow \text{recheck}(condition)$$
 
 ### 6.3 性能优化
 
-**定理 6.1** (批量操作优化)
+****定理 6**.1** (批量操作优化)
 对于批量操作，吞吐量可以提升为：
 $$T_{batch} = \frac{k}{t_{exec} + t_{sync}}$$
 
@@ -348,8 +348,7 @@ $$T_{batch} = \frac{k}{t_{exec} + \frac{t_{sync}}{k}} = \frac{k^2}{k \cdot t_{ex
 
 1. **形式化理论**: 建立了管程模式的完整数学理论
 2. **代数结构**: 定义了管程的代数运算和性质
-3. **定理证明**: 证明了互斥性、安全性和公平性定理
-4. **实现验证**: 提供了类型安全的Rust实现
+3. **定理证明**: 证明了互斥性、安全性和公平性**定理 4**. **实现验证**: 提供了类型安全的Rust实现
 
 ### 8.2 未来工作
 
@@ -368,3 +367,4 @@ $$T_{batch} = \frac{k}{t_{exec} + \frac{t_{sync}}{k}} = \frac{k^2}{k \cdot t_{ex
 **版本**: 1.0
 **最后更新**: 2025-01-27
 **作者**: AI Assistant
+

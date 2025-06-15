@@ -1,4 +1,4 @@
-# 01. IoT系统架构模式理论
+﻿# 01. IoT系统架构模式理论
 
 ## 目录
 
@@ -15,7 +15,7 @@
 
 ### 1.1 IoT系统定义
 
-**定义 1.1.1** (IoT系统)
+****定义 1**.1.1** (IoT系统)
 IoT系统是连接物理世界和数字世界的分布式系统，包含设备、网络、平台和应用层。
 
 $$\text{IoTSystem} = \langle \mathcal{D}, \mathcal{N}, \mathcal{P}, \mathcal{A}, \mathcal{S} \rangle$$
@@ -30,7 +30,7 @@ $$\text{IoTSystem} = \langle \mathcal{D}, \mathcal{N}, \mathcal{P}, \mathcal{A},
 
 ### 1.2 系统架构层次
 
-**定义 1.2.1** (架构层次)
+****定义 1**.2.1** (架构层次)
 IoT系统采用分层架构模式：
 
 $$\text{IoTArchitecture} ::= \text{Device} \times \text{Gateway} \times \text{Network} \times \text{Platform} \times \text{Application}$$
@@ -45,7 +45,7 @@ $$\text{IoTArchitecture} ::= \text{Device} \times \text{Gateway} \times \text{Ne
 
 ### 1.3 系统特性
 
-**定义 1.3.1** (系统特性)
+****定义 1**.3.1** (系统特性)
 IoT系统具有以下核心特性：
 
 $$\text{IoTProperties} = \langle \text{Scalability}, \text{Reliability}, \text{Security}, \text{Interoperability} \rangle$$
@@ -61,7 +61,7 @@ $$\text{IoTProperties} = \langle \text{Scalability}, \text{Reliability}, \text{S
 
 ### 2.1 设备分类
 
-**定义 2.1.1** (设备分类)
+****定义 2**.1.1** (设备分类)
 IoT设备按功能分为不同类型：
 
 $$\text{DeviceType} ::= \text{Sensor} \mid \text{Actuator} \mid \text{Gateway} \mid \text{Controller}$$
@@ -71,7 +71,7 @@ $$\text{Device} = \langle \text{Type}, \text{Capabilities}, \text{Resources}, \t
 
 ### 2.2 传感器架构
 
-**定义 2.2.1** (传感器架构)
+****定义 2**.2.1** (传感器架构)
 传感器负责数据采集和转换：
 
 $$\text{SensorArchitecture} = \langle \text{Transducer}, \text{SignalConditioning}, \text{ADC}, \text{Communication} \rangle$$
@@ -108,7 +108,7 @@ where
 
 ### 2.3 执行器架构
 
-**定义 2.3.1** (执行器架构)
+****定义 2**.3.1** (执行器架构)
 执行器负责物理动作的执行：
 
 $$\text{ActuatorArchitecture} = \langle \text{Controller}, \text{Driver}, \text{Mechanism}, \text{Feedback} \rangle$$
@@ -120,7 +120,7 @@ $$\text{actuator\_control}(\text{command}, \text{feedback}) = \text{action}$$
 
 ### 3.1 通信协议
 
-**定义 3.1.1** (通信协议)
+****定义 3**.1.1** (通信协议)
 IoT设备使用多种通信协议：
 
 $$\text{CommunicationProtocol} ::= \text{WiFi} \mid \text{Bluetooth} \mid \text{Zigbee} \mid \text{LoRa} \mid \text{NB-IoT}$$
@@ -130,7 +130,7 @@ $$\text{Protocol} = \langle \text{Range}, \text{Bandwidth}, \text{Power}, \text{
 
 ### 3.2 网络拓扑
 
-**定义 3.2.1** (网络拓扑)
+****定义 3**.2.1** (网络拓扑)
 IoT网络采用不同的拓扑结构：
 
 $$\text{NetworkTopology} ::= \text{Star} \mid \text{Mesh} \mid \text{Tree} \mid \text{Bus}$$
@@ -144,7 +144,7 @@ $$\text{NetworkTopology} ::= \text{Star} \mid \text{Mesh} \mid \text{Tree} \mid 
 
 ### 3.3 路由算法
 
-**定义 3.3.1** (路由算法)
+****定义 3**.3.1** (路由算法)
 路由算法决定数据包的传输路径：
 
 $$\text{RoutingAlgorithm} = \text{Network} \times \text{Source} \times \text{Destination} \rightarrow \text{Path}$$
@@ -174,7 +174,7 @@ function energy_aware_routing(network, source, destination):
 
 ### 4.1 平台架构
 
-**定义 4.1.1** (IoT平台)
+****定义 4**.1.1** (IoT平台)
 IoT平台提供设备管理、数据处理和应用支持：
 
 $$\text{IoTPlatform} = \langle \text{DeviceManagement}, \text{DataProcessing}, \text{Analytics}, \text{APIs} \rangle$$
@@ -188,7 +188,7 @@ $$\text{IoTPlatform} = \langle \text{DeviceManagement}, \text{DataProcessing}, \
 
 ### 4.2 数据流架构
 
-**定义 4.2.1** (数据流)
+****定义 4**.2.1** (数据流)
 数据在IoT系统中的流动路径：
 
 $$\text{DataFlow} ::= \text{Device} \rightarrow \text{Gateway} \rightarrow \text{Platform} \rightarrow \text{Application}$$
@@ -228,7 +228,7 @@ impl DataProcessor {
 
 ### 4.3 存储架构
 
-**定义 4.3.1** (存储架构)
+****定义 4**.3.1** (存储架构)
 IoT数据存储采用分层架构：
 
 $$\text{StorageArchitecture} = \langle \text{Edge}, \text{Fog}, \text{Cloud} \rangle$$
@@ -243,7 +243,7 @@ $$\text{StorageArchitecture} = \langle \text{Edge}, \text{Fog}, \text{Cloud} \ra
 
 ### 5.1 应用架构模式
 
-**定义 5.1.1** (应用架构)
+****定义 5**.1.1** (应用架构)
 IoT应用采用微服务架构模式：
 
 $$\text{ApplicationArchitecture} = \langle \text{Services}, \text{APIs}, \text{Databases}, \text{UIs} \rangle$$
@@ -253,7 +253,7 @@ $$\text{ServiceType} ::= \text{DeviceService} \mid \text{DataService} \mid \text
 
 ### 5.2 事件驱动架构
 
-**定义 5.2.1** (事件驱动)
+****定义 5**.2.1** (事件驱动)
 事件驱动架构处理IoT系统中的异步事件：
 
 $$\text{EventDrivenArchitecture} = \langle \text{EventBus}, \text{Producers}, \text{Consumers}, \text{Handlers} \rangle$$
@@ -293,7 +293,7 @@ impl EventProcessor {
 
 ### 5.3 API设计
 
-**定义 5.3.1** (API设计)
+****定义 5**.3.1** (API设计)
 IoT API提供标准化的接口：
 
 $$\text{IoTAPI} = \langle \text{REST}, \text{GraphQL}, \text{gRPC}, \text{WebSocket} \rangle$$
@@ -309,7 +309,7 @@ $$\text{IoTAPI} = \langle \text{REST}, \text{GraphQL}, \text{gRPC}, \text{WebSoc
 
 ### 6.1 安全威胁模型
 
-**定义 6.1.1** (安全威胁)
+****定义 6**.1.1** (安全威胁)
 IoT系统面临多种安全威胁：
 
 $$\text{SecurityThreat} ::= \text{DeviceTampering} \mid \text{DataInterception} \mid \text{DenialOfService} \mid \text{PrivilegeEscalation}$$
@@ -319,7 +319,7 @@ $$\text{ThreatVector} = \langle \text{AttackSurface}, \text{Vulnerability}, \tex
 
 ### 6.2 安全机制
 
-**定义 6.2.1** (安全机制)
+****定义 6**.2.1** (安全机制)
 IoT安全机制保护系统和数据：
 
 $$\text{SecurityMechanism} = \langle \text{Authentication}, \text{Authorization}, \text{Encryption}, \text{Integrity} \rangle$$
@@ -333,7 +333,7 @@ $$\text{SecurityMechanism} = \langle \text{Authentication}, \text{Authorization}
 
 ### 6.3 密钥管理
 
-**定义 6.3.1** (密钥管理)
+****定义 6**.3.1** (密钥管理)
 密钥管理系统保护加密密钥：
 
 $$\text{KeyManagement} = \langle \text{KeyGeneration}, \text{KeyDistribution}, \text{KeyRotation}, \text{KeyRevocation} \rangle$$
@@ -345,7 +345,7 @@ $$\text{key\_lifecycle} = \text{Generate} \rightarrow \text{Distribute} \rightar
 
 ### 7.1 数据管道
 
-**定义 7.1.1** (数据管道)
+****定义 7**.1.1** (数据管道)
 数据管道处理IoT数据流：
 
 $$\text{DataPipeline} = \text{Ingestion} \rightarrow \text{Processing} \rightarrow \text{Storage} \rightarrow \text{Analytics}$$
@@ -359,7 +359,7 @@ $$\text{DataPipeline} = \text{Ingestion} \rightarrow \text{Processing} \rightarr
 
 ### 7.2 流处理
 
-**定义 7.2.1** (流处理)
+****定义 7**.2.1** (流处理)
 流处理实时处理数据流：
 
 $$\text{StreamProcessing} = \langle \text{Stream}, \text{Operators}, \text{Windows}, \text{Output} \rangle$$
@@ -386,7 +386,7 @@ async fn process_sensor_stream(
 
 ### 7.3 机器学习集成
 
-**定义 7.3.1** (ML集成)
+****定义 7**.3.1** (ML集成)
 机器学习集成提供智能分析：
 
 $$\text{MLIntegration} = \langle \text{ModelTraining}, \text{ModelDeployment}, \text{Inference}, \text{Feedback} \rangle$$
@@ -402,7 +402,7 @@ $$\text{MLIntegration} = \langle \text{ModelTraining}, \text{ModelDeployment}, \
 
 ### 8.1 系统正确性
 
-**定理 8.1.1** (系统正确性)
+****定理 8**.1.1** (系统正确性)
 IoT系统在正确实现时保证数据完整性和系统可靠性。
 
 **证明**：
@@ -413,7 +413,7 @@ IoT系统在正确实现时保证数据完整性和系统可靠性。
 
 ### 8.2 性能保证
 
-**定理 8.2.1** (性能保证)
+****定理 8**.2.1** (性能保证)
 IoT系统保证实时性和可扩展性。
 
 **证明**：
@@ -424,7 +424,7 @@ IoT系统保证实时性和可扩展性。
 
 ### 8.3 安全保证
 
-**定理 8.3.1** (安全保证)
+****定理 8**.3.1** (安全保证)
 IoT系统提供多层次安全保护。
 
 **证明**：
@@ -449,3 +449,4 @@ IoT系统提供多层次安全保护。
 8. **形式化证明**：正确性、性能、安全保证
 
 该理论体系为IoT系统的设计、实现和优化提供了坚实的数学基础。
+

@@ -1,4 +1,4 @@
-# 4.2.3 事件路由 (Event Routing)
+﻿# 4.2.3 事件路由 (Event Routing)
 
 ## 概述
 
@@ -8,7 +8,7 @@
 
 ### 4.2.3.1 事件路由定义
 
-**定义 4.2.3.1** (事件路由)
+****定义 4**.2.3.1** (事件路由)
 事件路由是一个五元组 $ER = (P, C, \mathcal{R}, \mathcal{F}, \mathcal{Q})$，其中：
 
 - $P$ 是生产者集合
@@ -17,7 +17,7 @@
 - $\mathcal{F}$ 是过滤规则，$\mathcal{F}: E \times C \rightarrow \mathbb{B}$
 - $\mathcal{Q}$ 是队列管理，$\mathcal{Q}: C \rightarrow \mathcal{P}(E)$
 
-**定义 4.2.3.2** (发布订阅模式)
+****定义 4**.2.3.2** (发布订阅模式)
 发布订阅模式是一个四元组 $PS = (P, S, \mathcal{T}, \mathcal{D})$，其中：
 
 - $P$ 是发布者集合
@@ -25,14 +25,14 @@
 - $\mathcal{T}$ 是主题映射，$\mathcal{T}: S \rightarrow \mathcal{P}(T)$
 - $\mathcal{D}$ 是分发函数，$\mathcal{D}: E \times T \rightarrow \mathcal{P}(S)$
 
-**定义 4.2.3.3** (事件总线)
+****定义 4**.2.3.3** (事件总线)
 事件总线是一个三元组 $EB = (E, \mathcal{H}, \mathcal{M})$，其中：
 
 - $E$ 是事件集合
 - $\mathcal{H}$ 是处理器集合，$\mathcal{H} = \{h_1, h_2, \ldots, h_n\}$
 - $\mathcal{M}$ 是中间件集合，$\mathcal{M} = \{m_1, m_2, \ldots, m_k\}$
 
-**定义 4.2.3.4** (消息队列)
+****定义 4**.2.3.4** (消息队列)
 消息队列是一个四元组 $MQ = (M, \mathcal{Q}, \mathcal{P}, \mathcal{C})$，其中：
 
 - $M$ 是消息集合
@@ -42,22 +42,22 @@
 
 ### 4.2.3.2 路由策略定义
 
-**定义 4.2.3.5** (直接路由)
+****定义 4**.2.3.5** (直接路由)
 直接路由定义为：
 
 $$direct\_route(e, p) = \{c \in C \mid c \text{ is directly connected to } p\}$$
 
-**定义 4.2.3.6** (主题路由)
+****定义 4**.2.3.6** (主题路由)
 主题路由定义为：
 
 $$topic\_route(e, t) = \{s \in S \mid t \in \mathcal{T}(s)\}$$
 
-**定义 4.2.3.7** (内容路由)
+****定义 4**.2.3.7** (内容路由)
 内容路由定义为：
 
 $$content\_route(e) = \{c \in C \mid \mathcal{F}(e, c) = true\}$$
 
-**定义 4.2.3.8** (负载均衡路由)
+****定义 4**.2.3.8** (负载均衡路由)
 负载均衡路由定义为：
 
 $$load\_balance\_route(e, C) = \arg\min_{c \in C} load(c)$$
@@ -66,7 +66,7 @@ $$load\_balance\_route(e, C) = \arg\min_{c \in C} load(c)$$
 
 ## 核心定理
 
-### 定理 4.2.3.1 (路由正确性)
+### **定理 4**.2.3.1 (路由正确性)
 
 **定理**: 对于事件路由 $ER = (P, C, \mathcal{R}, \mathcal{F}, \mathcal{Q})$，如果路由规则 $\mathcal{R}$ 满足正确性，则：
 
@@ -80,7 +80,7 @@ $$\forall e \in E, \forall p \in P, \mathcal{R}(e, p) \text{ is a subset of } C$
 因此：
 $$\mathcal{R}(e, p) \subseteq C$$
 
-### 定理 4.2.3.2 (路由完整性)
+### **定理 4**.2.3.2 (路由完整性)
 
 **定理**: 对于事件路由 $ER = (P, C, \mathcal{R}, \mathcal{F}, \mathcal{Q})$，如果路由规则 $\mathcal{R}$ 满足完整性，则：
 
@@ -94,7 +94,7 @@ $$\forall e \in E, \forall p \in P, \forall c \in C, \text{ if } \mathcal{F}(e, 
 因此：
 $$\text{if } \exists c \in C \text{ such that } \mathcal{F}(e, c) = true \text{ then } c \in \mathcal{R}(e, p)$$
 
-### 定理 4.2.3.3 (路由性能)
+### **定理 4**.2.3.3 (路由性能)
 
 **定理**: 事件路由的时间复杂度 $T_{route}$ 满足：
 
@@ -839,3 +839,4 @@ impl LoadBalancer {
 ## 总结
 
 事件路由是事件驱动架构的核心组件，通过发布订阅、事件总线和消息队列等模式，提供了灵活的事件分发和处理机制。通过形式化定义和Rust实现，我们建立了完整的事件路由框架，支持多种路由策略和负载均衡算法，为构建高性能的事件驱动系统提供了重要基础。
+

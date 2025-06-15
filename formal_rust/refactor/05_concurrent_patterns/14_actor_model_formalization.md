@@ -1,4 +1,4 @@
-# Actor模型形式化理论 (Actor Model Formalization)
+﻿# Actor模型形式化理论 (Actor Model Formalization)
 
 ## 目录
 
@@ -38,7 +38,7 @@
 
 **Actor模型**是一种并发计算模型，其中Actor是计算的基本单位，通过消息传递进行通信。
 
-#### 定义 1.1.1 (Actor系统)
+#### **定义 1**.1.1 (Actor系统)
 
 Actor系统是一个五元组 $\mathcal{A} = (A, M, S, \mathcal{B}, \mathcal{O})$，其中：
 
@@ -48,7 +48,7 @@ Actor系统是一个五元组 $\mathcal{A} = (A, M, S, \mathcal{B}, \mathcal{O})
 - $\mathcal{B}$ 是行为集合
 - $\mathcal{O}$ 是操作集合
 
-#### 定义 1.1.2 (Actor)
+#### **定义 1**.1.2 (Actor)
 
 Actor $a \in A$ 是一个四元组 $(id, state, mailbox, behavior)$，其中：
 
@@ -59,7 +59,7 @@ Actor $a \in A$ 是一个四元组 $(id, state, mailbox, behavior)$，其中：
 
 ### 1.2. 模型定义
 
-#### 定义 1.2.1 (消息)
+#### **定义 1**.2.1 (消息)
 
 消息 $m \in M$ 是一个三元组 $(sender, receiver, content)$，其中：
 
@@ -67,14 +67,14 @@ Actor $a \in A$ 是一个四元组 $(id, state, mailbox, behavior)$，其中：
 - $receiver$ 是接收者Actor
 - $content$ 是消息内容
 
-#### 定义 1.2.2 (行为)
+#### **定义 1**.2.2 (行为)
 
 行为 $\beta \in \mathcal{B}$ 是一个函数：
 $$\beta: S \times M \rightarrow S \times \mathcal{A}$$
 
 其中 $\mathcal{A}$ 是动作集合。
 
-#### 定义 1.2.3 (动作)
+#### **定义 1**.2.3 (动作)
 
 动作 $\alpha \in \mathcal{A}$ 可以是：
 
@@ -99,7 +99,7 @@ Actor模型广泛应用于：
 
 ### 2.1. 代数结构
 
-#### 定义 2.1.1 (Actor代数)
+#### **定义 2**.1.1 (Actor代数)
 
 Actor代数是一个八元组：
 $$\mathcal{A} = (S, \Sigma, \delta, s_0, F, \mathcal{C}, \mathcal{T}, \mathcal{P})$$
@@ -115,7 +115,7 @@ $$\mathcal{A} = (S, \Sigma, \delta, s_0, F, \mathcal{C}, \mathcal{T}, \mathcal{P
 - $\mathcal{T}$ 是类型系统
 - $\mathcal{P}$ 是优先级规则集合
 
-#### 定义 2.1.2 (状态空间)
+#### **定义 2**.1.2 (状态空间)
 
 状态空间 $S$ 定义为：
 $$S = \{(a, m, s, b) \mid a \in A, m \in M^*, s \in S, b \in \mathcal{B}\}$$
@@ -129,21 +129,21 @@ $$S = \{(a, m, s, b) \mid a \in A, m \in M^*, s \in S, b \in \mathcal{B}\}$$
 
 ### 2.2. 操作语义
 
-#### 定义 2.2.1 (消息接收语义)
+#### **定义 2**.2.1 (消息接收语义)
 
 对于状态 $s = (a, m \cdot msg, s', b)$ 和操作 $receive()$：
 $$\delta(s, receive()) = (a, m, s'', b')$$
 
 其中 $(s'', b') = b(s', msg)$。
 
-#### 定义 2.2.2 (消息发送语义)
+#### **定义 2**.2.2 (消息发送语义)
 
 对于状态 $s = (a, m, s', b)$ 和操作 $send(target, content)$：
 $$\delta(s, send(target, content)) = (a, m, s', b)$$
 
 同时目标Actor的邮箱会增加消息 $(a, target, content)$。
 
-#### 定义 2.2.3 (Actor创建语义)
+#### **定义 2**.2.3 (Actor创建语义)
 
 对于状态 $s = (a, m, s', b)$ 和操作 $spawn(behavior, state)$：
 $$\delta(s, spawn(behavior, state)) = (a, m, s', b)$$
@@ -152,14 +152,14 @@ $$\delta(s, spawn(behavior, state)) = (a, m, s', b)$$
 
 ### 2.3. 状态转换
 
-#### 定义 2.3.1 (状态转换图)
+#### **定义 2**.3.1 (状态转换图)
 
 状态转换图 $G = (S, E)$ 其中：
 
 - $S$ 是状态集合
 - $E \subseteq S \times \Sigma \times S$ 是转换边集合
 
-#### 定义 2.3.2 (可达性)
+#### **定义 2**.3.2 (可达性)
 
 状态 $s'$ 从状态 $s$ 可达，记作 $s \rightarrow^* s'$，如果存在操作序列 $\sigma_1, \sigma_2, \ldots, \sigma_n$ 使得：
 $$s \xrightarrow{\sigma_1} s_1 \xrightarrow{\sigma_2} s_2 \cdots \xrightarrow{\sigma_n} s'$$
@@ -204,7 +204,7 @@ $$composite(msg_1, msg_2) = (sender, receiver, (content_1, content_2))$$
 
 ### 3.3. 等价性
 
-#### 定义 3.3.1 (Actor等价)
+#### **定义 3**.3.1 (Actor等价)
 
 两个Actor $a_1$ 和 $a_2$ 等价，记作 $a_1 \equiv a_2$，如果：
 
@@ -222,7 +222,7 @@ $$behavior(a_1)(state(a_1), m) \equiv behavior(a_2)(state(a_2), m)$$
 
 ### 4.1. 安全性定理
 
-#### 定理 4.1.1 (状态隔离安全)
+#### **定理 4**.1.1 (状态隔离安全)
 
 不同Actor的状态完全隔离，不会相互干扰。
 
@@ -233,20 +233,19 @@ $$behavior(a_1)(state(a_1), m) \equiv behavior(a_2)(state(a_2), m)$$
 3. 只有通过消息才能影响其他Actor
 4. 因此状态完全隔离
 
-#### 定理 4.1.2 (消息传递安全)
+#### **定理 4**.1.2 (消息传递安全)
 
 消息传递是类型安全的，不会导致运行时错误。
 
 **证明**：
 
-1. 消息有明确的类型定义
-2. Actor行为函数处理类型检查
+1. 消息有明确的类型**定义 2**. Actor行为函数处理类型检查
 3. 消息队列保证消息完整性
 4. 因此消息传递是类型安全的
 
 ### 4.2. 活性定理
 
-#### 定理 4.2.1 (消息处理活性)
+#### **定理 4**.2.1 (消息处理活性)
 
 在无限时间假设下，所有消息最终会被处理。
 
@@ -257,7 +256,7 @@ $$behavior(a_1)(state(a_1), m) \equiv behavior(a_2)(state(a_2), m)$$
 3. 没有消息会被无限期忽略
 4. 因此所有消息最终被处理
 
-#### 定理 4.2.2 (系统活性)
+#### **定理 4**.2.2 (系统活性)
 
 Actor系统不会进入死锁状态。
 
@@ -270,7 +269,7 @@ Actor系统不会进入死锁状态。
 
 ### 4.3. 公平性定理
 
-#### 定理 4.3.1 (消息处理公平性)
+#### **定理 4**.3.1 (消息处理公平性)
 
 在公平调度下，所有消息都有机会被处理。
 
@@ -281,7 +280,7 @@ Actor系统不会进入死锁状态。
 3. 没有消息会被无限期延迟
 4. 因此消息处理是公平的
 
-#### 定理 4.3.2 (Actor调度公平性)
+#### **定理 4**.3.2 (Actor调度公平性)
 
 在公平调度下，所有Actor都有机会执行。
 
@@ -294,7 +293,7 @@ Actor系统不会进入死锁状态。
 
 ### 4.4. 性能定理
 
-#### 定理 4.4.1 (并发性能)
+#### **定理 4**.4.1 (并发性能)
 
 Actor模型支持真正的并发执行。
 
@@ -305,7 +304,7 @@ Actor模型支持真正的并发执行。
 3. 多个Actor可以并行运行
 4. 因此支持真正的并发
 
-#### 定理 4.4.2 (扩展性)
+#### **定理 4**.4.2 (扩展性)
 
 Actor系统具有良好的扩展性。
 
@@ -1014,3 +1013,4 @@ pub enum LifecycleEvent {
 **最后更新**: 2025-06-14
 **状态**: 完成
 **负责人**: AI Assistant
+

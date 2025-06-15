@@ -1,4 +1,4 @@
-# 03. 异步编程模式与最佳实践
+﻿# 03. 异步编程模式与最佳实践
 
 ## 目录
 
@@ -15,7 +15,7 @@
 
 ### 1.1 异步模式定义
 
-**定义 1.1.1** (异步模式)
+****定义 1**.1.1** (异步模式)
 异步模式是处理异步操作的标准解决方案，提供可重用、可维护的代码结构。
 
 $$\text{AsyncPattern} = \langle \text{Problem}, \text{Solution}, \text{Context}, \text{Consequences} \rangle$$
@@ -25,7 +25,7 @@ $$\text{PatternType} ::= \text{Structural} \mid \text{Behavioral} \mid \text{Con
 
 ### 1.2 异步生命周期
 
-**定义 1.2.1** (异步生命周期)
+****定义 1**.2.1** (异步生命周期)
 异步操作的生命周期包含创建、执行、完成和清理阶段：
 
 $$\text{AsyncLifecycle} ::= \text{Created} \rightarrow \text{Pending} \rightarrow \text{Running} \rightarrow \text{Completed}$$
@@ -35,7 +35,7 @@ $$\text{lifecycle\_manage}(\text{async\_op}) = \text{LifecycleState} \rightarrow
 
 ### 1.3 异步上下文
 
-**定义 1.3.1** (异步上下文)
+****定义 1**.3.1** (异步上下文)
 异步上下文包含执行异步操作所需的环境信息：
 
 $$\text{AsyncContext} = \langle \text{Runtime}, \text{Executor}, \text{TaskQueue}, \text{Resources} \rangle$$
@@ -44,7 +44,7 @@ $$\text{AsyncContext} = \langle \text{Runtime}, \text{Executor}, \text{TaskQueue
 
 ### 2.1 Future链式组合
 
-**定义 2.1.1** (Future链式组合)
+****定义 2**.1.1** (Future链式组合)
 Future链式组合将多个异步操作按顺序连接：
 
 $$\text{FutureChain} ::= \text{Future}_1 \xrightarrow{\text{then}} \text{Future}_2 \xrightarrow{\text{then}} \cdots \xrightarrow{\text{then}} \text{Future}_n$$
@@ -65,7 +65,7 @@ async fn process_data() -> Result<String, Error> {
 
 ### 2.2 Future并行组合
 
-**定义 2.2.1** (Future并行组合)
+****定义 2**.2.1** (Future并行组合)
 Future并行组合同时执行多个异步操作：
 
 $$\text{ParallelFutures} = \text{join}(\text{Future}_1, \text{Future}_2, \ldots, \text{Future}_n)$$
@@ -88,7 +88,7 @@ async fn parallel_operations() -> Result<(String, i32), Error> {
 
 ### 2.3 Future选择模式
 
-**定义 2.3.1** (Future选择)
+****定义 2**.3.1** (Future选择)
 Future选择在多个异步操作中选择第一个完成的结果：
 
 $$\text{FutureSelect} = \text{select}(\text{Future}_1, \text{Future}_2, \ldots, \text{Future}_n)$$
@@ -117,7 +117,7 @@ async fn select_operation() {
 
 ### 3.1 流定义
 
-**定义 3.1.1** (异步流)
+****定义 3**.1.1** (异步流)
 异步流是产生一系列异步值的抽象：
 
 $$\text{AsyncStream} ::= \text{Stream}[\text{Item}] \times \text{Poll}[\text{Option}[\text{Item}]]$$
@@ -127,7 +127,7 @@ $$\text{stream\_next}(\text{stream}) = \text{Option}[\text{Item}]$$
 
 ### 3.2 流转换
 
-**定义 3.2.1** (流转换)
+****定义 3**.2.1** (流转换)
 流转换对流中的每个元素应用操作：
 
 $$\text{StreamTransform} = \text{Stream}[\text{A}] \xrightarrow{\text{map}} \text{Stream}[\text{B}]$$
@@ -152,7 +152,7 @@ async fn process_stream() {
 
 ### 3.3 流合并
 
-**定义 3.3.1** (流合并)
+****定义 3**.3.1** (流合并)
 流合并将多个流合并为单个流：
 
 $$\text{StreamMerge} = \text{merge}(\text{Stream}_1, \text{Stream}_2, \ldots, \text{Stream}_n)$$
@@ -167,7 +167,7 @@ $$\text{StreamMerge} = \text{merge}(\text{Stream}_1, \text{Stream}_2, \ldots, \t
 
 ### 4.1 信号量模式
 
-**定义 4.1.1** (信号量控制)
+****定义 4**.1.1** (信号量控制)
 信号量控制同时执行的异步操作数量：
 
 $$\text{SemaphoreControl} = \langle \text{Permits}, \text{WaitQueue}, \text{ActiveCount} \rangle$$
@@ -202,7 +202,7 @@ async fn controlled_concurrency() {
 
 ### 4.2 令牌桶模式
 
-**定义 4.2.1** (令牌桶)
+****定义 4**.2.1** (令牌桶)
 令牌桶控制异步操作的速率：
 
 $$\text{TokenBucket} = \langle \text{Capacity}, \text{Tokens}, \text{RefillRate} \rangle$$
@@ -213,7 +213,7 @@ $$\text{refill\_tokens}(\text{bucket}) = \text{Unit}$$
 
 ### 4.3 屏障模式
 
-**定义 4.3.1** (异步屏障)
+****定义 4**.3.1** (异步屏障)
 异步屏障等待多个异步操作完成：
 
 $$\text{AsyncBarrier} = \langle \text{Count}, \text{Waiters}, \text{Completed} \rangle$$
@@ -225,7 +225,7 @@ $$\text{wait\_barrier}(\text{barrier}) = \text{BarrierResult}$$
 
 ### 5.1 错误传播链
 
-**定义 5.1.1** (错误传播)
+****定义 5**.1.1** (错误传播)
 错误在异步操作链中传播的机制：
 
 $$\text{ErrorPropagation} = \text{Error} \xrightarrow{\text{propagate}} \text{Result}[\text{T}, \text{Error}]$$
@@ -238,7 +238,7 @@ $$\text{ErrorPropagation} = \text{Error} \xrightarrow{\text{propagate}} \text{Re
 
 ### 5.2 重试模式
 
-**定义 5.2.1** (重试机制)
+****定义 5**.2.1** (重试机制)
 重试机制在操作失败时自动重试：
 
 $$\text{RetryPattern} = \langle \text{MaxAttempts}, \text{BackoffStrategy}, \text{RetryCondition} \rangle$$
@@ -275,7 +275,7 @@ where
 
 ### 5.3 断路器模式
 
-**定义 5.3.1** (断路器)
+****定义 5**.3.1** (断路器)
 断路器在连续失败时暂时停止操作：
 
 $$\text{CircuitBreaker} = \langle \text{State}, \text{FailureCount}, \text{Threshold}, \text{Timeout} \rangle$$
@@ -287,7 +287,7 @@ $$\text{BreakerState} ::= \text{Closed} \mid \text{Open} \mid \text{HalfOpen}$$
 
 ### 6.1 连接池模式
 
-**定义 6.1.1** (连接池)
+****定义 6**.1.1** (连接池)
 连接池复用昂贵的资源连接：
 
 $$\text{ConnectionPool} = \langle \text{Connections}, \text{MaxSize}, \text{IdleTimeout} \rangle$$
@@ -298,7 +298,7 @@ $$\text{release\_connection}(\text{connection}) = \text{Unit}$$
 
 ### 6.2 缓存模式
 
-**定义 6.2.1** (异步缓存)
+****定义 6**.2.1** (异步缓存)
 异步缓存存储计算结果以避免重复计算：
 
 $$\text{AsyncCache} = \langle \text{Storage}, \text{TTL}, \text{EvictionPolicy} \rangle$$
@@ -309,7 +309,7 @@ $$\text{set\_cached}(\text{key}, \text{value}) = \text{Unit}$$
 
 ### 6.3 批处理模式
 
-**定义 6.3.1** (异步批处理)
+****定义 6**.3.1** (异步批处理)
 异步批处理将多个小操作合并为大批量操作：
 
 $$\text{AsyncBatch} = \langle \text{BatchSize}, \text{Timeout}, \text{Processor} \rangle$$
@@ -322,7 +322,7 @@ $$\text{process\_batch}(\text{batch}) = \text{Results}$$
 
 ### 7.1 异步测试
 
-**定义 7.1.1** (异步测试)
+****定义 7**.1.1** (异步测试)
 异步测试验证异步代码的正确性：
 
 $$\text{AsyncTest} = \langle \text{TestFunction}, \text{Timeout}, \text{Assertions} \rangle$$
@@ -358,7 +358,7 @@ async fn test_concurrent_operations() {
 
 ### 7.2 异步调试
 
-**定义 7.2.1** (异步调试)
+****定义 7**.2.1** (异步调试)
 异步调试工具和技术：
 
 $$\text{AsyncDebug} = \langle \text{Logging}, \text{Tracing}, \text{Profiling} \rangle$$
@@ -371,7 +371,7 @@ $$\text{AsyncDebug} = \langle \text{Logging}, \text{Tracing}, \text{Profiling} \
 
 ### 7.3 监控模式
 
-**定义 7.3.1** (异步监控)
+****定义 7**.3.1** (异步监控)
 异步监控收集运行时指标：
 
 $$\text{AsyncMonitoring} = \langle \text{Metrics}, \text{Alerts}, \text{Dashboard} \rangle$$
@@ -387,7 +387,7 @@ $$\text{AsyncMonitoring} = \langle \text{Metrics}, \text{Alerts}, \text{Dashboar
 
 ### 8.1 模式正确性
 
-**定理 8.1.1** (模式正确性)
+****定理 8**.1.1** (模式正确性)
 异步模式在正确实现时保证程序正确性。
 
 **证明**：
@@ -398,7 +398,7 @@ $$\text{AsyncMonitoring} = \langle \text{Metrics}, \text{Alerts}, \text{Dashboar
 
 ### 8.2 性能保证
 
-**定理 8.2.1** (性能保证)
+****定理 8**.2.1** (性能保证)
 异步模式在合理使用时提供性能优势。
 
 **证明**：
@@ -409,7 +409,7 @@ $$\text{AsyncMonitoring} = \langle \text{Metrics}, \text{Alerts}, \text{Dashboar
 
 ### 8.3 可维护性
 
-**定理 8.3.1** (可维护性)
+****定理 8**.3.1** (可维护性)
 异步模式提高代码的可维护性。
 
 **证明**：
@@ -434,3 +434,4 @@ $$\text{AsyncMonitoring} = \langle \text{Metrics}, \text{Alerts}, \text{Dashboar
 8. **形式化证明**：正确性、性能、可维护性保证
 
 该理论体系为异步编程的实践和优化提供了系统性的指导。
+

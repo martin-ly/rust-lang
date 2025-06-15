@@ -1,4 +1,4 @@
-# 05. 区块链与Web3理论 (Blockchain and Web3 Theory)
+﻿# 05. 区块链与Web3理论 (Blockchain and Web3 Theory)
 
 ## 📋 目录 (Table of Contents)
 
@@ -185,7 +185,7 @@
 
 #### 2.1.1 区块链系统定义 (Blockchain System Definition)
 
-**定义 2.1.1** (区块链系统) 一个区块链系统是一个七元组 $\mathcal{B} = (N, T, C, S, V, M, P)$，其中：
+****定义 2**.1.1** (区块链系统) 一个区块链系统是一个七元组 $\mathcal{B} = (N, T, C, S, V, M, P)$，其中：
 
 - $N$ 是节点集合，$N = \{n_1, n_2, \ldots, n_m\}$
 - $T$ 是交易集合，$T = \{t_1, t_2, \ldots, t_k\}$
@@ -195,7 +195,7 @@
 - $M$ 是共识机制，$M = (A, F, T)$
 - $P$ 是网络协议集合，$P = \{p_1, p_2, \ldots, p_r\}$
 
-**定义 2.1.2** (节点) 一个节点 $n \in N$ 是一个五元组 $n = (id, type, state, peers, blockchain)$，其中：
+****定义 2**.1.2** (节点) 一个节点 $n \in N$ 是一个五元组 $n = (id, type, state, peers, blockchain)$，其中：
 
 - $id$ 是节点唯一标识符
 - $type$ 是节点类型（全节点、轻节点、验证节点、矿工节点）
@@ -203,7 +203,7 @@
 - $peers$ 是邻居节点集合
 - $blockchain$ 是本地区块链副本
 
-**定义 2.1.3** (交易) 一个交易 $t \in T$ 是一个六元组 $t = (hash, from, to, value, data, signature)$，其中：
+****定义 2**.1.3** (交易) 一个交易 $t \in T$ 是一个六元组 $t = (hash, from, to, value, data, signature)$，其中：
 
 - $hash$ 是交易哈希
 - $from$ 是发送方地址
@@ -212,7 +212,7 @@
 - $data$ 是交易数据
 - $signature$ 是数字签名
 
-**定义 2.1.4** (区块) 一个区块 $c \in C$ 是一个五元组 $c = (header, transactions, state_root, timestamp, hash)$，其中：
+****定义 2**.1.4** (区块) 一个区块 $c \in C$ 是一个五元组 $c = (header, transactions, state_root, timestamp, hash)$，其中：
 
 - $header$ 是区块头信息
 - $transactions$ 是交易列表
@@ -220,7 +220,7 @@
 - $timestamp$ 是时间戳
 - $hash$ 是区块哈希
 
-**定义 2.1.5** (共识机制) 共识机制 $M = (A, F, T)$ 包含：
+****定义 2**.1.5** (共识机制) 共识机制 $M = (A, F, T)$ 包含：
 
 - $A$ 是共识算法
 - $F$ 是故障容忍度
@@ -228,7 +228,7 @@
 
 #### 2.1.2 智能合约平台定义 (Smart Contract Platform Definition)
 
-**定义 2.1.6** (智能合约平台) 智能合约平台是一个五元组 $\mathcal{SC} = (L, E, S, G, V)$，其中：
+****定义 2**.1.6** (智能合约平台) 智能合约平台是一个五元组 $\mathcal{SC} = (L, E, S, G, V)$，其中：
 
 - $L$ 是合约语言，$L = (syntax, semantics, type_system)$
 - $E$ 是执行环境，$E = (vm, memory, gas)$
@@ -236,7 +236,7 @@
 - $G$ 是Gas机制，$G = (cost, limit, pricing)$
 - $V$ 是验证器，$V = (static_analysis, formal_verification, audit)$
 
-**定义 2.1.7** (智能合约) 智能合约是一个四元组 $sc = (address, code, storage, balance)$，其中：
+****定义 2**.1.7** (智能合约) 智能合约是一个四元组 $sc = (address, code, storage, balance)$，其中：
 
 - $address$ 是合约地址
 - $code$ 是合约字节码
@@ -245,7 +245,7 @@
 
 #### 2.1.3 去中心化应用定义 (Decentralized Application Definition)
 
-**定义 2.1.8** (去中心化应用) 去中心化应用是一个四元组 $\mathcal{DApp} = (F, B, U, I)$，其中：
+****定义 2**.1.8** (去中心化应用) 去中心化应用是一个四元组 $\mathcal{DApp} = (F, B, U, I)$，其中：
 
 - $F$ 是前端界面，$F = (ui, ux, interaction)$
 - $B$ 是后端逻辑，$B = (contracts, api, business_logic)$
@@ -254,11 +254,11 @@
 
 ### 2.2 定理证明 (Theorem Proofs)
 
-每个重要性质都有完整的数学证明：
+每个重要性质都有完整的数学**证明**：
 
 #### 2.2.1 区块链一致性定理 (Blockchain Consistency Theorem)
 
-**定理 2.2.1** (区块链一致性) 对于任意区块链系统 $\mathcal{B} = (N, T, C, S, V, M, P)$，如果共识机制 $M$ 满足拜占庭容错条件，则系统可以保证最终一致性。
+****定理 2**.2.1** (区块链一致性) 对于任意区块链系统 $\mathcal{B} = (N, T, C, S, V, M, P)$，如果共识机制 $M$ 满足拜占庭容错条件，则系统可以保证最终一致性。
 
 **证明**:
 
@@ -272,7 +272,7 @@
 
 #### 2.2.2 智能合约安全性定理 (Smart Contract Security Theorem)
 
-**定理 2.2.2** (智能合约安全性) 对于任意智能合约 $sc \in \mathcal{SC}$，在Gas限制 $G$ 下，执行时间满足：
+****定理 2**.2.2** (智能合约安全性) 对于任意智能合约 $sc \in \mathcal{SC}$，在Gas限制 $G$ 下，执行时间满足：
 
 $$T_{exec}(sc) \leq \frac{G(sc)}{gas\_rate}$$
 
@@ -287,7 +287,7 @@ $$T_{exec}(sc) \leq \frac{G(sc)}{gas\_rate}$$
 
 #### 2.2.3 去中心化应用可用性定理 (DApp Availability Theorem)
 
-**定理 2.2.3** (去中心化应用可用性) 对于去中心化应用 $d \in \mathcal{DApp}$，可用性满足：
+****定理 2**.2.3** (去中心化应用可用性) 对于去中心化应用 $d \in \mathcal{DApp}$，可用性满足：
 
 $$A(d) = \frac{MTTF(d)}{MTTF(d) + MTTR(d)}$$
 
@@ -835,3 +835,4 @@ impl ExecutionEnvironment {
 **项目负责人**: AI Assistant
 
 🎊 **区块链与Web3理论体系建立完成！** 🎊
+

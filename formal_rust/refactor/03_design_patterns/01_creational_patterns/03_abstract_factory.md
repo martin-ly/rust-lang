@@ -1,4 +1,4 @@
-# 抽象工厂模式 (Abstract Factory Pattern) - 形式化重构
+﻿# 抽象工厂模式 (Abstract Factory Pattern) - 形式化重构
 
 ## 目录 (Table of Contents)
 
@@ -14,7 +14,7 @@
 
 ### 1.1 抽象工厂模式五元组 (Abstract Factory Pattern Quintuple)
 
--**定义 1.1.1 (抽象工厂模式)**
+-****定义 1**.1.1 (抽象工厂模式)**
 
 设 $AF = (N, I, S, R, C)$ 为抽象工厂模式，其中：
 
@@ -26,7 +26,7 @@
 
 ### 1.2 产品族定义 (Product Family Definition)
 
--**定义 1.2.1 (产品族)**
+-****定义 1**.2.1 (产品族)**
 
 设 $\mathcal{F}$ 为产品族，满足：
 
@@ -34,7 +34,7 @@ $$\mathcal{F} = \{\text{Product}_1, \text{Product}_2, \ldots, \text{Product}_n\}
 
 其中每个产品都是相关的。
 
--**定义 1.2.2 (产品族兼容性)**
+-****定义 1**.2.2 (产品族兼容性)**
 
 产品族 $\mathcal{F}$ 是兼容的，当且仅当：
 
@@ -46,13 +46,13 @@ $$\forall \text{Product}_i, \text{Product}_j \in \mathcal{F}, \text{Compatible}(
 
 ### 2.1 产品族理论 (Product Family Theory)
 
--**定义 2.1.1 (产品族一致性)**
+-****定义 2**.1.1 (产品族一致性)**
 
 抽象工厂模式满足产品族一致性，当且仅当：
 
 $$\forall f \in \text{ConcreteFactory}, \forall p_1, p_2 \in \text{create\_products}(f), \text{Compatible}(p_1, p_2)$$
 
--**定义 2.1.2 (工厂抽象性)**
+-****定义 2**.1.2 (工厂抽象性)**
 
 抽象工厂模式满足工厂抽象性，当且仅当：
 
@@ -60,7 +60,7 @@ $$\text{AbstractFactory} \not\hookrightarrow \text{ConcreteProduct}$$
 
 ### 2.2 兼容性理论 (Compatibility Theory)
 
--**定义 2.2.1 (产品兼容性)**
+-****定义 2**.2.1 (产品兼容性)**
 
 两个产品 $p_1, p_2$ 是兼容的，当且仅当：
 
@@ -72,18 +72,18 @@ $$\text{Interface}(p_1) \cap \text{Interface}(p_2) \neq \emptyset$$
 
 ### 3.1 产品族一致性定理 (Product Family Consistency Theorem)
 
--**定理 3.1.1 (产品族一致性)**
+-****定理 3**.1.1 (产品族一致性)**
 
 对于任意抽象工厂模式 $AF$，同一工厂创建的产品是兼容的。
 
 **证明**:
 设 $f \in \text{ConcreteFactory}$ 是具体工厂。
 
-根据定义 1.2.2，产品族 $\mathcal{F}$ 是兼容的。
+根据**定义 1**.2.2，产品族 $\mathcal{F}$ 是兼容的。
 
 因此，$f$ 创建的所有产品都满足兼容性约束。
 
--**定理 3.1.2 (工厂抽象性)**
+-****定理 3**.1.2 (工厂抽象性)**
 
 抽象工厂模式满足依赖倒置原则。
 
@@ -584,3 +584,4 @@ impl Game3DFactory {
 **文档版本**: 1.0
 **最后更新**: 2024-12-19
 **状态**: 完成
+

@@ -1,4 +1,4 @@
-# 2. 并发模式形式化理论 (Concurrent Patterns Formalization)
+﻿# 2. 并发模式形式化理论 (Concurrent Patterns Formalization)
 
 ## 目录
 
@@ -18,7 +18,7 @@
 
 ### 2.1.1. 并发模型
 
-**定义 2.1.1** (并发模型)
+****定义 2**.1.1** (并发模型)
 并发模型是一个五元组 $\mathcal{C} = (T, R, S, \mu, \sigma)$，其中：
 
 - $T$ 是线程集合
@@ -27,17 +27,17 @@
 - $\mu: T \times R \rightarrow \{0,1\}$ 是资源分配函数
 - $\sigma: T \times S \rightarrow S$ 是状态转换函数
 
-**定义 2.1.2** (并发执行)
+****定义 2**.1.2** (并发执行)
 对于线程集合 $T' \subseteq T$，并发执行定义为：
 $$\text{concurrent}(T') = \bigcup_{t \in T'} \text{execute}(t)$$
 
 ### 2.1.2. 并发安全性
 
-**定义 2.1.3** (数据竞争)
+****定义 2**.1.3** (数据竞争)
 对于两个线程 $t_1, t_2 \in T$ 和共享资源 $r \in R$，存在数据竞争当且仅当：
 $$\exists t_1, t_2: \mu(t_1, r) = 1 \land \mu(t_2, r) = 1 \land \text{conflict}(t_1, t_2, r)$$
 
-**定义 2.1.4** (并发安全)
+****定义 2**.1.4** (并发安全)
 并发程序是安全的，当且仅当不存在数据竞争：
 $$\text{safe}(\mathcal{C}) \iff \neg \exists \text{race}(\mathcal{C})$$
 
@@ -47,7 +47,7 @@ $$\text{safe}(\mathcal{C}) \iff \neg \exists \text{race}(\mathcal{C})$$
 
 ### 2.2.1. 线程池模型
 
-**定义 2.2.1** (线程池)
+****定义 2**.2.1** (线程池)
 线程池是一个四元组 $\mathcal{P} = (W, Q, S, \pi)$，其中：
 
 - $W$ 是工作线程集合
@@ -55,7 +55,7 @@ $$\text{safe}(\mathcal{C}) \iff \neg \exists \text{race}(\mathcal{C})$$
 - $S$ 是调度策略
 - $\pi: Q \rightarrow W$ 是任务分配函数
 
-**定义 2.2.2** (线程池状态)
+****定义 2**.2.2** (线程池状态)
 线程池状态是一个三元组 $\text{state}(\mathcal{P}) = (|W|, |Q|, \text{load}(W))$，其中：
 
 - $|W|$ 是活跃线程数
@@ -90,7 +90,7 @@ fn load_balance_schedule(workers: &[Worker], task: Task) -> Worker {
 }
 ```
 
-**定理 2.2.1** (线程池公平性)
+****定理 2**.2.1** (线程池公平性)
 如果调度函数 $\pi$ 满足公平性条件，则：
 $$\forall t \in Q: \lim_{n \to \infty} P(\pi(t) = w) = \frac{1}{|W|}$$
 
@@ -104,7 +104,7 @@ $$\lim_{n \to \infty} P(\pi(t) = w) = \frac{1}{|W|}$$
 
 ### 2.3.1. Actor定义
 
-**定义 2.3.1** (Actor)
+****定义 2**.3.1** (Actor)
 Actor是一个五元组 $\mathcal{A} = (S, M, B, \delta, \lambda)$，其中：
 
 - $S$ 是状态集合
@@ -113,7 +113,7 @@ Actor是一个五元组 $\mathcal{A} = (S, M, B, \delta, \lambda)$，其中：
 - $\delta: S \times M \rightarrow S$ 是状态转换函数
 - $\lambda: S \times M \rightarrow B$ 是行为函数
 
-**定义 2.3.2** (Actor系统)
+****定义 2**.3.2** (Actor系统)
 Actor系统是一个三元组 $\mathcal{S} = (A, C, \tau)$，其中：
 
 - $A$ 是Actor集合
@@ -122,15 +122,15 @@ Actor系统是一个三元组 $\mathcal{S} = (A, C, \tau)$，其中：
 
 ### 2.3.2. 消息传递
 
-**定义 2.3.3** (消息传递)
+****定义 2**.3.3** (消息传递)
 从Actor $a_1$ 到Actor $a_2$ 的消息传递定义为：
 $$a_1 \xrightarrow{m} a_2 = \text{send}(a_1, m, a_2)$$
 
-**定义 2.3.4** (消息处理)
+****定义 2**.3.4** (消息处理)
 Actor $a$ 处理消息 $m$ 的过程定义为：
 $$\text{process}(a, m) = \lambda(\text{state}(a), m)$$
 
-**定理 2.3.1** (Actor隔离性)
+****定理 2**.3.1** (Actor隔离性)
 任意两个Actor $a_1, a_2$ 的状态是隔离的：
 $$\text{state}(a_1) \cap \text{state}(a_2) = \emptyset$$
 
@@ -143,7 +143,7 @@ $$\text{state}(a_1) \cap \text{state}(a_2) = \emptyset$$
 
 ### 2.4.1. 同步消息传递
 
-**定义 2.4.1** (同步消息传递)
+****定义 2**.4.1** (同步消息传递)
 同步消息传递是一个三元组 $\text{sync}(s, m, r)$，其中：
 
 - $s$ 是发送者
@@ -162,7 +162,7 @@ fn sync_send<T>(sender: &Actor, message: T, receiver: &Actor) -> Result<(), Erro
 
 ### 2.4.2. 异步消息传递
 
-**定义 2.4.2** (异步消息传递)
+****定义 2**.4.2** (异步消息传递)
 异步消息传递是一个四元组 $\text{async}(s, m, r, f)$，其中：
 
 - $s$ 是发送者
@@ -187,7 +187,7 @@ where
 
 ### 2.4.3. 广播模式
 
-**定义 2.4.3** (广播)
+****定义 2**.4.3** (广播)
 广播是一个三元组 $\text{broadcast}(s, m, R)$，其中：
 
 - $s$ 是发送者
@@ -213,7 +213,7 @@ fn broadcast<T>(sender: &Actor, message: T, receivers: &[Actor]) {
 
 ### 2.5.1. 互斥锁
 
-**定义 2.5.1** (互斥锁)
+****定义 2**.5.1** (互斥锁)
 互斥锁是一个三元组 $\mathcal{M} = (S, L, U)$，其中：
 
 - $S \in \{\text{Locked}, \text{Unlocked}\}$ 是锁状态
@@ -244,7 +244,7 @@ impl<T> MutexLock<T> {
 
 ### 2.5.2. 信号量
 
-**定义 2.5.2** (信号量)
+****定义 2**.5.2** (信号量)
 信号量是一个四元组 $\mathcal{S} = (C, P, V, \text{count})$，其中：
 
 - $C$ 是容量
@@ -298,7 +298,7 @@ impl Semaphore {
 
 ### 2.5.3. 条件变量
 
-**定义 2.5.3** (条件变量)
+****定义 2**.5.3** (条件变量)
 条件变量是一个三元组 $\mathcal{C} = (M, W, N)$，其中：
 
 - $M$ 是关联的互斥锁
@@ -356,7 +356,7 @@ impl ConditionVariable {
 
 ### 2.6.1. 死锁避免定理
 
-**定理 2.6.1** (死锁避免)
+****定理 2**.6.1** (死锁避免)
 如果资源分配图是无环的，则系统不会发生死锁。
 
 **证明**:
@@ -367,7 +367,7 @@ $$t_1 \rightarrow r_1 \rightarrow t_2 \rightarrow r_2 \rightarrow \cdots \righta
 
 ### 2.6.2. 并发正确性定理
 
-**定理 2.6.2** (并发正确性)
+****定理 2**.6.2** (并发正确性)
 如果所有共享资源的访问都是串行化的，则并发执行的结果是确定的。
 
 **证明**:
@@ -375,7 +375,7 @@ $$t_1 \rightarrow r_1 \rightarrow t_2 \rightarrow r_2 \rightarrow \cdots \righta
 
 ### 2.6.3. Actor隔离性定理
 
-**定理 2.6.3** (Actor隔离性)
+****定理 2**.6.3** (Actor隔离性)
 Actor模型天然避免了数据竞争。
 
 **证明**:
@@ -764,7 +764,7 @@ impl Barrier {
 
 ### 2.8.1. 时间复杂度分析
 
-**定理 2.8.1** (线程池复杂度)
+****定理 2**.8.1** (线程池复杂度)
 线程池的任务调度时间复杂度为：
 $$T(n) = O(\log n)$$
 
@@ -775,7 +775,7 @@ $$T(n) = O(\log n)$$
 
 ### 2.8.2. 空间复杂度分析
 
-**定理 2.8.2** (Actor系统空间复杂度)
+****定理 2**.8.2** (Actor系统空间复杂度)
 Actor系统的空间复杂度为：
 $$S(n) = O(n + m)$$
 
@@ -884,3 +884,4 @@ mod tests {
 8. **性能分析**: 分析了时间复杂度和空间复杂度
 
 这些理论为并发编程提供了严格的数学基础，确保了程序的正确性和性能。
+

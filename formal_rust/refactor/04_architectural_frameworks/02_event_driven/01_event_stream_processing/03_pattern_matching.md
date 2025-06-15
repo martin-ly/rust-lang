@@ -1,4 +1,4 @@
-# 4.2.1.3 模式匹配 (Pattern Matching)
+﻿# 4.2.1.3 模式匹配 (Pattern Matching)
 
 ## 概述
 
@@ -8,7 +8,7 @@
 
 ### 4.2.1.3.1 模式定义
 
-**定义 4.2.1.3.1** (事件模式)
+****定义 4**.2.1.3.1** (事件模式)
 事件模式是一个五元组 $P = (S, \mathcal{R}, \mathcal{C}, \mathcal{A}, \mathcal{T})$，其中：
 
 - $S$ 是状态集合，$S = \{s_1, s_2, \ldots, s_n\}$
@@ -17,7 +17,7 @@
 - $\mathcal{A}$ 是动作函数集合，$\mathcal{A} = \{a_1, a_2, \ldots, a_k\}$
 - $\mathcal{T}$ 是时间约束，$\mathcal{T}: S \times S \rightarrow \mathbb{R}^+$
 
-**定义 4.2.1.3.2** (模式匹配)
+****定义 4**.2.1.3.2** (模式匹配)
 模式匹配是一个函数 $match: E^* \times P \rightarrow \mathcal{P}(M)$，其中：
 
 - $E^*$ 是事件序列集合
@@ -25,7 +25,7 @@
 - $M$ 是匹配结果集合
 - $\mathcal{P}(M)$ 是匹配结果的幂集
 
-**定义 4.2.1.3.3** (序列模式)
+****定义 4**.2.1.3.3** (序列模式)
 序列模式是一个正则表达式 $R$，定义在事件类型集合 $\mathcal{T}_{events}$ 上：
 
 $$R ::= \epsilon \mid t \mid R_1 \cdot R_2 \mid R_1 \mid R_2 \mid R^* \mid R^+ \mid R?$$
@@ -40,7 +40,7 @@ $$R ::= \epsilon \mid t \mid R_1 \cdot R_2 \mid R_1 \mid R_2 \mid R^* \mid R^+ \
 - $R^+$ 是一次或多次重复
 - $R?$ 是零次或一次
 
-**定义 4.2.1.3.4** (时间模式)
+****定义 4**.2.1.3.4** (时间模式)
 时间模式是一个函数 $T_{pattern}: \mathcal{T} \times \mathcal{T} \rightarrow \mathbb{B}$，其中：
 
 $$T_{pattern}(t_1, t_2) = \begin{cases}
@@ -50,7 +50,7 @@ false & \text{otherwise}
 
 其中 $\Delta T$ 是时间窗口大小。
 
-**定义 4.2.1.3.5** (条件模式)
+****定义 4**.2.1.3.5** (条件模式)
 条件模式是一个函数 $C_{pattern}: E \times \mathcal{V} \rightarrow \mathbb{B}$，其中：
 
 $$C_{pattern}(e, v) = \begin{cases}
@@ -62,7 +62,7 @@ false & \text{otherwise}
 
 ## 核心定理
 
-### 定理 4.2.1.3.1 (模式匹配正确性)
+### **定理 4**.2.1.3.1 (模式匹配正确性)
 
 **定理**: 对于模式 $P = (S, \mathcal{R}, \mathcal{C}, \mathcal{A}, \mathcal{T})$ 和事件序列 $\sigma = e_1, e_2, \ldots, e_n$，如果：
 
@@ -90,7 +90,7 @@ $$\forall m \in M_{valid}, \forall (s_i, s_k), \mathcal{T}(s_i, s_k) \geq 0$$
 因此：
 $$match(\sigma, P) = M_{valid} = \{m \in M \mid m \text{ is a valid match}\}$$
 
-### 定理 4.2.1.3.2 (模式匹配复杂度)
+### **定理 4**.2.1.3.2 (模式匹配复杂度)
 
 **定理**: 模式匹配的时间复杂度 $O(match)$ 满足：
 
@@ -109,7 +109,7 @@ $$O(match) = O(|S| \cdot |\sigma| \cdot |\mathcal{R}|)$$
 对于每个事件，需要检查所有状态的所有转移：
 $$O(match) = O(|S| \cdot |\sigma| \cdot |\mathcal{R}|)$$
 
-### 定理 4.2.1.3.3 (模式匹配空间复杂度)
+### **定理 4**.2.1.3.3 (模式匹配空间复杂度)
 
 **定理**: 模式匹配的空间复杂度 $S(match)$ 满足：
 
@@ -830,3 +830,4 @@ async fn main() {
 **创建时间**: 2024-12-19  
 **版本**: 1.0  
 **状态**: 已完成
+

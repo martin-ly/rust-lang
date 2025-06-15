@@ -1,4 +1,4 @@
-# Rust内存安全形式化理论 (Rust Memory Safety Formalization Theory)
+﻿# Rust内存安全形式化理论 (Rust Memory Safety Formalization Theory)
 
 ## 📋 目录
 
@@ -57,7 +57,7 @@ G = (V, E, \ell)
 
 ## 🔬 形式化定义
 
-### 定义 1: 内存状态
+### **定义 1**: 内存状态
 
 一个内存状态是一个四元组：
 
@@ -72,7 +72,7 @@ G = (V, E, \ell)
 - $\mathcal{O}$: 所有权关系
 - $\mathcal{B}$: 借用关系
 
-### 定义 2: 所有权关系
+### **定义 2**: 所有权关系
 
 所有权关系 $O: \mathcal{V} \times \mathcal{M} \rightarrow \mathbb{B}$ 定义为：
 
@@ -83,7 +83,7 @@ O(v, m) = \begin{cases}
 \end{cases}
 ```
 
-### 定义 3: 借用关系
+### **定义 3**: 借用关系
 
 借用关系 $B: \mathcal{V} \times \mathcal{M} \times \mathcal{M} \times \mathcal{L} \rightarrow \mathbb{B}$ 定义为：
 
@@ -94,7 +94,7 @@ B(v, m, m', \ell) = \begin{cases}
 \end{cases}
 ```
 
-### 定义 4: 生命周期
+### **定义 4**: 生命周期
 
 生命周期 $\ell \in \mathcal{L}$ 是一个标识符，满足：
 
@@ -102,7 +102,7 @@ B(v, m, m', \ell) = \begin{cases}
 \ell: \mathcal{V} \rightarrow \mathbb{N}
 ```
 
-### 定义 5: 内存安全谓词
+### **定义 5**: 内存安全谓词
 
 内存安全谓词 $Safe: \mathcal{S} \rightarrow \mathbb{B}$ 定义为：
 
@@ -110,7 +110,7 @@ B(v, m, m', \ell) = \begin{cases}
 Safe(\mathcal{S}) = \forall v, m, m', \ell. B(v, m, m', \ell) \implies \text{valid}(m') \land \text{outlives}(m', \ell)
 ```
 
-### 定义 6: 悬垂引用检测
+### **定义 6**: 悬垂引用检测
 
 悬垂引用检测函数 $Dangling: \mathcal{S} \rightarrow \mathbb{B}$ 定义为：
 
@@ -118,7 +118,7 @@ Safe(\mathcal{S}) = \forall v, m, m', \ell. B(v, m, m', \ell) \implies \text{val
 Dangling(\mathcal{S}) = \exists v, m, m', \ell. B(v, m, m', \ell) \land \neg \text{valid}(m')
 ```
 
-### 定义 7: 数据竞争检测
+### **定义 7**: 数据竞争检测
 
 数据竞争检测函数 $Race: \mathcal{S} \rightarrow \mathbb{B}$ 定义为：
 
@@ -130,7 +130,7 @@ Race(\mathcal{S}) = \exists v_1, v_2, m. B(v_1, m, m, \ell_1) \land B(v_2, m, m,
 
 ## 🛡️ 核心定理
 
-### 定理 1: 所有权唯一性
+### **定理 1**: 所有权唯一性
 
 对于任意内存状态 $\mathcal{S}$，如果 $\mathcal{S}$ 是有效的，则：
 
@@ -142,7 +142,7 @@ Race(\mathcal{S}) = \exists v_1, v_2, m. B(v_1, m, m, \ell_1) \land B(v_2, m, m,
 
 根据Rust所有权系统的设计，每个内存位置最多只能有一个所有者。如果存在多个所有者，则违反了所有权规则，导致编译错误。
 
-### 定理 2: 借用规则
+### **定理 2**: 借用规则
 
 对于任意内存状态 $\mathcal{S}$，如果 $\mathcal{S}$ 是内存安全的，则：
 
@@ -160,7 +160,7 @@ Race(\mathcal{S}) = \exists v_1, v_2, m. B(v_1, m, m, \ell_1) \land B(v_2, m, m,
 2. 要么有一个可变借用
 3. 不能同时有可变和不可变借用
 
-### 定理 3: 生命周期安全
+### **定理 3**: 生命周期安全
 
 对于任意引用 $r$ 和生命周期 $\ell$，如果 $r$ 通过生命周期检查，则：
 
@@ -172,7 +172,7 @@ Race(\mathcal{S}) = \exists v_1, v_2, m. B(v_1, m, m, \ell_1) \land B(v_2, m, m,
 
 Rust的生命周期系统确保引用的生命周期不会超过被引用数据的生命周期，防止悬垂引用。
 
-### 定理 4: 内存安全保证
+### **定理 4**: 内存安全保证
 
 对于任意Rust程序 $P$，如果 $P$ 通过借用检查，则：
 
@@ -184,7 +184,7 @@ Rust的生命周期系统确保引用的生命周期不会超过被引用数据�
 
 基于Rust的所有权系统和借用检查器，编译时检查确保所有可能的内存状态都是安全的。
 
-### 定理 5: 零成本抽象
+### **定理 5**: 零成本抽象
 
 对于任意内存安全保证 $G$，如果 $G$ 通过编译时检查实现，则：
 
@@ -881,3 +881,4 @@ pub fn create_borrow(
 **最后更新**: 2025-06-14  
 **作者**: AI Assistant  
 **质量等级**: A+ (优秀)
+

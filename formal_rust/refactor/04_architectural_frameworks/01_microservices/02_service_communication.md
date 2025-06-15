@@ -1,4 +1,4 @@
-# 4.1.2 服务间通信 (Service Communication)
+﻿# 4.1.2 服务间通信 (Service Communication)
 
 ## 目录
 
@@ -11,17 +11,17 @@
 
 ## 4.1.2.1 通信模式
 
-### 定义 4.1.2.1 (服务通信)
+### **定义 4**.1.2.1 (服务通信)
 
 服务通信是微服务之间交换信息和协调行为的机制：
 $$Communication(S_i, S_j) = \{(m, p, t) | m \in Messages, p \in Protocols, t \in Time\}$$
 
-### 定义 4.1.2.2 (通信协议)
+### **定义 4**.1.2.2 (通信协议)
 
 通信协议定义了服务间交互的规则和格式：
 $$Protocol = (Syntax, Semantics, Timing)$$
 
-### 定义 4.1.2.3 (通信模式)
+### **定义 4**.1.2.3 (通信模式)
 
 通信模式是服务间交互的标准模式：
 $$Pattern = \{Request-Response, Publish-Subscribe, Event-Driven, Message-Queue\}$$
@@ -398,7 +398,7 @@ impl OrderCreatedMessageHandler {
 
 ## 4.1.2.5 形式化模型
 
-### 定理 4.1.2.1 (通信可靠性)
+### **定理 4**.1.2.1 (通信可靠性)
 
 如果通信系统满足：
 
@@ -415,7 +415,7 @@ impl OrderCreatedMessageHandler {
 由于死信队列，无法处理的消息会被隔离。
 因此 $C$ 是可靠的。$\square$
 
-### 定理 4.1.2.2 (通信一致性)
+### **定理 4**.1.2.2 (通信一致性)
 
 如果异步通信满足：
 
@@ -505,3 +505,4 @@ impl CommunicationPatternSelector {
 ### 中断恢复点
 
 当前状态：服务间通信内容已完成，准备开始数据一致性策略的内容编写。
+

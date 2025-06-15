@@ -1,4 +1,4 @@
-# 内存优化形式化理论 (Memory Optimization Formalization Theory)
+﻿# 内存优化形式化理论 (Memory Optimization Formalization Theory)
 
 ## 📋 目录 (Table of Contents)
 
@@ -257,8 +257,7 @@ $$\mathcal{O}_{\text{pred}}: \sigma \times \text{Pattern} \rightarrow \sigma'$$
 
 1. 定义分配状态序列
 2. 证明单调性
-3. 使用不动点定理
-4. 证明收敛性
+3. 使用不动点**定理 4**. 证明收敛性
 
 ### 3.2 垃圾回收定理 (Garbage Collection Theorems)
 
@@ -974,3 +973,4 @@ impl OptimizationMonitor {
 **理论状态**: 完整形式化  
 **实现状态**: 完整Rust实现  
 **质量状态**: 学术标准 ✅
+

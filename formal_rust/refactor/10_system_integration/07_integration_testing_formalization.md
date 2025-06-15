@@ -1,4 +1,4 @@
-# 集成测试形式化理论 (Integration Testing Formalization Theory)
+﻿# 集成测试形式化理论 (Integration Testing Formalization Theory)
 
 ## 目录 (Table of Contents)
 
@@ -12,7 +12,7 @@
 
 ### 1.1 集成测试模型 (Integration Testing Models)
 
-**定义 1.1.1** (集成测试系统)
+****定义 1**.1.1** (集成测试系统)
 集成测试系统是一个五元组 $ITS = (C, T, E, V, R)$，其中：
 
 - $C$ 是组件集合
@@ -21,22 +21,22 @@
 - $V$ 是验证规则
 - $R$ 是测试结果
 
-**定义 1.1.2** (测试覆盖率)
+****定义 1**.1.2** (测试覆盖率)
 测试覆盖率：$Coverage = \frac{Executed\_Paths}{Total\_Paths}$
 
 ### 1.2 测试策略 (Testing Strategies)
 
-**定义 1.2.1** (自底向上测试)
+****定义 1**.2.1** (自底向上测试)
 自底向上测试：$BottomUp(C) = \bigcup_{i=1}^{n} Test(C_i)$
 
-**定义 1.2.2** (自顶向下测试)
+****定义 1**.2.2** (自顶向下测试)
 自顶向下测试：$TopDown(C) = Test(C_{root}) \circ \bigcup_{i=1}^{n} Test(C_i)$
 
 ## 2. 数学定义 (Mathematical Definitions)
 
 ### 2.1 测试用例 (Test Cases)
 
-**定义 2.1.1** (测试用例)
+****定义 2**.1.1** (测试用例)
 测试用例：$TC = (I, E, O, V)$，其中：
 
 - $I$ 是输入
@@ -44,12 +44,12 @@
 - $O$ 是实际输出
 - $V$ 是验证函数
 
-**定义 2.1.2** (测试执行)
+****定义 2**.1.2** (测试执行)
 测试执行：$Execute(TC) = V(I, O) \implies Pass/Fail$
 
 ### 2.2 测试环境 (Test Environment)
 
-**定义 2.2.1** (测试环境)
+****定义 2**.2.1** (测试环境)
 测试环境：$TE = (S, D, M, N)$，其中：
 
 - $S$ 是模拟器
@@ -61,13 +61,13 @@
 
 ### 3.1 集成测试定理 (Integration Testing Theorems)
 
-**定理 3.1.1** (测试完整性定理)
+****定理 3**.1.1** (测试完整性定理)
 测试完整性：$Complete(Test) \iff \forall c \in C: Tested(c)$
 
-**定理 3.1.2** (覆盖率定理)
+****定理 3**.1.2** (覆盖率定理)
 覆盖率保证：$Coverage \geq Threshold \implies Reliable(Test)$
 
-**定理 3.1.3** (回归测试定理)
+****定理 3**.1.3** (回归测试定理)
 回归测试：$Regression(Test) \iff \forall TC: Execute(TC) = Previous(TC)$
 
 ## 4. Rust实现 (Rust Implementation)
@@ -888,8 +888,7 @@ mod tests {
 ### 5.1 理论贡献 (Theoretical Contributions)
 
 1. **测试模型**: 建立了集成测试的数学模型
-2. **覆盖率理论**: 提供了测试覆盖率的数学定义
-3. **执行策略**: 建立了测试执行的理论框架
+2. **覆盖率理论**: 提供了测试覆盖率的数学**定义 3**. **执行策略**: 建立了测试执行的理论框架
 4. **验证机制**: 提供了测试验证的理论基础
 
 ### 5.2 实现贡献 (Implementation Contributions)
@@ -912,3 +911,4 @@ mod tests {
 **创建时间**: 2025-06-14
 **理论完整性**: 100%
 **实现完整性**: 100%
+

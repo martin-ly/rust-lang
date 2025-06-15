@@ -1,4 +1,4 @@
-# 01. 游戏引擎架构理论
+﻿# 01. 游戏引擎架构理论
 
 ## 目录
 
@@ -15,7 +15,7 @@
 
 ### 1.1 游戏引擎定义
 
-**定义 1.1.1** (游戏引擎)
+****定义 1**.1.1** (游戏引擎)
 游戏引擎是提供游戏开发基础设施的软件框架，包含渲染、物理、音频等核心系统。
 
 $$\text{GameEngine} = \langle \mathcal{R}, \mathcal{P}, \mathcal{A}, \mathcal{I}, \mathcal{M} \rangle$$
@@ -30,7 +30,7 @@ $$\text{GameEngine} = \langle \mathcal{R}, \mathcal{P}, \mathcal{A}, \mathcal{I}
 
 ### 1.2 引擎架构模式
 
-**定义 1.2.1** (引擎架构)
+****定义 1**.2.1** (引擎架构)
 游戏引擎采用分层架构模式：
 
 $$\text{EngineArchitecture} ::= \text{Application} \times \text{Engine} \times \text{Platform} \times \text{Hardware}$$
@@ -44,7 +44,7 @@ $$\text{EngineArchitecture} ::= \text{Application} \times \text{Engine} \times \
 
 ### 1.3 游戏循环
 
-**定义 1.3.1** (游戏循环)
+****定义 1**.3.1** (游戏循环)
 游戏循环是引擎的核心执行模式：
 
 $$\text{GameLoop} ::= \text{Input} \rightarrow \text{Update} \rightarrow \text{Render} \rightarrow \text{GameLoop}$$
@@ -56,7 +56,7 @@ $$\text{frame\_rate} = \frac{1}{\text{frame\_time}}$$
 
 ### 2.1 系统管理器
 
-**定义 2.1.1** (系统管理器)
+****定义 2**.1.1** (系统管理器)
 系统管理器协调各个子系统的运行：
 
 $$\text{SystemManager} = \langle \text{Systems}, \text{Dependencies}, \text{UpdateOrder} \rangle$$
@@ -96,7 +96,7 @@ impl SystemManager {
 
 ### 2.2 组件系统
 
-**定义 2.2.1** (组件系统)
+****定义 2**.2.1** (组件系统)
 组件系统是实体-组件-系统(ECS)架构的核心：
 
 $$\text{ComponentSystem} = \langle \text{Entities}, \text{Components}, \text{Systems} \rangle$$
@@ -110,7 +110,7 @@ $$\text{remove\_component}(\text{entity}, \text{component\_type}) = \text{Entity
 
 ### 2.3 消息系统
 
-**定义 2.3.1** (消息系统)
+****定义 2**.3.1** (消息系统)
 消息系统实现系统间的解耦通信：
 
 $$\text{MessageSystem} = \langle \text{MessageQueue}, \text{Handlers}, \text{Routing} \rangle$$
@@ -125,7 +125,7 @@ $$\text{route\_message}(\text{message}) = \text{Set}[\text{Handler}]$$
 
 ### 3.1 渲染管线
 
-**定义 3.1.1** (渲染管线)
+****定义 3**.1.1** (渲染管线)
 渲染管线是将3D场景转换为2D图像的处理流程：
 
 $$\text{RenderPipeline} ::= \text{Input} \rightarrow \text{Vertex} \rightarrow \text{Rasterization} \rightarrow \text{Fragment} \rightarrow \text{Output}$$
@@ -141,7 +141,7 @@ $$\text{RenderPipeline} ::= \text{Input} \rightarrow \text{Vertex} \rightarrow \
 
 ### 3.2 着色器系统
 
-**定义 3.2.1** (着色器系统)
+****定义 3**.2.1** (着色器系统)
 着色器系统管理GPU程序：
 
 $$\text{ShaderSystem} = \langle \text{VertexShaders}, \text{FragmentShaders}, \text{ComputeShaders} \rangle$$
@@ -194,7 +194,7 @@ impl ShaderSystem {
 
 ### 3.3 材质系统
 
-**定义 3.3.1** (材质系统)
+****定义 3**.3.1** (材质系统)
 材质系统定义物体的表面属性：
 
 $$\text{MaterialSystem} = \langle \text{Materials}, \text{Textures}, \text{Shaders} \rangle$$
@@ -206,7 +206,7 @@ $$\text{Material} = \langle \text{Albedo}, \text{Metallic}, \text{Roughness}, \t
 
 ### 4.1 物理引擎
 
-**定义 4.1.1** (物理引擎)
+****定义 4**.1.1** (物理引擎)
 物理引擎模拟现实世界的物理行为：
 
 $$\text{PhysicsEngine} = \langle \text{World}, \text{Bodies}, \text{Constraints}, \text{Solver} \rangle$$
@@ -216,7 +216,7 @@ $$\text{PhysicsWorld} = \langle \text{Gravity}, \text{TimeStep}, \text{Iteration
 
 ### 4.2 碰撞检测
 
-**定义 4.2.1** (碰撞检测)
+****定义 4**.2.1** (碰撞检测)
 碰撞检测识别物体间的接触：
 
 $$\text{CollisionDetection} = \text{BroadPhase} \times \text{NarrowPhase}$$
@@ -238,7 +238,7 @@ function aabb_collision(box1, box2):
 
 ### 4.3 刚体动力学
 
-**定义 4.3.1** (刚体动力学)
+****定义 4**.3.1** (刚体动力学)
 刚体动力学模拟刚体的运动：
 
 $$\text{RigidBody} = \langle \text{Position}, \text{Rotation}, \text{Velocity}, \text{AngularVelocity}, \text{Mass} \rangle$$
@@ -254,7 +254,7 @@ $$\text{verlet\_integration}(\text{position}, \text{velocity}, \text{acceleratio
 
 ### 5.1 音频引擎
 
-**定义 5.1.1** (音频引擎)
+****定义 5**.1.1** (音频引擎)
 音频引擎处理声音的播放和处理：
 
 $$\text{AudioEngine} = \langle \text{Devices}, \text{Sources}, \text{Listeners}, \text{Effects} \rangle$$
@@ -264,7 +264,7 @@ $$\text{AudioSource} = \langle \text{Buffer}, \text{Position}, \text{Velocity}, 
 
 ### 5.2 3D音频
 
-**定义 5.2.1** (3D音频)
+****定义 5**.2.1** (3D音频)
 3D音频模拟空间中的声音传播：
 
 $$\text{SpatialAudio} = \langle \text{Position}, \text{Distance}, \text{Doppler}, \text{Reverb} \rangle$$
@@ -277,7 +277,7 @@ $$\text{frequency} = f_0 \frac{c + v_r}{c + v_s}$$
 
 ### 5.3 音频效果
 
-**定义 5.3.1** (音频效果)
+****定义 5**.3.1** (音频效果)
 音频效果处理声音信号：
 
 $$\text{AudioEffect} ::= \text{Reverb} \mid \text{Echo} \mid \text{Filter} \mid \text{Compressor}$$
@@ -289,7 +289,7 @@ $$\text{EffectChain} = \text{Effect}_1 \circ \text{Effect}_2 \circ \cdots \circ 
 
 ### 6.1 输入管理器
 
-**定义 6.1.1** (输入管理器)
+****定义 6**.1.1** (输入管理器)
 输入管理器处理各种输入设备：
 
 $$\text{InputManager} = \langle \text{Devices}, \text{Events}, \text{Bindings} \rangle$$
@@ -299,7 +299,7 @@ $$\text{InputDevice} ::= \text{Keyboard} \mid \text{Mouse} \mid \text{Gamepad} \
 
 ### 6.2 事件系统
 
-**定义 6.2.1** (输入事件)
+****定义 6**.2.1** (输入事件)
 输入事件表示用户输入动作：
 
 $$\text{InputEvent} = \langle \text{Type}, \text{Device}, \text{Data}, \text{Timestamp} \rangle$$
@@ -309,7 +309,7 @@ $$\text{EventType} ::= \text{KeyDown} \mid \text{KeyUp} \mid \text{MouseMove} \m
 
 ### 6.3 输入映射
 
-**定义 6.3.1** (输入映射)
+****定义 6**.3.1** (输入映射)
 输入映射将物理输入转换为游戏动作：
 
 $$\text{InputMapping} = \text{Map}[\text{PhysicalInput}, \text{GameAction}]$$
@@ -321,7 +321,7 @@ $$\text{configure\_mapping}(\text{input}, \text{action}) = \text{Mapping}$$
 
 ### 7.1 资源系统
 
-**定义 7.1.1** (资源系统)
+****定义 7**.1.1** (资源系统)
 资源系统管理游戏资源：
 
 $$\text{ResourceSystem} = \langle \text{Resources}, \text{Loader}, \text{Cache}, \text{Streaming} \rangle$$
@@ -331,7 +331,7 @@ $$\text{ResourceType} ::= \text{Texture} \mid \text{Model} \mid \text{Audio} \mi
 
 ### 7.2 资源加载
 
-**定义 7.2.1** (资源加载)
+****定义 7**.2.1** (资源加载)
 资源加载从存储介质读取资源：
 
 $$\text{ResourceLoader} = \text{Async}[\text{Resource}] \rightarrow \text{Resource}$$
@@ -344,7 +344,7 @@ $$\text{ResourceLoader} = \text{Async}[\text{Resource}] \rightarrow \text{Resour
 
 ### 7.3 内存管理
 
-**定义 7.3.1** (内存管理)
+****定义 7**.3.1** (内存管理)
 内存管理优化资源的内存使用：
 
 $$\text{MemoryManager} = \langle \text{Pools}, \text{Allocator}, \text{GarbageCollector} \rangle$$
@@ -359,7 +359,7 @@ $$\text{gc}(\text{resources}) = \text{FreeMemory}$$
 
 ### 8.1 引擎正确性
 
-**定理 8.1.1** (引擎正确性)
+****定理 8**.1.1** (引擎正确性)
 游戏引擎在正确实现时保证游戏的正确运行。
 
 **证明**：
@@ -370,7 +370,7 @@ $$\text{gc}(\text{resources}) = \text{FreeMemory}$$
 
 ### 8.2 性能保证
 
-**定理 8.2.1** (性能保证)
+****定理 8**.2.1** (性能保证)
 游戏引擎保证稳定的帧率和响应性。
 
 **证明**：
@@ -381,7 +381,7 @@ $$\text{gc}(\text{resources}) = \text{FreeMemory}$$
 
 ### 8.3 可扩展性
 
-**定理 8.3.1** (可扩展性)
+****定理 8**.3.1** (可扩展性)
 游戏引擎支持模块化扩展。
 
 **证明**：
@@ -406,3 +406,4 @@ $$\text{gc}(\text{resources}) = \text{FreeMemory}$$
 8. **形式化证明**：正确性、性能、可扩展性
 
 该理论体系为游戏引擎的设计、实现和优化提供了坚实的数学基础。
+

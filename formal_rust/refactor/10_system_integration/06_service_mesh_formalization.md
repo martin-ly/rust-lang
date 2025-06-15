@@ -1,4 +1,4 @@
-# 服务网格形式化理论 (Service Mesh Formalization Theory)
+﻿# 服务网格形式化理论 (Service Mesh Formalization Theory)
 
 ## 目录 (Table of Contents)
 
@@ -12,7 +12,7 @@
 
 ### 1.1 服务网格模型 (Service Mesh Models)
 
-**定义 1.1.1** (服务网格)
+****定义 1**.1.1** (服务网格)
 服务网格是一个四元组 $SM = (S, P, C, M)$，其中：
 
 - $S$ 是服务集合
@@ -20,37 +20,37 @@
 - $C$ 是控制平面
 - $M$ 是管理策略
 
-**定义 1.1.2** (服务发现)
+****定义 1**.1.2** (服务发现)
 服务发现函数：$Discovery: Service \to Endpoint$
 
 ### 1.2 通信模型 (Communication Models)
 
-**定义 1.2.1** (服务间通信)
+****定义 1**.2.1** (服务间通信)
 服务间通信：$Communication(s_1, s_2) = Proxy(s_1) \circ Network \circ Proxy(s_2)$
 
 ## 2. 数学定义 (Mathematical Definitions)
 
 ### 2.1 代理理论 (Proxy Theory)
 
-**定义 2.1.1** (代理功能)
+****定义 2**.1.1** (代理功能)
 代理功能：$Proxy: Request \to Response$
 
-**定义 2.1.2** (路由规则)
+****定义 2**.1.2** (路由规则)
 路由规则：$Route: Request \to Service$
 
 ### 2.2 负载均衡 (Load Balancing)
 
-**定义 2.2.1** (负载分布)
+****定义 2**.2.1** (负载分布)
 负载分布：$Load(s) = \frac{Requests(s)}{Capacity(s)}$
 
 ## 3. 核心定理 (Core Theorems)
 
 ### 3.1 服务网格定理 (Service Mesh Theorems)
 
-**定理 3.1.1** (服务发现定理)
+****定理 3**.1.1** (服务发现定理)
 服务发现正确性：$\forall s \in S: Discovery(s) \neq \emptyset$
 
-**定理 3.1.2** (通信可靠性定理)
+****定理 3**.1.2** (通信可靠性定理)
 通信可靠性：$Reliability = \frac{Successful\_Requests}{Total\_Requests}$
 
 ## 4. Rust实现 (Rust Implementation)
@@ -718,8 +718,7 @@ mod tests {
 ### 5.1 理论贡献 (Theoretical Contributions)
 
 1. **服务网格模型**: 建立了服务网格的数学模型
-2. **代理理论**: 提供了代理功能的数学定义
-3. **通信模型**: 建立了服务间通信的理论框架
+2. **代理理论**: 提供了代理功能的数学**定义 3**. **通信模型**: 建立了服务间通信的理论框架
 4. **发现机制**: 提供了服务发现的理论基础
 
 ### 5.2 实现贡献 (Implementation Contributions)
@@ -742,3 +741,4 @@ mod tests {
 **创建时间**: 2025-06-14
 **理论完整性**: 100%
 **实现完整性**: 100%
+

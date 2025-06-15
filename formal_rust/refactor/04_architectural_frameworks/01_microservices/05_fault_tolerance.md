@@ -1,4 +1,4 @@
-# 4.1.5 容错与弹性 (Fault Tolerance and Resilience)
+﻿# 4.1.5 容错与弹性 (Fault Tolerance and Resilience)
 
 ## 概述
 
@@ -8,7 +8,7 @@
 
 ### 4.1.5.1 容错系统定义
 
-**定义 4.1.5.1** (容错系统)
+****定义 4**.1.5.1** (容错系统)
 容错系统是一个六元组 $\mathcal{FT} = (S, F, R, D, M, \mathcal{T})$，其中：
 
 - $S$ 是服务集合，$S = \{s_1, s_2, \ldots, s_n\}$
@@ -18,26 +18,26 @@
 - $M$ 是监控函数，$M: S \times \mathcal{T} \rightarrow \{0,1\}$
 - $\mathcal{T}$ 是时间序列，$\mathcal{T} = \{t_1, t_2, \ldots\}$
 
-**定义 4.1.5.2** (故障类型)
+****定义 4**.1.5.2** (故障类型)
 故障类型是一个三元组 $f = (type, severity, impact)$，其中：
 
 - $type$ 是故障类型，$type \in \{Network, Service, Database, Resource\}$
 - $severity$ 是严重程度，$severity \in \{Low, Medium, High, Critical\}$
 - $impact$ 是影响范围，$impact: S \rightarrow [0,1]$
 
-**定义 4.1.5.3** (弹性策略)
+****定义 4**.1.5.3** (弹性策略)
 弹性策略是一个函数 $resilience: F \times S \rightarrow Strategy$，其中 $Strategy$ 是策略集合：
 
 $$Strategy = \{Retry, CircuitBreaker, Fallback, Degradation, Isolation\}$$
 
-**定义 4.1.5.4** (容错度)
+****定义 4**.1.5.4** (容错度)
 容错度是一个函数 $tolerance: S \rightarrow [0,1]$，表示服务在故障情况下的可用性：
 
 $$tolerance(s) = \frac{|\{t \in \mathcal{T} \mid M(s, t) = 1\}|}{|\mathcal{T}|}$$
 
 ## 核心定理
 
-### 定理 4.1.5.1 (容错系统可用性)
+### **定理 4**.1.5.1 (容错系统可用性)
 
 **定理**: 对于容错系统 $\mathcal{FT} = (S, F, R, D, M, \mathcal{T})$，系统可用性 $A$ 满足：
 
@@ -57,7 +57,7 @@ $$A = \min_{s \in S} A_s$$
 
 $$A \geq \max_{s \in S} tolerance(s) \cdot \prod_{f \in F} (1 - impact(f, s))$$
 
-### 定理 4.1.5.2 (故障恢复时间)
+### **定理 4**.1.5.2 (故障恢复时间)
 
 **定理**: 故障恢复时间 $T_{recovery}$ 满足：
 
@@ -80,7 +80,7 @@ $$T_{recovery} \leq T_{detection} + T_{isolation} + T_{recovery\_action}$$
 
 $$T_{recovery} = T_{detection} + T_{isolation} + T_{recovery\_action}$$
 
-### 定理 4.1.5.3 (弹性策略有效性)
+### **定理 4**.1.5.3 (弹性策略有效性)
 
 **定理**: 如果弹性策略 $resilience$ 满足以下条件：
 
@@ -359,7 +359,7 @@ pub enum CircuitBreakerError<E> {
 
 ### 4.1.5.1 容错系统性能
 
-**定理 4.1.5.4** (容错系统性能)
+****定理 4**.1.5.4** (容错系统性能)
 容错系统的性能开销为：
 
 - 故障检测: $O(1)$
@@ -376,7 +376,7 @@ pub enum CircuitBreakerError<E> {
 
 ### 4.1.5.2 资源消耗分析
 
-**定理 4.1.5.5** (容错系统资源消耗)
+****定理 4**.1.5.5** (容错系统资源消耗)
 容错系统的资源消耗为 $O(m + n)$，其中 $m$ 是故障数量，$n$ 是服务数量。
 
 **证明**:
@@ -392,12 +392,12 @@ pub enum CircuitBreakerError<E> {
 
 ### 4.1.5.1 故障检测可靠性
 
-**定义 4.1.5.5** (故障检测可靠性)
+****定义 4**.1.5.5** (故障检测可靠性)
 故障检测可靠性 $R_{detection}$ 定义为：
 
 $$R_{detection} = \frac{|\{f \in F \mid D(f) = true\}|}{|F|}$$
 
-**定理 4.1.5.6** (故障检测可靠性保证)
+****定理 4**.1.5.6** (故障检测可靠性保证)
 如果故障检测系统满足以下条件：
 
 1. 监控覆盖完整性

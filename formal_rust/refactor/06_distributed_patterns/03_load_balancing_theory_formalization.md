@@ -1,4 +1,4 @@
-# 负载均衡理论形式化 (Load Balancing Theory Formalization)
+﻿# 负载均衡理论形式化 (Load Balancing Theory Formalization)
 
 ## 目录 (Table of Contents)
 
@@ -83,7 +83,7 @@ $$\text{round\_robin}(N, i) = n_{i \bmod |N|}$$
 **定理2.1.1 (轮询公平性)**
 轮询算法在长期运行中保证负载均匀分布。
 
-**证明：**
+****证明**：**
 设 $T$ 为总请求数，$|N| = k$，则每个节点接收的请求数为：
 $$\left\lfloor \frac{T}{k} \right\rfloor \leq \text{requests}(n_i) \leq \left\lceil \frac{T}{k} \right\rceil$$
 
@@ -100,7 +100,7 @@ $$\text{least\_connections}(N) = \arg\min_{n \in N} \text{connections}(n)$$
 **定理2.2.1 (最少连接最优性)**
 最少连接算法最小化最大连接数。
 
-**证明：**
+****证明**：**
 设 $n^* = \text{least\_connections}(N)$，则：
 $$\text{connections}(n^*) = \min_{n \in N} \text{connections}(n)$$
 
@@ -117,7 +117,7 @@ $$\text{consistent\_hash}(k, N) = \arg\min_{n \in N} \text{hash}(n) \geq \text{h
 **定理2.3.1 (一致性哈希单调性)**
 当节点集合从 $N$ 变为 $N'$ 时，只有 $\frac{1}{|N|}$ 的键需要重新映射。
 
-**证明：**
+****证明**：**
 设 $N' = N \cup \{n_{new}\}$，则只有映射到 $n_{new}$ 哈希区间的键需要重新映射。
 由于哈希函数均匀分布，重新映射的比例为 $\frac{1}{|N|}$。
 
@@ -142,14 +142,14 @@ $$P(\text{select}(n_i)) = \frac{W(n_i)}{\sum_{n \in N} W(n)}$$
 **定理3.1.1 (负载均衡正确性)**
 负载均衡系统保证请求正确分配。
 
-**证明：**
+****证明**：**
 根据定义1.1.1，分配函数 $A: N \times S \rightarrow N$ 确保每个请求都被分配到有效节点。
 根据公理1.3.2，容量约束确保节点不会过载。
 
 **定理3.1.2 (负载均衡完整性)**
 负载均衡系统保证所有健康节点都能接收请求。
 
-**证明：**
+****证明**：**
 根据健康检查机制，只有健康节点参与负载均衡。
 根据策略选择函数，所有健康节点都有机会被选择。
 
@@ -159,7 +159,7 @@ $$P(\text{select}(n_i)) = \frac{W(n_i)}{\sum_{n \in N} W(n)}$$
 最优负载均衡策略的效率为：
 $$\text{efficiency}(LB^*) = \frac{\min_{n \in N} \text{load}(n)}{\max_{n \in N} \text{load}(n)} \geq 1 - \frac{1}{|N|}$$
 
-**证明：**
+****证明**：**
 设最优分配为 $\text{load}^*(n_i) = \frac{\text{total\_load}}{|N|}$，则：
 $$\text{efficiency}(LB^*) = \frac{\min \text{load}^*(n_i)}{\max \text{load}^*(n_i)} = 1$$
 
@@ -174,7 +174,7 @@ $$\text{avg\_response\_time} = \frac{1}{|N|} \sum_{n \in N} \text{response\_time
 **定理3.3.1 (负载均衡稳定性)**
 在动态负载变化下，负载均衡系统保持稳定。
 
-**证明：**
+****证明**：**
 根据负载守恒公理1.3.1：
 $$\sum_{n \in N} \text{load}(n) = \text{total\_load}$$
 
@@ -183,7 +183,7 @@ $$\sum_{n \in N} \text{load}(n) = \text{total\_load}$$
 **定理3.3.2 (故障恢复性)**
 当节点故障时，负载均衡系统能够自动恢复。
 
-**证明：**
+****证明**：**
 根据健康检查机制，故障节点被排除在负载均衡之外。
 剩余健康节点重新分配负载，系统继续运行。
 
@@ -806,7 +806,7 @@ $$\text{Var}(X) = \frac{T \cdot (k-1)}{k^2}$$
 
 其中 $T$ 是总请求数，$k$ 是节点数。
 
-**证明：**
+****证明**：**
 每个节点接收的请求数服从二项分布 $B(T, \frac{1}{k})$，方差为：
 $$\text{Var}(X) = T \cdot \frac{1}{k} \cdot \left(1 - \frac{1}{k}\right) = \frac{T \cdot (k-1)}{k^2}$$
 
@@ -854,10 +854,10 @@ $$\text{Var}(X) = T \cdot \frac{1}{k} \cdot \left(1 - \frac{1}{k}\right) = \frac
 
 1. **理论基础**：五元组定义、代数理论、分布理论
 2. **算法理论**：轮询、最少连接、一致性哈希、加权轮询
-3. **核心定理**：正确性、性能、稳定性定理
-4. **Rust实现**：完整的类型安全实现
+3. **核心定理**：正确性、性能、稳定性**定理 4**. **Rust实现**：完整的类型安全实现
 5. **应用场景**：Web服务器、微服务、数据库、缓存
 6. **性能分析**：时间/空间复杂度、负载分布分析
 7. **变体模式**：分层、智能、地理负载均衡
 
 该理论框架为分布式系统的负载均衡提供了严格的数学基础和实用的实现指导。
+

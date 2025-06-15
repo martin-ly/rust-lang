@@ -1,4 +1,4 @@
-# 05. 数学基础 (Mathematical Foundations)
+﻿# 05. 数学基础 (Mathematical Foundations)
 
 ## 目录结构
 
@@ -46,7 +46,7 @@
 
 ### 5.1 数学基础的形式化框架
 
-**定义 5.1** (形式化系统)
+****定义 5**.1** (形式化系统)
 形式化系统是一个四元组 $\mathcal{FS} = (\Sigma, \mathcal{R}, \mathcal{A}, \mathcal{T})$，其中：
 
 - $\Sigma$ 是符号表
@@ -54,7 +54,7 @@
 - $\mathcal{A}$ 是公理集合
 - $\mathcal{T}$ 是定理集合
 
-**定理 5.1** (一致性定理)
+****定理 5**.1** (一致性定理)
 如果形式化系统 $\mathcal{FS}$ 满足：
 
 1. $\mathcal{A} \cap \mathcal{T} = \emptyset$
@@ -72,7 +72,7 @@
 
 ### 5.1 基本概念
 
-**定义 5.2** (范畴)
+****定义 5**.2** (范畴)
 范畴 $\mathcal{C}$ 由以下组成：
 
 - 对象集合 $Ob(\mathcal{C})$
@@ -82,7 +82,7 @@
 
 满足结合律和单位律。
 
-**定理 5.2** (Yoneda引理)
+****定理 5**.2** (Yoneda引理)
 对于任意函子 $F: \mathcal{C}^{op} \rightarrow \mathbf{Set}$ 和对象 $A \in \mathcal{C}$，
 存在自然同构：
 $$Hom(\mathcal{C}(-,A), F) \cong F(A)$$
@@ -91,11 +91,11 @@ $$Hom(\mathcal{C}(-,A), F) \cong F(A)$$
 
 ### 5.1 线性逻辑语法
 
-**定义 5.3** (线性逻辑公式)
+****定义 5**.3** (线性逻辑公式)
 线性逻辑公式由以下语法定义：
 $$\phi ::= A | \phi \otimes \psi | \phi \multimap \psi | \phi \& \psi | \phi \oplus \psi | !\phi | ?\phi$$
 
-**定理 5.3** (线性逻辑的切割消除)
+****定理 5**.3** (线性逻辑的切割消除)
 在线性逻辑中，切割规则是可消除的。
 
 **证明**：
@@ -106,7 +106,7 @@ $$\phi ::= A | \phi \otimes \psi | \phi \multimap \psi | \phi \& \psi | \phi \op
 
 ### 5.1 域理论
 
-**定义 5.4** (完全偏序)
+****定义 5**.4** (完全偏序)
 完全偏序 $(D, \sqsubseteq)$ 满足：
 
 1. 自反性：$\forall x \in D: x \sqsubseteq x$
@@ -114,7 +114,7 @@ $$\phi ::= A | \phi \otimes \psi | \phi \multimap \psi | \phi \& \psi | \phi \op
 3. 反对称性：$x \sqsubseteq y \land y \sqsubseteq x \Rightarrow x = y$
 4. 有向完备性：每个有向集都有最小上界
 
-**定理 5.4** (不动点定理)
+****定理 5**.4** (不动点定理)
 设 $f: D \rightarrow D$ 是连续函数，则 $f$ 有最小不动点：
 $$\mu f = \bigsqcup_{n \in \omega} f^n(\bot)$$
 
@@ -122,14 +122,14 @@ $$\mu f = \bigsqcup_{n \in \omega} f^n(\bot)$$
 
 ### 5.1 小步语义
 
-**定义 5.5** (小步语义)
+****定义 5**.5** (小步语义)
 小步语义是一个三元组 $(\mathcal{S}, \rightarrow, \mathcal{F})$，其中：
 
 - $\mathcal{S}$ 是状态集合
 - $\rightarrow \subseteq \mathcal{S} \times \mathcal{S}$ 是转换关系
 - $\mathcal{F} \subseteq \mathcal{S}$ 是最终状态集合
 
-**定理 5.5** (终止性)
+****定理 5**.5** (终止性)
 如果小步语义满足：
 
 1. $\rightarrow$ 是良基的
@@ -141,11 +141,11 @@ $$\mu f = \bigsqcup_{n \in \omega} f^n(\bot)$$
 
 ### 5.1 简单类型论
 
-**定义 5.6** (类型)
+****定义 5**.6** (类型)
 类型由以下语法定义：
 $$\tau ::= \alpha | \tau \rightarrow \tau | \tau \times \tau | \tau + \tau$$
 
-**定理 5.6** (类型安全)
+****定理 5**.6** (类型安全)
 如果 $\Gamma \vdash e : \tau$ 且 $e \rightarrow e'$，则 $\Gamma \vdash e' : \tau$。
 
 ## Rust实现示例
@@ -223,8 +223,7 @@ impl<T> LinearRef<T> {
 
 ### 5.2 下一步计划
 
-1. 完成范畴论的基本概念和定理
-2. 实现线性逻辑的证明系统
+1. 完成范畴论的基本概念和**定理 2**. 实现线性逻辑的证明系统
 3. 建立指称语义的域理论
 4. 构建操作语义的抽象机器
 5. 设计类型论的形式化系统
@@ -232,3 +231,49 @@ impl<T> LinearRef<T> {
 ### 5.3 中断恢复点
 
 当前状态：主README文件已创建，准备开始范畴论的详细内容编写。
+
+## 相关文档引用
+
+### 理论基础关联
+- [01. 理论基础](../01_foundational_theory/00_readme.md) - 哲学和数学基础
+- [02. 编程范式](../02_programming_paradigms/00_readme.md) - 编程理论体系
+- [08. Rust语言理论](../08_rust_language_theory/00_readme.md) - Rust核心理论
+
+### 设计模式关联
+- [03. 设计模式](../03_design_patterns/00_readme.md) - 经典和高级设计模式
+- [12. 高级模式](../12_advanced_patterns/00_readme.md) - 高级编程模式
+
+### 工程实践关联
+- [05. 并发模式](../05_concurrent_patterns/00_readme.md) - 并发编程模式
+- [06. 分布式模式](../06_distributed_patterns/00_readme.md) - 分布式系统模式
+- [07. 工作流模式](../07_workflow_patterns/00_readme.md) - 工作流工程模式
+- [09. 异步编程](../09_async_programming/00_readme.md) - 异步编程理论
+
+### 系统集成关联
+- [10. 系统集成](../10_system_integration/00_readme.md) - 系统集成理论
+- [11. 性能优化](../11_performance_optimization/00_readme.md) - 性能优化技术
+
+### 行业应用关联
+- [04. 行业应用](../04_industry_applications/00_readme.md) - 各行业应用实践
+
+## 知识图谱
+
+`mermaid
+graph TD
+    A[理论基础] --> B[编程范式]
+    A --> C[Rust语言理论]
+    B --> D[设计模式]
+    B --> E[高级模式]
+    D --> F[并发模式]
+    D --> G[分布式模式]
+    D --> H[工作流模式]
+    E --> I[异步编程]
+    F --> J[系统集成]
+    G --> J
+    H --> J
+    I --> J
+    J --> K[性能优化]
+    K --> L[行业应用]
+`
+
+

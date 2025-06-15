@@ -1,4 +1,4 @@
-# 4.2.2 事件存储 (Event Storage)
+﻿# 4.2.2 事件存储 (Event Storage)
 
 ## 概述
 
@@ -8,7 +8,7 @@
 
 ### 4.2.2.1 事件存储定义
 
-**定义 4.2.2.1** (事件存储)
+****定义 4**.2.2.1** (事件存储)
 事件存储是一个四元组 $ES = (E, \mathcal{S}, \mathcal{I}, \mathcal{Q})$，其中：
 
 - $E$ 是事件集合
@@ -16,45 +16,45 @@
 - $\mathcal{I}$ 是索引策略，$\mathcal{I}: E \rightarrow \mathcal{P}(K)$
 - $\mathcal{Q}$ 是查询策略，$\mathcal{Q}: Q \rightarrow \mathcal{P}(E)$
 
-**定义 4.2.2.2** (事件序列)
+****定义 4**.2.2.2** (事件序列)
 事件序列是一个有序的事件列表 $\sigma = \langle e_1, e_2, \ldots, e_n \rangle$，满足：
 
 $$\forall i < j, e_i.timestamp \leq e_j.timestamp$$
 
-**定义 4.2.2.3** (事件流)
+****定义 4**.2.2.3** (事件流)
 事件流是一个无限的事件序列 $\phi = \langle e_1, e_2, \ldots \rangle$，满足：
 
 $$\forall i \in \mathbb{N}, e_i.timestamp \leq e_{i+1}.timestamp$$
 
-**定义 4.2.2.4** (存储一致性)
+****定义 4**.2.2.4** (存储一致性)
 存储一致性定义为：
 
 $$\forall e \in E, \forall s \in \mathcal{S}(e), \text{ if } e \text{ is stored in } s \text{ then } e \text{ is retrievable from } s$$
 
 ### 4.2.2.2 事件溯源定义
 
-**定义 4.2.2.5** (事件溯源)
+****定义 4**.2.2.5** (事件溯源)
 事件溯源是一个三元组 $ES = (E, \mathcal{R}, \mathcal{S})$，其中：
 
 - $E$ 是事件集合
 - $\mathcal{R}$ 是重建函数，$\mathcal{R}: \mathcal{P}(E) \rightarrow S$
 - $\mathcal{S}$ 是状态集合
 
-**定义 4.2.2.6** (状态重建)
+****定义 4**.2.2.6** (状态重建)
 状态重建定义为：
 
 $$reconstruct(S_0, \sigma) = \mathcal{R}(\sigma)(S_0)$$
 
 其中 $S_0$ 是初始状态，$\sigma$ 是事件序列。
 
-**定义 4.2.2.7** (事件溯源正确性)
+****定义 4**.2.2.7** (事件溯源正确性)
 事件溯源正确性定义为：
 
 $$\forall \sigma_1, \sigma_2, \text{ if } \sigma_1 \subseteq \sigma_2 \text{ then } reconstruct(S_0, \sigma_1) \subseteq reconstruct(S_0, \sigma_2)$$
 
 ### 4.2.2.3 CQRS模式定义
 
-**定义 4.2.2.8** (CQRS模式)
+****定义 4**.2.2.8** (CQRS模式)
 CQRS模式是一个五元组 $CQRS = (C, Q, \mathcal{E}, \mathcal{P}, \mathcal{S})$，其中：
 
 - $C$ 是命令集合
@@ -63,14 +63,14 @@ CQRS模式是一个五元组 $CQRS = (C, Q, \mathcal{E}, \mathcal{P}, \mathcal{S
 - $\mathcal{P}$ 是投影函数，$\mathcal{P}: \mathcal{E} \rightarrow \mathcal{V}$
 - $\mathcal{S}$ 是状态集合
 
-**定义 4.2.2.9** (命令处理)
+****定义 4**.2.2.9** (命令处理)
 命令处理定义为：
 
 $$process(c, S) = \mathcal{E}(c, S)$$
 
 其中 $c$ 是命令，$S$ 是当前状态。
 
-**定义 4.2.2.10** (查询处理)
+****定义 4**.2.2.10** (查询处理)
 查询处理定义为：
 
 $$query(q, \mathcal{V}) = \mathcal{Q}(q, \mathcal{V})$$
@@ -79,7 +79,7 @@ $$query(q, \mathcal{V}) = \mathcal{Q}(q, \mathcal{V})$$
 
 ## 核心定理
 
-### 定理 4.2.2.1 (事件存储持久性)
+### **定理 4**.2.2.1 (事件存储持久性)
 
 **定理**: 对于事件存储 $ES = (E, \mathcal{S}, \mathcal{I}, \mathcal{Q})$，如果存储策略 $\mathcal{S}$ 满足持久性，则：
 
@@ -95,7 +95,7 @@ $$\forall s \in \mathcal{S}(e), s \text{ is persistent}$$
 因此：
 $$e \text{ is never lost}$$
 
-### 定理 4.2.2.2 (事件溯源一致性)
+### **定理 4**.2.2.2 (事件溯源一致性)
 
 **定理**: 对于事件溯源 $ES = (E, \mathcal{R}, \mathcal{S})$，如果重建函数 $\mathcal{R}$ 是确定性的，则：
 
@@ -112,7 +112,7 @@ $$\forall \sigma_1, \sigma_2, \text{ if } \sigma_1 = \sigma_2 \text{ then } \mat
 所以：
 $$reconstruct(S_0, \sigma_1) = reconstruct(S_0, \sigma_2)$$
 
-### 定理 4.2.2.3 (CQRS分离性)
+### **定理 4**.2.2.3 (CQRS分离性)
 
 **定理**: 对于CQRS模式 $CQRS = (C, Q, \mathcal{E}, \mathcal{P}, \mathcal{S})$，命令和查询是分离的：
 
@@ -818,3 +818,4 @@ impl Projector<Event> for UserProjector {
 ## 总结
 
 事件存储是事件驱动架构的基础，通过事件溯源和CQRS模式，提供了强大的数据持久化和查询能力。通过形式化定义和Rust实现，我们建立了完整的事件存储框架，支持多种存储策略和查询模式，为构建可扩展的事件驱动系统提供了重要基础。
+

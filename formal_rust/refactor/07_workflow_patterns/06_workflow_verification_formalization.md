@@ -1,4 +1,4 @@
-# 工作流验证形式化理论
+﻿# 工作流验证形式化理论
 
 (Workflow Verification Formalization)
 
@@ -43,8 +43,7 @@
 
 ### 1.2 研究目标
 
-1. **形式化定义**: 建立工作流验证的严格数学定义
-2. **验证算法理论**: 定义各种验证算法的理论基础
+1. **形式化定义**: 建立工作流验证的严格数学**定义 2**. **验证算法理论**: 定义各种验证算法的理论基础
 3. **性质验证理论**: 建立工作流性质的验证方法
 4. **实现理论**: 提供高效的Rust实现
 
@@ -61,27 +60,27 @@
 
 ### 2.1 基本概念
 
-**定义 2.1** (工作流性质)
+****定义 2**.1** (工作流性质)
 工作流性质是一个谓词 $P: \mathcal{W} \rightarrow \mathbb{B}$，其中 $\mathcal{W}$ 是工作流集合。
 
-**定义 2.2** (验证问题)
+****定义 2**.2** (验证问题)
 验证问题是判断工作流 $W$ 是否满足性质 $P$：
 $$W \models P \Leftrightarrow P(W) = \text{true}$$
 
-**定义 2.3** (验证算法)
+****定义 2**.3** (验证算法)
 验证算法是一个函数 $V: \mathcal{W} \times \mathcal{P} \rightarrow \mathbb{B}$，其中 $\mathcal{P}$ 是性质集合。
 
 ### 2.2 验证性质分类
 
-**定义 2.4** (安全性性质)
+****定义 2**.4** (安全性性质)
 安全性性质 $P_{safe}$ 定义为：
 $$P_{safe}(W) = \forall \pi \in \text{paths}(W): \text{safe}(\pi)$$
 
-**定义 2.5** (活性性质)
+****定义 2**.5** (活性性质)
 活性性质 $P_{live}$ 定义为：
 $$P_{live}(W) = \forall s \in \text{states}(W): \exists \pi: s \rightarrow^* \text{final}$$
 
-**定义 2.6** (公平性性质)
+****定义 2**.6** (公平性性质)
 公平性性质 $P_{fair}$ 定义为：
 $$P_{fair}(W) = \forall r \in \text{resources}(W): \text{fair\_allocation}(r)$$
 
@@ -91,7 +90,7 @@ $$P_{fair}(W) = \forall r \in \text{resources}(W): \text{fair\_allocation}(r)$$
 
 ### 3.1 模型检查
 
-**定义 3.1** (模型检查)
+****定义 3**.1** (模型检查)
 
 ```latex
 模型检查是验证工作流 $W$ 是否满足性质 $P$ 的过程：
@@ -101,21 +100,21 @@ $$\text{ModelCheck}(W, P) = \begin{cases}
 \end{cases}$$
 ```
 
-**定义 3.2** (状态空间)
+****定义 3**.2** (状态空间)
 工作流的状态空间定义为：
 $$\text{StateSpace}(W) = \{(s, e, s') \mid s \xrightarrow{e} s'\}$$
 
-**定义 3.3** (可达性分析)
+****定义 3**.3** (可达性分析)
 可达性分析检查状态 $s$ 是否可达：
 $$\text{Reachable}(W, s) = \exists \pi: s_0 \rightarrow^* s$$
 
 ### 3.2 性质规范
 
-**定义 3.4** (线性时序逻辑)
+****定义 3**.4** (线性时序逻辑)
 线性时序逻辑公式 $\phi$ 定义为：
 $$\phi ::= p \mid \neg \phi \mid \phi \land \psi \mid \phi \lor \psi \mid \mathbf{X} \phi \mid \mathbf{F} \phi \mid \mathbf{G} \phi \mid \phi \mathbf{U} \psi$$
 
-**定义 3.5** (计算树逻辑)
+****定义 3**.5** (计算树逻辑)
 计算树逻辑公式 $\psi$ 定义为：
 $$\psi ::= p \mid \neg \psi \mid \psi \land \chi \mid \psi \lor \chi \mid \mathbf{EX} \psi \mid \mathbf{EF} \psi \mid \mathbf{EG} \psi \mid \mathbf{E}[\psi \mathbf{U} \chi]$$
 
@@ -155,7 +154,7 @@ fn dfs_helper(workflow: &Workflow, current: State, target: State, visited: &mut 
 }
 ```
 
-**定理 4.1** (DFS正确性)
+****定理 4**.1** (DFS正确性)
 深度优先搜索算法能够正确判断状态可达性。
 
 **证明**:
@@ -185,7 +184,7 @@ fn ctl_model_check(workflow: &Workflow, formula: &CTLFormula) -> bool {
 }
 ```
 
-**定理 4.2** (CTL模型检查正确性)
+****定理 4**.2** (CTL模型检查正确性)
 CTL模型检查算法能够正确验证CTL公式。
 
 **证明**:
@@ -214,7 +213,7 @@ fn has_enabled_transitions(workflow: &Workflow, state: State) -> bool {
 }
 ```
 
-**定理 4.3** (死锁检测正确性)
+****定理 4**.3** (死锁检测正确性)
 死锁检测算法能够正确识别所有死锁状态。
 
 **证明**:
@@ -226,13 +225,13 @@ fn has_enabled_transitions(workflow: &Workflow, state: State) -> bool {
 
 ### 5.1 验证复杂性
 
-**定理 5.1** (模型检查复杂性)
+****定理 5**.1** (模型检查复杂性)
 CTL模型检查的时间复杂度为 $O(|W| \cdot |\phi|)$，其中 $|W|$ 是工作流大小，$|\phi|$ 是公式大小。
 
 **证明**:
 通过分析CTL模型检查算法的执行过程证明。
 
-**定理 5.2** (可达性复杂性)
+****定理 5**.2** (可达性复杂性)
 可达性分析的时间复杂度为 $O(|W|)$。
 
 **证明**:
@@ -240,13 +239,13 @@ CTL模型检查的时间复杂度为 $O(|W| \cdot |\phi|)$，其中 $|W|$ 是工
 
 ### 5.2 验证完备性
 
-**定理 5.3** (验证完备性)
+****定理 5**.3** (验证完备性)
 如果验证算法 $V$ 返回 $\text{true}$，则工作流 $W$ 确实满足性质 $P$。
 
 **证明**:
 通过归纳法证明验证算法的完备性。
 
-**定理 5.4** (验证可靠性)
+****定理 5**.4** (验证可靠性)
 如果工作流 $W$ 满足性质 $P$，则验证算法 $V$ 返回 $\text{true}$。
 
 **证明**:
@@ -872,8 +871,7 @@ mod tests {
 本文档建立了工作流验证的完整形式化理论体系：
 
 1. **基础理论**: 定义了工作流验证的基本概念和性质
-2. **形式化定义**: 建立了工作流验证的严格数学定义
-3. **算法理论**: 定义了各种验证算法的理论基础
+2. **形式化定义**: 建立了工作流验证的严格数学**定义 3**. **算法理论**: 定义了各种验证算法的理论基础
 4. **模型检查**: 建立了CTL模型检查的理论
 5. **核心定理**: 证明了验证的重要性质和复杂性
 
@@ -907,3 +905,4 @@ mod tests {
 **最后更新**: 2025-06-14
 **作者**: AI Assistant
 **状态**: 完成 ✅
+

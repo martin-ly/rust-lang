@@ -1,4 +1,4 @@
-# 并发安全的形式化理论
+﻿# 并发安全的形式化理论
 
 ## 目录
 
@@ -24,25 +24,25 @@
 
 ### 1.1. 并发模型
 
-**定义 1.1.1** (并发程序)
+****定义 1**.1.1** (并发程序)
 并发程序 $CP = (T, S, \delta, s_0)$ 其中：
 - $T = \{t_1, t_2, ..., t_n\}$: 线程集合
 - $S$: 状态集合
 - $\delta: S \times T \times \text{Action} \to S$: 状态转换函数
 - $s_0 \in S$: 初始状态
 
-**定义 1.1.2** (并发执行)
+****定义 1**.1.2** (并发执行)
 并发执行是一个交错序列 $\sigma = (t_1, a_1), (t_2, a_2), ..., (t_k, a_k)$ 其中：
 - $t_i \in T$: 执行线程
 - $a_i \in \text{Action}$: 执行动作
 - $\forall i: s_{i+1} = \delta(s_i, t_i, a_i)$
 
-**定义 1.1.3** (并发动作)
+****定义 1**.1.3** (并发动作)
 并发动作集合 $\text{Action} = \{\text{read}, \text{write}, \text{lock}, \text{unlock}, \text{fork}, \text{join}\}$
 
 ### 1.2. 数据竞争定义
 
-**定义 1.2.1** (数据竞争)
+****定义 1**.2.1** (数据竞争)
 对于变量 $x$ 和线程 $t_1, t_2$，存在数据竞争当且仅当：
 1. $t_1$ 和 $t_2$ 同时访问 $x$
 2. 至少有一个访问是写操作
@@ -51,7 +51,7 @@
 **形式化定义**:
 $$\text{race}(x, t_1, t_2) \iff \exists a_1, a_2: \text{access}(t_1, x, a_1) \land \text{access}(t_2, x, a_2) \land (\text{write}(a_1) \lor \text{write}(a_2)) \land \neg \text{sync}(t_1, t_2)$$
 
-**定义 1.2.2** (同步关系)
+****定义 1**.2.2** (同步关系)
 同步关系 $\text{sync} \subseteq T \times T$ 满足：
 1. **自反性**: $\forall t: \text{sync}(t, t)$
 2. **对称性**: $\text{sync}(t_1, t_2) \implies \text{sync}(t_2, t_1)$
@@ -59,18 +59,18 @@ $$\text{race}(x, t_1, t_2) \iff \exists a_1, a_2: \text{access}(t_1, x, a_1) \la
 
 ### 1.3. 死锁理论
 
-**定义 1.3.1** (死锁)
+****定义 1**.3.1** (死锁)
 死锁是一个状态集合 $D = \{s_1, s_2, ..., s_n\}$ 满足：
 1. 每个线程都在等待其他线程释放资源
 2. 形成循环等待链
 3. 无法通过正常执行打破循环
 
-**定义 1.3.2** (资源分配图)
+****定义 1**.3.2** (资源分配图)
 资源分配图 $G = (V, E)$ 其中：
 - $V = T \cup R$: 顶点集合（线程和资源）
 - $E = E_{request} \cup E_{allocation}$: 边集合
 
-**定理 1.3.1** (死锁检测)
+****定理 1**.3.1** (死锁检测)
 死锁存在当且仅当资源分配图中存在环。
 
 **证明**:
@@ -79,13 +79,13 @@ $$\text{race}(x, t_1, t_2) \iff \exists a_1, a_2: \text{access}(t_1, x, a_1) \la
 
 ### 1.4. 并发控制
 
-**定义 1.4.1** (并发控制协议)
+****定义 1**.4.1** (并发控制协议)
 并发控制协议 $P = (L, A, R)$ 其中：
 - $L$: 锁集合
 - $A$: 获取规则
 - $R$: 释放规则
 
-**定义 1.4.2** (两阶段锁定)
+****定义 1**.4.2** (两阶段锁定)
 两阶段锁定协议要求：
 1. **增长阶段**: 只能获取锁，不能释放锁
 2. **收缩阶段**: 只能释放锁，不能获取锁
@@ -94,7 +94,7 @@ $$\text{race}(x, t_1, t_2) \iff \exists a_1, a_2: \text{access}(t_1, x, a_1) \la
 
 ### 2.1. 并发状态机
 
-**定义 2.1.1** (并发状态机)
+****定义 2**.1.1** (并发状态机)
 并发状态机 $CSM = (Q, \Sigma, \delta, q_0, F)$ 其中：
 - $Q = S \times \text{ThreadStates}$: 状态集合
 - $\Sigma = T \times \text{Action}$: 输入字母表
@@ -102,7 +102,7 @@ $$\text{race}(x, t_1, t_2) \iff \exists a_1, a_2: \text{access}(t_1, x, a_1) \la
 - $q_0 \in Q$: 初始状态
 - $F \subseteq Q$: 接受状态集合
 
-**定义 2.1.2** (线程状态)
+****定义 2**.1.2** (线程状态)
 线程状态 $\text{ThreadStates} = \{\text{running}, \text{waiting}, \text{blocked}, \text{terminated}\}$
 
 **转移规则**:
@@ -113,20 +113,20 @@ $$\text{race}(x, t_1, t_2) \iff \exists a_1, a_2: \text{access}(t_1, x, a_1) \la
 
 ### 2.2. 同步原语
 
-**定义 2.2.1** (互斥锁)
+****定义 2**.2.1** (互斥锁)
 互斥锁 $M = (S, L, U)$ 其中：
 - $S \in \{\text{locked}, \text{unlocked}\}$: 锁状态
 - $L: \text{Thread} \to \text{Bool}$: 锁定函数
 - $U: \text{Thread} \to \text{Bool}$: 解锁函数
 
-**定义 2.2.2** (读写锁)
+****定义 2**.2.2** (读写锁)
 读写锁 $RW = (S, R, W, U)$ 其中：
 - $S \in \{\text{free}, \text{read\_locked}, \text{write\_locked}\}$: 锁状态
 - $R: \text{Thread} \to \text{Bool}$: 读锁定函数
 - $W: \text{Thread} \to \text{Bool}$: 写锁定函数
 - $U: \text{Thread} \to \text{Bool}$: 解锁函数
 
-**定义 2.2.3** (条件变量)
+****定义 2**.2.3** (条件变量)
 条件变量 $CV = (W, S, N)$ 其中：
 - $W \subseteq \text{Thread}$: 等待线程集合
 - $S: \text{Thread} \to \text{Bool}$: 信号函数
@@ -134,18 +134,18 @@ $$\text{race}(x, t_1, t_2) \iff \exists a_1, a_2: \text{access}(t_1, x, a_1) \la
 
 ### 2.3. 内存模型
 
-**定义 2.3.1** (内存模型)
+****定义 2**.3.1** (内存模型)
 内存模型 $MM = (M, \text{hb}, \text{rf}, \text{co})$ 其中：
 - $M$: 内存操作集合
 - $\text{hb} \subseteq M \times M$: happens-before关系
 - $\text{rf} \subseteq M \times M$: reads-from关系
 - $\text{co} \subseteq M \times M$: coherence-order关系
 
-**定义 2.3.2** (顺序一致性)
+****定义 2**.3.2** (顺序一致性)
 顺序一致性要求：
 $$\forall \text{execution}: \exists \text{total order} \supseteq \text{hb}$$
 
-**定义 2.3.3** (因果一致性)
+****定义 2**.3.3** (因果一致性)
 因果一致性要求：
 $$\text{hb} \cup \text{rf} \cup \text{co} \text{ is acyclic}$$
 
@@ -153,45 +153,45 @@ $$\text{hb} \cup \text{rf} \cup \text{co} \text{ is acyclic}$$
 
 ### 3.1. 数据竞争自由定理
 
-**定理 3.1.1** (数据竞争自由)
+****定理 3**.1.1** (数据竞争自由)
 如果程序 $P$ 通过Rust借用检查，则 $P$ 无数据竞争：
 $$\forall x, t_1, t_2: \neg \text{race}(x, t_1, t_2)$$
 
 **证明**:
-通过借用规则证明：
+通过借用规则**证明**：
 1. 可变借用是唯一的
 2. 不可变借用可以共享
 3. 可变借用和不可变借用不能同时存在
 
-**定理 3.1.2** (Send和Sync保证)
+****定理 3**.1.2** (Send和Sync保证)
 如果类型 $T$ 实现 `Send` 和 `Sync`，则：
 - `Send`: 可以安全地跨线程发送
 - `Sync`: 可以安全地跨线程共享引用
 
 ### 3.2. 死锁自由定理
 
-**定理 3.2.1** (死锁自由)
+****定理 3**.2.1** (死锁自由)
 如果程序 $P$ 使用Rust的所有权系统，则 $P$ 无死锁：
 $$\forall \text{execution}: \neg \text{deadlock}$$
 
 **证明**:
-通过所有权系统证明：
+通过所有权系统**证明**：
 1. 每个资源最多有一个所有者
 2. 资源转移是原子的
 3. 不存在循环等待
 
-**定理 3.2.2** (活锁自由)
+****定理 3**.2.2** (活锁自由)
 如果程序 $P$ 使用公平调度，则 $P$ 无活锁：
 $$\forall \text{execution}: \neg \text{livelock}$$
 
 ### 3.3. 活锁自由定理
 
-**定理 3.3.1** (活锁自由)
+****定理 3**.3.1** (活锁自由)
 如果程序 $P$ 使用Rust的异步运行时，则 $P$ 无活锁：
 $$\forall \text{execution}: \text{progress}$$
 
 **证明**:
-通过异步运行时证明：
+通过异步运行时**证明**：
 1. 任务调度是公平的
 2. 没有优先级反转
 3. 资源分配是饥饿自由的
@@ -740,8 +740,7 @@ pub enum ConcurrencyError {
 本文档提供了并发安全的形式化理论基础和Rust实现方案。通过类型系统、同步原语和并发控制机制，Rust在编译时保证了并发安全。
 
 关键要点：
-1. **形式化理论**: 基于状态机和图论的严格定义
-2. **类型安全**: 通过Send和Sync特征保证并发安全
+1. **形式化理论**: 基于状态机和图论的严格**定义 2**. **类型安全**: 通过Send和Sync特征保证并发安全
 3. **同步原语**: 提供高效的锁和无锁数据结构
 4. **死锁检测**: 编译时和运行时死锁检测
 5. **性能优化**: 最小化并发开销

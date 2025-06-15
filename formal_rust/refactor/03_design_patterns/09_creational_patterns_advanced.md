@@ -1,8 +1,8 @@
-# 3.1 创建型设计模式
+﻿# 3.1 创建型设计模式
 
 ## 3.1.1 形式化定义
 
-### 定义 3.1.1 (创建型模式)
+### **定义 3**.1.1 (创建型模式)
 
 创建型模式是处理对象创建机制的抽象模式，定义为：
 $$\mathcal{C} = \{P | P: \mathcal{F} \rightarrow \mathcal{O}\}$$
@@ -12,19 +12,19 @@ $$\mathcal{C} = \{P | P: \mathcal{F} \rightarrow \mathcal{O}\}$$
 - $\mathcal{O}$ 为对象空间
 - $P$ 为创建模式
 
-### 定义 3.1.2 (对象创建函数)
+### **定义 3**.1.2 (对象创建函数)
 
 对象创建函数 $f: \mathcal{P} \rightarrow \mathcal{O}$ 满足：
 $$\forall p \in \mathcal{P}, f(p) \in \mathcal{O} \land \text{Valid}(f(p))$$
 
 ## 3.1.2 单例模式 (Singleton)
 
-### 定义 3.1.3 (单例模式)
+### **定义 3**.1.3 (单例模式)
 
 单例模式 $\mathcal{S}$ 定义为：
 $$\mathcal{S} = \{o \in \mathcal{O} | \forall o' \in \mathcal{O}, o' = o \lor o' \not\equiv o\}$$
 
-### 定理 3.1.1 (单例唯一性)
+### **定理 3**.1.1 (单例唯一性)
 
 在单例模式中，对象实例是唯一的。
 
@@ -68,7 +68,7 @@ impl Singleton {
 
 ### 形式化验证
 
-**定理 3.1.2 (单例线程安全)**
+****定理 3**.1.2 (单例线程安全)**
 上述实现是线程安全的。
 
 **证明**：
@@ -79,12 +79,12 @@ impl Singleton {
 
 ## 3.1.3 工厂方法模式 (Factory Method)
 
-### 定义 3.1.4 (工厂方法)
+### **定义 3**.1.4 (工厂方法)
 
 工厂方法模式定义为：
 $$\mathcal{F}_M = \{f: \mathcal{P} \rightarrow \mathcal{O} | \forall p \in \mathcal{P}, f(p) \in \text{Create}(p)\}$$
 
-### 定理 3.1.3 (工厂方法正确性)
+### **定理 3**.1.3 (工厂方法正确性)
 
 工厂方法创建的对象满足产品规范。
 
@@ -153,7 +153,7 @@ impl Factory for ConcreteFactoryB {
 
 ## 3.1.4 抽象工厂模式 (Abstract Factory)
 
-### 定义 3.1.5 (抽象工厂)
+### **定义 3**.1.5 (抽象工厂)
 
 抽象工厂模式定义为：
 $$\mathcal{A}_F = \{F: \mathcal{F}_S \rightarrow \mathcal{P}_S | \forall s \in \mathcal{F}_S, F(s) \in \mathcal{P}_S\}$$
@@ -163,7 +163,7 @@ $$\mathcal{A}_F = \{F: \mathcal{F}_S \rightarrow \mathcal{P}_S | \forall s \in \
 - $\mathcal{F}_S$ 为产品族空间
 - $\mathcal{P}_S$ 为产品空间
 
-### 定理 3.1.4 (产品族一致性)
+### **定理 3**.1.4 (产品族一致性)
 
 抽象工厂创建的产品族是一致的。
 
@@ -248,14 +248,14 @@ impl AbstractFactory for ConcreteFactory2 {
 
 ## 3.1.5 建造者模式 (Builder)
 
-### 定义 3.1.6 (建造者模式)
+### **定义 3**.1.6 (建造者模式)
 
 建造者模式定义为：
 $$\mathcal{B} = \{b: \mathcal{S}_1 \times \mathcal{S}_2 \times \cdots \times \mathcal{S}_n \rightarrow \mathcal{O} | \text{Stepwise}(b)\}$$
 
 其中 $\text{Stepwise}(b)$ 表示分步构建。
 
-### 定理 3.1.5 (建造者完整性)
+### **定理 3**.1.5 (建造者完整性)
 
 建造者模式可以构建复杂对象。
 
@@ -336,12 +336,12 @@ impl Director {
 
 ## 3.1.6 原型模式 (Prototype)
 
-### 定义 3.1.7 (原型模式)
+### **定义 3**.1.7 (原型模式)
 
 原型模式定义为：
 $$\mathcal{P}_T = \{p: \mathcal{O} \rightarrow \mathcal{O} | \forall o \in \mathcal{O}, p(o) \equiv o \land p(o) \neq o\}$$
 
-### 定理 3.1.6 (原型克隆性)
+### **定理 3**.1.6 (原型克隆性)
 
 原型模式可以创建对象的深拷贝。
 
@@ -404,12 +404,12 @@ impl PrototypeRegistry {
 
 ## 3.1.7 创建型模式比较
 
-### 定义 3.1.8 (模式复杂度)
+### **定义 3**.1.8 (模式复杂度)
 
 模式复杂度定义为：
 $$C(P) = |\text{Components}(P)| + |\text{Relations}(P)|$$
 
-### 定理 3.1.7 (模式选择)
+### **定理 3**.1.7 (模式选择)
 
 不同场景下应选择不同的创建型模式。
 
@@ -423,12 +423,12 @@ $$C(P) = |\text{Components}(P)| + |\text{Relations}(P)|$$
 
 ## 3.1.8 形式化验证
 
-### 定义 3.1.9 (模式正确性)
+### **定义 3**.1.9 (模式正确性)
 
 模式 $P$ 是正确的，当且仅当：
 $$\forall i \in \mathcal{I}, P(i) \in \mathcal{O} \land \text{Valid}(P(i))$$
 
-### 定理 3.1.8 (创建型模式正确性)
+### **定理 3**.1.8 (创建型模式正确性)
 
 所有创建型模式都是正确的。
 
@@ -440,13 +440,13 @@ $$\forall i \in \mathcal{I}, P(i) \in \mathcal{O} \land \text{Valid}(P(i))$$
 
 ## 3.1.9 性能分析
 
-### 定义 3.1.10 (创建复杂度)
+### **定义 3**.1.10 (创建复杂度)
 
 创建复杂度定义为：
 $$T(n) = O(f(n))$$
 其中 $n$ 为对象复杂度，$f(n)$ 为创建函数。
 
-### 定理 3.1.9 (模式性能)
+### **定理 3**.1.9 (模式性能)
 
 不同模式的性能特征不同：
 
@@ -467,3 +467,4 @@ $$T(n) = O(f(n))$$
 1. Gamma, E., Helm, R., Johnson, R., & Vlissides, J. (1994). Design Patterns: Elements of Reusable Object-Oriented Software. Addison-Wesley.
 2. Freeman, E., Robson, E., Sierra, K., & Bates, B. (2004). Head First Design Patterns. O'Reilly Media.
 3. Liskov, B. H., & Wing, J. M. (1994). A behavioral notion of subtyping. ACM Transactions on Programming Languages and Systems, 16(6), 1811-1841.
+

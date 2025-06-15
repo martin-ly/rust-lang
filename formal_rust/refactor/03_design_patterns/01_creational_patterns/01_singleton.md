@@ -1,4 +1,4 @@
-# 单例模式 (Singleton Pattern) - 形式化重构
+﻿# 单例模式 (Singleton Pattern) - 形式化重构
 
 ## 目录 (Table of Contents)
 
@@ -16,7 +16,7 @@
 
 ### 1.1 单例模式五元组 (Singleton Pattern Quintuple)
 
-**定义 1.1.1 (单例模式)**
+****定义 1**.1.1 (单例模式)**
 
 设 $S = (N, I, S, R, C)$ 为单例模式，其中：
 
@@ -28,7 +28,7 @@
 
 ### 1.2 单例实例定义 (Singleton Instance Definition)
 
-**定义 1.2.1 (单例实例)**
+****定义 1**.2.1 (单例实例)**
 
 设 $I$ 为单例实例，满足：
 
@@ -37,7 +37,7 @@ $$I = \begin{cases}
 \text{instance} & \text{if 已初始化}
 \end{cases}$$
 
-**定义 1.2.2 (单例状态)**
+****定义 1**.2.2 (单例状态)**
 
 单例的状态函数定义为：
 
@@ -47,7 +47,7 @@ $$\text{State}: \mathbb{T} \rightarrow \{\text{Uninitialized}, \text{Initialized
 
 ### 1.3 单例操作定义 (Singleton Operation Definition)
 
-**定义 1.3.1 (获取实例操作)**
+****定义 1**.3.1 (获取实例操作)**
 
 设 $\text{get\_instance}: \mathbb{T} \rightarrow I$ 为获取实例操作，满足：
 
@@ -56,7 +56,7 @@ $$\text{get\_instance}(t) = \begin{cases}
 \text{return\_existing}() & \text{if } \text{State}(t) = \text{Initialized}
 \end{cases}$$
 
-**定义 1.3.2 (创建实例操作)**
+****定义 1**.3.2 (创建实例操作)**
 
 设 $\text{create\_instance}: \emptyset \rightarrow I$ 为创建实例操作，满足：
 
@@ -68,13 +68,13 @@ $$\text{create\_instance}() = \text{new Singleton}()$$
 
 ### 2.1 唯一性理论 (Uniqueness Theory)
 
-**定义 2.1.1 (唯一性)**
+****定义 2**.1.1 (唯一性)**
 
 单例模式满足唯一性，当且仅当：
 
 $$\forall t_1, t_2 \in \mathbb{T}, \text{get\_instance}(t_1) = \text{get\_instance}(t_2)$$
 
-**定义 2.1.2 (全局性)**
+****定义 2**.1.2 (全局性)**
 
 单例模式满足全局性，当且仅当：
 
@@ -82,13 +82,13 @@ $$\forall t \in \mathbb{T}, \exists i \in I, \text{get\_instance}(t) = i$$
 
 ### 2.2 线程安全理论 (Thread Safety Theory)
 
-**定义 2.2.1 (线程安全)**
+****定义 2**.2.1 (线程安全)**
 
 单例模式是线程安全的，当且仅当：
 
 $$\forall t_1, t_2 \in \mathbb{T}, \text{Thread}_1(t_1) \land \text{Thread}_2(t_2) \implies \text{get\_instance}(t_1) = \text{get\_instance}(t_2)$$
 
-**定义 2.2.2 (原子性)**
+****定义 2**.2.2 (原子性)**
 
 单例创建操作是原子的，当且仅当：
 
@@ -96,13 +96,13 @@ $$\text{Atomic}(\text{create\_instance}())$$
 
 ### 2.3 延迟初始化理论 (Lazy Initialization Theory)
 
-**定义 2.3.1 (延迟初始化)**
+****定义 2**.3.1 (延迟初始化)**
 
 单例模式支持延迟初始化，当且仅当：
 
 $$\exists t \in \mathbb{T}, \text{State}(t) = \text{Uninitialized} \land \text{get\_instance}(t) \neq \text{null}$$
 
-**定义 2.3.2 (初始化时机)**
+****定义 2**.3.2 (初始化时机)**
 
 初始化时机函数定义为：
 
@@ -116,7 +116,7 @@ $$\text{InitTime}: \mathbb{T} \rightarrow \mathbb{T}$$
 
 ### 3.1 唯一性定理 (Uniqueness Theorem)
 
-**定理 3.1.1 (单例唯一性)**
+****定理 3**.1.1 (单例唯一性)**
 
 对于任意单例模式 $S$，在任意时刻 $t \in \mathbb{T}$，最多存在一个实例。
 
@@ -131,12 +131,12 @@ $$\text{InitTime}: \mathbb{T} \rightarrow \mathbb{T}$$
 
 因此，单例模式在任意时刻最多存在一个实例。
 
-**定理 3.1.2 (全局访问性)**
+****定理 3**.1.2 (全局访问性)**
 
 对于任意单例模式 $S$，实例可以通过全局访问点获取。
 
 **证明**:
-根据定义 1.3.1，$\text{get\_instance}$ 操作是全局可访问的。
+根据**定义 1**.3.1，$\text{get\_instance}$ 操作是全局可访问的。
 
 对于任意时刻 $t \in \mathbb{T}$，调用 $\text{get\_instance}(t)$ 都能获得实例。
 
@@ -144,7 +144,7 @@ $$\text{InitTime}: \mathbb{T} \rightarrow \mathbb{T}$$
 
 ### 3.2 线程安全定理 (Thread Safety Theorem)
 
-**定理 3.2.1 (线程安全保证)**
+****定理 3**.2.1 (线程安全保证)**
 
 如果单例模式的创建操作是原子的，则该模式是线程安全的。
 
@@ -161,12 +161,12 @@ $$\text{InitTime}: \mathbb{T} \rightarrow \mathbb{T}$$
 
 ### 3.3 延迟初始化定理 (Lazy Initialization Theorem)
 
-**定理 3.3.1 (延迟初始化正确性)**
+****定理 3**.3.1 (延迟初始化正确性)**
 
 如果单例模式支持延迟初始化，则实例只在首次访问时创建。
 
 **证明**:
-根据定义 2.3.1，存在时刻 $t$ 使得 $\text{State}(t) = \text{Uninitialized}$。
+根据**定义 2**.3.1，存在时刻 $t$ 使得 $\text{State}(t) = \text{Uninitialized}$。
 
 在时刻 $t$ 调用 $\text{get\_instance}(t)$ 时，由于状态为未初始化，将调用 $\text{create\_instance}()$。
 
@@ -178,18 +178,18 @@ $$\text{InitTime}: \mathbb{T} \rightarrow \mathbb{T}$$
 
 ### 3.4 性能定理 (Performance Theorem)
 
-**定理 3.4.1 (访问复杂度)**
+****定理 3**.4.1 (访问复杂度)**
 
 单例模式的实例访问时间复杂度为 $O(1)$。
 
 **证明**:
-根据定义 1.3.1，$\text{get\_instance}()$ 操作只包含：
+根据**定义 1**.3.1，$\text{get\_instance}()$ 操作只包含：
 1. 状态检查：$O(1)$
 2. 实例返回：$O(1)$
 
 因此，总时间复杂度为 $O(1)$。
 
-**定理 3.4.2 (空间复杂度)**
+****定理 3**.4.2 (空间复杂度)**
 
 单例模式的空间复杂度为 $O(1)$。
 
@@ -567,7 +567,7 @@ mod tests {
 
 ### 5.1 时间复杂度分析 (Time Complexity Analysis)
 
-**定理 5.1.1 (访问时间复杂度)**
+****定理 5**.1.1 (访问时间复杂度)**
 
 单例模式的访问时间复杂度为 $O(1)$。
 
@@ -580,7 +580,7 @@ mod tests {
 
 ### 5.2 空间复杂度分析 (Space Complexity Analysis)
 
-**定理 5.2.1 (空间复杂度)**
+****定理 5**.2.1 (空间复杂度)**
 
 单例模式的空间复杂度为 $O(1)$。
 
@@ -593,7 +593,7 @@ mod tests {
 
 ### 5.3 内存安全分析 (Memory Safety Analysis)
 
-**定理 5.3.1 (内存安全)**
+****定理 5**.3.1 (内存安全)**
 
 Rust实现的单例模式是内存安全的。
 
@@ -957,3 +957,4 @@ where
 **文档版本**: 1.0
 **最后更新**: 2024-12-19
 **状态**: 完成
+

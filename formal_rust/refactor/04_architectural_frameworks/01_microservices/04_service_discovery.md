@@ -1,4 +1,4 @@
-# 4.1.4 服务发现与注册 (Service Discovery and Registration)
+﻿# 4.1.4 服务发现与注册 (Service Discovery and Registration)
 
 ## 概述
 
@@ -8,7 +8,7 @@
 
 ### 4.1.4.1 服务发现系统定义
 
-**定义 4.1.4.1** (服务发现系统)
+****定义 4**.1.4.1** (服务发现系统)
 服务发现系统是一个五元组 $\mathcal{SD} = (S, R, D, H, \mathcal{T})$，其中：
 
 - $S$ 是服务集合，$S = \{s_1, s_2, \ldots, s_n\}$
@@ -17,7 +17,7 @@
 - $H$ 是健康检查函数，$H: S \rightarrow \{0,1\}$
 - $\mathcal{T}$ 是时间序列，$\mathcal{T} = \{t_1, t_2, \ldots\}$
 
-**定义 4.1.4.2** (服务元数据)
+****定义 4**.1.4.2** (服务元数据)
 服务元数据是一个六元组 $m = (id, name, version, endpoints, health, metadata)$，其中：
 
 - $id$ 是服务唯一标识符
@@ -27,12 +27,12 @@
 - $health$ 是健康状态
 - $metadata$ 是附加元数据
 
-**定义 4.1.4.3** (服务注册)
+****定义 4**.1.4.3** (服务注册)
 服务注册是一个函数 $register: S \times M \rightarrow R$，满足：
 
 $$\forall s \in S, m \in M: register(s, m) = R' \text{ where } R'(s) = R(s) \cup \{m\}$$
 
-**定义 4.1.4.4** (服务发现)
+****定义 4**.1.4.4** (服务发现)
 服务发现是一个函数 $discover: Q \rightarrow \mathcal{P}(S)$，满足：
 
 $$\forall q \in Q: discover(q) = \{s \in S \mid H(s) = 1 \land match(s, q)\}$$
@@ -41,7 +41,7 @@ $$\forall q \in Q: discover(q) = \{s \in S \mid H(s) = 1 \land match(s, q)\}$$
 
 ## 核心定理
 
-### 定理 4.1.4.1 (服务发现一致性)
+### **定理 4**.1.4.1 (服务发现一致性)
 
 **定理**: 对于服务发现系统 $\mathcal{SD} = (S, R, D, H, \mathcal{T})$，如果满足以下条件：
 
@@ -71,7 +71,7 @@ $$\lim_{t \to \infty} E_t = 0$$
 
 $$\lim_{t \to \infty} P(discover(q) = \{s \in S \mid H(s) = 1 \land match(s, q)\}) = 1$$
 
-### 定理 4.1.4.2 (服务发现可用性)
+### **定理 4**.1.4.2 (服务发现可用性)
 
 **定理**: 服务发现系统的可用性 $A$ 满足：
 
@@ -500,7 +500,7 @@ impl ServiceRegistry {
 
 ### 4.1.4.1 时间复杂度分析
 
-**定理 4.1.4.3** (服务发现时间复杂度)
+****定理 4**.1.4.3** (服务发现时间复杂度)
 服务发现算法的时间复杂度为：
 
 - 注册操作: $O(1)$
@@ -517,7 +517,7 @@ impl ServiceRegistry {
 
 ### 4.1.4.2 空间复杂度分析
 
-**定理 4.1.4.4** (服务发现空间复杂度)
+****定理 4**.1.4.4** (服务发现空间复杂度)
 服务发现系统的空间复杂度为 $O(n \cdot m)$，其中 $n$ 是服务数量，$m$ 是平均元数据大小。
 
 **证明**:
@@ -536,12 +536,12 @@ impl ServiceRegistry {
 
 ### 4.1.4.1 最终一致性
 
-**定义 4.1.4.5** (最终一致性)
+****定义 4**.1.4.5** (最终一致性)
 服务发现系统满足最终一致性，当且仅当：
 
 $$\forall q \in Q, \exists t_0: \forall t > t_0, discover_t(q) = discover_{t_0}(q)$$
 
-**定理 4.1.4.5** (最终一致性保证)
+****定理 4**.1.4.5** (最终一致性保证)
 如果服务发现系统满足以下条件：
 
 1. 注册操作的原子性
@@ -699,3 +699,4 @@ impl FailureRecovery {
 ---
 
 **下一节**: [4.1.5 容错与弹性](./05_fault_tolerance.md)
+

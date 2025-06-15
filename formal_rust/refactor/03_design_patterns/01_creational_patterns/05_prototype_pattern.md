@@ -1,4 +1,4 @@
-# 原型模式形式化重构 (Prototype Pattern Formal Refactoring)
+﻿# 原型模式形式化重构 (Prototype Pattern Formal Refactoring)
 
 ## 目录
 
@@ -102,7 +102,7 @@ $$\text{dynamic\_create}(type\_name) = \text{Registry}(type\_name).\text{clone}(
 **定理3.1.1 (克隆正确性)**
 如果克隆操作正确实现，则克隆对象与原对象内容等价且独立。
 
-**证明：**
+****证明**：**
 设 $p$ 为原型对象，$c = \text{clone}(p)$ 为克隆对象。
 
 1. **内容等价性**：
@@ -125,7 +125,7 @@ $$\text{dynamic\_create}(type\_name) = \text{Registry}(type\_name).\text{clone}(
 **定理3.2.1 (克隆性能优势)**
 对于复杂对象，克隆比重新创建更高效。
 
-**证明：**
+****证明**：**
 
 1. **创建成本分析**：
    - 新创建：需要完整的初始化过程
@@ -142,7 +142,7 @@ $$\text{dynamic\_create}(type\_name) = \text{Registry}(type\_name).\text{clone}(
 **定理3.2.2 (克隆复杂度)**
 克隆操作的复杂度为 $O(|S|)$，其中 $|S|$ 是对象状态大小。
 
-**证明：**
+****证明**：**
 
 1. 需要复制对象的所有状态
 2. 每个状态项的复制是常数时间
@@ -153,7 +153,7 @@ $$\text{dynamic\_create}(type\_name) = \text{Registry}(type\_name).\text{clone}(
 **定理3.3.1 (动态创建正确性)**
 通过原型注册表可以正确实现动态对象创建。
 
-**证明：**
+****证明**：**
 
 1. **类型安全**：
    - 注册表确保类型名称与原型对象对应
@@ -172,7 +172,7 @@ $$\text{dynamic\_create}(type\_name) = \text{Registry}(type\_name).\text{clone}(
 **定理3.4.1 (克隆内存管理)**
 克隆操作需要适当的内存管理策略。
 
-**证明：**
+****证明**：**
 
 1. **内存分配**：
    - 每个克隆都需要新的内存分配
@@ -820,3 +820,4 @@ $$\text{Reusability}(P) = \frac{|I|}{|S|} \cdot \frac{1}{\text{Complexity}(P)}$$
 4. **内存管理定理**：需要适当的内存管理
 
 原型模式通过严格的数学基础和形式化验证，为对象克隆和动态创建提供了可靠的理论保证和实践指导。
+

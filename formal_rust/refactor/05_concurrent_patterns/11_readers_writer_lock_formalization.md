@@ -1,4 +1,4 @@
-# 读写锁模式形式化理论
+﻿# 读写锁模式形式化理论
 
 (Readers-Writer Lock Pattern Formalization)
 
@@ -57,7 +57,7 @@
 
 设 $\mathcal{T}$ 为所有线程的集合，$\mathcal{R}$ 为所有读者的集合，$\mathcal{W}$ 为所有写者的集合，$\mathcal{S}$ 为所有状态的集合。
 
-**定义 2.1** (读写锁)
+****定义 2**.1** (读写锁)
 读写锁是一个七元组 $RWL = (S, R, W, \mu_r, \mu_w, \gamma, \delta)$，其中：
 
 - $S \in \mathcal{S}$ 是共享状态
@@ -68,7 +68,7 @@
 - $\gamma: RWL \rightarrow \{shared, exclusive, idle\}$ 是锁状态函数
 - $\delta: RWL \rightarrow \mathbb{N}$ 是读者计数函数
 
-**定义 2.2** (读者)
+****定义 2**.2** (读者)
 读者是一个四元组 $Reader = (id, state, access_time, lock)$，其中：
 
 - $id$ 是读者标识符
@@ -76,7 +76,7 @@
 - $access_time$ 是访问时间
 - $lock$ 是对读写锁的引用
 
-**定义 2.3** (写者)
+****定义 2**.3** (写者)
 写者是一个四元组 $Writer = (id, state, access_time, lock)$，其中：
 
 - $id$ 是写者标识符
@@ -86,7 +86,7 @@
 
 ### 2.2 操作语义
 
-**定义 2.4** (获取读锁)
+****定义 2**.4** (获取读锁)
 
 ```latex
 $$acquire_read(rwl, reader) = \begin{cases}
@@ -95,13 +95,13 @@ wait(reader) & \text{otherwise}
 \end{cases}$$
 ```
 
-**定义 2.5** (释放读锁)
+****定义 2**.5** (释放读锁)
 
 ```latex
 $$release_read(rwl, reader) = R \setminus \{reader\} \land \text{if } R = \emptyset \text{ then } \gamma(rwl) = idle$$
 ```
 
-**定义 2.6** (获取写锁)
+****定义 2**.6** (获取写锁)
 
 ```latex
 $$acquire_write(rwl, writer) = \begin{cases}
@@ -110,7 +110,7 @@ wait(writer) & \text{otherwise}
 \end{cases}$$
 ```
 
-**定义 2.7** (释放写锁)
+****定义 2**.7** (释放写锁)
 $$release_write(rwl, writer) = W \setminus \{writer\} \land \gamma(rwl) = idle$$
 
 ---
@@ -119,7 +119,7 @@ $$release_write(rwl, writer) = W \setminus \{writer\} \land \gamma(rwl) = idle$$
 
 ### 3.1 读写锁代数
 
-**定义 3.1** (读写锁代数)
+****定义 3**.1** (读写锁代数)
 读写锁代数是一个八元组 $\mathcal{RWL} = (RWL, \oplus, \otimes, \mathbf{0}, \mathbf{1}, \alpha, \beta, \gamma)$，其中：
 
 - $RWL$ 是读写锁集合
@@ -133,15 +133,15 @@ $$release_write(rwl, writer) = W \setminus \{writer\} \land \gamma(rwl) = idle$$
 
 ### 3.2 代数性质
 
-**定理 3.1** (结合律)
+****定理 3**.1** (结合律)
 对于任意读写锁 $rwl_1, rwl_2, rwl_3 \in RWL$：
 $$(rwl_1 \oplus rwl_2) \oplus rwl_3 = rwl_1 \oplus (rwl_2 \oplus rwl_3)$$
 
-**定理 3.2** (分配律)
+****定理 3**.2** (分配律)
 对于任意读写锁 $rwl_1, rwl_2 \in RWL$ 和线程 $t \in \mathcal{T}$：
 $$(rwl_1 \oplus rwl_2) \otimes t = (rwl_1 \otimes t) \oplus (rwl_2 \otimes t)$$
 
-**定理 3.3** (单位元)
+****定理 3**.3** (单位元)
 对于任意读写锁 $rwl \in RWL$：
 $$rwl \oplus \mathbf{0} = rwl = \mathbf{0} \oplus rwl$$
 $$rwl \otimes \mathbf{1} = rwl = \mathbf{1} \otimes rwl$$
@@ -152,7 +152,7 @@ $$rwl \otimes \mathbf{1} = rwl = \mathbf{1} \otimes rwl$$
 
 ### 4.1 安全性定理
 
-**定理 4.1** (读写互斥)
+****定理 4**.1** (读写互斥)
 对于读写锁 $RWL = (S, R, W, \mu_r, \mu_w, \gamma, \delta)$，如果：
 
 1. 写者活跃时没有读者活跃
@@ -172,7 +172,7 @@ $$acquire_read(rwl, reader) \Rightarrow W = \emptyset$$
 
 ### 4.2 并发度定理
 
-**定理 4.2** (最大并发度)
+****定理 4**.2** (最大并发度)
 
 ```latex
 对于读写锁 $RWL$，其最大并发度 $C_{max}$ 满足：
@@ -201,7 +201,7 @@ $\square$
 
 ### 4.3 公平性定理
 
-**定理 4.3** (写者饥饿避免)
+****定理 4**.3** (写者饥饿避免)
 如果读写锁使用写者优先策略，则写者不会饥饿：
 $$\forall writer \in W: \exists t: acquire_write(rwl, writer) \text{ at time } t$$
 
@@ -441,7 +441,7 @@ $$\forall w_1, w_2 \in W: w_1 \neq w_2 \Rightarrow \neg concurrent(w_1, w_2)$$
 
 ### 6.3 性能优化
 
-**定理 6.1** (最优策略)
+****定理 6**.1** (最优策略)
 对于读多写少的场景，读者优先策略最优：
 $$T_{optimal} = \frac{|R|}{t_{read}} + \frac{|W|}{t_{write}}$$
 
@@ -483,8 +483,7 @@ $\square$
 
 1. **形式化理论**: 建立了读写锁模式的完整数学理论
 2. **代数结构**: 定义了读写锁的代数运算和性质
-3. **定理证明**: 证明了安全性、并发度和公平性定理
-4. **实现验证**: 提供了类型安全的Rust实现
+3. **定理证明**: 证明了安全性、并发度和公平性**定理 4**. **实现验证**: 提供了类型安全的Rust实现
 
 ### 8.2 未来工作
 
@@ -504,3 +503,4 @@ $\square$
 **版本**: 1.0
 **最后更新**: 2025-01-27
 **作者**: AI Assistant
+

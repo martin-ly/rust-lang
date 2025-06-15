@@ -1,4 +1,4 @@
-# 1. 异步模式形式化理论
+﻿# 1. 异步模式形式化理论
 
  (Async Patterns Formalization)
 
@@ -37,7 +37,7 @@
 
 ### 1.1.1. 异步编程模型
 
-**定义 1.1.1** (异步编程模型)
+****定义 1**.1.1** (异步编程模型)
 异步编程模型是一个五元组 $\mathcal{A} = (S, E, T, \delta, \lambda)$，其中：
 
 - $S$ 是状态集合
@@ -46,17 +46,17 @@
 - $\delta: S \times E \rightarrow S$ 是状态转换函数
 - $\lambda: T \rightarrow \mathbb{R}^+$ 是任务执行时间函数
 
-**定义 1.1.2** (异步执行)
+****定义 1**.1.2** (异步执行)
 对于任务 $t \in T$，异步执行定义为：
 $$\text{async}(t) = \{(s_i, e_i, s_{i+1}) \mid s_i \xrightarrow{e_i} s_{i+1}, i \in \mathbb{N}\}$$
 
 ### 1.1.2. 并发与并行
 
-**定义 1.1.3** (并发执行)
+****定义 1**.1.3** (并发执行)
 两个任务 $t_1, t_2 \in T$ 的并发执行定义为：
 $$\text{concurrent}(t_1, t_2) = \text{async}(t_1) \parallel \text{async}(t_2)$$
 
-**定义 1.1.4** (并行执行)
+****定义 1**.1.4** (并行执行)
 两个任务 $t_1, t_2 \in T$ 的并行执行定义为：
 $$\text{parallel}(t_1, t_2) = \text{async}(t_1) \otimes \text{async}(t_2)$$
 
@@ -66,7 +66,7 @@ $$\text{parallel}(t_1, t_2) = \text{async}(t_1) \otimes \text{async}(t_2)$$
 
 ### 1.2.1. 事件循环模型
 
-**定义 1.2.1** (事件循环)
+****定义 1**.2.1** (事件循环)
 事件循环是一个四元组 $\mathcal{L} = (Q, P, H, \sigma)$，其中：
 
 - $Q$ 是事件队列
@@ -74,7 +74,7 @@ $$\text{parallel}(t_1, t_2) = \text{async}(t_1) \otimes \text{async}(t_2)$$
 - $H$ 是处理器池
 - $\sigma: Q \rightarrow P$ 是调度函数
 
-**定义 1.2.2** (事件循环执行)
+****定义 1**.2.2** (事件循环执行)
 事件循环的执行过程定义为：
 $$\text{execute}(\mathcal{L}) = \bigcup_{i=1}^{\infty} \sigma(q_i)$$
 
@@ -98,7 +98,7 @@ fn priority_schedule(queue: &mut BinaryHeap<Event>) -> Option<Event> {
 }
 ```
 
-**定理 1.2.1** (调度公平性)
+****定理 1**.2.1** (调度公平性)
 对于任意事件循环 $\mathcal{L}$，如果调度函数 $\sigma$ 满足公平性条件，则：
 $$\forall e \in Q: \lim_{n \to \infty} P(\sigma(e) = p) = \frac{1}{|P|}$$
 
@@ -115,14 +115,14 @@ $$\lim_{n \to \infty} P(\sigma(e) = p) = \frac{1}{|P|}$$
 
 ### 1.3.1. Future代数
 
-**定义 1.3.1** (Future)
+****定义 1**.3.1** (Future)
 Future是一个三元组 $\mathcal{F} = (V, S, f)$，其中：
 
 - $V$ 是值类型
 - $S \in \{\text{Pending}, \text{Ready}, \text{Error}\}$ 是状态
 - $f: () \rightarrow V$ 是计算函数
 
-**定义 1.3.2** (Future组合)
+****定义 1**.3.2** (Future组合)
 对于两个Future $\mathcal{F}_1 = (V_1, S_1, f_1)$ 和 $\mathcal{F}_2 = (V_2, S_2, f_2)$：
 
 **映射操作**:
@@ -136,7 +136,7 @@ $$\mathcal{F}_1 \otimes \mathcal{F}_2 = ((V_1, V_2), S_1 \times S_2, (f_1, f_2))
 
 ### 1.3.2. Promise理论
 
-**定义 1.3.3** (Promise)
+****定义 1**.3.3** (Promise)
 Promise是一个四元组 $\mathcal{P} = (V, S, \text{resolve}, \text{reject})$，其中：
 
 - $V$ 是值类型
@@ -144,7 +144,7 @@ Promise是一个四元组 $\mathcal{P} = (V, S, \text{resolve}, \text{reject})$�
 - $\text{resolve}: V \rightarrow \text{Fulfilled}$ 是解决函数
 - $\text{reject}: E \rightarrow \text{Rejected}$ 是拒绝函数
 
-**定理 1.3.1** (Promise单调性)
+****定理 1**.3.1** (Promise单调性)
 对于任意Promise $\mathcal{P}$，状态转换是单调的：
 $$S_i \leq S_{i+1}$$
 
@@ -165,7 +165,7 @@ $$S_i \leq S_{i+1}$$
 
 ### 1.4.1. 异步状态机
 
-**定义 1.4.1** (异步状态机)
+****定义 1**.4.1** (异步状态机)
 异步状态机是一个六元组 $\mathcal{M} = (Q, \Sigma, \Delta, q_0, F, \tau)$，其中：
 
 - $Q$ 是状态集合
@@ -177,17 +177,17 @@ $$S_i \leq S_{i+1}$$
 
 ### 1.4.2. 状态转换
 
-**定义 1.4.2** (异步转移)
+****定义 1**.4.2** (异步转移)
 对于状态 $q \in Q$ 和输入 $a \in \Sigma$，异步转移定义为：
 $$q \xrightarrow{a, \tau(q,a)} q'$$
 
 其中 $q' \in \Delta(q, a)$。
 
-**定义 1.4.3** (异步路径)
+****定义 1**.4.3** (异步路径)
 异步路径是一个序列：
 $$\pi = q_0 \xrightarrow{a_1, t_1} q_1 \xrightarrow{a_2, t_2} \cdots \xrightarrow{a_n, t_n} q_n$$
 
-**定理 1.4.1** (异步可达性)
+****定理 1**.4.1** (异步可达性)
 状态 $q'$ 从状态 $q$ 异步可达，当且仅当存在异步路径 $\pi$ 从 $q$ 到 $q'$。
 
 **证明**:
@@ -200,7 +200,7 @@ $$\pi = q_0 \xrightarrow{a_1, t_1} q_1 \xrightarrow{a_2, t_2} \cdots \xrightarro
 
 ### 1.5.1. 异步组合定理
 
-**定理 1.5.1** (异步组合)
+****定理 1**.5.1** (异步组合)
 对于两个异步任务 $t_1, t_2$：
 $$\text{async}(t_1 \otimes t_2) = \text{async}(t_1) \otimes \text{async}(t_2)$$
 
@@ -219,7 +219,7 @@ $$\text{async}(t_1) \otimes \text{async}(t_2) = \{(s_1, e_1, s_1') \mid s_1 \xri
 
 ### 1.5.2. 性能保证定理
 
-**定理 1.5.2** (异步性能)
+****定理 1**.5.2** (异步性能)
 对于异步任务 $t$，其执行时间满足：
 $$\lambda(t) \leq \sum_{i=1}^{n} \lambda(t_i)$$
 
@@ -486,7 +486,7 @@ where
 
 ### 1.7.1. 时间复杂度分析
 
-**定理 1.7.1** (异步任务复杂度)
+****定理 1**.7.1** (异步任务复杂度)
 对于包含 $n$ 个子任务的异步任务，其时间复杂度为：
 $$T(n) = O(\max_{i=1}^{n} T_i)$$
 
@@ -497,7 +497,7 @@ $$T(n) = O(\max_{i=1}^{n} T_i)$$
 
 ### 1.7.2. 空间复杂度分析
 
-**定理 1.7.2** (异步任务空间复杂度)
+****定理 1**.7.2** (异步任务空间复杂度)
 异步任务的空间复杂度为：
 $$S(n) = O(\sum_{i=1}^{n} S_i)$$
 
@@ -561,8 +561,8 @@ mod tests {
 2. **事件循环理论**: 建立了事件循环的数学模型和调度算法
 3. **Future/Promise理论**: 提供了Future代数理论和Promise理论
 4. **异步状态机理论**: 定义了异步状态机和状态转换
-5. **核心定理证明**: 证明了异步组合和性能保证定理
-6. **Rust实现**: 提供了完整的Rust实现代码
+5. **核心定理证明**: 证明了异步组合和性能保证**定理 6**. **Rust实现**: 提供了完整的Rust实现代码
 7. **性能分析**: 分析了时间复杂度和空间复杂度
 
 这些理论为异步编程提供了严格的数学基础，确保了实现的正确性和性能保证。
+

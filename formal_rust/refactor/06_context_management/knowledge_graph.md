@@ -1,4 +1,4 @@
-# Rust知识图谱 - 概念关联与依赖关系
+﻿# Rust知识图谱 - 概念关联与依赖关系
 
 ## 目录
 
@@ -15,7 +15,7 @@
 
 ### 1.1 知识图谱定义
 
-**定义 1.1.1** (Rust知识图谱)
+****定义 1**.1.1** (Rust知识图谱)
 Rust知识图谱 $\mathcal{G}_{Rust}$ 是一个有向图：
 
 $$\mathcal{G}_{Rust} = \langle V, E, \mathcal{L} \rangle$$
@@ -28,7 +28,7 @@ $$\mathcal{G}_{Rust} = \langle V, E, \mathcal{L} \rangle$$
 
 ### 1.2 关系类型
 
-**定义 1.2.1** (关系类型)
+****定义 1**.2.1** (关系类型)
 关系类型 $\mathcal{R}$ 包含：
 
 1. **依赖关系** $\mathcal{R}_{dep}$: $A \rightarrow B$ 表示A依赖B
@@ -115,7 +115,7 @@ graph TD
 
 ### 3.1 理论层次
 
-**定义 3.1.1** (理论层次)
+****定义 3**.1.1** (理论层次)
 理论层次 $\mathcal{H}_{theory}$ 定义为：
 
 ```text
@@ -131,7 +131,7 @@ $$\mathcal{H}_{theory} = \mathcal{H}_1 \prec \mathcal{H}_2 \prec \mathcal{H}_3 \
 
 ### 3.2 实践层次
 
-**定义 3.2.1** (实践层次)
+****定义 3**.2.1** (实践层次)
 实践层次 $\mathcal{H}_{practice}$ 定义为：
 
 ```text
@@ -147,7 +147,7 @@ $$\mathcal{H}_{practice} = \mathcal{P}_1 \prec \mathcal{P}_2 \prec \mathcal{P}_3
 
 ### 3.3 依赖关系矩阵
 
-**定义 3.3.1** (依赖矩阵)
+****定义 3**.3.1** (依赖矩阵)
 依赖矩阵 $D = [d_{ij}]$ 定义为：
 
 ```text
@@ -222,14 +222,14 @@ graph TD
 
 ### 5.1 学习路径
 
-**定义 5.1.1** (学习路径)
+****定义 5**.1.1** (学习路径)
 学习路径 $\mathcal{P}_{learn}$ 是一个序列：
 
 $$\mathcal{P}_{learn} = \langle c_1, c_2, \ldots, c_n \rangle$$
 
 其中每个概念 $c_i$ 都是前一个概念 $c_{i-1}$ 的依赖。
 
-**定理 5.1.1** (最优学习路径)
+****定理 5**.1.1** (最优学习路径)
 存在最优学习路径，使得总学习成本最小。
 
 **证明**:
@@ -258,7 +258,7 @@ graph LR
 
 ### 5.3 知识更新流
 
-**定义 5.3.1** (知识更新)
+****定义 5**.3.1** (知识更新)
 知识更新 $\mathcal{U}$ 是一个函数：
 
 $$\mathcal{U} : \mathcal{K} \times \mathcal{I} \rightarrow \mathcal{K}'$$
@@ -275,7 +275,7 @@ $$\mathcal{U} : \mathcal{K} \times \mathcal{I} \rightarrow \mathcal{K}'$$
 
 ### 6.1 概念一致性
 
-**定义 6.1.1** (概念一致性)
+****定义 6**.1.1** (概念一致性)
 概念一致性 $\mathcal{C}_{cons}$ 定义为：
 
 $$\mathcal{C}_{cons} = \frac{|\text{ConsistentConcepts}|}{|\text{TotalConcepts}|}$$
@@ -288,7 +288,7 @@ $$\mathcal{C}_{cons} = \frac{|\text{ConsistentConcepts}|}{|\text{TotalConcepts}|
 
 ### 6.2 关系一致性
 
-**定义 6.2.1** (关系一致性)
+****定义 6**.2.1** (关系一致性)
 关系一致性 $\mathcal{R}_{cons}$ 定义为：
 
 $$\mathcal{R}_{cons} = \frac{|\text{ConsistentRelations}|}{|\text{TotalRelations}|}$$
@@ -301,15 +301,14 @@ $$\mathcal{R}_{cons} = \frac{|\text{ConsistentRelations}|}{|\text{TotalRelations
 
 ### 6.3 完整性检查
 
-**定义 6.3.1** (完整性)
+****定义 6**.3.1** (完整性)
 完整性 $\mathcal{I}_{comp}$ 定义为：
 
 $$\mathcal{I}_{comp} = \frac{|\text{DefinedConcepts}|}{|\text{ReferencedConcepts}|}$$
 
 **检查规则**:
 
-1. 所有引用概念都有定义
-2. 所有依赖关系都有说明
+1. 所有引用概念都有**定义 2**. 所有依赖关系都有说明
 3. 所有路径都有终点
 
 ### 6.4 一致性验证算法
@@ -344,7 +343,7 @@ def consistency_check(knowledge_graph):
 
 ### 7.1 更新策略
 
-**定义 7.1.1** (更新策略)
+****定义 7**.1.1** (更新策略)
 更新策略 $\mathcal{S}_{update}$ 包含：
 
 1. **增量更新**: 只更新变化的部分
@@ -354,7 +353,7 @@ def consistency_check(knowledge_graph):
 
 ### 7.2 质量保证
 
-**定义 7.2.1** (质量指标)
+****定义 7**.2.1** (质量指标)
 质量指标 $\mathcal{Q}$ 包含：
 
 - **准确性**: $\mathcal{Q}_{acc} = \frac{|\text{CorrectConcepts}|}{|\text{TotalConcepts}|}$
@@ -364,7 +363,7 @@ def consistency_check(knowledge_graph):
 
 ### 7.3 自动化维护
 
-**定义 7.3.1** (自动化维护)
+****定义 7**.3.1** (自动化维护)
 自动化维护系统 $\mathcal{A}_{maintain}$ 包含：
 
 1. **自动检测**: 检测知识图谱中的问题
@@ -416,3 +415,4 @@ def consistency_check(knowledge_graph):
 **最后更新**: 2024-01-XX  
 **版本**: 1.0.0  
 **状态**: 初稿完成
+

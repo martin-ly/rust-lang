@@ -1,4 +1,4 @@
-# 建造者模式形式化重构 (Builder Pattern Formal Refactoring)
+﻿# 建造者模式形式化重构 (Builder Pattern Formal Refactoring)
 
 ## 目录
 
@@ -96,7 +96,7 @@ $$\text{BuildProcess} \perp \text{ProductRepresentation}$$
 **定理3.1.1 (构建完整性保证)**
 如果构建序列是有效的且所有必需属性都被设置，则构建的产品是完整的。
 
-**证明：**
+****证明**：**
 设 $B = (N, I, S, R, C)$ 为建造者模式，$BP$ 为构建过程。
 
 1. 根据定义1.4，产品完整性要求所有必需属性都有值
@@ -112,7 +112,7 @@ $$\text{BuildProcess} \perp \text{ProductRepresentation}$$
 **定理3.2.1 (构建过程可控性)**
 建造者模式允许精确控制构建过程。
 
-**证明：**
+****证明**：**
 
 1. 每个构建步骤都是独立的方法调用
 2. 可以条件性地执行某些步骤
@@ -123,7 +123,7 @@ $$\text{BuildProcess} \perp \text{ProductRepresentation}$$
 **定理3.2.2 (构建过程可验证性)**
 构建过程中的每个状态都可以验证。
 
-**证明：**
+****证明**：**
 
 1. 每个构建步骤后，产品状态都是确定的
 2. 可以定义验证规则检查状态正确性
@@ -135,7 +135,7 @@ $$\text{BuildProcess} \perp \text{ProductRepresentation}$$
 **定理3.3.1 (表示分离满足)**
 建造者模式实现了构建过程与产品表示的分离。
 
-**证明：**
+****证明**：**
 
 1. Builder接口定义了构建步骤，不涉及具体产品表示
 2. ConcreteBuilder实现构建逻辑，与产品表示解耦
@@ -147,7 +147,7 @@ $$\text{BuildProcess} \perp \text{ProductRepresentation}$$
 **定理3.4.1 (构建复杂度)**
 建造者模式的构建复杂度为 $O(|S|)$，其中 $|S|$ 是构建步骤数量。
 
-**证明：**
+****证明**：**
 
 1. 每个构建步骤执行一次
 2. 步骤间无复杂依赖关系
@@ -156,7 +156,7 @@ $$\text{BuildProcess} \perp \text{ProductRepresentation}$$
 **定理3.4.2 (内存复杂度)**
 建造者模式的内存复杂度为 $O(|A|)$，其中 $|A|$ 是产品属性数量。
 
-**证明：**
+****证明**：**
 
 1. 需要存储产品的所有属性
 2. 构建过程中需要临时存储中间状态
@@ -929,3 +929,4 @@ $$\text{Reusability}(B) = \frac{|I|}{|S|} \cdot \frac{1}{\text{Complexity}(B)}$$
 4. **性能定理**：构建复杂度为 $O(|S|)$
 
 建造者模式通过严格的数学基础和形式化验证，为复杂对象构建提供了可靠的理论保证和实践指导。
+

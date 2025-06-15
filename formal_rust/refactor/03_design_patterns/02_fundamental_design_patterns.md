@@ -1,5 +1,56 @@
 # 03. 基础设计模式
 
+## 📚 相关文档引用
+
+### 🏛️ 理论基础
+
+- [Rust语言哲学基础](../01_foundational_theory/03_rust_language_philosophy.md) - 设计模式的哲学基础
+- [理论基础概述](../01_foundational_theory/00_readme.md) - 理论基础整体框架
+
+### 🔄 编程范式
+
+- [Rust哲学形式化](../02_programming_paradigms/04_rust_philosophy_formalization.md) - 哲学思想的形式化表达
+- [设计原则形式化](../02_programming_paradigms/07_design_principles_formalization.md) - 设计原则的形式化理论
+- [架构模式形式化](../02_programming_paradigms/06_architectural_patterns_formalization.md) - 架构模式形式化
+
+### 🎨 设计模式
+
+- [设计模式概述](../03_design_patterns/00_readme.md) - 设计模式整体概述
+- [创建型模式](../03_design_patterns/03_creational_patterns.md) - 创建型模式详细内容
+- [结构型模式](../03_design_patterns/04_structural_patterns.md) - 结构型模式详细内容
+- [行为型模式](../03_design_patterns/05_behavioral_patterns.md) - 行为型模式详细内容
+- [创建型模式形式化](../03_design_patterns/06_creational_patterns_formalization.md) - 创建型模式形式化
+- [结构型模式形式化](../03_design_patterns/07_structural_patterns_formalization.md) - 结构型模式形式化
+- [行为型模式形式化](../03_design_patterns/08_behavioral_patterns_formalization.md) - 行为型模式形式化
+- [高级创建型模式](../03_design_patterns/09_creational_patterns_advanced.md) - 高级创建型模式
+
+### 🦀 Rust语言理论
+
+- [所有权系统形式化](../08_rust_language_theory/01_ownership_system_formalization.md) - 所有权系统在设计模式中的应用
+- [类型系统形式化](../08_rust_language_theory/03_type_system_formalization.md) - 类型系统在设计模式中的应用
+- [Trait系统形式化](../08_rust_language_theory/08_trait_system_formalization.md) - Trait系统在设计模式中的应用
+- [泛型系统形式化](../08_rust_language_theory/09_generic_system_formalization.md) - 泛型系统在设计模式中的应用
+
+### ⚡ 并发模式
+
+- [高级并发形式化](../05_concurrent_patterns/02_advanced_concurrency_formalization.md) - 并发模式与设计模式的结合
+- [Actor模型形式化](../05_concurrent_patterns/14_actor_model_formalization.md) - Actor模式与设计模式的结合
+- [Future/Promise模式形式化](../05_concurrent_patterns/13_future_promise_pattern_formalization.md) - Future/Promise模式与设计模式的结合
+
+### 🏭 行业应用
+
+- [金融科技形式化](../04_industry_applications/09_fintech_formalization.md) - 设计模式在金融科技中的应用
+- [AI/ML形式化](../04_industry_applications/17_ai_ml_formalization.md) - 设计模式在AI/ML中的应用
+- [区块链形式化](../04_industry_applications/19_blockchain_formalization.md) - 设计模式在区块链中的应用
+
+### 🎯 高级模式
+
+- [创建型模式形式化](../12_advanced_patterns/01_creational_patterns_formalization.md) - 高级创建型模式形式化
+- [结构型模式形式化](../12_advanced_patterns/04_structural_patterns_formalization.md) - 高级结构型模式形式化
+- [响应式模式](../12_advanced_patterns/03_reactive_patterns.md) - 响应式设计模式
+
+---
+
 ## 目录
 
 ### 1. 设计模式理论基础
@@ -76,6 +127,8 @@ DesignPattern : Problem → Solution
   {solution, context, consequences}
 ```
 
+> **哲学基础**: 关于设计模式的哲学思考，请参考 [Rust语言哲学基础](../01_foundational_theory/03_rust_language_philosophy.md) 中的 [约束性设计原则](#32-有效形式模型的探索原则)。
+
 **模式结构**：
 
 ```
@@ -99,6 +152,8 @@ Pattern : (Context, Problem, Solution) → Design
 ∀c ∈ Context, ∀p ∈ Problem, ∀s ∈ Solution | 
   Pattern(c, p, s) = {context: c, problem: p, solution: s}
 ```
+
+> **形式化理论**: 关于设计模式的形式化理论，请参考 [Rust哲学形式化](../02_programming_paradigms/04_rust_philosophy_formalization.md) 和 [设计原则形式化](../02_programming_paradigms/07_design_principles_formalization.md)。
 
 ### 1.2 分类体系
 
@@ -128,6 +183,8 @@ CategorizePattern : Pattern → (Purpose, Scope)
   (p.purpose, p.scope)
 ```
 
+> **详细分类**: 关于各种模式的详细分类，请参考 [创建型模式](../03_design_patterns/03_creational_patterns.md)、[结构型模式](../03_design_patterns/04_structural_patterns.md) 和 [行为型模式](../03_design_patterns/05_behavioral_patterns.md)。
+
 ### 1.3 形式化表达
 
 **模式实例化**：
@@ -145,6 +202,8 @@ PatternComposition : [Pattern] → CompositePattern
 ∀patterns ∈ [Pattern] | PatternComposition(patterns) = 
   combine_patterns(patterns)
 ```
+
+> **高级模式**: 关于高级模式的形式化，请参考 [创建型模式形式化](../03_design_patterns/06_creational_patterns_formalization.md)、[结构型模式形式化](../03_design_patterns/07_structural_patterns_formalization.md) 和 [行为型模式形式化](../03_design_patterns/08_behavioral_patterns_formalization.md)。
 
 ---
 
@@ -173,6 +232,8 @@ SingletonConstraints : Class → Boolean
   global_access(class) ∧ 
   lazy_initialization(class)
 ```
+
+> **所有权应用**: 关于单例模式中所有权系统的应用，请参考 [所有权系统形式化](../08_rust_language_theory/01_ownership_system_formalization.md)。
 
 **Rust实现**：
 
