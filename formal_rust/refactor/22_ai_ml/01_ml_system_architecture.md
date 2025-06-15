@@ -1,6 +1,7 @@
 # 01. 机器学习系统架构理论
 
 ## 目录
+
 1. [ML系统基础](#1-ml系统基础)
 2. [数据管道架构](#2-数据管道架构)
 3. [模型训练架构](#3-模型训练架构)
@@ -20,6 +21,7 @@
 $$\text{MLSystem} = \langle \mathcal{D}, \mathcal{T}, \mathcal{I}, \mathcal{M}, \mathcal{O} \rangle$$
 
 其中：
+
 - $\mathcal{D}$ 是数据管道
 - $\mathcal{T}$ 是训练系统
 - $\mathcal{I}$ 是推理系统
@@ -34,6 +36,7 @@ ML系统采用分层架构模式：
 $$\text{MLArchitecture} ::= \text{Data} \times \text{Training} \times \text{Serving} \times \text{Monitoring}$$
 
 **架构层次**：
+
 1. **数据层**：数据存储、ETL、特征工程
 2. **训练层**：模型训练、验证、实验管理
 3. **服务层**：模型部署、推理、API服务
@@ -47,6 +50,7 @@ ML系统具有以下核心特性：
 $$\text{MLProperties} = \langle \text{Scalability}, \text{Reproducibility}, \text{Observability}, \text{Reliability} \rangle$$
 
 **特性定义**：
+
 - **可扩展性**：支持大规模数据和模型
 - **可重现性**：保证实验结果的重复性
 - **可观测性**：提供完整的系统监控
@@ -62,6 +66,7 @@ $$\text{MLProperties} = \langle \text{Scalability}, \text{Reproducibility}, \tex
 $$\text{DataFlow} ::= \text{RawData} \rightarrow \text{Ingestion} \rightarrow \text{Processing} \rightarrow \text{Features} \rightarrow \text{Training}$$
 
 **数据流组件**：
+
 1. **数据摄入**：从各种源收集数据
 2. **数据清洗**：处理缺失值、异常值
 3. **特征提取**：从原始数据提取特征
@@ -78,6 +83,7 @@ $$\text{BatchProcessing} = \langle \text{DataSource}, \text{Processor}, \text{St
 $$\text{batch\_process}(\text{data}) = \text{processed\_data}$$
 
 **示例 2.2.1** (批处理实现)
+
 ```rust
 use tokio::sync::mpsc;
 
@@ -147,11 +153,13 @@ $$\text{training\_loop}(\text{data}, \text{model}) = \text{trained\_model}$$
 $$\text{DistributedTraining} = \langle \text{Workers}, \text{ParameterServer}, \text{Synchronization} \rangle$$
 
 **训练策略**：
+
 1. **数据并行**：不同节点处理不同数据
 2. **模型并行**：不同节点处理模型不同部分
 3. **混合并行**：结合数据和模型并行
 
 **示例 3.3.1** (分布式训练)
+
 ```rust
 use tokio::sync::mpsc;
 
@@ -220,11 +228,13 @@ $$\text{inference}(\text{input}) = \text{preprocess} \circ \text{model} \circ \t
 $$\text{ModelDeployment} = \langle \text{Model}, \text{Environment}, \text{Configuration}, \text{Monitoring} \rangle$$
 
 **部署策略**：
+
 1. **蓝绿部署**：零停机时间部署
 2. **金丝雀部署**：渐进式部署
 3. **A/B测试**：对比不同模型版本
 
 **示例 4.2.1** (模型服务)
+
 ```rust
 use axum::{extract::Json, response::Json as ResponseJson};
 use serde::{Deserialize, Serialize};
@@ -281,6 +291,7 @@ async fn predict_handler(
 $$\text{LoadBalancer} = \langle \text{Instances}, \text{Strategy}, \text{HealthCheck} \rangle$$
 
 **均衡策略**：
+
 1. **轮询**：依次分配请求
 2. **加权轮询**：根据权重分配
 3. **最少连接**：分配给连接最少的实例
@@ -306,6 +317,7 @@ $$\text{FeatureType} ::= \text{Numerical} \mid \text{Categorical} \mid \text{Tex
 $$\text{FeatureStore} = \langle \text{Storage}, \text{Index}, \text{Cache}, \text{Versioning} \rangle$$
 
 **存储特性**：
+
 1. **快速访问**：支持低延迟查询
 2. **版本控制**：管理特征版本
 3. **一致性**：保证数据一致性
@@ -341,6 +353,7 @@ $$\text{ModelMetadata} = \langle \text{Name}, \text{Version}, \text{Framework}, 
 $$\text{ModelVersioning} = \langle \text{Versions}, \text{Dependencies}, \text{Lineage}, \text{Approval} \rangle$$
 
 **版本管理**：
+
 1. **语义版本**：主版本.次版本.修订版本
 2. **实验版本**：开发中的模型版本
 3. **生产版本**：已部署的模型版本
@@ -365,6 +378,7 @@ $$\text{manage\_lifecycle}(\text{model}, \text{stage}) = \text{next\_stage}$$
 $$\text{ModelMonitoring} = \langle \text{Metrics}, \text{Alerts}, \text{Dashboard}, \text{Drift} \rangle$$
 
 **监控指标**：
+
 - **预测准确性**：模型预测的准确程度
 - **延迟**：推理响应时间
 - **吞吐量**：每秒处理的请求数
@@ -378,6 +392,7 @@ $$\text{ModelMonitoring} = \langle \text{Metrics}, \text{Alerts}, \text{Dashboar
 $$\text{SystemMonitoring} = \langle \text{Resources}, \text{Performance}, \text{Errors}, \text{Availability} \rangle$$
 
 **监控维度**：
+
 1. **资源监控**：CPU、内存、磁盘使用率
 2. **性能监控**：响应时间、吞吐量
 3. **错误监控**：错误率、异常检测
@@ -401,6 +416,7 @@ $$\text{track\_experiment}(\text{experiment}) = \text{experiment\_id}$$
 ML系统在正确实现时保证模型训练和推理的正确性。
 
 **证明**：
+
 1. **数据一致性**：数据管道保证数据一致性
 2. **模型正确性**：训练过程保证模型收敛
 3. **推理正确性**：推理服务保证预测准确性
@@ -411,6 +427,7 @@ ML系统在正确实现时保证模型训练和推理的正确性。
 ML系统保证训练和推理的性能要求。
 
 **证明**：
+
 1. **训练性能**：分布式训练提高训练速度
 2. **推理性能**：负载均衡和缓存提高推理速度
 3. **系统性能**：监控和优化保证系统性能
@@ -421,6 +438,7 @@ ML系统保证训练和推理的性能要求。
 ML系统支持水平扩展以处理更大规模的数据和模型。
 
 **证明**：
+
 1. **数据扩展**：分布式存储支持大数据
 2. **计算扩展**：分布式训练支持大模型
 3. **服务扩展**：负载均衡支持高并发
@@ -440,4 +458,4 @@ ML系统支持水平扩展以处理更大规模的数据和模型。
 7. **监控运维**：模型监控、系统监控、实验管理
 8. **形式化证明**：正确性、性能、可扩展性
 
-该理论体系为机器学习系统的设计、实现和优化提供了坚实的数学基础。 
+该理论体系为机器学习系统的设计、实现和优化提供了坚实的数学基础。
