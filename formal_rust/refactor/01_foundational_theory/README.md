@@ -1,246 +1,234 @@
-# 1. 基础理论 (Foundational Theory)
-
-## 概述
-
-基础理论为Rust语言的形式化研究提供数学和理论支撑，包括范畴论、类型论、编程语言理论和形式化语义。
-
-## 形式化框架
-
-### 1.1 编程语言理论
-
-**定义 1.1** (编程语言)
-编程语言是一个六元组 $PL = (S, T, E, O, R, P)$，其中：
-
-- $S$ 是语法集合
-- $T$ 是类型系统
-- $E$ 是执行语义
-- $O$ 是操作语义
-- $R$ 是运行时系统
-- $P$ 是程序集合
-
-**定义 1.2** (Rust语言模型)
-Rust语言模型是一个七元组 $RM = (O, B, T, L, M, S, C)$，其中：
-
-- $O$ 是所有权系统
-- $B$ 是借用系统
-- $T$ 是类型系统
-- $L$ 是生命周期系统
-- $M$ 是内存模型
-- $S$ 是安全保证
-- $C$ 是并发模型
-
-**定义 1.3** (所有权系统)
-所有权系统是一个四元组 $OS = (R, O, T, L)$，其中：
-
-- $R$ 是资源集合
-- $O$ 是所有者关系
-- $T$ 是转移规则
-- $L$ 是生命周期规则
-
-### 1.2 核心定理
-
-**定理 1.1** (内存安全)
-对于任意Rust程序 $p \in P$，如果通过借用检查，则内存安全：
-
-$$borrow\_check(p) = true \Rightarrow memory\_safe(p)$$
-
-**定理 1.2** (数据竞争自由)
-对于任意并发Rust程序 $p \in P$，如果通过借用检查，则无数据竞争：
-
-$$borrow\_check(p) = true \Rightarrow data\_race\_free(p)$$
-
-**定理 1.3** (类型安全)
-对于任意Rust程序 $p \in P$，如果类型检查通过，则类型安全：
-
-$$type\_check(p) = true \Rightarrow type\_safe(p)$$
+# 05. 数学基础 (Mathematical Foundations)
 
 ## 目录结构
 
-```text
-01_foundational_theory/
-├── README.md                           # 本文档
-├── 01_category_theory.md               # 范畴论基础
-├── 02_type_theory.md                   # 类型论基础
-├── 03_programming_language_theory.md   # 编程语言理论
-├── 04_formal_semantics.md              # 形式化语义
-├── 05_rust_language_model.md           # Rust语言模型
-└── 06_mathematical_foundations.md      # 数学基础
+### 5.1 范畴论 (Category Theory)
+
+- [5.1.1 基本概念](./01_category_theory/01_basic_concepts.md)
+- [5.1.2 函子与自然变换](./01_category_theory/02_functors_natural_transformations.md)
+- [5.1.3 极限与余极限](./01_category_theory/03_limits_colimits.md)
+- [5.1.4 伴随函子](./01_category_theory/04_adjoint_functors.md)
+- [5.1.5 单子与余单子](./01_category_theory/05_monads_comonads.md)
+
+### 5.2 线性逻辑 (Linear Logic)
+
+- [5.2.1 线性逻辑基础](./02_linear_logic/01_linear_logic_basics.md)
+- [5.2.2 证明系统](./02_linear_logic/02_proof_systems.md)
+- [5.2.3 资源管理](./02_linear_logic/03_resource_management.md)
+- [5.2.4 线性类型系统](./02_linear_logic/04_linear_type_systems.md)
+- [5.2.5 并发语义](./02_linear_logic/05_concurrent_semantics.md)
+
+### 5.3 指称语义 (Denotational Semantics)
+
+- [5.3.1 域理论](./03_denotational_semantics/01_domain_theory.md)
+- [5.3.2 连续函数](./03_denotational_semantics/02_continuous_functions.md)
+- [5.3.3 不动点理论](./03_denotational_semantics/03_fixed_point_theory.md)
+- [5.3.4 递归定义](./03_denotational_semantics/04_recursive_definitions.md)
+- [5.3.5 语义模型](./03_denotational_semantics/05_semantic_models.md)
+
+### 5.4 操作语义 (Operational Semantics)
+
+- [5.4.1 小步语义](./04_operational_semantics/01_small_step_semantics.md)
+- [5.4.2 大步语义](./04_operational_semantics/02_big_step_semantics.md)
+- [5.4.3 抽象机器](./04_operational_semantics/03_abstract_machines.md)
+- [5.4.4 并发语义](./04_operational_semantics/04_concurrent_semantics.md)
+- [5.4.5 语义等价性](./04_operational_semantics/05_semantic_equivalence.md)
+
+### 5.5 类型论 (Type Theory)
+
+- [5.5.1 简单类型论](./05_type_theory/01_simple_type_theory.md)
+- [5.5.2 依赖类型论](./05_type_theory/02_dependent_type_theory.md)
+- [5.5.3 同伦类型论](./05_type_theory/03_homotopy_type_theory.md)
+- [5.5.4 构造演算](./05_type_theory/04_constructive_calculus.md)
+- [5.5.5 类型系统设计](./05_type_theory/05_type_system_design.md)
+
+## 形式化基础
+
+### 5.1 数学基础的形式化框架
+
+**定义 5.1** (形式化系统)
+形式化系统是一个四元组 $\mathcal{FS} = (\Sigma, \mathcal{R}, \mathcal{A}, \mathcal{T})$，其中：
+
+- $\Sigma$ 是符号表
+- $\mathcal{R}$ 是推理规则集合
+- $\mathcal{A}$ 是公理集合
+- $\mathcal{T}$ 是定理集合
+
+**定理 5.1** (一致性定理)
+如果形式化系统 $\mathcal{FS}$ 满足：
+
+1. $\mathcal{A} \cap \mathcal{T} = \emptyset$
+2. $\forall r \in \mathcal{R}: r$ 是保真推理规则
+3. $\mathcal{T}$ 在 $\mathcal{R}$ 下封闭
+
+则 $\mathcal{FS}$ 是一致的。
+
+**证明**：
+假设 $\mathcal{FS}$ 不一致，则存在 $\phi \in \mathcal{A}$ 且 $\neg\phi \in \mathcal{T}$。
+由于 $\mathcal{T}$ 在 $\mathcal{R}$ 下封闭，且 $\mathcal{R}$ 是保真推理规则，
+这与条件1矛盾。因此 $\mathcal{FS}$ 是一致的。$\square$
+
+## 范畴论基础
+
+### 5.1 基本概念
+
+**定义 5.2** (范畴)
+范畴 $\mathcal{C}$ 由以下组成：
+
+- 对象集合 $Ob(\mathcal{C})$
+- 态射集合 $Hom_{\mathcal{C}}(A,B)$ 对于每对对象 $A,B$
+- 复合运算 $\circ: Hom(B,C) \times Hom(A,B) \rightarrow Hom(A,C)$
+- 单位态射 $1_A \in Hom(A,A)$
+
+满足结合律和单位律。
+
+**定理 5.2** (Yoneda引理)
+对于任意函子 $F: \mathcal{C}^{op} \rightarrow \mathbf{Set}$ 和对象 $A \in \mathcal{C}$，
+存在自然同构：
+$$Hom(\mathcal{C}(-,A), F) \cong F(A)$$
+
+## 线性逻辑基础
+
+### 5.1 线性逻辑语法
+
+**定义 5.3** (线性逻辑公式)
+线性逻辑公式由以下语法定义：
+$$\phi ::= A | \phi \otimes \psi | \phi \multimap \psi | \phi \& \psi | \phi \oplus \psi | !\phi | ?\phi$$
+
+**定理 5.3** (线性逻辑的切割消除)
+在线性逻辑中，切割规则是可消除的。
+
+**证明**：
+通过结构归纳法证明。对于每个切割，都存在一个不使用切割的证明。
+详细证明涉及复杂的重写规则。$\square$
+
+## 指称语义基础
+
+### 5.1 域理论
+
+**定义 5.4** (完全偏序)
+完全偏序 $(D, \sqsubseteq)$ 满足：
+
+1. 自反性：$\forall x \in D: x \sqsubseteq x$
+2. 传递性：$x \sqsubseteq y \land y \sqsubseteq z \Rightarrow x \sqsubseteq z$
+3. 反对称性：$x \sqsubseteq y \land y \sqsubseteq x \Rightarrow x = y$
+4. 有向完备性：每个有向集都有最小上界
+
+**定理 5.4** (不动点定理)
+设 $f: D \rightarrow D$ 是连续函数，则 $f$ 有最小不动点：
+$$\mu f = \bigsqcup_{n \in \omega} f^n(\bot)$$
+
+## 操作语义基础
+
+### 5.1 小步语义
+
+**定义 5.5** (小步语义)
+小步语义是一个三元组 $(\mathcal{S}, \rightarrow, \mathcal{F})$，其中：
+
+- $\mathcal{S}$ 是状态集合
+- $\rightarrow \subseteq \mathcal{S} \times \mathcal{S}$ 是转换关系
+- $\mathcal{F} \subseteq \mathcal{S}$ 是最终状态集合
+
+**定理 5.5** (终止性)
+如果小步语义满足：
+
+1. $\rightarrow$ 是良基的
+2. $\mathcal{F}$ 是 $\rightarrow$ 的终止状态
+
+则每个计算都会终止。
+
+## 类型论基础
+
+### 5.1 简单类型论
+
+**定义 5.6** (类型)
+类型由以下语法定义：
+$$\tau ::= \alpha | \tau \rightarrow \tau | \tau \times \tau | \tau + \tau$$
+
+**定理 5.6** (类型安全)
+如果 $\Gamma \vdash e : \tau$ 且 $e \rightarrow e'$，则 $\Gamma \vdash e' : \tau$。
+
+## Rust实现示例
+
+### 5.1 范畴论实现
+
+```rust
+// 范畴的基本结构
+pub trait Category {
+    type Object;
+    type Morphism;
+    
+    fn id(&self, obj: &Self::Object) -> Self::Morphism;
+    fn compose(&self, f: Self::Morphism, g: Self::Morphism) -> Option<Self::Morphism>;
+}
+
+// 函子实现
+pub trait Functor<C1, C2> 
+where 
+    C1: Category,
+    C2: Category,
+{
+    fn map_object(&self, obj: C1::Object) -> C2::Object;
+    fn map_morphism(&self, morph: C1::Morphism) -> C2::Morphism;
+}
+
+// 单子实现
+pub trait Monad {
+    type T;
+    
+    fn unit(&self, value: Self::T) -> Self;
+    fn bind<F>(&self, f: F) -> Self 
+    where 
+        F: FnOnce(Self::T) -> Self;
+}
 ```
 
-## 技术特色
+### 5.2 线性逻辑实现
 
-### 1.1 形式化建模
+```rust
+// 线性类型系统
+pub trait LinearType {
+    fn consume(self) -> ();
+    fn duplicate(&self) -> (Self, Self) 
+    where 
+        Self: Clone;
+}
 
-- **数学定义**: 严格的数学符号和定义
-- **定理证明**: 完整的定理证明过程
-- **语义模型**: 形式化语义模型
-- **类型系统**: 类型论基础
+// 线性引用
+pub struct LinearRef<T> {
+    value: Option<T>,
+}
 
-### 1.2 Rust实现
+impl<T> LinearRef<T> {
+    pub fn new(value: T) -> Self {
+        LinearRef { value: Some(value) }
+    }
+    
+    pub fn take(mut self) -> T {
+        self.value.take().expect("Value already consumed")
+    }
+}
+```
 
-- **所有权系统**: 形式化所有权模型
-- **借用检查**: 借用检查算法
-- **类型系统**: 类型推导算法
-- **生命周期**: 生命周期分析
+## 持续上下文管理
 
-### 1.3 理论基础
+### 5.1 进度跟踪
 
-- **范畴论**: 抽象数学结构
-- **类型论**: 类型理论基础
-- **逻辑学**: 形式逻辑系统
-- **计算理论**: 计算复杂性
+- [x] 目录结构建立
+- [ ] 范畴论内容
+- [ ] 线性逻辑内容
+- [ ] 指称语义内容
+- [ ] 操作语义内容
+- [ ] 类型论内容
 
-## 核心模块
+### 5.2 下一步计划
 
-### 1.1 范畴论基础
+1. 完成范畴论的基本概念和定理
+2. 实现线性逻辑的证明系统
+3. 建立指称语义的域理论
+4. 构建操作语义的抽象机器
+5. 设计类型论的形式化系统
 
-范畴论为编程语言提供抽象数学框架：
+### 5.3 中断恢复点
 
-- **范畴定义**: 对象和态射的集合
-- **函子**: 范畴间的映射
-- **自然变换**: 函子间的映射
-- **伴随函子**: 对偶关系
-
-### 1.2 类型论基础
-
-类型论为类型系统提供理论基础：
-
-- **简单类型论**: 基础类型系统
-- **依赖类型论**: 依赖类型系统
-- **同伦类型论**: 高阶类型系统
-- **线性类型论**: 线性类型系统
-
-### 1.3 编程语言理论
-
-编程语言理论提供语言设计原则：
-
-- **语法理论**: 形式语法定义
-- **语义理论**: 操作语义和指称语义
-- **类型理论**: 类型系统和类型推导
-- **编译理论**: 编译原理和优化
-
-### 1.4 形式化语义
-
-形式化语义提供程序含义的精确描述：
-
-- **操作语义**: 程序执行步骤
-- **指称语义**: 程序数学含义
-- **公理语义**: 程序性质描述
-- **代数语义**: 代数结构描述
-
-### 1.5 Rust语言模型
-
-Rust语言模型提供Rust的形式化描述：
-
-- **所有权模型**: 资源管理形式化
-- **借用模型**: 借用检查形式化
-- **类型模型**: 类型系统形式化
-- **并发模型**: 并发安全形式化
-
-### 1.6 数学基础
-
-数学基础提供理论支撑：
-
-- **集合论**: 基础数学结构
-- **逻辑学**: 形式推理系统
-- **代数**: 代数结构理论
-- **拓扑学**: 拓扑空间理论
-
-## 实现策略
-
-### 1.1 理论构建
-
-- **公理化**: 基于公理的理论体系
-- **形式化**: 严格的数学形式化
-- **系统化**: 完整的理论系统
-- **实用化**: 理论与实践结合
-
-### 1.2 算法设计
-
-- **类型推导**: 类型推导算法
-- **借用检查**: 借用检查算法
-- **生命周期**: 生命周期分析
-- **内存管理**: 内存管理算法
-
-### 1.3 验证方法
-
-- **形式化验证**: 数学证明验证
-- **模型检查**: 状态空间检查
-- **定理证明**: 自动定理证明
-- **类型检查**: 静态类型检查
-
-## 应用场景
-
-### 1.1 语言设计
-
-- **语法设计**: 语言语法设计
-- **语义设计**: 语言语义设计
-- **类型设计**: 类型系统设计
-- **安全设计**: 安全机制设计
-
-### 1.2 编译器开发
-
-- **词法分析**: 词法分析器设计
-- **语法分析**: 语法分析器设计
-- **语义分析**: 语义分析器设计
-- **代码生成**: 代码生成器设计
-
-### 1.3 程序验证
-
-- **正确性验证**: 程序正确性验证
-- **安全性验证**: 程序安全性验证
-- **性能验证**: 程序性能验证
-- **并发验证**: 并发程序验证
-
-### 1.4 工具开发
-
-- **静态分析**: 静态分析工具
-- **动态分析**: 动态分析工具
-- **调试工具**: 程序调试工具
-- **优化工具**: 程序优化工具
-
-## 发展趋势
-
-### 1.1 理论发展
-
-- **高阶类型**: 高阶类型系统
-- **依赖类型**: 依赖类型系统
-- **线性类型**: 线性类型系统
-- **量子类型**: 量子计算类型
-
-### 1.2 技术演进
-
-- **自动推理**: 自动定理证明
-- **机器学习**: 机器学习应用
-- **量子计算**: 量子计算理论
-- **生物计算**: 生物计算模型
-
-### 1.3 应用扩展
-
-- **安全编程**: 安全编程语言
-- **并发编程**: 并发编程语言
-- **函数式编程**: 函数式编程语言
-- **领域特定**: 领域特定语言
-
-## 质量指标
-
-### 1.1 理论质量
-
-- **一致性**: 理论内部一致性
-- **完备性**: 理论完备性
-- **正确性**: 理论正确性
-- **实用性**: 理论实用性
-
-### 1.2 实现质量
-
-- **正确性**: 实现正确性
-- **效率**: 实现效率
-- **可维护性**: 实现可维护性
-- **可扩展性**: 实现可扩展性
-
-### 1.3 应用质量
-
-- **适用性**: 应用适用性
-- **有效性**: 应用有效性
-- **可靠性**: 应用可靠性
-- **易用性**: 应用易用性
+当前状态：主README文件已创建，准备开始范畴论的详细内容编写。
