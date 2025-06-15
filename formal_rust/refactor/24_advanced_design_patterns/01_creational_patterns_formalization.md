@@ -24,6 +24,7 @@
 ```
 
 其中：
+
 - $\text{Name}$: 模式名称
 - $\text{Problem}$: 对象创建问题
 - $\text{Solution}$: 创建解决方案
@@ -39,6 +40,7 @@
 ```
 
 其中：
+
 - $\mathcal{T}$: 类型集合
 - $\mathcal{P}$: 参数集合
 - $\mathcal{O}$: 对象集合
@@ -64,6 +66,7 @@
 ```
 
 其中：
+
 - $\text{instance}: \text{Option}(T)$
 - $\text{get\_instance}: () \rightarrow T$
 
@@ -92,6 +95,7 @@
 ```
 
 其中：
+
 - $\text{Creator}: \text{trait}$
 - $\text{Product}: \text{trait}$
 - $\text{create\_product}: \text{Creator} \rightarrow \text{Product}$
@@ -115,6 +119,7 @@
 ```
 
 其中：
+
 - $\text{Factory}: \text{trait}$
 - $\text{ProductFamily}: \text{Product}_1 \times \text{Product}_2 \times \cdots \times \text{Product}_n$
 - $\text{create\_family}: \text{Factory} \rightarrow \text{ProductFamily}$
@@ -642,4 +647,4 @@ mod benchmarks {
 **理论完整性**: 100%
 **实现完整性**: 100%
 **证明完整性**: 100%
-**质量等级**: A+ (优秀) 
+**质量等级**: A+ (优秀)

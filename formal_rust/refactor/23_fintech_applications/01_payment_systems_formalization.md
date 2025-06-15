@@ -24,6 +24,7 @@
 ```
 
 其中：
+
 - $\mathcal{A}$: 账户集合
 - $\mathcal{T}$: 交易集合
 - $\mathcal{V}$: 验证规则集合
@@ -114,14 +115,18 @@ U(accounts, transaction) = \text{accounts} \oplus \{\text{from} \mapsto \text{ba
 1. **基础情况**: $t = t_0$ 时，等式显然成立
 2. **归纳步骤**: 假设在时间 $t$ 时等式成立
 3. **交易执行**: 对于任意交易 $tr$，有：
+
    ```math
    \text{balance}(from, t+1) = \text{balance}(from, t) - \text{amount}(tr)
    \text{balance}(to, t+1) = \text{balance}(to, t) + \text{amount}(tr)
    ```
-4. **总和不变**: 
+
+4. **总和不变**:
+
    ```math
    \sum_{a \in \mathcal{A}} \text{balance}(a, t+1) = \sum_{a \in \mathcal{A}} \text{balance}(a, t)
    ```
+
 5. **结论**: 通过数学归纳法，资金守恒定理成立
 
 ## 3. 类型系统设计
@@ -769,4 +774,4 @@ mod tests {
 **理论完整性**: 100%
 **实现完整性**: 100%
 **证明完整性**: 100%
-**质量等级**: A+ (优秀) 
+**质量等级**: A+ (优秀)

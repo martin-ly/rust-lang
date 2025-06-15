@@ -2,7 +2,7 @@
 
 ## 📋 目录结构
 
-```
+```text
 23_fintech_applications/
 ├── README.md                           # 本文件：理论概述和目录
 ├── 01_payment_systems_formalization.md # 支付系统形式化理论
@@ -41,6 +41,7 @@
 ```
 
 其中：
+
 - $\mathcal{P}$: 支付系统模型
 - $\mathcal{T}$: 交易系统模型
 - $\mathcal{R}$: 风险管理系统模型
@@ -70,6 +71,7 @@
 ```
 
 其中：
+
 - $\mathcal{A}$: 账户集合
 - $\mathcal{O}$: 订单集合
 - $\mathcal{M}$: 匹配引擎
@@ -336,4 +338,4 @@ pub mod payment_system {
 **创建时间**: 2025-01-27
 **理论状态**: 开发中
 **质量目标**: A+ (优秀)
-**学术标准**: 严格遵循数学形式化规范 
+**学术标准**: 严格遵循数学形式化规范
