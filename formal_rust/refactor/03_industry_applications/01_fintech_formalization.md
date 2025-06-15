@@ -25,6 +25,7 @@
 $$\mathcal{F} = \langle \mathcal{V}, \mathcal{T}, \phi, \psi \rangle$$
 
 其中：
+
 - $\phi: \mathcal{V} \times \mathcal{V} \rightarrow \mathcal{T}$ 为价值转换函数
 - $\psi: \mathcal{T} \rightarrow \mathbb{R}$ 为风险评估函数
 
@@ -73,6 +74,8 @@ $$\forall t \in T, \forall u_1, u_2 \in U: V(t, u_1, u_2) \Rightarrow \text{Cons
 ### 2.1 交易处理模型 (Transaction Processing Model)
 
 **定义 2.1.1** (交易处理状态机)
+
+```latex
 交易处理状态机是一个七元组 $\mathcal{TSM} = \langle Q, \Sigma, \delta, q_0, F, \lambda, \tau \rangle$，其中：
 
 - $Q$ 为状态集合
@@ -82,9 +85,11 @@ $$\forall t \in T, \forall u_1, u_2 \in U: V(t, u_1, u_2) \Rightarrow \text{Cons
 - $F \subseteq Q$ 为接受状态集合
 - $\lambda: Q \rightarrow \mathbb{R}$ 为状态价值函数
 - $\tau: Q \times \Sigma \rightarrow \mathbb{R}^+$ 为时间函数
+```
 
 **定理 2.1.1** (交易处理正确性定理)
 对于任意交易处理状态机 $\mathcal{TSM}$，如果满足以下条件：
+
 1. $\forall q \in F: \lambda(q) \geq 0$
 2. $\forall q \in Q, \sigma \in \Sigma: \tau(q, \sigma) > 0$
 
@@ -101,25 +106,32 @@ $$\forall t \in T, \forall u_1, u_2 \in U: V(t, u_1, u_2) \Rightarrow \text{Cons
 ### 2.2 风险评估模型 (Risk Assessment Model)
 
 **定义 2.2.1** (风险评估函数)
+
+```latex
 风险评估函数 $R: \mathcal{D} \times \mathcal{M} \rightarrow [0,1]$ 定义为：
 $$R(d, m) = \frac{\sum_{i=1}^{n} w_i \cdot f_i(d, m)}{\sum_{i=1}^{n} w_i}$$
 
 其中：
+
 - $d \in \mathcal{D}$ 为数据点
 - $m \in \mathcal{M}$ 为模型
 - $w_i$ 为权重
 - $f_i$ 为特征函数
+```
 
 **定理 2.2.1** (风险评估单调性定理)
 如果所有特征函数 $f_i$ 都是单调递增的，则风险评估函数 $R$ 也是单调递增的。
 
 **证明**:
+
+```latex
 设 $d_1 \leq d_2$，则：
 $$\begin{align}
 R(d_1, m) &= \frac{\sum_{i=1}^{n} w_i \cdot f_i(d_1, m)}{\sum_{i=1}^{n} w_i} \\
 &\leq \frac{\sum_{i=1}^{n} w_i \cdot f_i(d_2, m)}{\sum_{i=1}^{n} w_i} \\
 &= R(d_2, m)
 \end{align}$$
+```
 
 ---
 
@@ -129,6 +141,7 @@ R(d_1, m) &= \frac{\sum_{i=1}^{n} w_i \cdot f_i(d_1, m)}{\sum_{i=1}^{n} w_i} \\
 
 **定理 3.1.1** (支付系统安全性定理)
 对于任意支付系统 $\mathcal{P}$，如果满足以下条件：
+
 1. 双花检测：$\forall t_1, t_2 \in T: \text{Conflict}(t_1, t_2) \Rightarrow \text{Reject}(t_1) \lor \text{Reject}(t_2)$
 2. 余额验证：$\forall t \in T: \text{Balance}(t) \geq \text{Amount}(t)$
 3. 身份验证：$\forall t \in T: \text{Authenticate}(\text{Sender}(t)) \land \text{Authenticate}(\text{Receiver}(t))$
@@ -170,7 +183,7 @@ use uuid::Uuid;
 use chrono::{DateTime, Utc};
 
 /// 支付系统状态机
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub enum PaymentState {
     Initiated,
     Validated,
@@ -181,7 +194,7 @@ pub enum PaymentState {
 }
 
 /// 交易结构
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Transaction {
     pub id: Uuid,
     pub sender_id: String,
@@ -214,16 +227,16 @@ impl PaymentSystem {
     pub async fn process_transaction(&self, transaction: Transaction) -> Result<(), PaymentError> {
         // 1. 验证交易
         self.validate_transaction(&transaction)?;
-        
+
         // 2. 风险评估
         let risk_score = self.risk_engine.assess_risk(&transaction).await?;
         if risk_score > 0.8 {
             return Err(PaymentError::HighRisk);
         }
-        
+
         // 3. 执行交易
         self.execute_transaction(transaction).await?;
-        
+
         Ok(())
     }
 
@@ -233,39 +246,39 @@ impl PaymentSystem {
         let accounts = self.accounts.lock().unwrap();
         let sender_account = accounts.get(&transaction.sender_id)
             .ok_or(PaymentError::AccountNotFound)?;
-        
+
         if sender_account.balance < transaction.amount {
             return Err(PaymentError::InsufficientFunds);
         }
-        
+
         // 检查双花
         if self.is_double_spend(transaction) {
             return Err(PaymentError::DoubleSpend);
         }
-        
+
         Ok(())
     }
 
     /// 执行交易
     async fn execute_transaction(&self, mut transaction: Transaction) -> Result<(), PaymentError> {
         transaction.state = PaymentState::Processing;
-        
+
         // 更新账户余额
         let mut accounts = self.accounts.lock().unwrap();
         let sender_account = accounts.get_mut(&transaction.sender_id)
             .ok_or(PaymentError::AccountNotFound)?;
         let receiver_account = accounts.get_mut(&transaction.receiver_id)
             .ok_or(PaymentError::AccountNotFound)?;
-        
+
         sender_account.balance -= transaction.amount;
         receiver_account.balance += transaction.amount;
-        
+
         transaction.state = PaymentState::Completed;
-        
+
         // 记录交易
         let mut transactions = self.transactions.lock().unwrap();
         transactions.push(transaction);
-        
+
         Ok(())
     }
 
@@ -281,7 +294,7 @@ impl PaymentSystem {
 }
 
 /// 账户结构
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Account {
     pub id: String,
     pub balance: f64,
@@ -309,19 +322,19 @@ impl RiskEngine {
     pub async fn assess_risk(&self, transaction: &Transaction) -> Result<f64, PaymentError> {
         let mut total_risk = 0.0;
         let mut total_weight = 0.0;
-        
+
         for model in &self.models {
             let (risk_score, weight) = model.calculate_risk(transaction).await?;
             total_risk += risk_score * weight;
             total_weight += weight;
         }
-        
+
         Ok(total_risk / total_weight)
     }
 }
 
 /// 风险模型
-#[derive(Debug)]
+# [derive(Debug)]
 pub enum RiskModel {
     AmountBased,
     FrequencyBased,
@@ -348,7 +361,7 @@ impl RiskModel {
 }
 
 /// 支付错误
-#[derive(Debug, thiserror::Error)]
+# [derive(Debug, thiserror::Error)]
 pub enum PaymentError {
     #[error("Account not found")]
     AccountNotFound,
@@ -362,7 +375,7 @@ pub enum PaymentError {
     ValidationFailed,
 }
 
-#[cfg(test)]
+# [cfg(test)]
 mod tests {
     use super::*;
     use chrono::Utc;
@@ -370,7 +383,7 @@ mod tests {
     #[tokio::test]
     async fn test_payment_system() {
         let payment_system = PaymentSystem::new();
-        
+
         // 创建测试账户
         let mut accounts = payment_system.accounts.lock().unwrap();
         accounts.insert("sender".to_string(), Account {
@@ -386,7 +399,7 @@ mod tests {
             created_at: Utc::now(),
         });
         drop(accounts);
-        
+
         // 创建测试交易
         let transaction = Transaction {
             id: Uuid::new_v4(),
@@ -398,16 +411,16 @@ mod tests {
             state: PaymentState::Initiated,
             metadata: HashMap::new(),
         };
-        
+
         // 处理交易
         let result = payment_system.process_transaction(transaction).await;
         assert!(result.is_ok());
-        
+
         // 验证余额更新
         let accounts = payment_system.accounts.lock().unwrap();
         let sender_balance = accounts.get("sender").unwrap().balance;
         let receiver_balance = accounts.get("receiver").unwrap().balance;
-        
+
         assert_eq!(sender_balance, 900.0);
         assert_eq!(receiver_balance, 100.0);
     }
@@ -422,7 +435,7 @@ use serde::{Deserialize, Serialize};
 use tokio::sync::RwLock;
 
 /// 风控规则
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RiskRule {
     pub id: String,
     pub name: String,
@@ -432,7 +445,7 @@ pub struct RiskRule {
 }
 
 /// 规则条件
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub enum RuleCondition {
     AmountGreaterThan(f64),
     FrequencyExceeds(u32),
@@ -441,7 +454,7 @@ pub enum RuleCondition {
 }
 
 /// 规则动作
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub enum RuleAction {
     Block,
     Flag,
@@ -475,7 +488,7 @@ impl RiskControlSystem {
         let mut total_risk = 0.0;
         let mut total_weight = 0.0;
         let mut actions = Vec::new();
-        
+
         for rule in rules.iter() {
             if self.matches_condition(&rule.condition, transaction) {
                 total_risk += rule.weight;
@@ -483,17 +496,17 @@ impl RiskControlSystem {
                 actions.push(rule.action.clone());
             }
         }
-        
+
         let risk_score = if total_weight > 0.0 {
             total_risk / total_weight
         } else {
             0.0
         };
-        
+
         // 更新风险分数
         let mut risk_scores = self.risk_scores.write().await;
         risk_scores.insert(transaction.sender_id.clone(), risk_score);
-        
+
         RiskAssessment {
             risk_score,
             actions,
@@ -525,7 +538,7 @@ impl RiskControlSystem {
     /// 生成建议
     fn generate_recommendations(&self, risk_score: f64) -> Vec<String> {
         let mut recommendations = Vec::new();
-        
+
         if risk_score > 0.8 {
             recommendations.push("立即阻止交易".to_string());
             recommendations.push("通知安全团队".to_string());
@@ -535,27 +548,27 @@ impl RiskControlSystem {
         } else if risk_score > 0.2 {
             recommendations.push("记录交易日志".to_string());
         }
-        
+
         recommendations
     }
 }
 
 /// 风险评估结果
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct RiskAssessment {
     pub risk_score: f64,
     pub actions: Vec<RuleAction>,
     pub recommendations: Vec<String>,
 }
 
-#[cfg(test)]
+# [cfg(test)]
 mod risk_tests {
     use super::*;
 
     #[tokio::test]
     async fn test_risk_control_system() {
         let risk_system = RiskControlSystem::new();
-        
+
         // 添加风控规则
         let rule = RiskRule {
             id: "rule1".to_string(),
@@ -564,9 +577,9 @@ mod risk_tests {
             action: RuleAction::Flag,
             weight: 0.8,
         };
-        
+
         risk_system.add_rule(rule).await;
-        
+
         // 创建测试交易
         let transaction = Transaction {
             id: Uuid::new_v4(),
@@ -578,10 +591,10 @@ mod risk_tests {
             state: PaymentState::Initiated,
             metadata: HashMap::new(),
         };
-        
+
         // 评估风险
         let assessment = risk_system.evaluate_risk(&transaction).await;
-        
+
         assert!(assessment.risk_score > 0.0);
         assert!(!assessment.actions.is_empty());
         assert!(!assessment.recommendations.is_empty());
@@ -598,7 +611,8 @@ mod risk_tests {
 **案例描述**: 构建高并发支付网关系统，支持多种支付方式。
 
 **技术架构**:
-```
+
+```text
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   API Gateway   │───▶│  Payment Router │───▶│  Risk Engine    │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
@@ -611,6 +625,7 @@ mod risk_tests {
 ```
 
 **性能指标**:
+
 - 吞吐量: 10,000 TPS
 - 延迟: < 100ms
 - 可用性: 99.99%
@@ -620,6 +635,7 @@ mod risk_tests {
 **案例描述**: 基于机器学习的实时风控系统。
 
 **算法流程**:
+
 1. 特征提取: $F = \text{ExtractFeatures}(T)$
 2. 模型预测: $P = \text{Predict}(F, M)$
 3. 决策制定: $D = \text{Decide}(P, T)$
@@ -639,6 +655,7 @@ $$E(n, m) = \frac{n}{m \cdot T_{\text{avg}}}$$
 ### 6.2 内存优化
 
 **优化策略**:
+
 1. 对象池模式
 2. 内存映射
 3. 垃圾回收优化
@@ -656,6 +673,7 @@ $$\text{Strength}(E) = \log_2(\text{KeySpace}(E))$$
 ### 7.2 合规性要求
 
 **PCI DSS 要求**:
+
 1. 数据加密
 2. 访问控制
 3. 安全监控
@@ -683,4 +701,4 @@ $$\text{Strength}(E) = \log_2(\text{KeySpace}(E))$$
 **创建时间**: 2025-06-14
 **最后更新**: 2025-06-14
 **作者**: AI Assistant
-**质量等级**: A+ (优秀) 
+**质量等级**: A+ (优秀)

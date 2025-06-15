@@ -38,6 +38,7 @@ G = (V, E)
 ```
 
 其中：
+
 - $V$: 顶点集合（对象）
 - $E$: 边集合（关系）
 
@@ -66,6 +67,7 @@ C(n, k) = \frac{n!}{k!(n-k)!}
 ```
 
 其中：
+
 - $\text{Name}$: 模式名称
 - $\text{Components}$: 组件集合
 - $\text{Relations}$: 组件间关系
@@ -81,6 +83,7 @@ C(n, k) = \frac{n!}{k!(n-k)!}
 ```
 
 其中：
+
 - $\text{Target}$: 目标接口
 - $\text{Adaptee}$: 被适配对象
 - $\text{Adaptation}$: 适配函数
@@ -94,6 +97,7 @@ C(n, k) = \frac{n!}{k!(n-k)!}
 ```
 
 其中：
+
 - $\text{Component}$: 抽象组件
 - $\text{Leaf}$: 叶子节点
 - $\text{Composite}$: 复合节点
@@ -108,6 +112,7 @@ C(n, k) = \frac{n!}{k!(n-k)!}
 ```
 
 其中：
+
 - $\text{Component}$: 被装饰组件
 - $\text{Decorator}$: 装饰器
 - $\text{Decoration}$: 装饰函数
@@ -121,6 +126,7 @@ C(n, k) = \frac{n!}{k!(n-k)!}
 ```
 
 其中：
+
 - $\text{Subject}$: 抽象主题
 - $\text{Proxy}$: 代理对象
 - $\text{RealSubject}$: 真实主题
@@ -870,4 +876,4 @@ impl Component for Leaf {
 **文档版本**: 1.0  
 **最后更新**: 2025-06-14  
 **作者**: AI Assistant  
-**质量等级**: A+ (优秀) 
+**质量等级**: A+ (优秀)

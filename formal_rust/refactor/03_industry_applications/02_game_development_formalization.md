@@ -25,6 +25,7 @@
 $$\mathcal{G} = \langle \mathcal{W}, \mathcal{A}, \mathcal{P}, \phi, \psi, \tau \rangle$$
 
 其中：
+
 - $\phi: \mathcal{W} \times \mathcal{A} \rightarrow \mathcal{W}$ 为状态转移函数
 - $\psi: \mathcal{W} \times \mathcal{P} \rightarrow \mathbb{R}$ 为奖励函数
 - $\tau: \mathcal{W} \rightarrow \mathbb{R}^+$ 为时间函数
@@ -104,6 +105,7 @@ $$T(n, m) = O(\log n + m)$$
 
 **定理 2.2.1** (物理引擎稳定性定理)
 如果物理引擎满足以下条件：
+
 1. $\forall b \in B: \text{Valid}(b)$
 2. $\forall c \in C: \text{Consistent}(c)$
 3. $\forall f \in F: \text{Bounded}(f)$
@@ -138,6 +140,7 @@ $$T(n) = O(n \log n)$$
 
 **定理 3.1.1** (游戏循环稳定性定理)
 对于任意游戏循环 $\mathcal{GL}$，如果满足以下条件：
+
 1. 固定时间步长：$\Delta t = \text{const}$
 2. 有界处理时间：$T_{\text{process}} < \Delta t$
 3. 单调递增时间：$t_{i+1} > t_i$
@@ -770,7 +773,8 @@ mod collision_tests {
 **案例描述**: 构建高性能2D平台游戏引擎。
 
 **技术架构**:
-```
+
+```text
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   Input System  │───▶│  Physics Engine │───▶│  Render System  │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
@@ -783,6 +787,7 @@ mod collision_tests {
 ```
 
 **性能指标**:
+
 - 帧率: 60 FPS
 - 实体数量: 10,000+
 - 内存使用: < 100MB
@@ -792,6 +797,7 @@ mod collision_tests {
 **案例描述**: 大规模3D开放世界游戏引擎。
 
 **技术特性**:
+
 1. 流式加载
 2. LOD系统
 3. 多线程渲染
@@ -809,6 +815,7 @@ mod collision_tests {
 ### 6.2 渲染优化
 
 **优化策略**:
+
 1. 视锥剔除
 2. 遮挡剔除
 3. 批处理渲染
@@ -851,4 +858,4 @@ $$T_{\text{response}} \leq T_{\text{deadline}}$$
 **创建时间**: 2025-06-14
 **最后更新**: 2025-06-14
 **作者**: AI Assistant
-**质量等级**: A+ (优秀) 
+**质量等级**: A+ (优秀)

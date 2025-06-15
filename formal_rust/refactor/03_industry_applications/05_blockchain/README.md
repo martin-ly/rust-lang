@@ -776,7 +776,7 @@ impl ExecutionEnvironment {
 
 ### 3.1 文档组织 (Document Organization)
 
-```
+```text
 05_blockchain/
 ├── README.md                           # 本文档
 ├── 01_smart_contracts.md               # 智能合约理论
@@ -834,4 +834,4 @@ impl ExecutionEnvironment {
 **最后更新**: 2025-06-14
 **项目负责人**: AI Assistant
 
-🎊 **区块链与Web3理论体系建立完成！** 🎊 
+🎊 **区块链与Web3理论体系建立完成！** 🎊
