@@ -3,50 +3,81 @@
 ## 目录
 
 ### 1. 并发编程基础
+
 #### 1.1 并发与并行概念
+
 #### 1.2 并发编程挑战
+
 #### 1.3 Rust并发模型
 
 ### 2. 活动对象模式 (Active Object)
+
 #### 2.1 模式定义与结构
+
 #### 2.2 实现机制
+
 #### 2.3 性能分析
+
 #### 2.4 Rust实现
 
 ### 3. 管程模式 (Monitor)
+
 #### 3.1 管程概念
+
 #### 3.2 同步机制
+
 #### 3.3 条件变量
+
 #### 3.4 Rust实现
 
 ### 4. 线程池模式 (Thread Pool)
+
 #### 4.1 线程池设计
+
 #### 4.2 任务调度
+
 #### 4.3 负载均衡
+
 #### 4.4 Rust实现
 
 ### 5. 生产者-消费者模式 (Producer-Consumer)
+
 #### 5.1 模式结构
+
 #### 5.2 缓冲区管理
+
 #### 5.3 同步机制
+
 #### 5.4 Rust实现
 
 ### 6. 读写锁模式 (Readers-Writer Lock)
+
 #### 6.1 读写锁概念
+
 #### 6.2 公平性策略
+
 #### 6.3 性能优化
+
 #### 6.4 Rust实现
 
 ### 7. Future/Promise模式
+
 #### 7.1 异步编程模型
+
 #### 7.2 Future组合
+
 #### 7.3 错误处理
+
 #### 7.4 Rust实现
 
 ### 8. Actor模型
+
 #### 8.1 Actor概念
+
 #### 8.2 消息传递
+
 #### 8.3 监督策略
+
 #### 8.4 Rust实现
 
 ---
@@ -56,6 +87,7 @@
 ### 1.1 并发与并行概念
 
 **并发定义**：
+
 ```
 Concurrency : System → Property
 ∀system ∈ System | Concurrency(system) = 
@@ -63,6 +95,7 @@ Concurrency : System → Property
 ```
 
 **并行定义**：
+
 ```
 Parallelism : System → Property
 ∀system ∈ System | Parallelism(system) = 
@@ -70,6 +103,7 @@ Parallelism : System → Property
 ```
 
 **关系定理**：
+
 ```
 Theorem: ConcurrencyVsParallelism
 ∀sys ∈ System | Parallelism(sys) → Concurrency(sys)
@@ -77,6 +111,7 @@ Theorem: ConcurrencyVsParallelism
 ```
 
 **形式化表达**：
+
 ```
 ConcurrentExecution : [Task] → Execution
 ∀tasks ∈ [Task] | ConcurrentExecution(tasks) = 
@@ -86,6 +121,7 @@ ConcurrentExecution : [Task] → Execution
 ### 1.2 并发编程挑战
 
 **数据竞争**：
+
 ```
 DataRace : (Thread, Thread, Resource) → Boolean
 ∀t1, t2 ∈ Thread, ∀r ∈ Resource | DataRace(t1, t2, r) = 
@@ -93,6 +129,7 @@ DataRace : (Thread, Thread, Resource) → Boolean
 ```
 
 **死锁**：
+
 ```
 Deadlock : [Thread] → Boolean
 ∀threads ∈ [Thread] | Deadlock(threads) = 
@@ -100,6 +137,7 @@ Deadlock : [Thread] → Boolean
 ```
 
 **活锁**：
+
 ```
 Livelock : [Thread] → Boolean
 ∀threads ∈ [Thread] | Livelock(threads) = 
@@ -107,6 +145,7 @@ Livelock : [Thread] → Boolean
 ```
 
 **饥饿**：
+
 ```
 Starvation : Thread → Boolean
 ∀thread ∈ Thread | Starvation(thread) = 
@@ -116,6 +155,7 @@ Starvation : Thread → Boolean
 ### 1.3 Rust并发模型
 
 **所有权系统**：
+
 ```
 OwnershipSystem : (Value, Thread) → Permission
 ∀value ∈ Value, ∀thread ∈ Thread | OwnershipSystem(value, thread) = 
@@ -125,6 +165,7 @@ OwnershipSystem : (Value, Thread) → Permission
 ```
 
 **借用检查器**：
+
 ```
 BorrowChecker : (Value, [Thread]) → Boolean
 ∀value ∈ Value, ∀threads ∈ [Thread] | BorrowChecker(value, threads) = 
@@ -132,6 +173,7 @@ BorrowChecker : (Value, [Thread]) → Boolean
 ```
 
 **Send和Sync trait**：
+
 ```
 SendSyncTraits : Type → Properties
 ∀type ∈ Type | SendSyncTraits(type) = {
@@ -147,6 +189,7 @@ SendSyncTraits : Type → Properties
 ### 2.1 模式定义与结构
 
 **活动对象定义**：
+
 ```
 ActiveObject : Object → ActiveObject
 ∀object ∈ Object | ActiveObject(object) = {
@@ -158,6 +201,7 @@ ActiveObject : Object → ActiveObject
 ```
 
 **模式结构**：
+
 ```
 ActiveObjectStructure : ActiveObject → Components
 ∀ao ∈ ActiveObject | ActiveObjectStructure(ao) = {
@@ -170,6 +214,7 @@ ActiveObjectStructure : ActiveObject → Components
 ```
 
 **方法调用流程**：
+
 ```
 MethodCallFlow : (Client, ActiveObject, Method) → Future<Result>
 ∀client ∈ Client, ∀ao ∈ ActiveObject, ∀method ∈ Method | 
@@ -180,6 +225,7 @@ MethodCallFlow : (Client, ActiveObject, Method) → Future<Result>
 ### 2.2 实现机制
 
 **调度器**：
+
 ```
 Scheduler : ActiveObject → Scheduler
 ∀ao ∈ ActiveObject | Scheduler(ao) = {
@@ -190,6 +236,7 @@ Scheduler : ActiveObject → Scheduler
 ```
 
 **方法请求**：
+
 ```
 MethodRequest : Method → Request
 ∀method ∈ Method | MethodRequest(method) = {
@@ -201,6 +248,7 @@ MethodRequest : Method → Request
 ```
 
 **激活队列**：
+
 ```
 ActivationQueue : ActiveObject → Queue
 ∀ao ∈ ActiveObject | ActivationQueue(ao) = 
@@ -210,6 +258,7 @@ ActivationQueue : ActiveObject → Queue
 ### 2.3 性能分析
 
 **延迟分析**：
+
 ```
 LatencyAnalysis : ActiveObject → Latency
 ∀ao ∈ ActiveObject | LatencyAnalysis(ao) = 
@@ -217,6 +266,7 @@ LatencyAnalysis : ActiveObject → Latency
 ```
 
 **吞吐量分析**：
+
 ```
 ThroughputAnalysis : ActiveObject → Throughput
 ∀ao ∈ ActiveObject | ThroughputAnalysis(ao) = 
@@ -224,6 +274,7 @@ ThroughputAnalysis : ActiveObject → Throughput
 ```
 
 **资源利用率**：
+
 ```
 ResourceUtilization : ActiveObject → Utilization
 ∀ao ∈ ActiveObject | ResourceUtilization(ao) = 
@@ -304,6 +355,7 @@ impl ActiveObject {
 ### 3.1 管程概念
 
 **管程定义**：
+
 ```
 Monitor : Resource → Monitor
 ∀resource ∈ Resource | Monitor(resource) = {
@@ -315,6 +367,7 @@ Monitor : Resource → Monitor
 ```
 
 **管程结构**：
+
 ```
 MonitorStructure : Monitor → Components
 ∀monitor ∈ Monitor | MonitorStructure(monitor) = {
@@ -326,6 +379,7 @@ MonitorStructure : Monitor → Components
 ```
 
 **互斥访问**：
+
 ```
 MutualExclusion : Monitor → Boolean
 ∀monitor ∈ Monitor | MutualExclusion(monitor) = 
@@ -335,6 +389,7 @@ MutualExclusion : Monitor → Boolean
 ### 3.2 同步机制
 
 **进入管程**：
+
 ```
 EnterMonitor : (Thread, Monitor) → Boolean
 ∀thread ∈ Thread, ∀monitor ∈ Monitor | 
@@ -343,6 +398,7 @@ EnterMonitor : (Thread, Monitor) → Boolean
 ```
 
 **离开管程**：
+
 ```
 ExitMonitor : (Thread, Monitor) → Unit
 ∀thread ∈ Thread, ∀monitor ∈ Monitor | 
@@ -351,6 +407,7 @@ ExitMonitor : (Thread, Monitor) → Unit
 ```
 
 **条件等待**：
+
 ```
 ConditionWait : (Thread, Condition) → Unit
 ∀thread ∈ Thread, ∀condition ∈ Condition | 
@@ -361,6 +418,7 @@ ConditionWait : (Thread, Condition) → Unit
 ### 3.3 条件变量
 
 **条件变量操作**：
+
 ```
 ConditionVariable : Condition → Operations
 ∀condition ∈ Condition | ConditionVariable(condition) = {
@@ -371,6 +429,7 @@ ConditionVariable : Condition → Operations
 ```
 
 **等待队列**：
+
 ```
 WaitQueue : Condition → Queue<Thread>
 ∀condition ∈ Condition | WaitQueue(condition) = 
@@ -378,6 +437,7 @@ WaitQueue : Condition → Queue<Thread>
 ```
 
 **信号语义**：
+
 ```
 SignalSemantics : (Condition, Thread) → Effect
 ∀condition ∈ Condition, ∀thread ∈ Thread | 
@@ -479,6 +539,7 @@ impl<T> BoundedBuffer<T> {
 ### 4.1 线程池设计
 
 **线程池定义**：
+
 ```
 ThreadPool : Configuration → ThreadPool
 ∀config ∈ Configuration | ThreadPool(config) = {
@@ -490,6 +551,7 @@ ThreadPool : Configuration → ThreadPool
 ```
 
 **工作线程**：
+
 ```
 Worker : ThreadPool → Worker
 ∀pool ∈ ThreadPool | Worker(pool) = {
@@ -500,6 +562,7 @@ Worker : ThreadPool → Worker
 ```
 
 **任务队列**：
+
 ```
 TaskQueue : ThreadPool → Queue
 ∀pool ∈ ThreadPool | TaskQueue(pool) = 
@@ -509,6 +572,7 @@ TaskQueue : ThreadPool → Queue
 ### 4.2 任务调度
 
 **任务定义**：
+
 ```
 Task : Job → Task
 ∀job ∈ Job | Task(job) = {
@@ -520,6 +584,7 @@ Task : Job → Task
 ```
 
 **调度策略**：
+
 ```
 SchedulingStrategy : ThreadPool → Strategy
 ∀pool ∈ ThreadPool | SchedulingStrategy(pool) ∈ {
@@ -528,6 +593,7 @@ SchedulingStrategy : ThreadPool → Strategy
 ```
 
 **负载均衡**：
+
 ```
 LoadBalancing : [Worker] → Worker
 ∀workers ∈ [Worker] | LoadBalancing(workers) = 
@@ -537,6 +603,7 @@ LoadBalancing : [Worker] → Worker
 ### 4.3 负载均衡
 
 **工作窃取**：
+
 ```
 WorkStealing : (Worker, [Worker]) → Task
 ∀worker ∈ Worker, ∀workers ∈ [Worker] | 
@@ -548,6 +615,7 @@ WorkStealing : (Worker, [Worker]) → Task
 ```
 
 **动态调整**：
+
 ```
 DynamicAdjustment : ThreadPool → Adjustment
 ∀pool ∈ ThreadPool | DynamicAdjustment(pool) = 
@@ -555,6 +623,7 @@ DynamicAdjustment : ThreadPool → Adjustment
 ```
 
 **性能监控**：
+
 ```
 PerformanceMonitoring : ThreadPool → Metrics
 ∀pool ∈ ThreadPool | PerformanceMonitoring(pool) = {
@@ -657,6 +726,7 @@ impl Worker {
 ### 5.1 模式结构
 
 **模式定义**：
+
 ```
 ProducerConsumer : (Producer, Consumer, Buffer) → System
 ∀producer ∈ Producer, ∀consumer ∈ Consumer, ∀buffer ∈ Buffer | 
@@ -669,6 +739,7 @@ ProducerConsumer : (Producer, Consumer, Buffer) → System
 ```
 
 **组件关系**：
+
 ```
 ComponentRelations : ProducerConsumer → Relations
 ∀pc ∈ ProducerConsumer | ComponentRelations(pc) = {
@@ -679,6 +750,7 @@ ComponentRelations : ProducerConsumer → Relations
 ```
 
 **数据流**：
+
 ```
 DataFlow : ProducerConsumer → Flow
 ∀pc ∈ ProducerConsumer | DataFlow(pc) = 
@@ -688,6 +760,7 @@ DataFlow : ProducerConsumer → Flow
 ### 5.2 缓冲区管理
 
 **缓冲区接口**：
+
 ```
 BufferInterface : Buffer → Operations
 ∀buffer ∈ Buffer | BufferInterface(buffer) = {
@@ -699,6 +772,7 @@ BufferInterface : Buffer → Operations
 ```
 
 **有界缓冲区**：
+
 ```
 BoundedBuffer : Capacity → Buffer
 ∀capacity ∈ Capacity | BoundedBuffer(capacity) = {
@@ -711,6 +785,7 @@ BoundedBuffer : Capacity → Buffer
 ```
 
 **无界缓冲区**：
+
 ```
 UnboundedBuffer : () → Buffer
 ∀() ∈ Unit | UnboundedBuffer() = {
@@ -723,6 +798,7 @@ UnboundedBuffer : () → Buffer
 ### 5.3 同步机制
 
 **生产者同步**：
+
 ```
 ProducerSynchronization : (Producer, Buffer) → Sync
 ∀producer ∈ Producer, ∀buffer ∈ Buffer | 
@@ -731,6 +807,7 @@ ProducerSynchronization : (Producer, Buffer) → Sync
 ```
 
 **消费者同步**：
+
 ```
 ConsumerSynchronization : (Consumer, Buffer) → Sync
 ∀consumer ∈ Consumer, ∀buffer ∈ Buffer | 
@@ -739,6 +816,7 @@ ConsumerSynchronization : (Consumer, Buffer) → Sync
 ```
 
 **条件变量**：
+
 ```
 ConditionVariables : Buffer → Conditions
 ∀buffer ∈ Buffer | ConditionVariables(buffer) = {
@@ -826,6 +904,7 @@ where
 ### 6.1 读写锁概念
 
 **读写锁定义**：
+
 ```
 ReadWriteLock : Resource → ReadWriteLock
 ∀resource ∈ Resource | ReadWriteLock(resource) = {
@@ -840,6 +919,7 @@ ReadWriteLock : Resource → ReadWriteLock
 ```
 
 **访问模式**：
+
 ```
 AccessMode : Thread → Mode
 ∀thread ∈ Thread | AccessMode(thread) ∈ {
@@ -848,6 +928,7 @@ AccessMode : Thread → Mode
 ```
 
 **锁状态**：
+
 ```
 LockState : ReadWriteLock → State
 ∀lock ∈ ReadWriteLock | LockState(lock) ∈ {
@@ -858,6 +939,7 @@ LockState : ReadWriteLock → State
 ### 6.2 公平性策略
 
 **读者优先**：
+
 ```
 ReaderPriority : ReadWriteLock → Strategy
 ∀lock ∈ ReadWriteLock | ReaderPriority(lock) = 
@@ -865,6 +947,7 @@ ReaderPriority : ReadWriteLock → Strategy
 ```
 
 **写者优先**：
+
 ```
 WriterPriority : ReadWriteLock → Strategy
 ∀lock ∈ ReadWriteLock | WriterPriority(lock) = 
@@ -872,6 +955,7 @@ WriterPriority : ReadWriteLock → Strategy
 ```
 
 **公平策略**：
+
 ```
 FairStrategy : ReadWriteLock → Strategy
 ∀lock ∈ ReadWriteLock | FairStrategy(lock) = 
@@ -881,6 +965,7 @@ FairStrategy : ReadWriteLock → Strategy
 ### 6.3 性能优化
 
 **锁升级**：
+
 ```
 LockUpgrade : (ReadLock, WriteLock) → Upgrade
 ∀read_lock ∈ ReadLock, ∀write_lock ∈ WriteLock | 
@@ -889,6 +974,7 @@ LockUpgrade : (ReadLock, WriteLock) → Upgrade
 ```
 
 **锁降级**：
+
 ```
 LockDowngrade : (WriteLock, ReadLock) → Downgrade
 ∀write_lock ∈ WriteLock, ∀read_lock ∈ ReadLock | 
@@ -897,6 +983,7 @@ LockDowngrade : (WriteLock, ReadLock) → Downgrade
 ```
 
 **批量操作**：
+
 ```
 BatchOperations : [Operation] → Batch
 ∀operations ∈ [Operation] | BatchOperations(operations) = 
@@ -981,6 +1068,7 @@ impl ReadWriteLock {
 ### 7.1 异步编程模型
 
 **Future定义**：
+
 ```
 Future : Computation → Future
 ∀computation ∈ Computation | Future(computation) = {
@@ -992,6 +1080,7 @@ Future : Computation → Future
 ```
 
 **Future状态**：
+
 ```
 FutureState : Future → State
 ∀future ∈ Future | FutureState(future) ∈ {
@@ -1000,6 +1089,7 @@ FutureState : Future → State
 ```
 
 **异步执行**：
+
 ```
 AsyncExecution : Future → Execution
 ∀future ∈ Future | AsyncExecution(future) = 
@@ -1009,6 +1099,7 @@ AsyncExecution : Future → Execution
 ### 7.2 Future组合
 
 **组合操作**：
+
 ```
 FutureComposition : (Future, Future) → CombinedFuture
 ∀f1, f2 ∈ Future | FutureComposition(f1, f2) = 
@@ -1016,6 +1107,7 @@ FutureComposition : (Future, Future) → CombinedFuture
 ```
 
 **链式调用**：
+
 ```
 FutureChaining : (Future, Continuation) → ChainedFuture
 ∀future ∈ Future, ∀continuation ∈ Continuation | 
@@ -1024,6 +1116,7 @@ FutureChaining : (Future, Continuation) → ChainedFuture
 ```
 
 **并行执行**：
+
 ```
 ParallelExecution : [Future] → ParallelFuture
 ∀futures ∈ [Future] | ParallelExecution(futures) = 
@@ -1033,6 +1126,7 @@ ParallelExecution : [Future] → ParallelFuture
 ### 7.3 错误处理
 
 **错误传播**：
+
 ```
 ErrorPropagation : Future → Error
 ∀future ∈ Future | ErrorPropagation(future) = 
@@ -1040,6 +1134,7 @@ ErrorPropagation : Future → Error
 ```
 
 **错误恢复**：
+
 ```
 ErrorRecovery : (Future, Handler) → RecoveredFuture
 ∀future ∈ Future, ∀handler ∈ Handler | 
@@ -1048,6 +1143,7 @@ ErrorRecovery : (Future, Handler) → RecoveredFuture
 ```
 
 **超时处理**：
+
 ```
 TimeoutHandling : (Future, Duration) → TimeoutFuture
 ∀future ∈ Future, ∀duration ∈ Duration | 
@@ -1159,6 +1255,7 @@ impl AsyncRuntime {
 ### 8.1 Actor概念
 
 **Actor定义**：
+
 ```
 Actor : Behavior → Actor
 ∀behavior ∈ Behavior | Actor(behavior) = {
@@ -1170,6 +1267,7 @@ Actor : Behavior → Actor
 ```
 
 **Actor系统**：
+
 ```
 ActorSystem : [Actor] → System
 ∀actors ∈ [Actor] | ActorSystem(actors) = {
@@ -1180,6 +1278,7 @@ ActorSystem : [Actor] → System
 ```
 
 **消息传递**：
+
 ```
 MessagePassing : (Actor, Actor, Message) → Unit
 ∀sender, receiver ∈ Actor, ∀message ∈ Message | 
@@ -1190,6 +1289,7 @@ MessagePassing : (Actor, Actor, Message) → Unit
 ### 8.2 消息传递
 
 **消息类型**：
+
 ```
 MessageType : Message → Type
 ∀message ∈ Message | MessageType(message) ∈ {
@@ -1198,6 +1298,7 @@ MessageType : Message → Type
 ```
 
 **邮箱管理**：
+
 ```
 Mailbox : Actor → Queue
 ∀actor ∈ Actor | Mailbox(actor) = 
@@ -1205,6 +1306,7 @@ Mailbox : Actor → Queue
 ```
 
 **消息处理**：
+
 ```
 MessageHandling : (Actor, Message) → Response
 ∀actor ∈ Actor, ∀message ∈ Message | 
@@ -1215,6 +1317,7 @@ MessageHandling : (Actor, Message) → Response
 ### 8.3 监督策略
 
 **监督层次**：
+
 ```
 SupervisionHierarchy : Actor → Hierarchy
 ∀actor ∈ Actor | SupervisionHierarchy(actor) = 
@@ -1222,6 +1325,7 @@ SupervisionHierarchy : Actor → Hierarchy
 ```
 
 **故障处理**：
+
 ```
 FaultHandling : (Actor, Error) → Action
 ∀actor ∈ Actor, ∀error ∈ Error | 
@@ -1230,6 +1334,7 @@ FaultHandling : (Actor, Error) → Action
 ```
 
 **重启策略**：
+
 ```
 RestartStrategy : Actor → Strategy
 ∀actor ∈ Actor | RestartStrategy(actor) ∈ {
@@ -1331,10 +1436,11 @@ impl ActorSystem {
 并发设计模式为构建高性能、可扩展的并发系统提供了重要的工具和模式。通过Rust的所有权系统和类型安全保证，这些模式能够以更安全、更高效的方式实现。
 
 **核心并发原则**：
+
 1. 避免数据竞争：通过所有权和借用检查
 2. 最小化锁竞争：使用适当的同步机制
 3. 最大化并行性：合理设计任务分解
 4. 保证正确性：形式化验证和测试
 5. 优化性能：减少同步开销
 
-这些模式为构建复杂的并发系统提供了坚实的基础，确保系统的正确性、性能和可维护性。 
+这些模式为构建复杂的并发系统提供了坚实的基础，确保系统的正确性、性能和可维护性。

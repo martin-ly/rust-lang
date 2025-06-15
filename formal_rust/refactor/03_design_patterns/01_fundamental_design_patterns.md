@@ -3,37 +3,63 @@
 ## 目录
 
 ### 1. 设计模式理论基础
+
 #### 1.1 概念与定义
+
 #### 1.2 分类体系
+
 #### 1.3 形式化表达
 
 ### 2. 创建型模式 (Creational Patterns)
+
 #### 2.1 单例模式 (Singleton)
+
 #### 2.2 工厂方法模式 (Factory Method)
+
 #### 2.3 抽象工厂模式 (Abstract Factory)
+
 #### 2.4 建造者模式 (Builder)
+
 #### 2.5 原型模式 (Prototype)
 
 ### 3. 结构型模式 (Structural Patterns)
+
 #### 3.1 适配器模式 (Adapter)
+
 #### 3.2 桥接模式 (Bridge)
+
 #### 3.3 组合模式 (Composite)
+
 #### 3.4 装饰器模式 (Decorator)
+
 #### 3.5 外观模式 (Facade)
+
 #### 3.6 享元模式 (Flyweight)
+
 #### 3.7 代理模式 (Proxy)
 
 ### 4. 行为型模式 (Behavioral Patterns)
+
 #### 4.1 责任链模式 (Chain of Responsibility)
+
 #### 4.2 命令模式 (Command)
+
 #### 4.3 解释器模式 (Interpreter)
+
 #### 4.4 迭代器模式 (Iterator)
+
 #### 4.5 中介者模式 (Mediator)
+
 #### 4.6 备忘录模式 (Memento)
+
 #### 4.7 观察者模式 (Observer)
+
 #### 4.8 状态模式 (State)
+
 #### 4.9 策略模式 (Strategy)
+
 #### 4.10 模板方法模式 (Template Method)
+
 #### 4.11 访问者模式 (Visitor)
 
 ---
@@ -43,6 +69,7 @@
 ### 1.1 概念与定义
 
 **设计模式定义**：
+
 ```
 DesignPattern : Problem → Solution
 ∀problem ∈ DesignProblem | DesignPattern(problem) = 
@@ -50,6 +77,7 @@ DesignPattern : Problem → Solution
 ```
 
 **模式结构**：
+
 ```
 PatternStructure : Pattern → Components
 ∀pattern ∈ Pattern | PatternStructure(pattern) = {
@@ -65,6 +93,7 @@ PatternStructure : Pattern → Components
 ```
 
 **形式化表达**：
+
 ```
 Pattern : (Context, Problem, Solution) → Design
 ∀c ∈ Context, ∀p ∈ Problem, ∀s ∈ Solution | 
@@ -74,6 +103,7 @@ Pattern : (Context, Problem, Solution) → Design
 ### 1.2 分类体系
 
 **按目的分类**：
+
 ```
 PatternClassification : Pattern → Category
 ∀pattern ∈ Pattern | PatternClassification(pattern) ∈ {
@@ -82,6 +112,7 @@ PatternClassification : Pattern → Category
 ```
 
 **按范围分类**：
+
 ```
 PatternScope : Pattern → Scope
 ∀pattern ∈ Pattern | PatternScope(pattern) ∈ {
@@ -90,6 +121,7 @@ PatternScope : Pattern → Scope
 ```
 
 **分类函数**：
+
 ```
 CategorizePattern : Pattern → (Purpose, Scope)
 ∀p ∈ Pattern | CategorizePattern(p) = 
@@ -99,6 +131,7 @@ CategorizePattern : Pattern → (Purpose, Scope)
 ### 1.3 形式化表达
 
 **模式实例化**：
+
 ```
 PatternInstantiation : Pattern → Instance
 ∀pattern ∈ Pattern | PatternInstantiation(pattern) = 
@@ -106,6 +139,7 @@ PatternInstantiation : Pattern → Instance
 ```
 
 **模式组合**：
+
 ```
 PatternComposition : [Pattern] → CompositePattern
 ∀patterns ∈ [Pattern] | PatternComposition(patterns) = 
@@ -121,6 +155,7 @@ PatternComposition : [Pattern] → CompositePattern
 **定义**：保证一个类仅有一个实例，并提供一个访问它的全局访问点。
 
 **形式化表达**：
+
 ```
 Singleton : Class → Instance
 ∀class ∈ Class | Singleton(class) = {
@@ -130,6 +165,7 @@ Singleton : Class → Instance
 ```
 
 **约束条件**：
+
 ```
 SingletonConstraints : Class → Boolean
 ∀class ∈ Class | SingletonConstraints(class) = 
@@ -139,6 +175,7 @@ SingletonConstraints : Class → Boolean
 ```
 
 **Rust实现**：
+
 ```rust
 use std::sync::{Mutex, Once, ONCE_INIT};
 use std::mem;
@@ -171,6 +208,7 @@ impl SingletonLogger {
 ```
 
 **形式化验证**：
+
 ```
 Theorem: SingletonUniqueness
 ∀s1, s2 ∈ SingletonInstance | s1 = s2
@@ -181,6 +219,7 @@ Theorem: SingletonUniqueness
 **定义**：定义一个用于创建对象的接口，让子类决定实例化哪一个类。
 
 **形式化表达**：
+
 ```
 FactoryMethod : Creator → Product
 ∀creator ∈ Creator | FactoryMethod(creator) = 
@@ -188,6 +227,7 @@ FactoryMethod : Creator → Product
 ```
 
 **类型关系**：
+
 ```
 FactoryMethodTypes : (Creator, Product) → Relationship
 ∀creator ∈ Creator, ∀product ∈ Product | 
@@ -196,6 +236,7 @@ FactoryMethodTypes : (Creator, Product) → Relationship
 ```
 
 **Rust实现**：
+
 ```rust
 // 产品trait
 trait Product {
@@ -248,6 +289,7 @@ impl Creator for ConcreteCreatorB {
 **定义**：提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们的具体类。
 
 **形式化表达**：
+
 ```
 AbstractFactory : Factory → ProductFamily
 ∀factory ∈ Factory | AbstractFactory(factory) = 
@@ -256,6 +298,7 @@ AbstractFactory : Factory → ProductFamily
 ```
 
 **产品族约束**：
+
 ```
 ProductFamilyConstraint : ProductFamily → Boolean
 ∀family ∈ ProductFamily | ProductFamilyConstraint(family) = 
@@ -267,6 +310,7 @@ ProductFamilyConstraint : ProductFamily → Boolean
 **定义**：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。
 
 **形式化表达**：
+
 ```
 Builder : Builder → Product
 ∀builder ∈ Builder | Builder(builder) = 
@@ -274,6 +318,7 @@ Builder : Builder → Product
 ```
 
 **构建过程**：
+
 ```
 BuildProcess : Builder → [Step]
 ∀builder ∈ Builder | BuildProcess(builder) = 
@@ -285,6 +330,7 @@ BuildProcess : Builder → [Step]
 **定义**：用原型实例指定创建对象的种类，并且通过复制这些原型创建新的对象。
 
 **形式化表达**：
+
 ```
 Prototype : Prototype → Clone
 ∀prototype ∈ Prototype | Prototype(prototype) = 
@@ -292,6 +338,7 @@ Prototype : Prototype → Clone
 ```
 
 **克隆操作**：
+
 ```
 CloneOperation : Object → Object
 ∀obj ∈ Object | CloneOperation(obj) = 
@@ -307,6 +354,7 @@ CloneOperation : Object → Object
 **定义**：将一个类的接口转换成客户希望的另外一个接口。
 
 **形式化表达**：
+
 ```
 Adapter : (Target, Adaptee) → Adapted
 ∀target ∈ Target, ∀adaptee ∈ Adaptee | 
@@ -314,6 +362,7 @@ Adapter : (Target, Adaptee) → Adapted
 ```
 
 **接口映射**：
+
 ```
 InterfaceMapping : (SourceInterface, TargetInterface) → Mapping
 ∀source ∈ SourceInterface, ∀target ∈ TargetInterface | 
@@ -326,6 +375,7 @@ InterfaceMapping : (SourceInterface, TargetInterface) → Mapping
 **定义**：将抽象部分与实现部分分离，使它们都可以独立地变化。
 
 **形式化表达**：
+
 ```
 Bridge : (Abstraction, Implementation) → Bridge
 ∀abstraction ∈ Abstraction, ∀implementation ∈ Implementation | 
@@ -334,6 +384,7 @@ Bridge : (Abstraction, Implementation) → Bridge
 ```
 
 **解耦关系**：
+
 ```
 Decoupling : (Abstraction, Implementation) → Boolean
 ∀abs ∈ Abstraction, ∀impl ∈ Implementation | 
@@ -345,6 +396,7 @@ Decoupling : (Abstraction, Implementation) → Boolean
 **定义**：将对象组合成树形结构以表示"部分-整体"的层次结构。
 
 **形式化表达**：
+
 ```
 Composite : Component → Tree
 ∀component ∈ Component | Composite(component) = 
@@ -353,6 +405,7 @@ Composite : Component → Tree
 ```
 
 **树结构**：
+
 ```
 TreeStructure : Component → Structure
 ∀component ∈ Component | TreeStructure(component) = {
@@ -367,6 +420,7 @@ TreeStructure : Component → Structure
 **定义**：动态地给一个对象添加一些额外的职责。
 
 **形式化表达**：
+
 ```
 Decorator : (Component, Decorator) → DecoratedComponent
 ∀component ∈ Component, ∀decorator ∈ Decorator | 
@@ -375,6 +429,7 @@ Decorator : (Component, Decorator) → DecoratedComponent
 ```
 
 **装饰链**：
+
 ```
 DecorationChain : [Decorator] → Component → DecoratedComponent
 ∀decorators ∈ [Decorator], ∀component ∈ Component | 
@@ -387,6 +442,7 @@ DecorationChain : [Decorator] → Component → DecoratedComponent
 **定义**：为子系统中的一组接口提供一个一致的界面。
 
 **形式化表达**：
+
 ```
 Facade : Subsystem → Interface
 ∀subsystem ∈ Subsystem | Facade(subsystem) = 
@@ -394,6 +450,7 @@ Facade : Subsystem → Interface
 ```
 
 **简化接口**：
+
 ```
 SimplifiedInterface : ComplexInterface → SimpleInterface
 ∀complex ∈ ComplexInterface | SimplifiedInterface(complex) = 
@@ -405,6 +462,7 @@ SimplifiedInterface : ComplexInterface → SimpleInterface
 **定义**：运用共享技术有效地支持大量细粒度对象的复用。
 
 **形式化表达**：
+
 ```
 Flyweight : (IntrinsicState, ExtrinsicState) → Flyweight
 ∀intrinsic ∈ IntrinsicState, ∀extrinsic ∈ ExtrinsicState | 
@@ -413,6 +471,7 @@ Flyweight : (IntrinsicState, ExtrinsicState) → Flyweight
 ```
 
 **共享池**：
+
 ```
 SharedPool : Flyweight → Pool
 ∀flyweight ∈ Flyweight | SharedPool(flyweight) = 
@@ -424,6 +483,7 @@ SharedPool : Flyweight → Pool
 **定义**：为其他对象提供一种代理以控制对这个对象的访问。
 
 **形式化表达**：
+
 ```
 Proxy : Subject → ControlledAccess
 ∀subject ∈ Subject | Proxy(subject) = 
@@ -431,6 +491,7 @@ Proxy : Subject → ControlledAccess
 ```
 
 **访问控制**：
+
 ```
 AccessControl : (Subject, Client) → Permission
 ∀subject ∈ Subject, ∀client ∈ Client | 
@@ -447,6 +508,7 @@ AccessControl : (Subject, Client) → Permission
 **定义**：使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。
 
 **形式化表达**：
+
 ```
 ChainOfResponsibility : [Handler] → Request → Response
 ∀handlers ∈ [Handler], ∀request ∈ Request | 
@@ -455,6 +517,7 @@ ChainOfResponsibility : [Handler] → Request → Response
 ```
 
 **处理链**：
+
 ```
 ProcessingChain : Handler → Handler
 ∀handler ∈ Handler | ProcessingChain(handler) = 
@@ -467,6 +530,7 @@ ProcessingChain : Handler → Handler
 **定义**：将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化。
 
 **形式化表达**：
+
 ```
 Command : (Receiver, Action) → Command
 ∀receiver ∈ Receiver, ∀action ∈ Action | 
@@ -475,6 +539,7 @@ Command : (Receiver, Action) → Command
 ```
 
 **命令执行**：
+
 ```
 CommandExecution : Command → Result
 ∀command ∈ Command | CommandExecution(command) = 
@@ -486,6 +551,7 @@ CommandExecution : Command → Result
 **定义**：给定一个语言，定义它的文法的一种表示，并定义一个解释器，这个解释器使用该表示来解释语言中的句子。
 
 **形式化表达**：
+
 ```
 Interpreter : (Grammar, Expression) → Result
 ∀grammar ∈ Grammar, ∀expression ∈ Expression | 
@@ -494,6 +560,7 @@ Interpreter : (Grammar, Expression) → Result
 ```
 
 **语法树**：
+
 ```
 SyntaxTree : Expression → Tree
 ∀expression ∈ Expression | SyntaxTree(expression) = 
@@ -505,6 +572,7 @@ SyntaxTree : Expression → Tree
 **定义**：提供一种方法顺序访问一个聚合对象中的各个元素，而又不暴露其内部的表示。
 
 **形式化表达**：
+
 ```
 Iterator : Aggregate → Iterator
 ∀aggregate ∈ Aggregate | Iterator(aggregate) = 
@@ -512,6 +580,7 @@ Iterator : Aggregate → Iterator
 ```
 
 **迭代操作**：
+
 ```
 IterationOperations : Iterator → Operations
 ∀iterator ∈ Iterator | IterationOperations(iterator) = {
@@ -526,6 +595,7 @@ IterationOperations : Iterator → Operations
 **定义**：用一个中介对象来封装一系列的对象交互。
 
 **形式化表达**：
+
 ```
 Mediator : [Colleague] → Mediator
 ∀colleagues ∈ [Colleague] | Mediator(colleagues) = 
@@ -533,6 +603,7 @@ Mediator : [Colleague] → Mediator
 ```
 
 **消息路由**：
+
 ```
 MessageRouting : (From, To, Message) → RoutedMessage
 ∀from ∈ Colleague, ∀to ∈ Colleague, ∀message ∈ Message | 
@@ -545,6 +616,7 @@ MessageRouting : (From, To, Message) → RoutedMessage
 **定义**：在不破坏封装的前提下，捕获并外部化对象的内部状态。
 
 **形式化表达**：
+
 ```
 Memento : Originator → Memento
 ∀originator ∈ Originator | Memento(originator) = 
@@ -552,6 +624,7 @@ Memento : Originator → Memento
 ```
 
 **状态保存**：
+
 ```
 StatePreservation : Originator → Memento
 ∀originator ∈ Originator | StatePreservation(originator) = 
@@ -563,6 +636,7 @@ StatePreservation : Originator → Memento
 **定义**：定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。
 
 **形式化表达**：
+
 ```
 Observer : (Subject, [Observer]) → Notification
 ∀subject ∈ Subject, ∀observers ∈ [Observer] | 
@@ -571,6 +645,7 @@ Observer : (Subject, [Observer]) → Notification
 ```
 
 **通知机制**：
+
 ```
 NotificationMechanism : Subject → [Observer] → Unit
 ∀subject ∈ Subject, ∀observers ∈ [Observer] | 
@@ -583,6 +658,7 @@ NotificationMechanism : Subject → [Observer] → Unit
 **定义**：允许一个对象在其内部状态改变时改变它的行为。
 
 **形式化表达**：
+
 ```
 State : Context → State
 ∀context ∈ Context | State(context) = 
@@ -590,6 +666,7 @@ State : Context → State
 ```
 
 **状态转换**：
+
 ```
 StateTransition : (Context, Event) → NewState
 ∀context ∈ Context, ∀event ∈ Event | 
@@ -602,6 +679,7 @@ StateTransition : (Context, Event) → NewState
 **定义**：定义一系列的算法，把它们一个个封装起来，并且使它们可以互相替换。
 
 **形式化表达**：
+
 ```
 Strategy : [Algorithm] → Context
 ∀algorithms ∈ [Algorithm] | Strategy(algorithms) = 
@@ -609,6 +687,7 @@ Strategy : [Algorithm] → Context
 ```
 
 **算法选择**：
+
 ```
 AlgorithmSelection : Context → Algorithm
 ∀context ∈ Context | AlgorithmSelection(context) = 
@@ -620,6 +699,7 @@ AlgorithmSelection : Context → Algorithm
 **定义**：定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。
 
 **形式化表达**：
+
 ```
 TemplateMethod : AbstractClass → Template
 ∀abstract_class ∈ AbstractClass | TemplateMethod(abstract_class) = 
@@ -631,6 +711,7 @@ TemplateMethod : AbstractClass → Template
 ```
 
 **步骤定义**：
+
 ```
 StepDefinition : AbstractClass → [Step]
 ∀abstract_class ∈ AbstractClass | StepDefinition(abstract_class) = 
@@ -642,6 +723,7 @@ StepDefinition : AbstractClass → [Step]
 **定义**：表示一个作用于某对象结构中的各元素的操作。
 
 **形式化表达**：
+
 ```
 Visitor : (Visitor, Element) → Result
 ∀visitor ∈ Visitor, ∀element ∈ Element | 
@@ -650,6 +732,7 @@ Visitor : (Visitor, Element) → Result
 ```
 
 **双重分发**：
+
 ```
 DoubleDispatch : (Visitor, Element) → Operation
 ∀visitor ∈ Visitor, ∀element ∈ Element | 
@@ -664,10 +747,11 @@ DoubleDispatch : (Visitor, Element) → Operation
 基础设计模式为软件设计提供了经过验证的解决方案。通过形式化的表达和Rust的具体实现，我们能够更好地理解和应用这些模式。
 
 **核心设计原则**：
+
 1. 开闭原则：对扩展开放，对修改封闭
 2. 单一职责原则：一个类只负责一个职责
 3. 里氏替换原则：子类可以替换父类
 4. 接口隔离原则：客户端不应依赖它不需要的接口
 5. 依赖倒置原则：依赖抽象而非具体实现
 
-这些模式为后续的高级设计模式、并发模式和分布式模式提供了基础。 
+这些模式为后续的高级设计模式、并发模式和分布式模式提供了基础。
