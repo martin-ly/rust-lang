@@ -1,24 +1,41 @@
-# 系统集成架构形式化理论 (System Integration Architecture Formalization)
+# 系统集成架构形式化理论
 
-## 目录 (Table of Contents)
+(System Integration Architecture Formalization)
 
-### 1. 引言 (Introduction)
+## 目录
 
-### 2. 系统集成基础理论 (System Integration Foundation Theory)
-
-### 3. 集成架构形式化定义 (Integration Architecture Formal Definition)
-
-### 4. 接口理论 (Interface Theory)
-
-### 5. 数据流理论 (Data Flow Theory)
-
-### 6. 核心定理证明 (Core Theorems Proof)
-
-### 7. Rust实现 (Rust Implementation)
-
-### 8. 应用示例 (Application Examples)
-
-### 9. 总结 (Summary)
+- [系统集成架构形式化理论](#系统集成架构形式化理论)
+  - [目录](#目录)
+  - [1. 引言 (Introduction)](#1-引言-introduction)
+    - [1.1 研究背景](#11-研究背景)
+    - [1.2 研究目标](#12-研究目标)
+    - [1.3 理论贡献](#13-理论贡献)
+  - [2. 系统集成基础理论 (System Integration Foundation Theory)](#2-系统集成基础理论-system-integration-foundation-theory)
+    - [2.1 基本概念](#21-基本概念)
+    - [2.2 集成性质](#22-集成性质)
+  - [3. 集成架构形式化定义 (Integration Architecture Formal Definition)](#3-集成架构形式化定义-integration-architecture-formal-definition)
+    - [3.1 点对点架构](#31-点对点架构)
+    - [3.2 中心化架构](#32-中心化架构)
+    - [3.3 总线架构](#33-总线架构)
+    - [3.4 微服务架构](#34-微服务架构)
+  - [4. 接口理论 (Interface Theory)](#4-接口理论-interface-theory)
+    - [4.1 接口定义](#41-接口定义)
+    - [4.2 协议理论](#42-协议理论)
+  - [5. 数据流理论 (Data Flow Theory)](#5-数据流理论-data-flow-theory)
+    - [5.1 数据流定义](#51-数据流定义)
+    - [5.2 数据转换理论](#52-数据转换理论)
+  - [6. 核心定理证明 (Core Theorems Proof)](#6-核心定理证明-core-theorems-proof)
+    - [6.1 集成正确性](#61-集成正确性)
+    - [6.2 性能分析](#62-性能分析)
+  - [7. Rust实现 (Rust Implementation)](#7-rust实现-rust-implementation)
+    - [7.1 系统集成核心实现](#71-系统集成核心实现)
+  - [8. 应用示例 (Application Examples)](#8-应用示例-application-examples)
+    - [8.1 系统集成示例](#81-系统集成示例)
+  - [9. 总结 (Summary)](#9-总结-summary)
+    - [9.1 理论成果](#91-理论成果)
+    - [9.2 实现成果](#92-实现成果)
+    - [9.3 应用价值](#93-应用价值)
+    - [9.4 未来工作](#94-未来工作)
 
 ---
 

@@ -1,12 +1,27 @@
-# 数据集成形式化理论 (Data Integration Formalization Theory)
+# 数据集成形式化理论
 
-## 目录 (Table of Contents)
+(Data Integration Formalization Theory)
 
-1. [理论基础](#1-理论基础)
-2. [数学定义](#2-数学定义)
-3. [核心定理](#3-核心定理)
-4. [Rust实现](#4-rust实现)
-5. [总结](#5-总结)
+(Table of Contents)
+
+## 目录
+
+- [数据集成形式化理论](#数据集成形式化理论)
+  - [目录](#目录)
+  - [1. 理论基础 (Theoretical Foundation)](#1-理论基础-theoretical-foundation)
+    - [1.1 数据集成模型 (Data Integration Models)](#11-数据集成模型-data-integration-models)
+    - [1.2 数据流理论 (Data Flow Theory)](#12-数据流理论-data-flow-theory)
+  - [2. 数学定义 (Mathematical Definitions)](#2-数学定义-mathematical-definitions)
+    - [2.1 数据转换 (Data Transformation)](#21-数据转换-data-transformation)
+    - [2.2 数据质量 (Data Quality)](#22-数据质量-data-quality)
+  - [3. 核心定理 (Core Theorems)](#3-核心定理-core-theorems)
+    - [3.1 数据集成定理 (Data Integration Theorems)](#31-数据集成定理-data-integration-theorems)
+  - [4. Rust实现 (Rust Implementation)](#4-rust实现-rust-implementation)
+    - [4.1 数据集成框架 (Data Integration Framework)](#41-数据集成框架-data-integration-framework)
+  - [5. 总结 (Summary)](#5-总结-summary)
+    - [5.1 理论贡献 (Theoretical Contributions)](#51-理论贡献-theoretical-contributions)
+    - [5.2 实现贡献 (Implementation Contributions)](#52-实现贡献-implementation-contributions)
+    - [5.3 实践价值 (Practical Value)](#53-实践价值-practical-value)
 
 ## 1. 理论基础 (Theoretical Foundation)
 
@@ -767,6 +782,7 @@ impl DataProcessor for TransformProcessor {
         Ok(transformed)
     }
 }
+```
 
 ## 5. 总结 (Summary)
 

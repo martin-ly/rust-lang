@@ -1,12 +1,27 @@
-# API设计形式化理论 (API Design Formalization Theory)
+# API设计形式化理论
 
-## 目录 (Table of Contents)
+(API Design Formalization Theory)
 
-1. [理论基础](#1-理论基础)
-2. [数学定义](#2-数学定义)
-3. [核心定理](#3-核心定理)
-4. [Rust实现](#4-rust实现)
-5. [总结](#5-总结)
+(Table of Contents)
+
+## 目录
+
+- [API设计形式化理论](#api设计形式化理论)
+  - [目录](#目录)
+  - [1. 理论基础 (Theoretical Foundation)](#1-理论基础-theoretical-foundation)
+    - [1.1 API设计原则 (API Design Principles)](#11-api设计原则-api-design-principles)
+    - [1.2 接口规范 (Interface Specifications)](#12-接口规范-interface-specifications)
+  - [2. 数学定义 (Mathematical Definitions)](#2-数学定义-mathematical-definitions)
+    - [2.1 API模型 (API Models)](#21-api模型-api-models)
+    - [2.2 版本管理 (Version Management)](#22-版本管理-version-management)
+  - [3. 核心定理 (Core Theorems)](#3-核心定理-core-theorems)
+    - [3.1 API设计定理 (API Design Theorems)](#31-api设计定理-api-design-theorems)
+  - [4. Rust实现 (Rust Implementation)](#4-rust实现-rust-implementation)
+    - [4.1 API设计框架 (API Design Framework)](#41-api设计框架-api-design-framework)
+  - [5. 总结 (Summary)](#5-总结-summary)
+    - [5.1 理论贡献 (Theoretical Contributions)](#51-理论贡献-theoretical-contributions)
+    - [5.2 实现贡献 (Implementation Contributions)](#52-实现贡献-implementation-contributions)
+    - [5.3 实践价值 (Practical Value)](#53-实践价值-practical-value)
 
 ## 1. 理论基础 (Theoretical Foundation)
 
@@ -65,16 +80,25 @@ $$\forall e_1, e_2 \in E: Compatible(e_1, e_2)$$
 ### 3.1 API设计定理 (API Design Theorems)
 
 **定理 3.1.1** (接口一致性定理)
+
+```latex
 如果API设计满足一致性约束，则：
 $$\forall e_1, e_2: Consistent(e_1, e_2) \implies Compatible(e_1, e_2)$$
+```
 
 **定理 3.1.2** (版本管理定理)
+
+```latex
 语义版本管理保证：
 $$Major \neq Major' \implies \neg Compatible(Version, Version')$$
+```
 
 **定理 3.1.3** (性能定理)
+
+```latex
 API性能满足：
 $$Performance = \frac{1}{1 + \frac{Complexity}{Simplicity}}$$
+```
 
 ## 4. Rust实现 (Rust Implementation)
 
@@ -638,6 +662,7 @@ impl Default for ValidationRule {
         }
     }
 }
+```
 
 ## 5. 总结 (Summary)
 
