@@ -115,6 +115,7 @@ $$Middleware = \forall A. (A \rightarrow Res) \rightarrow (A \rightarrow Res)$$
 $$Pattern = String \times \{exact, prefix, regex\}$$
 
 **定义 4.2** (路由匹配)
+
 路由匹配函数 $match: Pattern \times Path \rightarrow Bool$ 定义为：
 $$match((p, t), path) = \begin{cases}
 true & \text{if } t = exact \land p = path \\

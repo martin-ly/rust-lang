@@ -20,6 +20,7 @@
 
 **定义 2.1** (游戏引擎代数)
 游戏引擎代数是一个九元组 $\mathcal{G} = (S, R, P, A, I, T, \mathcal{M}, \mathcal{U}, \mathcal{L})$，其中：
+
 - $S$ 是场景状态集合
 - $R$ 是渲染系统
 - $P$ 是物理系统
@@ -45,6 +46,7 @@ $$\forall t: |s(t)| = 1$$
 $$s = (entities, components, systems, time)$$
 
 其中：
+
 - $entities = \{e_1, e_2, \ldots, e_n\}$ 是实体集合
 - $components = \{c_1, c_2, \ldots, c_m\}$ 是组件集合
 - $systems = \{sys_1, sys_2, \ldots, sys_k\}$ 是系统集合
@@ -58,6 +60,7 @@ $$\delta: S \times \Delta t \rightarrow S$$
 如果所有系统都是确定性的，则状态转换是确定性的。
 
 **证明**：
+
 1. 假设所有系统都是确定性的
 2. 相同输入产生相同输出
 3. 因此状态转换是确定性的
@@ -76,6 +79,7 @@ $$Pipeline = [Vertex, Tessellation, Geometry, Rasterization, Fragment, Output]$$
 $$M = P \times V \times M$$
 
 其中：
+
 - $P$ 是投影矩阵
 - $V$ 是视图矩阵
 - $M$ 是模型矩阵
@@ -85,6 +89,7 @@ $$M = P \times V \times M$$
 $$(A \times B) \times C = A \times (B \times C)$$
 
 **证明**：
+
 1. 矩阵乘法满足结合律
 2. 因此变换顺序可以调整
 3. 证毕
@@ -96,6 +101,7 @@ Phong光照模型定义为：
 $$I = I_a + I_d + I_s$$
 
 其中：
+
 - $I_a = k_a \times I_{light}$ 是环境光
 - $I_d = k_d \times (L \cdot N) \times I_{light}$ 是漫反射
 - $I_s = k_s \times (R \cdot V)^n \times I_{light}$ 是镜面反射
@@ -104,6 +110,7 @@ $$I = I_a + I_d + I_s$$
 光照计算的时间复杂度为 $O(n \times m)$，其中 $n$ 是顶点数，$m$ 是光源数。
 
 **证明**：
+
 1. 每个顶点需要计算每个光源的影响
 2. 因此复杂度为 $O(n \times m)$
 3. 证毕
@@ -122,6 +129,7 @@ $$sample(texture, u, v) = bilinear\_interpolation(texture, u, v)$$
 使用纹理缓存可以减少内存访问次数。
 
 **证明**：
+
 1. 纹理缓存存储最近访问的纹理数据
 2. 减少重复的内存访问
 3. 因此提高效率
@@ -139,6 +147,7 @@ $$sample(texture, u, v) = bilinear\_interpolation(texture, u, v)$$
 $$F = m \times a$$
 
 其中：
+
 - $F$ 是力向量
 - $m$ 是质量
 - $a$ 是加速度
@@ -148,6 +157,7 @@ $$F = m \times a$$
 $$x(t + \Delta t) = x(t) + v(t) \times \Delta t$$
 
 **证明**：
+
 1. 速度是位置的导数
 2. 积分得到位置更新公式
 3. 证毕
@@ -168,6 +178,7 @@ $$AABB_1.min \leq AABB_2.max \land AABB_2.min \leq AABB_1.max$$
 AABB碰撞检测的时间复杂度为 $O(1)$。
 
 **证明**：
+
 1. AABB重叠检测只需要比较6个值
 2. 因此是常数时间
 3. 证毕
@@ -190,6 +201,7 @@ $$F_c = -\lambda \nabla C$$
 如果约束求解器收敛，则约束得到满足。
 
 **证明**：
+
 1. 约束求解器最小化约束违反
 2. 收敛时约束违反为零
 3. 因此约束得到满足
@@ -212,6 +224,7 @@ $$f_s > 2f_{max}$$
 $$mix(x_1, x_2) = \alpha x_1 + \beta x_2$$
 
 **证明**：
+
 1. 音频信号可以线性叠加
 2. 因此混音是线性的
 3. 证毕
@@ -227,6 +240,7 @@ $$audio_3d(position, listener) = f(distance, direction) \times audio_2d$$
 $$I \propto \frac{1}{d^2}$$
 
 **证明**：
+
 1. 声波能量在球面上分布
 2. 球面面积与距离平方成正比
 3. 因此强度与距离平方成反比
@@ -241,6 +255,7 @@ $$I \propto \frac{1}{d^2}$$
 $$e = (type, data, timestamp)$$
 
 其中：
+
 - $type \in \{keyboard, mouse, gamepad, touch\}$
 - $data$ 是事件数据
 - $timestamp$ 是时间戳
@@ -254,6 +269,7 @@ $$Q = [e_1, e_2, \ldots, e_n]$$
 $$delay = processing\_time + rendering\_time$$
 
 **证明**：
+
 1. 输入需要处理和渲染
 2. 总延迟是各阶段延迟之和
 3. 证毕
@@ -268,6 +284,7 @@ $$map: Event \rightarrow Action$$
 如果映射函数是确定的，则输入响应是一致的。
 
 **证明**：
+
 1. 确定性映射保证相同输入产生相同输出
 2. 因此输入响应一致
 3. 证毕
@@ -328,7 +345,7 @@ pub trait Component: Send + Sync {
 }
 
 // 位置组件
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Transform {
     pub position: [f32; 3],
     pub rotation: [f32; 3],
@@ -342,7 +359,7 @@ impl Component for Transform {
 }
 
 // 渲染组件
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Renderable {
     pub mesh_id: u32,
     pub material_id: u32,
@@ -356,7 +373,7 @@ impl Component for Renderable {
 }
 
 // 物理组件
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Physics {
     pub velocity: [f32; 3],
     pub acceleration: [f32; 3],
@@ -385,17 +402,17 @@ impl Entity {
             components: HashMap::new(),
         }
     }
-    
+
     pub fn add_component<T: Component + 'static>(&mut self, component: T) {
         self.components.insert(std::any::TypeId::of::<T>(), Box::new(component));
     }
-    
+
     pub fn get_component<T: Component + 'static>(&self) -> Option<&T> {
         self.components
             .get(&std::any::TypeId::of::<T>())
             .and_then(|c| c.as_any().downcast_ref::<T>())
     }
-    
+
     pub fn get_component_mut<T: Component + 'static>(&mut self) -> Option<&mut T> {
         self.components
             .get_mut(&std::any::TypeId::of::<T>())
@@ -422,7 +439,7 @@ impl System for PhysicsSystem {
                 for i in 0..3 {
                     transform.position[i] += physics.velocity[i] * delta_time;
                 }
-                
+
                 // 更新物理组件
                 physics.update(delta_time);
             }
@@ -467,35 +484,35 @@ impl GameEngine {
             target_fps,
         }
     }
-    
+
     pub fn add_entity(&mut self, entity: Entity) {
         self.entities.insert(entity.id, entity);
     }
-    
+
     pub fn add_system(&mut self, system: Box<dyn System>) {
         self.systems.push(system);
     }
-    
+
     pub fn run(&mut self) {
         let target_frame_time = Duration::from_secs_f32(1.0 / self.target_fps as f32);
-        
+
         loop {
             let current_time = Instant::now();
             let delta_time = current_time.duration_since(self.last_time).as_secs_f32();
-            
+
             // 更新所有系统
             for system in &mut self.systems {
                 let mut entities: Vec<Entity> = self.entities.values().cloned().collect();
                 system.update(&mut entities, delta_time);
-                
+
                 // 更新实体
                 for entity in entities {
                     self.entities.insert(entity.id, entity);
                 }
             }
-            
+
             self.last_time = current_time;
-            
+
             // 帧率控制
             let elapsed = current_time.elapsed();
             if elapsed < target_frame_time {
@@ -524,41 +541,41 @@ impl Renderer {
             index_buffer: 0,
         }
     }
-    
+
     pub fn render(&self, transform: &Transform, renderable: &Renderable) {
         // 设置变换矩阵
         let model_matrix = self.calculate_model_matrix(transform);
-        
+
         // 绑定着色器程序
         unsafe {
             gl::UseProgram(self.shader_program);
-            
+
             // 设置uniform变量
             let model_location = gl::GetUniformLocation(self.shader_program, b"model\0".as_ptr() as *const i8);
             gl::UniformMatrix4fv(model_location, 1, gl::FALSE, model_matrix.as_ptr());
-            
+
             // 绑定顶点数组
             gl::BindVertexArray(self.vertex_buffer);
-            
+
             // 绘制
             gl::DrawElements(gl::TRIANGLES, renderable.mesh_id as i32, gl::UNSIGNED_INT, std::ptr::null());
         }
     }
-    
+
     fn calculate_model_matrix(&self, transform: &Transform) -> [f32; 16] {
         // 简化的模型矩阵计算
         let mut matrix = [0.0f32; 16];
-        
+
         // 平移
         matrix[0] = transform.scale[0];
         matrix[5] = transform.scale[1];
         matrix[10] = transform.scale[2];
         matrix[15] = 1.0;
-        
+
         matrix[12] = transform.position[0];
         matrix[13] = transform.position[1];
         matrix[14] = transform.position[2];
-        
+
         matrix
     }
 }
@@ -580,7 +597,7 @@ impl PhysicsEngine {
             time_step: 1.0 / 60.0,
         }
     }
-    
+
     pub fn update(&self, entities: &mut [Entity]) {
         for entity in entities {
             if let Some(physics) = entity.get_component_mut::<Physics>() {
@@ -588,16 +605,16 @@ impl PhysicsEngine {
                 for i in 0..3 {
                     physics.acceleration[i] += self.gravity[i];
                 }
-                
+
                 // 更新物理
                 physics.update(self.time_step);
             }
         }
     }
-    
+
     pub fn check_collisions(&self, entities: &[Entity]) -> Vec<(EntityId, EntityId)> {
         let mut collisions = Vec::new();
-        
+
         for (i, entity1) in entities.iter().enumerate() {
             for entity2 in &entities[i + 1..] {
                 if self.collision_detection(entity1, entity2) {
@@ -605,10 +622,10 @@ impl PhysicsEngine {
                 }
             }
         }
-        
+
         collisions
     }
-    
+
     fn collision_detection(&self, entity1: &Entity, entity2: &Entity) -> bool {
         // 简化的AABB碰撞检测
         if let (Some(transform1), Some(transform2)) = (
@@ -620,7 +637,7 @@ impl PhysicsEngine {
                 (transform1.position[1] - transform2.position[1]).abs(),
                 (transform1.position[2] - transform2.position[2]).abs(),
             ];
-            
+
             let threshold = 1.0; // 碰撞阈值
             distance[0] < threshold && distance[1] < threshold && distance[2] < threshold
         } else {
@@ -710,4 +727,4 @@ impl PhysicsEngine {
 5. Game Programming Patterns
 6. Real-Time Collision Detection
 7. Audio Programming for Games
-8. Game Engine Black Book 
+8. Game Engine Black Book

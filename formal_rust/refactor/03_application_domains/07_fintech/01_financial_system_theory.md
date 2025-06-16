@@ -20,6 +20,7 @@
 
 **定义 2.1** (金融系统代数)
 金融系统代数是一个十元组 $\mathcal{F} = (A, T, P, R, M, C, \mathcal{S}, \mathcal{V}, \mathcal{L}, \mathcal{K})$，其中：
+
 - $A$ 是账户集合
 - $T$ 是交易集合
 - $P$ 是产品集合
@@ -46,6 +47,7 @@ $$\forall t \in T: t \in \{committed, aborted\}$$
 $$a = (id, balance, currency, status, permissions)$$
 
 其中：
+
 - $id$ 是账户标识符
 - $balance$ 是账户余额
 - $currency$ 是货币类型
@@ -60,6 +62,7 @@ $$\Delta balance: A \times T \rightarrow \mathbb{R}$$
 如果所有交易都满足资金守恒，则系统余额一致。
 
 **证明**：
+
 1. 每个交易满足资金守恒
 2. 总余额变化为零
 3. 因此系统余额一致
@@ -74,6 +77,7 @@ $$\Delta balance: A \times T \rightarrow \mathbb{R}$$
 $$t = (from, to, amount, currency, timestamp, signature)$$
 
 其中：
+
 - $from, to$ 是账户标识符
 - $amount$ 是交易金额
 - $currency$ 是货币类型
@@ -319,7 +323,7 @@ use sha2::{Sha256, Digest};
 use serde::{Serialize, Deserialize};
 
 // 账户
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Account {
     pub id: String,
     pub balance: f64,
@@ -328,7 +332,7 @@ pub struct Account {
     pub permissions: Vec<String>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub enum AccountStatus {
     Active,
     Suspended,
@@ -336,7 +340,7 @@ pub enum AccountStatus {
 }
 
 // 交易
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Transaction {
     pub id: String,
     pub from_account: String,
@@ -363,20 +367,20 @@ impl Transaction {
             signature: Vec::new(),
         }
     }
-    
+
     fn generate_id(from: &str, to: &str, amount: f64, currency: &str) -> String {
         let mut hasher = Sha256::new();
         hasher.update(format!("{}{}{}{}", from, to, amount, currency).as_bytes());
         format!("{:x}", hasher.finalize())
     }
-    
+
     pub fn sign(&mut self, private_key: &[u8]) {
         // 简化的签名实现
         let mut hasher = Sha256::new();
         hasher.update(&bincode::serialize(&self).unwrap());
         self.signature = hasher.finalize().to_vec();
     }
-    
+
     pub fn verify(&self, public_key: &[u8]) -> bool {
         // 简化的验证实现
         let mut hasher = Sha256::new();
@@ -399,37 +403,37 @@ impl TransactionProcessor {
             transaction_log: Vec::new(),
         }
     }
-    
+
     pub fn add_account(&mut self, account: Account) {
         self.accounts.insert(account.id.clone(), account);
     }
-    
+
     pub fn process_transaction(&mut self, transaction: Transaction) -> Result<(), String> {
         // 验证交易
         if !self.validate_transaction(&transaction) {
             return Err("Invalid transaction".to_string());
         }
-        
+
         // 检查余额
         if !self.check_balance(&transaction) {
             return Err("Insufficient balance".to_string());
         }
-        
+
         // 执行交易
         self.execute_transaction(&transaction);
-        
+
         // 记录交易
         self.transaction_log.push(transaction);
-        
+
         Ok(())
     }
-    
+
     fn validate_transaction(&self, transaction: &Transaction) -> bool {
         // 验证签名
         if !transaction.verify(&[]) {
             return false;
         }
-        
+
         // 验证账户存在
         if !self.accounts.contains_key(&transaction.from_account) {
             return false;
@@ -437,15 +441,15 @@ impl TransactionProcessor {
         if !self.accounts.contains_key(&transaction.to_account) {
             return false;
         }
-        
+
         // 验证金额
         if transaction.amount <= 0.0 {
             return false;
         }
-        
+
         true
     }
-    
+
     fn check_balance(&self, transaction: &Transaction) -> bool {
         if let Some(from_account) = self.accounts.get(&transaction.from_account) {
             from_account.balance >= transaction.amount
@@ -453,17 +457,17 @@ impl TransactionProcessor {
             false
         }
     }
-    
+
     fn execute_transaction(&mut self, transaction: &Transaction) {
         if let Some(from_account) = self.accounts.get_mut(&transaction.from_account) {
             from_account.balance -= transaction.amount;
         }
-        
+
         if let Some(to_account) = self.accounts.get_mut(&transaction.to_account) {
             to_account.balance += transaction.amount;
         }
     }
-    
+
     pub fn get_balance(&self, account_id: &str) -> Option<f64> {
         self.accounts.get(account_id).map(|a| a.balance)
     }
@@ -474,13 +478,13 @@ impl TransactionProcessor {
 
 ```rust
 // 投资组合
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Portfolio {
     pub assets: Vec<Asset>,
     pub weights: Vec<f64>,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Asset {
     pub symbol: String,
     pub price: f64,
@@ -494,29 +498,29 @@ impl Portfolio {
             weights: Vec::new(),
         }
     }
-    
+
     pub fn add_asset(&mut self, asset: Asset, weight: f64) {
         self.assets.push(asset);
         self.weights.push(weight);
     }
-    
+
     pub fn calculate_var(&self, confidence_level: f64) -> f64 {
         // 简化的VaR计算
         let portfolio_value = self.calculate_value();
         let portfolio_volatility = self.calculate_volatility();
-        
+
         // 使用正态分布假设
         let z_score = self.normal_inverse(confidence_level);
         portfolio_value * portfolio_volatility * z_score
     }
-    
+
     pub fn calculate_value(&self) -> f64 {
         self.assets.iter()
             .zip(self.weights.iter())
             .map(|(asset, weight)| asset.price * weight)
             .sum()
     }
-    
+
     pub fn calculate_volatility(&self) -> f64 {
         // 简化的波动率计算
         let variance: f64 = self.assets.iter()
@@ -525,7 +529,7 @@ impl Portfolio {
             .sum();
         variance.sqrt()
     }
-    
+
     fn normal_inverse(&self, p: f64) -> f64 {
         // 简化的正态分布逆函数
         // 实际应用中应使用更精确的实现
@@ -550,22 +554,22 @@ impl RiskMonitor {
             risk_limits: HashMap::new(),
         }
     }
-    
+
     pub fn add_portfolio(&mut self, id: String, portfolio: Portfolio) {
         self.portfolios.insert(id.clone(), portfolio);
     }
-    
+
     pub fn set_risk_limit(&mut self, portfolio_id: String, limit: f64) {
         self.risk_limits.insert(portfolio_id, limit);
     }
-    
+
     pub fn check_risk(&self, portfolio_id: &str) -> RiskStatus {
         if let (Some(portfolio), Some(limit)) = (
             self.portfolios.get(portfolio_id),
             self.risk_limits.get(portfolio_id),
         ) {
             let var = portfolio.calculate_var(0.95);
-            
+
             if var > *limit {
                 RiskStatus::Exceeded(var)
             } else {
@@ -577,7 +581,7 @@ impl RiskMonitor {
     }
 }
 
-#[derive(Debug)]
+# [derive(Debug)]
 pub enum RiskStatus {
     WithinLimit(f64),
     Exceeded(f64),
@@ -589,7 +593,7 @@ pub enum RiskStatus {
 
 ```rust
 // 市场数据
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct MarketData {
     pub symbol: String,
     pub bid_price: f64,
@@ -600,7 +604,7 @@ pub struct MarketData {
 }
 
 // 订单
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Order {
     pub id: String,
     pub symbol: String,
@@ -611,13 +615,13 @@ pub struct Order {
     pub timestamp: u64,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub enum OrderSide {
     Buy,
     Sell,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub enum OrderType {
     Market,
     Limit,
@@ -650,7 +654,7 @@ impl MovingAverageStrategy {
             position: 0,
         }
     }
-    
+
     fn calculate_moving_average(&self, prices: &[f64], window: usize) -> Option<f64> {
         if prices.len() >= window {
             let sum: f64 = prices.iter().rev().take(window).sum();
@@ -666,9 +670,9 @@ impl TradingAlgorithm for MovingAverageStrategy {
         if market_data.symbol != self.symbol {
             return None;
         }
-        
+
         let mid_price = (market_data.bid_price + market_data.ask_price) / 2.0;
-        
+
         if let (Some(short_ma), Some(long_ma)) = (
             self.calculate_moving_average(&self.short_prices, self.short_window),
             self.calculate_moving_average(&self.long_prices, self.long_window),
@@ -708,13 +712,13 @@ impl TradingAlgorithm for MovingAverageStrategy {
             None
         }
     }
-    
+
     fn update_state(&mut self, market_data: &MarketData) {
         if market_data.symbol == self.symbol {
             let mid_price = (market_data.bid_price + market_data.ask_price) / 2.0;
             self.short_prices.push(mid_price);
             self.long_prices.push(mid_price);
-            
+
             // 保持窗口大小
             if self.short_prices.len() > self.short_window {
                 self.short_prices.remove(0);
@@ -739,26 +743,26 @@ impl TradingEngine {
             market_data_feed: Vec::new(),
         }
     }
-    
+
     pub fn add_algorithm(&mut self, algorithm: Box<dyn TradingAlgorithm>) {
         self.algorithms.push(algorithm);
     }
-    
+
     pub fn process_market_data(&mut self, market_data: MarketData) -> Vec<Order> {
         let mut orders = Vec::new();
-        
+
         // 更新算法状态
         for algorithm in &mut self.algorithms {
             algorithm.update_state(&market_data);
         }
-        
+
         // 生成订单
         for algorithm in &self.algorithms {
             if let Some(order) = algorithm.generate_order(&market_data) {
                 orders.push(order);
             }
         }
-        
+
         self.market_data_feed.push(market_data);
         orders
     }
@@ -847,4 +851,4 @@ VaR计算的时间复杂度为 $O(n \log n)$，其中 $n$ 是历史数据点数�
 5. Financial Mathematics
 6. Cryptography and Network Security
 7. Regulatory Compliance in Finance
-8. High-Frequency Trading 
+8. High-Frequency Trading

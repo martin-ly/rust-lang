@@ -36,6 +36,7 @@
 $$f_P(I, R) = \langle T(I), M(I), C(I) \rangle$$
 
 其中：
+
 - $T(I)$ 为执行时间
 - $M(I)$ 为内存使用量
 - $C(I)$ 为计算复杂度
@@ -51,6 +52,7 @@ $$T_A(I) \geq \Omega(f(n))$$
 其中 $f(n)$ 为问题固有的复杂度下界。
 
 **证明：**
+
 1. 假设存在算法 $A'$ 使得 $T_{A'}(I) < \Omega(f(n))$ 对所有输入成立
 2. 根据信息论，处理 $n$ 位信息至少需要 $\Omega(n)$ 时间
 3. 矛盾，因此原假设不成立
@@ -71,6 +73,7 @@ $$S_A(n) = \max_{|I| = n} S_A(I)$$
 $$T_A(n) \cdot S_A(n) \geq \Omega(n)$$
 
 **证明：**
+
 1. 设算法在时间 $T$ 内使用空间 $S$
 2. 算法最多能访问 $T \cdot S$ 个不同的内存位置
 3. 要处理 $n$ 个输入元素，至少需要 $\Omega(n)$ 次访问
@@ -102,6 +105,7 @@ $$size = 2^{\lceil \log_2 n \rceil}$$
 $$alignment = \min\{2^k : 2^k \geq size\}$$
 
 **证明：**
+
 1. 设 $size = 2^k$ 且 $2^{k-1} < n \leq 2^k$
 2. 任何更小的分配无法容纳数据
 3. 任何更大的分配浪费空间
@@ -165,6 +169,7 @@ $$H = \frac{\text{缓存命中次数}}{\text{总访问次数}}$$
 $$H \geq 1 - \frac{1}{cache\_size}$$
 
 **证明：**
+
 1. 设缓存大小为 $C$，访问序列长度为 $N$
 2. 最坏情况下，每次访问都导致缓存未命中
 3. 但时间局部性确保最近访问的数据仍在缓存中
@@ -255,6 +260,7 @@ $$f(n) = O(g(n)) \iff \exists c, n_0 : \forall n \geq n_0, f(n) \leq c \cdot g(n
 $$T(n) = a \cdot T\left(\frac{n}{b}\right) + f(n)$$
 
 则：
+
 - 如果 $f(n) = O(n^c)$ 且 $c < \log_b a$，则 $T(n) = \Theta(n^{\log_b a})$
 - 如果 $f(n) = \Theta(n^c \log^k n)$ 且 $c = \log_b a$，则 $T(n) = \Theta(n^c \log^{k+1} n)$
 - 如果 $f(n) = \Omega(n^c)$ 且 $c > \log_b a$，则 $T(n) = \Theta(f(n))$
@@ -262,7 +268,7 @@ $$T(n) = a \cdot T\left(\frac{n}{b}\right) + f(n)$$
 **证明：**
 使用主定理，通过递归树分析可得。
 
-**优化示例：快速排序**
+**优化示例：快速排序**:
 
 ```rust
 // 优化前：朴素快速排序
@@ -321,6 +327,7 @@ $$Efficiency(D) = \frac{\text{操作性能}}{\text{空间开销}}$$
 $$\alpha_{optimal} = \frac{1}{2}$$
 
 **证明：**
+
 1. 设哈希表大小为 $m$，元素个数为 $n$
 2. 负载因子 $\alpha = \frac{n}{m}$
 3. 平均查找时间 $T = 1 + \frac{\alpha}{2}$
@@ -405,6 +412,7 @@ $$S_p = \frac{T_1}{T_p}$$
 $$S_p \leq \frac{1}{(1-f) + \frac{f}{p}}$$
 
 **证明：**
+
 1. 设总工作量为 $W$
 2. 串行部分：$W_s = (1-f)W$
 3. 并行部分：$W_p = fW$
@@ -468,6 +476,7 @@ $$Benefit(f) = CallCost(f) - InlineCost(f)$$
 $$Benefit(f) > 0 \land Size(f) < Threshold$$
 
 **证明：**
+
 1. 内联收益必须为正
 2. 函数大小必须小于阈值以避免代码膨胀
 3. 这两个条件同时满足时，内联是有益的
@@ -506,6 +515,7 @@ $$\exists \text{执行路径从入口到 } B$$
 $$B \text{ 不可达} \lor (B \text{ 无副作用} \land B \text{ 结果未使用})$$
 
 **证明：**
+
 1. 如果代码块不可达，显然可以删除
 2. 如果代码块无副作用且结果未使用，删除不影响程序语义
 3. 因此满足条件的代码块是死代码
@@ -582,6 +592,7 @@ $$Cost_{syscall} = T_{context\_switch} + T_{kernel\_execution} + T_{context\_swi
 $$Cost_{batched} = Cost_{syscall} + (n-1) \cdot T_{minimal}$$
 
 **证明：**
+
 1. 单个系统调用：$n \cdot Cost_{syscall}$
 2. 批处理：$Cost_{syscall} + (n-1) \cdot T_{minimal}$
 3. 节省：$(n-1) \cdot (Cost_{syscall} - T_{minimal})$
@@ -723,4 +734,4 @@ impl ConnectionPool {
 
 ---
 
-*本文档遵循严格的数学规范，包含完整的证明过程和多种表征方式，确保内容的学术性和实用性。* 
+*本文档遵循严格的数学规范，包含完整的证明过程和多种表征方式，确保内容的学术性和实用性。*

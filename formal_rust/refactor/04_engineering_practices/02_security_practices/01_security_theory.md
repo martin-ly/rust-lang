@@ -36,6 +36,7 @@
 $$S_{secure} = \{s \in S : \forall v \in V, P_{security}(s, v) = true\}$$
 
 其中：
+
 - $S$ 为所有可能状态集合
 - $V$ 为安全验证函数集合
 - $P_{security}$ 为安全谓词
@@ -49,6 +50,7 @@ $$\forall s_1, s_2 \in S_{secure}, \forall t \in T : s_1 \xrightarrow{t} s_2 \im
 $$\forall s_0 \in S_{secure}, \forall \pi \in \Pi : s_0 \xrightarrow{\pi} s_n \implies s_n \in S_{secure}$$
 
 **证明：**
+
 1. 基础情况：$s_0 \in S_{secure}$（给定）
 2. 归纳假设：假设 $s_k \in S_{secure}$
 3. 归纳步骤：$s_k \xrightarrow{t_{k+1}} s_{k+1}$，根据安全不变性，$s_{k+1} \in S_{secure}$
@@ -61,6 +63,7 @@ $$\forall s_0 \in S_{secure}, \forall \pi \in \Pi : s_0 \xrightarrow{\pi} s_n \i
 $$TM = \langle A, R, C, P \rangle$$
 
 其中：
+
 - $A$ 为攻击者能力集合
 - $R$ 为资源约束
 - $C$ 为攻击成本
@@ -77,6 +80,7 @@ $$AS = \sum_{i=1}^{n} V_i \times P_i$$
 $$\min_{S} AS(S) \text{ s.t. } F(S) \geq F_{required}$$
 
 **证明：**
+
 1. 设 $S_1, S_2$ 为两个系统设计
 2. 如果 $AS(S_1) < AS(S_2)$ 且 $F(S_1) \geq F_{required}$
 3. 则 $S_1$ 更安全
@@ -121,6 +125,7 @@ $$\forall p_1, p_2 \in P, \forall m \in M : Borrows(p_1, m) \land Borrows(p_2, m
 $$OwnershipSystem \implies MemorySafety$$
 
 **证明：**
+
 1. 所有权唯一性确保每个内存位置只有一个所有者
 2. 借用规则确保同时只有一个可变借用或多个不可变借用
 3. 生命周期检查确保引用不会悬空
@@ -143,6 +148,7 @@ $$Conflict(b_1, b_2) = (b_1.m = b_2.m) \land (b_1.mode = mutable \lor b_2.mode =
 $$\forall b_1, b_2 \in B : \neg Conflict(b_1, b_2) \implies SafeBorrow$$
 
 **证明：**
+
 1. 如果两个借用不冲突，则它们可以共存
 2. 借用检查器确保所有借用都不冲突
 3. 因此系统是安全的
@@ -224,6 +230,7 @@ $$L_1 \subseteq L_2 \iff t_{birth}(L_1) \geq t_{birth}(L_2) \land t_{death}(L_1)
 $$\forall r \in R, \forall x \in X : Refers(r, x) \implies Lifetime(r) \subseteq Lifetime(x)$$
 
 **证明：**
+
 1. 如果引用生命周期超出被引用对象生命周期
 2. 则引用可能指向已释放的内存
 3. 这违反了内存安全
@@ -294,6 +301,7 @@ $$Type(e) = t \implies \forall v \in Values(e) : Type(v) = t$$
 $$TypeSystem \implies TypeSafety$$
 
 **证明：**
+
 1. 编译时类型检查确保所有表达式都有正确类型
 2. 类型推导算法保证类型一致性
 3. 泛型系统保证类型参数安全
@@ -312,6 +320,7 @@ $$\Gamma \vdash e : \tau$$
 $$\forall \sigma : \Gamma \vdash e : \tau \implies Safe(e, \tau)$$
 
 **证明：**
+
 1. 类型推导规则是语法导向的
 2. 每个规则都保证类型安全
 3. 因此推导出的类型是安全的
@@ -407,6 +416,7 @@ $$\forall \tau \in Types, \forall e \in E : Generic(e, \tau) \implies Safe(e[\ta
 $$Safe(GenericDef) \implies \forall \tau : Safe(GenericDef[\tau])$$
 
 **证明：**
+
 1. 泛型定义在编译时检查
 2. 类型参数满足约束条件
 3. 实例化时类型检查确保安全
@@ -476,6 +486,7 @@ $$DataRace(t_1, t_2, m) = Access(t_1, m) \land Access(t_2, m) \land (Write(t_1, 
 $$TypeSystem \implies \neg \exists t_1, t_2, m : DataRace(t_1, t_2, m)$$
 
 **证明：**
+
 1. 可变引用唯一性确保同时只有一个线程可以修改数据
 2. 不可变引用允许多个线程同时读取
 3. 借用检查器在编译时检查这些规则
@@ -551,6 +562,7 @@ fn safe_read_write() {
 $$\neg (MutualExclusion \land HoldWait \land NoPreemption \land CircularWait) \implies \neg Deadlock$$
 
 **证明：**
+
 1. 死锁需要四个条件同时满足
 2. 如果任一条件不满足，则不会发生死锁
 3. 因此预防策略是破坏其中一个或多个条件
@@ -724,6 +736,7 @@ $$\forall t_1, t_2 \in T : Atomic(op) \implies \neg Interleaved(op, t_1, t_2)$$
 $$Atomic(op) \implies \forall s_1, s_2 : s_1 \xrightarrow{op} s_2 \implies \neg \exists s' : s_1 \xrightarrow{op'} s' \xrightarrow{op''} s_2$$
 
 **证明：**
+
 1. 原子操作在硬件层面保证不可分割
 2. 没有中间状态可以被其他线程观察到
 3. 因此操作要么完全执行，要么完全不执行
@@ -827,6 +840,7 @@ $$\forall m_1, m_2 \in M, \forall k \in K : P(E_k(m_1) = c) = P(E_k(m_2) = c)$$
 $$\forall m \in M, \forall c \in C : P(m|c) = P(m)$$
 
 **证明：**
+
 1. 根据贝叶斯定理：$P(m|c) = \frac{P(c|m)P(m)}{P(c)}$
 2. 完美保密意味着 $P(c|m_1) = P(c|m_2)$ 对所有 $m_1, m_2$
 3. 因此 $P(c)$ 与消息无关
@@ -964,6 +978,7 @@ $$\forall k \in K, \forall a \in A : P(Compromise(k, a)) \leq \epsilon$$
 $$\forall k \in K : P(Intercept(k)) \leq \epsilon$$
 
 **证明：**
+
 1. 安全密钥分发协议使用加密通道
 2. 即使攻击者截获通信，也无法获得密钥
 3. 因此密钥泄露概率小于 $\epsilon$
@@ -1071,6 +1086,7 @@ $$\forall p \in P : P(S) = \frac{1}{|S|}$$
 $$\forall PPT_A : |P(A(PRG(k)) = 1) - P(A(r) = 1)| \leq negl(n)$$
 
 **证明：**
+
 1. 密码学安全的 PRG 满足不可区分性
 2. 任何多项式时间算法都无法区分 PRG 输出和真随机数
 3. 因此优势函数是可忽略的
@@ -1211,4 +1227,4 @@ impl EntropyPool {
 
 ---
 
-*本文档遵循严格的数学规范，包含完整的证明过程和多种表征方式，确保内容的学术性和实用性。* 
+*本文档遵循严格的数学规范，包含完整的证明过程和多种表征方式，确保内容的学术性和实用性。*

@@ -20,6 +20,7 @@
 
 **定义 2.1** (物联网系统代数)
 物联网系统代数是一个十一元组 $\mathcal{I} = (D, S, N, C, P, M, \mathcal{T}, \mathcal{R}, \mathcal{S}, \mathcal{E}, \mathcal{A})$，其中：
+
 - $D$ 是设备集合
 - $S$ 是传感器集合
 - $N$ 是网络节点集合
@@ -47,6 +48,7 @@ $$receive(send(m)) = m$$
 $$d = (id, sensors, actuators, processor, memory, battery, location)$$
 
 其中：
+
 - $id$ 是设备标识符
 - $sensors$ 是传感器集合
 - $actuators$ 是执行器集合
@@ -63,6 +65,7 @@ $$state = (operational, battery\_level, connectivity, data\_buffer)$$
 如果设备状态正常且网络连通，则设备可靠。
 
 **证明**：
+
 1. 设备状态正常保证功能可用
 2. 网络连通保证通信能力
 3. 因此设备可靠
@@ -87,6 +90,7 @@ $$reading = true\_value + noise$$
 $$accuracy \propto \frac{1}{\sigma^2}$$
 
 **证明**：
+
 1. 噪声方差越小，读数越准确
 2. 精度与噪声方差成反比
 3. 证毕
@@ -103,6 +107,7 @@ $$fuse(readings) = \frac{\sum_{i=1}^{n} w_i \times reading_i}{\sum_{i=1}^{n} w_i
 加权平均融合提高精度。
 
 **证明**：
+
 1. 多个传感器提供冗余信息
 2. 加权平均减少噪声影响
 3. 因此提高精度
@@ -114,6 +119,7 @@ $$fuse(readings) = \frac{\sum_{i=1}^{n} w_i \times reading_i}{\sum_{i=1}^{n} w_i
 
 **定义 4.1** (网络图)
 网络图 $G = (V, E)$ 定义为：
+
 - $V$ 是节点集合
 - $E$ 是边集合，表示通信链路
 
@@ -125,6 +131,7 @@ $$\forall u, v \in V: \exists path(u, v)$$
 最小连通网络需要 $n-1$ 条边。
 
 **证明**：
+
 1. 树是最小连通图
 2. 树有 $n-1$ 条边
 3. 因此最小连通性成立
@@ -144,6 +151,7 @@ $$shortest\_path(u, v) = \arg\min_{p \in paths(u,v)} length(p)$$
 Dijkstra算法找到最短路径。
 
 **证明**：
+
 1. Dijkstra算法是贪心算法
 2. 每次选择最小距离节点
 3. 因此找到最短路径
@@ -165,6 +173,7 @@ $$PL(d) = PL_0 + 10n \log_{10}(\frac{d}{d_0})$$
 通信范围与发射功率成正比。
 
 **证明**：
+
 1. 发射功率越大，信号强度越强
 2. 信号强度决定通信范围
 3. 因此通信范围与功率成正比
@@ -187,6 +196,7 @@ $$process(stream, window) = aggregate(window(stream))$$
 $$latency = processing\_time + transmission\_time$$
 
 **证明**：
+
 1. 数据需要处理和传输
 2. 总延迟是各阶段延迟之和
 3. 证毕
@@ -205,6 +215,7 @@ $$assign(task, edges) = \arg\min_{e \in edges} cost(task, e)$$
 边缘计算减少网络延迟。
 
 **证明**：
+
 1. 边缘计算就近处理
 2. 减少数据传输距离
 3. 因此减少延迟
@@ -291,7 +302,7 @@ use std::collections::HashMap;
 use std::time::{Duration, Instant};
 
 // 设备类型
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub enum DeviceType {
     Sensor,
     Actuator,
@@ -300,7 +311,7 @@ pub enum DeviceType {
 }
 
 // 设备状态
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct DeviceState {
     pub operational: bool,
     pub battery_level: f32,
@@ -322,7 +333,7 @@ pub struct IoTDevice {
     pub state: DeviceState,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Sensor {
     pub id: String,
     pub sensor_type: String,
@@ -332,7 +343,7 @@ pub struct Sensor {
     pub power_consumption: f32,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Actuator {
     pub id: String,
     pub actuator_type: String,
@@ -340,21 +351,21 @@ pub struct Actuator {
     pub power_consumption: f32,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Processor {
     pub frequency: f32,
     pub cores: u32,
     pub power_consumption: f32,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Memory {
     pub capacity: u64,
     pub used: u64,
     pub power_consumption: f32,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Battery {
     pub capacity: f32,
     pub current_level: f32,
@@ -362,7 +373,7 @@ pub struct Battery {
     pub temperature: f32,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Location {
     pub latitude: f64,
     pub longitude: f64,
@@ -406,15 +417,15 @@ impl IoTDevice {
             },
         }
     }
-    
+
     pub fn add_sensor(&mut self, sensor: Sensor) {
         self.sensors.push(sensor);
     }
-    
+
     pub fn add_actuator(&mut self, actuator: Actuator) {
         self.actuators.push(actuator);
     }
-    
+
     pub fn read_sensor(&self, sensor_id: &str) -> Option<f32> {
         if let Some(sensor) = self.sensors.iter().find(|s| s.id == sensor_id) {
             // 模拟传感器读数
@@ -425,7 +436,7 @@ impl IoTDevice {
             None
         }
     }
-    
+
     pub fn control_actuator(&mut self, actuator_id: &str, value: f32) -> Result<(), String> {
         if let Some(actuator) = self.actuators.iter_mut().find(|a| a.id == actuator_id) {
             if value >= actuator.range.0 && value <= actuator.range.1 {
@@ -439,16 +450,16 @@ impl IoTDevice {
             Err("Actuator not found".to_string())
         }
     }
-    
+
     pub fn update_battery(&mut self, consumption: f32) {
         self.battery.current_level -= consumption;
         self.state.battery_level = self.battery.current_level / self.battery.capacity;
-        
+
         if self.state.battery_level < 0.1 {
             self.state.operational = false;
         }
     }
-    
+
     pub fn is_alive(&self) -> bool {
         self.state.last_seen.elapsed() < Duration::from_secs(300) // 5分钟超时
     }
@@ -467,55 +478,55 @@ impl DeviceManager {
             network_topology: HashMap::new(),
         }
     }
-    
+
     pub fn add_device(&mut self, device: IoTDevice) {
         let id = device.id.clone();
         self.devices.insert(id.clone(), device);
         self.network_topology.insert(id, Vec::new());
     }
-    
+
     pub fn connect_devices(&mut self, device1: &str, device2: &str) {
         if let Some(neighbors) = self.network_topology.get_mut(device1) {
             if !neighbors.contains(&device2.to_string()) {
                 neighbors.push(device2.to_string());
             }
         }
-        
+
         if let Some(neighbors) = self.network_topology.get_mut(device2) {
             if !neighbors.contains(&device1.to_string()) {
                 neighbors.push(device1.to_string());
             }
         }
     }
-    
+
     pub fn find_route(&self, from: &str, to: &str) -> Option<Vec<String>> {
         self.dijkstra_shortest_path(from, to)
     }
-    
+
     fn dijkstra_shortest_path(&self, from: &str, to: &str) -> Option<Vec<String>> {
         let mut distances: HashMap<String, f32> = HashMap::new();
         let mut previous: HashMap<String, Option<String>> = HashMap::new();
         let mut unvisited: std::collections::HashSet<String> = std::collections::HashSet::new();
-        
+
         // 初始化
         for device_id in self.devices.keys() {
             distances.insert(device_id.clone(), f32::INFINITY);
             unvisited.insert(device_id.clone());
         }
         distances.insert(from.to_string(), 0.0);
-        
+
         while !unvisited.is_empty() {
             // 找到距离最小的未访问节点
             let current = unvisited.iter()
                 .min_by(|a, b| distances[*a].partial_cmp(&distances[*b]).unwrap())
                 .cloned()?;
-            
+
             if current == to {
                 break;
             }
-            
+
             unvisited.remove(&current);
-            
+
             // 更新邻居距离
             if let Some(neighbors) = self.network_topology.get(&current) {
                 for neighbor in neighbors {
@@ -529,7 +540,7 @@ impl DeviceManager {
                 }
             }
         }
-        
+
         // 重建路径
         let mut path = Vec::new();
         let mut current = to.to_string();
@@ -543,7 +554,7 @@ impl DeviceManager {
         }
         path.push(from.to_string());
         path.reverse();
-        
+
         Some(path)
     }
 }
@@ -555,7 +566,7 @@ impl DeviceManager {
 use std::collections::VecDeque;
 
 // 消息类型
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub enum MessageType {
     Data,
     Control,
@@ -564,7 +575,7 @@ pub enum MessageType {
 }
 
 // 消息
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Message {
     pub id: String,
     pub source: String,
@@ -601,14 +612,14 @@ impl MQTProtocol {
             connected: false,
         }
     }
-    
+
     pub fn connect(&mut self) -> Result<(), String> {
         // 模拟连接
         println!("Connecting to MQTT broker: {}", self.broker_url);
         self.connected = true;
         Ok(())
     }
-    
+
     pub fn subscribe(&mut self, topic: String) -> Result<(), String> {
         if self.connected {
             self.topics.push(topic);
@@ -617,7 +628,7 @@ impl MQTProtocol {
             Err("Not connected".to_string())
         }
     }
-    
+
     pub fn publish(&mut self, topic: &str, payload: Vec<u8>) -> Result<(), String> {
         if self.connected {
             let message = Message {
@@ -635,7 +646,7 @@ impl MQTProtocol {
                     .as_secs(),
                 ttl: 100,
             };
-            
+
             self.message_queue.push_back(message);
             Ok(())
         } else {
@@ -653,11 +664,11 @@ impl CommunicationProtocol for MQTProtocol {
             Err("Not connected".to_string())
         }
     }
-    
+
     fn receive(&mut self) -> Option<Message> {
         self.message_queue.pop_front()
     }
-    
+
     fn broadcast(&mut self, message: Message) -> Result<(), String> {
         // 广播到所有订阅的主题
         for topic in &self.topics {
@@ -720,15 +731,15 @@ impl DataProcessor {
             aggregators: Vec::new(),
         }
     }
-    
+
     pub fn add_filter(&mut self, filter: Box<dyn DataFilter>) {
         self.filters.push(filter);
     }
-    
+
     pub fn add_aggregator(&mut self, aggregator: Box<dyn DataAggregator>) {
         self.aggregators.push(aggregator);
     }
-    
+
     pub fn process_data(&self, data: &[u8]) -> Option<Vec<u8>> {
         // 应用过滤器
         for filter in &self.filters {
@@ -736,7 +747,7 @@ impl DataProcessor {
                 return None;
             }
         }
-        
+
         // 应用聚合器
         if !self.aggregators.is_empty() && data.len() >= 4 {
             let values: Vec<f32> = data.chunks(4)
@@ -748,7 +759,7 @@ impl DataProcessor {
                     }
                 })
                 .collect();
-            
+
             let aggregated = self.aggregators[0].aggregate(&values);
             Some(aggregated.to_le_bytes().to_vec())
         } else {
@@ -770,7 +781,7 @@ pub struct SecurityManager {
     pub authentication_tokens: HashMap<String, String>,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct DeviceCredentials {
     pub device_id: String,
     pub public_key: Vec<u8>,
@@ -786,7 +797,7 @@ impl SecurityManager {
             authentication_tokens: HashMap::new(),
         }
     }
-    
+
     pub fn register_device(&mut self, device_id: String, public_key: Vec<u8>) -> Result<(), String> {
         let credentials = DeviceCredentials {
             device_id: device_id.clone(),
@@ -794,24 +805,24 @@ impl SecurityManager {
             certificate: Vec::new(), // 简化实现
             permissions: vec!["read".to_string(), "write".to_string()],
         };
-        
+
         self.devices.insert(device_id, credentials);
         Ok(())
     }
-    
+
     pub fn authenticate_device(&self, device_id: &str, signature: &[u8]) -> bool {
         if let Some(credentials) = self.devices.get(device_id) {
             // 简化的认证实现
             let mut hasher = Sha256::new();
             hasher.update(device_id.as_bytes());
             let expected_signature = hasher.finalize();
-            
+
             signature == expected_signature.as_slice()
         } else {
             false
         }
     }
-    
+
     pub fn encrypt_data(&self, data: &[u8]) -> Vec<u8> {
         // 简化的加密实现
         let mut encrypted = Vec::new();
@@ -820,7 +831,7 @@ impl SecurityManager {
         }
         encrypted
     }
-    
+
     pub fn decrypt_data(&self, encrypted_data: &[u8]) -> Vec<u8> {
         // 简化的解密实现
         let mut decrypted = Vec::new();
@@ -829,10 +840,10 @@ impl SecurityManager {
         }
         decrypted
     }
-    
+
     pub fn generate_token(&mut self, device_id: &str) -> Option<String> {
         if self.devices.contains_key(device_id) {
-            let token = format!("token_{}_{}", device_id, 
+            let token = format!("token_{}_{}", device_id,
                 std::time::SystemTime::now()
                     .duration_since(std::time::UNIX_EPOCH)
                     .unwrap()
@@ -843,7 +854,7 @@ impl SecurityManager {
             None
         }
     }
-    
+
     pub fn validate_token(&self, device_id: &str, token: &str) -> bool {
         if let Some(stored_token) = self.authentication_tokens.get(device_id) {
             stored_token == token
@@ -934,4 +945,4 @@ $$efficiency = \frac{useful\_work}{total\_energy}$$
 5. Energy-Efficient IoT Systems
 6. IoT Communication Protocols
 7. Sensor Networks and Applications
-8. IoT Data Analytics 
+8. IoT Data Analytics

@@ -36,6 +36,7 @@
 $$DM = \langle A, E, C, S, T \rangle$$
 
 其中：
+
 - $A$ 为应用程序
 - $E$ 为执行环境
 - $C$ 为配置
@@ -342,7 +343,7 @@ $$\forall t \in T : Capacity(t) = Demand(t) + Buffer$$
 use std::sync::Arc;
 use tokio::time::{Duration, interval};
 
-#[derive(Debug)]
+# [derive(Debug)]
 struct AutoScaler {
     min_replicas: u32,
     max_replicas: u32,
@@ -361,20 +362,20 @@ impl AutoScaler {
             check_interval: Duration::from_secs(30),
         }
     }
-    
+
     async fn run(&self) {
         let mut interval = interval(self.check_interval);
-        
+
         loop {
             interval.tick().await;
             self.scale_if_needed().await;
         }
     }
-    
+
     async fn scale_if_needed(&self) {
         let current_cpu = self.get_current_cpu().await;
         let current_replicas = self.current_replicas.load(Ordering::Relaxed);
-        
+
         if current_cpu > self.target_cpu * 1.1 {
             // 需要扩容
             if current_replicas < self.max_replicas {
@@ -387,18 +388,18 @@ impl AutoScaler {
             }
         }
     }
-    
+
     async fn get_current_cpu(&self) -> f64 {
         // 获取当前 CPU 使用率
         0.75 // 示例值
     }
-    
+
     async fn scale_up(&self) {
         let current = self.current_replicas.load(Ordering::Relaxed);
         self.current_replicas.store(current + 1, Ordering::Relaxed);
         println!("Scaling up to {} replicas", current + 1);
     }
-    
+
     async fn scale_down(&self) {
         let current = self.current_replicas.load(Ordering::Relaxed);
         self.current_replicas.store(current - 1, Ordering::Relaxed);
@@ -423,7 +424,7 @@ $$RecoveryTime \leq MTTR + MTBF$$
 use std::sync::Arc;
 use tokio::time::{Duration, sleep};
 
-#[derive(Debug)]
+# [derive(Debug)]
 struct CircuitBreaker {
     failure_threshold: u32,
     recovery_timeout: Duration,
@@ -431,7 +432,7 @@ struct CircuitBreaker {
     failure_count: Arc<AtomicU32>,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 enum CircuitState {
     Closed,
     Open,
@@ -447,21 +448,21 @@ impl CircuitBreaker {
             failure_count: Arc::new(AtomicU32::new(0)),
         }
     }
-    
+
     async fn call<F, Fut, T, E>(&self, f: F) -> Result<T, E>
     where
         F: FnOnce() -> Fut,
         Fut: Future<Output = Result<T, E>>,
     {
         let state = self.state.lock().unwrap();
-        
+
         match *state {
             CircuitState::Open => {
                 return Err("Circuit breaker is open".into());
             }
             CircuitState::HalfOpen | CircuitState::Closed => {
                 drop(state);
-                
+
                 match f().await {
                     Ok(result) => {
                         self.on_success();
@@ -475,20 +476,20 @@ impl CircuitBreaker {
             }
         }
     }
-    
+
     fn on_success(&self) {
         self.failure_count.store(0, Ordering::Relaxed);
         let mut state = self.state.lock().unwrap();
         *state = CircuitState::Closed;
     }
-    
+
     async fn on_failure(&self) {
         let failures = self.failure_count.fetch_add(1, Ordering::Relaxed) + 1;
-        
+
         if failures >= self.failure_threshold {
             let mut state = self.state.lock().unwrap();
             *state = CircuitState::Open;
-            
+
             // 启动恢复定时器
             let state_clone = Arc::clone(&self.state);
             let timeout = self.recovery_timeout;
@@ -518,7 +519,7 @@ $$\forall m \in Metrics : Monitored(m) \implies Alert(m)$$
 use std::sync::Arc;
 use tokio::sync::mpsc;
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 struct Metric {
     name: String,
     value: f64,
@@ -536,7 +537,7 @@ impl MetricsCollector {
         let processor = MetricsProcessor::new(receiver);
         (Self { sender }, processor)
     }
-    
+
     fn record(&self, name: &str, value: f64, tags: HashMap<String, String>) {
         let metric = Metric {
             name: name.to_string(),
@@ -544,7 +545,7 @@ impl MetricsCollector {
             timestamp: std::time::Instant::now(),
             tags,
         };
-        
+
         let _ = self.sender.try_send(metric);
     }
 }
@@ -561,13 +562,13 @@ impl MetricsProcessor {
             alerts: Vec::new(),
         }
     }
-    
+
     async fn run(&mut self) {
         while let Some(metric) = self.receiver.recv().await {
             self.process_metric(&metric).await;
         }
     }
-    
+
     async fn process_metric(&self, metric: &Metric) {
         // 检查告警规则
         for alert in &self.alerts {
@@ -576,14 +577,14 @@ impl MetricsProcessor {
             }
         }
     }
-    
+
     async fn trigger_alert(&self, alert: &AlertRule, metric: &Metric) {
-        println!("ALERT: {} = {} (threshold: {})", 
+        println!("ALERT: {} = {} (threshold: {})",
                  metric.name, metric.value, alert.threshold);
     }
 }
 
-#[derive(Debug)]
+# [derive(Debug)]
 struct AlertRule {
     name: String,
     metric_name: String,
@@ -591,7 +592,7 @@ struct AlertRule {
     operator: AlertOperator,
 }
 
-#[derive(Debug)]
+# [derive(Debug)]
 enum AlertOperator {
     GreaterThan,
     LessThan,
@@ -603,7 +604,7 @@ impl AlertRule {
         if metric.name != self.metric_name {
             return false;
         }
-        
+
         match self.operator {
             AlertOperator::GreaterThan => metric.value > self.threshold,
             AlertOperator::LessThan => metric.value < self.threshold,
@@ -630,7 +631,7 @@ $$ZeroTrust \implies \forall attack : Blocked(attack)$$
 ```rust
 use std::collections::HashMap;
 
-#[derive(Debug)]
+# [derive(Debug)]
 struct ZeroTrustPolicy {
     identity_verification: bool,
     device_verification: bool,
@@ -648,56 +649,56 @@ impl ZeroTrustEnforcer {
             policies: HashMap::new(),
         }
     }
-    
+
     fn enforce(&self, request: &Request) -> bool {
         let policy = self.policies.get(&request.resource)
             .expect("Policy not found");
-        
+
         // 验证身份
         if policy.identity_verification && !self.verify_identity(&request.identity) {
             return false;
         }
-        
+
         // 验证设备
         if policy.device_verification && !self.verify_device(&request.device) {
             return false;
         }
-        
+
         // 验证网络
         if policy.network_verification && !self.verify_network(&request.network) {
             return false;
         }
-        
+
         // 验证资源访问权限
         if policy.resource_verification && !self.verify_resource_access(&request) {
             return false;
         }
-        
+
         true
     }
-    
+
     fn verify_identity(&self, identity: &Identity) -> bool {
         // 实现身份验证逻辑
         identity.is_valid()
     }
-    
+
     fn verify_device(&self, device: &Device) -> bool {
         // 实现设备验证逻辑
         device.is_compliant()
     }
-    
+
     fn verify_network(&self, network: &Network) -> bool {
         // 实现网络验证逻辑
         network.is_secure()
     }
-    
+
     fn verify_resource_access(&self, request: &Request) -> bool {
         // 实现资源访问验证逻辑
         request.has_permission()
     }
 }
 
-#[derive(Debug)]
+# [derive(Debug)]
 struct Request {
     identity: Identity,
     device: Device,
@@ -705,7 +706,7 @@ struct Request {
     resource: String,
 }
 
-#[derive(Debug)]
+# [derive(Debug)]
 struct Identity {
     token: String,
     permissions: Vec<String>,
@@ -718,7 +719,7 @@ impl Identity {
     }
 }
 
-#[derive(Debug)]
+# [derive(Debug)]
 struct Device {
     id: String,
     compliance_status: bool,
@@ -730,7 +731,7 @@ impl Device {
     }
 }
 
-#[derive(Debug)]
+# [derive(Debug)]
 struct Network {
     ip: String,
     vpn: bool,
@@ -765,7 +766,7 @@ $$Secure(KeyManagement) \implies \forall key : Protected(key)$$
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 struct Key {
     id: String,
     algorithm: String,
@@ -786,11 +787,11 @@ impl KeyManager {
             rotation_interval,
         }
     }
-    
+
     fn generate_key(&mut self, algorithm: &str) -> String {
         let key_id = format!("key_{}", uuid::Uuid::new_v4());
         let now = std::time::Instant::now();
-        
+
         let key = Key {
             id: key_id.clone(),
             algorithm: algorithm.to_string(),
@@ -798,26 +799,26 @@ impl KeyManager {
             expires_at: now + self.rotation_interval,
             data: self.generate_random_data(32),
         };
-        
+
         let mut keys = self.keys.lock().unwrap();
         keys.insert(key_id.clone(), key);
-        
+
         key_id
     }
-    
+
     fn get_key(&self, key_id: &str) -> Option<Key> {
         let keys = self.keys.lock().unwrap();
         keys.get(key_id).cloned()
     }
-    
+
     fn rotate_key(&mut self, key_id: &str) -> Option<String> {
         let mut keys = self.keys.lock().unwrap();
-        
+
         if let Some(old_key) = keys.get(key_id) {
             // 生成新密钥
             let new_key_id = format!("key_{}", uuid::Uuid::new_v4());
             let now = std::time::Instant::now();
-            
+
             let new_key = Key {
                 id: new_key_id.clone(),
                 algorithm: old_key.algorithm.clone(),
@@ -825,27 +826,27 @@ impl KeyManager {
                 expires_at: now + self.rotation_interval,
                 data: self.generate_random_data(32),
             };
-            
+
             keys.insert(new_key_id.clone(), new_key);
-            
+
             // 标记旧密钥为过期
             if let Some(old_key) = keys.get_mut(key_id) {
                 old_key.expires_at = now;
             }
-            
+
             Some(new_key_id)
         } else {
             None
         }
     }
-    
+
     fn cleanup_expired_keys(&mut self) {
         let now = std::time::Instant::now();
         let mut keys = self.keys.lock().unwrap();
-        
+
         keys.retain(|_, key| key.expires_at > now);
     }
-    
+
     fn generate_random_data(&self, length: usize) -> Vec<u8> {
         use rand::Rng;
         let mut rng = rand::thread_rng();
@@ -870,7 +871,7 @@ $$\forall op \in Operations : Logged(op) \land Analyzed(op)$$
 use std::sync::Arc;
 use tokio::sync::mpsc;
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 struct AuditEvent {
     timestamp: std::time::Instant,
     user_id: String,
@@ -880,7 +881,7 @@ struct AuditEvent {
     metadata: HashMap<String, String>,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 enum AuditResult {
     Success,
     Failure(String),
@@ -896,7 +897,7 @@ impl AuditLogger {
         let processor = AuditProcessor::new(receiver);
         (Self { sender }, processor)
     }
-    
+
     fn log(&self, event: AuditEvent) {
         let _ = self.sender.try_send(event);
     }
@@ -914,17 +915,17 @@ impl AuditProcessor {
             rules: Vec::new(),
         }
     }
-    
+
     fn add_rule(&mut self, rule: AuditRule) {
         self.rules.push(rule);
     }
-    
+
     async fn run(&mut self) {
         while let Some(event) = self.receiver.recv().await {
             self.process_event(&event).await;
         }
     }
-    
+
     async fn process_event(&self, event: &AuditEvent) {
         // 检查审计规则
         for rule in &self.rules {
@@ -932,23 +933,23 @@ impl AuditProcessor {
                 self.trigger_alert(rule, event).await;
             }
         }
-        
+
         // 存储审计事件
         self.store_event(event).await;
     }
-    
+
     async fn trigger_alert(&self, rule: &AuditRule, event: &AuditEvent) {
-        println!("AUDIT ALERT: {} - User: {}, Action: {}, Resource: {}", 
+        println!("AUDIT ALERT: {} - User: {}, Action: {}, Resource: {}",
                  rule.name, event.user_id, event.action, event.resource);
     }
-    
+
     async fn store_event(&self, event: &AuditEvent) {
         // 实现事件存储逻辑
         println!("Stored audit event: {:?}", event);
     }
 }
 
-#[derive(Debug)]
+# [derive(Debug)]
 struct AuditRule {
     name: String,
     user_pattern: Option<String>,
@@ -966,21 +967,21 @@ impl AuditRule {
                 return false;
             }
         }
-        
+
         // 检查操作模式
         if let Some(pattern) = &self.action_pattern {
             if !event.action.contains(pattern) {
                 return false;
             }
         }
-        
+
         // 检查资源模式
         if let Some(pattern) = &self.resource_pattern {
             if !event.resource.contains(pattern) {
                 return false;
             }
         }
-        
+
         true
     }
 }
@@ -1000,4 +1001,4 @@ impl AuditRule {
 
 ---
 
-*本文档遵循严格的数学规范，包含完整的证明过程和多种表征方式，确保内容的学术性和实用性。* 
+*本文档遵循严格的数学规范，包含完整的证明过程和多种表征方式，确保内容的学术性和实用性。*

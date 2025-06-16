@@ -199,7 +199,7 @@ $$\forall a_1, a_2 \in A: a_1 \neq a_2 \implies \text{block}(a_1) \cap \text{blo
 
 ### 5.1 时间复杂度
 
-**定理 5.1 (分配复杂度)**
+**定理 5.1 (分配复杂度)**:
 
 - 最佳适配：$O(n)$
 - 首次适配：$O(n)$
