@@ -6,23 +6,34 @@
 
 ## 目录
 
-1. [引言：条件控制流基础](#1-引言条件控制流基础)
-2. [if表达式](#2-if表达式)
-   - [2.1 定义与形式化](#21-定义与形式化)
-   - [2.2 类型系统约束](#22-类型系统约束)
-   - [2.3 所有权与借用规则](#23-所有权与借用规则)
-   - [2.4 代码示例与证明](#24-代码示例与证明)
-3. [if let表达式](#3-if-let表达式)
-   - [3.1 模式匹配语法糖](#31-模式匹配语法糖)
-   - [3.2 形式化语义](#32-形式化语义)
-   - [3.3 实现示例](#33-实现示例)
-4. [match表达式](#4-match表达式)
-   - [4.1 穷尽性证明](#41-穷尽性证明)
-   - [4.2 模式匹配理论](#42-模式匹配理论)
-   - [4.3 所有权语义](#43-所有权语义)
-   - [4.4 形式化验证](#44-形式化验证)
-5. [条件控制流的类型论基础](#5-条件控制流的类型论基础)
-6. [总结与展望](#6-总结与展望)
+- [Rust条件控制流：形式化分析与实现](#rust条件控制流形式化分析与实现)
+  - [目录](#目录)
+  - [1. 引言：条件控制流基础](#1-引言条件控制流基础)
+    - [1.1 形式化定义](#11-形式化定义)
+    - [1.2 类型安全保证](#12-类型安全保证)
+  - [2. if表达式](#2-if表达式)
+    - [2.1 定义与形式化](#21-定义与形式化)
+    - [2.2 类型系统约束](#22-类型系统约束)
+    - [2.3 所有权与借用规则](#23-所有权与借用规则)
+    - [2.4 代码示例与证明](#24-代码示例与证明)
+  - [3. if let表达式](#3-if-let表达式)
+    - [3.1 模式匹配语法糖](#31-模式匹配语法糖)
+    - [3.2 形式化语义](#32-形式化语义)
+    - [3.3 实现示例](#33-实现示例)
+  - [4. match表达式](#4-match表达式)
+    - [4.1 穷尽性证明](#41-穷尽性证明)
+    - [4.2 模式匹配理论](#42-模式匹配理论)
+    - [4.3 所有权语义](#43-所有权语义)
+    - [4.4 形式化验证](#44-形式化验证)
+  - [5. 条件控制流的类型论基础](#5-条件控制流的类型论基础)
+    - [5.1 Curry-Howard同构](#51-curry-howard同构)
+    - [5.2 依赖类型视角](#52-依赖类型视角)
+    - [5.3 范畴论解释](#53-范畴论解释)
+  - [6. 总结与展望](#6-总结与展望)
+    - [6.1 主要成果](#61-主要成果)
+    - [6.2 理论贡献](#62-理论贡献)
+    - [6.3 未来工作](#63-未来工作)
+  - [参考文献](#参考文献)
 
 ## 1. 引言：条件控制流基础
 
@@ -36,6 +47,7 @@
 \[ \text{ControlFlow}: \mathcal{S} \times \text{Condition} \times \text{Block}_1 \times \text{Block}_2 \rightarrow \mathcal{S} \times \mathcal{V} \]
 
 其中：
+
 - \( \text{Condition}: \mathcal{S} \rightarrow \{\text{true}, \text{false}\} \) 是条件函数
 - \( \text{Block}_i: \mathcal{S} \rightarrow \mathcal{S} \times \mathcal{V} \) 是代码块函数
 
@@ -55,14 +67,14 @@ Rust的类型系统确保条件控制流的类型安全：
 \[ \text{if}: \text{Bool} \times \text{Expr} \times \text{Expr} \rightarrow \text{Expr} \]
 
 其语义定义为：
-\[ \text{if}(c, e_1, e_2) = \begin{cases} 
+\[ \text{if}(c, e_1, e_2) = \begin{cases}
 \text{eval}(e_1) & \text{if } c = \text{true} \\
 \text{eval}(e_2) & \text{if } c = \text{false}
 \end{cases} \]
 
 ### 2.2 类型系统约束
 
-**约束2.1** (分支类型一致性): 
+**约束2.1** (分支类型一致性):
 \[ \text{typeof}(\text{eval}(e_1)) = \text{typeof}(\text{eval}(e_2)) \]
 
 **约束2.2** (条件类型约束):
@@ -181,7 +193,8 @@ fn theorem_if_let_pattern_matching() {
 
 **定理4.1** (穷尽性检查): Rust编译器能够静态检查match表达式的穷尽性。
 
-**证明**: 
+**证明**:
+
 1. 对于枚举类型，编译器可以枚举所有变体
 2. 对于基本类型，编译器要求使用通配符模式 `_`
 3. 对于复合类型，编译器递归检查其组成部分
@@ -221,6 +234,7 @@ fn theorem_exhaustiveness_check() {
 其中 \( \mathcal{P} \) 是模式空间。
 
 **模式类型**:
+
 1. **字面值模式**: \( \text{Literal}(v) \)
 2. **变量模式**: \( \text{Variable}(x) \)
 3. **通配符模式**: \( \text{Wildcard} \)
@@ -297,7 +311,8 @@ fn formal_verification_example() {
 
 在类型论中，条件控制流对应于逻辑中的条件推理：
 
-**同构5.1**: 
+**同构5.1**:
+
 - `if` 表达式 ↔ 条件推理规则
 - `match` 表达式 ↔ 情况分析规则
 - 穷尽性检查 ↔ 排中律
@@ -343,4 +358,4 @@ fn formal_verification_example() {
 1. Rust Reference Manual
 2. Type Theory and Functional Programming
 3. Category Theory in Context
-4. Formal Semantics of Programming Languages 
+4. Formal Semantics of Programming Languages

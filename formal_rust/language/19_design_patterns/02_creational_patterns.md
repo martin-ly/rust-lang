@@ -150,7 +150,7 @@ enum ProductType {
 
 ### 2.5 正确性证明
 
-**不变式**: 
+**不变式**:
 $$\forall f \in \text{Factory}: \forall c \in \text{Context}: f.create(c) \in \text{ValidProducts}$$
 
 **终止性**: 工厂方法总是终止并返回有效产品
@@ -832,4 +832,4 @@ impl<T> FactoryBuilder<T> {
 ---
 
 **维护者**: Rust语言形式化理论团队  
-**最后更新**: 2025-01-27 
+**最后更新**: 2025-01-27

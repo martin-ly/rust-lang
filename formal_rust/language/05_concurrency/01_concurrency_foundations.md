@@ -1,880 +1,1267 @@
-# Rust并发系统理论基础与形式化分析
+# 5. 并发系统理论基础
 
 ## 目录
 
-1. [引言：并发的形式化基础](#1-引言并发的形式化基础)
-   1.1. [并发定义与分类](#11-并发定义与分类)
-   1.2. [并发模型](#12-并发模型)
-   1.3. [内存模型](#13-内存模型)
+- [5. 并发系统理论基础](#5-并发系统理论基础)
+  - [目录](#目录)
+  - [5.1 引言](#51-引言)
+    - [5.1.1 并发系统的设计哲学](#511-并发系统的设计哲学)
+  - [5.2 并发基础概念](#52-并发基础概念)
+    - [5.2.1 并发与并行](#521-并发与并行)
+    - [5.2.2 线程模型](#522-线程模型)
+    - [5.2.3 并发原语](#523-并发原语)
+  - [5.3 Rust并发系统架构](#53-rust并发系统架构)
+    - [5.3.1 线程系统](#531-线程系统)
+    - [5.3.2 锁机制](#532-锁机制)
+    - [5.3.3 原子操作](#533-原子操作)
+    - [5.3.4 通道通信](#534-通道通信)
+  - [5.4 并发安全保证](#54-并发安全保证)
+    - [5.4.1 Send和Sync Trait](#541-send和sync-trait)
+    - [5.4.2 数据竞争预防](#542-数据竞争预防)
+    - [5.4.3 死锁预防](#543-死锁预防)
+  - [5.5 高级并发特性](#55-高级并发特性)
+    - [5.5.1 无锁编程](#551-无锁编程)
+    - [5.5.2 并发数据结构](#552-并发数据结构)
+    - [5.5.3 并发模式](#553-并发模式)
+  - [5.6 并发与内存安全](#56-并发与内存安全)
+  - [5.7 总结](#57-总结)
 
-2. [线程系统](#2-线程系统)
-   2.1. [线程创建](#21-线程创建)
-      2.1.1. [线程定义形式化](#211-线程定义形式化)
-      2.1.2. [线程生命周期](#212-线程生命周期)
-      2.1.3. [线程状态转换](#213-线程状态转换)
-   2.2. [线程同步](#22-线程同步)
-      2.2.1. [Join操作](#221-join操作)
-      2.2.2. [线程本地存储](#222-线程本地存储)
-   2.3. [线程池](#23-线程池)
-      2.3.1. [池化模型](#231-池化模型)
-      2.3.2. [任务调度](#232-任务调度)
+## 5.1 引言
 
-3. [同步原语](#3-同步原语)
-   3.1. [互斥锁](#31-互斥锁)
-      3.1.1. [Mutex定义](#311-mutex定义)
-      3.1.2. [锁语义](#312-锁语义)
-      3.1.3. [死锁预防](#313-死锁预防)
-   3.2. [读写锁](#32-读写锁)
-      3.2.1. [RwLock定义](#321-rwlock定义)
-      3.2.2. [读写优先级](#322-读写优先级)
-   3.3. [条件变量](#33-条件变量)
-      3.3.1. [条件变量定义](#331-条件变量定义)
-      3.3.2. [等待通知机制](#332-等待通知机制)
-   3.4. [屏障](#34-屏障)
-      3.4.1. [屏障定义](#341-屏障定义)
-      3.4.2. [同步点](#342-同步点)
+Rust的并发系统基于所有权和类型系统，提供了内存安全和线程安全的并发编程模型。通过编译时检查，Rust可以防止数据竞争、死锁等常见的并发问题。
 
-4. [原子操作](#4-原子操作)
-   4.1. [原子类型](#41-原子类型)
-      4.1.1. [原子整数](#411-原子整数)
-      4.1.2. [原子指针](#412-原子指针)
-      4.1.3. [原子布尔值](#413-原子布尔值)
-   4.2. [内存序](#42-内存序)
-      4.2.1. [Relaxed](#421-relaxed)
-      4.2.2. [Acquire](#422-acquire)
-      4.2.3. [Release](#423-release)
-      4.2.4. [AcqRel](#424-acqrel)
-      4.2.5. [SeqCst](#425-seqcst)
-   4.3. [原子操作语义](#43-原子操作语义)
-
-5. [消息传递](#5-消息传递)
-   5.1. [通道](#51-通道)
-      5.1.1. [通道定义](#511-通道定义)
-      5.1.2. [发送接收语义](#512-发送接收语义)
-      5.1.3. [通道类型](#513-通道类型)
-   5.2. [Actor模型](#52-actor模型)
-      5.2.1. [Actor定义](#521-actor定义)
-      5.2.2. [消息处理](#522-消息处理)
-   5.3. [CSP模型](#53-csp模型)
-
-6. [无锁编程](#6-无锁编程)
-   6.1. [无锁数据结构](#61-无锁数据结构)
-      6.1.1. [无锁栈](#611-无锁栈)
-      6.1.2. [无锁队列](#612-无锁队列)
-      6.1.3. [无锁哈希表](#613-无锁哈希表)
-   6.2. [CAS操作](#62-cas操作)
-      6.2.1. [比较交换](#621-比较交换)
-      6.2.2. [ABA问题](#622-aba问题)
-   6.3. [内存回收](#63-内存回收)
-      6.3.1. [引用计数](#631-引用计数)
-      6.3.2. [垃圾回收](#632-垃圾回收)
-
-7. [并行计算](#7-并行计算)
-   7.1. [数据并行](#71-数据并行)
-      7.1.1. [并行迭代](#711-并行迭代)
-      7.1.2. [并行归约](#712-并行归约)
-   7.2. [任务并行](#72-任务并行)
-      7.2.1. [任务分解](#721-任务分解)
-      7.2.2. [任务调度](#722-任务调度)
-   7.3. [流水线并行](#73-流水线并行)
-
-8. [形式化验证](#8-形式化验证)
-   8.1. [并发安全性](#81-并发安全性)
-      8.1.1. [数据竞争检测](#811-数据竞争检测)
-      8.1.2. [死锁检测](#812-死锁检测)
-   8.2. [线性化性](#82-线性化性)
-   8.3. [活性保证](#83-活性保证)
-
----
-
-## 1. 引言：并发的形式化基础
-
-### 1.1 并发定义与分类
-
-**定义 1.1.1** (并发)
-并发是多个计算任务在时间上重叠执行的现象。形式化表示为：
-$$\text{Concurrent}(T_1, T_2, \ldots, T_n) = \exists t : \text{active}(T_i, t) \land \text{active}(T_j, t) \text{ for some } i \neq j$$
-
-**分类 1.1.2** (并发类型)
-Rust并发可分为以下类型：
-
-1. **线程并发**：$\text{Thread}(T_1, T_2, \ldots, T_n)$
-2. **异步并发**：$\text{Async}(F_1, F_2, \ldots, F_n)$
-3. **进程并发**：$\text{Process}(P_1, P_2, \ldots, P_n)$
-
-### 1.2 并发模型
-
-**定义 1.2.1** (并发模型)
-并发模型定义了并发执行的形式化语义：
-
-1. **共享内存模型**：$\text{SharedMemory}(S, T_1, T_2, \ldots, T_n)$
-2. **消息传递模型**：$\text{MessagePassing}(C, T_1, T_2, \ldots, T_n)$
-3. **Actor模型**：$\text{Actor}(A_1, A_2, \ldots, A_n)$
-
-**形式化表示**：
-$$\text{ConcurrentModel} = \langle \text{States}, \text{Transitions}, \text{InitialState} \rangle$$
-
-### 1.3 内存模型
-
-**定义 1.3.1** (内存模型)
-内存模型定义了多线程环境下的内存访问语义：
-$$\text{MemoryModel} = \langle \text{Locations}, \text{Operations}, \text{Ordering} \rangle$$
-
-**内存序关系**：
-$$\text{Ordering} = \{ \text{Relaxed}, \text{Acquire}, \text{Release}, \text{AcqRel}, \text{SeqCst} \}$$
-
----
-
-## 2. 线程系统
-
-### 2.1 线程创建
-
-#### 2.1.1 线程定义形式化
-
-**定义 2.1.1** (线程)
-线程是并发执行的基本单位：
-$$\text{Thread} = \langle \text{ID}, \text{State}, \text{Stack}, \text{Context} \rangle$$
-
-**线程创建**：
-$$\text{spawn}(f) : \text{ThreadHandle} \text{ where } f : \text{FnOnce}() \rightarrow T$$
-
-**类型规则**：
-$$\frac{\Gamma \vdash f : \text{FnOnce}() \rightarrow T}{\Gamma \vdash \text{spawn}(f) : \text{ThreadHandle<T>}}$$
-
-**代码示例**：
+### 5.1.1 并发系统的设计哲学
 
 ```rust
-use std::thread;
-
-fn thread_example() {
-    let handle = thread::spawn(|| {
-        println!("Hello from thread!");
-        42
-    });
+// 并发系统的核心价值
+fn concurrency_philosophy() {
+    // 1. 内存安全 - 编译时防止数据竞争
+    use std::sync::{Arc, Mutex};
+    use std::thread;
     
-    let result = handle.join().unwrap();
-    println!("Thread returned: {}", result);
-}
-```
-
-#### 2.1.2 线程生命周期
-
-**定义 2.1.2** (线程状态)
-线程状态转换图：
-$$\text{ThreadState} = \{ \text{New}, \text{Runnable}, \text{Running}, \text{Blocked}, \text{Terminated} \}$$
-
-**状态转换规则**：
-$$\text{New} \xrightarrow{\text{start}} \text{Runnable} \xrightarrow{\text{schedule}} \text{Running} \xrightarrow{\text{block}} \text{Blocked} \xrightarrow{\text{unblock}} \text{Runnable} \xrightarrow{\text{exit}} \text{Terminated}$$
-
-#### 2.1.3 线程状态转换
-
-**形式化状态机**：
-$$\text{ThreadFSM} = \langle Q, \Sigma, \delta, q_0, F \rangle$$
-
-其中：
-
-- $Q$ 是状态集合
-- $\Sigma$ 是事件集合
-- $\delta$ 是状态转换函数
-- $q_0$ 是初始状态
-- $F$ 是终止状态集合
-
-### 2.2 线程同步
-
-#### 2.2.1 Join操作
-
-**定义 2.2.1** (Join操作)
-Join操作等待线程完成：
-$$\text{join}(h) : \text{Result<T, E>} \text{ where } h : \text{ThreadHandle<T>}$$
-
-**Join语义**：
-$$\text{join}(h) = \begin{cases}
-\text{Ok}(v) & \text{if thread completed with value } v \\
-\text{Err}(e) & \text{if thread panicked with error } e
-\end{cases}$$
-
-**代码示例**：
-```rust
-fn join_example() {
-    let handles: Vec<_> = (0..5).map(|i| {
-        thread::spawn(move || {
-            println!("Thread {} started", i);
-            i * i
-        })
-    }).collect();
-
-    for handle in handles {
-        let result = handle.join().unwrap();
-        println!("Thread result: {}", result);
-    }
-}
-```
-
-#### 2.2.2 线程本地存储
-
-**定义 2.2.2** (线程本地存储)
-线程本地存储为每个线程提供独立的数据：
-$$\text{ThreadLocal<T>} = \text{Map<ThreadID, T>}$$
-
-**类型规则**：
-$$\frac{\Gamma \vdash T : \text{Type}}{\Gamma \vdash \text{ThreadLocal<T>} : \text{Type}}$$
-
-**代码示例**：
-```rust
-use std::cell::RefCell;
-use std::thread_local;
-
-thread_local! {
-    static COUNTER: RefCell<i32> = RefCell::new(0);
-}
-
-fn thread_local_example() {
-    COUNTER.with(|counter| {
-        *counter.borrow_mut() += 1;
-        println!("Counter: {}", *counter.borrow());
-    });
-}
-```
-
-### 2.3 线程池
-
-#### 2.3.1 池化模型
-
-**定义 2.3.1** (线程池)
-线程池管理一组工作线程：
-$$\text{ThreadPool} = \langle \text{Workers}, \text{TaskQueue}, \text{Size} \rangle$$
-
-**池化语义**：
-$$\text{execute}(pool, task) = \text{submit task to available worker}$$
-
-#### 2.3.2 任务调度
-
-**调度算法**：
-1. **FIFO调度**：$\text{FIFO}(Q) = \text{head}(Q)$
-2. **优先级调度**：$\text{Priority}(Q) = \arg\max_{t \in Q} \text{priority}(t)$
-3. **工作窃取**：$\text{WorkSteal}(Q_i, Q_j) = \text{steal}(Q_j) \text{ if } Q_i \text{ is empty}$
-
----
-
-## 3. 同步原语
-
-### 3.1 互斥锁
-
-#### 3.1.1 Mutex定义
-
-**定义 3.1.1** (互斥锁)
-互斥锁提供互斥访问：
-$$\text{Mutex<T>} = \langle \text{Lock}, \text{Data<T>}, \text{Owner} \rangle$$
-
-**锁操作**：
-- $\text{lock}() : \text{MutexGuard<T>}$
-- $\text{try_lock}() : \text{Option<MutexGuard<T>>}$
-- $\text{unlock}(guard) : \text{()}$
-
-**类型规则**：
-$$\frac{\Gamma \vdash T : \text{Type}}{\Gamma \vdash \text{Mutex<T>} : \text{Type}}$$
-
-**代码示例**：
-```rust
-use std::sync::Mutex;
-
-fn mutex_example() {
-    let counter = Mutex::new(0);
-
+    let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];
+    
     for _ in 0..10 {
-        let counter = counter.clone();
+        let counter = Arc::clone(&counter);
         let handle = thread::spawn(move || {
             let mut num = counter.lock().unwrap();
             *num += 1;
         });
         handles.push(handle);
     }
-
+    
     for handle in handles {
         handle.join().unwrap();
     }
-
-    println!("Counter: {}", *counter.lock().unwrap());
+    
+    println!("最终计数: {}", *counter.lock().unwrap());
+    
+    // 2. 零成本抽象 - 并发原语无运行时开销
+    use std::sync::atomic::{AtomicUsize, Ordering};
+    
+    let atomic_counter = AtomicUsize::new(0);
+    atomic_counter.fetch_add(1, Ordering::SeqCst);
+    
+    // 3. 类型安全 - Send和Sync Trait保证线程安全
+    // 只有实现了Send的类型才能在线程间传递
+    // 只有实现了Sync的类型才能在线程间共享引用
 }
 ```
 
-#### 3.1.2 锁语义
+## 5.2 并发基础概念
 
-**锁不变式**：
-$$\text{Invariant}(\text{Mutex<T>}) = \text{at most one thread holds the lock}$$
+### 5.2.1 并发与并行
 
-**锁公平性**：
-$$\text{Fair}(\text{Mutex}) = \forall t_1, t_2 : \text{waiting}(t_1) \land \text{waiting}(t_2) \Rightarrow \text{eventually}(t_1 \text{ or } t_2 \text{ acquires lock})$$
+**并发定义**：
 
-#### 3.1.3 死锁预防
+并发是指多个任务在时间上重叠执行，但不一定同时执行。并行是指多个任务真正同时执行。
 
-**死锁条件**：
-1. **互斥条件**：资源不能同时被多个线程访问
-2. **持有等待条件**：线程持有资源时等待其他资源
-3. **非抢占条件**：资源不能被强制剥夺
-4. **循环等待条件**：存在循环等待链
+**形式化表示**：
 
-**预防策略**：
-- **资源排序**：$\text{Order}(R_1, R_2, \ldots, R_n)$
-- **超时机制**：$\text{Timeout}(lock, t) = \text{try_lock for } t \text{ seconds}$
-- **死锁检测**：$\text{DetectDeadlock}(G) = \text{has_cycle}(G)$
+```latex
+并发: ∀t1, t2 ∈ Tasks. ∃t ∈ Time. t1(t) ∧ t2(t)
+并行: ∀t1, t2 ∈ Tasks. ∃t ∈ Time. t1(t) ∧ t2(t) ∧ CPU(t1) ≠ CPU(t2)
+```
 
-### 3.2 读写锁
+**实现示例**：
 
-#### 3.2.1 RwLock定义
-
-**定义 3.2.1** (读写锁)
-读写锁允许多个读者或单个写者：
-$$\text{RwLock<T>} = \langle \text{Readers}, \text{Writer}, \text{Data<T>} \rangle$$
-
-**锁操作**：
-- $\text{read}() : \text{RwLockReadGuard<T>}$
-- $\text{write}() : \text{RwLockWriteGuard<T>}$
-- $\text{try_read}() : \text{Option<RwLockReadGuard<T>>}$
-- $\text{try_write}() : \text{Option<RwLockWriteGuard<T>>}$
-
-**不变式**：
-$$\text{Invariant}(\text{RwLock<T>}) = (\text{readers} > 0 \land \text{writer} = \text{None}) \lor (\text{readers} = 0 \land \text{writer} = \text{Some}(t))$$
-
-#### 3.2.2 读写优先级
-
-**优先级策略**：
-1. **读者优先**：$\text{ReaderPriority} = \text{readers can proceed while writer waits}$
-2. **写者优先**：$\text{WriterPriority} = \text{writer can proceed while readers wait}$
-3. **公平策略**：$\text{FairPriority} = \text{FIFO order for all requests}$
-
-### 3.3 条件变量
-
-#### 3.3.1 条件变量定义
-
-**定义 3.3.1** (条件变量)
-条件变量用于线程间通信：
-$$\text{Condvar} = \langle \text{WaitQueue}, \text{Predicate} \rangle$$
-
-**操作**：
-- $\text{wait}(mutex) : \text{()}$
-- $\text{notify_one}() : \text{()}$
-- $\text{notify_all}() : \text{()}$
-
-**代码示例**：
 ```rust
-use std::sync::{Mutex, Condvar};
+fn concurrency_vs_parallelism() {
+    use std::thread;
+    use std::time::Duration;
+    
+    // 并发示例：任务在时间上重叠
+    let handle1 = thread::spawn(|| {
+        for i in 0..5 {
+            println!("任务1: {}", i);
+            thread::sleep(Duration::from_millis(100));
+        }
+    });
+    
+    let handle2 = thread::spawn(|| {
+        for i in 0..5 {
+            println!("任务2: {}", i);
+            thread::sleep(Duration::from_millis(100));
+        }
+    });
+    
+    handle1.join().unwrap();
+    handle2.join().unwrap();
+    
+    // 并行示例：使用rayon库实现真正的并行
+    use rayon::prelude::*;
+    
+    let data = vec![1, 2, 3, 4, 5];
+    let result: Vec<i32> = data.par_iter().map(|x| x * 2).collect();
+    println!("并行结果: {:?}", result);
+}
+```
 
-fn condvar_example() {
+### 5.2.2 线程模型
+
+**线程定义**：
+
+线程是程序执行的最小单位，是CPU调度的基本单位。
+
+**线程状态**：
+
+```rust
+// 线程状态的简化模型
+#[derive(Debug)]
+enum ThreadState {
+    New,        // 新建
+    Runnable,   // 可运行
+    Running,    // 运行中
+    Blocked,    // 阻塞
+    Terminated, // 终止
+}
+
+struct Thread {
+    id: usize,
+    state: ThreadState,
+    stack: Vec<u8>,
+}
+```
+
+**线程创建与管理**：
+
+```rust
+fn thread_management() {
+    use std::thread;
+    use std::time::Duration;
+    
+    // 基本线程创建
+    let handle = thread::spawn(|| {
+        println!("线程开始执行");
+        thread::sleep(Duration::from_millis(1000));
+        println!("线程执行完成");
+    });
+    
+    // 等待线程完成
+    handle.join().unwrap();
+    
+    // 带参数的线程
+    let value = 42;
+    let handle = thread::spawn(move || {
+        println!("线程中的值: {}", value);
+    });
+    
+    handle.join().unwrap();
+    
+    // 线程属性设置
+    let handle = thread::Builder::new()
+        .name("自定义线程".to_string())
+        .stack_size(1024 * 1024) // 1MB栈
+        .spawn(|| {
+            println!("自定义线程执行");
+        })
+        .unwrap();
+    
+    handle.join().unwrap();
+}
+```
+
+### 5.2.3 并发原语
+
+**并发原语定义**：
+
+并发原语是构建并发程序的基本工具，包括锁、信号量、条件变量等。
+
+**基本原语类型**：
+
+```rust
+fn concurrency_primitives() {
+    // 1. 互斥锁 (Mutex)
+    use std::sync::Mutex;
+    
+    let mutex = Mutex::new(0);
+    {
+        let mut value = mutex.lock().unwrap();
+        *value += 1;
+    } // 锁在这里自动释放
+    
+    // 2. 读写锁 (RwLock)
+    use std::sync::RwLock;
+    
+    let rwlock = RwLock::new(vec![1, 2, 3]);
+    {
+        let read_guard = rwlock.read().unwrap();
+        println!("读取: {:?}", *read_guard);
+    }
+    {
+        let mut write_guard = rwlock.write().unwrap();
+        write_guard.push(4);
+    }
+    
+    // 3. 条件变量 (Condvar)
+    use std::sync::{Mutex, Condvar};
+    
     let pair = (Mutex::new(false), Condvar::new());
     let (lock, cvar) = &pair;
-
-    let handle = thread::spawn(move || {
-        let mut started = lock.lock().unwrap();
-        while !*started {
-            started = cvar.wait(started).unwrap();
-        }
-        println!("Thread started!");
-    });
-
-    {
-        let mut started = lock.lock().unwrap();
-        *started = true;
-        cvar.notify_one();
+    
+    let mut started = lock.lock().unwrap();
+    while !*started {
+        started = cvar.wait(started).unwrap();
     }
-
-    handle.join().unwrap();
+    
+    // 4. 信号量 (Semaphore)
+    use std::sync::Semaphore;
+    
+    let semaphore = Semaphore::new(3);
+    for _ in 0..5 {
+        let _permit = semaphore.acquire().unwrap();
+        // 临界区
+    }
 }
 ```
 
-#### 3.3.2 等待通知机制
+## 5.3 Rust并发系统架构
 
-**等待语义**：
-$$\text{wait}(mutex, condvar) = \text{release}(mutex) \land \text{block}() \land \text{acquire}(mutex) \text{ when notified}$$
+### 5.3.1 线程系统
 
-**通知语义**：
-$$\text{notify}(condvar) = \text{wake up one waiting thread}$$
+**线程创建**：
 
-### 3.4 屏障
-
-#### 3.4.1 屏障定义
-
-**定义 3.4.1** (屏障)
-屏障同步多个线程的执行：
-$$\text{Barrier} = \langle \text{Count}, \text{Generation}, \text{WaitQueue} \rangle$$
-
-**操作**：
-- $\text{wait}() : \text{BarrierWaitResult}$
-
-**代码示例**：
 ```rust
-use std::sync::Barrier;
+fn thread_system() {
+    use std::thread;
+    use std::time::Duration;
+    
+    // 基本线程创建
+    let handle = thread::spawn(|| {
+        println!("子线程执行");
+    });
+    
+    println!("主线程执行");
+    handle.join().unwrap();
+    
+    // 线程间数据传递
+    let data = vec![1, 2, 3, 4, 5];
+    let handle = thread::spawn(move || {
+        println!("子线程数据: {:?}", data);
+    });
+    
+    handle.join().unwrap();
+    
+    // 线程局部存储
+    thread_local! {
+        static THREAD_ID: std::cell::RefCell<usize> = std::cell::RefCell::new(0);
+    }
+    
+    THREAD_ID.with(|id| {
+        *id.borrow_mut() = 42;
+        println!("线程ID: {}", *id.borrow());
+    });
+}
+```
 
-fn barrier_example() {
-    let barrier = Barrier::new(3);
+**线程池**：
+
+```rust
+fn thread_pool() {
+    use std::sync::{Arc, Mutex};
+    use std::thread;
+    use std::collections::VecDeque;
+    
+    struct ThreadPool {
+        workers: Vec<Worker>,
+        sender: std::sync::mpsc::Sender<Message>,
+    }
+    
+    struct Worker {
+        id: usize,
+        thread: Option<thread::JoinHandle<()>>,
+    }
+    
+    enum Message {
+        NewJob(Job),
+        Terminate,
+    }
+    
+    type Job = Box<dyn FnOnce() + Send + 'static>;
+    
+    impl ThreadPool {
+        fn new(size: usize) -> ThreadPool {
+            assert!(size > 0);
+            
+            let (sender, receiver) = std::sync::mpsc::channel();
+            let receiver = Arc::new(Mutex::new(receiver));
+            let mut workers = Vec::with_capacity(size);
+            
+            for id in 0..size {
+                workers.push(Worker::new(id, Arc::clone(&receiver)));
+            }
+            
+            ThreadPool { workers, sender }
+        }
+        
+        fn execute<F>(&self, f: F)
+        where
+            F: FnOnce() + Send + 'static,
+        {
+            let job = Box::new(f);
+            self.sender.send(Message::NewJob(job)).unwrap();
+        }
+    }
+    
+    impl Worker {
+        fn new(id: usize, receiver: Arc<Mutex<std::sync::mpsc::Receiver<Message>>>) -> Worker {
+            let thread = thread::spawn(move || loop {
+                let message = receiver.lock().unwrap().recv().unwrap();
+                
+                match message {
+                    Message::NewJob(job) => {
+                        println!("Worker {} 执行任务", id);
+                        job();
+                    }
+                    Message::Terminate => {
+                        println!("Worker {} 终止", id);
+                        break;
+                    }
+                }
+            });
+            
+            Worker {
+                id,
+                thread: Some(thread),
+            }
+        }
+    }
+    
+    // 使用线程池
+    let pool = ThreadPool::new(4);
+    
+    for i in 0..8 {
+        pool.execute(move || {
+            println!("执行任务 {}", i);
+            thread::sleep(Duration::from_millis(100));
+        });
+    }
+}
+```
+
+### 5.3.2 锁机制
+
+**互斥锁 (Mutex)**：
+
+```rust
+fn mutex_mechanism() {
+    use std::sync::Mutex;
+    use std::thread;
+    
+    // 基本Mutex使用
+    let counter = Mutex::new(0);
+    
     let mut handles = vec![];
-
-    for i in 0..3 {
-        let barrier = barrier.clone();
+    
+    for _ in 0..10 {
+        let counter = Mutex::clone(&counter);
         let handle = thread::spawn(move || {
-            println!("Thread {} before barrier", i);
-            barrier.wait();
-            println!("Thread {} after barrier", i);
+            let mut num = counter.lock().unwrap();
+            *num += 1;
         });
         handles.push(handle);
     }
-
+    
     for handle in handles {
         handle.join().unwrap();
+    }
+    
+    println!("最终计数: {}", *counter.lock().unwrap());
+    
+    // Mutex错误处理
+    let mutex = Mutex::new(0);
+    
+    // 尝试获取锁
+    match mutex.try_lock() {
+        Ok(mut guard) => {
+            *guard += 1;
+            println!("成功获取锁");
+        }
+        Err(_) => {
+            println!("锁被占用");
+        }
+    }
+    
+    // 带超时的锁获取
+    use std::time::Duration;
+    match mutex.try_lock_for(Duration::from_millis(100)) {
+        Ok(mut guard) => {
+            *guard += 1;
+            println!("在超时内获取锁");
+        }
+        Err(_) => {
+            println!("获取锁超时");
+        }
     }
 }
 ```
 
-#### 3.4.2 同步点
+**读写锁 (RwLock)**：
 
-**同步语义**：
-$$\text{wait}(barrier) = \begin{cases}
-\text{WaitResult::Wait} & \text{if not all threads arrived} \\
-\text{WaitResult::Done} & \text{if all threads arrived}
-\end{cases}$$
-
----
-
-## 4. 原子操作
-
-### 4.1 原子类型
-
-#### 4.1.1 原子整数
-
-**定义 4.1.1** (原子整数)
-原子整数提供原子操作：
-$$\text{AtomicI32} = \text{AtomicInteger<32>}$$
-
-**原子操作**：
-- $\text{load}(order) : \text{i32}$
-- $\text{store}(value, order) : \text{()}$
-- $\text{compare_exchange}(current, new, success, failure) : \text{Result<i32, i32>}$
-- $\text{fetch_add}(value, order) : \text{i32}$
-- $\text{fetch_sub}(value, order) : \text{i32}$
-
-**代码示例**：
 ```rust
-use std::sync::atomic::{AtomicI32, Ordering};
-
-fn atomic_example() {
-    let counter = AtomicI32::new(0);
-
+fn rwlock_mechanism() {
+    use std::sync::RwLock;
+    use std::thread;
+    
+    let data = RwLock::new(vec![1, 2, 3, 4, 5]);
     let mut handles = vec![];
+    
+    // 多个读线程
+    for i in 0..3 {
+        let data = RwLock::clone(&data);
+        let handle = thread::spawn(move || {
+            let read_guard = data.read().unwrap();
+            println!("读线程 {}: {:?}", i, *read_guard);
+        });
+        handles.push(handle);
+    }
+    
+    // 写线程
+    let data = RwLock::clone(&data);
+    let handle = thread::spawn(move || {
+        let mut write_guard = data.write().unwrap();
+        write_guard.push(6);
+        println!("写线程: 添加元素");
+    });
+    handles.push(handle);
+    
+    for handle in handles {
+        handle.join().unwrap();
+    }
+    
+    println!("最终数据: {:?}", *data.read().unwrap());
+}
+```
+
+### 5.3.3 原子操作
+
+**原子类型**：
+
+```rust
+fn atomic_operations() {
+    use std::sync::atomic::{AtomicUsize, Ordering};
+    use std::thread;
+    
+    // 基本原子操作
+    let atomic_counter = AtomicUsize::new(0);
+    
+    let mut handles = vec![];
+    
     for _ in 0..10 {
-        let counter = &counter;
+        let counter = &atomic_counter;
         let handle = thread::spawn(move || {
             for _ in 0..1000 {
-                counter.fetch_add(1, Ordering::Relaxed);
+                counter.fetch_add(1, Ordering::SeqCst);
             }
         });
         handles.push(handle);
     }
-
+    
     for handle in handles {
         handle.join().unwrap();
     }
-
-    println!("Counter: {}", counter.load(Ordering::Relaxed));
+    
+    println!("原子计数: {}", atomic_counter.load(Ordering::SeqCst));
+    
+    // 内存序 (Memory Ordering)
+    let atomic_bool = std::sync::atomic::AtomicBool::new(false);
+    
+    // Relaxed - 最弱的内存序
+    atomic_bool.store(true, Ordering::Relaxed);
+    
+    // Acquire - 获取操作
+    let value = atomic_bool.load(Ordering::Acquire);
+    
+    // Release - 释放操作
+    atomic_bool.store(false, Ordering::Release);
+    
+    // AcqRel - 获取释放操作
+    atomic_bool.compare_exchange(false, true, Ordering::AcqRel, Ordering::Relaxed);
+    
+    // SeqCst - 顺序一致性
+    atomic_bool.store(true, Ordering::SeqCst);
 }
 ```
 
-#### 4.1.2 原子指针
+**原子比较交换**：
 
-**定义 4.1.2** (原子指针)
-原子指针提供指针的原子操作：
-$$\text{AtomicPtr<T>} = \text{AtomicPointer<T>}$$
-
-**操作**：
-- $\text{load}(order) : \text{*mut T}$
-- $\text{store}(ptr, order) : \text{()}$
-- $\text{compare_exchange}(current, new, success, failure) : \text{Result<*mut T, *mut T>}$
-
-#### 4.1.3 原子布尔值
-
-**定义 4.1.3** (原子布尔值)
-原子布尔值提供布尔值的原子操作：
-$$\text{AtomicBool} = \text{AtomicBoolean}$$
-
-**操作**：
-- $\text{load}(order) : \text{bool}$
-- $\text{store}(value, order) : \text{()}$
-- $\text{compare_exchange}(current, new, success, failure) : \text{Result<bool, bool>}$
-
-### 4.2 内存序
-
-#### 4.2.1 Relaxed
-
-**定义 4.2.1** (Relaxed内存序)
-Relaxed提供最弱的内存序保证：
-$$\text{Relaxed} = \text{no ordering guarantees}$$
-
-**语义**：
-$$\text{Relaxed} \text{ only guarantees atomicity, no ordering}$$
-
-#### 4.2.2 Acquire
-
-**定义 4.2.2** (Acquire内存序)
-Acquire防止后续操作重排到当前操作之前：
-$$\text{Acquire} = \text{prevents reordering of subsequent operations before this operation}$$
-
-**语义**：
-$$\text{Acquire} \text{ establishes happens-before relationship with subsequent operations}$$
-
-#### 4.2.3 Release
-
-**定义 4.2.3** (Release内存序)
-Release防止前面的操作重排到当前操作之后：
-$$\text{Release} = \text{prevents reordering of previous operations after this operation}$$
-
-**语义**：
-$$\text{Release} \text{ establishes happens-before relationship with previous operations}$$
-
-#### 4.2.4 AcqRel
-
-**定义 4.2.4** (AcqRel内存序)
-AcqRel结合Acquire和Release：
-$$\text{AcqRel} = \text{Acquire} \land \text{Release}$$
-
-#### 4.2.5 SeqCst
-
-**定义 4.2.5** (SeqCst内存序)
-SeqCst提供全局顺序：
-$$\text{SeqCst} = \text{global total ordering of all SeqCst operations}$$
-
-**语义**：
-$$\text{SeqCst} \text{ provides strongest ordering guarantees}$$
-
-### 4.3 原子操作语义
-
-**原子性**：
-$$\text{Atomic}(op) = \text{operation appears to execute instantaneously}$$
-
-**可见性**：
-$$\text{Visibility}(op, order) = \text{operation becomes visible to other threads according to ordering}$$
-
-**顺序性**：
-$$\text{Ordering}(op_1, op_2, order) = \text{relative ordering of operations according to memory order}$$
-
----
-
-## 5. 消息传递
-
-### 5.1 通道
-
-#### 5.1.1 通道定义
-
-**定义 5.1.1** (通道)
-通道提供线程间通信：
-$$\text{Channel<T>} = \langle \text{Sender<T>}, \text{Receiver<T>} \rangle$$
-
-**通道类型**：
-1. **无界通道**：$\text{UnboundedChannel<T>}$
-2. **有界通道**：$\text{BoundedChannel<T>}$
-3. **同步通道**：$\text{SyncChannel<T>}$
-
-**代码示例**：
 ```rust
-use std::sync::mpsc;
-
-fn channel_example() {
-    let (tx, rx) = mpsc::channel();
-
-    let handle = thread::spawn(move || {
-        tx.send("Hello from thread!").unwrap();
-    });
-
-    let message = rx.recv().unwrap();
-    println!("Received: {}", message);
-
-    handle.join().unwrap();
-}
-```
-
-#### 5.1.2 发送接收语义
-
-**发送语义**：
-$$\text{send}(channel, message) = \begin{cases}
-\text{Ok}(()) & \text{if message sent successfully} \\
-\text{Err}(message) & \text{if channel is closed}
-\end{cases}$$
-
-**接收语义**：
-$$\text{recv}(channel) = \begin{cases}
-\text{Ok}(message) & \text{if message received} \\
-\text{Err}(()) & \text{if channel is closed and empty}
-\end{cases}$$
-
-#### 5.1.3 通道类型
-
-**无界通道**：
-$$\text{UnboundedChannel<T>} = \text{unlimited buffer}$$
-
-**有界通道**：
-$$\text{BoundedChannel<T>} = \text{limited buffer of size } n$$
-
-**同步通道**：
-$$\text{SyncChannel<T>} = \text{rendezvous synchronization}$$
-
-### 5.2 Actor模型
-
-#### 5.2.1 Actor定义
-
-**定义 5.2.1** (Actor)
-Actor是并发计算的基本单位：
-$$\text{Actor} = \langle \text{State}, \text{Behavior}, \text{Mailbox} \rangle$$
-
-**Actor操作**：
-- $\text{spawn}(behavior) : \text{ActorRef}$
-- $\text{send}(actor, message) : \text{()}$
-- $\text{stop}(actor) : \text{()}$
-
-#### 5.2.2 消息处理
-
-**消息处理语义**：
-$$\text{process}(actor, message) = \text{behavior}(actor.state, message)$$
-
-**Actor生命周期**：
-$$\text{ActorState} = \{ \text{Active}, \text{Stopped} \}$$
-
-### 5.3 CSP模型
-
-**定义 5.3.1** (CSP)
-通信顺序进程模型：
-$$\text{CSP} = \langle \text{Processes}, \text{Channels}, \text{Communication} \rangle$$
-
-**CSP操作**：
-- $\text{parallel}(P_1, P_2) : \text{Process}$
-- $\text{sequence}(P_1, P_2) : \text{Process}$
-- $\text{choice}(P_1, P_2) : \text{Process}$
-
----
-
-## 6. 无锁编程
-
-### 6.1 无锁数据结构
-
-#### 6.1.1 无锁栈
-
-**定义 6.1.1** (无锁栈)
-无锁栈使用CAS操作实现：
-$$\text{LockFreeStack<T>} = \langle \text{Head}, \text{Node<T>} \rangle$$
-
-**操作**：
-- $\text{push}(stack, value) : \text{()}$
-- $\text{pop}(stack) : \text{Option<T>}$
-
-**实现**：
-```rust
-use std::sync::atomic::{AtomicPtr, Ordering};
-
-struct Node<T> {
-    value: T,
-    next: AtomicPtr<Node<T>>,
-}
-
-struct LockFreeStack<T> {
-    head: AtomicPtr<Node<T>>,
-}
-
-impl<T> LockFreeStack<T> {
-    fn push(&self, value: T) {
-        let new_node = Box::into_raw(Box::new(Node {
-            value,
-            next: AtomicPtr::new(std::ptr::null_mut()),
-        }));
-
-        loop {
-            let head = self.head.load(Ordering::Acquire);
-            unsafe {
-                (*new_node).next.store(head, Ordering::Relaxed);
-            }
-            if self.head.compare_exchange_weak(
-                head, new_node, Ordering::Release, Ordering::Relaxed
-            ).is_ok() {
-                break;
-            }
+fn atomic_compare_exchange() {
+    use std::sync::atomic::{AtomicUsize, Ordering};
+    
+    let atomic_value = AtomicUsize::new(0);
+    
+    // 比较并交换
+    let result = atomic_value.compare_exchange(
+        0,    // 期望值
+        1,    // 新值
+        Ordering::SeqCst,  // 成功时的内存序
+        Ordering::Relaxed, // 失败时的内存序
+    );
+    
+    match result {
+        Ok(old_value) => {
+            println!("交换成功，旧值: {}", old_value);
+        }
+        Err(current_value) => {
+            println!("交换失败，当前值: {}", current_value);
+        }
+    }
+    
+    // 弱比较交换
+    let weak_result = atomic_value.compare_exchange_weak(
+        1,
+        2,
+        Ordering::SeqCst,
+        Ordering::Relaxed,
+    );
+    
+    match weak_result {
+        Ok(old_value) => {
+            println!("弱交换成功，旧值: {}", old_value);
+        }
+        Err(current_value) => {
+            println!("弱交换失败，当前值: {}", current_value);
         }
     }
 }
 ```
 
-#### 6.1.2 无锁队列
+### 5.3.4 通道通信
 
-**定义 6.1.2** (无锁队列)
-无锁队列使用两个指针：
-$$\text{LockFreeQueue<T>} = \langle \text{Head}, \text{Tail} \rangle$$
+**基本通道**：
 
-**操作**：
-- $\text{enqueue}(queue, value) : \text{()}$
-- $\text{dequeue}(queue) : \text{Option<T>}$
-
-#### 6.1.3 无锁哈希表
-
-**定义 6.1.3** (无锁哈希表)
-无锁哈希表使用链表法：
-$$\text{LockFreeHashMap<K, V>} = \langle \text{Buckets}, \text{HashFunction} \rangle$$
-
-### 6.2 CAS操作
-
-#### 6.2.1 比较交换
-
-**定义 6.2.1** (CAS操作)
-比较并交换是原子操作：
-$$\text{CAS}(ptr, expected, new) = \begin{cases}
-\text{Ok}(old) & \text{if } *ptr = expected \\
-\text{Err}(current) & \text{otherwise}
-\end{cases}$$
-
-**CAS语义**：
-$$\text{CAS}(ptr, expected, new) = \text{atomic compare and swap}$$
-
-#### 6.2.2 ABA问题
-
-**定义 6.2.2** (ABA问题)
-ABA问题是CAS操作中的经典问题：
-$$\text{ABA}(ptr, A, B, A) = \text{value changes from A to B and back to A}$$
-
-**解决方案**：
-1. **版本号**：$\text{VersionedPtr<T>} = \langle \text{ptr}, \text{version} \rangle$
-2. **标记位**：$\text{TaggedPtr<T>} = \langle \text{ptr}, \text{tag} \rangle$
-
-### 6.3 内存回收
-
-#### 6.3.1 引用计数
-
-**定义 6.3.1** (引用计数)
-引用计数跟踪对象引用数：
-$$\text{RefCount<T>} = \langle \text{data}, \text{count} \rangle$$
-
-**操作**：
-- $\text{clone}(rc) : \text{RefCount<T>}$
-- $\text{drop}(rc) : \text{()}$
-
-#### 6.3.2 垃圾回收
-
-**定义 6.3.2** (垃圾回收)
-垃圾回收自动管理内存：
-$$\text{GarbageCollector} = \langle \text{Objects}, \text{Mark}, \text{Sweep} \rangle$$
-
-**算法**：
-1. **标记清除**：$\text{MarkAndSweep} = \text{mark reachable objects} \land \text{sweep unreachable objects}$
-2. **分代回收**：$\text{GenerationalGC} = \text{separate objects by age}$
-
----
-
-## 7. 并行计算
-
-### 7.1 数据并行
-
-#### 7.1.1 并行迭代
-
-**定义 7.1.1** (并行迭代)
-并行迭代同时处理多个数据项：
-$$\text{par_iter}(data) = \text{parallel iteration over data}$$
-
-**代码示例**：
 ```rust
-use rayon::prelude::*;
-
-fn parallel_iter_example() {
-    let numbers: Vec<i32> = (0..1000).collect();
-
-    let sum: i32 = numbers.par_iter()
-        .map(|&x| x * x)
-        .sum();
-
-    println!("Sum of squares: {}", sum);
+fn channel_communication() {
+    use std::sync::mpsc;
+    use std::thread;
+    
+    // 创建通道
+    let (sender, receiver) = mpsc::channel();
+    
+    // 发送线程
+    let sender_handle = thread::spawn(move || {
+        for i in 0..5 {
+            sender.send(i).unwrap();
+            println!("发送: {}", i);
+        }
+    });
+    
+    // 接收线程
+    let receiver_handle = thread::spawn(move || {
+        for received in receiver {
+            println!("接收: {}", received);
+        }
+    });
+    
+    sender_handle.join().unwrap();
+    receiver_handle.join().unwrap();
+    
+    // 多发送者通道
+    let (sender, receiver) = mpsc::channel();
+    let sender1 = sender.clone();
+    let sender2 = sender.clone();
+    
+    let handle1 = thread::spawn(move || {
+        for i in 0..3 {
+            sender1.send(format!("发送者1: {}", i)).unwrap();
+        }
+    });
+    
+    let handle2 = thread::spawn(move || {
+        for i in 0..3 {
+            sender2.send(format!("发送者2: {}", i)).unwrap();
+        }
+    });
+    
+    drop(sender); // 关闭主发送者
+    
+    for received in receiver {
+        println!("接收: {}", received);
+    }
+    
+    handle1.join().unwrap();
+    handle2.join().unwrap();
 }
 ```
 
-#### 7.1.2 并行归约
+**异步通道**：
 
-**定义 7.1.2** (并行归约)
-并行归约并行计算聚合结果：
-$$\text{par_reduce}(data, op) = \text{parallel reduction with operator } op$$
+```rust
+fn async_channel() {
+    use std::sync::mpsc;
+    use std::thread;
+    use std::time::Duration;
+    
+    // 异步通道（无界）
+    let (sender, receiver) = mpsc::channel();
+    
+    let sender_handle = thread::spawn(move || {
+        for i in 0..10 {
+            sender.send(i).unwrap();
+            thread::sleep(Duration::from_millis(100));
+        }
+    });
+    
+    let receiver_handle = thread::spawn(move || {
+        for received in receiver {
+            println!("异步接收: {}", received);
+        }
+    });
+    
+    sender_handle.join().unwrap();
+    receiver_handle.join().unwrap();
+    
+    // 同步通道（有界）
+    let (sender, receiver) = mpsc::sync_channel(3); // 缓冲区大小为3
+    
+    let sender_handle = thread::spawn(move || {
+        for i in 0..10 {
+            sender.send(i).unwrap();
+            println!("同步发送: {}", i);
+        }
+    });
+    
+    let receiver_handle = thread::spawn(move || {
+        for received in receiver {
+            println!("同步接收: {}", received);
+            thread::sleep(Duration::from_millis(200));
+        }
+    });
+    
+    sender_handle.join().unwrap();
+    receiver_handle.join().unwrap();
+}
+```
 
-### 7.2 任务并行
+## 5.4 并发安全保证
 
-#### 7.2.1 任务分解
+### 5.4.1 Send和Sync Trait
 
-**定义 7.2.1** (任务分解)
-任务分解将大任务分解为小任务：
-$$\text{decompose}(task) = \{ \text{subtask}_1, \text{subtask}_2, \ldots, \text{subtask}_n \}$$
+**Send Trait**：
 
-#### 7.2.2 任务调度
+```rust
+fn send_trait() {
+    // Send Trait表示类型可以安全地在线程间转移所有权
+    use std::thread;
+    
+    // 基本类型都实现了Send
+    let x = 42;
+    let handle = thread::spawn(move || {
+        println!("线程中的值: {}", x);
+    });
+    handle.join().unwrap();
+    
+    // 自定义Send类型
+    struct SafeStruct {
+        data: i32,
+    }
+    
+    // 自动实现Send（因为所有字段都实现了Send）
+    let safe_struct = SafeStruct { data: 42 };
+    let handle = thread::spawn(move || {
+        println!("安全结构体: {}", safe_struct.data);
+    });
+    handle.join().unwrap();
+    
+    // 非Send类型示例
+    struct NonSendStruct {
+        _data: std::rc::Rc<i32>, // Rc不是Send
+    }
+    
+    // 以下代码会编译错误
+    // let non_send = NonSendStruct { _data: std::rc::Rc::new(42) };
+    // let handle = thread::spawn(move || {
+    //     println!("非Send结构体");
+    // });
+}
+```
 
-**调度策略**：
-1. **工作窃取**：$\text{WorkStealing} = \text{steal work from other threads}$
-2. **负载均衡**：$\text{LoadBalancing} = \text{distribute work evenly}$
-3. **动态调度**：$\text{DynamicScheduling} = \text{adjust scheduling at runtime}$
+**Sync Trait**：
 
-### 7.3 流水线并行
+```rust
+fn sync_trait() {
+    // Sync Trait表示类型可以安全地在线程间共享引用
+    use std::sync::{Arc, Mutex};
+    use std::thread;
+    
+    // Arc实现了Sync
+    let shared_data = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+    
+    for _ in 0..3 {
+        let data = Arc::clone(&shared_data);
+        let handle = thread::spawn(move || {
+            let mut value = data.lock().unwrap();
+            *value += 1;
+        });
+        handles.push(handle);
+    }
+    
+    for handle in handles {
+        handle.join().unwrap();
+    }
+    
+    println!("共享数据: {}", *shared_data.lock().unwrap());
+    
+    // 自定义Sync类型
+    struct SafeSharedStruct {
+        data: Mutex<i32>,
+    }
+    
+    // 自动实现Sync（因为所有字段都实现了Sync）
+    let safe_shared = Arc::new(SafeSharedStruct {
+        data: Mutex::new(0),
+    });
+    
+    let mut handles = vec![];
+    for _ in 0..3 {
+        let shared = Arc::clone(&safe_shared);
+        let handle = thread::spawn(move || {
+            let mut value = shared.data.lock().unwrap();
+            *value += 1;
+        });
+        handles.push(handle);
+    }
+    
+    for handle in handles {
+        handle.join().unwrap();
+    }
+}
+```
 
-**定义 7.3.1** (流水线并行)
-流水线并行将计算分解为阶段：
-$$\text{Pipeline} = \langle \text{Stage}_1, \text{Stage}_2, \ldots, \text{Stage}_n \rangle$$
+### 5.4.2 数据竞争预防
 
-**流水线语义**：
-$$\text{process}(pipeline, data) = \text{Stage}_n(\ldots(\text{Stage}_2(\text{Stage}_1(data))))$$
+**数据竞争定义**：
 
----
+数据竞争是指两个或多个线程同时访问同一内存位置，其中至少有一个是写操作，且没有同步机制。
 
-## 8. 形式化验证
+**Rust的预防机制**：
 
-### 8.1 并发安全性
+```rust
+fn data_race_prevention() {
+    use std::sync::{Arc, Mutex};
+    use std::thread;
+    
+    // 1. 使用Mutex防止数据竞争
+    let counter = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+    
+    for _ in 0..10 {
+        let counter = Arc::clone(&counter);
+        let handle = thread::spawn(move || {
+            let mut value = counter.lock().unwrap();
+            *value += 1;
+        });
+        handles.push(handle);
+    }
+    
+    for handle in handles {
+        handle.join().unwrap();
+    }
+    
+    println!("安全计数: {}", *counter.lock().unwrap());
+    
+    // 2. 使用原子操作
+    use std::sync::atomic::{AtomicUsize, Ordering};
+    
+    let atomic_counter = AtomicUsize::new(0);
+    let mut handles = vec![];
+    
+    for _ in 0..10 {
+        let counter = &atomic_counter;
+        let handle = thread::spawn(move || {
+            for _ in 0..1000 {
+                counter.fetch_add(1, Ordering::SeqCst);
+            }
+        });
+        handles.push(handle);
+    }
+    
+    for handle in handles {
+        handle.join().unwrap();
+    }
+    
+    println!("原子计数: {}", atomic_counter.load(Ordering::SeqCst));
+    
+    // 3. 使用通道避免共享状态
+    use std::sync::mpsc;
+    
+    let (sender, receiver) = mpsc::channel();
+    let mut handles = vec![];
+    
+    for i in 0..5 {
+        let sender = sender.clone();
+        let handle = thread::spawn(move || {
+            sender.send(i).unwrap();
+        });
+        handles.push(handle);
+    }
+    
+    drop(sender); // 关闭发送者
+    
+    for received in receiver {
+        println!("接收: {}", received);
+    }
+    
+    for handle in handles {
+        handle.join().unwrap();
+    }
+}
+```
 
-#### 8.1.1 数据竞争检测
+### 5.4.3 死锁预防
 
-**定义 8.1.1** (数据竞争)
-数据竞争是并发访问共享数据：
-$$\text{DataRace}(T_1, T_2, x) = \text{concurrent access to shared variable } x$$
+**死锁定义**：
 
-**检测算法**：
-$$\text{DetectRace}(program) = \text{find all data races in program}$$
+死锁是指两个或多个线程互相等待对方持有的资源，导致所有线程都无法继续执行。
 
-#### 8.1.2 死锁检测
+**死锁预防策略**：
 
-**定义 8.1.2** (死锁)
-死锁是循环等待资源：
-$$\text{Deadlock}(T_1, T_2, \ldots, T_n) = \text{circular wait for resources}$$
+```rust
+fn deadlock_prevention() {
+    use std::sync::{Arc, Mutex};
+    use std::thread;
+    use std::time::Duration;
+    
+    // 1. 锁的顺序化
+    let lock1 = Arc::new(Mutex::new(0));
+    let lock2 = Arc::new(Mutex::new(0));
+    
+    let lock1_clone = Arc::clone(&lock1);
+    let lock2_clone = Arc::clone(&lock2);
+    
+    let handle1 = thread::spawn(move || {
+        let _guard1 = lock1_clone.lock().unwrap();
+        thread::sleep(Duration::from_millis(100));
+        let _guard2 = lock2_clone.lock().unwrap();
+        println!("线程1获得两个锁");
+    });
+    
+    let handle2 = thread::spawn(move || {
+        let _guard1 = lock1.lock().unwrap(); // 相同的锁顺序
+        thread::sleep(Duration::from_millis(100));
+        let _guard2 = lock2.lock().unwrap();
+        println!("线程2获得两个锁");
+    });
+    
+    handle1.join().unwrap();
+    handle2.join().unwrap();
+    
+    // 2. 超时机制
+    let mutex = Arc::new(Mutex::new(0));
+    let mutex_clone = Arc::clone(&mutex);
+    
+    let handle = thread::spawn(move || {
+        // 尝试获取锁，带超时
+        match mutex_clone.try_lock_for(Duration::from_millis(100)) {
+            Ok(_guard) => {
+                println!("成功获取锁");
+            }
+            Err(_) => {
+                println!("获取锁超时，避免死锁");
+            }
+        }
+    });
+    
+    // 主线程持有锁
+    let _guard = mutex.lock().unwrap();
+    thread::sleep(Duration::from_millis(200));
+    
+    handle.join().unwrap();
+    
+    // 3. 使用try_lock避免阻塞
+    let mutex1 = Arc::new(Mutex::new(0));
+    let mutex2 = Arc::new(Mutex::new(0));
+    
+    let mutex1_clone = Arc::clone(&mutex1);
+    let mutex2_clone = Arc::clone(&mutex2);
+    
+    let handle = thread::spawn(move || {
+        loop {
+            // 尝试获取第一个锁
+            if let Ok(guard1) = mutex1_clone.try_lock() {
+                // 尝试获取第二个锁
+                if let Ok(guard2) = mutex2_clone.try_lock() {
+                    println!("成功获取两个锁");
+                    break;
+                }
+                // 释放第一个锁
+                drop(guard1);
+            }
+            thread::sleep(Duration::from_millis(10));
+        }
+    });
+    
+    handle.join().unwrap();
+}
+```
 
-**检测算法**：
-$$\text{DetectDeadlock}(G) = \text{has_cycle}(G)$$
+## 5.5 高级并发特性
 
-### 8.2 线性化性
+### 5.5.1 无锁编程
 
-**定义 8.2.1** (线性化性)
-线性化性保证并发操作的可串行化：
-$$\text{Linearizable}(H) = \exists S : \text{sequential}(S) \land \text{equivalent}(H, S)$$
+**无锁数据结构**：
 
-**线性化点**：
-$$\text{LinearizationPoint}(op) = \text{point where operation appears to take effect}$$
+```rust
+fn lock_free_programming() {
+    use std::sync::atomic::{AtomicPtr, Ordering};
+    use std::ptr;
+    
+    // 无锁栈实现
+    struct Node<T> {
+        data: T,
+        next: AtomicPtr<Node<T>>,
+    }
+    
+    struct LockFreeStack<T> {
+        head: AtomicPtr<Node<T>>,
+    }
+    
+    impl<T> LockFreeStack<T> {
+        fn new() -> Self {
+            LockFreeStack {
+                head: AtomicPtr::new(ptr::null_mut()),
+            }
+        }
+        
+        fn push(&self, data: T) {
+            let new_node = Box::into_raw(Box::new(Node {
+                data,
+                next: AtomicPtr::new(ptr::null_mut()),
+            }));
+            
+            loop {
+                let head = self.head.load(Ordering::Acquire);
+                unsafe {
+                    (*new_node).next.store(head, Ordering::Relaxed);
+                }
+                
+                if self.head.compare_exchange_weak(
+                    head,
+                    new_node,
+                    Ordering::Release,
+                    Ordering::Relaxed,
+                ).is_ok() {
+                    break;
+                }
+            }
+        }
+        
+        fn pop(&self) -> Option<T> {
+            loop {
+                let head = self.head.load(Ordering::Acquire);
+                if head.is_null() {
+                    return None;
+                }
+                
+                let next = unsafe { (*head).next.load(Ordering::Relaxed) };
+                
+                if self.head.compare_exchange_weak(
+                    head,
+                    next,
+                    Ordering::Release,
+                    Ordering::Relaxed,
+                ).is_ok() {
+                    unsafe {
+                        let data = ptr::read(&(*head).data);
+                        drop(Box::from_raw(head));
+                        return Some(data);
+                    }
+                }
+            }
+        }
+    }
+    
+    // 使用无锁栈
+    let stack = LockFreeStack::new();
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
+    
+    while let Some(value) = stack.pop() {
+        println!("弹出: {}", value);
+    }
+}
+```
 
-### 8.3 活性保证
+### 5.5.2 并发数据结构
 
-**定义 8.3.1** (活性)
-活性保证系统最终取得进展：
-$$\text{Liveness}(system) = \text{eventually}(progress)$$
+**并发HashMap**：
 
-**活性类型**：
-1. **无饥饿**：$\text{StarvationFree} = \forall t : \text{eventually}(t \text{ makes progress})$
-2. **无死锁**：$\text{DeadlockFree} = \text{no deadlock states}$
-3. **公平性**：$\text{Fairness} = \text{fair scheduling of threads}$
+```rust
+fn concurrent_data_structures() {
+    use std::collections::HashMap;
+    use std::sync::{Arc, RwLock};
+    use std::thread;
+    
+    // 并发HashMap
+    struct ConcurrentHashMap<K, V> {
+        data: Arc<RwLock<HashMap<K, V>>>,
+    }
+    
+    impl<K, V> ConcurrentHashMap<K, V>
+    where
+        K: Eq + std::hash::Hash + Clone,
+        V: Clone,
+    {
+        fn new() -> Self {
+            ConcurrentHashMap {
+                data: Arc::new(RwLock::new(HashMap::new())),
+            }
+        }
+        
+        fn insert(&self, key: K, value: V) {
+            let mut map = self.data.write().unwrap();
+            map.insert(key, value);
+        }
+        
+        fn get(&self, key: &K) -> Option<V> {
+            let map = self.data.read().unwrap();
+            map.get(key).cloned()
+        }
+        
+        fn remove(&self, key: &K) -> Option<V> {
+            let mut map = self.data.write().unwrap();
+            map.remove(key)
+        }
+    }
+    
+    // 使用并发HashMap
+    let map = ConcurrentHashMap::new();
+    let mut handles = vec![];
+    
+    // 多个写线程
+    for i in 0..5 {
+        let map = Arc::new(map);
+        let handle = thread::spawn(move || {
+            map.insert(format!("key{}", i), i);
+        });
+        handles.push(handle);
+    }
+    
+    // 多个读线程
+    for i in 0..5 {
+        let map = Arc::new(map);
+        let handle = thread::spawn(move || {
+            if let Some(value) = map.get(&format!("key{}", i)) {
+                println!("读取 key{}: {}", i, value);
+            }
+        });
+        handles.push(handle);
+    }
+    
+    for handle in handles {
+        handle.join().unwrap();
+    }
+}
+```
 
----
+### 5.5.3 并发模式
 
-## 总结
+**生产者-消费者模式**：
 
-本文档提供了Rust并发系统的完整形式化分析，包括：
+```rust
+fn producer_consumer_pattern() {
+    use std::sync::mpsc;
+    use std::thread;
+    use std::time::Duration;
+    
+    // 生产者-消费者模式
+    let (sender, receiver) = mpsc::channel();
+    let mut handles = vec![];
+    
+    // 生产者
+    for i in 0..3 {
+        let sender = sender.clone();
+        let handle = thread::spawn(move || {
+            for j in 0..5 {
+                sender.send(format!("生产者{}: 项目{}", i, j)).unwrap();
+                thread::sleep(Duration::from_millis(100));
+            }
+        });
+        handles.push(handle);
+    }
+    
+    // 消费者
+    let consumer_handle = thread::spawn(move || {
+        for received in receiver {
+            println!("消费: {}", received);
+            thread::sleep(Duration::from_millis(50));
+        }
+    });
+    
+    drop(sender); // 关闭所有发送者
+    
+    for handle in handles {
+        handle.join().unwrap();
+    }
+    
+    consumer_handle.join().unwrap();
+    
+    // 工作池模式
+    use std::sync::{Arc, Mutex};
+    
+    struct WorkPool {
+        workers: Vec<Worker>,
+        sender: mpsc::Sender<Job>,
+    }
+    
+    struct Worker {
+        id: usize,
+        thread: Option<thread::JoinHandle<()>>,
+    }
+    
+    type Job = Box<dyn FnOnce() + Send + 'static>;
+    
+    impl WorkPool {
+        fn new(size: usize) -> WorkPool {
+            let (sender, receiver) = mpsc::channel();
+            let receiver = Arc::new(Mutex::new(receiver));
+            let mut workers = Vec::with_capacity(size);
+            
+            for id in 0..size {
+                workers.push(Worker::new(id, Arc::clone(&receiver)));
+            }
+            
+            WorkPool { workers, sender }
+        }
+        
+        fn execute<F>(&self, f: F)
+        where
+            F: FnOnce() + Send + 'static,
+        {
+            let job = Box::new(f);
+            self.sender.send(job).unwrap();
+        }
+    }
+    
+    impl Worker {
+        fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Worker {
+            let thread = thread::spawn(move || loop {
+                let job = receiver.lock().unwrap().recv();
+                
+                match job {
+                    Ok(job) => {
+                        println!("Worker {} 执行任务", id);
+                        job();
+                    }
+                    Err(_) => {
+                        println!("Worker {} 终止", id);
+                        break;
+                    }
+                }
+            });
+            
+            Worker {
+                id,
+                thread: Some(thread),
+            }
+        }
+    }
+    
+    // 使用工作池
+    let pool = WorkPool::new(4);
+    
+    for i in 0..8 {
+        pool.execute(move || {
+            println!("执行任务 {}", i);
+            thread::sleep(Duration::from_millis(100));
+        });
+    }
+}
+```
 
-1. **理论基础**：并发模型和内存模型
-2. **线程系统**：线程创建、同步和池化
-3. **同步原语**：互斥锁、读写锁、条件变量和屏障
-4. **原子操作**：原子类型和内存序
-5. **消息传递**：通道、Actor模型和CSP
-6. **无锁编程**：无锁数据结构和CAS操作
-7. **并行计算**：数据并行、任务并行和流水线并行
-8. **形式化验证**：并发安全性、线性化性和活性保证
+## 5.6 并发与内存安全
 
-所有内容都遵循严格的数学规范，包含形式化符号、类型规则和证明过程，为Rust并发系统的深入理解和应用提供了理论基础。
+**并发内存安全保证**：
+
+```rust
+fn concurrency_memory_safety() {
+    use std::sync::{Arc, Mutex};
+    use std::thread;
+    
+    // 1. 所有权系统防止数据竞争
+    let data = Arc::new(Mutex::new(vec![1, 2, 3]));
+    let mut handles = vec![];
+    
+    for i in 0..3 {
+        let data = Arc::clone(&data);
+        let handle = thread::spawn(move || {
+            let mut vec = data.lock().unwrap();
+            vec.push(i);
+        });
+        handles.push(handle);
+    }
+    
+    for handle in handles {
+        handle.join().unwrap();
+    }
+    
+    println!("安全数据: {:?}", *data.lock().unwrap());
+    
+    // 2. 生命周期系统防止悬垂引用
+    let value = 42;
+    let handle = thread::spawn(move || {
+        println!("线程中的值: {}", value);
+    });
+    
+    handle.join().unwrap();
+    
+    // 3. 类型系统保证线程安全
+    // 只有实现了Send的类型才能在线程间传递
+    // 只有实现了Sync的类型才能在线程间共享引用
+    
+    // 4. 编译时检查并发错误
+    // Rust编译器会在编译时检查并发安全问题
+    // 防止数据竞争、死锁等并发错误
+}
+```
+
+## 5.7 总结
+
+Rust的并发系统通过以下机制提供安全保障：
+
+1. **编译时检查**：Send和Sync Trait确保线程安全
+2. **所有权系统**：防止数据竞争和悬垂引用
+3. **类型系统**：保证并发操作的类型安全
+4. **零成本抽象**：并发原语无运行时开销
+
+**核心优势**：
+
+- 编译时并发安全保证
+- 零运行时开销
+- 内存安全保证
+- 防止数据竞争
+- 防止死锁
+
+**适用场景**：
+
+- 高性能并发应用
+- 服务器编程
+- 并行计算
+- 实时系统
+- 多线程数据处理
+
+并发系统是Rust语言的重要组成部分，与所有权系统和类型系统共同构成了Rust的安全基础。

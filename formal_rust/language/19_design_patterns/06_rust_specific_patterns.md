@@ -26,6 +26,7 @@
 $$\text{Move}: \text{Variable} \times \text{Variable} \rightarrow \text{Ownership}$$
 
 **模式描述**:
+
 ```rust
 // 移动语义示例
 let s1 = String::from("hello");
@@ -48,6 +49,7 @@ RAII (Resource Acquisition Is Initialization) 模式确保资源在对象创建�
 $$\text{RAII}: \text{Resource} \rightarrow \text{Object} \rightarrow \text{Lifecycle}$$
 
 **实现示例**:
+
 ```rust
 struct ResourceManager {
     resource: Resource,
@@ -89,11 +91,13 @@ RAII模式保证了资源的自动管理，避免了资源泄漏。
 $$\text{BorrowCheck}: \text{Reference} \times \text{Reference} \rightarrow \text{Validity}$$
 
 **规则描述**:
+
 1. **不可变借用**: 可以有多个不可变引用
 2. **可变借用**: 只能有一个可变引用
 3. **互斥性**: 不可变借用和可变借用不能同时存在
 
 **实现示例**:
+
 ```rust
 fn borrow_check_example() {
     let mut data = vec![1, 2, 3, 4, 5];
@@ -123,11 +127,13 @@ fn borrow_check_example() {
 $$\text{ImmutableBorrow}: \text{Value} \rightarrow \text{ImmutableReference}$$
 
 **模式特征**:
+
 - 允许多个同时存在
 - 不允许修改数据
 - 生命周期不能超过被借用值的生命周期
 
 **实现示例**:
+
 ```rust
 fn immutable_borrow_pattern() {
     let data = vec![1, 2, 3, 4, 5];
@@ -154,11 +160,13 @@ fn immutable_borrow_pattern() {
 $$\text{MutableBorrow}: \text{Value} \rightarrow \text{MutableReference}$$
 
 **模式特征**:
+
 - 只能有一个同时存在
 - 允许修改数据
 - 生命周期不能超过被借用值的生命周期
 
 **实现示例**:
+
 ```rust
 fn mutable_borrow_pattern() {
     let mut data = vec![1, 2, 3, 4, 5];
@@ -184,11 +192,13 @@ fn mutable_borrow_pattern() {
 $$\text{BorrowChecker}: \text{Program} \rightarrow \text{Validity}$$
 
 **检查规则**:
+
 1. **生命周期检查**: 确保引用的生命周期不超过被引用值的生命周期
 2. **借用规则检查**: 确保借用规则得到遵守
 3. **数据竞争检查**: 防止数据竞争
 
 **实现示例**:
+
 ```rust
 // 借用检查器会检查以下代码
 fn borrow_checker_example() {
@@ -220,6 +230,7 @@ fn borrow_checker_example() {
 $$\text{Lifetime}: \text{Reference} \rightarrow \text{Scope}$$
 
 **语法规则**:
+
 ```rust
 // 生命周期参数
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
@@ -244,11 +255,13 @@ struct ImportantExcerpt<'a> {
 Rust编译器可以自动推断某些情况下的生命周期。
 
 **省略规则**:
+
 1. **输入生命周期**: 每个引用参数都有自己的生命周期参数
 2. **输出生命周期**: 如果只有一个输入生命周期参数，那么它被赋给所有输出生命周期参数
 3. **方法生命周期**: 如果方法有&self或&mut self参数，那么self的生命周期被赋给所有输出生命周期参数
 
 **实现示例**:
+
 ```rust
 // 生命周期省略示例
 fn first_word(s: &str) -> &str {
@@ -277,6 +290,7 @@ fn first_word_explicit<'a>(s: &'a str) -> &'a str {
 $$\text{StaticLifetime}: \text{Reference} \rightarrow \text{StaticScope}$$
 
 **实现示例**:
+
 ```rust
 // 静态字符串
 let s: &'static str = "I have a static lifetime.";
@@ -303,6 +317,7 @@ struct StaticData {
 $$\text{TraitObject}: \text{Trait} \rightarrow \text{DynamicType}$$
 
 **实现示例**:
+
 ```rust
 trait Draw {
     fn draw(&self);
@@ -337,11 +352,13 @@ fn draw_components(components: Vec<Box<dyn Draw>>) {
 特征必须满足对象安全要求才能用作特征对象。
 
 **对象安全规则**:
+
 1. 返回类型不能是Self
 2. 没有泛型类型参数
 3. 方法不能有where子句
 
 **实现示例**:
+
 ```rust
 // 对象安全的特征
 trait ObjectSafe {
@@ -362,11 +379,13 @@ trait NotObjectSafe {
 特征对象使用动态分发，有一定的性能开销。
 
 **性能特征**:
+
 - **动态分发**: 运行时确定方法调用
 - **内存开销**: 需要额外的指针和虚函数表
 - **缓存不友好**: 可能影响CPU缓存性能
 
 **优化策略**:
+
 ```rust
 // 使用泛型进行静态分发
 fn draw_static<T: Draw>(component: &T) {
@@ -390,6 +409,7 @@ Box是拥有所有权的智能指针，用于在堆上分配数据。
 $$\text{Box}: \text{Value} \rightarrow \text{HeapAllocation}$$
 
 **实现示例**:
+
 ```rust
 // Box基本使用
 let b = Box::new(5);
@@ -413,6 +433,7 @@ Rc是引用计数的智能指针，允许多个所有者。
 $$\text{Rc}: \text{Value} \rightarrow \text{SharedOwnership}$$
 
 **实现示例**:
+
 ```rust
 use std::rc::Rc;
 
@@ -440,6 +461,7 @@ Arc是原子引用计数的智能指针，用于多线程环境。
 $$\text{Arc}: \text{Value} \rightarrow \text{ThreadSafeOwnership}$$
 
 **实现示例**:
+
 ```rust
 use std::sync::Arc;
 use std::thread;
@@ -470,6 +492,7 @@ RefCell提供内部可变性，在运行时检查借用规则。
 $$\text{RefCell}: \text{Value} \rightarrow \text{InteriorMutability}$$
 
 **实现示例**:
+
 ```rust
 use std::cell::RefCell;
 
@@ -500,6 +523,7 @@ Result类型用于表示可能成功或失败的操作。
 $$\text{Result}: \text{Success} \times \text{Error} \rightarrow \text{Outcome}$$
 
 **实现示例**:
+
 ```rust
 use std::fs::File;
 use std::io::{self, Read};
@@ -527,6 +551,7 @@ Option类型用于表示可能为空的值。
 $$\text{Option}: \text{Value} \times \text{None} \rightarrow \text{OptionalValue}$$
 
 **实现示例**:
+
 ```rust
 fn find_element(arr: &[i32], target: i32) -> Option<usize> {
     for (i, &item) in arr.iter().enumerate() {
@@ -554,6 +579,7 @@ match find_element(&arr, 3) {
 $$\text{ErrorPropagation}: \text{Result} \rightarrow \text{PropagatedResult}$$
 
 **实现示例**:
+
 ```rust
 use std::fs::File;
 use std::io::{self, Read, Write};
@@ -591,6 +617,7 @@ fn process_file(input: &str, output: &str) -> Result<(), io::Error> {
 Rust特定模式在保证安全性的同时，提供了零成本抽象。
 
 **性能指标**:
+
 - **所有权模式**: O(1) 移动操作
 - **借用模式**: O(1) 引用操作
 - **智能指针**: 最小运行时开销
@@ -602,6 +629,7 @@ Rust特定模式在保证安全性的同时，提供了零成本抽象。
 Rust特定模式通过类型系统保证了并发安全。
 
 **安全保证**:
+
 - **数据竞争**: 编译时防止数据竞争
 - **死锁**: 通过所有权系统减少死锁风险
 - **原子性**: 提供原子操作支持
@@ -664,11 +692,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ## 🔗 交叉引用
 
 ### 相关概念
+
 - [理论基础](01_theoretical_foundations.md) - 理论背景
 - [创建型模式](02_creational_patterns.md) - 创建型模式
 - [并发模式](05_concurrency_patterns.md) - 并发模式
 
 ### 外部资源
+
 - [Rust所有权](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
 - [Rust借用](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
 - [Rust生命周期](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
@@ -684,4 +714,4 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 **维护者**: Rust语言形式化理论团队  
 **最后更新**: 2025-01-27  
-**版本**: 1.0.0 
+**版本**: 1.0.0

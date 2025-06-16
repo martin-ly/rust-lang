@@ -28,6 +28,7 @@
 \[ \text{ControlFlow}: \mathcal{S} \times \text{Instruction} \rightarrow \mathcal{S} \times \text{NextInstruction} \]
 
 其中：
+
 - \( \mathcal{S} \) 是程序状态空间
 - \( \text{Instruction} \) 是指令集合
 - \( \text{NextInstruction} \) 是下一个指令
@@ -231,4 +232,4 @@
 4. Rust Reference Manual
 5. Type Theory and Functional Programming
 6. Category Theory for Programmers
-7. Formal Semantics of Programming Languages 
+7. Formal Semantics of Programming Languages

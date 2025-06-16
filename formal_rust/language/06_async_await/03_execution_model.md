@@ -24,6 +24,7 @@
 $$\text{Executor}: \text{Set}(\text{Future}) \rightarrow \text{Set}(\text{Result})$$
 
 **架构层次**:
+
 ```
 ┌─────────────────────────────────────┐
 │           应用层 (Application)       │
@@ -41,6 +42,7 @@ $$\text{Executor}: \text{Set}(\text{Future}) \rightarrow \text{Set}(\text{Result
 ### 1.2 核心组件
 
 #### 1.2.1 任务队列
+
 ```rust
 pub struct TaskQueue {
     ready_tasks: VecDeque<Task>,
@@ -49,6 +51,7 @@ pub struct TaskQueue {
 ```
 
 #### 1.2.2 调度器
+
 ```rust
 pub trait Scheduler {
     fn schedule(&self, task: Task);
@@ -58,6 +61,7 @@ pub trait Scheduler {
 ```
 
 #### 1.2.3 执行器
+
 ```rust
 pub trait Executor {
     fn spawn<F>(&self, future: F) -> JoinHandle<F::Output>
@@ -140,7 +144,9 @@ $$\text{Schedule}: \text{Set}(\text{Task}) \rightarrow \text{Queue}(\text{Task})
 ### 2.2 常见调度算法
 
 #### 2.2.1 轮转调度 (Round Robin)
+
 **算法描述**:
+
 ```rust
 fn round_robin_schedule(tasks: &[Task]) -> VecDeque<Task> {
     let mut queue = VecDeque::new();
@@ -155,7 +161,9 @@ fn round_robin_schedule(tasks: &[Task]) -> VecDeque<Task> {
 **空间复杂度**: $O(n)$
 
 #### 2.2.2 优先级调度 (Priority Scheduling)
+
 **算法描述**:
+
 ```rust
 fn priority_schedule(tasks: &[Task]) -> BinaryHeap<Task> {
     let mut heap = BinaryHeap::new();
@@ -170,7 +178,9 @@ fn priority_schedule(tasks: &[Task]) -> BinaryHeap<Task> {
 **空间复杂度**: $O(n)$
 
 #### 2.2.3 工作窃取调度 (Work Stealing)
+
 **算法描述**:
+
 ```rust
 struct WorkStealingScheduler {
     local_queues: Vec<VecDeque<Task>>,
@@ -284,6 +294,7 @@ impl Future for YieldingTask {
 
 **证明**:
 通过归纳法证明：
+
 1. **基础情况**: 单个任务总是公平的
 2. **归纳步骤**: 假设n个任务公平，那么n+1个任务也公平
 
@@ -341,6 +352,7 @@ impl CooperativeExecutor {
 异步运行时是一个完整的异步执行环境，包含执行器、调度器、I/O处理等组件。
 
 **架构图**:
+
 ```
 ┌─────────────────────────────────────┐
 │           应用代码 (Application)     │
@@ -362,6 +374,7 @@ impl CooperativeExecutor {
 ### 4.2 核心组件
 
 #### 4.2.1 I/O驱动
+
 ```rust
 pub trait IoDriver {
     fn register(&self, source: IoSource) -> Result<(), Error>;
@@ -371,6 +384,7 @@ pub trait IoDriver {
 ```
 
 #### 4.2.2 定时器
+
 ```rust
 pub trait Timer {
     fn schedule(&self, duration: Duration, callback: Box<dyn FnOnce()>) -> TimerId;
@@ -448,6 +462,7 @@ impl AsyncRuntime {
 3. **缓存友好**: 提高缓存命中率
 
 **实现示例**:
+
 ```rust
 pub struct ObjectPool<T> {
     objects: VecDeque<T>,
@@ -475,6 +490,7 @@ impl<T> ObjectPool<T> {
 3. **负载均衡**: 平衡工作负载
 
 **实现示例**:
+
 ```rust
 use crossbeam::queue::ArrayQueue;
 
@@ -606,11 +622,13 @@ impl Worker {
 ## 🔗 交叉引用
 
 ### 相关概念
+
 - [核心概念](02_core_concepts.md) - 基础概念
 - [状态机实现](04_state_machine.md) - 实现细节
 - [性能优化](07_performance_optimization.md) - 优化技术
 
 ### 外部资源
+
 - [Tokio运行时](https://tokio.rs/)
 - [async-std运行时](https://docs.rs/async-std/)
 - [smol运行时](https://docs.rs/smol/)
@@ -626,4 +644,4 @@ impl Worker {
 
 **维护者**: Rust语言形式化理论团队  
 **最后更新**: 2025-01-27  
-**版本**: 1.0.0 
+**版本**: 1.0.0

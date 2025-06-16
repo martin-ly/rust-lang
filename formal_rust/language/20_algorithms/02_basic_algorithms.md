@@ -23,6 +23,7 @@
 快速排序是一种分治排序算法，通过选择基准元素将数组分为两部分。
 
 **算法描述**:
+
 ```rust
 fn quicksort<T: Ord>(arr: &mut [T]) {
     if arr.len() <= 1 {
@@ -51,7 +52,8 @@ fn partition<T: Ord>(arr: &mut [T]) -> usize {
 ```
 
 **复杂度分析**:
-- **时间复杂度**: 
+
+- **时间复杂度**:
   - 最好情况: $O(n \log n)$
   - 平均情况: $O(n \log n)$
   - 最坏情况: $O(n^2)$
@@ -72,6 +74,7 @@ $$T(n) = \frac{1}{n} \sum_{i=0}^{n-1} (T(i) + T(n-i-1)) + O(n)$$
 归并排序是一种稳定的分治排序算法，将数组分为两半，递归排序后合并。
 
 **算法描述**:
+
 ```rust
 fn merge_sort<T: Ord + Clone>(arr: &mut [T]) {
     if arr.len() <= 1 {
@@ -118,6 +121,7 @@ fn merge<T: Ord + Clone>(arr: &mut [T], left: &[T], right: &[T]) {
 ```
 
 **复杂度分析**:
+
 - **时间复杂度**: $O(n \log n)$ (所有情况)
 - **空间复杂度**: $O(n)$
 
@@ -133,6 +137,7 @@ fn merge<T: Ord + Clone>(arr: &mut [T], left: &[T], right: &[T]) {
 堆排序利用堆数据结构的特性进行排序。
 
 **算法描述**:
+
 ```rust
 fn heap_sort<T: Ord>(arr: &mut [T]) {
     // 构建最大堆
@@ -168,6 +173,7 @@ fn heapify<T: Ord>(arr: &mut [T], root: usize) {
 ```
 
 **复杂度分析**:
+
 - **时间复杂度**: $O(n \log n)$ (所有情况)
 - **空间复杂度**: $O(1)$
 
@@ -179,6 +185,7 @@ fn heapify<T: Ord>(arr: &mut [T], root: usize) {
 计数排序是一种非比较排序算法，适用于已知范围的整数排序。
 
 **算法描述**:
+
 ```rust
 fn counting_sort(arr: &[u32], max_value: u32) -> Vec<u32> {
     let mut count = vec![0; (max_value + 1) as usize];
@@ -206,6 +213,7 @@ fn counting_sort(arr: &[u32], max_value: u32) -> Vec<u32> {
 ```
 
 **复杂度分析**:
+
 - **时间复杂度**: $O(n + k)$，其中 $k$ 是数据范围
 - **空间复杂度**: $O(n + k)$
 
@@ -217,6 +225,7 @@ fn counting_sort(arr: &[u32], max_value: u32) -> Vec<u32> {
 线性搜索逐个检查数组中的每个元素。
 
 **算法描述**:
+
 ```rust
 fn linear_search<T: PartialEq>(arr: &[T], target: &T) -> Option<usize> {
     for (i, item) in arr.iter().enumerate() {
@@ -229,6 +238,7 @@ fn linear_search<T: PartialEq>(arr: &[T], target: &T) -> Option<usize> {
 ```
 
 **复杂度分析**:
+
 - **时间复杂度**: $O(n)$
 - **空间复杂度**: $O(1)$
 
@@ -238,6 +248,7 @@ fn linear_search<T: PartialEq>(arr: &[T], target: &T) -> Option<usize> {
 二分搜索在有序数组中查找目标元素。
 
 **算法描述**:
+
 ```rust
 fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
     let mut left = 0;
@@ -258,6 +269,7 @@ fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
 ```
 
 **复杂度分析**:
+
 - **时间复杂度**: $O(\log n)$
 - **空间复杂度**: $O(1)$
 
@@ -273,6 +285,7 @@ fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
 插值搜索是二分搜索的改进版本，使用线性插值估计目标位置。
 
 **算法描述**:
+
 ```rust
 fn interpolation_search(arr: &[i32], target: i32) -> Option<usize> {
     let mut left = 0;
@@ -298,7 +311,8 @@ fn interpolation_search(arr: &[i32], target: i32) -> Option<usize> {
 ```
 
 **复杂度分析**:
-- **时间复杂度**: 
+
+- **时间复杂度**:
   - 最好情况: $O(\log \log n)$ (均匀分布)
   - 最坏情况: $O(n)$
 - **空间复杂度**: $O(1)$
@@ -313,6 +327,7 @@ fn interpolation_search(arr: &[i32], target: i32) -> Option<usize> {
 KMP算法是一种高效的字符串匹配算法，利用部分匹配表避免重复比较。
 
 **算法描述**:
+
 ```rust
 fn kmp_search(text: &str, pattern: &str) -> Option<usize> {
     let pattern_bytes = pattern.as_bytes();
@@ -367,6 +382,7 @@ fn compute_lps(pattern: &[u8]) -> Vec<usize> {
 ```
 
 **复杂度分析**:
+
 - **时间复杂度**: $O(m + n)$，其中 $m$ 是模式长度，$n$ 是文本长度
 - **空间复杂度**: $O(m)$
 
@@ -376,6 +392,7 @@ fn compute_lps(pattern: &[u8]) -> Vec<usize> {
 Boyer-Moore算法是一种高效的字符串匹配算法，从右到左比较。
 
 **算法描述**:
+
 ```rust
 fn boyer_moore_search(text: &str, pattern: &str) -> Option<usize> {
     let pattern_bytes = pattern.as_bytes();
@@ -414,6 +431,7 @@ fn boyer_moore_search(text: &str, pattern: &str) -> Option<usize> {
 编辑距离是将一个字符串转换为另一个字符串所需的最少操作次数。
 
 **算法描述**:
+
 ```rust
 fn edit_distance(s1: &str, s2: &str) -> usize {
     let s1_bytes = s1.as_bytes();
@@ -453,6 +471,7 @@ fn edit_distance(s1: &str, s2: &str) -> usize {
 ```
 
 **复杂度分析**:
+
 - **时间复杂度**: $O(mn)$
 - **空间复杂度**: $O(mn)$
 
@@ -466,6 +485,7 @@ fn edit_distance(s1: &str, s2: &str) -> usize {
 埃拉托斯特尼筛法是一种高效的素数生成算法。
 
 **算法描述**:
+
 ```rust
 fn sieve_of_eratosthenes(n: usize) -> Vec<bool> {
     let mut is_prime = vec![true; n + 1];
@@ -487,6 +507,7 @@ fn sieve_of_eratosthenes(n: usize) -> Vec<bool> {
 ```
 
 **复杂度分析**:
+
 - **时间复杂度**: $O(n \log \log n)$
 - **空间复杂度**: $O(n)$
 
@@ -496,6 +517,7 @@ fn sieve_of_eratosthenes(n: usize) -> Vec<bool> {
 Miller-Rabin是一种概率性素数测试算法。
 
 **算法描述**:
+
 ```rust
 fn miller_rabin(n: u64, k: u32) -> bool {
     if n <= 1 || n == 4 {
@@ -565,6 +587,7 @@ fn mod_pow(mut base: u64, mut exp: u64, modulus: u64) -> u64 {
 欧几里得算法计算两个数的最大公约数。
 
 **算法描述**:
+
 ```rust
 fn gcd(mut a: u64, mut b: u64) -> u64 {
     while b != 0 {
@@ -587,6 +610,7 @@ fn extended_gcd(a: i64, b: i64) -> (i64, i64, i64) {
 ```
 
 **复杂度分析**:
+
 - **时间复杂度**: $O(\log \min(a, b))$
 - **空间复杂度**: $O(1)$
 
@@ -599,6 +623,7 @@ fn extended_gcd(a: i64, b: i64) -> (i64, i64, i64) {
 
 **证明**:
 通过数学归纳法：
+
 1. **基础情况**: 长度为0或1的数组已经有序
 2. **归纳步骤**: 假设子数组排序正确，则合并后数组也正确
 
@@ -616,6 +641,7 @@ fn extended_gcd(a: i64, b: i64) -> (i64, i64, i64) {
 排序算法是稳定的，当且仅当相等元素的相对顺序在排序后保持不变。
 
 **稳定性分析**:
+
 - **稳定算法**: 归并排序、插入排序、冒泡排序
 - **不稳定算法**: 快速排序、堆排序、选择排序
 
@@ -665,11 +691,13 @@ mod tests {
 ## 🔗 交叉引用
 
 ### 相关概念
+
 - [理论基础](01_theoretical_foundations.md) - 理论背景
 - [数据结构算法](03_data_structure_algorithms.md) - 数据结构相关算法
 - [高级算法](04_advanced_algorithms.md) - 高级算法技术
 
 ### 外部资源
+
 - [Rust标准库排序](https://doc.rust-lang.org/std/primitive.slice.html#method.sort)
 - [算法可视化](https://visualgo.net/)
 - [排序算法比较](https://www.toptal.com/developers/sorting-algorithms)
@@ -685,4 +713,4 @@ mod tests {
 
 **维护者**: Rust语言形式化理论团队  
 **最后更新**: 2025-01-27  
-**版本**: 1.0.0 
+**版本**: 1.0.0

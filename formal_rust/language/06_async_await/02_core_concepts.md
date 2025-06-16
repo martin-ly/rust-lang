@@ -80,6 +80,7 @@ impl Future for SimpleFuture {
 
 **定义 2.1** (async函数)
 async函数是一个返回Future的函数，语法为：
+
 ```rust
 async fn function_name(parameters) -> ReturnType {
     // 函数体
@@ -93,6 +94,7 @@ $$\text{async}: \text{Fn}(T_1, \ldots, T_n) \rightarrow T \rightarrow \text{Futu
 
 **定义 2.2** (await表达式)
 await表达式用于等待Future完成，语法为：
+
 ```rust
 let result = future.await;
 ```
@@ -176,6 +178,7 @@ impl Future for ExampleFuture {
 自引用结构体是包含指向自身字段引用的结构体。
 
 **问题描述**:
+
 ```rust
 struct SelfReferential {
     data: String,
@@ -426,11 +429,13 @@ impl Future for StateMachineFuture {
 ## 🔗 交叉引用
 
 ### 相关概念
+
 - [理论基础](01_theoretical_foundations.md) - 理论背景
 - [执行模型](03_execution_model.md) - 执行机制
 - [状态机实现](04_state_machine.md) - 实现细节
 
 ### 外部资源
+
 - [Rust Future文档](https://doc.rust-lang.org/std/future/trait.Future.html)
 - [Pin类型文档](https://doc.rust-lang.org/std/pin/struct.Pin.html)
 - [Waker文档](https://doc.rust-lang.org/std/task/struct.Waker.html)
@@ -446,4 +451,4 @@ impl Future for StateMachineFuture {
 
 **维护者**: Rust语言形式化理论团队  
 **最后更新**: 2025-01-27  
-**版本**: 1.0.0 
+**版本**: 1.0.0

@@ -408,4 +408,4 @@ Rust的所有权系统证明了：
 2. Jung, R., et al. "Stacked borrows: an aliasing model for Rust." POPL 2019.
 3. Jung, R., et al. "The future is ours: Programming model innovations for everyone." CACM 2020.
 4. O'Hearn, P. W. "Resources, concurrency, and local reasoning." Theoretical Computer Science 2007.
-5. Reynolds, J. C. "Separation logic: A logic for shared mutable data structures." LICS 2002. 
+5. Reynolds, J. C. "Separation logic: A logic for shared mutable data structures." LICS 2002.
