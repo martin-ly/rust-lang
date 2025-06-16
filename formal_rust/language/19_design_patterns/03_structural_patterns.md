@@ -1131,4 +1131,4 @@ impl<T: Subject> Subject for DecoratorProxy<T> {
 ---
 
 **维护者**: Rust语言形式化理论团队  
-**最后更新**: 2025-01-27 
+**最后更新**: 2025-01-27

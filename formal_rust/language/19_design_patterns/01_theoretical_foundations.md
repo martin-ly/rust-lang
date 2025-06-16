@@ -133,6 +133,7 @@ enum PatternComplexity {
 $$\text{Pattern}: \mathcal{C} \rightarrow \mathcal{D}$$
 
 其中：
+
 - $\mathcal{C}$: 问题范畴
 - $\mathcal{D}$: 解决方案范畴
 
@@ -153,6 +154,7 @@ $$\text{Singleton} :: \forall a. a \rightarrow \text{Unique} \, a$$
 $$\text{Pattern} \equiv \forall x. P(x) \rightarrow Q(x)$$
 
 其中：
+
 - $P(x)$: 问题描述
 - $Q(x)$: 解决方案
 
@@ -371,4 +373,4 @@ $$\forall P \in \text{Patterns}: \text{TypeSafe}(P) \equiv \text{WellTyped}(P) \
 ---
 
 **维护者**: Rust语言形式化理论团队  
-**最后更新**: 2025-01-27 
+**最后更新**: 2025-01-27
