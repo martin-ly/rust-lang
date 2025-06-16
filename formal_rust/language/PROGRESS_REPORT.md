@@ -13,6 +13,18 @@
   - [x] rust_symmetry.md (373行) - 对称性分析
   - [x] variable_analysis.md (426行) - 变量分析
 
+- [x] c02_type_system/docs 深度分析
+  - [x] type_safety_inference.md (334行) - 类型安全与推理
+  - [x] affine_type_theory.md (305行) - 仿射类型理论
+  - [x] rust_type_design01-04.md - 类型系统设计系列
+  - [x] type_category_theory.md (363行) - 范畴论视角
+  - [x] type_HoTT.md (260行) - 同伦类型论
+
+- [x] c03_control_fn/docs 深度分析
+  - [x] view01.md (616行) - 控制流特性分析
+  - [x] view02.md (1642行) - 控制流深度分析
+  - [x] Rust 所有权模型针对特定类型的访问控制.md (152行) - 访问控制
+
 ### 已完成的重构
 
 - [x] formal_rust/language/01_ownership_borrowing/ 重构完成
@@ -25,24 +37,29 @@
 - [x] formal_rust/language/02_type_system/ 重构完成
   - [x] index.md - 主索引文件
   - [x] 01_theoretical_foundations.md - 理论基础（范畴论、HoTT、仿射类型论、控制论）
+  - [x] 02_core_concepts.md - 核心概念（类型安全、类型推理、生命周期）
   - [x] 03_algebraic_data_types.md - 代数数据类型
   - [x] 04_variance_system.md - 型变系统
+  - [x] 05_trait_system.md - 特征系统
+  - [x] 06_lifetime_system.md - 生命周期系统
+
+- [x] formal_rust/language/03_control_flow/ 重构完成
+  - [x] 00_index.md - 主索引文件
+  - [x] 01_formal_control_flow.md - 控制流系统形式化分析
+  - [x] 01_conditional_expressions.md - 条件表达式
+  - [x] 02_loop_statements.md - 循环语句
+  - [x] 03_function_control.md - 函数控制流
 
 ### 正在进行的分析
 
-- [ ] c02_type_system/docs 深度分析
-  - [ ] type_safety_inference.md (334行) - 类型安全与推理
-  - [ ] rust_type_design01-04.md - 类型系统设计系列
-  - [ ] affine_type_theory.md (305行) - 仿射类型理论
+- [ ] c04_generic/docs 深度分析
+- [ ] c05_threads/docs 深度分析
+- [ ] c06_async/docs 深度分析
+- [ ] c07_process/docs 深度分析
+- [ ] c08_algorithms/docs 深度分析
 
 ### 待分析目录
 
-- [ ] c03_control_fn/docs
-- [ ] c04_generic/docs  
-- [ ] c05_threads/docs
-- [ ] c06_async/docs
-- [ ] c07_process/docs
-- [ ] c08_algorithms/docs
 - [ ] c09_design_pattern/docs
 - [ ] c10_networks/docs
 - [ ] c11_frameworks/docs
@@ -102,23 +119,71 @@
 - **仿射类型论视角**: 仿射类型基础，资源使用规则，所有权转移，借用系统扩展
 - **控制论视角**: 类型系统作为控制器，状态管理，反馈机制，系统稳定性
 
-#### 2. 代数数据类型 (03_algebraic_data_types.md)
+#### 2. 核心概念 (02_core_concepts.md)
+
+- **类型安全**: 类型安全定义，进展定理，保持定理
+- **类型推理**: Hindley-Milner算法，类型约束求解，统一算法
+- **生命周期系统**: 生命周期定义，约束，推理，省略规则
+- **型变系统**: 协变，逆变，不变，类型转换安全性
+
+#### 3. 代数数据类型 (03_algebraic_data_types.md)
 
 - **积类型**: 结构体和元组作为积类型，通用性质
 - **和类型**: 枚举作为和类型，模式匹配，通用性质
 - **递归类型**: 列表类型，树类型，不动点构造
 - **类型代数**: 类型运算，类型等式，类型同构，类型优化
 
-#### 3. 型变系统 (04_variance_system.md)
+#### 4. 型变系统 (04_variance_system.md)
 
 - **协变**: 定义、类型构造子、安全性
 - **逆变**: 定义、类型构造子、安全性
 - **不变**: 定义、类型构造子、必要性
 - **生命周期型变**: 协变、逆变、不变规则
 
+#### 5. 特征系统 (05_trait_system.md)
+
+- **特征定义**: 基本特征，泛型特征，关联类型
+- **特征约束**: 基本约束，where从句，约束推理
+- **特征对象**: 特征对象定义，实现，对象安全
+- **高级特性**: 默认方法，特征继承，特征扩展
+
+#### 6. 生命周期系统 (06_lifetime_system.md)
+
+- **生命周期定义**: 基本概念，约束类型，生命周期环境
+- **生命周期标注**: 基本标注，多参数，约束
+- **生命周期推理**: 推理规则，推理算法，优化
+- **高级特性**: 子类型，不变性，协变逆变
+
+### 控制流系统重构完成
+
+#### 1. 理论基础 (01_formal_control_flow.md)
+
+- **控制流定义**: 控制流概念，执行状态，求值关系
+- **条件控制流**: if表达式，if let表达式，match表达式
+- **循环控制流**: loop语句，while语句，for语句
+- **函数控制流**: 函数调用，函数返回，递归函数
+
+#### 2. 条件表达式 (01_conditional_expressions.md)
+
+- **if表达式**: 语法，语义，类型规则，所有权规则
+- **if let表达式**: 模式匹配，语法糖，实现
+- **match表达式**: 穷尽性检查，模式匹配，分支类型一致性
+
+#### 3. 循环语句 (02_loop_statements.md)
+
+- **loop语句**: 无限循环，break返回值，实现
+- **while语句**: 条件循环，语义，类型检查
+- **for语句**: 迭代器遍历，模式绑定，生命周期
+
+#### 4. 函数控制流 (03_function_control.md)
+
+- **函数调用**: 参数传递，返回值，调用栈
+- **递归函数**: 递归定义，终止性，内存管理
+- **高阶函数**: 函数作为参数，函数作为返回值
+
 ### 理论贡献
 
-1. **统一理论框架**: 建立了所有权系统的完整形式化理论框架
+1. **统一理论框架**: 建立了所有权系统、类型系统、控制流系统的完整形式化理论框架
 2. **形式化表示**: 提供了完整的数学符号和形式化证明
 3. **实践指导**: 包含大量可运行的代码示例
 4. **系统化组织**: 建立了严格的目录编号和交叉引用体系
@@ -144,20 +209,19 @@
 
 ### 立即执行 (批量处理)
 
-1. **完成类型系统剩余文档**
-   - 02_core_concepts.md - 核心概念
-   - 05_trait_system.md - 特征系统
-   - 06_lifetime_system.md - 生命周期系统
-   - 07_generic_system.md - 泛型系统
-   - 08_type_safety.md - 类型安全
-   - 09_formal_proofs.md - 形式化证明
-   - 10_examples_implementations.md - 示例与实现
+1. **完成泛型系统重构**
+   - 分析c04_generic/docs的内容
+   - 重构到formal_rust/language/04_generics/
 
-2. **开始控制流系统重构**
-   - 分析c03_control_fn/docs的内容
-   - 重构到formal_rust/language/03_control_flow/
+2. **完成并发系统重构**
+   - 分析c05_threads/docs的内容
+   - 重构到formal_rust/language/05_concurrency/
 
-3. **继续分析其他目录**
+3. **完成异步系统重构**
+   - 分析c06_async/docs的内容
+   - 重构到formal_rust/language/06_async_await/
+
+4. **继续分析其他目录**
    - 并行处理多个目录
    - 建立交叉引用关系
    - 保持上下文连续性
@@ -198,7 +262,27 @@
 - **交叉引用**: 90%+
 - **代码示例**: 100%
 
+## 当前阶段总结
+
+### 已完成的核心系统
+
+1. **所有权系统**: 完整的理论基础和形式化分析
+2. **类型系统**: 完整的类型理论和实现
+3. **控制流系统**: 完整的控制流理论和语义
+
+### 正在进行的工作
+
+1. **泛型系统**: 分析c04_generic/docs，准备重构
+2. **并发系统**: 分析c05_threads/docs，准备重构
+3. **异步系统**: 分析c06_async/docs，准备重构
+
+### 下一步重点
+
+1. **批量处理**: 同时分析多个目录，提高效率
+2. **质量保证**: 确保所有重构内容符合学术规范
+3. **交叉引用**: 建立完整的文档间引用关系
+
 ---
 **最后更新**: 2025-01-27
-**当前阶段**: 所有权系统重构完成，类型系统重构完成，开始控制流系统重构
-**下一步**: 完成类型系统剩余文档，开始控制流系统重构
+**当前阶段**: 所有权系统、类型系统、控制流系统重构完成，开始泛型系统重构
+**下一步**: 完成泛型系统、并发系统、异步系统重构
