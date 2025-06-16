@@ -3,11 +3,13 @@
 ## 1. 概述
 
 ### 1.1 定义
+
 Map-Reduce 模式是一种并行计算模型，将大规模数据处理分解为 Map 和 Reduce 两个阶段。
 
 ### 1.2 形式化定义
 
 **定义 1.1 (Map-Reduce)** 一个 Map-Reduce 系统是一个五元组 $MR = (D, M, R, \phi, \psi)$，其中：
+
 - $D$ 是输入数据集合
 - $M$ 是 Map 函数集合 $M: D \rightarrow K \times V$
 - $R$ 是 Reduce 函数集合 $R: K \times [V] \rightarrow V'$
@@ -35,7 +37,7 @@ $$\forall k_1, k_2 \in K: k_1 = k_2 \implies \phi(k_1) = \phi(k_2)$$
 
 ### 2.2 并行语义
 
-**定义 2.4 (并行执行)** 
+**定义 2.4 (并行执行)**
 Map-Reduce 并行执行满足：
 $$\text{parallel}(MR) = \{\text{map}_1, \text{map}_2, \ldots, \text{map}_n\} \parallel \{\text{reduce}_1, \text{reduce}_2, \ldots, \text{reduce}_m\}$$
 
@@ -173,6 +175,7 @@ where
 $$\forall d \in D, \forall (k, v) \in \text{map}(d): \text{type}(k) \in \mathcal{K} \land \text{type}(v) \in \mathcal{V}$$
 
 **证明：**
+
 1. Map 函数类型：$\forall m \in M: \text{type}(m) = D \rightarrow K \times V$
 2. Reduce 函数类型：$\forall r \in R: \text{type}(r) = K \times [V] \rightarrow V'$
 3. 类型一致性：$\forall (k, v) \in \text{intermediate}: \text{type}(k) = K \land \text{type}(v) = V$
@@ -184,6 +187,7 @@ $$\forall d \in D, \forall (k, v) \in \text{map}(d): \text{type}(k) \in \mathcal
 **定理 4.1 (无数据竞争)** Map-Reduce 系统天然无数据竞争
 
 **证明：**
+
 1. 数据分区：$\forall d_1, d_2 \in D: \text{partition}(d_1) \cap \text{partition}(d_2) = \emptyset$
 2. 独立处理：$\forall p_1, p_2 \in P: \text{process}(p_1) \parallel \text{process}(p_2)$
 3. 结果合并：$\forall r_1, r_2 \in R: \text{merge}(r_1, r_2) \text{ is atomic}$
@@ -191,6 +195,7 @@ $$\forall d \in D, \forall (k, v) \in \text{map}(d): \text{type}(k) \in \mathcal
 ### 4.2 容错性
 
 **定理 4.2 (容错性)** Map-Reduce 系统具有容错性：
+
 1. 任务重试机制
 2. 数据备份策略
 3. 故障检测与恢复
@@ -200,6 +205,7 @@ $$\forall d \in D, \forall (k, v) \in \text{map}(d): \text{type}(k) \in \mathcal
 ### 5.1 时间复杂度
 
 **定理 5.1 (并行复杂度)**
+
 - Map 阶段：$O(|D|/n)$
 - Shuffle 阶段：$O(|D| \log |D|)$
 - Reduce 阶段：$O(|K|/m)$
@@ -430,9 +436,10 @@ where
 ## 9. 总结
 
 Map-Reduce 模式提供了：
+
 - 大规模数据并行处理
 - 自动容错机制
 - 良好的扩展性
 - 简单的编程模型
 
-在 Rust 中，Map-Reduce 模式通过类型系统和所有权系统提供了额外的安全保障。 
+在 Rust 中，Map-Reduce 模式通过类型系统和所有权系统提供了额外的安全保障。

@@ -3,16 +3,19 @@
 ## 1. 概述
 
 ### 1.1 定义
+
 内存管理是系统编程的核心组件，负责内存的分配、释放和生命周期管理。
 
 ### 1.2 形式化定义
 
 **定义 1.1 (内存空间)** 内存空间是一个三元组 $M = (A, S, P)$，其中：
+
 - $A$ 是地址空间 $A = \{0, 1, 2, \ldots, 2^n - 1\}$
 - $S$ 是大小函数 $S: A \rightarrow \mathbb{N}$
 - $P$ 是权限函数 $P: A \rightarrow \{R, W, X, RW, RX, WX, RWX\}$
 
 **定义 1.2 (内存块)** 内存块是一个四元组 $B = (a, s, p, t)$，其中：
+
 - $a \in A$ 是起始地址
 - $s \in \mathbb{N}$ 是块大小
 - $p \in P$ 是权限
@@ -36,7 +39,7 @@ $$\forall a_1, a_2 \in \text{same\_block}: P(a_1) = P(a_2)$$
 
 ### 2.2 分配语义
 
-**定义 2.4 (分配正确性)** 
+**定义 2.4 (分配正确性)**
 内存分配正确当且仅当：
 $$\forall s \in \mathbb{N}: \text{allocator}(s) = a \implies S(a) \geq s$$
 
@@ -169,6 +172,7 @@ impl Drop for MemoryAllocator {
 $$\forall a \in A: \text{type}(a) = \text{expected\_type}(a)$$
 
 **证明：**
+
 1. 地址类型检查：$\forall a \in A: \text{type}(a) \in \mathcal{T}$
 2. 大小类型匹配：$\forall a \in A: \text{size}(a) = \text{type\_size}(\text{type}(a))$
 3. 权限类型一致：$\forall a \in A: \text{permission}(a) \subseteq \text{type\_permission}(\text{type}(a))$
@@ -181,6 +185,7 @@ $$\forall a \in A: \text{type}(a) = \text{expected\_type}(a)$$
 $$\forall a \in A: \text{allocated}(a) \implies \text{will\_be\_freed}(a)$$
 
 **证明：**
+
 1. 引用计数：$\forall a \in A: \text{ref\_count}(a) \geq 0$
 2. 生命周期管理：$\forall a \in A: \text{lifetime}(a) \text{ is finite}$
 3. 自动释放：$\forall a \in A: \text{ref\_count}(a) = 0 \implies \text{free}(a)$
@@ -195,6 +200,7 @@ $$\forall a_1, a_2 \in A: a_1 \neq a_2 \implies \text{block}(a_1) \cap \text{blo
 ### 5.1 时间复杂度
 
 **定理 5.1 (分配复杂度)**
+
 - 最佳适配：$O(n)$
 - 首次适配：$O(n)$
 - 快速适配：$O(\log n)$
@@ -532,9 +538,10 @@ impl MemoryCompactor {
 ## 9. 总结
 
 内存管理提供了：
+
 - 高效的内存分配和释放
 - 内存安全保证
 - 自动资源管理
 - 性能优化机制
 
-在 Rust 中，内存管理通过所有权系统和借用检查器提供了额外的安全保障。 
+在 Rust 中，内存管理通过所有权系统和借用检查器提供了额外的安全保障。

@@ -3,11 +3,13 @@
 ## 1. 概述
 
 ### 1.1 定义
+
 Fork-Join 模式是一种并行编程模型，通过分治策略将任务分解为子任务并行执行，然后合并结果。
 
 ### 1.2 形式化定义
 
 **定义 1.1 (Fork-Join 系统)** Fork-Join 系统是一个六元组 $FJ = (T, D, F, J, P, R)$，其中：
+
 - $T$ 是任务集合 $T = \{t_1, t_2, \ldots, t_n\}$
 - $D$ 是数据集合 $D = \{d_1, d_2, \ldots, d_m\}$
 - $F$ 是 Fork 函数 $F: T \rightarrow \{T_1, T_2, \ldots, T_k\}$
@@ -36,7 +38,7 @@ $$\forall t_1, t_2 \in T: t_1 \parallel t_2 \implies \text{execute}(t_1) \parall
 
 ### 2.2 分治语义
 
-**定义 2.4 (分治策略)** 
+**定义 2.4 (分治策略)**
 分治策略满足：
 $$\text{divide}(T) = \{T_1, T_2, \ldots, T_k\} \land \text{conquer}(\{R_1, R_2, \ldots, R_k\}) = R$$
 
@@ -247,6 +249,7 @@ where
 $$\forall t \in T, \forall r \in R: \text{type}(t) \in \mathcal{T} \land \text{type}(r) \in \mathcal{R}$$
 
 **证明：**
+
 1. 任务类型检查：$\forall t \in T: \text{type}(t) \in \mathcal{T}$
 2. 结果类型检查：$\forall r \in R: \text{type}(r) \in \mathcal{R}$
 3. 函数类型一致：$\forall f \in F: \text{type}(f) = T \rightarrow \{T_1, T_2, \ldots, T_k\}$
@@ -258,6 +261,7 @@ $$\forall t \in T, \forall r \in R: \text{type}(t) \in \mathcal{T} \land \text{t
 **定理 4.1 (无数据竞争)** Fork-Join 系统天然无数据竞争
 
 **证明：**
+
 1. 任务独立性：$\forall t_1, t_2 \in T: t_1 \neq t_2 \implies \text{data}(t_1) \cap \text{data}(t_2) = \emptyset$
 2. 并行执行：$\forall t_1, t_2 \in T: t_1 \parallel t_2 \implies \text{execute}(t_1) \parallel \text{execute}(t_2)$
 3. 结果合并：$\forall r_1, r_2 \in R: \text{merge}(r_1, r_2) \text{ is atomic}$
@@ -265,6 +269,7 @@ $$\forall t \in T, \forall r \in R: \text{type}(t) \in \mathcal{T} \land \text{t
 ### 4.2 死锁预防
 
 **定理 4.2 (死锁自由)** Fork-Join 系统无死锁当且仅当：
+
 1. 无循环依赖
 2. 有限递归深度
 3. 任务可终止
@@ -274,6 +279,7 @@ $$\forall t \in T, \forall r \in R: \text{type}(t) \in \mathcal{T} \land \text{t
 ### 5.1 时间复杂度
 
 **定理 5.1 (并行复杂度)**
+
 - Fork 操作：$O(\log n)$
 - 并行执行：$O(n/p)$
 - Join 操作：$O(\log n)$
@@ -694,9 +700,10 @@ where
 ## 9. 总结
 
 Fork-Join 模式提供了：
+
 - 高效的分治并行处理
 - 自动负载均衡
 - 递归任务分解
 - 良好的缓存局部性
 
-在 Rust 中，Fork-Join 模式通过类型系统和所有权系统提供了额外的安全保障。 
+在 Rust 中，Fork-Join 模式通过类型系统和所有权系统提供了额外的安全保障。

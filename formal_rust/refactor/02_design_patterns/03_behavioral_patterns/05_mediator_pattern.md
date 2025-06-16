@@ -8,6 +8,7 @@
 
 **定义 1.1.1** (中介者系统)
 设 $C$ 为同事对象集合，$M$ 为中介者集合，中介者系统是一个三元组 $(C, M, \phi)$，其中：
+
 - $\phi: C \times C \times M \rightarrow M$ 是交互函数
 
 **定义 1.1.2** (交互过程)
@@ -43,7 +44,7 @@ trait Mediator {
     type Colleague;
     type Event;
     type Result;
-    
+
     fn notify(&mut self, colleague: &Self::Colleague, event: Self::Event) -> Self::Result;
 }
 
@@ -51,7 +52,7 @@ trait Mediator {
 trait Colleague {
     type Mediator: Mediator;
     type Event;
-    
+
     fn set_mediator(&mut self, mediator: Box<Self::Mediator>);
     fn send(&self, event: Self::Event);
     fn receive(&mut self, event: Self::Event);
@@ -66,7 +67,7 @@ impl Mediator for ConcreteMediator {
     type Colleague = Box<dyn Colleague<Mediator = Self, Event = String>>;
     type Event = String;
     type Result = ();
-    
+
     fn notify(&mut self, colleague: &Self::Colleague, event: Self::Event) -> Self::Result {
         for other in &mut self.colleagues {
             if std::ptr::eq(other.as_ref(), colleague.as_ref()) {
@@ -101,17 +102,17 @@ struct ConcreteColleagueA {
 impl Colleague for ConcreteColleagueA {
     type Mediator = dyn Mediator<Colleague = Self, Event = String, Result = ()>;
     type Event = String;
-    
+
     fn set_mediator(&mut self, mediator: Box<Self::Mediator>) {
         self.mediator = Some(mediator);
     }
-    
+
     fn send(&self, event: Self::Event) {
         if let Some(ref mediator) = self.mediator {
             mediator.notify(self, event);
         }
     }
-    
+
     fn receive(&mut self, event: Self::Event) {
         println!("Colleague {} received: {}", self.name, event);
     }
@@ -132,7 +133,7 @@ impl Mediator for ChatRoom {
     type Colleague = Box<dyn Colleague<Mediator = Self, Event = ChatMessage>>;
     type Event = ChatMessage;
     type Result = ();
-    
+
     fn notify(&mut self, sender: &Self::Colleague, message: Self::Event) -> Self::Result {
         for participant in &mut self.participants {
             if !std::ptr::eq(participant.as_ref(), sender.as_ref()) {
@@ -151,7 +152,7 @@ trait Event {
     type Source;
     type Target;
     type Data;
-    
+
     fn source(&self) -> &Self::Source;
     fn target(&self) -> Option<&Self::Target>;
     fn data(&self) -> &Self::Data;
@@ -168,12 +169,12 @@ impl<E: Event> EventMediator<E> {
             handlers: HashMap::new(),
         }
     }
-    
+
     fn register_handler<T: 'static>(&mut self, handler: Box<dyn Fn(&E)>) {
         let type_id = TypeId::of::<T>();
         self.handlers.entry(type_id).or_insert_with(Vec::new).push(handler);
     }
-    
+
     fn publish(&self, event: &E) {
         let type_id = TypeId::of::<E>();
         if let Some(handlers) = self.handlers.get(&type_id) {
@@ -262,11 +263,11 @@ impl LayeredMediator {
     fn new() -> Self {
         Self { layers: vec![] }
     }
-    
+
     fn add_layer(&mut self, layer: Box<dyn Mediator>) {
         self.layers.push(layer);
     }
-    
+
     fn process_event(&mut self, event: Event) {
         for layer in &mut self.layers {
             layer.notify(&event.source, event.clone());
@@ -293,4 +294,4 @@ $$\text{Mediator} \cong \text{EventStream}$$
 3. **可扩展性**：易于添加新的同事对象
 4. **可维护性**：交互逻辑易于理解和修改
 
-通过形式化方法，我们确保了中介者模式的正确性和可靠性，为实际应用提供了坚实的理论基础。 
+通过形式化方法，我们确保了中介者模式的正确性和可靠性，为实际应用提供了坚实的理论基础。

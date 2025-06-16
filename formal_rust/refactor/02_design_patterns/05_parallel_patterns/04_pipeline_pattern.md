@@ -3,11 +3,13 @@
 ## 1. 概述
 
 ### 1.1 定义
+
 流水线模式是一种并行处理模型，将计算任务分解为多个阶段，每个阶段处理数据流的不同部分。
 
 ### 1.2 形式化定义
 
 **定义 1.1 (流水线系统)** 流水线系统是一个六元组 $PL = (S, D, F, B, C, R)$，其中：
+
 - $S$ 是阶段集合 $S = \{s_1, s_2, \ldots, s_n\}$
 - $D$ 是数据流 $D = \{d_1, d_2, \ldots, d_m\}$
 - $F$ 是阶段函数集合 $F: S \times D \rightarrow D$
@@ -16,6 +18,7 @@
 - $R$ 是结果集合 $R = \{r_1, r_2, \ldots, r_p\}$
 
 **定义 1.2 (流水线阶段)** 流水线阶段是一个三元组 $(s, f, b)$，其中：
+
 - $s \in S$ 是阶段标识
 - $f: D \rightarrow D$ 是处理函数
 - $b \in B$ 是缓冲区
@@ -38,7 +41,7 @@ $$\forall s_1, s_2 \in S: s_1 \neq s_2 \implies \text{process}(s_1) \parallel \t
 
 ### 2.2 流水线语义
 
-**定义 2.4 (阶段依赖)** 
+**定义 2.4 (阶段依赖)**
 阶段依赖满足：
 $$\forall s_1, s_2 \in S: s_1 \rightarrow s_2 \implies \text{depends}(s_2, s_1)$$
 
@@ -291,6 +294,7 @@ where
 $$\forall s \in S, \forall d \in D: \text{type}(\text{output}(s)) = \text{type}(\text{input}(\text{next}(s)))$$
 
 **证明：**
+
 1. 阶段类型检查：$\forall s \in S: \text{type}(s) \in \mathcal{S}$
 2. 数据流类型一致：$\forall d \in D: \text{type}(d) \in \mathcal{D}$
 3. 函数类型匹配：$\forall f \in F: \text{type}(f) = D \rightarrow D$
@@ -302,6 +306,7 @@ $$\forall s \in S, \forall d \in D: \text{type}(\text{output}(s)) = \text{type}(
 **定理 4.1 (无数据竞争)** 流水线系统天然无数据竞争
 
 **证明：**
+
 1. 阶段独立性：$\forall s_1, s_2 \in S: s_1 \neq s_2 \implies \text{data}(s_1) \cap \text{data}(s_2) = \emptyset$
 2. 缓冲区互斥：$\forall b \in B: \text{access}(b) \text{ is mutually exclusive}$
 3. 通道原子性：$\forall c \in C: \text{transfer}(c) \text{ is atomic}$
@@ -309,6 +314,7 @@ $$\forall s \in S, \forall d \in D: \text{type}(\text{output}(s)) = \text{type}(
 ### 4.2 死锁预防
 
 **定理 4.2 (死锁自由)** 流水线系统无死锁当且仅当：
+
 1. 无循环依赖
 2. 缓冲区有界
 3. 超时机制
@@ -318,6 +324,7 @@ $$\forall s \in S, \forall d \in D: \text{type}(\text{output}(s)) = \text{type}(
 ### 5.1 时间复杂度
 
 **定理 5.1 (流水线复杂度)**
+
 - 阶段处理：$O(n)$
 - 并行执行：$O(n/p)$
 - 缓冲区管理：$O(1)$
@@ -844,9 +851,10 @@ where
 ## 9. 总结
 
 流水线模式提供了：
+
 - 高效的数据流处理
 - 阶段化并行执行
 - 可扩展的架构设计
 - 良好的资源利用
 
-在 Rust 中，流水线模式通过类型系统和所有权系统提供了额外的安全保障。 
+在 Rust 中，流水线模式通过类型系统和所有权系统提供了额外的安全保障。

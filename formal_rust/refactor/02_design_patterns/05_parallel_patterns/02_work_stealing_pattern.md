@@ -3,11 +3,13 @@
 ## 1. 概述
 
 ### 1.1 定义
+
 工作窃取模式是一种并行调度算法，允许空闲线程从其他线程的工作队列中"窃取"任务。
 
 ### 1.2 形式化定义
 
 **定义 1.1 (工作窃取系统)** 工作窃取系统是一个五元组 $WS = (T, Q, S, L, R)$，其中：
+
 - $T$ 是线程集合 $T = \{t_1, t_2, \ldots, t_n\}$
 - $Q$ 是工作队列集合 $Q: T \rightarrow \text{Queue}$
 - $S$ 是窃取策略 $S: T \times T \rightarrow \text{Task}$
@@ -35,7 +37,7 @@ $$\forall t_1, t_2 \in T: |L(t_1) - L(t_2)| \leq \epsilon$$
 
 ### 2.2 并行语义
 
-**定义 2.4 (并行执行)** 
+**定义 2.4 (并行执行)**
 工作窃取并行执行满足：
 $$\text{parallel}(WS) = \{\text{execute}(t_1), \text{execute}(t_2), \ldots, \text{execute}(t_n)\}$$
 
@@ -176,6 +178,7 @@ where
 $$\forall t \in T, \forall task \in \text{queue}(t): \text{type}(task) \in \mathcal{T}$$
 
 **证明：**
+
 1. 任务类型检查：$\forall task \in \text{Task}: \text{type}(task) \in \mathcal{T}$
 2. 队列类型一致：$\forall q \in Q: \text{type}(q) = \text{Queue}(\mathcal{T})$
 3. 窃取类型保持：$\forall t_1, t_2 \in T: \text{type}(\text{steal}(t_1, t_2)) = \mathcal{T}$
@@ -187,6 +190,7 @@ $$\forall t \in T, \forall task \in \text{queue}(t): \text{type}(task) \in \math
 **定理 4.1 (无数据竞争)** 工作窃取系统天然无数据竞争
 
 **证明：**
+
 1. 队列互斥访问：$\forall q \in Q: \text{access}(q) \text{ is mutually exclusive}$
 2. 任务独立执行：$\forall task_1, task_2 \in \text{Task}: \text{execute}(task_1) \parallel \text{execute}(task_2)$
 3. 窃取原子性：$\forall t_1, t_2 \in T: \text{steal}(t_1, t_2) \text{ is atomic}$
@@ -194,6 +198,7 @@ $$\forall t \in T, \forall task \in \text{queue}(t): \text{type}(task) \in \math
 ### 4.2 死锁预防
 
 **定理 4.2 (死锁自由)** 工作窃取系统无死锁当且仅当：
+
 1. 无循环等待
 2. 超时机制
 3. 任务优先级
@@ -203,6 +208,7 @@ $$\forall t \in T, \forall task \in \text{queue}(t): \text{type}(task) \in \math
 ### 5.1 时间复杂度
 
 **定理 5.1 (调度复杂度)**
+
 - 本地队列操作：$O(1)$
 - 全局队列操作：$O(1)$
 - 窃取操作：$O(\log n)$
@@ -463,9 +469,10 @@ where
 ## 9. 总结
 
 工作窃取模式提供了：
+
 - 高效的负载均衡
 - 自适应调度策略
 - 低调度开销
 - 良好的扩展性
 
-在 Rust 中，工作窃取模式通过类型系统和所有权系统提供了额外的安全保障。 
+在 Rust 中，工作窃取模式通过类型系统和所有权系统提供了额外的安全保障。

@@ -3,17 +3,20 @@
 ## 1. 概述
 
 ### 1.1 定义
+
 Channel 模式是一种基于消息传递的并发通信机制，提供线程安全的异步通信能力。
 
 ### 1.2 形式化定义
 
 **定义 1.1 (Channel)** 一个 Channel 是一个四元组 $C = (S, R, B, \tau)$，其中：
+
 - $S$ 是发送端集合
 - $R$ 是接收端集合  
 - $B$ 是缓冲区
 - $\tau$ 是传输函数 $\tau: S \times M \rightarrow R \times M$
 
 **定义 1.2 (消息传递)** 消息传递是一个三元组 $(s, m, r)$，其中：
+
 - $s \in S$ 是发送者
 - $m \in M$ 是消息
 - $r \in R$ 是接收者
@@ -33,7 +36,7 @@ $$\forall b \in B: |b| \leq \text{capacity}(B)$$
 
 ### 2.2 同步语义
 
-**定义 2.4 (同步 Channel)** 
+**定义 2.4 (同步 Channel)**
 同步 Channel 满足：
 $$\text{send}(s, m) \text{ blocks until } \text{recv}(r) \text{ is called}$$
 
@@ -107,6 +110,7 @@ impl<T> Receiver<T> {
 $$\forall (s, m, r) \in \text{transmissions}: \text{type}(m) = \text{expected\_type}(r)$$
 
 **证明：**
+
 1. 发送类型检查：$\forall s \in S: \text{type}(s) \subseteq \mathcal{T}$
 2. 接收类型检查：$\forall r \in R: \text{type}(r) \subseteq \mathcal{T}$
 3. 类型匹配：$\forall (s, m, r): \text{type}(m) = \text{type}(r)$
@@ -118,6 +122,7 @@ $$\forall (s, m, r) \in \text{transmissions}: \text{type}(m) = \text{expected\_t
 **定理 4.1 (无数据竞争)** Channel 系统天然无数据竞争
 
 **证明：**
+
 1. 互斥访问：$\forall b \in B: \text{access}(b) \text{ is mutually exclusive}$
 2. 消息传递：$\forall m \in M: \text{ownership}(m) \text{ is transferred}$
 3. 类型安全：$\forall t \in \mathcal{T}: \text{type\_check}(t) \text{ is enforced}$
@@ -125,6 +130,7 @@ $$\forall (s, m, r) \in \text{transmissions}: \text{type}(m) = \text{expected\_t
 ### 4.2 死锁预防
 
 **定理 4.2 (死锁自由)** 如果 Channel 系统满足以下条件，则无死锁：
+
 1. 无循环等待
 2. 超时机制
 3. 资源有序分配
@@ -134,6 +140,7 @@ $$\forall (s, m, r) \in \text{transmissions}: \text{type}(m) = \text{expected\_t
 ### 5.1 时间复杂度
 
 **定理 5.1 (操作复杂度)**
+
 - 发送操作：$O(1)$
 - 接收操作：$O(1)$
 - 缓冲区管理：$O(1)$
@@ -322,9 +329,10 @@ async fn broadcast_example() {
 ## 9. 总结
 
 Channel 模式提供了：
+
 - 类型安全的并发通信
 - 灵活的消息传递机制
 - 良好的性能特性
 - 简单的错误处理
 
-在 Rust 中，Channel 模式通过类型系统和所有权系统提供了额外的安全保障。 
+在 Rust 中，Channel 模式通过类型系统和所有权系统提供了额外的安全保障。

@@ -3,11 +3,13 @@
 ## 1. 概述
 
 ### 1.1 定义
+
 Future 模式是一种异步编程模型，表示一个可能尚未完成的计算结果。
 
 ### 1.2 形式化定义
 
 **定义 1.1 (Future)** 一个 Future 是一个三元组 $F = (S, P, R)$，其中：
+
 - $S$ 是状态空间 $\{Pending, Ready, Error\}$
 - $P$ 是计算过程 $P: \emptyset \rightarrow T$
 - $R$ 是结果类型 $T$
@@ -33,7 +35,7 @@ $$\forall F \in \mathcal{F}, \forall f: T \rightarrow U: F \text{ map } f \in \m
 
 ### 2.2 异步语义
 
-**定义 2.4 (异步执行)** 
+**定义 2.4 (异步执行)**
 Future 异步执行满足：
 $$\text{execute}(F) \text{ returns immediately with } F$$
 
@@ -103,6 +105,7 @@ impl<T, E> Future for SimpleFuture<T, E> {
 $$\forall F \in \mathcal{F}: \text{type}(F) = \text{Future}(\text{type}(\text{result}(F)))$$
 
 **证明：**
+
 1. Future 类型构造：$\forall T: \text{Future}(T) \in \mathcal{T}$
 2. 结果类型匹配：$\forall F: \text{type}(\text{result}(F)) = T$
 3. 类型一致性：$\forall F: \text{type}(F) = \text{Future}(T)$
@@ -114,6 +117,7 @@ $$\forall F \in \mathcal{F}: \text{type}(F) = \text{Future}(\text{type}(\text{re
 **定理 4.1 (状态一致性)** Future 状态转换是原子的
 
 **证明：**
+
 1. 状态互斥：$\forall F: \text{state}(F) \text{ is atomic}$
 2. 转换原子性：$\forall F: \text{transition}(F) \text{ is atomic}$
 3. 结果一致性：$\forall F: \text{result}(F) \text{ is consistent}$
@@ -123,6 +127,7 @@ $$\forall F \in \mathcal{F}: \text{type}(F) = \text{Future}(\text{type}(\text{re
 **定理 4.2 (内存安全)** Future 系统满足内存安全
 
 **证明：**
+
 1. 所有权转移：$\forall F: \text{ownership}(F) \text{ is transferred}$
 2. 生命周期管理：$\forall F: \text{lifetime}(F) \text{ is managed}$
 3. 借用检查：$\forall F: \text{borrow\_check}(F) \text{ is enforced}$
@@ -132,6 +137,7 @@ $$\forall F \in \mathcal{F}: \text{type}(F) = \text{Future}(\text{type}(\text{re
 ### 5.1 时间复杂度
 
 **定理 5.1 (操作复杂度)**
+
 - Future 创建：$O(1)$
 - Future 轮询：$O(1)$
 - Future 完成：$O(1)$
@@ -391,9 +397,10 @@ where
 ## 9. 总结
 
 Future 模式提供了：
+
 - 非阻塞的异步计算
 - 类型安全的异步编程
 - 灵活的组合能力
 - 高效的资源利用
 
-在 Rust 中，Future 模式通过类型系统和所有权系统提供了额外的安全保障。 
+在 Rust 中，Future 模式通过类型系统和所有权系统提供了额外的安全保障。
