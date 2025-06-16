@@ -8,6 +8,7 @@
 
 **定义 1.1.1** (静态分析系统)
 静态分析系统是一个六元组 $\mathcal{S} = (P, A, D, F, V, R)$，其中：
+
 - $P$ 是程序集合
 - $A$ 是抽象域
 - $D$ 是数据流分析
@@ -31,6 +32,7 @@ $$\text{StaticAnalysis}(p, \phi) = \text{False} \Rightarrow \text{Unsafe}(p, \ph
 
 **定义 2.1.1** (抽象域)
 抽象域是一个格 $(A, \sqsubseteq, \sqcup, \sqcap, \bot, \top)$，其中：
+
 - $A$ 是抽象值集合
 - $\sqsubseteq$ 是偏序关系
 - $\sqcup$ 是上确界操作
@@ -43,6 +45,7 @@ $$\text{StaticAnalysis}(p, \phi) = \text{False} \Rightarrow \text{Unsafe}(p, \ph
 $$\text{Monotone}(f) \Rightarrow \text{Convergent}(f)$$
 
 **证明**：
+
 1. 假设 $\text{Monotone}(f)$ 成立
 2. 根据单调性，$f(\bot) \sqsubseteq f(f(\bot)) \sqsubseteq \ldots$
 3. 由于域是有限的，序列会收敛
@@ -53,6 +56,7 @@ $$\text{Monotone}(f) \Rightarrow \text{Convergent}(f)$$
 
 **定义 2.2.1** (伽罗瓦连接)
 伽罗瓦连接是一对函数 $(\alpha, \gamma)$，其中：
+
 - $\alpha: \text{Concrete} \rightarrow \text{Abstract}$ 是抽象函数
 - $\gamma: \text{Abstract} \rightarrow \text{Concrete}$ 是具体化函数
 
@@ -88,6 +92,7 @@ $$\text{ReachingDefinitions}(n) = D \Rightarrow \text{AllReachable}(n, D)$$
 
 **定义 4.1.1** (控制流图)
 控制流图是一个有向图 $G = (N, E, s, e)$，其中：
+
 - $N$ 是节点集合
 - $E \subseteq N \times N$ 是边集合
 - $s \in N$ 是起始节点
@@ -274,6 +279,7 @@ $$\text{CompleteTraversal}(t) \Rightarrow \text{VisitAll}(t)$$
 
 **定义 13.1.1** (静态分析工具)
 静态分析工具是一个五元组 $\mathcal{T} = (P, A, E, R, O)$，其中：
+
 - $P$ 是解析器
 - $A$ 是分析器
 - $E$ 是执行引擎
@@ -341,4 +347,4 @@ $$\text{OptimizeEfficiency}(a) \Rightarrow \text{Faster}(a)$$
 
 ---
 
-*本文档建立了完整的静态分析形式化理论框架，为Rust程序分析提供了理论基础和实践指导。* 
+*本文档建立了完整的静态分析形式化理论框架，为Rust程序分析提供了理论基础和实践指导。*

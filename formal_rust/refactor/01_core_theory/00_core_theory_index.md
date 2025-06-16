@@ -61,6 +61,7 @@ graph TD
 **文件**: [01_rust_philosophy.md](01_language_foundations/01_rust_philosophy.md)
 
 **核心内容**:
+
 - 形式化哲学基础
 - 停机问题与计算理论
 - 类型系统哲学
@@ -75,6 +76,7 @@ $$\text{Safety} \land \text{Performance} \Rightarrow \text{ZeroCostAbstraction}$
 **文件**: [01_type_theory_foundations.md](02_type_system/01_type_theory_foundations.md)
 
 **核心内容**:
+
 - 类型系统公理
 - 类型构造器理论
 - 类型推导算法
@@ -89,6 +91,7 @@ $$\forall e \in \text{Expression}: \text{TypeSafe}(e) \Rightarrow \text{MemorySa
 **文件**: [01_memory_model_theory.md](03_memory_model/01_memory_model_theory.md)
 
 **核心内容**:
+
 - 内存模型公理
 - 内存布局理论
 - 栈与堆管理
@@ -103,6 +106,7 @@ $$\text{MemorySpace} = \text{Stack} \cup \text{Heap} \cup \text{Static} \cup \te
 **文件**: [01_ownership_theory.md](04_ownership_system/01_ownership_theory.md)
 
 **核心内容**:
+
 - 所有权公理系统
 - 借用系统理论
 - 生命周期理论
@@ -117,6 +121,7 @@ $$\forall v \in \text{Value}: \exists! o \in \text{Owner}: \text{Owns}(o, v)$$
 **文件**: [01_concurrency_theory.md](05_concurrency_model/01_concurrency_theory.md)
 
 **核心内容**:
+
 - 并发模型公理
 - 线程理论
 - 同步原语理论
@@ -159,6 +164,7 @@ graph LR
 $$\text{Consistent}(\text{RustCoreTheory})$$
 
 **证明**:
+
 1. 各模块基于相同的哲学基础
 2. 类型系统与所有权系统协调一致
 3. 内存模型与并发模型兼容
@@ -171,6 +177,7 @@ $$\text{Consistent}(\text{RustCoreTheory})$$
 ### 4.1 统一符号系统
 
 **定义 4.1** (统一符号)
+
 - $\text{Type}$: 类型集合
 - $\text{Value}$: 值集合
 - $\text{Owner}$: 所有者集合
@@ -247,16 +254,19 @@ $$\forall s \in \text{System}: \text{Composable}(s) \Rightarrow \text{Modular}(s
 ### 7.1 理论扩展
 
 **扩展 7.1** (高级类型系统)
+
 - 依赖类型
 - 线性类型
 - 会话类型
 
 **扩展 7.2** (形式化验证)
+
 - 程序验证
 - 性质证明
 - 模型检查
 
 **扩展 7.3** (并发模型)
+
 - Actor 模型
 - 消息传递
 - 分布式计算
@@ -264,11 +274,13 @@ $$\forall s \in \text{System}: \text{Composable}(s) \Rightarrow \text{Modular}(s
 ### 7.2 应用扩展
 
 **扩展 7.4** (领域特定语言)
+
 - 嵌入式 DSL
 - 安全关键系统
 - 高性能计算
 
 **扩展 7.5** (工具支持)
+
 - 静态分析工具
 - 形式化验证工具
 - 性能分析工具
@@ -344,4 +356,4 @@ $$\forall s \in \text{System}: \text{Composable}(s) \Rightarrow \text{Modular}(s
 
 *最后更新：2024年12月19日*
 *版本：1.0.0*
-*状态：核心理论索引完成* 
+*状态：核心理论索引完成*

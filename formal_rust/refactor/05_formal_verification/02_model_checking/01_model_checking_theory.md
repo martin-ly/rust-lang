@@ -8,6 +8,7 @@
 
 **定义 1.1.1** (模型检查系统)
 模型检查系统是一个五元组 $\mathcal{M} = (S, T, P, V, R)$，其中：
+
 - $S$ 是状态集合
 - $T$ 是转移关系
 - $P$ 是属性集合
@@ -30,6 +31,7 @@ $$\neg\text{Verify}(s, \phi) \Rightarrow \exists c: \text{Counterexample}(c, s, 
 
 **定义 2.1.1** (状态空间)
 状态空间是一个有向图 $G = (S, T)$，其中：
+
 - $S$ 是状态集合
 - $T \subseteq S \times S$ 是转移关系
 
@@ -38,6 +40,7 @@ $$\neg\text{Verify}(s, \phi) \Rightarrow \exists c: \text{Counterexample}(c, s, 
 $$\text{Reachable}(s_1, s_2) \Leftrightarrow \exists \pi: \text{Path}(s_1, s_2, \pi)$$
 
 **证明**：
+
 1. 假设 $\text{Reachable}(s_1, s_2)$ 成立
 2. 根据转移关系 $T$，存在路径 $\pi = s_1 \rightarrow s_2 \rightarrow \ldots \rightarrow s_n$
 3. 因此 $\text{Path}(s_1, s_2, \pi)$ 成立
@@ -61,6 +64,7 @@ LTL公式的语法定义为：
 $$\phi ::= p \mid \neg\phi \mid \phi \land \phi \mid \text{X}\phi \mid \text{G}\phi \mid \phi \text{ U } \phi$$
 
 其中：
+
 - $p$ 是原子命题
 - $\text{X}\phi$ 表示"下一个时刻 $\phi$"
 - $\text{G}\phi$ 表示"总是 $\phi$"
@@ -78,6 +82,7 @@ CTL公式的语法定义为：
 $$\phi ::= p \mid \neg\phi \mid \phi \land \phi \mid \text{EX}\phi \mid \text{EG}\phi \mid \text{E}[\phi \text{ U } \phi]$$
 
 其中：
+
 - $\text{EX}\phi$ 表示"存在下一个状态满足 $\phi$"
 - $\text{EG}\phi$ 表示"存在路径总是满足 $\phi$"
 - $\text{E}[\phi \text{ U } \psi]$ 表示"存在路径 $\phi$ 直到 $\psi$"
@@ -93,6 +98,7 @@ $$s \models \text{EG}\phi \Leftrightarrow \exists \pi: \pi^0 = s \land \forall i
 
 **定义 4.1.1** (Büchi自动机)
 Büchi自动机是一个五元组 $\mathcal{B} = (Q, \Sigma, \delta, q_0, F)$，其中：
+
 - $Q$ 是状态集合
 - $\Sigma$ 是字母表
 - $\delta: Q \times \Sigma \rightarrow 2^Q$ 是转移函数
@@ -180,6 +186,7 @@ $$\text{Refine}(M', c) = M'' \Rightarrow \text{MorePrecise}(M'', M')$$
 
 **定义 8.1.1** (并发系统)
 并发系统是一个三元组 $\mathcal{C} = (P, S, T)$，其中：
+
 - $P$ 是进程集合
 - $S$ 是全局状态集合
 - $T$ 是并发转移关系
@@ -202,6 +209,7 @@ $$\text{HandleStateExplosion}(M) \Rightarrow \text{Reduction}(M) \lor \text{Abst
 
 **定义 9.1.1** (时间自动机)
 时间自动机是一个六元组 $\mathcal{T} = (L, C, \Sigma, E, l_0, I)$，其中：
+
 - $L$ 是位置集合
 - $C$ 是时钟集合
 - $\Sigma$ 是动作集合
@@ -227,6 +235,7 @@ $$\text{RegionGraph}(\mathcal{T}) = G \Rightarrow \text{Preserve}(G, \mathcal{T}
 
 **定义 10.1.1** (马尔可夫链)
 马尔可夫链是一个三元组 $\mathcal{M} = (S, P, s_0)$，其中：
+
 - $S$ 是状态集合
 - $P: S \times S \rightarrow [0,1]$ 是转移概率
 - $s_0$ 是初始状态
@@ -271,6 +280,7 @@ $$\text{Induction}(P(n)) \Rightarrow \forall n \geq 1: P(n)$$
 
 **定义 12.1.1** (模型检查工具)
 模型检查工具是一个四元组 $\mathcal{T} = (P, M, V, R)$，其中：
+
 - $P$ 是解析器
 - $M$ 是模型检查器
 - $V$ 是验证器
@@ -357,4 +367,4 @@ $$\text{ParallelModelCheck}(M, \phi) \Rightarrow \text{Faster}(M, \phi)$$
 
 ---
 
-*本文档建立了完整的模型检查形式化理论框架，为Rust程序验证提供了理论基础和实践指导。* 
+*本文档建立了完整的模型检查形式化理论框架，为Rust程序验证提供了理论基础和实践指导。*

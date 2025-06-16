@@ -8,6 +8,7 @@
 
 **定义 1.1.1** (证明系统)
 证明系统是一个五元组 $\mathcal{P} = (L, A, R, D, V)$，其中：
+
 - $L$ 是逻辑语言
 - $A$ 是公理集合
 - $R$ 是推理规则集合
@@ -37,6 +38,7 @@ $$\text{TypeInference}(e, \Gamma) = \text{Derive}(e, \Gamma)$$
 $$\text{TypeInference}(e, \Gamma) = \tau \Rightarrow \Gamma \vdash e : \tau$$
 
 **证明**：
+
 1. 假设 $\text{TypeInference}(e, \Gamma) = \tau$ 成立
 2. 根据类型推导算法，$\tau$ 是 $e$ 在 $\Gamma$ 下的最一般类型
 3. 因此 $\Gamma \vdash e : \tau$ 成立
@@ -147,6 +149,7 @@ $$\text{ProperLocking}(p) \Rightarrow \neg\text{Deadlock}(p)$$
 
 **定义 7.1.1** (Hoare三元组)
 Hoare三元组是一个三元组 $\{P\} C \{Q\}$，其中：
+
 - $P$ 是前置条件
 - $C$ 是程序代码
 - $Q$ 是后置条件
@@ -192,6 +195,7 @@ $$\text{VerifyModule}(M) \Rightarrow \text{ModuleCorrect}(M)$$
 
 **定义 9.1.1** (抽象域)
 抽象域是一个格 $(A, \sqsubseteq, \sqcup, \sqcap)$，其中：
+
 - $A$ 是抽象值集合
 - $\sqsubseteq$ 是偏序关系
 - $\sqcup$ 是上确界操作
@@ -215,6 +219,7 @@ $$\text{AbstractInterpretation}(p, d) = a \Rightarrow \text{Sound}(a, p)$$
 
 **定义 10.1.1** (状态空间)
 状态空间是一个图 $G = (S, T)$，其中：
+
 - $S$ 是状态集合
 - $T \subseteq S \times S$ 是转移关系
 
@@ -339,4 +344,4 @@ $$\text{ValidSpecification}(s) \Rightarrow \text{Consistent}(s)$$
 
 ---
 
-*本文档建立了完整的证明系统形式化理论框架，为Rust程序验证提供了理论基础和实践指导。* 
+*本文档建立了完整的证明系统形式化理论框架，为Rust程序验证提供了理论基础和实践指导。*
