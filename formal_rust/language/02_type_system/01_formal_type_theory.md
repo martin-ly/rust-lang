@@ -60,6 +60,7 @@ Rust类型系统的设计遵循以下原则：
 #### 2.1.1 基本概念
 
 在HoTT中：
+
 - **类型即空间**：类型 $T$ 可以看作是一个空间
 - **值即点**：值 $x : T$ 是空间 $T$ 中的一个点
 - **函数即路径**：函数 $f : A \to B$ 是从空间 $A$ 到空间 $B$ 的路径
@@ -96,6 +97,7 @@ $$\frac{a : A \quad f : A \to B}{f(a) : B}$$
 #### 2.2.1 基本概念
 
 在范畴论中：
+
 - **类型作为对象**：类型是范畴中的对象
 - **函数作为态射**：函数是对象之间的态射
 - **复合作为组合**：函数组合对应态射复合
@@ -186,6 +188,7 @@ let unit: () = ();
 #### 3.1.2 复合类型
 
 **结构体（乘积类型）**：
+
 ```rust
 struct Point {
     x: f64,
@@ -196,6 +199,7 @@ struct Point {
 ```
 
 **枚举（和类型）**：
+
 ```rust
 enum Option<T> {
     None,
@@ -736,10 +740,10 @@ Rust类型系统证明了：
 
 ---
 
-**参考文献**
+**参考文献**:
 
 1. Pierce, B. C. "Types and programming languages." MIT Press 2002.
 2. Voevodsky, V. "Univalent foundations and the equivalence principle." 2014.
 3. Mac Lane, S. "Categories for the working mathematician." Springer 1978.
 4. Jung, R., et al. "RustBelt: Securing the foundations of the Rust programming language." ACM TOPLAS 2019.
-5. Milner, R. "A theory of type polymorphism in programming." JCSS 1978. 
+5. Milner, R. "A theory of type polymorphism in programming." JCSS 1978.

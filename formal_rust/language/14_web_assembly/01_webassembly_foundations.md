@@ -2,32 +2,34 @@
 
 ## 目录
 
-1. [引言](#引言)
-2. [WebAssembly的形式化定义](#webassembly的形式化定义)
-   - [2.1 WASM的数学结构](#21-wasm的数学结构)
-   - [2.2 类型系统的形式化](#22-类型系统的形式化)
-   - [2.3 执行模型的形式化](#23-执行模型的形式化)
-3. [栈式虚拟机理论](#栈式虚拟机理论)
-   - [3.1 栈操作的形式化](#31-栈操作的形式化)
-   - [3.2 指令集的形式化](#32-指令集的形式化)
-   - [3.3 控制流的形式化](#33-控制流的形式化)
-4. [编译理论](#编译理论)
-   - [4.1 从Rust到WASM的编译](#41-从rust到wasm的编译)
-   - [4.2 优化技术的形式化](#42-优化技术的形式化)
-   - [4.3 代码生成的理论](#43-代码生成的理论)
-5. [内存模型](#内存模型)
-   - [5.1 线性内存的形式化](#51-线性内存的形式化)
-   - [5.2 内存安全的理论](#52-内存安全的理论)
-   - [5.3 垃圾回收的模型](#53-垃圾回收的模型)
-6. [性能分析](#性能分析)
-   - [6.1 性能模型的形式化](#61-性能模型的形式化)
-   - [6.2 优化策略的理论](#62-优化策略的理论)
-   - [6.3 基准测试的方法](#63-基准测试的方法)
-7. [Rust与WebAssembly的集成](#rust与webassembly的集成)
-   - [7.1 wasm-bindgen的理论](#71-wasm-bindgen的理论)
-   - [7.2 类型转换的形式化](#72-类型转换的形式化)
-   - [7.3 互操作性的保证](#73-互操作性的保证)
-8. [结论与展望](#结论与展望)
+- [1. WebAssembly基础理论：形式化语义与编译模型](#1-webassembly基础理论形式化语义与编译模型)
+  - [目录](#目录)
+  - [引言](#引言)
+  - [WebAssembly的形式化定义](#webassembly的形式化定义)
+    - [2.1 WASM的数学结构](#21-wasm的数学结构)
+    - [2.2 类型系统的形式化](#22-类型系统的形式化)
+    - [2.3 执行模型的形式化](#23-执行模型的形式化)
+  - [栈式虚拟机理论](#栈式虚拟机理论)
+    - [3.1 栈操作的形式化](#31-栈操作的形式化)
+    - [3.2 指令集的形式化](#32-指令集的形式化)
+    - [3.3 控制流的形式化](#33-控制流的形式化)
+  - [编译理论](#编译理论)
+    - [4.1 从Rust到WASM的编译](#41-从rust到wasm的编译)
+    - [4.2 优化技术的形式化](#42-优化技术的形式化)
+    - [4.3 代码生成的理论](#43-代码生成的理论)
+  - [内存模型](#内存模型)
+    - [5.1 线性内存的形式化](#51-线性内存的形式化)
+    - [5.2 内存安全的理论](#52-内存安全的理论)
+    - [5.3 垃圾回收的模型](#53-垃圾回收的模型)
+  - [性能分析](#性能分析)
+    - [6.1 性能模型的形式化](#61-性能模型的形式化)
+    - [6.2 优化策略的理论](#62-优化策略的理论)
+    - [6.3 基准测试的方法](#63-基准测试的方法)
+  - [Rust与WebAssembly的集成](#rust与webassembly的集成)
+    - [7.1 wasm-bindgen的理论](#71-wasm-bindgen的理论)
+    - [7.2 类型转换的形式化](#72-类型转换的形式化)
+    - [7.3 互操作性的保证](#73-互操作性的保证)
+  - [结论与展望](#结论与展望)
 
 ## 引言
 
@@ -39,12 +41,14 @@ WebAssembly（WASM）是一种低级的类汇编语言，具有紧凑的二进�
 
 **定义 2.1.1** (WebAssembly模块)
 WebAssembly模块是一个四元组 \((\text{types}, \text{functions}, \text{memory}, \text{exports})\)，其中：
+
 - \(\text{types}\) 是函数类型集合
 - \(\text{functions}\) 是函数定义集合
 - \(\text{memory}\) 是内存定义
 - \(\text{exports}\) 是导出项集合
 
 **公理 2.1.1** (WASM模块的基本性质)
+
 1. **类型安全**：所有函数调用都经过类型检查
 2. **内存安全**：内存访问都在边界内
 3. **确定性**：相同的输入总是产生相同的输出
@@ -53,6 +57,7 @@ WebAssembly模块是一个四元组 \((\text{types}, \text{functions}, \text{mem
 WebAssembly模块在隔离环境中执行，不会影响宿主环境的安全。
 
 **证明**：
+
 1. WASM使用沙箱执行环境
 2. 所有内存访问都经过边界检查
 3. 没有直接的系统调用接口
@@ -61,6 +66,7 @@ WebAssembly模块在隔离环境中执行，不会影响宿主环境的安全。
 
 **定义 2.2.1** (WASM类型)
 WebAssembly支持以下基本类型：
+
 - \(\text{i32}\)：32位整数
 - \(\text{i64}\)：64位整数
 - \(\text{f32}\)：32位浮点数
@@ -68,10 +74,12 @@ WebAssembly支持以下基本类型：
 
 **定义 2.2.2** (函数类型)
 函数类型是一个二元组 \((\text{params}, \text{results})\)，其中：
+
 - \(\text{params}\) 是参数类型列表
 - \(\text{results}\) 是返回值类型列表
 
 **示例 2.2.1** (WASM类型的Rust表示)
+
 ```rust
 #[derive(Debug, Clone)]
 pub enum WasmType {
@@ -106,11 +114,13 @@ WebAssembly使用栈式虚拟机作为执行模型：
 \[\text{State} = \text{Stack} \times \text{Locals} \times \text{Memory} \times \text{Program Counter}\]
 
 **公理 2.3.1** (执行模型的性质)
+
 1. **栈操作**：所有操作都在栈上进行
 2. **局部变量**：函数有独立的局部变量空间
 3. **线性内存**：单一连续的内存空间
 
 **算法 2.3.1** (WASM执行算法)
+
 ```
 function execute_wasm(module, function_index, arguments):
     let state = initialize_state(module, function_index, arguments)
@@ -129,17 +139,20 @@ function execute_wasm(module, function_index, arguments):
 
 **定义 3.1.1** (栈操作)
 栈操作是WebAssembly的基本操作，包括：
+
 - \(\text{push}(v)\)：将值 \(v\) 推入栈
 - \(\text{pop}()\)：从栈顶弹出值
 - \(\text{dup}()\)：复制栈顶元素
 - \(\text{drop}()\)：丢弃栈顶元素
 
 **公理 3.1.1** (栈操作的性质)
+
 1. **后进先出**：最后推入的元素最先弹出
 2. **类型保持**：栈操作保持类型一致性
 3. **边界检查**：不会在空栈上执行pop操作
 
 **示例 3.1.1** (栈操作的实现)
+
 ```rust
 #[derive(Debug, Clone)]
 pub struct WasmStack {
@@ -188,12 +201,14 @@ impl WasmStack {
 
 **定义 3.2.1** (WASM指令)
 WebAssembly指令集包括：
+
 - **数值指令**：算术和逻辑运算
 - **控制指令**：分支和函数调用
 - **内存指令**：内存读写操作
 - **变量指令**：局部变量操作
 
 **示例 3.2.1** (指令的实现)
+
 ```rust
 #[derive(Debug, Clone)]
 pub enum WasmInstruction {
@@ -247,11 +262,13 @@ impl WasmInstruction {
 控制流是程序执行的顺序和分支结构。
 
 **公理 3.3.1** (控制流的性质)
+
 1. **结构化**：控制流是结构化的，没有goto语句
 2. **类型安全**：分支和循环保持类型一致性
 3. **终止性**：所有循环都有终止条件
 
 **示例 3.3.1** (控制流的实现)
+
 ```rust
 pub struct ControlFlow {
     pub blocks: Vec<BasicBlock>,
@@ -287,12 +304,14 @@ impl ControlFlow {
 
 **定义 4.1.1** (编译过程)
 从Rust到WebAssembly的编译过程包括：
+
 1. **词法分析**：将源代码转换为token流
 2. **语法分析**：构建抽象语法树
 3. **语义分析**：类型检查和语义验证
 4. **代码生成**：生成WebAssembly字节码
 
 **算法 4.1.1** (Rust到WASM编译)
+
 ```
 function compile_rust_to_wasm(rust_code):
     let tokens = lex(rust_code)
@@ -303,6 +322,7 @@ function compile_rust_to_wasm(rust_code):
 ```
 
 **示例 4.1.1** (编译示例)
+
 ```rust
 // Rust源代码
 pub fn add(a: i32, b: i32) -> i32 {
@@ -324,12 +344,14 @@ pub fn add(a: i32, b: i32) -> i32 {
 编译优化是提高生成代码性能的技术。
 
 **优化策略 4.2.1** (常见优化)
+
 1. **常量折叠**：编译时计算常量表达式
 2. **死代码消除**：移除不可达的代码
 3. **循环优化**：优化循环结构
 4. **内联优化**：将函数调用替换为函数体
 
 **示例 4.2.1** (优化实现)
+
 ```rust
 pub struct WasmOptimizer {
     pub optimizations: Vec<Box<dyn Optimization>>,
@@ -392,6 +414,7 @@ impl Optimization for ConstantFolding {
 如果代码生成器是正确的，则生成的代码与源代码语义等价。
 
 **示例 4.3.1** (代码生成器)
+
 ```rust
 pub struct CodeGenerator {
     pub symbol_table: SymbolTable,
@@ -452,11 +475,13 @@ impl CodeGenerator {
 WebAssembly使用线性内存模型，内存是一个连续的字节数组。
 
 **公理 5.1.1** (线性内存的性质)
+
 1. **连续性**：内存是连续的字节数组
 2. **边界检查**：所有内存访问都经过边界检查
 3. **类型安全**：内存访问保持类型一致性
 
 **示例 5.1.1** (内存管理)
+
 ```rust
 pub struct LinearMemory {
     pub data: Vec<u8>,
@@ -518,6 +543,7 @@ impl LinearMemory {
 WebAssembly通过边界检查保证内存安全。
 
 **证明**：
+
 1. 所有内存访问都经过边界检查
 2. 内存大小是固定的，不能越界
 3. 没有指针算术，避免悬空指针
@@ -528,6 +554,7 @@ WebAssembly通过边界检查保证内存安全。
 垃圾回收是自动管理内存的机制。
 
 **算法 5.3.1** (标记-清除算法)
+
 ```rust
 pub struct GarbageCollector {
     pub heap: Vec<Object>,
@@ -587,11 +614,13 @@ impl GarbageCollector {
 
 **定理 6.1.1** (WASM性能特征)
 WebAssembly的性能接近原生代码，主要开销来自：
+
 1. **边界检查**：内存访问的边界检查
 2. **类型检查**：运行时的类型验证
 3. **函数调用**：跨边界函数调用的开销
 
 **示例 6.1.1** (性能分析)
+
 ```rust
 pub struct PerformanceAnalyzer {
     pub metrics: HashMap<String, f64>,
@@ -638,6 +667,7 @@ impl PerformanceAnalyzer {
 优化策略是提高代码性能的技术集合。
 
 **策略 6.2.1** (常见优化策略)
+
 1. **循环优化**：展开、向量化、并行化
 2. **函数内联**：减少函数调用开销
 3. **常量传播**：传播常量值
@@ -649,6 +679,7 @@ impl PerformanceAnalyzer {
 基准测试是测量程序性能的标准方法。
 
 **方法 6.3.1** (基准测试流程)
+
 ```rust
 pub struct BenchmarkRunner {
     pub iterations: usize,
@@ -698,11 +729,13 @@ impl BenchmarkRunner {
 wasm-bindgen是Rust和JavaScript之间的绑定生成器。
 
 **公理 7.1.1** (绑定生成的性质)
+
 1. **类型安全**：生成的绑定保持类型安全
 2. **零成本**：绑定不引入运行时开销
 3. **互操作性**：支持复杂的类型转换
 
 **示例 7.1.1** (wasm-bindgen使用)
+
 ```rust
 use wasm_bindgen::prelude::*;
 
@@ -746,6 +779,7 @@ pub fn greet(name: &str) -> String {
 类型转换是在不同语言类型系统之间转换值的机制。
 
 **算法 7.2.1** (类型转换算法)
+
 ```rust
 pub trait TypeConverter<T> {
     fn from_js_value(js_value: JsValue) -> Result<T, ConversionError>;
@@ -785,6 +819,7 @@ impl TypeConverter<String> for String {
 Rust和WebAssembly之间的互操作性是类型安全和高效的。
 
 **证明**：
+
 1. wasm-bindgen提供类型安全的绑定
 2. 编译时检查确保类型一致性
 3. 零成本抽象保证性能
@@ -794,12 +829,14 @@ Rust和WebAssembly之间的互操作性是类型安全和高效的。
 本章从形式化理论的角度深入分析了WebAssembly的数学基础、编译模型和性能特性。
 
 **主要贡献**：
+
 1. 建立了WebAssembly的严格数学定义
 2. 提供了栈式虚拟机的理论基础
 3. 分析了编译优化的技术
 4. 探讨了Rust与WebAssembly的集成
 
 **未来研究方向**：
+
 1. 开发WebAssembly的形式化验证工具
 2. 研究WebAssembly在边缘计算中的应用
 3. 探索WebAssembly的并行计算能力
@@ -808,7 +845,8 @@ Rust和WebAssembly之间的互操作性是类型安全和高效的。
 ---
 
 **参考文献**：
+
 1. Haas, A., et al. (2017). Bringing the web up to speed with WebAssembly. ACM SIGPLAN Notices, 52(6), 185-200.
 2. Rossberg, A., et al. (2018). Bringing the web up to speed with WebAssembly. Communications of the ACM, 61(12), 107-115.
 3. Watt, C., et al. (2019). Weakening WebAssembly. Proceedings of the ACM on Programming Languages, 3(OOPSLA), 1-28.
-4. Jung, R., et al. (2020). RustBelt meets relaxed memory. Proceedings of the ACM on Programming Languages, 4(POPL), 1-29. 
+4. Jung, R., et al. (2020). RustBelt meets relaxed memory. Proceedings of the ACM on Programming Languages, 4(POPL), 1-29.

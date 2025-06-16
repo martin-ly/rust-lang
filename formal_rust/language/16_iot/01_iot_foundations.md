@@ -2,32 +2,34 @@
 
 ## 目录
 
-1. [引言](#引言)
-2. [物联网的形式化定义](#物联网的形式化定义)
-   - [2.1 物联网系统的数学结构](#21-物联网系统的数学结构)
-   - [2.2 设备的形式化表示](#22-设备的形式化表示)
-   - [2.3 网络拓扑的形式化](#23-网络拓扑的形式化)
-3. [传感器网络理论](#传感器网络理论)
-   - [3.1 传感器数据的形式化](#31-传感器数据的形式化)
-   - [3.2 数据融合的数学理论](#32-数据融合的数学理论)
-   - [3.3 能量效率的优化](#33-能量效率的优化)
-4. [通信协议的形式化](#通信协议的形式化)
-   - [4.1 协议栈的形式化模型](#41-协议栈的形式化模型)
-   - [4.2 消息传递的语义](#42-消息传递的语义)
-   - [4.3 可靠性的数学保证](#43-可靠性的数学保证)
-5. [边缘计算的理论基础](#边缘计算的理论基础)
-   - [5.1 边缘节点的形式化](#51-边缘节点的形式化)
-   - [5.2 计算卸载的优化](#52-计算卸载的优化)
-   - [5.3 延迟分析的理论](#53-延迟分析的理论)
-6. [安全与隐私保护](#安全与隐私保护)
-   - [6.1 设备认证的形式化](#61-设备认证的形式化)
-   - [6.2 数据加密的理论](#62-数据加密的理论)
-   - [6.3 隐私保护算法](#63-隐私保护算法)
-7. [Rust在物联网中的应用](#rust在物联网中的应用)
-   - [7.1 嵌入式系统的优势](#71-嵌入式系统的优势)
-   - [7.2 内存安全的重要性](#72-内存安全的重要性)
-   - [7.3 实时系统的保证](#73-实时系统的保证)
-8. [结论与展望](#结论与展望)
+- [1. 物联网基础理论：形式化语义与系统架构](#1-物联网基础理论形式化语义与系统架构)
+  - [目录](#目录)
+  - [引言](#引言)
+  - [物联网的形式化定义](#物联网的形式化定义)
+    - [2.1 物联网系统的数学结构](#21-物联网系统的数学结构)
+    - [2.2 设备的形式化表示](#22-设备的形式化表示)
+    - [2.3 网络拓扑的形式化](#23-网络拓扑的形式化)
+  - [传感器网络理论](#传感器网络理论)
+    - [3.1 传感器数据的形式化](#31-传感器数据的形式化)
+    - [3.2 数据融合的数学理论](#32-数据融合的数学理论)
+    - [3.3 能量效率的优化](#33-能量效率的优化)
+  - [通信协议的形式化](#通信协议的形式化)
+    - [4.1 协议栈的形式化模型](#41-协议栈的形式化模型)
+    - [4.2 消息传递的语义](#42-消息传递的语义)
+    - [4.3 可靠性的数学保证](#43-可靠性的数学保证)
+  - [边缘计算的理论基础](#边缘计算的理论基础)
+    - [5.1 边缘节点的形式化](#51-边缘节点的形式化)
+    - [5.2 计算卸载的优化](#52-计算卸载的优化)
+    - [5.3 延迟分析的理论](#53-延迟分析的理论)
+  - [安全与隐私保护](#安全与隐私保护)
+    - [6.1 设备认证的形式化](#61-设备认证的形式化)
+    - [6.2 数据加密的理论](#62-数据加密的理论)
+    - [6.3 隐私保护算法](#63-隐私保护算法)
+  - [Rust在物联网中的应用](#rust在物联网中的应用)
+    - [7.1 嵌入式系统的优势](#71-嵌入式系统的优势)
+    - [7.2 内存安全的重要性](#72-内存安全的重要性)
+    - [7.3 实时系统的保证](#73-实时系统的保证)
+  - [结论与展望](#结论与展望)
 
 ## 引言
 
@@ -39,11 +41,13 @@
 
 **定义 2.1.1** (物联网系统)
 物联网系统是一个三元组 \((\mathcal{D}, \mathcal{N}, \mathcal{P})\)，其中：
+
 - \(\mathcal{D}\) 是设备集合
 - \(\mathcal{N}\) 是网络拓扑
 - \(\mathcal{P}\) 是协议集合
 
 **公理 2.1.1** (物联网系统的基本性质)
+
 1. **连通性**：任意两个设备之间都存在通信路径
 2. **可扩展性**：系统可以动态添加新设备
 3. **容错性**：单个设备故障不影响整个系统
@@ -52,6 +56,7 @@
 如果网络拓扑是连通的，则物联网系统是连通的。
 
 **证明**：
+
 1. 假设网络拓扑是连通的
 2. 对于任意两个设备 \(d_1, d_2 \in \mathcal{D}\)
 3. 存在网络路径连接 \(d_1\) 和 \(d_2\)
@@ -61,6 +66,7 @@
 
 **定义 2.2.1** (物联网设备)
 物联网设备是一个五元组 \((\text{id}, \text{type}, \text{state}, \text{sensors}, \text{actuators})\)，其中：
+
 - \(\text{id}\) 是设备唯一标识符
 - \(\text{type}\) 是设备类型
 - \(\text{state}\) 是设备当前状态
@@ -68,6 +74,7 @@
 - \(\text{actuators}\) 是执行器集合
 
 **示例 2.2.1** (设备的Rust实现)
+
 ```rust
 #[derive(Debug, Clone)]
 pub struct IoTDevice {
@@ -134,17 +141,20 @@ impl IoTDevice {
 
 **定义 2.3.1** (网络拓扑)
 网络拓扑是一个图 \(G = (V, E)\)，其中：
+
 - \(V\) 是设备节点集合
 - \(E\) 是通信链路集合
 
 **定义 2.3.2** (拓扑类型)
 常见的网络拓扑包括：
+
 1. **星形拓扑**：所有设备连接到一个中心节点
 2. **网状拓扑**：设备之间可以相互直接通信
 3. **树形拓扑**：层次化的网络结构
 4. **环形拓扑**：设备形成环形连接
 
 **算法 2.3.1** (拓扑发现算法)
+
 ```
 function discover_topology(devices):
     let topology = Graph::new()
@@ -166,17 +176,20 @@ function discover_topology(devices):
 
 **定义 3.1.1** (传感器数据)
 传感器数据是一个四元组 \((\text{timestamp}, \text{value}, \text{unit}, \text{accuracy})\)，其中：
+
 - \(\text{timestamp}\) 是数据采集时间
 - \(\text{value}\) 是测量值
 - \(\text{unit}\) 是单位
 - \(\text{accuracy}\) 是精度
 
 **公理 3.1.1** (传感器数据的基本性质)
+
 1. **时间性**：数据与时间戳相关联
 2. **数值性**：数据具有数值表示
 3. **精度性**：数据具有精度信息
 
 **示例 3.1.1** (传感器数据的Rust实现)
+
 ```rust
 #[derive(Debug, Clone)]
 pub struct SensorReading {
@@ -220,6 +233,7 @@ impl Sensor {
 数据融合是将多个传感器的数据组合以获得更准确信息的过程。
 
 **算法 3.2.1** (加权平均融合)
+
 ```
 function weighted_average_fusion(readings, weights):
     let sum = 0.0
@@ -233,6 +247,7 @@ function weighted_average_fusion(readings, weights):
 ```
 
 **示例 3.2.1** (卡尔曼滤波融合)
+
 ```rust
 pub struct KalmanFilter {
     pub state: f64,
@@ -272,6 +287,7 @@ impl KalmanFilter {
 \[\text{Energy Efficiency} = \frac{\text{Performance}}{\text{Energy Consumption}}\]
 
 **算法 3.3.1** (能量感知调度)
+
 ```
 function energy_aware_scheduling(tasks, battery_level):
     let scheduled_tasks = []
@@ -295,6 +311,7 @@ function energy_aware_scheduling(tasks, battery_level):
 协议栈是一个分层的通信协议集合，每一层提供特定的服务。
 
 **定义 4.1.2** (OSI七层模型)
+
 1. **物理层**：物理传输介质
 2. **数据链路层**：帧传输和错误检测
 3. **网络层**：路由和寻址
@@ -304,6 +321,7 @@ function energy_aware_scheduling(tasks, battery_level):
 7. **应用层**：应用程序接口
 
 **示例 4.1.1** (协议栈的Rust实现)
+
 ```rust
 pub trait ProtocolLayer {
     fn send(&self, data: &[u8]) -> Result<(), ProtocolError>;
@@ -343,11 +361,13 @@ impl IoTProtocolStack {
 消息传递是设备之间交换信息的机制。
 
 **公理 4.2.1** (消息传递的性质)
+
 1. **可靠性**：消息要么被正确传递，要么被检测到丢失
 2. **顺序性**：消息按发送顺序到达（可选）
 3. **原子性**：消息要么完全传递，要么完全不传递
 
 **示例 4.2.1** (可靠消息传递)
+
 ```rust
 pub struct ReliableMessageProtocol {
     pub sequence_number: u32,
@@ -405,11 +425,13 @@ impl ReliableMessageProtocol {
 边缘节点是位于网络边缘的计算设备，提供本地计算和存储能力。
 
 **公理 5.1.1** (边缘节点的性质)
+
 1. **本地性**：靠近数据源
 2. **实时性**：低延迟处理
 3. **自治性**：可以独立运行
 
 **示例 5.1.1** (边缘节点的Rust实现)
+
 ```rust
 pub struct EdgeNode {
     pub id: NodeId,
@@ -455,6 +477,7 @@ impl EdgeNode {
 计算卸载是将计算任务从资源受限的设备转移到资源丰富的设备的过程。
 
 **算法 5.2.1** (计算卸载决策)
+
 ```
 function compute_offloading_decision(task, local_device, edge_node, cloud):
     let local_cost = calculate_local_cost(task, local_device)
@@ -487,11 +510,13 @@ function compute_offloading_decision(task, local_device, edge_node, cloud):
 设备认证是验证设备身份的过程。
 
 **公理 6.1.1** (认证的基本要求)
+
 1. **唯一性**：每个设备有唯一身份
 2. **不可伪造性**：身份不能被伪造
 3. **可验证性**：身份可以被验证
 
 **示例 6.1.1** (设备认证实现)
+
 ```rust
 pub struct DeviceAuthentication {
     pub certificate_authority: CertificateAuthority,
@@ -531,6 +556,7 @@ impl DeviceAuthentication {
 数据加密是将明文转换为密文的过程，确保数据机密性。
 
 **算法 6.2.1** (AES加密)
+
 ```rust
 use aes_gcm::{Aes256Gcm, Key, Nonce};
 use aes_gcm::aead::{Aead, NewAead};
@@ -564,6 +590,7 @@ impl DataEncryption {
 差分隐私是一种隐私保护技术，确保查询结果不会泄露个体信息。
 
 **算法 6.3.1** (拉普拉斯噪声)
+
 ```rust
 pub struct DifferentialPrivacy {
     pub epsilon: f64,
@@ -590,11 +617,13 @@ impl DifferentialPrivacy {
 
 **定理 7.1.1** (Rust的嵌入式优势)
 Rust在嵌入式系统中具有以下优势：
+
 1. **内存安全**：防止缓冲区溢出和内存泄漏
 2. **零成本抽象**：高级抽象不引入运行时开销
 3. **并发安全**：防止数据竞争
 
 **示例 7.1.1** (嵌入式Rust应用)
+
 ```rust
 #![no_std]
 #![no_main]
@@ -631,6 +660,7 @@ fn main() -> ! {
 Rust的所有权系统保证了内存安全，避免了常见的内存错误。
 
 **示例 7.2.1** (内存安全的IoT代码)
+
 ```rust
 pub struct SafeIoTSystem {
     devices: Vec<IoTDevice>,
@@ -667,11 +697,13 @@ impl SafeIoTSystem {
 实时系统是必须在规定时间内响应的系统。
 
 **公理 7.3.1** (实时系统的要求)
+
 1. **确定性**：响应时间是可预测的
 2. **及时性**：在截止时间内完成
 3. **可靠性**：高可用性
 
 **示例 7.3.1** (实时IoT系统)
+
 ```rust
 use tokio::time::{Duration, Instant};
 
@@ -718,12 +750,14 @@ impl RealTimeTask {
 本章从形式化理论的角度深入分析了物联网的数学基础、系统架构和关键技术。
 
 **主要贡献**：
+
 1. 建立了物联网系统的严格数学定义
 2. 提供了传感器网络的理论基础
 3. 分析了通信协议的形式化模型
 4. 探讨了Rust在物联网中的应用
 
 **未来研究方向**：
+
 1. 开发物联网系统的形式化验证工具
 2. 研究5G/6G网络对物联网的影响
 3. 探索人工智能在物联网中的应用
@@ -732,7 +766,8 @@ impl RealTimeTask {
 ---
 
 **参考文献**：
+
 1. Atzori, L., Iera, A., & Morabito, G. (2010). The internet of things: A survey. Computer networks, 54(15), 2787-2805.
 2. Gubbi, J., et al. (2013). Internet of Things (IoT): A vision, architectural elements, and future directions. Future generation computer systems, 29(7), 1645-1660.
 3. Akyildiz, I. F., et al. (2002). Wireless sensor networks: a survey. Computer networks, 38(4), 393-422.
-4. Shi, W., et al. (2016). Edge computing: Vision and challenges. IEEE internet of things journal, 3(5), 637-646. 
+4. Shi, W., et al. (2016). Edge computing: Vision and challenges. IEEE internet of things journal, 3(5), 637-646.

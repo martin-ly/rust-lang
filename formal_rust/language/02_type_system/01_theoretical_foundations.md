@@ -31,6 +31,7 @@
 ### 1.1 Rust作为类型范畴
 
 **定义 1.1.1**: 令 $\mathcal{Rust}$ 表示Rust类型范畴，其中：
+
 - **对象**: Rust中的类型
 - **态射**: 类型之间的函数
 - **恒等态射**: 每个类型到自身的恒等函数
@@ -39,6 +40,7 @@
 **定理 1.1.1**: $\mathcal{Rust}$ 是一个范畴。
 
 **证明**:
+
 1. **结合律**: 对于函数 $f: A \rightarrow B$, $g: B \rightarrow C$, $h: C \rightarrow D$，有 $(h \circ g) \circ f = h \circ (g \circ f)$
 2. **单位律**: 对于任意类型 $A$，存在恒等函数 $id_A: A \rightarrow A$，满足 $f \circ id_A = f$ 和 $id_B \circ f = f$
 
@@ -57,6 +59,7 @@ impl Animal for Dog {}
 ### 1.2 函子与自然变换
 
 **定义 1.2.1**: 类型构造子 $F: \mathcal{Rust} \rightarrow \mathcal{Rust}$ 是函子，如果：
+
 - 将类型 $A$ 映射到类型 $F(A)$
 - 将函数 $f: A \rightarrow B$ 映射到函数 $F(f): F(A) \rightarrow F(B)$
 - 满足函子定律
@@ -64,6 +67,7 @@ impl Animal for Dog {}
 **定理 1.2.1**: `Option<T>` 和 `Vec<T>` 是 $\mathcal{Rust}$ 上的函子。
 
 **证明**:
+
 ```rust
 // Option 函子
 impl<T> Functor for Option<T> {
@@ -86,6 +90,7 @@ impl<T> Functor for Option<T> {
 ### 1.3 积与余积
 
 **定义 1.3.1**: 在 $\mathcal{Rust}$ 中：
+
 - **积类型**: 结构体和元组，如 `(A, B)` 或 `struct Point { x: A, y: B }`
 - **余积类型**: 枚举，如 `enum Result<T, E> { Ok(T), Err(E) }`
 
@@ -93,6 +98,7 @@ impl<T> Functor for Option<T> {
 
 **证明**:
 对于任意类型 $C$ 和函数 $f: C \rightarrow A$, $g: C \rightarrow B$，存在唯一的函数 $\langle f, g \rangle: C \rightarrow A \times B$ 使得：
+
 - $\pi_1 \circ \langle f, g \rangle = f$
 - $\pi_2 \circ \langle f, g \rangle = g$
 
@@ -110,6 +116,7 @@ fn proj2<A, B>((_, b): (A, B)) -> B { b }
 ### 1.4 单子结构
 
 **定义 1.4.1**: 单子是三元组 $(M, \eta, \mu)$，其中：
+
 - $M: \mathcal{Rust} \rightarrow \mathcal{Rust}$ 是函子
 - $\eta: Id \rightarrow M$ 是单位自然变换
 - $\mu: M \circ M \rightarrow M$ 是乘法自然变换
@@ -117,6 +124,7 @@ fn proj2<A, B>((_, b): (A, B)) -> B { b }
 **定理 1.4.1**: `Option<T>` 和 `Result<T, E>` 是单子。
 
 **证明**:
+
 ```rust
 // Option 单子
 impl<T> Monad for Option<T> {
@@ -148,6 +156,7 @@ impl<T> Monad for Option<T> {
 ### 2.1 类型作为空间
 
 **定义 2.1.1**: 在HoTT中，类型被视为空间：
+
 - **基本类型**: 如 `bool` 对应空间 $\mathbf{2}$（两个点）
 - **单元类型**: `()` 对应空间 $\mathbf{1}$（单点）
 - **空类型**: `!` 对应空间 $\mathbf{0}$（空空间）
@@ -155,6 +164,7 @@ impl<T> Monad for Option<T> {
 **定理 2.1.1**: Rust的基本类型对应HoTT中的基本空间。
 
 **证明**:
+
 ```rust
 // bool 对应空间 2
 let true_point: bool = true;   // 空间 2 中的一个点
@@ -176,6 +186,7 @@ fn never_returns() -> ! {
 **定理 2.2.1**: Rust的值对应HoTT空间中的点。
 
 **证明**:
+
 ```rust
 // 结构体值对应乘积空间中的点
 struct Point { x: f64, y: f64 }
@@ -196,6 +207,7 @@ let circle = Shape::Circle(5.0); // 空间 ℝ + (ℝ × ℝ) 中的一个点
 **定理 2.3.1**: Rust的相等性对应HoTT中的路径。
 
 **证明**:
+
 ```rust
 // 相等性作为路径
 let x = 42;
@@ -216,6 +228,7 @@ let b: Alias = 42;
 **定理 2.4.1**: Rust的生命周期系统对应HoTT中的依存类型。
 
 **证明**:
+
 ```rust
 // 生命周期作为依存类型
 struct Reference<'a, T> {
@@ -237,6 +250,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 **定理 3.1.1**: Rust实现了仿射类型系统。
 
 **证明**:
+
 ```rust
 // 使用一次（移动）
 let s = String::from("hello");
@@ -252,6 +266,7 @@ let s = String::from("hello");
 ### 3.2 资源使用规则
 
 **定义 3.2.1**: 仿射类型系统的核心规则：
+
 1. 每个值最多使用一次
 2. 值可以被丢弃（使用零次）
 3. 值不能被复制（除非实现Copy）
@@ -259,6 +274,7 @@ let s = String::from("hello");
 **定理 3.2.1**: Rust的所有权系统实现了仿射类型规则。
 
 **证明**:
+
 ```rust
 // 仿射类型规则验证
 fn affine_example() {
@@ -285,6 +301,7 @@ fn affine_example() {
 **定理 3.3.1**: Rust的所有权转移形成单射映射。
 
 **证明**:
+
 ```rust
 // 所有权转移的单射性
 fn ownership_transfer() {
@@ -303,6 +320,7 @@ fn ownership_transfer() {
 **定理 3.4.1**: 借用系统保持了仿射类型的安全性。
 
 **证明**:
+
 ```rust
 // 借用系统的安全性
 fn borrow_safety() {
@@ -331,6 +349,7 @@ fn borrow_safety() {
 **定理 4.1.1**: 类型系统提供了系统安全的静态保证。
 
 **证明**:
+
 ```rust
 // 类型系统作为控制器
 fn type_system_controller() {
@@ -358,6 +377,7 @@ fn type_system_controller() {
 **定理 4.2.1**: 类型系统通过状态管理确保系统一致性。
 
 **证明**:
+
 ```rust
 // 状态管理示例
 struct SystemState {
@@ -388,6 +408,7 @@ fn state_management() {
 **定理 4.3.1**: 反馈机制确保系统收敛到正确状态。
 
 **证明**:
+
 ```rust
 // 反馈机制示例
 fn feedback_example() {
@@ -408,6 +429,7 @@ fn feedback_example() {
 **定理 4.4.1**: 类型安全的程序具有运行时稳定性。
 
 **证明**:
+
 ```rust
 // 系统稳定性保证
 fn stable_system() -> Result<i32, String> {
@@ -440,6 +462,7 @@ fn stable_system() -> Result<i32, String> {
 **定理**: Rust类型系统在四个理论框架下保持一致性。
 
 **证明**: 通过以下对应关系建立统一性：
+
 1. 范畴论提供结构框架
 2. 同伦类型论提供空间解释
 3. 仿射类型论提供资源管理
@@ -452,6 +475,7 @@ fn stable_system() -> Result<i32, String> {
 ```
 
 其中：
+
 - $\mathcal{C}$: 范畴论结构
 - $\mathcal{S}$: 同伦类型论空间
 - $\mathcal{A}$: 仿射类型论规则
@@ -460,4 +484,4 @@ fn stable_system() -> Result<i32, String> {
 ---
 **最后更新**: 2025-01-27
 **版本**: 1.0.0
-**状态**: 理论基础完成 
+**状态**: 理论基础完成
