@@ -41,6 +41,7 @@ fn identity<T>(x: T) -> T {
 参数多态性是一种类型系统特性，允许函数或数据结构在保持类型安全的前提下，接受任意类型作为参数。
 
 形式化表示：
+
 ```math
 \forall \alpha. \tau(\alpha)
 ```
@@ -59,11 +60,13 @@ fn identity<T>(x: T) -> T {
 类型变量是表示未知类型的符号，通常用希腊字母表示。
 
 类型变量的性质：
+
 - **可替换性**：类型变量可以被具体类型替换
 - **作用域**：类型变量有明确的作用域
 - **约束性**：类型变量可以受到约束
 
 **类型变量环境**：
+
 ```math
 \Gamma ::= \emptyset \mid \Gamma, \alpha : Type
 ```
@@ -81,6 +84,7 @@ struct Vec<T> {
 ```
 
 形式化表示：
+
 ```math
 Vec : Type \rightarrow Type
 ```
@@ -97,6 +101,7 @@ Vec : Type \rightarrow Type
 ```
 
 其中：
+
 - $\alpha$：类型变量
 - $\tau_1 \rightarrow \tau_2$：函数类型
 - $\forall \alpha. \tau(\alpha)$：全称类型
@@ -106,26 +111,31 @@ Vec : Type \rightarrow Type
 ### 3.2 类型推导规则
 
 **规则3.2.1 (类型变量)**：
+
 ```math
 \frac{\alpha \in \Gamma}{\Gamma \vdash \alpha : \alpha}
 ```
 
 **规则3.2.2 (全称量词引入)**：
+
 ```math
 \frac{\Gamma, \alpha : Type \vdash e : \tau(\alpha)}{\Gamma \vdash e : \forall \alpha. \tau(\alpha)}
 ```
 
 **规则3.2.3 (全称量词消除)**：
+
 ```math
 \frac{\Gamma \vdash e : \forall \alpha. \tau(\alpha)}{\Gamma \vdash e : \tau(\sigma)}
 ```
 
 **规则3.2.4 (函数抽象)**：
+
 ```math
 \frac{\Gamma, x : \tau_1 \vdash e : \tau_2}{\Gamma \vdash \lambda x. e : \tau_1 \rightarrow \tau_2}
 ```
 
 **规则3.2.5 (函数应用)**：
+
 ```math
 \frac{\Gamma \vdash e_1 : \tau_1 \rightarrow \tau_2 \quad \Gamma \vdash e_2 : \tau_1}{\Gamma \vdash e_1 e_2 : \tau_2}
 ```
@@ -142,6 +152,7 @@ Vec : Type \rightarrow Type
 表示将类型$\tau$中的类型变量$\alpha$替换为类型$\sigma$。
 
 **替换规则**：
+
 1. $[\sigma/\alpha]\alpha = \sigma$
 2. $[\sigma/\alpha]\beta = \beta$ (如果$\alpha \neq \beta$)
 3. $[\sigma/\alpha](\tau_1 \rightarrow \tau_2) = [\sigma/\alpha]\tau_1 \rightarrow [\sigma/\alpha]\tau_2$
@@ -155,6 +166,7 @@ Vec : Type \rightarrow Type
 Hindley-Milner算法是用于推导参数多态类型系统的标准算法。
 
 **主要步骤**：
+
 1. **约束生成**：为表达式生成类型约束
 2. **约束求解**：求解约束系统
 3. **类型替换**：用求解结果替换类型变量
@@ -207,6 +219,7 @@ fn unify(τ1: Type, τ2: Type) -> Result<Substitution, UnificationError> {
 ### 5.1 基本泛型函数
 
 **示例5.1.1 (恒等函数)**：
+
 ```rust
 fn identity<T>(x: T) -> T {
     x
@@ -214,6 +227,7 @@ fn identity<T>(x: T) -> T {
 ```
 
 **类型推导过程**：
+
 1. 假设$x : \alpha$
 2. 函数体$x$的类型为$\alpha$
 3. 因此$identity : \alpha \rightarrow \alpha$
@@ -222,6 +236,7 @@ fn identity<T>(x: T) -> T {
 ### 5.2 泛型数据结构
 
 **示例5.2.1 (泛型容器)**：
+
 ```rust
 struct Container<T> {
     value: T,
@@ -239,12 +254,14 @@ impl<T> Container<T> {
 ```
 
 **类型推导**：
+
 - $Container : \forall \alpha. \alpha \rightarrow Container(\alpha)$
 - $get : \forall \alpha. Container(\alpha) \rightarrow \alpha$
 
 ### 5.3 高阶泛型函数
 
 **示例5.3.1 (函数映射)**：
+
 ```rust
 fn map<F, T, U>(f: F, x: T) -> U
 where
@@ -255,6 +272,7 @@ where
 ```
 
 **类型推导**：
+
 - $map : \forall \alpha, \beta. (\alpha \rightarrow \beta) \times \alpha \rightarrow \beta$
 
 ## 6. 理论证明
@@ -299,6 +317,7 @@ where
 单态化是编译器将泛型代码转换为具体类型代码的过程。
 
 **单态化算法**：
+
 ```rust
 fn monomorphize<T>(generic_type: GenericType<T>) -> ConcreteType {
     match generic_type {
@@ -334,6 +353,7 @@ fn monomorphize<T>(generic_type: GenericType<T>) -> ConcreteType {
 类型参数是Rust泛型系统的核心，提供了强大的抽象能力和类型安全保证。通过形式化理论的分析，我们建立了类型参数的数学基础，证明了其正确性和安全性。
 
 关键特性：
+
 - **参数多态性**：支持任意类型的抽象
 - **类型安全**：编译时保证类型正确性
 - **零成本抽象**：不引入运行时开销

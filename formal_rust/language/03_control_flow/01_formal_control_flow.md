@@ -19,6 +19,7 @@ Rust的控制流系统是语言核心的重要组成部分，它提供了类型�
 ### 1.1 控制流定义
 
 **定义 1.1** (控制流): 控制流是程序指令执行顺序的规则集合，表示为三元组 $(S, \rightarrow, \mathcal{F})$，其中：
+
 - $S$ 是程序状态集合
 - $\rightarrow \subseteq S \times S$ 是状态转换关系
 - $\mathcal{F}: S \rightarrow \mathbb{B}$ 是控制条件函数
@@ -26,6 +27,7 @@ Rust的控制流系统是语言核心的重要组成部分，它提供了类型�
 ### 1.2 形式化目标
 
 本文档的目标是：
+
 - 建立Rust控制流的数学形式化模型
 - 证明控制流系统的类型安全性
 - 分析控制流与所有权系统的交互
@@ -39,6 +41,7 @@ Rust的控制流系统是语言核心的重要组成部分，它提供了类型�
 $$\sigma = (env, heap, stack, pc, \mathcal{T})$$
 
 其中：
+
 - $env$ 是变量环境映射
 - $heap$ 是堆内存状态
 - $stack$ 是调用栈
@@ -55,6 +58,7 @@ $$\sigma \rightarrow \sigma' \iff \exists e \in \mathcal{E}: \sigma \xrightarrow
 ### 2.3 控制流图
 
 **定义 2.3** (控制流图): 控制流图 $G = (V, E, \mathcal{L})$ 是一个有向图，其中：
+
 - $V$ 是基本块集合
 - $E \subseteq V \times V$ 是边集合
 - $\mathcal{L}: E \rightarrow \mathcal{C}$ 是边标签函数，$\mathcal{C}$ 是控制条件集合
@@ -215,6 +219,7 @@ $$\frac{\sigma \vdash e \Downarrow Future[\tau] \quad \sigma \vdash e \Downarrow
 ### 6.3 异步控制流图
 
 **定义 6.5** (异步控制流图): 异步控制流图 $G_{async} = (V, E, \mathcal{L}, \mathcal{S})$ 其中：
+
 - $V$ 是异步状态集合
 - $E \subseteq V \times V$ 是异步转换边
 - $\mathcal{L}: E \rightarrow \mathcal{A}$ 是异步操作标签
@@ -281,5 +286,5 @@ $$\{P\} e \{Q\}$$
 
 1. Pierce, B. C. (2002). *Types and Programming Languages*. MIT Press.
 2. Jung, R., et al. (2017). "RustBelt: Securing the foundations of the Rust programming language".
-3. The Rust Reference. https://doc.rust-lang.org/reference/
-4. The Rust Async Book. https://rust-lang.github.io/async-book/
+3. The Rust Reference. <https://doc.rust-lang.org/reference/>
+4. The Rust Async Book. <https://rust-lang.github.io/async-book/>

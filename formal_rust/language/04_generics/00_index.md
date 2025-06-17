@@ -37,6 +37,7 @@ Rust的泛型系统基于以下理论：
 参数多态性是一种类型系统特性，允许函数或数据结构在保持类型安全的前提下，接受任意类型作为参数。
 
 形式化表示：
+
 ```math
 \forall \alpha. \tau(\alpha)
 ```
@@ -52,6 +53,7 @@ Rust的泛型系统基于以下理论：
 类型约束是对类型变量的限制条件，通常表示为Trait约束。
 
 形式化表示：
+
 ```math
 \forall \alpha. C(\alpha) \Rightarrow \tau(\alpha)
 ```
@@ -59,6 +61,7 @@ Rust的泛型系统基于以下理论：
 其中$C(\alpha)$是约束条件，$\tau(\alpha)$是受约束的类型。
 
 **约束推理规则**：
+
 ```math
 \frac{\Gamma \vdash e : \forall \alpha. C(\alpha) \Rightarrow \tau(\alpha) \quad \Gamma \vdash \sigma : C(\sigma)}{\Gamma \vdash e : \tau(\sigma)}
 ```
@@ -85,6 +88,7 @@ fn identity<T>(x: T) -> T {
 ```
 
 形式化表示：
+
 ```math
 identity : \forall \alpha. \alpha \rightarrow \alpha
 ```
@@ -101,6 +105,7 @@ fn max<T: Ord>(a: T, b: T) -> T {
 ```
 
 形式化表示：
+
 ```math
 max : \forall \alpha. Ord(\alpha) \Rightarrow \alpha \times \alpha \rightarrow \alpha
 ```
@@ -118,6 +123,7 @@ trait Iterator {
 ```
 
 形式化表示：
+
 ```math
 Iterator(\alpha) \triangleq \{ Item : Type, next : \alpha \rightarrow Option(Item) \}
 ```
@@ -136,16 +142,19 @@ Iterator(\alpha) \triangleq \{ Item : Type, next : \alpha \rightarrow Option(Ite
 **类型推导规则**：
 
 1. **类型变量引入**：
+
 ```math
 \frac{\alpha \in \Gamma}{\Gamma \vdash \alpha : \alpha}
 ```
 
 2. **全称量词引入**：
+
 ```math
 \frac{\Gamma, C(\alpha) \vdash e : \tau(\alpha)}{\Gamma \vdash e : \forall \alpha. C(\alpha) \Rightarrow \tau(\alpha)}
 ```
 
 3. **全称量词消除**：
+
 ```math
 \frac{\Gamma \vdash e : \forall \alpha. C(\alpha) \Rightarrow \tau(\alpha) \quad \Gamma \vdash \sigma : C(\sigma)}{\Gamma \vdash e : \tau(\sigma)}
 ```
@@ -182,6 +191,7 @@ M(\forall \alpha. C(\alpha) \Rightarrow \tau(\alpha)) = \tau(\sigma)
 ### 5.1 数据结构
 
 **泛型容器**：
+
 ```rust
 struct Vec<T> {
     data: Box<[T]>,
@@ -191,6 +201,7 @@ struct Vec<T> {
 ```
 
 **形式化表示**：
+
 ```math
 Vec(\alpha) \triangleq \{ data : Box([\alpha]), len : Nat, capacity : Nat \}
 ```
@@ -198,6 +209,7 @@ Vec(\alpha) \triangleq \{ data : Box([\alpha]), len : Nat, capacity : Nat \}
 ### 5.2 算法抽象
 
 **泛型算法**：
+
 ```rust
 fn sort<T: Ord>(slice: &mut [T]) {
     // 排序实现
@@ -205,6 +217,7 @@ fn sort<T: Ord>(slice: &mut [T]) {
 ```
 
 **形式化表示**：
+
 ```math
 sort : \forall \alpha. Ord(\alpha) \Rightarrow [\alpha] \rightarrow [\alpha]
 ```
@@ -212,6 +225,7 @@ sort : \forall \alpha. Ord(\alpha) \Rightarrow [\alpha] \rightarrow [\alpha]
 ### 5.3 类型级编程
 
 **类型级计算**：
+
 ```rust
 trait Add<Rhs> {
     type Output;
@@ -231,4 +245,4 @@ type Sum<A, B> = <A as Add<B>>::Output;
 
 3. **Rust泛型**
    - The Rust Reference: Generics
-   - The Rust Book: Generic Types, Traits, and Lifetimes 
+   - The Rust Book: Generic Types, Traits, and Lifetimes
