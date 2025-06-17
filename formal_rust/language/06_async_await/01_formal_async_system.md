@@ -37,6 +37,7 @@ Rust的异步系统提供了一种高效、安全的方式来处理并发计算�
 **定义 2.1** (异步计算): 异步计算是一个可能暂停和恢复的计算过程。
 
 **定义 2.2** (计算状态): 计算状态 $\sigma$ 是一个四元组 $(env, store, pc, future)$，其中：
+
 - $env$ 是环境映射
 - $store$ 是存储映射
 - $pc$ 是程序计数器
@@ -124,6 +125,7 @@ struct Pin<P> {
 **证明**: 由Pin的类型系统保证。
 
 **代码示例**:
+
 ```rust
 use std::future::Future;
 use std::pin::Pin;
@@ -189,6 +191,7 @@ $$\frac{\sigma \Downarrow future \Rightarrow f \quad f.poll(cx) = Poll::Ready(v)
 $$\frac{\sigma \Downarrow future \Rightarrow f \quad f.poll(cx) = Poll::Pending}{\sigma \Downarrow future.await \Rightarrow \text{suspend}}$$
 
 **代码示例**:
+
 ```rust
 async fn async_function() -> i32 {
     // 模拟异步操作
@@ -236,6 +239,7 @@ struct Task<F> {
 ```
 
 **调度算法**:
+
 1. 执行器维护一个就绪队列
 2. 轮询所有任务
 3. 将返回Pending的任务挂起
@@ -257,6 +261,7 @@ struct Runtime {
 **证明**: 通过轮询机制和Waker通知保证。
 
 **代码示例**:
+
 ```rust
 use tokio::runtime::Runtime;
 
@@ -292,6 +297,7 @@ enum AsyncStateMachine {
 ```
 
 **状态转换规则**:
+
 - Start → Waiting: 开始异步操作
 - Waiting → Waiting: 继续等待
 - Waiting → Done: 操作完成
@@ -303,6 +309,7 @@ enum AsyncStateMachine {
 **证明**: 通过编译器生成的代码结构保证。
 
 **代码示例**:
+
 ```rust
 // 原始async函数
 async fn example_async() -> i32 {
@@ -374,6 +381,7 @@ impl Future for ExampleStateMachine {
 ### 7.2 异步并发
 
 **代码示例**:
+
 ```rust
 use tokio::join;
 
@@ -403,6 +411,7 @@ async fn select_example() {
 **定义 7.3** (异步同步): 异步同步确保多个异步操作的协调执行。
 
 **代码示例**:
+
 ```rust
 use tokio::sync::Mutex;
 

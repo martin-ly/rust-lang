@@ -34,6 +34,7 @@ Rust的进程管理系统提供了对操作系统进程的安全抽象，包括�
 ### 2.1 进程模型
 
 **定义 2.1** (进程): 进程是一个四元组 $P = (code, data, stack, resources)$，其中：
+
 - $code$ 是程序代码
 - $data$ 是数据段
 - $stack$ 是执行栈
@@ -69,6 +70,7 @@ $$create\_process : Command \rightarrow Result<Process, Error>$$
 $$\frac{\Gamma \vdash cmd : Command}{\Gamma \vdash create\_process(cmd) : Result<Process, Error>}$$
 
 **代码示例**:
+
 ```rust
 use std::process::{Command, Stdio};
 
@@ -97,6 +99,7 @@ $$\frac{\Gamma \vdash data : [u8]}{\Gamma \vdash pipe.write(data) : Result<usize
 $$\frac{}{\Gamma \vdash pipe.read() : Result<[u8], Error>}$$
 
 **代码示例**:
+
 ```rust
 use std::process::{Command, Stdio};
 use std::io::{Write, Read};
@@ -129,6 +132,7 @@ $$\frac{\Gamma \vdash addr : SocketAddr}{\Gamma \vdash TcpListener::bind(addr) :
 $$\frac{\Gamma \vdash addr : SocketAddr}{\Gamma \vdash TcpStream::connect(addr) : Result<TcpStream, Error>}$$
 
 **代码示例**:
+
 ```rust
 use std::net::{TcpListener, TcpStream};
 use std::io::{Read, Write};
@@ -156,6 +160,7 @@ $$SharedMemory = (address, size, permissions)$$
 $$\frac{\Gamma \vdash size : usize}{\Gamma \vdash mmap(size) : Result<*mut u8, Error>}$$
 
 **代码示例**:
+
 ```rust
 use std::ptr;
 use std::mem;
@@ -200,6 +205,7 @@ $$\frac{\Gamma \vdash mutex : Mutex<T>}{\Gamma \vdash mutex.lock() : Result<Mute
 **证明**: 由锁的状态和获取/释放操作保证。
 
 **代码示例**:
+
 ```rust
 use std::sync::{Arc, Mutex};
 use std::thread;
@@ -236,6 +242,7 @@ $$\frac{\Gamma \vdash mutex : Mutex<T>}{\Gamma \vdash Condvar::new() : Condvar}$
 $$\frac{\Gamma \vdash condvar : Condvar \land \Gamma \vdash guard : MutexGuard<T>}{\Gamma \vdash condvar.wait(guard) : Result<MutexGuard<T>, Error>}$$
 
 **代码示例**:
+
 ```rust
 use std::sync::{Arc, Mutex, Condvar};
 use std::thread;
@@ -270,6 +277,7 @@ $$\frac{\Gamma \vdash count : usize}{\Gamma \vdash Semaphore::new(count) : Semap
 $$\frac{\Gamma \vdash semaphore : Semaphore}{\Gamma \vdash semaphore.acquire() : Result<(), Error>}$$
 
 **代码示例**:
+
 ```rust
 use std::sync::Semaphore;
 use std::thread;
@@ -305,6 +313,7 @@ $$\frac{\Gamma \vdash value : T}{\Gamma \vdash Atomic::new(value) : Atomic<T>}$$
 $$\frac{\Gamma \vdash atomic : Atomic<T>}{\Gamma \vdash atomic.load(Ordering) : T}$$
 
 **代码示例**:
+
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::thread;
@@ -348,6 +357,7 @@ $$ResourceLimit = (resource: ResourceType, soft: usize, hard: usize)$$
 **证明**: 通过RAII模式和Drop trait保证。
 
 **代码示例**:
+
 ```rust
 use std::process::Command;
 
@@ -434,4 +444,4 @@ $$Memory(P_1) \cap Memory(P_2) = \emptyset$$
 
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  
-**状态**: 完成 
+**状态**: 完成

@@ -37,11 +37,13 @@
 ### 2.1 控制流图模型
 
 **定义 2.1** (控制流图): 控制流图是一个有向图 $G = (V, E)$，其中：
+
 - $V$ 是基本块集合
 - $E$ 是控制流边集合
 - 每条边表示可能的执行路径
 
 **定义 2.2** (执行状态): 执行状态 $\sigma$ 是一个三元组 $(env, store, pc)$，其中：
+
 - $env$ 是环境映射
 - $store$ 是存储映射
 - $pc$ 是程序计数器
@@ -74,6 +76,7 @@ $$\frac{\sigma \Downarrow e_1 \Rightarrow true \quad \sigma \Downarrow e_2 \Righ
 $$\frac{\sigma \Downarrow e_1 \Rightarrow false \quad \sigma \Downarrow e_3 \Rightarrow v}{\sigma \Downarrow if \; e_1 \; \{ e_2 \} \; else \; \{ e_3 \} \Rightarrow v}$$
 
 **定理 3.1** (if表达式类型安全): 若 $\Gamma \vdash if \; e_1 \; \{ e_2 \} \; else \; \{ e_3 \} : \tau$，则：
+
 1. $\Gamma \vdash e_1 : bool$
 2. $\Gamma \vdash e_2 : \tau$
 3. $\Gamma \vdash e_3 : \tau$
@@ -81,6 +84,7 @@ $$\frac{\sigma \Downarrow e_1 \Rightarrow false \quad \sigma \Downarrow e_3 \Rig
 **证明**: 由类型规则直接得出。
 
 **代码示例**:
+
 ```rust
 fn conditional_example(x: i32) -> &'static str {
     if x > 0 {
@@ -111,6 +115,7 @@ $$\frac{exhaustive(\tau, \{p_1, \ldots, p_n\})}{exhaustive(match \; e \; \{ p_1 
 **证明**: 由编译器静态分析保证。
 
 **代码示例**:
+
 ```rust
 enum Message {
     Quit,
@@ -179,6 +184,7 @@ $$for \; x \; in \; e_1 \; \{ e_2 \}$$
 $$\frac{\Gamma \vdash e_1 : Iterator<Item = \tau> \quad \Gamma, x : \tau \vdash e_2 : ()}{\Gamma \vdash for \; x \; in \; e_1 \; \{ e_2 \} : ()}$$
 
 **代码示例**:
+
 ```rust
 fn iteration_example() {
     let numbers = vec![1, 2, 3, 4, 5];
@@ -237,6 +243,7 @@ $$\frac{\Gamma, f : \tau_1 \rightarrow \tau_2, x : \tau_1 \vdash e : \tau_2}{\Ga
 **定理 5.1** (递归终止性): 若递归函数满足终止条件，则其执行会终止。
 
 **代码示例**:
+
 ```rust
 fn factorial(n: u32) -> u32 {
     if n == 0 {
@@ -263,6 +270,7 @@ fn fibonacci(n: u32) -> u32 {
 $$\frac{\Gamma \vdash e : !}{\Gamma \vdash fn \; f() \rightarrow ! \; \{ e \} : () \rightarrow !}$$
 
 **代码示例**:
+
 ```rust
 fn diverging_function() -> ! {
     loop {
@@ -305,6 +313,7 @@ $$\frac{\Gamma \vdash e_1 : Future<Output = \tau>}{\Gamma \vdash e_1.await : \ta
 $$\frac{\sigma \Downarrow e_1 \Rightarrow future \quad future \; completes \; with \; v}{\sigma \Downarrow e_1.await \Rightarrow v}$$
 
 **代码示例**:
+
 ```rust
 use std::future::Future;
 use std::pin::Pin;
@@ -347,10 +356,12 @@ impl Future for MyFuture {
 **证明**: 通过对表达式结构进行归纳。
 
 **基础情况**:
+
 - 若 $e$ 是值，则定理成立
 - 若 $e$ 是变量，则与封闭性矛盾
 
 **归纳情况**:
+
 - 若 $e = e_1(e_2)$，则由归纳假设和函数调用规则
 - 若 $e = if \; e_1 \; \{ e_2 \} \; else \; \{ e_3 \}$，则由条件求值规则
 - 其他情况类似

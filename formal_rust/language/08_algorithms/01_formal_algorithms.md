@@ -81,6 +81,7 @@ struct Context<S: Strategy<T>, T> {
 $$\frac{\Gamma \vdash strategy : Strategy<T>}{\Gamma \vdash Context::new(strategy) : Context<S, T>}$$
 
 **代码示例**:
+
 ```rust
 trait SortStrategy {
     fn sort<T: Ord>(&self, slice: &mut [T]);
@@ -154,6 +155,7 @@ trait Iterator {
 $$\frac{\Gamma \vdash iter : Iterator<Item = T>}{\Gamma \vdash iter.next() : Option<T>}$$
 
 **代码示例**:
+
 ```rust
 struct Range {
     start: usize,
@@ -208,6 +210,7 @@ trait Problem {
 ```
 
 **代码示例**:
+
 ```rust
 struct MergeSortAlgorithm;
 
@@ -250,7 +253,8 @@ impl MergeSortAlgorithm {
 
 **定理 4.1** (快速排序平均复杂度): 快速排序的平均时间复杂度为 $O(n \log n)$。
 
-**证明**: 
+**证明**:
+
 1. 每次分区的时间复杂度为 $O(n)$
 2. 平均情况下，分区将数组分为两个大致相等的部分
 3. 递归深度为 $O(\log n)$
@@ -259,6 +263,7 @@ impl MergeSortAlgorithm {
 **定理 4.2** (归并排序复杂度): 归并排序的时间复杂度为 $O(n \log n)$，空间复杂度为 $O(n)$。
 
 **证明**:
+
 1. 每次归并的时间复杂度为 $O(n)$
 2. 递归深度为 $O(\log n)$
 3. 总时间复杂度为 $O(n \log n)$
@@ -269,6 +274,7 @@ impl MergeSortAlgorithm {
 **定义 4.1** (缓存友好): 算法是缓存友好的，如果其内存访问模式具有良好的局部性。
 
 **代码示例**:
+
 ```rust
 // 缓存友好的矩阵乘法
 fn cache_friendly_matrix_multiply(a: &[f64], b: &[f64], c: &mut [f64], n: usize) {
@@ -311,6 +317,7 @@ unsafe fn simd_vector_add(a: &[f32], b: &[f32], result: &mut [f32]) {
 **定义 4.2** (零拷贝): 零拷贝算法避免不必要的数据复制。
 
 **代码示例**:
+
 ```rust
 use std::io::{self, Read, Write};
 
@@ -340,6 +347,7 @@ fn process_strings(strings: &[String]) -> Vec<usize> {
 ### 5.2 并行排序
 
 **代码示例**:
+
 ```rust
 use std::thread;
 use std::sync::{Arc, Mutex};
@@ -388,6 +396,7 @@ fn merge<T: Ord>(left: &[T], right: &[T]) -> Vec<T> {
 **定义 5.3** (并行归约): 并行归约将数组元素组合为单个值。
 
 **代码示例**:
+
 ```rust
 use rayon::prelude::*;
 
@@ -407,6 +416,7 @@ fn parallel_max<T: Send + Sync + Ord + Copy>(data: &[T]) -> Option<T> {
 **定义 6.1** (搜索问题): 搜索问题是在状态空间中寻找目标状态。
 
 **代码示例**:
+
 ```rust
 trait SearchProblem {
     type State;
@@ -506,6 +516,7 @@ impl<S> std::cmp::Ord for StateWithPriority<S> {
 **定义 6.2** (优化问题): 优化问题是寻找函数的最大值或最小值。
 
 **代码示例**:
+
 ```rust
 trait OptimizationProblem {
     type Solution;
@@ -576,7 +587,8 @@ impl<P: OptimizationProblem> SimulatedAnnealing<P> {
 
 **定理 7.1** (快速排序正确性): 快速排序算法正确排序输入数组。
 
-**证明**: 
+**证明**:
+
 1. 基础情况：长度为0或1的数组已排序
 2. 归纳步骤：假设子数组正确排序
 3. 分区操作确保pivot在正确位置
@@ -587,6 +599,7 @@ impl<P: OptimizationProblem> SimulatedAnnealing<P> {
 **定理 7.2** (归并排序复杂度): 归并排序的时间复杂度为 $O(n \log n)$。
 
 **证明**:
+
 1. 递归树高度为 $O(\log n)$
 2. 每层归并时间为 $O(n)$
 3. 总时间复杂度为 $O(n \log n)$
@@ -619,4 +632,4 @@ impl<P: OptimizationProblem> SimulatedAnnealing<P> {
 
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  
-**状态**: 完成 
+**状态**: 完成
