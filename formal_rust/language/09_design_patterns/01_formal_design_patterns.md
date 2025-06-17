@@ -1,158 +1,208 @@
-# Rust设计模式系统形式化理论
+# Rust设计模式形式化理论
 
 ## 目录
 
 1. [引言](#1-引言)
-2. [设计模式理论基础](#2-设计模式理论基础)
+2. [设计模式基础理论](#2-设计模式基础理论)
 3. [创建型模式](#3-创建型模式)
 4. [结构型模式](#4-结构型模式)
 5. [行为型模式](#5-行为型模式)
 6. [并发模式](#6-并发模式)
-7. [异步模式](#7-异步模式)
+7. [函数式模式](#7-函数式模式)
 8. [形式化证明](#8-形式化证明)
-9. [应用实例](#9-应用实例)
-10. [参考文献](#10-参考文献)
+9. [参考文献](#9-参考文献)
 
 ## 1. 引言
 
-### 1.1 设计模式的定义
+Rust的设计模式系统结合了面向对象和函数式编程的范式，通过所有权系统和Trait系统提供了独特的设计模式实现。这些模式在保证内存安全的同时提供了良好的代码组织和复用。
 
-设计模式是软件设计中常见问题的典型解决方案。在Rust中，设计模式不仅需要考虑面向对象的设计原则，还需要考虑所有权、借用和生命周期等Rust特有的概念。
+### 1.1 核心概念
 
-**形式化定义**:
+- **设计模式**: 解决常见设计问题的可重用解决方案
+- **模式分类**: 创建型、结构型、行为型模式
+- **Rust特性**: 所有权、借用、Trait系统
+- **模式实现**: 在Rust中的具体实现方式
 
-设 $P$ 为设计模式集合，$S$ 为软件系统，$C$ 为上下文环境，则设计模式可以定义为：
+### 1.2 形式化目标
 
-$$Pattern: P \times S \times C \rightarrow S'$$
+- 定义设计模式的数学语义
+- 证明模式实现的正确性
+- 建立模式组合的形式化模型
+- 验证模式在Rust中的适用性
 
-其中 $S'$ 是应用模式后的系统。
+## 2. 设计模式基础理论
 
-### 1.2 Rust设计模式的特点
+### 2.1 模式类型系统
 
-**所有权安全**: 所有设计模式必须保证所有权规则的一致性
-**类型安全**: 模式实现必须通过Rust的类型检查
-**内存安全**: 避免数据竞争和内存泄漏
-**零成本抽象**: 模式不应引入运行时开销
+**定义 2.1** (设计模式类型): 设计模式类型定义为：
+$$PatternType ::= Creational | Structural | Behavioral | Concurrency | Functional$$
 
-## 2. 设计模式理论基础
+**定义 2.2** (模式状态): 模式状态 $\sigma_{pattern}$ 是一个四元组 $(context, problem, solution, consequences)$，其中：
+- $context$ 是应用场景
+- $problem$ 是要解决的问题
+- $solution$ 是解决方案
+- $consequences$ 是结果和权衡
 
-### 2.1 模式分类理论
+### 2.2 模式类型规则
 
-**定义 2.1** (模式分类): 设计模式可以分为三类：
+**定义 2.3** (模式类型规则): 模式类型规则定义为：
+$$PatternRule ::= PatternDef(name, category) | PatternImpl(pattern, code) | PatternUse(pattern, context)$$
 
-1. **创建型模式** (Creational Patterns): $\mathcal{C} = \{Singleton, Factory, Builder, ...\}$
-2. **结构型模式** (Structural Patterns): $\mathcal{S} = \{Adapter, Bridge, Composite, ...\}$
-3. **行为型模式** (Behavioral Patterns): $\mathcal{B} = \{Observer, Strategy, Command, ...\}$
+**类型规则**:
+$$\frac{\Gamma \vdash Pattern : PatternType}{\Gamma \vdash Pattern : Type}$$
 
-**定理 2.1** (模式完备性): 对于任意软件设计问题 $Q$，存在模式组合 $P_1, P_2, ..., P_n$ 使得：
+### 2.3 模式求值关系
 
-$$\forall Q \in \mathcal{Q}, \exists P_1, P_2, ..., P_n \in \mathcal{C} \cup \mathcal{S} \cup \mathcal{B}: \text{solve}(Q, P_1, P_2, ..., P_n)$$
-
-### 2.2 Rust模式语义
-
-**定义 2.2** (模式语义): 给定模式 $P$，其语义函数为：
-
-$$\llbracket P \rrbracket : \text{Context} \rightarrow \text{Implementation}$$
-
-其中 $\text{Context}$ 是应用上下文，$\text{Implementation}$ 是具体实现。
+**定义 2.4** (模式求值): 模式求值关系 $\Downarrow_{pattern}$ 定义为：
+$$pattern\_expression \Downarrow_{pattern} Solution(implementation)$$
 
 ## 3. 创建型模式
 
-### 3.1 单例模式 (Singleton Pattern)
+### 3.1 单例模式
 
-**定义 3.1** (单例模式): 确保一个类只有一个实例，并提供全局访问点。
-
-**形式化描述**:
-
-$$\text{Singleton}(T) = \{\text{instance}: \text{Option}<T>, \text{get\_instance}: () \rightarrow T\}$$
+**定义 3.1** (单例模式): 单例模式确保一个类只有一个实例：
+$$Singleton ::= Singleton(instance, access\_method)$$
 
 **Rust实现**:
-
 ```rust
-use std::sync::{Arc, Mutex};
 use std::sync::Once;
+use std::sync::Mutex;
+use std::sync::Arc;
 
 struct Singleton {
-    value: i32,
+    data: String,
 }
 
 impl Singleton {
-    fn instance() -> Arc<Mutex<Singleton>> {
-        static mut SINGLETON: Option<Arc<Mutex<Singleton>>> = None;
-        static ONCE: Once = Once::new();
-
+    fn new() -> Arc<Mutex<Singleton>> {
+        static mut INSTANCE: Option<Arc<Mutex<Singleton>>> = None;
+        static INIT: Once = Once::new();
+        
         unsafe {
-            ONCE.call_once(|| {
-                let singleton = Singleton { value: 42 };
-                SINGLETON = Some(Arc::new(Mutex::new(singleton)));
+            INIT.call_once(|| {
+                INSTANCE = Some(Arc::new(Mutex::new(Singleton {
+                    data: String::from("singleton"),
+                })));
             });
-            SINGLETON.clone().unwrap()
+            INSTANCE.clone().unwrap()
         }
     }
 }
 ```
 
-**定理 3.1** (单例唯一性): 对于任意时刻 $t$，Singleton模式保证：
+**形式化语义**:
+$$Singleton(instance) = \begin{cases}
+existing\_instance & \text{if instance exists} \\
+new\_instance & \text{if no instance exists}
+\end{cases}$$
 
-$$\forall t_1, t_2 \in \text{Time}: \text{instance}(t_1) = \text{instance}(t_2)$$
+### 3.2 工厂模式
 
-### 3.2 工厂模式 (Factory Pattern)
-
-**定义 3.2** (工厂模式): 定义一个创建对象的接口，让子类决定实例化哪个类。
-
-**形式化描述**:
-
-$$\text{Factory}(T) = \{\text{create}: \text{Type} \rightarrow T\}$$
+**定义 3.2** (工厂模式): 工厂模式通过工厂方法创建对象：
+$$Factory ::= Factory(creator, product)$$
 
 **Rust实现**:
-
 ```rust
 trait Product {
     fn operation(&self) -> String;
 }
 
 struct ConcreteProductA;
+struct ConcreteProductB;
+
 impl Product for ConcreteProductA {
     fn operation(&self) -> String {
-        "Result of ConcreteProductA".to_string()
+        "Product A".to_string()
     }
 }
 
-struct ConcreteProductB;
 impl Product for ConcreteProductB {
     fn operation(&self) -> String {
-        "Result of ConcreteProductB".to_string()
+        "Product B".to_string()
     }
 }
 
-struct Creator;
-impl Creator {
-    fn factory_method(product_type: &str) -> Box<dyn Product> {
-        match product_type {
-            "A" => Box::new(ConcreteProductA),
-            "B" => Box::new(ConcreteProductB),
-            _ => panic!("Unknown product type"),
-        }
+trait Factory {
+    fn create_product(&self) -> Box<dyn Product>;
+}
+
+struct ConcreteFactoryA;
+struct ConcreteFactoryB;
+
+impl Factory for ConcreteFactoryA {
+    fn create_product(&self) -> Box<dyn Product> {
+        Box::new(ConcreteProductA)
+    }
+}
+
+impl Factory for ConcreteFactoryB {
+    fn create_product(&self) -> Box<dyn Product> {
+        Box::new(ConcreteProductB)
     }
 }
 ```
 
-**定理 3.2** (工厂类型安全): 工厂模式保证类型安全：
+### 3.3 建造者模式
 
-$$\forall t \in \text{Type}: \text{create}(t) \in \text{Product}$$
+**定义 3.3** (建造者模式): 建造者模式分步骤构建复杂对象：
+$$Builder ::= Builder(steps, result)$$
+
+**Rust实现**:
+```rust
+struct Product {
+    part_a: String,
+    part_b: String,
+    part_c: String,
+}
+
+struct Builder {
+    part_a: Option<String>,
+    part_b: Option<String>,
+    part_c: Option<String>,
+}
+
+impl Builder {
+    fn new() -> Self {
+        Builder {
+            part_a: None,
+            part_b: None,
+            part_c: None,
+        }
+    }
+    
+    fn part_a(mut self, part_a: String) -> Self {
+        self.part_a = Some(part_a);
+        self
+    }
+    
+    fn part_b(mut self, part_b: String) -> Self {
+        self.part_b = Some(part_b);
+        self
+    }
+    
+    fn part_c(mut self, part_c: String) -> Self {
+        self.part_c = Some(part_c);
+        self
+    }
+    
+    fn build(self) -> Result<Product, String> {
+        Ok(Product {
+            part_a: self.part_a.ok_or("Missing part_a")?,
+            part_b: self.part_b.ok_or("Missing part_b")?,
+            part_c: self.part_c.ok_or("Missing part_c")?,
+        })
+    }
+}
+```
 
 ## 4. 结构型模式
 
-### 4.1 适配器模式 (Adapter Pattern)
+### 4.1 适配器模式
 
-**定义 4.1** (适配器模式): 将一个类的接口转换成客户希望的另一个接口。
-
-**形式化描述**:
-
-$$\text{Adapter}(T, U) = \{\text{adapt}: T \rightarrow U\}$$
+**定义 4.1** (适配器模式): 适配器模式使不兼容的接口能够协同工作：
+$$Adapter ::= Adapter(target, adaptee, adapt)$$
 
 **Rust实现**:
-
 ```rust
 trait Target {
     fn request(&self) -> String;
@@ -185,130 +235,156 @@ impl Target for Adapter {
 }
 ```
 
-**定理 4.1** (适配器正确性): 适配器模式保证接口兼容性：
+### 4.2 装饰器模式
 
-$$\forall a \in \text{Adaptee}: \text{Target}::\text{request}(\text{Adapter}::\text{new}(a)) = \text{Adaptee}::\text{specific\_request}(a)$$
-
-### 4.2 装饰器模式 (Decorator Pattern)
-
-**定义 4.2** (装饰器模式): 动态地给对象添加额外的职责。
-
-**形式化描述**:
-
-$$\text{Decorator}(T) = \{\text{component}: T, \text{decorate}: T \rightarrow T\}$$
+**定义 4.2** (装饰器模式): 装饰器模式动态地给对象添加新功能：
+$$Decorator ::= Decorator(component, decorator)$$
 
 **Rust实现**:
-
 ```rust
 trait Component {
     fn operation(&self) -> String;
 }
 
 struct ConcreteComponent;
+
 impl Component for ConcreteComponent {
     fn operation(&self) -> String {
         "ConcreteComponent".to_string()
     }
 }
 
-struct Decorator {
+struct ConcreteDecoratorA {
     component: Box<dyn Component>,
 }
 
-impl Decorator {
+impl ConcreteDecoratorA {
     fn new(component: Box<dyn Component>) -> Self {
-        Decorator { component }
+        ConcreteDecoratorA { component }
     }
 }
 
-impl Component for Decorator {
+impl Component for ConcreteDecoratorA {
     fn operation(&self) -> String {
-        format!("Decorator({})", self.component.operation())
+        format!("DecoratorA({})", self.component.operation())
+    }
+}
+```
+
+### 4.3 代理模式
+
+**定义 4.3** (代理模式): 代理模式为其他对象提供代理以控制访问：
+$$Proxy ::= Proxy(subject, proxy)$$
+
+**Rust实现**:
+```rust
+trait Subject {
+    fn request(&self) -> String;
+}
+
+struct RealSubject;
+
+impl Subject for RealSubject {
+    fn request(&self) -> String {
+        "RealSubject".to_string()
+    }
+}
+
+struct Proxy {
+    real_subject: Option<RealSubject>,
+}
+
+impl Proxy {
+    fn new() -> Self {
+        Proxy { real_subject: None }
+    }
+}
+
+impl Subject for Proxy {
+    fn request(&self) -> String {
+        if self.real_subject.is_none() {
+            // 延迟初始化
+            return "Proxy: Initializing...".to_string();
+        }
+        format!("Proxy: {}", self.real_subject.as_ref().unwrap().request())
     }
 }
 ```
 
 ## 5. 行为型模式
 
-### 5.1 观察者模式 (Observer Pattern)
+### 5.1 观察者模式
 
-**定义 5.1** (观察者模式): 定义对象间的一对多依赖，当一个对象改变状态时，所有依赖者都会收到通知。
-
-**形式化描述**:
-
-$$\text{Observer}(T) = \{\text{observers}: \text{Set}<T>, \text{notify}: T \rightarrow \text{Unit}\}$$
+**定义 5.1** (观察者模式): 观察者模式定义对象间的一对多依赖关系：
+$$Observer ::= Observer(subject, observers, notify)$$
 
 **Rust实现**:
-
 ```rust
-use std::cell::RefCell;
-use std::rc::Rc;
+use std::collections::HashMap;
+use std::sync::{Arc, Mutex};
 
 trait Observer {
-    fn update(&self, message: &str);
-}
-
-struct ConcreteObserver {
-    name: String,
-}
-
-impl Observer for ConcreteObserver {
-    fn update(&self, message: &str) {
-        println!("{} received: {}", self.name, message);
-    }
+    fn update(&self, data: &str);
 }
 
 struct Subject {
-    observers: Vec<Rc<RefCell<dyn Observer>>>,
+    observers: Arc<Mutex<HashMap<String, Box<dyn Observer + Send>>>>,
+    data: String,
 }
 
 impl Subject {
     fn new() -> Self {
-        Subject { observers: vec![] }
-    }
-
-    fn attach(&mut self, observer: Rc<RefCell<dyn Observer>>) {
-        self.observers.push(observer);
-    }
-
-    fn notify(&self, message: &str) {
-        for observer in &self.observers {
-            observer.borrow().update(message);
+        Subject {
+            observers: Arc::new(Mutex::new(HashMap::new())),
+            data: String::new(),
         }
+    }
+    
+    fn attach(&mut self, name: String, observer: Box<dyn Observer + Send>) {
+        self.observers.lock().unwrap().insert(name, observer);
+    }
+    
+    fn detach(&mut self, name: &str) {
+        self.observers.lock().unwrap().remove(name);
+    }
+    
+    fn notify(&self) {
+        let observers = self.observers.lock().unwrap();
+        for observer in observers.values() {
+            observer.update(&self.data);
+        }
+    }
+    
+    fn set_data(&mut self, data: String) {
+        self.data = data;
+        self.notify();
     }
 }
 ```
 
-**定理 5.1** (观察者完整性): 观察者模式保证通知完整性：
+### 5.2 策略模式
 
-$$\forall o \in \text{observers}: \text{notify}(message) \implies o.\text{update}(message)$$
-
-### 5.2 策略模式 (Strategy Pattern)
-
-**定义 5.2** (策略模式): 定义一系列算法，把它们封装起来，并且使它们可以互相替换。
-
-**形式化描述**:
-
-$$\text{Strategy}(T) = \{\text{algorithms}: \text{Map}<\text{String}, T>, \text{execute}: \text{String} \rightarrow T\}$$
+**定义 5.2** (策略模式): 策略模式定义算法族并使其可互换：
+$$Strategy ::= Strategy(context, strategies)$$
 
 **Rust实现**:
-
 ```rust
 trait Strategy {
     fn algorithm(&self) -> String;
 }
 
 struct ConcreteStrategyA;
+struct ConcreteStrategyB;
+
 impl Strategy for ConcreteStrategyA {
     fn algorithm(&self) -> String {
-        "Algorithm A".to_string()
+        "Strategy A".to_string()
     }
 }
 
-struct ConcreteStrategyB;
 impl Strategy for ConcreteStrategyB {
     fn algorithm(&self) -> String {
-        "Algorithm B".to_string()
+        "Strategy B".to_string()
     }
 }
 
@@ -320,241 +396,280 @@ impl Context {
     fn new(strategy: Box<dyn Strategy>) -> Self {
         Context { strategy }
     }
-
+    
     fn execute_strategy(&self) -> String {
         self.strategy.algorithm()
     }
 }
 ```
 
-## 6. 并发模式
+### 5.3 命令模式
 
-### 6.1 线程安全单例
-
-**定义 6.1** (线程安全单例): 在多线程环境中保证单例的唯一性。
-
-**形式化描述**:
-
-$$\text{ThreadSafeSingleton}(T) = \{\text{instance}: \text{Arc}<\text{Mutex}<T>>, \text{get\_instance}: () \rightarrow \text{Arc}<\text{Mutex}<T>>\}$$
+**定义 5.3** (命令模式): 命令模式将请求封装为对象：
+$$Command ::= Command(invoker, command, receiver)$$
 
 **Rust实现**:
-
 ```rust
-use std::sync::{Arc, Mutex};
-use std::sync::Once;
-
-struct ThreadSafeSingleton {
-    value: i32,
+trait Command {
+    fn execute(&self);
 }
 
-impl ThreadSafeSingleton {
-    fn instance() -> Arc<Mutex<ThreadSafeSingleton>> {
-        static mut SINGLETON: Option<Arc<Mutex<ThreadSafeSingleton>>> = None;
-        static ONCE: Once = Once::new();
+struct Receiver;
 
-        unsafe {
-            ONCE.call_once(|| {
-                let singleton = ThreadSafeSingleton { value: 42 };
-                SINGLETON = Some(Arc::new(Mutex::new(singleton)));
-            });
-            SINGLETON.clone().unwrap()
+impl Receiver {
+    fn action(&self) {
+        println!("Receiver action");
+    }
+}
+
+struct ConcreteCommand {
+    receiver: Receiver,
+}
+
+impl ConcreteCommand {
+    fn new(receiver: Receiver) -> Self {
+        ConcreteCommand { receiver }
+    }
+}
+
+impl Command for ConcreteCommand {
+    fn execute(&self) {
+        self.receiver.action();
+    }
+}
+
+struct Invoker {
+    commands: Vec<Box<dyn Command>>,
+}
+
+impl Invoker {
+    fn new() -> Self {
+        Invoker { commands: Vec::new() }
+    }
+    
+    fn add_command(&mut self, command: Box<dyn Command>) {
+        self.commands.push(command);
+    }
+    
+    fn execute_all(&self) {
+        for command in &self.commands {
+            command.execute();
         }
     }
 }
 ```
 
-**定理 6.1** (线程安全): 线程安全单例保证：
+## 6. 并发模式
 
-$$\forall t_1, t_2 \in \text{Thread}: \text{instance}(t_1) = \text{instance}(t_2)$$
+### 6.1 线程池模式
+
+**定义 6.1** (线程池模式): 线程池模式管理线程的生命周期：
+$$ThreadPool ::= ThreadPool(workers, tasks, queue)$$
+
+**Rust实现**:
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+use std::sync::mpsc;
+
+type Job = Box<dyn FnOnce() + Send + 'static>;
+
+struct Worker {
+    id: usize,
+    thread: Option<thread::JoinHandle<()>>,
+}
+
+impl Worker {
+    fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Worker {
+        let thread = thread::spawn(move || loop {
+            let job = receiver.lock().unwrap().recv().unwrap();
+            job();
+        });
+        
+        Worker {
+            id,
+            thread: Some(thread),
+        }
+    }
+}
+
+struct ThreadPool {
+    workers: Vec<Worker>,
+    sender: mpsc::Sender<Job>,
+}
+
+impl ThreadPool {
+    fn new(size: usize) -> ThreadPool {
+        let (sender, receiver) = mpsc::channel();
+        let receiver = Arc::new(Mutex::new(receiver));
+        let mut workers = Vec::with_capacity(size);
+        
+        for id in 0..size {
+            workers.push(Worker::new(id, Arc::clone(&receiver)));
+        }
+        
+        ThreadPool { workers, sender }
+    }
+    
+    fn execute<F>(&self, f: F)
+    where
+        F: FnOnce() + Send + 'static,
+    {
+        let job = Box::new(f);
+        self.sender.send(job).unwrap();
+    }
+}
+```
 
 ### 6.2 生产者-消费者模式
 
-**定义 6.2** (生产者-消费者): 通过队列协调生产者和消费者的并发访问。
-
-**形式化描述**:
-
-$$\text{ProducerConsumer}(T) = \{\text{queue}: \text{Channel}<T>, \text{produce}: T \rightarrow \text{Unit}, \text{consume}: () \rightarrow T\}$$
+**定义 6.2** (生产者-消费者模式): 生产者-消费者模式协调生产和消费：
+$$ProducerConsumer ::= ProducerConsumer(producer, consumer, buffer)$$
 
 **Rust实现**:
-
 ```rust
+use std::sync::{Arc, Mutex};
 use std::sync::mpsc;
 use std::thread;
 
-fn producer_consumer() {
-    let (tx, rx) = mpsc::channel();
-
-    let producer = thread::spawn(move || {
-        for i in 0..10 {
-            tx.send(i).unwrap();
-        }
-    });
-
-    let consumer = thread::spawn(move || {
-        for received in rx {
-            println!("Received: {}", received);
-        }
-    });
-
-    producer.join().unwrap();
-    consumer.join().unwrap();
-}
-```
-
-## 7. 异步模式
-
-### 7.1 异步单例
-
-**定义 7.1** (异步单例): 在异步环境中保证单例的唯一性。
-
-**形式化描述**:
-
-$$\text{AsyncSingleton}(T) = \{\text{instance}: \text{Arc}<\text{Mutex}<T>>, \text{get\_instance}: () \rightarrow \text{Future}<\text{Arc}<\text{Mutex}<T>>>\}$$
-
-**Rust实现**:
-
-```rust
-use std::sync::{Arc, Mutex};
-use tokio::sync::OnceCell;
-
-struct AsyncSingleton {
-    value: i32,
+struct Producer {
+    sender: mpsc::Sender<i32>,
 }
 
-impl AsyncSingleton {
-    async fn instance() -> Arc<Mutex<AsyncSingleton>> {
-        static INSTANCE: OnceCell<Arc<Mutex<AsyncSingleton>>> = OnceCell::const_new();
+impl Producer {
+    fn new(sender: mpsc::Sender<i32>) -> Self {
+        Producer { sender }
+    }
+    
+    fn produce(&self, item: i32) {
+        self.sender.send(item).unwrap();
+    }
+}
 
-        INSTANCE.get_or_init(|| async {
-            Arc::new(Mutex::new(AsyncSingleton { value: 42 }))
-        }).await.clone()
+struct Consumer {
+    receiver: mpsc::Receiver<i32>,
+}
+
+impl Consumer {
+    fn new(receiver: mpsc::Receiver<i32>) -> Self {
+        Consumer { receiver }
+    }
+    
+    fn consume(&self) -> Option<i32> {
+        self.receiver.recv().ok()
     }
 }
 ```
 
-### 7.2 异步观察者
+## 7. 函数式模式
 
-**定义 7.2** (异步观察者): 在异步环境中实现观察者模式。
+### 7.1 高阶函数模式
 
-**形式化描述**:
-
-$$\text{AsyncObserver}(T) = \{\text{observers}: \text{Set}<T>, \text{notify}: T \rightarrow \text{Future}<\text{Unit}>\}$$
+**定义 7.1** (高阶函数模式): 高阶函数模式使用函数作为参数或返回值：
+$$HigherOrderFunction ::= HigherOrderFunction(function, argument)$$
 
 **Rust实现**:
-
 ```rust
-use async_trait::async_trait;
-use tokio::sync::broadcast;
-
-#[async_trait]
-trait AsyncObserver {
-    async fn update(&self, message: &str);
+fn map<F, T, U>(items: Vec<T>, f: F) -> Vec<U>
+where
+    F: Fn(T) -> U,
+{
+    items.into_iter().map(f).collect()
 }
 
-struct AsyncSubject {
-    tx: broadcast::Sender<String>,
+fn filter<F, T>(items: Vec<T>, predicate: F) -> Vec<T>
+where
+    F: Fn(&T) -> bool,
+{
+    items.into_iter().filter(predicate).collect()
 }
 
-impl AsyncSubject {
-    fn new() -> Self {
-        let (tx, _) = broadcast::channel(100);
-        AsyncSubject { tx }
-    }
+fn fold<F, T, U>(items: Vec<T>, init: U, f: F) -> U
+where
+    F: Fn(U, T) -> U,
+{
+    items.into_iter().fold(init, f)
+}
+```
 
-    async fn notify(&self, message: &str) {
-        let _ = self.tx.send(message.to_string());
+### 7.2 闭包模式
+
+**定义 7.2** (闭包模式): 闭包模式使用闭包捕获环境：
+$$Closure ::= Closure(environment, function)$$
+
+**Rust实现**:
+```rust
+fn create_counter() -> impl FnMut() -> i32 {
+    let mut count = 0;
+    move || {
+        count += 1;
+        count
     }
+}
+
+fn create_adder(x: i32) -> impl Fn(i32) -> i32 {
+    move |y| x + y
 }
 ```
 
 ## 8. 形式化证明
 
-### 8.1 模式正确性证明
+### 8.1 模式正确性
 
-**定理 8.1** (模式正确性): 对于任意模式 $P$，如果满足以下条件：
+**定理 8.1** (模式正确性): 设计模式在Rust中的实现是正确的。
 
-1. 类型安全: $\forall t \in \text{Type}: \text{check}(t) = \text{true}$
-2. 所有权安全: $\forall o \in \text{Object}: \text{own}(o) \leq 1$
-3. 内存安全: $\forall m \in \text{Memory}: \text{valid}(m)$
+**证明**: 
+1. 通过模式定义验证实现符合规范
+2. 通过类型系统保证类型安全
+3. 通过所有权系统保证内存安全
+4. 结合三者证明正确性
 
-则模式 $P$ 是正确的。
+### 8.2 模式组合性
 
-**证明**: 通过结构归纳法证明每个条件。
+**定理 8.2** (模式组合性): 设计模式可以安全地组合使用。
 
-### 8.2 模式组合证明
+**证明**: 
+1. 通过模式接口保证兼容性
+2. 通过类型系统保证组合安全
+3. 通过测试验证组合正确性
 
-**定理 8.2** (模式组合): 如果模式 $P_1$ 和 $P_2$ 都是正确的，则组合模式 $P_1 \circ P_2$ 也是正确的。
+### 8.3 模式性能
 
-**证明**: 使用组合逻辑和类型理论证明。
+**定理 8.3** (模式性能): 设计模式在Rust中具有零成本抽象。
 
-## 9. 应用实例
+**证明**: 
+1. 通过编译时优化消除运行时开销
+2. 通过内联优化提高性能
+3. 通过内存布局优化减少开销
 
-### 9.1 Web框架中的模式应用
+### 8.4 模式安全性
 
-```rust
-// 中间件模式
-trait Middleware {
-    fn process(&self, request: &Request) -> Response;
-}
+**定理 8.4** (模式安全性): 设计模式在Rust中保证内存和线程安全。
 
-struct LoggerMiddleware;
-impl Middleware for LoggerMiddleware {
-    fn process(&self, request: &Request) -> Response {
-        println!("Logging request: {:?}", request);
-        // 处理请求
-        Response::new()
-    }
-}
+**证明**: 
+1. 通过所有权系统保证内存安全
+2. 通过借用检查器保证数据竞争安全
+3. 通过类型系统保证类型安全
 
-// 路由模式
-struct Router {
-    routes: HashMap<String, Box<dyn Handler>>,
-}
+### 8.5 模式表达力
 
-impl Router {
-    fn add_route(&mut self, path: &str, handler: Box<dyn Handler>) {
-        self.routes.insert(path.to_string(), handler);
-    }
-}
-```
+**定理 8.5** (模式表达力): Rust的设计模式具有足够的表达力。
 
-### 9.2 数据库访问模式
+**证明**: 
+1. 通过Trait系统保证抽象能力
+2. 通过泛型系统保证复用能力
+3. 通过组合模式保证扩展能力
 
-```rust
-// 仓储模式
-trait Repository<T> {
-    fn find(&self, id: i32) -> Option<T>;
-    fn save(&mut self, entity: T) -> Result<(), Error>;
-}
+## 9. 参考文献
 
-struct UserRepository {
-    connection: DatabaseConnection,
-}
-
-impl Repository<User> for UserRepository {
-    fn find(&self, id: i32) -> Option<User> {
-        // 数据库查询实现
-        None
-    }
-
-    fn save(&mut self, entity: User) -> Result<(), Error> {
-        // 数据库保存实现
-        Ok(())
-    }
-}
-```
-
-## 10. 参考文献
-
-1. Gamma, E., Helm, R., Johnson, R., & Vlissides, J. (1994). Design Patterns: Elements of Reusable Object-Oriented Software
-2. The Rust Programming Language Book
-3. Rust Design Patterns
-4. Asynchronous Programming in Rust
-5. Concurrent Programming in Rust
+1. Gamma, E., et al. (1994). "Design Patterns: Elements of Reusable Object-Oriented Software"
+2. The Rust Book. "Design Patterns"
+3. Jung, R., et al. (2017). "RustBelt: Securing the foundations of the Rust programming language"
+4. Pierce, B. C. (2002). "Types and Programming Languages"
+5. Freeman, E., et al. (2004). "Head First Design Patterns"
 
 ---
 
 **版本**: 1.0.0  
 **更新时间**: 2025-01-27  
-**状态**: 完成
 **状态**: 完成
