@@ -38,6 +38,7 @@ Rust的并发编程系统基于以下理论：
 所有权是Rust内存管理的核心概念，确保每个值只有一个所有者。
 
 形式化表示：
+
 ```math
 \text{Own}(x) \triangleq \forall y \neq x. \neg \text{Own}(y)
 ```
@@ -54,6 +55,7 @@ Rust的并发编程系统基于以下理论：
 借用是对值的临时引用，不转移所有权。
 
 形式化表示：
+
 ```math
 \text{Borrow}(r, x) \triangleq \exists t. \text{Ref}(r, x, t) \land \text{Own}(x)
 ```
@@ -61,11 +63,13 @@ Rust的并发编程系统基于以下理论：
 其中$r$是引用，$x$是被借用的值，$t$是借用时间。
 
 **借用规则**：
+
 1. **不可变借用**：可以有多个不可变借用同时存在
 2. **可变借用**：只能有一个可变借用存在
 3. **借用与所有权互斥**：不能同时拥有所有权和可变借用
 
 形式化表示：
+
 ```math
 \text{BorrowMut}(r, x) \Rightarrow \neg \text{Own}(x) \land \neg \exists r'. \text{BorrowMut}(r', x)
 ```
@@ -76,6 +80,7 @@ Rust的并发编程系统基于以下理论：
 一个类型$T$是线程安全的，如果它可以安全地在多个线程间共享。
 
 形式化表示：
+
 ```math
 \text{ThreadSafe}(T) \triangleq \forall t_1, t_2. \text{SafeShare}(T, t_1, t_2)
 ```
@@ -84,6 +89,7 @@ Rust的并发编程系统基于以下理论：
 一个类型$T$是线程安全的，当且仅当它实现了`Send`和`Sync` trait。
 
 **证明**：
+
 - `Send` trait确保类型可以安全地移动到其他线程
 - `Sync` trait确保类型可以安全地在多个线程间共享引用
 - 两者结合确保类型在并发环境中的安全性
@@ -105,6 +111,7 @@ let handle = thread::spawn(|| {
 ```
 
 **线程安全保证**：
+
 ```rust
 // 线程安全的类型
 let data = Arc::new(Mutex::new(42));
@@ -132,6 +139,7 @@ let counter = Mutex::new(0);
 ```
 
 **形式化表示**：
+
 ```math
 \text{Mutex}(m, x) \triangleq \forall t. \text{Access}(t, x) \Rightarrow \text{Locked}(m, t)
 ```
@@ -172,6 +180,7 @@ counter.fetch_add(1, Ordering::SeqCst);
 ```
 
 **原子操作的类型**：
+
 - `Relaxed`：最弱的内存排序
 - `Acquire`：获取语义
 - `Release`：释放语义
@@ -192,16 +201,19 @@ counter.fetch_add(1, Ordering::SeqCst);
 **类型推导规则**：
 
 1. **线程创建**：
+
 ```math
 \frac{\Gamma \vdash e : \tau \quad \tau : \text{Send}}{\Gamma \vdash \text{thread::spawn}(e) : \text{JoinHandle}(\tau)}
 ```
 
 2. **互斥锁**：
+
 ```math
 \frac{\Gamma \vdash e : \tau}{\Gamma \vdash \text{Mutex::new}(e) : \text{Mutex}(\tau)}
 ```
 
 3. **原子操作**：
+
 ```math
 \frac{\Gamma \vdash e : \tau \quad \tau : \text{Atomic}}{\Gamma \vdash \text{AtomicUsize::new}(e) : \text{AtomicUsize}}
 ```
@@ -212,11 +224,13 @@ counter.fetch_add(1, Ordering::SeqCst);
 Rust的内存模型基于C++11内存模型，定义了内存操作的顺序关系。
 
 **内存排序**：
+
 ```math
 \text{Ordering} ::= \text{Relaxed} \mid \text{Acquire} \mid \text{Release} \mid \text{AcqRel} \mid \text{SeqCst}
 ```
 
 **内存操作语义**：
+
 ```math
 \text{AtomicOp}(op, addr, val, ord) \triangleq \text{MemoryOp}(op, addr, val) \land \text{Ordering}(ord)
 ```
@@ -227,6 +241,7 @@ Rust的内存模型基于C++11内存模型，定义了内存操作的顺序关�
 数据竞争发生在两个或多个线程同时访问同一内存位置，且至少有一个是写入操作。
 
 形式化表示：
+
 ```math
 \text{DataRace}(t_1, t_2, addr) \triangleq \text{Concurrent}(t_1, t_2) \land \text{Access}(t_1, addr) \land \text{Access}(t_2, addr) \land \text{Write}(t_1, addr)
 ```
@@ -236,6 +251,7 @@ Rust的内存模型基于C++11内存模型，定义了内存操作的顺序关�
 
 **证明**：
 通过所有权系统和类型系统，Rust在编译时检查所有内存访问，确保：
+
 1. 每个值只有一个所有者
 2. 可变借用是独占的
 3. 共享数据通过安全的同步原语访问
@@ -249,6 +265,7 @@ Rust的内存模型基于C++11内存模型，定义了内存操作的顺序关�
 
 **证明**：
 Rust的类型系统在编译时检查所有类型，确保：
+
 1. 所有变量都有正确的类型
 2. 所有函数调用都有正确的参数类型
 3. 所有返回值都有正确的类型
@@ -260,6 +277,7 @@ Rust的类型系统在编译时检查所有类型，确保：
 
 **证明**：
 通过所有权系统和借用检查器，Rust确保：
+
 1. 没有悬空指针
 2. 没有双重释放
 3. 没有内存泄漏
@@ -271,6 +289,7 @@ Rust的类型系统在编译时检查所有类型，确保：
 如果类型实现了`Send`和`Sync` trait，那么它可以安全地在多线程环境中使用。
 
 **证明**：
+
 - `Send` trait确保类型可以安全地移动到其他线程
 - `Sync` trait确保类型可以安全地在多个线程间共享引用
 - 两者结合确保类型在并发环境中的安全性
@@ -280,6 +299,7 @@ Rust的类型系统在编译时检查所有类型，确保：
 ### 6.1 并行计算
 
 **并行算法**：
+
 ```rust
 use rayon::prelude::*;
 
@@ -290,6 +310,7 @@ let sum: i32 = numbers.par_iter().sum();
 ### 6.2 服务器编程
 
 **并发服务器**：
+
 ```rust
 use std::net::TcpListener;
 use std::thread;
@@ -308,6 +329,7 @@ for stream in listener.incoming() {
 ### 6.3 数据处理
 
 **并发数据处理**：
+
 ```rust
 use std::sync::mpsc;
 
@@ -334,6 +356,7 @@ for received in rx {
 Rust的并发抽象不会引入运行时开销。
 
 **证明**：
+
 - 所有权检查在编译时进行
 - 同步原语直接映射到系统调用
 - 没有垃圾收集器开销
@@ -344,6 +367,7 @@ Rust的并发抽象不会引入运行时开销。
 Rust的并发程序内存占用与手动编写的并发程序相同。
 
 **证明**：
+
 - 没有运行时系统开销
 - 静态内存分配
 - 精确的内存管理
@@ -351,6 +375,7 @@ Rust的并发程序内存占用与手动编写的并发程序相同。
 ### 7.3 性能优化
 
 **性能优化技术**：
+
 1. **无锁数据结构**：避免锁的开销
 2. **内存池**：减少内存分配开销
 3. **缓存友好的数据布局**：提高缓存命中率
@@ -361,6 +386,7 @@ Rust的并发程序内存占用与手动编写的并发程序相同。
 Rust的并发编程系统提供了强大而安全的并发编程模型。通过形式化理论的分析，我们建立了并发编程的数学基础，证明了其正确性和安全性。
 
 关键特性：
+
 - **所有权模型**：通过编译时检查防止数据竞争
 - **类型系统**：保证线程安全和内存安全
 - **零成本抽象**：不引入运行时开销
@@ -383,4 +409,4 @@ Rust的并发编程系统提供了强大而安全的并发编程模型。通过�
 
 4. **形式化方法**
    - Pierce, B. C. (2002). "Types and programming languages"
-   - Milner, R. (1999). "Communicating and mobile systems: the π-calculus" 
+   - Milner, R. (1999). "Communicating and mobile systems: the π-calculus"
