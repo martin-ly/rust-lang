@@ -69,6 +69,7 @@ Rust工作流系统的优势：
 $$\mathcal{W} = (S, A, T, s_0, F, E, C)$$
 
 其中：
+
 - $S$ 是状态集合
 - $A$ 是活动集合
 - $T$ 是转换函数
@@ -118,6 +119,7 @@ pub trait Activity {
 $$\text{WorkflowStateMachine} = (S, \Sigma, \delta, s_0, F)$$
 
 其中：
+
 - $S$ 是状态集合
 - $\Sigma$ 是输入字母表（事件）
 - $\delta: S \times \Sigma \rightarrow S$ 是状态转移函数
@@ -128,10 +130,12 @@ $$\text{WorkflowStateMachine} = (S, \Sigma, \delta, s_0, F)$$
 
 状态转移可以形式化为：
 
-$$\delta(s, e) = \begin{cases}
+$$
+\delta(s, e) = \begin{cases}
 s' & \text{if } \text{valid}(s, e) \\
 \text{error} & \text{otherwise}
-\end{cases}$$
+\end{cases}
+$$
 
 其中 $\text{valid}(s, e)$ 表示在状态 $s$ 下事件 $e$ 是否有效。
 
@@ -149,11 +153,11 @@ impl WorkflowStateMachine {
         if let Some(next_state) = self.transitions
             .get(&self.current_state)
             .and_then(|transitions| transitions.get(&event)) {
-            
+
             if let Some(action) = self.actions.get(&self.current_state) {
                 action.execute(&mut self.context)?;
             }
-            
+
             self.current_state = *next_state;
             Ok(())
         } else {
@@ -172,6 +176,7 @@ impl WorkflowStateMachine {
 $$G = (V, E)$$
 
 其中：
+
 - $V$ 是顶点集合（状态/活动）
 - $E$ 是边集合（转换/依赖关系）
 
@@ -212,7 +217,7 @@ pub struct WorkflowFuture {
 
 impl Future for WorkflowFuture {
     type Output = Result<WorkflowResult, WorkflowError>;
-    
+
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
         // 实现工作流执行逻辑
         todo!()
@@ -272,10 +277,12 @@ pub struct AsyncState {
 
 异步状态转移可以形式化为：
 
-$$\delta_{async}(s, f) = \begin{cases}
+$$
+\delta_{async}(s, f) = \begin{cases}
 s' & \text{if } f \text{ completes successfully} \\
 \text{error} & \text{if } f \text{ fails}
-\end{cases}$$
+\end{cases}
+$$
 
 #### 3.2.3 异步状态机实现
 
@@ -470,7 +477,7 @@ pub trait WorkflowType {
     type Output;
     type State;
     type Activity;
-    
+
     fn define_states(&self) -> Vec<Self::State>;
     fn define_activities(&self) -> Vec<Self::Activity>;
 }
@@ -510,7 +517,7 @@ pub trait ActivityType {
     type Output;
     type Error;
     type Constraints;
-    
+
     fn validate_constraints(&self, input: &Self::Input) -> Result<(), Self::Error>;
 }
 ```
@@ -837,6 +844,7 @@ pub struct DynamicAdjuster {
 对于所有有限工作流，如果不存在循环依赖，则工作流必定终止。
 
 **证明**：
+
 1. 工作流是有向无环图
 2. 有向无环图必定有拓扑排序
 3. 按拓扑排序执行必定终止
@@ -847,6 +855,7 @@ pub struct DynamicAdjuster {
 如果工作流的所有活动都满足前置条件，则工作流执行结果一致。
 
 **证明**：
+
 1. 活动满足前置条件
 2. 状态转换是确定性的
 3. 因此执行结果一致
@@ -859,6 +868,7 @@ pub struct DynamicAdjuster {
 在异步网络模型中，如果网络分区最终恢复，则系统达到最终一致性。
 
 **证明**：
+
 1. 使用反熵协议
 2. 网络分区恢复后传播更新
 3. 因此达到最终一致性
@@ -869,6 +879,7 @@ pub struct DynamicAdjuster {
 如果事件 $e_1$ 因果先于事件 $e_2$，则所有节点都按此顺序处理事件。
 
 **证明**：
+
 1. 使用向量时钟
 2. 向量时钟保证因果顺序
 3. 因此保证因果一致性
@@ -881,6 +892,7 @@ pub struct DynamicAdjuster {
 工作流的并发执行具有线性扩展性。
 
 **证明**：
+
 1. 活动间无数据竞争
 2. 使用无锁数据结构
 3. 因此具有线性扩展性
@@ -891,6 +903,7 @@ pub struct DynamicAdjuster {
 工作流执行延迟与活动数量成正比。
 
 **证明**：
+
 1. 活动执行时间有界
 2. 调度开销常数
 3. 因此延迟线性增长
@@ -904,12 +917,12 @@ use async_trait::async_trait;
 use std::collections::HashMap;
 use tokio::sync::mpsc;
 
-#[async_trait]
+# [async_trait]
 pub trait Workflow {
     type Input;
     type Output;
     type Error;
-    
+
     async fn execute(&self, input: Self::Input) -> Result<Self::Output, Self::Error>;
     fn get_states(&self) -> Vec<State>;
     fn get_activities(&self) -> Vec<Box<dyn Activity>>;
@@ -929,11 +942,11 @@ impl WorkflowEngine {
             event_store,
         }
     }
-    
+
     pub fn register_workflow<W: Workflow + 'static>(&mut self, id: WorkflowId, workflow: W) {
         self.workflows.insert(id, Box::new(workflow));
     }
-    
+
     pub async fn start_workflow<I, O, E>(
         &mut self,
         id: WorkflowId,
@@ -951,7 +964,7 @@ impl WorkflowEngine {
             Err(WorkflowError::WorkflowNotFound)
         }
     }
-    
+
     pub async fn get_status(&self, handle: &WorkflowHandle) -> Result<WorkflowStatus, WorkflowError> {
         self.executor.get_status(handle).await
     }
@@ -972,7 +985,7 @@ impl WorkflowExecutor {
             status_receiver,
         }
     }
-    
+
     pub async fn execute<W: Workflow>(
         &mut self,
         workflow: &W,
@@ -980,25 +993,25 @@ impl WorkflowExecutor {
     ) -> Result<WorkflowHandle, WorkflowError> {
         let workflow_id = WorkflowId::new();
         let status_sender = self.status_sender.clone();
-        
+
         let task = tokio::spawn(async move {
             let result = workflow.execute(input).await;
             let status = match result {
                 Ok(_) => WorkflowStatus::Completed,
                 Err(_) => WorkflowStatus::Failed,
             };
-            
+
             if let Err(e) = status_sender.send(status).await {
                 eprintln!("Failed to send status: {}", e);
             }
-            
+
             result
         });
-        
+
         self.tasks.insert(workflow_id.clone(), task);
         Ok(WorkflowHandle { id: workflow_id })
     }
-    
+
     pub async fn get_status(&self, handle: &WorkflowHandle) -> Result<WorkflowStatus, WorkflowError> {
         // 实现状态查询逻辑
         todo!()
@@ -1028,20 +1041,20 @@ impl DistributedWorkflowEngine {
             consensus: Box::new(RaftConsensus::new()),
         }
     }
-    
+
     pub async fn add_node(&mut self, node_id: NodeId, info: NodeInfo) {
         self.nodes.insert(node_id, info);
         self.consensus.add_node(node_id).await;
     }
-    
+
     pub async fn start_workflow(&mut self, workflow: Box<dyn Workflow>) -> Result<WorkflowId, WorkflowError> {
         // 1. 提议工作流开始
         let proposal = Proposal::StartWorkflow(workflow);
         self.consensus.propose(proposal).await?;
-        
+
         // 2. 等待共识
         let decision = self.consensus.decide().await?;
-        
+
         // 3. 执行工作流
         match decision {
             Decision::StartWorkflow(workflow_id) => {
@@ -1051,7 +1064,7 @@ impl DistributedWorkflowEngine {
             _ => Err(WorkflowError::ConsensusError),
         }
     }
-    
+
     pub async fn sync_state(&mut self) -> Result<(), WorkflowError> {
         self.state_manager.sync().await
     }
@@ -1071,16 +1084,16 @@ impl DistributedStateManager {
             event_store: Box::new(InMemoryEventStore::new()),
         }
     }
-    
+
     pub async fn start_workflow(&mut self, id: WorkflowId, workflow: Box<dyn Workflow>) -> Result<(), WorkflowError> {
         let event = Event::WorkflowStarted { id: id.clone() };
         self.event_store.append(vec![event]).await?;
-        
+
         let mut state = self.local_state.write().await;
         state.add_workflow(id, workflow);
         Ok(())
     }
-    
+
     pub async fn sync(&self) -> Result<(), WorkflowError> {
         // 实现状态同步逻辑
         todo!()
@@ -1094,7 +1107,7 @@ impl DistributedStateManager {
 use serde::{Deserialize, Serialize};
 use std::collections::VecDeque;
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+# [derive(Debug, Clone, Serialize, Deserialize)]
 pub enum WorkflowEvent {
     WorkflowStarted { id: WorkflowId },
     ActivityStarted { workflow_id: WorkflowId, activity_id: ActivityId },
@@ -1117,7 +1130,7 @@ impl EventSourcedWorkflowEngine {
             workflows: HashMap::new(),
         }
     }
-    
+
     pub async fn start_workflow<W: Workflow>(
         &mut self,
         id: WorkflowId,
@@ -1126,15 +1139,15 @@ impl EventSourcedWorkflowEngine {
     ) -> Result<(), WorkflowError> {
         // 1. 存储工作流定义
         self.workflows.insert(id.clone(), Box::new(workflow));
-        
+
         // 2. 记录开始事件
         let event = WorkflowEvent::WorkflowStarted { id: id.clone() };
         self.event_store.append(vec![event]).await?;
-        
+
         // 3. 执行工作流
         self.execute_workflow(id, input).await
     }
-    
+
     async fn execute_workflow<W: Workflow>(
         &mut self,
         id: WorkflowId,
@@ -1142,11 +1155,11 @@ impl EventSourcedWorkflowEngine {
     ) -> Result<(), WorkflowError> {
         // 1. 重建工作流状态
         let state = self.rebuild_state(&id).await?;
-        
+
         // 2. 执行工作流
         let workflow = self.workflows.get(&id).unwrap();
         let result = workflow.execute(input).await;
-        
+
         // 3. 记录结果事件
         let event = match result {
             Ok(output) => WorkflowEvent::WorkflowCompleted {
@@ -1158,11 +1171,11 @@ impl EventSourcedWorkflowEngine {
                 error: e.to_string(),
             },
         };
-        
+
         self.event_store.append(vec![event]).await?;
         result
     }
-    
+
     async fn rebuild_state(&self, workflow_id: &WorkflowId) -> Result<WorkflowState, WorkflowError> {
         // 1. 尝试从快照恢复
         if let Some(snapshot) = self.snapshots.get_latest(workflow_id).await? {
@@ -1171,19 +1184,19 @@ impl EventSourcedWorkflowEngine {
                 .await?;
             return Ok(self.replay_events(snapshot.state, events));
         }
-        
+
         // 2. 从头重放所有事件
         let events = self.event_store.read(workflow_id, 0, u64::MAX).await?;
         Ok(self.replay_events(WorkflowState::new(), events))
     }
-    
+
     fn replay_events(&self, mut state: WorkflowState, events: Vec<Event>) -> WorkflowState {
         for event in events {
             state = self.apply_event(state, event);
         }
         state
     }
-    
+
     fn apply_event(&self, mut state: WorkflowState, event: Event) -> WorkflowState {
         match event.data {
             WorkflowEvent::WorkflowStarted { id } => {
@@ -1218,25 +1231,25 @@ impl SnapshotStore {
             max_snapshots: 10,
         }
     }
-    
+
     pub async fn create_snapshot(&mut self, workflow_id: WorkflowId, state: WorkflowState) -> Result<(), SnapshotError> {
         let snapshot = Snapshot {
             state,
             timestamp: chrono::Utc::now(),
             version: self.get_next_version(&workflow_id),
         };
-        
+
         let snapshots = self.snapshots.entry(workflow_id).or_insert_with(VecDeque::new);
         snapshots.push_back(snapshot);
-        
+
         // 保持快照数量限制
         while snapshots.len() > self.max_snapshots {
             snapshots.pop_front();
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn get_latest(&self, workflow_id: &WorkflowId) -> Result<Option<Snapshot>, SnapshotError> {
         if let Some(snapshots) = self.snapshots.get(workflow_id) {
             Ok(snapshots.back().cloned())
@@ -1244,7 +1257,7 @@ impl SnapshotStore {
             Ok(None)
         }
     }
-    
+
     fn get_next_version(&self, workflow_id: &WorkflowId) -> u64 {
         if let Some(snapshots) = self.snapshots.get(workflow_id) {
             snapshots.back().map(|s| s.version + 1).unwrap_or(0)
@@ -1286,15 +1299,15 @@ Rust工作流系统的优势在于：
 
 2. Lamport, L. (1978). Time, clocks, and the ordering of events in a distributed system. Communications of the ACM, 21(7), 558-565.
 
-3. Fowler, M. (2005). Event Sourcing. https://martinfowler.com/eaaDev/EventSourcing.html
+3. Fowler, M. (2005). Event Sourcing. <https://martinfowler.com/eaaDev/EventSourcing.html>
 
 4. Matsakis, N. D., & Klock, F. S. (2014). The Rust language. ACM SIGAda Ada Letters, 34(3), 103-104.
 
 5. Jung, R., et al. (2017). RustBelt: Securing the foundations of the Rust programming language. POPL 2018.
 
-6. Tokio Contributors. (2021). Tokio: An asynchronous runtime for Rust. https://tokio.rs/
+6. Tokio Contributors. (2021). Tokio: An asynchronous runtime for Rust. <https://tokio.rs/>
 
-7. Temporal Contributors. (2021). Temporal: Durable execution for distributed applications. https://temporal.io/
+7. Temporal Contributors. (2021). Temporal: Durable execution for distributed applications. <https://temporal.io/>
 
-8. Cadence Contributors. (2021). Cadence: A distributed, scalable, durable, and highly available orchestration engine. https://cadenceworkflow.io/
-</rewritten_file> 
+8. Cadence Contributors. (2021). Cadence: A distributed, scalable, durable, and highly available orchestration engine. <https://cadenceworkflow.io/>
+</rewritten_file>

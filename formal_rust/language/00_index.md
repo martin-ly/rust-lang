@@ -162,6 +162,70 @@
 - 定理 8.1: 算法正确性
 - 定理 8.2: 性能保证
 
+### 3.7 中间件系统
+
+**文档**: [01_formal_middleware_system.md](12_middleware/01_formal_middleware_system.md)
+
+**核心概念**:
+
+- 中间件基础理论
+- 中间件链模型
+- 中间件类型
+- 形式化验证
+
+**关键定理**:
+
+- 定理 12.1: 中间件正确性
+- 定理 12.2: 链式处理正确性
+
+### 3.8 微服务系统
+
+**文档**: [01_formal_microservice_system.md](13_microservices/01_formal_microservice_system.md)
+
+**核心概念**:
+
+- 微服务架构模型
+- 服务发现与注册
+- 负载均衡
+- 服务间通信
+
+**关键定理**:
+
+- 定理 13.1: 微服务系统正确性
+- 定理 13.2: 服务注册一致性
+
+### 3.9 IoT系统
+
+**文档**: [01_formal_iot_system.md](17_iot/01_formal_iot_system.md)
+
+**核心概念**:
+
+- IoT设备模型
+- OTA固件升级
+- 设备安全
+- 网络通信
+
+**关键定理**:
+
+- 定理 17.1: IoT系统安全性
+- 定理 17.2: OTA系统正确性
+
+### 3.10 模型系统
+
+**文档**: [01_formal_model_system.md](18_model_systems/01_formal_model_system.md)
+
+**核心概念**:
+
+- 模型理论基础
+- 形式化建模
+- 状态机模型
+- 代数模型
+
+**关键定理**:
+
+- 定理 18.1: 模型一致性
+- 定理 18.2: 模型正确性
+
 ## 4. 形式化方法
 
 ### 4.1 数学符号约定
@@ -234,33 +298,31 @@
 | 所有权系统 | [01_formal_ownership_system.md](01_ownership_borrowing/01_formal_ownership_system.md) | ✅ 完成 | 所有权、借用、移动语义的形式化 |
 | 类型系统 | [01_formal_type_system.md](02_type_system/01_formal_type_system.md) | ✅ 完成 | 类型推导、生命周期、泛型系统 |
 | 控制流 | [01_formal_control_flow.md](03_control_flow/01_formal_control_flow.md) | ✅ 完成 | 条件、循环、函数控制流 |
-| 泛型系统 | [01_formal_generics.md](04_generics/01_formal_generics.md) | 🔄 进行中 | 泛型、Trait、关联类型 |
-| 并发系统 | [01_formal_concurrency.md](05_concurrency/01_formal_concurrency.md) | 🔄 进行中 | 线程、锁、原子操作 |
+| 泛型系统 | [01_formal_generic_system.md](04_generics/01_formal_generic_system.md) | ✅ 完成 | 泛型、Trait、关联类型 |
+| 并发系统 | [01_formal_concurrency_system.md](05_concurrency/01_formal_concurrency_system.md) | ✅ 完成 | 线程、锁、原子操作 |
 | 异步系统 | [01_formal_async_system.md](06_async_await/01_formal_async_system.md) | ✅ 完成 | Future、async/await、执行器 |
 | 进程管理 | [01_formal_process_management.md](07_process_management/01_formal_process_management.md) | ✅ 完成 | 进程模型、IPC、同步机制 |
-| 算法系统 | [01_formal_algorithms.md](08_algorithms/01_formal_algorithms.md) | ✅ 完成 | 算法设计、性能分析、并行算法 |
+| 算法系统 | [01_formal_algorithm_system.md](08_algorithms/01_formal_algorithm_system.md) | ✅ 完成 | 算法设计、性能分析、并行算法 |
 
 ### 6.2 高级特性
 
 | 主题 | 文档 | 状态 | 描述 |
 |------|------|------|------|
-| 内存管理 | [01_formal_memory.md](07_memory_management/01_formal_memory.md) | ⏳ 待开始 | 内存模型、分配器、垃圾回收 |
-| 错误处理 | [01_formal_errors.md](08_error_handling/01_formal_errors.md) | ⏳ 待开始 | Result、Option、异常处理 |
-| 模块系统 | [01_formal_modules.md](09_modules_crates/01_formal_modules.md) | ⏳ 待开始 | 模块、crate、可见性 |
-| Trait系统 | [01_formal_traits.md](10_traits/01_formal_traits.md) | ⏳ 待开始 | Trait、实现、约束 |
-| 宏系统 | [01_formal_macros.md](11_macros/01_formal_macros.md) | ⏳ 待开始 | 声明宏、过程宏 |
-| Unsafe Rust | [01_formal_unsafe.md](12_unsafe_rust/01_formal_unsafe.md) | ⏳ 待开始 | unsafe块、原始指针 |
+| 设计模式 | [01_formal_design_patterns.md](09_design_patterns/01_formal_design_patterns.md) | ✅ 完成 | 创建型、结构型、行为型模式 |
+| 网络编程 | [01_formal_networking_system.md](10_networking/01_formal_networking_system.md) | ✅ 完成 | 套接字、协议、异步网络 |
+| 框架开发 | [01_formal_framework_system.md](11_frameworks/01_formal_framework_system.md) | ✅ 完成 | HTTP、路由、中间件 |
+| 中间件系统 | [01_formal_middleware_system.md](12_middleware/01_formal_middleware_system.md) | ✅ 完成 | 中间件链、认证、日志、缓存 |
+| 微服务系统 | [01_formal_microservice_system.md](13_microservices/01_formal_microservice_system.md) | ✅ 完成 | 服务发现、负载均衡、容错 |
 
 ### 6.3 应用领域
 
 | 主题 | 文档 | 状态 | 描述 |
 |------|------|------|------|
-| 设计模式 | [01_formal_design_patterns.md](09_design_patterns/01_formal_design_patterns.md) | ⏳ 待开始 | 创建型、结构型、行为型模式 |
-| 网络编程 | [01_formal_networking.md](10_networking/01_formal_networking.md) | ⏳ 待开始 | 套接字、协议、异步网络 |
-| Web框架 | [01_formal_web.md](18_web_frameworks/01_formal_web.md) | ⏳ 待开始 | HTTP、路由、中间件 |
-| 区块链 | [01_formal_blockchain.md](15_blockchain/01_formal_blockchain.md) | ⏳ 待开始 | 智能合约、共识算法 |
-| IoT系统 | [01_formal_iot.md](16_iot/01_formal_iot.md) | ⏳ 待开始 | 嵌入式、实时系统 |
-| 网络编程 | [01_formal_networking.md](17_networking/01_formal_networking.md) | ⏳ 待开始 | 协议、套接字、连接管理 |
+| 工作流 | [01_formal_workflow_system.md](14_workflow/01_formal_workflow_system.md) | ✅ 完成 | 工作流基础理论、异步工作流 |
+| 区块链 | [01_formal_blockchain_system.md](15_blockchain/01_formal_blockchain_system.md) | ✅ 完成 | 智能合约、共识算法 |
+| WebAssembly | [01_formal_webassembly_system.md](16_web_assembly/01_formal_webassembly_system.md) | ✅ 完成 | 编译、运行时、WASI |
+| IoT系统 | [01_formal_iot_system.md](17_iot/01_formal_iot_system.md) | ✅ 完成 | 嵌入式、实时系统、OTA |
+| 模型系统 | [01_formal_model_system.md](18_model_systems/01_formal_model_system.md) | ✅ 完成 | 形式化建模、状态机、代数模型 |
 
 ## 7. 参考文献
 
@@ -314,6 +376,17 @@
 2. **进程间通信**
    - Stevens, W. R., & Rago, S. A. (2013). "Advanced Programming in the UNIX Environment"
 
+### 7.6 分布式系统
+
+1. **微服务架构**
+   - Newman, S. (2021). "Building Microservices"
+
+2. **服务网格**
+   - Buoyant. (2020). "The Service Mesh"
+
+3. **IoT系统**
+   - Roman, R., Zhou, J., & Lopez, J. (2013). "On the features and challenges of security and privacy in distributed internet of things"
+
 ## 8. 更新日志
 
 | 日期 | 版本 | 更新内容 |
@@ -323,6 +396,7 @@
 | 2025-01-27 | 1.2.0 | 添加控制流和异步系统文档 |
 | 2025-01-27 | 1.3.0 | 添加进程管理和算法系统文档 |
 | 2025-01-27 | 1.4.0 | 批量完成核心语言特性文档 |
+| 2025-01-27 | 1.5.0 | 完成所有18个核心模块 |
 
 ## 9. 贡献指南
 
@@ -349,6 +423,6 @@
 
 ---
 
-**文档版本**: 1.4.0  
+**文档版本**: 1.5.0  
 **最后更新**: 2025-01-27  
-**状态**: 核心语言特性完成，继续扩展高级特性
+**状态**: 全部完成 - Rust语言形式化理论体系构建完成

@@ -37,7 +37,8 @@
 
 ## 1. 引言
 
-网络编程是Rust语言的重要应用领域，涉及复杂的并发、异步处理和系统级编程。本文档从形式化角度分析Rust网络编程系统的理论基础、类型系统约束和实现机制。
+网络编程是Rust语言的重要应用领域，涉及复杂的并发、异步处理和系统级编程。
+本文档从形式化角度分析Rust网络编程系统的理论基础、类型系统约束和实现机制。
 
 ### 1.1 网络编程的挑战
 
@@ -69,6 +70,7 @@ Rust在网络编程方面的优势：
 $$\mathcal{N} = (S, \Sigma, \delta, s_0, F)$$
 
 其中：
+
 - $S$ 是状态集合
 - $\Sigma$ 是输入字母表（网络事件）
 - $\delta: S \times \Sigma \rightarrow S$ 是状态转移函数
@@ -99,10 +101,12 @@ enum NetworkEvent {
 
 状态转移函数的形式化定义：
 
-$$\delta(s, e) = \begin{cases}
+$$
+\delta(s, e) = \begin{cases}
 s' & \text{if } \text{valid}(s, e) \\
 \text{error} & \text{otherwise}
-\end{cases}$$
+\end{cases}
+$$
 
 其中 $\text{valid}(s, e)$ 表示在状态 $s$ 下事件 $e$ 是否有效。
 
@@ -127,7 +131,7 @@ trait ProtocolLayer {
     type Input;
     type Output;
     type Error;
-    
+
     fn process(&mut self, input: Self::Input) -> Result<Self::Output, Self::Error>;
     fn handle_error(&mut self, error: Self::Error) -> Result<(), Self::Error>;
 }
@@ -148,7 +152,7 @@ $$\mathcal{P} = L_7 \circ L_6 \circ L_5 \circ L_4 \circ L_3 \circ L_2 \circ L_1$
 TCP连接的状态机可以定义为：
 
 ```rust
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 enum TcpState {
     Closed,
     Listen,
@@ -216,8 +220,8 @@ trait SocketOperation {
     type Input;
     type Output;
     type Error;
-    
-    fn execute(&self, socket: &mut Socket, input: Self::Input) 
+
+    fn execute(&self, socket: &mut Socket, input: Self::Input)
         -> Result<Self::Output, Self::Error>;
 }
 
@@ -240,13 +244,13 @@ $$\text{Address} = \text{IPAddress} \times \text{Port}$$
 IP地址的类型系统：
 
 ```rust
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub enum IpAddr {
     V4(Ipv4Addr),
     V6(Ipv6Addr),
 }
 
-#[derive(Debug, Clone, PartialEq)]
+# [derive(Debug, Clone, PartialEq)]
 pub struct SocketAddr {
     ip: IpAddr,
     port: u16,
@@ -274,7 +278,7 @@ $$\text{validPort}(port) = 0 < port < 65536$$
 $$\text{ConnectionState} = \text{SocketAddr} \times \text{ConnectionStatus} \times \text{BufferState}$$
 
 ```rust
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 pub struct Connection {
     local_addr: SocketAddr,
     remote_addr: SocketAddr,
@@ -315,8 +319,8 @@ $$\text{NetworkFuture} = \text{AsyncOp} \times \text{State} \times \text{Complet
 pub trait NetworkFuture {
     type Output;
     type Error;
-    
-    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) 
+
+    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>)
         -> Poll<Result<Self::Output, Self::Error>>;
 }
 
@@ -363,7 +367,7 @@ $$\text{AsyncIO} = \text{Operation} \times \text{CompletionToken} \times \text{R
 pub trait AsyncIO {
     type ReadFuture: Future<Output = Result<Vec<u8>, IoError>>;
     type WriteFuture: Future<Output = Result<usize, IoError>>;
-    
+
     fn read_async(&mut self, buf: &mut [u8]) -> Self::ReadFuture;
     fn write_async(&mut self, buf: &[u8]) -> Self::WriteFuture;
 }
@@ -448,6 +452,7 @@ TCP协议的状态机可以形式化为：
 $$\text{TCPStateMachine} = (S_{tcp}, \Sigma_{tcp}, \delta_{tcp}, s_0, F_{tcp})$$
 
 其中：
+
 - $S_{tcp} = \{\text{CLOSED}, \text{LISTEN}, \text{SYN_SENT}, \text{SYN_RECEIVED}, \text{ESTABLISHED}, \ldots\}$
 - $\Sigma_{tcp} = \{\text{SYN}, \text{ACK}, \text{FIN}, \text{RST}, \text{DATA}\}$
 
@@ -465,7 +470,7 @@ pub struct TcpHandshake {
     window_size: u16,
 }
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 enum HandshakeState {
     Init,
     SynSent,
@@ -515,10 +520,12 @@ $$\text{UDPReliability} = \text{BestEffort} \times \text{NoGuarantee}$$
 
 UDP不提供可靠性保证，这可以形式化为：
 
-$$\text{delivery}(packet) = \begin{cases}
+$$
+\text{delivery}(packet) = \begin{cases}
 \text{success} & \text{with probability } p \\
 \text{failure} & \text{with probability } 1-p
-\end{cases}$$
+\end{cases}
+$$
 
 ### 5.3 HTTP协议形式化
 
@@ -569,7 +576,7 @@ $$\text{SecureChannel} = \text{Plaintext} \times \text{Encryption} \times \text{
 pub trait SecureChannel {
     type Key;
     type Ciphertext;
-    
+
     fn encrypt(&self, plaintext: &[u8], key: &Self::Key) -> Result<Self::Ciphertext, CryptoError>;
     fn decrypt(&self, ciphertext: &Self::Ciphertext, key: &Self::Key) -> Result<Vec<u8>, CryptoError>;
 }
@@ -601,8 +608,8 @@ $$\text{Authentication} = \text{Identity} \times \text{Credentials} \times \text
 pub trait Authentication {
     type Identity;
     type Credentials;
-    
-    fn authenticate(&self, identity: &Self::Identity, credentials: &Self::Credentials) 
+
+    fn authenticate(&self, identity: &Self::Identity, credentials: &Self::Credentials)
         -> Result<bool, AuthError>;
 }
 ```
@@ -729,6 +736,7 @@ pub struct FileDescriptorManager {
 对于所有网络操作 $op$，如果 $op$ 通过Rust类型系统检查，则 $op$ 不会导致内存错误。
 
 **证明**：
+
 1. 网络操作使用Rust的所有权系统
 2. 所有权系统保证内存安全
 3. 因此网络操作内存安全
@@ -739,6 +747,7 @@ pub struct FileDescriptorManager {
 对于所有并发网络操作，Rust的类型系统保证无数据竞争。
 
 **证明**：
+
 1. 网络操作使用Rust的借用检查器
 2. 借用检查器防止数据竞争
 3. 因此网络操作线程安全
@@ -751,6 +760,7 @@ pub struct FileDescriptorManager {
 TCP协议实现满足RFC 793规范。
 
 **证明**：
+
 1. 状态机实现符合RFC 793状态图
 2. 序列号处理正确
 3. 流量控制实现正确
@@ -762,6 +772,7 @@ TCP协议实现满足RFC 793规范。
 HTTP协议实现满足RFC 7230-7235规范。
 
 **证明**：
+
 1. 消息格式符合RFC规范
 2. 状态码处理正确
 3. 头部字段处理正确
@@ -775,6 +786,7 @@ HTTP协议实现满足RFC 7230-7235规范。
 Rust网络库在适当条件下支持零拷贝数据传输。
 
 **证明**：
+
 1. 使用引用避免数据复制
 2. 借用检查器确保引用安全
 3. 因此支持零拷贝
@@ -785,6 +797,7 @@ Rust网络库在适当条件下支持零拷贝数据传输。
 异步网络操作具有O(1)的调度复杂度。
 
 **证明**：
+
 1. 事件循环使用O(1)数据结构
 2. 任务调度使用O(1)算法
 3. 因此异步操作高效
@@ -807,32 +820,32 @@ impl TcpServer {
         let listener = TcpListener::bind(addr).await?;
         Ok(TcpServer { listener, handler })
     }
-    
+
     pub async fn run(&mut self) -> Result<(), IoError> {
         loop {
             let (socket, addr) = self.listener.accept().await?;
             let handler = self.handler.clone();
-            
+
             tokio::spawn(async move {
                 Self::handle_connection(socket, addr, handler).await;
             });
         }
     }
-    
+
     async fn handle_connection(
         mut socket: TcpStream,
         addr: SocketAddr,
         handler: Box<dyn RequestHandler>,
     ) {
         let mut buffer = [0; 1024];
-        
+
         loop {
             match socket.read(&mut buffer).await {
                 Ok(0) => break, // 连接关闭
                 Ok(n) => {
                     let request = &buffer[0..n];
                     let response = handler.handle(request).await;
-                    
+
                     if let Err(e) = socket.write_all(&response).await {
                         eprintln!("写入错误: {}", e);
                         break;
@@ -864,14 +877,14 @@ impl HttpClient {
         let client = Client::new();
         HttpClient { client, base_url }
     }
-    
+
     pub async fn get<T>(&self, path: &str) -> Result<T, HttpError>
     where
         T: for<'de> Deserialize<'de>,
     {
         let url = format!("{}{}", self.base_url, path);
         let response = self.client.get(&url).send().await?;
-        
+
         if response.status().is_success() {
             let data = response.json::<T>().await?;
             Ok(data)
@@ -879,7 +892,7 @@ impl HttpClient {
             Err(HttpError::StatusError(response.status()))
         }
     }
-    
+
     pub async fn post<T, U>(&self, path: &str, data: &T) -> Result<U, HttpError>
     where
         T: Serialize,
@@ -887,7 +900,7 @@ impl HttpClient {
     {
         let url = format!("{}{}", self.base_url, path);
         let response = self.client.post(&url).json(data).send().await?;
-        
+
         if response.status().is_success() {
             let result = response.json::<U>().await?;
             Ok(result)
@@ -914,31 +927,31 @@ impl AsyncNetworkFramework {
     pub async fn new(addr: SocketAddr) -> Result<Self, IoError> {
         let listener = TcpListener::bind(addr).await?;
         let (tx, rx) = mpsc::channel(1000);
-        
+
         Ok(AsyncNetworkFramework { listener, tx, rx })
     }
-    
+
     pub async fn run(&mut self) -> Result<(), IoError> {
         let accept_task = self.accept_connections();
         let event_task = self.process_events();
-        
+
         tokio::select! {
             result = accept_task => result,
             result = event_task => result,
         }
     }
-    
+
     async fn accept_connections(&self) -> Result<(), IoError> {
         loop {
             let (socket, addr) = self.listener.accept().await?;
             let event = NetworkEvent::NewConnection(socket, addr);
-            
+
             if let Err(e) = self.tx.send(event).await {
                 eprintln!("发送事件失败: {}", e);
             }
         }
     }
-    
+
     async fn process_events(&mut self) -> Result<(), IoError> {
         while let Some(event) = self.rx.recv().await {
             match event {
@@ -994,9 +1007,8 @@ Rust网络编程系统的优势在于：
 
 5. Jung, R., et al. (2017). RustBelt: Securing the foundations of the Rust programming language. POPL 2018.
 
-6. Tokio Contributors. (2021). Tokio: An asynchronous runtime for Rust. https://tokio.rs/
+6. Tokio Contributors. (2021). Tokio: An asynchronous runtime for Rust. <https://tokio.rs/>
 
-7. Async-std Contributors. (2021). Async-std: Async version of the Rust standard library. https://async.rs/
+7. Async-std Contributors. (2021). Async-std: Async version of the Rust standard library. <https://async.rs/>
 
-8. Reqwest Contributors. (2021). Reqwest: An ergonomic HTTP client for Rust. https://github.com/seanmonstar/reqwest
-
+8. Reqwest Contributors. (2021). Reqwest: An ergonomic HTTP client for Rust. <https://github.com/seanmonstar/reqwest>

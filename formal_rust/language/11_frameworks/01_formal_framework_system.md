@@ -73,6 +73,7 @@ Rust框架系统的优势：
 $$\mathcal{F} = (M, I, D, C, L, P)$$
 
 其中：
+
 - $M$ 是模块集合
 - $I$ 是接口集合
 - $D$ 是依赖关系
@@ -878,6 +879,7 @@ $$\text{LifecycleCoordination} = \text{Components} \times \text{Order} \times \t
 对于所有框架操作 $op$，如果 $op$ 通过Rust类型系统检查，则 $op$ 不会导致类型错误。
 
 **证明**：
+
 1. 框架使用Rust的类型系统
 2. Rust类型系统保证类型安全
 3. 因此框架操作类型安全
@@ -888,6 +890,7 @@ $$\text{LifecycleCoordination} = \text{Components} \times \text{Order} \times \t
 对于所有框架操作，Rust的所有权系统保证内存安全。
 
 **证明**：
+
 1. 框架使用Rust的所有权系统
 2. 所有权系统保证内存安全
 3. 因此框架内存安全
@@ -900,6 +903,7 @@ $$\text{LifecycleCoordination} = \text{Components} \times \text{Order} \times \t
 框架的抽象在运行时没有额外开销。
 
 **证明**：
+
 1. 框架使用编译时泛型
 2. 编译器优化消除抽象开销
 3. 因此实现零成本抽象
@@ -910,6 +914,7 @@ $$\text{LifecycleCoordination} = \text{Components} \times \text{Order} \times \t
 框架的并发操作具有线性扩展性。
 
 **证明**：
+
 1. 框架使用无锁数据结构
 2. 并发操作无竞争条件
 3. 因此具有线性扩展性
@@ -922,6 +927,7 @@ $$\text{LifecycleCoordination} = \text{Components} \times \text{Order} \times \t
 框架实现满足其规范要求。
 
 **证明**：
+
 1. 框架有明确的接口规范
 2. 实现符合接口规范
 3. 因此框架正确
@@ -932,6 +938,7 @@ $$\text{LifecycleCoordination} = \text{Components} \times \text{Order} \times \t
 框架组合保持各框架的正确性。
 
 **证明**：
+
 1. 组合使用类型安全的接口
 2. 依赖关系无循环
 3. 因此组合正确
@@ -1271,12 +1278,12 @@ Rust框架系统的优势在于：
 
 3. Jung, R., et al. (2017). RustBelt: Securing the foundations of the Rust programming language. POPL 2018.
 
-4. Serde Contributors. (2021). Serde: Serialization framework for Rust. https://serde.rs/
+4. Serde Contributors. (2021). Serde: Serialization framework for Rust. <https://serde.rs/>
 
-5. Tokio Contributors. (2021). Tokio: An asynchronous runtime for Rust. https://tokio.rs/
+5. Tokio Contributors. (2021). Tokio: An asynchronous runtime for Rust. <https://tokio.rs/>
 
-6. Tracing Contributors. (2021). Tracing: Application-level tracing for Rust. https://tracing.rs/
+6. Tracing Contributors. (2021). Tracing: Application-level tracing for Rust. <https://tracing.rs/>
 
-7. Thiserror Contributors. (2021). Thiserror: derive(Error) for struct and enum error types. https://github.com/dtolnay/thiserror
+7. Thiserror Contributors. (2021). Thiserror: derive(Error) for struct and enum error types. <https://github.com/dtolnay/thiserror>
 
-8. Config Contributors. (2021). Config: Layered configuration system for Rust. https://github.com/mehcode/config-rs 
+8. Config Contributors. (2021). Config: Layered configuration system for Rust. <https://github.com/mehcode/config-rs>
