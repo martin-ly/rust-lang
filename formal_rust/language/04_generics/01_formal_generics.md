@@ -28,6 +28,7 @@
 ### 1.2 数学符号约定
 
 **泛型系统符号**:
+
 - $\alpha, \beta, \gamma$: 类型参数
 - $\tau$: 类型
 - $\Gamma$: 类型环境
@@ -47,6 +48,7 @@
 $$\text{Generic} = \{\text{TypeParam}, \text{Constraint}, \text{Implementation}\}$$
 
 其中:
+
 - $\text{TypeParam}$: 类型参数集合
 - $\text{Constraint}$: 类型约束集合
 - $\text{Implementation}$: 泛型实现集合
@@ -77,6 +79,7 @@ $$\Gamma_g : \text{TypeParam} \rightarrow \mathcal{P}(\text{Constraint})$$
 类型参数是泛型定义中的占位符，表示任意类型。
 
 **语法**:
+
 ```rust
 fn function_name<T>(parameter: T) -> T {
     // 函数体
@@ -97,6 +100,7 @@ $$\frac{\Gamma \vdash e : \forall \alpha. \tau \quad \Gamma \vdash \tau' : \text
 ### 3.3 类型参数推理
 
 **算法 3.1 (类型参数推理)**:
+
 ```rust
 fn infer_type_parameters(expr: &Expr) -> Result<Vec<TypeParam>, TypeError> {
     match expr {
@@ -134,6 +138,7 @@ fn infer_type_parameters(expr: &Expr) -> Result<Vec<TypeParam>, TypeError> {
 泛型约束限制了类型参数必须满足的条件。
 
 **语法**:
+
 ```rust
 fn function_name<T: Trait>(parameter: T) {
     // 函数体
@@ -154,6 +159,7 @@ $$\frac{\Gamma \vdash T : \text{Type} \quad \Gamma \vdash \text{Trait} : \text{T
 ### 4.3 约束推理
 
 **算法 4.1 (约束推理)**:
+
 ```rust
 fn infer_constraints(expr: &Expr) -> Result<Vec<Constraint>, TypeError> {
     match expr {
@@ -178,6 +184,7 @@ fn infer_constraints(expr: &Expr) -> Result<Vec<Constraint>, TypeError> {
 ### 4.4 约束求解
 
 **算法 4.2 (约束求解)**:
+
 ```rust
 fn solve_constraints(constraints: &[Constraint]) -> Result<Substitution, ConstraintError> {
     let mut solver = ConstraintSolver::new();
@@ -208,6 +215,7 @@ fn solve_constraints(constraints: &[Constraint]) -> Result<Substitution, Constra
 泛型函数是可以接受不同类型参数的函数。
 
 **语法**:
+
 ```rust
 fn identity<T>(value: T) -> T {
     value
@@ -228,6 +236,7 @@ $$\frac{\Gamma \vdash f : \forall \alpha. \tau \quad \Gamma \vdash e : \tau' \qu
 ### 5.3 泛型函数推理
 
 **算法 5.1 (泛型函数推理)**:
+
 ```rust
 fn infer_generic_function(fun: &GenericFunction, args: &[Expr]) -> Result<Type, TypeError> {
     let mut env = TypeEnv::new();
@@ -265,6 +274,7 @@ fn infer_generic_function(fun: &GenericFunction, args: &[Expr]) -> Result<Type, 
 泛型结构体是可以包含不同类型字段的结构体。
 
 **语法**:
+
 ```rust
 struct Point<T> {
     x: T,
@@ -281,6 +291,7 @@ $$\text{Point}[\alpha] = \{\text{x}: \alpha, \text{y}: \alpha\}$$
 泛型枚举是可以包含不同类型变体的枚举。
 
 **语法**:
+
 ```rust
 enum Option<T> {
     Some(T),
@@ -297,6 +308,7 @@ $$\text{Option}[\alpha] = \text{Some}(\alpha) \mid \text{None}$$
 泛型类型可以为满足特定约束的类型实现方法。
 
 **语法**:
+
 ```rust
 impl<T> Point<T> {
     fn new(x: T, y: T) -> Self {
@@ -316,6 +328,7 @@ $$\frac{\Gamma, \alpha \vdash \text{impl}[\alpha] \text{ Point}[\alpha]}{\Gamma 
 关联类型是特征内部定义的类型别名。
 
 **语法**:
+
 ```rust
 trait Iterator {
     type Item;
@@ -333,6 +346,7 @@ $$\text{Iterator} = \{\text{Item}: \text{Type}, \text{next}: \text{Self} \righta
 实现特征时，需要为关联类型指定具体类型。
 
 **语法**:
+
 ```rust
 impl Iterator for Counter {
     type Item = u32;
@@ -352,6 +366,7 @@ $$\frac{\Gamma \vdash T : \text{Type} \quad \Gamma \vdash \text{Item} = \tau}{\G
 关联类型可以有自己的约束。
 
 **语法**:
+
 ```rust
 trait Container {
     type Item: Clone + Debug;
@@ -379,6 +394,7 @@ $$\text{HigherOrderType} = \text{Type} \rightarrow \text{Type}$$
 函子是保持结构的高阶类型。
 
 **语法**:
+
 ```rust
 trait Functor<A> {
     type Target<B>;
@@ -398,6 +414,7 @@ $$\text{Functor}[\alpha] = \{\text{Target}[\beta]: \text{Type}, \text{map}: (\al
 单子是具有绑定操作的高阶类型。
 
 **语法**:
+
 ```rust
 trait Monad<A> {
     type Target<B>;
@@ -627,4 +644,4 @@ impl ConstraintSolver {
 
 4. **高阶类型**:
    - Wadler, P. (1992). "The essence of functional programming"
-   - Moggi, E. (1991). "Notions of computation and monads" 
+   - Moggi, E. (1991). "Notions of computation and monads"

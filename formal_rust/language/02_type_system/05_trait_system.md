@@ -26,6 +26,7 @@
 ### 1.2 数学符号约定
 
 **特征系统符号**:
+
 - $\text{Trait}$: 特征类型
 - $\text{Impl}$: 实现关系
 - $\text{Bound}$: 特征约束
@@ -204,6 +205,7 @@ where
 ### 4.3 特征约束推理
 
 **算法 4.1 (特征约束推理)**:
+
 ```rust
 fn infer_trait_bounds(expr: &Expr) -> Result<Vec<TraitBound>, TypeError> {
     match expr {
@@ -294,6 +296,7 @@ fn make_all_sounds(animals: &[Box<dyn Animal>]) {
 特征对象是类型安全的，当且仅当特征满足对象安全条件。
 
 **对象安全条件**:
+
 1. 所有方法都是对象安全的
 2. 特征不包含关联类型
 3. 特征不包含泛型方法
@@ -503,4 +506,4 @@ impl TraitObjectGenerator {
 
 4. **特征约束**:
    - Pierce, B. C. (2002). "Types and programming languages"
-   - Tofte, M., & Milner, R. (1988). "Co-induction in relational semantics" 
+   - Tofte, M., & Milner, R. (1988). "Co-induction in relational semantics"

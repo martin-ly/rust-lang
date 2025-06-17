@@ -18,6 +18,7 @@
 ### 1.1 语法定义
 
 **定义 1.1.1**: match表达式的语法形式
+
 ```
 match_expr ::= match expression { match_arms* }
 match_arms ::= pattern => expression [,]
@@ -32,6 +33,7 @@ guard_pattern ::= pattern if condition
 
 **定义 1.1.2**: match表达式的语义
 match表达式将一个值与一系列模式进行比较，执行第一个匹配成功的分支：
+
 - 按顺序检查每个模式
 - 执行第一个匹配成功的分支
 - 必须穷尽所有可能的值
@@ -44,6 +46,7 @@ match表达式将一个值与一系列模式进行比较，执行第一个匹配
 
 **定义 2.1.1**: 模式（Pattern）
 模式是一个用于解构和匹配值的语法结构，具有以下性质：
+
 - 可以绑定变量
 - 可以解构复合类型
 - 可以包含守卫条件
@@ -128,7 +131,7 @@ fn compute_uncovered(patterns: &[Pattern], value_type: Type) -> Vec<Value> {
                 .iter()
                 .flat_map(|p| extract_enum_variants(p))
                 .collect();
-            
+
             variants
                 .into_iter()
                 .filter(|v| !covered_variants.contains(v))
@@ -138,7 +141,7 @@ fn compute_uncovered(patterns: &[Pattern], value_type: Type) -> Vec<Value> {
         Type::Bool => {
             let has_true = patterns.iter().any(|p| matches_bool(p, true));
             let has_false = patterns.iter().any(|p| matches_bool(p, false));
-            
+
             let mut uncovered = Vec::new();
             if !has_true { uncovered.push(Value::Bool(true)); }
             if !has_false { uncovered.push(Value::Bool(false)); }
@@ -187,17 +190,17 @@ $$\text{typeof}(e_1) = \text{typeof}(e_2) = \ldots = \text{typeof}(e_n)$$
 ```rust
 fn infer_match_type(value_type: Type, arms: &[(Pattern, Expression)]) -> Result<Type, TypeError> {
     let mut arm_types = Vec::new();
-    
+
     for (pattern, expression) in arms {
         // 创建新的类型环境，包含模式绑定的变量
         let mut env = TypeEnvironment::new();
         bind_pattern_variables(pattern, &value_type, &mut env)?;
-        
+
         // 推断分支表达式的类型
         let arm_type = infer_expression_type(expression, &env)?;
         arm_types.push(arm_type);
     }
-    
+
     // 检查所有分支类型是否一致
     let first_type = arm_types.first().ok_or(TypeError::NoArms)?;
     for arm_type in arm_types.iter().skip(1) {
@@ -205,7 +208,7 @@ fn infer_match_type(value_type: Type, arms: &[(Pattern, Expression)]) -> Result<
             return Err(TypeError::ArmTypeMismatch);
         }
     }
-    
+
     Ok(first_type.clone())
 }
 ```
@@ -403,7 +406,7 @@ fn divide_and_process(a: f64, b: f64) -> Result<String, String> {
         (x, y) if x < 0.0 && y < 0.0 => Ok("两个负数相除".to_string()),
         (x, y) => Ok(format!("结果: {}", x / y)),
     };
-    
+
     result
 }
 
@@ -487,4 +490,4 @@ match表达式是Rust模式匹配系统的核心，提供了强大、安全、�
 ---
 
 **版本**: 1.0  
-**更新时间**: 2025-01-27 
+**更新时间**: 2025-01-27

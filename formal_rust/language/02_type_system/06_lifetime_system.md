@@ -27,6 +27,7 @@
 ### 1.2 数学符号约定
 
 **生命周期符号**:
+
 - $\alpha, \beta, \gamma$: 生命周期参数
 - $\text{'a}, \text{'b}, \text{'c}$: 生命周期标注
 - $\text{'static}$: 静态生命周期
@@ -49,6 +50,7 @@ $$\text{Lifetime} = \{\text{'a}, \text{'b}, \text{'c}, \ldots\} \cup \{\text{'st
 生命周期约束描述引用之间的包含关系。
 
 **约束类型**:
+
 1. **包含约束**: $\text{'a} \subseteq \text{'b}$ 表示 $\text{'a}$ 的生命周期包含在 $\text{'b}$ 中
 2. **相等约束**: $\text{'a} \equiv \text{'b}$ 表示两个生命周期相等
 3. **静态约束**: $\text{'a} \subseteq \text{'static}$ 对所有生命周期 $\text{'a}$ 成立
@@ -156,6 +158,7 @@ fn longest<'a: 'b, 'b>(x: &'a str, y: &'b str) -> &'a str {
 生命周期约束有多种类型，用于不同的场景。
 
 **约束分类**:
+
 1. **包含约束**: $\text{'a} \subseteq \text{'b}$
 2. **相等约束**: $\text{'a} \equiv \text{'b}$
 3. **静态约束**: $\text{'a} \subseteq \text{'static}$
@@ -164,6 +167,7 @@ fn longest<'a: 'b, 'b>(x: &'a str, y: &'b str) -> &'a str {
 ### 4.2 约束推理
 
 **算法 4.1 (约束推理)**:
+
 ```rust
 fn infer_lifetime_constraints(expr: &Expr) -> Result<Vec<LifetimeConstraint>, LifetimeError> {
     match expr {
@@ -194,6 +198,7 @@ fn infer_lifetime_constraints(expr: &Expr) -> Result<Vec<LifetimeConstraint>, Li
 ### 4.3 约束求解
 
 **算法 4.2 (约束求解)**:
+
 ```rust
 fn solve_lifetime_constraints(constraints: &[LifetimeConstraint]) -> Result<LifetimeEnv, LifetimeError> {
     let mut env = LifetimeEnv::new();
@@ -224,6 +229,7 @@ fn solve_lifetime_constraints(constraints: &[LifetimeConstraint]) -> Result<Life
 生命周期推理基于一组形式化规则。
 
 **推理规则**:
+
 1. **包含传递性**: $\text{'a} \subseteq \text{'b} \land \text{'b} \subseteq \text{'c} \implies \text{'a} \subseteq \text{'c}$
 2. **包含自反性**: $\text{'a} \subseteq \text{'a}$
 3. **静态包含**: $\text{'a} \subseteq \text{'static}$ 对所有 $\text{'a}$
@@ -232,6 +238,7 @@ fn solve_lifetime_constraints(constraints: &[LifetimeConstraint]) -> Result<Life
 ### 5.2 推理算法
 
 **算法 5.1 (生命周期推理)**:
+
 ```rust
 fn infer_lifetimes(expr: &Expr) -> Result<LifetimeEnv, LifetimeError> {
     match expr {
@@ -268,6 +275,7 @@ fn infer_lifetimes(expr: &Expr) -> Result<LifetimeEnv, LifetimeError> {
 ### 5.3 推理优化
 
 **算法 5.2 (推理优化)**:
+
 ```rust
 fn optimize_lifetime_inference(env: &mut LifetimeEnv) -> Result<(), LifetimeError> {
     // 移除冗余约束
@@ -291,6 +299,7 @@ fn optimize_lifetime_inference(env: &mut LifetimeEnv) -> Result<(), LifetimeErro
 Rust编译器可以自动推断某些生命周期，减少显式标注的需求。
 
 **省略规则**:
+
 1. **单参数函数**: `fn foo(x: &i32) -> &i32` 等价于 `fn foo<'a>(x: &'a i32) -> &'a i32`
 2. **多参数函数**: `fn foo(x: &i32, y: &i32) -> &i32` 等价于 `fn foo<'a, 'b>(x: &'a i32, y: &'b i32) -> &'a i32`
 3. **方法**: `fn method(&self) -> &i32` 等价于 `fn method<'a>(&'a self) -> &'a i32`
@@ -298,6 +307,7 @@ Rust编译器可以自动推断某些生命周期，减少显式标注的需求�
 ### 6.2 省略算法
 
 **算法 6.1 (生命周期省略)**:
+
 ```rust
 fn elide_lifetimes(signature: &FnSignature) -> FnSignature {
     let mut new_signature = signature.clone();
@@ -323,6 +333,7 @@ fn elide_lifetimes(signature: &FnSignature) -> FnSignature {
 ### 6.3 省略验证
 
 **算法 6.2 (省略验证)**:
+
 ```rust
 fn validate_elision(signature: &FnSignature) -> Result<bool, LifetimeError> {
     // 检查省略是否合法
@@ -556,4 +567,4 @@ impl LifetimeInferrer {
 
 4. **约束求解**:
    - Tofte, M., & Milner, R. (1988). "Co-induction in relational semantics"
-   - Hindley, J. R. (1969). "The principal type-scheme of an object in combinatory logic" 
+   - Hindley, J. R. (1969). "The principal type-scheme of an object in combinatory logic"

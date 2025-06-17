@@ -56,6 +56,7 @@ fn covariant_types() {
 **定理 1.3.1**: 协变类型构造子保持类型安全。
 
 **证明**:
+
 ```rust
 // 协变的安全性证明
 fn covariant_safety() {
@@ -122,6 +123,7 @@ fn contravariant_types() {
 **定理 2.3.1**: 逆变类型构造子保持类型安全。
 
 **证明**:
+
 ```rust
 // 逆变的安全性证明
 fn contravariant_safety() {
@@ -188,6 +190,7 @@ fn invariant_types() {
 **定理 3.3.1**: 不变性对于可变类型是必要的。
 
 **证明**:
+
 ```rust
 // 不变性的必要性证明
 fn invariance_necessity() {
@@ -377,4 +380,4 @@ fn variance_error_handling() {
 ---
 **最后更新**: 2025-01-27
 **版本**: 1.0.0
-**状态**: 型变系统理论完成 
+**状态**: 型变系统理论完成

@@ -24,6 +24,7 @@
 ### 1.2 数学符号约定
 
 **类型系统符号**:
+
 - $\tau$: 类型
 - $\Gamma$: 类型环境
 - $\vdash$: 类型判断
@@ -32,6 +33,7 @@
 - $\exists$: 存在量词
 
 **生命周期符号**:
+
 - $\alpha$: 生命周期参数
 - $\text{'a}$: 生命周期标注
 - $\text{'static}$: 静态生命周期
@@ -47,6 +49,7 @@
 $$\forall e, \sigma. \Gamma \vdash e : \tau \land e, \sigma \Downarrow v \implies \text{type\_of}(v) \sqsubseteq \tau$$
 
 其中:
+
 - $e$ 是表达式
 - $\sigma$ 是执行状态
 - $v$ 是值
@@ -76,6 +79,7 @@ $$\forall e, \sigma. \Gamma \vdash e : \tau \land e, \sigma \Downarrow v \implie
 类型推理是从表达式推导出最一般类型的过程。
 
 **算法 W**:
+
 ```rust
 fn infer_type(env: &TypeEnv, expr: &Expr) -> Result<(Type, Subst), TypeError> {
     match expr {
@@ -108,6 +112,7 @@ fn infer_type(env: &TypeEnv, expr: &Expr) -> Result<(Type, Subst), TypeError> {
 类型约束是形如 $\tau_1 = \tau_2$ 的等式，其中 $\tau_1$ 和 $\tau_2$ 是类型。
 
 **统一算法**:
+
 ```rust
 fn unify(t1: &Type, t2: &Type) -> Result<Subst, UnificationError> {
     match (t1, t2) {
@@ -146,6 +151,7 @@ $$\text{Lifetime} = \{\text{'a}, \text{'b}, \text{'c}, \ldots\} \cup \{\text{'st
 生命周期约束描述引用之间的包含关系。
 
 **约束规则**:
+
 1. **包含关系**: $\text{'a} \subseteq \text{'b}$ 表示 $\text{'a}$ 的生命周期包含在 $\text{'b}$ 中
 2. **相等关系**: $\text{'a} = \text{'b}$ 表示两个生命周期相等
 3. **静态生命周期**: $\text{'a} \subseteq \text{'static}$ 对所有生命周期 $\text{'a}$ 成立
@@ -153,6 +159,7 @@ $$\text{Lifetime} = \{\text{'a}, \text{'b}, \text{'c}, \ldots\} \cup \{\text{'st
 ### 4.3 生命周期推理
 
 **算法 4.1 (生命周期推理)**:
+
 ```rust
 fn infer_lifetimes(expr: &Expr) -> Result<LifetimeEnv, LifetimeError> {
     match expr {
@@ -193,6 +200,7 @@ fn infer_lifetimes(expr: &Expr) -> Result<LifetimeEnv, LifetimeError> {
 型变描述类型构造子在子类型关系下的行为。
 
 **型变分类**:
+
 1. **协变 (Covariant)**: 如果 $S \sqsubseteq T$，那么 $C[S] \sqsubseteq C[T]$
 2. **逆变 (Contravariant)**: 如果 $S \sqsubseteq T$，那么 $C[T] \sqsubseteq C[S]$
 3. **不变 (Invariant)**: 既不协变也不逆变
@@ -363,4 +371,4 @@ impl LifetimeChecker {
 
 4. **型变理论**:
    - Liskov, B. H., & Wing, J. M. (1994). "A behavioral notion of subtyping"
-   - Cardelli, L., & Wegner, P. (1985). "On understanding types, data abstraction, and polymorphism" 
+   - Cardelli, L., & Wegner, P. (1985). "On understanding types, data abstraction, and polymorphism"

@@ -46,6 +46,7 @@ $$\exists x, y : \text{refers\_to}(x, y) \land \text{refers\_to}(y, x)$$
 $$\text{circular\_ref}(x, y) \implies \neg\text{single\_ownership}(x, y)$$
 
 **证明**：
+
 1. 假设存在循环引用 $x \leftrightarrow y$
 2. 根据所有权规则，每个值只能有一个所有者
 3. 如果 $x$ 拥有 $y$，则 $y$ 不能拥有 $x$
@@ -65,7 +66,8 @@ $$\text{Rc}[\tau]$$
 $$\text{Rc}(x) \implies \text{multiple\_owners}(x)$$
 
 **算法 2.1** (循环引用检测)
-```
+
+```latex
 输入: 数据结构 D
 输出: 是否存在循环引用
 
@@ -75,6 +77,7 @@ $$\text{Rc}(x) \implies \text{multiple\_owners}(x)$$
 ```
 
 **复杂度分析**：
+
 - 时间复杂度：$O(V + E)$，其中 $V$ 是节点数，$E$ 是边数
 - 空间复杂度：$O(V)$
 
@@ -149,6 +152,7 @@ Arena分配器表示为：
 $$\text{Arena}[\tau] = \{\text{items}: \text{Vec}[\tau], \text{next\_id}: \text{usize}\}$$
 
 **算法 2.2** (Arena图构建)
+
 ```
 输入: 图定义 G = (V, E)
 输出: Arena中的图表示
@@ -165,6 +169,7 @@ $$\text{Arena}[\tau] = \{\text{items}: \text{Vec}[\tau], \text{next\_id}: \text{
 
 **定义 3.1** (观察者模式)
 观察者模式包含：
+
 - 主题：$\text{Subject}$
 - 观察者：$\text{Observer}$
 - 通知关系：$\text{notify}(S, O)$
@@ -180,6 +185,7 @@ $$\text{observer\_pattern}(S, O) \implies \text{ownership\_challenge}(S, O)$$
 $$\text{WeakObserver}(S, O) \iff \text{subject}(S) \land \text{weak\_ref}(S, O)$$
 
 **算法 3.1** (弱引用观察者实现)
+
 ```
 输入: 主题和观察者
 输出: 弱引用观察者模式
@@ -217,6 +223,7 @@ $$\text{DependencyInjection}(C, D) \implies \text{ownership\_challenge}(C, D)$$
 $$\text{RcDependencyInjection}(C, D) \iff \text{client}(C) \land \text{Rc}(D) \land \text{inject}(C, D)$$
 
 **算法 3.2** (引用计数依赖注入实现)
+
 ```
 输入: 客户端和依赖
 输出: 引用计数依赖注入
@@ -254,6 +261,7 @@ $$\text{Command}(C, E) \implies \text{ownership\_challenge}(C, E)$$
 $$\text{ClosureCommand}(F, E) \iff \text{closure}(F) \land \text{executor}(E) \land \text{execute}(F, E)$$
 
 **算法 3.3** (闭包命令实现)
+
 ```
 输入: 命令逻辑和执行器
 输出: 闭包命令模式
@@ -283,6 +291,7 @@ $$\text{EventDriven}(E, H) \implies \text{ownership\_challenge}(E, H)$$
 $$\text{MessageQueue}(M, Q) \iff \text{messages}(M) \land \text{queue}(Q) \land \text{enqueue}(M, Q)$$
 
 **算法 4.1** (消息队列实现)
+
 ```
 输入: 消息和队列
 输出: 消息队列系统
@@ -321,6 +330,7 @@ $$\text{CallbackSystem}(C, F) \implies \text{lifetime\_challenge}(C, F)$$
 $$\text{LifetimeCallback}(C, F, L) \iff \text{callback}(C) \land \text{function}(F) \land \text{lifetime}(L)$$
 
 **算法 4.2** (生命周期标注回调实现)
+
 ```
 输入: 回调和生命周期
 输出: 生命周期标注回调
@@ -349,6 +359,7 @@ $$\text{PluginSystem}(H, P) \implies \text{ownership\_challenge}(H, P)$$
 $$\text{DynamicPlugin}(H, L) \iff \text{host}(H) \land \text{library}(L) \land \text{load}(H, L)$$
 
 **算法 4.3** (动态库插件实现)
+
 ```
 输入: 主机和动态库
 输出: 动态库插件系统
@@ -379,6 +390,7 @@ $$\text{CacheSystem}(K, V, C) \implies \text{thread\_safe\_required}(K, V, C)$$
 $$\text{ArcMutexCache}(K, V) \iff \text{Arc}(\text{Mutex}(\text{HashMap}(K, V)))$$
 
 **算法 5.1** (ArcMutex缓存实现)
+
 ```
 输入: 键值类型
 输出: 线程安全缓存
@@ -397,6 +409,7 @@ LRU缓存表示为：
 $$\text{LRUCache}(K, V, N) \iff \text{keys}(K) \land \text{values}(V) \land \text{capacity}(N) \land \text{evict\_lru}(K, V, N)$$
 
 **算法 5.2** (LRU缓存实现)
+
 ```
 输入: 键值类型和容量
 输出: LRU缓存系统
@@ -424,6 +437,7 @@ $$\text{ObjectMapping}(O, D) \implies \text{reference\_challenge}(O, D)$$
 $$\text{IDMapping}(O, D) \iff \text{objects}(O) \land \text{ids}(I) \land \text{map\_by\_id}(O, I, D)$$
 
 **算法 5.3** (ID映射实现)
+
 ```
 输入: 对象和数据库
 输出: ID映射系统
@@ -451,6 +465,7 @@ Actor模型表示为：
 $$\text{ActorModel}(A, M) \iff \text{actors}(A) \land \text{messages}(M) \land \text{send}(A, M)$$
 
 **算法 5.4** (Actor模型实现)
+
 ```
 输入: Actor和消息类型
 输出: Actor模型系统
@@ -471,6 +486,7 @@ $$\text{ActorModel}(A, M) \iff \text{actors}(A) \land \text{messages}(M) \land \
 $$\forall P : \text{refactored\_pattern}(P) \implies \text{memory\_safe}(P)$$
 
 **证明**：
+
 1. 使用引用计数避免循环引用
 2. 使用弱引用防止内存泄漏
 3. 使用生命周期标注保证引用有效性
@@ -483,6 +499,7 @@ $$\forall P : \text{refactored\_pattern}(P) \implies \text{memory\_safe}(P)$$
 $$\forall A : \text{refactored\_architecture}(A) \implies \text{correct}(A)$$
 
 **证明**：
+
 1. 使用消息传递避免共享状态
 2. 使用ID映射避免循环引用
 3. 使用线程安全数据结构
@@ -495,6 +512,7 @@ $$\forall A : \text{refactored\_architecture}(A) \implies \text{correct}(A)$$
 $$\forall P : \text{refactored\_pattern}(P) \implies \text{performance\_preserved}(P)$$
 
 **证明**：
+
 1. 引用计数操作是常数时间
 2. 弱引用检查是常数时间
 3. 消息传递是线性时间
@@ -532,4 +550,4 @@ Rust的所有权系统对传统设计模式和软件架构提出了独特挑战�
 1. Gamma, E., et al. (1994). Design patterns: Elements of reusable object-oriented software. Pearson Education.
 2. Matsakis, N. D., & Klock, F. S. (2014). The Rust language. ACM SIGAda Ada Letters.
 3. Jung, R., et al. (2017). RustBelt: Securing the foundations of the Rust programming language. POPL 2018.
-4. Hewitt, C., et al. (1973). A universal modular ACTOR formalism for artificial intelligence. IJCAI. 
+4. Hewitt, C., et al. (1973). A universal modular ACTOR formalism for artificial intelligence. IJCAI.

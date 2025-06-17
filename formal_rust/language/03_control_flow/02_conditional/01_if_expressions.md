@@ -17,6 +17,7 @@
 ### 1.1 语法定义
 
 **定义 1.1.1**: if表达式的语法形式
+
 ```
 if_expr ::= if condition { block_true } [else { block_false }]
 condition ::= expression : bool
@@ -28,6 +29,7 @@ block_false ::= { statements* }
 
 **定义 1.1.2**: if表达式的语义
 if表达式根据条件表达式的值选择性地执行代码块：
+
 - 当条件为 `true` 时，执行 `block_true`
 - 当条件为 `false` 时，执行 `block_false`（如果存在）
 
@@ -45,6 +47,7 @@ $$\frac{\langle C, \sigma \rangle \rightarrow \langle \text{true}, \sigma' \rang
 $$\frac{\langle C, \sigma \rangle \rightarrow \langle \text{false}, \sigma' \rangle \quad \langle F, \sigma' \rangle \rightarrow \langle v, \sigma'' \rangle}{\langle \text{if } C \text{ then } T \text{ else } F, \sigma \rangle \rightarrow \langle v, \sigma'' \rangle}$$
 
 其中：
+
 - $\sigma$ 表示程序状态
 - $v$ 表示表达式的值
 - $\rightarrow$ 表示状态转换关系
@@ -100,7 +103,7 @@ fn infer_if_type(condition: Type, then_block: Type, else_block: Option<Type>) ->
     if condition != Type::Bool {
         return Err(TypeError::ExpectedBool);
     }
-    
+
     // 检查分支类型一致性
     match else_block {
         Some(else_type) => {
@@ -307,15 +310,15 @@ fn optimized_search<T: PartialEq>(items: &[T], target: &T) -> Option<usize> {
     if items.is_empty() {
         return None;
     }
-    
+
     if items.len() == 1 {
         return if items[0] == *target { Some(0) } else { None };
     }
-    
+
     // 执行二分搜索
     let mut left = 0;
     let mut right = items.len() - 1;
-    
+
     while left <= right {
         let mid = (left + right) / 2;
         if items[mid] == *target {
@@ -326,7 +329,7 @@ fn optimized_search<T: PartialEq>(items: &[T], target: &T) -> Option<usize> {
             right = mid - 1;
         }
     }
-    
+
     None
 }
 ```
@@ -356,4 +359,4 @@ if表达式是Rust控制流系统的核心组件，通过严格的类型检查�
 ---
 
 **版本**: 1.0  
-**更新时间**: 2025-01-27 
+**更新时间**: 2025-01-27

@@ -23,6 +23,7 @@
 ### 1.2 if let与while let的作用
 
 **定义 1.1.2**: if let与while let的作用
+
 - **if let**: 提供了一种简洁的方式来处理只关心一种模式匹配的情况
 - **while let**: 提供了一种简洁的方式来处理循环中的模式匹配
 
@@ -33,12 +34,14 @@
 ### 2.1 if let语法
 
 **定义 2.1.1**: if let语法形式
-```
+
+```latex
 if_let_expr ::= if let pattern = expression { block_true } [else { block_false }]
 ```
 
 **定义 2.1.2**: if let的语义等价
 `if let pattern = expression { block_true } else { block_false }` 等价于：
+
 ```rust
 match expression {
     pattern => { block_true },
@@ -49,12 +52,14 @@ match expression {
 ### 2.2 while let语法
 
 **定义 2.1.3**: while let语法形式
+
 ```
 while_let_expr ::= while let pattern = expression { block }
 ```
 
 **定义 2.1.4**: while let的语义等价
 `while let pattern = expression { block }` 等价于：
+
 ```rust
 loop {
     match expression {
@@ -67,11 +72,13 @@ loop {
 ### 2.3 语法糖的优势
 
 **优势 2.1.1**: 可读性提升
+
 - 减少了样板代码
 - 突出了关心的模式
 - 降低了认知负担
 
 **优势 2.1.2**: 错误减少
+
 - 减少了手动编写match的出错机会
 - 编译器自动处理穷尽性检查
 - 类型安全保证
@@ -221,7 +228,7 @@ fn desugar_if_let(pattern: Pattern, expression: Expression, then_block: Block, e
             body: else_block.unwrap_or_else(|| Block::empty()),
         },
     ];
-    
+
     Expression::Match {
         scrutinee: Box::new(expression),
         arms: match_arms,
@@ -246,12 +253,12 @@ fn desugar_while_let(pattern: Pattern, expression: Expression, body: Block) -> E
             body: Block::from_statement(Statement::Break),
         },
     ];
-    
+
     let match_expr = Expression::Match {
         scrutinee: Box::new(expression),
         arms: match_arms,
     };
-    
+
     Expression::Loop {
         body: Block::from_statement(Statement::Expression(match_expr)),
     }
@@ -369,7 +376,7 @@ fn process_status(status: Status) {
 // 迭代器处理
 fn process_iterator() {
     let mut numbers = vec![1, 2, 3, 4, 5];
-    
+
     while let Some(number) = numbers.pop() {
         println!("Processing: {}", number);
     }
@@ -378,7 +385,7 @@ fn process_iterator() {
 // 流处理
 fn process_stream() {
     let mut stream = create_stream();
-    
+
     while let Some(chunk) = stream.next_chunk() {
         process_chunk(chunk);
     }
@@ -393,7 +400,7 @@ enum State {
 
 fn process_state_machine() {
     let mut state = State::Initial;
-    
+
     while let State::Processing = state {
         state = process_next_state(state);
     }
@@ -429,7 +436,7 @@ struct Point {
 
 fn process_point_data(data: Vec<Option<Point>>) {
     let mut iter = data.into_iter();
-    
+
     while let Some(Some(Point { x, y })) = iter.next() {
         if x > 0 && y > 0 {
             println!("Positive quadrant: ({}, {})", x, y);
@@ -445,7 +452,7 @@ fn process_point_data(data: Vec<Option<Point>>) {
 fn process_chain() -> Result<i32, String> {
     let config = load_config()?;
     let data = load_data(&config)?;
-    
+
     if let Some(processed) = process_data(data) {
         Ok(processed)
     } else {
@@ -458,7 +465,7 @@ fn process_optional_chain() -> Option<i32> {
     let user = get_user()?;
     let profile = user.get_profile()?;
     let settings = profile.get_settings()?;
-    
+
     Some(settings.get_value())
 }
 
@@ -490,14 +497,14 @@ fn find_element_optimized<T: PartialEq>(items: &[T], target: &T) -> Option<usize
             return Some(0);
         }
     }
-    
+
     // 继续搜索其余元素
     for (i, item) in items.iter().enumerate().skip(1) {
         if item == target {
             return Some(i);
         }
     }
-    
+
     None
 }
 
@@ -547,4 +554,4 @@ if let和while let是Rust中重要的语法糖，它们提供了更简洁、更�
 ---
 
 **版本**: 1.0  
-**更新时间**: 2025-01-27 
+**更新时间**: 2025-01-27
