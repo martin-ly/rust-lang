@@ -38,6 +38,7 @@ Rust的设计模式系统结合了面向对象和函数式编程的范式，通�
 $$PatternType ::= Creational | Structural | Behavioral | Concurrency | Functional$$
 
 **定义 2.2** (模式状态): 模式状态 $\sigma_{pattern}$ 是一个四元组 $(context, problem, solution, consequences)$，其中：
+
 - $context$ 是应用场景
 - $problem$ 是要解决的问题
 - $solution$ 是解决方案
@@ -64,6 +65,7 @@ $$pattern\_expression \Downarrow_{pattern} Solution(implementation)$$
 $$Singleton ::= Singleton(instance, access\_method)$$
 
 **Rust实现**:
+
 ```rust
 use std::sync::Once;
 use std::sync::Mutex;
@@ -169,22 +171,22 @@ impl Builder {
             part_c: None,
         }
     }
-    
+
     fn part_a(mut self, part_a: String) -> Self {
         self.part_a = Some(part_a);
         self
     }
-    
+
     fn part_b(mut self, part_b: String) -> Self {
         self.part_b = Some(part_b);
         self
     }
-    
+
     fn part_c(mut self, part_c: String) -> Self {
         self.part_c = Some(part_c);
         self
     }
-    
+
     fn build(self) -> Result<Product, String> {
         Ok(Product {
             part_a: self.part_a.ok_or("Missing part_a")?,
@@ -339,22 +341,22 @@ impl Subject {
             data: String::new(),
         }
     }
-    
+
     fn attach(&mut self, name: String, observer: Box<dyn Observer + Send>) {
         self.observers.lock().unwrap().insert(name, observer);
     }
-    
+
     fn detach(&mut self, name: &str) {
         self.observers.lock().unwrap().remove(name);
     }
-    
+
     fn notify(&self) {
         let observers = self.observers.lock().unwrap();
         for observer in observers.values() {
             observer.update(&self.data);
         }
     }
-    
+
     fn set_data(&mut self, data: String) {
         self.data = data;
         self.notify();
@@ -396,7 +398,7 @@ impl Context {
     fn new(strategy: Box<dyn Strategy>) -> Self {
         Context { strategy }
     }
-    
+
     fn execute_strategy(&self) -> String {
         self.strategy.algorithm()
     }
@@ -446,11 +448,11 @@ impl Invoker {
     fn new() -> Self {
         Invoker { commands: Vec::new() }
     }
-    
+
     fn add_command(&mut self, command: Box<dyn Command>) {
         self.commands.push(command);
     }
-    
+
     fn execute_all(&self) {
         for command in &self.commands {
             command.execute();
@@ -485,7 +487,7 @@ impl Worker {
             let job = receiver.lock().unwrap().recv().unwrap();
             job();
         });
-        
+
         Worker {
             id,
             thread: Some(thread),
@@ -503,14 +505,14 @@ impl ThreadPool {
         let (sender, receiver) = mpsc::channel();
         let receiver = Arc::new(Mutex::new(receiver));
         let mut workers = Vec::with_capacity(size);
-        
+
         for id in 0..size {
             workers.push(Worker::new(id, Arc::clone(&receiver)));
         }
-        
+
         ThreadPool { workers, sender }
     }
-    
+
     fn execute<F>(&self, f: F)
     where
         F: FnOnce() + Send + 'static,
@@ -540,7 +542,7 @@ impl Producer {
     fn new(sender: mpsc::Sender<i32>) -> Self {
         Producer { sender }
     }
-    
+
     fn produce(&self, item: i32) {
         self.sender.send(item).unwrap();
     }
@@ -554,7 +556,7 @@ impl Consumer {
     fn new(receiver: mpsc::Receiver<i32>) -> Self {
         Consumer { receiver }
     }
-    
+
     fn consume(&self) -> Option<i32> {
         self.receiver.recv().ok()
     }
@@ -618,7 +620,7 @@ fn create_adder(x: i32) -> impl Fn(i32) -> i32 {
 
 **定理 8.1** (模式正确性): 设计模式在Rust中的实现是正确的。
 
-**证明**: 
+**证明**:
 1. 通过模式定义验证实现符合规范
 2. 通过类型系统保证类型安全
 3. 通过所有权系统保证内存安全
@@ -628,7 +630,7 @@ fn create_adder(x: i32) -> impl Fn(i32) -> i32 {
 
 **定理 8.2** (模式组合性): 设计模式可以安全地组合使用。
 
-**证明**: 
+**证明**:
 1. 通过模式接口保证兼容性
 2. 通过类型系统保证组合安全
 3. 通过测试验证组合正确性
@@ -637,7 +639,7 @@ fn create_adder(x: i32) -> impl Fn(i32) -> i32 {
 
 **定理 8.3** (模式性能): 设计模式在Rust中具有零成本抽象。
 
-**证明**: 
+**证明**:
 1. 通过编译时优化消除运行时开销
 2. 通过内联优化提高性能
 3. 通过内存布局优化减少开销
@@ -646,7 +648,7 @@ fn create_adder(x: i32) -> impl Fn(i32) -> i32 {
 
 **定理 8.4** (模式安全性): 设计模式在Rust中保证内存和线程安全。
 
-**证明**: 
+**证明**:
 1. 通过所有权系统保证内存安全
 2. 通过借用检查器保证数据竞争安全
 3. 通过类型系统保证类型安全
@@ -655,7 +657,7 @@ fn create_adder(x: i32) -> impl Fn(i32) -> i32 {
 
 **定理 8.5** (模式表达力): Rust的设计模式具有足够的表达力。
 
-**证明**: 
+**证明**:
 1. 通过Trait系统保证抽象能力
 2. 通过泛型系统保证复用能力
 3. 通过组合模式保证扩展能力

@@ -23,6 +23,7 @@
 $$\text{Middleware} : \text{Request} \times \text{Handler} \rightarrow \text{Response}$$
 
 其中：
+
 - $\text{Request}$: 请求类型
 - $\text{Handler}$: 处理器类型
 - $\text{Response}$: 响应类型
@@ -111,6 +112,7 @@ impl<Req, Res> Pipeline<Req, Res> {
 $$\text{AuthState} = (\text{User}, \text{Token}, \text{Permissions})$$
 
 其中：
+
 - $\text{User}$: 用户标识
 - $\text{Token}$: 认证令牌
 - $\text{Permissions}$: 权限集合
@@ -122,6 +124,7 @@ $$\text{AuthState} = (\text{User}, \text{Token}, \text{Permissions})$$
 $$\text{JWT} = (\text{Header}, \text{Payload}, \text{Signature})$$
 
 其中：
+
 - $\text{Header} = \text{Base64}(\text{JSON}(\text{alg}, \text{typ}))$
 - $\text{Payload} = \text{Base64}(\text{JSON}(\text{claims}))$
 - $\text{Signature} = \text{HMAC}(\text{secret}, \text{Header}.\text{Payload})$
@@ -452,4 +455,4 @@ $$\text{Correctness}(middleware) \iff \forall req, handler. \text{Valid}(middlew
 
 **版本**: 1.0.0  
 **更新时间**: 2025-01-27  
-**状态**: 完成 
+**状态**: 完成

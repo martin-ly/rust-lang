@@ -38,6 +38,7 @@ Rust的宏系统提供了编译时代码生成和元编程的能力。宏系统�
 $$MacroType ::= DeclMacro(name, rules) | ProcMacro(name, function)$$
 
 **定义 2.2** (宏状态): 宏状态 $\sigma_{macro}$ 是一个三元组 $(macros, expansions, hygiene)$，其中：
+
 - $macros$ 是宏定义集合
 - $expansions$ 是展开历史
 - $hygiene$ 是卫生性信息
@@ -63,6 +64,7 @@ $$macro\_expression \Downarrow_{macro} Expanded(code)$$
 $$DeclMacro ::= macro\_rules! \ Name \ \{ rules \}$$
 
 **语法规则**:
+
 ```rust
 macro_rules! macro_name {
     (pattern1) => { expansion1 };
@@ -94,6 +96,7 @@ $$Metavariable ::= $name:kind$$
 $$MetavariableKind ::= ident | expr | ty | path | pat | stmt | block | item | tt$$
 
 **示例**:
+
 ```rust
 macro_rules! print_expr {
     ($expr:expr) => {
@@ -110,6 +113,7 @@ macro_rules! print_expr {
 $$ProcMacro ::= DeriveMacro | FunctionMacro | AttributeMacro$$
 
 **过程宏类型**:
+
 - **派生宏**: 为结构体和枚举自动实现Trait
 - **函数宏**: 类似声明宏但更灵活
 - **属性宏**: 修改被标记的项目
@@ -120,6 +124,7 @@ $$ProcMacro ::= DeriveMacro | FunctionMacro | AttributeMacro$$
 $$DeriveMacro ::= #[derive(Trait1, Trait2, ...)]$$
 
 **派生宏实现**:
+
 ```rust
 #[proc_macro_derive(MyTrait)]
 pub fn derive_my_trait(input: TokenStream) -> TokenStream {
@@ -134,6 +139,7 @@ pub fn derive_my_trait(input: TokenStream) -> TokenStream {
 $$FunctionMacro ::= macro_name!(args)$$
 
 **函数宏实现**:
+
 ```rust
 #[proc_macro]
 pub fn my_macro(input: TokenStream) -> TokenStream {
@@ -150,6 +156,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 $$MacroExpansion ::= Expansion(input, output, steps)$$
 
 **展开步骤**:
+
 1. **解析**: 解析宏调用语法
 2. **匹配**: 匹配宏规则模式
 3. **替换**: 替换元变量
@@ -179,6 +186,7 @@ $$\frac{\Gamma \vdash macro1 : Macro \quad \Gamma \vdash macro2 : Macro}{\text{r
 $$Hygiene ::= Hygienic(macro, context)$$
 
 **卫生性条件**:
+
 1. **变量绑定**: 宏中的变量绑定不影响外部
 2. **变量引用**: 宏中的变量引用使用正确的上下文
 3. **名称解析**: 宏中的名称解析遵循作用域规则
@@ -207,11 +215,13 @@ $$\frac{\Gamma \vdash macro : Macro}{\text{check\_hygiene}(macro) \Rightarrow va
 $$Repetition ::= $(pattern:separator)* | $(pattern:separator)+ | $(pattern:separator)?$$
 
 **重复语义**:
+
 - **\***: 零次或多次重复
 - **+**: 一次或多次重复
 - **?**: 零次或一次重复
 
 **示例**:
+
 ```rust
 macro_rules! vector {
     ($($x:expr),*) => {
@@ -242,7 +252,8 @@ $$\frac{\Gamma \vdash input : TokenStream \quad \Gamma \vdash capture : Capture}
 
 **定理 8.1** (宏类型安全): 良类型的宏系统不会产生运行时类型错误。
 
-**证明**: 
+**证明**:
+
 1. 通过宏定义的类型检查保证结构正确
 2. 通过宏展开的类型检查保证输出正确
 3. 通过卫生性保证变量名不冲突
@@ -252,7 +263,8 @@ $$\frac{\Gamma \vdash input : TokenStream \quad \Gamma \vdash capture : Capture}
 
 **定理 8.2** (展开正确性): 宏展开系统保证展开结果的正确性。
 
-**证明**: 
+**证明**:
+
 1. 通过模式匹配算法保证匹配正确
 2. 通过元变量替换保证替换正确
 3. 通过递归展开保证完整性
@@ -261,7 +273,8 @@ $$\frac{\Gamma \vdash input : TokenStream \quad \Gamma \vdash capture : Capture}
 
 **定理 8.3** (卫生性保证): 卫生性系统保证宏中变量名不冲突。
 
-**证明**: 
+**证明**:
+
 1. 通过语法上下文保证变量隔离
 2. 通过名称解析保证作用域正确
 3. 通过编译时检查保证卫生性
@@ -270,7 +283,8 @@ $$\frac{\Gamma \vdash input : TokenStream \quad \Gamma \vdash capture : Capture}
 
 **定理 8.4** (展开终止性): 宏展开过程总是会终止。
 
-**证明**: 
+**证明**:
+
 1. 通过展开深度限制保证终止
 2. 通过循环检测保证无无限递归
 3. 通过编译时检查保证终止性
@@ -279,7 +293,8 @@ $$\frac{\Gamma \vdash input : TokenStream \quad \Gamma \vdash capture : Capture}
 
 **定理 8.5** (宏表达能力): 宏系统能够表达所有必要的代码生成模式。
 
-**证明**: 
+**证明**:
+
 1. 通过声明宏保证基本表达能力
 2. 通过过程宏保证高级表达能力
 3. 通过组合使用保证完备性

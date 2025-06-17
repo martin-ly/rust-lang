@@ -38,6 +38,7 @@ Rust的模块系统提供了代码组织和封装的机制，通过模块、Crat
 $$ModuleType ::= Module(name, items, visibility)$$
 
 **定义 2.2** (模块状态): 模块状态 $\sigma_{module}$ 是一个四元组 $(modules, crates, dependencies, visibility)$，其中：
+
 - $modules$ 是模块集合
 - $crates$ 是Crate集合
 - $dependencies$ 是依赖关系
@@ -64,6 +65,7 @@ $$module\_expression \Downarrow_{module} Module(value)$$
 $$ModuleDef ::= mod \ Name \ \{ items \} | mod \ Name;$$
 
 **语法规则**:
+
 ```rust
 mod module_name {
     // module items
@@ -115,11 +117,13 @@ $$\frac{\Gamma \vdash parent : Module \quad \Gamma \vdash child : Module}{\Gamma
 $$RelativePath ::= Self | Super | Super::Super | ...$$
 
 **相对路径规则**:
+
 - **self**: 当前模块
 - **super**: 父模块
 - **super::super**: 祖父模块
 
 **示例**:
+
 ```rust
 mod parent {
     mod child {
@@ -158,6 +162,7 @@ $$\frac{\Gamma \vdash item : ModuleItem \quad \Gamma \vdash visibility : Visibil
 $$\frac{\Gamma \vdash access : Access \quad \Gamma \vdash item : ModuleItem}{\text{check\_visibility}(access, item) \Rightarrow allowed | denied}$$
 
 **访问规则**:
+
 1. **私有项目**: 只能在定义模块内访问
 2. **公共项目**: 可以在任何地方访问
 3. **受限项目**: 只能在指定路径内访问
@@ -170,6 +175,7 @@ $$\frac{\Gamma \vdash access : Access \quad \Gamma \vdash item : ModuleItem}{\te
 $$\frac{\Gamma \vdash parent : Public \quad \Gamma \vdash child : Private}{\Gamma \vdash child \text{ in } parent : Private}$$
 
 **示例**:
+
 ```rust
 mod outer {
     pub mod inner {
@@ -249,7 +255,7 @@ $$\frac{\Gamma \vdash feature : Feature \quad \Gamma \vdash enabled : bool}{\tex
 
 **定理 8.1** (模块类型安全): 良类型的模块系统不会产生运行时类型错误。
 
-**证明**: 
+**证明**:
 1. 通过模块定义的类型检查保证结构正确
 2. 通过可见性检查保证访问权限正确
 3. 通过路径解析保证引用正确
@@ -259,7 +265,7 @@ $$\frac{\Gamma \vdash feature : Feature \quad \Gamma \vdash enabled : bool}{\tex
 
 **定理 8.2** (可见性一致性): 可见性系统保证访问权限的一致性。
 
-**证明**: 
+**证明**:
 1. 通过可见性规则保证访问控制
 2. 通过可见性传播保证层次一致性
 3. 通过编译时检查保证正确性
@@ -268,7 +274,7 @@ $$\frac{\Gamma \vdash feature : Feature \quad \Gamma \vdash enabled : bool}{\tex
 
 **定理 8.3** (依赖正确性): 依赖管理系统保证依赖关系的正确性。
 
-**证明**: 
+**证明**:
 1. 通过依赖解析算法保证版本一致性
 2. 通过冲突检测保证无循环依赖
 3. 通过编译时检查保证正确性
@@ -277,7 +283,7 @@ $$\frac{\Gamma \vdash feature : Feature \quad \Gamma \vdash enabled : bool}{\tex
 
 **定理 8.4** (模块封装): 模块系统保证代码的封装性。
 
-**证明**: 
+**证明**:
 1. 通过可见性规则保证信息隐藏
 2. 通过模块边界保证接口清晰
 3. 通过编译时检查保证封装性
@@ -286,7 +292,7 @@ $$\frac{\Gamma \vdash feature : Feature \quad \Gamma \vdash enabled : bool}{\tex
 
 **定理 8.5** (路径解析完备性): 路径解析系统能够解析所有有效的路径。
 
-**证明**: 
+**证明**:
 1. 通过路径语法保证表达能力
 2. 通过解析算法保证完备性
 3. 通过错误处理保证健壮性

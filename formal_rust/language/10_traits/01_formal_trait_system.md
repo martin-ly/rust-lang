@@ -38,6 +38,7 @@ Rust的Trait系统是类型系统的核心组件，提供了接口抽象、多�
 $$TraitType ::= Trait(name, methods, bounds)$$
 
 **定义 2.2** (Trait状态): Trait状态 $\sigma_{trait}$ 是一个三元组 $(definitions, implementations, constraints)$，其中：
+
 - $definitions$ 是Trait定义集合
 - $implementations$ 是实现集合
 - $constraints$ 是约束集合
@@ -63,6 +64,7 @@ $$trait\_expression \Downarrow_{trait} Trait(value)$$
 $$TraitDef ::= trait \ Name<params> \ \{ methods \}$$
 
 **语法规则**:
+
 ```rust
 trait TraitName<T1, T2, ...> {
     fn method1(&self) -> ReturnType1;
@@ -94,6 +96,7 @@ $$DefaultImpl ::= Default(method, body)$$
 $$\frac{\Gamma \vdash method : MethodSignature \quad \Gamma \vdash body : Expression}{\Gamma \vdash default \ impl : DefaultImpl}$$
 
 **示例**:
+
 ```rust
 trait Printable {
     fn print(&self) {
@@ -110,6 +113,7 @@ trait Printable {
 $$Implementation ::= impl<Trait> \ for \ Type \ \{ methods \}$$
 
 **语法规则**:
+
 ```rust
 impl TraitName for TypeName {
     fn method1(&self) -> ReturnType1 {
@@ -129,6 +133,7 @@ $$\frac{\Gamma \vdash Type : Type \quad \Gamma \vdash Trait : TraitType \quad \G
 $$\frac{\Gamma \vdash impl : Implementation}{\text{check\_implementation}(impl) \Rightarrow valid | invalid}$$
 
 **实现要求**:
+
 1. **方法签名匹配**: 实现的方法签名必须与Trait定义匹配
 2. **类型约束满足**: 实现必须满足Trait的类型约束
 3. **孤儿规则**: 实现必须满足孤儿规则
@@ -141,6 +146,7 @@ $$\frac{\Gamma \vdash impl : Implementation}{\text{check\_implementation}(impl) 
 $$\frac{\text{impl Trait for Type}}{\text{orphan\_rule}(impl) \Rightarrow \text{Trait or Type is local}}$$
 
 **规则说明**:
+
 - 如果Trait是本地定义的，可以为任何类型实现
 - 如果类型是本地定义的，可以为任何Trait实现
 - 如果Trait和类型都是外部的，不能实现
@@ -153,6 +159,7 @@ $$\frac{\text{impl Trait for Type}}{\text{orphan\_rule}(impl) \Rightarrow \text{
 $$TraitBound ::= Type : Trait | Type : Trait1 + Trait2$$
 
 **语法规则**:
+
 ```rust
 fn function<T: Trait1 + Trait2>(param: T) -> ReturnType {
     // function body
@@ -170,6 +177,7 @@ $$\frac{\Gamma \vdash T : Type \quad \Gamma \vdash Trait : TraitType}{\Gamma \vd
 $$\frac{\Gamma \vdash T : Trait1 \quad Trait1 \text{ requires } Trait2}{\Gamma \vdash T : Trait2}$$
 
 **示例**:
+
 ```rust
 trait Trait1 {
     fn method1(&self);
@@ -207,6 +215,7 @@ $$\frac{\Gamma \vdash Trait : TraitType \quad Trait \text{ is object safe}}{\Gam
 **定义 6.2** (对象安全): 对象安全是Trait可以作为Trait对象的条件。
 
 **对象安全规则**:
+
 1. **方法不能是泛型的**
 2. **方法不能使用Self类型**
 3. **方法不能有where子句**
@@ -224,6 +233,7 @@ $$VTable ::= VTable(trait\_id, method\_pointers)$$
 $$\frac{\Gamma \vdash Type : Type \quad \Gamma \vdash Trait : TraitType}{\text{construct\_vtable}(Type, Trait) \Rightarrow VTable}$$
 
 **示例**:
+
 ```rust
 trait Drawable {
     fn draw(&self);
@@ -255,6 +265,7 @@ fn draw_all(shapes: Vec<Box<dyn Drawable>>) {
 $$TraitInheritance ::= trait \ SubTrait : SuperTrait$$
 
 **语法规则**:
+
 ```rust
 trait SuperTrait {
     fn super_method(&self);
@@ -292,7 +303,8 @@ $$\frac{\Gamma \vdash T : SubTrait \quad SubTrait : Trait1 + Trait2}{\Gamma \vda
 
 **定理 8.1** (Trait类型安全): 良类型的Trait系统不会产生运行时类型错误。
 
-**证明**: 
+**证明**:
+
 1. 通过Trait定义的类型检查保证方法签名正确
 2. 通过实现检查保证实现满足Trait要求
 3. 通过约束检查保证泛型参数满足Trait约束
@@ -302,7 +314,8 @@ $$\frac{\Gamma \vdash T : SubTrait \quad SubTrait : Trait1 + Trait2}{\Gamma \vda
 
 **定理 8.2** (实现一致性): Trait实现系统保证实现与定义的一致性。
 
-**证明**: 
+**证明**:
+
 1. 通过方法签名匹配检查保证一致性
 2. 通过类型约束检查保证约束满足
 3. 通过孤儿规则保证实现位置正确
@@ -311,7 +324,8 @@ $$\frac{\Gamma \vdash T : SubTrait \quad SubTrait : Trait1 + Trait2}{\Gamma \vda
 
 **定理 8.3** (约束完备性): Trait约束系统能够表达所有必要的类型约束。
 
-**证明**: 
+**证明**:
+
 1. 通过约束语法证明表达能力
 2. 通过约束传播证明传递性
 3. 通过约束推断证明自动性
@@ -320,7 +334,8 @@ $$\frac{\Gamma \vdash T : SubTrait \quad SubTrait : Trait1 + Trait2}{\Gamma \vda
 
 **定理 8.4** (对象安全): 对象安全的Trait可以安全地用作Trait对象。
 
-**证明**: 
+**证明**:
+
 1. 通过对象安全规则保证方法可用性
 2. 通过虚表机制保证运行时分发
 3. 通过类型系统保证内存安全
@@ -329,7 +344,8 @@ $$\frac{\Gamma \vdash T : SubTrait \quad SubTrait : Trait1 + Trait2}{\Gamma \vda
 
 **定理 8.5** (继承正确性): Trait继承系统保证继承关系的正确性。
 
-**证明**: 
+**证明**:
+
 1. 通过继承语义保证方法可用性
 2. 通过多重继承保证组合性
 3. 通过类型系统保证一致性

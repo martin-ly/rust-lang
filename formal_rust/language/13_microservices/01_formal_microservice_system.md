@@ -23,6 +23,7 @@
 $$\text{Microservice} = (\text{ServiceID}, \text{Interface}, \text{Implementation}, \text{State})$$
 
 其中：
+
 - $\text{ServiceID}$: 服务唯一标识
 - $\text{Interface}$: 服务接口定义
 - $\text{Implementation}$: 服务实现
@@ -100,6 +101,7 @@ impl ServiceState {
 $$G = (V, E)$$
 
 其中：
+
 - $V = \{s_1, s_2, ..., s_n\}$ 是服务集合
 - $E = \{(s_i, s_j) | s_i \text{ depends on } s_j\}$ 是依赖关系
 
@@ -618,4 +620,4 @@ $$\text{Scalability} = \frac{\text{Throughput}(n)}{\text{Throughput}(1)} \geq \a
 
 **版本**: 1.0.0  
 **更新时间**: 2025-01-27  
-**状态**: 完成 
+**状态**: 完成

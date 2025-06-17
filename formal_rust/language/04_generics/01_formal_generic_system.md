@@ -35,6 +35,7 @@ Rust的泛型系统基于参数多态性，允许代码在多种类型上工作�
 ### 2.1 范畴定义
 
 **定义 2.1** (范畴): 范畴 $\mathcal{C}$ 包含：
+
 - 对象集合 $Ob(\mathcal{C})$
 - 态射集合 $Hom(A,B)$ 对于每对对象 $A,B \in Ob(\mathcal{C})$
 - 复合运算 $\circ : Hom(B,C) \times Hom(A,B) \rightarrow Hom(A,C)$
@@ -43,6 +44,7 @@ Rust的泛型系统基于参数多态性，允许代码在多种类型上工作�
 ### 2.2 类型范畴
 
 **定义 2.2** (类型范畴): Rust类型范畴 $\mathcal{T}$ 定义为：
+
 - 对象：Rust类型
 - 态射：类型之间的转换函数
 - 复合：函数复合
@@ -51,6 +53,7 @@ Rust的泛型系统基于参数多态性，允许代码在多种类型上工作�
 ### 2.3 泛型作为态射
 
 **定义 2.3** (泛型态射): 泛型函数 $f : \forall \alpha. T(\alpha)$ 是类型范畴中的态射，其中：
+
 - $\alpha$ 是类型参数
 - $T(\alpha)$ 是参数化类型
 
@@ -65,6 +68,7 @@ Rust的泛型系统基于参数多态性，允许代码在多种类型上工作�
 **定义 3.1** (类型参数): 类型参数 $\alpha$ 是类型系统中的变量，表示未知类型。
 
 **语法规则**:
+
 ```
 <T1, T2, ..., Tn>
 ```
@@ -81,6 +85,7 @@ $$f : \forall \alpha_1, \alpha_2, ..., \alpha_n. T_1 \rightarrow T_2 \rightarrow
 $$\frac{\Gamma, \alpha_i : Type \vdash body : R}{\Gamma \vdash fn \ f<\alpha_1, ..., \alpha_n>(params) \rightarrow R \ \{ body \} : \forall \alpha_1, ..., \alpha_n. T_1 \rightarrow ... \rightarrow T_n \rightarrow R}$$
 
 **示例**:
+
 ```rust
 fn identity<T>(value: T) -> T {
     value
@@ -99,6 +104,7 @@ $$Struct<T_1, T_2, ..., T_n> ::= \{ field_1 : T_1, field_2 : T_2, ..., field_n :
 $$\frac{\Gamma, \alpha_i : Type \vdash fields : \{ field_i : T_i \}}{\Gamma \vdash struct \ Name<\alpha_1, ..., \alpha_n> \ \{ fields \} : \forall \alpha_1, ..., \alpha_n. \{ field_i : T_i \}}$$
 
 **示例**:
+
 ```rust
 struct Wrapper<T> {
     value: T,
@@ -125,6 +131,7 @@ $$\frac{\Gamma \vdash T : Type \quad \Gamma \vdash \alpha_i : Type}{\Gamma \vdas
 $$\frac{\Gamma \vdash f : \forall \alpha. T \quad \Gamma \vdash U : Type}{\Gamma \vdash f[U] : T[\alpha \mapsto U]}$$
 
 **示例**:
+
 ```rust
 let int_wrapper: Wrapper<i32> = Wrapper { value: 42 };
 let string_wrapper: Wrapper<String> = Wrapper { value: "hello".to_string() };
@@ -160,6 +167,7 @@ $$T : Trait$$
 $$\frac{\Gamma \vdash T : Type \quad \Gamma \vdash Trait : \forall \alpha. Trait \quad T \text{ implements } Trait}{\Gamma \vdash T : Trait}$$
 
 **示例**:
+
 ```rust
 fn print_value<T: std::fmt::Debug>(value: T) {
     println!("{:?}", value);
@@ -188,6 +196,7 @@ $$\frac{\Gamma \vdash T : Trait_1 \quad Trait_1 \text{ requires } Trait_2}{\Gamm
 $$F : Type \rightarrow Type$$
 
 **示例**:
+
 ```rust
 struct Option<T> {
     // Some(T) or None
@@ -211,6 +220,7 @@ $$F \circ G : Type \rightarrow Type$$
 $$\frac{\Gamma \vdash F : Type \rightarrow Type \quad \Gamma \vdash G : Type \rightarrow Type}{\Gamma \vdash F \circ G : Type \rightarrow Type}$$
 
 **示例**:
+
 ```rust
 type OptionVec<T> = Option<Vec<T>>;
 ```
@@ -227,6 +237,7 @@ $$\eta : F \rightarrow G$$
 $$\eta_{G(T)} \circ F(f) = G(f) \circ \eta_{F(T)}$$
 
 **示例**:
+
 ```rust
 fn option_to_vec<T>(opt: Option<T>) -> Vec<T> {
     match opt {
@@ -247,6 +258,7 @@ $$f : (T \rightarrow U) \rightarrow V$$
 $$\frac{\Gamma \vdash f : T \rightarrow U \quad \Gamma \vdash g : (T \rightarrow U) \rightarrow V}{\Gamma \vdash g(f) : V}$$
 
 **示例**:
+
 ```rust
 fn apply<F, T>(func: F, value: T) -> T
 where
@@ -265,6 +277,7 @@ $$apply : \forall \alpha. (\alpha \rightarrow \alpha) \rightarrow \alpha \righta
 $$F : Type^n \rightarrow Type$$
 
 **示例**:
+
 ```rust
 struct Pair<T, U> {
     first: T,
@@ -281,7 +294,8 @@ $$Pair : Type \times Type \rightarrow Type$$
 
 **定理 8.1** (泛型类型安全): 良类型的泛型程序不会产生运行时类型错误。
 
-**证明**: 
+**证明**:
+
 1. 通过进展定理证明泛型程序总是可以继续执行
 2. 通过保持定理证明执行过程中类型保持不变
 3. 结合两者证明类型安全
@@ -308,7 +322,8 @@ $$Pair : Type \times Type \rightarrow Type$$
 
 **定理 8.5** (范畴论对应): Rust泛型系统与类型范畴中的态射存在对应关系。
 
-**证明**: 
+**证明**:
+
 1. 泛型函数对应类型范畴中的态射
 2. 类型参数对应范畴中的对象
 3. Trait约束对应态射的约束条件
@@ -325,4 +340,4 @@ $$Pair : Type \times Type \rightarrow Type$$
 
 **版本**: 1.0.0  
 **更新时间**: 2025-01-27  
-**状态**: 完成 
+**状态**: 完成
