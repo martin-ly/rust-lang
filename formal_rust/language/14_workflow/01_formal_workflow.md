@@ -44,6 +44,7 @@ $$Workflow: W \times T \times S \rightarrow \text{Process}$$
 $$\text{WorkflowModel} = (V, E, \text{Start}, \text{End})$$
 
 其中：
+
 - $V$: 节点集合（任务节点）
 - $E$: 边集合（控制流）
 - $\text{Start}$: 起始节点
@@ -70,6 +71,7 @@ $$\text{WorkflowState} = \{\text{current\_tasks}: \text{Set}<\text{Task}>, \text
 $$\text{FiniteStateMachine} = (Q, \Sigma, \delta, q_0, F)$$
 
 其中：
+
 - $Q$: 状态集合
 - $\Sigma$: 输入字母表
 - $\delta$: 状态转移函数
@@ -1168,4 +1170,4 @@ async fn main() {
 
 **版本**: 1.0.0  
 **更新时间**: 2025-01-27  
-**状态**: 完成 
+**状态**: 完成
