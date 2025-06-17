@@ -26,6 +26,7 @@
 $$\text{NetworkProgramming} = \langle \text{Socket}, \text{Protocol}, \text{Transport}, \text{Security} \rangle$$
 
 其中：
+
 - $\text{Socket}$: 套接字抽象
 - $\text{Protocol}$: 通信协议
 - $\text{Transport}$: 传输机制
@@ -91,27 +92,27 @@ use std::io::{Read, Write};
 
 fn tcp_server_example() -> std::io::Result<()> {
     let listener = TcpListener::bind("127.0.0.1:8080")?;
-    
+
     for stream in listener.incoming() {
         let mut stream = stream?;
         let mut buffer = [0; 1024];
-        
+
         let n = stream.read(&mut buffer)?;
         stream.write_all(&buffer[0..n])?;
     }
-    
+
     Ok(())
 }
 
 fn tcp_client_example() -> std::io::Result<()> {
     let mut stream = TcpStream::connect("127.0.0.1:8080")?;
-    
+
     stream.write_all(b"Hello, server!")?;
-    
+
     let mut buffer = [0; 1024];
     let n = stream.read(&mut buffer)?;
     println!("Received: {}", String::from_utf8_lossy(&buffer[0..n]));
-    
+
     Ok(())
 }
 ```
@@ -120,7 +121,7 @@ fn tcp_client_example() -> std::io::Result<()> {
 
 **引理 3.1**: TCP套接字操作满足类型安全约束。
 
-**证明**: 
+**证明**:
 1. 套接字类型在编译时确定
 2. 缓冲区大小在编译时验证
 3. 错误处理通过Result类型强制
@@ -140,13 +141,13 @@ use std::net::UdpSocket;
 
 fn udp_example() -> std::io::Result<()> {
     let socket = UdpSocket::bind("127.0.0.1:8080")?;
-    
+
     let mut buffer = [0; 1024];
     let (n, src) = socket.recv_from(&mut buffer)?;
-    
+
     println!("Received {} bytes from {}", n, src);
     socket.send_to(&buffer[0..n], src)?;
-    
+
     Ok(())
 }
 ```
@@ -166,15 +167,15 @@ use std::io::{Read, Write};
 
 fn unix_socket_example() -> std::io::Result<()> {
     let listener = UnixListener::bind("/tmp/socket")?;
-    
+
     for stream in listener.incoming() {
         let mut stream = stream?;
         let mut buffer = [0; 1024];
-        
+
         let n = stream.read(&mut buffer)?;
         stream.write_all(&buffer[0..n])?;
     }
-    
+
     Ok(())
 }
 ```
@@ -212,10 +213,10 @@ impl HttpRequest {
         let mut buffer = [0; 1024];
         let n = stream.read(&mut buffer)?;
         let request_str = String::from_utf8_lossy(&buffer[0..n]);
-        
+
         let lines: Vec<&str> = request_str.lines().collect();
         let first_line: Vec<&str> = lines[0].split_whitespace().collect();
-        
+
         Ok(HttpRequest {
             method: first_line[0].to_string(),
             path: first_line[1].to_string(),
@@ -229,15 +230,15 @@ impl HttpResponse {
     fn send(&self, stream: &mut TcpStream) -> std::io::Result<()> {
         let status_line = format!("HTTP/1.1 {} OK\r\n", self.status);
         stream.write_all(status_line.as_bytes())?;
-        
+
         for (key, value) in &self.headers {
             let header_line = format!("{}: {}\r\n", key, value);
             stream.write_all(header_line.as_bytes())?;
         }
-        
+
         stream.write_all(b"\r\n")?;
         stream.write_all(&self.body)?;
-        
+
         Ok(())
     }
 }
@@ -266,29 +267,29 @@ impl WebSocketFrame {
     fn parse(stream: &mut TcpStream) -> std::io::Result<Self> {
         let mut header = [0; 2];
         stream.read_exact(&mut header)?;
-        
+
         let fin = (header[0] & 0x80) != 0;
         let opcode = header[0] & 0x0F;
         let payload_len = header[1] & 0x7F;
-        
+
         let mut payload = vec![0; payload_len as usize];
         stream.read_exact(&mut payload)?;
-        
+
         Ok(WebSocketFrame {
             fin,
             opcode,
             payload,
         })
     }
-    
+
     fn send(&self, stream: &mut TcpStream) -> std::io::Result<()> {
         let mut header = [0; 2];
         header[0] = if self.fin { 0x80 } else { 0x00 } | self.opcode;
         header[1] = self.payload.len() as u8;
-        
+
         stream.write_all(&header)?;
         stream.write_all(&self.payload)?;
-        
+
         Ok(())
     }
 }
@@ -311,20 +312,20 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 async fn async_tcp_server() -> std::io::Result<()> {
     let listener = TcpListener::bind("127.0.0.1:8080").await?;
-    
+
     loop {
         let (mut socket, _) = listener.accept().await?;
-        
+
         tokio::spawn(async move {
             let mut buffer = [0; 1024];
-            
+
             loop {
                 let n = match socket.read(&mut buffer).await {
                     Ok(n) if n == 0 => return,
                     Ok(n) => n,
                     Err(_) => return,
                 };
-                
+
                 if let Err(_) = socket.write_all(&buffer[0..n]).await {
                     return;
                 }
@@ -335,13 +336,13 @@ async fn async_tcp_server() -> std::io::Result<()> {
 
 async fn async_tcp_client() -> std::io::Result<()> {
     let mut stream = TcpStream::connect("127.0.0.1:8080").await?;
-    
+
     stream.write_all(b"Hello, async server!").await?;
-    
+
     let mut buffer = [0; 1024];
     let n = stream.read(&mut buffer).await?;
     println!("Received: {}", String::from_utf8_lossy(&buffer[0..n]));
-    
+
     Ok(())
 }
 ```
@@ -361,12 +362,12 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 async fn event_driven_server() -> std::io::Result<()> {
     let listener = TcpListener::bind("127.0.0.1:8080").await?;
-    
+
     loop {
         match listener.accept().await {
             Ok((mut socket, addr)) => {
                 println!("New connection from: {}", addr);
-                
+
                 tokio::spawn(async move {
                     handle_connection(&mut socket).await;
                 });
@@ -380,7 +381,7 @@ async fn event_driven_server() -> std::io::Result<()> {
 
 async fn handle_connection(socket: &mut TcpStream) {
     let mut buffer = [0; 1024];
-    
+
     loop {
         match socket.read(&mut buffer).await {
             Ok(0) => break, // 连接关闭
@@ -413,14 +414,14 @@ $$\text{NetworkTopology}(nodes, edges) = \text{Graph}(V, E)$$
 ```rust
 use std::collections::HashMap;
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 struct NetworkNode {
     id: String,
     address: String,
     connections: Vec<String>,
 }
 
-#[derive(Debug)]
+# [derive(Debug)]
 struct NetworkTopology {
     nodes: HashMap<String, NetworkNode>,
 }
@@ -431,17 +432,17 @@ impl NetworkTopology {
             nodes: HashMap::new(),
         }
     }
-    
+
     fn add_node(&mut self, node: NetworkNode) {
         self.nodes.insert(node.id.clone(), node);
     }
-    
+
     fn add_connection(&mut self, from: &str, to: &str) {
         if let Some(node) = self.nodes.get_mut(from) {
             node.connections.push(to.to_string());
         }
     }
-    
+
     fn find_path(&self, from: &str, to: &str) -> Option<Vec<String>> {
         // 实现最短路径算法
         None
@@ -463,7 +464,7 @@ use std::net::SocketAddr;
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
-#[derive(Debug, Clone)]
+# [derive(Debug, Clone)]
 struct Server {
     addr: SocketAddr,
     weight: u32,
@@ -488,15 +489,15 @@ impl LoadBalancer {
             algorithm,
         }
     }
-    
+
     async fn add_server(&self, server: Server) {
         let mut servers = self.servers.write().await;
         servers.push(server);
     }
-    
+
     async fn select_server(&self) -> Option<Server> {
         let servers = self.servers.read().await;
-        
+
         match self.algorithm {
             LoadBalancingAlgorithm::RoundRobin => {
                 // 实现轮询算法
@@ -527,7 +528,7 @@ $$\text{Packet}(header, payload) = \text{Header}(\text{metadata}) \oplus \text{P
 **Rust实现**:
 
 ```rust
-#[derive(Debug)]
+# [derive(Debug)]
 struct PacketHeader {
     version: u8,
     flags: u8,
@@ -535,7 +536,7 @@ struct PacketHeader {
     sequence: u32,
 }
 
-#[derive(Debug)]
+# [derive(Debug)]
 struct Packet {
     header: PacketHeader,
     payload: Vec<u8>,
@@ -553,22 +554,22 @@ impl Packet {
             payload,
         }
     }
-    
+
     fn serialize(&self) -> Vec<u8> {
         let mut data = Vec::new();
-        
+
         // 序列化头部
         data.push(self.header.version);
         data.push(self.header.flags);
         data.extend_from_slice(&self.header.length.to_be_bytes());
         data.extend_from_slice(&self.header.sequence.to_be_bytes());
-        
+
         // 序列化负载
         data.extend_from_slice(&self.payload);
-        
+
         data
     }
-    
+
     fn deserialize(data: &[u8]) -> std::io::Result<Self> {
         if data.len() < 8 {
             return Err(std::io::Error::new(
@@ -576,16 +577,16 @@ impl Packet {
                 "Packet too short",
             ));
         }
-        
+
         let header = PacketHeader {
             version: data[0],
             flags: data[1],
             length: u16::from_be_bytes([data[2], data[3]]),
             sequence: u32::from_be_bytes([data[4], data[5], data[6], data[7]]),
         };
-        
+
         let payload = data[8..].to_vec();
-        
+
         Ok(Packet { header, payload })
     }
 }
@@ -601,7 +602,7 @@ $$\text{PacketFilter}(rules, packets) = \text{Filter}(\text{packets}, \text{rule
 **Rust实现**:
 
 ```rust
-#[derive(Debug)]
+# [derive(Debug)]
 struct FilterRule {
     source_ip: Option<String>,
     dest_ip: Option<String>,
@@ -609,7 +610,7 @@ struct FilterRule {
     action: FilterAction,
 }
 
-#[derive(Debug)]
+# [derive(Debug)]
 enum FilterAction {
     Accept,
     Drop,
@@ -624,21 +625,21 @@ impl PacketFilter {
     fn new() -> Self {
         PacketFilter { rules: Vec::new() }
     }
-    
+
     fn add_rule(&mut self, rule: FilterRule) {
         self.rules.push(rule);
     }
-    
+
     fn filter_packet(&self, packet: &Packet) -> FilterAction {
         for rule in &self.rules {
             if self.matches_rule(packet, rule) {
                 return rule.action.clone();
             }
         }
-        
+
         FilterAction::Accept // 默认接受
     }
-    
+
     fn matches_rule(&self, _packet: &Packet, _rule: &FilterRule) -> bool {
         // 实现规则匹配逻辑
         true
@@ -672,30 +673,30 @@ impl SecureChannel {
     fn new(key: [u8; 32]) -> Self {
         SecureChannel { key }
     }
-    
+
     fn encrypt(&self, data: &[u8]) -> Vec<u8> {
         let cipher = Aes256::new_from_slice(&self.key).unwrap();
         let mut encrypted = Vec::new();
-        
+
         for chunk in data.chunks(16) {
             let mut block = GenericArray::clone_from_slice(chunk);
             cipher.encrypt_block(&mut block);
             encrypted.extend_from_slice(&block);
         }
-        
+
         encrypted
     }
-    
+
     fn decrypt(&self, data: &[u8]) -> Vec<u8> {
         let cipher = Aes256::new_from_slice(&self.key).unwrap();
         let mut decrypted = Vec::new();
-        
+
         for chunk in data.chunks(16) {
             let mut block = GenericArray::clone_from_slice(chunk);
             cipher.decrypt_block(&mut block);
             decrypted.extend_from_slice(&block);
         }
-        
+
         decrypted
     }
 }
@@ -723,12 +724,12 @@ impl Authentication {
             users: std::collections::HashMap::new(),
         }
     }
-    
+
     fn add_user(&mut self, username: String, password: String) {
         let hash = self.hash_password(&password);
         self.users.insert(username, hash);
     }
-    
+
     fn authenticate(&self, username: &str, password: &str) -> bool {
         if let Some(stored_hash) = self.users.get(username) {
             let input_hash = self.hash_password(password);
@@ -737,7 +738,7 @@ impl Authentication {
             false
         }
     }
-    
+
     fn hash_password(&self, password: &str) -> String {
         let mut hasher = Sha256::new();
         hasher.update(password.as_bytes());
@@ -752,7 +753,7 @@ impl Authentication {
 
 **定理 9.1** (网络安全性): 如果网络通信使用加密和身份验证，那么通信是安全的。
 
-**证明**: 
+**证明**:
 1. 加密保证数据机密性
 2. 身份验证保证身份真实性
 3. 完整性检查保证数据完整性
@@ -762,7 +763,7 @@ impl Authentication {
 
 **定理 9.2** (异步I/O正确性): 异步I/O操作在Rust中是正确和安全的。
 
-**证明**: 
+**证明**:
 1. Future trait保证异步操作的抽象
 2. 所有权系统保证内存安全
 3. 类型系统保证操作正确性
@@ -784,21 +785,21 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 async fn http_server() -> std::io::Result<()> {
     let listener = TcpListener::bind("127.0.0.1:8080").await?;
-    
+
     loop {
         let (mut socket, _) = listener.accept().await?;
-        
+
         tokio::spawn(async move {
             let mut buffer = [0; 1024];
             let n = socket.read(&mut buffer).await.unwrap_or(0);
-            
+
             let request = String::from_utf8_lossy(&buffer[0..n]);
             let response = if request.starts_with("GET /") {
                 "HTTP/1.1 200 OK\r\nContent-Length: 13\r\n\r\nHello, World!"
             } else {
                 "HTTP/1.1 404 Not Found\r\nContent-Length: 0\r\n\r\n"
             };
-            
+
             socket.write_all(response.as_bytes()).await.unwrap_or(());
         });
     }
@@ -817,15 +818,15 @@ async fn chat_server() -> std::io::Result<()> {
     let listener = TcpListener::bind("127.0.0.1:8080").await?;
     let (tx, _rx) = broadcast::channel(100);
     let mut clients = HashMap::new();
-    
+
     loop {
         let (mut socket, addr) = listener.accept().await?;
         let tx = tx.clone();
         let mut rx = tx.subscribe();
-        
+
         tokio::spawn(async move {
             let mut buffer = [0; 1024];
-            
+
             loop {
                 tokio::select! {
                     result = socket.read(&mut buffer) => {
@@ -867,4 +868,4 @@ async fn chat_server() -> std::io::Result<()> {
 
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  
-**状态**: 完成 
+**状态**: 完成

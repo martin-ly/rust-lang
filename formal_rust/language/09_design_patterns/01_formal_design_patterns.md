@@ -25,6 +25,7 @@
 $$\text{Pattern} = \langle \text{Problem}, \text{Solution}, \text{Consequences} \rangle$$
 
 其中：
+
 - $\text{Problem}$: 问题描述
 - $\text{Solution}$: 解决方案的结构
 - $\text{Consequences}$: 应用模式的后果
@@ -100,11 +101,11 @@ impl Singleton {
             data: String::from("singleton data"),
         }
     }
-    
+
     pub fn instance() -> Arc<Mutex<Singleton>> {
         static mut INSTANCE: Option<Arc<Mutex<Singleton>>> = None;
         static ONCE: Once = Once::new();
-        
+
         unsafe {
             ONCE.call_once(|| {
                 INSTANCE = Some(Arc::new(Mutex::new(Singleton::new())));
@@ -119,7 +120,7 @@ impl Singleton {
 
 **引理 3.1**: 单例模式满足类型安全约束。
 
-**证明**: 
+**证明**:
 1. 类型T在编译时确定
 2. 所有权通过Arc<Mutex<T>>管理
 3. 生命周期通过静态变量保证
@@ -293,7 +294,7 @@ impl ConcreteSubject {
             state: String::new(),
         }
     }
-    
+
     fn set_state(&mut self, state: String) {
         self.state = state;
         self.notify();
@@ -304,11 +305,11 @@ impl Subject for ConcreteSubject {
     fn attach(&mut self, observer: Arc<Mutex<dyn Observer>>) {
         self.observers.push(observer);
     }
-    
+
     fn detach(&mut self, observer: Arc<Mutex<dyn Observer>>) {
         // 实现移除逻辑
     }
-    
+
     fn notify(&self) {
         for observer in &self.observers {
             if let Ok(observer) = observer.lock() {
@@ -356,7 +357,7 @@ impl Context {
     fn new(strategy: Box<dyn Strategy>) -> Self {
         Context { strategy }
     }
-    
+
     fn execute_strategy(&self, data: &str) -> String {
         self.strategy.execute(data)
     }
@@ -380,19 +381,19 @@ use std::thread;
 
 fn producer_consumer_example() {
     let (tx, rx) = mpsc::channel();
-    
+
     let producer = thread::spawn(move || {
         for i in 0..10 {
             tx.send(i).unwrap();
         }
     });
-    
+
     let consumer = thread::spawn(move || {
         for received in rx {
             println!("Received: {}", received);
         }
     });
-    
+
     producer.join().unwrap();
     consumer.join().unwrap();
 }
@@ -413,20 +414,20 @@ use std::thread;
 
 fn read_write_lock_example() {
     let data = RwLock::new(0);
-    
+
     let reader = thread::spawn(move || {
         if let Ok(value) = data.read() {
             println!("Reader: {}", *value);
         }
     });
-    
+
     let writer = thread::spawn(move || {
         if let Ok(mut value) = data.write() {
             *value += 1;
             println!("Writer: {}", *value);
         }
     });
-    
+
     reader.join().unwrap();
     writer.join().unwrap();
 }
@@ -448,11 +449,11 @@ use rayon::prelude::*;
 
 fn map_reduce_example() {
     let data: Vec<i32> = (1..=1000).collect();
-    
+
     let result: i32 = data.par_iter()
         .map(|&x| x * x)  // Map阶段
         .sum();          // Reduce阶段
-    
+
     println!("Result: {}", result);
 }
 ```
@@ -471,11 +472,11 @@ fn divide_conquer<T: Ord + Clone>(arr: &[T]) -> Vec<T> {
     if arr.len() <= 1 {
         return arr.to_vec();
     }
-    
+
     let mid = arr.len() / 2;
     let left = divide_conquer(&arr[..mid]);
     let right = divide_conquer(&arr[mid..]);
-    
+
     merge(left, right)
 }
 
@@ -483,10 +484,10 @@ fn merge<T: Ord + Clone>(left: Vec<T>, right: Vec<T>) -> Vec<T> {
     let mut result = Vec::new();
     let mut left_iter = left.into_iter();
     let mut right_iter = right.into_iter();
-    
+
     let mut left_peek = left_iter.next();
     let mut right_peek = right_iter.next();
-    
+
     while let (Some(l), Some(r)) = (left_peek.as_ref(), right_peek.as_ref()) {
         if l <= r {
             result.push(left_peek.take().unwrap());
@@ -496,10 +497,10 @@ fn merge<T: Ord + Clone>(left: Vec<T>, right: Vec<T>) -> Vec<T> {
             right_peek = right_iter.next();
         }
     }
-    
+
     result.extend(left_iter);
     result.extend(right_iter);
-    
+
     result
 }
 ```
@@ -510,7 +511,7 @@ fn merge<T: Ord + Clone>(left: Vec<T>, right: Vec<T>) -> Vec<T> {
 
 **定理 8.1** (模式组合): 如果模式P₁和P₂都是有效的，那么它们的组合P₁ ∘ P₂也是有效的。
 
-**证明**: 
+**证明**:
 1. 类型安全：组合后的类型约束是原约束的交集
 2. 所有权安全：组合后的所有权规则是原规则的并集
 3. 内存安全：组合后的内存安全保证是原保证的交集
@@ -578,12 +579,12 @@ impl Repository<User> for UserRepository {
         // 实现查找逻辑
         None
     }
-    
+
     fn save(&mut self, entity: User) -> Result<(), Error> {
         // 实现保存逻辑
         Ok(())
     }
-    
+
     fn delete(&mut self, id: u64) -> Result<(), Error> {
         // 实现删除逻辑
         Ok(())
