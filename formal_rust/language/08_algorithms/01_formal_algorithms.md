@@ -19,6 +19,7 @@
 
 **形式化定义**：
 算法系统是一个元组 $(\mathcal{A}, \mathcal{P}, \mathcal{C}, \mathcal{O})$，其中：
+
 - $\mathcal{A}$ 是算法集合
 - $\mathcal{P}$ 是问题集合
 - $\mathcal{C}$ 是复杂度分析函数
@@ -40,6 +41,7 @@
 $$\text{Algorithm} : \text{Input} \rightarrow \text{Output}$$
 
 **算法特性**：
+
 - **确定性**：相同输入产生相同输出
 - **有限性**：算法在有限步后终止
 - **有效性**：每个步骤都是可执行的
@@ -47,6 +49,7 @@ $$\text{Algorithm} : \text{Input} \rightarrow \text{Output}$$
 **形式化表示**：
 $$A = (Q, \Sigma, \delta, q_0, F)$$
 其中：
+
 - $Q$ 是状态集合
 - $\Sigma$ 是输入字母表
 - $\delta$ 是状态转换函数
@@ -62,6 +65,7 @@ $$T(n) = O(f(n)) \iff \exists c, n_0 : \forall n \geq n_0, T(n) \leq c \cdot f(n
 $$S(n) = O(f(n)) \iff \exists c, n_0 : \forall n \geq n_0, S(n) \leq c \cdot f(n)$$
 
 **渐近分析**：
+
 - $O(1)$: 常数时间
 - $O(\log n)$: 对数时间
 - $O(n)$: 线性时间
@@ -82,6 +86,7 @@ $$\forall x \in \text{Input} : \text{Pre}(x) \implies \text{Terminates}(A, x) \l
 ### 3.1 分治算法
 
 **分治模式**：
+
 ```rust
 pub trait DivideAndConquer<T> {
     fn solve(&self, input: &[T]) -> T {
@@ -106,6 +111,7 @@ pub trait DivideAndConquer<T> {
 $$T(n) = a \cdot T(n/b) + f(n)$$
 
 其中：
+
 - $a$ 是子问题数量
 - $b$ 是问题规模缩小因子
 - $f(n)$ 是合并步骤的复杂度
@@ -113,6 +119,7 @@ $$T(n) = a \cdot T(n/b) + f(n)$$
 ### 3.2 动态规划
 
 **动态规划模式**：
+
 ```rust
 pub trait DynamicProgramming<T, R> {
     fn solve(&self, input: T) -> R {
@@ -140,6 +147,7 @@ $$T(n) = \sum_{i=1}^{n} T(i) \cdot \text{work}(i)$$
 ### 3.3 贪心算法
 
 **贪心模式**：
+
 ```rust
 pub trait Greedy<T, R> {
     fn solve(&self, input: &[T]) -> R {
@@ -185,6 +193,7 @@ $$T_{best}(n) = \min_{|x| = n} T(x)$$
 ### 4.2 优化技术
 
 **循环优化**：
+
 ```rust
 // 循环展开
 fn optimized_sum(data: &[i32]) -> i32 {
@@ -208,6 +217,7 @@ fn optimized_sum(data: &[i32]) -> i32 {
 ```
 
 **内存优化**：
+
 ```rust
 // 缓存友好的矩阵乘法
 fn cache_friendly_multiply(a: &[[f64; N]; N], b: &[[f64; N]; N]) -> [[f64; N]; N] {
@@ -228,12 +238,14 @@ fn cache_friendly_multiply(a: &[[f64; N]; N], b: &[[f64; N]; N]) -> [[f64; N]; N
 ### 4.3 算法选择
 
 **选择标准**：
+
 1. **时间复杂度**：优先选择低复杂度算法
 2. **空间复杂度**：考虑内存限制
 3. **实现复杂度**：权衡开发和维护成本
 4. **稳定性**：考虑输入数据特征
 
 **选择策略**：
+
 ```rust
 pub trait AlgorithmSelector<T> {
     fn select_algorithm(&self, input: &[T], constraints: &Constraints) -> Box<dyn Algorithm<T>> {
@@ -252,12 +264,14 @@ pub trait AlgorithmSelector<T> {
 ### 5.1 并行模型
 
 **PRAM模型**：
+
 - 共享内存多处理器模型
 - 处理器数量：$P$
 - 时间复杂度：$T(n, P)$
 - 加速比：$S(n, P) = T_{seq}(n) / T_{par}(n, P)$
 
 **工作深度模型**：
+
 - 工作：$W(n)$ - 总计算量
 - 深度：$D(n)$ - 关键路径长度
 - 并行时间：$T(n, P) = O(W(n)/P + D(n))$
@@ -265,6 +279,7 @@ pub trait AlgorithmSelector<T> {
 ### 5.2 并行算法设计
 
 **分治并行**：
+
 ```rust
 use rayon::prelude::*;
 
@@ -290,6 +305,7 @@ pub trait ParallelDivideAndConquer<T> {
 ```
 
 **Map-Reduce模式**：
+
 ```rust
 pub trait MapReduce<T, U, R> {
     fn map_reduce(&self, input: &[T]) -> R {
@@ -313,6 +329,7 @@ pub trait MapReduce<T, U, R> {
 ### 5.3 并行排序
 
 **并行归并排序**：
+
 ```rust
 pub fn parallel_merge_sort<T: Ord + Send + Sync>(data: &mut [T]) {
     if data.len() <= 1 {
@@ -356,6 +373,7 @@ fn merge_in_place<T: Ord>(data: &mut [T], mid: usize) {
 
 **证明**：
 通过结构归纳法证明：
+
 1. **基础情况**：简单算法直接验证
 2. **归纳步骤**：复杂算法分解为子算法
 
@@ -376,6 +394,7 @@ $$T(n) = a \cdot T(n/b) + f(n)$$
 $$S_{max} = \frac{1}{1 - p + p/P}$$
 
 **证明**：
+
 1. 串行时间：$T_s = T_{seq} + T_{par}$
 2. 并行时间：$T_p = T_{seq} + T_{par}/P$
 3. 加速比：$S = T_s / T_p = \frac{1}{1 - p + p/P}$
@@ -386,6 +405,7 @@ $$S_{max} = \frac{1}{1 - p + p/P}$$
 如果问题满足贪心选择性质，则贪心算法产生最优解。
 
 **证明**：
+
 1. 假设贪心解不是最优解
 2. 构造最优解与贪心解的差异
 3. 利用贪心选择性质证明矛盾
@@ -396,6 +416,7 @@ $$S_{max} = \frac{1}{1 - p + p/P}$$
 ### 7.1 排序算法
 
 **快速排序**：
+
 ```rust
 pub fn quicksort<T: Ord>(data: &mut [T]) {
     if data.len() <= 1 {
@@ -424,6 +445,7 @@ fn partition<T: Ord>(data: &mut [T]) -> usize {
 ```
 
 **归并排序**：
+
 ```rust
 pub fn merge_sort<T: Ord + Clone>(data: &[T]) -> Vec<T> {
     if data.len() <= 1 {
@@ -461,6 +483,7 @@ fn merge<T: Ord>(left: Vec<T>, right: Vec<T>) -> Vec<T> {
 ### 7.2 图算法
 
 **深度优先搜索**：
+
 ```rust
 use std::collections::HashSet;
 
@@ -491,6 +514,7 @@ pub fn dfs<T: Eq + Hash + Clone>(
 ```
 
 **Dijkstra算法**：
+
 ```rust
 use std::collections::{BinaryHeap, HashMap};
 use std::cmp::Ordering;
@@ -541,6 +565,7 @@ pub fn dijkstra(graph: &[Vec<(usize, i32)>], start: usize) -> Vec<i32> {
 ### 7.3 动态规划
 
 **最长公共子序列**：
+
 ```rust
 pub fn longest_common_subsequence(s1: &str, s2: &str) -> String {
     let chars1: Vec<char> = s1.chars().collect();

@@ -20,6 +20,7 @@
 
 **形式化定义**：
 控制流是一个状态转换系统 $(\Sigma, \rightarrow, \sigma_0)$，其中：
+
 - $\Sigma$ 是程序状态集合
 - $\rightarrow \subseteq \Sigma \times \Sigma$ 是状态转换关系
 - $\sigma_0 \in \Sigma$ 是初始状态
@@ -61,6 +62,7 @@ $$\forall i, j \in \text{branches}(e) : \text{moved}(v, i) \iff \text{moved}(v, 
 ### 3.1 if表达式
 
 **语法定义**：
+
 ```
 if condition { block_true } else { block_false }
 ```
@@ -78,13 +80,13 @@ $$\tau(b_t) = \tau(b_f) = \tau$$
 ```rust
 fn if_ownership_example() {
     let s = String::from("hello");
-    
+
     let result = if true {
         &s[0..1]  // 借用
     } else {
         &s[1..2]  // 借用
     };
-    
+
     // s 仍然有效
     println!("{}", s);
 }

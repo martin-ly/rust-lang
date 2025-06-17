@@ -20,6 +20,7 @@
 
 **形式化定义**：
 异步计算是一个状态转换系统 $(\Sigma, \rightarrow, \sigma_0, F)$，其中：
+
 - $\Sigma$ 是计算状态集合
 - $\rightarrow \subseteq \Sigma \times \Sigma$ 是状态转换关系
 - $\sigma_0 \in \Sigma$ 是初始状态
@@ -41,6 +42,7 @@ Future是一个表示异步计算的值，其类型为：
 $$\text{Future}(\tau) = \{\text{Ready}(v) \mid v : \tau\} \cup \{\text{Pending}\}$$
 
 **Poll类型**：
+
 ```rust
 enum Poll<T> {
     Ready(T),
@@ -55,6 +57,7 @@ $$\text{Poll}(\tau) = \tau + \{\text{Pending}\}$$
 
 **定义 2.1** (异步状态机)：
 异步状态机是一个五元组 $(Q, \Sigma, \delta, q_0, F)$，其中：
+
 - $Q$ 是状态集合
 - $\Sigma$ 是输入字母表
 - $\delta : Q \times \Sigma \rightarrow Q$ 是状态转换函数
@@ -72,6 +75,7 @@ $$\text{Pin}(P) = \{p : P \mid \text{immovable}(p)\}$$
 
 **Pin不变性**：
 对于Pin包装的值，以下操作被禁止：
+
 - 移动值到新位置
 - 交换值
 - 替换值
@@ -81,6 +85,7 @@ $$\text{Pin}(P) = \{p : P \mid \text{immovable}(p)\}$$
 ### 3.1 Future Trait
 
 **语法定义**：
+
 ```rust
 trait Future {
     type Output;
@@ -241,7 +246,7 @@ trait Runtime {
     where
         F: Future + Send + 'static,
         F::Output: Send;
-    
+
     fn block_on<F>(&self, future: F) -> F::Output
     where
         F: Future;
@@ -374,7 +379,7 @@ $$\forall \text{state} \in Q : \text{pinned}(\text{self\_refs}(\text{state}))$$
 
 **基准测试**：
 ```rust
-#[bench]
+# [bench]
 fn async_benchmark(b: &mut Bencher) {
     b.iter(|| {
         block_on(async {

@@ -264,60 +264,464 @@ $$MinimumSpanningTree(graph) = \text{Kruskal}(graph)$$
 
 ## 8. 形式化证明
 
-### 8.1 算法正确性
+### 8.1 算法系统概述
 
-**定理 8.1** (算法正确性): 良类型的算法实现满足其规范。
+### 8.1.1 算法系统的数学基础
 
-**证明**:
-1. 通过算法规范定义正确性条件
-2. 通过代码实现验证满足条件
-3. 通过测试用例验证边界情况
-4. 结合三者证明正确性
+Rust的算法系统基于**算法理论**（Algorithm Theory）和**计算复杂性理论**（Computational Complexity Theory），通过**类型系统**和**泛型编程**提供高效的算法实现。
 
-### 8.2 算法复杂度
+**定义 8.1.1** (算法)
+设 $\mathcal{I}$ 为输入集合，$\mathcal{O}$ 为输出集合，则算法 $A$ 是一个计算函数：
+$$A: \mathcal{I} \rightarrow \mathcal{O}$$
 
-**定理 8.2** (算法复杂度): 算法的时间复杂度分析是正确的。
+**定义 8.1.2** (算法复杂度)
+对于算法 $A$ 和输入 $x$，时间复杂度 $T_A(x)$ 定义为：
+$$T_A(x) = \text{执行 } A(x) \text{ 所需的基本操作次数}$$
 
-**证明**:
-1. 通过算法结构分析基本操作数
-2. 通过输入规模分析增长趋势
-3. 通过最坏情况分析上界
-4. 结合三者证明复杂度
+**定理 8.1.1** (算法正确性)
+对于任意算法 $A$，如果 $A$ 通过Rust的类型检查，则 $A$ 是类型安全的。
 
-### 8.3 算法稳定性
+**证明**：
+1. Rust的类型系统确保所有操作都是类型安全的
+2. 泛型约束保证算法的正确性
+3. 因此算法是类型安全的
 
-**定理 8.3** (算法稳定性): 稳定的算法保持相等元素的相对顺序。
+### 8.1.2 算法系统的核心概念
 
-**证明**:
-1. 通过算法实现验证稳定性
-2. 通过测试用例验证稳定性
-3. 通过形式化分析证明稳定性
+#### 8.1.2.1 算法抽象
 
-### 8.4 算法最优性
+**定义 8.1.3** (算法抽象)
+算法抽象 $AA$ 是一个trait，定义了算法的接口：
+$$AA = \{method_1: T_1 \rightarrow R_1, method_2: T_2 \rightarrow R_2, ...\}$$
 
-**定理 8.4** (算法最优性): 某些算法在特定问题上是最优的。
+**示例 8.1.1** (排序算法抽象)
+```rust
+pub trait Sorter {
+    fn sort<T: Ord>(&self, slice: &mut [T]);
 
-**证明**:
-1. 通过下界分析证明最优性
-2. 通过算法实现达到下界
-3. 通过理论分析证明最优性
+    fn is_sorted<T: Ord>(&self, slice: &[T]) -> bool {
+        slice.windows(2).all(|w| w[0] <= w[1])
+    }
+}
+```
 
-### 8.5 算法类型安全
+数学表示：
+$$\text{Sorter} = \{\text{sort}: [T] \rightarrow [T], \text{is\_sorted}: [T] \rightarrow \mathbb{B}\}$$
 
-**定理 8.5** (算法类型安全): 算法系统在Rust类型系统下是类型安全的。
+#### 8.1.2.2 泛型算法
 
-**证明**:
-1. 通过Trait约束保证类型安全
-2. 通过泛型系统保证类型正确
-3. 通过编译时检查保证安全
+**定义 8.1.4** (泛型算法)
+泛型算法 $GA[T]$ 是一个参数化的算法，满足：
+$$GA[T]: \mathcal{T} \rightarrow \mathcal{T}$$
 
-## 9. 参考文献
+**示例 8.1.2** (泛型查找算法)
+```rust
+pub fn find_min_by_key<I, F, K>(iter: I, key_fn: F) -> Option<I::Item>
+where
+    I: Iterator,
+    F: Fn(&I::Item) -> K,
+    K: Ord,
+{
+    iter.min_by_key(key_fn)
+}
+```
 
-1. The Rust Standard Library. "Iterator"
-2. The Rust Standard Library. "Collections"
-3. Cormen, T. H., et al. (2009). "Introduction to Algorithms"
-4. Knuth, D. E. (1997). "The Art of Computer Programming"
-5. Sedgewick, R., & Wayne, K. (2011). "Algorithms"
+数学表示：
+$$\text{find\_min\_by\_key}[I, F, K]: I \times F \rightarrow \text{Option}[I::\text{Item}]$$
+
+### 8.2 排序算法
+
+### 8.2.1 快速排序
+
+**定义 8.2.1** (快速排序)
+快速排序 $QS$ 是一个分治算法，满足：
+$$QS([a_1, a_2, ..., a_n]) = QS([a_i | a_i < pivot]) \cdot [pivot] \cdot QS([a_i | a_i > pivot])$$
+
+**定理 8.2.1** (快速排序正确性)
+快速排序算法能够正确排序任意可比较的序列。
+
+**证明**：
+1. 基础情况：空序列或单元素序列已排序
+2. 归纳步骤：
+   - 选择pivot元素
+   - 将序列分为小于pivot和大于pivot两部分
+   - 递归排序两部分
+   - 合并结果
+3. 因此快速排序是正确的
+
+**示例 8.2.1** (快速排序实现)
+```rust
+pub struct QuickSort;
+
+impl Sorter for QuickSort {
+    fn sort<T: Ord>(&self, slice: &mut [T]) {
+        if slice.len() <= 1 {
+            return;
+        }
+
+        let pivot_index = self.partition(slice);
+        self.sort(&mut slice[..pivot_index]);
+        self.sort(&mut slice[pivot_index + 1..]);
+    }
+
+    fn partition<T: Ord>(&self, slice: &mut [T]) -> usize {
+        let len = slice.len();
+        let pivot_index = len - 1;
+        let mut i = 0;
+
+        for j in 0..len - 1 {
+            if slice[j] <= slice[pivot_index] {
+                slice.swap(i, j);
+                i += 1;
+            }
+        }
+
+        slice.swap(i, pivot_index);
+        i
+    }
+}
+```
+
+### 8.2.2 归并排序
+
+**定义 8.2.2** (归并排序)
+归并排序 $MS$ 是一个分治算法，满足：
+$$MS([a_1, a_2, ..., a_n]) = \text{merge}(MS([a_1, ..., a_{n/2}]), MS([a_{n/2+1}, ..., a_n]))$$
+
+**定理 8.2.2** (归并排序复杂度)
+归并排序的时间复杂度为 $O(n \log n)$。
+
+**证明**：
+1. 递归树的高度为 $\log n$
+2. 每层的合并操作复杂度为 $O(n)$
+3. 因此总复杂度为 $O(n \log n)$
+
+## 8.3 搜索算法
+
+### 8.3.1 二分搜索
+
+**定义 8.3.1** (二分搜索)
+二分搜索 $BS$ 是一个在有序序列中查找元素的算法：
+$$BS([a_1, ..., a_n], target) = \begin{cases}
+\text{Some}(i) & \text{if } a_i = target \\
+\text{None} & \text{otherwise}
+\end{cases}$$
+
+**定理 8.3.1** (二分搜索复杂度)
+二分搜索的时间复杂度为 $O(\log n)$。
+
+**证明**：
+1. 每次比较将搜索空间减半
+2. 搜索空间大小：$n, n/2, n/4, ..., 1$
+3. 因此需要 $\log n$ 次比较
+
+**示例 8.3.1** (二分搜索实现)
+```rust
+pub fn binary_search<T: Ord>(slice: &[T], target: &T) -> Option<usize> {
+    let mut left = 0;
+    let mut right = slice.len();
+
+    while left < right {
+        let mid = left + (right - left) / 2;
+        match slice[mid].cmp(target) {
+            std::cmp::Ordering::Equal => return Some(mid),
+            std::cmp::Ordering::Less => left = mid + 1,
+            std::cmp::Ordering::Greater => right = mid,
+        }
+    }
+
+    None
+}
+```
+
+### 8.3.2 深度优先搜索
+
+**定义 8.3.2** (深度优先搜索)
+深度优先搜索 $DFS$ 是一个图遍历算法：
+$$DFS(G, v) = \text{visit}(v) \cdot \prod_{u \in \text{adj}(v)} DFS(G, u)$$
+
+**定理 8.3.2** (DFS正确性)
+深度优先搜索能够访问图中的所有可达节点。
+
+**证明**：
+1. 从起始节点开始
+2. 递归访问所有未访问的邻居
+3. 因此能够访问所有可达节点
+
+## 8.4 图算法
+
+### 8.4.1 最短路径算法
+
+**定义 8.4.1** (Dijkstra算法)
+Dijkstra算法 $D$ 是一个单源最短路径算法：
+$$D(G, s) = \text{计算从 } s \text{ 到所有其他节点的最短路径}$$
+
+**定理 8.4.1** (Dijkstra正确性)
+Dijkstra算法能够正确计算最短路径。
+
+**证明**：
+1. 使用贪心策略选择当前最短距离的节点
+2. 通过归纳法证明每次选择都是最优的
+3. 因此算法是正确的
+
+**示例 8.4.1** (Dijkstra算法实现)
+```rust
+use std::collections::BinaryHeap;
+use std::cmp::Reverse;
+
+pub fn dijkstra(graph: &Graph, start: usize) -> Vec<usize> {
+    let mut distances = vec![usize::MAX; graph.len()];
+    let mut heap = BinaryHeap::new();
+
+    distances[start] = 0;
+    heap.push(Reverse((0, start)));
+
+    while let Some(Reverse((cost, node))) = heap.pop() {
+        if cost > distances[node] {
+            continue;
+        }
+
+        for &(neighbor, weight) in &graph[node] {
+            let new_cost = cost + weight;
+            if new_cost < distances[neighbor] {
+                distances[neighbor] = new_cost;
+                heap.push(Reverse((new_cost, neighbor)));
+            }
+        }
+    }
+
+    distances
+}
+```
+
+### 8.4.2 最小生成树
+
+**定义 8.4.2** (Kruskal算法)
+Kruskal算法 $K$ 是一个最小生成树算法：
+$$K(G) = \text{选择权重最小的边，避免环}$$
+
+**定理 8.4.2** (Kruskal正确性)
+Kruskal算法能够找到最小生成树。
+
+**证明**：
+1. 使用贪心策略选择最小权重边
+2. 使用并查集避免环
+3. 通过归纳法证明结果是最小生成树
+
+## 8.5 动态规划
+
+### 8.5.1 动态规划原理
+
+**定义 8.5.1** (动态规划)
+动态规划 $DP$ 是一种通过子问题求解原问题的方法：
+$$DP[i] = \min_{j < i} \{DP[j] + cost(j, i)\}$$
+
+**定理 8.5.1** (最优子结构)
+动态规划问题具有最优子结构性质。
+
+**证明**：
+1. 原问题的最优解包含子问题的最优解
+2. 通过反证法证明
+3. 因此具有最优子结构
+
+**示例 8.5.1** (斐波那契数列)
+```rust
+pub fn fibonacci_dp(n: usize) -> u64 {
+    if n <= 1 {
+        return n as u64;
+    }
+
+    let mut dp = vec![0; n + 1];
+    dp[0] = 0;
+    dp[1] = 1;
+
+    for i in 2..=n {
+        dp[i] = dp[i - 1] + dp[i - 2];
+    }
+
+    dp[n]
+}
+```
+
+### 8.5.2 背包问题
+
+**定义 8.5.2** (0-1背包问题)
+0-1背包问题是一个经典的动态规划问题：
+$$\max \sum_{i=1}^n v_i x_i \text{ subject to } \sum_{i=1}^n w_i x_i \leq W, x_i \in \{0, 1\}$$
+
+**定理 8.5.2** (背包问题复杂度)
+0-1背包问题的动态规划解法时间复杂度为 $O(nW)$。
+
+**证明**：
+1. 状态空间大小为 $O(nW)$
+2. 每个状态的计算复杂度为 $O(1)$
+3. 因此总复杂度为 $O(nW)$
+
+## 8.6 并行算法
+
+### 8.6.1 并行归并排序
+
+**定义 8.6.1** (并行归并排序)
+并行归并排序 $PMS$ 是一个并行算法：
+$$PMS([a_1, ..., a_n]) = \text{parallel\_merge}(PMS([a_1, ..., a_{n/2}]), PMS([a_{n/2+1}, ..., a_n]))$$
+
+**定理 8.6.1** (并行归并排序复杂度)
+使用 $p$ 个处理器的并行归并排序时间复杂度为 $O(\frac{n \log n}{p})$。
+
+**证明**：
+1. 串行归并排序复杂度为 $O(n \log n)$
+2. 并行化将复杂度除以处理器数量
+3. 因此复杂度为 $O(\frac{n \log n}{p})$
+
+**示例 8.6.1** (并行归并排序实现)
+```rust
+use rayon::prelude::*;
+
+pub fn parallel_merge_sort<T: Ord + Send + Sync>(slice: &mut [T]) {
+    if slice.len() <= 1 {
+        return;
+    }
+
+    let mid = slice.len() / 2;
+    let (left, right) = slice.split_at_mut(mid);
+
+    rayon::join(
+        || parallel_merge_sort(left),
+        || parallel_merge_sort(right)
+    );
+
+    merge(slice, mid);
+}
+```
+
+### 8.6.2 并行前缀和
+
+**定义 8.6.2** (并行前缀和)
+并行前缀和 $PPS$ 是一个并行算法：
+$$PPS([a_1, ..., a_n]) = [a_1, a_1 + a_2, ..., \sum_{i=1}^n a_i]$$
+
+**定理 8.6.2** (并行前缀和复杂度)
+并行前缀和的时间复杂度为 $O(\log n)$。
+
+**证明**：
+1. 使用分治策略
+2. 每层需要 $O(1)$ 时间
+3. 总共需要 $\log n$ 层
+
+## 8.7 随机化算法
+
+### 8.7.1 随机化快速排序
+
+**定义 8.7.1** (随机化快速排序)
+随机化快速排序 $RQS$ 是快速排序的随机化版本：
+$$RQS([a_1, ..., a_n]) = \text{随机选择pivot} \cdot QS([a_1, ..., a_n])$$
+
+**定理 8.7.1** (随机化快速排序期望复杂度)
+随机化快速排序的期望时间复杂度为 $O(n \log n)$。
+
+**证明**：
+1. 随机选择pivot使得分割更均匀
+2. 期望情况下每个元素被选为pivot的概率相等
+3. 因此期望复杂度为 $O(n \log n)$
+
+### 8.7.2 蒙特卡洛算法
+
+**定义 8.7.2** (蒙特卡洛算法)
+蒙特卡洛算法 $MC$ 是一种随机化算法：
+$$MC(x) = \text{以高概率返回正确结果的随机化算法}$$
+
+**定理 8.7.2** (蒙特卡洛正确性)
+蒙特卡洛算法能够以高概率返回正确结果。
+
+**证明**：
+1. 通过多次运行提高正确性概率
+2. 使用概率论分析正确性
+3. 因此能够以高概率返回正确结果
+
+## 8.8 算法优化
+
+### 8.8.1 缓存优化
+
+**定义 8.8.1** (缓存友好算法)
+缓存友好算法 $CFA$ 是考虑缓存性能的算法：
+$$CFA = \text{最小化缓存未命中的算法}$$
+
+**定理 8.8.1** (缓存优化效果)
+缓存优化能够显著提高算法性能。
+
+**证明**：
+1. 缓存命中比内存访问快得多
+2. 优化数据访问模式减少缓存未命中
+3. 因此能够提高性能
+
+### 8.8.2 内存优化
+
+**定义 8.8.2** (内存优化算法)
+内存优化算法 $MOA$ 是考虑内存使用的算法：
+$$MOA = \text{最小化内存使用的算法}$$
+
+**定理 8.8.2** (内存优化必要性)
+内存优化对于大数据集是必要的。
+
+**证明**：
+1. 内存是有限的资源
+2. 大数据集可能超出可用内存
+3. 因此需要内存优化
+
+## 8.9 算法验证
+
+### 8.9.1 形式化验证
+
+**定义 8.9.1** (算法验证)
+算法验证 $AV$ 是证明算法正确性的过程：
+$$AV(A) = \text{证明算法 } A \text{ 满足规范}$$
+
+**定理 8.9.1** (验证必要性)
+形式化验证能够保证算法的正确性。
+
+**证明**：
+1. 形式化验证提供严格的数学证明
+2. 比测试更全面
+3. 因此能够保证正确性
+
+### 8.9.2 性能分析
+
+**定义 8.9.2** (性能分析)
+性能分析 $PA$ 是分析算法性能的过程：
+$$PA(A) = \text{分析算法 } A \text{ 的时间和空间复杂度}$$
+
+**定理 8.9.2** (性能分析重要性)
+性能分析对于算法选择是重要的。
+
+**证明**：
+1. 不同算法有不同的复杂度
+2. 复杂度影响实际性能
+3. 因此需要性能分析
+
+## 8.10 总结
+
+Rust的算法系统通过类型系统、泛型编程和并行计算提供了高效的算法实现。通过严格的数学基础和形式化证明，算法系统确保了程序的正确性和性能。
+
+### 8.10.1 关键特性
+
+1. **类型安全**：编译时类型检查
+2. **泛型编程**：通用算法实现
+3. **并行计算**：高性能并行算法
+4. **零成本抽象**：无运行时开销
+
+### 8.10.2 理论贡献
+
+1. **形式化语义**：严格的数学定义
+2. **复杂度分析**：时间和空间复杂度分析
+3. **正确性证明**：算法正确性证明
+4. **性能优化**：缓存和内存优化
+
+---
+
+**参考文献**：
+1. Cormen, T. H., et al. (2009). Introduction to Algorithms. MIT Press.
+2. Knuth, D. E. (1997). The Art of Computer Programming. Addison-Wesley.
+3. Rust Reference. (2024). Algorithms. https://doc.rust-lang.org/std/collections/
 
 ---
 

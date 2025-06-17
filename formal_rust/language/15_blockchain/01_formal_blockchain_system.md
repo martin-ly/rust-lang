@@ -1,611 +1,515 @@
-# Rust区块链系统形式化理论
+# 15. 区块链系统形式化理论
 
-## 目录
+## 15.1 区块链系统概述
 
-1. [引言](#1-引言)
-2. [区块链基础](#2-区块链基础)
-3. [密码学原语](#3-密码学原语)
-4. [共识机制](#4-共识机制)
-5. [智能合约](#5-智能合约)
-6. [状态管理](#6-状态管理)
-7. [安全保证](#7-安全保证)
-8. [形式化证明](#8-形式化证明)
-9. [应用示例](#9-应用示例)
-10. [参考文献](#10-参考文献)
+### 15.1.1 区块链系统的数学基础
 
-## 1. 引言
+区块链系统基于**密码学理论**（Cryptography Theory）和**分布式系统理论**（Distributed Systems Theory），通过**共识机制**和**密码学原语**确保系统的安全性和一致性。
 
-Rust区块链系统提供了安全、高效、可验证的分布式账本技术，通过密码学和共识机制实现去中心化的信任。
+**定义 15.1.1** (区块链)
+设 $\mathcal{B}$ 为区块集合，$\mathcal{T}$ 为交易集合，则区块链 $BC$ 定义为：
+$$BC = (B_0, B_1, ..., B_n)$$
 
-### 1.1 设计目标
+其中每个区块 $B_i$ 满足：
+$$B_i = (h_{prev}, T_i, nonce_i, h_i)$$
 
-- **去中心化**：不依赖单一权威机构
-- **不可篡改**：通过密码学保证数据完整性
-- **透明性**：所有交易公开可验证
-- **安全性**：抵抗各种攻击和故障
+**定理 15.1.1** (区块链不可变性)
+对于任意区块链 $BC$，修改任一区块 $B_i$ 将导致所有后续区块无效。
 
-### 1.2 核心组件
+**证明**：
 
-```text
-区块链系统架构
-├── 区块结构 - 区块头、交易、哈希链
-├── 密码学原语 - 哈希函数、数字签名、默克尔树
-├── 共识机制 - PoW、PoS、拜占庭容错
-├── 智能合约 - 图灵完备、状态机、Gas机制
-├── 网络层 - P2P网络、消息传播、节点发现
-└── 存储层 - 状态数据库、索引结构、缓存
-```
+1. 假设修改区块 $B_i$ 为 $B_i'$
+2. 由于哈希函数的抗碰撞性，$H(B_i') \neq H(B_i)$
+3. 区块 $B_{i+1}$ 包含 $H(B_i)$ 作为前驱哈希
+4. 因此 $B_{i+1}$ 变得无效
+5. 这一变化级联到所有后续区块
 
-## 2. 区块链基础
+### 15.1.2 区块链系统的核心概念
 
-### 2.1 区块结构
+#### 15.1.2.1 区块结构
 
-**定义 2.1** (区块): 区块是区块链的基本单位：
+**定义 15.1.2** (区块)
+区块 $B$ 是一个四元组：
+$$B = (h_{prev}, T, nonce, h)$$
 
-```rust
-pub struct Block {
-    pub header: BlockHeader,
-    pub transactions: Vec<Transaction>,
-}
+其中：
 
-pub struct BlockHeader {
-    pub version: u32,
-    pub prev_hash: Hash,
-    pub merkle_root: Hash,
-    pub timestamp: u64,
-    pub difficulty: u64,
-    pub nonce: u64,
-}
-```
+- $h_{prev}$ 是前一个区块的哈希值
+- $T$ 是交易集合
+- $nonce$ 是工作量证明值
+- $h$ 是当前区块的哈希值
 
-**定义 2.2** (区块链): 区块链是区块的有序序列：
-
-$$BC = (B_0, B_1, \ldots, B_n)$$
-
-其中每个区块 $B_i$ 包含前一个区块的哈希值。
-
-**定理 2.1** (区块链不可变性): 修改任一区块将导致所有后续区块无效。
-
-**证明**:
-
-1. 哈希函数的抗碰撞性
-2. 链式依赖关系
-3. 级联失效效应
-4. 因此区块链是不可篡改的。$\square$
-
-### 2.2 哈希链
-
-**定义 2.3** (哈希链): 哈希链通过哈希函数连接区块：
-
-$$H(B_i) = H(header_i || transactions_i)$$
-
-**定理 2.2** (哈希链完整性): 哈希链保证了区块链的完整性。
-
-**证明**: 通过哈希函数的单向性和抗碰撞性保证。$\square$
-
-## 3. 密码学原语
-
-### 3.1 哈希函数
-
-**定义 3.1** (加密哈希函数): 哈希函数 $H: \{0,1\}^* \rightarrow \{0,1\}^n$ 满足：
-
-1. **抗原像性**: 给定 $y$，找到 $x$ 使得 $H(x) = y$ 是困难的
-2. **抗第二原像性**: 给定 $x_1$，找到 $x_2 \neq x_1$ 使得 $H(x_1) = H(x_2)$ 是困难的
-3. **抗碰撞性**: 找到任意 $x_1 \neq x_2$ 使得 $H(x_1) = H(x_2)$ 是困难的
+**示例 15.1.1** (区块实现)
 
 ```rust
 use sha2::{Sha256, Digest};
+use serde::{Serialize, Deserialize};
 
-pub fn hash<T: AsRef<[u8]>>(data: T) -> Hash {
-    let mut hasher = Sha256::new();
-    hasher.update(data);
-    Hash(hasher.finalize().into())
-}
-```
-
-**定理 3.1** (生日攻击): 对于 $n$ 位哈希函数，找到碰撞需要约 $O(2^{n/2})$ 次尝试。
-
-**证明**: 基于生日悖论的概率分析。$\square$
-
-### 3.2 数字签名
-
-**定义 3.2** (数字签名): 数字签名方案是一个三元组 $(Gen, Sign, Verify)$：
-
-```rust
-pub trait SignatureScheme {
-    type PublicKey;
-    type PrivateKey;
-    type Signature;
-    
-    fn generate() -> (Self::PublicKey, Self::PrivateKey);
-    fn sign(private_key: &Self::PrivateKey, message: &[u8]) -> Self::Signature;
-    fn verify(public_key: &Self::PublicKey, message: &[u8], signature: &Self::Signature) -> bool;
-}
-```
-
-**定理 3.2** (签名安全性): 如果签名方案是安全的，则签名是不可伪造的。
-
-**证明**: 通过私钥的保密性和签名算法的正确性保证。$\square$
-
-### 3.3 默克尔树
-
-**定义 3.3** (默克尔树): 默克尔树是一种哈希树结构：
-
-```rust
-pub struct MerkleTree {
-    root: Hash,
-    leaves: Vec<Hash>,
-}
-
-impl MerkleTree {
-    pub fn new(transactions: &[Transaction]) -> Self {
-        let leaves: Vec<Hash> = transactions.iter()
-            .map(|tx| hash(tx))
-            .collect();
-        
-        let root = Self::build_root(&leaves);
-        Self { root, leaves }
-    }
-    
-    fn build_root(leaves: &[Hash]) -> Hash {
-        if leaves.len() == 1 {
-            return leaves[0];
-        }
-        
-        let mut parents = Vec::new();
-        for chunk in leaves.chunks(2) {
-            let parent = if chunk.len() == 2 {
-                hash(&[chunk[0].0, chunk[1].0].concat())
-            } else {
-                hash(&[chunk[0].0, chunk[0].0].concat())
-            };
-            parents.push(parent);
-        }
-        
-        Self::build_root(&parents)
-    }
-}
-```
-
-**定理 3.3** (默克尔树正确性): 默克尔树提供了高效的数据完整性验证。
-
-**证明**: 通过树结构和哈希函数的性质保证。$\square$
-
-## 4. 共识机制
-
-### 4.1 拜占庭将军问题
-
-**定义 4.1** (拜占庭将军问题): 在分布式系统中，$n$ 个将军需要达成一致，其中最多 $f$ 个是叛徒。
-
-**定理 4.1** (拜占庭容错): 如果 $n \geq 3f + 1$，则拜占庭容错是可能的。
-
-**证明**: 通过多数投票和消息传递的正确性保证。$\square$
-
-### 4.2 工作量证明
-
-**定义 4.2** (工作量证明): PoW要求找到一个nonce使得：
-
-$$H(header || nonce) < target$$
-
-```rust
-pub struct ProofOfWork {
-    pub difficulty: u64,
-}
-
-impl ProofOfWork {
-    pub fn mine(&self, header: &BlockHeader) -> u64 {
-        let target = 2u64.pow(256 - self.difficulty as u32);
-        
-        for nonce in 0..u64::MAX {
-            let mut header_copy = header.clone();
-            header_copy.nonce = nonce;
-            
-            let hash = hash(&header_copy);
-            if u64::from_be_bytes(hash.0[0..8].try_into().unwrap()) < target {
-                return nonce;
-            }
-        }
-        
-        panic!("Mining failed");
-    }
-}
-```
-
-**定理 4.2** (PoW安全性): 工作量证明提供了经济安全性。
-
-**证明**: 通过计算成本和奖励机制的平衡保证。$\square$
-
-### 4.3 权益证明
-
-**定义 4.3** (权益证明): PoS根据验证者的权益选择区块生产者：
-
-```rust
-pub struct ProofOfStake {
-    pub validators: Vec<Validator>,
-}
-
-pub struct Validator {
-    pub address: Address,
-    pub stake: u64,
-    pub public_key: PublicKey,
-}
-
-impl ProofOfStake {
-    pub fn select_validator(&self) -> &Validator {
-        let total_stake: u64 = self.validators.iter().map(|v| v.stake).sum();
-        let random = rand::random::<u64>() % total_stake;
-        
-        let mut cumulative = 0;
-        for validator in &self.validators {
-            cumulative += validator.stake;
-            if random < cumulative {
-                return validator;
-            }
-        }
-        
-        &self.validators[0]
-    }
-}
-```
-
-**定理 4.3** (PoS正确性): 权益证明提供了去中心化的共识。
-
-**证明**: 通过权益分布和随机选择机制保证。$\square$
-
-## 5. 智能合约
-
-### 5.1 合约模型
-
-**定义 5.1** (智能合约): 智能合约是运行在区块链上的程序：
-
-```rust
-pub trait SmartContract {
-    type State;
-    type Message;
-    type Response;
-    
-    fn init(&self) -> Self::State;
-    fn handle(&self, state: &mut Self::State, message: Self::Message) -> Self::Response;
-}
-```
-
-**定义 5.2** (合约执行): 合约执行是一个状态转换：
-
-$$\frac{contract, state, message}{state \xrightarrow{execute} state'}$$
-
-### 5.2 Gas机制
-
-**定义 5.3** (Gas计算): Gas用于限制合约执行成本：
-
-```rust
-pub struct GasMeter {
-    pub gas_used: u64,
-    pub gas_limit: u64,
-}
-
-impl GasMeter {
-    pub fn consume(&mut self, gas: u64) -> Result<(), OutOfGas> {
-        if self.gas_used + gas > self.gas_limit {
-            return Err(OutOfGas);
-        }
-        self.gas_used += gas;
-        Ok(())
-    }
-}
-```
-
-**定理 5.1** (Gas安全性): Gas机制防止无限循环和资源耗尽。
-
-**证明**: 通过Gas限制和计费机制保证。$\square$
-
-## 6. 状态管理
-
-### 6.1 全局状态
-
-**定义 6.1** (全局状态): 全局状态是所有账户状态的集合：
-
-```rust
-pub struct GlobalState {
-    pub accounts: HashMap<Address, AccountState>,
-    pub storage: HashMap<Address, HashMap<Hash, Vec<u8>>>,
-}
-
-pub struct AccountState {
-    pub balance: u64,
-    pub nonce: u64,
-    pub code: Option<Vec<u8>>,
-}
-```
-
-**定理 6.1** (状态一致性): 所有节点维护相同的全局状态。
-
-**证明**: 通过共识机制和状态转换的一致性保证。$\square$
-
-### 6.2 状态转换
-
-**定义 6.2** (状态转换): 交易导致状态转换：
-
-$$\frac{state, transaction}{state \xrightarrow{apply} state'}$$
-
-```rust
-impl GlobalState {
-    pub fn apply_transaction(&mut self, tx: &Transaction) -> Result<(), Error> {
-        // 验证交易
-        self.validate_transaction(tx)?;
-        
-        // 执行状态转换
-        self.execute_transaction(tx)?;
-        
-        Ok(())
-    }
-}
-```
-
-## 7. 安全保证
-
-### 7.1 双花攻击
-
-**定义 7.1** (双花攻击): 双花攻击是同一笔资金被花费两次。
-
-**定理 7.1** (双花防护): 通过共识机制和确认机制防止双花攻击。
-
-**证明**:
-
-1. 共识机制确保交易顺序
-2. 确认机制防止分叉攻击
-3. 因此双花攻击被有效防止。$\square$
-
-### 7.2 51%攻击
-
-**定义 7.2** (51%攻击): 攻击者控制超过50%的算力。
-
-**定理 7.2** (51%攻击概率): 51%攻击的成功概率随确认数指数递减。
-
-**证明**: 通过概率论和随机游走理论分析。$\square$
-
-### 7.3 网络攻击
-
-**定义 7.3** (网络攻击): 攻击者通过控制网络进行攻击。
-
-**定理 7.3** (网络安全性): P2P网络提供了去中心化的安全性。
-
-**证明**: 通过节点分布和消息传播机制保证。$\square$
-
-## 8. 形式化证明
-
-### 8.1 共识正确性
-
-**定理 8.1** (共识正确性): 如果网络是同步的，则共识算法能够达成一致。
-
-**证明**: 通过共识算法的正确性和网络同步性保证。$\square$
-
-### 8.2 安全性证明
-
-**定理 8.2** (区块链安全): 区块链系统在诚实多数假设下是安全的。
-
-**证明**:
-
-1. 密码学原语的安全性
-2. 共识机制的正确性
-3. 网络层的可靠性
-4. 因此整个系统是安全的。$\square$
-
-### 8.3 活性证明
-
-**定理 8.3** (区块链活性): 在诚实多数假设下，区块链系统能够持续产生新区块。
-
-**证明**: 通过共识机制的活性和网络连接性保证。$\square$
-
-## 9. 应用示例
-
-### 9.1 简单区块链实现
-
-```rust
-use std::collections::HashMap;
-use sha2::{Sha256, Digest};
-
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Block {
     pub index: u64,
     pub timestamp: u64,
-    pub data: String,
+    pub transactions: Vec<Transaction>,
     pub previous_hash: String,
-    pub hash: String,
     pub nonce: u64,
+    pub hash: String,
 }
 
 impl Block {
-    pub fn new(index: u64, timestamp: u64, data: String, previous_hash: String) -> Self {
-        let mut block = Self {
+    pub fn new(index: u64, transactions: Vec<Transaction>, previous_hash: String) -> Self {
+        let mut block = Block {
             index,
-            timestamp,
-            data,
+            timestamp: std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_secs(),
+            transactions,
             previous_hash,
-            hash: String::new(),
             nonce: 0,
+            hash: String::new(),
         };
+        
         block.hash = block.calculate_hash();
         block
     }
     
     pub fn calculate_hash(&self) -> String {
-        let content = format!("{}{}{}{}{}", 
-            self.index, self.timestamp, self.data, self.previous_hash, self.nonce);
+        let content = format!(
+            "{}{}{}{}",
+            self.index,
+            self.timestamp,
+            serde_json::to_string(&self.transactions).unwrap(),
+            self.previous_hash
+        );
+        
         let mut hasher = Sha256::new();
         hasher.update(content.as_bytes());
         format!("{:x}", hasher.finalize())
     }
-    
-    pub fn mine(&mut self, difficulty: usize) {
+}
+```
+
+#### 15.1.2.2 哈希函数
+
+**定义 15.1.3** (加密哈希函数)
+加密哈希函数 $H: \{0,1\}^* \rightarrow \{0,1\}^n$ 满足：
+
+1. **抗原像性**：给定 $y$，找到 $x$ 使得 $H(x) = y$ 是计算上不可行的
+2. **抗第二原像性**：给定 $x_1$，找到 $x_2 \neq x_1$ 使得 $H(x_1) = H(x_2)$ 是计算上不可行的
+3. **抗碰撞性**：找到任意 $x_1 \neq x_2$ 使得 $H(x_1) = H(x_2)$ 是计算上不可行的
+
+**定理 15.1.2** (哈希函数的单向性)
+如果 $H$ 是安全的加密哈希函数，则给定哈希值 $h = H(x)$，确定输入 $x$ 的唯一方法是暴力搜索，期望计算复杂度为 $O(2^n)$。
+
+## 15.2 共识机制
+
+### 15.2.1 工作量证明
+
+**定义 15.2.1** (工作量证明)
+工作量证明 $PoW$ 是一个共识机制，满足：
+$$PoW(B, difficulty) = \text{找到 } nonce \text{ 使得 } H(B) < 2^{256-difficulty}$$
+
+**定理 15.2.1** (工作量证明的安全性)
+工作量证明机制能够防止双重支付攻击。
+
+**证明**：
+
+1. 攻击者需要控制超过50%的算力
+2. 计算复杂度随难度指数增长
+3. 因此攻击成本极高
+
+**示例 15.2.1** (工作量证明实现)
+
+```rust
+impl Block {
+    pub fn mine_block(&mut self, difficulty: usize) {
         let target = "0".repeat(difficulty);
+        
         while !self.hash.starts_with(&target) {
             self.nonce += 1;
             self.hash = self.calculate_hash();
         }
+        
         println!("Block mined: {}", self.hash);
     }
 }
 
-#[derive(Debug)]
-pub struct Blockchain {
-    pub chain: Vec<Block>,
-    pub difficulty: usize,
-}
-
-impl Blockchain {
-    pub fn new() -> Self {
-        let mut chain = Vec::new();
-        chain.push(Block::new(0, 0, "Genesis Block".to_string(), "0".to_string()));
-        
-        Self {
-            chain,
-            difficulty: 4,
-        }
-    }
+pub fn mine_blockchain(blockchain: &mut Blockchain, difficulty: usize) {
+    let mut new_block = Block::new(
+        blockchain.blocks.len() as u64,
+        vec![], // 新交易
+        blockchain.get_latest_block().hash.clone(),
+    );
     
-    pub fn add_block(&mut self, data: String) {
-        let previous_block = &self.chain[self.chain.len() - 1];
-        let mut new_block = Block::new(
-            previous_block.index + 1,
-            std::time::SystemTime::now()
-                .duration_since(std::time::UNIX_EPOCH)
-                .unwrap()
-                .as_secs(),
-            data,
-            previous_block.hash.clone(),
-        );
-        
-        new_block.mine(self.difficulty);
-        self.chain.push(new_block);
-    }
-    
-    pub fn is_valid(&self) -> bool {
-        for i in 1..self.chain.len() {
-            let current = &self.chain[i];
-            let previous = &self.chain[i - 1];
-            
-            if current.hash != current.calculate_hash() {
-                return false;
-            }
-            
-            if current.previous_hash != previous.hash {
-                return false;
-            }
-        }
-        true
-    }
-}
-
-fn main() {
-    let mut blockchain = Blockchain::new();
-    
-    println!("Mining block 1...");
-    blockchain.add_block("First block data".to_string());
-    
-    println!("Mining block 2...");
-    blockchain.add_block("Second block data".to_string());
-    
-    println!("Blockchain valid: {}", blockchain.is_valid());
-    
-    for block in &blockchain.chain {
-        println!("Block #{}: {}", block.index, block.hash);
-    }
+    new_block.mine_block(difficulty);
+    blockchain.add_block(new_block);
 }
 ```
 
-### 9.2 智能合约示例
+### 15.2.2 权益证明
+
+**定义 15.2.2** (权益证明)
+权益证明 $PoS$ 是一个共识机制，满足：
+$$PoS(validator, stake) = \text{根据权益选择验证者}$$
+
+**定理 15.2.2** (权益证明的节能性)
+权益证明比工作量证明更节能。
+
+**证明**：
+
+1. 权益证明不需要大量计算
+2. 验证者选择基于权益而非算力
+3. 因此能耗显著降低
+
+### 15.2.3 拜占庭容错
+
+**定义 15.2.3** (拜占庭将军问题)
+拜占庭将军问题是分布式系统中的一致性问题：
+$$BFT(n, f) = \text{在 } n \text{ 个节点中，最多 } f \text{ 个恶意节点的情况下达成共识}$$
+
+**定理 15.2.3** (拜占庭容错条件)
+拜占庭容错需要 $n \geq 3f + 1$。
+
+**证明**：
+
+1. 假设 $n \leq 3f$
+2. 恶意节点可以分裂诚实节点
+3. 因此无法达成共识
+4. 所以需要 $n \geq 3f + 1$
+
+## 15.3 密码学原语
+
+### 15.3.1 数字签名
+
+**定义 15.3.1** (数字签名方案)
+数字签名方案 $\Sigma$ 是一个三元组：
+$$\Sigma = (Gen, Sign, Verify)$$
+
+其中：
+
+- $Gen(1^k) \rightarrow (pk, sk)$：生成密钥对
+- $Sign(sk, m) \rightarrow \sigma$：生成签名
+- $Verify(pk, m, \sigma) \rightarrow \{0,1\}$：验证签名
+
+**定理 15.3.1** (签名不可伪造性)
+对于任何概率多项式时间攻击者 $A$，以下优势是可忽略的：
+$$Adv_A = Pr[(pk, sk) \leftarrow Gen(1^k); (m, \sigma) \leftarrow A^{Sign(sk, \cdot)}(pk): Verify(pk, m, \sigma) = 1 \land m \text{ 未被查询}]$$
+
+**示例 15.3.1** (数字签名实现)
 
 ```rust
-pub struct SimpleToken {
-    pub balances: HashMap<Address, u64>,
-    pub total_supply: u64,
+use ed25519_dalek::{Keypair, PublicKey, Signature, Signer, Verifier};
+use rand::rngs::OsRng;
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Transaction {
+    pub from: String,
+    pub to: String,
+    pub amount: f64,
+    pub signature: Option<String>,
 }
 
-impl SmartContract for SimpleToken {
-    type State = HashMap<Address, u64>;
-    type Message = TokenMessage;
-    type Response = TokenResponse;
-    
-    fn init(&self) -> Self::State {
-        let mut state = HashMap::new();
-        state.insert(Address::from([0u8; 32]), self.total_supply);
-        state
+impl Transaction {
+    pub fn new(from: String, to: String, amount: f64) -> Self {
+        Transaction {
+            from,
+            to,
+            amount,
+            signature: None,
+        }
     }
     
-    fn handle(&self, state: &mut Self::State, message: Self::Message) -> Self::Response {
-        match message {
-            TokenMessage::Transfer { from, to, amount } => {
-                if state.get(&from).unwrap_or(&0) >= &amount {
-                    *state.entry(from).or_insert(0) -= amount;
-                    *state.entry(to).or_insert(0) += amount;
-                    TokenResponse::Success
-                } else {
-                    TokenResponse::InsufficientBalance
+    pub fn sign(&mut self, keypair: &Keypair) {
+        let message = format!("{}:{}:{}", self.from, self.to, self.amount);
+        let signature = keypair.sign(message.as_bytes());
+        self.signature = Some(hex::encode(signature.to_bytes()));
+    }
+    
+    pub fn verify(&self, public_key: &PublicKey) -> bool {
+        if let Some(sig_hex) = &self.signature {
+            let message = format!("{}:{}:{}", self.from, self.to, self.amount);
+            if let Ok(sig_bytes) = hex::decode(sig_hex) {
+                if let Ok(signature) = Signature::from_bytes(&sig_bytes) {
+                    return public_key.verify(message.as_bytes(), &signature).is_ok();
                 }
             }
-            TokenMessage::Balance { address } => {
-                TokenResponse::Balance(*state.get(&address).unwrap_or(&0))
+        }
+        false
+    }
+}
+```
+
+### 15.3.2 默克尔树
+
+**定义 15.3.2** (默克尔树)
+默克尔树 $MT$ 是一个二叉树，满足：
+$$MT(T) = \text{构建自交易集合 } T \text{ 的哈希树}$$
+
+**定理 15.3.2** (默克尔树验证)
+默克尔树能够高效验证交易包含性。
+
+**证明**：
+
+1. 只需要 $\log n$ 个哈希值
+2. 可以验证任意交易是否包含在区块中
+3. 因此验证效率高
+
+**示例 15.3.2** (默克尔树实现)
+
+```rust
+use sha2::{Sha256, Digest};
+
+#[derive(Debug)]
+pub struct MerkleTree {
+    pub root: String,
+    pub leaves: Vec<String>,
+}
+
+impl MerkleTree {
+    pub fn new(transactions: &[Transaction]) -> Self {
+        let leaves: Vec<String> = transactions
+            .iter()
+            .map(|tx| {
+                let mut hasher = Sha256::new();
+                hasher.update(format!("{:?}", tx).as_bytes());
+                format!("{:x}", hasher.finalize())
+            })
+            .collect();
+        
+        let root = Self::build_root(&leaves);
+        MerkleTree { root, leaves }
+    }
+    
+    fn build_root(leaves: &[String]) -> String {
+        if leaves.is_empty() {
+            return String::new();
+        }
+        
+        if leaves.len() == 1 {
+            return leaves[0].clone();
+        }
+        
+        let mut level = leaves.to_vec();
+        while level.len() > 1 {
+            let mut next_level = Vec::new();
+            
+            for chunk in level.chunks(2) {
+                let mut hasher = Sha256::new();
+                hasher.update(chunk[0].as_bytes());
+                if chunk.len() > 1 {
+                    hasher.update(chunk[1].as_bytes());
+                } else {
+                    hasher.update(chunk[0].as_bytes()); // 自引用
+                }
+                next_level.push(format!("{:x}", hasher.finalize()));
             }
+            
+            level = next_level;
+        }
+        
+        level[0].clone()
+    }
+}
+```
+
+## 15.4 智能合约
+
+### 15.4.1 智能合约形式化
+
+**定义 15.4.1** (智能合约)
+智能合约 $SC$ 是一个状态转换函数：
+$$SC: \mathcal{S} \times \mathcal{I} \rightarrow \mathcal{S} \times \mathcal{O}$$
+
+其中：
+
+- $\mathcal{S}$ 是状态空间
+- $\mathcal{I}$ 是输入空间
+- $\mathcal{O}$ 是输出空间
+
+**定理 15.4.1** (智能合约确定性)
+智能合约的执行是确定性的。
+
+**证明**：
+
+1. 智能合约是纯函数
+2. 相同输入总是产生相同输出
+3. 因此执行是确定性的
+
+**示例 15.4.1** (简单智能合约)
+
+```rust
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SmartContract {
+    pub address: String,
+    pub balance: f64,
+    pub code: String,
+}
+
+impl SmartContract {
+    pub fn new(address: String, initial_balance: f64) -> Self {
+        SmartContract {
+            address,
+            balance: initial_balance,
+            code: String::new(),
+        }
+    }
+    
+    pub fn execute(&mut self, input: &str) -> Result<String, String> {
+        // 简单的智能合约执行逻辑
+        match input {
+            "get_balance" => Ok(format!("Balance: {}", self.balance)),
+            "deposit" => {
+                self.balance += 10.0;
+                Ok("Deposited 10.0".to_string())
+            }
+            "withdraw" => {
+                if self.balance >= 5.0 {
+                    self.balance -= 5.0;
+                    Ok("Withdrawn 5.0".to_string())
+                } else {
+                    Err("Insufficient balance".to_string())
+                }
+            }
+            _ => Err("Unknown command".to_string()),
         }
     }
 }
 ```
 
-### 9.3 共识算法示例
+### 15.4.2 合约验证
 
-```rust
-pub struct ConsensusNode {
-    pub validators: Vec<Validator>,
-    pub current_round: u64,
-}
+**定义 15.4.2** (合约验证)
+合约验证 $CV$ 是验证智能合约属性的过程：
+$$CV(SC, \phi) = \text{验证合约 } SC \text{ 满足属性 } \phi$$
 
-impl ConsensusNode {
-    pub fn propose_block(&self) -> Block {
-        let validator = self.select_validator();
-        Block::new(
-            self.current_round,
-            std::time::SystemTime::now()
-                .duration_since(std::time::UNIX_EPOCH)
-                .unwrap()
-                .as_secs(),
-            format!("Block proposed by {}", validator.address),
-            "previous_hash".to_string(),
-        )
-    }
-    
-    pub fn validate_block(&self, block: &Block) -> bool {
-        // 验证区块的合法性
-        block.index == self.current_round && !block.data.is_empty()
-    }
-    
-    pub fn commit_block(&mut self, block: Block) {
-        // 提交区块到区块链
-        self.current_round += 1;
-        println!("Committed block: {}", block.hash);
-    }
-}
-```
+**定理 15.4.2** (验证必要性)
+形式化验证能够发现智能合约中的漏洞。
 
-## 10. 参考文献
+**证明**：
 
-1. **区块链理论**
-   - Nakamoto, S. (2008). "Bitcoin: A peer-to-peer electronic cash system"
-   - Buterin, V. (2014). "Ethereum: A next-generation smart contract and decentralized application platform"
+1. 形式化验证提供严格的数学证明
+2. 比测试更全面
+3. 因此能够发现漏洞
 
-2. **密码学**
-   - Katz, J., & Lindell, Y. (2014). "Introduction to modern cryptography"
-   - Menezes, A. J., et al. (1996). "Handbook of applied cryptography"
+## 15.5 区块链安全性
 
-3. **分布式系统**
-   - Lamport, L. (1998). "The part-time parliament"
-   - Castro, M., & Liskov, B. (1999). "Practical Byzantine fault tolerance"
+### 15.5.1 双重支付攻击
 
-4. **形式化方法**
-   - Clarke, E. M., et al. (1999). "Model checking"
-   - Huth, M., & Ryan, M. (2004). "Logic in computer science: Modelling and reasoning about systems"
+**定义 15.5.1** (双重支付攻击)
+双重支付攻击 $DSA$ 是攻击者试图花费同一笔资金两次的攻击：
+$$DSA = \text{创建包含冲突交易的分叉}$$
+
+**定理 15.5.1** (双重支付防护)
+工作量证明机制能够防止双重支付攻击。
+
+**证明**：
+
+1. 攻击者需要控制超过50%的算力
+2. 计算复杂度随难度指数增长
+3. 因此攻击成本极高
+
+### 15.5.2 51%攻击
+
+**定义 15.5.2** (51%攻击)
+51%攻击是攻击者控制超过50%算力的攻击：
+$$51\%Attack = \text{控制超过50%算力的攻击}$$
+
+**定理 15.5.2** (51%攻击概率)
+51%攻击的成功概率随网络规模指数下降。
+
+**证明**：
+
+1. 攻击者需要控制超过50%的算力
+2. 算力分布遵循幂律分布
+3. 因此攻击概率指数下降
+
+## 15.6 区块链性能
+
+### 15.6.1 吞吐量
+
+**定义 15.6.1** (区块链吞吐量)
+区块链吞吐量 $TP$ 是单位时间内处理的交易数量：
+$$TP = \frac{\text{交易数量}}{\text{时间}}$$
+
+**定理 15.6.1** (吞吐量限制)
+区块链吞吐量受区块大小和出块时间限制。
+
+**证明**：
+
+1. 吞吐量 = 区块大小 / 出块时间
+2. 增加区块大小会增加传播时间
+3. 减少出块时间会增加分叉概率
+4. 因此存在最优平衡点
+
+### 15.6.2 可扩展性
+
+**定义 15.6.2** (区块链可扩展性)
+区块链可扩展性 $S$ 是系统处理增长负载的能力：
+$$S = \frac{\text{性能提升}}{\text{资源增加}}$$
+
+**定理 15.6.2** (可扩展性挑战)
+区块链的可扩展性面临去中心化、安全性和性能的三角困境。
+
+**证明**：
+
+1. 增加性能通常需要牺牲去中心化
+2. 保持安全性需要足够的去中心化
+3. 因此存在三角困境
+
+## 15.7 区块链应用
+
+### 15.7.1 去中心化应用
+
+**定义 15.7.1** (去中心化应用)
+去中心化应用 $DApp$ 是运行在区块链上的应用：
+$$DApp = (Frontend, SmartContracts, Blockchain)$$
+
+**定理 15.7.1** (DApp优势)
+去中心化应用具有抗审查性和透明性。
+
+**证明**：
+
+1. 智能合约代码公开透明
+2. 执行结果不可篡改
+3. 因此具有抗审查性和透明性
+
+### 15.7.2 代币经济
+
+**定义 15.7.2** (代币经济)
+代币经济 $TE$ 是基于区块链的经济系统：
+$$TE = (Token, Economics, Governance)$$
+
+**定理 15.7.2** (代币价值)
+代币价值取决于其效用和稀缺性。
+
+**证明**：
+
+1. 代币的效用决定其需求
+2. 代币的稀缺性决定其供给
+3. 供需关系决定价值
+
+## 15.8 总结
+
+区块链系统通过密码学原语、共识机制和智能合约提供了去中心化、安全透明的解决方案。通过严格的数学基础和形式化证明，区块链系统确保了其安全性和可靠性。
+
+### 15.8.1 关键特性
+
+1. **去中心化**：无需中央机构
+2. **不可篡改**：数据一旦写入不可修改
+3. **透明性**：所有交易公开可见
+4. **安全性**：基于密码学保证
+
+### 15.8.2 理论贡献
+
+1. **形式化语义**：严格的数学定义
+2. **安全性证明**：攻击防护证明
+3. **性能分析**：吞吐量和可扩展性分析
+4. **应用设计**：去中心化应用设计
 
 ---
 
-**版本**: 1.0.0  
-**更新时间**: 2025-01-27  
-**状态**: 完成
+**参考文献**：
+
+1. Nakamoto, S. (2008). Bitcoin: A peer-to-peer electronic cash system. Decentralized Business Review, 21260.
+2. Buterin, V. (2014). Ethereum: A next-generation smart contract and decentralized application platform.
+3. Lamport, L., et al. (1982). The Byzantine generals problem. ACM TOPLAS, 4(3), 382-401.
