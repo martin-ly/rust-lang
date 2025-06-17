@@ -9,113 +9,147 @@
 5. [函数控制流](#5-函数控制流)
 6. [异步控制流](#6-异步控制流)
 7. [形式化证明](#7-形式化证明)
-8. [类型安全保证](#8-类型安全保证)
-9. [参考文献](#9-参考文献)
+8. [类型系统约束](#8-类型系统约束)
+9. [安全保证](#9-安全保证)
+10. [参考文献](#10-参考文献)
 
 ## 1. 引言
 
-控制流是程序执行过程中指令执行顺序的规则集合。Rust的控制流系统与所有权、借用和生命周期系统深度集成，提供了类型安全且富有表现力的控制流机制。
+控制流是程序执行过程中指令执行顺序的规则集合。Rust的控制流系统与所有权、借用和生命周期系统深度集成，提供了类型安全且富有表现力的控制流机制。本文档从形式化角度分析Rust控制流系统的理论基础、实现机制和安全保证。
 
 ### 1.1 核心原则
 
-- **表达式优先**: 大多数控制结构都是表达式，能够返回值
-- **类型安全**: 控制结构必须满足类型系统约束
-- **所有权尊重**: 控制流不能破坏所有权规则
-- **零成本抽象**: 高级控制流结构编译为高效机器码
+- **表达式优先**: 控制结构作为表达式返回值
+- **类型安全**: 严格的类型约束确保程序正确性
+- **所有权尊重**: 控制流不破坏所有权规则
+- **零成本抽象**: 高级控制流编译为高效机器码
 
 ### 1.2 形式化方法
 
-本文档使用以下形式化方法：
+本文档使用以下形式化工具：
 
-- **类型理论**: 基于Hindley-Milner类型系统
+- **类型论**: 基于Hindley-Milner类型系统
 - **操作语义**: 定义程序执行的形式化规则
-- **证明系统**: 提供安全性和正确性的形式化证明
-- **状态机模型**: 描述控制流的执行状态转换
+- **分离逻辑**: 描述内存和资源管理
+- **状态机**: 建模异步控制流
 
 ## 2. 控制流基础理论
 
-### 2.1 控制流图模型
+### 2.1 控制流图
 
 **定义 2.1** (控制流图): 控制流图是一个有向图 $G = (V, E)$，其中：
+- $V$ 是基本块的集合
+- $E$ 是控制流边的集合
+- 每个边 $(u, v) \in E$ 表示从基本块 $u$ 到基本块 $v$ 的可能控制转移
 
-- $V$ 是基本块集合
-- $E$ 是控制流边集合
-- 每条边表示可能的执行路径
+**定义 2.2** (执行路径): 执行路径是控制流图中的一条路径 $p = v_1 \rightarrow v_2 \rightarrow \cdots \rightarrow v_n$，表示程序执行时经过的基本块序列。
 
-**定义 2.2** (执行状态): 执行状态 $\sigma$ 是一个三元组 $(env, store, pc)$，其中：
+### 2.2 状态转换系统
 
-- $env$ 是环境映射
-- $store$ 是存储映射
-- $pc$ 是程序计数器
+**定义 2.3** (程序状态): 程序状态 $\sigma = (env, heap, stack)$ 包含：
+- $env$: 环境映射，将变量名映射到值
+- $heap$: 堆内存状态
+- $stack$: 调用栈状态
 
-### 2.2 类型环境
+**定义 2.4** (状态转换): 状态转换关系 $\sigma_1 \rightarrow \sigma_2$ 表示从状态 $\sigma_1$ 到状态 $\sigma_2$ 的转换。
 
-**定义 2.3** (类型环境): 类型环境 $\Gamma$ 是一个从变量到类型的映射：
-$$\Gamma : Var \rightarrow Type$$
+### 2.3 类型安全控制流
 
-**定义 2.4** (类型判断): 类型判断 $\Gamma \vdash e : \tau$ 表示在环境 $\Gamma$ 下，表达式 $e$ 具有类型 $\tau$。
+**定理 2.1** (类型保持): 如果 $\Gamma \vdash e : \tau$ 且 $\sigma \rightarrow \sigma'$，则 $\Gamma \vdash e' : \tau$，其中 $e'$ 是 $e$ 在状态 $\sigma'$ 中的求值结果。
 
-### 2.3 求值关系
-
-**定义 2.5** (求值关系): 求值关系 $\Downarrow$ 定义为：
-$$\frac{\Gamma \vdash e : \tau \quad \sigma \Downarrow e \Rightarrow v}{\Gamma \vdash e \Downarrow v : \tau}$$
+**证明**: 通过结构归纳法证明每个控制流构造的类型保持性质。
 
 ## 3. 条件控制流
 
 ### 3.1 if表达式
 
-**定义 3.1** (if表达式): if表达式具有形式：
-$$if \; e_1 \; \{ e_2 \} \; else \; \{ e_3 \}$$
+**语法定义**:
+```
+if_expr ::= if condition { block_true } [else { block_false }]
+condition ::= expression : bool
+```
 
 **类型规则**:
-$$\frac{\Gamma \vdash e_1 : bool \quad \Gamma \vdash e_2 : \tau \quad \Gamma \vdash e_3 : \tau}{\Gamma \vdash if \; e_1 \; \{ e_2 \} \; else \; \{ e_3 \} : \tau}$$
+```
+Γ ⊢ condition : bool
+Γ ⊢ block_true : τ
+Γ ⊢ block_false : τ
+─────────────────────────
+Γ ⊢ if condition { block_true } else { block_false } : τ
+```
 
-**求值规则**:
-$$\frac{\sigma \Downarrow e_1 \Rightarrow true \quad \sigma \Downarrow e_2 \Rightarrow v}{\sigma \Downarrow if \; e_1 \; \{ e_2 \} \; else \; \{ e_3 \} \Rightarrow v}$$
+**操作语义**:
+```
+σ ⊢ condition ⇓ true    σ ⊢ block_true ⇓ v
+─────────────────────────────────────────
+σ ⊢ if condition { block_true } else { block_false } ⇓ v
 
-$$\frac{\sigma \Downarrow e_1 \Rightarrow false \quad \sigma \Downarrow e_3 \Rightarrow v}{\sigma \Downarrow if \; e_1 \; \{ e_2 \} \; else \; \{ e_3 \} \Rightarrow v}$$
+σ ⊢ condition ⇓ false    σ ⊢ block_false ⇓ v
+──────────────────────────────────────────
+σ ⊢ if condition { block_true } else { block_false } ⇓ v
+```
 
-**定理 3.1** (if表达式类型安全): 若 $\Gamma \vdash if \; e_1 \; \{ e_2 \} \; else \; \{ e_3 \} : \tau$，则：
+**形式化表示**:
+将if表达式表示为函数 $E_{if}$:
+$$E_{if}(condition, block_{true}, block_{false}) = \begin{cases}
+eval(block_{true}) & \text{if } condition = \text{true} \\
+eval(block_{false}) & \text{if } condition = \text{false}
+\end{cases}$$
 
-1. $\Gamma \vdash e_1 : bool$
-2. $\Gamma \vdash e_2 : \tau$
-3. $\Gamma \vdash e_3 : \tau$
-
-**证明**: 由类型规则直接得出。
+**所有权约束**:
+- 所有分支必须保持一致的变量状态
+- 借用检查器分析每个分支的所有权变化
 
 **代码示例**:
-
 ```rust
-fn conditional_example(x: i32) -> &'static str {
-    if x > 0 {
-        "positive"
-    } else if x < 0 {
-        "negative"
+fn ownership_in_if() {
+    let s = String::from("hello");
+    
+    let result = if true {
+        &s[0..1]  // 借用
     } else {
-        "zero"
-    }
+        &s[1..2]  // 借用
+    };
+    
+    println!("原始字符串: {}, 结果: {}", s, result);
 }
 ```
 
 ### 3.2 match表达式
 
-**定义 3.2** (match表达式): match表达式具有形式：
-$$match \; e \; \{ p_1 \Rightarrow e_1, \ldots, p_n \Rightarrow e_n \}$$
-
-其中 $p_i$ 是模式，$e_i$ 是对应表达式。
+**语法定义**:
+```
+match_expr ::= match expression { pattern_1 => expr_1, ..., pattern_n => expr_n }
+pattern ::= literal | variable | struct_pattern | enum_pattern | _
+```
 
 **类型规则**:
-$$\frac{\Gamma \vdash e : \tau \quad \forall i. \Gamma, p_i \vdash e_i : \tau'}{\Gamma \vdash match \; e \; \{ p_1 \Rightarrow e_1, \ldots, p_n \Rightarrow e_n \} : \tau'}$$
+```
+Γ ⊢ expression : τ
+Γ, pattern_1 ⊢ expr_1 : τ'
+...
+Γ, pattern_n ⊢ expr_n : τ'
+patterns exhaust τ
+────────────────────────────────────────
+Γ ⊢ match expression { pattern_1 => expr_1, ..., pattern_n => expr_n } : τ'
+```
 
 **穷尽性检查**:
-$$\frac{exhaustive(\tau, \{p_1, \ldots, p_n\})}{exhaustive(match \; e \; \{ p_1 \Rightarrow e_1, \ldots, p_n \Rightarrow e_n \})}$$
+**定义 3.1** (模式穷尽性): 模式集合 $P = \{p_1, p_2, \ldots, p_n\}$ 对类型 $\tau$ 是穷尽的，当且仅当对于 $\tau$ 的每个可能值 $v$，存在模式 $p_i \in P$ 使得 $v$ 匹配 $p_i$。
 
-**定理 3.2** (match穷尽性): 若match表达式类型检查通过，则其模式集合是穷尽的。
+**定理 3.1** (穷尽性保证): Rust编译器静态检查match表达式的穷尽性，确保所有可能的值都被处理。
 
-**证明**: 由编译器静态分析保证。
+**操作语义**:
+```
+σ ⊢ expression ⇓ v    v matches pattern_i    σ ⊢ expr_i ⇓ v'
+──────────────────────────────────────────────────────────
+σ ⊢ match expression { pattern_1 => expr_1, ..., pattern_n => expr_n } ⇓ v'
+```
+
+**形式化表示**:
+$$E_{match}(value, [(p_1, e_1), (p_2, e_2), \ldots]) = eval(e_i) \text{ where } p_i \text{ is the first pattern matching } value$$
 
 **代码示例**:
-
 ```rust
 enum Message {
     Quit,
@@ -127,223 +161,352 @@ fn process_message(msg: Message) {
     match msg {
         Message::Quit => println!("退出"),
         Message::Move { x, y } => println!("移动到: ({}, {})", x, y),
-        Message::Write(text) => println!("写入: {}", text),
+        Message::Write(text) => {
+            println!("文本: {}", text);
+            // text获得String的所有权
+        }
     }
 }
 ```
 
 ### 3.3 if let表达式
 
-**定义 3.3** (if let表达式): if let表达式是match的语法糖：
-$$if \; let \; p = e_1 \; \{ e_2 \} \; else \; \{ e_3 \}$$
-
-等价于：
-$$match \; e_1 \; \{ p \Rightarrow e_2, _ \Rightarrow e_3 \}$$
+**语法定义**:
+```
+if_let_expr ::= if let pattern = expression { block_true } [else { block_false }]
+```
 
 **类型规则**:
-$$\frac{\Gamma \vdash e_1 : \tau \quad \Gamma, p \vdash e_2 : \tau' \quad \Gamma \vdash e_3 : \tau'}{\Gamma \vdash if \; let \; p = e_1 \; \{ e_2 \} \; else \; \{ e_3 \} : \tau'}$$
+```
+Γ ⊢ expression : τ
+Γ, pattern ⊢ block_true : τ'
+Γ ⊢ block_false : τ'
+─────────────────────────────────────────
+Γ ⊢ if let pattern = expression { block_true } else { block_false } : τ'
+```
+
+**等价性定理**:
+**定理 3.2**: `if let pattern = expression { block_true } else { block_false }` 等价于：
+```rust
+match expression {
+    pattern => { block_true },
+    _ => { block_false },
+}
+```
 
 ## 4. 循环控制流
 
 ### 4.1 loop语句
 
-**定义 4.1** (loop语句): loop语句创建无限循环：
-$$loop \; \{ e \}$$
+**语法定义**:
+```
+loop_stmt ::= loop { block }
+```
 
 **类型规则**:
-$$\frac{\Gamma \vdash e : \tau}{\Gamma \vdash loop \; \{ e \} : !}$$
+```
+Γ ⊢ block : τ
+────────────────
+Γ ⊢ loop { block } : !
+```
 
-其中 $!$ 表示发散类型。
+**操作语义**:
+```
+σ ⊢ block ⇓ continue
+────────────────────
+σ ⊢ loop { block } ⇓ continue
 
-**求值规则**:
-$$\frac{\sigma \Downarrow e \Rightarrow v \quad \sigma' \Downarrow loop \; \{ e \} \Rightarrow v'}{\sigma \Downarrow loop \; \{ e \} \Rightarrow v'}$$
+σ ⊢ block ⇓ break v
+───────────────────
+σ ⊢ loop { block } ⇓ v
+```
 
-**定理 4.1** (loop发散性): loop语句具有发散类型 $!$。
+**形式化表示**:
+$$E_{loop}(block) = \begin{cases}
+E_{loop}(block) & \text{if } eval(block) = \text{continue} \\
+v & \text{if } eval(block) = \text{break } v
+\end{cases}$$
 
-**证明**: 由类型规则和loop的语义直接得出。
+**代码示例**:
+```rust
+fn loop_with_value() -> i32 {
+    let mut counter = 0;
+    loop {
+        counter += 1;
+        if counter >= 10 {
+            break counter;  // 返回值
+        }
+    }
+}
+```
 
 ### 4.2 while语句
 
-**定义 4.2** (while语句): while语句具有形式：
-$$while \; e_1 \; \{ e_2 \}$$
+**语法定义**:
+```
+while_stmt ::= while condition { block }
+```
 
 **类型规则**:
-$$\frac{\Gamma \vdash e_1 : bool \quad \Gamma \vdash e_2 : ()}{\Gamma \vdash while \; e_1 \; \{ e_2 \} : ()}$$
+```
+Γ ⊢ condition : bool
+Γ ⊢ block : ()
+────────────────────
+Γ ⊢ while condition { block } : ()
+```
 
-**求值规则**:
-$$\frac{\sigma \Downarrow e_1 \Rightarrow true \quad \sigma \Downarrow e_2 \Rightarrow () \quad \sigma' \Downarrow while \; e_1 \; \{ e_2 \} \Rightarrow ()}{\sigma \Downarrow while \; e_1 \; \{ e_2 \} \Rightarrow ()}$$
+**操作语义**:
+```
+σ ⊢ condition ⇓ true    σ ⊢ block ⇓ ()    σ ⊢ while condition { block } ⇓ ()
+─────────────────────────────────────────────────────────────────────────
+σ ⊢ while condition { block } ⇓ ()
 
-$$\frac{\sigma \Downarrow e_1 \Rightarrow false}{\sigma \Downarrow while \; e_1 \; \{ e_2 \} \Rightarrow ()}$$
+σ ⊢ condition ⇓ false
+─────────────────────
+σ ⊢ while condition { block } ⇓ ()
+```
+
+**形式化表示**:
+$$E_{while}(condition, block) = \begin{cases}
+E_{while}(condition, block) & \text{if } eval(condition) = \text{true} \\
+() & \text{if } eval(condition) = \text{false}
+\end{cases}$$
 
 ### 4.3 for语句
 
-**定义 4.3** (for语句): for语句用于迭代：
-$$for \; x \; in \; e_1 \; \{ e_2 \}$$
+**语法定义**:
+```
+for_stmt ::= for pattern in iterator { block }
+```
 
 **类型规则**:
-$$\frac{\Gamma \vdash e_1 : Iterator<Item = \tau> \quad \Gamma, x : \tau \vdash e_2 : ()}{\Gamma \vdash for \; x \; in \; e_1 \; \{ e_2 \} : ()}$$
+```
+Γ ⊢ iterator : impl Iterator<Item = τ>
+Γ, pattern ⊢ block : ()
+────────────────────────────
+Γ ⊢ for pattern in iterator { block } : ()
+```
+
+**操作语义**:
+```
+iterator.next() = Some(item)    σ, pattern = item ⊢ block ⇓ ()    σ ⊢ for pattern in iterator { block } ⇓ ()
+─────────────────────────────────────────────────────────────────────────────────────────────────────
+σ ⊢ for pattern in iterator { block } ⇓ ()
+
+iterator.next() = None
+─────────────────────
+σ ⊢ for pattern in iterator { block } ⇓ ()
+```
 
 **代码示例**:
-
 ```rust
-fn iteration_example() {
+fn for_loop_ownership() {
     let numbers = vec![1, 2, 3, 4, 5];
     
-    // for循环
-    for num in &numbers {
-        println!("数字: {}", num);
+    for num in numbers {  // numbers的所有权被移动
+        println!("{}", num);
     }
+    // numbers在这里不再可用
     
-    // while循环
-    let mut i = 0;
-    while i < numbers.len() {
-        println!("索引 {}: {}", i, numbers[i]);
-        i += 1;
+    let numbers_ref = vec![1, 2, 3, 4, 5];
+    for num in &numbers_ref {  // 借用numbers_ref
+        println!("{}", num);
     }
-    
-    // loop循环
-    let mut j = 0;
-    loop {
-        if j >= numbers.len() {
-            break;
+    // numbers_ref在这里仍然可用
+}
+```
+
+### 4.4 循环标签
+
+**语法定义**:
+```
+labeled_loop ::= 'label: loop { block }
+break_stmt ::= break ['label] [expression]
+continue_stmt ::= continue ['label]
+```
+
+**类型规则**:
+```
+Γ ⊢ block : τ
+────────────────
+Γ ⊢ 'label: loop { block } : τ
+```
+
+**代码示例**:
+```rust
+fn labeled_loops() {
+    'outer: loop {
+        'inner: loop {
+            if some_condition() {
+                break 'outer;  // 跳出外层循环
+            }
+            if another_condition() {
+                continue 'inner;  // 继续内层循环
+            }
         }
-        println!("循环索引 {}: {}", j, numbers[j]);
-        j += 1;
     }
 }
 ```
 
 ## 5. 函数控制流
 
-### 5.1 函数定义
+### 5.1 函数定义与调用
 
-**定义 5.1** (函数类型): 函数类型 $\tau_1 \rightarrow \tau_2$ 表示从类型 $\tau_1$ 到类型 $\tau_2$ 的函数。
-
-**类型规则**:
-$$\frac{\Gamma, x : \tau_1 \vdash e : \tau_2}{\Gamma \vdash fn \; f(x : \tau_1) \rightarrow \tau_2 \; \{ e \} : \tau_1 \rightarrow \tau_2}$$
-
-### 5.2 函数调用
-
-**定义 5.2** (函数调用): 函数调用具有形式：
-$$e_1(e_2)$$
+**语法定义**:
+```
+function ::= fn name(parameters) -> return_type { body }
+parameters ::= parameter | parameter, parameters
+parameter ::= pattern: type
+```
 
 **类型规则**:
-$$\frac{\Gamma \vdash e_1 : \tau_1 \rightarrow \tau_2 \quad \Gamma \vdash e_2 : \tau_1}{\Gamma \vdash e_1(e_2) : \tau_2}$$
+```
+Γ, parameters ⊢ body : return_type
+─────────────────────────────────
+Γ ⊢ fn name(parameters) -> return_type { body } : fn(parameters) -> return_type
+```
 
-**求值规则**:
-$$\frac{\sigma \Downarrow e_1 \Rightarrow fn \; f(x : \tau_1) \rightarrow \tau_2 \; \{ e \} \quad \sigma \Downarrow e_2 \Rightarrow v \quad \sigma'[x \mapsto v] \Downarrow e \Rightarrow v'}{\sigma \Downarrow e_1(e_2) \Rightarrow v'}$$
+**调用规则**:
+```
+Γ ⊢ function : fn(τ_1, ..., τ_n) -> τ
+Γ ⊢ arg_1 : τ_1
+...
+Γ ⊢ arg_n : τ_n
+────────────────────────────
+Γ ⊢ function(arg_1, ..., arg_n) : τ
+```
 
-### 5.3 递归函数
+**操作语义**:
+```
+σ ⊢ arg_1 ⇓ v_1    ...    σ ⊢ arg_n ⇓ v_n    σ, parameters = (v_1, ..., v_n) ⊢ body ⇓ v
+─────────────────────────────────────────────────────────────────────────────────────
+σ ⊢ function(arg_1, ..., arg_n) ⇓ v
+```
 
-**定义 5.3** (递归函数): 递归函数允许在函数体内调用自身。
+### 5.2 递归函数
+
+**定义 5.1** (递归函数): 递归函数是在其定义中调用自身的函数。
 
 **类型规则**:
-$$\frac{\Gamma, f : \tau_1 \rightarrow \tau_2, x : \tau_1 \vdash e : \tau_2}{\Gamma \vdash fn \; f(x : \tau_1) \rightarrow \tau_2 \; \{ e \} : \tau_1 \rightarrow \tau_2}$$
+```
+Γ, f: fn(τ_1, ..., τ_n) -> τ, parameters ⊢ body : τ
+──────────────────────────────────────────────────
+Γ ⊢ fn f(parameters) -> τ { body } : fn(τ_1, ..., τ_n) -> τ
+```
 
-**定理 5.1** (递归终止性): 若递归函数满足终止条件，则其执行会终止。
+**终止性分析**:
+**定理 5.1** (递归终止性): 如果递归函数满足以下条件之一，则保证终止：
+1. 每次递归调用时参数严格递减
+2. 存在明确的终止条件
+3. 递归深度有上界
 
 **代码示例**:
-
 ```rust
 fn factorial(n: u32) -> u32 {
-    if n == 0 {
+    if n <= 1 {
         1
     } else {
-        n * factorial(n - 1)
-    }
-}
-
-fn fibonacci(n: u32) -> u32 {
-    match n {
-        0 => 0,
-        1 => 1,
-        _ => fibonacci(n - 1) + fibonacci(n - 2),
+        n * factorial(n - 1)  // 递归调用，参数递减
     }
 }
 ```
 
-### 5.4 发散函数
+### 5.3 发散函数
 
-**定义 5.4** (发散函数): 发散函数具有类型 $!$，表示永不返回。
+**语法定义**:
+```
+diverging_function ::= fn name(parameters) -> ! { body }
+```
 
 **类型规则**:
-$$\frac{\Gamma \vdash e : !}{\Gamma \vdash fn \; f() \rightarrow ! \; \{ e \} : () \rightarrow !}$$
+```
+Γ, parameters ⊢ body : !
+────────────────────────
+Γ ⊢ fn name(parameters) -> ! { body } : fn(parameters) -> !
+```
+
+**发散性证明**:
+**定理 5.2** (发散性): 如果函数返回类型为 `!`，则该函数永远不会正常返回。
 
 **代码示例**:
-
 ```rust
 fn diverging_function() -> ! {
     loop {
-        // 永不返回
+        // 无限循环，永不返回
     }
 }
 
 fn panic_function() -> ! {
-    panic!("这是一个发散函数");
+    panic!("This function never returns normally");
 }
 ```
 
 ## 6. 异步控制流
 
-### 6.1 Future类型
+### 6.1 Future系统
 
-**定义 6.1** (Future类型): Future类型表示一个异步计算：
-$$Future<Output = \tau>$$
+**定义 6.1** (Future): Future是一个表示异步计算的值，可能尚未完成。
 
-**类型规则**:
-$$\frac{\Gamma \vdash e : \tau}{\Gamma \vdash async \; \{ e \} : Future<Output = \tau>}$$
+**类型定义**:
+```rust
+trait Future {
+    type Output;
+    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
+}
+
+enum Poll<T> {
+    Ready(T),
+    Pending,
+}
+```
+
+**形式化表示**:
+$$Future(\tau) = \{\text{Ready}(v) \mid v : \tau\} \cup \{\text{Pending}\}$$
 
 ### 6.2 async函数
 
-**定义 6.2** (async函数): async函数返回Future：
-$$async \; fn \; f(x : \tau_1) \rightarrow \tau_2 \; \{ e \}$$
+**语法定义**:
+```
+async_function ::= async fn name(parameters) -> return_type { body }
+```
 
 **类型规则**:
-$$\frac{\Gamma, x : \tau_1 \vdash e : \tau_2}{\Gamma \vdash async \; fn \; f(x : \tau_1) \rightarrow \tau_2 \; \{ e \} : \tau_1 \rightarrow Future<Output = \tau_2>}$$
+```
+Γ, parameters ⊢ body : return_type
+─────────────────────────────────
+Γ ⊢ async fn name(parameters) -> return_type { body } : fn(parameters) -> impl Future<Output = return_type>
+```
 
-### 6.3 await表达式
+**状态机转换**:
+**定义 6.2** (异步状态机): async函数编译为状态机，每个await点对应一个状态。
 
-**定义 6.3** (await表达式): await表达式等待Future完成：
-$$e_1.await$$
-
-**类型规则**:
-$$\frac{\Gamma \vdash e_1 : Future<Output = \tau>}{\Gamma \vdash e_1.await : \tau}$$
-
-**求值规则**:
-$$\frac{\sigma \Downarrow e_1 \Rightarrow future \quad future \; completes \; with \; v}{\sigma \Downarrow e_1.await \Rightarrow v}$$
+**状态转换规则**:
+```
+σ ⊢ expression ⇓ Future(v)
+σ ⊢ await expression ⇓ v
+```
 
 **代码示例**:
-
 ```rust
-use std::future::Future;
-use std::pin::Pin;
-
 async fn async_function() -> i32 {
-    // 模拟异步操作
-    std::thread::sleep(std::time::Duration::from_millis(100));
-    42
+    let future = some_async_operation();
+    let result = future.await;  // 等待点
+    result + 1
 }
+```
 
-async fn async_main() {
-    let result = async_function().await;
-    println!("异步结果: {}", result);
-}
+### 6.3 异步控制流安全
 
-// 手动实现Future
-struct MyFuture {
-    completed: bool,
-}
+**定理 6.1** (异步内存安全): 异步函数中的借用必须跨越所有可能的执行路径。
 
-impl Future for MyFuture {
-    type Output = i32;
-    
-    fn poll(self: Pin<&mut Self>, _cx: &mut std::task::Context<'_>) -> std::task::Poll<Self::Output> {
-        if self.completed {
-            std::task::Poll::Ready(42)
-        } else {
-            std::task::Poll::Pending
-        }
-    }
+**证明**: 通过分析状态机的所有可能状态转换，确保借用检查器能够验证每个路径上的借用有效性。
+
+**生命周期约束**:
+```rust
+async fn async_with_lifetime<'a>(data: &'a str) -> &'a str {
+    // data的生命周期必须跨越整个async函数
+    some_async_operation().await;
+    data
 }
 ```
 
@@ -351,54 +514,66 @@ impl Future for MyFuture {
 
 ### 7.1 进展定理
 
-**定理 7.1** (进展定理): 若 $\Gamma \vdash e : \tau$ 且 $e$ 是封闭的，则要么 $e$ 是一个值，要么存在 $e'$ 使得 $e \rightarrow e'$。
+**定理 7.1** (控制流进展): 如果 $\Gamma \vdash e : \tau$ 且 $e$ 不是值，则存在 $e'$ 使得 $e \rightarrow e'$。
 
-**证明**: 通过对表达式结构进行归纳。
-
-**基础情况**:
-
-- 若 $e$ 是值，则定理成立
-- 若 $e$ 是变量，则与封闭性矛盾
-
-**归纳情况**:
-
-- 若 $e = e_1(e_2)$，则由归纳假设和函数调用规则
-- 若 $e = if \; e_1 \; \{ e_2 \} \; else \; \{ e_3 \}$，则由条件求值规则
-- 其他情况类似
+**证明**: 通过结构归纳法证明每个控制流构造的进展性质。
 
 ### 7.2 保持定理
 
-**定理 7.2** (保持定理): 若 $\Gamma \vdash e : \tau$ 且 $e \rightarrow e'$，则 $\Gamma \vdash e' : \tau$。
+**定理 7.2** (控制流保持): 如果 $\Gamma \vdash e : \tau$ 且 $e \rightarrow e'$，则 $\Gamma \vdash e' : \tau$。
 
-**证明**: 通过对求值规则进行归纳。
+**证明**: 通过分析每个求值规则，证明类型在求值过程中保持不变。
 
 ### 7.3 类型安全
 
-**定理 7.3** (类型安全): 若 $\Gamma \vdash e : \tau$，则 $e$ 不会产生运行时类型错误。
+**定理 7.3** (控制流类型安全): 如果 $\Gamma \vdash e : \tau$，则 $e$ 要么是值，要么可以继续求值。
 
-**证明**: 由进展定理和保持定理直接得出。
+**证明**: 结合进展定理和保持定理，证明类型安全的程序不会卡住。
 
-## 8. 类型安全保证
+## 8. 类型系统约束
 
-### 8.1 所有权安全
+### 8.1 分支类型一致性
 
-**定理 8.1** (所有权安全): 控制流不会破坏所有权规则。
+**约束 8.1**: if表达式的所有分支必须返回相同类型。
 
-**证明**: 通过借用检查器的静态分析保证。
+**形式化表示**:
+$$\forall i, j \in \{1, 2, \ldots, n\}. \text{typeof}(branch_i) = \text{typeof}(branch_j)$$
 
-### 8.2 生命周期安全
+### 8.2 模式穷尽性
 
-**定理 8.2** (生命周期安全): 控制流中的引用不会超过其生命周期。
+**约束 8.2**: match表达式必须穷尽所有可能的值。
 
-**证明**: 通过生命周期检查器的静态分析保证。
+**形式化表示**:
+$$\forall v : \tau. \exists pattern_i. v \text{ matches } pattern_i$$
 
-### 8.3 线程安全
+### 8.3 借用检查约束
 
-**定理 8.3** (线程安全): 控制流在并发环境中是安全的。
+**约束 8.3**: 控制流中的借用必须满足借用检查器的约束。
 
-**证明**: 通过所有权系统和类型系统共同保证。
+**形式化表示**:
+$$\forall path \in \text{execution\_paths}. \text{borrow\_check}(path) = \text{valid}$$
 
-## 9. 参考文献
+## 9. 安全保证
+
+### 9.1 内存安全
+
+**定理 9.1** (控制流内存安全): Rust的控制流系统保证内存安全。
+
+**证明**: 通过所有权系统和借用检查器，确保所有内存访问都是安全的。
+
+### 9.2 线程安全
+
+**定理 9.2** (控制流线程安全): Rust的控制流系统保证线程安全。
+
+**证明**: 通过Send和Sync trait，确保数据在线程间安全传递。
+
+### 9.3 数据竞争自由
+
+**定理 9.3** (数据竞争自由): Rust的控制流系统防止数据竞争。
+
+**证明**: 通过借用检查器和所有权系统，确保不存在并发访问同一数据的可变引用。
+
+## 10. 参考文献
 
 1. **类型理论**
    - Hindley, J. R. (1969). "The principal type-scheme of an object in combinatory logic"
@@ -413,6 +588,9 @@ impl Future for MyFuture {
 4. **异步编程**
    - The Rust Async Book
    - The Rust Reference
+
+5. **形式化语义**
+   - Pierce, B. C. (2002). "Types and programming languages"
 
 ---
 
