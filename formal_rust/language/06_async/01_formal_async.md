@@ -439,6 +439,7 @@ $$\text{Size}(F) = \max_{s \in S} \text{Size}(s)$$
 其中 $S$ 是状态机的状态集合。
 
 **优化策略**：
+
 - 状态压缩：合并相似状态
 - 字段重排：减少内存对齐开销
 - 生命周期优化：尽早释放不需要的数据
@@ -453,12 +454,14 @@ $$\text{Size}(F) = \max_{s \in S} \text{Size}(s)$$
 $$M = (S, S_0, R, L)$$
 
 其中：
+
 - $S$ 是状态集合
 - $S_0 \subseteq S$ 是初始状态
 - $R \subseteq S \times S$ 是转换关系
 - $L: S \rightarrow 2^{AP}$ 是标签函数
 
 **验证属性**：
+
 - 活性：$\Box \Diamond \text{Progress}$
 - 安全性：$\Box \neg \text{Error}$
 - 公平性：$\Box(\text{Ready} \rightarrow \Diamond \text{Scheduled})$

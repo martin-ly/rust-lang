@@ -25,7 +25,7 @@
 
 ### 1.2 目标目录结构
 
-```
+```text
 formal_rust/language/
 ├── 01_ownership_borrowing/     # 所有权与借用
 ├── 02_type_system/            # 类型系统

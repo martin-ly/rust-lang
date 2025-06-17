@@ -25,6 +25,7 @@
 $$\text{AlgorithmSystem} = \langle A, I, O, \text{execute}, \text{analyze}, \text{optimize} \rangle$$
 
 其中：
+
 - $\text{execute}: A \times I \rightarrow O$ 为算法执行函数
 - $\text{analyze}: A \rightarrow \text{Complexity}$ 为复杂度分析函数
 - $\text{optimize}: A \rightarrow A$ 为算法优化函数
@@ -45,6 +46,7 @@ $$\text{AlgorithmSystem} = \langle A, I, O, \text{execute}, \text{analyze}, \tex
 $$\text{Algorithm} = \langle \text{input}, \text{output}, \text{steps}, \text{termination} \rangle$$
 
 其中：
+
 - $\text{input} \subseteq I$ 为输入集合
 - $\text{output} \subseteq O$ 为输出集合
 - $\text{steps}$ 为计算步骤序列
@@ -324,7 +326,8 @@ impl MergeSort {
 
 **定理 4.1** (快速排序复杂度): 快速排序的平均时间复杂度为 $O(n \log n)$。
 
-**证明**: 
+**证明**:
+
 1. 每次分区的时间复杂度为 $O(n)$
 2. 平均情况下，分区将数组分为两半
 3. 递归深度为 $O(\log n)$
@@ -333,6 +336,7 @@ impl MergeSort {
 **定理 4.2** (归并排序复杂度): 归并排序的时间复杂度为 $O(n \log n)$。
 
 **证明**:
+
 1. 每次合并的时间复杂度为 $O(n)$
 2. 递归深度为 $O(\log n)$
 3. 因此总复杂度为 $O(n \log n)$

@@ -33,6 +33,7 @@ Rust的并发系统提供了内存安全和线程安全的并发编程支持。�
 ### 1.3 形式化目标
 
 本文档提供Rust并发系统的完整形式化描述，包括：
+
 - 线程系统的数学模型
 - 同步原语的形式化语义
 - 内存模型的理论基础
@@ -43,6 +44,7 @@ Rust的并发系统提供了内存安全和线程安全的并发编程支持。�
 ### 2.1 并发执行模型
 
 **定义 2.1** (并发执行): 并发执行是一个三元组 $(T, \rightarrow, \mathcal{S})$，其中：
+
 - $T$ 是线程集合
 - $\rightarrow \subseteq T \times T$ 是线程间的依赖关系
 - $\mathcal{S}$ 是共享状态集合
@@ -50,6 +52,7 @@ Rust的并发系统提供了内存安全和线程安全的并发编程支持。�
 ### 2.2 线程状态
 
 **定义 2.2** (线程状态): 线程状态 $\sigma_t = (pc_t, env_t, stack_t)$ 包含：
+
 - $pc_t$: 程序计数器
 - $env_t$: 线程局部环境
 - $stack_t$: 调用栈
@@ -57,6 +60,7 @@ Rust的并发系统提供了内存安全和线程安全的并发编程支持。�
 ### 2.3 全局状态
 
 **定义 2.3** (全局状态): 全局状态 $\Sigma = (heap, \{\sigma_t\}_{t \in T})$ 包含：
+
 - $heap$: 共享堆内存
 - $\{\sigma_t\}_{t \in T}$: 所有线程的状态
 
@@ -70,6 +74,7 @@ Rust的并发系统提供了内存安全和线程安全的并发编程支持。�
 $$\frac{\Sigma \vdash f : \text{fn}(args) \rightarrow () \quad \Sigma \vdash args : \text{Args}}{\Sigma \vdash spawn(f, args) : \text{ThreadId}}$$
 
 **示例**:
+
 ```rust
 use std::thread;
 
@@ -83,6 +88,7 @@ handle.join().unwrap();
 ### 3.2 线程生命周期
 
 **定义 3.2** (线程生命周期): 线程的生命周期包含以下状态：
+
 - `Created`: 已创建但未启动
 - `Running`: 正在执行
 - `Blocked`: 等待同步原语
@@ -103,6 +109,7 @@ $$\frac{\text{state} = \text{Running} \quad \text{completion}}{\text{state} \rig
 $$\text{ThreadPool} = \{t_1, t_2, ..., t_n\} \text{ where } n = \text{pool size}$$
 
 **示例**:
+
 ```rust
 use std::sync::mpsc;
 use std::thread;
@@ -136,6 +143,7 @@ $$\frac{\text{state} = \text{unlocked}}{\text{lock()} \rightarrow \text{locked}}
 $$\frac{\text{state} = \text{locked}}{\text{unlock()} \rightarrow \text{unlocked}}$$
 
 **示例**:
+
 ```rust
 use std::sync::{Arc, Mutex};
 use std::thread;
@@ -172,6 +180,7 @@ $$\frac{\text{state} = \text{Idle}}{\text{read_lock()} \rightarrow \text{Read}}$
 $$\frac{\text{state} = \text{Idle}}{\text{write_lock()} \rightarrow \text{Write}}$$
 
 **示例**:
+
 ```rust
 use std::sync::RwLock;
 
@@ -206,6 +215,7 @@ $$\frac{\text{condition is false}}{\text{wait(mutex)} \rightarrow \text{blocked}
 $$\frac{\text{condition is true}}{\text{notify_one()} \rightarrow \text{wake one thread}}$$
 
 **示例**:
+
 ```rust
 use std::sync::{Arc, Mutex, Condvar};
 use std::thread;
@@ -241,6 +251,7 @@ $$\text{AtomicT} = \{\text{value}: T, \text{atomic operations}\}$$
 **定义 5.2** (内存排序): 内存排序定义了原子操作的内存可见性顺序。
 
 **排序级别**:
+
 - `Relaxed`: 最弱的内存排序
 - `Acquire`: 获取语义
 - `Release`: 释放语义
@@ -253,6 +264,7 @@ $$\text{Relaxed} \leq \text{Acquire} \leq \text{AcqRel} \leq \text{SeqCst}$$
 $$\text{Relaxed} \leq \text{Release} \leq \text{AcqRel} \leq \text{SeqCst}$$
 
 **示例**:
+
 ```rust
 use std::sync::atomic::{AtomicBool, Ordering};
 
@@ -272,6 +284,7 @@ if READY.load(Ordering::Acquire) {
 **定义 5.3** (原子操作): 原子操作是不可分割的操作，保证在多线程环境下的正确性。
 
 **常见原子操作**:
+
 - `load(order)`: 原子加载
 - `store(value, order)`: 原子存储
 - `compare_exchange(expected, new, success_order, failure_order)`: 比较并交换
@@ -279,6 +292,7 @@ if READY.load(Ordering::Acquire) {
 - `fetch_sub(value, order)`: 原子减法
 
 **示例**:
+
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
 
@@ -303,6 +317,7 @@ let old_value = counter.compare_exchange(
 **定义 6.1** (内存一致性): 内存一致性定义了多线程程序中内存操作的可见性顺序。
 
 **一致性模型**:
+
 - **顺序一致性**: 所有线程看到相同的操作顺序
 - **因果一致性**: 保持因果关系的操作顺序
 - **最终一致性**: 最终所有线程看到相同的状态
@@ -319,6 +334,7 @@ $$\text{DataRace}(op_1, op_2) \iff \text{concurrent}(op_1, op_2) \land \text{sam
 **定义 6.3** (内存屏障): 内存屏障确保内存操作的顺序。
 
 **屏障类型**:
+
 - **加载屏障**: 确保加载操作不被重排序
 - **存储屏障**: 确保存储操作不被重排序
 - **全屏障**: 确保所有内存操作不被重排序
@@ -345,6 +361,7 @@ $$\frac{\text{buffer not empty}}{\text{recv()} \rightarrow \text{value}}$$
 $$\frac{\text{buffer empty}}{\text{recv()} \rightarrow \text{blocked}}$$
 
 **示例**:
+
 ```rust
 use std::sync::mpsc;
 use std::thread;
@@ -365,6 +382,7 @@ println!("Got: {}", received);
 **定义 7.3** (MPMC通道): 多生产者多消费者通道允许多个发送者和接收者。
 
 **示例**:
+
 ```rust
 use std::sync::mpsc;
 use std::thread;
@@ -402,6 +420,7 @@ $$\text{LockFree}(DS) \iff \forall t \in T. \text{progress}(t, DS)$$
 **定义 8.2** (无锁栈): 无锁栈使用原子操作实现栈操作。
 
 **实现原理**:
+
 ```rust
 use std::sync::atomic::{AtomicPtr, Ordering};
 
@@ -444,6 +463,7 @@ impl<T> LockFreeStack<T> {
 **定义 8.3** (无锁队列): 无锁队列使用原子操作实现队列操作。
 
 **实现原理**:
+
 ```rust
 use std::sync::atomic::{AtomicPtr, Ordering};
 
@@ -501,6 +521,7 @@ impl<T> LockFreeQueue<T> {
 **定义 9.1** (并行迭代): 并行迭代将迭代任务分配给多个线程执行。
 
 **示例**:
+
 ```rust
 use rayon::prelude::*;
 
@@ -513,6 +534,7 @@ let sum: i32 = numbers.par_iter().sum();
 **定义 9.2** (并行归约): 并行归约将归约操作并行化。
 
 **示例**:
+
 ```rust
 use rayon::prelude::*;
 
@@ -525,6 +547,7 @@ let max = numbers.par_iter().max().unwrap();
 **定义 9.3** (并行映射): 并行映射将映射操作并行化。
 
 **示例**:
+
 ```rust
 use rayon::prelude::*;
 

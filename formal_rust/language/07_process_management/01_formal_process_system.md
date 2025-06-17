@@ -24,6 +24,7 @@
 $$\text{ProcessSystem} = \langle P, R, \text{create}, \text{schedule}, \text{terminate}, \text{communicate} \rangle$$
 
 其中：
+
 - $\text{create}: \text{Command} \rightarrow P$ 为进程创建函数
 - $\text{schedule}: P \rightarrow \text{State}$ 为进程调度函数
 - $\text{terminate}: P \rightarrow \text{Unit}$ 为进程终止函数
@@ -45,6 +46,7 @@ $$\text{ProcessSystem} = \langle P, R, \text{create}, \text{schedule}, \text{ter
 $$\text{Process} = \langle \text{pid}, \text{state}, \text{memory}, \text{resources}, \text{context} \rangle$$
 
 其中：
+
 - $\text{pid} \in \mathbb{N}$ 为进程标识符
 - $\text{state} \in \{\text{Created}, \text{Running}, \text{Waiting}, \text{Terminated}\}$ 为进程状态
 - $\text{memory} \subseteq \text{AddressSpace}$ 为进程地址空间
@@ -182,6 +184,7 @@ $$\frac{P \text{ releases } r}{\text{resources}(P) \leftarrow \text{resources}(P
 $$\text{IPC} = \langle \text{channels}, \text{send}, \text{receive}, \text{synchronize} \rangle$$
 
 其中：
+
 - $\text{channels}$ 为通信通道集合
 - $\text{send}: \text{Channel} \times \text{Message} \rightarrow \text{Result}$ 为发送函数
 - $\text{receive}: \text{Channel} \rightarrow \text{Message}$ 为接收函数

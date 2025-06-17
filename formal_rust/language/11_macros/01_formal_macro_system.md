@@ -35,6 +35,7 @@ Rust的宏系统提供了强大的代码生成和元编程能力，通过声明�
 
 **定义 2.1** (宏)
 宏 $M$ 是一个四元组 $(N, P, B, T)$，其中：
+
 - $N$ 是宏名称
 - $P$ 是模式集合
 - $B$ 是展开体集合
@@ -42,6 +43,7 @@ Rust的宏系统提供了强大的代码生成和元编程能力，通过声明�
 
 **定义 2.2** (宏类型)
 宏类型包括：
+
 - **声明宏**: 基于模式的语法扩展
 - **过程宏**: 基于AST的代码生成
 - **属性宏**: 基于属性的代码转换
@@ -60,6 +62,7 @@ $$\frac{\text{expand}(M, args) = code}{\Gamma \vdash M!(args) \Downarrow code}$$
 
 **定义 3.1** (宏规则)
 宏规则 $R$ 是一个二元组 $(P, T)$，其中：
+
 - $P$ 是匹配模式
 - $T$ 是展开模板
 
@@ -75,6 +78,7 @@ $$\text{Pattern} ::= \text{Token} \mid \text{Repetition} \mid \text{Group}$$
 $$\text{Repetition} ::= \text{Token} \text{RepetitionOp}$$
 
 **重复操作符**:
+
 - `*`: 零次或多次
 - `+`: 一次或多次
 - `?`: 零次或一次
@@ -127,6 +131,7 @@ $$\frac{\text{concat}(stream_1, stream_2) = stream}{\text{TokenStream::concat}(s
 宏展开是一个递归过程，将宏调用替换为展开结果。
 
 **展开步骤**:
+
 1. **识别**: 识别宏调用
 2. **匹配**: 匹配宏规则
 3. **绑定**: 绑定变量
@@ -178,6 +183,7 @@ $$\forall M. \text{valid\_macro}(M) \implies \text{hygienic}(M)$$
 
 **证明**:
 基于以下机制：
+
 1. 作用域分离
 2. 标识符重命名
 3. 编译时检查
@@ -192,6 +198,7 @@ $$\forall M, args. \text{expand}(M!(args)) = \text{expected}(M, args)$$
 
 **证明**:
 通过结构归纳法证明：
+
 1. **基础情况**: 简单宏调用
 2. **归纳步骤**: 复杂宏调用
 
@@ -538,4 +545,4 @@ pub fn configurable_macro(attr: TokenStream, item: TokenStream) -> TokenStream {
 
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  
-**状态**: 完成 
+**状态**: 完成

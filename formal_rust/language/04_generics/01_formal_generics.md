@@ -33,6 +33,7 @@ Rust的泛型系统是其强大类型系统的核心组成部分，提供了类�
 ### 1.3 形式化目标
 
 本文档提供Rust泛型系统的完整形式化描述，包括：
+
 - 类型参数的形式化定义
 - Trait约束的数学表示
 - 多态性的理论基础
@@ -45,6 +46,7 @@ Rust的泛型系统是其强大类型系统的核心组成部分，提供了类�
 **定义 2.1** (类型参数): 类型参数是一个类型变量，用大写字母表示，如 $T, U, V$ 等。
 
 **语法规则**:
+
 ```
 <T1, T2, ..., Tn>
 ```
@@ -61,6 +63,7 @@ $$\text{fn } f<T_1, T_2, ..., T_n>(params) \rightarrow \tau$$
 $$\frac{\Gamma, T_1, T_2, ..., T_n \vdash body : \tau}{\Gamma \vdash \text{fn } f<T_1, T_2, ..., T_n>(params) \rightarrow \tau \{ body \} : \forall T_1, T_2, ..., T_n. \text{fn}(params) \rightarrow \tau}$$
 
 **示例**:
+
 ```rust
 fn identity<T>(value: T) -> T {
     value
@@ -72,6 +75,7 @@ fn identity<T>(value: T) -> T {
 **定义 2.3** (泛型结构体): 泛型结构体是具有类型参数的结构体。
 
 **语法规则**:
+
 ```
 struct StructName<T1, T2, ..., Tn> {
     field1: T1,
@@ -84,6 +88,7 @@ struct StructName<T1, T2, ..., Tn> {
 $$\frac{\Gamma, T_1, T_2, ..., T_n \vdash fields : \text{Fields}}{\Gamma \vdash \text{struct } S<T_1, T_2, ..., T_n> \{ fields \} : \text{Struct}(T_1, T_2, ..., T_n)}$$
 
 **示例**:
+
 ```rust
 struct Point<T> {
     x: T,
@@ -98,6 +103,7 @@ struct Point<T> {
 **定义 3.1** (类型参数约束): 类型参数约束是对类型参数的限制条件，通常通过Trait bounds实现。
 
 **语法规则**:
+
 ```
 T: Trait1 + Trait2 + ... + TraitN
 ```
@@ -113,6 +119,7 @@ $$\frac{\Gamma \vdash T : \tau \quad \tau \text{ implements } \text{Trait}_1, \t
 $$\frac{\Gamma \vdash e : \tau \quad \tau \text{ unifies with } \sigma[T_1 \mapsto \tau_1, ..., T_n \mapsto \tau_n]}{\Gamma \vdash e : \sigma[T_1 \mapsto \tau_1, ..., T_n \mapsto \tau_n]}$$
 
 **示例**:
+
 ```rust
 let point = Point { x: 5, y: 10 }; // T 被推导为 i32
 let float_point = Point { x: 3.14, y: 2.71 }; // T 被推导为 f64
@@ -132,6 +139,7 @@ $$\frac{\Gamma \vdash f : \forall T. \text{fn}(T) \rightarrow T \quad \Gamma \vd
 **定义 4.1** (Trait): Trait是Rust中定义共享行为的接口，可以包含方法签名和默认实现。
 
 **语法规则**:
+
 ```
 trait TraitName {
     fn method1(&self) -> ReturnType1;
@@ -148,6 +156,7 @@ $$\frac{\Gamma \vdash methods : \text{MethodSignatures}}{\Gamma \vdash \text{tra
 **定义 4.2** (Trait约束): Trait约束要求类型参数实现特定的Trait。
 
 **语法规则**:
+
 ```
 fn function<T: Trait1 + Trait2>(param: T) -> ReturnType
 ```
@@ -156,6 +165,7 @@ fn function<T: Trait1 + Trait2>(param: T) -> ReturnType
 $$\frac{\Gamma \vdash T : \text{Trait}_1 + \text{Trait}_2 \quad \Gamma \vdash param : T}{\Gamma \vdash \text{fn } f<T : \text{Trait}_1 + \text{Trait}_2>(param : T) : \text{ReturnType}}$$
 
 **示例**:
+
 ```rust
 fn print_value<T: std::fmt::Debug>(value: T) {
     println!("{:?}", value);
@@ -167,6 +177,7 @@ fn print_value<T: std::fmt::Debug>(value: T) {
 **定义 4.3** (where子句): where子句提供了一种更清晰的Trait约束语法。
 
 **语法规则**:
+
 ```
 fn function<T>(param: T) -> ReturnType
 where
@@ -187,6 +198,7 @@ $$\frac{\Gamma \vdash T : \text{Trait}_1 + \text{Trait}_2 \quad \Gamma \vdash T:
 **定义 5.1** (关联类型): 关联类型是Trait中定义的类型别名，与实现类型相关联。
 
 **语法规则**:
+
 ```
 trait TraitName {
     type AssociatedType;
@@ -202,6 +214,7 @@ $$\frac{\Gamma \vdash \text{trait } T \{ \text{type } AT; methods \} : \text{Tra
 **定义 5.2** (关联类型约束): 关联类型约束是对关联类型的限制条件。
 
 **语法规则**:
+
 ```
 trait TraitName {
     type AssociatedType: Trait1 + Trait2;
@@ -212,6 +225,7 @@ trait TraitName {
 $$\frac{\Gamma \vdash T::AT : \text{Trait}_1 + \text{Trait}_2}{\Gamma \vdash T : \text{Trait with } AT : \text{Trait}_1 + \text{Trait}_2}$$
 
 **示例**:
+
 ```rust
 trait Iterator {
     type Item;
@@ -236,6 +250,7 @@ impl Iterator for VecIter<i32> {
 $$F : \text{Type} \rightarrow \text{Type}$$
 
 **示例**:
+
 ```rust
 // Option 是一个高阶类型
 type Option<T> = Some(T) | None;
@@ -252,6 +267,7 @@ type Vec<T> = /* vector implementation */;
 $$\frac{\Gamma \vdash F : \text{Type} \rightarrow \text{Type} \quad \Gamma \vdash \tau : \text{Type}}{\Gamma \vdash F(\tau) : \text{Type}}$$
 
 **示例**:
+
 ```rust
 let option_int: Option<i32> = Some(42);
 let vector_string: Vec<String> = vec!["hello".to_string()];
@@ -262,10 +278,12 @@ let vector_string: Vec<String> = vec!["hello".to_string()];
 **定义 6.3** (函子): 函子是一个高阶类型 $F$ 以及一个映射函数 $fmap$，满足函子定律。
 
 **函子定律**:
+
 1. **恒等律**: $fmap(id) = id$
 2. **结合律**: $fmap(f \circ g) = fmap(f) \circ fmap(g)$
 
 **示例**:
+
 ```rust
 impl<T> Option<T> {
     fn map<U, F>(self, f: F) -> Option<U>
@@ -290,6 +308,7 @@ impl<T> Option<T> {
 $$\forall T. \text{fn}(T) \rightarrow T$$
 
 **示例**:
+
 ```rust
 fn identity<T>(value: T) -> T {
     value
@@ -304,6 +323,7 @@ fn identity<T>(value: T) -> T {
 $$\text{trait } T \{ \text{fn } method(&self) \rightarrow \text{ReturnType} \}$$
 
 **示例**:
+
 ```rust
 trait Display {
     fn display(&self) -> String;
@@ -372,10 +392,12 @@ $$f : \forall T. A(T) \rightarrow B(T)$$
 ### 9.2 类型范畴
 
 **定义 9.2** (类型范畴): 类型范畴 $\mathcal{C}$ 包含：
+
 - 对象：Rust类型
 - 态射：类型之间的函数
 
 **范畴公理**:
+
 1. **结合律**: $(f \circ g) \circ h = f \circ (g \circ h)$
 2. **恒等律**: $id_A \circ f = f = f \circ id_B$
 
@@ -384,6 +406,7 @@ $$f : \forall T. A(T) \rightarrow B(T)$$
 **定义 9.3** (泛型函子): 泛型类型构造子是从类型范畴到自身的函子。
 
 **函子性质**:
+
 - 对象映射：$F : \text{Type} \rightarrow \text{Type}$
 - 态射映射：$F : \text{Hom}(A, B) \rightarrow \text{Hom}(F(A), F(B))$
 

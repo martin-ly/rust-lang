@@ -24,6 +24,7 @@
 $$\text{AsyncModel} = \langle T, I, \text{schedule}, \text{poll}, \text{wake} \rangle$$
 
 其中：
+
 - $\text{schedule}: T \rightarrow \text{Executor}$ 为调度函数
 - $\text{poll}: \text{Future} \times \text{Context} \rightarrow \text{Poll}$ 为轮询函数
 - $\text{wake}: \text{Waker} \rightarrow \text{Unit}$ 为唤醒函数
@@ -132,6 +133,7 @@ $$\frac{\text{poll}(F, \text{cx}) = \text{Pending}}{\text{state}(F) \rightarrow 
 $$\text{AsyncStateMachine} = \langle S, \Sigma, \delta, s_0, F \rangle$$
 
 其中：
+
 - $S$ 为状态集合
 - $\Sigma$ 为输入字母表（await点）
 - $\delta: S \times \Sigma \rightarrow S$ 为状态转换函数
@@ -194,6 +196,7 @@ impl Future for ExampleStateMachine {
 $$\text{Executor} = \langle \text{task_queue}, \text{schedule}, \text{run} \rangle$$
 
 其中：
+
 - $\text{task_queue}$ 为任务队列
 - $\text{schedule}: \text{Task} \rightarrow \text{Unit}$ 为调度函数
 - $\text{run}: \text{Unit} \rightarrow \text{Unit}$ 为运行函数
@@ -290,6 +293,7 @@ $$\frac{\text{await}(e)}{\text{lifetime}(e) \subseteq \text{lifetime}(\text{asyn
 $$\text{CooperativeScheduling} = \langle \text{tasks}, \text{yield_points}, \text{resume} \rangle$$
 
 其中：
+
 - $\text{yield_points}$ 为让出点集合（await点）
 - $\text{resume}: \text{Task} \rightarrow \text{Unit}$ 为恢复函数
 
