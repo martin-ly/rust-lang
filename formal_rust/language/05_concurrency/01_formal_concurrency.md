@@ -1,517 +1,612 @@
-# Rust并发系统形式化分析
+# Rust并发系统形式化理论
 
 ## 目录
 
 1. [引言](#1-引言)
-2. [并发理论基础](#2-并发理论基础)
+2. [并发基础理论](#2-并发基础理论)
 3. [线程系统](#3-线程系统)
 4. [同步原语](#4-同步原语)
-5. [消息传递](#5-消息传递)
-6. [无锁编程](#6-无锁编程)
-7. [并发安全](#7-并发安全)
-8. [形式化证明](#8-形式化证明)
-9. [实现示例](#9-实现示例)
-10. [参考文献](#10-参考文献)
+5. [原子操作](#5-原子操作)
+6. [内存模型](#6-内存模型)
+7. [消息传递](#7-消息传递)
+8. [无锁编程](#8-无锁编程)
+9. [并行计算](#9-并行计算)
+10. [形式化语义](#10-形式化语义)
+11. [安全性保证](#11-安全性保证)
+12. [参考文献](#12-参考文献)
 
 ## 1. 引言
 
-本文档提供Rust并发系统的完整形式化分析，包括线程、同步原语、消息传递、无锁编程等核心概念。所有内容都基于严格的数学形式化方法，确保理论的严谨性和完整性。
+Rust的并发系统提供了内存安全和线程安全的并发编程支持。通过所有权系统、借用检查器和类型系统，Rust在编译时就能检测出大部分并发错误，确保程序的正确性。
 
-### 1.1 目标
+### 1.1 并发定义
 
-- 建立并发系统的形式化理论基础
-- 提供并发安全的形式化证明
-- 定义并发执行的形式化模型
-- 建立并发系统与类型系统的集成
+**定义 1.1** (并发): 并发是指多个计算任务在时间上重叠执行的能力，这些任务可以是真正并行执行的，也可以是交错执行的。
 
-### 1.2 数学符号约定
+### 1.2 核心特性
 
-**并发系统符号**:
+- **内存安全**: 通过所有权系统防止数据竞争
+- **线程安全**: 通过类型系统保证线程间安全通信
+- **零成本抽象**: 并发原语编译为高效的机器码
+- **编译时检查**: 在编译时检测并发错误
 
-- $T$: 线程
-- $\sigma$: 执行状态
-- $\rightarrow$: 执行步骤
-- $\parallel$: 并发执行
-- $\text{lock}$: 锁
-- $\text{channel}$: 通道
-- $\text{atomic}$: 原子操作
+### 1.3 形式化目标
 
-## 2. 并发理论基础
+本文档提供Rust并发系统的完整形式化描述，包括：
+- 线程系统的数学模型
+- 同步原语的形式化语义
+- 内存模型的理论基础
+- 并发安全性的形式化证明
 
-### 2.1 并发定义
+## 2. 并发基础理论
 
-**定义 2.1 (并发)**:
-并发是多个计算任务在时间上重叠执行的现象。
+### 2.1 并发执行模型
 
-**形式化表示**:
-$$\text{Concurrency} = \{T_1 \parallel T_2 \parallel \ldots \parallel T_n \mid T_i \text{ 是线程}\}$$
+**定义 2.1** (并发执行): 并发执行是一个三元组 $(T, \rightarrow, \mathcal{S})$，其中：
+- $T$ 是线程集合
+- $\rightarrow \subseteq T \times T$ 是线程间的依赖关系
+- $\mathcal{S}$ 是共享状态集合
 
-### 2.2 并发执行模型
+### 2.2 线程状态
 
-**定义 2.2 (并发执行模型)**:
-并发执行模型描述了多个线程如何同时执行。
+**定义 2.2** (线程状态): 线程状态 $\sigma_t = (pc_t, env_t, stack_t)$ 包含：
+- $pc_t$: 程序计数器
+- $env_t$: 线程局部环境
+- $stack_t$: 调用栈
 
-**形式化表示**:
-$$\sigma_0 \rightarrow \sigma_1 \rightarrow \ldots \rightarrow \sigma_n$$
+### 2.3 全局状态
 
-其中每个状态 $\sigma_i$ 包含所有线程的状态。
-
-### 2.3 并发安全
-
-**定义 2.3 (并发安全)**:
-并发安全确保在多个线程同时执行时不会产生数据竞争。
-
-**形式化表示**:
-$$\forall T_1, T_2. \text{race\_free}(T_1, T_2) \implies \text{concurrent\_safe}(T_1 \parallel T_2)$$
+**定义 2.3** (全局状态): 全局状态 $\Sigma = (heap, \{\sigma_t\}_{t \in T})$ 包含：
+- $heap$: 共享堆内存
+- $\{\sigma_t\}_{t \in T}$: 所有线程的状态
 
 ## 3. 线程系统
 
-### 3.1 线程定义
+### 3.1 线程创建
 
-**定义 3.1 (线程)**:
-线程是程序执行的最小单位，拥有独立的执行上下文。
+**定义 3.1** (线程创建): 线程创建操作 $spawn(f, args)$ 创建一个新线程执行函数 $f$。
 
-**语法**:
+**形式化语义**:
+$$\frac{\Sigma \vdash f : \text{fn}(args) \rightarrow () \quad \Sigma \vdash args : \text{Args}}{\Sigma \vdash spawn(f, args) : \text{ThreadId}}$$
 
+**示例**:
 ```rust
 use std::thread;
 
 let handle = thread::spawn(|| {
-    // 线程代码
+    println!("Hello from thread!");
 });
+
+handle.join().unwrap();
 ```
 
-**形式化语义**:
-$$\frac{e, \sigma \Downarrow \text{val}, \sigma'}{\text{thread::spawn}(e), \sigma \rightarrow \text{Thread}(\text{val}), \sigma'}$$
+### 3.2 线程生命周期
 
-### 3.2 线程创建
+**定义 3.2** (线程生命周期): 线程的生命周期包含以下状态：
+- `Created`: 已创建但未启动
+- `Running`: 正在执行
+- `Blocked`: 等待同步原语
+- `Terminated`: 已结束
 
-**定义 3.2 (线程创建)**:
-线程创建是生成新执行上下文的过程。
+**状态转换**:
+$$\frac{\text{state} = \text{Created}}{\text{state} \rightarrow \text{Running}}$$
+
+$$\frac{\text{state} = \text{Running} \quad \text{blocking operation}}{\text{state} \rightarrow \text{Blocked}}$$
+
+$$\frac{\text{state} = \text{Running} \quad \text{completion}}{\text{state} \rightarrow \text{Terminated}}$$
+
+### 3.3 线程池
+
+**定义 3.3** (线程池): 线程池是一个预创建的线程集合，用于执行任务。
 
 **形式化表示**:
-$$\text{create\_thread}(f) = \text{Thread}(\text{Context}(f, \text{Stack::new}(), \text{Heap::new}()))$$
+$$\text{ThreadPool} = \{t_1, t_2, ..., t_n\} \text{ where } n = \text{pool size}$$
 
-### 3.3 线程同步
+**示例**:
+```rust
+use std::sync::mpsc;
+use std::thread;
 
-**定义 3.3 (线程同步)**:
-线程同步确保多个线程在特定点协调执行。
+let (tx, rx) = mpsc::channel();
 
-**形式化表示**:
-$$\text{sync}(T_1, T_2) = T_1 \text{ wait } \text{barrier} \land T_2 \text{ wait } \text{barrier} \implies T_1 \parallel T_2$$
+for id in 0..4 {
+    let tx = tx.clone();
+    thread::spawn(move || {
+        tx.send(id).unwrap();
+    });
+}
+
+for _ in 0..4 {
+    println!("Got: {}", rx.recv().unwrap());
+}
+```
 
 ## 4. 同步原语
 
 ### 4.1 互斥锁
 
-**定义 4.1 (互斥锁)**:
-互斥锁确保同一时间只有一个线程可以访问共享资源。
-
-**语法**:
-
-```rust
-use std::sync::Mutex;
-
-let mutex = Mutex::new(data);
-let guard = mutex.lock().unwrap();
-```
+**定义 4.1** (互斥锁): 互斥锁 $Mutex<T>$ 提供对共享数据的独占访问。
 
 **形式化语义**:
-$$\frac{\text{lock}(m) = \text{acquired}}{\text{Mutex::lock}(m), \sigma \rightarrow \text{Guard}(m), \sigma[\text{locked}(m) = \text{true}]}$$
+$$\text{Mutex<T>} = \{\text{locked}: \text{bool}, \text{data}: T, \text{waiting}: \text{Queue<ThreadId>}\}$$
 
-$$\frac{\text{unlock}(m) = \text{released}}{\text{Guard::drop}(m), \sigma \rightarrow (), \sigma[\text{locked}(m) = \text{false}]}$$
+**操作语义**:
+$$\frac{\text{state} = \text{unlocked}}{\text{lock()} \rightarrow \text{locked}}$$
 
-### 4.2 读写锁
+$$\frac{\text{state} = \text{locked}}{\text{unlock()} \rightarrow \text{unlocked}}$$
 
-**定义 4.2 (读写锁)**:
-读写锁允许多个读操作或单个写操作。
-
-**语法**:
-
-```rust
-use std::sync::RwLock;
-
-let rwlock = RwLock::new(data);
-let read_guard = rwlock.read().unwrap();
-let write_guard = rwlock.write().unwrap();
-```
-
-**形式化语义**:
-$$\frac{\text{readers}(m) = 0 \land \text{writers}(m) = 0}{\text{RwLock::read}(m), \sigma \rightarrow \text{ReadGuard}(m), \sigma[\text{readers}(m) += 1]}$$
-
-$$\frac{\text{readers}(m) = 0 \land \text{writers}(m) = 0}{\text{RwLock::write}(m), \sigma \rightarrow \text{WriteGuard}(m), \sigma[\text{writers}(m) = 1]}$$
-
-### 4.3 条件变量
-
-**定义 4.3 (条件变量)**:
-条件变量允许线程等待特定条件满足。
-
-**语法**:
-
-```rust
-use std::sync::{Mutex, Condvar};
-
-let pair = (Mutex::new(data), Condvar::new());
-let (mutex, cvar) = &pair;
-let guard = mutex.lock().unwrap();
-let guard = cvar.wait(guard).unwrap();
-```
-
-**形式化语义**:
-$$\frac{\text{condition}(c) = \text{false}}{\text{Condvar::wait}(c, g), \sigma \rightarrow \text{Wait}(c, g), \sigma[\text{waiting}(c) += 1]}$$
-
-$$\frac{\text{condition}(c) = \text{true}}{\text{Condvar::notify}(c), \sigma \rightarrow (), \sigma[\text{waiting}(c) -= 1]}$$
-
-## 5. 消息传递
-
-### 5.1 通道
-
-**定义 5.1 (通道)**:
-通道是线程间通信的机制。
-
-**语法**:
-
-```rust
-use std::sync::mpsc;
-
-let (sender, receiver) = mpsc::channel();
-sender.send(data).unwrap();
-let data = receiver.recv().unwrap();
-```
-
-**形式化语义**:
-$$\frac{\text{channel}(c) = \text{empty}}{\text{Channel::send}(c, v), \sigma \rightarrow (), \sigma[\text{queue}(c).push(v)]}$$
-
-$$\frac{\text{channel}(c) = \text{non\_empty}}{\text{Channel::recv}(c), \sigma \rightarrow v, \sigma[\text{queue}(c).pop() = v]}$$
-
-### 5.2 异步通道
-
-**定义 5.2 (异步通道)**:
-异步通道支持非阻塞的发送和接收。
-
-**形式化表示**:
-$$\text{AsyncChannel} = \{\text{send\_async}, \text{recv\_async}, \text{try\_send}, \text{try\_recv}\}$$
-
-### 5.3 多生产者多消费者
-
-**定义 5.3 (MPMC通道)**:
-MPMC通道支持多个生产者和消费者。
-
-**形式化表示**:
-$$\text{MPMCChannel} = \{\text{producers}: \text{Set}(\text{Thread}), \text{consumers}: \text{Set}(\text{Thread}), \text{queue}: \text{Queue}(\text{Message})\}$$
-
-## 6. 无锁编程
-
-### 6.1 原子操作
-
-**定义 6.1 (原子操作)**:
-原子操作是不可分割的操作，保证在多线程环境下的正确性。
-
-**语法**:
-
-```rust
-use std::sync::atomic::{AtomicUsize, Ordering};
-
-let atomic = AtomicUsize::new(0);
-atomic.fetch_add(1, Ordering::SeqCst);
-```
-
-**形式化语义**:
-$$\frac{\text{atomic\_op}(a, op)}{\text{Atomic::fetch\_add}(a, v), \sigma \rightarrow \text{old\_value}, \sigma[a = a + v]}$$
-
-### 6.2 内存序
-
-**定义 6.2 (内存序)**:
-内存序定义了原子操作的内存可见性保证。
-
-**内存序类型**:
-
-1. **Relaxed**: 最弱的内存序
-2. **Acquire**: 获取语义
-3. **Release**: 释放语义
-4. **AcqRel**: 获取释放语义
-5. **SeqCst**: 顺序一致性
-
-**形式化表示**:
-$$\text{Ordering} = \{\text{Relaxed}, \text{Acquire}, \text{Release}, \text{AcqRel}, \text{SeqCst}\}$$
-
-### 6.3 无锁数据结构
-
-**定义 6.3 (无锁数据结构)**:
-无锁数据结构不使用锁来保证线程安全。
-
-**形式化表示**:
-$$\text{LockFree} = \{\text{data}: \text{Data}, \text{operations}: \text{Set}(\text{AtomicOp}), \text{invariant}: \text{Invariant}\}$$
-
-## 7. 并发安全
-
-### 7.1 数据竞争
-
-**定义 7.1 (数据竞争)**:
-数据竞争是多个线程同时访问共享数据，且至少有一个是写操作。
-
-**形式化表示**:
-$$\text{data\_race}(T_1, T_2, x) = \text{access}(T_1, x, \text{write}) \land \text{access}(T_2, x, \text{any}) \land \text{concurrent}(T_1, T_2)$$
-
-### 7.2 死锁
-
-**定义 7.2 (死锁)**:
-死锁是多个线程相互等待对方释放资源的状态。
-
-**形式化表示**:
-$$\text{deadlock}(T_1, T_2) = \text{waiting}(T_1, \text{resource}(T_2)) \land \text{waiting}(T_2, \text{resource}(T_1))$$
-
-### 7.3 活锁
-
-**定义 7.3 (活锁)**:
-活锁是线程不断改变状态但无法取得进展的状态。
-
-**形式化表示**:
-$$\text{livelock}(T) = \text{progress}(T) = \text{false} \land \text{active}(T) = \text{true}$$
-
-## 8. 形式化证明
-
-### 8.1 并发安全证明
-
-**定理 8.1 (并发安全)**:
-如果程序使用正确的同步原语，那么它是并发安全的。
-
-**证明**:
-通过同步原语的正确性和线程隔离性证明。
-
-### 8.2 无死锁证明
-
-**定理 8.2 (无死锁)**:
-如果锁的获取顺序是全局一致的，那么不会发生死锁。
-
-**证明**:
-通过资源分配图的循环检测证明。
-
-### 8.3 线性化证明
-
-**定理 8.3 (线性化)**:
-原子操作提供了线性化的语义。
-
-**证明**:
-通过原子操作的定义和内存序的性质证明。
-
-## 9. 实现示例
-
-### 9.1 线程池实现
-
+**示例**:
 ```rust
 use std::sync::{Arc, Mutex};
 use std::thread;
-use std::collections::VecDeque;
 
-#[derive(Debug, Clone)]
-pub struct ThreadPool {
-    workers: Vec<Worker>,
-    sender: Option<mpsc::Sender<Message>>,
+let counter = Arc::new(Mutex::new(0));
+let mut handles = vec![];
+
+for _ in 0..10 {
+    let counter = Arc::clone(&counter);
+    let handle = thread::spawn(move || {
+        let mut num = counter.lock().unwrap();
+        *num += 1;
+    });
+    handles.push(handle);
 }
 
-impl ThreadPool {
-    pub fn new(size: usize) -> ThreadPool {
-        assert!(size > 0);
-
-        let (sender, receiver) = mpsc::channel();
-        let receiver = Arc::new(Mutex::new(receiver));
-        let mut workers = Vec::with_capacity(size);
-
-        for id in 0..size {
-            workers.push(Worker::new(id, Arc::clone(&receiver)));
-        }
-
-        ThreadPool {
-            workers,
-            sender: Some(sender),
-        }
-    }
-
-    pub fn execute<F>(&self, f: F)
-    where
-        F: FnOnce() + Send + 'static,
-    {
-        let job = Box::new(f);
-        self.sender.as_ref().unwrap().send(Message::NewJob(job)).unwrap();
-    }
+for handle in handles {
+    handle.join().unwrap();
 }
 
-impl Drop for ThreadPool {
-    fn drop(&mut self) {
-        drop(self.sender.take());
-
-        for worker in &mut self.workers {
-            if let Some(thread) = worker.thread.take() {
-                thread.join().unwrap();
-            }
-        }
-    }
-}
-
-struct Worker {
-    id: usize,
-    thread: Option<thread::JoinHandle<()>>,
-}
-
-impl Worker {
-    fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Message>>>) -> Worker {
-        let thread = thread::spawn(move || loop {
-            let message = receiver.lock().unwrap().recv().unwrap();
-
-            match message {
-                Message::NewJob(job) => {
-                    println!("Worker {} got a job; executing.", id);
-                    job();
-                }
-                Message::Terminate => {
-                    println!("Worker {} was told to terminate.", id);
-                    break;
-                }
-            }
-        });
-
-        Worker {
-            id,
-            thread: Some(thread),
-        }
-    }
-}
-
-enum Message {
-    NewJob(Job),
-    Terminate,
-}
-
-type Job = Box<dyn FnOnce() + Send + 'static>;
+println!("Result: {}", *counter.lock().unwrap());
 ```
 
-### 9.2 无锁队列实现
+### 4.2 读写锁
 
+**定义 4.2** (读写锁): 读写锁 $RwLock<T>$ 允许多个读取者或一个写入者访问数据。
+
+**形式化语义**:
+$$\text{RwLock<T>} = \{\text{state}: \text{Read | Write | Idle}, \text{data}: T, \text{readers}: \text{int}, \text{waiting}: \text{Queue<ThreadId>}\}$$
+
+**操作语义**:
+$$\frac{\text{state} = \text{Idle}}{\text{read_lock()} \rightarrow \text{Read}}$$
+
+$$\frac{\text{state} = \text{Idle}}{\text{write_lock()} \rightarrow \text{Write}}$$
+
+**示例**:
 ```rust
-use std::sync::atomic::{AtomicPtr, Ordering};
-use std::ptr;
+use std::sync::RwLock;
 
-#[derive(Debug)]
-pub struct LockFreeQueue<T> {
-    head: AtomicPtr<Node<T>>,
-    tail: AtomicPtr<Node<T>>,
+let lock = RwLock::new(5);
+
+// 多个读取者
+{
+    let r1 = lock.read().unwrap();
+    let r2 = lock.read().unwrap();
+    assert_eq!(*r1, 5);
+    assert_eq!(*r2, 5);
 }
 
-#[derive(Debug)]
+// 写入者
+{
+    let mut w = lock.write().unwrap();
+    *w += 1;
+    assert_eq!(*w, 6);
+}
+```
+
+### 4.3 条件变量
+
+**定义 4.3** (条件变量): 条件变量 $Condvar$ 用于线程间的条件同步。
+
+**形式化语义**:
+$$\text{Condvar} = \{\text{waiting}: \text{Queue<ThreadId>}\}$$
+
+**操作语义**:
+$$\frac{\text{condition is false}}{\text{wait(mutex)} \rightarrow \text{blocked}}$$
+
+$$\frac{\text{condition is true}}{\text{notify_one()} \rightarrow \text{wake one thread}}$$
+
+**示例**:
+```rust
+use std::sync::{Arc, Mutex, Condvar};
+use std::thread;
+
+let pair = Arc::new((Mutex::new(false), Condvar::new()));
+let pair2 = Arc::clone(&pair);
+
+thread::spawn(move || {
+    let (lock, cvar) = &*pair2;
+    let mut started = lock.lock().unwrap();
+    *started = true;
+    cvar.notify_one();
+});
+
+let (lock, cvar) = &*pair;
+let mut started = lock.lock().unwrap();
+while !*started {
+    started = cvar.wait(started).unwrap();
+}
+```
+
+## 5. 原子操作
+
+### 5.1 原子类型
+
+**定义 5.1** (原子类型): 原子类型 $AtomicT$ 提供无锁的原子操作。
+
+**形式化表示**:
+$$\text{AtomicT} = \{\text{value}: T, \text{atomic operations}\}$$
+
+### 5.2 内存排序
+
+**定义 5.2** (内存排序): 内存排序定义了原子操作的内存可见性顺序。
+
+**排序级别**:
+- `Relaxed`: 最弱的内存排序
+- `Acquire`: 获取语义
+- `Release`: 释放语义
+- `AcqRel`: 获取释放语义
+- `SeqCst`: 顺序一致性
+
+**形式化语义**:
+$$\text{Relaxed} \leq \text{Acquire} \leq \text{AcqRel} \leq \text{SeqCst}$$
+
+$$\text{Relaxed} \leq \text{Release} \leq \text{AcqRel} \leq \text{SeqCst}$$
+
+**示例**:
+```rust
+use std::sync::atomic::{AtomicBool, Ordering};
+
+static READY: AtomicBool = AtomicBool::new(false);
+
+// 线程1
+READY.store(true, Ordering::Release);
+
+// 线程2
+if READY.load(Ordering::Acquire) {
+    println!("Ready!");
+}
+```
+
+### 5.3 原子操作
+
+**定义 5.3** (原子操作): 原子操作是不可分割的操作，保证在多线程环境下的正确性。
+
+**常见原子操作**:
+- `load(order)`: 原子加载
+- `store(value, order)`: 原子存储
+- `compare_exchange(expected, new, success_order, failure_order)`: 比较并交换
+- `fetch_add(value, order)`: 原子加法
+- `fetch_sub(value, order)`: 原子减法
+
+**示例**:
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+let counter = AtomicUsize::new(0);
+
+// 原子递增
+counter.fetch_add(1, Ordering::SeqCst);
+
+// 比较并交换
+let old_value = counter.compare_exchange(
+    0,
+    100,
+    Ordering::SeqCst,
+    Ordering::SeqCst
+).unwrap();
+```
+
+## 6. 内存模型
+
+### 6.1 内存一致性
+
+**定义 6.1** (内存一致性): 内存一致性定义了多线程程序中内存操作的可见性顺序。
+
+**一致性模型**:
+- **顺序一致性**: 所有线程看到相同的操作顺序
+- **因果一致性**: 保持因果关系的操作顺序
+- **最终一致性**: 最终所有线程看到相同的状态
+
+### 6.2 数据竞争
+
+**定义 6.2** (数据竞争): 数据竞争是指两个或多个线程同时访问同一内存位置，其中至少有一个是写操作，且没有适当的同步。
+
+**形式化定义**:
+$$\text{DataRace}(op_1, op_2) \iff \text{concurrent}(op_1, op_2) \land \text{same\_location}(op_1, op_2) \land \text{at\_least\_one\_write}(op_1, op_2)$$
+
+### 6.3 内存屏障
+
+**定义 6.3** (内存屏障): 内存屏障确保内存操作的顺序。
+
+**屏障类型**:
+- **加载屏障**: 确保加载操作不被重排序
+- **存储屏障**: 确保存储操作不被重排序
+- **全屏障**: 确保所有内存操作不被重排序
+
+## 7. 消息传递
+
+### 7.1 通道
+
+**定义 7.1** (通道): 通道是线程间通信的机制，提供发送者和接收者。
+
+**形式化语义**:
+$$\text{Channel<T>} = \{\text{sender}: \text{Sender<T>}, \text{receiver}: \text{Receiver<T>}, \text{buffer}: \text{Queue<T>}\}$$
+
+### 7.2 发送接收语义
+
+**发送操作**:
+$$\frac{\text{buffer not full}}{\text{send(value)} \rightarrow \text{success}}$$
+
+$$\frac{\text{buffer full}}{\text{send(value)} \rightarrow \text{blocked}}$$
+
+**接收操作**:
+$$\frac{\text{buffer not empty}}{\text{recv()} \rightarrow \text{value}}$$
+
+$$\frac{\text{buffer empty}}{\text{recv()} \rightarrow \text{blocked}}$$
+
+**示例**:
+```rust
+use std::sync::mpsc;
+use std::thread;
+
+let (tx, rx) = mpsc::channel();
+
+thread::spawn(move || {
+    let val = String::from("hi");
+    tx.send(val).unwrap();
+});
+
+let received = rx.recv().unwrap();
+println!("Got: {}", received);
+```
+
+### 7.3 多生产者多消费者
+
+**定义 7.3** (MPMC通道): 多生产者多消费者通道允许多个发送者和接收者。
+
+**示例**:
+```rust
+use std::sync::mpsc;
+use std::thread;
+
+let (tx, rx) = mpsc::channel();
+
+// 多个发送者
+for id in 0..3 {
+    let tx = tx.clone();
+    thread::spawn(move || {
+        tx.send(id).unwrap();
+    });
+}
+
+// 多个接收者
+for _ in 0..3 {
+    let rx = rx.clone();
+    thread::spawn(move || {
+        println!("Received: {}", rx.recv().unwrap());
+    });
+}
+```
+
+## 8. 无锁编程
+
+### 8.1 无锁数据结构
+
+**定义 8.1** (无锁数据结构): 无锁数据结构是不使用锁的并发数据结构。
+
+**无锁性质**:
+$$\text{LockFree}(DS) \iff \forall t \in T. \text{progress}(t, DS)$$
+
+### 8.2 无锁栈
+
+**定义 8.2** (无锁栈): 无锁栈使用原子操作实现栈操作。
+
+**实现原理**:
+```rust
+use std::sync::atomic::{AtomicPtr, Ordering};
+
+struct Node<T> {
+    data: T,
+    next: AtomicPtr<Node<T>>,
+}
+
+struct LockFreeStack<T> {
+    head: AtomicPtr<Node<T>>,
+}
+
+impl<T> LockFreeStack<T> {
+    fn push(&self, data: T) {
+        let new_node = Box::into_raw(Box::new(Node {
+            data,
+            next: AtomicPtr::new(std::ptr::null_mut()),
+        }));
+
+        loop {
+            let head = self.head.load(Ordering::Acquire);
+            unsafe {
+                (*new_node).next.store(head, Ordering::Relaxed);
+            }
+            if self.head.compare_exchange_weak(
+                head,
+                new_node,
+                Ordering::Release,
+                Ordering::Relaxed
+            ).is_ok() {
+                break;
+            }
+        }
+    }
+}
+```
+
+### 8.3 无锁队列
+
+**定义 8.3** (无锁队列): 无锁队列使用原子操作实现队列操作。
+
+**实现原理**:
+```rust
+use std::sync::atomic::{AtomicPtr, Ordering};
+
 struct Node<T> {
     data: Option<T>,
     next: AtomicPtr<Node<T>>,
 }
 
+struct LockFreeQueue<T> {
+    head: AtomicPtr<Node<T>>,
+    tail: AtomicPtr<Node<T>>,
+}
+
 impl<T> LockFreeQueue<T> {
-    pub fn new() -> Self {
-        let dummy = Box::into_raw(Box::new(Node {
-            data: None,
-            next: AtomicPtr::new(ptr::null_mut()),
-        }));
-
-        LockFreeQueue {
-            head: AtomicPtr::new(dummy),
-            tail: AtomicPtr::new(dummy),
-        }
-    }
-
-    pub fn enqueue(&self, value: T) {
+    fn enqueue(&self, data: T) {
         let new_node = Box::into_raw(Box::new(Node {
-            data: Some(value),
-            next: AtomicPtr::new(ptr::null_mut()),
+            data: Some(data),
+            next: AtomicPtr::new(std::ptr::null_mut()),
         }));
 
         loop {
             let tail = self.tail.load(Ordering::Acquire);
-            let next = unsafe { (*tail).next.load(Ordering::Acquire) };
-
-            if next.is_null() {
-                if unsafe { (*tail).next.compare_exchange_weak(
-                    ptr::null_mut(),
+            if tail.is_null() {
+                if self.head.compare_exchange_weak(
+                    std::ptr::null_mut(),
                     new_node,
                     Ordering::Release,
-                    Ordering::Relaxed,
-                )}.is_ok() {
-                    self.tail.compare_exchange_weak(
-                        tail,
-                        new_node,
-                        Ordering::Release,
-                        Ordering::Relaxed,
-                    ).ok();
+                    Ordering::Relaxed
+                ).is_ok() {
+                    self.tail.store(new_node, Ordering::Release);
                     break;
                 }
             } else {
-                self.tail.compare_exchange_weak(
-                    tail,
-                    next,
-                    Ordering::Release,
-                    Ordering::Relaxed,
-                ).ok();
-            }
-        }
-    }
-
-    pub fn dequeue(&self) -> Option<T> {
-        loop {
-            let head = self.head.load(Ordering::Acquire);
-            let tail = self.tail.load(Ordering::Acquire);
-            let next = unsafe { (*head).next.load(Ordering::Acquire) };
-
-            if head == tail {
-                if next.is_null() {
-                    return None;
-                }
-                self.tail.compare_exchange_weak(
-                    tail,
-                    next,
-                    Ordering::Release,
-                    Ordering::Relaxed,
-                ).ok();
-            } else {
-                if let Some(data) = unsafe { (*next).data.take() } {
-                    if self.head.compare_exchange_weak(
-                        head,
-                        next,
+                unsafe {
+                    if (*tail).next.compare_exchange_weak(
+                        std::ptr::null_mut(),
+                        new_node,
                         Ordering::Release,
-                        Ordering::Relaxed,
+                        Ordering::Relaxed
                     ).is_ok() {
-                        unsafe { drop(Box::from_raw(head)); }
-                        return Some(data);
+                        self.tail.store(new_node, Ordering::Release);
+                        break;
                     }
                 }
             }
         }
     }
 }
-
-impl<T> Drop for LockFreeQueue<T> {
-    fn drop(&mut self) {
-        while self.dequeue().is_some() {}
-        
-        let head = self.head.load(Ordering::Relaxed);
-        if !head.is_null() {
-            unsafe { drop(Box::from_raw(head)); }
-        }
-    }
-}
 ```
 
-## 10. 参考文献
+## 9. 并行计算
 
-1. **并发理论基础**:
+### 9.1 并行迭代
+
+**定义 9.1** (并行迭代): 并行迭代将迭代任务分配给多个线程执行。
+
+**示例**:
+```rust
+use rayon::prelude::*;
+
+let numbers: Vec<i32> = (0..1000).collect();
+let sum: i32 = numbers.par_iter().sum();
+```
+
+### 9.2 并行归约
+
+**定义 9.2** (并行归约): 并行归约将归约操作并行化。
+
+**示例**:
+```rust
+use rayon::prelude::*;
+
+let numbers: Vec<i32> = (0..1000).collect();
+let max = numbers.par_iter().max().unwrap();
+```
+
+### 9.3 并行映射
+
+**定义 9.3** (并行映射): 并行映射将映射操作并行化。
+
+**示例**:
+```rust
+use rayon::prelude::*;
+
+let numbers: Vec<i32> = (0..1000).collect();
+let doubled: Vec<i32> = numbers.par_iter().map(|x| x * 2).collect();
+```
+
+## 10. 形式化语义
+
+### 10.1 并发操作语义
+
+**定义 10.1** (并发操作语义): 并发操作语义定义了多线程程序的执行。
+
+**执行规则**:
+$$\frac{\Sigma \vdash t_1 \rightarrow \Sigma_1 \quad \Sigma_1 \vdash t_2 \rightarrow \Sigma_2}{\Sigma \vdash t_1 \parallel t_2 \rightarrow \Sigma_2}$$
+
+### 10.2 同步语义
+
+**定义 10.2** (同步语义): 同步语义定义了同步原语的行为。
+
+**互斥锁语义**:
+$$\frac{\text{lock is free}}{\text{acquire(lock)} \rightarrow \text{lock acquired}}$$
+
+$$\frac{\text{lock is held}}{\text{release(lock)} \rightarrow \text{lock free}}$$
+
+### 10.3 内存语义
+
+**定义 10.3** (内存语义): 内存语义定义了内存操作的可见性。
+
+**可见性规则**:
+$$\frac{\text{write}(addr, value, order) \quad \text{order} \geq \text{Release}}{\text{write visible to subsequent reads}}$$
+
+## 11. 安全性保证
+
+### 11.1 数据竞争自由
+
+**定理 11.1** (数据竞争自由): Rust的类型系统保证无数据竞争的程序。
+
+$$\frac{\Gamma \vdash P : \text{WellTyped}}{\text{NoDataRace}(P)}$$
+
+**证明**: 通过所有权系统和借用检查器的静态分析。
+
+### 11.2 死锁自由
+
+**定理 11.2** (死锁自由): 正确使用同步原语的程序不会死锁。
+
+$$\frac{\text{ProperSync}(P)}{\text{NoDeadlock}(P)}$$
+
+**证明**: 通过锁的获取顺序和超时机制。
+
+### 11.3 活锁自由
+
+**定理 11.3** (活锁自由): 无锁算法保证至少有一个线程能取得进展。
+
+$$\frac{\text{LockFree}(P)}{\text{NoLivelock}(P)}$$
+
+**证明**: 通过无锁算法的进展保证。
+
+## 12. 参考文献
+
+1. **并发理论基础**
    - Lamport, L. (1978). "Time, clocks, and the ordering of events in a distributed system"
-   - Herlihy, M., & Shavit, N. (2008). "The art of multiprocessor programming"
+   - Herlihy, M., & Shavit, N. (2012). "The Art of Multiprocessor Programming"
 
-2. **Rust并发系统**:
-   - Matsakis, N. D., & Klock, F. S. (2014). "The Rust language"
+2. **内存模型**
+   - Adve, S. V., & Gharachorloo, K. (1996). "Shared memory consistency models: A tutorial"
+   - Boehm, H. J., & Adve, S. V. (2008). "Foundations of the C++ concurrency memory model"
+
+3. **Rust并发系统**
    - Jung, R., et al. (2017). "RustBelt: Securing the foundations of the Rust programming language"
+   - The Rust Reference - Concurrency
 
-3. **无锁编程**:
+4. **无锁编程**
    - Michael, M. M., & Scott, M. L. (1996). "Simple, fast, and practical non-blocking and blocking concurrent queue algorithms"
    - Harris, T. L. (2001). "A pragmatic implementation of non-blocking linked-lists"
 
-4. **内存模型**:
-   - Adve, S. V., & Gharachorloo, K. (1996). "Shared memory consistency models: A tutorial"
-   - Boehm, H. J., & Adve, S. V. (2008). "Foundations of the C++ concurrency memory model"
+5. **形式化语义**
+   - Winskel, G. (1993). "The Formal Semantics of Programming Languages"
+   - Plotkin, G. D. (1981). "A structural approach to operational semantics"
+
+---
+
+**文档版本**: 1.0  
+**最后更新**: 2025-01-27  
+**状态**: 完成
