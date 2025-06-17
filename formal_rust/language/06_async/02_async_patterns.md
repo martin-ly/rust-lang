@@ -5,6 +5,7 @@
 - [Rust 异步编程模式形式化](#rust-异步编程模式形式化)
   - [目录](#目录)
   - [1. 引言：异步模式的重要性](#1-引言异步模式的重要性)
+    - [1.1 模式分类](#11-模式分类)
   - [2. 基础异步模式](#2-基础异步模式)
     - [2.1 生产者-消费者模式](#21-生产者-消费者模式)
     - [2.2 发布-订阅模式](#22-发布-订阅模式)
@@ -71,6 +72,7 @@
 $$PC = (Q, P, C, \text{produce}, \text{consume})$$
 
 其中：
+
 - $Q$ 是有限容量的队列
 - $P$ 是生产者集合
 - $C$ 是消费者集合
@@ -78,6 +80,7 @@ $$PC = (Q, P, C, \text{produce}, \text{consume})$$
 - $\text{consume}: C \times T \rightarrow \text{Result}$ 是消费函数
 
 **形式化实现**：
+
 ```rust
 struct ProducerConsumer<T> {
     queue: Arc<Mutex<VecDeque<T>>>,
@@ -117,6 +120,7 @@ $$\text{Throughput} = \min(p, c) \times \text{ProcessingRate}$$
 $$PubSub = (T, P, S, \text{publish}, \text{subscribe})$$
 
 其中：
+
 - $T$ 是主题集合
 - $P$ 是发布者集合
 - $S$ 是订阅者集合
@@ -124,6 +128,7 @@ $$PubSub = (T, P, S, \text{publish}, \text{subscribe})$$
 - $\text{subscribe}: S \times T \rightarrow \text{Stream}<M>$ 是订阅函数
 
 **形式化实现**：
+
 ```rust
 struct PubSub<T, M> {
     topics: Arc<RwLock<HashMap<T, Vec<Sender<M>>>>>,
@@ -165,6 +170,7 @@ $$Pipeline = (S_1, S_2, \ldots, S_n, \text{connect})$$
 其中 $S_i$ 是第 $i$ 个处理阶段。
 
 **形式化实现**：
+
 ```rust
 struct Pipeline<I, O> {
     stages: Vec<Box<dyn Fn(I) -> Future<Output = O> + Send + Sync>>,
@@ -198,6 +204,7 @@ $$Semaphore = (n, \text{acquire}, \text{release})$$
 其中 $n$ 是最大并发数。
 
 **形式化实现**：
+
 ```rust
 struct Semaphore {
     permits: Arc<AtomicUsize>,
@@ -246,6 +253,7 @@ $$\forall t: \text{Active}(t) \leq n$$
 $$TokenBucket = (capacity, rate, tokens, \text{consume})$$
 
 **形式化实现**：
+
 ```rust
 struct TokenBucket {
     capacity: usize,
@@ -290,6 +298,7 @@ impl TokenBucket {
 $$Backpressure = (buffer, threshold, \text{apply})$$
 
 **形式化实现**：
+
 ```rust
 struct Backpressure<T> {
     buffer: Arc<Mutex<VecDeque<T>>>,
@@ -347,6 +356,7 @@ impl<T> Backpressure<T> {
 $$Retry = (max_attempts, backoff, \text{execute})$$
 
 **形式化实现**：
+
 ```rust
 struct Retry<F, T, E> {
     max_attempts: usize,
@@ -395,6 +405,7 @@ $$P(\text{success}) = 1 - (1-p)^n$$
 $$CircuitBreaker = (\text{state}, \text{threshold}, \text{timeout}, \text{execute})$$
 
 **形式化实现**：
+
 ```rust
 enum CircuitState {
     Closed,    // 正常工作
@@ -452,6 +463,7 @@ where F: Fn() -> Future<Output = Result<T, E>> + Send + Sync {
 $$Timeout = (duration, \text{execute})$$
 
 **形式化实现**：
+
 ```rust
 struct Timeout<F, T> {
     duration: Duration,
@@ -479,6 +491,7 @@ where F: Future<Output = T> + Send + Sync {
 $$ConnectionPool = (pool, \text{acquire}, \text{release})$$
 
 **形式化实现**：
+
 ```rust
 struct ConnectionPool<T> {
     connections: Arc<Mutex<VecDeque<T>>>,
@@ -519,6 +532,7 @@ impl<T> ConnectionPool<T> {
 $$ObjectPool = (pool, \text{acquire}, \text{release})$$
 
 **形式化实现**：
+
 ```rust
 struct ObjectPool<T> 
 where T: Default + Send + Sync {
@@ -550,6 +564,7 @@ where T: Default + Send + Sync {
 $$Lifecycle = (\text{init}, \text{use}, \text{cleanup})$$
 
 **形式化实现**：
+
 ```rust
 struct Lifecycle<T> {
     resource: Option<T>,
@@ -589,6 +604,7 @@ impl<T> Drop for Lifecycle<T> {
 $$Window = (size, \text{slide}, \text{process})$$
 
 **形式化实现**：
+
 ```rust
 struct Window<T> {
     size: usize,
@@ -618,6 +634,7 @@ impl<T> Window<T> {
 $$Aggregate = (\text{key}, \text{reduce}, \text{result})$$
 
 **形式化实现**：
+
 ```rust
 struct Aggregate<K, V, R> 
 where K: Eq + Hash + Clone, V: Clone {
@@ -647,6 +664,7 @@ where K: Eq + Hash + Clone, V: Clone {
 $$Split = (\text{predicate}, \text{streams})$$
 
 **形式化实现**：
+
 ```rust
 struct Split<T> {
     predicates: Vec<Box<dyn Fn(&T) -> bool + Send + Sync>>,
@@ -675,6 +693,7 @@ where T: Clone {
 $$Barrier = (count, \text{wait})$$
 
 **形式化实现**：
+
 ```rust
 struct Barrier {
     count: Arc<AtomicUsize>,
@@ -717,6 +736,7 @@ impl Barrier {
 $$FanInFanOut = (\text{fan_out}, \text{process}, \text{fan_in})$$
 
 **形式化实现**：
+
 ```rust
 struct FanInFanOut<I, O> {
     workers: usize,
@@ -759,6 +779,7 @@ where I: Send + 'static, O: Send + 'static {
 $$WorkStealing = (\text{queues}, \text{steal}, \text{balance})$$
 
 **形式化实现**：
+
 ```rust
 struct WorkStealing<T> {
     queues: Vec<Arc<Mutex<VecDeque<T>>>>,
@@ -802,6 +823,7 @@ where T: Send + 'static {
 $$Batch = (\text{size}, \text{timeout}, \text{process})$$
 
 **形式化实现**：
+
 ```rust
 struct Batch<T, R> {
     size: usize,
@@ -843,6 +865,7 @@ where T: Send + 'static, R: Send + 'static {
 $$Cache = (\text{store}, \text{lookup}, \text{evict})$$
 
 **形式化实现**：
+
 ```rust
 struct Cache<K, V> 
 where K: Eq + Hash + Clone, V: Clone {
@@ -891,6 +914,7 @@ where K: Eq + Hash + Clone, V: Clone {
 $$Prefetch = (\text{predict}, \text{load}, \text{buffer})$$
 
 **形式化实现**：
+
 ```rust
 struct Prefetch<T> {
     buffer: Arc<Mutex<VecDeque<T>>>,
@@ -949,7 +973,8 @@ where T: Clone + Send + 'static {
 $$Performance = f(\text{Throughput}, \text{Latency}, \text{ResourceUsage})$$
 
 **算法 5 (性能分析)**：
-```
+
+```latex
 function analyze_performance(pattern, workload):
     metrics = {}
     
@@ -978,9 +1003,10 @@ function analyze_performance(pattern, workload):
 7. **性能优化**：批处理、缓存、预取
 
 每个模式都包含：
+
 - 形式化定义
 - 实现示例
 - 正确性定理
 - 性能分析
 
-这些模式为构建高性能、可靠的异步系统提供了理论基础和实践指导。通过形式化验证，我们可以确保模式的正确性和性能保证。 
+这些模式为构建高性能、可靠的异步系统提供了理论基础和实践指导。通过形式化验证，我们可以确保模式的正确性和性能保证。

@@ -5,6 +5,8 @@
 - [Rust 异步编程系统形式化理论](#rust-异步编程系统形式化理论)
   - [目录](#目录)
   - [1. 引言：异步计算的形式化基础](#1-引言异步计算的形式化基础)
+    - [1.1 异步计算的基本假设](#11-异步计算的基本假设)
+    - [1.2 形式化符号约定](#12-形式化符号约定)
   - [2. 核心概念的形式化定义](#2-核心概念的形式化定义)
     - [2.1 Future 特质的形式化](#21-future-特质的形式化)
     - [2.2 轮询模型的形式化](#22-轮询模型的形式化)
@@ -46,12 +48,14 @@
 我们首先建立异步计算的基本假设：
 
 **假设 1 (异步计算环境)**：
+
 - 存在一个执行环境 $E$，包含有限数量的执行线程 $T_1, T_2, \ldots, T_n$
 - 每个线程可以执行多个异步任务
 - 存在一个全局的任务调度器 $S$，负责管理任务的执行顺序
 - 存在一个事件循环 $L$，处理I/O事件和任务唤醒
 
 **假设 2 (非阻塞I/O)**：
+
 - I/O操作不会阻塞执行线程
 - 当I/O操作完成时，通过事件通知机制唤醒等待的任务
 - 任务可以在I/O等待期间让出控制权
@@ -77,6 +81,7 @@
 $$F = (S, \Sigma, \delta, s_0, F)$$
 
 其中：
+
 - $S$ 是状态集合
 - $\Sigma$ 是输入字母表（包含Context）
 - $\delta: S \times \Sigma \rightarrow S \times \text{Poll}(T)$ 是状态转换函数
@@ -86,10 +91,12 @@ $$F = (S, \Sigma, \delta, s_0, F)$$
 **定义 2 (Poll操作)**：
 对于Future $F$，Poll操作定义为：
 
-$$\text{Poll}(F, cx) = \begin{cases}
+$$
+\text{Poll}(F, cx) = \begin{cases}
 \text{Ready}(v) & \text{if } F \text{ 已完成，结果为 } v \\
 \text{Pending} & \text{if } F \text{ 未完成，已注册 } cx.waker()
-\end{cases}$$
+\end{cases}
+$$
 
 **公理 1 (Waker契约)**：
 如果 $\text{Poll}(F, cx) = \text{Pending}$，那么当 $F$ 可以取得进展时，必须调用 $cx.waker().wake()$ 或在下一次状态变化前被再次轮询。
@@ -117,13 +124,15 @@ $$(\exists t_2 > t_1: \text{Wake}(cx.waker()) \lor \text{Poll}(F, cx') \text{ at
 $$E = (Q, R, P, W)$$
 
 其中：
+
 - $Q$ 是就绪任务队列
 - $R$ 是运行中的任务集合
 - $P$ 是暂停的任务集合
 - $W$ 是等待I/O的任务集合
 
 **算法 1 (执行器主循环)**：
-```
+
+```latex
 while Q ≠ ∅ or R ≠ ∅ or W ≠ ∅:
     // 处理就绪任务
     for task in Q:
@@ -132,7 +141,7 @@ while Q ≠ ∅ or R ≠ ∅ or W ≠ ∅:
             complete(task, value)
         else:
             W.add(task)
-    
+
     // 处理I/O事件
     for event in poll_io_events():
         waker = event.waker
@@ -212,6 +221,7 @@ $$\text{Pin}<&mut S> \land \text{SelfReferential}(S) \implies \text{ValidReferen
 $$\text{CorrectPinUsage} \land \text{ValidWakerContract} \implies \text{MemorySafe}$$
 
 **证明**：
+
 1. Pin机制防止自引用结构移动，避免悬垂指针
 2. 所有权系统防止数据竞争
 3. Waker契约确保正确的唤醒机制
@@ -237,7 +247,8 @@ $$S: \mathcal{T}^* \times \mathcal{E} \rightarrow \mathcal{T}$$
 决定下一个要执行的任务。
 
 **算法 2 (工作窃取调度)**：
-```
+
+```latex
 // 本地队列调度
 if local_queue.is_empty():
     // 尝试从其他线程窃取任务
@@ -331,10 +342,11 @@ Stream是产生一系列值的异步计算：
 $$\text{Stream}<T> = \text{Future}<\text{Option}<T>>$$
 
 **定义 17 (Stream trait)**：
+
 ```rust
 trait Stream {
     type Item;
-    fn poll_next(self: Pin<&mut Self>, cx: &mut Context<'_>) 
+    fn poll_next(self: Pin<&mut Self>, cx: &mut Context<'_>)
         -> Poll<Option<Self::Item>>;
 }
 ```
@@ -349,8 +361,9 @@ trait Stream {
 - **take**: $S.take(n) = \{x_1, x_2, \ldots, x_n\}$
 
 **算法 3 (流消费)**：
-```
-async fn consume_stream<S>(mut stream: S) 
+
+```rust
+async fn consume_stream<S>(mut stream: S)
 where S: Stream + Unpin {
     while let Some(item) = stream.next().await {
         process(item);
@@ -370,10 +383,12 @@ $$\text{Result}<T, E> = \text{Ok}(T) \mid \text{Err}(E)$$
 **定义 20 (错误传播)**：
 错误传播操作符 `?` 定义为：
 
-$$\text{Propagate}(r) = \begin{cases}
+$$
+\text{Propagate}(r) = \begin{cases}
 \text{return Ok}(v) & \text{if } r = \text{Ok}(v) \\
 \text{return Err}(e) & \text{if } r = \text{Err}(e)
-\end{cases}$$
+\end{cases}
+$$
 
 ### 7.2 取消机制的形式化
 
@@ -383,13 +398,14 @@ $$\text{Propagate}(r) = \begin{cases}
 $$\text{CancellableFuture}<T> = \text{Future}<T> \times \text{CancelToken}$$
 
 **算法 4 (取消检查)**：
-```
+
+```rust
 async fn cancellable_operation(token: CancelToken) -> Result<T, Cancelled> {
     loop {
         if token.is_cancelled() {
             return Err(Cancelled);
         }
-        
+
         match do_work().await {
             Ok(result) => return Ok(result),
             Err(e) if e.is_retryable() => continue,
@@ -470,4 +486,4 @@ Rust的异步编程系统通过严格的形式化方法提供了强大的安全�
 3. **生态系统标准化**：统一异步I/O接口和运行时标准
 4. **跨语言互操作**：改进与其他语言异步系统的互操作性
 
-通过形式化方法，我们可以精确理解和验证Rust异步系统的行为，为构建可靠的高性能异步应用提供理论基础。 
+通过形式化方法，我们可以精确理解和验证Rust异步系统的行为，为构建可靠的高性能异步应用提供理论基础。

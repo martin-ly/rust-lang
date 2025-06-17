@@ -35,6 +35,7 @@ Rust的错误处理系统基于代数数据类型和函数式编程范式，提�
 
 **定义 2.1** (代数数据类型)
 代数数据类型 $T$ 是以下构造的递归组合：
+
 - 单元类型: $\text{Unit}$
 - 乘积类型: $T_1 \times T_2$
 - 和类型: $T_1 + T_2$
@@ -64,6 +65,7 @@ Result类型是一个二元和类型：
 $$\text{Result}(T, E) = \text{Ok}(T) + \text{Err}(E)$$
 
 其中：
+
 - $T$ 是成功值的类型
 - $E$ 是错误值的类型
 
@@ -126,6 +128,7 @@ $$\frac{\Gamma \vdash o: \text{Option}(T) \quad \Gamma \vdash f: T \rightarrow \
 $$\frac{\Gamma \vdash r: \text{Result}(T, E) \quad \Gamma \vdash f: E \rightarrow F}{\Gamma \vdash r? \text{ in } f: \text{Result}(T, F)}$$
 
 **传播规则**:
+
 1. 如果 $r = \text{Ok}(v)$，则 $r? = v$
 2. 如果 $r = \text{Err}(e)$，则 $r? = \text{return Err}(e)$
 
@@ -169,6 +172,7 @@ $$\frac{\Gamma \vdash r: \text{Result}(T, E) \quad \sigma \vdash r \Downarrow v}
 
 **证明**:
 通过结构归纳法证明：
+
 1. **基础情况**: Ok和Err构造
 2. **归纳步骤**: 组合操作
 
@@ -180,6 +184,7 @@ $$\forall r: \text{Result}(T, E). \text{handled}(r)$$
 
 **证明**:
 基于以下性质：
+
 1. 模式匹配的穷尽性
 2. 传播操作符的显式性
 3. 编译时检查
@@ -291,8 +296,8 @@ fn chained_operations() -> Result<i32, String> {
 
 ### 9.2 内存布局
 
-- **Result<T, E>**: 与最大类型大小相同
-- **Option<T>**: 与T大小相同（通过null指针优化）
+- **`Result<T, E>`**: 与最大类型大小相同
+- **`Option<T>`**: 与T大小相同（通过null指针优化）
 - **错误传播**: 无额外内存分配
 
 ## 10. 最佳实践
@@ -359,4 +364,4 @@ fn composition_pattern() -> Result<i32, String> {
 
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  
-**状态**: 完成 
+**状态**: 完成

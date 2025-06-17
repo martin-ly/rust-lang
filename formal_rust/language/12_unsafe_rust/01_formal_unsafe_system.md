@@ -46,6 +46,7 @@ $$\frac{\Gamma \vdash \text{unsafe fn } N(p: T) \rightarrow R \{ \text{body} \}}
 
 **定义 2.2** (安全保证)
 在Unsafe代码中，程序员必须手动保证以下性质：
+
 1. **内存安全**: 无悬垂指针、无缓冲区溢出
 2. **数据竞争**: 无并发数据竞争
 3. **类型安全**: 类型转换的正确性
@@ -62,6 +63,7 @@ $$\text{safe\_contract}(unsafe\_code) \iff \text{memory\_safe}(unsafe\_code) \la
 原始指针是一个不受所有权系统约束的指针类型。
 
 **指针类型**:
+
 - `*const T`: 不可变原始指针
 - `*mut T`: 可变原始指针
 
@@ -134,6 +136,7 @@ $$\frac{\text{Layout::from\_size\_align}(size, align) = layout}{\text{unsafe } \
 $$\frac{\Gamma \vdash \text{extern "C" fn } N(p: T) \rightarrow R;}{\Gamma \vdash N: \text{ExternalFn}(T \rightarrow R)}$$
 
 **链接规范**:
+
 - `"C"`: C语言调用约定
 - `"stdcall"`: Windows API调用约定
 - `"fastcall"`: 快速调用约定
@@ -193,6 +196,7 @@ $$\frac{\text{safe\_contract}(unsafe\_code)}{\text{memory\_safe}(unsafe\_code)}$
 
 **证明**:
 基于以下条件：
+
 1. 指针有效性检查
 2. 生命周期管理
 3. 内存边界检查
@@ -205,6 +209,7 @@ $$\frac{\text{proper\_usage}(unsafe\_code)}{\text{race\_free}(unsafe\_code)}$$
 
 **证明**:
 基于以下机制：
+
 1. 同步原语使用
 2. 原子操作
 3. 内存屏障
@@ -644,4 +649,4 @@ extern "C" {
 
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  
-**状态**: 完成 
+**状态**: 完成

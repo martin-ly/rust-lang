@@ -34,6 +34,7 @@ Rust的内存管理系统是其安全性的核心基础，通过所有权系统�
 
 **定义 2.1** (内存状态)
 内存状态 $\sigma$ 是一个三元组 $(H, L, T)$，其中：
+
 - $H: \text{Addr} \rightarrow \text{Value}$ 是堆映射
 - $L: \text{Var} \rightarrow \text{Addr}$ 是局部变量映射
 - $T: \text{Addr} \rightarrow \text{Type}$ 是类型映射
@@ -66,6 +67,7 @@ $$\forall a \in \text{Addr}. |\{x \in \text{Var} \mid L(x) = a \land \text{owns}
 
 **规则 3.2** (借用规则)
 借用必须满足以下约束：
+
 1. **不可变借用**: 可以有多个不可变借用
 2. **可变借用**: 只能有一个可变借用
 3. **互斥性**: 不可变借用和可变借用不能同时存在
@@ -99,13 +101,13 @@ $$\frac{\mathcal{A}.\text{deallocate}(a)}{\sigma \vdash \text{deallocate}(a) \Do
 
 ### 4.2 智能指针
 
-**Box<T>**:
+**`Box<T>`**:
 $$\frac{\text{alloc}(\tau, \sigma) = (a, \sigma')}{\sigma \vdash \text{Box::new}(v) \Downarrow \text{Box}(a), \sigma'}$$
 
-**Rc<T>**:
+**`Rc<T>`**:
 $$\frac{\text{refcount}(a) = n}{\sigma \vdash \text{Rc::new}(v) \Downarrow \text{Rc}(a, n), \sigma'}$$
 
-**Arc<T>**:
+**`Arc<T>`**:
 $$\frac{\text{atomic\_refcount}(a) = n}{\sigma \vdash \text{Arc::new}(v) \Downarrow \text{Arc}(a, n), \sigma'}$$
 
 ## 5. 内存安全保证
@@ -114,6 +116,7 @@ $$\frac{\text{atomic\_refcount}(a) = n}{\sigma \vdash \text{Arc::new}(v) \Downar
 
 **定理 5.1** (内存安全)
 对于所有类型良好的程序 $P$，如果 $\sigma_0 \vdash P \Downarrow \sigma_n$，则：
+
 1. 无空指针解引用
 2. 无悬垂指针
 3. 无缓冲区溢出
@@ -121,6 +124,7 @@ $$\frac{\text{atomic\_refcount}(a) = n}{\sigma \vdash \text{Arc::new}(v) \Downar
 
 **证明**:
 通过结构归纳法证明：
+
 1. **基础情况**: 字面量和变量访问
 2. **归纳步骤**: 复合表达式和语句
 
@@ -132,6 +136,7 @@ $$\forall P_1, P_2. \text{thread\_safe}(P_1 \parallel P_2)$$
 
 **证明**:
 基于以下性质：
+
 1. 所有权唯一性
 2. 借用检查
 3. 原子操作
@@ -232,10 +237,10 @@ impl<T> Drop for MyBox<T> {
 
 ### 8.2 内存开销
 
-- **Box<T>**: 额外开销 0 字节
-- **Rc<T>**: 额外开销 2 个 usize
-- **Arc<T>**: 额外开销 2 个 usize
-- **Vec<T>**: 额外开销 3 个 usize
+- **`Box<T>`**: 额外开销 0 字节
+- **`Rc<T>`**: 额外开销 2 个 usize
+- **`Arc<T>`**: 额外开销 2 个 usize
+- **`Vec<T>`**: 额外开销 3 个 usize
 
 ## 9. 参考文献
 
@@ -255,4 +260,4 @@ impl<T> Drop for MyBox<T> {
 
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  
-**状态**: 完成 
+**状态**: 完成
