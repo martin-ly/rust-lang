@@ -114,7 +114,39 @@
 - 定理 3.2: 保持定理
 - 定理 3.3: 类型安全
 
-### 3.4 异步系统
+### 3.4 泛型系统
+
+**文档**: [01_formal_generic_system.md](04_generics/01_formal_generic_system.md)
+
+**核心概念**:
+
+- 类型参数化
+- Trait约束系统
+- 关联类型
+- 自然变换
+
+**关键定理**:
+
+- 定理 4.1: 泛型类型安全
+- 定理 4.2: 约束满足性
+
+### 3.5 并发系统
+
+**文档**: [01_formal_concurrency_system.md](05_concurrency/01_formal_concurrency_system.md)
+
+**核心概念**:
+
+- 线程系统
+- 同步原语
+- 消息传递
+- 无锁编程
+
+**关键定理**:
+
+- 定理 5.1: 并发内存安全
+- 定理 5.2: 死锁避免
+
+### 3.6 异步系统
 
 **文档**: [01_formal_async_system.md](06_async_await/01_formal_async_system.md)
 
@@ -129,7 +161,7 @@
 
 - 定理 6.1: 异步内存安全
 
-### 3.5 进程管理系统
+### 3.7 进程管理系统
 
 **文档**: [01_formal_process_management.md](07_process_management/01_formal_process_management.md)
 
@@ -146,9 +178,9 @@
 - 定理 7.2: 进程资源安全
 - 定理 7.3: 进程类型安全
 
-### 3.6 算法系统
+### 3.8 算法系统
 
-**文档**: [01_formal_algorithms.md](08_algorithms/01_formal_algorithms.md)
+**文档**: [01_formal_algorithm_system.md](08_algorithms/01_formal_algorithm_system.md)
 
 **核心概念**:
 
@@ -162,7 +194,55 @@
 - 定理 8.1: 算法正确性
 - 定理 8.2: 性能保证
 
-### 3.7 中间件系统
+### 3.9 设计模式系统
+
+**文档**: [01_formal_design_patterns.md](09_design_patterns/01_formal_design_patterns.md)
+
+**核心概念**:
+
+- 创建型模式
+- 结构型模式
+- 行为型模式
+- 并发模式
+
+**关键定理**:
+
+- 定理 9.1: 模式正确性
+- 定理 9.2: 模式组合性
+
+### 3.10 网络编程系统
+
+**文档**: [01_formal_networking_system.md](10_networking/01_formal_networking_system.md)
+
+**核心概念**:
+
+- 网络协议
+- Socket编程
+- 异步通信
+- 网络拓扑
+
+**关键定理**:
+
+- 定理 10.1: 网络协议正确性
+- 定理 10.2: 通信安全性
+
+### 3.11 框架开发系统
+
+**文档**: [01_formal_framework_system.md](11_frameworks/01_formal_framework_system.md)
+
+**核心概念**:
+
+- 框架架构
+- 配置管理
+- 数据库集成
+- 序列化
+
+**关键定理**:
+
+- 定理 11.1: 框架正确性
+- 定理 11.2: 扩展性保证
+
+### 3.12 中间件系统
 
 **文档**: [01_formal_middleware_system.md](12_middleware/01_formal_middleware_system.md)
 
@@ -178,9 +258,9 @@
 - 定理 12.1: 中间件正确性
 - 定理 12.2: 链式处理正确性
 
-### 3.8 微服务系统
+### 3.13 微服务系统
 
-**文档**: [01_formal_microservice_system.md](13_microservices/01_formal_microservice_system.md)
+**文档**: [01_formal_microservices_system.md](13_microservices/01_formal_microservices_system.md)
 
 **核心概念**:
 
@@ -194,37 +274,133 @@
 - 定理 13.1: 微服务系统正确性
 - 定理 13.2: 服务注册一致性
 
-### 3.9 IoT系统
+### 3.14 工作流系统
+
+**文档**: [01_formal_workflow_system.md](14_workflow/01_formal_workflow_system.md)
+
+**核心概念**:
+
+- 工作流引擎
+- 状态机
+- 任务调度
+- 流程控制
+
+**关键定理**:
+
+- 定理 14.1: 工作流正确性
+- 定理 14.2: 状态一致性
+
+### 3.15 区块链系统
+
+**文档**: [01_formal_blockchain_system.md](15_blockchain/01_formal_blockchain_system.md)
+
+**核心概念**:
+
+- 区块链架构
+- 共识算法
+- 智能合约
+- 密码学基础
+
+**关键定理**:
+
+- 定理 15.1: 区块链一致性
+- 定理 15.2: 智能合约安全性
+
+### 3.16 WebAssembly系统
+
+**文档**: [01_formal_webassembly_system.md](16_web_assembly/01_formal_webassembly_system.md)
+
+**核心概念**:
+
+- WASM字节码
+- 编译优化
+- 运行时环境
+- 跨平台执行
+
+**关键定理**:
+
+- 定理 16.1: WASM安全性
+- 定理 16.2: 跨平台一致性
+
+### 3.17 IoT系统
 
 **文档**: [01_formal_iot_system.md](17_iot/01_formal_iot_system.md)
 
 **核心概念**:
 
-- IoT设备模型
-- OTA固件升级
-- 设备安全
-- 网络通信
+- IoT架构
+- 设备管理
+- 数据采集
+- 边缘计算
 
 **关键定理**:
 
 - 定理 17.1: IoT系统安全性
-- 定理 17.2: OTA系统正确性
+- 定理 17.2: 设备通信可靠性
 
-### 3.10 模型系统
+### 3.18 模型系统
 
-**文档**: [01_formal_model_system.md](18_model_systems/01_formal_model_system.md)
+**文档**: [01_formal_model_systems.md](18_model_systems/01_formal_model_systems.md)
 
 **核心概念**:
 
-- 模型理论基础
-- 形式化建模
-- 状态机模型
-- 代数模型
+- 形式化模型
+- 认知科学交叉
+- 跨学科应用
+- 元级编程
 
 **关键定理**:
 
 - 定理 18.1: 模型一致性
-- 定理 18.2: 模型正确性
+- 定理 18.2: 跨学科正确性
+
+### 3.19 形式语义系统
+
+**文档**: [01_formal_semantics_system.md](19_formal_semantics/01_formal_semantics_system.md)
+
+**核心概念**:
+
+- 操作语义
+- 指称语义
+- 公理语义
+- 语义等价性
+
+**关键定理**:
+
+- 定理 19.1: 语义一致性
+- 定理 19.2: 语义等价性
+
+### 3.20 编译器内部系统
+
+**文档**: [01_formal_compiler_system.md](20_compiler_internals/01_formal_compiler_system.md)
+
+**核心概念**:
+
+- 词法分析
+- 语法分析
+- 语义分析
+- 代码生成
+
+**关键定理**:
+
+- 定理 20.1: 编译正确性
+- 定理 20.2: 优化保持性
+
+### 3.21 宏系统
+
+**文档**: [01_formal_macro_system.md](26_macros/01_formal_macro_system.md)
+
+**核心概念**:
+
+- 宏展开
+- 卫生宏
+- 过程宏
+- 编译时代码生成
+
+**关键定理**:
+
+- 定理 26.1: 宏展开正确性
+- 定理 26.2: 卫生性保证
 
 ## 4. 形式化方法
 
@@ -312,7 +488,7 @@
 | 网络编程 | [01_formal_networking_system.md](10_networking/01_formal_networking_system.md) | ✅ 完成 | 套接字、协议、异步网络 |
 | 框架开发 | [01_formal_framework_system.md](11_frameworks/01_formal_framework_system.md) | ✅ 完成 | HTTP、路由、中间件 |
 | 中间件系统 | [01_formal_middleware_system.md](12_middleware/01_formal_middleware_system.md) | ✅ 完成 | 中间件链、认证、日志、缓存 |
-| 微服务系统 | [01_formal_microservice_system.md](13_microservices/01_formal_microservice_system.md) | ✅ 完成 | 服务发现、负载均衡、容错 |
+| 微服务系统 | [01_formal_microservices_system.md](13_microservices/01_formal_microservices_system.md) | ✅ 完成 | 服务发现、负载均衡、容错 |
 
 ### 6.3 应用领域
 
@@ -322,7 +498,7 @@
 | 区块链 | [01_formal_blockchain_system.md](15_blockchain/01_formal_blockchain_system.md) | ✅ 完成 | 智能合约、共识算法 |
 | WebAssembly | [01_formal_webassembly_system.md](16_web_assembly/01_formal_webassembly_system.md) | ✅ 完成 | 编译、运行时、WASI |
 | IoT系统 | [01_formal_iot_system.md](17_iot/01_formal_iot_system.md) | ✅ 完成 | 嵌入式、实时系统、OTA |
-| 模型系统 | [01_formal_model_system.md](18_model_systems/01_formal_model_system.md) | ✅ 完成 | 形式化建模、状态机、代数模型 |
+| 模型系统 | [01_formal_model_systems.md](18_model_systems/01_formal_model_systems.md) | ✅ 完成 | 形式化建模、状态机、代数模型 |
 
 ## 7. 参考文献
 
