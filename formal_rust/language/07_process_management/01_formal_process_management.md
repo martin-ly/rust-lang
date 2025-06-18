@@ -6,373 +6,327 @@
 2. [进程基础理论](#2-进程基础理论)
 3. [进程生命周期](#3-进程生命周期)
 4. [进程间通信](#4-进程间通信)
-5. [同步机制](#5-同步机制)
+5. [同步原语](#5-同步原语)
 6. [资源管理](#6-资源管理)
-7. [内存隔离](#7-内存隔离)
-8. [形式化语义](#8-形式化语义)
-9. [安全性证明](#9-安全性证明)
-10. [参考文献](#10-参考文献)
+7. [形式化证明](#7-形式化证明)
+8. [参考文献](#8-参考文献)
 
 ## 1. 引言
 
-Rust的进程管理系统提供了对操作系统进程的安全抽象，结合了传统系统编程的功能与现代语言的安全保证。通过所有权模型和类型系统，Rust确保了进程间通信和资源管理的安全性。
+进程管理是操作系统和系统编程的核心概念。Rust提供了对进程创建、管理和通信的安全抽象，同时通过所有权系统确保资源安全和内存隔离。
 
-### 1.1 进程的形式化定义
+### 1.1 进程的基本概念
 
-**定义 1.1** (进程): 进程是一个五元组 $P = (S, \Sigma, \delta, s_0, R)$，其中：
-
-- $S$ 是进程状态集合
-- $\Sigma$ 是输入动作集合
-- $\delta: S \times \Sigma \rightarrow S$ 是状态转移函数
-- $s_0 \in S$ 是初始状态
+**定义 1.1** (进程)
+进程是程序执行的实例，形式化为：
+$$P = (S, R, M, C)$$
+其中：
+- $S$ 是进程状态
 - $R$ 是资源集合
+- $M$ 是内存空间
+- $C$ 是执行上下文
 
-**定义 1.2** (进程空间): 进程空间是一个三元组 $PS = (P, \mathcal{M}, \mathcal{I})$，其中：
+**定义 1.2** (Rust进程系统)
+Rust进程系统是一个扩展的进程模型：
+$$RPS = (P, \mathcal{C}, \mathcal{I}, \mathcal{S})$$
+其中：
+- $\mathcal{C}$ 是命令系统
+- $\mathcal{I}$ 是IPC系统
+- $\mathcal{S}$ 是同步系统
 
-- $P$ 是进程集合
-- $\mathcal{M}$ 是内存映射
-- $\mathcal{I}$ 是进程间交互关系
+### 1.2 形式化符号约定
 
-### 1.2 进程安全保证
-
-**定理 1.1** (进程隔离): 对于任意两个进程 $P_1, P_2$，如果 $P_1 \neq P_2$，则 $P_1$ 不能直接访问 $P_2$ 的内存空间。
-
-**证明**: 通过操作系统的虚拟内存管理和Rust的所有权系统确保进程隔离。
+- $\mathcal{P}$: 进程类型
+- $\mathcal{C}$: 命令类型
+- $\mathcal{I}$: IPC类型
+- $\mathcal{S}$: 同步原语类型
+- $\text{Child}$: 子进程类型
+- $\text{ExitStatus}$: 退出状态类型
 
 ## 2. 进程基础理论
 
-### 2.1 进程模型
-
-**定义 2.1** (进程模型): 进程模型定义了进程的结构和行为。
-
-**进程结构**:
-$$\text{Process} = \text{Code} \times \text{Data} \times \text{Stack} \times \text{Heap} \times \text{Resources}$$
-
-**进程行为**:
-$$\text{Behavior}(P) = \text{Execute} \times \text{Communicate} \times \text{Synchronize}$$
-
-### 2.2 进程状态
-
-**定义 2.2** (进程状态): 进程状态表示进程在某一时刻的完整信息。
-
-**状态定义**:
-$$\text{State} = \text{Registers} \times \text{Memory} \times \text{Resources} \times \text{Status}$$
-
-**状态转移**:
-$$\frac{P \in \text{Running} \quad \text{event}(P) = \text{block}}{P \xrightarrow{\text{block}} \text{Blocked}}$$
-
-$$\frac{P \in \text{Blocked} \quad \text{event}(P) = \text{wake}}{P \xrightarrow{\text{wake}} \text{Running}}$$
-
-### 2.3 进程创建
-
-**定义 2.3** (进程创建): 进程创建是一个从程序到进程的映射。
-
-**创建规则**:
-$$\frac{\Gamma \vdash \text{program} : \text{Program} \quad \Gamma \vdash \text{args} : \text{Args}}{\Gamma \vdash \text{spawn}(\text{program}, \text{args}) : \text{Process}}$$
-
-**创建语义**:
-$$\text{spawn}(p, a) = \text{create_process}(p, a, \text{default_resources})$$
-
-## 3. 进程生命周期
-
-### 3.1 生命周期状态
-
-**定义 3.1** (生命周期): 进程生命周期是状态的有序序列。
-
-**生命周期定义**:
-$$\text{Lifecycle} = \text{New} \rightarrow \text{Ready} \rightarrow \text{Running} \rightarrow \text{Blocked} \rightarrow \text{Terminated}$$
-
-**状态转移规则**:
-$$\frac{P \in \text{New}}{\text{schedule}(P) \xrightarrow{\text{ready}} P \in \text{Ready}}$$
-
-$$\frac{P \in \text{Ready} \quad \text{CPU\_available}}{\text{dispatch}(P) \xrightarrow{\text{run}} P \in \text{Running}}$$
-
-$$\frac{P \in \text{Running} \quad \text{event} = \text{block}}{\text{block}(P) \xrightarrow{\text{block}} P \in \text{Blocked}}$$
-
-$$\frac{P \in \text{Running} \quad \text{event} = \text{terminate}}{\text{terminate}(P) \xrightarrow{\text{exit}} P \in \text{Terminated}}$$
-
-### 3.2 进程调度
-
-**定义 3.2** (调度器): 调度器决定进程的执行顺序。
-
-**调度规则**:
-$$\frac{P_1 \in \text{Ready} \quad P_2 \in \text{Ready} \quad \text{priority}(P_1) > \text{priority}(P_2)}{\text{schedule}(P_1) \prec \text{schedule}(P_2)}$$
-
-### 3.3 进程终止
-
-**定义 3.3** (进程终止): 进程终止是进程生命周期的结束。
-
-**终止规则**:
-$$\frac{P \in \text{Running} \quad \text{exit\_code} \in \mathbb{Z}}{\text{terminate}(P, \text{exit\_code}) \xrightarrow{\text{cleanup}} \text{cleanup}(P)}$$
-
-## 4. 进程间通信
-
-### 4.1 管道通信
-
-**定义 4.1** (管道): 管道是单向通信通道。
-
-**管道类型**:
-$$\text{Pipe} = \text{ReadEnd} \times \text{WriteEnd}$$
-
-**管道操作**:
-$$\frac{\text{pipe} = \text{create\_pipe}()}{\text{pipe.read} : \text{ReadEnd} \quad \text{pipe.write} : \text{WriteEnd}}$$
-
-**数据传输**:
-$$\frac{\text{data} \in \text{Data} \quad \text{write\_end} \in \text{WriteEnd}}{\text{write\_end.send}(\text{data}) : \text{Result}[\text{unit}, \text{Error}]}$$
-
-$$\frac{\text{read\_end} \in \text{ReadEnd}}{\text{read\_end.recv}() : \text{Result}[\text{Data}, \text{Error}]}$$
-
-### 4.2 共享内存
-
-**定义 4.2** (共享内存): 共享内存允许多个进程访问同一内存区域。
-
-**共享内存定义**:
-$$\text{SharedMemory} = \text{Address} \times \text{Size} \times \text{Permissions}$$
-
-**共享内存操作**:
-$$\frac{\text{size} \in \mathbb{N}}{\text{create\_shared\_memory}(\text{size}) : \text{SharedMemory}}$$
-
-$$\frac{\text{shm} \in \text{SharedMemory} \quad \text{offset} \in \mathbb{N} \quad \text{data} \in \text{Data}}{\text{shm.write}(\text{offset}, \text{data}) : \text{unit}}$$
-
-$$\frac{\text{shm} \in \text{SharedMemory} \quad \text{offset} \in \mathbb{N}}{\text{shm.read}(\text{offset}) : \text{Data}}$$
-
-### 4.3 消息队列
-
-**定义 4.3** (消息队列): 消息队列提供异步消息传递。
-
-**消息队列定义**:
-$$\text{MessageQueue} = \text{Queue}[\text{Message}] \times \text{Capacity}$$
-
-**消息操作**:
-$$\frac{\text{msg} \in \text{Message} \quad \text{queue} \in \text{MessageQueue}}{\text{queue.send}(\text{msg}) : \text{Result}[\text{unit}, \text{Error}]}$$
-
-$$\frac{\text{queue} \in \text{MessageQueue}}{\text{queue.receive}() : \text{Result}[\text{Message}, \text{Error}]}$$
-
-### 4.4 套接字通信
-
-**定义 4.4** (套接字): 套接字提供网络通信能力。
-
-**套接字类型**:
-$$\text{Socket} = \text{Address} \times \text{Port} \times \text{Protocol}$$
-
-**套接字操作**:
-$$\frac{\text{socket} \in \text{Socket} \quad \text{data} \in \text{Data}}{\text{socket.send}(\text{data}) : \text{Result}[\text{unit}, \text{Error}]}$$
-
-$$\frac{\text{socket} \in \text{Socket}}{\text{socket.recv}() : \text{Result}[\text{Data}, \text{Error}]}$$
-
-## 5. 同步机制
-
-### 5.1 互斥锁
-
-**定义 5.1** (互斥锁): 互斥锁提供对共享资源的独占访问。
-
-**互斥锁定义**:
-$$\text{Mutex}[\tau] = \text{Lock} \times \text{Data}[\tau] \times \text{Owner}$$
-
-**锁操作**:
-$$\frac{\text{mutex} \in \text{Mutex}[\tau] \quad \text{owner} = \text{None}}{\text{mutex.lock}() : \text{Guard}[\tau]}$$
-
-$$\frac{\text{guard} \in \text{Guard}[\tau]}{\text{guard.unlock}() : \text{unit}}$$
-
-### 5.2 条件变量
-
-**定义 5.2** (条件变量): 条件变量用于线程间的条件同步。
-
-**条件变量定义**:
-$$\text{Condvar} = \text{WaitQueue} \times \text{Predicate}$$
-
-**条件变量操作**:
-$$\frac{\text{cv} \in \text{Condvar} \quad \text{guard} \in \text{Guard}[\tau]}{\text{cv.wait}(\text{guard}) : \text{Guard}[\tau]}$$
-
-$$\frac{\text{cv} \in \text{Condvar}}{\text{cv.notify_one}() : \text{unit}}$$
-
-$$\frac{\text{cv} \in \text{Condvar}}{\text{cv.notify_all}() : \text{unit}}$$
-
-### 5.3 信号量
-
-**定义 5.3** (信号量): 信号量控制对有限资源的访问。
-
-**信号量定义**:
-$$\text{Semaphore} = \text{Count} \times \text{MaxCount} \times \text{WaitQueue}$$
-
-**信号量操作**:
-$$\frac{\text{sem} \in \text{Semaphore} \quad \text{sem.count} > 0}{\text{sem.acquire}() : \text{unit}}$$
-
-$$\frac{\text{sem} \in \text{Semaphore}}{\text{sem.release}() : \text{unit}}$$
-
-### 5.4 屏障
-
-**定义 5.4** (屏障): 屏障确保多个进程在特定点同步。
-
-**屏障定义**:
-$$\text{Barrier} = \text{Count} \times \text{MaxCount} \times \text{Generation}$$
-
-**屏障操作**:
-$$\frac{\text{barrier} \in \text{Barrier}}{\text{barrier.wait}() : \text{BarrierResult}}$$
-
-## 6. 资源管理
-
-### 6.1 资源分配
-
-**定义 6.1** (资源): 资源是进程执行所需的系统实体。
-
-**资源类型**:
-$$\text{Resource} = \text{CPU} \mid \text{Memory} \mid \text{IO} \mid \text{File} \mid \text{Network}$$
-
-**资源分配**:
-$$\frac{P \in \text{Process} \quad R \in \text{Resource} \quad \text{available}(R)}{\text{allocate}(P, R) : \text{unit}}$$
-
-### 6.2 资源限制
-
-**定义 6.2** (资源限制): 资源限制控制进程的资源使用。
-
-**限制类型**:
-$$\text{Limit} = \text{Soft} \times \text{Hard}$$
-
-**限制设置**:
-$$\frac{P \in \text{Process} \quad R \in \text{Resource} \quad L \in \text{Limit}}{\text{set\_limit}(P, R, L) : \text{unit}}$$
-
-### 6.3 资源清理
-
-**定义 6.3** (资源清理): 资源清理确保进程终止时释放所有资源。
-
-**清理规则**:
-$$\frac{P \in \text{Terminated}}{\text{cleanup}(P) = \text{release\_all\_resources}(P)}$$
-
-## 7. 内存隔离
-
-### 7.1 地址空间
-
-**定义 7.1** (地址空间): 每个进程拥有独立的虚拟地址空间。
-
-**地址空间定义**:
-$$\text{AddressSpace} = \text{PageTable} \times \text{MemoryMap} \times \text{Permissions}$$
-
-**地址空间隔离**:
-$$\frac{P_1 \neq P_2}{\text{address\_space}(P_1) \cap \text{address\_space}(P_2) = \emptyset}$$
-
-### 7.2 内存保护
-
-**定义 7.2** (内存保护): 内存保护防止进程访问未授权的内存区域。
-
-**保护机制**:
-$$\text{Protection} = \text{Read} \times \text{Write} \times \text{Execute}$$
-
-**保护检查**:
-$$\frac{P \in \text{Process} \quad \text{addr} \in \text{Address} \quad \text{op} \in \text{Operation}}{\text{check\_permission}(P, \text{addr}, \text{op}) : \text{bool}}$$
-
-### 7.3 内存映射
-
-**定义 7.3** (内存映射): 内存映射将虚拟地址映射到物理地址。
-
-**映射关系**:
-$$\text{Mapping} : \text{VirtualAddress} \rightarrow \text{PhysicalAddress} \times \text{Protection}$$
-
-**映射操作**:
-$$\frac{\text{va} \in \text{VirtualAddress} \quad \text{pa} \in \text{PhysicalAddress} \quad \text{prot} \in \text{Protection}}{\text{map\_memory}(\text{va}, \text{pa}, \text{prot}) : \text{unit}}$$
-
-## 8. 形式化语义
-
-### 8.1 进程语义
-
-**定义 8.1** (进程语义): 进程语义定义了进程的执行行为。
-
-**执行规则**:
-$$\frac{P \in \text{Running} \quad \text{instruction}(P) = \text{op}}{\text{execute}(P, \text{op}) \xrightarrow{\text{step}} P'}$$
-
-### 8.2 通信语义
-
-**定义 8.2** (通信语义): 通信语义定义了进程间的交互。
-
-**通信规则**:
-$$\frac{P_1 \text{ sends } m \text{ to } P_2}{P_1 \parallel P_2 \xrightarrow{\text{comm}} P_1' \parallel P_2'}$$
-
-### 8.3 同步语义
-
-**定义 8.3** (同步语义): 同步语义定义了进程间的同步操作。
-
-**同步规则**:
-$$\frac{P_1 \text{ waits for } P_2}{P_1 \parallel P_2 \xrightarrow{\text{sync}} P_1' \parallel P_2'}$$
-
-## 9. 安全性证明
-
-### 9.1 进程隔离安全
-
-**定理 9.1** (进程隔离): 对于任意两个进程 $P_1, P_2$，如果 $P_1 \neq P_2$，则 $P_1$ 不能直接访问 $P_2$ 的内存。
-
-**证明**: 通过以下机制实现：
-
-1. **虚拟内存管理**: 每个进程拥有独立的地址空间
-2. **内存保护**: 硬件和操作系统提供内存保护机制
-3. **Rust所有权系统**: 防止内存安全漏洞
-
-### 9.2 资源安全
-
-**定理 9.2** (资源安全): 进程只能访问被授权的资源。
-
-**证明**: 通过以下机制实现：
-
-1. **资源分配**: 明确的资源分配机制
-2. **权限检查**: 每次资源访问都进行权限验证
-3. **资源清理**: 进程终止时自动清理所有资源
-
-### 9.3 通信安全
-
-**定理 9.3** (通信安全): 进程间通信不会违反内存安全。
-
-**证明**: 通过以下机制实现：
-
-1. **类型安全**: 通信数据必须满足类型约束
-2. **所有权传递**: 通过所有权系统管理共享数据
-3. **错误处理**: 通信错误不会导致未定义行为
-
-## 10. 代码示例
-
-### 10.1 进程创建示例
+### 2.1 进程状态
+
+**定义 2.1** (进程状态)
+进程状态是一个有限状态机：
+$$PSM = (Q, \Sigma, \delta, q_0, F)$$
+其中：
+- $Q = \{\text{Created}, \text{Running}, \text{Waiting}, \text{Terminated}\}$
+- $\Sigma$ 是事件集合
+- $\delta: Q \times \Sigma \rightarrow Q$ 是状态转换函数
+- $q_0 = \text{Created}$ 是初始状态
+- $F = \{\text{Terminated}\}$ 是最终状态集合
+
+**状态转换规则**：
+$$\begin{align}
+\delta(\text{Created}, \text{spawn}) &= \text{Running} \\
+\delta(\text{Running}, \text{wait}) &= \text{Waiting} \\
+\delta(\text{Waiting}, \text{resume}) &= \text{Running} \\
+\delta(\text{Running}, \text{exit}) &= \text{Terminated}
+\end{align}$$
+
+### 2.2 进程隔离
+
+**定理 2.1** (进程内存隔离)
+对于任意两个进程 $P_1$ 和 $P_2$，它们的地址空间是隔离的：
+$$M_1 \cap M_2 = \emptyset$$
+
+**证明**：
+1. 操作系统提供虚拟内存管理
+2. 每个进程有独立的页表
+3. 地址空间映射不重叠
+
+**代码示例**：
 
 ```rust
-use std::process::Command;
+use std::process::{Command, Child, ExitStatus};
+use std::io::{Read, Write};
 
-fn process_creation_example() -> std::io::Result<()> {
-    let output = Command::new("echo")
+// 进程创建
+fn create_process() -> std::io::Result<Child> {
+    Command::new("echo")
         .arg("Hello, World!")
+        .spawn()
+}
+
+// 进程执行
+fn execute_process() -> std::io::Result<ExitStatus> {
+    let output = Command::new("ls")
+        .arg("-la")
         .output()?;
     
-    println!("Output: {}", String::from_utf8_lossy(&output.stdout));
-    Ok(())
+    println!("输出: {}", String::from_utf8_lossy(&output.stdout));
+    Ok(output.status)
 }
 ```
 
-### 10.2 进程间通信示例
+## 3. 进程生命周期
+
+### 3.1 进程创建
+
+**定义 3.1** (进程创建)
+进程创建是一个函数：
+$$\text{create}: \text{Command} \rightarrow \text{Result<Child, Error>}$$
+
+**命令构建器**：
+$$\text{Command} = (\text{program}, \text{args}, \text{env}, \text{dir}, \text{io})$$
+其中：
+- $\text{program}$ 是可执行文件路径
+- $\text{args}$ 是参数列表
+- $\text{env}$ 是环境变量
+- $\text{dir}$ 是工作目录
+- $\text{io}$ 是I/O重定向配置
+
+**代码示例**：
 
 ```rust
 use std::process::{Command, Stdio};
 use std::io::Write;
 
-fn ipc_example() -> std::io::Result<()> {
-    let mut child = Command::new("grep")
-        .arg("hello")
+fn process_lifecycle_example() -> std::io::Result<()> {
+    // 1. 创建命令
+    let mut command = Command::new("grep")
+        .arg("pattern")
         .stdin(Stdio::piped())
-        .stdout(Stdio::piped())
-        .spawn()?;
+        .stdout(Stdio::piped());
     
+    // 2. 启动进程
+    let mut child = command.spawn()?;
+    
+    // 3. 与进程交互
     if let Some(stdin) = child.stdin.as_mut() {
-        stdin.write_all(b"hello world\nbye world")?;
+        stdin.write_all(b"input data\n")?;
     }
     
+    // 4. 等待进程完成
     let output = child.wait_with_output()?;
-    println!("Filtered: {}", String::from_utf8_lossy(&output.stdout));
+    
+    println!("退出码: {}", output.status);
+    println!("输出: {}", String::from_utf8_lossy(&output.stdout));
+    
     Ok(())
 }
 ```
 
-### 10.3 同步机制示例
+### 3.2 进程终止
+
+**定义 3.2** (进程终止)
+进程终止是一个状态转换：
+$$\text{terminate}: \text{Child} \rightarrow \text{ExitStatus}$$
+
+**终止类型**：
+- 正常终止：$\text{ExitStatus::Success}$
+- 异常终止：$\text{ExitStatus::Failure}$
+- 信号终止：$\text{ExitStatus::Signal}$
+
+**代码示例**：
 
 ```rust
-use std::sync::{Arc, Mutex};
+use std::process::{Command, ExitStatus};
+use std::time::Duration;
 use std::thread;
 
-fn synchronization_example() {
+fn process_termination_example() -> std::io::Result<()> {
+    // 启动长时间运行的进程
+    let mut child = Command::new("sleep")
+        .arg("10")
+        .spawn()?;
+    
+    // 等待一段时间
+    thread::sleep(Duration::from_secs(2));
+    
+    // 强制终止进程
+    child.kill()?;
+    
+    // 等待终止
+    let status = child.wait()?;
+    
+    match status.code() {
+        Some(code) => println!("进程退出码: {}", code),
+        None => println!("进程被信号终止"),
+    }
+    
+    Ok(())
+}
+```
+
+## 4. 进程间通信
+
+### 4.1 管道通信
+
+**定义 4.1** (管道)
+管道是一个单向通信通道：
+$$\text{Pipe} = (\text{read}, \text{write})$$
+其中：
+- $\text{read}$ 是读取端
+- $\text{write}$ 是写入端
+
+**管道类型规则**：
+$$\frac{\Gamma \vdash \text{read}: \text{Read} \quad \Gamma \vdash \text{write}: \text{Write}}{\Gamma \vdash \text{Pipe}(\text{read}, \text{write}): \text{Pipe}}$$
+
+**代码示例**：
+
+```rust
+use std::process::{Command, Stdio};
+use std::io::{Read, Write};
+
+fn pipe_communication_example() -> std::io::Result<()> {
+    // 创建管道
+    let mut child = Command::new("sort")
+        .stdin(Stdio::piped())
+        .stdout(Stdio::piped())
+        .spawn()?;
+    
+    // 写入数据
+    if let Some(stdin) = child.stdin.as_mut() {
+        stdin.write_all(b"zebra\nalpha\nbeta\n")?;
+    }
+    
+    // 读取结果
+    let mut output = String::new();
+    if let Some(stdout) = child.stdout.as_mut() {
+        stdout.read_to_string(&mut output)?;
+    }
+    
+    // 等待进程完成
+    child.wait()?;
+    
+    println!("排序结果:\n{}", output);
+    Ok(())
+}
+```
+
+### 4.2 命名管道
+
+**定义 4.2** (命名管道)
+命名管道是一个持久化的通信通道：
+$$\text{NamedPipe} = \text{Pipe} \times \text{Path}$$
+
+**代码示例**：
+
+```rust
+use std::fs::File;
+use std::io::{Read, Write};
+use std::os::unix::fs::FileTypeExt;
+
+fn named_pipe_example() -> std::io::Result<()> {
+    let pipe_path = "/tmp/my_pipe";
+    
+    // 创建命名管道（需要先创建）
+    // mkfifo /tmp/my_pipe
+    
+    // 读取端
+    let mut file = File::open(pipe_path)?;
+    let mut buffer = [0; 1024];
+    let n = file.read(&mut buffer)?;
+    
+    println!("读取: {}", String::from_utf8_lossy(&buffer[..n]));
+    Ok(())
+}
+```
+
+### 4.3 套接字通信
+
+**定义 4.3** (套接字)
+套接字是一个双向通信端点：
+$$\text{Socket} = (\text{domain}, \text{type}, \text{protocol})$$
+
+**套接字类型**：
+- Unix域套接字：$\text{AF_UNIX}$
+- Internet套接字：$\text{AF_INET}$
+- IPv6套接字：$\text{AF_INET6}$
+
+**代码示例**：
+
+```rust
+use std::os::unix::net::{UnixListener, UnixStream};
+use std::io::{Read, Write};
+
+fn unix_socket_example() -> std::io::Result<()> {
+    let socket_path = "/tmp/rust_socket";
+    
+    // 服务器端
+    let listener = UnixListener::bind(socket_path)?;
+    
+    // 客户端连接
+    let mut stream = UnixStream::connect(socket_path)?;
+    
+    // 发送数据
+    stream.write_all(b"Hello from client")?;
+    
+    // 接收数据
+    let mut response = [0; 1024];
+    let n = stream.read(&mut response)?;
+    
+    println!("服务器响应: {}", String::from_utf8_lossy(&response[..n]));
+    Ok(())
+}
+```
+
+## 5. 同步原语
+
+### 5.1 互斥锁
+
+**定义 5.1** (互斥锁)
+互斥锁是一个同步原语：
+$$\text{Mutex}<T> = (T, \text{locked})$$
+其中：
+- $T$ 是保护的数据类型
+- $\text{locked}$ 是锁状态
+
+**互斥锁操作**：
+$$\begin{align}
+\text{lock}: \text{Mutex}<T> \rightarrow \text{MutexGuard}<T> \\
+\text{unlock}: \text{MutexGuard}<T> \rightarrow \text{Mutex}<T>
+\end{align}$$
+
+**代码示例**：
+
+```rust
+use std::sync::{Mutex, Arc};
+use std::thread;
+
+fn mutex_example() {
     let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];
     
@@ -389,44 +343,226 @@ fn synchronization_example() {
         handle.join().unwrap();
     }
     
-    println!("Final count: {}", *counter.lock().unwrap());
+    println!("最终计数: {}", *counter.lock().unwrap());
 }
 ```
 
-### 10.4 资源管理示例
+### 5.2 条件变量
+
+**定义 5.2** (条件变量)
+条件变量是一个同步原语：
+$$\text{Condvar} = \text{WaitQueue}$$
+
+**条件变量操作**：
+$$\begin{align}
+\text{wait}: \text{MutexGuard}<T> \times \text{Condvar} \rightarrow \text{MutexGuard}<T> \\
+\text{notify_one}: \text{Condvar} \rightarrow \text{Unit} \\
+\text{notify_all}: \text{Condvar} \rightarrow \text{Unit}
+\end{align}$$
+
+**代码示例**：
 
 ```rust
-use std::fs::File;
-use std::io::Write;
+use std::sync::{Mutex, Condvar, Arc};
+use std::thread;
 
-fn resource_management_example() -> std::io::Result<()> {
-    // 文件资源自动管理
-    let mut file = File::create("output.txt")?;
-    file.write_all(b"Hello, World!")?;
-    // 文件在作用域结束时自动关闭
+fn condvar_example() {
+    let pair = Arc::new((Mutex::new(false), Condvar::new()));
+    let pair2 = Arc::clone(&pair);
+    
+    // 等待线程
+    let waiter = thread::spawn(move || {
+        let (lock, cvar) = &*pair2;
+        let mut started = lock.lock().unwrap();
+        while !*started {
+            started = cvar.wait(started).unwrap();
+        }
+        println!("条件满足!");
+    });
+    
+    // 通知线程
+    let notifier = thread::spawn(move || {
+        let (lock, cvar) = &*pair;
+        let mut started = lock.lock().unwrap();
+        *started = true;
+        cvar.notify_one();
+    });
+    
+    waiter.join().unwrap();
+    notifier.join().unwrap();
+}
+```
+
+### 5.3 信号量
+
+**定义 5.3** (信号量)
+信号量是一个计数同步原语：
+$$\text{Semaphore} = \text{AtomicUsize}$$
+
+**信号量操作**：
+$$\begin{align}
+\text{acquire}: \text{Semaphore} \rightarrow \text{Unit} \\
+\text{release}: \text{Semaphore} \rightarrow \text{Unit}
+\end{align}$$
+
+**代码示例**：
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::Arc;
+use std::thread;
+
+struct Semaphore {
+    count: AtomicUsize,
+}
+
+impl Semaphore {
+    fn new(count: usize) -> Self {
+        Self {
+            count: AtomicUsize::new(count),
+        }
+    }
+    
+    fn acquire(&self) {
+        while self.count.fetch_sub(1, Ordering::Acquire) == 0 {
+            self.count.fetch_add(1, Ordering::Release);
+            thread::yield_now();
+        }
+    }
+    
+    fn release(&self) {
+        self.count.fetch_add(1, Ordering::Release);
+    }
+}
+
+fn semaphore_example() {
+    let semaphore = Arc::new(Semaphore::new(2));
+    let mut handles = vec![];
+    
+    for i in 0..5 {
+        let sem = Arc::clone(&semaphore);
+        let handle = thread::spawn(move || {
+            sem.acquire();
+            println!("线程 {} 获得信号量", i);
+            thread::sleep(std::time::Duration::from_secs(1));
+            sem.release();
+            println!("线程 {} 释放信号量", i);
+        });
+        handles.push(handle);
+    }
+    
+    for handle in handles {
+        handle.join().unwrap();
+    }
+}
+```
+
+## 6. 资源管理
+
+### 6.1 资源分配
+
+**定义 6.1** (资源)
+资源是进程可以使用的系统对象：
+$$R = \{\text{CPU}, \text{Memory}, \text{File}, \text{Network}, \text{Device}\}$$
+
+**资源分配**：
+$$\text{allocate}: P \times R \rightarrow \text{Result<Resource, Error>}$$
+
+### 6.2 资源限制
+
+**定义 6.2** (资源限制)
+资源限制是对进程资源使用的约束：
+$$\text{Limit} = \{\text{soft}, \text{hard}\}$$
+
+**代码示例**：
+
+```rust
+use nix::sys::resource::{setrlimit, Resource, Rlimit};
+
+fn resource_limits_example() -> nix::Result<()> {
+    // 设置最大文件描述符数量
+    setrlimit(Resource::RLIMIT_NOFILE, Rlimit::new(1024, 2048))?;
+    
+    // 设置最大虚拟内存
+    setrlimit(Resource::RLIMIT_AS, Rlimit::new(1024 * 1024 * 100, 1024 * 1024 * 200))?;
     
     Ok(())
 }
 ```
 
-## 11. 参考文献
+### 6.3 资源清理
+
+**定理 6.1** (资源清理)
+当进程终止时，所有分配的资源都会被自动释放。
+
+**证明**：
+1. Rust的Drop trait确保资源清理
+2. 操作系统回收进程资源
+3. 文件描述符自动关闭
+
+## 7. 形式化证明
+
+### 7.1 进程内存隔离证明
+
+**定理 7.1** (进程内存隔离)
+对于任意两个进程 $P_1$ 和 $P_2$，它们的地址空间是隔离的。
+
+**证明**：
+1. 操作系统提供虚拟内存管理
+2. 每个进程有独立的页表
+3. 地址空间映射不重叠
+4. 内存访问通过页表验证
+
+### 7.2 进程通信安全性
+
+**定理 7.2** (进程通信安全)
+Rust的IPC机制确保通信安全性。
+
+**证明**：
+1. 类型系统确保数据完整性
+2. 所有权系统防止数据竞争
+3. 同步原语保证互斥访问
+4. 错误处理机制处理异常
+
+### 7.3 死锁避免
+
+**定理 7.3** (死锁避免)
+如果进程按照固定顺序获取锁，则不会发生死锁。
+
+**证明**：
+1. 资源分配图是无环的
+2. 不存在循环等待
+3. 满足死锁避免条件
+
+### 7.4 资源泄漏防止
+
+**定理 7.4** (资源泄漏防止)
+Rust的RAII机制确保资源不会泄漏。
+
+**证明**：
+1. 资源在作用域结束时自动释放
+2. Drop trait保证清理代码执行
+3. 编译器静态检查资源使用
+
+## 8. 参考文献
 
 1. **操作系统理论**
    - Silberschatz, A., Galvin, P. B., & Gagne, G. (2018). "Operating System Concepts"
-   - Tanenbaum, A. S., & Bos, H. (2014). "Modern Operating Systems"
 
 2. **进程间通信**
    - Stevens, W. R., & Rago, S. A. (2013). "Advanced Programming in the UNIX Environment"
-   - Bach, M. J. (1986). "The Design of the UNIX Operating System"
 
 3. **并发理论**
    - Herlihy, M., & Shavit, N. (2012). "The Art of Multiprocessor Programming"
-   - Lamport, L. (1978). "Time, clocks, and the ordering of events in a distributed system"
+   - Lynch, N. A. (1996). "Distributed Algorithms"
 
 4. **Rust系统编程**
    - The Rust Programming Language Book
    - The Rust Reference
-   - Jung, R., et al. (2017). "RustBelt: Securing the foundations of the Rust programming language"
+
+5. **形式化方法**
+   - Hoare, C. A. R. (1985). "Communicating Sequential Processes"
+   - Milner, R. (1989). "Communication and Concurrency"
 
 ---
 
