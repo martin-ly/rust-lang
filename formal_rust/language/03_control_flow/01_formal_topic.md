@@ -32,6 +32,7 @@ Rust的控制流系统是其编程语言设计的核心组成部分，通过表�
 ### 1.3 符号约定
 
 **控制流符号**:
+
 - $\mathcal{C}$: 控制流关系
 - $\mathcal{S}$: 状态转换
 - $\mathcal{E}$: 表达式求值
@@ -39,6 +40,7 @@ Rust的控制流系统是其编程语言设计的核心组成部分，通过表�
 - $\mathcal{F}$: 函数调用
 
 **类型系统符号**:
+
 - $\tau$: 类型
 - $\Gamma$: 类型环境
 - $\vdash$: 类型判断
@@ -46,6 +48,7 @@ Rust的控制流系统是其编程语言设计的核心组成部分，通过表�
 - $\bot$: 底部类型（Never类型）
 
 **逻辑符号**:
+
 - $\land$: 逻辑与
 - $\lor$: 逻辑或
 - $\implies$: 蕴含
@@ -64,6 +67,7 @@ $$\mathcal{C} : \text{State} \times \text{Instruction} \rightarrow \text{State}$
 **定义 2.2** (状态): 程序状态 $S$ 定义为：
 $$S = (\text{Environment}, \text{Stack}, \text{Heap}, \text{Control})$$
 其中：
+
 - $\text{Environment}$: 变量环境
 - $\text{Stack}$: 调用栈
 - $\text{Heap}$: 堆内存
@@ -233,7 +237,7 @@ $$\text{FnMut}(A) \rightarrow R \equiv \text{mutable closure}$$
 **定义 6.5** (FnOnce trait): FnOnce trait定义为：
 $$\text{FnOnce}(A) \rightarrow R \equiv \text{consuming closure}$$
 
-**定理 6.1** (闭包特征层次): 
+**定理 6.1** (闭包特征层次):
 $$\text{Fn}(A) \rightarrow R \implies \text{FnMut}(A) \rightarrow R \implies \text{FnOnce}(A) \rightarrow R$$
 
 ### 6.3 环境捕获
@@ -410,4 +414,4 @@ $$\text{exhaustiveness\_check}(patterns, type) \iff \forall v : type. \exists p 
 
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  
-**状态**: 完成 
+**状态**: 完成

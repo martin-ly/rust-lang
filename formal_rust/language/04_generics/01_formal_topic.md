@@ -251,7 +251,7 @@ $$\text{Monomorphize} : \text{GenericCode} \times \text{Type} \rightarrow \text{
 
 **算法 6.1** (单态化算法):
 
-```
+```text
 function monomorphize(generic_code, type_arguments):
     for each type parameter α in generic_code:
         replace α with corresponding type from type_arguments

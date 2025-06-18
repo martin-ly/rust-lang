@@ -138,15 +138,15 @@ impl<T> DynamicArray<T> {
     pub fn new() -> Self {
         Self { data: Vec::new() }
     }
-    
+
     pub fn push(&mut self, item: T) {
         self.data.push(item); // Vec 已实现动态扩容
     }
-    
+
     pub fn pop(&mut self) -> Option<T> {
         self.data.pop()
     }
-    
+
     pub fn get(&self, index: usize) -> Option<&T> {
         self.data.get(index)
     }
@@ -173,7 +173,7 @@ impl<T> List<T> {
     pub fn new() -> Self {
         Self { head: None }
     }
-    
+
     pub fn push_front(&mut self, value: T) {
         let new_node = Box::new(Node {
             value,
@@ -181,7 +181,7 @@ impl<T> List<T> {
         });
         self.head = Some(new_node);
     }
-    
+
     pub fn pop_front(&mut self) -> Option<T> {
         self.head.take().map(|node| {
             self.head = node.next;
@@ -224,11 +224,11 @@ impl<T: Ord> BinarySearchTree<T> {
     pub fn new() -> Self {
         Self { root: None }
     }
-    
+
     pub fn insert(&mut self, value: T) {
         self.root = Some(Box::new(self.insert_recursive(self.root.take(), value)));
     }
-    
+
     fn insert_recursive(&self, node: Option<Box<Node<T>>>, value: T) -> Node<T> {
         match node {
             None => Node { value, left: None, right: None },
@@ -277,11 +277,11 @@ impl Graph {
             adjacency_list: HashMap::new(),
         }
     }
-    
+
     pub fn add_edge(&mut self, from: usize, to: usize) {
         self.adjacency_list.entry(from).or_insert_with(Vec::new).push(to);
     }
-    
+
     pub fn get_neighbors(&self, vertex: usize) -> Option<&Vec<usize>> {
         self.adjacency_list.get(&vertex)
     }
@@ -324,7 +324,7 @@ pub fn quicksort<T: Ord>(arr: &mut [T]) {
     if arr.len() <= 1 {
         return;
     }
-    
+
     let pivot_index = partition(arr);
     quicksort(&mut arr[..pivot_index]);
     quicksort(&mut arr[pivot_index + 1..]);
@@ -333,14 +333,14 @@ pub fn quicksort<T: Ord>(arr: &mut [T]) {
 fn partition<T: Ord>(arr: &mut [T]) -> usize {
     let pivot_index = arr.len() - 1;
     let mut i = 0;
-    
+
     for j in 0..pivot_index {
         if arr[j] <= arr[pivot_index] {
             arr.swap(i, j);
             i += 1;
         }
     }
-    
+
     arr.swap(i, pivot_index);
     i
 }
@@ -357,7 +357,7 @@ pub fn mergesort<T: Ord + Clone>(arr: &mut [T]) {
     if arr.len() <= 1 {
         return;
     }
-    
+
     let mid = arr.len() / 2;
     mergesort(&mut arr[..mid]);
     mergesort(&mut arr[mid..]);
@@ -367,11 +367,11 @@ pub fn mergesort<T: Ord + Clone>(arr: &mut [T]) {
 fn merge<T: Ord + Clone>(arr: &mut [T], mid: usize) {
     let left = arr[..mid].to_vec();
     let right = arr[mid..].to_vec();
-    
+
     let mut i = 0;
     let mut j = 0;
     let mut k = 0;
-    
+
     while i < left.len() && j < right.len() {
         if left[i] <= right[j] {
             arr[k] = left[i].clone();
@@ -382,13 +382,13 @@ fn merge<T: Ord + Clone>(arr: &mut [T], mid: usize) {
         }
         k += 1;
     }
-    
+
     while i < left.len() {
         arr[k] = left[i].clone();
         i += 1;
         k += 1;
     }
-    
+
     while j < right.len() {
         arr[k] = right[j].clone();
         j += 1;
@@ -409,23 +409,23 @@ fn merge<T: Ord + Clone>(arr: &mut [T], mid: usize) {
 pub fn counting_sort(arr: &[usize], max_value: usize) -> Vec<usize> {
     let mut count = vec![0; max_value + 1];
     let mut output = vec![0; arr.len()];
-    
+
     // 计数
     for &x in arr {
         count[x] += 1;
     }
-    
+
     // 累加
     for i in 1..=max_value {
         count[i] += count[i - 1];
     }
-    
+
     // 输出
     for &x in arr.iter().rev() {
         output[count[x] - 1] = x;
         count[x] -= 1;
     }
-    
+
     output
 }
 ```
@@ -472,7 +472,7 @@ pub fn linear_search<T: PartialEq>(arr: &[T], target: &T) -> Option<usize> {
 pub fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
     let mut left = 0;
     let mut right = arr.len();
-    
+
     while left < right {
         let mid = left + (right - left) / 2;
         match arr[mid].cmp(target) {
@@ -481,7 +481,7 @@ pub fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
             std::cmp::Ordering::Greater => right = mid,
         }
     }
-    
+
     None
 }
 ```
@@ -502,7 +502,7 @@ pub fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
 pub fn dfs(graph: &Graph, start: usize, visited: &mut Vec<bool>) {
     visited[start] = true;
     println!("Visited: {}", start);
-    
+
     if let Some(neighbors) = graph.get_neighbors(start) {
         for &neighbor in neighbors {
             if !visited[neighbor] {
@@ -522,13 +522,13 @@ use std::collections::VecDeque;
 pub fn bfs(graph: &Graph, start: usize) {
     let mut visited = vec![false; graph.adjacency_list.len()];
     let mut queue = VecDeque::new();
-    
+
     visited[start] = true;
     queue.push_back(start);
-    
+
     while let Some(vertex) = queue.pop_front() {
         println!("Visited: {}", vertex);
-        
+
         if let Some(neighbors) = graph.get_neighbors(vertex) {
             for &neighbor in neighbors {
                 if !visited[neighbor] {
@@ -565,15 +565,15 @@ use std::cmp::Reverse;
 pub fn dijkstra(graph: &Graph, start: usize) -> Vec<usize> {
     let mut distances = vec![usize::MAX; graph.adjacency_list.len()];
     let mut heap = BinaryHeap::new();
-    
+
     distances[start] = 0;
     heap.push(Reverse((0, start)));
-    
+
     while let Some(Reverse((dist, vertex))) = heap.pop() {
         if dist > distances[vertex] {
             continue;
         }
-        
+
         if let Some(neighbors) = graph.get_neighbors(vertex) {
             for &neighbor in neighbors {
                 let new_dist = dist + 1; // 假设所有边权重为 1
@@ -584,7 +584,7 @@ pub fn dijkstra(graph: &Graph, start: usize) -> Vec<usize> {
             }
         }
     }
-    
+
     distances
 }
 ```
@@ -606,17 +606,17 @@ pub struct Edge {
 
 pub fn kruskal(edges: &mut [Edge], num_vertices: usize) -> Vec<Edge> {
     edges.sort_by_key(|e| e.weight);
-    
+
     let mut union_find = UnionFind::new(num_vertices);
     let mut mst = Vec::new();
-    
+
     for edge in edges {
         if union_find.find(edge.from) != union_find.find(edge.to) {
             union_find.union(edge.from, edge.to);
             mst.push(*edge);
         }
     }
-    
+
     mst
 }
 ```
@@ -648,15 +648,15 @@ pub fn fibonacci_dp(n: usize) -> usize {
     if n <= 1 {
         return n;
     }
-    
+
     let mut dp = vec![0; n + 1];
     dp[0] = 0;
     dp[1] = 1;
-    
+
     for i in 2..=n {
         dp[i] = dp[i - 1] + dp[i - 2];
     }
-    
+
     dp[n]
 }
 ```
@@ -675,7 +675,7 @@ pub fn longest_common_subsequence(text1: &str, text2: &str) -> usize {
     let m = text1.len();
     let n = text2.len();
     let mut dp = vec![vec![0; n + 1]; m + 1];
-    
+
     for i in 1..=m {
         for j in 1..=n {
             if text1.chars().nth(i - 1) == text2.chars().nth(j - 1) {
@@ -685,7 +685,7 @@ pub fn longest_common_subsequence(text1: &str, text2: &str) -> usize {
             }
         }
     }
-    
+
     dp[m][n]
 }
 ```
@@ -736,7 +736,7 @@ pub fn merge_sort_divide_conquer<T: Ord + Clone>(arr: &mut [T]) {
     if arr.len() <= 1 {
         return;
     }
-    
+
     let mid = arr.len() / 2;
     merge_sort_divide_conquer(&mut arr[..mid]);
     merge_sort_divide_conquer(&mut arr[mid..]);
@@ -752,7 +752,7 @@ pub fn quick_sort_divide_conquer<T: Ord>(arr: &mut [T]) {
     if arr.len() <= 1 {
         return;
     }
-    
+
     let pivot_index = partition(arr);
     quick_sort_divide_conquer(&mut arr[..pivot_index]);
     quick_sort_divide_conquer(&mut arr[pivot_index + 1..]);
@@ -799,17 +799,17 @@ pub struct Activity {
 
 pub fn activity_selection(activities: &mut [Activity]) -> Vec<usize> {
     activities.sort_by_key(|a| a.finish);
-    
+
     let mut selected = Vec::new();
     let mut last_finish = 0;
-    
+
     for (i, activity) in activities.iter().enumerate() {
         if activity.start >= last_finish {
             selected.push(i);
             last_finish = activity.finish;
         }
     }
-    
+
     selected
 }
 ```
@@ -839,20 +839,20 @@ pub fn build_huffman_tree(frequencies: &[usize]) -> Option<Box<HuffmanNode>> {
             right: None,
         })))
         .collect();
-    
+
     while heap.len() > 1 {
         let left = heap.pop().unwrap().0;
         let right = heap.pop().unwrap().0;
-        
+
         let parent = Box::new(HuffmanNode {
             frequency: left.frequency + right.frequency,
             left: Some(left),
             right: Some(right),
         });
-        
+
         heap.push(Reverse(parent));
     }
-    
+
     heap.pop().map(|node| node.0)
 }
 ```
@@ -885,7 +885,7 @@ pub fn build_huffman_tree(frequencies: &[usize]) -> Option<Box<HuffmanNode>> {
 pub fn solve_n_queens(n: usize) -> Vec<Vec<String>> {
     let mut board = vec![vec!['.'; n]; n];
     let mut solutions = Vec::new();
-    
+
     backtrack_n_queens(&mut board, 0, &mut solutions);
     solutions
 }
@@ -895,7 +895,7 @@ fn backtrack_n_queens(board: &mut Vec<Vec<char>>, row: usize, solutions: &mut Ve
         solutions.push(board.iter().map(|r| r.iter().collect()).collect());
         return;
     }
-    
+
     for col in 0..board.len() {
         if is_valid_placement(board, row, col) {
             board[row][col] = 'Q';
@@ -912,18 +912,18 @@ fn is_valid_placement(board: &[Vec<char>], row: usize, col: usize) -> bool {
             return false;
         }
     }
-    
+
     // 检查对角线
     for r in 0..row {
         let c1 = col as i32 - (row as i32 - r as i32);
         let c2 = col as i32 + (row as i32 - r as i32);
-        
+
         if (c1 >= 0 && c1 < board.len() as i32 && board[r][c1 as usize] == 'Q') ||
            (c2 >= 0 && c2 < board.len() as i32 && board[r][c2 as usize] == 'Q') {
             return false;
         }
     }
-    
+
     true
 }
 ```
@@ -966,15 +966,15 @@ pub fn parallel_merge_sort<T: Ord + Send + Sync>(arr: &mut [T]) {
     if arr.len() <= 1 {
         return;
     }
-    
+
     let mid = arr.len() / 2;
     let (left, right) = arr.split_at_mut(mid);
-    
+
     rayon::join(
         || parallel_merge_sort(left),
         || parallel_merge_sort(right)
     );
-    
+
     merge(arr, mid);
 }
 ```
@@ -993,7 +993,7 @@ use rayon::prelude::*;
 pub fn parallel_dfs(graph: &Graph, start: usize) -> Vec<usize> {
     let mut visited = vec![false; graph.adjacency_list.len()];
     let mut result = Vec::new();
-    
+
     parallel_dfs_recursive(graph, start, &mut visited, &mut result);
     result
 }
@@ -1001,13 +1001,13 @@ pub fn parallel_dfs(graph: &Graph, start: usize) -> Vec<usize> {
 fn parallel_dfs_recursive(graph: &Graph, vertex: usize, visited: &mut [bool], result: &mut Vec<usize>) {
     visited[vertex] = true;
     result.push(vertex);
-    
+
     if let Some(neighbors) = graph.get_neighbors(vertex) {
         let unvisited: Vec<usize> = neighbors.iter()
             .filter(|&&n| !visited[n])
             .cloned()
             .collect();
-        
+
         unvisited.par_iter().for_each(|&neighbor| {
             parallel_dfs_recursive(graph, neighbor, visited, result);
         });
@@ -1032,4 +1032,4 @@ Rust 的算法与数据结构实现具有以下特点：
 - 设计高效的并行算法
 - 指导算法的最佳实践
 
-这个理论框架为 Rust 算法编程提供了坚实的数学基础，确保算法的正确性和效率。 
+这个理论框架为 Rust 算法编程提供了坚实的数学基础，确保算法的正确性和效率。

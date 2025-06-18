@@ -73,6 +73,7 @@
 
 **定义 1.1.1 (进程)**
 进程是程序执行的实例，包含：
+
 - 代码段 $C$
 - 数据段 $D$
 - 堆栈段 $S$
@@ -96,6 +97,7 @@ $$S = \{\text{New}, \text{Ready}, \text{Running}, \text{Waiting}, \text{Terminat
 $$\text{Syscall}(op, args) = \text{OS\_Service}(op, args)$$
 
 **Rust 系统调用抽象：**
+
 ```rust
 pub struct Command {
     program: OsString,
@@ -116,6 +118,7 @@ $$\text{Process\_Abstraction} = \langle \text{Command}, \text{Child}, \text{Outp
 
 **定义 1.3.1 (资源)**
 进程资源包括：
+
 - 内存空间 $M$
 - 文件描述符 $F$
 - CPU 时间 $T$
@@ -138,6 +141,7 @@ Rust 进程抽象确保内存安全：
 $$\text{Process\_Safety}(P) = \text{Memory\_Isolation}(P) \land \text{Resource\_Safety}(P)$$
 
 **证明：**
+
 1. 操作系统提供虚拟内存隔离
 2. Rust 类型系统防止内存错误
 3. 资源管理通过 RAII 确保清理
@@ -153,6 +157,7 @@ $$\text{Process\_Safety}(P) = \text{Memory\_Isolation}(P) \land \text{Resource\_
 $$\text{Create}(parent, config) \rightarrow child$$
 
 **Rust 实现：**
+
 ```rust
 use std::process::Command;
 
@@ -543,12 +548,12 @@ $$\text{ConditionalCompilation} = \langle \text{target}, \text{features}, \text{
 
 **编译条件：**
 ```rust
-#[cfg(target_os = "linux")]
+# [cfg(target_os = "linux")]
 fn linux_specific_function() {
     // Linux 特定实现
 }
 
-#[cfg(target_os = "windows")]
+# [cfg(target_os = "windows")]
 fn windows_specific_function() {
     // Windows 特定实现
 }
@@ -672,4 +677,4 @@ Rust 的进程系统提供了强大的系统编程能力：
 - 设计可靠的分布式系统
 - 指导最佳实践
 
-这个理论框架为 Rust 系统编程提供了坚实的数学基础，确保程序的可靠性和安全性。 
+这个理论框架为 Rust 系统编程提供了坚实的数学基础，确保程序的可靠性和安全性。
