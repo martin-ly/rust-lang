@@ -18,14 +18,17 @@
 ## 1. 引言
 
 ### 1.1 研究背景
+
 形式语义是程序语言理论的基础，Rust形式语义需要处理所有权、借用、生命周期等复杂概念的形式化描述。
 
 ### 1.2 形式化目标
+
 - 建立Rust语言的形式语义模型
 - 证明程序正确性和安全性
 - 支持编译器实现的形式化验证
 
 ### 1.3 符号约定
+
 - $\sigma$：状态
 - $\rho$：环境
 - $\tau$：类型
@@ -34,18 +37,21 @@
 ## 2. 形式语义基础理论
 
 ### 2.1 语义域
+
 **定义 2.1 (语义域)**：
 $$
 \text{Domain} = \text{Values} \times \text{States} \times \text{Environments}
 $$
 
 ### 2.2 语义函数
+
 **定义 2.2 (语义函数)**：
 $$
 \mathcal{E}: \text{Expressions} \rightarrow \text{Environments} \rightarrow \text{States} \rightarrow \text{Values}
 $$
 
 ### 2.3 语义等价
+
 **定义 2.3 (语义等价)**：
 $$
 e_1 \equiv e_2 \Leftrightarrow \forall \rho, \sigma: \mathcal{E}[e_1]\rho\sigma = \mathcal{E}[e_2]\rho\sigma
@@ -54,18 +60,21 @@ $$
 ## 3. 操作语义
 
 ### 3.1 小步语义
+
 **定义 3.1 (小步语义)**：
 $$
 \langle e, \sigma \rangle \rightarrow \langle e', \sigma' \rangle
 $$
 
 ### 3.2 大步语义
+
 **定义 3.2 (大步语义)**：
 $$
 \langle e, \sigma \rangle \Downarrow v
 $$
 
 ### 3.3 求值规则
+
 **规则 3.1 (变量求值)**：
 $$
 \frac{\rho(x) = v}{\langle x, \sigma \rangle \Downarrow v}
@@ -79,18 +88,21 @@ $$
 ## 4. 指称语义
 
 ### 4.1 指称函数
+
 **定义 4.1 (指称函数)**：
 $$
 \mathcal{D}: \text{Expressions} \rightarrow \text{Environments} \rightarrow \text{Continuations}
 $$
 
 ### 4.2 连续语义
+
 **定义 4.2 (连续语义)**：
 $$
 \text{Continuation} = \text{Values} \rightarrow \text{Answers}
 $$
 
 ### 4.3 指称等价
+
 **定义 4.3 (指称等价)**：
 $$
 e_1 \cong e_2 \Leftrightarrow \mathcal{D}[e_1] = \mathcal{D}[e_2]
@@ -99,12 +111,14 @@ $$
 ## 5. 公理语义
 
 ### 5.1 Hoare逻辑
+
 **定义 5.1 (Hoare三元组)**：
 $$
 \{P\} C \{Q\}
 $$
 
 ### 5.2 推理规则
+
 **规则 5.1 (赋值规则)**：
 $$
 \frac{}{\{P[E/x]\} x := E \{P\}}
@@ -121,6 +135,7 @@ $$
 $$
 
 ### 5.3 循环规则
+
 **规则 5.4 (循环规则)**：
 $$
 \frac{\{P \land B\} C \{P\}}{\{P\} \text{while } B \text{ do } C \{P \land \neg B\}}
@@ -129,36 +144,42 @@ $$
 ## 6. 类型语义
 
 ### 6.1 类型环境
+
 **定义 6.1 (类型环境)**：
 $$
 \Gamma: \text{Variables} \rightarrow \text{Types}
 $$
 
 ### 6.2 类型推导
+
 **定义 6.2 (类型推导)**：
 $$
 \Gamma \vdash e: \tau
 $$
 
 ### 6.3 类型安全
+
 **定理 6.1 (类型安全)**：
 若$\Gamma \vdash e: \tau$且$e \Downarrow v$，则$v$具有类型$\tau$。
 
 ## 7. 内存语义
 
 ### 7.1 内存模型
+
 **定义 7.1 (内存模型)**：
 $$
 \text{Memory} = \text{Addresses} \rightarrow \text{Values}
 $$
 
 ### 7.2 所有权语义
+
 **定义 7.2 (所有权)**：
 $$
 \text{Ownership}(x, v) \Leftrightarrow \text{Unique}(x) \land \text{Valid}(v)
 $$
 
 ### 7.3 借用语义
+
 **定义 7.3 (借用)**：
 $$
 \text{Borrow}(x, v) \Leftrightarrow \text{Shared}(x) \land \text{Valid}(v)
@@ -167,18 +188,21 @@ $$
 ## 8. 并发语义
 
 ### 8.1 并发状态
+
 **定义 8.1 (并发状态)**：
 $$
 \text{ConcurrentState} = \text{Threads} \times \text{SharedMemory}
 $$
 
 ### 8.2 同步语义
+
 **定义 8.2 (同步)**：
 $$
 \text{Synchronize}(t_1, t_2) = \text{Order}(t_1, t_2) \land \text{Consistency}
 $$
 
 ### 8.3 数据竞争
+
 **定义 8.3 (数据竞争)**：
 $$
 \text{DataRace}(t_1, t_2) \Leftrightarrow \text{Concurrent}(t_1, t_2) \land \text{Conflict}(t_1, t_2)
@@ -187,9 +211,11 @@ $$
 ## 9. Rust形式语义实现
 
 ### 9.1 典型架构
+
 - 操作语义、类型系统、内存模型
 
 ### 9.2 代码示例
+
 ```rust
 // 操作语义实现
 pub struct OperationalSemantics {
@@ -467,19 +493,23 @@ impl TypeSemantics {
 ## 10. 形式化验证
 
 ### 10.1 语义正确性
+
 **定理 10.1 (语义正确性)**：
 若$e \Downarrow v$且$\Gamma \vdash e: \tau$，则$v$具有类型$\tau$。
 
 ### 10.2 类型安全
+
 **定理 10.2 (类型安全)**：
 类型检查保证运行时安全。
 
 ## 11. 应用实例
 
 ### 11.1 程序验证
+
 - 正确性证明、安全性分析、优化验证
 
 ### 11.2 实际应用示例
+
 ```rust
 // Hoare逻辑验证
 pub struct HoareLogic {
@@ -585,6 +615,7 @@ impl HoareLogic {
 ```
 
 ## 12. 参考文献
+
 1. "Semantics with Applications" - Hanne Riis Nielson
 2. "Types and Programming Languages" - Benjamin C. Pierce
 3. "The Formal Semantics of Programming Languages" - Glynn Winskel
@@ -596,4 +627,4 @@ impl HoareLogic {
 **版本**: 1.0  
 **状态**: 完成  
 **最后更新**: 2025-01-27  
-**作者**: Rust形式化文档项目组 
+**作者**: Rust形式化文档项目组

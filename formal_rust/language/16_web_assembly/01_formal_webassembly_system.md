@@ -41,6 +41,7 @@ WebAssembly (Wasm) 是一种低级二进制指令格式，为高级语言提供�
 $$W = (T, F, G, M, I, E, V)$$
 
 其中：
+
 - $T$: 类型集合（数值和引用类型）
 - $F$: 指令集合
 - $G$: 全局状态空间
@@ -61,6 +62,7 @@ $$FuncType = (params, results) \text{ where } params, results \in T^*$$
 $$Module = (types, imports, functions, tables, memories, globals, exports, elements)$$
 
 **示例 2.1**:
+
 ```wat
 (module
   ;; 类型定义
@@ -115,6 +117,7 @@ $$State = (stack, locals, memory, globals)$$
 $$(s, l, m, g) \xrightarrow{i} (s', l', m', g')$$
 
 其中：
+
 - $s, s'$: 操作数栈
 - $l, l'$: 局部变量
 - $m, m'$: 内存
@@ -122,6 +125,7 @@ $$(s, l, m, g) \xrightarrow{i} (s', l', m', g')$$
 - $i$: 指令
 
 **示例 2.2** (指令执行规则):
+
 ```math
 \frac{(s, l, m, g) \xrightarrow{i32.add} (s', l, m, g)}{(s \cdot v_1 \cdot v_2, l, m, g) \xrightarrow{i32.add} (s' \cdot (v_1 + v_2), l, m, g)}
 ```
@@ -137,6 +141,7 @@ $$compile : RustCode \rightarrow WasmModule$$
 $$type\_map : RustType \rightarrow WasmType$$
 
 **类型映射规则**:
+
 ```math
 type\_map(i32) = i32 \\
 type\_map(i64) = i64 \\
@@ -155,6 +160,7 @@ $$Memory = \{ 0, 1 \}^{64K \times pages}$$
 $$Layout(S) = (size, alignment, fields)$$
 
 **示例 3.1**:
+
 ```rust
 #[repr(C)]
 struct Point {
@@ -177,6 +183,7 @@ $$CallingConvention = (param\_passing, return\_passing, stack\_management)$$
 **定理 3.1** (调用约定正确性): Rust函数调用正确映射到Wasm调用约定。
 
 **证明**: 通过以下机制实现：
+
 1. 参数通过栈传递
 2. 返回值通过栈返回
 3. 栈指针自动管理
@@ -189,6 +196,7 @@ $$CallingConvention = (param\_passing, return\_passing, stack\_management)$$
 $$Runtime = (Engine, Store, Instance, Memory, Table)$$
 
 其中：
+
 - $Engine$: 编译和执行引擎
 - $Store$: 运行时状态存储
 - $Instance$: 模块实例
@@ -201,6 +209,7 @@ $$Runtime = (Engine, Store, Instance, Memory, Table)$$
 $$Engine = (Compiler, Optimizer, JIT)$$
 
 **示例 4.1**:
+
 ```rust
 use wasmtime::{Engine, Store, Module, Instance};
 
@@ -359,7 +368,7 @@ $$AsyncFunction = Function \times Promise$$
 use wasm_bindgen_futures::spawn_local;
 use wasm_bindgen::prelude::*;
 
-#[wasm_bindgen]
+# [wasm_bindgen]
 pub async fn async_function() -> Result<JsValue, JsValue> {
     // 异步操作
     let result = some_async_operation().await;

@@ -18,14 +18,17 @@
 ## 1. 引言
 
 ### 1.1 研究背景
+
 Rust编译器内部机制是实现内存安全和零成本抽象的核心，包括MIR、类型检查、借用检查等复杂组件。
 
 ### 1.2 形式化目标
+
 - 建立编译器内部组件的形式化模型
 - 证明类型检查和借用检查的正确性
 - 分析编译器优化的效果
 
 ### 1.3 符号约定
+
 - $M$：MIR表示
 - $T$：类型系统
 - $B$：借用检查
@@ -34,18 +37,21 @@ Rust编译器内部机制是实现内存安全和零成本抽象的核心，包�
 ## 2. 编译器内部基础理论
 
 ### 2.1 编译器架构
+
 **定义 2.1 (编译器架构)**：
 $$
 \text{Compiler} = \text{AST} \rightarrow \text{HIR} \rightarrow \text{MIR} \rightarrow \text{LLVM}
 $$
 
 ### 2.2 编译阶段
+
 **定义 2.2 (编译阶段)**：
 $$
 \text{Phase} = \{\text{Parsing}, \text{TypeChecking}, \text{BorrowChecking}, \text{CodeGen}\}
 $$
 
 ### 2.3 内部一致性
+
 **定义 2.3 (内部一致性)**：
 $$
 \text{Consistent}(C) \Leftrightarrow \forall p \in \text{Phases}: \text{Valid}(p)
@@ -54,18 +60,21 @@ $$
 ## 3. MIR中间表示
 
 ### 3.1 MIR定义
+
 **定义 3.1 (MIR)**：
 $$
 \text{MIR} = (\text{BasicBlocks}, \text{Statements}, \text{Terminators})
 $$
 
 ### 3.2 基本块
+
 **定义 3.2 (基本块)**：
 $$
 \text{BasicBlock} = [\text{Statement}_1, \text{Statement}_2, \ldots, \text{Terminator}]
 $$
 
 ### 3.3 控制流图
+
 **定义 3.3 (控制流图)**：
 $$
 \text{CFG} = (V, E) \text{ where } V = \text{BasicBlocks}, E = \text{Edges}
@@ -74,36 +83,42 @@ $$
 ## 4. 类型检查器
 
 ### 4.1 类型推导
+
 **定义 4.1 (类型推导)**：
 $$
 \Gamma \vdash e: \tau
 $$
 
 ### 4.2 类型统一
+
 **定义 4.2 (类型统一)**：
 $$
 \text{Unify}(\tau_1, \tau_2) = \sigma \text{ where } \sigma\tau_1 = \sigma\tau_2
 $$
 
 ### 4.3 类型检查正确性
+
 **定理 4.1 (类型检查正确性)**：
 若$\Gamma \vdash e: \tau$，则$e$具有类型$\tau$。
 
 ## 5. 借用检查器
 
 ### 5.1 借用规则
+
 **定义 5.1 (借用规则)**：
 $$
 \text{BorrowRules} = \{\text{NoAlias}, \text{NoUseAfterMove}, \text{Lifetime}\}
 $$
 
 ### 5.2 生命周期
+
 **定义 5.2 (生命周期)**：
 $$
 \text{Lifetime} = \text{Region} \subseteq \text{ProgramPoints}
 $$
 
 ### 5.3 借用检查算法
+
 **定义 5.3 (借用检查)**：
 $$
 \text{BorrowCheck}(MIR) = \text{Validate}(\text{BorrowRules}, MIR)
@@ -112,18 +127,21 @@ $$
 ## 6. 代码生成
 
 ### 6.1 LLVM IR生成
+
 **定义 6.1 (LLVM生成)**：
 $$
 \text{GenerateLLVM}(MIR) = \text{Translate}(MIR) \rightarrow \text{LLVM}
 $$
 
 ### 6.2 指令选择
+
 **定义 6.2 (指令选择)**：
 $$
 \text{InstructionSelection}(IR) = \text{Select}(\text{Instructions}, IR)
 $$
 
 ### 6.3 寄存器分配
+
 **定义 6.3 (寄存器分配)**：
 $$
 \text{RegisterAllocation}(SSA) = \text{Allocate}(\text{Registers}, SSA)
@@ -132,18 +150,21 @@ $$
 ## 7. 优化器
 
 ### 7.1 优化通道
+
 **定义 7.1 (优化通道)**：
 $$
 \text{OptimizationPass} = \text{Transform}(IR) \rightarrow IR
 $$
 
 ### 7.2 内联优化
+
 **定义 7.2 (内联)**：
 $$
 \text{Inline}(f, call) = \text{Replace}(call, \text{Body}(f))
 $$
 
 ### 7.3 死代码消除
+
 **定义 7.3 (死代码消除)**：
 $$
 \text{DeadCodeElimination}(IR) = IR \setminus \text{Unreachable}(IR)
@@ -152,18 +173,21 @@ $$
 ## 8. 错误处理
 
 ### 8.1 错误类型
+
 **定义 8.1 (错误类型)**：
 $$
 \text{Error} = \{\text{TypeError}, \text{BorrowError}, \text{LifetimeError}\}
 $$
 
 ### 8.2 错误报告
+
 **定义 8.2 (错误报告)**：
 $$
 \text{ReportError}(e) = \text{Location}(e) \times \text{Message}(e) \times \text{Suggestion}(e)
 $$
 
 ### 8.3 错误恢复
+
 **定义 8.3 (错误恢复)**：
 $$
 \text{ErrorRecovery}(e) = \text{Continue} \cup \text{Abort}
@@ -172,9 +196,11 @@ $$
 ## 9. Rust编译器内部实现
 
 ### 9.1 典型架构
+
 - rustc、MIR、类型检查器、借用检查器
 
 ### 9.2 代码示例
+
 ```rust
 // MIR表示示例
 #[derive(Debug, Clone)]
@@ -407,19 +433,23 @@ impl BorrowChecker {
 ## 10. 形式化验证
 
 ### 10.1 类型检查正确性
+
 **定理 10.1 (类型检查正确性)**：
 类型检查器保证类型安全。
 
 ### 10.2 借用检查正确性
+
 **定理 10.2 (借用检查正确性)**：
 借用检查器保证内存安全。
 
 ## 11. 应用实例
 
 ### 11.1 编译器开发
+
 - 新特性实现、优化改进、错误处理
 
 ### 11.2 实际应用示例
+
 ```rust
 // 自定义MIR优化
 pub struct CustomOptimizer;
@@ -468,6 +498,7 @@ impl CustomOptimizer {
 ```
 
 ## 12. 参考文献
+
 1. "The Rust Reference" - Rust Team
 2. "Rust Compiler Internals" - Rust Team
 3. "MIR RFC" - Rust RFCs
@@ -479,4 +510,4 @@ impl CustomOptimizer {
 **版本**: 1.0  
 **状态**: 完成  
 **最后更新**: 2025-01-27  
-**作者**: Rust形式化文档项目组 
+**作者**: Rust形式化文档项目组

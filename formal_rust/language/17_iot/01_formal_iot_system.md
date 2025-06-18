@@ -41,6 +41,7 @@ IoT（物联网）系统是Rust在嵌入式领域的重要应用，通过类型�
 $$Device = (Hardware, Software, Sensors, Actuators, Communication, Power)$$
 
 其中：
+
 - $Hardware$: 硬件组件
 - $Software$: 软件系统
 - $Sensors$: 传感器集合
@@ -57,6 +58,7 @@ $$DeviceState = (operational, sensors, actuators, communication, power)$$
 $$IoTArchitecture = (Application, Framework, Protocol, HAL, PAC, Hardware)$$
 
 **数学表示**:
+
 ```math
 +--------------------------+
 |      Application         |  <- 业务逻辑层
@@ -74,6 +76,7 @@ $$IoTArchitecture = (Application, Framework, Protocol, HAL, PAC, Hardware)$$
 ```
 
 **示例 2.1**:
+
 ```rust
 // 设备抽象
 pub struct IoTDevice {
@@ -113,6 +116,7 @@ $$HAL = \{ Trait_1, Trait_2, ..., Trait_n \}$$
 其中每个trait定义了一个硬件功能的抽象接口。
 
 **定义 3.2** (数字输出): 数字输出trait $OutputPin$ 定义为：
+
 ```rust
 trait OutputPin {
     type Error;
@@ -132,6 +136,7 @@ $$OutputPin = \{ set\_high : () \rightarrow Result[(), Error], set\_low : () \ri
 $$PeripheralAccess = (register, field, value)$$
 
 **示例 3.1**:
+
 ```rust
 // PAC生成的寄存器访问
 pub struct GPIOA {
@@ -174,6 +179,7 @@ impl MODER {
 $$TypeState[State] = PhantomData[State]$$
 
 **示例 3.2**:
+
 ```rust
 // I2C总线状态安全操作
 pub struct I2cBus<STATE> {
@@ -234,6 +240,7 @@ impl I2cBus<Addressed> {
 $$RealTimeSystem = (tasks, scheduler, timing, constraints)$$
 
 其中：
+
 - $tasks$: 任务集合
 - $scheduler$: 调度器
 - $timing$: 时序约束
@@ -251,6 +258,7 @@ $$Task = (id, priority, deadline, execution\_time, state)$$
 $$Scheduler : TaskQueue \rightarrow Task$$
 
 **示例 4.1**:
+
 ```rust
 use embassy::executor::Spawner;
 use embassy::time::{Duration, Timer};
@@ -294,6 +302,7 @@ async fn main(spawner: Spawner) {
 $$Interrupt = (vector, priority, handler)$$
 
 **示例 4.2**:
+
 ```rust
 use embassy::interrupt::InterruptExt;
 
@@ -335,6 +344,7 @@ $$Authentication = (credentials, verification, session)$$
 $$Encryption = (algorithm, key, plaintext, ciphertext)$$
 
 **示例 5.1**:
+
 ```rust
 use aes::Aes128;
 use aes::cipher::{
@@ -387,6 +397,7 @@ $$SecureBoot = (verification, chain\_of\_trust, integrity\_check)$$
 **定理 5.1** (安全启动正确性): 安全启动确保设备运行可信代码。
 
 **证明**: 通过以下机制实现：
+
 1. 数字签名验证
 2. 信任链建立
 3. 完整性检查
@@ -402,6 +413,7 @@ $$CommunicationProtocol = (format, encoding, transport, routing)$$
 $$MQTT = (broker, topic, message, qos)$$
 
 **示例 6.1**:
+
 ```rust
 use mqtt_async_client::client::{Client, Publish, QoS};
 
@@ -439,6 +451,7 @@ impl MQTTClient {
 $$WirelessCommunication = (protocol, frequency, power, range)$$
 
 **示例 6.2**:
+
 ```rust
 use esp32_nimble::{BLEDevice, BLEServer, BLEService, BLECharacteristic};
 
@@ -477,6 +490,7 @@ $$MemoryManagement = (allocation, deallocation, fragmentation, optimization)$$
 $$StaticAllocation = \{ var_1, var_2, ..., var_n \}$$
 
 **示例 7.1**:
+
 ```rust
 // 静态分配示例
 static mut SENSOR_DATA: [u8; 1024] = [0; 1024];
@@ -513,6 +527,7 @@ impl ResourceManager {
 $$PowerManagement = (voltage, current, power\_states, optimization)$$
 
 **示例 7.2**:
+
 ```rust
 pub enum PowerState {
     Active,
@@ -565,6 +580,7 @@ impl PowerManager {
 **定理 8.1** (IoT内存安全): Rust IoT系统保证内存安全。
 
 **证明**: 通过以下机制实现：
+
 1. 所有权系统
 2. 借用检查器
 3. 生命周期分析
@@ -574,6 +590,7 @@ impl PowerManager {
 **定理 8.2** (实时性保证): Rust IoT系统满足实时约束。
 
 **证明**: 通过以下机制实现：
+
 1. 静态调度分析
 2. 最坏情况执行时间分析
 3. 优先级调度
@@ -583,6 +600,7 @@ impl PowerManager {
 **定理 8.3** (设备安全性): Rust IoT系统提供设备安全保证。
 
 **证明**: 通过以下机制实现：
+
 1. 类型安全
 2. 内存安全
 3. 并发安全
@@ -592,6 +610,7 @@ impl PowerManager {
 **定理 8.4** (资源效率): Rust IoT系统高效使用资源。
 
 **证明**: 通过以下机制实现：
+
 1. 零成本抽象
 2. 静态内存分配
 3. 编译时优化
