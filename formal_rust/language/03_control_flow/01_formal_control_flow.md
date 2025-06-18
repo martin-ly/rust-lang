@@ -6,82 +6,97 @@
 2. [控制流基础理论](#2-控制流基础理论)
 3. [条件控制表达式](#3-条件控制表达式)
 4. [循环控制语句](#4-循环控制语句)
-5. [函数与控制流](#5-函数与控制流)
-6. [闭包与控制流](#6-闭包与控制流)
+5. [函数控制流](#5-函数控制流)
+6. [闭包控制流](#6-闭包控制流)
 7. [异步控制流](#7-异步控制流)
 8. [形式化证明](#8-形式化证明)
 9. [参考文献](#9-参考文献)
 
 ## 1. 引言
 
-控制流（Control Flow）是程序指令执行顺序的规则集合，决定了程序如何根据条件、循环、函数调用及并发操作来导航其执行路径。Rust提供了丰富、类型安全且富有表现力的控制流机制，与所有权、借用和生命周期系统深度集成。
+控制流（Control Flow）是程序执行过程中指令执行顺序的规则集合。Rust提供了丰富、类型安全且富有表现力的控制流机制，与所有权、借用和生命周期系统深度集成，确保内存安全和线程安全。
 
-### 1.1 核心原则
+### 1.1 控制流的基本概念
 
-- **表达式优先**: 大多数控制结构都是表达式而非语句，能够返回值
-- **类型安全**: 控制结构必须满足类型系统的约束
-- **所有权尊重**: 控制流不能破坏所有权规则
-- **零成本抽象**: 高级控制流结构编译为高效机器码
+**定义 1.1** (控制流)
+控制流是一个三元组 $CF = (S, T, \delta)$，其中：
 
-### 1.2 形式化目标
+- $S$ 是状态集合
+- $T$ 是转换集合
+- $\delta: S \times T \rightarrow S$ 是状态转换函数
 
-本文档建立Rust控制流系统的完整形式化理论，包括：
+**定义 1.2** (Rust控制流)
+Rust控制流是一个扩展的控制流系统 $RCF = (S, T, \delta, \tau, \mathcal{O})$，其中：
 
-- 数学符号和形式化定义
-- 类型系统约束和证明
-- 所有权和借用规则的形式化
-- 异步控制流的状态机模型
+- $\tau$ 是类型系统
+- $\mathcal{O}$ 是所有权系统
+
+### 1.2 形式化符号约定
+
+- $\Gamma$: 类型环境
+- $\vdash$: 类型判断
+- $\Downarrow$: 求值关系
+- $\sigma$: 执行状态
+- $v$: 值
+- $e$: 表达式
+- $\tau$: 类型
+- $\mathcal{O}$: 所有权关系
 
 ## 2. 控制流基础理论
 
-### 2.1 控制流图模型
+### 2.1 表达式与语句
 
-**定义 2.1** (控制流图): 控制流图是一个有向图 $G = (V, E)$，其中：
+**定义 2.1** (表达式)
+表达式 $e$ 是一个可以求值的语法结构，满足：
+$$\Gamma \vdash e : \tau \land \sigma, e \Downarrow v$$
 
-- $V$ 是基本块（Basic Blocks）的集合
-- $E$ 是控制流边的集合
-- 每个边 $(u, v) \in E$ 表示从基本块 $u$ 到基本块 $v$ 的可能控制转移
+**定义 2.2** (语句)
+语句 $s$ 是一个执行动作，满足：
+$$\sigma, s \Downarrow \sigma'$$
 
-**定义 2.2** (执行状态): 执行状态 $\sigma$ 是一个三元组 $(env, stack, heap)$：
+### 2.2 控制流类型安全
 
-- $env$: 环境映射，将变量名映射到值
-- $stack$: 调用栈
-- $heap$: 堆内存
+**定理 2.1** (控制流类型安全)
+对于任意控制流结构 $cf$，如果 $\Gamma \vdash cf : \tau$，则：
+$$\forall \sigma, \sigma', v. (\sigma, cf \Downarrow v) \implies \Gamma \vdash v : \tau$$
 
-### 2.2 类型系统基础
+**证明**：
+通过结构归纳法证明：
 
-**定义 2.3** (类型环境): 类型环境 $\Gamma$ 是一个从变量到类型的映射：
-$$\Gamma : Var \rightarrow Type$$
-
-**定义 2.4** (类型判断): 类型判断 $\Gamma \vdash e : \tau$ 表示在环境 $\Gamma$ 下，表达式 $e$ 具有类型 $\tau$。
-
-### 2.3 所有权系统形式化
-
-**定义 2.5** (所有权关系): 所有权关系 $\owns$ 是一个从变量到内存地址的映射：
-$$\owns : Var \rightarrow Addr$$
-
-**定义 2.6** (借用关系): 借用关系 $\borrows$ 是一个从引用到地址的映射：
-$$\borrows : Ref \rightarrow Addr$$
+1. 基础情况：对于原子表达式，类型安全直接成立
+2. 归纳步骤：对于复合控制流结构，通过类型推导规则保证类型安全
 
 ## 3. 条件控制表达式
 
 ### 3.1 if表达式
 
-**定义 3.1** (if表达式): if表达式 $E_{if}$ 的形式化定义为：
+**定义 3.1** (if表达式)
+if表达式 $E_{if}$ 定义为：
 $$E_{if}(condition, block_{true}, block_{false}) = \begin{cases}
-eval(block_{true}) & \text{if } condition = true \\
-eval(block_{false}) & \text{if } condition = false
+eval(block_{true}) & \text{if } condition = \text{true} \\
+eval(block_{false}) & \text{if } condition = \text{false}
 \end{cases}$$
 
-**类型规则 3.1** (if表达式类型):
+**类型规则**：
 $$\frac{\Gamma \vdash condition : bool \quad \Gamma \vdash block_{true} : \tau \quad \Gamma \vdash block_{false} : \tau}{\Gamma \vdash E_{if}(condition, block_{true}, block_{false}) : \tau}$$
 
-**所有权规则 3.1** (if表达式所有权):
-- 所有分支后的变量状态必须一致
-- 分支内的临时借用在分支结束时必须失效
+**所有权规则**：
+$$\frac{\mathcal{O}(\sigma, block_{true}) = \mathcal{O}(\sigma, block_{false})}{\mathcal{O}(\sigma, E_{if}) = \mathcal{O}(\sigma, block_{true})}$$
 
-**示例 3.1**:
+**代码示例**：
+
 ```rust
+fn formal_if_example(x: i32) -> &'static str {
+    if x > 0 {
+        "positive"
+    } else if x < 0 {
+        "negative"
+    } else {
+        "zero"
+    }
+}
+
+// 形式化验证
 fn ownership_in_if() {
     let s = String::from("hello");
 
@@ -91,273 +106,440 @@ fn ownership_in_if() {
         &s[1..2]  // 借用
     };
 
-    println!("原始字符串: {}, 结果: {}", s, result);
+    // s仍然有效，因为两个分支都只借用
+    println!("{}", s);
 }
 ```
 
 ### 3.2 match表达式
 
-**定义 3.2** (match表达式): match表达式 $E_{match}$ 的形式化定义为：
-$$E_{match}(value, [(pattern_1, expr_1), (pattern_2, expr_2), ...]) = eval(expr_i)$$
-其中 $pattern_i$ 是第一个匹配 $value$ 的模式。
+**定义 3.2** (match表达式)
+match表达式 $E_{match}$ 定义为：
+$$E_{match}(value, [(p_1, e_1), (p_2, e_2), \dots, (p_n, e_n)]) = eval(e_i) \text{ where } p_i \text{ matches } value$$
 
-**穷尽性定理 3.1**: 对于类型 $\tau$ 的所有可能值 $v$，必须存在一个模式 $pattern_i$ 使得 $pattern_i$ 匹配 $v$。
+**穷尽性约束**：
+$$\forall v \in \text{type}(value). \exists i. p_i \text{ matches } v$$
 
-**证明**: 假设存在值 $v$ 不匹配任何模式，那么程序在 $value = v$ 时将没有确定的执行路径，造成不安全状态。Rust编译器通过静态分析确保匹配穷尽性。
+**类型规则**：
+$$\frac{\Gamma \vdash value : \tau_v \quad \forall i. \Gamma \vdash e_i : \tau}{\Gamma \vdash E_{match}(value, patterns) : \tau}$$
 
-**类型规则 3.2** (match表达式类型):
-$$\frac{\Gamma \vdash value : \tau \quad \forall i. \Gamma \vdash expr_i : \tau'}{\Gamma \vdash E_{match}(value, [(pattern_1, expr_1), ...]) : \tau'}$$
+**模式匹配规则**：
 
-**示例 3.2**:
+1. **字面值模式**：$p = literal$
+2. **变量模式**：$p = x$
+3. **通配符模式**：$p = \_$
+4. **解构模式**：$p = \text{Struct}\{field_1, field_2, \dots\}$
+
+**代码示例**：
+
 ```rust
 enum Message {
     Quit,
-    Write(String),
     Move { x: i32, y: i32 },
+    Write(String),
 }
 
-fn process_message(msg: Message) {
+fn formal_match_example(msg: Message) {
     match msg {
         Message::Quit => println!("退出"),
+        Message::Move { x, y } => println!("移动到 ({}, {})", x, y),
         Message::Write(text) => {
-            println!("文本消息: {}", text);
+            // text获得String的所有权
+            println!("写入: {}", text);
         }
-        Message::Move { x, y } => {
-            println!("移动到: ({}, {})", x, y);
-        }
+    }
+}
+
+// 形式化验证：穷尽性检查
+fn exhaustive_match(msg: Message) -> i32 {
+    match msg {
+        Message::Quit => 0,
+        Message::Move { x, y } => x + y,
+        Message::Write(_) => 1,
+        // 编译器确保所有情况都被覆盖
     }
 }
 ```
 
-### 3.3 if let和while let表达式
+### 3.3 if let表达式
 
-**定义 3.3** (if let表达式): if let表达式是match的语法糖：
-$$E_{if\_let}(pattern, expression, block_{true}, block_{false}) = E_{match}(expression, [(pattern, block_{true}), (_, block_{false})])$$
+**定义 3.3** (if let表达式)
+if let表达式是match的语法糖：
+$$E_{iflet}(pattern, expression, block_{true}, block_{false}) = E_{match}(expression, [(pattern, block_{true}), (\_, block_{false})])$$
 
-**定义 3.4** (while let表达式): while let表达式等价于：
-$$E_{while\_let}(pattern, expression, block) = loop \{
-    match expression \{
-        pattern => \{ block \},
-        _ => break
-    \}
-\}$$
+**代码示例**：
+
+```rust
+fn formal_if_let_example() {
+    let maybe_value: Option<i32> = Some(42);
+
+    if let Some(value) = maybe_value {
+        println!("值为: {}", value);
+    } else {
+        println!("无值");
+    }
+}
+```
 
 ## 4. 循环控制语句
 
 ### 4.1 loop语句
 
-**定义 4.1** (loop语句): loop语句的形式化定义为：
-$$E_{loop}(block) = \begin{cases}
-value & \text{if } block \text{ executes break with } value \\
-\bot & \text{if no break occurs (无限循环)}
-\end{cases}$$
+**定义 4.1** (loop语句)
+loop语句 $L_{loop}$ 定义为：
+$$L_{loop}(block) = \text{repeat}(block) \text{ until break}$$
 
-**示例 4.1**:
+**类型规则**：
+$$\frac{\Gamma \vdash block : \tau}{\Gamma \vdash L_{loop}(block) : \tau}$$
+
+**代码示例**：
+
 ```rust
-let result = loop {
-    counter += 1;
-    if counter == 10 {
-        break counter * 2;
-    }
-};
+fn formal_loop_example() -> i32 {
+    let mut counter = 0;
+
+    let result = loop {
+        counter += 1;
+        if counter >= 10 {
+            break counter;  // 从循环返回值
+        }
+    };
+
+    result
+}
 ```
 
 ### 4.2 while语句
 
-**定义 4.2** (while语句): while语句的形式化定义为：
-$$E_{while}(condition, block) = \begin{cases}
-() & \text{如果初始 } condition = false \\
-eval(block); E_{while}(condition', block) & \text{如果 } condition = true
+**定义 4.2** (while语句)
+while语句 $L_{while}$ 定义为：
+$$L_{while}(condition, block) = \text{while } condition \text{ do } block$$
+
+**形式化表示**：
+$$L_{while}(condition, block) = \begin{cases}
+block; L_{while}(condition, block) & \text{if } condition = \text{true} \\
+\text{()} & \text{if } condition = \text{false}
 \end{cases}$$
 
-其中 $condition'$ 是执行 $block$ 后重新计算的条件。
+**代码示例**：
 
-### 4.3 for语句
-
-**定义 4.3** (for语句): for语句的形式化定义为：
-$$E_{for}(item, iter, block) = \begin{cases}
-() & \text{如果 } iter \text{ 为空} \\
-eval(block[item/v_1]); E_{for}(item, [v_2,...,v_n], block) & \text{否则}
-\end{cases}$$
-
-**迭代器安全性定理 4.1**: for循环通过Iterator trait安全地遍历集合，避免索引越界。
-
-**证明**: Iterator trait定义了安全的迭代接口，编译器确保迭代器在遍历过程中不会产生无效引用或越界访问。
-
-### 4.4 break和continue
-
-**定义 4.4** (break语句): break语句立即退出当前最内层循环。
-
-**定义 4.5** (continue语句): continue语句跳过当前迭代的剩余部分，开始下一次迭代。
-
-**标签语法**: 可以为循环添加标签，实现非局部跳转：
 ```rust
-'outer: for i in 0..3 {
-    for j in 0..3 {
-        if i == 1 && j == 1 {
-            continue 'outer;
-        }
-        if i == 2 && j == 1 {
-            break 'outer;
-        }
+fn formal_while_example() {
+    let mut x = 0;
+
+    while x < 5 {
+        println!("x = {}", x);
+        x += 1;
     }
 }
 ```
 
-## 5. 函数与控制流
+### 4.3 for语句
 
-### 5.1 函数调用
+**定义 4.3** (for语句)
+for语句 $L_{for}$ 定义为：
+$$L_{for}(iterator, block) = \text{for each } item \text{ in } iterator \text{ do } block$$
 
-**定义 5.1** (函数调用): 函数调用 $call(f, args)$ 的形式化定义为：
-$$call(f, args) = \begin{cases}
-eval(body_f[params/args]) & \text{if } f \text{ is defined} \\
-\bot & \text{otherwise}
-\end{cases}$$
+**迭代器类型规则**：
+$$\frac{\Gamma \vdash iterator : \text{Iterator<Item = }\tau\text{>} \quad \Gamma \vdash block : \text{()}}{\Gamma \vdash L_{for}(iterator, block) : \text{()}}$$
 
-其中 $body_f$ 是函数 $f$ 的体，$params$ 是参数列表。
+**代码示例**：
+
+```rust
+fn formal_for_example() {
+    let numbers = vec![1, 2, 3, 4, 5];
+
+    for number in numbers.iter() {
+        println!("数字: {}", number);
+    }
+
+    // 所有权转移版本
+    for number in numbers {
+        println!("拥有数字: {}", number);
+    }
+    // numbers在这里不再可用
+}
+```
+
+## 5. 函数控制流
+
+### 5.1 函数定义与调用
+
+**定义 5.1** (函数类型)
+函数类型 $\tau_1 \rightarrow \tau_2$ 表示从类型 $\tau_1$ 到类型 $\tau_2$ 的函数。
+
+**函数调用规则**：
+$$\frac{\Gamma \vdash f : \tau_1 \rightarrow \tau_2 \quad \Gamma \vdash arg : \tau_1}{\Gamma \vdash f(arg) : \tau_2}$$
+
+**所有权传递规则**：
+$$\mathcal{O}(\sigma, f(arg)) = \mathcal{O}(\sigma', f) \text{ where } \sigma' = \sigma[arg \mapsto \text{moved}]$$
+
+**代码示例**：
+
+```rust
+fn formal_function_example(x: i32, y: String) -> (i32, String) {
+    // 函数体
+    (x + 1, y)  // 返回元组
+}
+
+fn ownership_function(s: String) -> usize {
+    s.len()  // s的所有权被消耗
+}
+
+// 调用示例
+fn call_example() {
+    let s = String::from("hello");
+    let len = ownership_function(s);
+    // s在这里不再可用
+    println!("长度: {}", len);
+}
+```
 
 ### 5.2 递归函数
 
-**定义 5.2** (递归函数): 递归函数是调用自身的函数。
+**定义 5.2** (递归函数)
+递归函数满足：
+$$f(x) = \begin{cases}
+base\_case(x) & \text{if } condition(x) \\
+f(step(x)) & \text{otherwise}
+\end{cases}$$
 
-**终止性定理 5.1**: 递归函数必须包含基本情况（Base Case）来终止递归。
+**终止性证明**：
+对于递归函数 $f$，如果存在良基关系 $<$ 使得 $step(x) < x$，则 $f$ 终止。
 
-**证明**: 假设递归函数没有基本情况，那么每次递归调用都会产生新的调用，导致无限递归和栈溢出。
+**代码示例**：
 
-**示例 5.1**:
 ```rust
-fn factorial(n: u64) -> u64 {
-    if n == 0 {  // 基本情况
-        1
+fn factorial(n: u32) -> u32 {
+    if n == 0 {
+        1  // 基本情况
     } else {
         n * factorial(n - 1)  // 递归情况
     }
 }
+
+// 形式化验证：终止性
+// 良基关系：n-1 < n
+// 基本情况：n = 0
 ```
 
 ### 5.3 发散函数
 
-**定义 5.3** (发散函数): 返回类型为 $\bot$ (Never类型) 的函数称为发散函数。
+**定义 5.3** (发散函数)
+发散函数是永不返回的函数，类型为 $\bot$（bottom type）。
 
-**定理 5.2**: 发散函数保证永不返回控制权给调用者。
+**发散函数规则**：
+$$\frac{\Gamma \vdash f : \bot}{\Gamma \vdash f() : \tau} \text{ for any } \tau$$
 
-**证明**: 发散函数通过 `panic!`、`std::process::exit` 或无限 `loop` 实现永不返回，编译器利用这个信息进行控制流分析。
+**代码示例**：
 
-## 6. 闭包与控制流
+```rust
+fn diverging_function() -> ! {
+    loop {
+        // 永不返回
+    }
+}
+
+fn use_diverging() {
+    let x: i32 = diverging_function();  // 类型检查通过
+    // 这行代码永远不会执行
+}
+```
+
+## 6. 闭包控制流
 
 ### 6.1 闭包定义
 
-**定义 6.1** (闭包): 闭包是可捕获其定义环境的匿名函数。
+**定义 6.1** (闭包)
+闭包是一个可以捕获环境的函数，形式为：
+$$\lambda x. e \text{ where } e \text{ may reference captured variables}$$
 
-**环境捕获**: 闭包有三种捕获方式，对应三种Fn Trait：
+**闭包类型**：
+- $Fn$: 不可变借用环境
+- $FnMut$: 可变借用环境  
+- $FnOnce$: 获取环境所有权
 
-- **FnOnce**: 闭包可能消耗捕获的变量，只能被调用一次
-- **FnMut**: 闭包可以可变地借用捕获的变量，可以被调用多次
-- **Fn**: 闭包只能不可变地借用捕获的变量，可以被调用多次
+**代码示例**：
 
-### 6.2 闭包类型系统
-
-**类型规则 6.1** (闭包类型):
-$$\frac{\Gamma \vdash body : \tau \quad \Gamma \vdash captured : \tau_c}{\Gamma \vdash |params| \{ body \} : Fn(params) \rightarrow \tau}$$
-
-**所有权规则 6.1** (闭包所有权):
-- 编译器根据闭包如何使用环境中的变量自动推断实现哪个最具体的Trait
-- `move` 关键字强制闭包获取捕获变量的所有权
-
-### 6.3 高阶函数
-
-**定义 6.2** (高阶函数): 高阶函数是接受其他函数作为参数或返回函数的函数。
-
-**示例 6.1**:
 ```rust
-fn apply_operation<F>(a: i32, b: i32, op: F) -> i32
+fn formal_closure_example() {
+    let x = 42;
+
+    // Fn闭包
+    let add_x = |y| x + y;
+
+    // FnMut闭包
+    let mut counter = 0;
+    let mut increment = || {
+        counter += 1;
+        counter
+    };
+
+    // FnOnce闭包
+    let consume_string = move |s: String| {
+        println!("消耗: {}", s);
+        s.len()
+    };
+
+    let s = String::from("hello");
+    let len = consume_string(s);
+    // s在这里不再可用
+}
+```
+
+### 6.2 闭包作为控制流
+
+**定义 6.2** (高阶函数)
+高阶函数是接受函数作为参数的函数：
+$$H(f, x) = f(x)$$
+
+**代码示例**：
+
+```rust
+fn map<F, T, U>(f: F, items: Vec<T>) -> Vec<U>
 where
-    F: Fn(i32, i32) -> i32,
+    F: Fn(T) -> U,
 {
-    op(a, b)
+    let mut result = Vec::new();
+    for item in items {
+        result.push(f(item));
+    }
+    result
 }
 
-let multiply = |x, y| (x + y) * 10;
-let result = apply_operation(3, 4, multiply);
+fn formal_higher_order_example() {
+    let numbers = vec![1, 2, 3, 4, 5];
+    let doubled = map(|x| x * 2, numbers);
+
+    // 形式化验证：类型安全
+    // map: (T -> U) -> Vec<T> -> Vec<U>
+    // |x| x * 2: i32 -> i32
+    // 结果: Vec<i32>
+}
 ```
 
 ## 7. 异步控制流
 
 ### 7.1 Future系统
 
-**定义 7.1** (Future): Future代表一个可能在未来完成的计算。
+**定义 7.1** (Future)
+Future是一个表示异步计算的值，满足：
+$$\text{Future} = \text{Poll<Output>}$$
 
-**Future trait定义**:
+**Future状态**：
+- $\text{Pending}$: 计算未完成
+- $\text{Ready}(value)$: 计算完成，返回value
+
+**代码示例**：
+
 ```rust
-trait Future {
-    type Output;
-    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
+use std::future::Future;
+use std::pin::Pin;
+use std::task::{Context, Poll};
+
+struct SimpleFuture {
+    completed: bool,
+}
+
+impl Future for SimpleFuture {
+    type Output = i32;
+
+    fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
+        if self.completed {
+            Poll::Ready(42)
+        } else {
+            Poll::Pending
+        }
+    }
 }
 ```
 
 ### 7.2 async/await语法
 
-**定义 7.2** (async函数): async函数返回一个Future，不会立即执行函数体。
+**定义 7.2** (async函数)
+async函数返回一个Future：
+$$\text{async fn } f(x: \tau_1) \rightarrow \tau_2 \text{ 等价于 } fn f(x: \tau_1) \rightarrow \text{Future<Output = }\tau_2\text{>}$$
 
-**定义 7.3** (await操作): await操作符用于等待Future完成，在等待期间暂停执行。
+**await操作**：
+$$\text{await } future \text{ 等待future完成并返回结果}$$
 
-**状态机定理 7.1**: 编译器将async函数转换为状态机。
+**代码示例**：
 
-**证明**: 每个.await点对应状态机的一个状态，局部变量成为状态机结构体的字段，以便在暂停和恢复之间保持状态。
-
-### 7.3 异步所有权规则
-
-**定理 7.2**: 如果Future需要在线程间移动，它及其包含的所有状态必须是Send。
-
-**定理 7.3**: 引用的生命周期不能安全地跨越.await点。
-
-**证明**: 暂停期间数据可能被修改或销毁，导致悬垂引用。
-
-**示例 7.1**:
 ```rust
-async fn fetch_url(url: String) -> String {
-    println!("Fetching {}...", url);
-    sleep(Duration::from_millis(100)).await;
-    format!("Data from {}", url)
+async fn formal_async_example() -> i32 {
+    let future1 = async { 1 };
+    let future2 = async { 2 };
+
+    let result1 = future1.await;
+    let result2 = future2.await;
+
+    result1 + result2
 }
 
-# [tokio::main]
-async fn main() {
-    let url = String::from("http://example.com");
-    let result = fetch_url(url).await;
-    println!("Result: {}", result);
+// 形式化验证：异步函数的类型
+// formal_async_example: () -> Future<Output = i32>
+```
+
+### 7.3 状态机转换
+
+**定义 7.3** (异步状态机)
+异步函数编译为状态机：
+$$SM = (S, s_0, \delta, F)$$
+其中：
+- $S$ 是状态集合
+- $s_0$ 是初始状态
+- $\delta$ 是状态转换函数
+- $F$ 是最终状态集合
+
+**代码示例**：
+
+```rust
+async fn state_machine_example() -> i32 {
+    let x = 1;  // 状态1
+    let y = x + 1;  // 状态2
+    y  // 最终状态
+}
+
+// 编译后的状态机（简化版）
+enum StateMachine {
+    State1,
+    State2,
+    Complete(i32),
 }
 ```
 
 ## 8. 形式化证明
 
-### 8.1 控制流安全性
+### 8.1 控制流安全性证明
 
-**定理 8.1** (控制流安全性): Rust的控制流系统保证内存安全和线程安全。
+**定理 8.1** (控制流内存安全)
+对于任意Rust程序 $P$，如果 $\Gamma \vdash P : \tau$，则 $P$ 满足内存安全。
 
-**证明**: 通过以下机制实现：
-1. 类型系统确保所有控制路径的类型一致性
-2. 所有权系统防止数据竞争和悬垂引用
-3. 借用检查器分析所有可能执行路径
-4. 穷尽性检查确保所有情况都被处理
+**证明**：
+1. 所有权系统确保每个值只有一个所有者
+2. 借用检查器确保借用规则得到遵守
+3. 生命周期系统确保引用有效性
+4. 控制流结构不破坏这些保证
 
-### 8.2 进展定理
+### 8.2 类型安全证明
 
-**定理 8.2** (进展定理): 如果 $\Gamma \vdash e : \tau$ 且 $e$ 不是值，那么存在 $e'$ 使得 $e \rightarrow e'$。
+**定理 8.2** (控制流类型安全)
+对于任意控制流结构 $cf$，类型系统保证：
+$$\forall \sigma, v. (\sigma, cf \Downarrow v) \implies \Gamma \vdash v : \tau$$
 
-**证明**: 通过结构归纳法证明每个表达式要么是值，要么可以进一步求值。
+**证明**：
+通过结构归纳法：
+1. 基础情况：原子表达式
+2. 归纳步骤：复合控制流结构
 
-### 8.3 保持定理
+### 8.3 终止性证明
 
-**定理 8.3** (保持定理): 如果 $\Gamma \vdash e : \tau$ 且 $e \rightarrow e'$，那么 $\Gamma \vdash e' : \tau$。
+**定理 8.3** (循环终止性)
+对于任意循环结构，如果存在良基关系，则循环终止。
 
-**证明**: 通过规则归纳法证明每个求值步骤保持类型。
-
-### 8.4 类型安全
-
-**定理 8.4** (类型安全): 如果 $\Gamma \vdash e : \tau$，那么 $e$ 要么求值为类型 $\tau$ 的值，要么发散。
-
-**证明**: 结合进展定理和保持定理，通过归纳法证明。
+**证明**：
+1. 良基关系确保每次迭代都向终止条件靠近
+2. 有限下降链确保最终达到终止条件
 
 ## 9. 参考文献
 
@@ -368,15 +550,13 @@ async fn main() {
    - Hindley, J. R. (1969). "The principal type-scheme of an object in combinatory logic"
    - Milner, R. (1978). "A theory of type polymorphism in programming"
 
-3. **异步编程**
+3. **控制流理论**
+   - Reynolds, J. C. (1998). "Theories of programming languages"
+   - Pierce, B. C. (2002). "Types and programming languages"
+
+4. **异步编程**
    - The Rust Async Book
    - The Rust Reference
-
-4. **形式化语义**
-   - Jung, R., et al. (2017). "RustBelt: Securing the foundations of the Rust programming language"
-
-5. **控制流分析**
-   - Nielson, F., Nielson, H. R., & Hankin, C. (2015). "Principles of program analysis"
 
 ---
 

@@ -1,4 +1,4 @@
-# Rust WebAssembly形式化理论
+# Rust WebAssembly系统的形式化理论
 
 ## 目录
 
@@ -35,99 +35,44 @@ WebAssembly (Wasm) 是一种低级二进制指令格式，为高级语言提供�
 
 ## 2. WebAssembly基础理论
 
-### 2.1 WebAssembly定义
+### 1.1 WebAssembly的数学定义
 
-**定义 2.1** (WebAssembly): WebAssembly $W$ 是一个七元组：
-$$W = (T, F, G, M, I, E, V)$$
+WebAssembly可以形式化定义为一个虚拟执行环境 $\mathcal{W} = (M, I, E, S)$，其中：
 
-其中：
+- $M$ 是内存模型
+- $I$ 是指令集
+- $E$ 是执行引擎
+- $S$ 是栈系统
 
-- $T$: 类型集合（数值和引用类型）
-- $F$: 指令集合
-- $G$: 全局状态空间
-- $M$: 模块定义
-- $I$: 导入接口
-- $E$: 导出接口
-- $V$: 验证器
+**定义 1.1** (WebAssembly模块)：一个WebAssembly模块 $\mathcal{M}$ 是一个七元组 $(T, F, M, G, E, I, D)$，其中：
 
-**定义 2.2** (WebAssembly类型): WebAssembly类型 $T$ 包含：
-$$T = \{ i32, i64, f32, f64, v128, funcref, externref \}$$
+- $T$ 是类型定义集合
+- $F$ 是函数定义集合
+- $M$ 是内存定义集合
+- $G$ 是全局变量集合
+- $E$ 是导出集合
+- $I$ 是导入集合
+- $D$ 是数据段集合
 
-**定义 2.3** (函数类型): 函数类型 $FuncType$ 定义为：
-$$FuncType = (params, results) \text{ where } params, results \in T^*$$
+### 1.2 类型系统的形式化
 
-### 2.2 模块结构
-
-**定义 2.4** (WebAssembly模块): 模块 $Module$ 是一个八元组：
-$$Module = (types, imports, functions, tables, memories, globals, exports, elements)$$
-
-**示例 2.1**:
-
-```wat
-(module
-  ;; 类型定义
-  (type $fib_type (func (param i32) (result i32)))
-  
-  ;; 导入
-  (import "console" "log" (func $log (param i32)))
-  
-  ;; 内存
-  (memory (export "memory") 1)
-  
-  ;; 全局变量
-  (global $counter (mut i32) (i32.const 0))
-  
-  ;; 函数
-  (func $fibonacci (export "fibonacci") (type $fib_type)
-    (local $i i32)
-    (local $a i32)
-    (local $b i32)
-    (local $temp i32)
-    
-    ;; 边界条件
-    (if (i32.lt_s (local.get 0) (i32.const 2))
-      (then (return (local.get 0)))
-    )
-    
-    ;; 初始化
-    (local.set $a (i32.const 0))
-    (local.set $b (i32.const 1))
-    (local.set $i (i32.const 2))
-    
-    ;; 循环
-    (loop $fib_loop
-      (local.set $temp (local.get $b))
-      (local.set $b (i32.add (local.get $a) (local.get $b)))
-      (local.set $a (local.get $temp))
-      (local.set $i (i32.add (local.get $i) (i32.const 1)))
-      (br_if $fib_loop (i32.le_s (local.get $i) (local.get 0)))
-    )
-    
-    (local.get $b)
-  )
-)
-```
-
-### 2.3 执行语义
-
-**定义 2.5** (执行状态): 执行状态 $State$ 是一个四元组：
-$$State = (stack, locals, memory, globals)$$
-
-**定义 2.6** (指令执行): 指令执行可以形式化为：
-$$(s, l, m, g) \xrightarrow{i} (s', l', m', g')$$
-
-其中：
-
-- $s, s'$: 操作数栈
-- $l, l'$: 局部变量
-- $m, m'$: 内存
-- $g, g'$: 全局变量
-- $i$: 指令
-
-**示例 2.2** (指令执行规则):
+**定义 1.2** (WebAssembly类型)：WebAssembly类型系统 $\mathcal{T}$ 包含：
 
 ```math
-\frac{(s, l, m, g) \xrightarrow{i32.add} (s', l, m, g)}{(s \cdot v_1 \cdot v_2, l, m, g) \xrightarrow{i32.add} (s' \cdot (v_1 + v_2), l, m, g)}
+\mathcal{T} = \begin{cases}
+\text{i32} & \text{32位整数} \\
+\text{i64} & \text{64位整数} \\
+\text{f32} & \text{32位浮点数} \\
+\text{f64} & \text{64位浮点数} \\
+\text{funcref} & \text{函数引用} \\
+\text{externref} & \text{外部引用}
+\end{cases}
+```
+
+**函数类型**：
+
+```math
+\text{FunctionType} = \text{ValueType}^* \rightarrow \text{ValueType}^*
 ```
 
 ## 3. Rust编译到WebAssembly

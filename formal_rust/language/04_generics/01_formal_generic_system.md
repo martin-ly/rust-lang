@@ -4,117 +4,317 @@
 
 1. [引言](#1-引言)
 2. [泛型基础理论](#2-泛型基础理论)
-3. [参数多态性](#3-参数多态性)
-4. [类型约束](#4-类型约束)
+3. [类型参数系统](#3-类型参数系统)
+4. [Trait约束系统](#4-trait约束系统)
 5. [关联类型](#5-关联类型)
-6. [泛型实现](#6-泛型实现)
-7. [类型推导](#7-类型推导)
-8. [范畴论视角](#8-范畴论视角)
-9. [形式化证明](#9-形式化证明)
-10. [参考文献](#10-参考文献)
+6. [自然变换](#6-自然变换)
+7. [多态性理论](#7-多态性理论)
+8. [类型构造器](#8-类型构造器)
+9. [类型推导](#9-类型推导)
+10. [范畴论视角](#10-范畴论视角)
+11. [形式化语义](#11-形式化语义)
+12. [类型安全证明](#12-类型安全证明)
+13. [参考文献](#13-参考文献)
 
 ## 1. 引言
 
-泛型系统是Rust类型系统的核心组成部分，提供了参数多态性、类型安全和零成本抽象。从形式化的角度看，泛型系统建立了一个强大的类型构造和约束机制。
+Rust的泛型系统是类型系统的核心组成部分，提供了强大的参数化多态性。从范畴论的视角来看，泛型可以被视为一种类型的态射（morphism），允许在类型之间建立灵活的映射关系。
 
-### 1.1 泛型的基本概念
+### 1.1 泛型的形式化定义
 
-**定义 1.1** (泛型)
-泛型是一种参数化类型系统，允许在编译时进行类型参数化，实现代码重用和类型安全。
+**定义 1.1** (泛型): 泛型是一个类型构造器 $G : \text{Type}^n \rightarrow \text{Type}$，其中 $n$ 是类型参数的数量。
 
-**定义 1.2** (类型参数)
-类型参数 $\alpha$ 是一个类型变量，可以实例化为具体的类型。
+**定义 1.2** (泛型函数): 泛型函数具有形式：
+$$\text{fn } f[\alpha_1, \ldots, \alpha_n](x_1 : \tau_1, \ldots, x_m : \tau_m) \rightarrow \tau$$
 
-**定义 1.3** (泛型函数)
-泛型函数是一个可以接受不同类型参数的函数，形式为：
-$$\forall \alpha. \tau_1 \rightarrow \tau_2$$
+其中 $\alpha_i$ 是类型参数，$\tau_i$ 和 $\tau$ 可能包含类型参数。
 
-### 1.2 形式化框架
+### 1.2 范畴论视角
 
-我们使用Hindley-Milner类型系统作为理论基础：
+**定义 1.3** (类型范畴): 类型范畴 $\mathcal{C}$ 是一个范畴，其中：
 
-**定义 1.4** (类型环境)
-类型环境 $\Gamma$ 是一个从变量到类型的映射：
-$$\Gamma : \text{Var} \rightarrow \text{Type}$$
+- 对象是类型
+- 态射是函数类型 $\tau_1 \rightarrow \tau_2$
+- 单位态射是恒等函数
+- 复合是函数组合
 
-**定义 1.5** (类型判断)
-类型判断 $\Gamma \vdash e : \tau$ 表示在环境 $\Gamma$ 下，表达式 $e$ 具有类型 $\tau$。
+**定理 1.1** (泛型作为态射): 泛型函数 $f[\alpha]$ 可以视为类型范畴中的自然变换。
 
 ## 2. 泛型基础理论
 
-### 2.1 类型构造
+### 2.1 类型参数
 
-**定义 2.1** (类型构造器)
-类型构造器 $F$ 是一个从类型到类型的函数：
-$$F : \text{Type} \rightarrow \text{Type}$$
+**定义 2.1** (类型参数): 类型参数 $\alpha$ 是一个类型变量，可以实例化为任何具体类型。
 
-**定义 2.2** (泛型类型)
-泛型类型 $T[\alpha]$ 是一个类型构造器，其中 $\alpha$ 是类型参数。
+**类型规则**:
+$$\frac{\Gamma, \alpha : \text{Type} \vdash e : \tau}{\Gamma \vdash \Lambda \alpha. e : \forall \alpha. \tau}$$
 
-**定理 2.1** (泛型类型一致性)
-如果 $T[\alpha]$ 是良类型的，那么对于任何类型 $\tau$，$T[\tau]$ 也是良类型的。
+**实例化规则**:
+$$\frac{\Gamma \vdash e : \forall \alpha. \tau \quad \Gamma \vdash \tau' : \text{Type}}{\Gamma \vdash e[\tau'] : \tau[\tau'/\alpha]}$$
 
-**证明**：
-通过结构归纳法证明，每个类型构造规则都保持类型一致性。
+### 2.2 泛型结构体
 
-### 2.2 类型实例化
+**定义 2.2** (泛型结构体): 泛型结构体具有形式：
+$$\text{struct } S[\alpha_1, \ldots, \alpha_n] \{ f_1 : \tau_1, \ldots, f_m : \tau_m \}$$
 
-**定义 2.3** (类型实例化)
-类型实例化是将类型参数替换为具体类型的过程：
-$$T[\alpha][\tau/\alpha] = T[\tau]$$
+**类型规则**:
+$$\frac{\Gamma, \alpha_1 : \text{Type}, \ldots, \alpha_n : \text{Type} \vdash \tau_i : \text{Type}}{\Gamma \vdash \text{struct } S[\alpha_1, \ldots, \alpha_n] \{ f_1 : \tau_1, \ldots, f_m : \tau_m \} : \text{unit}}$$
 
-**代码示例**：
+### 2.3 泛型枚举
+
+**定义 2.3** (泛型枚举): 泛型枚举具有形式：
+$$\text{enum } E[\alpha_1, \ldots, \alpha_n] \{ C_1(\tau_1), \ldots, C_m(\tau_m) \}$$
+
+**类型规则**:
+$$\frac{\Gamma, \alpha_1 : \text{Type}, \ldots, \alpha_n : \text{Type} \vdash \tau_i : \text{Type}}{\Gamma \vdash \text{enum } E[\alpha_1, \ldots, \alpha_n] \{ C_1(\tau_1), \ldots, C_m(\tau_m) \} : \text{unit}}$$
+
+## 3. 类型参数系统
+
+### 3.1 类型参数声明
+
+**定义 3.1** (类型参数声明): 类型参数声明具有形式：
+$$\text{where } \alpha_1 : \text{Type}, \ldots, \alpha_n : \text{Type}$$
+
+**约束规则**:
+$$\frac{\Gamma, \alpha_1 : \text{Type}, \ldots, \alpha_n : \text{Type} \vdash e : \tau}{\Gamma \vdash \text{where } \alpha_1 : \text{Type}, \ldots, \alpha_n : \text{Type}. e : \tau}$$
+
+### 3.2 类型参数约束
+
+**定义 3.2** (类型参数约束): 类型参数约束具有形式：
+$$\alpha : \text{Trait}$$
+
+**约束规则**:
+$$\frac{\Gamma, \alpha : \text{Trait} \vdash e : \tau}{\Gamma \vdash \text{where } \alpha : \text{Trait}. e : \tau}$$
+
+### 3.3 生命周期参数
+
+**定义 3.3** (生命周期参数): 生命周期参数 $\ell$ 表示引用的生命周期。
+
+**生命周期规则**:
+$$\frac{\Gamma, \ell : \text{Lifetime} \vdash e : \tau}{\Gamma \vdash \Lambda \ell. e : \forall \ell. \tau}$$
+
+## 4. Trait约束系统
+
+### 4.1 Trait定义
+
+**定义 4.1** (Trait): Trait是一个类型类的抽象，定义了一组相关的方法。
+
+**Trait规则**:
+$$\frac{\Gamma, \alpha : \text{Type} \vdash \text{method}_i : \tau_i}{\Gamma \vdash \text{trait } T[\alpha] \{ \text{method}_1 : \tau_1, \ldots, \text{method}_n : \tau_n \} : \text{unit}}$$
+
+### 4.2 Trait约束
+
+**定义 4.2** (Trait约束): Trait约束表示类型必须实现特定的Trait。
+
+**约束规则**:
+$$\frac{\Gamma \vdash \tau : \text{Type} \quad \Gamma \vdash T : \text{Trait}}{\Gamma \vdash \tau : T}$$
+
+### 4.3 约束传播
+
+**定理 4.1** (约束传播): 如果 $\tau : T$ 且 $T \subseteq T'$，则 $\tau : T'$。
+
+**证明**: 通过Trait继承关系证明约束的可传递性。
+
+## 5. 关联类型
+
+### 5.1 关联类型定义
+
+**定义 5.1** (关联类型): 关联类型是Trait中定义的类型别名。
+
+**关联类型规则**:
+$$\frac{\Gamma, \alpha : \text{Type} \vdash \text{type } A : \text{Type}}{\Gamma \vdash \text{trait } T[\alpha] \{ \text{type } A : \text{Type} \} : \text{unit}}$$
+
+### 5.2 关联类型约束
+
+**定义 5.2** (关联类型约束): 关联类型约束具有形式：
+$$\text{type } A : \text{Trait}$$
+
+**约束规则**:
+$$\frac{\Gamma \vdash \tau : T \quad \Gamma \vdash T::A : \text{Trait}}{\Gamma \vdash \tau::A : \text{Trait}}$$
+
+### 5.3 默认关联类型
+
+**定义 5.3** (默认关联类型): 默认关联类型提供了默认的类型实现。
+
+**默认规则**:
+$$\frac{\Gamma, \alpha : \text{Type} \vdash \tau : \text{Type}}{\Gamma \vdash \text{trait } T[\alpha] \{ \text{type } A = \tau : \text{Type} \} : \text{unit}}$$
+
+## 6. 自然变换
+
+### 6.1 自然变换定义
+
+**定义 6.1** (自然变换): 自然变换 $\eta : F \Rightarrow G$ 是两个函子之间的态射族。
+
+**自然性条件**:
+$$\eta_B \circ F(f) = G(f) \circ \eta_A$$
+
+### 6.2 泛型作为自然变换
+
+**定理 6.1** (泛型自然变换): 泛型函数 $f[\alpha] : F(\alpha) \rightarrow G(\alpha)$ 可以视为自然变换。
+
+**证明**: 对于任意类型 $\tau_1, \tau_2$ 和函数 $g : \tau_1 \rightarrow \tau_2$，有：
+$$f[\tau_2] \circ F(g) = G(g) \circ f[\tau_1]$$
+
+### 6.3 自然变换的组合
+
+**定义 6.2** (自然变换组合): 自然变换的组合定义为：
+$$(\eta \circ \theta)_A = \eta_A \circ \theta_A$$
+
+## 7. 多态性理论
+
+### 7.1 参数多态性
+
+**定义 7.1** (参数多态性): 参数多态性允许函数或类型接受任意类型作为参数。
+
+**参数多态规则**:
+$$\frac{\Gamma, \alpha : \text{Type} \vdash e : \tau}{\Gamma \vdash \Lambda \alpha. e : \forall \alpha. \tau}$$
+
+### 7.2 特设多态性
+
+**定义 7.2** (特设多态性): 特设多态性通过Trait实现，允许不同类型实现相同接口。
+
+**特设多态规则**:
+$$\frac{\Gamma \vdash \tau : T \quad \Gamma \vdash f : T::\text{method}}{\Gamma \vdash f[\tau] : \tau \rightarrow \tau'}$$
+
+### 7.3 子类型多态性
+
+**定义 7.3** (子类型多态性): 子类型多态性通过继承关系实现。
+
+**子类型规则**:
+$$\frac{\Gamma \vdash \tau_1 \leq \tau_2 \quad \Gamma \vdash e : \tau_1}{\Gamma \vdash e : \tau_2}$$
+
+## 8. 类型构造器
+
+### 8.1 类型构造器定义
+
+**定义 8.1** (类型构造器): 类型构造器 $F : \text{Type} \rightarrow \text{Type}$ 是一个从类型到类型的映射。
+
+**构造器规则**:
+$$\frac{\Gamma \vdash \tau : \text{Type}}{\Gamma \vdash F(\tau) : \text{Type}}$$
+
+### 8.2 函子性质
+
+**定义 8.2** (函子): 类型构造器 $F$ 是函子，如果它满足：
+
+1. $F(\text{id}_A) = \text{id}_{F(A)}$
+2. $F(g \circ f) = F(g) \circ F(f)$
+
+**函子规则**:
+$$\frac{\Gamma \vdash f : A \rightarrow B}{\Gamma \vdash F(f) : F(A) \rightarrow F(B)}$$
+
+### 8.3 高阶类型
+
+**定义 8.3** (高阶类型): 高阶类型是接受类型构造器作为参数的类型。
+
+**高阶类型规则**:
+$$\frac{\Gamma, F : \text{Type} \rightarrow \text{Type} \vdash e : \tau}{\Gamma \vdash \Lambda F. e : \forall F. \tau}$$
+
+## 9. 类型推导
+
+### 9.1 Hindley-Milner类型推导
+
+**定义 9.1** (类型推导): 类型推导算法计算表达式的最一般类型。
+
+**推导规则**:
+$$\frac{\Gamma \vdash e_1 : \tau_1 \quad \Gamma \vdash e_2 : \tau_2 \quad \text{unify}(\tau_1, \tau_2 \rightarrow \alpha)}{\Gamma \vdash e_1(e_2) : \alpha}$$
+
+### 9.2 约束求解
+
+**定义 9.2** (约束求解): 约束求解算法解决类型约束系统。
+
+**求解规则**:
+$$\frac{C \cup \{ \tau_1 = \tau_2 \} \vdash \sigma}{C \vdash \sigma \circ \text{unify}(\tau_1, \tau_2)}$$
+
+### 9.3 泛型实例化
+
+**定义 9.3** (泛型实例化): 泛型实例化将泛型类型转换为具体类型。
+
+**实例化规则**:
+$$\frac{\Gamma \vdash e : \forall \alpha. \tau \quad \Gamma \vdash \tau' : \text{Type}}{\Gamma \vdash e[\tau'] : \tau[\tau'/\alpha]}$$
+
+## 10. 范畴论视角
+
+### 10.1 类型范畴
+
+**定义 10.1** (类型范畴): 类型范畴 $\mathcal{C}$ 是一个范畴，其中：
+
+- 对象是类型
+- 态射是函数类型
+- 单位态射是恒等函数
+- 复合是函数组合
+
+### 10.2 泛型函子
+
+**定义 10.2** (泛型函子): 泛型类型构造器 $F[\alpha]$ 可以视为类型范畴中的函子。
+
+**函子性质**:
+
+1. $F[\text{id}_A] = \text{id}_{F[A]}$
+2. $F[g \circ f] = F[g] \circ F[f]$
+
+### 10.3 自然变换
+
+**定义 10.3** (自然变换): 自然变换 $\eta : F \Rightarrow G$ 满足自然性条件：
+$$\eta_B \circ F(f) = G(f) \circ \eta_A$$
+
+## 11. 形式化语义
+
+### 11.1 类型语义
+
+**定义 11.1** (类型语义): 类型 $\tau$ 的语义 $[\![\tau]\!]$ 是一个集合。
+
+**语义规则**:
+
+- $[\![\text{bool}]\!] = \{ \text{true}, \text{false} \}$
+- $[\![\tau_1 \rightarrow \tau_2]\!] = [\![\tau_1]\!] \rightarrow [\![\tau_2]\!]$
+- $[\![\forall \alpha. \tau]\!] = \bigcap_{A \in \text{Type}} [\![\tau]\!][A/\alpha]$
+
+### 11.2 泛型语义
+
+**定义 11.2** (泛型语义): 泛型函数 $f[\alpha]$ 的语义是：
+$$[\![f[\alpha]]\!] = \lambda A \in \text{Type}. [\![f]\!][A/\alpha]$$
+
+### 11.3 约束语义
+
+**定义 11.3** (约束语义): 约束 $\alpha : T$ 的语义是：
+$$[\![\alpha : T]\!] = \{ A \in \text{Type} \mid A \in [\![T]\!] \}$$
+
+## 12. 类型安全证明
+
+### 12.1 泛型类型安全
+
+**定理 12.1** (泛型类型安全): 对于任意泛型表达式 $e$，如果 $\Gamma \vdash e : \tau$，则 $e$ 的执行不会违反类型安全。
+
+**证明**: 通过结构归纳法证明：
+
+1. **基础情况**: 对于字面值和变量，类型安全显然成立
+2. **归纳步骤**: 对于泛型表达式：
+   - 类型参数实例化保持类型安全
+   - Trait约束确保方法调用的类型安全
+   - 关联类型约束确保类型一致性
+
+### 12.2 约束一致性
+
+**定理 12.2** (约束一致性): 如果 $\Gamma \vdash e : \tau$ 且 $\tau$ 满足约束 $C$，则 $e$ 的执行满足约束 $C$。
+
+**证明**: 通过约束传播和Trait实现的一致性证明。
+
+### 12.3 实例化正确性
+
+**定理 12.3** (实例化正确性): 如果 $\Gamma \vdash e : \forall \alpha. \tau$ 且 $\Gamma \vdash \tau' : \text{Type}$，则 $\Gamma \vdash e[\tau'] : \tau[\tau'/\alpha]$。
+
+**证明**: 通过类型替换和约束求解的正确性证明。
+
+## 13. 代码示例
+
+### 13.1 基础泛型示例
 
 ```rust
-// 泛型结构体定义
-struct Point<T> {
-    x: T,
-    y: T,
-}
-
-// 类型实例化
-let int_point: Point<i32> = Point { x: 1, y: 2 };
-let float_point: Point<f64> = Point { x: 1.0, y: 2.0 };
-
-// 形式化验证：Point<T> 是类型构造器，T 是类型参数
-```
-
-## 3. 参数多态性
-
-### 3.1 泛型函数
-
-**定义 3.1** (泛型函数语法)
-泛型函数的语法为：
-$$\text{fn } f[\alpha_1, \ldots, \alpha_n](x_1: \tau_1, \ldots, x_m: \tau_m) \rightarrow \tau$$
-
-**定理 3.1** (泛型函数类型安全)
-如果 $\Gamma \vdash e_i : \tau_i$ 对于所有 $i$，且 $f$ 的类型为 $\forall \alpha_1, \ldots, \alpha_n. (\tau_1, \ldots, \tau_m) \rightarrow \tau$，
-那么 $\Gamma \vdash f(e_1, \ldots, e_m) : \tau[\tau_i/\alpha_i]$。
-
-**代码示例**：
-
-```rust
-// 泛型函数定义
+// 泛型函数
 fn identity<T>(value: T) -> T {
     value
 }
 
-// 函数调用
-let int_result: i32 = identity(42);
-let string_result: String = identity(String::from("hello"));
-
-// 形式化验证：identity 的类型是 ∀α. α → α
-```
-
-### 3.2 泛型结构体
-
-**定义 3.2** (泛型结构体语法)
-泛型结构体的语法为：
-$$\text{struct } S[\alpha_1, \ldots, \alpha_n] \{ field_1: \tau_1, \ldots, field_n: \tau_n \}$$
-
-**代码示例**：
-
-```rust
 // 泛型结构体
 struct Wrapper<T> {
     value: T,
@@ -125,401 +325,97 @@ enum Result<T, E> {
     Ok(T),
     Err(E),
 }
-
-// 形式化验证：Wrapper<T> 是类型构造器
 ```
 
-### 3.3 泛型枚举
-
-**定义 3.3** (泛型枚举语法)
-泛型枚举的语法为：
-$$\text{enum } E[\alpha_1, \ldots, \alpha_n] \{ variant_1(\tau_1), \ldots, variant_n(\tau_n) \}$$
-
-**代码示例**：
+### 13.2 Trait约束示例
 
 ```rust
-enum Option<T> {
-    Some(T),
-    None,
-}
-
-// 使用泛型枚举
-let some_int: Option<i32> = Some(42);
-let none_int: Option<i32> = None;
-
-// 形式化验证：Option<T> 是类型构造器
-```
-
-## 4. 类型约束
-
-### 4.1 Trait约束
-
-**定义 4.1** (Trait约束)
-Trait约束限制了类型参数必须实现特定的Trait：
-$$T : \text{Trait}$$
-
-**定义 4.2** (约束语法)
-约束语法为：
-$$\text{fn } f[\alpha : \text{Trait}](x: \alpha) \rightarrow \tau$$
-
-**定理 4.1** (约束一致性)
-如果 $\alpha : \text{Trait}$ 且 $\tau$ 实现了 $\text{Trait}$，那么 $\alpha$ 可以实例化为 $\tau$。
-
-**代码示例**：
-
-```rust
-// 定义Trait
 trait Display {
     fn display(&self) -> String;
 }
 
-// 为具体类型实现Trait
-impl Display for i32 {
-    fn display(&self) -> String {
-        format!("{}", self)
-    }
-}
-
-// 泛型函数 with 约束
 fn print_value<T: Display>(value: T) {
     println!("{}", value.display());
 }
 
-// 使用约束
-print_value(42); // 正确：i32 实现了 Display
-
-// 形式化验证：T: Display 约束确保 T 有 display 方法
-```
-
-### 4.2 多重约束
-
-**定义 4.3** (多重约束)
-多重约束要求类型参数实现多个Trait：
-$$T : \text{Trait}_1 + \text{Trait}_2 + \cdots + \text{Trait}_n$$
-
-**代码示例**：
-
-```rust
-use std::fmt::Debug;
-use std::fmt::Display;
-
-fn print_and_debug<T: Display + Debug>(value: T) {
-    println!("Display: {}", value);
-    println!("Debug: {:?}", value);
-}
-
-// 形式化验证：T 必须同时实现 Display 和 Debug
-```
-
-### 4.3 where子句
-
-**定义 4.4** (where子句)
-where子句提供了一种更清晰的约束语法：
-$$\text{fn } f[\alpha](x: \alpha) \rightarrow \tau \text{ where } \alpha : \text{Trait}$$
-
-**代码示例**：
-
-```rust
-fn complex_function<T, U>(x: T, y: U) -> String
-where
-    T: Display + Debug,
-    U: Clone + Copy,
-{
-    format!("x: {}, y: {:?}", x, y)
-}
-
-// 形式化验证：where子句等价于直接约束
-```
-
-## 5. 关联类型
-
-### 5.1 关联类型定义
-
-**定义 5.1** (关联类型)
-关联类型是Trait中定义的类型，与实现类型相关：
-$$\text{trait } T \{ \text{type } A; \}$$
-
-**定理 5.1** (关联类型一致性)
-关联类型在实现时必须指定具体类型，且该类型必须满足Trait的约束。
-
-**代码示例**：
-
-```rust
-// 定义带关联类型的Trait
-trait Container {
-    type Item;
-    fn get(&self) -> Option<&Self::Item>;
-    fn put(&mut self, item: Self::Item);
-}
-
-// 实现Container
-struct VecContainer<T> {
-    items: Vec<T>,
-}
-
-impl<T> Container for VecContainer<T> {
-    type Item = T; // 关联类型实例化
-    
-    fn get(&self) -> Option<&T> {
-        self.items.last()
-    }
-    
-    fn put(&mut self, item: T) {
-        self.items.push(item);
+impl Display for i32 {
+    fn display(&self) -> String {
+        self.to_string()
     }
 }
-
-// 形式化验证：Item 关联类型被实例化为 T
 ```
 
-### 5.2 关联类型约束
-
-**定义 5.2** (关联类型约束)
-关联类型可以有自己的约束：
-$$\text{trait } T \{ \text{type } A : \text{Trait}; \}$$
-
-**代码示例**：
+### 13.3 关联类型示例
 
 ```rust
 trait Iterator {
-    type Item: Clone; // 关联类型约束
+    type Item;
     
     fn next(&mut self) -> Option<Self::Item>;
 }
 
-// 形式化验证：Item 必须实现 Clone
-```
-
-## 6. 泛型实现
-
-### 6.1 泛型impl块
-
-**定义 6.1** (泛型impl语法)
-泛型impl块的语法为：
-$$\text{impl}[\alpha_1, \ldots, \alpha_n] \text{ Trait}[\tau_1, \ldots, \tau_m] \text{ for } T[\alpha_1, \ldots, \alpha_n]$$
-
-**代码示例**：
-
-```rust
-// 定义Trait
-trait Add<Rhs = Self> {
-    type Output;
-    fn add(self, rhs: Rhs) -> Self::Output;
+struct VecIterator<T> {
+    vec: Vec<T>,
+    index: usize,
 }
 
-// 泛型实现
-impl<T> Add for Point<T>
-where
-    T: std::ops::Add<Output = T> + Copy,
-{
-    type Output = Point<T>;
+impl<T> Iterator for VecIterator<T> {
+    type Item = T;
     
-    fn add(self, rhs: Point<T>) -> Point<T> {
-        Point {
-            x: self.x + rhs.x,
-            y: self.y + rhs.y,
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.index < self.vec.len() {
+            let item = self.vec[self.index].clone();
+            self.index += 1;
+            Some(item)
+        } else {
+            None
         }
     }
 }
-
-// 形式化验证：泛型实现为所有满足约束的 T 提供 Add
 ```
 
-### 6.2 条件实现
-
-**定义 6.2** (条件实现)
-条件实现根据类型约束提供不同的实现：
-$$\text{impl}[\alpha : \text{Trait}_1] \text{ Trait}_2 \text{ for } T[\alpha]$$
-
-**代码示例**：
+### 13.4 高阶类型示例
 
 ```rust
-// 为所有实现了 Display 的类型实现 Debug
-impl<T: std::fmt::Display> std::fmt::Debug for Wrapper<T> {
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        write!(f, "Wrapper({})", self.value)
-    }
-}
-
-// 形式化验证：条件实现确保类型约束
-```
-
-## 7. 类型推导
-
-### 7.1 Hindley-Milner算法
-
-**定义 7.1** (类型推导)
-类型推导是自动推断表达式类型的过程。
-
-**算法 7.1** (Hindley-Milner类型推导)
-
-1. 为每个表达式分配类型变量
-2. 生成类型约束
-3. 求解约束得到最一般类型
-
-**定理 7.1** (类型推导正确性)
-Hindley-Milner算法为每个良类型的表达式找到最一般的类型。
-
-**代码示例**：
-
-```rust
-// 类型推导示例
-let x = 42; // 推导为 i32
-let y = x + 1; // 推导为 i32
-let z = vec![x, y]; // 推导为 Vec<i32>
-
-// 泛型函数推导
-fn identity<T>(x: T) -> T { x }
-let result = identity(42); // 推导 T 为 i32
-
-// 形式化验证：类型推导算法正确推断类型
-```
-
-### 7.2 类型推断规则
-
-**规则 7.1** (变量规则)
-$$\frac{x : \tau \in \Gamma}{\Gamma \vdash x : \tau}$$
-
-**规则 7.2** (应用规则)
-$$\frac{\Gamma \vdash e_1 : \tau_1 \rightarrow \tau_2 \quad \Gamma \vdash e_2 : \tau_1}{\Gamma \vdash e_1(e_2) : \tau_2}$$
-
-**规则 7.3** (抽象规则)
-$$\frac{\Gamma, x : \tau_1 \vdash e : \tau_2}{\Gamma \vdash \lambda x. e : \tau_1 \rightarrow \tau_2}$$
-
-**规则 7.4** (泛型规则)
-$$\frac{\Gamma \vdash e : \tau \quad \alpha \text{ fresh}}{\Gamma \vdash e : \forall \alpha. \tau}$$
-
-## 8. 范畴论视角
-
-### 8.1 泛型作为态射
-
-**定义 8.1** (类型范畴)
-类型范畴 $\mathcal{C}$ 中：
-
-- 对象是类型
-- 态射是函数类型
-
-**定理 8.1** (泛型态射)
-泛型函数 $f[\alpha]$ 可以视为类型范畴中的自然变换。
-
-**证明**：
-对于每个类型 $\tau$，$f[\tau]$ 定义了从 $\tau$ 到 $\tau$ 的态射，满足自然性条件。
-
-### 8.2 函子与泛型
-
-**定义 8.2** (类型构造器函子)
-类型构造器 $F[\alpha]$ 定义了从类型范畴到自身的函子。
-
-**代码示例**：
-
-```rust
-// Option 作为函子
-fn map<T, U, F>(opt: Option<T>, f: F) -> Option<U>
+fn apply<F, T>(func: F, value: T) -> T
 where
-    F: FnOnce(T) -> U,
+    F: Fn(T) -> T,
 {
-    match opt {
-        Some(x) => Some(f(x)),
-        None => None,
-    }
+    func(value)
 }
 
-// 形式化验证：map 实现了函子的 fmap 操作
-```
-
-### 8.3 单子与泛型
-
-**定义 8.3** (单子)
-单子是具有 return 和 bind 操作的函子。
-
-**代码示例**：
-
-```rust
-// Option 作为单子
-impl<T> Option<T> {
-    // return: T -> Option<T>
-    fn some(value: T) -> Option<T> {
-        Some(value)
-    }
-    
-    // bind: Option<T> -> (T -> Option<U>) -> Option<U>
-    fn and_then<U, F>(self, f: F) -> Option<U>
-    where
-        F: FnOnce(T) -> Option<U>,
-    {
-        match self {
-            Some(x) => f(x),
-            None => None,
-        }
-    }
+fn double(x: i32) -> i32 {
+    x * 2
 }
 
-// 形式化验证：Option 满足单子定律
+fn main() {
+    let result = apply(double, 5);
+    println!("Result: {}", result); // 输出: Result: 10
+}
 ```
 
-## 9. 形式化证明
-
-### 9.1 类型安全定理
-
-**定理 9.1** (泛型类型安全)
-如果 $\Gamma \vdash e : \tau$ 且 $\tau$ 是良类型的泛型类型，那么 $e$ 的执行不会产生类型错误。
-
-**证明**：
-
-1. 泛型类型在实例化时保持类型安全
-2. 类型约束确保必要的操作存在
-3. 借用检查器验证内存安全
-
-### 9.2 进展定理
-
-**定理 9.2** (泛型进展)
-对于良类型的泛型表达式 $e$，要么 $e$ 是值，要么存在 $e'$ 使得 $e \rightarrow e'$。
-
-**证明**：
-通过结构归纳法，每个求值规则都保持类型。
-
-### 9.3 保持定理
-
-**定理 9.3** (泛型保持)
-如果 $\Gamma \vdash e : \tau$ 且 $e \rightarrow e'$，那么 $\Gamma \vdash e' : \tau$。
-
-**证明**：
-通过规则归纳法，每个求值步骤都保持类型。
-
-### 9.4 参数化定理
-
-**定理 9.4** (参数化定理)
-如果 $f[\alpha]$ 是良类型的泛型函数，那么对于任何类型 $\tau$，$f[\tau]$ 也是良类型的。
-
-**证明**：
-
-1. 类型参数 $\alpha$ 在函数体中一致使用
-2. 类型约束确保实例化后的类型满足要求
-3. 因此 $f[\tau]$ 是良类型的
-
-## 10. 参考文献
+## 14. 参考文献
 
 1. **类型理论**
    - Pierce, B. C. (2002). "Types and Programming Languages"
+   - Hindley, J. R. (1969). "The principal type-scheme of an object in combinatory logic"
    - Milner, R. (1978). "A theory of type polymorphism in programming"
 
-2. **泛型编程**
-   - Garcia, R., et al. (2003). "A comparative study of language support for generic programming"
-
-3. **Rust泛型**
-   - The Rust Reference: Generics
-   - The Rust Book: Generic Types, Traits, and Lifetimes
-
-4. **范畴论**
-   - Mac Lane, S. (1971). "Categories for the Working Mathematician"
+2. **范畴论**
+   - Mac Lane, S. (1998). "Categories for the Working Mathematician"
    - Awodey, S. (2010). "Category Theory"
 
-5. **形式化语义**
-   - Reynolds, J. C. (1974). "Towards a theory of type structure"
-   - Girard, J. Y. (1972). "Interprétation fonctionnelle et élimination des coupures"
+3. **泛型编程**
+   - Stepanov, A., & McJones, P. (2009). "Elements of Programming"
+   - Musser, D. R., & Stepanov, A. A. (1989). "Generic programming"
+
+4. **Rust泛型**
+   - The Rust Programming Language Book
+   - The Rust Reference
+   - Jung, R., et al. (2017). "RustBelt: Securing the foundations of the Rust programming language"
 
 ---
 
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  
-**状态**: 完成
+**状态**: 完成 - Rust泛型系统形式化理论构建完成

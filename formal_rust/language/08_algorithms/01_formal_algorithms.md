@@ -3,581 +3,454 @@
 ## 目录
 
 1. [引言](#1-引言)
-2. [理论基础](#2-理论基础)
-3. [算法设计模式](#3-算法设计模式)
-4. [性能分析与优化](#4-性能分析与优化)
-5. [并行算法](#5-并行算法)
-6. [形式化证明](#6-形式化证明)
-7. [应用与实现](#7-应用与实现)
-8. [参考文献](#8-参考文献)
+2. [形式化基础](#2-形式化基础)
+3. [算法抽象](#3-算法抽象)
+4. [迭代器系统](#4-迭代器系统)
+5. [排序算法](#5-排序算法)
+6. [搜索算法](#6-搜索算法)
+7. [图算法](#7-图算法)
+8. [动态规划](#8-动态规划)
+9. [并行算法](#9-并行算法)
+10. [形式化证明](#10-形式化证明)
+11. [应用实例](#11-应用实例)
+12. [参考文献](#12-参考文献)
 
 ## 1. 引言
 
-### 1.1 算法系统概念
+Rust的算法系统是一个基于类型安全和零成本抽象的算法实现框架，它通过特征系统、泛型和迭代器提供了高效、安全的算法抽象。本文档提供该系统的完整形式化理论。
 
-算法系统是计算机科学的核心，涉及问题的形式化描述、算法设计和性能分析。Rust通过其类型系统和所有权模型，提供了安全且高效的算法实现能力。
+### 1.1 设计目标
 
-**形式化定义**：
-算法系统是一个元组 $(\mathcal{A}, \mathcal{P}, \mathcal{C}, \mathcal{O})$，其中：
+- **类型安全**: 通过类型系统保证算法正确性
+- **零成本抽象**: 算法抽象不引入运行时开销
+- **可组合性**: 算法可以灵活组合和扩展
+- **性能保证**: 提供性能分析和优化指导
 
-- $\mathcal{A}$ 是算法集合
-- $\mathcal{P}$ 是问题集合
-- $\mathcal{C}$ 是复杂度分析函数
-- $\mathcal{O}$ 是优化策略集合
+### 1.2 核心组件
 
-### 1.2 核心原则
+```text
+算法系统架构
+├── Iterator Trait - 算法抽象的核心
+├── Algorithm Traits - 算法特征定义
+├── Generic Functions - 泛型算法实现
+├── Performance Analysis - 性能分析工具
+├── Parallel Algorithms - 并行算法支持
+└── Optimization Techniques - 优化技术
+```
 
-1. **类型安全**：通过类型系统保证算法正确性
-2. **零成本抽象**：高级抽象不引入运行时开销
-3. **内存安全**：通过所有权系统避免内存错误
-4. **性能保证**：编译时优化和运行时效率
+## 2. 形式化基础
 
-## 2. 理论基础
+### 2.1 算法复杂度理论
 
-### 2.1 算法理论
+**定义 2.1** (时间复杂度)
+给定算法 $A$ 和输入大小 $n$，时间复杂度 $T(n)$ 定义为：
+$$T(n) = O(f(n)) \iff \exists c, n_0 > 0: \forall n \geq n_0, T(n) \leq c \cdot f(n)$$
 
-**定义 2.1** (算法)：
-算法是一个有限的计算过程，将输入转换为输出：
-$$\text{Algorithm} : \text{Input} \rightarrow \text{Output}$$
+**定义 2.2** (空间复杂度)
+给定算法 $A$ 和输入大小 $n$，空间复杂度 $S(n)$ 定义为：
+$$S(n) = O(f(n)) \iff \exists c, n_0 > 0: \forall n \geq n_0, S(n) \leq c \cdot f(n)$$
 
-**算法特性**：
+### 2.2 算法正确性
 
-- **确定性**：相同输入产生相同输出
-- **有限性**：算法在有限步后终止
-- **有效性**：每个步骤都是可执行的
+**定义 2.3** (算法正确性)
+算法 $A$ 对于问题 $P$ 是正确的，当且仅当：
+$$\forall x \in \text{Input}(P): A(x) \in \text{Output}(P) \land \text{Valid}(A(x), x)$$
 
-**形式化表示**：
-$$A = (Q, \Sigma, \delta, q_0, F)$$
-其中：
+**定义 2.4** (算法终止性)
+算法 $A$ 是终止的，当且仅当：
+$$\forall x \in \text{Input}: \exists n \in \mathbb{N}: A(x) \text{ 在 } n \text{ 步内终止}$$
 
-- $Q$ 是状态集合
-- $\Sigma$ 是输入字母表
-- $\delta$ 是状态转换函数
-- $q_0$ 是初始状态
-- $F$ 是接受状态集合
+### 2.3 不变量理论
 
-### 2.2 复杂度理论
+**定义 2.5** (循环不变量)
+对于循环 $L$，不变量 $I$ 满足：
 
-**时间复杂度**：
-$$T(n) = O(f(n)) \iff \exists c, n_0 : \forall n \geq n_0, T(n) \leq c \cdot f(n)$$
+1. **初始化**: 循环开始前 $I$ 为真
+2. **保持**: 每次迭代后 $I$ 仍为真
+3. **终止**: 循环终止时 $I$ 为真
 
-**空间复杂度**：
-$$S(n) = O(f(n)) \iff \exists c, n_0 : \forall n \geq n_0, S(n) \leq c \cdot f(n)$$
+**定理 2.1** (不变量正确性)
+如果循环不变量 $I$ 成立且循环终止，则算法正确。
 
-**渐近分析**：
+## 3. 算法抽象
 
-- $O(1)$: 常数时间
-- $O(\log n)$: 对数时间
-- $O(n)$: 线性时间
-- $O(n \log n)$: 线性对数时间
-- $O(n^2)$: 二次时间
-- $O(2^n)$: 指数时间
+### 3.1 特征系统
 
-### 2.3 算法正确性
-
-**部分正确性**：
-$$\forall x \in \text{Input} : \text{Pre}(x) \land \text{Terminates}(A, x) \implies \text{Post}(A(x))$$
-
-**完全正确性**：
-$$\forall x \in \text{Input} : \text{Pre}(x) \implies \text{Terminates}(A, x) \land \text{Post}(A(x))$$
-
-## 3. 算法设计模式
-
-### 3.1 分治算法
-
-**分治模式**：
+**定义 3.1** (算法特征)
+算法特征定义为：
 
 ```rust
-pub trait DivideAndConquer<T> {
-    fn solve(&self, input: &[T]) -> T {
-        if self.is_base_case(input) {
-            self.solve_base_case(input)
-        } else {
-            let (left, right) = self.divide(input);
-            let left_result = self.solve(left);
-            let right_result = self.solve(right);
-            self.combine(left_result, right_result)
-        }
-    }
-    
-    fn is_base_case(&self, input: &[T]) -> bool;
-    fn solve_base_case(&self, input: &[T]) -> T;
-    fn divide(&self, input: &[T]) -> (&[T], &[T]);
-    fn combine(&self, left: T, right: T) -> T;
+trait Algorithm<I, O> {
+    fn execute(&self, input: I) -> O;
+    fn complexity(&self) -> Complexity;
 }
 ```
 
-**分治复杂度**：
-$$T(n) = a \cdot T(n/b) + f(n)$$
-
-其中：
-
-- $a$ 是子问题数量
-- $b$ 是问题规模缩小因子
-- $f(n)$ 是合并步骤的复杂度
-
-### 3.2 动态规划
-
-**动态规划模式**：
+**定义 3.2** (复杂度类型)
 
 ```rust
-pub trait DynamicProgramming<T, R> {
-    fn solve(&self, input: T) -> R {
-        let mut memo = HashMap::new();
-        self.solve_with_memo(input, &mut memo)
-    }
-    
-    fn solve_with_memo(&self, input: T, memo: &mut HashMap<T, R>) -> R {
-        if let Some(result) = memo.get(&input) {
-            return result.clone();
-        }
-        
-        let result = self.compute(input.clone());
-        memo.insert(input, result.clone());
-        result
-    }
-    
-    fn compute(&self, input: T) -> R;
+struct Complexity {
+    time: BigO,
+    space: BigO,
+}
+
+enum BigO {
+    O1, OLogN, ON, ONLogN, ON2, O2N, ONFactorial
 }
 ```
 
-**动态规划复杂度**：
-$$T(n) = \sum_{i=1}^{n} T(i) \cdot \text{work}(i)$$
+### 3.2 泛型算法
 
-### 3.3 贪心算法
+**定义 3.3** (泛型算法)
+泛型算法定义为：
+$$\text{GenericAlgorithm}[\tau_1, \tau_2] = \tau_1 \rightarrow \tau_2$$
 
-**贪心模式**：
+**定理 3.1** (泛型正确性)
+如果泛型算法 $G$ 对所有类型 $\tau$ 都正确，则 $G$ 是类型安全的。
+
+**证明**:
+
+1. 泛型约束保证类型安全
+2. 特征边界确保必要操作存在
+3. 因此算法对所有满足约束的类型都正确
+
+### 3.3 策略模式
+
+**定义 3.4** (策略模式)
+策略模式定义为：
+$$\text{Strategy}[\tau] = \{\text{execute}: \tau \rightarrow \text{Result}\}$$
+
+**定理 3.2** (策略可替换性)
+如果策略 $S_1$ 和 $S_2$ 实现相同特征，则它们可以相互替换。
+
+## 4. 迭代器系统
+
+### 4.1 Iterator Trait
+
+**定义 4.1** (Iterator Trait)
+Iterator trait的形式化定义为：
 
 ```rust
-pub trait Greedy<T, R> {
-    fn solve(&self, input: &[T]) -> R {
-        let mut solution = self.initialize();
-        let mut candidates = input.to_vec();
-        
-        while !candidates.is_empty() {
-            let best = self.select_best(&candidates);
-            if self.is_feasible(&solution, &best) {
-                solution = self.add_to_solution(solution, best);
-            }
-            candidates = self.remove_candidate(candidates, best);
-        }
-        
-        solution
-    }
-    
-    fn initialize(&self) -> R;
-    fn select_best(&self, candidates: &[T]) -> T;
-    fn is_feasible(&self, solution: &R, candidate: &T) -> bool;
-    fn add_to_solution(&self, solution: R, candidate: T) -> R;
-    fn remove_candidate(&self, candidates: Vec<T>, candidate: T) -> Vec<T>;
+trait Iterator {
+    type Item;
+    fn next(&mut self) -> Option<Self::Item>;
 }
 ```
 
-**贪心正确性**：
-贪心算法正确当且仅当问题满足贪心选择性质：
-$$\forall S \subseteq \text{Optimal} : \exists g \in \text{GreedyChoice} : S \cup \{g\} \subseteq \text{Optimal}$$
+**定义 4.2** (迭代器语义)
+迭代器的语义定义为：
+$$\text{Iterator}[\tau] = \{\text{next}: \text{Unit} \rightarrow \text{Option}[\tau]\}$$
 
-## 4. 性能分析与优化
+### 4.2 迭代器组合
 
-### 4.1 算法分析
+**定义 4.3** (迭代器组合)
+给定迭代器 $I_1: \text{Iterator}[\tau_1]$ 和 $I_2: \text{Iterator}[\tau_2]$，它们的组合定义为：
+$$I_1 \otimes I_2 = \lambda. \text{chain}(I_1, I_2)$$
 
-**最坏情况分析**：
-$$T_{worst}(n) = \max_{|x| = n} T(x)$$
+**定理 4.1** (组合结合性)
+迭代器组合满足结合律：
+$$(I_1 \otimes I_2) \otimes I_3 = I_1 \otimes (I_2 \otimes I_3)$$
 
-**平均情况分析**：
-$$T_{avg}(n) = \sum_{|x| = n} P(x) \cdot T(x)$$
+### 4.3 惰性求值
 
-**最好情况分析**：
-$$T_{best}(n) = \min_{|x| = n} T(x)$$
+**定义 4.4** (惰性求值)
+惰性求值定义为：
+$$\text{Lazy}[e] = \lambda. e$$
 
-### 4.2 优化技术
+**定理 4.2** (惰性求值正确性)
+惰性求值不会改变算法的语义，但可能改变执行顺序。
 
-**循环优化**：
+## 5. 排序算法
+
+### 5.1 排序特征
+
+**定义 5.1** (排序特征)
+排序特征定义为：
 
 ```rust
-// 循环展开
-fn optimized_sum(data: &[i32]) -> i32 {
-    let mut sum = 0;
-    let mut i = 0;
-    
-    // 展开4次循环
-    while i + 3 < data.len() {
-        sum += data[i] + data[i + 1] + data[i + 2] + data[i + 3];
-        i += 4;
-    }
-    
-    // 处理剩余元素
-    while i < data.len() {
-        sum += data[i];
-        i += 1;
-    }
-    
-    sum
+trait Sorter {
+    fn sort<T: Ord>(&self, slice: &mut [T]);
 }
 ```
 
-**内存优化**：
+**定义 5.2** (排序正确性)
+排序算法 $S$ 是正确的，当且仅当：
+$$\forall x: [\tau]: \text{is\_sorted}(S(x)) \land \text{permutation}(S(x), x)$$
+
+### 5.2 快速排序
+
+**算法 5.1** (快速排序)
 
 ```rust
-// 缓存友好的矩阵乘法
-fn cache_friendly_multiply(a: &[[f64; N]; N], b: &[[f64; N]; N]) -> [[f64; N]; N] {
-    let mut result = [[0.0; N]; N];
-    
-    for i in 0..N {
-        for k in 0..N {
-            for j in 0..N {
-                result[i][j] += a[i][k] * b[k][j];
-            }
-        }
-    }
-    
-    result
-}
-```
-
-### 4.3 算法选择
-
-**选择标准**：
-
-1. **时间复杂度**：优先选择低复杂度算法
-2. **空间复杂度**：考虑内存限制
-3. **实现复杂度**：权衡开发和维护成本
-4. **稳定性**：考虑输入数据特征
-
-**选择策略**：
-
-```rust
-pub trait AlgorithmSelector<T> {
-    fn select_algorithm(&self, input: &[T], constraints: &Constraints) -> Box<dyn Algorithm<T>> {
-        match (input.len(), constraints) {
-            (n, _) if n < 10 => Box::new(InsertionSort),
-            (n, _) if n < 1000 => Box::new(QuickSort),
-            (_, Constraints { memory: Memory::Limited, .. }) => Box::new(HeapSort),
-            _ => Box::new(MergeSort),
-        }
-    }
-}
-```
-
-## 5. 并行算法
-
-### 5.1 并行模型
-
-**PRAM模型**：
-
-- 共享内存多处理器模型
-- 处理器数量：$P$
-- 时间复杂度：$T(n, P)$
-- 加速比：$S(n, P) = T_{seq}(n) / T_{par}(n, P)$
-
-**工作深度模型**：
-
-- 工作：$W(n)$ - 总计算量
-- 深度：$D(n)$ - 关键路径长度
-- 并行时间：$T(n, P) = O(W(n)/P + D(n))$
-
-### 5.2 并行算法设计
-
-**分治并行**：
-
-```rust
-use rayon::prelude::*;
-
-pub trait ParallelDivideAndConquer<T> {
-    fn solve_parallel(&self, input: &[T]) -> T {
-        if input.len() < self.parallel_threshold() {
-            self.solve_sequential(input)
-        } else {
-            let (left, right) = self.divide(input);
-            let (left_result, right_result) = rayon::join(
-                || self.solve_parallel(left),
-                || self.solve_parallel(right)
-            );
-            self.combine(left_result, right_result)
-        }
-    }
-    
-    fn parallel_threshold(&self) -> usize;
-    fn solve_sequential(&self, input: &[T]) -> T;
-    fn divide(&self, input: &[T]) -> (&[T], &[T]);
-    fn combine(&self, left: T, right: T) -> T;
-}
-```
-
-**Map-Reduce模式**：
-
-```rust
-pub trait MapReduce<T, U, R> {
-    fn map_reduce(&self, input: &[T]) -> R {
-        let mapped: Vec<U> = input.par_iter()
-            .map(|x| self.map(x))
-            .collect();
-        
-        let reduced = mapped.par_iter()
-            .fold(|| self.identity(), |acc, x| self.reduce(acc, x))
-            .reduce(|| self.identity(), |acc, x| self.reduce(acc, x));
-        
-        reduced
-    }
-    
-    fn map(&self, input: &T) -> U;
-    fn reduce(&self, acc: R, value: &U) -> R;
-    fn identity(&self) -> R;
-}
-```
-
-### 5.3 并行排序
-
-**并行归并排序**：
-
-```rust
-pub fn parallel_merge_sort<T: Ord + Send + Sync>(data: &mut [T]) {
-    if data.len() <= 1 {
+fn quicksort<T: Ord>(slice: &mut [T]) {
+    if slice.len() <= 1 {
         return;
     }
     
-    let mid = data.len() / 2;
-    let (left, right) = data.split_at_mut(mid);
-    
-    rayon::join(
-        || parallel_merge_sort(left),
-        || parallel_merge_sort(right)
-    );
-    
-    merge_in_place(data, mid);
+    let pivot = partition(slice);
+    quicksort(&mut slice[..pivot]);
+    quicksort(&mut slice[pivot + 1..]);
 }
 
-fn merge_in_place<T: Ord>(data: &mut [T], mid: usize) {
-    // 原地归并实现
-    let mut i = 0;
-    let mut j = mid;
-    
-    while i < j && j < data.len() {
-        if data[i] <= data[j] {
-            i += 1;
-        } else {
-            data[i..=j].rotate_right(1);
-            i += 1;
-            j += 1;
-        }
-    }
-}
-```
-
-## 6. 形式化证明
-
-### 6.1 算法正确性定理
-
-**定理 6.1** (算法正确性)：
-如果算法 $A$ 满足前置条件 $P$ 和后置条件 $Q$，那么 $A$ 是正确的。
-
-**证明**：
-通过结构归纳法证明：
-
-1. **基础情况**：简单算法直接验证
-2. **归纳步骤**：复杂算法分解为子算法
-
-### 6.2 复杂度分析定理
-
-**定理 6.2** (分治复杂度)：
-对于分治算法，如果 $f(n) = O(n^d)$ 且 $a < b^d$，则 $T(n) = O(n^d)$。
-
-**证明**：
-使用主定理：
-$$T(n) = a \cdot T(n/b) + f(n)$$
-如果 $f(n) = O(n^d)$ 且 $a < b^d$，则 $T(n) = O(n^d)$。
-
-### 6.3 并行加速比定理
-
-**定理 6.3** (Amdahl定律)：
-如果程序的可并行部分比例为 $p$，则最大加速比为：
-$$S_{max} = \frac{1}{1 - p + p/P}$$
-
-**证明**：
-
-1. 串行时间：$T_s = T_{seq} + T_{par}$
-2. 并行时间：$T_p = T_{seq} + T_{par}/P$
-3. 加速比：$S = T_s / T_p = \frac{1}{1 - p + p/P}$
-
-### 6.4 贪心正确性定理
-
-**定理 6.4** (贪心选择性质)：
-如果问题满足贪心选择性质，则贪心算法产生最优解。
-
-**证明**：
-
-1. 假设贪心解不是最优解
-2. 构造最优解与贪心解的差异
-3. 利用贪心选择性质证明矛盾
-4. 因此贪心解是最优解
-
-## 7. 应用与实现
-
-### 7.1 排序算法
-
-**快速排序**：
-
-```rust
-pub fn quicksort<T: Ord>(data: &mut [T]) {
-    if data.len() <= 1 {
-        return;
-    }
-    
-    let pivot_index = partition(data);
-    quicksort(&mut data[..pivot_index]);
-    quicksort(&mut data[pivot_index + 1..]);
-}
-
-fn partition<T: Ord>(data: &mut [T]) -> usize {
-    let pivot = data.len() - 1;
+fn partition<T: Ord>(slice: &mut [T]) -> usize {
+    let pivot = slice.len() - 1;
     let mut i = 0;
     
     for j in 0..pivot {
-        if data[j] <= data[pivot] {
-            data.swap(i, j);
+        if slice[j] <= slice[pivot] {
+            slice.swap(i, j);
             i += 1;
         }
     }
     
-    data.swap(i, pivot);
+    slice.swap(i, pivot);
     i
 }
 ```
 
-**归并排序**：
+**定理 5.1** (快速排序复杂度)
+快速排序的平均时间复杂度为 $O(n \log n)$，最坏情况为 $O(n^2)$。
+
+**证明**:
+
+1. 平均情况下，每次分割将数组分为两半
+2. 递归深度为 $\log n$
+3. 每层需要 $O(n)$ 时间
+4. 因此总时间为 $O(n \log n)$
+
+### 5.3 归并排序
+
+**算法 5.2** (归并排序)
 
 ```rust
-pub fn merge_sort<T: Ord + Clone>(data: &[T]) -> Vec<T> {
-    if data.len() <= 1 {
-        return data.to_vec();
+fn mergesort<T: Ord + Clone>(slice: &mut [T]) {
+    if slice.len() <= 1 {
+        return;
     }
     
-    let mid = data.len() / 2;
-    let left = merge_sort(&data[..mid]);
-    let right = merge_sort(&data[mid..]);
+    let mid = slice.len() / 2;
+    let (left, right) = slice.split_at_mut(mid);
     
-    merge(left, right)
+    mergesort(left);
+    mergesort(right);
+    merge(slice, left, right);
 }
 
-fn merge<T: Ord>(left: Vec<T>, right: Vec<T>) -> Vec<T> {
-    let mut result = Vec::with_capacity(left.len() + right.len());
+fn merge<T: Ord + Clone>(slice: &mut [T], left: &[T], right: &[T]) {
     let mut i = 0;
     let mut j = 0;
+    let mut k = 0;
     
     while i < left.len() && j < right.len() {
         if left[i] <= right[j] {
-            result.push(left[i].clone());
+            slice[k] = left[i].clone();
             i += 1;
         } else {
-            result.push(right[j].clone());
+            slice[k] = right[j].clone();
             j += 1;
         }
+        k += 1;
     }
     
-    result.extend_from_slice(&left[i..]);
-    result.extend_from_slice(&right[j..]);
-    result
+    // 复制剩余元素
+    while i < left.len() {
+        slice[k] = left[i].clone();
+        i += 1;
+        k += 1;
+    }
+    
+    while j < right.len() {
+        slice[k] = right[j].clone();
+        j += 1;
+        k += 1;
+    }
 }
 ```
 
-### 7.2 图算法
+**定理 5.2** (归并排序复杂度)
+归并排序的时间复杂度为 $O(n \log n)$，空间复杂度为 $O(n)$。
 
-**深度优先搜索**：
+## 6. 搜索算法
+
+### 6.1 线性搜索
+
+**算法 6.1** (线性搜索)
 
 ```rust
-use std::collections::HashSet;
-
-pub fn dfs<T: Eq + Hash + Clone>(
-    graph: &HashMap<T, Vec<T>>,
-    start: T,
-    visited: &mut HashSet<T>,
-) -> Vec<T> {
-    let mut result = Vec::new();
-    let mut stack = vec![start];
-    
-    while let Some(node) = stack.pop() {
-        if visited.insert(node.clone()) {
-            result.push(node.clone());
-            
-            if let Some(neighbors) = graph.get(&node) {
-                for neighbor in neighbors.iter().rev() {
-                    if !visited.contains(neighbor) {
-                        stack.push(neighbor.clone());
-                    }
-                }
-            }
+fn linear_search<T: PartialEq>(slice: &[T], target: &T) -> Option<usize> {
+    for (i, item) in slice.iter().enumerate() {
+        if item == target {
+            return Some(i);
         }
     }
-    
-    result
+    None
 }
 ```
 
-**Dijkstra算法**：
+**定理 6.1** (线性搜索复杂度)
+线性搜索的时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+### 6.2 二分搜索
+
+**算法 6.2** (二分搜索)
 
 ```rust
-use std::collections::{BinaryHeap, HashMap};
-use std::cmp::Ordering;
-
-#[derive(Eq, PartialEq)]
-struct State {
-    cost: i32,
-    node: usize,
-}
-
-impl Ord for State {
-    fn cmp(&self, other: &Self) -> Ordering {
-        other.cost.cmp(&self.cost)
-    }
-}
-
-impl PartialOrd for State {
-    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        Some(self.cmp(other))
-    }
-}
-
-pub fn dijkstra(graph: &[Vec<(usize, i32)>], start: usize) -> Vec<i32> {
-    let mut distances = vec![i32::MAX; graph.len()];
-    distances[start] = 0;
+fn binary_search<T: Ord>(slice: &[T], target: &T) -> Option<usize> {
+    let mut left = 0;
+    let mut right = slice.len();
     
-    let mut heap = BinaryHeap::new();
-    heap.push(State { cost: 0, node: start });
-    
-    while let Some(State { cost, node }) = heap.pop() {
-        if cost > distances[node] {
-            continue;
-        }
+    while left < right {
+        let mid = left + (right - left) / 2;
         
-        for &(neighbor, weight) in &graph[node] {
-            let new_cost = cost + weight;
-            if new_cost < distances[neighbor] {
-                distances[neighbor] = new_cost;
-                heap.push(State { cost: new_cost, node: neighbor });
-            }
+        match slice[mid].cmp(target) {
+            std::cmp::Ordering::Equal => return Some(mid),
+            std::cmp::Ordering::Less => left = mid + 1,
+            std::cmp::Ordering::Greater => right = mid,
         }
     }
     
-    distances
+    None
 }
 ```
 
-### 7.3 动态规划
+**定理 6.2** (二分搜索复杂度)
+二分搜索的时间复杂度为 $O(\log n)$，空间复杂度为 $O(1)$。
 
-**最长公共子序列**：
+**证明**:
+
+1. 每次迭代将搜索空间减半
+2. 最多需要 $\log n$ 次迭代
+3. 每次迭代需要常数时间
+4. 因此总时间为 $O(\log n)$
+
+## 7. 图算法
+
+### 7.1 图表示
+
+**定义 7.1** (图)
+图 $G = (V, E)$ 定义为：
+
+- $V$ 是顶点集合
+- $E \subseteq V \times V$ 是边集合
+
+**定义 7.2** (图表示)
 
 ```rust
-pub fn longest_common_subsequence(s1: &str, s2: &str) -> String {
-    let chars1: Vec<char> = s1.chars().collect();
-    let chars2: Vec<char> = s2.chars().collect();
-    let m = chars1.len();
-    let n = chars2.len();
+struct Graph {
+    vertices: Vec<Vertex>,
+    edges: Vec<Edge>,
+}
+
+struct Vertex {
+    id: usize,
+    data: String,
+}
+
+struct Edge {
+    from: usize,
+    to: usize,
+    weight: f64,
+}
+```
+
+### 7.2 深度优先搜索
+
+**算法 7.1** (深度优先搜索)
+
+```rust
+fn dfs(graph: &Graph, start: usize, visited: &mut Vec<bool>) {
+    visited[start] = true;
+    println!("访问顶点: {}", start);
     
+    for edge in &graph.edges {
+        if edge.from == start && !visited[edge.to] {
+            dfs(graph, edge.to, visited);
+        }
+    }
+}
+```
+
+**定理 7.1** (DFS复杂度)
+深度优先搜索的时间复杂度为 $O(|V| + |E|)$。
+
+### 7.3 广度优先搜索
+
+**算法 7.2** (广度优先搜索)
+
+```rust
+use std::collections::VecDeque;
+
+fn bfs(graph: &Graph, start: usize) {
+    let mut visited = vec![false; graph.vertices.len()];
+    let mut queue = VecDeque::new();
+    
+    visited[start] = true;
+    queue.push_back(start);
+    
+    while let Some(vertex) = queue.pop_front() {
+        println!("访问顶点: {}", vertex);
+        
+        for edge in &graph.edges {
+            if edge.from == vertex && !visited[edge.to] {
+                visited[edge.to] = true;
+                queue.push_back(edge.to);
+            }
+        }
+    }
+}
+```
+
+**定理 7.2** (BFS复杂度)
+广度优先搜索的时间复杂度为 $O(|V| + |E|)$。
+
+## 8. 动态规划
+
+### 8.1 动态规划原理
+
+**定义 8.1** (最优子结构)
+问题具有最优子结构，如果最优解包含子问题的最优解。
+
+**定义 8.2** (重叠子问题)
+问题具有重叠子问题，如果递归算法重复解决相同的子问题。
+
+### 8.2 斐波那契数列
+
+**算法 8.1** (动态规划斐波那契)
+
+```rust
+fn fibonacci_dp(n: usize) -> u64 {
+    if n <= 1 {
+        return n as u64;
+    }
+    
+    let mut dp = vec![0; n + 1];
+    dp[0] = 0;
+    dp[1] = 1;
+    
+    for i in 2..=n {
+        dp[i] = dp[i - 1] + dp[i - 2];
+    }
+    
+    dp[n]
+}
+```
+
+**定理 8.1** (斐波那契复杂度)
+动态规划斐波那契的时间复杂度为 $O(n)$，空间复杂度为 $O(n)$。
+
+### 8.3 最长公共子序列
+
+**算法 8.2** (最长公共子序列)
+
+```rust
+fn lcs(s1: &str, s2: &str) -> usize {
+    let m = s1.len();
+    let n = s2.len();
     let mut dp = vec![vec![0; n + 1]; m + 1];
     
     for i in 1..=m {
         for j in 1..=n {
-            if chars1[i - 1] == chars2[j - 1] {
+            if s1.chars().nth(i - 1) == s2.chars().nth(j - 1) {
                 dp[i][j] = dp[i - 1][j - 1] + 1;
             } else {
                 dp[i][j] = dp[i - 1][j].max(dp[i][j - 1]);
@@ -585,51 +458,246 @@ pub fn longest_common_subsequence(s1: &str, s2: &str) -> String {
         }
     }
     
-    // 重建序列
-    let mut result = String::new();
-    let mut i = m;
-    let mut j = n;
-    
-    while i > 0 && j > 0 {
-        if chars1[i - 1] == chars2[j - 1] {
-            result.insert(0, chars1[i - 1]);
-            i -= 1;
-            j -= 1;
-        } else if dp[i - 1][j] > dp[i][j - 1] {
-            i -= 1;
-        } else {
-            j -= 1;
-        }
-    }
-    
-    result
+    dp[m][n]
 }
 ```
 
-## 8. 参考文献
+**定理 8.2** (LCS复杂度)
+最长公共子序列算法的时间复杂度为 $O(mn)$，空间复杂度为 $O(mn)$。
 
-1. **算法理论**
+## 9. 并行算法
+
+### 9.1 并行计算模型
+
+**定义 9.1** (PRAM模型)
+PRAM (Parallel Random Access Machine) 模型定义为：
+
+- $p$ 个处理器
+- 共享内存
+- 同步执行
+
+**定义 9.2** (并行复杂度)
+并行算法的时间复杂度定义为：
+$$T_p(n) = \frac{T_1(n)}{p} + \text{同步开销}$$
+
+### 9.2 并行归并排序
+
+**算法 9.1** (并行归并排序)
+
+```rust
+use rayon::prelude::*;
+
+fn parallel_mergesort<T: Ord + Send + Sync>(slice: &mut [T]) {
+    if slice.len() <= 1 {
+        return;
+    }
+    
+    let mid = slice.len() / 2;
+    let (left, right) = slice.split_at_mut(mid);
+    
+    // 并行递归
+    rayon::join(
+        || parallel_mergesort(left),
+        || parallel_mergesort(right)
+    );
+    
+    merge(slice, left, right);
+}
+```
+
+**定理 9.1** (并行归并排序复杂度)
+并行归并排序的时间复杂度为 $O(\frac{n \log n}{p} + \log p)$。
+
+### 9.3 并行前缀和
+
+**算法 9.2** (并行前缀和)
+
+```rust
+fn parallel_prefix_sum(slice: &mut [i32]) {
+    let n = slice.len();
+    
+    // 向上扫描
+    for d in 0..(n as f64).log2().ceil() as usize {
+        let stride = 1 << d;
+        slice.par_iter_mut().skip(stride).for_each(|x| {
+            *x += slice[x - stride];
+        });
+    }
+    
+    // 向下扫描
+    for d in (0..(n as f64).log2().ceil() as usize).rev() {
+        let stride = 1 << d;
+        slice.par_iter_mut().skip(stride).for_each(|x| {
+            *x += slice[x - stride];
+        });
+    }
+}
+```
+
+**定理 9.2** (并行前缀和复杂度)
+并行前缀和的时间复杂度为 $O(\frac{n}{p} + \log n)$。
+
+## 10. 形式化证明
+
+### 10.1 算法正确性证明
+
+**定理 10.1** (排序算法正确性)
+如果排序算法 $S$ 满足以下条件，则 $S$ 是正确的：
+
+1. **终止性**: $S$ 对所有输入都终止
+2. **排序性**: $S(x)$ 是有序的
+3. **排列性**: $S(x)$ 是 $x$ 的排列
+
+**证明**:
+通过结构归纳法：
+
+1. 基础情况：空数组和单元素数组
+2. 归纳步骤：分割和合并保持性质
+3. 因此算法对所有输入都正确
+
+### 10.2 复杂度分析
+
+**定理 10.2** (分治算法复杂度)
+如果分治算法满足：
+
+- 分割时间：$O(n)$
+- 递归调用：$a$ 个子问题，每个大小为 $\frac{n}{b}$
+- 合并时间：$O(n^k)$
+
+则总复杂度为：
+$$T(n) = \begin{cases}
+O(n^k) & \text{if } a < b^k \\
+O(n^k \log n) & \text{if } a = b^k \\
+O(n^{\log_b a}) & \text{if } a > b^k
+\end{cases}$$
+
+### 10.3 并行算法分析
+
+**定理 10.3** (并行算法加速比)
+并行算法的加速比定义为：
+$$S_p = \frac{T_1}{T_p}$$
+
+其中 $T_1$ 是串行时间，$T_p$ 是并行时间。
+
+**定理 10.4** (Amdahl定律)
+如果程序中有 $f$ 比例的部分必须串行执行，则最大加速比为：
+$$S_{\max} = \frac{1}{f}$$
+
+## 11. 应用实例
+
+### 11.1 排序算法比较
+
+```rust
+use std::time::Instant;
+
+fn benchmark_sorting() {
+    let mut data: Vec<i32> = (0..10000).rev().collect();
+
+    // 测试快速排序
+    let mut quick_data = data.clone();
+    let start = Instant::now();
+    quicksort(&mut quick_data);
+    let quick_time = start.elapsed();
+
+    // 测试归并排序
+    let mut merge_data = data.clone();
+    let start = Instant::now();
+    mergesort(&mut merge_data);
+    let merge_time = start.elapsed();
+
+    println!("快速排序时间: {:?}", quick_time);
+    println!("归并排序时间: {:?}", merge_time);
+}
+```
+
+### 11.2 图算法应用
+
+```rust
+fn graph_analysis() {
+    let mut graph = Graph::new();
+
+    // 添加顶点
+    graph.add_vertex(0, "A".to_string());
+    graph.add_vertex(1, "B".to_string());
+    graph.add_vertex(2, "C".to_string());
+
+    // 添加边
+    graph.add_edge(0, 1, 1.0);
+    graph.add_edge(1, 2, 2.0);
+    graph.add_edge(0, 2, 3.0);
+
+    // 执行DFS
+    let mut visited = vec![false; graph.vertices.len()];
+    dfs(&graph, 0, &mut visited);
+
+    // 执行BFS
+    bfs(&graph, 0);
+}
+```
+
+### 11.3 并行算法应用
+
+```rust
+use rayon::prelude::*;
+
+fn parallel_processing() {
+    let data: Vec<i32> = (0..1000000).collect();
+
+    // 并行计算平方和
+    let sum: i64 = data.par_iter()
+        .map(|&x| (x * x) as i64)
+        .sum();
+
+    println!("平方和: {}", sum);
+
+    // 并行查找最大值
+    let max = data.par_iter().max().unwrap();
+    println!("最大值: {}", max);
+}
+```
+
+## 12. 参考文献
+
+### 12.1 算法理论
+
+1. **算法设计**
    - Cormen, T. H., et al. (2009). "Introduction to Algorithms"
    - Knuth, D. E. (1997). "The Art of Computer Programming"
 
-2. **算法设计**
-   - Kleinberg, J., & Tardos, É. (2006). "Algorithm Design"
-   - Dasgupta, S., Papadimitriou, C., & Vazirani, U. (2008). "Algorithms"
+2. **复杂度理论**
+   - Papadimitriou, C. H. (1994). "Computational Complexity"
+   - Arora, S., & Barak, B. (2009). "Computational Complexity: A Modern Approach"
 
 3. **并行算法**
    - Jájá, J. (1992). "An Introduction to Parallel Algorithms"
-   - Leiserson, C. E. (1992). "Introduction to Parallel Algorithms and Architectures"
+   - Leighton, F. T. (1992). "Introduction to Parallel Algorithms and Architectures"
 
-4. **复杂度理论**
-   - Arora, S., & Barak, B. (2009). "Computational Complexity: A Modern Approach"
-   - Papadimitriou, C. H. (1994). "Computational Complexity"
+### 12.2 Rust相关
 
-5. **Rust算法实现**
-   - The Rust Programming Language Book
-   - The Rust Reference
+1. **Rust算法实现**
+   - The Rust Standard Library - Algorithms
+   - The Rust Book - Iterators
+
+2. **性能优化**
+   - The Rust Performance Book
+   - Rust Compiler Internals
+
+3. **并行编程**
+   - Rayon Documentation
+   - Crossbeam Documentation
+
+### 12.3 形式化方法
+
+1. **程序验证**
+   - Winskel, G. (1993). "The Formal Semantics of Programming Languages"
+   - Nielson, F., Nielson, H. R., & Hankin, C. (2015). "Principles of Program Analysis"
+
+2. **类型理论**
+   - Pierce, B. C. (2002). "Types and Programming Languages"
+   - Reynolds, J. C. (1983). "Types, abstraction and parametric polymorphism"
 
 ---
 
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  
-**状态**: 完成
+**状态**: 完成 - Rust算法系统形式化理论构建完成

@@ -46,6 +46,7 @@ $$L \subseteq \Sigma^*$$
 $$ChomskyHierarchy = \{ Type_0, Type_1, Type_2, Type_3 \}$$
 
 其中：
+
 - $Type_0$: 无限制文法（图灵完备）
 - $Type_1$: 上下文相关文法
 - $Type_2$: 上下文无关文法
@@ -61,12 +62,14 @@ $$ChomskyHierarchy = \{ Type_0, Type_1, Type_2, Type_3 \}$$
 $$G = (V, \Sigma, R, S)$$
 
 其中：
+
 - $V$: 非终结符集合
 - $\Sigma$: 终结符集合
 - $R$: 产生式规则集合
 - $S$: 起始符号
 
 **示例 2.1** (Rust表达式语法):
+
 ```rust
 // Rust表达式的CFG表示
 // expr ::= literal
@@ -93,6 +96,7 @@ $$expr \rightarrow literal \mid identifier \mid expr \oplus expr \mid \ominus ex
 $$Logic \cong TypeSystem$$
 
 **同构映射**:
+
 - 命题 $\leftrightarrow$ 类型
 - 证明 $\leftrightarrow$ 程序
 - 逻辑蕴含 $\leftrightarrow$ 函数类型
@@ -100,6 +104,7 @@ $$Logic \cong TypeSystem$$
 - 逻辑析取 $\leftrightarrow$ 和类型
 
 **示例 3.1**:
+
 ```rust
 // 逻辑与类型的对应关系
 type True = (); // 永真命题
@@ -134,6 +139,7 @@ fn exists<T: Display>(x: T) -> impl Display {
 $$C = (Ob(C), Hom(C), \circ, id)$$
 
 其中：
+
 - $Ob(C)$: 对象集合
 - $Hom(C)$: 态射集合
 - $\circ$: 复合运算
@@ -144,6 +150,7 @@ $$F: Ob(C) \rightarrow Ob(D)$$
 $$F: Hom(C) \rightarrow Hom(D)$$
 
 **示例 3.2**:
+
 ```rust
 // 范畴论中的函子(Functor)在Rust中的实现
 trait Functor<A, B> {
@@ -194,6 +201,7 @@ impl<A> Monad<A> for Option<A> {
 $$T = (Types, Rules, Judgments)$$
 
 其中：
+
 - $Types$: 类型集合
 - $Rules$: 类型规则集合
 - $Judgments$: 类型判断集合
@@ -201,6 +209,7 @@ $$T = (Types, Rules, Judgments)$$
 **定义 3.5** (类型判断): 类型判断 $\Gamma \vdash e : \tau$ 表示在上下文 $\Gamma$ 中表达式 $e$ 具有类型 $\tau$。
 
 **类型规则示例**:
+
 ```math
 \frac{\Gamma \vdash e_1 : \tau_1 \rightarrow \tau_2 \quad \Gamma \vdash e_2 : \tau_1}{\Gamma \vdash e_1(e_2) : \tau_2} \text{ (应用规则)}
 ```
@@ -214,6 +223,7 @@ $$T = (Types, Rules, Judgments)$$
 ### 4.1 λ演算
 
 **定义 4.1** (λ演算): λ演算是一个形式系统，包含：
+
 - 变量：$x, y, z, ...$
 - 抽象：$\lambda x.M$
 - 应用：$MN$
@@ -222,6 +232,7 @@ $$T = (Types, Rules, Judgments)$$
 $$(\lambda x.M)N \rightarrow_\beta M[x := N]$$
 
 **示例 4.1** (Rust闭包与λ演算):
+
 ```rust
 // λ演算表达式: λx.x + 1
 let add_one = |x| x + 1;
@@ -247,6 +258,7 @@ $$(s, e) \rightarrow (s', e')$$
 其中 $s$ 是状态，$e$ 是表达式。
 
 **定义 4.4** (小步语义): 小步语义规则：
+
 ```math
 \frac{e_1 \rightarrow e_1'}{e_1 + e_2 \rightarrow e_1' + e_2} \text{ (左规约)}
 ```
@@ -265,6 +277,7 @@ $$(s, e) \rightarrow (s', e')$$
 $$\llbracket e \rrbracket : Environment \rightarrow Value$$
 
 **示例 4.2**:
+
 ```rust
 // 指称语义示例
 trait DenotationalSemantics {
@@ -295,6 +308,7 @@ impl DenotationalSemantics for Expression {
 ### 5.1 霍尔逻辑
 
 **定义 5.1** (霍尔三元组): 霍尔三元组 $\{P\}C\{Q\}$ 表示：
+
 - $P$: 前置条件
 - $C$: 程序
 - $Q$: 后置条件
@@ -311,6 +325,7 @@ $$\frac{\{P\}C_1\{R\} \quad \{R\}C_2\{Q\}}{\{P\}C_1;C_2\{Q\}}$$
 $$\frac{\{P \land B\}C_1\{Q\} \quad \{P \land \neg B\}C_2\{Q\}}{\{P\}\text{if }B\text{ then }C_1\text{ else }C_2\{Q\}}$$
 
 **示例 5.1**:
+
 ```rust
 // 霍尔逻辑验证示例
 fn factorial(n: u32) -> u32 {
@@ -343,6 +358,7 @@ $$\{P * Q\} \text{ alloc}(x) \{P * Q * x \mapsto \_\}$$
 $$\{P * x \mapsto v\} \text{ free}(x) \{P\}$$
 
 **示例 5.2**:
+
 ```rust
 // 分离逻辑在Rust中的应用
 fn safe_pointer_operation(ptr: &mut i32) {
@@ -370,11 +386,13 @@ fn safe_pointer_operation(ptr: &mut i32) {
 $$QTS = (Qubit, Gate, Measurement)$$
 
 其中：
+
 - $Qubit$: 量子比特类型
 - $Gate$: 量子门操作
 - $Measurement$: 测量操作
 
 **示例 6.1**:
+
 ```rust
 // 量子计算的Rust模拟
 trait Qubit {
@@ -402,6 +420,7 @@ impl QuantumCircuit {
 $$BioSeq = (DNA, RNA, Protein)$$
 
 **示例 6.2**:
+
 ```rust
 // 生物信息学的类型安全表示
 #[derive(Debug, Clone)]
@@ -451,6 +470,7 @@ $$Language \rightarrow Cognition$$
 $$Knowledge = Construction(Experience, Reflection)$$
 
 **示例 7.1**:
+
 ```rust
 // 构造主义在Rust中的体现
 // 通过类型构造理解程序结构
@@ -499,6 +519,7 @@ $$DomainModel \cong LanguageModel$$
 **定理 8.1** (类型安全): Rust类型系统保证类型安全。
 
 **证明**: 通过以下机制实现：
+
 1. 静态类型检查
 2. 借用检查器
 3. 生命周期分析
@@ -508,6 +529,7 @@ $$DomainModel \cong LanguageModel$$
 **定理 8.2** (内存安全): Rust所有权系统保证内存安全。
 
 **证明**: 通过以下机制实现：
+
 1. 所有权规则
 2. 借用规则
 3. 生命周期约束
@@ -517,6 +539,7 @@ $$DomainModel \cong LanguageModel$$
 **定理 8.3** (并发安全): Rust类型系统保证并发安全。
 
 **证明**: 通过以下机制实现：
+
 1. 发送和同步trait
 2. 借用检查器
 3. 类型系统约束
@@ -526,6 +549,7 @@ $$DomainModel \cong LanguageModel$$
 **定理 8.4** (表达力): Rust具有足够的表达力表示复杂系统。
 
 **证明**: 通过以下机制实现：
+
 1. 泛型系统
 2. trait系统
 3. 宏系统
