@@ -33,6 +33,7 @@ Rust的泛型系统是其类型系统的核心组成部分，基于参数多态�
 ### 1.3 符号约定
 
 **泛型系统符号**:
+
 - $\alpha, \beta, \gamma$: 类型参数
 - $\forall$: 全称量词
 - $\exists$: 存在量词
@@ -41,6 +42,7 @@ Rust的泛型系统是其类型系统的核心组成部分，基于参数多态�
 - $\Sigma$: 依赖和类型
 
 **范畴论符号**:
+
 - $\mathcal{C}$: 范畴
 - $\text{Ob}(\mathcal{C})$: 对象集合
 - $\text{Mor}(\mathcal{C})$: 态射集合
@@ -49,6 +51,7 @@ Rust的泛型系统是其类型系统的核心组成部分，基于参数多态�
 - $\circ$: 态射复合
 
 **类型系统符号**:
+
 - $\tau, \sigma$: 类型
 - $\Gamma$: 类型环境
 - $\vdash$: 类型判断
@@ -67,13 +70,14 @@ $$\text{Polymorphic}(\alpha) = \forall \alpha. \tau(\alpha)$$
 $$\Lambda \alpha. \tau = \lambda \alpha. \tau$$
 
 **定义 2.3** (类型应用): 类型应用定义为：
-$$(\Lambda \alpha. \tau)[\sigma] = \tau[\sigma/\alpha]$$
+$$[\Lambda \alpha. \tau](\sigma) = \tau[\sigma/\alpha]$$
 
 ### 2.2 范畴论基础
 
 **定义 2.4** (类型范畴): 类型范畴 $\mathcal{C}_{\text{Type}}$ 定义为：
 $$\mathcal{C}_{\text{Type}} = (\text{Type}, \text{Function}, \circ, \text{id})$$
 其中：
+
 - $\text{Type}$: 类型集合
 - $\text{Function}$: 函数类型集合
 - $\circ$: 函数复合
@@ -104,11 +108,13 @@ $$\frac{\Gamma[\alpha] \vdash e : \tau}{\Gamma \vdash \Lambda \alpha. e : \foral
 $$\frac{\Gamma \vdash e : \forall \alpha. \tau \quad \Gamma \vdash \sigma : \text{Type}}{\Gamma \vdash e[\sigma] : \tau[\sigma/\alpha]}$$
 
 **示例 3.1** (恒等函数):
+
 ```rust
 fn identity<T>(x: T) -> T {
     x
 }
 ```
+
 形式化表示为：
 $$\text{identity} : \forall \alpha. \alpha \rightarrow \alpha$$
 
@@ -121,12 +127,14 @@ $$T : \forall \alpha_1, \ldots, \alpha_n. \text{Type}$$
 $$\frac{\Gamma[\alpha_1, \ldots, \alpha_n] \vdash \tau : \text{Type}}{\Gamma \vdash \Lambda \alpha_1, \ldots, \alpha_n. \tau : \forall \alpha_1, \ldots, \alpha_n. \text{Type}}$$
 
 **示例 3.2** (泛型结构体):
+
 ```rust
 struct Point<T> {
     x: T,
     y: T,
 }
 ```
+
 形式化表示为：
 $$\text{Point} : \forall \alpha. \text{Struct}\{x: \alpha, y: \alpha\}$$
 
@@ -150,11 +158,13 @@ $$S[\alpha_1, \ldots, \alpha_n] = \text{Struct}\{field_1: \tau_1, \ldots, field_
 $$\frac{\Gamma[\alpha_1, \ldots, \alpha_n] \vdash field_i : \tau_i}{\Gamma \vdash S[\alpha_1, \ldots, \alpha_n] : \text{Type}}$$
 
 **示例 4.1** (泛型容器):
+
 ```rust
 struct Container<T> {
     value: T,
 }
 ```
+
 形式化表示为：
 $$\text{Container} : \forall \alpha. \text{Struct}\{value: \alpha\}$$
 
@@ -167,12 +177,14 @@ $$E[\alpha_1, \ldots, \alpha_n] = \text{Enum}\{variant_1(\tau_1), \ldots, varian
 $$\frac{\Gamma[\alpha_1, \ldots, \alpha_n] \vdash variant_i : \tau_i}{\Gamma \vdash E[\alpha_1, \ldots, \alpha_n] : \text{Type}}$$
 
 **示例 4.2** (泛型Option):
+
 ```rust
 enum Option<T> {
     Some(T),
     None,
 }
 ```
+
 形式化表示为：
 $$\text{Option} : \forall \alpha. \text{Enum}\{\text{Some}(\alpha), \text{None}()\}$$
 
@@ -206,12 +218,14 @@ $$\alpha : T_1 \land \alpha : T_2 \land \ldots \land \alpha : T_n$$
 $$\frac{\Gamma[\alpha : T_1, \ldots, \alpha : T_n] \vdash e : \tau}{\Gamma \vdash \Lambda \alpha : T_1, \ldots, T_n. e : \forall \alpha : T_1, \ldots, T_n. \tau}$$
 
 **示例 5.1** (多重约束):
+
 ```rust
 fn process<T: Display + Debug>(item: T) {
     println!("{:?}", item);
     println!("{}", item);
 }
 ```
+
 形式化表示为：
 $$\text{process} : \forall \alpha : \text{Display} \land \text{Debug}. \alpha \rightarrow ()$$
 
@@ -236,6 +250,7 @@ $$\text{Monomorphize} : \text{GenericCode} \times \text{Type} \rightarrow \text{
 ### 6.2 单态化算法
 
 **算法 6.1** (单态化算法):
+
 ```
 function monomorphize(generic_code, type_arguments):
     for each type parameter α in generic_code:
@@ -277,6 +292,7 @@ $$F(f \circ g) = F(f) \circ F(g)$$
 $$F(\text{id}) = \text{id}$$
 
 **示例 7.2** (Option函子):
+
 ```rust
 impl<T> Option<T> {
     fn map<U, F>(self, f: F) -> Option<U>
@@ -313,6 +329,7 @@ $$\text{AssociatedType} = \text{Trait} \times \text{TypeParameter}$$
 $$\text{type } \text{Name} : \text{Bound}$$
 
 **示例 8.1** (Iterator特征):
+
 ```rust
 trait Iterator {
     type Item;
@@ -334,6 +351,7 @@ $$\frac{\Gamma \vdash T : \text{Trait} \quad \Gamma \vdash \text{AssociatedType}
 $$\text{type } \text{Name} : \text{Bound} = \text{DefaultType}$$
 
 **示例 8.2** (默认关联类型):
+
 ```rust
 trait Add<Rhs = Self> {
     type Output;
@@ -354,6 +372,7 @@ $$\eta_Y \circ F(f) = G(f) \circ \eta_X$$
 ### 9.2 自然变换示例
 
 **示例 9.1** (Option到Result的自然变换):
+
 ```rust
 fn option_to_result<T, E>(opt: Option<T>, error: E) -> Result<T, E> {
     match opt {
@@ -378,6 +397,7 @@ $$\text{Mor}(\mathcal{C}^{\mathcal{D}}) = \text{NaturalTransformations}$$
 **定理 10.1** (泛型类型安全): Rust的泛型系统保证类型安全。
 
 **证明**:
+
 1. **参数多态性**: 类型参数在编译时检查
 2. **特征约束**: 约束确保类型具有必要的行为
 3. **单态化**: 生成的具体代码保持类型安全
@@ -387,6 +407,7 @@ $$\text{Mor}(\mathcal{C}^{\mathcal{D}}) = \text{NaturalTransformations}$$
 **定理 10.2** (零成本抽象): 泛型系统提供零成本抽象。
 
 **证明**:
+
 1. **编译时检查**: 所有类型检查在编译时完成
 2. **单态化**: 运行时无类型信息开销
 3. **代码生成**: 生成优化的机器代码
@@ -396,6 +417,7 @@ $$\text{Mor}(\mathcal{C}^{\mathcal{D}}) = \text{NaturalTransformations}$$
 **定理 10.3** (表达能力): 泛型系统具有强大的表达能力。
 
 **证明**:
+
 1. **参数多态性**: 支持任意类型的抽象
 2. **特征约束**: 支持行为约束
 3. **高阶类型**: 支持类型构造器
@@ -451,6 +473,7 @@ $$\text{monomorphization}(\text{generic}) = \{\text{concrete\_code} \mid \text{t
 ---
 
 **参考文献**:
+
 1. Pierce, B. C. (2002). "Types and programming languages"
 2. Milner, R. (1978). "A theory of type polymorphism in programming"
 3. Reynolds, J. C. (1974). "Towards a theory of type structure"
@@ -458,4 +481,4 @@ $$\text{monomorphization}(\text{generic}) = \{\text{concrete\_code} \mid \text{t
 
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  
-**状态**: 完成 
+**状态**: 完成

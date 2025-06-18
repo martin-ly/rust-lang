@@ -33,6 +33,7 @@ Rust的并发编程系统是其内存安全保证的核心组成部分，通过�
 ### 1.3 符号约定
 
 **并发系统符号**:
+
 - $\mathcal{T}$: 线程集合
 - $\mathcal{M}$: 内存状态
 - $\mathcal{S}$: 同步原语
@@ -41,6 +42,7 @@ Rust的并发编程系统是其内存安全保证的核心组成部分，通过�
 - $\mathcal{R}$: 资源
 
 **时序逻辑符号**:
+
 - $\square$: 总是
 - $\diamond$: 最终
 - $\mathcal{U}$: 直到
@@ -48,6 +50,7 @@ Rust的并发编程系统是其内存安全保证的核心组成部分，通过�
 - $\mathcal{X}$: 下一个
 
 **类型系统符号**:
+
 - $\tau$: 类型
 - $\Gamma$: 类型环境
 - $\vdash$: 类型判断
@@ -61,6 +64,7 @@ Rust的并发编程系统是其内存安全保证的核心组成部分，通过�
 **定义 2.1** (并发系统): 并发系统 $\mathcal{CS}$ 定义为：
 $$\mathcal{CS} = (\mathcal{T}, \mathcal{M}, \mathcal{S}, \mathcal{C})$$
 其中：
+
 - $\mathcal{T}$: 线程集合
 - $\mathcal{M}$: 共享内存
 - $\mathcal{S}$: 同步原语集合
@@ -69,6 +73,7 @@ $$\mathcal{CS} = (\mathcal{T}, \mathcal{M}, \mathcal{S}, \mathcal{C})$$
 **定义 2.2** (线程): 线程 $t \in \mathcal{T}$ 定义为：
 $$t = (\text{id}, \text{state}, \text{program})$$
 其中：
+
 - $\text{id}$: 线程标识符
 - $\text{state}$: 线程状态
 - $\text{program}$: 线程程序
@@ -103,12 +108,14 @@ $$\text{spawn} : \text{Closure} \rightarrow \text{JoinHandle}$$
 $$\frac{\Gamma \vdash f : \text{FnOnce}() \rightarrow T \quad T : \text{Send}}{\Gamma \vdash \text{spawn}(f) : \text{JoinHandle}<T>}$$
 
 **示例 3.1** (线程创建):
+
 ```rust
 let handle = thread::spawn(|| {
     println!("Hello from thread!");
     42
 });
 ```
+
 形式化表示为：
 $$\text{spawn}(\lambda(). \text{println}("Hello") \land 42) : \text{JoinHandle}<\text{i32}>$$
 
@@ -135,6 +142,7 @@ $$\frac{\Gamma \vdash value : T}{\Gamma \vdash \text{ThreadLocal}::\text{new}(va
 **定义 4.1** (互斥锁): 互斥锁 $M$ 定义为：
 $$M = (\text{locked}, \text{owner}, \text{waiting})$$
 其中：
+
 - $\text{locked} : \text{Bool}$
 - $\text{owner} : \text{Option}<\text{ThreadId}>$
 - $\text{waiting} : \text{Queue}<\text{ThreadId}>$
@@ -154,6 +162,7 @@ $$\text{lock} : \text{Mutex}<T> \rightarrow \text{Result}<\text{MutexGuard}<T>, 
 **定义 4.3** (读写锁): 读写锁 $R$ 定义为：
 $$R = (\text{readers}, \text{writer}, \text{waiting})$$
 其中：
+
 - $\text{readers} : \text{Set}<\text{ThreadId}>$
 - $\text{writer} : \text{Option}<\text{ThreadId}>$
 - $\text{waiting} : \text{Queue}<\text{ThreadId}>$
@@ -166,6 +175,7 @@ $$\frac{\Gamma \vdash value : T}{\Gamma \vdash \text{RwLock}::\text{new}(value) 
 **定义 4.4** (条件变量): 条件变量 $C$ 定义为：
 $$C = (\text{waiting}, \text{predicate})$$
 其中：
+
 - $\text{waiting} : \text{Queue}<\text{ThreadId}>$
 - $\text{predicate} : \text{Closure} \rightarrow \text{Bool}$
 
@@ -247,7 +257,8 @@ $$\text{conflicting\_access}(t_1, t_2, x) \iff \text{access}(t_1, x) \land \text
 $$\text{detect\_race}(P) = \{\text{race} \mid \text{race} \in \text{possible\_races}(P)\}$$
 
 **算法 7.1** (静态数据竞争检测):
-```
+
+```latex
 function detect_races(program):
     for each variable x in program:
         for each thread t1, t2:
@@ -261,6 +272,7 @@ function detect_races(program):
 **定理 7.1** (所有权预防数据竞争): Rust的所有权系统预防数据竞争。
 
 **证明**:
+
 1. **唯一所有权**: 确保每个值只有一个所有者
 2. **借用规则**: 防止同时的可变借用
 3. **生命周期**: 确保引用的有效性
@@ -272,6 +284,7 @@ function detect_races(program):
 **定义 8.1** (通道): 通道 $C$ 定义为：
 $$C = (\text{sender}, \text{receiver}, \text{buffer})$$
 其中：
+
 - $\text{sender} : \text{Sender}<T>$
 - $\text{receiver} : \text{Receiver}<T>$
 - $\text{buffer} : \text{Queue}<T>$
@@ -310,7 +323,8 @@ $$\text{wait\_free} \iff \forall \text{thread}. \text{finite\_steps}(\text{threa
 ### 9.2 无锁算法
 
 **算法 9.1** (无锁栈):
-```
+
+```latex
 function push(stack, value):
     loop:
         old_head = stack.head.load(Acquire)
@@ -320,7 +334,8 @@ function push(stack, value):
 ```
 
 **算法 9.2** (无锁队列):
-```
+
+```latex
 function enqueue(queue, value):
     node = Node(value)
     loop:
@@ -350,6 +365,7 @@ $$\text{memory\_barrier}(\text{SeqCst}) \implies \text{full\_ordering}$$
 **定理 10.1** (Rust线程安全): Rust的类型系统保证线程安全。
 
 **证明**:
+
 1. **Send特征**: 确保类型可以安全地跨线程发送
 2. **Sync特征**: 确保类型可以安全地跨线程共享
 3. **所有权系统**: 防止数据竞争
@@ -360,6 +376,7 @@ $$\text{memory\_barrier}(\text{SeqCst}) \implies \text{full\_ordering}$$
 **定理 10.2** (死锁预防): Rust的类型系统预防死锁。
 
 **证明**:
+
 1. **资源管理**: RAII模式确保资源自动释放
 2. **所有权转移**: 防止资源循环等待
 3. **类型检查**: 编译时检测潜在死锁
@@ -369,6 +386,7 @@ $$\text{memory\_barrier}(\text{SeqCst}) \implies \text{full\_ordering}$$
 **定理 10.3** (零成本抽象): Rust的并发原语提供零成本抽象。
 
 **证明**:
+
 1. **编译时检查**: 所有安全检查在编译时完成
 2. **运行时开销**: 最小化运行时开销
 3. **内存布局**: 优化的内存布局
@@ -427,6 +445,7 @@ $$\text{error\_recovery} = \text{graceful\_degradation} \land \text{fault\_toler
 ---
 
 **参考文献**:
+
 1. Lamport, L. (1979). "How to make a multiprocessor computer that correctly executes multiprocess programs"
 2. Boehm, H. J. (2005). "Threads cannot be implemented as a library"
 3. Adve, S. V., & Gharachorloo, K. (1996). "Shared memory consistency models: A tutorial"
@@ -434,4 +453,4 @@ $$\text{error\_recovery} = \text{graceful\_degradation} \land \text{fault\_toler
 
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  
-**状态**: 完成 
+**状态**: 完成

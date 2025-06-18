@@ -31,6 +31,7 @@ Rust的类型系统是现代编程语言中最先进的类型系统之一，融�
 ### 1.3 符号约定
 
 **类型系统符号**:
+
 - $\tau, \sigma$: 类型
 - $\Gamma$: 类型环境
 - $\vdash$: 类型判断
@@ -41,12 +42,14 @@ Rust的类型系统是现代编程语言中最先进的类型系统之一，融�
 - $\top$: 顶部类型
 
 **代数类型符号**:
+
 - $\times$: 积类型
 - $+$: 和类型
 - $\mu$: 递归类型
 - $\lambda$: 类型抽象
 
 **型变符号**:
+
 - $\prec$: 子类型关系
 - $\sim$: 型变关系
 - $\oplus$: 协变
@@ -84,6 +87,7 @@ $$\mathcal{W}(\Gamma, e) = (\mathcal{S}, \tau)$$
 其中 $\mathcal{S}$ 是替换，$\tau$ 是推导出的类型。
 
 **算法 2.1** (Hindley-Milner类型推导):
+
 ```
 W(Γ, x) = (id, Γ(x))
 W(Γ, λx.e) = let (S1, τ1) = W(Γ[x:α], e)
@@ -142,6 +146,7 @@ $$\frac{\Gamma \vdash e : \forall \alpha. \tau}{\Gamma \vdash e : \tau[\sigma / 
 ### 4.2 类型推断算法
 
 **算法 4.1** (统一算法):
+
 ```
 unify(τ, τ) = id
 unify(α, τ) = [τ/α] if α ∉ ftv(τ)
@@ -185,6 +190,7 @@ $$\frac{\tau_2 \prec \tau_1 \quad \sigma_1 \prec \sigma_2}{\tau_1 \rightarrow \s
 **定理 5.1** (型变安全性): Rust的型变规则保证类型安全。
 
 **证明**:
+
 1. **协变安全性**: 协变允许更具体的类型替代更抽象的类型，保持类型安全
 2. **逆变安全性**: 逆变确保函数可以处理比预期更具体的类型
 3. **不变安全性**: 不变防止通过类型转换导致的内存安全问题
@@ -261,6 +267,7 @@ $$\frac{\Gamma[\alpha : T] \vdash e : \tau}{\Gamma \vdash e : \forall \alpha : T
 ### 8.3 泛型推导
 
 **算法 8.1** (泛型推导):
+
 ```
 G(Γ, e) = let (S, τ) = W(Γ, e)
           in (S, ∀α1...αn. τ)
@@ -274,6 +281,7 @@ G(Γ, e) = let (S, τ) = W(Γ, e)
 **定理 9.1** (类型安全): Rust的类型系统保证类型安全。
 
 **证明**:
+
 1. **静态检查**: 所有类型检查在编译时完成
 2. **类型推导**: Hindley-Milner算法确保类型推导的正确性
 3. **型变规则**: 型变规则确保类型转换的安全性
@@ -284,6 +292,7 @@ G(Γ, e) = let (S, τ) = W(Γ, e)
 **定理 9.2** (内存安全): Rust的类型系统保证内存安全。
 
 **证明**:
+
 1. **所有权系统**: 确保每个值有唯一所有者
 2. **借用规则**: 防止数据竞争和悬垂引用
 3. **生命周期**: 确保引用不会超过被引用数据的生命周期
@@ -294,6 +303,7 @@ G(Γ, e) = let (S, τ) = W(Γ, e)
 **定理 9.3** (并发安全): Rust的类型系统保证并发安全。
 
 **证明**:
+
 1. **借用检查**: 借用检查器确保数据竞争安全
 2. **类型系统**: 类型系统提供编译时并发安全保证
 3. **所有权**: 所有权系统确保资源管理的确定性
@@ -352,6 +362,7 @@ $$\text{error\_recovery}(\text{type\_error}) \implies \text{helpful\_message}$$
 ---
 
 **参考文献**:
+
 1. Hindley, J. R. (1969). "The principal type-scheme of an object in combinatory logic"
 2. Milner, R. (1978). "A theory of type polymorphism in programming"
 3. Pierce, B. C. (2002). "Types and programming languages"
@@ -359,4 +370,4 @@ $$\text{error\_recovery}(\text{type\_error}) \implies \text{helpful\_message}$$
 
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  
-**状态**: 完成 
+**状态**: 完成
