@@ -21,6 +21,7 @@
 进程是程序执行的实例，形式化为：
 $$P = (S, R, M, C)$$
 其中：
+
 - $S$ 是进程状态
 - $R$ 是资源集合
 - $M$ 是内存空间
@@ -30,6 +31,7 @@ $$P = (S, R, M, C)$$
 Rust进程系统是一个扩展的进程模型：
 $$RPS = (P, \mathcal{C}, \mathcal{I}, \mathcal{S})$$
 其中：
+
 - $\mathcal{C}$ 是命令系统
 - $\mathcal{I}$ 是IPC系统
 - $\mathcal{S}$ 是同步系统
@@ -51,6 +53,7 @@ $$RPS = (P, \mathcal{C}, \mathcal{I}, \mathcal{S})$$
 进程状态是一个有限状态机：
 $$PSM = (Q, \Sigma, \delta, q_0, F)$$
 其中：
+
 - $Q = \{\text{Created}, \text{Running}, \text{Waiting}, \text{Terminated}\}$
 - $\Sigma$ 是事件集合
 - $\delta: Q \times \Sigma \rightarrow Q$ 是状态转换函数
@@ -58,12 +61,14 @@ $$PSM = (Q, \Sigma, \delta, q_0, F)$$
 - $F = \{\text{Terminated}\}$ 是最终状态集合
 
 **状态转换规则**：
-$$\begin{align}
+$$
+\begin{align}
 \delta(\text{Created}, \text{spawn}) &= \text{Running} \\
 \delta(\text{Running}, \text{wait}) &= \text{Waiting} \\
 \delta(\text{Waiting}, \text{resume}) &= \text{Running} \\
 \delta(\text{Running}, \text{exit}) &= \text{Terminated}
-\end{align}$$
+\end{align}
+$$
 
 ### 2.2 进程隔离
 
@@ -72,6 +77,7 @@ $$\begin{align}
 $$M_1 \cap M_2 = \emptyset$$
 
 **证明**：
+
 1. 操作系统提供虚拟内存管理
 2. 每个进程有独立的页表
 3. 地址空间映射不重叠
@@ -94,7 +100,7 @@ fn execute_process() -> std::io::Result<ExitStatus> {
     let output = Command::new("ls")
         .arg("-la")
         .output()?;
-    
+
     println!("输出: {}", String::from_utf8_lossy(&output.stdout));
     Ok(output.status)
 }
@@ -111,6 +117,7 @@ $$\text{create}: \text{Command} \rightarrow \text{Result<Child, Error>}$$
 **命令构建器**：
 $$\text{Command} = (\text{program}, \text{args}, \text{env}, \text{dir}, \text{io})$$
 其中：
+
 - $\text{program}$ 是可执行文件路径
 - $\text{args}$ 是参数列表
 - $\text{env}$ 是环境变量
@@ -129,21 +136,21 @@ fn process_lifecycle_example() -> std::io::Result<()> {
         .arg("pattern")
         .stdin(Stdio::piped())
         .stdout(Stdio::piped());
-    
+
     // 2. 启动进程
     let mut child = command.spawn()?;
-    
+
     // 3. 与进程交互
     if let Some(stdin) = child.stdin.as_mut() {
         stdin.write_all(b"input data\n")?;
     }
-    
+
     // 4. 等待进程完成
     let output = child.wait_with_output()?;
-    
+
     println!("退出码: {}", output.status);
     println!("输出: {}", String::from_utf8_lossy(&output.stdout));
-    
+
     Ok(())
 }
 ```
@@ -155,6 +162,7 @@ fn process_lifecycle_example() -> std::io::Result<()> {
 $$\text{terminate}: \text{Child} \rightarrow \text{ExitStatus}$$
 
 **终止类型**：
+
 - 正常终止：$\text{ExitStatus::Success}$
 - 异常终止：$\text{ExitStatus::Failure}$
 - 信号终止：$\text{ExitStatus::Signal}$
@@ -171,21 +179,21 @@ fn process_termination_example() -> std::io::Result<()> {
     let mut child = Command::new("sleep")
         .arg("10")
         .spawn()?;
-    
+
     // 等待一段时间
     thread::sleep(Duration::from_secs(2));
-    
+
     // 强制终止进程
     child.kill()?;
-    
+
     // 等待终止
     let status = child.wait()?;
-    
+
     match status.code() {
         Some(code) => println!("进程退出码: {}", code),
         None => println!("进程被信号终止"),
     }
-    
+
     Ok(())
 }
 ```
@@ -198,6 +206,7 @@ fn process_termination_example() -> std::io::Result<()> {
 管道是一个单向通信通道：
 $$\text{Pipe} = (\text{read}, \text{write})$$
 其中：
+
 - $\text{read}$ 是读取端
 - $\text{write}$ 是写入端
 
@@ -216,21 +225,21 @@ fn pipe_communication_example() -> std::io::Result<()> {
         .stdin(Stdio::piped())
         .stdout(Stdio::piped())
         .spawn()?;
-    
+
     // 写入数据
     if let Some(stdin) = child.stdin.as_mut() {
         stdin.write_all(b"zebra\nalpha\nbeta\n")?;
     }
-    
+
     // 读取结果
     let mut output = String::new();
     if let Some(stdout) = child.stdout.as_mut() {
         stdout.read_to_string(&mut output)?;
     }
-    
+
     // 等待进程完成
     child.wait()?;
-    
+
     println!("排序结果:\n{}", output);
     Ok(())
 }
@@ -251,15 +260,15 @@ use std::os::unix::fs::FileTypeExt;
 
 fn named_pipe_example() -> std::io::Result<()> {
     let pipe_path = "/tmp/my_pipe";
-    
+
     // 创建命名管道（需要先创建）
     // mkfifo /tmp/my_pipe
-    
+
     // 读取端
     let mut file = File::open(pipe_path)?;
     let mut buffer = [0; 1024];
     let n = file.read(&mut buffer)?;
-    
+
     println!("读取: {}", String::from_utf8_lossy(&buffer[..n]));
     Ok(())
 }
@@ -272,6 +281,7 @@ fn named_pipe_example() -> std::io::Result<()> {
 $$\text{Socket} = (\text{domain}, \text{type}, \text{protocol})$$
 
 **套接字类型**：
+
 - Unix域套接字：$\text{AF_UNIX}$
 - Internet套接字：$\text{AF_INET}$
 - IPv6套接字：$\text{AF_INET6}$
@@ -284,20 +294,20 @@ use std::io::{Read, Write};
 
 fn unix_socket_example() -> std::io::Result<()> {
     let socket_path = "/tmp/rust_socket";
-    
+
     // 服务器端
     let listener = UnixListener::bind(socket_path)?;
-    
+
     // 客户端连接
     let mut stream = UnixStream::connect(socket_path)?;
-    
+
     // 发送数据
     stream.write_all(b"Hello from client")?;
-    
+
     // 接收数据
     let mut response = [0; 1024];
     let n = stream.read(&mut response)?;
-    
+
     println!("服务器响应: {}", String::from_utf8_lossy(&response[..n]));
     Ok(())
 }
@@ -311,6 +321,7 @@ fn unix_socket_example() -> std::io::Result<()> {
 互斥锁是一个同步原语：
 $$\text{Mutex}<T> = (T, \text{locked})$$
 其中：
+
 - $T$ 是保护的数据类型
 - $\text{locked}$ 是锁状态
 
@@ -329,7 +340,7 @@ use std::thread;
 fn mutex_example() {
     let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];
-    
+
     for _ in 0..10 {
         let counter = Arc::clone(&counter);
         let handle = thread::spawn(move || {
@@ -338,11 +349,11 @@ fn mutex_example() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     println!("最终计数: {}", *counter.lock().unwrap());
 }
 ```
@@ -369,7 +380,7 @@ use std::thread;
 fn condvar_example() {
     let pair = Arc::new((Mutex::new(false), Condvar::new()));
     let pair2 = Arc::clone(&pair);
-    
+
     // 等待线程
     let waiter = thread::spawn(move || {
         let (lock, cvar) = &*pair2;
@@ -379,7 +390,7 @@ fn condvar_example() {
         }
         println!("条件满足!");
     });
-    
+
     // 通知线程
     let notifier = thread::spawn(move || {
         let (lock, cvar) = &*pair;
@@ -387,7 +398,7 @@ fn condvar_example() {
         *started = true;
         cvar.notify_one();
     });
-    
+
     waiter.join().unwrap();
     notifier.join().unwrap();
 }
@@ -422,14 +433,14 @@ impl Semaphore {
             count: AtomicUsize::new(count),
         }
     }
-    
+
     fn acquire(&self) {
         while self.count.fetch_sub(1, Ordering::Acquire) == 0 {
             self.count.fetch_add(1, Ordering::Release);
             thread::yield_now();
         }
     }
-    
+
     fn release(&self) {
         self.count.fetch_add(1, Ordering::Release);
     }
@@ -438,7 +449,7 @@ impl Semaphore {
 fn semaphore_example() {
     let semaphore = Arc::new(Semaphore::new(2));
     let mut handles = vec![];
-    
+
     for i in 0..5 {
         let sem = Arc::clone(&semaphore);
         let handle = thread::spawn(move || {
@@ -450,7 +461,7 @@ fn semaphore_example() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
@@ -482,10 +493,10 @@ use nix::sys::resource::{setrlimit, Resource, Rlimit};
 fn resource_limits_example() -> nix::Result<()> {
     // 设置最大文件描述符数量
     setrlimit(Resource::RLIMIT_NOFILE, Rlimit::new(1024, 2048))?;
-    
+
     // 设置最大虚拟内存
     setrlimit(Resource::RLIMIT_AS, Rlimit::new(1024 * 1024 * 100, 1024 * 1024 * 200))?;
-    
+
     Ok(())
 }
 ```

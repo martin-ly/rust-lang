@@ -21,6 +21,7 @@
 算法是一个有限的计算过程，形式化为：
 $$A = (I, O, P, T)$$
 其中：
+
 - $I$ 是输入集合
 - $O$ 是输出集合
 - $P$ 是计算过程
@@ -30,6 +31,7 @@ $$A = (I, O, P, T)$$
 Rust算法系统是一个扩展的算法模型：
 $$RAS = (A, \mathcal{T}, \mathcal{I}, \mathcal{P})$$
 其中：
+
 - $\mathcal{T}$ 是trait系统
 - $\mathcal{I}$ 是迭代器系统
 - $\mathcal{P}$ 是并行系统
@@ -58,6 +60,7 @@ $$\forall x \in I. A(x) \in O \land \text{spec}(x, A(x))$$
 
 **证明**：
 通过霍尔逻辑证明：
+
 1. 前置条件：$\text{pre}(x)$
 2. 后置条件：$\text{post}(x, A(x))$
 3. 正确性：$\text{pre}(x) \implies \text{post}(x, A(x))$
@@ -378,6 +381,7 @@ impl DijkstraStrategy {
 $$\text{Iterator} = \text{trait} \{ \text{next}: \text{Self} \rightarrow \text{Option<Item>} \}$$
 
 **迭代器trait**：
+
 ```rust
 trait Iterator {
     type Item;
@@ -736,6 +740,7 @@ fn is_prime(n: i32) -> bool {
 $$T(n) = O(f(n))$$
 
 **常见复杂度**：
+
 - 常数时间：$O(1)$
 - 对数时间：$O(\log n)$
 - 线性时间：$O(n)$
@@ -834,11 +839,13 @@ fn merge_sort<T: Ord + Clone>(slice: &mut [T]) {
 
 **定理 7.1** (排序算法正确性)
 如果排序算法 $S$ 满足以下条件，则 $S$ 是正确的：
-1. 输出是有序的：$\forall i < j. S(A)[i] \leq S(A)[j]$
+
+1. 输出是有序的：$\forall i < j. S[A](i) \leq S[A](j)$
 2. 输出是输入的排列：$\text{permutation}(A, S(A))$
 
 **证明**：
 通过归纳法证明：
+
 1. 基础情况：长度为1的数组
 2. 归纳步骤：长度为n的数组
 
@@ -846,12 +853,14 @@ fn merge_sort<T: Ord + Clone>(slice: &mut [T]) {
 
 **定理 7.2** (递归算法终止性)
 如果递归算法 $R$ 满足以下条件，则 $R$ 终止：
+
 1. 存在基本情况
 2. 递归调用参数递减
 3. 参数有下界
 
 **证明**：
 通过良基关系证明：
+
 1. 定义良基关系 $<$
 2. 证明递归调用参数递减
 3. 应用良基归纳原理
@@ -862,6 +871,7 @@ fn merge_sort<T: Ord + Clone>(slice: &mut [T]) {
 快速排序的平均时间复杂度是 $O(n \log n)$。
 
 **证明**：
+
 1. 递归树高度：$\log n$
 2. 每层工作量：$O(n)$
 3. 总工作量：$O(n \log n)$
@@ -870,11 +880,13 @@ fn merge_sort<T: Ord + Clone>(slice: &mut [T]) {
 
 **定理 7.4** (并行算法正确性)
 如果并行算法 $P$ 满足以下条件，则 $P$ 是正确的：
+
 1. 数据竞争自由
 2. 顺序一致性
 3. 与串行版本等价
 
 **证明**：
+
 1. 证明无数据竞争
 2. 证明顺序一致性
 3. 证明等价性

@@ -73,6 +73,7 @@ $$\mathcal{M}(g \circ f)(req, next) = (g \circ f) \circ next = g \circ (f \circ 
 - $\mu : \mathcal{M}(\mathcal{M}(A)) \rightarrow \mathcal{M}(A)$ 是乘法
 
 **单子律**:
+
 1. $\mu \circ \eta_{\mathcal{M}(A)} = \text{id}_{\mathcal{M}(A)}$
 2. $\mu \circ \mathcal{M}(\eta_A) = \text{id}_{\mathcal{M}(A)}$
 3. $\mu \circ \mu_{\mathcal{M}(A)} = \mu \circ \mathcal{M}(\mu_A)$
@@ -148,6 +149,7 @@ $$\text{execute}(pipe, req) = \text{fold}(pipe, req, \text{handler})$$
 $$\frac{\Gamma \vdash M_1 : \text{Middleware}[\tau_1, \tau_2] \quad \Gamma \vdash M_2 : \text{Middleware}[\tau_2, \tau_3]}{\Gamma \vdash M_1 \circ M_2 : \text{Middleware}[\tau_1, \tau_3]}$$
 
 **顺序组合实现**:
+
 ```rust
 impl<T1, T2, T3> Compose<T1, T3> for (Middleware<T1, T2>, Middleware<T2, T3>) {
     fn compose(self, req: T1, next: impl Fn(T1) -> T3) -> T3 {
@@ -165,6 +167,7 @@ impl<T1, T2, T3> Compose<T1, T3> for (Middleware<T1, T2>, Middleware<T2, T3>) {
 $$\frac{\Gamma \vdash M_1 : \text{Middleware}[\tau, \tau'] \quad \Gamma \vdash M_2 : \text{Middleware}[\tau, \tau'']}{\Gamma \vdash M_1 \parallel M_2 : \text{Middleware}[\tau, \tau' \times \tau'']}$$
 
 **并行组合实现**:
+
 ```rust
 impl<T, T1, T2> Parallel<T, (T1, T2)> for (Middleware<T, T1>, Middleware<T, T2>) {
     fn parallel(self, req: T, next: impl Fn(T) -> (T1, T2)) -> (T1, T2) {
@@ -186,6 +189,7 @@ impl<T, T1, T2> Parallel<T, (T1, T2)> for (Middleware<T, T1>, Middleware<T, T2>)
 $$\frac{\Gamma \vdash M_1 : \text{Middleware}[\tau, \tau'] \quad \Gamma \vdash M_2 : \text{Middleware}[\tau, \tau'] \quad \Gamma \vdash p : \tau \rightarrow \text{Bool}}{\Gamma \vdash \text{if } p \text{ then } M_1 \text{ else } M_2 : \text{Middleware}[\tau, \tau']}$$
 
 **条件组合实现**:
+
 ```rust
 impl<T, T1> Conditional<T, T1> for (Box<dyn Fn(T) -> bool>, Middleware<T, T1>, Middleware<T, T1>) {
     fn conditional(self, req: T, next: impl Fn(T) -> T1) -> T1 {
@@ -219,6 +223,7 @@ $$\text{ErrorHandler} : \text{Middleware}[\text{Request}[\tau], \text{Response}[
 $$\frac{\Gamma \vdash handler : \text{Error} \rightarrow \text{Response}[\tau']}{\Gamma \vdash \text{ErrorHandler}(handler) : \text{Middleware}[\text{Request}[\tau], \text{Response}[\tau']]}$$
 
 **错误处理实现**:
+
 ```rust
 pub struct ErrorHandler<F> {
     handler: F,
@@ -264,6 +269,7 @@ $$\text{AuthMiddleware} : \text{Middleware}[\text{Request}[\tau], \text{Response
 $$\frac{\Gamma \vdash auth : \text{Authentication}}{\Gamma \vdash \text{AuthMiddleware}(auth) : \text{Middleware}[\text{Request}[\tau], \text{Response}[\tau']]}$$
 
 **认证实现**:
+
 ```rust
 pub struct AuthMiddleware<F> {
     authenticator: F,
@@ -316,6 +322,7 @@ $$\text{LogMiddleware} : \text{Middleware}[\text{Request}[\tau], \text{Response}
 $$\frac{\Gamma \vdash logger : \text{Log} \rightarrow \text{unit}}{\Gamma \vdash \text{LogMiddleware}(logger) : \text{Middleware}[\text{Request}[\tau], \text{Response}[\tau']]}$$
 
 **日志实现**:
+
 ```rust
 pub struct LogMiddleware<F> {
     logger: F,
@@ -374,6 +381,7 @@ $$\text{CacheMiddleware} : \text{Middleware}[\text{Request}[\tau], \text{Respons
 $$\frac{\Gamma \vdash cache : \text{Cache}[\text{Response}[\tau']]}{\Gamma \vdash \text{CacheMiddleware}(cache) : \text{Middleware}[\text{Request}[\tau], \text{Response}[\tau']]}$$
 
 **缓存实现**:
+
 ```rust
 pub struct CacheMiddleware<C> {
     cache: C,
@@ -425,6 +433,7 @@ $$\text{LoadBalancerMiddleware} : \text{Middleware}[\text{Request}[\tau], \text{
 $$\frac{\Gamma \vdash balancer : \text{LoadBalancer}}{\Gamma \vdash \text{LoadBalancerMiddleware}(balancer) : \text{Middleware}[\text{Request}[\tau], \text{Response}[\tau']]}$$
 
 **负载均衡实现**:
+
 ```rust
 pub struct LoadBalancerMiddleware<B> {
     balancer: B,
@@ -470,6 +479,7 @@ $$\text{MonitorMiddleware} : \text{Middleware}[\text{Request}[\tau], \text{Respo
 $$\frac{\Gamma \vdash collector : \text{Metric} \rightarrow \text{unit}}{\Gamma \vdash \text{MonitorMiddleware}(collector) : \text{Middleware}[\text{Request}[\tau], \text{Response}[\tau']]}$$
 
 **监控实现**:
+
 ```rust
 pub struct MonitorMiddleware<C> {
     collector: C,
@@ -530,6 +540,7 @@ $$\llbracket M \rrbracket : \text{Request} \times (\text{Request} \rightarrow \t
 **定义 12.3** (中间件公理语义): 中间件的公理语义通过公理系统描述中间件的性质。
 
 **公理系统**:
+
 1. **组合律**: $(M_1 \circ M_2) \circ M_3 = M_1 \circ (M_2 \circ M_3)$
 2. **单位律**: $\text{id} \circ M = M = M \circ \text{id}$
 3. **分配律**: $(M_1 \parallel M_2) \circ M_3 = (M_1 \circ M_3) \parallel (M_2 \circ M_3)$
@@ -571,13 +582,14 @@ $$\llbracket M \rrbracket : \text{Request} \times (\text{Request} \rightarrow \t
 ### 14.3 性能优化
 
 **优化策略**:
+
 1. **中间件缓存**: 缓存中间件的计算结果
 2. **并行处理**: 并行执行独立的中间件
 3. **延迟计算**: 延迟执行昂贵的中间件操作
 
 ## 15. 参考文献
 
-1. **Rust官方文档**: https://doc.rust-lang.org/
+1. **Rust官方文档**: <https://doc.rust-lang.org/>
 2. **中间件架构模式**: Hohpe, G., & Woolf, B. (2003). Enterprise Integration Patterns
 3. **函数式编程**: Bird, R. (1998). Introduction to Functional Programming
 4. **类型理论**: Pierce, B. C. (2002). Types and Programming Languages
