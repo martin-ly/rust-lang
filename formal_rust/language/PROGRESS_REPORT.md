@@ -212,24 +212,29 @@
 - ✅ **c06_async/docs/** - 异步编程
   - 文件：view01.md到view14.md (14个文件)
   - 状态：已重构到06_async_await/02_formal_async_programming.md
+  - 内容：异步编程基础理论、Future系统、async/await语法、执行器与运行时、Pin机制、异步流、形式化证明
 
 - ✅ **c07_process/docs/** - 进程管理
   - 文件：view01.md到view05.md (5个文件)
   - 状态：已重构到07_process_management/01_formal_process_management.md
-  - 内容：进程基础理论、进程间通信形式化模型、同步机制形式化分析、资源管理形式化理论
+  - 内容：进程基础理论、进程间通信、同步机制、资源管理、安全保证、形式化证明
 
 - ✅ **c08_algorithms/docs/** - 算法实现
   - 文件：algorithm_exp01.md到algorithm_exp14.md (14个文件)
   - 状态：已重构到08_algorithms/01_formal_algorithm_system.md
-  - 内容：算法抽象与表达、算法策略模式、性能优化与零成本抽象、状态机与算法表示
+  - 内容：算法抽象理论、算法策略模式、性能优化理论、状态机与算法、递归算法理论、并行算法、形式化证明
 
 - ✅ **c15_blockchain/docs/** - 区块链系统
   - 文件：view01.md到view19.md, define.md (20个文件)
   - 状态：已重构到15_blockchain/01_formal_blockchain_system.md
   - 内容：区块链基础理论、密码学原语形式化、共识机制形式化模型、区块链安全性分析、智能合约形式化验证
 
+- ✅ **c16_webassembly/docs/** - WebAssembly系统
+  - 文件：rust_webassembly/view01.md到view13.md (13个文件)
+  - 状态：已重构到16_web_assembly/01_formal_webassembly_system.md
+  - 内容：WebAssembly基础理论、Rust编译到WebAssembly、运行时系统、WASI系统接口、组件模型、并发与异步、形式化证明
+
 #### 待分析crates目录
-- ⏳ **c16_webassembly/docs/** - WebAssembly
 - ⏳ **c17_iot/docs/** - 物联网
 - ⏳ **c18_model/docs/** - 模型系统
 
@@ -315,5 +320,5 @@
 ---
 
 **报告时间**: 2025-01-27  
-**版本**: v11.0  
-**状态**: 批量重构进行中 - 已完成35个核心模块，已分析5个crates/docs目录内容
+**版本**: v12.0  
+**状态**: 批量重构进行中 - 已完成35个核心模块，已分析7个crates/docs目录内容

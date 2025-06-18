@@ -35,6 +35,7 @@
 
 **定义 2.1**: 范畴
 范畴 $\mathcal{C}$ 由以下组成：
+
 - 对象集合 $\text{Ob}(\mathcal{C})$
 - 态射集合 $\text{Mor}(\mathcal{C})$
 - 复合操作 $\circ$
@@ -42,6 +43,7 @@
 
 **定义 2.2**: 函子
 函子 $F : \mathcal{C} \rightarrow \mathcal{D}$ 是范畴间的映射：
+
 - 对象映射：$F : \text{Ob}(\mathcal{C}) \rightarrow \text{Ob}(\mathcal{D})$
 - 态射映射：$F : \text{Mor}(\mathcal{C}) \rightarrow \text{Mor}(\mathcal{D})$
 
@@ -61,6 +63,7 @@
 
 **定义 3.1**: Rust类型范畴
 Rust类型范畴 $\mathcal{R}$ 定义为：
+
 - 对象：Rust类型 $\tau_1, \tau_2, \ldots$
 - 态射：函数 $f : \tau_1 \rightarrow \tau_2$
 - 复合：函数组合
@@ -86,6 +89,7 @@ Rust类型范畴 $\mathcal{R}$ 定义为：
 
 **定义 4.1**: 积类型
 类型 $\tau_1 \times \tau_2$ 是类型 $\tau_1$ 和 $\tau_2$ 的积，具有投影态射：
+
 - $\pi_1 : \tau_1 \times \tau_2 \rightarrow \tau_1$
 - $\pi_2 : \tau_1 \times \tau_2 \rightarrow \tau_2$
 
@@ -99,6 +103,7 @@ Rust类型范畴 $\mathcal{R}$ 定义为：
 
 **定义 4.2**: 余积类型
 类型 $\tau_1 + \tau_2$ 是类型 $\tau_1$ 和 $\tau_2$ 的余积，具有注入态射：
+
 - $\iota_1 : \tau_1 \rightarrow \tau_1 + \tau_2$
 - $\iota_2 : \tau_2 \rightarrow \tau_1 + \tau_2$
 
@@ -114,6 +119,7 @@ Rust类型范畴 $\mathcal{R}$ 定义为：
 $F(f) : F(A) \rightarrow F(B)$
 
 **示例**:
+
 ```rust
 // Vec<T> 是协变函子
 fn covariant_example() {
@@ -129,6 +135,7 @@ fn covariant_example() {
 $F(f) : F(B) \rightarrow F(A)$
 
 **示例**:
+
 ```rust
 // 函数参数位置是逆变的
 fn contravariant_example() {
@@ -144,6 +151,7 @@ fn contravariant_example() {
 函子 $F$ 是不变的，如果它既不是协变的也不是逆变的。
 
 **示例**:
+
 ```rust
 // &mut T 是不变函子
 fn invariant_example() {
@@ -159,11 +167,13 @@ fn invariant_example() {
 
 **定义 6.1**: 单子
 单子 $(M, \eta, \mu)$ 由以下组成：
+
 - 函子 $M : \mathcal{C} \rightarrow \mathcal{C}$
 - 单位自然变换 $\eta : \text{Id} \rightarrow M$
 - 乘法自然变换 $\mu : M \circ M \rightarrow M$
 
 满足单子定律：
+
 1. $\mu \circ \eta_M = \text{id}_M$
 2. $\mu \circ M\eta = \text{id}_M$
 3. $\mu \circ \mu_M = \mu \circ M\mu$
@@ -172,11 +182,13 @@ fn invariant_example() {
 
 **定理 6.1**: Option是单子
 `Option<T>` 构成单子，其中：
+
 - 单位：`Some : T → Option<T>`
 - 绑定：`and_then : Option<T> → (T → Option<U>) → Option<U>`
 
 **证明**:
 验证单子定律：
+
 ```rust
 // 左单位律
 Some(x).and_then(f) ≡ f(x)
@@ -192,6 +204,7 @@ opt.and_then(f).and_then(g) ≡ opt.and_then(|x| f(x).and_then(g))
 
 **定理 6.2**: Result是单子
 `Result<T, E>` 构成单子，其中：
+
 - 单位：`Ok : T → Result<T, E>`
 - 绑定：`and_then : Result<T, E> → (T → Result<U, E>) → Result<U, E>`
 
@@ -201,11 +214,13 @@ opt.and_then(f).and_then(g) ≡ opt.and_then(|x| f(x).and_then(g))
 
 **定义 7.1**: 线性类型
 线性类型系统基于线性逻辑，其中：
+
 - 每个资源只能使用一次
 - 没有隐式的复制或丢弃
 
 **定理 7.1**: Rust所有权系统
 Rust的所有权系统实现了仿射类型系统，其中：
+
 - 值可以被使用一次或丢弃
 - 移动语义确保资源唯一性
 
@@ -213,6 +228,7 @@ Rust的所有权系统实现了仿射类型系统，其中：
 
 **定义 7.2**: 借用规则
 借用系统满足以下规则：
+
 - 不可变借用：$\&T$ 可以有多个
 - 可变借用：$\&mut T$ 只能有一个
 - 借用冲突：不可变借用与可变借用不能共存
@@ -245,6 +261,7 @@ Rust的所有权系统实现了仿射类型系统，其中：
 ### 9.2 生命周期推断
 
 **算法 9.1**: 生命周期省略规则
+
 1. 每个引用参数都有自己的生命周期参数
 2. 如果只有一个输入生命周期参数，则它被赋给所有输出生命周期参数
 3. 如果有多个输入生命周期参数，但其中一个是 `&self` 或 `&mut self`，则 `self` 的生命周期被赋给所有输出生命周期参数
@@ -258,6 +275,7 @@ Rust的所有权系统实现了仿射类型系统，其中：
 
 **证明**:
 通过结构归纳法：
+
 1. 基础情况：变量、字面量
 2. 归纳步骤：函数应用、条件表达式等
 
@@ -267,6 +285,7 @@ Rust的所有权系统实现了仿射类型系统，其中：
 Rust的类型系统保证内存安全。
 
 **证明**:
+
 1. 所有权系统防止悬垂指针
 2. 借用系统防止数据竞争
 3. 生命周期系统确保引用有效性
@@ -332,4 +351,4 @@ impl Animal for Dog {
 
 **文档版本**: 1.0  
 **最后更新**: 2025-01-27  
-**状态**: 完成 
+**状态**: 完成
