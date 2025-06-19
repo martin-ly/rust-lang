@@ -12,6 +12,7 @@
 Rust Web开发采用现代异步架构，支持高性能、高并发的Web应用开发。
 
 **架构层次**:
+
 ```
 Client Layer (浏览器/移动端)
     ↓
@@ -29,6 +30,7 @@ Database Layer (数据库层)
 HTTP是Web开发的基础协议，Rust提供了完整的HTTP/1.1和HTTP/2支持。
 
 **HTTP请求结构**:
+
 ```
 GET /api/users HTTP/1.1
 Host: example.com
@@ -43,6 +45,7 @@ Authorization: Bearer token
 现代Web框架基于异步I/O，支持高并发处理。
 
 **异步处理模型**:
+
 ```rust
 async fn handle_request(req: Request) -> Response {
     // 异步处理逻辑
@@ -963,4 +966,4 @@ impl TemplateEngine {
 
 Rust Web开发系统为构建高性能、安全的Web应用提供了强大的工具和框架。通过异步编程、类型安全和内存安全，Rust Web应用能够处理高并发负载，同时保持代码的可靠性和可维护性。
 
-现代Web开发需要综合考虑性能、安全性、可扩展性和用户体验。Rust的生态系统提供了完整的解决方案，从底层的HTTP处理到高级的Web框架，为开发者提供了构建企业级Web应用所需的所有工具。 
+现代Web开发需要综合考虑性能、安全性、可扩展性和用户体验。Rust的生态系统提供了完整的解决方案，从底层的HTTP处理到高级的Web框架，为开发者提供了构建企业级Web应用所需的所有工具。

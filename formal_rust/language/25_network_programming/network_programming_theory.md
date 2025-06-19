@@ -12,6 +12,7 @@
 网络编程是构建分布式系统的核心技术，涉及网络协议、数据传输、连接管理等底层网络功能。
 
 **数学定义**:
+
 ```
 network_programming ::= protocol_stack + socket_interface + data_transmission
 socket ::= endpoint + protocol + address_family
@@ -23,6 +24,7 @@ connection ::= client_socket + server_socket + data_channel
 网络协议栈定义了数据在网络中传输的规则和格式。
 
 **OSI七层模型**:
+
 ```
 应用层 (Application Layer)
 表示层 (Presentation Layer)
@@ -38,6 +40,7 @@ connection ::= client_socket + server_socket + data_channel
 Socket是网络编程的基础抽象，提供了进程间通信的接口。
 
 **Socket类型**:
+
 ```rust
 // 流式Socket (TCP)
 SOCK_STREAM -> 可靠、有序、双向通信
@@ -1263,4 +1266,4 @@ Rust网络编程为构建高性能、安全的网络应用提供了强大的工�
 
 网络编程需要深入理解网络协议、Socket编程和异步编程模型。Rust的生态系统提供了完整的网络编程解决方案，从底层的Socket操作到高级的网络框架，为开发者提供了构建企业级网络应用所需的所有工具。
 
-现代网络应用需要综合考虑性能、安全性、可扩展性和可靠性。Rust的网络编程特性使得开发者能够构建既高效又安全的网络系统，满足各种复杂的网络应用需求。 
+现代网络应用需要综合考虑性能、安全性、可扩展性和可靠性。Rust的网络编程特性使得开发者能够构建既高效又安全的网络系统，满足各种复杂的网络应用需求。
