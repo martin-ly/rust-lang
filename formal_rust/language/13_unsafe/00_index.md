@@ -3,12 +3,14 @@
 ## 目录结构
 
 ### 1. 理论基础
+
 1. [形式化Unsafe系统](01_formal_unsafe_system.md)
 2. [Unsafe理论](02_unsafe_theory.md)
 3. [Unsafe实现](03_unsafe_implementation.md)
 4. [Unsafe应用](04_unsafe_applications.md)
 
 ### 2. 参考资料
+
 5. [代码示例](05_examples.md)
 6. [定理证明](06_theorems.md)
 7. [参考文献](07_references.md)
@@ -25,24 +27,28 @@ Unsafe Rust允许绕过编译器的安全检查，用于系统编程、FFI接口
 ## 核心概念
 
 ### Unsafe基础
+
 - unsafe关键字使用
 - unsafe块和函数
 - unsafe trait实现
 - 安全抽象设计
 
 ### 原始指针
+
 - 裸指针类型
 - 指针算术操作
 - 内存访问模式
 - 指针生命周期
 
 ### FFI接口
+
 - 外部函数声明
 - C语言互操作
 - ABI约定和调用
 - 类型转换和映射
 
 ### 内存安全
+
 - 内存布局控制
 - 对齐要求保证
 - 未定义行为避免
@@ -58,6 +64,7 @@ Unsafe Rust允许绕过编译器的安全检查，用于系统编程、FFI接口
 ## 数学符号说明
 
 本文档使用以下数学符号：
+
 - $U$：Unsafe代码
 - $P$：原始指针
 - $M$：内存
@@ -65,4 +72,4 @@ Unsafe Rust允许绕过编译器的安全检查，用于系统编程、FFI接口
 - $\bot$：未定义行为
 - $\vdash$：安全推导
 - $\rightarrow$：指针解引用
-- $\circ$：内存操作 
+- $\circ$：内存操作

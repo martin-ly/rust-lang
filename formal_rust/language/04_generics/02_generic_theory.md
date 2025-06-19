@@ -10,6 +10,7 @@ Rust泛型系统基于参数化多态性理论，允许类型和函数接受类�
 $$\text{GenericType} = \forall \alpha_1, \alpha_2, \ldots, \alpha_n. \tau$$
 
 其中：
+
 - $\alpha_i$ 是类型参数
 - $\tau$ 是具体类型表达式
 - $\forall$ 表示全称量词
@@ -57,6 +58,7 @@ $$\text{fn} \langle T : \text{Trait}_1 + \text{Trait}_2 \rangle (x: T) \rightarr
 Rust使用Hindley-Milner类型推导算法：
 
 **统一算法**:
+
 ```rust
 fn unify(type1: &Type, type2: &Type) -> Result<Substitution, Error> {
     match (type1, type2) {
@@ -435,6 +437,7 @@ impl Monomorphizer {
 **定理**: 泛型抽象在编译时完全消除，无运行时开销。
 
 **证明**:
+
 1. **编译时单态化**: 所有泛型代码在编译时转换为具体类型代码
 2. **无动态分发**: 泛型函数调用是静态的，无运行时类型检查
 3. **内联优化**: 编译器可以内联泛型函数，消除函数调用开销
@@ -570,4 +573,4 @@ Rust泛型系统提供了强大的参数化编程能力，同时保持了零成�
 
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  
-**维护者**: Rust语言形式化理论项目组 
+**维护者**: Rust语言形式化理论项目组

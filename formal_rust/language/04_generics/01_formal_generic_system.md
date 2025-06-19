@@ -14,6 +14,7 @@ Rust泛型系统基于参数化多态性理论，提供了强大的类型抽象�
 $$\text{GenericType} = \forall \alpha_1, \alpha_2, \ldots, \alpha_n. \tau$$
 
 其中：
+
 - $\alpha_i$ 是类型参数
 - $\tau$ 是具体类型表达式
 - $\forall$ 表示全称量词
@@ -93,7 +94,8 @@ fn monomorphize(generic_fn: &GenericFunction, type_args: &[Type]) -> ConcreteFun
 
 **定理**: 泛型抽象在编译时完全消除，无运行时开销。
 
-**证明**: 
+**证明**:
+
 1. 单态化在编译时完成
 2. 生成的代码与手写代码等价
 3. 无动态分发开销
@@ -136,6 +138,7 @@ $$\frac{\Gamma \vdash N : \text{Const} \quad \text{Const} \vdash N : \text{Integ
 ### 6.1 Hindley-Milner类型推导
 
 **统一算法**:
+
 ```rust
 fn unify(type1: &Type, type2: &Type) -> Result<Substitution, UnificationError> {
     match (type1, type2) {
@@ -171,6 +174,7 @@ fn unify(type1: &Type, type2: &Type) -> Result<Substitution, UnificationError> {
 ### 6.2 约束收集
 
 **约束收集算法**:
+
 ```rust
 fn collect_constraints(expr: &Expr, env: &TypeEnv) -> Result<Constraints, TypeError> {
     match expr {
@@ -201,7 +205,8 @@ fn collect_constraints(expr: &Expr, env: &TypeEnv) -> Result<Constraints, TypeEr
 
 **定理**: 如果程序通过Rust类型检查，则程序是类型安全的。
 
-**证明**: 
+**证明**:
+
 1. 所有类型推导都有明确的类型规则
 2. 泛型实例化保持类型安全
 3. Trait约束确保类型满足接口要求
@@ -212,6 +217,7 @@ fn collect_constraints(expr: &Expr, env: &TypeEnv) -> Result<Constraints, TypeEr
 **定理**: 泛型代码在内存安全方面与具体类型代码等价。
 
 **证明**:
+
 1. 所有权规则适用于所有类型
 2. 借用检查器对泛型类型有效
 3. 生命周期约束确保引用安全
@@ -301,6 +307,7 @@ fn find_max<T: Comparable>(items: &[T]) -> Option<&T> {
 Rust泛型系统提供了强大的参数化编程能力，同时保持了零成本抽象和类型安全。通过形式化的类型规则、单态化理论和约束系统，Rust能够在编译时保证程序的正确性，并在运行时提供最佳性能。
 
 泛型系统的核心优势包括：
+
 1. **类型安全**: 编译时类型检查
 2. **零成本抽象**: 无运行时开销
 3. **代码复用**: 高度可重用的代码

@@ -12,6 +12,7 @@ $$\text{Items} = \text{Functions} + \text{Types} + \text{Constants} + \text{Modu
 $$\text{Visibility} = \text{Public} + \text{Private} + \text{Restricted}$$
 
 其中：
+
 - $\times$ 表示积类型（结构体）
 - $+$ 表示和类型（枚举）
 - $\text{Items}$ 是模块内容
@@ -44,6 +45,7 @@ $$\text{ModuleTree} = \text{Node}\langle \text{Module}, \text{List}\langle \text
 可见性控制基于作用域和访问权限：
 
 **可见性级别**:
+
 1. **Public**: 完全可见
 2. **Private**: 仅模块内可见
 3. **Restricted**: 指定路径可见
@@ -652,6 +654,7 @@ fn main() {
 ### 8.1 编译性能
 
 **模块化编译性能**:
+
 - **增量编译**: 只重新编译修改的模块
 - **并行编译**: 独立模块可并行编译
 - **缓存优化**: 模块级缓存减少重复编译
@@ -662,6 +665,7 @@ $$\text{CompileTime}(M) = \sum_{m \in \text{Dependencies}(M)} \text{CompileTime}
 ### 8.2 运行时性能
 
 **模块加载性能**:
+
 - **延迟加载**: 按需加载模块
 - **预加载**: 关键模块预加载
 - **缓存**: 模块实例缓存
@@ -713,4 +717,4 @@ Rust模块系统理论基于模块代数和层次结构，提供了强大的代�
 
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  
-**维护者**: Rust语言形式化理论项目组 
+**维护者**: Rust语言形式化理论项目组
