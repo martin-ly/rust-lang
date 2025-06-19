@@ -68,6 +68,7 @@ $\&^{\rho} \text{mut} \tau$ 表示生命周期为 $\rho$ 的可变引用。
 $$\text{fn} \langle \rho_1, \ldots, \rho_n \rangle (\tau_1, \ldots, \tau_m) \rightarrow \tau$$
 
 **示例**：
+
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
@@ -118,7 +119,8 @@ Rust编译器使用以下规则自动推导生命周期：
 ### 4.2 生命周期推导算法
 
 **算法 4.1**（生命周期推导）
-```
+
+```text
 输入：函数签名
 输出：生命周期标注
 
@@ -142,7 +144,8 @@ Rust编译器使用以下规则自动推导生命周期：
 ### 5.1 约束求解
 
 **算法 5.1**（生命周期约束求解）
-```
+
+```text
 输入：约束集合 C
 输出：生命周期映射 σ 或错误
 
@@ -178,6 +181,7 @@ $$\forall \rho. \&^{\rho} \tau \rightarrow \&^{\rho} \tau$$
 如果程序通过生命周期检查，则不会产生悬垂引用。
 
 **证明**：
+
 1. 生命周期检查确保引用不会超出被引用对象的生命周期
 2. 生命周期约束确保引用的有效性
 3. 因此，不会产生悬垂引用
@@ -188,6 +192,7 @@ $$\forall \rho. \&^{\rho} \tau \rightarrow \&^{\rho} \tau$$
 生命周期系统与借用检查器结合，防止数据竞争。
 
 **证明**：
+
 1. 生命周期系统管理引用的有效性
 2. 借用检查器管理引用的并发访问
 3. 两者结合确保线程安全
@@ -199,6 +204,7 @@ $$\forall \rho. \&^{\rho} \tau \rightarrow \&^{\rho} \tau$$
 
 **证明**：
 通过结构归纳法证明：
+
 1. 基础情况：变量和常量
 2. 归纳步骤：函数应用、引用操作等
 3. 每个生命周期规则都保持一致性
@@ -211,6 +217,7 @@ $$\forall \rho. \&^{\rho} \tau \rightarrow \&^{\rho} \tau$$
 生命周期推导算法是正确的。
 
 **证明**：
+
 1. 省略规则的正确性
 2. 约束生成的正确性
 3. 约束求解的正确性
@@ -246,6 +253,7 @@ fn main() {
 ```
 
 **形式化分析**：
+
 - 变量 x：$\text{x} : \text{int}$
 - 引用 y：$\text{y} : \&^{\rho_x} \text{int}$
 - 生命周期约束：$\rho_y \subseteq \rho_x$
@@ -269,6 +277,7 @@ fn main() {
 ```
 
 **形式化分析**：
+
 - 函数类型：$\forall 'a. \&'a \text{str} \times \&'a \text{str} \rightarrow \&'a \text{str}$
 - 生命周期约束：$\rho_{\text{string1}} \cap \rho_{\text{string2}} \subseteq 'a$
 - 借用检查失败：$\rho_{\text{result}} \not\subseteq \rho_{\text{string2}}$
@@ -290,6 +299,7 @@ fn main() {
 ```
 
 **形式化分析**：
+
 - 结构体类型：$\forall 'a. \text{struct} \{ \text{part} : \&'a \text{str} \}$
 - 实例类型：$\text{ImportantExcerpt}^{\rho_{\text{first\_sentence}}}$
 - 生命周期约束：$\rho_{\text{part}} \subseteq \rho_{\text{first\_sentence}}$
@@ -306,6 +316,7 @@ fn main() {
 ```
 
 **形式化分析**：
+
 - 静态引用：$\&^{\text{static}} \text{str}$
 - 生命周期约束：$\rho_{\text{GREETING}} = \text{static}$
 - 全局有效性：在整个程序运行期间有效
@@ -329,4 +340,4 @@ fn main() {
 
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  
-**状态**: 完成 
+**状态**: 完成

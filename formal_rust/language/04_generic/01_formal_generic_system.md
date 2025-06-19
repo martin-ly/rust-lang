@@ -36,6 +36,7 @@ $$\text{GenericType} = \text{TypeConstructor}(\text{TypeParameter})$$
 泛型系统是四元组：
 $$\mathcal{GS} = (\mathcal{T}, \mathcal{P}, \mathcal{C}, \mathcal{I})$$
 其中：
+
 - $\mathcal{T}$ 是类型集合
 - $\mathcal{P}$ 是类型参数集合
 - $\mathcal{C}$ 是约束集合
@@ -45,6 +46,7 @@ $$\mathcal{GS} = (\mathcal{T}, \mathcal{P}, \mathcal{C}, \mathcal{I})$$
 
 **定义 1.5** (类型范畴)
 类型范畴 $\mathcal{C}$ 是：
+
 - 对象：类型 $T \in \mathcal{T}$
 - 态射：类型函数 $f: T_1 \rightarrow T_2$
 
@@ -71,6 +73,7 @@ $$\text{GenericStruct}(T_1, ..., T_n) = \text{Struct}\{f_1: T_1, ..., f_n: T_n\}
 $$\text{GenericEnum}(T_1, ..., T_n) = \text{Enum}\{\text{Variant}_1(T_1), ..., \text{Variant}_n(T_n)\}$$
 
 **示例 2.1** (泛型类型)
+
 ```rust
 // 泛型结构体
 struct Point<T> {
@@ -98,6 +101,7 @@ $$\text{instantiate}(\text{GenericType}(T_1, ..., T_n), [U_1, ..., U_n]) = \text
 $$\frac{\Gamma \vdash T_i: \text{Type} \quad \text{GenericType}(P_1, ..., P_n) \in \Gamma}{\Gamma \vdash \text{GenericType}(T_1, ..., T_n): \text{Type}}$$
 
 **示例 2.2** (类型实例化)
+
 ```rust
 let point: Point<i32> = Point { x: 1, y: 2 };
 let result: Result<String, std::io::Error> = Ok("success".to_string());
@@ -107,6 +111,7 @@ let pair: Pair<i32, &str> = (42, "answer");
 ### 2.3 类型推导
 
 **算法 2.1** (泛型类型推导)
+
 ```rust
 fn infer_generic_type(expr: &Expr, context: &Context) -> Option<Type> {
     match expr {
@@ -148,6 +153,7 @@ $$\text{GenericFunction} = \lambda T. \text{Function}(T)$$
 $$\frac{\Gamma, T: \text{Type} \vdash f: F(T)}{\Gamma \vdash \lambda T. f: \forall T. F(T)}$$
 
 **示例 3.1** (泛型函数)
+
 ```rust
 // 恒等函数
 fn identity<T>(value: T) -> T {
@@ -209,6 +215,7 @@ $$\text{Constraint} = \text{TraitBound} \mid \text{LifetimeBound} \mid \text{Typ
 $$\text{ConstraintContext} = \{\text{Constraint}_1, ..., \text{Constraint}_n\}$$
 
 **示例 4.1** (Trait边界)
+
 ```rust
 // 基本Trait边界
 fn print_value<T: std::fmt::Display>(value: T) {
@@ -240,6 +247,7 @@ where
 ### 4.3 约束求解
 
 **算法 4.1** (约束求解)
+
 ```rust
 fn solve_constraints(constraints: &[Constraint]) -> Option<Substitution> {
     let mut subst = Substitution::new();
@@ -281,6 +289,7 @@ $$\text{GenericFunctionSignature} = \forall T_1, ..., T_n. \text{FunctionType}$$
 $$\text{GenericImpl} = \text{impl} \text{GenericType}(T_1, ..., T_n)$$
 
 **示例 5.1** (泛型函数与实现)
+
 ```rust
 // 泛型函数
 fn find_max<T: PartialOrd>(items: &[T]) -> Option<&T> {
@@ -326,6 +335,7 @@ $$\text{monomorphize}(\text{GenericCode}, \text{TypeArgs}) = \text{ConcreteCode}
 $$\text{type-safe}(\text{GenericCode}) \Rightarrow \text{type-safe}(\text{monomorphize}(\text{GenericCode}, \text{Args}))$$
 
 **算法 5.1** (单态化算法)
+
 ```rust
 fn monomorphize(generic_fn: &GenericFunction, type_args: &[Type]) -> ConcreteFunction {
     let mut concrete_fn = ConcreteFunction::new();
@@ -363,6 +373,7 @@ $$\text{TypeConstructor}: \mathcal{T} \rightarrow \mathcal{T}$$
 $$\text{Functor} = \text{TypeConstructor} \times \text{map}: (A \rightarrow B) \rightarrow F(A) \rightarrow F(B)$$
 
 **示例 6.1** (函子实例)
+
 ```rust
 // Option是函子
 impl<T> Option<T> {
@@ -398,6 +409,7 @@ impl<T, E> Result<T, E> {
 $$\text{Monad} = \text{Functor} \times \text{bind}: F(A) \times (A \rightarrow F(B)) \rightarrow F(B)$$
 
 **示例 6.2** (单子实例)
+
 ```rust
 // Option是单子
 impl<T> Option<T> {
@@ -447,6 +459,7 @@ $$\text{GenericMorphism}(T_1 \times T_2) = \text{GenericMorphism}(T_1) \times \t
 $$\text{NaturalTransformation}: F \rightarrow G$$
 
 **示例 7.1** (自然变换)
+
 ```rust
 // Option到Result的自然变换
 fn option_to_result<T, E>(opt: Option<T>, default_error: E) -> Result<T, E> {
@@ -468,6 +481,7 @@ fn vec_to_option<T>(vec: Vec<T>) -> Option<T> {
 Rust的泛型类型构造器形成函子范畴。
 
 **证明**：
+
 1. 恒等映射：`identity<T>(x: T) -> T`
 2. 复合映射：`compose(f: A -> B, g: B -> C) -> A -> C`
 3. 函子律：`map(id) = id` 和 `map(f . g) = map(f) . map(g)`
@@ -486,6 +500,7 @@ $$\text{generic-type-safe}(G) \Leftrightarrow \forall T: \text{type-safe}(\text{
 Rust的泛型系统在编译时保证类型安全。
 
 **证明**：
+
 1. 类型检查器验证所有约束
 2. 借用检查器确保内存安全
 3. 单态化生成类型安全的代码
@@ -497,6 +512,7 @@ Rust的泛型系统在编译时保证类型安全。
 $$\text{satisfies-constraints}(T, C) \Leftrightarrow \forall c \in C: \text{satisfies}(T, c)$$
 
 **算法 8.1** (约束检查)
+
 ```rust
 fn check_constraints(ty: &Type, constraints: &[Constraint]) -> bool {
     for constraint in constraints {
@@ -528,6 +544,7 @@ fn check_constraints(ty: &Type, constraints: &[Constraint]) -> bool {
 Rust的泛型系统是图灵完备的。
 
 **证明**：
+
 1. 递归类型：`enum List<T> { Nil, Cons(T, Box<List<T>>) }`
 2. 高阶函数：`fn apply<F, T>(f: F, x: T) -> T where F: Fn(T) -> T`
 3. 类型级编程：通过关联类型和Trait实现
@@ -536,6 +553,7 @@ Rust的泛型系统是图灵完备的。
 Rust的类型推导算法是正确的。
 
 **证明**：
+
 1. 算法基于Hindley-Milner类型系统
 2. 统一算法保证类型一致性
 3. 约束求解确保所有约束满足
@@ -544,6 +562,7 @@ Rust的类型推导算法是正确的。
 单态化生成的代码与手写代码效率相同。
 
 **证明**：
+
 1. 编译时类型消除
 2. 无运行时类型检查
 3. 直接函数调用，无虚函数开销
@@ -554,6 +573,7 @@ Rust的类型推导算法是正确的。
 Rust编译器的泛型实现与形式化定义一致。
 
 **验证方法**：
+
 1. 类型检查器验证类型规则
 2. 约束求解器验证约束满足
 3. 代码生成器验证语义正确性
@@ -564,6 +584,7 @@ Rust编译器的泛型实现与形式化定义一致。
 编译器可以优化泛型代码，生成高效的机器码。
 
 **证明**：
+
 1. 单态化消除泛型开销
 2. 内联优化减少函数调用
 3. 类型特化生成专门代码
@@ -580,4 +601,4 @@ Rust的泛型系统提供了：
 4. **范畴论基础**：基于函子和单子的数学理论
 5. **高阶类型支持**：支持复杂的类型构造器
 
-这些特性使Rust的泛型系统成为现代编程语言中最强大和安全的类型系统之一。 
+这些特性使Rust的泛型系统成为现代编程语言中最强大和安全的类型系统之一。

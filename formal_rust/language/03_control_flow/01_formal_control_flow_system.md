@@ -21,6 +21,7 @@
 控制流是程序执行过程中指令执行顺序的规则集合，表示为状态转换系统：
 $$\mathcal{CF} = (\Sigma, \delta, s_0, F)$$
 其中：
+
 - $\Sigma$ 是程序状态集合
 - $\delta: \Sigma \times \mathcal{I} \rightarrow \Sigma$ 是状态转换函数
 - $s_0 \in \Sigma$ 是初始状态
@@ -31,6 +32,7 @@ $$\mathcal{CF} = (\Sigma, \delta, s_0, F)$$
 $$\forall i < n: s_{i+1} = \delta(s_i, instr_i)$$
 
 **定义 1.3** (表达式与语句)
+
 - **表达式** (Expression): 计算并返回值的代码结构，类型为 $E: \text{Context} \rightarrow \text{Value}$
 - **语句** (Statement): 执行动作但不返回值的代码结构，类型为 $S: \text{Context} \rightarrow \text{Context}$
 
@@ -398,7 +400,7 @@ async fn process_data(data: &[i32]) -> usize {
     // 错误：引用不能跨越await
     // sleep(Duration::from_millis(100)).await;
     // data.len()
-    
+
     // 正确：使用拥有所有权的数据
     let owned_data = data.to_vec();
     sleep(Duration::from_millis(100)).await;
@@ -512,4 +514,4 @@ Rust的控制流系统通过以下机制提供强大的安全保障：
 4. **类型系统约束**：确保所有控制流路径类型安全
 5. **异步支持**：提供非阻塞并发控制流
 
-这些机制共同构成了一个形式化验证的控制流系统，在保证高性能的同时提供强大的安全保证。 
+这些机制共同构成了一个形式化验证的控制流系统，在保证高性能的同时提供强大的安全保证。

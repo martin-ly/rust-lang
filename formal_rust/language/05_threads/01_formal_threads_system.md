@@ -36,6 +36,7 @@ $$\text{Thread} = (\text{Stack}, \text{Registers}, \text{ProgramCounter}, \text{
 并发系统是四元组：
 $$\mathcal{CS} = (\mathcal{T}, \mathcal{S}, \mathcal{R}, \mathcal{I})$$
 其中：
+
 - $\mathcal{T}$ 是线程集合
 - $\mathcal{S}$ 是共享状态集合
 - $\mathcal{R}$ 是同步关系集合
@@ -47,6 +48,7 @@ $$\mathcal{CS} = (\mathcal{T}, \mathcal{S}, \mathcal{R}, \mathcal{I})$$
 数据竞争发生在两个并发访问之间：
 $$\text{race}(a_1, a_2) \Leftrightarrow \text{concurrent}(a_1, a_2) \land \text{conflict}(a_1, a_2)$$
 其中：
+
 - $\text{concurrent}(a_1, a_2)$ 表示访问并发执行
 - $\text{conflict}(a_1, a_2)$ 表示访问冲突（至少一个是写操作）
 
@@ -64,6 +66,7 @@ $$\text{spawn}: \text{Function} \rightarrow \text{ThreadHandle}$$
 $$\frac{\Gamma \vdash f: F \quad F: \text{Send}}{\Gamma \vdash \text{spawn}(f): \text{ThreadHandle}}$$
 
 **示例 2.1** (线程创建)
+
 ```rust
 use std::thread;
 
@@ -93,6 +96,7 @@ $$\text{ThreadState} = \text{Running} \mid \text{Blocked} \mid \text{Terminated}
 $$\text{join}: \text{ThreadHandle} \rightarrow \text{Result<T, E>}$$
 
 **示例 2.2** (线程生命周期)
+
 ```rust
 use std::thread;
 use std::time::Duration;
@@ -117,6 +121,7 @@ println!("{}", result);
 $$\text{ThreadLocal} = \text{Thread} \rightarrow \text{Value}$$
 
 **示例 2.3** (线程本地存储)
+
 ```rust
 use std::cell::RefCell;
 use std::thread_local;
@@ -164,6 +169,7 @@ $$\text{Sync}(T) \Rightarrow \text{Send}(\&T)$$
 Sync表示&T可以安全地在线程间转移，这正是Send的定义。
 
 **示例 3.1** (Send/Sync示例)
+
 ```rust
 // 自动实现Send和Sync的类型
 struct SafeType {
@@ -195,6 +201,7 @@ Rust的类型系统在编译时保证并发安全：
 $$\text{type-safe}(P) \Rightarrow \text{concurrent-safe}(P)$$
 
 **证明**：
+
 1. Send trait确保数据可以安全转移
 2. Sync trait确保引用可以安全共享
 3. 借用检查器防止数据竞争
@@ -218,6 +225,7 @@ $$\text{unlock}: \text{MutexGuard}(T) \rightarrow \text{Mutex}(T)$$
 $$\frac{\Gamma \vdash T: \text{Send}}{\Gamma \vdash \text{Mutex}(T): \text{Sync}}$$
 
 **示例 4.1** (互斥锁)
+
 ```rust
 use std::sync::{Arc, Mutex};
 use std::thread;
@@ -248,11 +256,13 @@ println!("Final count: {}", *counter.lock().unwrap());
 $$\text{RwLock}(T) = \text{ReadLock} \times \text{WriteLock} \times T$$
 
 **定义 4.4** (读写锁语义)
+
 - 多个线程可以同时持有读锁
 - 写锁与读锁和写锁互斥
 - 写锁优先于读锁
 
 **示例 4.2** (读写锁)
+
 ```rust
 use std::sync::{Arc, RwLock};
 use std::thread;
@@ -295,6 +305,7 @@ $$\text{atomic}(op) \Leftrightarrow \forall t: \text{interrupted}(op, t) = \text
 $$\text{Atomic}(T) = \text{AtomicOperations} \times T$$
 
 **示例 4.3** (原子类型)
+
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
@@ -331,6 +342,7 @@ println!("Final count: {}", counter.load(Ordering::SeqCst));
 $$\text{MemoryOrdering} = \text{Relaxed} \mid \text{Acquire} \mid \text{Release} \mid \text{AcqRel} \mid \text{SeqCst}$$
 
 **定义 5.2** (内存序语义)
+
 - **Relaxed**: 只保证原子性，不保证顺序
 - **Acquire**: 确保后续操作不会重排到此操作之前
 - **Release**: 确保之前的操作不会重排到此操作之后
@@ -338,6 +350,7 @@ $$\text{MemoryOrdering} = \text{Relaxed} \mid \text{Acquire} \mid \text{Release}
 - **SeqCst**: 提供全局顺序一致性
 
 **示例 5.1** (内存序)
+
 ```rust
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::Arc;
@@ -395,6 +408,7 @@ $$\text{send}: \text{Sender}(T) \times T \rightarrow \text{Result<(), SendError>
 $$\text{recv}: \text{Receiver}(T) \rightarrow \text{Result<T, RecvError>}$$
 
 **示例 6.1** (通道)
+
 ```rust
 use std::sync::mpsc;
 use std::thread;
@@ -426,6 +440,7 @@ MPSC通道允许多个发送者，一个接收者：
 $$\text{MPSC}(T) = \text{MultiSender}(T) \times \text{SingleReceiver}(T)$$
 
 **示例 6.2** (MPSC通道)
+
 ```rust
 use std::sync::mpsc;
 use std::thread;
@@ -475,6 +490,7 @@ $$\text{LockFree} = \text{NoMutex} \land \text{AtomicOperations}$$
 $$\text{WaitFree} = \text{LockFree} \land \text{FiniteSteps}$$
 
 **示例 7.1** (无锁队列)
+
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
@@ -585,6 +601,7 @@ consumer.join().unwrap();
 $$\text{Arc}(T) = \text{AtomicRefCount} \times T$$
 
 **示例 7.2** (Arc实现原理)
+
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
@@ -650,6 +667,7 @@ $$\text{linearizable}(P) \Leftrightarrow \exists \text{sequential}: \text{equiva
 $$\text{deadlock}(T_1, T_2, ..., T_n) \Leftrightarrow \forall i: \text{waiting}(T_i, T_{(i+1)\bmod n})$$
 
 **算法 8.1** (死锁检测)
+
 ```rust
 fn detect_deadlock(threads: &[ThreadState]) -> bool {
     // 构建资源分配图
@@ -679,6 +697,7 @@ fn detect_deadlock(threads: &[ThreadState]) -> bool {
 $$\text{type-check}(P) = \text{valid} \Rightarrow \neg\exists a_1, a_2: \text{race}(a_1, a_2)$$
 
 **证明**：
+
 1. Send trait确保数据可以安全转移
 2. Sync trait确保引用可以安全共享
 3. 借用检查器防止并发访问冲突
@@ -704,6 +723,7 @@ $$\text{atomic}(op) \Rightarrow \text{atomic-execution}(op)$$
 Rust的线程实现与形式化定义一致。
 
 **验证方法**：
+
 1. 类型检查器验证Send/Sync约束
 2. 运行时系统确保线程隔离
 3. 同步原语提供正确的语义
@@ -714,6 +734,7 @@ Rust的线程实现与形式化定义一致。
 无锁数据结构在高竞争环境下性能优于基于锁的数据结构。
 
 **证明**：
+
 1. 无锁操作避免线程阻塞
 2. 原子操作比锁操作开销更小
 3. 减少上下文切换开销
@@ -730,4 +751,4 @@ Rust的线程与并发系统提供了：
 4. **高效的消息传递**：通道机制简化线程间通信
 5. **无锁编程支持**：原子操作和高级无锁数据结构
 
-这些机制共同构成了一个安全、高效、易用的并发编程系统，在保证内存安全的同时提供强大的并发能力。 
+这些机制共同构成了一个安全、高效、易用的并发编程系统，在保证内存安全的同时提供强大的并发能力。

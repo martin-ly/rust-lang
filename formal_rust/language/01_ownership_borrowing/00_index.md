@@ -1,183 +1,244 @@
-# 01_ownership_borrowing - 所有权与借用系统
+# 01 所有权与借用系统
 
-## 目录说明
+## 目录
 
-本目录包含Rust所有权与借用系统的完整形式化理论体系，涵盖从基础概念到高级应用的各个方面。
+1. [概述](#1-概述)
+2. [理论体系](#2-理论体系)
+3. [核心概念](#3-核心概念)
+4. [数学基础](#4-数学基础)
+5. [应用领域](#5-应用领域)
+6. [相关链接](#6-相关链接)
+7. [参考文献](#7-参考文献)
 
-## 文件结构
+## 1. 概述
 
+Rust所有权与借用系统是Rust语言的核心创新，基于线性类型理论和仿射类型系统，在编译时保证内存安全、线程安全和资源安全。本索引提供了所有权与借用系统理论的完整导航。
+
+### 1.1 系统特点
+
+- **内存安全**：编译时防止悬垂引用、数据竞争、内存泄漏
+- **线程安全**：通过借用检查防止并发数据竞争
+- **资源安全**：通过RAII模式自动管理资源生命周期
+- **零成本抽象**：所有权检查在编译时完成，无运行时开销
+
+### 1.2 理论基础
+
+- **线性类型理论**：每个值有且仅有一个所有者
+- **仿射类型系统**：支持移动语义和借用语义
+- **分离逻辑**：借用检查的数学基础
+- **区域类型系统**：生命周期管理的理论基础
+
+## 2. 理论体系
+
+### 2.1 核心文档
+
+| 文档 | 描述 | 状态 |
+|------|------|------|
+| [01_formal_ownership_system.md](./01_formal_ownership_system.md) | 形式化所有权系统理论 | ✅ 完成 |
+| [02_borrowing_system.md](./02_borrowing_system.md) | 借用系统形式化理论 | ⏳ 待处理 |
+| [03_lifetime_system.md](./03_lifetime_system.md) | 生命周期系统形式化理论 | ⏳ 待处理 |
+| [04_memory_management.md](./04_memory_management.md) | 内存管理系统形式化理论 | ⏳ 待处理 |
+| [05_variable_analysis.md](./05_variable_analysis.md) | 变量分析形式化理论 | ⏳ 待处理 |
+| [06_theorems.md](./06_theorems.md) | 定理证明 | ⏳ 待处理 |
+| [07_examples.md](./07_examples.md) | 实际应用示例 | ⏳ 待处理 |
+
+### 2.2 理论层次
+
+```text
+所有权与借用系统理论
+├── 基础理论
+│   ├── 所有权定义
+│   ├── 移动语义
+│   ├── 复制语义
+│   └── RAII模式
+├── 借用系统
+│   ├── 不可变借用
+│   ├── 可变借用
+│   ├── 借用规则
+│   └── 借用检查器
+├── 生命周期系统
+│   ├── 生命周期标注
+│   ├── 生命周期推断
+│   ├── 生命周期省略
+│   └── 非词法生命周期
+├── 内存管理
+│   ├── 栈内存管理
+│   ├── 堆内存管理
+│   ├── 智能指针
+│   └── 内存布局
+└── 变量分析
+    ├── 作用域分析
+    ├── 变量生命周期
+    ├── 静态分析
+    └── 借用检查算法
 ```
-01_ownership_borrowing/
-├── 01_formal_topic.md      # 形式化理论文档
-├── 02_examples.md          # 代码示例
-├── 03_proofs.md            # 形式化证明
-├── 04_diagrams.md          # 图表和可视化
-├── 05_applications.md      # 实际应用
-└── README.md               # 本说明文档
+
+## 3. 核心概念
+
+### 3.1 所有权系统
+
+| 概念 | 符号 | 描述 |
+|------|------|------|
+| 所有权 | $Owns(o, x)$ | 对象 $o$ 拥有资源 $x$ |
+| 移动语义 | $\tau_{owner} \to \tau_{borrowed}$ | 所有权转移 |
+| 复制语义 | $\text{Copy}(\tau)$ | 可复制类型 |
+| RAII模式 | $\text{RAII}(\text{resource}) = \text{struct}\{\text{resource}, \text{drop}\}$ | 资源获取即初始化 |
+
+### 3.2 借用系统
+
+| 概念 | 符号 | 描述 |
+|------|------|------|
+| 不可变借用 | $\& \tau$ | 共享读取访问 |
+| 可变借用 | $\& \text{mut } \tau$ | 独占写入访问 |
+| 借用规则 | $\text{BorrowRules}(\tau)$ | 编译时安全检查 |
+| 借用检查器 | $\text{BorrowChecker}(\text{code})$ | 静态分析机制 |
+
+### 3.3 生命周期系统
+
+| 概念 | 符号 | 描述 |
+|------|------|------|
+| 生命周期参数 | $'a, 'b, 'c$ | 生命周期标注 |
+| 生命周期约束 | $'a \subseteq 'b$ | 生命周期关系 |
+| 生命周期推断 | $\text{InferLifetime}(\text{code})$ | 自动推断算法 |
+| 生命周期省略 | $\text{ElideLifetime}(\text{code})$ | 简化标注规则 |
+
+## 4. 数学基础
+
+### 4.1 线性类型理论
+
+**所有权环境**：$\Gamma = \{x_1 : \tau_1, x_2 : \tau_2, \ldots, x_n : \tau_n\}$
+
+**所有权判断**：$\Gamma \vdash e : \tau$
+
+**所有权转移规则**：
+$$\frac{\Gamma \vdash e : \tau \quad \text{Move}(\tau)}{\Gamma \setminus \{x\} \vdash \text{move}(e) : \tau}$$
+
+**所有权复制规则**：
+$$\frac{\Gamma \vdash e : \tau \quad \text{Copy}(\tau)}{\Gamma \vdash \text{copy}(e) : \tau}$$
+
+### 4.2 借用理论
+
+**借用环境**：$B = (B_{\text{imm}}, B_{\text{mut}})$
+
+**借用规则**：
+$$\frac{\Gamma \vdash e : \tau \quad \text{not\_borrowed}(e, B)}{\Gamma \vdash \&e : \&\tau}$$
+
+$$\frac{\Gamma \vdash e : \tau \quad \text{not\_borrowed}(e, B)}{\Gamma \vdash \&\text{mut } e : \&\text{mut } \tau}$$
+
+**借用检查算法**：
+
+```rust
+fn borrow_check(expr: &Expr, env: &BorrowEnv) -> Result<(), BorrowError> {
+    match expr {
+        Expr::Ref(inner) => {
+            if env.is_borrowed(inner) {
+                Err(BorrowError::AlreadyBorrowed)
+            } else {
+                env.add_immutable_borrow(inner);
+                Ok(())
+            }
+        }
+        Expr::MutRef(inner) => {
+            if env.is_borrowed(inner) {
+                Err(BorrowError::AlreadyBorrowed)
+            } else {
+                env.add_mutable_borrow(inner);
+                Ok(())
+            }
+        }
+        // ... 其他情况
+    }
+}
 ```
 
-## 核心主题
+### 4.3 生命周期理论
 
-### 1. 所有权系统 (Ownership System)
+**生命周期参数**：$\alpha, \beta, \gamma, \ldots$
 
-- **线性类型理论**: 每个值有且仅有一个所有者
-- **移动语义**: 所有权转移的机制
-- **RAII模式**: 资源获取即初始化
-- **Copy/Move语义**: 复制与移动的区别
+**生命周期约束**：$\alpha \subseteq \beta$
 
-### 2. 借用系统 (Borrowing System)
+**生命周期标注**：$\&^{\alpha} \tau$
 
-- **不可变借用**: 共享读取访问
-- **可变借用**: 独占写入访问
-- **借用规则**: 编译时安全检查
-- **借用检查器**: 静态分析机制
+**生命周期省略规则**：
 
-### 3. 生命周期系统 (Lifetime System)
+1. 每个引用参数都有自己的生命周期参数
+2. 如果只有一个输入生命周期参数，则它被赋给所有输出生命周期参数
+3. 如果有多个输入生命周期参数，但其中一个是 `&self` 或 `&mut self`，则 `self` 的生命周期被赋给所有输出生命周期参数
 
-- **生命周期标注**: 显式生命周期参数
-- **生命周期推断**: 编译器自动推断
-- **生命周期省略**: 简化标注规则
-- **非词法生命周期**: 精确的生命周期分析
+## 5. 应用领域
 
-### 4. 作用域与变量 (Scope and Variables)
+### 5.1 系统编程
 
-- **作用域定义**: 变量的有效范围
-- **嵌套作用域**: 作用域的层次结构
-- **变量生命周期**: 变量的生存期
-- **静态分析**: 编译时检查
+- **内存管理**：通过所有权系统确保内存安全
+- **资源管理**：通过RAII模式自动管理资源
+- **并发编程**：通过借用检查防止数据竞争
+- **错误处理**：通过所有权转移确保错误安全
 
-## 理论特色
+### 5.2 嵌入式编程
 
-### 1. 形式化方法
+- **资源约束**：在有限资源环境下安全编程
+- **实时系统**：确保实时约束下的内存安全
+- **硬件抽象**：安全地抽象硬件接口
+- **中断处理**：安全地处理中断和异常
 
-- 严格的数学符号体系
-- 完整的定理和证明
-- 基于线性类型理论
-- 仿射类型系统
+### 5.3 高性能计算
 
-### 2. 多表征方式
+- **零成本抽象**：所有权检查无运行时开销
+- **内存布局**：控制数据的内存布局
+- **缓存优化**：优化内存访问模式
+- **并行计算**：安全的并行数据处理
 
-- 数学公式和符号
-- 代码示例和实现
-- 图表和可视化
-- 实际应用案例
+### 5.4 Web开发
 
-### 3. 学术规范
+- **API设计**：设计安全的内存管理API
+- **并发处理**：安全的并发请求处理
+- **资源管理**：管理网络连接和文件句柄
+- **错误恢复**：安全的错误处理和恢复
 
-- 完整的参考文献
-- 严格的逻辑推理
-- 清晰的术语定义
-- 规范的文档结构
+## 6. 相关链接
 
-## 学习路径
+### 6.1 内部链接
 
-### 初学者路径
+- [类型系统](../02_type_system/01_formal_type_system.md) - 类型系统基础
+- [控制流系统](../03_control_flow/01_formal_control_flow.md) - 控制流与所有权
+- [泛型系统](../04_generics/01_formal_generic_system.md) - 泛型与所有权
+- [并发系统](../05_concurrency/01_formal_concurrency_system.md) - 并发与所有权
+- [异步系统](../06_async_await/01_formal_async_system.md) - 异步与所有权
+- [宏系统](../07_macro_system/01_formal_macro_system.md) - 宏与所有权
+- [算法系统](../08_algorithms/01_formal_algorithm_system.md) - 算法与所有权
 
-1. 阅读 `02_examples.md` 了解基础概念
-2. 查看 `04_diagrams.md` 理解可视化表示
-3. 学习 `01_formal_topic.md` 掌握理论基础
-4. 实践 `05_applications.md` 中的应用案例
+### 6.2 外部资源
 
-### 进阶学习路径
+- [Rust Reference - Ownership](https://doc.rust-lang.org/reference/types.html#pointer-types)
+- [Rust Book - Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
+- [Rust Book - References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
+- [Rust Book - The Slice Type](https://doc.rust-lang.org/book/ch04-03-slices.html)
 
-1. 深入 `01_formal_topic.md` 的形式化理论
-2. 研究 `03_proofs.md` 中的数学证明
-3. 分析 `05_applications.md` 中的高级应用
-4. 结合其他主题目录进行交叉学习
+## 7. 参考文献
 
-## 相关主题
+### 7.1 学术论文
 
-### 前置知识
+1. **Wadler, P.** (1990). "Linear types can change the world!"
+2. **Reynolds, J.C.** (2002). "Separation logic: A logic for shared mutable data structures"
+3. **Jung, R., et al.** (2018). "RustBelt: Securing the foundations of the Rust programming language"
+4. **Jung, R., et al.** (2020). "The future is ours: Programming F* with higher-order stateful separation logic"
 
-- [02_type_system](../02_type_system/) - 类型系统基础
-- [03_control_flow](../03_control_flow/) - 控制流系统
+### 7.2 技术文档
 
-### 后续主题
+1. **Rust Reference** (2024). "The Rust Reference"
+2. **Rust Book** (2024). "The Rust Programming Language"
+3. **Rustonomicon** (2024). "The Dark Arts of Advanced and Unsafe Rust Programming"
+4. **RustBelt Project** (2024). "RustBelt: Securing the foundations of the Rust programming language"
 
-- [05_concurrency](../05_concurrency/) - 并发编程
-- [06_async_await](../06_async_await/) - 异步编程
-- [21_memory_management](../21_memory_management/) - 内存管理
+### 7.3 在线资源
 
-## 实践建议
-
-### 1. 代码实践
-
-- 运行所有代码示例
-- 修改示例代码观察行为变化
-- 尝试编写自己的所有权和借用代码
-- 使用Rust Playground进行在线实验
-
-### 2. 理论学习
-
-- 理解线性类型理论的基本概念
-- 掌握形式化证明的方法
-- 学习类型系统的数学基础
-- 研究内存安全的理论保证
-
-### 3. 应用开发
-
-- 在实际项目中应用所有权概念
-- 设计符合借用规则的数据结构
-- 优化代码以利用Rust的安全保证
-- 参与开源项目学习最佳实践
-
-## 常见问题
-
-### Q1: 为什么需要所有权系统？
-
-A: 所有权系统在编译时保证内存安全，避免悬垂引用、数据竞争和内存泄漏，同时提供零成本抽象。
-
-### Q2: 借用检查器如何工作？
-
-A: 借用检查器在编译时静态分析代码，确保借用规则得到遵守，包括排他性借用和生命周期约束。
-
-### Q3: 生命周期标注的规则是什么？
-
-A: 生命周期标注遵循三条省略规则，当编译器无法自动推断时需要显式标注，确保引用的有效性。
-
-### Q4: 如何处理复杂的借用情况？
-
-A: 可以通过重构代码、使用智能指针、内部可变性等方式处理复杂的借用情况，保持代码的可读性和安全性。
-
-## 贡献指南
-
-### 1. 内容改进
-
-- 发现错误或遗漏请提交Issue
-- 提供更好的示例代码
-- 补充理论证明
-- 添加实际应用案例
-
-### 2. 格式规范
-
-- 保持数学符号的一致性
-- 遵循文档结构规范
-- 确保代码示例可编译运行
-- 维护内部链接的有效性
-
-### 3. 学术标准
-
-- 引用相关的研究文献
-- 提供严格的逻辑推理
-- 使用准确的术语定义
-- 保持理论的完整性
-
-## 更新日志
-
-| 版本 | 日期 | 更新内容 |
-|------|------|----------|
-| 1.0.0 | 2025-01-27 | 初始版本，完成基础理论文档 |
-| 1.1.0 | 2025-01-27 | 添加代码示例和证明 |
-| 1.2.0 | 2025-01-27 | 完善图表和应用案例 |
+1. **Rust Playground** (2024). "Rust Playground - Online Rust Compiler"
+2. **Rust By Example** (2024). "Rust By Example - Learn Rust with Examples"
+3. **Rustlings** (2024). "Rustlings - Small exercises to get you used to reading and writing Rust code"
 
 ---
 
-**文档版本**: 1.2.0  
+**文档版本**: 1.3.0  
 **最后更新**: 2025-01-27  
-**维护者**: Rust语言形式化理论项目组
-
-**相关链接**:
-
-- [Rust官方文档](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
-- [RustBelt项目](https://plv.mpi-sws.org/rustbelt/)
-- [形式化方法研究](https://en.wikipedia.org/wiki/Formal_methods)
+**维护者**: Rust语言形式化理论项目组  
+**状态**: 索引完成，详细文档待完善

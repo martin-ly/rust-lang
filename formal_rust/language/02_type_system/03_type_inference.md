@@ -105,6 +105,7 @@ $$\frac{\Gamma \vdash e : \tau \Rightarrow C}{\Gamma \vdash *e : \alpha \Rightar
 ### 4.1 约束求解算法
 
 **算法 4.1**（约束求解）
+
 ```
 输入：约束集合 C
 输出：类型替换 σ 或失败
@@ -197,22 +198,22 @@ infer(e, Γ):
             return (Γ(x), ∅)
         else:
             return error("unbound variable")
-    
+
     if e 是常量 n:
         return (int, ∅)
-    
+
     if e 是 λx.e':
         α = fresh_type_variable()
         (τ', σ') = infer(e', Γ[x ↦ α])
         return (σ'(α) → τ', σ')
-    
+
     if e 是 e1 e2:
         (τ1, σ1) = infer(e1, Γ)
         (τ2, σ2) = infer(e2, σ1(Γ))
         α = fresh_type_variable()
         σ3 = unify(σ2(τ1), τ2 → α)
         return (σ3(α), σ3 ∘ σ2 ∘ σ1)
-    
+
     // 其他表达式类型...
 ```
 
@@ -239,12 +240,12 @@ infer_generic(e, Γ):
 generate_constraints(e, Γ):
     if e 是变量 x:
         return ∅
-    
+
     if e 是函数应用 e1 e2:
         C1 = generate_constraints(e1, Γ)
         C2 = generate_constraints(e2, Γ)
         return C1 ∪ C2 ∪ {type(e1) = type(e2) → α}
-    
+
     // 其他表达式类型...
 ```
 
@@ -377,4 +378,4 @@ fn main() {
 
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  
-**状态**: 完成 
+**状态**: 完成

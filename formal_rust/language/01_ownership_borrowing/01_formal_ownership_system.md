@@ -42,6 +42,7 @@ Rust的所有权系统是其类型系统的核心，基于线性类型理论和�
 
 **定义 2.1**（线性类型系统）
 线性类型系统是一个类型系统，其中：
+
 - 每个变量在表达式中必须恰好使用一次
 - 无法随意丢弃或复制值
 - 类型环境中的变量使用遵循线性逻辑规则
@@ -55,6 +56,7 @@ $$\frac{\Gamma, x : \tau \vdash e : \sigma}{\Gamma \vdash \lambda x.e : \tau \ri
 
 **定义 2.2**（仿射类型系统）
 仿射类型系统满足以下规则：
+
 - 弱化规则（Weakening）：可以引入未使用的变量
 - 收缩规则（Contraction）：限制变量的重复使用
 - 交换规则（Exchange）：允许变量顺序的重新排列
@@ -70,6 +72,7 @@ $$\frac{\Gamma \vdash e : \tau}{\Gamma, x : \sigma \vdash e : \tau} \text{(Weake
 $P * Q$ 表示堆可以分为两个不相交的部分，一部分满足 $P$，另一部分满足 $Q$。
 
 **公理**：
+
 - 交换律：$P * Q \equiv Q * P$
 - 结合律：$(P * Q) * R \equiv P * (Q * R)$
 - 单位元：$P * \text{emp} \equiv P$
@@ -94,6 +97,7 @@ $P * Q$ 表示堆可以分为两个不相交的部分，一部分满足 $P$，�
 $$\Gamma ::= \emptyset \mid \Gamma, x : T$$
 
 **环境操作**：
+
 - $\Gamma \oplus \Delta$：环境合并
 - $\Gamma \setminus x$：从环境中移除变量 $x$
 - $\text{dom}(\Gamma)$：环境的定义域
@@ -102,11 +106,13 @@ $$\Gamma ::= \emptyset \mid \Gamma, x : T$$
 
 **定义 3.3**（借用关系）
 借用关系 $\mathcal{B}$ 是一个三元组 $(l, p, r)$，其中：
+
 - $l$：借用位置
 - $p$：借用路径
 - $r$：借用区域
 
 **借用规则**：
+
 1. **独占性**：$\forall (l_1, p_1, r_1), (l_2, p_2, r_2) \in \mathcal{B}$
    $$(l_1 = l_2 \land p_1 \cap p_2 \neq \emptyset) \implies r_1 \cap r_2 = \emptyset$$
 
@@ -170,7 +176,8 @@ $$\frac{\rho_1 \subseteq \rho_2}{\&^{\rho_1} T \leq \&^{\rho_2} T} \text{(Lifeti
 ### 5.2 约束求解
 
 **算法 5.1**（借用检查算法）
-```
+
+```latex
 输入：程序 P
 输出：借用关系集合 B 或错误
 
@@ -202,6 +209,7 @@ $$\delta : \text{State} \times \text{Statement} \rightarrow \text{State}$$
 如果程序 $P$ 通过借用检查，则 $P$ 不会发生内存错误。
 
 **证明**：
+
 1. 借用检查确保没有悬垂引用
 2. 所有权系统确保每个值有唯一所有者
 3. 生命周期系统确保引用在有效期内使用
@@ -213,6 +221,7 @@ $$\delta : \text{State} \times \text{Statement} \rightarrow \text{State}$$
 如果程序 $P$ 通过借用检查，则 $P$ 是线程安全的。
 
 **证明**：
+
 1. 可变借用确保独占访问
 2. 不可变借用允许多个并发访问
 3. 借用检查防止数据竞争
@@ -225,6 +234,7 @@ $$\delta : \text{State} \times \text{Statement} \rightarrow \text{State}$$
 
 **证明**：
 通过结构归纳法证明：
+
 1. 基础情况：变量和常量
 2. 归纳步骤：函数应用、借用操作等
 3. 每个类型规则都保持类型安全
@@ -238,6 +248,7 @@ $$\delta : \text{State} \times \text{Statement} \rightarrow \text{State}$$
 
 **证明**：
 通过结构归纳法证明：
+
 1. 对于变量：不可能（类型环境为空）
 2. 对于函数应用：可以继续求值
 3. 对于借用操作：可以继续求值
@@ -250,6 +261,7 @@ $$\delta : \text{State} \times \text{Statement} \rightarrow \text{State}$$
 
 **证明**：
 通过规则归纳法证明：
+
 1. 对于每个求值规则，证明类型保持不变
 2. 使用替换引理
 3. 考虑环境的变化
@@ -258,10 +270,12 @@ $$\delta : \text{State} \times \text{Statement} \rightarrow \text{State}$$
 
 **定理 7.3**（借用检查正确性）
 借用检查算法是正确的，即：
+
 - 如果算法接受程序 $P$，则 $P$ 满足借用规则
 - 如果算法拒绝程序 $P$，则 $P$ 违反借用规则
 
 **证明**：
+
 1. 约束生成正确性
 2. 约束求解正确性
 3. 数据流分析正确性
@@ -280,6 +294,7 @@ fn main() {
 ```
 
 **形式化分析**：
+
 - 初始状态：$\emptyset$
 - 分配 s1：$\{s1 : \text{Own}(\text{String})\}$
 - 移动 s1 到 s2：$\{s2 : \text{Own}(\text{String})\}$
@@ -301,6 +316,7 @@ fn main() {
 ```
 
 **形式化分析**：
+
 - 借用约束：$\text{borrow}(s, \text{path}(s), \rho_1)$
 - 借用约束：$\text{borrow}(s, \text{path}(s), \rho_2)$
 - 可变借用约束：$\text{borrow}(s, \text{path}(s), \rho_3)$
@@ -325,6 +341,7 @@ fn main() {
 ```
 
 **形式化分析**：
+
 - 生命周期参数：$\forall 'a. \&'a \text{str} \times \&'a \text{str} \rightarrow \&'a \text{str}$
 - 生命周期约束：$\text{lifetime}(string1) \cap \text{lifetime}(string2) \subseteq 'a$
 - 借用检查失败：$\text{lifetime}(result) \not\subseteq \text{lifetime}(string2)$
@@ -350,4 +367,4 @@ fn main() {
 
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  
-**状态**: 完成 
+**状态**: 完成

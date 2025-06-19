@@ -35,6 +35,7 @@ $$\text{Substitution} = \text{Var} \rightarrow \text{Value}$$
 模式匹配系统是三元组：
 $$\mathcal{PM} = (\mathcal{P}, \mathcal{V}, \text{match})$$
 其中：
+
 - $\mathcal{P}$ 是模式集合
 - $\mathcal{V}$ 是值集合
 - $\text{match}$ 是匹配函数
@@ -479,4 +480,4 @@ Rust的模式匹配系统提供了：
 4. **穷尽性检查**：确保所有情况都被处理
 5. **高效实现**：编译为优化的机器码
 
-这些特性使模式匹配成为Rust中最强大的控制流机制之一。 
+这些特性使模式匹配成为Rust中最强大的控制流机制之一。
