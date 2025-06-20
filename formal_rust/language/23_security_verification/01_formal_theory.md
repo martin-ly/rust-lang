@@ -97,6 +97,7 @@ $$\{Own(x) \land \neg Own(y)\} \; y = x \; \{Own(y) \land \neg Own(x)\}$$
 
 **定义 23.3** (克里普克结构)
 系统可以建模为克里普克结构 $M = (S, S_0, R, L)$，其中：
+
 - $S$ 是状态集合
 - $S_0 \subseteq S$ 是初始状态集合
 - $R \subseteq S \times S$ 是转移关系
@@ -143,7 +144,7 @@ struct BorrowedMut<'a, T> {
 形式化规则：
 
 1. **所有权唯一性**: 在任何时刻，一个值只有一个所有者。
-   
+
    $$\forall v \in Values, \forall t: |Owners(v, t)| \leq 1$$
 
 2. **借用规则**: 在任何时刻，要么有多个不可变借用，要么有一个可变借用。
@@ -190,6 +191,7 @@ $$\forall v: T, \forall op \in Operations: I_T(v) \; before \; op \Rightarrow I_
 Rust编译器的静态分析是验证安全属性的第一道防线。这包括借用检查器、生命周期分析和类型检查。
 
 **流程 23.1** (借用检查算法)
+
 ```rust
 fn borrow_check(fn_body: FnBody) -> Result<(), BorrowError> {
     let mut borrows = HashMap::new(); // 存储每个变量的借用情况
@@ -266,6 +268,7 @@ $$DeadlockFree(P) \iff \forall s \in Reach(P): \neg Deadlock(s)$$
 
 **定理 23.4** (Rust内存安全)
 使用安全Rust编写的程序不会出现以下内存安全问题：
+
 - 使用释放后的内存
 - 双重释放
 - 数据竞争

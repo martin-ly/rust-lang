@@ -108,7 +108,7 @@ $$Safety(L) = (memory, type, concurrency, undefined\_behavior, ...)$$
 **定理 24.2** (安全性比较)
 语言 $L_1$ 的安全性不低于 $L_2$ 当且仅当 $L_1$ 的安全保证向量在每个维度上都不低于 $L_2$。
 
-$$Safety(L_1) \geq Safety(L_2) \iff \forall i: Safety(L_1)[i] \geq Safety(L_2)[i]$$
+$$Safety(L_1) \geq Safety(L_2) \iff \forall i: Safety[L_1](i) \geq Safety[L_2](i)$$
 
 ### 性能模型
 
@@ -171,6 +171,7 @@ struct LanguageFeatures<L> {
 从语言 $L_1$ 到 $L_2$ 的特性映射 $FM: F_{L_1} \rightarrow F_{L_2}$ 建立了 $L_1$ 中的特性与 $L_2$ 中特性的对应关系。
 
 映射可以是以下几种类型之一：
+
 - **直接对应**: $L_2$ 中有与 $L_1$ 中特性直接对应的特性
 - **模拟**: $L_2$ 可以通过组合多个特性模拟 $L_1$ 的特性
 - **部分支持**: $L_2$ 只能部分支持 $L_1$ 的特性
@@ -385,12 +386,12 @@ void cpp_example() {
     std::vector<int> v2 = v; // 复制向量，v和v2都有效
     std::cout << v[0] << std::endl; // 正常
     std::cout << v2[0] << std::endl; // 正常
-    
+
     // 使用独占智能指针模拟所有权
     auto ptr = std::make_unique<std::vector<int>>(std::vector{1, 2, 3});
     // auto ptr2 = ptr; // 编译错误：unique_ptr不能复制
     auto ptr2 = std::move(ptr); // 所有权转移
-    // std::cout << (*ptr)[0] << std::endl; // 运行时错误：ptr为空
+    // std::cout << [*ptr](0) << std::endl; // 运行时错误：ptr为空
 } // v, v2和ptr2离开作用域，资源被自动释放
 ```
 
@@ -412,11 +413,11 @@ func goExample() {
 // Rust: 线程和消息传递
 fn rust_concurrency() {
     let (tx, rx) = mpsc::channel();
-    
+
     thread::spawn(move || {
         tx.send("hello").unwrap();
     });
-    
+
     let msg = rx.recv().unwrap();
     println!("Got: {}", msg);
 }
@@ -426,11 +427,11 @@ fn rust_concurrency() {
 // Go: goroutine和通道
 func goConcurrency() {
     c := make(chan string)
-    
+
     go func() {
         c <- "hello"
     }()
-    
+
     msg := <-c
     fmt.Println("Got:", msg)
 }
@@ -443,14 +444,14 @@ void cppConcurrency() {
     std::mutex mtx;
     std::condition_variable cv;
     bool done = false;
-    
+
     std::thread producer([&]() {
         std::unique_lock<std::mutex> lock(mtx);
         messageQueue.push("hello");
         done = true;
         cv.notify_one();
     });
-    
+
     std::thread consumer([&]() {
         std::unique_lock<std::mutex> lock(mtx);
         cv.wait(lock, [&]() { return done; });
@@ -458,7 +459,7 @@ void cppConcurrency() {
         messageQueue.pop();
         std::cout << "Got: " << msg << std::endl;
     });
-    
+
     producer.join();
     consumer.join();
 }
