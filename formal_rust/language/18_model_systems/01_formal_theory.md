@@ -204,10 +204,10 @@ trait Optimization {
 
 1. Butcher, J. C. (2008). *Numerical Methods for Ordinary Differential Equations*. Wiley.
 2. Press, W. H., et al. (2007). *Numerical Recipes*. Cambridge University Press.
-3. Rust 数值计算生态：https://github.com/rust-ndarray
+3. Rust 数值计算生态：<https://github.com/rust-ndarray>
 
 ---
 
 **文档状态**：已完成  
 **下次评审**：2025-02-27  
-**维护者**：Rust 形式化理论团队 
+**维护者**：Rust 形式化理论团队

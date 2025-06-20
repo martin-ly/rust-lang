@@ -232,12 +232,12 @@ mod app {
 
 ## 10. 参考文献
 
-1. Rust 嵌入式工作组：https://github.com/rust-embedded
-2. embedded-hal：https://github.com/rust-embedded/embedded-hal
-3. RTIC：https://github.com/rtic-rs/cortex-m-rtic
+1. Rust 嵌入式工作组：<https://github.com/rust-embedded>
+2. embedded-hal：<https://github.com/rust-embedded/embedded-hal>
+3. RTIC：<https://github.com/rtic-rs/cortex-m-rtic>
 
 ---
 
 **文档状态**：已完成  
 **下次评审**：2025-02-27  
-**维护者**：Rust 形式化理论团队 
+**维护者**：Rust 形式化理论团队

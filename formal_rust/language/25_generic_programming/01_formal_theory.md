@@ -312,12 +312,12 @@ fn main() {
 
 ## 10. 参考文献
 
-1. Rust 泛型编程指南：https://doc.rust-lang.org/book/ch10-00-generics.html
-2. Rust 类型系统：https://doc.rust-lang.org/reference/types.html
-3. Rust Trait 系统：https://doc.rust-lang.org/book/ch10-02-traits.html
+1. Rust 泛型编程指南：<https://doc.rust-lang.org/book/ch10-00-generics.html>
+2. Rust 类型系统：<https://doc.rust-lang.org/reference/types.html>
+3. Rust Trait 系统：<https://doc.rust-lang.org/book/ch10-02-traits.html>
 
 ---
 
 **文档状态**：已完成  
 **下次评审**：2025-02-27  
-**维护者**：Rust 形式化理论团队 
+**维护者**：Rust 形式化理论团队

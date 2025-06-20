@@ -183,11 +183,11 @@ trait Protocol {
 1. Tanenbaum, A. S. (2011). *Computer Networks*. Pearson.
 2. Stevens, W. R. (1994). *TCP/IP Illustrated*. Addison-Wesley.
 3. Jung, R., et al. (2021). *RustBelt: Securing the foundations of the Rust programming language*. JACM.
-4. Rust 官方文档：https://doc.rust-lang.org/std/net/
-5. Tokio 异步运行时：https://tokio.rs/
+4. Rust 官方文档：<https://doc.rust-lang.org/std/net/>
+5. Tokio 异步运行时：<https://tokio.rs/>
 
 ---
 
 **文档状态**：已完成  
 **下次评审**：2025-02-27  
-**维护者**：Rust 形式化理论团队 
+**维护者**：Rust 形式化理论团队

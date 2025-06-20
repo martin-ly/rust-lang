@@ -288,12 +288,12 @@ fn concurrent_increment() {
 
 ## 10. 参考文献
 
-1. Rust 系统编程指南：https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html
-2. Rustonomicon：https://doc.rust-lang.org/nomicon/
-3. Rust 嵌入式编程：https://rust-embedded.github.io/book/
+1. Rust 系统编程指南：<https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html>
+2. Rustonomicon：<https://doc.rust-lang.org/nomicon/>
+3. Rust 嵌入式编程：<https://rust-embedded.github.io/book/>
 
 ---
 
 **文档状态**：已完成  
 **下次评审**：2025-02-27  
-**维护者**：Rust 形式化理论团队 
+**维护者**：Rust 形式化理论团队

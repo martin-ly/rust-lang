@@ -194,12 +194,12 @@ trait BorrowChecker {
 
 ## 10. 参考文献
 
-1. Rust 编译器源码：https://github.com/rust-lang/rust
-2. LLVM 项目：https://llvm.org/
+1. Rust 编译器源码：<https://github.com/rust-lang/rust>
+2. LLVM 项目：<https://llvm.org/>
 3. Pierce, B. C. (2002). *Types and Programming Languages*. MIT Press.
 
 ---
 
 **文档状态**：已完成  
 **下次评审**：2025-02-27  
-**维护者**：Rust 形式化理论团队 
+**维护者**：Rust 形式化理论团队

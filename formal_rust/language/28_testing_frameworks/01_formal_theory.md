@@ -432,12 +432,12 @@ mod tests {
 
 ## 10. 参考文献
 
-1. Rust 测试指南：https://doc.rust-lang.org/book/ch11-00-testing.html
-2. Rust 属性测试：https://github.com/AltSysrq/proptest
-3. Rust 测试框架：https://doc.rust-lang.org/rust-by-example/testing.html
+1. Rust 测试指南：<https://doc.rust-lang.org/book/ch11-00-testing.html>
+2. Rust 属性测试：<https://github.com/AltSysrq/proptest>
+3. Rust 测试框架：<https://doc.rust-lang.org/rust-by-example/testing.html>
 
 ---
 
 **文档状态**：已完成  
 **下次评审**：2025-02-27  
-**维护者**：Rust 形式化理论团队 
+**维护者**：Rust 形式化理论团队

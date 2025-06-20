@@ -536,12 +536,12 @@ fn main() {
 
 ## 10. 参考文献
 
-1. Rust 性能指南：https://doc.rust-lang.org/book/ch13-00-functional-features.html
-2. Criterion 基准测试：https://github.com/bheisler/criterion.rs
-3. Rust 优化技巧：https://nnethercote.github.io/perf-book/
+1. Rust 性能指南：<https://doc.rust-lang.org/book/ch13-00-functional-features.html>
+2. Criterion 基准测试：<https://github.com/bheisler/criterion.rs>
+3. Rust 优化技巧：<https://nnethercote.github.io/perf-book/>
 
 ---
 
 **文档状态**：已完成  
 **下次评审**：2025-02-27  
-**维护者**：Rust 形式化理论团队 
+**维护者**：Rust 形式化理论团队

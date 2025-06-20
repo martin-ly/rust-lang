@@ -286,12 +286,12 @@ fn main() {
 
 ## 10. 参考文献
 
-1. Rust 宏编程指南：https://doc.rust-lang.org/book/ch19-06-macros.html
-2. Rust 过程宏：https://doc.rust-lang.org/reference/procedural-macros.html
-3. Rust 编译时编程：https://doc.rust-lang.org/reference/const_eval.html
+1. Rust 宏编程指南：<https://doc.rust-lang.org/book/ch19-06-macros.html>
+2. Rust 过程宏：<https://doc.rust-lang.org/reference/procedural-macros.html>
+3. Rust 编译时编程：<https://doc.rust-lang.org/reference/const_eval.html>
 
 ---
 
 **文档状态**：已完成  
 **下次评审**：2025-02-27  
-**维护者**：Rust 形式化理论团队 
+**维护者**：Rust 形式化理论团队

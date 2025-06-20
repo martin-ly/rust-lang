@@ -403,12 +403,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 10. 参考文献
 
-1. Rust 异步编程指南：https://rust-lang.github.io/async-book/
-2. Tokio 异步运行时：https://tokio.rs/
-3. Rust Future trait：https://doc.rust-lang.org/std/future/trait.Future.html
+1. Rust 异步编程指南：<https://rust-lang.github.io/async-book/>
+2. Tokio 异步运行时：<https://tokio.rs/>
+3. Rust Future trait：<https://doc.rust-lang.org/std/future/trait.Future.html>
 
 ---
 
 **文档状态**：已完成  
 **下次评审**：2025-02-27  
-**维护者**：Rust 形式化理论团队 
+**维护者**：Rust 形式化理论团队

@@ -390,12 +390,12 @@ fn main() {
 
 ## 10. 参考文献
 
-1. Rust 错误处理指南：https://doc.rust-lang.org/book/ch09-00-error-handling.html
-2. Rust Result 类型：https://doc.rust-lang.org/std/result/
-3. Rust Option 类型：https://doc.rust-lang.org/std/option/
+1. Rust 错误处理指南：<https://doc.rust-lang.org/book/ch09-00-error-handling.html>
+2. Rust Result 类型：<https://doc.rust-lang.org/std/result/>
+3. Rust Option 类型：<https://doc.rust-lang.org/std/option/>
 
 ---
 
 **文档状态**：已完成  
 **下次评审**：2025-02-27  
-**维护者**：Rust 形式化理论团队 
+**维护者**：Rust 形式化理论团队

@@ -190,7 +190,7 @@ trait Iterator {
 
 ## 10. 参考文献
 
-1. Rust 官方文档：https://doc.rust-lang.org/book/ch10-02-traits.html
+1. Rust 官方文档：<https://doc.rust-lang.org/book/ch10-02-traits.html>
 2. Pierce, B. C. (2002). *Types and Programming Languages*. MIT Press.
 3. Cardelli, L., & Wegner, P. (1985). *On understanding types, data abstraction, and polymorphism*. ACM Computing Surveys.
 
@@ -198,4 +198,4 @@ trait Iterator {
 
 **文档状态**：已完成  
 **下次评审**：2025-02-27  
-**维护者**：Rust 形式化理论团队 
+**维护者**：Rust 形式化理论团队

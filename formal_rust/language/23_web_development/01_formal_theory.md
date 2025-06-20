@@ -284,12 +284,12 @@ async fn fetch_user(id: u32) -> Result<User, Box<dyn std::error::Error>> {
 
 ## 10. 参考文献
 
-1. Rust Web 工作组：https://github.com/rustwasm
-2. Yew 框架：https://github.com/yewstack/yew
-3. Actix Web：https://github.com/actix/actix-web
+1. Rust Web 工作组：<https://github.com/rustwasm>
+2. Yew 框架：<https://github.com/yewstack/yew>
+3. Actix Web：<https://github.com/actix/actix-web>
 
 ---
 
 **文档状态**：已完成  
 **下次评审**：2025-02-27  
-**维护者**：Rust 形式化理论团队 
+**维护者**：Rust 形式化理论团队

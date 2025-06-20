@@ -229,12 +229,12 @@ impl Drop for SafeBuffer {
 
 ## 10. 参考文献
 
-1. Rust 官方文档：https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html#calling-rust-functions-from-other-languages
-2. Rust FFI 指南：https://rust-lang.github.io/rust-bindgen/
-3. Rustonomicon：https://doc.rust-lang.org/nomicon/ffi.html
+1. Rust 官方文档：<https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html#calling-rust-functions-from-other-languages>
+2. Rust FFI 指南：<https://rust-lang.github.io/rust-bindgen/>
+3. Rustonomicon：<https://doc.rust-lang.org/nomicon/ffi.html>
 
 ---
 
 **文档状态**：已完成  
 **下次评审**：2025-02-27  
-**维护者**：Rust 形式化理论团队 
+**维护者**：Rust 形式化理论团队

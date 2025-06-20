@@ -172,7 +172,7 @@ impl Drop for Resource {
 
 ## 10. 参考文献
 
-1. Rust 官方文档：https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html
+1. Rust 官方文档：<https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html>
 2. Jung, R., et al. (2021). *RustBelt: Securing the foundations of the Rust programming language*. JACM.
 3. Pierce, B. C. (2002). *Types and Programming Languages*. MIT Press.
 
@@ -180,4 +180,4 @@ impl Drop for Resource {
 
 **文档状态**：已完成  
 **下次评审**：2025-02-27  
-**维护者**：Rust 形式化理论团队 
+**维护者**：Rust 形式化理论团队

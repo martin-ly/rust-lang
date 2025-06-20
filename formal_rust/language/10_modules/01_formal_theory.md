@@ -168,7 +168,7 @@ pub use foo::bar;
 
 ## 10. 参考文献
 
-1. Rust 官方文档：https://doc.rust-lang.org/reference/items/modules.html
+1. Rust 官方文档：<https://doc.rust-lang.org/reference/items/modules.html>
 2. Pierce, B. C. (2002). *Types and Programming Languages*. MIT Press.
 3. Gamma, E., et al. (1994). *Design Patterns*. Addison-Wesley.
 
@@ -176,4 +176,4 @@ pub use foo::bar;
 
 **文档状态**：已完成  
 **下次评审**：2025-02-27  
-**维护者**：Rust 形式化理论团队 
+**维护者**：Rust 形式化理论团队

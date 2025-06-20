@@ -477,12 +477,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 10. 参考文献
 
-1. Serde 序列化框架：https://serde.rs/
-2. Rust 序列化指南：https://doc.rust-lang.org/serde/
-3. JSON 序列化：https://docs.rs/serde_json/
+1. Serde 序列化框架：<https://serde.rs/>
+2. Rust 序列化指南：<https://doc.rust-lang.org/serde/>
+3. JSON 序列化：<https://docs.rs/serde_json/>
 
 ---
 
 **文档状态**：已完成  
 **下次评审**：2025-02-27  
-**维护者**：Rust 形式化理论团队 
+**维护者**：Rust 形式化理论团队

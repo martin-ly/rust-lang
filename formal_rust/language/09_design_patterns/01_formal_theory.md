@@ -36,6 +36,7 @@ A **Rust Design Pattern** is a formal specification of a recurring solution to a
 $$\mathcal{P} = (\Sigma, \mathcal{T}, \mathcal{R}, \mathcal{S})$$
 
 Where:
+
 - $\Sigma$ is the signature (types and traits)
 - $\mathcal{T}$ is the type constraints
 - $\mathcal{R}$ is the implementation rules
@@ -82,6 +83,7 @@ A pattern signature $\Sigma$ is defined as:
 $$\Sigma = (T, F, R)$$
 
 Where:
+
 - $T$ is a set of type parameters
 - $F$ is a set of function signatures
 - $R$ is a set of trait bounds
@@ -120,6 +122,7 @@ $$\frac{\Gamma \vdash e : \mathcal{P}}{\Gamma \vdash e : \tau} \quad \text{where
 $$\text{Singleton}(T) = \exists x : T. \forall y : T. x = y$$
 
 **Implementation**:
+
 ```rust
 pub struct Singleton<T> {
     instance: OnceLock<T>,
@@ -143,6 +146,7 @@ impl<T> Singleton<T> {
 $$\text{Factory}(T, F) = \forall x : F. \exists y : T. \text{create}(x) = y$$
 
 **Type Signature**:
+
 ```rust
 trait Factory<T> {
     fn create(&self) -> T;
@@ -157,6 +161,7 @@ trait Factory<T> {
 $$\text{Adapter}(A, B) = \exists f : A \rightarrow B. \forall x : A. \text{adapt}(x) = f(x)$$
 
 **Implementation**:
+
 ```rust
 trait Target {
     fn request(&self) -> String;
@@ -192,6 +197,7 @@ $$\text{Decorator}(T, D) = \forall x : T. \exists d : D. \text{decorate}(x, d) :
 $$\text{Strategy}(S, C) = \forall s : S. \exists c : C. \text{execute}(s, c) : \text{Result}$$
 
 **Implementation**:
+
 ```rust
 trait Strategy {
     fn execute(&self, a: i32, b: i32) -> i32;
@@ -223,6 +229,7 @@ $$\text{Observer}(S, O) = \forall s : S. \forall o : O. \text{notify}(s, o) \rig
 $$\text{ProducerConsumer}(T) = \exists c : \text{Channel}(T). \text{Producer}(c) \parallel \text{Consumer}(c)$$
 
 **Implementation**:
+
 ```rust
 struct ProducerConsumer<T> {
     sender: mpsc::Sender<T>,
@@ -317,6 +324,7 @@ $$\mathcal{P}_1 \sqsubseteq \mathcal{P}_2 \land \mathcal{P}_2 \sqsubseteq \mathc
 **Theorem 7.1** (Pattern Memory Safety): All Rust design patterns preserve memory safety.
 
 **Proof**: By structural induction on pattern definitions:
+
 1. **Base Case**: Primitive patterns use safe Rust constructs
 2. **Inductive Step**: Pattern composition preserves safety invariants
 3. **Conclusion**: All patterns maintain memory safety
@@ -325,7 +333,8 @@ $$\mathcal{P}_1 \sqsubseteq \mathcal{P}_2 \land \mathcal{P}_2 \sqsubseteq \mathc
 
 **Theorem 7.2** (Pattern Thread Safety): Concurrency patterns guarantee thread safety.
 
-**Proof**: 
+**Proof**:
+
 - Producer-Consumer: Uses `mpsc::channel()` which is thread-safe
 - Reader-Writer: Uses `RwLock<T>` which prevents data races
 - Actor: Uses message passing which is inherently thread-safe
@@ -437,6 +446,7 @@ Since function composition is associative, the result follows.
 Let $\mathcal{P}_1$ and $\mathcal{P}_2$ be safe patterns.
 
 For any composition $\mathcal{P}_1 \circ \mathcal{P}_2$:
+
 1. $\mathcal{P}_1$ is safe by assumption
 2. $\mathcal{P}_2$ is safe by assumption
 3. Composition preserves safety by Rust's type system
@@ -486,4 +496,4 @@ Therefore, $\mathcal{P} \equiv \mathcal{P}$.
 
 **Document Status**: Complete  
 **Next Review**: 2025-02-27  
-**Maintainer**: Rust Formal Theory Team 
+**Maintainer**: Rust Formal Theory Team
