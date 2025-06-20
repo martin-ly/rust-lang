@@ -403,12 +403,14 @@ $$(M_1 \circ M_2) \circ M_3 = M_1 \circ (M_2 \circ M_3)$$
 
 对于任意处理函数 $f$ 和输入 $x$，有：
 
-$$\begin{align}
+$$
+\begin{align}
 ((M_1 \circ M_2) \circ M_3)(f)(x) &= (M_1 \circ M_2)(M_3(f))(x) \\
 &= M_1(M_2(M_3(f)))(x) \\
 &= M_1((M_2 \circ M_3)(f))(x) \\
 &= (M_1 \circ (M_2 \circ M_3))(f)(x)
-\end{align}$$
+\end{align}
+$$
 
 因此，$(M_1 \circ M_2) \circ M_3 = M_1 \circ (M_2 \circ M_3)$。
 
@@ -436,15 +438,19 @@ $$M \circ M \equiv M$$
 
 对于任意处理函数 $f$ 和输入 $x$，有：
 
-$$\begin{align}
+$$
+\begin{align}
 (M \circ M)(f)(x) &= M(M(f))(x) \\
-\end{align}$$
+\end{align}
+$$
 
 如果 $M$ 是幂等的，则 $M(M(f)) = M(f)$，因此：
 
-$$\begin{align}
+$$
+\begin{align}
 M(M(f))(x) &= M(f)(x) \\
-\end{align}$$
+\end{align}
+$$
 
 所以 $M \circ M \equiv M$。
 
@@ -463,4 +469,4 @@ $$M_1 \circ M_2 \equiv M_{fused}$$
 5. 函数式编程中的中间件模式：Composable Application Architecture with Reasonably Priced Monads
 6. 范畴论与函数式编程：Category Theory for Programmers
 7. 洋葱模型架构：The Onion Architecture
-8. Rust异步编程：Asynchronous Programming in Rust 
+8. Rust异步编程：Asynchronous Programming in Rust

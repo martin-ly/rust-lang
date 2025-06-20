@@ -287,7 +287,7 @@ impl DatabasePool {
 
 ## Rocket框架分析
 
-### 架构设计
+### 架构设计1
 
 ```rust
 // Rocket 核心架构
@@ -482,7 +482,7 @@ pub async fn create_user_with_validation(
 
 ## Warp框架分析
 
-### 架构设计
+### 架构设计2
 
 ```rust
 // Warp 核心架构
@@ -704,7 +704,7 @@ pub fn protected_user_routes() -> impl Filter<Extract = impl Reply> + Clone {
 
 ## Axum框架分析
 
-### 架构设计
+### 架构设计3
 
 ```rust
 // Axum 核心架构
@@ -898,7 +898,7 @@ async fn main() {
 }
 ```
 
-### 类型安全特性
+### 类型安全特性1
 
 ```rust
 // Axum 类型安全特性
