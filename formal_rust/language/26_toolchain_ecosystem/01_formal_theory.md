@@ -269,7 +269,7 @@ $$Compile(src) = Link \circ CodeGen \circ Optimize \circ MIRGen \circ HIRGen \ci
 
 **模型 26.1** (rustc流水线)
 
-```
+```text
 源代码 -> 词法分析 -> 语法分析 -> 名称解析 -> 类型检查 -> 
 借用检查 -> HIR -> MIR -> LLVM IR -> 机器代码
 ```
@@ -287,7 +287,7 @@ $$Resolve(P) = \{(D_1, V_1), (D_2, V_2), ..., (D_n, V_n)\}$$
 
 **算法 26.1** (依赖解析算法)
 
-```
+```cpp
 function ResolveDependencies(package):
     resolved = {}
     unresolved = package.dependencies
@@ -426,7 +426,7 @@ $$Protocol = (Messages, Sequence, ErrorHandling)$$
 
 **模型 26.4** (rust-analyzer协议)
 
-```
+```text
 Editor <--[LSP]--> rust-analyzer <--[IPC]--> rustc
 ```
 
@@ -463,7 +463,7 @@ Rust工具链使用语义化版本控制来管理版本演进。
 
 **算法 26.2** (版本升级决策)
 
-```
+```cpp
 function DetermineNewVersion(changes):
     if HasIncompatibleChanges(changes):
         return IncrementMajor(currentVersion)
@@ -498,7 +498,7 @@ $$Integration(IDE, LS) = (Requests, Notifications, Configurations)$$
 
 **模型 26.5** (LSP集成)
 
-```
+```text
 +-------+   LSP请求   +---------+   内部API   +-------+
 | IDE   | ---------> | 语言服务 | ---------> | rustc |
 +-------+ <--------- | 服务器   | <--------- +-------+
@@ -518,7 +518,7 @@ $$CICD = (Checkout, Build, Test, Deploy)$$
 
 **模型 26.6** (CI/CD工作流)
 
-```
+```text
 源代码 -> cargo build -> cargo test -> cargo bench -> cargo doc -> 部署
 ```
 
@@ -533,7 +533,7 @@ $$CrossPlatform(T) = \min_{p_i, p_j \in Platforms} Similarity(Behavior(T, p_i), 
 
 **模型 26.7** (跨平台抽象)
 
-```
+```text
 +-------------+
 | 统一工具接口 |
 +-------------+

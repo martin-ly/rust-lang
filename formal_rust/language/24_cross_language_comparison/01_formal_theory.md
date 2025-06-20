@@ -184,7 +184,7 @@ struct LanguageFeatures<L> {
 **定义 24.7** (语法映射)
 语法映射 $SM: Syntax_{L_1} \rightarrow Syntax_{L_2}$ 定义了语言 $L_1$ 中的语法结构如何映射到语言 $L_2$ 中的语法结构。
 
-```
+```cpp
 // Rust 到 C++ 的部分语法映射示例
 struct RustToCppSyntaxMap {
     // Rust的struct映射到C++的class或struct
@@ -207,7 +207,7 @@ struct RustToCppSyntaxMap {
 **定义 24.8** (安全保证映射)
 安全保证映射 $SM: Safety_{L_1} \rightarrow Safety_{L_2}$ 定义了语言 $L_1$ 中的安全保证如何映射到语言 $L_2$ 中的安全保证。
 
-```
+```cpp
 // Rust 到 C++ 的安全保证映射
 struct RustToCppSafetyMap {
     // Rust的所有权系统对应于C++的RAII和智能指针
@@ -271,11 +271,13 @@ struct RustToCppSafetyMap {
 **定义 24.9** (特性度量)
 对于特性 $f$，我们定义度量函数 $M_f(L)$ 来评估语言 $L$ 对该特性的支持程度。
 
-$$M_f(L) = \begin{cases}
+$$
+M_f(L) = \begin{cases}
 0, & \text{不支持} \\
 0.5, & \text{部分支持} \\
 1, & \text{完全支持}
-\end{cases}$$
+\end{cases}
+$$
 
 **定义 24.10** (语言相似度)
 两种语言 $L_1$ 和 $L_2$ 的相似度定义为它们在所有特性上的度量差异的加权平均。
@@ -311,6 +313,7 @@ $$FM_{i,j} = M_{f_j}(L_i)$$
 Rust和C++都是系统编程语言，但它们在安全性和内存管理方面有显著差异。
 
 **表格 24.1** Rust vs C++ 比较
+
 | 特性 | Rust | C++ | 说明 |
 |------|------|-----|------|
 | 内存安全 | 1 | 0.5 | Rust提供编译时内存安全保证；C++通过RAII和智能指针提供部分安全保证 |
@@ -330,6 +333,7 @@ $$\text{Rust enum} \mapsto \text{C++ variant 或类层次结构}$$
 Rust和Haskell在类型系统和函数式编程方面有许多共同点，但它们的核心设计理念不同。
 
 **表格 24.2** Rust vs Haskell 比较
+
 | 特性 | Rust | Haskell | 说明 |
 |------|------|---------|------|
 | 类型系统 | 0.8 | 1 | Haskell的类型系统更强大，支持高阶类型和类型类 |
@@ -349,6 +353,7 @@ $$\text{Rust闭包} \mapsto \text{Haskell函数和闭包}$$
 Rust和Go都是现代的系统编程语言，但它们在并发模型和内存管理方面有显著差异。
 
 **表格 24.3** Rust vs Go 比较
+
 | 特性 | Rust | Go | 说明 |
 |------|------|-----|------|
 | 内存管理 | 1 | 0.7 | Rust使用所有权系统；Go使用垃圾回收 |

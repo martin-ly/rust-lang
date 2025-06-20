@@ -216,7 +216,7 @@ impl ConceptDependencyGraph {
 
 **例子 25.2** (部分Rust概念依赖图)
 
-```
+```text
 所有权 <- 借用 <- 生命周期
         ↑
 基本类型 <- 复合类型 <- trait <- 泛型
@@ -291,7 +291,7 @@ $$TS_{t+1} = Update(TS_t, feedback_t)$$
 
 **算法 25.1** (所有权教学序列)
 
-```
+```cpp
 function TeachOwnership(student):
     // 第1步：引入具体类比
     Analogy = "图书借阅系统，一本书只能被一个人拥有"
@@ -363,7 +363,7 @@ function TeachOwnership(student):
 **定义 25.11** (生命周期可视化)
 生命周期可以通过时间线可视化表示：
 
-```
+```rust
 fn example<'a>(x: &'a str, y: &str) -> &'a str {
     x
 }
@@ -396,7 +396,7 @@ Rust的错误处理模式结合了函数式和命令式风格，教学模式如�
 
 **示例 25.3** (错误处理进阶路径)
 
-```
+```text
 基本Result使用 → 自定义错误类型 → 错误转换 → 高级错误处理库
 ```
 
@@ -598,7 +598,7 @@ fn lifetime_step2() {
 }
 ```
 
-**步骤3: 生命周期边界情况**
+**步骤3: 生命周期边界情况**:
 
 ```rust
 fn lifetime_step3() {
