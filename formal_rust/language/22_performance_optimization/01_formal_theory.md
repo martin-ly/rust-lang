@@ -1085,7 +1085,7 @@ enum DeallocationError {
 
 ### 编译器优化示例
 
-#### 循环优化
+#### 循环优化1
 
 ```rust
 // 循环优化示例
@@ -1334,7 +1334,7 @@ use std::collections::VecDeque;
 
 5. Herlihy, M., and N. Shavit. "The Art of Multiprocessor Programming." Morgan Kaufmann (2008).
 
-6. Rust Team. "The Rust Programming Language." https://doc.rust-lang.org/book/ (2021).
+6. Rust Team. "The Rust Programming Language." <https://doc.rust-lang.org/book/> (2021).
 
 7. Intel. "Intel 64 and IA-32 Architectures Optimization Reference Manual." Intel Corporation (2016).
 
@@ -1346,4 +1346,4 @@ use std::collections::VecDeque;
 
 ---
 
-**相关文档**: [03_内存管理](../03_memory_management/01_formal_theory.md), [05_并发](../05_concurrency/01_formal_theory.md), [07_不安全Rust](../07_unsafe_rust/01_formal_theory.md), [21_应用领域](../21_application_domains/01_formal_theory.md) 
+**相关文档**: [03_内存管理](../03_memory_management/01_formal_theory.md), [05_并发](../05_concurrency/01_formal_theory.md), [07_不安全Rust](../07_unsafe_rust/01_formal_theory.md), [21_应用领域](../21_application_domains/01_formal_theory.md)

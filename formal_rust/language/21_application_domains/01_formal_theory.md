@@ -52,6 +52,7 @@
 $$DSL_D = (L, \Sigma_D, \mathcal{R}_D, \mathcal{S}_D)$$
 
 其中：
+
 - $\Sigma_D$ 是领域特定的语法
 - $\mathcal{R}_D$ 是领域特定的语义规则
 - $\mathcal{S}_D$ 是领域特定的安全约束
@@ -464,7 +465,7 @@ impl QuantumCircuit {
 
 ---
 
-## 安全保证
+## 安全保证1
 
 ### 形式化安全属性
 
@@ -1068,7 +1069,7 @@ fn main() {
 
 3. Nielsen, M. A., and I. L. Chuang. "Quantum computation and quantum information." Cambridge University Press (2010).
 
-4. Rust Team. "The Rust Programming Language." https://doc.rust-lang.org/book/ (2021).
+4. Rust Team. "The Rust Programming Language." <https://doc.rust-lang.org/book/> (2021).
 
 5. Vogels, W. "Eventually consistent." Communications of the ACM 52.1 (2009): 40-44.
 
@@ -1084,4 +1085,4 @@ fn main() {
 
 ---
 
-**相关文档**: [02_类型系统](../02_type_system/01_formal_theory.md), [05_并发](../05_concurrency/01_formal_theory.md), [07_不安全Rust](../07_unsafe_rust/01_formal_theory.md), [19_高级语言特性](../19_advanced_language_features/01_formal_theory.md) 
+**相关文档**: [02_类型系统](../02_type_system/01_formal_theory.md), [05_并发](../05_concurrency/01_formal_theory.md), [07_不安全Rust](../07_unsafe_rust/01_formal_theory.md), [19_高级语言特性](../19_advanced_language_features/01_formal_theory.md)
