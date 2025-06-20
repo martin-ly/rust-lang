@@ -74,12 +74,14 @@ Rust工具链生态系统理论探讨Rust工具链的组织和演化原则，展
 
 **定义 26.1** (工具链依赖图)
 工具链依赖图是一个有向图 $G = (V, E)$，其中:
+
 - $V$ 是工具链组件的集合
 - $E$ 是组件间依赖关系的集合
 - 如果组件 $v_i$ 依赖于组件 $v_j$，则存在边 $(v_i, v_j) \in E$
 
 **定理 26.1** (依赖图性质)
 一个健壮的工具链依赖图 $G$ 应满足:
+
 - $G$ 是有向无环图 (DAG)
 - 对于任意节点 $v \in V$，其依赖节点数量有上限: $|Dep(v)| \leq k$，其中 $k$ 是常数
 - 存在少量核心节点 $C \subset V$，使得大部分节点依赖于 $C$
@@ -90,11 +92,13 @@ Rust工具链生态系统理论探讨Rust工具链的组织和演化原则，展
 
 **定义 26.2** (工具链代数)
 工具链代数是一个三元组 $(T, \oplus, \otimes)$，其中:
+
 - $T$ 是工具集合
 - $\oplus$ 是工具并行组合操作
 - $\otimes$ 是工具串行组合操作
 
 这些操作满足以下性质:
+
 - $\oplus$ 是交换律: $a \oplus b = b \oplus a$
 - $\otimes$ 满足结合律: $(a \otimes b) \otimes c = a \otimes (b \otimes c)$
 - $\otimes$ 对 $\oplus$ 满足分配律: $a \otimes (b \oplus c) = (a \otimes b) \oplus (a \otimes c)$
@@ -116,6 +120,7 @@ $$C^* = \arg\min_C Cost(T, C)$$
 $$S(t) = (C(t), U(t), D(t), E(t))$$
 
 其中:
+
 - $C(t)$ 是组件集合
 - $U(t)$ 是用户需求分布
 - $D(t)$ 是开发者活跃度分布
@@ -217,6 +222,7 @@ struct DataSink {
 $$ExtensionPoint = (Hook, Protocol, Constraints)$$
 
 其中:
+
 - $Hook$ 是挂载点
 - $Protocol$ 是通信协议
 - $Constraints$ 是约束条件
@@ -262,6 +268,7 @@ $$Compile(src) = Link \circ CodeGen \circ Optimize \circ MIRGen \circ HIRGen \ci
 其中每个阶段都将输入转换为更接近目标代码的表示。
 
 **模型 26.1** (rustc流水线)
+
 ```
 源代码 -> 词法分析 -> 语法分析 -> 名称解析 -> 类型检查 -> 
 借用检查 -> HIR -> MIR -> LLVM IR -> 机器代码
@@ -279,6 +286,7 @@ $$Resolve(P) = \{(D_1, V_1), (D_2, V_2), ..., (D_n, V_n)\}$$
 使得所有版本约束都满足，且不存在版本冲突。
 
 **算法 26.1** (依赖解析算法)
+
 ```
 function ResolveDependencies(package):
     resolved = {}
@@ -311,6 +319,7 @@ rustup管理不同版本和目标的Rust工具链，实现跨平台和版本管�
 $$Toolchain = (Version, Target, Components)$$
 
 **模型 26.2** (rustup管理模型)
+
 ```rust
 struct Rustup {
     installed_toolchains: HashMap<String, Toolchain>,
@@ -344,7 +353,8 @@ struct Rustup {
 $$Cooperate(T_1, T_2) \iff Output(T_1) \subseteq Input(T_2)$$
 
 **模型 26.3** (辅助工具生态)
-```
+
+```text
              +--------+
              | rustc  |
              +--------+
@@ -380,6 +390,7 @@ Rust工具链生态系统可以分为以下层次:
 
 **定义 26.13** (稳定依赖原则)
 健康的工具链生态系统应满足:
+
 1. 依赖应指向更稳定的组件
 2. 循环依赖应被最小化
 3. 核心组件应有最少的依赖
@@ -414,6 +425,7 @@ struct DependencyGraph {
 $$Protocol = (Messages, Sequence, ErrorHandling)$$
 
 **模型 26.4** (rust-analyzer协议)
+
 ```
 Editor <--[LSP]--> rust-analyzer <--[IPC]--> rustc
 ```
@@ -433,6 +445,7 @@ $$Evolve(F, v_1, v_2) = (Add(F, v_1, v_2), Modify(F, v_1, v_2), Remove(F, v_1, v
 
 **定理 26.5** (演化约束)
 健康的工具链演化应满足:
+
 1. 向后兼容性: $Compatible(v_n, v_{n-1})$
 2. 渐进式变革: $|Evolve(F, v_n, v_{n+1})| \leq k$，其中 $k$ 是常数
 3. 稳定API: 核心API在主版本之间保持稳定
@@ -443,11 +456,13 @@ Rust工具链使用语义化版本控制来管理版本演进。
 
 **定义 26.16** (语义版本)
 版本号 $v = (Major, Minor, Patch)$ 的语义为:
+
 - $Major$: 不兼容API变更
 - $Minor$: 向后兼容的功能添加
 - $Patch$: 向后兼容的错误修复
 
 **算法 26.2** (版本升级决策)
+
 ```
 function DetermineNewVersion(changes):
     if HasIncompatibleChanges(changes):
@@ -482,6 +497,7 @@ IDE与语言服务器的集成可以表示为:
 $$Integration(IDE, LS) = (Requests, Notifications, Configurations)$$
 
 **模型 26.5** (LSP集成)
+
 ```
 +-------+   LSP请求   +---------+   内部API   +-------+
 | IDE   | ---------> | 语言服务 | ---------> | rustc |
@@ -501,6 +517,7 @@ $$CICD = (Checkout, Build, Test, Deploy)$$
 每个阶段可以使用不同的Rust工具链组件。
 
 **模型 26.6** (CI/CD工作流)
+
 ```
 源代码 -> cargo build -> cargo test -> cargo bench -> cargo doc -> 部署
 ```
@@ -515,6 +532,7 @@ Rust工具链支持多平台，通过跨平台抽象层实现。
 $$CrossPlatform(T) = \min_{p_i, p_j \in Platforms} Similarity(Behavior(T, p_i), Behavior(T, p_j))$$
 
 **模型 26.7** (跨平台抽象)
+
 ```
 +-------------+
 | 统一工具接口 |
@@ -530,10 +548,10 @@ Win  macOS Linux  BSD  WASM ...
 
 1. Matsakis, N. D., & Klock, F. S. (2014). The Rust Language. ACM SIGAda Ada Letters, 34(3).
 2. Turon, A. (2015). Understanding and Evolving the Rust Programming Language. PhD Thesis.
-3. The Cargo Book. https://doc.rust-lang.org/cargo/
-4. The rustup Book. https://rust-lang.github.io/rustup/
-5. The rustc Book. https://doc.rust-lang.org/rustc/
+3. The Cargo Book. <https://doc.rust-lang.org/cargo/>
+4. The rustup Book. <https://rust-lang.github.io/rustup/>
+5. The rustc Book. <https://doc.rust-lang.org/rustc/>
 6. Blandy, J., Orendorff, J., & Tindall, L. (2021). Programming Rust. O'Reilly Media.
 7. Klabnik, S., & Nichols, C. (2018). The Rust Programming Language. No Starch Press.
-8. Rust RFC Book. https://rust-lang.github.io/rfcs/
-9. Rust Language Server Protocol. https://github.com/rust-analyzer/rust-analyzer
+8. Rust RFC Book. <https://rust-lang.github.io/rfcs/>
+9. Rust Language Server Protocol. <https://github.com/rust-analyzer/rust-analyzer>
