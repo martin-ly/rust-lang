@@ -120,6 +120,7 @@ $$\Omega = \{S | S \text{ 是有效的生态系统状态}\}$$
 $$S = (C, R, M, P)$$
 
 其中：
+
 - $C$ 是组件集合
 - $R$ 是关系集合
 - $M$ 是元数据集合
@@ -207,10 +208,12 @@ $$\frac{dA_\tau(t)}{dt} = r A_\tau(t)^\eta (1 - A_\tau(t))$$
 **定理 27.14** (临界采纳质量)
 如果初始采纳率 $A_\tau(0) > \theta_\tau$，则技术最终会被广泛采纳；否则采纳率会下降。
 
-$$\lim_{t \to \infty} A_\tau(t) = \begin{cases}
+$$
+\lim_{t \to \infty} A_\tau(t) = \begin{cases}
 1, & \text{如果 } A_\tau(0) > \theta_\tau \\
 0, & \text{如果 } A_\tau(0) < \theta_\tau
-\end{cases}$$
+\end{cases}
+$$
 
 **证明**:
 在考虑阈值的修正模型中：
@@ -234,6 +237,7 @@ $$v_L(t) = \frac{dA_L(t)}{dt}$$
 $$v_L(t) = f(Q_L, C_L, A_L(t), N_L(t), D_L)$$
 
 其中：
+
 - $Q_L$ 是库的质量
 - $C_L$ 是与替代品的兼容性
 - $A_L(t)$ 是当前采纳率
@@ -455,4 +459,4 @@ Cargo构建系统的演化展示了生态系统健康度的动态变化：
 6. Rust Foundation. (2025). Rust Ecosystem Health Report.
 7. Matsakis, N. D., & Klock, F. S., II. (2014). The Rust Language.
 8. Tokio Team. (2024). Tokio Ecosystem Evolution Analysis.
-9. Rust Core Team. (2023). Rust Language Evolution Strategy. 
+9. Rust Core Team. (2023). Rust Language Evolution Strategy.

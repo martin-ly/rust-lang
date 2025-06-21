@@ -187,4 +187,4 @@
 - [**22_性能优化**](../22_performance_optimization/00_index.md) - 性能优化与生态系统架构的关系
 - [**23_安全验证**](../23_security_verification/00_index.md) - 安全验证在生态系统中的应用
 - [**26_工具链生态系统**](../26_toolchain_ecosystem/00_index.md) - 工具链作为生态系统的一部分
-- [**20_理论视角**](../20_theoretical_perspectives/00_index.md) - 理论基础与生态系统架构的关联 
+- [**20_理论视角**](../20_theoretical_perspectives/00_index.md) - 理论基础与生态系统架构的关联

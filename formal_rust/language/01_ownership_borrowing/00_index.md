@@ -59,10 +59,33 @@ Rust所有权系统是语言的核心创新，通过编译时检查确保内存�
 
 ## 交叉引用
 
-- 与[类型系统](../02_type_system/00_index.md)的深度集成
-- 与[控制流](../03_control_flow/00_index.md)的交互
-- 与[并发系统](../05_concurrency/00_index.md)的安全保证
-- 与[异步编程](../06_async_await/00_index.md)的生命周期管理
+### 相关模块
+
+- [模块 02: 类型系统](../02_type_system/00_index.md) - 所有权与类型系统的深度集成
+- [模块 04: 泛型](../04_generics/00_index.md) - 所有权与泛型编程的结合
+- [模块 05: 并发](../05_concurrency/00_index.md) - 所有权保证的线程安全
+- [模块 06: 异步/等待](../06_async_await/00_index.md) - 生命周期与异步编程
+- [模块 11: 内存管理](../11_memory_management/00_index.md) - 所有权系统的内存管理实现
+- [模块 19: 高级语言特性](../19_advanced_language_features/00_index.md) - 高级所有权模式
+
+### 相关概念
+
+| 概念 | 定义位置 | 相关模块 |
+|------|----------|----------|
+| 类型安全 | [模块 02: 类型系统](../02_type_system/01_formal_type_system.md#类型安全) | 02, 23 |
+| 内存管理 | [模块 11: 内存管理](../11_memory_management/01_formal_memory_model.md#内存管理模型) | 11, 22 |
+| 线程安全 | [模块 05: 并发](../05_concurrency/01_formal_concurrency_model.md#线程安全性) | 05, 23 |
+| 泛型生命周期 | [模块 04: 泛型](../04_generics/01_formal_generics_system.md#泛型生命周期) | 04, 19 |
+
+### 核心定义与定理
+
+- **定义 1.1**: [所有权](01_formal_ownership_system.md#所有权定义) - 值的唯一控制权
+- **定义 1.4**: [借用](02_borrowing_system.md#借用定义) - 临时访问权限
+- **定义 1.6**: [生命周期](03_lifetime_system.md#生命周期定义) - 引用有效期
+
+- **定理 1.1**: [所有权唯一性](06_theorems.md#所有权唯一性) - 在任何时刻，一个值只能有一个所有者
+- **定理 1.6**: [借用安全性](06_theorems.md#借用安全性) - 借用规则确保内存安全
+- **定理 1.9**: [生命周期有界性](06_theorems.md#生命周期有界性) - 引用的生命周期不能超过被引用值的生命周期
 
 ## 数学符号说明
 

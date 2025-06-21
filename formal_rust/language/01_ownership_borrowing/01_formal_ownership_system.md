@@ -20,6 +20,11 @@
 
 Rust所有权系统是Rust语言的核心创新，它通过静态分析在编译时保证内存安全和线程安全，同时避免了垃圾回收的运行时开销。该系统基于线性类型理论和分离逻辑，实现了零成本抽象的安全保证。
 
+**相关概念**：
+- [类型系统](../02_type_system/01_formal_type_system.md#类型系统概述) (模块 02)
+- [内存安全](../23_security_verification/01_formal_security_model.md#内存安全) (模块 23)
+- [零成本抽象](../19_advanced_language_features/01_zero_cost_abstractions.md#零成本抽象) (模块 19)
+
 ### 1.2 历史背景
 
 所有权系统的理论基础可以追溯到：
@@ -141,9 +146,9 @@ $$\Gamma ::= \emptyset \mid \Gamma, x: \tau$$
 - $\text{Ref}(\tau)$: 借用类型 $\tau$ 的值
 - $\text{RefMut}(\tau)$: 可变借用类型 $\tau$ 的值
 
-### 4.3 生命周期
+### 4.3 生命周期 {#生命周期定义}
 
-**定义**: 生命周期 $\alpha$ 表示引用的有效期。
+**定义 1.6**: 生命周期 $\alpha$ 表示引用的有效期，即引用在程序中可以安全使用的时间范围。
 
 **形式化表示**:
 $$\text{Ref}_{\alpha}(\tau)$$
@@ -155,9 +160,20 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 }
 ```
 
+**相关定理**：
+- [定理 1.9: 生命周期有界性](06_theorems.md#生命周期有界性)
+- [定理 1.10: 生命周期包含关系](06_theorems.md#生命周期包含关系)
+
+**相关概念**：
+- [借用规则](#借用定义) (本模块)
+- [泛型生命周期](../04_generics/01_formal_generics_system.md#泛型生命周期) (模块 04)
+- [异步生命周期](../06_async_await/01_formal_async_model.md#异步生命周期) (模块 06)
+
 ## 5. 核心概念
 
-### 5.1 所有权规则
+### 5.1 所有权规则 {#所有权定义}
+
+**定义 1.1**: 所有权是指对一个值的唯一控制权，包括读取、修改和销毁该值的能力。
 
 **规则1**: 每个值都有一个所有者
 $$\text{Value}(v) \Rightarrow \exists x. \text{Owner}(x, v)$$
@@ -168,7 +184,18 @@ $$\text{Owner}(x, v) \land \text{Owner}(y, v) \Rightarrow x = y$$
 **规则3**: 所有者离开作用域时值被丢弃
 $$\text{ScopeEnd}(x) \Rightarrow \text{Drop}(\text{ValueOf}(x))$$
 
-### 5.2 借用规则
+**相关定理**：
+- [定理 1.1: 所有权唯一性](06_theorems.md#所有权唯一性)
+- [定理 1.2: 所有权转移保持性](06_theorems.md#所有权转移保持性)
+
+**相关概念**：
+- [移动语义](#53-移动语义) (本模块)
+- [内存管理模型](../11_memory_management/01_formal_memory_model.md#内存管理模型) (模块 11)
+- [线程安全性](../05_concurrency/01_formal_concurrency_model.md#线程安全性) (模块 05)
+
+### 5.2 借用规则 {#借用定义}
+
+**定义 1.4**: 借用是指在不转移所有权的情况下，临时获取对值的访问权限。借用分为不可变借用（只读访问）和可变借用（读写访问）。
 
 **不可变借用规则**:
 $$\text{BorrowImm}(r, v) \Rightarrow \text{Read}(r, v) \land \neg \text{Write}(r, v)$$
@@ -178,6 +205,16 @@ $$\text{BorrowMut}(r, v) \Rightarrow \text{Read}(r, v) \land \text{Write}(r, v) 
 
 **借用冲突规则**:
 $$\text{BorrowMut}(r_1, v) \land \text{Borrow}(r_2, v) \Rightarrow \text{Conflict}$$
+
+**相关定理**：
+- [定理 1.6: 借用安全性](06_theorems.md#借用安全性)
+- [定理 1.7: 多重不可变借用安全性](06_theorems.md#多重不可变借用安全性)
+- [定理 1.8: 可变借用排他性](06_theorems.md#可变借用排他性)
+
+**相关概念**：
+- [生命周期](#生命周期定义) (本模块)
+- [引用类型](../02_type_system/01_formal_type_system.md#引用类型) (模块 02)
+- [并发安全性](../05_concurrency/01_formal_concurrency_model.md#并发安全性) (模块 05)
 
 ### 5.3 移动语义
 
