@@ -209,6 +209,7 @@ struct Point {
 **形式化对应**：
 
 在类型理论中，结构体 `Point` 是类型 `f64` 和 `f64` 的积，伴随着投影函数：
+
 - `get_x: Point -> f64`
 - `get_y: Point -> f64`
 
@@ -229,6 +230,7 @@ enum Either<A, B> {
 **形式化对应**：
 
 在类型理论中，枚举 `Either<A, B>` 是类型 `A` 和 `B` 的余积，伴随着注入函数：
+
 - `Left: A -> Either<A, B>`
 - `Right: B -> Either<A, B>`
 
@@ -253,9 +255,9 @@ Rust的类型系统可以被视为一个范畴，其中：
 
 以下是Rust标准库中函子的例子：
 
-1. **Option<T>**：通过 `map` 方法实现函子特性
-2. **Result<T, E>**：通过 `map` 方法实现函子特性，保持错误类型不变
-3. **Vec<T>**：通过 `map` 方法（通过迭代器）实现函子特性
+1. **`Option<T>`**：通过 `map` 方法实现函子特性
+2. **`Result<T, E>`**：通过 `map` 方法实现函子特性，保持错误类型不变
+3. **`Vec<T>`**：通过 `map` 方法（通过迭代器）实现函子特性
 
 ```rust
 // Option<T>作为函子
@@ -275,11 +277,11 @@ let y: Vec<i32> = x.into_iter().map(|n| n + 1).collect();  // [2, 3, 4]
 
 以下是Rust中单子的例子：
 
-1. **Option<T>**：
+1. **`Option<T>`**：
    - `pure` = `Some`
    - `bind` = `and_then`
 
-2. **Result<T, E>**：
+2. **`Result<T, E>`**：
    - `pure` = `Ok`
    - `bind` = `and_then`
 
@@ -594,4 +596,4 @@ impl<S, A> Lens<S, A, fn(&S) -> &A> {
 4. Wadler, P. (1992). The Essence of Functional Programming. In Proceedings of the 19th ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages.
 5. McBride, C., & Paterson, R. (2008). Applicative Programming with Effects. Journal of Functional Programming, 18(1), 1-13.
 6. The Rust Core Team. (2021). The Rust Programming Language. <https://doc.rust-lang.org/book/>
-7. MacIver, D. (2015). Rust, Generics, and Collections. <https://blog.rust-lang.org/2015/05/11/traits.html> 
+7. MacIver, D. (2015). Rust, Generics, and Collections. <https://blog.rust-lang.org/2015/05/11/traits.html>
