@@ -60,6 +60,7 @@ struct Point {
 $$\text{Type}(\tau) \Rightarrow \text{Ideal}(\tau)$$
 
 **相关概念**:
+
 - [类型理论哲学基础](../20_theoretical_perspectives/01_philosophical_foundations.md#类型理论哲学基础) (模块 20)
 - [形式主义与类型](../20_theoretical_perspectives/01_philosophical_foundations.md#形式主义) (模块 20)
 
@@ -82,6 +83,7 @@ enum List<T> {
 $$\text{Construct}(C) \Rightarrow \text{Type}(\tau)$$
 
 **相关概念**:
+
 - [构造主义数学](../20_theoretical_perspectives/01_philosophical_foundations.md#构造主义数学) (模块 20)
 - [直觉主义类型理论](../20_theoretical_perspectives/02_type_theory.md#直觉主义类型理论) (模块 20)
 
@@ -97,6 +99,7 @@ $$\text{Construct}(C) \Rightarrow \text{Type}(\tau)$$
 - **抽象**: 类型提供抽象
 
 **相关概念**:
+
 - [实用主义编程](../20_theoretical_perspectives/01_philosophical_foundations.md#实用主义编程) (模块 20)
 - [类型驱动开发](../25_teaching_learning/03_teaching_methods.md#类型驱动开发) (模块 25)
 
@@ -223,6 +226,7 @@ $$\tau ::= \forall \alpha. \tau$$
 $$\tau ::= \&_{\alpha} \tau \mid \&_{\alpha} \text{mut} \tau$$
 
 **相关概念**:
+
 - [类型表达式](02_type_theory.md#类型表达式) (本模块)
 - [类型系统语法](../19_advanced_language_features/01_type_systems.md#类型系统语法) (模块 19)
 
@@ -234,6 +238,7 @@ $$\tau ::= \&_{\alpha} \tau \mid \&_{\alpha} \text{mut} \tau$$
 $$\Gamma ::= \emptyset \mid \Gamma, x: \tau \mid \Gamma, \alpha$$
 
 **相关概念**:
+
 - [类型上下文](02_type_inference.md#类型上下文) (本模块)
 - [作用域与环境](../03_control_flow/02_scoping_rules.md#作用域环境) (模块 03)
 
@@ -353,6 +358,7 @@ $$\frac{}{\Gamma \vdash n: \text{Int}}$$
 $$\frac{}{\Gamma \vdash s: \text{String}}$$
 
 **相关概念**:
+
 - [类型检查规则](04_type_safety.md#类型检查规则) (本模块)
 - [基本类型系统](../19_advanced_language_features/01_type_systems.md#基本类型系统) (模块 19)
 
@@ -362,6 +368,7 @@ $$\frac{}{\Gamma \vdash s: \text{String}}$$
 $$\frac{x: \tau \in \Gamma}{\Gamma \vdash x: \tau}$$
 
 **相关概念**:
+
 - [变量绑定](../01_ownership_borrowing/01_formal_ownership_system.md#变量绑定) (模块 01)
 - [作用域规则](../03_control_flow/02_scoping_rules.md#作用域规则) (模块 03)
 
@@ -374,6 +381,7 @@ $$\frac{\Gamma, x: \tau \vdash e: \sigma}{\Gamma \vdash \lambda x.e: \tau \right
 $$\frac{\Gamma \vdash e_1: \tau \rightarrow \sigma \quad \Gamma \vdash e_2: \tau}{\Gamma \vdash e_1 e_2: \sigma}$$
 
 **相关概念**:
+
 - [函数类型](02_type_theory.md#函数类型) (本模块)
 - [高阶函数](../19_advanced_language_features/04_higher_order_functions.md#高阶函数) (模块 19)
 - [闭包类型](../19_advanced_language_features/05_closures.md#闭包类型) (模块 19)
@@ -393,6 +401,7 @@ $$\frac{\Gamma \vdash e: \tau_i}{\Gamma \vdash \text{in}_i(e): \tau_1 + \tau_2}$
 $$\frac{\Gamma \vdash e: \tau_1 + \tau_2 \quad \Gamma, x: \tau_1 \vdash e_1: \sigma \quad \Gamma, y: \tau_2 \vdash e_2: \sigma}{\Gamma \vdash \text{match } e \text{ with } \text{in}_1(x) \Rightarrow e_1 \mid \text{in}_2(y) \Rightarrow e_2: \sigma}$$
 
 **相关概念**:
+
 - [模式匹配](../03_control_flow/03_pattern_matching.md#模式匹配) (模块 03)
 - [代数数据类型定义](#代数数据类型定义) (本模块)
 - [枚举类型](../19_advanced_language_features/01_type_systems.md#枚举类型) (模块 19)
@@ -406,6 +415,7 @@ $$\frac{\Gamma, \alpha \vdash e: \tau}{\Gamma \vdash \Lambda \alpha.e: \forall \
 $$\frac{\Gamma \vdash e: \forall \alpha.\tau}{\Gamma \vdash e[\sigma]: \tau[\sigma/\alpha]}$$
 
 **相关概念**:
+
 - [泛型系统](../04_generics/01_formal_generics_system.md#泛型规则) (模块 04)
 - [类型参数化](../04_generics/01_formal_generics_system.md#类型参数化) (模块 04)
 - [泛型实例化](../04_generics/02_type_inference.md#泛型实例化) (模块 04)
@@ -419,6 +429,7 @@ $$\frac{\Gamma \vdash e: \tau}{\Gamma \vdash \&e: \&_{\alpha} \tau}$$
 $$\frac{\Gamma \vdash e: \&_{\alpha} \tau}{\Gamma \vdash *e: \tau}$$
 
 **相关概念**:
+
 - [借用规则](../01_ownership_borrowing/02_borrowing_system.md#借用规则) (模块 01)
 - [生命周期标注](../01_ownership_borrowing/03_lifetime_system.md#生命周期标注) (模块 01)
 - [引用安全性](../23_security_verification/01_formal_security_model.md#引用安全性) (模块 23)
@@ -440,6 +451,7 @@ $$\frac{e \rightarrow e'}{e.i \rightarrow e'.i}$$
 $$\frac{}{(v_1, v_2).1 \rightarrow v_1}$$
 
 **相关概念**:
+
 - [操作语义](../20_theoretical_perspectives/03_operational_semantics.md#操作语义) (模块 20)
 - [求值策略](../03_control_flow/01_evaluation_order.md#求值策略) (模块 03)
 - [表达式求值](../03_control_flow/01_evaluation_order.md#表达式求值) (模块 03)
@@ -453,6 +465,7 @@ $$\frac{\Gamma \vdash e: \tau \quad \alpha \notin \text{ftv}(\Gamma)}{\Gamma \vd
 $$\frac{\Gamma \vdash e: \forall \alpha.\tau}{\Gamma \vdash e: \tau[\sigma/\alpha]}$$
 
 **相关概念**:
+
 - [类型推断算法](02_type_inference.md#类型推断算法) (本模块)
 - [泛型类型推断](../04_generics/02_type_inference.md#泛型类型推断) (模块 04)
 - [类型变量](02_type_inference.md#类型变量) (本模块)
@@ -529,6 +542,7 @@ fn main() {
 ```
 
 **相关概念**:
+
 - [基本类型系统](../19_advanced_language_features/01_type_systems.md#基本类型系统) (模块 19)
 - [函数类型](02_type_theory.md#函数类型) (本模块)
 - [高阶函数](../19_advanced_language_features/04_higher_order_functions.md#高阶函数) (模块 19)
@@ -578,6 +592,7 @@ fn divide(x: f64, y: f64) -> Result<f64, String> {
 ```
 
 **相关概念**:
+
 - [代数数据类型定义](#代数数据类型定义) (本模块)
 - [结构体设计](07_type_design.md#结构体设计) (本模块)
 - [枚举设计](07_type_design.md#枚举设计) (本模块)
@@ -631,6 +646,7 @@ fn main() {
 ```
 
 **相关概念**:
+
 - [泛型系统](../04_generics/01_formal_generics_system.md#泛型系统) (模块 04)
 - [泛型约束](../04_generics/01_formal_generics_system.md#泛型约束) (模块 04)
 - [泛型实现](../04_generics/03_advanced_generics.md#泛型实现) (模块 04)
@@ -690,6 +706,7 @@ fn main() {
 ```
 
 **相关概念**:
+
 - [关联类型](../12_traits/04_trait_composition.md#关联类型) (模块 12)
 - [生命周期系统](../01_ownership_borrowing/03_lifetime_system.md#生命周期系统) (模块 01)
 - [特质系统](../12_traits/01_formal_trait_system.md#特质系统) (模块 12)
@@ -708,6 +725,7 @@ fn main() {
 3. **最一般性**: 找到的类型是最一般的
 
 **相关概念**:
+
 - [类型推断算法](02_type_inference.md#类型推断算法) (本模块)
 - [类型推断可判定性](02_type_inference.md#类型推断可判定性) (本模块)
 - [类型推断复杂度](02_type_inference.md#类型推断复杂度) (本模块)
@@ -723,6 +741,7 @@ fn main() {
 3. **唯一性**: 每个表达式有唯一类型
 
 **相关概念**:
+
 - [类型安全性定理](04_type_safety.md#类型安全性定理) (本模块)
 - [进度保证定理](04_type_safety.md#进度保证定理) (本模块)
 - [保存定理](04_type_safety.md#保存定理) (本模块)
@@ -739,6 +758,7 @@ fn main() {
 3. **不变证明**: 不变保证类型安全
 
 **相关概念**:
+
 - [型变定义](08_type_conversion.md#型变定义) (本模块)
 - [协变安全性](08_type_conversion.md#协变安全性) (本模块)
 - [逆变安全性](08_type_conversion.md#逆变安全性) (本模块)
@@ -760,6 +780,7 @@ fn main() {
 3. Rust Nomicon. (2024). Type Safety and Ownership. <https://doc.rust-lang.org/nomicon/ownership.html>
 
 **相关资源**:
+
 - [类型系统综述](../24_cross_language_comparison/01_type_systems.md#类型系统综述) (模块 24)
 - [Rust类型系统教程](../25_teaching_learning/02_tutorials.md#类型系统教程) (模块 25)
 - [类型系统研究进展](../20_theoretical_perspectives/05_research_frontiers.md#类型系统研究) (模块 20)
