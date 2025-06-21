@@ -23,6 +23,7 @@ Rust控制流系统是程序执行顺序的规则集合，它决定了程序如�
 ### 1.2 历史背景
 
 控制流系统的理论基础可以追溯到：
+
 - **结构化编程** (Dijkstra, 1968)
 - **操作语义** (Plotkin, 1981)
 - **指称语义** (Stoy, 1977)
@@ -31,6 +32,7 @@ Rust控制流系统是程序执行顺序的规则集合，它决定了程序如�
 ### 1.3 在Rust中的应用
 
 控制流系统在Rust中体现为：
+
 - 条件控制：if、if let、match表达式
 - 循环控制：loop、while、for语句
 - 函数控制：函数调用、递归、闭包
@@ -43,6 +45,7 @@ Rust控制流系统是程序执行顺序的规则集合，它决定了程序如�
 **核心思想**: 程序结构决定执行流程
 
 在Rust中，控制流通过结构化构造实现：
+
 ```rust
 // 结构化条件控制
 if condition {
@@ -60,6 +63,7 @@ $$\text{Structure}(P) \Rightarrow \text{Flow}(P)$$
 **核心思想**: 控制流作为函数组合
 
 控制流通过函数组合实现：
+
 ```rust
 // 函数式控制流
 let result = input
@@ -76,13 +80,14 @@ $$\text{Compose}(f, g) \Rightarrow \text{Flow}(f \circ g)$$
 **核心思想**: 类型系统指导控制流
 
 类型系统确保控制流的安全性：
+
 - **穷尽性检查**: match表达式必须覆盖所有情况
 - **类型一致性**: 条件分支必须返回相同类型
 - **生命周期检查**: 引用在控制流中保持有效
 
 ## 3. 数学理论基础
 
-### 3.1 操作语义
+### 3.1 操作语义 {#操作语义}
 
 **定义**: 操作语义描述程序如何逐步执行。
 
@@ -92,7 +97,12 @@ $$\frac{e_1 \rightarrow e_1'}{e_1 \oplus e_2 \rightarrow e_1' \oplus e_2}$$
 **大步语义**: 描述完整执行
 $$\frac{e_1 \Downarrow v_1 \quad e_2 \Downarrow v_2}{e_1 \oplus e_2 \Downarrow v_1 \oplus v_2}$$
 
-### 3.2 指称语义
+**相关概念**:
+
+- [控制流理论](02_control_flow_theory.md#操作语义) (本模块)
+- [形式化验证](../23_security_verification/01_formal_security_model.md#形式化验证) (模块 23)
+
+### 3.2 指称语义 {#指称语义}
 
 **定义**: 指称语义将程序映射到数学对象。
 
@@ -104,7 +114,12 @@ $$\frac{e_1 \Downarrow v_1 \quad e_2 \Downarrow v_2}{e_1 \oplus e_2 \Downarrow v
 $$\mathcal{E}[\![x]\!]\rho = \rho(x)$$
 $$\mathcal{E}[\![e_1 + e_2]\!]\rho = \mathcal{E}[\![e_1]\!]\rho + \mathcal{E}[\![e_2]\!]\rho$$
 
-### 3.3 公理语义
+**相关概念**:
+
+- [类型理论](../02_type_system/02_type_theory.md#指称语义) (模块 02)
+- [理论视角](../20_theoretical_perspectives/01_programming_paradigms.md) (模块 20)
+
+### 3.3 公理语义 {#公理语义}
 
 **定义**: 公理语义通过前置条件和后置条件描述程序行为。
 
@@ -113,9 +128,14 @@ $$\mathcal{E}[\![e_1 + e_2]\!]\rho = \mathcal{E}[\![e_1]\!]\rho + \mathcal{E}[\!
 **形式化表示**:
 $$\frac{\{P\} C_1 \{R\} \quad \{R\} C_2 \{Q\}}{\{P\} C_1; C_2 \{Q\}} \text{(Sequencing)}$$
 
+**相关概念**:
+
+- [形式化验证](../23_security_verification/01_formal_security_model.md#公理语义) (模块 23)
+- [程序证明](../23_security_verification/02_formal_proofs.md) (模块 23)
+
 ## 4. 形式化模型
 
-### 4.1 控制流图
+### 4.1 控制流图 {#控制流图}
 
 **定义**: 控制流图是程序执行路径的抽象表示。
 
@@ -126,12 +146,18 @@ $$\frac{\{P\} C_1 \{R\} \quad \{R\} C_2 \{Q\}}{\{P\} C_1; C_2 \{Q\}} \text{(Sequ
 $$G = (V, E, \text{entry}, \text{exit})$$
 
 其中：
+
 - $V$: 基本块集合
 - $E \subseteq V \times V$: 控制转移边
 - $\text{entry} \in V$: 入口节点
 - $\text{exit} \in V$: 出口节点
 
-### 4.2 状态转换系统
+**相关概念**:
+
+- [控制流分析](02_control_flow_analysis.md#控制流图分析) (本模块)
+- [优化技术](../22_performance_optimization/02_compiler_optimizations.md) (模块 22)
+
+### 4.2 状态转换系统 {#状态转换系统}
 
 **定义**: 状态转换系统描述程序执行的状态变化。
 
@@ -142,7 +168,12 @@ $$G = (V, E, \text{entry}, \text{exit})$$
 **形式化表示**:
 $$\frac{\text{env}, \text{store}, \text{stack} \vdash e \rightarrow e'}{\text{env}, \text{store}, \text{stack} \vdash e \rightarrow \text{env}, \text{store}, \text{stack} \vdash e'}$$
 
-### 4.3 类型环境
+**相关概念**:
+
+- [所有权状态](../01_ownership_borrowing/01_formal_ownership_system.md#所有权状态) (模块 01)
+- [异步状态机](../06_async_await/01_formal_async_model.md#状态机) (模块 06)
+
+### 4.3 类型环境 {#类型环境}
 
 **定义**: 类型环境记录变量和表达式的类型信息。
 
@@ -150,11 +181,37 @@ $$\frac{\text{env}, \text{store}, \text{stack} \vdash e \rightarrow e'}{\text{en
 
 **类型判断**: $\Gamma \vdash e: \tau$
 
+**相关概念**:
+
+- [类型环境](../02_type_system/01_formal_type_system.md#类型环境) (模块 02)
+- [类型推导](../02_type_system/02_type_inference.md) (模块 02)
+
 ## 5. 核心概念
 
-### 5.1 条件控制
+### 5.1 控制流 {#控制流定义}
+
+**定义 3.1**: 控制流是程序执行路径的形式化表示，描述了程序如何在不同的语句和表达式之间转移执行控制。
+
+**形式化表示**:
+$$\text{ControlFlow}(P) = (S, E, \text{entry}, \text{exit})$$
+
+其中：
+
+- $S$: 语句集合
+- $E \subseteq S \times S$: 执行转移关系
+- $\text{entry} \in S$: 入口语句
+- $\text{exit} \in S$: 出口语句
+
+**相关概念**:
+
+- [控制流分析](02_control_flow_analysis.md) (本模块)
+- [控制流优化](03_control_flow_optimization.md) (本模块)
+- [执行模型](../22_performance_optimization/01_formal_optimization_theory.md#执行模型) (模块 22)
+
+### 5.2 条件控制 {#条件控制}
 
 **if表达式**: 基于布尔条件选择执行路径
+
 ```rust
 if condition {
     expression1
@@ -166,9 +223,15 @@ if condition {
 **形式化表示**:
 $$\frac{\Gamma \vdash e_1: \text{Bool} \quad \Gamma \vdash e_2: \tau \quad \Gamma \vdash e_3: \tau}{\Gamma \vdash \text{if } e_1 \text{ then } e_2 \text{ else } e_3: \tau}$$
 
-### 5.2 模式匹配
+**相关概念**:
+
+- [条件控制流](03_conditional_flow.md) (本模块)
+- [模式匹配](02_pattern_matching_system.md) (本模块)
+
+### 5.3 模式匹配 {#模式匹配}
 
 **match表达式**: 基于模式匹配选择执行路径
+
 ```rust
 match value {
     pattern1 => expression1,
@@ -180,9 +243,15 @@ match value {
 **形式化表示**:
 $$\frac{\Gamma \vdash e: \tau \quad \forall i. \Gamma, \text{pat}_i \vdash e_i: \sigma}{\Gamma \vdash \text{match } e \text{ with } \text{pat}_i \Rightarrow e_i: \sigma}$$
 
-### 5.3 循环控制
+**相关概念**:
+
+- [模式匹配系统](02_pattern_matching_system.md) (本模块)
+- [代数数据类型](../02_type_system/01_formal_type_system.md#代数数据类型) (模块 02)
+
+### 5.4 循环控制 {#循环控制}
 
 **loop语句**: 无限循环
+
 ```rust
 loop {
     // 循环体
@@ -195,19 +264,30 @@ loop {
 **形式化表示**:
 $$\frac{\Gamma \vdash e: \tau}{\Gamma \vdash \text{loop } e: \tau}$$
 
-### 5.4 函数控制
+**相关概念**:
+
+- [循环控制](04_loop_control.md) (本模块)
+- [迭代器模式](../09_design_patterns/03_behavioral_patterns.md#迭代器模式) (模块 09)
+
+### 5.5 函数控制 {#函数控制}
 
 **函数调用**: 控制流转移到函数体
+
 ```rust
-fn function(x: i32) -> i32 {
-    x + 1
+fn function(param: Type) -> ReturnType {
+    // 函数体
 }
 
-let result = function(5);
+// 函数调用
+let result = function(argument);
 ```
 
 **形式化表示**:
-$$\frac{\Gamma \vdash e_1: \tau \rightarrow \sigma \quad \Gamma \vdash e_2: \tau}{\Gamma \vdash e_1(e_2): \sigma}$$
+$$\frac{\Gamma \vdash f: \tau \rightarrow \sigma \quad \Gamma \vdash e: \tau}{\Gamma \vdash f(e): \sigma}$$
+
+**相关概念**:
+
+- [函数控制](05_function_control.md) (本模块)
 
 ## 6. 类型规则
 
@@ -318,6 +398,7 @@ $$\frac{}{\text{await } \text{Future}(v) \rightarrow v}$$
 **定理 8.1** (控制流安全): Rust控制流系统保证程序执行安全。
 
 **证明**:
+
 1. **无死循环**: 循环必须有退出条件
 2. **无悬空引用**: 引用在控制流中保持有效
 3. **无数据竞争**: 并发控制流保证线程安全
@@ -327,6 +408,7 @@ $$\frac{}{\text{await } \text{Future}(v) \rightarrow v}$$
 **定理 8.2** (类型安全): 控制流系统保证类型安全。
 
 **证明**:
+
 1. **进展性**: 良类型程序不会卡住
 2. **保持性**: 求值保持类型
 3. **穷尽性**: 模式匹配覆盖所有情况
@@ -336,6 +418,7 @@ $$\frac{}{\text{await } \text{Future}(v) \rightarrow v}$$
 **定理 8.3** (内存安全): 控制流系统保证内存安全。
 
 **证明**:
+
 1. **无内存泄漏**: 控制流确保资源释放
 2. **无悬空指针**: 生命周期系统保证引用有效
 3. **无重复释放**: 所有权系统防止重复释放
@@ -345,6 +428,7 @@ $$\frac{}{\text{await } \text{Future}(v) \rightarrow v}$$
 ### 9.1 基础示例
 
 **示例 9.1**: 条件控制
+
 ```rust
 fn classify_number(x: i32) -> &'static str {
     if x > 0 {
@@ -364,6 +448,7 @@ fn main() {
 ```
 
 **示例 9.2**: 模式匹配
+
 ```rust
 enum Message {
     Quit,
@@ -383,6 +468,7 @@ fn process_message(msg: Message) {
 ### 9.2 循环控制示例
 
 **示例 9.3**: 基本循环
+
 ```rust
 fn count_down(n: u32) {
     let mut count = n;
@@ -401,6 +487,7 @@ fn main() {
 ```
 
 **示例 9.4**: 迭代器循环
+
 ```rust
 fn process_numbers(numbers: Vec<i32>) {
     for num in numbers.iter() {
@@ -423,6 +510,7 @@ fn main() {
 ### 9.3 函数控制示例
 
 **示例 9.5**: 递归函数
+
 ```rust
 fn factorial(n: u32) -> u32 {
     if n == 0 {
@@ -447,6 +535,7 @@ fn main() {
 ```
 
 **示例 9.6**: 高阶函数
+
 ```rust
 fn apply_twice<F>(f: F, x: i32) -> i32 
 where 
@@ -468,6 +557,7 @@ fn main() {
 ### 9.4 异步控制示例
 
 **示例 9.7**: 异步函数
+
 ```rust
 use std::time::Duration;
 use tokio::time::sleep;
@@ -484,6 +574,7 @@ async fn main() {
 ```
 
 **示例 9.8**: 异步控制流
+
 ```rust
 use tokio::time::{sleep, Duration};
 
@@ -515,6 +606,7 @@ where
 **引理 10.1**: 控制流正确性证明
 
 **证明**:
+
 1. **终止性**: 所有控制流路径都会终止
 2. **确定性**: 控制流执行是确定性的
 3. **完整性**: 控制流覆盖所有可能情况
@@ -524,6 +616,7 @@ where
 **引理 10.2**: 控制流类型安全证明
 
 **证明**:
+
 1. **进展性**: 良类型程序不会卡住
 2. **保持性**: 求值保持类型
 3. **一致性**: 控制流分支类型一致
@@ -533,6 +626,7 @@ where
 **定理 10.3**: 控制流内存安全证明
 
 **证明**:
+
 1. **生命周期**: 引用在控制流中保持有效
 2. **所有权**: 所有权在控制流中正确转移
 3. **借用**: 借用规则在控制流中得到遵守
@@ -548,12 +642,12 @@ where
 
 ### 11.2 技术文档
 
-1. Rust Reference. (2024). Control flow. https://doc.rust-lang.org/reference/expressions.html
-2. Rust Book. (2024). Control Flow. https://doc.rust-lang.org/book/ch03-05-control-flow.html
-3. Rust Async Book. (2024). Async/Await. https://rust-lang.github.io/async-book/
+1. Rust Reference. (2024). Control flow. <https://doc.rust-lang.org/reference/expressions.html>
+2. Rust Book. (2024). Control Flow. <https://doc.rust-lang.org/book/ch03-05-control-flow.html>
+3. Rust Async Book. (2024). Async/Await. <https://rust-lang.github.io/async-book/>
 
 ### 11.3 在线资源
 
-1. Rust Control Flow. https://doc.rust-lang.org/book/ch03-05-control-flow.html
-2. Rust Pattern Matching. https://doc.rust-lang.org/book/ch06-00-enums.html
-3. Rust Async Programming. https://rust-lang.github.io/async-book/
+1. Rust Control Flow. <https://doc.rust-lang.org/book/ch03-05-control-flow.html>
+2. Rust Pattern Matching. <https://doc.rust-lang.org/book/ch06-00-enums.html>
+3. Rust Async Programming. <https://rust-lang.github.io/async-book/>

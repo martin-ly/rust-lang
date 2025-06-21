@@ -21,6 +21,7 @@
 Rust所有权系统是Rust语言的核心创新，它通过静态分析在编译时保证内存安全和线程安全，同时避免了垃圾回收的运行时开销。该系统基于线性类型理论和分离逻辑，实现了零成本抽象的安全保证。
 
 **相关概念**：
+
 - [类型系统](../02_type_system/01_formal_type_system.md#类型系统概述) (模块 02)
 - [内存安全](../23_security_verification/01_formal_security_model.md#内存安全) (模块 23)
 - [零成本抽象](../19_advanced_language_features/01_zero_cost_abstractions.md#零成本抽象) (模块 19)
@@ -28,6 +29,7 @@ Rust所有权系统是Rust语言的核心创新，它通过静态分析在编译
 ### 1.2 历史背景
 
 所有权系统的理论基础可以追溯到：
+
 - **线性类型理论** (Girard, 1987)
 - **分离逻辑** (Reynolds, 2002)
 - **区域类型系统** (Tofte & Talpin, 1994)
@@ -36,6 +38,7 @@ Rust所有权系统是Rust语言的核心创新，它通过静态分析在编译
 ### 1.3 在Rust中的应用
 
 所有权系统在Rust中体现为：
+
 - 所有权规则：每个值有唯一所有者
 - 借用机制：不可变借用和可变借用
 - 移动语义：所有权转移而非复制
@@ -48,6 +51,7 @@ Rust所有权系统是Rust语言的核心创新，它通过静态分析在编译
 **核心思想**: 劳动创造所有权
 
 在Rust中，通过创建值获得所有权：
+
 ```rust
 let s = String::from("hello"); // 通过创建获得所有权
 ```
@@ -60,6 +64,7 @@ $$\text{Create}(v) \Rightarrow \text{Own}(v)$$
 **核心思想**: 所有权作为道德义务
 
 借用检查器强制执行道德律令：
+
 ```rust
 let mut s = String::from("hello");
 let r1 = &s;        // 不可变借用 - 允许多个
@@ -75,6 +80,7 @@ $$\text{Borrow}(r, v) \land \text{Exclusive}(r) \Rightarrow \neg \text{Borrow}(r
 **核心思想**: 社会效用最大化
 
 所有权系统通过静态分析最大化安全性和性能：
+
 - **安全性**: 防止内存错误
 - **性能**: 零运行时开销
 - **并发安全**: 防止数据竞争
@@ -89,6 +95,7 @@ $$\text{Borrow}(r, v) \land \text{Exclusive}(r) \Rightarrow \neg \text{Borrow}(r
 $$\frac{\Gamma, x: \tau \vdash e: \sigma}{\Gamma \vdash \lambda x.e: \tau \multimap \sigma} \text{(Linear Function)}$$
 
 **Rust实现**:
+
 ```rust
 fn take_ownership(s: String) {
     println!("{}", s);
@@ -104,6 +111,7 @@ fn take_ownership(s: String) {
 $$\frac{\Gamma \vdash e: \tau}{\Gamma, x: \sigma \vdash e: \tau} \text{(Weakening)}$$
 
 **Rust实现**:
+
 ```rust
 let s = String::from("hello");
 // 可以不使用s - 仿射类型允许丢弃
@@ -121,6 +129,7 @@ let u = t;  // t移动到u，t不能再使用
 $$\frac{\{P\} C \{Q\}}{\{P * R\} C \{Q * R\}} \text{(Frame Rule)}$$
 
 **Rust对应**:
+
 ```rust
 let mut v = vec![1, 2, 3];
 let r1 = &v;        // 不可变借用
@@ -142,6 +151,7 @@ $$\Gamma ::= \emptyset \mid \Gamma, x: \tau$$
 **定义**: 所有权类型表示值的所有权状态。
 
 **基本类型**:
+
 - $\text{Own}(\tau)$: 拥有类型 $\tau$ 的值
 - $\text{Ref}(\tau)$: 借用类型 $\tau$ 的值
 - $\text{RefMut}(\tau)$: 可变借用类型 $\tau$ 的值
@@ -154,6 +164,7 @@ $$\Gamma ::= \emptyset \mid \Gamma, x: \tau$$
 $$\text{Ref}_{\alpha}(\tau)$$
 
 **Rust语法**:
+
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
@@ -161,10 +172,12 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ```
 
 **相关定理**：
+
 - [定理 1.9: 生命周期有界性](06_theorems.md#生命周期有界性)
 - [定理 1.10: 生命周期包含关系](06_theorems.md#生命周期包含关系)
 
 **相关概念**：
+
 - [借用规则](#借用定义) (本模块)
 - [泛型生命周期](../04_generics/01_formal_generics_system.md#泛型生命周期) (模块 04)
 - [异步生命周期](../06_async_await/01_formal_async_model.md#异步生命周期) (模块 06)
@@ -185,10 +198,12 @@ $$\text{Owner}(x, v) \land \text{Owner}(y, v) \Rightarrow x = y$$
 $$\text{ScopeEnd}(x) \Rightarrow \text{Drop}(\text{ValueOf}(x))$$
 
 **相关定理**：
+
 - [定理 1.1: 所有权唯一性](06_theorems.md#所有权唯一性)
 - [定理 1.2: 所有权转移保持性](06_theorems.md#所有权转移保持性)
 
 **相关概念**：
+
 - [移动语义](#53-移动语义) (本模块)
 - [内存管理模型](../11_memory_management/01_formal_memory_model.md#内存管理模型) (模块 11)
 - [线程安全性](../05_concurrency/01_formal_concurrency_model.md#线程安全性) (模块 05)
@@ -207,11 +222,13 @@ $$\text{BorrowMut}(r, v) \Rightarrow \text{Read}(r, v) \land \text{Write}(r, v) 
 $$\text{BorrowMut}(r_1, v) \land \text{Borrow}(r_2, v) \Rightarrow \text{Conflict}$$
 
 **相关定理**：
+
 - [定理 1.6: 借用安全性](06_theorems.md#借用安全性)
 - [定理 1.7: 多重不可变借用安全性](06_theorems.md#多重不可变借用安全性)
 - [定理 1.8: 可变借用排他性](06_theorems.md#可变借用排他性)
 
 **相关概念**：
+
 - [生命周期](#生命周期定义) (本模块)
 - [引用类型](../02_type_system/01_formal_type_system.md#引用类型) (模块 02)
 - [并发安全性](../05_concurrency/01_formal_concurrency_model.md#并发安全性) (模块 05)
@@ -224,6 +241,7 @@ $$\text{BorrowMut}(r_1, v) \land \text{Borrow}(r_2, v) \Rightarrow \text{Conflic
 $$\text{Move}(x, y, v) \Rightarrow \text{Owner}(y, v) \land \neg \text{Owner}(x, v)$$
 
 **Rust实现**:
+
 ```rust
 let s1 = String::from("hello");
 let s2 = s1;  // s1的所有权移动到s2
@@ -288,6 +306,7 @@ $$\frac{\text{valid}(r, v) \land \text{no-conflict}(r, v)}{\text{borrow}(r, v) \
 **定理 8.1** (内存安全): Rust所有权系统保证内存安全。
 
 **证明**:
+
 1. **无悬空引用**: 生命周期系统确保引用有效
 2. **无重复释放**: 所有权唯一性防止重复释放
 3. **无内存泄漏**: 作用域规则确保资源释放
@@ -297,6 +316,7 @@ $$\frac{\text{valid}(r, v) \land \text{no-conflict}(r, v)}{\text{borrow}(r, v) \
 **定理 8.2** (线程安全): Rust所有权系统保证线程安全。
 
 **证明**:
+
 1. **无数据竞争**: 借用规则防止并发访问冲突
 2. **无竞态条件**: 静态分析检测潜在问题
 3. **安全并发**: Send和Sync trait保证线程安全
@@ -306,6 +326,7 @@ $$\frac{\text{valid}(r, v) \land \text{no-conflict}(r, v)}{\text{borrow}(r, v) \
 **定理 8.3** (类型安全): Rust类型系统保证类型安全。
 
 **证明**:
+
 1. **进展性**: 良类型程序不会卡住
 2. **保持性**: 求值保持类型
 3. **唯一性**: 每个表达式有唯一类型
@@ -315,6 +336,7 @@ $$\frac{\text{valid}(r, v) \land \text{no-conflict}(r, v)}{\text{borrow}(r, v) \
 ### 9.1 基础示例
 
 **示例 9.1**: 所有权转移
+
 ```rust
 fn main() {
     let s1 = String::from("hello");
@@ -326,6 +348,7 @@ fn main() {
 ```
 
 **示例 9.2**: 借用机制
+
 ```rust
 fn main() {
     let mut v = vec![1, 2, 3];
@@ -343,6 +366,7 @@ fn main() {
 ### 9.2 高级示例
 
 **示例 9.3**: 生命周期注解
+
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
@@ -360,6 +384,7 @@ fn main() {
 ```
 
 **示例 9.4**: 智能指针
+
 ```rust
 use std::rc::Rc;
 
@@ -380,6 +405,7 @@ fn main() {
 **引理 10.1**: 借用检查器算法正确性
 
 **证明**:
+
 1. **完备性**: 所有安全程序都能通过检查
 2. **可靠性**: 通过检查的程序都是安全的
 3. **终止性**: 检查算法总是终止
@@ -389,6 +415,7 @@ fn main() {
 **引理 10.2**: 生命周期推导算法正确性
 
 **证明**:
+
 1. **最小性**: 推导的生命周期是最小的
 2. **有效性**: 推导的生命周期是有效的
 3. **一致性**: 推导结果是一致的
@@ -398,6 +425,7 @@ fn main() {
 **定理 10.3**: 所有权系统一致性
 
 **证明**:
+
 1. **类型一致性**: 类型推导结果一致
 2. **语义一致性**: 语义规则一致
 3. **安全一致性**: 安全保证一致
@@ -413,12 +441,12 @@ fn main() {
 
 ### 11.2 技术文档
 
-1. Rust Reference. (2024). Ownership and borrowing. https://doc.rust-lang.org/reference/types.html
-2. Rust Book. (2024). Understanding Ownership. https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html
-3. Rustonomicon. (2024). The Dark Arts of Advanced and Unsafe Rust Programming. https://doc.rust-lang.org/nomicon/
+1. Rust Reference. (2024). Ownership and borrowing. <https://doc.rust-lang.org/reference/types.html>
+2. Rust Book. (2024). Understanding Ownership. <https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html>
+3. Rustonomicon. (2024). The Dark Arts of Advanced and Unsafe Rust Programming. <https://doc.rust-lang.org/nomicon/>
 
 ### 11.3 在线资源
 
-1. Rust Ownership Visualization. https://rustviz.github.io/
-2. Rust Borrow Checker. https://rustc-dev-guide.rust-lang.org/borrow_check.html
-3. Rust Type System. https://doc.rust-lang.org/reference/types.html
+1. Rust Ownership Visualization. <https://rustviz.github.io/>
+2. Rust Borrow Checker. <https://rustc-dev-guide.rust-lang.org/borrow_check.html>
+3. Rust Type System. <https://doc.rust-lang.org/reference/types.html>

@@ -4,16 +4,17 @@
 
 ### 1. 理论基础
 
-1. [形式化泛型系统](01_formal_generic_system.md)
-2. [泛型理论](02_generic_theory.md)
-3. [泛型实现](03_generic_implementation.md)
-4. [泛型应用](04_generic_applications.md)
+1. [形式化泛型系统](01_formal_generics.md)
+2. [类型参数](02_type_parameters.md)
+3. [Trait约束](03_trait_bounds.md)
+4. [关联类型](04_associated_types.md)
 
-### 2. 参考资料
+### 2. 实现与应用
 
-5. [代码示例](05_examples.md)
-6. [定理证明](06_theorems.md)
-7. [参考文献](07_references.md)
+5. [泛型实现](05_generic_impls.md)
+6. [幻影数据](06_phantom_data.md)
+7. [泛型模式](07_generic_patterns.md)
+8. [实例研究](08_examples.md)
 
 ## 主题概述
 
@@ -54,12 +55,33 @@ Rust泛型系统提供了强大的参数化编程能力，通过类型参数、T
 - 编译时类型检查
 - 代码生成优化
 
-## 交叉引用
+## 相关模块
 
-- 与[类型系统](../02_type_system/00_index.md)的深度集成
-- 与[所有权系统](../01_ownership_borrowing/00_index.md)的交互
-- 与[算法](../08_algorithms/00_index.md)的泛型实现
-- 与[模型系统](../18_model_systems/00_index.md)的理论基础
+- [模块 01: 所有权与借用](../01_ownership_borrowing/00_index.md) - 泛型与所有权系统的交互
+- [模块 02: 类型系统](../02_type_system/00_index.md) - 泛型与类型系统的深度集成
+- [模块 12: 特质系统](../12_traits/00_index.md) - 泛型与特质系统的关系
+- [模块 19: 高级语言特性](../19_advanced_language_features/00_index.md) - 高级泛型特性
+- [模块 22: 性能优化](../22_performance_optimization/00_index.md) - 泛型的编译优化
+
+## 相关概念
+
+| 概念 | 定义位置 | 相关模块 |
+|------|----------|----------|
+| 类型参数 | [类型参数](02_type_parameters.md#类型参数定义) | 04, 02 |
+| 特质约束 | [Trait约束](03_trait_bounds.md#特质约束定义) | 04, 12 |
+| 关联类型 | [关联类型](04_associated_types.md#关联类型定义) | 04, 12 |
+| 泛型生命周期 | [泛型生命周期](01_formal_generics.md#泛型生命周期) | 04, 01 |
+| 单态化 | [泛型实现](05_generic_impls.md#单态化) | 04, 22 |
+
+## 核心定义与定理
+
+- **定义 4.1**: [泛型](01_formal_generics.md#泛型定义) - 参数化类型的形式化定义
+- **定义 4.2**: [类型参数](02_type_parameters.md#类型参数定义) - 类型级别的参数化机制
+- **定义 4.3**: [特质约束](03_trait_bounds.md#特质约束定义) - 对类型参数的行为约束
+
+- **定理 4.1**: [泛型类型安全性](01_formal_generics.md#泛型安全性) - 泛型保证类型安全
+- **定理 4.2**: [特质约束完备性](03_trait_bounds.md#约束完备性) - 特质约束确保完整的类型信息
+- **定理 4.3**: [零成本抽象](05_generic_impls.md#零成本抽象定理) - 泛型实现不引入运行时开销
 
 ## 数学符号说明
 
@@ -73,107 +95,31 @@ Rust泛型系统提供了强大的参数化编程能力，通过类型参数、T
 - $\exists$：存在量词
 - $\rightarrow$：函数类型
 - $\times$：积类型
+- $P<T>$：参数化类型
+- $T: \text{Trait}$：特质约束
+- $T::\text{AssocType}$：关联类型
 
-## Module Overview
+## 形式化表示
 
-This module provides a comprehensive formalization of Rust's generics system, including type parameters, trait bounds, associated types, and generic programming patterns.
+### 泛型函数
 
-## Directory Structure
+$$\forall T. \; \Gamma, T \vdash f(x: T) : \tau$$
 
-```text
-04_generics/
-├── 00_index.md                    # This file - Directory index and navigation
-├── 01_formal_generics.md          # Formal generics theory and foundations
-├── 02_type_parameters.md          # Type parameter system and constraints
-├── 03_trait_bounds.md             # Trait bounds and constraint systems
-├── 04_associated_types.md         # Associated types and type families
-├── 05_generic_impls.md            # Generic implementations and specialization
-├── 06_phantom_data.md             # Phantom data and type markers
-├── 07_generic_patterns.md         # Common generic programming patterns
-└── 08_examples.md                 # Practical examples and case studies
-```
+### 特质约束
 
-## Quick Navigation
+$$\forall T. \; T: \text{Trait} \Rightarrow \Gamma, T \vdash f(x: T) : \tau$$
 
-### Core Theory
+### 关联类型
 
-- **[01_formal_generics.md](01_formal_generics.md)** - Mathematical foundations of generics
-- **[02_type_parameters.md](02_type_parameters.md)** - Type parameter formalization
-- **[03_trait_bounds.md](03_trait_bounds.md)** - Trait bound constraint systems
+$$\forall T. \; T: \text{Trait} \Rightarrow \text{Trait}::AssocType$$
 
-### Advanced Concepts
+### 单态化
 
-- **[04_associated_types.md](04_associated_types.md)** - Associated types and type families
-- **[05_generic_impls.md](05_generic_impls.md)** - Generic implementations
-- **[06_phantom_data.md](06_phantom_data.md)** - Phantom data patterns
-
-### Practical Applications
-
-- **[07_generic_patterns.md](07_generic_patterns.md)** - Common generic patterns
-- **[08_examples.md](08_examples.md)** - Real-world examples and case studies
-
-## Cross-References
-
-### Related Modules
-
-- **[../01_ownership_borrowing/](../01_ownership_borrowing/)** - Ownership in generic contexts
-- **[../02_type_system/](../02_type_system/)** - Type system foundations
-- **[../03_control_flow/](../03_control_flow/)** - Control flow with generics
-- **[../05_concurrency/](../05_concurrency/)** - Generic concurrency patterns
-- **[../06_async_await/](../06_async_await/)** - Async generics
-- **[../07_macros/](../07_macros/)** - Macro-generic interactions
-- **[../08_algorithms/](../08_algorithms/)** - Generic algorithms
-
-### Key Concepts
-
-- **Type Parameters**: Generic type variables and their constraints
-- **Trait Bounds**: Constraint systems for type parameters
-- **Associated Types**: Type families and associated type parameters
-- **Generic Implementations**: Implementing traits for generic types
-- **Phantom Data**: Type-level programming with phantom types
-- **Generic Patterns**: Common patterns in generic programming
-
-## Mathematical Foundations
-
-### Formal Notation
-
-- **∀T**: Universal quantification over type T
-- **∃T**: Existential quantification over type T
-- **T : Trait**: Trait bound constraint
-- **T::AssocType**: Associated type access
-- **`PhantomData<T>`**: Phantom type marker
-
-### Key Theorems
-
-1. **Generic Type Safety**: All generic types preserve type safety
-2. **Trait Bound Completeness**: Trait bounds ensure complete type information
-3. **Associated Type Consistency**: Associated types maintain type consistency
-4. **Generic Implementation Soundness**: Generic implementations are sound
-
-## Progress Status
-
-- [x] Directory structure established
-- [x] Index and navigation created
-- [ ] Core theory formalization
-- [ ] Type parameter system
-- [ ] Trait bounds formalization
-- [ ] Associated types theory
-- [ ] Generic implementations
-- [ ] Phantom data patterns
-- [ ] Generic programming patterns
-- [ ] Practical examples
-
-## Next Steps
-
-1. Formalize core generics theory
-2. Develop type parameter constraint systems
-3. Create trait bound formalization
-4. Build associated types theory
-5. Document generic implementation patterns
-6. Provide comprehensive examples
+$$\forall T. \; \text{generic}[T] \Rightarrow \bigcup_{\tau \in \text{Types}} \text{monomorphized}[\tau]$$
 
 ---
 
-**Last Updated**: 2024-12-19  
-**Version**: 1.0  
-**Status**: In Progress
+**文档版本**: 1.0.0  
+**最后更新**: 2025年7月11日  
+**维护者**: Rust语言形式化理论项目组  
+**状态**: 已更新交叉引用
