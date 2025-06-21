@@ -13,6 +13,7 @@
 **形式化定义**：
 
 种类系统通常使用以下符号表示：
+
 - `*`（或 `Type`）：表示具体类型的种类，如 `i32`、`bool` 等
 - `* -> *`：表示接受一个类型参数返回一个类型的类型构造器，如 `Vec<T>` 或 `Option<T>`
 - `* -> * -> *`：表示接受两个类型参数的类型构造器，如 `Result<T, E>`
@@ -51,6 +52,7 @@ $$\Lambda X :: K. e$$
 从范畴论的角度，高阶类型可以看作是函子（Functor）、单子（Monad）等概念的形式化表示。
 
 **函子**：种类为 `* -> *` 的类型构造器 $F$，满足以下性质：
+
 - 保持恒等映射：$F(\text{id}_A) = \text{id}_{F(A)}$
 - 保持组合：$F(g \circ f) = F(g) \circ F(f)$
 
@@ -416,4 +418,4 @@ impl<A> Functor<Option<_>> for Option<A> {
 
 5. Carette, J., Kiselyov, O., & Shan, C. C. (2009). Finally tagless, partially evaluated: Tagless staged interpreters for simpler typed languages. Journal of Functional Programming, 19(5), 509-543.
 
-6. Yallop, J., & White, L. (2014). Lightweight higher-kinded polymorphism. In International Symposium on Functional and Logic Programming. 
+6. Yallop, J., & White, L. (2014). Lightweight higher-kinded polymorphism. In International Symposium on Functional and Logic Programming.

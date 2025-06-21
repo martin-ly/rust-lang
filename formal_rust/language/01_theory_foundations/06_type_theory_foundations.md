@@ -32,6 +32,7 @@ let x: i32 = 42;  // x 是类型 i32 的一个项
 $$\Gamma \vdash t : T$$
 
 其中：
+
 - $\Gamma$ 是类型上下文（typing context），包含自由变量的类型假设
 - $t$ 是待判断的项
 - $T$ 是断言 $t$ 所属的类型
@@ -245,6 +246,7 @@ Rust的类型检查可以形式化为一系列判断和规则：
 $$\Gamma; \Delta \vdash t : T$$
 
 其中：
+
 - $\Gamma$ 是共享引用的类型上下文
 - $\Delta$ 是线性（独占）资源的类型上下文
 
@@ -261,6 +263,7 @@ $$\frac{\Gamma; \Delta, x: T \vdash t : U}{\Gamma; \Delta, x: \text{&mut}T \vdas
 类型推导（Type Inference）是从程序表达式自动推导类型的过程，通常基于Hindley-Milner算法。
 
 **核心步骤**：
+
 1. 生成类型约束
 2. 统一（Unification）类型变量
 3. 生成最一般类型（Most General Type）
@@ -292,4 +295,4 @@ $$\frac{\Gamma; \Delta, x: T \vdash t : U}{\Gamma; \Delta, x: \text{&mut}T \vdas
 2. Harper, R. (2016). Practical Foundations for Programming Languages. Cambridge University Press.
 3. Cardelli, L. (1996). Type Systems. ACM Computing Surveys.
 4. Wadler, P. (1990). Linear Types Can Change the World!
-5. Chlipala, A. (2013). Certified Programming with Dependent Types. MIT Press. 
+5. Chlipala, A. (2013). Certified Programming with Dependent Types. MIT Press.

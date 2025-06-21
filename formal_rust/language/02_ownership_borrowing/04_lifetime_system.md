@@ -370,4 +370,4 @@ Rust的生命周期系统是其类型系统的核心组成部分，通过静态�
 4. Grossman, D., Morrisett, G., Jim, T., Hicks, M., Wang, Y., & Cheney, J. (2002). Region-based memory management in Cyclone.
 5. Pierce, B. C. (2002). Types and Programming Languages. MIT Press.
 6. Rust Reference. (2021). Lifetime Elision.
-7. Rust RFC 2094. (2017). Non-lexical lifetimes. 
+7. Rust RFC 2094. (2017). Non-lexical lifetimes.

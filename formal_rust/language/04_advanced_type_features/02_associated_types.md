@@ -270,6 +270,7 @@ impl Add<f64> for Vector {
 **定理**：如果类型 $T$ 实现了特征 $\text{Tr}$，且 $\text{Tr}$ 有关联类型 $\text{Assoc}$，则 $T::\text{Assoc}$ 在编译时是唯一确定的具体类型。
 
 **证明**：
+
 1. 根据Rust的类型系统规则，每个类型对于给定特征只能有一个实现（孤儿规则）
 2. 在特征实现中，每个关联类型必须指定为唯一的具体类型
 3. 因此，$T::\text{Assoc}$ 在编译时是唯一确定的
@@ -281,6 +282,7 @@ impl Add<f64> for Vector {
 **定理**：存在一些类型抽象，使用关联类型比使用泛型参数需要更少的类型注释和约束。
 
 **证明**：考虑迭代器模式
+
 1. 使用关联类型：`fn process<I: Iterator>(iter: I) -> Vec<I::Item>`
 2. 使用泛型参数：`fn process<I, T>(iter: I) -> Vec<T> where I: Iterator<Item = T>`
 3. 关联类型版本需要更少的类型参数和约束，同时保持相同的表达能力
@@ -306,6 +308,7 @@ instance Collection [a] where
 ```
 
 **主要区别**：
+
 1. Haskell的类型族支持更复杂的类型级计算
 2. Rust的关联类型与所有权系统和特征系统紧密集成
 
@@ -324,6 +327,7 @@ concept Container = requires(C c) {
 ```
 
 **主要区别**：
+
 1. Rust的关联类型是特征系统的一部分，而C++的关联类型是概念系统的一部分
 2. Rust强制每个实现指定关联类型，而C++允许通过模板推导确定关联类型
 
@@ -348,6 +352,7 @@ class IntContainer extends Container {
 ```
 
 **主要区别**：
+
 1. Scala的类型成员可以是协变或逆变的，而Rust的关联类型没有型变注解
 2. Scala支持路径依赖类型的更通用形式
 
@@ -431,10 +436,10 @@ trait Graph<N, E> {
 
 2. Chakravarty, M. M., Keller, G., Peyton Jones, S., & Marlow, S. (2005). Associated types with class. In Proceedings of the 32nd ACM SIGPLAN-SIGACT symposium on Principles of programming languages.
 
-3. The Rust Programming Language. (n.d.). Associated Types. Retrieved from https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#associated-types
+3. The Rust Programming Language. (n.d.). Associated Types. Retrieved from <https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#associated-types>
 
-4. Rust RFC 195: Associated Items. (2014). Retrieved from https://github.com/rust-lang/rfcs/blob/master/text/0195-associated-items.md
+4. Rust RFC 195: Associated Items. (2014). Retrieved from <https://github.com/rust-lang/rfcs/blob/master/text/0195-associated-items.md>
 
-5. Rust RFC 1598: Generic Associated Types. (2016). Retrieved from https://github.com/rust-lang/rfcs/blob/master/text/1598-generic_associated_types.md
+5. Rust RFC 1598: Generic Associated Types. (2016). Retrieved from <https://github.com/rust-lang/rfcs/blob/master/text/1598-generic_associated_types.md>
 
-6. Odersky, M., & Zenger, M. (2005). Scalable component abstractions. In Proceedings of the 20th annual ACM SIGPLAN conference on Object-oriented programming, systems, languages, and applications. 
+6. Odersky, M., & Zenger, M. (2005). Scalable component abstractions. In Proceedings of the 20th annual ACM SIGPLAN conference on Object-oriented programming, systems, languages, and applications.

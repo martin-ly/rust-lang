@@ -16,6 +16,7 @@ Rust中的引用有两种基本类型：
 **形式化表示**：
 
 设 $T$ 是任意类型，则：
+
 - $\text{Ref}(T)$ 表示类型 $T$ 的不可变引用类型，即 `&T`
 - $\text{MutRef}(T)$ 表示类型 $T$ 的可变引用类型，即 `&mut T`
 
@@ -239,6 +240,7 @@ $$\frac{\Gamma; \Delta \vdash s : \text{String} \quad \text{no borrows of } s \t
 **证明**：
 
 数据竞争发生的条件是：
+
 1. 两个或更多指针同时访问同一数据
 2. 至少有一个指针被用于写入
 3. 没有同步机制
@@ -322,4 +324,4 @@ Rust的借用机制是所有权系统的关键扩展，它允许在不转移所�
 2. Matsakis, N. D., & Klock, F. S. (2014). The Rust Language. Ada Letters, 34(3), 103-104.
 3. Jung, R., Jourdan, J. H., Krebbers, R., & Dreyer, D. (2018). RustBelt: Securing the Foundations of the Rust Programming Language.
 4. Weiss, A., Patterson, D., Ahmed, A., Appel, A. W., & Morrisett, G. (2019). Reference Mutability for Safe Parallelism.
-5. Matsakis, N. D. (2018). Non-lexical lifetimes: Introduction. Rust Blog. 
+5. Matsakis, N. D. (2018). Non-lexical lifetimes: Introduction. Rust Blog.

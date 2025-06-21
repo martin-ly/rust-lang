@@ -99,6 +99,7 @@ Rust的类型系统将所有权信息编码到类型判断中。
 $$\Gamma; \Delta \vdash e : T$$
 
 其中：
+
 - $\Gamma$ 是共享（非线性）环境，包含引用类型
 - $\Delta$ 是线性环境，包含拥有所有权的值
 - $e$ 是表达式
@@ -228,6 +229,7 @@ $$\frac{\text{owner}_{t_3}(v') = \text{s} \quad \text{s2 = result of gives_owner
 4. 由于每个值都有唯一的所有者，且所有者最终会离开作用域，所以每个资源最终都会被释放
 
 例外情况：
+
 - 使用`std::mem::forget`显式阻止值被丢弃
 - 创建循环引用（需要使用`Rc`/`Arc`和`RefCell`/`Mutex`）
 
@@ -265,4 +267,4 @@ Rust的所有权系统是一种强大的内存管理机制，它通过静态类�
 2. Klabnik, S., & Nichols, C. (2019). The Rust Programming Language.
 3. Wadler, P. (1990). Linear Types Can Change the World!
 4. Walker, D. (2005). Substructural Type Systems. In Advanced Topics in Types and Programming Languages.
-5. Jung, R., Jourdan, J. H., Krebbers, R., & Dreyer, D. (2018). RustBelt: Securing the Foundations of the Rust Programming Language. 
+5. Jung, R., Jourdan, J. H., Krebbers, R., & Dreyer, D. (2018). RustBelt: Securing the Foundations of the Rust Programming Language.

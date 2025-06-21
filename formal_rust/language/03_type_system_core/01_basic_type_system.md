@@ -29,6 +29,7 @@ Rust中的类型包括：
 **形式化表示**：
 
 类型判断通常表示为 $\Gamma \vdash e : T$，其中：
+
 - $\Gamma$ 是类型环境，包含变量及其类型的映射
 - $e$ 是表达式
 - $T$ 是类型
@@ -300,4 +301,4 @@ Rust的类型系统通过静态类型检查和强类型系统提供了强大的�
 
 4. Lindley, S. (2016). Algebraic effects and effect handlers for idioms and arrows. In Proceedings of the 19th International Conference on Functional Programming.
 
-5. Damas, L., & Milner, R. (1982). Principal type-schemes for functional programs. In Proceedings of the 9th ACM SIGPLAN-SIGACT symposium on Principles of programming languages. 
+5. Damas, L., & Milner, R. (1982). Principal type-schemes for functional programs. In Proceedings of the 9th ACM SIGPLAN-SIGACT symposium on Principles of programming languages.

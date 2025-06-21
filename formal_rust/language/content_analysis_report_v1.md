@@ -96,9 +96,9 @@
    - 对应类型论中的有界量化（bounded quantification）
 
 4. **型变（Variance）**
-   - 协变（Covariant）：如果A是B的子类型，则F<A>是F<B>的子类型
-   - 逆变（Contravariant）：如果A是B的子类型，则F<B>是F<A>的子类型
-   - 不变（Invariant）：即使A是B的子类型，F<A>和F<B>之间也没有子类型关系
+   - 协变（Covariant）：如果A是B的子类型，则`F<A>`是`F<B>`的子类型
+   - 逆变（Contravariant）：如果A是B的子类型，则`F<B>`是`F<A>`的子类型
+   - 不变（Invariant）：即使A是B的子类型，`F<A>`和`F<B>`之间也没有子类型关系
 
 ### 3.3 高级类型系统特性
 
