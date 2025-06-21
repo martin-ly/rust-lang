@@ -19,8 +19,6 @@ Rust与WebAssembly的深度集成提供了高性能的Web应用开发能力，�
 
 ## 2. Core Concepts {#2-core-concepts}
 
-<a id="concept-wasm-definition"></a>
-
 ### 2.1 WebAssembly定义 {#2-1-wasm-definition}
 
 WebAssembly是一种二进制指令格式，形式化定义为：
@@ -35,8 +33,6 @@ $$\mathcal{W} = (M, F, T, I, E)$$
 - $I$ 是指令集合
 - $E$ 是执行环境
 
-<a id="concept-compilation-model"></a>
-
 ### 2.2 编译模型 {#2-2-compilation-model}
 
 从Rust到WebAssembly的编译过程，形式化表示为：
@@ -45,15 +41,11 @@ $$\text{Compile}: \text{Rust} \rightarrow \text{WebAssembly}$$
 
 包括类型映射、内存模型转换和代码生成优化。
 
-<a id="concept-memory-model"></a>
-
 ### 2.3 内存模型 {#2-3-memory-model}
 
 WebAssembly内存模型是线性内存空间，形式化定义为：
 
 $$\text{Memory} = \{(\text{addr}, \text{value}) | \text{addr} \in \mathbb{N}, \text{value} \in \text{Bytes}\}$$
-
-<a id="concept-wasm-interface"></a>
 
 ### 2.4 接口系统 {#2-4-wasm-interface}
 
@@ -61,21 +53,15 @@ WebAssembly系统接口(WASI)提供了与宿主环境交互的标准化方式。
 
 ## 3. Key Components {#3-key-components}
 
-<a id="component-module-system"></a>
-
 ### 3.1 模块系统 {#3-1-module-system}
 
 WebAssembly模块系统负责代码组织和导入/导出功能。
-
-<a id="component-validation"></a>
 
 ### 3.2 类型检查与验证 {#3-2-validation}
 
 类型检查确保WebAssembly程序符合类型安全规则，形式化定义为：
 
 $$\vdash \text{module} : \text{valid}$$
-
-<a id="component-runtime"></a>
 
 ### 3.3 执行环境 {#3-3-runtime}
 

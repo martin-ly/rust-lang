@@ -19,8 +19,6 @@ Rust IoT生态系统提供了安全、高效、可靠的物联网开发能力，
 
 ## 2. Core Concepts {#2-core-concepts}
 
-<a id="concept-iot-definition"></a>
-
 ### 2.1 物联网定义 {#2-1-iot-definition}
 
 物联网系统形式化定义为：
@@ -35,8 +33,6 @@ $$\mathcal{I} = (D, S, N, P, C)$$
 - $P$ 是协议栈
 - $C$ 是通信模型
 
-<a id="concept-embedded-rust"></a>
-
 ### 2.2 嵌入式Rust {#2-2-embedded-rust}
 
 嵌入式Rust是Rust语言在资源受限环境中的应用，关键特性包括：
@@ -46,8 +42,6 @@ $$\mathcal{I} = (D, S, N, P, C)$$
 - 中断处理和实时性保证
 - 硬件抽象和驱动开发
 
-<a id="concept-real-time-system"></a>
-
 ### 2.3 实时系统 {#2-3-real-time-system}
 
 实时系统是物联网中的核心组件，形式化定义为：
@@ -56,27 +50,19 @@ $$\text{RTOS}(T, R) = \forall t \in T. \exists r \in R. \text{respond}(t) \leq r
 
 其中 $T$ 是任务集合，$R$ 是响应时间需求。
 
-<a id="concept-communication-protocol"></a>
-
 ### 2.4 通信协议 {#2-4-communication-protocol}
 
 IoT通信协议定义了设备间数据交换的规则和格式。
 
 ## 3. Key Components {#3-key-components}
 
-<a id="component-hardware-abstraction"></a>
-
 ### 3.1 硬件抽象层 {#3-1-hardware-abstraction}
 
 硬件抽象层(HAL)提供了统一的硬件接口，简化设备驱动开发。
 
-<a id="component-rtos"></a>
-
 ### 3.2 实时操作系统 {#3-2-rtos}
 
 实时操作系统负责任务调度、中断处理和资源管理。
-
-<a id="component-protocol-stack"></a>
 
 ### 3.3 协议栈 {#3-3-protocol-stack}
 

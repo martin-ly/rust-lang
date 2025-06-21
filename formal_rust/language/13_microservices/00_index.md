@@ -19,7 +19,6 @@
 
 ## 2. Core Concepts {#2-core-concepts}
 
-
 ### 2.1 微服务定义 {#2-1-microservice-definition}
 
 Rust微服务系统是分布式系统的形式化规范，定义为：
@@ -33,8 +32,6 @@ $$\mathcal{M} = (\mathcal{S}, \mathcal{C}, \mathcal{D}, \mathcal{O})$$
 - $\mathcal{D}$ 是服务发现机制
 - $\mathcal{O}$ 是编排系统
 
-<a id="concept-service-algebra"></a>
-
 ### 2.2 服务代数 {#2-2-service-algebra}
 
 服务代数定义了服务交互和组合的数学操作，包括：
@@ -44,15 +41,11 @@ $$\mathcal{M} = (\mathcal{S}, \mathcal{C}, \mathcal{D}, \mathcal{O})$$
 - 分布式系统理论
 - 服务推理规则
 
-<a id="concept-service-interface"></a>
-
 ### 2.3 服务接口 {#2-3-service-interface}
 
 服务接口定义了服务间通信的契约，形式化定义为：
 
 $$\text{Service}(I, O, E) = \forall i : I. \exists o : O. \text{handle}(i) : \text{Result}[O, E]$$
-
-<a id="concept-service-discovery"></a>
 
 ### 2.4 服务发现 {#2-4-service-discovery}
 
@@ -62,23 +55,17 @@ $$\text{Registry}(S) = \forall s : S. \exists r : \text{Record}. \text{register}
 
 ## 3. Key Components {#3-key-components}
 
-<a id="component-load-balancing"></a>
-
 ### 3.1 负载均衡 {#3-1-load-balancing}
 
 负载均衡器负责将请求分发到多个服务实例，形式化定义为：
 
 $$\text{LoadBalancer}(S, L) = \forall r : \text{Request}. \exists s : S. \text{route}(r) = s$$
 
-<a id="component-circuit-breaker"></a>
-
 ### 3.2 熔断器模式 {#3-2-circuit-breaker}
 
 熔断器模式提供故障隔离和恢复机制，状态定义为：
 
 $$\text{CircuitBreaker}(S) = \text{State} \in \{\text{Closed}, \text{Open}, \text{HalfOpen}\}$$
-
-<a id="component-service-orchestration"></a>
 
 ### 3.3 服务编排 {#3-3-service-orchestration}
 

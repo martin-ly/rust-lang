@@ -19,8 +19,6 @@ Rust区块链系统提供了安全、高效、可扩展的区块链实现，充�
 
 ## 2. Core Concepts {#2-core-concepts}
 
-<a id="concept-blockchain-definition"></a>
-
 ### 2.1 区块链定义 {#2-1-blockchain-definition}
 
 区块链是一个分布式账本系统，形式化定义为：
@@ -35,8 +33,6 @@ $$\mathcal{B} = (B, H, T, S, C)$$
 - $S$ 是状态空间
 - $C$ 是共识机制
 
-<a id="concept-consensus-mechanism"></a>
-
 ### 2.2 共识机制 {#2-2-consensus-mechanism}
 
 共识机制保证分布式节点达成一致，主要模型包括：
@@ -45,8 +41,6 @@ $$\mathcal{B} = (B, H, T, S, C)$$
 - 权益证明(PoS)
 - 拜占庭容错(BFT)
 
-<a id="concept-smart-contract"></a>
-
 ### 2.3 智能合约 {#2-3-smart-contract}
 
 智能合约是区块链上自动执行的程序，形式化定义为：
@@ -54,8 +48,6 @@ $$\mathcal{B} = (B, H, T, S, C)$$
 $$\text{Contract}(S, I, O) = \forall i : I. \exists s' : S. \text{execute}(s, i) = (s', o)$$
 
 其中 $s$ 是原始状态，$s'$ 是新状态，$i$ 是输入，$o$ 是输出。
-
-<a id="concept-cryptography"></a>
 
 ### 2.4 密码学基础 {#2-4-cryptography}
 
@@ -68,21 +60,15 @@ $$\text{Contract}(S, I, O) = \forall i : I. \exists s' : S. \text{execute}(s, i)
 
 ## 3. Key Components {#3-key-components}
 
-<a id="component-block-structure"></a>
-
 ### 3.1 区块结构 {#3-1-block-structure}
 
 区块是区块链的基本单位，包含头部和交易列表，形式化定义为：
 
 $$\text{Block} = (\text{Header}, \text{Transactions})$$
 
-<a id="component-merkle-tree"></a>
-
 ### 3.2 默克尔树 {#3-2-merkle-tree}
 
 默克尔树是一种哈希树，用于高效验证区块中的交易。
-
-<a id="component-p2p-network"></a>
 
 ### 3.3 点对点网络 {#3-3-p2p-network}
 

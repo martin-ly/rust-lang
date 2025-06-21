@@ -41,7 +41,7 @@ $$h \models P * Q \iff \exists h_1, h_2. (h = h_1 \uplus h_2) \land (h_1 \models
 ### 1.4.2.3 分离逻辑的推理规则
 
 1. **帧规则（Frame Rule）**：
-   
+
    $$\frac{\{P\} C \{Q\}}{\{P * R\} C \{Q * R\}}$$
 
    其中 $C$ 是一个命令，$P$、$Q$ 和 $R$ 是断言，且 $R$ 中的变量不被 $C$ 修改。
@@ -49,23 +49,23 @@ $$h \models P * Q \iff \exists h_1, h_2. (h = h_1 \uplus h_2) \land (h_1 \models
    帧规则是分离逻辑的核心，它允许局部推理：如果命令 $C$ 在满足 $P$ 的状态下执行后满足 $Q$，那么在满足 $P * R$ 的状态下执行后将满足 $Q * R$。
 
 2. **顺序组合规则（Sequential Composition Rule）**：
-   
+
    $$\frac{\{P\} C_1 \{R\} \quad \{R\} C_2 \{Q\}}{\{P\} C_1; C_2 \{Q\}}$$
 
 3. **分配规则（Allocation Rule）**：
-   
+
    $$\{emp\} \text{let } x = \text{alloc}() \{x \mapsto -\}$$
 
 4. **读取规则（Load Rule）**：
-   
+
    $$\{l \mapsto v\} \text{let } x = *l \{l \mapsto v \land x = v\}$$
 
 5. **写入规则（Store Rule）**：
-   
+
    $$\{l \mapsto -\} *l = v \{l \mapsto v\}$$
 
 6. **释放规则（Deallocation Rule）**：
-   
+
    $$\{l \mapsto -\} \text{free}(l) \{emp\}$$
 
 ## 1.4.3 分离逻辑与Rust所有权系统
@@ -96,6 +96,7 @@ Rust的借用规则可以通过分离逻辑优雅地表达：
 - 可变借用：$\text{mut\_borrow}(x) \equiv x \mapsto v * \text{write\_permission}(x)$
 
 其中：
+
 - $\text{read\_permission}(x)$ 可以被复制（多个读取权限可以共存）
 - $\text{write\_permission}(x)$ 不能被复制（只能有一个写入权限）
 - $\text{write\_permission}(x)$ 与 $\text{read\_permission}(x)$ 不能共存
@@ -196,4 +197,4 @@ RustBelt证明了Rust类型系统的基本安全性质：
 2. O'Hearn, P. W. (2007). Resources, concurrency, and local reasoning. Theoretical Computer Science, 375(1-3), 271-307.
 3. Jung, R., Krebbers, R., Jourdan, J. H., Bizjak, A., Birkedal, L., & Dreyer, D. (2018). Iris from the ground up: A modular foundation for higher-order concurrent separation logic. Journal of Functional Programming, 28.
 4. Jung, R., Jourdan, J. H., Krebbers, R., & Dreyer, D. (2017). RustBelt: Securing the foundations of the Rust programming language. POPL 2018.
-5. Tassarotti, J., Jung, R., & Harper, R. (2017). A higher-order logic for concurrent termination-preserving refinement. ESOP 2017. 
+5. Tassarotti, J., Jung, R., & Harper, R. (2017). A higher-order logic for concurrent termination-preserving refinement. ESOP 2017.

@@ -19,8 +19,6 @@ Rust模型系统提供了建模、验证和模拟复杂系统的形式化框架�
 
 ## 2. Core Concepts {#2-core-concepts}
 
-<a id="concept-model-definition"></a>
-
 ### 2.1 模型定义 {#2-1-model-definition}
 
 模型系统形式化定义为：
@@ -35,8 +33,6 @@ $$\mathcal{M} = (E, R, C, T, S)$$
 - $T$ 是转换规则
 - $S$ 是语义解释
 
-<a id="concept-model-semantics"></a>
-
 ### 2.2 模型语义 {#2-2-model-semantics}
 
 模型语义定义了模型的解释框架，形式化表示为：
@@ -44,8 +40,6 @@ $$\mathcal{M} = (E, R, C, T, S)$$
 $$\text{Semantics}(\mathcal{M}) = \{\mathcal{I} | \mathcal{I} \models \mathcal{M}\}$$
 
 其中 $\mathcal{I}$ 是模型的一个有效解释。
-
-<a id="concept-model-verification"></a>
 
 ### 2.3 模型验证 {#2-3-model-verification}
 
@@ -55,27 +49,19 @@ $$\text{Verify}(\mathcal{M}, \phi) = \forall \mathcal{I} \in \text{Semantics}(\m
 
 其中 $\phi$ 是需要验证的属性。
 
-<a id="concept-model-transformation"></a>
-
 ### 2.4 模型转换 {#2-4-model-transformation}
 
 模型转换定义了将一个模型映射到另一个模型的规则。
 
 ## 3. Key Components {#3-key-components}
 
-<a id="component-type-models"></a>
-
 ### 3.1 类型模型 {#3-1-type-models}
 
 类型模型使用Rust的类型系统表达领域模型和约束。
 
-<a id="component-behavioral-models"></a>
-
 ### 3.2 行为模型 {#3-2-behavioral-models}
 
 行为模型描述系统的动态行为，包括状态机和过程模型。
-
-<a id="component-property-verification"></a>
 
 ### 3.3 属性验证 {#3-3-property-verification}
 

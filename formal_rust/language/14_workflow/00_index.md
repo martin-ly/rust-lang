@@ -19,8 +19,6 @@ Rust工作流系统提供了强大的业务流程编排能力，与异步机制�
 
 ## 2. Core Concepts {#2-core-concepts}
 
-<a id="concept-workflow-definition"></a>
-
 ### 2.1 工作流定义 {#2-1-workflow-definition}
 
 一个工作流系统形式化定义为：
@@ -35,15 +33,11 @@ $$\mathcal{W} = (S, T, I, O, \Delta)$$
 - $O$ 是输出类型
 - $\Delta$ 是状态转换规则
 
-<a id="concept-workflow-execution"></a>
-
 ### 2.2 工作流执行模型 {#2-2-workflow-execution}
 
 工作流执行模型定义了状态转换的过程，形式化表示为：
 
 $$\Delta: S \times I \rightarrow S \times O$$
-
-<a id="concept-workflow-composition"></a>
 
 ### 2.3 工作流组合 {#2-3-workflow-composition}
 
@@ -51,27 +45,19 @@ $$\Delta: S \times I \rightarrow S \times O$$
 
 $$(W_1 \circ W_2)(i) = W_2(W_1(i))$$
 
-<a id="concept-workflow-state"></a>
-
 ### 2.4 工作流状态管理 {#2-4-workflow-state}
 
 工作流状态管理处理工作流执行过程中的状态持久化和恢复。
 
 ## 3. Key Components {#3-key-components}
 
-<a id="component-workflow-engine"></a>
-
 ### 3.1 工作流引擎 {#3-1-workflow-engine}
 
 工作流引擎负责工作流的执行和状态转换，是系统的核心组件。
 
-<a id="component-error-handling"></a>
-
 ### 3.2 错误处理 {#3-2-error-handling}
 
 工作流错误处理定义了在执行过程中产生错误时的行为规则和恢复机制。
-
-<a id="component-async-workflow"></a>
 
 ### 3.3 异步工作流 {#3-3-async-workflow}
 

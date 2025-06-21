@@ -22,19 +22,19 @@
 线性类型系统的核心规则包括：
 
 1. **变量规则**：
-   
+
    $$\frac{x:\tau \in \Gamma}{\Gamma \vdash x : \tau}$$
 
    其中 $\Gamma$ 只包含 $x$ 一个变量。
 
 2. **函数应用规则**：
-   
+
    $$\frac{\Gamma_1 \vdash e_1 : \tau_1 \to \tau_2 \quad \Gamma_2 \vdash e_2 : \tau_1}{\Gamma_1, \Gamma_2 \vdash e_1\;e_2 : \tau_2}$$
 
    其中 $\Gamma_1$ 和 $\Gamma_2$ 是不相交的上下文。
 
 3. **函数抽象规则**：
-   
+
    $$\frac{\Gamma, x:\tau_1 \vdash e : \tau_2}{\Gamma \vdash \lambda x:\tau_1.e : \tau_1 \to \tau_2}$$
 
 ### 1.2.2.3 线性类型的性质
@@ -64,11 +64,11 @@ $$\frac{\Gamma \vdash e : \tau}{\Gamma, x : \sigma \vdash e : \tau} \text{ (Weak
 仿射类型系统包含线性类型系统的所有规则，并添加了弱化规则：
 
 1. **弱化规则**：
-   
+
    $$\frac{\Gamma \vdash e : \tau}{\Gamma, x : \sigma \vdash e : \tau} \text{ (Weakening)}$$
 
 2. **丢弃规则**：
-   
+
    $$\frac{\Gamma \vdash e : \tau \quad \tau \text{ 是可丢弃的}}{\Gamma \vdash \text{drop}(e) : \text{unit}}$$
 
 ### 1.2.3.3 仿射类型的性质
@@ -87,7 +87,7 @@ $$\frac{\Gamma \vdash e : \tau}{\Gamma, x : \sigma \vdash e : \tau} \text{ (Weak
 Rust的所有权系统基于仿射类型理论，而非严格的线性类型理论。这体现在以下方面：
 
 1. **允许变量未使用**：Rust允许声明但不使用变量（虽然会产生警告）
-   
+
    ```rust
    fn main() {
        let x = 5; // 变量x未被使用，编译器会产生警告，但程序仍然有效
@@ -95,7 +95,7 @@ Rust的所有权系统基于仿射类型理论，而非严格的线性类型理�
    ```
 
 2. **允许显式丢弃值**：值可以在作用域结束时自动丢弃，或使用`drop`函数显式丢弃
-   
+
    ```rust
    fn main() {
        let s = String::from("hello");
@@ -105,7 +105,7 @@ Rust的所有权系统基于仿射类型理论，而非严格的线性类型理�
    ```
 
 3. **禁止多次使用移动语义类型**：移动语义类型（如`String`、`Vec`等）不能在移动后再次使用
-   
+
    ```rust
    fn main() {
        let s1 = String::from("hello");
@@ -176,4 +176,4 @@ Rust的借用系统可以看作是对仿射类型系统的扩展，允许在不�
 2. Wadler, P. (1990). Linear types can change the world! In Programming Concepts and Methods.
 3. Tov, J. A., & Pucella, R. (2011). Practical affine types. In Proceedings of the 38th annual ACM SIGPLAN-SIGACT symposium on Principles of programming languages.
 4. Jung, R., Jourdan, J. H., Krebbers, R., & Dreyer, D. (2017). RustBelt: Securing the foundations of the Rust programming language. POPL 2018.
-5. Matsakis, N. D., & Klock, F. S. (2014). The Rust language. ACM SIGAda Ada Letters, 34(3), 103-104. 
+5. Matsakis, N. D., & Klock, F. S. (2014). The Rust language. ACM SIGAda Ada Letters, 34(3), 103-104.

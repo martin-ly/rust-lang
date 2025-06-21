@@ -19,8 +19,6 @@ Rust高级语言特性提供了强大的表达能力和抽象能力，使开发�
 
 ## 2. Core Concepts {#2-core-concepts}
 
-<a id="concept-advanced-types"></a>
-
 ### 2.1 高级类型系统 {#2-1-advanced-types}
 
 Rust的高级类型系统特性包括：
@@ -61,23 +59,19 @@ $$\mathcal{U} = (S, I, C)$$
 - $I$ 是不变量
 - $C$ 是契约
 
-
 ### 2.4 编译时计算 {#2-4-compile-time-evaluation}
 
 编译时计算允许在编译期执行代码，包括const函数和const泛型。
 
 ## 3. Key Components {#3-key-components}
 
-
 ### 3.1 高级特质系统 {#3-1-advanced-trait-system}
 
 高级特质系统包括特质边界、关联类型和特质继承等功能。
 
-
 ### 3.2 过程宏 {#3-2-procedural-macros}
 
 过程宏允许在编译期操作语法树，实现代码生成和转换。
-
 
 ### 3.3 常量泛型 {#3-3-const-generics}
 
