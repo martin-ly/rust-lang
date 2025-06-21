@@ -1,5 +1,18 @@
 # Rust 中间件系统形式理论
 
+**Document Version**: V1.0  
+**Creation Date**: 2025-01-27  
+**Last Updated**: 2025-07-21  
+**Category**: Formal Theory  
+**Cross-References**:
+
+- [Module 11: Frameworks](../11_frameworks/00_index.md)
+- [Module 09: Design Patterns](../09_design_patterns/00_index.md)
+- [Module 06: Async/Await](../06_async_await/00_index.md)
+- [Module 05: Concurrency](../05_concurrency/00_index.md)
+- [Module 13: Microservices](../13_microservices/00_index.md)
+- [Module 27: Ecosystem Architecture](../27_ecosystem_architecture/00_index.md)
+
 ## 目录
 
 1. [引言](#1-引言)
@@ -40,7 +53,9 @@
    9.3. [中间件优化定理](#93-中间件优化定理)
 10. [参考文献](#10-参考文献)
 
-## 1. 引言
+## 1. 引言 {#1-引言}
+
+<a id="middleware-concept"></a>
 
 ### 1.1. 中间件概念
 
@@ -51,6 +66,8 @@
 $$M : (A \rightarrow B) \rightarrow (A \rightarrow B)$$
 
 其中 $A$ 表示输入类型（如请求），$B$ 表示输出类型（如响应）。
+
+<a id="design-principles"></a>
 
 ### 1.2. 设计原则
 
@@ -101,7 +118,9 @@ $$M : \Omega \rightarrow \Omega$$
 2. **最小侵入原则**：中间件应当最小化对核心业务逻辑的侵入。
 3. **责任分配原则**：中间件应当明确其责任边界，不应承担过多责任。
 
-## 3. 数学理论
+## 3. 数学理论 {#3-数学理论}
+
+<a id="middleware-algebra"></a>
 
 ### 3.1. 中间件代数
 
@@ -121,6 +140,8 @@ $$M : \Omega \rightarrow \Omega$$
 
 因此，中间件集合与组合操作构成一个幺半群（Monoid）。
 
+<a id="pipeline-composition-theory"></a>
+
 ### 3.2. 管道组合理论
 
 中间件管道可以通过函数组合理论来形式化：
@@ -137,6 +158,8 @@ $$M : \Omega \rightarrow \Omega$$
 
    $$M_1 \circ M_2 \circ \ldots \circ M_n \equiv M'_1 \circ M'_2 \circ \ldots \circ M'_m \text{ where } m < n$$
 
+<a id="category-theory-perspective"></a>
+
 ### 3.3. 范畴论视角
 
 从范畴论角度，中间件系统可以建模为：
@@ -148,7 +171,9 @@ $$M : \Omega \rightarrow \Omega$$
 
 这构成了一个自函子范畴（Endofunctor Category）。
 
-## 4. 形式化模型
+## 4. 形式化模型 {#4-形式化模型}
+
+<a id="middleware-formal-definition"></a>
 
 ### 4.1. 中间件形式定义
 
@@ -166,6 +191,8 @@ trait Middleware<Req, Res> {
 
 $$\text{Middleware} = \forall \alpha, \beta. (\alpha \rightarrow \beta) \times \alpha \rightarrow \beta$$
 
+<a id="pipeline-model"></a>
+
 ### 4.2. 管道模型
 
 管道模型将中间件视为管道中的处理单元：
@@ -177,6 +204,8 @@ $$\text{Middleware} = \forall \alpha, \beta. (\alpha \rightarrow \beta) \times \
 形式化表示：
 
 $$\text{Pipeline}(M_1, M_2, \ldots, M_n)(f) = M_1 \circ M_2 \circ \ldots \circ M_n(f)$$
+
+<a id="onion-model"></a>
 
 ### 4.3. 洋葱模型
 

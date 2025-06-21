@@ -36,6 +36,7 @@ The process management system embodies the philosophical concept of **computatio
 - **Coordination**: Processes coordinate through synchronization primitives
 
 **Philosophical Questions:**
+
 - What does it mean for a computation to be "isolated"?
 - How do we understand the relationship between processes and resources?
 - What are the ethical implications of process creation and termination?
@@ -59,6 +60,7 @@ A process can be formalized as a **state machine**:
 ```
 
 Where:
+
 - `State` is the process's current execution state
 - `Program` is the sequence of instructions to execute
 - `Resources` is the set of allocated system resources
@@ -73,6 +75,7 @@ Process states form a **transition system**:
 ```
 
 **State Transition Function:**
+
 ```math
 \delta : \text{ProcessState} \times \text{Event} \rightarrow \text{ProcessState}
 ```
@@ -86,6 +89,7 @@ IPC channels can be modeled as **communication channels**:
 ```
 
 **Channel Operations:**
+
 1. **Send**: `send(ch, msg) \rightarrow \text{Result}`
 2. **Receive**: `recv(ch) \rightarrow \text{Result}(T)`
 3. **Close**: `close(ch) \rightarrow \text{unit}`
@@ -106,6 +110,7 @@ struct ProcessCreation {
 ```
 
 **Creation Semantics:**
+
 ```math
 \text{create\_process}(config) \rightarrow \text{Result}(\text{Process})
 ```
@@ -123,6 +128,7 @@ struct IpcChannel<T> {
 ```
 
 **Channel Properties:**
+
 1. **FIFO Ordering**: Messages are delivered in first-in-first-out order
 2. **Atomicity**: Send and receive operations are atomic
 3. **Reliability**: Messages are not lost unless the channel is closed
@@ -136,6 +142,7 @@ Process synchronization is modeled through **synchronization primitives**:
 ```
 
 **Synchronization Semantics:**
+
 ```math
 \text{acquire}(sync) \rightarrow \text{exclusive\_access}
 \text{release}(sync) \rightarrow \text{release\_access}
@@ -154,6 +161,7 @@ let output = Command::new("ls")
 ```
 
 **Mathematical Interpretation:**
+
 - `Command::new` creates a **process configuration**
 - `output()` executes the process and captures its output
 - The result represents the **process execution outcome**
@@ -176,6 +184,7 @@ if let Some(stdin) = child.stdin.as_mut() {
 ```
 
 **IPC Semantics:**
+
 ```math
 \text{pipe}(parent, child) \equiv \text{create\_channel}(parent, child)
 \text{write}(pipe, data) \equiv \text{send}(pipe, data)
@@ -195,6 +204,7 @@ let child = Command::new("child_program")
 ```
 
 **Synchronization Semantics:**
+
 ```math
 \text{shared\_resource}(parent, child) \equiv \text{mutex}(\text{resource})
 ```
@@ -217,6 +227,7 @@ fn handle_signal(signal: Signal) {
 ```
 
 **Signal Semantics:**
+
 ```math
 \text{signal}(process, sig) \equiv \text{interrupt}(process, sig)
 ```
@@ -254,6 +265,7 @@ fn handle_signal(signal: Signal) {
 **Theorem**: Rust's process management ensures process isolation.
 
 **Proof Sketch:**
+
 1. Each process has its own address space
 2. Operating system enforces memory isolation
 3. Rust's abstractions don't bypass isolation
@@ -264,6 +276,7 @@ fn handle_signal(signal: Signal) {
 **Theorem**: IPC channels provide safe inter-process communication.
 
 **Proof Sketch:**
+
 1. Channels are type-safe
 2. Message passing is atomic
 3. No shared memory access through channels
@@ -274,6 +287,7 @@ fn handle_signal(signal: Signal) {
 **Theorem**: Process resources are properly managed and cleaned up.
 
 **Proof Sketch:**
+
 1. `Drop` trait ensures cleanup
 2. Process termination triggers cleanup
 3. Error handling preserves cleanup
@@ -284,6 +298,7 @@ fn handle_signal(signal: Signal) {
 **Theorem**: Rust's process management cannot prevent all deadlocks.
 
 **Proof Sketch:**
+
 1. Deadlocks are a runtime property
 2. Process management operates at system level
 3. Some deadlock patterns are undecidable
@@ -312,6 +327,7 @@ let grep_output = Command::new("grep")
 ```
 
 **Pipeline Semantics:**
+
 ```math
 \text{pipeline}(cmd_1, cmd_2) \equiv \text{pipe}(\text{execute}(cmd_1), \text{execute}(cmd_2))
 ```
@@ -337,6 +353,7 @@ impl ProcessPool {
 ```
 
 **Pool Semantics:**
+
 ```math
 \text{ProcessPool} = \text{Set}(\text{Process}) \times \text{Scheduler}
 ```
@@ -358,6 +375,7 @@ for i in 0..4 {
 ```
 
 **Shared Memory Semantics:**
+
 ```math
 \text{shared\_memory}(processes, data) \equiv \text{mutex}(\text{shared}(data))
 ```
@@ -369,6 +387,7 @@ for i in 0..4 {
 **Theorem**: Process creation is safe and doesn't violate memory safety.
 
 **Proof**:
+
 1. Process creation allocates new address space
 2. New address space is isolated from parent
 3. No shared memory between parent and child
@@ -379,6 +398,7 @@ for i in 0..4 {
 **Theorem**: IPC channels provide safe communication between processes.
 
 **Proof**:
+
 1. Channels are implemented by operating system
 2. Operating system ensures message integrity
 3. No direct memory access between processes
@@ -389,6 +409,7 @@ for i in 0..4 {
 **Theorem**: Process resources are properly cleaned up on termination.
 
 **Proof**:
+
 1. `Drop` trait is implemented for process handles
 2. Process termination triggers cleanup
 3. Operating system reclaims resources
@@ -399,6 +420,7 @@ for i in 0..4 {
 **Theorem**: Processes are isolated and cannot access each other's memory.
 
 **Proof**:
+
 1. Each process has separate address space
 2. Operating system enforces memory protection
 3. Rust doesn't provide unsafe memory access
@@ -422,4 +444,4 @@ for i in 0..4 {
 
 ---
 
-*This document represents the formal mathematical foundation of Rust's process management and IPC system, providing rigorous definitions, proofs, and semantic models for understanding and implementing safe system-level programming in Rust.* 
+*This document represents the formal mathematical foundation of Rust's process management and IPC system, providing rigorous definitions, proofs, and semantic models for understanding and implementing safe system-level programming in Rust.*

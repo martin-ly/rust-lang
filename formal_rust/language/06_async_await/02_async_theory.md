@@ -1,31 +1,36 @@
-# Rust异步编程全面总结
+# Rust异步编程全面总结 {#异步理论概述}
 
 ## 目录
 
-- [Rust异步编程全面总结](#rust异步编程全面总结)
+- [Rust异步编程全面总结 {#异步理论概述}](#rust异步编程全面总结-异步理论概述)
   - [目录](#目录)
-  - [思维导图](#思维导图)
-  - [1. 基本概念](#1-基本概念)
-    - [1.1 异步编程简介](#11-异步编程简介)
-    - [1.2 Future特质](#12-future特质)
-    - [1.3 async/await语法](#13-asyncawait语法)
-  - [2. 原理与机制](#2-原理与机制)
-    - [2.1 状态机转换原理](#21-状态机转换原理)
-    - [2.2 Pin与内存安全](#22-pin与内存安全)
-    - [2.3 Waker与任务唤醒](#23-waker与任务唤醒)
-  - [3. 执行器与运行时](#3-执行器与运行时)
-    - [3.1 执行器的工作原理](#31-执行器的工作原理)
-    - [3.2 异步运行时对比](#32-异步运行时对比)
-  - [4. 高级特性与应用](#4-高级特性与应用)
-    - [4.1 异步流](#41-异步流)
-    - [4.2 取消与超时](#42-取消与超时)
-    - [4.3 异步锁与同步原语](#43-异步锁与同步原语)
-  - [5. 形式化证明与推理](#5-形式化证明与推理)
-    - [5.1 异步执行模型的形式化表示](#51-异步执行模型的形式化表示)
-    - [5.2 调度公平性证明](#52-调度公平性证明)
-    - [5.3 活性与安全性保证](#53-活性与安全性保证)
+  - [思维导图 {#思维导图}](#思维导图-思维导图)
+  - [1. 基本概念 {#基本概念}](#1-基本概念-基本概念)
+    - [1.1 异步编程简介 {#异步编程简介}](#11-异步编程简介-异步编程简介)
+    - [1.2 Future特质 {#future特质}](#12-future特质-future特质)
+    - [1.3 async/await语法 {#async-await语法}](#13-asyncawait语法-async-await语法)
+  - [2. 原理与机制 {#原理与机制}](#2-原理与机制-原理与机制)
+    - [2.1 状态机转换原理 {#状态机转换原理}](#21-状态机转换原理-状态机转换原理)
+  - [3. 执行器与运行时 {#执行器与运行时}](#3-执行器与运行时-执行器与运行时)
+    - [3.1 执行器的工作原理 {#执行器的工作原理}](#31-执行器的工作原理-执行器的工作原理)
+    - [3.2 异步运行时对比 {#异步运行时对比}](#32-异步运行时对比-异步运行时对比)
+  - [4. 高级特性与应用 {#高级特性与应用}](#4-高级特性与应用-高级特性与应用)
+    - [4.1 异步流 {#异步流}](#41-异步流-异步流)
+    - [4.2 取消与超时 {#取消与超时}](#42-取消与超时-取消与超时)
+    - [4.3 异步锁与同步原语 {#异步锁与同步原语}](#43-异步锁与同步原语-异步锁与同步原语)
+  - [5. 形式化证明与推理 {#形式化证明与推理}](#5-形式化证明与推理-形式化证明与推理)
+    - [5.1 异步执行模型的形式化表示 {#异步执行模型的形式化表示}](#51-异步执行模型的形式化表示-异步执行模型的形式化表示)
+    - [5.2 调度公平性证明 {#调度公平性证明}](#52-调度公平性证明-调度公平性证明)
+    - [5.3 活性与安全性保证 {#活性与安全性保证}](#53-活性与安全性保证-活性与安全性保证)
 
-## 思维导图
+**相关概念**:
+
+- [异步编程概述](01_formal_async_system.md#异步编程概述) (本模块)
+- [并发模型](../05_concurrency/01_formal_concurrency_model.md#并发模型) (模块 05)
+- [控制流](../03_control_flow/01_formal_control_flow.md#控制流定义) (模块 03)
+- [类型系统](../02_type_system/01_formal_type_system.md#类型系统) (模块 02)
+
+## 思维导图 {#思维导图}
 
 ```text
 Rust异步编程
@@ -60,12 +65,18 @@ Rust异步编程
     └── monoio - 高性能io_uring运行时
 ```
 
-## 1. 基本概念
+## 1. 基本概念 {#基本概念}
 
-### 1.1 异步编程简介
+### 1.1 异步编程简介 {#异步编程简介}
 
 异步编程是一种允许程序在等待I/O操作完成时执行其他工作的编程模式。
 Rust的异步模型是基于**零成本抽象**原则设计的，同时保持了**内存安全**和**无数据竞争**的语言特性。
+
+**相关概念**:
+
+- [零成本抽象](../19_advanced_language_features/01_formal_spec.md#零成本抽象) (模块 19)
+- [内存安全](../13_safety_guarantees/01_formal_safety.md#内存安全) (模块 13)
+- [数据竞争](../13_safety_guarantees/03_data_race_freedom.md#数据竞争) (模块 13)
 
 与传统并发模型对比：
 
@@ -77,9 +88,21 @@ Rust的异步模型是基于**零成本抽象**原则设计的，同时保持了
 
 Rust选择了基于**Future**和**状态机**的异步模型，避免了回调地狱，同时保持高性能。
 
-### 1.2 Future特质
+**相关概念**:
+
+- [线程模型](../05_concurrency/02_threading_model.md#线程模型) (模块 05)
+- [回调机制](../03_control_flow/01_formal_control_flow.md#回调机制) (模块 03)
+- [状态机](../20_theoretical_perspectives/03_state_transition_systems.md#状态机) (模块 20)
+
+### 1.2 Future特质 {#future特质}
 
 `Future`是Rust异步编程的核心抽象，代表一个可能尚未完成的异步操作。
+
+**相关概念**:
+
+- [Trait系统](../02_type_system/01_formal_type_system.md#trait系统) (模块 02)
+- [关联类型](../02_type_system/01_formal_type_system.md#关联类型) (模块 02)
+- [延迟计算](../20_theoretical_perspectives/01_programming_paradigms.md#延迟计算) (模块 20)
 
 ```rust
 pub trait Future {
@@ -99,6 +122,12 @@ pub enum Poll<T> {
 - **可组合性**：Future可以嵌套和组合构建复杂异步流程
 - **零开销**：不使用的Future特性不会产生运行时开销
 
+**相关概念**:
+
+- [惰性求值](../20_theoretical_perspectives/01_programming_paradigms.md#惰性求值) (模块 20)
+- [组合模式](../20_theoretical_perspectives/02_design_patterns.md#组合模式) (模块 20)
+- [零成本抽象](../19_advanced_language_features/01_formal_spec.md#零成本抽象) (模块 19)
+
 简单的Future实现示例：
 
 ```rust
@@ -113,9 +142,15 @@ impl<T> Future for ReadyFuture<T> {
 }
 ```
 
-### 1.3 async/await语法
+### 1.3 async/await语法 {#async-await语法}
 
 `async`/`await`是Rust提供的语法糖，使异步代码看起来像同步代码，大大简化了异步编程。
+
+**相关概念**:
+
+- [语法糖](../19_advanced_language_features/01_formal_spec.md#语法糖) (模块 19)
+- [函数](../05_function_control/01_function_theory.md#函数) (模块 05)
+- [控制流结构](../03_control_flow/01_formal_control_flow.md#控制流结构) (模块 03)
 
 ```rust
 // 异步函数定义
@@ -147,12 +182,24 @@ async {
 }
 ```
 
-## 2. 原理与机制
+**相关概念**:
 
-### 2.1 状态机转换原理
+- [形式化语义](../20_theoretical_perspectives/04_mathematical_foundations.md#形式化语义) (模块 20)
+- [求值关系](../20_theoretical_perspectives/04_mathematical_foundations.md#求值关系) (模块 20)
+- [挂起操作](../03_control_flow/01_formal_control_flow.md#挂起操作) (模块 03)
+
+## 2. 原理与机制 {#原理与机制}
+
+### 2.1 状态机转换原理 {#状态机转换原理}
 
 编译器将`async`函数或块转换为实现`Future`的状态机。
 每个`.await`点成为状态机的一个可能暂停点。
+
+**相关概念**:
+
+- [编译器转换](../24_compiler_internals/02_desugaring.md#编译器转换) (模块 24)
+- [状态机](../20_theoretical_perspectives/03_state_transition_systems.md#状态机) (模块 20)
+- [暂停点](../20_theoretical_perspectives/03_state_transition_systems.md#暂停点) (模块 20)
 
 例如，这个简单的异步函数：
 
@@ -218,105 +265,9 @@ impl Future for ExampleFuture {
 - **断点恢复**：能够从上次暂停处恢复执行
 - **效率优化**：编译器优化生成的状态机，减少不必要的状态
 
-### 2.2 Pin与内存安全
+## 3. 执行器与运行时 {#执行器与运行时}
 
-`Pin`是Rust解决自引用结构内存安全的关键机制。
-
-问题背景：
-异步状态机可能包含自引用（一个字段引用另一个字段），
-如果状态机在内存中移动，这些引用会失效，导致未定义行为。
-
-```rust
-struct SelfReferential {
-    data: String,
-    // 指向data内部的指针，如果结构体移动，将变为无效
-    ptr_to_data: *const u8,
-}
-```
-
-`Pin`的核心作用：
-
-- 确保实现了`!Unpin`的类型一旦被固定，就不能再被移动
-- 提供安全API确保固定数据的引用安全
-
-```rust
-// Pin的核心API
-pub struct Pin<P> {
-    pointer: P,
-}
-
-impl<P: Deref> Deref for Pin<P> {
-    type Target = P::Target;
-    fn deref(&self) -> &Self::Target {
-        // 安全，只是提供不可变引用
-        self.pointer.deref()
-    }
-}
-
-// 只有当P::Target: Unpin时才提供get_mut
-impl<P: DerefMut> Pin<P> where P::Target: Unpin {
-    pub fn get_mut(self) -> P {
-        self.pointer
-    }
-}
-```
-
-使用`Pin`安全地处理自引用Future：
-
-1. Future的poll方法接收`self: Pin<&mut Self>`而非`&mut self`
-2. 执行器负责正确地固定Future
-3. 大多数开发者通过`async/await`间接使用`Pin`，无需直接操作
-
-### 2.3 Waker与任务唤醒
-
-Waker是异步任务通知执行器"我已准备好继续执行"的机制。
-
-```rust
-pub struct Context<'a> {
-    waker: &'a Waker,
-    // 其他字段...
-}
-
-pub struct Waker {
-    // 包含唤醒特定任务所需的信息
-}
-
-impl Waker {
-    pub fn wake(self) { /* 唤醒相关任务 */ }
-    pub fn wake_by_ref(&self) { /* 唤醒但不消耗自身 */ }
-}
-```
-
-唤醒机制的工作流程：
-
-1. 执行器通过`Context`传递`Waker`给Future的`poll`方法
-2. 当Future需要等待I/O等资源时，它注册`Waker`与该资源
-3. 资源就绪时(如I/O完成)，资源调用`wake()`通知执行器
-4. 执行器将任务重新放入就绪队列，稍后再次轮询
-
-自定义Waker示例（简化版）：
-
-```rust
-// 创建一个简单的Waker
-fn create_waker(task_id: usize, queue: Arc<Mutex<VecDeque<usize>>>) -> Waker {
-    // 原始Waker构建（略去unsafe细节）
-    unsafe {
-        Waker::from_raw(raw_waker)
-    }
-}
-
-// 在执行器中使用
-let waker = create_waker(task_id, task_queue.clone());
-let mut context = Context::from_waker(&waker);
-match future.poll(&mut context) {
-    Poll::Ready(result) => { /* 处理结果 */ },
-    Poll::Pending => { /* 任务将通过waker重新入队 */ },
-}
-```
-
-## 3. 执行器与运行时
-
-### 3.1 执行器的工作原理
+### 3.1 执行器的工作原理 {#执行器的工作原理}
 
 执行器是管理异步任务生命周期的核心组件，负责调度和轮询Future。
 
@@ -374,7 +325,7 @@ impl MiniExecutor {
 - **公平性**：确保所有任务都有执行机会
 - **资源限制**：控制同时运行的任务数量
 
-### 3.2 异步运行时对比
+### 3.2 异步运行时对比 {#异步运行时对比}
 
 Rust不在标准库提供异步运行时，而是由生态系统提供多种选择：
 
@@ -394,9 +345,9 @@ Rust不在标准库提供异步运行时，而是由生态系统提供多种选�
 - 生态系统支持
 - 性能特征
 
-## 4. 高级特性与应用
+## 4. 高级特性与应用 {#高级特性与应用}
 
-### 4.1 异步流
+### 4.1 异步流 {#异步流}
 
 `Stream`特质是异步版本的迭代器，表示一系列异步产生的值：
 
@@ -420,7 +371,7 @@ async fn main() {
 }
 ```
 
-### 4.2 取消与超时
+### 4.2 取消与超时 {#取消与超时}
 
 异步任务的取消控制：
 
@@ -463,7 +414,7 @@ impl<T, R> CancellableTask<T, R> {
 }
 ```
 
-### 4.3 异步锁与同步原语
+### 4.3 异步锁与同步原语 {#异步锁与同步原语}
 
 异步同步原语与传统同步原语的区别在于：
 当它们不能立即获取时，会让出执行权而非阻塞。
@@ -491,9 +442,9 @@ async fn process_shared_data(shared: Arc<Mutex<Vec<u32>>>) {
 - `Notify` - 异步通知（类似条件变量）
 - `oneshot`/`mpsc`/`broadcast` - 各种异步通道
 
-## 5. 形式化证明与推理
+## 5. 形式化证明与推理 {#形式化证明与推理}
 
-### 5.1 异步执行模型的形式化表示
+### 5.1 异步执行模型的形式化表示 {#异步执行模型的形式化表示}
 
 异步执行模型可以通过操作语义形式化：
 
@@ -517,7 +468,7 @@ Schedule(T) = {
 }
 ```
 
-### 5.2 调度公平性证明
+### 5.2 调度公平性证明 {#调度公平性证明}
 
 **定义**：
 调度策略D是一个映射D: 2^T × H → T，其中T是任务集合，H是任务执行历史。
@@ -533,7 +484,7 @@ Schedule(T) = {
 这表示：
 对于任何任务t，如果在某个时刻后，比t优先级高的就绪任务数量有上限，则t最终会被调度执行。
 
-### 5.3 活性与安全性保证
+### 5.3 活性与安全性保证 {#活性与安全性保证}
 
 **Waker正确性定理**：一个正确实现的Waker满足：
 

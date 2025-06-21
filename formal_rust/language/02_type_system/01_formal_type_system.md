@@ -1,26 +1,68 @@
-# Rust类型系统形式化理论 {#formal-type-system}
+# Rust类型系统形式化理论
 
-## 目录 {#table-of-contents}
+ {#formal-type-system}
 
-1. [引言](#1-引言)
-2. [哲学基础](#2-哲学基础)
-3. [数学理论基础](#3-数学理论基础)
-4. [形式化模型](#4-形式化模型)
-5. [核心概念](#5-核心概念)
-6. [类型规则](#6-类型规则)
-7. [语义规则](#7-语义规则)
-8. [安全保证](#8-安全保证)
-9. [应用实例](#9-应用实例)
-10. [理论证明](#10-理论证明)
-11. [参考文献](#11-参考文献)
+## 目录
 
-## 1. 引言 {#1-引言}
+- [Rust类型系统形式化理论](#rust类型系统形式化理论)
+  - [目录](#目录)
+  - [1. 引言](#1-引言)
+    - [1.1 主题概述](#11-主题概述)
+    - [1.2 历史背景](#12-历史背景)
+    - [1.3 在Rust中的应用](#13-在rust中的应用)
+  - [2. 哲学基础](#2-哲学基础)
+    - [2.1 柏拉图主义类型观](#21-柏拉图主义类型观)
+    - [2.2 构造主义类型观](#22-构造主义类型观)
+    - [2.3 实用主义类型观](#23-实用主义类型观)
+  - [3. 数学理论基础](#3-数学理论基础)
+    - [3.1 范畴论基础](#31-范畴论基础)
+    - [3.2 代数数据类型](#32-代数数据类型)
+    - [3.3 参数多态](#33-参数多态)
+    - [3.4 类型推导](#34-类型推导)
+  - [4. 形式化模型](#4-形式化模型)
+    - [4.1 类型语法](#41-类型语法)
+    - [4.2 类型环境 {#类型环境}](#42-类型环境-类型环境)
+    - [4.3 类型约束 {#类型约束}](#43-类型约束-类型约束)
+  - [5. 核心概念](#5-核心概念)
+    - [5.1 类型安全](#51-类型安全)
+    - [5.2 类型](#52-类型)
+    - [5.3 子类型](#53-子类型)
+    - [5.4 多态性](#54-多态性)
+  - [6. 类型规则](#6-类型规则)
+    - [6.1 基本类型规则](#61-基本类型规则)
+    - [6.2 变量规则](#62-变量规则)
+    - [6.3 函数规则](#63-函数规则)
+    - [6.4 代数数据类型规则](#64-代数数据类型规则)
+    - [6.5 泛型规则](#65-泛型规则)
+    - [6.6 引用规则 {#引用规则}](#66-引用规则-引用规则)
+  - [7. 语义规则](#7-语义规则)
+    - [7.1 求值规则](#71-求值规则)
+    - [7.2 类型推导规则](#72-类型推导规则)
+  - [8. 安全保证](#8-安全保证)
+    - [8.1 类型安全保证](#81-类型安全保证)
+    - [8.2 内存安全保证](#82-内存安全保证)
+  - [9. 应用实例](#9-应用实例)
+    - [9.1 基础示例](#91-基础示例)
+    - [9.2 代数数据类型示例](#92-代数数据类型示例)
+    - [9.3 泛型示例 {#泛型示例}](#93-泛型示例-泛型示例)
+    - [9.4 高级类型示例 {#高级类型示例}](#94-高级类型示例-高级类型示例)
+  - [10. 理论证明 {#10-理论证明}](#10-理论证明-10-理论证明)
+    - [10.1 类型推导算法正确性 {#类型推导算法正确性}](#101-类型推导算法正确性-类型推导算法正确性)
+    - [10.2 类型安全证明 {#类型安全证明}](#102-类型安全证明-类型安全证明)
+    - [10.3 型变证明 {#型变证明}](#103-型变证明-型变证明)
+  - [11. 参考文献 {#11-参考文献}](#11-参考文献-11-参考文献)
+    - [11.1 学术论文 {#学术论文}](#111-学术论文-学术论文)
+    - [11.2 技术文档 {#技术文档}](#112-技术文档-技术文档)
 
-### 1.1 主题概述 {#主题概述}
+{#table-of-contents}
+
+## 1. 引言
+
+### 1.1 主题概述
 
 Rust类型系统是一个强大的静态类型系统，它结合了函数式编程的类型理论和系统编程的实用性。该系统基于Hindley-Milner类型系统，扩展了代数数据类型、参数多态、生命周期和所有权类型等概念。
 
-### 1.2 历史背景 {#历史背景}
+### 1.2 历史背景
 
 Rust类型系统的理论基础可以追溯到：
 
@@ -29,7 +71,7 @@ Rust类型系统的理论基础可以追溯到：
 - **参数多态** (Reynolds, 1974)
 - **类型推导** (Damas & Milner, 1982)
 
-### 1.3 在Rust中的应用 {#应用}
+### 1.3 在Rust中的应用
 
 类型系统在Rust中体现为：
 
@@ -39,9 +81,9 @@ Rust类型系统的理论基础可以追溯到：
 - 参数多态：泛型编程
 - 生命周期：引用有效性
 
-## 2. 哲学基础 {#2-哲学基础}
+## 2. 哲学基础
 
-### 2.1 柏拉图主义类型观 {#柏拉图主义类型观}
+### 2.1 柏拉图主义类型观
 
 **核心思想**: 类型作为永恒理念
 
@@ -64,7 +106,7 @@ $$\text{Type}(\tau) \Rightarrow \text{Ideal}(\tau)$$
 - [类型理论哲学基础](../20_theoretical_perspectives/01_philosophical_foundations.md#类型理论哲学基础) (模块 20)
 - [形式主义与类型](../20_theoretical_perspectives/01_philosophical_foundations.md#形式主义) (模块 20)
 
-### 2.2 构造主义类型观 {#构造主义类型观}
+### 2.2 构造主义类型观
 
 **核心思想**: 类型作为构造过程
 
@@ -87,7 +129,7 @@ $$\text{Construct}(C) \Rightarrow \text{Type}(\tau)$$
 - [构造主义数学](../20_theoretical_perspectives/01_philosophical_foundations.md#构造主义数学) (模块 20)
 - [直觉主义类型理论](../20_theoretical_perspectives/02_type_theory.md#直觉主义类型理论) (模块 20)
 
-### 2.3 实用主义类型观 {#实用主义类型观}
+### 2.3 实用主义类型观
 
 **核心思想**: 类型作为工具
 
@@ -103,9 +145,9 @@ $$\text{Construct}(C) \Rightarrow \text{Type}(\tau)$$
 - [实用主义编程](../20_theoretical_perspectives/01_philosophical_foundations.md#实用主义编程) (模块 20)
 - [类型驱动开发](../25_teaching_learning/03_teaching_methods.md#类型驱动开发) (模块 25)
 
-## 3. 数学理论基础 {#3-数学理论基础}
+## 3. 数学理论基础
 
-### 3.1 范畴论基础 {#范畴论基础}
+### 3.1 范畴论基础
 
 **定义**: 类型和函数形成范畴。
 
@@ -126,7 +168,7 @@ $$\frac{f: \tau \rightarrow \sigma \quad g: \sigma \rightarrow \rho}{g \circ f: 
 - [函子与应用](../20_theoretical_perspectives/02_category_theory.md#函子) (模块 20)
 - [单子与效应](../20_theoretical_perspectives/02_category_theory.md#单子) (模块 20)
 
-### 3.2 代数数据类型 {#代数数据类型定义}
+### 3.2 代数数据类型
 
 **定义 2.4**: 代数数据类型是通过类型代数运算（如积、和、幂等）构造的复合数据类型。
 
@@ -160,7 +202,7 @@ $$\text{Sum}(\tau, \sigma) = \tau + \sigma$$
 - [类型组合](../12_traits/04_trait_composition.md#类型组合) (模块 12)
 - [代数数据类型理论](../20_theoretical_perspectives/02_type_theory.md#代数数据类型理论) (模块 20)
 
-### 3.3 参数多态 {#参数多态}
+### 3.3 参数多态
 
 **定义**: 参数多态允许函数和数据结构对多种类型进行操作。
 
@@ -182,7 +224,7 @@ fn identity<T>(x: T) -> T {
 - [多态性理论](../19_advanced_language_features/03_polymorphism.md#多态性理论) (模块 19)
 - [类型抽象](../19_advanced_language_features/01_type_systems.md#类型抽象) (模块 19)
 
-### 3.4 类型推导 {#类型推导}
+### 3.4 类型推导
 
 **Hindley-Milner算法**: 自动推导表达式类型。
 
@@ -203,9 +245,9 @@ let z = vec![1, 2];  // 推导为 Vec<i32>
 - [泛型类型推断](../04_generics/02_type_inference.md#泛型类型推断) (模块 04)
 - [局部类型推断](../19_advanced_language_features/02_type_inference.md#局部类型推断) (模块 19)
 
-## 4. 形式化模型 {#4-形式化模型}
+## 4. 形式化模型
 
-### 4.1 类型语法 {#类型语法}
+### 4.1 类型语法
 
 **基本类型**:
 $$\tau ::= \text{Bool} \mid \text{Int} \mid \text{String} \mid \alpha$$
@@ -258,9 +300,9 @@ $$\Gamma ::= \emptyset \mid \Gamma, x: \tau \mid \Gamma, \alpha$$
 - [生命周期约束](../01_ownership_borrowing/03_lifetime_system.md#生命周期约束) (模块 01)
 - [类型约束求解](02_type_inference.md#约束求解) (本模块)
 
-## 5. 核心概念 {#5-核心概念}
+## 5. 核心概念
 
-### 5.1 类型安全 {#类型安全}
+### 5.1 类型安全
 
 **定义**: 类型安全确保程序不会在运行时出现类型错误。
 
@@ -283,7 +325,7 @@ fn main() {
 - [内存安全](../23_security_verification/01_formal_security_model.md#内存安全) (模块 23)
 - [类型安全证明](../23_security_verification/02_formal_proofs.md#类型安全证明) (模块 23)
 
-### 5.2 类型 {#类型定义}
+### 5.2 类型
 
 **定义 2.1**: 类型是一组值及其上的操作集合。
 
@@ -305,7 +347,7 @@ let z = x * 2;   // 乘法操作
 - [类型系统](../19_advanced_language_features/01_type_systems.md#类型系统基础) (模块 19)
 - [类型与集合论](../20_theoretical_perspectives/02_type_theory.md#类型集合论) (模块 20)
 
-### 5.3 子类型 {#子类型定义}
+### 5.3 子类型
 
 **定义 2.2**: 如果类型 $\tau$ 的值可以用于任何需要类型 $\sigma$ 的上下文，则 $\tau$ 是 $\sigma$ 的子类型。
 
@@ -318,7 +360,7 @@ $$\tau \leq \sigma \Leftrightarrow \forall C[\cdot], C[\tau] \text{ is valid } \
 - [特质继承](../12_traits/03_trait_inheritance.md#特质继承) (模块 12)
 - [子类型多态](../19_advanced_language_features/03_polymorphism.md#子类型多态) (模块 19)
 
-### 5.4 多态性 {#多态性}
+### 5.4 多态性
 
 **定义**: 多态性允许代码对多种类型进行操作。
 
@@ -344,9 +386,9 @@ fn add<T: std::ops::Add<Output = T>>(a: T, b: T) -> T { a + b }
 - [动态分派](../12_traits/05_dynamic_dispatch.md#动态分派) (模块 12)
 - [多态性理论](../19_advanced_language_features/03_polymorphism.md#多态性理论) (模块 19)
 
-## 6. 类型规则 {#6-类型规则}
+## 6. 类型规则
 
-### 6.1 基本类型规则 {#基本类型规则}
+### 6.1 基本类型规则
 
 **(T-Bool)** 布尔字面量
 $$\frac{}{\Gamma \vdash \text{true}: \text{Bool}}$$
@@ -362,7 +404,7 @@ $$\frac{}{\Gamma \vdash s: \text{String}}$$
 - [类型检查规则](04_type_safety.md#类型检查规则) (本模块)
 - [基本类型系统](../19_advanced_language_features/01_type_systems.md#基本类型系统) (模块 19)
 
-### 6.2 变量规则 {#变量规则}
+### 6.2 变量规则
 
 **(T-Var)** 变量引用
 $$\frac{x: \tau \in \Gamma}{\Gamma \vdash x: \tau}$$
@@ -372,7 +414,7 @@ $$\frac{x: \tau \in \Gamma}{\Gamma \vdash x: \tau}$$
 - [变量绑定](../01_ownership_borrowing/01_formal_ownership_system.md#变量绑定) (模块 01)
 - [作用域规则](../03_control_flow/02_scoping_rules.md#作用域规则) (模块 03)
 
-### 6.3 函数规则 {#函数规则}
+### 6.3 函数规则
 
 **(T-Abs)** 函数抽象
 $$\frac{\Gamma, x: \tau \vdash e: \sigma}{\Gamma \vdash \lambda x.e: \tau \rightarrow \sigma}$$
@@ -386,7 +428,7 @@ $$\frac{\Gamma \vdash e_1: \tau \rightarrow \sigma \quad \Gamma \vdash e_2: \tau
 - [高阶函数](../19_advanced_language_features/04_higher_order_functions.md#高阶函数) (模块 19)
 - [闭包类型](../19_advanced_language_features/05_closures.md#闭包类型) (模块 19)
 
-### 6.4 代数数据类型规则 {#代数数据类型规则}
+### 6.4 代数数据类型规则
 
 **(T-Product)** 积类型构造
 $$\frac{\Gamma \vdash e_1: \tau_1 \quad \Gamma \vdash e_2: \tau_2}{\Gamma \vdash (e_1, e_2): \tau_1 \times \tau_2}$$
@@ -402,11 +444,10 @@ $$\frac{\Gamma \vdash e: \tau_1 + \tau_2 \quad \Gamma, x: \tau_1 \vdash e_1: \si
 
 **相关概念**:
 
-- [模式匹配](../03_control_flow/03_pattern_matching.md#模式匹配) (模块 03)
-- [代数数据类型定义](#代数数据类型定义) (本模块)
-- [枚举类型](../19_advanced_language_features/01_type_systems.md#枚举类型) (模块 19)
+- [模式匹配](../03_control_flow/03_pattern_matching.md#模式匹配)
+- [枚举类型](../19_advanced_language_features/01_type_systems.md#枚举类型)
 
-### 6.5 泛型规则 {#泛型规则}
+### 6.5 泛型规则
 
 **(T-Forall)** 全称量化
 $$\frac{\Gamma, \alpha \vdash e: \tau}{\Gamma \vdash \Lambda \alpha.e: \forall \alpha.\tau}$$
@@ -434,9 +475,9 @@ $$\frac{\Gamma \vdash e: \&_{\alpha} \tau}{\Gamma \vdash *e: \tau}$$
 - [生命周期标注](../01_ownership_borrowing/03_lifetime_system.md#生命周期标注) (模块 01)
 - [引用安全性](../23_security_verification/01_formal_security_model.md#引用安全性) (模块 23)
 
-## 7. 语义规则 {#7-语义规则}
+## 7. 语义规则
 
-### 7.1 求值规则 {#求值规则}
+### 7.1 求值规则
 
 **(E-App)** 函数应用求值
 $$\frac{e_1 \rightarrow e_1'}{e_1 e_2 \rightarrow e_1' e_2}$$
@@ -456,7 +497,7 @@ $$\frac{}{(v_1, v_2).1 \rightarrow v_1}$$
 - [求值策略](../03_control_flow/01_evaluation_order.md#求值策略) (模块 03)
 - [表达式求值](../03_control_flow/01_evaluation_order.md#表达式求值) (模块 03)
 
-### 7.2 类型推导规则 {#类型推导规则}
+### 7.2 类型推导规则
 
 **(E-Generalize)** 泛化
 $$\frac{\Gamma \vdash e: \tau \quad \alpha \notin \text{ftv}(\Gamma)}{\Gamma \vdash e: \forall \alpha.\tau}$$
@@ -470,9 +511,9 @@ $$\frac{\Gamma \vdash e: \forall \alpha.\tau}{\Gamma \vdash e: \tau[\sigma/\alph
 - [泛型类型推断](../04_generics/02_type_inference.md#泛型类型推断) (模块 04)
 - [类型变量](02_type_inference.md#类型变量) (本模块)
 
-## 8. 安全保证 {#8-安全保证}
+## 8. 安全保证
 
-### 8.1 类型安全保证 {#类型安全保证}
+### 8.1 类型安全保证
 
 **定理 2.1** (类型安全性): 良型程序不会出现类型错误。
 
@@ -491,7 +532,7 @@ $$\Gamma \vdash e: \tau \Rightarrow \text{NoTypeError}(e)$$
 - [保存定理](04_type_safety.md#保存定理) (本模块)
 - [内存安全定理](../23_security_verification/02_formal_proofs.md#内存安全定理) (模块 23)
 
-### 8.2 内存安全保证 {#内存安全保证}
+### 8.2 内存安全保证
 
 **定理**: 类型系统与所有权系统结合，确保内存安全。
 
@@ -504,9 +545,9 @@ $$\Gamma \vdash e: \tau \land \text{OwnershipSafe}(e) \Rightarrow \text{MemorySa
 - [内存安全验证](../23_security_verification/03_verification_methods.md#内存安全验证) (模块 23)
 - [类型安全与内存安全关系](../23_security_verification/01_formal_security_model.md#类型内存安全关系) (模块 23)
 
-## 9. 应用实例 {#9-应用实例}
+## 9. 应用实例
 
-### 9.1 基础示例 {#基础示例}
+### 9.1 基础示例
 
 **示例 9.1**: 基本类型
 
@@ -547,7 +588,7 @@ fn main() {
 - [函数类型](02_type_theory.md#函数类型) (本模块)
 - [高阶函数](../19_advanced_language_features/04_higher_order_functions.md#高阶函数) (模块 19)
 
-### 9.2 代数数据类型示例 {#代数数据类型示例}
+### 9.2 代数数据类型示例
 
 **示例 9.3**: 积类型
 
@@ -593,7 +634,6 @@ fn divide(x: f64, y: f64) -> Result<f64, String> {
 
 **相关概念**:
 
-- [代数数据类型定义](#代数数据类型定义) (本模块)
 - [结构体设计](07_type_design.md#结构体设计) (本模块)
 - [枚举设计](07_type_design.md#枚举设计) (本模块)
 - [错误处理模式](../09_error_handling/02_error_patterns.md#错误处理模式) (模块 09)

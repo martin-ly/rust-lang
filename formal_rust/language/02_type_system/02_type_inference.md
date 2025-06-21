@@ -1,24 +1,22 @@
-# 02 类型推断形式化理论
+# 02 类型推断形式化理论 {#type-inference-theory}
 
 ## 目录
 
-- [02 类型推断形式化理论](#02-类型推断形式化理论)
+- [02 类型推断形式化理论 {#type-inference-theory}](#02-类型推断形式化理论-type-inference-theory)
   - [目录](#目录)
-  - [1. 概述](#1-概述)
-    - [1.1 类型推断特点](#11-类型推断特点)
-    - [1.2 理论基础](#12-理论基础)
-  - [2. 数学基础](#2-数学基础)
-    - [2.1 类型语言](#21-类型语言)
-    - [2.2 类型环境](#22-类型环境)
-    - [2.3 类型替换](#23-类型替换)
-  - [3. Hindley-Milner类型系统](#3-hindley-milner类型系统)
-    - [3.1 类型模式](#31-类型模式)
-    - [3.2 类型泛化](#32-类型泛化)
-    - [3.3 类型规则](#33-类型规则)
-  - [4. 类型约束](#4-类型约束)
-    - [4.1 约束定义](#41-约束定义)
-    - [4.2 约束生成](#42-约束生成)
-    - [4.3 约束简化](#43-约束简化)
+  - [1. 概述 {#1-概述}](#1-概述-1-概述)
+    - [1.1 类型推断特点 {#11-类型推断特点}](#11-类型推断特点-11-类型推断特点)
+    - [1.2 理论基础 {#12-理论基础}](#12-理论基础-12-理论基础)
+  - [2. 数学基础 {#2-数学基础}](#2-数学基础-2-数学基础)
+    - [2.1 类型语言 {#21-类型语言}](#21-类型语言-21-类型语言)
+    - [2.2 类型环境 {#类型上下文}](#22-类型环境-类型上下文)
+    - [2.3 类型替换 {#23-类型替换}](#23-类型替换-23-类型替换)
+  - [3. Hindley-Milner类型系统 {#3-hindley-milner类型系统}](#3-hindley-milner类型系统-3-hindley-milner类型系统)
+    - [3.1 类型模式 {#31-类型模式}](#31-类型模式-31-类型模式)
+    - [3.2 类型泛化 {#32-类型泛化}](#32-类型泛化-32-类型泛化)
+    - [3.3 类型规则 {#33-类型规则}](#33-类型规则-33-类型规则)
+  - [4. 类型约束 {#4-类型约束}](#4-类型约束-4-类型约束)
+    - [4.1 约束定义 {#约束定义}](#41-约束定义-约束定义)
   - [5. 约束求解](#5-约束求解)
     - [5.1 统一算法](#51-统一算法)
     - [5.2 替换应用](#52-替换应用)
@@ -41,28 +39,40 @@
     - [9.2 技术文档](#92-技术文档)
     - [9.3 在线资源](#93-在线资源)
 
-## 1. 概述
+## 1. 概述 {#1-概述}
 
 类型推断是Rust类型系统的核心功能，允许编译器自动推断表达式的类型，减少程序员需要显式标注的类型。
 类型推断基于Hindley-Milner类型系统，提供了强大而安全的类型推断能力。
 
-### 1.1 类型推断特点
+### 1.1 类型推断特点 {#11-类型推断特点}
 
 - **自动推断**：编译器能够自动推断大部分类型
 - **类型安全**：推断结果保证类型安全
 - **完备性**：能够推断出所有可能的类型
 - **效率**：推断算法具有多项式时间复杂度
 
-### 1.2 理论基础
+**相关概念**:
+
+- [类型安全](../02_type_system/04_type_safety.md#类型安全性) (本模块)
+- [类型系统基础](../02_type_system/01_formal_type_system.md#类型定义) (本模块)
+- [泛型类型推断](../04_generics/02_type_inference.md#泛型类型推断) (模块 04)
+
+### 1.2 理论基础 {#12-理论基础}
 
 - **Hindley-Milner类型系统**：类型推断的理论基础
 - **统一算法**：类型约束求解的核心算法
 - **多态类型**：支持参数化多态
 - **类型约束**：类型关系的数学表示
 
-## 2. 数学基础
+**相关概念**:
 
-### 2.1 类型语言
+- [参数多态](../02_type_system/01_formal_type_system.md#参数多态) (本模块)
+- [类型理论](../20_theoretical_perspectives/02_type_theory.md#类型理论) (模块 20)
+- [形式化验证](../23_security_verification/03_verification_methods.md#形式化验证) (模块 23)
+
+## 2. 数学基础 {#2-数学基础}
+
+### 2.1 类型语言 {#21-类型语言}
 
 **类型语言定义**：
 $$\tau ::= \alpha \mid \text{Int} \mid \text{Bool} \mid \text{String} \mid \tau_1 \to \tau_2 \mid \forall \alpha. \tau$$
@@ -74,7 +84,13 @@ $$\tau ::= \alpha \mid \text{Int} \mid \text{Bool} \mid \text{String} \mid \tau_
 - $\tau_1 \to \tau_2$ 是函数类型
 - $\forall \alpha. \tau$ 是通用类型
 
-### 2.2 类型环境
+**相关概念**:
+
+- [类型语法](../02_type_system/01_formal_type_system.md#类型语法) (本模块)
+- [类型表达式](../02_type_system/02_type_theory.md#类型表达式) (本模块)
+- [形式化语法](../20_theoretical_perspectives/03_formal_methods.md#形式化语法) (模块 20)
+
+### 2.2 类型环境 {#类型上下文}
 
 **类型环境定义**：
 $$\Gamma = \{x_1 : \tau_1, x_2 : \tau_2, \ldots, x_n : \tau_n\}$$
@@ -85,7 +101,13 @@ $$\Gamma = \{x_1 : \tau_1, x_2 : \tau_2, \ldots, x_n : \tau_n\}$$
 - $\text{dom}(\Gamma)$ 表示环境 $\Gamma$ 的定义域
 - $\Gamma(x)$ 表示变量 $x$ 在环境 $\Gamma$ 中的类型
 
-### 2.3 类型替换
+**相关概念**:
+
+- [类型环境](../02_type_system/01_formal_type_system.md#类型环境) (本模块)
+- [作用域规则](../03_control_flow/02_scoping_rules.md#作用域规则) (模块 03)
+- [上下文敏感分析](../19_advanced_language_features/02_type_inference.md#上下文敏感分析) (模块 19)
+
+### 2.3 类型替换 {#23-类型替换}
 
 **类型替换定义**：
 $$\sigma = [\alpha_1 \mapsto \tau_1, \alpha_2 \mapsto \tau_2, \ldots, \alpha_n \mapsto \tau_n]$$
@@ -96,9 +118,15 @@ $$\sigma(\tau) = \tau[\alpha_1 \mapsto \tau_1, \alpha_2 \mapsto \tau_2, \ldots, 
 **替换组合**：
 $$\sigma_1 \circ \sigma_2 = \sigma_1(\sigma_2(\tau))$$
 
-## 3. Hindley-Milner类型系统
+**相关概念**:
 
-### 3.1 类型模式
+- [类型变量](../04_generics/01_formal_generics_system.md#类型变量) (模块 04)
+- [泛型实例化](../04_generics/02_type_inference.md#泛型实例化) (模块 04)
+- [类型统一](../19_advanced_language_features/02_type_inference.md#类型统一) (模块 19)
+
+## 3. Hindley-Milner类型系统 {#3-hindley-milner类型系统}
+
+### 3.1 类型模式 {#31-类型模式}
 
 **类型模式定义**：
 $$\text{TypeScheme} = \forall \alpha_1. \forall \alpha_2. \ldots \forall \alpha_n. \tau$$
@@ -108,7 +136,13 @@ $$\text{instantiate}(\forall \alpha_1. \forall \alpha_2. \ldots \forall \alpha_n
 
 其中 $\beta_1, \beta_2, \ldots, \beta_n$ 是新的类型变量。
 
-### 3.2 类型泛化
+**相关概念**:
+
+- [参数多态](../02_type_system/01_formal_type_system.md#参数多态) (本模块)
+- [泛型系统](../04_generics/01_formal_generics_system.md#泛型系统) (模块 04)
+- [类型抽象](../19_advanced_language_features/01_type_systems.md#类型抽象) (模块 19)
+
+### 3.2 类型泛化 {#32-类型泛化}
 
 **类型泛化定义**：
 $$\text{generalize}(\Gamma, \tau) = \forall \alpha_1. \forall \alpha_2. \ldots \forall \alpha_n. \tau$$
@@ -130,7 +164,13 @@ fn generalize(env: &TypeEnv, ty: &Type) -> TypeScheme {
 }
 ```
 
-### 3.3 类型规则
+**相关概念**:
+
+- [类型推导规则](../02_type_system/01_formal_type_system.md#类型推导规则) (本模块)
+- [泛型约束](../04_generics/01_formal_generics_system.md#泛型约束) (模块 04)
+- [多态类型系统](../19_advanced_language_features/03_polymorphism.md#多态类型系统) (模块 19)
+
+### 3.3 类型规则 {#33-类型规则}
 
 **变量规则**：
 $$\frac{x : \sigma \in \Gamma \quad \tau = \text{instantiate}(\sigma)}{\Gamma \vdash x : \tau}$$
@@ -144,9 +184,15 @@ $$\frac{\Gamma \vdash e_1 : \tau_1 \to \tau_2 \quad \Gamma \vdash e_2 : \tau_1}{
 **Let规则**：
 $$\frac{\Gamma \vdash e_1 : \tau_1 \quad \sigma = \text{generalize}(\Gamma, \tau_1) \quad \Gamma, x : \sigma \vdash e_2 : \tau_2}{\Gamma \vdash \text{let } x = e_1 \text{ in } e_2 : \tau_2}$$
 
-## 4. 类型约束
+**相关概念**:
 
-### 4.1 约束定义
+- [类型规则](../02_type_system/01_formal_type_system.md#6-类型规则) (本模块)
+- [函数规则](../02_type_system/01_formal_type_system.md#函数规则) (本模块)
+- [类型检查规则](../02_type_system/04_type_safety.md#类型检查规则) (本模块)
+
+## 4. 类型约束 {#4-类型约束}
+
+### 4.1 约束定义 {#约束定义}
 
 **类型约束定义**：
 $$C = \{\tau_1 = \tau_2, \tau_3 = \tau_4, \ldots\}$$
@@ -161,118 +207,11 @@ enum TypeConstraint {
 }
 ```
 
-### 4.2 约束生成
+**相关概念**:
 
-**约束生成函数**：
-
-```rust
-fn generate_constraints(expr: &Expr, env: &TypeEnv) -> (Type, Vec<TypeConstraint>) {
-    match expr {
-        Expr::Variable(name) => {
-            let ty = fresh_type();
-            let scheme = env.get(name).unwrap_or_else(|| {
-                TypeScheme::new(vec![], ty.clone())
-            });
-            let instantiated = instantiate(&scheme);
-            (instantiated, vec![])
-        }
-        Expr::Integer(_) => {
-            (Type::Int, vec![])
-        }
-        Expr::Boolean(_) => {
-            (Type::Bool, vec![])
-        }
-        Expr::Lambda(param, body) => {
-            let param_type = fresh_type();
-            let new_env = env.extend(param.clone(), TypeScheme::new(vec![], param_type.clone()));
-            let (body_type, body_constraints) = generate_constraints(body, &new_env);
-            let function_type = Type::Function(param_type, Box::new(body_type));
-            (function_type, body_constraints)
-        }
-        Expr::Application(func, arg) => {
-            let (func_type, func_constraints) = generate_constraints(func, env);
-            let (arg_type, arg_constraints) = generate_constraints(arg, env);
-            let result_type = fresh_type();
-            let app_constraints = vec![
-                TypeConstraint::Equal(
-                    func_type,
-                    Type::Function(arg_type, Box::new(result_type.clone()))
-                )
-            ];
-            let all_constraints = func_constraints
-                .into_iter()
-                .chain(arg_constraints)
-                .chain(app_constraints)
-                .collect();
-            (result_type, all_constraints)
-        }
-        Expr::Let(name, value, body) => {
-            let (value_type, value_constraints) = generate_constraints(value, env);
-            let scheme = generalize(env, &value_type);
-            let new_env = env.extend(name.clone(), scheme);
-            let (body_type, body_constraints) = generate_constraints(body, &new_env);
-            let all_constraints = value_constraints
-                .into_iter()
-                .chain(body_constraints)
-                .collect();
-            (body_type, all_constraints)
-        }
-    }
-}
-```
-
-### 4.3 约束简化
-
-**约束简化算法**：
-
-```rust
-fn simplify_constraints(constraints: Vec<TypeConstraint>) -> Result<Vec<TypeConstraint>, TypeError> {
-    let mut simplified = Vec::new();
-    let mut worklist = constraints;
-    
-    while let Some(constraint) = worklist.pop() {
-        match constraint {
-            TypeConstraint::Equal(t1, t2) => {
-                if t1 == t2 {
-                    // 相同类型，无需约束
-                    continue;
-                }
-                
-                match (t1, t2) {
-                    (Type::Int, Type::Int) | (Type::Bool, Type::Bool) => {
-                        // 基本类型相等，无需约束
-                    }
-                    (Type::Function(p1, r1), Type::Function(p2, r2)) => {
-                        // 函数类型相等，分解为参数和返回值约束
-                        worklist.push(TypeConstraint::Equal(*p1, *p2));
-                        worklist.push(TypeConstraint::Equal(*r1, *r2));
-                    }
-                    (Type::Variable(v), t) | (t, Type::Variable(v)) => {
-                        // 变量与类型相等，检查循环依赖
-                        if occurs_in(&v, &t) {
-                            return Err(TypeError::CircularConstraint);
-                        }
-                        simplified.push(TypeConstraint::Equal(Type::Variable(v), t));
-                    }
-                    _ => {
-                        return Err(TypeError::TypeMismatch(t1, t2));
-                    }
-                }
-            }
-            TypeConstraint::Subtype(t1, t2) => {
-                // 子类型约束处理
-                simplified.push(TypeConstraint::Subtype(t1, t2));
-            }
-            TypeConstraint::Instance(t, scheme) => {
-                // 实例化约束处理
-                simplified.push(TypeConstraint::Instance(t, scheme));
-            }
-        }
-    }
-    
-    Ok(simplified)
-}
-```
+- [类型约束](../02_type_system/01_formal_type_system.md#类型约束) (本模块)
+- [特质约束](../12_traits/02_trait_bounds.md#特质约束) (模块 12)
+- [生命周期约束](../01_ownership_borrowing/03_lifetime_system.md#生命周期约束) (模块 01)
 
 ## 5. 约束求解
 

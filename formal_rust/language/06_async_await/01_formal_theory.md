@@ -32,6 +32,7 @@ The Rust async/await system represents a fundamental paradigm shift in concurren
 The async/await system is philosophically grounded in the concept of **continuations** - the idea that computation can be suspended and resumed at arbitrary points. This represents a departure from traditional imperative programming models where execution flows linearly.
 
 **Philosophical Questions:**
+
 - What does it mean for a computation to be "in progress"?
 - How do we represent the state of a suspended computation?
 - What are the ethical implications of resource sharing in concurrent systems?
@@ -57,11 +58,13 @@ The `Future` trait can be formalized as a mathematical structure:
 For a type `T`, `Future<T>` represents the type of computations that may eventually produce a value of type `T`.
 
 **Formal Definition:**
+
 ```math
 \text{Future}(T) = \Sigma_{s \in \text{State}} \text{Transition}(s) \times \text{Output}(s)
 ```
 
 Where:
+
 - `State` is the set of possible states of the computation
 - `Transition(s)` is the set of possible next states from state `s`
 - `Output(s)` is the output type when in state `s`
@@ -75,6 +78,7 @@ The `poll` function implements a **partial function** from the current state to 
 ```
 
 Where:
+
 ```math
 \text{Poll}(T) = \text{Ready}(T) \cup \text{Pending}
 ```
@@ -140,6 +144,7 @@ The waker system implements a **notification protocol**:
 ```
 
 **Formal Semantics:**
+
 ```math
 \text{wake}(w) \equiv \text{schedule}(\text{task\_of}(w))
 ```
@@ -158,6 +163,7 @@ pub trait Future {
 ```
 
 **Mathematical Interpretation:**
+
 - `Future` is a **monad** in the category of Rust types
 - `poll` is the **bind operation** of this monad
 - `Output` is the **extraction function**
@@ -172,6 +178,7 @@ async fn example() -> u32 {
 ```
 
 **Compilation Process:**
+
 1. **Desugaring**: Convert to explicit Future implementation
 2. **State Machine Generation**: Create enum with all possible states
 3. **Variable Capture**: Store variables that cross await boundaries
@@ -188,6 +195,7 @@ trait Executor {
 ```
 
 **Formal Properties:**
+
 - **Fairness**: All ready tasks eventually get scheduled
 - **Progress**: Ready tasks are scheduled within finite time
 - **Efficiency**: Scheduling overhead is bounded
@@ -207,11 +215,13 @@ trait Executor {
 ### State Machine Semantics
 
 **State Transition Function:**
+
 ```math
 \delta : \text{State} \times \text{Event} \rightarrow \text{State}
 ```
 
 Where `Event` includes:
+
 - `Poll` - Executor calls poll
 - `Wake` - Waker is invoked
 - `Complete` - Inner future completes
@@ -229,6 +239,7 @@ Where `Event` includes:
 **Theorem**: Async functions maintain Rust's memory safety guarantees.
 
 **Proof Sketch:**
+
 1. All async functions are pinned, preventing moves of self-referential data
 2. The borrow checker applies to async functions as to regular functions
 3. State machines preserve the ownership model
@@ -238,6 +249,7 @@ Where `Event` includes:
 **Theorem**: Async functions can be safely shared across threads when `Send` is implemented.
 
 **Proof Sketch:**
+
 1. `Send` ensures all captured data is thread-safe
 2. State machines are `Send` when their captured data is `Send`
 3. Executors handle cross-thread scheduling safely
@@ -247,6 +259,7 @@ Where `Event` includes:
 **Theorem**: Under fair scheduling, async functions eventually complete if their inner futures complete.
 
 **Proof Sketch:**
+
 1. Each await point represents finite progress
 2. Fair scheduling ensures all ready futures are eventually polled
 3. Termination follows from the finiteness of the state machine
@@ -265,6 +278,7 @@ async fn fetch_data(url: &str) -> Result<String, Error> {
 ```
 
 **State Machine Representation:**
+
 ```rust
 enum FetchDataState {
     Start(&str),
@@ -287,6 +301,7 @@ async fn process_stream(mut stream: impl Stream<Item = u32>) -> Vec<u32> {
 ```
 
 **Mathematical Semantics:**
+
 ```math
 \text{process\_stream} : \text{Stream}(T) \rightarrow \text{Future}(\text{List}(T))
 ```
@@ -298,6 +313,7 @@ async fn process_stream(mut stream: impl Stream<Item = u32>) -> Vec<u32> {
 **Theorem**: `Pin<P>` prevents moves of self-referential data.
 
 **Proof**:
+
 1. Assume `T` contains self-references
 2. Moving `T` would invalidate these references
 3. `Pin<P>` prevents access to `&mut T` that could move the data
@@ -309,6 +325,7 @@ async fn process_stream(mut stream: impl Stream<Item = u32>) -> Vec<u32> {
 **Theorem**: Async functions terminate if all their inner futures terminate.
 
 **Proof by Induction**:
+
 1. **Base Case**: Async function with no await points terminates immediately
 2. **Inductive Step**: Assume async functions with n await points terminate
 3. For n+1 await points:
@@ -322,6 +339,7 @@ async fn process_stream(mut stream: impl Stream<Item = u32>) -> Vec<u32> {
 **Theorem**: A fair executor ensures all ready tasks are eventually scheduled.
 
 **Proof**:
+
 1. Define fairness as: if task T is ready at time t, T is scheduled by time t + δ
 2. Fair scheduler maintains this property by construction
 3. Ready queue is processed in FIFO order
@@ -346,4 +364,4 @@ async fn process_stream(mut stream: impl Stream<Item = u32>) -> Vec<u32> {
 
 ---
 
-*This document represents the formal mathematical foundation of Rust's async/await system, providing rigorous definitions, proofs, and semantic models for understanding and implementing asynchronous computation in Rust.* 
+*This document represents the formal mathematical foundation of Rust's async/await system, providing rigorous definitions, proofs, and semantic models for understanding and implementing asynchronous computation in Rust.*
