@@ -19,8 +19,6 @@ Rust理论视角模块探讨Rust语言的理论基础，从多个学术视角分
 
 ## 2. Core Concepts {#2-core-concepts}
 
-<a id="concept-type-theory"></a>
-
 ### 2.1 类型理论视角 {#2-1-type-theory}
 
 从类型理论视角分析Rust语言，形式化定义为：
@@ -33,8 +31,6 @@ $$\mathcal{T}_{Rust} = (T, \Gamma, \vdash, R)$$
 - $\Gamma$ 是类型上下文
 - $\vdash$ 是类型判断关系
 - $R$ 是类型规则集合
-
-<a id="concept-category-theory"></a>
 
 ### 2.2 范畴论视角 {#2-2-category-theory}
 
@@ -49,8 +45,6 @@ $$\mathcal{C}_{Rust} = (Obj, Mor, \circ, id)$$
 - $\circ$ 是态射组合操作
 - $id$ 是单位态射
 
-<a id="concept-program-verification"></a>
-
 ### 2.3 程序验证视角 {#2-3-program-verification}
 
 从程序验证视角分析Rust语言，关注形式化规范和证明，形式化定义为：
@@ -64,27 +58,20 @@ $$\mathcal{V}_{Rust} = (P, S, \models, \vdash)$$
 - $\models$ 是语义满足关系
 - $\vdash$ 是推导关系
 
-<a id="concept-concurrency-theory"></a>
-
 ### 2.4 并发理论视角 {#2-4-concurrency-theory}
 
 从并发理论视角分析Rust语言，关注并发模型和通信机制。
 
 ## 3. Key Components {#3-key-components}
 
-<a id="component-formal-semantics"></a>
-
 ### 3.1 形式语义 {#3-1-formal-semantics}
 
 Rust的形式语义定义了语言结构的精确数学意义。
-
-<a id="component-theoretical-models"></a>
 
 ### 3.2 理论模型 {#3-2-theoretical-models}
 
 Rust的理论模型提供了语言特性的抽象表示和形式分析。
 
-<a id="component-proof-systems"></a>
 
 ### 3.3 证明系统 {#3-3-proof-systems}
 

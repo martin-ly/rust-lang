@@ -41,8 +41,6 @@ $$\mathcal{T}_{adv} = (T, C, L, P)$$
 - $L$ 是生命周期参数
 - $P$ 是类型级编程功能
 
-<a id="concept-macro-system"></a>
-
 ### 2.2 宏系统 {#2-2-macro-system}
 
 Rust的宏系统提供了强大的元编程能力，形式化定义为：
@@ -50,8 +48,6 @@ Rust的宏系统提供了强大的元编程能力，形式化定义为：
 $$\text{Macro}(I) \rightarrow O$$
 
 其中 $I$ 是输入令牌流，$O$ 是输出令牌流。
-
-<a id="concept-unsafe-rust"></a>
 
 ### 2.3 Unsafe Rust {#2-3-unsafe-rust}
 
@@ -65,7 +61,6 @@ $$\mathcal{U} = (S, I, C)$$
 - $I$ 是不变量
 - $C$ 是契约
 
-<a id="concept-compile-time-evaluation"></a>
 
 ### 2.4 编译时计算 {#2-4-compile-time-evaluation}
 
@@ -73,19 +68,16 @@ $$\mathcal{U} = (S, I, C)$$
 
 ## 3. Key Components {#3-key-components}
 
-<a id="component-advanced-trait-system"></a>
 
 ### 3.1 高级特质系统 {#3-1-advanced-trait-system}
 
 高级特质系统包括特质边界、关联类型和特质继承等功能。
 
-<a id="component-procedural-macros"></a>
 
 ### 3.2 过程宏 {#3-2-procedural-macros}
 
 过程宏允许在编译期操作语法树，实现代码生成和转换。
 
-<a id="component-const-generics"></a>
 
 ### 3.3 常量泛型 {#3-3-const-generics}
 

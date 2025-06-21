@@ -13,13 +13,16 @@
 5. [Module Structure](#5-module-structure)
 6. [References](#6-references)
 
-## 1. Introduction {#1-introduction}
+## 1. Introduction
+
+{#1-introduction}
 
 Rust安全验证模块探讨了形式化方法在验证Rust程序安全性方面的应用。Rust的类型系统和所有权模型提供了强大的安全保证，但复杂系统仍需要系统化的验证方法来确保其安全属性。本模块采用形式化方法对安全验证技术进行系统性分析，建立安全模型和验证策略的数学基础，涵盖类型安全、内存安全、并发安全和信息流安全等方面，为开发安全可靠的Rust系统提供理论指导和实践方法。
 
-## 2. Core Concepts {#2-core-concepts}
+## 2. Core Concepts
 
-<a id="concept-security-model"></a>
+{#2-core-concepts}
+
 ### 2.1 安全模型 {#2-1-security-model}
 
 安全模型是对系统安全属性的形式化表示，定义为：
@@ -27,52 +30,61 @@ Rust安全验证模块探讨了形式化方法在验证Rust程序安全性方面
 $$\mathcal{S} = (P, A, T, C)$$
 
 其中：
+
 - $P$ 是安全属性集合
 - $A$ 是攻击模型
 - $T$ 是威胁模型
 - $C$ 是安全约束
 
-<a id="concept-formal-verification"></a>
-### 2.2 形式化验证 {#2-2-formal-verification}
+### 2.2 形式化验证
+
+{#2-2-formal-verification}
 
 形式化验证是通过数学方法证明系统满足特定安全属性的过程，形式化定义为：
 
 $$\text{Verify}(\text{System}, \text{Property}) = \text{System} \models \text{Property}$$
 
-<a id="concept-type-safety"></a>
-### 2.3 类型安全 {#2-3-type-safety}
+### 2.3 类型安全
+
+{#2-3-type-safety}
 
 类型安全保证程序不会执行非预期的类型操作，是Rust安全模型的基础。
 
-<a id="concept-memory-safety"></a>
-### 2.4 内存安全 {#2-4-memory-safety}
+### 2.4 内存安全
+
+{#2-4-memory-safety}
 
 内存安全保证程序不会出现内存错误，包括空指针解引用、缓冲区溢出和释放后使用等。
 
-<a id="concept-concurrency-safety"></a>
-### 2.5 并发安全 {#2-5-concurrency-safety}
+### 2.5 并发安全
+
+{#2-5-concurrency-safety}
 
 并发安全保证程序在并发执行时不会出现数据竞争、死锁等并发错误。
 
 ## 3. Key Components {#3-key-components}
 
-<a id="component-static-analysis"></a>
-### 3.1 静态分析 {#3-1-static-analysis}
+### 3.1 静态分析
+
+{#3-1-static-analysis}
 
 静态分析是在不执行程序的情况下分析程序代码以发现安全漏洞的技术。
 
-<a id="component-model-checking"></a>
-### 3.2 模型检查 {#3-2-model-checking}
+### 3.2 模型检查
+
+{#3-2-model-checking}
 
 模型检查通过系统地探索程序状态空间，验证系统是否满足特定安全属性。
 
-<a id="component-theorem-proving"></a>
-### 3.3 定理证明 {#3-3-theorem-proving}
+### 3.3 定理证明
+
+{#3-3-theorem-proving}
 
 定理证明使用形式化逻辑推导系统满足安全属性的证明。
 
-<a id="component-symbolic-execution"></a>
-### 3.4 符号执行 {#3-4-symbolic-execution}
+### 3.4 符号执行
+
+{#3-4-symbolic-execution}
 
 符号执行通过抽象执行程序，分析程序的行为和可能的执行路径。
 
@@ -111,5 +123,6 @@ $$\text{Verify}(\text{System}, \text{Property}) = \text{System} \models \text{Pr
 ---
 
 **Document History**:  
+
 - Created: 2025-07-23
-- Updated: 2025-07-23 - 创建了索引文件并添加了交叉引用 
+- Updated: 2025-07-23 - 创建了索引文件并添加了交叉引用

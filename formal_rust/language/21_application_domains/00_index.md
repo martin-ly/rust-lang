@@ -19,8 +19,6 @@ Rust应用领域模块探讨了Rust语言在各种应用场景中的形式化模
 
 ## 2. Core Concepts {#2-core-concepts}
 
-<a id="concept-domain-modeling"></a>
-
 ### 2.1 领域建模 {#2-1-domain-modeling}
 
 领域建模是将特定应用领域的概念、关系和约束映射到Rust类型系统的过程，形式化定义为：
@@ -34,8 +32,6 @@ $$\mathcal{D} = (E, R, C, M)$$
 - $C$ 是约束集合
 - $M$ 是从领域到Rust类型系统的映射
 
-<a id="concept-domain-patterns"></a>
-
 ### 2.2 领域特定模式 {#2-2-domain-patterns}
 
 领域特定模式是在特定应用领域中反复出现的解决方案模板，形式化定义为：
@@ -43,8 +39,6 @@ $$\mathcal{D} = (E, R, C, M)$$
 $$\text{Pattern}(D, P, S) = \forall p \in P. \exists s \in S. \text{solve}(p, D) = s$$
 
 其中 $D$ 是领域，$P$ 是问题集合，$S$ 是解决方案集合。
-
-<a id="concept-application-architectures"></a>
 
 ### 2.3 应用架构 {#2-3-application-architectures}
 
@@ -55,33 +49,23 @@ $$\text{Pattern}(D, P, S) = \forall p \in P. \exists s \in S. \text{solve}(p, D)
 - 事件驱动架构
 - 领域驱动设计
 
-<a id="concept-domain-optimization"></a>
-
 ### 2.4 领域优化 {#2-4-domain-optimization}
 
 领域优化涉及针对特定应用领域的性能、内存使用和安全性优化。
 
 ## 3. Key Components {#3-key-components}
 
-<a id="component-systems-programming"></a>
-
 ### 3.1 系统编程 {#3-1-systems-programming}
 
 Rust在操作系统、设备驱动和系统工具等系统编程领域的应用。
-
-<a id="component-web-development"></a>
 
 ### 3.2 Web开发 {#3-2-web-development}
 
 Rust在Web服务器、API和全栈Web应用程序开发中的应用。
 
-<a id="component-embedded-systems"></a>
-
 ### 3.3 嵌入式系统 {#3-3-embedded-systems}
 
 Rust在资源受限的嵌入式设备和实时系统中的应用。
-
-<a id="component-scientific-computing"></a>
 
 ### 3.4 科学计算 {#3-4-scientific-computing}
 

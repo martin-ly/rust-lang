@@ -19,7 +19,6 @@
 
 ## 2. Core Concepts {#2-core-concepts}
 
-<a id="concept-microservice-definition"></a>
 
 ### 2.1 微服务定义 {#2-1-microservice-definition}
 

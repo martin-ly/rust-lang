@@ -13,13 +13,14 @@
 5. [Module Structure](#5-module-structure)
 6. [References](#6-references)
 
-## 1. Introduction {#1-introduction}
+## 1. Introduction
+
+ {#1-introduction}
 
 Rust生态系统架构模块探讨了Rust语言生态系统的结构、动态和演化规律的形式化理论基础。本模块通过数学模型和系统分析方法，描述和分析生态系统的组成部分及其交互关系，建立了理解Rust生态系统架构的综合框架。从理论基础到实际应用案例，再到动态演化模型，提供了多层次的分析视角，为生态系统的发展和优化提供理论指导。
 
 ## 2. Core Concepts {#2-core-concepts}
 
-<a id="concept-ecosystem-network"></a>
 ### 2.1 生态系统网络 {#2-1-ecosystem-network}
 
 生态系统网络是表示组件间依赖关系的加权有向图，形式化定义为：
@@ -31,8 +32,9 @@ $$\mathcal{G} = (V, E, W)$$
 - $E$ 是依赖关系集合
 - $W$ 是关系权重函数
 
-<a id="concept-evolution-dynamics"></a>
-### 2.2 演化动力学 {#2-2-evolution-dynamics}
+### 2.2 演化动力学 
+
+{#2-2-evolution-dynamics}
 
 演化动力学描述生态系统状态随时间变化的数学模型，形式化定义为：
 
@@ -40,8 +42,9 @@ $$\frac{d\mathbf{S}}{dt} = \mathbf{F}(\mathbf{S}, \mathbf{P}, t)$$
 
 其中 $\mathbf{S}$ 是系统状态向量，$\mathbf{P}$ 是参数向量，$t$ 是时间。
 
-<a id="concept-component-interaction"></a>
-### 2.3 组件交互模型 {#2-3-component-interaction}
+### 2.3 组件交互模型 
+
+{#2-3-component-interaction}
 
 组件交互模型形式化表示组件间功能交互的方式，包括：
 
@@ -50,8 +53,9 @@ $$\frac{d\mathbf{S}}{dt} = \mathbf{F}(\mathbf{S}, \mathbf{P}, t)$$
 - 数据流动
 - 交互协议
 
-<a id="concept-ecosystem-health"></a>
-### 2.4 生态系统健康度 {#2-4-ecosystem-health}
+### 2.4 生态系统健康度 
+
+{#2-4-ecosystem-health}
 
 生态系统健康度是衡量生态系统整体状态的综合指标，包括：
 
@@ -63,23 +67,27 @@ $$\frac{d\mathbf{S}}{dt} = \mathbf{F}(\mathbf{S}, \mathbf{P}, t)$$
 
 ## 3. Key Components {#3-key-components}
 
-<a id="component-dependency-propagation"></a>
-### 3.1 依赖传播模型 {#3-1-dependency-propagation}
+### 3.1 依赖传播模型 
+
+{#3-1-dependency-propagation}
 
 依赖传播模型描述依赖关系如何在生态系统中传播的机制。
 
-<a id="component-library-diffusion"></a>
-### 3.2 库传播模型 {#3-2-library-diffusion}
+### 3.2 库传播模型 
+
+{#3-2-library-diffusion}
 
 库传播模型描述库在生态系统中采纳和传播的数学模型。
 
-<a id="component-technology-adoption"></a>
-### 3.3 技术采纳模型 {#3-3-technology-adoption}
+### 3.3 技术采纳模型 
+
+{#3-3-technology-adoption}
 
 技术采纳模型描述新技术在生态系统中采纳过程的动态机制。
 
-<a id="component-evolution-path"></a>
-### 3.4 演化路径分析 {#3-4-evolution-path}
+### 3.4 演化路径分析 
+
+{#3-4-evolution-path}
 
 演化路径分析研究系统从一个状态到另一个状态的转移序列及其优化。
 
