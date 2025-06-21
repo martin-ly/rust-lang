@@ -1,76 +1,123 @@
-# 物联网主题索引
+# Module 17: Rust 物联网系统 {#module-17-iot}
 
-## 目录结构
+**Document Version**: V1.0  
+**Module Status**: Active Development  
+**Last Updated**: 2025-07-22
 
-### 1. 理论基础
+## 目录 {#table-of-contents}
 
-1. [形式化IoT系统](01_formal_iot_system.md)
-2. [IoT理论](02_iot_theory.md)
-3. [IoT实现](03_iot_implementation.md)
-4. [IoT应用](04_iot_applications.md)
+1. [Introduction](#1-introduction)
+2. [Core Concepts](#2-core-concepts)
+3. [Key Components](#3-key-components)
+4. [Related Modules](#4-related-modules)
+5. [Module Structure](#5-module-structure)
+6. [References](#6-references)
 
-### 2. 参考资料
+## 1. Introduction {#1-introduction}
 
-5. [代码示例](05_examples.md)
-6. [定理证明](06_theorems.md)
-7. [参考文献](07_references.md)
+Rust IoT生态系统提供了安全、高效、可靠的物联网开发能力，通过嵌入式Rust、实时操作系统和硬件抽象层实现资源受限环境下的高性能应用。物联网（Internet of Things，IoT）是指通过互联网将各种物理设备、车辆、家用电器及其他嵌入电子、软件、传感器、执行器的物品相互连接，实现数据交换和通信的网络。本模块采用形式化方法对Rust IoT系统进行系统性分析，建立严格的数学基础，为物联网设计和实现提供理论指导。
 
-## 主题概述
+## 2. Core Concepts {#2-core-concepts}
 
-Rust IoT生态系统提供了安全、高效、可靠的物联网开发能力，通过嵌入式Rust、实时操作系统和硬件抽象层实现资源受限环境下的高性能应用。本主题涵盖：
+<a id="concept-iot-definition"></a>
 
-- **体系架构**：嵌入式Rust分层架构、元模型与模型关系
-- **核心库生态**：硬件抽象层、实时操作系统、通信协议栈
-- **形式化方法**：形式化方法在Rust IoT中的应用、模型间关系与映射
-- **实际应用**：IoT架构模式与反模式、实际应用与案例分析
+### 2.1 物联网定义 {#2-1-iot-definition}
 
-## 核心概念
+物联网系统形式化定义为：
 
-### 嵌入式Rust
+$$\mathcal{I} = (D, S, N, P, C)$$
 
-- 无标准库环境
+其中：
+
+- $D$ 是设备集合
+- $S$ 是传感器集合
+- $N$ 是网络拓扑
+- $P$ 是协议栈
+- $C$ 是通信模型
+
+<a id="concept-embedded-rust"></a>
+
+### 2.2 嵌入式Rust {#2-2-embedded-rust}
+
+嵌入式Rust是Rust语言在资源受限环境中的应用，关键特性包括：
+
+- 无标准库环境（no_std）
 - 内存管理和资源控制
 - 中断处理和实时性保证
 - 硬件抽象和驱动开发
 
-### 实时系统
+<a id="concept-real-time-system"></a>
 
-- 实时操作系统(RTOS)
-- 任务调度和优先级管理
-- 中断处理和响应时间
-- 资源管理和内存安全
+### 2.3 实时系统 {#2-3-real-time-system}
 
-### 通信协议
+实时系统是物联网中的核心组件，形式化定义为：
 
-- 低功耗通信协议
-- 网络协议栈实现
-- 安全通信和加密
-- 协议优化和性能调优
+$$\text{RTOS}(T, R) = \forall t \in T. \exists r \in R. \text{respond}(t) \leq r$$
 
-### 硬件抽象
+其中 $T$ 是任务集合，$R$ 是响应时间需求。
 
-- 硬件抽象层(HAL)
-- 设备驱动开发
-- 外设接口抽象
-- 跨平台兼容性
+<a id="concept-communication-protocol"></a>
 
-## 交叉引用
+### 2.4 通信协议 {#2-4-communication-protocol}
 
-- 与[并发系统](../05_concurrency/00_index.md)的实时性要求
-- 与[网络编程](../10_networking/00_index.md)的协议实现
-- 与[算法](../08_algorithms/00_index.md)的优化应用
-- 与[模型系统](../18_model_systems/00_index.md)的形式化方法
+IoT通信协议定义了设备间数据交换的规则和格式。
 
-## 数学符号说明
+## 3. Key Components {#3-key-components}
 
-本文档使用以下数学符号：
+<a id="component-hardware-abstraction"></a>
 
-- $I$：IoT设备
-- $S$：传感器
-- $N$：网络
-- $T$：时间
-- $\rightarrow$：数据传输
-- $\Rightarrow$：状态转换
-- $\vdash$：推导关系
-- $\bot$：错误状态
-- $\top$：正常状态
+### 3.1 硬件抽象层 {#3-1-hardware-abstraction}
+
+硬件抽象层(HAL)提供了统一的硬件接口，简化设备驱动开发。
+
+<a id="component-rtos"></a>
+
+### 3.2 实时操作系统 {#3-2-rtos}
+
+实时操作系统负责任务调度、中断处理和资源管理。
+
+<a id="component-protocol-stack"></a>
+
+### 3.3 协议栈 {#3-3-protocol-stack}
+
+IoT协议栈包括物理层、链路层、网络层和应用层协议。
+
+## 4. Related Modules {#4-related-modules}
+
+- [Module 05: Concurrency](../05_concurrency/00_index.md#module-05-concurrency) - 并发处理在IoT系统中至关重要
+- [Module 06: Async/Await](../06_async_await/00_index.md#module-06-async-await) - 异步编程模型适用于IoT设备的I/O操作
+- [Module 08: Algorithms](../08_algorithms/00_index.md) - 优化算法对资源受限的IoT设备至关重要
+- [Module 16: WebAssembly](../16_webassembly/00_index.md#module-16-webassembly) - WebAssembly可用作IoT设备的轻量级运行时
+- [Module 22: Performance Optimization](../22_performance_optimization/00_index.md) - 性能优化对IoT设备的电池寿命和响应时间至关重要
+- [Module 23: Security Verification](../23_security_verification/00_index.md) - 安全验证在IoT设备中尤为重要
+
+## 5. Module Structure {#5-module-structure}
+
+本模块包含以下文件：
+
+- [00_index.md](00_index.md) - 本文件，提供模块概述和导航
+- [01_formal_theory.md](01_formal_theory.md) - IoT系统的形式理论基础
+- [01_formal_iot_system.md](01_formal_iot_system.md) - 形式化IoT系统详细规范
+- [02_iot_theory.md](02_iot_theory.md) - IoT理论
+
+## 6. References {#6-references}
+
+- 嵌入式系统理论
+- 实时操作系统设计
+- IoT通信协议规范
+- 嵌入式Rust编程
+- 硬件抽象层设计
+
+## 7. Related Concepts {#7-related-concepts}
+
+- [并发模型](../05_concurrency/00_index.md#concept-concurrency-model) - IoT系统中的并发和任务调度
+- [异步模型](../06_async_await/00_index.md#concept-async-await-model) - IoT设备中的异步编程
+- [算法优化](../08_algorithms/00_index.md) - IoT设备中的算法优化
+- [WebAssembly接口](../16_webassembly/00_index.md#concept-wasm-interface) - IoT设备中的WebAssembly应用
+
+---
+
+**Document History**:  
+
+- Created: 2025-07-21
+- Updated: 2025-07-22 - 更新了交叉引用和相关概念部分
