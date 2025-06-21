@@ -32,7 +32,7 @@ GATs 可以视为类型族（Type Families）的实现，类型族是参数化�
 
 在 Rust 中，GATs 的语法形式化定义为：
 
-```
+```text
 TRAIT_ITEM ::= 'type' IDENT [generic_params] [':' TYPE_PARAM_BOUNDS] [where_clause] ';'
 ```
 
@@ -51,7 +51,7 @@ TRAIT_ITEM ::= 'type' IDENT [generic_params] [':' TYPE_PARAM_BOUNDS] [where_clau
 
 GATs 特别重要的应用是生命周期参数化，形式定义为：
 
-```
+```rust
 type A<'a>: Trait<'a>;
 ```
 
@@ -205,6 +205,7 @@ GATs 的类型安全性可以通过以下形式系统证明：
 **定理**：对于包含 GATs 的 Rust 程序 $P$，如果 $P$ 通过类型检查，则 $P$ 不会出现类型错误。
 
 **证明思路**：
+
 1. 定义操作语义，包括 GATs 的实例化规则
 2. 定义类型系统，包括 GAT 相关的类型规则
 3. 证明进展性（Progress）：良类型程序不会"卡住"
@@ -245,4 +246,4 @@ GATs 设计必须确保不引入不一致性：
 
 6. Jung, R., Jourdan, J. H., Krebbers, R., & Dreyer, D. (2018). RustBelt: securing the foundations of the Rust programming language. Proceedings of the ACM on Programming Languages.
 
-7. The Rust Reference. (n.d.). Generic Associated Types. Retrieved from <https://doc.rust-lang.org/nightly/reference/items/associated-items.html#generic-associated-types> 
+7. The Rust Reference. (n.d.). Generic Associated Types. Retrieved from <https://doc.rust-lang.org/nightly/reference/items/associated-items.html#generic-associated-types>

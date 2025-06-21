@@ -80,6 +80,7 @@ $$\forall m \in \text{methods}(T). \text{dispatchable}(m)$$
 $$\text{vtable}_T = [\text{drop}, \text{size}, \text{align}, \text{ptr}_{\text{impl}(m_1)}, \text{ptr}_{\text{impl}(m_2)}, ..., \text{ptr}_{\text{impl}(m_n)}]$$
 
 其中：
+
 - `drop` 是类型的析构函数指针
 - `size` 是类型大小
 - `align` 是类型对齐要求
@@ -236,4 +237,4 @@ $$\forall T. \text{ If } T: Trait_1 \text{ and } T: Trait_2 \text{ then } \text{
 
 6. Jung, R., Dang, H., Kang, J., & Dreyer, D. (2020). Stacked Borrows: An Aliasing Model for Rust. Proceedings of the ACM on Programming Languages.
 
-7. Rust RFC 0255: Object Safety. (2014). Retrieved from <https://github.com/rust-lang/rfcs/blob/master/text/0255-object-safety.md> 
+7. Rust RFC 0255: Object Safety. (2014). Retrieved from <https://github.com/rust-lang/rfcs/blob/master/text/0255-object-safety.md>

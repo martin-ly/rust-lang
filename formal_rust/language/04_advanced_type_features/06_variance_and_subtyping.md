@@ -11,6 +11,7 @@
 子类型是一种类型间的关系，表示一个类型是另一个类型的"子集"或"更具体版本"。形式上，若 $S$ 是 $T$ 的子类型，记作 $S <: T$，则任何需要类型 $T$ 的地方都可以使用类型 $S$。
 
 子类型关系满足以下数学性质：
+
 - 自反性: $\forall T. T <: T$
 - 传递性: $\forall S, T, U. S <: T \land T <: U \Rightarrow S <: U$
 
@@ -37,6 +38,7 @@
 - 若 $F<T>$ 在 $T$ 上是逆变的，且 $G<T>$ 在 $T$ 上是逆变的，则 $F<G<T>>$ 在 $T$ 上是协变的
 
 形式化表示：
+
 - $\text{Cov}[F] \land \text{Cov}[G] \Rightarrow \text{Cov}[F \circ G]$
 - $\text{Cov}[F] \land \text{Contra}[G] \Rightarrow \text{Contra}[F \circ G]$
 - $\text{Contra}[F] \land \text{Cov}[G] \Rightarrow \text{Contra}[F \circ G]$
@@ -235,6 +237,7 @@ Rust 变型规则的健全性可以通过以下定理表述：
 **定理**: 若 Rust 类型系统接受程序 $P$，则 $P$ 不会因子类型替换而导致未定义行为。
 
 **证明思路**:
+
 1. 使用 Rust 的所有权系统形式化模型
 2. 证明可变引用不变性保证了内存安全
 3. 证明所有子类型替换保持类型不变量
@@ -268,4 +271,4 @@ Rust 的变型系统与其他语言的比较：
 
 6. Jung, R., Jourdan, J. H., Krebbers, R., & Dreyer, D. (2018). RustBelt: securing the foundations of the Rust programming language. Proceedings of the ACM on Programming Languages.
 
-7. Klabnik, S., & Nichols, C. (2019). The Rust Programming Language. No Starch Press. 
+7. Klabnik, S., & Nichols, C. (2019). The Rust Programming Language. No Starch Press.
