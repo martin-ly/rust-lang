@@ -188,17 +188,20 @@
 ### 5.1 数学符号标准
 
 1. **类型规则表示**：
+
    ```
    \[ \frac{\Gamma \vdash e_1 : \tau \quad \tau \text{ is movable}}{\Gamma \vdash \text{let } x = e_1; e_2 : \tau'} \]
    ```
 
 2. **生命周期和区域表示**：
+
    ```
    \[ \text{ref}_{\rho} \tau \]
    \[ \rho_1 \subseteq \rho_2 \implies \text{ref}_{\rho_1} \tau \leq \text{ref}_{\rho_2} \tau \]
    ```
 
 3. **分离逻辑表示**：
+
    ```
    \[ P * Q \]
    ```
@@ -252,4 +255,4 @@
 **计划生成**: 2025年7月30日  
 **版本**: V1  
 **状态**: 初步规划  
-**下一步**: 开始第一阶段重构工作 
+**下一步**: 开始第一阶段重构工作
