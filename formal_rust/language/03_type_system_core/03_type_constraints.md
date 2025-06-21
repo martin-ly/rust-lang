@@ -240,6 +240,7 @@ Rust编译器使用约束检查算法验证类型是否满足指定的约束。
 **形式化表示**：
 
 约束检查函数 $\text{check\_constraints}(\Gamma, \mathcal{C}, \sigma)$，其中：
+
 - $\Gamma$ 是类型环境
 - $\mathcal{C}$ 是约束集
 - $\sigma$ 是类型替换（将类型变量映射到具体类型）
@@ -452,4 +453,4 @@ Rust的类型约束系统是其类型系统的核心组成部分，通过特征�
 
 4. Matsakis, N. D., & Klock, F. S. (2014). The Rust language. ACM SIGAda Ada Letters, 34(3), 103-104.
 
-5. Gregor, D., Järvi, J., Siek, J., Stroustrup, B., Dos Reis, G., & Lumsdaine, A. (2006). Concepts: linguistic support for generic programming in C++. In Proceedings of the 21st annual ACM SIGPLAN conference on Object-oriented programming systems, languages, and applications. 
+5. Gregor, D., Järvi, J., Siek, J., Stroustrup, B., Dos Reis, G., & Lumsdaine, A. (2006). Concepts: linguistic support for generic programming in C++. In Proceedings of the 21st annual ACM SIGPLAN conference on Object-oriented programming systems, languages, and applications.

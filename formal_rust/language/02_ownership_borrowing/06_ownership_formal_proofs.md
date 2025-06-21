@@ -259,4 +259,4 @@ $$\forall P, P'. \text{LifetimeInference}(P) = P' \Rightarrow \text{LifetimeChec
 
 6. Reynolds, J. C. (2002). Separation logic: A logic for shared mutable data structures. LICS 2002.
 
-7. Grossman, D., Morrisett, G., Jim, T., Hicks, M., Wang, Y., & Cheney, J. (2002). Region-based memory management in Cyclone. PLDI 2002. 
+7. Grossman, D., Morrisett, G., Jim, T., Hicks, M., Wang, Y., & Cheney, J. (2002). Region-based memory management in Cyclone. PLDI 2002.
