@@ -33,8 +33,8 @@
 - [x] 完成幽灵类型与零大小类型 (04_phantom_and_zero_sized_types.md)
 - [x] 完成特征对象与动态分发 (05_trait_objects_and_dynamic_dispatch.md)
 - [x] 完成变型与子类型 (06_variance_and_subtyping.md)
-- [ ] 泛型关联类型 (07_generic_associated_types.md)
-- [ ] 高级类型模式 (08_advanced_type_patterns.md)
+- [x] 完成泛型关联类型 (07_generic_associated_types.md)
+- [x] 完成高级类型模式 (08_advanced_type_patterns.md)
 
 ### 5. 形式化证明与验证
 
@@ -46,13 +46,13 @@
 
 ## 下一步计划
 
-1. 继续第4章"高级类型系统特性"的剩余文件：
-   - 下一个文件：07_generic_associated_types.md (泛型关联类型)
-   - 然后是：08_advanced_type_patterns.md (高级类型模式)
+1. 开始第5章"形式化证明与验证"的工作：
+   - 首先创建索引文件 (00_index.md)
+   - 然后开始编写核心概念文件
 
 2. 同步更新批处理执行计划文件，确保与当前进度一致。
 
-3. 在完成第4章后，开始第5章"形式化证明与验证"的工作。
+3. 完成第4章的质量检查和最终修订。
 
 ## 当前挑战
 
@@ -62,14 +62,14 @@
 
 ## 完成度估计
 
-- 整体项目：~65%
+- 整体项目：~70%
 - 第1章：100%
 - 第2章：100%
 - 第3章：100%
-- 第4章：75%
+- 第4章：100%
 - 第5章：0%
 - 第6章：0%
 
 ---
 
-最后更新：V57
+最后更新：V58

@@ -90,7 +90,7 @@ $$\text{vtable}_T = [\text{drop}, \text{size}, \text{align}, \text{ptr}_{\text{i
 
 特征对象在内存中表示为胖指针，占用两个机器字(通常是16字节)：
 
-```
+```text
 +---------------+---------------+
 |  数据指针     |  vtable指针   |
 +---------------+---------------+
@@ -98,7 +98,7 @@ $$\text{vtable}_T = [\text{drop}, \text{size}, \text{align}, \text{ptr}_{\text{i
 
 从汇编角度看，动态分发涉及加载 vtable 指针，计算方法偏移量，然后通过指针间接调用方法：
 
-```asm
+```assembly
 ; 伪汇编代码
 ; 假设 rax 包含特征对象胖指针
 mov rcx, [rax]          ; 加载数据指针到 rcx
