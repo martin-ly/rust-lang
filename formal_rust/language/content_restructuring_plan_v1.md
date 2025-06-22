@@ -16,7 +16,7 @@
 
 ### 2.1 基础理论框架（01_theory_foundations）
 
-```
+```text
 01_theory_foundations/
 ├── 00_index.md                         # 基础理论框架概述
 ├── 01_linear_affine_types.md           # 线性类型与仿射类型理论
@@ -29,7 +29,7 @@
 
 ### 2.2 所有权与借用系统（02_ownership_borrowing）
 
-```
+```text
 02_ownership_borrowing/
 ├── 00_index.md                         # 所有权与借用系统概述
 ├── 01_ownership_rules.md               # 所有权规则的形式化
@@ -42,7 +42,7 @@
 
 ### 2.3 类型系统核心（03_type_system_core）
 
-```
+```text
 03_type_system_core/
 ├── 00_index.md                         # 类型系统核心概述
 ├── 01_type_safety.md                   # 类型安全与静态检查
@@ -55,7 +55,7 @@
 
 ### 2.4 高级类型系统特性（04_advanced_type_features）
 
-```
+```text
 04_advanced_type_features/
 ├── 00_index.md                         # 高级类型系统特性概述
 ├── 01_dependent_types.md               # 依存类型特性
@@ -68,7 +68,7 @@
 
 ### 2.5 形式化证明与验证（05_formal_verification）
 
-```
+```text
 05_formal_verification/
 ├── 00_index.md                         # 形式化证明与验证概述
 ├── 01_type_system_safety.md            # 类型系统的安全性证明
@@ -81,7 +81,7 @@
 
 ### 2.6 理论与实践映射（06_theory_practice）
 
-```
+```text
 06_theory_practice/
 ├── 00_index.md                         # 理论与实践映射概述
 ├── 01_resource_management.md           # 资源管理模型
@@ -189,20 +189,20 @@
 
 1. **类型规则表示**：
 
-   ```
+   ```text
    \[ \frac{\Gamma \vdash e_1 : \tau \quad \tau \text{ is movable}}{\Gamma \vdash \text{let } x = e_1; e_2 : \tau'} \]
    ```
 
 2. **生命周期和区域表示**：
 
-   ```
+   ```text
    \[ \text{ref}_{\rho} \tau \]
    \[ \rho_1 \subseteq \rho_2 \implies \text{ref}_{\rho_1} \tau \leq \text{ref}_{\rho_2} \tau \]
    ```
 
 3. **分离逻辑表示**：
 
-   ```
+   ```text
    \[ P * Q \]
    ```
 
