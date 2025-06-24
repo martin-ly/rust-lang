@@ -6,10 +6,10 @@
 
 在 Rust 的语境下，我们可以建立一个称为 **Hask** (或在此情境下为 **Rust** 范畴) 的范畴，其中的对应关系如下：
 
--   **对象 (Objects)**: Rust 中的 **类型** (e.g., `i32`, `String`, `struct Point`, `enum Option<T>`).
--   **态射 (Morphisms)**: Rust 中的 **函数** (e.g., `fn(A) -> B`).
--   **组合 (Composition)**: 态射的组合对应于 **函数调用**。
--   **单位态射 (Identity Morphism)**: 每个对象 `T` 都有一个单位态射 `id: T -> T`，在 Rust 中这对应于恒等函数 `|x| x`。
+- **对象 (Objects)**: Rust 中的 **类型** (e.g., `i32`, `String`, `struct Point`, `enum Option<T>`).
+- **态射 (Morphisms)**: Rust 中的 **函数** (e.g., `fn(A) -> B`).
+- **组合 (Composition)**: 态射的组合对应于 **函数调用**。
+- **单位态射 (Identity Morphism)**: 每个对象 `T` 都有一个单位态射 `id: T -> T`，在 Rust 中这对应于恒等函数 `|x| x`。
 
 ## 2. 核心构造
 
@@ -17,13 +17,13 @@
 
 范畴论中的积与和是构造新对象的基础，它们在 Rust 的代数数据类型中得到了直接体现。
 
--   **积 (Product)**: 两种类型 `A` 和 `B` 的积是一个新类型 `A x B`，它包含了 `A` 和 `B` 的所有信息。在 Rust 中，这由 **元组 `(A, B)`** 和 **结构体 `struct { a: A, b: B }`** 实现。
+- **积 (Product)**: 两种类型 `A` 和 `B` 的积是一个新类型 `A x B`，它包含了 `A` 和 `B` 的所有信息。在 Rust 中，这由 **元组 `(A, B)`** 和 **结构体 `struct { a: A, b: B }`** 实现。
 
     \[
     \text{Point} = \mathbb{R} \times \mathbb{R}
     \]
 
--   **和 (Coproduct or Sum)**: 两种类型 `A` 和 `B` 的和是一个新类型 `A + B`，它的值要么是 `A` 类型，要么是 `B` 类型。在 Rust 中，这由 **枚举 `enum`** 实现。`Result<T, E>` 是一个典型的和类型。
+- **和 (Coproduct or Sum)**: 两种类型 `A` 和 `B` 的和是一个新类型 `A + B`，它的值要么是 `A` 类型，要么是 `B` 类型。在 Rust 中，这由 **枚举 `enum`** 实现。`Result<T, E>` 是一个典型的和类型。
 
     \[
     \text{Result}<T, E> = T + E
@@ -57,13 +57,13 @@ let vec_b: Vec<String> = vec_a.iter().map(|x| x.to_string()).collect(); // f: &i
 
 单子是一种特殊的函子，它为顺序化计算提供了一种强大的抽象。一个类型 `M<T>` 是一个单子，如果它除了是函子外，还提供了两个操作：
 
-1.  **单位 (Unit / Return)**: 一个从类型 `T` 创建一个 `M<T>` 值的函数。在 Rust 中，这通常是构造器，如 `Some(value)` 或 `Ok(value)`。
+1. **单位 (Unit / Return)**: 一个从类型 `T` 创建一个 `M<T>` 值的函数。在 Rust 中，这通常是构造器，如 `Some(value)` 或 `Ok(value)`。
 
     \[
     \text{return}: T \to M(T)
     \]
 
-2.  **绑定 (Bind)**: 一个用于链接计算的函数，通常在 Rust 中实现为 `and_then` 或 `flat_map`。它接受一个 `M<T>` 和一个返回 `M<U>` 的函数 `f: T -> M<U>`，并产生一个 `M<U>`。
+2. **绑定 (Bind)**: 一个用于链接计算的函数，通常在 Rust 中实现为 `and_then` 或 `flat_map`。它接受一个 `M<T>` 和一个返回 `M<U>` 的函数 `f: T -> M<U>`，并产生一个 `M<U>`。
 
     \[
     \text{bind}: M(T) \to (T \to M(U)) \to M(U)
