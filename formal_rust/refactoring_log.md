@@ -162,9 +162,10 @@
     6. `06_summary_and_future.md` - ⏳ **待创建**
 * **日志**:
   * 启动 `c07_process` 模块。已分析源文件，制定了六章结构的重构计划，并生成了 `_index.md`。
+  * 创建了 `01_process_model_and_lifecycle.md`，系统梳理了 Rust 进程模型、生命周期管理、资源控制与安全抽象。
 
 ---
 
 ## **下一步行动**
 
-* 生成 `01_process_model_and_lifecycle.md`.
+* 生成 `02_ipc_mechanisms.md`。
