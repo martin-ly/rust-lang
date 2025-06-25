@@ -148,8 +148,23 @@
 * **Reasoning**: To finalize the module, generating the standard set of auxiliary files to provide high-level context, definitions, and answers to common questions.
 * **Outcome**: All auxiliary files for `c06_async` have been created. The module is now fully finalized. Encountered and bypassed several false negatives from the `edit_file` tool during this process.
 
+### 🔄 `c07_process` (进程、通信与同步机制) - **正在进行**
+
+* **状态**: `IN_PROGRESS`
+* **源目录**: `crates/c07_process/docs/`
+* **目标目录**: `formal_rust/language/c07_process/`
+* **重构计划**:
+    1. `01_process_model_and_lifecycle.md` - ⏳ **待创建**
+    2. `02_ipc_mechanisms.md` - ⏳ **待创建**
+    3. `03_synchronization_and_concurrency.md` - ⏳ **待创建**
+    4. `04_formal_models_and_type_system.md` - ⏳ **待创建**
+    5. `05_advanced_patterns_and_cross_platform.md` - ⏳ **待创建**
+    6. `06_summary_and_future.md` - ⏳ **待创建**
+* **日志**:
+  * 启动 `c07_process` 模块。已分析源文件，制定了六章结构的重构计划，并生成了 `_index.md`。
+
 ---
 
 ## **下一步行动**
 
-* 启动 `c07_macros` 模块的分析和重构。
+* 生成 `01_process_model_and_lifecycle.md`.
