@@ -124,7 +124,7 @@ impl Container<OptionHKT> for OptionHKT {
 
 ## 依赖类型系统
 
-### 定义与内涵
+### 定义与内涵1
 
 依赖类型系统允许类型依赖于值，提供更精确的类型表达能力。
 
@@ -136,7 +136,7 @@ impl Container<OptionHKT> for OptionHKT {
 λx:A.t       // 依赖λ抽象
 ```
 
-### 理论基础
+### 理论基础1
 
 依赖类型系统基于：
 
@@ -144,7 +144,7 @@ impl Container<OptionHKT> for OptionHKT {
 2. **构造演算（Calculus of Constructions）**
 3. **同伦类型理论（Homotopy Type Theory）**
 
-### Rust 1.87.0中的现状
+### Rust 1.87.0中的现状1
 
 Rust通过以下特性部分支持依赖类型：
 
@@ -188,13 +188,13 @@ impl<const N: usize> SafeIndex<N> {
 }
 ```
 
-### 2025年最新发展
+### 2025年最新发展1
 
 1. **Const Generics** 的扩展和完善
 2. **Type-Level Arithmetic** 的增强
 3. **Dependent Pattern Matching** 的研究
 
-### 实际应用示例
+### 实际应用示例1
 
 ```rust
 // 类型安全的矩阵操作
@@ -248,7 +248,7 @@ impl<T: Copy + std::ops::Mul<Output = T> + std::ops::Add<Output = T> + Default,
 
 ## 线性类型系统
 
-### 定义与内涵
+### 定义与内涵2
 
 线性类型系统确保每个值恰好被使用一次，提供资源管理和内存安全保证。
 
@@ -261,7 +261,7 @@ Linear Type System:
 - Relevant: A → B (A must be used at least once)
 ```
 
-### 理论基础
+### 理论基础2
 
 线性类型系统基于：
 
@@ -269,7 +269,7 @@ Linear Type System:
 2. **资源管理理论**
 3. **内存安全保证**
 
-### Rust 1.87.0中的现状
+### Rust 1.87.0中的现状2
 
 Rust通过所有权系统部分实现了线性类型：
 
@@ -309,13 +309,13 @@ fn process_resource(resource: LinearResource) {
 }
 ```
 
-### 2025年最新发展
+### 2025年最新发展3
 
 1. **Move Semantics** 的完善
 2. **Borrow Checker** 的增强
 3. **Resource Management** 的优化
 
-### 实际应用示例
+### 实际应用示例3
 
 ```rust
 // 高级线性类型抽象
@@ -383,7 +383,7 @@ fn process_with_resources() -> std::io::Result<()> {
 
 ## 效应系统
 
-### 定义与内涵
+### 定义与内涵3
 
 效应系统（Effect Systems）用于跟踪和控制程序中的副作用，提供更精确的程序行为描述。
 
@@ -396,7 +396,7 @@ Effect System:
 - Effect Polymorphism: ∀E. A ! E
 ```
 
-### 理论基础
+### 理论基础3
 
 效应系统基于：
 
@@ -404,7 +404,7 @@ Effect System:
 2. **效应处理（Effect Handlers）**
 3. **效应推理（Effect Inference）**
 
-### Rust 1.87.0中的现状
+### Rust 1.87.0中的现状4
 
 Rust通过以下方式处理效应：
 
@@ -440,13 +440,13 @@ async fn combined_effects() -> Result<Option<String>, std::io::Error> {
 }
 ```
 
-### 2025年最新发展
+### 2025年最新发展4
 
 1. **Async/Await** 的完善
 2. **Error Handling** 的增强
 3. **Effect Polymorphism** 的研究
 
-### 实际应用示例
+### 实际应用示例4
 
 ```rust
 // 效应类型系统
@@ -515,7 +515,7 @@ impl<A, E> Effectful<A, E> {
 
 ## 子类型系统
 
-### 定义与内涵
+### 定义与内涵4
 
 子类型系统（Subtyping）定义类型间的包含关系，支持多态和代码复用。
 
@@ -529,7 +529,7 @@ Subtyping Rules:
 - Contravariance: A <: B ⇒ F<B> <: F<A>
 ```
 
-### 理论基础
+### 理论基础4
 
 子类型系统基于：
 
@@ -537,7 +537,7 @@ Subtyping Rules:
 2. **Liskov替换原则**
 3. **协变和逆变**
 
-### Rust 1.87.0中的现状
+### Rust 1.87.0中的现状5
 
 Rust通过以下方式支持子类型：
 
@@ -596,13 +596,13 @@ fn use_consumer(consumer: Box<dyn Consumer<Animal>>) {
 }
 ```
 
-### 2025年最新发展
+### 2025年最新发展5
 
 1. **Trait Objects** 的增强
 2. **Associated Types** 的完善
 3. **Higher-Ranked Trait Bounds** 的扩展
 
-### 实际应用示例
+### 实际应用示例5
 
 ```rust
 // 高级子类型系统
@@ -699,7 +699,7 @@ fn draw_shapes<T: Drawable<Area = f64>>(shapes: &[T]) {
 
 ## 多态类型系统
 
-### 定义与内涵
+### 定义与内涵5
 
 多态类型系统（Polymorphic Types）支持类型参数化，实现代码复用和类型安全。
 
@@ -712,7 +712,7 @@ Polymorphic Types:
 - Subtype: Bounded quantification
 ```
 
-### 理论基础
+### 理论基础5
 
 多态类型系统基于：
 
@@ -720,7 +720,7 @@ Polymorphic Types:
 2. **参数化多态**
 3. **特设多态**
 
-### Rust 1.87.0中的现状
+### Rust 1.87.0中的现状6
 
 Rust通过以下方式支持多态：
 
@@ -783,13 +783,13 @@ impl Monad<Option> for Option {
 }
 ```
 
-### 2025年最新发展
+### 2025年最新发展6
 
 1. **Generic Associated Types (GAT)** 的完善
 2. **Higher-Ranked Trait Bounds** 的扩展
 3. **Type-Level Programming** 的增强
 
-### 实际应用示例
+### 实际应用示例6
 
 ```rust
 // 高级多态抽象

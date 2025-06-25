@@ -1,102 +1,43 @@
-# 所有权与借用主题索引
+# 01. 所有权与借用系统 索引
 
-## 目录结构
+## 目录
 
-### 1. 理论基础
+1. [哲学批判性分析](./05_variable_analysis.md#1-哲学批判性分析)
+2. [变量的本体论与类型系统](./05_variable_analysis.md#2-变量的本体论与类型系统)
+    1. [变量的定义与本体论](./05_variable_analysis.md#21-变量的定义与本体论)
+    2. [类型系统与变量的身份](./05_variable_analysis.md#22-类型系统与变量的身份)
+    3. [Copy语义与所有权](./05_variable_analysis.md#23-copy语义与所有权)
+3. [生命周期与作用域的多维分析](./03_lifetime_system.md)
+    1. [哲学批判性分析](./03_lifetime_system.md#1-哲学批判性分析)
+    2. [作用域的本体论与分类](./03_lifetime_system.md#2-作用域的本体论与分类)
+    3. [生命周期与作用域的关系](./03_lifetime_system.md#3-生命周期与作用域的关系)
+    4. [控制流、数据流与作用域](./03_lifetime_system.md#4-控制流数据流与作用域)
+    5. [可见性、遮蔽与命名空间](./03_lifetime_system.md#5-可见性遮蔽与命名空间)
+    6. [RAII、Drop与资源管理](./03_lifetime_system.md#6-raiidrop与资源管理)
+    7. [多表征与形式化证明](./03_lifetime_system.md#7-多表征与形式化证明)
+    8. [工程实践与最佳策略](./03_lifetime_system.md#8-工程实践与最佳策略)
+    9. [总结与未来展望](./03_lifetime_system.md#9-总结与未来展望)
+4. [可变性与内部可变性](./05_variable_analysis.md#4-可变性与内部可变性)
+    1. [不变性与可变性](./05_variable_analysis.md#41-不变性与可变性)
+    2. [内部可变性模式](./05_variable_analysis.md#42-内部可变性模式)
+    3. [可变性与并发安全](./05_variable_analysis.md#43-可变性与并发安全)
+5. [所有权与借用规则](./05_variable_analysis.md#5-所有权与借用规则)
+    1. [所有权原则](./05_variable_analysis.md#51-所有权原则)
+    2. [借用类型与排他性](./05_variable_analysis.md#52-借用类型与排他性)
+    3. [生命周期与借用检查](./05_variable_analysis.md#53-生命周期与借用检查)
+6. [数据流、执行流与变量状态](./05_variable_analysis.md#6-数据流执行流与变量状态)
+    1. [所有权转移的数据流图](./05_variable_analysis.md#61-所有权转移的数据流图)
+    2. [借用的数据通道](./05_variable_analysis.md#62-借用的数据通道)
+    3. [控制流与变量生命周期](./05_variable_analysis.md#63-控制流与变量生命周期)
+7. [多表征与形式化证明](./05_variable_analysis.md#7-多表征与形式化证明)
+    1. [变量生命周期流程图](./05_variable_analysis.md#71-变量生命周期流程图)
+    2. [所有权转移示意图](./05_variable_analysis.md#72-所有权转移示意图)
+    3. [变量系统的形式化符号](./05_variable_analysis.md#73-变量系统的形式化符号)
+8. [跨范式与工程实践](./05_variable_analysis.md#8-跨范式与工程实践)
+    1. [函数式、面向对象、系统编程视角](./05_variable_analysis.md#81-函数式面向对象系统编程视角)
+    2. [工程最佳实践与陷阱](./05_variable_analysis.md#82-工程最佳实践与陷阱)
+9. [总结与未来展望](./05_variable_analysis.md#9-总结与未来展望)
 
-1. [形式化所有权系统](01_formal_ownership_system.md)
-2. [所有权理论](02_ownership_theory.md)
-3. [借用系统](03_borrowing_system.md)
-4. [生命周期理论](04_lifetime_theory.md)
+---
 
-### 2. 实践应用
-
-5. [所有权实现](05_ownership_implementation.md)
-6. [借用实现](06_borrowing_implementation.md)
-7. [生命周期实现](07_lifetime_implementation.md)
-8. [内存管理](08_memory_management.md)
-
-### 3. 参考资料
-
-9. [代码示例](05_examples.md)
-10. [定理证明](06_theorems.md)
-11. [参考文献](07_references.md)
-
-## 主题概述
-
-Rust所有权系统是语言的核心创新，通过编译时检查确保内存安全和线程安全，无需垃圾回收器。本主题涵盖：
-
-- **所有权概念**：值的唯一所有权、移动语义、复制语义
-- **借用机制**：不可变借用、可变借用、借用检查器
-- **生命周期**：生命周期标注、生命周期推断、生命周期约束
-- **内存安全**：编译时内存安全保证、数据竞争避免
-
-## 核心概念
-
-### 所有权规则
-
-- 每个值都有一个所有者
-- 同一时间只能有一个所有者
-- 当所有者离开作用域时，值被丢弃
-
-### 借用规则
-
-- 在任意给定时间，要么只能有一个可变引用，要么只能有任意数量的不可变引用
-- 引用必须总是有效的
-
-### 生命周期
-
-- 生命周期标注语法
-- 生命周期推断规则
-- 生命周期约束和边界
-
-### 内存管理
-
-- 栈内存管理
-- 堆内存管理
-- 智能指针
-- 内存布局优化
-
-## 交叉引用
-
-### 相关模块
-
-- [模块 02: 类型系统](../02_type_system/00_index.md) - 所有权与类型系统的深度集成
-- [模块 04: 泛型](../04_generics/00_index.md) - 所有权与泛型编程的结合
-- [模块 05: 并发](../05_concurrency/00_index.md) - 所有权保证的线程安全
-- [模块 06: 异步/等待](../06_async_await/00_index.md) - 生命周期与异步编程
-- [模块 11: 内存管理](../11_memory_management/00_index.md) - 所有权系统的内存管理实现
-- [模块 19: 高级语言特性](../19_advanced_language_features/00_index.md) - 高级所有权模式
-
-### 相关概念
-
-| 概念 | 定义位置 | 相关模块 |
-|------|----------|----------|
-| 类型安全 | [模块 02: 类型系统](../02_type_system/01_formal_type_system.md#类型安全) | 02, 23 |
-| 内存管理 | [模块 11: 内存管理](../11_memory_management/01_formal_memory_model.md#内存管理模型) | 11, 22 |
-| 线程安全 | [模块 05: 并发](../05_concurrency/01_formal_concurrency_model.md#线程安全性) | 05, 23 |
-| 泛型生命周期 | [模块 04: 泛型](../04_generics/01_formal_generics_system.md#泛型生命周期) | 04, 19 |
-
-### 核心定义与定理
-
-- **定义 1.1**: [所有权](01_formal_ownership_system.md#所有权定义) - 值的唯一控制权
-- **定义 1.4**: [借用](02_borrowing_system.md#借用定义) - 临时访问权限
-- **定义 1.6**: [生命周期](03_lifetime_system.md#生命周期定义) - 引用有效期
-
-- **定理 1.1**: [所有权唯一性](06_theorems.md#所有权唯一性) - 在任何时刻，一个值只能有一个所有者
-- **定理 1.6**: [借用安全性](06_theorems.md#借用安全性) - 借用规则确保内存安全
-- **定理 1.9**: [生命周期有界性](06_theorems.md#生命周期有界性) - 引用的生命周期不能超过被引用值的生命周期
-
-## 数学符号说明
-
-本文档使用以下数学符号：
-
-- $O$：所有者
-- $V$：值
-- $R$：引用
-- $L$：生命周期
-- $\rightarrow$：移动关系
-- $\Rightarrow$：借用关系
-- $\vdash$：推导关系
-- $\bot$：无效状态
-- $\top$：有效状态
+[返回上级目录](../00_index.md)

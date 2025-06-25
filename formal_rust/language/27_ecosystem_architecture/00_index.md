@@ -28,11 +28,12 @@ Rust生态系统架构模块探讨了Rust语言生态系统的结构、动态和
 $$\mathcal{G} = (V, E, W)$$
 
 其中：
+
 - $V$ 是组件集合
 - $E$ 是依赖关系集合
 - $W$ 是关系权重函数
 
-### 2.2 演化动力学 
+### 2.2 演化动力学
 
 {#2-2-evolution-dynamics}
 
@@ -42,7 +43,7 @@ $$\frac{d\mathbf{S}}{dt} = \mathbf{F}(\mathbf{S}, \mathbf{P}, t)$$
 
 其中 $\mathbf{S}$ 是系统状态向量，$\mathbf{P}$ 是参数向量，$t$ 是时间。
 
-### 2.3 组件交互模型 
+### 2.3 组件交互模型
 
 {#2-3-component-interaction}
 
@@ -53,7 +54,7 @@ $$\frac{d\mathbf{S}}{dt} = \mathbf{F}(\mathbf{S}, \mathbf{P}, t)$$
 - 数据流动
 - 交互协议
 
-### 2.4 生态系统健康度 
+### 2.4 生态系统健康度
 
 {#2-4-ecosystem-health}
 
@@ -67,25 +68,25 @@ $$\frac{d\mathbf{S}}{dt} = \mathbf{F}(\mathbf{S}, \mathbf{P}, t)$$
 
 ## 3. Key Components {#3-key-components}
 
-### 3.1 依赖传播模型 
+### 3.1 依赖传播模型
 
 {#3-1-dependency-propagation}
 
 依赖传播模型描述依赖关系如何在生态系统中传播的机制。
 
-### 3.2 库传播模型 
+### 3.2 库传播模型
 
 {#3-2-library-diffusion}
 
 库传播模型描述库在生态系统中采纳和传播的数学模型。
 
-### 3.3 技术采纳模型 
+### 3.3 技术采纳模型
 
 {#3-3-technology-adoption}
 
 技术采纳模型描述新技术在生态系统中采纳过程的动态机制。
 
-### 3.4 演化路径分析 
+### 3.4 演化路径分析
 
 {#3-4-evolution-path}
 
@@ -129,5 +130,6 @@ $$\frac{d\mathbf{S}}{dt} = \mathbf{F}(\mathbf{S}, \mathbf{P}, t)$$
 ---
 
 **Document History**:  
+
 - Created: 2025-06-28
 - Updated: 2025-07-23 - 更新了索引文件格式并添加了交叉引用
