@@ -277,3 +277,65 @@
 **最后更新时间**: 2025年1月27日  
 **项目状态**: 核心理论构建阶段  
 **完成度**: 40% (6/15 核心文档)
+
+### 详细重构日志
+
+#### 模块：`c02_type_system`
+
+- **[已完成]** 任务 1：创建类型系统导论
+  - **源文件**:
+    - `crates/c02_type_system/docs/rust_type_design01.md`
+    - `crates/c02_type_system/docs/type_system_mindmap.md`
+  - **输出文件**: `/formal_rust/language/02_type_system/01_introduction_and_philosophy.md`
+  - **内容**: 合并并重构源文件，提炼出 Rust 类型系统的核心设计哲学、目标和高级结构图，添加了理论视角和哲学批判性分析。
+  - **元数据**: 创建了分册目录 `/formal_rust/language/02_type_system/_index.md`。
+
+- **[已完成]** 任务 2：创建类型系统基础概念
+  - **源文件**:
+    - `crates/c02_type_system/docs/type_define.md`
+    - `crates/c02_type_system/docs/rust_type_design02.md`
+    - `crates/c02_type_system/docs/type_system_mindmap.md`
+  - **输出文件**: `/formal_rust/language/02_type_system/02_fundamental_concepts.md`
+  - **内容**: 基于 `type_system_mindmap.md` 的结构，融合 `rust_type_design02.md` 的形式化定义，详细阐述了 Rust 的原始类型、复合类型（结构体、枚举）、序列类型、指针和函数类型。
+  - **元数据**: 更新了分册目录 `/formal_rust/language/02_type_system/_index.md`。
+
+- **[已完成]** 任务 3：创建类型安全与推断章节
+  - **源文件**:
+    - `crates/c02_type_system/docs/type_safety_inference.md` (仅借鉴视角)
+  - **输出文件**: `/formal_rust/language/02_type_system/03_type_safety_and_inference.md`
+  - **内容**: 提炼了源文件中"类型安全"的视角，并补充了缺失的、关于 Rust 类型推断机制的完整说明，包括其类 Hindley-Milner 算法、应用场景、局限性及哲学权衡。
+  - **元数据**: 更新了分册目录 `/formal_rust/language/02_type_system/_index.md`。
+
+- **[已完成]** 任务 4：创建泛型与 Trait 章节
+  - **源文件**:
+    - `crates/c02_type_system/docs/rust_type_design03.md`
+    - `crates/c02_type_system/docs/rust_type_design04.md`
+  - **输出文件**: `/formal_rust/language/02_type_system/04_generics_and_traits.md`
+  - **内容**: 结合源文件中的理论视角，创建了关于泛型与 Trait 的完整说明。内容涵盖泛型机制、单态化、Trait 定义与实现、Trait Bound、`impl/dyn Trait`、关联类型，并深入分析了其理论基础（多态性、函子、存在/全称类型）和设计权衡（静态/动态分派、孤儿规则）。
+  - **元数据**: 更新了分册目录 `/formal_rust/language/02_type_system/_index.md`。
+
+- **[已完成]** 任务 5：创建类型转换与强制章节
+  - **源文件**:
+    - `crates/c02_type_system/docs/type_cast.md`
+    - `crates/c02_type_system/docs/type_down_up_cast.md`
+  - **输出文件**: `/formal_rust/language/02_type_system/05_type_casting_and_coercion.md`
+  - **内容**: 整合了源文件中关于"下转型"的讨论，并补充了缺失的关键概念，如隐式类型强制（Deref Coercion）、`as` 关键字转换和惯用的 `From/Into` Trait，形成了一个全面的类型转换指南。
+  - **元数据**: 更新了分册目录 `/formal_rust/language/02_type_system/_index.md`。
+
+- **[已完成]** 任务 6：创建型变章节
+  - **源文件**:
+    - `crates/c02_type_system/docs/type_variant.md`
+    - `crates/c02_type_system/docs/type_define_variant.md`
+    - `crates/c02_type_system/docs/type_cast.md` (相关部分)
+  - **输出文件**: `/formal_rust/language/02_type_system/06_variance.md`
+  - **内容**: 创建了关于型变的完整章节。从生命周期子类型关系出发，详细解释了协变、逆变和不变，并提供关键示例（特别是 `&mut T` 的不变性）来论证其对内存安全的必要性。同时解释了 `PhantomData` 的作用。
+  - **元数据**: 更新了分册目录 `/formal_rust/language/02_type_system/_index.md`。
+
+- **[已完成]** 任务 7：完成模块元数据建设
+  - **源文件**: 无 (基于已生成章节)
+  - **输出文件**:
+    - `/formal_rust/language/02_type_system/README.md`
+    - `/formal_rust/language/02_type_system/Glossary.md`
+    - `/formal_rust/language/02_type_system/FAQ.md`
+  - **内容**: 创建了模块的导读（README）、关键术语表（Glossary）和常见问题解答（FAQ），完成了模块的封装。
+  - **元数据**: 模块 `c02_type_system` 已全面重构完毕。
