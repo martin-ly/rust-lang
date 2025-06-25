@@ -4,10 +4,10 @@
 
 ## 核心哲学 (Core Philosophy)
 
-1.  **零成本抽象 (Zero-Cost Abstraction)**: `async/await` 语法在编译时被转换为高效的状态机，没有运行时的虚拟机或垃圾回收开销，性能接近手动优化的底层代码。
-2.  **内存安全 (Memory Safety)**: 异步模型与 Rust 的所有权和借用系统深度集成。`Future` 的生命周期和 `Send`/`Sync` 约束在编译时就保证了异步任务的内存安全，消除了数据竞争。
-3.  **运行时与语言分离**: Rust 语言本身只提供 `Future` Trait 和 `async/await` 语法等核心原语。具体的执行器 (Executor) 和运行时 (Runtime) 则由社区生态系统提供（如 `tokio`, `async-std`），允许用户根据场景选择最合适的执行策略。
-4.  **协作式调度 (Cooperative Scheduling)**: Rust 的异步任务是协作式的。任务在遇到 `.await` 时会主动让出控制权，而不是被动地被操作系统抢占。这减少了不必要的上下文切换，提高了效率。
+1. **零成本抽象 (Zero-Cost Abstraction)**: `async/await` 语法在编译时被转换为高效的状态机，没有运行时的虚拟机或垃圾回收开销，性能接近手动优化的底层代码。
+2. **内存安全 (Memory Safety)**: 异步模型与 Rust 的所有权和借用系统深度集成。`Future` 的生命周期和 `Send`/`Sync` 约束在编译时就保证了异步任务的内存安全，消除了数据竞争。
+3. **运行时与语言分离**: Rust 语言本身只提供 `Future` Trait 和 `async/await` 语法等核心原语。具体的执行器 (Executor) 和运行时 (Runtime) 则由社区生态系统提供（如 `tokio`, `async-std`），允许用户根据场景选择最合适的执行策略。
+4. **协作式调度 (Cooperative Scheduling)**: Rust 的异步任务是协作式的。任务在遇到 `.await` 时会主动让出控制权，而不是被动地被操作系统抢占。这减少了不必要的上下文切换，提高了效率。
 
 ## 章节目录
 
@@ -30,4 +30,4 @@
   - *核心概念：函数"颜色", 架构兼容性*
   - *机制：与同步代码交互，设计权衡*
 
-<!-- LATER_CHAPTERS --> 
+<!-- LATER_CHAPTERS -->

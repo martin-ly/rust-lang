@@ -4,7 +4,9 @@
 
 ---
 
-### Arc<T> (Atomically Reference Counted)
+## 术语
+
+### `Arc<T>` (Atomically Reference Counted)
 
 一个线程安全的引用计数智能指针。`Arc<T>` 允许多个所有者（通常在不同线程中）共享对同一份数据 `T` 的所有权。它使用原子操作来管理引用计数，确保其在多线程环境下的安全。
 
