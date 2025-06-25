@@ -99,12 +99,14 @@
 * **目标目录**: `formal_rust/language/c06_async/`
 * **重构计划**:
     1. `01_introduction_and_philosophy.md` - ✅ **已创建**
+    2. `02_runtime_and_execution_model.md` - ✅ **已创建**
 * **日志**:
-  * **[最新]** 启动 `c06_async` 模块。已分析源文件，制定了分章节重构计划。
+  * **[最新]** 创建了 `02_runtime_and_execution_model.md`，详细阐述了执行器与运行时的概念和工作原理。
+  * 启动 `c06_async` 模块。已分析源文件，制定了分章节重构计划。
   * 创建了 `01_introduction_and_philosophy.md`，综合了多个源文件的核心概念。
 
 ---
 
 ## **下一步行动**
 
-* 继续 `c06_async` 模块的重构，创建 `02_runtime_and_execution_model.md`。
+* 继续 `c06_async` 模块的重构，创建 `03_pinning_and_unsafe_foundations.md`。
