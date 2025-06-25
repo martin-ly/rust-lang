@@ -2,7 +2,7 @@
 
 ## 目录
 
-- [14. 交互式练习与思考题（14_interactive_exercises）](#14-交互式练习与思考题14_interactive_exercises)
+- [14. 交互式练习与思考题（14\_interactive\_exercises）](#14-交互式练习与思考题14_interactive_exercises)
   - [目录](#目录)
   - [14.1 练习题](#141-练习题)
   - [14.2 思考题](#142-思考题)
@@ -16,17 +16,46 @@
 3. 实现一个简单的异步函数，说明生命周期标注的作用。
 4. 用Rust实现一个线程安全的计数器，分析其所有权与并发模型。
 
+**工程案例：线程安全计数器**:
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let counter = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+    for _ in 0..10 {
+        let counter = Arc::clone(&counter);
+        let handle = thread::spawn(move || {
+            let mut num = counter.lock().unwrap();
+            *num += 1;
+        });
+        handles.push(handle);
+    }
+    for handle in handles {
+        handle.join().unwrap();
+    }
+    println!("Result: {}", *counter.lock().unwrap());
+}
+```
+
 ## 14.2 思考题
 
 1. 为什么Rust采用所有权系统而不是传统GC？请结合资源管理和性能分析。
 2. 范畴论视角下，如何用态射描述变量的生命周期变化？
 3. 比较Rust与C++在内存安全机制上的异同。
 4. 结合实际项目，分析所有权系统对架构设计的影响。
+5. 设计一个交互式可视化工具，动态展示变量生命周期与所有权流转。
 
 ## 14.3 批判性分析
 
-- 优势：交互式练习和思考题有助于巩固理论知识，提升实际编程能力
-- 局限：需持续补充题库，覆盖更多理论与实践场景
+- **优势：**
+  - 交互式练习和思考题有助于巩固理论知识，提升实际编程能力
+  - 工程案例和可视化建议促进理论与工程结合
+- **局限：**
+  - 需持续补充题库，覆盖更多理论与实践场景
+  - 交互式平台和工具生态仍需完善
 
 ## 14.4 交叉引用
 
