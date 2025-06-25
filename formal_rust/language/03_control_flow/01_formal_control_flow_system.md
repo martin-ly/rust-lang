@@ -2,14 +2,42 @@
 
 ## 目录
 
-1. [引言与基础定义](#1-引言与基础定义)
-2. [条件控制表达式](#2-条件控制表达式)
-3. [循环控制结构](#3-循环控制结构)
-4. [函数与控制流转移](#4-函数与控制流转移)
-5. [闭包与环境捕获](#5-闭包与环境捕获)
-6. [异步控制流](#6-异步控制流)
-7. [形式化验证与安全保证](#7-形式化验证与安全保证)
-8. [定理与证明](#8-定理与证明)
+- [03.01 形式化控制流系统 (Formal Control Flow System)](#0301-形式化控制流系统-formal-control-flow-system)
+  - [目录](#目录)
+  - [1. 引言与基础定义](#1-引言与基础定义)
+    - [1.1 控制流基础概念](#11-控制流基础概念)
+    - [1.2 Rust控制流核心原则](#12-rust控制流核心原则)
+  - [2. 条件控制表达式](#2-条件控制表达式)
+    - [2.1 if表达式形式化](#21-if表达式形式化)
+    - [2.2 match表达式形式化](#22-match表达式形式化)
+    - [2.3 if let与while let语法糖](#23-if-let与while-let语法糖)
+  - [3. 循环控制结构](#3-循环控制结构)
+    - [3.1 循环基础定义](#31-循环基础定义)
+    - [3.2 循环语义](#32-循环语义)
+    - [3.3 循环中的所有权](#33-循环中的所有权)
+    - [3.4 break与continue](#34-break与continue)
+  - [4. 函数与控制流转移](#4-函数与控制流转移)
+    - [4.1 函数调用语义](#41-函数调用语义)
+    - [4.2 递归函数](#42-递归函数)
+    - [4.3 发散函数](#43-发散函数)
+  - [5. 闭包与环境捕获](#5-闭包与环境捕获)
+    - [5.1 闭包基础定义](#51-闭包基础定义)
+    - [5.2 闭包Trait系统](#52-闭包trait系统)
+    - [5.3 高阶函数](#53-高阶函数)
+  - [6. 异步控制流](#6-异步控制流)
+    - [6.1 Future类型](#61-future类型)
+    - [6.2 async/await语法](#62-asyncawait语法)
+    - [6.3 状态机转换](#63-状态机转换)
+    - [6.4 异步所有权](#64-异步所有权)
+  - [7. 形式化验证与安全保证](#7-形式化验证与安全保证)
+    - [7.1 控制流安全](#71-控制流安全)
+    - [7.2 终止性分析](#72-终止性分析)
+    - [7.3 并发安全](#73-并发安全)
+  - [8. 定理与证明](#8-定理与证明)
+    - [8.1 核心定理](#81-核心定理)
+    - [8.2 形式化证明示例](#82-形式化证明示例)
+    - [8.3 实现验证](#83-实现验证)
+  - [总结](#总结)
 
 ---
 
@@ -58,10 +86,12 @@ $$\forall \pi \in \text{Path}: \text{ownership-valid}(\pi) \Rightarrow \text{mem
 
 **定义 2.1** (if表达式)
 if表达式是条件分支结构，形式化定义为：
-$$E_{if}(cond, e_1, e_2) = \begin{cases}
+$$
+E_{if}(cond, e_1, e_2) = \begin{cases}
 eval(e_1) & \text{if } cond = \text{true} \\
 eval(e_2) & \text{if } cond = \text{false}
-\end{cases}$$
+\end{cases}
+$$
 
 **类型规则 2.1** (if表达式类型)
 $$\frac{\Gamma \vdash cond: \text{bool} \quad \Gamma \vdash e_1: T \quad \Gamma \vdash e_2: T}{\Gamma \vdash \text{if } cond \text{ } e_1 \text{ else } e_2: T}$$
@@ -73,7 +103,9 @@ $$\frac{\Gamma \vdash cond: \text{bool} \quad \Gamma \vdash e_1: T \quad \Gamma 
 根据类型规则2.1，编译器强制要求 $e_1$ 和 $e_2$ 具有相同类型。若类型不匹配，编译时会产生类型错误。
 
 **所有权规则 2.1** (if表达式所有权)
-$$\frac{\text{borrow-check}(e_1, \Gamma) \quad \text{borrow-check}(e_2, \Gamma)}{\text{borrow-check}(E_{if}(cond, e_1, e_2), \Gamma)}$$
+$$
+\frac{\text{borrow-check}(e_1, \Gamma) \quad \text{borrow-check}(e_2, \Gamma)}{\text{borrow-check}(E_{if}(cond, e_1, e_2), \Gamma)}
+$$
 
 ### 2.2 match表达式形式化
 
@@ -84,10 +116,12 @@ $$E_{match}(value, [(p_1, e_1), (p_2, e_2), ..., (p_n, e_n)]) = eval(e_i)$$
 
 **定义 2.3** (模式匹配)
 模式匹配函数 $match: \text{Value} \times \text{Pattern} \rightarrow \text{Option<Substitution>}$ 定义为：
-$$match(v, p) = \begin{cases}
+$$
+match(v, p) = \begin{cases}
 \text{Some}(\sigma) & \text{if } v \text{ matches } p \text{ with substitution } \sigma \\
 \text{None} & \text{otherwise}
-\end{cases}$$
+\end{cases}
+$$
 
 **类型规则 2.2** (match表达式类型)
 $$\frac{\Gamma \vdash value: T \quad \forall i: \Gamma, \sigma_i \vdash e_i: U}{\Gamma \vdash \text{match } value \text{ } \{ p_1 \Rightarrow e_1, ..., p_n \Rightarrow e_n \}: U}$$
@@ -100,6 +134,7 @@ $$\forall v \in \text{Value}: \exists i: match(v, p_i) \neq \text{None}$$
 Rust编译器通过静态分析检查所有可能的值是否被模式覆盖。对于枚举类型，检查所有变体；对于其他类型，要求有通配符模式 `_`。
 
 **示例 2.1** (match表达式)
+
 ```rust
 enum Message {
     Quit,
@@ -161,12 +196,14 @@ $$\frac{iterator.next() = \text{None}}{L_{for}(iterator, body) \text{ terminates
 
 **定理 3.1** (for循环所有权)
 对于for循环 `for item in collection`：
+
 - `collection.into_iter()`: 获取所有权，消耗collection
 - `collection.iter()`: 不可变借用，产生 `&T`
 - `collection.iter_mut()`: 可变借用，产生 `&mut T`
 
 **证明**：
 根据迭代器trait定义：
+
 ```rust
 trait IntoIterator {
     type Item;
@@ -176,6 +213,7 @@ trait IntoIterator {
 ```
 
 **示例 3.1** (循环所有权)
+
 ```rust
 let mut vec = vec![1, 2, 3];
 
@@ -229,15 +267,18 @@ $$\frac{\Gamma \vdash f: T_1 \rightarrow T_2 \quad \Gamma \vdash args: T_1}{\Gam
 
 **定义 4.2** (递归函数)
 递归函数是调用自身的函数：
-$$f(x) = \begin{cases}
+$$
+f(x) = \begin{cases}
 \text{base-case}(x) & \text{if } \text{termination-condition}(x) \\
 \text{recursive-case}(x, f(\text{reduce}(x))) & \text{otherwise}
-\end{cases}$$
+\end{cases}
+$$
 
 **定理 4.1** (递归终止性)
 递归函数必须包含终止条件，否则会导致无限递归。
 
 **示例 4.1** (递归函数)
+
 ```rust
 fn factorial(n: u64) -> u64 {
     if n == 0 {
@@ -273,11 +314,13 @@ $$\text{closure}(params, body, env) = \lambda params. \text{execute}(body, env)$
 
 **定义 5.2** (环境捕获)
 环境捕获是闭包访问外部变量的机制：
-$$\text{capture}(env, var) = \begin{cases}
+$$
+\text{capture}(env, var) = \begin{cases}
 \text{move}(var) & \text{if } \text{consumed}(var) \\
 \text{borrow-mut}(var) & \text{if } \text{mutated}(var) \\
 \text{borrow}(var) & \text{otherwise}
-\end{cases}$$
+\end{cases}
+$$
 
 ### 5.2 闭包Trait系统
 
@@ -300,6 +343,7 @@ $$\text{Fn} \subseteq \text{FnMut} \subseteq \text{FnOnce}$$
 根据借用规则，不可变借用比可变借用更严格，可变借用比移动更严格。
 
 **示例 5.1** (闭包Trait)
+
 ```rust
 // Fn: 不可变借用
 let factor = 10;
@@ -327,6 +371,7 @@ let process_data = move || {
 $$\text{higher-order}(f) \Leftrightarrow \text{function-parameter}(f) \vee \text{function-return}(f)$$
 
 **示例 5.2** (高阶函数)
+
 ```rust
 fn apply_operation<F>(a: i32, b: i32, op: F) -> i32
 where
@@ -360,10 +405,12 @@ $$\text{async fn } f(params) \rightarrow T \equiv \text{fn } f(params) \rightarr
 
 **定义 6.4** (await操作)
 await操作等待Future完成：
-$$\text{await}(future) = \begin{cases}
+$$
+\text{await}(future) = \begin{cases}
 \text{value} & \text{if } future = \text{Ready(value)} \\
 \text{yield} & \text{if } future = \text{Pending}
-\end{cases}$$
+\end{cases}
+$$
 
 ### 6.3 状态机转换
 
@@ -375,6 +422,7 @@ $$\text{async-fn} \xrightarrow{\text{compile}} \text{state-machine}$$
 每个await点对应一个状态，局部变量成为状态机字段。
 
 **示例 6.1** (async函数)
+
 ```rust
 async fn fetch_data(url: String) -> String {
     println!("Fetching {}", url);
@@ -395,6 +443,7 @@ $$\text{borrow}(ref) \text{ across } \text{await} \Rightarrow \text{compile-erro
 await点可能暂停执行，引用可能变为悬垂引用。
 
 **示例 6.2** (异步所有权)
+
 ```rust
 async fn process_data(data: &[i32]) -> usize {
     // 错误：引用不能跨越await
@@ -430,6 +479,7 @@ $$\text{terminating}(P) \Leftrightarrow \forall \pi \in \text{paths}(P): \text{f
 
 **定理 7.2** (循环终止性)
 Rust循环在以下条件下终止：
+
 1. while循环：条件最终变为false
 2. for循环：迭代器最终返回None
 3. loop循环：包含break语句
@@ -454,6 +504,7 @@ $$\text{ownership-safe}(P) \Rightarrow \text{concurrent-safe}(P)$$
 Rust控制流系统是图灵完备的。
 
 **证明**：
+
 1. 条件分支：if/else提供条件执行
 2. 循环：loop/while/for提供重复执行
 3. 函数调用：提供子程序抽象
@@ -463,6 +514,7 @@ Rust控制流系统是图灵完备的。
 Rust控制流在编译时保证类型安全。
 
 **证明**：
+
 1. 所有表达式都有静态类型
 2. 类型检查器验证所有控制流路径
 3. 穷尽性检查确保所有情况都被处理
@@ -471,6 +523,7 @@ Rust控制流在编译时保证类型安全。
 Rust控制流在编译时保证内存安全。
 
 **证明**：
+
 1. 所有权系统防止双重释放
 2. 借用检查器防止悬垂引用
 3. 生命周期系统确保引用有效性
@@ -498,6 +551,7 @@ Rust控制流在编译时保证内存安全。
 Rust编译器实现的控制流语义与形式化定义一致。
 
 **验证方法**：
+
 1. 类型检查器验证类型规则
 2. 借用检查器验证所有权规则
 3. 代码生成器验证语义规则

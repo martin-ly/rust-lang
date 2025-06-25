@@ -19,8 +19,6 @@
 
 ## 2. Core Concepts {#2-core-concepts}
 
-<a id="concept-middleware-definition"></a>
-
 ### 2.1 中间件定义
 
 中间件是一个高阶函数，形式化定义为：
@@ -28,8 +26,6 @@
 $$M : (A \rightarrow B) \rightarrow (A \rightarrow B)$$
 
 其中 $A$ 表示输入类型（如请求），$B$ 表示输出类型（如响应）。
-
-<a id="concept-middleware-composition"></a>
 
 ### 2.2 中间件组合
 
@@ -39,8 +35,6 @@ $$(M_1 \circ M_2)(f) = M_1(M_2(f))$$
 
 此组合满足结合律，形成代数结构。
 
-<a id="concept-middleware-models"></a>
-
 ### 2.3 中间件模型
 
 主要的中间件模型包括：
@@ -48,8 +42,6 @@ $$(M_1 \circ M_2)(f) = M_1(M_2(f))$$
 - **管道模型**：线性单向数据流
 - **洋葱模型**：双向处理路径
 - **函数式模型**：基于函数组合的模型
-
-<a id="concept-middleware-context"></a>
 
 ### 2.4 中间件上下文
 
@@ -61,19 +53,13 @@ $$\text{Context} = \{(k_1, v_1), (k_2, v_2), \ldots, (k_n, v_n)\}$$
 
 ## 3. Key Components {#3-key-components}
 
-<a id="component-request-chain"></a>
-
 ### 3.1 请求处理链
 
 请求处理链定义了请求如何通过一系列中间件进行处理，是中间件系统的核心组件。
 
-<a id="component-error-handling"></a>
-
 ### 3.2 错误处理
 
 中间件错误处理定义了在处理过程中产生错误时的行为规则和恢复机制。
-
-<a id="component-async-middleware"></a>
 
 ### 3.3 异步中间件
 

@@ -1,5 +1,46 @@
 # 11. 内存管理系统 (Memory Management System)
 
+## 目录
+
+- [11. 内存管理系统 (Memory Management System)](#11-内存管理系统-memory-management-system)
+  - [目录](#目录)
+  - [11.1 理论基础：内存管理的形式化模型](#111-理论基础内存管理的形式化模型)
+    - [11.1.1 内存空间的形式化定义](#1111-内存空间的形式化定义)
+    - [11.1.2 所有权系统的内存模型](#1112-所有权系统的内存模型)
+    - [11.1.3 内存安全的形式化保证](#1113-内存安全的形式化保证)
+  - [11.2 内存分配与释放](#112-内存分配与释放)
+    - [11.2.1 分配器的形式化模型](#1121-分配器的形式化模型)
+    - [11.2.2 栈分配与堆分配](#1122-栈分配与堆分配)
+    - [11.2.3 智能指针的内存管理](#1123-智能指针的内存管理)
+  - [11.3 引用计数与垃圾回收](#113-引用计数与垃圾回收)
+    - [11.3.1 引用计数的形式化模型](#1131-引用计数的形式化模型)
+    - [11.3.2 Arc的并发安全性](#1132-arc的并发安全性)
+    - [11.3.3 垃圾回收接口](#1133-垃圾回收接口)
+  - [11.4 内存布局与对齐](#114-内存布局与对齐)
+    - [11.4.1 内存布局的形式化定义](#1141-内存布局的形式化定义)
+    - [11.4.2 结构体内存布局](#1142-结构体内存布局)
+    - [11.4.3 零大小类型](#1143-零大小类型)
+  - [11.5 内存模型与并发](#115-内存模型与并发)
+    - [11.5.1 内存模型的形式化定义](#1151-内存模型的形式化定义)
+    - [11.5.2 原子操作的内存语义](#1152-原子操作的内存语义)
+    - [11.5.3 内存序的形式化语义](#1153-内存序的形式化语义)
+  - [11.6 内存安全的形式化验证](#116-内存安全的形式化验证)
+    - [11.6.1 内存安全证明](#1161-内存安全证明)
+    - [11.6.2 内存泄漏检测](#1162-内存泄漏检测)
+    - [11.6.3 形式化验证工具](#1163-形式化验证工具)
+  - [11.7 内存管理性能优化](#117-内存管理性能优化)
+    - [11.7.1 分配器性能](#1171-分配器性能)
+    - [11.7.2 内存池优化](#1172-内存池优化)
+    - [11.7.3 缓存友好的内存布局](#1173-缓存友好的内存布局)
+  - [11.8 实际应用与最佳实践](#118-实际应用与最佳实践)
+    - [11.8.1 内存管理模式](#1181-内存管理模式)
+    - [11.8.2 内存安全最佳实践](#1182-内存安全最佳实践)
+    - [11.8.3 性能优化策略](#1183-性能优化策略)
+  - [11.9 总结与展望](#119-总结与展望)
+    - [11.9.1 内存管理系统的核心特性](#1191-内存管理系统的核心特性)
+    - [11.9.2 形式化保证](#1192-形式化保证)
+    - [11.9.3 未来发展方向](#1193-未来发展方向)
+
 ## 11.1 理论基础：内存管理的形式化模型
 
 ### 11.1.1 内存空间的形式化定义
@@ -8,6 +49,7 @@
 $$\text{MemorySpace} = (\text{Addresses}, \text{Values}, \text{Layout})$$
 
 其中：
+
 - $\text{Addresses} = \{0, 1, 2, \ldots, 2^{64}-1\}$ 是地址空间
 - $\text{Values} = \text{Bytes}^*$ 是值的集合
 - $\text{Layout} = \text{Address} \rightarrow \text{Type}$ 是内存布局
@@ -21,6 +63,7 @@ $$\text{MemoryRegion} = (\text{start}: \text{Address}, \text{size}: \mathbb{N}, 
 $$\text{OwnershipModel} = (\text{Owners}, \text{Borrows}, \text{Lifetimes})$$
 
 其中：
+
 - $\text{Owners} = \text{Variable} \rightarrow \text{MemoryRegion}$ 定义变量对内存区域的所有权
 - $\text{Borrows} = \text{Reference} \rightarrow \text{MemoryRegion}$ 定义引用对内存区域的借用
 - $\text{Lifetimes} = \text{Reference} \rightarrow \text{Scope}$ 定义引用的生命周期
@@ -31,6 +74,7 @@ $$\forall r \in \text{MemoryRegions}. |\{o \in \text{Owners} \mid o \text{ owns 
 ### 11.1.3 内存安全的形式化保证
 
 **定义 11.1.4** (内存安全): 内存安全是指程序不会出现以下错误：
+
 1. 使用已释放的内存
 2. 释放已释放的内存
 3. 访问越界内存
@@ -50,11 +94,13 @@ $$\text{OwnershipRules} \Rightarrow \text{MemorySafety}$$
 $$\text{Allocator} = (\text{allocate}, \text{deallocate}, \text{reallocate})$$
 
 其中：
+
 - $\text{allocate}: \text{Layout} \rightarrow \text{Result<*mut u8, AllocError>}$
 - $\text{deallocate}: (*\text{mut u8}, \text{Layout}) \rightarrow ()$
 - $\text{reallocate}: (*\text{mut u8}, \text{Layout}, \text{Layout}) \rightarrow \text{Result<*mut u8, AllocError>}$
 
 **定义 11.2.2** (分配器契约): 分配器必须满足以下契约：
+
 1. **分配成功**: 如果分配成功，返回的指针指向足够大的内存区域
 2. **对齐要求**: 返回的指针满足布局的对齐要求
 3. **唯一性**: 分配的指针是唯一的，不会与其他分配重叠
@@ -111,6 +157,7 @@ $$\text{Arc<T>} \Rightarrow T: \text{Send} \land T: \text{Sync}$$
 $$\text{GCInterface} = (\text{trace}, \text{mark}, \text{sweep})$$
 
 其中：
+
 - $\text{trace}: \text{Object} \rightarrow \text{Set<Object>}$ 跟踪对象引用的其他对象
 - $\text{mark}: \text{Object} \rightarrow \text{Bool}$ 标记对象为活跃
 - $\text{sweep}: \text{MemorySpace} \rightarrow \text{Set<Object>}$ 清理未标记的对象
@@ -155,6 +202,7 @@ $$\forall T \in \text{ZST}. \text{MemoryFootprint}(T) = 0$$
 $$\text{MemoryModel} = (\text{Locations}, \text{Operations}, \text{HappensBefore})$$
 
 其中：
+
 - $\text{Locations}$ 是内存位置集合
 - $\text{Operations}$ 是内存操作集合
 - $\text{HappensBefore}$ 是操作间的顺序关系
@@ -176,6 +224,7 @@ $$\text{Atomic}(op) \Rightarrow \text{Indivisible}(op)$$
 $$\text{MemoryOrder} = \{\text{Relaxed}, \text{Acquire}, \text{Release}, \text{AcqRel}, \text{SeqCst}\}$$
 
 **定理 11.5.2** (内存序保证): 不同的内存序提供不同的保证：
+
 - $\text{Relaxed}$: 只保证原子性
 - $\text{Acquire}$: 保证后续操作不会重排到此操作之前
 - $\text{Release}$: 保证之前的操作不会重排到此操作之后
@@ -186,6 +235,7 @@ $$\text{MemoryOrder} = \{\text{Relaxed}, \text{Acquire}, \text{Release}, \text{A
 ### 11.6.1 内存安全证明
 
 **定义 11.6.1** (内存安全证明): 内存安全可以通过以下方式证明：
+
 1. **类型检查**: 确保所有权和借用规则
 2. **生命周期检查**: 确保引用不会超过其指向数据的生命周期
 3. **并发安全检查**: 确保没有数据竞争
@@ -204,6 +254,7 @@ $$\text{OwnershipRules} \Rightarrow \neg\text{MemoryLeak}$$
 ### 11.6.3 形式化验证工具
 
 **定义 11.6.3** (验证工具): 内存安全可以通过以下工具验证：
+
 1. **MIRI**: Rust解释器，用于检测未定义行为
 2. **Loom**: 并发测试工具，用于检测数据竞争
 3. **Kani**: 模型检查工具，用于验证内存安全
@@ -299,4 +350,4 @@ Rust的内存管理系统具有以下核心特性：
 2. "Programming Rust" - Jim Blandy, Jason Orendorff
 3. "Rust in Action" - Tim McNamara
 4. "The Rust Programming Language" - Steve Klabnik, Carol Nichols
-5. "Rust Memory Management" - Nicholas Matsakis 
+5. "Rust Memory Management" - Nicholas Matsakis

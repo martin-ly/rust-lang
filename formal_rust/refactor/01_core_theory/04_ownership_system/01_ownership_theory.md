@@ -2,16 +2,44 @@
 
 ## 目录
 
-1. [所有权公理系统](#1-所有权公理系统)
-2. [借用系统理论](#2-借用系统理论)
-3. [生命周期理论](#3-生命周期理论)
-4. [内存安全证明](#4-内存安全证明)
-5. [借用检查算法](#5-借用检查算法)
-6. [所有权转移语义](#6-所有权转移语义)
-7. [并发安全保证](#7-并发安全保证)
-8. [形式化语义](#8-形式化语义)
-9. [实现策略](#9-实现策略)
-10. [扩展理论](#10-扩展理论)
+- [01. Rust 所有权系统理论](#01-rust-所有权系统理论)
+  - [目录](#目录)
+  - [1. 所有权公理系统](#1-所有权公理系统)
+    - [1.1 基本公理](#11-基本公理)
+    - [1.2 所有权关系](#12-所有权关系)
+  - [2. 借用系统理论](#2-借用系统理论)
+    - [2.1 借用公理](#21-借用公理)
+    - [2.2 借用规则](#22-借用规则)
+    - [2.3 借用类型](#23-借用类型)
+  - [3. 生命周期理论](#3-生命周期理论)
+    - [3.1 生命周期定义](#31-生命周期定义)
+    - [3.2 生命周期约束](#32-生命周期约束)
+    - [3.3 生命周期推导](#33-生命周期推导)
+  - [4. 内存安全证明](#4-内存安全证明)
+    - [4.1 内存安全定义](#41-内存安全定义)
+    - [4.2 安全性质](#42-安全性质)
+    - [4.3 安全证明](#43-安全证明)
+  - [5. 借用检查算法](#5-借用检查算法)
+    - [5.1 借用检查器](#51-借用检查器)
+    - [5.2 借用环境](#52-借用环境)
+  - [6. 所有权转移语义](#6-所有权转移语义)
+    - [6.1 转移规则](#61-转移规则)
+    - [6.2 移动语义](#62-移动语义)
+    - [6.3 复制语义](#63-复制语义)
+  - [7. 并发安全保证](#7-并发安全保证)
+    - [7.1 并发安全定义](#71-并发安全定义)
+    - [7.2 数据竞争预防](#72-数据竞争预防)
+    - [7.3 同步原语](#73-同步原语)
+  - [8. 形式化语义](#8-形式化语义)
+    - [8.1 操作语义](#81-操作语义)
+    - [8.2 指称语义](#82-指称语义)
+  - [9. 实现策略](#9-实现策略)
+    - [9.1 编译时检查](#91-编译时检查)
+    - [9.2 运行时支持](#92-运行时支持)
+  - [10. 扩展理论](#10-扩展理论)
+    - [10.1 高级所有权](#101-高级所有权)
+    - [10.2 所有权模式](#102-所有权模式)
+  - [参考文献](#参考文献)
 
 ---
 
@@ -38,6 +66,7 @@ $$\text{OwnershipRelation} = \{(o, v) \mid \text{Owns}(o, v)\}$$
 $$\text{Ownership}: \text{Value} \rightarrow \text{Owner}$$
 
 **证明**：
+
 1. 根据唯一所有权公理，每个值有唯一所有者
 2. 因此所有权关系是函数
 3. 证毕
@@ -96,6 +125,7 @@ $$\alpha \leq \beta \Rightarrow \text{Scope}[\alpha] \subseteq \text{Scope}[\bet
 ### 3.3 生命周期推导
 
 **算法 3.1** (生命周期推导)
+
 ```rust
 fn lifetime_inference(expr: &Expr) -> Result<Lifetime, LifetimeError> {
     match expr {
@@ -146,6 +176,7 @@ $$\forall v \in \text{Value}: \text{Used}(v) \land \text{Deallocated}(v) \Righta
 $$\forall p \in \text{Program}: \text{OwnershipSafe}(p) \Rightarrow \text{MemorySafe}(p)$$
 
 **证明**：
+
 1. 所有权系统保证每个值有唯一所有者
 2. 所有者负责内存管理
 3. 借用系统防止并发访问
@@ -158,6 +189,7 @@ $$\forall p \in \text{Program}: \text{OwnershipSafe}(p) \Rightarrow \text{Memory
 ### 5.1 借用检查器
 
 **算法 5.1** (借用检查)
+
 ```rust
 fn borrow_check(expr: &Expr, env: &BorrowEnv) -> Result<BorrowInfo, BorrowError> {
     match expr {
@@ -238,6 +270,7 @@ $$\text{ConcurrentSafe}(p) = \forall t_1, t_2 \in \text{Thread}: \text{SafeInter
 $$\text{OwnershipSafe}(p) \Rightarrow \text{NoDataRace}(p)$$
 
 **证明**：
+
 1. 所有权系统保证独占访问
 2. 借用系统防止并发可变访问
 3. 证毕
@@ -274,6 +307,7 @@ $$\llbracket \text{Borrowing} \rrbracket: \text{Program} \rightarrow \text{Borro
 ### 9.1 编译时检查
 
 **策略 9.1** (编译时所有权检查)
+
 ```rust
 fn ownership_check(expr: &Expr) -> Result<OwnershipInfo, OwnershipError> {
     match expr {
@@ -293,6 +327,7 @@ fn ownership_check(expr: &Expr) -> Result<OwnershipInfo, OwnershipError> {
 ### 9.2 运行时支持
 
 **策略 9.2** (运行时所有权跟踪)
+
 - 使用栈分配管理所有权
 - 编译器插入析构函数调用
 - 运行时检查借用有效性
@@ -331,4 +366,4 @@ $$\text{SmartPointer}[T] = \text{Ownership}[T] \times \text{AutomaticCleanup}[T]
 
 *最后更新：2024年12月19日*
 *版本：1.0.0*
-*状态：所有权系统理论形式化完成* 
+*状态：所有权系统理论形式化完成*

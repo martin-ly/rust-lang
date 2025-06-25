@@ -2,16 +2,42 @@
 
 ## 目录
 
-1. [内存模型公理](#1-内存模型公理)
-2. [内存布局理论](#2-内存布局理论)
-3. [栈与堆管理](#3-栈与堆管理)
-4. [内存分配策略](#4-内存分配策略)
-5. [垃圾回收理论](#5-垃圾回收理论)
-6. [内存安全保证](#6-内存安全保证)
-7. [并发内存模型](#7-并发内存模型)
-8. [内存优化技术](#8-内存优化技术)
-9. [形式化语义](#9-形式化语义)
-10. [实现策略](#10-实现策略)
+- [01. Rust 内存模型理论](#01-rust-内存模型理论)
+  - [目录](#目录)
+  - [1. 内存模型公理](#1-内存模型公理)
+    - [1.1 基本公理](#11-基本公理)
+    - [1.2 内存操作公理](#12-内存操作公理)
+  - [2. 内存布局理论](#2-内存布局理论)
+    - [2.1 内存空间定义](#21-内存空间定义)
+    - [2.2 内存布局](#22-内存布局)
+    - [2.3 内存对齐](#23-内存对齐)
+  - [3. 栈与堆管理](#3-栈与堆管理)
+    - [3.1 栈管理](#31-栈管理)
+    - [3.2 堆管理](#32-堆管理)
+    - [3.3 内存分配器](#33-内存分配器)
+  - [4. 内存分配策略](#4-内存分配策略)
+    - [4.1 分配策略分类](#41-分配策略分类)
+    - [4.2 分配器实现](#42-分配器实现)
+  - [5. 垃圾回收理论](#5-垃圾回收理论)
+    - [5.1 垃圾回收定义](#51-垃圾回收定义)
+    - [5.2 垃圾回收算法](#52-垃圾回收算法)
+  - [6. 内存安全保证](#6-内存安全保证)
+    - [6.1 安全性质](#61-安全性质)
+    - [6.2 安全证明](#62-安全证明)
+  - [7. 并发内存模型](#7-并发内存模型)
+    - [7.1 并发内存操作](#71-并发内存操作)
+    - [7.2 内存序](#72-内存序)
+    - [7.3 数据竞争预防](#73-数据竞争预防)
+  - [8. 内存优化技术](#8-内存优化技术)
+    - [8.1 内存池](#81-内存池)
+    - [8.2 内存压缩](#82-内存压缩)
+  - [9. 形式化语义](#9-形式化语义)
+    - [9.1 操作语义](#91-操作语义)
+    - [9.2 指称语义](#92-指称语义)
+  - [10. 实现策略](#10-实现策略)
+    - [10.1 系统级实现](#101-系统级实现)
+    - [10.2 用户级实现](#102-用户级实现)
+  - [参考文献](#参考文献)
 
 ---
 
@@ -51,6 +77,7 @@ $$\text{MemoryRegion} = \text{Address} \times \text{Size} \times \text{Permissio
 ### 2.2 内存布局
 
 **定义 2.3** (内存布局)
+
 ```mermaid
 graph TD
     A[虚拟内存空间] --> B[代码段]
@@ -96,6 +123,7 @@ $$\text{HeapDeallocate}(ptr) = \text{MarkFree}(ptr) \times \text{MergeAdjacent}$
 ### 3.3 内存分配器
 
 **定义 3.5** (分配器接口)
+
 ```rust
 trait Allocator {
     fn allocate(&mut self, layout: Layout) -> Result<NonNull<u8>, AllocError>;
@@ -121,6 +149,7 @@ $$\text{WorstFit}(size) = \text{Max}(block \in \text{FreeBlocks}: block.size \ge
 ### 4.2 分配器实现
 
 **算法 4.1** (简单分配器)
+
 ```rust
 struct SimpleAllocator {
     free_blocks: Vec<Block>,
@@ -157,6 +186,7 @@ $$\text{Garbage}(v) = \neg \text{Reachable}(v)$$
 ### 5.2 垃圾回收算法
 
 **算法 5.1** (标记-清除)
+
 ```rust
 fn mark_sweep(heap: &mut Heap) {
     // 标记阶段
@@ -174,6 +204,7 @@ fn mark_sweep(heap: &mut Heap) {
 ```
 
 **算法 5.2** (复制收集)
+
 ```rust
 fn copy_collection(heap: &mut Heap) {
     let to_space = heap.allocate_to_space();
@@ -209,6 +240,7 @@ $$\forall a \in \text{Address}: \text{Access}(a) \Rightarrow a \in \text{Allocat
 $$\text{OwnershipSafe}(p) \Rightarrow \text{MemorySafe}(p)$$
 
 **证明**：
+
 1. 所有权系统保证每个值有唯一所有者
 2. 所有者负责内存管理
 3. 自动析构防止内存泄漏
@@ -249,6 +281,7 @@ $$\text{OwnershipSafe}(p) \Rightarrow \text{NoDataRace}(p)$$
 $$\text{MemoryPool}[T] = \text{Preallocated}[T] \times \text{FastAllocation}$$
 
 **算法 8.1** (内存池分配)
+
 ```rust
 struct MemoryPool<T> {
     blocks: Vec<T>,
@@ -272,6 +305,7 @@ impl<T> MemoryPool<T> {
 $$\text{MemoryCompression} = \text{Compact}[\text{AllocatedBlocks}]$$
 
 **算法 8.2** (压缩算法)
+
 ```rust
 fn compact_memory(heap: &mut Heap) {
     let mut new_heap = Heap::new();
@@ -314,6 +348,7 @@ $$\llbracket \text{Allocation} \rrbracket: \text{Size} \rightarrow \text{Address
 ### 10.1 系统级实现
 
 **策略 10.1** (系统调用)
+
 ```rust
 fn system_allocate(size: usize) -> *mut u8 {
     unsafe {
@@ -325,6 +360,7 @@ fn system_allocate(size: usize) -> *mut u8 {
 ### 10.2 用户级实现
 
 **策略 10.2** (用户级分配器)
+
 ```rust
 struct UserAllocator {
     arena: Arena,
@@ -353,4 +389,4 @@ impl Allocator for UserAllocator {
 
 *最后更新：2024年12月19日*
 *版本：1.0.0*
-*状态：内存模型理论形式化完成* 
+*状态：内存模型理论形式化完成*

@@ -2,16 +2,46 @@
 
 ## 目录
 
-1. [类型系统公理](#1-类型系统公理)
-2. [类型构造器理论](#2-类型构造器理论)
-3. [类型推导算法](#3-类型推导算法)
-4. [多态性理论](#4-多态性理论)
-5. [Trait 系统理论](#5-trait-系统理论)
-6. [生命周期理论](#6-生命周期理论)
-7. [类型安全证明](#7-类型安全证明)
-8. [编译时检查](#8-编译时检查)
-9. [类型系统扩展](#9-类型系统扩展)
-10. [形式化验证](#10-形式化验证)
+- [01. Rust 类型系统理论基础](#01-rust-类型系统理论基础)
+  - [目录](#目录)
+  - [1. 类型系统公理](#1-类型系统公理)
+    - [1.1 基本公理](#11-基本公理)
+    - [1.2 类型关系公理](#12-类型关系公理)
+  - [2. 类型构造器理论](#2-类型构造器理论)
+    - [2.1 基本类型构造器](#21-基本类型构造器)
+    - [2.2 高阶类型构造器](#22-高阶类型构造器)
+    - [2.3 类型构造器性质](#23-类型构造器性质)
+  - [3. 类型推导算法](#3-类型推导算法)
+    - [3.1 Hindley-Milner 系统](#31-hindley-milner-系统)
+    - [3.2 类型推导算法](#32-类型推导算法)
+    - [3.3 类型推导正确性](#33-类型推导正确性)
+  - [4. 多态性理论](#4-多态性理论)
+    - [4.1 参数多态](#41-参数多态)
+    - [4.2 特设多态](#42-特设多态)
+    - [4.3 子类型多态](#43-子类型多态)
+  - [5. Trait 系统理论](#5-trait-系统理论)
+    - [5.1 Trait 定义](#51-trait-定义)
+    - [5.2 Trait 实现](#52-trait-实现)
+    - [5.3 Trait 对象](#53-trait-对象)
+  - [6. 生命周期理论](#6-生命周期理论)
+    - [6.1 生命周期定义](#61-生命周期定义)
+    - [6.2 生命周期约束](#62-生命周期约束)
+    - [6.3 生命周期推导](#63-生命周期推导)
+  - [7. 类型安全证明](#7-类型安全证明)
+    - [7.1 类型安全定义](#71-类型安全定义)
+    - [7.2 进展定理](#72-进展定理)
+    - [7.3 保持定理](#73-保持定理)
+  - [8. 编译时检查](#8-编译时检查)
+    - [8.1 类型检查算法](#81-类型检查算法)
+    - [8.2 借用检查](#82-借用检查)
+  - [9. 类型系统扩展](#9-类型系统扩展)
+    - [9.1 高级类型](#91-高级类型)
+    - [9.2 类型级编程](#92-类型级编程)
+  - [10. 形式化验证](#10-形式化验证)
+    - [10.1 类型系统验证](#101-类型系统验证)
+    - [10.2 实现验证](#102-实现验证)
+    - [10.3 工具支持](#103-工具支持)
+  - [参考文献](#参考文献)
 
 ---
 
@@ -82,6 +112,7 @@ $$\frac{\Gamma \vdash e: \tau \quad \alpha \notin \text{FreeVars}(\Gamma)}{\Gamm
 ### 3.2 类型推导算法
 
 **算法 3.1** (W 算法)
+
 ```rust
 fn type_inference(expr: &Expr, env: &TypeEnv) -> Result<Type, TypeError> {
     match expr {
@@ -110,6 +141,7 @@ fn type_inference(expr: &Expr, env: &TypeEnv) -> Result<Type, TypeError> {
 $$\forall e \in \text{Expression}: \text{TypeInference}(e) = t \Rightarrow \text{Valid}(e, t)$$
 
 **证明**：
+
 1. 对表达式结构进行归纳
 2. 每个推导规则都保持类型安全
 3. 证毕
@@ -184,6 +216,7 @@ $$\forall r \in \text{Reference}: \text{ValidLifetime}(r) \Rightarrow \text{Safe
 ### 6.3 生命周期推导
 
 **算法 6.1** (生命周期推导)
+
 ```rust
 fn lifetime_inference(expr: &Expr) -> Result<Lifetime, LifetimeError> {
     match expr {
@@ -215,6 +248,7 @@ $$\text{TypeSafe}(e) = \forall \text{Context}: \text{Valid}(e, \text{Context})$$
 $$\forall e \in \text{Expression}: \text{TypeSafe}(e) \Rightarrow \text{Progress}(e)$$
 
 **证明**：
+
 1. 对表达式结构进行归纳
 2. 每个类型规则都保证进展
 3. 证毕
@@ -225,6 +259,7 @@ $$\forall e \in \text{Expression}: \text{TypeSafe}(e) \Rightarrow \text{Progress
 $$\forall e_1, e_2: e_1 \rightarrow e_2 \land \text{TypeSafe}(e_1) \Rightarrow \text{TypeSafe}(e_2)$$
 
 **证明**：
+
 1. 对归约规则进行归纳
 2. 每个归约都保持类型
 3. 证毕
@@ -236,6 +271,7 @@ $$\forall e_1, e_2: e_1 \rightarrow e_2 \land \text{TypeSafe}(e_1) \Rightarrow \
 ### 8.1 类型检查算法
 
 **算法 8.1** (类型检查)
+
 ```rust
 fn type_check(expr: &Expr, expected_type: &Type) -> Result<(), TypeError> {
     let inferred_type = type_inference(expr)?;
@@ -247,6 +283,7 @@ fn type_check(expr: &Expr, expected_type: &Type) -> Result<(), TypeError> {
 ### 8.2 借用检查
 
 **算法 8.2** (借用检查)
+
 ```rust
 fn borrow_check(expr: &Expr) -> Result<BorrowInfo, BorrowError> {
     match expr {
@@ -300,6 +337,7 @@ $$\text{ImplementationVerification}: \text{Implementation} \rightarrow \text{Cor
 ### 10.3 工具支持
 
 **工具 10.1** (形式化验证工具)
+
 - RustBelt
 - Oxide
 - Prusti
@@ -318,4 +356,4 @@ $$\text{ImplementationVerification}: \text{Implementation} \rightarrow \text{Cor
 
 *最后更新：2024年12月19日*
 *版本：1.0.0*
-*状态：类型系统理论形式化完成* 
+*状态：类型系统理论形式化完成*

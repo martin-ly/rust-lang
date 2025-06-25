@@ -80,7 +80,7 @@ $$\frac{\mathcal{E}(e_1, \rho_1) \quad \rho_1 = \text{false}}{\mathcal{E}(\text{
 
 - [表达式求值](../../20_theoretical_perspectives/02_formal_semantics.md#表达式求值) (模块 20)
 - [操作语义](../../20_theoretical_perspectives/03_operational_semantics.md#小步语义) (模块 20)
-- [短路求值](#短路求值) (本文件)
+- [短路求值](短路求值) (本文件)
 
 ### 3.3 安全性证明 {#if安全性证明}
 
@@ -465,7 +465,7 @@ fn dead_code_elimination(cfg: &mut CFG) {
 - [进度定理](../../02_type_system/04_type_safety.md#进度定理) (模块 02)
 - [保存定理](../../02_type_system/04_type_safety.md#保存定理) (模块 02)
 - [类型系统健全性](../../02_type_system/04_type_safety.md#类型系统健全性) (模块 02)
-- [if表达式安全性](#if表达式类型安全) (本文件)
+- [if表达式安全性](if表达式类型安全) (本文件)
 - [match表达式安全性](../02_pattern_matching_system.md#模式匹配正确性) (本模块)
 
 ### 8.2 内存安全证明 {#内存安全证明}
@@ -615,7 +615,7 @@ fn transition(current: State, event: Event) -> State {
 - [状态转换系统](../../20_theoretical_perspectives/03_state_transition_systems.md#状态转换系统) (模块 20)
 - [元组模式](../02_pattern_matching_system.md#元组模式) (本模块)
 - [枚举模式](../02_pattern_matching_system.md#枚举模式) (本模块)
-- [模式匹配穷尽性](#模式穷尽性) (本文件)
+- [模式匹配穷尽性](模式穷尽性) (本文件)
 - [通配符模式](../02_pattern_matching_system.md#通配符模式) (本模块)
 
 ## 11. 形式化验证 {#形式化验证}
@@ -668,7 +668,7 @@ fn model_check(program: &Program, property: &Property) -> bool {
 
 - [模型检查](../../23_security_verification/05_model_checking.md#模型检查) (模块 23)
 - [状态空间探索](../../08_algorithms/02_search_algorithms.md#状态空间探索) (模块 08)
-- [可达性分析](#可达性分析) (本文件)
+- [可达性分析](可达性分析) (本文件)
 - [时序逻辑](../../20_theoretical_perspectives/03_formal_logic.md#时序逻辑) (模块 20)
 
 ### 11.2 定理证明 {#定理证明}

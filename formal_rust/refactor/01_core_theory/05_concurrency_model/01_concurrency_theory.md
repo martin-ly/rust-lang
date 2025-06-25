@@ -2,16 +2,45 @@
 
 ## 目录
 
-1. [并发模型公理](#1-并发模型公理)
-2. [线程理论](#2-线程理论)
-3. [同步原语理论](#3-同步原语理论)
-4. [数据竞争预防](#4-数据竞争预防)
-5. [内存序理论](#5-内存序理论)
-6. [异步编程模型](#6-异步编程模型)
-7. [并发安全证明](#7-并发安全证明)
-8. [死锁预防](#8-死锁预防)
-9. [性能分析](#9-性能分析)
-10. [形式化验证](#10-形式化验证)
+- [01. Rust 并发模型理论](#01-rust-并发模型理论)
+  - [目录](#目录)
+  - [1. 并发模型公理](#1-并发模型公理)
+    - [1.1 基本公理](#11-基本公理)
+    - [1.2 并发操作公理](#12-并发操作公理)
+  - [2. 线程理论](#2-线程理论)
+    - [2.1 线程定义](#21-线程定义)
+    - [2.2 线程操作](#22-线程操作)
+    - [2.3 线程调度](#23-线程调度)
+  - [3. 同步原语理论](#3-同步原语理论)
+    - [3.1 互斥锁](#31-互斥锁)
+    - [3.2 读写锁](#32-读写锁)
+    - [3.3 条件变量](#33-条件变量)
+  - [4. 数据竞争预防](#4-数据竞争预防)
+    - [4.1 数据竞争定义](#41-数据竞争定义)
+    - [4.2 所有权防止数据竞争](#42-所有权防止数据竞争)
+    - [4.3 同步防止数据竞争](#43-同步防止数据竞争)
+  - [5. 内存序理论](#5-内存序理论)
+    - [5.1 内存序定义](#51-内存序定义)
+    - [5.2 原子操作](#52-原子操作)
+    - [5.3 内存屏障](#53-内存屏障)
+  - [6. 异步编程模型](#6-异步编程模型)
+    - [6.1 异步任务](#61-异步任务)
+    - [6.2 异步运行时](#62-异步运行时)
+    - [6.3 异步流](#63-异步流)
+  - [7. 并发安全证明](#7-并发安全证明)
+    - [7.1 安全性质](#71-安全性质)
+    - [7.2 安全证明](#72-安全证明)
+  - [8. 死锁预防](#8-死锁预防)
+    - [8.1 死锁定义](#81-死锁定义)
+    - [8.2 死锁预防策略](#82-死锁预防策略)
+  - [9. 性能分析](#9-性能分析)
+    - [9.1 并发性能指标](#91-并发性能指标)
+    - [9.2 性能优化](#92-性能优化)
+  - [10. 形式化验证](#10-形式化验证)
+    - [10.1 模型检查](#101-模型检查)
+    - [10.2 定理证明](#102-定理证明)
+    - [10.3 工具支持](#103-工具支持)
+  - [参考文献](#参考文献)
 
 ---
 
@@ -59,6 +88,7 @@ $$\text{Join}(t) \Rightarrow \text{Wait}(t) \land \text{GetResult}(t)$$
 ### 2.3 线程调度
 
 **算法 2.1** (线程调度)
+
 ```rust
 fn schedule_threads(threads: &mut Vec<Thread>) {
     loop {
@@ -88,6 +118,7 @@ $$\text{Lock}(m) \Rightarrow \text{Acquire}(m) \land \text{Exclusive}(m)$$
 $$\text{Unlock}(m) \Rightarrow \text{Release}(m) \land \text{Free}(m)$$
 
 **算法 3.1** (互斥锁实现)
+
 ```rust
 struct Mutex<T> {
     locked: AtomicBool,
@@ -124,6 +155,7 @@ $$\text{WriteLock}(r) \Rightarrow \text{Exclusive}(r)$$
 $$\text{CondVar} = \text{WaitQueue} \times \text{Predicate}$$
 
 **算法 3.2** (条件变量使用)
+
 ```rust
 fn producer_consumer() {
     let mutex = Mutex::new(Vec::new());
@@ -165,6 +197,7 @@ $$\text{NoDataRace}(p) = \forall t_1, t_2, v: \neg \text{DataRace}(t_1, t_2, v)$
 $$\text{OwnershipSafe}(p) \Rightarrow \text{NoDataRace}(p)$$
 
 **证明**：
+
 1. 所有权系统保证每个值有唯一所有者
 2. 借用系统防止并发可变访问
 3. 证毕
@@ -192,6 +225,7 @@ $$\text{Relaxed} \prec \text{Acquire} \prec \text{Release} \prec \text{AcqRel} \
 $$\text{Atomic}[T] = \text{Uninterruptible}[T] \times \text{MemoryOrder}$$
 
 **算法 5.1** (原子操作)
+
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
 
@@ -214,6 +248,7 @@ let old_value = counter.compare_exchange(
 $$\text{MemoryBarrier} = \text{Ordering}[\text{MemoryAccess}]$$
 
 **算法 5.2** (内存屏障使用)
+
 ```rust
 use std::sync::atomic::{fence, Ordering};
 
@@ -243,6 +278,7 @@ if ready.load(Ordering::Acquire) {
 $$\text{AsyncTask} = \text{Future} \times \text{Executor}$$
 
 **定义 6.2** (Future trait)
+
 ```rust
 trait Future {
     type Output;
@@ -256,6 +292,7 @@ trait Future {
 $$\text{AsyncRuntime} = \text{Executor} \times \text{Reactor} \times \text{TaskQueue}$$
 
 **算法 6.1** (异步执行)
+
 ```rust
 async fn async_function() -> i32 {
     // 异步操作
@@ -276,6 +313,7 @@ async fn main() {
 $$\text{AsyncStream}[T] = \text{Stream}[T] \times \text{AsyncIterator}$$
 
 **算法 6.2** (异步流处理)
+
 ```rust
 use tokio_stream::{self, StreamExt};
 
@@ -309,6 +347,7 @@ $$\forall t_1, t_2 \in \text{Thread}: \neg \text{Deadlock}(t_1, t_2)$$
 $$\text{OwnershipSafe}(p) \land \text{ProperlySynchronized}(p) \Rightarrow \text{ConcurrentSafe}(p)$$
 
 **证明**：
+
 1. 所有权系统防止数据竞争
 2. 同步原语保证正确交互
 3. 证毕
@@ -331,6 +370,7 @@ $$\text{ResourceOrdering} = \text{TotalOrder}[\text{Resource}]$$
 $$\text{Timeout}(op) = \text{Wait}(op, t) \land \text{Timeout}(t)$$
 
 **算法 8.1** (死锁预防)
+
 ```rust
 fn safe_lock_ordering(mutex1: &Mutex<i32>, mutex2: &Mutex<i32>) {
     // 按地址排序锁定
@@ -386,6 +426,7 @@ $$\text{TheoremProving}: \text{ConcurrentProgram} \rightarrow \text{CorrectnessP
 ### 10.3 工具支持
 
 **工具 10.1** (形式化验证工具)
+
 - TLA+
 - SPIN
 - CBMC
@@ -405,4 +446,4 @@ $$\text{TheoremProving}: \text{ConcurrentProgram} \rightarrow \text{CorrectnessP
 
 *最后更新：2024年12月19日*
 *版本：1.0.0*
-*状态：并发模型理论形式化完成* 
+*状态：并发模型理论形式化完成*

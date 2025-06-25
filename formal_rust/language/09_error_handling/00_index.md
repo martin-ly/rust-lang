@@ -11,9 +11,9 @@
 
 ### 2. 参考资料
 
-5. [代码示例](05_examples.md)
-6. [定理证明](06_theorems.md)
-7. [参考文献](07_references.md)
+1. [代码示例](05_examples.md)
+2. [定理证明](06_theorems.md)
+3. [参考文献](07_references.md)
 
 ## 主题概述
 
