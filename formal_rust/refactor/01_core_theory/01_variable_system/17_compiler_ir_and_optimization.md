@@ -1,5 +1,15 @@
 # 17. MIR与编译器优化中的所有权分析（17_compiler_ir_and_optimization）
 
+## 目录
+
+- [17. MIR与编译器优化中的所有权分析（17_compiler_ir_and_optimization）](#17-mir与编译器优化中的所有权分析17_compiler_ir_and_optimization)
+  - [目录](#目录)
+  - [17.1 MIR结构与作用](#171-mir结构与作用)
+  - [17.2 所有权与借用分析](#172-所有权与借用分析)
+  - [17.3 编译器优化策略](#173-编译器优化策略)
+  - [17.4 批判性分析](#174-批判性分析)
+  - [17.5 交叉引用](#175-交叉引用)
+
 ## 17.1 MIR结构与作用
 
 - 17.1.1 MIR（Mid-level Intermediate Representation）简介
@@ -27,7 +37,7 @@
 
 - [类型/所有权系统的形式化证明与验证工具](15_formal_proof_and_verification.md)
 - [状态机与可视化](16_state_machine_and_visualization.md)
-- [目录](index.md)
+- [index.md](../00_master_index.md)
 
 ---
 

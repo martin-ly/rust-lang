@@ -1,5 +1,14 @@
 # 16. 状态机与可视化（16_state_machine_and_visualization）
 
+## 目录
+
+- [16. 状态机与可视化（16_state_machine_and_visualization）](#16-状态机与可视化16_state_machine_and_visualization)
+  - [目录](#目录)
+  - [16.1 状态机建模](#161-状态机建模)
+  - [16.2 图表与可视化](#162-图表与可视化)
+  - [16.3 批判性分析](#163-批判性分析)
+  - [16.4 交叉引用](#164-交叉引用)
+
 ## 16.1 状态机建模
 
 - 16.1.1 异步函数的状态机转换
@@ -27,7 +36,7 @@ graph TD;
 
 - [可视化与思维导图](10_visualization_and_mindmap.md)
 - [交互式练习与思考题](14_interactive_exercises.md)
-- [目录](index.md)
+- [index.md](../00_master_index.md)
 
 ---
 
