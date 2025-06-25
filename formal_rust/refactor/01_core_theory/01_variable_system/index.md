@@ -8,6 +8,17 @@
 4. [对称性原理与Rust设计](04_symmetry_principle.md)
 5. [函数式与所有权交互](05_function_ownership_interaction.md)
 6. [实际案例分析与多视角整合](06_case_studies.md)
+7. [理论前沿与跨语言比较](07_theory_frontier_comparison.md)
+8. [Rust在新兴领域的应用](08_rust_in_new_domains.md)
+9. [分层学习路径与交互式内容](09_learning_path_and_interactive.md)
+10. [可视化与思维导图](10_visualization_and_mindmap.md)
+11. [文档模板与质量标准](11_template_and_quality_standard.md)
+12. [术语映射与统一词汇表](12_concept_mapping_and_glossary.md)
+13. [实际项目案例分析](13_project_case_analysis.md)
+14. [交互式练习与思考题](14_interactive_exercises.md)
+15. [类型/所有权系统的形式化证明与验证工具](15_formal_proof_and_verification.md)
+16. [状态机与可视化](16_state_machine_and_visualization.md)
+17. [MIR与编译器优化中的所有权分析](17_compiler_ir_and_optimization.md)
 
 ---
 
