@@ -24,6 +24,7 @@
 $$\text{Bridge} : \mathcal{A} \times \mathcal{I} \rightarrow \mathcal{S}$$
 
 其中：
+
 - $\mathcal{A}$ 为抽象层次集合
 - $\mathcal{I}$ 为实现层次集合
 - $\mathcal{S}$ 为系统集合
@@ -43,7 +44,7 @@ class RefinedAbstraction where
 
 ### 1.3 模式结构
 
-```
+```text
 Abstraction
 ├── implementor: Implementor
 └── operation() -> String
@@ -75,6 +76,7 @@ $$B : \mathcal{A} \times \mathcal{I} \rightarrow \mathcal{S}$$
 $$S : \mathcal{S} \rightarrow \mathcal{A} \times \mathcal{I}$$
 
 其中对于任意系统 $s \in \mathcal{S}$：
+
 - $S(s) = (a, i)$ 其中 $a \in \mathcal{A}, i \in \mathcal{I}$
 - $a$ 和 $i$ 可以独立变化
 
@@ -163,6 +165,7 @@ $$\frac{A : \text{Abstraction} \quad A \vdash \text{operation} : () \rightarrow 
 $$F : \mathcal{C}_A \times \mathcal{C}_I \rightarrow \mathcal{C}_S$$
 
 其中：
+
 - $\mathcal{C}_A$ 是抽象范畴
 - $\mathcal{C}_I$ 是实现范畴
 - $\mathcal{C}_S$ 是系统范畴
@@ -300,11 +303,13 @@ $$\text{TypeOf}(A.\text{operation}()) = \text{ExpectedType}(I.\text{operation\_i
 ### 6.2 性能分析
 
 **时间复杂度**：
+
 - 抽象操作：$O(1)$
 - 实现委托：$O(1)$
 - 桥接创建：$O(1)$
 
 **空间复杂度**：
+
 - 抽象实例：$O(1)$
 - 实现实例：$O(1)$
 - 桥接连接：$O(1)$
@@ -315,11 +320,13 @@ $$\text{TypeOf}(A.\text{operation}()) = \text{ExpectedType}(I.\text{operation\_i
 
 **命题 7.1**：桥接正确性
 对于任意抽象 $a$ 和实现 $i$，桥接 $B(a, i)$ 满足：
+
 1. 抽象和实现可以独立变化
 2. 桥接提供了稳定的接口
 3. 系统行为由抽象和实现的组合决定
 
 **证明**：
+
 1. 抽象通过组合持有实现的引用
 2. 抽象的方法委托给实现的方法
 3. 抽象和实现通过接口解耦
@@ -331,6 +338,7 @@ $$\text{TypeOf}(A.\text{operation}()) = \text{ExpectedType}(I.\text{operation\_i
 抽象和实现可以独立地变化而不影响对方。
 
 **证明**：
+
 1. 抽象只依赖实现的接口
 2. 实现不依赖抽象的具体实现
 3. 通过桥接模式，两者解耦
@@ -454,6 +462,7 @@ impl DataAccess for UserDataAccess {
 ---
 
 **参考文献**：
+
 1. Gamma, E., et al. "Design Patterns: Elements of Reusable Object-Oriented Software"
 2. Pierce, B. C. "Types and Programming Languages"
-3. Mac Lane, S. "Categories for the Working Mathematician" 
+3. Mac Lane, S. "Categories for the Working Mathematician"

@@ -24,6 +24,7 @@
 $$\text{Proxy} : \mathcal{C} \times \mathcal{S} \rightarrow \mathcal{P}$$
 
 其中：
+
 - $\mathcal{S}$ 为真实主题集合
 - $\mathcal{P}$ 为代理集合
 - $\mathcal{C}$ 为客户端集合
@@ -66,6 +67,7 @@ $$P : \mathcal{C} \times \mathcal{S} \rightarrow \mathcal{P}$$
 $$A : \mathcal{P} \times \mathcal{C} \rightarrow \text{Bool}$$
 
 其中对于任意代理 $p$ 和客户端 $c$：
+
 - $A(p, c) = \text{true}$ 表示允许访问
 - $A(p, c) = \text{false}$ 表示拒绝访问
 
@@ -153,6 +155,7 @@ $$\frac{P : \text{Proxy} \quad P \vdash \text{request} : () \rightarrow \text{St
 $$F : \mathcal{C}_C \times \mathcal{C}_S \rightarrow \mathcal{C}_P$$
 
 其中：
+
 - $\mathcal{C}_C$ 是客户端范畴
 - $\mathcal{C}_S$ 是主题范畴
 - $\mathcal{C}_P$ 是代理范畴
@@ -368,11 +371,13 @@ $$\text{TypeOf}(P.\text{request}()) = \text{ExpectedType}(\text{String})$$
 ### 6.2 性能分析
 
 **时间复杂度**：
+
 - 代理操作：$O(1)$
 - 访问控制：$O(1)$
 - 对象加载：$O(1)$
 
 **空间复杂度**：
+
 - 代理实例：$O(1)$
 - 真实对象：$O(1)$
 - 缓存存储：$O(n)$，其中 $n$ 为缓存项数量
@@ -383,11 +388,13 @@ $$\text{TypeOf}(P.\text{request}()) = \text{ExpectedType}(\text{String})$$
 
 **命题 7.1**：代理正确性
 对于任意客户端 $c$ 和主题 $s$，代理 $P(c, s)$ 满足：
+
 1. 代理与主题实现相同的接口
 2. 代理控制对主题的访问
 3. 代理可以添加额外的功能
 
 **证明**：
+
 1. 代理实现了与主题相同的 trait
 2. 代理在调用主题方法前进行访问控制
 3. 代理可以在调用前后添加额外逻辑
@@ -399,6 +406,7 @@ $$\text{TypeOf}(P.\text{request}()) = \text{ExpectedType}(\text{String})$$
 代理模式提供了有效的访问控制机制。
 
 **证明**：
+
 1. 代理实现了访问控制逻辑
 2. 只有通过代理才能访问真实对象
 3. 代理可以根据条件决定是否允许访问
@@ -556,6 +564,7 @@ impl DatabaseConnection for ConnectionPool {
 ---
 
 **参考文献**：
+
 1. Gamma, E., et al. "Design Patterns: Elements of Reusable Object-Oriented Software"
 2. Pierce, B. C. "Types and Programming Languages"
-3. Mac Lane, S. "Categories for the Working Mathematician" 
+3. Mac Lane, S. "Categories for the Working Mathematician"

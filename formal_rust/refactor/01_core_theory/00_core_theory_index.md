@@ -7,6 +7,8 @@
   - [1. 理论体系概述](#1-理论体系概述)
     - [1.1 核心理论构成](#11-核心理论构成)
     - [1.2 理论层次结构](#12-理论层次结构)
+    - [1.3 多模态理论结构图](#13-多模态理论结构图)
+    - [1.4 批判性分析与未来展望](#14-批判性分析与未来展望)
   - [2. 模块结构](#2-模块结构)
     - [2.1 语言哲学模块](#21-语言哲学模块)
     - [2.2 类型系统模块](#22-类型系统模块)
@@ -14,6 +16,7 @@
     - [2.4 所有权系统模块](#24-所有权系统模块)
     - [2.5 并发模型模块](#25-并发模型模块)
     - [2.6 变量系统模块](#26-变量系统模块)
+    - [2.7 交叉引用与工程映射](#27-交叉引用与工程映射)
   - [3. 理论关联](#3-理论关联)
     - [3.1 理论依赖关系](#31-理论依赖关系)
     - [3.2 交叉引用矩阵](#32-交叉引用矩阵)
@@ -44,9 +47,11 @@
 
 ### 1.1 核心理论构成
 
-Rust 核心理论体系由五个相互关联的理论模块构成：
+Rust 核心理论体系由六个相互关联的理论模块构成：
 
-$$\text{RustCoreTheory} = \text{Philosophy} \times \text{TypeSystem} \times \text{MemoryModel} \times \text{Ownership} \times \text{Concurrency}$$
+$$
+\text{RustCoreTheory} = \text{Philosophy} \times \text{TypeSystem} \times \text{MemoryModel} \times \text{Ownership} \times \text{Concurrency} \times \text{VariableSystem}
+$$
 
 ### 1.2 理论层次结构
 
@@ -57,27 +62,49 @@ graph TD
     A --> D[内存模型]
     A --> E[所有权系统]
     A --> F[并发模型]
-    
+    A --> G[变量系统]
     B --> B1[形式化哲学基础]
     B --> B2[停机问题理论]
     B --> B3[设计哲学]
-    
     C --> C1[类型系统公理]
     C --> C2[类型推导算法]
     C --> C3[Trait 系统]
-    
     D --> D1[内存布局理论]
     D --> D2[分配策略]
     D --> D3[垃圾回收]
-    
     E --> E1[所有权公理]
     E --> E2[借用系统]
     E --> E3[生命周期]
-    
     F --> F1[并发模型公理]
     F --> F2[同步原语]
     F --> F3[异步编程]
+    G --> G1[变量公理]
+    G --> G2[变量推导]
+    G --> G3[变量生命周期]
 ```
+
+### 1.3 多模态理论结构图
+
+- **Graphviz 结构图**：
+
+```mermaid
+graph LR
+    PHI[哲学] --> TS[类型系统]
+    PHI --> OWN[所有权]
+    TS --> MEM[内存模型]
+    OWN --> MEM
+    OWN --> CON[并发]
+    MEM --> CON
+    TS --> VAR[变量系统]
+    OWN --> VAR
+    MEM --> VAR
+    CON --> VAR
+```
+
+### 1.4 批判性分析与未来展望
+
+- **批判性分析**：Rust 理论体系强调安全性与性能，但理论与工程实现间仍有鸿沟。类型系统与所有权模型虽强大，但对高阶抽象和异构系统支持有限。
+- **未来展望**：理论体系将持续扩展，涵盖依赖类型、分布式并发、形式化验证等前沿方向。
 
 ---
 
@@ -85,93 +112,54 @@ graph TD
 
 ### 2.1 语言哲学模块
 
-**文件**: [01_rust_philosophy.md](01_language_foundations/01_rust_philosophy.md)
+**文件**: [01_language_foundations/01_rust_philosophy.md](01_language_foundations/01_rust_philosophy.md)
 
-**核心内容**:
-
-- 形式化哲学基础
-- 停机问题与计算理论
-- 类型系统哲学
-- 所有权系统哲学
-- 安全性与性能平衡
-
-**关键公理**:
-$$\text{Safety} \land \text{Performance} \Rightarrow \text{ZeroCostAbstraction}$$
+- 形式化哲学基础、停机问题与计算理论、类型系统哲学、所有权系统哲学、安全性与性能平衡
+- **关键公理**: $\text{Safety} \land \text{Performance} \Rightarrow \text{ZeroCostAbstraction}$
 
 ### 2.2 类型系统模块
 
-**文件**: [01_type_theory_foundations.md](02_type_system/01_type_theory_foundations.md)
+**文件**: [02_type_system/01_type_theory_foundations.md](02_type_system/01_type_theory_foundations.md)
 
-**核心内容**:
-
-- 类型系统公理
-- 类型构造器理论
-- 类型推导算法
-- 多态性理论
-- Trait 系统理论
-
-**关键定理**:
-$$\forall e \in \text{Expression}: \text{TypeSafe}(e) \Rightarrow \text{MemorySafe}(e)$$
+- 类型系统公理、类型构造器理论、类型推导算法、多态性理论、Trait 系统理论
+- **关键定理**: $\forall e \in \text{Expression}: \text{TypeSafe}(e) \Rightarrow \text{MemorySafe}(e)$
 
 ### 2.3 内存模型模块
 
-**文件**: [01_memory_model_theory.md](03_memory_model/01_memory_model_theory.md)
+**文件**: [03_memory_model/01_memory_model_theory.md](03_memory_model/01_memory_model_theory.md)
 
-**核心内容**:
-
-- 内存模型公理
-- 内存布局理论
-- 栈与堆管理
-- 内存分配策略
-- 垃圾回收理论
-
-**关键定义**:
-$$\text{MemorySpace} = \text{Stack} \cup \text{Heap} \cup \text{Static} \cup \text{Code}$$
+- 内存模型公理、内存布局理论、栈与堆管理、内存分配策略、垃圾回收理论
+- **关键定义**: $\text{MemorySpace} = \text{Stack} \cup \text{Heap} \cup \text{Static} \cup \text{Code}$
 
 ### 2.4 所有权系统模块
 
-**文件**: [01_ownership_theory.md](04_ownership_system/01_ownership_theory.md)
+**文件**: [04_ownership_system/01_ownership_theory.md](04_ownership_system/01_ownership_theory.md)
 
-**核心内容**:
-
-- 所有权公理系统
-- 借用系统理论
-- 生命周期理论
-- 内存安全证明
-- 借用检查算法
-
-**关键公理**:
-$$\forall v \in \text{Value}: \exists! o \in \text{Owner}: \text{Owns}(o, v)$$
+- 所有权公理系统、借用系统理论、生命周期理论、内存安全证明、借用检查算法
+- **关键公理**: $\forall v \in \text{Value}: \exists! o \in \text{Owner}: \text{Owns}(o, v)$
 
 ### 2.5 并发模型模块
 
-**文件**: [01_concurrency_theory.md](05_concurrency_model/01_concurrency_theory.md)
+**文件**: [05_concurrency_model/01_concurrency_theory.md](05_concurrency_model/01_concurrency_theory.md)
 
-**核心内容**:
-
-- 并发模型公理
-- 线程理论
-- 同步原语理论
-- 数据竞争预防
-- 异步编程模型
-
-**关键定理**:
-$$\text{OwnershipSafe}(p) \Rightarrow \text{NoDataRace}(p)$$
+- 并发模型公理、线程理论、同步原语理论、数据竞争预防、异步编程模型
+- **关键定理**: $\text{OwnershipSafe}(p) \Rightarrow \text{NoDataRace}(p)$
 
 ### 2.6 变量系统模块
 
-**文件**: [01_variable_system.md](01_variable_system/01_variable_system.md)
+**文件**: [01_variable_system/index.md](01_variable_system/index.md)
 
-**核心内容**:
+- 变量系统公理、变量构造器理论、变量推导算法、多态性理论、Trait 系统理论
+- **关键定理**: $\forall e \in \text{Expression}: \text{VariableSafe}(e) \Rightarrow \text{MemorySafe}(e)$
 
-- 变量系统公理
-- 变量构造器理论
-- 变量推导算法
-- 多态性理论
-- Trait 系统理论
+### 2.7 交叉引用与工程映射
 
-**关键定理**:
-$$\forall e \in \text{Expression}: \text{VariableSafe}(e) \Rightarrow \text{MemorySafe}(e)$$
+- [语言哲学](01_language_foundations/01_rust_philosophy.md)
+- [类型系统](02_type_system/01_type_theory_foundations.md)
+- [内存模型](03_memory_model/01_memory_model_theory.md)
+- [所有权系统](04_ownership_system/01_ownership_theory.md)
+- [并发模型](05_concurrency_model/01_concurrency_theory.md)
+- [变量系统](01_variable_system/index.md)
 
 ---
 
@@ -187,6 +175,10 @@ graph LR
     C --> D
     C --> E[并发模型]
     D --> E
+    B --> F[变量系统]
+    C --> F
+    D --> F
+    E --> F
 ```
 
 ### 3.2 交叉引用矩阵
@@ -206,7 +198,7 @@ graph LR
 所有核心理论模块满足：
 $$\text{Consistent}(\text{RustCoreTheory})$$
 
-**证明**:
+**证明**：
 
 1. 各模块基于相同的哲学基础
 2. 类型系统与所有权系统协调一致

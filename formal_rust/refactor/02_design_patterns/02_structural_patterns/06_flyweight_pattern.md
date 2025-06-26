@@ -24,6 +24,7 @@
 $$\text{Flyweight} : \mathcal{S} \times \mathcal{U} \rightarrow \mathcal{O}$$
 
 其中：
+
 - $\mathcal{S}$ 为共享状态集合
 - $\mathcal{U}$ 为唯一状态集合
 - $\mathcal{O}$ 为目标对象集合
@@ -156,6 +157,7 @@ $$\frac{F : \text{Flyweight} \quad F \vdash \text{operation} : \text{String} \ri
 $$F : \mathcal{C}_S \times \mathcal{C}_U \rightarrow \mathcal{C}_O$$
 
 其中：
+
 - $\mathcal{C}_S$ 是共享状态范畴
 - $\mathcal{C}_U$ 是唯一状态范畴
 - $\mathcal{C}_O$ 是对象范畴
@@ -280,11 +282,13 @@ $$\text{TypeOf}(F.\text{operation}(u)) = \text{ExpectedType}(\text{String})$$
 ### 6.2 性能分析
 
 **时间复杂度**：
+
 - 享元创建：$O(1)$
 - 享元查找：$O(1)$（使用 HashMap）
 - 享元操作：$O(1)$
 
 **空间复杂度**：
+
 - 享元存储：$O(n)$，其中 $n$ 为唯一享元数量
 - 状态存储：$O(m)$，其中 $m$ 为对象数量
 
@@ -294,11 +298,13 @@ $$\text{TypeOf}(F.\text{operation}(u)) = \text{ExpectedType}(\text{String})$$
 
 **命题 7.1**：享元正确性
 对于任意共享状态 $s$ 和唯一状态 $u$，享元 $F(s, u)$ 满足：
+
 1. 共享状态被多个对象共享
 2. 唯一状态是每个对象独有的
 3. 享元对象被正确复用
 
 **证明**：
+
 1. 工厂使用 HashMap 缓存享元对象
 2. 相同共享状态的对象共享同一个享元
 3. 唯一状态通过参数传递
@@ -310,6 +316,7 @@ $$\text{TypeOf}(F.\text{operation}(u)) = \text{ExpectedType}(\text{String})$$
 享元模式显著减少了内存使用。
 
 **证明**：
+
 1. 共享状态只存储一份
 2. 唯一状态通过参数传递
 3. 相同共享状态的对象共享享元
@@ -451,6 +458,7 @@ impl Forest {
 ---
 
 **参考文献**：
+
 1. Gamma, E., et al. "Design Patterns: Elements of Reusable Object-Oriented Software"
 2. Pierce, B. C. "Types and Programming Languages"
-3. Mac Lane, S. "Categories for the Working Mathematician" 
+3. Mac Lane, S. "Categories for the Working Mathematician"

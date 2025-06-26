@@ -24,6 +24,7 @@
 $$\text{Builder} : \mathcal{S}^* \rightarrow \mathcal{O}$$
 
 其中：
+
 - $\mathcal{S}^*$ 表示构建步骤的序列
 - $\mathcal{O}$ 为目标对象集合
 
@@ -73,6 +74,7 @@ $$\forall \sigma_1, \sigma_2 \in \mathcal{S}^* : \sigma_1 \subseteq \sigma_2 \Ri
 
 **定义 2.3**：步骤依赖图
 步骤依赖图 $G = (V, E)$ 其中：
+
 - $V = \mathcal{S}$ 为步骤集合
 - $E = \{(s_i, s_j) | s_i \text{ 必须在 } s_j \text{ 之前执行}\}$
 
@@ -125,6 +127,7 @@ $$\frac{B : \text{Builder} \quad B \vdash \text{build} : () \rightarrow P}{B.\te
 $$F : \mathcal{C} \rightarrow \mathcal{D}$$
 
 其中：
+
 - $\mathcal{C}$ 是构建步骤范畴
 - $\mathcal{D}$ 是产品范畴
 
@@ -238,11 +241,13 @@ $$\text{TypeOf}(B.\text{build}()) = \text{ExpectedType}(P)$$
 ### 6.2 性能分析
 
 **时间复杂度**：
+
 - 构建步骤：$O(1)$ 每步
 - 构建完成：$O(n)$，其中 $n$ 为步骤数
 - 重置操作：$O(1)$
 
 **空间复杂度**：
+
 - 建造者实例：$O(1)$
 - 产品实例：$O(m)$，其中 $m$ 为产品属性数
 
@@ -254,6 +259,7 @@ $$\text{TypeOf}(B.\text{build}()) = \text{ExpectedType}(P)$$
 对于任意有效的构建序列 $\sigma$，建造者能够生成完整的产品。
 
 **证明**：
+
 1. 设 $\sigma = \langle s_1, s_2, \ldots, s_n \rangle$ 为有效构建序列
 2. 根据定义，每个步骤 $s_i$ 都有对应的设置方法
 3. 建造者按顺序执行所有步骤
@@ -266,6 +272,7 @@ $$\text{TypeOf}(B.\text{build}()) = \text{ExpectedType}(P)$$
 建造者模式允许灵活的步骤顺序，只要满足依赖约束。
 
 **证明**：
+
 1. 建造者模式使用链式调用
 2. 每个步骤都是独立的操作
 3. 只要满足依赖关系，步骤顺序可以调整
@@ -324,6 +331,7 @@ trait ConfigBuilder {
 ---
 
 **参考文献**：
+
 1. Gamma, E., et al. "Design Patterns: Elements of Reusable Object-Oriented Software"
 2. Pierce, B. C. "Types and Programming Languages"
-3. Mac Lane, S. "Categories for the Working Mathematician" 
+3. Mac Lane, S. "Categories for the Working Mathematician"

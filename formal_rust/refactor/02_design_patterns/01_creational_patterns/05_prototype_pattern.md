@@ -24,6 +24,7 @@
 $$\text{Prototype} : \mathcal{P} \rightarrow \mathcal{O}$$
 
 其中：
+
 - $\mathcal{P} \subseteq \mathcal{O}$ 为原型对象集合
 - $\mathcal{O}$ 为目标对象集合
 
@@ -56,6 +57,7 @@ ConcretePrototype
 $$C_s : \mathcal{O} \rightarrow \mathcal{O}$$
 
 其中对于对象 $o \in \mathcal{O}$：
+
 - $C_s(o)$ 创建一个新对象
 - $C_s(o)$ 的引用类型字段指向与原对象相同的地址
 
@@ -64,6 +66,7 @@ $$C_s : \mathcal{O} \rightarrow \mathcal{O}$$
 $$C_d : \mathcal{O} \rightarrow \mathcal{O}$$
 
 其中对于对象 $o \in \mathcal{O}$：
+
 - $C_d(o)$ 创建一个新对象
 - $C_d(o)$ 的所有字段都是独立的副本
 
@@ -240,11 +243,13 @@ $$\text{TypeOf}(P.\text{clone}()) = \text{TypeOf}(P)$$
 ### 6.2 性能分析
 
 **时间复杂度**：
+
 - 浅克隆：$O(1)$
 - 深克隆：$O(n)$，其中 $n$ 为对象大小
 - 注册原型：$O(1)$
 
 **空间复杂度**：
+
 - 原型存储：$O(m)$，其中 $m$ 为原型数量
 - 克隆对象：$O(n)$，其中 $n$ 为对象大小
 
@@ -254,11 +259,13 @@ $$\text{TypeOf}(P.\text{clone}()) = \text{TypeOf}(P)$$
 
 **命题 7.1**：克隆正确性
 对于任意原型对象 $o$，其克隆 $C(o)$ 满足：
+
 1. $C(o) \neq o$（不同的对象）
 2. $\text{TypeOf}(C(o)) = \text{TypeOf}(o)$（相同类型）
 3. $\text{State}(C(o)) = \text{State}(o)$（相同状态）
 
 **证明**：
+
 1. 根据克隆定义，$C(o)$ 创建新对象，因此 $C(o) \neq o$
 2. 克隆操作保持类型不变，因此类型相同
 3. 克隆操作复制所有状态，因此状态相同。$\square$
@@ -269,6 +276,7 @@ $$\text{TypeOf}(P.\text{clone}()) = \text{TypeOf}(P)$$
 对于任意对象 $o$，其深克隆 $C_d(o)$ 是唯一的。
 
 **证明**：
+
 1. 深克隆创建完全独立的副本
 2. 所有引用都被递归地克隆
 3. 因此深克隆结果是唯一的。$\square$
@@ -351,6 +359,7 @@ impl Prototype for Enemy {
 ---
 
 **参考文献**：
+
 1. Gamma, E., et al. "Design Patterns: Elements of Reusable Object-Oriented Software"
 2. Pierce, B. C. "Types and Programming Languages"
-3. Mac Lane, S. "Categories for the Working Mathematician" 
+3. Mac Lane, S. "Categories for the Working Mathematician"

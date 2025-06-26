@@ -8,6 +8,7 @@
 
 **定义 1.1.1** (语法树)
 设 $V$ 为终结符集合，$N$ 为非终结符集合，语法树是一个有向树 $T = (V \cup N, E)$，其中：
+
 - 根节点 $r \in N$ 是起始符号
 - 叶子节点都是终结符
 - 内部节点都是非终结符
@@ -46,7 +47,7 @@ $$\text{interpret}(T', C) \subseteq \text{interpret}(T, C)$$
 trait Expression {
     type Context;
     type Result;
-    
+
     fn interpret(&self, context: &Self::Context) -> Self::Result;
 }
 
@@ -59,7 +60,7 @@ struct TerminalExpression<T, R> {
 impl<T, R> Expression for TerminalExpression<T, R> {
     type Context = R;
     type Result = R;
-    
+
     fn interpret(&self, context: &Self::Context) -> Self::Result {
         (self.interpreter)(&self.value, context)
     }
@@ -74,7 +75,7 @@ struct NonTerminalExpression<T, R> {
 impl<T, R> Expression for NonTerminalExpression<T, R> {
     type Context = T;
     type Result = R;
-    
+
     fn interpret(&self, context: &Self::Context) -> Self::Result {
         let results: Vec<R> = self.children.iter()
             .map(|child| child.interpret(context))
@@ -110,7 +111,7 @@ enum MathExpression {
 impl Expression for MathExpression {
     type Context = ();
     type Result = f64;
-    
+
     fn interpret(&self, _context: &Self::Context) -> Self::Result {
         match self {
             MathExpression::Number(n) => *n,
@@ -145,15 +146,15 @@ impl Context {
             functions: HashMap::new(),
         }
     }
-    
+
     fn set_variable(&mut self, name: String, value: f64) {
         self.variables.insert(name, value);
     }
-    
+
     fn get_variable(&self, name: &str) -> Option<f64> {
         self.variables.get(name).copied()
     }
-    
+
     fn register_function(&mut self, name: String, func: Box<dyn Fn(&[f64]) -> f64>) {
         self.functions.insert(name, func);
     }
@@ -237,18 +238,18 @@ impl Optimizer {
     fn new() -> Self {
         Self { rules: vec![] }
     }
-    
+
     fn add_rule(&mut self, rule: Box<dyn Fn(&MathExpression) -> Option<MathExpression>>) {
         self.rules.push(rule);
     }
-    
+
     fn optimize(&self, expr: &MathExpression) -> MathExpression {
         for rule in &self.rules {
             if let Some(optimized) = rule(expr) {
                 return self.optimize(&optimized);
             }
         }
-        
+
         // 递归优化子表达式
         match expr {
             MathExpression::Add(a, b) => {
@@ -282,4 +283,4 @@ $$\text{Expression} \cong \text{Algebraic Data Type}$$
 3. **可组合性**：支持复杂表达式的构建
 4. **可优化性**：支持语法树优化
 
-通过形式化方法，我们确保了解释器模式的正确性和可靠性，为实际应用提供了坚实的理论基础。 
+通过形式化方法，我们确保了解释器模式的正确性和可靠性，为实际应用提供了坚实的理论基础。

@@ -24,6 +24,7 @@
 $$\text{Facade} : \mathcal{S} \rightarrow \mathcal{I}$$
 
 其中：
+
 - $\mathcal{S} = \{S_1, S_2, \ldots, S_n\}$ 为子系统集合
 - $\mathcal{I}$ 为统一接口集合
 
@@ -174,6 +175,7 @@ $$\frac{F : \text{Facade} \quad F \vdash \text{operation} : () \rightarrow \text
 $$F : \mathcal{C}_S \rightarrow \mathcal{C}_I$$
 
 其中：
+
 - $\mathcal{C}_S$ 是子系统范畴
 - $\mathcal{C}_I$ 是接口范畴
 
@@ -335,11 +337,13 @@ $$\text{TypeOf}(F.\text{operation}()) = \text{ExpectedType}(\text{String})$$
 ### 6.2 性能分析
 
 **时间复杂度**：
+
 - 外观操作：$O(n)$，其中 $n$ 为子系统数量
 - 子系统调用：$O(1)$
 - 外观创建：$O(1)$
 
 **空间复杂度**：
+
 - 外观实例：$O(n)$，其中 $n$ 为子系统数量
 - 子系统实例：$O(1)$
 
@@ -349,11 +353,13 @@ $$\text{TypeOf}(F.\text{operation}()) = \text{ExpectedType}(\text{String})$$
 
 **命题 7.1**：外观正确性
 对于任意子系统集合 $S$，外观 $F(S)$ 满足：
+
 1. 提供简化的接口
 2. 隐藏子系统的复杂性
 3. 协调子系统的操作
 
 **证明**：
+
 1. 外观封装了所有子系统
 2. 外观提供统一的高层接口
 3. 外观协调子系统的调用顺序
@@ -365,6 +371,7 @@ $$\text{TypeOf}(F.\text{operation}()) = \text{ExpectedType}(\text{String})$$
 外观模式显著简化了客户端与子系统的交互。
 
 **证明**：
+
 1. 客户端只需要与外观交互
 2. 外观处理所有子系统的复杂性
 3. 客户端不需要了解子系统的内部结构
@@ -482,6 +489,7 @@ impl DatabaseFacade {
 ---
 
 **参考文献**：
+
 1. Gamma, E., et al. "Design Patterns: Elements of Reusable Object-Oriented Software"
 2. Pierce, B. C. "Types and Programming Languages"
-3. Mac Lane, S. "Categories for the Working Mathematician" 
+3. Mac Lane, S. "Categories for the Working Mathematician"

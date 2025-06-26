@@ -24,6 +24,7 @@
 $$\text{Adapter} : \mathcal{I}_1 \rightarrow \mathcal{I}_2$$
 
 其中：
+
 - $\mathcal{I}_1$ 为不兼容的源接口
 - $\mathcal{I}_2$ 为客户期望的目标接口
 
@@ -67,6 +68,7 @@ $$M : \mathcal{I}_1 \rightarrow \mathcal{I}_2$$
 $$A : \text{Method}_1 \rightarrow \text{Method}_2$$
 
 其中：
+
 - $\text{Method}_1$ 为源接口的方法集合
 - $\text{Method}_2$ 为目标接口的方法集合
 
@@ -139,6 +141,7 @@ $$\frac{A : \text{Adapter} \quad A \vdash \text{request} : () \rightarrow \text{
 $$F : \mathcal{C}_1 \rightarrow \mathcal{C}_2$$
 
 其中：
+
 - $\mathcal{C}_1$ 是源接口范畴
 - $\mathcal{C}_2$ 是目标接口范畴
 
@@ -233,11 +236,13 @@ $$\text{TypeOf}(A.\text{request}()) = \text{ExpectedType}(T.\text{request}())$$
 ### 6.2 性能分析
 
 **时间复杂度**：
+
 - 适配调用：$O(1)$
 - 接口转换：$O(1)$
 - 方法委托：$O(1)$
 
 **空间复杂度**：
+
 - 适配器实例：$O(1)$
 - 被适配对象：$O(1)$
 
@@ -249,6 +254,7 @@ $$\text{TypeOf}(A.\text{request}()) = \text{ExpectedType}(T.\text{request}())$$
 对于任意源接口 $i_1$ 和目标接口 $i_2$，适配器 $A$ 能够正确地将 $i_1$ 适配为 $i_2$。
 
 **证明**：
+
 1. 设 $m_1$ 为源接口的方法，$m_2$ 为目标接口的方法
 2. 适配器 $A$ 实现了目标接口 $i_2$
 3. 在适配器的实现中，调用源接口的方法 $m_1$
@@ -261,6 +267,7 @@ $$\text{TypeOf}(A.\text{request}()) = \text{ExpectedType}(T.\text{request}())$$
 适配器模式确保客户端代码无需修改即可使用不兼容的接口。
 
 **证明**：
+
 1. 适配器实现了客户端期望的目标接口
 2. 客户端代码只依赖目标接口
 3. 适配器内部处理与源接口的交互
@@ -329,6 +336,7 @@ impl DataFormat for FormatAdapter {
 ---
 
 **参考文献**：
+
 1. Gamma, E., et al. "Design Patterns: Elements of Reusable Object-Oriented Software"
 2. Pierce, B. C. "Types and Programming Languages"
-3. Mac Lane, S. "Categories for the Working Mathematician" 
+3. Mac Lane, S. "Categories for the Working Mathematician"

@@ -24,6 +24,7 @@
 $$\text{Decorator} : \mathcal{O} \times \mathcal{D} \rightarrow \mathcal{O}$$
 
 其中：
+
 - $\mathcal{O}$ 为基础对象集合
 - $\mathcal{D}$ 为装饰器集合
 
@@ -40,7 +41,7 @@ class Decorator where
 
 ### 1.3 模式结构
 
-```
+```text
 Component
 └── operation() -> String
 
@@ -257,11 +258,13 @@ $$\text{TypeOf}(D.\text{operation}()) = \text{ExpectedType}(C.\text{operation}()
 ### 6.2 性能分析
 
 **时间复杂度**：
+
 - 装饰调用：$O(1)$
 - 装饰链调用：$O(n)$，其中 $n$ 为装饰器数量
 - 装饰器创建：$O(1)$
 
 **空间复杂度**：
+
 - 装饰器实例：$O(1)$
 - 装饰链：$O(n)$，其中 $n$ 为装饰器数量
 
@@ -271,10 +274,12 @@ $$\text{TypeOf}(D.\text{operation}()) = \text{ExpectedType}(C.\text{operation}()
 
 **命题 7.1**：装饰正确性
 对于任意组件 $c$ 和装饰器 $d$，装饰后的对象 $D(c, d)$ 满足：
+
 1. $D(c, d)$ 实现了相同的接口
 2. $D(c, d)$ 的行为是 $c$ 的行为加上 $d$ 的额外行为
 
 **证明**：
+
 1. 装饰器实现了与组件相同的接口
 2. 装饰器在调用组件方法的基础上添加额外行为
 3. 因此装饰后的对象满足接口要求并具有增强的行为。$\square$
@@ -285,6 +290,7 @@ $$\text{TypeOf}(D.\text{operation}()) = \text{ExpectedType}(C.\text{operation}()
 多个装饰器可以按任意顺序组合，结果相同。
 
 **证明**：
+
 1. 装饰器通过组合关系连接
 2. 每个装饰器都实现相同的接口
 3. 装饰器的组合满足结合律
@@ -384,6 +390,7 @@ impl Logger for LevelDecorator {
 ---
 
 **参考文献**：
+
 1. Gamma, E., et al. "Design Patterns: Elements of Reusable Object-Oriented Software"
 2. Pierce, B. C. "Types and Programming Languages"
-3. Mac Lane, S. "Categories for the Working Mathematician" 
+3. Mac Lane, S. "Categories for the Working Mathematician"

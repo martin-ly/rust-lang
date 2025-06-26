@@ -8,6 +8,7 @@
 
 **定义 1.1.1** (责任链)
 设 $C$ 为处理器集合，$R$ 为请求集合，责任链是一个三元组 $(C, \prec, h)$，其中：
+
 - $\prec \subseteq C \times C$ 是处理器之间的后继关系
 - $h: C \times R \rightarrow \{true, false\}$ 是处理函数
 
@@ -41,7 +42,7 @@ $$\forall r \in R: \text{process}(r) \neq \text{fail}$$
 trait Handler {
     type Request;
     type Response;
-    
+
     fn handle(&self, request: &Self::Request) -> Option<Self::Response>;
     fn set_next(&mut self, next: Box<dyn Handler<Request = Self::Request, Response = Self::Response>>);
 }
@@ -55,7 +56,7 @@ impl<T, U> AbstractHandler<T, U> {
     fn new() -> Self {
         Self { next: None }
     }
-    
+
     fn set_next(&mut self, next: Box<dyn Handler<Request = T, Response = U>>) {
         self.next = Some(next);
     }
@@ -85,7 +86,7 @@ struct ConcreteHandlerA {
 impl Handler for ConcreteHandlerA {
     type Request = String;
     type Response = String;
-    
+
     fn handle(&self, request: &Self::Request) -> Option<Self::Response> {
         if request.contains("A") {
             Some(format!("Handled by A: {}", request))
@@ -93,7 +94,7 @@ impl Handler for ConcreteHandlerA {
             None
         }
     }
-    
+
     fn set_next(&mut self, next: Box<dyn Handler<Request = Self::Request, Response = Self::Response>>) {
         self.next = Some(next);
     }
@@ -112,23 +113,23 @@ impl<T, U> ChainBuilder<T, U> {
     fn new() -> Self {
         Self { handlers: vec![] }
     }
-    
+
     fn add_handler(mut self, handler: Box<dyn Handler<Request = T, Response = U>>) -> Self {
         self.handlers.push(handler);
         self
     }
-    
+
     fn build(mut self) -> Option<Box<dyn Handler<Request = T, Response = U>>> {
         if self.handlers.is_empty() {
             return None;
         }
-        
+
         // 构建链式关系
         for i in 0..self.handlers.len() - 1 {
             let next = self.handlers.remove(i + 1);
             // 这里需要 unsafe 操作来设置 next
         }
-        
+
         self.handlers.pop()
     }
 }
@@ -204,4 +205,4 @@ impl<T, U> ChainBuilder<T, U> {
 3. **灵活性**：可以动态调整处理顺序
 4. **可证明性**：具有严格的数学基础
 
-通过形式化方法，我们确保了责任链模式的正确性和可靠性，为实际应用提供了坚实的理论基础。 
+通过形式化方法，我们确保了责任链模式的正确性和可靠性，为实际应用提供了坚实的理论基础。

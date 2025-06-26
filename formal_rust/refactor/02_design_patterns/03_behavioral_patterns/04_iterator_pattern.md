@@ -8,6 +8,7 @@
 
 **定义 1.1.1** (迭代器)
 设 $A$ 为聚合对象集合，$E$ 为元素集合，迭代器是一个四元组 $(a, i, n, h)$，其中：
+
 - $a \in A$ 是聚合对象
 - $i \in \mathbb{N}$ 是当前索引
 - $n: A \rightarrow \mathbb{N}$ 是大小函数
@@ -46,7 +47,7 @@ $$\text{advance}(it) = (a, i + 1, n, h)$$
 // 迭代器特征
 trait Iterator {
     type Item;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
 }
 
@@ -54,7 +55,7 @@ trait Iterator {
 trait IntoIterator {
     type Item;
     type IntoIter: Iterator<Item = Self::Item>;
-    
+
     fn into_iter(self) -> Self::IntoIter;
 }
 
@@ -66,7 +67,7 @@ struct VecIterator<T> {
 
 impl<T> Iterator for VecIterator<T> {
     type Item = T;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         if self.index < self.vec.len() {
             let item = self.vec.remove(self.index);
@@ -101,11 +102,11 @@ impl<T> CustomCollection<T> {
     fn new() -> Self {
         Self { data: vec![] }
     }
-    
+
     fn add(&mut self, item: T) {
         self.data.push(item);
     }
-    
+
     fn len(&self) -> usize {
         self.data.len()
     }
@@ -115,7 +116,7 @@ impl<T> CustomCollection<T> {
 impl<T> IntoIterator for CustomCollection<T> {
     type Item = T;
     type IntoIter = CustomIterator<T>;
-    
+
     fn into_iter(self) -> Self::IntoIter {
         CustomIterator {
             collection: self,
@@ -131,7 +132,7 @@ struct CustomIterator<T> {
 
 impl<T> Iterator for CustomIterator<T> {
     type Item = T;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         if self.index < self.collection.len() {
             let item = self.collection.data.remove(self.index);
@@ -158,7 +159,7 @@ where
     P: FnMut(&I::Item) -> bool,
 {
     type Item = I::Item;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         while let Some(item) = self.iter.next() {
             if (self.predicate)(&item) {
@@ -181,7 +182,7 @@ where
     F: FnMut(I::Item) -> B,
 {
     type Item = B;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         self.iter.next().map(&mut self.mapper)
     }
@@ -267,7 +268,7 @@ where
     F: FnMut() -> Option<T>,
 {
     type Item = T;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         (self.generator)()
     }
@@ -280,7 +281,7 @@ where
 // 并行迭代器特征
 trait ParallelIterator {
     type Item;
-    
+
     fn drive_unindexed<C>(self, consumer: C) -> C::Result
     where
         C: UnindexedConsumer<Self::Item>;
@@ -296,4 +297,4 @@ trait ParallelIterator {
 3. **灵活性**：支持多种遍历策略
 4. **可组合性**：支持迭代器的组合和转换
 
-通过形式化方法，我们确保了迭代器模式的正确性和可靠性，为实际应用提供了坚实的理论基础。 
+通过形式化方法，我们确保了迭代器模式的正确性和可靠性，为实际应用提供了坚实的理论基础。

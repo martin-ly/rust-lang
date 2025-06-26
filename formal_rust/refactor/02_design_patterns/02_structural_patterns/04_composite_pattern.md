@@ -24,6 +24,7 @@
 $$\text{Composite} : \mathcal{N} \times \mathcal{E} \rightarrow \mathcal{T}$$
 
 其中：
+
 - $\mathcal{N}$ 为节点集合（叶子节点和组合节点）
 - $\mathcal{E}$ 为边集合（父子关系）
 - $\mathcal{T}$ 为树形结构集合
@@ -73,6 +74,7 @@ Composite
 
 **定义 2.1**：树形结构
 树形结构 $T = (N, E)$ 是一个有向无环图，其中：
+
 - $N$ 为节点集合
 - $E \subseteq N \times N$ 为边集合
 - 存在一个根节点 $r \in N$
@@ -327,12 +329,14 @@ $$\text{TypeOf}(C.\text{operation}()) = \text{ExpectedType}(\text{String})$$
 ### 6.2 性能分析
 
 **时间复杂度**：
+
 - 添加组件：$O(1)$
 - 删除组件：$O(n)$，其中 $n$ 为子组件数量
 - 查找组件：$O(1)$（使用 HashMap）
 - 遍历操作：$O(n)$，其中 $n$ 为节点总数
 
 **空间复杂度**：
+
 - 叶子节点：$O(1)$
 - 组合节点：$O(m)$，其中 $m$ 为子组件数量
 - 整个树：$O(n)$，其中 $n$ 为节点总数
@@ -343,11 +347,13 @@ $$\text{TypeOf}(C.\text{operation}()) = \text{ExpectedType}(\text{String})$$
 
 **命题 7.1**：组合正确性
 对于任意组件 $c$，组合操作满足：
+
 1. 叶子节点和组合节点都实现相同的接口
 2. 组合节点可以包含叶子节点和其他组合节点
 3. 操作在叶子节点和组合节点上具有一致性
 
 **证明**：
+
 1. 所有组件都实现 `Component` trait
 2. 组合节点通过 `Vec` 或 `HashMap` 存储子组件
 3. 操作通过递归或迭代处理所有子组件
@@ -359,6 +365,7 @@ $$\text{TypeOf}(C.\text{operation}()) = \text{ExpectedType}(\text{String})$$
 组合模式形成的结构是一个有效的树形结构。
 
 **证明**：
+
 1. 每个节点最多有一个父节点
 2. 根节点没有父节点
 3. 从根节点到任意叶子节点有且仅有一条路径
@@ -514,6 +521,7 @@ impl Employee for Manager {
 ---
 
 **参考文献**：
+
 1. Gamma, E., et al. "Design Patterns: Elements of Reusable Object-Oriented Software"
 2. Pierce, B. C. "Types and Programming Languages"
-3. Mac Lane, S. "Categories for the Working Mathematician" 
+3. Mac Lane, S. "Categories for the Working Mathematician"
