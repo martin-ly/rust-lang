@@ -2,14 +2,14 @@
 
 ## 2.0 严格编号目录
 
-- [2. 范畴论视角分析（02_category_theory）](#2-范畴论视角分析02_category_theory)
+- [2. 范畴论视角分析（02\_category\_theory）](#2-范畴论视角分析02_category_theory)
   - [2.0 严格编号目录](#20-严格编号目录)
   - [2.1 视角简介](#21-视角简介)
   - [2.2 理论建模](#22-理论建模)
     - [2.2.1 对象（Object）](#221-对象object)
     - [2.2.2 态射（Morphism）](#222-态射morphism)
     - [2.2.3 范畴结构（Category Structure）](#223-范畴结构category-structure)
-    - [2.2.4 函子与自然变换（Functor & Natural Transformation）](#224-函子与自然变换functor--natural-transformation)
+    - [2.2.4 函子与自然变换（Functor \& Natural Transformation）](#224-函子与自然变换functor--natural-transformation)
   - [2.3 数学符号与公式](#23-数学符号与公式)
   - [2.4 代码示例](#24-代码示例)
   - [2.5 图示（变量系统的范畴建模）](#25-图示变量系统的范畴建模)
@@ -64,6 +64,7 @@
 - 生命周期函数：$L: Var \to TimeSpan$
 
 **补充说明：**
+
 - 范畴论建模有助于形式化推理和跨语言对比。
 - 例如，所有权转移的合成满足 $f \circ g$ 的结合律。
 
@@ -98,6 +99,7 @@ graph LR
 ```
 
 **形式化描述：**
+
 - $f: Var_1 \to Var_2$ 表示所有权转移
 - $b: Var \to Ref<Var>$ 表示借用
 - $L: Var \to TimeSpan$ 表示生命周期函数
