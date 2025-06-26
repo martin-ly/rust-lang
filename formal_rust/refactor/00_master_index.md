@@ -6,7 +6,7 @@
 
 ## 理论体系架构
 
-```
+```text
 Rust形式化理论体系
 ├── 01_core_theory/           # 核心理论模块 (6个文档)
 ├── 02_design_patterns/       # 设计模式模块 (28个文档)
@@ -19,7 +19,7 @@ Rust形式化理论体系
 
 ### 1. 核心理论模块 (01_core_theory/)
 
-**理论基础**
+**理论基础**:
 
 - [00_core_theory_index.md](01_core_theory/00_core_theory_index.md) - 核心理论索引
 - [01_rust_philosophy.md](01_core_theory/01_rust_philosophy.md) - Rust语言哲学形式化理论
@@ -199,7 +199,7 @@ Rust形式化理论体系
 
 ## 理论关联图
 
-```
+```text
 核心理论模块
     ↓
 设计模式模块 ←→ 应用领域模块

@@ -41,7 +41,7 @@ class Builder b where
 
 ### 1.3 模式结构
 
-```
+```text
 Builder
 ├── reset() -> Builder
 ├── setPartA(part) -> Builder

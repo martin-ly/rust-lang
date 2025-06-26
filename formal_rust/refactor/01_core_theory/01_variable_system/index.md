@@ -1,13 +1,23 @@
-# 变量系统模块总览（01_variable_system）
+# 00. 变量系统模块总览（01_variable_system）
 
 ## 目录
 
-- [变量系统模块总览（01_variable_system）](#变量系统模块总览01_variable_system)
-  - [目录](#目录)
-  - [1. 子模块导航](#1-子模块导航)
-  - [2. 内容结构与多表征](#2-内容结构与多表征)
-  - [3. 批判性分析](#3-批判性分析)
-  - [4. 交叉引用](#4-交叉引用)
+1. [1. 子模块导航](#1-子模块导航)
+2. [2. 内容结构与多表征](#2-内容结构与多表征)
+3. [3. 批判性分析](#3-批判性分析)
+4. [4. 交叉引用](#4-交叉引用)
+5. [5. 本地导航与相关主题](#5-本地导航与相关主题)
+
+---
+
+> **本地导航**：
+>
+> - [类型系统理论](../02_type_system/01_type_theory_foundations.md)
+> - [所有权系统理论](../04_ownership_system/01_ownership_theory.md)
+> - [内存模型理论](../03_memory_model/01_memory_model_theory.md)
+> - [并发模型理论](../05_concurrency_model/01_concurrency_theory.md)
+
+---
 
 ## 1. 子模块导航
 
@@ -22,12 +32,15 @@
 9. [分层学习路径与交互式内容](09_learning_path_and_interactive.md)
 10. [可视化与思维导图](10_visualization_and_mindmap.md)
 11. [文档模板与质量标准](11_template_and_quality_standard.md)
-12. [术语映射与统一词汇表](12_concept_mapping_and_glossary.md)
+12. [术语映射与统一词汇](12_concept_mapping_and_glossary.md)
 13. [实际项目案例分析](13_project_case_analysis.md)
 14. [交互式练习与思考题](14_interactive_exercises.md)
-15. [类型/所有权系统的形式化证明与验证工具](15_formal_proof_and_verification.md)
+15. [形式化证明与验证](15_formal_proof_and_verification.md)
 16. [状态机与可视化](16_state_machine_and_visualization.md)
-17. [MIR与编译器优化中的所有权分析](17_compiler_ir_and_optimization.md)
+17. [MIR与编译器优化](17_compiler_ir_and_optimization.md)
+18. [变量系统多维视角](01_variable_system_multiview.md)
+
+---
 
 ## 2. 内容结构与多表征
 
@@ -39,17 +52,40 @@
 - 论证过程与结论分明，支持形式化表达
 - 保持与最新理论和工程实践同步
 
+**多表征结构示例表**：
+
+| 视角         | 理论阐释         | 代码/图/表         | 工程案例         | 批判性分析         |
+|--------------|------------------|--------------------|------------------|--------------------|
+| 不变性       | 定义、性质       | 代码、Mermaid图    | 配置、常量       | 灵活性局限         |
+| 可变性       | 定义、机制       | 代码、状态机图     | 计数器、状态机   | 竞态风险           |
+| 内部可变性   | 类型封装、借用   | 代码、结构图       | RefCell、Mutex   | 运行时风险         |
+
+---
+
 ## 3. 批判性分析
 
-- 优势：结构化导航与多表征内容提升模块可维护性与可扩展性
-- 局限：需持续维护与补充，保持内容时效性与创新性
+| 主题           | 主要观点                                                                 |
+|----------------|--------------------------------------------------------------------------|
+| 结构化导航优势 | 结构化导航与多表征内容提升模块可维护性与可扩展性。                     |
+| 持续维护局限   | 需持续维护与补充，保持内容时效性与创新性。                             |
+| 优化建议       | 结合最新 Rust 理论与工程实践，持续优化内容。                           |
+
+---
 
 ## 4. 交叉引用
 
 - [类型系统分析](../02_type_system/index.md)
 - [文档模板与质量标准](11_template_and_quality_standard.md)
-- [index.md](../00_master_index.md)
+- [核心理论总索引](../00_core_theory_index.md)
+- [变量系统多维视角](01_variable_system_multiview.md)
+- [分层学习路径与交互式内容](09_learning_path_and_interactive.md)
+- [MIR与编译器优化](17_compiler_ir_and_optimization.md)
 
 ---
 
-> 本模块所有文档均严格编号，支持交叉引用，包含图、表、数学公式等多表征，内容持续更新。
+## 5. 本地导航与相关主题
+
+> - [类型系统理论](../02_type_system/01_type_theory_foundations.md)
+> - [所有权系统理论](../04_ownership_system/01_ownership_theory.md)
+> - [内存模型理论](../03_memory_model/01_memory_model_theory.md)
+> - [并发模型理论](../05_concurrency_model/01_concurrency_theory.md)
