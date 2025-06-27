@@ -1,54 +1,61 @@
 # 1. Rust 内存模型理论（01_memory_model_theory）
 
-## 1.0 严格编号目录
+## 目录
 
-- [1. Rust 内存模型理论（01_memory_model_theory）](#1-rust-内存模型理论01_memory_model_theory)
-  - [1.0 严格编号目录](#10-严格编号目录)
-  - [1.1 内存模型公理](#11-内存模型公理)
-    - [1.1.1 基本公理](#111-基本公理)
-    - [1.1.2 内存操作公理](#112-内存操作公理)
-    - [1.1.3 内存模型结构图](#113-内存模型结构图)
-    - [1.1.4 批判性分析（表格）](#114-批判性分析表格)
-  - [1.2 内存布局理论](#12-内存布局理论)
-    - [1.2.1 内存空间定义](#121-内存空间定义)
-    - [1.2.2 内存布局](#122-内存布局)
-    - [1.2.3 内存对齐](#123-内存对齐)
-    - [1.2.4 工程案例与批判性分析（表格）](#124-工程案例与批判性分析表格)
-  - [1.3 栈与堆管理](#13-栈与堆管理)
-    - [1.3.1 栈管理](#131-栈管理)
-    - [1.3.2 堆管理](#132-堆管理)
-    - [1.3.3 内存分配器](#133-内存分配器)
-    - [1.3.4 工程案例与批判性分析（表格）](#134-工程案例与批判性分析表格)
-  - [1.4 内存分配策略](#14-内存分配策略)
-    - [1.4.1 分配策略分类](#141-分配策略分类)
-    - [1.4.2 分配器实现](#142-分配器实现)
-    - [1.4.3 工程案例与批判性分析（表格）](#143-工程案例与批判性分析表格)
-  - [1.5 垃圾回收理论](#15-垃圾回收理论)
-    - [1.5.1 垃圾回收定义](#151-垃圾回收定义)
-    - [1.5.2 垃圾回收算法](#152-垃圾回收算法)
-    - [1.5.3 工程案例与批判性分析（表格）](#153-工程案例与批判性分析表格)
-  - [1.6 内存安全保证](#16-内存安全保证)
-    - [1.6.1 安全性质](#161-安全性质)
-    - [1.6.2 安全证明](#162-安全证明)
-    - [1.6.3 工程案例与批判性分析（表格）](#163-工程案例与批判性分析表格)
-  - [1.7 并发内存模型](#17-并发内存模型)
-    - [1.7.1 并发内存操作](#171-并发内存操作)
-    - [1.7.2 内存序](#172-内存序)
-    - [1.7.3 数据竞争预防](#173-数据竞争预防)
-    - [1.7.4 工程案例与批判性分析（表格）](#174-工程案例与批判性分析表格)
-  - [1.8 内存优化技术与未来展望](#18-内存优化技术与未来展望)
-    - [1.8.1 内存池](#181-内存池)
-    - [1.8.2 内存压缩](#182-内存压缩)
-    - [1.8.3 批判性分析与未来展望（表格）](#183-批判性分析与未来展望表格)
-  - [1.9 形式化语义](#19-形式化语义)
-    - [1.9.1 操作语义](#191-操作语义)
-    - [1.9.2 指称语义](#192-指称语义)
-  - [1.10 实现策略与交叉引用](#110-实现策略与交叉引用)
-    - [1.10.1 系统级实现](#1101-系统级实现)
-    - [1.10.2 用户级实现](#1102-用户级实现)
-    - [1.10.3 交叉引用](#1103-交叉引用)
-  - [1.11 参考文献](#111-参考文献)
-  - [1.12 本地导航与相关主题](#112-本地导航与相关主题)
+1. [内存模型公理](#11-内存模型公理)
+    1.1 [基本公理](#111-基本公理)
+    1.2 [内存操作公理](#112-内存操作公理)
+    1.3 [内存模型结构图](#113-内存模型结构图)
+    1.4 [批判性分析（表格）](#114-批判性分析表格)
+2. [内存布局理论](#12-内存布局理论)
+    2.1 [内存空间定义](#121-内存空间定义)
+    2.2 [内存布局](#122-内存布局)
+    2.3 [内存对齐](#123-内存对齐)
+    2.4 [工程案例与批判性分析（表格）](#124-工程案例与批判性分析表格)
+3. [栈与堆管理](#13-栈与堆管理)
+    3.1 [栈管理](#131-栈管理)
+    3.2 [堆管理](#132-堆管理)
+    3.3 [内存分配器](#133-内存分配器)
+    3.4 [工程案例与批判性分析（表格）](#134-工程案例与批判性分析表格)
+4. [内存分配策略](#14-内存分配策略)
+    4.1 [分配策略分类](#141-分配策略分类)
+    4.2 [分配器实现](#142-分配器实现)
+    4.3 [工程案例与批判性分析（表格）](#143-工程案例与批判性分析表格)
+5. [垃圾回收理论](#15-垃圾回收理论)
+    5.1 [垃圾回收定义](#151-垃圾回收定义)
+    5.2 [垃圾回收算法](#152-垃圾回收算法)
+    5.3 [工程案例与批判性分析（表格）](#153-工程案例与批判性分析表格)
+6. [内存安全保证](#16-内存安全保证)
+    6.1 [安全性质](#161-安全性质)
+    6.2 [安全证明](#162-安全证明)
+    6.3 [工程案例与批判性分析（表格）](#163-工程案例与批判性分析表格)
+7. [并发内存模型](#17-并发内存模型)
+    7.1 [并发内存操作](#171-并发内存操作)
+    7.2 [内存序](#172-内存序)
+    7.3 [数据竞争预防](#173-数据竞争预防)
+    7.4 [工程案例与批判性分析（表格）](#174-工程案例与批判性分析表格)
+8. [内存优化技术与未来展望](#18-内存优化技术与未来展望)
+    8.1 [内存池](#181-内存池)
+    8.2 [内存压缩](#182-内存压缩)
+    8.3 [批判性分析与未来展望（表格）](#183-批判性分析与未来展望表格)
+9. [形式化语义](#19-形式化语义)
+    9.1 [操作语义](#191-操作语义)
+    9.2 [指称语义](#192-指称语义)
+10. [实现策略与交叉引用](#110-实现策略与交叉引用)
+    10.1 [系统级实现](#1101-系统级实现)
+    10.2 [用户级实现](#1102-用户级实现)
+    10.3 [交叉引用](#1103-交叉引用)
+11. [参考文献](#111-参考文献)
+12. [本地导航与相关主题](#112-本地导航与相关主题)
+
+---
+
+> **本地导航**：
+>
+> - [变量系统理论](../01_variable_system/index.md)
+> - [类型系统理论](../02_type_system/01_type_theory_foundations.md)
+> - [所有权系统理论](../04_ownership_system/01_ownership_theory.md)
+> - [并发模型理论](../05_concurrency_model/01_concurrency_theory.md)
 
 ---
 
@@ -67,8 +74,23 @@ $$\forall a \in \text{Address}: \text{Valid}(a) \Rightarrow \text{Safe}(a)$$
 
 - **理论基础**：内存模型为程序分配唯一且安全的内存空间。
 - **工程案例**：Rust 编译器分配栈空间、堆空间，防止悬垂指针。
+- **代码示例**：
 
-**Mermaid 可视化**：
+```rust
+// 内存分配示例
+fn memory_allocation_example() {
+    // 栈分配
+    let x = 42;  // 栈上分配
+    
+    // 堆分配
+    let y = Box::new(42);  // 堆上分配
+    
+    // 自动释放
+    // x 和 y 在作用域结束时自动释放
+}
+```
+
+- **Mermaid 可视化**：
 
 ```mermaid
 graph TD
@@ -86,6 +108,22 @@ $$\text{Allocate}(size) \Rightarrow \exists a \in \text{Address}: \text{Free}(a,
 $$\text{Deallocate}(a) \Rightarrow \text{Invalid}(a) \land \text{Free}(a)$$
 
 - **工程案例**：Box、Vec、String 等类型的内存分配与释放。
+- **代码示例**：
+
+```rust
+// 内存操作示例
+fn memory_operations() {
+    // 分配
+    let mut vec = Vec::with_capacity(10);
+    
+    // 使用
+    vec.push(1);
+    vec.push(2);
+    
+    // 自动释放（RAII）
+    // vec 在作用域结束时自动释放
+}
+```
 
 ### 1.1.3 内存模型结构图
 
@@ -105,9 +143,9 @@ graph TD
 
 ### 1.1.4 批判性分析（表格）
 
-| 维度         | 优势                                                         | 局限                                                         |
-|--------------|--------------------------------------------------------------|--------------------------------------------------------------|
-| 内存模型公理 | 安全性高，理论基础扎实                                       | 对高性能场景灵活性有限                                       |
+| 维度         | 优势                       | 局限                       |
+|--------------|----------------------------|----------------------------|
+| 内存模型公理 | 安全性高，理论基础扎实     | 对高性能场景灵活性有限     |
 
 ---
 
@@ -122,6 +160,18 @@ $$\text{MemorySpace} = \text{Stack} \cup \text{Heap} \cup \text{Static} \cup \te
 $$\text{MemoryRegion} = \text{Address} \times \text{Size} \times \text{Permission}$$
 
 - **工程案例**：Rust 变量在不同内存区域的分布。
+- **代码示例**：
+
+```rust
+// 不同内存区域的变量
+static GLOBAL: i32 = 42;  // 静态内存
+
+fn main() {
+    let stack_var = 10;           // 栈内存
+    let heap_var = Box::new(20);  // 堆内存
+    let code_ref = main;          // 代码内存
+}
+```
 
 ### 1.2.2 内存布局
 
@@ -151,14 +201,31 @@ $$\text{Aligned}(a, n) = a \bmod n = 0$$
 $$\text{Aligned}(a, n) \Rightarrow \text{OptimalAccess}(a)$$
 
 - **工程案例**：结构体字段对齐、内存填充。
+- **代码示例**：
+
+```rust
+// 内存对齐示例
+#[repr(C)]
+struct AlignedStruct {
+    a: u8,    // 1字节
+    b: u32,   // 4字节，需要3字节填充
+    c: u16,   // 2字节
+}
+
+// 紧凑布局
+#[repr(packed)]
+struct PackedStruct {
+    a: u8,    // 1字节
+    b: u32,   // 4字节，无填充
+    c: u16,   // 2字节
+}
+```
 
 ### 1.2.4 工程案例与批判性分析（表格）
 
-- **工程案例**：repr(C)、repr(align(N))、packed struct。
-
-| 维度         | 优势                                                         | 局限                                                         |
-|--------------|--------------------------------------------------------------|--------------------------------------------------------------|
-| 内存布局     | 提升访问效率，提升安全性                                     | 可能导致空间浪费                                             |
+| 维度         | 优势                       | 局限                       |
+|--------------|----------------------------|----------------------------|
+| 内存布局     | 提升访问效率，提升安全性   | 可能导致空间浪费           |
 
 ---
 
@@ -174,6 +241,21 @@ $$\text{Push}(v) \Rightarrow \text{Stack}[sp] = v \land sp = sp + 1$$
 $$\text{Pop}() \Rightarrow v = \text{Stack}[sp-1] \land sp = sp - 1$$
 
 - **工程案例**：函数调用栈帧、递归深度限制。
+- **代码示例**：
+
+```rust
+// 栈管理示例
+fn recursive_function(n: u32) -> u32 {
+    if n == 0 {
+        return 1;
+    }
+    n * recursive_function(n - 1)  // 递归调用，栈帧增长
+}
+
+fn main() {
+    let result = recursive_function(5);  // 栈上分配局部变量
+}
+```
 
 ### 1.3.2 堆管理
 
@@ -184,6 +266,22 @@ $$\text{HeapAllocate}(size) = \text{FindFreeBlock}(size) \times \text{MarkUsed}$
 $$\text{HeapDeallocate}(ptr) = \text{MarkFree}(ptr) \times \text{MergeAdjacent}$$
 
 - **工程案例**：Box::new、Vec::with_capacity。
+- **代码示例**：
+
+```rust
+// 堆管理示例
+fn heap_management() {
+    // 堆分配
+    let boxed_value = Box::new(42);
+    let vector = Vec::with_capacity(100);
+    
+    // 使用堆内存
+    println!("Boxed value: {}", *boxed_value);
+    
+    // 自动释放（RAII）
+    // boxed_value 和 vector 在作用域结束时自动释放
+}
+```
 
 ### 1.3.3 内存分配器
 
@@ -197,14 +295,35 @@ trait Allocator {
 ```
 
 - **工程案例**：自定义分配器、全局分配器。
+- **代码示例**：
+
+```rust
+// 自定义分配器示例
+use std::alloc::{GlobalAlloc, Layout};
+
+struct MyAllocator;
+
+unsafe impl GlobalAlloc for MyAllocator {
+    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
+        // 自定义分配逻辑
+        std::alloc::alloc(layout)
+    }
+    
+    unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
+        // 自定义释放逻辑
+        std::alloc::dealloc(ptr, layout)
+    }
+}
+
+#[global_allocator]
+static ALLOCATOR: MyAllocator = MyAllocator;
+```
 
 ### 1.3.4 工程案例与批判性分析（表格）
 
-- **工程案例**：jemalloc、mimalloc、Rust 全局分配器。
-
-| 维度         | 优势                                                         | 局限                                                         |
-|--------------|--------------------------------------------------------------|--------------------------------------------------------------|
-| 内存分配器   | 提升内存分配效率，提升多线程性能                             | 可能导致内存碎片率增加                                       |
+| 维度         | 优势                       | 局限                       |
+|--------------|----------------------------|----------------------------|
+| 内存分配器   | 提升内存分配效率，提升多线程性能 | 可能导致内存碎片率增加   |
 
 ---
 
@@ -222,6 +341,36 @@ $$\text{BestFit}(size) = \text{Min}(block \in \text{FreeBlocks}: block.size \geq
 $$\text{WorstFit}(size) = \text{Max}(block \in \text{FreeBlocks}: block.size \geq size)$$
 
 - **工程案例**：jemalloc、mimalloc、系统分配器。
+- **代码示例**：
+
+```rust
+// 分配策略示例
+enum AllocationStrategy {
+    FirstFit,
+    BestFit,
+    WorstFit,
+}
+
+impl AllocationStrategy {
+    fn allocate(&self, size: usize, free_blocks: &[Block]) -> Option<&Block> {
+        match self {
+            AllocationStrategy::FirstFit => {
+                free_blocks.iter().find(|block| block.size >= size)
+            }
+            AllocationStrategy::BestFit => {
+                free_blocks.iter()
+                    .filter(|block| block.size >= size)
+                    .min_by_key(|block| block.size)
+            }
+            AllocationStrategy::WorstFit => {
+                free_blocks.iter()
+                    .filter(|block| block.size >= size)
+                    .max_by_key(|block| block.size)
+            }
+        }
+    }
+}
+```
 
 ### 1.4.2 分配器实现
 
@@ -250,11 +399,9 @@ impl Allocator for SimpleAllocator {
 
 ### 1.4.3 工程案例与批判性分析（表格）
 
-- **工程案例**：自定义分配器、嵌入式分配器。
-
-| 维度         | 优势                                                         | 局限                                                         |
-|--------------|--------------------------------------------------------------|--------------------------------------------------------------|
-| 内存分配器   | 提升内存分配效率，提升多线程性能                             | 可能导致内存碎片率增加                                       |
+| 维度         | 优势                       | 局限                       |
+|--------------|----------------------------|----------------------------|
+| 内存分配器   | 提升内存分配效率，提升多线程性能 | 可能导致内存碎片率增加   |
 
 ---
 
@@ -269,6 +416,20 @@ $$\text{Reachable}(v) = \exists \text{Path}: \text{Root} \rightarrow v$$
 $$\text{Garbage}(v) = \neg \text{Reachable}(v)$$
 
 - **工程案例**：Rust 无自动 GC，依赖所有权与生命周期管理。
+- **代码示例**：
+
+```rust
+// Rust 无垃圾回收，依赖 RAII
+fn no_garbage_collection() {
+    let data = Box::new(vec![1, 2, 3, 4, 5]);
+    
+    // 使用数据
+    println!("Data: {:?}", data);
+    
+    // 自动释放（RAII）
+    // data 在作用域结束时自动释放，无需垃圾回收
+}
+```
 
 ### 1.5.2 垃圾回收算法
 
@@ -278,41 +439,41 @@ $$\text{Garbage}(v) = \neg \text{Reachable}(v)$$
 fn mark_sweep(heap: &mut Heap) {
     // 标记阶段
     for root in heap.roots() {
-        mark_reachable(root);
+        mark_reachable(root, heap);
     }
     
     // 清除阶段
-    for object in heap.objects() {
-        if !object.is_marked() {
-            heap.free(object);
-        }
+    heap.sweep_unmarked();
+}
+
+fn mark_reachable(obj: &Object, heap: &mut Heap) {
+    if obj.is_marked() {
+        return;
+    }
+    
+    obj.mark();
+    for child in obj.children() {
+        mark_reachable(child, heap);
     }
 }
 ```
 
-**算法 1.2** (复制收集)
+- **Mermaid 可视化**：
 
-```rust
-fn copy_collection(heap: &mut Heap) {
-    let to_space = heap.allocate_to_space();
-    
-    // 复制可达对象
-    for root in heap.roots() {
-        copy_object(root, to_space);
-    }
-    
-    // 交换空间
-    heap.swap_spaces();
-}
+```mermaid
+graph TD
+    A[垃圾回收] --> B[标记阶段]
+    A --> C[清除阶段]
+    B --> D[从根对象开始]
+    D --> E[标记可达对象]
+    C --> F[清除未标记对象]
 ```
 
 ### 1.5.3 工程案例与批判性分析（表格）
 
-- **工程案例**：Rc、Arc、Weak 等引用计数型垃圾回收。
-
-| 维度         | 优势                                                         | 局限                                                         |
-|--------------|--------------------------------------------------------------|--------------------------------------------------------------|
-| 垃圾回收     | 解决循环引用问题，提升内存安全性                             | 可能导致内存泄漏                                             |
+| 维度         | 优势                       | 局限                       |
+|--------------|----------------------------|----------------------------|
+| 垃圾回收     | 自动内存管理，减少内存泄漏 | 性能开销，不确定性         |
 
 ---
 
@@ -320,36 +481,48 @@ fn copy_collection(heap: &mut Heap) {
 
 ### 1.6.1 安全性质
 
-**性质 1.1** (无悬垂指针)
-$$\forall p \in \text{Pointer}: \text{Valid}(p) \Rightarrow \text{TargetExists}(p)$$
+**性质 1.1** (内存安全)
+$$\text{MemorySafe}(p) = \forall a \in \text{Access}: \text{Valid}(a)$$
 
-**性质 1.2** (无重复释放)
-$$\forall a \in \text{Address}: \text{Deallocated}(a) \Rightarrow \neg \text{Deallocated}(a)$$
+**性质 1.2** (无悬垂指针)
+$$\text{NoDangling}(p) = \forall ptr \in \text{Pointer}: \text{Valid}(ptr)$$
 
-**性质 1.3** (无缓冲区溢出)
-$$\forall a \in \text{Address}: \text{Access}(a) \Rightarrow a \in \text{AllocatedRange}$$
+- **工程案例**：Rust 所有权系统保证内存安全。
+- **代码示例**：
 
-- **工程案例**：Rust 编译器静态检查、Clippy 检查。
+```rust
+// 内存安全示例
+fn memory_safety_example() {
+    let data = vec![1, 2, 3, 4, 5];
+    
+    // 借用检查防止悬垂指针
+    let reference = &data[0];
+    
+    // 以下代码会编译错误，防止悬垂指针
+    // drop(data);  // 编译错误：data 仍被借用
+    // println!("{}", reference);  // 编译错误：悬垂指针
+    
+    println!("{}", reference);  // 正确：在 data 有效期内使用
+}
+```
 
 ### 1.6.2 安全证明
 
-**定理 1.1** (所有权内存安全)
+**定理 1.2** (内存安全定理)
 $$\text{OwnershipSafe}(p) \Rightarrow \text{MemorySafe}(p)$$
 
-**证明**：
+**证明思路**：
 
 1. 所有权系统保证每个值有唯一所有者
-2. 所有者负责内存管理
-3. 自动析构防止内存泄漏
+2. 借用检查保证引用有效性
+3. 生命周期系统保证引用不会悬垂
 4. 证毕
 
 ### 1.6.3 工程案例与批判性分析（表格）
 
-- **工程案例**：Rust 静态分析、Miri 工具。
-
-| 维度         | 优势                                                         | 局限                                                         |
-|--------------|--------------------------------------------------------------|--------------------------------------------------------------|
-| 内存安全     | 提升内存安全性，减少内存泄漏                                 | 依赖于类型系统与所有权模型的正确实现                           |
+| 维度         | 优势                       | 局限                       |
+|--------------|----------------------------|----------------------------|
+| 内存安全     | 编译时保证，零运行时开销   | 对复杂场景表达有限         |
 
 ---
 
@@ -357,32 +530,71 @@ $$\text{OwnershipSafe}(p) \Rightarrow \text{MemorySafe}(p)$$
 
 ### 1.7.1 并发内存操作
 
-**定义 1.11** (原子操作)
-$$\text{Atomic}[T] = \text{Uninterruptible}[T]$$
+**定义 1.11** (并发访问)
+$$\text{ConcurrentAccess}(a_1, a_2) = \text{Overlap}(a_1, a_2) \land \text{Parallel}(a_1, a_2)$$
 
-**定义 1.12** (内存屏障)
-$$\text{MemoryBarrier} = \text{Ordering}[\text{MemoryAccess}]$$
+**定义 1.12** (数据竞争)
+$$\text{DataRace}(a_1, a_2) = \text{ConcurrentAccess}(a_1, a_2) \land \text{OneWrite}(a_1, a_2)$$
+
+- **工程案例**：Rust 借用检查防止数据竞争。
+- **代码示例**：
+
+```rust
+use std::thread;
+
+// 数据竞争预防示例
+fn prevent_data_race() {
+    let mut data = vec![1, 2, 3, 4, 5];
+    
+    // 以下代码会编译错误，防止数据竞争
+    // let ref1 = &mut data;
+    // let ref2 = &mut data;  // 编译错误：同时可变借用
+    
+    // 正确的并发访问
+    let handle = thread::spawn(move || {
+        // 在新线程中使用 data
+        println!("Data in thread: {:?}", data);
+    });
+    
+    handle.join().unwrap();
+}
+```
 
 ### 1.7.2 内存序
 
 **定义 1.13** (内存序)
 $$\text{MemoryOrder} = \{\text{Relaxed}, \text{Acquire}, \text{Release}, \text{AcqRel}, \text{SeqCst}\}$$
 
-**定理 1.2** (内存序一致性)
-$$\text{SeqCst} \Rightarrow \text{TotalOrder}[\text{MemoryAccess}]$$
+- **工程案例**：原子操作、内存屏障。
+- **代码示例**：
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+// 内存序示例
+fn memory_ordering_example() {
+    let counter = AtomicUsize::new(0);
+    
+    // 不同的内存序
+    counter.fetch_add(1, Ordering::Relaxed);  // 最弱的内存序
+    counter.fetch_add(1, Ordering::Acquire);  // 获取语义
+    counter.fetch_add(1, Ordering::Release);  // 释放语义
+    counter.fetch_add(1, Ordering::SeqCst);   // 顺序一致性
+}
+```
 
 ### 1.7.3 数据竞争预防
 
-**定理 1.3** (数据竞争预防)
-$$\text{OwnershipSafe}(p) \Rightarrow \text{NoDataRace}(p)$$
+**策略 1.4** (数据竞争预防)
+$$\text{PreventRace}(a_1, a_2) = \text{Exclusive}(a_1, a_2) \lor \text{Immutable}(a_1, a_2)$$
+
+- **工程案例**：Mutex、RwLock、原子操作。
 
 ### 1.7.4 工程案例与批判性分析（表格）
 
-- **工程案例**：AtomicUsize、`Arc<Mutex<T>>`、并发容器。
-
-| 维度         | 优势                                                         | 局限                                                         |
-|--------------|--------------------------------------------------------------|--------------------------------------------------------------|
-| 并发内存     | 提升多线程安全性，减少数据竞争                                 | 原子操作和同步原语的正确使用需谨慎                             |
+| 维度         | 优势                       | 局限                       |
+|--------------|----------------------------|----------------------------|
+| 并发内存     | 编译时防止数据竞争         | 并发模型复杂度高           |
 
 ---
 
@@ -436,11 +648,9 @@ fn compact_memory(heap: &mut Heap) {
 
 ### 1.8.3 批判性分析与未来展望（表格）
 
-- **工程案例**：内存池与压缩算法在实际应用中的性能与空间效率。
-
-| 维度         | 优势                                                         | 局限                                                         |
-|--------------|--------------------------------------------------------------|--------------------------------------------------------------|
-| 内存优化     | 提升内存性能，减少内存碎片率                                 | 随着硬件性能提升，内存优化技术将更加精细化与智能化             |
+| 维度         | 优势                       | 局限                       |
+|--------------|----------------------------|----------------------------|
+| 内存优化     | 提升性能，减少内存碎片     | 实现复杂度高，调试困难     |
 
 ---
 
@@ -448,19 +658,41 @@ fn compact_memory(heap: &mut Heap) {
 
 ### 1.9.1 操作语义
 
-**规则 1.1** (分配规则)
-$$\frac{\text{Allocate}(size)}{\text{NewAddress}(a) \land \text{Valid}(a, size)}$$
+**定义 1.16** (内存操作语义)
+$$\text{MemorySemantics} = \text{Allocation} \times \text{Deallocation} \times \text{Access}$$
 
-**规则 1.2** (访问规则)
-$$\frac{\text{Valid}(a) \quad \text{Access}(a, v)}{\text{Read}(a) = v}$$
+**规则 1.1** (分配规则)
+$$\frac{\text{Free}(a, size)}{\text{Allocate}(size) \rightarrow a}$$
+
+**规则 1.2** (释放规则)
+$$\frac{\text{Allocated}(a)}{\text{Deallocate}(a) \rightarrow \text{Free}(a)}$$
+
+- **工程案例**：Rust 内存模型的形式化定义。
+- **代码示例**：
+
+```rust
+// 形式化语义示例
+fn formal_semantics_example() {
+    // 分配语义
+    let ptr = Box::new(42);  // Allocate(size) -> a
+    
+    // 访问语义
+    let value = *ptr;        // Access(a) -> value
+    
+    // 释放语义（自动）
+    // Deallocate(a) -> Free(a)
+}
+```
 
 ### 1.9.2 指称语义
 
-**定义 1.16** (内存指称语义)
-$$\llbracket \text{Memory} \rrbracket: \text{Program} \rightarrow \text{MemoryState}$$
+**定义 1.17** (内存状态)
+$$\text{MemoryState} = \text{Address} \rightarrow \text{Value} \cup \{\bot\}$$
 
-**定义 1.17** (分配指称语义)
-$$\llbracket \text{Allocation} \rrbracket: \text{Size} \rightarrow \text{Address}$$
+**定义 1.18** (内存转换)
+$$\text{MemoryTransition} = \text{MemoryState} \times \text{Operation} \rightarrow \text{MemoryState}$$
+
+- **工程案例**：内存模型的形式化验证。
 
 ---
 
@@ -468,58 +700,59 @@ $$\llbracket \text{Allocation} \rrbracket: \text{Size} \rightarrow \text{Address
 
 ### 1.10.1 系统级实现
 
-**策略 1.1** (系统调用)
+**策略 1.5** (系统级内存管理)
+$$\text{SystemMemory} = \text{VirtualMemory} \times \text{PhysicalMemory} \times \text{PageTable}$$
+
+- **工程案例**：操作系统内存管理、虚拟内存。
+- **代码示例**：
 
 ```rust
-fn system_allocate(size: usize) -> *mut u8 {
-    unsafe {
-        libc::malloc(size) as *mut u8
+// 系统级内存管理示例
+use std::alloc::{alloc, dealloc, Layout};
+
+unsafe fn system_memory_example() {
+    let layout = Layout::from_size_align(1024, 8).unwrap();
+    let ptr = alloc(layout);
+    
+    if !ptr.is_null() {
+        // 使用内存
+        *(ptr as *mut u8) = 42;
+        
+        // 释放内存
+        dealloc(ptr, layout);
     }
 }
 ```
 
 ### 1.10.2 用户级实现
 
-**策略 1.2** (用户级分配器)
+**策略 1.6** (用户级内存管理)
+$$\text{UserMemory} = \text{Allocator} \times \text{GC} \times \text{SafetyChecks}$$
 
-```rust
-struct UserAllocator {
-    arena: Arena,
-    free_list: FreeList,
-}
-
-impl Allocator for UserAllocator {
-    fn allocate(&mut self, layout: Layout) -> Result<NonNull<u8>, AllocError> {
-        // 用户级分配逻辑
-        self.arena.allocate(layout)
-    }
-}
-```
+- **工程案例**：用户态分配器、垃圾回收器。
 
 ### 1.10.3 交叉引用
 
+- [变量系统理论](../01_variable_system/index.md)
 - [类型系统理论](../02_type_system/01_type_theory_foundations.md)
 - [所有权系统理论](../04_ownership_system/01_ownership_theory.md)
 - [并发模型理论](../05_concurrency_model/01_concurrency_theory.md)
-- [变量系统理论](../01_variable_system/index.md)
 
 ---
 
 ## 1.11 参考文献
 
-1. "The Rust Programming Language" - Memory Management
-2. "Rust Reference Manual" - Memory Model
-3. "Garbage Collection: Algorithms for Automatic Dynamic Memory Management"
-4. "The Art of Computer Programming, Volume 1" - Memory Management
-5. "Operating Systems: Three Easy Pieces" - Memory Management
+1. "Memory Management: Algorithms and Implementation in C/C++" - Bill Blunden
+2. "The Garbage Collection Handbook" - Richard Jones, Antony Hosking, Eliot Moss
+3. "Modern Operating Systems" - Andrew S. Tanenbaum
+4. Rust Reference Manual - Memory Model
+5. "Systems Programming: Rust" - Rust Book
 
 ---
 
 ## 1.12 本地导航与相关主题
 
----
-
-> **本地导航**：
+> **相关主题**：
 >
 > - [变量系统理论](../01_variable_system/index.md)
 > - [类型系统理论](../02_type_system/01_type_theory_foundations.md)
@@ -527,3 +760,5 @@ impl Allocator for UserAllocator {
 > - [并发模型理论](../05_concurrency_model/01_concurrency_theory.md)
 
 ---
+
+> 本文档持续更新，欢迎补充内存模型理论与工程案例。

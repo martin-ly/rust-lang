@@ -79,6 +79,11 @@ $$\forall t_1, t_2 \in \text{Thread}: \text{SafeInteraction}(t_1, t_2)$$
 - **理论基础**：并发模型以线程为基本执行单元，强调独立性与安全交互。
 - **批判性分析**：理论模型假设线程独立，实际工程中存在线程间资源竞争与同步复杂性。
 
+| 维度 | 优势 | 局限 | 改进方向 |
+|------|------|------|----------|
+| 并发理论 | 形式化建模，便于分析 | 忽略实际资源竞争 | 引入资源竞争建模 |
+| 线程独立性 | 便于推理 | 实际线程常有共享资源 | 增强模型表达能力 |
+
 ### 1.2 并发操作公理
 
 **公理 1.4** (原子性公理)
@@ -88,6 +93,15 @@ $$\text{Atomic}(op) \Rightarrow \text{Uninterruptible}(op)$$
 $$\text{Visible}(op) \Rightarrow \text{Observed}(op)$$
 
 - **工程案例**：原子操作、内存屏障、同步原语。
+
+#### Rust 原子操作示例
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+let counter = AtomicUsize::new(0);
+counter.fetch_add(1, Ordering::SeqCst);
+```
 
 ### 1.3 并发模型结构图
 
@@ -122,6 +136,19 @@ $$\text{Spawn}(f) \Rightarrow \exists t \in \text{Thread}: \text{Execute}(t, f)$
 **定义 2.4** (线程连接)
 $$\text{Join}(t) \Rightarrow \text{Wait}(t) \land \text{GetResult}(t)$$
 
+#### Rust 线程创建与连接示例
+
+```rust
+use std::thread;
+
+fn main() {
+    let handle = thread::spawn(|| {
+        println!("Hello from a thread!");
+    });
+    handle.join().unwrap();
+}
+```
+
 ### 2.3 线程调度
 
 **算法 2.1** (线程调度)
@@ -141,10 +168,27 @@ fn schedule_threads(threads: &mut Vec<Thread>) {
 }
 ```
 
+- **Mermaid 可视化**：
+
+```mermaid
+graph LR
+    A[线程池] --> B[调度器]
+    B --> C[就绪队列]
+    B --> D[运行队列]
+    D --> E[阻塞队列]
+    C --> D
+    E --> C
+```
+
 ### 2.4 工程案例与批判性分析
 
 - **工程案例**：Rust std::thread::spawn、join、线程池 rayon。
 - **批判性分析**：Rust 线程模型简化了线程创建与管理，但线程生命周期与资源释放需谨慎处理。
+
+| 维度 | 优势 | 局限 | 改进方向 |
+|------|------|------|----------|
+| 线程模型 | 简化并发编程 | 生命周期管理复杂 | 引入线程池与自动回收 |
+| 线程调度 | 灵活高效 | 可能导致饥饿 | 增强调度算法 |
 
 ---
 
@@ -159,26 +203,27 @@ $$\text{Mutex}[T] = \text{Lock} \times \text{ProtectedData}[T]$$
 $$\text{Lock}(m) \Rightarrow \text{Acquire}(m) \land \text{Exclusive}(m)$$
 $$\text{Unlock}(m) \Rightarrow \text{Release}(m) \land \text{Free}(m)$$
 
-**算法 3.1** (互斥锁实现)
+#### Rust 互斥锁示例
 
 ```rust
-struct Mutex<T> {
-    locked: AtomicBool,
-    data: UnsafeCell<T>,
-}
+use std::sync::{Mutex, Arc};
+use std::thread;
 
-impl<T> Mutex<T> {
-    fn lock(&self) -> MutexGuard<T> {
-        while self.locked.compare_exchange_weak(
-            false, true, 
-            Ordering::Acquire, 
-            Ordering::Relaxed
-        ).is_err() {
-            // 自旋等待
-            std::hint::spin_loop();
-        }
-        MutexGuard { mutex: self }
+fn main() {
+    let counter = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+    for _ in 0..10 {
+        let counter = Arc::clone(&counter);
+        let handle = thread::spawn(move || {
+            let mut num = counter.lock().unwrap();
+            *num += 1;
+        });
+        handles.push(handle);
     }
+    for handle in handles {
+        handle.join().unwrap();
+    }
+    println!("Result: {}", *counter.lock().unwrap());
 }
 ```
 
@@ -226,6 +271,11 @@ fn producer_consumer() {
 - **工程案例**：std::sync::Mutex、RwLock、Condvar、parking_lot。
 - **批判性分析**：同步原语可防止数据竞争，但易引入死锁与性能瓶颈。
 
+| 维度 | 优势 | 局限 | 改进方向 |
+|------|------|------|----------|
+| 同步原语 | 保证并发安全，防止数据竞争 | 易引入死锁，性能瓶颈 | 引入死锁检测与高性能锁 |
+| 工程实现 | 标准库支持丰富 | 复杂场景下易用性有限 | 丰富API与文档 |
+
 ---
 
 ## 4. 数据竞争预防
@@ -249,15 +299,52 @@ $$\text{OwnershipSafe}(p) \Rightarrow \text{NoDataRace}(p)$$
 2. 借用系统防止并发可变访问
 3. 证毕
 
+- **Mermaid 可视化**：
+
+```mermaid
+graph TD
+    A[唯一所有权] --> B[无并发可变访问]
+    B --> C[无数据竞争]
+```
+
 ### 4.3 同步防止数据竞争
 
 **定理 4.2** (同步数据竞争预防)
 $$\text{ProperlySynchronized}(p) \Rightarrow \text{NoDataRace}(p)$$
 
+- **Rust 代码示例**：
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let data = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+    for _ in 0..10 {
+        let data = Arc::clone(&data);
+        let handle = thread::spawn(move || {
+            let mut num = data.lock().unwrap();
+            *num += 1;
+        });
+        handles.push(handle);
+    }
+    for handle in handles {
+        handle.join().unwrap();
+    }
+    println!("Result: {}", *data.lock().unwrap());
+}
+```
+
 ### 4.4 工程案例与批判性分析
 
 - **工程案例**：Send/Sync trait、`Arc<Mutex<T>>`、多线程安全容器。
 - **批判性分析**：Rust 静态检查可消除绝大多数数据竞争，但复杂同步场景仍需工程师谨慎设计。
+
+| 维度 | 优势 | 局限 | 改进方向 |
+|------|------|------|----------|
+| 静态检查 | 编译期消除数据竞争 | 某些场景需手动同步 | 丰富同步原语 |
+| 工程实践 | 多线程安全容器丰富 | 复杂同步难以验证 | 引入形式化验证 |
 
 ---
 
@@ -276,17 +363,13 @@ $$\text{Relaxed} \prec \text{Acquire} \prec \text{Release} \prec \text{AcqRel} \
 **定义 5.3** (原子类型)
 $$\text{Atomic}[T] = \text{Uninterruptible}[T] \times \text{MemoryOrder}$$
 
-**算法 5.1** (原子操作)
+**Rust 原子操作示例**：
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 let counter = AtomicUsize::new(0);
-
-// 原子递增
 counter.fetch_add(1, Ordering::SeqCst);
-
-// 原子比较交换
 let old_value = counter.compare_exchange(
     0, 1, 
     Ordering::Acquire, 
@@ -299,31 +382,34 @@ let old_value = counter.compare_exchange(
 **定义 5.4** (内存屏障)
 $$\text{MemoryBarrier} = \text{Ordering}[\text{MemoryAccess}]$$
 
-**算法 5.2** (内存屏障使用)
+**Rust 内存屏障示例**：
 
 ```rust
 use std::sync::atomic::{fence, Ordering};
 
-// 发布-订阅模式
-let data = 42;
-let ready = AtomicBool::new(false);
-
-// 发布者
-data.store(42, Ordering::Relaxed);
 fence(Ordering::Release);
-ready.store(true, Ordering::Relaxed);
+fence(Ordering::Acquire);
+```
 
-// 订阅者
-if ready.load(Ordering::Acquire) {
-    fence(Ordering::Acquire);
-    let value = data.load(Ordering::Relaxed);
-}
+- **Mermaid 可视化**：
+
+```mermaid
+graph LR
+    A[写入数据] --> B[Release 屏障]
+    B --> C[设置标志位]
+    D[读取标志位] --> E[Acquire 屏障]
+    E --> F[读取数据]
 ```
 
 ### 5.4 工程案例与批判性分析
 
 - **工程案例**：AtomicUsize、AtomicBool、fence、发布-订阅模式。
 - **批判性分析**：内存序与原子操作为高性能并发提供基础，但易用性与正确性需权衡。
+
+| 维度 | 优势 | 局限 | 改进方向 |
+|------|------|------|----------|
+| 原子操作 | 高性能并发 | 易用性差，易出错 | 提供更安全API |
+| 内存序 | 精细控制同步 | 理解难度大 | 增强文档与工具 |
 
 ---
 
@@ -348,11 +434,10 @@ trait Future {
 **定义 6.3** (异步运行时)
 $$\text{AsyncRuntime} = \text{Executor} \times \text{Reactor} \times \text{TaskQueue}$$
 
-**算法 6.1** (异步执行)
+**Rust 异步执行示例**：
 
 ```rust
 async fn async_function() -> i32 {
-    // 异步操作
     let result = some_async_operation().await;
     result + 1
 }
@@ -369,14 +454,13 @@ async fn main() {
 **定义 6.4** (异步流)
 $$\text{AsyncStream}[T] = \text{Stream}[T] \times \text{AsyncIterator}$$
 
-**算法 6.2** (异步流处理)
+**Rust 异步流处理示例**：
 
 ```rust
 use tokio_stream::{self, StreamExt};
 
 async fn process_stream() {
     let mut stream = tokio_stream::iter(1..=10);
-    
     while let Some(value) = stream.next().await {
         println!("Processing: {}", value);
     }
@@ -387,6 +471,11 @@ async fn process_stream() {
 
 - **工程案例**：Tokio、async-std、Futures crate。
 - **未来展望**：Rust 异步生态持续发展，异步与并发模型深度融合。
+
+| 维度 | 优势 | 局限 | 改进方向 |
+|------|------|------|----------|
+| 异步模型 | 高并发、低开销 | 学习曲线陡峭 | 丰富文档与工具 |
+| 生态发展 | 生态活跃 | 兼容性与标准化挑战 | 推动标准化 |
 
 ---
 
@@ -412,12 +501,25 @@ $$\text{OwnershipSafe}(p) \land \text{ProperlySynchronized}(p) \Rightarrow \text
 
 1. 所有权系统防止数据竞争
 2. 同步原语保证正确交互
-3. 证毕
+3. 死锁预防策略保证无死锁
+4. 证毕
+
+- **Mermaid 可视化**：
+
+```mermaid
+graph TD
+    A[所有权安全] --> B[无数据竞争]
+    B --> C[同步原语]
+    C --> D[无死锁]
+    D --> E[并发安全]
+```
 
 ### 7.3 批判性分析
 
-- **理论基础**：Rust 并发安全性依赖于类型系统与所有权模型。
-- **批判性分析**：理论安全性依赖于工程实现的正确性，复杂场景下仍需形式化验证。
+| 维度 | 优势 | 局限 | 改进方向 |
+|------|------|------|----------|
+| 理论安全 | 类型系统与所有权模型保证 | 依赖工程实现正确性 | 增强静态分析与形式化验证 |
+| 工程实现 | 编译器静态检查 | 复杂场景下难以完全验证 | 引入自动化验证工具 |
 
 ---
 
@@ -446,17 +548,31 @@ fn safe_lock_ordering(mutex1: &Mutex<i32>, mutex2: &Mutex<i32>) {
     } else {
         (mutex2, mutex1)
     };
-    
     let _lock1 = first.lock();
     let _lock2 = second.lock();
     // 安全操作
 }
 ```
 
+- **Mermaid 可视化**：
+
+```mermaid
+graph LR
+    A[线程1] -- 等待 --> B[线程2]
+    B -- 等待 --> A
+    C[资源排序] --> D[避免循环等待]
+    E[超时机制] --> F[释放资源]
+```
+
 ### 8.3 工程案例与未来展望
 
 - **工程案例**：多资源加锁、死锁检测工具。
 - **未来展望**：Rust 死锁预防机制与静态分析工具将持续完善。
+
+| 维度 | 优势 | 局限 | 改进方向 |
+|------|------|------|----------|
+| 死锁预防 | 降低死锁风险 | 复杂场景下难以完全避免 | 引入静态死锁分析 |
+| 工具支持 | 死锁检测工具丰富 | 误报与漏报问题 | 优化检测算法 |
 
 ---
 
@@ -481,10 +597,27 @@ $$\text{ReduceContention} = \text{FineGrainedLocking} \cup \text{LockFreeDataStr
 **策略 9.2** (提高并行度)
 $$\text{IncreaseParallelism} = \text{TaskDecomposition} \cup \text{DataParallelism}$$
 
+- **Rust 代码示例**：
+
+```rust
+use rayon::prelude::*;
+
+fn main() {
+    let v: Vec<i32> = (1..1000).collect();
+    let sum: i32 = v.par_iter().sum();
+    println!("并行求和: {}", sum);
+}
+```
+
 ### 9.3 工程案例与批判性分析
 
 - **工程案例**：rayon 并行计算、crossbeam、lock-free 队列。
 - **批判性分析**：高并发优化需权衡可维护性与复杂度。
+
+| 维度 | 优势 | 局限 | 改进方向 |
+|------|------|------|----------|
+| 并发性能 | 高吞吐量、低延迟 | 代码复杂度提升 | 引入自动性能分析 |
+| 工具支持 | 并发性能分析工具丰富 | 结果解释难度大 | 优化可视化与报告 |
 
 ---
 
@@ -495,44 +628,62 @@ $$\text{IncreaseParallelism} = \text{TaskDecomposition} \cup \text{DataParalleli
 **方法 10.1** (模型检查)
 $$\text{ModelChecking}: \text{ConcurrentProgram} \rightarrow \text{SafetyProperties}$$
 
+- **工具案例**：TLA+、SPIN、CBMC。
+
 ### 10.2 定理证明
 
 **方法 10.2** (定理证明)
 $$\text{TheoremProving}: \text{ConcurrentProgram} \rightarrow \text{CorrectnessProof}$$
 
+- **工具案例**：RustBelt、Coq、Isabelle。
+
 ### 10.3 工具支持
 
-**工具 10.1** (形式化验证工具)
-
-- TLA+
-- SPIN
-- CBMC
-- RustBelt
+| 工具 | 说明 |
+|------|------|
+| TLA+ | 并发系统建模与验证 |
+| SPIN | 并发协议模型检查 |
+| CBMC | C/Rust 程序模型检查 |
+| RustBelt | Rust 类型系统与安全性形式化 |
 
 ### 10.4 未来展望
 
-- **理论基础**：形式化验证为并发安全提供数学保障。
-- **未来展望**：Rust 并发模型的形式化工具链将持续丰富。
+- 形式化验证工具将持续完善，支持更复杂的并发场景。
+- Rust 生态将引入更多自动化验证与分析工具。
 
 ---
 
 ## 11. 交叉引用
 
-- [类型系统理论](../../02_type_system/01_type_theory_foundations.md)
-- [所有权系统理论](../04_ownership_system/01_ownership_theory.md)
-- [内存模型理论](../03_memory_model/01_memory_model_theory.md)
 - [变量系统理论](../01_variable_system/index.md)
+- [类型系统理论](../02_type_system/01_type_theory_foundations.md)
+- [内存模型理论](../03_memory_model/01_memory_model_theory.md)
+- [所有权系统理论](../04_ownership_system/01_ownership_theory.md)
 
 ---
 
 ## 参考文献
 
-1. "The Rust Programming Language" - Concurrency
-2. "Rust Reference Manual" - Memory Model
-3. "The Art of Multiprocessor Programming" - Maurice Herlihy, Nir Shavit
-4. "Concurrent Programming in Java" - Doug Lea
-5. "Principles of Concurrent and Distributed Programming" - M. Ben-Ari
+1. "The Rust Programming Language" - Concurrency Chapter
+2. "Rust Reference Manual" - Concurrency
+3. Josh Triplett, et al. "Fearless Concurrency in Rust"
+4. Jung, R., et al. "RustBelt: Securing the foundations of the Rust programming language"
+5. Lamport, L. "Specifying Systems: The TLA+ Language and Tools for Hardware and Software Engineers"
+6. Holzmann, G. J. "The SPIN Model Checker"
+7. "Rayon: Data Parallelism in Rust"
+8. "Crossbeam: Tools for concurrent programming in Rust"
 
 ---
 
-> 本文档持续更新，欢迎补充并发模型理论与工程案例。
+## 本地导航与相关主题
+
+- [Rust 并发与异步编程专题](../../../c06_async/docs/)
+- [Rust 线程与同步原语](../../../c05_threads/src/)
+- [Rust 类型系统与所有权](../02_type_system/01_type_theory_foundations.md)
+- [Rust 内存模型](../03_memory_model/01_memory_model_theory.md)
+
+---
+
+*最后更新：2024年12月19日*
+*版本：1.0.0*
+*状态：并发模型理论规范化与内容增强完成*

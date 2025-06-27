@@ -12,7 +12,8 @@
 嵌入式系统是专用于特定任务的计算机系统，具有资源受限、实时性要求高、可靠性要求严格的特点。
 
 **数学定义**:
-```
+
+```text
 embedded_system ::= hardware + firmware + real_time_constraints
 bare_metal ::= no_os + direct_hardware_access
 hal ::= hardware_abstraction_layer
@@ -23,6 +24,7 @@ hal ::= hardware_abstraction_layer
 裸机编程直接在硬件上运行，不依赖操作系统，需要直接管理硬件资源。
 
 **核心概念**:
+
 ```rust
 #![no_std]           // 禁用标准库
 #![no_main]          // 自定义入口点
@@ -34,7 +36,8 @@ hal ::= hardware_abstraction_layer
 硬件抽象层(HAL)提供统一的硬件接口，屏蔽底层硬件差异。
 
 **HAL层次结构**:
-```
+
+```text
 Application Layer
     ↓
 HAL (Hardware Abstraction Layer)
@@ -687,4 +690,4 @@ impl WirelessModule {
 
 Rust嵌入式系统编程为资源受限的硬件平台提供了安全、高效的解决方案。通过裸机编程、硬件抽象层和实时系统设计，可以实现高性能的嵌入式应用。
 
-嵌入式系统开发需要深入理解硬件特性、实时性要求和资源约束。Rust的所有权系统和零成本抽象为嵌入式开发提供了独特优势，既保证了内存安全，又保持了高性能。 
+嵌入式系统开发需要深入理解硬件特性、实时性要求和资源约束。Rust的所有权系统和零成本抽象为嵌入式开发提供了独特优势，既保证了内存安全，又保持了高性能。
