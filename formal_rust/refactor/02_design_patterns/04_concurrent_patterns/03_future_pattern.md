@@ -136,7 +136,7 @@ $$\forall F \in \mathcal{F}: \text{type}(F) = \text{Future}(\text{type}(\text{re
 
 ### 5.1 时间复杂度
 
-**定理 5.1 (操作复杂度)**
+**定理 5.1 (操作复杂度)**:
 
 - Future 创建：$O(1)$
 - Future 轮询：$O(1)$

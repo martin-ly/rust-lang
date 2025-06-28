@@ -139,7 +139,7 @@ $$\forall (s, m, r) \in \text{transmissions}: \text{type}(m) = \text{expected\_t
 
 ### 5.1 时间复杂度
 
-**定理 5.1 (操作复杂度)**
+**定理 5.1 (操作复杂度)**:
 
 - 发送操作：$O(1)$
 - 接收操作：$O(1)$

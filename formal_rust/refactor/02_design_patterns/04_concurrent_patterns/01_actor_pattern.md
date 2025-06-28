@@ -127,7 +127,7 @@ $$\forall A_1 \xrightarrow{m} A_2: type(m) \subseteq accepted\_types(A_2)$$
 
 ### 5.1 消息传递复杂度
 
-**定理 5.1 (消息传递复杂度)**
+**定理 5.1 (消息传递复杂度)**:
 
 - 时间复杂度：$O(1)$
 - 空间复杂度：$O(|M|)$

@@ -278,7 +278,7 @@ $$\forall t \in T, \forall r \in R: \text{type}(t) \in \mathcal{T} \land \text{t
 
 ### 5.1 时间复杂度
 
-**定理 5.1 (并行复杂度)**
+**定理 5.1 (并行复杂度)**:
 
 - Fork 操作：$O(\log n)$
 - 并行执行：$O(n/p)$

@@ -204,7 +204,7 @@ $$\forall d \in D, \forall (k, v) \in \text{map}(d): \text{type}(k) \in \mathcal
 
 ### 5.1 时间复杂度
 
-**定理 5.1 (并行复杂度)**
+**定理 5.1 (并行复杂度)**:
 
 - Map 阶段：$O(|D|/n)$
 - Shuffle 阶段：$O(|D| \log |D|)$

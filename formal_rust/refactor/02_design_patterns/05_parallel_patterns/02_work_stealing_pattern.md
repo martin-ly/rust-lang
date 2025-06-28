@@ -207,7 +207,7 @@ $$\forall t \in T, \forall task \in \text{queue}(t): \text{type}(task) \in \math
 
 ### 5.1 时间复杂度
 
-**定理 5.1 (调度复杂度)**
+**定理 5.1 (调度复杂度)**:
 
 - 本地队列操作：$O(1)$
 - 全局队列操作：$O(1)$
