@@ -4,9 +4,9 @@
 
 - [3. 多视角对比与综合方法论（03\_comparative\_analysis）](#3-多视角对比与综合方法论03_comparative_analysis)
   - [3.0 严格编号目录](#30-严格编号目录)
-  - [3.1 视角概述与理论基础](#31-视角概述与理论基础)
-    - [3.1.1 核心视角体系](#311-核心视角体系)
-    - [3.1.2 综合方法论框架](#312-综合方法论框架)
+  - [3.1 视角概述](#31-视角概述)
+    - [3.1.1 核心视角](#311-核心视角)
+    - [3.1.2 方法论框架](#312-方法论框架)
   - [3.2 对比分析表](#32-对比分析表)
     - [3.2.1 基础对比](#321-基础对比)
     - [3.2.2 深度分析](#322-深度分析)
@@ -363,6 +363,7 @@ graph TB
   - ✅ 学术规范化处理
 
 **质量标准达成：**
+
 - ✅ 理论完整性：涵盖主要分析视角
 - ✅ 方法科学性：建立系统对比框架
 - ✅ 实用性验证：提供具体应用指导
@@ -371,11 +372,13 @@ graph TB
 ### 3.6.2 后续建议
 
 **发展方向：**
+
 1. 深化各视角间的理论融合，建立统一分析框架
 2. 扩展新兴编程范式（如异步、并发）的多视角分析
 3. 建立基于多视角的自动化分析工具
 
 **与其他文件的联动：**
+
 - 持续跟进[1. 执行流视角](01_execution_flow.md)和[2. 范畴论视角](02_category_theory.md)的理论发展
 - 为[6. 案例研究](06_case_studies.md)提供分析方法指导
 - 支撑[7. 理论前沿对比](07_theory_frontier_comparison.md)的跨语言比较
@@ -389,6 +392,7 @@ graph TB
 **交叉引用网络：**
 
 **内部引用：**
+
 - [1. 执行流视角](01_execution_flow.md#12-理论建模与数学基础) - 工程实践基础
 - [2. 范畴论视角](02_category_theory.md#22-范畴论核心概念与变量系统映射) - 理论抽象支撑
 - [4. 对称性原理](04_symmetry_principle.md#42-理论阐释) - 设计原则分析
@@ -399,6 +403,7 @@ graph TB
 - [index.md（主目录）](index.md) - 系统导航
 
 **外部资源：**
+
 - Programming Language Theory: Comparative Analysis Methods
 - Software Engineering: Multi-perspective Analysis Frameworks
 - Formal Methods: Cross-paradigm Verification Techniques

@@ -4,7 +4,7 @@
 
 - [6. 综合案例研究与理论验证（06\_case\_studies）](#6-综合案例研究与理论验证06_case_studies)
   - [6.0 严格编号目录](#60-严格编号目录)
-  - [6.1 研究框架与案例选择](#61-研究框架与案例选择)
+  - [6.1 视角简介](#61-视角简介)
   - [6.2 典型案例分析](#62-典型案例分析)
     - [6.2.1 所有权与借用在数据结构中的应用](#621-所有权与借用在数据结构中的应用)
     - [6.2.2 闭包与生命周期推断](#622-闭包与生命周期推断)
@@ -531,6 +531,7 @@ impl MultiPerspectiveAnalyzer for RustVariableAnalyzer {
 ### 6.7.1 当前进度
 
 **当前完成状态：**
+
 - ✅ 综合案例研究体系建立
 - ✅ 多视角理论验证完成
 - ✅ 实际工程问题分析
@@ -538,6 +539,7 @@ impl MultiPerspectiveAnalyzer for RustVariableAnalyzer {
 - ✅ 批判性评估与展望
 
 **质量标准达成：**
+
 - ✅ 案例典型性：覆盖主要应用场景
 - ✅ 分析深度：多视角理论综合应用
 - ✅ 实用价值：提供具体工程指导
@@ -546,11 +548,13 @@ impl MultiPerspectiveAnalyzer for RustVariableAnalyzer {
 ### 6.7.2 后续建议
 
 **案例库扩展：**
+
 1. 增加更多新兴领域的复杂案例
 2. 建立案例分类与标签体系
 3. 开发交互式案例分析工具
 
 **理论验证深化：**
+
 - 建立量化的理论验证指标
 - 设计对照实验验证理论有效性
 - 收集更多实际项目反馈数据
@@ -564,6 +568,7 @@ impl MultiPerspectiveAnalyzer for RustVariableAnalyzer {
 **交叉引用网络：**
 
 **内部引用：**
+
 - [1. 执行流视角](01_execution_flow.md#13-多模态示例与验证) - 执行流案例分析
 - [2. 范畴论视角](02_category_theory.md#24-代码实现与工程验证) - 理论建模验证
 - [3. 多视角对比](03_comparative_analysis.md#32-对比分析表) - 方法论应用
@@ -574,6 +579,7 @@ impl MultiPerspectiveAnalyzer for RustVariableAnalyzer {
 - [index.md（主目录）](index.md) - 系统导航
 
 **外部资源：**
+
 - Real-World Rust Projects Analysis
 - Systems Programming Case Studies
 - Memory Safety in Production Systems

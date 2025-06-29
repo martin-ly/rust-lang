@@ -88,7 +88,7 @@ $$\forall t \in L_{\text{borrow}}: \neg\exists v' \neq v_{\text{borrower}} : \te
 
 ### 1.2.4 可变性与内部可变性的类型论分析
 
-**定义 1.4（可变性类型）**
+**定义 1.4（可变性类型）**:
 
 - 不可变类型：$T$
 - 可变类型：$\text{mut } T$
