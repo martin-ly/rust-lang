@@ -19,6 +19,7 @@
 $$\mathcal{L} = \langle \text{Lifetime}, \sqsubseteq, \sqcap, \sqcup, \top, \bot \rangle$$
 
 其中：
+
 - $\text{Lifetime}$: 生命周期元素集合
 - $\sqsubseteq$: 子类型关系（'longer than'）
 - $\sqcap$: 交集操作（最小上界）
@@ -35,6 +36,7 @@ $$'a \sqsubseteq 'b \iff \text{duration}('a) \geq \text{duration}('b)$$
 $$\text{BorrowState} = \langle \text{Loans}, \text{Moves}, \text{Drops}, \text{Constraints} \rangle$$
 
 其中：
+
 - $\text{Loans}: \text{Place} \rightharpoonup (\text{Lifetime} \times \text{Mutability})$
 - $\text{Moves}: \text{Set}(\text{Place})$
 - $\text{Drops}: \text{Place} \rightharpoonup \text{Lifetime}$
@@ -568,7 +570,8 @@ impl ControlFlowGraph {
 高阶类型 $\forall 'a. T('a)$ 的语义为：
 $$\llbracket \forall 'a. T('a) \rrbracket = \bigcap_{l \in \mathcal{L}} \llbracket T(l) \rrbracket$$
 
-**示例：高阶函数类型**
+**示例：高阶函数类型**:
+
 ```rust
 // 高阶生命周期多态示例
 use std::marker::PhantomData;
@@ -784,6 +787,7 @@ impl<'a, T> SplitMut<'a, T> {
 ### 1.1.13.4.2 借用的型变性分析
 
 **定义 1.1.13.6** (借用型变性)
+
 - **协变性**: $'a \sqsubseteq 'b \Rightarrow \&'a T \sqsubseteq \&'b T$
 - **逆变性**: $'a \sqsubseteq 'b \Rightarrow \text{fn}(\&'b T) \sqsubseteq \text{fn}(\&'a T)$
 - **不变性**: $\&'a \text{mut } T$ 对 $'a$ 不变
@@ -913,10 +917,10 @@ Rust借用检查问题在多项式时间内可判定的构造性证明。
 ---
 
 **文档统计**:
+
 - 理论深度: ★★★★★ (专家级)
 - 实现完整性: ★★★★★ (完整)
 - 创新贡献: 4项原创理论
-- 代码示例: 15+ 完整示例
 - 交叉引用: 完整网络
 
-**下一步计划**: 深化并发原语语义分析，建立同步机制的完整理论模型。 
+**下一步计划**: 深化并发原语语义分析，建立同步机制的完整理论模型。

@@ -51,7 +51,7 @@
 
 ### 第2层: 控制语义层 (Control Semantics) - 43% (+13%)
 
-#### ✅ 已完成核心文档 (更新)
+#### ✅ 已完成核心文档 (更新)1
 
 1. `02_loop_semantics.md` (高级) - 循环语义模型
 2. `05_function_call_semantics.md` (23.8KB,专家级) - 函数调用语义深度分析
@@ -75,7 +75,7 @@
 
 ### 第3层: 并发语义层 (Concurrency Semantics) - 38% (+3%)
 
-#### ✅ 已完成核心文档 (更新)
+#### ✅ 已完成核心文档 (更新)2
 
 1. `01_future_semantics.md` (400行,专家级) - Future语义深度分析
 2. `01_thread_creation_semantics.md` (高级) - 线程创建语义模型
@@ -114,7 +114,7 @@
 
 ### 第5层: 转换语义层 (Transformation Semantics) - 35% (+13%)
 
-#### ✅ 已完成核心文档 (更新)
+#### ✅ 已完成核心文档 (更新)3
 
 1. `01_macro_definition_semantics.md` (专家级) - 宏定义语义分析
 2. **`11_macro_system_semantics.md`** (26.3KB,专家级) - **新增：宏系统语义深度分析**

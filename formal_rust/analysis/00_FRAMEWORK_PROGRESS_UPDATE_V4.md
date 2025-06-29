@@ -67,7 +67,7 @@
 
 ### 第2层: 控制语义层 (Control Semantics) - 43% (+13%)
 
-#### ✅ 最新完成文档  
+#### ✅ 最新完成文档1
 
 1. **`10_error_handling_semantics.md`** (专家级) - 错误处理语义
    - Result类型的单子结构
@@ -83,7 +83,7 @@
 
 ### 第3层: 并发语义层 (Concurrency Semantics) - 38% (+3%)
 
-#### ✅ 最新完成文档
+#### ✅ 最新完成文档2
 
 1. **`12_async_runtime_semantics.md`** (专家级) - 异步运行时语义
    - 执行器模型代数
@@ -99,7 +99,7 @@
 
 ### 第5层: 转换语义层 (Transformation Semantics) - 35% (+13%)
 
-#### ✅ 最新完成文档
+#### ✅ 最新完成文档3
 
 1. **`11_macro_system_semantics.md`** (专家级) - 宏系统语义深度分析
    - 宏展开的形式化语义
