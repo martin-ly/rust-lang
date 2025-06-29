@@ -18,6 +18,7 @@
 $$\text{FFI} = \langle \text{ExternBlocks}, \text{ABI}, \text{TypeMapping}, \text{Safety}, \text{Ownership} \rangle$$
 
 其中：
+
 - $\text{ExternBlocks}: \text{Set}(\text{ExternBlock})$ - 外部块集合
 - $\text{ABI}: \text{ABISpec}$ - 应用二进制接口规范
 - $\text{TypeMapping}: \text{RustType} \leftrightarrow \text{ForeignType}$ - 类型映射
@@ -559,9 +560,10 @@ $$\text{exception\_safe}(ffi\_call) \iff \text{no\_unwind\_across\_boundary}(ffi
 ---
 
 **文档统计**:
+
 - 理论深度: ★★★★★ (专家级)
 - 创新贡献: 4项原创理论
 - 互操作完整性: 全面覆盖FFI语义
 - 实用价值: 直接指导跨语言集成
 
-**下一步计划**: 建立性能分析语义，完成编译时性能预测的数学模型。 
+**下一步计划**: 建立性能分析语义，完成编译时性能预测的数学模型。

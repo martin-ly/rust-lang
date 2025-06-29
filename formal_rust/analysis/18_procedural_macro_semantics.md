@@ -18,6 +18,7 @@
 $$\text{ProcMacro} = \langle \text{Input}, \text{Transform}, \text{Output}, \text{Context}, \text{Expansion} \rangle$$
 
 其中：
+
 - $\text{Input}: \text{TokenStream}$ - 输入令牌流
 - $\text{Transform}: \text{TokenStream} \rightarrow \text{TokenStream}$ - 转换函数
 - $\text{Output}: \text{TokenStream}$ - 输出令牌流
@@ -34,6 +35,7 @@ $$\text{TokenStream} = \text{List}(\text{TokenTree})$$
 $$\text{TokenTree} = \text{Token} \mid \text{Group}(\text{Delimiter}, \text{TokenStream})$$
 
 **令牌流操作**：
+
 - **连接**: $ts_1 \oplus ts_2 = \text{concat}(ts_1, ts_2)$
 - **过滤**: $\text{filter}(ts, predicate) = \{t \in ts \mid predicate(t)\}$
 - **映射**: $\text{map}(ts, f) = \{f(t) \mid t \in ts\}$
@@ -599,4 +601,4 @@ $$\text{invalidate}(change) \Rightarrow \text{recompile}(\text{affected\_macros}
 - 元编程完整性: 全面覆盖过程宏语义
 - 实用价值: 直接指导宏系统实现
 
-**下一步计划**: 深入FFI互操作语义，建立跨语言调用的完整安全理论。 
+**下一步计划**: 深入FFI互操作语义，建立跨语言调用的完整安全理论。
