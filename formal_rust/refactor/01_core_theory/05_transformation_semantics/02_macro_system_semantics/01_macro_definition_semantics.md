@@ -16,6 +16,7 @@
 $$\text{Macro} = \langle \text{Pattern}, \text{Template}, \text{Expansion}, \text{Hygiene}, \text{Resolution} \rangle$$
 
 其中：
+
 - $\text{Pattern} : \text{TokenStream} \rightarrow \text{Match}$ - 模式匹配
 - $\text{Template} : \text{Match} \rightarrow \text{TokenStream}$ - 代码生成
 - $\text{Expansion} : \text{MacroCall} \rightarrow \text{AST}$ - 宏展开
@@ -806,16 +807,19 @@ fn compile_time_macro_usage() {
 ## 5.2.1.6 相关引用与扩展阅读
 
 ### 5.2.1.6.1 内部交叉引用
+
 - [5.1.1 编译流程语义](../01_compilation_semantics/01_compilation_process_semantics.md) - 宏展开时机
 - [1.1.1 原始类型语义](../../01_foundation_semantics/01_type_system_semantics/01_primitive_types_semantics.md) - 类型在宏中的使用
 - [4.1.1 模块定义语义](../../04_organization_semantics/01_module_system_semantics/01_module_definition_semantics.md) - 宏的可见性
 
 ### 5.2.1.6.2 外部参考文献
+
 1. *The Rust Programming Language* - Chapter 19: Advanced Features
 2. *The Little Book of Rust Macros*
 3. Kohlhoff, C. *Procedural Macros in Rust*. 2018.
 
 ### 5.2.1.6.3 实现参考
+
 - [syn](https://crates.io/crates/syn) - Rust语法解析
 - [quote](https://crates.io/crates/quote) - 代码生成
 - [proc-macro2](https://crates.io/crates/proc-macro2) - 过程宏工具
@@ -823,8 +827,9 @@ fn compile_time_macro_usage() {
 ---
 
 **文档元数据**:
+
 - **复杂度级别**: ⭐⭐⭐⭐⭐ (专家级)
 - **前置知识**: Rust语法、令牌流、AST概念
 - **相关工具**: cargo expand, rust-analyzer
 - **更新频率**: 与Rust宏系统演进同步
-- **维护者**: Rust转换语义分析工作组 
+- **维护者**: Rust转换语义分析工作组
