@@ -18,6 +18,7 @@
 $$\text{WASM} = \langle \text{Module}, \text{Memory}, \text{Table}, \text{Function}, \text{Export}, \text{Import} \rangle$$
 
 其中：
+
 - $\text{Module}: \text{WasmModule}$ - WASM模块结构
 - $\text{Memory}: \text{LinearMemory}$ - 线性内存模型
 - $\text{Table}: \text{FunctionTable}$ - 函数表
@@ -614,7 +615,8 @@ $$\text{optimization\_correct}(optimization) \iff \text{semantics\_preserving}(o
 ---
 
 **文档统计**:
+
 - 理论深度: ★★★★★ (专家级)
 - 创新贡献: 4项原创理论
 - 跨平台完整性: 全面的WASM语义
-- 实用价值: 直接指导WASM工具链 
+- 实用价值: 直接指导WASM工具链
