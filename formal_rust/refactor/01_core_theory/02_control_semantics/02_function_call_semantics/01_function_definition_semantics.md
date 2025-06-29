@@ -18,6 +18,7 @@ Rust的函数定义可形式化为类型化λ演算的扩展：
 $$\text{Function} = \langle \text{Name}, \text{Params}, \text{ReturnType}, \text{Body}, \text{Generics}, \text{Constraints} \rangle$$
 
 其中：
+
 - $\text{Name} : \text{Identifier}$ - 函数名称
 - $\text{Params} : \text{List}(\text{Parameter})$ - 参数列表
 - $\text{ReturnType} : \text{Type}$ - 返回类型
@@ -89,6 +90,7 @@ fn square(x: i32) -> i32 {
 ```
 
 **函数定义语义分析**：
+
 - **名称绑定**: 函数名在定义作用域内可见
 - **类型推断**: 返回类型可从函数体推断
 - **表达式vs语句**: 最后一个表达式作为返回值
@@ -633,24 +635,28 @@ fn maybe_diverges(should_panic: bool) -> i32 {
 ## 2.2.1.10 相关引用与扩展阅读
 
 ### 2.2.1.10.1 内部交叉引用
+
 - [2.2.2 参数传递语义](02_parameter_passing_semantics.md) - 参数传递机制详细分析
 - [2.2.3 返回值语义](03_return_value_semantics.md) - 返回值处理语义
 - [1.1.4 函数类型语义](../../01_foundation_semantics/01_type_system_semantics/04_function_types_semantics.md) - 函数类型理论
 
 ### 2.2.1.10.2 外部参考文献
+
 1. Pierce, B.C. *Types and Programming Languages*. Chapter 9: Simply Typed Lambda-Calculus.
 2. Harper, R. *Practical Foundations for Programming Languages*. Chapter 7: Functions.
 3. Rust Reference: [Functions](https://doc.rust-lang.org/reference/items/functions.html)
 
 ### 2.2.1.10.3 实现参考
+
 - [rustc_ast](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_ast/index.html) - AST表示
 - [rustc_typeck](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_typeck/index.html) - 类型检查
 
 ---
 
 **文档元数据**:
+
 - **复杂度级别**: ⭐⭐⭐⭐ (高级)
 - **前置知识**: Rust基础语法、类型系统、λ演算基础
 - **相关工具**: rustc, rust-analyzer, cargo
 - **更新频率**: 与Rust函数系统演进同步
-- **维护者**: Rust控制语义分析工作组 
+- **维护者**: Rust控制语义分析工作组

@@ -29,20 +29,20 @@ graph TD
         E[求值else分支]
         F[返回结果]
     end
-    
+
     subgraph "类型检查"
         G[检查条件类型为bool]
         H[检查分支类型一致]
         I[推断整体类型]
     end
-    
+
     A --> B
     B --> C
     C -->|true| D
     C -->|false| E
     D --> F
     E --> F
-    
+
     A --> G
     G --> H
     H --> I
@@ -71,17 +71,17 @@ fn if_expression_semantics() {
         "small"
     };
     assert_eq!(result, "large");
-    
+
     // 2. if表达式的值绑定
     let value = if true { 42 } else { 0 };
     assert_eq!(value, 42);
-    
+
     // 3. 单元类型的if表达式
     let condition = true;
     if condition {
         println!("Condition is true");
     } // 等价于 if condition { println!("...") } else { () }
-    
+
     // 4. 嵌套if表达式
     let nested_result = if x > 0 {
         if x > 10 {
@@ -92,7 +92,7 @@ fn if_expression_semantics() {
     } else {
         "non-positive"
     };
-    
+
     println!("Nested result: {}", nested_result);
 }
 ```
@@ -108,35 +108,35 @@ $$\frac{\Gamma \vdash e_c : \text{bool} \quad \Gamma \vdash e_1 : T \quad \Gamma
 fn if_type_inference() {
     // 1. 相同类型分支
     let number_result: i32 = if true { 100 } else { 200 };
-    
+
     // 2. 类型强制转换
     let mixed_result = if false {
         42i32  // i32
     } else {
         100u32 as i32  // u32转换为i32
     };
-    
+
     // 3. 泛型上下文中的类型推断
     fn generic_if<T>(condition: bool, a: T, b: T) -> T {
         if condition { a } else { b }
     }
-    
+
     let string_result = generic_if(true, "hello", "world");
     let int_result = generic_if(false, 1, 2);
-    
+
     // 4. 复杂类型的统一
     enum Value {
         Int(i32),
         Float(f64),
         Text(String),
     }
-    
+
     let complex_result = if condition_function() {
         Value::Int(42)
     } else {
         Value::Text("hello".to_string())
     };
-    
+
     println!("Complex result type unified successfully");
 }
 
@@ -149,7 +149,7 @@ fn condition_function() -> bool { true }
 // if表达式副作用语义
 fn if_side_effects() {
     let mut counter = 0;
-    
+
     // 1. 条件求值的副作用
     let result = if {
         counter += 1;  // 副作用：修改counter
@@ -160,10 +160,10 @@ fn if_side_effects() {
     } else {
         "zero or negative"
     };
-    
+
     assert_eq!(counter, 2);
     assert_eq!(result, "positive");
-    
+
     // 2. 短路求值语义
     let mut flag = false;
     let short_circuit = if false {
@@ -172,19 +172,19 @@ fn if_side_effects() {
     } else {
         "not executed"
     };
-    
+
     assert!(!flag);  // flag仍然是false
-    
+
     // 3. 资源管理中的副作用
     fn with_resource() -> String {
         let resource = acquire_resource();
-        
+
         let result = if resource.is_valid() {
             process_resource(&resource)
         } else {
             "invalid resource".to_string()
         };
-        
+
         // resource在此处自动释放
         result
     }
@@ -224,12 +224,12 @@ fn match_expression_semantics() {
         Blue,
         RGB(u8, u8, u8),
     }
-    
+
     let color = Color::RGB(255, 128, 0);
-    
+
     let description = match color {
         Color::Red => "Pure red",
-        Color::Green => "Pure green", 
+        Color::Green => "Pure green",
         Color::Blue => "Pure blue",
         Color::RGB(r, g, b) => {
             // 解构模式，绑定变量
@@ -237,7 +237,7 @@ fn match_expression_semantics() {
             "Custom RGB color"
         }
     };
-    
+
     // 2. 数值范围匹配
     let number = 42;
     let category = match number {
@@ -247,7 +247,7 @@ fn match_expression_semantics() {
         101..=1000 => "large",
         _ => "very large",     // 通配符模式
     };
-    
+
     // 3. 守卫条件匹配
     let point = (3, 4);
     let quadrant = match point {
@@ -257,7 +257,7 @@ fn match_expression_semantics() {
         (x, y) if x > 0 && y < 0 => "Fourth quadrant",
         (0, _) | (_, 0) => "On axis",  // 或模式
     };
-    
+
     println!("Point {:?} is in: {}", point, quadrant);
 }
 ```
@@ -274,13 +274,13 @@ fn complex_pattern_matching() {
         age: u32,
         email: Option<String>,
     }
-    
+
     let person = Person {
         name: "Alice".to_string(),
         age: 30,
         email: Some("alice@example.com".to_string()),
     };
-    
+
     match person {
         Person { name, age: 18..=25, email: Some(email) } => {
             println!("Young adult {} with email {}", name, email);
@@ -292,33 +292,33 @@ fn complex_pattern_matching() {
             println!("Person {}, age {}, email: {:?}", name, age, email);
         }
     }
-    
+
     // 2. 嵌套模式匹配
     enum Message {
         Text(String),
         Image { url: String, width: u32, height: u32 },
         Video { url: String, duration: u32 },
     }
-    
+
     enum ChatEvent {
         MessageReceived(Message),
         UserJoined(String),
         UserLeft(String),
     }
-    
+
     let event = ChatEvent::MessageReceived(
-        Message::Image { 
-            url: "image.jpg".to_string(), 
-            width: 800, 
-            height: 600 
+        Message::Image {
+            url: "image.jpg".to_string(),
+            width: 800,
+            height: 600
         }
     );
-    
+
     match event {
         ChatEvent::MessageReceived(Message::Text(content)) => {
             println!("Text message: {}", content);
         }
-        ChatEvent::MessageReceived(Message::Image { width, height, .. }) 
+        ChatEvent::MessageReceived(Message::Image { width, height, .. })
             if width > 1000 || height > 1000 => {
             println!("Large image received");
         }
@@ -353,26 +353,26 @@ fn exhaustiveness_checking() {
         Inactive,
         Pending,
     }
-    
+
     let status = Status::Active;
-    
+
     // 完整匹配
     let message = match status {
         Status::Active => "System is active",
-        Status::Inactive => "System is inactive", 
+        Status::Inactive => "System is inactive",
         Status::Pending => "System is pending",
         // 编译器确保所有变体都被覆盖
     };
-    
+
     // 2. Option的穷尽性
     let maybe_value: Option<i32> = Some(42);
-    
+
     let result = match maybe_value {
         Some(value) => value * 2,
         None => 0,
         // 必须处理Both Some和None情况
     };
-    
+
     // 3. 布尔值的穷尽性
     let flag = true;
     let decision = match flag {
@@ -380,7 +380,7 @@ fn exhaustiveness_checking() {
         false => "stop",
         // bool只有两个值，必须都覆盖
     };
-    
+
     // 4. 使用通配符避免穷尽性问题
     enum HttpStatus {
         Ok,
@@ -390,14 +390,14 @@ fn exhaustiveness_checking() {
         Unauthorized,
         // ... 可能有更多状态
     }
-    
+
     let status = HttpStatus::Ok;
     let response = match status {
         HttpStatus::Ok => "Success",
         HttpStatus::NotFound => "Not Found",
         _ => "Other error",  // 处理所有其他情况
     };
-    
+
     println!("Response: {}", response);
 }
 ```
@@ -421,29 +421,29 @@ fn let_pattern_matching() {
     assert_eq!(x, 1);
     assert_eq!(y, "hello");
     assert_eq!(z, 3.14);
-    
+
     // 2. 结构体解构
     struct Point { x: i32, y: i32 }
     let point = Point { x: 10, y: 20 };
     let Point { x: px, y: py } = point;  // 重命名字段
     let Point { x, y } = point;          // 使用字段名
-    
+
     // 3. 数组/切片解构
     let array = [1, 2, 3, 4, 5];
     let [first, second, ..] = array;    // 解构前两个元素
     let [.., last] = array;             // 解构最后一个元素
     let [first, .., last] = array;      // 解构首尾元素
-    
+
     // 4. 嵌套解构
     let nested = ((1, 2), (3, 4));
     let ((a, b), (c, d)) = nested;
-    
+
     // 5. Option解构
     let maybe_value = Some(42);
     if let Some(value) = maybe_value {
         println!("Value is: {}", value);
     }
-    
+
     // 6. Result解构
     let result: Result<i32, &str> = Ok(100);
     if let Ok(success_value) = result {
@@ -459,38 +459,38 @@ fn let_pattern_matching() {
 fn refutable_patterns() {
     // 1. if let表达式
     let config_value = Some("debug");
-    
+
     if let Some(value) = config_value {
         println!("Config: {}", value);
     } else {
         println!("No config found");
     }
-    
+
     // 2. while let循环
     let mut stack = vec![1, 2, 3, 4, 5];
-    
+
     while let Some(item) = stack.pop() {
         println!("Popped: {}", item);
     }
-    
+
     // 3. match守卫
     let number = 42;
-    
+
     match number {
         n if n > 0 => println!("Positive: {}", n),
         n if n < 0 => println!("Negative: {}", n),
         _ => println!("Zero"),
     }
-    
+
     // 4. 复杂条件模式
     enum Event {
         Click { x: i32, y: i32 },
         KeyPress(char),
         Scroll(i32),
     }
-    
+
     let event = Event::Click { x: 100, y: 200 };
-    
+
     if let Event::Click { x, y } = event {
         if x > 50 && y > 50 {
             println!("Click in main area: ({}, {})", x, y);
@@ -517,7 +517,7 @@ fn branch_prediction_optimization() {
             _ => "unknown",           // 最少见的情况
         }
     }
-    
+
     // 2. 使用likely/unlikely属性（实验性功能）
     fn optimized_check(value: i32) -> bool {
         if value > 0 {
@@ -528,7 +528,7 @@ fn branch_prediction_optimization() {
             false
         }
     }
-    
+
     // 3. 避免深度嵌套的条件
     fn flat_conditions(x: i32, y: i32, z: i32) -> &'static str {
         // 展平条件而不是嵌套
@@ -552,28 +552,28 @@ fn branch_prediction_optimization() {
 fn compile_time_optimization() {
     // 1. 常量条件优化
     const DEBUG: bool = cfg!(debug_assertions);
-    
+
     let result = if DEBUG {
         expensive_debug_calculation()  // 在release构建中被优化掉
     } else {
         simple_calculation()
     };
-    
+
     // 2. 配置条件编译
     #[cfg(feature = "advanced")]
     fn advanced_processing() -> i32 {
         // 高级处理逻辑
         100
     }
-    
+
     #[cfg(not(feature = "advanced"))]
     fn advanced_processing() -> i32 {
         // 简化处理逻辑
         10
     }
-    
+
     let processed = advanced_processing();
-    
+
     // 3. 目标平台条件编译
     let platform_specific = if cfg!(unix) {
         "Unix system"
@@ -582,7 +582,7 @@ fn compile_time_optimization() {
     } else {
         "Other system"
     };
-    
+
     println!("Running on: {}", platform_specific);
 }
 
@@ -607,7 +607,7 @@ fn simple_calculation() -> i32 {
 fn error_handling_conditionals() -> Result<String, Box<dyn std::error::Error>> {
     // 1. Result的条件处理
     let data = load_data()?;
-    
+
     let processed = if data.is_empty() {
         return Err("Empty data".into());
     } else if data.len() > 1000 {
@@ -615,14 +615,14 @@ fn error_handling_conditionals() -> Result<String, Box<dyn std::error::Error>> {
     } else {
         process_small_data(data)?
     };
-    
+
     // 2. Option的条件处理
     let config = load_config();
     let timeout = match config {
         Some(cfg) => cfg.timeout.unwrap_or(30),
         None => 30,  // 默认值
     };
-    
+
     // 3. 组合条件错误处理
     let result = match (validate_input(&processed), timeout > 0) {
         (Ok(valid_data), true) => {
@@ -635,7 +635,7 @@ fn error_handling_conditionals() -> Result<String, Box<dyn std::error::Error>> {
             return Err(format!("Validation failed: {}", e).into());
         }
     };
-    
+
     Ok(result)
 }
 
@@ -679,39 +679,39 @@ fn early_return_patterns() -> Result<i32, &'static str> {
         if n < 0 {
             return Err("Negative number");
         }
-        
+
         if n == 0 {
             return Err("Zero value");
         }
-        
+
         if n > 1000 {
             return Err("Number too large");
         }
-        
+
         // 主要逻辑
         Ok(n * 2)
     }
-    
+
     // 2. 资源验证模式
     fn process_with_resources() -> Result<String, &'static str> {
         let resource1 = acquire_resource1().ok_or("Failed to acquire resource1")?;
         let resource2 = acquire_resource2().ok_or("Failed to acquire resource2")?;
-        
+
         if !resource1.is_valid() {
             return Err("Resource1 is invalid");
         }
-        
+
         if !resource2.is_compatible(&resource1) {
             return Err("Resources are incompatible");
         }
-        
+
         // 主要处理逻辑
         Ok(format!("Processed with {} and {}", resource1.name(), resource2.name()))
     }
-    
+
     let result1 = process_number(42)?;
     let _result2 = process_with_resources()?;
-    
+
     Ok(result1)
 }
 
@@ -789,7 +789,7 @@ impl StateMachine {
             data: Vec::new(),
         }
     }
-    
+
     fn transition(&mut self, input: Input) -> Result<(), String> {
         self.state = match (&self.state, input) {
             (State::Idle, Input::Start) => {
@@ -814,12 +814,12 @@ impl StateMachine {
                 return Err(format!("Invalid transition from {:?} with {:?}", current, input));
             }
         };
-        
+
         Ok(())
     }
 }
 
-#[derive(Debug)]
+# [derive(Debug)]
 enum Input {
     Start,
     Data(Vec<u8>),
@@ -832,7 +832,7 @@ enum Input {
 
 ```rust
 // 配置驱动的条件处理
-#[derive(Debug)]
+# [derive(Debug)]
 struct ProcessingConfig {
     enable_feature_a: bool,
     enable_feature_b: bool,
@@ -843,7 +843,7 @@ struct ProcessingConfig {
 fn conditional_processing(config: &ProcessingConfig, input: &str) -> Result<String, String> {
     // 配置驱动的条件逻辑
     let mut result = input.to_string();
-    
+
     if config.enable_feature_a {
         result = match apply_feature_a(&result) {
             Ok(processed) => processed,
@@ -854,7 +854,7 @@ fn conditional_processing(config: &ProcessingConfig, input: &str) -> Result<Stri
             Err(e) => return Err(format!("Feature A failed: {}", e)),
         };
     }
-    
+
     if config.enable_feature_b {
         result = if config.timeout_seconds > 0 {
             timeout_operation(|| apply_feature_b(&result), config.timeout_seconds)?
@@ -862,7 +862,7 @@ fn conditional_processing(config: &ProcessingConfig, input: &str) -> Result<Stri
             apply_feature_b(&result)?
         };
     }
-    
+
     // 后处理条件
     let final_result = match (config.enable_feature_a, config.enable_feature_b) {
         (true, true) => format!("Both features: {}", result),
@@ -870,7 +870,7 @@ fn conditional_processing(config: &ProcessingConfig, input: &str) -> Result<Stri
         (false, true) => format!("Feature B only: {}", result),
         (false, false) => format!("No features: {}", result),
     };
-    
+
     Ok(final_result)
 }
 
@@ -922,4 +922,4 @@ where
 
 ---
 
-> **链接网络**: [控制流语义索引](./00_control_flow_semantics_index.md) | [控制语义层总览](../00_control_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md) 
+> **链接网络**: [控制流语义索引](./00_control_flow_semantics_index.md) | [控制语义层总览](../00_control_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md)

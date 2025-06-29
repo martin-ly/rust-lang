@@ -17,6 +17,7 @@ Rust的模块系统可建模为层次化命名空间：
 $$\text{Module} = \langle \text{Name}, \text{Items}, \text{Visibility}, \text{Path} \rangle$$
 
 其中：
+
 - $\text{Name} : \text{Identifier}$ - 模块名称
 - $\text{Items} : \mathcal{P}(\text{Item})$ - 模块项集合
 - $\text{Visibility} : \text{VisibilityLevel}$ - 可见性级别
@@ -105,6 +106,7 @@ mod graphics {
 ```
 
 **语义特性**：
+
 - **命名空间隔离**：模块创建独立的命名空间
 - **可见性控制**：默认私有，需要 `pub` 关键字公开
 - **嵌套能力**：支持任意深度的模块嵌套
@@ -112,6 +114,7 @@ mod graphics {
 ### 4.1.1.2.2 文件模块定义
 
 **定义 4.1.1.3** (文件模块映射)
+
 ```rust
 // main.rs 中声明文件模块
 mod utils;  // 对应 utils.rs 或 utils/mod.rs
@@ -133,6 +136,7 @@ graphics::Point                 // 简化路径
 ```
 
 **路径解析算法**：
+
 ```mermaid
 flowchart TD
     Path[输入路径]
@@ -594,22 +598,26 @@ mod service_layer {
 ## 4.1.1.10 相关引用与扩展阅读
 
 ### 4.1.1.10.1 内部交叉引用
+
 - [4.1.2 模块可见性语义](02_module_visibility_semantics.md) - 详细的可见性规则
 - [4.2.1 crate系统语义](../02_crate_system_semantics/01_crate_definition_semantics.md) - crate级别组织
 - [5.2.1 宏系统语义](../../05_transformation_semantics/02_macro_semantics/01_declarative_macro_semantics.md) - 宏与模块交互
 
 ### 4.1.1.10.2 外部参考文献
+
 1. Cardelli, L. & Wegner, P. *On Understanding Types, Data Abstraction, and Polymorphism*. 1985.
 2. Mitchell, J.C. *Concepts in Programming Languages*. Chapter 8: Data Abstraction and Modularity.
 3. Rust Reference: [Modules](https://doc.rust-lang.org/reference/items/modules.html)
 
 ### 4.1.1.10.3 实现参考
+
 - [rustc_resolve](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_resolve/index.html) - 名称解析实现
 - [rustc_privacy](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_privacy/index.html) - 可见性检查
 
 ---
 
 **文档元数据**:
+
 - **复杂度级别**: ⭐⭐⭐ (中高级)
 - **前置知识**: Rust基础语法、命名空间概念、可见性规则
 - **相关工具**: rustc, rust-analyzer, cargo

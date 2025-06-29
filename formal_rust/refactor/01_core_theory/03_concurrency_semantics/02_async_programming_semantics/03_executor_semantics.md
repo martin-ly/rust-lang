@@ -18,6 +18,7 @@
 $$\text{Executor} = \langle \text{TaskQueue}, \text{Scheduler}, \text{Waker}, \text{Context}, \text{Runtime} \rangle$$
 
 其中：
+
 - $\text{TaskQueue} : \text{Queue}(\text{Task})$ - 任务队列
 - $\text{Scheduler} : \text{TaskQueue} \rightarrow \text{Task}$ - 调度算法
 - $\text{Waker} : \text{Task} \rightarrow \text{Signal}$ - 唤醒机制
@@ -129,6 +130,7 @@ fn create_simple_waker() -> Waker {
 ```
 
 **简单执行器语义特性**：
+
 - **FIFO调度**: 简单的先进先出任务调度
 - **忙等待**: 挂起的任务立即重新排队
 - **无优先级**: 所有任务等权重处理
@@ -455,6 +457,7 @@ async fn current_thread_executor() {
 ```
 
 **Tokio执行器特性**：
+
 - **多线程工作窃取**: 高效的任务分发和负载均衡
 - **I/O驱动**: 集成epoll/kqueue等系统调用
 - **计时器驱动**: 内置的超时和延迟机制
@@ -1032,16 +1035,19 @@ impl MonitoredExecutor {
 ## 3.2.3.9 相关引用与扩展阅读
 
 ### 3.2.3.9.1 内部交叉引用
+
 - [3.2.1 Future语义](01_future_semantics.md) - Future trait详细分析
 - [3.2.2 async/await语义](02_async_await_semantics.md) - 异步语法糖
 - [3.2.4 异步运行时语义](04_async_runtime_semantics.md) - 运行时系统
 
 ### 3.2.3.9.2 外部参考文献
+
 1. Tokio Documentation: [Runtime and Executors](https://docs.rs/tokio/latest/tokio/runtime/index.html)
 2. Stjepan Glavina: *Work-stealing in Rust*. Blog series on async executors.
 3. Carl Lerche: *Designing futures for Rust*. RustConf 2016.
 
 ### 3.2.3.9.3 实现参考
+
 - [tokio](https://github.com/tokio-rs/tokio) - Tokio异步运行时
 - [async-std](https://github.com/async-rs/async-std) - async-std运行时
 - [smol](https://github.com/smol-rs/smol) - 轻量级异步执行器
@@ -1049,8 +1055,9 @@ impl MonitoredExecutor {
 ---
 
 **文档元数据**:
+
 - **复杂度级别**: ⭐⭐⭐⭐⭐ (专家级)
 - **前置知识**: 异步编程、Future、并发原理、操作系统调度
 - **相关工具**: tokio, async-std, futures
 - **更新频率**: 与Rust异步生态演进同步
-- **维护者**: Rust并发语义分析工作组 
+- **维护者**: Rust并发语义分析工作组

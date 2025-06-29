@@ -323,7 +323,7 @@ $$\forall s \in S, \forall d \in D: \text{type}(\text{output}(s)) = \text{type}(
 
 ### 5.1 时间复杂度
 
-**定理 5.1 (流水线复杂度)**
+**定理 5.1 (流水线复杂度)**:
 
 - 阶段处理：$O(n)$
 - 并行执行：$O(n/p)$

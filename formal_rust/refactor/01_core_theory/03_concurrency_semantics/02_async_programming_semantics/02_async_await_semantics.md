@@ -9,6 +9,7 @@ async函数的语法糖去糖化为状态机：
 $$\text{async fn } f(x: T) \rightarrow R \leadsto \text{fn } f(x: T) \rightarrow \text{impl Future}\langle\text{Output} = R\rangle$$
 
 **去糖化变换规则**：
+
 ```mermaid
 graph LR
     subgraph "async语法糖"
@@ -343,6 +344,7 @@ impl Future for ErrorHandlingFuture {
 
 **定义 3.2.2.3** (async块捕获规则)
 async块的捕获遵循闭包捕获规则：
+
 - **按引用捕获**: 当变量在async块中被不可变使用
 - **按可变引用捕获**: 当变量在async块中被可变使用  
 - **按值捕获**: 当使用move关键字
@@ -841,11 +843,13 @@ async fn async_closure_simulation() {
 ## 3.2.2.9 跨引用网络
 
 ### 3.2.2.9.1 内部引用
+
 - [Future语义](./01_future_semantics.md) - Future的底层机制
 - [执行器语义](./03_executor_semantics.md) - async任务的执行
 - [异步运行时语义](./04_async_runtime_semantics.md) - 运行时环境
 
 ### 3.2.2.9.2 外部引用
+
 - [函数类型语义](../../01_foundation_semantics/01_type_system_semantics/04_function_types_semantics.md) - 异步函数类型
 - [生命周期语义](../../02_control_semantics/03_lifetime_semantics/01_lifetime_annotation_semantics.md) - 异步生命周期
 - [错误处理语义](../../02_control_semantics/04_error_handling_semantics/01_result_option_semantics.md) - 异步错误处理
@@ -855,11 +859,13 @@ async fn async_closure_simulation() {
 ## 3.2.2.10 理论前沿与发展方向
 
 ### 3.2.2.10.1 语言特性扩展
+
 1. **async闭包**: 原生支持的异步闭包语法
 2. **async迭代器**: 更好的异步迭代器支持
 3. **异步生成器**: yield语法的异步版本
 
 ### 3.2.2.10.2 编译器优化
+
 1. **状态机优化**: 更紧凑的状态机生成
 2. **零分配异步**: 消除堆分配的异步操作
 3. **编译时调度**: 编译时确定的任务调度
@@ -993,12 +999,14 @@ async fn process_data_async(data: RawData) -> ProcessedData {
 ## 3.2.2.12 持续改进与版本追踪
 
 ### 3.2.2.12.1 文档版本
+
 - **版本**: v1.0.0
 - **创建日期**: 2024-12-30
 - **最后更新**: 2024-12-30
 - **状态**: 核心内容完成
 
 ### 3.2.2.12.2 改进计划
+
 - [ ] 添加更多异步模式分析
 - [ ] 深化编译器优化研究
 - [ ] 完善性能基准测试
@@ -1006,4 +1014,4 @@ async fn process_data_async(data: RawData) -> ProcessedData {
 
 ---
 
-> **链接网络**: [异步编程语义索引](./00_async_programming_semantics_index.md) | [并发语义层总览](../00_concurrency_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md) 
+> **链接网络**: [异步编程语义索引](./00_async_programming_semantics_index.md) | [并发语义层总览](../00_concurrency_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md)

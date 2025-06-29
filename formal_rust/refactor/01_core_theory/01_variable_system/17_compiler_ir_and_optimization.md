@@ -2,7 +2,7 @@
 
 ## 17.0 严格编号目录
 
-- [17. MIR与编译器优化中的所有权分析（17_compiler_ir_and_optimization）](#17-mir与编译器优化中的所有权分析17_compiler_ir_and_optimization)
+- [17. MIR与编译器优化中的所有权分析（17\_compiler\_ir\_and\_optimization）](#17-mir与编译器优化中的所有权分析17_compiler_ir_and_optimization)
   - [17.0 严格编号目录](#170-严格编号目录)
   - [17.1 MIR结构与作用](#171-mir结构与作用)
     - [17.1.1 MIR简介与理论基础](#1711-mir简介与理论基础)

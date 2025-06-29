@@ -18,6 +18,7 @@ Rust的trait系统可形式化为类型类（type class）的扩展：
 $$\text{Trait} = \langle \text{Name}, \text{Methods}, \text{AssocTypes}, \text{SuperTraits}, \text{Bounds} \rangle$$
 
 其中：
+
 - $\text{Name} : \text{Identifier}$ - trait名称
 - $\text{Methods} : \text{Set}(\text{MethodSignature})$ - 方法签名集合
 - $\text{AssocTypes} : \text{Set}(\text{AssociatedType})$ - 关联类型集合
@@ -28,6 +29,7 @@ $$\text{Trait} = \langle \text{Name}, \text{Methods}, \text{AssocTypes}, \text{S
 
 **Trait作为函子**：
 在范畴论中，trait可以建模为函子 $F: \mathcal{C} \rightarrow \mathcal{D}$，其中：
+
 - $\mathcal{C}$ 是类型范畴
 - $\mathcal{D}$ 是带有trait方法的类型范畴
 
@@ -349,6 +351,7 @@ fn use_trait_objects() {
 $$\frac{\text{trait } T \text{ is object-safe}}{\text{dyn } T \text{ is valid}} \text{[OBJECT-SAFETY]}$$
 
 对象安全要求：
+
 1. 没有泛型方法
 2. 没有静态方法
 3. `Self`类型只能出现在特定位置
@@ -1074,24 +1077,28 @@ trait MinimalBounds {
 ## 5.3.1.10 相关引用与扩展阅读
 
 ### 5.3.1.10.1 内部交叉引用
+
 - [5.3.2 impl语义](02_impl_semantics.md) - trait实现详细分析
 - [5.3.3 trait边界语义](03_trait_bounds_semantics.md) - trait约束系统
 - [1.1.5 trait类型语义](../../01_foundation_semantics/01_type_system_semantics/05_trait_types_semantics.md) - trait类型理论
 
 ### 5.3.1.10.2 外部参考文献
+
 1. Wadler, P. & Blott, S. *How to make ad-hoc polymorphism less ad hoc*. POPL 1989.
 2. Jones, M.P. *Type Classes: an exploration of the design space*. Haskell Workshop 1997.
 3. Rust Reference: [Traits](https://doc.rust-lang.org/reference/items/traits.html)
 
 ### 5.3.1.10.3 实现参考
+
 - [rustc_trait_selection](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_trait_selection/index.html) - trait选择算法
 - [rustc_typeck](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_typeck/index.html) - 类型检查和trait解析
 
 ---
 
 **文档元数据**:
+
 - **复杂度级别**: ⭐⭐⭐⭐⭐ (专家级)
 - **前置知识**: Rust类型系统、泛型、生命周期、类型类理论
 - **相关工具**: rustc, rust-analyzer, cargo
 - **更新频率**: 与Rust trait系统演进同步
-- **维护者**: Rust转换语义分析工作组 
+- **维护者**: Rust转换语义分析工作组

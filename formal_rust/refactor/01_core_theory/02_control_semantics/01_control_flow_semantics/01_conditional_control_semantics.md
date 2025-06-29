@@ -18,13 +18,14 @@ Rust的条件控制可形式化为布尔代数上的分支结构：
 $$\text{Conditional} = \langle \text{Condition}, \text{ThenBranch}, \text{ElseBranch}, \text{Context} \rangle$$
 
 其中：
+
 - $\text{Condition} : \text{Expr} \to \text{bool}$ - 条件表达式
 - $\text{ThenBranch} : \text{Block}$ - 真分支
 - $\text{ElseBranch} : \text{Option}(\text{Block})$ - 假分支（可选）
 - $\text{Context} : \text{TypeContext}$ - 类型上下文
 
 **条件控制语义函数**：
-$$\llbracket \text{if } e \text{ then } s_1 \text{ else } s_2 \rrbracket_\sigma = 
+$$\llbracket \text{if } e \text{ then } s_1 \text{ else } s_2 \rrbracket_\sigma =
 \begin{cases}
 \llbracket s_1 \rrbracket_\sigma & \text{if } \llbracket e \rrbracket_\sigma = \text{true} \\
 \llbracket s_2 \rrbracket_\sigma & \text{if } \llbracket e \rrbracket_\sigma = \text{false}
@@ -40,13 +41,13 @@ graph TB
         ElsePath[Else分支路径]
         Result[结果类型]
     end
-    
+
     subgraph "类型推断机制"
         BoolType[bool类型]
         UnifyType[类型统一]
         ResultType[结果类型]
     end
-    
+
     subgraph "控制流图"
         Entry[入口节点]
         CondEval[条件求值]
@@ -54,14 +55,14 @@ graph TB
         ElseBlock[Else块]
         Exit[出口节点]
     end
-    
+
     Condition --> BoolType
     BoolType --> CondEval
     CondEval -->|true| ThenBlock
     CondEval -->|false| ElseBlock
     ThenBlock --> Exit
     ElseBlock --> Exit
-    
+
     ThenPath --> UnifyType
     ElsePath --> UnifyType
     UnifyType --> ResultType
@@ -170,18 +171,18 @@ flowchart TD
         Exhaustive{穷尽性}
         Reachable{可达性}
     end
-    
+
     subgraph "编译期验证"
         TypeCheck[类型检查]
         PatternCheck[模式检查]
         DeadCode[死代码检测]
     end
-    
+
     Input --> Patterns
     Patterns --> Coverage
     Coverage --> Exhaustive
     Coverage --> Reachable
-    
+
     Exhaustive -->|通过| TypeCheck
     Reachable -->|通过| PatternCheck
     TypeCheck --> DeadCode
@@ -235,18 +236,18 @@ graph LR
         BranchOpt[分支优化]
         Target[目标代码]
     end
-    
+
     subgraph "优化策略"
         CondOpt[条件优化]
         PatternOpt[模式优化]
         InlineOpt[内联优化]
     end
-    
+
     Source --> ConstFold
     ConstFold --> DeadElim
     DeadElim --> BranchOpt
     BranchOpt --> Target
-    
+
     CondOpt --> BranchOpt
     PatternOpt --> BranchOpt
     InlineOpt --> BranchOpt
@@ -333,7 +334,7 @@ fn smart_conditional<T, F1, F2>(
     condition: bool,
     then_fn: F1,
     else_fn: F2,
-) -> T 
+) -> T
 where
     F1: FnOnce() -> T,
     F2: FnOnce() -> T,
@@ -352,14 +353,14 @@ where
 
 ```rust
 // 条件编译的语义边界
-#[cfg(debug_assertions)]
+# [cfg(debug_assertions)]
 fn debug_conditional() {
     if DEBUG_FLAG {
         expensive_debug_operation();
     }
 }
 
-#[cfg(not(debug_assertions))]
+# [cfg(not(debug_assertions))]
 fn debug_conditional() {
     // 空实现，编译期移除
 }
@@ -437,4 +438,4 @@ fn ownership_conditional(flag: bool, data: Vec<i32>) -> Vec<i32> {
 - **前置知识**: 基础Rust语法、类型理论、操作语义
 - **相关工具**: rustc, miri, chalk
 - **更新频率**: 与Rust语言演进同步
-- **维护者**: Rust语义分析工作组 
+- **维护者**: Rust语义分析工作组

@@ -18,6 +18,7 @@ Rust的所有权系统可形式化为资源管理的代数结构：
 $$\text{Ownership} = \langle \text{Resource}, \text{Owner}, \text{Scope}, \text{Transfer}, \text{Drop} \rangle$$
 
 其中：
+
 - $\text{Resource} : \text{Type} \times \text{Value}$ - 被管理的资源
 - $\text{Owner} : \text{Variable} \rightarrow \text{Option}(\text{Resource})$ - 所有权映射
 - $\text{Scope} : \text{Owner} \rightarrow \text{Lifetime}$ - 作用域边界
@@ -223,7 +224,7 @@ $$\frac{\text{Vec}\langle T \rangle \quad \text{owns}(v, \text{vec}) \quad \text
 
 ## 1.4.1.5 智能指针与所有权
 
-### 1.4.1.5.1 Box<T>的独占所有权
+### 1.4.1.5.1 `Box<T>`的独占所有权
 
 ```rust
 fn box_ownership() {
@@ -239,7 +240,7 @@ fn box_ownership() {
 **Box所有权语义**：
 $$\frac{\text{Box}\langle T \rangle \quad \text{owns}(b, \text{box}(v))}{\text{owns}(b, v) \land \text{heap\_allocated}(v)} \text{[BOX-OWNERSHIP]}$$
 
-### 1.4.1.5.2 Rc<T>的共享所有权
+### 1.4.1.5.2 `Rc<T>`的共享所有权
 
 ```rust
 use std::rc::Rc;
@@ -291,6 +292,7 @@ flowchart TD
 ```
 
 **所有权检查算法**：
+
 ```text
 algorithm OwnershipCheck(ast: AST) -> Result<(), Error> {
     ownership_graph = build_ownership_graph(ast)
@@ -503,7 +505,7 @@ fn result_ownership() {
 }
 ```
 
-### 1.4.1.9.2 Option<T>与所有权转移
+### 1.4.1.9.2 `Option<T>`与所有权转移
 
 ```rust
 fn option_ownership() {
@@ -523,24 +525,28 @@ fn option_ownership() {
 ## 1.4.1.10 相关引用与扩展阅读
 
 ### 1.4.1.10.1 内部交叉引用
+
 - [1.4.2 借用语义模型](02_borrowing_semantics.md) - 借用系统详细分析
 - [1.4.3 生命周期语义](03_lifetime_semantics.md) - 生命周期系统
 - [1.3.1 内存布局语义](../03_memory_model_semantics/01_memory_layout_semantics.md) - 内存管理基础
 
 ### 1.4.1.10.2 外部参考文献
+
 1. Klabnik, S. & Nichols, C. *The Rust Programming Language*. Chapter 4: Understanding Ownership.
 2. Jung, R. et al. *RustBelt: Securing the Foundations of the Rust Programming Language*. POPL 2018.
 3. Reed, E. *Patina: A Formalization of the Rust Programming Language*. Technical Report, 2015.
 
 ### 1.4.1.10.3 实现参考
+
 - [rustc_borrowck](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_borrowck/index.html) - 借用检查器实现
 - [MIR](https://rustc-dev-guide.rust-lang.org/mir/index.html) - 中级表示中的所有权
 
 ---
 
 **文档元数据**:
+
 - **复杂度级别**: ⭐⭐⭐⭐⭐ (专家级)
 - **前置知识**: Rust基础语法、内存管理概念、类型系统理论
 - **相关工具**: rustc, rust-analyzer, miri
 - **更新频率**: 与Rust所有权系统演进同步
-- **维护者**: Rust基础语义分析工作组 
+- **维护者**: Rust基础语义分析工作组

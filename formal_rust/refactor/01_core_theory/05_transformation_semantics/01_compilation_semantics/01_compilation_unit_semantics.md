@@ -9,6 +9,7 @@
 $$\text{CompilationUnit} = \text{Lex} \circ \text{Parse} \circ \text{Resolve} \circ \text{TypeCheck} \circ \text{CodeGen}$$
 
 其中：
+
 - $\text{Lex} : \text{Source} \rightarrow \text{Tokens}$ - 词法分析
 - $\text{Parse} : \text{Tokens} \rightarrow \text{AST}$ - 语法分析
 - $\text{Resolve} : \text{AST} \rightarrow \text{HIR}$ - 名称解析
@@ -471,6 +472,7 @@ fn complex_borrowing() {
 
 **定义 5.1.1.6** (中间表示语义)
 编译器使用多层中间表示：
+
 - **HIR** (High-level IR): 去糖化的AST
 - **THIR** (Typed HIR): 类型化的HIR  
 - **MIR** (Mid-level IR): 控制流图表示
@@ -761,11 +763,13 @@ pub fn feature_detection() {
 ## 5.1.1.9 跨引用网络
 
 ### 5.1.1.9.1 内部引用
+
 - [宏系统语义](../02_macro_semantics/01_declarative_macro_semantics.md) - 编译时宏展开
 - [类型推断语义](../02_type_inference_semantics/01_type_unification_semantics.md) - 类型检查过程
 - [模块系统语义](../../04_organization_semantics/01_module_system_semantics/01_module_definition_semantics.md) - 编译单元组织
 
 ### 5.1.1.9.2 外部引用
+
 - [内存布局语义](../../01_foundation_semantics/03_memory_model_semantics/01_memory_layout_semantics.md) - 代码生成的内存布局
 - [并发编译](../../07_cross_layer_analysis/02_performance_semantic_analysis/02_compilation_performance_semantics.md) - 编译性能优化
 - [错误报告](../../07_cross_layer_analysis/03_safety_semantic_analysis/03_error_reporting_semantics.md) - 编译错误处理
@@ -775,11 +779,13 @@ pub fn feature_detection() {
 ## 5.1.1.10 理论前沿与发展方向
 
 ### 5.1.1.10.1 编译器技术进步
+
 1. **增量编译**: 更智能的增量编译策略
 2. **并行编译**: 更好的并行化编译
 3. **查询驱动编译**: 基于查询的编译器架构
 
 ### 5.1.1.10.2 优化技术
+
 1. **机器学习优化**: AI驱动的编译优化
 2. **跨过程优化**: 更强的全程序优化
 3. **自适应优化**: 运行时反馈的优化
@@ -896,12 +902,14 @@ pub fn show_build_info() {
 ## 5.1.1.12 持续改进与版本追踪
 
 ### 5.1.1.12.1 文档版本
+
 - **版本**: v1.0.0
 - **创建日期**: 2024-12-30
 - **最后更新**: 2024-12-30
 - **状态**: 核心内容完成
 
 ### 5.1.1.12.2 改进计划
+
 - [ ] 添加更多编译器内部细节
 - [ ] 深化优化pass分析
 - [ ] 完善错误恢复机制
@@ -909,4 +917,4 @@ pub fn show_build_info() {
 
 ---
 
-> **链接网络**: [编译语义索引](./00_compilation_semantics_index.md) | [转换语义层总览](../00_transformation_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md) 
+> **链接网络**: [编译语义索引](./00_compilation_semantics_index.md) | [转换语义层总览](../00_transformation_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md)
