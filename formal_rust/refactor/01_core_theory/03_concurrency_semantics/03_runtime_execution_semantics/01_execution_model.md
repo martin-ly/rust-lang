@@ -13,6 +13,7 @@
 
 **定义 1.1** (运行时环境)  
 运行时环境是一个五元组 $RT = (H, S, T, M, G)$，其中：
+
 - $H$ 是堆内存空间
 - $S$ 是栈内存空间  
 - $T$ 是线程集合
@@ -21,6 +22,7 @@
 
 **定理 1.1** (运行时安全性)  
 如果运行时环境满足：
+
 1. **内存安全**: $∀p ∈ Pointer, valid(p) ⟹ accessible(p)$
 2. **类型安全**: $∀v ∈ Value, typeof(v) = declared\_type(v)$
 3. **并发安全**: $∀t_1, t_2 ∈ T, shared\_access(t_1, t_2) ⟹ synchronized(t_1, t_2)$
@@ -30,16 +32,20 @@
 ### 1.2 执行语义
 
 **操作语义**定义：
-```
+
+```text
 ⟨e, σ⟩ → ⟨e', σ'⟩
 ```
+
 其中：
+
 - $e$ 是表达式
 - $σ$ 是存储状态
 - $→$ 是单步执行关系
 
 **基本执行规则**:
-```
+
+```text
          n ∈ ℕ
 ——————————————————— (E-NUM)
 ⟨n, σ⟩ → ⟨n, σ⟩
@@ -187,6 +193,7 @@ Rust内存布局是一个分区结构：
 $$Memory = Stack \cup Heap \cup Data \cup Text$$
 
 其中各分区满足：
+
 - $Stack \cap Heap = \emptyset$
 - $Data \cap Text = \emptyset$  
 - $Stack \cup Heap \cup Data \cup Text = Memory$
@@ -271,7 +278,8 @@ impl TextSection {
 $$call: (Function, Args, Context) → (Result, Context')$$
 
 **调用语义规则**:
-```
+
+```text
     f ∈ Functions, args = [v₁, ..., vₙ]
     frame = create_frame(f, args)
     σ' = push_frame(σ, frame)
@@ -360,7 +368,8 @@ impl RuntimeError {
 $$throw: (Exception, Context) → Context'$$
 
 **异常传播规则**:
-```
+
+```text
     e ∈ Exceptions, h ∈ Handlers
     match(e, h) = true
 ——————————————————————————— (CATCH)
@@ -702,4 +711,4 @@ pub struct PerformanceMetrics {
 
 *文档状态: 完成*  
 *版本: 1.0*  
-*字数: ~7500字* 
+*字数: ~7500字*
