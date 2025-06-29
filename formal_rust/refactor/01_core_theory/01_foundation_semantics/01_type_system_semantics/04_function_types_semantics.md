@@ -9,6 +9,7 @@
 $$T_1 \rightarrow T_2 \cong T_2^{T_1}$$
 
 对于Rust中的函数类型层次：
+
 ```mermaid
 graph TB
     subgraph "函数类型层次"
@@ -44,6 +45,7 @@ graph TB
 $$\text{FnSig} = \{f : T_1 \times T_2 \times ... \times T_n \rightarrow R\}$$
 
 **类型安全性约束**：
+
 1. **参数类型匹配**: $\forall i, \text{type}(\text{arg}_i) = T_i$
 2. **返回类型匹配**: $\text{type}(\text{result}) = R$
 3. **内存安全**: 所有参数和返回值满足所有权规则
@@ -129,6 +131,7 @@ fn type_inference_examples() {
 $$\text{Closure} = \langle \text{code} : \text{CodePtr}, \text{env} : \text{Environment} \rangle$$
 
 其中环境包含：
+
 - **按值捕获**: $\text{env}[\text{var}] = \text{value}$
 - **按引用捕获**: $\text{env}[\text{var}] = \text{reference}$
 - **按可变引用捕获**: $\text{env}[\text{var}] = \text{mutable\_reference}$
@@ -739,11 +742,13 @@ fn continuation_passing_style() {
 ## 4.10 跨引用网络
 
 ### 4.10.1 内部引用
+
 - [原始类型语义](./01_primitive_types_semantics.md) - 函数类型的基础
 - [复合类型语义](./02_composite_types_semantics.md) - 复合函数类型
 - [引用类型语义](./03_reference_types_semantics.md) - 函数参数的引用语义
 
 ### 4.10.2 外部引用
+
 - [异步编程语义](../../03_concurrency_semantics/02_async_programming_semantics/01_future_semantics.md) - 异步函数详解
 - [trait系统语义](../../05_transformation_semantics/03_trait_system_semantics/01_trait_definition_semantics.md) - Fn traits
 - [生命周期语义](../../02_control_semantics/03_lifetime_semantics/01_lifetime_annotation_semantics.md) - 函数生命周期
@@ -753,11 +758,13 @@ fn continuation_passing_style() {
 ## 4.11 理论前沿与发展方向
 
 ### 4.11.1 高阶类型
+
 1. **类型构造器**: `type Constructor<F<_>>`
 2. **依赖类型**: 返回类型依赖于参数值
 3. **效果系统**: 在类型中编码副作用
 
 ### 4.11.2 编译器优化
+
 1. **内联优化**: 函数调用的零成本抽象
 2. **特化优化**: 泛型函数的高效单态化
 3. **逃逸分析**: 闭包环境的栈分配优化
@@ -831,12 +838,14 @@ fn functional_error_handling() -> Result<String, ProcessError> {
 ## 4.13 持续改进与版本追踪
 
 ### 4.13.1 文档版本
+
 - **版本**: v1.0.0
 - **创建日期**: 2024-12-30
 - **最后更新**: 2024-12-30
 - **状态**: 核心内容完成
 
 ### 4.13.2 改进计划
+
 - [ ] 添加更多高阶函数模式
 - [ ] 深化异步函数语义分析
 - [ ] 完善泛型函数的形式化处理
@@ -844,4 +853,4 @@ fn functional_error_handling() -> Result<String, ProcessError> {
 
 ---
 
-> **链接网络**: [类型系统语义模型索引](./00_type_system_semantics_index.md) | [基础语义层总览](../00_foundation_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md) 
+> **链接网络**: [类型系统语义模型索引](./00_type_system_semantics_index.md) | [基础语义层总览](../00_foundation_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md)

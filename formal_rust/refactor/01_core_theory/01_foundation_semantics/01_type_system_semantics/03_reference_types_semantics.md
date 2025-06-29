@@ -15,10 +15,7 @@ $$\&\text{mut } T = \{(ptr, lifetime, exclusive) : ptr \in \text{Ptr}(T), lifeti
 - $\mathcal{L}$: 生命周期域
 - $exclusive$: 排他性标记
 
-### 3.1.2 借用规则的形式化
-
-**公理 3.1.1** (借用安全性公理)
-Rust的借用规则可形式化为以下约束系统：
+**借用规则的形式化**：
 
 1. **排他性原理**: $\forall t \in \text{Time}, x \in \text{Var}: |\{\text{active\_mut\_borrows}(x, t)\}| \leq 1$
 2. **共享-排他互斥**: $\text{active\_mut\_borrows}(x, t) \neq \emptyset \Rightarrow \text{active\_shared\_borrows}(x, t) = \emptyset$
@@ -51,11 +48,30 @@ graph TB
     H --> D
 ```
 
+```rust
+// 借用规则基础示例
+fn borrowing_basics() {
+    let mut data = vec![1, 2, 3];
+    
+    // 不可变引用 - 可以有多个
+    let ref1 = &data;
+    let ref2 = &data;
+    println!("Refs: {:?}, {:?}", ref1, ref2);
+    
+    // 可变引用 - 只能有一个
+    let mut_ref = &mut data;
+    mut_ref.push(4);
+    
+    // ref1, ref2 在此处已失效
+    println!("Modified: {:?}", mut_ref);
+}
+```
+
 ---
 
 ## 3.2 不可变引用语义分析
 
-### 3.2.1 共享借用语义
+### 3.2.1 共享借用操作语义
 
 **定义 3.2.1** (共享借用操作语义)
 共享借用操作 `&x` 的语义定义为：
@@ -72,34 +88,23 @@ $$\text{env}' = \text{env} \cup \{(\&x, \text{current\_lifetime})\}$$
 fn shared_borrowing_semantics() {
     let data = vec![1, 2, 3, 4, 5];
 
-    // 1. 多个不可变引用可以共存
-    let ref1 = &data;        // 第一个共享借用
-    let ref2 = &data;        // 第二个共享借用
+    // 多个不可变引用可以共存
+    let ref1 = &data;
+    let ref2 = &data;
     let ref3 = &data[1..3];  // 部分借用
 
-    // 2. 共享借用的传递性
-    let ref4 = &ref1[0];     // 借用的借用
-
-    // 3. 自动解引用
-    println!("Length: {}", ref1.len()); // 等价于 (*ref1).len()
-
-    // 4. 生命周期自动推断
-    let longer_lived = choose_longer(ref1, ref2);
+    // 自动解引用
+    println!("Length: {}", ref1.len());
 
     // 所有引用在此处仍然有效
-    println!("{:?} {:?} {:?} {} {:?}", ref1, ref2, ref3, ref4, longer_lived);
-}
-
-fn choose_longer<'a>(x: &'a Vec<i32>, y: &'a Vec<i32>) -> &'a Vec<i32> {
-    if x.len() > y.len() { x } else { y }
+    println!("{:?} {:?} {:?}", ref1, ref2, ref3);
 }
 ```
 
-### 3.2.2 引用的内存语义
+### 3.2.2 引用的内存安全性
 
 **定理 3.2.1** (引用内存安全性)
 对于任意不可变引用 `r: &T`：
-
 1. **有效性保证**: `r` 指向的内存在其生命周期内始终有效
 2. **不变性保证**: 通过 `r` 无法修改被引用的值
 3. **别名安全**: 多个不可变引用可以安全共存
@@ -145,22 +150,15 @@ $$\text{can\_borrow\_mut}(x, \text{env}) \iff \neg\exists r \in \text{env}: \tex
 fn exclusive_borrowing_semantics() {
     let mut data = vec![1, 2, 3];
 
-    // 1. 创建可变引用
+    // 创建可变引用
     let mut_ref = &mut data;
-
-    // 2. 通过可变引用修改数据
     mut_ref.push(4);
     mut_ref[0] = 10;
 
-    // 3. 编译时保证：排他性
-    // let another_ref = &data;     // 错误：不能在可变借用存在时创建不可变借用
-    // let another_mut = &mut data; // 错误：不能有多个可变借用
-
-    // 4. 可变引用的生命周期结束
+    // 可变引用结束后才能创建新的借用
     println!("Modified data: {:?}", mut_ref);
-    // mut_ref在此处结束
 
-    // 5. 现在可以创建新的借用
+    // 现在可以创建新的借用
     let new_ref = &data;
     println!("Final data: {:?}", new_ref);
 }
@@ -214,10 +212,13 @@ fn lifetime_annotation_semantics() {
     {
         let string2 = String::from("short");
         // 编译器推断生命周期
-        result = longest(&string1, &string2); // 错误：string2生命周期太短
+        // result = longest(&string1, &string2); // 错误：string2生命周期太短
     }
 
-    // println!("Longest: {}", result); // 错误：result引用了已销毁的数据
+    // 正确的用法
+    let string2 = String::from("another long string");
+    result = longest(&string1, &string2);
+    println!("Longest: {}", result);
 }
 
 // 显式生命周期标注
@@ -263,7 +264,7 @@ fn lifetime_subtyping_example() {
 
 ## 3.5 引用类型的高级特性
 
-### 3.5.1 重借用 (Reborrowing)
+### 3.5.1 重借用语义
 
 **定义 3.5.1** (重借用语义)
 重借用是从现有引用创建新引用的操作：
@@ -294,14 +295,10 @@ fn modify_vec(vec: &mut Vec<i32>) {
 }
 ```
 
-### 3.5.2 引用的内部可变性
-
-**定义 3.5.2** (内部可变性模式)
-某些类型提供内部可变性，允许通过不可变引用修改内部状态：
+### 3.5.2 内部可变性
 
 ```rust
 use std::cell::{Cell, RefCell};
-use std::rc::Rc;
 
 // 内部可变性语义
 fn interior_mutability_semantics() {
@@ -315,11 +312,11 @@ fn interior_mutability_semantics() {
     let refcell_ref = &refcell;
 
     {
-        let mut borrowed = refcell_ref.borrow_mut(); // 运行时可变借用
+        let mut borrowed = refcell_ref.borrow_mut();
         borrowed.push(4);
-    } // 借用在此处结束
+    }
 
-    let borrowed = refcell_ref.borrow(); // 运行时不可变借用
+    let borrowed = refcell_ref.borrow();
     println!("RefCell contents: {:?}", *borrowed);
 }
 ```
@@ -341,51 +338,17 @@ fn reference_pattern_matching() {
     let data = (1, 2, 3);
     let reference = &data;
 
-    // 1. 解引用模式
+    // 解引用模式
     match reference {
         &(x, y, z) => println!("Destructured: {}, {}, {}", x, y, z),
     }
 
-    // 2. ref模式
+    // ref模式
     match data {
         (ref x, ref y, ref z) => {
-            // x, y, z 是对原值的引用
             println!("References: {}, {}, {}", x, y, z);
         }
     }
-
-    // 3. 混合模式
-    let vec = vec![1, 2, 3, 4];
-    match &vec[..] {
-        &[first, ref rest @ ..] => {
-            println!("First: {}, Rest: {:?}", first, rest);
-        }
-        _ => {}
-    }
-}
-```
-
-### 3.6.2 引用的自动解引用
-
-**定理 3.6.1** (自动解引用规则)
-Rust编译器在方法调用时自动应用解引用：
-$$\text{method\_call}(r.method()) = \text{method\_call}((*r).method())$$
-
-```rust
-// 自动解引用语义
-fn auto_deref_semantics() {
-    let string = String::from("hello");
-    let string_ref = &string;
-    let string_ref_ref = &string_ref;
-
-    // 所有这些调用都等价
-    println!("Direct: {}", string.len());
-    println!("One ref: {}", string_ref.len());      // 自动解引用
-    println!("Two refs: {}", string_ref_ref.len()); // 多次自动解引用
-
-    // String -> &str 的Deref强制转换
-    let str_method: &str = &string;  // String实现Deref<Target=str>
-    println!("Deref coercion: {}", str_method.chars().count());
 }
 ```
 
@@ -415,10 +378,8 @@ fn dangling_reference_prevention() {
         42
     }
 
-    // 或者使用生命周期参数
-    fn borrow_from_parameter<'a>(x: &'a i32) -> &'a i32 {
-        x  // 安全：返回输入引用
-    }
+    let value = create_owned_value();
+    println!("Value: {}", value);
 }
 ```
 
@@ -459,10 +420,6 @@ fn data_race_prevention() {
 ## 3.8 高级引用模式
 
 ### 3.8.1 Pin引用语义
-
-**定义 3.8.1** (Pin引用语义)
-`Pin<&mut T>` 保证被引用的值不会被移动：
-$$\text{Pin}\langle \&\text{mut } T \rangle: \text{immovable}(T) \Rightarrow \text{addr}(T) = \text{const}$$
 
 ```rust
 use std::pin::Pin;
@@ -511,9 +468,7 @@ fn weak_reference_semantics() {
         None => println!("Value has been dropped"),
     }
 
-    drop(strong_ref); // 释放强引用
-
-    // 弱引用现在无法升级
+    drop(strong_ref);
     assert!(weak_ref.upgrade().is_none());
 }
 ```
@@ -541,8 +496,6 @@ fn performance_characteristics() {
 
     // 引用访问的性能等价于指针解引用
     let ptr = &value as *const i32;
-
-    // 这两个操作在优化后应该生成相同的汇编代码
     let via_reference = *reference;
     let via_pointer = unsafe { *ptr };
 
@@ -576,12 +529,12 @@ fn compiler_optimizations() {
 ### 3.10.1 内部引用
 - [原始类型语义](./01_primitive_types_semantics.md) - 引用的基础类型
 - [复合类型语义](./02_composite_types_semantics.md) - 复合类型的引用
-- [生命周期语义](../../02_control_semantics/03_lifetime_semantics/01_lifetime_annotation_semantics.md) - 生命周期详细分析
+- [函数类型语义](./04_function_types_semantics.md) - 函数参数的引用语义
 
 ### 3.10.2 外部引用
 - [所有权系统语义](../04_ownership_system_semantics/02_borrowing_semantics.md) - 借用机制详解
 - [内存模型语义](../03_memory_model_semantics/06_reference_semantics.md) - 引用的内存表示
-- [并发语义](../../03_concurrency_semantics/01_concurrency_model_semantics/02_shared_state_semantics.md) - 引用的线程安全性
+- [生命周期语义](../../02_control_semantics/03_lifetime_semantics/01_lifetime_annotation_semantics.md) - 生命周期详细分析
 
 ---
 
