@@ -17,6 +17,7 @@ Rust架构模式可建模为三维空间：
 $$\text{Pattern} = \langle \text{Structure}, \text{Behavior}, \text{Ownership} \rangle$$
 
 其中：
+
 - $\text{Structure}$ - 组件组织方式
 - $\text{Behavior}$ - 控制流模式  
 - $\text{Ownership}$ - 所有权分布策略
@@ -1098,4 +1099,4 @@ pub mod event_sourcing {
 *文档状态: 已完成规范化*  
 *版本: 1.0*  
 *字数: ~12KB*  
-*最后更新: 2025-01-27* 
+*最后更新: 2025-01-27*
