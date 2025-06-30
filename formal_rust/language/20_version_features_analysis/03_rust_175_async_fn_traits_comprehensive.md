@@ -16,7 +16,7 @@ Rust 1.75.0标志着异步编程的**语言级革命**，稳定化了两个核�
 1. **async fn in traits**: 允许在trait中直接定义异步方法
 2. **Return Position Impl Trait in Traits (RPITIT)**: 支持trait中返回`impl Trait`
 
-这两个特性结束了Rust异步编程长达5年的"外挂时代"，实现了**零成本抽象的异步trait**。
+这两个特性结束了Rust异步编程长达5年的"外挂时代"，实现了**零成本抽象的异步特征**。
 
 ### 1.2 历史演进轨迹
 
@@ -37,6 +37,7 @@ Rust 1.75.0标志着异步编程的**语言级革命**，稳定化了两个核�
 ### 1.3 技术挑战与突破
 
 **核心挑战**:
+
 ```mathematical
 问题核心 = 动态分发(dyn Trait) ∩ 异步函数(async fn) ∩ 类型安全
 
@@ -47,6 +48,7 @@ Rust 1.75.0标志着异步编程的**语言级革命**，稳定化了两个核�
 ```
 
 **革命性解决方案**:
+
 ```rust
 // 1.75.0前的workaround
 #[async_trait]
@@ -117,6 +119,7 @@ trait AsyncWorker {
 #### 2.2.2 形式化语义模型
 
 **定义1 (异步trait语义)**:
+
 ```mathematical
 AsyncTrait T = {
     methods: Set[AsyncMethod],
@@ -137,6 +140,7 @@ AsyncReturnType t ::=
 ```
 
 **定理1 (类型安全性)**:
+
 ```mathematical
 ∀ trait T with async fn m,
 ∀ impl I: T,
@@ -925,6 +929,7 @@ T_compile = T_type_checking + T_codegen
 **陈述**: 对于任何async trait T及其实现I，编译时确保类型安全。
 
 **证明**:
+
 ```mathematical
 给定:
 - trait T with async fn method() -> R
@@ -946,6 +951,7 @@ T_compile = T_type_checking + T_codegen
 **陈述**: async trait中的生命周期参数不会导致use-after-free。
 
 **证明**:
+
 ```mathematical
 给定:
 - async fn borrow<'a>(&'a self, data: &'a T) -> &'a U
@@ -997,7 +1003,7 @@ Rust保证:
 if (shares_data(op1, op2) ∧ (writes(op1) ∨ writes(op2)))
 then ∃ 同步机制 sync: synchronizes(sync, op1, op2)
 
-async trait特性保持此不变性:
+async trait特征保持此不变性:
 - 通过借用检查器确保无数据竞争
 - 通过Send/Sync bounds确保线程安全
 - 通过生命周期确保内存安全
@@ -1104,12 +1110,7 @@ AdoptionRate(t) = 1 - e^(-λt)
 
 ### 10.1 技术成就总结
 
-Rust 1.75.0的async fn in traits特性代表了**编程语言设计的重大突破**：
-
-1. **语言层面**: 实现了真正的零成本异步抽象
-2. **性能层面**: 相比async-trait提升了20-50%的性能
-3. **开发者体验**: 大幅简化了异步代码的编写和维护
-4. **生态系统**: 为整个Rust异步生态的统一奠定了基础
+Rust 1.75.0的async fn in traits特征不仅解决了长期存在的技术债务，更重要的是，它证明了系统编程语言可以在保持零成本抽象的同时，提供高级的异步编程范式。这一突破为现代并发和异步系统的开发开辟了新的可能性，标志着Rust在系统编程语言进化史上的又一个里程碑。
 
 ### 10.2 理论贡献
 
@@ -1162,6 +1163,6 @@ V_total = V_performance + V_safety + V_productivity + V_ecosystem
 
 ---
 
-**技术总结**: Rust 1.75.0的async fn in traits特性不仅解决了长期存在的技术债务，更重要的是，它证明了系统编程语言可以在保持零成本抽象的同时，提供高级的异步编程范式。这一突破为现代并发和异步系统的开发开辟了新的可能性，标志着Rust在系统编程语言进化史上的又一个里程碑。
+**技术总结**: Rust 1.75.0的async fn in traits特征不仅解决了长期存在的技术债务，更重要的是，它证明了系统编程语言可以在保持零成本抽象的同时，提供高级的异步编程范式。这一突破为现代并发和异步系统的开发开辟了新的可能性，标志着Rust在系统编程语言进化史上的又一个里程碑。
 
-**研究价值**: 这一特性的成功实现为编程语言设计提供了宝贵的经验，特别是在类型系统设计、编译器优化和语言特性集成方面。它将成为未来编程语言研究的重要参考案例。 
+**研究价值**: 这一特性的成功实现为编程语言设计提供了宝贵的经验，特别是在类型系统设计、编译器优化和语言特性集成方面。它将成为未来编程语言研究的重要参考案例。

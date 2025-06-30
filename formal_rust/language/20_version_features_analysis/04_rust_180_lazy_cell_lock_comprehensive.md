@@ -13,14 +13,15 @@
 
 Rust 1.80.0引入了两个关键的懒初始化原语：
 
-1. **LazyCell<T>**: 线程本地的懒初始化存储
-2. **LazyLock<T>**: 线程安全的全局懒初始化存储
+1. **`LazyCell<T>`**: 线程本地的懒初始化存储
+2. **`LazyLock<T>`**: 线程安全的全局懒初始化存储
 
 这两个原语结束了Rust生态系统对`once_cell`和`lazy_static`等外部crate的依赖。
 
 ### 1.2 技术挑战与解决方案
 
 **核心挑战**:
+
 ```mathematical
 懒初始化问题 = 线程安全 ∩ 性能优化 ∩ 内存效率
 
@@ -32,6 +33,7 @@ Rust 1.80.0引入了两个关键的懒初始化原语：
 ```
 
 **革命性解决方案**:
+
 ```rust
 // 传统方案 (once_cell)
 use once_cell::sync::Lazy;
@@ -73,6 +75,7 @@ const POISONED: u8 = 3;
 #### 2.1.2 并发安全性数学模型
 
 **定理1 (初始化唯一性)**:
+
 ```mathematical
 ∀ LazyLock<T> instance L,
 ∀ 时间点 t,
@@ -87,6 +90,7 @@ const POISONED: u8 = 3;
 ```
 
 **定理2 (内存一致性)**:
+
 ```mathematical
 ∀ 线程 t1, t2,
 ∀ LazyLock<T> instance L,
@@ -823,9 +827,10 @@ static HEAVY_COMPUTATION: LazyLock<Vec<String>> = LazyLock::new(|| {
 
 #### 7.1.1 定理: 无数据竞争保证
 
-**陈述**: LazyLock<T>在并发环境下不会产生数据竞争。
+**陈述**: `LazyLock<T>`在并发环境下不会产生数据竞争。
 
 **证明**:
+
 ```mathematical
 数据竞争定义: ∃ 时间点t, ∃ 线程i,j (i≠j):
   access(i,memory,t) ∧ access(j,memory,t) ∧ 
@@ -846,9 +851,10 @@ LazyLock保证:
 
 #### 7.1.2 定理: 内存泄漏预防
 
-**陈述**: LazyLock<T>不会导致内存泄漏。
+**陈述**: `LazyLock<T>`不会导致内存泄漏。
 
 **证明**:
+
 ```mathematical
 内存泄漏条件: ∃ 分配内存m: 不可达(m) ∧ 未释放(m)
 
@@ -1093,4 +1099,4 @@ V_total = V_performance + V_safety + V_ecosystem + V_standardization
 
 **技术总结**: Rust 1.80.0的LazyCell/LazyLock特性通过精密的并发设计和性能优化，为系统编程提供了新的标准。这一特性不仅解决了长期存在的生态系统分裂问题，更重要的是建立了并发懒初始化的理论基础和最佳实践。
 
-**实践价值**: 这些原语将成为现代Rust应用的基础构建块，特别是在需要高性能和线程安全的场景中。它们的引入标志着Rust并发编程进入了一个新的成熟阶段。 
+**实践价值**: 这些原语将成为现代Rust应用的基础构建块，特别是在需要高性能和线程安全的场景中。它们的引入标志着Rust并发编程进入了一个新的成熟阶段。

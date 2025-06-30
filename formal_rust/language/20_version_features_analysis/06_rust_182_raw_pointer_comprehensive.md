@@ -14,6 +14,7 @@
 Rust 1.82.0引入的`&raw`操作符解决了长期存在的未定义行为风险：
 
 **传统问题**:
+
 ```rust
 // 问题1: 通过引用创建原始指针可能触发UB
 #[repr(C)]
@@ -27,6 +28,7 @@ let ptr = &s.b as *const u32;  // 潜在UB：创建未对齐引用
 ```
 
 **革命性解决方案**:
+
 ```rust
 // &raw直接创建原始指针，避免中间引用
 let s = PackedStruct { a: 1, b: 2 };
@@ -87,6 +89,7 @@ impl<'tcx> Builder<'_, 'tcx> {
 #### 2.1.1 数学模型定义
 
 **定义1 (地址计算函数)**:
+
 ```mathematical
 设内存模型 M = (Locations, Values, Layout)
 
@@ -102,6 +105,7 @@ addr(place_expr) = base_addr + offset(field_path)
 ```
 
 **定理1 (地址计算确定性)**:
+
 ```mathematical
 ∀ place_expr P, ∀ 程序状态 S₁, S₂:
 layout_compatible(S₁, S₂) ⟹ addr_S₁(P) = addr_S₂(P)
@@ -118,6 +122,7 @@ layout_compatible(S₁, S₂) ⟹ addr_S₁(P) = addr_S₂(P)
 #### 2.2.1 安全性不变量
 
 **定理2 (引用创建安全性)**:
+
 ```mathematical
 ∀ 内存位置 loc, ∀ 类型 T:
 safe(&raw const loc) ⟺ ¬creates_intermediate_reference(loc)
@@ -127,6 +132,7 @@ unsafe(&loc as *const T) ⟺ ∃ intermediate_ref: may_be_invalid(intermediate_r
 ```
 
 **证明**:
+
 ```mathematical
 &raw操作的安全性保证:
 

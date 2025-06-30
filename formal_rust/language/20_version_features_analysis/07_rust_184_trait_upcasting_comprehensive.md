@@ -14,6 +14,7 @@
 Rust 1.84.0引入的trait对象向上转型解决了长期存在的类型转换限制：
 
 **传统限制**:
+
 ```rust
 trait Animal {
     fn name(&self) -> &str;
@@ -37,6 +38,7 @@ fn handle_animals_old(animals: Vec<Box<dyn Dog>>) {
 ```
 
 **革命性解决方案**:
+
 ```rust
 // Rust 1.84.0支持的向上转型
 fn handle_animals_new(animals: Vec<Box<dyn Dog>>) {
@@ -111,6 +113,7 @@ impl TraitObject {
 #### 2.1.1 Trait继承层次
 
 **定义1 (Trait子类型关系)**:
+
 ```mathematical
 设trait集合 T = {t₁, t₂, ..., tₙ}
 子类型关系 <: ⊆ T × T
@@ -122,6 +125,7 @@ Child <: Parent
 ```
 
 **定理1 (向上转型安全性)**:
+
 ```mathematical
 ∀ concrete type C, ∀ traits T₁, T₂:
 (C: T₁) ∧ (T₁ <: T₂) ⟹ safe_upcast(dyn T₁ → dyn T₂)
@@ -1068,4 +1072,4 @@ V_total = V_type_safety + V_performance + V_expressiveness + V_ecosystem
 
 **技术总结**: Rust 1.84.0的trait对象向上转型通过精巧的vtable兼容性设计，在保持零运行时开销的同时，显著提升了语言的表达能力。这一特性填补了Rust面向对象编程的重要空白。
 
-**实践价值**: 向上转型将成为现代Rust应用架构的基础特性，特别是在需要复杂继承层次和动态分发的场景中。它的引入标志着Rust在企业级面向对象开发中达到了新的成熟度。 
+**实践价值**: 向上转型将成为现代Rust应用架构的基础特性，特别是在需要复杂继承层次和动态分发的场景中。它的引入标志着Rust在企业级面向对象开发中达到了新的成熟度。

@@ -14,6 +14,7 @@
 Rust 1.81.0引入的`#[expect]`属性解决了长期存在的lint管理痛点：
 
 **传统问题**:
+
 ```rust
 // 问题1: #[allow]过于宽泛，容易隐藏真正的问题
 #[allow(dead_code)]  // 允许所有死代码，可能隐藏bug
@@ -29,6 +30,7 @@ fn legacy_function(x: i32) {
 ```
 
 **革命性解决方案**:
+
 ```rust
 // #[expect]提供验证性suppress
 #[expect(dead_code, reason = "计划在v2.0中使用")]
@@ -95,6 +97,7 @@ pub enum ExpectationState {
 #### 2.1.1 基础代数结构
 
 **定义1 (Expect属性代数)**:
+
 ```mathematical
 ExpectAlgebra = (E, L, R, ⊕, ⊗, ⊙)
 
@@ -110,6 +113,7 @@ ExpectAlgebra = (E, L, R, ⊕, ⊗, ⊙)
 ```
 
 **定理1 (期望唯一性)**:
+
 ```mathematical
 ∀ span s, ∀ lint_id l:
 ∃! expectation e: e.span = s ∧ e.lint_id = l
@@ -124,6 +128,7 @@ ExpectAlgebra = (E, L, R, ⊕, ⊗, ⊙)
 #### 2.1.2 验证一致性模型
 
 **定理2 (验证完备性)**:
+
 ```mathematical
 设 Expected = {e₁, e₂, ..., eₙ} (期望集合)
 设 Actual = {a₁, a₂, ..., aₘ} (实际lint集合)
@@ -161,6 +166,7 @@ pub enum ScopePriority {
 ```
 
 **定理3 (作用域覆盖规则)**:
+
 ```mathematical
 设scope层次: S₁ ⊂ S₂ ⊂ ... ⊂ Sₙ (S₁最内层)
 
@@ -871,6 +877,7 @@ M_expect_overhead ≈ 64KB + 128 × 100 + 24KB ≈ 100KB
 **陈述**: #[expect]属性不会改变程序的运行时行为。
 
 **证明**:
+
 ```mathematical
 ∀ 程序P, ∀ expect属性集合E:
 runtime_behavior(P) = runtime_behavior(add_expects(P, E))
@@ -887,6 +894,7 @@ runtime_behavior(P) = runtime_behavior(add_expects(P, E))
 **陈述**: 所有期望都会被正确验证。
 
 **证明**:
+
 ```mathematical
 设 E = {e₁, e₂, ..., eₙ} 为所有期望
 设 L = {l₁, l₂, ..., lₘ} 为实际lint
@@ -1458,4 +1466,4 @@ pub mod visualization_tools {
         ]
     }
 }
-``` 
+```
