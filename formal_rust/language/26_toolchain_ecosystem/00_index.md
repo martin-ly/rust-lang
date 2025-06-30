@@ -19,8 +19,6 @@ Rust工具链生态系统模块探讨了支持Rust开发、编译、测试和部
 
 ## 2. Core Concepts {#2-core-concepts}
 
-<a id="concept-toolchain-model"></a>
-
 ### 2.1 工具链模型 {#2-1-toolchain-model}
 
 工具链模型是对Rust开发工具集的形式化表示，定义为：
@@ -34,8 +32,6 @@ $$\mathcal{T} = (C, P, I, W)$$
 - $I$ 是交互接口
 - $W$ 是工作流
 
-<a id="concept-ecosystem-dynamics"></a>
-
 ### 2.2 生态系统动态 {#2-2-ecosystem-dynamics}
 
 生态系统动态描述了Rust工具链组件间的交互关系，形式化定义为：
@@ -43,8 +39,6 @@ $$\mathcal{T} = (C, P, I, W)$$
 $$\text{Dynamics}(\mathcal{T}) = \{(c_i, c_j, r_{ij}) | c_i, c_j \in \mathcal{T}.C, r_{ij} \in R\}$$
 
 其中 $R$ 是交互关系类型集合。
-
-<a id="concept-tool-integration"></a>
 
 ### 2.3 工具集成 {#2-3-tool-integration}
 
@@ -55,33 +49,23 @@ $$\text{Dynamics}(\mathcal{T}) = \{(c_i, c_j, r_{ij}) | c_i, c_j \in \mathcal{T}
 - 工作流协调
 - 扩展机制
 
-<a id="concept-tool-evolution"></a>
-
 ### 2.4 工具演化 {#2-4-tool-evolution}
 
 工具演化描述了Rust工具链随时间发展的模式和趋势，包括功能扩展、性能改进和接口变化。
 
 ## 3. Key Components {#3-key-components}
 
-<a id="component-compiler"></a>
-
 ### 3.1 编译器系统 {#3-1-compiler-system}
 
 编译器系统负责将Rust代码转换为可执行程序，包括前端、中端和后端。
-
-<a id="component-package-manager"></a>
 
 ### 3.2 包管理系统 {#3-2-package-manager-system}
 
 包管理系统管理代码依赖和版本，实现可重用组件的高效分发和集成。
 
-<a id="component-build-system"></a>
-
 ### 3.3 构建系统 {#3-3-build-system}
 
 构建系统协调编译流程，包括依赖解析、源码处理和产物生成。
-
-<a id="component-development-tools"></a>
 
 ### 3.4 开发工具 {#3-4-development-tools}
 

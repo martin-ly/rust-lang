@@ -20,6 +20,7 @@ Rust性能优化模块探讨了系统性的性能分析和优化方法，以充�
 ## 2. Core Concepts {#2-core-concepts}
 
 <a id="concept-performance-model"></a>
+
 ### 2.1 性能模型 {#2-1-performance-model}
 
 性能模型是对系统性能行为的形式化表示，定义为：
@@ -27,12 +28,14 @@ Rust性能优化模块探讨了系统性的性能分析和优化方法，以充�
 $$\mathcal{P} = (M, T, R, C)$$
 
 其中：
+
 - $M$ 是度量指标集合
 - $T$ 是时间复杂度函数
 - $R$ 是资源消耗函数
 - $C$ 是约束条件
 
 <a id="concept-optimization-strategy"></a>
+
 ### 2.2 优化策略 {#2-2-optimization-strategy}
 
 优化策略是针对特定性能问题的系统化解决方案，形式化定义为：
@@ -42,11 +45,13 @@ $$\text{Strategy}(P, O) = \forall p \in P. \exists o \in O. \text{optimize}(p) =
 其中 $P$ 是性能问题集合，$O$ 是优化技术集合。
 
 <a id="concept-compile-time-optimization"></a>
+
 ### 2.3 编译时优化 {#2-3-compile-time-optimization}
 
 编译时优化利用Rust的类型系统和零成本抽象特性，在编译期进行代码转换和优化。
 
 <a id="concept-runtime-optimization"></a>
+
 ### 2.4 运行时优化 {#2-4-runtime-optimization}
 
 运行时优化关注程序执行过程中的性能表现，包括内存分配、缓存利用和执行路径优化。
@@ -54,21 +59,25 @@ $$\text{Strategy}(P, O) = \forall p \in P. \exists o \in O. \text{optimize}(p) =
 ## 3. Key Components {#3-key-components}
 
 <a id="component-profiling"></a>
+
 ### 3.1 性能分析 {#3-1-profiling}
 
 性能分析是识别程序中性能瓶颈的过程，包括静态分析和动态分析。
 
 <a id="component-memory-optimization"></a>
+
 ### 3.2 内存优化 {#3-2-memory-optimization}
 
 内存优化涉及数据结构和内存布局的设计，以最小化内存占用和提高缓存利用率。
 
 <a id="component-algorithm-optimization"></a>
+
 ### 3.3 算法优化 {#3-3-algorithm-optimization}
 
 算法优化通过选择和改进算法，降低时间和空间复杂度。
 
 <a id="component-concurrency-optimization"></a>
+
 ### 3.4 并发优化 {#3-4-concurrency-optimization}
 
 并发优化通过并行执行和异步处理，提高系统的吞吐量和响应性。
@@ -108,5 +117,6 @@ $$\text{Strategy}(P, O) = \forall p \in P. \exists o \in O. \text{optimize}(p) =
 ---
 
 **Document History**:  
+
 - Created: 2025-07-23
-- Updated: 2025-07-23 - 创建了索引文件并添加了交叉引用 
+- Updated: 2025-07-23 - 创建了索引文件并添加了交叉引用

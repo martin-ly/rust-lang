@@ -19,7 +19,6 @@ Rust跨语言比较模块探讨了Rust语言与其他编程语言在理论基础
 
 ## 2. Core Concepts {#2-core-concepts}
 
-<a id="concept-language-feature-model"></a>
 ### 2.1 语言特性模型 {#2-1-language-feature-model}
 
 语言特性模型是对编程语言各方面特性的形式化表示，定义为：
@@ -27,13 +26,13 @@ Rust跨语言比较模块探讨了Rust语言与其他编程语言在理论基础
 $$\mathcal{L} = (T, M, C, P, S)$$
 
 其中：
+
 - $T$ 是类型系统
 - $M$ 是内存管理模型
 - $C$ 是并发模型
 - $P$ 是编程范式
 - $S$ 是语义模型
 
-<a id="concept-comparative-framework"></a>
 ### 2.2 比较框架 {#2-2-comparative-framework}
 
 比较框架提供了系统化比较不同语言特性的方法，形式化定义为：
@@ -42,7 +41,6 @@ $$\text{Compare}(L_1, L_2, D) = \{(f_1, f_2, \sim) | f_1 \in L_1, f_2 \in L_2, \
 
 其中 $L_1$ 和 $L_2$ 是语言特性，$D$ 是比较维度，$\sim$ 是比较关系。
 
-<a id="concept-language-tradeoffs"></a>
 ### 2.3 语言权衡 {#2-3-language-tradeoffs}
 
 语言权衡描述了不同语言设计决策之间的取舍关系，包括：
@@ -52,29 +50,24 @@ $$\text{Compare}(L_1, L_2, D) = \{(f_1, f_2, \sim) | f_1 \in L_1, f_2 \in L_2, \
 - 抽象与控制
 - 静态检查与灵活性
 
-<a id="concept-interoperability"></a>
 ### 2.4 互操作性 {#2-4-interoperability}
 
 互操作性描述了Rust与其他语言交互的机制和原则，包括FFI、绑定生成和共享数据结构。
 
 ## 3. Key Components {#3-key-components}
 
-<a id="component-type-system-comparison"></a>
 ### 3.1 类型系统比较 {#3-1-type-system-comparison}
 
 比较Rust的类型系统与其他语言类型系统的异同，包括静态类型、类型推导和多态性。
 
-<a id="component-memory-model-comparison"></a>
 ### 3.2 内存模型比较 {#3-2-memory-model-comparison}
 
 比较Rust的所有权模型与其他语言内存管理方法的异同，包括垃圾收集和手动内存管理。
 
-<a id="component-concurrency-model-comparison"></a>
 ### 3.3 并发模型比较 {#3-3-concurrency-model-comparison}
 
 比较Rust的并发模型与其他语言并发处理方法的异同，包括线程模型、异步模型和同步原语。
 
-<a id="component-paradigm-comparison"></a>
 ### 3.4 编程范式比较 {#3-4-paradigm-comparison}
 
 比较Rust支持的编程范式与其他语言的异同，包括函数式、面向对象和过程式编程。
@@ -114,5 +107,6 @@ $$\text{Compare}(L_1, L_2, D) = \{(f_1, f_2, \sim) | f_1 \in L_1, f_2 \in L_2, \
 ---
 
 **Document History**:  
+
 - Created: 2025-07-23
-- Updated: 2025-07-23 - 创建了索引文件并添加了交叉引用 
+- Updated: 2025-07-23 - 创建了索引文件并添加了交叉引用

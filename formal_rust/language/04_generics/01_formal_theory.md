@@ -35,6 +35,7 @@ The generics system embodies the philosophical tension between **universal** and
 - **Particularity**: Each instantiation of a generic type is a particular, concrete type
 
 **Philosophical Questions:**
+
 - What is the ontological status of generic types?
 - How do we understand the relationship between abstract patterns and concrete implementations?
 - What does it mean for a type to be "parameterizable"?
@@ -60,6 +61,7 @@ F : \text{Type} \rightarrow \text{Type}
 For example, `Vec<T>` is a functor that maps any type `T` to the type of vectors containing `T`.
 
 **Functor Laws:**
+
 1. **Identity**: `F(id_T) = id_{F(T)}`
 2. **Composition**: `F(g \circ f) = F(g) \circ F(f)`
 
@@ -74,6 +76,7 @@ Generic type parameters represent **universal quantification**:
 This means "for all types T, we can construct a new type."
 
 **Mathematical Interpretation:**
+
 - Type parameters are **universally quantified variables**
 - Generic functions are **polymorphic functions**
 - Type constraints are **bounded quantification**
@@ -89,6 +92,7 @@ Trait bounds implement **bounded universal quantification**:
 This means "for all types T that implement Trait, we can construct a new type."
 
 **Formal Definition:**
+
 ```math
 \text{TraitBound}(T, \text{Trait}) = \{ t : T \mid \text{implements}(t, \text{Trait}) \}
 ```
@@ -106,6 +110,7 @@ trait TypeConstructor<T> {
 ```
 
 **Mathematical Properties:**
+
 1. **Injectivity**: Different type arguments produce different output types
 2. **Compositionality**: Type constructors can be composed
 3. **Parametricity**: Behavior depends only on the type parameter, not its internal structure
@@ -119,6 +124,7 @@ f : \forall T. T \rightarrow T
 ```
 
 **Formal Semantics:**
+
 ```math
 \llbracket \text{fn identity<T>(x: T) -> T} \rrbracket = \lambda T. \lambda x : T. x
 ```
@@ -132,6 +138,7 @@ Associated types implement **type families**:
 ```
 
 **Mathematical Properties:**
+
 1. **Dependency**: Associated types depend on the implementing type
 2. **Uniqueness**: Each implementation provides exactly one associated type
 3. **Coherence**: All implementations of a trait for a type must agree on associated types
@@ -147,6 +154,7 @@ fn identity<T>(x: T) -> T {
 ```
 
 **Mathematical Interpretation:**
+
 - `T` is a **universally quantified type variable**
 - The function is **parametric** in `T`
 - **Parametricity theorem** applies: behavior depends only on the type, not its structure
@@ -161,6 +169,7 @@ struct Point<T> {
 ```
 
 **Category-Theoretic Interpretation:**
+
 - `Point` is an **endofunctor** on the category of types
 - `Point<T>` is the **image** of type `T` under the `Point` functor
 - The functor preserves the structure of the input type
@@ -174,6 +183,7 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 ```
 
 **Mathematical Semantics:**
+
 - `T: PartialOrd` is a **bounded universal quantification**
 - The function is parametric over all types that implement `PartialOrd`
 - The bound provides a **constraint** on the type parameter
@@ -188,6 +198,7 @@ trait Iterator {
 ```
 
 **Type Family Interpretation:**
+
 - `Item` is a **type family** indexed by the implementing type
 - Each implementation of `Iterator` defines its own `Item` type
 - The associated type is **dependent** on the implementing type
@@ -219,6 +230,7 @@ trait Iterator {
 **Theorem**: Generic code maintains type safety for all type arguments.
 
 **Proof Sketch:**
+
 1. Type parameters are universally quantified
 2. All operations must be valid for all possible type arguments
 3. Compile-time checking ensures type safety
@@ -229,6 +241,7 @@ trait Iterator {
 **Theorem**: Generic functions are parametric in their type parameters.
 
 **Proof Sketch:**
+
 1. Type parameters cannot be inspected at runtime
 2. Behavior depends only on the type structure, not internal details
 3. Free theorems hold for all generic functions
@@ -239,6 +252,7 @@ trait Iterator {
 **Theorem**: Trait implementations are coherent (no conflicts).
 
 **Proof Sketch:**
+
 1. Orphan rule prevents conflicting implementations
 2. Each trait-type pair has at most one implementation
 3. Associated types are uniquely determined
@@ -255,12 +269,14 @@ fn swap<T>(x: T, y: T) -> (T, T) {
 ```
 
 **Mathematical Semantics:**
+
 ```math
 \text{swap} : \forall T. T \times T \rightarrow T \times T
 ```
 
 **Parametricity Property:**
 For any function `f : T \rightarrow U`, we have:
+
 ```math
 \text{swap}(f(x), f(y)) = f(\text{swap}(x, y))
 ```
@@ -276,6 +292,7 @@ struct BinaryTree<T> {
 ```
 
 **Category-Theoretic Interpretation:**
+
 - `BinaryTree` is a **recursive endofunctor**
 - It forms a **fixpoint** of the functor `F(T) = T \times \text{Option}(F(T)) \times \text{Option}(F(T))`
 - The structure is **parametric** in the element type
@@ -290,6 +307,7 @@ fn sort<T: Ord>(mut items: Vec<T>) -> Vec<T> {
 ```
 
 **Mathematical Semantics:**
+
 ```math
 \text{sort} : \forall T : \text{Ord}. \text{Vec}(T) \rightarrow \text{Vec}(T)
 ```
@@ -304,6 +322,7 @@ The `Ord` bound ensures that `T` supports total ordering, which is required for 
 **Theorem**: Generic functions are parametric in their type parameters.
 
 **Proof**:
+
 1. Type parameters are universally quantified
 2. No runtime type information is available
 3. Behavior must be uniform across all type arguments
@@ -314,6 +333,7 @@ The `Ord` bound ensures that `T` supports total ordering, which is required for 
 **Theorem**: Type constructors are injective.
 
 **Proof**:
+
 1. Assume `F<T1> = F<T2>`
 2. By definition of type equality, the types are identical
 3. Since `F` is a function, `T1 = T2`
@@ -324,6 +344,7 @@ The `Ord` bound ensures that `T` supports total ordering, which is required for 
 **Theorem**: Trait implementations are coherent.
 
 **Proof**:
+
 1. Orphan rule prevents conflicting implementations
 2. Each trait-type pair has at most one implementation
 3. Associated types are uniquely determined by the implementation
@@ -334,6 +355,7 @@ The `Ord` bound ensures that `T` supports total ordering, which is required for 
 **Theorem**: For any function `f : \forall T. T \rightarrow T`, we have `f = \lambda x. x`.
 
 **Proof**:
+
 1. By parametricity, `f` must behave uniformly for all types
 2. The only uniform function of type `T \rightarrow T` is the identity
 3. Therefore, `f` is the identity function
@@ -356,4 +378,4 @@ The `Ord` bound ensures that `T` supports total ordering, which is required for 
 
 ---
 
-*This document represents the formal mathematical foundation of Rust's generics system, providing rigorous definitions, proofs, and semantic models for understanding and implementing parametric polymorphism in Rust.* 
+*This document represents the formal mathematical foundation of Rust's generics system, providing rigorous definitions, proofs, and semantic models for understanding and implementing parametric polymorphism in Rust.*

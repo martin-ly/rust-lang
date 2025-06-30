@@ -19,8 +19,6 @@ Rust教学与学习模块探讨了Rust语言教育和学习过程的形式化理
 
 ## 2. Core Concepts {#2-core-concepts}
 
-<a id="concept-learning-model"></a>
-
 ### 2.1 学习模型 {#2-1-learning-model}
 
 学习模型是对Rust学习过程的形式化表示，定义为：
@@ -34,8 +32,6 @@ $$\mathcal{L} = (C, P, S, M)$$
 - $S$ 是学习策略
 - $M$ 是掌握度量
 
-<a id="concept-pedagogical-framework"></a>
-
 ### 2.2 教学框架 {#2-2-pedagogical-framework}
 
 教学框架提供了系统化教授Rust概念的方法，形式化定义为：
@@ -43,8 +39,6 @@ $$\mathcal{L} = (C, P, S, M)$$
 $$\text{Teach}(C, A, M) = \{\text{Session}(c_i, a_j, m_k) | c_i \in C, a_j \in A, m_k \in M\}$$
 
 其中 $C$ 是概念集合，$A$ 是教学活动，$M$ 是评估方法。
-
-<a id="concept-cognitive-complexity"></a>
 
 ### 2.3 认知复杂性 {#2-3-cognitive-complexity}
 
@@ -55,33 +49,23 @@ $$\text{Teach}(C, A, M) = \{\text{Session}(c_i, a_j, m_k) | c_i \in C, a_j \in A
 - 心智模型距离
 - 先验知识要求
 
-<a id="concept-learning-progression"></a>
-
 ### 2.4 学习进阶 {#2-4-learning-progression}
 
 学习进阶描述了从初学者到专家的发展路径，包括不同阶段的知识结构和能力特征。
 
 ## 3. Key Components {#3-key-components}
 
-<a id="component-concept-mapping"></a>
-
 ### 3.1 概念映射 {#3-1-concept-mapping}
 
 概念映射建立了Rust概念之间的关系网络，展示了概念依赖和关联。
-
-<a id="component-learning-resources"></a>
 
 ### 3.2 学习资源 {#3-2-learning-resources}
 
 学习资源包括教材、教程、练习和项目，为不同学习风格和水平提供支持。
 
-<a id="component-assessment-methods"></a>
-
 ### 3.3 评估方法 {#3-3-assessment-methods}
 
 评估方法用于衡量学习者对Rust概念的理解和应用能力。
-
-<a id="component-teaching-strategies"></a>
 
 ### 3.4 教学策略 {#3-4-teaching-strategies}
 
