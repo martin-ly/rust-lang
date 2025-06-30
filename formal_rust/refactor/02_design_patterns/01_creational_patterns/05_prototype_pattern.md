@@ -40,6 +40,11 @@
     - [8.3 工程案例与批判性分析](#83-工程案例与批判性分析)
   - [9. 总结与批判性反思](#9-总结与批判性反思)
   - [10. 交叉引用与理论联系](#10-交叉引用与理论联系)
+    - [设计模式关联](#设计模式关联)
+    - [理论基础关联](#理论基础关联)
+    - [行为模式关联](#行为模式关联)
+    - [并发模式关联](#并发模式关联)
+    - [工程实践关联](#工程实践关联)
   - [11. 规范化进度与后续建议](#11-规范化进度与后续建议)
 
 ---
@@ -448,11 +453,33 @@ impl Prototype for Enemy {
 
 ## 10. 交叉引用与理论联系
 
-- [建造者模式](04_builder_pattern.md)
-- [抽象工厂模式](03_abstract_factory_pattern.md)
-- [工厂方法模式](02_factory_method_pattern.md)
-- [Rust 类型系统与设计模式](../../02_type_system/01_type_theory_foundations.md)
-- [范畴论与类型系统](../../01_core_theory/02_type_system/02_category_theory.md)
+### 设计模式关联
+
+- [建造者模式](04_builder_pattern.md) - 同为创建型模式，建造者注重构建过程，原型注重复制现有对象
+- [抽象工厂模式](03_abstract_factory_pattern.md) - 可结合使用，工厂创建原型，原型负责复制
+- [工厂方法模式](02_factory_method_pattern.md) - 创建型模式对比，原型避免了复杂的工厂层次
+
+### 理论基础关联  
+
+- [类型理论基础](../../01_core_theory/02_type_system/01_type_theory_foundations.md) - Rust类型系统为原型模式提供类型安全保证
+- [范畴论基础](../../01_core_theory/01_variable_system/02_category_theory.md) - 克隆操作的函子映射理论基础
+
+### 行为模式关联
+
+- [命令模式](../03_behavioral_patterns/02_command_pattern.md) - 不可变对象的原型复制
+- [策略模式](../03_behavioral_patterns/09_strategy_pattern.md) - 策略对象的原型克隆
+- [状态模式](../03_behavioral_patterns/08_state_pattern.md) - 状态对象的复制和切换
+
+### 并发模式关联
+
+- [Actor模式](../04_concurrent_patterns/01_actor_pattern.md) - 原型模式在Actor模型中的应用
+- [通道模式](../04_concurrent_patterns/02_channel_pattern.md) - 通道中传递的对象原型
+- [Future模式](../04_concurrent_patterns/03_future_pattern.md) - 异步计算结果的克隆
+
+### 工程实践关联
+
+- [对象池性能优化](../../04_engineering_practices/01_performance_optimization/03_object_pool_patterns.md) - 对象池与原型模式结合
+- [原型测试策略](../../04_engineering_practices/03_testing_strategies/02_prototype_testing.md) - 测试对象的原型创建
 
 ---
 

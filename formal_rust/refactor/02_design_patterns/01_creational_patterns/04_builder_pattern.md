@@ -40,6 +40,12 @@
     - [8.3 工程案例与批判性分析](#83-工程案例与批判性分析)
   - [9. 总结与批判性反思](#9-总结与批判性反思)
   - [10. 交叉引用与理论联系](#10-交叉引用与理论联系)
+    - [设计模式关联](#设计模式关联)
+    - [理论基础关联](#理论基础关联)
+    - [行为模式关联](#行为模式关联)
+    - [结构模式关联](#结构模式关联)
+    - [并发模式关联](#并发模式关联)
+    - [工程实践关联](#工程实践关联)
   - [11. 规范化进度与后续建议](#11-规范化进度与后续建议)
 
 ---
@@ -432,11 +438,38 @@ trait ConfigBuilder {
 
 ## 10. 交叉引用与理论联系
 
-- [抽象工厂模式](03_abstract_factory_pattern.md)
-- [工厂方法模式](02_factory_method_pattern.md)
-- [原型模式](05_prototype_pattern.md)
-- [Rust 类型系统与设计模式](../../02_type_system/01_type_theory_foundations.md)
-- [范畴论与类型系统](../../01_core_theory/02_type_system/02_category_theory.md)
+### 设计模式关联
+
+- [抽象工厂模式](03_abstract_factory_pattern.md) - 可结合使用，工厂创建建造者
+- [工厂方法模式](02_factory_method_pattern.md) - 创建型模式对比，建造者注重构建过程
+- [原型模式](05_prototype_pattern.md) - 可结合使用，原型提供初始状态，建造者完善细节
+- [单例模式](01_singleton_pattern.md) - 建造者本身可以是单例
+
+### 理论基础关联  
+
+- [类型理论基础](../../01_core_theory/02_type_system/01_type_theory_foundations.md) - Rust类型系统为建造者模式提供类型安全保证
+- [范畴论基础](../../01_core_theory/01_variable_system/02_category_theory.md) - 建造过程的函子映射理论
+
+### 行为模式关联
+
+- [命令模式](../03_behavioral_patterns/02_command_pattern.md) - 建造步骤的命令化封装
+- [策略模式](../03_behavioral_patterns/09_strategy_pattern.md) - 不同的建造策略选择
+- [状态模式](../03_behavioral_patterns/08_state_pattern.md) - 建造过程的状态转换
+
+### 结构模式关联
+
+- [装饰器模式](../02_structural_patterns/04_decorator_pattern.md) - 逐步装饰构建对象
+- [外观模式](../02_structural_patterns/03_facade_pattern.md) - 简化复杂建造过程的接口
+
+### 并发模式关联
+
+- [Actor模式](../04_concurrent_patterns/01_actor_pattern.md) - 并发环境下的对象构建
+- [Future模式](../04_concurrent_patterns/03_future_pattern.md) - 异步建造过程
+
+### 工程实践关联
+
+- [建造者性能优化](../../04_engineering_practices/01_performance_optimization/04_builder_optimization.md) - 建造过程的性能优化策略
+- [建造者测试策略](../../04_engineering_practices/03_testing_strategies/03_builder_testing.md) - 建造者模式的测试方法论
 
 ---
 
