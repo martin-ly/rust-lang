@@ -15,14 +15,14 @@
 
 ### 基础可见性分类
 
-```
+```text
 Visibility ::= Private | Pub(Scope)
 Scope ::= Crate | Super | SelfMod | Path(ModulePath)
 ```
 
 ### 可见性层次结构
 
-```
+```text
 VisibilityHierarchy: Module → PowerSet(Module)
   Private: {self}
   pub(self): {self}
@@ -33,7 +33,7 @@ VisibilityHierarchy: Module → PowerSet(Module)
 
 ### 可见性关系的数学模型
 
-```
+```text
 Visible: (Item, Module) → Boolean
 Visible(item, observer) ⟺ 
   observer ∈ VisibilityScope(visibility(item))
@@ -43,7 +43,7 @@ Visible(item, observer) ⟺
 
 ### 隐私边界定义
 
-```
+```text
 PrivacyBoundary ::= ModuleBoundary | CrateBoundary
 ModuleBoundary: Module → Boolean
 CrateBoundary: Crate → Boolean
@@ -53,7 +53,7 @@ CrateBoundary: Crate → Boolean
 
 **隐私边界定理**：
 
-```
+```text
 ∀ item ∈ Module, ∀ observer ∈ Module:
   crosses_privacy_boundary(item, observer) ⇒
   requires_explicit_visibility(item)
@@ -63,14 +63,14 @@ CrateBoundary: Crate → Boolean
 
 ### 规则1：默认隐私性
 
-```
+```text
 ∀ item ∈ Module:
   ¬explicit_visibility(item) ⇒ visibility(item) = Private
 ```
 
 ### 规则2：可见性传播
 
-```
+```text
 ∀ parent, child ∈ Item:
   contains(parent, child) ∧ visibility(parent) < visibility(child)
   ⇒ effective_visibility(child) = visibility(parent)
@@ -78,7 +78,7 @@ CrateBoundary: Crate → Boolean
 
 ### 规则3：重导出可见性
 
-```
+```text
 pub use path::Item;
 ⇒ visibility(Item_in_current_module) = pub
 ```
@@ -97,7 +97,7 @@ struct Example {
 
 ### 字段访问的形式化
 
-```
+```text
 FieldAccess: (Struct, Field, Module) → Boolean
 FieldAccess(s, f, m) ⟺ 
   Visible(s, m) ∧ Visible(f, m)
@@ -107,7 +107,7 @@ FieldAccess(s, f, m) ⟺
 
 **结构体构造定理**：
 
-```
+```text
 ∀ struct S, ∀ constructor_site:
   can_construct(S, constructor_site) ⇔
   (∀ field ∈ private_fields(S): 
@@ -144,7 +144,7 @@ mod private_mod {
 
 **类型泄漏检测定理**：
 
-```
+```text
 ∀ function f, ∀ type T:
   appears_in_signature(T, f) ∧ 
   visibility(f) > visibility(T) ⇒
@@ -155,7 +155,7 @@ mod private_mod {
 
 ### 特质实现可见性规则
 
-```
+```text
 ImplVisibility: (Trait, Type, Module) → Boolean
 ImplVisibility(trait, type, module) ⟺
   Visible(trait, module) ∧ Visible(type, module)
@@ -165,7 +165,7 @@ ImplVisibility(trait, type, module) ⟺
 
 **孤儿规则**：
 
-```
+```text
 ∀ impl Trait for Type:
   (local_to_crate(Trait) ∨ local_to_crate(Type)) ∨
   covered_by_local_type(Type)
@@ -173,7 +173,7 @@ ImplVisibility(trait, type, module) ⟺
 
 ### 相干性与可见性
 
-```
+```text
 ∀ impl1, impl2:
   overlaps(impl1, impl2) ∧ 
   same_visibility_scope(impl1, impl2) ⇒
@@ -196,7 +196,7 @@ pub(crate) macro_rules! crate_macro { ... } // crate可见
 
 **宏展开可见性定理**：
 
-```
+```text
 ∀ macro_call, ∀ expanded_code:
   expand(macro_call) = expanded_code ⇒
   visibility_context(expanded_code) = 
@@ -209,7 +209,7 @@ pub(crate) macro_rules! crate_macro { ... } // crate可见
 
 **封装保护定理**：
 
-```
+```text
 ∀ module M, ∀ invariant I:
   maintains(M, I) ∧ 
   (∀ external_access: ¬violates(external_access, I)) ⇒
@@ -218,7 +218,7 @@ pub(crate) macro_rules! crate_macro { ... } // crate可见
 
 ### 信息隐藏的形式化
 
-```
+```text
 InformationHiding: (Module, Implementation) → Boolean
 InformationHiding(M, impl) ⟺
   ∀ external_observer:
@@ -242,7 +242,7 @@ fn hidden_lifetime() -> impl Iterator<Item = i32> {
 
 ### 生命周期可见性定理
 
-```
+```text
 ∀ lifetime 'a, ∀ type T:
   appears_in(T, 'a) ∧ visibility(T) = pub ⇒
   effective_visibility('a) ≥ pub
@@ -252,7 +252,7 @@ fn hidden_lifetime() -> impl Iterator<Item = i32> {
 
 ### 模块移动的可见性保持
 
-```
+```text
 ModuleMove: (Module, NewParent) → VisibilityChange
 ∀ move_operation:
   preserve_external_visibility(move_operation) ⇒
@@ -275,7 +275,7 @@ pub mod a {
 
 **影响分析定理**：
 
-```
+```text
 ∀ visibility_change:
   reduces_visibility(change) ⇒
   potential_breaking_change(change)
@@ -285,7 +285,7 @@ pub mod a {
 
 ### Crate边界的可见性
 
-```
+```text
 CrateBoundary: (Item, ExternalCrate) → Boolean
 CrateBoundary(item, ext_crate) ⟺
   visibility(item) = pub ∧ 
@@ -294,7 +294,7 @@ CrateBoundary(item, ext_crate) ⟺
 
 ### 依赖关系的可见性传播
 
-```
+```text
 DependencyVisibility: (CrateA, CrateB) → VisibilityRelation
 depends_on(A, B) ⇒ can_access(A, pub_items(B))
 ```
@@ -303,7 +303,7 @@ depends_on(A, B) ⇒ can_access(A, pub_items(B))
 
 ### 静态可见性检查
 
-```
+```text
 Algorithm: VisibilityCheck(item, access_site)
 1. path ← compute_access_path(item, access_site)
 2. for each segment in path:
@@ -314,7 +314,7 @@ Algorithm: VisibilityCheck(item, access_site)
 
 ### 可见性图的构建
 
-```
+```text
 VisibilityGraph: (Crate) → DirectedGraph
 nodes ← all_items(crate)
 edges ← {(a, b) | can_access(a, b)}
@@ -324,7 +324,7 @@ edges ← {(a, b) | can_access(a, b)}
 
 ### 封装完整性检查
 
-```
+```text
 EncapsulationIntegrity: Module → Boolean
 ∀ module M:
   EncapsulationIntegrity(M) ⟺
@@ -334,7 +334,7 @@ EncapsulationIntegrity: Module → Boolean
 
 ### 隐私泄漏检测
 
-```
+```text
 PrivacyLeakDetection: (PublicAPI) → Set<PrivacyLeak>
 leaks ← ∅
 for each public_item in PublicAPI:

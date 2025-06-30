@@ -61,7 +61,7 @@ fn target() { ... } → modified_function
 
 #### TokenStream类型
 
-```
+```text
 TokenStream ::= ε | Token · TokenStream | Group(Delimiter, TokenStream) · TokenStream
 
 Token ::= Ident(String) | Literal(LitKind) | Punct(char) | ...
@@ -71,7 +71,7 @@ Delimiter ::= Parenthesis | Bracket | Brace
 
 #### 编译时计算模型
 
-```
+```text
 CompileTime: Program → MacroExecutionEnvironment
 MacroExecutionEnvironment: TokenStream → Either<TokenStream, Error>
 ```
@@ -80,20 +80,20 @@ MacroExecutionEnvironment: TokenStream → Either<TokenStream, Error>
 
 #### 展开规则
 
-```
+```text
 Γ ⊢ macro_call: TokenStream → TokenStream'
 Γ ⊢ context[macro_call] → context[TokenStream']
 ```
 
 #### 递归展开控制
 
-```
+```text
 depth(macro_expansion) ≤ MAX_DEPTH
 ```
 
 **递归限制定理**：
 
-```
+```text
 ∀ m ∈ MacroCall: 
   expansion_depth(m) < ∞ ⇒ termination_guaranteed(m)
 ```
@@ -104,7 +104,7 @@ depth(macro_expansion) ≤ MAX_DEPTH
 
 #### 定理：编译时内存安全
 
-```
+```text
 ∀ proc_macro ∈ ProcMacro:
   compile_time_execution(proc_macro) ⇒ memory_safe(proc_macro)
 ```
@@ -117,7 +117,7 @@ depth(macro_expansion) ≤ MAX_DEPTH
 
 #### 卫生性定理 (Hygiene Theorem)
 
-```
+```text
 ∀ macro_call, ∀ identifier ∈ macro_expansion:
   scope(identifier) = original_scope ∨ expansion_scope
 ```
@@ -131,7 +131,7 @@ depth(macro_expansion) ≤ MAX_DEPTH
 
 #### 展开后类型正确性
 
-```
+```text
 TypeCheck(original_code) = ✓ ∧ 
 MacroExpand(original_code) = expanded_code
 ⇒ TypeCheck(expanded_code) = ✓ ∨ CompileError
@@ -143,13 +143,13 @@ MacroExpand(original_code) = expanded_code
 
 #### 宏作为高阶函数
 
-```
+```text
 MacroλCalc ::= x | λx.M | M N | quote(TokenStream) | unquote(Expr)
 ```
 
 #### 准引用机制 (Quasi-quotation)
 
-```
+```text
 quote! { #(#tokens)* } ≡ TokenStream::from([#(tokens.into()),*])
 ```
 
@@ -157,7 +157,7 @@ quote! { #(#tokens)* } ≡ TokenStream::from([#(tokens.into()),*])
 
 #### 定理：编译时可计算性
 
-```
+```text
 ∀ f ∈ ComputableFunction:
   ∃ proc_macro: proc_macro ≡ f
 ```
@@ -172,13 +172,13 @@ quote! { #(#tokens)* } ≡ TokenStream::from([#(tokens.into()),*])
 
 #### 宏状态共享模型
 
-```
+```text
 MacroState: Global → Local → TokenStream
 ```
 
 **状态隔离定理**：
 
-```
+```text
 ∀ m1, m2 ∈ ProcMacro:
   state(m1) ∩ state(m2) = ∅ (默认情况)
 ```
@@ -205,7 +205,7 @@ where T: Serialize
 
 **类型约束传播定理**：
 
-```
+```text
 ∀ T: Serialize ⇒ Data<T>: Serialize
 ```
 
@@ -228,7 +228,7 @@ trait AsyncTrait {
 
 **生命周期保持定理**：
 
-```
+```text
 ∀ 'a: async_method_call('a) ⇒ output_lifetime ⊆ 'a
 ```
 
@@ -238,13 +238,13 @@ trait AsyncTrait {
 
 #### 缓存机制
 
-```
+```text
 MacroCache: (MacroId, InputTokens) → OutputTokens
 ```
 
 #### 增量编译支持
 
-```
+```text
 IncrementalExpansion: 
   ΔInput → ΔOutput ∨ FullRecompile
 ```
@@ -253,13 +253,13 @@ IncrementalExpansion:
 
 #### 展开时间复杂性
 
-```
+```text
 TimeComplexity(macro_expansion) = O(f(|input_tokens|))
 ```
 
 #### 内存使用分析
 
-```
+```text
 MemoryUsage(macro_state) ≤ MAX_PROC_MACRO_MEMORY
 ```
 
@@ -269,14 +269,14 @@ MemoryUsage(macro_state) ≤ MAX_PROC_MACRO_MEMORY
 
 #### 错误传播模型
 
-```
+```text
 MacroError ::= SyntaxError | SemanticError | RuntimeError
 ErrorContext ::= MacroCallSite | ExpansionSite | NestedMacro
 ```
 
 #### 错误恢复策略
 
-```
+```text
 ErrorRecovery: MacroError → Either<PartialExpansion, Abort>
 ```
 
@@ -284,7 +284,7 @@ ErrorRecovery: MacroError → Either<PartialExpansion, Abort>
 
 #### 源位置追踪定理
 
-```
+```text
 ∀ error ∈ expanded_code:
   ∃ span ∈ original_code: maps_to(error, span)
 ```
@@ -295,7 +295,7 @@ ErrorRecovery: MacroError → Either<PartialExpansion, Abort>
 
 #### 展开跟踪模型
 
-```
+```text
 ExpansionTrace: MacroCall → [ExpansionStep]
 ExpansionStep: (Input, Macro, Output, Context)
 ```
@@ -351,14 +351,14 @@ trait ToTokens {
 
 #### 属性解析规则
 
-```
+```text
 Attribute ::= #[Meta]
 Meta ::= Path | Path = Lit | Path(TokenTree)
 ```
 
 #### 多属性组合
 
-```
+```text
 CombineAttributes: [Attribute] → GlobalEffect
 ```
 

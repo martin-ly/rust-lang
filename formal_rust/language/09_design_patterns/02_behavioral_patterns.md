@@ -29,7 +29,7 @@ Iterator<I> ≡ (State, State → Option<(Item, State)>)
 
 #### 数学模型
 
-```
+```text
 Sequence: [a₁, a₂, ..., aₙ]
 Iterator: State × (State → Option<Item × State>)
 ```
@@ -38,7 +38,7 @@ Iterator: State × (State → Option<Item × State>)
 
 **迭代器安全性定理**：
 
-```
+```text
 ∀ iter ∈ Iterator<T>:
   ∀ i ∈ ℕ: iter.nth(i) = Some(item) ⇒ valid_access(collection, i)
 ```
@@ -67,7 +67,7 @@ impl<T> Iterator for VecIterator<T> {
 
 #### 惰性求值的形式化
 
-```
+```text
 LazyIterator: () → Iterator<T>
 map_fusion: Iterator<T>.map(f).map(g) ≡ Iterator<T>.map(g ∘ f)
 ```
@@ -164,14 +164,14 @@ impl Connection<Connected> {
 
 #### 状态转换的形式化
 
-```
+```text
 StateTransition: State₁ → Action → State₂
 TypeState: State ∈ TypeSystem
 ```
 
 **状态安全性定理**：
 
-```
+```text
 ∀ s₁, s₂ ∈ State, ∀ a ∈ Action:
   valid_transition(s₁, a, s₂) ⇔ 
   ∃ method: impl FnOnce(Object<s₁>) → Object<s₂>
@@ -215,7 +215,7 @@ impl<S: SortStrategy> GenericSorter<S> {
 
 **零成本抽象定理**：
 
-```
+```text
 ∀ strategy ∈ GenericStrategy:
   runtime_cost(generic_call) = runtime_cost(direct_call)
 ```
@@ -560,7 +560,7 @@ where
 
 **行为模式内存安全定理**：
 
-```
+```text
 ∀ pattern ∈ BehavioralPattern:
   implements_correctly(pattern) ⇒ memory_safe(pattern)
 ```
@@ -569,7 +569,7 @@ where
 
 **行为模式并发安全定理**：
 
-```
+```text
 ∀ pattern ∈ ConcurrentBehavioralPattern:
   Send + Sync + correct_implementation(pattern) ⇒ thread_safe(pattern)
 ```

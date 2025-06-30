@@ -10,7 +10,7 @@
 
 我们建立了从理论到实践的多层抽象体系：
 
-```
+```text
 数学理论层    ←→    形式化规范层    ←→    实现验证层    ←→    工程实践层
     ↓                   ↓                   ↓                 ↓
 类型理论          Rust类型系统        编译器检查        代码质量
@@ -20,7 +20,7 @@
 
 **定义 1.1**: 理论应用映射 Application: Theory → Practice
 
-```
+```text
 Application(T) = {
     formalization: T → FormalSpec,
     implementation: FormalSpec → RustCode,

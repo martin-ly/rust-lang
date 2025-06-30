@@ -16,7 +16,7 @@
 
 **定义 1.2**: 正确性谓词 Correct(P, S) 当且仅当：
 
-```
+```text
 ∀ input i. behavior(P, i) ⊨ specification(S, i)
 ```
 
@@ -36,7 +36,7 @@ x ↦ v  // x指向值v
 
 **定理 1.1**: 所有权分离性
 
-```
+```text
 ∀ x, y: &mut T. x ≠ y ⟹ heap(x) * heap(y)
 ```
 
@@ -176,7 +176,7 @@ fn sum_range_iter(a: i32, b: i32) -> i32 {
 
 #### 1.1 基本三元组
 
-```
+```text
 {P} C {Q}
 ```
 
@@ -200,7 +200,7 @@ fn abs_value(x: i32) -> i32 {
 
 **定理 1.2**: 弱前条件规则
 
-```
+```text
 P' ⟹ P, {P} C {Q} ⊢ {P'} C {Q}
 ```
 
@@ -227,7 +227,7 @@ fn array_sum(arr: &[i32]) -> i32 {
 
 **定义 1.4**: 数据竞争 DataRace(T, t1, t2) 当且仅当：
 
-```
+```text
 ∃ location l ∈ T.
   (access(t1, l, write) ∧ access(t2, l, read)) ∨
   (access(t1, l, write) ∧ access(t2, l, write))
@@ -235,7 +235,7 @@ fn array_sum(arr: &[i32]) -> i32 {
 
 **定理 1.3**: Rust数据竞争自由性
 
-```
+```text
 ∀ program P. well_typed(P) ⟹ ¬∃ T, t1, t2. DataRace(T, t1, t2)
 ```
 

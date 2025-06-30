@@ -10,7 +10,7 @@
 
 **定义 1.1**: 模块空间 ModuleSpace 是一个有向无环图 (DAG)：
 
-```
+```text
 ModuleSpace = (Modules, Dependencies, Resolution)
 其中:
 - Modules: 模块集合
@@ -20,7 +20,7 @@ ModuleSpace = (Modules, Dependencies, Resolution)
 
 **定义 1.2**: 模块路径解析函数：
 
-```
+```text
 resolve: Path × Context → Option<Module>
 resolve(path, ctx) = {
     Some(module) 如果路径在上下文中有效
@@ -74,7 +74,7 @@ ExternalPath ::= CrateName '::' PathSegments
 
 **算法 1**: 路径解析算法
 
-```
+```text
 function resolve_path(path, current_module):
     if path.starts_with("crate"):
         return resolve_from_crate_root(path.tail())

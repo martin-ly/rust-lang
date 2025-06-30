@@ -10,14 +10,14 @@
 
 **定义 1.1**: 中间件函数是一个高阶函数：
 
-```
+```text
 Middleware<Req, Res, Next> = (Req, Next) → Future<Res>
 其中 Next = Req → Future<Res>
 ```
 
 **定义 1.2**: 中间件组合 `∘` 满足结合律：
 
-```
+```text
 (m₁ ∘ m₂) ∘ m₃ = m₁ ∘ (m₂ ∘ m₃)
 ```
 
