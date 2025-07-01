@@ -197,12 +197,14 @@
 基于线性逻辑的所有权演算系统：
 
 **语法定义**:
+
 ```
 Expr e ::= x | λx.e | e₁ e₂ | let x = e₁ in e₂ | move e | &e | &mut e
 Type τ ::= Own T | Shr T | Mut T | τ₁ → τ₂
 ```
 
 **类型规则**:
+
 ```
 Γ ⊢ x : Own T    (if x : Own T ∈ Γ)
 Γ, x : Own T ⊢ e : τ / Γ ⊢ λx.e : Own T → τ
@@ -211,12 +213,14 @@ Type τ ::= Own T | Shr T | Mut T | τ₁ → τ₂
 ### 借用检查算法
 
 **路径分析函数**:
+
 ```
 Path p ::= x | p.f | *p | p[i]
 PathSet P ::= {p₁, p₂, ..., pₙ}
 ```
 
 **冲突检测算法**:
+
 ```
 conflict(P₁, P₂) = ∃p₁ ∈ P₁, p₂ ∈ P₂ : overlaps(p₁, p₂)
 ```
@@ -224,12 +228,14 @@ conflict(P₁, P₂) = ∃p₁ ∈ P₁, p₂ ∈ P₂ : overlaps(p₁, p₂)
 ### 生命周期推导理论
 
 **生命周期约束系统**:
+
 ```
 Constraint C ::= α ⊆ β | α = β | α : 'static
 ConstraintSet Φ ::= {C₁, C₂, ..., Cₙ}
 ```
 
 **统一化算法**:
+
 ```
 unify(Φ) = solve(Φ) ∪ generate_fresh_vars(Φ)
 ```
@@ -242,7 +248,7 @@ unify(Φ) = solve(Φ) ∪ generate_fresh_vars(Φ)
 ∀ reference r, time t : valid(r, t) → ∃ allocation a : points_to(r, a) ∧ alive(a, t)
 
 **定理 1.3 (无数据竞争)**:
-∀ location l, time t : (∃ thread₁ : writes(thread₁, l, t)) → 
+∀ location l, time t : (∃ thread₁ : writes(thread₁, l, t)) →
   (∀ thread₂ ≠ thread₁ : ¬accesses(thread₂, l, t))
 
 **定理 1.4 (无内存泄漏)**:
@@ -252,12 +258,14 @@ unify(Φ) = solve(Φ) ∪ generate_fresh_vars(Φ)
 
 **不变式 1.1 (借用唯一性)**:
 对于任意时刻 t 和位置 l：
+
 ```
 (∃ r : mutable_borrow(r, l, t)) → (∀ r' ≠ r : ¬borrows(r', l, t))
 ```
 
 **不变式 1.2 (生命周期包含)**:
 对于任意借用 r 和其目标 t：
+
 ```
 lifetime(r) ⊆ lifetime(t)
 ```
@@ -267,11 +275,13 @@ lifetime(r) ⊆ lifetime(t)
 ### 编译器实现架构
 
 **MIR 表示**:
+
 - 基本块结构: BB₁ → BB₂ → ... → BBₙ
 - 语句序列: stmt₁; stmt₂; ...; stmtₙ
 - 控制流图: CFG(entry, {BB}, {edge})
 
 **借用检查器流程**:
+
 1. **路径构建**: extract_paths(mir) → PathSet
 2. **借用分析**: analyze_borrows(paths) → BorrowSet  
 3. **冲突检测**: check_conflicts(borrows) → ConflictSet
@@ -280,11 +290,13 @@ lifetime(r) ⊆ lifetime(t)
 ### 优化策略
 
 **非词法生命周期 (NLL)**:
+
 - 基于数据流分析的精确生命周期推导
 - 减少不必要的借用检查错误
 - 提高代码表达能力
 
 **Polonius 项目**:
+
 - 基于 Datalog 的下一代借用检查器
 - 更精确的别名分析
 - 支持更复杂的借用模式
@@ -292,18 +304,21 @@ lifetime(r) ⊆ lifetime(t)
 ## 质量指标
 
 ### 理论完整性
+
 - **文档总数**: 32个文件
 - **总行数**: 超过9,000行
 - **数学形式化覆盖**: 95%+ 核心概念
 - **定理证明覆盖**: 90%+ 关键性质
 
 ### 实践指导价值
+
 - **示例代码覆盖**: 1000+ 代码示例
 - **常见模式分析**: 50+ 设计模式
 - **错误场景分析**: 100+ 编译错误示例
 - **性能优化指导**: 完整的最佳实践
 
 ### 教学适用性
+
 - **学习路径清晰度**: 分层递进结构
 - **概念映射完整性**: 完整的关联图谱
 - **练习题覆盖**: 理论与实践结合
@@ -323,12 +338,14 @@ lifetime(r) ⊆ lifetime(t)
 基于线性逻辑的所有权演算系统：
 
 **语法定义**:
+
 ```
 Expr e ::= x | λx.e | e e | let x = e in e | move e | &e | &mut e
 Type τ ::= Own T | Shr T | Mut T | τ  τ
 ```
 
 **类型规则**:
+
 ```
 Γ  x : Own T    (if x : Own T  Γ)
 Γ, x : Own T  e : τ / Γ  λx.e : Own T  τ
@@ -337,12 +354,14 @@ Type τ ::= Own T | Shr T | Mut T | τ  τ
 ### 借用检查算法
 
 **路径分析函数**:
+
 ```
 Path p ::= x | p.f | *p | p[i]
 PathSet P ::= {p, p, ..., p}
 ```
 
 **冲突检测算法**:
+
 ```
 conflict(P, P) = p  P, p  P : overlaps(p, p)
 ```
@@ -350,6 +369,7 @@ conflict(P, P) = p  P, p  P : overlaps(p, p)
 ### 生命周期推导理论
 
 **生命周期约束系统**:
+
 ```
 Constraint C ::= α  β | α = β | α : 'static
 ConstraintSet Φ ::= {C, C, ..., C}
@@ -370,6 +390,7 @@ ConstraintSet Φ ::= {C, C, ..., C}
 
 **不变式 1.1 (借用唯一性)**:
 对于任意时刻 t 和位置 l：
+
 ```
 ( r : mutable_borrow(r, l, t))  ( r'  r : borrows(r', l, t))
 ```
@@ -379,11 +400,13 @@ ConstraintSet Φ ::= {C, C, ..., C}
 ### 编译器实现架构
 
 **MIR 表示**:
+
 - 基本块结构: BB  BB  ...  BB
 - 语句序列: stmt; stmt; ...; stmt
 - 控制流图: CFG(entry, {BB}, {edge})
 
 **借用检查器流程**:
+
 1. **路径构建**: extract_paths(mir)  PathSet
 2. **借用分析**: analyze_borrows(paths)  BorrowSet  
 3. **冲突检测**: check_conflicts(borrows)  ConflictSet
@@ -392,11 +415,13 @@ ConstraintSet Φ ::= {C, C, ..., C}
 ### 优化策略
 
 **非词法生命周期 (NLL)**:
+
 - 基于数据流分析的精确生命周期推导
 - 减少不必要的借用检查错误
 - 提高代码表达能力
 
 **Polonius 项目**:
+
 - 基于 Datalog 的下一代借用检查器
 - 更精确的别名分析
 - 支持更复杂的借用模式
@@ -404,17 +429,20 @@ ConstraintSet Φ ::= {C, C, ..., C}
 ## 扩展理论指标
 
 ### 理论完整性
+
 - **数学形式化覆盖**: 95%+ 核心概念
 - **定理证明覆盖**: 90%+ 关键性质
 - **算法实现覆盖**: 完整的编译器实现
 
 ### 实践指导价值
+
 - **示例代码覆盖**: 1000+ 代码示例
 - **常见模式分析**: 50+ 设计模式
 - **错误场景分析**: 100+ 编译错误示例
 - **性能优化指导**: 完整的最佳实践
 
 ### 教学适用性
+
 - **学习路径清晰度**: 分层递进结构
 - **概念映射完整性**: 完整的关联图谱
 - **练习题覆盖**: 理论与实践结合
