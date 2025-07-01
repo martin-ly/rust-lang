@@ -91,7 +91,7 @@
 
 #### 内存安全性的完整证明
 
-```
+```text
 ∀ p ∈ Program, ∀ t ∈ Time, ∀ m ∈ Memory:
   TypeCheck(p) = ✓ ⇒ 
   (NoUseAfterFree(p, t, m) ∧ 
@@ -101,7 +101,7 @@
 
 #### 类型安全性的数学验证
 
-```
+```text
 ∀ p ∈ Program:
   TypeCheck(p) = ✓ ⇒ 
   (Progress(p) ∧ Preservation(p))
@@ -109,7 +109,7 @@
 
 #### 并发安全性的形式化保证
 
-```
+```text
 ∀ p ∈ ConcurrentProgram:
   TypeCheck(p) = ✓ ⇒ NoDataRaces(p)
 ```
@@ -118,7 +118,7 @@
 
 #### 零成本抽象的形式化验证
 
-```
+```text
 ∀ pattern ∈ GenericPattern:
   runtime_cost(generic_call) = runtime_cost(direct_call)
 ```
@@ -133,13 +133,13 @@
 
 #### 过程宏的形式化语义
 
-```
+```text
 MacroλCalc ::= x | λx.M | M N | quote(TokenStream) | unquote(Expr)
 ```
 
 #### 编译时计算的安全性模型
 
-```
+```text
 ∀ proc_macro ∈ ProcMacro:
   compile_time_execution(proc_macro) ⇒ memory_safe(proc_macro)
 ```
