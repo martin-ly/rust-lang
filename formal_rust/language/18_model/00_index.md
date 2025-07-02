@@ -46,7 +46,7 @@ Rust模型系统模块提供了建模、验证和模拟复杂系统的形式化�
 
 ### 1.3 应用领域
 
-```
+```text
 模型系统应用域
 ├── 领域建模
 │   ├── 业务规则模型
@@ -70,7 +70,7 @@ Rust模型系统模块提供了建模、验证和模拟复杂系统的形式化�
 
 ### 2.1 三层架构设计
 
-```
+```text
 18_model/
 ├── theory_foundations/          # 理论基础层
 │   ├── formal_model_theory.md  # 形式化模型理论
@@ -102,7 +102,7 @@ Rust模型系统模块提供了建模、验证和模拟复杂系统的形式化�
 
 ### 3.1 输入依赖
 
-```
+```text
 输入依赖关系图
 02_type_system → 18_model (类型理论基础)
 04_generics → 18_model (泛型建模)
@@ -113,7 +113,7 @@ Rust模型系统模块提供了建模、验证和模拟复杂系统的形式化�
 
 ### 3.2 输出影响
 
-```
+```text
 输出影响关系图
 18_model → 领域驱动设计 (DDD架构)
 18_model → 形式化验证 (系统验证)
@@ -123,7 +123,7 @@ Rust模型系统模块提供了建模、验证和模拟复杂系统的形式化�
 
 ### 3.3 横向关联
 
-```
+```text
 横向关联网络
 18_model ↔ 15_blockchain (区块链建模)
 18_model ↔ 17_iot (IoT系统建模)
@@ -134,7 +134,7 @@ Rust模型系统模块提供了建模、验证和模拟复杂系统的形式化�
 
 ### 4.1 模型系统层次结构
 
-```
+```text
 模型系统架构
 ├── 抽象层 (Abstraction Layer)
 │   ├── 概念模型
@@ -183,7 +183,7 @@ Rust模型系统模块提供了建模、验证和模拟复杂系统的形式化�
 
 ### 4.2 模型分类体系
 
-```
+```text
 模型分类
 ├── 按抽象级别
 │   ├── 概念模型 (高级抽象)
@@ -218,6 +218,7 @@ Rust模型系统模块提供了建模、验证和模拟复杂系统的形式化�
 $$\mathcal{M} = (E, R, C, T, S, V, I)$$
 
 其中：
+
 - $E = \{e_1, e_2, \ldots, e_n\}$ 是实体集合
 - $R = \{r_1, r_2, \ldots, r_m\}$ 是关系集合
 - $C = \{c_1, c_2, \ldots, c_k\}$ 是约束集合
@@ -244,6 +245,7 @@ $$\text{Complete}(\mathcal{M}, \mathcal{D}) \iff \forall d \in \mathcal{D} : \ex
 $$\mathcal{T} = (\Gamma, \Delta, \Phi, \Psi)$$
 
 其中：
+
 - $\Gamma$ 是类型环境
 - $\Delta$ 是类型约束
 - $\Phi$ 是类型谓词
@@ -262,6 +264,7 @@ $$\forall t : T, v : \text{Value} : \Gamma \vdash v : T \implies \text{safe}(\te
 $$\mathcal{S} = (D, I, \models)$$
 
 其中：
+
 - $D$ 是语义域
 - $I$ 是解释函数 $I: \text{Syntax} \rightarrow D$
 - $\models$ 是满足关系
@@ -308,12 +311,14 @@ $$\text{SemanticPreserving}(f: \mathcal{M}_1 \rightarrow \mathcal{M}_2) \iff \ex
 ### 7.1 模型设计最佳实践
 
 **设计原则**：
+
 1. **类型优先**: 使用Rust的类型系统表达领域概念
 2. **不变量保护**: 通过类型约束维护业务不变量
 3. **组合性**: 设计可组合的模型组件
 4. **可验证性**: 确保模型的属性可以验证
 
 **实现策略**：
+
 ```rust
 // 类型驱动的领域模型示例
 #[derive(Debug, Clone, PartialEq)]
@@ -348,6 +353,7 @@ pub trait UserRepository {
 ### 7.2 状态机建模
 
 **状态机设计模式**：
+
 ```rust
 // 类型状态模式
 pub struct Order<S> {
@@ -386,6 +392,7 @@ impl Order<Submitted> {
 ### 7.3 验证和测试
 
 **属性测试框架**：
+
 ```rust
 use proptest::prelude::*;
 
@@ -411,6 +418,7 @@ proptest! {
 ### 7.4 代码生成
 
 **宏驱动的模型生成**：
+
 ```rust
 use proc_macro::TokenStream;
 
@@ -438,14 +446,17 @@ pub fn derive_model(input: TokenStream) -> TokenStream {
 ### 8.1 基础路径 (Basic Path)
 
 **先修知识**：
+
 - Rust基础语法和类型系统
 - 面向对象和函数式编程概念
 - 基础数学逻辑
 
 **学习序列**：
+
 1. 类型驱动设计 → 2. 简单领域模型 → 3. 基础验证 → 4. 状态机入门
 
 **实践项目**：
+
 - 用户管理系统
 - 简单状态机
 - 数据验证器
@@ -453,14 +464,17 @@ pub fn derive_model(input: TokenStream) -> TokenStream {
 ### 8.2 标准路径 (Standard Path)
 
 **进阶内容**：
+
 - 形式化方法基础
 - 高级类型系统特性
 - 模型转换技术
 
 **学习序列**：
+
 1. 形式化建模 → 2. 复杂状态机 → 3. 模型验证 → 4. 代码生成
 
 **实践项目**：
+
 - 工作流引擎
 - 业务规则引擎
 - DSL设计和实现
@@ -468,14 +482,17 @@ pub fn derive_model(input: TokenStream) -> TokenStream {
 ### 8.3 专家路径 (Expert Path)
 
 **高级主题**：
+
 - 范畴论应用
 - 高级验证技术
 - 大型系统建模
 
 **学习序列**：
+
 1. 理论基础 → 2. 高级建模技术 → 3. 形式化验证 → 4. 系统集成
 
 **实践项目**：
+
 - 企业架构建模
 - 安全协议建模
 - 分布式系统建模
@@ -536,5 +553,6 @@ pub fn derive_model(input: TokenStream) -> TokenStream {
 ---
 
 **文档历史**:  
+
 - 创建: 2025-07-22 - 初始版本
-- 更新: 2025-01-01 - V2.0版本，建立完整的模型系统理论框架 
+- 更新: 2025-01-01 - V2.0版本，建立完整的模型系统理论框架
