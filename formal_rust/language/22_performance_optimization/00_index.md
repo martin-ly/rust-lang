@@ -46,7 +46,7 @@ Rust性能优化模块是系统性研究和实践高性能Rust程序设计的核
 
 ### 1.3 性能优化层次
 
-```
+```text
 Rust性能优化体系架构
 ├── 语言层面优化
 │   ├── 零成本抽象利用
@@ -84,7 +84,7 @@ Rust性能优化体系架构
 
 ### 2.1 三层架构设计
 
-```
+```text
 22_performance_optimization/
 ├── theory_foundations/          # 理论基础层
 │   ├── performance_theory.md   # 性能理论基础
@@ -116,7 +116,7 @@ Rust性能优化体系架构
 
 ### 3.1 输入依赖
 
-```
+```text
 输入依赖关系网络
 01_ownership_borrowing → 22_performance_optimization (内存管理基础)
 02_type_system → 22_performance_optimization (类型优化基础)
@@ -127,7 +127,7 @@ Rust性能优化体系架构
 
 ### 3.2 输出影响
 
-```
+```text
 输出影响关系网络
 22_performance_optimization → 应用开发质量 (性能保证)
 22_performance_optimization → 系统架构设计 (性能导向设计)
@@ -137,7 +137,7 @@ Rust性能优化体系架构
 
 ### 3.3 横向关联
 
-```
+```text
 横向关联网络
 22_performance_optimization ↔ 21_application_domains (领域特定优化)
 22_performance_optimization ↔ 23_security_verification (安全性能平衡)
@@ -148,7 +148,7 @@ Rust性能优化体系架构
 
 ### 4.1 性能优化技术栈
 
-```
+```text
 性能优化技术分类体系
 ├── 编译时优化
 │   ├── 零成本抽象
@@ -238,7 +238,7 @@ Rust性能优化体系架构
 
 ### 4.2 性能度量体系
 
-```
+```text
 性能指标分类框架
 ├── 时间性能指标
 │   ├── 延迟 (Latency)

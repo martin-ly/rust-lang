@@ -46,7 +46,7 @@ Rust安全验证模块是研究和实践软件安全保证的核心模块，专�
 
 ### 1.3 安全验证层次
 
-```
+```text
 Rust安全验证体系架构
 ├── 语言级安全
 │   ├── 类型安全验证
@@ -79,7 +79,7 @@ Rust安全验证体系架构
 
 ### 2.1 三层架构设计
 
-```
+```text
 23_security_verification/
 ├── theory_foundations/          # 理论基础层
 │   ├── security_models.md      # 安全模型理论
@@ -112,7 +112,7 @@ Rust安全验证体系架构
 
 ### 3.1 输入依赖
 
-```
+```text
 输入依赖关系网络
 01_ownership_borrowing → 23_security_verification (内存安全基础)
 02_type_system → 23_security_verification (类型安全基础)
@@ -123,7 +123,7 @@ Rust安全验证体系架构
 
 ### 3.2 输出影响
 
-```
+```text
 输出影响关系网络
 23_security_verification → 关键系统开发 (安全保证)
 23_security_verification → 安全标准制定 (验证方法)
@@ -133,7 +133,7 @@ Rust安全验证体系架构
 
 ### 3.3 横向关联
 
-```
+```text
 横向关联网络
 23_security_verification ↔ 22_performance_optimization (安全性能平衡)
 23_security_verification ↔ 21_application_domains (领域安全需求)
@@ -144,7 +144,7 @@ Rust安全验证体系架构
 
 ### 4.1 安全验证技术栈
 
-```
+```text
 安全验证技术分类体系
 ├── 静态安全分析
 │   ├── 类型系统验证
@@ -234,7 +234,7 @@ Rust安全验证体系架构
 
 ### 4.2 安全威胁模型
 
-```
+```text
 安全威胁分类框架
 ├── 内存安全威胁
 │   ├── 缓冲区溢出

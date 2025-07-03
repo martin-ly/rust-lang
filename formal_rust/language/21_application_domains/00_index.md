@@ -46,7 +46,7 @@ Rust应用领域模块是一个综合性的研究和实践模块，探讨Rust语
 
 ### 1.3 应用领域分类
 
-```
+```text
 Rust应用领域全景图
 ├── 系统基础设施
 │   ├── 操作系统内核
@@ -94,7 +94,7 @@ Rust应用领域全景图
 
 ### 2.1 三层架构设计
 
-```
+```text
 21_application_domains/
 ├── theory_foundations/          # 理论基础层
 │   ├── domain_theory.md        # 领域理论基础
@@ -123,7 +123,7 @@ Rust应用领域全景图
 
 ### 3.1 输入依赖
 
-```
+```text
 输入依赖关系网络
 01_ownership_borrowing → 21_application_domains (内存安全基础)
 02_type_system → 21_application_domains (类型安全保证)
@@ -135,7 +135,7 @@ Rust应用领域全景图
 
 ### 3.2 输出影响
 
-```
+```text
 输出影响关系网络
 21_application_domains → 产业标准制定 (技术标准影响)
 21_application_domains → 生态系统发展 (crates生态)
@@ -145,7 +145,7 @@ Rust应用领域全景图
 
 ### 3.3 横向关联
 
-```
+```text
 横向关联网络
 21_application_domains ↔ 22_performance_optimization (性能调优)
 21_application_domains ↔ 23_security_verification (安全验证)
@@ -156,7 +156,7 @@ Rust应用领域全景图
 
 ### 4.1 应用领域技术栈
 
-```
+```text
 应用领域技术架构
 ├── 系统编程领域
 │   ├── 内核开发
@@ -267,7 +267,7 @@ Rust应用领域全景图
 
 ### 4.2 Rust特性与领域匹配度
 
-```
+```text
 特性适配性分析
 ├── 内存安全 (Memory Safety)
 │   ├── 系统编程: ⭐⭐⭐⭐⭐ (关键优势)
