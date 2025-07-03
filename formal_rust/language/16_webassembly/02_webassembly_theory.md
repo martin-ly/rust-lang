@@ -4,6 +4,8 @@
 
 - [Rust视角下的WebAssembly生态系统分析](#rust视角下的webassembly生态系统分析)
   - [目录](#目录)
+  - [批判性分析](#批判性分析)
+  - [典型案例](#典型案例)
   - [1. Rust与WebAssembly的关系基础](#1-rust与webassembly的关系基础)
     - [1.1 Rust作为WebAssembly的理想源语言](#11-rust作为webassembly的理想源语言)
     - [1.2 Rust到WebAssembly的编译模型](#12-rust到webassembly的编译模型)
@@ -50,6 +52,16 @@
     - [11.1 Rust编译流水线优化](#111-rust编译流水线优化)
     - [11.2 零成本Rust-WebAssembly互操作](#112-零成本rust-webassembly互操作)
     - [11.3 组件模型的类型级保证](#113-组件模型的类型级保证)
+
+## 批判性分析
+
+- Rust 生成的 WebAssembly 在跨平台部署和安全性方面具备优势，但与主流 JS/TS 生态集成仍有门槛。
+- Wasm 标准化进程推动了多语言互操作，但实际工程中调试和性能优化工具仍需完善。
+
+## 典型案例
+
+- Rust+Wasm 用于 Web 前端高性能图像处理。
+- Rust 生成 Wasm 模块在边缘计算、区块链等场景下实现高安全性部署。
 
 ## 1. Rust与WebAssembly的关系基础
 
@@ -706,28 +718,6 @@ fn modify_array(values: &mut [i32]) {
 
 对应的WebAssembly伪代码：
 
-```wat
-(func $sum_array (param $values_ptr i32) (param $values_len i32) (result i32)
-  (local $total i32)
-  (local $i i32)
-  
-  ;; 初始化累加器
-  (local.set $total (i32.const 0))
-  (local.set $i (i32.const 0))
-  
-  ;; 循环数组元素
-  (block $break
-    (loop $continue
-      ;; 检查循环边界
-      (br_if $break
-        (i32.eq (local.get $i) (local.get $values_len))
-      )
-      
-      ;; 读取当前值并累加
-      (local
-### 3.2 引用与借用在Wasm中的表示（续）
-
-对应的WebAssembly伪代码：
 ```wat
 (func $sum_array (param $values_ptr i32) (param $values_len i32) (result i32)
   (local $total i32)

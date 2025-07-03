@@ -176,6 +176,7 @@ Rust控制流系统提供了强大的程序执行控制能力，与所有权、�
 `
 CFG = (V, E, entry, exit)
 其中:
+
 - V: 基本块集合
 - E  V  V: 控制流边
 - entry  V: 入口块
@@ -219,7 +220,7 @@ unreachable(pᵢ, {p, ..., pᵢ})  v : matches(v, pᵢ)  j < i : matches(v, pⱼ
 
 **异常传播语义**:
 `
-Etry e catch h = 
+Etry e catch h =
   case Ee of
     Normal(v)  Normal(v)
     Exception(x)  Eh x
@@ -251,6 +252,7 @@ OrderConstraint : Load  Store  MemoryOrder  Bool
 `
 Lattice L = (D, , , , , )
 其中:
+
 - D: 数据流值域
 - : 偏序关系
 - : 上确界操作
@@ -278,7 +280,7 @@ LoopInvariant(I, L)
 
 **循环终止性**:
 `
-Termination(L)  measure M : 
+Termination(L)  measure M :
   iteration : M(after) < M(before)  M  0
 `
 
@@ -299,7 +301,8 @@ Accuracy = Correct_Predictions / Total_Predictions
 ### 类型细化 (Type Refinement)
 
 **条件类型细化**:
-`ust
+`
+ust
 fn process(x: Option<i32>) {
     if let Some(value) = x {
         // 此处 x: Some(i32), value: i32
@@ -349,7 +352,7 @@ ConstantTime(f)  x, y : |x| = |y|  Time(f(x)) = Time(f(y))
 
 **侧信道分析抵抗**:
 `
-SideChannelResistant(f)  secret, observable : 
+SideChannelResistant(f)  secret, observable :
   Independence(secret, Observable(f(secret)))
 `
 
@@ -365,7 +368,7 @@ StateTransition : State  Event  State  Output
 
 **yield语义**:
 `
-YieldSemanticsyield e = 
+YieldSemanticsyield e =
   (Suspended(current_point), eval(e))
 `
 
@@ -463,21 +466,25 @@ Proof : Program  Specification  Certificate
 ## 控制流质量评估
 
 ### 理论完整性指标
+
 - **形式化模型覆盖**: 98% 控制流构造形式化
 - **语义定义完整性**: 95% 核心语义定义
 - **安全性质证明**: 90% 关键性质形式化证明
 
 ### 实践应用价值
+
 - **优化技术覆盖**: 50+ 控制流优化策略
 - **分析工具方法**: 30+ 静态分析技术
 - **安全机制**: 完整的控制流安全保证
 
 ### 教育适用性
+
 - **概念递进性**: 从基础到高级的完整路径
 - **示例丰富性**: 200+ 控制流代码示例
 - **工具实践**: 完整的分析工具使用指南
 
 ### 前瞻性与创新性
+
 - **前沿技术**: 量子计算、机器学习集成
 - **研究方向**: 形式化验证、安全性分析
 - **标准制定**: 控制流安全性标准参与

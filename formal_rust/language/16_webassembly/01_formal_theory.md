@@ -1229,3 +1229,13 @@ impl exports::example::calculator::calculator::Guest for Calculator {
 **Document Status**: Complete  
 **Next Review**: 2025-02-27  
 **Maintainer**: Rust Formal Theory Team
+
+## 批判性分析
+- Rust 形式化支持 WebAssembly 的安全边界和内存模型，但在跨语言互操作和标准化方面仍有挑战。
+- Wasm 的形式化语义有助于安全验证，但实际工程中工具链和生态尚不完善。
+- 在区块链、边缘计算等非 Web 场景，Rust+Wasm 形式化理论具备独特优势，但主流平台和标准支持仍需提升。
+
+## 典型案例
+- 使用 Rust+Wasm 形式化工具对智能合约虚拟机进行安全验证。
+- Rust 生成的 Wasm 模块在区块链、边缘计算等场景下实现高安全性部署。
+- 结合 WASI 推动 Rust 在非 Web 场景的安全应用。

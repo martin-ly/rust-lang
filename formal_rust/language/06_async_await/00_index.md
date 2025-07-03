@@ -322,3 +322,15 @@ Future<A> × (A → Future<B>) → Future<B>  [单子结合律]
 - [类型系统](../02_type_system/00_index.md) - Future类型
 - [网络编程](../10_networks/00_index.md) - 异步I/O
 - [微服务架构](../13_microservices/00_index.md) - 异步服务
+
+## 批判性分析
+
+- Rust 异步/await 机制基于 Future trait，零成本抽象，性能优越，但生态和语法复杂度高于 Go、JS 等主流语言。
+- 缺乏原生协程和运行时，导致异步生态高度依赖第三方库（如 Tokio、async-std），不同运行时间兼容性需关注。
+- 异步生命周期、Pin、Send/Sync 等高级概念对初学者不友好，调试难度较大。
+
+## 典型案例
+
+- 使用 Tokio 实现高并发异步 Web 服务器。
+- Rust 异步驱动高性能网络通信、数据库访问。
+- 结合 async trait 实现异步多态接口。
