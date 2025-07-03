@@ -370,7 +370,7 @@ conflict(P, P) = p  P, p  P : overlaps(p, p)
 
 **生命周期约束系统**:
 
-```
+```text
 Constraint C ::= α  β | α = β | α : 'static
 ConstraintSet Φ ::= {C, C, ..., C}
 ```
@@ -391,7 +391,7 @@ ConstraintSet Φ ::= {C, C, ..., C}
 **不变式 1.1 (借用唯一性)**:
 对于任意时刻 t 和位置 l：
 
-```
+```text
 ( r : mutable_borrow(r, l, t))  ( r'  r : borrows(r', l, t))
 ```
 
