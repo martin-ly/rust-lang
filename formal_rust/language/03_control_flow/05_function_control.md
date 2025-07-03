@@ -53,6 +53,8 @@
     - [12.2 函数等价性验证](#122-函数等价性验证)
   - [13. 总结](#13-总结)
   - [14. 参考文献](#14-参考文献)
+  - [批判性分析](#批判性分析)
+  - [典型案例](#典型案例)
 
 ## 1. 概述
 
@@ -576,3 +578,13 @@ fn verify_equivalence(f: &Function, g: &Function) -> bool {
 3. Nielson, F., & Nielson, H. R. (1999). Type and Effect Systems. Springer.
 4. Aho, A. V., Lam, M. S., Sethi, R., & Ullman, J. D. (2006). Compilers: Principles, Techniques, and Tools. Pearson.
 5. Muchnick, S. S. (1997). Advanced Compiler Design and Implementation. Morgan Kaufmann.
+
+## 批判性分析
+- Rust 函数控制强调类型安全、生命周期和所有权管理，提升了内存安全和并发安全，但复杂场景下设计和调试难度较高。
+- 与 C/C++、Python 等语言相比，Rust 函数控制更注重编译期检查和零成本抽象，但灵活性略逊。
+- 在嵌入式、并发等场景，函数控制优势明显，但生态和工具链对复杂函数控制的支持仍有提升空间。
+
+## 典型案例
+- 使用函数参数、返回值和闭包实现灵活控制流。
+- 结合生命周期和所有权管理保障内存安全。
+- 在嵌入式和高性能场景下，利用函数控制优化系统结构和性能。

@@ -806,11 +806,13 @@ WebAssembly作为Rust的重要目标平台，将在高性能Web应用、边缘�
 - 误以为 Wasm 性能总优于 JS，实际需视场景而定。
 
 ## 批判性分析（补充）
+
 - Rust 生成的 WebAssembly 代码在安全性、性能和可移植性方面优于 JS/TS，但与 JS 生态集成、调试工具链、异步支持等方面仍有门槛。
 - Wasm 在区块链、边缘计算等非 Web 场景应用潜力大，但标准化、跨平台兼容性和高性能场景下的调优仍是挑战。
 - 社区和官方推动 Wasm 生态发展，但主流平台和浏览器支持的深度与广度仍需提升。
 
 ## 典型案例（补充）
+
 - Rust+Wasm 用于区块链智能合约虚拟机（如 Parity Substrate、CosmWasm）。
 - Rust 生成 Wasm 模块在边缘计算、IoT 设备等场景下实现高安全性和高性能部署。
 - WebAssembly System Interface (WASI) 推动 Rust 在非 Web 场景的广泛应用。

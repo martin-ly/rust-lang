@@ -44,6 +44,8 @@
     - [11.2 错误恢复验证](#112-错误恢复验证)
   - [12. 总结](#12-总结)
   - [13. 参考文献](#13-参考文献)
+  - [批判性分析](#批判性分析)
+  - [典型案例](#典型案例)
 
 ## 1. 概述
 
@@ -569,3 +571,13 @@ fn verify_error_recovery(recovery: &RecoveryStrategy) -> bool {
 3. Nielson, F., & Nielson, H. R. (1999). Type and Effect Systems. Springer.
 4. Peyton Jones, S. (2003). The Implementation of Functional Programming Languages. Prentice Hall.
 5. Wadler, P. (1990). Comprehending Monads. ACM SIGPLAN Notices.
+
+## 批判性分析
+- Rust 异常处理强调类型安全和显式错误处理，Option/Result 类型强制开发者处理异常，提升了健壮性，但代码可能冗长。
+- 与 C++ 异常、Python try/except 等机制相比，Rust 更注重静态检查和零成本抽象，但缺乏原生异常传播，复杂错误链处理较繁琐。
+- 在嵌入式、并发等场景，异常处理优势明显，但生态和工具链对复杂异常场景的支持仍有提升空间。
+
+## 典型案例
+- 使用 Result 类型实现安全的文件 IO、网络请求等。
+- 结合 anyhow、thiserror 实现复杂错误链和上下文追踪。
+- Option 类型广泛应用于可空值和简化分支处理。

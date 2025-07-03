@@ -854,11 +854,13 @@ where
 **Maintainer**: Rust Formal Theory Team
 
 ## 批判性分析
+
 - Rust 高级语言特性（如 async/await、Pin、unsafe、宏系统等）极大提升了表达能力和性能，但学习曲线和调试难度较高。
 - 与 C++、Go 等语言相比，Rust 在类型安全和零成本抽象方面具备优势，但部分高级特性对初学者不友好。
 - 高级特性推动了工程创新，但也可能导致代码复杂度和维护成本上升。
 
 ## 典型案例
+
 - 使用 async/await 实现高性能异步系统。
 - 通过 unsafe 优化底层性能关键路径。
 - 利用宏系统和 trait 组合实现领域特定语言（DSL）。

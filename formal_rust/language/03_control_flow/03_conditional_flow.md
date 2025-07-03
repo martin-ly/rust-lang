@@ -724,3 +724,15 @@ fn model_check(program: &Program, property: &Property) -> bool {
 - [形式化验证文献](../../23_security_verification/07_references.md) (模块 23)
 - [编译器优化文献](../../22_performance_optimization/07_references.md) (模块 22)
 - [理论计算机科学文献](../../20_theoretical_perspectives/07_references.md) (模块 20)
+
+## 批判性分析
+
+- Rust 条件流系统强调类型安全和静态检查，减少了运行时错误，但表达能力和灵活性略逊于动态语言。
+- 与 C/C++、Python 等语言相比，Rust 条件流更注重编译期安全，但部分高级用法（如条件编译、宏条件）需特殊设计。
+- 在嵌入式、并发等场景，条件流优势明显，但生态和工具链对复杂条件流的支持仍有提升空间。
+
+## 典型案例
+
+- 使用 if、else if、else 实现多分支逻辑。
+- 结合 match、if let、while let 实现复杂条件判断。
+- 在嵌入式和高性能场景下，利用条件流优化系统响应。
