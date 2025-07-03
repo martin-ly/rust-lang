@@ -2,15 +2,41 @@
 
 ## 目录
 
-1. [引言](#1-引言)
-2. [类型推导基础](#2-类型推导基础)
-3. [约束生成](#3-约束生成)
-4. [约束求解](#4-约束求解)
-5. [统一算法](#5-统一算法)
-6. [类型推导算法](#6-类型推导算法)
-7. [定理与证明](#7-定理与证明)
-8. [应用实例](#8-应用实例)
-9. [参考文献](#9-参考文献)
+- [Rust类型推导形式化理论](#rust类型推导形式化理论)
+  - [目录](#目录)
+  - [1. 引言](#1-引言)
+    - [1.1 核心概念](#11-核心概念)
+    - [1.2 数学符号约定](#12-数学符号约定)
+  - [2. 类型推导基础](#2-类型推导基础)
+    - [2.1 Hindley-Milner类型系统](#21-hindley-milner类型系统)
+    - [2.2 约束系统](#22-约束系统)
+    - [2.3 约束生成关系](#23-约束生成关系)
+  - [3. 约束生成](#3-约束生成)
+    - [3.1 基本规则](#31-基本规则)
+    - [3.2 函数规则](#32-函数规则)
+    - [3.3 条件规则](#33-条件规则)
+    - [3.4 引用规则](#34-引用规则)
+  - [4. 约束求解](#4-约束求解)
+    - [4.1 约束求解算法](#41-约束求解算法)
+    - [4.2 约束类型处理](#42-约束类型处理)
+  - [5. 统一算法](#5-统一算法)
+    - [5.1 统一函数](#51-统一函数)
+    - [5.2 出现检查](#52-出现检查)
+    - [5.3 替换组合](#53-替换组合)
+  - [6. 类型推导算法](#6-类型推导算法)
+    - [6.1 主推导算法](#61-主推导算法)
+    - [6.2 泛型处理](#62-泛型处理)
+    - [6.3 约束生成](#63-约束生成)
+  - [7. 定理与证明](#7-定理与证明)
+    - [7.1 类型推导正确性](#71-类型推导正确性)
+    - [7.2 统一算法正确性](#72-统一算法正确性)
+    - [7.3 最一般类型](#73-最一般类型)
+  - [8. 应用实例](#8-应用实例)
+    - [8.1 基本类型推导](#81-基本类型推导)
+    - [8.2 函数类型推导](#82-函数类型推导)
+    - [8.3 泛型类型推导](#83-泛型类型推导)
+    - [8.4 复杂类型推导](#84-复杂类型推导)
+  - [9. 参考文献](#9-参考文献)
 
 ## 1. 引言
 
@@ -106,7 +132,7 @@ $$\frac{\Gamma \vdash e : \tau \Rightarrow C}{\Gamma \vdash *e : \alpha \Rightar
 
 **算法 4.1**（约束求解）
 
-```
+```text
 输入：约束集合 C
 输出：类型替换 σ 或失败
 
@@ -121,29 +147,36 @@ $$\frac{\Gamma \vdash e : \tau \Rightarrow C}{\Gamma \vdash *e : \alpha \Rightar
 ### 4.2 约束类型处理
 
 **等式约束处理**：
-$$\text{unify}(\tau_1, \tau_2) = \begin{cases}
+$$
+\text{unify}(\tau_1, \tau_2) = \begin{cases}
 \sigma & \text{if } \tau_1 \text{ and } \tau_2 \text{ can be unified} \\
 \text{fail} & \text{otherwise}
-\end{cases}$$
+\end{cases}
+$$
 
 **子类型约束处理**：
-$$\text{subtype}(\tau_1, \tau_2) = \begin{cases}
+$$
+\text{subtype}(\tau_1, \tau_2) = \begin{cases}
 \text{true} & \text{if } \tau_1 \leq \tau_2 \\
 \text{false} & \text{otherwise}
-\end{cases}$$
+\end{cases}
+$$
 
 **生命周期约束处理**：
-$$\text{lifetime\_subset}(\rho_1, \rho_2) = \begin{cases}
+$$
+\text{lifetime\_subset}(\rho_1, \rho_2) = \begin{cases}
 \text{true} & \text{if } \rho_1 \subseteq \rho_2 \\
 \text{false} & \text{otherwise}
-\end{cases}$$
+\end{cases}
+$$
 
 ## 5. 统一算法
 
 ### 5.1 统一函数
 
 **算法 5.1**（统一算法）
-```
+
+```text
 输入：类型 τ1, τ2
 输出：替换 σ 或失败
 
@@ -171,10 +204,13 @@ unify(τ1, τ2):
 出现检查确保类型变量不会出现在自己的实例化中，防止循环类型。
 
 **出现检查函数**：
-$$\alpha \in \text{FV}(\tau) = \begin{cases}
+
+$$
+\alpha \in \text{FV}(\tau) = \begin{cases}
 \text{true} & \text{if } \alpha \text{ appears in } \tau \\
 \text{false} & \text{otherwise}
-\end{cases}$$
+\end{cases}
+$$
 
 ### 5.3 替换组合
 
@@ -188,7 +224,8 @@ $$(\sigma_2 \circ \sigma_1)(\tau) = \sigma_2(\sigma_1(\tau))$$
 ### 6.1 主推导算法
 
 **算法 6.1**（类型推导）
-```
+
+```text
 输入：表达式 e，环境 Γ
 输出：类型 τ 和替换 σ 或错误
 
@@ -220,7 +257,8 @@ infer(e, Γ):
 ### 6.2 泛型处理
 
 **算法 6.2**（泛型类型推导）
-```
+
+```text
 输入：泛型表达式 e，环境 Γ
 输出：泛型类型 ∀α.τ 和替换 σ
 
@@ -233,7 +271,8 @@ infer_generic(e, Γ):
 ### 6.3 约束生成
 
 **算法 6.3**（约束生成）
-```
+
+```text
 输入：表达式 e，环境 Γ
 输出：约束集合 C
 
@@ -258,6 +297,7 @@ generate_constraints(e, Γ):
 
 **证明**：
 通过结构归纳法证明：
+
 1. 基础情况：变量和常量
 2. 归纳步骤：函数应用、抽象等
 3. 每个推导规则都保持正确性
@@ -269,6 +309,7 @@ generate_constraints(e, Γ):
 
 **证明**：
 通过算法结构归纳：
+
 1. 基础情况：相同类型
 2. 归纳步骤：类型变量、函数类型等
 3. 出现检查确保终止性
@@ -279,6 +320,7 @@ generate_constraints(e, Γ):
 如果 $\text{infer}(e, \Gamma) = (\tau, \sigma)$，则 $\tau$ 是 $e$ 在 $\Gamma$ 中的最一般类型。
 
 **证明**：
+
 1. 统一算法产生最一般统一子
 2. 约束求解保持一般性
 3. 因此，推导的类型是最一般的
@@ -296,6 +338,7 @@ fn main() {
 ```
 
 **形式化推导**：
+
 1. $\emptyset \vdash 5 : \text{int} \Rightarrow \emptyset$
 2. $\{x : \text{int}\} \vdash x : \text{int} \Rightarrow \emptyset$
 3. $\{x : \text{int}\} \vdash x + 1 : \text{int} \Rightarrow \emptyset$
@@ -314,6 +357,7 @@ fn main() {
 ```
 
 **形式化推导**：
+
 1. 函数类型：$\text{identity} : \text{int} \rightarrow \text{int}$
 2. 应用类型：$\text{identity}(5) : \text{int}$
 3. 约束：$\text{int} = \text{int} \rightarrow \alpha \Rightarrow \alpha = \text{int}$
@@ -332,6 +376,7 @@ fn main() {
 ```
 
 **形式化推导**：
+
 1. 泛型函数：$\forall \alpha. \alpha \rightarrow \alpha$
 2. 实例化1：$\text{int} \rightarrow \text{int}$
 3. 实例化2：$\&'static \text{str} \rightarrow \&'static \text{str}$
@@ -352,6 +397,7 @@ fn main() {
 ```
 
 **形式化推导**：
+
 1. 函数类型：$\forall \alpha, \beta, \gamma. (\beta \rightarrow \gamma) \times (\alpha \rightarrow \beta) \rightarrow (\alpha \rightarrow \gamma)$
 2. 实例化：$(\text{int} \rightarrow \text{int}) \times (\text{int} \rightarrow \text{int}) \rightarrow (\text{int} \rightarrow \text{int})$
 3. 结果类型：$\text{int} \rightarrow \text{int}$
