@@ -198,14 +198,14 @@
 
 **语法定义**:
 
-```
+```text
 Expr e ::= x | λx.e | e₁ e₂ | let x = e₁ in e₂ | move e | &e | &mut e
 Type τ ::= Own T | Shr T | Mut T | τ₁ → τ₂
 ```
 
 **类型规则**:
 
-```
+```text
 Γ ⊢ x : Own T    (if x : Own T ∈ Γ)
 Γ, x : Own T ⊢ e : τ / Γ ⊢ λx.e : Own T → τ
 ```
@@ -214,14 +214,14 @@ Type τ ::= Own T | Shr T | Mut T | τ₁ → τ₂
 
 **路径分析函数**:
 
-```
+```text
 Path p ::= x | p.f | *p | p[i]
 PathSet P ::= {p₁, p₂, ..., pₙ}
 ```
 
 **冲突检测算法**:
 
-```
+```text
 conflict(P₁, P₂) = ∃p₁ ∈ P₁, p₂ ∈ P₂ : overlaps(p₁, p₂)
 ```
 
@@ -229,14 +229,14 @@ conflict(P₁, P₂) = ∃p₁ ∈ P₁, p₂ ∈ P₂ : overlaps(p₁, p₂)
 
 **生命周期约束系统**:
 
-```
+```text
 Constraint C ::= α ⊆ β | α = β | α : 'static
 ConstraintSet Φ ::= {C₁, C₂, ..., Cₙ}
 ```
 
 **统一化算法**:
 
-```
+```text
 unify(Φ) = solve(Φ) ∪ generate_fresh_vars(Φ)
 ```
 
@@ -259,14 +259,14 @@ unify(Φ) = solve(Φ) ∪ generate_fresh_vars(Φ)
 **不变式 1.1 (借用唯一性)**:
 对于任意时刻 t 和位置 l：
 
-```
+```text
 (∃ r : mutable_borrow(r, l, t)) → (∀ r' ≠ r : ¬borrows(r', l, t))
 ```
 
 **不变式 1.2 (生命周期包含)**:
 对于任意借用 r 和其目标 t：
 
-```
+```text
 lifetime(r) ⊆ lifetime(t)
 ```
 
@@ -339,14 +339,14 @@ lifetime(r) ⊆ lifetime(t)
 
 **语法定义**:
 
-```
+```text
 Expr e ::= x | λx.e | e e | let x = e in e | move e | &e | &mut e
 Type τ ::= Own T | Shr T | Mut T | τ  τ
 ```
 
 **类型规则**:
 
-```
+```text
 Γ  x : Own T    (if x : Own T  Γ)
 Γ, x : Own T  e : τ / Γ  λx.e : Own T  τ
 ```
@@ -355,14 +355,14 @@ Type τ ::= Own T | Shr T | Mut T | τ  τ
 
 **路径分析函数**:
 
-```
+```text
 Path p ::= x | p.f | *p | p[i]
 PathSet P ::= {p, p, ..., p}
 ```
 
 **冲突检测算法**:
 
-```
+```text
 conflict(P, P) = p  P, p  P : overlaps(p, p)
 ```
 
