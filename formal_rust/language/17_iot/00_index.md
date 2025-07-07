@@ -46,7 +46,7 @@ Rust IoT系统模块专注于嵌入式和物联网环境中的Rust语言应用�
 
 ### 1.3 应用领域
 
-```
+```text
 IoT应用域
 ├── 智能家居系统
 │   ├── 环境监控
@@ -70,7 +70,7 @@ IoT应用域
 
 ### 2.1 三层架构设计
 
-```
+```text
 17_iot/
 ├── theory_foundations/          # 理论基础层
 │   ├── formal_iot_model.md     # 形式化IoT模型
@@ -102,7 +102,7 @@ IoT应用域
 
 ### 3.1 输入依赖
 
-```
+```text
 输入依赖关系图
 05_concurrency → 17_iot (并发模型支持)
 06_async_await → 17_iot (异步I/O操作)
@@ -113,7 +113,7 @@ IoT应用域
 
 ### 3.2 输出影响
 
-```
+```text
 输出影响关系图
 17_iot → 工业应用 (设备控制系统)
 17_iot → 智能家居 (家庭自动化)
@@ -123,7 +123,7 @@ IoT应用域
 
 ### 3.3 横向关联
 
-```
+```text
 横向关联网络
 17_iot ↔ 13_microservices (分布式架构)
 17_iot ↔ 16_webassembly (轻量级运行时)
@@ -134,7 +134,7 @@ IoT应用域
 
 ### 4.1 物联网系统层次结构
 
-```
+```text
 IoT系统架构
 ├── 设备层 (Device Layer)
 │   ├── 传感器节点
@@ -183,7 +183,7 @@ IoT系统架构
 
 ### 4.2 嵌入式Rust生态
 
-```
+```text
 嵌入式Rust技术栈
 ├── 核心语言特性
 │   ├── no_std环境
@@ -665,6 +665,7 @@ IoT系统的环境影响：
 **项目背景**: 构建覆盖整个城市的智能IoT管理平台，实现城市基础设施的智能化监控和管理
 
 **技术架构**:
+
 ```rust
 // 智能城市IoT管理平台
 struct SmartCityIoTPlatform {
@@ -739,6 +740,7 @@ impl SmartCityIoTPlatform {
 ```
 
 **应用场景**:
+
 - 城市交通管理系统
 - 环境监测网络
 - 公共安全监控系统
@@ -748,6 +750,7 @@ impl SmartCityIoTPlatform {
 **项目背景**: 构建工业4.0智能制造平台，实现生产过程的智能化监控和优化
 
 **智能制造平台**:
+
 ```rust
 // 工业4.0智能制造平台
 struct Industry40ManufacturingPlatform {
@@ -837,6 +840,7 @@ impl Industry40ManufacturingPlatform {
 ```
 
 **应用场景**:
+
 - 自动化生产线监控
 - 设备预测性维护
 - 供应链优化管理
@@ -846,6 +850,7 @@ impl Industry40ManufacturingPlatform {
 **项目背景**: 构建农业物联网精准管理平台，实现农业生产的智能化和精准化
 
 **农业IoT平台**:
+
 ```rust
 // 农业物联网精准管理平台
 struct AgriculturalIoTPlatform {
@@ -935,6 +940,7 @@ impl AgriculturalIoTPlatform {
 ```
 
 **应用场景**:
+
 - 精准农业管理
 - 智能灌溉系统
 - 病虫害防治
@@ -944,6 +950,7 @@ impl AgriculturalIoTPlatform {
 **项目背景**: 构建医疗健康IoT监护平台，实现患者健康状态的实时监控和远程医疗
 
 **医疗IoT平台**:
+
 ```rust
 // 医疗健康IoT监护平台
 struct HealthcareIoTPlatform {
@@ -1033,6 +1040,7 @@ impl HealthcareIoTPlatform {
 ```
 
 **应用场景**:
+
 - 慢性病管理
 - 远程医疗监护
 - 健康数据分析
@@ -1042,6 +1050,7 @@ impl HealthcareIoTPlatform {
 **项目背景**: 构建能源IoT智能管理平台，实现能源系统的智能化监控和优化
 
 **能源IoT平台**:
+
 ```rust
 // 能源IoT智能管理平台
 struct EnergyIoTPlatform {
@@ -1131,6 +1140,7 @@ impl EnergyIoTPlatform {
 ```
 
 **应用场景**:
+
 - 智能电网管理
 - 可再生能源集成
 - 能源效率优化

@@ -37,7 +37,7 @@
 
 ## 核心概念映射 {#核心概念映射}
 
-```
+```text
 Rust工具链生态系统
 ├── 理论基础层
 │   ├── 编译理论
@@ -64,7 +64,7 @@ Rust工具链生态系统
 
 **形式化表示**:
 
-```
+```text
 编译器系统 C = (L_s, L_t, T, S)
 其中:
 - L_s: 源语言 (Rust)
@@ -87,7 +87,7 @@ Rust工具链生态系统
 
 **数学模型**:
 
-```
+```text
 包管理系统 P = (Packages, Dependencies, Versions, Resolver)
 
 其中:
@@ -105,7 +105,7 @@ Rust工具链生态系统
 
 **图论模型**:
 
-```
+```text
 构建图 B = (Tasks, Dependencies, Artifacts)
 - Tasks: 构建任务集合
 - Dependencies: 任务依赖关系
@@ -123,7 +123,7 @@ Rust工具链生态系统
 
 工具链完整性定义为工具链支持完整开发生命周期的程度：
 
-```
+```text
 Completeness(T) = |Supported_Stages(T)| / |Total_Development_Stages|
 
 开发阶段 = {编码, 编译, 测试, 调试, 性能分析, 部署, 维护}
@@ -133,7 +133,7 @@ Completeness(T) = |Supported_Stages(T)| / |Total_Development_Stages|
 
 工具协同性衡量工具链组件间的集成程度：
 
-```
+```text
 Synergy(T) = Σ(i,j) Integration_Quality(t_i, t_j) / |Tool_Pairs|
 
 其中:
@@ -197,7 +197,7 @@ Synergy(T) = Σ(i,j) Integration_Quality(t_i, t_j) / |Tool_Pairs|
 
 **架构设计**:
 
-```
+```text
 rustc架构 = {
     前端: {词法分析, 语法分析, 宏展开},
     中端: {HIR构建, 类型检查, 借用检查, MIR构建},
@@ -219,7 +219,7 @@ Source → Tokens → AST → HIR → MIR → LLVM IR → Object → Executable
 
 **设计原则**:
 
-```
+```text
 Cargo设计原则 = {
     约定优于配置,
     依赖版本语义化,
@@ -254,7 +254,7 @@ def resolve_dependencies(manifest):
 
 **IDE支持工具**:
 
-```
+```text
 IDE工具链 = {
     rust-analyzer: {语言服务器, 智能补全, 语法高亮},
     rustfmt: {代码格式化, 风格统一},
@@ -265,7 +265,7 @@ IDE工具链 = {
 
 **调试工具**:
 
-```
+```text
 调试工具集 = {
     gdb/lldb: {本地调试, 断点设置},
     rust-gdb: {Rust专用调试脚本},
@@ -276,7 +276,7 @@ IDE工具链 = {
 
 **测试工具**:
 
-```
+```text
 测试工具链 = {
     内置测试: {单元测试, 集成测试, 文档测试},
     criterion: {基准测试, 性能回归检测},
@@ -291,7 +291,7 @@ IDE工具链 = {
 
 **语言服务器协议 (LSP)**:
 
-```
+```text
 LSP集成模式:
 Editor ↔ LSP Server (rust-analyzer) ↔ rustc
 
@@ -306,7 +306,7 @@ Editor ↔ LSP Server (rust-analyzer) ↔ rustc
 
 **CI/CD集成模式**:
 
-```
+```text
 CI/CD流水线:
 1. 代码提交
 2. cargo check (快速语法检查)
@@ -356,7 +356,7 @@ panic = "abort"        # 异常处理优化
 
 **构建优化策略**:
 
-```
+```text
 优化策略 = {
     增量编译: 减少重复编译开销,
     并行编译: 利用多核处理能力,
@@ -369,7 +369,7 @@ panic = "abort"        # 异常处理优化
 
 **性能分析工具链**:
 
-```
+```text
 性能工具 = {
     perf: Linux性能分析器,
     Instruments: macOS性能分析,
@@ -408,7 +408,7 @@ criterion_main!(benches);
 
 **Clippy分析器**:
 
-```
+```text
 Clippy分析类别 = {
     正确性检查: 潜在错误识别,
     性能建议: 性能优化提示,
@@ -427,7 +427,7 @@ Clippy分析类别 = {
 
 **多层次测试策略**:
 
-```
+```text
 测试金字塔 = {
     单元测试: {
         覆盖率要求: >90%,
@@ -451,7 +451,7 @@ Clippy分析类别 = {
 
 **安全工具集成**:
 
-```
+```text
 安全工具链 = {
     cargo-audit: 依赖漏洞扫描,
     cargo-deny: 许可证合规检查,
@@ -515,7 +515,7 @@ categories = ["development-tools"]
 
 **版本演化策略**:
 
-```
+```text
 版本策略 = {
     快速发布周期: 6周发布节奏,
     语义版本控制: 向后兼容保证,
@@ -534,7 +534,7 @@ Edition演化:
 
 **开源协作模型**:
 
-```
+```text
 贡献流程 = {
     RFC过程: 重大变更提案,
     PR审查: 代码审查流程,
@@ -554,7 +554,7 @@ Edition演化:
 
 **质量指标体系**:
 
-```
+```text
 工具链质量 = {
     编译性能: {
         编译速度: 增量编译时间,
