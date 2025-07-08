@@ -10,22 +10,26 @@
 ### 1.1 基本定义
 
 #### 类型范畴
+
 ```math
 \mathcal{C} = (\text{Ob}(\mathcal{C}), \text{Hom}(\mathcal{C}), \circ, \text{id})
 ```
 
 其中：
+
 - $\text{Ob}(\mathcal{C})$: 类型对象的集合
 - $\text{Hom}(\mathcal{C})$: 函数类型态射的集合
 - $\circ$: 函数复合操作
 - $\text{id}$: 恒等函数
 
 #### 对象集合
+
 ```math
 \text{Ob}(\mathcal{C}) = \mathbb{T} = \mathbb{T}_{\text{primitive}} \cup \mathbb{T}_{\text{composite}} \cup \mathbb{T}_{\text{reference}}
 ```
 
 #### 态射集合
+
 ```math
 \text{Hom}(T, U) = \{f: T \rightarrow U \mid f \text{ 是良型函数}\}
 ```
@@ -33,12 +37,14 @@
 ### 1.2 范畴公理
 
 #### 结合律
+
 ```math
 \forall f: A \rightarrow B, g: B \rightarrow C, h: C \rightarrow D. 
 (h \circ g) \circ f = h \circ (g \circ f)
 ```
 
 #### 单位律
+
 ```math
 \forall f: A \rightarrow B. f \circ \text{id}_A = f = \text{id}_B \circ f
 ```
@@ -48,11 +54,13 @@
 ### 2.1 积类型 (Product Types)
 
 #### 积对象
+
 ```math
 A \times B = \{(a, b) \mid a \in A, b \in B\}
 ```
 
 #### 积的泛性质
+
 ```math
 \forall C, f: C \rightarrow A, g: C \rightarrow B. 
 \exists! h: C \rightarrow A \times B. 
@@ -62,6 +70,7 @@ A \times B = \{(a, b) \mid a \in A, b \in B\}
 其中 $\pi_1: A \times B \rightarrow A$ 和 $\pi_2: A \times B \rightarrow B$ 是投影函数。
 
 #### Rust结构体
+
 ```rust
 struct Point<T> { x: T, y: T }
 // 对应数学: Point<T> = T × T
@@ -70,6 +79,7 @@ struct Point<T> { x: T, y: T }
 ### 2.2 和类型 (Sum Types)
 
 #### 和对象
+
 ```math
 A + B = \text{Inl}(A) \cup \text{Inr}(B)
 ```
@@ -77,6 +87,7 @@ A + B = \text{Inl}(A) \cup \text{Inr}(B)
 其中 $\text{Inl}: A \rightarrow A + B$ 和 $\text{Inr}: B \rightarrow A + B$ 是注入函数。
 
 #### 和的泛性质
+
 ```math
 \forall C, f: A \rightarrow C, g: B \rightarrow C. 
 \exists! h: A + B \rightarrow C. 
@@ -84,6 +95,7 @@ h \circ \text{Inl} = f \land h \circ \text{Inr} = g
 ```
 
 #### Rust枚举
+
 ```rust
 enum Result<T, E> { Ok(T), Err(E) }
 // 对应数学: Result<T, E> = T + E
@@ -94,11 +106,13 @@ enum Result<T, E> { Ok(T), Err(E) }
 ### 3.1 指数对象
 
 #### 指数对象定义
+
 ```math
 U^T = \{f: T \rightarrow U \mid f \text{ 是良型函数}\}
 ```
 
 #### 指数对象的泛性质
+
 ```math
 \forall A, f: A \times T \rightarrow U. 
 \exists! g: A \rightarrow U^T. 
@@ -110,16 +124,19 @@ U^T = \{f: T \rightarrow U \mid f \text{ 是良型函数}\}
 ### 3.2 函数类型
 
 #### 函数类型定义
+
 ```math
 T \rightarrow U = U^T
 ```
 
 #### 函数复合
+
 ```math
 (f \circ g)(x) = f(g(x))
 ```
 
 #### Rust函数类型
+
 ```rust
 fn add(x: i32, y: i32) -> i32 { x + y }
 // 对应数学: add: i32 × i32 → i32
@@ -130,11 +147,13 @@ fn add(x: i32, y: i32) -> i32 { x + y }
 ### 4.1 参数多态
 
 #### 全称类型
+
 ```math
 \forall \alpha. T(\alpha) = \bigcap_{\tau \in \mathbb{T}} T(\tau)
 ```
 
 #### 存在类型
+
 ```math
 \exists \alpha. T(\alpha) = \bigcup_{\tau \in \mathbb{T}} T(\tau)
 ```
@@ -142,11 +161,13 @@ fn add(x: i32, y: i32) -> i32 { x + y }
 ### 4.2 泛型函数
 
 #### 泛型函数类型
+
 ```math
 \text{for<}\alpha\text{> fn}(x: \alpha) \rightarrow \alpha
 ```
 
 #### Rust泛型
+
 ```rust
 fn identity<T>(x: T) -> T { x }
 // 对应数学: ∀α. α → α
@@ -157,11 +178,13 @@ fn identity<T>(x: T) -> T { x }
 ### 5.1 特质定义
 
 #### 特质类型
+
 ```math
 \text{Trait} = \{\text{methods} \mid \text{methods 是函数签名的集合}\}
 ```
 
 #### 特质实现
+
 ```math
 \text{impl Trait for Type} \iff \text{Type} \models \text{Trait}
 ```
@@ -169,16 +192,19 @@ fn identity<T>(x: T) -> T { x }
 ### 5.2 特质约束
 
 #### 特质约束
+
 ```math
 T: \text{Trait} \iff T \models \text{Trait}
 ```
 
 #### 关联类型
+
 ```math
 \text{type Output} \in \text{Trait} \iff \text{Output}: \text{Type}
 ```
 
 #### Rust特质
+
 ```rust
 trait Iterator {
     type Item;
@@ -192,11 +218,13 @@ trait Iterator {
 ### 6.1 子类型关系
 
 #### 子类型定义
+
 ```math
 T <: U \iff \forall x \in T. x \in U
 ```
 
 #### 子类型传递性
+
 ```math
 T <: U \land U <: V \implies T <: V
 ```
@@ -204,16 +232,19 @@ T <: U \land U <: V \implies T <: V
 ### 6.2 型变
 
 #### 协变 (Covariant)
+
 ```math
 T <: U \implies \text{Container}<T> <: \text{Container}<U>
 ```
 
 #### 逆变 (Contravariant)
+
 ```math
 T <: U \implies \text{Container}<U> <: \text{Container}<T>
 ```
 
 #### 不变 (Invariant)
+
 ```math
 T <: U \land U <: T \implies \text{Container}<T> = \text{Container}<U>
 ```
@@ -223,11 +254,13 @@ T <: U \land U <: T \implies \text{Container}<T> = \text{Container}<U>
 ### 7.1 类型推断
 
 #### Hindley-Milner算法
+
 ```math
 \text{unify}(\tau_1, \tau_2) = \sigma \iff \sigma(\tau_1) = \sigma(\tau_2)
 ```
 
 #### 类型推断规则
+
 ```math
 \frac{\Gamma, x: \tau \vdash e: \tau'}{\Gamma \vdash \lambda x.e: \tau \rightarrow \tau'}
 ```
@@ -235,11 +268,13 @@ T <: U \land U <: T \implies \text{Container}<T> = \text{Container}<U>
 ### 7.2 类型统一
 
 #### 统一算法
+
 ```math
 \text{unify}(\alpha, \tau) = [\alpha \mapsto \tau]
 ```
 
 #### 最一般统一子
+
 ```math
 \text{mgu}(\tau_1, \tau_2) = \sigma \iff \sigma \text{ 是最一般的统一子}
 ```
@@ -249,6 +284,7 @@ T <: U \land U <: T \implies \text{Container}<T> = \text{Container}<U>
 ### 8.1 递归类型
 
 #### 递归类型定义
+
 ```math
 \mu X. F(X) = \text{fix}(\lambda X. F(X))
 ```
@@ -256,6 +292,7 @@ T <: U \land U <: T \implies \text{Container}<T> = \text{Container}<U>
 其中 $\text{fix}$ 是最小不动点算子。
 
 #### Rust递归类型
+
 ```rust
 enum List<T> { Nil, Cons(T, Box<List<T>>) }
 // 对应数学: List<T> = μX. 1 + T × X
@@ -264,11 +301,13 @@ enum List<T> { Nil, Cons(T, Box<List<T>>) }
 ### 8.2 代数数据类型
 
 #### 代数数据类型
+
 ```math
 \text{ADT} = \text{Sum of Products} = \sum_i \prod_j T_{i,j}
 ```
 
 #### Rust代数数据类型
+
 ```rust
 enum Shape {
     Circle { radius: f64 },
@@ -282,6 +321,7 @@ enum Shape {
 ### 9.1 类型安全定义
 
 #### 类型安全
+
 ```math
 \text{TypeSafe}(P) \iff \forall \text{execution} \sigma. \text{WellTyped}(\sigma)
 ```
@@ -289,11 +329,13 @@ enum Shape {
 ### 9.2 关键定理
 
 #### 定理 1: 类型安全保证
+
 ```math
 \text{WellTyped}(P) \implies \text{TypeSafe}(P)
 ```
 
 **证明**:
+
 ```math
 \begin{align}
 \text{假设}: &\text{WellTyped}(P) \\
@@ -305,11 +347,13 @@ enum Shape {
 ```
 
 #### 定理 2: 进度保证
+
 ```math
 \text{WellTyped}(P) \implies \text{Progress}(P)
 ```
 
 **证明**:
+
 ```math
 \begin{align}
 \text{假设}: &\text{WellTyped}(P) \\
@@ -325,6 +369,7 @@ enum Shape {
 ### 10.1 类型检查器
 
 #### 类型检查器定义
+
 ```rust
 pub struct TypeChecker {
     pub type_environment: TypeEnvironment,
@@ -351,6 +396,7 @@ impl TypeChecker {
 ### 10.2 类型推断引擎
 
 #### 类型推断
+
 ```rust
 pub struct TypeInferenceEngine {
     pub type_variables: TypeVariableGenerator,
@@ -390,4 +436,4 @@ impl TypeInferenceEngine {
 **文档版本**: V2.0  
 **创建日期**: 2025-01-27  
 **状态**: 严格数学定义  
-**质量评级**: A+ (理论深度显著提升) 
+**质量评级**: A+ (理论深度显著提升)
