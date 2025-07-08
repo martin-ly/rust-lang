@@ -45,21 +45,21 @@
 
 #### 所有权关系的公理
 
-**公理 1 (唯一性)**
+**公理 1 (唯一性)**:
 
 ```math
 \forall x \in \mathbb{X}, v_1, v_2 \in \mathbb{V}. 
 \text{Own}(x, v_1) \land \text{Own}(x, v_2) \implies v_1 = v_2
 ```
 
-**公理 2 (排他性)**
+**公理 2 (排他性)**:
 
 ```math
 \forall x_1, x_2 \in \mathbb{X}, v \in \mathbb{V}. 
 \text{Own}(x_1, v) \land \text{Own}(x_2, v) \implies x_1 = x_2
 ```
 
-**公理 3 (存在性)**
+**公理 3 (存在性)**:
 
 ```math
 \forall x \in \mathbb{X}. \exists v \in \mathbb{V}. \text{Own}(x, v) \lor \text{Undefined}(x)
@@ -77,14 +77,14 @@
 
 #### 借用关系的公理
 
-**公理 4 (借用唯一性)**
+**公理 4 (借用唯一性)**:
 
 ```math
 \forall r, x \in \mathbb{X}, \alpha \in \mathbb{L}. 
 \text{Borrow}(r, x, \alpha) \implies \text{Own}(x, v) \text{ for some } v \in \mathbb{V}
 ```
 
-**公理 5 (借用排他性)**
+**公理 5 (借用排他性)**:
 
 ```math
 \forall r_1, r_2, x \in \mathbb{X}, \alpha_1, \alpha_2 \in \mathbb{L}. 

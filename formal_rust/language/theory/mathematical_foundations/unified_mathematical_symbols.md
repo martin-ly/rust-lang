@@ -8,6 +8,7 @@
 ## 1. 基础集合符号
 
 ### 1.1 基本集合
+
 ```math
 \begin{align}
 \mathbb{X} &= \{x_1, x_2, x_3, \ldots\} \text{ (变量集合)} \\
@@ -20,6 +21,7 @@
 ```
 
 ### 1.2 函数和关系
+
 ```math
 \begin{align}
 \text{Own} &: \mathbb{X} \times \mathbb{V} \rightarrow \mathbb{B} \text{ (所有权关系)} \\
@@ -33,6 +35,7 @@
 ## 2. 类型系统符号
 
 ### 2.1 类型构造
+
 ```math
 \begin{align}
 \text{Product}(A, B) &= A \times B \text{ (积类型)} \\
@@ -44,6 +47,7 @@
 ```
 
 ### 2.2 类型关系
+
 ```math
 \begin{align}
 A <: B &\text{ (子类型关系)} \\
@@ -55,6 +59,7 @@ A \sim B &\text{ (类型相似)} \\
 ```
 
 ### 2.3 类型约束
+
 ```math
 \begin{align}
 T: \text{Trait} &\text{ (特质约束)} \\
@@ -68,6 +73,7 @@ T: \text{Sync} &\text{ (同步约束)}
 ## 3. 所有权系统符号
 
 ### 3.1 所有权公理
+
 ```math
 \begin{align}
 \text{公理1 (唯一性)} &: \forall x \in \mathbb{X}, v_1, v_2 \in \mathbb{V}. \text{Own}(x, v_1) \land \text{Own}(x, v_2) \implies v_1 = v_2 \\
@@ -77,6 +83,7 @@ T: \text{Sync} &\text{ (同步约束)}
 ```
 
 ### 3.2 借用公理
+
 ```math
 \begin{align}
 \text{公理4 (借用唯一性)} &: \forall r, x \in \mathbb{X}, \alpha \in \mathbb{L}. \text{Borrow}(r, x, \alpha) \implies \text{Own}(x, v) \\
@@ -87,6 +94,7 @@ T: \text{Sync} &\text{ (同步约束)}
 ```
 
 ### 3.3 移动语义
+
 ```math
 \begin{align}
 \text{Move}(x \rightarrow y) &\iff \text{Own}(x, v) \land \text{Own}(y, v) \land \text{Invalid}(x) \\
@@ -99,6 +107,7 @@ T: \text{Sync} &\text{ (同步约束)}
 ## 4. 生命周期符号
 
 ### 4.1 生命周期关系
+
 ```math
 \begin{align}
 \alpha_1 \text{ Outlives } \alpha_2 &\iff \alpha_1 \supseteq \alpha_2 \\
@@ -109,6 +118,7 @@ T: \text{Sync} &\text{ (同步约束)}
 ```
 
 ### 4.2 生命周期约束
+
 ```math
 \begin{align}
 \text{for<'a> fn}(x: \&'a T) \rightarrow \&'a U &\text{ (生命周期参数)} \\
@@ -119,6 +129,7 @@ T: \text{Sync} &\text{ (同步约束)}
 ## 5. 并发系统符号
 
 ### 5.1 并发关系
+
 ```math
 \begin{align}
 P \parallel Q &\text{ (并行执行)} \\
@@ -129,6 +140,7 @@ P \text{ ; } Q &\text{ (顺序执行)} \\
 ```
 
 ### 5.2 安全保证
+
 ```math
 \begin{align}
 \text{Concurrent}(P, Q) &\implies \text{Safe}(P \parallel Q) \\
@@ -140,6 +152,7 @@ P \text{ ; } Q &\text{ (顺序执行)} \\
 ## 6. 类型检查符号
 
 ### 6.1 类型推断
+
 ```math
 \begin{align}
 \Gamma \vdash e: \tau &\text{ (类型判断)} \\
@@ -150,6 +163,7 @@ P \text{ ; } Q &\text{ (顺序执行)} \\
 ```
 
 ### 6.2 类型统一
+
 ```math
 \begin{align}
 \text{unify}(\tau_1, \tau_2) &= \sigma \iff \sigma(\tau_1) = \sigma(\tau_2) \\
@@ -161,6 +175,7 @@ P \text{ ; } Q &\text{ (顺序执行)} \\
 ## 7. 内存安全符号
 
 ### 7.1 安全定义
+
 ```math
 \begin{align}
 \text{MemorySafe}(P) &\iff \forall \text{execution} \sigma. \text{Valid}(\sigma) \\
@@ -171,6 +186,7 @@ P \text{ ; } Q &\text{ (顺序执行)} \\
 ```
 
 ### 7.2 安全定理
+
 ```math
 \begin{align}
 \text{OwnershipRules}(P) &\implies \text{MemorySafe}(P) \\
@@ -182,6 +198,7 @@ P \text{ ; } Q &\text{ (顺序执行)} \\
 ## 8. 线性逻辑符号
 
 ### 8.1 线性连接词
+
 ```math
 \begin{align}
 P \otimes Q &\iff P \land Q \land \text{Disjoint}(P, Q) \text{ (线性合取)} \\
@@ -194,6 +211,7 @@ P \oplus Q &\text{ (加法析取)} \\
 ```
 
 ### 8.2 线性类型规则
+
 ```math
 \begin{align}
 \frac{\Gamma, x: \tau \vdash e: \tau'}{\Gamma \vdash \lambda x.e: \tau \multimap \tau'} &\text{ (线性函数类型)} \\
@@ -204,6 +222,7 @@ P \oplus Q &\text{ (加法析取)} \\
 ## 9. 分离逻辑符号
 
 ### 9.1 分离连接词
+
 ```math
 \begin{align}
 P * Q &\iff P \land Q \land \text{Separate}(P, Q) \text{ (分离合取)} \\
@@ -215,6 +234,7 @@ P \lor Q &\text{ (经典析取)}
 ```
 
 ### 9.2 堆操作
+
 ```math
 \begin{align}
 h \models P &\text{ (堆满足谓词)} \\
@@ -226,6 +246,7 @@ h \models P * Q &\iff \exists h_1, h_2. h = h_1 \cup h_2 \land h_1 \models P \la
 ## 10. 范畴论符号
 
 ### 10.1 类型范畴
+
 ```math
 \begin{align}
 \mathcal{C} &= (\text{Ob}(\mathcal{C}), \text{Hom}(\mathcal{C}), \circ, \text{id}) \\
@@ -235,6 +256,7 @@ h \models P * Q &\iff \exists h_1, h_2. h = h_1 \cup h_2 \land h_1 \models P \la
 ```
 
 ### 10.2 范畴公理
+
 ```math
 \begin{align}
 \forall f: A \rightarrow B, g: B \rightarrow C, h: C \rightarrow D. \\
@@ -244,6 +266,7 @@ h \models P * Q &\iff \exists h_1, h_2. h = h_1 \cup h_2 \land h_1 \models P \la
 ```
 
 ### 10.3 积与和
+
 ```math
 \begin{align}
 A \times B &= \{(a, b) \mid a \in A, b \in B\} \text{ (积对象)} \\
@@ -255,6 +278,7 @@ U^T &= \{f: T \rightarrow U \mid f \text{ 是良型函数}\} \text{ (指数对�
 ## 11. 代数数据类型符号
 
 ### 11.1 递归类型
+
 ```math
 \begin{align}
 \mu X. F(X) &= \text{fix}(\lambda X. F(X)) \text{ (递归类型)} \\
@@ -264,6 +288,7 @@ U^T &= \{f: T \rightarrow U \mid f \text{ 是良型函数}\} \text{ (指数对�
 ```
 
 ### 11.2 代数数据类型
+
 ```math
 \begin{align}
 \text{ADT} &= \text{Sum of Products} = \sum_i \prod_j T_{i,j} \\
@@ -274,6 +299,7 @@ U^T &= \{f: T \rightarrow U \mid f \text{ 是良型函数}\} \text{ (指数对�
 ## 12. 符号使用规范
 
 ### 12.1 命名约定
+
 - 集合：使用 `\mathbb{X}` 格式
 - 函数：使用 `\text{FunctionName}` 格式
 - 关系：使用 `\text{RelationName}` 格式
@@ -281,12 +307,14 @@ U^T &= \{f: T \rightarrow U \mid f \text{ 是良型函数}\} \text{ (指数对�
 - 定理：使用 `\text{定理N: 名称}` 格式
 
 ### 12.2 格式规范
+
 - 数学公式：使用 `$$` 或 `$` 包围
 - 多行公式：使用 `\begin{align}` 和 `\end{align}`
 - 推理规则：使用 `\frac{前提}{结论}` 格式
 - 定义：使用 `\text{定义名称}` 格式
 
 ### 12.3 引用规范
+
 - 符号引用：使用 `\ref{symbol}` 格式
 - 定理引用：使用 `\ref{theorem}` 格式
 - 公理引用：使用 `\ref{axiom}` 格式
@@ -294,6 +322,7 @@ U^T &= \{f: T \rightarrow U \mid f \text{ 是良型函数}\} \text{ (指数对�
 ## 13. 符号验证工具
 
 ### 13.1 符号一致性检查
+
 ```rust
 pub struct SymbolConsistencyChecker {
     pub symbol_registry: HashMap<String, SymbolDefinition>,
@@ -322,6 +351,7 @@ impl SymbolConsistencyChecker {
 ```
 
 ### 13.2 符号验证器
+
 ```rust
 pub struct SymbolValidator {
     pub syntax_checker: SyntaxChecker,
@@ -365,4 +395,4 @@ impl SymbolValidator {
 **文档版本**: V1.0  
 **创建日期**: 2025-01-27  
 **状态**: 统一标准  
-**质量评级**: A+ (符号系统完整统一) 
+**质量评级**: A+ (符号系统完整统一)

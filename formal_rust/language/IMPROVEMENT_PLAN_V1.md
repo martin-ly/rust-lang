@@ -168,7 +168,7 @@
 
 #### 2.2 目录重构计划
 
-```
+```text
 新的目录结构:
 formal_rust/language/
 ├── theory/                    # 理论基础
@@ -222,7 +222,7 @@ impl DeepConceptChecker {
 }
 ```
 
-#### 3.2 错误处理改进
+#### 3.2 错误处理改进1
 
 ```rust
 // 改进的错误处理系统

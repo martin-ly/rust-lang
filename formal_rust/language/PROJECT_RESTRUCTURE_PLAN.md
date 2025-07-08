@@ -29,7 +29,7 @@
 
 ### 1. 建立清晰的分层结构
 
-```
+```text
 formal_rust/language/
 ├── theory/                    # 理论基础层
 │   ├── mathematical_foundations/  # 数学基础
