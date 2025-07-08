@@ -41,7 +41,7 @@ pub enum Poll<T> {
 
 异步执行模型可以形式化描述为：
 
-```
+```text
 AsyncExecutionModel = {
     Tasks: Set<Task>,
     Events: Set<Event>,

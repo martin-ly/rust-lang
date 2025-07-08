@@ -213,7 +213,6 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 **相关概念**：
 
-- [借用规则](#借用定义) (本模块)
 - [泛型生命周期](../04_generics/01_formal_generics_system.md#泛型生命周期) (模块 04)
 - [异步生命周期](../06_async_await/01_formal_async_model.md#异步生命周期) (模块 06)
 
@@ -264,7 +263,6 @@ $$\text{BorrowMut}(r_1, v) \land \text{Borrow}(r_2, v) \Rightarrow \text{Conflic
 
 **相关概念**：
 
-- [生命周期](#生命周期定义) (本模块)
 - [引用类型](../02_type_system/01_formal_type_system.md#引用类型) (模块 02)
 - [并发安全性](../05_concurrency/01_formal_concurrency_model.md#并发安全性) (模块 05)
 
