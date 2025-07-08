@@ -192,37 +192,37 @@
 
 ### 按类别索引
 
-#### 基础集合符号1
+#### 基础集合符号
 
 - $\mathbb{T}, \mathbb{V}, \mathbb{X}, \mathbb{L}, \mathbb{E}, \mathbb{S}$
 - $\Gamma, \Delta, \Lambda, \Sigma$
 
-#### 类型系统符号1
+#### 类型系统符号
 
 - $\vdash, \models, <:, \equiv$
 - $\rightarrow, \times, +, \forall, \exists$
 
-#### 所有权系统符号1
+#### 所有权系统符号
 
 - $\text{Own}, \text{Borrow}, \text{Move}, \text{Valid}$
 - $\text{Lifetime}, \text{Outlives}, \text{ValidAt}$
 
-#### 逻辑符号1
+#### 逻辑符号
 
 - $\forall, \exists, \implies, \iff, \land, \lor, \neg$
 - $\frac{P}{Q}, \therefore, \because$
 
-#### 操作语义符号1
+#### 操作语义符号
 
 - $\Downarrow, \rightarrow, \rightarrow^*, \bot$
 - $\langle e, s \rangle, \text{State}$
 
-#### 并发系统符号1
+#### 并发系统符号
 
 - $\parallel, \text{Sync}, \text{Lock}, \text{Channel}$
 - $\text{HappensBefore}, \text{Concurrent}$
 
-#### 错误处理符号1
+#### 错误处理符号
 
 - $\text{Error}, \text{Result}, \text{Option}$
 - $\text{Propagate}, \text{Handle}$
@@ -280,7 +280,7 @@
 3. 确保修改的一致性
 4. 更新符号索引
 
-### 3. 符号验证1
+### 3. 符号验证
 
 定期验证：
 

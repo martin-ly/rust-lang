@@ -34,13 +34,13 @@
 
 ### 基础定理验证
 
-**定理 1.1 (集合运算基本性质)**:
+**定理 1.1 (集合运算基本性质)**
 
 ```math
 \forall A, B \in \mathbb{S}. (A \cup B) \cap (A \cap B) = A \cap B
 ```
 
-**定理 1.2 (逻辑推理传递性)**:
+**定理 1.2 (逻辑推理传递性)**
 
 ```math
 \forall P, Q, R. (P \implies Q) \land (Q \implies R) \implies (P \implies R)
@@ -128,13 +128,13 @@
 
 ### 依赖关系验证
 
-**定义 1 (层次依赖)**:
+**定义 1 (层次依赖)**
 
 ```math
 \text{Depends}(L_1, L_2) \iff \forall c \in L_1. \exists c' \in L_2. \text{Requires}(c, c')
 ```
 
-**定理 1 (层次依赖传递性)**:
+**定理 1 (层次依赖传递性)**
 
 ```math
 \text{Depends}(L_1, L_2) \land \text{Depends}(L_2, L_3) \implies \text{Depends}(L_1, L_3)
@@ -142,13 +142,13 @@
 
 ### 概念映射验证
 
-**定义 2 (概念映射)**:
+**定义 2 (概念映射)**
 
 ```math
 \text{Map}(c_1, c_2) \iff \text{SameConcept}(c_1, c_2) \land \text{Level}(c_1) \neq \text{Level}(c_2)
 ```
 
-**定理 2 (映射一致性)**:
+**定理 2 (映射一致性)**
 
 ```math
 \forall c_1, c_2, c_3. \text{Map}(c_1, c_2) \land \text{Map}(c_2, c_3) \implies \text{Map}(c_1, c_3)
