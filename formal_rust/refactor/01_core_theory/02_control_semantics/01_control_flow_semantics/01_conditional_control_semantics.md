@@ -8,6 +8,45 @@
 
 ---
 
+## 目录
+
+- [2.1.1 Rust条件控制语义模型深度分析](#211-rust条件控制语义模型深度分析)
+  - [目录](#目录)
+  - [2.1.1.1 条件控制理论基础](#2111-条件控制理论基础)
+    - [2.1.1.1.1 条件控制的形式化语义](#21111-条件控制的形式化语义)
+    - [2.1.1.1.2 条件控制的范畴论视角](#21112-条件控制的范畴论视角)
+    - [2.1.1.1.3 条件控制的操作语义](#21113-条件控制的操作语义)
+  - [2.1.1.2 if表达式语义分析](#2112-if表达式语义分析)
+    - [2.1.1.2.1 基础if表达式](#21121-基础if表达式)
+    - [2.1.1.2.2 if let表达式语义](#21122-if-let表达式语义)
+    - [2.1.1.2.3 条件链语义](#21123-条件链语义)
+  - [2.1.1.3 模式匹配控制语义](#2113-模式匹配控制语义)
+    - [2.1.1.3.1 match表达式的理论基础](#21131-match表达式的理论基础)
+    - [2.1.1.3.2 模式匹配的完整性检查](#21132-模式匹配的完整性检查)
+    - [2.1.1.3.3 守卫条件语义](#21133-守卫条件语义)
+  - [2.1.1.4 控制流性能语义](#2114-控制流性能语义)
+    - [2.1.1.4.1 分支预测语义](#21141-分支预测语义)
+    - [2.1.1.4.2 编译期优化语义](#21142-编译期优化语义)
+  - [2.1.1.5 类型系统集成](#2115-类型系统集成)
+    - [2.1.1.5.1 类型推断中的条件控制](#21151-类型推断中的条件控制)
+    - [2.1.1.5.2 生命周期与条件控制](#21152-生命周期与条件控制)
+  - [2.1.1.6 错误处理集成](#2116-错误处理集成)
+    - [2.1.1.6.1 条件控制与Result语义](#21161-条件控制与result语义)
+    - [2.1.1.6.2 ? 操作符的条件语义](#21162--操作符的条件语义)
+  - [2.1.1.7 实践案例分析](#2117-实践案例分析)
+    - [2.1.1.7.1 零成本抽象验证](#21171-零成本抽象验证)
+    - [2.1.1.7.2 条件编译语义](#21172-条件编译语义)
+  - [2.1.1.8 安全性保证](#2118-安全性保证)
+    - [2.1.1.8.1 内存安全与条件控制](#21181-内存安全与条件控制)
+    - [2.1.1.8.2 类型安全保证](#21182-类型安全保证)
+  - [2.1.1.9 跨层分析集成](#2119-跨层分析集成)
+    - [2.1.1.9.1 与异步语义的集成](#21191-与异步语义的集成)
+    - [2.1.1.9.2 与所有权系统的交互](#21192-与所有权系统的交互)
+  - [2.1.1.10 相关引用与扩展阅读](#21110-相关引用与扩展阅读)
+    - [2.1.1.10.1 内部交叉引用](#211101-内部交叉引用)
+    - [2.1.1.10.2 外部参考文献](#211102-外部参考文献)
+    - [2.1.1.10.3 实现参考](#211103-实现参考)
+
 ## 2.1.1.1 条件控制理论基础
 
 ### 2.1.1.1.1 条件控制的形式化语义
@@ -25,11 +64,13 @@ $$\text{Conditional} = \langle \text{Condition}, \text{ThenBranch}, \text{ElseBr
 - $\text{Context} : \text{TypeContext}$ - 类型上下文
 
 **条件控制语义函数**：
-$$\llbracket \text{if } e \text{ then } s_1 \text{ else } s_2 \rrbracket_\sigma =
+$$
+\llbracket \text{if } e \text{ then } s_1 \text{ else } s_2 \rrbracket_\sigma =
 \begin{cases}
 \llbracket s_1 \rrbracket_\sigma & \text{if } \llbracket e \rrbracket_\sigma = \text{true} \\
 \llbracket s_2 \rrbracket_\sigma & \text{if } \llbracket e \rrbracket_\sigma = \text{false}
-\end{cases}$$
+\end{cases}
+$$
 
 ### 2.1.1.1.2 条件控制的范畴论视角
 
@@ -83,6 +124,7 @@ $$\frac{\langle e, \sigma \rangle \to \langle \text{false}, \sigma' \rangle \qua
 ### 2.1.1.2.1 基础if表达式
 
 **定义 2.1.1.2** (基础if表达式)
+
 ```rust
 // 基础if表达式语义模型
 if condition {
@@ -93,6 +135,7 @@ if condition {
 ```
 
 **语义特性**：
+
 - **表达式性质**：if是表达式，必须产生值
 - **类型统一**：所有分支必须返回相同类型
 - **穷尽性**：表达式形式必须包含else分支
@@ -100,6 +143,7 @@ if condition {
 ### 2.1.1.2.2 if let表达式语义
 
 **定义 2.1.1.3** (模式匹配条件)
+
 ```rust
 // if let 模式匹配条件语义
 if let pattern = expression {
@@ -110,10 +154,12 @@ if let pattern = expression {
 ```
 
 **形式化表示**：
-$$\text{IfLet}(p, e, s_1, s_2) = \begin{cases}
+$$
+\text{IfLet}(p, e, s_1, s_2) = \begin{cases}
 \text{bind}(p, v) \circ s_1 & \text{if } \text{match}(p, \llbracket e \rrbracket) \\
 s_2 & \text{otherwise}
-\end{cases}$$
+\end{cases}
+$$
 
 ### 2.1.1.2.3 条件链语义
 
@@ -129,6 +175,7 @@ if condition1 {
 ```
 
 **等价脱糖形式**：
+
 ```rust
 // 编译器内部表示
 if condition1 {
@@ -149,6 +196,7 @@ if condition1 {
 ### 2.1.1.3.1 match表达式的理论基础
 
 **定义 2.1.1.4** (模式匹配语义)
+
 ```rust
 match expression {
     pattern1 => result1,
@@ -198,10 +246,12 @@ match value {
 ```
 
 **守卫条件的语义扩展**：
-$$\text{GuardedPattern}(p, g, r) = \begin{cases}
+$$
+\text{GuardedPattern}(p, g, r) = \begin{cases}
 r & \text{if } \text{match}(p, v) \land \llbracket g \rrbracket_{\text{bind}(p,v)} \\
 \text{continue} & \text{otherwise}
-\end{cases}$$
+\end{cases}
+$$
 
 ---
 
@@ -210,6 +260,7 @@ r & \text{if } \text{match}(p, v) \land \llbracket g \rrbracket_{\text{bind}(p,v
 ### 2.1.1.4.1 分支预测语义
 
 **定义 2.1.1.5** (分支预测模型)
+
 ```rust
 // 分支预测提示的语义影响
 if likely(condition) {
@@ -220,10 +271,12 @@ if likely(condition) {
 ```
 
 **性能语义模型**：
-$$\text{Performance}(\text{branch}) = \begin{cases}
+$$
+\text{Performance}(\text{branch}) = \begin{cases}
 O(1) & \text{if prediction correct} \\
 O(k) & \text{if prediction miss, } k = \text{pipeline depth}
-\end{cases}$$
+\end{cases}
+$$
 
 ### 2.1.1.4.2 编译期优化语义
 
@@ -261,6 +314,7 @@ graph LR
 
 **定理 2.1.1.1** (条件分支类型统一)
 对于条件表达式 `if c then e1 else e2`，若：
+
 - $\Gamma \vdash c : \text{bool}$
 - $\Gamma \vdash e_1 : T$
 - $\Gamma \vdash e_2 : T$
@@ -374,6 +428,7 @@ fn debug_conditional() {
 
 **定理 2.1.1.2** (条件控制内存安全)
 条件控制结构保持内存安全性质：
+
 - 不产生悬垂指针
 - 不违反借用检查规则
 - 不引入数据竞争
@@ -418,22 +473,26 @@ fn ownership_conditional(flag: bool, data: Vec<i32>) -> Vec<i32> {
 ## 2.1.1.10 相关引用与扩展阅读
 
 ### 2.1.1.10.1 内部交叉引用
+
 - [1.1.1 原始类型语义](../../01_foundation_semantics/01_type_system_semantics/01_primitive_types_semantics.md) - bool类型语义基础
 - [2.1.3 模式匹配语义](03_pattern_matching_semantics.md) - 高级模式匹配
 - [2.4.1 Result/Option语义](../04_error_handling_semantics/01_result_option_semantics.md) - 错误处理集成
 
 ### 2.1.1.10.2 外部参考文献
+
 1. Pierce, B.C. *Types and Programming Languages*. Chapter 11: Simple Extensions.
 2. Harper, R. *Practical Foundations for Programming Languages*. Chapter 9: Gödel's T.
 3. Rust Reference: [Conditional expressions](https://doc.rust-lang.org/reference/expressions/if-expr.html)
 
 ### 2.1.1.10.3 实现参考
+
 - [rustc_middle::mir](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_middle/mir/index.html) - MIR中的条件控制表示
 - [rustc_hir](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_hir/index.html) - HIR中的if表达式
 
 ---
 
 **文档元数据**:
+
 - **复杂度级别**: ⭐⭐⭐⭐ (高级)
 - **前置知识**: 基础Rust语法、类型理论、操作语义
 - **相关工具**: rustc, miri, chalk
