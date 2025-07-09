@@ -31,6 +31,7 @@
 $$\text{Synchronization}(s) = \{\text{order} : \text{coordinate}(s) = \text{order}\}$$
 
 其中：
+
 - $s$: 同步原语
 - $\text{order}$: 执行顺序
 - $\text{coordinate}(s)$: 协调函数
@@ -863,6 +864,7 @@ Rust线程同步语义模型提供了：
 ---
 
 **相关文档**:
+
 - [线程创建语义](01_thread_creation_semantics.md)
 - [异步编程语义](../02_async_programming_semantics/00_index.md)
-- [内存模型语义](../../01_foundation_semantics/02_memory_model_semantics/00_index.md) 
+- [内存模型语义](../../01_foundation_semantics/02_memory_model_semantics/00_index.md)
