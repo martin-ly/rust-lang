@@ -2,34 +2,35 @@
 
 ## 目录
 
-- [目录](#目录)
-- [0.0 执行摘要](#00-执行摘要)
-  - [核心贡献](#核心贡献)
-- [1.0 智能指针语义理论基础](#10-智能指针语义理论基础)
-  - [1.1 智能指针语义概述](#11-智能指针语义概述)
-  - [1.2 形式化定义](#12-形式化定义)
-  - [1.3 智能指针算法](#13-智能指针算法)
-- [2.0 智能指针语义算法](#20-智能指针语义算法)
-  - [2.1 Box智能指针](#21-box智能指针)
-  - [2.2 Rc智能指针](#22-rc智能指针)
-  - [2.3 Arc智能指针](#23-arc智能指针)
-- [3.0 智能指针语义实现](#30-智能指针语义实现)
-  - [3.1 编译器实现](#31-编译器实现)
-  - [3.2 运行时机制](#32-运行时机制)
-  - [3.3 内存管理](#33-内存管理)
-- [4.0 安全优化策略](#40-安全优化策略)
-  - [4.1 编译时优化](#41-编译时优化)
-  - [4.2 运行时优化](#42-运行时优化)
-  - [4.3 安全保证](#43-安全保证)
-- [5.0 案例分析](#50-案例分析)
-  - [5.1 基本智能指针](#51-基本智能指针)
-  - [5.2 高级智能指针](#52-高级智能指针)
-  - [5.3 自定义智能指针](#53-自定义智能指针)
-- [6.0 总结与展望](#60-总结与展望)
-  - [6.1 理论贡献](#61-理论贡献)
-  - [6.2 实践价值](#62-实践价值)
-  - [6.3 未来发展方向](#63-未来发展方向)
-  - [6.4 学术影响](#64-学术影响)
+- [Rust智能指针语义深度分析](#rust智能指针语义深度分析)
+  - [目录](#目录)
+  - [0.0 执行摘要](#00-执行摘要)
+    - [核心贡献](#核心贡献)
+  - [1.0 智能指针语义理论基础](#10-智能指针语义理论基础)
+    - [1.1 智能指针语义概述](#11-智能指针语义概述)
+    - [1.2 形式化定义](#12-形式化定义)
+    - [1.3 智能指针算法](#13-智能指针算法)
+  - [2.0 智能指针语义算法](#20-智能指针语义算法)
+    - [2.1 Box智能指针](#21-box智能指针)
+    - [2.2 Rc智能指针](#22-rc智能指针)
+    - [2.3 Arc智能指针](#23-arc智能指针)
+  - [3.0 智能指针语义实现](#30-智能指针语义实现)
+    - [3.1 编译器实现](#31-编译器实现)
+    - [3.2 运行时机制](#32-运行时机制)
+    - [3.3 内存管理](#33-内存管理)
+  - [4.0 安全优化策略](#40-安全优化策略)
+    - [4.1 编译时优化](#41-编译时优化)
+    - [4.2 运行时优化](#42-运行时优化)
+    - [4.3 安全保证](#43-安全保证)
+  - [5.0 案例分析](#50-案例分析)
+    - [5.1 基本智能指针](#51-基本智能指针)
+    - [5.2 高级智能指针](#52-高级智能指针)
+    - [5.3 自定义智能指针](#53-自定义智能指针)
+  - [6.0 总结与展望](#60-总结与展望)
+    - [6.1 理论贡献](#61-理论贡献)
+    - [6.2 实践价值](#62-实践价值)
+    - [6.3 未来发展方向](#63-未来发展方向)
+    - [6.4 学术影响](#64-学术影响)
 
 ## 0.0 执行摘要
 
@@ -53,6 +54,7 @@
 $$\mathcal{SP} = \langle \mathcal{R}, \mathcal{O}, \mathcal{S}, \mathcal{M} \rangle$$
 
 其中：
+
 - $\mathcal{R}$ 是资源集合
 - $\mathcal{O}$ 是所有权集合
 - $\mathcal{S}$ 是安全规则集合
@@ -71,6 +73,7 @@ $$\text{smart\_ptr}(resource, ownership) = \langle resource, ownership, \text{ma
 $$\text{SmartPointerType} = \text{Type} \times \text{Ownership} \times \text{Management}$$
 
 其中：
+
 - $\text{Type}$ 是目标类型
 - $\text{Ownership}$ 是所有权类型
 - $\text{Management}$ 是管理策略
@@ -92,6 +95,7 @@ $$\text{ArcPointer} = \text{Type} \times \text{SharedOwnership} \times \text{Ato
 $$\text{management\_rules} = \{\text{allocation}, \text{deallocation}, \text{reference\_tracking}, \text{cleanup}\}$$
 
 其中：
+
 - $\text{allocation}$ 是分配规则
 - $\text{deallocation}$ 是释放规则
 - $\text{reference\_tracking}$ 是引用跟踪
@@ -791,15 +795,16 @@ fn custom_smart_pointer_example() {
 
 ---
 
-> **链接网络**: 
+> **链接网络**:
+>
 > - [内存布局语义](./01_memory_layout_semantics.md)
 > - [内存分配语义](./02_memory_allocation_semantics.md)
 > - [内存安全语义](./03_memory_safety_semantics.md)
 > - [指针语义](./04_pointer_semantics.md)
 > - [引用语义](./05_reference_semantics.md)
-
 > **相关资源**:
+>
 > - [Rust智能指针参考](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)
 > - [Box文档](https://doc.rust-lang.org/std/boxed/struct.Box.html)
 > - [Rc文档](https://doc.rust-lang.org/std/rc/struct.Rc.html)
-> - [Arc文档](https://doc.rust-lang.org/std/sync/struct.Arc.html) 
+> - [Arc文档](https://doc.rust-lang.org/std/sync/struct.Arc.html)
