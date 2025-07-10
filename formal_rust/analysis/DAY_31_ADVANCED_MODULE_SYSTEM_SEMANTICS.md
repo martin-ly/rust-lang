@@ -1,6 +1,6 @@
 # Day 31: 高级模块系统语义分析
 
-**Rust 2024版本特性递归迭代分析 - Day 31**
+**Rust 2024版本特性递归迭代分析 - Day 31**:
 
 **分析日期**: 2025-01-27  
 **分析主题**: 高级模块系统语义分析  
@@ -33,7 +33,7 @@
 
 **定义 31.1 (可见性传播函数)**:
 
-```
+```text
 V: Module × Path → {Public, Private, Inherited}
 ```
 
@@ -41,14 +41,14 @@ V: Module × Path → {Public, Private, Inherited}
 
 **公理 31.1 (可见性传递性)**:
 
-```
+```text
 ∀m₁, m₂, m₃ ∈ Module, p ∈ Path:
 V(m₁, p) = Public ∧ V(m₂, p) = Public → V(m₃, p) = Public
 ```
 
 **公理 31.2 (私有性保持)**:
 
-```
+```text
 ∀m ∈ Module, p ∈ Path:
 V(m, p) = Private → ∀m' ∈ Module: V(m', p) ≠ Public
 ```
@@ -57,7 +57,7 @@ V(m, p) = Private → ∀m' ∈ Module: V(m', p) ≠ Public
 
 **定义 31.2 (可见性约束)**:
 
-```
+```text
 C_visibility = {
   (m, p, v) | m ∈ Module, p ∈ Path, v ∈ Visibility
 }
@@ -65,7 +65,7 @@ C_visibility = {
 
 **定理 31.1 (可见性一致性)**:
 
-```
+```text
 ∀C ⊆ C_visibility:
 Consistent(C) ↔ ∀(m₁, p₁, v₁), (m₂, p₂, v₂) ∈ C:
   p₁ = p₂ ∧ m₁ ≠ m₂ → v₁ = v₂
@@ -141,13 +141,13 @@ fn check_visibility_consistency(modules: &[ModuleVisibility]) -> bool {
 
 **定义 31.3 (路径解析函数)**:
 
-```
+```text
 resolve: Path × ModuleContext → Option<Module>
 ```
 
 **算法 31.1 (确定性路径解析)**:
 
-```
+```text
 function resolve_path(path: Path, context: ModuleContext):
     if path.is_absolute():
         return resolve_absolute_path(path)
@@ -177,21 +177,21 @@ function resolve_relative_path(path: Path, context: ModuleContext):
 
 **定理 31.2 (路径解析确定性)**:
 
-```
+```text
 ∀p₁, p₂ ∈ Path, c ∈ ModuleContext:
 resolve(p₁, c) = resolve(p₂, c) → p₁ = p₂
 ```
 
 **证明**:
 
-```
+```text
 假设 resolve(p₁, c) = resolve(p₂, c) = Some(m)
 根据算法31.1，路径解析是确定性的
 因此 p₁ 和 p₂ 必须指向相同的模块 m
 根据模块的唯一性，p₁ = p₂
 ```
 
-### 实现示例
+### 实现示例1
 
 ```rust
 #[derive(Debug, Clone)]
@@ -280,7 +280,7 @@ mod tests {
 
 **定义 31.4 (宏展开上下文)**:
 
-```
+```text
 MacroContext = {
     current_module: Module,
     macro_definitions: Map<MacroName, MacroBody>,
@@ -290,13 +290,13 @@ MacroContext = {
 
 **定义 31.5 (宏展开语义)**:
 
-```
+```text
 expand: MacroCall × MacroContext → TokenStream
 ```
 
 **公理 31.3 (宏展开一致性)**:
 
-```
+```text
 ∀mc₁, mc₂ ∈ MacroCall, ctx ∈ MacroContext:
 expand(mc₁, ctx) = expand(mc₂, ctx) → mc₁ ≡ mc₂
 ```
@@ -305,21 +305,21 @@ expand(mc₁, ctx) = expand(mc₂, ctx) → mc₁ ≡ mc₂
 
 **定理 31.3 (宏展开安全性)**:
 
-```
+```text
 ∀macro_call ∈ MacroCall, ctx ∈ MacroContext:
 Safe(macro_call) ∧ Valid(ctx) → Safe(expand(macro_call, ctx))
 ```
 
 **证明**:
 
-```
+```text
 1. 假设 macro_call 是安全的
 2. 假设 ctx 是有效的
 3. 根据宏展开规则，安全性在展开过程中保持
 4. 因此 expand(macro_call, ctx) 是安全的
 ```
 
-### 实现示例
+### 实现示例2
 
 ```rust
 #[derive(Debug, Clone)]
@@ -441,14 +441,14 @@ mod macro_tests {
 
 **定义 31.6 (模块依赖图)**:
 
-```
+```text
 DependencyGraph = (V, E)
 其中 V = {Module}, E = {(m₁, m₂) | m₁ depends_on m₂}
 ```
 
 **定义 31.7 (依赖关系类型)**:
 
-```
+```text
 DependencyType = {
     Public,    // 公开依赖
     Private,   // 私有依赖
@@ -461,7 +461,7 @@ DependencyType = {
 
 **算法 31.2 (循环依赖检测)**:
 
-```
+```text
 function detect_cycles(graph: DependencyGraph):
     let visited = Set<Module>()
     let recursion_stack = Set<Module>()
@@ -492,7 +492,7 @@ function detect_cycles(graph: DependencyGraph):
 
 **定理 31.4 (依赖最小化)**:
 
-```
+```text
 ∀G = (V, E) ∈ DependencyGraph:
 存在最小依赖图 G' = (V, E') 使得:
 ∀m₁, m₂ ∈ V: reachable(m₁, m₂) in G ↔ reachable(m₁, m₂) in G'
@@ -500,7 +500,7 @@ function detect_cycles(graph: DependencyGraph):
 
 **证明**:
 
-```
+```text
 1. 构造传递闭包 G* = (V, E*)
 2. 对于每条边 (u, v) ∈ E*，检查是否存在路径 u → w → v
 3. 如果存在，则移除边 (u, v)
@@ -508,7 +508,7 @@ function detect_cycles(graph: DependencyGraph):
 5. 结果是最小依赖图
 ```
 
-### 实现示例
+### 实现示例3
 
 ```rust
 #[derive(Debug, Clone)]
@@ -682,7 +682,7 @@ impl ModuleCache {
 
 **定理 31.5 (模块系统安全性)**:
 
-```
+```text
 ∀module_system: ModuleSystem:
 Safe(module_system) ↔ 
   ∀m ∈ modules(module_system): 

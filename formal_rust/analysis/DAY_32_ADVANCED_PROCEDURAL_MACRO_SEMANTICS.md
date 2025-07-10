@@ -1,6 +1,6 @@
 # Day 32: 高级过程宏语义分析
 
-**Rust 2024版本特性递归迭代分析 - Day 32**
+-**Rust 2024版本特性递归迭代分析 - Day 32**
 
 **分析日期**: 2025-01-27  
 **分析主题**: 高级过程宏语义分析  
@@ -33,7 +33,7 @@
 
 **定义 32.1 (宏类型函数)**:
 
-```
+```text
 T_macro: MacroInput × MacroContext → MacroOutput
 ```
 
@@ -41,14 +41,14 @@ T_macro: MacroInput × MacroContext → MacroOutput
 
 **公理 32.1 (宏类型一致性)**:
 
-```
+```text
 ∀input₁, input₂ ∈ MacroInput, ctx ∈ MacroContext:
 T_macro(input₁, ctx) = T_macro(input₂, ctx) → input₁ ≡ input₂
 ```
 
 **公理 32.2 (宏类型传递性)**:
 
-```
+```text
 ∀input ∈ MacroInput, ctx₁, ctx₂ ∈ MacroContext:
 Valid(ctx₁) ∧ Valid(ctx₂) → T_macro(input, ctx₁) ≡ T_macro(input, ctx₂)
 ```
@@ -57,7 +57,7 @@ Valid(ctx₁) ∧ Valid(ctx₂) → T_macro(input, ctx₁) ≡ T_macro(input, ct
 
 **定义 32.2 (宏类型约束)**:
 
-```
+```text
 C_macro_type = {
   (input, output, constraint) | 
   input ∈ MacroInput, output ∈ MacroOutput, constraint ∈ TypeConstraint
@@ -66,7 +66,7 @@ C_macro_type = {
 
 **定理 32.1 (宏类型安全性)**:
 
-```
+```text
 ∀C ⊆ C_macro_type:
 TypeSafe(C) ↔ ∀(input₁, output₁, c₁), (input₂, output₂, c₂) ∈ C:
   input₁ ≡ input₂ → output₁ ≡ output₂
@@ -205,7 +205,7 @@ mod type_tests {
 
 **定义 32.3 (卫生性函数)**:
 
-```
+```text
 H: Identifier × MacroContext → Identifier
 ```
 
@@ -213,14 +213,14 @@ H: Identifier × MacroContext → Identifier
 
 **公理 32.3 (卫生性唯一性)**:
 
-```
+```text
 ∀id₁, id₂ ∈ Identifier, ctx ∈ MacroContext:
 H(id₁, ctx) = H(id₂, ctx) → id₁ = id₂
 ```
 
 **公理 32.4 (卫生性保持性)**:
 
-```
+```text
 ∀id ∈ Identifier, ctx₁, ctx₂ ∈ MacroContext:
 Valid(ctx₁) ∧ Valid(ctx₂) → H(id, ctx₁) = H(id, ctx₂)
 ```
@@ -229,7 +229,7 @@ Valid(ctx₁) ∧ Valid(ctx₂) → H(id, ctx₁) = H(id, ctx₂)
 
 **算法 32.1 (卫生性冲突检测)**:
 
-```
+```text
 function detect_hygiene_conflicts(macro_def: MacroDefinition, call_site: MacroCall):
     let macro_identifiers = extract_identifiers(macro_def.body)
     let call_identifiers = extract_identifiers(call_site.arguments)
@@ -245,7 +245,7 @@ function would_cause_conflict(macro_id: Identifier, call_id: Identifier):
            macro_id.span != call_id.span
 ```
 
-### 实现示例
+### 实现示例1
 
 ```rust
 #[derive(Debug, Clone)]
@@ -374,13 +374,13 @@ mod hygiene_tests {
 
 **定义 32.4 (编译时计算函数)**:
 
-```
+```text
 CT_Compute: CompileTimeExpr × CompileContext → CompileTimeValue
 ```
 
 **定义 32.5 (编译时值域)**:
 
-```
+```text
 CompileTimeValue = {
     Literal(Value),
     Type(Type),
@@ -393,21 +393,21 @@ CompileTimeValue = {
 
 **定理 32.2 (编译时计算确定性)**:
 
-```
+```text
 ∀expr₁, expr₂ ∈ CompileTimeExpr, ctx ∈ CompileContext:
 CT_Compute(expr₁, ctx) = CT_Compute(expr₂, ctx) → expr₁ ≡ expr₂
 ```
 
 **证明**:
 
-```
+```text
 1. 假设 CT_Compute(expr₁, ctx) = CT_Compute(expr₂, ctx) = value
 2. 根据编译时计算的确定性，相同输入产生相同输出
 3. 因此 expr₁ 和 expr₂ 在语义上等价
 4. 根据编译时表达式的唯一性，expr₁ ≡ expr₂
 ```
 
-### 实现示例
+### 实现示例2
 
 ```rust
 #[derive(Debug, Clone)]
@@ -577,13 +577,13 @@ mod compile_time_tests {
 
 **定义 32.6 (元编程安全函数)**:
 
-```
+```text
 MP_Safe: MacroDefinition × SecurityContext → SecurityLevel
 ```
 
 **定义 32.7 (安全级别)**:
 
-```
+```text
 SecurityLevel = {
     Safe,           // 安全
     Unsafe,         // 不安全
@@ -596,7 +596,7 @@ SecurityLevel = {
 
 **算法 32.2 (元编程安全验证)**:
 
-```
+```text
 function verify_macro_safety(macro_def: MacroDefinition, context: SecurityContext):
     let security_level = Safe
     
@@ -631,7 +631,7 @@ function resource_safe(macro_def: MacroDefinition):
     return not contains_resource_leak(macro_def.body)
 ```
 
-### 实现示例
+### 实现示例3
 
 ```rust
 #[derive(Debug, Clone)]

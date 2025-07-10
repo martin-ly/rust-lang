@@ -1,6 +1,6 @@
 # Day 36: 高级分布式系统语义分析
 
-**Rust 2024版本特性递归迭代分析 - Day 36**
+-**Rust 2024版本特性递归迭代分析 - Day 36**
 
 **分析日期**: 2025-01-27  
 **分析主题**: 高级分布式系统语义分析  
@@ -33,13 +33,13 @@
 
 **定义 36.1 (CAP属性函数)**:
 
-```
+```text
 CAP: System × Property → Boolean
 ```
 
 **定理 36.1 (CAP定理)**:
 
-```
+```text
 ∀system ∈ DistributedSystem:
 ¬(CAP(system, Consistency) ∧ CAP(system, Availability) ∧ CAP(system, PartitionTolerance))
 ```
@@ -48,7 +48,7 @@ CAP: System × Property → Boolean
 
 **定义 36.2 (一致性级别)**:
 
-```
+```text
 ConsistencyLevel = {
     Strong,      // 强一致性
     Sequential,  // 顺序一致性
@@ -59,7 +59,7 @@ ConsistencyLevel = {
 
 **定理 36.2 (一致性传递性)**:
 
-```
+```text
 ∀op₁, op₂ ∈ Operation, system ∈ DistributedSystem:
 Consistent(system, op₁) ∧ Consistent(system, op₂) → 
   Consistent(system, op₁ ∘ op₂)
@@ -145,13 +145,13 @@ impl DistributedSystem {
 
 **定义 36.3 (消息传递函数)**:
 
-```
+```text
 MessagePass: (Node, Message, Protocol) → (Node', State')
 ```
 
 **公理 36.1 (消息传递可靠性)**:
 
-```
+```text
 ∀node ∈ Node, msg ∈ Message, protocol ∈ Protocol:
 Reliable(protocol) → MessagePass(node, msg, protocol) = (node', state')
 ```
@@ -160,7 +160,7 @@ Reliable(protocol) → MessagePass(node, msg, protocol) = (node', state')
 
 **定义 36.4 (协议状态)**:
 
-```
+```text
 ProtocolState = {
     Init,
     Established,
@@ -172,12 +172,12 @@ ProtocolState = {
 
 **定理 36.3 (协议正确性)**:
 
-```
+```text
 ∀protocol ∈ Protocol, state ∈ ProtocolState:
 ValidTransition(state, protocol) → Consistent(state, protocol)
 ```
 
-### 实现示例
+### 实现示例1
 
 ```rust
 // 网络通信协议实现
@@ -250,13 +250,13 @@ impl NetworkProtocol {
 
 **定义 36.5 (容错函数)**:
 
-```
+```text
 FaultTolerance: (System, Fault) → RecoveryAction
 ```
 
 **定理 36.4 (容错正确性)**:
 
-```
+```text
 ∀system ∈ DistributedSystem, fault ∈ Fault:
 FaultTolerance(system, fault) = action → 
   Recovered(system, action) ∧ Consistent(system)
@@ -266,19 +266,19 @@ FaultTolerance(system, fault) = action →
 
 **定义 36.6 (自愈策略)**:
 
-```
+```text
 SelfHealing: (Node, Failure) → RecoveryPlan
 ```
 
 **定理 36.5 (自愈有效性)**:
 
-```
+```text
 ∀node ∈ Node, failure ∈ Failure:
 SelfHealing(node, failure) = plan → 
   ∃t ∈ Time: Recovered(node, t) ∧ plan ⊆ RecoveryActions
 ```
 
-### 实现示例
+### 实现示例2
 
 ```rust
 // 故障恢复机制实现
@@ -374,13 +374,13 @@ impl FaultToleranceSystem {
 
 **定义 36.7 (分布式性能函数)**:
 
-```
+```text
 DistributedPerformance: (System, Workload) → PerformanceMetrics
 ```
 
 **定理 36.6 (性能可扩展性)**:
 
-```
+```text
 ∀system ∈ DistributedSystem, workload ∈ Workload:
 Scalable(system) → 
   Performance(system, workload) ∝ Resources(system)
@@ -390,19 +390,19 @@ Scalable(system) →
 
 **定义 36.8 (分布式安全函数)**:
 
-```
+```text
 DistributedSecurity: (System, Threat) → SecurityLevel
 ```
 
 **定理 36.7 (安全保证)**:
 
-```
+```text
 ∀system ∈ DistributedSystem, threat ∈ Threat:
 Secure(system, threat) → 
   ∀attack ∈ Attack: ¬Successful(attack, system)
 ```
 
-### 实现示例
+### 实现示例3
 
 ```rust
 // 性能与安全性分析实现
