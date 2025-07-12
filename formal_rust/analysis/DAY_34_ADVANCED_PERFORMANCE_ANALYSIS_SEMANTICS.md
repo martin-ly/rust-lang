@@ -1140,7 +1140,7 @@ impl PerformanceCache {
 
 **定理 34.5 (性能优化安全性)**:
 
-```
+```text
 ∀code ∈ Code, opt_ctx ∈ OptimizationContext:
 SafeOptimization(code, opt_ctx) ↔ 
   ∀execution: ValidExecution: 

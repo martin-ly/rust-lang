@@ -886,7 +886,7 @@ impl MacroCache {
 
 **定理 32.3 (元编程安全性)**:
 
-```
+```text
 ∀macro_def: MacroDefinition, ctx: SecurityContext:
 MP_Safe(macro_def, ctx) = Safe → 
   ∀input: ValidInput: Safe(expand(macro_def, input))

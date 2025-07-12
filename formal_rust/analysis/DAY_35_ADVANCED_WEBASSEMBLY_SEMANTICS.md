@@ -33,13 +33,13 @@
 
 **定义 35.1 (Wasm抽象机)**:
 
-```
+```text
 WasmVM: (Module, State) → State'
 ```
 
 **公理 35.1 (确定性执行)**:
 
-```
+```text
 ∀m ∈ Module, s ∈ State:
 WasmVM(m, s) = s' → ∄s'' ≠ s': WasmVM(m, s) = s''
 ```
@@ -48,13 +48,13 @@ WasmVM(m, s) = s' → ∄s'' ≠ s': WasmVM(m, s) = s''
 
 **定义 35.2 (语义映射函数)**:
 
-```
+```text
 SemMap: RustCode × MappingContext → WasmCode
 ```
 
 **定理 35.1 (语义等价性)**:
 
-```
+```text
 ∀rc ∈ RustCode, ctx ∈ MappingContext:
 Exec(Rust, rc, ctx) ≡ Exec(Wasm, SemMap(rc, ctx), ctx)
 ```
@@ -86,13 +86,13 @@ fn rust_to_wasm(rust_code: &RustCode, ctx: &MappingContext) -> WasmCode {
 
 **定义 35.3 (内存沙箱函数)**:
 
-```
+```text
 Sandbox: (Address, Access, Policy) → Result
 ```
 
 **定理 35.2 (内存安全性)**:
 
-```
+```text
 ∀addr ∈ Address, access ∈ Access, policy ∈ Policy:
 Sandbox(addr, access, policy) = Allow → Safe(addr, access)
 ```
@@ -118,13 +118,13 @@ fn sandbox_access(addr: usize, access: AccessType, policy: &SandboxPolicy) -> Re
 
 **定义 35.4 (类型映射)**:
 
-```
+```text
 TypeMap: RustType × MappingContext → WasmType
 ```
 
 **定理 35.3 (类型安全映射)**:
 
-```
+```text
 ∀rt ∈ RustType, ctx ∈ MappingContext:
 TypeSafe(rt) → TypeSafe(TypeMap(rt, ctx))
 ```
