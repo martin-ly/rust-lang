@@ -48,6 +48,11 @@
     - [11.1 学术论文](#111-学术论文)
     - [11.2 技术文档](#112-技术文档)
     - [11.3 在线资源](#113-在线资源)
+  - [附录：标准化补全区块](#附录标准化补全区块)
+  - [形式化定义](#形式化定义)
+  - [定理与证明](#定理与证明)
+  - [符号表](#符号表)
+  - [术语表](#术语表)
 
 ## 1. 引言
 
@@ -483,3 +488,66 @@ fn main() {
 1. Rust Ownership Visualization. <https://rustviz.github.io/>
 2. Rust Borrow Checker. <https://rustc-dev-guide.rust-lang.org/borrow_check.html>
 3. Rust Type System. <https://doc.rust-lang.org/reference/types.html>
+
+## 附录：标准化补全区块
+
+## 形式化定义
+
+- **所有权三元组**：
+  $$
+  \mathcal{O}_{\text{Rust}} = (\mathbb{V}, \mathbb{X}, Own)
+  $$
+  其中 $\mathbb{V}$ 为值集合，$\mathbb{X}$ 为变量集合，$Own$ 为所有权关系。
+- **所有权关系**：
+  $$
+  Own(x, v) \iff x \text{ 拥有值 } v
+  $$
+- **借用关系**：
+  $$
+  Borrow(r, x, \alpha) \iff r \text{ 在生命周期 } \alpha \text{ 内借用 } x
+  $$
+
+## 定理与证明
+
+- **定理 1（所有权唯一性）**：
+  $$
+  \forall v \in \mathbb{V}, \exists! x \in \mathbb{X}, Own(x, v)
+  $$
+  
+- **定理 2（借用安全性）**：
+  $$
+  \forall r, x, \alpha.\ Borrow(r, x, \alpha) \implies \text{NoDanglingRef}(r, \alpha)
+  $$
+  
+- **定理 3（生命周期有界性）**：
+  $$
+  \forall r, x, \alpha.\ Borrow(r, x, \alpha) \implies \text{Lifetime}(r) \subseteq \text{Lifetime}(x)
+  $$
+  
+- **证明思路**：
+  采用结构归纳法，分别对所有权转移、借用规则、生命周期推导进行归纳证明，详见[所有权系统形式化证明](06_theorems.md)。
+
+## 符号表
+
+| 符号         | 含义           | 备注 |
+|--------------|----------------|------|
+| $\mathbb{V}$ | 值集合         | 见全局符号体系 |
+| $\mathbb{X}$ | 变量集合       |      |
+| $Own$        | 所有权关系     |      |
+| $Borrow$     | 借用关系       |      |
+| $\alpha$     | 生命周期       |      |
+| $\subseteq$  | 包含关系       | 生命周期包含 |
+| $\exists!$   | 存在唯一性     |      |
+
+## 术语表
+
+- **所有权（Ownership）**：变量对值的唯一占有关系。
+- **借用（Borrowing）**：在生命周期内对值的临时访问。
+- **生命周期（Lifetime）**：值或引用的有效作用域。
+- **悬垂引用（Dangling Reference）**：生命周期已结束但仍被访问的引用。
+- **所有权转移（Move）**：值的所有权从一个变量转移到另一个变量。
+- **不可变借用（Immutable Borrow）**：只读访问。
+- **可变借用（Mutable Borrow）**：可写访问，且同一时刻唯一。
+- **借用检查器（Borrow Checker）**：静态分析所有权与借用安全性的编译器组件。
+
+> 本区块为标准化模板，后续可根据实际内容补充详细证明、符号扩展与术语解释。
