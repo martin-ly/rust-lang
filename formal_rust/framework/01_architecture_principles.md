@@ -14,7 +14,7 @@
 
 ### 1.3.1 类型理论与架构设计
 
-**类型同构与架构等价性**
+**类型同构与架构等价性**:
 
 在Rust中，架构设计可以通过类型同构来形式化描述：
 
@@ -44,7 +44,7 @@ impl<A, B> ArchitectureEquivalence<A, B> {
 }
 ```
 
-**范畴论在架构中的应用**
+**范畴论在架构中的应用**:
 
 ```rust
 // 架构范畴定义
@@ -78,7 +78,7 @@ impl ArchitectureCategory for LayeredArchitecture {
 
 ### 1.3.2 代数结构与设计模式
 
-**设计模式的代数表示**
+**设计模式的代数表示**:
 
 ```rust
 // 设计模式的代数结构
@@ -118,6 +118,7 @@ impl DesignPatternAlgebra for FactoryPatternAlgebra {
 
 **定义1.1（分层架构）**
 分层架构是一个有序的层序列 L = (L₁, L₂, ..., Lₙ)，其中：
+
 - 每层 Lᵢ 是一个独立的模块
 - 层间关系满足传递性：Lᵢ → Lⱼ ∧ Lⱼ → Lₖ ⇒ Lᵢ → Lₖ
 - 禁止循环依赖：¬(Lᵢ → Lⱼ ∧ Lⱼ → Lᵢ)
@@ -168,6 +169,7 @@ impl LayeredArchitecture {
 
 **定理1.1（分层架构优化）**
 对于任意分层架构 L，存在最优分层 L*，使得：
+
 - 层间耦合度最小：min Σᵢⱼ coupling(Lᵢ, Lⱼ)
 - 层内内聚度最大：max Σᵢ cohesion(Lᵢ)
 - 满足所有约束条件
@@ -221,6 +223,7 @@ impl LayeredArchitecture {
 
 **定义1.2（六边形架构）**
 六边形架构是一个六元组 H = (C, P, A, I, O, D)，其中：
+
 - C：核心业务逻辑
 - P：端口集合
 - A：适配器集合
@@ -375,6 +378,7 @@ impl CleanArchitecture {
 
 **定理1.2（Clean Architecture最优性）**
 对于任意Clean Architecture C，存在最优结构 C*，使得：
+
 - 依赖复杂度最小：min Σᵢⱼ dependency_complexity(Lᵢ, Lⱼ)
 - 抽象层次最优：optimal_abstraction_levels(C*)
 - 测试友好性最大：max testability(C*)
@@ -415,12 +419,14 @@ impl CleanArchitecture {
 
 **定义1.3（限界上下文）**
 限界上下文是一个三元组 BC = (D, L, M)，其中：
+
 - D：领域对象集合
 - L：语言模型
 - M：映射关系
 
 **定义1.4（聚合根）**
 聚合根是一个四元组 AR = (E, I, C, R)，其中：
+
 - E：实体集合
 - I：不变性约束
 - C：一致性边界
@@ -718,11 +724,13 @@ impl ArchitectureTradeoff {
 
 **定理1.3（Rust架构局限性）**
 Rust的所有权系统在以下情况下可能限制架构设计：
+
 1. 复杂对象图的循环引用
 2. 动态多态性的实现
 3. 某些设计模式的直接实现
 
 **证明：**
+
 ```rust
 // 循环引用问题
 struct Node {
@@ -788,6 +796,7 @@ impl FutureArchitectureTrends {
 **Q: Rust项目如何选择合适的架构模式？**
 
 A: 基于形式化分析，建议：
+
 1. 使用分层架构验证工具确保无环性和传递性
 2. 通过代数结构验证设计模式的适用性
 3. 使用多目标优化进行架构决策
@@ -795,6 +804,7 @@ A: 基于形式化分析，建议：
 **Q: Rust适合哪些经典设计模式？**
 
 A: 通过数学证明，以下模式在Rust中表现良好：
+
 1. 工厂模式：类型安全的对象创建
 2. 观察者模式：通过trait实现解耦
 3. 策略模式：利用trait对象实现多态
