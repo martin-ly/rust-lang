@@ -8,13 +8,19 @@
 ---
 
 ## 章节导航
-1. [设计模式理论基础](#设计模式理论基础)
-2. [所有权系统对设计模式的影响](#所有权系统对设计模式的影响)
-3. [经典设计模式Rust实现](#经典设计模式rust实现)
-4. [所有权与生命周期下的变体](#所有权与生命周期下的变体)
-5. [工程案例与惯用法](#工程案例与惯用法)
-6. [形式化分析与定理](#形式化分析与定理)
-7. [交叉引用](#交叉引用)
+
+- [Rust 设计模式与所有权系统结合 {#设计模式}](#rust-设计模式与所有权系统结合-设计模式)
+  - [章节导航](#章节导航)
+  - [设计模式理论基础](#设计模式理论基础)
+  - [所有权系统对设计模式的影响](#所有权系统对设计模式的影响)
+  - [经典设计模式Rust实现](#经典设计模式rust实现)
+  - [所有权与生命周期下的变体](#所有权与生命周期下的变体)
+  - [工程案例与惯用法](#工程案例与惯用法)
+    - [1. 单例模式](#1-单例模式)
+    - [2. 观察者模式](#2-观察者模式)
+    - [3. 策略模式](#3-策略模式)
+  - [形式化分析与定理](#形式化分析与定理)
+  - [交叉引用](#交叉引用)
 
 ---
 
@@ -40,10 +46,10 @@
 
 - **单例（Singleton）**：OnceCell/Mutex静态全局。
 - **工厂（Factory）**：所有权转移，返回Box/Arc等。
-- **观察者（Observer）**：Rc<RefCell<T>>+Weak防止循环。
+- **观察者（Observer）**：`Rc<RefCell<T>>`+Weak防止循环。
 - **策略（Strategy）**：trait对象/泛型/闭包。
 - **命令（Command）**：FnBox/trait对象。
-- **装饰器（Decorator）**：Box<Trait>链式包装。
+- **装饰器（Decorator）**：`Box<Trait>`链式包装。
 - **组合（Composite）**：树结构+Box/Arc。
 
 ---
@@ -60,12 +66,14 @@
 ## 工程案例与惯用法
 
 ### 1. 单例模式
+
 ```rust
 use once_cell::sync::Lazy;
 static INSTANCE: Lazy<Mutex<Config>> = Lazy::new(|| Mutex::new(Config::default()));
 ```
 
 ### 2. 观察者模式
+
 ```rust
 use std::rc::{Rc, Weak};
 use std::cell::RefCell;
@@ -73,6 +81,7 @@ struct Subject { observers: Vec<Weak<RefCell<Observer>>> }
 ```
 
 ### 3. 策略模式
+
 ```rust
 trait Strategy { fn execute(&self); }
 struct Context<S: Strategy> { strategy: S }
@@ -83,14 +92,19 @@ struct Context<S: Strategy> { strategy: S }
 ## 形式化分析与定理
 
 - **定理 4.1 (所有权安全性)**
+
   ```text
   Rust设计模式实现 ⊢ 无悬垂指针/内存泄漏/数据竞争
   ```
+
 - **定理 4.2 (生命周期一致性)**
+
   ```text
   生命周期参数保证引用安全，防止悬垂
   ```
+
 - **定理 4.3 (组合与变体安全性)**
+
   ```text
   智能指针+Drop+Weak组合可安全实现复杂结构
   ```
@@ -98,6 +112,7 @@ struct Context<S: Strategy> { strategy: S }
 ---
 
 ## 交叉引用
+
 - [资源管理模型](./01_resource_management.md)
 - [RAII模式应用](./02_raii_patterns.md)
 - [线性类型实践](./03_linear_types_practice.md)
@@ -108,4 +123,4 @@ struct Context<S: Strategy> { strategy: S }
 
 ---
 
-> 本文档为Rust设计模式与所有权系统结合的理论与工程索引，后续章节将递归细化各子主题。 
+> 本文档为Rust设计模式与所有权系统结合的理论与工程索引，后续章节将递归细化各子主题。
