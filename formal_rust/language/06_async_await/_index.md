@@ -1,33 +1,48 @@
 # C06. 异步编程 (Asynchronous Programming)
 
-本分册深入探讨 Rust 的异步编程模型，这是 Rust 解决高并发 I/O 密集型问题的核心武器。与 `c05_threads` 中讨论的基于线程的并发不同，异步编程允许在极少数的操作系统线程上管理成千上万的并发任务。
+## 模块简介
 
-## 核心哲学 (Core Philosophy)
+本模块系统梳理Rust异步编程的理论基础、核心机制与工程实践，涵盖async/await语法、Future状态机、Send/Sync约束、Pin与内存安全、运行时与执行模型、异步流、异步trait、生态工具与高级主题。通过所有权模型与类型系统的深度结合，Rust异步编程在编译期消除数据竞争，实现高性能、高安全的I/O密集型并发。模块强调理论与工程的结合，助力开发者实现高效、可验证的异步系统。
 
-1. **零成本抽象 (Zero-Cost Abstraction)**: `async/await` 语法在编译时被转换为高效的状态机，没有运行时的虚拟机或垃圾回收开销，性能接近手动优化的底层代码。
-2. **内存安全 (Memory Safety)**: 异步模型与 Rust 的所有权和借用系统深度集成。`Future` 的生命周期和 `Send`/`Sync` 约束在编译时就保证了异步任务的内存安全，消除了数据竞争。
-3. **运行时与语言分离**: Rust 语言本身只提供 `Future` Trait 和 `async/await` 语法等核心原语。具体的执行器 (Executor) 和运行时 (Runtime) 则由社区生态系统提供（如 `tokio`, `async-std`），允许用户根据场景选择最合适的执行策略。
-4. **协作式调度 (Cooperative Scheduling)**: Rust 的异步任务是协作式的。任务在遇到 `.await` 时会主动让出控制权，而不是被动地被操作系统抢占。这减少了不必要的上下文切换，提高了效率。
+## 章节导航
 
-## 章节目录
+1. [异步编程导论与哲学](./01_introduction_and_philosophy.md) —— Future, async/await, 状态机, Waker, 轮询模型
+2. [运行时与执行模型](./02_runtime_and_execution_model.md) —— Executor, Runtime, 任务调度, tokio vs async-std
+3. [Pinning与Unsafe基础](./03_pinning_and_unsafe_foundations.md) —— Pin<T>, Unpin, 自引用结构与内存固定
+4. [异步流 (Streams)](./04_streams_and_sinks.md) —— Stream Trait, 异步迭代器
+5. [异步Trait与生态](./05_async_in_traits_and_ecosystem.md) —— async-trait, 动态/静态分派
+6. [批判性分析与高级主题](./06_critical_analysis_and_advanced_topics.md) —— 函数颜色、架构兼容性、同步异步交互、设计权衡
 
-- **`01_introduction_and_philosophy.md`**: 异步编程导论与哲学
-  - *核心概念：`Future`, `async/await`, 状态机, `Waker`*
-  - *机制：轮询 (Polling) 模型*
-- **`02_runtime_and_execution_model.md`**: 运行时与执行模型
-  - *核心概念：执行器 (Executor), 运行时 (Runtime), 任务 (Task)*
-  - *机制：`tokio` vs `async-std`, 任务调度*
-- **`03_pinning_and_unsafe_foundations.md`**: Pinning 与 Unsafe 基础
-  - *核心概念：`Pin<T>`, `Unpin`*
-  - *机制：自引用结构与内存固定*
-- **`04_streams_and_sinks.md`**: 异步流 (Streams)
-  - *核心概念：`Stream` Trait*
-  - *机制：异步的迭代器*
-- **`05_async_in_traits_and_ecosystem.md`**: 异步 Trait 与生态
-  - *核心概念：`async-trait` crate*
-  - *机制：动态与静态分派下的异步 Trait*
-- **`06_critical_analysis_and_advanced_topics.md`**: 批判性分析与高级主题
-  - *核心概念：函数"颜色", 架构兼容性*
-  - *机制：与同步代码交互，设计权衡*
+## 学习目标
 
-<!-- LATER_CHAPTERS -->
+- 理解Rust异步编程的理论基础与状态机模型
+- 掌握async/await、Future、Pin、Send/Sync等核心机制
+- 能够分析和解决实际工程中的异步安全与性能问题
+- 熟悉主流异步运行时、生态工具与高级特性
+- 跟踪异步编程领域的前沿理论与工程创新
+
+## 前置知识
+
+- Rust基础语法与所有权模型
+- 变量、借用、生命周期等内存安全机制
+- 基本的并发与同步原语概念
+
+## 实践项目
+
+1. 实现高并发异步I/O服务器（tokio/async-std）
+2. 设计自定义Future与状态机
+3. 开发异步流处理与管道
+4. 实现Pin/Unpin安全的自引用结构
+5. 形式化验证异步任务的Send/Sync与内存安全
+
+## 交叉引用
+
+- [所有权与借用](../01_ownership_borrowing/)
+- [类型系统与Send/Sync](../02_type_system/)
+- [并发与同步原语](../05_concurrency/)
+- [分离逻辑与异步安全](../05_formal_verification/)
+- [生态工具链](../26_toolchain_ecosystem/)
+
+## 总结
+
+本模块为Rust异步编程与高性能并发系统开发提供理论与实践基础。通过深入理解async/await、Future、Pin、Send/Sync等机制，开发者可编写高效、安全、可验证的异步程序，为后续探索分布式、Serverless、异步生态等前沿领域打下坚实基础。
