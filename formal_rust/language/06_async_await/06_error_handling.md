@@ -33,8 +33,8 @@
 
 ## Result与Option在异步中的应用
 
-- **Result<T, E>**：主流异步API返回Result，支持?运算符链式传播。
-- **Option<T>**：用于可选异步结果。
+- **`Result<T, E>`**：主流异步API返回Result，支持?运算符链式传播。
+- **`Option<T>`**：用于可选异步结果。
 - **async/await与?**：支持在async fn中直接使用?传播错误。
 
 ---
