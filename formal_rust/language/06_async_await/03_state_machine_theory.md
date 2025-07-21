@@ -8,14 +8,20 @@
 ---
 
 ## 章节导航
-1. [引言：异步为何需要状态机](#引言)
-2. [状态机理论基础](#状态机理论基础)
-3. [CPS转换与编译器实现](#cps转换与编译器实现)
-4. [Rust异步状态机的结构与优化](#rust异步状态机的结构与优化)
-5. [形式化定义与定理](#形式化定义与定理)
-6. [工程案例与代码示例](#工程案例与代码示例)
-7. [批判性分析与未来展望](#批判性分析与未来展望)
-8. [交叉引用](#交叉引用)
+
+- [Rust 异步状态机原理与形式化分析 {#状态机理论}](#rust-异步状态机原理与形式化分析-状态机理论)
+  - [章节导航](#章节导航)
+  - [引言](#引言)
+  - [状态机理论基础](#状态机理论基础)
+  - [CPS转换与编译器实现](#cps转换与编译器实现)
+  - [Rust异步状态机的结构与优化](#rust异步状态机的结构与优化)
+  - [形式化定义与定理](#形式化定义与定理)
+  - [工程案例与代码示例](#工程案例与代码示例)
+    - [1. 简单异步函数的状态机展开](#1-简单异步函数的状态机展开)
+    - [2. 手动实现状态机](#2-手动实现状态机)
+    - [3. 状态机优化案例](#3-状态机优化案例)
+  - [批判性分析与未来展望](#批判性分析与未来展望)
+  - [交叉引用](#交叉引用)
 
 ---
 
@@ -32,6 +38,7 @@ Rust异步编程的核心在于将async/await代码编译为高效的有限状�
 - **状态保存**：跨.await存活的变量成为状态机字段。
 
 **形式化定义**：
+
 ```text
 StateMachine = (S, Σ, δ, s₀, F)
 S: 状态集合
@@ -62,6 +69,7 @@ F: 终止状态集合
 - **内存布局**：状态机大小=最大活跃变量集合+子Future大小。
 
 **示例结构**：
+
 ```rust
 enum ExampleState { Start, WaitingA, WaitingB, Done }
 struct ExampleFuture { state: ExampleState, a: Option<A>, b: Option<B>, ... }
@@ -72,18 +80,25 @@ struct ExampleFuture { state: ExampleState, a: Option<A>, b: Option<B>, ... }
 ## 形式化定义与定理
 
 - **定义 3.1 (异步状态机)**
+
   ```text
   S: State × Input → State × Poll<Output>
   ```
+
 - **定理 3.1 (状态机等价性)**
+
   ```text
   ∀async_fn. Compile(async_fn) ≡ StateMachine(async_fn)
   ```
+
 - **定理 3.2 (内存安全性)**
+
   ```text
   Pin<StateMachine> ∧ BorrowCheck ⊢ MemorySafe
   ```
+
 - **定理 3.3 (零成本抽象)**
+
   ```text
   Cost(async_state_machine) ≈ Cost(manual_state_machine)
   ```
@@ -93,6 +108,7 @@ struct ExampleFuture { state: ExampleState, a: Option<A>, b: Option<B>, ... }
 ## 工程案例与代码示例
 
 ### 1. 简单异步函数的状态机展开
+
 ```rust
 async fn add_async(a: i32, b: i32) -> i32 {
     let x = async_op(a).await;
@@ -105,6 +121,7 @@ struct AddAsyncFuture { state: AddAsyncState, x: Option<i32>, y: Option<i32>, ..
 ```
 
 ### 2. 手动实现状态机
+
 ```rust
 struct ManualFuture { state: u8, ... }
 impl Future for ManualFuture {
@@ -116,6 +133,7 @@ impl Future for ManualFuture {
 ```
 
 ### 3. 状态机优化案例
+
 - 只保存跨.await变量，避免冗余字段。
 - 合并无分支的状态，减少状态数。
 
@@ -130,6 +148,7 @@ impl Future for ManualFuture {
 ---
 
 ## 交叉引用
+
 - [Future与Pin机制](./01_formal_async_system.md)
 - [调度与执行器](./02_async_theory.md)
 - [类型系统与生命周期](../02_type_system/)
@@ -138,4 +157,4 @@ impl Future for ManualFuture {
 
 ---
 
-> 本文档为Rust异步状态机原理与CPS转换的形式化索引，后续章节将递归细化各子主题。 
+> 本文档为Rust异步状态机原理与CPS转换的形式化索引，后续章节将递归细化各子主题。

@@ -1,58 +1,37 @@
-# `c06_async` 模块术语表
+# Rust 异步编程术语表（Glossary）
 
-## 问答
+**模块编号**: 06-Glossary  
+**主题**: async/await核心术语与工程释义  
+**最后更新**: 2024-12-30  
+**维护者**: Rust形式化团队
 
-### `async`/`await`
+---
 
-- **定义**: Rust 用于编写异步代码的语法关键字。`async` 用于定义一个异步函数或代码块，它返回一个 `Future`。`await` 用于暂停一个 `async` 函数的执行，直到其等待的 `Future` 完成。
-- **关联章节**: `01_introduction_and_philosophy.md`
+| 术语         | 英文/缩写      | 定义/工程意义                                                                 | 交叉引用 |
+|--------------|---------------|------------------------------------------------------------------------------|----------|
+| 异步/await   | async/await    | Rust用于编写异步代码的语法，async定义异步函数/块，await等待Future完成         | 01_formal_async_system.md |
+| Future       | Future         | 表示可能尚未完成的异步计算，核心trait，poll驱动状态转移                      | 01_formal_async_system.md, 04_future_execution.md |
+| 状态机       | State Machine  | async/await编译为有限状态机，管理暂停/恢复点                                 | 03_state_machine_theory.md |
+| Pin          | Pin            | 智能指针，保证对象在内存中不被移动，防止自引用结构悬垂指针                    | 01_formal_async_system.md |
+| Unpin        | Unpin          | 自动trait，标记可安全移动的类型，大多数类型默认Unpin                         | 01_formal_async_system.md |
+| Waker        | Waker          | 唤醒器，通知执行器某Future已准备好可继续poll                                  | 04_future_execution.md |
+| Context      | Context        | poll方法参数，封装Waker与任务上下文                                          | 04_future_execution.md |
+| Poll         | Poll           | poll方法返回值，Ready表示完成，Pending表示等待外部事件                        | 04_future_execution.md |
+| 执行器       | Executor       | 驱动Future的核心组件，负责任务调度与poll循环                                 | 05_runtime_system.md |
+| 运行时       | Runtime        | 提供执行器、I/O事件、定时器、线程池等异步环境                                | 05_runtime_system.md |
+| Stream       | Stream         | 异步迭代器trait，表示异步产生的值序列                                        | 08_concurrency_patterns.md |
+| 背压         | Backpressure   | 控制异步流/队列数据速率，防止内存膨胀                                        | 08_concurrency_patterns.md |
+| Actor模型    | Actor Model    | 并发模式，每个Actor独立任务，消息异步交互                                    | 08_concurrency_patterns.md |
+| Send/Sync    | Send/Sync      | trait，类型系统静态保证跨线程安全                                            | 08_concurrency_patterns.md |
+| async-trait  | async-trait    | 宏库，支持trait中定义async fn，自动转换为返回Future的普通函数                 | FAQ.md |
+| block_on     | block_on       | 同步阻塞等待异步Future完成，常用于main或测试                                 | FAQ.md |
+| spawn_blocking | spawn_blocking | 在异步任务中运行阻塞代码，防止阻塞执行器线程                                 | FAQ.md |
+| zero-copy    | Zero-Copy      | 性能优化技术，避免不必要的数据复制，直接在缓冲区操作                          | 07_performance_optimization.md |
+| 工作窃取     | Work Stealing  | 多线程任务调度算法，空闲线程可“窃取”他人任务                                 | 05_runtime_system.md |
+| 取消/超时    | Cancellation/Timeout | 通过select!、timeout等机制优雅终止/限制异步任务                             | 06_error_handling.md |
+| RAII         | RAII           | 资源获取即初始化，结合Drop确保异常/取消下资源安全释放                        | 06_error_handling.md |
+| 生态兼容     | Ecosystem Compatibility | 异步库/运行时间的互操作与迁移策略                                    | 09_ecosystem_integration.md |
 
-### `Future`
+---
 
-- **定义**: 一个 Trait，代表一个可以随时间推移而产生的值。这是 Rust 异步计算的核心抽象。`Future` 通过 `poll` 方法被驱动，直到产生一个最终值。
-- **关联章节**: `01_introduction_and_philosophy.md`, `03_pinning_and_unsafe_foundations.md`
-
-### 运行时 (Runtime)
-
-- **定义**: 一个库，提供了执行异步代码所需的服务。它包含一个或多个执行器、一个 I/O 事件反应器（如 epoll, kqueue）、定时器以及任务调度逻辑。`tokio` 和 `async-std` 是最流行的运行时。
-- **关联章节**: `02_runtime_and_execution_model.md`
-
-### 执行器 (Executor)
-
-- **定义**: 运行时的核心组件，负责接收异步任务（`Future`），并通过重复调用 `poll` 方法来驱动它们直至完成。
-- **关联章节**: `02_runtime_and_execution_model.md`
-
-### `Pin<T>`
-
-- **定义**: 一个智能指针，用于"固定"一个对象在内存中的位置，防止其被移动。这对于安全地处理自引用结构至关重要，而自引用结构是 `async`/`await` 状态机的常见实现方式。
-- **关联章节**: `03_pinning_and_unsafe_foundations.md`
-
-### `Unpin`
-
-- **定义**: 一个自动 Trait，用于标记那些即使被 `Pin` 包裹也可以安全移动的类型。绝大多数 Rust 类型都是 `Unpin` 的。如果一个类型不是 `Unpin`，它通常是自引用的。
-- **关联章节**: `03_pinning_and_unsafe_foundations.md`
-
-### `Stream`
-
-- **定义**: 一个 Trait，代表一个异步的值序列。它是 `Iterator` 的异步等价物。
-- **关联章节**: `04_streams_and_sinks.md`
-
-### `Sink`
-
-- **定义**: 一个 Trait，代表一个可以异步接收值的地方。它是 `Stream` 的对偶概念，用于异步写入数据。
-- **关联章节**: `04_streams_and_sinks.md`
-
-### 函数颜色 (Function Coloring)
-
-- **定义**: 一个描述编程语言中 `async` 和 `sync` 函数之间交互限制的术语。它指出了 `async` 代码倾向于"病毒式"传播，以及 `async`/`sync` 边界处需要谨慎处理的架构问题。
-- **关联章节**: `06_critical_analysis_and_advanced_topics.md`
-
-### `Waker`
-
-- **定义**: 一个由执行器提供给 `Future` 的句柄。当一个 `Future` 在 `poll` 时返回 `Poll::Pending`，它必须存储这个 `Waker`。当 `Future` 准备好再次被轮询时（例如，一个 I/O 事件已发生），它会调用 `waker.wake()` 来通知执行器。
-- **关联章节**: `01_introduction_and_philosophy.md`, `02_runtime_and_execution_model.md`
-
-### `async-trait`
-
-- **定义**: 一个流行的第三方 crate，它通过宏提供了在 Trait 中使用 `async fn` 的能力。它通过将 `Future` 包装在 `Box<dyn Future>` 中来实现对象安全。
-- **关联章节**: `05_async_in_traits_and_ecosystem.md`
+> 本术语表系统梳理Rust异步编程核心概念，便于理论学习与工程查阅，后续将递归细化各专题。
