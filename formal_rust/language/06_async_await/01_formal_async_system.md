@@ -8,14 +8,23 @@
 ---
 
 ## 章节导航
-1. [引言：异步编程的动因与挑战](#引言)
-2. [核心理论与形式化定义](#核心理论与形式化定义)
-3. [状态机与CPS转换](#状态机与cps转换)
-4. [执行器与运行时分层](#执行器与运行时分层)
-5. [Pin机制与内存安全](#pin机制与内存安全)
-6. [工程实现与代码示例](#工程实现与代码示例)
-7. [批判性分析与未来展望](#批判性分析与未来展望)
-8. [思维导图与交叉引用](#思维导图与交叉引用)
+
+- [Rust 异步编程形式化与工程基础 {#异步编程概述}](#rust-异步编程形式化与工程基础-异步编程概述)
+  - [章节导航](#章节导航)
+  - [引言](#引言)
+  - [核心理论与形式化定义](#核心理论与形式化定义)
+    - [1. Future与异步函数的形式化](#1-future与异步函数的形式化)
+    - [2. 理论基础与定理](#2-理论基础与定理)
+  - [状态机与CPS转换](#状态机与cps转换)
+  - [执行器与运行时分层](#执行器与运行时分层)
+  - [Pin机制与内存安全](#pin机制与内存安全)
+  - [工程实现与代码示例](#工程实现与代码示例)
+    - [1. 基本异步函数与状态机](#1-基本异步函数与状态机)
+    - [2. 手动实现Future与状态机](#2-手动实现future与状态机)
+    - [3. Tokio并发任务示例](#3-tokio并发任务示例)
+    - [4. Stream与背压](#4-stream与背压)
+  - [批判性分析与未来展望](#批判性分析与未来展望)
+  - [思维导图与交叉引用](#思维导图与交叉引用)
 
 ---
 
@@ -28,34 +37,46 @@ Rust异步编程以零成本抽象、内存安全和高性能为目标，解决�
 ## 核心理论与形式化定义
 
 ### 1. Future与异步函数的形式化
+
 - **定义 1.1 (Future类型)**
+
   ```rust
   trait Future {
       type Output;
       fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
   }
   ```
+
 - **定义 1.2 (异步函数语法糖)**
+
   ```text
   async fn f(x: T) -> U ≡ fn f(x: T) -> impl Future<Output = U>
   ```
+
 - **定义 1.3 (状态机转换)**
+
   ```text
   S: State × Input → State × Poll<Output>
   ```
 
 ### 2. 理论基础与定理
+
 - **单子理论**：Future满足结合律，可安全组合。
 - **CPS与状态机**：async/await基于CPS转换，编译为有限状态机。
 - **定理 1.1 (零成本抽象)**
+
   ```text
   Cost(async_code) ≤ Cost(equivalent_manual_state_machine) + O(1)
   ```
+
 - **定理 1.2 (内存安全性)**
+
   ```text
   ∀ async_fn. BorrowCheck(async_fn) ⊢ MemorySafe(async_fn)
   ```
+
 - **定理 1.3 (组合安全性)**
+
   ```text
   Future<A> × (A → Future<B>) → Future<B>  [单子结合律]
   ```
@@ -68,10 +89,12 @@ Rust异步编程以零成本抽象、内存安全和高性能为目标，解决�
 - 每个.await点为状态机的一个暂停点，poll方法驱动状态转移。
 - 状态机的字段仅保存跨.await存活的变量，极大优化内存占用。
 - 形式化：
+
   ```text
   enum State { Start, WaitingX, WaitingY, Done }
   struct StateMachine { state: State, ... }
   ```
+
 - CPS（连续传递样式）理论支撑异步控制流的暂停与恢复。
 
 ---
@@ -87,12 +110,14 @@ Rust异步编程以零成本抽象、内存安全和高性能为目标，解决�
 
 ## Pin机制与内存安全
 
-- **Pin<T>**：保证自引用状态机在内存中不被移动，防止悬垂指针。
+- **`Pin<T>`**：保证自引用状态机在内存中不被移动，防止悬垂指针。
 - **Unpin**：标记可安全移动的类型。
 - **定理 2.1 (Pin安全性)**
+
   ```text
   Pin<T> ⇒ ∀引用有效，内存安全
   ```
+
 - **工程意义**：async状态机常含自引用，Pin机制是Rust异步安全的基石。
 - **底层unsafe**：Pin的实现与状态机投影需底层unsafe，但对用户透明。
 
@@ -101,6 +126,7 @@ Rust异步编程以零成本抽象、内存安全和高性能为目标，解决�
 ## 工程实现与代码示例
 
 ### 1. 基本异步函数与状态机
+
 ```rust
 async fn fetch_data(url: &str) -> Result<String, Error> {
     let response = client.get(url).send().await?;
@@ -110,6 +136,7 @@ async fn fetch_data(url: &str) -> Result<String, Error> {
 ```
 
 ### 2. 手动实现Future与状态机
+
 ```rust
 struct ReadyFuture<T>(T);
 impl<T> Future for ReadyFuture<T> {
@@ -121,6 +148,7 @@ impl<T> Future for ReadyFuture<T> {
 ```
 
 ### 3. Tokio并发任务示例
+
 ```rust
 #[tokio::main]
 async fn main() {
@@ -132,6 +160,7 @@ async fn main() {
 ```
 
 ### 4. Stream与背压
+
 ```rust
 use futures::stream::StreamExt;
 async fn process_stream<S: futures::Stream<Item = i32> + Unpin>(mut s: S) {
@@ -164,6 +193,7 @@ Rust异步编程
 ```
 
 **交叉引用**：
+
 - [类型系统与Trait](../02_type_system/)
 - [并发与调度](../05_concurrency/)
 - [内存模型与安全](../04_memory_model/)
