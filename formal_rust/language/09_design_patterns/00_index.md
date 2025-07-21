@@ -497,6 +497,7 @@ AI在设计模式中的应用挑战：
 ## 生态工具与工程集成
 
 ### 主流设计模式工具链
+
 - **derive宏/属性宏**：自动生成样板代码（如Builder、Singleton、Visitor等）
 - **typetag、dyn-clone等crate**：trait对象与多态支持
 - **async-trait、futures、tokio**：异步/并发模式集成
@@ -504,6 +505,7 @@ AI在设计模式中的应用挑战：
 - **cargo-expand**：宏展开与模式调试
 
 ### 工程集成实践
+
 - 建议为核心设计模式编写属性测试与集成测试，结合CI自动化保障兼容性
 - 复杂模式建议trait抽象，便于mock与测试
 - 设计模式相关代码建议分crate独立维护，便于安全隔离与依赖管理
@@ -511,6 +513,7 @@ AI在设计模式中的应用挑战：
 ## 复杂工程案例
 
 ### 智能策略模式与动态切换
+
 ```rust
 // 结合trait对象与宏实现可热插拔的策略模式
 trait CompressionStrategy { fn compress(&self, data: &[u8]) -> Vec<u8>; }
@@ -522,6 +525,7 @@ impl Compressor { fn set_strategy(&mut self, s: Box<dyn CompressionStrategy>) { 
 ```
 
 ### 类型状态模式与API安全
+
 ```rust
 // 用PhantomData编码状态，编译期保证API调用顺序
 struct Connected; struct Disconnected;
@@ -533,14 +537,17 @@ impl Connection<Connected> { fn send(&self, data: &[u8]) { /* ... */ } }
 ## 形式化证明补充
 
 ### 设计模式组合性归纳证明
+
 - 归纳基：单一模式的类型安全由trait/泛型/生命周期保证
 - 归纳步：模式组合的类型安全由约束传递性递归保证
 
 ### 零成本抽象自动化分析
+
 - 可结合cargo-expand、静态分析工具自动检测模式引入的运行时开销
 - 未来可结合SAT/SMT工具自动验证复杂模式组合的安全性
 
 ## 批判性分析与未来展望（补充）
+
 - 设计模式生态工具链、自动化测试、静态分析将持续完善
 - 未来可探索AI驱动模式识别、自动重构、跨平台模式互操作等新方向
 - 设计模式与云原生、微服务、嵌入式等领域深度融合将成为主流
