@@ -68,3 +68,27 @@
 1. Bertot, Y., & Castéran, P. (2013). Interactive Theorem Proving and Program Development: Coq’Art. Springer.
 2. Nipkow, T., Paulson, L. C., & Wenzel, M. (2002). Isabelle/HOL: A Proof Assistant for Higher-Order Logic. Springer.
 3. Jung, R., Jourdan, J. H., Krebbers, R., & Dreyer, D. (2017). RustBelt: Securing the foundations of the Rust programming language. POPL 2018.
+
+## 7. 递归迭代补充：机械化证明的前沿与工程实践
+
+### 7.1 理论细化与新趋势
+
+- **高阶自动化与交互式证明结合**：未来机械化证明将递归融合自动化与交互式证明，提升大规模系统验证的效率与可扩展性。
+- **证明脚本与策略语言**：递归发展更强的证明脚本与策略语言（如Ltac、Lean tactic），支持复杂证明的自动化与复用。
+- **证明对象的可移植性与互操作性**：递归推动不同定理证明器间的证明对象互操作，促进Rust生态多工具协同。
+
+### 7.2 自动化流程与工程案例
+
+- **RustBelt的Coq/Iris自动化证明**：递归利用Coq/Iris对Rust类型系统、所有权、trait等进行自动化建模与证明，形成可复用的证明库。
+- **Polonius的Datalog自动化验证**：递归用Datalog规则自动化验证借用检查的正确性，提升编译器安全性。
+- **标准库与异步/并发组件的自动化验证**：递归扩展自动化证明到异步、并发、FFI等Rust生态关键组件。
+
+### 7.3 未来挑战与研究展望
+
+- **大规模系统的递归自动化证明**：如何递归提升自动化证明工具的性能与可扩展性，支持工业级Rust项目的全流程验证。
+- **证明与代码的同步演化**：递归解决代码变更与证明同步更新的工程难题，推动证明驱动开发。
+- **多工具协同与生态集成**：递归集成Coq、Lean、Isabelle、Datalog等多种工具，形成Rust生态的自动化验证闭环。
+
+---
+
+> **递归补充说明**：本节内容将持续迭代完善，欢迎结合实际工程案例、最新学术成果递交补充，推动Rust机械化证明体系不断进化。

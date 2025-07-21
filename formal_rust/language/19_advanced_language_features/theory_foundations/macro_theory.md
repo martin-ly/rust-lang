@@ -1,25 +1,43 @@
-# 宏系统理论
+# 宏系统理论（形式化补充）
 
-## 1. 声明式宏与过程宏
+## 1. 宏语法与展开
 
-- 声明式宏：模式匹配、重复展开、卫生宏
-- 过程宏：TokenStream转换、派生宏、属性宏
+- 声明宏：$\text{MacroRules}: \text{Pattern} \to \text{Expansion}$
+- 过程宏：$\text{ProcMacro}: \text{TokenStream} \to \text{TokenStream}$
 
-## 2. 宏展开与语义保持
+## 2. 卫生性与作用域
 
-- 宏展开的语法树变换与语义等价性
+- 卫生性：$\forall m \in \mathcal{M}: \text{hygienic}(m)$
+- 作用域隔离：宏展开自动重命名，防止污染外部作用域。
 
-## 3. 工程案例
+## 3. 类型安全与宏生成代码
 
-```rust
-// 声明式宏示例
-macro_rules! vec_of_strings {
-    ($($x:expr),*) => { vec![$($x.to_string()),*] };
-}
-// 过程宏示例见syn/quote用法
-```
+- 宏生成代码需通过类型系统检查。
+- 定理：$\forall m, e. \text{hygienic}(m) \implies \text{TypeSafe}(\text{expand}(e, m))$
 
-## 4. 批判性分析与未来展望
+## 4. 关键定理与证明
 
-- 宏系统提升元编程能力，但调试与可视化需加强
-- 未来可探索宏展开可视化与IDE集成
+**定理1（宏卫生性）**:
+> Rust宏系统保证标识符唯一性，避免名称冲突。
+
+**证明思路**：
+
+- 展开时自动重命名内部标识符。
+
+**定理2（宏展开类型安全）**:
+> 宏展开后代码类型安全。
+
+**证明思路**：
+
+- 宏生成代码需通过编译期类型检查。
+
+**定理3（宏展开语义等价）**:
+> 宏展开保持程序语义等价。
+
+**证明思路**：
+
+- $\llbracket P \rrbracket = \llbracket \text{expand}(P, M) \rrbracket$
+
+## 5. 参考文献
+
+- Rust Reference, Rust RFC Book, Hygiene论文, TAPL

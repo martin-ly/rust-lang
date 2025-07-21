@@ -1,21 +1,84 @@
-# 库设计实践
+# 库设计实践（形式化补充）
 
-## 1. API设计与泛型trait
+## 1. 形式化接口与类型安全
 
-- 类型安全API、trait抽象、泛型约束
+- trait接口：$\text{trait } T \{ ... \}$
+- 泛型与GAT接口：$\text{type } A<P>: C$
+- 类型安全定理：$\forall f \in \mathcal{F}: \text{type\_safe}(f)$
 
-## 2. 宏与元编程
+## 1.1 类型推导规则与trait bound
 
-- 派生宏、属性宏、自动代码生成
+- trait实现类型推导：
+  - $\Gamma \vdash T: \text{Trait}$
+  - $\Gamma \vdash \text{impl Trait for T}$
+- GAT类型推导：
+  - $\Gamma \vdash T::A<P>: \kappa$
 
-## 3. 工程案例
+## 2. 零成本抽象
+
+- 定理：$\forall f \in \mathcal{F}: \text{zero\_cost}(f)$
+- 编译器优化消除抽象层，无运行时开销
+
+## 2.1 零成本抽象归纳证明链条
+
+- 对所有trait对象、泛型、GAT实例归纳展开，编译器单态化与优化保证无运行时开销
+
+## 3. 工程伪代码
 
 ```rust
-// 类型安全API设计
-pub trait Repository<T> { fn save(&self, t: T); }
+// trait接口
+trait Service {
+    fn call(&self, req: Request) -> Response;
+}
+
+// GAT接口
+trait Streaming {
+    type Item<'a> where Self: 'a;
+    fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
+}
 ```
 
-## 4. 批判性分析与未来展望
+## 3.1 工程伪代码与类型安全映射
 
-- 库设计提升复用性，但泛型复杂度与文档需加强
-- 未来可探索API自动化文档与测试生成
+```rust
+// trait接口与泛型
+trait Repository<T> {
+    fn save(&self, t: T);
+}
+
+// GAT接口
+trait Streaming {
+    type Item<'a> where Self: 'a;
+    fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
+}
+
+// trait对象零成本抽象
+fn process<T: Repository<i32>>(repo: &T) {
+    repo.save(42);
+}
+```
+
+## 3.2 类型安全与零成本抽象的工程归纳
+
+- trait/GAT接口类型安全由编译器静态检查
+- 零成本抽象由单态化与优化自动保证
+
+## 4. 关键定理与证明
+
+**定理1（接口类型安全）**:
+> 只要trait接口类型安全，所有实现均类型安全。
+
+**证明思路**：
+
+- trait bound和泛型约束静态检查。
+
+**定理2（零成本抽象）**:
+> trait对象、泛型、GAT等均可零成本展开。
+
+**证明思路**：
+
+- 编译器单态化与优化。
+
+## 5. 参考文献
+
+- Rust Reference, RustBelt, TAPL

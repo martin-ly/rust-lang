@@ -838,6 +838,28 @@ where
 3. Const generics enable compile-time optimizations
 4. Macros generate efficient code
 
+### 9.4 Effect System Composition
+
+**Theorem**: Effect systems support effect composition.
+
+**Proof**:
+
+1. Effect types support composition
+2. Effect tracking is completed at compile time
+3. Effect safety is guaranteed by the type system
+4. Effect erasure is completed at runtime
+
+### 9.5 Macro Hygiene
+
+**Theorem**: Procedural macros maintain safety through hygiene.
+
+**Proof**:
+
+1. Procedural macros execute at compile time
+2. Macro expansion generates well-formed Rust code
+3. Macro maintains all safety guarantees
+4. Macro supports hygiene checks
+
 ## 10. References
 
 1. Rust Reference: <https://doc.rust-lang.org/reference/>

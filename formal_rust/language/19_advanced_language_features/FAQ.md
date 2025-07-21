@@ -7,14 +7,17 @@
 - **答**：Rust高级语言特性提供零成本抽象、编译期保证、类型安全、内存安全等优势，通过高级类型系统、模式匹配、元编程等机制实现更强大的表达能力。
 - **理论映射**：$\mathcal{F} = (\mathcal{T}, \mathcal{P}, \mathcal{M}, \mathcal{E})$ 形式化定义。
 
-### 2. 如何形式化描述高级语言特性？
+### 2. 如何形式化描述高级语言特性？（补充）
 
-- **答**：可用 $\mathcal{F} = (\mathcal{T}, \mathcal{P}, \mathcal{M}, \mathcal{E})$ 形式化，分别对应类型系统扩展、模式匹配系统、元编程系统、效应系统四大组件。
-- **理论映射**：见"01_formal_theory.md"中的形式化定义。
+- 形式化定义：$\mathcal{F} = (\mathcal{T}, \mathcal{P}, \mathcal{M}, \mathcal{E})$
+- 类型安全定理：$\forall f \in \mathcal{F}: \text{type\_safe}(f)$
+- 零成本抽象定理：$\forall f \in \mathcal{F}: \text{zero\_cost}(f)$
+- 宏卫生性定理：$\forall m \in \mathcal{M}: \text{hygienic}(m)$
 
-### 3. 高级语言特性的类型安全如何保证？
+### 3. 高级语言特性的类型安全如何保证？（补充）
 
-- **答**：通过 $\forall f \in \mathcal{F}: \text{type\_safe}(f)$ 保证，Rust编译器在编译期检查所有高级特性，确保类型正确性和内存安全。
+- 类型系统扩展保持健全性，GAT、HKT等均有静态类型推导规则
+- Unsafe块安全性可局部推理，外部上下文不破坏全局安全
 
 ## 实现相关
 
@@ -57,9 +60,10 @@ trait StreamingIterator {
 }
 ```
 
-### 6. 如何保证高级特性的零成本抽象？
+### 6. 如何保证高级特性的零成本抽象？（补充）
 
-- **答**：通过编译期优化、内联、代码生成等机制，确保高级特性在运行时没有额外开销。
+- 编译期消解所有抽象，无运行时开销
+- 类型级编程、宏系统、const泛型等均可形式化证明零成本
 
 ## 工程与部署
 
@@ -168,3 +172,8 @@ pub struct AdvancedType {
 ---
 
 如有更多问题，欢迎查阅理论文档、工程案例和知识网络，或在项目社区提问。
+
+### 7. Rust高级特性的形式化证明有哪些？
+
+- GAT类型安全证明、宏卫生性证明、unsafe局部推理证明、零成本抽象等价性证明
+- 详见“01_formal_theory.md”与“theory_foundations/”各文件

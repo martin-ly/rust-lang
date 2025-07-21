@@ -47,6 +47,7 @@ $$\forall x \in I. A(x) \in O \land P(x, A(x))$$
 $$M = (S, s_0, T)$$
 
 其中：
+
 - $S$ 是状态空间
 - $s_0 \in S$ 是初始状态
 - $T: S \rightarrow S$ 是状态转换函数
@@ -73,11 +74,13 @@ $$a_{\pi(1)} \leq a_{\pi(2)} \leq \cdots \leq a_{\pi(n)}$$
 **定义 3.2** (快速排序): 快速排序是一种分治排序算法，基于选择pivot元素进行分区。
 
 **算法描述**:
+
 1. 选择pivot元素 $p$
 2. 分区：将小于p的元素放在左边，大于p的元素放在右边
 3. 递归排序左右两部分
 
 **Rust实现**:
+
 ```rust
 fn quicksort<T: Ord>(arr: &mut [T]) {
     if arr.len() <= 1 {
@@ -114,11 +117,13 @@ fn partition<T: Ord>(arr: &mut [T]) -> usize {
 **定义 3.3** (归并排序): 归并排序是一种分治排序算法，将数组分为两半，递归排序后合并。
 
 **算法描述**:
+
 1. 将数组分为两半
 2. 递归排序两半
 3. 合并两个有序数组
 
 **Rust实现**:
+
 ```rust
 fn merge_sort<T: Ord + Clone>(arr: &mut [T]) {
     if arr.len() <= 1 {
@@ -179,12 +184,14 @@ fn merge<T: Ord + Clone>(arr: &mut [T], left: &[T], right: &[T]) {
 **定义 4.2** (二分搜索): 二分搜索是一种在有序数组中查找目标值的算法。
 
 **算法描述**:
+
 1. 比较目标值与中间元素
 2. 如果相等，返回位置
 3. 如果目标值小于中间元素，在左半部分搜索
 4. 如果目标值大于中间元素，在右半部分搜索
 
 **Rust实现**:
+
 ```rust
 fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
     let mut left = 0;
@@ -213,6 +220,7 @@ fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
 **定义 4.3** (线性搜索): 线性搜索是逐个检查数组元素直到找到目标值。
 
 **Rust实现**:
+
 ```rust
 fn linear_search<T: PartialEq>(arr: &[T], target: &T) -> Option<usize> {
     for (i, item) in arr.iter().enumerate() {
@@ -231,12 +239,14 @@ fn linear_search<T: PartialEq>(arr: &[T], target: &T) -> Option<usize> {
 ### 5.1 图的基本定义
 
 **定义 5.1** (图): 图G是一个二元组 $G = (V, E)$，其中：
+
 - $V$ 是顶点集合
 - $E \subseteq V \times V$ 是边集合
 
 **定义 5.2** (邻接表表示): 图的邻接表表示是一个映射 $adj: V \rightarrow 2^V$，其中 $adj(v)$ 表示与顶点v相邻的顶点集合。
 
 **Rust实现**:
+
 ```rust
 use std::collections::HashMap;
 
@@ -266,12 +276,14 @@ impl Graph {
 **定义 5.3** (广度优先搜索): BFS是一种图遍历算法，从起始顶点开始，逐层访问相邻顶点。
 
 **算法描述**:
+
 1. 将起始顶点加入队列
 2. 从队列中取出顶点，访问其所有未访问的邻居
 3. 将未访问的邻居加入队列
 4. 重复步骤2-3直到队列为空
 
 **Rust实现**:
+
 ```rust
 use std::collections::{HashMap, VecDeque};
 
@@ -306,11 +318,13 @@ fn bfs(graph: &Graph, start: usize) -> HashMap<usize, usize> {
 **定义 5.4** (深度优先搜索): DFS是一种图遍历算法，沿着图的边尽可能深入。
 
 **算法描述**:
+
 1. 从起始顶点开始
 2. 选择一个未访问的邻居，递归访问
 3. 当没有未访问的邻居时，回溯
 
 **Rust实现**:
+
 ```rust
 fn dfs(graph: &Graph, start: usize) -> Vec<usize> {
     let mut visited = HashSet::new();
@@ -344,6 +358,7 @@ fn dfs(graph: &Graph, start: usize) -> Vec<usize> {
 **定义 5.5** (最短路径): 给定带权图G和起始顶点s，最短路径问题是找到从s到所有其他顶点的最短路径。
 
 **Dijkstra算法描述**:
+
 1. 初始化距离数组，起始顶点距离为0，其他为无穷大
 2. 选择距离最小的未访问顶点u
 3. 更新u的所有邻居的距离
@@ -351,6 +366,7 @@ fn dfs(graph: &Graph, start: usize) -> Vec<usize> {
 5. 重复步骤2-4直到所有顶点都被访问
 
 **Rust实现**:
+
 ```rust
 use std::collections::BinaryHeap;
 use std::cmp::Reverse;
@@ -390,6 +406,7 @@ fn dijkstra(graph: &Graph, start: usize) -> HashMap<usize, usize> {
 **定义 6.1** (最大公约数): 两个整数a和b的最大公约数gcd(a,b)是能同时整除a和b的最大正整数。
 
 **欧几里得算法**:
+
 ```rust
 fn gcd(mut a: u64, mut b: u64) -> u64 {
     while b != 0 {
@@ -410,6 +427,7 @@ fn gcd(mut a: u64, mut b: u64) -> u64 {
 **定义 6.2** (素数): 大于1的整数p是素数，当且仅当p的正因子只有1和p本身。
 
 **Miller-Rabin素性测试**:
+
 ```rust
 fn is_prime(n: u64) -> bool {
     if n < 2 {
@@ -493,6 +511,7 @@ fn mod_pow(mut base: u64, mut exp: u64, modulus: u64) -> u64 {
 **定义 7.2** (KMP算法): KMP算法是一种高效的字符串匹配算法，利用模式的前缀函数避免不必要的比较。
 
 **前缀函数计算**:
+
 ```rust
 fn compute_prefix_function(pattern: &str) -> Vec<usize> {
     let pattern_bytes = pattern.as_bytes();
@@ -516,6 +535,7 @@ fn compute_prefix_function(pattern: &str) -> Vec<usize> {
 ```
 
 **KMP匹配**:
+
 ```rust
 fn kmp_search(text: &str, pattern: &str) -> Vec<usize> {
     let text_bytes = text.as_bytes();
@@ -560,6 +580,7 @@ fn kmp_search(text: &str, pattern: &str) -> Vec<usize> {
 **定义 8.3** (并行归约): 并行归约是将数组元素通过二元操作组合成单个值的过程。
 
 **Rust实现**:
+
 ```rust
 use rayon::prelude::*;
 
@@ -579,6 +600,7 @@ fn parallel_reduce<T: Send + Sync + Copy>(
 ### 8.3 并行排序
 
 **并行归并排序**:
+
 ```rust
 fn parallel_merge_sort<T: Ord + Send + Sync + Clone>(arr: &mut [T]) {
     if arr.len() <= 1 {
@@ -616,11 +638,13 @@ $$\frac{\Gamma \vdash \text{arr}: \text{Array}[T] \quad T: \text{Ord}}{\Gamma \v
 ### 9.3 不变量
 
 **排序不变量**:
+
 1. 排序后数组长度不变
 2. 排序后数组是有序的
 3. 排序后数组包含原数组的所有元素
 
 **搜索不变量**:
+
 1. 搜索在有效范围内进行
 2. 搜索返回正确的位置或None
 3. 搜索不会修改原数组
@@ -632,6 +656,7 @@ $$\frac{\Gamma \vdash \text{arr}: \text{Array}[T] \quad T: \text{Ord}}{\Gamma \v
 **定理 10.1** (快速排序正确性): 快速排序算法正确地对数组进行排序。
 
 **证明**:
+
 1. **终止性**: 每次递归调用处理更小的子数组，最终达到基本情况
 2. **正确性**: 通过数学归纳法证明，假设对大小为n-1的数组正确，证明对大小为n的数组也正确
 3. **完整性**: 所有元素都被处理，没有遗漏
@@ -641,6 +666,7 @@ $$\frac{\Gamma \vdash \text{arr}: \text{Array}[T] \quad T: \text{Ord}}{\Gamma \v
 **定理 10.2** (二分搜索正确性): 二分搜索算法在有序数组中正确找到目标元素。
 
 **证明**:
+
 1. **不变性**: 目标元素（如果存在）始终在搜索范围内
 2. **终止性**: 搜索范围每次减半，最终变为空
 3. **正确性**: 当找到目标元素时，返回正确位置；当搜索范围为空时，返回None
@@ -650,6 +676,7 @@ $$\frac{\Gamma \vdash \text{arr}: \text{Array}[T] \quad T: \text{Ord}}{\Gamma \v
 **定理 10.3** (Dijkstra算法正确性): Dijkstra算法正确计算最短路径。
 
 **证明**:
+
 1. **不变性**: 已访问顶点的距离是最短距离
 2. **终止性**: 所有顶点最终被访问
 3. **正确性**: 通过反证法证明，假设存在更短路径，导出矛盾
@@ -662,4 +689,4 @@ $$\frac{\Gamma \vdash \text{arr}: \text{Array}[T] \quad T: \text{Ord}}{\Gamma \v
 4. String Matching Algorithms - KMP and Boyer-Moore
 5. Parallel Algorithms - PRAM Model and Complexity
 6. Rust Programming Language - Algorithm Implementation
-7. Formal Methods in Algorithm Design - Correctness Proofs 
+7. Formal Methods in Algorithm Design - Correctness Proofs
