@@ -8,7 +8,7 @@
 
 1. [异步编程导论与哲学](./01_introduction_and_philosophy.md) —— Future, async/await, 状态机, Waker, 轮询模型
 2. [运行时与执行模型](./02_runtime_and_execution_model.md) —— Executor, Runtime, 任务调度, tokio vs async-std
-3. [Pinning与Unsafe基础](./03_pinning_and_unsafe_foundations.md) —— Pin<T>, Unpin, 自引用结构与内存固定
+3. [Pinning与Unsafe基础](./03_pinning_and_unsafe_foundations.md) —— `Pin<T>`, Unpin, 自引用结构与内存固定
 4. [异步流 (Streams)](./04_streams_and_sinks.md) —— Stream Trait, 异步迭代器
 5. [异步Trait与生态](./05_async_in_traits_and_ecosystem.md) —— async-trait, 动态/静态分派
 6. [批判性分析与高级主题](./06_critical_analysis_and_advanced_topics.md) —— 函数颜色、架构兼容性、同步异步交互、设计权衡

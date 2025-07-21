@@ -19,6 +19,7 @@
 - **健全性（Soundness）**：类型系统的规则能够保证类型安全。
 
 > **形式化定义**：
+>
 > - 若 $\Gamma \vdash e : T$，则 $e$ 要么是值，要么存在 $e'$ 使得 $e \rightarrow e'$（进展性）。
 > - 若 $\Gamma \vdash e : T$ 且 $e \rightarrow e'$，则 $\Gamma \vdash e' : T$（保持性）。
 
@@ -28,6 +29,7 @@
 - **保持定理（Preservation）**：良类型的程序每一步求值后，类型保持不变。
 
 > **定理表述**：
+>
 > - $\forall e, T, \Gamma.\ \Gamma \vdash e : T \implies (\text{isValue}(e) \lor \exists e'.\ e \rightarrow e')$
 > - $\forall e, e', T, \Gamma.\ \Gamma \vdash e : T \land e \rightarrow e' \implies \Gamma \vdash e' : T$
 
