@@ -1,12 +1,49 @@
-# 第 2 章：Rust 类型系统
+# 02 类型系统
 
-本章深入探讨 Rust 类型系统的核心概念、理论基础与工程实践。从基本类型结构到高级类型特性，再到其背后的形式化理论，我们将全面解析 Rust 如何利用其强大的类型系统来保证安全、性能与代码表现力。
+## 模块简介
 
-## 目录
+本模块系统梳理Rust类型系统的理论基础、核心机制与工程实践，涵盖类型结构、类型推断、安全性、泛型与Trait、型变、类型转换等。通过理论分析、代码示例与工程案例，帮助读者全面掌握Rust类型系统的安全性与表现力。
 
-- [01. 导论与设计哲学](./01_introduction_and_philosophy.md)
-- [02. 基础概念](./02_fundamental_concepts.md)
-- [03. 类型安全与推断](./03_type_safety_and_inference.md)
-- [04. 泛型与 Trait](./04_generics_and_traits.md)
-- [05. 类型转换与强制](./05_type_casting_and_coercion.md)
-- [06. 型变 (Variance)](./06_variance.md)
+## 章节导航
+
+1. [导论与设计哲学](./01_introduction_and_philosophy.md)
+2. [基础概念](./02_fundamental_concepts.md)
+3. [类型安全与推断](./03_type_safety_and_inference.md)
+4. [泛型与Trait](./04_generics_and_traits.md)
+5. [类型转换与强制](./05_type_casting_and_coercion.md)
+6. [型变 (Variance)](./06_variance.md)
+7. [FAQ 常见问题解答](./FAQ.md)
+8. [术语表 Glossary](./Glossary.md)
+
+## 学习目标
+
+- 理解Rust类型系统的理论基础与设计哲学
+- 掌握类型推断、类型安全、泛型与Trait等核心机制
+- 能够分析和解决实际工程中的类型安全与表达力问题
+- 熟悉Rust类型系统的型变、类型转换等高级特性
+- 跟踪类型系统的前沿理论与工程创新
+
+## 前置知识
+
+- Rust基础语法与所有权模型
+- 变量、借用、生命周期等内存安全机制
+- 基本的泛型与Trait概念
+
+## 实践项目
+
+1. 实现类型安全的数据结构与算法
+2. 设计多态与泛型API
+3. 分析和优化类型推断复杂函数
+4. 利用Trait对象实现动态分发
+5. 形式化验证小型Rust类型系统的安全性
+
+## 交叉引用
+
+- [所有权与借用](../01_ownership_borrowing/)
+- [错误处理与控制流](../03_control_flow/)
+- [并发与异步编程](../05_concurrency/)
+- [设计模式与工程案例](../09_design_patterns/)
+
+## 总结
+
+本模块为Rust类型安全体系的理论与实践基础。通过深入理解类型系统、泛型与Trait等机制，开发者可编写高效、安全、表现力强的系统级代码，为后续学习高级特性和工程应用打下坚实基础。
