@@ -63,7 +63,7 @@ trait AsyncStream {
 }
 ```
 
-**形式化模型1: GAT语义代数**
+**形式化模型1: GAT语义代数**:
 
 ```mathematical
 GAT语义空间定义:
@@ -165,7 +165,7 @@ async fn compute_chunk<const N: usize>(
 }
 ```
 
-**形式化模型2: 特性协同效应矩阵**
+**形式化模型2: 特性协同效应矩阵**:
 
 ```mathematical
 协同效应矩阵 S:
@@ -311,7 +311,7 @@ enum TradingError {
 
 #### 25.1 Rust语言路线图预测分析
 
-**形式化模型3: 技术扩散预测模型**
+**形式化模型3: 技术扩散预测模型**:
 
 ```mathematical
 技术采用扩散模型:
