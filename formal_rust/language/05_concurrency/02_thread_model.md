@@ -30,7 +30,9 @@
 
 **定义 3.1** (线程)
 线程定义为：
-$$\text{Thread}(id, \text{state}) = \text{struct}\{\text{id}: \text{ThreadId}, \text{state}: \text{ThreadState}, \text{stack}: \text{Stack}, \text{registers}: \text{Registers}, \text{context}: \text{ThreadContext}\}$$
+$$
+\text{Thread}(id, \text{state}) = \text{struct}\{\text{id}: \text{ThreadId}, \text{state}: \text{ThreadState}, \text{stack}: \text{Stack}, \text{registers}: \text{Registers}, \text{context}: \text{ThreadContext}\}
+$$
 
 **定义 3.2** (线程ID)
 线程ID定义为：

@@ -36,6 +36,7 @@ The concurrency system embodies the philosophical tension between **sharing** an
 - **Coordination**: Threads must coordinate to maintain consistency
 
 **Philosophical Questions:**
+
 - What does it mean for data to be "shared" between threads?
 - How do we understand the relationship between local and global state?
 - What are the ethical implications of concurrent resource access?
@@ -59,6 +60,7 @@ A thread can be formalized as a **sequential process**:
 ```
 
 Where:
+
 - `State` is the thread's local state
 - `Program` is the sequence of instructions to execute
 - `Environment` is the shared environment accessible to the thread
@@ -72,6 +74,7 @@ Rust's memory model is based on **C11 memory model** with additional guarantees:
 ```
 
 **Formal Properties:**
+
 1. **Sequential Consistency**: Single-threaded execution appears sequential
 2. **Data Race Freedom**: No undefined behavior from conflicting accesses
 3. **Atomic Operations**: Atomic operations provide synchronization guarantees
@@ -85,6 +88,7 @@ The ownership system extends to concurrent contexts:
 ```
 
 Where:
+
 - `Unique(T)` - Only one thread can access the data
 - `Shared(T)` - Multiple threads can access the data safely
 - `Atomic(T)` - Atomic operations provide synchronization
@@ -104,6 +108,7 @@ struct ThreadState {
 ```
 
 **State Transition Function:**
+
 ```math
 \delta : \text{ThreadState} \times \text{Instruction} \rightarrow \text{ThreadState}
 ```
@@ -120,6 +125,7 @@ struct SharedMemory {
 ```
 
 **Memory Operations:**
+
 1. **Read**: `read(addr) \rightarrow value`
 2. **Write**: `write(addr, value) \rightarrow unit`
 3. **Atomic**: `atomic_cas(addr, expected, new) \rightarrow bool`
@@ -133,6 +139,7 @@ Synchronization primitives implement **coordination protocols**:
 ```
 
 **Formal Semantics:**
+
 ```math
 \text{lock}(m) \equiv \text{acquire}(m) \land \text{exclusive\_access}(m)
 ```
@@ -151,6 +158,7 @@ let handle = thread::spawn(|| {
 ```
 
 **Mathematical Interpretation:**
+
 - `thread::spawn` creates a new **concurrent process**
 - The closure represents the **thread function**
 - The handle represents a **future result**
@@ -168,6 +176,7 @@ let counter = Mutex::new(0);
 ```
 
 **Formal Semantics:**
+
 ```math
 \text{mutex\_lock}(m) \rightarrow \text{exclusive\_access}(m)
 \text{mutex\_unlock}(m) \rightarrow \text{release}(m)
@@ -183,6 +192,7 @@ counter.fetch_add(1, Ordering::SeqCst);
 ```
 
 **Atomicity Guarantee:**
+
 ```math
 \text{atomic}(op) \equiv \text{appears\_to\_happen\_instantaneously}(op)
 ```
@@ -198,6 +208,7 @@ let value = rx.recv().unwrap();
 ```
 
 **Channel Semantics:**
+
 ```math
 \text{send}(ch, msg) \equiv \text{transfer\_ownership}(msg, ch)
 \text{recv}(ch) \equiv \text{acquire\_ownership}(ch)
@@ -230,6 +241,7 @@ let value = rx.recv().unwrap();
 **Theorem**: Rust's type system prevents data races.
 
 **Proof Sketch:**
+
 1. All shared data must be `Sync`
 2. `Sync` requires safe concurrent access
 3. Compiler enforces these constraints at compile time
@@ -240,6 +252,7 @@ let value = rx.recv().unwrap();
 **Theorem**: Concurrent programs maintain memory safety.
 
 **Proof Sketch:**
+
 1. Ownership system prevents use-after-free
 2. Borrow checker prevents dangling references
 3. Thread safety traits ensure safe sharing
@@ -250,6 +263,7 @@ let value = rx.recv().unwrap();
 **Theorem**: Rust's type system cannot prevent all deadlocks.
 
 **Proof Sketch:**
+
 1. Deadlocks are a runtime property
 2. Type system operates at compile time
 3. Some deadlock patterns are undecidable
@@ -281,6 +295,7 @@ for handle in handles {
 ```
 
 **Mathematical Semantics:**
+
 ```math
 \text{counter} : \text{Arc}(\text{Mutex}(\text{usize}))
 \text{increment} : \text{counter} \rightarrow \text{unit}
@@ -308,6 +323,7 @@ let consumer = thread::spawn(move || {
 ```
 
 **Channel Semantics:**
+
 ```math
 \text{channel} : \text{Sender}(T) \times \text{Receiver}(T)
 \text{send} : \text{Sender}(T) \times T \rightarrow \text{Result}
@@ -331,6 +347,7 @@ for i in 0..3 {
 ```
 
 **ARC Semantics:**
+
 ```math
 \text{Arc}(T) = \text{Atomic}(\text{Reference}(\text{Count}(T)))
 \text{clone} : \text{Arc}(T) \rightarrow \text{Arc}(T)
@@ -344,6 +361,7 @@ for i in 0..3 {
 **Theorem**: If `T: Send`, then `T` can be transferred between threads.
 
 **Proof**:
+
 1. `Send` trait requires safe transfer
 2. Transfer involves moving ownership
 3. Moving ownership is safe for `Send` types
@@ -352,6 +370,7 @@ for i in 0..3 {
 **Theorem**: If `T: Sync`, then `&T` can be shared between threads.
 
 **Proof**:
+
 1. `Sync` trait requires safe sharing
 2. Sharing involves multiple references
 3. Multiple references are safe for `Sync` types
@@ -362,6 +381,7 @@ for i in 0..3 {
 **Theorem**: Mutex provides mutual exclusion.
 
 **Proof**:
+
 1. Mutex has two states: locked and unlocked
 2. Only one thread can hold the lock at a time
 3. Lock acquisition is atomic
@@ -372,6 +392,7 @@ for i in 0..3 {
 **Theorem**: Channels provide safe message passing.
 
 **Proof**:
+
 1. Sender transfers ownership of data
 2. Receiver acquires ownership of data
 3. No shared state between sender and receiver
@@ -382,6 +403,7 @@ for i in 0..3 {
 **Theorem**: Atomic operations are linearizable.
 
 **Proof**:
+
 1. Atomic operations appear to happen instantaneously
 2. No other thread can observe intermediate states
 3. Operations are totally ordered
@@ -405,4 +427,4 @@ for i in 0..3 {
 
 ---
 
-*This document represents the formal mathematical foundation of Rust's concurrency and threading system, providing rigorous definitions, proofs, and semantic models for understanding and implementing safe concurrent programs in Rust.* 
+*This document represents the formal mathematical foundation of Rust's concurrency and threading system, providing rigorous definitions, proofs, and semantic models for understanding and implementing safe concurrent programs in Rust.*
