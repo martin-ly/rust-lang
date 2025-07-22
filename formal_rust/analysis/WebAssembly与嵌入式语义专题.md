@@ -89,9 +89,6 @@ pub extern "C" fn get_element(arr_ptr: *const u32, len: usize, idx: usize) -> u3
 
 // 工程实践：使用wasm-bindgen或官方工具链生成的Wasm模块，自动保证边界安全
 // 自动化验证平台可检测未加边界检查的Wasm访问路径
-```
-
----
 
 ## 2. 生命周期与内存安全
 

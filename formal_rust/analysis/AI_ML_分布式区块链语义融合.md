@@ -54,6 +54,61 @@ THEOREM ConsensusSafety ==
 
 ---
 
+## 2.1 分布式一致性定理递归细化
+
+### 定理5：分布式一致性协议安全性（Distributed Consensus Safety Theorem）
+>
+> Rust实现的分布式协议（如Raft）保证在任意网络分区和节点失效下全局状态一致性，无双主。
+
+#### 形式化表述（TLA+片段）
+
+```tla
+THEOREM ConsensusSafety ==
+  \A history : Consensus(history) => NoTwoLeaders(history)
+```
+
+#### Rust工程代码示例：Raft协议核心
+
+```rust
+use std::collections::HashMap;
+
+struct LogEntry { term: u64, command: String }
+struct RaftNode {
+    id: u64,
+    term: u64,
+    log: Vec<LogEntry>,
+    state: NodeState,
+}
+
+enum NodeState { Follower, Candidate, Leader }
+
+impl RaftNode {
+    fn append_entry(&mut self, entry: LogEntry) {
+        self.log.push(entry);
+    }
+    fn become_leader(&mut self) {
+        self.state = NodeState::Leader;
+    }
+    // ... 选主、日志复制等核心逻辑 ...
+}
+```
+
+#### 反例2
+
+- 网络分区未正确处理心跳超时，导致脑裂（两个节点都认为自己是Leader）
+
+#### 自动化测试脚本（Rust伪实现）
+
+```rust
+fn test_no_two_leaders(cluster: &mut [RaftNode]) {
+    // 模拟网络分区、节点失效
+    // 检查同一时刻是否有多个Leader
+    let leaders = cluster.iter().filter(|n| matches!(n.state, NodeState::Leader)).count();
+    assert!(leaders <= 1, "Consensus violated: multiple leaders!");
+}
+
+---
+
 ## 3. 区块链智能合约安全定理
 
 ### 定理3：智能合约类型安全性（Smart Contract Type Safety）
@@ -70,9 +125,54 @@ fn transfer(state: &mut ContractState, amount: u64) {
 }
 ```
 
-#### 反例2
+#### 反例3
 
 - 未正确检查余额导致溢出或未授权转账
+
+---
+
+## 3.1 智能合约安全定理递归细化
+
+### 定理6：智能合约类型安全性（Smart Contract Type Safety Theorem）
+>
+> Rust类型系统保证智能合约状态机的类型安全与生命周期一致性，防止未授权操作和溢出。
+
+#### Rust工程代码示例：安全转账合约
+
+```rust
+struct ContractState { balance: u64 }
+
+fn transfer(state: &mut ContractState, amount: u64) -> Result<(), &'static str> {
+    if state.balance < amount {
+        return Err("Insufficient balance");
+    }
+    state.balance = state.balance.checked_sub(amount).ok_or("Overflow")?;
+    Ok(())
+}
+
+fn main() {
+    let mut state = ContractState { balance: 100 };
+    assert!(transfer(&mut state, 50).is_ok());
+    assert!(transfer(&mut state, 100).is_err());
+}
+```
+
+#### 反例4
+
+- 未正确检查余额或溢出，导致未授权转账或panic
+
+#### 自动化检测脚本（Rust伪实现）
+
+```rust
+fn check_contract_safety(state: &ContractState, amount: u64) {
+    if state.balance < amount {
+        println!("Transfer denied: insufficient balance");
+    }
+    if state.balance.checked_sub(amount).is_none() {
+        println!("Transfer denied: overflow detected");
+    }
+}
+```
 
 ---
 
@@ -120,7 +220,7 @@ fn detect_drift(model: &Model, input1: &Tensor, input2: &Tensor) -> bool {
 }
 ```
 
-#### 反例3
+#### 反例5
 
 - 模型参数更新后未同步，导致同一输入分布下推理结果不一致
 

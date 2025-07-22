@@ -86,3 +86,45 @@ def ai_batch_theorem_verification(codebase):
 - AI生成定理未通过验证，自动归档为反例节点，供后续分析与改进
 
 ---
+
+## 5.2 知识图谱自动演化递归细化
+
+### 自动化依赖分析与可视化
+
+- Rust实现知识图谱节点依赖分析，自动发现高阶定理与跨领域联系
+- 可视化展示定理、证明、反例、工程案例的依赖网络
+
+#### Rust工程代码示例：知识图谱依赖分析
+
+```rust
+struct TheoremNode {
+    id: String,
+    dependencies: Vec<String>,
+}
+
+fn analyze_dependencies(nodes: &[TheoremNode]) {
+    for node in nodes {
+        println!("{} depends on: {:?}", node.id, node.dependencies);
+    }
+}
+```
+
+#### 反例1
+
+- 依赖分析遗漏导致知识图谱部分节点不可追溯
+
+---
+
+### Rust工程代码示例：AI批量生成与验证定理
+
+```rust
+fn ai_batch_theorem_verification(codebase: &str) {
+    let candidates = ai_model::suggest_theorems(codebase);
+    for thm in candidates {
+        let result = formal_verify(&thm);
+        knowledge_graph::add(&thm, result);
+    }
+}
+```
+
+---

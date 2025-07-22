@@ -120,24 +120,46 @@ Theorem async_ffi_lifetime_safety : forall cb data,
 #### 工程代码1
 
 ```rust
-extern "C" fn callback(ptr: *const u8);
-fn register_callback(cb: extern "C" fn(*const u8)) {
-    let data = Box::new([1u8, 2, 3]);
-    cb(Box::into_raw(data)); // 所有权转移，生命周期覆盖回调
+use std::ffi::c_void;
+use std::ptr;
+
+// C侧回调类型
+type Callback = extern "C" fn(*const u8, usize, *mut c_void);
+
+// 注册回调，Rust侧转移所有权，保证生命周期覆盖回调
+fn register_callback(cb: Callback, user_data: *mut c_void) {
+    let data = Box::new([1u8, 2, 3, 4]);
+    let ptr = Box::into_raw(data);
+    unsafe {
+        cb(ptr as *const u8, 4, user_data);
+        // 回调后回收内存，假设C侧约定回调后不再使用指针
+        let _ = Box::from_raw(ptr);
+    }
+}
+
+// C侧伪回调实现
+extern "C" fn c_callback(ptr: *const u8, len: usize, _user_data: *mut c_void) {
+    let slice = unsafe { std::slice::from_raw_parts(ptr, len) };
+    println!("C callback received: {:?}", slice);
+}
+
+fn main() {
+    register_callback(c_callback, ptr::null_mut());
 }
 ```
 
-#### 反例
+### 反例：生命周期未覆盖导致悬垂指针
 
-- 直接传递局部变量指针到异步回调，生命周期未覆盖，导致悬垂指针
-
-#### 自动化检测脚本（伪Python）
-
-```python
-def check_async_ffi_lifetime(code):
-    for cb, data in extract_async_callbacks(code):
-        if not lifetime_covers_callback(data, cb):
-            report_violation(cb, data)
+```rust
+fn register_callback_wrong(cb: Callback, user_data: *mut c_void) {
+    let data = [1u8, 2, 3, 4];
+    let ptr = data.as_ptr();
+    unsafe {
+        cb(ptr, 4, user_data); // data生命周期结束后ptr悬垂
+    }
+}
 ```
+
+// 工程实践：推荐所有权转移（Box::into_raw）或Arc/Mutex等安全封装，避免局部变量指针传递到异步FFI
 
 ---
