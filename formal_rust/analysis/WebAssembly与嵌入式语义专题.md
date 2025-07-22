@@ -20,13 +20,86 @@ Theorem wasm_type_preservation : forall e T,
 
 ---
 
+## 1.1 Wasm边界检查定理递归细化
+
+### 定理4：Wasm边界检查安全性（Wasm Boundary Check Safety）
+>
+> Rust到Wasm的编译保证所有内存访问都在合法边界内，防止越界访问。
+
+#### 形式化表述1（伪Coq）
+
+```coq
+Theorem wasm_memory_safety : forall e addr,
+  rust_to_wasm(e) ->
+  0 <= addr < wasm_memory_size ->
+  safe_access(e, addr).
+```
+
+#### 证明思路
+
+- Rust编译器在生成Wasm时插入边界检查指令
+- 所有数组/指针访问都自动加上边界校验
+- 结合生命周期分析，防止悬垂指针和未初始化内存访问
+
+#### 工程实现
+
+- 使用wasm-bindgen生成的Wasm模块，自动插入边界检查
+- 运行时遇到越界访问自动trap，防止内存破坏
+
+#### 反例
+
+- 手写Wasm模块绕过边界检查，导致内存越界
+- 自动化验证平台检测到未加边界检查的访问路径，报告安全漏洞
+
+#### 自动化验证脚本（伪Python）
+
+```python
+def check_wasm_bounds(wasm_module):
+    for access in wasm_module.memory_accesses:
+        if not access.has_bounds_check:
+            report_violation(access)
+```
+
+---
+
+## 1.1.1 Rust到Wasm的边界检查代码示例
+
+### Rust到Wasm的边界检查代码示例
+
+```rust
+// Rust代码，编译到Wasm后自动插入边界检查
+#[no_mangle]
+pub extern "C" fn get_element(arr_ptr: *const u32, len: usize, idx: usize) -> u32 {
+    let arr = unsafe { std::slice::from_raw_parts(arr_ptr, len) };
+    // 自动插入边界检查：idx < len
+    arr[idx]
+}
+```
+
+// 编译为Wasm后，arr[idx]会自动生成边界检查指令，越界时trap
+
+### 反例：绕过边界检查导致内存越界
+
+```wasm
+;; 手写Wasm模块，未加边界检查
+(func $get (param $ptr i32) (param $idx i32) (result i32)
+  (i32.load (i32.add (get_local $ptr) (get_local $idx))))
+;; 可能导致任意内存访问
+```
+
+// 工程实践：使用wasm-bindgen或官方工具链生成的Wasm模块，自动保证边界安全
+// 自动化验证平台可检测未加边界检查的Wasm访问路径
+```
+
+---
+
 ## 2. 生命周期与内存安全
 
 ### 定理2：生命周期安全性（Lifetime Safety in Wasm）
 
 Rust生命周期分析保证Wasm模块无悬垂指针和内存泄漏。
 
-#### 反例
+#### 反例1
 
 - 代码示例：
 
@@ -65,7 +138,7 @@ impl<'a> Led<'a> {
 
 - 生命周期参数确保外设寄存器不会悬垂
 
-#### 反例1
+#### 反例2
 
 - 裸指针直接操作外设，生命周期未受控，易导致悬垂或数据竞争
 
