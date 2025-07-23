@@ -941,6 +941,7 @@ Rust宏系统在编程语言理论中的重要贡献：
 ---
 
 ## 自动化验证脚本
+
 ```rust
 // 宏卫生性检测工具伪代码
 macro_rules! hygienic_macro {
@@ -950,6 +951,7 @@ macro_rules! hygienic_macro {
 ```
 
 ## 工程案例
+
 ```rust
 // 标准库derive宏
 #[derive(Debug, Clone)]
@@ -963,6 +965,7 @@ macro_rules! platform {
 ```
 
 ## 典型反例
+
 ```rust
 // 非卫生宏反例
 macro_rules! bad_macro {

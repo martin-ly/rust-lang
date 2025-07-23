@@ -878,3 +878,42 @@ Rust函数调用语义的关键优化保证：
 - 上游理论：类型系统、trait、生命周期
 - 下游理论：错误处理、异步调用、性能优化
 - 交叉节点：trait对象、ABI、宏系统
+
+---
+
+## 自动化验证脚本
+```rust
+// Rust自动化测试：ABI一致性
+#[no_mangle]
+pub extern "C" fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+fn main() {
+    let result = unsafe { add(1, 2) };
+    assert_eq!(result, 3);
+}
+```
+
+## 工程案例
+```rust
+// 标准库函数调用与尾调用优化
+fn factorial(n: u64) -> u64 {
+    fn inner(n: u64, acc: u64) -> u64 {
+        if n == 0 { acc } else { inner(n - 1, acc * n) }
+    }
+    inner(n, 1)
+}
+
+let res = factorial(5); // 120
+```
+
+## 典型反例
+```rust
+// ABI不一致反例
+#[no_mangle]
+pub extern "C" fn bad_add(a: i32, b: i32) -> i64 {
+    (a + b) as i64
+}
+// error: 调用方和被调用方ABI不一致，可能导致未定义行为
+```
