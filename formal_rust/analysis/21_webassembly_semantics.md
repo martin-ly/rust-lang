@@ -576,7 +576,6 @@ pub enum CompilationError {
     FunctionCompilationError(String),
     OptimizationError(String),
 }
-```
 
 ---
 
@@ -620,3 +619,17 @@ $$\text{optimization\_correct}(optimization) \iff \text{semantics\_preserving}(o
 - 创新贡献: 4项原创理论
 - 跨平台完整性: 全面的WASM语义
 - 实用价值: 直接指导WASM工具链
+
+---
+
+## 相关文档推荐
+- [19_ffi_interop_semantics.md] FFI与WebAssembly集成
+- [15_memory_layout_semantics.md] 内存模型与Wasm安全
+- [23_ai_ml_semantics.md] AI/ML与Wasm应用
+- [22_distributed_systems_semantics.md] 分布式系统与Wasm
+
+## 知识网络节点
+- 所属层级：应用语义层-WebAssembly分支
+- 上游理论：FFI、内存布局、分布式系统
+- 下游理论：AI/ML应用、性能优化、跨平台安全
+- 交叉节点：FFI、分布式系统、AI/ML
