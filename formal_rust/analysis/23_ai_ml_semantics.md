@@ -575,3 +575,40 @@ impl ModelMetrics {
 - 上游理论：WebAssembly、FFI、分布式系统
 - 下游理论：分布式AI、性能优化、形式化验证
 - 交叉节点：WebAssembly、FFI、分布式系统
+
+## 自动化验证脚本
+```rust
+// Rust自动化测试：AI模型输入输出一致性
+fn check_model_output(input: &[f32], expected: &[f32]) {
+    let output = my_model_infer(input);
+    assert_eq!(output, expected);
+}
+
+fn my_model_infer(input: &[f32]) -> Vec<f32> {
+    input.iter().map(|x| x * 2.0).collect()
+}
+```
+
+## 工程案例
+
+```rust
+// tch-rs调用PyTorch模型
+use tch::{CModule, Tensor};
+
+let model = CModule::load("model.pt").unwrap();
+let input = Tensor::of_slice(&[1.0, 2.0, 3.0]);
+let output = model.forward_ts(&[input]).unwrap();
+```
+
+## 典型反例
+
+```rust
+// AI模型漂移反例
+fn main() {
+    let input = vec![1.0, 2.0, 3.0];
+    let output1 = my_model_infer(&input);
+    // ...模型参数被意外修改...
+    let output2 = my_model_infer(&input);
+    assert_eq!(output1, output2); // 断言失败，模型漂移
+}
+```

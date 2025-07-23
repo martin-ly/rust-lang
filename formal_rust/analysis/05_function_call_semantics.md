@@ -882,6 +882,7 @@ Rust函数调用语义的关键优化保证：
 ---
 
 ## 自动化验证脚本
+
 ```rust
 // Rust自动化测试：ABI一致性
 #[no_mangle]
@@ -896,6 +897,7 @@ fn main() {
 ```
 
 ## 工程案例
+
 ```rust
 // 标准库函数调用与尾调用优化
 fn factorial(n: u64) -> u64 {
@@ -909,6 +911,7 @@ let res = factorial(5); // 120
 ```
 
 ## 典型反例
+
 ```rust
 // ABI不一致反例
 #[no_mangle]

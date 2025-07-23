@@ -336,3 +336,58 @@ $$\forall op \in \text{UnsafeOp}. \text{consistent}(op, \text{RustMemoryModel})$
 - 上游理论：内存布局、并发原语、错误处理
 - 下游理论：FFI安全、性能优化、工程实践
 - 交叉节点：panic机制、原子操作、C ABI
+
+---
+
+## 自动化验证脚本
+```rust
+// Miri自动化检测：未定义行为
+fn main() {
+    unsafe {
+        let ptr = 0x12345usize as *const i32;
+        // Miri会检测到未定义行为
+        // let _val = *ptr;
+    }
+}
+```
+
+## 工程案例
+```rust
+// 标准库unsafe trait与FFI边界
+unsafe trait MyUnsafeTrait {
+    unsafe fn dangerous(&self);
+}
+
+unsafe impl MyUnsafeTrait for i32 {
+    unsafe fn dangerous(&self) {
+        println!("dangerous: {}", self);
+    }
+}
+
+extern "C" {
+    fn abs(input: i32) -> i32;
+}
+
+unsafe {
+    let x = abs(-3);
+    println!("abs(-3) = {}", x);
+}
+```
+
+## 典型反例
+```rust
+// 未初始化内存反例
+fn main() {
+    let x: i32;
+    // println!("{}", x); // error: 使用未初始化内存，未定义行为
+}
+
+// FFI类型不匹配反例
+extern "C" {
+    fn bad(input: f64) -> i32;
+}
+unsafe {
+    // 错误调用：传递了错误类型
+    // let _ = bad(42i32 as f64);
+}
+```

@@ -580,3 +580,52 @@ $$\text{exception\_safe}(ffi\_call) \iff \text{no\_unwind\_across\_boundary}(ffi
 - 上游理论：内存布局、Unsafe边界、模块系统
 - 下游理论：WebAssembly、分布式系统、AI/ML集成
 - 交叉节点：C ABI、模块系统、性能优化
+
+---
+
+## 自动化验证脚本
+```rust
+// Rust自动化测试：C ABI兼容性
+#[repr(C)]
+pub struct Point {
+    x: f64,
+    y: f64,
+}
+
+extern "C" {
+    fn process_point(p: *const Point);
+}
+
+fn main() {
+    let p = Point { x: 1.0, y: 2.0 };
+    unsafe { process_point(&p); }
+}
+```
+
+## 工程案例
+
+```rust
+// Rust与C互操作示例
+#[no_mangle]
+pub extern "C" fn rust_add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+// C代码：extern int rust_add(int, int);
+```
+
+## 典型反例
+
+```rust
+// FFI悬垂指针反例
+extern "C" {
+    fn take_str(s: *const u8);
+}
+
+fn main() {
+    let s = String::from("hello");
+    let ptr = s.as_ptr();
+    drop(s);
+    unsafe { take_str(ptr); } // error: ptr已悬垂
+}
+```

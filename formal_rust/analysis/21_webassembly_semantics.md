@@ -633,3 +633,37 @@ $$\text{optimization\_correct}(optimization) \iff \text{semantics\_preserving}(o
 - 上游理论：FFI、内存布局、分布式系统
 - 下游理论：AI/ML应用、性能优化、跨平台安全
 - 交叉节点：FFI、分布式系统、AI/ML
+
+---
+
+## 自动化验证脚本
+```rust
+// Rust自动化测试：Wasm类型安全
+#[no_mangle]
+pub extern "C" fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+// 编译为Wasm后可用wasm-bindgen-test等工具验证类型安全
+```
+
+## 工程案例
+
+```rust
+// wasm-bindgen导出Rust函数到JS
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+pub fn greet(name: &str) -> String {
+    format!("Hello, {}!", name)
+}
+```
+
+## 典型反例
+
+```rust
+// Wasm边界检查失效反例
+#[no_mangle]
+pub extern "C" fn get(arr: *const i32, idx: usize) -> i32 {
+    unsafe { *arr.add(idx) } // 若idx越界，Wasm运行时可能崩溃
+}
+```

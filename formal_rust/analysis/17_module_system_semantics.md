@@ -516,3 +516,44 @@ $$\text{macro\_visible}(m, context) \iff \text{macro\_scope}(m) \sqsupseteq \tex
 - 上游理论：类型系统、trait、宏系统
 - 下游理论：可见性规则、FFI集成、工程组织
 - 交叉节点：trait系统、宏系统、FFI
+
+---
+
+## 自动化验证脚本
+```rust
+// Rust自动化测试：模块可见性
+mod outer {
+    pub mod inner {
+        pub fn foo() -> i32 { 42 }
+    }
+}
+
+fn main() {
+    assert_eq!(outer::inner::foo(), 42);
+}
+```
+
+## 工程案例
+
+```rust
+// 标准库模块与可见性
+pub mod math {
+    pub fn add(a: i32, b: i32) -> i32 { a + b }
+}
+
+use math::add;
+let sum = add(1, 2);
+```
+
+## 典型反例
+
+```rust
+// 私有模块访问反例
+mod secret {
+    fn hidden() {}
+}
+
+fn main() {
+    // secret::hidden(); // error: function `hidden` is private
+}
+```
