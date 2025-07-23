@@ -53,3 +53,93 @@
 ## 交叉引用
 
 - 与边缘计算、数据管道、安全工程、云原生、配置管理等模块的接口与协同
+
+---
+
+## 深度扩展：理论阐释
+
+### 物联网体系结构与分层模型
+
+- 感知层、网络层、平台层、应用层分工明确。
+- 设备接入、数据采集、协议转换、云端管理等环节协同。
+
+### 设备接入、通信协议与数据采集
+
+- 支持 MQTT、CoAP、HTTP 等轻量协议，适应低功耗、低带宽场景。
+- 数据采集需保证实时性与可靠性。
+
+### 边缘智能与本地处理
+
+- 边缘节点本地分析、预处理，降低延迟与带宽消耗。
+- 支持本地 AI 推理与决策。
+
+### 安全、隐私与远程管理
+
+- 设备认证、数据加密、远程固件升级与权限管理。
+
+---
+
+## 深度扩展：工程代码片段
+
+### 1. MQTT 设备接入
+
+```rust
+use rumqttc::{MqttOptions, Client, QoS};
+let mut mqttoptions = MqttOptions::new("client", "broker.hivemq.com", 1883);
+let (mut client, mut connection) = Client::new(mqttoptions, 10);
+client.subscribe("iot/topic", QoS::AtMostOnce).unwrap();
+```
+
+### 2. CoAP 数据采集
+
+```rust
+use coap::CoAPClient;
+let response = CoAPClient::get("coap://localhost:5683/sensor").unwrap();
+```
+
+### 3. 远程固件升级
+
+```rust
+// 伪代码：设备定期拉取固件版本，自动升级
+```
+
+### 4. 设备安全认证与加密
+
+```rust
+// 伪代码：TLS/DTLS 加密通信，设备证书认证
+```
+
+---
+
+## 深度扩展：典型场景案例
+
+### 智能家居设备接入与控制
+
+- 多协议设备统一接入，云端远程控制与数据采集。
+
+### 工业 IoT 数据采集与边缘分析
+
+- 边缘节点本地分析，异常数据实时上报。
+
+### 远程固件升级与安全管理
+
+- 设备 OTA 升级，权限分级与安全审计。
+
+---
+
+## 深度扩展：形式化证明与自动化测试
+
+### 形式化证明思路
+
+- 设备接入协议状态机建模，自动检测死锁与异常。
+- 数据一致性与安全策略自动化测试。
+
+### 自动化测试用例
+
+```rust
+#[test]
+fn test_iot_env() {
+    std::env::set_var("IOT", "on");
+    assert_eq!(std::env::var("IOT").unwrap(), "on");
+}
+```
