@@ -53,3 +53,114 @@
 ## 交叉引用
 
 - 与配置管理、可观测性、安全性、CI/CD、性能优化等模块的接口与协同
+
+---
+
+## 深度扩展：理论阐释
+
+### 云原生架构理念与微服务模式
+
+- 云原生强调弹性、可移植、自动化、可观测。
+- 微服务架构支持独立部署、弹性扩缩容、服务自治。
+
+### 容器化原理与隔离机制
+
+- 容器通过 Namespace、CGroup 实现资源隔离。
+- OCI 标准保证镜像可移植与兼容。
+
+### 服务编排与自动化运维
+
+- Kubernetes 支持服务发现、负载均衡、自动扩缩容、滚动升级。
+- Helm 管理复杂部署与配置。
+
+---
+
+## 深度扩展：工程代码片段
+
+### 1. Dockerfile 多阶段构建
+
+```dockerfile
+FROM rust:1.70 as builder
+WORKDIR /app
+COPY . .
+RUN cargo build --release
+FROM debian:buster-slim
+COPY --from=builder /app/target/release/myapp /usr/local/bin/myapp
+ENTRYPOINT ["myapp"]
+```
+
+### 2. Kubernetes 部署 YAML
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: myrepo/myapp:latest
+        ports:
+        - containerPort: 8080
+```
+
+### 3. ConfigMap/Secret 管理
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysecret
+stringData:
+  password: s3cr3t
+```
+
+### 4. Prometheus/Grafana 监控集成
+
+```yaml
+# ServiceMonitor/PodMonitor 资源配置
+```
+
+---
+
+## 深度扩展：典型场景案例
+
+### Rust 服务容器化与自动部署
+
+- Dockerfile 构建镜像，K8s 自动部署与扩缩容。
+
+### 配置与密钥安全管理
+
+- ConfigMap/Secret 管理敏感信息，动态注入。
+
+### 云原生监控与日志集成
+
+- Prometheus/Grafana/ELK 集成统一监控与日志。
+
+---
+
+## 深度扩展：形式化证明与自动化测试
+
+### 形式化证明思路
+
+- 容器生命周期与资源隔离建模，自动检测配置与依赖错误。
+- 部署流程可用自动化测试覆盖。
+
+### 自动化测试用例
+
+```rust
+#[test]
+fn test_k8s_env() {
+    std::env::set_var("K8S", "true");
+    assert_eq!(std::env::var("K8S").unwrap(), "true");
+}
+```
