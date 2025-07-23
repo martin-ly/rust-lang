@@ -322,3 +322,17 @@ $$\forall op \in \text{UnsafeOp}. \text{consistent}(op, \text{RustMemoryModel})$
 - 实用价值: 直接指导系统编程
 
 **下一步计划**: 整合所有语义模型，建立统一的Rust语义分析框架总结。
+
+---
+
+## 相关文档推荐
+- [15_memory_layout_semantics.md] 内存模型与Unsafe边界
+- [14_concurrency_primitives_semantics.md] 并发原语与安全性
+- [10_error_handling_semantics.md] 异常安全与panic
+- [19_ffi_interop_semantics.md] FFI与安全边界
+
+## 知识网络节点
+- 所属层级：基础语义层-安全边界分支
+- 上游理论：内存布局、并发原语、错误处理
+- 下游理论：FFI安全、性能优化、工程实践
+- 交叉节点：panic机制、原子操作、C ABI

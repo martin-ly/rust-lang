@@ -921,3 +921,17 @@ Rust宏系统在编程语言理论中的重要贡献：
 ---
 
 *本文档建立了Rust宏系统的完整理论框架，展示了元编程在系统编程中的强大应用。*
+
+---
+
+## 相关文档推荐
+- [08_trait_system_semantics.md] 特征系统语义
+- [09_const_generics_semantics.md] 常量泛型语义
+- [12_async_runtime_semantics.md] 异步运行时与宏
+- [17_module_system_semantics.md] 模块系统与宏可见性
+
+## 知识网络节点
+- 所属层级：转换语义层-宏系统分支
+- 上游理论：类型系统、trait、泛型
+- 下游理论：过程宏、类型安全宏、编译器优化
+- 交叉节点：trait系统、const generics、异步运行时

@@ -862,3 +862,17 @@ Rust函数调用语义的关键优化保证：
 ---
 
 *本文档建立了Rust函数调用语义的完整理论框架，为高性能函数式编程提供了科学依据。*
+
+---
+
+## 相关文档推荐
+- [02_async_await_semantics.md] 异步函数调用语义
+- [10_error_handling_semantics.md] 错误处理与调用链
+- [08_trait_system_semantics.md] trait对象与动态分发
+- [15_memory_layout_semantics.md] ABI与调用约定
+
+## 知识网络节点
+- 所属层级：控制语义层-函数调用分支
+- 上游理论：类型系统、trait、生命周期
+- 下游理论：错误处理、异步调用、性能优化
+- 交叉节点：trait对象、ABI、宏系统
