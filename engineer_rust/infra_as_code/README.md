@@ -53,3 +53,83 @@
 ## 交叉引用
 
 - 与 DevOps、云原生、配置管理、安全工程、CI/CD 等模块的接口与协同
+
+---
+
+## 深度扩展：理论阐释
+### IaC 概念与自动化基础设施管理
+- 基础设施以声明式/命令式代码形式管理，提升环境一致性与可追溯性。
+- 支持多云、多环境自动化部署与变更。
+
+### 声明式与命令式 IaC 模型
+- 声明式（Terraform、Pulumi）：描述目标状态，自动推导变更。
+- 命令式（Ansible、Shell）：逐步执行操作，控制更细粒度。
+
+### 可重复性、可追溯性与幂等性
+- IaC 保证多次执行结果一致，支持变更审计与回滚。
+
+### 资源依赖与变更管理
+- 资源依赖关系自动推导，变更影响可控。
+
+---
+
+## 深度扩展：工程代码片段
+### 1. Terraform 声明式配置
+```hcl
+resource "aws_s3_bucket" "b" {
+  bucket = "my-bucket"
+  acl    = "private"
+}
+```
+
+### 2. Ansible 命令式部署
+```yaml
+- hosts: all
+  tasks:
+    - name: 安装 nginx
+      apt: name=nginx state=present
+```
+
+### 3. 多环境 IaC 管理
+```hcl
+variable "env" {}
+resource "aws_instance" "web" {
+  count = var.env == "prod" ? 3 : 1
+}
+```
+
+### 4. 变更审计与回滚
+```sh
+git log
+terraform plan
+terraform apply
+terraform destroy
+```
+
+---
+
+## 深度扩展：典型场景案例
+### 多云环境自动化部署
+- 一套 IaC 配置支持 AWS/Azure/GCP 多云部署。
+
+### 资源变更审计与回滚
+- 变更记录可追溯，异常时一键回滚。
+
+### 环境幂等性保障
+- 多次 apply 结果一致，防止漂移。
+
+---
+
+## 深度扩展：形式化证明与自动化测试
+### 形式化证明思路
+- 资源依赖关系建模，自动检测环与遗漏。
+- 配置变更幂等性自动化测试。
+
+### 自动化测试用例
+```rust
+#[test]
+fn test_iac_env() {
+    std::env::set_var("IAC", "on");
+    assert_eq!(std::env::var("IAC").unwrap(), "on");
+}
+```
