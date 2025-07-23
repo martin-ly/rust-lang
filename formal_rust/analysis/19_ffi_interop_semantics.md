@@ -515,7 +515,6 @@ impl CType {
         }
     }
 }
-```
 
 ---
 
@@ -567,3 +566,17 @@ $$\text{exception\_safe}(ffi\_call) \iff \text{no\_unwind\_across\_boundary}(ffi
 - 实用价值: 直接指导跨语言集成
 
 **下一步计划**: 建立性能分析语义，完成编译时性能预测的数学模型。
+
+---
+
+## 相关文档推荐
+- [15_memory_layout_semantics.md] 内存布局与ABI
+- [16_unsafe_boundary_semantics.md] Unsafe边界与FFI安全
+- [17_module_system_semantics.md] 模块系统与FFI集成
+- [21_webassembly_semantics.md] WebAssembly与跨语言互操作
+
+## 知识网络节点
+- 所属层级：互操作语义层-FFI分支
+- 上游理论：内存布局、Unsafe边界、模块系统
+- 下游理论：WebAssembly、分布式系统、AI/ML集成
+- 交叉节点：C ABI、模块系统、性能优化
