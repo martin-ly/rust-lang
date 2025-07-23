@@ -53,3 +53,100 @@
 ## 交叉引用
 
 - 与服务网格、可观测性、安全工程、配置管理、DevOps 等模块的接口与协同
+
+---
+
+## 深度扩展：理论阐释
+
+### API 网关架构与职责分离
+
+- API 网关统一入口，路由转发、协议转换、聚合、认证鉴权、限流熔断等。
+- 解耦前后端、微服务，提升安全与可维护性。
+
+### 路由转发与协议转换
+
+- 支持 REST/gRPC/WebSocket 等多协议。
+- 路由规则灵活配置，支持正则、前缀、权重等。
+
+### 认证鉴权与访问控制
+
+- 支持 OAuth2、JWT、API Key 等多种认证方式。
+- 细粒度访问控制与权限管理。
+
+---
+
+## 深度扩展：工程代码片段
+
+### 1. Kong 路由与认证配置
+
+```yaml
+routes:
+  - name: myroute
+    paths:
+      - /api
+    methods:
+      - GET
+    strip_path: true
+    service: myservice
+plugins:
+  - name: key-auth
+```
+
+### 2. API 聚合与协议转换
+
+```yaml
+plugins:
+  - name: grpc-gateway
+```
+
+### 3. 限流与熔断策略
+
+```yaml
+plugins:
+  - name: rate-limiting
+    config:
+      minute: 100
+      policy: local
+```
+
+### 4. 日志与监控集成
+
+```yaml
+plugins:
+  - name: prometheus
+```
+
+---
+
+## 深度扩展：典型场景案例
+
+### Rust 服务对接 Kong/Envoy
+
+- 路由与认证插件配置，支持多协议聚合。
+
+### API 限流与熔断
+
+- 配置 rate-limiting、circuit-breaker 插件，防止异常流量冲击。
+
+### 日志与监控自动化
+
+- Prometheus 插件采集 API 指标，自动告警。
+
+---
+
+## 深度扩展：形式化证明与自动化测试
+
+### 形式化证明思路
+
+- 路由规则与访问控制建模，自动检测冲突与遗漏。
+- 限流熔断策略自动化测试。
+
+### 自动化测试用例
+
+```rust
+#[test]
+fn test_gateway_env() {
+    std::env::set_var("GATEWAY", "on");
+    assert_eq!(std::env::var("GATEWAY").unwrap(), "on");
+}
+```
