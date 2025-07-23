@@ -925,13 +925,49 @@ Rust宏系统在编程语言理论中的重要贡献：
 ---
 
 ## 相关文档推荐
+
 - [08_trait_system_semantics.md] 特征系统语义
 - [09_const_generics_semantics.md] 常量泛型语义
 - [12_async_runtime_semantics.md] 异步运行时与宏
 - [17_module_system_semantics.md] 模块系统与宏可见性
 
 ## 知识网络节点
+
 - 所属层级：转换语义层-宏系统分支
 - 上游理论：类型系统、trait、泛型
 - 下游理论：过程宏、类型安全宏、编译器优化
 - 交叉节点：trait系统、const generics、异步运行时
+
+---
+
+## 自动化验证脚本
+```rust
+// 宏卫生性检测工具伪代码
+macro_rules! hygienic_macro {
+    ($x:expr) => {{ let temp = $x; temp * 2 }}
+}
+// 自动化测试：temp不会与外部变量冲突
+```
+
+## 工程案例
+```rust
+// 标准库derive宏
+#[derive(Debug, Clone)]
+struct Point { x: i32, y: i32 }
+
+// 条件编译宏
+macro_rules! platform {
+    (windows) => { #[cfg(target_os = "windows")] };
+    (unix) => { #[cfg(target_family = "unix")] };
+}
+```
+
+## 典型反例
+```rust
+// 非卫生宏反例
+macro_rules! bad_macro {
+    ($x:expr) => {{ let temp = 42; $x + temp }}
+}
+let temp = 100;
+let result = bad_macro!(1); // temp 冲突，结果非预期
+```
