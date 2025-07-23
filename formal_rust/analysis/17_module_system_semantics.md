@@ -397,7 +397,6 @@ pub enum ResolutionError {
     },
     CircularDependency(Vec<String>),
 }
-```
 
 ---
 
@@ -503,3 +502,17 @@ $$\text{macro\_visible}(m, context) \iff \text{macro\_scope}(m) \sqsupseteq \tex
 - 实用价值: 直接指导编译器和工具开发
 
 **下一步计划**: 深入过程宏高级语义，建立复杂元编程的完整理论模型。
+
+---
+
+## 相关文档推荐
+- [08_trait_system_semantics.md] trait可见性与模块边界
+- [11_macro_system_semantics.md] 宏系统与模块集成
+- [15_memory_layout_semantics.md] 内存布局与模块划分
+- [19_ffi_interop_semantics.md] FFI与模块系统
+
+## 知识网络节点
+- 所属层级：组织语义层-模块系统分支
+- 上游理论：类型系统、trait、宏系统
+- 下游理论：可见性规则、FFI集成、工程组织
+- 交叉节点：trait系统、宏系统、FFI
