@@ -1,41 +1,114 @@
 # 性能工程（Performance Engineering）
 
-## 1. 工程原理与定义（Principle & Definition）
+## 1. 概念定义与哲学基础（Principle & Definition）
 
-性能工程是系统性地分析、优化和保障软件系统性能的工程实践。Rust 以零成本抽象、高性能和类型安全适合高性能场景。
-Performance engineering is the systematic practice of analyzing, optimizing, and ensuring software system performance. Rust's zero-cost abstractions, high performance, and type safety are ideal for high-performance scenarios.
+性能工程是系统性地分析、优化和保障软件系统性能的工程实践，体现了“零成本抽象”（Zero-cost Abstraction）与“可预测性优化”（Predictable Optimization）哲学。本质上不仅是效率提升，更是“系统可验证性”“资源最优分配”的工程思想。
 
-## 2. Rust 1.88 新特性工程化应用
+> Performance engineering is the systematic practice of analyzing, optimizing, and ensuring software system performance. The essence is not only efficiency improvement, but also the philosophy of zero-cost abstraction, predictable optimization, system verifiability, and optimal resource allocation.
 
-- inline const：提升常量表达式性能。
-- LazyLock：高效全局状态缓存。
-- try_blocks：简化性能关键路径的错误处理。
+### 1.1 历史沿革与国际视角（History & International Perspective）
 
-## 3. 典型场景与最佳实践（Typical Scenarios & Best Practices）
+- 20世纪80年代，性能分析与优化成为高性能计算的核心议题。
+- 现代性能工程涵盖并行计算、内存优化、编译器优化、基准测试等。
+- 国际标准（如SPEC、ISO/IEC 9126）强调性能可测量性、可预测性、可验证性。
+- 维基百科等主流定义突出“效率”“可测量性”“优化策略”等关键词。
 
-- 用rayon实现数据并行。
-- 用criterion做基准测试。
-- 用flamegraph/perf分析性能瓶颈。
-- 用tracing/metrics监控运行时性能。
+### 1.2 主流观点与分歧（Mainstream Views & Debates）
 
-**最佳实践：**
+- 工程派：强调基准测试、并行优化、可验证的性能提升。
+- 哲学派：关注性能工程对系统复杂性、可维护性的影响。
+- 批判观点：警惕过度优化、性能幻觉、可维护性下降等风险。
 
-- 用rayon提升多核并行效率。
-- 用criterion做细粒度基准测试。
-- 用flamegraph/perf定位性能瓶颈。
-- 用tracing/metrics做实时性能监控。
+### 1.3 术语表（Glossary）
 
-## 4. 常见问题 FAQ
+- Zero-cost Abstraction：零成本抽象
+- Inline Const：内联常量
+- LazyLock：惰性全局锁
+- Benchmarking：基准测试
+- Flamegraph：火焰图
+- Data Parallelism：数据并行
+- Predictable Optimization：可预测优化
 
-- Q: Rust如何提升系统性能？
-  A: 零成本抽象、静态类型和高效并发提升整体性能。
-- Q: 如何做基准测试？
-  A: 用criterion进行细粒度性能测试。
-- Q: 如何定位性能瓶颈？
-  A: 用flamegraph/perf分析运行时热点。
+## 2. Rust 1.88 工程论证与原理分析（Engineering Analysis in Rust 1.88）
 
-## 5. 参考与扩展阅读
+Rust 1.88 引入和强化了多项有利于性能工程的特性：
+
+- **inline const**：提升常量表达式性能，支持编译期计算与类型安全。
+
+  ```rust
+  const fn square(x: usize) -> usize { x * x }
+  let arr: [u8; { inline const { square(4) } }] = [0; 16];
+  ```
+
+  *工程动机*：消除运行时分支，提升常量表达式性能。
+  *原理*：inline const 允许在类型参数、宏等场景下嵌入编译期可计算表达式。
+  *边界*：仅支持编译期可求值表达式。
+
+- **LazyLock**：高效全局状态缓存，提升并发下的资源管理效率。
+
+  ```rust
+  use std::sync::LazyLock;
+  static CONFIG: LazyLock<Config> = LazyLock::new(|| load_config());
+  ```
+
+  *工程动机*：避免重复初始化，提升全局资源访问性能。
+  *原理*：线程安全的惰性初始化，保证只初始化一次。
+
+- **try_blocks**：简化性能关键路径的错误处理，减少嵌套与分支。
+
+  ```rust
+  let result: Result<(), Error> = try {
+      fast_path()?;
+      slow_path()?;
+  };
+  ```
+
+  *工程动机*：减少错误处理分支对性能关键路径的影响。
+  *原理*：try块自动传播错误，类型系统静态检查。
+
+- **CI集成建议**：
+  - 用criterion做自动化基准测试，监控性能回归。
+  - 用flamegraph/perf分析性能瓶颈，定位优化点。
+  - 用tracing/metrics做实时性能监控。
+
+## 3. 零成本抽象与性能可预测性的形式证明（Formal Reasoning & Proof Sketches）
+
+### 3.1 零成本抽象的工程保证
+
+- **命题**：Rust零成本抽象不会引入运行时开销。
+- **证明思路**：
+  - 编译期宏/泛型/内联等机制生成等价静态代码。
+  - 编译器优化消除无用分支与动态分配。
+- **反例**：泛型/宏滥用导致代码膨胀，影响指令缓存。
+
+### 3.2 性能可预测性的类型系统保障
+
+- **命题**：类型系统与所有权模型可静态消除部分性能隐患（如数据竞争、内存泄漏）。
+- **证明思路**：
+  - 所有权/借用/生命周期静态保证内存安全，避免GC暂停。
+  - Send/Sync等trait静态保证并发安全。
+- **反例**：unsafe代码绕过类型系统，导致性能隐患。
+
+## 4. 工程知识点系统化（Systematic Knowledge Points）
+
+- rayon的数据并行与零成本抽象。
+- criterion的基准测试与性能回归监控。
+- flamegraph/perf的性能瓶颈定位。
+- tracing/metrics的运行时性能监控。
+- inline const与类型参数的性能优化。
+- LazyLock的全局资源管理。
+- try_blocks对性能关键路径的影响。
+
+## 5. 批判性分析与未来展望（Critical Analysis & Future Trends）
+
+- **争议**：零成本抽象是否会导致代码膨胀？如何平衡性能与可维护性？
+- **局限**：过度优化、泛型/宏膨胀、性能幻觉。
+- **未来**：AI辅助性能分析、自动化性能回归、跨云性能优化、可验证性能工程。
+
+## 6. 参考与扩展阅读（References & Further Reading）
 
 - [rayon 数据并行库](https://github.com/rayon-rs/rayon)
 - [criterion 基准测试](https://bheisler.github.io/criterion.rs/)
 - [flamegraph 性能分析](https://github.com/flamegraph-rs/flamegraph)
+- [Wikipedia: Software performance testing](https://en.wikipedia.org/wiki/Software_performance_testing)
+- [RFC 2920: Inline const in patterns and types](https://github.com/rust-lang/rfcs/blob/master/text/2920-inline-const.md)
