@@ -28,41 +28,81 @@
 - Unicode：统一码
 - CLDR：通用本地数据仓库
 - Locale：区域设置
+- #[expect] attribute：预期异常属性
+- Fluent：声明式多语言资源库
+- ICU4X：国际化组件库
 
-## 2. Rust生态下的国际化工程（Engineering in Rust Ecosystem）
+## 2. Rust 1.88 工程论证与原理分析（Engineering Analysis in Rust 1.88）
 
-Rust以类型系统、资源抽象和生态库支持严谨的国际化工程。
+Rust 1.88 引入和强化了多项有利于i18n/l10n工程的特性：
 
-- **fluent/unic-langid库**：抽象多语言资源与标识。
-- **serde/yaml/json**：灵活管理本地化配置。
-- **#[expect]属性**：本地化测试中的预期异常标注。
+- **fluent/unic-langid库**：抽象多语言资源与标识，类型安全保证多语言适配。
 
-## 3. 典型场景与最佳实践（Typical Scenarios & Best Practices）
+  ```rust
+  use fluent::{FluentBundle, FluentResource};
+  let res = FluentResource::try_new("hello = 你好".to_string())?;
+  let mut bundle = FluentBundle::new(&[unic_langid::langid!("zh-CN")]);
+  bundle.add_resource(res)?;
+  ```
 
-- 用fluent/unic-langid抽象多语言文本与标识。
-- 用serde/yaml/json管理本地化资源。
-- 用trait统一国际化接口，提升可移植性。
-- 用CI自动化测试多语言适配。
+  *工程动机*：统一多语言资源管理，提升本地化能力。
+  *原理*：trait抽象+类型系统约束，保证多语言资源一致。
 
-**最佳实践：**
+- **serde/yaml/json**：灵活管理本地化配置，支持结构校验与类型安全。
 
-- 抽象语言与文化资源，分离业务逻辑与本地化内容。
-- 用fluent/unic-langid提升多语言适配能力。
-- 用serde统一配置管理。
-- 用自动化测试验证多语言兼容性。
+  ```rust
+  #[derive(Deserialize)]
+  struct L10nConfig { welcome: String, date_format: String }
+  let config: L10nConfig = serde_yaml::from_str(yaml_str)?;
+  ```
 
-## 4. 常见问题与批判性分析（FAQ & Critical Analysis）
+  *工程动机*：支持多格式本地化配置，提升可移植性。
+  *原理*：serde trait驱动反序列化，类型系统保证结构一致。
 
-- Q: Rust如何实现多语言适配？
-  A: 用fluent/unic-langid抽象文本与标识，serde管理配置。
-- Q: 如何保证本地化资源的正确性？
-  A: 用类型系统和自动化测试验证资源一致性。
-- Q: 如何做多语言自动化测试？
-  A: 用CI集成多语言测试用例。
-- Q: 国际化/本地化的局限与风险？
-  A: 需警惕文化误读、翻译失真、资源膨胀等问题。
+- **#[expect]属性**：本地化测试中的预期异常标注，提升CI自动化测试健壮性。
 
-## 5. 争议、局限与未来展望（Controversies, Limitations & Future Trends）
+  ```rust
+  #[test]
+  #[expect(panic)]
+  fn test_missing_locale() { /* ... */ }
+  ```
+
+  *工程动机*：显式标注预期异常，提升测试健壮性。
+  *原理*：测试框架识别#[expect]，区分预期与非预期异常。
+
+- **CI集成建议**：
+  - 自动化测试多语言资源加载、配置校验、异常分支。
+  - 用#[expect]标注预期异常，提升i18n/l10n系统健壮性。
+  - 用serde统一结构校验，防止本地化资源漂移。
+
+## 3. 类型安全与多语言一致性的形式证明（Formal Reasoning & Proof Sketches）
+
+### 3.1 多语言资源类型安全
+
+- **命题**：若多语言资源用trait/serde反序列化，类型系统保证字段一致性。
+- **证明思路**：
+  - trait抽象+serde反序列化，编译期校验字段类型。
+  - fluent/unic-langid等库自动映射资源与结构体字段。
+- **反例**：手动拼接本地化字符串，字段遗漏或类型不符导致运行时错误。
+
+### 3.2 多区域本地化一致性
+
+- **命题**：多语言/多区域资源合并后，类型系统保证最终结构一致。
+- **证明思路**：
+  - fluent等库合并多语言资源，serde统一反序列化。
+  - #[expect]标注异常，CI自动化测试多区域切换。
+- **反例**：资源文件/配置格式不一致，导致本地化漂移。
+
+## 4. 工程知识点系统化（Systematic Knowledge Points）
+
+- fluent/unic-langid的多语言资源抽象与类型安全。
+- serde多格式本地化配置与结构校验。
+- trait抽象国际化接口，提升可移植性。
+- #[expect]在本地化测试中的应用。
+- CI集成多语言/多区域的自动化测试。
+- 本地化漂移与文化误读的边界分析。
+
+## 5. 批判性分析与未来展望（Critical Analysis & Future Trends）
 
 - **争议**：i18n/l10n是否会导致开发复杂性上升？如何平衡全球一致性与本地体验？
 - **局限**：Rust生态i18n/l10n相关库与主流语言相比尚有差距，部分高级功能需自行实现。
