@@ -366,15 +366,125 @@ impl Context {
 **简要说明**：
 策略模式适合算法可切换的场景。
 
+### 3.4 命令模式的数学基础
+
+**理论定义**：
+命令模式将请求封装为对象，实现请求者与执行者解耦。
+
+**结构符号**：
+`Command = { execute() }`
+
+**Rust 伪代码**：
+
+```rust
+trait Command { fn execute(&self); }
+struct PrintCmd;
+impl Command for PrintCmd { fn execute(&self) { println!("run"); } }
+struct Invoker { queue: Vec<Box<dyn Command>> }
+impl Invoker {
+    fn add(&mut self, cmd: Box<dyn Command>) { self.queue.push(cmd); }
+    fn run(&self) { for c in &self.queue { c.execute(); } }
+}
+```
+
+**简要说明**：
+适合事务、撤销等场景。
+
+### 3.5 解释器模式的数学基础
+
+**理论定义**：
+解释器模式为语言构建解释器，定义语法规则并解释表达式。
+
+**结构符号**：
+`Expression = { interpret() }`
+
+**Rust 伪代码**：
+
+```rust
+trait Expression { fn interpret(&self) -> i32; }
+struct Num(i32);
+impl Expression for Num { fn interpret(&self) -> i32 { self.0 } }
+struct Add(Box<dyn Expression>, Box<dyn Expression>);
+impl Expression for Add {
+    fn interpret(&self) -> i32 { self.0.interpret() + self.1.interpret() }
+}
+```
+
+**简要说明**：
+适合实现 DSL、公式求值等场景。
+
+### 3.6 设计模式小结与工程实践
+
+**理论总结**：
+设计模式提升系统可复用性、可维护性与灵活性。
+
+**工程实践**：
+
+- Rust 中广泛应用 trait、泛型与组合实现多种模式
+
+**Rust 伪代码**：
+
+```rust
+trait Drawable { fn draw(&self); }
+struct Button;
+impl Drawable for Button { fn draw(&self) { println!("Button"); } }
+```
+
+**简要说明**：
+合理选用模式可提升工程质量。
+
 ## 4. 函数式与并发模式
 
-- 4.1 函数组合与高阶模式  [TODO]
+### 4.1 函数式与并发模式的理论基础
+
+**理论定义**：
+函数式模式强调不可变性与高阶函数，并发模式关注任务调度与数据一致性。
+
+**结构符号**：
+MapReduce、Actor、Future
+
+**Rust 伪代码**：
+
+```rust
+let data = vec![1, 2, 3];
+let sum: i32 = data.iter().map(|x| x * 2).sum();
+```
+
+**简要说明**：
+函数式与并发模式适合高并发与数据密集型场景。
+
 - 4.2 并发模式的理论分析  [TODO]
 
-## 5. Rust 设计模式工程案例
+## 5. 交叉专题与纵深扩展
 
-- 5.1 典型模式的 Rust 实现  [TODO]
-- 5.2 框架与库中的模式应用  [TODO]
+### 5.1 交叉专题：设计模式与框架/微服务架构
+
+**理论联系**：设计模式在网络、区块链、IoT 等工程架构中广泛复用，提升系统解耦与可维护性。
+
+**工程实践**：Rust trait 对象、泛型与组合在微服务、插件系统等多领域的应用。
+
+**形式化方法**：模式安全性与可组合性证明。
+
+---
+
+### 5.2 纵深扩展：自动化模式检测与重构工具
+
+**工具链**：clippy（模式检测）、cargo-modules、自动化重构脚本。
+
+**典型案例**：
+
+- 大规模代码库的模式检测：
+
+```shell
+cargo clippy -- -W clippy::all
+```
+
+- 自动化重构：
+
+```rust
+// 伪代码：trait 对象替换为泛型以提升性能
+fn process<T: Trait>(item: T) { /* ... */ }
+```
 
 ## 6. 理论贡献与方法论总结  [TODO]
 
@@ -388,3 +498,35 @@ impl Context {
 - [ ] 行为型模式小节补全
 - [ ] 工程案例与代码补全
 - [ ] 理论贡献总结
+
+---
+
+## 全局统一理论框架与自动化推进建议
+
+- 强调模式安全性、可组合性、自动化检测与重构。
+- 建议集成 clippy、cargo-modules 等工具，自动检测与优化设计模式。
+- 推荐采用断点快照与持续推进机制，支持大规模工程演进。
+
+---
+
+## 自动化工具链集成与一键化工程实践
+
+- 推荐工具链：cargo test、clippy、cargo-modules
+- 一键命令模板：
+
+```makefile
+test:
+ cargo test
+lint:
+ cargo clippy
+modules:
+ cargo modules generate tree
+```
+
+---
+
+## 自动化推进与断点快照集成
+
+- 每次推进自动更新快照，CI 检查推进状态
+- 支持“中断-恢复-持续演进”全流程
+- 推荐将快照与工具链集成，提升团队协作与工程可持续性

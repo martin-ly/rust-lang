@@ -356,3 +356,164 @@ Rust 框架适合高性能、可维护的服务端开发。
 - [ ] 容器化小节补全
 - [ ] 工程案例与代码补全
 - [ ] 理论贡献总结
+
+### 8.1 框架扩展机制与插件系统
+
+**理论定义**：
+插件系统实现框架功能动态扩展。
+
+**结构符号**：
+`Plugin = { load(), unload() }`
+
+**Rust 伪代码**：
+
+```rust
+use libloading::{Library, Symbol};
+fn load_plugin(path: &str) {
+    let lib = Library::new(path).unwrap();
+    // 动态加载符号
+}
+```
+
+**简要说明**：
+提升框架灵活性与可维护性。
+
+### 8.2 框架的可测试性与自动化测试
+
+**理论定义**：
+可测试性设计提升框架质量，自动化测试保障功能正确。
+
+**结构符号**：
+TestSuite = { setup(), run(), teardown() }
+
+**Rust 伪代码**：
+
+```rust
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn test_api() {
+        assert_eq!(2 + 2, 4);
+    }
+}
+```
+
+**简要说明**：
+自动化测试是高质量框架的保障。
+
+### 8.3 框架工程案例与生态分析
+
+**理论说明**：
+框架生态决定工程可扩展性与社区活跃度。
+
+**工程案例**：
+
+- Rust actix-web 实现 Web 服务
+
+**Rust 伪代码**：
+
+```rust
+use actix_web::{web, App, HttpServer, Responder};
+async fn index() -> impl Responder { "Hello, actix-web!" }
+#[actix_web::main]
+async fn main() {
+    HttpServer::new(|| App::new().route("/", web::get().to(index)))
+        .bind("127.0.0.1:8080").unwrap()
+        .run().await.unwrap();
+}
+```
+
+**简要总结**：
+选择合适框架有助于提升工程效率。
+
+### 8.4 框架未来展望与生态建议
+
+**理论总结**：
+框架生态决定工程创新与生产力。
+
+**发展趋势**：
+
+- 微服务与Serverless架构普及
+- 插件化、低代码与自动化集成
+- 跨平台与云原生支持增强
+
+**挑战**：
+
+- 生态碎片化
+- 性能与易用性的权衡
+- 安全与合规需求提升
+
+**Rust生态建议**：
+
+- 推动高性能、易用的框架标准化
+- 加强文档、社区与生态协作
+
+## 9. 交叉专题与纵深扩展
+
+### 9.1 交叉专题：框架与微服务/云原生/DevOps
+
+**理论联系**：微服务、Serverless、插件化架构等理念在现代框架中融合。
+
+**工程实践**：Rust 框架与 CI/CD、容器编排（Kubernetes）集成，提升自动化与弹性。
+
+**形式化方法**：服务依赖图、可用性与可靠性建模。
+
+---
+
+### 9.2 纵深扩展：自动化部署与可观测性
+
+**工具链**：GitHub Actions（CI/CD）、Prometheus、OpenTelemetry。
+
+**典型案例**：
+
+- 自动化部署流水线：
+
+```yaml
+# .github/workflows/ci.yml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: cargo build --release
+```
+
+- 分布式追踪：
+
+```rust
+use opentelemetry::global;
+global::tracer("my_app");
+```
+
+---
+
+## 全局统一理论框架与自动化推进建议
+
+- 强调自动化部署、可观测性、服务依赖建模与可靠性。
+- 建议集成 GitHub Actions、Prometheus、OpenTelemetry 等工具，形成自动化运维与监控体系。
+- 推荐采用断点快照与持续推进机制，支持框架生态持续演进。
+
+---
+
+## 自动化工具链集成与一键化工程实践
+
+- 推荐工具链：cargo test、GitHub Actions、Prometheus、OpenTelemetry
+- 一键命令模板：
+
+```makefile
+test:
+ cargo test
+ci:
+ git push && gh workflow run ci.yml
+monitor:
+ # Prometheus/OTel 相关命令
+```
+
+---
+
+## 自动化推进与断点快照集成
+
+- 每次推进自动更新快照，CI 检查推进状态
+- 支持“中断-恢复-持续演进”全流程
+- 推荐将快照与工具链集成，提升团队协作与工程可持续性

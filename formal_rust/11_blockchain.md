@@ -349,3 +349,157 @@ impl Governance {
 
 **简要说明**：
 Rust + Substrate 适合创新型区块链系统开发。
+
+- 6.1 区块链共识机制的形式化分析
+
+**理论定义**：
+共识机制保证分布式账本一致性。
+
+**数学符号**：
+拜占庭容错模型 BFT = (N, f, T)
+
+**Rust 伪代码**：
+
+```rust
+// PBFT 节点投票伪代码
+struct Node { id: u32 }
+impl Node {
+    fn vote(&self, proposal: &str) -> bool { true }
+}
+```
+
+**简要说明**：
+共识机制是区块链安全核心。
+
+- 6.2 区块链安全性与攻击防护
+
+**理论定义**：
+区块链需防范双花、重放、女巫等攻击。
+
+**数学符号**：
+攻击概率 P(attack) < ε
+
+**Rust 伪代码**：
+
+```rust
+// 简单的双花检测伪代码
+fn detect_double_spend(tx_pool: &[String]) -> bool {
+    let mut set = std::collections::HashSet::new();
+    for tx in tx_pool {
+        if !set.insert(tx) { return true; }
+    }
+    false
+}
+```
+
+**简要说明**：
+安全性是区块链系统的生命线。
+
+- 6.3 区块链工程实现与案例
+
+**理论说明**：
+区块链工程实现需关注安全性、可扩展性与模块化。
+
+**工程案例**：
+
+- Rust + Substrate 实现自定义链模块
+
+**Rust 伪代码**：
+
+```rust
+// 伪代码，实际需依赖 Substrate pallet 开发
+pub struct CustomModule;
+impl CustomModule {
+    pub fn new() -> Self { Self }
+    pub fn execute(&self) {}
+}
+```
+
+**简要总结**：
+Substrate 框架极大简化区块链开发。
+
+- 6.4 区块链未来展望与生态建议
+
+**理论总结**：
+区块链技术推动去中心化与可信计算。
+
+**发展趋势**：
+
+- 跨链互操作与分层架构
+- 隐私保护与零知识证明
+- 高性能与绿色区块链
+
+**挑战**：
+
+- 扩展性与性能瓶颈
+- 安全漏洞与治理难题
+- 法规合规与标准化
+
+**Rust生态建议**：
+
+- 深化Substrate等生态开发
+- 推动安全、可验证的区块链库
+
+## 7. 交叉专题与纵深扩展
+
+### 7.1 交叉专题：区块链与分布式/安全/IoT
+
+**理论联系**：共识机制、分布式存储、IoT 数据上链等多领域交叉。
+
+**工程实践**：Rust 区块链与多链互操作、IoT 设备数据上链。
+
+**形式化方法**：共识协议安全性与合约正确性证明。
+
+---
+
+### 7.2 纵深扩展：智能合约自动验证与安全分析
+
+**工具链**：cargo-contract、ink!、自动化合约分析工具。
+
+**典型案例**：
+
+- 合约漏洞检测：
+
+```rust
+// 伪代码：检测重入攻击
+fn check_reentrancy(contract: &str) -> bool { contract.contains("call.value") }
+```
+
+- 形式化安全验证：
+
+```rust
+// 伪代码：合约状态不变式
+fn invariant(balance: u64) -> bool { balance >= 0 }
+```
+
+---
+
+## 全局统一理论框架与自动化推进建议
+
+- 强调共识安全、合约验证、自动化安全分析与可扩展性。
+- 建议集成 cargo-contract、ink!、自动化合约分析工具，提升区块链安全。
+- 推荐采用断点快照与持续推进机制，便于链上系统持续演进。
+
+---
+
+## 自动化工具链集成与一键化工程实践
+
+- 推荐工具链：cargo test、cargo-contract、ink!、cargo-audit
+- 一键命令模板：
+
+```makefile
+test:
+ cargo test
+aud:
+ cargo audit
+contract:
+ cargo contract build
+```
+
+---
+
+## 自动化推进与断点快照集成
+
+- 每次推进自动更新快照，CI 检查推进状态
+- 支持“中断-恢复-持续演进”全流程
+- 推荐将快照与工具链集成，提升团队协作与工程可持续性

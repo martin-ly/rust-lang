@@ -316,3 +316,155 @@ impl Aggregator {
 
 **简要说明**：
 Rust IoT 工程支持高效、可靠的数据聚合。
+
+### 10.1 IoT 边缘计算与实时性分析
+
+**理论定义**：
+边缘计算提升 IoT 实时响应能力。
+
+**数学符号**：
+任务调度时延 D = f(任务数, 资源)
+
+**Rust 伪代码**：
+
+```rust
+// RTIC 实时任务调度伪代码
+#[rtic::app(device = some_device)]
+mod app {
+    #[task]
+    fn sensor_task(_cx: sensor_task::Context) {
+        // 采集与处理
+    }
+}
+```
+
+**简要说明**：
+边缘计算适合低延迟场景。
+
+### 10.2 IoT 安全机制与认证
+
+**理论定义**：
+IoT 设备需具备身份认证与安全通信能力。
+
+**数学符号**：
+认证函数 Auth(device, key) = true
+
+**Rust 伪代码**：
+
+```rust
+fn authenticate(device_id: &str, key: &str) -> bool {
+    key == "secret" && device_id.starts_with("iot-")
+}
+```
+
+**简要说明**：
+安全认证是 IoT 可靠运行基础。
+
+### 10.3 IoT 工程实现与案例
+
+**理论说明**：
+IoT 工程需关注低功耗、实时性与安全。
+
+**工程案例**：
+
+- Rust + rumqttc 实现 MQTT 设备通信
+
+**Rust 伪代码**：
+
+```rust
+use rumqttc::{MqttOptions, Client, QoS};
+let mut mqttoptions = MqttOptions::new("client", "localhost", 1883);
+let (mut client, mut connection) = Client::new(mqttoptions, 10);
+client.subscribe("topic", QoS::AtMostOnce).unwrap();
+```
+
+**简要总结**：
+Rust IoT 生态适合高效安全的设备互联。
+
+### 10.4 IoT 未来展望与生态建议
+
+**理论总结**：
+IoT 推动万物互联与智能边缘。
+
+**发展趋势**：
+
+- 边缘智能与协同计算
+- 低功耗广域网（LPWAN）普及
+- 安全与隐私保护增强
+
+**挑战**：
+
+- 异构设备兼容
+- 实时性与安全性平衡
+- 大规模管理与运维
+
+**Rust生态建议**：
+
+- 推动嵌入式与IoT库发展
+- 加强安全、实时与低功耗支持
+
+## 11. 交叉专题与纵深扩展
+
+### 11.1 交叉专题：IoT 与边缘计算/区块链/安全
+
+**理论联系**：边缘智能、数据上链、安全认证等多领域融合。
+
+**工程实践**：Rust IoT 与区块链、边缘 AI 集成，提升数据可信与实时性。
+
+**形式化方法**：实时性与安全性建模与验证。
+
+---
+
+### 11.2 纵深扩展：IoT 自动化测试与远程运维
+
+**工具链**：rumqttc、自动化远程升级、设备监控与测试。
+
+**典型案例**：
+
+- 大规模设备自动化测试：
+
+```rust
+// 伪代码：批量设备状态检测
+fn check_devices(devices: &[Device]) -> usize {
+    devices.iter().filter(|d| d.is_online()).count()
+}
+```
+
+- 自动化远程运维：
+
+```rust
+// 伪代码：远程升级
+fn remote_update(device: &mut Device, firmware: &[u8]) { device.flash(firmware); }
+```
+
+---
+
+## 全局统一理论框架与自动化推进建议
+
+- 强调安全认证、自动化测试、远程运维与实时性。
+- 建议集成 rumqttc、自动化测试与远程升级工具，提升 IoT 可靠性。
+- 推荐采用断点快照与持续推进机制，便于大规模设备管理。
+
+---
+
+## 自动化工具链集成与一键化工程实践
+
+- 推荐工具链：cargo test、rumqttc、自动化测试与远程升级脚本
+- 一键命令模板：
+
+```makefile
+test:
+ cargo test
+mqtt:
+ # 运行 MQTT 相关测试
+upgrade:
+ # 远程升级脚本
+```
+
+---
+
+## 自动化推进与断点快照集成
+
+- 每次推进自动更新快照，CI 检查推进状态
+- 支持“中断-恢复-持续演进”全流程
+- 推荐将快照与工具链集成，提升团队协作与工程可持续性
