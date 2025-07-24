@@ -1,39 +1,45 @@
 # AI集成（AI Integration）
 
-## 1. 定义与软件工程对标
+## 1. 工程原理与国际定义对标（Principle & International Definition）
 
-**AI集成**是指将人工智能算法和模型嵌入到业务系统，实现智能化决策和自动化。软件工程wiki认为，AI集成是智能系统和自动化的核心。
-**AI integration** means embedding AI algorithms and models into business systems for intelligent decision-making and automation. In software engineering, AI integration is central to smart systems and automation.
+AI集成是指将人工智能算法、模型与系统架构深度融合，实现智能化决策与自动化。对标[Wikipedia: Artificial intelligence](https://en.wikipedia.org/wiki/Artificial_intelligence)定义，AI集成强调算法、模型与系统的协同。
+AI integration refers to the deep fusion of AI algorithms, models, and system architectures to achieve intelligent decision-making and automation. According to [Wikipedia: Artificial intelligence](https://en.wikipedia.org/wiki/Artificial_intelligence), AI integration emphasizes the synergy of algorithms, models, and systems.
 
-## 2. Rust 1.88 最新特性
+## 2. Rust 1.88 新特性工程化应用
 
-- **异步trait**：高效处理AI推理与数据流。
-- **trait对象向上转型**：便于多模型和多后端适配。
-- **LazyLock**：全局模型缓存。
+- tch/onnxruntime库：高效集成AI推理。
+- async fn in traits：异步AI推理接口。
+- serde/yaml/json：灵活管理AI模型与配置。
 
 ## 3. 典型惯用法（Idioms）
 
-- 使用tch-rs/burn等库集成AI模型
-- 结合serde/json处理特征与推理结果
-- 利用trait抽象AI推理接口
+- 用trait抽象AI推理与服务接口。
+- 用tch/onnxruntime集成深度学习模型。
+- 用serde统一模型与参数管理。
 
-## 4. 代码示例
+## 4. 代码示例（含1.88新特性）
 
 ```rust
-trait Infer {
-    async fn predict(&self, input: Features) -> Output;
-}
+// 见 examples/ai_infer.rs
 ```
 
-## 5. 软件工程概念对照
+## 5. 工程批判性与哲学思辨
 
-- **可扩展性（Scalability）**：trait支持多模型扩展。
-- **自动化（Automation）**：AI推理自动化业务流程。
-- **可维护性（Maintainability）**：类型安全提升系统健壮性。
+- 智能增强与系统协同的边界。
+- 警惕AI黑箱、模型偏见与不可解释性。
+- 关注AI集成的可验证性与安全性。
 
 ## 6. FAQ
 
-- Q: Rust做AI集成的优势？
-  A: 性能高、类型安全、生态丰富，适合高并发智能场景。
+- Q: Rust如何实现AI集成？
+  A: 用tch/onnxruntime集成AI推理，serde管理模型与参数。
+- Q: 如何保证AI推理的准确性与安全性？
+  A: 用类型系统约束输入输出，自动化测试验证推理流程。
+- Q: 如何做AI集成的自动化测试？
+  A: 用CI集成AI推理与服务测试用例。
 
----
+## 7. 参考与扩展阅读
+
+- [tch-rs 深度学习库](https://github.com/LaurentMazare/tch-rs)
+- [onnxruntime 推理引擎](https://github.com/microsoft/onnxruntime)
+- [Wikipedia: Artificial intelligence](https://en.wikipedia.org/wiki/Artificial_intelligence)

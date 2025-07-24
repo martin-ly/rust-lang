@@ -1,40 +1,46 @@
 # 模块化（Modularity）
 
-## 1. 定义与软件工程对标
+## 1. 工程原理与国际定义对标（Principle & International Definition）
 
-**模块化**是指将系统划分为独立、可组合的模块，提升可维护性和可扩展性。软件工程wiki认为，模块化是大型系统设计的基础。
-**Modularity** means dividing a system into independent, composable modules to improve maintainability and scalability. In software engineering, modularity is foundational for large system design.
+模块化是指将系统划分为独立、可复用、易维护的模块，提升代码结构清晰度和可扩展性。对标[Wikipedia: Modularity](https://en.wikipedia.org/wiki/Modularity)定义，模块化强调关注点分离与组合优于继承。
+Modularity refers to dividing a system into independent, reusable, and maintainable modules, improving code structure clarity and extensibility. According to [Wikipedia: Modularity](https://en.wikipedia.org/wiki/Modularity), modularity emphasizes separation of concerns and composition over inheritance.
 
-## 2. Rust 1.88 最新特性
+## 2. Rust 1.88 新特性工程化应用
 
-- **mod/ pub/ crate/ super/ self**：灵活的模块系统。
-- **trait对象向上转型**：便于抽象模块接口。
-- **LazyLock**：全局模块状态缓存。
+- pub(crate)/pub(super)：灵活控制模块可见性。
+- inline mod：简化小型模块定义。
+- cargo workspaces：多包协作开发。
 
 ## 3. 典型惯用法（Idioms）
 
-- 使用mod和pub组织代码结构
-- 结合crate和workspace实现多包协作
-- 利用trait抽象模块接口和依赖
+- 用mod/文件夹组织模块。
+- 用pub/pub(crate)控制可见性。
+- 用cargo workspace管理多包项目。
+- 用trait抽象模块接口。
 
-## 4. 代码示例
+## 4. 代码示例（含1.88新特性）
 
 ```rust
-mod utils {
-    pub fn add(a: i32, b: i32) -> i32 { a + b }
-}
-use utils::add;
+// 见 examples/basic_mod.rs
 ```
 
-## 5. 软件工程概念对照
+## 5. 工程批判性与哲学思辨
 
-- **解耦（Decoupling）**：模块化降低依赖和耦合。
-- **可扩展性（Scalability）**：模块独立演进和扩展。
-- **可维护性（Maintainability）**：清晰结构便于维护。
+- 关注点分离与边界清晰。
+- 警惕模块耦合、接口泄漏与过度分层。
+- 组合优于继承的工程论证。
 
 ## 6. FAQ
 
-- Q: Rust模块化的优势？
-  A: 类型安全、灵活结构、生态丰富，适合大型工程。
+- Q: Rust如何组织模块？
+  A: 用mod和文件夹分层组织，pub控制可见性。
+- Q: 如何做多包协作？
+  A: 用cargo workspace管理多包项目。
+- Q: 如何做模块间接口抽象？
+  A: 用trait定义统一接口。
 
----
+## 7. 参考与扩展阅读
+
+- [Rust 模块系统官方文档](https://doc.rust-lang.org/book/ch07-00-modules.html)
+- [cargo workspaces 多包管理](https://doc.rust-lang.org/book/ch14-03-cargo-workspaces.html)
+- [Wikipedia: Modularity](https://en.wikipedia.org/wiki/Modularity)

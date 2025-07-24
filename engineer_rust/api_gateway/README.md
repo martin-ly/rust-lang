@@ -1,38 +1,43 @@
 # API网关（API Gateway）
 
-## 1. 定义与软件工程对标
+## 1. 工程原理与定义（Principle & Definition）
 
-**API网关**是微服务架构中的统一入口，负责路由、鉴权、限流等。软件工程wiki认为，API Gateway是服务治理和安全的核心。
-**API Gateway** is the unified entry point in microservice architectures, handling routing, authentication, rate limiting, etc. In software engineering, API gateways are central to service governance and security.
+API网关是微服务架构中的统一入口，负责请求路由、协议转换、安全认证与限流，实现服务解耦与集中治理。这体现了“接口抽象”与“边界控制”哲学。
+An API gateway is the unified entry point in microservice architectures, responsible for request routing, protocol translation, security authentication, and rate limiting, enabling service decoupling and centralized governance. This reflects the philosophy of interface abstraction and boundary control.
 
-## 2. Rust 1.88 最新特性
+## 2. Rust 1.88 新特性工程化应用
 
-- **异步trait**：高效处理并发请求。
-- **trait对象向上转型**：便于插件化扩展。
-- **LazyLock**：全局配置缓存。
+- async fn in traits：异步API处理接口。
+- axum/warp/actix-web：高效API路由与中间件。
+- serde/yaml/json：灵活管理API配置。
 
 ## 3. 典型惯用法（Idioms）
 
-- 使用axum/warp/actix-web实现高性能API网关
-- 结合serde处理JSON序列化
-- 利用trait抽象中间件与插件
+- 用trait抽象API处理与认证接口。
+- 用axum/warp/actix-web实现高效路由与中间件。
+- 用serde统一配置管理。
 
-## 4. 代码示例
+## 4. 代码示例（含1.88新特性）
 
 ```rust
-use axum::{Router, routing::get};
-let app = Router::new().route("/", get(handler));
+// 见 examples/basic_gateway.rs
 ```
 
 ## 5. 软件工程概念对照
 
-- **统一入口（Unified Entry）**：集中管理流量与安全。
-- **可扩展性（Scalability）**：插件化trait支持灵活扩展。
-- **高可用（High Availability）**：异步并发提升吞吐。
+- 接口抽象、边界控制、关注点分离、自动化测试、配置可追溯。
 
 ## 6. FAQ
 
-- Q: Rust做API网关的优势？
-  A: 性能极高、类型安全、生态丰富，适合高并发微服务场景。
+- Q: Rust如何实现API网关？
+  A: 用async trait定义处理接口，axum/warp/actix-web实现路由，serde管理配置。
+- Q: 如何保证API网关的安全与高可用？
+  A: 用类型系统约束接口，自动化测试验证安全策略。
+- Q: 如何做API网关的自动化测试？
+  A: 用CI集成API流量与安全测试用例。
 
----
+## 7. 参考与扩展阅读
+
+- [axum 高效Web框架](https://github.com/tokio-rs/axum)
+- [warp Web框架](https://github.com/seanmonstar/warp)
+- [serde 配置解析库](https://serde.rs/)
