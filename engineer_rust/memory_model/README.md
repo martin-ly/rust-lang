@@ -1,5 +1,57 @@
 # 内存模型（Memory Model）
 
+## 1. 定义与软件工程对标
+
+**内存模型**描述程序如何分配、访问和释放内存，直接影响安全性和性能。软件工程wiki强调，健壮的内存模型是系统级编程的基础。
+**Memory model** describes how programs allocate, access, and release memory, directly impacting safety and performance. In software engineering, a robust memory model is foundational for system programming.
+
+## 2. Rust 1.88 最新特性
+
+- **`&raw`指针操作符**：安全创建原始指针，便于底层优化。
+- **`inline const`**：支持常量表达式内嵌，提升编译期计算能力。
+- **LazyCell/LazyLock**：线程安全的惰性初始化。
+
+## 3. 典型惯用法（Idioms）
+
+- 使用 `Box`/`Rc`/`Arc` 管理堆内存
+- `Cell`/`RefCell` 实现内部可变性
+- `unsafe` 块进行底层优化，配合 `&raw` 保证安全
+- `miri` 工具检测未定义行为
+
+## 4. 代码示例（含1.88新特性）
+
+```rust
+// &raw 指针操作符
+#[repr(packed)]
+struct PackedData {
+    flag: u8,
+    value: u32,
+}
+fn safe_access(data: &PackedData) -> u32 {
+    let ptr = &raw const data.value;
+    unsafe { ptr.read_unaligned() }
+}
+
+// inline const
+const fn fib(n: usize) -> usize {
+    if n < 2 { n } else { fib(n-1) + fib(n-2) }
+}
+const F10: usize = const { fib(10) };
+```
+
+## 5. 软件工程概念对照
+
+- **内存安全（Memory Safety）**：Rust 静态消除悬垂/野指针。
+- **所有权与生命周期（Ownership & Lifetime）**：编译期强制内存管理。
+- **零成本抽象（Zero-cost Abstraction）**：抽象不引入运行时开销。
+
+## 6. FAQ
+
+- Q: Rust 如何保证内存安全？
+  A: 通过所有权、借用和生命周期静态检查，绝大多数内存错误在编译期被消除。
+
+---
+
 ## 理论基础
 
 - 内存安全与未定义行为

@@ -1,138 +1,45 @@
 # 文档与可维护性（Documentation & Maintainability）
 
-## 理论基础
+## 1. 定义与软件工程对标
 
-- 文档驱动开发（Documentation-Driven Development, DDD）
-- 可维护性度量与设计原则
-- 文档类型与生命周期管理
-- 代码与文档同步机制
+**文档与可维护性**是指通过规范化文档和良好工程实践提升代码可读性、可用性和长期维护能力。软件工程wiki认为，文档是高质量软件的基础。
+**Documentation & maintainability** means improving code readability, usability, and long-term maintainability through standardized documentation and good engineering practices. In software engineering, documentation is foundational for high-quality software.
 
-## 工程实践
+## 2. Rust 1.88 最新特性
 
-- Rust 文档工具（rustdoc、mdBook、cargo doc 等）
-- API 文档自动生成与注释规范
-- 设计文档、架构文档与变更记录
-- 文档测试（doctest）与持续集成
-- 多人协作与文档评审流程
+- **rustdoc支持Markdown增强**：更丰富的文档格式。
+- **自动化测试文档示例**：文档即测试。
+- **trait对象向上转型**：便于文档接口抽象。
 
-## 工程案例
+## 3. 典型惯用法（Idioms）
 
-- rustdoc 自动生成 API 文档的工程实践
-- mdBook 构建项目文档与知识库
-- 设计文档与变更记录的版本管理
-- 文档测试（doctest）与 CI 集成
+- 使用///注释和rustdoc生成API文档
+- 结合doctest保证文档代码可运行
+- 利用README/CONTRIBUTING规范协作
 
-## 形式化建模示例
-
-- 文档结构树的类型建模
-- 文档与代码一致性的自动化验证
-- 文档变更追溯的形式化描述
-
-## 交叉引用
-
-- 与测试、配置、国际化、可观测性等模块的接口与协同
-
-## 推进计划
-
-1. 理论基础与最佳实践梳理
-2. Rust 文档工具与工程案例
-3. 形式化建模与一致性验证
-4. 协作流程与自动化集成
-5. 推进快照与断点恢复
-
-## 断点快照
-
-- [x] 目录结构与 README 初稿
-- [ ] 理论基础与最佳实践补全
-- [ ] 工程案例与代码片段
-- [ ] 形式化建模与验证
-- [ ] 交叉引用与持续完善
-
----
-
-## 深度扩展：理论阐释
-
-### 文档驱动开发（DDD）与可维护性
-
-- 文档驱动开发强调先写文档再写代码，提升设计质量与协作效率。
-- 可维护性度量包括文档完整性、可读性、一致性等。
-
-### 文档类型与生命周期管理
-
-- API 文档、设计文档、变更记录、用户手册等。
-- 文档需随代码演进自动更新，防止过时。
-
-### 代码与文档同步机制
-
-- rustdoc 支持代码注释自动生成文档。
-- mdBook 支持知识库与教程文档。
-- 文档测试（doctest）保证文档代码可运行。
-
----
-
-## 深度扩展：工程代码片段
-
-### 1. rustdoc 注释与文档生成
+## 4. 代码示例
 
 ```rust
-/// 计算两数之和
+/// 计算两个数之和
 ///
-/// # 示例
+/// # Example
 /// ```
 /// assert_eq!(add(1, 2), 3);
 /// ```
-fn add(a: i32, b: i32) -> i32 { a + b }
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
 ```
 
-### 2. mdBook 构建知识库
+## 5. 软件工程概念对照
 
-```sh
-mdbook init docs
-mdbook build docs
-```
+- **可读性（Readability）**：文档提升代码理解效率。
+- **可维护性（Maintainability）**：文档与代码同步提升维护性。
+- **协作性（Collaboration）**：规范文档促进团队协作。
 
-### 3. 文档测试（doctest）
+## 6. FAQ
 
-```sh
-cargo test --doc
-```
-
-### 4. 设计文档与变更记录
-
-- docs/ 目录下维护设计文档、架构图、CHANGELOG.md。
+- Q: Rust文档系统的优势？
+  A: 自动化、类型安全、文档即测试，适合高质量工程。
 
 ---
-
-## 深度扩展：典型场景案例
-
-### API 文档自动生成
-
-- rustdoc 自动提取注释生成 HTML 文档。
-
-### 设计文档与知识库协作
-
-- mdBook 组织团队知识库，支持多人协作。
-
-### 文档测试与 CI 集成
-
-- CI 流水线自动运行 doctest，保证文档代码可用。
-
----
-
-## 深度扩展：形式化证明与自动化测试
-
-### 形式化证明思路
-
-- 文档结构树可用类型系统建模，自动检测缺失与冗余。
-- 文档与代码一致性可用 doctest 自动验证。
-
-### 自动化测试用例
-
-```rust
-/// 文档测试示例
-///
-/// ```
-/// assert_eq!(2 + 2, 4);
-/// ```
-fn doc_test_example() {}
-```

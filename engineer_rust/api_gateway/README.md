@@ -1,152 +1,38 @@
-# API 网关与统一接入（API Gateway & Unified Access）
+# API网关（API Gateway）
 
-## 理论基础
+## 1. 定义与软件工程对标
 
-- API 网关架构与职责分离
-- 路由转发、协议转换与聚合
-- 认证鉴权与访问控制
-- 限流、熔断与安全防护
+**API网关**是微服务架构中的统一入口，负责路由、鉴权、限流等。软件工程wiki认为，API Gateway是服务治理和安全的核心。
+**API Gateway** is the unified entry point in microservice architectures, handling routing, authentication, rate limiting, etc. In software engineering, API gateways are central to service governance and security.
 
-## 工程实践
+## 2. Rust 1.88 最新特性
 
-- Rust 项目对接主流 API 网关（Kong、APISIX、Envoy 等）
-- 路由与负载均衡配置
-- 统一认证鉴权与 Token 管理
-- API 聚合与协议转换（REST/gRPC/WebSocket）
-- 日志采集、监控与告警集成
+- **异步trait**：高效处理并发请求。
+- **trait对象向上转型**：便于插件化扩展。
+- **LazyLock**：全局配置缓存。
 
-## 形式化要点
+## 3. 典型惯用法（Idioms）
 
-- 路由规则与访问控制的形式化建模
-- 限流与熔断策略的可验证性
-- API 安全属性与合规性分析
+- 使用axum/warp/actix-web实现高性能API网关
+- 结合serde处理JSON序列化
+- 利用trait抽象中间件与插件
 
-## 推进计划
-
-1. 理论基础与主流 API 网关梳理
-2. Rust 服务与 API 网关集成实践
-3. 形式化建模与安全验证
-4. 监控与告警集成
-5. 推进快照与断点恢复
-
-## 断点快照
-
-- [x] 目录结构与 README 初稿
-- [ ] 理论基础与主流技术补全
-- [ ] 工程案例与配置模板
-- [ ] 形式化建模与验证
-- [ ] 交叉引用与持续完善
-
-## 工程案例
-
-- Rust 服务对接 Kong/Envoy 的路由与认证
-- API 聚合与协议转换实践
-- 限流与熔断策略配置
-- 日志与监控集成自动化
-
-## 形式化建模示例
-
-- 路由与访问控制规则的自动化建模
-- 限流熔断策略的验证用例
-- API 安全属性的形式化描述
-
-## 交叉引用
-
-- 与服务网格、可观测性、安全工程、配置管理、DevOps 等模块的接口与协同
-
----
-
-## 深度扩展：理论阐释
-
-### API 网关架构与职责分离
-
-- API 网关统一入口，路由转发、协议转换、聚合、认证鉴权、限流熔断等。
-- 解耦前后端、微服务，提升安全与可维护性。
-
-### 路由转发与协议转换
-
-- 支持 REST/gRPC/WebSocket 等多协议。
-- 路由规则灵活配置，支持正则、前缀、权重等。
-
-### 认证鉴权与访问控制
-
-- 支持 OAuth2、JWT、API Key 等多种认证方式。
-- 细粒度访问控制与权限管理。
-
----
-
-## 深度扩展：工程代码片段
-
-### 1. Kong 路由与认证配置
-
-```yaml
-routes:
-  - name: myroute
-    paths:
-      - /api
-    methods:
-      - GET
-    strip_path: true
-    service: myservice
-plugins:
-  - name: key-auth
-```
-
-### 2. API 聚合与协议转换
-
-```yaml
-plugins:
-  - name: grpc-gateway
-```
-
-### 3. 限流与熔断策略
-
-```yaml
-plugins:
-  - name: rate-limiting
-    config:
-      minute: 100
-      policy: local
-```
-
-### 4. 日志与监控集成
-
-```yaml
-plugins:
-  - name: prometheus
-```
-
----
-
-## 深度扩展：典型场景案例
-
-### Rust 服务对接 Kong/Envoy
-
-- 路由与认证插件配置，支持多协议聚合。
-
-### API 限流与熔断
-
-- 配置 rate-limiting、circuit-breaker 插件，防止异常流量冲击。
-
-### 日志与监控自动化
-
-- Prometheus 插件采集 API 指标，自动告警。
-
----
-
-## 深度扩展：形式化证明与自动化测试
-
-### 形式化证明思路
-
-- 路由规则与访问控制建模，自动检测冲突与遗漏。
-- 限流熔断策略自动化测试。
-
-### 自动化测试用例
+## 4. 代码示例
 
 ```rust
-#[test]
-fn test_gateway_env() {
-    std::env::set_var("GATEWAY", "on");
-    assert_eq!(std::env::var("GATEWAY").unwrap(), "on");
-}
+use axum::{Router, routing::get};
+let app = Router::new().route("/", get(handler));
 ```
+
+## 5. 软件工程概念对照
+
+- **统一入口（Unified Entry）**：集中管理流量与安全。
+- **可扩展性（Scalability）**：插件化trait支持灵活扩展。
+- **高可用（High Availability）**：异步并发提升吞吐。
+
+## 6. FAQ
+
+- Q: Rust做API网关的优势？
+  A: 性能极高、类型安全、生态丰富，适合高并发微服务场景。
+
+---

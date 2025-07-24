@@ -1,138 +1,39 @@
-# 安全工程与合规治理（Security Engineering & Compliance Governance）
+# 安全工程（Security Engineering）
 
-## 理论基础
+## 1. 定义与软件工程对标
 
-- 安全工程体系与分层防御理念
-- 威胁建模与风险评估
-- 合规标准与安全治理（如 GDPR、ISO 27001、等保等）
-- 安全开发生命周期（SDL）与自动化合规
+**安全工程**是指系统性地设计、实现和维护安全机制，防止数据泄露、未授权访问和攻击。软件工程wiki认为，安全工程是高可靠性系统的基石。
+**Security engineering** is the systematic design, implementation, and maintenance of security mechanisms to prevent data leaks, unauthorized access, and attacks. In software engineering, security is foundational for reliable systems.
 
-## 工程实践
+## 2. Rust 1.88 最新特性
 
-- Rust 项目的安全编码规范与静态分析
-- 自动化安全测试与漏洞扫描（cargo-audit、clippy 等）
-- 安全事件响应与日志审计
-- 合规性检查与自动化报告生成
-- 安全治理流程与多团队协作
+- **所有权与生命周期**：静态消除悬垂指针和数据竞争。
+- **trait对象向上转型**：便于安全策略抽象。
+- **LazyLock**：安全的全局状态管理。
 
-## 形式化要点
+## 3. 典型惯用法（Idioms）
 
-- 安全策略与访问控制的形式化建模
-- 风险评估与合规流程的可验证性
-- 安全事件追溯与合规性证明
+- 使用类型系统防止未初始化和越界访问
+- 结合serde加密/解密敏感数据
+- 利用trait抽象认证、授权和审计
 
-## 推进计划
-
-1. 理论基础与主流安全标准梳理
-2. Rust 项目安全工程与合规实践
-3. 形式化建模与自动化验证
-4. 安全治理与合规集成
-5. 推进快照与断点恢复
-
-## 断点快照
-
-- [x] 目录结构与 README 初稿
-- [ ] 理论基础与主流标准补全
-- [ ] 工程案例与合规配置
-- [ ] 形式化建模与验证
-- [ ] 交叉引用与持续完善
-
-## 工程案例
-
-- cargo-audit 自动化漏洞扫描与报告
-- 静态分析工具集成（clippy、rustsec 等）
-- 安全事件日志与合规审计
-- 自动化合规性检查与报告生成
-
-## 形式化建模示例
-
-- 安全策略与访问控制的类型系统建模
-- 风险评估流程的自动化验证
-- 合规性证明的形式化描述
-
-## 交叉引用
-
-- 与包管理、DevOps、可观测性、配置管理、CI/CD 等模块的接口与协同
-
----
-
-## 深度扩展：理论阐释
-
-### 安全工程体系与分层防御
-
-- 多层防御（网络、主机、应用、数据）提升整体安全性。
-- 安全开发生命周期（SDL）贯穿需求、设计、开发、测试、运维全流程。
-
-### 威胁建模与风险评估
-
-- STRIDE、DREAD 等方法识别威胁与评估风险。
-- 风险分级与优先级响应。
-
-### 合规标准与自动化治理
-
-- 遵循 GDPR、ISO 27001、等保等标准，自动化合规检查与报告。
-
----
-
-## 深度扩展：工程代码片段
-
-### 1. cargo-audit 自动化漏洞扫描
-
-```sh
-cargo install cargo-audit
-cargo audit
-```
-
-### 2. clippy 静态分析
-
-```sh
-cargo clippy -- -D warnings
-```
-
-### 3. 安全事件日志与审计
+## 4. 代码示例
 
 ```rust
-use log::warn;
-warn!("检测到异常登录");
-```
-
-### 4. 自动化合规报告生成
-
-```rust
-// 伪代码：自动生成合规报告
-```
-
----
-
-## 深度扩展：典型场景案例
-
-### 多层防御与安全开发流程
-
-- SDL 贯穿全流程，分层防御提升安全。
-
-### 自动化安全测试与合规报告
-
-- cargo-audit、clippy、自动化报告生成。
-
-### 安全事件响应与日志审计
-
-- 实时监控、日志审计与自动告警。
-
----
-
-## 深度扩展：形式化证明与自动化测试
-
-### 形式化证明思路
-
-- 安全策略与访问控制建模，自动检测冲突与遗漏。
-- 合规流程自动化测试与 mock 验证。
-
-### 自动化测试用例
-
-```rust
-#[test]
-fn test_security_env() {
-    std::env::set_var("SECURITY", "on");
-    assert_eq!(std::env::var("SECURITY").unwrap(), "on");
+trait Auth {
+    fn authenticate(&self, user: &str, pass: &str) -> bool;
 }
 ```
+
+## 5. 软件工程概念对照
+
+- **最小权限原则（Least Privilege）**：Rust类型系统限制资源访问。
+- **防御性编程（Defensive Programming）**：编译期消除大部分安全隐患。
+- **安全默认（Secure by Default）**：Rust默认内存安全。
+
+## 6. FAQ
+
+- Q: Rust如何提升系统安全性？
+  A: 静态类型、所有权和生命周期机制在编译期消除绝大多数安全漏洞。
+
+---

@@ -1,142 +1,40 @@
-# 可扩展性与插件系统（Extensibility & Plugin System）
+# 可扩展性与插件（Extensibility & Plugin）
 
-## 理论基础
+## 1. 定义与软件工程对标
 
-- 扩展点与插件架构模式
-- 动态加载与运行时扩展
-- 插件隔离与安全性
-- 插件生命周期与依赖管理
+**可扩展性**是指系统通过插件、模块等机制灵活扩展功能。软件工程wiki认为，Extensibility是大型系统可维护性和演进能力的基础。
+**Extensibility** means the ability to flexibly extend system functionality via plugins or modules. In software engineering, extensibility is foundational for maintainability and evolution of large systems.
 
-## 工程实践
+## 2. Rust 1.88 最新特性
 
-- Rust 插件系统设计范式（trait 对象、动态库、宏插件等）
-- 插件注册与发现机制
-- 插件沙箱与权限控制
-- 热插拔与动态扩展案例
-- 插件生态与社区治理
+- **trait对象向上转型**：便于插件接口抽象。
+- **GATs**：提升插件系统表达力。
+- **LazyLock**：全局插件注册与缓存。
 
-## 形式化要点
+## 3. 典型惯用法（Idioms）
 
-- 扩展点接口的形式化定义
-- 插件依赖与冲突的可验证性
-- 插件安全隔离的形式化建模
+- 使用trait定义插件接口
+- 结合动态加载（如libloading）实现热插拔
+- 利用LazyLock管理全局插件注册表
 
-## 推进计划
-
-1. 理论基础与架构模式梳理
-2. 工程案例与主流实现分析
-3. 形式化建模与安全验证
-4. 插件生态与治理机制探讨
-5. 推进快照与断点恢复
-
-## 断点快照
-
-- [x] 目录结构与 README 初稿
-- [ ] 理论基础与架构模式补全
-- [ ] 工程案例与代码片段
-- [ ] 形式化建模与验证
-- [ ] 交叉引用与持续完善
-
-## 工程案例
-
-- trait 对象驱动的插件架构示例
-- 动态库（dlopen）插件加载实践
-- 插件注册与发现机制的工程实现
-- 插件沙箱与权限控制的 Rust 代码片段
-
-## 形式化建模示例
-
-- 扩展点接口的 Rust trait 定义
-- 插件依赖关系的有向图建模
-- 插件隔离与安全策略的形式化描述
-
-## 交叉引用
-
-- 与模块化、包管理、安全性等模块的接口与协同
-
----
-
-## 深度扩展：理论阐释
-
-### 扩展点与插件架构模式
-
-- 扩展点（Extension Point）定义系统可插拔的接口。
-- 插件架构支持动态扩展、热插拔与生态繁荣。
-
-### 动态加载与运行时扩展
-
-- Rust 支持 trait 对象、动态库（dlopen）、宏插件等多种扩展方式。
-- 插件注册与发现机制提升可用性。
-
-### 插件隔离与安全性
-
-- 插件需与主程序隔离，防止恶意行为。
-- 权限控制与沙箱机制保障安全。
-
----
-
-## 深度扩展：工程代码片段
-
-### 1. trait 对象插件架构
+## 4. 代码示例
 
 ```rust
-trait Plugin { fn run(&self); }
-struct MyPlugin;
-impl Plugin for MyPlugin { fn run(&self) { println!("plugin run"); } }
-fn call_plugin(p: &dyn Plugin) { p.run(); }
-```
-
-### 2. 动态库插件加载
-
-```rust
-// 伪代码：libloading::Library 加载动态库，查找符号
-```
-
-### 3. 插件注册与发现
-
-```rust
-// 伪代码：插件注册表，动态发现与调用插件
-```
-
-### 4. 插件沙箱与权限控制
-
-```rust
-// 伪代码：限制插件访问主程序资源
-```
-
----
-
-## 深度扩展：典型场景案例
-
-### trait 对象驱动的插件生态
-
-- 通过 trait 对象实现插件注册、动态扩展。
-
-### 动态库热插拔
-
-- 运行时加载/卸载插件，提升系统灵活性。
-
-### 插件安全隔离与权限管理
-
-- 插件沙箱、权限控制防止恶意行为。
-
----
-
-## 深度扩展：形式化证明与自动化测试
-
-### 形式化证明思路
-
-- 扩展点接口类型建模，自动检测插件兼容性。
-- 插件依赖关系可用有向图建模。
-
-### 自动化测试用例
-
-```rust
-#[test]
-fn test_plugin_run() {
-    struct TestPlugin;
-    impl Plugin for TestPlugin { fn run(&self) { assert!(true); } }
-    let p = TestPlugin;
-    p.run();
+trait Plugin {
+    fn name(&self) -> &'static str;
+    fn execute(&self, input: &str) -> String;
 }
 ```
+
+## 5. 软件工程概念对照
+
+- **模块化（Modularity）**：插件机制实现功能解耦。
+- **热插拔（Hot Plugging）**：支持运行时动态扩展。
+- **可维护性（Maintainability）**：插件化提升系统可维护性。
+
+## 6. FAQ
+
+- Q: Rust插件系统的优势？
+  A: 类型安全、零成本抽象、支持热插拔，适合高可维护性场景。
+
+---

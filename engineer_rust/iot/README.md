@@ -1,145 +1,39 @@
-# IoT 物联网工程（Internet of Things Engineering）
+# 物联网（IoT, Internet of Things）
 
-## 理论基础
+## 1. 定义与软件工程对标
 
-- 物联网体系结构与分层模型
-- 设备接入、通信协议与数据采集
-- 边缘智能与本地处理
-- 安全、隐私与远程管理
+**物联网**指通过网络将各种物理设备连接起来，实现智能感知与控制。软件工程wiki认为，IoT是智能化系统和边缘计算的基础。
+**IoT** means connecting various physical devices via networks for smart sensing and control. In software engineering, IoT is the foundation for intelligent systems and edge computing.
 
-## 工程实践
+## 2. Rust 1.88 最新特性
 
-- Rust 在嵌入式与 IoT 设备开发中的应用
-- 设备接入协议（MQTT、CoAP、HTTP 等）集成
-- 远程固件升级与设备管理
-- IoT 数据采集、处理与上云
-- 物联网安全防护与认证机制
+- **异步trait**：高效处理设备并发数据流。
+- **trait对象向上转型**：便于抽象多种设备协议。
+- **LazyCell**：线程本地缓存，适合边缘场景。
 
-## 形式化要点
+## 3. 典型惯用法（Idioms）
 
-- 设备接入与通信协议的状态机建模
-- 数据采集与传输一致性的可验证性
-- 设备安全与远程管理策略的自动化分析
+- 使用async/await处理高并发设备数据
+- 结合serde/cbor高效序列化传感器数据
+- 利用trait抽象设备驱动与协议
 
-## 推进计划
-
-1. 理论基础与主流 IoT 技术梳理
-2. Rust IoT 设备开发与协议集成实践
-3. 形式化建模与一致性验证
-4. 安全与远程管理机制集成
-5. 推进快照与断点恢复
-
-## 断点快照
-
-- [x] 目录结构与 README 初稿
-- [ ] 理论基础与主流技术补全
-- [ ] 工程案例与协议配置
-- [ ] 形式化建模与验证
-- [ ] 交叉引用与持续完善
-
-## 工程案例
-
-- Rust 嵌入式开发板（如 ESP32、树莓派）IoT 应用
-- MQTT/CoAP 设备接入与数据采集
-- 远程固件升级与设备管理实践
-- IoT 安全认证与数据加密
-
-## 形式化建模示例
-
-- 设备接入协议的状态机建模
-- 数据采集与传输一致性验证用例
-- 设备安全与远程管理策略的自动化描述
-
-## 交叉引用
-
-- 与边缘计算、数据管道、安全工程、云原生、配置管理等模块的接口与协同
-
----
-
-## 深度扩展：理论阐释
-
-### 物联网体系结构与分层模型
-
-- 感知层、网络层、平台层、应用层分工明确。
-- 设备接入、数据采集、协议转换、云端管理等环节协同。
-
-### 设备接入、通信协议与数据采集
-
-- 支持 MQTT、CoAP、HTTP 等轻量协议，适应低功耗、低带宽场景。
-- 数据采集需保证实时性与可靠性。
-
-### 边缘智能与本地处理
-
-- 边缘节点本地分析、预处理，降低延迟与带宽消耗。
-- 支持本地 AI 推理与决策。
-
-### 安全、隐私与远程管理
-
-- 设备认证、数据加密、远程固件升级与权限管理。
-
----
-
-## 深度扩展：工程代码片段
-
-### 1. MQTT 设备接入
+## 4. 代码示例
 
 ```rust
-use rumqttc::{MqttOptions, Client, QoS};
-let mut mqttoptions = MqttOptions::new("client", "broker.hivemq.com", 1883);
-let (mut client, mut connection) = Client::new(mqttoptions, 10);
-client.subscribe("iot/topic", QoS::AtMostOnce).unwrap();
-```
-
-### 2. CoAP 数据采集
-
-```rust
-use coap::CoAPClient;
-let response = CoAPClient::get("coap://localhost:5683/sensor").unwrap();
-```
-
-### 3. 远程固件升级
-
-```rust
-// 伪代码：设备定期拉取固件版本，自动升级
-```
-
-### 4. 设备安全认证与加密
-
-```rust
-// 伪代码：TLS/DTLS 加密通信，设备证书认证
-```
-
----
-
-## 深度扩展：典型场景案例
-
-### 智能家居设备接入与控制
-
-- 多协议设备统一接入，云端远程控制与数据采集。
-
-### 工业 IoT 数据采集与边缘分析
-
-- 边缘节点本地分析，异常数据实时上报。
-
-### 远程固件升级与安全管理
-
-- 设备 OTA 升级，权限分级与安全审计。
-
----
-
-## 深度扩展：形式化证明与自动化测试
-
-### 形式化证明思路
-
-- 设备接入协议状态机建模，自动检测死锁与异常。
-- 数据一致性与安全策略自动化测试。
-
-### 自动化测试用例
-
-```rust
-#[test]
-fn test_iot_env() {
-    std::env::set_var("IOT", "on");
-    assert_eq!(std::env::var("IOT").unwrap(), "on");
+trait Device {
+    async fn read(&self) -> SensorData;
 }
 ```
+
+## 5. 软件工程概念对照
+
+- **可扩展性（Scalability）**：异步并发支撑大规模设备接入。
+- **安全性（Security）**：类型系统和内存安全防止常见IoT漏洞。
+- **低功耗（Low Power）**：零成本抽象优化嵌入式性能。
+
+## 6. FAQ
+
+- Q: Rust如何提升IoT系统安全性？
+  A: 静态类型、内存安全和最小化运行时，适合嵌入式与安全敏感场景。
+
+---

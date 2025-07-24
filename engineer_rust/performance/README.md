@@ -1,133 +1,39 @@
 # 性能优化（Performance Optimization）
 
-## 理论基础
+## 1. 定义与软件工程对标
 
-- 性能分析与瓶颈定位原理
-- 计算复杂度与内存效率
-- 零成本抽象与编译优化
-- 并发与异步对性能的影响
+**性能优化**是指通过分析和改进代码、架构、资源使用等手段提升系统响应速度和吞吐量。软件工程wiki认为，性能优化是高可用、高并发系统的核心。
+**Performance optimization** means improving system responsiveness and throughput by analyzing and refining code, architecture, and resource usage. In software engineering, performance is central to high-availability and high-concurrency systems.
 
-## 工程实践
+## 2. Rust 1.88 最新特性
 
-- Rust 性能分析工具（perf、flamegraph、criterion 等）
-- 代码优化技巧（内联、循环展开、内存对齐等）
-- 并发与异步性能调优
-- 内存分配与缓存优化
-- 性能基准测试与回归分析
+- **inline const**：提升编译期计算能力，减少运行时开销。
+- **LazyLock/LazyCell**：高效惰性初始化，减少资源浪费。
+- **GATs**：提升高性能抽象表达力。
 
-## 形式化要点
+## 3. 典型惯用法（Idioms）
 
-- 性能指标的形式化建模
-- 优化策略的可验证性
-- 性能回归检测与自动化分析
+- 使用cargo bench/criterion做基准测试
+- 结合rayon实现数据并行
+- 利用profile-guided optimization (PGO) 优化二进制
 
-## 推进计划
-
-1. 理论基础与性能模型梳理
-2. Rust 性能分析与优化实践
-3. 形式化建模与优化验证
-4. 性能基准测试与回归分析
-5. 推进快照与断点恢复
-
-## 断点快照
-
-- [x] 目录结构与 README 初稿
-- [ ] 理论基础与性能模型补全
-- [ ] 工程案例与代码片段
-- [ ] 形式化建模与验证
-- [ ] 交叉引用与持续完善
-
----
-
-## 深度扩展：理论阐释
-
-### 性能分析与瓶颈定位原理
-
-- 性能分析工具（perf、flamegraph、cargo-bench）定位 CPU、内存、IO 瓶颈。
-- 量化指标（延迟、吞吐、内存占用、GC 时间等）指导优化。
-
-### 计算复杂度与内存效率
-
-- 算法复杂度（O(n)、O(log n) 等）影响性能上限。
-- 内存分配与缓存命中率影响实际运行效率。
-
-### 零成本抽象与编译优化
-
-- Rust 泛型、迭代器等抽象在编译期优化为零开销。
-- LTO、内联、循环展开等编译优化手段。
-
-### 并发与异步对性能的影响
-
-- 合理利用多核并发、异步 IO 提升吞吐。
-- 需防止过度并发导致上下文切换与资源争用。
-
----
-
-## 深度扩展：工程代码片段
-
-### 1. 性能分析与基准测试
-
-```rust
-#[bench]
-fn bench_add(b: &mut test::Bencher) {
-    b.iter(|| 1 + 2);
-}
-```
-
-### 2. flamegraph 火焰图分析
-
-```sh
-cargo install flamegraph
-cargo flamegraph
-```
-
-### 3. rayon 并行加速
+## 4. 代码示例
 
 ```rust
 use rayon::prelude::*;
-let v: Vec<u32> = (0..1000).collect();
-let sum: u32 = v.par_iter().sum();
+let v = vec![1, 2, 3, 4];
+let sum: i32 = v.par_iter().map(|x| x * 2).sum();
 ```
 
-### 4. LTO 与编译优化
+## 5. 软件工程概念对照
 
-```toml
-[profile.release]
-lto = true
-codegen-units = 1
-```
+- **零成本抽象（Zero-cost Abstraction）**：Rust抽象不引入运行时开销。
+- **并行与并发（Parallelism & Concurrency）**：高效利用多核资源。
+- **可观测性（Observability）**：性能分析与监控辅助优化。
+
+## 6. FAQ
+
+- Q: Rust性能优化的优势？
+  A: 零成本抽象、类型安全、生态丰富，适合高性能场景。
 
 ---
-
-## 深度扩展：典型场景案例
-
-### 算法与数据结构优化
-
-- 选择合适算法与数据结构，降低复杂度。
-
-### 并发与异步性能调优
-
-- 合理分配线程/任务，避免资源争用。
-
-### 内存分配与缓存优化
-
-- 预分配、内存池、数据对齐提升缓存命中率。
-
----
-
-## 深度扩展：形式化证明与自动化测试
-
-### 形式化证明思路
-
-- 性能指标建模，自动检测回归与瓶颈。
-- 基准测试与回归分析自动化。
-
-### 自动化测试用例
-
-```rust
-#[test]
-fn test_sum() {
-    let v = vec![1, 2, 3];
-    assert_eq!(v.iter().sum::<i32>(), 6);
-}
-```

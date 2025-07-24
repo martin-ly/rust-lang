@@ -1,4 +1,50 @@
-# 泛型与 Trait（Generics & Traits）
+# 泛型与Trait（Generics & Traits）
+
+## 1. 定义与软件工程对标
+
+**泛型（Generics）**允许类型参数化，提升代码复用与类型安全。**Trait**定义行为接口，实现多态。软件工程wiki认为，泛型与接口是现代编程语言的核心抽象机制。
+**Generics** enable type parameterization for code reuse and type safety. **Traits** define behavioral interfaces for polymorphism. In software engineering, generics and interfaces are core abstraction mechanisms.
+
+## 2. Rust 1.88 最新特性
+
+- **`async fn in traits`**：trait可直接定义async方法，极大提升异步多态能力。
+- **trait对象向上转型**：支持trait对象的安全类型提升。
+- **GATs（Generic Associated Types）**：提升trait表达力。
+
+## 3. 典型惯用法（Idioms）
+
+- 使用 `impl Trait` 简化返回类型
+- 结合生命周期参数实现安全多态
+- 通过GATs实现高阶抽象
+- 动态trait对象（dyn Trait）与静态泛型的权衡
+
+## 4. 代码示例（含1.88新特性）
+
+```rust
+// async fn in traits
+trait AsyncProcessor {
+    async fn process(&self, data: &[u8]) -> Result<Vec<u8>, String>;
+}
+
+// GATs
+trait Streaming {
+    type Item<'a>;
+    fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
+}
+```
+
+## 5. 软件工程概念对照
+
+- **多态（Polymorphism）**：静态泛型与动态trait对象。
+- **接口分离原则（ISP）**：trait可细粒度拆分，提升可维护性。
+- **零成本抽象（Zero-cost Abstraction）**：Rust泛型编译期单态化，无运行时开销。
+
+## 6. FAQ
+
+- Q: Rust trait对象和泛型的主要区别？
+  A: trait对象支持运行时多态，泛型为编译期单态化，性能更优。
+
+---
 
 ## 理论基础
 

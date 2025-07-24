@@ -1,5 +1,51 @@
 # 并发模型（Concurrency Model）
 
+## 1. 定义与软件工程对标
+
+**并发（Concurrency）**指多个任务在同一时间段内交替推进，强调任务切换与资源共享。对标软件工程wiki，Concurrency 是系统设计的核心能力之一，直接影响可扩展性与响应性。
+**Concurrency** means multiple tasks make progress within the same time period, focusing on task switching and resource sharing. In software engineering, concurrency is a key capability for scalable and responsive systems.
+
+## 2. Rust 1.88 最新特性
+
+- **`std::sync::LazyLock`/`LazyCell`**：全局/线程局部懒初始化，线程安全，零开销。
+- **`async fn in traits`**：异步trait原生支持，极大简化异步并发设计。
+- **`#[expect]`属性**：可控lint，提升并发代码开发体验。
+- **trait对象向上转型**：支持trait对象的安全类型提升，便于并发抽象。
+
+## 3. 典型惯用法（Idioms）
+
+- 使用 `std::thread`/`tokio::task` 创建并发任务
+- `Mutex`/`RwLock`/`Arc` 进行安全共享
+- `channel`/`mpsc`/`crossbeam` 进行消息传递
+- `rayon` 实现数据并行
+- `LazyLock`/`LazyCell` 实现惰性并发初始化
+
+## 4. 代码示例（含1.88新特性）
+
+```rust
+// 1.88 新特性：LazyLock 全局并发初始化
+use std::sync::LazyLock;
+static CONFIG: LazyLock<String> = LazyLock::new(|| "init".to_string());
+
+// async fn in traits
+trait AsyncJob {
+    async fn run(&self);
+}
+```
+
+## 5. 软件工程概念对照
+
+- **线程安全（Thread Safety）**：Rust 通过类型系统（Send/Sync）静态保证。
+- **死锁检测（Deadlock Detection）**：可用clippy/loom等工具辅助。
+- **可扩展性（Scalability）**：并发模型设计直接影响系统可扩展性。
+
+## 6. FAQ
+
+- Q: Rust 如何避免数据竞争？
+  A: 通过所有权、借用和类型系统静态消除绝大多数数据竞争。
+
+---
+
 ## 理论基础
 
 - 并发与并行的区别

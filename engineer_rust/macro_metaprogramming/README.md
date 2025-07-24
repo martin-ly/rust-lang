@@ -1,49 +1,40 @@
-# 宏系统与元编程（Macro System & Metaprogramming）
+# 宏与元编程（Macro & Metaprogramming）
 
-## 理论基础
+## 1. 定义与软件工程对标
 
-- 宏展开与编译期代码生成原理
-- 过程宏与声明宏的区别
-- 元编程与代码复用性
-- 宏安全性与可维护性
+**宏与元编程**是指通过代码生成和编译期扩展提升开发效率和抽象能力。软件工程wiki认为，宏系统是现代语言高阶抽象的基础。
+**Macro & metaprogramming** means generating code and extending behavior at compile time to improve efficiency and abstraction. In software engineering, macros are foundational for high-level abstraction in modern languages.
 
-## 工程实践
+## 2. Rust 1.88 最新特性
 
-- Rust 宏系统（macro_rules!、proc_macro、syn、quote 等）
-- 典型宏用法与工程案例
-- 宏调试与测试方法
-- 宏与 IDE/工具链集成
-- 宏滥用与反模式分析
+- **macro_rules!增强**：更强的模式匹配和递归能力。
+- **proc_macro**：支持自定义属性和派生宏。
+- **inline const**：编译期常量表达式嵌入宏。
 
-## 工程案例
+## 3. 典型惯用法（Idioms）
 
-- macro_rules! 声明宏的常见用法
-- proc_macro 过程宏自动代码生成
-- syn/quote 解析与生成 AST 的实践
-- 宏与 IDE/工具链集成案例
+- 使用macro_rules!定义声明式宏
+- 结合proc_macro实现自定义派生和属性宏
+- 利用宏生成重复代码和DSL
 
-## 形式化建模示例
+## 4. 代码示例
 
-- 宏展开过程的自动化建模
-- 宏安全性与作用域隔离的验证
-- 宏与类型系统交互的形式化描述
+```rust
+macro_rules! add {
+    ($a:expr, $b:expr) => { $a + $b };
+}
+let sum = add!(1, 2);
+```
 
-## 交叉引用
+## 5. 软件工程概念对照
 
-- 与泛型、模块化、构建系统、测试等模块的接口与协同
+- **抽象能力（Abstraction）**：宏提升代码复用和表达力。
+- **类型安全（Type Safety）**：宏系统与类型系统协同。
+- **可维护性（Maintainability）**：减少重复代码，提升可维护性。
 
-## 推进计划
+## 6. FAQ
 
-1. 理论基础与宏系统梳理
-2. Rust 宏工程案例与最佳实践
-3. 形式化建模与安全验证
-4. 工具链集成与协作机制
-5. 推进快照与断点恢复
+- Q: Rust宏系统的优势？
+  A: 类型安全、编译期扩展、支持DSL，适合高阶抽象和自动化。
 
-## 断点快照
-
-- [x] 目录结构与 README 初稿
-- [ ] 理论基础与宏系统补全
-- [ ] 工程案例与代码片段
-- [ ] 形式化建模与验证
-- [ ] 交叉引用与持续完善
+---

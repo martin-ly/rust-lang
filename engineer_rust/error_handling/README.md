@@ -1,5 +1,55 @@
 # 错误处理（Error Handling）
 
+## 1. 定义与软件工程对标
+
+**错误处理**是指系统在运行时对异常或不可预期情况的检测、报告与恢复。软件工程wiki强调，健壮的错误处理机制是高可靠性系统的基础。
+**Error handling** refers to detecting, reporting, and recovering from exceptional or unexpected conditions at runtime. Robust error handling is fundamental for reliable systems in software engineering.
+
+## 2. Rust 1.88 最新特性
+
+- **`try_blocks`**：块级错误传播，简化复杂流程。
+- **`#[expect]`属性**：可控lint，提升开发体验。
+- **`anyhow`/`thiserror`**：主流错误链与自定义错误类型。
+
+## 3. 典型惯用法（Idioms）
+
+- 使用 `Result`/`Option` 明确错误边界
+- `?` 运算符简化错误传播
+- `anyhow`/`thiserror` 统一错误链
+- `panic::catch_unwind` 捕获不可恢复错误
+
+## 4. 代码示例（含1.88新特性）
+
+```rust
+// try_blocks 新特性
+fn parse_and_double(s: &str) -> Result<i32, Box<dyn std::error::Error>> {
+    let res = try {
+        let n: i32 = s.parse()?;
+        n * 2
+    };
+    res
+}
+
+// #[expect] 属性
+#[expect(unused_variables)]
+fn foo() {
+    let x = 1;
+}
+```
+
+## 5. 软件工程概念对照
+
+- **异常安全（Exception Safety）**：Rust 强制显式错误处理，防止遗漏。
+- **错误分层（Error Layering）**：业务/系统/依赖错误分层，便于定位。
+- **可恢复与不可恢复错误**：Result/Option vs panic!。
+
+## 6. FAQ
+
+- Q: Rust 如何实现统一的错误链？
+  A: 推荐使用 `thiserror`/`anyhow`，支持自动转换和链式追踪。
+
+---
+
 ## 理论基础
 
 - 错误类型与分层（可恢复/不可恢复）
