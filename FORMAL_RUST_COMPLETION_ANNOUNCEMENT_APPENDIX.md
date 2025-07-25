@@ -15,7 +15,8 @@
 9. Rust软件架构与开源组件生态 | Rust Software Architecture & Open Source Component Ecosystem
 10. Rust高级语言特性与前沿理论 | Rust Advanced Language Features & Frontier Theory
 11. Rust性能优化与资源管理 | Rust Performance Optimization & Resource Management
-12. Rust安全验证与形式化方法 | Rust Security Verification & Formal Methods
+  12. Rust安全验证与形式化方法 | Rust Security Verification & Formal Methods
+  13. Rust分布式系统与微服务架构 | Rust Distributed Systems & Microservices Architecture
 
 ---
 
