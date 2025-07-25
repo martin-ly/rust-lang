@@ -34,6 +34,7 @@
 零拷贝内存管理通过避免不必要的数据拷贝来提升性能。
 
 **形式化定义**：
+
 ```text
 Zero-Copy ::= ∀x. Read(x) ∧ Write(x) ⇒ ¬Copy(x)
 ```
@@ -134,11 +135,11 @@ impl ZeroCopyNetwork {
 
 ## 内存池与分配器
 
-### 定义与内涵
+### 定义与内涵1
 
 内存池通过预分配和复用内存块来减少分配开销。
 
-### Rust 1.87.0中的实现
+### Rust 1.87.0中的实现1
 
 ```rust
 use std::alloc::{alloc, dealloc, Layout};
@@ -247,7 +248,7 @@ unsafe impl GlobalAlloc for CustomAllocator {
 }
 ```
 
-### 2025年最新发展
+### 2025年最新发展1
 
 1. **NUMA感知** 的内存池
 2. **GPU内存** 的管理
@@ -258,11 +259,11 @@ unsafe impl GlobalAlloc for CustomAllocator {
 
 ## 智能指针系统
 
-### 定义与内涵
+### 定义与内涵2
 
 智能指针通过RAII模式自动管理内存生命周期。
 
-### Rust 1.87.0中的实现
+### Rust 1.87.0中的实现2
 
 ```rust
 use std::rc::Rc;
@@ -641,4 +642,4 @@ Rust的内存管理系统已经相当成熟，但在高级内存管理方面仍�
 
 *最后更新时间：2025年1月*
 *版本：2.0*
-*维护者：Rust社区* 
+*维护者：Rust社区*
