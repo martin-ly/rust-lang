@@ -31,10 +31,11 @@
 - #[expect] attribute：预期异常属性
 - Data Consistency：数据一致性
 - Trace Context Propagation：追踪上下文传播
+- Trait Abstraction：trait抽象
 
 ## 2. Rust 1.88 工程论证与原理分析（Engineering Analysis in Rust 1.88）
 
-Rust 1.88 引入和强化了多项有利于可观测性工程的特性：
+Rust 1.88 及其生态为日志与可观测性工程提供了多项关键特性：
 
 - **tracing/metrics/log库**：统一采集日志、指标与追踪，类型安全保证数据结构一致性。
 
@@ -43,8 +44,11 @@ Rust 1.88 引入和强化了多项有利于可观测性工程的特性：
   metrics::increment_counter!("service.login");
   ```
 
-  *工程动机*：统一数据流，提升分布式系统可观测性。
-  *原理*：trait抽象+类型系统约束，保证日志与指标结构一致。
+  *工程动机（Engineering Motivation）*：统一数据流，提升分布式系统可观测性。
+  *原理（Principle）*：trait抽象+类型系统约束，保证日志与指标结构一致。
+  *边界（Boundary）*：需保证字段类型与trait接口一致。
+
+  > tracing/metrics/log provide unified, type-safe collection of logs, metrics, and traces, ensuring data structure consistency. Field types must match trait interfaces.
 
 - **OpenTelemetry集成**：标准化分布式追踪，支持跨服务上下文传播。
 
@@ -58,6 +62,25 @@ Rust 1.88 引入和强化了多项有利于可观测性工程的特性：
 
   *工程动机*：实现端到端追踪，提升系统透明性。
   *原理*：trace context通过HTTP/gRPC等协议传播，类型系统保证上下文一致。
+  *边界*：需保证上下文在全链路中不丢失。
+
+  > OpenTelemetry enables standardized distributed tracing and context propagation, improving end-to-end transparency. Context must be preserved across the full chain.
+
+- **trait抽象可观测性接口**：统一日志、指标、追踪的采集与处理。
+
+  ```rust
+  pub trait Observability {
+      fn log(&self, msg: &str);
+      fn metric(&self, name: &str, value: f64);
+      fn trace(&self, span: &str);
+  }
+  ```
+
+  *工程动机*：解耦观测实现与业务逻辑，支持多后端扩展。
+  *原理*：trait定义统一接口，类型系统静态约束。
+  *边界*：需保证trait接口与后端实现一致。
+
+  > Trait abstraction decouples observability implementation from business logic, supporting extensibility. Interface and backend must be consistent.
 
 - **#[expect]属性**：日志/观测测试中的预期异常标注，提升CI自动化测试健壮性。
 
@@ -69,23 +92,27 @@ Rust 1.88 引入和强化了多项有利于可观测性工程的特性：
 
   *工程动机*：显式标注预期异常，提升测试健壮性。
   *原理*：测试框架识别#[expect]，区分预期与非预期异常。
+  *边界*：仅适用于测试用例。
 
-- **CI集成建议**：
+  > #[expect] attribute marks expected failures in observability tests, improving robustness and traceability. Only for test cases.
+
+- **CI集成建议（CI Integration Advice）**：
   - 自动化测试日志、指标、追踪数据流与异常分支。
   - 用#[expect]标注预期异常，提升观测系统健壮性。
   - 用OpenTelemetry/tracing/metrics统一数据采集与分析。
+  - 在CI流程中集成观测数据一致性与回归检测。
 
 ## 3. 类型安全与可观测性一致性的形式证明（Formal Reasoning & Proof Sketches）
 
-### 3.1 日志与指标类型安全
+### 3.1 日志与指标类型安全（Type Safety of Logs & Metrics）
 
-- **命题**：若日志与指标采集接口类型安全，数据流结构一致。
-- **证明思路**：
+- **命题（Proposition）**：若日志与指标采集接口类型安全，数据流结构一致。
+- **证明思路（Proof Sketch）**：
   - trait抽象+类型系统约束日志/指标结构。
   - tracing/metrics宏静态检查字段类型。
-- **反例**：手动拼接日志字符串，类型不一致导致观测盲区。
+- **反例（Counter-example）**：手动拼接日志字符串，类型不一致导致观测盲区。
 
-### 3.2 分布式追踪上下文一致性
+### 3.2 分布式追踪上下文一致性（Distributed Trace Context Consistency）
 
 - **命题**：OpenTelemetry等标准化追踪上下文传播保证端到端观测一致性。
 - **证明思路**：
@@ -99,14 +126,18 @@ Rust 1.88 引入和强化了多项有利于可观测性工程的特性：
 - OpenTelemetry的分布式追踪与上下文传播。
 - trait抽象可观测性接口，提升系统透明性。
 - #[expect]在观测测试中的应用。
-- CI集成日志、指标、追踪的自动化测试。
+- CI集成日志、指标、追踪的自动化测试与一致性校验。
 - 数据一致性与观测盲区的边界分析。
+
+> Systematic knowledge points: unified, type-safe data flow (tracing/metrics/log), distributed tracing (OpenTelemetry), trait abstraction for observability, #[expect] for test exceptions, CI-based automated testing and consistency checks, boundary analysis of data consistency and blind spots.
 
 ## 5. 批判性分析与未来展望（Critical Analysis & Future Trends）
 
-- **争议**：可观测性是否会导致数据泛滥？如何平衡观测与隐私？
-- **局限**：Rust生态可观测性相关库与主流语言相比尚有差距，部分高级功能需自行实现。
-- **未来**：自动化观测、AI辅助分析、跨云观测、可验证可观测性将成为趋势。
+- **争议（Controversies）**：可观测性是否会导致数据泛滥？如何平衡观测与隐私？
+- **局限（Limitations）**：Rust生态可观测性相关库与主流语言相比尚有差距，部分高级功能需自行实现。
+- **未来（Future Trends）**：自动化观测、AI辅助分析、跨云观测、可验证可观测性。
+
+> Controversies: Does observability lead to data overload? How to balance observability and privacy? Limitations: ecosystem gap, missing advanced features. Future: automated/AI-assisted/cross-cloud/verifiable observability.
 
 ## 6. 参考与扩展阅读（References & Further Reading）
 

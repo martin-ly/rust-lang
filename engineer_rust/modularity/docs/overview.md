@@ -27,45 +27,110 @@
 - Encapsulation：封装
 - Coupling：耦合
 - Cohesion：内聚
+- inline mod：内联模块
 
-## 2. Rust生态下的模块化工程（Engineering in Rust Ecosystem）
+## 2. Rust 1.88 工程论证与原理分析（Engineering Analysis in Rust 1.88）
 
-Rust以模块系统、包与crate机制支持高效模块化开发。
+Rust 1.88 及其生态为模块化工程提供了多项关键特性：
 
-- **pub(crate)/pub(super)**：灵活控制模块可见性。
-- **inline mod**：简化小型模块定义。
-- **cargo workspaces**：多包协作开发。
+- **pub(crate)/pub(super)**：灵活控制模块可见性，提升封装性与边界安全。
 
-## 3. 典型场景与最佳实践（Typical Scenarios & Best Practices）
+  ```rust
+  mod internal {
+      pub(crate) fn only_for_crate() {}
+      pub(super) fn only_for_parent() {}
+  }
+  ```
 
-- 用mod/文件夹组织模块。
-- 用pub/pub(crate)控制可见性。
-- 用cargo workspace管理多包项目。
-- 用trait抽象模块接口。
+  *工程动机（Engineering Motivation）*：精细化控制模块边界，防止接口泄漏。
+  *原理（Principle）*：限定可见性范围，提升封装性。
+  *边界（Boundary）*：需合理设计模块层级。
 
-**最佳实践：**
+  > pub(crate)/pub(super) enables fine-grained visibility control, enhancing encapsulation and boundary safety. Requires careful module hierarchy design.
 
-- 用mod和文件夹清晰组织代码。
-- 用pub(crate)控制内部接口暴露。
-- 用cargo workspace提升多包协作效率。
-- 用trait统一模块间接口。
+- **inline mod**：简化小型模块定义，提升代码组织灵活性。
 
-## 4. 常见问题与批判性分析（FAQ & Critical Analysis）
+  ```rust
+  pub mod math {
+      pub fn add(a: i32, b: i32) -> i32 { a + b }
+  }
+  let sum = math::add(1, 2);
+  ```
 
-- Q: Rust如何组织模块？
-  A: 用mod和文件夹分层组织，pub控制可见性。
-- Q: 如何做多包协作？
-  A: 用cargo workspace管理多包项目。
-- Q: 如何做模块间接口抽象？
-  A: 用trait定义统一接口。
-- Q: 模块化的局限与风险？
-  A: 需警惕模块合成复杂、接口泄漏、过度分层等问题。
+  *工程动机*：减少文件碎片化，提升小型模块开发效率。
+  *原理*：允许在同一文件内定义模块。
+  *边界*：适用于小型、无复杂依赖的模块。
 
-## 5. 争议、局限与未来展望（Controversies, Limitations & Future Trends）
+  > Inline mod allows module definition within a single file, reducing fragmentation and improving development efficiency for small modules.
 
-- **争议**：模块化是否会导致系统碎片化？如何平衡独立性与整体性？
-- **局限**：Rust生态模块化相关工具与主流语言相比尚有差距，部分高级功能需自行实现。
-- **未来**：动态模块加载、插件化、跨语言模块协作、形式化模块验证将成为趋势。
+- **cargo workspaces**：多包协作开发，支持大型系统模块化。
+
+  ```toml
+  # Cargo.toml
+  [workspace]
+  members = ["core", "utils", "api"]
+  ```
+
+  *工程动机*：支持大型项目的多包协作与依赖管理。
+  *原理*：统一管理多个crate，提升构建与测试效率。
+  *边界*：需合理拆分包与依赖。
+
+  > Cargo workspaces enable multi-crate collaboration and unified management, improving build and test efficiency for large projects.
+
+- **trait抽象**：统一模块间接口，提升系统可扩展性与演化能力。
+
+  ```rust
+  pub trait Service { fn call(&self); }
+  impl Service for MyService { fn call(&self) { /* ... */ } }
+  ```
+
+  *工程动机*：解耦模块实现与接口，支持多态与扩展。
+  *原理*：trait定义统一接口，支持多实现。
+  *边界*：需保证trait语义清晰。
+
+  > Trait abstraction decouples implementation from interface, supporting polymorphism and extensibility. Requires clear trait semantics.
+
+- **CI集成建议（CI Integration Advice）**：
+  - 用cargo test自动化测试各模块。
+  - 用cargo check确保接口变更兼容性。
+  - 用clippy/miri等工具做模块安全与边界检查。
+  - 在CI流程中集成多包测试与接口验证。
+
+## 3. 模块边界与接口安全的形式证明（Formal Reasoning & Proof Sketches）
+
+### 3.1 可见性与封装性的工程保证（Visibility & Encapsulation Guarantee）
+
+- **命题（Proposition）**：pub(crate)/pub(super)可静态保证模块边界安全，防止接口泄漏。
+- **证明思路（Proof Sketch）**：
+  - 编译器静态检查可见性修饰符，防止跨边界访问。
+  - trait接口统一约束模块间通信。
+- **反例（Counter-example）**：不合理的pub使用导致内部实现泄漏。
+
+### 3.2 多包协作与接口演化（Multi-crate Collaboration & Interface Evolution）
+
+- **命题**：cargo workspace与trait抽象可提升大型系统的模块协作与接口演化能力。
+- **证明思路**：
+  - workspace统一依赖与构建，trait支持多实现与接口扩展。
+- **反例**：包依赖环或trait语义不清导致协作障碍。
+
+## 4. 工程知识点系统化（Systematic Knowledge Points）
+
+- pub(crate)/pub(super) 的可见性控制。
+- inline mod 的小型模块组织。
+- cargo workspace 的多包协作。
+- trait 的接口抽象与多态。
+- CI集成下的多包测试与接口验证。
+- clippy/miri 的模块安全检查。
+
+> Systematic knowledge points: visibility control (pub(crate)/pub(super)), inline mod for small modules, multi-crate collaboration (workspace), trait abstraction and polymorphism, CI-based multi-crate testing and interface validation, module safety checks (clippy/miri).
+
+## 5. 批判性分析与未来展望（Critical Analysis & Future Trends）
+
+- **争议（Controversies）**：模块化是否导致系统碎片化？如何平衡独立性与整体性？
+- **局限（Limitations）**：包依赖环、trait语义不清、工具链与主流语言差距。
+- **未来（Future Trends）**：动态模块加载、插件化、跨语言协作、可验证模块化。
+
+> Controversies: Does modularity lead to system fragmentation? How to balance independence and integrity? Limitations: dependency cycles, unclear trait semantics, toolchain gap. Future: dynamic loading, pluginization, cross-language collaboration, verifiable modularity.
 
 ## 6. 参考与扩展阅读（References & Further Reading）
 

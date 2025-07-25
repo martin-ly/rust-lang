@@ -40,9 +40,11 @@ Rust 1.88 引入和强化了多项有利于性能工程的特性：
   let arr: [u8; { inline const { square(4) } }] = [0; 16];
   ```
 
-  *工程动机*：消除运行时分支，提升常量表达式性能。
-  *原理*：inline const 允许在类型参数、宏等场景下嵌入编译期可计算表达式。
-  *边界*：仅支持编译期可求值表达式。
+  *工程动机（Engineering Motivation）*：消除运行时分支，提升常量表达式性能。
+  *原理（Principle）*：inline const 允许在类型参数、宏等场景下嵌入编译期可计算表达式。
+  *边界（Boundary）*：仅支持编译期可求值表达式。
+
+  > Inline const enables compile-time constant evaluation in type parameters and macros, eliminating runtime branches and improving performance. Only compile-time evaluable expressions are supported.
 
 - **LazyLock**：高效全局状态缓存，提升并发下的资源管理效率。
 
@@ -53,6 +55,9 @@ Rust 1.88 引入和强化了多项有利于性能工程的特性：
 
   *工程动机*：避免重复初始化，提升全局资源访问性能。
   *原理*：线程安全的惰性初始化，保证只初始化一次。
+  *边界*：适用于全局只读或初始化昂贵的资源。
+
+  > LazyLock provides thread-safe, one-time initialization for global resources, improving concurrent access efficiency. Suitable for global read-only or expensive-to-initialize resources.
 
 - **try_blocks**：简化性能关键路径的错误处理，减少嵌套与分支。
 
@@ -65,23 +70,27 @@ Rust 1.88 引入和强化了多项有利于性能工程的特性：
 
   *工程动机*：减少错误处理分支对性能关键路径的影响。
   *原理*：try块自动传播错误，类型系统静态检查。
+  *边界*：适用于需要简洁错误传播的性能敏感代码。
 
-- **CI集成建议**：
+  > Try blocks simplify error propagation in performance-critical code, reducing nesting and branches. Type system ensures static checking.
+
+- **CI集成建议（CI Integration Advice）**：
   - 用criterion做自动化基准测试，监控性能回归。
   - 用flamegraph/perf分析性能瓶颈，定位优化点。
   - 用tracing/metrics做实时性能监控。
+  - 在CI流程中集成性能回归检测，保障主干分支性能稳定。
 
 ## 3. 零成本抽象与性能可预测性的形式证明（Formal Reasoning & Proof Sketches）
 
-### 3.1 零成本抽象的工程保证
+### 3.1 零成本抽象的工程保证（Zero-cost Abstraction Guarantee）
 
-- **命题**：Rust零成本抽象不会引入运行时开销。
-- **证明思路**：
+- **命题（Proposition）**：Rust零成本抽象不会引入运行时开销。
+- **证明思路（Proof Sketch）**：
   - 编译期宏/泛型/内联等机制生成等价静态代码。
   - 编译器优化消除无用分支与动态分配。
-- **反例**：泛型/宏滥用导致代码膨胀，影响指令缓存。
+- **反例（Counter-example）**：泛型/宏滥用导致代码膨胀，影响指令缓存。
 
-### 3.2 性能可预测性的类型系统保障
+### 3.2 性能可预测性的类型系统保障（Type System for Predictable Performance）
 
 - **命题**：类型系统与所有权模型可静态消除部分性能隐患（如数据竞争、内存泄漏）。
 - **证明思路**：
@@ -98,12 +107,17 @@ Rust 1.88 引入和强化了多项有利于性能工程的特性：
 - inline const与类型参数的性能优化。
 - LazyLock的全局资源管理。
 - try_blocks对性能关键路径的影响。
+- CI集成下的性能回归自动检测。
+
+> Systematic knowledge points: data parallelism (rayon), benchmarking (criterion), bottleneck analysis (flamegraph/perf), runtime monitoring (tracing/metrics), inline const for type-level optimization, LazyLock for global resource management, try_blocks for error handling in hot paths, CI-based performance regression detection.
 
 ## 5. 批判性分析与未来展望（Critical Analysis & Future Trends）
 
-- **争议**：零成本抽象是否会导致代码膨胀？如何平衡性能与可维护性？
-- **局限**：过度优化、泛型/宏膨胀、性能幻觉。
-- **未来**：AI辅助性能分析、自动化性能回归、跨云性能优化、可验证性能工程。
+- **争议（Controversies）**：零成本抽象是否会导致代码膨胀？如何平衡性能与可维护性？
+- **局限（Limitations）**：过度优化、泛型/宏膨胀、性能幻觉。
+- **未来（Future Trends）**：AI辅助性能分析、自动化性能回归、跨云性能优化、可验证性能工程。
+
+> Controversies: Does zero-cost abstraction lead to code bloat? How to balance performance and maintainability? Limitations: over-optimization, macro/generic bloat, performance illusion. Future: AI-assisted analysis, automated regression, cross-cloud optimization, verifiable performance engineering.
 
 ## 6. 参考与扩展阅读（References & Further Reading）
 
