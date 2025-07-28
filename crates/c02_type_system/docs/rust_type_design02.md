@@ -36,7 +36,10 @@
 
 ## 引言
 
-Rust的类型系统是其核心特性，提供了内存安全和并发安全的强有力保证，而无需垃圾回收。本分析将从同伦类型论（HoTT）、范畴论（Category Theory, CT）和控制论（Control Theory）这三个不同的理论视角，对Rust类型系统的关键设计选择进行严格的、批判性的审视。我们将重点分析其类型、变量、所有权、生命周期、借用、类型分类、解构、控制流、型变以及同步/异步执行模型，并结合形式化分析、论证和代码示例进行探讨。本分析旨在揭示Rust类型系统设计的理论基础、内在结构、优势和局限性，避免使用辩证法技巧，追求直接、严谨的逻辑推理。
+Rust的类型系统是其核心特性，提供了内存安全和并发安全的强有力保证，而无需垃圾回收。
+本分析将从同伦类型论（HoTT）、范畴论（Category Theory, CT）和控制论（Control Theory）这三个不同的理论视角，对Rust类型系统的关键设计选择进行严格的、批判性的审视。
+我们将重点分析其类型、变量、所有权、生命周期、借用、类型分类、解构、控制流、型变以及同步/异步执行模型，并结合形式化分析、论证和代码示例进行探讨。
+本分析旨在揭示Rust类型系统设计的理论基础、内在结构、优势和局限性，避免使用辩证法技巧，追求直接、严谨的逻辑推理。
 
 ## 类型、变量、所有权、生命周期与借用
 
@@ -80,10 +83,17 @@ Rust中变量绑定、类型以及独特的资源管理机制（所有权、生�
 **形式化分析 (借用规则简化)**：
 令 \( \Gamma \) 为类型环境，\( \rho \) 为借用环境（记录活跃借用）。
 规则 (不可变借用):
-\[ \frac{\Gamma \vdash x : T \quad (x, \text{mut}) \notin \rho}{\Gamma; \rho \cup \{(x, \text{imm})\} \vdash \&x : \&'a T} \]
+\[
+\frac{\Gamma \vdash x : T \quad (x, \text{mut}) \notin \rho}{\Gamma; \rho \cup \{(x, \text{imm})\} \vdash \&x : \&'a T}
+\]
+
 规则 (可变借用):
-\[ \frac{\Gamma \vdash x : T \quad (x, \_) \notin \rho}{\Gamma; \rho \cup \{(x, \text{mut})\} \vdash \&\text{mut } x : \&'a \text{mut } T} \]
-生命周期 `'a` 约束了借用环境 \( \rho \) 中条目的有效期。借用检查器确保在任何程序点，\( \rho \) 都满足约束：对于任何 \( x \)，要么 \( (x, \text{mut}) \in \rho \) 且唯一，要么存在零个或多个 \( (x, \text{imm}) \in \rho \)。
+\[
+\frac{\Gamma \vdash x : T \quad (x, \_) \notin \rho}{\Gamma; \rho \cup \{(x, \text{mut})\} \vdash \&\text{mut } x : \&'a \text{mut } T}
+\]
+
+生命周期 `'a` 约束了借用环境 \( \rho \) 中条目的有效期。
+借用检查器确保在任何程序点，\( \rho \) 都满足约束：对于任何 \( x \)，要么 \( (x, \text{mut}) \in \rho \) 且唯一，要么存在零个或多个 \( (x, \text{imm}) \in \rho \)。
 
 **代码示例**：
 
