@@ -4,12 +4,50 @@
 //! This module provides complete workflow state management functionality based on state machine theory and distributed coordination theory.
 
 use crate::types::*;
-use crate::error::*;
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 use std::sync::{Arc, Mutex, RwLock};
 use std::time::{Duration, Instant};
-use serde::{Deserialize, Serialize};
-use tokio::sync::mpsc;
+use serde::{Deserialize, Serialize, Serializer, Deserializer};
+
+mod timestamp_serde {
+    use super::*;
+    
+    pub fn serialize<S>(instant: &Instant, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        serializer.serialize_u64(instant.elapsed().as_nanos() as u64)
+    }
+    
+    pub fn deserialize<'de, D>(deserializer: D) -> Result<Instant, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let nanos = u64::deserialize(deserializer)?;
+        Ok(Instant::now() - Duration::from_nanos(nanos))
+    }
+    
+    pub fn serialize_option<S>(instant: &Option<Instant>, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        match instant {
+            Some(inst) => serialize(inst, serializer),
+            None => serializer.serialize_none(),
+        }
+    }
+    
+    pub fn deserialize_option<'de, D>(deserializer: D) -> Result<Option<Instant>, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let nanos = Option::<u64>::deserialize(deserializer)?;
+        match nanos {
+            Some(n) => Ok(Some(Instant::now() - Duration::from_nanos(n))),
+            None => Ok(None),
+        }
+    }
+}
 
 /// 状态管理器 / State Manager
 /// 
@@ -129,8 +167,10 @@ pub struct InstanceState {
     /// 状态数据 / State Data
     pub state_data: HashMap<String, serde_json::Value>,
     /// 状态进入时间 / State Entry Time
+    #[serde(with = "timestamp_serde")]
     pub entry_time: Instant,
     /// 状态超时时间 / State Timeout Time
+    #[serde(serialize_with = "timestamp_serde::serialize_option", deserialize_with = "timestamp_serde::deserialize_option")]
     pub timeout_time: Option<Instant>,
     /// 重试计数 / Retry Count
     pub retry_count: usize,
@@ -139,6 +179,7 @@ pub struct InstanceState {
     /// 状态锁 / State Lock
     pub is_locked: bool,
     /// 锁定时间 / Lock Time
+    #[serde(serialize_with = "timestamp_serde::serialize_option", deserialize_with = "timestamp_serde::deserialize_option")]
     pub lock_time: Option<Instant>,
 }
 
@@ -148,8 +189,10 @@ pub struct StateHistoryEntry {
     /// 状态名称 / State Name
     pub state_name: String,
     /// 进入时间 / Entry Time
+    #[serde(with = "timestamp_serde")]
     pub entry_time: Instant,
     /// 退出时间 / Exit Time
+    #[serde(serialize_with = "timestamp_serde::serialize_option", deserialize_with = "timestamp_serde::deserialize_option")]
     pub exit_time: Option<Instant>,
     /// 停留时长 / Duration
     pub duration: Option<Duration>,
@@ -262,11 +305,9 @@ impl StateManager {
         reason: Option<String>,
     ) -> Result<(), StateError> {
         // 获取实例状态 / Get instance state
-        let mut instance_state = {
-            let mut instance_states = self.instance_states.write().unwrap();
-            instance_states.get_mut(instance_id)
-                .ok_or_else(|| StateError::InstanceNotFound(instance_id.to_string()))?
-        };
+        let mut instance_states = self.instance_states.write().unwrap();
+        let instance_state = instance_states.get_mut(instance_id)
+            .ok_or_else(|| StateError::InstanceNotFound(instance_id.to_string()))?;
         
         // 检查状态锁 / Check state lock
         if instance_state.is_locked {
@@ -274,11 +315,9 @@ impl StateManager {
         }
         
         // 验证目标状态 / Validate target state
-        {
-            let states = self.states.read().unwrap();
-            if !states.contains_key(&to_state) {
-                return Err(StateError::StateNotFound(to_state));
-            }
+        let states = self.states.read().unwrap();
+        if !states.contains_key(&to_state) {
+            return Err(StateError::StateNotFound(to_state));
         }
         
         // 记录历史 / Record history
@@ -307,12 +346,10 @@ impl StateManager {
         instance_state.retry_count = 0;
         
         // 设置超时时间 / Set timeout time
-        {
-            let states = self.states.read().unwrap();
-            if let Some(state_def) = states.get(&to_state) {
-                if let Some(timeout) = state_def.timeout {
-                    instance_state.timeout_time = Some(Instant::now() + timeout);
-                }
+        let states = self.states.read().unwrap();
+        if let Some(state_def) = states.get(&to_state) {
+            if let Some(timeout) = state_def.timeout {
+                instance_state.timeout_time = Some(Instant::now() + timeout);
             }
         }
         
@@ -327,8 +364,8 @@ impl StateManager {
         // 通知监听器 / Notify listeners
         self.notify_listeners(StateChangeEvent {
             instance_id: instance_id.to_string(),
-            from_state,
-            to_state,
+            from_state: from_state.clone(),
+            to_state: to_state.clone(),
             change_time: Instant::now(),
             reason,
             state_data: instance_state.state_data.clone(),
@@ -453,11 +490,9 @@ impl StateManager {
     /// 执行进入动作 / Execute Entry Actions
     fn execute_entry_actions(&self, state_name: &str, instance_id: &str) -> Result<(), StateError> {
         // 获取状态定义 / Get state definition
-        let state_def = {
-            let states = self.states.read().unwrap();
-            states.get(state_name)
-                .ok_or_else(|| StateError::StateNotFound(state_name.to_string()))?
-        };
+        let states = self.states.read().unwrap();
+        let state_def = states.get(state_name)
+            .ok_or_else(|| StateError::StateNotFound(state_name.to_string()))?;
         
         // 执行进入动作 / Execute entry actions
         for action in &state_def.entry_actions {
@@ -472,11 +507,9 @@ impl StateManager {
     /// 执行退出动作 / Execute Exit Actions
     fn execute_exit_actions(&self, state_name: &str, instance_id: &str) -> Result<(), StateError> {
         // 获取状态定义 / Get state definition
-        let state_def = {
-            let states = self.states.read().unwrap();
-            states.get(state_name)
-                .ok_or_else(|| StateError::StateNotFound(state_name.to_string()))?
-        };
+        let states = self.states.read().unwrap();
+        let state_def = states.get(state_name)
+            .ok_or_else(|| StateError::StateNotFound(state_name.to_string()))?;
         
         // 执行退出动作 / Execute exit actions
         for action in &state_def.exit_actions {
@@ -627,7 +660,7 @@ impl StateMachineImpl {
     }
     
     /// 验证状态转换 / Validate State Transition
-    fn validate_transition(&self, instance_id: &str, to_state: &str) -> Result<(), StateError> {
+    fn validate_transition(&self, instance_id: &str, _to_state: &str) -> Result<(), StateError> {
         // 获取当前状态 / Get current state
         let instance_state = self.state_manager.get_instance_state(instance_id)
             .ok_or_else(|| StateError::InstanceNotFound(instance_id.to_string()))?;
@@ -670,7 +703,7 @@ impl crate::types::state_machine::StateMachine for StateMachineImpl {
     type Event = StateEvent;
     type Action = String;
     
-    fn transition(&self, state: &Self::State, event: &Self::Event) -> Option<Self::State> {
+    fn transition(&self, _state: &Self::State, event: &Self::Event) -> Option<Self::State> {
         // 这里实现具体的状态转换逻辑
         // Here implement specific state transition logic
         match event {

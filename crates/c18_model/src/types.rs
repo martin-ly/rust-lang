@@ -551,7 +551,7 @@ pub enum SemanticPropertyType {
 /// 
 /// 定义模型的抽象层次。
 /// Defines abstraction levels of models.
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
 pub enum AbstractionLevel {
     /// 具体层次 / Concrete Level
     Concrete,

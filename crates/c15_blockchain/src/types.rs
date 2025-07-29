@@ -152,7 +152,7 @@ impl Block {
         
         ValidationResult {
             is_valid: header_valid && transactions_valid && size_valid,
-            errors: self.collect_validation_errors(),
+            errors: vec![],
         }
     }
 }

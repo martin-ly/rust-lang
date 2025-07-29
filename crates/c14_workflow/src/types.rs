@@ -3,9 +3,28 @@
 //! 本模块定义了工作流系统的核心数据类型和结构。
 //! This module defines the core data types and structures for the workflow system.
 
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize, Serializer, Deserializer};
 use std::collections::HashMap;
 use std::time::{Duration, Instant};
+
+mod timestamp_serde {
+    use super::*;
+    
+    pub fn serialize<S>(instant: &Instant, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        serializer.serialize_u64(instant.elapsed().as_nanos() as u64)
+    }
+    
+    pub fn deserialize<'de, D>(deserializer: D) -> Result<Instant, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let nanos = u64::deserialize(deserializer)?;
+        Ok(Instant::now() - Duration::from_nanos(nanos))
+    }
+}
 
 /// 工作流定义 / Workflow Definition
 /// 
@@ -122,8 +141,10 @@ pub struct WorkflowData {
     /// 数据版本 / Data Version
     pub version: String,
     /// 创建时间 / Creation Time
+    #[serde(with = "timestamp_serde")]
     pub created_at: Instant,
     /// 最后更新时间 / Last Update Time
+    #[serde(with = "timestamp_serde")]
     pub updated_at: Instant,
     /// 元数据 / Metadata
     pub metadata: HashMap<String, serde_json::Value>,
@@ -219,8 +240,10 @@ pub struct WorkflowInstance {
     /// 执行历史 / Execution History
     pub history: Vec<StateTransitionRecord>,
     /// 创建时间 / Creation Time
+    #[serde(with = "timestamp_serde")]
     pub created_at: Instant,
     /// 最后更新时间 / Last Update Time
+    #[serde(with = "timestamp_serde")]
     pub updated_at: Instant,
     /// 状态 / Status
     pub status: WorkflowStatus,
@@ -282,6 +305,7 @@ pub struct StateTransitionRecord {
     /// 目标状态 / Target State
     pub to_state: String,
     /// 时间戳 / Timestamp
+    #[serde(with = "timestamp_serde")]
     pub timestamp: Instant,
     /// 转换数据 / Transition Data
     pub data: Option<serde_json::Value>,

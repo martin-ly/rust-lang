@@ -5,7 +5,7 @@ edition = "2024"
 resolver = "3"
 
 [dependencies]
-thiserror = { version = ">=2.0.12", features = ["full"] }
+thiserror = { version = ">=2.0.12"}
 tokio = { version = ">=1.44.1", features = ["full"] }
 anyhow = "1.0.97"
 

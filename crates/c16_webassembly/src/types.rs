@@ -389,7 +389,7 @@ impl Memory {
             index,
             initial,
             maximum,
-            data: vec![0; size],
+            data: vec![0; size as usize],
         }
     }
     
@@ -501,6 +501,35 @@ pub enum ElementType {
     FuncRef,
     /// 外部引用 / External Reference
     ExternRef,
+}
+
+/// 表类型 / Table Type
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TableType {
+    /// 元素类型 / Element Type
+    pub element_type: ElementType,
+    /// 初始大小 / Initial Size
+    pub initial: u32,
+    /// 最大大小 / Maximum Size
+    pub maximum: Option<u32>,
+}
+
+/// 内存类型 / Memory Type
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MemoryType {
+    /// 初始大小（页数）/ Initial Size (Pages)
+    pub initial: u32,
+    /// 最大大小（页数）/ Maximum Size (Pages)
+    pub maximum: Option<u32>,
+}
+
+/// 全局变量类型 / Global Variable Type
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct GlobalType {
+    /// 值类型 / Value Type
+    pub value_type: ValueType,
+    /// 是否可变 / Mutable Flag
+    pub mutable: bool,
 }
 
 /// 全局变量 / Global Variable

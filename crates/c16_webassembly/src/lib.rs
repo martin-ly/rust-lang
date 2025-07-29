@@ -323,7 +323,7 @@
 //!    - 类型安全验证
 //!    - Type safety verification
 //! 
-! 3. **跨平台优势** / Cross-platform Advantages
+//! 3. **跨平台优势** / Cross-platform Advantages
 //!    - 一次编译，到处运行
 //!    - Write once, run anywhere
 //!    - 与多种语言互操作

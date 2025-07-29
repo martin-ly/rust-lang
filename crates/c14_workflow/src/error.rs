@@ -5,7 +5,7 @@
 
 use std::collections::HashMap;
 use std::time::{Duration, Instant};
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize, Serializer, Deserializer};
 
 /// 工作流错误类型 / Workflow Error Types
 /// 
@@ -43,11 +43,11 @@ pub enum WorkflowError {
     
     /// 验证错误 / Validation error
     #[error("验证错误 / Validation error: {0}")]
-    ValidationError(#[from] crate::types::WorkflowValidationError),
+    ValidationError(String),
     
     /// 数据序列化错误 / Data serialization error
     #[error("数据序列化错误 / Data serialization error: {0}")]
-    SerializationError(#[from] serde_json::Error),
+    SerializationError(String),
     
     /// 网络错误 / Network error
     #[error("网络错误 / Network error: {0}")]
@@ -74,7 +74,7 @@ pub enum WorkflowError {
 /// 
 /// 定义了错误的严重程度，用于错误分类和处理优先级。
 /// Defines error severity levels for error classification and handling priority.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum ErrorSeverity {
     /// 低严重程度 - 可恢复 / Low severity - recoverable
     Low,
@@ -93,6 +93,7 @@ pub enum ErrorSeverity {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ErrorContext {
     /// 错误发生时间 / Error occurrence time
+    #[serde(with = "timestamp_serde")]
     pub timestamp: Instant,
     /// 错误发生位置 / Error location
     pub location: String,
@@ -322,8 +323,10 @@ pub struct ErrorPattern {
     /// 建议解决方案 / Suggested solutions
     pub suggested_solutions: Vec<String>,
     /// 首次出现时间 / First occurrence time
+    #[serde(with = "timestamp_serde")]
     pub first_occurrence: Instant,
     /// 最后出现时间 / Last occurrence time
+    #[serde(with = "timestamp_serde")]
     pub last_occurrence: Instant,
 }
 
@@ -520,6 +523,25 @@ pub struct ErrorStatistics {
 /// 
 /// 提供错误处理的工具函数。
 /// Provides utility functions for error handling.
+mod timestamp_serde {
+    use super::*;
+    
+    pub fn serialize<S>(instant: &Instant, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        serializer.serialize_u64(instant.elapsed().as_nanos() as u64)
+    }
+    
+    pub fn deserialize<'de, D>(deserializer: D) -> Result<Instant, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let nanos = u64::deserialize(deserializer)?;
+        Ok(Instant::now() - Duration::from_nanos(nanos))
+    }
+}
+
 pub mod utils {
     use super::*;
     

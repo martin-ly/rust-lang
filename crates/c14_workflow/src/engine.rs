@@ -7,8 +7,9 @@ use crate::types::*;
 use crate::error::*;
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex, RwLock};
-use tokio::sync::{mpsc, oneshot};
-use tokio::time::{Duration, Instant};
+use tokio::sync::mpsc;
+use tokio::time::Duration;
+use std::time::Instant;
 use serde_json::Value;
 
 /// 工作流引擎 / Workflow Engine
@@ -23,7 +24,7 @@ pub struct WorkflowEngine {
     /// 事件发送器 / Event Sender
     event_sender: mpsc::Sender<WorkflowEvent>,
     /// 事件接收器 / Event Receiver
-    event_receiver: mpsc::Receiver<WorkflowEvent>,
+    event_receiver: Option<mpsc::Receiver<WorkflowEvent>>,
     /// 性能监控器 / Performance Monitor
     performance_monitor: Arc<PerformanceMonitor>,
     /// 配置选项 / Configuration Options
@@ -72,7 +73,7 @@ impl WorkflowEngine {
             workflows: Arc::new(RwLock::new(HashMap::new())),
             instances: Arc::new(RwLock::new(HashMap::new())),
             event_sender,
-            event_receiver,
+            event_receiver: Some(event_receiver),
             performance_monitor,
             config,
         }
@@ -83,12 +84,14 @@ impl WorkflowEngine {
         let start_time = Instant::now();
         
         // 验证工作流定义 / Validate workflow definition
-        definition.validate()?;
+        if let Err(e) = definition.validate() {
+            return Err(WorkflowError::ValidationError(e.to_string()));
+        }
         
         // 检查循环依赖 / Check for circular dependencies
         if crate::types::utils::has_cycles(&definition) {
             return Err(WorkflowError::ValidationError(
-                WorkflowValidationError::CircularDependency
+                "Circular dependency detected".to_string()
             ));
         }
         
@@ -115,7 +118,7 @@ impl WorkflowEngine {
         let start_time = Instant::now();
         
         // 检查工作流定义是否存在 / Check if workflow definition exists
-        let definition = {
+        let _definition = {
             let workflows = self.workflows.read().unwrap();
             workflows.get(name)
                 .ok_or_else(|| WorkflowError::WorkflowNotFound(name.to_string()))?
@@ -171,34 +174,38 @@ impl WorkflowEngine {
     
     /// 处理工作流事件 / Handle Workflow Events
     pub async fn process_events(&mut self) -> Result<(), WorkflowError> {
-        while let Some(event) = self.event_receiver.recv().await {
-            let start_time = Instant::now();
-            
-            match event {
-                WorkflowEvent::Start { instance_id, workflow_name } => {
-                    self.handle_start_event(instance_id, workflow_name).await?;
+        while let Some(receiver) = &mut self.event_receiver {
+            if let Some(event) = receiver.recv().await {
+                let start_time = Instant::now();
+                
+                match event {
+                    WorkflowEvent::Start { instance_id, workflow_name } => {
+                        self.handle_start_event(instance_id, workflow_name).await?;
+                    }
+                    WorkflowEvent::StateTransition { instance_id, from_state, to_state, data } => {
+                        self.handle_state_transition_event(instance_id, from_state, to_state, data).await?;
+                    }
+                    WorkflowEvent::Complete { instance_id, result } => {
+                        self.handle_complete_event(instance_id, result).await?;
+                    }
+                    WorkflowEvent::Error { instance_id, error } => {
+                        self.handle_error_event(instance_id, error).await?;
+                    }
+                    WorkflowEvent::Timeout { instance_id, state } => {
+                        self.handle_timeout_event(instance_id, state).await?;
+                    }
                 }
-                WorkflowEvent::StateTransition { instance_id, from_state, to_state, data } => {
-                    self.handle_state_transition_event(instance_id, from_state, to_state, data).await?;
+                
+                // 记录事件处理性能 / Record event processing performance
+                if self.config.enable_performance_monitoring {
+                    self.performance_monitor.record_operation(
+                        "process_event",
+                        start_time.elapsed(),
+                        None,
+                    );
                 }
-                WorkflowEvent::Complete { instance_id, result } => {
-                    self.handle_complete_event(instance_id, result).await?;
-                }
-                WorkflowEvent::Error { instance_id, error } => {
-                    self.handle_error_event(instance_id, error).await?;
-                }
-                WorkflowEvent::Timeout { instance_id, state } => {
-                    self.handle_timeout_event(instance_id, state).await?;
-                }
-            }
-            
-            // 记录事件处理性能 / Record event processing performance
-            if self.config.enable_performance_monitoring {
-                self.performance_monitor.record_operation(
-                    "process_event",
-                    start_time.elapsed(),
-                    None,
-                );
+            } else {
+                break;
             }
         }
         
@@ -242,7 +249,7 @@ impl WorkflowEngine {
     async fn handle_state_transition_event(
         &self,
         instance_id: String,
-        from_state: String,
+        _from_state: String,
         to_state: String,
         data: Option<Value>,
     ) -> Result<(), WorkflowError> {
@@ -393,7 +400,7 @@ impl OperationStats {
     pub fn update(&mut self, execution_time: Duration) {
         self.call_count += 1;
         self.total_time += execution_time;
-        self.avg_time = self.total_time / self.call_count;
+        self.avg_time = self.total_time / self.call_count as u32;
         self.min_time = self.min_time.min(execution_time);
         self.max_time = self.max_time.max(execution_time);
         self.last_call = Some(Instant::now());
@@ -431,7 +438,7 @@ impl OverallStats {
     pub fn update(&mut self, execution_time: Duration) {
         self.total_operations += 1;
         self.total_execution_time += execution_time;
-        self.avg_response_time = self.total_execution_time / self.total_operations;
+        self.avg_response_time = self.total_execution_time / self.total_operations as u32;
         self.last_activity = Some(Instant::now());
     }
 }
@@ -446,7 +453,7 @@ impl PerformanceMonitor {
     }
     
     /// 记录操作 / Record Operation
-    pub fn record_operation(&self, operation_name: &str, execution_time: Duration, context: Option<String>) {
+    pub fn record_operation(&self, operation_name: &str, execution_time: Duration, _context: Option<String>) {
         // 更新操作统计 / Update operation statistics
         {
             let mut operations = self.operations.lock().unwrap();
@@ -540,7 +547,7 @@ impl WorkflowEngineBuilder {
 /// Manage multiple workflow engine instances.
 pub struct WorkflowEngineManager {
     /// 引擎实例 / Engine Instances
-    engines: Arc<RwLock<HashMap<String, WorkflowEngine>>>,
+    engines: Arc<RwLock<HashMap<String, Arc<WorkflowEngine>>>>,
 }
 
 impl WorkflowEngineManager {
@@ -554,17 +561,17 @@ impl WorkflowEngineManager {
     /// 添加引擎 / Add Engine
     pub fn add_engine(&self, name: String, engine: WorkflowEngine) {
         let mut engines = self.engines.write().unwrap();
-        engines.insert(name, engine);
+        engines.insert(name, Arc::new(engine));
     }
     
     /// 获取引擎 / Get Engine
-    pub fn get_engine(&self, name: &str) -> Option<WorkflowEngine> {
+    pub fn get_engine(&self, name: &str) -> Option<Arc<WorkflowEngine>> {
         let engines = self.engines.read().unwrap();
         engines.get(name).cloned()
     }
     
     /// 移除引擎 / Remove Engine
-    pub fn remove_engine(&self, name: &str) -> Option<WorkflowEngine> {
+    pub fn remove_engine(&self, name: &str) -> Option<Arc<WorkflowEngine>> {
         let mut engines = self.engines.write().unwrap();
         engines.remove(name)
     }
