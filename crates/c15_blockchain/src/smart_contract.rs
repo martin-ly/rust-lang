@@ -35,7 +35,7 @@ impl SmartContract {
         }
     }
     
-    pub fn execute(&mut self, function: &str, params: Vec<Vec<u8>>) -> Result<Vec<u8>, String> {
+    pub fn execute(&mut self, _function: &str, _params: Vec<Vec<u8>>) -> Result<Vec<u8>, String> {
         // 基本执行逻辑
         Ok(vec![])
     }

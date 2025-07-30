@@ -20,7 +20,7 @@ impl AbstractionAnalyzer {
         }
     }
     
-    pub fn analyze_abstraction(&self, model: &crate::framework::Model) -> AbstractionAnalysis {
+    pub fn analyze_abstraction(&self, _model: &crate::framework::Model) -> AbstractionAnalysis {
         // 基本抽象分析逻辑
         AbstractionAnalysis {
             level_analysis: HashMap::new(),

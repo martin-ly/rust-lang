@@ -24,7 +24,7 @@ impl WebAssemblyVM {
         }
     }
     
-    pub fn execute(&mut self, module: &Module) -> Result<(), WebAssemblyError> {
+    pub fn execute(&mut self, _module: &Module) -> Result<(), WebAssemblyError> {
         // 基本执行逻辑
         Ok(())
     }

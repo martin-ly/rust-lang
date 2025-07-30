@@ -22,7 +22,7 @@ impl BlockchainTools {
     }
     
     /// 计算交易哈希 / Calculate transaction hash
-    pub fn calculate_tx_hash(transaction: &Transaction) -> Vec<u8> {
+    pub fn calculate_tx_hash(_transaction: &Transaction) -> Vec<u8> {
         // 基本哈希计算
         vec![]
     }

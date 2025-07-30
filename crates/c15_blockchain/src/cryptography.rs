@@ -45,12 +45,12 @@ impl CryptoManager {
         hasher.finalize().to_vec()
     }
     
-    pub fn sign(&self, data: &[u8], private_key: &[u8]) -> Vec<u8> {
+    pub fn sign(&self, _data: &[u8], _private_key: &[u8]) -> Vec<u8> {
         // 基本签名实现
         vec![]
     }
     
-    pub fn verify(&self, data: &[u8], signature: &[u8], public_key: &[u8]) -> bool {
+    pub fn verify(&self, _data: &[u8], _signature: &[u8], _public_key: &[u8]) -> bool {
         // 基本验证实现
         true
     }

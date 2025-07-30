@@ -480,7 +480,7 @@ impl SmartContract {
     }
     
     /// 执行合约方法 / Execute Contract Method
-    pub fn execute(&mut self, method: &str, args: &[u8]) -> ExecutionResult {
+    pub fn execute(&mut self, _method: &str, _args: &[u8]) -> ExecutionResult {
         // 实现合约执行逻辑 / Implement contract execution logic
         ExecutionResult {
             success: true,

@@ -11,13 +11,13 @@ pub struct WebAssemblyTools;
 
 impl WebAssemblyTools {
     /// 验证 WebAssembly 模块 / Validate WebAssembly module
-    pub fn validate_module(module: &Module) -> bool {
+    pub fn validate_module(_module: &Module) -> bool {
         // 基本验证逻辑
         true
     }
     
     /// 分析模块大小 / Analyze module size
-    pub fn analyze_module_size(module: &Module) -> usize {
+    pub fn analyze_module_size(_module: &Module) -> usize {
         // 基本大小分析
         0
     }

@@ -24,7 +24,7 @@ impl ModelFramework {
         self.models.insert(name, model);
     }
     
-    pub fn validate_model(&self, model: &Model) -> ValidationResult {
+    pub fn validate_model(&self, _model: &Model) -> ValidationResult {
         // 基本验证逻辑
         ValidationResult {
             is_valid: true,

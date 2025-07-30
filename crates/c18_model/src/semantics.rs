@@ -20,7 +20,7 @@ impl SemanticInterpreter {
         }
     }
     
-    pub fn interpret(&self, expression: &Expression) -> Value {
+    pub fn interpret(&self, _expression: &Expression) -> Value {
         // 基本语义解释逻辑
         Value::Unit
     }

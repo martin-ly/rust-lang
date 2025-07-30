@@ -22,7 +22,7 @@ impl SecurityValidator {
         }
     }
     
-    pub fn validate_module(&self, module: &Module) -> Result<(), WebAssemblyError> {
+    pub fn validate_module(&self, _module: &Module) -> Result<(), WebAssemblyError> {
         // 基本安全验证逻辑
         Ok(())
     }

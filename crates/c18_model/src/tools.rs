@@ -11,13 +11,13 @@ pub struct ModelTools;
 
 impl ModelTools {
     /// 验证模型语法 / Validate model syntax
-    pub fn validate_syntax(model: &crate::framework::Model) -> bool {
+    pub fn validate_syntax(_model: &crate::framework::Model) -> bool {
         // 基本语法验证逻辑
         true
     }
     
     /// 分析模型复杂度 / Analyze model complexity
-    pub fn analyze_complexity(model: &crate::framework::Model) -> f64 {
+    pub fn analyze_complexity(_model: &crate::framework::Model) -> f64 {
         // 基本复杂度分析
         1.0
     }

@@ -20,7 +20,7 @@ impl WebAssemblyCompiler {
         }
     }
     
-    pub fn compile(&self, source: &str) -> Result<Module, WebAssemblyError> {
+    pub fn compile(&self, _source: &str) -> Result<Module, WebAssemblyError> {
         // 基本编译逻辑
         Ok(Module::new("default".to_string()))
     }

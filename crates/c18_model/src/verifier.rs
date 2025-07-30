@@ -20,7 +20,7 @@ impl ModelVerifier {
         }
     }
     
-    pub fn verify(&mut self, model: &crate::framework::Model, property: &Property) -> VerificationResult {
+    pub fn verify(&mut self, _model: &crate::framework::Model, _property: &Property) -> VerificationResult {
         // 基本验证逻辑
         VerificationResult {
             is_satisfied: true,

@@ -26,7 +26,7 @@ impl WebAssemblyRuntime {
         self.modules.insert(name, module);
     }
     
-    pub fn execute_function(&self, module_name: &str, function_name: &str, args: Vec<Value>) -> Result<Value, WebAssemblyError> {
+    pub fn execute_function(&self, _module_name: &str, _function_name: &str, _args: Vec<Value>) -> Result<Value, WebAssemblyError> {
         // 基本执行逻辑
         Ok(Value::I32(0))
     }
