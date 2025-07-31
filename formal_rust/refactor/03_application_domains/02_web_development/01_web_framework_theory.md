@@ -1,5 +1,43 @@
 # Web开发框架形式化理论
 
+## 目录
+
+- [Web开发框架形式化理论](#web开发框架形式化理论)
+  - [目录](#目录)
+  - [1. 概述](#1-概述)
+    - [1.1 研究背景](#11-研究背景)
+    - [1.2 理论目标](#12-理论目标)
+  - [2. 形式化基础](#2-形式化基础)
+    - [2.1 Web框架代数结构](#21-web框架代数结构)
+    - [2.2 请求-响应类型理论](#22-请求-响应类型理论)
+  - [3. 中间件系统理论](#3-中间件系统理论)
+    - [3.1 中间件代数](#31-中间件代数)
+    - [3.2 中间件类型系统](#32-中间件类型系统)
+  - [4. 路由系统理论](#4-路由系统理论)
+    - [4.1 路由匹配理论](#41-路由匹配理论)
+    - [4.2 路由树结构](#42-路由树结构)
+  - [5. 异步处理理论](#5-异步处理理论)
+    - [5.1 Future代数](#51-future代数)
+    - [5.2 异步处理器](#52-异步处理器)
+  - [6. 性能优化理论](#6-性能优化理论)
+    - [6.1 内存管理](#61-内存管理)
+    - [6.2 连接池理论](#62-连接池理论)
+  - [7. 安全性理论](#7-安全性理论)
+    - [7.1 输入验证](#71-输入验证)
+    - [7.2 认证授权](#72-认证授权)
+  - [8. Rust实现示例](#8-rust实现示例)
+    - [8.1 基础框架结构](#81-基础框架结构)
+    - [8.2 中间件实现](#82-中间件实现)
+    - [8.3 路由系统](#83-路由系统)
+  - [9. 性能分析](#9-性能分析)
+    - [9.1 时间复杂度分析](#91-时间复杂度分析)
+    - [9.2 空间复杂度分析](#92-空间复杂度分析)
+  - [10. 形式化验证](#10-形式化验证)
+    - [10.1 类型安全证明](#101-类型安全证明)
+    - [10.2 内存安全证明](#102-内存安全证明)
+  - [11. 总结](#11-总结)
+  - [参考文献](#参考文献)
+
 ## 1. 概述
 
 ### 1.1 研究背景
@@ -117,17 +155,20 @@ $$Pattern = String \times \{exact, prefix, regex\}$$
 **定义 4.2** (路由匹配)
 
 路由匹配函数 $match: Pattern \times Path \rightarrow Bool$ 定义为：
-$$match((p, t), path) = \begin{cases}
+$$
+match((p, t), path) = \begin{cases}
 true & \text{if } t = exact \land p = path \\
 true & \text{if } t = prefix \land path.startsWith(p) \\
 true & \text{if } t = regex \land p.matches(path) \\
 false & \text{otherwise}
-\end{cases}$$
+\end{cases}
+$$
 
 **定理 4.1** (路由确定性)
 对于任意路径 $path$ 和模式集合 $P$，最多有一个模式 $p \in P$ 匹配 $path$。
 
 **证明**：
+
 1. 假设存在两个模式 $p_1, p_2 \in P$ 都匹配 $path$
 2. 根据匹配定义，这会导致路由冲突
 3. 因此最多有一个模式匹配
@@ -145,6 +186,7 @@ $$RouteTree = Node \times (String \rightarrow RouteTree)^*$$
 对于任意路由配置，存在唯一的路由树表示。
 
 **证明**：
+
 1. 路由配置可以唯一地映射到树结构
 2. 每个节点对应一个路径段
 3. 因此路由树是唯一的
@@ -160,10 +202,12 @@ $$Future<T> = \mathbb{N} \rightarrow Option<T>$$
 
 **定义 5.2** (Future组合)
 对于 $f_1: Future<A>$, $f_2: A \rightarrow Future<B>$，其组合定义为：
-$$(f_1 \bind f_2)(n) = \begin{cases}
+$$
+(f_1 \bind f_2)(n) = \begin{cases}
 None & \text{if } f_1(n) = None \\
 f_2(a)(n) & \text{if } f_1(n) = Some(a)
-\end{cases}$$
+\end{cases}
+$$
 
 **定理 5.1** (Future结合律)
 Future组合满足结合律：
@@ -179,6 +223,7 @@ $$AsyncHandler = Req \rightarrow Future<Res>$$
 异步处理器保持类型安全性。
 
 **证明**：
+
 1. 异步处理器最终产生同步响应
 2. 因此类型安全性得到保持
 3. 证毕
@@ -197,6 +242,7 @@ $$Pool = \{chunk_1, chunk_2, \ldots, chunk_n\}$$
 使用内存池可以减少内存分配开销。
 
 **证明**：
+
 1. 内存池预分配内存块
 2. 减少运行时分配次数
 3. 因此提高性能
@@ -212,6 +258,7 @@ $$ConnPool = \{conn_1, conn_2, \ldots, conn_m\}$$
 连接复用可以减少连接建立开销。
 
 **证明**：
+
 1. 连接池维护持久连接
 2. 避免重复建立连接
 3. 因此提高性能
@@ -223,15 +270,18 @@ $$ConnPool = \{conn_1, conn_2, \ldots, conn_m\}$$
 
 **定义 7.1** (验证函数)
 验证函数 $validate: Input \rightarrow Result<ValidInput, Error>$ 定义为：
-$$validate(input) = \begin{cases}
+$$
+validate(input) = \begin{cases}
 Ok(valid) & \text{if } isValid(input) \\
 Err(error) & \text{otherwise}
-\end{cases}$$
+\end{cases}
+$$
 
 **定理 7.1** (验证完整性)
 如果所有输入都经过验证，则系统是安全的。
 
 **证明**：
+
 1. 验证函数过滤无效输入
 2. 只有有效输入进入处理流程
 3. 因此系统安全
@@ -241,10 +291,12 @@ Err(error) & \text{otherwise}
 
 **定义 7.2** (认证函数)
 认证函数 $authenticate: Credentials \rightarrow Result<User, AuthError>$ 定义为：
-$$authenticate(creds) = \begin{cases}
+$$
+authenticate(creds) = \begin{cases}
 Ok(user) & \text{if } isValid(creds) \\
 Err(error) & \text{otherwise}
-\end{cases}$$
+\end{cases}
+$$
 
 **定义 7.3** (授权函数)
 授权函数 $authorize: User \times Resource \rightarrow Bool$ 定义为：
@@ -381,6 +433,7 @@ impl RouteMatcher {
 路由匹配的时间复杂度为 $O(n)$，其中 $n$ 是路由数量。
 
 **证明**：
+
 1. 路由匹配需要遍历所有路由
 2. 每个路由的匹配操作是常数时间
 3. 因此总复杂度为 $O(n)$
@@ -390,6 +443,7 @@ impl RouteMatcher {
 中间件链的执行时间复杂度为 $O(m)$，其中 $m$ 是中间件数量。
 
 **证明**：
+
 1. 每个中间件执行一次
 2. 中间件执行是常数时间
 3. 因此总复杂度为 $O(m)$
@@ -401,6 +455,7 @@ impl RouteMatcher {
 框架的内存使用为 $O(r + m)$，其中 $r$ 是路由数量，$m$ 是中间件数量。
 
 **证明**：
+
 1. 路由存储需要 $O(r)$ 空间
 2. 中间件存储需要 $O(m)$ 空间
 3. 因此总空间复杂度为 $O(r + m)$
@@ -414,6 +469,7 @@ impl RouteMatcher {
 Web框架在编译时保证类型安全。
 
 **证明**：
+
 1. Rust类型系统保证所有类型匹配
 2. 泛型约束确保类型一致性
 3. 借用检查器防止数据竞争
@@ -426,6 +482,7 @@ Web框架在编译时保证类型安全。
 Web框架在运行时保证内存安全。
 
 **证明**：
+
 1. 所有权系统防止内存泄漏
 2. 借用检查器防止数据竞争
 3. 生命周期系统管理资源
