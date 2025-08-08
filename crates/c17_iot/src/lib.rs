@@ -588,7 +588,7 @@ pub mod communication;
 pub mod tools;
 
 // 重新导出主要类型 / Re-export main types
-pub use types::*;
+// pub use types::*;
 pub use embedded::*;
 pub use scheduler::*;
 pub use power::*;

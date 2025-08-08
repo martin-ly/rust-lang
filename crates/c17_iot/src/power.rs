@@ -3,8 +3,8 @@
 //! 本模块实现了 IoT 设备的电源管理功能。
 //! This module implements power management functionality for IoT devices.
 
-use crate::types::*;
-use std::collections::HashMap;
+// use crate::types::*;
+// use std::collections::HashMap;
 
 /// IoT 电源管理器 / IoT Power Manager
 pub struct PowerManager {
