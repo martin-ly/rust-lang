@@ -3,8 +3,8 @@
 //! 本模块实现了区块链网络通信功能。
 //! This module implements blockchain network communication functionality.
 
-use crate::types::*;
-use std::collections::HashMap;
+// use crate::types::*;
+// use std::collections::HashMap;
 
 /// 网络节点类型 / Network Node Type
 #[derive(Debug, Clone)]

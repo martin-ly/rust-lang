@@ -3,8 +3,8 @@
 //! 本模块实现了区块链相关的密码学功能。
 //! This module implements blockchain-related cryptographic functions.
 
-use crate::types::*;
-use std::collections::HashMap;
+// use crate::types::*;
+// use std::collections::HashMap;
 
 /// 哈希算法类型 / Hash Algorithm Type
 #[derive(Debug, Clone)]

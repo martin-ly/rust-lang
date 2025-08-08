@@ -4,7 +4,7 @@
 //! This module implements various blockchain consensus algorithms.
 
 use crate::types::*;
-use std::collections::HashMap;
+// use std::collections::HashMap;
 
 /// 共识算法类型 / Consensus Algorithm Type
 #[derive(Debug, Clone)]

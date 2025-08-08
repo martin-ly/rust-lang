@@ -4,7 +4,7 @@
 //! This module defines the core data types and structures for the IoT system.
 
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
+// use std::collections::HashMap;
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
 /// 实时任务 / Real-time Task
@@ -409,7 +409,7 @@ impl PowerOptimizationResult {
     }
     
     /// 添加策略结果 / Add Strategy Result
-    pub fn add_strategy_result(&mut self, strategy: EnergySavingStrategy, result: StrategyResult) {
+    pub fn add_strategy_result(&mut self, _strategy: EnergySavingStrategy, result: StrategyResult) {
         self.strategy_results.push(result.clone());
         self.total_energy_saved += result.energy_saved;
         

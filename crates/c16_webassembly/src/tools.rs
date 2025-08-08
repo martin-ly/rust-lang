@@ -4,7 +4,7 @@
 //! This module provides WebAssembly-related utility functions.
 
 use crate::types::*;
-use std::collections::HashMap;
+// use std::collections::HashMap;
 
 /// WebAssembly 工具 / WebAssembly Tools
 pub struct WebAssemblyTools;

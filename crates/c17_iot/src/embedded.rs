@@ -3,8 +3,8 @@
 //! 本模块实现了 IoT 嵌入式系统的核心功能。
 //! This module implements the core functionality of IoT embedded systems.
 
-use crate::types::*;
-use std::collections::HashMap;
+// use crate::types::*;
+// use std::collections::HashMap;
 
 /// 传感器 / Sensor
 #[derive(Debug, Clone)]

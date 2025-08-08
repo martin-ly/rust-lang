@@ -3,7 +3,7 @@
 //! 本模块实现了智能合约的执行和管理功能。
 //! This module implements smart contract execution and management functionality.
 
-use crate::types::*;
+// use crate::types::*;
 use std::collections::HashMap;
 
 /// 智能合约状态 / Smart Contract State

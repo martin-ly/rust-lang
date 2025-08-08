@@ -4,7 +4,7 @@
 //! This module implements WebAssembly compilation functionality.
 
 use crate::types::*;
-use std::collections::HashMap;
+// use std::collections::HashMap;
 
 /// WebAssembly 编译器 / WebAssembly Compiler
 pub struct WebAssemblyCompiler {

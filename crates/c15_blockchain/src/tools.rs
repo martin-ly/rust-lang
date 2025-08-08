@@ -4,7 +4,7 @@
 //! This module provides blockchain-related utility functions.
 
 use crate::types::*;
-use std::collections::HashMap;
+// use std::collections::HashMap;
 
 /// 区块链工具 / Blockchain Tools
 pub struct BlockchainTools;

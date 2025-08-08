@@ -4,7 +4,7 @@
 //! This module implements WebAssembly security validation functionality.
 
 use crate::types::*;
-use std::collections::HashMap;
+// use std::collections::HashMap;
 
 /// WebAssembly 安全验证器 / WebAssembly Security Validator
 pub struct SecurityValidator {
