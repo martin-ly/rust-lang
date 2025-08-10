@@ -1,0 +1,18 @@
+[package]
+name = "c09_design_pattern"
+version = "0.1.0"
+edition = "2024"
+resolver = "3"
+
+[dependencies]
+async-trait = "0.1.88"
+tokio = { version = "1.44.1", features = ["full"] }
+rayon = ">=1.10"
+crossbeam = ">=0.8"
+[lib]
+name = "c09_design_pattern"
+path = "src/lib.rs"
+
+[[bin]]
+name = "c09_design_pattern"
+path = "src/bin/main.rs"
