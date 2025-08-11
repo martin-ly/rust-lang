@@ -1,5 +1,17 @@
 # 移动语义深度分析
 
+## 📅 文档信息
+
+**文档版本**: v1.0  
+**创建日期**: 2025-08-11  
+**最后更新**: 2025-08-11  
+**状态**: 已完成  
+**质量等级**: 钻石级 ⭐⭐⭐⭐⭐
+
+---
+
+
+
 ## 目录
 
 - [理论基础](#理论基础)
@@ -828,8 +840,8 @@ where
 
 > **链接网络**:
 >
-> - 相关文档: [所有权规则语义](./01_ownership_rules_semantics.md) | [借用语义模型](./02_borrowing_semantics.md) | [生命周期语义](./03_lifetime_semantics.md)
+> - 相关文档: [所有权规则语义](01_ownership_rules_semantics.md) | [借用语义模型](02_borrowing_semantics.md) | [生命周期语义](03_lifetime_semantics.md)
 > - 上级文档: [所有权系统语义](../04_ownership_system_semantics.md) | [基础语义层](../../01_foundation_semantics.md)  
-> - 下级文档: [复制克隆语义](./05_copy_clone_semantics.md) | [Drop语义模型](./06_drop_semantics.md)
+> - 下级文档: [复制克隆语义](05_copy_clone_semantics.md) | [Drop语义模型](06_drop_semantics.md)
 >
 > **深度**: ⭐⭐⭐⭐⭐ **广度**: ⭐⭐⭐⭐⭐ **完成度**: 100%

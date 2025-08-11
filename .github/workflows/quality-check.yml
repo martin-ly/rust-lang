@@ -1,0 +1,38 @@
+name: Quality Assurance
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  docs-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run Standardization (dry run)
+        run: |
+          python scripts/standardize_docs.py formal_rust/refactor --report standardization_report_ci.md
+
+      - name: Link Check
+        run: |
+          python scripts/check_links.py formal_rust/refactor --out link_check_report_ci.md
+
+      - name: Duplicate Analysis
+        run: |
+          python scripts/find_duplicates.py formal_rust/refactor --out duplicates_report_ci.md
+
+      - name: Upload QA Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-reports
+          path: |
+            standardization_report_ci.md
+            link_check_report_ci.md
+            duplicates_report_ci.md 

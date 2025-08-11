@@ -511,17 +511,23 @@ pub mod variable;
 
 // 重新导出主要类型 / Re-export main types
 pub use copy_move::*;
-pub use expression::*;
-pub use function::*;
+//pub use expression::*;
+//pub use function::*;
 pub use internal_mut::*;
-pub use scope::*;
-pub use variable::*;
+//pub use scope::*;
+//pub use variable::*;
+
 
 /// 所有权系统版本 / Ownership System Version
 pub const VERSION: &str = "1.0.0";
+
+
+/*
 
 /// 模块初始化 / Module Initialization
 pub fn init() -> Result<(), crate::error::OwnershipError> {
     println!("Rust所有权和借用作用域模块已初始化 / Rust Ownership and Borrowing Scope Module Initialized");
     Ok(())
 }
+
+*/

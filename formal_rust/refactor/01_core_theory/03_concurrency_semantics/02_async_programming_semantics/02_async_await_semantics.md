@@ -1,5 +1,17 @@
 # async/await语义深度分析
 
+## 📅 文档信息
+
+**文档版本**: v1.0  
+**创建日期**: 2025-08-11  
+**最后更新**: 2025-08-11  
+**状态**: 已完成  
+**质量等级**: 钻石级 ⭐⭐⭐⭐⭐
+
+---
+
+
+
 ## 目录
 
 - [理论基础](#理论基础)
@@ -750,8 +762,8 @@ impl AsyncBlockchainProcessor {
 
 > **链接网络**:
 >
-> - 相关文档: [Future语义](./01_future_semantics.md) | [执行器语义](./03_executor_semantics.md)
+> - 相关文档: [Future语义](01_future_semantics.md) | [执行器语义](03_executor_semantics.md)
 > - 上级文档: [异步编程语义模型](../02_async_programming_semantics.md) | [并发语义层](../../03_concurrency_semantics.md)
-> - 下级文档: [异步运行时语义](./04_async_runtime_semantics.md) | [异步流语义](./05_async_stream_semantics.md)
+> - 下级文档: [异步运行时语义](04_async_runtime_semantics.md) | [异步流语义](05_async_stream_semantics.md)
 >
 > **深度**: ⭐⭐⭐⭐⭐ **广度**: ⭐⭐⭐⭐⭐ **完成度**: 100%

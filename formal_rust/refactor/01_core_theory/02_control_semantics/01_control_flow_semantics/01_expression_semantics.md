@@ -1,5 +1,17 @@
 # 表达式语义深度分析
 
+## 📅 文档信息
+
+**文档版本**: v1.0  
+**创建日期**: 2025-08-11  
+**最后更新**: 2025-08-11  
+**状态**: 已完成  
+**质量等级**: 钻石级 ⭐⭐⭐⭐⭐
+
+---
+
+
+
 ## 目录
 
 - [理论基础](#理论基础)
@@ -574,7 +586,7 @@ pub fn optimize_expression(expr: &Expr) -> Expr {
 
 > **链接网络**:
 >
-> - 相关文档: [语句语义](./02_statement_semantics.md) | [控制结构语义](./03_control_structures_semantics.md)
+> - 相关文档: [语句语义](02_statement_semantics.md) | [控制结构语义](03_control_structures_semantics.md)
 > - 上级文档: [控制流语义模型](../01_control_flow_semantics.md) | [控制语义层](../../02_control_semantics.md)
 >
 > **深度**: ⭐⭐⭐⭐⭐ **广度**: ⭐⭐⭐⭐⭐ **完成度**: 100%

@@ -12,12 +12,14 @@
 ### 1. 环境准备 (1分钟)
 
 #### 1.1 系统要求
+
 - **操作系统**: Windows 10+, macOS 10.15+, Ubuntu 18.04+
 - **内存**: 8GB+ (推荐16GB+)
 - **存储**: 2GB可用空间
 - **网络**: 稳定的互联网连接
 
 #### 1.2 安装Rust
+
 ```bash
 # 安装Rust工具链
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -28,6 +30,7 @@ cargo --version
 ```
 
 #### 1.3 安装形式化验证工具
+
 ```bash
 # 安装Coq
 opam install coq
@@ -57,12 +60,14 @@ cargo build
 #### 3.1 所有权系统示例
 
 **创建新项目**:
+
 ```bash
 cargo new ownership_example
 cd ownership_example
 ```
 
 **编辑 `src/main.rs`**:
+
 ```rust
 use std::collections::HashMap;
 
@@ -143,12 +148,14 @@ fn main() {
 ```
 
 **运行示例**:
+
 ```bash
 cargo run
 ```
 
 **预期输出**:
-```
+
+```text
 Bob borrowed 100 gold from Alice
 Alice transferred silver to Bob
 Bob now owns 50 silver
@@ -157,6 +164,7 @@ Bob now owns 50 silver
 #### 3.2 类型系统示例
 
 **创建类型系统示例**:
+
 ```rust
 use std::fmt;
 
@@ -252,6 +260,7 @@ fn main() {
 #### 4.1 Coq证明示例
 
 **创建 `proofs/ownership_safety.v`**:
+
 ```coq
 (* 所有权安全性证明 *)
 Require Import Coq.Lists.List.
@@ -302,6 +311,7 @@ Qed.
 ```
 
 **验证证明**:
+
 ```bash
 coqc proofs/ownership_safety.v
 ```
@@ -309,6 +319,7 @@ coqc proofs/ownership_safety.v
 #### 4.2 Lean 4证明示例
 
 **创建 `proofs/type_safety.lean`**:
+
 ```lean
 -- 类型安全性证明
 inductive Type where
@@ -352,6 +363,7 @@ theorem type_safety :
 ```
 
 **验证证明**:
+
 ```bash
 lean --run proofs/type_safety.lean
 ```
@@ -359,6 +371,7 @@ lean --run proofs/type_safety.lean
 ## 🔧 常用命令
 
 ### 1. 项目构建
+
 ```bash
 # 构建项目
 cargo build
@@ -371,6 +384,7 @@ cargo clean
 ```
 
 ### 2. 测试运行
+
 ```bash
 # 运行所有测试
 cargo test
@@ -383,6 +397,7 @@ cargo test -- --nocapture
 ```
 
 ### 3. 文档生成
+
 ```bash
 # 生成文档
 cargo doc
@@ -395,6 +410,7 @@ cargo doc --document-private-items
 ```
 
 ### 4. 代码检查
+
 ```bash
 # 代码格式检查
 cargo fmt --check
@@ -409,16 +425,19 @@ cargo audit
 ## 📚 下一步学习
 
 ### 1. 理论深入学习
+
 - **所有权系统**: 阅读 `theoretical-foundations/ownership/` 目录
 - **类型系统**: 阅读 `theoretical-foundations/type-theory/` 目录
 - **并发模型**: 阅读 `theoretical-foundations/concurrency-models/` 目录
 
 ### 2. 实践项目
+
 - **Web框架**: 参考 `ecosystem-applications/open-source-integration/web-frameworks-theory.md`
 - **数据库集成**: 参考 `ecosystem-applications/open-source-integration/database-integration-theory.md`
 - **机器学习**: 参考 `ecosystem-applications/open-source-integration/machine-learning-integration-theory.md`
 
 ### 3. 行业应用
+
 - **金融科技**: 参考 `ecosystem-applications/industry-solutions/fintech-theory-framework.md`
 - **游戏开发**: 参考 `ecosystem-applications/industry-solutions/game-development-theory.md`
 - **物联网**: 参考 `ecosystem-applications/industry-solutions/iot-theory-framework.md`
@@ -427,8 +446,10 @@ cargo audit
 ## 🆘 常见问题
 
 ### 1. 安装问题
+
 **Q: Rust安装失败怎么办？**
 A: 检查网络连接，尝试使用镜像源：
+
 ```bash
 export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
 export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
@@ -437,6 +458,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 **Q: Coq安装失败怎么办？**
 A: 使用包管理器安装：
+
 ```bash
 # Ubuntu/Debian
 sudo apt-get install coq
@@ -449,27 +471,33 @@ brew install coq
 ```
 
 ### 2. 编译问题
+
 **Q: 编译时出现所有权错误怎么办？**
 A: 这是正常的，Rust的所有权系统在保护你。参考错误信息修改代码：
+
 - 使用引用 `&` 进行借用
 - 使用可变引用 `&mut` 进行可变借用
 - 使用 `clone()` 进行值拷贝
 
 **Q: 类型检查失败怎么办？**
 A: 检查类型注解和类型推断：
+
 - 明确指定类型注解
 - 检查函数签名
 - 使用 `as` 进行类型转换
 
 ### 3. 验证问题
+
 **Q: Coq证明失败怎么办？**
 A: 检查证明步骤：
+
 - 使用 `simpl` 简化表达式
 - 使用 `auto` 自动证明
 - 使用 `induction` 进行归纳证明
 
 **Q: Lean 4证明失败怎么办？**
 A: 检查证明策略：
+
 - 使用 `intro` 引入变量
 - 使用 `apply` 应用定理
 - 使用 `induction` 进行归纳
@@ -477,20 +505,23 @@ A: 检查证明策略：
 ## 📞 获取帮助
 
 ### 1. 官方资源
+
 - **项目文档**: `docs/` 目录
 - **API参考**: `cargo doc --open`
 - **示例代码**: `examples/` 目录
 
 ### 2. 社区支持
+
 - **GitHub Issues**: 报告问题和建议
 - **Discord**: 实时讨论和帮助
 - **Stack Overflow**: 技术问答
 
 ### 3. 学习资源
-- **Rust Book**: https://doc.rust-lang.org/book/
-- **Rust Reference**: https://doc.rust-lang.org/reference/
-- **Coq Manual**: https://coq.inria.fr/refman/
-- **Lean 4 Manual**: https://leanprover.github.io/lean4/doc/
+
+- **Rust Book**: <https://doc.rust-lang.org/book/>
+- **Rust Reference**: <https://doc.rust-lang.org/reference/>
+- **Coq Manual**: <https://coq.inria.fr/refman/>
+- **Lean 4 Manual**: <https://leanprover.github.io/lean4/doc/>
 
 ---
 
@@ -498,4 +529,4 @@ A: 检查证明策略：
 **质量等级**: 💎 **钻石级** (9.0/10)  
 **用户友好度**: 🌟 **极佳**  
 **实用性**: 🚀 **立即可用**  
-**Ready for Users**: ✅ **完全就绪** 
+**Ready for Users**: ✅ **完全就绪**

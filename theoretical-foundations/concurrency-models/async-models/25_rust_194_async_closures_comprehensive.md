@@ -58,7 +58,7 @@ let processed = process_async_stream(data_stream, async |item| {
 
 ### 1.2 异步闭包的类型系统扩展
 
-**形式化模型1: 异步闭包类型理论**
+**形式化模型1: 异步闭包类型理论**:
 
 ```mathematical
 异步闭包类型定义:
@@ -567,7 +567,7 @@ enum EventError {
 
 ### 4.1 异步闭包的零开销实现
 
-**形式化模型2: 异步闭包性能模型**
+**形式化模型2: 异步闭包性能模型**:
 
 ```mathematical
 异步闭包性能分析:
@@ -941,7 +941,7 @@ async fn new_stream_processing() -> Result<Vec<String>, ProcessingError> {
 
 ### 6.1 经济影响量化评估
 
-**形式化模型3: 异步闭包经济价值模型**
+**形式化模型3: 异步闭包经济价值模型**:
 
 ```mathematical
 异步闭包经济价值评估:

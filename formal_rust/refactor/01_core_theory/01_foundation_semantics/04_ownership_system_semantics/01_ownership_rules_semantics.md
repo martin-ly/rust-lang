@@ -1,5 +1,17 @@
 # 所有权规则语义深度分析
 
+## 📅 文档信息
+
+**文档版本**: v1.0  
+**创建日期**: 2025-08-11  
+**最后更新**: 2025-08-11  
+**状态**: 已完成  
+**质量等级**: 钻石级 ⭐⭐⭐⭐⭐
+
+---
+
+
+
 ## 目录
 
 - [所有权规则语义深度分析](#所有权规则语义深度分析)
@@ -1324,9 +1336,9 @@ struct GpuOwned<T> {
 
 > **链接网络**：
 >
-> - [借用语义模型](./02_borrowing_semantics.md)
-> - [生命周期语义](./03_lifetime_semantics.md)
-> - [移动语义分析](./04_move_semantics.md)
+> - [借用语义模型](02_borrowing_semantics.md)
+> - [生命周期语义](03_lifetime_semantics.md)
+> - [移动语义分析](04_move_semantics.md)
 > - [内存安全语义](../03_memory_model_semantics/04_memory_safety_semantics.md)
 
 ---

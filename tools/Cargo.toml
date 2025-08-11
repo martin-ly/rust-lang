@@ -1,0 +1,18 @@
+[package]
+name = "doc-checker"
+version = "0.1.0"
+edition = "2021"
+authors = ["Rust Formal Theory Team"]
+description = "Document format checker for Rust formal theory system"
+license = "MIT"
+
+[dependencies]
+walkdir = "2.4"
+tempfile = "3.8"
+
+[dev-dependencies]
+tempfile = "3.8"
+
+[[bin]]
+name = "doc-checker"
+path = "doc_checker.rs" 

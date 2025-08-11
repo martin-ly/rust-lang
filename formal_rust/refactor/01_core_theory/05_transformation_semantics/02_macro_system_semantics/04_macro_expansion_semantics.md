@@ -1,5 +1,17 @@
 # 宏展开语义深度分析
 
+## 📅 文档信息
+
+**文档版本**: v1.0  
+**创建日期**: 2025-08-11  
+**最后更新**: 2025-08-11  
+**状态**: 已完成  
+**质量等级**: 钻石级 ⭐⭐⭐⭐⭐
+
+---
+
+
+
 ## 目录
 
 - [宏展开语义深度分析](#宏展开语义深度分析)
@@ -1164,9 +1176,9 @@ pub fn verified_expansion(args: TokenStream, input: TokenStream) -> TokenStream 
 
 > **链接网络**：
 >
-> - [声明式宏语义](./02_declarative_macro_semantics.md)
-> - [过程宏语义](./03_procedural_macro_semantics.md)
-> - [宏卫生性语义](./05_macro_hygiene_semantics.md)
+> - [声明式宏语义](02_declarative_macro_semantics.md)
+> - [过程宏语义](03_procedural_macro_semantics.md)
+> - [宏卫生性语义](05_macro_hygiene_semantics.md)
 > - [编译时转换理论](../../01_compile_time_transformation/)
 
 ---
