@@ -1,18 +1,39 @@
 [package]
-name = "doc-checker"
+name = "rust-formal-tools"
 version = "0.1.0"
 edition = "2021"
-authors = ["Rust Formal Theory Team"]
-description = "Document format checker for Rust formal theory system"
+authors = ["AI Assistant <ai@rust-formal.org>"]
+description = "Rust形式化理论项目质量改进工具集"
 license = "MIT"
+repository = "https://github.com/rust-formal/rust-formal-tools"
 
 [dependencies]
-walkdir = "2.4"
 tempfile = "3.8"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+clap = { version = "4.0", features = ["derive"] }
+walkdir = "2.4"
+regex = "1.10"
+indicatif = "0.17"
+colored = "2.0"
 
 [dev-dependencies]
 tempfile = "3.8"
 
 [[bin]]
-name = "doc-checker"
-path = "doc_checker.rs" 
+name = "terminology_fixer"
+path = "terminology_fixer.rs"
+
+[[bin]]
+name = "structure_checker"
+path = "structure_checker.rs"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+
+[profile.dev]
+opt-level = 0
+debug = true 
