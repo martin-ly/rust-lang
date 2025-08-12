@@ -1,4 +1,4 @@
-# 系统编程进程管理形式化理论
+﻿# 系统编程进程管理形式化理论
 
 ## 📅 文档信息
 
@@ -1158,3 +1158,4 @@ fn quantum_process_management_concept() {
 - [内存管理](01_memory_management.md)
 - [并发语义](../../01_core_theory/03_concurrency_semantics/00_index.md)
 - [错误处理语义](../../01_core_theory/03_concurrency_semantics/03_error_handling_semantics/00_index.md)
+

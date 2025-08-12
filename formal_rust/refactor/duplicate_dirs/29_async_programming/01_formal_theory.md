@@ -1,4 +1,4 @@
-# Rust 异步编程：形式化理论与哲学基础
+﻿# Rust 异步编程：形式化理论与哲学基础
 
 ## 📅 文档信息
 
@@ -15,7 +15,7 @@
 **文档版本**：V1.0  
 **创建日期**：2025-01-27  
 **类别**：形式化理论  
-**交叉引用**：[04_concurrency](../04_concurrency/01_formal_theory.md), [05_futures](../05_futures/01_formal_theory.md)
+**交叉引用**：[04_concurrency](01_formal_theory.md), [05_futures](01_formal_theory.md)
 
 ## 目录
 
@@ -428,3 +428,4 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 **文档状态**：已完成  
 **下次评审**：2025-02-27  
 **维护者**：Rust 形式化理论团队
+

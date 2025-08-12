@@ -1,4 +1,4 @@
-# Rust内存布局语义深度分析
+﻿# Rust内存布局语义深度分析
 
 ## 📅 文档信息
 
@@ -643,7 +643,7 @@ fn analyze_async_layout() {
 
 > **链接网络**:
 >
-> - [类型系统语义](01_type_system_semantics/)
+> - [类型系统语义](../01_type_system_semantics)
 > - [变量系统语义](../02_variable_system_semantics/)
 > - [内存分配语义](02_memory_allocation_semantics.md)
 > - [内存安全语义](03_memory_safety_semantics.md)
@@ -652,3 +652,4 @@ fn analyze_async_layout() {
 > - [Rust内存模型](https://doc.rust-lang.org/nomicon/)
 > - [内存布局参考](https://doc.rust-lang.org/reference/type-layout.html)
 > - [系统编程指南](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)
+

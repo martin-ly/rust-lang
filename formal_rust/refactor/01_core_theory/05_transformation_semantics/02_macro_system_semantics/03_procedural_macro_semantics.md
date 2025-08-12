@@ -1,4 +1,4 @@
-# 过程宏语义深度分析
+﻿# 过程宏语义深度分析
 
 ## 📅 文档信息
 
@@ -831,9 +831,10 @@ pub fn derive_multi_lang_bindings(input: TokenStream) -> TokenStream {
 >
 > - [声明式宏语义分析](02_declarative_macro_semantics.md)
 > - [宏展开语义模型](04_macro_expansion_semantics.md)
-> - [编译时转换理论](../../01_compile_time_transformation/)
-> - [trait系统语义](../../03_trait_system_semantics/)
+> - [编译时转换理论](../01_compile_time_transformation)
+> - [trait系统语义](../03_trait_system_semantics)
 
 ---
 
 > **版本信息**：文档版本 v1.0.0，最后更新于 2024-12-30
+

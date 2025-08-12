@@ -1,4 +1,4 @@
-# Trait对象语义深度分析
+﻿# Trait对象语义深度分析
 
 ## 📅 文档信息
 
@@ -867,4 +867,5 @@ fn verify_zero_cost<T: ZeroCostTraitObject>(t: T) {
 
 ---
 
-> **链接网络**: [Trait定义语义](01_trait_definition_semantics.md) | [Trait实现语义](02_trait_implementation_semantics.md) | [Trait边界语义](03_trait_bounds_semantics.md) | [关联类型语义](04_associated_types_semantics.md) | [类型系统语义](../01_foundation_semantics/01_type_system_semantics/00_type_system_semantics_index.md)
+> **链接网络**: [Trait定义语义](01_trait_definition_semantics.md) | [Trait实现语义](02_trait_implementation_semantics.md) | [Trait边界语义](03_trait_bounds_semantics.md) | [关联类型语义](04_associated_types_semantics.md) | [类型系统语义](../../01_foundation_semantics/01_type_system_semantics/00_type_system_semantics_index.md)
+

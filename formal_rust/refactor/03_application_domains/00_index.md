@@ -1,4 +1,4 @@
-# Application Domains Module - 应用领域模块主索引
+﻿# Application Domains Module - 应用领域模块主索引
 
 ## 📅 文档信息
 
@@ -139,7 +139,7 @@ The Application Domains Module represents the applied layer of Rust language for
 
 ### 2. Web Development Semantics - Web开发语义 🔄
 
-- **[02_web_development/00_index.md](02_web_development/00_index.md)** - Web Development Semantics
+- **[02_web_development/00_index.md](00_index.md)** - Web Development Semantics
   - Frontend Framework Semantics - 前端框架语义
   - Backend Service Semantics - 后端服务语义
   - API Design Semantics - API设计语义
@@ -167,7 +167,7 @@ The Application Domains Module represents the applied layer of Rust language for
 
 ### 3. Embedded Systems Semantics - 嵌入式系统语义 🔄
 
-- **[03_embedded_systems/00_index.md](03_embedded_systems/00_index.md)** - Embedded Systems Semantics
+- **[03_embedded_systems/00_index.md](00_index.md)** - Embedded Systems Semantics
   - Real-time System Semantics - 实时系统语义
   - Hardware Abstraction Semantics - 硬件抽象语义
   - Interrupt Handling Semantics - 中断处理语义
@@ -195,7 +195,7 @@ The Application Domains Module represents the applied layer of Rust language for
 
 ### 4. AI/ML Semantics - AI/ML语义 🔄
 
-- **[04_ai_ml/00_index.md](04_ai_ml/00_index.md)** - AI/ML Semantics
+- **[04_ai_ml/00_index.md](00_index.md)** - AI/ML Semantics
   - Machine Learning Semantics - 机器学习语义
   - Deep Learning Semantics - 深度学习语义
   - Data Processing Semantics - 数据处理语义
@@ -223,7 +223,7 @@ The Application Domains Module represents the applied layer of Rust language for
 
 ### 5. Blockchain Semantics - 区块链语义 🔄
 
-- **[05_blockchain/00_index.md](05_blockchain/00_index.md)** - Blockchain Semantics
+- **[05_blockchain/00_index.md](00_index.md)** - Blockchain Semantics
   - Smart Contract Semantics - 智能合约语义
   - Consensus Algorithm Semantics - 共识算法语义
   - Cryptography Semantics - 密码学语义
@@ -251,7 +251,7 @@ The Application Domains Module represents the applied layer of Rust language for
 
 ### 6. Gaming Semantics - 游戏开发语义 🔄
 
-- **[06_gaming/00_index.md](06_gaming/00_index.md)** - Gaming Semantics
+- **[06_gaming/00_index.md](00_index.md)** - Gaming Semantics
   - Game Engine Semantics - 游戏引擎语义
   - Physics Engine Semantics - 物理引擎语义
   - Rendering Engine Semantics - 渲染引擎语义
@@ -279,7 +279,7 @@ The Application Domains Module represents the applied layer of Rust language for
 
 ### 7. Fintech Semantics - 金融科技语义 🔄
 
-- **[07_fintech/00_index.md](07_fintech/00_index.md)** - Fintech Semantics
+- **[07_fintech/00_index.md](00_index.md)** - Fintech Semantics
   - Trading System Semantics - 交易系统语义
   - Risk Control Semantics - 风险控制语义
   - Compliance Check Semantics - 合规检查语义
@@ -307,7 +307,7 @@ The Application Domains Module represents the applied layer of Rust language for
 
 ### 8. IoT Semantics - 物联网语义 🔄
 
-- **[08_iot/00_index.md](08_iot/00_index.md)** - IoT Semantics
+- **[08_iot/00_index.md](00_index.md)** - IoT Semantics
   - Sensor Data Semantics - 传感器数据语义
   - Device Communication Semantics - 设备通信语义
   - Edge Computing Semantics - 边缘计算语义
@@ -335,7 +335,7 @@ The Application Domains Module represents the applied layer of Rust language for
 
 ### 9. Cloud Infrastructure Semantics - 云基础设施语义 🔄
 
-- **[09_cloud_infrastructure/00_index.md](09_cloud_infrastructure/00_index.md)** - Cloud Infrastructure Semantics
+- **[09_cloud_infrastructure/00_index.md](00_index.md)** - Cloud Infrastructure Semantics
   - Containerization Semantics - 容器化语义
   - Microservices Semantics - 微服务语义
   - Load Balancing Semantics - 负载均衡语义
@@ -363,7 +363,7 @@ The Application Domains Module represents the applied layer of Rust language for
 
 ### 10. Big Data Analytics Semantics - 大数据分析语义 🔄
 
-- **[10_big_data_analytics/00_index.md](10_big_data_analytics/00_index.md)** - Big Data Analytics Semantics
+- **[10_big_data_analytics/00_index.md](00_index.md)** - Big Data Analytics Semantics
   - Data Stream Processing Semantics - 数据流处理语义
   - Batch Processing Semantics - 批处理语义
   - Data Warehouse Semantics - 数据仓库语义
@@ -391,7 +391,7 @@ The Application Domains Module represents the applied layer of Rust language for
 
 ### 11. Cybersecurity Semantics - 网络安全语义 🔄
 
-- **[11_cybersecurity/00_index.md](11_cybersecurity/00_index.md)** - Cybersecurity Semantics
+- **[11_cybersecurity/00_index.md](00_index.md)** - Cybersecurity Semantics
   - Encryption Algorithm Semantics - 加密算法语义
   - Authentication Authorization Semantics - 认证授权语义
   - Intrusion Detection Semantics - 入侵检测语义
@@ -419,7 +419,7 @@ The Application Domains Module represents the applied layer of Rust language for
 
 ### 12. Healthcare Semantics - 医疗健康语义 🔄
 
-- **[12_healthcare/00_index.md](12_healthcare/00_index.md)** - Healthcare Semantics
+- **[12_healthcare/00_index.md](00_index.md)** - Healthcare Semantics
   - Medical Device Semantics - 医疗设备语义
   - Health Data Semantics - 健康数据语义
   - Diagnostic System Semantics - 诊断系统语义
@@ -447,7 +447,7 @@ The Application Domains Module represents the applied layer of Rust language for
 
 ### 13. Education Technology Semantics - 教育科技语义 🔄
 
-- **[13_education_tech/00_index.md](13_education_tech/00_index.md)** - Education Technology Semantics
+- **[13_education_tech/00_index.md](00_index.md)** - Education Technology Semantics
   - Learning Platform Semantics - 学习平台语义
   - Assessment System Semantics - 评估系统语义
   - Personalized Learning Semantics - 个性化学习语义
@@ -475,7 +475,7 @@ The Application Domains Module represents the applied layer of Rust language for
 
 ### 14. Automotive Semantics - 汽车语义 🔄
 
-- **[14_automotive/00_index.md](14_automotive/00_index.md)** - Automotive Semantics
+- **[14_automotive/00_index.md](00_index.md)** - Automotive Semantics
   - Autonomous Driving Semantics - 自动驾驶语义
   - Vehicle System Semantics - 车载系统语义
   - Sensor Fusion Semantics - 传感器融合语义
@@ -984,3 +984,4 @@ graph TB
 - [Core Theory Main Index - 核心理论主索引](../../01_core_theory/00_index.md)
 - [Design Pattern Semantics - 设计模式语义](../../02_design_patterns/00_index.md)
 - [Engineering Practice Semantics - 工程实践语义](../../04_engineering_practices/00_index.md)
+

@@ -1,4 +1,4 @@
-# 1.0 Rust内存布局语义模型深度分析
+﻿# 1.0 Rust内存布局语义模型深度分析
 
 ## 📅 文档信息
 
@@ -675,4 +675,5 @@ fn quantum_memory_layout() {
 
 ---
 
-> **链接网络**: [内存模型语义模型索引](00_memory_model_semantics_index.md) | [基础语义层总览](../00_foundation_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md)
+> **链接网络**: [内存模型语义模型索引](../03_memory_model_semantics/00_MEMORY_MODEL_SEMANTICS_INDEX.md) | [基础语义层总览](../00_foundation_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md)
+

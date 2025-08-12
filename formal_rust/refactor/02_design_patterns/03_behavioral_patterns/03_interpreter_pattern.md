@@ -1,4 +1,4 @@
-# 2.3.3 解释器模式（Interpreter Pattern）
+﻿# 2.3.3 解释器模式（Interpreter Pattern）
 
 ## 📅 文档信息
 
@@ -183,3 +183,4 @@ graph TD
 1. Gamma, E., et al. "Design Patterns: Elements of Reusable Object-Oriented Software"
 2. Pierce, B. C. "Types and Programming Languages"
 3. Mac Lane, S. "Categories for the Working Mathematician"
+

@@ -1,4 +1,4 @@
-# 工程实践语义模块主索引
+﻿# 工程实践语义模块主索引
 
 ## 📅 文档信息
 
@@ -20,7 +20,7 @@
 
 ### 1. 性能优化
 
-- **[01_performance_optimization/00_index.md](01_performance_optimization/00_index.md)** - 性能优化语义
+- **[01_performance_optimization/00_index.md](00_index.md)** - 性能优化语义
   - 性能优化理论
   - 性能分析理论
   - 对象池模式
@@ -28,7 +28,7 @@
 
 ### 2. 安全实践
 
-- **[02_security_practices/00_index.md](02_security_practices/00_index.md)** - 安全实践语义
+- **[02_security_practices/00_index.md](00_index.md)** - 安全实践语义
   - 内存安全语义
   - 并发安全语义
   - 网络安全语义
@@ -36,7 +36,7 @@
 
 ### 3. 测试策略
 
-- **[03_testing_strategies/00_index.md](03_testing_strategies/00_index.md)** - 测试策略语义
+- **[03_testing_strategies/00_index.md](00_index.md)** - 测试策略语义
   - 单元测试语义
   - 集成测试语义
   - 性能测试语义
@@ -44,7 +44,7 @@
 
 ### 4. 部署模式
 
-- **[04_deployment_patterns/00_index.md](04_deployment_patterns/00_index.md)** - 部署模式语义
+- **[04_deployment_patterns/00_index.md](00_index.md)** - 部署模式语义
   - 容器化部署语义
   - 微服务部署语义
   - 云原生部署语义
@@ -52,7 +52,7 @@
 
 ### 5. 监控可观测性
 
-- **[05_monitoring_observability/00_index.md](05_monitoring_observability/00_index.md)** - 监控可观测性语义
+- **[05_monitoring_observability/00_index.md](00_index.md)** - 监控可观测性语义
   - 日志记录语义
   - 指标收集语义
   - 分布式追踪语义
@@ -210,3 +210,4 @@ graph TB
 - [核心理论主索引](../../01_core_theory/00_index.md)
 - [设计模式语义](../02_design_patterns/00_index.md)
 - [应用领域语义](../03_application_domains/00_index.md)
+

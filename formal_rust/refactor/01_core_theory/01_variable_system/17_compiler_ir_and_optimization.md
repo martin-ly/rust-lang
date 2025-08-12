@@ -1,4 +1,4 @@
-# 17. MIR与编译器优化中的所有权分析（17_compiler_ir_and_optimization）
+﻿# 17. MIR与编译器优化中的所有权分析（17_compiler_ir_and_optimization）
 
 ## 📅 文档信息
 
@@ -207,3 +207,4 @@
 ---
 
 > 本文档持续更新，欢迎补充MIR分析与优化案例。
+

@@ -1,4 +1,4 @@
-# 4.1.1 Rust模块定义语义模型深度分析
+﻿# 4.1.1 Rust模块定义语义模型深度分析
 
 ## 📅 文档信息
 
@@ -15,7 +15,7 @@
 **文档版本**: V1.0  
 **创建日期**: 2025-01-27  
 **所属层**: 组织语义层 (Organization Semantics Layer)  
-**父模块**: [4.1 模块系统语义](../00_module_system_index.md)  
+**父模块**: [4.1 模块系统语义](00_module_system_index.md)  
 **交叉引用**: [2.1.1 条件控制语义](../../02_control_semantics/01_control_flow_semantics/01_conditional_control_semantics.md), [1.1.1 原始类型语义](../../01_foundation_semantics/01_type_system_semantics/01_primitive_types_semantics.md)
 
 ---
@@ -675,3 +675,4 @@ mod service_layer {
 - **相关工具**: rustc, rust-analyzer, cargo
 - **更新频率**: 与Rust模块系统演进同步
 - **维护者**: Rust组织语义分析工作组
+

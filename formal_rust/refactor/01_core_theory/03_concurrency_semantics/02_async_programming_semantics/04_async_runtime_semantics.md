@@ -1,4 +1,4 @@
-# 3.2.4 Rust异步运行时语义模型深度分析
+﻿# 3.2.4 Rust异步运行时语义模型深度分析
 
 ## 📅 文档信息
 
@@ -922,9 +922,9 @@ impl CacheOptimizedScheduler {
 
 ### 3.2.4.7.2 外部引用
 
-- [内存模型语义](../../01_foundation_semantics/03_memory_model_semantics/) - 内存安全保证
-- [线程模型语义](../01_concurrency_model_semantics/) - 与线程系统集成
-- [错误处理语义](../../02_control_semantics/04_error_handling_semantics/) - 异步错误处理
+- [内存模型语义](../../01_foundation_semantics/03_memory_model_semantics) - 内存安全保证
+- [线程模型语义](../01_concurrency_model_semantics) - 与线程系统集成
+- [错误处理语义](../../02_control_semantics/04_error_handling_semantics) - 异步错误处理
 
 ---
 
@@ -977,3 +977,4 @@ impl CacheOptimizedScheduler {
 *版本: 2.0*  
 *字数: ~15KB*  
 *最后更新: 2025-01-27*
+

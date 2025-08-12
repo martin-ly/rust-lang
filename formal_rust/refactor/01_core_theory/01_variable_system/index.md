@@ -1,4 +1,4 @@
-# 00. 变量系统模块总览（01_variable_system）
+﻿# 00. 变量系统模块总览（01_variable_system）
 
 ## 📅 文档信息
 
@@ -84,7 +84,7 @@
 
 ## 0. 4 交叉引用
 
-- [类型系统分析](../02_type_system/index.md)
+- [类型系统分析](index.md)
 - [文档模板与质量标准](11_template_and_quality_standard.md)
 - [核心理论总索引](../00_core_theory_index.md)
 - [变量系统多维视角](01_variable_system_multiview.md)
@@ -111,3 +111,4 @@
 ---
 
 > 本文档持续更新，欢迎补充批判性观点与最新理论成果。
+

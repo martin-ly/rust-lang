@@ -1,4 +1,4 @@
-# 支付电商集成语义模块
+﻿# 支付电商集成语义模块
 
 ## 文档信息
 
@@ -424,13 +424,13 @@ impl PaymentFlowStateManager {
 
 - **[支付系统语义](00_index.md)** - 支付处理基础
 - **[电商语义](../01_ecommerce/00_index.md)** - 电商平台基础
-- **[安全语义](../09_cybersecurity/00_index.md)** - 安全验证基础
+- **[安全语义](00_index.md)** - 安全验证基础
 
 ### 输出影响
 
 - **[支付系统语义](00_index.md)** - 支付集成增强
 - **[电商语义](../01_ecommerce/00_index.md)** - 支付体验优化
-- **[分析语义](../04_analytics/00_index.md)** - 支付数据分析
+- **[分析语义](00_index.md)** - 支付数据分析
 
 ---
 
@@ -438,5 +438,6 @@ impl PaymentFlowStateManager {
 
 - [支付系统语义](00_index.md)
 - [电商语义](../01_ecommerce/00_index.md)
-- [供应链语义](../02_supply_chain/00_index.md)
-- [客户关系管理语义](../03_crm/00_index.md)
+- [供应链语义](00_index.md)
+- [客户关系管理语义](00_index.md)
+

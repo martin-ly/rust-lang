@@ -1,4 +1,4 @@
-# 01. Rust 内存模型理论（01_memory_model_theory）
+﻿# 01. Rust 内存模型理论（01_memory_model_theory）
 
 ## 📅 文档信息
 
@@ -723,3 +723,4 @@ $$\text{UserMemory} = \text{Allocator} \times \text{GC} \times \text{SafetyCheck
 ---
 
 > 本文档持续更新，欢迎补充内存模型理论与工程案例。
+

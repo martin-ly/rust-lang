@@ -1,4 +1,4 @@
-# Rust智能指针语义深度分析
+﻿# Rust智能指针语义深度分析
 
 ## 📅 文档信息
 
@@ -820,3 +820,4 @@ fn custom_smart_pointer_example() {
 > - [Box文档](https://doc.rust-lang.org/std/boxed/struct.Box.html)
 > - [Rc文档](https://doc.rust-lang.org/std/rc/struct.Rc.html)
 > - [Arc文档](https://doc.rust-lang.org/std/sync/struct.Arc.html)
+

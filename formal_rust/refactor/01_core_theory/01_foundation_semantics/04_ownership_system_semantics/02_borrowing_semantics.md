@@ -1,4 +1,4 @@
-# 借用语义模型深度分析
+﻿# 借用语义模型深度分析
 
 ## 📅 文档信息
 
@@ -691,8 +691,9 @@ struct GpuBorrow<T> {
 > - [所有权规则语义](01_ownership_rules_semantics.md)
 > - [生命周期语义](03_lifetime_semantics.md)
 > - [内存安全语义](../03_memory_model_semantics/04_memory_safety_semantics.md)
-> - [类型系统语义](../01_type_system_semantics/)
+> - [类型系统语义](../01_type_system_semantics)
 
 ---
 
 > **版本信息**：v1.0.0，最后更新于 2024-12-30
+

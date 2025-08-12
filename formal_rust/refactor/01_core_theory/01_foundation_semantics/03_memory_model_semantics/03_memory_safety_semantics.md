@@ -1,4 +1,4 @@
-# Rust内存安全语义深度分析
+﻿# Rust内存安全语义深度分析
 
 ## 📅 文档信息
 
@@ -1383,10 +1383,11 @@ fn test_data_race_detection() {
 >
 > - [内存布局语义](01_memory_layout_semantics.md)
 > - [内存分配语义](02_memory_allocation_semantics.md)
-> - [类型系统语义](../01_type_system_semantics/)
+> - [类型系统语义](../01_type_system_semantics)
 > - [变量系统语义](../02_variable_system_semantics/)
 > **相关资源**:
 >
 > - [Rust内存模型](https://doc.rust-lang.org/nomicon/)
 > - [内存安全参考](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
 > - [系统编程指南](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)
+

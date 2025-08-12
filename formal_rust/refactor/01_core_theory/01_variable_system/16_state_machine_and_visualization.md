@@ -1,4 +1,4 @@
-# 16. 状态机与可视化（16_state_machine_and_visualization）
+﻿# 16. 状态机与可视化（16_state_machine_and_visualization）
 
 ## 📅 文档信息
 
@@ -183,3 +183,4 @@
 ---
 
 > 本文档持续更新，欢迎补充状态机建模与可视化案例。
+

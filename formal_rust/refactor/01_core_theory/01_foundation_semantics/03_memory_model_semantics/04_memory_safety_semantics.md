@@ -1,4 +1,4 @@
-# 内存安全语义深度分析
+﻿# 内存安全语义深度分析
 
 ## 📅 文档信息
 
@@ -1124,9 +1124,10 @@ where
 >
 > - [内存布局语义](01_memory_layout_semantics.md)
 > - [内存分配语义](02_memory_allocation_semantics.md)
-> - [所有权系统语义](../04_ownership_system_semantics/)
-> - [类型系统语义](../01_type_system_semantics/)
+> - [所有权系统语义](../04_ownership_system_semantics)
+> - [类型系统语义](../01_type_system_semantics)
 
 ---
 
 > **版本信息**：文档版本 v1.0.0，最后更新于 2024-12-30
+

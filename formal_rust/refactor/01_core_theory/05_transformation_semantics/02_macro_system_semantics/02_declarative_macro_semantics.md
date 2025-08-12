@@ -1,4 +1,4 @@
-# 声明式宏语义深度分析
+﻿# 声明式宏语义深度分析
 
 ## 📅 文档信息
 
@@ -1169,12 +1169,13 @@ macro_rules! zero_cost_verification {
 
 > **链接网络**：
 >
-> - [宏系统语义总览](../01_macro_definition_semantics.md)
+> - [宏系统语义总览](01_macro_definition_semantics.md)
 > - [过程宏语义分析](03_procedural_macro_semantics.md)
 > - [宏展开语义模型](04_macro_expansion_semantics.md)
-> - [编译时转换理论](../../01_compile_time_transformation/)
-> - [类型系统语义](../../01_foundation_semantics/01_type_system_semantics/)
+> - [编译时转换理论](../01_compile_time_transformation)
+> - [类型系统语义](../../01_foundation_semantics/01_type_system_semantics)
 
 ---
 
 > **版本信息**：文档版本 v1.0.0，最后更新于 2024-12-30，符合 Rust 1.75+ 标准
+

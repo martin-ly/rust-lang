@@ -1,4 +1,4 @@
-# 模型检查形式化理论
+﻿# 模型检查形式化理论
 
 ## 📅 文档信息
 
@@ -380,3 +380,4 @@ $$\text{ParallelModelCheck}(M, \phi) \Rightarrow \text{Faster}(M, \phi)$$
 ---
 
 *本文档建立了完整的模型检查形式化理论框架，为Rust程序验证提供了理论基础和实践指导。*
+

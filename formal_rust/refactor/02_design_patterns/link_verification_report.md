@@ -1,4 +1,4 @@
-# 设计模式文档链接验证报告
+﻿# 设计模式文档链接验证报告
 
 ## 📅 文档信息
 
@@ -30,8 +30,8 @@
 
 #### 理论基础链接
 
-- [类型理论基础](01_core_theory/02_type_system/01_type_theory_foundations.md) ✅ 存在
-- [范畴论基础](01_core_theory/01_variable_system/02_category_theory.md) ✅ 存在
+- [类型理论基础](../01_core_theory/02_type_system/01_type_theory_foundations.md) ✅ 存在
+- [范畴论基础](../01_core_theory/01_variable_system/02_category_theory.md) ✅ 存在
 
 #### 行为模式链接
 
@@ -49,8 +49,8 @@
 
 #### 工程实践链接（目录存在，具体文件待创建）
 
-- [性能优化](04_engineering_practices/01_performance_optimization/) ⚠️ 目录存在，具体文件待确认
-- [测试策略](04_engineering_practices/03_testing_strategies/) ⚠️ 目录存在，具体文件待确认
+- [性能优化](../04_engineering_practices/01_performance_optimization) ⚠️ 目录存在，具体文件待确认
+- [测试策略](../04_engineering_practices/03_testing_strategies) ⚠️ 目录存在，具体文件待确认
 
 ### 🔗 链接修正建议
 
@@ -110,9 +110,9 @@
 ---
 
 
-- [命令模式](../03_behavioral_patterns/02_command_pattern.md)
-- [策略模式](../03_behavioral_patterns/09_strategy_pattern.md)  
-- [状态模式](../03_behavioral_patterns/08_state_pattern.md)
+- [命令模式](03_behavioral_patterns/02_command_pattern.md)
+- [策略模式](03_behavioral_patterns/09_strategy_pattern.md)  
+- [状态模式](03_behavioral_patterns/08_state_pattern.md)
 
 # 建议保持不变（路径正确）
 
@@ -202,3 +202,4 @@
 **状态**: 🟡 基本完善，少数链接待优化  
 **优先级**: 中等  
 **预计完成时间**: 1-2天
+

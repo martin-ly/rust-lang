@@ -1,4 +1,4 @@
-# 02. 工厂方法模式（Factory Method Pattern）形式化理论
+﻿# 02. 工厂方法模式（Factory Method Pattern）形式化理论
 
 ## 📅 文档信息
 
@@ -709,7 +709,7 @@ $$\text{FactoryComposition} = \text{Factory} \circ \text{Factory}$$
 ## 1. 12 规范化进度与后续建议（终批次）
 
 - 本文件已完成全量严格编号、结构优化、多模态表达、批判性分析、交叉引用与学术规范化。
-- 建议持续补充工厂方法模式在 Rust 及多语言中的工程案例与理论创新，保持与[设计模式索引](../index.md)同步。
+- 建议持续补充工厂方法模式在 Rust 及多语言中的工程案例与理论创新，保持与[设计模式索引](../../01_core_theory/01_variable_system/index.md)同步。
 - 进度：`02_factory_method_pattern.md` 全量规范化已完成。
 
 ---
@@ -717,3 +717,4 @@ $$\text{FactoryComposition} = \text{Factory} \circ \text{Factory}$$
 *最后更新：2024年12月19日*
 *版本：1.0.0*
 *状态：形式化验证完成*
+

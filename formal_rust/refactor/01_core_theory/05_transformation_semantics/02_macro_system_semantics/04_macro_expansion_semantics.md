@@ -1,4 +1,4 @@
-# 宏展开语义深度分析
+﻿# 宏展开语义深度分析
 
 ## 📅 文档信息
 
@@ -1179,8 +1179,9 @@ pub fn verified_expansion(args: TokenStream, input: TokenStream) -> TokenStream 
 > - [声明式宏语义](02_declarative_macro_semantics.md)
 > - [过程宏语义](03_procedural_macro_semantics.md)
 > - [宏卫生性语义](05_macro_hygiene_semantics.md)
-> - [编译时转换理论](../../01_compile_time_transformation/)
+> - [编译时转换理论](../01_compile_time_transformation)
 
 ---
 
 > **版本信息**：文档版本 v1.0.0，最后更新于 2024-12-30
+

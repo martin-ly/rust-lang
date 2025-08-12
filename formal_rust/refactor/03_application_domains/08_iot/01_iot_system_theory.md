@@ -1,4 +1,4 @@
-# 物联网系统形式化理论
+﻿# 物联网系统形式化理论
 
 ## 📅 文档信息
 
@@ -1139,3 +1139,4 @@ $$efficiency = \frac{useful\_work}{total\_energy}$$
 6. IoT Communication Protocols
 7. Sensor Networks and Applications
 8. IoT Data Analytics
+

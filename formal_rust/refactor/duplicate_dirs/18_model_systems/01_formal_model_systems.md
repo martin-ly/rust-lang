@@ -1,4 +1,4 @@
-# Rust模型系统的形式化理论
+﻿# Rust模型系统的形式化理论
 
 ## 📅 文档信息
 
@@ -581,3 +581,4 @@ impl ModelComposer {
 3. Cousot, P., & Cousot, R. (1977). "Abstract interpretation: A unified lattice model for static analysis of programs by construction or approximation of fixpoints". *POPL*, 238-252.
 4. Hopcroft, J. E. (1971). "An n log n algorithm for minimizing states in a finite automaton". *Theory of Machines and Computations*, 189-196.
 5. Milner, R. (1989). *Communication and Concurrency*. Prentice Hall.
+

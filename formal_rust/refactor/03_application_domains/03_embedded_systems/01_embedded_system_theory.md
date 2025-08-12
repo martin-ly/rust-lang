@@ -1,4 +1,4 @@
-# 嵌入式系统形式化理论
+﻿# 嵌入式系统形式化理论
 
 ## 📅 文档信息
 
@@ -673,3 +673,4 @@ $$R_i = C_i + \sum_{j \in hp(i)} \left\lceil \frac{R_i}{P_j} \right\rceil C_j$$
 6. Sensor Fusion Algorithms
 7. Memory Management in Embedded Systems
 8. Communication Protocols for Embedded Systems
+

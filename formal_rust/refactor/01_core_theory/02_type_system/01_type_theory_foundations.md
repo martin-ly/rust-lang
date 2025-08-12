@@ -1,4 +1,4 @@
-# 01. Rust 类型系统理论基础（01_type_theory_foundations）
+﻿# 01. Rust 类型系统理论基础（01_type_theory_foundations）
 
 ## 📅 文档信息
 
@@ -296,7 +296,7 @@ graph TD
 ## 1. 5 规范化进度与后续建议
 
 - 本文件已完成首批（1-250行）严格编号、结构优化、多模态表达、批判性分析、交叉引用与学术规范化。
-- 建议后续持续补充类型理论与工程案例，保持与[核心理论总索引](../00_core_theory_index.md)和[目录索引](index.md)同步。
+- 建议后续持续补充类型理论与工程案例，保持与[核心理论总索引](../00_core_theory_index.md)和[目录索引](../01_variable_system/index.md)同步。
 - 进度：`01_type_theory_foundations.md` 已完成类型推导算法部分的内容补全。
 
 ---
@@ -639,3 +639,4 @@ $$\text{ImplementationVerification}: \text{Implementation} \rightarrow \text{Cor
 ---
 
 > 本文档持续更新，欢迎补充类型理论与工程案例。
+

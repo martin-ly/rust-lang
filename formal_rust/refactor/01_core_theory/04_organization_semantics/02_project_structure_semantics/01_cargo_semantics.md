@@ -1,4 +1,4 @@
-# 4.2.1 Rust Cargo语义模型深度分析
+﻿# 4.2.1 Rust Cargo语义模型深度分析
 
 ## 📅 文档信息
 
@@ -1708,3 +1708,4 @@ fn check_outdated_dependencies() -> Result<(), Box<dyn std::error::Error>> {
 - **相关工具**: cargo, rustc, crates.io
 - **更新频率**: 与Cargo版本同步
 - **维护者**: Rust组织语义分析工作组
+

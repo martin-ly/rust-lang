@@ -1,4 +1,4 @@
-# 2.3.6 备忘录模式（Memento Pattern）
+﻿# 2.3.6 备忘录模式（Memento Pattern）
 
 ## 📅 文档信息
 
@@ -186,3 +186,4 @@ graph TD
 1. Gamma, E., et al. "Design Patterns: Elements of Reusable Object-Oriented Software"
 2. Pierce, B. C. "Types and Programming Languages"
 3. Mac Lane, S. "Categories for the Working Mathematician"
+

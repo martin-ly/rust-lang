@@ -1,4 +1,4 @@
-# 智能合约语义模块主索引
+﻿# 智能合约语义模块主索引
 
 ## 📅 文档信息
 
@@ -20,7 +20,7 @@
 
 ### 1. 合约执行语义
 
-- **[01_contract_execution/00_index.md](01_contract_execution/00_index.md)** - 合约执行语义
+- **[01_contract_execution/00_index.md](00_index.md)** - 合约执行语义
   - 执行环境语义
   - 执行状态语义
   - 执行验证语义
@@ -28,7 +28,7 @@
 
 ### 2. 合约验证语义
 
-- **[02_contract_verification/00_index.md](02_contract_verification/00_index.md)** - 合约验证语义
+- **[02_contract_verification/00_index.md](00_index.md)** - 合约验证语义
   - 验证策略语义
   - 验证过程语义
   - 验证结果语义
@@ -36,7 +36,7 @@
 
 ### 3. 合约安全语义
 
-- **[03_contract_security/00_index.md](03_contract_security/00_index.md)** - 合约安全语义
+- **[03_contract_security/00_index.md](00_index.md)** - 合约安全语义
   - 安全策略语义
   - 安全验证语义
   - 安全监控语义
@@ -44,7 +44,7 @@
 
 ### 4. 合约优化语义
 
-- **[04_contract_optimization/00_index.md](04_contract_optimization/00_index.md)** - 合约优化语义
+- **[04_contract_optimization/00_index.md](00_index.md)** - 合约优化语义
   - 性能优化语义
   - Gas优化语义
   - 存储优化语义
@@ -155,9 +155,9 @@ graph TB
 
 ### 输出影响
 
-- **[DeFi应用](../02_defi_applications/00_index.md)** - DeFi应用
-- **[NFT应用](../03_nft_applications/00_index.md)** - NFT应用
-- **[DAO应用](../04_dao_applications/00_index.md)** - DAO应用
+- **[DeFi应用](00_index.md)** - DeFi应用
+- **[NFT应用](00_index.md)** - NFT应用
+- **[DAO应用](00_index.md)** - DAO应用
 
 ## 维护信息
 
@@ -191,6 +191,7 @@ graph TB
 
 **相关链接**:
 
-- [区块链主索引](../00_index.md)
+- [区块链主索引](00_index.md)
 - [基础语义主索引](../../../01_core_theory/01_foundation_semantics/00_index.md)
 - [高级语义主索引](../../../01_core_theory/04_advanced_semantics/00_index.md)
+

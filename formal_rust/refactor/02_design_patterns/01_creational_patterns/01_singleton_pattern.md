@@ -1,4 +1,4 @@
-# 01. 单例模式（Singleton Pattern）形式化理论
+﻿# 01. 单例模式（Singleton Pattern）形式化理论
 
 ## 📅 文档信息
 
@@ -66,7 +66,7 @@
 
 > **本地导航**：
 >
-> - [设计模式模块总览](../index.md)
+> - [设计模式模块总览](../../01_core_theory/01_variable_system/index.md)
 > - [工厂方法模式](02_factory_method_pattern.md)
 > - [建造者模式](04_builder_pattern.md)
 > - [原型模式](05_prototype_pattern.md)
@@ -456,9 +456,10 @@ $$\text{SingletonFactory} = \text{Singleton} \circ \text{Factory}$$
 ## 1. 13 规范化进度与后续建议（终批次）
 
 - 本文件已完成全量严格编号、结构优化、多模态表达、批判性分析、交叉引用与学术规范化。
-- 建议持续补充单例模式在 Rust 及多语言中的工程案例与理论创新，保持与[设计模式索引](../index.md)同步。
+- 建议持续补充单例模式在 Rust 及多语言中的工程案例与理论创新，保持与[设计模式索引](../../01_core_theory/01_variable_system/index.md)同步。
 - 进度：`01_singleton_pattern.md` 全量规范化已完成。
 
 ---
 
 > 本文档持续更新，欢迎补充单例模式理论与工程案例。
+

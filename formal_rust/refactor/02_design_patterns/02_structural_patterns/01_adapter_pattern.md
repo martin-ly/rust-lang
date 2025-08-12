@@ -1,4 +1,4 @@
-# 01. 适配器模式（Adapter Pattern）形式化理论
+﻿# 01. 适配器模式（Adapter Pattern）形式化理论
 
 ## 📅 文档信息
 
@@ -432,8 +432,8 @@ impl DataFormat for FormatAdapter {
 
 - [装饰器模式](02_decorator_pattern.md)
 - [桥接模式](03_bridge_pattern.md)
-- [Rust 类型系统与设计模式](../../02_type_system/01_type_theory_foundations.md)
-- [范畴论与类型系统](../../01_core_theory/02_type_system/02_category_theory.md)
+- [Rust 类型系统与设计模式](../../01_core_theory/02_type_system/01_type_theory_foundations.md)
+- [范畴论与类型系统](../../01_core_theory/01_variable_system/02_category_theory.md)
 
 ---
 
@@ -451,3 +451,4 @@ impl DataFormat for FormatAdapter {
 2. 增加与其他结构型模式的对比分析表格
 3. 深化范畴论与类型系统的交叉理论探讨
 4. 持续完善多模态表达与可视化
+

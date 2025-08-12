@@ -1,4 +1,4 @@
-# 01. Rust 并发模型理论（01_concurrency_theory）
+﻿# 01. Rust 并发模型理论（01_concurrency_theory）
 
 ## 📅 文档信息
 
@@ -276,7 +276,7 @@ fn producer_consumer() {
 ## 1. 5 规范化进度与后续建议
 
 - 本文件已完成首批（1-250行）严格编号、结构优化、多模态表达、批判性分析、交叉引用与学术规范化。
-- 建议后续持续补充并发模型理论与工程案例，保持与[核心理论总索引](../00_core_theory_index.md)和[目录索引](index.md)同步。
+- 建议后续持续补充并发模型理论与工程案例，保持与[核心理论总索引](../00_core_theory_index.md)和[目录索引](../01_variable_system/index.md)同步。
 - 进度：`01_concurrency_theory.md` 首批已完成，后续分批推进。
 
 ---
@@ -475,3 +475,4 @@ graph TD
 - 进度：`01_concurrency_theory.md` 深度扩展已完成，可进入下一个文件或主题。
 
 ---
+

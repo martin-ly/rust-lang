@@ -1,4 +1,4 @@
-# 3.2.3 Rust执行器语义模型深度分析
+﻿# 3.2.3 Rust执行器语义模型深度分析
 
 ## 📅 文档信息
 
@@ -1107,3 +1107,4 @@ impl MonitoredExecutor {
 - **相关工具**: tokio, async-std, futures
 - **更新频率**: 与Rust异步生态演进同步
 - **维护者**: Rust并发语义分析工作组
+

@@ -1,4 +1,4 @@
-# 3.0 Rust内存安全语义模型深度分析
+﻿# 3.0 Rust内存安全语义模型深度分析
 
 ## 📅 文档信息
 
@@ -849,4 +849,5 @@ fn quantum_memory_safety() {
 
 ---
 
-> **链接网络**: [内存模型语义模型索引](00_memory_model_semantics_index.md) | [基础语义层总览](../00_foundation_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md)
+> **链接网络**: [内存模型语义模型索引](../03_memory_model_semantics/00_MEMORY_MODEL_SEMANTICS_INDEX.md) | [基础语义层总览](../00_foundation_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md)
+

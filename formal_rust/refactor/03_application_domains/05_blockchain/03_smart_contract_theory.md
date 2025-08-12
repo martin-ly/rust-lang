@@ -1,4 +1,4 @@
-# 智能合约理论 - Smart Contract Theory
+﻿# 智能合约理论 - Smart Contract Theory
 
 ## 📅 文档信息
 
@@ -548,3 +548,4 @@ proptest! {
   }
 }
 ```
+

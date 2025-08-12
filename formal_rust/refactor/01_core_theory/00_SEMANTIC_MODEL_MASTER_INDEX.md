@@ -1,4 +1,4 @@
-# Rust语言设计全面语义模型分析框架 - 主导航索引
+﻿# Rust语言设计全面语义模型分析框架 - 主导航索引
 
 ## 📅 文档信息
 
@@ -1035,4 +1035,5 @@ $$[数学定义]$$
 
 ---
 
-> **导航链接**: [总体框架文档](../MASTER_SEMANTIC_ANALYSIS_FRAMEWORK.md) | [基础语义层](01_foundation_semantics/) | [并发语义层](03_concurrency_semantics/)
+> **导航链接**: [总体框架文档](../MASTER_SEMANTIC_ANALYSIS_FRAMEWORK.md) | [基础语义层](01_foundation_semantics) | [并发语义层](03_concurrency_semantics)
+

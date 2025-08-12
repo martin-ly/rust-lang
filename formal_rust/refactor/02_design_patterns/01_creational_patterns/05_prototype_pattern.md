@@ -1,4 +1,4 @@
-# 05. 原型模式（Prototype Pattern）形式化理论
+﻿# 05. 原型模式（Prototype Pattern）形式化理论
 
 ## 📅 文档信息
 
@@ -508,3 +508,4 @@ impl Prototype for Enemy {
 2. 增加与其他设计模式的对比分析表格
 3. 深化范畴论与类型系统的交叉理论探讨
 4. 持续完善多模态表达与可视化
+

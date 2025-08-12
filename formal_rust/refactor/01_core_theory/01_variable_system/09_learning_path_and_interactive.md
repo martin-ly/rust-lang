@@ -1,4 +1,4 @@
-# 9. 分层学习路径与交互式内容（09_learning_path_and_interactive）
+﻿# 9. 分层学习路径与交互式内容（09_learning_path_and_interactive）
 
 ## 📅 文档信息
 
@@ -103,7 +103,7 @@
     | 运行时检查   | ✗        | ✗      | ✗    | ✓          |
 
 - **推荐阅读**：
-  - [3. 多视角对比与方法论](../03_application_domains/03_comparative_analysis.md)
+  - [3. 多视角对比与方法论](03_comparative_analysis.md)
   - [6. 实际案例分析与多视角整合](06_case_studies.md)
 
 ### 9.2.3 理论研究者路径
@@ -321,3 +321,4 @@
 ---
 
 > 本文档持续更新，欢迎补充学习路径与交互内容建议。
+

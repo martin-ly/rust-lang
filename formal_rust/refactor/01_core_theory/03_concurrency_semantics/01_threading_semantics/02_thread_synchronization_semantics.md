@@ -1,4 +1,4 @@
-# 3.1.2 Rust线程同步语义模型深度分析
+﻿# 3.1.2 Rust线程同步语义模型深度分析
 
 ## 📅 文档信息
 
@@ -878,5 +878,6 @@ Rust线程同步语义模型提供了：
 **相关文档**:
 
 - [线程创建语义](01_thread_creation_semantics.md)
-- [异步编程语义](../02_async_programming_semantics/00_index.md)
-- [内存模型语义](../../01_foundation_semantics/02_memory_model_semantics/00_index.md)
+- [异步编程语义](../03_error_handling_semantics/00_index.md)
+- [内存模型语义](../03_error_handling_semantics/00_index.md)
+

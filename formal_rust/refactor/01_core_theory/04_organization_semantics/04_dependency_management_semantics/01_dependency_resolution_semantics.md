@@ -1,4 +1,4 @@
-# 4.4.1 Rust依赖解析语义模型深度分析
+﻿# 4.4.1 Rust依赖解析语义模型深度分析
 
 ## 📅 文档信息
 
@@ -16,7 +16,7 @@
 **创建日期**: 2025-01-27  
 **所属层**: 组织语义层 (Organization Semantics Layer)  
 **父模块**: [4.4 依赖管理语义](../00_dependency_management_index.md)  
-**交叉引用**: [4.2.1 Cargo语义](../../02_project_structure_semantics/01_cargo_semantics.md), [4.4.2 版本约束语义](02_version_constraints_semantics.md)
+**交叉引用**: [4.2.1 Cargo语义](../02_project_structure_semantics/01_cargo_semantics.md), [4.4.2 版本约束语义](02_version_constraints_semantics.md)
 
 ---
 
@@ -609,8 +609,8 @@ pub mod parallel_resolution {
 
 ### 4.4.1.4.2 外部引用
 
-- [Cargo语义](../../02_project_structure_semantics/01_cargo_semantics.md) - 构建系统基础
-- [模块系统语义](../../01_module_system_semantics/) - 模块组织原则
+- [Cargo语义](../02_project_structure_semantics/01_cargo_semantics.md) - 构建系统基础
+- [模块系统语义](../01_module_system_semantics) - 模块组织原则
 
 ---
 
@@ -642,3 +642,4 @@ pub mod parallel_resolution {
 *版本: 1.0*  
 *字数: ~8KB*  
 *最后更新: 2025-01-27*
+

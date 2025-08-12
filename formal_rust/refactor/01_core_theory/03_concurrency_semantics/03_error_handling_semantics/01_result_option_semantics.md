@@ -1,4 +1,4 @@
-# 3.3.1 Rust错误处理语义模型深度分析
+﻿# 3.3.1 Rust错误处理语义模型深度分析
 
 ## 📅 文档信息
 
@@ -899,5 +899,6 @@ Rust错误处理语义模型提供了：
 **相关文档**:
 
 - [线程同步语义](../01_threading_semantics/02_thread_synchronization_semantics.md)
-- [异步编程语义](../02_async_programming_semantics/00_index.md)
+- [异步编程语义](00_index.md)
 - [控制流语义](../../01_foundation_semantics/04_control_flow_semantics/00_index.md)
+

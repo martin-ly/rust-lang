@@ -1,4 +1,4 @@
-# Rust类型参数语义深度分析
+﻿# Rust类型参数语义深度分析
 
 ## 📅 文档信息
 
@@ -1393,3 +1393,4 @@ Rust的类型参数语义系统是一个高度发达的类型系统，它提供�
 > - [Trait系统语义](../03_trait_system_semantics/01_trait_definition_semantics.md)
 > - [类型系统语义](../../01_foundation_semantics/01_type_system_semantics/01_primitive_types_semantics.md)
 > - [内存模型语义](../../01_foundation_semantics/02_memory_model_semantics/01_memory_layout_semantics.md)
+

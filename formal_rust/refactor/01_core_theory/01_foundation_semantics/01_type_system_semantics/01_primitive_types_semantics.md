@@ -1,4 +1,4 @@
-# 1.0 Rust原始类型语义模型深度分析
+﻿# 1.0 Rust原始类型语义模型深度分析
 
 ## 📅 文档信息
 
@@ -491,7 +491,7 @@ fn safe_numerical_processing() {
 
 ### 1.11.1 内部引用
 
-- [变量系统语义模型](../01_variable_system/01_execution_flow.md) - 变量与类型的交互
+- [变量系统语义模型](../../01_variable_system/01_execution_flow.md) - 变量与类型的交互
 - [内存模型语义](../03_memory_model_semantics/01_memory_layout_semantics.md) - 类型的内存表示
 - [所有权系统语义](../04_ownership_system_semantics/01_ownership_rules_semantics.md) - 类型与所有权
 
@@ -538,3 +538,4 @@ fn safe_numerical_processing() {
 ---
 
 > **链接网络**: [类型系统语义模型索引](00_type_system_semantics_index.md) | [基础语义层总览](../00_foundation_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md)
+

@@ -1,4 +1,4 @@
-# 支付系统语义模块主索引
+﻿# 支付系统语义模块主索引
 
 ## 📅 文档信息
 
@@ -20,7 +20,7 @@
 
 ### 1. 交易语义
 
-- **[01_transaction_semantics/00_index.md](01_transaction_semantics/00_index.md)** - 交易语义
+- **[01_transaction_semantics/00_index.md](00_index.md)** - 交易语义
   - 交易处理语义
   - 交易验证语义
   - 交易路由语义
@@ -28,7 +28,7 @@
 
 ### 2. 安全语义
 
-- **[02_security_semantics/00_index.md](02_security_semantics/00_index.md)** - 安全语义
+- **[02_security_semantics/00_index.md](00_index.md)** - 安全语义
   - 加密语义
   - 认证语义
   - 授权语义
@@ -36,7 +36,7 @@
 
 ### 3. 合规语义
 
-- **[03_compliance_semantics/00_index.md](03_compliance_semantics/00_index.md)** - 合规语义
+- **[03_compliance_semantics/00_index.md](00_index.md)** - 合规语义
   - 监管合规语义
   - 反洗钱语义
   - 反恐融资语义
@@ -44,7 +44,7 @@
 
 ### 4. 优化语义
 
-- **[04_optimization_semantics/00_index.md](04_optimization_semantics/00_index.md)** - 优化语义
+- **[04_optimization_semantics/00_index.md](00_index.md)** - 优化语义
   - 性能优化语义
   - 成本优化语义
   - 风险优化语义
@@ -155,9 +155,9 @@ graph TB
 
 ### 输出影响
 
-- **[风险管理](../02_risk_management/00_index.md)** - 风险管理应用
-- **[合规管理](../03_compliance_management/00_index.md)** - 合规管理应用
-- **[数据分析](../04_data_analytics/00_index.md)** - 数据分析应用
+- **[风险管理](00_index.md)** - 风险管理应用
+- **[合规管理](00_index.md)** - 合规管理应用
+- **[数据分析](00_index.md)** - 数据分析应用
 
 ## 维护信息
 
@@ -191,6 +191,7 @@ graph TB
 
 **相关链接**:
 
-- [金融科技主索引](../00_index.md)
+- [金融科技主索引](00_index.md)
 - [基础语义主索引](../../../01_core_theory/01_foundation_semantics/00_index.md)
 - [高级语义主索引](../../../01_core_theory/04_advanced_semantics/00_index.md)
+

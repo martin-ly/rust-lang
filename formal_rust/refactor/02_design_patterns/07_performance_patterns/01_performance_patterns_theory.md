@@ -1,4 +1,4 @@
-# Rust 高性能计算设计模式理论分析
+﻿# Rust 高性能计算设计模式理论分析
 
 ## 📅 文档信息
 
@@ -1013,3 +1013,4 @@ Rust shows great potential in high-performance computing design patterns through
 **文档状态**: 持续更新中  
 **质量目标**: 建立世界级的 Rust 高性能计算设计模式知识体系  
 **发展愿景**: 成为 Rust 高性能计算设计模式的重要理论基础设施
+

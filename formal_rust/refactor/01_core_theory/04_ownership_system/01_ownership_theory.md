@@ -1,4 +1,4 @@
-# 01. Rust 所有权系统理论（01_ownership_theory）
+﻿# 01. Rust 所有权系统理论（01_ownership_theory）
 
 ## 📅 文档信息
 
@@ -230,7 +230,7 @@ impl<'a> Parser<'a> {
 ## 1. 5 规范化进度与后续建议
 
 - 本文件已完成首批（1-250行）严格编号、结构优化、多模态表达、批判性分析、交叉引用与学术规范化。
-- 建议后续持续补充所有权系统理论与工程案例，保持与[核心理论总索引](../00_core_theory_index.md)和[目录索引](index.md)同步。
+- 建议后续持续补充所有权系统理论与工程案例，保持与[核心理论总索引](../00_core_theory_index.md)和[目录索引](../01_variable_system/index.md)同步。
 - 进度：`01_ownership_theory.md` 首批已完成，后续分批推进。
 
 ---
@@ -252,3 +252,4 @@ impl<'a> Parser<'a> {
 *状态：所有权系统理论形式化完成*
 
 *下一步：继续处理 [生命周期系统理论](../02_lifetime_system/01_lifetime_theory.md)*
+

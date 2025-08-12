@@ -1,4 +1,4 @@
-# 6. 综合案例研究与理论验证（06_case_studies）
+﻿# 6. 综合案例研究与理论验证（06_case_studies）
 
 ## 📅 文档信息
 
@@ -531,7 +531,7 @@ impl MultiPerspectiveAnalyzer for RustVariableAnalyzer {
 **索引文件：**
 
 - [主索引](index.md) - 返回目录
-- [核心理论索引](../index.md) - 理论框架
+- [核心理论索引](index.md) - 理论框架
 
 ### 6.6.2 外部资源
 
@@ -550,7 +550,7 @@ impl MultiPerspectiveAnalyzer for RustVariableAnalyzer {
 ### 6.6.3 相关索引
 
 - [主索引](index.md) - 返回目录
-- [核心理论索引](../index.md) - 理论框架
+- [核心理论索引](index.md) - 理论框架
 
 ---
 
@@ -615,3 +615,4 @@ impl MultiPerspectiveAnalyzer for RustVariableAnalyzer {
 ---
 
 > **文档状态：** 已完成规范化 | **版本：** v2.0 | **最后更新：** 2024-12 | **下一步：** 07_theory_frontier_comparison.md
+

@@ -1,4 +1,4 @@
-# 4.1.2 Rust模块可见性语义模型深度分析
+﻿# 4.1.2 Rust模块可见性语义模型深度分析
 
 ## 📅 文档信息
 
@@ -791,7 +791,7 @@ pub mod compilation_units {
 
 ### 4.1.2.8.2 外部引用
 
-- [所有权语义](../../01_foundation_semantics/02_ownership_semantics/) - 所有权在模块边界的传递
+- [所有权语义](../../../01_foundation_semantics/02_ownership_semantics) - 所有权在模块边界的传递
 - [trait系统语义](../../01_foundation_semantics/01_type_system_semantics/06_trait_semantics.md) - trait的可见性规则
 - [宏系统语义](../../05_transformation_semantics/02_macro_semantics/) - 宏展开中的可见性
 
@@ -844,3 +844,4 @@ pub mod compilation_units {
 *版本: 1.0*  
 *字数: ~8KB*  
 *最后更新: 2025-01-27*
+

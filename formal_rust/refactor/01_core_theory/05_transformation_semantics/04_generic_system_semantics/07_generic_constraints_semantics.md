@@ -1,4 +1,4 @@
-# Rust泛型约束语义深度分析
+﻿# Rust泛型约束语义深度分析
 
 ## 📅 文档信息
 
@@ -417,3 +417,4 @@ where
 > - [泛型参数语义](02_generic_parameters_semantics.md)
 > - [Trait系统语义](../03_trait_system_semantics/01_trait_definition_semantics.md)
 > - [类型系统语义](../../01_foundation_semantics/01_type_system_semantics/01_primitive_types_semantics.md)
+

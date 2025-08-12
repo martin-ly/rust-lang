@@ -1,4 +1,4 @@
-# 12. 术语映射与统一词汇（12_concept_mapping_and_glossary）
+﻿# 12. 术语映射与统一词汇（12_concept_mapping_and_glossary）
 
 ## 📅 文档信息
 
@@ -212,3 +212,4 @@ flowchart LR
 ---
 
 > 本文档持续更新，欢迎补充术语映射与词汇表内容。
+

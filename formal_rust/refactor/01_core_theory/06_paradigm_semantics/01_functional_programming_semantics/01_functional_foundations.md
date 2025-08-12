@@ -1,4 +1,4 @@
-# 1.0 Rust函数式编程基础语义
+﻿# 1.0 Rust函数式编程基础语义
 
 ## 📅 文档信息
 
@@ -602,3 +602,4 @@ fn memory_optimization() {
 ---
 
 > **链接网络**: [函数式编程语义索引](00_functional_programming_semantics_index.md) | [范式语义层总览](../00_paradigm_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md)
+

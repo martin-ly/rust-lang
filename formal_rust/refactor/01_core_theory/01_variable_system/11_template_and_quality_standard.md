@@ -1,4 +1,4 @@
-# 11. 文档模板与质量标准（11_template_and_quality_standard）
+﻿# 11. 文档模板与质量标准（11_template_and_quality_standard）
 
 ## 📅 文档信息
 
@@ -143,7 +143,7 @@
 
 - [1. 执行流视角分析](01_execution_flow.md)
 - [2. 范畴论视角分析](02_category_theory.md)
-- [3. 多视角对比与方法论](../03_application_domains/03_comparative_analysis.md)
+- [3. 多视角对比与方法论](03_comparative_analysis.md)
 - [6. 实际案例分析与多视角整合](06_case_studies.md)
 - [7. 理论前沿与跨语言比较](07_theory_frontier_comparison.md)
 - [9. 分层学习路径与交互式内容](09_learning_path_and_interactive.md)
@@ -154,8 +154,9 @@
 - [15. 形式化证明与验证](15_formal_proof_and_verification.md)
 - [16. 状态机与可视化](16_state_machine_and_visualization.md)
 - [17. MIR与编译器优化](17_compiler_ir_and_optimization.md)
-- [index.md](../00_master_index.md)
+- [index.md](../../00_master_index.md)
 
 ---
 
 > 本文档持续更新，欢迎补充模板建议与质量标准案例。
+

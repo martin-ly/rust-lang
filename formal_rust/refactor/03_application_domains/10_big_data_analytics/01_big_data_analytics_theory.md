@@ -1,4 +1,4 @@
-# 10. 大数据分析形式化理论
+﻿# 10. 大数据分析形式化理论
 
 ## 📅 文档信息
 
@@ -383,3 +383,4 @@ $$W(\mathcal{S}, w, t+1) = W(\mathcal{S}, w, t) \setminus \{x_{t-w+1}\} \cup \{x
 1. Dean, J., & Ghemawat, S. "MapReduce: simplified data processing on large clusters." OSDI'04.
 2. Zaharia, M., et al. "Spark: Cluster computing with working sets." HotCloud'10.
 3. Stonebraker, M., & Cetintemel, U. "One size fits all: An idea whose time has come and gone." ICDE'05.
+

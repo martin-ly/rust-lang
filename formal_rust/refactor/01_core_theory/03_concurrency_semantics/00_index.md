@@ -1,4 +1,4 @@
-# 并发语义模块主索引
+﻿# 并发语义模块主索引
 
 ## 📅 文档信息
 
@@ -20,7 +20,7 @@
 
 ### 1. 线程语义
 
-- **[01_threading_semantics/00_index.md](01_threading_semantics/00_index.md)** - 线程语义
+- **[01_threading_semantics/00_index.md](00_index.md)** - 线程语义
   - 线程创建语义
   - 线程同步语义
   - 线程生命周期语义
@@ -28,7 +28,7 @@
 
 ### 2. 异步编程语义
 
-- **[02_async_programming_semantics/00_index.md](02_async_programming_semantics/00_index.md)** - 异步编程语义
+- **[02_async_programming_semantics/00_index.md](00_index.md)** - 异步编程语义
   - Future语义
   - async/await语义
   - 执行器语义
@@ -44,7 +44,7 @@
 
 ### 4. 运行时执行语义
 
-- **[04_runtime_execution_semantics/00_index.md](04_runtime_execution_semantics/00_index.md)** - 运行时执行语义
+- **[04_runtime_execution_semantics/00_index.md](00_index.md)** - 运行时执行语义
   - 运行时环境语义
   - 任务调度语义
   - 内存管理语义
@@ -52,7 +52,7 @@
 
 ### 5. 同步语义
 
-- **[05_synchronization_semantics/00_index.md](05_synchronization_semantics/00_index.md)** - 同步语义
+- **[05_synchronization_semantics/00_index.md](00_index.md)** - 同步语义
   - 同步原语语义
   - 锁语义
   - 原子操作语义
@@ -165,9 +165,9 @@ graph TB
 
 ### 输入依赖
 
-- **[基础语义](../../01_foundation_semantics/00_index.md)** - 基础语义理论
-- **[控制流语义](../../01_foundation_semantics/04_control_flow_semantics/00_index.md)** - 控制流基础
-- **[内存模型语义](../../01_foundation_semantics/02_memory_model_semantics/00_index.md)** - 内存管理基础
+- **[基础语义](00_index.md)** - 基础语义理论
+- **[控制流语义](00_index.md)** - 控制流基础
+- **[内存模型语义](00_index.md)** - 内存管理基础
 
 ### 输出影响
 
@@ -207,6 +207,7 @@ graph TB
 
 **相关链接**:
 
-- [核心理论主索引](../00_index.md)
-- [项目主索引](../../00_index.md)
+- [核心理论主索引](00_index.md)
+- [项目主索引](00_index.md)
 - [重构主索引](../../../00_index.md)
+

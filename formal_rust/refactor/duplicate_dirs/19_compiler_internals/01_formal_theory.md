@@ -1,4 +1,4 @@
-# Rust 编译器内部：形式化理论与哲学基础
+﻿# Rust 编译器内部：形式化理论与哲学基础
 
 ## 📅 文档信息
 
@@ -15,7 +15,7 @@
 **文档版本**：V1.0  
 **创建日期**：2025-01-27  
 **类别**：形式化理论  
-**交叉引用**：[02_type_system](../02_type_system/01_formal_theory.md), [01_ownership_borrowing](../01_ownership_borrowing/01_formal_theory.md)
+**交叉引用**：[02_type_system](01_formal_theory.md), [01_ownership_borrowing](01_formal_theory.md)
 
 ## 目录
 
@@ -219,3 +219,4 @@ trait BorrowChecker {
 **文档状态**：已完成  
 **下次评审**：2025-02-27  
 **维护者**：Rust 形式化理论团队
+

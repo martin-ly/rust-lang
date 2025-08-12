@@ -1,4 +1,4 @@
-# 2.2.5 外观模式（Facade Pattern）
+﻿# 2.2.5 外观模式（Facade Pattern）
 
 ## 📅 文档信息
 
@@ -291,3 +291,4 @@ graph TD
 1. Gamma, E., et al. "Design Patterns: Elements of Reusable Object-Oriented Software"
 2. Pierce, B. C. "Types and Programming Languages"
 3. Mac Lane, S. "Categories for the Working Mathematician"
+

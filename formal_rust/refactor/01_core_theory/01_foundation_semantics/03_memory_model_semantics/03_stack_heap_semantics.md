@@ -1,4 +1,4 @@
-# 1.3.3 Rust栈堆内存语义模型深度分析
+﻿# 1.3.3 Rust栈堆内存语义模型深度分析
 
 ## 📅 文档信息
 
@@ -681,3 +681,4 @@ fn memory_usage_monitoring() {
 - **相关工具**: valgrind, heaptrack, massif
 - **更新频率**: 与Rust内存模型演进同步
 - **维护者**: Rust基础语义分析工作组
+

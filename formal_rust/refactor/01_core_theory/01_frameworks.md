@@ -1,4 +1,4 @@
-# 1. Rust框架原理与生态总览
+﻿# 1. Rust框架原理与生态总览
 
 ## 📅 文档信息
 
@@ -72,5 +72,6 @@ graph TD;
 ## 1. 8 交叉引用
 
 - [工程实践总览](../04_engineering_practices/01_engineering_overview.md)
-- [设计模式与架构](../02_design_patterns/)
+- [设计模式与架构](../02_design_patterns)
 - [软件工程与生态](../04_engineering_practices/02_software_engineering.md)
+

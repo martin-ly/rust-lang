@@ -1,4 +1,4 @@
-# Rust 核心理论索引
+﻿# Rust 核心理论索引
 
 ## 📅 文档信息
 
@@ -433,3 +433,4 @@ $$\forall s \in \text{System}: \text{Composable}(s) \Rightarrow \text{Modular}(s
 ---
 
 ## 10. 本地导航与相关主题
+
