@@ -1,6 +1,6 @@
-# Rust现实项目评估：批量递归细化与形式化论证
+﻿# Rust现实项目评估：批量递归细化与形式化论证
 
-## 1. 安全性评估与自动化检测
+## 1. 安全评估与自动化检测
 
 ### 1.1 类型安全与生命周期健全性
 
@@ -17,7 +17,7 @@ fn log_sensitive(data: &Sensitive) {
 
 ### 1.2 FFI安全与生命周期覆盖
 
-- Rust与C异步FFI所有权转移，生命周期覆盖回调
+- Rust与C异步FFI所有权移动，生命周期覆盖回调
 
 ```rust
 use std::ffi::c_void;
@@ -193,6 +193,35 @@ fn auto_archive_to_knowledge_graph(results: &[CaseResult]) {
 
 - 每轮递归细化安全、性能、分布式、AI/ML、Wasm等分支，批量生成定理、反例、工程代码、自动化检测脚本
 - 自动化验证平台与知识图谱联动，支持断点恢复与多分支并行推进
-- 持续集成Rust最新语言特性与跨领域理论，形成可持续演化的项目评估体系
+- 持续集成Rust最新语言特征与跨领域理论，形成可持续演化的项目评估体系
 
 ---
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

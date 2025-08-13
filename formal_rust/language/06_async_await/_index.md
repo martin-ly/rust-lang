@@ -1,4 +1,4 @@
-# C06. 异步编程 (Asynchronous Programming)
+﻿# C06. 异步编程 (Asynchronous Programming)
 
 ## 模块简介
 
@@ -8,7 +8,7 @@
 
 1. [异步编程导论与哲学](./01_introduction_and_philosophy.md) —— Future, async/await, 状态机, Waker, 轮询模型
 2. [运行时与执行模型](./02_runtime_and_execution_model.md) —— Executor, Runtime, 任务调度, tokio vs async-std
-3. [Pinning与Unsafe基础](./03_pinning_and_unsafe_foundations.md) —— `Pin<T>`, Unpin, 自引用结构与内存固定
+3. [Pinning与Unsafe基础](./03_pinning_and_unsafe_foundations.md) —— `Pin<T>`, Unpin, 自引用结构体体体与内存固定
 4. [异步流 (Streams)](./04_streams_and_sinks.md) —— Stream Trait, 异步迭代器
 5. [异步Trait与生态](./05_async_in_traits_and_ecosystem.md) —— async-trait, 动态/静态分派
 6. [批判性分析与高级主题](./06_critical_analysis_and_advanced_topics.md) —— 函数颜色、架构兼容性、同步异步交互、设计权衡
@@ -18,7 +18,7 @@
 - 理解Rust异步编程的理论基础与状态机模型
 - 掌握async/await、Future、Pin、Send/Sync等核心机制
 - 能够分析和解决实际工程中的异步安全与性能问题
-- 熟悉主流异步运行时、生态工具与高级特性
+- 熟悉主流异步运行时、生态工具与高级特征
 - 跟踪异步编程领域的前沿理论与工程创新
 
 ## 前置知识
@@ -32,7 +32,7 @@
 1. 实现高并发异步I/O服务器（tokio/async-std）
 2. 设计自定义Future与状态机
 3. 开发异步流处理与管道
-4. 实现Pin/Unpin安全的自引用结构
+4. 实现Pin/Unpin安全的自引用结构体体体
 5. 形式化验证异步任务的Send/Sync与内存安全
 
 ## 交叉引用
@@ -46,3 +46,32 @@
 ## 总结
 
 本模块为Rust异步编程与高性能并发系统开发提供理论与实践基础。通过深入理解async/await、Future、Pin、Send/Sync等机制，开发者可编写高效、安全、可验证的异步程序，为后续探索分布式、Serverless、异步生态等前沿领域打下坚实基础。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

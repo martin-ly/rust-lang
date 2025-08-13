@@ -12,6 +12,9 @@ function Write-Info($msg) { Write-Host "[INFO] $msg" -ForegroundColor Cyan }
 function Write-Success($msg) { Write-Host "[SUCCESS] $msg" -ForegroundColor Green }
 function Write-WarningMsg($msg) { Write-Host "[WARNING] $msg" -ForegroundColor Yellow }
 function Write-ErrorMsg($msg) { Write-Host "[ERROR] $msg" -ForegroundColor Red }
+function Get-Percent([double]$num, [double]$den) {
+    if ($den -gt 0) { return [math]::Round(($num / $den) * 100, 2) } else { return 0 }
+}
 
 if (-not (Test-Path $TargetDir)) {
     Write-ErrorMsg "目标目录不存在: $TargetDir"
@@ -80,7 +83,6 @@ foreach ($file in $mdFiles) {
     try {
         $content = Get-Content -LiteralPath $file.FullName -Raw -Encoding UTF8
     } catch {
-        # 读取失败时尝试无编码回退
         try { $content = Get-Content -LiteralPath $file.FullName -Raw } catch { $content = '' }
     }
     if ($null -eq $content) { $content = '' }
@@ -96,7 +98,6 @@ foreach ($file in $mdFiles) {
         if ($count -gt 0) {
             $fileTotalTerms += $count
             if (-not $DryRun) {
-                # 纯文本替换（无反向引用）
                 $content = [regex]::Replace($content, $escapedIncorrect, [System.Text.RegularExpressions.MatchEvaluator]{ param($m) $correct })
             }
             $fileReplacements += $count
@@ -122,7 +123,8 @@ foreach ($file in $mdFiles) {
         ErrorMessage = ''
     }
 }
-Write-Success "术语标准化完成: 文件=$($mdFiles.Count) 修正数=$totalReplacements 术语总数=$totalTerms 修正率=$([math]::Round((if($totalTerms -gt 0){$totalReplacements/$totalTerms}else{0})*100,2))%"
+$overallFixRate = Get-Percent -num $totalReplacements -den $totalTerms
+Write-Success "术语标准化完成: 文件=$($mdFiles.Count) 修正数=$totalReplacements 术语总数=$totalTerms 修正率=$overallFixRate%"
 
 # 生成术语修正报告
 $termReportPath = Join-Path $TargetDir "terminology_fix_report.md"
@@ -132,13 +134,14 @@ $termReport += "## 总体统计"
 $termReport += "- 处理文件数: $($mdFiles.Count)"
 $termReport += "- 总修正数: $totalReplacements"
 $termReport += "- 总术语数: $totalTerms"
-$termReport += ("- 修正率: {0}%`n" -f ([math]::Round((if($totalTerms -gt 0){$totalReplacements/$totalTerms}else{0})*100,2)))
+$termReport += "- 修正率: $overallFixRate%`n"
 $termReport += "## 成功修正文件"
 foreach ($r in $TermResults | Where-Object { $_.ReplacementsMade -gt 0 }) {
+    $fileFixRate = Get-Percent -num $r.ReplacementsMade -den $r.TotalTerms
     $termReport += "### $($r.FilePath)"
     $termReport += "- 修正数: $($r.ReplacementsMade)"
     $termReport += "- 总术语数: $($r.TotalTerms)"
-    $termReport += ("- 修正率: {0}%`n" -f ([math]::Round((if($r.TotalTerms -gt 0){$r.ReplacementsMade/$r.TotalTerms}else{0})*100,2)))
+    $termReport += "- 修正率: $fileFixRate%`n"
 }
 $termReport += "## 修正映射详情"
 foreach ($k in $TermMap.Keys) { $termReport += "- **$k** → **$($TermMap[$k])**" }
@@ -161,7 +164,6 @@ foreach ($file in $mdFiles) {
             $level = $matches[1].Length
             $name = $matches[2].Trim()
             if ($name.Length -gt 0) {
-                # 计算内容长度（直到下一个同级或更高级标题）
                 $contentLen = 0
                 for ($j=$i+1; $j -lt $lines.Length; $j++) {
                     if ($lines[$j] -match '^(#+)\s*') {
@@ -175,14 +177,12 @@ foreach ($file in $mdFiles) {
         }
     }
 
-    # 必需章节命中
     $found = @()
     $missing = @()
     foreach ($req in $RequiredSections) {
         if ($sections | Where-Object { $_.Name -like "*$req*" }) { $found += $req } else { $missing += $req }
     }
 
-    # 结构分数
     $totalWeight = ($SectionWeights.Values | Measure-Object -Sum).Sum
     $achieved = 0.0
     foreach ($sec in $sections) {
@@ -242,7 +242,7 @@ $summary += "## 术语修正摘要"
 $summary += "- 处理文件数: $($mdFiles.Count)"
 $summary += "- 总修正数: $totalReplacements"
 $summary += "- 总术语数: $totalTerms"
-$summary += ("- 修正率: {0}%" -f ([math]::Round((if($totalTerms -gt 0){$totalReplacements/$totalTerms}else{0})*100,2)))
+$summary += "- 修正率: $overallFixRate%"
 $summary += "- 报告: $termReportPath"
 $summary += ""
 $summary += "## 结构检查摘要"

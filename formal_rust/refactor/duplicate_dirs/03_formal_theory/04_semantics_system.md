@@ -27,7 +27,7 @@ $$\text{Semantics} = \langle \text{Syntax}, \text{Meaning}, \text{Interpretation
 
 其中：
 
-- $\text{Syntax}$ 是语法结构
+- $\text{Syntax}$ 是语法结构体体体
 - $\text{Meaning}$ 是意义域
 - $\text{Interpretation}$ 是解释函数
 
@@ -124,7 +124,7 @@ $$\text{RustConfig} = \langle \text{Environment}, \text{Expression}, \text{Memor
 
 #### Rust操作语义规则
 
-**所有权转移**:
+**所有权移动**:
 $$\frac{\text{Owns}(o_1, v)}{\langle \rho, \text{let } x = v, \mu, o \rangle \rightarrow \langle \rho[x \mapsto v], x, \mu, o[o_2 \mapsto v] \rangle}$$
 
 **借用创建**:
@@ -252,7 +252,7 @@ $$\{P\} \, \text{RustCode} \, \{Q\}$$
 
 #### Rust公理规则
 
-**所有权转移公理**:
+**所有权移动公理**:
 $$\{P * \text{Own}(v)\} \, \text{let } x = v \, \{P * \text{Own}(x)\}$$
 
 **借用创建公理**:
@@ -439,3 +439,32 @@ mod semantic_verification {
 **维护者**: Rust语言形式化理论项目组  
 **最后更新**: 2025-01-27  
 **版本**: V1.0
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

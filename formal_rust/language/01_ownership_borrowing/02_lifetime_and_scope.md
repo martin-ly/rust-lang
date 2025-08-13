@@ -1,4 +1,4 @@
-
+﻿
 # 02 生命周期与作用域分析
 
 ## 概述
@@ -70,7 +70,7 @@ fn first_word(s: &str) -> &str {
 ## FAQ
 
 - 生命周期和作用域有何区别？
-  - 作用域是变量的可见范围，生命周期是引用有效的时间区间。
+  - 作用域是变量的可见作用域，生命周期是引用有效的时间区间。
 - 为什么有时需要手动标注生命周期？
   - 当编译器无法自动推断或涉及多个引用关系时需手动标注。
 - 静态生命周期有什么用？
@@ -85,3 +85,30 @@ fn first_word(s: &str) -> &str {
 ## 总结
 
 Rust生命周期与作用域机制为内存安全提供了强有力的静态保障。理解生命周期标注和作用域嵌套是编写健壮Rust代码的关键。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

@@ -1,4 +1,4 @@
-# 批判性分析
+﻿# 批判性分析
 
 - Rust 所有权与借用理论极大提升了内存安全和并发安全，但对初学者学习曲线较陡，复杂场景下设计和调试难度较高。
 - 与 C/C++ 手动内存管理相比，Rust 自动化且安全，但灵活性略逊，部分高级用法（如多重可变借用）需特殊设计。
@@ -6,6 +6,35 @@
 
 ## 典型案例
 
-- Rust 通过所有权转移和借用检查器实现无 GC 的内存安全。
+- Rust 通过所有权移动和借用检查器实现无 GC 的内存安全。
 - 多线程场景下，所有权模型保障了数据竞争的静态消除。
 - 标准库 Vec、String 等类型的所有权语义。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

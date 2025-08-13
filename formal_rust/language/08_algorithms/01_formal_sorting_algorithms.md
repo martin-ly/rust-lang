@@ -1,4 +1,4 @@
-# 08.01 形式化排序算法
+﻿# 08.01 形式化排序算法
 
 ## 目录
 
@@ -437,7 +437,7 @@ fn partition_3way<T: Ord>(arr: &mut [T]) -> (usize, usize) {
 ### 4.3 堆排序
 
 **定义 4.3** (堆排序)
-堆排序利用堆这种数据结构所设计的排序算法，是一种选择排序。
+堆排序利用堆这种数据结构体体体所设计的排序算法，是一种选择排序。
 
 **算法 4.3** (堆排序)
 
@@ -558,7 +558,7 @@ function counting_sort(A[1..n], k):
 ```
 
 **定理 5.1** (计数排序复杂度)
-计数排序的时间复杂度为 $O(n + k)$，其中k是数据范围。
+计数排序的时间复杂度为 $O(n + k)$，其中k是数据作用域。
 
 **复杂度分析**：
 
@@ -815,4 +815,33 @@ Rust的排序算法提供了：
 4. **形式化保证**：严格的数学定义和证明
 5. **实际应用**：丰富的标准库支持
 
-这些特性使Rust的排序算法既理论严谨又实用高效，能够满足各种排序需求。
+这些特征使Rust的排序算法既理论严谨又实用高效，能够满足各种排序需求。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

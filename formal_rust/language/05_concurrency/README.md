@@ -1,10 +1,10 @@
-# 说明
+﻿# 说明
 
 本目录 (`formal_rust/language/c05_threads`) 包含了对 Rust 并发编程模型的形式化、系统性探讨。
 
-## 内容结构
+## 内容结构体体体
 
-本分册的内容是基于对 Rust 并发核心概念的理解，由 AI 系统从零开始生成的，旨在提供一个结构清晰、内容连贯的学习路径。章节安排如下：
+本分册的内容是基于对 Rust 并发核心概念的理解，由 AI 系统从零开始生成的，旨在提供一个结构体体体清晰、内容连贯的学习路径。章节安排如下：
 
 1. **`01_threads_and_ownership.md`**: 探讨并发的起点——线程，以及 Rust 的所有权系统如何从根本上保证线程安全。
 2. **`02_message_passing.md`**: 深入研究 Rust 推崇的第一种并发范式：通过通道进行消息传递，实现"不要通过共享内存来通信"。
@@ -15,3 +15,32 @@
 ## 核心理念
 
 本分册旨在阐明 Rust 如何通过其独特的所有权系统和 `Send`/`Sync` Trait，将传统的、充满危险的并发编程，转变为一种编译器保驾护航的、"无畏"的工程实践。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

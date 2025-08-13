@@ -1,4 +1,4 @@
-# 第 1 章：异步编程导论与哲学
+﻿# 第 1 章：异步编程导论与哲学
 
 - [第 1 章：异步编程导论与哲学](#第-1-章异步编程导论与哲学)
   - [1. 哲学：为什么需要异步？](#1-哲学为什么需要异步)
@@ -50,7 +50,7 @@ Rust 的异步模型在设计上追求三大核心目标：
 
 ### 2.1. 定义：一个尚未完成的计算
 
-`Future` 是一个 Trait，它代表一个**可能在未来某个时间点完成**的计算。它可以是一个等待完成的数据库查询，一个正在下载文件的网络请求，或是一个简单的定时器。
+`Future` 是一个 Trait，它代表一个**可能在未来值值值某个时间点完成**的计算。它可以是一个等待完成的数据库查询，一个正在下载文件的网络请求，或是一个简单的定时器。
 
 关键在于，`Future` 本身是**惰性的 (lazy)**。仅仅创建一个 `Future` 并不会执行任何操作。它只是描述了一个计算过程，直到它被一个**执行器 (Executor)** actively **轮询 (poll)** 时，计算才会向前推进。
 
@@ -135,7 +135,7 @@ async fn hello_world() {
 
 ### 4.1. 编译器的魔法
 
-当你编写一个 `async fn` 时，编译器会分析其中的 `.await` 调用点。这些暂停点将整个函数分割成不同的状态。编译器会生成一个匿名的结构体（或枚举），这个结构体就是实现了 `Future` Trait 的状态机。
+当你编写一个 `async fn` 时，编译器会分析其中的 `.await` 调用点。这些暂停点将整个函数分割成不同的状态。编译器会生成一个匿名的结构体体体体（或枚举），这个结构体体体体就是实现了 `Future` Trait 的状态机。
 
 - 状态机的**字段**包含了所有需要跨越 `.await` 点保存的局部变量。
 - 状态机的 `poll` 方法实现了状态转换的逻辑。
@@ -166,7 +166,7 @@ enum FetchAndProcessState {
     Done,
 }
 
-// 这个结构体实现了 Future<Output = u32>
+// 这个结构体体体体实现了 Future<Output = u32>
 struct FetchAndProcessStateMachine {
     state: FetchAndProcessState,
     // ... 其他需要保存的变量
@@ -227,4 +227,33 @@ hello_world();
 
 ## 6. 总结
 
-本章介绍了 Rust 异步编程的基石。其核心是一种基于**轮询 (Polling)** 的模型，其中惰性的 `Future` 描述了一个异步计算，而执行器则负责驱动这些 `Future`。通过 `async/await` 语法，编译器将复杂的异步逻辑转换为高效的状态机，而 `Waker` 机制则充当了任务与执行器之间的通信桥梁。这个精心设计的系统共同构成了 Rust 高性能、高安全性的异步编程范式。
+本章介绍了 Rust 异步编程的基石。其核心是一种基于**轮询 (Polling)** 的模型，其中惰性的 `Future` 描述了一个异步计算，而执行器则负责驱动这些 `Future`。通过 `async/await` 语法，编译器将复杂的异步逻辑转换为高效的状态机，而 `Waker` 机制则充当了任务与执行器之间的通信桥梁。这个精心设计的系统共同构成了 Rust 高性能、高安全的异步编程范式。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

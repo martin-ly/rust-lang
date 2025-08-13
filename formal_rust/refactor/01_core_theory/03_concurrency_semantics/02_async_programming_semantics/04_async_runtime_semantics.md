@@ -687,7 +687,7 @@ impl TimerWheel {
 
 1. **状态机内存**: 每个async函数编译为状态机，占用固定内存
 2. **栈帧复用**: 异步调用不使用传统栈，而是在堆上分配状态
-3. **零拷贝传输**: 数据在异步边界间传输时尽量避免拷贝
+3. **零复制传输**: 数据在异步边界间传输时尽量避免复制
 
 ```rust
 use std::alloc::{alloc, dealloc, Layout};
@@ -939,7 +939,7 @@ impl CacheOptimizedScheduler {
 
 
 | **资源管理** | 自动清理、引用计数 | GC压力、内存泄漏风险 | 增量GC、弱引用 |
-| **调试性** |:---:|:---:|:---:| 结构化并发 |:---:|:---:|:---:| 复杂的调用栈、难以调试 |:---:|:---:|:---:| 异步调试工具、追踪 |:---:|:---:|:---:|
+| **调试性** |:---:|:---:|:---:| 结构体体体化并发 |:---:|:---:|:---:| 复杂的调用栈、难以调试 |:---:|:---:|:---:| 异步调试工具、追踪 |:---:|:---:|:---:|
 
 
 
@@ -977,4 +977,33 @@ impl CacheOptimizedScheduler {
 *版本: 2.0*  
 *字数: ~15KB*  
 *最后更新: 2025-01-27*
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

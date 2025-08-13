@@ -1,10 +1,10 @@
-# C07-01. 进程模型与生命周期
+﻿# C07-01. 进程模型与生命周期
 
 本章系统梳理 Rust 进程的理论基础、生命周期管理、资源属性控制及其安全抽象。
 
 ## 1. 进程定义与模型
 
-- **进程**：操作系统分配资源和调度的基本单位，拥有独立的地址空间、代码、数据、堆栈和系统资源。
+- **进程**：操作系统分配资源和调度的基本单位，拥有独立的地址空间、代码、数据、栈和系统资源。
 - **Rust 抽象**：通过 `std::process` 提供跨平台进程管理，封装平台细节，保证内存与资源安全。
 
 ```rust
@@ -61,4 +61,33 @@ setrlimit(Resource::RLIMIT_AS, 1024 * 1024 * 100, 1024 * 1024 * 200)?;
 
 ## 5. 小结
 
-Rust 进程模型以类型系统和所有权为基础，结合操作系统原语，提供了安全、可移植、易用的进程管理能力。生命周期管理、资源控制和错误处理机制共同确保了系统级编程的健壮性和安全性。
+Rust 进程模型以类型系统和所有权为基础，结合操作系统原语，提供了安全、可移植、易用的进程管理能力。生命周期管理、资源控制和错误处理机制共同确保了系统级编程的健壮性和安全。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

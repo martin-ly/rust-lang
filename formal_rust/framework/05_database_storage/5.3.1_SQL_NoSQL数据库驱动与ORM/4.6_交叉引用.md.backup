@@ -1,0 +1,73 @@
+﻿# SQL/NoSQL数据库驱动与ORM - 交叉引用
+
+## 1. 与微服务架构的关系
+
+- 数据库驱动与ORM是微服务架构中数据层解耦、服务自治的基础。
+- 结合事件驱动、CQRS、分布式事务等模式，提升数据一致性与可扩展性。
+- 推荐阅读：
+  - 《微服务设计》Sam Newman
+  - 《Building Event-Driven Microservices》Adam Bellemare
+
+## 2. 与数据一致性与事务机制的关联
+
+- ORM/驱动需支持本地/分布式事务，保障数据一致性。
+- 结合SAGA、TCC等柔性事务模式，适应分布式场景。
+- 推荐阅读：
+  - 《Designing Data-Intensive Applications》Martin Kleppmann
+  - Rust社区分布式事务相关库文档
+
+## 3. 与分布式存储与缓存架构的协同
+
+- ORM/驱动常与分布式存储（如TiKV、Etcd）和缓存（如Redis）集成，提升系统性能与可用性。
+- 多级缓存、读写分离、数据分片等架构模式需数据库驱动/ORM配合实现。
+- 推荐阅读：
+  - TiKV、Etcd、Redis官方文档
+  - Rust异步缓存库（如 moka、cached）
+
+## 4. 与云原生/Serverless的集成
+
+- Rust数据库驱动/ORM正加速适配云原生、Serverless数据库，支持弹性扩展、无状态访问。
+- 推荐阅读：
+  - 《Cloud Native Patterns》Cornelia Davis
+  - 云原生数据库官方文档
+
+## 5. 与AI/大数据/区块链的融合
+
+- Rust数据库生态正与AI推理、流式大数据、区块链等新兴领域深度融合。
+- 推荐阅读：
+  - 《Real-Time Analytics》Byron Ellis
+  - Substrate区块链开发文档
+
+## 6. 相关开源项目与社区资源
+
+- sqlx、Diesel、SeaORM、mongodb、redis等主流Rust数据库库
+- Rust官方文档：<https://www.rust-lang.org/zh-CN/>
+- Rust数据库生态导航：<https://github.com/rust-unofficial/awesome-rust#database>
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

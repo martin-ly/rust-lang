@@ -1,4 +1,4 @@
-# Rust 异步运行时系统与执行器架构 {#运行时系统}
+﻿# Rust 异步运行时系统与执行器架构 {#运行时系统}
 
 **模块编号**: 06-05  
 **主题**: 运行时系统、执行器与资源管理  
@@ -12,7 +12,7 @@
 - [Rust 异步运行时系统与执行器架构 {#运行时系统}](#rust-异步运行时系统与执行器架构-运行时系统)
   - [章节导航](#章节导航)
   - [引言](#引言)
-  - [运行时系统的分层结构](#运行时系统的分层结构)
+  - [运行时系统的分层结构体体体](#运行时系统的分层结构体体体)
   - [执行器架构与任务调度](#执行器架构与任务调度)
   - [任务队列与工作窃取算法](#任务队列与工作窃取算法)
   - [线程池与资源管理](#线程池与资源管理)
@@ -32,7 +32,7 @@ Rust异步运行时系统为Future提供完整的执行环境，集成任务调�
 
 ---
 
-## 运行时系统的分层结构
+## 运行时系统的分层结构体体体
 
 - **语言核心层**：Future trait、Pin、async/await语法。
 - **执行器层**：任务调度、poll驱动、Waker管理。
@@ -152,3 +152,32 @@ fn main() {
 ---
 
 > 本文档为Rust异步运行时系统与执行器架构的形式化索引，后续章节将递归细化各子主题。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

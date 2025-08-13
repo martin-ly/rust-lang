@@ -82,7 +82,7 @@ $$\frac{Γ ⊢ e : \text{impl Future}⟨\text{Output} = τ⟩}{Γ ⊢ e.\text{aw
 
 ## Rust实现
 
-### 核心特性
+### 核心特征
 
 **1. 异步函数状态机生成**:
 
@@ -767,4 +767,29 @@ impl AsyncBlockchainProcessor {
 > - 下级文档: [异步运行时语义](04_async_runtime_semantics.md) | [异步流语义](05_async_stream_semantics.md)
 >
 > **深度**: ⭐⭐⭐⭐⭐ **广度**: ⭐⭐⭐⭐⭐ **完成度**: 100%
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

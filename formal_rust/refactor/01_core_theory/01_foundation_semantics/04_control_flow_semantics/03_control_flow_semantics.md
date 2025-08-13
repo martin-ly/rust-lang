@@ -83,7 +83,7 @@ fn control_flow_example() {
 ### 3.1.2 控制流图语义
 
 **定义 3.1.2** (控制流图)
-控制流图是程序结构的数学表示：
+控制流图是程序结构体体体的数学表示：
 $$\text{CFG} = (V, E, \text{entry}, \text{exit})$$
 
 其中：
@@ -576,7 +576,7 @@ fn control_flow_verification() {
                 if let Some(block) = cfg.blocks.get(&block_id) {
                     for stmt in &block.statements {
                         if stmt.contains("unsafe") {
-                            // 检查unsafe块的安全性
+                            // 检查unsafe块的安全
                             if !self.verify_unsafe_safety(stmt) {
                                 self.errors.push(format!("不安全的unsafe块: {}", stmt));
                             }
@@ -587,7 +587,7 @@ fn control_flow_verification() {
         }
         
         fn verify_unsafe_safety(&self, stmt: &str) -> bool {
-            // 简化的unsafe安全性检查
+            // 简化的unsafe安全检查
             !stmt.contains("undefined behavior")
         }
     }
@@ -617,7 +617,7 @@ fn control_flow_verification() {
 ### 3.4.1 高级控制流系统
 
 **定义 3.4.1** (高级控制流系统)
-高级控制流系统支持复杂的控制结构：
+高级控制流系统支持复杂的控制结构体体体：
 $$\text{AdvancedControlFlow} = \{\text{async}, \text{await}, \text{yield}, \text{resume}\}$$
 
 ```rust
@@ -736,9 +736,9 @@ Rust控制流语义模型提供了：
 1. **理论基础**: 严格的数学定义和控制流图语义
 2. **实现机制**: 完整的条件、循环、跳转控制流实现
 3. **应用价值**: 控制流分析、优化、验证等实际应用
-4. **前沿发展**: 异步控制流、量子控制流等高级特性
+4. **前沿发展**: 异步控制流、量子控制流等高级特征
 
-控制流语义是程序执行的核心，为Rust语言的控制结构提供了严格的语义基础。
+控制流语义是程序执行的核心，为Rust语言的控制结构体体体提供了严格的语义基础。
 
 ---
 
@@ -747,4 +747,31 @@ Rust控制流语义模型提供了：
 - [表达式语义](01_expression_semantics.md)
 - [语句语义](02_statement_semantics.md)
 - [内存模型语义](../02_memory_model_semantics/01_memory_layout_semantics.md)
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

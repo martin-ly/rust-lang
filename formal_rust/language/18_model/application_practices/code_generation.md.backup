@@ -1,0 +1,47 @@
+﻿# 代码生成
+
+## 1. 模型到代码与宏驱动生成
+
+- 派生宏、属性宏、自动生成序列化/验证代码
+
+## 2. 工程案例
+
+```rust
+// Rust宏驱动代码生成
+#[derive(Serialize, Validate)]
+struct User { id: u32, email: String }
+```
+
+## 3. 批判性分析与未来值值展望
+
+- 代码生成提升开发效率，但生成质量与调试需关注
+- 未来值值可探索模型驱动代码生成平台与自动化测试生成
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

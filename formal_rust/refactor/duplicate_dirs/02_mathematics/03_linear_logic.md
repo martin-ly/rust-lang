@@ -22,7 +22,7 @@
 线性逻辑为Rust的所有权系统提供了完美的数学基础，特别是在以下方面：
 
 1. **资源管理**: 线性逻辑的"使用一次"原则
-2. **所有权转移**: 线性蕴涵的消耗性
+2. **所有权移动**: 线性蕴涵的消耗性
 3. **借用检查**: 指数模态的共享访问
 4. **并发安全**: 线性逻辑的并发语义
 
@@ -868,3 +868,32 @@ impl MacroLinearLogic {
 ---
 
 **文档维护**: 本线性逻辑基础文档将随着Rust形式化理论的发展持续更新和完善。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

@@ -1,0 +1,82 @@
+﻿# 4.7 交叉主题与延伸阅读
+
+## 4.7.1 微服务架构与网络通信
+
+- 微服务对网络通信的要求、服务网格、API 网关
+- 推荐阅读：
+  - 《微服务架构》专题（见 03_microservice_architecture）
+  - [microservices.io](https://microservices.io/)
+
+## 4.7.2 事件驱动与消息中间件
+
+- 事件驱动架构、消息队列、异步通信
+- 推荐阅读：
+  - 《事件驱动消息与微服务》专题（见 04_event_driven_messaging）
+  - [CloudEvents 官方文档](https://cloudevents.io/)
+
+## 4.7.3 云原生与容器网络
+
+- Kubernetes 网络、CNI 插件、Service Mesh
+- 推荐阅读：
+  - [Kubernetes 官方文档](https://kubernetes.io/zh/docs/)
+  - [Linkerd 官方文档](https://linkerd.io/)
+
+## 4.7.4 DevOps 与自动化运维
+
+- 持续集成、持续交付、自动化测试、CI/CD 流水线
+- 推荐阅读：
+  - 《DevOps 与自动化运维》专题
+  - [GitHub Actions 官方文档](https://docs.github.com/actions)
+
+## 4.7.5 Rust 性能优化与工程实践
+
+- Rust 性能调优、异步编程、内存管理
+- 推荐阅读：
+  - 《Rust 性能优化实战》
+  - [tokio 官方文档](https://docs.rs/tokio/)
+
+## 4.7.6 其他延伸主题
+
+- 边缘计算、物联网通信、安全通信等
+- 推荐阅读：
+  - 《边缘计算与物联网》专题
+  - [Awesome Rust 网络项目集](https://github.com/rust-unofficial/awesome-rust#network-programming)
+
+## 4.7.8 AI工程与智能网络通信
+
+- AI网络架构、AIOps、智能流量调度、可解释AI等
+- 推荐阅读：
+  - 《AI工程与网络通信融合实践》专题
+  - [IEEE 7000系列AI伦理标准](https://standards.ieee.org/)
+
+## 4.7.9 绿色IT与可持续网络通信
+
+- 绿色部署、能效优化、碳排放监控、绿色云原生
+- 推荐阅读：
+  - CNCF Green Software Foundation
+  - [ISO/IEC 30134绿色数据中心标准](https://www.iso.org/standard/63545.html)
+
+## 4.7.10 工程伦理与社会责任
+
+- 数据隐私、算法公平、工程伦理、社会责任评估
+- 推荐阅读：
+  - ACM/IEEE软件工程伦理准则
+  - [OECD AI原则](https://oecd.ai/en/ai-principles)
+
+## 4.7.11 全球合规与多元法规适配
+
+- GDPR、CCPA、数据主权、跨境合规、合规中台
+- 推荐阅读：
+  - [GDPR官方文档](https://gdpr.eu/)
+  - [NIST零信任架构](https://csrc.nist.gov/publications/detail/sp/800-207/final)
+
+## 4.7.12 未来值趋势与挑战
+
+- 智能化、绿色化、全球协作、工程伦理等新兴趋势
+- 推荐阅读：
+  - ICSE/NeurIPS等顶级会议论文
+  - arXiv/IEEE Xplore最新前沿论文
+
+---
+
+

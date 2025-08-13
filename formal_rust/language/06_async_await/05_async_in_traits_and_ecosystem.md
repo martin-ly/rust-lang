@@ -1,4 +1,4 @@
-# C06-05. 异步 Trait 与生态
+﻿# C06-05. 异步 Trait 与生态
 
 在 Rust 中，Trait 是构建可复用和可扩展抽象的核心工具。然而，将 `async fn` 直接用在 Trait 中会带来一系列挑战，因为 `async fn` 返回的是一个匿名的、实现了 `Future` 的类型。这与 Trait 的对象安全（Object Safety）规则和静态分派机制产生了冲突。
 
@@ -116,7 +116,7 @@ impl HttpClient for MyClient {
 
 - **优先使用 `async-trait`**: 对于大多数应用程序，尤其是业务逻辑代码，`async-trait` 的便利性远远超过其微小的性能开销。它是构建清晰、可维护的异步抽象的首选。
 - **性能关键路径使用 GATs**: 在编写底层库、高性能网络服务或需要避免任何堆分配的嵌入式环境中，手动实现 GAT 模式是更合适的选择。
-- **未来展望**: Rust 语言团队正在积极开发原生的 `async fn` in traits。最终目标是实现 GATs 模式的性能，同时拥有 `async-trait` 的人体工程学。
+- **未来值值值展望**: Rust 语言团队正在积极开发原生的 `async fn` in traits。最终目标是实现 GATs 模式的性能，同时拥有 `async-trait` 的人体工程学。
 
 ## 总结
 
@@ -126,3 +126,32 @@ impl HttpClient for MyClient {
 - **GATs 模式**: 提供了零成本的静态分派抽象，但写法复杂且不是对象安全的。
 
 理解这两种模式的权衡，可以帮助开发者根据具体需求在人体工程学和性能之间做出明智的决策。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

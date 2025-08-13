@@ -1,0 +1,113 @@
+﻿# 02.08 类型族（Type Families）
+
+---
+
+## 理论简述
+
+类型族（Type Families）是指一组通过类型参数或关联类型系统性生成的相关类型集合。Rust通过泛型、trait的关联类型（Associated Types）、泛型关联类型（GATs）等机制实现类型族，提升了类型系统的表达力和抽象能力。相关理论详见[类型族与GAT](../../02_type_system/07_type_families.md)及[trait系统](../../12_traits/04_associated_types.md)。
+
+---
+
+## 核心代码示例
+
+```rust
+// 关联类型定义类型族
+trait Iterator {
+    type Item;
+    fn next(&mut self) -> Option<Self::Item>;
+}
+
+struct Counter {
+    count: u32,
+}
+
+impl Iterator for Counter {
+    type Item = u32;
+    fn next(&mut self) -> Option<Self::Item> {
+        self.count += 1;
+        if self.count < 6 {
+            Some(self.count)
+        } else {
+            None
+        }
+    }
+}
+
+// 泛型关联类型（GAT）示例
+trait StreamingIterator {
+    type Item<'a>;
+    fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
+}
+```
+
+---
+
+## 详细注释
+
+- `trait Iterator { type Item; ... }` 通过关联类型定义类型族，允许不同实现指定不同的`Item`类型。
+- `impl Iterator for Counter` 指定`Item = u32`，形成具体类型族成员。
+- 泛型关联类型（GAT）允许类型族依赖生命周期参数，提升表达力。
+- 类型族广泛用于集合、迭代器、容器等抽象。
+
+---
+
+## 理论映射
+
+- 对应[类型族与GAT](../../02_type_system/07_type_families.md)
+- 相关trait系统见[12_traits/04_associated_types.md](../../12_traits/04_associated_types.md)
+- 泛型与多态理论见[01_formal_type_system.md#多态性](../../02_type_system/01_formal_type_system.md#多态性)
+
+---
+
+## 边界情况与常见错误
+
+- **边界情况**：
+  - 关联类型必须在trait实现中具体化。
+  - GAT需配合生命周期参数正确使用。
+- **常见错误**：
+  - 忘记实现trait的关联类型，导致编译错误。
+  - GAT使用时生命周期不匹配。
+  - 类型族成员类型不一致，导致trait约束不满足。
+
+---
+
+## FAQ
+
+- **Q: 类型族和泛型有何区别？**
+  - A: 泛型通过参数化类型，类型族通过trait的关联类型系统性生成相关类型。
+- **Q: 何时使用GAT？**
+  - A: 当类型族成员依赖生命周期或需更高阶抽象时使用GAT。
+- **Q: 如何定位类型族相关的编译错误？**
+  - A: 检查trait实现是否补全所有关联类型，GAT的生命周期参数是否一致。
+
+---
+
+（本示例可直接用`rustc`编译验证，理论与代码一一对应，便于教学与自动化校验。）
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

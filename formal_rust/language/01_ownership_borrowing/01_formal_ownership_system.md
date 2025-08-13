@@ -1,4 +1,4 @@
-# Rust所有权系统形式化理论
+﻿# Rust所有权系统形式化理论
 
 ## 目录
 
@@ -81,7 +81,7 @@ Rust所有权系统是Rust语言的核心创新，它通过静态分析在编译
 
 - 所有权规则：每个值有唯一所有者
 - 借用机制：不可变借用和可变借用
-- 移动语义：所有权转移而非复制
+- 移动语义：所有权移动而非复制
 - 生命周期：引用有效期的静态分析
 
 ## 2. 哲学基础
@@ -119,9 +119,9 @@ $$\text{Borrow}(r, v) \land \text{Exclusive}(r) \Rightarrow \neg \text{Borrow}(r
 
 **核心思想**: 社会效用最大化
 
-所有权系统通过静态分析最大化安全性和性能：
+所有权系统通过静态分析最大化安全和性能：
 
-- **安全性**: 防止内存错误
+- **安全**: 防止内存错误
 - **性能**: 零运行时开销
 - **并发安全**: 防止数据竞争
 
@@ -198,7 +198,7 @@ $$\Gamma ::= \emptyset \mid \Gamma, x: \tau$$
 
 ### 4.3 生命周期 {#生命周期定义}
 
-**定义 1.6**: 生命周期 $\alpha$ 表示引用的有效期，即引用在程序中可以安全使用的时间范围。
+**定义 1.6**: 生命周期 $\alpha$ 表示引用的有效期，即引用在程序中可以安全使用的时间作用域。
 
 **形式化表示**:
 $$\text{Ref}_{\alpha}(\tau)$$
@@ -239,17 +239,17 @@ $$\text{ScopeEnd}(x) \Rightarrow \text{Drop}(\text{ValueOf}(x))$$
 **相关定理**：
 
 - [定理 1.1: 所有权唯一性](06_theorems.md#所有权唯一性)
-- [定理 1.2: 所有权转移保持性](06_theorems.md#所有权转移保持性)
+- [定理 1.2: 所有权移动保持性](06_theorems.md#所有权移动保持性)
 
 **相关概念**：
 
 - [移动语义](#53-移动语义) (本模块)
 - [内存管理模型](../11_memory_management/01_formal_memory_model.md#内存管理模型) (模块 11)
-- [线程安全性](../05_concurrency/01_formal_concurrency_model.md#线程安全性) (模块 05)
+- [线程安全](../05_concurrency/01_formal_concurrency_model.md#线程安全) (模块 05)
 
 ### 5.2 借用规则 {#借用定义}
 
-**定义 1.4**: 借用是指在不转移所有权的情况下，临时获取对值的访问权限。借用分为不可变借用（只读访问）和可变借用（读写访问）。
+**定义 1.4**: 借用是指在不移动所有权的情况下，临时获取对值的访问权限。借用分为不可变借用（只读访问）和可变借用（读写访问）。
 
 **不可变借用规则**:
 $$\text{BorrowImm}(r, v) \Rightarrow \text{Read}(r, v) \land \neg \text{Write}(r, v)$$
@@ -262,18 +262,18 @@ $$\text{BorrowMut}(r_1, v) \land \text{Borrow}(r_2, v) \Rightarrow \text{Conflic
 
 **相关定理**：
 
-- [定理 1.6: 借用安全性](06_theorems.md#借用安全性)
-- [定理 1.7: 多重不可变借用安全性](06_theorems.md#多重不可变借用安全性)
+- [定理 1.6: 借用安全](06_theorems.md#借用安全)
+- [定理 1.7: 多重不可变借用安全](06_theorems.md#多重不可变借用安全)
 - [定理 1.8: 可变借用排他性](06_theorems.md#可变借用排他性)
 
 **相关概念**：
 
 - [引用类型](../02_type_system/01_formal_type_system.md#引用类型) (模块 02)
-- [并发安全性](../05_concurrency/01_formal_concurrency_model.md#并发安全性) (模块 05)
+- [并发安全](../05_concurrency/01_formal_concurrency_model.md#并发安全) (模块 05)
 
 ### 5.3 移动语义
 
-**移动定义**: 所有权从一个变量转移到另一个变量。
+**移动定义**: 所有权从一个变量移动到另一个变量。
 
 **形式化表示**:
 $$\text{Move}(x, y, v) \Rightarrow \text{Owner}(y, v) \land \neg \text{Owner}(x, v)$$
@@ -373,7 +373,7 @@ $$\frac{\text{valid}(r, v) \land \text{no-conflict}(r, v)}{\text{borrow}(r, v) \
 
 ### 9.1 基础示例
 
-**示例 9.1**: 所有权转移
+**示例 9.1**: 所有权移动
 
 ```rust
 fn main() {
@@ -514,7 +514,7 @@ fn main() {
   \forall v \in \mathbb{V}, \exists! x \in \mathbb{X}, Own(x, v)
   $$
   
-- **定理 2（借用安全性）**：
+- **定理 2（借用安全）**：
   $$
   \forall r, x, \alpha.\ Borrow(r, x, \alpha) \implies \text{NoDanglingRef}(r, \alpha)
   $$
@@ -525,7 +525,7 @@ fn main() {
   $$
   
 - **证明思路**：
-  采用结构归纳法，分别对所有权转移、借用规则、生命周期推导进行归纳证明，详见[所有权系统形式化证明](06_theorems.md)。
+  采用结构体体体归纳法，分别对所有权移动、借用规则、生命周期推导进行归纳证明，详见[所有权系统形式化证明](06_theorems.md)。
 
 ## 符号表
 
@@ -545,9 +545,34 @@ fn main() {
 - **借用（Borrowing）**：在生命周期内对值的临时访问。
 - **生命周期（Lifetime）**：值或引用的有效作用域。
 - **悬垂引用（Dangling Reference）**：生命周期已结束但仍被访问的引用。
-- **所有权转移（Move）**：值的所有权从一个变量转移到另一个变量。
+- **所有权移动（Move）**：值的所有权从一个变量移动到另一个变量。
 - **不可变借用（Immutable Borrow）**：只读访问。
 - **可变借用（Mutable Borrow）**：可写访问，且同一时刻唯一。
-- **借用检查器（Borrow Checker）**：静态分析所有权与借用安全性的编译器组件。
+- **借用检查器（Borrow Checker）**：静态分析所有权与借用安全的编译器组件。
 
 > 本区块为标准化模板，后续可根据实际内容补充详细证明、符号扩展与术语解释。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

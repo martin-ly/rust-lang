@@ -173,7 +173,7 @@ fn nested_loops_with_labels() {
 }
 ```
 
-**loop循环的语义特性**：
+**loop循环的语义特征**：
 
 - **无条件入口**: 总是执行循环体
 - **显式退出**: 必须通过break退出
@@ -836,9 +836,9 @@ trait AsyncIterator {
     ) -> Poll<Option<Self::Item>>;
 }
 
-// 异步for循环的概念（实验性特性）
+// 异步for循环的概念（实验性特征）
 async fn async_iteration_concept() {
-    // 注意：这需要实验性特性 #![feature(async_iterator)]
+    // 注意：这需要实验性特征 #![feature(async_iterator)]
     /*
     async fn process_async_items() {
         let async_iter = create_async_iterator();
@@ -956,4 +956,33 @@ async fn stream_processing() {
 - **相关工具**: rustc, cargo, rust-analyzer
 - **更新频率**: 与Rust循环和迭代器演进同步
 - **维护者**: Rust控制语义分析工作组
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

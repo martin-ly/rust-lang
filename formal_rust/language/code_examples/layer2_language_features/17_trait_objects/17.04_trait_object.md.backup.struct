@@ -1,0 +1,76 @@
+﻿# 17.04 trait对象（Trait Object）
+
+---
+
+## 理论简述
+
+trait对象（dyn Trait）实现运行时多态，通过类型擦除支持不同类型以统一接口传递。trait对象需对象安全，常用于插件、回调、容器等场景。相关理论详见[trait系统理论](../../12_traits/01_trait_system.md)与[trait对象机制](../../12_traits/06_trait_object.md)。
+
+---
+
+## 核心代码示例
+
+```rust
+trait Draw {
+    fn draw(&self);
+}
+
+struct Circle;
+impl Draw for Circle {
+    fn draw(&self) { println!("Circle"); }
+}
+
+fn draw_shape(shape: &dyn Draw) {
+    shape.draw();
+}
+
+fn main() {
+    let c = Circle;
+    draw_shape(&c);
+}
+```
+
+---
+
+## 详细注释
+
+- &dyn Trait为trait对象，支持运行时多态。
+- trait对象需对象安全，不能有泛型方法、Self返回值等。
+- trait对象常用于接口抽象、插件、回调等。
+
+---
+
+## 理论映射
+
+- 对应[trait系统理论](../../12_traits/01_trait_system.md)
+- trait对象机制见[12_traits/06_trait_object.md](../../12_traits/06_trait_object.md)
+- 类型擦除见[02_type_system/09_type_erasure.md](../../02_type_system/09_type_erasure.md)
+
+---
+
+## 边界情况与常见错误
+
+- **边界情况**：
+  - trait对象与泛型混用。
+  - 多层trait对象。
+- **常见错误**：
+  - trait未对象安全导致编译错误。
+  - 忘记加dyn导致类型不匹配。
+  - trait对象生命周期不明确。
+
+---
+
+## FAQ
+
+- **Q: trait对象和泛型有何区别？**
+  - A: trait对象为运行时多态，泛型为编译期多态。
+- **Q: trait对象的对象安全如何判断？**
+  - A: 不能有泛型方法、Self返回值等。
+- **Q: trait对象常见应用场景？**
+  - A: 插件系统、容器、接口抽象等。
+
+---
+
+（本示例可直接用`rustc`编译验证，理论与代码一一对应，便于教学与自动化校验。）
+
+

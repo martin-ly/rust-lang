@@ -1,4 +1,4 @@
-# Rust声明宏形式化理论
+﻿# Rust声明宏形式化理论
 
 ## 1. 声明宏概述
 
@@ -15,7 +15,7 @@ $$\text{DeclarativeMacro} = \text{macro\_rules!} \quad \text{MacroName} \quad \t
 - $\text{MacroRules} = \text{MacroRule}^*$
 - $\text{MacroRule} = \text{MacroPattern} \Rightarrow \text{MacroTemplate}$
 
-### 1.2 声明宏语法结构
+### 1.2 声明宏语法结构体体体
 
 ```text
 DeclarativeMacro
@@ -94,7 +94,7 @@ $$\frac{\Gamma \vdash \text{pattern}(p) \quad \Gamma \vdash \text{input}(i) \qua
 **模板语法**:
 $$\text{MacroTemplate} = \text{TokenTree} \times \text{Substitution} \times \text{Repetition}$$
 
-**模板结构**:
+**模板结构体体体**:
 ```
 MacroTemplate
 ├── LiteralTokens
@@ -549,4 +549,29 @@ macro_rules! debug_macro {
 
 声明宏是Rust中最强大的元编程工具之一，通过严格的形式化理论保证了类型安全和卫生性。通过模式匹配和模板展开，声明宏能够生成类型安全的代码，同时保持编译时检查的优势。
 
-声明宏的形式化理论为编译器实现提供了理论基础，确保了宏展开的正确性和安全性。通过数学定义和定理证明，我们建立了声明宏的完整理论体系，为Rust的元编程能力提供了坚实的数学基础。
+声明宏的形式化理论为编译器实现提供了理论基础，确保了宏展开的正确性和安全。通过数学定义和定理证明，我们建立了声明宏的完整理论体系，为Rust的元编程能力提供了坚实的数学基础。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

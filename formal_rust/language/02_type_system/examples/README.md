@@ -1,4 +1,4 @@
-# 类型系统模块工程案例说明
+﻿# 类型系统模块工程案例说明
 
 ## 案例目录
 
@@ -10,7 +10,7 @@
 ## 理论映射
 
 - 每个案例均与[类型系统形式化理论](../01_formal_type_system.md)的相关定义、定理直接对应。
-- 例如：example_basic_type.rs 对应“类型判断”与“类型安全性”定理。
+- 例如：example_basic_type.rs 对应“类型判断”与“类型安全”定理。
 - example_subtyping.rs 对应“子类型”与“型变”理论。
 
 ## 编译与验证
@@ -33,3 +33,32 @@
   - 理论映射：
   - 代码文件：
   - 验证说明：
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

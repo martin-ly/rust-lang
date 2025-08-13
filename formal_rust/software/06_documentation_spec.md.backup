@@ -1,0 +1,63 @@
+﻿# 6. 文档与规范
+
+## 6.1 元数据
+
+- 更新时间：2025-02-01
+- 相关主题：rustdoc、自动文档、代码规范、风格指南
+
+## 6.2 摘要
+
+本节梳理Rust文档生成（rustdoc）、自动化文档、代码规范、风格指南等内容，分析其对工程质量和团队协作的影响。
+
+## 6.3 主要内容大纲
+
+- rustdoc自动文档生成
+- 代码注释与API文档
+- 代码规范与风格指南
+- 文档在工程协作中的作用
+- 工程案例与批判性分析
+
+## 6.4 批判性分析
+
+- Rust文档工具与主流语言的对比？
+- 自动文档的优势与局限？
+- 规范化对工程质量的实际提升？
+
+## 6.5 FAQ
+
+- Rust如何生成API文档？
+- 代码规范如何落地？
+- 文档协作的最佳实践？
+
+## 6.6 交叉引用
+
+- [测试、调试与质量保障](./05_testing_quality.md)
+- [社区与生态](./07_community_ecosystem.md)
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

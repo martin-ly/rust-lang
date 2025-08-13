@@ -1,0 +1,430 @@
+﻿# 控制流
+
+## 元数据
+
+- **概念ID**: 03.01
+- **概念名称**: 控制流 (Control Flow)
+- **理论层次**: 第二层：语言特征形式化层
+- **相关概念**: 03.02 (函数), 03.03 (闭包), 03.04 (错误处理)
+- **难度级别**: 中级
+
+## 形式化定义
+
+使用统一符号系统(RFUSS)的形式化定义：
+
+```math
+\text{ControlFlow}(S, C) \equiv \forall s \in S. \exists c \in C. s \vdash c
+```
+
+其中：
+
+- $\text{ControlFlow}(S, C)$ 表示控制流语句集合 $S$ 和条件集合 $C$
+- $\forall s \in S$ 表示对所有控制流语句 $s$
+- $\exists c \in C$ 表示存在条件 $c$
+- $s \vdash c$ 表示语句 $s$ 在条件 $c$ 下执行
+
+## 代码映射
+
+形式化表示与代码的对应关系：
+
+| 形式化表示 | Rust代码 | 说明 |
+|----------|---------|------|
+| `ControlFlow(S, C)` | 控制流语句 | 控制程序执行流程的语句 |
+| `s ⊢ c` | `if condition { ... }` | 条件执行 |
+| `s₁; s₂` | `stmt1; stmt2` | 顺序执行 |
+| `s₁ ∨ s₂` | `if ... else` | 分支选择 |
+| `∀s. s ⊢ c` | `loop { ... }` | 循环执行 |
+
+## 基础示例
+
+最小化示例代码，展示控制流的核心概念：
+
+```rust
+fn main() {
+    // 条件语句
+    let number = 7;
+    
+    if number < 5 {
+        println!("数字小于5");
+    } else if number < 10 {
+        println!("数字在5到10之间");
+    } else {
+        println!("数字大于等于10");
+    }
+    
+    // 循环语句
+    let mut count = 0;
+    
+    // while循环
+    while count < 3 {
+        println!("while循环: {}", count);
+        count += 1;
+    }
+    
+    // for循环
+    for i in 0..3 {
+        println!("for循环: {}", i);
+    }
+    
+    // loop循环
+    let mut loop_count = 0;
+    loop {
+        println!("loop循环: {}", loop_count);
+        loop_count += 1;
+        if loop_count >= 3 {
+            break;
+        }
+    }
+    
+    // match表达式
+    let value = 3;
+    match value {
+        1 => println!("一"),
+        2 => println!("二"),
+        3 => println!("三"),
+        _ => println!("其他"),
+    }
+}
+```
+
+**解释**：
+
+- `if-else` 提供条件分支执行
+- `while` 循环在条件为真时重复执行
+- `for` 循环遍历集合或作用域
+- `loop` 提供无限循环，需要显式退出
+- `match` 提供模式匹配和分支选择
+
+## 进阶示例
+
+在实际场景中应用控制流概念：
+
+```rust
+// 复杂条件控制流
+fn process_data(data: &[i32]) -> Vec<i32> {
+    let mut result = Vec::new();
+    
+    for &item in data {
+        match item {
+            // 处理正数
+            n if n > 0 => {
+                if n % 2 == 0 {
+                    result.push(n * 2); // 偶数翻倍
+                } else {
+                    result.push(n + 1); // 奇数加1
+                }
+            },
+            // 处理零
+            0 => {
+                result.push(0);
+            },
+            // 处理负数
+            n if n < 0 => {
+                result.push(n.abs()); // 取绝对值
+            },
+            _ => unreachable!(),
+        }
+    }
+    
+    result
+}
+
+// 嵌套控制流
+fn find_pattern(matrix: &[[i32; 3]; 3]) -> Option<(usize, usize)> {
+    for (i, row) in matrix.iter().enumerate() {
+        for (j, &cell) in row.iter().enumerate() {
+            // 检查是否为中心点
+            if i > 0 && i < 2 && j > 0 && j < 2 {
+                // 检查周围8个方向
+                let mut count = 0;
+                for di in -1..=1 {
+                    for dj in -1..=1 {
+                        if di == 0 && dj == 0 { continue; }
+                        
+                        let ni = (i as i32 + di) as usize;
+                        let nj = (j as i32 + dj) as usize;
+                        
+                        if ni < 3 && nj < 3 && matrix[ni][nj] == cell {
+                            count += 1;
+                        }
+                    }
+                }
+                
+                if count >= 3 {
+                    return Some((i, j));
+                }
+            }
+        }
+    }
+    None
+}
+
+// 函数式控制流
+fn functional_control_flow(numbers: &[i32]) -> Vec<i32> {
+    numbers
+        .iter()
+        .filter(|&&x| x > 0) // 过滤正数
+        .map(|&x| x * 2)     // 翻倍
+        .take(5)             // 取前5个
+        .collect()
+}
+
+fn main() {
+    // 测试复杂控制流
+    let data = vec![1, -2, 0, 3, -4, 5];
+    let processed = process_data(&data);
+    println!("处理结果: {:?}", processed);
+    
+    // 测试嵌套控制流
+    let matrix = [
+        [1, 2, 1],
+        [2, 1, 2],
+        [1, 2, 1],
+    ];
+    
+    if let Some((i, j)) = find_pattern(&matrix) {
+        println!("找到模式在位置 ({}, {})", i, j);
+    } else {
+        println!("未找到模式");
+    }
+    
+    // 测试函数式控制流
+    let numbers = vec![1, -2, 3, -4, 5, 6, 7, 8];
+    let result = functional_control_flow(&numbers);
+    println!("函数式结果: {:?}", result);
+    
+    // 错误处理控制流
+    let results: Vec<Result<i32, &str>> = vec![
+        Ok(1),
+        Err("错误1"),
+        Ok(3),
+        Err("错误2"),
+    ];
+    
+    for result in results {
+        match result {
+            Ok(value) => println!("成功: {}", value),
+            Err(e) => println!("错误: {}", e),
+        }
+    }
+}
+```
+
+**解释**：
+
+- 复杂条件使用嵌套的`match`和`if`语句
+- 嵌套循环处理二维数据结构体
+- 函数式控制流使用迭代器链
+- 错误处理使用`Result`类型和模式匹配
+
+## 边界情况
+
+展示控制流的边界条件和复杂情况：
+
+```rust
+// 无限循环和退出条件
+fn infinite_loop_with_exit() {
+    let mut counter = 0;
+    loop {
+        counter += 1;
+        
+        // 多种退出条件
+        if counter > 100 {
+            break;
+        }
+        
+        if counter % 10 == 0 {
+            continue; // 跳过10的倍数
+        }
+        
+        if counter == 50 {
+            return; // 提前返回
+        }
+        
+        println!("计数: {}", counter);
+    }
+}
+
+// 复杂模式匹配
+fn complex_pattern_matching(value: &str) -> &str {
+    match value {
+        // 字符串模式
+        "hello" | "hi" => "问候",
+        "goodbye" | "bye" => "告别",
+        
+        // 长度模式
+        s if s.len() < 3 => "短字符串",
+        s if s.len() > 10 => "长字符串",
+        
+        // 字符模式
+        s if s.starts_with('a') => "以a开头",
+        s if s.ends_with('z') => "以z结尾",
+        
+        // 默认情况
+        _ => "其他",
+    }
+}
+
+// 递归控制流
+fn recursive_control_flow(n: u32) -> u32 {
+    match n {
+        0 => 1,
+        1 => 1,
+        _ => recursive_control_flow(n - 1) + recursive_control_flow(n - 2),
+    }
+}
+
+// 异步控制流
+async fn async_control_flow() {
+    let mut tasks = Vec::new();
+    
+    for i in 0..3 {
+        let task = async move {
+            println!("异步任务 {}", i);
+            i * 2
+        };
+        tasks.push(task);
+    }
+    
+    // 等待所有任务完成
+    for task in tasks {
+        let result = task.await;
+        println!("任务结果: {}", result);
+    }
+}
+
+fn main() {
+    // 测试无限循环
+    infinite_loop_with_exit();
+    
+    // 测试复杂模式匹配
+    let test_strings = vec!["hello", "goodbye", "a", "very_long_string", "testz"];
+    for s in test_strings {
+        println!("'{}' -> {}", s, complex_pattern_matching(s));
+    }
+    
+    // 测试递归控制流
+    let fib_result = recursive_control_flow(10);
+    println!("斐波那契(10): {}", fib_result);
+    
+    // 注意：异步控制流需要运行时支持
+    // async_control_flow().await;
+}
+```
+
+**解释**：
+
+- 无限循环需要明确的退出条件
+- 复杂模式匹配支持多种匹配策略
+- 递归控制流需要明确的终止条件
+- 异步控制流支持并发执行
+
+## 常见错误
+
+展示与控制流相关的常见错误及修正：
+
+```rust
+fn main() {
+    // 错误1: 无限循环
+    // let mut x = 0;
+    // while x < 10 {
+    //     println!("{}", x);
+    //     // 忘记递增x，导致无限循环
+    // }
+    
+    // 错误2: 悬垂引用
+    // let mut data = vec![1, 2, 3];
+    // let reference = &data[0];
+    // data.push(4); // 错误：引用仍然存在时修改数据
+    // println!("{}", reference);
+    
+    // 错误3: 模式匹配不完整
+    // let value = Some(5);
+    // match value {
+    //     Some(x) => println!("{}", x),
+    //     // 缺少None分支
+    // }
+    
+    // 错误4: 递归没有终止条件
+    // fn bad_recursion(n: i32) -> i32 {
+    //     bad_recursion(n + 1) // 永远不会终止
+    // }
+}
+```
+
+**错误原因**：
+
+- 无限循环：缺少正确的终止条件
+- 悬垂引用：在引用存在时修改数据
+- 不完整匹配：match表达式没有覆盖所有情况
+- 无限递归：递归函数没有终止条件
+
+**正确版本**：
+
+```rust
+fn main() {
+    // 修正1: 正确的循环
+    let mut x = 0;
+    while x < 10 {
+        println!("{}", x);
+        x += 1; // 正确递增
+    }
+    
+    // 修正2: 避免悬垂引用
+    let mut data = vec![1, 2, 3];
+    {
+        let reference = &data[0];
+        println!("{}", reference);
+    } // 引用在这里结束
+    data.push(4); // 现在可以安全修改
+    
+    // 修正3: 完整的模式匹配
+    let value = Some(5);
+    match value {
+        Some(x) => println!("{}", x),
+        None => println!("没有值"),
+    }
+    
+    // 修正4: 正确的递归
+    fn good_recursion(n: i32) -> i32 {
+        if n <= 0 {
+            0
+        } else {
+            n + good_recursion(n - 1)
+        }
+    }
+    
+    println!("递归结果: {}", good_recursion(5));
+}
+```
+
+## 性能考量
+
+讨论控制流的性能特征：
+
+- **分支预测**：CPU可以预测条件分支的执行路径
+- **循环优化**：编译器可以优化循环结构体
+- **尾递归优化**：某些递归可以转换为循环
+- **内联优化**：小函数可以被内联到调用点
+- **缓存友好性**：顺序访问比随机访问更高效
+
+## 最佳实践
+
+提供使用控制流的最佳实践建议：
+
+1. **使用适当的循环**：选择最适合的循环类型
+2. **避免无限循环**：确保循环有明确的终止条件
+3. **完整的模式匹配**：确保match表达式覆盖所有情况
+4. **避免深层嵌套**：保持代码的可读性
+5. **使用函数式风格**：在适当的地方使用迭代器
+6. **正确处理错误**：使用Result和Option类型
+7. **测试边界条件**：确保控制流在边界情况下正确工作
+
+## 相关资源
+
+- [Rust控制流](https://doc.rust-lang.org/book/ch03-05-control-flow.html)
+- [Rust模式匹配](https://doc.rust-lang.org/book/ch06-02-match.html)
+- [Rust迭代器](https://doc.rust-lang.org/book/ch13-02-iterators.html)
+- [Rust错误处理](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
+
+

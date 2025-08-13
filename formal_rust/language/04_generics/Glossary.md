@@ -1,7 +1,7 @@
-# C04: 术语表 (Glossary)
+﻿# C04: 术语表 (Glossary)
 
 - **泛型 (Generics)**
-  - 定义：一种编程语言特性，允许在定义函数、结构体等实体时使用占位符类型（类型参数），从而编写能够适用于多种具体类型的通用代码。
+  - 定义：一种编程语言特征，允许在定义函数、结构体体体体等实体时使用占位符类型（类型参数），从而编写能够适用于多种具体类型的通用代码。
 
 - **参数化多态 (Parametric Polymorphism)**
   - 定义：多态的一种形式，其中代码对一个或多个类型参数是通用的。这是 Rust 泛型所实现的多态类型。也称为静态多态。
@@ -31,4 +31,33 @@
   - 定义：一个在类型级别上运作的"函数"。它是一个泛型类型，接受一个或多个类型作为参数，并构造出一个新的具体类型。例如，`Vec` 是一个类型构造器。
 
 - **高阶类型 (Higher-Kinded Types, HKT)**
-  - 定义：一种高级的类型系统特性，允许泛化类型构造器本身。例如，能够编写一个对任何容器 `F<_>` 都通用的函数，而不管 `F` 是 `Vec`、`Option` 还是其他类型。Rust 目前不原生支持 HKT。
+  - 定义：一种高级的类型系统特征，允许泛化类型构造器本身。例如，能够编写一个对任何容器 `F<_>` 都通用的函数，而不管 `F` 是 `Vec`、`Option` 还是其他类型。Rust 目前不原生支持 HKT。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

@@ -1,10 +1,10 @@
-# 05. 原子操作理论
+﻿# 05. 原子操作理论
 
 ## 1. 形式化定义
 
 - 原子操作（Atomic Operations）：不可分割的基本操作，常用于无锁并发。
 - 主要类型：原子读写、CAS（Compare-And-Swap）、FAA（Fetch-And-Add）等。
-- 形式化建模：$\text{Atomic} = (S, A, \rightarrow, I)$，$S$为状态，$A$为原子操作，$\rightarrow$为转移，$I$为初始状态。
+- 形式化建模：$\text{Atomic} = (S, A, \rightarrow, I)$，$S$为状态，$A$为原子操作，$\rightarrow$为移动，$I$为初始状态。
 - ABA问题：CAS操作中，内存值A被改为B又回到A，CAS无法检测到。
 
 ## 2. 核心定理与证明
@@ -15,7 +15,7 @@
 
 ## 3. 证明方法
 
-- 状态机建模、结构归纳、模型检验、自动化定理证明（Coq/Lean）、Loom并发测试。
+- 状态机建模、结构体体体归纳、模型检验、自动化定理证明（Coq/Lean）、Loom并发测试。
 
 ## 4. 工程案例
 
@@ -28,10 +28,39 @@
 - 典型反例：ABA问题、原子操作与内存序不一致。
 - 工程经验：版本号指针、Hazard Pointer、自动化测试。
 
-## 6. 未来趋势
+## 6. 未来值值值趋势
 
 - 更高阶原子操作、异步/分布式原子性、自动化验证工具链、工程集成。
 
 ---
 
 > 本文档将持续递归补充，欢迎结合最新理论、工程案例、自动化工具、反例与前沿趋势递交补充，推动Rust原子操作理论的形式化论证与证明体系不断进化。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

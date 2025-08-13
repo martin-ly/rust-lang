@@ -40,7 +40,7 @@
     - [2.1.1.7.1 内部引用](#21171-内部引用)
     - [2.1.1.7.2 外部引用](#21172-外部引用)
   - [2.1.1.8 理论前沿与发展方向](#2118-理论前沿与发展方向)
-    - [2.1.1.8.1 高级条件特性](#21181-高级条件特性)
+    - [2.1.1.8.1 高级条件特征](#21181-高级条件特征)
     - [2.1.1.8.2 静态分析](#21182-静态分析)
   - [2.1.1.9 实际应用案例](#2119-实际应用案例)
     - [2.1.1.9.1 状态机实现](#21191-状态机实现)
@@ -291,11 +291,11 @@ fn match_expression_semantics() {
         }
     };
 
-    // 2. 数值范围匹配
+    // 2. 数值作用域匹配
     let number = 42;
     let category = match number {
         0 => "zero",
-        1..=10 => "small",     // 范围模式
+        1..=10 => "small",     // 作用域模式
         11..=100 => "medium",
         101..=1000 => "large",
         _ => "very large",     // 通配符模式
@@ -320,7 +320,7 @@ fn match_expression_semantics() {
 ```rust
 // 复杂模式匹配语义
 fn complex_pattern_matching() {
-    // 1. 结构体解构匹配
+    // 1. 结构体体体体解构匹配
     #[derive(Debug)]
     struct Person {
         name: String,
@@ -475,7 +475,7 @@ fn let_pattern_matching() {
     assert_eq!(y, "hello");
     assert_eq!(z, 3.14);
 
-    // 2. 结构体解构
+    // 2. 结构体体体体解构
     struct Point { x: i32, y: i32 }
     let point = Point { x: 10, y: 20 };
     let Point { x: px, y: py } = point;  // 重命名字段
@@ -807,7 +807,7 @@ fn acquire_resource2() -> Option<Resource> {
 
 ## 2. 1.1.8 理论前沿与发展方向
 
-### 2.1.1.8.1 高级条件特性
+### 2.1.1.8.1 高级条件特征
 
 1. **模式守卫增强**: 更复杂的守卫条件语法
 2. **条件编译扩展**: 更灵活的编译时条件
@@ -1006,4 +1006,31 @@ where
 ---
 
 > **链接网络**: [控制流语义索引](00_control_flow_semantics_index.md) | [控制语义层总览](../00_control_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md)
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

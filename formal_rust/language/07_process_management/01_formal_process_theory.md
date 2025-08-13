@@ -1,4 +1,4 @@
-# 进程理论基础
+﻿# 进程理论基础
 
 ## 1. 进程代数与π演算
 
@@ -20,11 +20,11 @@
 ## 2. CSP与状态机建模
 
 - CSP（Communicating Sequential Processes）强调同步通信与死锁分析。
-- 状态机理论用于建模进程生命周期与状态转移。
+- 状态机理论用于建模进程生命周期与状态移动。
 
 ### 2.1 状态机定义
 
-- 状态集合$S$，输入$I$，输出$O$，转移函数$\delta$，初始状态$s_0$
+- 状态集合$S$，输入$I$，输出$O$，移动函数$\delta$，初始状态$s_0$
 - Rust进程状态：Created, Running, Waiting, Zombie, Terminated
 
 ## 3. 并发进程的形式化语义
@@ -62,7 +62,36 @@ tx.send(42).unwrap();
 let v = rx.recv().unwrap();
 ```
 
-## 6. 批判性分析与未来展望
+## 6. 批判性分析与未来值值值展望
 
 - 进程代数与π演算为并发与IPC建模提供理论基础，但实际工程需结合类型系统与所有权模型。
-- 未来可结合SAT/SMT工具自动分析进程等价性与死锁活性。
+- 未来值值值可结合SAT/SMT工具自动分析进程等价性与死锁活性。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

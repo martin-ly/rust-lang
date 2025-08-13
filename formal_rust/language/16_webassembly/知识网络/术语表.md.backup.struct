@@ -1,0 +1,363 @@
+﻿# WebAssembly系统术语表
+
+## 核心概念
+
+### WebAssembly (WASM)
+
+- **定义**: 低级虚拟指令集架构，为高性能应用程序提供接近原生性能的执行环境
+- **形式化**: $\mathcal{W} = (\mathcal{C}, \mathcal{R}, \mathcal{M}, \mathcal{I})$
+- **示例**: 浏览器中的高性能计算、区块链智能合约、跨平台应用
+- **理论映射**: WebAssembly系统 → 可移植执行环境
+
+### 线性内存 (Linear Memory)
+
+- **定义**: WebAssembly的连续字节数组内存模型
+- **形式化**: $\text{Memory} = \text{Array}[\text{Byte}]$
+- **示例**: 动态内存分配、数组操作、字符串处理
+- **理论映射**: 线性内存 → 内存安全保证
+
+### 沙箱执行 (Sandboxed Execution)
+
+- **定义**: 在隔离环境中执行代码的安全机制
+- **形式化**: $\forall w \in W, \forall e \in \mathcal{E}: \text{exec}(w, e) \subseteq \text{sandbox}(e)$
+- **示例**: 浏览器中的WebAssembly、云函数执行
+- **理论映射**: 沙箱执行 → 安全隔离
+
+### 抽象机器 (Abstract Machine)
+
+- **定义**: 提供数学计算模型的虚拟机器
+- **形式化**: $\mathcal{A} = (S, I, \delta, s_0)$
+- **示例**: WebAssembly虚拟机、JVM、CLR
+- **理论映射**: 抽象机器 → 计算模型
+
+## 编译系统
+
+### 编译流水线 (Compilation Pipeline)
+
+- **定义**: 从源代码到目标代码的转换过程
+- **形式化**: $\text{Pipeline} = \text{Parse} \circ \text{Analyze} \circ \text{Optimize} \circ \text{Generate}$
+- **示例**: Rust到WebAssembly编译、LLVM编译
+- **理论映射**: 编译流水线 → 代码转换
+
+### 类型映射 (Type Mapping)
+
+- **定义**: 将源语言类型映射到目标语言类型
+- **形式化**: $\text{types}: \text{RustTypes} \rightarrow \text{WasmTypes}$
+- **示例**: Rust的i32映射到WebAssembly的i32
+- **理论映射**: 类型映射 → 类型安全保持
+
+### 内存模型转换 (Memory Model Translation)
+
+- **定义**: 将源语言内存模型转换为目标语言内存模型
+- **形式化**: $\text{memory\_model}: \text{RustMemory} \rightarrow \text{WasmMemory}$
+- **示例**: Rust的所有权模型转换为WebAssembly的线性内存
+- **理论映射**: 内存模型转换 → 内存安全保持
+
+### 优化策略 (Optimization Strategy)
+
+- **定义**: 提高生成代码性能的编译技术
+- **形式化**: $\text{optimize}: \text{IR} \rightarrow \text{OptimizedIR}$
+- **示例**: 死代码消除、常量折叠、内联优化
+- **理论映射**: 优化策略 → 性能提升
+
+## 运行时系统
+
+### WebAssembly运行时 (WASM Runtime)
+
+- **定义**: 执行WebAssembly模块的软件环境
+- **形式化**: $\text{Runtime} = (\text{Engine}, \text{Memory}, \text{API})$
+- **示例**: V8引擎、SpiderMonkey、Wasmer、Wasmtime
+- **理论映射**: WebAssembly运行时 → 执行环境
+
+### 即时编译 (Just-In-Time Compilation, JIT)
+
+- **定义**: 在运行时将字节码编译为机器码的技术
+- **形式化**: $\text{JIT}: \text{Bytecode} \times \text{Profile} \rightarrow \text{MachineCode}$
+- **示例**: V8的TurboFan、SpiderMonkey的IonMonkey
+- **理论映射**: JIT编译 → 性能优化
+
+### 内存管理 (Memory Management)
+
+- **定义**: 管理WebAssembly线性内存的机制
+- **形式化**: $\text{MemoryManager}: \text{Allocation} \rightarrow \text{MemoryLayout}$
+- **示例**: 内存分配、垃圾回收、内存压缩
+- **理论映射**: 内存管理 → 资源管理
+
+### 系统调用接口 (System Call Interface)
+
+- **定义**: WebAssembly与宿主环境交互的接口
+- **形式化**: $\text{Syscall}: \text{WasmModule} \times \text{HostAPI} \rightarrow \text{Result}$
+- **示例**: WASI、浏览器API、自定义宿主函数
+- **理论映射**: 系统调用接口 → 环境交互
+
+## 互操作性
+
+### JavaScript互操作 (JavaScript Interop)
+
+- **定义**: WebAssembly与JavaScript代码的交互机制
+- **形式化**: $\text{JSInterop}: \text{WasmModule} \leftrightarrow \text{JavaScript}$
+- **示例**: wasm-bindgen、JS API调用、数据传递
+- **理论映射**: JavaScript互操作 → 语言边界
+
+### 宿主绑定 (Host Bindings)
+
+- **定义**: WebAssembly模块与宿主环境的绑定机制
+- **形式化**: $\text{HostBinding}: \text{WasmFunction} \leftrightarrow \text{HostFunction}$
+- **示例**: 文件系统访问、网络调用、硬件访问
+- **理论映射**: 宿主绑定 → 环境集成
+
+### 外部函数接口 (Foreign Function Interface, FFI)
+
+- **定义**: 不同语言间函数调用的接口标准
+- **形式化**: $\text{FFI}: \text{Language}_1 \leftrightarrow \text{Language}_2$
+- **示例**: C函数调用、Rust FFI、WebAssembly导入/导出
+- **理论映射**: FFI → 语言互操作
+
+### 组件模型 (Component Model)
+
+- **定义**: WebAssembly模块组合和接口定义的标准
+- **形式化**: $\text{Component} = (\text{Interfaces}, \text{Implementations}, \text{Compositions})$
+- **示例**: WIT接口定义、组件组合、类型安全
+- **理论映射**: 组件模型 → 模块化设计
+
+## 安全机制
+
+### 边界检查 (Bounds Checking)
+
+- **定义**: 确保内存访问在有效作用域内的检查机制
+- **形式化**: $\forall \text{addr}, \text{size}: \text{addr} + \text{size} \leq |\text{Memory}|$
+- **示例**: 数组访问检查、指针边界验证
+- **理论映射**: 边界检查 → 内存安全
+
+### 类型检查 (Type Checking)
+
+- **定义**: 在编译时或运行时验证类型正确性的机制
+- **形式化**: $\Gamma \vdash e : \tau \Rightarrow \text{type\_safe}(e)$
+- **示例**: 静态类型检查、动态类型验证
+- **理论映射**: 类型检查 → 类型安全
+
+### 控制流验证 (Control Flow Validation)
+
+- **定义**: 确保程序控制流符合结构体化编程规则的验证
+- **形式化**: $\text{well-formed}(\text{module}) \Rightarrow \text{control-flow-safe}(\text{execution})$
+- **示例**: 跳转目标验证、函数调用检查
+- **理论映射**: 控制流验证 → 程序安全
+
+### 沙箱隔离 (Sandbox Isolation)
+
+- **定义**: 限制程序执行环境的隔离机制
+- **形式化**: $\text{exec}(w, e) \subseteq \text{sandbox}(e)$
+- **示例**: 内存隔离、系统调用限制、资源限制
+- **理论映射**: 沙箱隔离 → 安全执行
+
+## 性能优化
+
+### 静态编译 (Static Compilation)
+
+- **定义**: 在编译时生成目标代码的技术
+- **形式化**: $\text{StaticCompile}: \text{Source} \rightarrow \text{TargetCode}$
+- **示例**: AOT编译、原生代码生成
+- **理论映射**: 静态编译 → 性能优化
+
+### 代码优化 (Code Optimization)
+
+- **定义**: 提高生成代码效率的编译技术
+- **形式化**: $\text{Optimize}: \text{IR} \rightarrow \text{OptimizedIR}$
+- **示例**: 循环优化、内联优化、常量传播
+- **理论映射**: 代码优化 → 性能提升
+
+### 内存优化 (Memory Optimization)
+
+- **定义**: 提高内存使用效率的优化技术
+- **形式化**: $\text{MemoryOptimize}: \text{MemoryLayout} \rightarrow \text{OptimizedLayout}$
+- **示例**: 内存对齐、缓存优化、垃圾回收优化
+- **理论映射**: 内存优化 → 资源效率
+
+### 并行执行 (Parallel Execution)
+
+- **定义**: 同时执行多个计算任务的技术
+- **形式化**: $\text{Parallel}: \text{Tasks} \rightarrow \text{ConcurrentExecution}$
+- **示例**: Web Workers、SIMD指令、多线程
+- **理论映射**: 并行执行 → 性能扩展
+
+## 应用领域
+
+### Web应用 (Web Applications)
+
+- **定义**: 在浏览器中运行的高性能Web应用
+- **形式化**: $\text{WebApp} = (\text{WasmModule}, \text{JavaScript}, \text{WebAPI})$
+- **示例**: 游戏引擎、图像处理、科学计算
+- **理论映射**: Web应用 → 客户端计算
+
+### 区块链应用 (Blockchain Applications)
+
+- **定义**: 在区块链平台上运行的智能合约
+- **形式化**: $\text{BlockchainApp} = (\text{WasmModule}, \text{BlockchainAPI})$
+- **示例**: DeFi协议、NFT合约、DAO治理
+- **理论映射**: 区块链应用 → 去中心化计算
+
+### 边缘计算 (Edge Computing)
+
+- **定义**: 在边缘设备上运行的轻量级应用
+- **形式化**: $\text{EdgeApp} = (\text{WasmModule}, \text{EdgeAPI})$
+- **示例**: IoT设备、移动应用、CDN计算
+- **理论映射**: 边缘计算 → 分布式计算
+
+### 云函数 (Cloud Functions)
+
+- **定义**: 在云平台上按需执行的函数
+- **形式化**: $\text{CloudFunction} = (\text{WasmModule}, \text{CloudAPI})$
+- **示例**: 无服务器计算、事件处理、数据处理
+- **理论映射**: 云函数 → 弹性计算
+
+## 开发工具
+
+### wasm-pack
+
+- **定义**: Rust WebAssembly项目的构建工具
+- **形式化**: $\text{wasm-pack}: \text{RustProject} \rightarrow \text{WasmPackage}$
+- **示例**: 项目构建、依赖管理、发布部署
+- **理论映射**: wasm-pack → 构建工具
+
+### wasm-bindgen
+
+- **定义**: Rust和JavaScript之间的绑定生成器
+- **形式化**: $\text{wasm-bindgen}: \text{RustAPI} \leftrightarrow \text{JavaScriptAPI}$
+- **示例**: 类型转换、函数绑定、数据传递
+- **理论映射**: wasm-bindgen → 互操作工具
+
+### WASI (WebAssembly System Interface)
+
+- **定义**: WebAssembly系统接口标准
+- **形式化**: $\text{WASI} = (\text{SystemCalls}, \text{FileSystem}, \text{Network})$
+- **示例**: 文件系统访问、网络调用、环境变量
+- **理论映射**: WASI → 系统接口
+
+### wit-bindgen
+
+- **定义**: WebAssembly组件模型的接口生成器
+- **形式化**: $\text{wit-bindgen}: \text{WITInterface} \rightarrow \text{LanguageBindings}$
+- **示例**: 接口定义、语言绑定、类型生成
+- **理论映射**: wit-bindgen → 组件工具
+
+## 指令集
+
+### 数值指令 (Numeric Instructions)
+
+- **定义**: 处理数值运算的WebAssembly指令
+- **形式化**: $\text{NumericInstr} ::= \text{const} \, c \mid \text{unop} \mid \text{binop}$
+- **示例**: i32.add、f64.mul、i64.sub
+- **理论映射**: 数值指令 → 算术运算
+
+### 内存指令 (Memory Instructions)
+
+- **定义**: 处理内存访问的WebAssembly指令
+- **形式化**: $\text{MemoryInstr} ::= \text{load} \mid \text{store} \mid \text{size} \mid \text{grow}$
+- **示例**: i32.load、i64.store、memory.size
+- **理论映射**: 内存指令 → 内存操作
+
+### 控制指令 (Control Instructions)
+
+- **定义**: 处理程序控制流的WebAssembly指令
+- **形式化**: $\text{ControlInstr} ::= \text{block} \mid \text{loop} \mid \text{if} \mid \text{br} \mid \text{br\_if}$
+- **示例**: block、loop、if、br、br_if
+- **理论映射**: 控制指令 → 控制流
+
+### 函数指令 (Function Instructions)
+
+- **定义**: 处理函数调用的WebAssembly指令
+- **形式化**: $\text{FunctionInstr} ::= \text{call} \mid \text{call\_indirect} \mid \text{return}$
+- **示例**: call、call_indirect、return
+- **理论映射**: 函数指令 → 函数调用
+
+## 类型系统
+
+### 值类型 (Value Types)
+
+- **定义**: WebAssembly的基本数据类型
+- **形式化**: $\text{ValueType} = \{i32, i64, f32, f64, v128\}$
+- **示例**: 32位整数、64位浮点数、向量类型
+- **理论映射**: 值类型 → 数据类型
+
+### 引用类型 (Reference Types)
+
+- **定义**: WebAssembly的引用数据类型
+- **形式化**: $\text{RefType} = \{\text{ref}~\text{null}~t, \text{ref}~t\}$
+- **示例**: 函数引用、外部引用
+- **理论映射**: 引用类型 → 引用数据
+
+### 函数类型 (Function Types)
+
+- **定义**: WebAssembly函数的类型签名
+- **形式化**: $\text{FuncType} = (\text{params}: [\text{ValueType}], \text{results}: [\text{ValueType}])$
+- **示例**: (i32, i32) → i32、() → f64
+- **理论映射**: 函数类型 → 函数签名
+
+### 表类型 (Table Types)
+
+- **定义**: WebAssembly函数表的类型定义
+- **形式化**: $\text{TableType} = (\text{element\_type}: \text{RefType}, \text{limits}: \text{Limits})$
+- **示例**: 函数表、外部引用表
+- **理论映射**: 表类型 → 表结构体
+
+## 模块系统
+
+### 模块结构体 (Module Structure)
+
+- **定义**: WebAssembly模块的组织结构体
+- **形式化**: $\text{Module} = (\text{Types}, \text{Functions}, \text{Tables}, \text{Memories}, \text{Globals}, \text{Imports}, \text{Exports})$
+- **示例**: 类型定义、函数实现、导入导出
+- **理论映射**: 模块结构体 → 代码组织
+
+### 导入导出 (Imports and Exports)
+
+- **定义**: WebAssembly模块与外部环境的接口
+- **形式化**: $\text{Interface} = (\text{Imports}: \text{ExternalAPI}, \text{Exports}: \text{PublicAPI})$
+- **示例**: 宿主函数导入、公共函数导出
+- **理论映射**: 导入导出 → 模块接口
+
+### 链接 (Linking)
+
+- **定义**: 将多个WebAssembly模块组合的过程
+- **形式化**: $\text{Link}: \text{Modules} \rightarrow \text{CombinedModule}$
+- **示例**: 模块合并、符号解析、依赖处理
+- **理论映射**: 链接 → 模块组合
+
+### 实例化 (Instantiation)
+
+- **定义**: 创建WebAssembly模块运行实例的过程
+- **形式化**: $\text{Instantiate}: \text{Module} \times \text{Imports} \rightarrow \text{Instance}$
+- **示例**: 模块加载、内存分配、函数绑定
+- **理论映射**: 实例化 → 运行时创建
+
+## 验证系统
+
+### 类型验证 (Type Validation)
+
+- **定义**: 验证WebAssembly模块类型正确性的过程
+- **形式化**: $\text{TypeCheck}: \text{Module} \rightarrow \text{Boolean}$
+- **示例**: 函数签名检查、局部变量类型验证
+- **理论映射**: 类型验证 → 类型安全
+
+### 1控制流验证 (Control Flow Validation)
+
+- **定义**: 验证WebAssembly控制流结构体的过程
+- **形式化**: $\text{ControlCheck}: \text{Module} \rightarrow \text{Boolean}$
+- **示例**: 跳转目标验证、栈平衡检查
+- **理论映射**: 控制流验证 → 程序安全
+
+### 内存验证 (Memory Validation)
+
+- **定义**: 验证WebAssembly内存访问安全的过程
+- **形式化**: $\text{MemoryCheck}: \text{Module} \rightarrow \text{Boolean}$
+- **示例**: 边界检查、对齐要求验证
+- **理论映射**: 内存验证 → 内存安全
+
+### 资源验证 (Resource Validation)
+
+- **定义**: 验证WebAssembly资源使用限制的过程
+- **形式化**: $\text{ResourceCheck}: \text{Module} \rightarrow \text{Boolean}$
+- **示例**: 栈深度检查、函数数量限制
+- **理论映射**: 资源验证 → 资源安全
+
+

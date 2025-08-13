@@ -1,4 +1,4 @@
-# C06-06. 批判性分析与高级主题
+﻿# C06-06. 批判性分析与高级主题
 
 Rust 的 `async/await` 是一个强大的工具，但它并非没有缺点和复杂性。一个成熟的工程师不仅要了解如何使用一个工具，还要了解它的设计权衡、固有限制以及在大型系统中可能引发的架构挑战。
 
@@ -48,3 +48,31 @@ Rust 的异步模型是一个经过深思熟虑的、以性能和安全为核心
 - **生态系统**: 运行时的选择会产生深远的影响。
 
 一个务实的 Rust 开发者应该拥抱 `async` 带来的好处，同时也要批判性地看待它的成本。在决定是否将一个库或应用程序的一部分设计为 `async` 时，需要权衡其带来的并发优势与增加的架构复杂性。在许多情况下，一个简单的、基于线程的同步模型可能仍然是更清晰、更易于维护的选择。
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

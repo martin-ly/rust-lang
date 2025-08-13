@@ -1,4 +1,4 @@
-# 类型理论基础 (Type Theory Foundations)
+﻿# 类型理论基础 (Type Theory Foundations)
 
 ## 1. 概述
 
@@ -119,7 +119,7 @@ $$
 - **生命周期 (Lifetimes)**: `'static` 是所有生命周期的超类型。如果 `'long: 'short`，则 `&'long T` 是 `&'short T` 的子类型（协变）。
 - **Trait 对象**: 如果 `Dog` 实现了 `Animal` trait，那么 `Box<Dog>` 可以被强制转换为 `Box<dyn Animal>`。
 
-## 5. 类型理论与 Rust 的核心特性
+## 5. 类型理论与 Rust 的核心特征
 
 ### 5.1. 线性类型与所有权
 
@@ -132,7 +132,7 @@ Rust 的 `move` 语义直接对应于仿射类型。当一个值被移动时，�
 
 ```rust
 let s1 = String::from("hello");
-let s2 = s1; // s1 的所有权转移给 s2
+let s2 = s1; // s1 的所有权移动给 s2
 // println!("{}", s1); // 编译错误：s1 已被移动，其类型状态变为"未使用"
 ```
 
@@ -156,4 +156,29 @@ let items: Vec<Box<dyn Drawable>> = vec![Box::new(Button), Box::new(Screen)];
 
 ## 6. 结论
 
-类型理论为 Rust 的设计提供了深刻的理论依据。它不是一个孤立的学术概念，而是直接塑造了 Rust 的核心特性，使其能够在没有运行时开销的情况下提供强大的安全保证。从所有权系统对线性类型的应用，到泛型和 Trait 对多态和存在类型的实现，类型理论是理解 Rust 为何如此安全、高效和富有表现力的关键。
+类型理论为 Rust 的设计提供了深刻的理论依据。它不是一个孤立的学术概念，而是直接塑造了 Rust 的核心特征，使其能够在没有运行时开销的情况下提供强大的安全保证。从所有权系统对线性类型的应用，到泛型和 Trait 对多态和存在类型的实现，类型理论是理解 Rust 为何如此安全、高效和富有表现力的关键。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

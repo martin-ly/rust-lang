@@ -82,7 +82,7 @@ $$\text{Ownership}(T) = \{owner : \text{unique}(owner, T)\}$$
 
 1. 每个值只有一个所有者
 2. 当所有者离开作用域时，值被丢弃
-3. 所有权可以通过移动转移
+3. 所有权可以通过移动移动
 
 ```mermaid
 graph TB
@@ -92,7 +92,7 @@ graph TB
         C --> D[安全访问]
         
         E[作用域结束] --> F[自动释放]
-        G[移动语义] --> H[所有权转移]
+        G[移动语义] --> H[所有权移动]
     end
     
     A --> E
@@ -162,7 +162,7 @@ fn lifetime_checking() {
     let s2 = "longer";
     let result = longest(s1, s2);  // 生命周期推断
     
-    // 结构体生命周期
+    // 结构体体体体生命周期
     struct StringWrapper<'a> {
         data: &'a str,
     }
@@ -850,4 +850,31 @@ fn quantum_memory_safety() {
 ---
 
 > **链接网络**: [内存模型语义模型索引](../03_memory_model_semantics/00_MEMORY_MODEL_SEMANTICS_INDEX.md) | [基础语义层总览](../00_foundation_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md)
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

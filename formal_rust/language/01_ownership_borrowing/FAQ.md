@@ -1,4 +1,4 @@
-# Rust 所有权与生命周期分册 FAQ
+﻿# Rust 所有权与生命周期分册 FAQ
 
 ## 1. 所有权、借用与生命周期
 
@@ -111,7 +111,7 @@ A：
 
 - 保证引用的生命周期不超过被引用值的生命周期，编译器会强制检查。
 
-### 7. Drop特性和C++析构函数有何不同？
+### 7. Drop特征和C++析构函数有何不同？
 
 - Drop不可手动调用，panic时也保证资源释放。
 
@@ -155,3 +155,28 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ## 总结
 
 掌握FAQ中的核心问题和解答，有助于高效学习和工程实践Rust的内存安全机制。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

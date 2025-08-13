@@ -1,0 +1,91 @@
+﻿# 09.04 panic与不可恢复错误（Panic & Unrecoverable Errors）
+
+---
+
+## 理论简述
+
+panic用于处理不可恢复的严重错误，导致线程终止。Rust通过panic!宏、assert断言等机制触发panic，适用于逻辑错误、越界等场景。相关理论详见[错误处理理论](../../09_error_handling/01_error_handling_theory.md)与[panic机制](../../09_error_handling/03_panic.md)。
+
+---
+
+## 核心代码示例
+
+```rust
+fn main() {
+    let v = vec![1, 2, 3];
+    // println!("{}", v[3]); // 越界访问，运行时panic
+    assert!(1 + 1 == 2);
+    // panic!("手动触发panic");
+}
+```
+
+---
+
+## 详细注释
+
+- 越界访问、assert失败、panic!宏均可触发panic。
+- panic会终止当前线程，释放资源。
+- 可用catch_unwind捕获panic，适用于边界场景。
+
+---
+
+## 理论映射
+
+- 对应[错误处理理论](../../09_error_handling/01_error_handling_theory.md)
+- panic机制见[09_error_handling/03_panic.md](../../09_error_handling/03_panic.md)
+- Result与Option见[09.02_result_option.md](./09.02_result_option.md)
+
+---
+
+## 边界情况与常见错误
+
+- **边界情况**：
+  - 多线程panic传播。
+  - panic与资源释放的关系。
+- **常见错误**：
+  - 误用panic处理可恢复错误。
+  - 忽略panic导致程序崩溃。
+  - panic未被捕获导致服务不可用。
+
+---
+
+## FAQ
+
+- **Q: panic和Result有何区别？**
+  - A: panic用于不可恢复错误，Result用于可恢复错误。
+- **Q: 如何捕获panic？**
+  - A: 使用std::panic::catch_unwind。
+- **Q: panic常见应用场景？**
+  - A: 断言失败、越界、逻辑错误等。
+
+---
+
+（本示例可直接用`rustc`编译验证，理论与代码一一对应，便于教学与自动化校验。）
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

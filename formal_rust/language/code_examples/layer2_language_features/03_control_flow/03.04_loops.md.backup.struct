@@ -1,0 +1,84 @@
+﻿# 03.04 循环结构体（Loops）
+
+---
+
+## 理论简述
+
+循环结构体是控制流的重要组成部分，Rust支持`loop`、`while`、`for`三种主要循环语法。循环结构体用于重复执行代码块，支持break、continue等控制语句，结合模式匹配和迭代器实现灵活的数据处理。相关理论详见[控制流与循环](../../03_control_flow/04_loops.md)与[迭代器模式](../../08_algorithms/01_iterator_pattern.md)。
+
+---
+
+## 核心代码示例
+
+```rust
+fn main() {
+    // 无限循环
+    let mut count = 0;
+    loop {
+        count += 1;
+        if count == 3 {
+            println!("到3了，跳出循环");
+            break;
+        }
+    }
+
+    // while循环
+    let mut n = 5;
+    while n > 0 {
+        println!("n = {}", n);
+        n -= 1;
+    }
+
+    // for循环遍历集合
+    let arr = [10, 20, 30];
+    for x in arr.iter() {
+        println!("元素: {}", x);
+    }
+}
+```
+
+---
+
+## 详细注释
+
+- `loop`创建无限循环，需用`break`跳出。
+- `while`根据条件判断是否继续循环。
+- `for`结合迭代器遍历集合，安全高效。
+- 可用`continue`跳过本次循环，`break`提前结束。
+
+---
+
+## 理论映射
+
+- 对应[控制流与循环](../../03_control_flow/04_loops.md)
+- 相关迭代器模式见[08_algorithms/01_iterator_pattern.md](../../08_algorithms/01_iterator_pattern.md)
+- 控制流基础见[01_control_flow_theory.md](../../03_control_flow/01_control_flow_theory.md)
+
+---
+
+## 边界情况与常见错误
+
+- **边界情况**：
+  - 无限循环未正确break导致死循环。
+  - for循环遍历空集合。
+- **常见错误**：
+  - 循环条件写错导致提前结束或死循环。
+  - for循环变量遮蔽。
+  - break/continue用法错误。
+
+---
+
+## FAQ
+
+- **Q: Rust循环结构体和其他语言有何不同？**
+  - A: Rust for循环基于迭代器，安全且高效，loop/while语法与C系语言类似。
+- **Q: 如何定位循环相关的逻辑错误？**
+  - A: 检查循环条件、break/continue位置和变量作用域。
+- **Q: 循环结构体常见应用场景？**
+  - A: 集合遍历、状态机、数据处理等。
+
+---
+
+（本示例可直接用`rustc`编译验证，理论与代码一一对应，便于教学与自动化校验。）
+
+

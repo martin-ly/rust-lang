@@ -20,7 +20,7 @@
 
 - $S$ 是状态空间
 - $T$ 是时间域
-- $F$ 是状态转移函数
+- $F$ 是状态移动函数
 - $I$ 是输入空间
 - $O$ 是输出空间
 
@@ -28,7 +28,7 @@
 
 - $S$ 是状态集合
 - $\Sigma$ 是输入字母表
-- $\delta: S \times \Sigma \rightarrow S$ 是状态转移函数
+- $\delta: S \times \Sigma \rightarrow S$ 是状态移动函数
 - $s_0 \in S$ 是初始状态
 - $F \subseteq S$ 是接受状态集合
 
@@ -38,15 +38,15 @@
 
 - $Q$ 是有限状态集合
 - $\Sigma$ 是输入字母表
-- $\delta: Q \times \Sigma \rightarrow Q$ 是状态转移函数
+- $\delta: Q \times \Sigma \rightarrow Q$ 是状态移动函数
 - $q_0 \in Q$ 是初始状态
 - $F \subseteq Q$ 是接受状态集合
 - $\lambda: Q \times \Sigma \rightarrow \Gamma$ 是输出函数
 
-**状态转移**：
+**状态移动**：
 
 ```math
-\delta(q, a) = q' \text{ 表示从状态 } q \text{ 在输入 } a \text{ 下转移到状态 } q'
+\delta(q, a) = q' \text{ 表示从状态 } q \text{ 在输入 } a \text{ 下移动到状态 } q'
 ```
 
 ## 2. 模型验证理论
@@ -382,7 +382,7 @@ impl ModelSimplifier {
             minimal.add_state(state_name.clone(), labels);
         }
         
-        // 添加转移
+        // 添加移动
         for (i, class) in classes.iter().enumerate() {
             let from_state = format!("q{}", i);
             let representative = class.iter().next().unwrap();
@@ -412,7 +412,7 @@ impl ModelSimplifier {
 \mathcal{M}_1 \parallel \mathcal{M}_2 = (S_1 \times S_2, \Sigma_1 \cup \Sigma_2, \delta, (s_{01}, s_{02}), F_1 \times F_2)
 ```
 
-其中转移函数 $\delta$ 定义为：
+其中移动函数 $\delta$ 定义为：
 
 ```math
 \delta((s_1, s_2), a) = \begin{cases}
@@ -476,16 +476,16 @@ impl ModelComposer {
             }
         }
         
-        // 创建组合转移
+        // 创建组合移动
         for (i, state1) in m1.states.iter().enumerate() {
             for (j, state2) in m2.states.iter().enumerate() {
                 let from_state = format!("{}_{}", state1, state2);
                 
-                // 获取两个模型的转移
+                // 获取两个模型的移动
                 let transitions1 = m1.transitions.get(state1).cloned().unwrap_or_default();
                 let transitions2 = m2.transitions.get(state2).cloned().unwrap_or_default();
                 
-                // 创建组合转移
+                // 创建组合移动
                 for next1 in &transitions1 {
                     for next2 in &transitions2 {
                         let to_state = format!("{}_{}", next1, next2);
@@ -581,4 +581,33 @@ impl ModelComposer {
 3. Cousot, P., & Cousot, R. (1977). "Abstract interpretation: A unified lattice model for static analysis of programs by construction or approximation of fixpoints". *POPL*, 238-252.
 4. Hopcroft, J. E. (1971). "An n log n algorithm for minimizing states in a finite automaton". *Theory of Machines and Computations*, 189-196.
 5. Milner, R. (1989). *Communication and Concurrency*. Prentice Hall.
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

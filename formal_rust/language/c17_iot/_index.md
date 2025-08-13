@@ -1,14 +1,14 @@
-# 17 物联网（IoT）
+﻿# 17 物联网（IoT）
 
 ## 模块简介
 
-本模块系统梳理Rust在物联网（IoT）领域的理论基础、核心技术与工程实践，涵盖嵌入式开发、设备通信、协议栈、安全性、边缘计算、实时性、主流生态工具链等。通过理论分析、代码示例与工程案例，帮助读者全面掌握Rust驱动的高可靠IoT系统设计与实现。
+本模块系统梳理Rust在物联网（IoT）领域的理论基础、核心技术与工程实践，涵盖嵌入式开发、设备通信、协议栈、安全、边缘计算、实时性、主流生态工具链等。通过理论分析、代码示例与工程案例，帮助读者全面掌握Rust驱动的高可靠IoT系统设计与实现。
 
 ## 章节导航
 
 1. [IoT基础与嵌入式开发](./01_iot_fundamentals.md)
 2. [设备通信与协议栈](./02_device_communication.md)
-3. [安全性与隐私保护](./03_security_and_privacy.md)
+3. [安全与隐私保护](./03_security_and_privacy.md)
 4. [边缘计算与实时性](./04_edge_and_realtime.md)
 5. [生态工具链与平台适配](./05_ecosystem_and_platform.md)
 6. [案例分析与工程实践](./06_case_studies.md)
@@ -45,4 +45,33 @@
 
 ## 总结
 
-本模块为Rust物联网开发的理论与实践基础。通过深入理解嵌入式开发、协议栈、安全性等机制，开发者可实现高可靠、可扩展的IoT系统，为后续探索边缘智能、工业互联网等新兴领域打下坚实基础。
+本模块为Rust物联网开发的理论与实践基础。通过深入理解嵌入式开发、协议栈、安全等机制，开发者可实现高可靠、可扩展的IoT系统，为后续探索边缘智能、工业互联网等新兴领域打下坚实基础。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

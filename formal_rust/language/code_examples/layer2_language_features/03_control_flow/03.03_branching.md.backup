@@ -1,0 +1,105 @@
+﻿# 03.03 分支结构体体（Branching）
+
+---
+
+## 理论简述
+
+分支结构体体是控制流的基础，Rust通过`if`、`else if`、`else`等语法实现条件分支。分支结构体体结合模式匹配、布尔表达式等，保证程序在不同条件下的正确执行路径。相关理论详见[控制流基础](../../03_control_flow/01_control_flow_theory.md)与[分支结构体体](../../03_control_flow/03_branching.md)。
+
+---
+
+## 核心代码示例
+
+```rust
+fn main() {
+    let n = 7;
+    if n > 0 {
+        println!("正数");
+    } else if n < 0 {
+        println!("负数");
+    } else {
+        println!("零");
+    }
+
+    // if let 结合分支
+    let opt = Some(10);
+    if let Some(x) = opt {
+        println!("有值: {}", x);
+    } else {
+        println!("无值");
+    }
+}
+```
+
+---
+
+## 详细注释
+
+- `if`语句根据布尔表达式选择执行路径。
+- `else if`和`else`用于多分支选择。
+- `if let`结合分支结构体体处理可选类型和模式匹配。
+- 分支结构体体可嵌套使用，表达复杂逻辑。
+
+---
+
+## 理论映射
+
+- 对应[控制流基础](../../03_control_flow/01_control_flow_theory.md)
+- 分支结构体体详见[03_branching.md](../../03_control_flow/03_branching.md)
+- 模式匹配与分支结合见[02_pattern_matching.md](../../03_control_flow/02_pattern_matching.md)
+
+---
+
+## 边界情况与常见错误
+
+- **边界情况**：
+  - 嵌套分支、复杂条件表达式。
+  - 分支覆盖不全导致逻辑漏洞。
+- **常见错误**：
+  - 条件表达式类型错误。
+  - 忘记处理else分支导致未覆盖所有情况。
+  - if let绑定变量作用域错误。
+
+---
+
+## FAQ
+
+- **Q: Rust分支结构体体和其他语言有何不同？**
+  - A: Rust分支表达式可返回值，支持模式匹配和类型安全。
+- **Q: 如何定位分支结构体体相关的编译错误？**
+  - A: 检查条件表达式类型、分支覆盖和变量作用域。
+- **Q: 分支结构体体常见应用场景？**
+  - A: 条件判断、错误处理、状态机实现等。
+
+---
+
+（本示例可直接用`rustc`编译验证，理论与代码一一对应，便于教学与自动化校验。）
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

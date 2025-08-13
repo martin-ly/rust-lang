@@ -1,4 +1,4 @@
-# Rust 类型系统：型变 (Variance)
+﻿# Rust 类型系统：型变 (Variance)
 
 ## 目录
 
@@ -65,7 +65,7 @@ fn foo<'long, 'short>(long_ref: &'long str, mut short_ref: &'short str) where 'l
 - `fn(&'short T)` 是 `fn(&'long T)` 的子类型。
 
 这看起来违反直觉，但可以通过一个例子来理解：
-想象一个 API 需要一个“能处理任何长生命周期引用的函数”。如果我们提供一个“能处理任何短生命周期引用的函数”，这是安全的吗？是的，因为短生命周期的函数能力更强——它能处理的输入范围更广（包括了所有长生命周期的引用）。
+想象一个 API 需要一个“能处理任何长生命周期引用的函数”。如果我们提供一个“能处理任何短生命周期引用的函数”，这是安全的吗？是的，因为短生命周期的函数能力更强——它能处理的输入作用域更广（包括了所有长生命周期的引用）。
 
 ```rust
 // 这个函数接受一个闭包，该闭包可以处理任何 'static 引用
@@ -137,33 +137,33 @@ fn evil_covariance() {
 
 #### 5.1. 编译器如何推导型变
 
-编译器会检查一个泛型参数 `T` 在结构体的字段中是如何被使用的，来自动推导该结构体对于 `T` 的型变。
+编译器会检查一个泛型参数 `T` 在结构体体体体的字段中是如何被使用的，来自动推导该结构体体体体对于 `T` 的型变。
 
-- 如果 `T` 只出现在协变的位置（如 `&T`, `Box<T>`），则结构体对 `T` 是协变的。
-- 如果 `T` 只出现在逆变的位置（如 `fn(T)`），则结构体对 `T` 是逆变的。
-- 如果 `T` 同时出现在协变和逆变位置，或者出现在不变的位置（如 `&mut T`），则结构体对 `T` 是不变的。
+- 如果 `T` 只出现在协变的位置（如 `&T`, `Box<T>`），则结构体体体体对 `T` 是协变的。
+- 如果 `T` 只出现在逆变的位置（如 `fn(T)`），则结构体体体体对 `T` 是逆变的。
+- 如果 `T` 同时出现在协变和逆变位置，或者出现在不变的位置（如 `&mut T`），则结构体体体体对 `T` 是不变的。
 
 #### 5.2. 使用 `PhantomData` 影响型变
 
-有时我们的结构体在逻辑上与某个泛型参数 `T` 有关，但 `T` 并未出现在任何字段中（例如，实现 FFI 时）。这时，我们可以使用 `std::marker::PhantomData<T>` 来“告诉”编译器型变规则。
+有时我们的结构体体体体在逻辑上与某个泛型参数 `T` 有关，但 `T` 并未出现在任何字段中（例如，实现 FFI 时）。这时，我们可以使用 `std::marker::PhantomData<T>` 来“告诉”编译器型变规则。
 
 `PhantomData<T>` 是一个零大小的类型，它本身对 `T` 是协变的。
 
 ```rust
 use std::marker::PhantomData;
 
-// 这个结构体对 T 是协变的
+// 这个结构体体体体对 T 是协变的
 struct MyCovariant<T> {
     _marker: PhantomData<T>,
 }
 
-// 这个结构体对 T 是逆变的
+// 这个结构体体体体对 T 是逆变的
 // 因为 fn(T) 对 T 是逆变的
 struct MyContravariant<T> {
     _marker: PhantomData<fn(T)>,
 }
 
-// 这个结构体对 T 是不变的
+// 这个结构体体体体对 T 是不变的
 // 因为 &mut T 对 T 是不变的
 struct MyInvariant<T> {
     _marker: PhantomData<&'static mut T>,
@@ -189,3 +189,32 @@ Rust 的型变系统是自动推导的，全局性的，且与所有权和生命
 ### 7. 总结
 
 型变是 Rust 类型系统中的一个重要概念，它描述了当类型参数之间存在子类型关系时，包含这些参数的泛型类型之间会形成什么样的子类型关系。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

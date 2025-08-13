@@ -19,9 +19,9 @@
 建造者模式的主要性能瓶颈源于：
 
 1. **内存分配**：构建过程中的中间对象分配
-2. **数据拷贝**：链式调用中的值传递
+2. **数据复制**：链式调用中的值传递
 3. **调用开销**：多层方法调用的栈开销
-4. **生命周期管理**：所有权转移的运行时成本
+4. **生命周期管理**：所有权移动的运行时成本
 
 ### 1.2 形式化性能模型
 
@@ -39,9 +39,9 @@ formal_rust/refactor/04_engineering_practices/03_testing_strategies/03_builder_t
 
 ---
 
-## 2. 零拷贝优化策略
+## 2. 零复制优化策略
 
-### 2.1 所有权转移模式
+### 2.1 所有权移动模式
 
 ```rust
 pub struct ZeroCopyBuilder<T> {
@@ -73,7 +73,7 @@ impl<T> ZeroCopyBuilder<T> {
 
 | 场景 | 推荐策略 | 性能提升 | 复杂度 |
 |------|---------|----------|--------|
-| 小对象构建 | 零拷贝模式 | 30-50% | 低 |
+| 小对象构建 | 零复制模式 | 30-50% | 低 |
 | 大对象构建 |:---:|:---:|:---:| 对象池 |:---:|:---:|:---:| 50-80% |:---:|:---:|:---:| 中 |:---:|:---:|:---:|
 
 
@@ -84,4 +84,33 @@ impl<T> ZeroCopyBuilder<T> {
 | 类型安全要求 | 类型状态 | 20-40% | 高 |
 
 通过系统性的性能优化策略，建造者模式可以在保持设计灵活性的同时，实现接近原生性能的表现。
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

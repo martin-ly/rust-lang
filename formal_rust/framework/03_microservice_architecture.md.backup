@@ -1,0 +1,62 @@
+﻿# 3. 微服务与分布式架构
+
+## 3.1 元数据
+
+- 更新时间：2025-02-01
+- 相关主题：服务拆分、gRPC、REST、消息队列、一致性、容错
+
+## 3.2 摘要
+
+本节梳理Rust微服务与分布式架构的设计原则、通信模式（gRPC、REST、消息队列）、一致性与容错机制、工程案例与批判性分析。
+
+## 3.3 主要内容大纲
+
+- 服务拆分与治理
+- gRPC、REST、消息队列通信模式
+- 分布式一致性与容错机制
+- 工程案例与批判性分析
+
+## 3.4 批判性分析
+
+- Rust微服务架构与主流实现的对比？
+- 分布式一致性与所有权模型的结合难点？
+- 微服务拆分的工程风险？
+
+## 3.5 FAQ
+
+- Rust如何实现高效微服务？
+- 分布式一致性如何保障？
+- 微服务架构的最佳实践？
+
+## 3.6 交叉引用
+
+- [架构设计原理与模式](./01_architecture_principles.md)
+- [典型开源组件分析](./02_open_source_components.md)
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

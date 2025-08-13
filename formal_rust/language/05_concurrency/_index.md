@@ -1,4 +1,4 @@
-# C05. 并发：线程、消息与同步 (Concurrency: Threads, Messaging, and Synchronization)
+﻿# C05. 并发：线程、消息与同步 (Concurrency: Threads, Messaging, and Synchronization)
 
 ## 模块简介
 
@@ -7,7 +7,7 @@
 ## 章节导航
 
 1. [线程与所有权](./01_threads_and_ownership.md) —— thread::spawn, JoinHandle, move闭包，所有权防止数据竞争
-2. [消息传递并发](./02_message_passing.md) —— 通道(Channel)、mpsc，所有权转移与线程安全通信
+2. [消息传递并发](./02_message_passing.md) —— 通道(Channel)、mpsc，所有权移动与线程安全通信
 3. [共享状态与同步原语](./03_synchronization_primitives.md) —— Mutex, Arc, RwLock，Send/Sync trait与同步机制
 4. [并行计算与生态](./04_parallelism_and_beyond.md) —— 并发vs并行、Rayon、数据并行与调度
 5. [高级主题与总结](./05_advanced_topics_and_summary.md) —— 原子类型、无锁编程、内存排序、并发安全回顾
@@ -17,7 +17,7 @@
 - 理解Rust并发安全的理论基础与所有权模型
 - 掌握线程、消息传递、共享状态、同步原语等核心机制
 - 能够分析和解决实际工程中的数据竞争与并发安全问题
-- 熟悉Send/Sync trait、原子类型、无锁并发等高级特性
+- 熟悉Send/Sync trait、原子类型、无锁并发等高级特征
 - 跟踪并发与并行领域的前沿理论与工程创新
 
 ## 前置知识
@@ -29,7 +29,7 @@
 ## 实践项目
 
 1. 实现多线程安全的消息传递系统
-2. 设计并发安全的共享状态数据结构
+2. 设计并发安全的共享状态数据结构体体体
 3. 利用Rayon实现高性能数据并行计算
 4. 编写无锁并发算法与原子操作实验
 5. 形式化验证并发程序的数据竞争免疫性
@@ -53,7 +53,7 @@
 
 - Rust并发系统以所有权模型、类型系统、线程安全、同步原语、消息传递、原子操作、内存序等为核心，理论基础包括并发语义、分离逻辑、CSP、Actor模型、Datalog推理等。
 - 关键定理：数据竞争免疫、死锁检测、内存安全、原子操作正确性、类型安全、消息传递安全。
-- 证明方法：结构归纳、状态空间爆炸规避的模型检验、自动化定理证明、反例生成。
+- 证明方法：结构体体体归纳、状态空间爆炸规避的模型检验、自动化定理证明、反例生成。
 
 ### 自动化工具与工程案例
 
@@ -66,11 +66,40 @@
 - 典型反例：Send/Sync误用、死锁、ABA问题、原子操作不一致、消息丢失等。
 - 工程经验：自动化测试、模型检查、CI集成、IDE并发分析插件。
 
-### 未来趋势与前沿
+### 未来值值值趋势与前沿
 
-- 异步/分布式/跨语言并发安全、量子并发、机器学习驱动的并发优化、自动化验证工具链、形式化规范与工程集成等为未来发展方向。
-- 理论创新与工程集成将持续推动Rust并发系统的安全性、表现力与可维护性。
+- 异步/分布式/跨语言并发安全、量子并发、机器学习驱动的并发优化、自动化验证工具链、形式化规范与工程集成等为未来值值值发展方向。
+- 理论创新与工程集成将持续推动Rust并发系统的安全、表现力与可维护性。
 
 ---
 
 > **递归补充说明**：本节内容将持续迭代完善，欢迎结合最新理论、工程案例、自动化工具、反例与前沿趋势递交补充，推动Rust并发模块总览的形式化论证与证明体系不断进化。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

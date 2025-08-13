@@ -1,0 +1,658 @@
+﻿# 观察者模式 (Observer Pattern)
+
+## 概述
+
+观察者模式定义对象间的一对多依赖关系，当一个对象状态改变时，所有依赖者都会得到通知并自动更新。
+
+## 数学定义
+
+### 观察者模式
+
+```text
+Observer(Subject, Observer) = Subject.notify() → ∀o ∈ Observer: o.update()
+```
+
+### 事件系统
+
+```text
+EventSystem = {subscribers: Set<Observer>, events: Queue<Event>}
+```
+
+### 异步观察者
+
+```text
+AsyncObserver = Observer.update_async() → Future<()>
+```
+
+## 代码示例
+
+### 基础观察者模式
+
+```rust
+use std::collections::HashMap;
+use std::sync::{Arc, Mutex};
+
+// 观察者trait
+trait Observer {
+    fn update(&self, data: &str);
+}
+
+// 具体观察者
+struct ConcreteObserver {
+    name: String,
+}
+
+impl Observer for ConcreteObserver {
+    fn update(&self, data: &str) {
+        println!("Observer {} received: {}", self.name, data);
+    }
+}
+
+// 主题trait
+trait Subject {
+    fn attach(&mut self, observer: Box<dyn Observer>);
+    fn detach(&mut self, observer_id: usize);
+    fn notify(&self, data: &str);
+}
+
+// 具体主题
+struct ConcreteSubject {
+    observers: HashMap<usize, Box<dyn Observer>>,
+    next_id: usize,
+}
+
+impl ConcreteSubject {
+    fn new() -> Self {
+        ConcreteSubject {
+            observers: HashMap::new(),
+            next_id: 0,
+        }
+    }
+    
+    fn set_data(&mut self, data: String) {
+        println!("Subject setting data: {}", data);
+        self.notify(&data);
+    }
+}
+
+impl Subject for ConcreteSubject {
+    fn attach(&mut self, observer: Box<dyn Observer>) {
+        let id = self.next_id;
+        self.observers.insert(id, observer);
+        self.next_id += 1;
+        println!("Observer attached with id: {}", id);
+    }
+    
+    fn detach(&mut self, observer_id: usize) {
+        self.observers.remove(&observer_id);
+        println!("Observer detached with id: {}", observer_id);
+    }
+    
+    fn notify(&self, data: &str) {
+        for observer in self.observers.values() {
+            observer.update(data);
+        }
+    }
+}
+
+fn main() {
+    let mut subject = ConcreteSubject::new();
+    
+    let observer1 = Box::new(ConcreteObserver {
+        name: "Observer1".to_string(),
+    });
+    let observer2 = Box::new(ConcreteObserver {
+        name: "Observer2".to_string(),
+    });
+    
+    subject.attach(observer1);
+    subject.attach(observer2);
+    
+    subject.set_data("Hello, Observers!".to_string());
+}
+```
+
+### 泛型观察者模式
+
+```rust
+use std::collections::HashMap;
+use std::sync::{Arc, Mutex};
+
+trait Observer<T> {
+    fn update(&self, data: &T);
+}
+
+struct DataObserver<T> {
+    name: String,
+    _phantom: std::marker::PhantomData<T>,
+}
+
+impl<T> DataObserver<T> {
+    fn new(name: String) -> Self {
+        DataObserver {
+            name,
+            _phantom: std::marker::PhantomData,
+        }
+    }
+}
+
+impl<T: std::fmt::Display> Observer<T> for DataObserver<T> {
+    fn update(&self, data: &T) {
+        println!("Observer {} received: {}", self.name, data);
+    }
+}
+
+trait Subject<T> {
+    fn attach(&mut self, observer: Box<dyn Observer<T>>);
+    fn detach(&mut self, observer_id: usize);
+    fn notify(&self, data: &T);
+}
+
+struct GenericSubject<T> {
+    observers: HashMap<usize, Box<dyn Observer<T>>>,
+    next_id: usize,
+    _phantom: std::marker::PhantomData<T>,
+}
+
+impl<T> GenericSubject<T> {
+    fn new() -> Self {
+        GenericSubject {
+            observers: HashMap::new(),
+            next_id: 0,
+            _phantom: std::marker::PhantomData,
+        }
+    }
+    
+    fn set_data(&mut self, data: T) {
+        self.notify(&data);
+    }
+}
+
+impl<T> Subject<T> for GenericSubject<T> {
+    fn attach(&mut self, observer: Box<dyn Observer<T>>) {
+        let id = self.next_id;
+        self.observers.insert(id, observer);
+        self.next_id += 1;
+    }
+    
+    fn detach(&mut self, observer_id: usize) {
+        self.observers.remove(&observer_id);
+    }
+    
+    fn notify(&self, data: &T) {
+        for observer in self.observers.values() {
+            observer.update(data);
+        }
+    }
+}
+
+fn main() {
+    let mut subject = GenericSubject::new();
+    
+    let observer1 = Box::new(DataObserver::new("Observer1".to_string()));
+    let observer2 = Box::new(DataObserver::new("Observer2".to_string()));
+    
+    subject.attach(observer1);
+    subject.attach(observer2);
+    
+    subject.set_data(42);
+    subject.set_data("Hello".to_string());
+}
+```
+
+### 事件系统1
+
+```rust
+use std::collections::HashMap;
+use std::sync::{Arc, Mutex};
+
+#[derive(Debug, Clone)]
+enum Event {
+    DataChanged(String),
+    StatusChanged(String),
+    Error(String),
+}
+
+trait EventHandler {
+    fn handle_event(&self, event: &Event);
+}
+
+struct EventHandlerImpl {
+    name: String,
+}
+
+impl EventHandlerImpl {
+    fn new(name: String) -> Self {
+        EventHandlerImpl { name }
+    }
+}
+
+impl EventHandler for EventHandlerImpl {
+    fn handle_event(&self, event: &Event) {
+        match event {
+            Event::DataChanged(data) => {
+                println!("Handler {}: Data changed to {}", self.name, data);
+            }
+            Event::StatusChanged(status) => {
+                println!("Handler {}: Status changed to {}", self.name, status);
+            }
+            Event::Error(error) => {
+                println!("Handler {}: Error occurred: {}", self.name, error);
+            }
+        }
+    }
+}
+
+struct EventSystem {
+    handlers: HashMap<String, Box<dyn EventHandler>>,
+}
+
+impl EventSystem {
+    fn new() -> Self {
+        EventSystem {
+            handlers: HashMap::new(),
+        }
+    }
+    
+    fn register_handler(&mut self, name: String, handler: Box<dyn EventHandler>) {
+        self.handlers.insert(name.clone(), handler);
+        println!("Handler '{}' registered", name);
+    }
+    
+    fn unregister_handler(&mut self, name: &str) {
+        self.handlers.remove(name);
+        println!("Handler '{}' unregistered", name);
+    }
+    
+    fn publish_event(&self, event: Event) {
+        println!("Publishing event: {:?}", event);
+        for handler in self.handlers.values() {
+            handler.handle_event(&event);
+        }
+    }
+}
+
+fn main() {
+    let mut event_system = EventSystem::new();
+    
+    let handler1 = Box::new(EventHandlerImpl::new("Handler1".to_string()));
+    let handler2 = Box::new(EventHandlerImpl::new("Handler2".to_string()));
+    
+    event_system.register_handler("handler1".to_string(), handler1);
+    event_system.register_handler("handler2".to_string(), handler2);
+    
+    event_system.publish_event(Event::DataChanged("New Data".to_string()));
+    event_system.publish_event(Event::StatusChanged("Running".to_string()));
+    event_system.publish_event(Event::Error("Something went wrong".to_string()));
+}
+```
+
+### 异步观察者模式
+
+```rust
+use std::future::Future;
+use std::pin::Pin;
+use std::sync::{Arc, Mutex};
+use tokio::sync::mpsc;
+
+trait AsyncObserver {
+    type Future: Future<Output = ()>;
+    fn update_async(&self, data: String) -> Self::Future;
+}
+
+struct AsyncDataObserver {
+    name: String,
+}
+
+impl AsyncDataObserver {
+    fn new(name: String) -> Self {
+        AsyncDataObserver { name }
+    }
+}
+
+impl AsyncObserver for AsyncDataObserver {
+    type Future = Pin<Box<dyn Future<Output = ()> + Send>>;
+    
+    fn update_async(&self, data: String) -> Self::Future {
+        let name = self.name.clone();
+        Box::pin(async move {
+            tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
+            println!("Async Observer {} received: {}", name, data);
+        })
+    }
+}
+
+struct AsyncSubject {
+    observers: Vec<Arc<dyn AsyncObserver + Send + Sync>>,
+}
+
+impl AsyncSubject {
+    fn new() -> Self {
+        AsyncSubject {
+            observers: Vec::new(),
+        }
+    }
+    
+    fn attach(&mut self, observer: Arc<dyn AsyncObserver + Send + Sync>) {
+        self.observers.push(observer);
+    }
+    
+    async fn notify(&self, data: String) {
+        let mut futures = Vec::new();
+        
+        for observer in &self.observers {
+            futures.push(observer.update_async(data.clone()));
+        }
+        
+        for future in futures {
+            future.await;
+        }
+    }
+}
+
+#[tokio::main]
+async fn main() {
+    let mut subject = AsyncSubject::new();
+    
+    let observer1 = Arc::new(AsyncDataObserver::new("AsyncObserver1".to_string()));
+    let observer2 = Arc::new(AsyncDataObserver::new("AsyncObserver2".to_string()));
+    
+    subject.attach(observer1);
+    subject.attach(observer2);
+    
+    subject.notify("Async Data".to_string()).await;
+}
+```
+
+### 线程安全观察者
+
+```rust
+use std::collections::HashMap;
+use std::sync::{Arc, Mutex, RwLock};
+use std::thread;
+
+trait ThreadSafeObserver: Send + Sync {
+    fn update(&self, data: &str);
+}
+
+struct ThreadSafeDataObserver {
+    name: String,
+}
+
+impl ThreadSafeDataObserver {
+    fn new(name: String) -> Self {
+        ThreadSafeDataObserver { name }
+    }
+}
+
+impl ThreadSafeObserver for ThreadSafeDataObserver {
+    fn update(&self, data: &str) {
+        println!("Thread-safe observer {} received: {}", self.name, data);
+    }
+}
+
+struct ThreadSafeSubject {
+    observers: Arc<RwLock<HashMap<usize, Arc<dyn ThreadSafeObserver>>>>,
+    next_id: Arc<Mutex<usize>>,
+}
+
+impl ThreadSafeSubject {
+    fn new() -> Self {
+        ThreadSafeSubject {
+            observers: Arc::new(RwLock::new(HashMap::new())),
+            next_id: Arc::new(Mutex::new(0)),
+        }
+    }
+    
+    fn attach(&self, observer: Arc<dyn ThreadSafeObserver>) -> usize {
+        let mut next_id = self.next_id.lock().unwrap();
+        let id = *next_id;
+        *next_id += 1;
+        
+        let mut observers = self.observers.write().unwrap();
+        observers.insert(id, observer);
+        
+        id
+    }
+    
+    fn detach(&self, observer_id: usize) {
+        let mut observers = self.observers.write().unwrap();
+        observers.remove(&observer_id);
+    }
+    
+    fn notify(&self, data: &str) {
+        let observers = self.observers.read().unwrap();
+        for observer in observers.values() {
+            observer.update(data);
+        }
+    }
+}
+
+fn main() {
+    let subject = Arc::new(ThreadSafeSubject::new());
+    
+    let observer1 = Arc::new(ThreadSafeDataObserver::new("Observer1".to_string()));
+    let observer2 = Arc::new(ThreadSafeDataObserver::new("Observer2".to_string()));
+    
+    let id1 = subject.attach(observer1);
+    let id2 = subject.attach(observer2);
+    
+    let subject_clone = Arc::clone(&subject);
+    let handle = thread::spawn(move || {
+        subject_clone.notify("Data from thread");
+    });
+    
+    subject.notify("Data from main thread");
+    handle.join().unwrap();
+}
+```
+
+### 配置化观察者
+
+```rust
+use std::collections::HashMap;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+struct ObserverConfig {
+    name: String,
+    enabled: bool,
+    filter: Option<String>,
+}
+
+trait ConfigurableObserver {
+    fn update(&self, data: &str);
+    fn get_config(&self) -> &ObserverConfig;
+    fn is_enabled(&self) -> bool {
+        self.get_config().enabled
+    }
+}
+
+struct ConfigurableDataObserver {
+    config: ObserverConfig,
+}
+
+impl ConfigurableDataObserver {
+    fn new(config: ObserverConfig) -> Self {
+        ConfigurableDataObserver { config }
+    }
+}
+
+impl ConfigurableObserver for ConfigurableDataObserver {
+    fn update(&self, data: &str) {
+        if !self.is_enabled() {
+            return;
+        }
+        
+        if let Some(filter) = &self.config.filter {
+            if !data.contains(filter) {
+                return;
+            }
+        }
+        
+        println!("Observer {} received: {}", self.config.name, data);
+    }
+    
+    fn get_config(&self) -> &ObserverConfig {
+        &self.config
+    }
+}
+
+struct ConfigurableSubject {
+    observers: HashMap<String, Box<dyn ConfigurableObserver>>,
+}
+
+impl ConfigurableSubject {
+    fn new() -> Self {
+        ConfigurableSubject {
+            observers: HashMap::new(),
+        }
+    }
+    
+    fn add_observer(&mut self, observer: Box<dyn ConfigurableObserver>) {
+        let config = observer.get_config();
+        self.observers.insert(config.name.clone(), observer);
+    }
+    
+    fn remove_observer(&mut self, name: &str) {
+        self.observers.remove(name);
+    }
+    
+    fn notify(&self, data: &str) {
+        for observer in self.observers.values() {
+            observer.update(data);
+        }
+    }
+}
+
+fn main() {
+    let mut subject = ConfigurableSubject::new();
+    
+    let config1 = ObserverConfig {
+        name: "Observer1".to_string(),
+        enabled: true,
+        filter: Some("important".to_string()),
+    };
+    
+    let config2 = ObserverConfig {
+        name: "Observer2".to_string(),
+        enabled: true,
+        filter: None,
+    };
+    
+    let observer1 = Box::new(ConfigurableDataObserver::new(config1));
+    let observer2 = Box::new(ConfigurableDataObserver::new(config2));
+    
+    subject.add_observer(observer1);
+    subject.add_observer(observer2);
+    
+    subject.notify("This is important data");
+    subject.notify("This is regular data");
+}
+```
+
+## 测试验证
+
+```rust
+#[cfg(test)]
+mod tests {
+    use super::*;
+    
+    #[test]
+    fn test_basic_observer() {
+        let mut subject = ConcreteSubject::new();
+        let observer = Box::new(ConcreteObserver {
+            name: "TestObserver".to_string(),
+        });
+        
+        subject.attach(observer);
+        subject.set_data("Test Data".to_string());
+    }
+    
+    #[test]
+    fn test_generic_observer() {
+        let mut subject = GenericSubject::new();
+        let observer = Box::new(DataObserver::new("TestObserver".to_string()));
+        
+        subject.attach(observer);
+        subject.set_data(42);
+    }
+    
+    #[test]
+    fn test_event_system() {
+        let mut event_system = EventSystem::new();
+        let handler = Box::new(EventHandlerImpl::new("TestHandler".to_string()));
+        
+        event_system.register_handler("test".to_string(), handler);
+        event_system.publish_event(Event::DataChanged("Test".to_string()));
+    }
+    
+    #[tokio::test]
+    async fn test_async_observer() {
+        let mut subject = AsyncSubject::new();
+        let observer = Arc::new(AsyncDataObserver::new("TestObserver".to_string()));
+        
+        subject.attach(observer);
+        subject.notify("Test Data".to_string()).await;
+    }
+    
+    #[test]
+    fn test_thread_safe_observer() {
+        let subject = Arc::new(ThreadSafeSubject::new());
+        let observer = Arc::new(ThreadSafeDataObserver::new("TestObserver".to_string()));
+        
+        let _id = subject.attach(observer);
+        subject.notify("Test Data");
+    }
+    
+    #[test]
+    fn test_configurable_observer() {
+        let mut subject = ConfigurableSubject::new();
+        let config = ObserverConfig {
+            name: "TestObserver".to_string(),
+            enabled: true,
+            filter: None,
+        };
+        let observer = Box::new(ConfigurableDataObserver::new(config));
+        
+        subject.add_observer(observer);
+        subject.notify("Test Data");
+    }
+}
+```
+
+## 形式化验证
+
+### 观察者模式验证
+
+- 验证观察者注册和注销的正确性
+- 检查通知机制的一致性
+- 确保观察者更新的完整性
+
+### 事件系统验证
+
+- 验证事件发布和订阅机制
+- 检查事件处理的正确性
+- 确保事件系统的可靠性
+
+### 异步观察者验证
+
+- 验证异步通知的正确性
+- 检查并发安全
+- 确保异步操作的完整性
+
+## 性能考虑
+
+1. **内存使用**: 观察者模式可能增加内存使用
+2. **通知开销**: 大量观察者可能影响性能
+3. **线程安全**: 线程安全观察者需要额外的同步开销
+
+## 最佳实践
+
+1. **清晰的接口**: 定义清晰的观察者接口
+2. **内存管理**: 注意观察者的生命周期管理
+3. **性能优化**: 考虑观察者模式的性能影响
+4. **线程安全**: 在多线程环境中使用线程安全实现
+5. **配置化**: 支持观察者的配置化管理
+
+

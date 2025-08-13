@@ -1,4 +1,4 @@
-# Rust 教学与学习: 形式化理论
+﻿# Rust 教学与学习: 形式化理论
 
 **文档编号**: 25.01  
 **版本**: 1.0  
@@ -77,12 +77,12 @@ $$S = \{(k_1, p_1), (k_2, p_2), ..., (k_n, p_n)\}$$
 
 其中 $k_i$ 是知识点，$p_i \in [0, 1]$ 是掌握程度。
 
-**定义 25.2** (认知状态转移)
-学习活动 $a$ 将认知状态从 $S$ 转移到 $S'$：
+**定义 25.2** (认知状态移动)
+学习活动 $a$ 将认知状态从 $S$ 移动到 $S'$：
 
 $$S' = T(S, a)$$
 
-其中 $T$ 是状态转移函数。
+其中 $T$ 是状态移动函数。
 
 ### 认知负荷理论
 
@@ -125,7 +125,7 @@ $$C = \{f_1, f_2, ..., f_m\}$$
 $$C = Abstract(E) = \{f | f \text{ is common in } e_1, e_2, ..., e_k\}$$
 
 **例子 25.1** (所有权概念形成)
-通过多个所有权转移示例，学习者抽象出所有权概念：
+通过多个所有权移动示例，学习者抽象出所有权概念：
 
 ```rust
 let s1 = String::from("hello");
@@ -135,7 +135,7 @@ let x = 5;
 let y = x; // x仍然有效
 ```
 
-从这些示例中，学习者形成"引用类型在赋值时转移所有权"的概念。
+从这些示例中，学习者形成"引用类型在赋值时移动所有权"的概念。
 
 ### 错误驱动学习
 
@@ -163,7 +163,7 @@ $$EV(error) \propto C(error) \times S(error) \times H(error)$$
 - $E$ 是概念依赖关系集合
 
 **定义 25.7** (最优学习路径)
-给定学习者的初始状态 $S_0$ 和目标状态 $S_g$，最优学习路径 $P^*$ 是使得认知转移成本最小的路径：
+给定学习者的初始状态 $S_0$ 和目标状态 $S_g$，最优学习路径 $P^*$ 是使得认知移动成本最小的路径：
 
 $$P^* = \arg\min_P \sum_{i=0}^{|P|-1} Cost(S_i \rightarrow S_{i+1})$$
 
@@ -278,7 +278,7 @@ $$TS_{t+1} = Update(TS_t, feedback_t)$$
    - 强调"单一所有者"原则
 
 2. **实例代码阶段**：
-   - 展示简单的所有权转移代码
+   - 展示简单的所有权移动代码
    - 展示常见错误和编译器消息
 
 3. **规则抽象阶段**：
@@ -341,7 +341,7 @@ function TeachOwnership(student):
 有效的借用规则教学满足：
 
 - 先教授不可变借用，再教授可变借用
-- 明确借用的生命周期范围
+- 明确借用的生命周期作用域
 - 通过编译器错误实例强化理解
 
 ### 生命周期教学策略
@@ -404,7 +404,7 @@ Rust的错误处理模式结合了函数式和命令式风格，教学模式如�
 
 ### 基础学习路径
 
-1. **基础语法与类型** → **所有权基础** → **借用规则** → **结构体与枚举** → **错误处理** → **特质系统** → **泛型编程** → **集合类型** → **模块系统** → **并发编程**
+1. **基础语法与类型** → **所有权基础** → **借用规则** → **结构体体体体与枚举** → **错误处理** → **特质系统** → **泛型编程** → **集合类型** → **模块系统** → **并发编程**
 
 ### 个性化路径优化
 
@@ -461,7 +461,7 @@ fn calculate_concept_priority(
     learner: &LearnerModel,
     concepts: &ConceptDependencyGraph
 ) -> f32 {
-    // 结合概念重要性、难度和学习者特性计算优先级
+    // 结合概念重要性、难度和学习者特征计算优先级
     // ...
     0.0
 }
@@ -502,18 +502,18 @@ $$Transition(i \rightarrow i+1) \iff \forall c \in ConceptsRequiredForStage(i+1)
 
 以下是教授所有权的递进示例序列：
 
-**步骤1: 基本所有权转移**:
+**步骤1: 基本所有权移动**:
 
 ```rust
 fn ownership_step1() {
-    // 示例1: 基本所有权转移
+    // 示例1: 基本所有权移动
     let s1 = String::from("hello");
     let s2 = s1;
     
     // println!("{}", s1); // 编译错误：s1已移动
     println!("{}", s2); // 正常工作
     
-    // 解释: s1的所有权已转移给s2，s1不再有效
+    // 解释: s1的所有权已移动给s2，s1不再有效
 }
 ```
 
@@ -521,7 +521,7 @@ fn ownership_step1() {
 
 ```rust
 fn ownership_step2() {
-    // 示例2: 克隆而非转移所有权
+    // 示例2: 克隆而非移动所有权
     let s1 = String::from("hello");
     let s2 = s1.clone();
     
@@ -674,3 +674,30 @@ fn assess_learning_progress(
 7. Meyer, B. (2003). The misconceptions of programming. IEEE Computer, 36(5).
 8. Kölling, M. (2015). Lessons from the design of three educational programming environments. International Journal of People-Oriented Programming.
 9. Nystrom, B. (2014). Crafting Interpreters (for understanding programming language concepts).
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

@@ -1,4 +1,4 @@
-# Rust所有权与借用系统代码示例
+﻿# Rust所有权与借用系统代码示例
 
 ## 目录
 
@@ -7,7 +7,7 @@
   - [1. 基础示例](#1-基础示例)
     - [1.1 所有权基础](#11-所有权基础)
     - [1.2 函数与所有权](#12-函数与所有权)
-  - [2. 所有权转移](#2-所有权转移)
+  - [2. 所有权移动](#2-所有权移动)
     - [2.1 移动语义](#21-移动语义)
     - [2.2 克隆与复制](#22-克隆与复制)
   - [3. 借用系统](#3-借用系统)
@@ -16,7 +16,7 @@
     - [3.3 借用检查器](#33-借用检查器)
   - [4. 生命周期](#4-生命周期)
     - [4.1 生命周期标注](#41-生命周期标注)
-    - [4.2 结构体中的生命周期](#42-结构体中的生命周期)
+    - [4.2 结构体体体体中的生命周期](#42-结构体体体体中的生命周期)
     - [4.3 生命周期省略](#43-生命周期省略)
   - [5. 作用域](#5-作用域)
     - [5.1 作用域基础](#51-作用域基础)
@@ -41,7 +41,7 @@ fn ownership_basics() {
     let s1 = String::from("hello");
     println!("s1: {}", s1);
     
-    // 2. 所有权转移
+    // 2. 所有权移动
     let s2 = s1; // s1的所有权移动到s2
     // println!("s1: {}", s1); // 编译错误：s1已被移动
     println!("s2: {}", s2);
@@ -81,7 +81,7 @@ fn ownership_and_functions() {
 }
 ```
 
-## 2. 所有权转移
+## 2. 所有权移动
 
 ### 2.1 移动语义
 
@@ -115,9 +115,9 @@ fn create_string() -> String {
 
 ```rust
 fn clone_and_copy() {
-    // 1. 克隆（深拷贝）
+    // 1. 克隆（深复制）
     let s1 = String::from("hello");
-    let s2 = s1.clone(); // 深拷贝
+    let s2 = s1.clone(); // 深复制
     println!("s1: {}, s2: {}", s1, s2);
     
     // 2. Copy trait
@@ -238,7 +238,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 }
 ```
 
-### 4.2 结构体中的生命周期
+### 4.2 结构体体体体中的生命周期
 
 ```rust
 struct ImportantExcerpt<'a> {
@@ -492,3 +492,32 @@ fn debugging_tips() {
 6. **错误处理**: 常见错误、修复方法、调试技巧
 
 这些示例为理解Rust的内存安全模型提供了实践基础。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

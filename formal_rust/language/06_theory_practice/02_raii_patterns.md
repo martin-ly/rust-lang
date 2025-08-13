@@ -1,4 +1,4 @@
-# Rust RAII模式应用与析构机制 {#raii模式}
+﻿# Rust RAII模式应用与析构机制 {#raii模式}
 
 **章节编号**: 06-02  
 **主题**: RAII模式、析构、作用域、惯用法  
@@ -65,7 +65,7 @@
   ∀资源r, r绑定于对象o, o离开作用域 ⇒ Drop(r)
   ```
 
-- **定理 2.1 (异常安全性)**
+- **定理 2.1 (异常安全)**
 
   ```text
   ∀panic/return, Drop trait保证资源最终释放
@@ -131,3 +131,32 @@ fn main() {
 ---
 
 > 本文档为Rust RAII模式应用与析构机制的理论与工程索引，后续章节将递归细化各子主题。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

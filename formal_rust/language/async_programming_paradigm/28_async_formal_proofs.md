@@ -1,4 +1,4 @@
-# 异步编程形式化证明
+﻿# 异步编程形式化证明
 
 ## 形式化基础
 
@@ -10,7 +10,7 @@
 
 - $S$ 是状态集合
 - $\Sigma$ 是事件集合
-- $\delta: S \times \Sigma \rightarrow 2^S$ 是异步转移函数
+- $\delta: S \times \Sigma \rightarrow 2^S$ 是异步移动函数
 - $s_0 \in S$ 是初始状态
 - $F \subseteq S$ 是接受状态集合
 
@@ -18,7 +18,7 @@
 
 - $s_i \in S$ 是状态
 - $e_i \in \Sigma$ 是事件
-- $s_{i+1} \in \delta(s_i, e_i)$ 是转移关系
+- $s_{i+1} \in \delta(s_i, e_i)$ 是移动关系
 
 **定理 1.1 (异步程序的可达性)** 对于异步程序 $P$，状态 $s$ 是可达的当且仅当存在执行路径 $\pi$ 使得 $s$ 出现在 $\pi$ 中。
 
@@ -130,7 +130,7 @@ $\forall \pi \in \Pi, P'(O(\pi)) \geq P(\pi)$
 **证明：**
 根据性能优化的定义，$P'(O(\pi)) \geq P(\pi)$，因此性能优化具有单调性。
 
-#### 4.2 并发性能的形式化分析
+#### 4.2 并发能的形式化分析
 
 **定义 4.3 (并发度)** 异步程序的并发度是同时执行的任务数量：
 $C(P) = \max_{\pi \in \Pi} |\{t \in Tasks(\pi) | t$ 正在执行 $\}|$
@@ -163,13 +163,13 @@ $\forall \pi \in L(P), \phi(\pi) = true$
 
 **定义 5.3 (访问控制策略)** 访问控制策略是一个函数 $AC: Subject \times Object \times Action \rightarrow \{allow, deny\}$
 
-**定义 5.4 (访问控制的安全性)** 访问控制策略是安全的，当且仅当：
+**定义 5.4 (访问控制的安全)** 访问控制策略是安全的，当且仅当：
 $\forall s \in Subject, \forall o \in Object, \forall a \in Action, AC(s, o, a) = allow \Rightarrow$ 主体 $s$ 有权对对象 $o$ 执行动作 $a$
 
 **定理 5.2 (访问控制的传递性)** 如果访问控制策略 $AC$ 是安全的，且 $s_1$ 可以访问 $o$，$s_2$ 可以访问 $s_1$，则 $s_2$ 可以访问 $o$。
 
 **证明：**
-根据访问控制策略的安全性定义，如果 $AC(s_1, o, a) = allow$ 且 $AC(s_2, s_1, access) = allow$，则 $AC(s_2, o, a) = allow$。
+根据访问控制策略的安全定义，如果 $AC(s_1, o, a) = allow$ 且 $AC(s_2, s_1, access) = allow$，则 $AC(s_2, o, a) = allow$。
 
 ### 6. 异步测试的形式化证明
 
@@ -308,7 +308,7 @@ $p$ 满足 $s \Rightarrow V(p, s) = valid$
 
 - 所有定义都基于通用的数学基础
 - 所有证明都遵循标准的证明方法
-- 理论体系具有模块化结构
+- 理论体系具有模块化结构体体体
 
 因此，异步编程范式理论体系是可扩展的。
 
@@ -322,3 +322,30 @@ $p$ 满足 $s \Rightarrow V(p, s) = valid$
 4. **理论体系的可扩展性**：可以在此基础上继续扩展
 
 这为Rust异步编程提供了坚实的理论基础，确保了理论体系的严谨性和可靠性。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

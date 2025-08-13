@@ -1,6 +1,6 @@
-# 02. 条件表达式 (Conditional Expressions)
+﻿# 02. 条件表达式 (Conditional Expressions)
 
-条件表达式是 Rust 控制流的基石，允许程序根据不同条件执行不同的代码路径。与许多语言不同，Rust 中的条件结构主要是表达式，这意味着它们能返回一个值。
+条件表达式是 Rust 控制流的基石，允许程序根据不同条件执行不同的代码路径。与许多语言不同，Rust 中的条件结构体体体主要是表达式，这意味着它们能返回一个值。
 
 ## 2.1. `if` 与 `if let`
 
@@ -79,13 +79,13 @@ if let Some(value) = maybe_value {
 
 ## 2.2. `match` 表达式：强大的模式匹配
 
-`match` 是 Rust 中最强大、最通用的控制流结构之一。它允许将一个值与一系列模式进行比较，并根据第一个成功匹配的模式执行相应的代码块。
+`match` 是 Rust 中最强大、最通用的控制流结构体体体之一。它允许将一个值与一系列模式进行比较，并根据第一个成功匹配的模式执行相应的代码块。
 
 **形式化定义**:
 一个 `match` 表达式 \(E_{m}\) 接受一个值 \(v\) 和一个模式-表达式对的列表 \([(p_i, e_i), ...]\)。它会返回第一个匹配成功的模式 \(p_k\) 对应的表达式 \(e_k\) 的求值结果。
 \[ E_{match}(v, [(p_i, e_i)]) = eval(e_k) \text{ where } p_k \text{ is the first pattern matching } v \]
 
-**核心特性**:
+**核心特征**:
 
 1. **穷尽性 (Exhaustiveness)**
     * **定义**: `match` 表达式必须是**穷尽的**，即它的模式必须覆盖所有可能输入的值。
@@ -96,9 +96,9 @@ if let Some(value) = maybe_value {
     Rust 的模式非常强大，包括：
     * 字面值: `1`, `"hello"`
     * 变量绑定: `Some(x)` 会将 `Option` 内部的值绑定到变量 `x`
-    * 解构: `Point { x, y }` 可以解构结构体
+    * 解构: `Point { x, y }` 可以解构结构体体体体
     * 通配符: `_` 匹配任何值但不绑定
-    * 范围: `1..=5` (仅限数字和字符)
+    * 作用域: `1..=5` (仅限数字和字符)
     * 守卫 (Guards): `Some(n) if n > 0`，提供额外的条件判断
 
 **所有权与借用**:
@@ -155,5 +155,34 @@ fn process_state(state: State) -> &'static str {
 **章节导航:**
 
 * **上一章 ->** `01_foundations_of_control_flow.md`
-* **下一章 ->** `03_iterative_constructs.md`: 探讨 `loop`, `for`, `while` 等循环结构。
+* **下一章 ->** `03_iterative_constructs.md`: 探讨 `loop`, `for`, `while` 等循环结构体体体。
 * **返回目录 ->** `_index.md`
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

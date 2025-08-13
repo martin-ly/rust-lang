@@ -1,10 +1,10 @@
-# 05 形式化验证模块简介
+﻿# 05 形式化验证模块简介
 
 本模块系统梳理Rust语言的形式化验证理论、核心定理与工程实践，涵盖类型系统安全、所有权正确性、程序逻辑、分离逻辑、并发验证、机械化证明、主流验证工具与工程案例。通过形式化定义、定理、证明思路、自动化工具与工程应用，帮助读者全面掌握Rust安全保障的数学基础与自动化验证能力，推动高安全、高可靠系统级开发。
 
 ## 章节导航
 
-- [类型系统安全性证明](./01_type_system_safety.md)
+- [类型系统安全证明](./01_type_system_safety.md)
 - [所有权系统正确性证明](./02_ownership_correctness.md)
 - [程序逻辑与验证](./03_program_logic.md)
 - [分离逻辑应用](./04_separation_logic.md)
@@ -21,19 +21,19 @@
 - 所有权与借用：每个值有唯一所有者，借用规则与生命周期静态保证内存安全。
 - 分离逻辑：支持资源分离、帧规则与局部推理。
 - 并发安全：类型系统与分离逻辑共同保证无数据竞争、原子性与资源独占。
-- 机械化证明：利用Coq/Isabelle/Lean等定理证明器对Rust特性进行形式化建模与自动化验证。
+- 机械化证明：利用Coq/Isabelle/Lean等定理证明器对Rust特征进行形式化建模与自动化验证。
 
 ## 主要证明思路
 
 - Progress/Preservation定理链路
 - 所有权与借用的唯一性与生命周期约束
-- 分离逻辑的资源分配与转移
-- 并发分离逻辑与Send/Sync trait的安全性
+- 分离逻辑的资源分配与移动
+- 并发分离逻辑与Send/Sync trait的安全
 - 自动化工具与工程级验证流程
 
 ## 工程意义
 
-- 编译期消除大量运行时错误，提升系统级安全性
+- 编译期消除大量运行时错误，提升系统级安全
 - 支持高性能、无GC的系统开发
 - 自动化验证工具助力大规模工程落地
 
@@ -48,3 +48,32 @@
 - 高阶类型、异步安全、unsafe代码的自动化验证
 - 工具链集成与标准化、跨领域应用
 - 形式化验证体系推动Rust生态在高安全、高可靠领域不断突破
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

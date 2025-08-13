@@ -1,4 +1,4 @@
-# 术语表 (Glossary)
+﻿# 术语表 (Glossary)
 
 本页定义了“第 2 章：Rust 类型系统”中出现的关键术语。
 
@@ -54,7 +54,7 @@
 ### P
 
 - **`PhantomData`**
-  - 一个零大小的标记类型，用于在逻辑上关联一个结构体与某个泛型参数，即使该参数未在字段中被使用。它主要用于影响编译器的型变推导。
+  - 一个零大小的标记类型，用于在逻辑上关联一个结构体体体体与某个泛型参数，即使该参数未在字段中被使用。它主要用于影响编译器的型变推导。
 
 ### S
 
@@ -78,3 +78,32 @@
 
 - **型变 (Variance)**
   - 描述了当类型参数之间存在子类型关系时（如生命周期），包含这些参数的泛型类型之间会形成什么样的子类型关系（协变、逆变或不变）。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

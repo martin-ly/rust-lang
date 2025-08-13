@@ -1,0 +1,367 @@
+﻿# 类型检查
+
+## 元数据
+
+- **概念ID**: 02.02
+- **概念名称**: 类型检查 (Type Checking)
+- **理论层次**: 第二层：语言特征形式化层
+- **相关概念**: 02.01 (类型推断), 02.03 (子类型), 02.04 (trait系统)
+- **难度级别**: 中级
+
+## 形式化定义
+
+使用统一符号系统(RFUSS)的形式化定义：
+
+```math
+\text{TypeCheck}(\Gamma, e, T) \equiv \Gamma \vdash e : T \land \text{ValidType}(T) \land \text{Consistent}(\Gamma, e, T)
+```
+
+其中：
+
+- $\text{TypeCheck}(\Gamma, e, T)$ 表示在类型上下文$\Gamma$中检查表达式$e$是否具有类型$T$
+- $\Gamma \vdash e : T$ 表示类型判断关系
+- $\text{ValidType}(T)$ 表示类型$T$是有效的
+- $\text{Consistent}(\Gamma, e, T)$ 表示类型上下文$\Gamma$、表达式$e$和类型$T$是一致的
+
+## 代码映射
+
+形式化表示与代码的对应关系：
+
+| 形式化表示 | Rust代码 | 说明 |
+|----------|---------|------|
+| `TypeCheck(Γ, e, T)` | 编译时检查 | 在上下文Γ中检查e的类型T |
+| `Γ ⊢ e : T` | 类型判断 | 表达式e具有类型T |
+| `ValidType(T)` | 类型验证 | 类型T是有效的 |
+| `Consistent(Γ, e, T)` | 一致性检查 | 上下文、表达式、类型一致 |
+| `Γ = {x₁:T₁, x₂:T₂, ...}` | 变量绑定 | 类型上下文 |
+
+## 基础示例
+
+最小化示例代码，展示类型检查的核心概念：
+
+```rust
+fn main() {
+    // 类型检查：编译器检查x的类型为i32
+    // TypeCheck(Γ, x, i32) where Γ = {}
+    let x: i32 = 42;
+    
+    // 类型检查：编译器检查y的类型为String
+    // TypeCheck(Γ, y, String) where Γ = {x: i32}
+    let y: String = String::from("hello");
+    
+    // 类型检查：编译器检查sum的类型为i32
+    // TypeCheck(Γ, sum, i32) where Γ = {x: i32, y: String}
+    let sum: i32 = x + 10;
+    
+    // 类型检查：编译器检查result的类型为f64
+    // TypeCheck(Γ, result, f64) where Γ = {x: i32, y: String, sum: i32}
+    let result: f64 = 3.14 * 2.0;
+    
+    println!("x: {}, y: {}, sum: {}, result: {}", x, y, sum, result);
+}
+```
+
+**解释**：
+
+- `let x: i32 = 42` 编译器检查$x$的类型为`i32`
+- `let y: String = String::from("hello")` 编译器检查$y$的类型为`String`
+- `let sum: i32 = x + 10` 编译器检查$sum$的类型为`i32`
+- `let result: f64 = 3.14 * 2.0` 编译器检查$result$的类型为`f64`
+
+## 进阶示例
+
+在实际场景中应用类型检查概念：
+
+```rust
+// 泛型函数，类型检查处理泛型约束
+fn find_max<T: PartialOrd>(items: &[T]) -> Option<&T> {
+    items.iter().max()
+}
+
+// 结构体体体类型检查
+#[derive(Debug)]
+struct Point<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> Point<T> {
+    fn new(x: T, y: T) -> Self {
+        Point { x, y }
+    }
+    
+    fn distance(&self) -> f64 
+    where 
+        T: Into<f64> + Copy,
+    {
+        let x: f64 = self.x.into();
+        let y: f64 = self.y.into();
+        (x * x + y * y).sqrt()
+    }
+}
+
+// 枚举类型检查
+#[derive(Debug)]
+enum Result<T, E> {
+    Ok(T),
+    Err(E),
+}
+
+impl<T, E> Result<T, E> {
+    fn is_ok(&self) -> bool {
+        matches!(self, Result::Ok(_))
+    }
+    
+    fn unwrap(self) -> T {
+        match self {
+            Result::Ok(value) => value,
+            Result::Err(_) => panic!("called `Result::unwrap()` on an `Err` value"),
+        }
+    }
+}
+
+fn main() {
+    // 类型检查：编译器检查vec的类型为Vec<i32>
+    let vec = vec![1, 2, 3, 4, 5];
+    
+    // 类型检查：编译器检查max的类型为Option<&i32>
+    let max = find_max(&vec);
+    println!("最大值: {:?}", max);
+    
+    // 类型检查：编译器检查point的类型为Point<i32>
+    let point = Point::new(3, 4);
+    println!("点: {:?}", point);
+    
+    // 类型检查：编译器检查distance的类型为f64
+    let distance = point.distance();
+    println!("距离: {}", distance);
+    
+    // 类型检查：编译器检查result的类型为Result<i32, String>
+    let result: Result<i32, String> = Result::Ok(42);
+    println!("结果: {:?}", result);
+    
+    // 类型检查：编译器检查is_ok的类型为bool
+    let is_ok = result.is_ok();
+    println!("是否成功: {}", is_ok);
+}
+```
+
+**解释**：
+
+- `find_max<T: PartialOrd>` 类型检查确保泛型参数$T$实现`PartialOrd` trait
+- `Point<T>` 结构体体体的类型检查处理泛型类型参数
+- `Result<T, E>` 枚举的类型检查处理两个泛型参数
+- 类型检查确保所有操作都符合类型约束
+
+## 边界情况
+
+展示类型检查的边界条件和复杂情况：
+
+```rust
+// 复杂类型检查示例
+fn main() {
+    // 情况1: 嵌套泛型类型检查
+    let nested: Vec<Option<Box<i32>>> = vec![
+        Some(Box::new(1)),
+        None,
+        Some(Box::new(3)),
+    ];
+    println!("嵌套类型: {:?}", nested);
+    
+    // 情况2: 函数指针类型检查
+    let func: fn(i32) -> i32 = |x| x * 2;
+    let result = func(5);
+    println!("函数结果: {}", result);
+    
+    // 情况3: 闭包类型检查
+    let closure = |x: i32, y: i32| x + y;
+    let sum = closure(10, 20);
+    println!("闭包结果: {}", sum);
+    
+    // 情况4: 关联类型检查
+    let numbers: Vec<i32> = vec![1, 2, 3, 4, 5];
+    let doubled: Vec<i32> = numbers.iter().map(|x| x * 2).collect();
+    println!("加倍结果: {:?}", doubled);
+    
+    // 情况5: 生命周期类型检查
+    fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+        if x.len() > y.len() {
+            x
+        } else {
+            y
+        }
+    }
+    
+    let string1 = String::from("short");
+    let string2 = String::from("longer");
+    let longest_str = longest(&string1, &string2);
+    println!("较长的字符串: {}", longest_str);
+}
+
+// 高级类型检查：trait对象
+trait Drawable {
+    fn draw(&self);
+}
+
+struct Circle {
+    radius: f64,
+}
+
+impl Drawable for Circle {
+    fn draw(&self) {
+        println!("绘制圆形，半径: {}", self.radius);
+    }
+}
+
+struct Square {
+    side: f64,
+}
+
+impl Drawable for Square {
+    fn draw(&self) {
+        println!("绘制正方形，边长: {}", self.side);
+    }
+}
+
+fn draw_shapes(shapes: &[Box<dyn Drawable>]) {
+    for shape in shapes {
+        shape.draw();
+    }
+}
+
+fn main() {
+    let circle = Box::new(Circle { radius: 5.0 });
+    let square = Box::new(Square { side: 4.0 });
+    
+    let shapes: Vec<Box<dyn Drawable>> = vec![circle, square];
+    draw_shapes(&shapes);
+}
+```
+
+**解释**：
+
+- 嵌套泛型类型检查确保复杂的类型结构体体正确
+- 函数指针类型检查确保函数签名匹配
+- 闭包类型检查处理匿名函数的类型推断
+- 关联类型检查处理迭代器和集合的类型关系
+- 生命周期类型检查确保引用的有效性
+- trait对象类型检查处理动态分发
+
+## 常见错误
+
+展示与类型检查相关的常见错误及修正：
+
+```rust
+fn main() {
+    // 错误1: 类型不匹配
+    // let x: i32 = "hello"; // 错误：字符串不能赋值给i32
+    
+    // 错误2: 泛型约束不满足
+    // fn compare<T>(a: T, b: T) -> bool {
+    //     a > b // 错误：T没有实现PartialOrd
+    // }
+    
+    // 错误3: 生命周期不匹配
+    // fn return_reference() -> &str {
+    //     let s = String::from("hello");
+    //     &s // 错误：返回悬垂引用
+    // }
+    
+    // 错误4: 类型推断失败
+    // let x = vec![]; // 错误：无法推断元素类型
+}
+
+// 错误：类型不匹配
+// fn add_strings(a: String, b: String) -> i32 {
+//     a + b // 错误：String + String = String，不是i32
+// }
+```
+
+**错误原因**：
+
+- 类型不匹配：赋值或操作的类型与期望不符
+- 泛型约束不满足：泛型参数没有实现必需的trait
+- 生命周期不匹配：引用的生命周期关系不正确
+- 类型推断失败：编译器无法推断出明确的类型
+
+**正确版本**：
+
+```rust
+fn main() {
+    // 修正1: 使用正确的类型
+    let x: String = "hello".to_string();
+    
+    // 修正2: 添加泛型约束
+    fn compare<T: PartialOrd>(a: T, b: T) -> bool {
+        a > b
+    }
+    
+    // 修正3: 返回拥有所有权的值
+    fn return_string() -> String {
+        String::from("hello")
+    }
+    
+    // 修正4: 明确指定类型
+    let x: Vec<i32> = vec![];
+    
+    // 修正5: 正确的类型操作
+    fn add_strings(a: String, b: String) -> String {
+        a + &b
+    }
+}
+```
+
+## 性能考量
+
+讨论类型检查系统的性能特征：
+
+- **编译时检查**：类型检查在编译时完成，运行时没有开销
+- **算法复杂度**：类型检查算法的时间复杂度通常为O(n²)到O(n³)
+- **内存使用**：类型检查需要存储类型上下文和约束信息
+- **增量检查**：现代编译器支持增量类型检查，提高编译效率
+- **缓存机制**：编译器缓存检查结果，避免重复计算
+
+## 最佳实践
+
+提供使用类型检查的最佳实践建议：
+
+1. **明确类型注解**：对于复杂类型，明确指定类型注解
+2. **利用类型推断**：让编译器推断简单类型，减少冗余注解
+3. **理解泛型约束**：为泛型函数添加适当的trait约束
+4. **管理生命周期**：正确处理引用的生命周期关系
+5. **测试类型边界**：编写测试验证类型检查的正确性
+6. **使用类型别名**：为复杂类型创建别名，提高可读性
+
+## 相关资源
+
+- [Rust类型系统](https://doc.rust-lang.org/book/ch03-02-data-types.html)
+- [Rust类型检查](https://rustc-dev-guide.rust-lang.org/type-checking.html)
+- [Rust泛型](https://doc.rust-lang.org/book/ch10-01-syntax.html)
+- [Rust生命周期](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

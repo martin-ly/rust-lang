@@ -1,0 +1,62 @@
+﻿# 3.3.5 工具链对比与工程案例
+
+## 元数据
+
+- 更新时间：2025-02-01
+- 相关主题：工具链对比、工程案例、生态分析、最佳实践
+
+## 摘要
+
+本节通过对比Rust与主流语言工具链，结合典型工程案例，分析工具链选型、集成与创新实践。
+
+## 详细内容
+
+- Rust工具链与C++/Go/Java等主流语言对比
+- 工具链集成与工程落地实践
+- 典型项目案例剖析
+- 工具链升级与兼容性问题
+
+## 批判性分析
+
+- Rust工具链生态的创新点与短板
+- 工具链选型的工程权衡
+- 工具链对工程效率与质量的影响
+
+## FAQ
+
+- Rust工具链与主流语言有何异同？
+- 工具链升级常见问题有哪些？
+- 如何选择适合团队的工具链？
+
+## 交叉引用
+
+- [CI/CD集成与自动化测试](./3.3.4_CI_CD集成与自动化测试.md)
+- [工程对比与生态分析](../08_engineering_comparison.md)
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

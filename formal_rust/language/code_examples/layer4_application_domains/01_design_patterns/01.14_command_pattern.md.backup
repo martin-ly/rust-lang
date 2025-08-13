@@ -1,0 +1,612 @@
+﻿# 命令模式 (Command Pattern)
+
+## 概述
+
+命令模式将请求封装成对象，从而可以用不同的请求对客户进行参数化，对请求排队或记录请求日志，以及支持可撤销的操作。
+
+## 数学定义
+
+### 命令封装
+
+```text
+CommandPattern(Request, Command) = Command.encapsulate(Request) → ExecutableObject
+```
+
+### 命令执行
+
+```text
+CommandExecution(Command, Receiver) = Command.execute(Receiver) → Result
+```
+
+### 命令队列
+
+```text
+CommandQueue(Commands) = Queue[Command] ∧ ∀cmd ∈ Commands. cmd.execute()
+```
+
+### 撤销操作
+
+```text
+UndoOperation(Command) = Command.execute() → Command.undo() → OriginalState
+```
+
+## 代码示例
+
+### 基础命令模式
+
+```rust
+// 命令trait
+trait Command {
+    fn execute(&self);
+    fn undo(&self);
+}
+
+// 接收者
+struct Receiver {
+    name: String,
+}
+
+impl Receiver {
+    fn new(name: String) -> Self {
+        Receiver { name }
+    }
+    
+    fn action_a(&self) {
+        println!("Receiver({}): 执行动作A", self.name);
+    }
+    
+    fn action_b(&self) {
+        println!("Receiver({}): 执行动作B", self.name);
+    }
+    
+    fn undo_action_a(&self) {
+        println!("Receiver({}): 撤销动作A", self.name);
+    }
+    
+    fn undo_action_b(&self) {
+        println!("Receiver({}): 撤销动作B", self.name);
+    }
+}
+
+// 具体命令A
+struct ConcreteCommandA<'a> {
+    receiver: &'a Receiver,
+}
+
+impl<'a> ConcreteCommandA<'a> {
+    fn new(receiver: &'a Receiver) -> Self {
+        ConcreteCommandA { receiver }
+    }
+}
+
+impl<'a> Command for ConcreteCommandA<'a> {
+    fn execute(&self) {
+        self.receiver.action_a();
+    }
+    
+    fn undo(&self) {
+        self.receiver.undo_action_a();
+    }
+}
+
+// 具体命令B
+struct ConcreteCommandB<'a> {
+    receiver: &'a Receiver,
+}
+
+impl<'a> ConcreteCommandB<'a> {
+    fn new(receiver: &'a Receiver) -> Self {
+        ConcreteCommandB { receiver }
+    }
+}
+
+impl<'a> Command for ConcreteCommandB<'a> {
+    fn execute(&self) {
+        self.receiver.action_b();
+    }
+    
+    fn undo(&self) {
+        self.receiver.undo_action_b();
+    }
+}
+
+// 调用者
+struct Invoker<'a> {
+    commands: Vec<Box<dyn Command + 'a>>,
+}
+
+impl<'a> Invoker<'a> {
+    fn new() -> Self {
+        Invoker { commands: Vec::new() }
+    }
+    
+    fn add_command(&mut self, command: Box<dyn Command + 'a>) {
+        self.commands.push(command);
+    }
+    
+    fn execute_all(&self) {
+        for command in &self.commands {
+            command.execute();
+        }
+    }
+    
+    fn undo_all(&self) {
+        for command in self.commands.iter().rev() {
+            command.undo();
+        }
+    }
+}
+
+fn main() {
+    let receiver = Receiver::new("测试接收者".to_string());
+    
+    let mut invoker = Invoker::new();
+    invoker.add_command(Box::new(ConcreteCommandA::new(&receiver)));
+    invoker.add_command(Box::new(ConcreteCommandB::new(&receiver)));
+    
+    println!("执行所有命令:");
+    invoker.execute_all();
+    
+    println!("\n撤销所有命令:");
+    invoker.undo_all();
+}
+```
+
+### 命令队列模式
+
+```rust
+use std::collections::VecDeque;
+
+// 命令队列
+struct CommandQueue<'a> {
+    commands: VecDeque<Box<dyn Command + 'a>>,
+    executed_commands: VecDeque<Box<dyn Command + 'a>>,
+}
+
+impl<'a> CommandQueue<'a> {
+    fn new() -> Self {
+        CommandQueue {
+            commands: VecDeque::new(),
+            executed_commands: VecDeque::new(),
+        }
+    }
+    
+    fn enqueue(&mut self, command: Box<dyn Command + 'a>) {
+        self.commands.push_back(command);
+    }
+    
+    fn execute_next(&mut self) {
+        if let Some(command) = self.commands.pop_front() {
+            command.execute();
+            self.executed_commands.push_back(command);
+        }
+    }
+    
+    fn execute_all(&mut self) {
+        while !self.commands.is_empty() {
+            self.execute_next();
+        }
+    }
+    
+    fn undo_last(&mut self) {
+        if let Some(command) = self.executed_commands.pop_back() {
+            command.undo();
+            // 将撤销的命令重新加入队列
+            self.commands.push_front(command);
+        }
+    }
+    
+    fn is_empty(&self) -> bool {
+        self.commands.is_empty()
+    }
+    
+    fn queue_size(&self) -> usize {
+        self.commands.len()
+    }
+}
+
+fn main() {
+    let receiver = Receiver::new("队列接收者".to_string());
+    
+    let mut queue = CommandQueue::new();
+    queue.enqueue(Box::new(ConcreteCommandA::new(&receiver)));
+    queue.enqueue(Box::new(ConcreteCommandB::new(&receiver)));
+    queue.enqueue(Box::new(ConcreteCommandA::new(&receiver)));
+    
+    println!("队列大小: {}", queue.queue_size());
+    
+    println!("执行下一个命令:");
+    queue.execute_next();
+    
+    println!("执行所有剩余命令:");
+    queue.execute_all();
+    
+    println!("撤销最后一个命令:");
+    queue.undo_last();
+}
+```
+
+### 宏命令模式
+
+```rust
+// 宏命令
+struct MacroCommand<'a> {
+    commands: Vec<Box<dyn Command + 'a>>,
+}
+
+impl<'a> MacroCommand<'a> {
+    fn new() -> Self {
+        MacroCommand { commands: Vec::new() }
+    }
+    
+    fn add_command(&mut self, command: Box<dyn Command + 'a>) {
+        self.commands.push(command);
+    }
+}
+
+impl<'a> Command for MacroCommand<'a> {
+    fn execute(&self) {
+        println!("MacroCommand: 开始执行宏命令");
+        for command in &self.commands {
+            command.execute();
+        }
+        println!("MacroCommand: 宏命令执行完成");
+    }
+    
+    fn undo(&self) {
+        println!("MacroCommand: 开始撤销宏命令");
+        for command in self.commands.iter().rev() {
+            command.undo();
+        }
+        println!("MacroCommand: 宏命令撤销完成");
+    }
+}
+
+fn main() {
+    let receiver = Receiver::new("宏命令接收者".to_string());
+    
+    let mut macro_cmd = MacroCommand::new();
+    macro_cmd.add_command(Box::new(ConcreteCommandA::new(&receiver)));
+    macro_cmd.add_command(Box::new(ConcreteCommandB::new(&receiver)));
+    macro_cmd.add_command(Box::new(ConcreteCommandA::new(&receiver)));
+    
+    println!("执行宏命令:");
+    macro_cmd.execute();
+    
+    println!("\n撤销宏命令:");
+    macro_cmd.undo();
+}
+```
+
+### 异步命令模式
+
+```rust
+use async_trait::async_trait;
+
+#[async_trait]
+trait AsyncCommand {
+    async fn execute_async(&self);
+    async fn undo_async(&self);
+}
+
+// 异步接收者
+struct AsyncReceiver {
+    name: String,
+}
+
+impl AsyncReceiver {
+    fn new(name: String) -> Self {
+        AsyncReceiver { name }
+    }
+    
+    async fn async_action_a(&self) {
+        tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
+        println!("AsyncReceiver({}): 异步执行动作A", self.name);
+    }
+    
+    async fn async_action_b(&self) {
+        tokio::time::sleep(tokio::time::Duration::from_millis(50)).await;
+        println!("AsyncReceiver({}): 异步执行动作B", self.name);
+    }
+    
+    async fn async_undo_action_a(&self) {
+        tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
+        println!("AsyncReceiver({}): 异步撤销动作A", self.name);
+    }
+    
+    async fn async_undo_action_b(&self) {
+        tokio::time::sleep(tokio::time::Duration::from_millis(50)).await;
+        println!("AsyncReceiver({}): 异步撤销动作B", self.name);
+    }
+}
+
+// 异步具体命令A
+struct AsyncConcreteCommandA<'a> {
+    receiver: &'a AsyncReceiver,
+}
+
+impl<'a> AsyncConcreteCommandA<'a> {
+    fn new(receiver: &'a AsyncReceiver) -> Self {
+        AsyncConcreteCommandA { receiver }
+    }
+}
+
+#[async_trait]
+impl<'a> AsyncCommand for AsyncConcreteCommandA<'a> {
+    async fn execute_async(&self) {
+        self.receiver.async_action_a().await;
+    }
+    
+    async fn undo_async(&self) {
+        self.receiver.async_undo_action_a().await;
+    }
+}
+
+// 异步具体命令B
+struct AsyncConcreteCommandB<'a> {
+    receiver: &'a AsyncReceiver,
+}
+
+impl<'a> AsyncConcreteCommandB<'a> {
+    fn new(receiver: &'a AsyncReceiver) -> Self {
+        AsyncConcreteCommandB { receiver }
+    }
+}
+
+#[async_trait]
+impl<'a> AsyncCommand for AsyncConcreteCommandB<'a> {
+    async fn execute_async(&self) {
+        self.receiver.async_action_b().await;
+    }
+    
+    async fn undo_async(&self) {
+        self.receiver.async_undo_action_b().await;
+    }
+}
+
+// 异步调用者
+struct AsyncInvoker<'a> {
+    commands: Vec<Box<dyn AsyncCommand + Send + Sync + 'a>>,
+}
+
+impl<'a> AsyncInvoker<'a> {
+    fn new() -> Self {
+        AsyncInvoker { commands: Vec::new() }
+    }
+    
+    fn add_command(&mut self, command: Box<dyn AsyncCommand + Send + Sync + 'a>) {
+        self.commands.push(command);
+    }
+    
+    async fn execute_all_async(&self) {
+        let mut futures = Vec::new();
+        for command in &self.commands {
+            futures.push(command.execute_async());
+        }
+        futures::future::join_all(futures).await;
+    }
+    
+    async fn undo_all_async(&self) {
+        let mut futures = Vec::new();
+        for command in self.commands.iter().rev() {
+            futures.push(command.undo_async());
+        }
+        futures::future::join_all(futures).await;
+    }
+}
+
+#[tokio::main]
+async fn main() {
+    let receiver = AsyncReceiver::new("异步接收者".to_string());
+    
+    let mut invoker = AsyncInvoker::new();
+    invoker.add_command(Box::new(AsyncConcreteCommandA::new(&receiver)));
+    invoker.add_command(Box::new(AsyncConcreteCommandB::new(&receiver)));
+    
+    println!("异步执行所有命令:");
+    invoker.execute_all_async().await;
+    
+    println!("\n异步撤销所有命令:");
+    invoker.undo_all_async().await;
+}
+```
+
+### 泛型命令模式
+
+```rust
+// 泛型命令trait
+trait GenericCommand<T> {
+    fn execute(&self, data: T) -> T;
+    fn undo(&self, data: T) -> T;
+}
+
+// 泛型接收者
+struct GenericReceiver<T> {
+    name: String,
+    _phantom: std::marker::PhantomData<T>,
+}
+
+impl<T> GenericReceiver<T> {
+    fn new(name: String) -> Self {
+        GenericReceiver {
+            name,
+            _phantom: std::marker::PhantomData,
+        }
+    }
+}
+
+// 泛型具体命令
+struct GenericConcreteCommand<T> {
+    receiver: GenericReceiver<T>,
+}
+
+impl<T> GenericConcreteCommand<T> {
+    fn new(receiver: GenericReceiver<T>) -> Self {
+        GenericConcreteCommand { receiver }
+    }
+}
+
+impl<T: Clone> GenericCommand<T> for GenericConcreteCommand<T> {
+    fn execute(&self, data: T) -> T {
+        println!("GenericConcreteCommand({}): 执行命令", self.receiver.name);
+        data
+    }
+    
+    fn undo(&self, data: T) -> T {
+        println!("GenericConcreteCommand({}): 撤销命令", self.receiver.name);
+        data
+    }
+}
+
+// 泛型调用者
+struct GenericInvoker<T> {
+    commands: Vec<Box<dyn GenericCommand<T>>>,
+}
+
+impl<T> GenericInvoker<T> {
+    fn new() -> Self {
+        GenericInvoker { commands: Vec::new() }
+    }
+    
+    fn add_command(&mut self, command: Box<dyn GenericCommand<T>>) {
+        self.commands.push(command);
+    }
+    
+    fn execute_all(&self, data: T) -> T {
+        let mut result = data;
+        for command in &self.commands {
+            result = command.execute(result);
+        }
+        result
+    }
+    
+    fn undo_all(&self, data: T) -> T {
+        let mut result = data;
+        for command in self.commands.iter().rev() {
+            result = command.undo(result);
+        }
+        result
+    }
+}
+
+fn main() {
+    // 字符串类型命令
+    let receiver_string = GenericReceiver::<String>::new("字符串接收者".to_string());
+    let mut invoker_string = GenericInvoker::new();
+    invoker_string.add_command(Box::new(GenericConcreteCommand::new(receiver_string)));
+    
+    let result_string = invoker_string.execute_all("hello".to_string());
+    println!("字符串结果: {}", result_string);
+    
+    // 数字类型命令
+    let receiver_number = GenericReceiver::<i32>::new("数字接收者".to_string());
+    let mut invoker_number = GenericInvoker::new();
+    invoker_number.add_command(Box::new(GenericConcreteCommand::new(receiver_number)));
+    
+    let result_number = invoker_number.execute_all(42);
+    println!("数字结果: {}", result_number);
+}
+```
+
+## 测试验证
+
+```rust
+#[cfg(test)]
+mod tests {
+    use super::*;
+    
+    #[test]
+    fn test_basic_command() {
+        let receiver = Receiver::new("测试接收者".to_string());
+        let command = ConcreteCommandA::new(&receiver);
+        
+        command.execute();
+        command.undo();
+    }
+    
+    #[test]
+    fn test_command_queue() {
+        let receiver = Receiver::new("队列接收者".to_string());
+        let mut queue = CommandQueue::new();
+        
+        queue.enqueue(Box::new(ConcreteCommandA::new(&receiver)));
+        queue.enqueue(Box::new(ConcreteCommandB::new(&receiver)));
+        
+        assert_eq!(queue.queue_size(), 2);
+        queue.execute_next();
+        assert_eq!(queue.queue_size(), 1);
+    }
+    
+    #[test]
+    fn test_macro_command() {
+        let receiver = Receiver::new("宏命令接收者".to_string());
+        let mut macro_cmd = MacroCommand::new();
+        
+        macro_cmd.add_command(Box::new(ConcreteCommandA::new(&receiver)));
+        macro_cmd.add_command(Box::new(ConcreteCommandB::new(&receiver)));
+        
+        macro_cmd.execute();
+        macro_cmd.undo();
+    }
+    
+    #[test]
+    fn test_generic_command() {
+        let receiver = GenericReceiver::<String>::new("泛型接收者".to_string());
+        let command = GenericConcreteCommand::new(receiver);
+        
+        let result = command.execute("test".to_string());
+        assert_eq!(result, "test");
+    }
+    
+    #[tokio::test]
+    async fn test_async_command() {
+        let receiver = AsyncReceiver::new("异步接收者".to_string());
+        let command = AsyncConcreteCommandA::new(&receiver);
+        
+        command.execute_async().await;
+        command.undo_async().await;
+    }
+}
+```
+
+## 形式化验证
+
+- 验证命令封装的正确性
+- 检查命令执行的完整性
+- 验证命令队列的管理逻辑
+- 检查宏命令的组合正确性
+- 验证异步命令的并发安全
+- 检查泛型命令的类型安全
+- 验证撤销操作的正确性
+
+## 性能与最佳实践
+
+1. **命令封装**: 将请求封装为对象，支持参数化
+2. **队列管理**: 支持命令排队和批量执行
+3. **撤销支持**: 提供撤销操作的能力
+4. **异步执行**: 支持异步命令执行
+5. **类型安全**: 泛型命令确保类型安全
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

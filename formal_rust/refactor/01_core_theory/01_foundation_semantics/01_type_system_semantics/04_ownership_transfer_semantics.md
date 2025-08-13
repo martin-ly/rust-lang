@@ -1,4 +1,4 @@
-﻿# Rust所有权转移语义
+﻿# Rust所有权移动语义
 
 **文档编号**: RFTS-01-OTS  
 **版本**: 1.0  
@@ -9,12 +9,12 @@
 
 ## 目录
 
-- [Rust所有权转移语义](#rust所有权转移语义)
+- [Rust所有权移动语义](#rust所有权移动语义)
   - [目录](#目录)
-  - [1. 所有权转移理论基础](#1-所有权转移理论基础)
-    - [1.1 所有权转移语义模型](#11-所有权转移语义模型)
+  - [1. 所有权移动理论基础](#1-所有权移动理论基础)
+    - [1.1 所有权移动语义模型](#11-所有权移动语义模型)
     - [1.2 线性类型理论基础](#12-线性类型理论基础)
-  - [2. Rust所有权转移机制](#2-rust所有权转移机制)
+  - [2. Rust所有权移动机制](#2-rust所有权移动机制)
     - [2.1 移动语义](#21-移动语义)
     - [2.2 复制语义](#22-复制语义)
     - [2.3 借用语义](#23-借用语义)
@@ -28,19 +28,19 @@
     - [5.1 RAII模式](#51-raii模式)
   - [总结](#总结)
 
-## 1. 所有权转移理论基础
+## 1. 所有权移动理论基础
 
-### 1.1 所有权转移语义模型
+### 1.1 所有权移动语义模型
 
-**定义 1.1** (所有权转移)  
-所有权转移是一个三元组 $OT = (O, S, T)$，其中：
+**定义 1.1** (所有权移动)  
+所有权移动是一个三元组 $OT = (O, S, T)$，其中：
 
 - $O$ 是所有权状态集合
 - $S$ 是存储位置集合
-- $T: O × S → O × S$ 是转移函数
+- $T: O × S → O × S$ 是移动函数
 
-**定理 1.1** (所有权转移正确性)  
-对于任意所有权转移操作，以下性质成立：
+**定理 1.1** (所有权移动正确性)  
+对于任意所有权移动操作，以下性质成立：
 
 1. **唯一性**: $∀s ∈ S, |owners(s)| ≤ 1$
 2. **完整性**: $∀o ∈ O, transferred(o) ⟹ ¬accessible(o)$
@@ -52,7 +52,7 @@
 线性类型是满足以下约束的类型：
 $$LinearType(T) ≡ ∀x: T, use\_count(x) = 1$$
 
-**子结构规则限制**:
+**子结构体体体规则限制**:
 
 ```text
     Γ ⊢ e : T    T 线性类型
@@ -68,7 +68,7 @@ $$LinearType(T) ≡ ∀x: T, use\_count(x) = 1$$
     Γ, x: T ⊬ Γ
 ```
 
-## 2. Rust所有权转移机制
+## 2. Rust所有权移动机制
 
 ### 2.1 移动语义
 
@@ -97,7 +97,7 @@ impl Resource {
 fn demonstrate_move_semantics() {
     let resource1 = Resource::new(1, 1024);
     
-    // 所有权转移：resource1 -> resource2
+    // 所有权移动：resource1 -> resource2
     let resource2 = resource1; // Move发生
     
     // resource1 现在无效，以下代码会编译错误
@@ -106,14 +106,14 @@ fn demonstrate_move_semantics() {
     println!("Resource ID: {}", resource2.get_id()); // OK
 }
 
-// 函数参数的所有权转移
+// 函数参数的所有权移动
 fn take_ownership(resource: Resource) -> u64 {
     resource.get_id() // resource 在函数结束时被drop
 }
 
 fn transfer_through_function() {
     let resource = Resource::new(2, 2048);
-    let id = take_ownership(resource); // 所有权转移给函数
+    let id = take_ownership(resource); // 所有权移动给函数
     // resource 现在无效
     println!("Resource ID: {}", id);
 }
@@ -511,7 +511,7 @@ fn demonstrate_box_ownership() {
     // Box拥有堆上资源的所有权
     println!("Boxed resource ID: {}", boxed_value.get_id());
     
-    // 所有权可以转移
+    // 所有权可以移动
     let inner_value = boxed_value.into_inner();
     println!("Extracted resource ID: {}", inner_value.get_id());
     
@@ -625,9 +625,9 @@ RAII模式保证：
 
 ## 总结
 
-本文档建立了Rust所有权转移语义的完整理论体系，包括：
+本文档建立了Rust所有权移动语义的完整理论体系，包括：
 
-1. **理论基础**: 线性类型理论和所有权转移模型
+1. **理论基础**: 线性类型理论和所有权移动模型
 2. **核心机制**: 移动、复制、借用语义
 3. **生命周期**: 借用检查和作用域管理
 4. **智能指针**: Box、Rc等所有权抽象
@@ -640,4 +640,31 @@ RAII模式保证：
 *文档状态: 完成*  
 *版本: 1.0*  
 *字数: ~12KB*
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

@@ -1,0 +1,109 @@
+﻿# 03.05 控制流分析（Control Flow Analysis）
+
+---
+
+## 理论简述
+
+控制流分析（Control Flow Analysis, CFA）是编译器和静态分析工具用于理解程序执行路径、变量活跃性、不可达代码等的重要技术。Rust通过静态类型检查、借用检查和生命周期分析等机制，提升了控制流的安全和可分析性。相关理论详见[控制流分析理论](../../03_control_flow/05_control_flow_analysis.md)与[静态分析基础](../../22_performance_optimization/01_static_analysis.md)。
+
+---
+
+## 核心代码示例
+
+```rust
+fn main() {
+    let mut x = 0;
+    if x > 0 {
+        x += 1;
+    } else {
+        x -= 1;
+    }
+    // 控制流分析可判定x的所有可能取值
+
+    // 死代码示例
+    if false {
+        println!("这段代码永远不会执行");
+    }
+
+    // 变量活跃性分析
+    let y;
+    if x > 0 {
+        y = 1;
+    } else {
+        y = 2;
+    }
+    println!("y = {}", y); // y在所有分支都被初始化
+}
+```
+
+---
+
+## 详细注释
+
+- 控制流分析可发现死代码、未初始化变量、不可达分支等问题。
+- Rust编译器在编译期进行活跃性和借用分析，提升安全。
+- 变量必须在所有控制流路径上初始化，否则编译报错。
+
+---
+
+## 理论映射
+
+- 对应[控制流分析理论](../../03_control_flow/05_control_flow_analysis.md)
+- 静态分析基础见[22_performance_optimization/01_static_analysis.md](../../22_performance_optimization/01_static_analysis.md)
+- 类型系统与控制流见[02_type_system/01_formal_type_system.md](../../02_type_system/01_formal_type_system.md)
+
+---
+
+## 边界情况与常见错误
+
+- **边界情况**：
+  - 复杂嵌套分支、循环中的变量活跃性。
+  - 死代码和不可达分支。
+- **常见错误**：
+  - 变量未在所有分支初始化。
+  - 死代码未被发现，影响可维护性。
+  - 控制流分析遗漏导致安全隐患。
+
+---
+
+## FAQ
+
+- **Q: Rust如何保证控制流安全？**
+  - A: 通过静态类型检查、借用检查和活跃性分析，防止未初始化变量和死代码。
+- **Q: 控制流分析常见应用场景？**
+  - A: 编译器优化、静态分析工具、代码安全审计等。
+- **Q: 如何定位控制流相关的编译错误？**
+  - A: 检查变量初始化、分支覆盖和死代码提示，参考编译器输出。
+
+---
+
+（本示例可直接用`rustc`编译验证，理论与代码一一对应，便于教学与自动化校验。）
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

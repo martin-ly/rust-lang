@@ -28,7 +28,7 @@
   - [3.2.1.4 Future组合器语义](#3214-future组合器语义)
     - [3.2.1.4.1 基础组合器](#32141-基础组合器)
     - [3.2.1.4.2 并发组合器](#32142-并发组合器)
-  - [3.2.1.5 Pin与自引用结构](#3215-pin与自引用结构)
+  - [3.2.1.5 Pin与自引用结构体体体](#3215-pin与自引用结构体体体)
     - [3.2.1.5.1 Pin语义模型](#32151-pin语义模型)
     - [3.2.1.5.2 Unpin特征语义](#32152-unpin特征语义)
   - [3.2.1.6 异步生命周期与借用检查](#3216-异步生命周期与借用检查)
@@ -37,7 +37,7 @@
   - [3.2.1.7 错误处理与异步语义](#3217-错误处理与异步语义)
     - [3.2.1.7.1 Result\<T, E\>在异步中的语义](#32171-resultt-e在异步中的语义)
     - [3.2.1.7.2 try块与异步语义](#32172-try块与异步语义)
-  - [3.2.1.8 性能特性与优化](#3218-性能特性与优化)
+  - [3.2.1.8 性能特征与优化](#3218-性能特征与优化)
     - [3.2.1.8.1 零成本抽象验证](#32181-零成本抽象验证)
     - [3.2.1.8.2 内存使用优化](#32182-内存使用优化)
   - [3.2.1.9 跨引用网络](#3219-跨引用网络)
@@ -65,7 +65,7 @@ $$\text{Future}\langle T \rangle = \langle S, s_0, \delta, F, \text{output} \ran
 
 - $S$: 状态集合
 - $s_0 \in S$: 初始状态  
-- $\delta: S \times \text{Context} \rightarrow S$: 状态转移函数
+- $\delta: S \times \text{Context} \rightarrow S$: 状态移动函数
 - $F \subseteq S$: 终止状态集合
 - $\text{output}: F \rightarrow \text{Poll}\langle T \rangle$: 输出函数
 
@@ -79,7 +79,7 @@ $$\text{Poll}\langle T \rangle = \text{Ready}(T) + \text{Pending}$$
 trait Future {
     type Output;
     
-    // 核心语义：状态转移函数
+    // 核心语义：状态移动函数
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
 }
 
@@ -310,7 +310,7 @@ fn context_semantics_example() {
 ### 3.2.1.4.1 基础组合器
 
 **定义 3.2.1.5** (Future组合器代数)
-Future组合器构成一个代数结构：
+Future组合器构成一个代数结构体体体：
 
 1. **map**: $\text{map}: \text{Future}\langle A \rangle \times (A \rightarrow B) \rightarrow \text{Future}\langle B \rangle$
 2. **and_then**: $\text{and\_then}: \text{Future}\langle A \rangle \times (A \rightarrow \text{Future}\langle B \rangle) \rightarrow \text{Future}\langle B \rangle$
@@ -461,7 +461,7 @@ where
 
 ---
 
-## 3. 2.1.5 Pin与自引用结构
+## 3. 2.1.5 Pin与自引用结构体体体
 
 ### 3.2.1.5.1 Pin语义模型
 
@@ -509,10 +509,10 @@ impl SelfReferential {
 ### 3.2.1.5.2 Unpin特征语义
 
 **定义 3.2.1.7** (Unpin语义分类)
-类型根据移动安全性分为两类：
+类型根据移动安全分为两类：
 
 - **Unpin类型**: 可以安全移动的类型
-- **!Unpin类型**: 不能移动的类型(如自引用结构)
+- **!Unpin类型**: 不能移动的类型(如自引用结构体体体)
 
 ```mermaid
 graph TB
@@ -689,7 +689,7 @@ async fn try_block_semantics() -> Result<i32, MyError> {
 
 ---
 
-## 3. 2.1.8 性能特性与优化
+## 3. 2.1.8 性能特征与优化
 
 ### 3.2.1.8.1 零成本抽象验证
 
@@ -915,4 +915,31 @@ impl<T> BatchProcessor<T> {
 ---
 
 > **链接网络**: [异步编程语义索引](00_async_programming_semantics_index.md) | [并发语义层总览](../00_concurrency_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md)
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

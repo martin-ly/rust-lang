@@ -1,4 +1,4 @@
-# 01. 泛型导论 (Introduction to Generics)
+﻿# 01. 泛型导论 (Introduction to Generics)
 
 ## 目录
 
@@ -9,7 +9,7 @@
   - [1.3. 实践：为何及如何使用泛型？](#13-实践为何及如何使用泛型)
   - [1.4. 编译时机制：单态化 (Monomorphization)](#14-编译时机制单态化-monomorphization)
 
-泛型 (Generics) 是 Rust 类型系统的基石之一，它赋予了开发者编写灵活、抽象且可重用代码的能力，同时维持编译时的类型安全。通过泛型，我们可以编写出不依赖于任何具体类型的函数、结构体和 trait，这些代码结构能够"通用地"处理多种数据类型。
+泛型 (Generics) 是 Rust 类型系统的基石之一，它赋予了开发者编写灵活、抽象且可重用代码的能力，同时维持编译时的类型安全。通过泛型，我们可以编写出不依赖于任何具体类型的函数、结构体体体体和 trait，这些代码结构体体体能够"通用地"处理多种数据类型。
 
 ## 1.1. 核心概念：什么是泛型？
 
@@ -17,7 +17,7 @@
 
 **基础定义**:
 
-- **泛型类型 (Generic Type)**: 在定义结构体或枚举时使用的占位符类型。
+- **泛型类型 (Generic Type)**: 在定义结构体体体体或枚举时使用的占位符类型。
 
     ```rust
     // `T` 是一个泛型类型参数，Point 可以是任何类型的点
@@ -45,7 +45,7 @@
 - **对象 (Objects)**: 是具体的类型，如 `i32`, `String`, `MyStruct`。
 - **态射 (Morphisms)**: 是类型之间的函数或映射。
 
-一个泛型函数，如 `fn identity<T>(value: T) -> T`，可以被看作是定义了一族无穷多的态射。对于范畴中的每一个对象（类型）`T`，这个泛型定义了一个从 `T` 到 `T` 的恒等态射 (identity morphism)。同样，一个泛型结构体 `Wrapper<T>` 定义了一个从任意类型 `T` 到新类型 `Wrapper<T>` 的映射，这在范畴论中被称为**类型构造器 (Type Constructor)**。
+一个泛型函数，如 `fn identity<T>(value: T) -> T`，可以被看作是定义了一族无穷多的态射。对于范畴中的每一个对象（类型）`T`，这个泛型定义了一个从 `T` 到 `T` 的恒等态射 (identity morphism)。同样，一个泛型结构体体体体 `Wrapper<T>` 定义了一个从任意类型 `T` 到新类型 `Wrapper<T>` 的映射，这在范畴论中被称为**类型构造器 (Type Constructor)**。
 
 这种视角揭示了泛型的本质：它不是关于某一个具体类型，而是关于**类型之间的关系和转换**。它允许我们在一个更高的抽象层次上推理代码的行为，确保其在所有适用类型上都拥有一致的、可证明的属性。
 
@@ -113,3 +113,30 @@ Rust 的泛型是**零成本抽象**。这是通过在编译时进行**单态化
 
 - **下一章 ->** `02_generic_type_parameters.md`: 深入探讨类型参数。
 - **返回目录 ->** `_index.md`
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

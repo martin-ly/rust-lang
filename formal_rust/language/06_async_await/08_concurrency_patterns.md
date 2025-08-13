@@ -1,4 +1,4 @@
-# Rust 异步并发模式与消息传递 {#并发模式}
+﻿# Rust 异步并发模式与消息传递 {#并发模式}
 
 **模块编号**: 06-08  
 **主题**: Actor模型、消息传递、流处理与背压  
@@ -58,7 +58,7 @@ Rust异步并发模式强调消息传递、无锁共享、流式处理与背压�
 
 - **Send/Sync trait**：类型系统静态保证跨线程安全。
 - **Arc/Mutex/RwLock**：安全共享状态。
-- **无锁并发**：crossbeam、lock-free结构。
+- **无锁并发**：crossbeam、lock-free结构体体体。
 
 ---
 
@@ -96,13 +96,13 @@ async fn process_stream<S: Stream<Item = Data> + Unpin>(mut s: S) {
   ∀Actor_i, Actor_j. i≠j ⇒ state(Actor_i) ⊥ state(Actor_j)
   ```
 
-- **定理 8.2 (背压安全性)**
+- **定理 8.2 (背压安全)**
 
   ```text
   ∀Stream. Backpressure(Stream) ⇒ ¬OOM
   ```
 
-- **定理 8.3 (Send/Sync安全性)**
+- **定理 8.3 (Send/Sync安全)**
 
   ```text
   ∀T: Send+Sync. SafeAcrossThreads(T)
@@ -120,3 +120,30 @@ async fn process_stream<S: Stream<Item = Data> + Unpin>(mut s: S) {
 ---
 
 > 本文档为Rust异步并发模式与消息传递的形式化索引，后续章节将递归细化各子主题。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

@@ -14,7 +14,7 @@
   - [1. 控制流理论基础](#1-控制流理论基础)
     - [1.1 控制流语义模型](#11-控制流语义模型)
     - [1.2 程序点语义](#12-程序点语义)
-  - [2. Rust控制结构语义](#2-rust控制结构语义)
+  - [2. Rust控制结构体体体语义](#2-rust控制结构体体体语义)
     - [2.1 条件分支语义](#21-条件分支语义)
     - [2.2 循环语义](#22-循环语义)
   - [3. 函数调用语义](#3-函数调用语义)
@@ -29,7 +29,7 @@
 控制流图是一个有向图 $CFG = (N, E, entry, exit)$，其中：
 
 - $N$ 是基本块节点集合
-- $E ⊆ N × N$ 是控制转移边集合
+- $E ⊆ N × N$ 是控制移动边集合
 - $entry ∈ N$ 是入口节点
 - $exit ∈ N$ 是出口节点
 
@@ -51,9 +51,9 @@ $$PP = (pc, locals, stack, heap)$$
 - $pc$ 是程序计数器
 - $locals$ 是局部变量状态
 - $stack$ 是调用栈状态  
-- $heap$ 是堆内存状态
+- $heap$ 是堆状态
 
-**转移关系**:
+**移动关系**:
 $$⟨stmt, σ⟩ → σ'$$
 
 基本语句的语义规则：
@@ -72,7 +72,7 @@ $$⟨stmt, σ⟩ → σ'$$
 ⟨e₁ op e₂, σ⟩ → eval(op, v₁, v₂)
 ```
 
-## 2. Rust控制结构语义
+## 2. Rust控制结构体体体语义
 
 ### 2.1 条件分支语义
 
@@ -189,7 +189,7 @@ struct ExecutionContext {
 ### 2.2 循环语义
 
 ```rust
-// 循环结构的形式化语义
+// 循环结构体体体的形式化语义
 enum Loop<T> {
     While {
         condition: Box<dyn Fn() -> bool>,
@@ -282,7 +282,7 @@ impl LoopInvariant {
 ```
 
 **定理 2.2** (循环语义正确性)  
-对于循环结构：
+对于循环结构体体体：
 
 1. **终止性**: 所有循环都有终止条件
 2. **不变量保持**: 循环不变量在整个执行过程中保持
@@ -429,4 +429,33 @@ struct WhereClause {
 
 *文档状态: 完成*  
 *版本: 1.0*
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

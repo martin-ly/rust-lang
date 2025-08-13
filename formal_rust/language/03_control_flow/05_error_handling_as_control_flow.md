@@ -1,4 +1,4 @@
-# 05. 作为控制流的错误处理 (Error Handling as Control Flow)
+﻿# 05. 作为控制流的错误处理 (Error Handling as Control Flow)
 
 在 Rust 中，错误处理并非传统意义上的异常（exceptions），而是一种显式的、由类型系统强制执行的控制流机制。`Option` 和 `Result` 这两个核心枚举类型，结合 `match` 和 `?` 运算符，构建了一套强大且安全的系统，用于引导程序在成功和失败路径之间流动。
 
@@ -96,14 +96,14 @@ fn read_username_from_file_concise() -> Result<String, io::Error> {
 
 ---
 
-## 批判性分析（未来展望）
+## 批判性分析（未来值值值展望）
 
-* Rust 错误处理与控制流集成未来可在自动化分析、工程实践和生态协作等方面持续优化。
+* Rust 错误处理与控制流集成未来值值值可在自动化分析、工程实践和生态协作等方面持续优化。
 
 * 随着系统复杂度提升，错误处理机制与控制流的深度集成将成为提升系统健壮性和开发效率的关键。
 * 社区和生态对错误处理与控制流集成的标准化、自动化工具和最佳实践的支持仍有较大提升空间。
 
-## 典型案例（未来展望）
+## 典型案例（未来值值值展望）
 
 * 开发自动化错误处理与控制流分析工具，提升大型项目的可维护性。
 
@@ -117,3 +117,32 @@ fn read_username_from_file_concise() -> Result<String, io::Error> {
 * **上一章 ->** `04_functions_and_closures.md`
 * **下一章 ->** `06_advanced_control_flow.md`: 探讨异步和类型状态等高级控制流模式。
 * **返回目录 ->** `_index.md`
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

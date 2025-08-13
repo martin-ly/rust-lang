@@ -1,4 +1,4 @@
-# 验证理论基础
+﻿# 验证理论基础
 
 ## 目录
 
@@ -90,7 +90,7 @@ x ↦ v  // x指向值v
 
 - 每个值恰好被使用一次
 - 不能复制或丢弃
-- 支持显式的所有权转移
+- 支持显式的所有权移动
 
 ```rust
 // 线性类型示例
@@ -104,7 +104,7 @@ fn consume<T>(value: T) -> U {
 
 #### 3.1 静态验证
 
-**类型检查**: 编译时验证类型安全性
+**类型检查**: 编译时验证类型安全
 
 ```rust
 // 类型安全验证
@@ -113,7 +113,7 @@ fn type_safe_operation<T: Send>(data: T) -> impl Send {
 }
 ```
 
-**借用检查**: 验证内存安全性
+**借用检查**: 验证内存安全
 
 ```rust
 // 借用安全验证
@@ -462,3 +462,26 @@ fn conditional_verification(n: i32) -> i32 {
 **文档版本**: 1.0  
 **最后更新**: 2025-06-30  
 **维护者**: Rust形式化验证工作组
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

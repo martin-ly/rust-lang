@@ -189,8 +189,8 @@ $$\text{Deallocate}(m, addr) = m \setminus \{addr\}$$
 
 $$\text{Ownership}(r, o) \iff \text{ExclusiveControl}(o, r) \land \text{Responsibility}(o, r)$$
 
-#### 定义 4.1.2 (所有权转移)
-所有权转移操作：
+#### 定义 4.1.2 (所有权移动)
+所有权移动操作：
 
 $$\text{Transfer}(o_1, o_2, r) \iff \text{Ownership}(r, o_1) \land \text{Ownership}(r, o_2) \land \neg \text{Ownership}(r, o_1)$$
 
@@ -214,7 +214,7 @@ $$\text{MutableBorrow}(r, b) \iff \text{Borrow}(r, b, \text{ReadWrite}) \land \t
 ### 4.3 生命周期
 
 #### 定义 4.3.1 (生命周期)
-生命周期是资源有效的时间范围：
+生命周期是资源有效的时间作用域：
 
 $$\text{Lifetime}(r) = [\text{Birth}(r), \text{Death}(r)]$$
 
@@ -240,7 +240,7 @@ Rust的所有权系统确保内存安全。
 
 **证明**:
 1. 所有权确保每个值只有一个所有者
-2. 借用规则确保访问的安全性
+2. 借用规则确保访问的安全
 3. 生命周期确保引用的有效性
 4. 因此Rust程序是内存安全的
 
@@ -398,3 +398,32 @@ mod separation_logic_tests {
 **维护者**: Rust语言形式化理论项目组  
 **最后更新**: 2025-01-27  
 **版本**: V1.0
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

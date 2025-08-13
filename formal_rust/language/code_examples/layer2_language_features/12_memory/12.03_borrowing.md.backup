@@ -1,0 +1,97 @@
+﻿# 12.03 借用（Borrowing）
+
+---
+
+## 理论简述
+
+借用是Rust所有权系统的核心机制，允许在不移动所有权的情况下安全访问数据。分为不可变借用（&T）和可变借用（&mut T），编译器通过借用检查器保证无数据竞争和悬垂引用。相关理论详见[借用系统理论](../../01_ownership_borrowing/02_borrowing_system.md)与[内存管理机制](../../11_memory_management/01_memory_management_theory.md)。
+
+---
+
+## 核心代码示例
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+    let r1 = &s; // 不可变借用
+    let r2 = &s; // 允许多个不可变借用
+    println!("r1 = {}, r2 = {}", r1, r2);
+    // let r3 = &mut s; // 编译错误：不可变借用和可变借用不能共存
+
+    let r4 = &mut s; // 可变借用，独占访问
+    r4.push_str(" world");
+    println!("r4 = {}", r4);
+}
+```
+
+---
+
+## 详细注释
+
+- 不可变借用（&T）允许多个同时存在。
+- 可变借用（&mut T）在同一作用域内只能有一个，且不能与不可变借用共存。
+- 借用规则防止数据竞争和悬垂引用。
+
+---
+
+## 理论映射
+
+- 对应[借用系统理论](../../01_ownership_borrowing/02_borrowing_system.md)
+- 内存管理机制见[11_memory_management/01_memory_management_theory.md](../../11_memory_management/01_memory_management_theory.md)
+- 借用检查器见[01_ownership_borrowing/04_borrow_checker.md](../../01_ownership_borrowing/04_borrow_checker.md)
+
+---
+
+## 边界情况与常见错误
+
+- **边界情况**：
+  - 嵌套借用、作用域交错。
+  - 可变借用与不可变借用的生命周期重叠。
+- **常见错误**：
+  - 同时存在可变和不可变借用。
+  - 可变借用超出作用域。
+  - 悬垂引用。
+
+---
+
+## FAQ
+
+- **Q: Rust借用和C++引用有何不同？**
+  - A: Rust借用有严格的生命周期和可变性检查，C++引用无此机制。
+- **Q: 如何解决借用相关编译错误？**
+  - A: 检查借用的作用域、可变性和生命周期。
+- **Q: 借用常见应用场景？**
+  - A: 函数参数传递、数据结构体体遍历、并发安全等。
+
+---
+
+（本示例可直接用`rustc`编译验证，理论与代码一一对应，便于教学与自动化校验。）
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

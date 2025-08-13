@@ -1,15 +1,15 @@
-# 04 移动语义与部分移动
+﻿# 04 移动语义与部分移动
 
 ## 概述
 
-本章系统梳理Rust的移动语义（Move Semantics）与部分移动（Partial Move）机制，分析其对资源管理、内存安全和性能的影响。通过理论分析与代码示例，帮助读者理解Rust如何高效且安全地转移资源所有权。
+本章系统梳理Rust的移动语义（Move Semantics）与部分移动（Partial Move）机制，分析其对资源管理、内存安全和性能的影响。通过理论分析与代码示例，帮助读者理解Rust如何高效且安全地移动资源所有权。
 
 ## 理论基础
 
-- 移动语义的定义与所有权转移
+- 移动语义的定义与所有权移动
 - Copy与非Copy类型的区别
-- 部分移动与结构体字段所有权
-- Drop特性与资源释放
+- 部分移动与结构体体体体字段所有权
+- Drop特征与资源释放
 
 ## 核心机制
 
@@ -29,7 +29,7 @@ let y = x; // i32实现Copy，x和y都有效
 println!("x = {}, y = {}", x, y);
 ```
 
-### 3. 部分移动（结构体字段）
+### 3. 部分移动（结构体体体体字段）
 
 ```rust
 struct Pair { a: String, b: String }
@@ -38,7 +38,7 @@ let Pair { a, b: _ } = pair; // a被移动，pair.b失效
 // println!("{}", pair.b); // 编译错误
 ```
 
-### 4. Drop特性与资源释放
+### 4. Drop特征与资源释放
 
 ```rust
 struct Resource;
@@ -53,15 +53,15 @@ let r = Resource; // r超出作用域时自动调用drop
 ## 批判性分析
 
 - 移动语义避免了双重释放和悬垂指针，但对初学者有一定理解门槛
-- 部分移动提升了结构体的灵活性，但需注意剩余字段的可用性
-- Drop特性自动释放资源，减少内存泄漏风险，但需避免循环引用
+- 部分移动提升了结构体体体体的灵活性，但需注意剩余字段的可用性
+- Drop特征自动释放资源，减少内存泄漏风险，但需避免循环引用
 
 ## FAQ
 
 - 什么是移动语义？
-  - 所有权从一个变量转移到另一个变量，原变量失效。
+  - 所有权从一个变量移动到另一个变量，原变量失效。
 - Copy和Move有何区别？
-  - Copy类型按位复制，原变量依然有效；Move类型转移所有权，原变量失效。
+  - Copy类型按位复制，原变量依然有效；Move类型移动所有权，原变量失效。
 - 如何避免部分移动导致的未初始化字段？
   - 可用Option包裹字段，或实现自定义Drop逻辑。
 
@@ -74,3 +74,30 @@ let r = Resource; // r超出作用域时自动调用drop
 ## 总结
 
 Rust通过移动语义和部分移动机制，实现了高效且安全的资源管理。理解这些机制有助于编写健壮、无悬垂指针和内存泄漏的Rust代码。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

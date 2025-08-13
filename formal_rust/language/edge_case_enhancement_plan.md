@@ -1,4 +1,4 @@
-# 复杂场景与边界情况补充推进计划（见CRITICAL_EVALUATION_REPORT.md 持续优化方向4）
+﻿# 复杂场景与边界情况补充推进计划（见CRITICAL_EVALUATION_REPORT.md 持续优化方向4）
 
 ## 一、现状分析
 
@@ -37,7 +37,7 @@
 ## 六、理论分析
 
 - 形式化描述边界场景的理论基础
-- 证明边界情况下安全性/一致性
+- 证明边界情况下安全/一致性
 
 ## 七、自动化测试脚本与覆盖率报告
 
@@ -48,3 +48,32 @@
 ## 八、交叉引用
 
 - 见 edge_case_library.md、theory_practice_mapping.md、toolchain_optimization_plan.md
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

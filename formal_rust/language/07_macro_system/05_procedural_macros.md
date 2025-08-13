@@ -1,4 +1,4 @@
-# 过程宏理论
+﻿# 过程宏理论
 
 ## 1. 过程宏类型
 
@@ -48,9 +48,9 @@ pub fn my_attr(_attr: TokenStream, item: TokenStream) -> TokenStream {
 ## 6. 批判性分析
 
 - 过程宏功能强大但调试难度高，需谨慎设计
-- 未来可提升IDE集成与安全性分析能力
+- 未来值值值可提升IDE集成与安全分析能力
 
-## 7. 安全性与自动化测试
+## 7. 安全与自动化测试
 
 - 过程宏建议结合macrotest/trybuild进行自动化测试，防止展开回归
 - 错误处理应返回Span定位，便于开发者定位问题
@@ -67,6 +67,33 @@ pub fn enum_display(input: TokenStream) -> TokenStream {
 }
 ```
 
-## 9. 未来展望（补充）
+## 9. 未来值值值展望（补充）
 
-- 过程宏IDE集成、静态分析与安全性工具将成为主流
+- 过程宏IDE集成、静态分析与安全工具将成为主流
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

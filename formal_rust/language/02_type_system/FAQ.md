@@ -1,4 +1,4 @@
-# 常见问题解答 (FAQ)
+﻿# 常见问题解答 (FAQ)
 
 本页旨在回答一些关于 Rust 类型系统的常见或深刻的问题。
 
@@ -42,7 +42,7 @@
 
 ### Q3: `as` 和 `From`/`Into` 之间有什么本质区别？
 
-**A3:** 主要区别在于 **安全性和意图**。
+**A3:** 主要区别在于 **安全和意图**。
 
 - **`From`/`Into`**:
   - **安全**: `From/Into` Trait 用于定义 **有意义的、值到值的、保证成功的** 转换。它是一种类型安全的转换契约。
@@ -57,3 +57,30 @@
   - **用途**: `as` 主要是为底层系统编程准备的"最后手段"，用于与硬件、FFI 交互或执行无法通过安全抽象表达的转换。
 
 **总结**: 优先使用 `From/Into` (或 `TryFrom/TryInto`)。只有在绝对必要且完全理解其后果的情况下，才使用 `as`。在代码审查中，`as` 的出现通常需要特别的理由。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

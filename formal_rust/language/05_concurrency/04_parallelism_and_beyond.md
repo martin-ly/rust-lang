@@ -1,4 +1,4 @@
-# 第 4 章：并行计算与生态系统
+﻿# 第 4 章：并行计算与生态系统
 
 - [第 4 章：并行计算与生态系统](#第-4-章并行计算与生态系统)
   - [1. 并发 (Concurrency) vs. 并行 (Parallelism)](#1-并发-concurrency-vs-并行-parallelism)
@@ -92,7 +92,7 @@ Rayon 的高性能得益于其底层的**工作窃取调度器**。
 
 ### 3.1. `crossbeam`: 更强大的通道与工具
 
-`crossbeam` 是一个提供了多种高效并发数据结构和算法的库。
+`crossbeam` 是一个提供了多种高效并发数据结构体体体和算法的库。
 
 - **无界/有界通道**: 它提供了比标准库 `mpsc` 功能更强大的通道，支持多生产者、多消费者 (MPMC)，并且在许多基准测试中性能更高。
 - **原子操作工具**: 提供了如 `AtomicCell` 等方便的原子类型。
@@ -118,7 +118,7 @@ Rayon 的高性能得益于其底层的**工作窃取调度器**。
 
 ### 4.2. "无畏"的边界
 
-Rayon 和其他库极大地扩展了"无畏并发"的边界。对于数据并行这类高度结构化的问题，它们几乎完全消除了并发编程的复杂性。
+Rayon 和其他库极大地扩展了"无畏并发"的边界。对于数据并行这类高度结构体体体化的问题，它们几乎完全消除了并发编程的复杂性。
 
 然而，"无畏"并非"无思"。开发者仍然需要理解其代码的并行潜力。一个本质上是顺序的算法，无论如何使用 Rayon 也无法获得加速。此外，对于小任务量的计算，并行化引入的调度开销甚至可能超过其带来的收益。性能分析和基准测试仍然是不可或缺的。
 
@@ -134,3 +134,32 @@ Rust 的并发故事远不止于标准库。通过像 Rayon 这样的第三方�
 - **上一章 ->** `03_synchronization_primitives.md`
 - **下一章 ->** `05_advanced_topics_and_summary.md`: 高级主题与本分册总结。
 - **返回目录 ->** `_index.md`
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

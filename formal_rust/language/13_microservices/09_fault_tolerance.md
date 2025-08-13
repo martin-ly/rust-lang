@@ -1,4 +1,4 @@
-# 容错与恢复
+﻿# 容错与恢复
 
 ## 1. 熔断与重试机制
 
@@ -12,7 +12,7 @@
 
 ## 3. 故障检测与恢复
 
-- 健康检查、自动故障转移
+- 健康检查、自动故障移动
 - 日志与监控辅助定位
 
 ## 4. 工程案例
@@ -23,7 +23,36 @@ use tower::retry::Retry;
 // 伪代码：定义重试策略，包裹服务调用
 ```
 
-## 5. 批判性分析与未来展望
+## 5. 批判性分析与未来值值值展望
 
 - 容错机制提升系统鲁棒性，但过度重试与降级需权衡业务影响
-- 未来可探索自动化故障检测与智能容错恢复
+- 未来值值值可探索自动化故障检测与智能容错恢复
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

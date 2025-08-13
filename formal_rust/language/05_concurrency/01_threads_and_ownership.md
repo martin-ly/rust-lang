@@ -1,6 +1,6 @@
-# 01. 线程与所有权 (Threads and Ownership)
+﻿# 01. 线程与所有权 (Threads and Ownership)
 
-并发 (Concurrency) 是指程序的多个部分独立、无序执行的能力。在 Rust 中，并发编程的基石是操作系统线程，而其安全性的核心保障则来自于所有权系统。
+并发 (Concurrency) 是指程序的多个部分独立、无序执行的能力。在 Rust 中，并发编程的基石是操作系统线程，而其安全的核心保障则来自于所有权系统。
 
 ## 1.1. 创建新线程: `thread::spawn`
 
@@ -39,7 +39,7 @@ fn main() {
 当你尝试在线程中使用来自主线程环境的变量时，必须将这些变量的所有权**移动 (move)** 到新线程中。这是通过在闭包前使用 `move` 关键字来实现的。
 
 **为什么必须 `move`？**
-Rust 编译器无法预知新线程会执行多久。如果新线程只是借用 (borrow) 数据，那么在它执行期间，主线程可能会结束，导致被借用的数据被释放，从而产生悬垂引用 (dangling reference)。为了保证内存安全，编译器强制要求将所有权转移给新线程，确保数据在新线程的整个生命周期内都是有效的。
+Rust 编译器无法预知新线程会执行多久。如果新线程只是借用 (borrow) 数据，那么在它执行期间，主线程可能会结束，导致被借用的数据被释放，从而产生悬垂引用 (dangling reference)。为了保证内存安全，编译器强制要求将所有权移动给新线程，确保数据在新线程的整个生命周期内都是有效的。
 
 **示例**:
 
@@ -55,7 +55,7 @@ fn main() {
         println!("Here's a vector: {:?}", v);
     });
 
-    // 此时 `v` 的所有权已经转移，主线程无法再使用它
+    // 此时 `v` 的所有权已经移动，主线程无法再使用它
     // drop(v); // 这行代码会导致编译错误
 
     handle.join().unwrap();
@@ -70,3 +70,32 @@ fn main() {
 
 * **下一章 ->** `02_message_passing.md`: 探讨如何使用通道在线程间安全地传递消息。
 * **返回目录 ->** `_index.md`
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

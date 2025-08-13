@@ -1,0 +1,62 @@
+﻿# 4.3.1 事件总线与发布订阅模式
+
+## 元数据
+
+- 更新时间：2025-02-01
+- 相关主题：事件总线、发布订阅、消息驱动、解耦
+
+## 摘要
+
+本节介绍Rust生态下事件总线与发布订阅模式的原理、实现方式及其在分布式系统中的作用。
+
+## 详细内容
+
+- 事件总线与发布订阅的基本原理
+- Rust中主流事件总线/发布订阅库（如bus、event-bus等）
+- 发布订阅在微服务、模块解耦中的应用
+- 工程实现要点与典型案例
+
+## 批判性分析
+
+- Rust事件驱动生态与主流语言对比
+- 发布订阅模式的优缺点与适用边界
+- 事件风暴与系统复杂性管理
+
+## FAQ
+
+- Rust如何实现高效的事件总线？
+- 发布订阅模式适合哪些场景？
+- 如何避免事件风暴？
+
+## 交叉引用
+
+- [主流消息中间件在Rust中的应用](./4.3.2_主流消息中间件在Rust中的应用.md)
+- [微服务与分布式架构](../03_microservice_architecture.md)
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

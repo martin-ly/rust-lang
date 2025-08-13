@@ -1,8 +1,8 @@
-# 02 所有权系统正确性证明
+﻿# 02 所有权系统正确性证明
 
 ## 章节简介
 
-本章系统梳理Rust所有权系统的理论基础、形式化定义、核心定理与证明思路，涵盖所有权、借用、生命周期、内存安全、借用检查、资源自动管理等。通过分离逻辑、状态机等建模，给出安全性定理、推理过程与工程意义。
+本章系统梳理Rust所有权系统的理论基础、形式化定义、核心定理与证明思路，涵盖所有权、借用、生命周期、内存安全、借用检查、资源自动管理等。通过分离逻辑、状态机等建模，给出安全定理、推理过程与工程意义。
 
 ## 目录
 
@@ -31,7 +31,7 @@
   - 同一时刻只能有一个可变借用，或任意多个不可变借用。
   - 借用不能超出所有者的生命周期。
 
-> **安全性定理**：
+> **安全定理**：
 >
 > - 无悬垂指针：$\forall ref.\ valid(ref) \implies lifetime(ref) \leq lifetime(owner)$
 > - 无二次释放：$\forall v.\ released(v) \implies \neg access(v)$
@@ -46,8 +46,8 @@
 
 ## 4. Rust所有权正确性形式化思路
 
-- **形式化模型**：以状态机、类型系统或分离逻辑建模所有权转移与借用关系。
-- **安全性定理**：证明在所有权规则下，程序不会出现悬垂指针、二次释放等内存错误。
+- **形式化模型**：以状态机、类型系统或分离逻辑建模所有权移动与借用关系。
+- **安全定理**：证明在所有权规则下，程序不会出现悬垂指针、二次释放等内存错误。
 - **RustBelt/Iris**：采用分离逻辑与不变式，机械化证明Rust所有权模型的正确性。
 
 ## 5. 代码示例与工程意义
@@ -70,3 +70,32 @@ fn main() {
 1. Jung, R., Jourdan, J. H., Krebbers, R., & Dreyer, D. (2017). RustBelt: Securing the foundations of the Rust programming language. POPL 2018.
 2. Matsakis, N. D., & Klock, F. S. (2014). The Rust language. ACM SIGAda Ada Letters, 34(3), 103-104.
 3. Walker, D. (2005). Substructural type systems. In Advanced Topics in Types and Programming Languages, MIT Press.
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

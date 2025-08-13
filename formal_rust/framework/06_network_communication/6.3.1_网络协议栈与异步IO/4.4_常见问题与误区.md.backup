@@ -1,0 +1,73 @@
+﻿# 4.4 常见问题与误区
+
+## 元数据
+
+- 主题：网络协议栈与异步IO的常见问题与误区
+- 适用作用域：Rust网络开发、异步IO实践
+- 关键词：常见问题、误区、异步IO、Rust
+
+## 摘要
+
+本节梳理网络协议栈与异步IO在Rust开发中的常见问题与易犯误区，结合实际工程经验，给出分析与解决建议。
+
+## 1. 典型问题
+
+- async/await导致的性能瓶颈
+- 事件循环阻塞与任务饥饿
+- 资源泄漏与生命周期管理失误
+- 网络协议栈分层理解偏差
+
+## 2. 误区分析
+
+- 异步IO一定比同步快？
+- tokio与async-std能无缝切换？
+- 只用async/await就能高并发？
+- Rust异步生态已完全成熟？
+
+## 3. Rust工程实践建议
+
+- 正确认识异步IO的适用场景
+- 结合tokio/mio等库的最佳实践
+- 性能调优与监控建议
+
+## 4. FAQ常见问答
+
+- 为什么异步IO下CPU占用反而升高？
+- 如何避免资源泄漏？
+- Rust异步生态有哪些“坑”？
+
+## 5. 交叉引用
+
+- 参见“高性能网络服务架构”“异步编程模式”相关章节
+
+## 6. 扩展阅读
+
+- [Rust异步陷阱与调优](https://rust-lang.github.io/async-book/)
+- [Tokio常见问题解答](https://tokio.rs/faq)
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

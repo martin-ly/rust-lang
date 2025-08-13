@@ -1,4 +1,4 @@
-# Rust 中的型变概念
+﻿# Rust 中的型变概念
 
 ## 目录
 
@@ -23,7 +23,7 @@
     - [5.2 示例](#52-示例)
     - [5.3 实际应用](#53-实际应用)
   - [6. Rust 中的型变规则](#6-rust-中的型变规则)
-    - [6.1 常见类型的型变特性](#61-常见类型的型变特性)
+    - [6.1 常见类型的型变特征](#61-常见类型的型变特征)
     - [6.2 型变组合](#62-型变组合)
   - [7. 型变的实际意义](#7-型变的实际意义)
 
@@ -171,7 +171,7 @@ fn example() {
 
 ## 6. Rust 中的型变规则
 
-### 6.1 常见类型的型变特性
+### 6.1 常见类型的型变特征
 
 ```rust
 // 协变例子
@@ -211,3 +211,32 @@ struct Complex<T, U> {
 3. **不变**确保了可变状态的安全操作，防止通过类型转换导致的内存安全问题。
 
 通过理解和正确使用型变，我们可以设计出既灵活又安全的泛型系统。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

@@ -1,8 +1,8 @@
-# 特征对象与动态分发 (Trait Objects and Dynamic Dispatch)
+﻿# 特征对象与动态分发 (Trait Objects and Dynamic Dispatch)
 
 ## 摘要
 
-特征对象(Trait Objects)是 Rust 中实现运行时多态的主要机制，它允许代码以统一方式处理不同类型的值。本文探讨特征对象的理论基础、编译器实现、性能特性以及与静态分发的比较。
+特征对象(Trait Objects)是 Rust 中实现运行时多态的主要机制，它允许代码以统一方式处理不同类型的值。本文探讨特征对象的理论基础、编译器实现、性能特征以及与静态分发的比较。
 
 ## 理论基础
 
@@ -58,9 +58,9 @@ draw_shape(&circle);
 draw_shape(&square);
 ```
 
-### 2. 对象安全性
+### 2. 对象安全
 
-不是所有特征都可以用作特征对象，只有对象安全(Object Safe)的特征才可以。对象安全性的形式化定义包括以下条件：
+不是所有特征都可以用作特征对象，只有对象安全(Object Safe)的特征才可以。对象安全的形式化定义包括以下条件：
 
 - 所有方法都是分发的(dispatchable)：
   - 没有静态方法（没有 `Self` 类型的参数）
@@ -73,9 +73,9 @@ $$\forall m \in \text{methods}(T). \text{dispatchable}(m)$$
 
 ## 编译器实现
 
-### 1. 虚函数表(vtable)结构
+### 1. 虚函数表(vtable)结构体体体
 
-虚函数表是一种结构，包含指向实现类型的各个方法实现的函数指针。对于特征 $T$ 有方法 $\{m_1, m_2, ..., m_n\}$，vtable 是一个函数指针数组：
+虚函数表是一种结构体体体，包含指向实现类型的各个方法实现的函数指针。对于特征 $T$ 有方法 $\{m_1, m_2, ..., m_n\}$，vtable 是一个函数指针数组：
 
 $$\text{vtable}_T = [\text{drop}, \text{size}, \text{align}, \text{ptr}_{\text{impl}(m_1)}, \text{ptr}_{\text{impl}(m_2)}, ..., \text{ptr}_{\text{impl}(m_n)}]$$
 
@@ -116,11 +116,11 @@ call [rdx + offset]     ; 调用 vtable 中的方法，其中 offset 是方法�
    - 方法实现: $\text{load}(vtable\_ptr + \text{offset}_{method})$
    - 执行: $\text{call}(method\_impl, data\_ptr, args)$
 
-## 性能特性与权衡
+## 性能特征与权衡
 
 ### 1. 静态分发与动态分发比较
 
-| 特性 | 静态分发 (泛型) | 动态分发 (特征对象) |
+| 特征 | 静态分发 (泛型) | 动态分发 (特征对象) |
 |------|----------------|---------------------|
 | 编码时间 | 编译时 | 运行时 |
 | 内存布局 | 具体类型大小 | 胖指针 (16字节) |
@@ -147,7 +147,7 @@ call [rdx + offset]     ; 调用 vtable 中的方法，其中 offset 是方法�
 - 需要避免泛型代码的单态化带来的代码膨胀
 - 编译时不知道具体类型集合
 
-## 高级特性与模式
+## 高级特征与模式
 
 ### 1. 特征对象与生命周期
 
@@ -211,11 +211,11 @@ $$\text{erase}(T: Trait) \rightarrow \exists X. X: Trait$$
 
 $$\forall T. \text{ If } T: Trait_1 \text{ and } T: Trait_2 \text{ then } \text{dyn } Trait_1 <: \text{dyn } (Trait_1 + Trait_2)$$
 
-### 3. 安全性保证
+### 3. 安全保证
 
 特征对象的类型安全由编译器通过以下方式保证：
 
-1. 对象安全性检查（静态）
+1. 对象安全检查（静态）
 2. vtable 布局验证（静态）
 3. 类型标签检查（某些情况下的运行时）
 
@@ -238,3 +238,32 @@ $$\forall T. \text{ If } T: Trait_1 \text{ and } T: Trait_2 \text{ then } \text{
 6. Jung, R., Dang, H., Kang, J., & Dreyer, D. (2020). Stacked Borrows: An Aliasing Model for Rust. Proceedings of the ACM on Programming Languages.
 
 7. Rust RFC 0255: Object Safety. (2014). Retrieved from <https://github.com/rust-lang/rfcs/blob/master/text/0255-object-safety.md>
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

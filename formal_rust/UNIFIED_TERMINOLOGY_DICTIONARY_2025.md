@@ -1,10 +1,10 @@
-# Rust形式化理论项目统一术语词典 2025
+﻿# Rust形式化理论项目统一术语词典 2025
 
 ## 🎯 词典概述
 
 **版本**: v1.0 (基于批判性评估建立)  
 **制定日期**: 2025年1月27日  
-**适用范围**: 整个Rust形式化理论项目  
+**适用作用域**: 整个Rust形式化理论项目  
 **更新频率**: 月度更新与维护  
 **目标**: 解决术语使用不一致问题，建立标准化术语体系
 
@@ -18,12 +18,12 @@
 
 | 英文术语 | 标准中文翻译 | 定义 | 使用规范 |
 |----------|--------------|------|----------|
-| **ownership** | 所有权 | 变量对其值拥有独占控制权的机制 | 统一使用"所有权"，不使用"拥有权" |
-| **borrowing** | 借用 | 临时获取值的引用而不转移所有权的机制 | 统一使用"借用"，不使用"引用" |
+| **ownership** | 所有权 | 变量对其值拥有独占控制权的机制 | 统一使用"所有权"，不使用"所有权" |
+| **borrowing** | 借用 | 临时获取值的引用而不移动所有权的机制 | 统一使用"借用"，不使用"引用" |
 | **reference** | 引用 | 指向值的指针，分为可变引用和不可变引用 | 在借用上下文中使用"借用"，在指针上下文中使用"引用" |
-| **lifetime** | 生命周期 | 引用有效的时间范围 | 统一使用"生命周期"，不使用"生存期" |
+| **lifetime** | 生命周期 | 引用有效的时间作用域 | 统一使用"生命周期"，不使用"生命周期" |
 | **scope** | 作用域 | 变量或引用有效的代码区域 | 统一使用"作用域" |
-| **move** | 移动 | 将值的所有权从一个变量转移到另一个变量 | 统一使用"移动"，不使用"转移" |
+| **move** | 移动 | 将值的所有权从一个变量移动到另一个变量 | 统一使用"移动"，不使用"移动" |
 | **copy** | 复制 | 创建值的副本，原值保持不变 | 统一使用"复制" |
 | **clone** | 克隆 | 深度复制，创建完全独立的值副本 | 统一使用"克隆" |
 
@@ -31,13 +31,13 @@
 
 | 英文术语 | 标准中文翻译 | 定义 | 使用规范 |
 |----------|--------------|------|----------|
-| **trait** | 特征 | 定义共享行为的接口 | 统一使用"特征"，不使用"特性" |
-| **type** | 类型 | 值的分类和结构定义 | 统一使用"类型" |
+| **trait** | 特征 | 定义共享行为的接口 | 统一使用"特征"，不使用"特征" |
+| **type** | 类型 | 值的分类和结构体体体定义 | 统一使用"类型" |
 | **generic** | 泛型 | 可以处理多种类型的代码模板 | 统一使用"泛型" |
 | **impl** | 实现 | 为类型提供具体的行为实现 | 统一使用"实现" |
-| **struct** | 结构体 | 自定义复合数据类型 | 统一使用"结构体" |
+| **struct** | 结构体体体体 | 自定义复合数据类型 | 统一使用"结构体体体体" |
 | **enum** | 枚举 | 可以包含多个变体的类型 | 统一使用"枚举" |
-| **union** | 联合体 | 可以存储多种类型之一的数据结构 | 统一使用"联合体" |
+| **union** | 联合体体体体 | 可以存储多种类型之一的数据结构体体体 | 统一使用"联合体体体体" |
 | **type alias** | 类型别名 | 为现有类型创建新名称 | 统一使用"类型别名" |
 
 #### 1.3 内存管理
@@ -73,7 +73,7 @@
 |----------|--------------|------|----------|
 | **async** | 异步 | 非阻塞的编程模式 | 统一使用"异步" |
 | **await** | 等待 | 等待异步操作完成 | 统一使用"等待" |
-| **future** | 未来值 | 表示异步计算结果的类型 | 统一使用"未来值" |
+| **future** | 未来值值值值 | 表示异步计算结果的类型 | 统一使用"未来值值值值" |
 | **task** | 任务 | 异步执行的工作单元 | 统一使用"任务" |
 | **executor** | 执行器 | 调度和执行异步任务的组件 | 统一使用"执行器" |
 | **reactor** | 反应器 | 处理I/O事件的组件 | 统一使用"反应器" |
@@ -102,7 +102,7 @@
 | **derive macro** | 派生宏 | 自动实现特征的宏 | 统一使用"派生宏" |
 | **attribute macro** | 属性宏 | 修改项的宏 | 统一使用"属性宏" |
 | **function-like macro** | 函数式宏 | 类似函数调用的宏 | 统一使用"函数式宏" |
-| **hygiene** | 卫生性 | 宏展开时避免名称冲突的特性 | 统一使用"卫生性" |
+| **hygiene** | 卫生性 | 宏展开时避免名称冲突的特征 | 统一使用"卫生性" |
 
 ### 5. 模块系统
 
@@ -125,11 +125,11 @@
 |----------|--------------|------|----------|
 | **formal semantics** | 形式语义 | 编程语言的数学语义定义 | 统一使用"形式语义" |
 | **type theory** | 类型理论 | 研究类型系统的数学理论 | 统一使用"类型理论" |
-| **category theory** | 范畴论 | 研究数学结构的抽象理论 | 统一使用"范畴论" |
+| **category theory** | 范畴论 | 研究数学结构体体体的抽象理论 | 统一使用"范畴论" |
 | **monad** | 单子 | 函数式编程中的抽象概念 | 统一使用"单子" |
-| **functor** | 函子 | 保持结构的映射 | 统一使用"函子" |
+| **functor** | 函子 | 保持结构体体体的映射 | 统一使用"函子" |
 | **algebraic data type** | 代数数据类型 | 通过代数运算构造的数据类型 | 统一使用"代数数据类型" |
-| **pattern matching** | 模式匹配 | 根据数据结构形状进行匹配 | 统一使用"模式匹配" |
+| **pattern matching** | 模式匹配 | 根据数据结构体体体形状进行匹配 | 统一使用"模式匹配" |
 
 #### 6.2 证明理论
 
@@ -219,9 +219,9 @@ impl TerminologyChecker {
         standard_terms.insert("type".to_string(), "类型".to_string());
         standard_terms.insert("generic".to_string(), "泛型".to_string());
         standard_terms.insert("impl".to_string(), "实现".to_string());
-        standard_terms.insert("struct".to_string(), "结构体".to_string());
+        standard_terms.insert("struct".to_string(), "结构体体体体".to_string());
         standard_terms.insert("enum".to_string(), "枚举".to_string());
-        standard_terms.insert("union".to_string(), "联合体".to_string());
+        standard_terms.insert("union".to_string(), "联合体体体体".to_string());
         standard_terms.insert("stack".to_string(), "栈".to_string());
         standard_terms.insert("heap".to_string(), "堆".to_string());
         standard_terms.insert("memory safety".to_string(), "内存安全".to_string());
@@ -231,7 +231,7 @@ impl TerminologyChecker {
         standard_terms.insert("mutex".to_string(), "互斥锁".to_string());
         standard_terms.insert("async".to_string(), "异步".to_string());
         standard_terms.insert("await".to_string(), "等待".to_string());
-        standard_terms.insert("future".to_string(), "未来值".to_string());
+        standard_terms.insert("future".to_string(), "未来值值值值".to_string());
         standard_terms.insert("error".to_string(), "错误".to_string());
         standard_terms.insert("panic".to_string(), "恐慌".to_string());
         standard_terms.insert("Result".to_string(), "结果".to_string());
@@ -321,30 +321,30 @@ impl TerminologyChecker {
         
         // 定义可能的替代翻译
         let alternative_mappings = match english_term {
-            "trait" => vec!["特性"],
-            "ownership" => vec!["拥有权"],
+            "trait" => vec!["特征"],
+            "ownership" => vec!["所有权"],
             "borrowing" => vec!["引用"],
             "reference" => vec!["借用"],
-            "lifetime" => vec!["生存期"],
-            "move" => vec!["转移"],
-            "copy" => vec!["拷贝"],
-            "clone" => vec!["拷贝"],
+            "lifetime" => vec!["生命周期"],
+            "move" => vec!["移动"],
+            "copy" => vec!["复制"],
+            "clone" => vec!["复制"],
             "type" => vec!["类型"],
             "generic" => vec!["泛型"],
             "impl" => vec!["实现"],
-            "struct" => vec!["结构"],
+            "struct" => vec!["结构体体体"],
             "enum" => vec!["枚举"],
-            "union" => vec!["联合"],
+            "union" => vec!["联合体体体"],
             "stack" => vec!["栈"],
             "heap" => vec!["堆"],
-            "memory safety" => vec!["内存安全性"],
-            "concurrency" => vec!["并发性"],
-            "parallelism" => vec!["并行性"],
+            "memory safety" => vec!["内存安全"],
+            "concurrency" => vec!["并发"],
+            "parallelism" => vec!["并行"],
             "thread" => vec!["线程"],
-            "mutex" => vec!["互斥量"],
+            "mutex" => vec!["互斥锁"],
             "async" => vec!["异步"],
             "await" => vec!["等待"],
-            "future" => vec!["未来"],
+            "future" => vec!["未来值值值"],
             "error" => vec!["错误"],
             "panic" => vec!["恐慌"],
             "Result" => vec!["结果"],
@@ -362,7 +362,7 @@ impl TerminologyChecker {
             "theorem" => vec!["定理"],
             "performance" => vec!["性能"],
             "optimization" => vec!["优化"],
-            "safety" => vec!["安全性"],
+            "safety" => vec!["安全"],
             "verification" => vec!["验证"],
             _ => vec![],
         };
@@ -419,18 +419,18 @@ impl TerminologyFixer {
         let mut replacement_mappings = HashMap::new();
         
         // 定义需要替换的术语映射
-        replacement_mappings.insert("特性".to_string(), "特征".to_string());
-        replacement_mappings.insert("拥有权".to_string(), "所有权".to_string());
-        replacement_mappings.insert("生存期".to_string(), "生命周期".to_string());
-        replacement_mappings.insert("转移".to_string(), "移动".to_string());
-        replacement_mappings.insert("拷贝".to_string(), "复制".to_string());
-        replacement_mappings.insert("结构".to_string(), "结构体".to_string());
-        replacement_mappings.insert("联合".to_string(), "联合体".to_string());
-        replacement_mappings.insert("内存安全性".to_string(), "内存安全".to_string());
-        replacement_mappings.insert("并发性".to_string(), "并发".to_string());
-        replacement_mappings.insert("并行性".to_string(), "并行".to_string());
-        replacement_mappings.insert("互斥量".to_string(), "互斥锁".to_string());
-        replacement_mappings.insert("未来".to_string(), "未来值".to_string());
+        replacement_mappings.insert("特征".to_string(), "特征".to_string());
+        replacement_mappings.insert("所有权".to_string(), "所有权".to_string());
+        replacement_mappings.insert("生命周期".to_string(), "生命周期".to_string());
+        replacement_mappings.insert("移动".to_string(), "移动".to_string());
+        replacement_mappings.insert("复制".to_string(), "复制".to_string());
+        replacement_mappings.insert("结构体体体".to_string(), "结构体体体体".to_string());
+        replacement_mappings.insert("联合体体体".to_string(), "联合体体体体".to_string());
+        replacement_mappings.insert("内存安全".to_string(), "内存安全".to_string());
+        replacement_mappings.insert("并发".to_string(), "并发".to_string());
+        replacement_mappings.insert("并行".to_string(), "并行".to_string());
+        replacement_mappings.insert("互斥锁".to_string(), "互斥锁".to_string());
+        replacement_mappings.insert("未来值值值".to_string(), "未来值值值值".to_string());
         replacement_mappings.insert("选项".to_string(), "选项".to_string());
         replacement_mappings.insert("形式语义".to_string(), "形式语义".to_string());
         replacement_mappings.insert("类型理论".to_string(), "类型理论".tostring());
@@ -439,7 +439,7 @@ impl TerminologyFixer {
         replacement_mappings.insert("定理".to_string(), "定理".to_string());
         replacement_mappings.insert("性能".to_string(), "性能".to_string());
         replacement_mappings.insert("优化".to_string(), "优化".to_string());
-        replacement_mappings.insert("安全性".to_string(), "安全".to_string());
+        replacement_mappings.insert("安全".to_string(), "安全".to_string());
         replacement_mappings.insert("验证".to_string(), "验证".to_string());
         
         Self {
@@ -583,7 +583,7 @@ impl TerminologyFixer {
 
 **触发更新**:
 
-- 新语言特性引入
+- 新语言特征引入
 - 社区术语变化
 - 学术标准更新
 - 用户反馈建议
@@ -612,3 +612,46 @@ impl TerminologyFixer {
 **下次更新**: 2025年2月27日  
 
 �� **统一术语词典正式建立！** 🦀
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+
+## 技术背景
+
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+## 核心概念
+
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+## 技术实现
+
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+## 形式化分析
+
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+## 应用案例
+
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+## 性能分析
+
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+## 最佳实践
+
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+## 常见问题
+
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+## 未来值值展望
+
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n

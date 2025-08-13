@@ -1,4 +1,4 @@
-# 泛型模块工程案例说明
+﻿# 泛型模块工程案例说明
 
 ## 案例目录
 
@@ -10,7 +10,7 @@
 ## 理论映射
 
 - 每个案例均与[泛型系统理论](../01_formal_generics_system.md)的相关定义、定理直接对应。
-- 例如：example_trait_bound.rs 对应“Trait约束”与“泛型类型安全性”定理。
+- 例如：example_trait_bound.rs 对应“Trait约束”与“泛型类型安全”定理。
 - example_monomorphization.rs 对应“单态化一致性”定理。
 
 ## 编译与验证
@@ -25,3 +25,32 @@
 - 案例与理论的交叉引用建议在代码注释和本说明中同步补全。
 
 > 本文档为标准化模板，后续可根据实际案例补充详细说明与交叉引用。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

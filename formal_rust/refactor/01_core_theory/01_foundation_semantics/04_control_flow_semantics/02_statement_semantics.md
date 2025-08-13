@@ -88,7 +88,7 @@ $$\text{Execute}(s) = \text{step}(s) \rightarrow \text{action}$$
 
 1. 顺序执行
 2. 副作用处理
-3. 控制流转移
+3. 控制流移动
 
 ```mermaid
 graph TB
@@ -624,9 +624,9 @@ Rust语句语义模型提供了：
 1. **理论基础**: 严格的数学定义和语义规则
 2. **实现机制**: 完整的语句类型和执行模型
 3. **应用价值**: 代码生成、静态分析、优化等实际应用
-4. **前沿发展**: 异步语句、量子语义等高级特性
+4. **前沿发展**: 异步语句、量子语义等高级特征
 
-语句语义是控制流语义的核心组成部分，为Rust语言的安全性和表达能力提供了重要支撑。
+语句语义是控制流语义的核心组成部分，为Rust语言的安全和表达能力提供了重要支撑。
 
 ---
 
@@ -635,4 +635,31 @@ Rust语句语义模型提供了：
 - [表达式语义](01_expression_semantics.md)
 - [控制流语义](03_control_flow_semantics.md)
 - [内存模型语义](../02_memory_model_semantics/01_memory_layout_semantics.md)
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

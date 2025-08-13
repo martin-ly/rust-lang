@@ -1,0 +1,55 @@
+﻿# 并发模块交叉引用清单
+
+## 相关模块
+
+- [所有权与借用](../01_ownership_borrowing/00_index.md)
+- [类型系统](../02_type_system/00_index.md)
+- [内存管理](../11_memory_management/00_index.md)
+- [安全验证](../23_security_verification/00_index.md)
+
+## 相关概念
+
+- 互斥锁、原子操作、通道、数据竞争（见各案例）
+- 线程安全、同步、死锁、活锁、饥饿（见 术语表.md）
+
+## 相关定理
+
+- 无数据竞争定理（见 01_formal_concurrency_model.md 附录）
+- 线程安全定理（见 01_formal_concurrency_model.md 附录）
+- 并发安全定理（见 01_formal_concurrency_model.md 附录）
+
+## 交叉引用补全建议
+
+- 新增理论、案例、定理时请同步补全本清单。
+- 建议在每个文档/代码文件头部注明理论映射与交叉引用。
+
+> 本清单为标准化模板，后续可根据实际内容补充详细交叉引用。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

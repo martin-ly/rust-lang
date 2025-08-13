@@ -1,0 +1,83 @@
+﻿# 02.10 类型擦除（Type Erasure）
+
+---
+
+## 理论简述
+
+类型擦除（Type Erasure）是指在运行时丢弃类型信息，仅保留统一的接口或行为。Rust通过trait对象（如`dyn Trait`）实现类型擦除，允许不同类型在运行时以统一接口进行操作。类型擦除提升了多态性和灵活性，但也带来一定的运行时开销。相关理论详见[类型擦除与trait对象](../../02_type_system/09_type_erasure.md)与[动态分派](../../12_traits/05_dynamic_dispatch.md)。
+
+---
+
+## 核心代码示例
+
+```rust
+trait Draw {
+    fn draw(&self);
+}
+
+struct Circle;
+impl Draw for Circle {
+    fn draw(&self) { println!("Circle"); }
+}
+
+struct Square;
+impl Draw for Square {
+    fn draw(&self) { println!("Square"); }
+}
+
+fn draw_shape(shape: &dyn Draw) {
+    shape.draw();
+}
+
+fn main() {
+    let c = Circle;
+    let s = Square;
+    draw_shape(&c); // 类型擦除：以dyn Draw调用
+    draw_shape(&s);
+}
+```
+
+---
+
+## 详细注释
+
+- `trait Draw` 定义统一接口。
+- `draw_shape(shape: &dyn Draw)` 使用trait对象实现类型擦除，允许不同类型以统一接口传递。
+- `dyn Trait`会丢弃具体类型信息，仅保留trait方法表。
+- 类型擦除常用于插件、回调、容器等场景。
+
+---
+
+## 理论映射
+
+- 对应[类型擦除与trait对象](../../02_type_system/09_type_erasure.md)
+- 相关动态分派见[12_traits/05_dynamic_dispatch.md](../../12_traits/05_dynamic_dispatch.md)
+- 多态性理论见[01_formal_type_system.md#多态性](../../02_type_system/01_formal_type_system.md#多态性)
+
+---
+
+## 边界情况与常见错误
+
+- **边界情况**：
+  - 只有实现了trait的类型才能作为trait对象。
+  - trait对象不能用于不支持对象安全的方法（如带泛型参数的方法）。
+- **常见错误**：
+  - 尝试将不对象安全的trait作为trait对象。
+  - 忘记加`dyn`导致类型不匹配。
+  - trait对象生命周期不明确导致借用错误。
+
+---
+
+## FAQ
+
+- **Q: 类型擦除和泛型有何区别？**
+  - A: 泛型在编译期保留类型信息，类型擦除在运行时丢弃类型信息，仅保留统一接口。
+- **Q: Rust中trait对象的典型应用？**
+  - A: 插件系统、回调、动态容器等。
+- **Q: 如何定位trait对象相关的编译错误？**
+  - A: 检查trait是否对象安全，方法签名是否符合trait对象要求。
+
+---
+
+（本示例可直接用`rustc`编译验证，理论与代码一一对应，便于教学与自动化校验。）
+

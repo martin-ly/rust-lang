@@ -1,4 +1,4 @@
-# 递归迭代补充：借用检查器附录的形式化论证与证明
+﻿# 递归迭代补充：借用检查器附录的形式化论证与证明
 
 ## 1. 术语表与符号定义
 
@@ -15,7 +15,7 @@
 - **生命周期约束推理**：
   - 反身性：$'a : 'a$
   - 传递性：若 $'a : 'b$ 且 $'b : 'c$，则 $'a : 'c$
-- **借用安全性定理模板**：
+- **借用安全定理模板**：
   - 若所有借用关系满足分离逻辑断言，则无数据竞争与悬垂指针。
 - **生命周期推导完备性定理模板**：
   - 若生命周期推导算法分配的生命周期满足所有约束，则程序无生命周期相关错误。
@@ -35,3 +35,32 @@
 ---
 
 > **递归补充说明**：本节内容将持续迭代完善，欢迎结合实际工程案例、最新学术成果递交补充，推动Rust借用检查器附录的形式化论证与证明体系不断进化。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

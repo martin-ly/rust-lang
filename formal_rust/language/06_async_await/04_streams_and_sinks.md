@@ -1,4 +1,4 @@
-# C06-04. 异步流 (Streams) 与接收器 (Sinks)
+﻿# C06-04. 异步流 (Streams) 与接收器 (Sinks)
 
 `Future` 代表一个随时间推移最终会产生的单个值。但很多时候，我们需要处理的是一系列随时间推移而产生的值，例如网络套接字的数据块、GUI 事件流或定时器滴答。
 
@@ -23,8 +23,8 @@ pub trait Stream {
 
 - **`poll_next`**: 这是 `Stream` 的核心方法。当被轮询时，它会尝试产生一个值。
   - **`Poll::Ready(Some(item))`**: 表示流成功产生了一个新项目 `item`。
-  - **`Poll::Ready(None)`**: 表示流已经结束，未来不会再产生任何项目。
-  - **`Poll::Pending`**: 表示流目前没有新项目，但未来可能会有。它会注册 `Waker` 以便在准备好时通知执行器再次轮询。
+  - **`Poll::Ready(None)`**: 表示流已经结束，未来值值值不会再产生任何项目。
+  - **`Poll::Pending`**: 表示流目前没有新项目，但未来值值值可能会有。它会注册 `Waker` 以便在准备好时通知执行器再次轮询。
 
 这个模型与 `Future` 的 `poll` 方法如出一辙，使得 `Stream` 可以无缝地集成到 `async/await` 语法和执行器中。
 
@@ -130,3 +130,32 @@ async fn main() {
 - **生态系统**: `Stream` 和 `Sink` 是 `tokio`、`async-std` 等运行时中网络、进程间通信和定时器等功能的核心抽象。
 
 掌握 `Stream` 和 `Sink` 是构建复杂、高效的 Rust 异步应用程序的关键一步，它使得处理连续的异步事件流变得与处理同步集合一样直观和强大。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

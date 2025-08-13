@@ -1,0 +1,770 @@
+﻿# 单例模式 (Singleton Pattern)
+
+## 概述
+
+单例模式确保一个类只有一个实例，并提供一个全局访问点来访问该实例。
+
+## 数学定义
+
+### 单例模式
+
+```text
+SingletonPattern(Class) = ∃!instance ∈ Class ∧ GlobalAccess(instance)
+```
+
+### 唯一性约束
+
+```text
+UniquenessConstraint(Instance) = ∀i1, i2 ∈ Instance. i1 = i2
+```
+
+### 全局访问
+
+```text
+GlobalAccess(Instance) = ∀Context. Access(Context, Instance)
+```
+
+## 代码示例
+
+### 基础单例模式
+
+```rust
+use std::sync::Mutex;
+use std::sync::Once;
+use std::sync::Arc;
+
+// 基础单例实现
+struct Singleton {
+    data: String,
+}
+
+impl Singleton {
+    fn new() -> Self {
+        Singleton {
+            data: "Singleton instance".to_string(),
+        }
+    }
+    
+    fn get_data(&self) -> &str {
+        &self.data
+    }
+    
+    fn set_data(&mut self, data: String) {
+        self.data = data;
+    }
+}
+
+// 全局单例实例
+static mut SINGLETON: Option<Singleton> = None;
+static INIT: Once = Once::new();
+
+// 获取单例实例
+fn get_singleton() -> &'static mut Singleton {
+    unsafe {
+        INIT.call_once(|| {
+            SINGLETON = Some(Singleton::new());
+        });
+        SINGLETON.as_mut().unwrap()
+    }
+}
+
+fn main() {
+    let instance1 = get_singleton();
+    let instance2 = get_singleton();
+    
+    // 验证是同一个实例
+    println!("Instance 1 data: {}", instance1.get_data());
+    println!("Instance 2 data: {}", instance2.get_data());
+    
+    // 修改数据
+    instance1.set_data("Modified singleton data".to_string());
+    println!("After modification - Instance 2 data: {}", instance2.get_data());
+}
+```
+
+### 线程安全单例模式
+
+```rust
+use std::sync::Mutex;
+use std::sync::Once;
+use std::sync::Arc;
+use std::sync::RwLock;
+
+// 线程安全单例
+struct ThreadSafeSingleton {
+    data: String,
+    counter: u32,
+}
+
+impl ThreadSafeSingleton {
+    fn new() -> Self {
+        ThreadSafeSingleton {
+            data: "Thread safe singleton".to_string(),
+            counter: 0,
+        }
+    }
+    
+    fn get_data(&self) -> &str {
+        &self.data
+    }
+    
+    fn increment_counter(&mut self) {
+        self.counter += 1;
+    }
+    
+    fn get_counter(&self) -> u32 {
+        self.counter
+    }
+    
+    fn set_data(&mut self, data: String) {
+        self.data = data;
+    }
+}
+
+// 使用Arc<Mutex<>>的线程安全单例
+lazy_static::lazy_static! {
+    static ref THREAD_SAFE_SINGLETON: Arc<Mutex<ThreadSafeSingleton>> = {
+        Arc::new(Mutex::new(ThreadSafeSingleton::new()))
+    };
+}
+
+// 获取线程安全单例
+fn get_thread_safe_singleton() -> Arc<Mutex<ThreadSafeSingleton>> {
+    THREAD_SAFE_SINGLETON.clone()
+}
+
+// 使用RwLock的线程安全单例
+lazy_static::lazy_static! {
+    static ref RW_SINGLETON: Arc<RwLock<ThreadSafeSingleton>> = {
+        Arc::new(RwLock::new(ThreadSafeSingleton::new()))
+    };
+}
+
+fn get_rw_singleton() -> Arc<RwLock<ThreadSafeSingleton>> {
+    RW_SINGLETON.clone()
+}
+
+fn main() {
+    // 测试Mutex版本
+    let singleton1 = get_thread_safe_singleton();
+    let singleton2 = get_thread_safe_singleton();
+    
+    {
+        let mut instance1 = singleton1.lock().unwrap();
+        let mut instance2 = singleton2.lock().unwrap();
+        
+        instance1.increment_counter();
+        instance2.increment_counter();
+        
+        println!("Counter: {}", instance1.get_counter());
+    }
+    
+    // 测试RwLock版本
+    let rw_singleton1 = get_rw_singleton();
+    let rw_singleton2 = get_rw_singleton();
+    
+    {
+        let instance1 = rw_singleton1.read().unwrap();
+        let instance2 = rw_singleton2.read().unwrap();
+        
+        println!("RW Singleton data: {}", instance1.get_data());
+        println!("RW Singleton data: {}", instance2.get_data());
+    }
+    
+    {
+        let mut instance = rw_singleton1.write().unwrap();
+        instance.set_data("Modified RW singleton data".to_string());
+    }
+    
+    {
+        let instance = rw_singleton2.read().unwrap();
+        println!("Modified RW Singleton data: {}", instance.get_data());
+    }
+}
+```
+
+### 延迟初始化单例模式
+
+```rust
+use std::sync::Once;
+use std::sync::atomic::{AtomicBool, Ordering};
+
+// 延迟初始化单例
+struct LazySingleton {
+    data: String,
+    initialized: AtomicBool,
+}
+
+impl LazySingleton {
+    fn new() -> Self {
+        LazySingleton {
+            data: String::new(),
+            initialized: AtomicBool::new(false),
+        }
+    }
+    
+    fn initialize(&mut self, data: String) {
+        if !self.initialized.load(Ordering::Acquire) {
+            self.data = data;
+            self.initialized.store(true, Ordering::Release);
+        }
+    }
+    
+    fn get_data(&self) -> Option<&str> {
+        if self.initialized.load(Ordering::Acquire) {
+            Some(&self.data)
+        } else {
+            None
+        }
+    }
+    
+    fn is_initialized(&self) -> bool {
+        self.initialized.load(Ordering::Acquire)
+    }
+}
+
+// 全局延迟初始化单例
+static mut LAZY_SINGLETON: Option<LazySingleton> = None;
+static LAZY_INIT: Once = Once::new();
+
+fn get_lazy_singleton() -> &'static mut LazySingleton {
+    unsafe {
+        LAZY_INIT.call_once(|| {
+            LAZY_SINGLETON = Some(LazySingleton::new());
+        });
+        LAZY_SINGLETON.as_mut().unwrap()
+    }
+}
+
+fn main() {
+    let singleton = get_lazy_singleton();
+    
+    // 初始状态
+    println!("Initialized: {}", singleton.is_initialized());
+    println!("Data: {:?}", singleton.get_data());
+    
+    // 初始化
+    singleton.initialize("Lazy initialized data".to_string());
+    
+    // 初始化后状态
+    println!("Initialized: {}", singleton.is_initialized());
+    println!("Data: {:?}", singleton.get_data());
+    
+    // 再次初始化（应该不会改变）
+    singleton.initialize("Another data".to_string());
+    println!("Data after second init: {:?}", singleton.get_data());
+}
+```
+
+### 配置化单例模式
+
+```rust
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+use std::sync::Mutex;
+use std::sync::Once;
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+struct SingletonConfig {
+    name: String,
+    version: String,
+    settings: HashMap<String, String>,
+    enabled: bool,
+}
+
+impl Default for SingletonConfig {
+    fn default() -> Self {
+        let mut settings = HashMap::new();
+        settings.insert("debug".to_string(), "false".to_string());
+        settings.insert("log_level".to_string(), "info".to_string());
+        settings.insert("timeout".to_string(), "30".to_string());
+        
+        SingletonConfig {
+            name: "Default Singleton".to_string(),
+            version: "1.0.0".to_string(),
+            settings,
+            enabled: true,
+        }
+    }
+}
+
+struct ConfigurableSingleton {
+    config: SingletonConfig,
+    data: String,
+}
+
+impl ConfigurableSingleton {
+    fn new(config: SingletonConfig) -> Self {
+        ConfigurableSingleton {
+            config,
+            data: "Configurable singleton data".to_string(),
+        }
+    }
+    
+    fn get_config(&self) -> &SingletonConfig {
+        &self.config
+    }
+    
+    fn update_config(&mut self, config: SingletonConfig) {
+        self.config = config;
+    }
+    
+    fn get_setting(&self, key: &str) -> Option<&String> {
+        self.config.settings.get(key)
+    }
+    
+    fn set_setting(&mut self, key: String, value: String) {
+        self.config.settings.insert(key, value);
+    }
+    
+    fn get_data(&self) -> &str {
+        &self.data
+    }
+    
+    fn set_data(&mut self, data: String) {
+        self.data = data;
+    }
+}
+
+// 全局配置化单例
+static mut CONFIG_SINGLETON: Option<Mutex<ConfigurableSingleton>> = None;
+static CONFIG_INIT: Once = Once::new();
+
+fn get_configurable_singleton() -> &'static Mutex<ConfigurableSingleton> {
+    unsafe {
+        CONFIG_INIT.call_once(|| {
+            let config = SingletonConfig::default();
+            CONFIG_SINGLETON = Some(Mutex::new(ConfigurableSingleton::new(config)));
+        });
+        CONFIG_SINGLETON.as_ref().unwrap()
+    }
+}
+
+fn main() {
+    let singleton = get_configurable_singleton();
+    
+    // 初始配置
+    {
+        let instance = singleton.lock().unwrap();
+        println!("Initial config: {:?}", instance.get_config());
+        println!("Debug setting: {:?}", instance.get_setting("debug"));
+    }
+    
+    // 更新配置
+    {
+        let mut instance = singleton.lock().unwrap();
+        let mut new_config = instance.get_config().clone();
+        new_config.name = "Updated Singleton".to_string();
+        new_config.settings.insert("debug".to_string(), "true".to_string());
+        instance.update_config(new_config);
+    }
+    
+    // 验证更新
+    {
+        let instance = singleton.lock().unwrap();
+        println!("Updated config: {:?}", instance.get_config());
+        println!("Debug setting: {:?}", instance.get_setting("debug"));
+    }
+}
+```
+
+### 泛型单例模式
+
+```rust
+use std::sync::Mutex;
+use std::sync::Once;
+
+// 泛型单例trait
+trait Singleton<T> {
+    fn get_instance() -> &'static Mutex<T>;
+    fn new() -> T;
+}
+
+// 具体单例实现
+struct GenericSingleton<T> {
+    data: T,
+    counter: u32,
+}
+
+impl<T> GenericSingleton<T> {
+    fn new(data: T) -> Self {
+        GenericSingleton {
+            data,
+            counter: 0,
+        }
+    }
+    
+    fn get_data(&self) -> &T {
+        &self.data
+    }
+    
+    fn increment_counter(&mut self) {
+        self.counter += 1;
+    }
+    
+    fn get_counter(&self) -> u32 {
+        self.counter
+    }
+}
+
+// 字符串单例
+struct StringSingleton {
+    instance: GenericSingleton<String>,
+}
+
+impl StringSingleton {
+    fn new() -> Self {
+        StringSingleton {
+            instance: GenericSingleton::new("String singleton".to_string()),
+        }
+    }
+    
+    fn get_data(&self) -> &str {
+        self.instance.get_data()
+    }
+    
+    fn increment_counter(&mut self) {
+        self.instance.increment_counter();
+    }
+    
+    fn get_counter(&self) -> u32 {
+        self.instance.get_counter()
+    }
+}
+
+// 数字单例
+struct NumberSingleton {
+    instance: GenericSingleton<i32>,
+}
+
+impl NumberSingleton {
+    fn new() -> Self {
+        NumberSingleton {
+            instance: GenericSingleton::new(42),
+        }
+    }
+    
+    fn get_data(&self) -> i32 {
+        *self.instance.get_data()
+    }
+    
+    fn increment_counter(&mut self) {
+        self.instance.increment_counter();
+    }
+    
+    fn get_counter(&self) -> u32 {
+        self.instance.get_counter()
+    }
+}
+
+// 全局单例实例
+static mut STRING_SINGLETON: Option<Mutex<StringSingleton>> = None;
+static mut NUMBER_SINGLETON: Option<Mutex<NumberSingleton>> = None;
+static STRING_INIT: Once = Once::new();
+static NUMBER_INIT: Once = Once::new();
+
+fn get_string_singleton() -> &'static Mutex<StringSingleton> {
+    unsafe {
+        STRING_INIT.call_once(|| {
+            STRING_SINGLETON = Some(Mutex::new(StringSingleton::new()));
+        });
+        STRING_SINGLETON.as_ref().unwrap()
+    }
+}
+
+fn get_number_singleton() -> &'static Mutex<NumberSingleton> {
+    unsafe {
+        NUMBER_INIT.call_once(|| {
+            NUMBER_SINGLETON = Some(Mutex::new(NumberSingleton::new()));
+        });
+        NUMBER_SINGLETON.as_ref().unwrap()
+    }
+}
+
+fn main() {
+    // 测试字符串单例
+    let string_singleton1 = get_string_singleton();
+    let string_singleton2 = get_string_singleton();
+    
+    {
+        let instance1 = string_singleton1.lock().unwrap();
+        let instance2 = string_singleton2.lock().unwrap();
+        
+        println!("String singleton data: {}", instance1.get_data());
+        println!("String singleton data: {}", instance2.get_data());
+    }
+    
+    {
+        let mut instance = string_singleton1.lock().unwrap();
+        instance.increment_counter();
+        println!("String singleton counter: {}", instance.get_counter());
+    }
+    
+    // 测试数字单例
+    let number_singleton1 = get_number_singleton();
+    let number_singleton2 = get_number_singleton();
+    
+    {
+        let instance1 = number_singleton1.lock().unwrap();
+        let instance2 = number_singleton2.lock().unwrap();
+        
+        println!("Number singleton data: {}", instance1.get_data());
+        println!("Number singleton data: {}", instance2.get_data());
+    }
+    
+    {
+        let mut instance = number_singleton1.lock().unwrap();
+        instance.increment_counter();
+        println!("Number singleton counter: {}", instance.get_counter());
+    }
+}
+```
+
+### 异步单例模式
+
+```rust
+use std::sync::Arc;
+use std::sync::Mutex;
+use std::sync::Once;
+use tokio::sync::RwLock;
+use tokio::time::{sleep, Duration};
+
+// 异步单例
+struct AsyncSingleton {
+    data: String,
+    async_counter: u32,
+}
+
+impl AsyncSingleton {
+    fn new() -> Self {
+        AsyncSingleton {
+            data: "Async singleton".to_string(),
+            async_counter: 0,
+        }
+    }
+    
+    fn get_data(&self) -> &str {
+        &self.data
+    }
+    
+    async fn async_operation(&mut self) {
+        sleep(Duration::from_millis(100)).await;
+        self.async_counter += 1;
+    }
+    
+    fn get_counter(&self) -> u32 {
+        self.async_counter
+    }
+    
+    fn set_data(&mut self, data: String) {
+        self.data = data;
+    }
+}
+
+// 全局异步单例
+lazy_static::lazy_static! {
+    static ref ASYNC_SINGLETON: Arc<RwLock<AsyncSingleton>> = {
+        Arc::new(RwLock::new(AsyncSingleton::new()))
+    };
+}
+
+fn get_async_singleton() -> Arc<RwLock<AsyncSingleton>> {
+    ASYNC_SINGLETON.clone()
+}
+
+#[tokio::main]
+async fn main() {
+    let singleton1 = get_async_singleton();
+    let singleton2 = get_async_singleton();
+    
+    // 并发访问
+    let handle1 = {
+        let singleton = singleton1.clone();
+        tokio::spawn(async move {
+            let mut instance = singleton.write().await;
+            instance.async_operation().await;
+            println!("Task 1 counter: {}", instance.get_counter());
+        })
+    };
+    
+    let handle2 = {
+        let singleton = singleton2.clone();
+        tokio::spawn(async move {
+            let mut instance = singleton.write().await;
+            instance.async_operation().await;
+            println!("Task 2 counter: {}", instance.get_counter());
+        })
+    };
+    
+    // 等待任务完成
+    handle1.await.unwrap();
+    handle2.await.unwrap();
+    
+    // 验证最终状态
+    let instance = singleton1.read().await;
+    println!("Final counter: {}", instance.get_counter());
+    println!("Final data: {}", instance.get_data());
+}
+```
+
+## 测试验证
+
+```rust
+#[cfg(test)]
+mod tests {
+    use super::*;
+    
+    #[test]
+    fn test_basic_singleton() {
+        let instance1 = get_singleton();
+        let instance2 = get_singleton();
+        
+        // 验证是同一个实例
+        instance1.set_data("test data".to_string());
+        assert_eq!(instance1.get_data(), instance2.get_data());
+    }
+    
+    #[test]
+    fn test_thread_safe_singleton() {
+        let singleton1 = get_thread_safe_singleton();
+        let singleton2 = get_thread_safe_singleton();
+        
+        {
+            let mut instance1 = singleton1.lock().unwrap();
+            let mut instance2 = singleton2.lock().unwrap();
+            
+            instance1.increment_counter();
+            instance2.increment_counter();
+            
+            assert_eq!(instance1.get_counter(), 2);
+            assert_eq!(instance2.get_counter(), 2);
+        }
+    }
+    
+    #[test]
+    fn test_lazy_singleton() {
+        let singleton = get_lazy_singleton();
+        
+        // 初始状态
+        assert!(!singleton.is_initialized());
+        assert_eq!(singleton.get_data(), None);
+        
+        // 初始化
+        singleton.initialize("test data".to_string());
+        
+        // 初始化后状态
+        assert!(singleton.is_initialized());
+        assert_eq!(singleton.get_data(), Some("test data"));
+    }
+    
+    #[test]
+    fn test_configurable_singleton() {
+        let singleton = get_configurable_singleton();
+        
+        {
+            let instance = singleton.lock().unwrap();
+            assert_eq!(instance.get_setting("debug"), Some(&"false".to_string()));
+        }
+        
+        {
+            let mut instance = singleton.lock().unwrap();
+            instance.set_setting("debug".to_string(), "true".to_string());
+        }
+        
+        {
+            let instance = singleton.lock().unwrap();
+            assert_eq!(instance.get_setting("debug"), Some(&"true".to_string()));
+        }
+    }
+    
+    #[tokio::test]
+    async fn test_async_singleton() {
+        let singleton1 = get_async_singleton();
+        let singleton2 = get_async_singleton();
+        
+        // 并发操作
+        let handle1 = {
+            let singleton = singleton1.clone();
+            tokio::spawn(async move {
+                let mut instance = singleton.write().await;
+                instance.async_operation().await;
+                instance.get_counter()
+            })
+        };
+        
+        let handle2 = {
+            let singleton = singleton2.clone();
+            tokio::spawn(async move {
+                let mut instance = singleton.write().await;
+                instance.async_operation().await;
+                instance.get_counter()
+            })
+        };
+        
+        let counter1 = handle1.await.unwrap();
+        let counter2 = handle2.await.unwrap();
+        
+        // 验证是同一个实例
+        assert_eq!(counter1, counter2);
+    }
+}
+```
+
+## 形式化验证
+
+### 单例模式验证
+
+- 验证实例唯一性
+- 检查全局访问正确性
+- 确保线程安全
+
+### 延迟初始化验证
+
+- 验证延迟初始化正确性
+- 检查初始化状态一致性
+- 确保重复初始化安全
+
+### 配置化单例验证
+
+- 验证配置更新正确性
+- 检查配置状态一致性
+- 确保配置访问安全
+
+## 性能考虑
+
+1. **内存使用**: 单例模式减少内存使用
+2. **初始化开销**: 延迟初始化减少启动时间
+3. **线程安全**: 线程安全单例可能影响性能
+
+## 最佳实践
+
+1. **线程安全**: 在多线程环境中使用线程安全单例
+2. **延迟初始化**: 使用延迟初始化减少启动开销
+3. **配置管理**: 支持配置化的单例管理
+4. **测试**: 为单例模式编写完整的测试
+5. **性能**: 考虑单例模式的性能影响
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

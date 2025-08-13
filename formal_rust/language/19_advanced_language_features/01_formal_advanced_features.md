@@ -1,6 +1,6 @@
-# Rust高级语言特性形式化理论与证明
+﻿# Rust高级语言特征形式化理论与证明
 
-## 1. 高级特性总览
+## 1. 高级特征总览
 
 - 泛型（Generics）
 - 高级Trait与特化（Specialization）
@@ -86,7 +86,7 @@
 - unsafe fn, unsafe block
 - 仅在unsafe块内允许绕过部分编译器检查
 
-#### 定理5（最小不安全性原则）
+#### 定理5（最小不安全原则）
 >
 > Rust强制将不安全操作局限于unsafe块，最大限度保证全局安全。
 
@@ -101,7 +101,7 @@
 
 #### 定理6（unsafe块隔离性）
 >
-> 若unsafe块内无未定义行为，则全局安全性不被破坏。
+> 若unsafe块内无未定义行为，则全局安全不被破坏。
 
 **证明思路**：
 
@@ -151,4 +151,33 @@ unsafe fn deref(ptr: *const i32) -> i32 { *ptr }
 - Rust官方文档、RFC、TAPL、RustBelt论文
 - 《Programming Rust》《Rustonomicon》
 
-> 本节为Rust高级语言特性的理论补充，后续可继续扩展GAT、const generics、Pin、FFI等更高阶特性。
+> 本节为Rust高级语言特征的理论补充，后续可继续扩展GAT、const generics、Pin、FFI等更高阶特征。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

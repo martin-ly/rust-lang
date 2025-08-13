@@ -24,7 +24,7 @@
 ### 数学定义
 
 **定义 1.4.4.1** (移动语义域)
-移动语义定义为所有权转移的函数：
+移动语义定义为所有权移动的函数：
 $$\text{Move}: \text{Value} × \text{Context} → \text{Value} × \text{Context}$$
 $$\text{Move}(v, Γ) = (v, Γ \setminus \{v\})$$
 
@@ -60,7 +60,7 @@ graph TD
     L --> M[资源释放]
 ```
 
-**定理 1.4.4.1** (移动语义的安全性)
+**定理 1.4.4.1** (移动语义的安全)
 移动语义保证在任意时刻，每个资源都有唯一的所有者：
 $$∀t, r. |\{o \mid \text{owns}(o, r, t)\}| ≤ 1$$
 
@@ -78,7 +78,7 @@ $$\frac{Γ ⊢ e : τ^{\text{affine}} \quad \text{use\_count}(e) ≤ 1}{Γ ⊢ e
 
 ## Rust实现
 
-### 核心特性
+### 核心特征
 
 **1. 基本移动语义**:
 
@@ -242,7 +242,7 @@ struct NonCopyableData {
 
 // 泛型函数处理可Copy和不可Copy类型
 fn process_data<T: Clone>(data: T) -> T {
-    // 对于Copy类型，这里是拷贝
+    // 对于Copy类型，这里是复制
     // 对于非Copy类型，这里是移动然后clone
     let processed = data.clone();
     processed
@@ -283,7 +283,7 @@ mod move_perf_tests {
     fn benchmark_move_vs_copy() {
         const ITERATIONS: usize = 1_000_000;
         
-        // 测试大型结构的移动性能
+        // 测试大型结构体体体的移动性能
         #[derive(Clone)]
         struct LargeStruct {
             data: Vec<u8>,
@@ -352,13 +352,13 @@ pub fn optimized_move_chain() -> String {
 
 ### 工程案例
 
-**1. 零拷贝网络缓冲区**:
+**1. 零复制网络缓冲区**:
 
 ```rust
 use std::io::{Read, Write};
 use std::net::TcpStream;
 
-// 零拷贝缓冲区实现
+// 零复制缓冲区实现
 pub struct ZeroCopyBuffer {
     data: Vec<u8>,
     read_pos: usize,
@@ -374,7 +374,7 @@ impl ZeroCopyBuffer {
         }
     }
     
-    // 移动语义避免数据拷贝
+    // 移动语义避免数据复制
     pub fn into_vec(mut self) -> Vec<u8> {
         self.data.truncate(self.write_pos);
         self.data
@@ -382,7 +382,7 @@ impl ZeroCopyBuffer {
     
     // 直接移动数据到网络
     pub fn send_to_stream(self, mut stream: TcpStream) -> std::io::Result<()> {
-        let data = self.into_vec();  // 移动避免拷贝
+        let data = self.into_vec();  // 移动避免复制
         stream.write_all(&data)?;
         Ok(())
     }
@@ -818,7 +818,7 @@ where
         to: PublicKey,
         signature: Signature,
     ) -> Result<BlockchainAsset<T>, TransferError> {
-        // 验证所有权转移的密码学证明
+        // 验证所有权移动的密码学证明
         if self.ownership_proof.verify(&signature) {
             Ok(BlockchainAsset {
                 asset: self.asset,
@@ -845,4 +845,29 @@ where
 > - 下级文档: [复制克隆语义](05_copy_clone_semantics.md) | [Drop语义模型](06_drop_semantics.md)
 >
 > **深度**: ⭐⭐⭐⭐⭐ **广度**: ⭐⭐⭐⭐⭐ **完成度**: 100%
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

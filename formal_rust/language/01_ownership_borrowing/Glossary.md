@@ -1,4 +1,4 @@
-# 12 术语表 Glossary
+﻿# 12 术语表 Glossary
 
 ## 概述
 
@@ -11,10 +11,10 @@
 - **可变借用（Mutable Borrow）**：对值的唯一可变引用，允许修改。
 - **不可变借用（Immutable Borrow）**：对值的只读引用，可有多个。
 - **生命周期（Lifetime）**：引用或值在内存中的有效时间区间。
-- **作用域（Scope）**：变量或引用的可见范围。
+- **作用域（Scope）**：变量或引用的可见作用域。
 - **Copy类型**：可按位复制的类型，赋值后原值依然有效。
-- **Move语义**：所有权转移，原变量失效。
-- **Drop特性**：作用域结束时自动释放资源的机制。
+- **Move语义**：所有权移动，原变量失效。
+- **Drop特征**：作用域结束时自动释放资源的机制。
 - **RAII**：资源获取即初始化，自动管理资源生命周期。
 - **RefCell**：单线程内部可变性容器，运行时借用检查。
 - **Mutex**：多线程可变性容器，保证并发安全。
@@ -33,3 +33,30 @@
 ## 总结
 
 术语表有助于快速查阅和理解Rust内存安全相关概念，是理论学习和工程实践的重要参考。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

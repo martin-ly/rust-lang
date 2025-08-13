@@ -1,4 +1,4 @@
-# 工作流执行引擎重构设计与实现
+﻿# 工作流执行引擎重构设计与实现
 
 ## 目录
 
@@ -16,7 +16,7 @@
 这个新设计将从一开始就考虑以下关键方面：
 
 1. **增强的工作流控制能力**：包括暂停/恢复、步骤级控制和事件触发控制
-2. **工作流可视化与监控**：提供拓扑结构可视化和执行状态实时展示
+2. **工作流可视化与监控**：提供拓扑结构体体体可视化和执行状态实时展示
 3. **分布式一致性**：确保在分布式环境中工作流状态的一致性
 4. **可扩展性与高可用性**：支持水平扩展和节点故障恢复
 5. **全面的事件处理机制**：支持内部和外部事件触发工作流转换
@@ -559,7 +559,7 @@ pub struct ExecutionContext {
     /// 活动跟踪ID
     pub trace_id: Option<String>,
     
-    /// 当前执行范围
+    /// 当前执行作用域
     pub scope: String,
     
     /// 上下文元数据
@@ -4510,24 +4510,24 @@ and_then(|e| e.to_str()) == Some("yml") {
              use chrono::{DateTime, Utc};\n\n"
         );
         
-        // 为输入类型生成结构体
+        // 为输入类型生成结构体体体体
         if let Some(input_type) = &definition.input_type {
             generate_type_struct(&mut module_content, "Input", input_type);
         }
         
-        // 为输出类型生成结构体
+        // 为输出类型生成结构体体体体
         if let Some(output_type) = &definition.output_type {
             generate_type_struct(&mut module_content, "Output", output_type);
         }
         
-        // 为每个活动生成特性和实现
+        // 为每个活动生成特征和实现
         for step in &definition.steps {
             if let StepType::Activity { activity_type, input_mapping, .. } = &step.step_type {
                 generate_activity_trait(&mut module_content, step, activity_type, input_mapping);
             }
         }
         
-        // 为工作流执行器生成结构体
+        // 为工作流执行器生成结构体体体体
         module_content.push_str(
             "\n/// 工作流执行器\n\
              pub struct WorkflowExecutor {\n\
@@ -4572,9 +4572,9 @@ and_then(|e| e.to_str()) == Some("yml") {
              }\n"
         );
         
-        // 生成活动特性
+        // 生成活动特征
         module_content.push_str(
-            "\n/// 活动特性\n\
+            "\n/// 活动特征\n\
              #[async_trait]\n\
              pub trait Activity: Send + Sync {\n\
              /// 获取活动类型\n\
@@ -4660,7 +4660,7 @@ and_then(|e| e.to_str()) == Some("yml") {
         Ok(())
     }
     
-    /// 生成类型结构体
+    /// 生成类型结构体体体体
     fn generate_type_struct(content: &mut String, name: &str, type_def: &TypeDefinition) {
         content.push_str(&format!("\n/// {} 类型\n", name));
         content.push_str("#[derive(Debug, Clone, Serialize, Deserialize)]\n");
@@ -4706,7 +4706,7 @@ and_then(|e| e.to_str()) == Some("yml") {
         }
     }
     
-    /// 生成活动特性
+    /// 生成活动特征
     fn generate_activity_trait(
         content: &mut String, 
         step: &WorkflowStep,
@@ -4747,7 +4747,7 @@ and_then(|e| e.to_str()) == Some("yml") {
             activity_name
         ));
         
-        // 添加Activity特性实现
+        // 添加Activity特征实现
         content.push_str(&format!(
             "#[async_trait]\n\
              impl Activity for {} {{\n\
@@ -4828,7 +4828,7 @@ and_then(|e| e.to_str()) == Some("yml") {
         Ok(())
     }
     
-    /// 活动类型转换为结构体名称
+    /// 活动类型转换为结构体体体体名称
     fn activity_type_to_struct_name(activity_type: &str) -> String {
         let parts: Vec<&str> = activity_type.split('.').collect();
         let name = parts.last().unwrap_or(&activity_type);
@@ -5288,38 +5288,38 @@ io::fs::write(pkg_dir.join("workflow.go"), workflow_content).await?;
         Ok(DummyScheduler {})
     }
     
-    // 以下为组件特性的占位实现
+    // 以下为组件特征的占位实现
     
     pub trait StorageManager: Send + Sync {
-        // 存储管理器特性方法占位
+        // 存储管理器特征方法占位
     }
     
     pub trait LockManager: Send + Sync {
-        // 锁管理器特性方法占位
+        // 锁管理器特征方法占位
     }
     
     pub trait EventBus: Send + Sync {
-        // 事件总线特性方法占位
+        // 事件总线特征方法占位
     }
     
     pub trait TaskQueue: Send + Sync {
-        // 任务队列特性方法占位
+        // 任务队列特征方法占位
     }
     
     pub trait NodeManager: Send + Sync {
-        // 节点管理器特性方法占位
+        // 节点管理器特征方法占位
     }
     
     pub trait MetricsCollector: Send + Sync {
-        // 指标收集器特性方法占位
+        // 指标收集器特征方法占位
     }
     
     pub trait VisualizationEngine: Send + Sync {
-        // 可视化引擎特性方法占位
+        // 可视化引擎特征方法占位
     }
     
     pub trait Scheduler: Send + Sync {
-        // 调度器特性方法占位
+        // 调度器特征方法占位
     }
     
     // 以下为组件的虚拟实现
@@ -7559,7 +7559,7 @@ pub mod model {
         /// 详细信息
         pub details: Option<serde_json::Value>,
         
-        /// 堆栈跟踪
+        /// 栈跟踪
         pub stack_trace: Option<String>,
     }
     
@@ -8202,13 +8202,13 @@ pub mod storage {
         /// 状态
         pub state: Option<Vec<String>>,
         
-        /// 开始时间范围
+        /// 开始时间作用域
         pub start_time_range: Option<(DateTime<Utc>, DateTime<Utc>)>,
         
-        /// 结束时间范围
+        /// 结束时间作用域
         pub end_time_range: Option<(DateTime<Utc>, DateTime<Utc>)>,
         
-        /// 执行时间范围(毫秒)
+        /// 执行时间作用域(毫秒)
         pub duration_range: Option<(u64, u64)>,
         
         /// 自定义标签
@@ -8277,7 +8277,7 @@ pub mod storage {
         /// 工作流ID
         pub workflow_id: Option<String>,
         
-        /// 时间范围
+        /// 时间作用域
         pub time_range: (DateTime<Utc>, DateTime<Utc>),
         
         /// 时间粒度
@@ -8340,7 +8340,7 @@ pub mod storage {
     /// 工作流统计
     #[derive(Debug, Clone, Serialize, Deserialize)]
     pub struct WorkflowStatistics {
-        /// 时间范围
+        /// 时间作用域
         pub time_range: (DateTime<Utc>, DateTime<Utc>),
         
         /// 时间粒度
@@ -11781,7 +11781,7 @@ pub mod events {
         async fn stop(&self) -> Result<(), WorkflowError>;
     }
     
-    /// 事件类型特性
+    /// 事件类型特征
     pub trait EventType: serde::Serialize + serde::de::DeserializeOwned + Clone {
         /// 获取事件类型名称
         fn event_type() -> &'static str;
@@ -11793,7 +11793,7 @@ pub mod events {
         fn workflow_id(&self) -> &str;
     }
     
-    /// 事件处理器特性
+    /// 事件处理器特征
     #[async_trait]
     pub trait EventHandler<T: EventType + Send + Sync>: Send + Sync {
         /// 处理事件
@@ -12100,7 +12100,7 @@ pub mod events {
         storage: Arc<dyn storage::StorageManager>,
     }
     
-    /// 事件类型擦除特性
+    /// 事件类型擦除特征
     #[async_trait]
     trait AnyEventHandler: Send + Sync {
         /// 处理事件
@@ -14422,7 +14422,7 @@ pub mod visualization {
             Ok(view)
         }
         
-        /// 构建任务层次结构
+        /// 构建任务层次结构体体体
         async fn build_task_hierarchy(&self, execution_id: &str, depth: u32, include_io: bool) -> Result<Vec<TaskView>, WorkflowError> {
             // 获取根任务
             let root_task = self.storage.get_root_task(execution_id).await?;
@@ -14586,7 +14586,7 @@ pub mod api {
         pub details: Option<serde_json::Value>,
     }
     
-    // 实现warp::reject::Reject特性
+    // 实现warp::reject::Reject特征
     #[derive(Debug)]
     pub struct ApiRejection(pub ApiError);
     
@@ -15073,7 +15073,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 4. 实现了完整的主函数，整合了各个组件，启动工作流执行引擎和API服务器。
 
-该实现提供了一个功能完善的工作流执行引擎，支持各种类型的工作流步骤、丰富的控制流结构、人工干预点、事件处理等特性，同时还提供了可视化和监控能力，适合作为企业级工作流管理系统的核心引擎。
+该实现提供了一个功能完善的工作流执行引擎，支持各种类型的工作流步骤、丰富的控制流结构体体体、人工干预点、事件处理等特征，同时还提供了可视化和监控能力，适合作为企业级工作流管理系统的核心引擎。
 
 工作流引擎的主要特点包括：
 
@@ -15662,3 +15662,32 @@ function createWorkflowVisualization(containerId, workflowId, executionId) {
    - 提供更完善的业务指标收集
 
 这些功能将使工作流引擎更加健壮，更适合构建大规模的分布式工作流应用。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

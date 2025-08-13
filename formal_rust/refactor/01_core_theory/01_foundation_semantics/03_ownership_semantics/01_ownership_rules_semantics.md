@@ -57,7 +57,7 @@ $$\frac{\Gamma \vdash e : T}{\Gamma \vdash \text{owner}(e) : \text{Owner}(T)}$$
 fn ownership_example() {
     // 基本所有权
     let x = 42;  // x拥有值42
-    let y = x;   // 所有权转移，x不再有效
+    let y = x;   // 所有权移动，x不再有效
     
     // 编译时检查
     // println!("{}", x);  // 编译错误：x已被移动
@@ -66,7 +66,7 @@ fn ownership_example() {
     let data = vec![1, 2, 3, 4, 5];
     let data_owner = data;  // data_owner拥有数据
     
-    // 所有权转移
+    // 所有权移动
     fn take_ownership(data: Vec<i32>) -> Vec<i32> {
         data  // 返回所有权
     }
@@ -79,7 +79,7 @@ fn ownership_example() {
 ### 1.1.2 移动语义
 
 **定义 1.1.2** (移动语义)
-移动语义确保所有权转移：
+移动语义确保所有权移动：
 $$\text{Move}(source, target) = \text{transfer}(source, target) \land \text{invalidate}(source)$$
 
 **移动规则**：
@@ -93,7 +93,7 @@ graph TB
     subgraph "所有权系统"
         A[值创建] --> B[所有者分配]
         B --> C[移动检查]
-        C --> D[所有权转移]
+        C --> D[所有权移动]
         
         E[作用域结束] --> F[自动释放]
         G[借用检查] --> H[安全访问]
@@ -122,7 +122,7 @@ $$\text{BasicOwnership} = \{\text{unique}, \text{transfer}, \text{drop}\}$$
 fn basic_ownership_rules() {
     // 规则1：每个值只有一个所有者
     let data = vec![1, 2, 3];
-    let owner1 = data;  // data的所有权转移给owner1
+    let owner1 = data;  // data的所有权移动给owner1
     
     // 编译时检查
     // let owner2 = data;  // 编译错误：data已被移动
@@ -133,7 +133,7 @@ fn basic_ownership_rules() {
         // local_data在作用域结束时自动丢弃
     }
     
-    // 规则3：所有权可以通过移动转移
+    // 规则3：所有权可以通过移动移动
     fn transfer_ownership(data: Vec<i32>) -> Vec<i32> {
         data  // 返回所有权
     }
@@ -291,7 +291,7 @@ fn ownership_checking() {
     struct OwnershipRules {
         rule1: bool,  // 每个值只有一个所有者
         rule2: bool,  // 所有者离开作用域时值被丢弃
-        rule3: bool,  // 所有权可以通过移动转移
+        rule3: bool,  // 所有权可以通过移动移动
     }
     
     impl OwnershipRules {
@@ -1023,4 +1023,31 @@ fn quantum_ownership() {
 ---
 
 > **链接网络**: [所有权系统语义模型索引](00_ownership_semantics_index.md) | [基础语义层总览](../00_foundation_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md)
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

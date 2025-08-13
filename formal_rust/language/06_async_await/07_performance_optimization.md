@@ -1,4 +1,4 @@
-# Rust 异步性能优化与工程实践 {#性能优化}
+﻿# Rust 异步性能优化与工程实践 {#性能优化}
 
 **模块编号**: 06-07  
 **主题**: 异步性能分析、内存优化、延迟与吞吐量调优  
@@ -13,11 +13,11 @@
   - [章节导航](#章节导航)
   - [引言](#引言)
   - [性能分析方法与指标](#性能分析方法与指标)
-  - [内存使用优化与零拷贝](#内存使用优化与零拷贝)
+  - [内存使用优化与零复制](#内存使用优化与零复制)
   - [延迟与吞吐量调优](#延迟与吞吐量调优)
   - [批处理与缓存机制](#批处理与缓存机制)
   - [工程案例与代码示例](#工程案例与代码示例)
-    - [1. 零拷贝缓冲区](#1-零拷贝缓冲区)
+    - [1. 零复制缓冲区](#1-零复制缓冲区)
     - [2. 批量异步写入](#2-批量异步写入)
     - [3. Stream背压控制](#3-stream背压控制)
   - [形式化分析与定理](#形式化分析与定理)
@@ -41,10 +41,10 @@ Rust异步编程在高并发场景下对性能提出极高要求。通过合理�
 
 ---
 
-## 内存使用优化与零拷贝
+## 内存使用优化与零复制
 
 - **状态机优化**：只保存跨.await变量，减少状态机大小。
-- **零拷贝（Zero-Copy）**：避免不必要的数据复制，直接在缓冲区操作。
+- **零复制（Zero-Copy）**：避免不必要的数据复制，直接在缓冲区操作。
 - **内存池与对象复用**：减少频繁分配与回收。
 - **Pin与Unpin**：合理利用，避免堆分配。
 
@@ -69,7 +69,7 @@ Rust异步编程在高并发场景下对性能提出极高要求。通过合理�
 
 ## 工程案例与代码示例
 
-### 1. 零拷贝缓冲区
+### 1. 零复制缓冲区
 
 ```rust
 use bytes::BytesMut;
@@ -101,7 +101,7 @@ async fn process_stream<S: Stream<Item = Data> + Unpin>(mut s: S) {
 
 ## 形式化分析与定理
 
-- **定理 7.1 (零拷贝最优性)**
+- **定理 7.1 (零复制最优性)**
 
   ```text
   ZeroCopy(buf) ⇒ Min(MemoryCopyCost)
@@ -113,7 +113,7 @@ async fn process_stream<S: Stream<Item = Data> + Unpin>(mut s: S) {
   Batch(n) ⇒ Throughput↑, Latency↓ (n适中)
   ```
 
-- **定理 7.3 (背压安全性)**
+- **定理 7.3 (背压安全)**
 
   ```text
   ∀Stream. Backpressure(Stream) ⇒ ¬OOM
@@ -131,3 +131,28 @@ async fn process_stream<S: Stream<Item = Data> + Unpin>(mut s: S) {
 ---
 
 > 本文档为Rust异步性能优化与工程实践的形式化索引，后续章节将递归细化各子主题。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

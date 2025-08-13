@@ -1,4 +1,4 @@
-# Rust 设计模式与所有权系统结合 {#设计模式}
+﻿# Rust 设计模式与所有权系统结合 {#设计模式}
 
 **章节编号**: 06-04  
 **主题**: 经典设计模式、所有权系统、工程实现  
@@ -26,8 +26,8 @@
 
 ## 设计模式理论基础
 
-- **设计模式**：可复用的工程结构与行为方案，提升代码可维护性与扩展性。
-- **GoF 23种模式**：创建型、结构型、行为型。
+- **设计模式**：可复用的工程结构体体体与行为方案，提升代码可维护性与扩展性。
+- **GoF 23种模式**：创建型、结构体体体型、行为型。
 - **Rust特色**：所有权、借用、生命周期影响模式实现与变体。
 
 ---
@@ -35,7 +35,7 @@
 ## 所有权系统对设计模式的影响
 
 - **单例模式**：全局唯一性可用lazy_static/OnceCell/Mutex等安全实现。
-- **工厂模式**：所有权转移与资源管理结合，避免内存泄漏。
+- **工厂模式**：所有权移动与资源管理结合，避免内存泄漏。
 - **观察者模式**：弱引用（Weak）、生命周期管理防止循环引用。
 - **策略/命令模式**：trait对象、泛型、闭包灵活实现。
 - **装饰器/组合模式**：Box、Rc、Arc等智能指针安全组合。
@@ -45,12 +45,12 @@
 ## 经典设计模式Rust实现
 
 - **单例（Singleton）**：OnceCell/Mutex静态全局。
-- **工厂（Factory）**：所有权转移，返回Box/Arc等。
+- **工厂（Factory）**：所有权移动，返回Box/Arc等。
 - **观察者（Observer）**：`Rc<RefCell<T>>`+Weak防止循环。
 - **策略（Strategy）**：trait对象/泛型/闭包。
 - **命令（Command）**：FnBox/trait对象。
 - **装饰器（Decorator）**：`Box<Trait>`链式包装。
-- **组合（Composite）**：树结构+Box/Arc。
+- **组合（Composite）**：树结构体体体+Box/Arc。
 
 ---
 
@@ -91,7 +91,7 @@ struct Context<S: Strategy> { strategy: S }
 
 ## 形式化分析与定理
 
-- **定理 4.1 (所有权安全性)**
+- **定理 4.1 (所有权安全)**
 
   ```text
   Rust设计模式实现 ⊢ 无悬垂指针/内存泄漏/数据竞争
@@ -103,10 +103,10 @@ struct Context<S: Strategy> { strategy: S }
   生命周期参数保证引用安全，防止悬垂
   ```
 
-- **定理 4.3 (组合与变体安全性)**
+- **定理 4.3 (组合与变体安全)**
 
   ```text
-  智能指针+Drop+Weak组合可安全实现复杂结构
+  智能指针+Drop+Weak组合可安全实现复杂结构体体体
   ```
 
 ---
@@ -124,3 +124,30 @@ struct Context<S: Strategy> { strategy: S }
 ---
 
 > 本文档为Rust设计模式与所有权系统结合的理论与工程索引，后续章节将递归细化各子主题。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

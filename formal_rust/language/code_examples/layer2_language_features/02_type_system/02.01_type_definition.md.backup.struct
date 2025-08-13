@@ -1,0 +1,121 @@
+﻿# 类型定义（Type Definition）
+
+## 元数据
+
+- **概念ID**: 02.01
+- **概念名称**: 类型定义 (Type Definition)
+- **理论层次**: 第二层：语言特征形式化层
+- **相关概念**: 02.02 (类型推断), 02.03 (子类型), 02.11 (结构体体类型), 02.10 (枚举类型)
+- **难度级别**: 基础
+
+## 理论简述
+
+类型定义是类型系统的基础，描述了值的结构体和行为。Rust支持多种类型定义方式，包括基本类型、结构体体、枚举、元组、数组等。
+
+- 类型定义为值分配内存和行为约束
+- 用户可自定义复合类型（struct、enum、type alias）
+- 类型定义是类型安全和抽象的基础
+
+## 形式化定义
+
+```math
+T ::= \text{基本类型} \mid \text{结构体体} \mid \text{枚举} \mid \text{元组} \mid \text{数组}
+```
+
+- $T$ 表示类型定义的集合
+
+## 代码示例
+
+```rust
+// 基本类型定义
+type MyInt = i32;
+
+// 结构体体类型定义
+struct Point {
+    x: f64,
+    y: f64,
+}
+
+// 枚举类型定义
+enum Direction {
+    North,
+    South,
+    East,
+    West,
+}
+
+// 元组类型定义
+let tuple: (i32, f64, char) = (42, 3.14, 'a');
+
+// 数组类型定义
+let arr: [u8; 4] = [1, 2, 3, 4];
+
+fn main() {
+    let p = Point { x: 1.0, y: 2.0 };
+    let d = Direction::East;
+    println!("Point: ({}, {})", p.x, p.y);
+    match d {
+        Direction::North => println!("North"),
+        Direction::South => println!("South"),
+        Direction::East => println!("East"),
+        Direction::West => println!("West"),
+    }
+    println!("Tuple: {:?}", tuple);
+    println!("Array: {:?}", arr);
+}
+```
+
+**解释**：
+
+- `type MyInt = i32;` 定义类型别名
+- `struct Point` 定义结构体体类型
+- `enum Direction` 定义枚举类型
+- `(i32, f64, char)` 定义元组类型
+- `[u8; 4]` 定义数组类型
+
+## 边界情况
+
+```rust
+// 空结构体体和单元类型
+type Unit = ();
+struct Empty;
+
+fn main() {
+    let u: Unit = ();
+    let e = Empty;
+    println!("Unit: {:?}, Empty struct created", u);
+}
+```
+
+**解释**：
+
+- Rust支持空结构体体和单元类型，常用于标记、占位或零成本抽象
+
+## 理论映射
+
+- 形式化定义：$T ::= \text{基本类型} \mid \text{结构体体} \mid \text{枚举} \mid \text{元组} \mid \text{数组}$
+- 类型定义是类型安全、抽象和泛型的基础
+
+## 常见错误
+
+```rust
+// 错误：字段类型不一致
+struct BadPoint {
+    x: i32,
+    y: String,
+}
+
+fn main() {
+    // let p = BadPoint { x: 1, y: 2 }; // 错误：类型不匹配
+}
+```
+
+**错误原因**：
+
+- 字段类型与实际赋值类型不一致，编译器会报错
+
+## 总结
+
+类型定义是Rust类型系统的基础，支持多种复合类型和抽象能力，是类型安全和高效编程的根基。
+
+

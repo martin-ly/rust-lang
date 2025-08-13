@@ -1,0 +1,128 @@
+﻿# 借用（Borrowing）
+
+## 元数据
+
+- **概念ID**: 01.04
+- **概念名称**: 借用 (Borrowing)
+- **理论层次**: 第二层：语言特征形式化层
+- **相关概念**: 01.01 (所有权定义), 01.03 (所有权移动), 01.05 (生命周期)
+- **难度级别**: 基础
+
+## 理论简述
+
+借用是Rust所有权系统的核心机制之一，允许在不移动所有权的情况下临时访问值。借用分为不可变借用（&T）和可变借用（&mut T），编译器通过借用检查器（Borrow Checker）保证借用规则的安全。
+
+- 不可变借用：允许多个只读访问
+- 可变借用：同一时刻只允许一个可变借用，且不能与不可变借用共存
+
+## 形式化定义
+
+```math
+Borrow(r, x, \alpha) \iff r \text{ 在生命周期 } \alpha \text{ 内借用 } x
+```
+
+- $Borrow(r, x, \alpha)$ 表示引用$r$在生命周期$\alpha$内借用变量$x$
+- 借用不会移动所有权，原变量仍然拥有值
+
+## 代码示例
+
+```rust
+fn main() {
+    let s = String::from("hello");
+    // 不可变借用
+    let r1 = &s;
+    let r2 = &s;
+    println!("r1 = {}, r2 = {}", r1, r2);
+    // s 仍然拥有所有权
+
+    // 可变借用
+    let mut s2 = String::from("world");
+    let r3 = &mut s2;
+    r3.push_str("!");
+    println!("r3 = {}", r3);
+    // s2 仍然拥有所有权
+}
+```
+
+**解释**：
+
+- `let r1 = &s;` 创建对`s`的不可变借用，允许多个只读引用
+- `let r3 = &mut s2;` 创建对`s2`的可变借用，只允许一个可写引用
+- 借用期间，原变量的所有权未移动，生命周期由借用关系决定
+
+## 边界情况
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+    let r1 = &s;
+    let r2 = &s;
+    // let r3 = &mut s; // 错误：不能在有不可变借用时再创建可变借用
+    println!("r1 = {}, r2 = {}", r1, r2);
+
+    // 正确用法：所有不可变借用结束后再创建可变借用
+    let r3 = &mut s;
+    r3.push_str(" world");
+    println!("r3 = {}", r3);
+}
+```
+
+**解释**：
+
+- 不可变借用和可变借用不能同时存在
+- 可变借用必须独占访问，防止数据竞争
+
+## 理论映射
+
+- 形式化定义：$Borrow(r, x, \alpha)$
+- 不可变借用：`&T`，可有多个
+- 可变借用：`&mut T`，同一时刻唯一
+- 借用检查器：静态分析借用关系，防止悬垂引用和数据竞争
+
+## 常见错误
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+    let r1 = &s;
+    let r2 = &mut s; // 错误：不能在有不可变借用时再创建可变借用
+    println!("r1 = {}, r2 = {}", r1, r2);
+}
+```
+
+**错误原因**：
+
+- 不可变借用和可变借用不能共存，防止数据竞争
+
+## 总结
+
+借用机制是Rust安全的核心，配合生命周期和所有权规则，保证了内存安全和并发安全。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

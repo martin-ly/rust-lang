@@ -1,4 +1,4 @@
-# 02 借用系统形式化理论 {#借用系统}
+﻿# 02 借用系统形式化理论 {#借用系统}
 
 ## 目录
 
@@ -27,7 +27,7 @@
     - [6.2 生命周期推断 {#生命周期推断}](#62-生命周期推断-生命周期推断)
     - [6.3 生命周期省略 {#生命周期省略}](#63-生命周期省略-生命周期省略)
   - [7. 实际应用](#7-实际应用)
-    - [7.1 数据结构借用 {#数据结构借用}](#71-数据结构借用-数据结构借用)
+    - [7.1 数据结构体体体借用 {#数据结构体体体借用}](#71-数据结构体体体借用-数据结构体体体借用)
     - [7.2 函数借用 {#函数借用}](#72-函数借用-函数借用)
     - [7.3 并发借用 {#并发借用}](#73-并发借用-并发借用)
   - [8. 定理证明](#8-定理证明)
@@ -54,7 +54,7 @@
 
 - [所有权](01_formal_ownership_system.md#所有权定义) (本模块)
 - [类型安全](../02_type_system/01_formal_type_system.md#类型安全) (模块 02)
-- [并发安全性](../05_concurrency/01_formal_concurrency_model.md#并发安全性) (模块 05)
+- [并发安全](../05_concurrency/01_formal_concurrency_model.md#并发安全) (模块 05)
 
 ### 1.2 理论基础
 
@@ -102,8 +102,8 @@ $$\text{BorrowConstraint} = \text{struct}\{\text{borrower}: \text{Reference}, \t
 
 **相关定理**：
 
-- [定理 1.6: 借用安全性](06_theorems.md#借用安全性) (本模块)
-- [定理 1.7: 多重不可变借用安全性](06_theorems.md#多重不可变借用安全性) (本模块)
+- [定理 1.6: 借用安全](06_theorems.md#借用安全) (本模块)
+- [定理 1.7: 多重不可变借用安全](06_theorems.md#多重不可变借用安全) (本模块)
 
 ## 3. 借用类型
 
@@ -125,7 +125,7 @@ $$\frac{\Gamma \vdash e : \tau \quad \text{not\_borrowed}(e, B)}{\Gamma \vdash \
 
 **相关定理**：
 
-- [定理 1.7: 多重不可变借用安全性](06_theorems.md#多重不可变借用安全性) (本模块)
+- [定理 1.7: 多重不可变借用安全](06_theorems.md#多重不可变借用安全) (本模块)
 
 ### 3.2 可变借用 {#可变借用}
 
@@ -176,12 +176,12 @@ $$\forall x \in \text{Variables}. \text{imm\_and\_mut\_borrow\_exclusive}(x)$$
 
 **相关定理**：
 
-- [定理 1.6: 借用安全性](06_theorems.md#借用安全性) (本模块)
+- [定理 1.6: 借用安全](06_theorems.md#借用安全) (本模块)
 - [定理 1.8: 可变借用排他性](06_theorems.md#可变借用排他性) (本模块)
 
 **相关概念**：
 
-- [并发安全性](../05_concurrency/01_formal_concurrency_model.md#并发安全性) (模块 05)
+- [并发安全](../05_concurrency/01_formal_concurrency_model.md#并发安全) (模块 05)
 - [数据竞争避免](../05_concurrency/01_formal_concurrency_model.md#数据竞争避免) (模块 05)
 
 ### 4.2 借用检查算法 {#借用检查算法}
@@ -293,7 +293,7 @@ fn check_borrows(ast: &AST) -> Result<(), Vec<BorrowError>> {
 
 **相关定理**：
 
-- [定理 1.6: 借用安全性](06_theorems.md#借用安全性) (本模块)
+- [定理 1.6: 借用安全](06_theorems.md#借用安全) (本模块)
 - [定理 1.8: 可变借用排他性](06_theorems.md#可变借用排他性) (本模块)
 
 ### 5.3 错误检测 {#错误检测}
@@ -367,7 +367,7 @@ $$\frac{\Gamma \vdash e : \tau \quad \text{no\_lifetime\_annotations}(e)}{\Gamma
 
 ## 7. 实际应用
 
-### 7.1 数据结构借用 {#数据结构借用}
+### 7.1 数据结构体体体借用 {#数据结构体体体借用}
 
 **链表借用示例**：
 
@@ -390,7 +390,7 @@ fn traverse<T>(list: &List<T>) {
 **相关概念**：
 
 - [不可变借用](#不可变借用) (本文档)
-- [数据结构生命周期](03_lifetime_system.md#数据结构生命周期) (本模块)
+- [数据结构体体体生命周期](03_lifetime_system.md#数据结构体体体生命周期) (本模块)
 - [内存管理模型](../11_memory_management/01_formal_memory_model.md#内存管理模型) (模块 11)
 
 ### 7.2 函数借用 {#函数借用}
@@ -427,9 +427,9 @@ fn parallel_process(data: &Vec<i32>) {
 
 **相关概念**：
 
-- [并发安全性](../05_concurrency/01_formal_concurrency_model.md#并发安全性) (模块 05)
+- [并发安全](../05_concurrency/01_formal_concurrency_model.md#并发安全) (模块 05)
 - [数据竞争避免](../05_concurrency/01_formal_concurrency_model.md#数据竞争避免) (模块 05)
-- [线程安全](../05_concurrency/01_formal_concurrency_model.md#线程安全性) (模块 05)
+- [线程安全](../05_concurrency/01_formal_concurrency_model.md#线程安全) (模块 05)
 
 ## 8. 定理证明
 
@@ -446,7 +446,7 @@ fn parallel_process(data: &Vec<i32>) {
 
 **相关定理**：
 
-- [定理 1.6: 借用安全性](06_theorems.md#借用安全性) (本模块)
+- [定理 1.6: 借用安全](06_theorems.md#借用安全) (本模块)
 - [定理 1.9: 生命周期有界性](06_theorems.md#生命周期有界性) (本模块)
 
 ### 8.2 数据竞争避免定理 {#数据竞争避免定理}
@@ -463,7 +463,7 @@ fn parallel_process(data: &Vec<i32>) {
 **相关定理**：
 
 - [定理 1.8: 可变借用排他性](06_theorems.md#可变借用排他性) (本模块)
-- [并发安全性定理](../05_concurrency/06_theorems.md#并发安全性定理) (模块 05)
+- [并发安全定理](../05_concurrency/06_theorems.md#并发安全定理) (模块 05)
 
 ### 8.3 借用检查完备性定理 {#借用检查完备性定理}
 
@@ -478,7 +478,7 @@ fn parallel_process(data: &Vec<i32>) {
 
 **相关定理**：
 
-- [定理 1.6: 借用安全性](06_theorems.md#借用安全性) (本模块)
+- [定理 1.6: 借用安全](06_theorems.md#借用安全) (本模块)
 - [类型系统可靠性定理](../02_type_system/06_theorems.md#类型系统可靠性) (模块 02)
 
 ## 9. 参考文献
@@ -504,3 +504,30 @@ fn parallel_process(data: &Vec<i32>) {
 ---
 
 [返回主索引](../main_comprehensive_index.md)
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

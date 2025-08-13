@@ -20,7 +20,7 @@
 
 - **服务发现**: Service discovery for dynamic service location
 - **负载均衡**: Load balancing for resource distribution
-- **故障转移**: Failover for high availability
+- **故障移动**: Failover for high availability
 - **数据分片**: Data sharding for horizontal scaling
 
 **分布式架构理论** / Distributed Architecture Theory:
@@ -357,16 +357,16 @@ pub enum LoadBalanceError {
 }
 ```
 
-#### 2.3 故障转移模式实现 / Failover Pattern Implementation
+#### 2.3 故障移动模式实现 / Failover Pattern Implementation
 
-**故障转移管理器** / Failover Manager:
+**故障移动管理器** / Failover Manager:
 
 ```rust
-// 故障转移模式实现 / Failover Pattern Implementation
+// 故障移动模式实现 / Failover Pattern Implementation
 use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 
-// 故障转移管理器 / Failover Manager
+// 故障移动管理器 / Failover Manager
 pub struct FailoverManager {
     primary_node: Arc<Mutex<Option<NodeInfo>>>,
     backup_nodes: Arc<Mutex<Vec<NodeInfo>>>,
@@ -416,7 +416,7 @@ impl FailoverManager {
                 *last_heartbeat = Instant::now();
                 Ok(())
             } else {
-                // 触发故障转移 / Trigger failover
+                // 触发故障移动 / Trigger failover
                 self.perform_failover()?;
                 Err(FailoverError::PrimaryNodeFailed)
             }
@@ -750,7 +750,7 @@ async fn main() -> std::io::Result<()> {
 
 ### 6. 总结 / Summary
 
-Rust 在分布式设计模式领域展现了巨大的潜力，通过其内存安全、所有权系统和零成本抽象等特性，为分布式模式实现提供了新的可能性。虽然存在学习曲线和生态系统限制等挑战，但随着工具链的完善和社区的不断发展，Rust 有望成为分布式模式实现的重要选择。
+Rust 在分布式设计模式领域展现了巨大的潜力，通过其内存安全、所有权系统和零成本抽象等特征，为分布式模式实现提供了新的可能性。虽然存在学习曲线和生态系统限制等挑战，但随着工具链的完善和社区的不断发展，Rust 有望成为分布式模式实现的重要选择。
 
 Rust shows great potential in distributed design patterns through its memory safety, ownership system, and zero-cost abstractions, providing new possibilities for distributed pattern implementation. Although there are challenges such as learning curve and ecosystem limitations, with the improvement of toolchain and continuous community development, Rust is expected to become an important choice for distributed pattern implementation.
 
@@ -759,4 +759,31 @@ Rust shows great potential in distributed design patterns through its memory saf
 **文档状态**: 持续更新中  
 **质量目标**: 建立世界级的 Rust 分布式设计模式知识体系  
 **发展愿景**: 成为 Rust 分布式设计模式的重要理论基础设施
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

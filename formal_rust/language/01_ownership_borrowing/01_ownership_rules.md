@@ -1,8 +1,8 @@
-# 2.1 所有权规则的形式化
+﻿# 2.1 所有权规则的形式化
 
 ## 1. 概述
 
-所有权（Ownership）是 Rust 最核心的特性，它为内存安全和并发安全提供了编译时的保障，同时避免了垃圾回收器（Garbage Collector）的运行时开销。本章节将从形式化的角度详细阐述 Rust 的所有权规则，包括其数学基础、状态转换模型，以及与线性类型理论的深刻联系。
+所有权（Ownership）是 Rust 最核心的特征，它为内存安全和并发安全提供了编译时的保障，同时避免了垃圾回收器（Garbage Collector）的运行时开销。本章节将从形式化的角度详细阐述 Rust 的所有权规则，包括其数学基础、状态转换模型，以及与线性类型理论的深刻联系。
 
 ## 2. 所有权的核心原则
 
@@ -43,9 +43,9 @@ x \text{ leaves scope } S \quad \land \quad S(x) = \text{Initialized}(v)
 
 这是 RAII 模式在 Rust 中的形式化体现。
 
-## 4. 所有权转移 (Move Semantics)
+## 4. 所有权移动 (Move Semantics)
 
-Rust 默认的赋值和函数传参行为是 **移动（Move）**，而非浅拷贝或深拷贝。
+Rust 默认的赋值和函数传参行为是 **移动（Move）**，而非浅复制或深复制。
 
 **定义 2.3 (移动操作)**:
 `let y = x;` 的操作可以形式化为状态迁移：
@@ -89,7 +89,7 @@ S(x) = \text{Initialized}(v) \quad \land \quad S(y) = \text{Uninit} \quad \land 
 
 ### 5.2. `Clone` Trait
 
-对于没有实现 `Copy` 的复杂类型（如拥有堆内存的 `String`），如果需要创建其副本，必须显式调用 `.clone()` 方法。
+对于没有实现 `Copy` 的复杂类型（如拥有堆的 `String`），如果需要创建其副本，必须显式调用 `.clone()` 方法。
 
 **定义 2.5 (`Clone` 操作)**:
 `let y = x.clone();` 的操作形式化为：
@@ -102,7 +102,7 @@ S(x) = \text{Initialized}(v) \quad \land \quad S(y) = \text{Uninit}
 }
 \]
 
-`S(x)` 的状态同样保持不变，但 `clone()` 通常意味着一次新的堆内存分配和数据复制。
+`S(x)` 的状态同样保持不变，但 `clone()` 通常意味着一次新的堆分配和数据复制。
 
 ## 6. 与线性类型理论的联系
 
@@ -130,4 +130,31 @@ Rust 的模型最接近 **仿射类型**，因为当变量离开作用域时，�
 
 ## 7. 结论
 
-Rust 的所有权规则虽然初看之下可能显得严格，但它们可以通过一个精确、一致的形式化模型来描述。这个基于状态转换和仿射类型理论的模型，是理解 Rust 如何在编译时根除一整类内存和并发错误的根本。它不仅是语言的一个特性，更是构建可靠、高效软件的范式转变。
+Rust 的所有权规则虽然初看之下可能显得严格，但它们可以通过一个精确、一致的形式化模型来描述。这个基于状态转换和仿射类型理论的模型，是理解 Rust 如何在编译时根除一整类内存和并发错误的根本。它不仅是语言的一个特征，更是构建可靠、高效软件的范式转变。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

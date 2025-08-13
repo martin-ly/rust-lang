@@ -1,10 +1,10 @@
-# 2.2.1 Rust函数调用语义深度分析
+﻿# 2.2.1 Rust函数调用语义深度分析
 
 **文档版本**: V1.0  
 **创建日期**: 2025-01-27  
 **所属层**: 控制语义层 (Control Semantics Layer)  
 **学术等级**: 专家级 (Expert Level)  
-**交叉引用**: [1.1.4 所有权转移语义](04_ownership_transfer_semantics.md), [2.3 生命周期语义](../02_control_semantics/03_lifetime_semantics/01_lifetime_analysis_semantics.md)
+**交叉引用**: [1.1.4 所有权移动语义](04_ownership_transfer_semantics.md), [2.3 生命周期语义](../02_control_semantics/03_lifetime_semantics/01_lifetime_analysis_semantics.md)
 
 ---
 
@@ -26,13 +26,13 @@ graph TB
     subgraph "函数调用流程"
         Caller[调用者函数]
         Prepare[参数准备]
-        Transfer[控制转移]
+        Transfer[控制移动]
         Execute[函数执行]
         Return[返回处理]
         Cleanup[栈清理]
     end
     
-    subgraph "栈帧结构"
+    subgraph "栈帧结构体体体"
         RetAddr[返回地址]
         SavedRegs[保存的寄存器]
         LocalVars[局部变量]
@@ -40,7 +40,7 @@ graph TB
         TempSpace[临时空间]
     end
     
-    subgraph "所有权转移"
+    subgraph "所有权移动"
         MoveArgs[移动参数]
         BorrowArgs[借用参数]
         ReturnOwnership[返回所有权]
@@ -166,7 +166,7 @@ fn by_value_move(param: NonCopyType) -> usize {
 
 fn by_reference_borrow(param: &NonCopyType) -> usize {
     println!("按引用传递非Copy类型: {:?}", param);
-    param.data.len()  // 通过引用访问，所有权不转移
+    param.data.len()  // 通过引用访问，所有权不移动
 }
 
 // 参数传递性能测试
@@ -209,7 +209,7 @@ fn parameter_passing_benchmark() {
 // 大对象传递语义
 use std::mem::size_of;
 
-// 大型结构体
+// 大型结构体体体体
 #[derive(Clone)]
 struct LargeStruct {
     data: [u8; 8192],  // 8KB数据
@@ -225,17 +225,17 @@ impl LargeStruct {
     }
 }
 
-// 按值传递大对象 - 可能导致栈拷贝
+// 按值传递大对象 - 可能导致栈复制
 fn process_large_by_value(large: LargeStruct) -> u64 {
     large.metadata.0 + large.metadata.1
 }
 
-// 按引用传递大对象 - 零拷贝
+// 按引用传递大对象 - 零复制
 fn process_large_by_reference(large: &LargeStruct) -> u64 {
     large.metadata.0 + large.metadata.1
 }
 
-// 移动传递大对象 - 所有权转移，无拷贝
+// 移动传递大对象 - 所有权移动，无复制
 fn process_large_by_move(large: LargeStruct) -> (u64, LargeStruct) {
     let result = large.metadata.0 + large.metadata.1;
     (result, large)  // 返回处理后的对象
@@ -364,7 +364,7 @@ fn named_return_value_optimization() -> LargeStruct {
     let mut result = LargeStruct::new();  // 命名返回值
     result.metadata.0 = 100;
     result.metadata.1 = 200;
-    // NRVO: 直接在调用者空间构造result，避免拷贝
+    // NRVO: 直接在调用者空间构造result，避免复制
     result
 }
 
@@ -469,7 +469,7 @@ fn verify_tail_call_optimization() {
     
     assert_eq!(result1, result2);
     
-    // 测试大数值的栈安全性
+    // 测试大数值的栈安全
     let large_n = 100_000;
     println!("大数值阶乘 ({}): {}", large_n, factorial_recursive(large_n, 1) % 1000000);
 }
@@ -543,7 +543,7 @@ fn mutual_recursion_benchmark() {
 
 ### 2.2.1.5.1 panic安全的函数调用
 
-**定义 2.2.1.6** (panic安全性)
+**定义 2.2.1.6** (panic安全)
 函数 $f$ 是panic安全的当且仅当：
 $$\forall \text{state } S. \text{panic}(f(S)) \implies \text{consistent}(S')$$
 其中 $S'$ 是panic后的状态。
@@ -838,7 +838,7 @@ fn higher_order_function_optimization() {
 Rust函数调用语义的关键优化保证：
 
 1. **零成本内联**: 小函数完全内联，无调用开销
-2. **RVO/NRVO**: 返回值优化避免不必要的拷贝
+2. **RVO/NRVO**: 返回值优化避免不必要的复制
 3. **尾调用优化**: 尾递归转换为迭代，避免栈溢出
 4. **panic安全**: 栈展开确保资源正确清理
 
@@ -920,3 +920,30 @@ pub extern "C" fn bad_add(a: i32, b: i32) -> i64 {
 }
 // error: 调用方和被调用方ABI不一致，可能导致未定义行为
 ```
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

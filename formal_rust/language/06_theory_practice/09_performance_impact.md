@@ -1,4 +1,4 @@
-# Rust 性能影响分析：理论模型与实际表现 {#性能影响分析}
+﻿# Rust 性能影响分析：理论模型与实际表现 {#性能影响分析}
 
 **章节编号**: 06-09  
 **主题**: 性能模型、资源管理、所有权、并发、抽象、基准测试  
@@ -38,7 +38,7 @@
 
 ## 所有权与抽象的性能分析
 
-- **所有权转移**：move避免复制，提升性能。
+- **所有权移动**：move避免复制，提升性能。
 - **借用/引用**：减少不必要的复制，提升内存效率。
 - **trait对象/泛型**：泛型单态化零开销，trait对象有动态分派成本。
 
@@ -55,7 +55,7 @@
 ## 基准测试与优化策略
 
 - **基准测试工具**：criterion、cargo bench、perf、valgrind。
-- **优化策略**：内存池、批处理、零拷贝、缓存友好、避免过度抽象。
+- **优化策略**：内存池、批处理、零复制、缓存友好、避免过度抽象。
 - **性能陷阱**：过度Box/Arc、trait对象滥用、锁粒度过细。
 
 ---
@@ -86,7 +86,7 @@ use std::sync::{Mutex, atomic::{AtomicUsize, Ordering}};
   泛型单态化 ⊢ 无运行时开销
   ```
 
-- **定理 9.2 (所有权转移优化)**
+- **定理 9.2 (所有权移动优化)**
 
   ```text
   move语义 ⊢ 避免不必要复制，提升性能
@@ -104,7 +104,7 @@ use std::sync::{Mutex, atomic::{AtomicUsize, Ordering}};
 
 - [资源管理模型](./01_resource_management.md)
 - [所有权设计模式](./06_ownership_patterns.md)
-- [并发安全性保证](./07_concurrency_safety.md)
+- [并发安全保证](./07_concurrency_safety.md)
 - [并行编程模式](./08_parallel_patterns.md)
 - [类型系统核心](../03_type_system_core/)
 - [并发与性能优化](../05_concurrency/)
@@ -113,3 +113,28 @@ use std::sync::{Mutex, atomic::{AtomicUsize, Ordering}};
 ---
 
 > 本文档为Rust理论性能模型与实际表现的理论与工程索引，后续章节将递归细化各子主题。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

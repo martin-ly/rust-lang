@@ -1,4 +1,4 @@
-# Rust 异步错误处理机制与异常安全 {#错误处理}
+﻿# Rust 异步错误处理机制与异常安全 {#错误处理}
 
 **模块编号**: 06-06  
 **主题**: 异步错误传播、取消与超时、异常安全  
@@ -112,7 +112,7 @@ async fn safe_file_op(path: &str) -> std::io::Result<()> {
   async_fn: Input → Future<Result<Output, Error>>
   ```
 
-- **定理 6.1 (异常安全性)**
+- **定理 6.1 (异常安全)**
 
   ```text
   ∀async_fn. Drop + Ownership ⊢ ResourceSafe
@@ -136,3 +136,30 @@ async fn safe_file_op(path: &str) -> std::io::Result<()> {
 ---
 
 > 本文档为Rust异步错误处理机制与异常安全的形式化索引，后续章节将递归细化各子主题。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

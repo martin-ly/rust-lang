@@ -1,8 +1,8 @@
-# 2.2 借用机制的形式化
+﻿# 2.2 借用机制的形式化
 
 ## 1. 概述
 
-借用（Borrowing）是 Rust 所有权系统的配套机制，它允许在不转移所有权的情况下临时访问值。这种临时访问是通过 **引用（references）** 实现的。借用机制是 Rust 能够在编译时静态地防止数据竞争（data races）的核心。
+借用（Borrowing）是 Rust 所有权系统的配套机制，它允许在不移动所有权的情况下临时访问值。这种临时访问是通过 **引用（references）** 实现的。借用机制是 Rust 能够在编译时静态地防止数据竞争（data races）的核心。
 
 本章节将为借用机制提供一个形式化的状态机模型，清晰地定义共享引用（`&T`）和独占引用（`&mut T`）的规则、它们如何与所有者交互，以及生命周期的作用。
 
@@ -18,7 +18,7 @@ Rust 的借用机制可以概括为一个核心原则：**别名（Aliasing）�
 1. 存在任意数量的 **共享引用 (Shared References, `&T`)**，此时不允许任何方式的修改（别名，但不可变）。
 2. 存在 **一个且仅一个独占引用 (Exclusive Reference, `&mut T`)**，此时允许通过该引用进行修改（可变，但无别名）。
 
-这个原则是编译时数据竞争安全性的基石。
+这个原则是编译时数据竞争安全的基石。
 
 ## 3. 形式化模型: 借用状态机
 
@@ -64,8 +64,8 @@ Rust 的借用机制可以概括为一个核心原则：**别名（Aliasing）�
 
 **规则 3.3 (所有者权限限制)**:
 
-- 当 `B(v) = Shared(n)` 时，所有者只能读取 `v`，不能修改或转移 `v` 的所有权。
-- 当 `B(v) = Exclusive` 时，所有者完全不能访问 `v`（既不能读，也不能写或转移所有权），直到该独占引用失效。
+- 当 `B(v) = Shared(n)` 时，所有者只能读取 `v`，不能修改或移动 `v` 的所有权。
+- 当 `B(v) = Exclusive` 时，所有者完全不能访问 `v`（既不能读，也不能写或移动所有权），直到该独占引用失效。
 
 ```rust
 let mut s = String::from("hello"); // B(s) = Unborrowed
@@ -129,7 +129,7 @@ NLL 使得借用规则更加灵活和符合人体工程学，它允许在同一�
 
 2. **多线程间**:
     - 要在线程间共享数据，必须使用实现了 `Sync` 和 `Send` trait 的类型（通常是 `Arc<Mutex<T>>` 或 `Arc<RwLock<T>>`）。
-    - `Send` 保证类型可以被安全地转移到另一个线程。
+    - `Send` 保证类型可以被安全地移动到另一个线程。
     - `Sync` 保证类型可以被安全地通过引用（`&T`）在多个线程间共享。
     - 像 `Mutex` 和 `RwLock` 这样的同步原语，将借用规则从编译时强制执行转变为运行时（通过锁）强制执行，但依然保证了"Aliasing XOR Mutability"的核心原则，从而防止了跨线程的数据竞争。
 
@@ -164,7 +164,7 @@ $$\frac{\alpha : \beta}{\text{MutRef}_{\alpha}(T) : \text{MutRef}_{\beta}(T)}$$
 
 ## 2.3.11 总结
 
-Rust的借用机制是所有权系统的关键扩展，它允许在不转移所有权的情况下临时访问值。本章从形式化的角度详细阐述了借用机制，包括其数学基础、形式化定义以及安全性保证。借用机制与所有权系统共同构成了Rust内存安全和线程安全的基础，使得Rust能够在不依赖垃圾回收的情况下提供强大的安全保证。
+Rust的借用机制是所有权系统的关键扩展，它允许在不移动所有权的情况下临时访问值。本章从形式化的角度详细阐述了借用机制，包括其数学基础、形式化定义以及安全保证。借用机制与所有权系统共同构成了Rust内存安全和线程安全的基础，使得Rust能够在不依赖垃圾回收的情况下提供强大的安全保证。
 
 ## 2.3.12 参考文献
 
@@ -173,3 +173,30 @@ Rust的借用机制是所有权系统的关键扩展，它允许在不转移所�
 3. Jung, R., Jourdan, J. H., Krebbers, R., & Dreyer, D. (2018). RustBelt: Securing the Foundations of the Rust Programming Language.
 4. Weiss, A., Patterson, D., Ahmed, A., Appel, A. W., & Morrisett, G. (2019). Reference Mutability for Safe Parallelism.
 5. Matsakis, N. D. (2018). Non-lexical lifetimes: Introduction. Rust Blog.
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

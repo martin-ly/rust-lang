@@ -1,4 +1,4 @@
-# 01.1 变量系统与所有权基础
+﻿# 01.1 变量系统与所有权基础
 
 ## 概述
 
@@ -21,15 +21,15 @@ let mut y = 10; // 可变绑定
 y = 20;
 ```
 
-### 2. 所有权转移（Move）
+### 2. 所有权移动（Move）
 
 ```rust
 let s1 = String::from("hello");
-let s2 = s1; // s1的所有权转移给s2，s1失效
+let s2 = s1; // s1的所有权移动给s2，s1失效
 // println!("{}", s1); // 编译错误
 ```
 
-### 3. 拷贝类型（Copy）
+### 3. 复制类型（Copy）
 
 ```rust
 let a = 42;
@@ -51,7 +51,7 @@ println!("a = {}, b = {}", a, b);
 
 - Rust的所有权系统极大提升了内存安全，但对初学者有一定学习曲线
 - 变量不可变性鼓励函数式编程风格，减少数据竞争
-- 所有权转移机制对大型数据结构的高效管理有显著优势
+- 所有权移动机制对大型数据结构体体体的高效管理有显著优势
 
 ## FAQ
 
@@ -71,3 +71,30 @@ println!("a = {}, b = {}", a, b);
 ## 总结
 
 Rust变量系统与所有权机制为内存安全和高性能提供了坚实基础。理解这些核心机制是掌握Rust编程的第一步。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

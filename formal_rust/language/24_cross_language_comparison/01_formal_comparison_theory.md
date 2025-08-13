@@ -1,4 +1,4 @@
-# 批判性分析
+﻿# 批判性分析
 
 - Rust 在类型安全、内存安全、性能等方面优于 C/C++、Go、Java，但学习曲线和生态成熟度略逊。
 - 跨语言 FFI 支持良好，但与 Python、JS 等动态语言集成仍有门槛。
@@ -9,3 +9,31 @@
 - Rust 与 C/C++ 互操作开发高性能库。
 - Rust 通过 wasm 与 JS 集成实现 Web 加速。
 - Rust 结合 Python 进行数据处理和科学计算。
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

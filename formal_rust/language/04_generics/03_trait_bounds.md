@@ -1,4 +1,4 @@
-# 03. Trait 约束 (Trait Bounds)
+﻿# 03. Trait 约束 (Trait Bounds)
 
 泛型类型参数允许我们编写适用于多种类型的代码，但这带来一个问题：编译器如何知道这些未知类型能做什么？例如，在 `largest` 函数中，我们需要比较两个 `T` 类型的值，但并非所有类型都支持比较操作。
 
@@ -9,7 +9,7 @@
 Trait 约束的本质是**为泛型参数添加能力约束**。通过约束，我们告诉编译器："类型 `T` 可以是任何类型，只要它实现了 `SomeTrait`"。这使得我们可以在泛型函数内部安全地调用 `SomeTrait` 中定义的方法。
 
 **形式化视角**:
-从范畴论的角度看，Trait 约束是对泛型这一"态射"的进一步限定。它将一个泛型函数的作用域从"所有类型对象"缩小到"所有实现了特定 Trait 的类型对象子集"。这确保了类型映射的有效性和安全性。
+从范畴论的角度看，Trait 约束是对泛型这一"态射"的进一步限定。它将一个泛型函数的作用域从"所有类型对象"缩小到"所有实现了特定 Trait 的类型对象子集"。这确保了类型映射的有效性和安全。
 
 **语法**:
 在泛型参数声明后，使用 `:` 符号跟上一个或多个 Trait 名称。
@@ -118,3 +118,32 @@ impl<T: Display + PartialOrd> Pair<T> {
 * **上一章 ->** `02_generic_type_parameters.md`
 * **下一章 ->** `04_associated_types.md`: 探索 Trait 中关联类型的概念。
 * **返回目录 ->** `_index.md`
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

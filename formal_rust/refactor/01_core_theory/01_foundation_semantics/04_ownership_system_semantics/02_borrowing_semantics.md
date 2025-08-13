@@ -46,7 +46,7 @@ $$\text{BorrowInvariant}(state) \triangleq \text{Exclusivity}(state) \land \text
 
 ### 1.2 借用检查理论
 
-**定理 1.4.3** (借用安全性)
+**定理 1.4.3** (借用安全)
 良构的借用检查保证内存安全：
 $$\forall prog. \text{BorrowCheck}(prog) \Rightarrow \text{MemorySafe}(prog)$$
 
@@ -68,7 +68,7 @@ function borrow_check(program):
 ```rust
 use std::collections::{HashMap, HashSet};
 
-// 借用检查器核心结构
+// 借用检查器核心结构体体体
 #[derive(Debug)]
 struct BorrowChecker {
     loans: Vec<Loan>,
@@ -432,7 +432,7 @@ impl<'a, T> Drop for WriteGuard<'a, T> {
 ### 3.1 复杂借用场景
 
 ```rust
-// 树结构的借用管理
+// 树结构体体体的借用管理
 struct TreeNode<T> {
     value: T,
     children: Vec<Box<TreeNode<T>>>,
@@ -549,7 +549,7 @@ impl SplitBorrowExample {
     }
 }
 
-// 生命周期优化的数据结构
+// 生命周期优化的数据结构体体体
 struct OptimizedContainer<'a, T> {
     data: &'a mut [T],
     cursors: Vec<usize>,
@@ -616,7 +616,7 @@ enum Rule {
 **2. 非词法生命周期（NLL）**:
 
 ```rust
-// NLL示例：更精确的借用范围
+// NLL示例：更精确的借用作用域
 fn nll_example() {
     let mut data = vec![1, 2, 3];
     
@@ -696,4 +696,33 @@ struct GpuBorrow<T> {
 ---
 
 > **版本信息**：v1.0.0，最后更新于 2024-12-30
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

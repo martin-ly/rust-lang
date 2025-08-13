@@ -190,7 +190,7 @@ $$\forall d \in D, \forall (k, v) \in \text{map}(d): \text{type}(k) \in \mathcal
 2. Reduce 函数类型：$\forall r \in R: \text{type}(r) = K \times [V] \rightarrow V'$
 3. 类型一致性：$\forall (k, v) \in \text{intermediate}: \text{type}(k) = K \land \text{type}(v) = V$
 
-## 4. 并行安全性
+## 4. 并行安全
 
 ### 4.1 数据竞争预防
 
@@ -319,7 +319,7 @@ fn parallel_sort_example() {
     let numbers = vec![5, 2, 8, 1, 9, 3, 7, 4, 6];
     
     let map_fn = Box::new(|num: i32| {
-        vec![(num / 3, num)] // 按范围分区
+        vec![(num / 3, num)] // 按作用域分区
     });
     
     let reduce_fn = Box::new(|_range: i32, mut values: Vec<i32>| {
@@ -354,7 +354,7 @@ $$\forall d \in D: \text{result}(d) = \text{expected}(d)$$
 **定理 7.2 (并行保证)** Map-Reduce 系统满足并行保证：
 $$\forall p_1, p_2 \in P: p_1 \parallel p_2$$
 
-## 8. 高级特性
+## 8. 高级特征
 
 ### 8.1 流式处理
 
@@ -453,4 +453,29 @@ Map-Reduce 模式提供了：
 - 简单的编程模型
 
 在 Rust 中，Map-Reduce 模式通过类型系统和所有权系统提供了额外的安全保障。
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

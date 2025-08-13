@@ -1,4 +1,4 @@
-# 常见问题解答 (FAQ)
+﻿# 常见问题解答 (FAQ)
 
 ## 进程管理
 
@@ -155,7 +155,7 @@ A:
 
 1. 使用共享内存传输大数据
 2. 批量处理小消息
-3. 使用零拷贝技术
+3. 使用零复制技术
 4. 选择合适的 IPC 机制
 
 ### Q: 如何减少锁竞争？
@@ -164,7 +164,7 @@ A:
 
 1. 使用细粒度锁
 2. 减少锁持有时间
-3. 使用无锁数据结构
+3. 使用无锁数据结构体体体
 4. 采用读写锁分离
 
 ### Q: 如何监控进程性能？
@@ -426,3 +426,28 @@ A:
 ---
 
 *本 FAQ 涵盖了进程、通信与同步机制模块的常见问题。如有其他问题，请参考相关章节或提交 Issue。*
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

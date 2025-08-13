@@ -1,4 +1,4 @@
-# Rust 异步编程术语表（Glossary）
+﻿# Rust 异步编程术语表（Glossary）
 
 **模块编号**: 06-Glossary  
 **主题**: async/await核心术语与工程释义  
@@ -10,9 +10,9 @@
 | 术语         | 英文/缩写      | 定义/工程意义                                                                 | 交叉引用 |
 |--------------|---------------|------------------------------------------------------------------------------|----------|
 | 异步/await   | async/await    | Rust用于编写异步代码的语法，async定义异步函数/块，await等待Future完成         | 01_formal_async_system.md |
-| Future       | Future         | 表示可能尚未完成的异步计算，核心trait，poll驱动状态转移                      | 01_formal_async_system.md, 04_future_execution.md |
+| Future       | Future         | 表示可能尚未完成的异步计算，核心trait，poll驱动状态移动                      | 01_formal_async_system.md, 04_future_execution.md |
 | 状态机       | State Machine  | async/await编译为有限状态机，管理暂停/恢复点                                 | 03_state_machine_theory.md |
-| Pin          | Pin            | 智能指针，保证对象在内存中不被移动，防止自引用结构悬垂指针                    | 01_formal_async_system.md |
+| Pin          | Pin            | 智能指针，保证对象在内存中不被移动，防止自引用结构体体体悬垂指针                    | 01_formal_async_system.md |
 | Unpin        | Unpin          | 自动trait，标记可安全移动的类型，大多数类型默认Unpin                         | 01_formal_async_system.md |
 | Waker        | Waker          | 唤醒器，通知执行器某Future已准备好可继续poll                                  | 04_future_execution.md |
 | Context      | Context        | poll方法参数，封装Waker与任务上下文                                          | 04_future_execution.md |
@@ -35,3 +35,32 @@
 ---
 
 > 本术语表系统梳理Rust异步编程核心概念，便于理论学习与工程查阅，后续将递归细化各专题。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

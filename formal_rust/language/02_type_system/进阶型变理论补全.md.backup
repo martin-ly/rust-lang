@@ -1,0 +1,70 @@
+﻿
+# 进阶型变理论补全
+
+## 1. 型变基本定义与推理规则
+
+- **协变（Covariant）**：$F<T>$ 协变于 $T$，若 $T_1 <: T_2$ 则 $F<T_1> <: F<T_2>$。
+- **逆变（Contravariant）**：$F<T>$ 逆变于 $T$，若 $T_2 <: T_1$ 则 $F<T_1> <: F<T_2>$。
+- **不变（Invariant）**：$F<T>$ 不变于 $T$，无子类型关系。
+- **常变（Constant）**：$F<T>$ 常变于 $T$，$F<T_1> = F<T_2>$。
+- **推理规则**：对类型构造器、函数类型、引用类型等归纳推理。
+
+## 2. Rust中的型变场景
+
+- **引用类型**：`&'a T` 协变于 `'a` 和 `T`，`&'a mut T` 不变于 `T`，协变于 `'a`。
+- **函数类型**：参数逆变，返回值协变。
+- **泛型容器**：`Vec<T>` 协变于 `T`，`Cell<T>` 不变于 `T`。
+- **trait对象**：trait bound影响型变，`dyn Trait + 'a` 协变于 `'a`。
+
+## 3. 型变与生命周期/所有权/trait的交互
+
+- **生命周期型变**：$'a : 'b \Rightarrow &'a T <: &'b T$（协变）。
+- **所有权与型变**：`Box<T>` 协变于 `T`，但 `Rc<RefCell<T>>` 组合型变需谨慎。
+- **trait bound与型变**：trait对象安全与型变规则紧密相关。
+
+## 4. 反例与工程案例
+
+- **反例**：
+  - `fn(&'static str) -> &'static str` 不能赋值给 `fn(&'a str) -> &'a str`（参数逆变、返回值协变）。
+  - `Cell<T>` 不变，防止内部可变性破坏类型安全。
+- **工程案例**：
+  - 标准库 `Arc<T>`、`Mutex<T>`、`RefCell<T>` 的型变分析。
+  - 泛型trait对象的型变边界与编译器错误。
+
+## 5. 自动化验证与工具
+
+- **Coq/Lean型变推理脚本**：类型构造器、子类型规则、型变归纳证明。
+- **Rustc型变推导与错误报告**：编译器自动推导型变，错误信息与理论对应。
+
+---
+
+> **递归补充说明**：本节内容将持续迭代完善，欢迎补充具体型变证明、反例、工程案例与自动化工具用法，推动进阶型变理论内容的形式化论证与证明体系不断进化。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

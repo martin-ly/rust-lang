@@ -1,4 +1,4 @@
-# C07-02. 进程间通信机制（IPC Mechanisms）
+﻿# C07-02. 进程间通信机制（IPC Mechanisms）
 
 本章系统梳理 Rust 在进程间通信（IPC）方面的理论基础与工程实现，涵盖管道、命名管道、套接字、共享内存、信号、消息队列等主流机制。
 
@@ -86,4 +86,33 @@ let msg = rx.recv()?;
 
 ## 7. 小结
 
-Rust 提供了丰富的 IPC 机制抽象，结合类型系统和所有权模型，既保证了安全性，又兼顾了性能和可移植性。实际工程中应根据通信模式、性能需求和平台兼容性合理选型。
+Rust 提供了丰富的 IPC 机制抽象，结合类型系统和所有权模型，既保证了安全，又兼顾了性能和可移植性。实际工程中应根据通信模式、性能需求和平台兼容性合理选型。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

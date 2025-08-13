@@ -918,10 +918,10 @@ impl LoopOptimizer {
     }
     
     fn can_unroll_for_loop(&self, variable: &str, iterator: &AstNode) -> bool {
-        // 检查是否是简单的范围迭代
+        // 检查是否是简单的作用域迭代
         if let AstNode::BinaryExpr { operator, left, right } = iterator {
             if matches!(operator, BinaryOperator::Range) {
-                // 检查范围是否较小
+                // 检查作用域是否较小
                 if let (AstNode::LiteralExpr { value: LiteralValue::Integer(start) }, 
                        AstNode::LiteralExpr { value: LiteralValue::Integer(end) }) = (left.as_ref(), right.as_ref()) {
                     let iterations = (end - start).abs() as usize;
@@ -1136,3 +1136,32 @@ Rust优化器实现理论提供了：
 ---
 
 **文档维护**: 本优化器实现理论文档将随着Rust形式化理论的发展持续更新和完善。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

@@ -1,0 +1,106 @@
+﻿# 11.08 并发模式（Concurrent Patterns）
+
+---
+
+## 理论简述
+
+并发模式是并发程序设计中常见的结构体体化解决方案，如生产者-消费者、工作窃取、任务池等。Rust通过安全的并发原语和类型系统支持多种并发模式，提升程序的可扩展性和健壮性。相关理论详见[并发系统理论](../../05_concurrency/01_formal_concurrency_system.md)与[并发设计模式](../../05_concurrency/07_concurrent_patterns.md)。
+
+---
+
+## 核心代码示例
+
+```rust
+// 生产者-消费者模式
+use std::sync::mpsc;
+use std::thread;
+use std::time::Duration;
+
+fn main() {
+    let (tx, rx) = mpsc::channel();
+    // 生产者线程
+    thread::spawn(move || {
+        for i in 0..5 {
+            tx.send(i).unwrap();
+            println!("生产: {}", i);
+            thread::sleep(Duration::from_millis(50));
+        }
+    });
+    // 消费者主线程
+    for received in rx {
+        println!("消费: {}", received);
+    }
+}
+```
+
+---
+
+## 详细注释
+
+- 生产者通过通道发送数据，消费者通过通道接收数据。
+- 通道保证线程安全的数据传递。
+- 可扩展为多生产者多消费者、任务池等复杂模式。
+
+---
+
+## 理论映射
+
+- 对应[并发系统理论](../../05_concurrency/01_formal_concurrency_system.md)
+- 并发设计模式见[05_concurrency/07_concurrent_patterns.md](../../05_concurrency/07_concurrent_patterns.md)
+- 消息传递机制见[11.03_message_passing.md](./11.03_message_passing.md)
+
+---
+
+## 边界情况与常见错误
+
+- **边界情况**：
+  - 多生产者/多消费者需克隆通道端。
+  - 任务池需合理调度和回收资源。
+- **常见错误**：
+  - 通道提前关闭导致数据丢失。
+  - 死锁或资源泄漏。
+  - 线程间同步不当导致竞态。
+
+---
+
+## FAQ
+
+- **Q: Rust并发模式和传统语言有何不同？**
+  - A: Rust通过类型系统和所有权模型提升并发安全，减少数据竞争。
+- **Q: 如何扩展为多生产者多消费者？**
+  - A: 克隆发送端和接收端，合理管理线程。
+- **Q: 并发模式常见应用场景？**
+  - A: 任务调度、数据管道、实时处理等。
+
+---
+
+（本示例可直接用`rustc`编译验证，理论与代码一一对应，便于教学与自动化校验。）
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

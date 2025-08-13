@@ -1,4 +1,4 @@
-# Rust 理论与实践的现实世界类比 {#现实世界类比}
+﻿# Rust 理论与实践的现实世界类比 {#现实世界类比}
 
 **章节编号**: 06-11  
 **主题**: 理论-实践现实映射、资源管理、所有权、生命周期、并发  
@@ -35,7 +35,7 @@
 ## 所有权与法律/产权模型
 
 - **所有权=产权/所有权证**：每个资源有唯一合法所有者。
-- **转移=买卖/赠与**：资源可通过move语义安全转让。
+- **移动=买卖/赠与**：资源可通过move语义安全转让。
 - **借用=租赁/临时授权**：借用期间原所有者仍负责最终归还。
 - **生命周期=合同有效期**：引用/租赁需在合同期内归还。
 
@@ -60,7 +60,7 @@
 
 ## 抽象与分层设计现实映射
 
-- **抽象=组织分层/模块化**：如公司结构、政府部门。
+- **抽象=组织分层/模块化**：如公司结构体体体、政府部门。
 - **零成本抽象=高效分工**：分层不增加额外管理成本。
 - **trait=岗位职责/接口**：不同角色实现相同接口。
 
@@ -87,7 +87,7 @@
 - [资源管理模型](./01_resource_management.md)
 - [所有权设计模式](./06_ownership_patterns.md)
 - [生命周期与RAII](./02_raii_patterns.md)
-- [并发安全性保证](./07_concurrency_safety.md)
+- [并发安全保证](./07_concurrency_safety.md)
 - [零成本抽象实践](./10_zero_cost_abstractions.md)
 - [类型系统核心](../03_type_system_core/)
 - [设计模式与应用案例](../09_design_patterns/)
@@ -95,3 +95,32 @@
 ---
 
 > 本文档为Rust理论与实践现实世界类比的理论与工程索引，后续章节将递归细化各子主题。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

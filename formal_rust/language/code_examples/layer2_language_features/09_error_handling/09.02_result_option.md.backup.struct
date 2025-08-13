@@ -1,0 +1,77 @@
+﻿# 09.02 Result与Option（Result & Option）
+
+---
+
+## 理论简述
+
+Result与Option是Rust错误处理的核心枚举类型。Option用于可选值，Result用于可恢复错误。两者结合模式匹配、?运算符等机制，实现类型安全的错误处理。相关理论详见[错误处理理论](../../09_error_handling/01_error_handling_theory.md)与[代数数据类型](../../02_type_system/02_fundamental_concepts.md#代数数据类型)。
+
+---
+
+## 核心代码示例
+
+```rust
+fn divide(x: i32, y: i32) -> Option<i32> {
+    if y == 0 { None } else { Some(x / y) }
+}
+
+fn parse_number(s: &str) -> Result<i32, std::num::ParseIntError> {
+    s.parse::<i32>()
+}
+
+fn main() {
+    match divide(10, 2) {
+        Some(v) => println!("10/2 = {}", v),
+        None => println!("除零错误"),
+    }
+
+    match parse_number("42") {
+        Ok(n) => println!("解析成功: {}", n),
+        Err(e) => println!("解析失败: {}", e),
+    }
+}
+```
+
+---
+
+## 详细注释
+
+- Option用于表达可选值，Some/None分支需穷尽处理。
+- Result用于表达可能失败的操作，Ok/Err分支需穷尽处理。
+- 可结合?运算符简化错误传播。
+
+---
+
+## 理论映射
+
+- 对应[错误处理理论](../../09_error_handling/01_error_handling_theory.md)
+- 代数数据类型见[02_type_system/02_fundamental_concepts.md#代数数据类型](../../02_type_system/02_fundamental_concepts.md#代数数据类型)
+- 模式匹配见[03_control_flow/02_pattern_matching.md](../../03_control_flow/02_pattern_matching.md)
+
+---
+
+## 边界情况与常见错误
+
+- **边界情况**：
+  - 嵌套Option/Result类型。
+  - 组合?运算符与自定义错误类型。
+- **常见错误**：
+  - 忽略None/Err分支导致panic。
+  - 错误传播链不完整。
+  - 错误类型不兼容。
+
+---
+
+## FAQ
+
+- **Q: Option和Result有何区别？**
+  - A: Option用于可选值，Result用于错误处理。
+- **Q: ?运算符如何工作？**
+  - A: 自动传播Err/None，简化错误处理。
+- **Q: 错误处理常见应用场景？**
+  - A: 文件IO、网络、解析、业务逻辑等。
+
+---
+
+（本示例可直接用`rustc`编译验证，理论与代码一一对应，便于教学与自动化校验。）
+

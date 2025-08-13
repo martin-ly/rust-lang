@@ -1,4 +1,4 @@
-# 04 分离逻辑应用
+﻿# 04 分离逻辑应用
 
 ## 章节简介
 
@@ -15,7 +15,7 @@
 
 ## 1. 分离逻辑理论基础
 
-- **分离逻辑（Separation Logic）**：扩展自Hoare逻辑，专门用于推理带有指针和可变堆内存的程序。
+- **分离逻辑（Separation Logic）**：扩展自Hoare逻辑，专门用于推理带有指针和可变堆的程序。
 - **分离合取（*）**：断言内存可分为互不重叠的两部分，分别满足不同性质。
 - **帧规则（Frame Rule）**：支持局部推理，只需关注被修改的内存区域。
 
@@ -35,9 +35,9 @@
 
 ## 3. Rust内存安全的分离逻辑建模
 
-- **所有权与借用**：可用分离逻辑中的资源分配与转移建模。
+- **所有权与借用**：可用分离逻辑中的资源分配与移动建模。
 - **借用检查**：分离逻辑断言保证借用期间资源不会被其他路径访问。
-- **RustBelt/Iris**：用高阶分离逻辑形式化证明Rust标准库和unsafe代码的安全性。
+- **RustBelt/Iris**：用高阶分离逻辑形式化证明Rust标准库和unsafe代码的安全。
 
 > **建模示例**：
 >
@@ -65,3 +65,32 @@ fn swap(x: &mut i32, y: &mut i32) {
 1. Reynolds, J. C. (2002). Separation logic: A logic for shared mutable data structures. LICS.
 2. Jung, R., Jourdan, J. H., Krebbers, R., & Dreyer, D. (2017). RustBelt: Securing the foundations of the Rust programming language. POPL 2018.
 3. Prusti, Creusot等工具官方文档。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

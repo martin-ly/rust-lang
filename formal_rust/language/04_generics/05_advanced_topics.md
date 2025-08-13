@@ -1,4 +1,4 @@
-# 05. 高级泛型主题 (Advanced Generic Topics)
+﻿# 05. 高级泛型主题 (Advanced Generic Topics)
 
 本章探讨由 Rust 泛型系统引申出的一些更深入、更具理论性的主题，包括多态的两种主要形式，以及在类型级别进行抽象的更高层次的概念。
 
@@ -52,7 +52,7 @@
     }
     ```
 
-| 特性 | 静态多态 (泛型) | 动态多态 (Trait 对象) |
+| 特征 | 静态多态 (泛型) | 动态多态 (Trait 对象) |
 | :--- | :--- | :--- |
 | **解析时机** | 编译时 | 运行时 |
 | **性能开销** | 无 (零成本) | 微小 (vtable 查询) |
@@ -95,7 +95,7 @@ impl<T> Functor<Option<_>> for ... { ... }
 `Functor` Trait 本身是泛型的，它泛化的不是一个具体的类型 `T`，而是一个类型构造器 `F`。
 
 **当前状态**:
-目前，**Rust 稳定版不直接支持 HKT**。这是 Rust 类型系统中最受期待也最复杂的待实现特性之一。虽然社区通过一些复杂的编码模式（如 a-la-carte 模式）进行模拟，但原生支持仍在探索中。类似 `generic_const_exprs` 等特性的发展，标志着 Rust 的类型系统正逐步变得更强大，为未来可能支持 HKT 等高级概念奠定基础。
+目前，**Rust 稳定版不直接支持 HKT**。这是 Rust 类型系统中最受期待也最复杂的待实现特征之一。虽然社区通过一些复杂的编码模式（如 a-la-carte 模式）进行模拟，但原生支持仍在探索中。类似 `generic_const_exprs` 等特征的发展，标志着 Rust 的类型系统正逐步变得更强大，为未来值值值可能支持 HKT 等高级概念奠定基础。
 
 ---
 
@@ -103,3 +103,32 @@ impl<T> Functor<Option<_>> for ... { ... }
 
 * **上一章 ->** `04_associated_types.md`
 * **返回目录 ->** `_index.md`
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

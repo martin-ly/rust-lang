@@ -1,4 +1,4 @@
-# 编译理论（形式化补充）
+﻿# 编译理论（形式化补充）
 
 ## 1. 编译期类型检查
 
@@ -12,7 +12,7 @@
 
 ## 3. const求值与编译期计算
 
-- const fn、const泛型等在编译期求值，提升安全性与性能。
+- const fn、const泛型等在编译期求值，提升安全与性能。
 - 形式化：$\text{ConstEval}: \text{ConstFn} \times \text{ConstArgs} \to \text{ConstValue}$
 
 ## 4. 优化与零成本抽象
@@ -37,7 +37,7 @@
 
 - 宏展开仅做语法树转换，不改变语义。
 
-**定理3（const求值安全性）**:
+**定理3（const求值安全）**:
 > 编译期const求值不会引入未定义行为。
 
 **证明思路**：
@@ -45,7 +45,7 @@
 - const上下文受限，禁止不安全操作。
 
 **定理4（零成本抽象）**:
-> 高级特性消解后无运行时开销。
+> 高级特征消解后无运行时开销。
 
 **证明思路**：
 
@@ -54,3 +54,32 @@
 ## 6. 参考文献
 
 - Rust Reference, Rust RFC Book, TAPL, RustBelt, LLVM官方文档
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

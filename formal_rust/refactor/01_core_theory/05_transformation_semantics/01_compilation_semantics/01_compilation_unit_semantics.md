@@ -38,7 +38,7 @@
     - [5.1.1.7.2 目标平台适配](#51172-目标平台适配)
   - [5.1.1.8 编译单元的依赖管理](#5118-编译单元的依赖管理)
     - [5.1.1.8.1 Crate依赖解析](#51181-crate依赖解析)
-    - [5.1.1.8.2 特性门控](#51182-特性门控)
+    - [5.1.1.8.2 特征门控](#51182-特征门控)
   - [5.1.1.9 跨引用网络](#5119-跨引用网络)
     - [5.1.1.9.1 内部引用](#51191-内部引用)
     - [5.1.1.9.2 外部引用](#51192-外部引用)
@@ -72,7 +72,7 @@ $$\text{CompilationUnit} = \text{Lex} \circ \text{Parse} \circ \text{Resolve} \c
 $$\text{CrateMetadata} = \langle \text{name}, \text{version}, \text{dependencies}, \text{features} \rangle$$
 
 ```rust
-// 编译单元结构示例
+// 编译单元结构体体体示例
 // Cargo.toml 定义编译单元元数据
 /*
 [package]
@@ -199,7 +199,7 @@ fn lexical_error_examples() {
 $$\text{Parse}(tokens) = \text{AST} \text{ where AST satisfies grammar rules}$$
 
 ```rust
-// AST结构示例（简化）
+// AST结构体体体示例（简化）
 #[derive(Debug, Clone)]
 enum Expr {
     Literal(LitKind),
@@ -479,7 +479,7 @@ fn borrow_checking_examples() {
     {
         let local_data = vec![1, 2, 3];
         // result = &local_data[0]; // 错误：local_data生命周期太短
-        result = local_data[0]; // OK：拷贝值
+        result = local_data[0]; // OK：复制值
     }
     println!("Result: {}", result);
     
@@ -504,7 +504,7 @@ fn complex_borrowing() {
     
     println!("Split borrowed: {:?}", data);
     
-    // 结构体字段借用
+    // 结构体体体体字段借用
     struct Point { x: i32, y: i32 }
     let mut point = Point { x: 1, y: 2 };
     let x_ref = &mut point.x;
@@ -702,7 +702,7 @@ fn arm64_optimizations() {
     println!("Using ARM64 optimizations");
 }
 
-// 特性检测
+// 特征检测
 fn feature_detection() {
     #[cfg(target_feature = "sse2")]
     println!("SSE2 available");
@@ -710,7 +710,7 @@ fn feature_detection() {
     #[cfg(target_feature = "avx2")]
     println!("AVX2 available");
     
-    // 运行时特性检测
+    // 运行时特征检测
     if std::arch::is_x86_feature_detected!("avx2") {
         println!("AVX2 detected at runtime");
     }
@@ -754,17 +754,17 @@ fn version_compatibility_example() {
     // 依赖版本语义：
     // "1.0" = "^1.0" (兼容更新)
     // "=1.0" (精确版本)
-    // ">=1.0, <2.0" (范围)
+    // ">=1.0, <2.0" (作用域)
     // "~1.0" (保守更新)
     
     println!("Dependency resolution handled by Cargo");
 }
 ```
 
-### 5.1.1.8.2 特性门控
+### 5.1.1.8.2 特征门控
 
 ```rust
-// 特性门控系统
+// 特征门控系统
 /*
 Cargo.toml:
 [features]
@@ -775,7 +775,7 @@ async = ["tokio"]
 experimental = []
 */
 
-// 基于特性的条件编译
+// 基于特征的条件编译
 #[cfg(feature = "std")]
 use std::collections::HashMap;
 
@@ -797,7 +797,7 @@ pub mod experimental_features {
     }
 }
 
-// 特性检测
+// 特征检测
 pub fn feature_detection() {
     #[cfg(feature = "std")]
     println!("Standard library available");
@@ -931,7 +931,7 @@ fn main() {
     println!("cargo:rerun-if-changed=build.rs");
     println!("cargo:rerun-if-env-changed=CUSTOM_CONFIG");
     
-    // 5. 特性启用
+    // 5. 特征启用
     if env::var("ENABLE_FEATURE").is_ok() {
         println!("cargo:rustc-cfg=custom_feature");
     }
@@ -970,4 +970,31 @@ pub fn show_build_info() {
 ---
 
 > **链接网络**: [编译语义索引](00_compilation_semantics_index.md) | [转换语义层总览](../00_transformation_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md)
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

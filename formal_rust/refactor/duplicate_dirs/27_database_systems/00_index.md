@@ -35,7 +35,7 @@
 
 ### 1.2 历史背景
 
-数据库理论起源于20世纪60年代的关系模型，经过ACID特性、CAP定理、BASE理论等发展，形成了现代数据库系统的理论基础。
+数据库理论起源于20世纪60年代的关系模型，经过ACID特征、CAP定理、BASE理论等发展，形成了现代数据库系统的理论基础。
 
 ### 1.3 在Rust中的应用
 
@@ -62,7 +62,7 @@ Rust在数据库系统中的应用包括：
 - 笛卡尔积 (Cartesian Product): $R \times S$
 - 连接 (Join): $R \bowtie_{condition} S$
 
-### 2.2 ACID特性理论
+### 2.2 ACID特征理论
 
 **原子性 (Atomicity)**:
 $$\forall t \in T: \text{commit}(t) \lor \text{abort}(t)$$
@@ -78,7 +78,7 @@ $$\text{commit}(t) \Rightarrow \text{persistent}(t)$$
 
 ### 2.3 CAP定理
 
-对于分布式数据库系统，最多只能同时满足以下三个特性中的两个：
+对于分布式数据库系统，最多只能同时满足以下三个特征中的两个：
 
 - **一致性 (Consistency)**: 所有节点看到相同的数据
 - **可用性 (Availability)**: 每个请求都能得到响应
@@ -116,7 +116,7 @@ $$\text{TS}(T_i) < \text{TS}(T_j) \Rightarrow T_i \text{ precedes } T_j$$
 
 - 高度平衡: $\text{height}(T) = O(\log n)$
 - 节点填充: $\text{fill}(N) \geq \frac{m}{2}$
-- 范围查询: $O(\log n + k)$
+- 作用域查询: $O(\log n + k)$
 
 ## 4. 形式化模型
 
@@ -237,7 +237,7 @@ impl CacheManager {
 
 ## 6. 理论证明
 
-### 6.1 事务安全性证明
+### 6.1 事务安全证明
 
 **定理 6.1** (事务原子性)
 如果事务T满足两阶段提交协议，则T具有原子性。
@@ -316,4 +316,29 @@ B+树上的点查询时间复杂度为 $O(\log n)$。
 **维护者**: Rust语言形式化理论项目组  
 **最后更新**: 2025-01-27  
 **状态**: 完成
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

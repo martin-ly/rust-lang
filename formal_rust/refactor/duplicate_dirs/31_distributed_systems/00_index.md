@@ -119,7 +119,7 @@ $$\text{if } e_1 \to e_2 \text{ then } \text{read}(e_1) \leq \text{read}(e_2)$$
 **Raft算法**:
 1. **领导者选举**: 选举新的领导者
 2. **日志复制**: 复制日志条目
-3. **安全性**: 确保日志一致性
+3. **安全**: 确保日志一致性
 
 ### 3.3 分布式事务
 
@@ -142,7 +142,7 @@ $$S = (Q, \Sigma, \delta, q_0)$$
 其中：
 - $Q$ 是状态集合
 - $\Sigma$ 是输入字母表
-- $\delta: Q \times \Sigma \to Q$ 是转移函数
+- $\delta: Q \times \Sigma \to Q$ 是移动函数
 - $q_0$ 是初始状态
 
 **复制状态机**:
@@ -602,7 +602,7 @@ impl DistributedLock {
 1. 假设存在确定性共识算法A
 2. 构造一个执行序列，使得A无法达成共识
 3. 通过消息延迟和进程崩溃的组合
-4. 证明A要么违反安全性，要么违反活性
+4. 证明A要么违反安全，要么违反活性
 5. 因此不存在这样的算法
 
 ### 6.2 CAP定理证明
@@ -617,9 +617,9 @@ impl DistributedLock {
 4. 如果保持A，则可能返回不一致的数据，违反C
 5. 因此CAP三者不可兼得
 
-### 6.3 Raft安全性证明
+### 6.3 Raft安全证明
 
-**定理 6.3** (Raft安全性)
+**定理 6.3** (Raft安全)
 Raft算法保证在非拜占庭故障下，最多只有一个领导者，且已提交的日志不会被覆盖。
 
 **证明**:
@@ -671,4 +671,29 @@ Raft算法保证在非拜占庭故障下，最多只有一个领导者，且已�
 **维护者**: Rust语言形式化理论项目组  
 **最后更新**: 2025-01-27  
 **状态**: 完成
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

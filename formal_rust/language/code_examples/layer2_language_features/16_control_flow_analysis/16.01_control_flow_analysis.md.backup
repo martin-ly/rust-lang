@@ -1,0 +1,725 @@
+﻿# 控制流分析 (Control Flow Analysis)
+
+## 概述
+
+控制流分析用于分析程序执行路径，识别可达性、死代码和数据流。
+
+## 数学定义
+
+### 控制流图 (CFG)
+
+```text
+CFG = (V, E)
+V = {基本块}
+E = {(b1, b2) | b1 → b2}
+```
+
+### 可达性分析
+
+```text
+∀b ∈ V: reachable(b) = {b} ∪ ⋃{reachable(p) | p ∈ predecessors(b)}
+```
+
+### 数据流方程
+
+```text
+IN[b] = ⋃{OUT[p] | p ∈ predecessors(b)}
+OUT[b] = GEN[b] ∪ (IN[b] - KILL[b])
+```
+
+## 代码示例
+
+### 基础控制流分析
+
+```rust
+use std::collections::{HashMap, HashSet};
+
+// 控制流图节点
+#[derive(Debug, Clone)]
+struct BasicBlock {
+    id: usize,
+    instructions: Vec<String>,
+    successors: Vec<usize>,
+    predecessors: Vec<usize>,
+}
+
+// 控制流图
+#[derive(Debug)]
+struct ControlFlowGraph {
+    blocks: HashMap<usize, BasicBlock>,
+    entry: usize,
+    exit: usize,
+}
+
+impl ControlFlowGraph {
+    fn new() -> Self {
+        ControlFlowGraph {
+            blocks: HashMap::new(),
+            entry: 0,
+            exit: 0,
+        }
+    }
+    
+    fn add_block(&mut self, id: usize, instructions: Vec<String>) {
+        self.blocks.insert(id, BasicBlock {
+            id,
+            instructions,
+            successors: Vec::new(),
+            predecessors: Vec::new(),
+        });
+    }
+    
+    fn add_edge(&mut self, from: usize, to: usize) {
+        if let Some(block) = self.blocks.get_mut(&from) {
+            block.successors.push(to);
+        }
+        if let Some(block) = self.blocks.get_mut(&to) {
+            block.predecessors.push(from);
+        }
+    }
+    
+    // 可达性分析
+    fn reachability_analysis(&self) -> HashMap<usize, HashSet<usize>> {
+        let mut reachable = HashMap::new();
+        let mut worklist = vec![self.entry];
+        let mut visited = HashSet::new();
+        
+        while let Some(block_id) = worklist.pop() {
+            if visited.contains(&block_id) {
+                continue;
+            }
+            visited.insert(block_id);
+            
+            let mut reachable_from_block = HashSet::new();
+            reachable_from_block.insert(block_id);
+            
+            // 添加所有可达的后继节点
+            if let Some(block) = self.blocks.get(&block_id) {
+                for &successor in &block.successors {
+                    reachable_from_block.insert(successor);
+                    worklist.push(successor);
+                }
+            }
+            
+            reachable.insert(block_id, reachable_from_block);
+        }
+        
+        reachable
+    }
+    
+    // 死代码检测
+    fn dead_code_detection(&self) -> Vec<usize> {
+        let reachable = self.reachability_analysis();
+        let mut dead_blocks = Vec::new();
+        
+        for (block_id, _) in &self.blocks {
+            if !reachable.contains_key(block_id) {
+                dead_blocks.push(*block_id);
+            }
+        }
+        
+        dead_blocks
+    }
+}
+
+// 使用示例
+fn main() {
+    let mut cfg = ControlFlowGraph::new();
+    
+    // 创建基本块
+    cfg.add_block(0, vec!["entry".to_string()]);
+    cfg.add_block(1, vec!["x = 1".to_string()]);
+    cfg.add_block(2, vec!["y = 2".to_string()]);
+    cfg.add_block(3, vec!["z = x + y".to_string()]);
+    cfg.add_block(4, vec!["return z".to_string()]);
+    cfg.add_block(5, vec!["dead code".to_string()]);
+    
+    // 添加边
+    cfg.add_edge(0, 1);
+    cfg.add_edge(1, 2);
+    cfg.add_edge(2, 3);
+    cfg.add_edge(3, 4);
+    // 块5没有边连接，是死代码
+    
+    cfg.entry = 0;
+    cfg.exit = 4;
+    
+    // 分析可达性
+    let reachable = cfg.reachability_analysis();
+    println!("Reachability analysis:");
+    for (block_id, reachable_blocks) in reachable {
+        println!("Block {} can reach: {:?}", block_id, reachable_blocks);
+    }
+    
+    // 检测死代码
+    let dead_blocks = cfg.dead_code_detection();
+    println!("Dead blocks: {:?}", dead_blocks);
+}
+```
+
+### 数据流分析
+
+```rust
+// 数据流分析框架
+#[derive(Debug, Clone, PartialEq)]
+enum DataFlowValue {
+    Top,
+    Bottom,
+    Value(String),
+}
+
+#[derive(Debug)]
+struct DataFlowAnalysis {
+    cfg: ControlFlowGraph,
+    in_sets: HashMap<usize, HashSet<String>>,
+    out_sets: HashMap<usize, HashSet<String>>,
+}
+
+impl DataFlowAnalysis {
+    fn new(cfg: ControlFlowGraph) -> Self {
+        DataFlowAnalysis {
+            cfg,
+            in_sets: HashMap::new(),
+            out_sets: HashMap::new(),
+        }
+    }
+    
+    // 可用表达式分析
+    fn available_expressions(&mut self) {
+        let mut changed = true;
+        
+        // 初始化
+        for (block_id, _) in &self.cfg.blocks {
+            self.in_sets.insert(*block_id, HashSet::new());
+            self.out_sets.insert(*block_id, HashSet::new());
+        }
+        
+        while changed {
+            changed = false;
+            
+            for (block_id, block) in &self.cfg.blocks {
+                // 计算IN集合
+                let mut in_set = HashSet::new();
+                if !block.predecessors.is_empty() {
+                    in_set = self.out_sets[&block.predecessors[0]].clone();
+                    for pred_id in &block.predecessors[1..] {
+                        in_set = in_set.intersection(&self.out_sets[pred_id]).cloned().collect();
+                    }
+                }
+                
+                // 计算OUT集合
+                let gen_set = self.compute_gen_set(block);
+                let kill_set = self.compute_kill_set(block);
+                
+                let mut out_set = gen_set.clone();
+                for expr in &in_set {
+                    if !kill_set.contains(expr) {
+                        out_set.insert(expr.clone());
+                    }
+                }
+                
+                // 检查是否有变化
+                if self.in_sets[block_id] != in_set || self.out_sets[block_id] != out_set {
+                    changed = true;
+                    self.in_sets.insert(*block_id, in_set);
+                    self.out_sets.insert(*block_id, out_set);
+                }
+            }
+        }
+    }
+    
+    fn compute_gen_set(&self, block: &BasicBlock) -> HashSet<String> {
+        let mut gen_set = HashSet::new();
+        
+        for instruction in &block.instructions {
+            if instruction.contains("=") {
+                // 提取表达式
+                if let Some(expr) = self.extract_expression(instruction) {
+                    gen_set.insert(expr);
+                }
+            }
+        }
+        
+        gen_set
+    }
+    
+    fn compute_kill_set(&self, block: &BasicBlock) -> HashSet<String> {
+        let mut kill_set = HashSet::new();
+        
+        for instruction in &block.instructions {
+            if instruction.contains("=") {
+                // 提取被赋值的变量
+                if let Some(var) = self.extract_assigned_variable(instruction) {
+                    // 杀死包含该变量的所有表达式
+                    for (block_id, _) in &self.cfg.blocks {
+                        if let Some(block) = self.cfg.blocks.get(block_id) {
+                            for instruction in &block.instructions {
+                                if instruction.contains(&var) && instruction.contains("=") {
+                                    if let Some(expr) = self.extract_expression(instruction) {
+                                        kill_set.insert(expr);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        kill_set
+    }
+    
+    fn extract_expression(&self, instruction: &str) -> Option<String> {
+        if instruction.contains("=") {
+            let parts: Vec<&str> = instruction.split("=").collect();
+            if parts.len() == 2 {
+                return Some(parts[1].trim().to_string());
+            }
+        }
+        None
+    }
+    
+    fn extract_assigned_variable(&self, instruction: &str) -> Option<String> {
+        if instruction.contains("=") {
+            let parts: Vec<&str> = instruction.split("=").collect();
+            if parts.len() == 2 {
+                return Some(parts[0].trim().to_string());
+            }
+        }
+        None
+    }
+}
+```
+
+### 循环分析
+
+```rust
+// 循环检测和分析
+#[derive(Debug)]
+struct LoopAnalysis {
+    cfg: ControlFlowGraph,
+    loops: Vec<Loop>,
+}
+
+#[derive(Debug)]
+struct Loop {
+    header: usize,
+    body: HashSet<usize>,
+    back_edges: Vec<(usize, usize)>,
+}
+
+impl LoopAnalysis {
+    fn new(cfg: ControlFlowGraph) -> Self {
+        LoopAnalysis {
+            cfg,
+            loops: Vec::new(),
+        }
+    }
+    
+    // 检测自然循环
+    fn detect_natural_loops(&mut self) {
+        // 找到所有回边
+        let back_edges = self.find_back_edges();
+        
+        for (tail, head) in back_edges {
+            let loop_body = self.find_loop_body(head, tail);
+            self.loops.push(Loop {
+                header: head,
+                body: loop_body,
+                back_edges: vec![(tail, head)],
+            });
+        }
+    }
+    
+    fn find_back_edges(&self) -> Vec<(usize, usize)> {
+        let mut back_edges = Vec::new();
+        let mut visited = HashSet::new();
+        let mut stack = HashSet::new();
+        
+        self.dfs_back_edges(self.cfg.entry, &mut visited, &mut stack, &mut back_edges);
+        
+        back_edges
+    }
+    
+    fn dfs_back_edges(
+        &self,
+        node: usize,
+        visited: &mut HashSet<usize>,
+        stack: &mut HashSet<usize>,
+        back_edges: &mut Vec<(usize, usize)>,
+    ) {
+        visited.insert(node);
+        stack.insert(node);
+        
+        if let Some(block) = self.cfg.blocks.get(&node) {
+            for &successor in &block.successors {
+                if stack.contains(&successor) {
+                    back_edges.push((node, successor));
+                } else if !visited.contains(&successor) {
+                    self.dfs_back_edges(successor, visited, stack, back_edges);
+                }
+            }
+        }
+        
+        stack.remove(&node);
+    }
+    
+    fn find_loop_body(&self, header: usize, tail: usize) -> HashSet<usize> {
+        let mut body = HashSet::new();
+        body.insert(header);
+        
+        let mut worklist = vec![tail];
+        let mut visited = HashSet::new();
+        
+        while let Some(node) = worklist.pop() {
+            if visited.contains(&node) {
+                continue;
+            }
+            visited.insert(node);
+            body.insert(node);
+            
+            if let Some(block) = self.cfg.blocks.get(&node) {
+                for &predecessor in &block.predecessors {
+                    if !body.contains(&predecessor) {
+                        worklist.push(predecessor);
+                    }
+                }
+            }
+        }
+        
+        body
+    }
+    
+    // 循环优化
+    fn optimize_loops(&self) -> Vec<String> {
+        let mut optimizations = Vec::new();
+        
+        for loop_info in &self.loops {
+            // 循环不变量分析
+            let invariants = self.find_loop_invariants(loop_info);
+            if !invariants.is_empty() {
+                optimizations.push(format!(
+                    "Loop invariant hoisting for loop at block {}: {:?}",
+                    loop_info.header, invariants
+                ));
+            }
+            
+            // 强度削减
+            let strength_reductions = self.find_strength_reductions(loop_info);
+            if !strength_reductions.is_empty() {
+                optimizations.push(format!(
+                    "Strength reduction for loop at block {}: {:?}",
+                    loop_info.header, strength_reductions
+                ));
+            }
+        }
+        
+        optimizations
+    }
+    
+    fn find_loop_invariants(&self, loop_info: &Loop) -> Vec<String> {
+        let mut invariants = Vec::new();
+        
+        for &block_id in &loop_info.body {
+            if let Some(block) = self.cfg.blocks.get(&block_id) {
+                for instruction in &block.instructions {
+                    if self.is_invariant_instruction(instruction, loop_info) {
+                        invariants.push(instruction.clone());
+                    }
+                }
+            }
+        }
+        
+        invariants
+    }
+    
+    fn is_invariant_instruction(&self, instruction: &str, loop_info: &Loop) -> bool {
+        // 简化的不变量检测
+        // 实际实现需要更复杂的分析
+        instruction.contains("const") || instruction.contains("static")
+    }
+    
+    fn find_strength_reductions(&self, loop_info: &Loop) -> Vec<String> {
+        let mut reductions = Vec::new();
+        
+        for &block_id in &loop_info.body {
+            if let Some(block) = self.cfg.blocks.get(&block_id) {
+                for instruction in &block.instructions {
+                    if self.is_strength_reduction_candidate(instruction) {
+                        reductions.push(instruction.clone());
+                    }
+                }
+            }
+        }
+        
+        reductions
+    }
+    
+    fn is_strength_reduction_candidate(&self, instruction: &str) -> bool {
+        // 检测乘法可以用加法替代的情况
+        instruction.contains("*") && instruction.contains("+")
+    }
+}
+```
+
+### 路径分析
+
+```rust
+// 路径分析
+#[derive(Debug)]
+struct PathAnalysis {
+    cfg: ControlFlowGraph,
+    paths: Vec<Path>,
+}
+
+#[derive(Debug)]
+struct Path {
+    nodes: Vec<usize>,
+    conditions: Vec<String>,
+}
+
+impl PathAnalysis {
+    fn new(cfg: ControlFlowGraph) -> Self {
+        PathAnalysis {
+            cfg,
+            paths: Vec::new(),
+        }
+    }
+    
+    // 查找所有路径
+    fn find_all_paths(&mut self) {
+        self.dfs_paths(self.cfg.entry, vec![], vec![], &mut self.paths);
+    }
+    
+    fn dfs_paths(
+        &self,
+        current: usize,
+        mut path: Vec<usize>,
+        mut conditions: Vec<String>,
+        all_paths: &mut Vec<Path>,
+    ) {
+        path.push(current);
+        
+        if current == self.cfg.exit {
+            all_paths.push(Path {
+                nodes: path.clone(),
+                conditions,
+            });
+            return;
+        }
+        
+        if let Some(block) = self.cfg.blocks.get(&current) {
+            for &successor in &block.successors {
+                let mut new_conditions = conditions.clone();
+                
+                // 添加条件（如果有）
+                if let Some(condition) = self.extract_condition(&block.instructions) {
+                    new_conditions.push(condition);
+                }
+                
+                self.dfs_paths(successor, path.clone(), new_conditions, all_paths);
+            }
+        }
+    }
+    
+    fn extract_condition(&self, instructions: &[String]) -> Option<String> {
+        for instruction in instructions {
+            if instruction.contains("if") || instruction.contains("while") {
+                return Some(instruction.clone());
+            }
+        }
+        None
+    }
+    
+    // 路径覆盖分析
+    fn path_coverage_analysis(&self, executed_paths: &[Vec<usize>]) -> PathCoverage {
+        let mut covered_paths = HashSet::new();
+        let mut uncovered_paths = Vec::new();
+        
+        for executed_path in executed_paths {
+            covered_paths.insert(executed_path.clone());
+        }
+        
+        for path in &self.paths {
+            if !covered_paths.contains(&path.nodes) {
+                uncovered_paths.push(path.clone());
+            }
+        }
+        
+        PathCoverage {
+            total_paths: self.paths.len(),
+            covered_paths: covered_paths.len(),
+            uncovered_paths,
+        }
+    }
+}
+
+#[derive(Debug)]
+struct PathCoverage {
+    total_paths: usize,
+    covered_paths: usize,
+    uncovered_paths: Vec<Path>,
+}
+
+impl PathCoverage {
+    fn coverage_percentage(&self) -> f64 {
+        if self.total_paths == 0 {
+            0.0
+        } else {
+            (self.covered_paths as f64 / self.total_paths as f64) * 100.0
+        }
+    }
+}
+```
+
+## 测试验证
+
+```rust
+#[cfg(test)]
+mod tests {
+    use super::*;
+    
+    #[test]
+    fn test_reachability_analysis() {
+        let mut cfg = ControlFlowGraph::new();
+        
+        cfg.add_block(0, vec!["entry".to_string()]);
+        cfg.add_block(1, vec!["x = 1".to_string()]);
+        cfg.add_block(2, vec!["y = 2".to_string()]);
+        cfg.add_block(3, vec!["dead".to_string()]);
+        
+        cfg.add_edge(0, 1);
+        cfg.add_edge(1, 2);
+        
+        cfg.entry = 0;
+        cfg.exit = 2;
+        
+        let reachable = cfg.reachability_analysis();
+        
+        assert!(reachable.contains_key(&0));
+        assert!(reachable.contains_key(&1));
+        assert!(reachable.contains_key(&2));
+        assert!(!reachable.contains_key(&3));
+    }
+    
+    #[test]
+    fn test_dead_code_detection() {
+        let mut cfg = ControlFlowGraph::new();
+        
+        cfg.add_block(0, vec!["entry".to_string()]);
+        cfg.add_block(1, vec!["live".to_string()]);
+        cfg.add_block(2, vec!["dead".to_string()]);
+        
+        cfg.add_edge(0, 1);
+        
+        cfg.entry = 0;
+        cfg.exit = 1;
+        
+        let dead_blocks = cfg.dead_code_detection();
+        
+        assert!(dead_blocks.contains(&2));
+        assert!(!dead_blocks.contains(&0));
+        assert!(!dead_blocks.contains(&1));
+    }
+    
+    #[test]
+    fn test_loop_detection() {
+        let mut cfg = ControlFlowGraph::new();
+        
+        cfg.add_block(0, vec!["entry".to_string()]);
+        cfg.add_block(1, vec!["loop start".to_string()]);
+        cfg.add_block(2, vec!["loop body".to_string()]);
+        cfg.add_block(3, vec!["exit".to_string()]);
+        
+        cfg.add_edge(0, 1);
+        cfg.add_edge(1, 2);
+        cfg.add_edge(2, 1); // 回边
+        cfg.add_edge(1, 3);
+        
+        cfg.entry = 0;
+        cfg.exit = 3;
+        
+        let mut loop_analysis = LoopAnalysis::new(cfg);
+        loop_analysis.detect_natural_loops();
+        
+        assert_eq!(loop_analysis.loops.len(), 1);
+        assert_eq!(loop_analysis.loops[0].header, 1);
+    }
+    
+    #[test]
+    fn test_path_analysis() {
+        let mut cfg = ControlFlowGraph::new();
+        
+        cfg.add_block(0, vec!["entry".to_string()]);
+        cfg.add_block(1, vec!["if condition".to_string()]);
+        cfg.add_block(2, vec!["then branch".to_string()]);
+        cfg.add_block(3, vec!["else branch".to_string()]);
+        cfg.add_block(4, vec!["exit".to_string()]);
+        
+        cfg.add_edge(0, 1);
+        cfg.add_edge(1, 2);
+        cfg.add_edge(1, 3);
+        cfg.add_edge(2, 4);
+        cfg.add_edge(3, 4);
+        
+        cfg.entry = 0;
+        cfg.exit = 4;
+        
+        let mut path_analysis = PathAnalysis::new(cfg);
+        path_analysis.find_all_paths();
+        
+        assert_eq!(path_analysis.paths.len(), 2);
+    }
+}
+```
+
+## 形式化验证
+
+### 控制流图验证
+
+- 验证图的连通性
+- 检查基本块的完整性
+- 确保入口和出口节点的正确性
+
+### 数据流分析验证
+
+- 验证数据流方程的收敛性
+- 检查GEN和KILL集合的正确性
+- 确保分析结果的正确性
+
+## 性能考虑
+
+1. **算法复杂度**: 数据流分析的时间复杂度
+2. **内存使用**: 控制流图的存储开销
+3. **分析精度**: 平衡分析精度和性能
+
+## 最佳实践
+
+1. **模块化设计**: 将不同的分析分离
+2. **缓存结果**: 避免重复计算
+3. **增量分析**: 支持增量更新
+4. **可视化**: 提供分析结果的可视化
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

@@ -1,4 +1,4 @@
-# Rust 资源管理模型与生命周期机制 {#资源管理}
+﻿# Rust 资源管理模型与生命周期机制 {#资源管理}
 
 **章节编号**: 06-01  
 **主题**: 资源生命周期、所有权、自动释放、RAII  
@@ -51,7 +51,7 @@
 
 ## 资源管理的工程实现
 
-- **内存管理**：Box、Vec、String等自动管理堆内存。
+- **内存管理**：Box、Vec、String等自动管理堆。
 - **文件/网络/锁**：File、TcpStream、Mutex等实现Drop，自动关闭/解锁。
 - **智能指针**：Rc/Arc/RefCell等组合所有权与可变性。
 - **自定义资源管理器**：实现Drop trait，封装复杂资源释放逻辑。
@@ -72,7 +72,7 @@
   ∀r, owner(r)离开作用域 ⇒ Drop(r)
   ```
 
-- **定理 1.2 (生命周期安全性)**
+- **定理 1.2 (生命周期安全)**
 
   ```text
   ∀引用x, lifetime(x) ⊆ lifetime(owner(x))
@@ -92,7 +92,7 @@
 
 ```rust
 fn main() {
-    let v = vec![1, 2, 3]; // 离开作用域自动释放堆内存
+    let v = vec![1, 2, 3]; // 离开作用域自动释放堆
 }
 ```
 
@@ -130,3 +130,32 @@ impl Drop for MyResource {
 ---
 
 > 本文档为Rust资源管理模型与生命周期机制的理论与工程索引，后续章节将递归细化各子主题。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

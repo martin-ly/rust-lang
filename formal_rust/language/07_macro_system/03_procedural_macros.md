@@ -1,4 +1,4 @@
-# 过程宏：编译时元编程的形式化理论
+﻿# 过程宏：编译时元编程的形式化理论
 
 ## 文档状态
 
@@ -98,9 +98,9 @@ depth(macro_expansion) ≤ MAX_DEPTH
   expansion_depth(m) < ∞ ⇒ termination_guaranteed(m)
 ```
 
-## 过程宏的安全性模型
+## 过程宏的安全模型
 
-### 编译时安全性
+### 编译时安全
 
 #### 定理：编译时内存安全
 
@@ -127,7 +127,7 @@ depth(macro_expansion) ≤ MAX_DEPTH
 - 宏内标识符不会意外捕获外部作用域
 - 外部标识符不会被宏意外遮蔽
 
-### 类型安全性
+### 类型安全
 
 #### 展开后类型正确性
 
@@ -187,7 +187,7 @@ MacroState: Global → Local → TokenStream
 
 ### Serde的形式化模型
 
-#### 序列化宏的类型安全性
+#### 序列化宏的类型安全
 
 ```rust
 #[derive(Serialize)]
@@ -310,7 +310,7 @@ proc_macro_debug!(
 );
 ```
 
-## 未来发展方向
+## 未来值值值发展方向
 
 ### 1. 更强的类型级编程
 
@@ -362,14 +362,14 @@ Meta ::= Path | Path = Lit | Path(TokenTree)
 CombineAttributes: [Attribute] → GlobalEffect
 ```
 
-## 安全性验证案例
+## 安全验证案例
 
-### 案例1：derive(Clone)的安全性
+### 案例1：derive(Clone)的安全
 
 证明自动生成的Clone实现满足Clone trait的语义要求：
 
 ```rust
-// 原始结构
+// 原始结构体体体
 struct Data<T> { field: T }
 
 // 生成的实现必须满足：
@@ -411,3 +411,26 @@ fn test() {
 ---
 
 *本文档建立了过程宏的完整形式化基础，为Rust元编程提供了严格的理论框架。*
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

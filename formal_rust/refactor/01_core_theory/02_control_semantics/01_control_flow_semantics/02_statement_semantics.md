@@ -56,7 +56,7 @@ graph TD
     C --> G[位置写入]
     D --> H[环境更新]
     E --> I[局部环境]
-    F --> J[控制转移]
+    F --> J[控制移动]
     
     G --> K[状态更新]
     H --> K
@@ -67,7 +67,7 @@ graph TD
     M --> K
 ```
 
-**定理 2.1.2.1** (语句执行的安全性)
+**定理 2.1.2.1** (语句执行的安全)
 良类型的语句执行保持类型不变量：
 $$\text{TypeSafe}(s) ∧ \text{TypeConsistent}(σ) → \text{TypeConsistent}(\mathcal{S} \llbracket s \rrbracket σ)$$
 
@@ -81,7 +81,7 @@ $$\frac{Γ ⊢ e : τ \quad \text{linear}(τ) \quad x \notin \text{dom}(Γ)}{Γ,
 
 ## Rust实现
 
-### 核心特性
+### 核心特征
 
 **1. 语句AST定义**:
 
@@ -330,7 +330,7 @@ impl StatementExecutor {
     }
 }
 
-// 扩展Value类型以支持更多数据结构
+// 扩展Value类型以支持更多数据结构体体体
 #[derive(Debug, Clone, PartialEq)]
 pub enum Value {
     Unit,
@@ -354,7 +354,7 @@ pub enum Value {
 }
 ```
 
-**3. 高级语句特性**:
+**3. 高级语句特征**:
 
 ```rust
 // 循环语句处理
@@ -763,7 +763,7 @@ impl ContractStatementVerifier {
         // 2. 状态一致性检查
         self.state_checker.check_state_consistency(stmt)?;
         
-        // 3. 安全性分析
+        // 3. 安全分析
         self.security_analyzer.analyze_security(stmt)?;
         
         Ok(())
@@ -783,8 +783,33 @@ pub enum VerificationError {
 
 > **链接网络**:
 >
-> - 相关文档: [表达式语义](01_expression_semantics.md) | [控制结构语义](03_control_structures_semantics.md)
+> - 相关文档: [表达式语义](01_expression_semantics.md) | [控制结构体体体语义](03_control_structures_semantics.md)
 > - 上级文档: [控制流语义模型](../01_control_flow_semantics.md) | [控制语义层](../../02_control_semantics.md)
 >
 > **深度**: ⭐⭐⭐⭐⭐ **广度**: ⭐⭐⭐⭐⭐ **完成度**: 100%
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

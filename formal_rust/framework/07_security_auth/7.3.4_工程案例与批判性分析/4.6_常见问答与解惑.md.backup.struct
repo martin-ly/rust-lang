@@ -1,0 +1,1313 @@
+﻿# 4.6 常见问答与解惑
+
+## 认证相关问题
+
+### Q1: 如何选择合适的密码哈希算法？
+
+**问题描述**
+在Rust项目中，应该使用哪种密码哈希算法来保护用户密码？
+
+**详细解答**:
+
+```rust
+// 推荐使用Argon2id
+use argon2::{self, Config, Variant, Version};
+
+pub struct PasswordHasher {
+    config: Config,
+}
+
+impl PasswordHasher {
+    pub fn new() -> Self {
+        let config = Config {
+            variant: Variant::Argon2id, // 推荐使用Argon2id
+            version: Version::Version13,
+            mem_cost: 65536, // 64MB内存
+            time_cost: 3,    // 3次迭代
+            lanes: 4,        // 4个并行通道
+            secret: None,
+            ad: None,
+            hash_length: 32,
+        };
+        
+        Self { config }
+    }
+
+    pub fn hash_password(&self, password: &str) -> Result<String, Box<dyn std::error::Error>> {
+        let salt: [u8; 32] = rand::thread_rng().gen();
+        
+        let hash = argon2::hash_encoded(
+            password.as_bytes(),
+            &salt,
+            &self.config,
+        )?;
+        
+        Ok(hash)
+    }
+
+    pub fn verify_password(&self, password: &str, hash: &str) -> Result<bool, Box<dyn std::error::Error>> {
+        Ok(argon2::verify_encoded(hash, password.as_bytes())?)
+    }
+}
+
+// 使用示例
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let hasher = PasswordHasher::new();
+    
+    // 哈希密码
+    let password = "my_secure_password";
+    let hash = hasher.hash_password(password)?;
+    println!("Password hash: {}", hash);
+    
+    // 验证密码
+    let is_valid = hasher.verify_password(password, &hash)?;
+    println!("Password valid: {}", is_valid);
+    
+    Ok(())
+}
+```
+
+**最佳实践**:
+
+1. **使用Argon2id**: 目前最安全的密码哈希算法
+2. **适当的内存成本**: 至少64MB，防止GPU攻击
+3. **合理的时间成本**: 3-4次迭代，平衡安全和性能
+4. **随机盐值**: 每个密码使用唯一的盐值
+5. **定期更新**: 随着硬件发展调整参数
+
+### Q2: JWT Token应该设置多长的过期时间？
+
+**问题描述**
+JWT Token的过期时间应该如何设置？太短影响用户体验，太长存在安全风险。
+
+**详细解答**:
+
+```rust
+use jsonwebtoken::{encode, decode, Header, Validation, EncodingKey, DecodingKey};
+use serde::{Deserialize, Serialize};
+use chrono::{DateTime, Utc, Duration};
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Claims {
+    pub sub: String,
+    pub exp: i64,
+    pub iat: i64,
+    pub jti: String, // JWT ID，用于撤销
+}
+
+pub struct JwtManager {
+    encoding_key: EncodingKey,
+    decoding_key: DecodingKey,
+    access_token_duration: Duration,
+    refresh_token_duration: Duration,
+}
+
+impl JwtManager {
+    pub fn new(secret: &str) -> Self {
+        Self {
+            encoding_key: EncodingKey::from_secret(secret.as_ref()),
+            decoding_key: DecodingKey::from_secret(secret.as_ref()),
+            access_token_duration: Duration::minutes(15),  // 短期访问令牌
+            refresh_token_duration: Duration::days(7),     // 长期刷新令牌
+        }
+    }
+
+    pub fn create_access_token(&self, user_id: &str) -> Result<String, Box<dyn std::error::Error>> {
+        let now = Utc::now();
+        let exp = now + self.access_token_duration;
+        
+        let claims = Claims {
+            sub: user_id.to_string(),
+            exp: exp.timestamp(),
+            iat: now.timestamp(),
+            jti: Uuid::new_v4().to_string(),
+        };
+
+        Ok(encode(&Header::default(), &claims, &self.encoding_key)?)
+    }
+
+    pub fn create_refresh_token(&self, user_id: &str) -> Result<String, Box<dyn std::error::Error>> {
+        let now = Utc::now();
+        let exp = now + self.refresh_token_duration;
+        
+        let claims = Claims {
+            sub: user_id.to_string(),
+            exp: exp.timestamp(),
+            iat: now.timestamp(),
+            jti: Uuid::new_v4().to_string(),
+        };
+
+        Ok(encode(&Header::default(), &claims, &self.encoding_key)?)
+    }
+
+    pub fn verify_token(&self, token: &str) -> Result<Claims, Box<dyn std::error::Error>> {
+        let token_data = decode::<Claims>(token, &self.decoding_key, &Validation::default())?;
+        Ok(token_data.claims)
+    }
+}
+```
+
+**推荐配置**:
+
+- **访问令牌**: 15-30分钟
+- **刷新令牌**: 7-30天
+- **API密钥**: 根据使用场景，1-12个月
+- **会话令牌**: 2-8小时
+
+### Q3: 如何实现安全的会话管理？
+
+**问题描述**
+如何设计一个安全的会话管理系统，防止会话劫持和固定攻击？
+
+**详细解答**:
+
+```rust
+use std::collections::HashMap;
+use std::sync::Arc;
+use tokio::sync::RwLock;
+use chrono::{DateTime, Utc, Duration};
+
+#[derive(Debug, Clone)]
+pub struct Session {
+    pub id: String,
+    pub user_id: Uuid,
+    pub created_at: DateTime<Utc>,
+    pub expires_at: DateTime<Utc>,
+    pub last_activity: DateTime<Utc>,
+    pub ip_address: IpAddr,
+    pub user_agent: String,
+    pub is_active: bool,
+    pub csrf_token: String,
+}
+
+pub struct SessionManager {
+    sessions: Arc<RwLock<HashMap<String, Session>>>,
+    max_sessions_per_user: usize,
+    session_timeout: Duration,
+    absolute_timeout: Duration,
+}
+
+impl SessionManager {
+    pub fn new(max_sessions_per_user: usize, session_timeout: Duration, absolute_timeout: Duration) -> Self {
+        Self {
+            sessions: Arc::new(RwLock::new(HashMap::new())),
+            max_sessions_per_user,
+            session_timeout,
+            absolute_timeout,
+        }
+    }
+
+    pub async fn create_session(&self, user_id: Uuid, ip: IpAddr, user_agent: &str) -> Result<Session, Box<dyn std::error::Error>> {
+        let mut sessions = self.sessions.write().await;
+        
+        // 检查用户会话数量限制
+        let user_sessions: Vec<_> = sessions.values()
+            .filter(|s| s.user_id == user_id && s.is_active)
+            .collect();
+        
+        if user_sessions.len() >= self.max_sessions_per_user {
+            // 删除最旧的会话
+            let oldest_session = user_sessions.iter()
+                .min_by_key(|s| s.last_activity)
+                .unwrap();
+            sessions.remove(&oldest_session.id);
+        }
+        
+        let now = Utc::now();
+        let session = Session {
+            id: Uuid::new_v4().to_string(),
+            user_id,
+            created_at: now,
+            expires_at: now + self.absolute_timeout,
+            last_activity: now,
+            ip_address: ip,
+            user_agent: user_agent.to_string(),
+            is_active: true,
+            csrf_token: Self::generate_csrf_token(),
+        };
+        
+        sessions.insert(session.id.clone(), session.clone());
+        Ok(session)
+    }
+
+    pub async fn validate_session(&self, session_id: &str, ip: IpAddr, user_agent: &str) -> Result<Option<Session>, Box<dyn std::error::Error>> {
+        let mut sessions = self.sessions.write().await;
+        
+        if let Some(session) = sessions.get_mut(session_id) {
+            // 检查会话是否过期
+            if Utc::now() > session.expires_at {
+                sessions.remove(session_id);
+                return Ok(None);
+            }
+            
+            // 检查IP地址是否匹配（可选，防止会话劫持）
+            if session.ip_address != ip {
+                tracing::warn!("Session IP mismatch: expected {}, got {}", session.ip_address, ip);
+                // 可以选择终止会话或记录警告
+            }
+            
+            // 检查用户代理是否匹配
+            if session.user_agent != user_agent {
+                tracing::warn!("Session user agent mismatch");
+            }
+            
+            // 更新最后活动时间
+            session.last_activity = Utc::now();
+            
+            // 检查空闲超时
+            if Utc::now() - session.last_activity > self.session_timeout {
+                sessions.remove(session_id);
+                return Ok(None);
+            }
+            
+            Ok(Some(session.clone()))
+        } else {
+            Ok(None)
+        }
+    }
+
+    pub async fn invalidate_session(&self, session_id: &str) -> Result<(), Box<dyn std::error::Error>> {
+        let mut sessions = self.sessions.write().await;
+        sessions.remove(session_id);
+        Ok(())
+    }
+
+    pub async fn invalidate_user_sessions(&self, user_id: Uuid) -> Result<(), Box<dyn std::error::Error>> {
+        let mut sessions = self.sessions.write().await;
+        sessions.retain(|_, session| session.user_id != user_id);
+        Ok(())
+    }
+
+    fn generate_csrf_token() -> String {
+        use rand::Rng;
+        let mut rng = rand::thread_rng();
+        let bytes: [u8; 32] = rng.gen();
+        base64::encode(bytes)
+    }
+}
+```
+
+**安全最佳实践**:
+
+1. **会话ID随机性**: 使用加密安全的随机数生成器
+2. **HTTPS强制**: 所有会话相关请求使用HTTPS
+3. **HttpOnly Cookie**: 防止XSS攻击获取会话ID
+4. **Secure Cookie**: 仅通过HTTPS传输
+5. **SameSite属性**: 防止CSRF攻击
+6. **会话超时**: 设置合理的空闲和绝对超时时间
+7. **会话固定防护**: 登录后重新生成会话ID
+
+## 授权相关问题
+
+### Q4: 如何设计细粒度的权限控制系统？
+
+**问题描述**
+如何实现一个灵活、可扩展的权限控制系统，支持复杂的权限规则？
+
+**详细解答**:
+
+```rust
+use std::collections::HashMap;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Permission {
+    pub resource: String,
+    pub action: String,
+    pub conditions: Vec<Condition>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum Condition {
+    TimeRange { start: DateTime<Utc>, end: DateTime<Utc> },
+    IpRange { allowed_ips: Vec<IpAddr> },
+    UserAttribute { key: String, value: String },
+    ResourceAttribute { key: String, value: String },
+    Custom { expression: String },
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Role {
+    pub name: String,
+    pub permissions: Vec<Permission>,
+    pub inherits_from: Option<Vec<String>>,
+    pub metadata: HashMap<String, String>,
+}
+
+pub struct PermissionEngine {
+    roles: HashMap<String, Role>,
+    user_roles: HashMap<Uuid, Vec<String>>,
+    condition_evaluator: ConditionEvaluator,
+}
+
+impl PermissionEngine {
+    pub fn new() -> Self {
+        Self {
+            roles: HashMap::new(),
+            user_roles: HashMap::new(),
+            condition_evaluator: ConditionEvaluator::new(),
+        }
+    }
+
+    pub fn add_role(&mut self, role: Role) {
+        self.roles.insert(role.name.clone(), role);
+    }
+
+    pub fn assign_role(&mut self, user_id: Uuid, role_name: &str) -> Result<(), Box<dyn std::error::Error>> {
+        if !self.roles.contains_key(role_name) {
+            return Err("Role not found".into());
+        }
+        
+        let user_roles = self.user_roles.entry(user_id).or_insert_with(Vec::new);
+        if !user_roles.contains(&role_name.to_string()) {
+            user_roles.push(role_name.to_string());
+        }
+        
+        Ok(())
+    }
+
+    pub fn check_permission(
+        &self,
+        user_id: Uuid,
+        resource: &str,
+        action: &str,
+        context: &PermissionContext,
+    ) -> PermissionResult {
+        let user_roles = self.user_roles.get(&user_id).unwrap_or(&Vec::new());
+        let mut all_permissions = Vec::new();
+        
+        // 收集用户所有角色的权限
+        for role_name in user_roles {
+            if let Some(role) = self.roles.get(role_name) {
+                all_permissions.extend(role.permissions.clone());
+                
+                // 处理角色继承
+                if let Some(parent_roles) = &role.inherits_from {
+                    for parent_role_name in parent_roles {
+                        if let Some(parent_role) = self.roles.get(parent_role_name) {
+                            all_permissions.extend(parent_role.permissions.clone());
+                        }
+                    }
+                }
+            }
+        }
+        
+        // 检查是否有匹配的权限
+        for permission in all_permissions {
+            if permission.resource == resource && permission.action == action {
+                // 检查条件
+                let conditions_met = permission.conditions.iter()
+                    .all(|condition| self.condition_evaluator.evaluate(condition, context));
+                
+                if conditions_met {
+                    return PermissionResult {
+                        allowed: true,
+                        reason: "Permission granted".to_string(),
+                        role: "".to_string(),
+                    };
+                }
+            }
+        }
+        
+        PermissionResult {
+            allowed: false,
+            reason: "Permission denied".to_string(),
+            role: "".to_string(),
+        }
+    }
+}
+
+#[derive(Debug, Clone)]
+pub struct PermissionContext {
+    pub timestamp: DateTime<Utc>,
+    pub ip_address: IpAddr,
+    pub user_attributes: HashMap<String, String>,
+    pub resource_attributes: HashMap<String, String>,
+}
+
+pub struct ConditionEvaluator;
+
+impl ConditionEvaluator {
+    pub fn new() -> Self {
+        Self
+    }
+
+    pub fn evaluate(&self, condition: &Condition, context: &PermissionContext) -> bool {
+        match condition {
+            Condition::TimeRange { start, end } => {
+                context.timestamp >= *start && context.timestamp <= *end
+            },
+            Condition::IpRange { allowed_ips } => {
+                allowed_ips.contains(&context.ip_address)
+            },
+            Condition::UserAttribute { key, value } => {
+                context.user_attributes.get(key) == Some(value)
+            },
+            Condition::ResourceAttribute { key, value } => {
+                context.resource_attributes.get(key) == Some(value)
+            },
+            Condition::Custom { expression } => {
+                self.evaluate_custom_expression(expression, context)
+            },
+        }
+    }
+
+    fn evaluate_custom_expression(&self, expression: &str, context: &PermissionContext) -> bool {
+        // 实现自定义表达式评估
+        // 这里可以使用表达式解析器或脚本引擎
+        true // 简化实现
+    }
+}
+```
+
+**权限设计原则**:
+
+1. **最小权限原则**: 只授予必要的权限
+2. **职责分离**: 不同角色承担不同职责
+3. **权限继承**: 支持角色层次结构体
+4. **动态权限**: 支持基于上下文的权限
+5. **审计跟踪**: 记录所有权限检查
+
+### Q5: 如何处理权限缓存和性能优化？
+
+**问题描述**
+权限检查可能成为性能瓶颈，如何设计高效的权限缓存系统？
+
+**详细解答**:
+
+```rust
+use std::collections::HashMap;
+use std::sync::Arc;
+use tokio::sync::RwLock;
+use std::time::{Duration, Instant};
+
+#[derive(Debug, Clone)]
+pub struct PermissionCache {
+    cache: Arc<RwLock<HashMap<String, CachedPermission>>>,
+    ttl: Duration,
+    max_size: usize,
+}
+
+#[derive(Debug, Clone)]
+pub struct CachedPermission {
+    pub result: bool,
+    pub created_at: Instant,
+    pub expires_at: Instant,
+}
+
+impl PermissionCache {
+    pub fn new(ttl: Duration, max_size: usize) -> Self {
+        Self {
+            cache: Arc::new(RwLock::new(HashMap::new())),
+            ttl,
+            max_size,
+        }
+    }
+
+    pub async fn get_permission(
+        &self,
+        user_id: Uuid,
+        resource: &str,
+        action: &str,
+        context_hash: &str,
+    ) -> Option<bool> {
+        let cache_key = self.generate_cache_key(user_id, resource, action, context_hash);
+        let cache = self.cache.read().await;
+        
+        if let Some(cached) = cache.get(&cache_key) {
+            if Instant::now() < cached.expires_at {
+                return Some(cached.result);
+            }
+        }
+        
+        None
+    }
+
+    pub async fn set_permission(
+        &self,
+        user_id: Uuid,
+        resource: &str,
+        action: &str,
+        context_hash: &str,
+        result: bool,
+    ) -> Result<(), Box<dyn std::error::Error>> {
+        let cache_key = self.generate_cache_key(user_id, resource, action, context_hash);
+        let now = Instant::now();
+        
+        let mut cache = self.cache.write().await;
+        
+        // 检查缓存大小限制
+        if cache.len() >= self.max_size {
+            // 移除最旧的条目
+            let oldest_key = cache.iter()
+                .min_by_key(|(_, cached)| cached.created_at)
+                .map(|(key, _)| key.clone());
+            
+            if let Some(key) = oldest_key {
+                cache.remove(&key);
+            }
+        }
+        
+        cache.insert(cache_key, CachedPermission {
+            result,
+            created_at: now,
+            expires_at: now + self.ttl,
+        });
+        
+        Ok(())
+    }
+
+    pub async fn invalidate_user_permissions(&self, user_id: Uuid) -> Result<(), Box<dyn std::error::Error>> {
+        let mut cache = self.cache.write().await;
+        cache.retain(|key, _| !key.contains(&user_id.to_string()));
+        Ok(())
+    }
+
+    pub async fn clear_expired(&self) -> Result<(), Box<dyn std::error::Error>> {
+        let now = Instant::now();
+        let mut cache = self.cache.write().await;
+        cache.retain(|_, cached| now < cached.expires_at);
+        Ok(())
+    }
+
+    fn generate_cache_key(&self, user_id: Uuid, resource: &str, action: &str, context_hash: &str) -> String {
+        format!("{}:{}:{}:{}", user_id, resource, action, context_hash)
+    }
+}
+
+// 优化的权限检查器
+pub struct OptimizedPermissionChecker {
+    permission_engine: PermissionEngine,
+    cache: PermissionCache,
+    context_hasher: ContextHasher,
+}
+
+impl OptimizedPermissionChecker {
+    pub fn new() -> Self {
+        Self {
+            permission_engine: PermissionEngine::new(),
+            cache: PermissionCache::new(Duration::from_secs(300), 10000), // 5分钟TTL，最大10000条目
+            context_hasher: ContextHasher::new(),
+        }
+    }
+
+    pub async fn check_permission(
+        &self,
+        user_id: Uuid,
+        resource: &str,
+        action: &str,
+        context: &PermissionContext,
+    ) -> PermissionResult {
+        // 生成上下文哈希
+        let context_hash = self.context_hasher.hash_context(context);
+        
+        // 检查缓存
+        if let Some(cached_result) = self.cache.get_permission(user_id, resource, action, &context_hash).await {
+            return PermissionResult {
+                allowed: cached_result,
+                reason: "Cached result".to_string(),
+                role: "".to_string(),
+            };
+        }
+        
+        // 执行权限检查
+        let result = self.permission_engine.check_permission(user_id, resource, action, context);
+        
+        // 缓存结果
+        let _ = self.cache.set_permission(user_id, resource, action, &context_hash, result.allowed).await;
+        
+        result
+    }
+}
+```
+
+**缓存优化策略**:
+
+1. **分层缓存**: 本地缓存 + 分布式缓存
+2. **智能失效**: 基于权限变更的缓存失效
+3. **压缩存储**: 减少内存占用
+4. **批量操作**: 批量权限检查
+5. **预热策略**: 预加载常用权限
+
+## 安全通信问题
+
+### Q6: 如何配置安全的TLS连接？
+
+**问题描述**
+如何正确配置TLS以确保通信安全，避免常见的TLS配置错误？
+
+**详细解答**:
+
+```rust
+use rustls::{ServerConfig, ClientConfig, Certificate, PrivateKey};
+use rustls_pemfile::{certs, pkcs8_private_keys};
+use std::fs::File;
+use std::io::BufReader;
+
+pub struct SecureTlsConfig;
+
+impl SecureTlsConfig {
+    pub fn create_server_config(
+        cert_path: &str,
+        key_path: &str,
+    ) -> Result<ServerConfig, Box<dyn std::error::Error>> {
+        // 加载证书链
+        let cert_file = File::open(cert_path)?;
+        let cert_chain: Vec<Certificate> = certs(&mut BufReader::new(cert_file))?
+            .into_iter()
+            .map(|cert| Certificate(cert))
+            .collect();
+
+        // 加载私钥
+        let key_file = File::open(key_path)?;
+        let mut keys: Vec<PrivateKey> = pkcs8_private_keys(&mut BufReader::new(key_file))?
+            .into_iter()
+            .map(|key| PrivateKey(key))
+            .collect();
+
+        if keys.is_empty() {
+            return Err("No private keys found".into());
+        }
+
+        // 创建安全的服务器配置
+        let config = ServerConfig::builder()
+            .with_safe_default_cipher_suites()
+            .with_safe_default_kx_groups()
+            .with_protocol_versions(&[&rustls::version::TLS13])?
+            .with_no_client_auth()
+            .with_single_cert(cert_chain, keys.remove(0))?;
+
+        Ok(config)
+    }
+
+    pub fn create_client_config(
+        ca_cert_path: Option<&str>,
+    ) -> Result<ClientConfig, Box<dyn std::error::Error>> {
+        let mut config = ClientConfig::builder()
+            .with_safe_default_cipher_suites()
+            .with_safe_default_kx_groups()
+            .with_protocol_versions(&[&rustls::version::TLS13])?
+            .with_root_certificates(Self::load_root_certificates(ca_cert_path)?)
+            .with_no_client_auth();
+
+        // 配置证书验证
+        config.enable_sni = true;
+        config.enable_early_data = false; // 禁用早期数据以防止重放攻击
+
+        Ok(config)
+    }
+
+    fn load_root_certificates(ca_cert_path: Option<&str>) -> Result<rustls::RootCertStore, Box<dyn std::error::Error>> {
+        let mut root_store = rustls::RootCertStore::empty();
+        
+        if let Some(ca_path) = ca_cert_path {
+            let ca_file = File::open(ca_path)?;
+            let ca_certs = certs(&mut BufReader::new(ca_file))?;
+            
+            for cert in ca_certs {
+                root_store.add(&rustls::Certificate(cert))?;
+            }
+        } else {
+            // 使用系统默认的根证书
+            root_store.extend(rustls_native_certs::load_native_certs()?);
+        }
+        
+        Ok(root_store)
+    }
+}
+
+// 安全HTTP客户端
+pub struct SecureHttpClient {
+    client: reqwest::Client,
+}
+
+impl SecureHttpClient {
+    pub fn new() -> Result<Self, Box<dyn std::error::Error>> {
+        let tls_config = SecureTlsConfig::create_client_config(None)?;
+        
+        let client = reqwest::Client::builder()
+            .use_rustls_tls()
+            .use_preconfigured_tls(tls_config)
+            .timeout(Duration::from_secs(30))
+            .build()?;
+
+        Ok(Self { client })
+    }
+
+    pub async fn secure_get(&self, url: &str) -> Result<String, Box<dyn std::error::Error>> {
+        let response = self.client
+            .get(url)
+            .header("User-Agent", "SecureRustClient/1.0")
+            .send()
+            .await?;
+
+        if !response.status().is_success() {
+            return Err(format!("HTTP error: {}", response.status()).into());
+        }
+
+        let body = response.text().await?;
+        Ok(body)
+    }
+}
+```
+
+**TLS安全配置要点**:
+
+1. **使用TLS 1.3**: 最新的TLS协议版本
+2. **强密码套件**: 只使用安全的密码套件
+3. **证书验证**: 严格验证服务器证书
+4. **SNI支持**: 启用服务器名称指示
+5. **禁用不安全功能**: 禁用早期数据等
+6. **证书轮换**: 定期更新证书
+7. **OCSP装订**: 启用OCSP装订验证
+
+### Q7: 如何防止API密钥泄露？
+
+**问题描述**
+API密钥是重要的安全凭据，如何安全地管理和使用API密钥？
+
+**详细解答**:
+
+```rust
+use std::collections::HashMap;
+use std::sync::Arc;
+use tokio::sync::RwLock;
+use sha2::{Sha256, Digest};
+
+#[derive(Debug, Clone)]
+pub struct ApiKeyManager {
+    keys: Arc<RwLock<HashMap<String, ApiKeyInfo>>>,
+    key_generator: KeyGenerator,
+    rate_limiter: RateLimiter,
+}
+
+#[derive(Debug, Clone)]
+pub struct ApiKeyInfo {
+    pub key_hash: String,
+    pub user_id: Uuid,
+    pub name: String,
+    pub permissions: Vec<String>,
+    pub created_at: DateTime<Utc>,
+    pub last_used: Option<DateTime<Utc>>,
+    pub expires_at: Option<DateTime<Utc>>,
+    pub is_active: bool,
+    pub rate_limit: RateLimit,
+}
+
+#[derive(Debug, Clone)]
+pub struct RateLimit {
+    pub requests_per_minute: u32,
+    pub requests_per_hour: u32,
+    pub requests_per_day: u32,
+}
+
+impl ApiKeyManager {
+    pub fn new() -> Self {
+        Self {
+            keys: Arc::new(RwLock::new(HashMap::new())),
+            key_generator: KeyGenerator::new(),
+            rate_limiter: RateLimiter::new(),
+        }
+    }
+
+    pub async fn create_api_key(
+        &self,
+        user_id: Uuid,
+        name: &str,
+        permissions: Vec<String>,
+        expires_in_days: Option<u32>,
+    ) -> Result<(String, ApiKeyInfo), Box<dyn std::error::Error>> {
+        let (raw_key, key_hash) = self.key_generator.generate_key();
+        
+        let expires_at = expires_in_days.map(|days| Utc::now() + Duration::days(days as i64));
+        
+        let api_key_info = ApiKeyInfo {
+            key_hash,
+            user_id,
+            name: name.to_string(),
+            permissions,
+            created_at: Utc::now(),
+            last_used: None,
+            expires_at,
+            is_active: true,
+            rate_limit: RateLimit {
+                requests_per_minute: 100,
+                requests_per_hour: 1000,
+                requests_per_day: 10000,
+            },
+        };
+
+        let mut keys = self.keys.write().await;
+        keys.insert(raw_key.clone(), api_key_info.clone());
+
+        Ok((raw_key, api_key_info))
+    }
+
+    pub async fn validate_api_key(
+        &self,
+        api_key: &str,
+        required_permission: &str,
+    ) -> Result<ApiKeyValidationResult, Box<dyn std::error::Error>> {
+        let keys = self.keys.read().await;
+        
+        if let Some(key_info) = keys.get(api_key) {
+            // 检查密钥是否过期
+            if let Some(expires_at) = key_info.expires_at {
+                if Utc::now() > expires_at {
+                    return Ok(ApiKeyValidationResult {
+                        is_valid: false,
+                        reason: "API key expired".to_string(),
+                        user_id: None,
+                    });
+                }
+            }
+
+            // 检查密钥是否激活
+            if !key_info.is_active {
+                return Ok(ApiKeyValidationResult {
+                    is_valid: false,
+                    reason: "API key is inactive".to_string(),
+                    user_id: None,
+                });
+            }
+
+            // 检查权限
+            if !key_info.permissions.contains(&required_permission.to_string()) {
+                return Ok(ApiKeyValidationResult {
+                    is_valid: false,
+                    reason: "Insufficient permissions".to_string(),
+                    user_id: None,
+                });
+            }
+
+            // 检查速率限制
+            let rate_limit_result = self.rate_limiter.check_rate_limit(api_key, &key_info.rate_limit).await?;
+            if !rate_limit_result.allowed {
+                return Ok(ApiKeyValidationResult {
+                    is_valid: false,
+                    reason: "Rate limit exceeded".to_string(),
+                    user_id: None,
+                });
+            }
+
+            // 更新最后使用时间
+            self.update_last_used(api_key).await?;
+
+            Ok(ApiKeyValidationResult {
+                is_valid: true,
+                reason: "Valid API key".to_string(),
+                user_id: Some(key_info.user_id),
+            })
+        } else {
+            Ok(ApiKeyValidationResult {
+                is_valid: false,
+                reason: "Invalid API key".to_string(),
+                user_id: None,
+            })
+        }
+    }
+
+    pub async fn revoke_api_key(&self, api_key: &str) -> Result<(), Box<dyn std::error::Error>> {
+        let mut keys = self.keys.write().await;
+        if let Some(key_info) = keys.get_mut(api_key) {
+            key_info.is_active = false;
+        }
+        Ok(())
+    }
+
+    async fn update_last_used(&self, api_key: &str) -> Result<(), Box<dyn std::error::Error>> {
+        let mut keys = self.keys.write().await;
+        if let Some(key_info) = keys.get_mut(api_key) {
+            key_info.last_used = Some(Utc::now());
+        }
+        Ok(())
+    }
+}
+
+pub struct KeyGenerator;
+
+impl KeyGenerator {
+    pub fn new() -> Self {
+        Self
+    }
+
+    pub fn generate_key(&self) -> (String, String) {
+        use rand::Rng;
+        let mut rng = rand::thread_rng();
+        let bytes: [u8; 32] = rng.gen();
+        
+        let raw_key = base64::encode(bytes);
+        let key_hash = Self::hash_key(&raw_key);
+        
+        (raw_key, key_hash)
+    }
+
+    fn hash_key(key: &str) -> String {
+        let mut hasher = Sha256::new();
+        hasher.update(key.as_bytes());
+        base64::encode(hasher.finalize())
+    }
+}
+```
+
+**API密钥安全最佳实践**:
+
+1. **安全生成**: 使用加密安全的随机数生成器
+2. **哈希存储**: 只存储密钥的哈希值
+3. **权限分离**: 为不同用途创建不同的密钥
+4. **定期轮换**: 定期更新API密钥
+5. **速率限制**: 防止API密钥滥用
+6. **监控使用**: 记录API密钥的使用情况
+7. **安全传输**: 通过HTTPS传输API密钥
+
+## 审计和监控问题
+
+### Q8: 如何设计有效的安全审计系统？
+
+**问题描述**
+如何构建一个全面的安全审计系统，能够记录和分析安全事件？
+
+**详细解答**:
+
+```rust
+use std::collections::VecDeque;
+use tokio::sync::mpsc;
+use serde::{Serialize, Deserialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AuditEvent {
+    pub event_id: Uuid,
+    pub timestamp: DateTime<Utc>,
+    pub event_type: AuditEventType,
+    pub user_id: Option<Uuid>,
+    pub session_id: Option<String>,
+    pub ip_address: IpAddr,
+    pub user_agent: String,
+    pub resource: String,
+    pub action: String,
+    pub success: bool,
+    pub details: Value,
+    pub severity: AuditSeverity,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum AuditEventType {
+    Authentication,
+    Authorization,
+    DataAccess,
+    ConfigurationChange,
+    SecurityIncident,
+    SystemEvent,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum AuditSeverity {
+    Low,
+    Medium,
+    High,
+    Critical,
+}
+
+pub struct AuditSystem {
+    event_sender: mpsc::Sender<AuditEvent>,
+    event_processor: EventProcessor,
+    alert_manager: AlertManager,
+    storage: AuditStorage,
+}
+
+impl AuditSystem {
+    pub fn new() -> Self {
+        let (event_sender, event_receiver) = mpsc::channel(1000);
+        let event_processor = EventProcessor::new();
+        let alert_manager = AlertManager::new();
+        let storage = AuditStorage::new();
+
+        // 启动事件处理任务
+        let processor_clone = event_processor.clone();
+        let alert_clone = alert_manager.clone();
+        let storage_clone = storage.clone();
+        
+        tokio::spawn(async move {
+            while let Some(event) = event_receiver.recv().await {
+                // 处理事件
+                processor_clone.process_event(&event).await;
+                
+                // 检查是否需要告警
+                if event.severity == AuditSeverity::High || event.severity == AuditSeverity::Critical {
+                    alert_clone.send_alert(&event).await;
+                }
+                
+                // 存储事件
+                storage_clone.store_event(&event).await;
+            }
+        });
+
+        Self {
+            event_sender,
+            event_processor,
+            alert_manager,
+            storage,
+        }
+    }
+
+    pub async fn log_event(&self, event: AuditEvent) -> Result<(), Box<dyn std::error::Error>> {
+        self.event_sender.send(event).await?;
+        Ok(())
+    }
+
+    pub async fn search_events(
+        &self,
+        filters: AuditEventFilters,
+    ) -> Result<Vec<AuditEvent>, Box<dyn std::error::Error>> {
+        self.storage.search_events(filters).await
+    }
+
+    pub async fn generate_audit_report(
+        &self,
+        start_time: DateTime<Utc>,
+        end_time: DateTime<Utc>,
+    ) -> Result<AuditReport, Box<dyn std::error::Error>> {
+        let events = self.storage.get_events_in_range(start_time, end_time).await?;
+        
+        let report = AuditReport {
+            period: (start_time, end_time),
+            total_events: events.len(),
+            events_by_type: self.group_events_by_type(&events),
+            events_by_severity: self.group_events_by_severity(&events),
+            security_incidents: self.identify_security_incidents(&events),
+            recommendations: self.generate_recommendations(&events),
+        };
+
+        Ok(report)
+    }
+}
+
+#[derive(Debug, Clone)]
+pub struct AuditEventFilters {
+    pub user_id: Option<Uuid>,
+    pub event_type: Option<AuditEventType>,
+    pub severity: Option<AuditSeverity>,
+    pub resource: Option<String>,
+    pub start_time: Option<DateTime<Utc>>,
+    pub end_time: Option<DateTime<Utc>>,
+    pub success_only: Option<bool>,
+}
+
+#[derive(Debug, Clone)]
+pub struct AuditReport {
+    pub period: (DateTime<Utc>, DateTime<Utc>),
+    pub total_events: usize,
+    pub events_by_type: HashMap<AuditEventType, usize>,
+    pub events_by_severity: HashMap<AuditSeverity, usize>,
+    pub security_incidents: Vec<SecurityIncident>,
+    pub recommendations: Vec<String>,
+}
+
+impl AuditSystem {
+    fn group_events_by_type(&self, events: &[AuditEvent]) -> HashMap<AuditEventType, usize> {
+        let mut grouped = HashMap::new();
+        for event in events {
+            *grouped.entry(event.event_type.clone()).or_insert(0) += 1;
+        }
+        grouped
+    }
+
+    fn group_events_by_severity(&self, events: &[AuditEvent]) -> HashMap<AuditSeverity, usize> {
+        let mut grouped = HashMap::new();
+        for event in events {
+            *grouped.entry(event.severity.clone()).or_insert(0) += 1;
+        }
+        grouped
+    }
+
+    fn identify_security_incidents(&self, events: &[AuditEvent]) -> Vec<SecurityIncident> {
+        let mut incidents = Vec::new();
+        
+        // 检测失败的认证尝试
+        let failed_auth_events: Vec<_> = events.iter()
+            .filter(|e| e.event_type == AuditEventType::Authentication && !e.success)
+            .collect();
+        
+        if failed_auth_events.len() > 10 {
+            incidents.push(SecurityIncident {
+                incident_type: "Multiple failed authentication attempts".to_string(),
+                severity: AuditSeverity::High,
+                affected_users: failed_auth_events.iter().map(|e| e.user_id).collect(),
+                description: format!("{} failed authentication attempts detected", failed_auth_events.len()),
+            });
+        }
+        
+        // 检测异常访问模式
+        let suspicious_events: Vec<_> = events.iter()
+            .filter(|e| e.severity == AuditSeverity::High || e.severity == AuditSeverity::Critical)
+            .collect();
+        
+        if !suspicious_events.is_empty() {
+            incidents.push(SecurityIncident {
+                incident_type: "Suspicious activity detected".to_string(),
+                severity: AuditSeverity::Critical,
+                affected_users: suspicious_events.iter().map(|e| e.user_id).collect(),
+                description: "Multiple high-severity events detected".to_string(),
+            });
+        }
+        
+        incidents
+    }
+
+    fn generate_recommendations(&self, events: &[AuditEvent]) -> Vec<String> {
+        let mut recommendations = Vec::new();
+        
+        // 分析失败认证
+        let failed_auth_count = events.iter()
+            .filter(|e| e.event_type == AuditEventType::Authentication && !e.success)
+            .count();
+        
+        if failed_auth_count > 50 {
+            recommendations.push("Consider implementing account lockout policies".to_string());
+        }
+        
+        // 分析权限检查失败
+        let failed_authz_count = events.iter()
+            .filter(|e| e.event_type == AuditEventType::Authorization && !e.success)
+            .count();
+        
+        if failed_authz_count > 20 {
+            recommendations.push("Review and update user permissions".to_string());
+        }
+        
+        // 分析高风险事件
+        let high_severity_count = events.iter()
+            .filter(|e| e.severity == AuditSeverity::High || e.severity == AuditSeverity::Critical)
+            .count();
+        
+        if high_severity_count > 5 {
+            recommendations.push("Implement additional security monitoring".to_string());
+        }
+        
+        recommendations
+    }
+}
+```
+
+**审计系统最佳实践**:
+
+1. **全面记录**: 记录所有安全相关事件
+2. **实时处理**: 实时处理和分析审计事件
+3. **安全存储**: 安全存储审计日志，防止篡改
+4. **告警机制**: 对高风险事件及时告警
+5. **定期分析**: 定期分析审计数据，识别趋势
+6. **合规报告**: 生成合规性报告
+7. **数据保留**: 制定合适的数据保留策略
+
+## 最佳实践总结
+
+### 1. 安全配置管理
+
+```rust
+#[derive(Debug, Clone)]
+pub struct SecurityBestPractices {
+    pub password_policy: PasswordPolicy,
+    pub session_policy: SessionPolicy,
+    pub rate_limiting: RateLimitingPolicy,
+    pub audit_policy: AuditPolicy,
+}
+
+impl SecurityBestPractices {
+    pub fn validate_password(&self, password: &str) -> PasswordValidationResult {
+        let mut score = 0.0;
+        let mut issues = Vec::new();
+        
+        // 长度检查
+        if password.len() < self.password_policy.min_length {
+            issues.push("Password too short".to_string());
+        } else {
+            score += 0.2;
+        }
+        
+        // 复杂度检查
+        if password.chars().any(|c| c.is_uppercase()) {
+            score += 0.2;
+        } else {
+            issues.push("Missing uppercase letter".to_string());
+        }
+        
+        if password.chars().any(|c| c.is_lowercase()) {
+            score += 0.2;
+        } else {
+            issues.push("Missing lowercase letter".to_string());
+        }
+        
+        if password.chars().any(|c| c.is_numeric()) {
+            score += 0.2;
+        } else {
+            issues.push("Missing number".to_string());
+        }
+        
+        if password.chars().any(|c| !c.is_alphanumeric()) {
+            score += 0.2;
+        } else {
+            issues.push("Missing special character".to_string());
+        }
+        
+        PasswordValidationResult {
+            is_valid: score >= 0.8,
+            score,
+            issues,
+        }
+    }
+}
+```
+
+### 2. 错误处理
+
+```rust
+#[derive(Debug, thiserror::Error)]
+pub enum SecurityError {
+    #[error("Authentication failed: {0}")]
+    AuthenticationFailed(String),
+    #[error("Authorization denied: {0}")]
+    AuthorizationDenied(String),
+    #[error("Rate limit exceeded")]
+    RateLimitExceeded,
+    #[error("Session expired")]
+    SessionExpired,
+    #[error("Invalid token")]
+    InvalidToken,
+    #[error("Security policy violation: {0}")]
+    PolicyViolation(String),
+}
+
+pub type SecurityResult<T> = Result<T, SecurityError>;
+```
+
+### 3. 监控和告警
+
+```rust
+#[derive(Debug, Clone)]
+pub struct SecurityMonitoring {
+    pub metrics_collector: MetricsCollector,
+    pub alert_manager: AlertManager,
+    pub incident_response: IncidentResponse,
+}
+
+impl SecurityMonitoring {
+    pub async fn monitor_security_events(&self) {
+        // 监控认证失败
+        self.metrics_collector.track_metric("auth_failures", 1);
+        
+        // 监控权限检查失败
+        self.metrics_collector.track_metric("authz_failures", 1);
+        
+        // 监控异常访问
+        self.metrics_collector.track_metric("suspicious_activity", 1);
+        
+        // 检查告警阈值
+        if self.should_trigger_alert().await {
+            self.alert_manager.send_security_alert("High number of security events detected").await;
+        }
+    }
+}
+```
+
+

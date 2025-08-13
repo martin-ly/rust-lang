@@ -1,4 +1,4 @@
-# 3.5 子类型系统
+﻿# 3.5 子类型系统
 
 ## 3.5.1 概述
 
@@ -153,7 +153,7 @@ fn main() {
 
 ### 3.5.4.2 生命周期子类型
 
-生命周期子类型关系是Rust类型系统的重要组成部分，它确保引用的安全性。
+生命周期子类型关系是Rust类型系统的重要组成部分，它确保引用的安全。
 
 **形式化定义**：
 
@@ -305,7 +305,7 @@ fn polymorphism_example() {
 }
 ```
 
-## 3.5.6 子类型系统的高级特性
+## 3.5.6 子类型系统的高级特征
 
 ### 3.5.6.1 边界特征对象
 
@@ -462,7 +462,7 @@ fn example() {
 
 ### 3.5.8.1 与Java/C#的比较
 
-| 特性 | Rust | Java/C# |
+| 特征 | Rust | Java/C# |
 |:----:|:----:|:----:|
 | 子类型来源 | 特征实现、生命周期 | 类继承、接口实现 |
 | 多重继承 | 通过特征组合 | Java：接口多重继承；C#：接口多重继承 |
@@ -472,7 +472,7 @@ fn example() {
 
 ### 3.5.8.2 与C++的比较
 
-| 特性 | Rust | C++ |
+| 特征 | Rust | C++ |
 |:----:|:----:|:----:|
 | 子类型来源 | 特征实现 | 类继承 |
 | 多重继承 | 通过特征组合（安全） | 直接支持（可能导致菱形问题） |
@@ -482,7 +482,7 @@ fn example() {
 
 ### 3.5.8.3 与Haskell的比较
 
-| 特性 | Rust | Haskell |
+| 特征 | Rust | Haskell |
 |:----:|:----:|:----:|
 | 子类型来源 | 特征实现 | 类型类实例 |
 | 多态机制 | 特征约束（静态）、特征对象（动态） | 类型类（静态） |
@@ -612,7 +612,7 @@ fn process_ui_element(element: &UIElement) {
 
 **模式**：
 
-1. 使用生命周期参数表示引用的有效范围
+1. 使用生命周期参数表示引用的有效作用域
 2. 利用生命周期约束建立子类型关系
 3. 设计API时考虑生命周期的层次关系
 
@@ -644,9 +644,9 @@ struct ProcessedData<'a> {
 
 ## 3.5.10 总结
 
-Rust的子类型系统是其类型系统的重要组成部分，主要通过特征对象和生命周期约束体现。子类型关系建立了类型之间的层次结构，支持多态性和类型转换，同时保持类型安全和内存安全。
+Rust的子类型系统是其类型系统的重要组成部分，主要通过特征对象和生命周期约束体现。子类型关系建立了类型之间的层次结构体体体，支持多态性和类型转换，同时保持类型安全和内存安全。
 
-子类型系统的形式化基础建立在子类型判断和子类型规则上，通过严格的规则确保类型安全。特征对象提供了动态多态性，生命周期子类型关系确保了引用的安全性，而复合类型的子类型关系则取决于型变规则。
+子类型系统的形式化基础建立在子类型判断和子类型规则上，通过严格的规则确保类型安全。特征对象提供了动态多态性，生命周期子类型关系确保了引用的安全，而复合类型的子类型关系则取决于型变规则。
 
 理解子类型系统对于设计灵活、安全的Rust代码至关重要，特别是在涉及多态性、特征对象和生命周期约束时。通过合理利用子类型关系，可以创建既灵活又安全的API和抽象。
 
@@ -663,3 +663,30 @@ Rust的子类型系统是其类型系统的重要组成部分，主要通过特�
 5. Dreyer, D., Crary, K., & Harper, R. (2003). A type system for higher-order modules. In Proceedings of the 30th ACM SIGPLAN-SIGACT symposium on Principles of programming languages.
 
 6. Reynolds, J. C. (1983). Types, abstraction and parametric polymorphism. In Information Processing 83, Proceedings of the IFIP 9th World Computer Congress.
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

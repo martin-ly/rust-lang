@@ -1,4 +1,4 @@
-# Rust 并行编程模式与生态工具 {#并行编程模式}
+﻿# Rust 并行编程模式与生态工具 {#并行编程模式}
 
 **章节编号**: 06-08  
 **主题**: 数据并行、任务并行、生态工具、工程实现  
@@ -96,7 +96,7 @@ async fn run_all(tasks: Vec<impl Future<Output=()> + Send>) {
 
 ## 形式化分析与定理
 
-- **定理 8.1 (数据并行安全性)**
+- **定理 8.1 (数据并行安全)**
 
   ```text
   rayon::par_iter() ⊢ 无数据竞争/悬垂指针
@@ -118,7 +118,7 @@ async fn run_all(tasks: Vec<impl Future<Output=()> + Send>) {
 
 ## 交叉引用
 
-- [并发安全性保证](./07_concurrency_safety.md)
+- [并发安全保证](./07_concurrency_safety.md)
 - [资源管理模型](./01_resource_management.md)
 - [所有权设计模式](./06_ownership_patterns.md)
 - [类型系统核心](../03_type_system_core/)
@@ -128,3 +128,30 @@ async fn run_all(tasks: Vec<impl Future<Output=()> + Send>) {
 ---
 
 > 本文档为Rust并行编程模式与生态工具的理论与工程索引，后续章节将递归细化各子主题。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

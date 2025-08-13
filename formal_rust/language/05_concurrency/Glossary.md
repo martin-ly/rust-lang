@@ -1,4 +1,4 @@
-# 术语表 (Glossary) - C05 并发
+﻿# 术语表 (Glossary) - C05 并发
 
 本页定义了"第 5 章：并发"中出现的关键术语。
 
@@ -56,7 +56,7 @@ Rust 生态中一个著名的数据并行库。它提供了并行迭代器（`pa
 
 ### Send (Trait)
 
-一个标记 Trait，表示一个类型的所有权可以被安全地**转移**到另一个线程。
+一个标记 Trait，表示一个类型的所有权可以被安全地**移动**到另一个线程。
 
 ### Shared-State Concurrency (共享状态并发)
 
@@ -69,3 +69,32 @@ Rust 生态中一个著名的数据并行库。它提供了并行迭代器（`pa
 ### Work-Stealing (工作窃取)
 
 一种高效的并行任务调度算法，被 `Rayon` 使用。当一个工作线程变为空闲时，它会从其他繁忙线程的任务队列中"窃取"任务来执行，以实现负载均衡。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

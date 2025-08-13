@@ -23,7 +23,7 @@
 
 ## 1. 1.3 框架对比表
 
-| 框架       | 核心特性         | 性能 | 类型安全 | 异步支持 | 社区活跃度 |
+| 框架       | 核心特征         | 性能 | 类型安全 | 异步支持 | 社区活跃度 |
 |------------|------------------|------|----------|----------|------------|
 | actix-web  | actor模型/极致性能 | 高   | 强       | 是       | 高         |
 | Rocket     |:---:|:---:|:---:| 类型安全路由      |:---:|:---:|:---:| 中   |:---:|:---:|:---:| 极强     |:---:|:---:|:---:| 部分     |:---:|:---:|:---:| 高         |:---:|:---:|:---:|
@@ -45,7 +45,7 @@ graph TD;
 
 ## 1. 1.5 工程案例
 
-- actix-web高并发API服务工程结构
+- actix-web高并发API服务工程结构体体体
 - Rocket类型安全表单处理案例
 - Axum微服务拆分与集成
 
@@ -60,10 +60,39 @@ graph TD;
 
 - Rust Web框架如何选择？
 - 如何在Web项目中高效利用所有权/生命周期？
-- Rust Web生态的未来趋势？
+- Rust Web生态的未来值值值趋势？
 
 ## 1. 1.8 交叉引用
 
 - [异步与并发框架](01_frameworks_async.md)
 - [工程实践总览](../04_engineering_practices/01_engineering_overview.md)
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

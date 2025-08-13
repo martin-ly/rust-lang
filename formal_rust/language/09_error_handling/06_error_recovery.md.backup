@@ -1,0 +1,78 @@
+﻿# 错误恢复策略
+
+## 1. 重试机制
+
+- 指数退避、最大重试次数、同步/异步重试
+
+### 1.1 重试实现
+
+```rust
+fn retry<F, T, E>(mut f: F, max: usize) -> Result<T, E>
+where F: FnMut() -> Result<T, E> {
+    for _ in 0..max {
+        if let Ok(v) = f() { return Ok(v); }
+    }
+    f()
+}
+```
+
+## 2. 降级与补偿
+
+- 降级：使用备用方案或默认值
+- 补偿：回滚已执行操作
+
+### 2.1 降级实现
+
+```rust
+fn get_config() -> Result<Config, Error> {
+    read_config().or_else(|_| Ok(Config::default()))
+}
+```
+
+## 3. 忽略与容忍
+
+- 忽略非关键错误，继续执行
+
+### 3.1 忽略实现
+
+```rust
+fn process_all(files: &[&str]) {
+    for f in files {
+        let _ = process_file(f); // 忽略错误
+    }
+}
+```
+
+## 4. 批判性分析与未来值值展望
+
+- Rust错误恢复策略丰富，类型安全，但复杂补偿/降级场景需经验
+- 未来值值可探索自动化恢复策略与AI驱动自适应恢复
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

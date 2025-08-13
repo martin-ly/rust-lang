@@ -1,0 +1,69 @@
+﻿# 10.05 模块测试（Module Testing）
+
+---
+
+## 理论简述
+
+模块测试用于验证模块内部和外部接口的正确性。Rust内建测试框架，支持#[cfg(test)]、mod tests、assert等机制，便于单元测试和集成测试。相关理论详见[模块系统理论](../../10_modules/01_module_system_theory.md)与[模块测试机制](../../10_modules/05_module_testing.md)。
+
+---
+
+## 核心代码示例
+
+```rust
+pub fn add(a: i32, b: i32) -> i32 { a + b }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn test_add() {
+        assert_eq!(add(2, 3), 5);
+    }
+}
+```
+
+---
+
+## 详细注释
+
+- #[cfg(test)]修饰的模块仅在测试时编译。
+- #[test]标记测试函数，assert断言结果。
+- use super::*导入父模块内容。
+- cargo test自动发现并运行所有测试。
+
+---
+
+## 理论映射
+
+- 对应[模块系统理论](../../10_modules/01_module_system_theory.md)
+- 模块测试机制见[10_modules/05_module_testing.md](../../10_modules/05_module_testing.md)
+- 可见性与命名空间见[10.03_visibility_namespace.md](./10.03_visibility_namespace.md)
+
+---
+
+## 边界情况与常见错误
+
+- **边界情况**：
+  - 私有函数测试需用super::*导入。
+  - 集成测试与单元测试的区别。
+- **常见错误**：
+  - 忘记#[test]导致测试未被发现。
+  - 测试代码影响生产代码。
+  - 测试覆盖不全。
+
+---
+
+## FAQ
+
+- **Q: Rust如何组织模块测试？**
+  - A: 用#[cfg(test)]和mod tests分组，cargo test自动运行。
+- **Q: 如何测试私有函数？**
+  - A: 在tests模块中用super::*导入。
+- **Q: 模块测试常见应用场景？**
+  - A: 单元测试、集成测试、回归测试等。
+
+---
+
+（本示例可直接用`rustc`编译，或用cargo test自动化验证，理论与代码一一对应，便于教学与自动化校验。）
+

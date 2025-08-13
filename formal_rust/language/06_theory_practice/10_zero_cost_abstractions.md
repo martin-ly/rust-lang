@@ -1,4 +1,4 @@
-# Rust 零成本抽象实践与性能安全性 {#零成本抽象实践}
+﻿# Rust 零成本抽象实践与性能安全 {#零成本抽象实践}
 
 **章节编号**: 06-10  
 **主题**: 零成本抽象、泛型、trait、所有权、生命周期、工程落地  
@@ -9,7 +9,7 @@
 
 ## 章节导航
 
-- [Rust 零成本抽象实践与性能安全性 {#零成本抽象实践}](#rust-零成本抽象实践与性能安全性-零成本抽象实践)
+- [Rust 零成本抽象实践与性能安全 {#零成本抽象实践}](#rust-零成本抽象实践与性能安全-零成本抽象实践)
   - [章节导航](#章节导航)
   - [零成本抽象理论基础](#零成本抽象理论基础)
   - [泛型与单态化](#泛型与单态化)
@@ -52,7 +52,7 @@
 ## 所有权/生命周期与抽象安全
 
 - **所有权/生命周期**：静态保证抽象层间资源安全，无悬垂指针/二次释放。
-- **抽象安全性**：trait bound、lifetime bound等约束提升安全。
+- **抽象安全**：trait bound、lifetime bound等约束提升安全。
 - **工程案例**：Iterator trait、闭包生命周期推断。
 
 ---
@@ -103,7 +103,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str { if x.len() > y.len() { x } e
   trait对象引入vtable查找，开销可控
   ```
 
-- **定理 10.3 (所有权/生命周期安全性)**
+- **定理 10.3 (所有权/生命周期安全)**
 
   ```text
   Rust类型系统 ⊢ 无悬垂指针/二次释放
@@ -122,4 +122,31 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str { if x.len() > y.len() { x } e
 
 ---
 
-> 本文档为Rust零成本抽象实践与性能安全性的理论与工程索引，后续章节将递归细化各子主题。
+> 本文档为Rust零成本抽象实践与性能安全的理论与工程索引，后续章节将递归细化各子主题。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

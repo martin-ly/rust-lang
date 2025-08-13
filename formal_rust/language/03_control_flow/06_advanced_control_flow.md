@@ -1,4 +1,4 @@
-# 06. 高级控制流模式 (Advanced Control Flow Patterns)
+﻿# 06. 高级控制流模式 (Advanced Control Flow Patterns)
 
 除了基础的条件和循环，Rust 还提供了更高级的模式来管理复杂的控制流。本章探讨两种强大的机制：异步控制流和类型状态模式。
 
@@ -15,7 +15,7 @@ Rust 的异步模型主要围绕三个核心概念构建：
     * `async fn` 不会立即执行函数体，而是返回一个实现了 `Future` trait 的匿名类型。
 
 2. **`Future` Trait**:
-    * `Future` 是对一个未来某个时刻才能产生的"值"的抽象。它代表一个可以被轮询（poll）的异步计算。
+    * `Future` 是对一个未来值值值某个时刻才能产生的"值"的抽象。它代表一个可以被轮询（poll）的异步计算。
     * 其核心方法是 `poll`，它会尝试推进计算。`poll` 的返回结果是 `Poll<Self::Output>`，有两种可能：
         * `Poll::Ready(value)`: 计算完成，返回最终值。
         * `Poll::Pending`: 计算尚未完成，运行时应该在稍后再次轮询。
@@ -29,7 +29,7 @@ Rust 的异步模型主要围绕三个核心概念构建：
 在底层，`async fn` 被编译器转换为一个**状态机 (State Machine)**。
 
 * 函数体中的每个 `.await` 点都代表一个潜在的**状态转换**。
-* 函数的所有局部变量（包括在 `.await` 点之间传递的变量）都会成为这个状态机结构体的成员。
+* 函数的所有局部变量（包括在 `.await` 点之间传递的变量）都会成为这个状态机结构体体体体的成员。
 * 每次调用 `poll` 时，状态机会从当前状态开始执行，直到下一个 `.await` 点（进入 `Pending` 状态）或函数返回（进入 `Ready` 状态）。
 
 这种转换是零成本抽象的典范：它将高级的、看似顺序的 `async/await` 代码，编译成了高效的、基于状态机的底层实现，而无需手写复杂的回调。
@@ -67,8 +67,8 @@ async fn main() {
 
 **核心思想**:
 
-* 一个结构体 `Machine<State>` 的状态由其类型参数 `State` 表示。
-* 状态本身是独立的类型（通常是零大小的空结构体）。
+* 一个结构体体体体 `Machine<State>` 的状态由其类型参数 `State` 表示。
+* 状态本身是独立的类型（通常是零大小的空结构体体体体）。
 * 消耗 `self` 的方法 (`fn method(self) -> Machine<NewState>`) 用于实现状态转换。
 
 **形式化视角**:
@@ -86,7 +86,7 @@ struct Uninitialized;
 struct Initialized { data: String }
 struct Active;
 
-// 2. 定义持有状态的结构体
+// 2. 定义持有状态的结构体体体体
 struct Process<State> {
     _state: std::marker::PhantomData<State>,
 }
@@ -137,7 +137,7 @@ fn main() {
 * 使用 async/await 实现高性能异步流。
 
 * 结合 generator、stream 等库实现自定义控制流。
-* 在嵌入式和并发场景下，利用高级控制流优化系统结构和性能。
+* 在嵌入式和并发场景下，利用高级控制流优化系统结构体体体和性能。
 
 ---
 
@@ -145,3 +145,32 @@ fn main() {
 
 * **上一章 ->** `05_error_handling_as_control_flow.md`
 * **返回目录 ->** `_index.md`
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

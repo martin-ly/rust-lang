@@ -1,4 +1,4 @@
-# DSL构建技术
+﻿# DSL构建技术
 
 ## 1. DSL设计原理
 
@@ -38,7 +38,7 @@ let c = config!(host: "localhost", port: 8080);
 ## 5. 批判性分析
 
 - 宏驱动DSL极大提升领域开发效率，但可读性与调试需关注
-- 未来可结合IDE与可视化工具提升DSL开发体验
+- 未来值值值可结合IDE与可视化工具提升DSL开发体验
 
 ## 6. 类型安全与自动化测试
 
@@ -53,6 +53,33 @@ let c = config!(host: "localhost", port: 8080);
 // #[rule_engine] 属性宏自动生成规则匹配与执行代码
 ```
 
-## 8. 未来展望（补充）
+## 8. 未来值值值展望（补充）
 
 - DSL宏与类型系统、IDE可视化工具深度集成将提升领域开发体验
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

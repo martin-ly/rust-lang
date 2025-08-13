@@ -1,4 +1,4 @@
-## 批判性分析
+﻿## 批判性分析
 
 - Rust 宏系统分为声明式宏和过程宏，极大提升了代码复用和元编程能力，但过程宏学习曲线较高，调试难度大。
 - 与 C/C++ 预处理器宏相比，Rust 宏更安全、类型感知，但表达能力和灵活性略逊。
@@ -8,4 +8,33 @@
 
 - 使用 declarative macro 实现通用日志、序列化等功能。
 - 过程宏（如 serde_derive、tokio::main）简化复杂代码生成。
-- 大型项目中通过宏自动生成 API、数据结构等。
+- 大型项目中通过宏自动生成 API、数据结构体体体等。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

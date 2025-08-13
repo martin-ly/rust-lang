@@ -1,4 +1,4 @@
-# 变型与子类型 (Variance and Subtyping)
+﻿# 变型与子类型 (Variance and Subtyping)
 
 ## 摘要
 
@@ -84,7 +84,7 @@ Rust 类型系统中的其他子类型关系：
 | `Box<T>` | 在 `T` 上协变 | 若 `U <: T`，则 `Box<U> <: Box<T>` |
 | `fn(T) -> U` | 在参数 `T` 上逆变，在返回值 `U` 上协变 | 若 `T <: S` 且 `U <: V`，则 `fn(S) -> U <: fn(T) -> V` |
 
-### 2. 变型的安全性原理
+### 2. 变型的安全原理
 
 Rust 的变型规则设计用于保证内存安全。关键安全原则为：
 
@@ -97,7 +97,7 @@ Rust 的变型规则设计用于保证内存安全。关键安全原则为：
 
 编译器使用以下算法确定复合类型的变型：
 
-1. 构建类型的结构依赖图
+1. 构建类型的结构体体体依赖图
 2. 为每个类型变量分配变型位置标记（正、负或不变）
 3. 根据类型构造器的变型规则传播变型标记
 4. 根据最终标记确定整体变型
@@ -246,7 +246,7 @@ Rust 变型规则的健全性可以通过以下定理表述：
 
 Rust 的变型系统与其他语言的比较：
 
-| 语言 | 变型特性 |
+| 语言 | 变型特征 |
 |------|----------|
 | Java | 数组协变（不安全），泛型不变，通配符提供有限的协变/逆变 |
 | C# | 数组不变，泛型支持注解协变/逆变（`out`/`in`） |
@@ -255,7 +255,7 @@ Rust 的变型系统与其他语言的比较：
 
 ## 结论
 
-变型和子类型是 Rust 类型系统的重要组成部分，它们支持灵活的编程模式同时确保静态类型安全性。通过精心设计的变型规则，Rust 允许代码在适当情况下利用子类型关系，同时保持内存安全和并发安全的强保证。理解这些概念对于编写既安全又灵活的 Rust 代码至关重要，尤其在处理复杂的生命周期关系和泛型代码时。
+变型和子类型是 Rust 类型系统的重要组成部分，它们支持灵活的编程模式同时确保静态类型安全。通过精心设计的变型规则，Rust 允许代码在适当情况下利用子类型关系，同时保持内存安全和并发安全的强保证。理解这些概念对于编写既安全又灵活的 Rust 代码至关重要，尤其在处理复杂的生命周期关系和泛型代码时。
 
 ## 参考文献
 
@@ -272,3 +272,32 @@ Rust 的变型系统与其他语言的比较：
 6. Jung, R., Jourdan, J. H., Krebbers, R., & Dreyer, D. (2018). RustBelt: securing the foundations of the Rust programming language. Proceedings of the ACM on Programming Languages.
 
 7. Klabnik, S., & Nichols, C. (2019). The Rust Programming Language. No Starch Press.
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

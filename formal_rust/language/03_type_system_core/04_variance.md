@@ -1,4 +1,4 @@
-# 3.4 型变系统
+﻿# 3.4 型变系统
 
 ## 3.4.1 概述
 
@@ -280,7 +280,7 @@ fn example() {
 
 ### 3.4.6.2 型变与特征对象
 
-型变规则影响特征对象的行为和安全性。
+型变规则影响特征对象的行为和安全。
 
 **Rust示例**：
 
@@ -345,7 +345,7 @@ impl<A> Functor<A> for Option<A> {
 
 ### 3.4.7.1 与Java的比较
 
-| 特性 | Rust | Java |
+| 特征 | Rust | Java |
 |:----:|:----:|:----:|
 | 数组型变 | 不适用（无内置数组型变） | 协变（不安全） |
 | 泛型型变 | 根据类型自动推导 | 使用通配符（`? extends T`，`? super T`） |
@@ -354,7 +354,7 @@ impl<A> Functor<A> for Option<A> {
 
 ### 3.4.7.2 与C++的比较
 
-| 特性 | Rust | C++ |
+| 特征 | Rust | C++ |
 |:----:|:----:|:----:|
 | 泛型型变 | 自动推导 | 无内置支持（C++20前） |
 | 指针型变 | 原始指针协变，可变指针不变 | 所有指针协变（不安全） |
@@ -362,7 +362,7 @@ impl<A> Functor<A> for Option<A> {
 
 ### 3.4.7.3 与Scala的比较
 
-| 特性 | Rust | Scala |
+| 特征 | Rust | Scala |
 |:----:|:----:|:----:|
 | 型变声明 | 自动推导 | 显式声明（`+T` 协变，`-T` 逆变） |
 | 型变检查 | 编译时强制执行 | 编译时强制执行 |
@@ -448,7 +448,7 @@ fn fallible_operation() -> Result<(), Box<dyn Error>> {
 
 Rust的型变系统是其类型系统的重要组成部分，通过精心设计的型变规则确保了类型安全和内存安全。型变规则决定了泛型类型之间的子类型关系，这对于设计灵活且安全的API至关重要。
 
-型变系统的形式化基础建立在子类型理论上，通过协变、逆变和不变三种基本关系描述了复合类型之间的子类型关系。Rust编译器能够自动推导类型的型变性质，并在编译时强制执行型变规则，确保程序的安全性。
+型变系统的形式化基础建立在子类型理论上，通过协变、逆变和不变三种基本关系描述了复合类型之间的子类型关系。Rust编译器能够自动推导类型的型变性质，并在编译时强制执行型变规则，确保程序的安全。
 
 理解型变对于Rust程序员来说是至关重要的，它不仅有助于理解编译器错误，还能指导API设计和泛型抽象的实现。通过合理利用型变规则，可以创建既灵活又安全的代码。
 
@@ -465,3 +465,30 @@ Rust的型变系统是其类型系统的重要组成部分，通过精心设计�
 5. Tate, R., Leung, A., & Lerner, S. (2011). Taming wildcards in Java's type system. In Proceedings of the 32nd ACM SIGPLAN conference on Programming language design and implementation.
 
 6. Igarashi, A., & Viroli, M. (2002). On variance-based subtyping for parametric types. In ECOOP 2002—Object-Oriented Programming.
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

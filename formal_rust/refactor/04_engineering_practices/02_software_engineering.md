@@ -54,9 +54,9 @@ graph TD;
 
 - Rust工程方法论与C++/Go/Java等有何本质差异？
 - Rust工具链的优势与局限？
-- 依赖管理与安全性如何权衡？
+- 依赖管理与安全如何权衡？
 - 社区驱动的创新与治理模式有何优劣？
-- Rust软件工程的未来趋势与挑战？
+- Rust软件工程的未来值值值趋势与挑战？
 
 ## 2. 6 FAQ
 
@@ -70,4 +70,33 @@ graph TD;
 - [框架原理与生态](../01_core_theory/01_frameworks.md)
 - [设计模式与架构](../02_design_patterns)
 - [工程案例与实践](01_engineering_overview.md)
+
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
 

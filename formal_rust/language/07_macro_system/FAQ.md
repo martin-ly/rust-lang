@@ -1,4 +1,4 @@
-# Rust宏系统 FAQ
+﻿# Rust宏系统 FAQ
 
 ## 1. Rust宏系统有哪些主要类型？
 
@@ -8,7 +8,7 @@
 
 - 宏在编译期展开，操作语法树，可生成任意代码；函数/泛型在类型系统内，运行时调用。
 
-## 3. 如何保证宏的安全性与可维护性？
+## 3. 如何保证宏的安全与可维护性？
 
 - 避免递归过深、命名冲突，推荐限定作用域、编写测试用例。
 
@@ -27,3 +27,32 @@
 ## 7. 如何与团队协作优化宏使用？
 
 - 建议统一宏命名、注释、测试策略，定期重构与自动化检测。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+

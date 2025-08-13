@@ -1,4 +1,4 @@
-# Rust Future 执行模型与 Poll 机制 {#future执行}
+﻿# Rust Future 执行模型与 Poll 机制 {#future执行}
 
 **模块编号**: 06-04  
 **主题**: Future执行、Poll机制与上下文管理  
@@ -13,7 +13,7 @@
   - [章节导航](#章节导航)
   - [引言](#引言)
   - [Future trait与核心接口](#future-trait与核心接口)
-  - [Poll机制与状态转移](#poll机制与状态转移)
+  - [Poll机制与状态移动](#poll机制与状态移动)
   - [Waker与上下文管理](#waker与上下文管理)
   - [生命周期与内存安全](#生命周期与内存安全)
   - [工程案例与代码示例](#工程案例与代码示例)
@@ -46,7 +46,7 @@ Rust异步Future采用惰性求值与poll驱动，结合Waker与上下文，实�
 
 ---
 
-## Poll机制与状态转移
+## Poll机制与状态移动
 
 - **Poll枚举**：
 
@@ -54,8 +54,8 @@ Rust异步Future采用惰性求值与poll驱动，结合Waker与上下文，实�
   enum Poll<T> { Ready(T), Pending }
   ```
 
-- **状态转移**：poll返回Ready表示完成，Pending表示需等待外部事件。
-- **执行器循环**：不断poll所有Future，驱动状态机转移。
+- **状态移动**：poll返回Ready表示完成，Pending表示需等待外部事件。
+- **执行器循环**：不断poll所有Future，驱动状态机移动。
 
 ---
 
@@ -111,7 +111,7 @@ impl Future for DelayFuture {
   poll: State × Context → State × Poll<Output>
   ```
 
-- **定理 4.1 (惰性与安全性)**
+- **定理 4.1 (惰性与安全)**
 
   ```text
   ∀F. poll(F, cx)只推进一次状态，Pin保证内存安全
@@ -136,3 +136,32 @@ impl Future for DelayFuture {
 ---
 
 > 本文档为Rust Future执行模型与poll机制的形式化索引，后续章节将递归细化各子主题。
+
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+
