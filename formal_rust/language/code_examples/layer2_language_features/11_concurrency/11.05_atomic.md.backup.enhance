@@ -1,0 +1,131 @@
+﻿# 11.05 原子操作（Atomic Operations）
+
+---
+
+## 理论简述
+
+原子操作是并发编程中保证数据一致性和无锁同步的基础。Rust通过`std::sync::atomic`模块提供多种原子类型（如`AtomicUsize`），支持无锁计数、标志等场景。原子操作底层依赖CPU原语，适合高性能并发。相关理论详见[并发系统理论](../../05_concurrency/01_formal_concurrency_system.md)与[原子操作机制](../../05_concurrency/05_atomic.md)。
+
+---
+
+## 核心代码示例
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::Arc;
+use std::thread;
+
+fn main() {
+    let counter = Arc::new(AtomicUsize::new(0));
+    let mut handles = vec![];
+    for _ in 0..5 {
+        let counter = Arc::clone(&counter);
+        let handle = thread::spawn(move || {
+            for _ in 0..1000 {
+                counter.fetch_add(1, Ordering::SeqCst);
+            }
+        });
+        handles.push(handle);
+    }
+    for handle in handles {
+        handle.join().unwrap();
+    }
+    println!("结果: {}", counter.load(Ordering::SeqCst));
+}
+```
+
+---
+
+## 详细注释
+
+- `AtomicUsize::new(0)` 创建原子计数器。
+- `fetch_add`方法实现原子加法，`Ordering::SeqCst`保证强一致性。
+- 原子类型无需加锁即可安全并发修改。
+- 适合高性能计数、标志等场景。
+
+---
+
+## 理论映射
+
+- 对应[并发系统理论](../../05_concurrency/01_formal_concurrency_system.md)
+- 原子操作机制见[05_concurrency/05_atomic.md](../../05_concurrency/05_atomic.md)
+- Send/Sync trait见[12_traits/07_send_sync.md](../../12_traits/07_send_sync.md)
+
+---
+
+## 边界情况与常见错误
+
+- **边界情况**：
+  - 原子操作只适合简单数据类型。
+  - 复杂同步需用锁或通道。
+- **常见错误**：
+  - 忽略内存序导致竞态。
+  - 原子类型与普通类型混用。
+  - 过度依赖原子操作导致代码难以维护。
+
+---
+
+## FAQ
+
+- **Q: Rust原子操作和C/C++有何不同？**
+  - A: Rust类型系统保证原子类型安全，C/C++需手动管理。
+- **Q: 如何选择原子操作的内存序？**
+  - A: 一般用`SeqCst`保证最强一致性，性能敏感场景可用Relaxed等。
+- **Q: 原子操作常见应用场景？**
+  - A: 计数器、标志、无锁队列等。
+
+---
+
+（本示例可直接用`rustc`编译验证，理论与代码一一对应，便于教学与自动化校验。）
+"
+
+---
+
+<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
+"
+## 概述
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术背景
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 核心概念
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 技术实现
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 形式化分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 应用案例
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 性能分析
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 最佳实践
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 常见问题
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+## 未来值值展望
+(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
+
+
+
+
+## 未来展望
+
+### 理论发展方向
+- **类型系统扩展**: 更强大的类型系统功能
+- **形式化验证**: 更完整的数学证明
+- **并发模型**: 更安全的并发编程模型
+
+### 工程应用前景
+- **高性能计算**: 在HPC领域的应用
+- **系统编程**: 操作系统和嵌入式系统
+- **Web开发**: WebAssembly和前端开发
+
+### 技术演进趋势
+- **编译器优化**: 更智能的编译优化
+- **工具链完善**: 更强大的开发工具
+- **生态系统**: 更丰富的第三方库
+
+### 社区发展
+- **标准化**: 语言特性的标准化
+- **教育**: 更好的学习资源
+- **企业采用**: 更多企业的采用和支持
+

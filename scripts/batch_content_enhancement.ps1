@@ -396,16 +396,32 @@ foreach ($doc in $documents) {
         if ($contentTemplates.ContainsKey($section)) {
             $template = $contentTemplates[$section]
             
-            # 查找文档末尾的占位符
-            $placeholder = "## $section`n(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)"
+            # 查找各种可能的占位符格式
+            $placeholders = @(
+                "## $section`n(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)",
+                "## $section`n(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)`n",
+                "## 未来值值展望`n(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)",  # 处理错别字
+                "## 未来值值展望`n(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)`n"
+            )
             
-            if ($content -match [regex]::Escape($placeholder)) {
-                $content = $content -replace [regex]::Escape($placeholder), $template
-                $enhanced = $true
-            } else {
-                # 如果没有占位符，在文档末尾添加
-                $content += "`n`n$template"
-                $enhanced = $true
+            $found = $false
+            foreach ($placeholder in $placeholders) {
+                if ($content -match [regex]::Escape($placeholder)) {
+                    $content = $content -replace [regex]::Escape($placeholder), $template
+                    $enhanced = $true
+                    $found = $true
+                    break
+                }
+            }
+            
+            # 如果没有找到占位符，检查是否已经有该章节
+            if (-not $found) {
+                $sectionPattern = "## $section"
+                if ($content -notmatch [regex]::Escape($sectionPattern)) {
+                    # 在文档末尾添加新章节
+                    $content += "`n`n$template"
+                    $enhanced = $true
+                }
             }
         }
     }
