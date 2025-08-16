@@ -1,6 +1,7 @@
 ﻿# 占位文档清理报告
 
 ## 清理统计
+
 - 扫描文件总数: 171
 - 删除文件数: 23
 - 保留文件数: 148
@@ -8,8 +9,8 @@
 
 ## 删除的文件
 
-
 ## 保留的文件
+
 - F:\_src\rust-lang\formal_rust\refactor\01_creational_patterns\01_factory_pattern\00_index.md
 - F:\_src\rust-lang\formal_rust\refactor\01_creational_patterns\02_builder_pattern\00_index.md
 - F:\_src\rust-lang\formal_rust\refactor\01_creational_patterns\03_prototype_pattern\00_index.md
@@ -181,4 +182,3 @@
 - F:\_src\rust-lang\formal_rust\refactor\16_retail\07_fintech\10_big_data_analytics\00_index.md
 - F:\_src\rust-lang\formal_rust\refactor\16_retail\09_cybersecurity\00_index.md
 - F:\_src\rust-lang\formal_rust\refactor\16_retail\10_big_data_analytics\00_index.md
-
