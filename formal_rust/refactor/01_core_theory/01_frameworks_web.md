@@ -10,8 +10,6 @@
 
 ---
 
-
-
 ## 1. 1.1 元数据
 
 - 更新时间：2025-02-01
@@ -26,13 +24,10 @@
 | 框架       | 核心特征         | 性能 | 类型安全 | 异步支持 | 社区活跃度 |
 |------------|------------------|------|----------|----------|------------|
 | actix-web  | actor模型/极致性能 | 高   | 强       | 是       | 高         |
-| Rocket     |:---:|:---:|:---:| 类型安全路由      |:---:|:---:|:---:| 中   |:---:|:---:|:---:| 极强     |:---:|:---:|:---:| 部分     |:---:|:---:|:---:| 高         |:---:|:---:|:---:|
-
+| Rocket     | 类型安全路由      | 中   | 极强     | 部分     | 高         |
 
 | Axum       | Tower生态/现代异步 | 高   | 强       | 是       | 快速增长   |
-| warp       |:---:|:---:|:---:| 组合式/Filter链   |:---:|:---:|:---:| 中   |:---:|:---:|:---:| 强       |:---:|:---:|:---:| 是       |:---:|:---:|:---:| 中         |:---:|:---:|:---:|
-
-
+| warp       | 组合式/Filter链   | 中   | 强       | 是       | 中         |
 
 ## 1. 1.4 典型架构图
 
@@ -67,32 +62,6 @@ graph TD;
 - [异步与并发框架](01_frameworks_async.md)
 - [工程实践总览](../04_engineering_practices/01_engineering_overview.md)
 
-
 "
 
 ---
-
-<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
-"
-## 概述
-(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
-## 技术背景
-(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
-## 核心概念
-(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
-## 技术实现
-(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
-## 形式化分析
-(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
-## 应用案例
-(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
-## 性能分析
-(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
-## 最佳实践
-(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
-## 常见问题
-(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
-## 未来值值展望
-(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
-
-

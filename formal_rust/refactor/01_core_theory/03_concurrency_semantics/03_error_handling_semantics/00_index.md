@@ -10,8 +10,6 @@
 
 ---
 
-
-
 ## 模块概述
 
 错误处理语义模块涵盖了Rust语言中错误处理机制的完整语义模型，包括Result类型、Option类型、错误传播、错误恢复等核心概念。本模块建立了严格的理论基础，为Rust程序的错误安全提供了形式化的语义定义。
@@ -174,28 +172,6 @@
 - [核心理论主索引](00_index.md)
 - [项目主索引](00_index.md)
 
-
 "
 
 ---
-
-<!-- 以下为按标准模板自动补全的占位章节，待后续填充 -->
-"
-## 技术背景
-(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
-## 技术实现
-(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
-## 形式化分析
-(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
-## 应用案例
-(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
-## 性能分析
-(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
-## 最佳实践
-(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
-## 常见问题
-(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
-## 未来值值展望
-(待补充，参考 STANDARD_DOCUMENT_TEMPLATE_2025.md)\n
-
-
