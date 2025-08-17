@@ -668,8 +668,3 @@ SLO: {P99Latency, EnergyBudget, LossRate}
 冲突: 降低LossRate需增大Buffer ⇒ P99Latency上升
 决策: 通过价值函数进行权衡 w1*Latency + w2*Energy + w3*Loss
 ```
-
-
-"
-
----

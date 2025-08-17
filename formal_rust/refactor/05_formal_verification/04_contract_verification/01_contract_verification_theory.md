@@ -10,8 +10,6 @@
 
 ---
 
-
-
 ## 1. 概述
 
 ### 1.1 契约验证理论基础
@@ -275,7 +273,7 @@ $$\frac{\text{Satisfy}(p, \text{Compose}(c_1, c_2))}{\text{Satisfy}(p, c_1) \lan
 
 **算法 10.2.1** (契约推理)
 
-```
+```text
 function ContractInference(program, context):
     contracts = {}
     for function in program.functions:
@@ -304,7 +302,7 @@ $$\text{ContractInference}(p, \Gamma) = C \Rightarrow \text{Satisfy}(p, C)$$
 
 **算法 11.2.1** (契约验证流程)
 
-```
+```text
 function VerifyContract(program, contract):
     parsed = Parse(contract)
     analyzed = Analyze(program, parsed)
@@ -446,7 +444,6 @@ $$\text{ProtocolContract}(f) = (\text{MessageValid}(f), \text{StateConsistent}(f
 ---
 
 *本文档是Rust形式化重构项目的形式化验证模块的重要组成部分，与核心理论模块、设计模式模块、应用领域模块和工程实践模块共同构成完整的Rust形式化理论体系。*
-
 
 "
 

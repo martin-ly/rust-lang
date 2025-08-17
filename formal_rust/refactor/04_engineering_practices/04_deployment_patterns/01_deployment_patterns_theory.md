@@ -10,8 +10,6 @@
 
 ---
 
-
-
 ## 1. 概述
 
 ### 1.1 部署理论基础
@@ -358,7 +356,6 @@ $$\text{ReliableRecovery}(r) \Rightarrow \text{SystemRestored}(r)$$
 ---
 
 *本文档建立了完整的部署模式形式化理论框架，为Rust工程部署提供了理论基础和实践指导。*
-
 
 "
 

@@ -546,8 +546,3 @@ $$access(u, r) \Leftrightarrow ACM[u][r] = 1$$
 1. Bell, D. E., & LaPadula, L. J. "Secure computer system: Unified exposition and multics interpretation." Technical Report, 1976.
 2. Lampson, B. W. "A note on the confinement problem." Communications of the ACM 16.10 (1973): 613-615.
 3. Goldwasser, S., Micali, S., & Rackoff, C. "The knowledge complexity of interactive proof systems." SIAM Journal on Computing 18.1 (1989): 186-208.
-
-
-"
-
----

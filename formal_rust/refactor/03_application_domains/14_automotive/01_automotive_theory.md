@@ -1089,8 +1089,3 @@ $$\|x(t) - x_{ref}(t)\| \leq \epsilon, \quad \forall t \geq T$$
 1. Thrun, S., et al. "Probabilistic robotics." MIT press, 2005.
 2. LaValle, S. M. "Planning algorithms." Cambridge university press, 2006.
 3. Anderson, J. M., et al. "Autonomous vehicle technology: A guide for policymakers." Rand Corporation, 2014.
-
-
-"
-
----

@@ -10,8 +10,6 @@
 
 ---
 
-
-
 ## 1. 概述
 
 ### 1.1 安全实践理论基础
@@ -321,7 +319,6 @@ $$\text{ZeroTrust} = \forall e \in \text{Entities}: \text{Verify}(e) \land \text
 ---
 
 *本文档建立了完整的安全实践形式化理论框架，为Rust工程安全提供了理论基础和实践指导。*
-
 
 "
 

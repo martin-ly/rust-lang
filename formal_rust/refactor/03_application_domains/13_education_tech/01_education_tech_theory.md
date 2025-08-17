@@ -781,8 +781,3 @@ $$accuracy(R) = \frac{relevant\_recommendations}{total\_recommendations} \geq 0.
 1. Baker, R. S. "Data mining for education." International encyclopedia of education 7.3 (2010): 112-118.
 2. Siemens, G., & Long, P. "Penetrating the fog: Analytics in learning and education." EDUCAUSE review 46.5 (2011): 30.
 3. Deterding, S., et al. "From game design elements to gamefulness: defining gamification." Proceedings of the 15th international academic MindTrek conference. 2011.
-
-
-"
-
----

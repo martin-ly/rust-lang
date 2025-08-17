@@ -796,8 +796,3 @@ $$delay = blocks\_to\_confirm \times block\_time$$
 6. Introduction to Modern Cryptography
 7. Smart Contracts: Building Blocks for Digital Markets
 8. Blockchain Technology: Principles and Applications
-
-
-"
-
----

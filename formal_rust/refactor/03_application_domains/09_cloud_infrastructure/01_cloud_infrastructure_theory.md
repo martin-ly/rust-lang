@@ -411,8 +411,3 @@ $$|L(n_i) - L(n_j)| \leq \epsilon$$
 1. Armbrust, M., et al. "A view of cloud computing." Communications of the ACM 53.4 (2010): 50-58.
 2. Lamport, L. "Paxos made simple." ACM Sigact News 32.4 (2001): 18-25.
 3. Brewer, E. A. "CAP twelve years later: How the 'rules' have changed." Computer 45.2 (2012): 23-29.
-
-
-"
-
----

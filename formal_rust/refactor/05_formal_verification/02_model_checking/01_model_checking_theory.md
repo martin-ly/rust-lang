@@ -10,8 +10,6 @@
 
 ---
 
-
-
 ## 1. 概述
 
 ### 1.1 模型检查理论基础
@@ -380,7 +378,6 @@ $$\text{ParallelModelCheck}(M, \phi) \Rightarrow \text{Faster}(M, \phi)$$
 ---
 
 *本文档建立了完整的模型检查形式化理论框架，为Rust程序验证提供了理论基础和实践指导。*
-
 
 "
 

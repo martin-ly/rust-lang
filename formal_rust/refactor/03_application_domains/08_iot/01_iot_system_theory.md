@@ -1139,8 +1139,3 @@ $$efficiency = \frac{useful\_work}{total\_energy}$$
 6. IoT Communication Protocols
 7. Sensor Networks and Applications
 8. IoT Data Analytics
-
-
-"
-
----

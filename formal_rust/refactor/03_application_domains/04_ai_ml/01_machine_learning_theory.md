@@ -637,8 +637,3 @@ $$P(R(h) - \hat{R}(h) > \epsilon) \leq 4 \left(\frac{2en}{d}\right)^d e^{-\epsil
 7. Rust Machine Learning Ecosystem
 8. Numerical Optimization
 9. Goodfellow, I., Bengio, Y., & Courville, A. (2016). Deep learning.
-
-
-"
-
----

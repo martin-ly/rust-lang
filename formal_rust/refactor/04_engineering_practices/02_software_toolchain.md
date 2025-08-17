@@ -10,8 +10,6 @@
 
 ---
 
-
-
 ## 2. 1.1 元数据
 
 - 更新时间：2025-02-01
@@ -58,7 +56,6 @@ graph TD;
 - [依赖管理与版本控制](02_software_dependency.md)
 - [测试、调试与质量保障](02_software_testing.md)
 - [框架原理与生态](../01_core_theory/01_frameworks.md)
-
 
 "
 
