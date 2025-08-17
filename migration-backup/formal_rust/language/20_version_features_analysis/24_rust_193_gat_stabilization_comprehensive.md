@@ -49,7 +49,7 @@ trait Collection {
 
 ### 1.2 GAT语义模型与类型理论
 
-**形式化模型1: GAT语义代数**
+**形式化模型1: GAT语义代数**:
 
 ```mathematical
 GAT语义空间定义:
@@ -322,7 +322,7 @@ type PointerList = <OriginalList as TypeLevelMap<AddPointer>>::Output;
 
 ### 4.1 零开销GAT抽象验证
 
-**形式化模型2: GAT编译时开销分析**
+**形式化模型2: GAT编译时开销分析**:
 
 ```mathematical
 GAT编译开销模型:
@@ -533,7 +533,7 @@ impl<T, E> ResultExt for Result<T, E> {
 
 ### 6.1 开发效率提升量化
 
-**形式化模型3: GAT价值评估模型**
+**形式化模型3: GAT价值评估模型**:
 
 ```mathematical
 GAT开发效率提升模型:
