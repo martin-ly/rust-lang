@@ -1136,7 +1136,3 @@ fn quantum_borrowing() {
 ---
 
 > **链接网络**: [所有权系统语义模型索引](00_ownership_semantics_index.md) | [基础语义层总览](../00_foundation_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md)
-
-"
-
----

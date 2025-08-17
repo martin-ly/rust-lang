@@ -774,7 +774,3 @@ fn complex_lifetime_example() {
 > - [Rust引用参考](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
 > - [生命周期文档](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
 > - [借用检查器](https://doc.rust-lang.org/nomicon/borrow-checker.html)
-
-"
-
----

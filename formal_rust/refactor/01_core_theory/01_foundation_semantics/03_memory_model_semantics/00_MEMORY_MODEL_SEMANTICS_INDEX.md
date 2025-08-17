@@ -536,7 +536,3 @@
 > - [类型系统语义](../01_type_system_semantics)
 > - [变量系统语义](../02_variable_system_semantics/)
 > - [所有权系统语义](../04_ownership_system_semantics)
-
-"
-
----

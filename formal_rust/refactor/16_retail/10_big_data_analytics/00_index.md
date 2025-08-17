@@ -26,6 +26,3 @@ pub struct Metric(&'static str, f64);
 
 - [电商分析](../04_analytics/00_index.md)
 - [支付行为分析](../07_fintech/01_payment_systems/01_ecommerce/00_index.md)
-"
-
----

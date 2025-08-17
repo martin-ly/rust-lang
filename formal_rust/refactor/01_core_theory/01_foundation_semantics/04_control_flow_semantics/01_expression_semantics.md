@@ -582,7 +582,3 @@ fn advanced_expression_system() {
 ---
 
 > **链接网络**: [控制流语义模型索引](00_control_flow_semantics_index.md) | [基础语义层总览](../00_foundation_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md)
-
-"
-
----

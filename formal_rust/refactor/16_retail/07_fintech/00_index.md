@@ -28,6 +28,3 @@ pub struct PaymentTxnId(String);
 - [风险管理](00_index.md)
 - [合规检查](00_index.md)
 - [交易处理](00_index.md)
-"
-
----

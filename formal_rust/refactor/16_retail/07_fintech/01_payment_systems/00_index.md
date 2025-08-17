@@ -440,8 +440,3 @@ impl IntelligentRiskManagement {
 - [电商语义](01_ecommerce/00_index.md)
 - [供应链语义](00_index.md)
 - [客户关系管理语义](00_index.md)
-
-
-"
-
----

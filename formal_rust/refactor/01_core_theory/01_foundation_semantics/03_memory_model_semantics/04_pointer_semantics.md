@@ -706,7 +706,3 @@ fn bit_manipulation_pointer() {
 > - [Rust指针参考](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)
 > - [原始指针文档](https://doc.rust-lang.org/std/primitive.pointer.html)
 > - [系统编程指南](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)
-
-"
-
----
