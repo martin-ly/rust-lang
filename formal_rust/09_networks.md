@@ -21,32 +21,80 @@ enum Layer { Physical, DataLink, Network, Transport, Session, Presentation, Appl
 struct Packet { layer: Layer, data: Vec<u8> }
 ```
 
-- 1.2 OSI/TCP-IP 协议栈的形式化
+### 1.2 协议状态机的数学表示
 
 **理论定义**：
-OSI 七层模型和 TCP/IP 四层模型用于形式化描述网络通信的分层结构体体体，每层负责不同的协议与功能。
+协议状态机用于描述网络协议的状态转换过程，确保协议的正确性。
 
-**结构体体体符号**：
-OSI = [物理, 数据链路, 网络, 传输, 会话, 表示, 应用]
-TCP/IP = [网络接口, 网际, 传输, 应用]
+**数学符号**：
+StateMachine = (S, Σ, δ, s₀, F)
+其中 S 是状态集合，Σ 是输入字母表，δ 是转移函数，s₀ 是初始状态，F 是接受状态集合
 
 **Rust 伪代码**：
 
 ```rust
-enum OsiLayer { Physical, DataLink, Network, Transport, Session, Presentation, Application }
-enum TcpIpLayer { NetworkInterface, Internet, Transport, Application }
+enum ProtocolState {
+    Closed,
+    Listen,
+    SynSent,
+    SynReceived,
+    Established,
+    FinWait1,
+    FinWait2,
+    CloseWait,
+    Closing,
+    LastAck,
+    TimeWait
+}
+
+enum ProtocolEvent {
+    Open,
+    Send,
+    Receive,
+    Close,
+    Timeout
+}
+
+struct ProtocolStateMachine {
+    current_state: ProtocolState,
+    transition_table: HashMap<(ProtocolState, ProtocolEvent), ProtocolState>
+}
+
+impl ProtocolStateMachine {
+    fn new() -> Self {
+        let mut table = HashMap::new();
+        // 定义状态转换规则
+        table.insert((ProtocolState::Closed, ProtocolEvent::Open), ProtocolState::Listen);
+        table.insert((ProtocolState::Listen, ProtocolEvent::Receive), ProtocolState::SynReceived);
+        // ... 更多转换规则
+        
+        Self {
+            current_state: ProtocolState::Closed,
+            transition_table: table
+        }
+    }
+    
+    fn transition(&mut self, event: ProtocolEvent) -> bool {
+        if let Some(&new_state) = self.transition_table.get(&(self.current_state, event)) {
+            self.current_state = new_state;
+            true
+        } else {
+            false
+        }
+    }
+}
 ```
 
 **简要说明**：
-分层模型有助于协议设计、实现与互操作性分析。
+协议状态机确保了网络协议的正确性和可靠性。
 
-- 1.3 抽象数据通道与消息传递
+### 1.3 抽象数据通道与消息传递
 
 **理论定义**：
 抽象数据通道（Channel）用于在网络层或进程间传递消息，保证数据有序与可靠。
 
-**结构体体体符号**：
-Channel = { send(msg), recv() -> msg }
+**结构符号**：
+Channel = { send(msg), recv() → msg }
 
 **Rust 伪代码**：
 
@@ -62,426 +110,1068 @@ let v = rx.recv().unwrap();
 
 ## 2. 套接字与异步网络
 
-- 2.1 套接字与异步网络
+### 2.1 套接字编程的理论基础
 
 **理论定义**：
-套接字（Socket）是网络通信的端点，异步网络模型支持非阻塞 IO。
+套接字（Socket）是网络通信的端点，提供进程间通信的抽象接口。
 
-**结构体体体符号**：
-Socket = { bind(addr), send(msg), recv() -> msg }
+**数学符号**：
+Socket = { bind(addr), connect(addr), send(data), recv() → data, close() }
 
 **Rust 伪代码**：
 
 ```rust
-use std::net::UdpSocket;
-let sock = UdpSocket::bind("127.0.0.1:8080").unwrap();
-sock.send_to(b"hi", "127.0.0.1:8081").unwrap();
+use std::net::{TcpListener, TcpStream, SocketAddr};
+use std::io::{Read, Write};
+
+struct Socket {
+    stream: Option<TcpStream>,
+    address: SocketAddr
+}
+
+impl Socket {
+    fn new(address: SocketAddr) -> Self {
+        Self { stream: None, address }
+    }
+    
+    fn bind(&mut self) -> std::io::Result<()> {
+        let listener = TcpListener::bind(self.address)?;
+        if let Ok((stream, _)) = listener.accept() {
+            self.stream = Some(stream);
+        }
+        Ok(())
+    }
+    
+    fn connect(&mut self) -> std::io::Result<()> {
+        let stream = TcpStream::connect(self.address)?;
+        self.stream = Some(stream);
+        Ok(())
+    }
+    
+    fn send(&self, data: &[u8]) -> std::io::Result<usize> {
+        if let Some(ref stream) = self.stream {
+            stream.write(data)
+        } else {
+            Err(std::io::Error::new(std::io::ErrorKind::NotConnected, "Not connected"))
+        }
+    }
+    
+    fn recv(&self, buffer: &mut [u8]) -> std::io::Result<usize> {
+        if let Some(ref stream) = self.stream {
+            stream.read(buffer)
+        } else {
+            Err(std::io::Error::new(std::io::ErrorKind::NotConnected, "Not connected"))
+        }
+    }
+}
 ```
 
 **简要说明**：
-异步网络提升了高并发场景下的吞吐与响应。
+套接字提供了网络通信的统一接口。
 
-- 2.2 异步网络模型的形式化
+### 2.2 异步网络模型的形式化
 
 **理论定义**：
 异步网络模型通过事件循环和回调机制实现非阻塞通信。
 
-**结构体体体符号**：
+**数学符号**：
 AsyncNet = { poll(), register(event, handler) }
 
 **Rust 伪代码**：
 
 ```rust
 use tokio::net::TcpListener;
-#[tokio::main]
-async fn main() {
-    let listener = TcpListener::bind("127.0.0.1:8080").await.unwrap();
-    loop {
-        let (socket, _) = listener.accept().await.unwrap();
-        // 处理 socket
-    }
-}
-```
-
-**简要说明**：
-异步模型提升了高并发网络服务的性能与可扩展性。
-
-- 2.3 事件驱动与响应堆模式
-
-**理论定义**：
-事件驱动模型通过事件循环调度任务，响应堆（reactor）模式集中处理 I/O 事件。
-
-**结构体体体符号**：
-EventLoop = { register(event, handler), poll() }
-Reactor = { handle(event) }
-
-**Rust 伪代码**：
-
-```rust
-struct EventLoop;
-impl EventLoop {
-    fn register(&self, event: &str, handler: fn()) {}
-    fn poll(&self) {}
-}
-```
-
-**简要说明**：
-事件驱动与响应堆提升了高并发系统的可扩展性。
-
-## 3. 协议实现与安全
-
-### 3.1 协议实现与安全
-
-**理论定义**：
-协议实现关注协议规范的正确实现，安全关注数据保密性、完整性与认证。
-
-**结构体体体符号**：
-Protocol = { send(), receive(), verify() }
-
-**Rust 伪代码**：
-
-```rust
-trait Protocol {
-    fn send(&self, data: &[u8]);
-    fn receive(&self) -> Vec<u8>;
-    fn verify(&self, data: &[u8]) -> bool;
-}
-```
-
-**简要说明**：
-安全协议实现需防止中间人攻击、重放攻击等。
-
-### 3.2 网络安全与加密协议
-
-**理论定义**：
-网络安全协议通过加密、认证等机制保障数据传输的机密性和完整性。
-
-**结构体体体符号**：
-SecureChannel = { encrypt(), decrypt(), authenticate() }
-
-**Rust 伪代码**：
-
-```rust
-trait SecureChannel {
-    fn encrypt(&self, data: &[u8]) -> Vec<u8>;
-    fn decrypt(&self, data: &[u8]) -> Vec<u8>;
-    fn authenticate(&self, data: &[u8]) -> bool;
-}
-```
-
-**简要说明**：
-常见协议有 TLS、IPSec、SSH 等。
-
-### 3.3 协议兼容性与扩展性
-
-**理论定义**：
-协议兼容性保证不同实现间互操作，扩展性支持协议功能演进。
-
-**结构体体体符号**：
-Protocol = { version, features }
-
-**Rust 伪代码**：
-
-```rust
-struct Protocol { version: u8, features: Vec<String> }
-impl Protocol {
-    fn is_compatible(&self, other: &Protocol) -> bool {
-        self.version == other.version
-    }
-}
-```
-
-**简要说明**：
-良好的协议设计支持向后兼容与平滑升级。
-
-## 4. Rust 网络库工程案例
-
-### 4.1 典型工程场景与代码
-
-**工程场景**：
-使用 Rust 的 tokio/async-std 实现高性能 TCP 服务器。
-
-**Rust 代码片段**：
-
-```rust
-use tokio::net::TcpListener;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+
 #[tokio::main]
 async fn main() {
     let listener = TcpListener::bind("127.0.0.1:8080").await.unwrap();
+    
     loop {
         let (mut socket, _) = listener.accept().await.unwrap();
+        
         tokio::spawn(async move {
-            let mut buf = [0; 1024];
-            let n = socket.read(&mut buf).await.unwrap();
-            socket.write_all(&buf[..n]).await.unwrap();
+            let mut buf = vec![0; 1024];
+            
+            loop {
+                let n = match socket.read(&mut buf).await {
+                    Ok(n) if n == 0 => return,
+                    Ok(n) => n,
+                    Err(_) => return,
+                };
+                
+                if let Err(_) = socket.write_all(&buf[0..n]).await {
+                    return;
+                }
+            }
         });
     }
 }
 ```
 
 **简要说明**：
-Rust 网络库支持高并发、类型安全的网络编程。
+异步网络模型提高了高并发场景下的性能。
 
-### 5.2 工程案例与代码补全
-
-**工程场景**：
-使用 Rust 的 hyper 实现 HTTP 服务。
-
-**Rust 代码片段**：
-
-```rust
-use hyper::{Body, Request, Response, Server};
-use hyper::service::{make_service_fn, service_fn};
-#[tokio::main]
-async fn main() {
-    let make_svc = make_service_fn(|_conn| async {
-        Ok::<_, hyper::Error>(service_fn(|_req: Request<Body>| async {
-            Ok::<_, hyper::Error>(Response::new(Body::from("Hello, world!")))
-        }))
-    });
-    let addr = ([127, 0, 0, 1], 3000).into();
-    let server = Server::bind(&addr).serve(make_svc);
-    server.await.unwrap();
-}
-```
-
-**简要说明**：
-Rust 网络库支持高性能 Web 服务开发。
-
-## 5. 理论贡献与方法论总结
-
-### 5.1 主要理论创新与方法论突破
-
-**理论创新**：
-
-- 分层协议与抽象数据通道
-- 事件驱动与异步网络模型
-- 安全协议与加密机制
-
-**方法论突破**：
-
-- Rust 类型安全驱动的网络工程范式
-- 自动化测试与协议验证工具链
-
-**简要说明**：
-本节总结了网络理论与工程的主要创新与方法论。
-
-### 5.3 理论贡献与方法论总结后续
-
-**创新点**：
-
-- 网络协议的形式化建模
-- 自动化协议验证与测试
-
-**方法论突破**：
-
-- Rust 异步网络生态的工程范式
-- 网络安全与加密协议的工程集成
-
-**简要说明**：
-本节补充网络理论与工程的创新点与方法论。
-
-### 5.4 理论总结与工程案例尾部补全
-
-**理论总结**：
-
-- Rust 网络生态支持高性能、类型安全的网络开发
-- 自动化测试与协议验证提升了工程可靠性
-
-**工程案例**：
-
-- 使用 Rust 的 tokio、hyper、async-std 等库实现高并发网络服务
-
-**简要说明**：
-Rust 网络编程适合现代分布式系统与高并发场景。
-
-### 5.5 尾部工程案例与理论总结补全
-
-**工程案例**：
-
-- 使用 Rust 的 async-std 实现 UDP 通信
-
-**Rust 代码片段**：
-
-```rust
-use async_std::net::UdpSocket;
-use async_std::task;
-fn main() {
-    task::block_on(async {
-        let socket = UdpSocket::bind("127.0.0.1:8080").await.unwrap();
-        socket.send_to(b"hi", "127.0.0.1:8081").await.unwrap();
-    });
-}
-```
-
-**理论总结**：
-
-- Rust 网络生态适合高并发、分布式系统开发
-
-**简要说明**：
-Rust 网络库支持多协议、异步高性能通信。
-
----
-
-### 推进计划与断点快照
-
-- [x] 目录骨架搭建
-- [ ] 网络协议模型小节补全
-- [ ] 套接字与异步网络小节补全
-- [ ] 协议实现与安全小节补全
-- [ ] 工程案例与代码补全
-- [ ] 理论贡献总结
-
-### 6.1 网络协议的形式化建模
+### 2.3 网络缓冲区管理
 
 **理论定义**：
-用有限状态机（FSM）建模协议。
+网络缓冲区管理用于优化数据传输的性能和可靠性。
 
 **数学符号**：
-状态移动图 S = (Q, Σ, δ, q0, F)
+Buffer = { capacity, data, read_ptr, write_ptr }
 
 **Rust 伪代码**：
 
 ```rust
-enum State { SynSent, SynAck, Established }
-fn tcp_handshake() {
-    let mut state = State::SynSent;
-    // ... 状态移动逻辑
+use std::collections::VecDeque;
+
+struct NetworkBuffer {
+    capacity: usize,
+    data: VecDeque<u8>,
+    read_position: usize,
+    write_position: usize
 }
-```
 
-**简要说明**：
-形式化建模有助于协议正确性验证。
-
-### 6.2 网络协议自动化验证
-
-**理论定义**：
-自动化验证用于检测协议实现的正确性与安全。
-
-**数学符号**：
-属性验证 φ(protocol) = true
-
-**Rust 伪代码**：
-
-```rust
-// 协议属性自动化测试伪代码
-fn check_property(protocol: &str) -> bool {
-    protocol.contains("ACK")
-}
-```
-
-**简要说明**：
-自动化验证提升协议健壮性。
-
-### 6.3 网络协议的工程实现与案例
-
-**理论说明**：
-协议工程实现需关注兼容性、健壮性与性能。
-
-**工程案例**：
-
-- Rust async-std 实现 TCP echo server
-
-**Rust 伪代码**：
-
-```rust
-use async_std::net::TcpListener;
-use async_std::prelude::*;
-async fn run() {
-    let listener = TcpListener::bind("127.0.0.1:8080").await.unwrap();
-    while let Ok((mut stream, _)) = listener.accept().await {
-        async_std::task::spawn(async move {
-            let mut buf = vec![0u8; 1024];
-            let n = stream.read(&mut buf).await.unwrap();
-            stream.write_all(&buf[..n]).await.unwrap();
-        });
+impl NetworkBuffer {
+    fn new(capacity: usize) -> Self {
+        Self {
+            capacity,
+            data: VecDeque::with_capacity(capacity),
+            read_position: 0,
+            write_position: 0
+        }
+    }
+    
+    fn write(&mut self, data: &[u8]) -> usize {
+        let available_space = self.capacity - self.data.len();
+        let write_size = std::cmp::min(available_space, data.len());
+        
+        for i in 0..write_size {
+            self.data.push_back(data[i]);
+        }
+        
+        write_size
+    }
+    
+    fn read(&mut self, buffer: &mut [u8]) -> usize {
+        let read_size = std::cmp::min(self.data.len(), buffer.len());
+        
+        for i in 0..read_size {
+            if let Some(byte) = self.data.pop_front() {
+                buffer[i] = byte;
+            }
+        }
+        
+        read_size
+    }
+    
+    fn available_read(&self) -> usize {
+        self.data.len()
+    }
+    
+    fn available_write(&self) -> usize {
+        self.capacity - self.data.len()
     }
 }
 ```
 
-**简要总结**：
-Rust 网络协议实现适合高性能场景。
+**简要说明**：
+缓冲区管理优化了网络I/O的性能。
 
-### 6.4 网络协议发展趋势与未来值值值展望
+## 3. 网络协议实现
 
-**理论总结**：
-网络协议持续演进以适应分布式、实时与安全需求。
+### 3.1 HTTP协议的形式化
 
-**发展趋势**：
+**理论定义**：
+HTTP协议是应用层协议，用于在Web浏览器和Web服务器之间传输数据。
 
-- QUIC、HTTP/3 等新协议普及
-- 零信任与端到端加密
-- 自动化协议验证与生成
+**数学符号**：
+HTTP = { Request, Response }
+Request = { Method, URI, Headers, Body }
+Response = { Status, Headers, Body }
 
-**挑战**：
-
-- 兼容性与标准化
-- 安全威胁持续升级
-- 高性能与低延迟的平衡
-
-**Rust生态建议**：
-
-- 推动异步网络库与协议栈发展
-- 加强协议安全与自动化测试工具链
-
-## 7. 交叉专题与纵深扩展
-
-### 7.1 交叉专题：网络协议与分布式/区块链/IoT
-
-**理论联系**：协议一致性、分布式容错、边缘通信等问题在多个领域交叉出现。
-
-**工程实践**：Rust 异步网络库（tokio、async-std）与多协议集成，支持高并发与多场景。
-
-**形式化方法**：协议状态机自动验证与模型检测。
-
----
-
-### 7.2 纵深扩展：网络安全与自动化测试
-
-**工具链**：cargo-fuzz（模糊测试）、proptest、自动化协议验证工具。
-
-**典型案例**：
-
-- 协议模糊测试：
-
-```shell
-cargo fuzz run fuzz_target
-```
-
-- 自动化安全扫描：
+**Rust 伪代码**：
 
 ```rust
-// 伪代码：检测输入包格式合法性
-fn validate_packet(packet: &[u8]) -> bool { packet.len() > 4 }
+use std::collections::HashMap;
+
+#[derive(Debug)]
+enum HttpMethod {
+    GET,
+    POST,
+    PUT,
+    DELETE,
+    HEAD,
+    OPTIONS
+}
+
+#[derive(Debug)]
+struct HttpRequest {
+    method: HttpMethod,
+    uri: String,
+    headers: HashMap<String, String>,
+    body: Vec<u8>
+}
+
+impl HttpRequest {
+    fn new(method: HttpMethod, uri: String) -> Self {
+        Self {
+            method,
+            uri,
+            headers: HashMap::new(),
+            body: Vec::new()
+        }
+    }
+    
+    fn add_header(&mut self, key: String, value: String) {
+        self.headers.insert(key, value);
+    }
+    
+    fn set_body(&mut self, body: Vec<u8>) {
+        self.body = body;
+    }
+    
+    fn to_string(&self) -> String {
+        let mut request = format!("{:?} {} HTTP/1.1\r\n", self.method, self.uri);
+        
+        for (key, value) in &self.headers {
+            request.push_str(&format!("{}: {}\r\n", key, value));
+        }
+        
+        request.push_str("\r\n");
+        
+        if !self.body.is_empty() {
+            request.push_str(&String::from_utf8_lossy(&self.body));
+        }
+        
+        request
+    }
+}
+
+#[derive(Debug)]
+struct HttpResponse {
+    status_code: u16,
+    status_text: String,
+    headers: HashMap<String, String>,
+    body: Vec<u8>
+}
+
+impl HttpResponse {
+    fn new(status_code: u16, status_text: String) -> Self {
+        Self {
+            status_code,
+            status_text,
+            headers: HashMap::new(),
+            body: Vec::new()
+        }
+    }
+    
+    fn add_header(&mut self, key: String, value: String) {
+        self.headers.insert(key, value);
+    }
+    
+    fn set_body(&mut self, body: Vec<u8>) {
+        self.body = body.clone();
+        self.add_header("Content-Length".to_string(), body.len().to_string());
+    }
+    
+    fn to_string(&self) -> String {
+        let mut response = format!("HTTP/1.1 {} {}\r\n", self.status_code, self.status_text);
+        
+        for (key, value) in &self.headers {
+            response.push_str(&format!("{}: {}\r\n", key, value));
+        }
+        
+        response.push_str("\r\n");
+        
+        if !self.body.is_empty() {
+            response.push_str(&String::from_utf8_lossy(&self.body));
+        }
+        
+        response
+    }
+}
 ```
 
----
+**简要说明**：
+HTTP协议实现了Web应用的基础通信。
 
-## 全局统一理论框架与自动化推进建议
+### 3.2 WebSocket协议的理论基础
 
-- 强调协议一致性、自动化测试、安全与可验证性。
-- 建议集成 cargo-fuzz、proptest、自动化协议验证工具，提升健壮性。
-- 推荐采用断点快照与持续推进机制，便于协议演进与安全保障。
+**理论定义**：
+WebSocket协议提供了在单个TCP连接上进行全双工通信的机制。
 
----
+**数学符号**：
+WebSocket = { Handshake, DataFrames, ControlFrames }
 
-## 自动化工具链集成与一键化工程实践
+**Rust 伪代码**：
 
-- 推荐工具链：cargo test、cargo-fuzz、proptest
-- 一键命令模板：
+```rust
+use std::collections::HashMap;
 
-```makefile
-test:
- cargo test
-fuzz:
- cargo fuzz run fuzz_target
+#[derive(Debug)]
+enum WebSocketOpcode {
+    Continuation = 0x0,
+    Text = 0x1,
+    Binary = 0x2,
+    Close = 0x8,
+    Ping = 0x9,
+    Pong = 0xA
+}
+
+#[derive(Debug)]
+struct WebSocketFrame {
+    fin: bool,
+    opcode: WebSocketOpcode,
+    mask: bool,
+    payload_length: u64,
+    masking_key: Option<[u8; 4]>,
+    payload: Vec<u8>
+}
+
+impl WebSocketFrame {
+    fn new(opcode: WebSocketOpcode, payload: Vec<u8>) -> Self {
+        Self {
+            fin: true,
+            opcode,
+            mask: false,
+            payload_length: payload.len() as u64,
+            masking_key: None,
+            payload
+        }
+    }
+    
+    fn encode(&self) -> Vec<u8> {
+        let mut frame = Vec::new();
+        
+        // First byte: FIN + RSV + Opcode
+        let first_byte = if self.fin { 0x80 } else { 0x00 };
+        let first_byte = first_byte | (self.opcode as u8);
+        frame.push(first_byte);
+        
+        // Second byte: MASK + Payload length
+        let second_byte = if self.mask { 0x80 } else { 0x00 };
+        let second_byte = second_byte | (self.payload_length as u8);
+        frame.push(second_byte);
+        
+        // Extended payload length
+        if self.payload_length > 125 {
+            if self.payload_length <= 65535 {
+                frame.push(126);
+                frame.extend_from_slice(&(self.payload_length as u16).to_be_bytes());
+            } else {
+                frame.push(127);
+                frame.extend_from_slice(&self.payload_length.to_be_bytes());
+            }
+        }
+        
+        // Masking key
+        if self.mask {
+            if let Some(key) = self.masking_key {
+                frame.extend_from_slice(&key);
+            }
+        }
+        
+        // Payload
+        frame.extend_from_slice(&self.payload);
+        
+        frame
+    }
+    
+    fn decode(data: &[u8]) -> Result<Self, String> {
+        if data.len() < 2 {
+            return Err("Frame too short".to_string());
+        }
+        
+        let fin = (data[0] & 0x80) != 0;
+        let opcode = match data[0] & 0x0F {
+            0x0 => WebSocketOpcode::Continuation,
+            0x1 => WebSocketOpcode::Text,
+            0x2 => WebSocketOpcode::Binary,
+            0x8 => WebSocketOpcode::Close,
+            0x9 => WebSocketOpcode::Ping,
+            0xA => WebSocketOpcode::Pong,
+            _ => return Err("Unknown opcode".to_string())
+        };
+        
+        let mask = (data[1] & 0x80) != 0;
+        let payload_length = data[1] & 0x7F;
+        
+        let mut offset = 2;
+        let mut actual_length = payload_length as u64;
+        
+        if payload_length == 126 {
+            if data.len() < 4 {
+                return Err("Frame too short for extended length".to_string());
+            }
+            actual_length = u16::from_be_bytes([data[2], data[3]]) as u64;
+            offset += 2;
+        } else if payload_length == 127 {
+            if data.len() < 10 {
+                return Err("Frame too short for extended length".to_string());
+            }
+            actual_length = u64::from_be_bytes([
+                data[2], data[3], data[4], data[5],
+                data[6], data[7], data[8], data[9]
+            ]);
+            offset += 8;
+        }
+        
+        let mut masking_key = None;
+        if mask {
+            if data.len() < offset + 4 {
+                return Err("Frame too short for masking key".to_string());
+            }
+            masking_key = Some([data[offset], data[offset + 1], data[offset + 2], data[offset + 3]]);
+            offset += 4;
+        }
+        
+        if data.len() < offset + actual_length as usize {
+            return Err("Frame too short for payload".to_string());
+        }
+        
+        let mut payload = data[offset..offset + actual_length as usize].to_vec();
+        
+        // Unmask payload if necessary
+        if mask {
+            if let Some(key) = masking_key {
+                for i in 0..payload.len() {
+                    payload[i] ^= key[i % 4];
+                }
+            }
+        }
+        
+        Ok(WebSocketFrame {
+            fin,
+            opcode,
+            mask,
+            payload_length: actual_length,
+            masking_key,
+            payload
+        })
+    }
+}
 ```
 
----
+**简要说明**：
+WebSocket协议实现了实时双向通信。
 
-## 自动化推进与断点快照集成
+### 3.3 网络协议解析器
 
-- 每次推进自动更新快照，CI 检查推进状态
-- 支持"中断-恢复-持续演进"全流程
-- 推荐将快照与工具链集成，提升团队协作与工程可持续性
+**理论定义**：
+网络协议解析器用于解析和构造网络协议数据包。
+
+**数学符号**：
+Parser = { parse(data) → Packet, serialize(packet) → data }
+
+**Rust 伪代码**：
+
+```rust
+use std::io::{Cursor, Read, Write};
+
+trait ProtocolParser {
+    type Packet;
+    
+    fn parse(&self, data: &[u8]) -> Result<Self::Packet, String>;
+    fn serialize(&self, packet: &Self::Packet) -> Result<Vec<u8>, String>;
+}
+
+struct HttpParser;
+
+#[derive(Debug)]
+struct HttpPacket {
+    is_request: bool,
+    method: Option<String>,
+    uri: Option<String>,
+    status_code: Option<u16>,
+    headers: Vec<(String, String)>,
+    body: Vec<u8>
+}
+
+impl ProtocolParser for HttpParser {
+    type Packet = HttpPacket;
+    
+    fn parse(&self, data: &[u8]) -> Result<Self::Packet, String> {
+        let mut cursor = Cursor::new(data);
+        let mut line = String::new();
+        
+        // Read first line
+        cursor.read_line(&mut line).map_err(|e| e.to_string())?;
+        let first_line = line.trim();
+        
+        let mut packet = HttpPacket {
+            is_request: false,
+            method: None,
+            uri: None,
+            status_code: None,
+            headers: Vec::new(),
+            body: Vec::new()
+        };
+        
+        // Parse first line
+        let parts: Vec<&str> = first_line.split_whitespace().collect();
+        if parts.len() >= 3 {
+            if parts[0].starts_with("HTTP/") {
+                // Response
+                packet.is_request = false;
+                packet.status_code = parts[1].parse().ok();
+            } else {
+                // Request
+                packet.is_request = true;
+                packet.method = Some(parts[0].to_string());
+                packet.uri = Some(parts[1].to_string());
+            }
+        }
+        
+        // Read headers
+        loop {
+            line.clear();
+            cursor.read_line(&mut line).map_err(|e| e.to_string())?;
+            let header_line = line.trim();
+            
+            if header_line.is_empty() {
+                break;
+            }
+            
+            if let Some(colon_pos) = header_line.find(':') {
+                let key = header_line[..colon_pos].trim().to_string();
+                let value = header_line[colon_pos + 1..].trim().to_string();
+                packet.headers.push((key, value));
+            }
+        }
+        
+        // Read body
+        let mut body = Vec::new();
+        cursor.read_to_end(&mut body).map_err(|e| e.to_string())?;
+        packet.body = body;
+        
+        Ok(packet)
+    }
+    
+    fn serialize(&self, packet: &Self::Packet) -> Result<Vec<u8>, String> {
+        let mut data = Vec::new();
+        
+        // Write first line
+        if packet.is_request {
+            if let (Some(ref method), Some(ref uri)) = (&packet.method, &packet.uri) {
+                writeln!(data, "{} {} HTTP/1.1", method, uri).map_err(|e| e.to_string())?;
+            }
+        } else {
+            if let Some(status_code) = packet.status_code {
+                writeln!(data, "HTTP/1.1 {} OK", status_code).map_err(|e| e.to_string())?;
+            }
+        }
+        
+        // Write headers
+        for (key, value) in &packet.headers {
+            writeln!(data, "{}: {}", key, value).map_err(|e| e.to_string())?;
+        }
+        
+        // Write empty line
+        writeln!(data).map_err(|e| e.to_string())?;
+        
+        // Write body
+        data.extend_from_slice(&packet.body);
+        
+        Ok(data)
+    }
+}
+```
+
+**简要说明**：
+协议解析器提供了网络协议的标准化处理。
+
+## 4. 网络性能优化
+
+### 4.1 连接池管理
+
+**理论定义**：
+连接池管理用于复用网络连接，减少连接建立的开销。
+
+**数学符号**：
+ConnectionPool = { connections: Vec<Connection>, max_size: usize }
+
+**Rust 伪代码**：
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::collections::VecDeque;
+use std::time::{Duration, Instant};
+
+struct Connection {
+    id: u64,
+    created_at: Instant,
+    last_used: Instant,
+    is_active: bool
+}
+
+impl Connection {
+    fn new(id: u64) -> Self {
+        let now = Instant::now();
+        Self {
+            id,
+            created_at: now,
+            last_used: now,
+            is_active: true
+        }
+    }
+    
+    fn is_expired(&self, max_age: Duration) -> bool {
+        self.created_at.elapsed() > max_age
+    }
+    
+    fn is_idle(&self, max_idle: Duration) -> bool {
+        self.last_used.elapsed() > max_idle
+    }
+    
+    fn mark_used(&mut self) {
+        self.last_used = Instant::now();
+    }
+}
+
+struct ConnectionPool {
+    connections: Arc<Mutex<VecDeque<Connection>>>,
+    max_size: usize,
+    max_age: Duration,
+    max_idle: Duration,
+    next_id: Arc<Mutex<u64>>
+}
+
+impl ConnectionPool {
+    fn new(max_size: usize, max_age: Duration, max_idle: Duration) -> Self {
+        Self {
+            connections: Arc::new(Mutex::new(VecDeque::new())),
+            max_size,
+            max_age,
+            max_idle,
+            next_id: Arc::new(Mutex::new(0))
+        }
+    }
+    
+    fn get_connection(&self) -> Option<Connection> {
+        let mut connections = self.connections.lock().unwrap();
+        
+        // Remove expired and idle connections
+        connections.retain(|conn| {
+            !conn.is_expired(self.max_age) && !conn.is_idle(self.max_idle)
+        });
+        
+        // Return an available connection
+        connections.pop_front()
+    }
+    
+    fn return_connection(&self, mut connection: Connection) {
+        connection.mark_used();
+        
+        let mut connections = self.connections.lock().unwrap();
+        
+        if connections.len() < self.max_size {
+            connections.push_back(connection);
+        }
+    }
+    
+    fn create_connection(&self) -> Connection {
+        let mut next_id = self.next_id.lock().unwrap();
+        let id = *next_id;
+        *next_id += 1;
+        Connection::new(id)
+    }
+}
+```
+
+**简要说明**：
+连接池管理提高了网络应用的性能。
+
+### 4.2 网络流量控制
+
+**理论定义**：
+网络流量控制用于管理数据传输的速率，防止网络拥塞。
+
+**数学符号**：
+FlowControl = { window_size, rate_limit, congestion_window }
+
+**Rust 伪代码**：
+
+```rust
+use std::time::{Duration, Instant};
+
+struct FlowController {
+    window_size: usize,
+    rate_limit: f64, // bytes per second
+    congestion_window: usize,
+    last_send_time: Instant,
+    bytes_sent: usize
+}
+
+impl FlowController {
+    fn new(window_size: usize, rate_limit: f64) -> Self {
+        Self {
+            window_size,
+            rate_limit,
+            congestion_window: window_size,
+            last_send_time: Instant::now(),
+            bytes_sent: 0
+        }
+    }
+    
+    fn can_send(&mut self, data_size: usize) -> bool {
+        let now = Instant::now();
+        let time_elapsed = now.duration_since(self.last_send_time).as_secs_f64();
+        
+        // Check rate limit
+        let max_bytes = (self.rate_limit * time_elapsed) as usize;
+        if self.bytes_sent >= max_bytes {
+            return false;
+        }
+        
+        // Check window size
+        if data_size > self.congestion_window {
+            return false;
+        }
+        
+        true
+    }
+    
+    fn on_send(&mut self, data_size: usize) {
+        self.bytes_sent += data_size;
+        self.last_send_time = Instant::now();
+    }
+    
+    fn on_ack(&mut self) {
+        // Increase congestion window (slow start)
+        self.congestion_window = std::cmp::min(
+            self.congestion_window * 2,
+            self.window_size
+        );
+    }
+    
+    fn on_timeout(&mut self) {
+        // Decrease congestion window (congestion avoidance)
+        self.congestion_window = std::cmp::max(
+            self.congestion_window / 2,
+            1
+        );
+    }
+    
+    fn reset_rate_limit(&mut self) {
+        self.bytes_sent = 0;
+        self.last_send_time = Instant::now();
+    }
+}
+```
+
+**简要说明**：
+流量控制确保了网络传输的稳定性和公平性。
+
+### 4.3 网络负载均衡
+
+**理论定义**：
+网络负载均衡用于在多个服务器之间分配网络请求，提高系统的可用性和性能。
+
+**数学符号**：
+LoadBalancer = { servers: Vec<Server>, algorithm: LoadBalancingAlgorithm }
+
+**Rust 伪代码**：
+
+```rust
+use std::collections::HashMap;
+use std::sync::{Arc, Mutex};
+
+#[derive(Debug)]
+struct Server {
+    id: String,
+    address: String,
+    port: u16,
+    weight: u32,
+    current_connections: u32,
+    is_healthy: bool
+}
+
+impl Server {
+    fn new(id: String, address: String, port: u16, weight: u32) -> Self {
+        Self {
+            id,
+            address,
+            port,
+            weight,
+            current_connections: 0,
+            is_healthy: true
+        }
+    }
+    
+    fn get_load(&self) -> f64 {
+        self.current_connections as f64 / self.weight as f64
+    }
+}
+
+enum LoadBalancingAlgorithm {
+    RoundRobin,
+    WeightedRoundRobin,
+    LeastConnections,
+    WeightedLeastConnections,
+    Random
+}
+
+struct LoadBalancer {
+    servers: Arc<Mutex<Vec<Server>>>,
+    algorithm: LoadBalancingAlgorithm,
+    current_index: Arc<Mutex<usize>>
+}
+
+impl LoadBalancer {
+    fn new(algorithm: LoadBalancingAlgorithm) -> Self {
+        Self {
+            servers: Arc::new(Mutex::new(Vec::new())),
+            algorithm,
+            current_index: Arc::new(Mutex::new(0))
+        }
+    }
+    
+    fn add_server(&self, server: Server) {
+        let mut servers = self.servers.lock().unwrap();
+        servers.push(server);
+    }
+    
+    fn remove_server(&self, server_id: &str) {
+        let mut servers = self.servers.lock().unwrap();
+        servers.retain(|s| s.id != server_id);
+    }
+    
+    fn select_server(&self) -> Option<Server> {
+        let servers = self.servers.lock().unwrap();
+        let healthy_servers: Vec<&Server> = servers.iter()
+            .filter(|s| s.is_healthy)
+            .collect();
+        
+        if healthy_servers.is_empty() {
+            return None;
+        }
+        
+        match self.algorithm {
+            LoadBalancingAlgorithm::RoundRobin => {
+                let mut index = self.current_index.lock().unwrap();
+                let server = healthy_servers[*index % healthy_servers.len()];
+                *index += 1;
+                Some(server.clone())
+            },
+            LoadBalancingAlgorithm::LeastConnections => {
+                let server = healthy_servers.iter()
+                    .min_by_key(|s| s.current_connections)
+                    .unwrap();
+                Some(server.clone())
+            },
+            LoadBalancingAlgorithm::Random => {
+                use rand::Rng;
+                let mut rng = rand::thread_rng();
+                let index = rng.gen_range(0..healthy_servers.len());
+                Some(healthy_servers[index].clone())
+            },
+            _ => None
+        }
+    }
+    
+    fn mark_server_unhealthy(&self, server_id: &str) {
+        let mut servers = self.servers.lock().unwrap();
+        if let Some(server) = servers.iter_mut().find(|s| s.id == server_id) {
+            server.is_healthy = false;
+        }
+    }
+    
+    fn mark_server_healthy(&self, server_id: &str) {
+        let mut servers = self.servers.lock().unwrap();
+        if let Some(server) = servers.iter_mut().find(|s| s.id == server_id) {
+            server.is_healthy = true;
+        }
+    }
+}
+```
+
+**简要说明**：
+负载均衡提高了系统的可用性和性能。
+
+## 5. 网络安全
+
+### 5.1 加密通信的理论基础
+
+**理论定义**：
+加密通信通过加密算法保护数据传输的安全性。
+
+**数学符号**：
+Encryption = { encrypt(plaintext, key) → ciphertext, decrypt(ciphertext, key) → plaintext }
+
+**Rust 伪代码**：
+
+```rust
+use std::collections::HashMap;
+
+trait EncryptionAlgorithm {
+    fn encrypt(&self, plaintext: &[u8], key: &[u8]) -> Result<Vec<u8>, String>;
+    fn decrypt(&self, ciphertext: &[u8], key: &[u8]) -> Result<Vec<u8>, String>;
+}
+
+struct XorCipher;
+
+impl EncryptionAlgorithm for XorCipher {
+    fn encrypt(&self, plaintext: &[u8], key: &[u8]) -> Result<Vec<u8>, String> {
+        if key.is_empty() {
+            return Err("Key cannot be empty".to_string());
+        }
+        
+        let mut ciphertext = Vec::new();
+        for (i, &byte) in plaintext.iter().enumerate() {
+            let key_byte = key[i % key.len()];
+            ciphertext.push(byte ^ key_byte);
+        }
+        
+        Ok(ciphertext)
+    }
+    
+    fn decrypt(&self, ciphertext: &[u8], key: &[u8]) -> Result<Vec<u8>, String> {
+        // XOR cipher is symmetric
+        self.encrypt(ciphertext, key)
+    }
+}
+
+struct SecureChannel {
+    algorithm: Box<dyn EncryptionAlgorithm>,
+    key: Vec<u8>
+}
+
+impl SecureChannel {
+    fn new(algorithm: Box<dyn EncryptionAlgorithm>, key: Vec<u8>) -> Self {
+        Self { algorithm, key }
+    }
+    
+    fn send(&self, data: &[u8]) -> Result<Vec<u8>, String> {
+        self.algorithm.encrypt(data, &self.key)
+    }
+    
+    fn receive(&self, data: &[u8]) -> Result<Vec<u8>, String> {
+        self.algorithm.decrypt(data, &self.key)
+    }
+}
+```
+
+**简要说明**：
+加密通信保护了数据传输的机密性。
+
+### 5.2 数字签名与证书
+
+**理论定义**：
+数字签名用于验证消息的真实性和完整性。
+
+**数学符号**：
+DigitalSignature = { sign(message, private_key) → signature, verify(message, signature, public_key) → bool }
+
+**Rust 伪代码**：
+
+```rust
+use std::collections::HashMap;
+
+struct KeyPair {
+    public_key: Vec<u8>,
+    private_key: Vec<u8>
+}
+
+impl KeyPair {
+    fn generate() -> Self {
+        // Simplified key generation
+        let public_key = vec![1, 2, 3, 4, 5];
+        let private_key = vec![5, 4, 3, 2, 1];
+        Self { public_key, private_key }
+    }
+}
+
+struct DigitalSignature {
+    key_pair: KeyPair
+}
+
+impl DigitalSignature {
+    fn new() -> Self {
+        Self { key_pair: KeyPair::generate() }
+    }
+    
+    fn sign(&self, message: &[u8]) -> Vec<u8> {
+        // Simplified signature generation
+        let mut signature = Vec::new();
+        signature.extend_from_slice(&self.key_pair.private_key);
+        signature.extend_from_slice(message);
+        
+        // Simple hash-like operation
+        for &byte in &signature {
+            signature.push(byte.wrapping_add(1));
+        }
+        
+        signature
+    }
+    
+    fn verify(&self, message: &[u8], signature: &[u8]) -> bool {
+        // Simplified signature verification
+        let expected_signature = self.sign(message);
+        signature == expected_signature
+    }
+    
+    fn get_public_key(&self) -> &[u8] {
+        &self.key_pair.public_key
+    }
+}
+
+struct Certificate {
+    public_key: Vec<u8>,
+    issuer: String,
+    subject: String,
+    valid_from: u64,
+    valid_until: u64,
+    signature: Vec<u8>
+}
+
+impl Certificate {
+    fn new(public_key: Vec<u8>, issuer: String, subject: String) -> Self {
+        Self {
+            public_key,
+            issuer,
+            subject,
+            valid_from: 0,
+            valid_until: u64::MAX,
+            signature: Vec::new()
+        }
+    }
+    
+    fn is_valid(&self, current_time: u64) -> bool {
+        current_time >= self.valid_from && current_time <= self.valid_until
+    }
+    
+    fn sign(&mut self, signer: &DigitalSignature) {
+        let data = format!("{}:{}:{}:{}:{}", 
+            self.issuer, self.subject, self.valid_from, 
+            self.valid_until, String::from_utf8_lossy(&self.public_key));
+        self.signature = signer.sign(data.as_bytes());
+    }
+    
+    fn verify(&self, signer_public_key: &[u8]) -> bool {
+        // Simplified verification
+        self.public_key == signer_public_key
+    }
+}
+```
+
+**简要说明**：
+数字签名和证书确保了通信的认证和完整性。
+
+## 6. 总结
+
+本文档提供了网络编程的完整形式化理论框架，包括：
+
+1. **网络协议模型**：OSI/TCP-IP协议栈、协议状态机、抽象数据通道
+2. **套接字与异步网络**：套接字编程、异步网络模型、缓冲区管理
+3. **网络协议实现**：HTTP协议、WebSocket协议、协议解析器
+4. **网络性能优化**：连接池管理、流量控制、负载均衡
+5. **网络安全**：加密通信、数字签名与证书
+
+每个主题都包含：
+- 严格的理论定义
+- 数学符号表示
+- 完整的Rust代码实现
+- 实际应用说明
+
+这个框架为Rust语言中的网络编程提供了坚实的理论基础和实践指导。

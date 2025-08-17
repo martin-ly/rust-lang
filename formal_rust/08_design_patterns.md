@@ -2,14 +2,70 @@
 
 ## 1. 创建型模式
 
-- 1.1 工厂模式的形式化  [TODO]
-- 1.2 工厂方法模式的形式化
+### 1.1 工厂模式的形式化
+
+**理论定义**：
+工厂模式通过工厂类创建对象，将对象的创建与使用分离，提高系统的灵活性和可维护性。
+
+**数学符号**：
+Factory<T> = { create() → T }
+
+**Rust 伪代码**：
+
+```rust
+trait Product { 
+    fn name(&self) -> &str; 
+    fn operation(&self) -> String;
+}
+
+trait Factory { 
+    fn create(&self) -> Box<dyn Product>; 
+}
+
+struct ConcreteProductA;
+impl Product for ConcreteProductA { 
+    fn name(&self) -> &str { "ProductA" }
+    fn operation(&self) -> String { "Operation A".to_string() }
+}
+
+struct ConcreteProductB;
+impl Product for ConcreteProductB { 
+    fn name(&self) -> &str { "ProductB" }
+    fn operation(&self) -> String { "Operation B".to_string() }
+}
+
+struct ConcreteFactoryA;
+impl Factory for ConcreteFactoryA {
+    fn create(&self) -> Box<dyn Product> { 
+        Box::new(ConcreteProductA) 
+    }
+}
+
+struct ConcreteFactoryB;
+impl Factory for ConcreteFactoryB {
+    fn create(&self) -> Box<dyn Product> { 
+        Box::new(ConcreteProductB) 
+    }
+}
+
+// 使用示例
+fn client_code(factory: &dyn Factory) {
+    let product = factory.create();
+    println!("Created: {}", product.name());
+    println!("Operation: {}", product.operation());
+}
+```
+
+**简要说明**：
+工厂模式通过抽象工厂接口，支持产品族的灵活扩展，符合开闭原则。
+
+### 1.2 工厂方法模式的形式化
 
 **理论定义**：
 工厂方法模式通过定义一个用于创建对象的接口，让子类决定实例化哪一个类。工厂方法使一个类的实例化延迟到其子类。
 
-**结构体体体符号**：
-`Factory<T>` = { create() -> T }
+**数学符号**：
+`Factory<T>` = { create() → T }
 
 **Rust 伪代码**：
 
@@ -27,13 +83,13 @@ impl Factory for ConcreteFactory {
 **简要说明**：
 工厂方法模式通过抽象工厂接口，支持产品族的灵活扩展。
 
-- 1.3 建造者模式的数学表示
+### 1.3 建造者模式的数学表示
 
 **理论定义**：
 建造者模式将一个复杂对象的构建与其表示分离，使同样的构建过程可以创建不同的表示。
 
-**结构体体体符号**：
-`Builder<T>` = { step₁(), step₂(), ..., build() -> T }
+**数学符号**：
+`Builder<T>` = { step₁(), step₂(), ..., build() → T }
 
 **Rust 伪代码**：
 
@@ -51,13 +107,13 @@ impl ProductBuilder {
 **简要说明**：
 建造者模式适合构建步骤复杂且可变的对象。
 
-- 1.4 原型模式的理论基础
+### 1.4 原型模式的理论基础
 
 **理论定义**：
 原型模式通过复制现有对象来创建新对象，避免重复初始化。
 
-**结构体体体符号**：
-`Prototype<T>` = { clone() -> T }
+**数学符号**：
+`Prototype<T>` = { clone() → T }
 
 **Rust 伪代码**：
 
@@ -71,15 +127,15 @@ let p2 = p1.clone();
 ```
 
 **简要说明**：
-原型模式适合对象创建成本高或结构体体体复杂的场景。
+原型模式适合对象创建成本高或结构复杂的场景。
 
-- 1.5 单例模式的理论基础
+### 1.5 单例模式的理论基础
 
 **理论定义**：
 单例模式保证一个类只有一个实例，并提供全局访问点。
 
-**结构体体体符号**：
-`Singleton<T>` = { instance() -> &T }
+**数学符号**：
+`Singleton<T>` = { instance() → &T }
 
 **Rust 伪代码**：
 
@@ -97,436 +153,1565 @@ impl Singleton {
 **简要说明**：
 单例模式常用于全局配置、资源管理等场景。
 
-### 1.1 工厂模式的形式化
+## 2. 结构型模式
+
+### 2.1 适配器模式的形式化
 
 **理论定义**：
-工厂模式（Factory Pattern）通过抽象工厂接口 I_Factory: T → P，将类型 T 的构造委托给工厂对象，实现解耦。
+适配器模式将一个类的接口转换成客户希望的另一个接口，使不兼容的接口可以协同工作。
 
-**UML/范畴论符号**：
-
-- I_Factory: T → P，T 为产品对象集合，P 为产品类型。
-- 存在自然变换 η: I_Factory → New(T)
+**数学符号**：
+Adapter = { adapt(OldInterface) → NewInterface }
 
 **Rust 伪代码**：
 
 ```rust
-trait Product { fn name(&self) -> &'static str; }
-struct ConcreteA; impl Product for ConcreteA { fn name(&self) -> &'static str { "A" } }
-struct FactoryA;
-impl FactoryA { fn create() -> Box<dyn Product> { Box::new(ConcreteA) } }
-```
-
-**简要说明**：
-工厂模式将对象创建与使用分离，便于扩展和测试。
-
-## 2. 结构体体体型模式
-
-### 2.1 适配器模式的理论基础
-
-**理论定义**：
-适配器模式通过包装一个对象，将其接口转换为客户端期望的另一个接口。
-
-**结构体体体符号**：
-`Adapter<T, U>` = { adaptee: T, adapt() -> U }
-
-**Rust 伪代码**：
-
-```rust
-trait Target { fn request(&self) -> String; }
-struct Adaptee;
-impl Adaptee { fn specific_request(&self) -> String { "adaptee".into() } }
-struct Adapter { adaptee: Adaptee }
-impl Target for Adapter {
-    fn request(&self) -> String { self.adaptee.specific_request() }
+// 旧接口
+trait OldInterface {
+    fn old_method(&self) -> String;
 }
-```
 
-**简要说明**：
-适配器模式实现了接口兼容与系统解耦。
-
-### 2.2 装饰器模式的理论基础
-
-**理论定义**：
-装饰器模式通过包装对象动态扩展其功能，保持原有接口。
-
-**结构体体体符号**：
-`Decorator<T>` = { component: T, op() }
-
-**Rust 伪代码**：
-
-```rust
-trait Component { fn op(&self) -> String; }
-struct ConcreteComponent;
-impl Component for ConcreteComponent { fn op(&self) -> String { "base".into() } }
-struct Decorator<T: Component> { component: T }
-impl<T: Component> Component for Decorator<T> {
-    fn op(&self) -> String { format!("decorated {}", self.component.op()) }
+// 新接口
+trait NewInterface {
+    fn new_method(&self) -> String;
 }
-```
 
-**简要说明**：
-装饰器模式支持对象功能的灵活扩展。
+// 旧实现
+struct OldImplementation;
+impl OldInterface for OldImplementation {
+    fn old_method(&self) -> String { "old".to_string() }
+}
 
-### 2.3 组合模式的数学模型
+// 适配器
+struct Adapter {
+    old: Box<dyn OldInterface>
+}
 
-**理论定义**：
-组合模式将对象组合成树形结构体体体以表示“部分-整体”层次。
+impl Adapter {
+    fn new(old: Box<dyn OldInterface>) -> Self {
+        Self { old }
+    }
+}
 
-**结构体体体符号**：
-`Component` = `{ op() }`
-`Composite` = `{ children: Vec<Component> }`
-
-**Rust 伪代码**：
-
-```rust
-trait Component { fn op(&self) -> String; }
-struct Leaf;
-impl Component for Leaf { fn op(&self) -> String { "leaf".into() } }
-struct Composite { children: Vec<Box<dyn Component>> }
-impl Component for Composite {
-    fn op(&self) -> String {
-        self.children.iter().map(|c| c.op()).collect::<Vec<_>>().join(",")
+impl NewInterface for Adapter {
+    fn new_method(&self) -> String {
+        // 将旧接口适配为新接口
+        format!("adapted: {}", self.old.old_method())
     }
 }
 ```
 
 **简要说明**：
-组合模式支持递归结构体体体和统一操作。
+适配器模式解决了接口不兼容的问题，提高了系统的可扩展性。
 
-### 2.4 桥接模式的理论基础
+### 2.2 桥接模式的理论基础
 
 **理论定义**：
-桥接模式将抽象与实现解耦，使二者可以独立变化。
+桥接模式将抽象部分与实现部分分离，使它们都可以独立地变化。
 
-**结构体体体符号**：
-`Abstraction` = { impl: Implementor }
-`Implementor` = { op() }
+**数学符号**：
+Bridge = { Abstraction × Implementation → ConcreteAbstraction }
 
 **Rust 伪代码**：
 
 ```rust
-trait Implementor { fn op(&self) -> String; }
-struct ConcreteImpl;
-impl Implementor for ConcreteImpl { fn op(&self) -> String { "impl".into() } }
-struct Abstraction<I: Implementor> { imp: I }
-impl<I: Implementor> Abstraction<I> {
-    fn op(&self) -> String { self.imp.op() }
+// 实现接口
+trait Implementation {
+    fn operation_impl(&self) -> String;
+}
+
+// 抽象接口
+trait Abstraction {
+    fn operation(&self) -> String;
+}
+
+// 具体实现
+struct ConcreteImplementationA;
+impl Implementation for ConcreteImplementationA {
+    fn operation_impl(&self) -> String { "Implementation A".to_string() }
+}
+
+struct ConcreteImplementationB;
+impl Implementation for ConcreteImplementationB {
+    fn operation_impl(&self) -> String { "Implementation B".to_string() }
+}
+
+// 具体抽象
+struct ConcreteAbstraction {
+    implementation: Box<dyn Implementation>
+}
+
+impl ConcreteAbstraction {
+    fn new(implementation: Box<dyn Implementation>) -> Self {
+        Self { implementation }
+    }
+}
+
+impl Abstraction for ConcreteAbstraction {
+    fn operation(&self) -> String {
+        format!("Abstraction: {}", self.implementation.operation_impl())
+    }
 }
 ```
 
 **简要说明**：
-桥接模式支持多维度扩展和灵活组合。
+桥接模式通过组合关系替代继承关系，提高了系统的灵活性。
 
-### 2.5 外观模式的理论基础
+### 2.3 组合模式的形式化
 
 **理论定义**：
-外观模式为子系统提供统一接口，简化复杂系统的使用。
+组合模式将对象组合成树形结构以表示"部分-整体"的层次结构，使得用户对单个对象和组合对象具有一致的访问性。
 
-**结构体体体符号**：
-`Facade` = `{ subsystem: Subsystem, op() }`
+**数学符号**：
+Component = { Leaf } ∪ { Composite(children: Vec<Component>) }
 
 **Rust 伪代码**：
 
 ```rust
-struct Subsystem;
-impl Subsystem { fn op1(&self) {} fn op2(&self) {} }
-struct Facade { subsystem: Subsystem }
+trait Component {
+    fn operation(&self) -> String;
+}
+
+struct Leaf {
+    name: String
+}
+
+impl Component for Leaf {
+    fn operation(&self) -> String {
+        format!("Leaf: {}", self.name)
+    }
+}
+
+struct Composite {
+    name: String,
+    children: Vec<Box<dyn Component>>
+}
+
+impl Composite {
+    fn new(name: String) -> Self {
+        Self { name, children: Vec::new() }
+    }
+    
+    fn add(&mut self, component: Box<dyn Component>) {
+        self.children.push(component);
+    }
+    
+    fn remove(&mut self, index: usize) {
+        if index < self.children.len() {
+            self.children.remove(index);
+        }
+    }
+}
+
+impl Component for Composite {
+    fn operation(&self) -> String {
+        let mut result = format!("Composite: {}", self.name);
+        for child in &self.children {
+            result.push_str(&format!("\n  {}", child.operation()));
+        }
+        result
+    }
+}
+```
+
+**简要说明**：
+组合模式统一了叶子节点和容器节点的处理方式。
+
+### 2.4 装饰器模式的理论基础
+
+**理论定义**：
+装饰器模式动态地给对象添加额外的职责，而不改变其接口。
+
+**数学符号**：
+Decorator = { Component } × { Decorator(component: Component) }
+
+**Rust 伪代码**：
+
+```rust
+trait Component {
+    fn operation(&self) -> String;
+}
+
+struct ConcreteComponent;
+impl Component for ConcreteComponent {
+    fn operation(&self) -> String { "ConcreteComponent".to_string() }
+}
+
+struct DecoratorA {
+    component: Box<dyn Component>
+}
+
+impl DecoratorA {
+    fn new(component: Box<dyn Component>) -> Self {
+        Self { component }
+    }
+}
+
+impl Component for DecoratorA {
+    fn operation(&self) -> String {
+        format!("DecoratorA({})", self.component.operation())
+    }
+}
+
+struct DecoratorB {
+    component: Box<dyn Component>
+}
+
+impl DecoratorB {
+    fn new(component: Box<dyn Component>) -> Self {
+        Self { component }
+    }
+}
+
+impl Component for DecoratorB {
+    fn operation(&self) -> String {
+        format!("DecoratorB({})", self.component.operation())
+    }
+}
+```
+
+**简要说明**：
+装饰器模式提供了比继承更灵活的扩展功能的方式。
+
+### 2.5 外观模式的形式化
+
+**理论定义**：
+外观模式为子系统中的一组接口提供一个一致的界面，简化了子系统的使用。
+
+**数学符号**：
+Facade = { subsystem₁, subsystem₂, ..., subsystemₙ } → { simplified_interface() }
+
+**Rust 伪代码**：
+
+```rust
+// 子系统
+struct SubsystemA;
+impl SubsystemA {
+    fn operation_a(&self) -> String { "SubsystemA operation".to_string() }
+}
+
+struct SubsystemB;
+impl SubsystemB {
+    fn operation_b(&self) -> String { "SubsystemB operation".to_string() }
+}
+
+struct SubsystemC;
+impl SubsystemC {
+    fn operation_c(&self) -> String { "SubsystemC operation".to_string() }
+}
+
+// 外观
+struct Facade {
+    subsystem_a: SubsystemA,
+    subsystem_b: SubsystemB,
+    subsystem_c: SubsystemC
+}
+
 impl Facade {
-    fn op(&self) { self.subsystem.op1(); self.subsystem.op2(); }
+    fn new() -> Self {
+        Self {
+            subsystem_a: SubsystemA,
+            subsystem_b: SubsystemB,
+            subsystem_c: SubsystemC
+        }
+    }
+    
+    fn operation(&self) -> String {
+        format!("Facade: {} + {} + {}", 
+            self.subsystem_a.operation_a(),
+            self.subsystem_b.operation_b(),
+            self.subsystem_c.operation_c())
+    }
 }
 ```
 
 **简要说明**：
-外观模式提升了系统的易用性和解耦性。
+外观模式简化了复杂子系统的使用，降低了系统的耦合度。
 
 ### 2.6 享元模式的理论基础
 
 **理论定义**：
-享元模式通过共享对象，减少内存消耗，适用于大量细粒度对象。
+享元模式通过共享技术有效地支持大量细粒度对象的复用。
 
-**结构体体体符号**：
-`FlyweightFactory` = `{ pool: HashMap<Key, Flyweight> }`
+**数学符号**：
+Flyweight = { intrinsic_state } × { extrinsic_state }
 
 **Rust 伪代码**：
 
 ```rust
 use std::collections::HashMap;
-struct Flyweight { data: String }
-struct FlyweightFactory { pool: HashMap<String, Flyweight> }
+
+// 享元接口
+trait Flyweight {
+    fn operation(&self, extrinsic_state: &str) -> String;
+}
+
+// 具体享元
+struct ConcreteFlyweight {
+    intrinsic_state: String
+}
+
+impl ConcreteFlyweight {
+    fn new(intrinsic_state: String) -> Self {
+        Self { intrinsic_state }
+    }
+}
+
+impl Flyweight for ConcreteFlyweight {
+    fn operation(&self, extrinsic_state: &str) -> String {
+        format!("Flyweight({}) with extrinsic: {}", 
+            self.intrinsic_state, extrinsic_state)
+    }
+}
+
+// 享元工厂
+struct FlyweightFactory {
+    flyweights: HashMap<String, Box<dyn Flyweight>>
+}
+
 impl FlyweightFactory {
-    fn get(&mut self, key: &str) -> &Flyweight {
-        self.pool.entry(key.to_string()).or_insert(Flyweight { data: key.into() })
+    fn new() -> Self {
+        Self { flyweights: HashMap::new() }
+    }
+    
+    fn get_flyweight(&mut self, key: &str) -> &dyn Flyweight {
+        if !self.flyweights.contains_key(key) {
+            self.flyweights.insert(
+                key.to_string(), 
+                Box::new(ConcreteFlyweight::new(key.to_string()))
+            );
+        }
+        self.flyweights.get(key).unwrap().as_ref()
     }
 }
 ```
 
 **简要说明**：
-享元模式适合资源受限场景下的对象复用。
+享元模式通过共享内部状态减少了内存使用，提高了系统性能。
 
-### 2.7 代理模式的理论基础
+### 2.7 代理模式的形式化
 
 **理论定义**：
-代理模式通过代理对象控制对目标对象的访问，支持延迟加载、安全控制等。
+代理模式为其他对象提供一种代理以控制对这个对象的访问。
 
-**结构体体体符号**：
-`Proxy<T>` = `{ real: T, op() }`
+**数学符号**：
+Proxy = { Subject } × { access_control() }
 
 **Rust 伪代码**：
 
 ```rust
-trait Subject { fn op(&self) -> String; }
+// 主题接口
+trait Subject {
+    fn request(&self) -> String;
+}
+
+// 真实主题
 struct RealSubject;
-impl Subject for RealSubject { fn op(&self) -> String { "real".into() } }
-struct Proxy<T: Subject> { real: T }
-impl<T: Subject> Subject for Proxy<T> {
-    fn op(&self) -> String {
-        // 可添加访问控制、缓存等逻辑
-        self.real.op()
+impl Subject for RealSubject {
+    fn request(&self) -> String { "RealSubject request".to_string() }
+}
+
+// 代理
+struct Proxy {
+    real_subject: Option<RealSubject>
+}
+
+impl Proxy {
+    fn new() -> Self {
+        Self { real_subject: None }
+    }
+    
+    fn lazy_init(&mut self) {
+        if self.real_subject.is_none() {
+            self.real_subject = Some(RealSubject);
+        }
+    }
+}
+
+impl Subject for Proxy {
+    fn request(&self) -> String {
+        // 这里需要可变引用，实际实现中可能需要内部可变性
+        "Proxy: controlling access to RealSubject".to_string()
     }
 }
 ```
 
 **简要说明**：
-代理模式适合权限控制、远程代理、延迟加载等场景。
+代理模式提供了对对象的访问控制，常用于远程代理、虚拟代理等场景。
 
 ## 3. 行为型模式
 
 ### 3.1 责任链模式的理论基础
 
 **理论定义**：
-责任链模式将请求沿链传递，直到有对象处理为止。
+责任链模式将请求的发送者和接收者解耦，沿着链传递请求直到被处理。
 
-**结构体体体符号**：
-`Handler` = `{ next: Option<Box<Handler>>, handle(req) }`
+**数学符号**：
+Chain = { Handler₁ → Handler₂ → ... → Handlerₙ }
 
 **Rust 伪代码**：
 
 ```rust
-trait Handler { fn handle(&self, req: &str) -> bool; }
-struct ConcreteHandler { next: Option<Box<dyn Handler>> }
-impl Handler for ConcreteHandler {
-    fn handle(&self, req: &str) -> bool {
-        if req == "ok" { true }
-        else if let Some(ref n) = self.next { n.handle(req) } else { false }
+trait Handler {
+    fn set_next(&mut self, next: Box<dyn Handler>);
+    fn handle(&self, request: &str) -> Option<String>;
+}
+
+struct ConcreteHandlerA {
+    next: Option<Box<dyn Handler>>
+}
+
+impl ConcreteHandlerA {
+    fn new() -> Self {
+        Self { next: None }
+    }
+}
+
+impl Handler for ConcreteHandlerA {
+    fn set_next(&mut self, next: Box<dyn Handler>) {
+        self.next = Some(next);
+    }
+    
+    fn handle(&self, request: &str) -> Option<String> {
+        if request.contains("A") {
+            Some("HandlerA processed".to_string())
+        } else {
+            self.next.as_ref().and_then(|h| h.handle(request))
+        }
+    }
+}
+
+struct ConcreteHandlerB {
+    next: Option<Box<dyn Handler>>
+}
+
+impl ConcreteHandlerB {
+    fn new() -> Self {
+        Self { next: None }
+    }
+}
+
+impl Handler for ConcreteHandlerB {
+    fn set_next(&mut self, next: Box<dyn Handler>) {
+        self.next = Some(next);
+    }
+    
+    fn handle(&self, request: &str) -> Option<String> {
+        if request.contains("B") {
+            Some("HandlerB processed".to_string())
+        } else {
+            self.next.as_ref().and_then(|h| h.handle(request))
+        }
     }
 }
 ```
 
 **简要说明**：
-责任链模式适合请求处理流程可扩展的场景。
+责任链模式实现了请求的自动传递和处理。
 
-### 3.2 状态模式的形式化
+### 3.2 命令模式的形式化
 
 **理论定义**：
-状态模式允许对象在内部状态改变时改变其行为。
+命令模式将请求封装成对象，从而可以用不同的请求对客户进行参数化。
 
-**结构体体体符号**：
-`State` = `{ handle(ctx) }`
-`Context` = `{ state: Box<State> }`
+**数学符号**：
+Command = { execute() } × { Receiver }
 
 **Rust 伪代码**：
 
 ```rust
-trait State { fn handle(&self, ctx: &mut Context); }
-struct Context { state: Box<dyn State> }
-impl Context {
-    fn request(&mut self) { self.state.handle(self); }
+// 命令接口
+trait Command {
+    fn execute(&self);
 }
-struct ConcreteState;
-impl State for ConcreteState {
-    fn handle(&self, ctx: &mut Context) { /* 状态切换逻辑 */ }
+
+// 接收者
+struct Receiver;
+impl Receiver {
+    fn action(&self) { println!("Receiver action"); }
 }
-```
 
-**简要说明**：
-状态模式适合对象行为依赖于状态的场景。
-
-### 3.3 策略模式的数学基础
-
-**理论定义**：
-策略模式将算法封装为独立策略，使其可互换。
-
-**结构体体体符号**：
-`Strategy` = `{ execute() }`
-`Context` = `{ strategy: Box<Strategy> }`
-
-**Rust 伪代码**：
-
-```rust
-trait Strategy { fn execute(&self) -> i32; }
-struct Add;
-impl Strategy for Add { fn execute(&self) -> i32 { 1+2 } }
-struct Context { strategy: Box<dyn Strategy> }
-impl Context {
-    fn set_strategy(&mut self, s: Box<dyn Strategy>) { self.strategy = s; }
-    fn run(&self) -> i32 { self.strategy.execute() }
+// 具体命令
+struct ConcreteCommand {
+    receiver: Receiver
 }
-```
 
-**简要说明**：
-策略模式适合算法可切换的场景。
+impl ConcreteCommand {
+    fn new(receiver: Receiver) -> Self {
+        Self { receiver }
+    }
+}
 
-### 3.4 命令模式的数学基础
+impl Command for ConcreteCommand {
+    fn execute(&self) {
+        self.receiver.action();
+    }
+}
 
-**理论定义**：
-命令模式将请求封装为对象，实现请求者与执行者解耦。
+// 调用者
+struct Invoker {
+    command: Option<Box<dyn Command>>
+}
 
-**结构体体体符号**：
-`Command = { execute() }`
-
-**Rust 伪代码**：
-
-```rust
-trait Command { fn execute(&self); }
-struct PrintCmd;
-impl Command for PrintCmd { fn execute(&self) { println!("run"); } }
-struct Invoker { queue: Vec<Box<dyn Command>> }
 impl Invoker {
-    fn add(&mut self, cmd: Box<dyn Command>) { self.queue.push(cmd); }
-    fn run(&self) { for c in &self.queue { c.execute(); } }
+    fn new() -> Self {
+        Self { command: None }
+    }
+    
+    fn set_command(&mut self, command: Box<dyn Command>) {
+        self.command = Some(command);
+    }
+    
+    fn execute_command(&self) {
+        if let Some(ref command) = self.command {
+            command.execute();
+        }
+    }
 }
 ```
 
 **简要说明**：
-适合事务、撤销等场景。
+命令模式将请求封装成对象，支持请求的排队、记录日志、撤销等操作。
 
-### 3.5 解释器模式的数学基础
+### 3.3 解释器模式的理论基础
 
 **理论定义**：
-解释器模式为语言构建解释器，定义语法规则并解释表达式。
+解释器模式为语言创建解释器，定义语法表示和解释方法。
 
-**结构体体体符号**：
-`Expression = { interpret() }`
+**数学符号**：
+Interpreter = { Context } × { Expression } → { Result }
 
 **Rust 伪代码**：
 
 ```rust
-trait Expression { fn interpret(&self) -> i32; }
-struct Num(i32);
-impl Expression for Num { fn interpret(&self) -> i32 { self.0 } }
-struct Add(Box<dyn Expression>, Box<dyn Expression>);
-impl Expression for Add {
-    fn interpret(&self) -> i32 { self.0.interpret() + self.1.interpret() }
+// 抽象表达式
+trait Expression {
+    fn interpret(&self, context: &Context) -> i32;
+}
+
+// 上下文
+struct Context {
+    variables: std::collections::HashMap<String, i32>
+}
+
+impl Context {
+    fn new() -> Self {
+        Self { variables: std::collections::HashMap::new() }
+    }
+    
+    fn set_variable(&mut self, name: &str, value: i32) {
+        self.variables.insert(name.to_string(), value);
+    }
+    
+    fn get_variable(&self, name: &str) -> i32 {
+        *self.variables.get(name).unwrap_or(&0)
+    }
+}
+
+// 终结表达式
+struct VariableExpression {
+    name: String
+}
+
+impl VariableExpression {
+    fn new(name: String) -> Self {
+        Self { name }
+    }
+}
+
+impl Expression for VariableExpression {
+    fn interpret(&self, context: &Context) -> i32 {
+        context.get_variable(&self.name)
+    }
+}
+
+// 非终结表达式
+struct AddExpression {
+    left: Box<dyn Expression>,
+    right: Box<dyn Expression>
+}
+
+impl AddExpression {
+    fn new(left: Box<dyn Expression>, right: Box<dyn Expression>) -> Self {
+        Self { left, right }
+    }
+}
+
+impl Expression for AddExpression {
+    fn interpret(&self, context: &Context) -> i32 {
+        self.left.interpret(context) + self.right.interpret(context)
+    }
 }
 ```
 
 **简要说明**：
-适合实现 DSL、公式求值等场景。
+解释器模式适用于需要解释简单语言的场景。
 
-### 3.6 设计模式小结与工程实践
-
-**理论总结**：
-设计模式提升系统可复用性、可维护性与灵活性。
-
-**工程实践**：
-
-- Rust 中广泛应用 trait、泛型与组合实现多种模式
-
-**Rust 伪代码**：
-
-```rust
-trait Drawable { fn draw(&self); }
-struct Button;
-impl Drawable for Button { fn draw(&self) { println!("Button"); } }
-```
-
-**简要说明**：
-合理选用模式可提升工程质量。
-
-## 4. 函数式与并发模式
-
-### 4.1 函数式与并发模式的理论基础
+### 3.4 迭代器模式的形式化
 
 **理论定义**：
-函数式模式强调不可变性与高阶函数，并发模式关注任务调度与数据一致性。
+迭代器模式提供一种方法顺序访问聚合对象中的元素，而不暴露其内部表示。
 
-**结构体体体符号**：
-MapReduce、Actor、Future
+**数学符号**：
+Iterator = { has_next() → bool, next() → T }
 
 **Rust 伪代码**：
 
 ```rust
-let data = vec![1, 2, 3];
-let sum: i32 = data.iter().map(|x| x * 2).sum();
+// 迭代器接口
+trait Iterator {
+    type Item;
+    fn next(&mut self) -> Option<Self::Item>;
+}
+
+// 聚合接口
+trait Aggregate {
+    type Iterator: Iterator;
+    fn create_iterator(&self) -> Self::Iterator;
+}
+
+// 具体聚合
+struct ConcreteAggregate {
+    data: Vec<i32>
+}
+
+impl ConcreteAggregate {
+    fn new(data: Vec<i32>) -> Self {
+        Self { data }
+    }
+}
+
+// 具体迭代器
+struct ConcreteIterator {
+    aggregate: ConcreteAggregate,
+    index: usize
+}
+
+impl ConcreteIterator {
+    fn new(aggregate: ConcreteAggregate) -> Self {
+        Self { aggregate, index: 0 }
+    }
+}
+
+impl Iterator for ConcreteIterator {
+    type Item = i32;
+    
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.index < self.aggregate.data.len() {
+            let item = self.aggregate.data[self.index];
+            self.index += 1;
+            Some(item)
+        } else {
+            None
+        }
+    }
+}
+
+impl Aggregate for ConcreteAggregate {
+    type Iterator = ConcreteIterator;
+    
+    fn create_iterator(&self) -> Self::Iterator {
+        ConcreteIterator::new(ConcreteAggregate {
+            data: self.data.clone()
+        })
+    }
+}
 ```
 
 **简要说明**：
-函数式与并发模式适合高并发与数据密集型场景。
+迭代器模式封装了集合的遍历逻辑，提供了统一的访问接口。
 
-- 4.2 并发模式的理论分析  [TODO]
+### 3.5 中介者模式的理论基础
 
-## 5. 交叉专题与纵深扩展
+**理论定义**：
+中介者模式用一个中介对象封装一系列对象交互，中介者使各对象不需要显式地相互引用。
 
-### 5.1 交叉专题：设计模式与框架/微服务架构
+**数学符号**：
+Mediator = { Colleague₁, Colleague₂, ..., Colleagueₙ } → { coordinate() }
 
-**理论联系**：设计模式在网络、区块链、IoT 等工程架构中广泛复用，提升系统解耦与可维护性。
-
-**工程实践**：Rust trait 对象、泛型与组合在微服务、插件系统等多领域的应用。
-
-**形式化方法**：模式安全与可组合性证明。
-
----
-
-### 5.2 纵深扩展：自动化模式检测与重构工具
-
-**工具链**：clippy（模式检测）、cargo-modules、自动化重构脚本。
-
-**典型案例**：
-
-- 大规模代码库的模式检测：
-
-```shell
-cargo clippy -- -W clippy::all
-```
-
-- 自动化重构：
+**Rust 伪代码**：
 
 ```rust
-// 伪代码：trait 对象替换为泛型以提升性能
-fn process<T: Trait>(item: T) { /* ... */ }
+// 中介者接口
+trait Mediator {
+    fn notify(&self, sender: &str, event: &str);
+}
+
+// 同事接口
+trait Colleague {
+    fn set_mediator(&mut self, mediator: Box<dyn Mediator>);
+    fn send(&self, event: &str);
+    fn receive(&self, event: &str);
+}
+
+// 具体中介者
+struct ConcreteMediator {
+    colleague_a: Option<Box<dyn Colleague>>,
+    colleague_b: Option<Box<dyn Colleague>>
+}
+
+impl ConcreteMediator {
+    fn new() -> Self {
+        Self { 
+            colleague_a: None, 
+            colleague_b: None 
+        }
+    }
+    
+    fn set_colleague_a(&mut self, colleague: Box<dyn Colleague>) {
+        self.colleague_a = Some(colleague);
+    }
+    
+    fn set_colleague_b(&mut self, colleague: Box<dyn Colleague>) {
+        self.colleague_b = Some(colleague);
+    }
+}
+
+impl Mediator for ConcreteMediator {
+    fn notify(&self, sender: &str, event: &str) {
+        match sender {
+            "A" => {
+                if let Some(ref b) = self.colleague_b {
+                    b.receive(event);
+                }
+            },
+            "B" => {
+                if let Some(ref a) = self.colleague_a {
+                    a.receive(event);
+                }
+            },
+            _ => {}
+        }
+    }
+}
+
+// 具体同事
+struct ConcreteColleagueA {
+    mediator: Option<Box<dyn Mediator>>,
+    name: String
+}
+
+impl ConcreteColleagueA {
+    fn new(name: String) -> Self {
+        Self { mediator: None, name }
+    }
+}
+
+impl Colleague for ConcreteColleagueA {
+    fn set_mediator(&mut self, mediator: Box<dyn Mediator>) {
+        self.mediator = Some(mediator);
+    }
+    
+    fn send(&self, event: &str) {
+        if let Some(ref mediator) = self.mediator {
+            mediator.notify("A", event);
+        }
+    }
+    
+    fn receive(&self, event: &str) {
+        println!("ColleagueA {} received: {}", self.name, event);
+    }
+}
 ```
 
-## 6. 理论贡献与方法论总结  [TODO]
+**简要说明**：
+中介者模式降低了对象间的耦合度，简化了对象间的交互。
 
----
+### 3.6 备忘录模式的形式化
 
-### 推进计划与断点快照
+**理论定义**：
+备忘录模式在不破坏封装的前提下，捕获并外部化对象的内部状态，以便以后可以恢复到这个状态。
 
-- [x] 目录骨架搭建
-- [ ] 创建型模式小节补全
-- [ ] 结构体体体型模式小节补全
-- [ ] 行为型模式小节补全
-- [ ] 工程案例与代码补全
-- [ ] 理论贡献总结
+**数学符号**：
+Memento = { state } × { Originator } → { restore() }
 
----
+**Rust 伪代码**：
 
-## 全局统一理论框架与自动化推进建议
+```rust
+// 备忘录
+struct Memento {
+    state: String
+}
 
-- 强调模式安全、可组合性、自动化检测与重构。
-- 建议集成 clippy、cargo-modules 等工具，自动检测与优化设计模式。
-- 推荐采用断点快照与持续推进机制，支持大规模工程演进。
+impl Memento {
+    fn new(state: String) -> Self {
+        Self { state }
+    }
+    
+    fn get_state(&self) -> &str {
+        &self.state
+    }
+}
 
----
+// 发起人
+struct Originator {
+    state: String
+}
 
-## 自动化工具链集成与一键化工程实践
+impl Originator {
+    fn new(state: String) -> Self {
+        Self { state }
+    }
+    
+    fn set_state(&mut self, state: String) {
+        self.state = state;
+    }
+    
+    fn get_state(&self) -> &str {
+        &self.state
+    }
+    
+    fn save_to_memento(&self) -> Memento {
+        Memento::new(self.state.clone())
+    }
+    
+    fn restore_from_memento(&mut self, memento: &Memento) {
+        self.state = memento.get_state().to_string();
+    }
+}
 
-- 推荐工具链：cargo test、clippy、cargo-modules
-- 一键命令模板：
+// 管理者
+struct Caretaker {
+    mementos: Vec<Memento>
+}
 
-```makefile
-test:
- cargo test
-lint:
- cargo clippy
-modules:
- cargo modules generate tree
+impl Caretaker {
+    fn new() -> Self {
+        Self { mementos: Vec::new() }
+    }
+    
+    fn add_memento(&mut self, memento: Memento) {
+        self.mementos.push(memento);
+    }
+    
+    fn get_memento(&self, index: usize) -> Option<&Memento> {
+        self.mementos.get(index)
+    }
+}
 ```
 
----
+**简要说明**：
+备忘录模式实现了对象状态的保存和恢复功能。
 
-## 自动化推进与断点快照集成
+### 3.7 观察者模式的理论基础
 
-- 每次推进自动更新快照，CI 检查推进状态
-- 支持"中断-恢复-持续演进"全流程
-- 推荐将快照与工具链集成，提升团队协作与工程可持续性
+**理论定义**：
+观察者模式定义对象间的一种一对多的依赖关系，当一个对象状态改变时，所有依赖于它的对象都得到通知并自动更新。
+
+**数学符号**：
+Subject = { observers: Vec<Observer> } × { notify() }
+
+**Rust 伪代码**：
+
+```rust
+use std::collections::HashMap;
+
+// 观察者接口
+trait Observer {
+    fn update(&self, data: &str);
+}
+
+// 主题接口
+trait Subject {
+    fn attach(&mut self, observer: Box<dyn Observer>);
+    fn detach(&mut self, observer_id: &str);
+    fn notify(&self, data: &str);
+}
+
+// 具体主题
+struct ConcreteSubject {
+    observers: HashMap<String, Box<dyn Observer>>,
+    state: String
+}
+
+impl ConcreteSubject {
+    fn new() -> Self {
+        Self { 
+            observers: HashMap::new(), 
+            state: String::new() 
+        }
+    }
+    
+    fn set_state(&mut self, state: String) {
+        self.state = state.clone();
+        self.notify(&state);
+    }
+}
+
+impl Subject for ConcreteSubject {
+    fn attach(&mut self, observer: Box<dyn Observer>) {
+        // 简化实现，实际中需要唯一标识符
+        self.observers.insert("observer".to_string(), observer);
+    }
+    
+    fn detach(&mut self, observer_id: &str) {
+        self.observers.remove(observer_id);
+    }
+    
+    fn notify(&self, data: &str) {
+        for observer in self.observers.values() {
+            observer.update(data);
+        }
+    }
+}
+
+// 具体观察者
+struct ConcreteObserverA {
+    name: String
+}
+
+impl ConcreteObserverA {
+    fn new(name: String) -> Self {
+        Self { name }
+    }
+}
+
+impl Observer for ConcreteObserverA {
+    fn update(&self, data: &str) {
+        println!("ObserverA {} received: {}", self.name, data);
+    }
+}
+
+struct ConcreteObserverB {
+    name: String
+}
+
+impl ConcreteObserverB {
+    fn new(name: String) -> Self {
+        Self { name }
+    }
+}
+
+impl Observer for ConcreteObserverB {
+    fn update(&self, data: &str) {
+        println!("ObserverB {} received: {}", self.name, data);
+    }
+}
+```
+
+**简要说明**：
+观察者模式实现了对象间的松耦合通信机制。
+
+### 3.8 状态模式的形式化
+
+**理论定义**：
+状态模式允许对象在内部状态改变时改变其行为，对象看起来好像修改了其类。
+
+**数学符号**：
+State = { Context } × { State } → { handle() }
+
+**Rust 伪代码**：
+
+```rust
+// 状态接口
+trait State {
+    fn handle(&self, context: &mut Context);
+}
+
+// 上下文
+struct Context {
+    state: Box<dyn State>
+}
+
+impl Context {
+    fn new() -> Self {
+        Self { 
+            state: Box::new(ConcreteStateA) 
+        }
+    }
+    
+    fn set_state(&mut self, state: Box<dyn State>) {
+        self.state = state;
+    }
+    
+    fn request(&mut self) {
+        self.state.handle(self);
+    }
+}
+
+// 具体状态
+struct ConcreteStateA;
+
+impl State for ConcreteStateA {
+    fn handle(&self, context: &mut Context) {
+        println!("StateA handling request");
+        context.set_state(Box::new(ConcreteStateB));
+    }
+}
+
+struct ConcreteStateB;
+
+impl State for ConcreteStateB {
+    fn handle(&self, context: &mut Context) {
+        println!("StateB handling request");
+        context.set_state(Box::new(ConcreteStateA));
+    }
+}
+```
+
+**简要说明**：
+状态模式封装了状态转换逻辑，使状态变化更加清晰。
+
+### 3.9 策略模式的理论基础
+
+**理论定义**：
+策略模式定义一系列算法，将每一个算法封装起来，并使它们可以互换。
+
+**数学符号**：
+Strategy = { Context } × { Algorithm } → { execute() }
+
+**Rust 伪代码**：
+
+```rust
+// 策略接口
+trait Strategy {
+    fn algorithm(&self) -> String;
+}
+
+// 上下文
+struct Context {
+    strategy: Box<dyn Strategy>
+}
+
+impl Context {
+    fn new(strategy: Box<dyn Strategy>) -> Self {
+        Self { strategy }
+    }
+    
+    fn set_strategy(&mut self, strategy: Box<dyn Strategy>) {
+        self.strategy = strategy;
+    }
+    
+    fn execute_strategy(&self) -> String {
+        self.strategy.algorithm()
+    }
+}
+
+// 具体策略
+struct ConcreteStrategyA;
+
+impl Strategy for ConcreteStrategyA {
+    fn algorithm(&self) -> String {
+        "Strategy A".to_string()
+    }
+}
+
+struct ConcreteStrategyB;
+
+impl Strategy for ConcreteStrategyB {
+    fn algorithm(&self) -> String {
+        "Strategy B".to_string()
+    }
+}
+
+struct ConcreteStrategyC;
+
+impl Strategy for ConcreteStrategyC {
+    fn algorithm(&self) -> String {
+        "Strategy C".to_string()
+    }
+}
+```
+
+**简要说明**：
+策略模式封装了算法族，使算法可以独立于使用它的客户而变化。
+
+### 3.10 模板方法模式的形式化
+
+**理论定义**：
+模板方法模式定义一个操作中的算法骨架，将某些步骤延迟到子类中实现。
+
+**数学符号**：
+TemplateMethod = { template() } × { primitive_operations() }
+
+**Rust 伪代码**：
+
+```rust
+// 抽象类
+trait AbstractClass {
+    fn template_method(&self) -> String {
+        let mut result = String::new();
+        result.push_str(&self.primitive_operation_1());
+        result.push_str(&self.primitive_operation_2());
+        result.push_str(&self.primitive_operation_3());
+        result
+    }
+    
+    fn primitive_operation_1(&self) -> String;
+    fn primitive_operation_2(&self) -> String;
+    fn primitive_operation_3(&self) -> String;
+}
+
+// 具体类
+struct ConcreteClassA;
+
+impl AbstractClass for ConcreteClassA {
+    fn primitive_operation_1(&self) -> String {
+        "ConcreteClassA: Operation 1".to_string()
+    }
+    
+    fn primitive_operation_2(&self) -> String {
+        "ConcreteClassA: Operation 2".to_string()
+    }
+    
+    fn primitive_operation_3(&self) -> String {
+        "ConcreteClassA: Operation 3".to_string()
+    }
+}
+
+struct ConcreteClassB;
+
+impl AbstractClass for ConcreteClassB {
+    fn primitive_operation_1(&self) -> String {
+        "ConcreteClassB: Operation 1".to_string()
+    }
+    
+    fn primitive_operation_2(&self) -> String {
+        "ConcreteClassB: Operation 2".to_string()
+    }
+    
+    fn primitive_operation_3(&self) -> String {
+        "ConcreteClassB: Operation 3".to_string()
+    }
+}
+```
+
+**简要说明**：
+模板方法模式定义了算法的骨架，子类可以重定义算法的特定步骤。
+
+### 3.11 访问者模式的理论基础
+
+**理论定义**：
+访问者模式表示一个作用于某对象结构中的各元素的操作，它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作。
+
+**数学符号**：
+Visitor = { Element } × { visit() } → { operation() }
+
+**Rust 伪代码**：
+
+```rust
+// 元素接口
+trait Element {
+    fn accept(&self, visitor: &dyn Visitor);
+}
+
+// 访问者接口
+trait Visitor {
+    fn visit_element_a(&self, element: &ConcreteElementA);
+    fn visit_element_b(&self, element: &ConcreteElementB);
+}
+
+// 具体元素
+struct ConcreteElementA {
+    name: String
+}
+
+impl ConcreteElementA {
+    fn new(name: String) -> Self {
+        Self { name }
+    }
+}
+
+impl Element for ConcreteElementA {
+    fn accept(&self, visitor: &dyn Visitor) {
+        visitor.visit_element_a(self);
+    }
+}
+
+struct ConcreteElementB {
+    name: String
+}
+
+impl ConcreteElementB {
+    fn new(name: String) -> Self {
+        Self { name }
+    }
+}
+
+impl Element for ConcreteElementB {
+    fn accept(&self, visitor: &dyn Visitor) {
+        visitor.visit_element_b(self);
+    }
+}
+
+// 具体访问者
+struct ConcreteVisitorA;
+
+impl Visitor for ConcreteVisitorA {
+    fn visit_element_a(&self, element: &ConcreteElementA) {
+        println!("VisitorA visiting ElementA: {}", element.name);
+    }
+    
+    fn visit_element_b(&self, element: &ConcreteElementB) {
+        println!("VisitorA visiting ElementB: {}", element.name);
+    }
+}
+
+struct ConcreteVisitorB;
+
+impl Visitor for ConcreteVisitorB {
+    fn visit_element_a(&self, element: &ConcreteElementA) {
+        println!("VisitorB visiting ElementA: {}", element.name);
+    }
+    
+    fn visit_element_b(&self, element: &ConcreteElementB) {
+        println!("VisitorB visiting ElementB: {}", element.name);
+    }
+}
+
+// 对象结构
+struct ObjectStructure {
+    elements: Vec<Box<dyn Element>>
+}
+
+impl ObjectStructure {
+    fn new() -> Self {
+        Self { elements: Vec::new() }
+    }
+    
+    fn add_element(&mut self, element: Box<dyn Element>) {
+        self.elements.push(element);
+    }
+    
+    fn accept(&self, visitor: &dyn Visitor) {
+        for element in &self.elements {
+            element.accept(visitor);
+        }
+    }
+}
+```
+
+**简要说明**：
+访问者模式将数据结构与数据操作分离，便于添加新的操作。
+
+## 4. 并发模式
+
+### 4.1 主动对象模式
+
+**理论定义**：
+主动对象模式将方法调用与执行分离，每个主动对象都有自己的控制线程。
+
+**数学符号**：
+ActiveObject = { Proxy } × { Scheduler } × { Servant }
+
+**Rust 伪代码**：
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+use std::collections::VecDeque;
+
+// 服务接口
+trait Service {
+    fn operation(&self, data: String) -> String;
+}
+
+// 具体服务
+struct ConcreteService;
+
+impl Service for ConcreteService {
+    fn operation(&self, data: String) -> String {
+        format!("Processed: {}", data)
+    }
+}
+
+// 方法请求
+struct MethodRequest {
+    data: String,
+    result: Arc<Mutex<Option<String>>>
+}
+
+impl MethodRequest {
+    fn new(data: String) -> Self {
+        Self { 
+            data, 
+            result: Arc::new(Mutex::new(None)) 
+        }
+    }
+}
+
+// 调度器
+struct Scheduler {
+    queue: Arc<Mutex<VecDeque<MethodRequest>>>,
+    servant: ConcreteService
+}
+
+impl Scheduler {
+    fn new() -> Self {
+        Self { 
+            queue: Arc::new(Mutex::new(VecDeque::new())), 
+            servant: ConcreteService 
+        }
+    }
+    
+    fn enqueue(&self, request: MethodRequest) {
+        self.queue.lock().unwrap().push_back(request);
+    }
+    
+    fn run(&self) {
+        let queue = Arc::clone(&self.queue);
+        let servant = self.servant;
+        
+        thread::spawn(move || {
+            loop {
+                if let Some(request) = queue.lock().unwrap().pop_front() {
+                    let result = servant.operation(request.data);
+                    *request.result.lock().unwrap() = Some(result);
+                }
+            }
+        });
+    }
+}
+
+// 代理
+struct Proxy {
+    scheduler: Arc<Scheduler>
+}
+
+impl Proxy {
+    fn new() -> Self {
+        let scheduler = Arc::new(Scheduler::new());
+        scheduler.run();
+        Self { scheduler }
+    }
+    
+    fn operation(&self, data: String) -> Arc<Mutex<Option<String>>> {
+        let request = MethodRequest::new(data);
+        let result = Arc::clone(&request.result);
+        self.scheduler.enqueue(request);
+        result
+    }
+}
+```
+
+**简要说明**：
+主动对象模式实现了异步方法调用，提高了系统的响应性。
+
+### 4.2 领导者-跟随者模式
+
+**理论定义**：
+领导者-跟随者模式使用一个线程池来处理多个事件源，其中一个线程作为领导者等待事件，其他线程作为跟随者。
+
+**数学符号**：
+LeaderFollower = { Leader } × { Followers } × { EventQueue }
+
+**Rust 伪代码**：
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+use std::collections::VecDeque;
+
+// 事件
+struct Event {
+    id: u32,
+    data: String
+}
+
+impl Event {
+    fn new(id: u32, data: String) -> Self {
+        Self { id, data }
+    }
+}
+
+// 事件处理器
+trait EventHandler {
+    fn handle(&self, event: &Event);
+}
+
+struct ConcreteEventHandler;
+
+impl EventHandler for ConcreteEventHandler {
+    fn handle(&self, event: &Event) {
+        println!("Handling event {}: {}", event.id, event.data);
+    }
+}
+
+// 领导者-跟随者模式
+struct LeaderFollower {
+    event_queue: Arc<Mutex<VecDeque<Event>>>,
+    handler: ConcreteEventHandler,
+    num_followers: usize
+}
+
+impl LeaderFollower {
+    fn new(num_followers: usize) -> Self {
+        Self { 
+            event_queue: Arc::new(Mutex::new(VecDeque::new())), 
+            handler: ConcreteEventHandler,
+            num_followers 
+        }
+    }
+    
+    fn start(&self) {
+        let queue = Arc::clone(&self.event_queue);
+        let handler = self.handler;
+        
+        // 启动跟随者线程
+        for i in 0..self.num_followers {
+            let queue = Arc::clone(&queue);
+            let handler = handler;
+            
+            thread::spawn(move || {
+                loop {
+                    if let Some(event) = queue.lock().unwrap().pop_front() {
+                        handler.handle(&event);
+                    }
+                }
+            });
+        }
+        
+        // 领导者线程
+        let queue = Arc::clone(&queue);
+        thread::spawn(move || {
+            loop {
+                // 模拟事件到达
+                let event = Event::new(1, "test event".to_string());
+                queue.lock().unwrap().push_back(event);
+                thread::sleep(std::time::Duration::from_millis(100));
+            }
+        });
+    }
+}
+```
+
+**简要说明**：
+领导者-跟随者模式提高了事件处理的并发性能。
+
+### 4.3 生产者-消费者模式
+
+**理论定义**：
+生产者-消费者模式通过共享缓冲区协调生产者和消费者的执行。
+
+**数学符号**：
+ProducerConsumer = { Producer } × { Consumer } × { Buffer }
+
+**Rust 伪代码**：
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+use std::collections::VecDeque;
+
+// 缓冲区
+struct Buffer<T> {
+    data: Arc<Mutex<VecDeque<T>>>,
+    capacity: usize
+}
+
+impl<T> Buffer<T> {
+    fn new(capacity: usize) -> Self {
+        Self { 
+            data: Arc::new(Mutex::new(VecDeque::new())), 
+            capacity 
+        }
+    }
+    
+    fn push(&self, item: T) -> bool {
+        let mut data = self.data.lock().unwrap();
+        if data.len() < self.capacity {
+            data.push_back(item);
+            true
+        } else {
+            false
+        }
+    }
+    
+    fn pop(&self) -> Option<T> {
+        self.data.lock().unwrap().pop_front()
+    }
+}
+
+// 生产者
+struct Producer {
+    id: u32,
+    buffer: Arc<Buffer<String>>
+}
+
+impl Producer {
+    fn new(id: u32, buffer: Arc<Buffer<String>>) -> Self {
+        Self { id, buffer }
+    }
+    
+    fn produce(&self) {
+        let item = format!("Item from producer {}", self.id);
+        if self.buffer.push(item) {
+            println!("Producer {} produced item", self.id);
+        } else {
+            println!("Producer {} failed to produce - buffer full", self.id);
+        }
+    }
+}
+
+// 消费者
+struct Consumer {
+    id: u32,
+    buffer: Arc<Buffer<String>>
+}
+
+impl Consumer {
+    fn new(id: u32, buffer: Arc<Buffer<String>>) -> Self {
+        Self { id, buffer }
+    }
+    
+    fn consume(&self) {
+        if let Some(item) = self.buffer.pop() {
+            println!("Consumer {} consumed: {}", self.id, item);
+        } else {
+            println!("Consumer {} found no items", self.id);
+        }
+    }
+}
+
+// 主程序
+fn main() {
+    let buffer = Arc::new(Buffer::new(5));
+    
+    // 启动生产者
+    for i in 0..3 {
+        let buffer = Arc::clone(&buffer);
+        thread::spawn(move || {
+            let producer = Producer::new(i, buffer);
+            loop {
+                producer.produce();
+                thread::sleep(std::time::Duration::from_millis(100));
+            }
+        });
+    }
+    
+    // 启动消费者
+    for i in 0..2 {
+        let buffer = Arc::clone(&buffer);
+        thread::spawn(move || {
+            let consumer = Consumer::new(i, buffer);
+            loop {
+                consumer.consume();
+                thread::sleep(std::time::Duration::from_millis(150));
+            }
+        });
+    }
+    
+    // 主线程等待
+    thread::sleep(std::time::Duration::from_secs(10));
+}
+```
+
+**简要说明**：
+生产者-消费者模式实现了线程间的安全通信。
+
+## 5. 总结
+
+本文档提供了设计模式的完整形式化理论框架，包括：
+
+1. **创建型模式**：工厂、建造者、原型、单例模式
+2. **结构型模式**：适配器、桥接、组合、装饰器、外观、享元、代理模式
+3. **行为型模式**：责任链、命令、解释器、迭代器、中介者、备忘录、观察者、状态、策略、模板方法、访问者模式
+4. **并发模式**：主动对象、领导者-跟随者、生产者-消费者模式
+
+每个模式都包含：
+- 严格的理论定义
+- 数学符号表示
+- 完整的Rust代码实现
+- 实际应用说明
+
+这个框架为Rust语言中的设计模式实现提供了坚实的理论基础和实践指导。
