@@ -11,6 +11,7 @@ ALLOWED = {
 	"performance_formal_methods.md",
 	"README.md",
 	"verify_integrity.py",
+	"proofs",
 }
 REQUIRED_HEADINGS = {
 	"type_system_verification.md": ["最小可验证示例", "证明义务"],
@@ -18,6 +19,24 @@ REQUIRED_HEADINGS = {
 	"concurrency_safety_verification.md": ["最小可验证示例", "证明义务"],
 	"performance_formal_methods.md": ["最小可验证示例", "证明义务"],
 }
+
+
+def check_proofs_dir() -> list[str]:
+	violations: list[str] = []
+	p = BASE / "proofs"
+	if not p.exists():
+		return violations
+	# 允许的子结构
+	coq = p / "coq"
+	lean = p / "lean"
+	for d in [coq, lean]:
+		if not d.exists():
+			violations.append(f"缺少证明子目录: {d.relative_to(BASE)}")
+	readme = p / "README.md"
+	if not readme.exists():
+		violations.append("缺少 proofs/README.md")
+	return violations
+
 
 def find_violations():
 	violations = []
@@ -36,6 +55,7 @@ def find_violations():
 		for h in headings:
 			if h not in text:
 				violations.append(f"文档缺少必要章节: {fname} -> {h}")
+	violations.extend(check_proofs_dir())
 	return violations
 
 

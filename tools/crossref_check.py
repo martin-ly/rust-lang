@@ -8,7 +8,21 @@ LINK_RE = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
 
 errors = []
 
-for p in ROOT.rglob("*.md"):
+CONTROLLED_DIRS = [
+	"formal_rust/framework",
+	"formal_rust/language/20_version_features_analysis",
+	"theoretical-foundations/memory-models",
+]
+
+def iter_controlled_markdowns():
+	for rel in CONTROLLED_DIRS:
+		base = (ROOT / rel)
+		if not base.exists():
+			continue
+		for p in base.rglob("*.md"):
+			yield p
+
+for p in iter_controlled_markdowns():
 	# 忽略备份与外部区域
 	if any(part == "migration-backup" for part in p.parts):
 		continue

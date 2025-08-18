@@ -8,12 +8,14 @@
 - 20_version_features_analysis/01–20（≤1.89）全部补齐：MVE + 证明义务 + 框架交叉引用
 - GitHub Actions 工作流：`.github/workflows/ci.yml`（PR/Push 自动运行 `python tools/ci_check.py`）
 - 本地提交钩子安装脚本：`tools/install_hooks.ps1`（pre-commit 运行同一检查）
+- 新增 CI 检查：`tools/crossref_check.py`（受控目录交叉引用完整性）并集成至 `tools/ci_check.py`
+- 框架扩展：`formal_rust/framework/proofs`（含 `coq/` 与 `lean/`）及 `README.md` 说明，`verify_integrity.py` 放宽并校验结构
 
 ## 待办（下一步）
 
-1) 在 `analysis/` 精简/归档历史方法论文档，仅保留与验证或特性直接相关内容
-2) 将 `CROSS_REFERENCE_VALIDATOR.md` 的规则脚本化，合并进 `tools/ci_check.py`
-3) 为 framework 增补 Coq/Lean 草案目录与占位运行说明
+1) 分批扩大交叉引用受控范围，逐目录清理断链，最终覆盖全仓
+2) 在 `analysis/` 精简/归档历史方法论文档，仅保留与验证或特性直接相关内容
+3) 为 Proofs 增加首批占位义务文件（Coq/Lean 骨架）并建立命名映射清单
 
 ## 指标（回调）
 

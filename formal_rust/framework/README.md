@@ -11,6 +11,7 @@
 - `concurrency_safety_verification.md`: 并发安全验证
 - `performance_formal_methods.md`: 性能形式化方法
 - `verify_integrity.py`: 目录完整性与内容稽核脚本
+- `proofs/`: 证明骨架与外部证明工具集成
 
 ## 准入规范
 
@@ -26,6 +27,16 @@ python formal_rust/framework/verify_integrity.py
 ```
 
 - 输出任何违规项将返回非零退出码
+
+## 证明骨架(Proofs)
+
+- 目录结构:
+  - `proofs/README.md`: 使用说明与约定
+  - `proofs/coq/`: Coq 证明草案与脚手架
+  - `proofs/lean/`: Lean 证明草案与脚手架
+- 要求:
+  - 该目录仅存放最小可运行/可检查的证明骨架，不放置与验证无关内容
+  - 与验证文档的“证明义务”双向对应，命名建议: `<doc>__<obligation>.v|lean`
 
 ## 贡献建议
 

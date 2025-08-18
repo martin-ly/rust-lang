@@ -6,13 +6,20 @@ on:
 
 jobs:
   validate:
-    runs-on: windows-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.x']
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: ${{ matrix.python }}
       - name: Run CI checks
-        run: python tools/ci_check.py 
+        shell: bash
+        run: |
+          python --version
+          python tools/ci_check.py 
