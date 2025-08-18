@@ -785,3 +785,34 @@ V_total = 40% × V_safety + 30% × V_productivity + 20% × V_adoption + 10% × V
 "
 
 ---
+
+## 最小可验证示例 (MVE)
+
+```rust
+// safe transmute 思想实验（示意）：长度与对齐受控
+#[repr(C)]
+struct U32Pair { a: u32, b: u32 }
+
+fn sum_pair(p: U32Pair) -> u64 { (p.a as u64) + (p.b as u64) }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn layout_is_stable() {
+        assert_eq!(std::mem::size_of::<U32Pair>(), 8);
+        assert_eq!(std::mem::align_of::<U32Pair>(), 4);
+    }
+}
+```
+
+## 证明义务 (Proof Obligations)
+
+- T1: 结构体布局稳定（`repr(C)` 确保跨编译器/平台一致）
+- T2: 无未定义行为（类型边界与对齐规则满足）
+- T3: 仅允许在等长、等对齐且语义等价上下文中做值级重解释
+
+## 验证框架交叉引用
+
+- 内存安全验证: `formal_rust/framework/memory_safety_verification.md`
+- 性能形式化方法: `formal_rust/framework/performance_formal_methods.md`

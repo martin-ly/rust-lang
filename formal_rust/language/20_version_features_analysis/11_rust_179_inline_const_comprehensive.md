@@ -796,6 +796,32 @@ V_total = V_expressiveness + V_performance + V_safety + V_ecosystem
 
 **实践价值**: inline const将成为高性能库和框架的核心技术，特别是在需要复杂编译时计算和类型级编程的场景中。它标志着Rust编译时计算能力达到了新的高度。
 
-"
-
 ---
+
+## 最小可验证示例 (MVE)
+
+```rust
+const fn add(a: i32, b: i32) -> i32 { a + b }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn inline_const_behaves() {
+        const X: i32 = add(2, 3);
+        assert_eq!(X, 5);
+    }
+}
+```
+
+## 证明义务 (Proof Obligations)
+
+- IC1: 常量求值与运行时一致（纯函数）
+- IC2: 常量表达式不引入UB（内存安全）
+- IC3: 单态化与内联不影响语义（等价性）
+
+## 验证框架交叉引用
+
+- 类型系统验证: `formal_rust/framework/type_system_verification.md`
+- 性能形式化方法: `formal_rust/framework/performance_formal_methods.md`
+- 内存安全验证: `formal_rust/framework/memory_safety_verification.md`

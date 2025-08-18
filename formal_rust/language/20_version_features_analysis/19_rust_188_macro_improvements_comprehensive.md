@@ -591,6 +591,38 @@ V_total = 30% × V_productivity + 25% × V_performance + 25% × V_expressiveness
 
 **实践价值**: 该改进将显著提升Rust生态系统中库和框架的开发效率，预计年度产生15亿美元的经济价值，成为推动Rust在企业级框架开发中广泛采用的重要因素。
 
-"
-
 ---
+
+## 最小可验证示例 (MVE)
+
+```rust
+// 简单宏改进示例：计数与映射
+macro_rules! map_add_one {
+    ($($x:expr),* $(,)?) => {{
+        let mut v = Vec::new();
+        $( v.push($x + 1); )*
+        v
+    }};
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn macro_expands_and_types_check() {
+        let out = map_add_one![1, 2, 3];
+        assert_eq!(out, vec![2, 3, 4]);
+    }
+}
+```
+
+## 证明义务 (Proof Obligations)
+
+- M1: 展开结果在类型系统中良构（`Vec<i32>`）
+- M2: 空输入与尾随逗号可接受（语法健壮性）
+- M3: 无副作用插入（宏展开不引入未声明标识符）
+
+## 验证框架交叉引用
+
+- 类型系统验证: `formal_rust/framework/type_system_verification.md`
+- 性能形式化方法: `formal_rust/framework/performance_formal_methods.md`

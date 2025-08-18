@@ -627,3 +627,38 @@ V_total = 25% × V_performance + 30% × V_usability + 25% × V_maintenance + 20%
 "
 
 ---
+
+## 最小可验证示例 (MVE)
+
+```rust
+// 模拟：工作区依赖解析与特性统一（示意）
+#[derive(Debug, PartialEq)]
+struct Features { enable_fast: bool, enable_tls: bool }
+
+fn unify(a: Features, b: Features) -> Features {
+ Features { enable_fast: a.enable_fast || b.enable_fast,
+            enable_tls:  a.enable_tls  || b.enable_tls }
+}
+
+#[cfg(test)]
+mod tests {
+ use super::*;
+ #[test]
+ fn features_unify_is_commutative() {
+  let a = Features { enable_fast: true, enable_tls: false };
+  let b = Features { enable_fast: false, enable_tls: true };
+  assert_eq!(unify(a.clone(), b.clone()), unify(b, a));
+ }
+}
+```
+
+## 证明义务 (Proof Obligations)
+
+- C1: 特性合一满足交换/结合/幂等性（抽象层面）
+- C2: 工作区级声明不破坏子包最小需求（单调性）
+- C3: 构建计划可生成确定性输出（可重现性）
+
+## 验证框架交叉引用
+
+- 性能形式化方法: `formal_rust/framework/performance_formal_methods.md`
+- 类型系统验证: `formal_rust/framework/type_system_verification.md`

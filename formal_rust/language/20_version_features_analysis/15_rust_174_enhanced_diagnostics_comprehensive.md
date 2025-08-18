@@ -922,3 +922,31 @@ V_total = 30% × V_usability + 25% × V_productivity + 25% × V_learning + 20% �
 "
 
 ---
+
+## 最小可验证示例 (MVE)
+
+```rust
+fn parse_int(s: &str) -> Result<i32, String> {
+    s.parse::<i32>().map_err(|e| format!("parse error: {}", e))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn diag_is_informative() {
+        let err = parse_int("abc").unwrap_err();
+        assert!(err.contains("parse error"));
+    }
+}
+```
+
+## 证明义务 (Proof Obligations)
+
+- D1: 错误信息包含来源与上下文（可定位性）
+- D2: 诊断路径与类型信息一致（类型系统一致性）
+- D3: 不泄漏实现细节（安全性与抽象边界）
+
+## 验证框架交叉引用
+
+- 类型系统验证: `formal_rust/framework/type_system_verification.md`

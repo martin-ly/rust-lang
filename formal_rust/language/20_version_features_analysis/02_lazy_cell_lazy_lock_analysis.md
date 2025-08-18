@@ -896,6 +896,35 @@ LazyCell和LazyLock的引入显著提升了Rust标准库的并发编程能力，
 
 这些特征使得Rust在系统编程和高性能应用开发中更加强大和便利。
 
-"
-
 ---
+
+## 最小可验证示例 (MVE)
+
+```rust
+use std::cell::LazyCell;
+use std::sync::LazyLock;
+
+static A: LazyCell<u64> = LazyCell::new(|| 7);
+static B: LazyLock<String> = LazyLock::new(|| format!("{}", *A));
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn lazy_cell_and_lazy_lock_ok() {
+        assert_eq!(*A, 7);
+        assert_eq!(B.as_str(), "7");
+    }
+}
+```
+
+## 证明义务 (Proof Obligations)
+
+- LZ1: 初始化顺序可推理且无死锁（无循环依赖）
+- LZ2: `LazyLock` 并发一次性语义成立
+- LZ3: 只读共享满足 `Sync` 边界
+
+## 验证框架交叉引用
+
+- 并发安全验证: `formal_rust/framework/concurrency_safety_verification.md`
+- 类型系统验证: `formal_rust/framework/type_system_verification.md`

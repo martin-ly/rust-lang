@@ -1101,6 +1101,32 @@ V_total = V_performance + V_safety + V_ecosystem + V_standardization
 
 **实践价值**: 这些原语将成为现代Rust应用的基础构建块，特别是在需要高性能和线程安全的场景中。它们的引入标志着Rust并发编程进入了一个新的成熟阶段。
 
-"
-
 ---
+
+## 最小可验证示例 (MVE)
+
+```rust
+use std::sync::LazyLock;
+
+static DATA: LazyLock<Vec<u8>> = LazyLock::new(|| vec![1,2,3]);
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn lazylock_initializes_once() {
+        assert_eq!(DATA.len(), 3);
+        assert_eq!(DATA.len(), 3);
+    }
+}
+```
+
+## 证明义务 (Proof Obligations)
+
+- LL1: 初始化一次性与并发安全
+- LL2: 共享只读访问满足 `Sync`
+- LL3: 初始化过程中的失败传播可诊断
+
+## 验证框架交叉引用
+
+- 并发安全验证: `formal_rust/framework/concurrency_safety_verification.md`

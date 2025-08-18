@@ -1323,3 +1323,38 @@ impl MigrationValidator {
 "
 
 ---
+
+## 最小可验证示例 (MVE)
+
+```rust
+trait Worker {
+    async fn run(&self) -> i32;
+}
+
+struct W;
+
+impl Worker for W {
+    async fn run(&self) -> i32 { 1 }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[tokio::test]
+    async fn worker_runs() {
+        let w = W;
+        assert_eq!(Worker::run(&w).await, 1);
+    }
+}
+```
+
+## 证明义务 (Proof Obligations)
+
+- W1: async fn in traits 语义等价于返回 `impl Future<Output=T>`
+- W2: 生命周期推断与借用边界一致（无悬垂）
+- W3: 对象安全／泛型场景下的派发保持正确性
+
+## 验证框架交叉引用
+
+- 类型系统验证: `formal_rust/framework/type_system_verification.md`
+- 并发安全验证: `formal_rust/framework/concurrency_safety_verification.md`

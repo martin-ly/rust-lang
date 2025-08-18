@@ -456,7 +456,6 @@ fn high_performance_file_example() -> Result<(), Box<dyn std::error::Error>> {
     
     Ok(())
 }
-```
 
 ---
 
@@ -555,6 +554,29 @@ V_total = V_safety + V_performance + V_usability + V_ecosystem
 
 **实践价值**: C字符串字面量将成为系统编程和C库集成的标准工具，特别是在需要频繁FFI调用的应用中。它的引入标志着Rust FFI体验的重大改善。
 
-"
-
 ---
+
+## 最小可验证示例 (MVE)
+
+```rust
+use std::ffi::CStr;
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn c_str_roundtrip() {
+        let bytes = b"hello\0";
+        let cs = CStr::from_bytes_with_nul(bytes).unwrap();
+        assert_eq!(cs.to_str().unwrap(), "hello");
+    }
+}
+
+## 证明义务 (Proof Obligations)
+- CSTR1: NUL 终止保证
+- CSTR2: 不越界读取（按长度与对齐）
+- CSTR3: UTF-8 转换错误可报告（安全边界）
+
+## 验证框架交叉引用
+- 内存安全验证: `formal_rust/framework/memory_safety_verification.md`
+- 类型系统验证: `formal_rust/framework/type_system_verification.md`

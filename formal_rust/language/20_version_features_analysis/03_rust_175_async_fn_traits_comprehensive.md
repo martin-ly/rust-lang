@@ -1170,3 +1170,40 @@ V_total = V_performance + V_safety + V_productivity + V_ecosystem
 "
 
 ---
+
+## 最小可验证示例 (MVE)
+
+```rust
+trait Service {
+    async fn handle(&self, x: i32) -> i32;
+}
+
+struct S;
+
+impl Service for S {
+    async fn handle(&self, x: i32) -> i32 {
+        x + 1
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[tokio::test]
+    async fn async_fn_in_trait_works() {
+        let s = S;
+        assert_eq!(Service::handle(&s, 41).await, 42);
+    }
+}
+```
+
+## 证明义务 (Proof Obligations)
+
+- AFT1: `async fn` 在 trait 中的语义等价于返回 `impl Future<Output=T>`
+- AFT2: 自引用/借用在 `async` 边界上无悬垂（遵循借用检查）
+- AFT3: 组合与多态不破坏对象安全（需要时采用静态分发）
+
+## 验证框架交叉引用
+
+- 类型系统验证: `formal_rust/framework/type_system_verification.md`
+- 并发安全验证: `formal_rust/framework/concurrency_safety_verification.md`

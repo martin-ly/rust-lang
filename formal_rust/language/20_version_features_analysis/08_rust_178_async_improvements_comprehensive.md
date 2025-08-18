@@ -1046,6 +1046,30 @@ V_total = V_performance + V_stability + V_ecosystem + V_developer_experience
 
 **实践价值**: 这些改进将直接惠及所有使用异步Rust的应用，特别是高性能服务器和I/O密集型应用。它们为Rust异步生态系统的持续发展奠定了坚实基础。
 
-"
-
 ---
+
+## 最小可验证示例 (MVE)
+
+```rust
+async fn add(x: i32, y: i32) -> i32 { x + y }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[tokio::test]
+    async fn add_async_works() {
+        assert_eq!(add(2,3).await, 5);
+    }
+}
+```
+
+## 证明义务 (Proof Obligations)
+
+- AIMP1: Future 组合类型正确，生命周期可推断
+- AIMP2: 不涉及共享可变状态（或受同步保护）
+- AIMP3: 性能评估可通过基准（无多余 await 阻塞）
+
+## 验证框架交叉引用
+
+- 并发安全验证: `formal_rust/framework/concurrency_safety_verification.md`
+- 性能形式化方法: `formal_rust/framework/performance_formal_methods.md`

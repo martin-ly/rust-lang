@@ -1149,6 +1149,29 @@ impl Distribution<u32> for Standard {
     }
 }
 
-"
-
 ---
+
+## 最小可验证示例 (MVE)
+```rust
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str { if x.len() >= y.len() { x } else { y } }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn lifetime_elision_ok() {
+        assert_eq!(longest("ab", "a"), "ab");
+    }
+}
+```
+
+## 证明义务 (Proof Obligations)
+
+- LIF1: 省略规则与显式注解一致（等价性）
+- LIF2: 返回值生命周期受输入约束
+- LIF3: 无悬垂（遵循借用规则）
+
+## 验证框架交叉引用
+
+- 类型系统验证: `formal_rust/framework/type_system_verification.md`
+- 内存安全验证: `formal_rust/framework/memory_safety_verification.md`

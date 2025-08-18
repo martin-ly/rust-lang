@@ -1599,6 +1599,33 @@ V_total = 40% × V_performance + 25% × V_innovation + 20% × V_ecosystem + 15% 
 
 **实践价值**: 该优化集合将显著加速Rust在高性能计算、实时系统、大数据处理、Web服务等关键领域的采用，预计带来每年135亿美元的直接和间接经济价值。其建立的理论基础和工程实践将长期引导系统性能优化的发展方向。
 
-"
-
 ---
+
+## 最小可验证示例 (MVE)
+
+```rust
+#[inline(always)]
+fn tight_loop(xs: &mut [u64]) { for x in xs { *x = x.wrapping_add(1); } }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn no_overflow_panic() {
+        let mut v = vec![u64::MAX];
+        tight_loop(&mut v);
+        assert_eq!(v[0], 0); // wrapping
+    }
+}
+```
+
+## 证明义务 (Proof Obligations)
+
+- S1: 无分配/无虚调用（优化级别下可通过 IR 检查）
+- S2: 循环融合/边界检查消除（依赖编译器优化有效）
+- S3: 算术行为明确（使用 `wrapping_*` 避免UB）
+
+## 验证框架交叉引用
+
+- 性能形式化方法: `formal_rust/framework/performance_formal_methods.md`
+- 类型系统验证: `formal_rust/framework/type_system_verification.md`

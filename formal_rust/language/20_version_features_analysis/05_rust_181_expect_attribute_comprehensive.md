@@ -1468,6 +1468,32 @@ pub mod visualization_tools {
 }
 ```
 
-"
-
 ---
+
+## 最小可验证示例 (MVE)
+
+```rust
+#[inline(always)]
+fn expect_positive(x: i32) -> i32 { assert!(x >= 0, "negative"); x }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    #[should_panic]
+    fn panics_on_negative() {
+        let _ = expect_positive(-1);
+    }
+}
+```
+
+## 证明义务 (Proof Obligations)
+
+- EXP1: 属性/断言不改变函数外在语义（仅在违约时失败）
+- EXP2: 发布配置与优化级别下表现一致（无隐藏语义变更）
+- EXP3: 诊断信息可读（与增强诊断一致）
+
+## 验证框架交叉引用
+
+- 类型系统验证: `formal_rust/framework/type_system_verification.md`
+- 性能形式化方法: `formal_rust/framework/performance_formal_methods.md`

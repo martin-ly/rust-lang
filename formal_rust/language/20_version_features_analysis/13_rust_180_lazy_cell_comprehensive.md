@@ -837,6 +837,32 @@ V_total = 30% × V_performance + 25% × V_memory + 25% × V_safety + 20% × V_us
 
 **实践价值**: 这些类型将特别有利于需要全局配置、昂贵计算缓存和资源管理的应用，预计将广泛应用于Web服务、系统工具和高性能计算领域。
 
-"
-
 ---
+
+## 最小可验证示例 (MVE)
+
+```rust
+use std::cell::LazyCell;
+
+static ANSWER: LazyCell<u64> = LazyCell::new(|| 42);
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn lazy_initializes_once() {
+        assert_eq!(*ANSWER, 42);
+        assert_eq!(*ANSWER, 42);
+    }
+}
+```
+
+## 证明义务 (Proof Obligations)
+
+- L1: 初始化函数只执行一次（并发下也成立的语义约束）
+- L2: 值可安全共享（依据 `Sync` 约束）
+- L3: 无数据竞争（初始化期间的同步保证）
+
+## 验证框架交叉引用
+
+- 并发安全验证: `formal_rust/framework/concurrency_safety_verification.md`

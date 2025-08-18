@@ -570,6 +570,37 @@ V_total = 35% × V_performance + 30% × V_scalability + 20% × V_usability + 15%
 
 **实践价值**: 该改进将显著提升Rust异步应用的性能和可扩展性，预计年度产生30亿美元的经济价值，成为推动Rust在云计算和分布式系统领域广泛采用的重要因素。
 
-"
-
 ---
+
+## 最小可验证示例 (MVE)
+
+```rust
+// 简化：异步生态中的基本组合示例
+async fn add_one(x: i32) -> i32 { x + 1 }
+
+async fn pipeline(x: i32) -> i32 {
+    add_one(x).await * 2
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[tokio::test]
+    async fn pipeline_works() {
+        let r = pipeline(10).await;
+        assert_eq!(r, 22);
+    }
+}
+```
+
+## 证明义务 (Proof Obligations)
+
+- A1: 组合保持类型正确性（`i32 → i32`）
+- A2: 调度不引入数据竞争（单线程执行时）
+- A3: 在 `Send`/`Sync` 约束下并发路径满足并发安全
+
+## 验证框架交叉引用
+
+- 类型系统验证: `formal_rust/framework/type_system_verification.md`
+- 并发安全验证: `formal_rust/framework/concurrency_safety_verification.md`
+- 性能形式化方法: `formal_rust/framework/performance_formal_methods.md`

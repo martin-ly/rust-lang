@@ -145,3 +145,32 @@ ASCII检测: 5-10%提升 (字符处理)
 "
 
 ---
+
+## 最小可验证示例 (MVE)
+
+```rust
+// 示例：Option/Result 组合与迭代器链在std更新下的稳定表现
+fn parse_and_sum(xs: &[&str]) -> Result<i32, String> {
+    xs.iter()
+      .map(|s| s.parse::<i32>().map_err(|e| e.to_string()))
+      .try_fold(0, |acc, v| Ok(acc + v?))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn parse_and_sum_works() {
+        assert_eq!(parse_and_sum(&["1","2","3"]).unwrap(), 6);
+        assert!(parse_and_sum(&["1","x"]).is_err());
+    }
+}
+
+## 证明义务 (Proof Obligations)
+- U1: 迭代器与错误传播链保持类型系统一致性
+- U2: 无panic路径（错误通过Result显式化）
+- U3: 性能特征可通过基准验证（无多余分配）
+
+## 验证框架交叉引用
+- 类型系统验证: `formal_rust/framework/type_system_verification.md`
+- 性能形式化方法: `formal_rust/framework/performance_formal_methods.md`

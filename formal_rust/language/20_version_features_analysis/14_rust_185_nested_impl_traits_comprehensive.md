@@ -259,3 +259,31 @@ V_total = 35% × V_expressiveness + 25% × V_performance + 25% × V_usability + 
 "
 
 ---
+
+## 最小可验证示例 (MVE)
+
+```rust
+fn make_iter(n: usize) -> impl Iterator<Item = usize> {
+    (0..n).map(|x| x + 1)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn iter_yields_increments() {
+        let v: Vec<_> = make_iter(3).collect();
+        assert_eq!(v, vec![1,2,3]);
+    }
+}
+```
+
+## 证明义务 (Proof Obligations)
+
+- I1: `impl Trait` 展开满足 Item 类型一致性
+- I2: 组合器链不引入所有权/借用冲突
+- I3: 推断在无显式注解场景下保持决定性
+
+## 验证框架交叉引用
+
+- 类型系统验证: `formal_rust/framework/type_system_verification.md`

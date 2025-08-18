@@ -1069,6 +1069,37 @@ V_total = V_type_safety + V_performance + V_expressiveness + V_ecosystem
 
 **实践价值**: 向上转型将成为现代Rust应用架构的基础特征，特别是在需要复杂继承层次和动态分发的场景中。它的引入标志着Rust在企业级面向对象开发中达到了新的成熟度。
 
-"
-
 ---
+
+## 最小可验证示例 (MVE)
+
+```rust
+trait Base { fn id(&self) -> &'static str; }
+trait Derived: Base { fn extra(&self) -> usize; }
+
+struct T;
+impl Base for T { fn id(&self) -> &'static str { "T" } }
+impl Derived for T { fn extra(&self) -> usize { 42 } }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn dyn_upcast_allows_base_calls() {
+        let t = T;
+        let d: &dyn Derived = &t;
+        let b: &dyn Base = d; // upcasting
+        assert_eq!(b.id(), "T");
+    }
+}
+```
+
+## 证明义务 (Proof Obligations)
+
+- UCAST1: `&dyn Derived` 可向上转型为 `&dyn Base` 且方法分派保持语义
+- UCAST2: 无未定义行为（vtable 布局与对象安全满足）
+- UCAST3: 不破坏别名/可变性规则
+
+## 验证框架交叉引用
+
+- 类型系统验证: `formal_rust/framework/type_system_verification.md`

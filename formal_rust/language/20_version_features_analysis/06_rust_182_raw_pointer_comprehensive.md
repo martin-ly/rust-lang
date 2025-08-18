@@ -926,6 +926,41 @@ fn log_hardware_error(_error_code: u32) {
     // 记录硬件错误
 }
 
-"
-
 ---
+
+## 最小可验证示例 (MVE)
+```rust
+// 原始指针只读遍历（受控示例）
+fn sum_raw(xs: &[u32]) -> u64 {
+    let mut acc: u64 = 0;
+    let len = xs.len();
+    let ptr = xs.as_ptr();
+    for i in 0..len {
+        unsafe {
+            acc += *ptr.add(i) as u64; // 保证：i < len
+        }
+    }
+    acc
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn raw_sum_matches_safe() {
+        let v = vec![1u32,2,3,4];
+        assert_eq!(sum_raw(&v), v.iter().copied().map(|x| x as u64).sum());
+    }
+}
+```
+
+## 证明义务 (Proof Obligations)
+
+- RP1: 地址来自 `&[T]`，对齐满足 `align_of::<T>()`
+- RP2: 访问范围 `0..len` 不越界（`i < len`）
+- RP3: 只读访问不与可变借用并存（别名与唯一性）
+
+## 验证框架交叉引用
+
+- 内存安全验证: `formal_rust/framework/memory_safety_verification.md`
+- 性能形式化方法: `formal_rust/framework/performance_formal_methods.md`
