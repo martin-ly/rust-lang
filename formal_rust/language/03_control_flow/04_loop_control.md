@@ -577,7 +577,3 @@ fn explore_state_space(loop_expr: &LoopExpr) -> StateSpace {
 3. Rust Reference. (2023). The Rust Programming Language.
 4. Pierce, B. C. (2002). Types and Programming Languages. MIT Press.
 5. Nielson, F., & Nielson, H. R. (1999). Type and Effect Systems. Springer.
-
-"
-
----

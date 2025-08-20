@@ -321,7 +321,3 @@ $$\text{Safe}(P) \Rightarrow \text{MemSafe}(P)$$
 $$\text{HasUnsafe}(P) \land \text{UnsafeIsCorrect}(P) \Rightarrow \text{MemSafe}(P)$$
 
 其中 $\text{UnsafeIsCorrect}(P)$ 表示程序 $P$ 中的不安全代码满足安全不变量。
-
-"
-
----

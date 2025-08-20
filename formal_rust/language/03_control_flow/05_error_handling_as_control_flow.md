@@ -117,7 +117,3 @@ fn read_username_from_file_concise() -> Result<String, io::Error> {
 * **上一章 ->** `04_functions_and_closures.md`
 * **下一章 ->** `06_advanced_control_flow.md`: 探讨异步和类型状态等高级控制流模式。
 * **返回目录 ->** `_index.md`
-
-"
-
----

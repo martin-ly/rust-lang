@@ -38,6 +38,8 @@
     - [9.1 学术论文](#91-学术论文)
     - [9.2 技术文档](#92-技术文档)
     - [9.3 在线资源](#93-在线资源)
+  - [形式化证明映射（借用系统）](#形式化证明映射借用系统)
+    - [验证义务占位（与验证清单一致）](#验证义务占位与验证清单一致)
 
 ## 1. 概述
 
@@ -503,8 +505,26 @@ fn parallel_process(data: &Vec<i32>) {
 
 ---
 
-[返回主索引](../main_comprehensive_index.md)
+## 形式化证明映射（借用系统）
 
-"
+- 所有权/借用基础与规则：
+  - 文档：`formal_rust/language/01_ownership_borrowing/01_formal_ownership_system.md`
+- 生命周期省略与标注一致性：
+  - 文档：`formal_rust/language/21_lifetime_elision_theory.md`
+- 类型安全（进展/保持）联动：
+  - Coq：`formal_rust/framework/proofs/coq/type_system_progress_preservation.v`
+  - Lean：`formal_rust/framework/proofs/lean/TypeSystem/ProgressPreservation.lean`
+- 内存安全验证联动：
+  - 文档：`formal_rust/framework/memory_safety_verification.md`
+
+### 验证义务占位（与验证清单一致）
+
+- O-OB-UNI：可变借用唯一性（无并发别名）
+- O-OB-IMM：不可变借用多别名但只读（无写）
+- O-OB-LIF：借用生命周期不超越所有者（无悬垂）
+
+> 注：上述义务将按“文档 → 规则 → 最小可验证示例（MVE）→ Coq/Lean 占位 → 去除占位”的流程推进落地。
 
 ---
+
+[返回主索引](../main_comprehensive_index.md)

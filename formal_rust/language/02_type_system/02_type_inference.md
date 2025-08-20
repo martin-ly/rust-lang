@@ -698,11 +698,16 @@ fn complex_inference() {
 
 ---
 
+## 形式化证明映射（HM 推断）
+
+- 合一与约束性质：参见 `framework/proofs/coq/hm_inference_soundness_completeness.v` 与 `framework/proofs/lean/TypeSystem/HMInference.lean` 中的 `unify_sound`、`unify_complete` 占位。
+- 可靠性（Soundness）：与本文规则对齐，对应 `hm_soundness` 定理占位。
+- 完备性（Completeness））：与本文规则对齐，对应 `hm_completeness` 定理占位。
+- 最一般类型（Principal Types）：本文“泛型一般化/实例化”小节与骨架中的 `principal_types` 占位一一对应。
+
+> 说明：上述证明骨架与 `language/02_type_system/22_formal_type_system_proofs.md` 的 4.A 小节（合一与约束性质）相互参照，后续迭代将逐项去除占位完成正式证明。
+
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  
 **维护者**: Rust语言形式化理论项目组  
 **状态**: 完成
-
-"
-
----

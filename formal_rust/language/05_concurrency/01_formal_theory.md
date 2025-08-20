@@ -428,6 +428,3 @@ for i in 0..3 {
 ---
 
 *This document represents the formal mathematical foundation of Rust's concurrency and threading system, providing rigorous definitions, proofs, and semantic models for understanding and implementing safe concurrent programs in Rust.*
-"
-
----

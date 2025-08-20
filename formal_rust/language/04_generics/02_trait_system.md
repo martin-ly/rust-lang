@@ -625,6 +625,16 @@ fn verify_object_safety(trait_def: &TraitDef) -> bool {
 4. Cardelli, L., & Wegner, P. (1985). On Understanding Types, Data Abstraction, and Polymorphism. ACM Computing Surveys.
 5. Cook, W. R. (1990). Object-Oriented Programming Versus Abstract Data Types. FOSSACS.
 
-"
-
 ---
+
+## 形式化证明映射（Trait）
+
+- Trait约束与推断一致性：
+  - Coq：`formal_rust/framework/proofs/coq/hm_inference_soundness_completeness.v`
+  - Lean：`formal_rust/framework/proofs/lean/TypeSystem/HMInference.lean`
+- Trait方法/对象与类型安全：
+  - 进展/保持关联的安全性参考：
+    - Coq：`formal_rust/framework/proofs/coq/type_system_progress_preservation.v`
+    - Lean：`formal_rust/framework/proofs/lean/TypeSystem/ProgressPreservation.lean`
+
+> 注：对象安全与单态化等工程推导可在后续扩展阶段加入独立证明义务。

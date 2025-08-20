@@ -413,7 +413,3 @@ pub fn new_postgres_repository(config: &Config) -> impl UserRepository {
 
 这些准则和实践将帮助你在 Rust 中设计结构体体体良好、概念清晰、易于维护和使用的类型系统和库。
 通过合理的包管理和概念组织，你可以提高代码的可重用性、可理解性和可维护性，从而构建更加成功的 Rust 项目。
-
-"
-
----

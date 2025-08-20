@@ -10,7 +10,7 @@ A generic pattern is a reusable design that leverages type parameters to provide
 
 **Formal Definition:**
 
-```
+```text
 Pattern<T₁, T₂, ..., Tₙ> where:
 - Tᵢ are type parameters
 - Pattern provides functionality for all valid Tᵢ
@@ -52,7 +52,7 @@ Generic patterns can be classified by their purpose and structure.
 
 **Classifications:**
 
-```
+```text
 1. Container Patterns: Store and manage data of any type
 2. Function Patterns: Operate on data of any type
 3. Trait Patterns: Define behavior for any type
@@ -70,7 +70,7 @@ A container that can hold values of any type while maintaining type safety.
 
 **Formal Definition:**
 
-```
+```text
 Container<T> where:
 - T is the element type
 - Container<T> provides storage for T
@@ -141,7 +141,7 @@ A container that requires its elements to satisfy certain constraints.
 
 **Formal Definition:**
 
-```
+```text
 Container<T: Constraint> where:
 - T must satisfy Constraint
 - Container provides functionality based on Constraint
@@ -195,7 +195,7 @@ A container that can hold multiple types using type parameters.
 
 **Formal Definition:**
 
-```
+```text
 Container<T₁, T₂, ..., Tₙ> where:
 - Tᵢ are different type parameters
 - Container can store values of each type
@@ -247,7 +247,7 @@ A function that can operate on multiple types while maintaining type safety.
 
 **Formal Definition:**
 
-```
+```text
 fn function<T₁, T₂, ..., Tₙ>(args) -> ReturnType where:
 - Tᵢ are type parameters
 - Function works for all valid Tᵢ
@@ -293,7 +293,7 @@ A generic function that requires its type parameters to satisfy constraints.
 
 **Formal Definition:**
 
-```
+```text
 fn function<T: Constraint>(args) -> ReturnType where:
 - T must satisfy Constraint
 - Function can use functionality from Constraint
@@ -351,7 +351,7 @@ A function that takes or returns other functions.
 
 **Formal Definition:**
 
-```
+```text
 fn higher_order<F, T, U>(f: F, data: T) -> U where:
 - F: Fn(T) -> U
 - F is a function type
@@ -416,7 +416,7 @@ A trait that defines behavior for generic types.
 
 **Formal Definition:**
 
-```
+```text
 trait GenericTrait<T₁, T₂, ..., Tₙ> {
     type AssocType;
     fn method(&self, args) -> ReturnType;
@@ -480,7 +480,7 @@ A trait object that can hold any type implementing a trait.
 
 **Formal Definition:**
 
-```
+```text
 Box<dyn Trait> or &dyn Trait where:
 - Trait is object-safe
 - Can hold any type implementing Trait
@@ -540,7 +540,7 @@ A builder that can construct objects of any type with type-safe configuration.
 
 **Formal Definition:**
 
-```
+```text
 Builder<T> where:
 - T is the type to be built
 - Builder provides fluent interface
@@ -584,7 +584,7 @@ A builder that requires its type parameter to satisfy constraints.
 
 **Formal Definition:**
 
-```
+```text
 Builder<T: Constraint> where:
 - T must satisfy Constraint
 - Builder can use functionality from Constraint
@@ -652,7 +652,7 @@ An iterator that can iterate over any type while maintaining type safety.
 
 **Formal Definition:**
 
-```
+```text
 Iterator<T> where:
 - T is the element type
 - Iterator provides sequential access to T
@@ -702,7 +702,7 @@ An iterator that transforms or filters another iterator.
 
 **Formal Definition:**
 
-```
+```text
 Adapter<I, T, U> where:
 - I: Iterator<Item = T>
 - Adapter transforms T to U
@@ -805,7 +805,7 @@ A pattern where states are represented as types for compile-time safety.
 
 **Formal Definition:**
 
-```
+```text
 StateMachine<State> where:
 - State represents the current state
 - State transitions change the type parameter
@@ -881,7 +881,7 @@ A pattern where type parameters provide compile-time safety without runtime repr
 
 **Formal Definition:**
 
-```
+```text
 PhantomType<T> where:
 - T is used only at type level
 - PhantomData<T> has zero runtime size
@@ -943,7 +943,7 @@ Generic patterns preserve type safety across all instantiations.
 
 **Proof:**
 
-```
+```text
 1. Let Pattern<T> be a generic pattern
 2. T satisfies all constraints of Pattern
 3. Pattern provides functionality based on T's capabilities
@@ -959,7 +959,7 @@ Generic patterns can express all necessary programming abstractions.
 
 **Proof:**
 
-```
+```text
 1. Container patterns handle data storage
 2. Function patterns handle computation
 3. Trait patterns handle behavior
@@ -975,7 +975,7 @@ Generic patterns provide correct behavior for all valid types.
 
 **Proof:**
 
-```
+```text
 1. Patterns are defined in terms of type constraints
 2. Constraints ensure required functionality is available
 3. Implementation uses only guaranteed functionality

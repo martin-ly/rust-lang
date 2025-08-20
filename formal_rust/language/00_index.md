@@ -77,6 +77,7 @@
 - [02_type_system/](./02_type_system/) - 类型系统基础
 - [03_type_system_core/](./03_type_system_core/) - 类型系统核心理论
 - [04_advanced_type_features/](./04_advanced_type_features/) - 高级类型特征
+- [22_formal_type_system_proofs.md](./02_type_system/22_formal_type_system_proofs.md) - 类型系统形式化证明（完整版）
 
 ### 2.4 控制流
 
@@ -322,7 +323,3 @@
 **最后更新时间**: 2025-01-27  
 **版本**: V58  
 **状态**: 持续更新中
-
-"
-
----

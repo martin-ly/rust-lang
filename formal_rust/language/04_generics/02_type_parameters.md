@@ -10,7 +10,7 @@ A type parameter declaration introduces a type variable in a generic context.
 
 **Formal Definition:**
 
-```
+```text
 <T₁, T₂, ..., Tₙ> where:
 - Tᵢ are type parameter identifiers
 - Each Tᵢ ranges over the set of all types
@@ -42,7 +42,7 @@ The scope of a type parameter is the region where it can be referenced.
 
 **Formal Definition:**
 
-```
+```text
 scope(T) = { declaration_site, ..., end_of_generic_item }
 where:
 - T is a type parameter
@@ -81,7 +81,7 @@ A trait bound constrains a type parameter to implement specific traits.
 
 **Formal Definition:**
 
-```
+```text
 T : Trait₁ + Trait₂ + ... + Traitₙ where:
 - T must implement all Traitᵢ
 - All methods from all traits are available on T
@@ -116,7 +116,7 @@ Multiple trait bounds require a type parameter to implement several traits.
 
 **Formal Definition:**
 
-```
+```text
 T : Trait₁ + Trait₂ + ... + Traitₙ where:
 - T must implement all Traitᵢ simultaneously
 - All methods from all traits are available
@@ -148,7 +148,7 @@ A where clause provides additional constraints on type parameters.
 
 **Formal Definition:**
 
-```
+```text
 where
     T₁: Trait₁,
     T₂: Trait₂,
@@ -187,7 +187,7 @@ A type parameter is covariant if it preserves the subtyping relationship.
 
 **Formal Definition:**
 
-```
+```text
 If T₁ <: T₂, then G<T₁> <: G<T₂>
 where G is covariant in its type parameter
 ```
@@ -198,7 +198,7 @@ A type parameter is contravariant if it reverses the subtyping relationship.
 
 **Formal Definition:**
 
-```
+```text
 If T₁ <: T₂, then G<T₂> <: G<T₁>
 where G is contravariant in its type parameter
 ```
@@ -209,7 +209,7 @@ A type parameter is invariant if it neither preserves nor reverses subtyping.
 
 **Formal Definition:**
 
-```
+```text
 G<T₁> and G<T₂> are unrelated regardless of T₁ <: T₂
 where G is invariant in its type parameter
 ```
@@ -222,7 +222,7 @@ Rust's variance rules are determined by how the type parameter is used.
 
 **Rules:**
 
-```
+```text
 1. Output positions (return types) are covariant
 2. Input positions (parameter types) are contravariant
 3. Both input and output positions make the type invariant
@@ -259,7 +259,7 @@ Type inference automatically determines concrete types for type parameters.
 
 **Formal Definition:**
 
-```
+```text
 Given: f<T>(x: T) -> R
 When: f(42) is called
 Then: T is inferred as i32
@@ -286,7 +286,7 @@ The type checker collects constraints during type inference.
 
 **Algorithm:**
 
-```
+```text
 1. For each expression, collect type constraints
 2. Unify types where possible
 3. Check trait bounds are satisfied
@@ -317,7 +317,7 @@ A lifetime bound constrains the lifetime of a type parameter.
 
 **Formal Definition:**
 
-```
+```text
 T: 'a where:
 - T must not contain any references with lifetime shorter than 'a
 - T is valid for at least lifetime 'a
@@ -347,7 +347,7 @@ A sized bound requires a type parameter to have a known size at compile time.
 
 **Formal Definition:**
 
-```
+```text
 T: Sized where:
 - T has a known size at compile time
 - T can be moved by value
@@ -379,7 +379,7 @@ Specialization allows more specific implementations to override more general one
 
 **Formal Definition:**
 
-```
+```text
 impl<T> Trait for Container<T> { /* general */ }
 impl Trait for Container<i32> { /* specific */ }
 
@@ -418,7 +418,7 @@ Specialization must follow specific rules to maintain coherence.
 
 **Rules:**
 
-```
+```text
 1. More specific impls must be more specific in all type parameters
 2. Specialization must be transitive
 3. No overlapping impls without specialization
@@ -435,7 +435,7 @@ A phantom type parameter is used for type-level programming without runtime repr
 
 **Formal Definition:**
 
-```
+```text
 struct Phantom<T> {
     _phantom: PhantomData<T>,
 }
@@ -491,7 +491,7 @@ A type-level function maps types to types using associated types.
 
 **Formal Definition:**
 
-```
+```text
 trait TypeFunction {
     type Output;
 }
@@ -610,7 +610,7 @@ Type parameters preserve type safety under all valid substitutions.
 
 **Proof:**
 
-```
+```text
 1. Let G<T> be a generic type with type parameter T
 2. Let σ be a valid type substitution
 3. Assume T satisfies all constraints of G
@@ -627,7 +627,7 @@ The constraint system ensures all necessary type information is available.
 
 **Proof:**
 
-```
+```text
 1. Let f<T: Trait>(x: T) be a generic function
 2. T: Trait ensures all Trait methods are available
 3. Type checker can verify all method calls on T

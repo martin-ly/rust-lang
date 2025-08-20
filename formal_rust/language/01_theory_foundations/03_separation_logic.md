@@ -198,7 +198,3 @@ RustBelt证明了Rust类型系统的基本安全质：
 3. Jung, R., Krebbers, R., Jourdan, J. H., Bizjak, A., Birkedal, L., & Dreyer, D. (2018). Iris from the ground up: A modular foundation for higher-order concurrent separation logic. Journal of Functional Programming, 28.
 4. Jung, R., Jourdan, J. H., Krebbers, R., & Dreyer, D. (2017). RustBelt: Securing the foundations of the Rust programming language. POPL 2018.
 5. Tassarotti, J., Jung, R., & Harper, R. (2017). A higher-order logic for concurrent termination-preserving refinement. ESOP 2017.
-
-"
-
----

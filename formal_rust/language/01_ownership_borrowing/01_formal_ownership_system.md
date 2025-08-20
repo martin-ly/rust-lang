@@ -53,6 +53,7 @@
   - [定理与证明](#定理与证明)
   - [符号表](#符号表)
   - [术语表](#术语表)
+  - [形式化证明映射（所有权/借用）](#形式化证明映射所有权借用)
 
 ## 1. 引言
 
@@ -552,6 +553,16 @@ fn main() {
 
 > 本区块为标准化模板，后续可根据实际内容补充详细证明、符号扩展与术语解释。
 
-"
-
 ---
+
+## 形式化证明映射（所有权/借用）
+
+- 类型安全（进展/保持）：
+  - Coq：`formal_rust/framework/proofs/coq/type_system_progress_preservation.v`
+  - Lean：`formal_rust/framework/proofs/lean/TypeSystem/ProgressPreservation.lean`
+- 生命周期省略与标注一致性：
+  - 文档：`formal_rust/language/21_lifetime_elision_theory.md`
+- 借用与别名不变式（唯一可变 / 多个不可变）：
+  - 与类型安全骨架联动验证（进展/保持）
+
+> 注：所有权移动、借用规则与生命周期约束对应的证明义务，将在验证清单中以占位逐步落地。

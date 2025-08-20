@@ -173,7 +173,3 @@ Rust的借用机制是所有权系统的关键扩展，它允许在不移动所�
 3. Jung, R., Jourdan, J. H., Krebbers, R., & Dreyer, D. (2018). RustBelt: Securing the Foundations of the Rust Programming Language.
 4. Weiss, A., Patterson, D., Ahmed, A., Appel, A. W., & Morrisett, G. (2019). Reference Mutability for Safe Parallelism.
 5. Matsakis, N. D. (2018). Non-lexical lifetimes: Introduction. Rust Blog.
-
-"
-
----

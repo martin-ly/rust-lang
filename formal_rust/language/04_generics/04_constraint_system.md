@@ -591,6 +591,16 @@ fn verify_constraint_solving(constraints: &[Constraint]) -> bool {
 4. Cardelli, L., & Wegner, P. (1985). On Understanding Types, Data Abstraction, and Polymorphism. ACM Computing Surveys.
 5. Cook, W. R. (1990). Object-Oriented Programming Versus Abstract Data Types. FOSSACS.
 
-"
-
 ---
+
+## 形式化证明映射（Generics/约束）
+
+- 合一与约束健全/完备：
+  - Coq：`formal_rust/framework/proofs/coq/hm_inference_soundness_completeness.v`（`unify_sound`，`unify_complete`）
+  - Lean：`formal_rust/framework/proofs/lean/TypeSystem/HMInference.lean`（`unify_sound`，`unify_complete`）
+- 约束驱动推断的可靠性/完备性：
+  - 参见 `language/02_type_system/02_type_inference.md` 的“形式化证明映射（HM 推断）”
+- 类型安全关联：
+  - 约束简化/传播不破坏类型安全 → `formal_rust/framework/proofs/lean/TypeSystem/ProgressPreservation.lean` 与 `coq/type_system_progress_preservation.v`（进展/保持骨架）
+
+> 注：本节与 `language/02_type_system/22_formal_type_system_proofs.md` 第4.A小节（合一与约束性质）相互参照，后续将按义务清单逐项落地。

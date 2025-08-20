@@ -106,7 +106,3 @@ fn main() {
 * **上一章 ->** `03_trait_bounds.md`
 * **下一章 ->** `05_advanced_topics.md`: 探索多态、类型构造器和高阶类型等理论。
 * **返回目录 ->** `_index.md`
-
-"
-
----

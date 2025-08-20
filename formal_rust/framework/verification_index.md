@@ -11,6 +11,7 @@
 - 02 内存安全验证: `memory_safety_verification.md`
 - 03 并发安全验证: `concurrency_safety_verification.md`
 - 04 性能形式化方法: `performance_formal_methods.md`
+- 05 证明骨架目录: `proofs/README.md`（Coq/Lean 骨架与使用说明）
 - 校验脚本: `verify_integrity.py`
 
 ## 范围

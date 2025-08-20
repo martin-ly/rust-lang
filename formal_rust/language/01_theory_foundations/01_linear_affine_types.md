@@ -177,7 +177,3 @@ Rust的借用系统可以看作是对仿射类型系统的扩展，允许在不�
 3. Tov, J. A., & Pucella, R. (2011). Practical affine types. In Proceedings of the 38th annual ACM SIGPLAN-SIGACT symposium on Principles of programming languages.
 4. Jung, R., Jourdan, J. H., Krebbers, R., & Dreyer, D. (2017). RustBelt: Securing the foundations of the Rust programming language. POPL 2018.
 5. Matsakis, N. D., & Klock, F. S. (2014). The Rust language. ACM SIGAda Ada Letters, 34(3), 103-104.
-
-"
-
----

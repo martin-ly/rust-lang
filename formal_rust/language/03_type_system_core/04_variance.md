@@ -465,7 +465,3 @@ Rust的型变系统是其类型系统的重要组成部分，通过精心设计�
 5. Tate, R., Leung, A., & Lerner, S. (2011). Taming wildcards in Java's type system. In Proceedings of the 32nd ACM SIGPLAN conference on Programming language design and implementation.
 
 6. Igarashi, A., & Viroli, M. (2002). On variance-based subtyping for parametric types. In ECOOP 2002—Object-Oriented Programming.
-
-"
-
----

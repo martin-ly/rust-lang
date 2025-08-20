@@ -512,7 +512,3 @@ Rust的特征系统是其类型系统的核心组成部分，提供了强大的�
 4. Matsakis, N. D., & Klock, F. S. (2014). The Rust language. ACM SIGAda Ada Letters, 34(3), 103-104.
 
 5. Oliveira, B. C., & Cook, W. R. (2012). Extensibility for the masses. In European Conference on Object-Oriented Programming.
-
-"
-
----

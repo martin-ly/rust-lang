@@ -45,6 +45,9 @@
 ## 七、交叉引用
 
 - 见 application_case_library.md、theory_practice_integration.md、modularization_plan.md
-"
 
 ---
+
+## 八、理论映射补充
+
+- 类型系统形式化证明（完整版）：参见 `./02_type_system/22_formal_type_system_proofs.md`，将应用案例中的类型安全需求逐一映射到“进展性、保持性、HM 推断正确性、型变安全”对应定理，形成可追踪的验证闭环。

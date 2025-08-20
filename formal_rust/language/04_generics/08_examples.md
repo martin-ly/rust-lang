@@ -922,6 +922,3 @@ Generic programming in Rust provides powerful abstractions while maintaining com
 - [Rust Book - Generic Types](https://doc.rust-lang.org/book/ch10-01-syntax.html)
 - [Rust Book - Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)
 - [Rust Reference - Generics](https://doc.rust-lang.org/reference/items/generics.html)
-"
-
----

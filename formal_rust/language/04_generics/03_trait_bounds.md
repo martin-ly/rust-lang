@@ -118,7 +118,3 @@ impl<T: Display + PartialOrd> Pair<T> {
 * **上一章 ->** `02_generic_type_parameters.md`
 * **下一章 ->** `04_associated_types.md`: 探索 Trait 中关联类型的概念。
 * **返回目录 ->** `_index.md`
-
-"
-
----

@@ -75,6 +75,3 @@ Move semantics are consistently applied across the language:
 ## 6. Conclusion
 
 Move semantics is not merely a feature but the foundational principle of Rust's ownership system. By mandating a single owner and making ownership transfer an explicit 'move', Rust eradicates a wide array of memory safety bugs at compile time. It provides a clear, predictable, and efficient model for resource management, which, when combined with the borrow checker, forms the core of Rust's safety and performance guarantees.
-"
-
----

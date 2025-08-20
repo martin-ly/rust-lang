@@ -157,7 +157,3 @@ fn process_state(state: State) -> &'static str {
 * **上一章 ->** `01_foundations_of_control_flow.md`
 * **下一章 ->** `03_iterative_constructs.md`: 探讨 `loop`, `for`, `while` 等循环结构体体体。
 * **返回目录 ->** `_index.md`
-
-"
-
----

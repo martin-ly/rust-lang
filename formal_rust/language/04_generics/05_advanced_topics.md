@@ -103,7 +103,3 @@ impl<T> Functor<Option<_>> for ... { ... }
 
 * **上一章 ->** `04_associated_types.md`
 * **返回目录 ->** `_index.md`
-
-"
-
----

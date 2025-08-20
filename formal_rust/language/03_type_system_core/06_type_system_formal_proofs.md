@@ -438,8 +438,15 @@ Rust类型系统的形式化证明为其安全保证提供了坚实的理论基�
 
 ---
 
-> **递归补充说明**：本节内容将持续迭代完善，欢迎结合实际工程案例、最新学术成果递交补充，推动Rust类型系统形式化论证与证明体系不断进化。
+## 3.6.X 与框架证明骨架的双向映射（新增）
 
-"
+- 类型安全（进展性/保持性）
+  - 文档：`language/02_type_system/22_formal_type_system_proofs.md` 第3节
+  - Coq：`formal_rust/framework/proofs/coq/type_system_progress_preservation.v`
+  - Lean：`formal_rust/framework/proofs/lean/TypeSystem/ProgressPreservation.lean`
+- HM 推断（可靠性/完备性/最一般类型）
+  - 文档：`language/02_type_system/22_formal_type_system_proofs.md` 第4节与4.A
+  - Coq：`formal_rust/framework/proofs/coq/hm_inference_soundness_completeness.v`
+  - Lean：`formal_rust/framework/proofs/lean/TypeSystem/HMInference.lean`
 
----
+> 说明：本章的理论细节作为“核心章节”，与 `framework/type_system_verification.md` 的“证明义务与骨架映射”保持一致。后续迭代将基于此清单逐项推进 Coq/Lean 证明去除占位。

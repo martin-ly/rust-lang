@@ -56,3 +56,13 @@ fn borrow_rules_hold() {
 - M1: 对切片 `&[T]` 仅存在不可变别名(不变式保持)
 - M2: 任何可变借用不存在并发别名(唯一性)
 - M3: 生命周期终止前不发生释放(无悬垂)
+
+---
+
+## 形式化证明映射
+
+- 所有权/借用与生命周期：
+  - 文档：`formal_rust/language/01_ownership_borrowing/01_formal_ownership_system.md`、`formal_rust/language/21_lifetime_elision_theory.md`
+- 类型安全骨架（进展/保持）：
+  - Coq：`formal_rust/framework/proofs/coq/type_system_progress_preservation.v`
+  - Lean：`formal_rust/framework/proofs/lean/TypeSystem/ProgressPreservation.lean`

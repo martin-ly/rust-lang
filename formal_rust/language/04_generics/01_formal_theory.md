@@ -379,6 +379,3 @@ The `Ord` bound ensures that `T` supports total ordering, which is required for 
 ---
 
 *This document represents the formal mathematical foundation of Rust's generics system, providing rigorous definitions, proofs, and semantic models for understanding and implementing parametric polymorphism in Rust.*
-"
-
----

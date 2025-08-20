@@ -573,6 +573,16 @@ fn verify_associated_type_constraints(
 4. Cardelli, L., & Wegner, P. (1985). On Understanding Types, Data Abstraction, and Polymorphism. ACM Computing Surveys.
 5. Cook, W. R. (1990). Object-Oriented Programming Versus Abstract Data Types. FOSSACS.
 
-"
-
 ---
+
+## 形式化证明映射（关联类型）
+
+- 投影类型与约束统一：
+  - Coq：`formal_rust/framework/proofs/coq/hm_inference_soundness_completeness.v`
+  - Lean：`formal_rust/framework/proofs/lean/TypeSystem/HMInference.lean`
+- 使用一致性与类型安全：
+  - 进展/保持关联：
+    - Coq：`formal_rust/framework/proofs/coq/type_system_progress_preservation.v`
+    - Lean：`formal_rust/framework/proofs/lean/TypeSystem/ProgressPreservation.lean`
+
+> 注：关联类型投影与边界检查的更细化义务，将在后续增设专项证明脚本时添加。

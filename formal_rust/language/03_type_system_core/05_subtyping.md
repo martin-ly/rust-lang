@@ -663,7 +663,3 @@ Rust的子类型系统是其类型系统的重要组成部分，主要通过特�
 5. Dreyer, D., Crary, K., & Harper, R. (2003). A type system for higher-order modules. In Proceedings of the 30th ACM SIGPLAN-SIGACT symposium on Principles of programming languages.
 
 6. Reynolds, J. C. (1983). Types, abstraction and parametric polymorphism. In Information Processing 83, Proceedings of the IFIP 9th World Computer Congress.
-
-"
-
----

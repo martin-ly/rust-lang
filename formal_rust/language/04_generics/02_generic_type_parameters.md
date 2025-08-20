@@ -121,7 +121,3 @@ impl<T> Point<T> {
 - **上一章 ->** `01_introduction_to_generics.md`
 - **下一章 ->** `03_trait_bounds.md`: 学习如何使用 Trait 来约束类型参数。
 - **返回目录 ->** `_index.md`
-
-"
-
----

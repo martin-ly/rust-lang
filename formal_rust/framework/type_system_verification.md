@@ -1,65 +1,43 @@
-# 类型系统验证(Type System Verification)
+# 类型系统验证
 
-- 文档版本: 1.0  
-- 创建日期: 2025-01-27  
-- 状态: 已完成
+本文件描述类型系统的验证范围、最小可验证示例（MVE）与证明义务映射。
 
-## 1. 形式化目标
+## 证明义务与骨架映射（新增）
 
-- 进展(Preservation)与保持(Progress)定理的系统化描述与证明草案。
+- 进展性/保持性（Type Safety）
+  - Coq: `formal_rust/framework/proofs/coq/type_system_progress_preservation.v`
+  - Lean: `formal_rust/framework/proofs/lean/TypeSystem/ProgressPreservation.lean`
+- HM 推断：可靠性/完备性/最一般性
+  - Coq: `formal_rust/framework/proofs/coq/hm_inference_soundness_completeness.v`
+  - Lean: `formal_rust/framework/proofs/lean/TypeSystem/HMInference.lean`
+  - 义务：
+    - O-HM-SND: `hm_soundness`
+    - O-HM-CMP: `hm_completeness`
+    - O-HM-PT: `principal_types`
+- Generics / Trait / Associated Types（占位义务）
+  - O-TR-BND: Trait 约束一致性（映射 HM 合一与边界）
+  - O-AT-PROJ: 关联类型投影一致性（映射 HM 合一与进展/保持）
+  - O-GEN-MONO: 单态化正确性（后续阶段补充专用脚本）
+- Ownership / Borrowing（占位义务）
+  - O-OB-UNI: 可变借用唯一性（无并发别名）
+  - O-OB-IMM: 不可变借用多别名但只读（无写）
+  - O-OB-LIF: 生命周期不超越owner（无悬垂）
 
-## 2. 语法与类型规则(摘要)
+> 要求：依照文档 `language/02_type_system/22_formal_type_system_proofs.md` 的定理编号，逐条补全证明。
 
-```math
-\text{Typing } \Gamma \vdash e : T \qquad \text{Values } v \in \mathcal{V}
-```
+---
 
-核心规则示例:
+## 范围
 
-```math
-\frac{\Gamma(x)=T}{\Gamma \vdash x:T} \quad
-\frac{\Gamma \vdash e_1:T_1\to T_2 \quad \Gamma \vdash e_2:T_1}{\Gamma \vdash e_1\ e_2:T_2}
-```
+- Rust ≤1.89 的类型规则与操作语义的可验证子集
+- 目标：类型安全（进展性/保持性）、HM 推断正确性、型变安全的可验证骨架
 
-## 3. 定理
+## MVE（最小可验证示例）
 
-- 定理1(Progress): 若 `∅ ⊢ e : T`，则 `e` 为值或存在 `e → e'`。
-- 定理2(Preservation): 若 `Γ ⊢ e : T` 且 `e → e'`，则 `Γ ⊢ e' : T`。
+- 函数抽象/应用，代数数据类型构造/匹配，引用与解引用
+- 约束收集 + 合一的 HM 算法原型
 
-## 4. Rust要素映射
+## 质量门禁
 
-- 所有权/借用 → 线性/仿射资源管理约束
-- 生命周期 → 约束传播与地域化作用域
-- GATs/const泛型 → 约束生成与统一求解的扩展域
-
-## 5. 证明结构(骨架)
-
-```math
-\text{Induction on typing derivations} \land \text{case analysis on evaluation}
-```
-
-## 6. 工具化
-
-- 规则库: Coq/Lean 规则草案
-- 自动化: 约束生成与SMT求解集成(规划)
-
-## 最小可验证示例(MVE)
-
-```rust
-// 函数组合与类型保持
-fn inc(x: i32) -> i32 { x + 1 }
-fn dbl(x: i32) -> i32 { x * 2 }
-fn pipe(x: i32) -> i32 { dbl(inc(x)) }
-
-#[test]
-fn type_progress_preservation() {
-    let v = pipe(10);
-    assert_eq!(v, 22);
-}
-```
-
-## 证明义务(Proof Obligations)
-
-- O1: Γ ⊢ inc : i32→i32, Γ ⊢ dbl : i32→i32, 推得 Γ ⊢ dbl∘inc : i32→i32
-- O2: 对 pipe 的每步求值存在下一步(Progress)
-- O3: 求值后类型保持 i32 (Preservation)
+- 每个证明义务需有对应的 Coq/Lean 脚本文件
+- 脚本内保留 TODO/注释，后续迭代逐步去除 admit/sorry

@@ -454,7 +454,3 @@ Rust的类型约束系统是其类型系统的核心组成部分，通过特征�
 4. Matsakis, N. D., & Klock, F. S. (2014). The Rust language. ACM SIGAda Ada Letters, 34(3), 103-104.
 
 5. Gregor, D., Järvi, J., Siek, J., Stroustrup, B., Dos Reis, G., & Lumsdaine, A. (2006). Concepts: linguistic support for generic programming in C++. In Proceedings of the 21st annual ACM SIGPLAN conference on Object-oriented programming systems, languages, and applications.
-
-"
-
----

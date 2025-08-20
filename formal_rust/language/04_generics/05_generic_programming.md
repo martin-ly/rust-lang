@@ -635,7 +635,3 @@ fn verify_generic_constraints(
 3. Nielson, F., & Nielson, H. R. (1999). Type and Effect Systems. Springer.
 4. Cardelli, L., & Wegner, P. (1985). On Understanding Types, Data Abstraction, and Polymorphism. ACM Computing Surveys.
 5. Cook, W. R. (1990). Object-Oriented Programming Versus Abstract Data Types. FOSSACS.
-
-"
-
----

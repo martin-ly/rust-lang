@@ -442,7 +442,3 @@ $$\forall T : C, \forall \tau \text{ such that } \tau \models C, \text{Code}(T) 
 **最后更新**: 2025年7月11日  
 **维护者**: Rust语言形式化理论项目组  
 **状态**: 已更新交叉引用
-
-"
-
----

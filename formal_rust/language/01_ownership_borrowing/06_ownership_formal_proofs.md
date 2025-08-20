@@ -290,7 +290,3 @@ $$\forall P, P'. \text{LifetimeInference}(P) = P' \Rightarrow \text{LifetimeChec
 ---
 
 > **递归补充说明**：本节内容将持续迭代完善，欢迎结合实际工程案例、最新学术成果递交补充，推动Rust所有权系统形式化论证与证明体系不断进化。
-
-"
-
----

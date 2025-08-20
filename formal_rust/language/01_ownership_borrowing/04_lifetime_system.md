@@ -105,7 +105,3 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
   - 这是一个泛型约束，表示类型 `T` 本身不包含任何比 `'static` 短的借用。
   - 例如 `String` 类型满足 `String: 'static`，因为它拥有其所有数据。但 `&'a String` 不满足（除非 `'a` 是 `'static`）。
   - 这个约束在多线程编程中很常见（`thread::spawn` 要求闭包是 `'static`），以确保线程不会意外地引用主线程栈上可能被销毁的数据。
-
-"
-
----
