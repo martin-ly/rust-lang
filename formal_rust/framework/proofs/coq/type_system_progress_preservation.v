@@ -2,6 +2,12 @@
 
 (* Placeholder syntax: this is a scaffolding file to be refined. *)
 
+Require Import Coq.Lists.List.
+Import ListNotations.
+
+(* Minimal core rules (types/expr/typing/eval) *)
+Require Import core_minimal_rules.
+
 Parameter Expr TypeEnv Type : Set.
 Parameter value : Expr -> Prop.
 Parameter step : Expr -> Expr -> Prop.

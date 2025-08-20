@@ -19,9 +19,12 @@
   - O-AT-PROJ: 关联类型投影一致性（映射 HM 合一与进展/保持）
   - O-GEN-MONO: 单态化正确性（后续阶段补充专用脚本）
 - Ownership / Borrowing（占位义务）
-  - O-OB-UNI: 可变借用唯一性（无并发别名）
-  - O-OB-IMM: 不可变借用多别名但只读（无写）
-  - O-OB-LIF: 生命周期不超越owner（无悬垂）
+  - O-OB-UNI：可变借用唯一性（无并发别名）
+  - O-OB-IMM：不可变借用多别名但只读（无写）
+  - O-OB-LIF：借用生命周期不超越所有者（无悬垂）
+  - 参考骨架：
+    - Coq：`formal_rust/framework/proofs/coq/ownership_borrow_invariants.v`
+    - Lean：`formal_rust/framework/proofs/lean/TypeSystem/OwnershipBorrow.lean`
 
 > 要求：依照文档 `language/02_type_system/22_formal_type_system_proofs.md` 的定理编号，逐条补全证明。
 

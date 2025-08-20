@@ -85,3 +85,21 @@ fn first_word(s: &str) -> &str {
 ## 总结
 
 Rust生命周期与作用域机制为内存安全提供了强有力的静态保障。理解生命周期标注和作用域嵌套是编写健壮Rust代码的关键。
+
+---
+
+## 形式化证明映射（生命周期与作用域）
+
+- 生命周期省略与标注：
+  - 文档：`formal_rust/language/21_lifetime_elision_theory.md`
+- 类型安全（进展/保持）关联：
+  - Coq：`formal_rust/framework/proofs/coq/type_system_progress_preservation.v`
+  - Lean：`formal_rust/framework/proofs/lean/TypeSystem/ProgressPreservation.lean`
+- 所有权/借用不变量：
+  - Coq：`formal_rust/framework/proofs/coq/ownership_borrow_invariants.v`
+  - Lean：`formal_rust/framework/proofs/lean/TypeSystem/OwnershipBorrow.lean`
+
+### 验证义务占位
+
+- O-OB-LIF：借用生命周期不超越所有者（无悬垂）
+- 与 O-OB-UNI/O-OB-IMM 在作用域收敛处联动检查
