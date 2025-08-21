@@ -48,14 +48,20 @@ inductive Value : Expr → Prop
 | vAbs (x tx e) : Value (Expr.abs x tx e)
 | vPair (v1 v2) (h1 : Value v1) (h2 : Value v2) : Value (Expr.pair v1 v2)
 
-/-- small-step evaluation (skeleton; substitution omitted) -/
+/-/ substitution (placeholder; capture avoidance omitted) -/
+constant subst : Nat → Expr → Expr → Expr
+
+/-- small-step evaluation (skeleton) -/
 inductive Step : Expr → Expr → Prop
 | sApp1 (e1 e1' e2) (h : Step e1 e1') : Step (Expr.app e1 e2) (Expr.app e1' e2)
 | sApp2 (v1 e2 e2') (hv : Value v1) (h : Step e2 e2') :
     Step (Expr.app v1 e2) (Expr.app v1 e2')
+| sAppAbs (x tx e v) (hv : Value v) :
+    Step (Expr.app (Expr.abs x tx e) v) (subst 0 v e)
 | sPair1 (e1 e1' e2) (h : Step e1 e1') :
     Step (Expr.pair e1 e2) (Expr.pair e1' e2)
 | sPair2 (v1 e2 e2') (hv : Value v1) (h : Step e2 e2') :
     Step (Expr.pair v1 e2) (Expr.pair v1 e2')
 | sFst1 (e e') (h : Step e e') : Step (Expr.fst e) (Expr.fst e')
--- beta-reduction and fst(pair) step omitted as placeholders
+| sFstPair (v1 v2) (hv1 : Value v1) (hv2 : Value v2) :
+    Step (Expr.fst (Expr.pair v1 v2)) v1

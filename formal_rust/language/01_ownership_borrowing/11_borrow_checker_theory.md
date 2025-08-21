@@ -6,7 +6,7 @@
   - 用小步操作语义描述借用状态移动（如Move、Borrow、Drop等）。
   - 形式化状态：$(H, S, B)$，其中 $H$ 为堆，$S$ 为栈，$B$ 为借用关系。
 - **与类型系统的交互**：
-  - 类型规则与借用规则协同，$orall e, \Gamma \vdash e : T \wedge \text{BorrowCheck}(e) \Rightarrow \text{Safe}(e)$。
+  - 类型规则与借用规则协同，$Forall e, \Gamma \vdash e : T \wedge \text{BorrowCheck}(e) \Rightarrow \text{Safe}(e)$。
 
 ## 2. 分离逻辑与资源建模
 
@@ -44,3 +44,11 @@
 ---
 
 > **递归补充说明**：本节内容将持续迭代完善，欢迎结合实际工程案例、最新学术成果递交补充，推动Rust借用检查器理论形式化论证与证明体系不断进化。
+
+## 形式化证明映射（理论）
+
+- 类型系统与类型安全：见[类型安全](../02_type_system/04_type_safety.md#类型安全)、[类型安全总结](../02_type_system/04_type_safety.md#类型安全总结)
+- 安全验证（引用/内存）：见[引用安全](../23_security_verification/01_formal_security_model.md#引用安全)、[内存安全](../23_security_verification/01_formal_security_model.md#内存安全)、[内存安全保证](../23_security_verification/01_formal_security_model.md#内存安全保证)
+- 并发安全：见[并发安全定理](../05_concurrency/01_formal_concurrency_model.md#并发安全定理)
+- 所有权/借用定理与证明：见[所有权与借用定理](06_theorems.md)
+- 泛型生命周期与约束：见[泛型生命周期](../04_generics/01_formal_generics_system.md#泛型生命周期)

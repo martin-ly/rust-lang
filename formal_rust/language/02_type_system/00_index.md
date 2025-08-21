@@ -21,7 +21,7 @@
 ### 3. 参考资料 {#references}
 
 1. [代码示例](05_examples.md)
-2. [定理证明](06_theorems.md)
+2. [定理证明映射](22_formal_type_system_proofs.md)
 3. [参考文献](07_references.md)
 
 ## 主题概述 {#overview}

@@ -2,7 +2,9 @@
 
 ## 2.7.1 概述
 
-本章节将深入探讨Rust所有权系统的形式化证明，包括数学基础、证明技术、关键定理及其证明过程。所有权系统的形式化证明不仅验证了Rust的内存安全保证的正确性，也为理解所有权系统的本质提供了理论框架。我们将介绍几个主要的形式化工作，包括RustBelt、Oxide和Polonius等，并详细阐述它们如何证明所有权系统的安全和正确性。
+本章节将深入探讨Rust所有权系统的形式化证明，包括数学基础、证明技术、关键定理及其证明过程。
+所有权系统的形式化证明不仅验证了Rust的内存安全保证的正确性，也为理解所有权系统的本质提供了理论框架。
+我们将介绍几个主要的形式化工作，包括RustBelt、Oxide和Polonius等，并详细阐述它们如何证明所有权系统的安全和正确性。
 
 ## 2.7.2 形式化证明的基础
 
@@ -41,7 +43,8 @@ $$\forall P, \text{TypeCheck}(P) \land \text{BorrowCheck}(P) \Rightarrow \text{S
 
 ### 2.7.3.1 RustBelt概述
 
-RustBelt是一个使用Iris分离逻辑框架证明Rust类型系统安全的项目。它不仅证明了Rust的核心类型系统是安全的，还证明了许多使用unsafe代码的标准库组件是安全封装的。
+RustBelt是一个使用Iris分离逻辑框架证明Rust类型系统安全的项目。
+它不仅证明了Rust的核心类型系统是安全的，还证明了许多使用unsafe代码的标准库组件是安全封装的。
 
 **关键创新**：
 
@@ -84,7 +87,8 @@ $$\forall r, o, t. \text{Borrowed}(r, o, t) \Rightarrow \neg \text{Modified}(r, 
 
 ### 2.7.4.1 Oxide概述
 
-Oxide是一个形式化的Rust核心计算模型，它捕捉了Rust的本质特征，包括所有权、借用和生命周期。Oxide的目标是提供一个简洁但足够表达Rust关键特征的形式模型。
+Oxide是一个形式化的Rust核心计算模型，它捕捉了Rust的本质特征，包括所有权、借用和生命周期。
+Oxide的目标是提供一个简洁但足够表达Rust关键特征的形式模型。
 
 **核心特征**：
 
@@ -126,7 +130,8 @@ $$\forall P. \text{BorrowCheck}(P) \Rightarrow \neg\text{HasBorrowConflict}(P)$$
 
 ### 2.7.5.1 Polonius概述
 
-Polonius是Rust借用检查器的一个实验性重新实现，基于数据流分析。它将借用检查表述为一组逻辑规则，可以使用Datalog等声明式语言实现。
+Polonius是Rust借用检查器的一个实验性重新实现，基于数据流分析。
+它将借用检查表述为一组逻辑规则，可以使用Datalog等声明式语言实现。
 
 **核心创新**：
 

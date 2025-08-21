@@ -465,7 +465,7 @@ fn parallel_process(data: &Vec<i32>) {
 **相关定理**：
 
 - [定理 1.8: 可变借用排他性](06_theorems.md#可变借用排他性) (本模块)
-- [并发安全定理](../05_concurrency/06_theorems.md#并发安全定理) (模块 05)
+- [并发安全定理](../05_concurrency/01_formal_concurrency_model.md#并发安全定理) (模块 05)
 
 ### 8.3 借用检查完备性定理 {#借用检查完备性定理}
 
@@ -481,7 +481,7 @@ fn parallel_process(data: &Vec<i32>) {
 **相关定理**：
 
 - [定理 1.6: 借用安全](06_theorems.md#借用安全) (本模块)
-- [类型系统可靠性定理](../02_type_system/06_theorems.md#类型系统可靠性) (模块 02)
+- [类型系统可靠性定理](../02_type_system/04_type_soundness.md#类型系统可靠性) (模块 02)
 
 ## 9. 参考文献
 

@@ -35,7 +35,3 @@ let data = Arc::new(Mutex::new(0));
 
 - Rust静态安全保证极大提升可靠性，但unsafe代码需谨慎隔离
 - 未来值值值可探索自动化安全验证与IDE集成分析
-
-"
-
----

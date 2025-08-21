@@ -97,7 +97,7 @@ Rust控制流系统是程序执行顺序的规则集合，它决定了程序如�
 
 - [条件控制](03_conditional_flow.md#条件控制) (本模块)
 - [循环控制](04_loop_control.md#循环控制) (本模块)
-- [异步控制](../06_async_await/01_formal_async_model.md#异步控制) (模块 06)
+- [异步控制](../06_async_await/01_formal_async_system.md#异步控制) (模块 06)
 
 ## 2. 哲学基础 {#哲学基础}
 
@@ -252,7 +252,7 @@ $$\frac{\text{env}, \text{store}, \text{stack} \vdash e \rightarrow e'}{\text{en
 **相关概念**:
 
 - [所有权状态](../01_ownership_borrowing/01_formal_ownership_system.md#所有权状态) (模块 01)
-- [异步状态机](../06_async_await/01_formal_async_model.md#状态机) (模块 06)
+- [异步状态机](../06_async_await/01_formal_async_system.md#状态机) (模块 06)
 - [执行状态](../22_performance_optimization/01_formal_optimization_theory.md#执行状态) (模块 22)
 
 ### 4.3 类型环境 {#类型环境}
@@ -462,7 +462,7 @@ $$\frac{\Gamma \vdash e: \text{Future}[\tau]}{\Gamma \vdash \text{await } e: \ta
 
 **相关概念**:
 
-- [异步类型系统](../06_async_await/01_formal_async_model.md#类型规则) (模块 06)
+- [异步类型系统](../06_async_await/01_formal_async_system.md#类型规则) (模块 06)
 - [Future特质](../06_async_await/02_future_trait.md#Future接口) (模块 06)
 - [异步控制流](../06_async_await/03_async_execution.md#执行模型) (模块 06)
 
@@ -546,9 +546,9 @@ $$\frac{}{\text{await } \text{Future}(v) \rightarrow v}$$
 
 **相关概念**:
 
-- [异步语义](../06_async_await/01_formal_async_model.md#操作语义) (模块 06)
+- [异步语义](../06_async_await/01_formal_async_system.md#操作语义) (模块 06)
 - [Future执行](../06_async_await/03_async_execution.md#求值规则) (模块 06)
-- [异步状态转换](../06_async_await/01_formal_async_model.md#状态转换) (模块 06)
+- [异步状态转换](../06_async_await/01_formal_async_system.md#状态转换) (模块 06)
 
 ## 8. 安全保证 {#安全保证}
 
@@ -789,8 +789,8 @@ async fn main() {
 
 **相关概念**:
 
-- [异步函数](../06_async_await/01_formal_async_model.md#异步函数) (模块 06)
-- [await操作符](../06_async_await/01_formal_async_model.md#await操作符) (模块 06)
+- [异步函数](../06_async_await/01_formal_async_system.md#异步函数) (模块 06)
+- [await操作符](../06_async_await/01_formal_async_system.md#await操作符) (模块 06)
 - [Future特质](../06_async_await/02_future_trait.md#Future特质) (模块 06)
 
 **示例 9.8**: 异步控制流

@@ -1,6 +1,7 @@
 (*** Core Minimal Rules (Coq) ***)
 
 Require Import Coq.Lists.List.
+Require Import Coq.Arith.PeanoNat.
 Import ListNotations.
 
 (* Types *)
@@ -54,6 +55,19 @@ Inductive value : Expr -> Prop :=
 | V_Abs  : forall x tx e, value (EAbs x tx e)
 | V_Pair : forall v1 v2, value v1 -> value v2 -> value (EPair v1 v2).
 
+(* Substitution (naive; capture-avoidance omitted) *)
+Fixpoint subst (k : nat) (v : Expr) (e : Expr) : Expr :=
+  match e with
+  | EUnit => EUnit
+  | ETrue => ETrue
+  | EFalse => EFalse
+  | EVar x => if Nat.eqb x k then v else EVar x
+  | EAbs x tx e1 => EAbs x tx (subst (S k) v e1)
+  | EApp e1 e2 => EApp (subst k v e1) (subst k v e2)
+  | EPair e1 e2 => EPair (subst k v e1) (subst k v e2)
+  | EFst e1 => EFst (subst k v e1)
+  end.
+
 (* Small-step eval *)
 Inductive step : Expr -> Expr -> Prop :=
 | S_App1 : forall e1 e1' e2,
@@ -69,19 +83,4 @@ Inductive step : Expr -> Expr -> Prop :=
 | S_Fst1 : forall e e',
     step e e' -> step (EFst e) (EFst e')
 | S_FstPair : forall v1 v2,
-    value v1 -> value v2 -> step (EFst (EPair v1 v2)) v1
-with subst : nat -> Expr -> Expr -> Expr :=
-(* naive placeholder substitution for illustration; capture-avoidance omitted *)
-| Sb_Unit  : forall k v, subst k v EUnit = EUnit
-| Sb_True  : forall k v, subst k v ETrue = ETrue
-| Sb_False : forall k v, subst k v EFalse = EFalse
-| Sb_Var_same  : forall k v, subst k v (EVar k) = v
-| Sb_Var_other : forall k v x, x <> k -> subst k v (EVar x) = EVar x
-| Sb_Abs : forall k v x tx e,
-    subst k v (EAbs x tx e) = EAbs x tx (subst (S k) v e)
-| Sb_App : forall k v e1 e2,
-    subst k v (EApp e1 e2) = EApp (subst k v e1) (subst k v e2)
-| Sb_Pair : forall k v e1 e2,
-    subst k v (EPair e1 e2) = EPair (subst k v e1) (subst k v e2)
-| Sb_Fst : forall k v e,
-    subst k v (EFst e) = EFst (subst k v e).
+    value v1 -> value v2 -> step (EFst (EPair v1 v2)) v1.

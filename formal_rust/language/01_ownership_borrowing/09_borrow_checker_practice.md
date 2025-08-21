@@ -27,3 +27,11 @@
 ---
 
 > **递归补充说明**：本节内容将持续迭代完善，欢迎结合实际工程案例、最新学术成果递交补充，推动Rust借用检查器工程实践形式化论证与证明体系不断进化。
+
+## 形式化证明映射（工程实践）
+
+- 类型系统与类型安全：见[类型安全](../02_type_system/04_type_safety.md#类型安全)、[类型安全总结](../02_type_system/04_type_safety.md#类型安全总结)
+- 安全验证（引用/内存）：见[引用安全](../23_security_verification/01_formal_security_model.md#引用安全)、[内存安全](../23_security_verification/01_formal_security_model.md#内存安全)、[内存安全保证](../23_security_verification/01_formal_security_model.md#内存安全保证)
+- 并发安全：见[并发安全定理](../05_concurrency/01_formal_concurrency_model.md#并发安全定理)
+- 所有权/借用定理与案例：见[所有权与借用定理](06_theorems.md)、[案例](10_borrow_checker_case.md)
+- 泛型生命周期与约束：见[泛型生命周期](../04_generics/01_formal_generics_system.md#泛型生命周期)
