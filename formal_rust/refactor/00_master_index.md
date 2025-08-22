@@ -162,10 +162,18 @@
 - language/23_security_verification/application_practices/safe_system_design.md：安全系统设计（已补充 Rust 1.89 安全架构、威胁建模、安全模式、系统硬化、安全测试）。
 - language/23_security_verification/application_practices/certification_methods.md：认证方法（已补充 Rust 1.89 安全认证、合规检查、标准遵循、认证流程、持续监控）。
 
-#### Batch-22（计划中）
+#### Batch-22（已完成）
 
-- language/23_security_verification/tools_integration/：工具集成
-- language/23_security_verification/performance_optimization/：性能优化
+- language/23_security_verification/tools_integration/ide_integration.md：IDE 集成技术（已补充 Rust 1.89 语言服务器协议、安全插件开发、实时安全检查、增强 IDE 集成）。
+- language/23_security_verification/tools_integration/build_tools_integration.md：构建工具集成（已补充 Rust 1.89 Cargo 集成、构建脚本、依赖管理、安全构建）。
+- language/23_security_verification/tools_integration/cicd_integration.md：CI/CD 集成（已补充 Rust 1.89 持续集成、持续部署、安全流水线、自动化测试）。
+- language/23_security_verification/performance_optimization/analysis_optimization.md：分析优化（已补充 Rust 1.89 静态分析优化、动态分析优化、内存优化、并发优化）。
+- language/23_security_verification/performance_optimization/tool_optimization.md：工具优化（已补充 Rust 1.89 工具性能优化、缓存策略、并行处理、资源管理）。
+
+#### Batch-23（计划中）
+
+- language/23_security_verification/advanced_topics/：高级主题
+- language/23_security_verification/future_directions/：未来方向
 
 - 🔄 架构设计形式化
 - 🔄 开发流程形式化
