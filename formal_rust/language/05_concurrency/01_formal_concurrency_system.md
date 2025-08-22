@@ -1405,3 +1405,127 @@ ightarrow, I)$，其中：
 ---
 
 > 本文档将持续递归补充，欢迎结合最新理论、工程案例、自动化工具、反例与前沿趋势递交补充，推动Rust并发系统形式化论证与证明体系不断进化。
+
+---
+
+## Rust 1.89 对齐（结构化并发与取消传播）
+
+### 结构化并发模型
+
+```rust
+use std::future::Future;
+use tokio::task::JoinSet;
+
+// 结构化并发示例
+async fn structured_concurrency() {
+    let mut tasks = JoinSet::new();
+    
+    // 启动多个并发任务
+    for i in 0..5 {
+        tasks.spawn(async move {
+            // 任务执行
+            tokio::time::sleep(Duration::from_millis(100)).await;
+            i * 2
+        });
+    }
+    
+    // 等待所有任务完成
+    while let Some(result) = tasks.join_next().await {
+        println!("Task completed: {}", result.unwrap());
+    }
+}
+```
+
+### 取消传播机制
+
+```rust
+use tokio::time::{timeout, Duration};
+
+// 取消传播示例
+async fn cancellable_operation() -> Result<i32, tokio::time::error::Elapsed> {
+    let operation = async {
+        // 长时间运行的操作
+        tokio::time::sleep(Duration::from_secs(10)).await;
+        42
+    };
+    
+    // 设置超时，自动取消
+    timeout(Duration::from_secs(5), operation).await
+}
+```
+
+### 调度公平性与性能
+
+```rust
+use tokio::runtime::Runtime;
+
+// 公平调度配置
+fn create_fair_runtime() -> Runtime {
+    tokio::runtime::Builder::new_multi_thread()
+        .worker_threads(4)
+        .enable_all()
+        .build()
+        .unwrap()
+}
+
+// 工作窃取调度
+async fn work_stealing_example() {
+    let (tx, mut rx) = tokio::sync::mpsc::channel(100);
+    
+    // 生产者
+    tokio::spawn(async move {
+        for i in 0..100 {
+            tx.send(i).await.unwrap();
+        }
+    });
+    
+    // 消费者池
+    let mut handles = Vec::new();
+    for _ in 0..4 {
+        let mut rx = rx.clone();
+        handles.push(tokio::spawn(async move {
+            while let Some(item) = rx.recv().await {
+                // 处理任务
+                process_item(item).await;
+            }
+        }));
+    }
+    
+    // 等待所有消费者完成
+    for handle in handles {
+        handle.await.unwrap();
+    }
+}
+```
+
+---
+
+## 附：索引锚点与导航
+
+### 并发系统定义 {#并发系统定义}
+
+用于跨文档引用，统一指向本文并发系统基础定义与范围。
+
+### 进程间通信 {#进程间通信}
+
+用于跨文档引用，统一指向进程间通信机制（管道、套接字、共享内存、信号、消息队列）。
+
+### 同步原语 {#同步原语}
+
+用于跨文档引用，统一指向同步原语与机制（互斥锁、条件变量、信号量、原子操作）。
+
+### 数据竞争避免 {#数据竞争避免}
+
+用于跨文档引用，统一指向数据竞争避免策略与类型系统保证。
+
+### 死锁检测 {#死锁检测}
+
+用于跨文档引用，统一指向死锁检测算法与资源分配图分析。
+
+### 结构化并发 {#structured-concurrency}
+
+用于跨文档引用，统一指向结构化并发模型与取消传播机制。
+
+### 调度公平性 {#fair-scheduling}
+
+用于跨文档引用，统一指向任务调度公平性与工作窃取算法。

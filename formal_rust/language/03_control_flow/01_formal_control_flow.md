@@ -924,3 +924,101 @@ where
 - 开发自动化形式化验证工具，提升系统安全和可靠性。
 - 在分布式系统中，结合形式化理论与任务调度、容错机制实现高可用架构。
 - 推动形式化理论相关的跨平台标准和社区协作，促进 Rust 在多领域的广泛应用。
+
+---
+
+## Rust 1.89 对齐（结构化并发与取消传播）
+
+### 结构化并发控制流
+
+```rust
+use std::task::{Context, Poll};
+use std::pin::Pin;
+
+// 结构化并发示例
+async fn structured_concurrency() {
+    let task1 = async { /* 任务1 */ };
+    let task2 = async { /* 任务2 */ };
+    
+    // 并发执行，任一完成即返回
+    let result = tokio::select! {
+        r1 = task1 => r1,
+        r2 = task2 => r2,
+    };
+    
+    // 所有任务完成
+    let (r1, r2) = tokio::join!(task1, task2);
+}
+```
+
+### 取消传播机制
+
+```rust
+use std::future::Future;
+use std::pin::Pin;
+
+// 取消传播示例
+async fn cancellable_task() -> Result<i32, Cancelled> {
+    let mut future = Box::pin(async {
+        // 长时间运行的任务
+        tokio::time::sleep(Duration::from_secs(10)).await;
+        42
+    });
+    
+    // 检查取消信号
+    if is_cancelled() {
+        return Err(Cancelled);
+    }
+    
+    future.await.map(Ok)?
+}
+```
+
+### 调度公平性
+
+```rust
+// 公平调度示例
+async fn fair_scheduling() {
+    let mut tasks = Vec::new();
+    
+    for i in 0..10 {
+        tasks.push(tokio::spawn(async move {
+            // 任务执行
+            println!("Task {}", i);
+        }));
+    }
+    
+    // 等待所有任务完成
+    for task in tasks {
+        task.await.unwrap();
+    }
+}
+```
+
+---
+
+## 附：索引锚点与导航
+
+### 控制流定义 {#控制流定义}
+
+用于跨文档引用，统一指向本文控制流基础定义与范围。
+
+### 条件控制 {#条件控制}
+
+用于跨文档引用，统一指向条件控制（if、match、if let）的规则与语义。
+
+### 循环控制 {#循环控制}
+
+用于跨文档引用，统一指向循环控制（loop、while、for）的规则与语义。
+
+### 异步控制 {#异步控制}
+
+用于跨文档引用，统一指向异步控制流（async/await、Future）的规则与语义。
+
+### 结构化并发 {#structured-concurrency}
+
+用于跨文档引用，统一指向结构化并发控制流与取消传播机制。
+
+### 调度公平性 {#fair-scheduling}
+
+用于跨文档引用，统一指向任务调度公平性与并发控制策略。

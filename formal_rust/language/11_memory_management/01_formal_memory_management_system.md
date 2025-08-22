@@ -40,6 +40,17 @@
     - [11.9.1 内存管理系统的核心特征](#1191-内存管理系统的核心特征)
     - [11.9.2 形式化保证](#1192-形式化保证)
     - [11.9.3 未来值值值发展方向](#1193-未来值值值发展方向)
+  - [Rust 1.89 对齐（内存管理与优化）](#rust-189-对齐内存管理与优化)
+    - [自定义分配器](#自定义分配器)
+    - [内存池优化](#内存池优化)
+    - [零拷贝优化](#零拷贝优化)
+  - [附：索引锚点与导航](#附索引锚点与导航)
+    - [内存管理系统定义 {#内存管理系统定义}](#内存管理系统定义-内存管理系统定义)
+    - [内存分配 {#内存分配}](#内存分配-内存分配)
+    - [智能指针 {#智能指针}](#智能指针-智能指针)
+    - [内存布局 {#内存布局}](#内存布局-内存布局)
+    - [自定义分配器 {#自定义分配器}](#自定义分配器-自定义分配器)
+    - [零拷贝优化 {#零拷贝优化}](#零拷贝优化-零拷贝优化)
 
 ## 11.1 理论基础：内存管理的形式化模型
 
@@ -352,6 +363,162 @@ Rust的内存管理系统具有以下核心特征：
 4. "The Rust Programming Language" - Steve Klabnik, Carol Nichols
 5. "Rust Memory Management" - Nicholas Matsakis
 
-"
+---
+
+## Rust 1.89 对齐（内存管理与优化）
+
+### 自定义分配器
+
+```rust
+use std::alloc::{GlobalAlloc, Layout, System};
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+// 自定义分配器
+struct CustomAllocator {
+    allocated: AtomicUsize,
+}
+
+unsafe impl GlobalAlloc for CustomAllocator {
+    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
+        let ptr = System.alloc(layout);
+        if !ptr.is_null() {
+            self.allocated.fetch_add(layout.size(), Ordering::Relaxed);
+        }
+        ptr
+    }
+    
+    unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
+        System.dealloc(ptr, layout);
+        self.allocated.fetch_sub(layout.size(), Ordering::Relaxed);
+    }
+}
+
+#[global_allocator]
+static ALLOCATOR: CustomAllocator = CustomAllocator {
+    allocated: AtomicUsize::new(0),
+};
+
+// 内存使用统计
+fn get_memory_usage() -> usize {
+    ALLOCATOR.allocated.load(Ordering::Relaxed)
+}
+```
+
+### 内存池优化
+
+```rust
+use std::sync::Arc;
+use std::collections::HashMap;
+use std::sync::Mutex;
+
+// 内存池
+struct MemoryPool {
+    pools: Arc<Mutex<HashMap<usize, Vec<*mut u8>>>>,
+}
+
+impl MemoryPool {
+    fn new() -> Self {
+        MemoryPool {
+            pools: Arc::new(Mutex::new(HashMap::new())),
+        }
+    }
+    
+    fn allocate(&self, size: usize) -> *mut u8 {
+        let mut pools = self.pools.lock().unwrap();
+        
+        if let Some(blocks) = pools.get_mut(&size) {
+            if let Some(ptr) = blocks.pop() {
+                return ptr;
+            }
+        }
+        
+        // 从系统分配器分配
+        unsafe {
+            let layout = Layout::from_size_align(size, 8).unwrap();
+            System.alloc(layout)
+        }
+    }
+    
+    fn deallocate(&self, ptr: *mut u8, size: usize) {
+        let mut pools = self.pools.lock().unwrap();
+        pools.entry(size).or_insert_with(Vec::new).push(ptr);
+    }
+}
+
+// 线程本地内存池
+thread_local! {
+    static LOCAL_POOL: MemoryPool = MemoryPool::new();
+}
+
+fn allocate_local(size: usize) -> *mut u8 {
+    LOCAL_POOL.with(|pool| pool.allocate(size))
+}
+```
+
+### 零拷贝优化
+
+```rust
+use std::io::{Read, Write};
+use std::fs::File;
+
+// 零拷贝文件读取
+fn zero_copy_read(path: &str) -> Result<Vec<u8>, std::io::Error> {
+    let mut file = File::open(path)?;
+    let metadata = file.metadata()?;
+    let mut buffer = Vec::with_capacity(metadata.len() as usize);
+    
+    // 预分配内存，避免多次重新分配
+    unsafe {
+        buffer.set_len(metadata.len() as usize);
+    }
+    
+    file.read_exact(&mut buffer)?;
+    Ok(buffer)
+}
+
+// 内存映射文件
+use memmap2::Mmap;
+
+fn memory_mapped_read(path: &str) -> Result<Mmap, std::io::Error> {
+    let file = File::open(path)?;
+    unsafe { Mmap::map(&file) }
+}
+
+// 零拷贝网络传输
+use tokio::net::TcpStream;
+
+async fn zero_copy_transfer(mut stream: TcpStream, data: &[u8]) -> Result<(), std::io::Error> {
+    // 使用 vectored I/O 减少系统调用
+    let iovecs = [std::io::IoSlice::new(data)];
+    stream.write_vectored(&iovecs).await?;
+    Ok(())
+}
+```
 
 ---
+
+## 附：索引锚点与导航
+
+### 内存管理系统定义 {#内存管理系统定义}
+
+用于跨文档引用，统一指向本文内存管理系统基础定义与范围。
+
+### 内存分配 {#内存分配}
+
+用于跨文档引用，统一指向内存分配与释放机制。
+
+### 智能指针 {#智能指针}
+
+用于跨文档引用，统一指向智能指针与引用计数。
+
+### 内存布局 {#内存布局}
+
+用于跨文档引用，统一指向内存布局与对齐。
+
+### 自定义分配器 {#自定义分配器}
+
+用于跨文档引用，统一指向自定义分配器与内存池。
+
+### 零拷贝优化 {#零拷贝优化}
+
+用于跨文档引用，统一指向零拷贝技术与性能优化。

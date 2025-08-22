@@ -2,13 +2,15 @@
 
 ## 摘要
 
-幽灵类型(Phantom Types)和零大小类型(Zero-Sized Types, ZSTs)是 Rust 类型系统中的高级特征，它们虽然在运行时不占用内存空间，但在编译时提供重要的类型安全保证。本文探讨这些类型的理论基础、形式化定义以及在 Rust 中的实际应用。
+幽灵类型(Phantom Types)和零大小类型(Zero-Sized Types, ZSTs)是 Rust 类型系统中的高级特征，它们虽然在运行时不占用内存空间，但在编译时提供重要的类型安全保证。
+本文探讨这些类型的理论基础、形式化定义以及在 Rust 中的实际应用。
 
 ## 理论基础
 
 ### 1. 幽灵类型的形式定义
 
-幽灵类型是在数据类型定义中出现但不用于存储值的类型参数。形式上，如果数据类型 $T<P>$ 中的参数 $P$ 不出现在 $T$ 的值构造器的任何字段类型中，则 $P$ 是一个幽灵类型参数。
+幽灵类型是在数据类型定义中出现但不用于存储值的类型参数。
+形式上，如果数据类型 $T<P>$ 中的参数 $P$ 不出现在 $T$ 的值构造器的任何字段类型中，则 $P$ 是一个幽灵类型参数。
 
 用集合论表示，若 $T<P>$ 表示一个参数化类型，且其值构造的集合可表示为：
 
@@ -18,7 +20,8 @@ $$\llbracket T<P> \rrbracket = \{v | v \text{ is a value of type } T<P>\}$$
 
 ### 2. 零大小类型的形式定义
 
-零大小类型是在编译时存在但在运行时不占用内存的类型。形式上，类型 $T$ 是零大小类型，当且仅当：
+零大小类型是在编译时存在但在运行时不占用内存的类型。
+形式上，类型 $T$ 是零大小类型，当且仅当：
 
 $$\text{sizeof}(T) = 0$$
 
@@ -56,7 +59,7 @@ let unit: () = ();
 // 没有变体的枚举
 enum Void {}
 
-// 没有字段的结构体体体体
+// 没有字段的结构体
 struct Empty;
 ```
 
@@ -64,16 +67,16 @@ struct Empty;
 
 ### 1. 所有权语义与 PhantomData
 
-`PhantomData<T>` 告诉编译器，包含此字段的结构体体体体在逻辑上"拥有"类型 `T` 的值，即使物理上不存储此类值。
+`PhantomData<T>` 告诉编译器，包含此字段的结构体在逻辑上"拥有"类型 `T` 的值，即使物理上不存储此类值。
 
-形式上，若结构体体体体 $S<T>$ 包含 `PhantomData<T>`，则 $S<T>$ 满足与 $T$ 相同的所有权约束，即：
+形式上，若结构体 $S<T>$ 包含 `PhantomData<T>`，则 $S<T>$ 满足与 $T$ 相同的所有权约束，即：
 
 - 若 $T: \text{'static}$，则 $S<T>: \text{'static}$
 - 若 $T$ 不是 `Copy`，则 $S<T>$ 逻辑上"消耗" $T$ 的实例
 
 ### 2. 生命周期语义
 
-`PhantomData<&'a T>` 表示结构体体体体在逻辑上包含一个 $T$ 的引用，生命周期为 $\text{'a}$：
+`PhantomData<&'a T>` 表示结构体在逻辑上包含一个 $T$ 的引用，生命周期为 $\text{'a}$：
 
 $$\text{PhantomData}<\&\text{'a } T> \implies \text{借用约束}(\text{'a}, T)$$
 
@@ -209,7 +212,3 @@ struct Contravariant<T>(PhantomData<fn(T)>);
 5. Rust Standard Library Documentation. (n.d.). std::marker::PhantomData. Retrieved from <https://doc.rust-lang.org/std/marker/struct.PhantomData.html>
 
 6. Nomicon: The Dark Arts of Advanced and Unsafe Rust Programming. (n.d.). PhantomData. Retrieved from <https://doc.rust-lang.org/nomicon/phantom-data.html>
-
-"
-
----

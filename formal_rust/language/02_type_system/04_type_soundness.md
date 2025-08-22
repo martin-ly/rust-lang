@@ -27,3 +27,136 @@
 ---
 
 > **递归补充说明**：本节内容将持续迭代完善，欢迎结合实际工程案例、最新学术成果递交补充，推动Rust类型系统健全性形式化论证与证明体系不断进化。
+
+---
+
+## 5. 语言片段与形式化模型 {#语言片段}
+
+### 5.1 语法与类型判断 {#语法-类型判断}
+
+项与值：
+
+```text
+e ::= x | n | true | false | \lambda x: \tau. e | e\ e | if e1 e2 e3 | let x = e1 in e2
+    | &e | &mut e | *e | assign e1 = e2 | move e | drop e
+v ::= n | true | false | \lambda x: \tau. e | &v | &mut v
+```
+
+类型与环境：
+
+```text
+\tau ::= Unit | Bool | Int | \tau -> \tau | Ref\_\alpha\;\tau | RefMut\_\alpha\;\tau
+\Gamma ::= \emptyset | \Gamma, x: \tau
+```
+
+核心规则（节选）：
+
+```text
+(T-Var)   x: \tau \in \Gamma                    =>  \Gamma ⊢ x: \tau
+(T-Abs)   \Gamma, x: \tau1 ⊢ e: \tau2            =>  \Gamma ⊢ (\lambda x: \tau1. e): \tau1 -> \tau2
+(T-App)   \Gamma ⊢ e1: \tau1->\tau2 \wedge \Gamma ⊢ e2: \tau1 => \Gamma ⊢ e1 e2: \tau2
+(T-If)    \Gamma ⊢ e1: Bool \wedge \Gamma ⊢ e2: \tau \wedge \Gamma ⊢ e3: \tau => \Gamma ⊢ if e1 e2 e3: \tau
+
+(T-Borrow)    \Gamma ⊢ e: Own\;\tau \wedge not\_borrowed(e) => \Gamma ⊢ &e: Ref\_\alpha\;\tau
+(T-BorrowMut) \Gamma ⊢ e: Own\;\tau \wedge exclusive(e)     => \Gamma ⊢ &mut e: RefMut\_\alpha\;\tau
+(T-Deref)     \Gamma ⊢ e: Ref\_\alpha\;\tau                 => \Gamma ⊢ *e: \tau
+(T-Assign)    \Gamma ⊢ e1: RefMut\_\alpha\;\tau \wedge \Gamma ⊢ e2: \tau => \Gamma ⊢ assign e1 = e2: Unit
+(T-Move)      \Gamma ⊢ e: Own\;\tau => \Gamma ⊢ move e: \tau \quad (消费 e 的所有权)
+(T-Drop)      \Gamma ⊢ e: Own\;\tau => \Gamma ⊢ drop e: Unit
+```
+
+借用不变式：
+
+```text
+Mut(x) ⇒ ¬Imm(x) ∧ Unique(mut\_ref(x))
+Imm(x) ⇒ ¬Mut(x)
+Lifetime(r) ⊆ Lifetime(owner(r))
+```
+
+### 5.2 操作语义（小步） {#小步语义}
+
+```text
+⟨H,S,B, if true e2 e3⟩  → ⟨H,S,B, e2⟩
+⟨H,S,B, if false e2 e3⟩ → ⟨H,S,B, e3⟩
+⟨H,S,B, (\lambda x. e) v⟩ → ⟨H,S,B, e[x:=v]⟩
+⟨H,S,B, &e⟩ → ⟨H,S,B∪{Imm(target(e))}, &v⟩             (当 e ⇓ v 且可借用)
+⟨H,S,B, &mut e⟩ → ⟨H,S,B∪{Mut(target(e))}, &mut v⟩     (当 e ⇓ v 且独占)
+⟨H,S,B, *(&mut v)⟩ → ⟨H,S,B, v⟩
+⟨H,S,B, assign (&mut v) = v'⟩ → ⟨H',S,B, Unit⟩        (更新位置并保持不变式)
+⟨H,S,B, move v⟩ → ⟨H,S\{owner(v)},B\{v,*}, v⟩
+⟨H,S,B, drop v⟩ → ⟨H,S\{v},B\{v,*}, Unit⟩
+```
+
+与 NLL/Polonius 的接口：在 MIR 点集上求解 `outlives` 约束并据此收缩借用活跃区，保证不变式可维护。
+
+---
+
+## 6. 进展与保持定理 {#进展-保持}
+
+### 6.1 进展（Progress） {#进展}
+
+定理（进展）：
+
+```text
+若 ⊢ e: \tau，且 e 非值，则存在 e' 使得 e → e'
+```
+
+证明要点：
+
+1) 对 e 的推导树归纳；2) 对函数应用、条件分支给出可前进规则；3) 借用相关项由可借用性与独占性前提保证步骤存在；4) 与运行时错误（悬垂、别名冲突）互斥，由不变式与 NLL/Polonius 求解确保。
+
+### 6.2 保持（Preservation） {#保持}
+
+定理（保持）：
+
+```text
+若 ⊢ e: \tau 且 e → e'，则 ⊢ e': \tau
+```
+
+证明要点：
+
+1) 对归约规则分类讨论；2) 代换引理确保 (T-Abs/T-App) 的类型保持；3) 借用/赋值规则下，不变式与生命周期包含关系确保类型不变；4) move/drop 更新环境映射但不改变余项类型。
+
+### 6.3 健全性结论 {#健全性}
+
+由进展与保持得出：
+
+```text
+良类型程序既不会卡住，也不会违反借用不变式或产生未定义行为（在模型覆盖范围内）
+```
+
+---
+
+## 7. Rust 1.89 对齐要点 {#rust-189}
+
+- NLL/Polonius：以 MIR 点集约束收缩借用活跃区，减少伪冲突，保持健全性证明结构不变。
+- GAT/关联类型：在保持性证明中以 well-formedness 约束与 where-clauses 强化替换安全。
+- async/.await：状态机降级下的借用跨挂起点由类型/借用检查共同约束；`Future: !Send` 情况明确影响并发调度而非健全性结论。
+
+---
+
+## 附：索引锚点与导航
+
+### 语言片段 {#语言片段}
+
+统一指向本章的简化语法与类型/语义规则。
+
+### 语法与类型判断 {#语法-类型判断}
+
+统一指向类型推导与规则集合。
+
+### 小步语义 {#小步语义}
+
+统一指向归约关系与与借用不变式的结合。
+
+### 进展 {#进展}
+
+统一指向进展定理陈述与证明要点。
+
+### 保持 {#保持}
+
+统一指向保持定理陈述与证明要点。
+
+### 健全性 {#健全性}
+
+统一指向总体健全性结论与适用范围。

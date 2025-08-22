@@ -7,16 +7,88 @@
 
 ## Table of Contents
 
-1. [Introduction](#1-introduction)
-2. [Philosophical Foundation](#2-philosophical-foundation)
-3. [Mathematical Theory](#3-mathematical-theory)
-4. [Formal Models](#4-formal-models)
-5. [Core Concepts](#5-core-concepts)
-6. [IoT Architecture](#6-iot-architecture)
-7. [Safety Guarantees](#7-safety-guarantees)
-8. [Examples and Applications](#8-examples-and-applications)
-9. [Formal Proofs](#9-formal-proofs)
-10. [References](#10-references)
+- [Rust IoT Systems: Formal Theory and Philosophical Foundation](#rust-iot-systems-formal-theory-and-philosophical-foundation)
+  - [Table of Contents](#table-of-contents)
+  - [1. Introduction](#1-introduction)
+    - [1.1 IoT Systems in Rust: A Formal Perspective](#11-iot-systems-in-rust-a-formal-perspective)
+    - [1.2 Formal Definition](#12-formal-definition)
+  - [2. Philosophical Foundation](#2-philosophical-foundation)
+    - [2.1 Ontology of IoT Systems](#21-ontology-of-iot-systems)
+      - [2.1.1 Physical-Digital Bridge Theory](#211-physical-digital-bridge-theory)
+      - [2.1.2 Resource-Constrained Computing Theory](#212-resource-constrained-computing-theory)
+    - [2.2 Epistemology of IoT Design](#22-epistemology-of-iot-design)
+      - [2.2.1 IoT Design as Constraint Satisfaction](#221-iot-design-as-constraint-satisfaction)
+      - [2.2.2 Safety-First Design Philosophy](#222-safety-first-design-philosophy)
+  - [3. Mathematical Theory](#3-mathematical-theory)
+    - [3.1 IoT System Algebra](#31-iot-system-algebra)
+      - [3.1.1 Device Composition](#311-device-composition)
+      - [3.1.2 Network Topology](#312-network-topology)
+    - [3.2 Resource Management Theory](#32-resource-management-theory)
+      - [3.2.1 Memory Safety](#321-memory-safety)
+      - [3.2.2 Power Management](#322-power-management)
+  - [4. Formal Models](#4-formal-models)
+    - [4.1 Device Model](#41-device-model)
+      - [4.1.1 Device Structure](#411-device-structure)
+    - [4.2 Sensor Model](#42-sensor-model)
+      - [4.2.1 Sensor Interface](#421-sensor-interface)
+    - [4.3 Actuator Model](#43-actuator-model)
+      - [4.3.1 Actuator Interface](#431-actuator-interface)
+    - [4.4 Network Model](#44-network-model)
+      - [4.4.1 Communication Protocol](#441-communication-protocol)
+  - [5. Core Concepts](#5-core-concepts)
+    - [5.1 Resource Management](#51-resource-management)
+    - [5.2 Safety and Security](#52-safety-and-security)
+    - [5.3 Real-time Requirements](#53-real-time-requirements)
+  - [6. IoT Architecture](#6-iot-architecture)
+    - [6.1 Layered Architecture](#61-layered-architecture)
+    - [6.2 Edge Computing](#62-edge-computing)
+    - [6.3 Cloud Integration](#63-cloud-integration)
+  - [7. Safety Guarantees](#7-safety-guarantees)
+    - [7.1 Memory Safety](#71-memory-safety)
+    - [7.2 Thread Safety](#72-thread-safety)
+    - [7.3 Real-time Safety](#73-real-time-safety)
+  - [8. Examples and Applications](#8-examples-and-applications)
+    - [8.1 Smart Home System](#81-smart-home-system)
+    - [8.2 Industrial IoT System](#82-industrial-iot-system)
+  - [9. Formal Proofs](#9-formal-proofs)
+    - [9.1 Memory Safety](#91-memory-safety)
+    - [9.2 Real-time Safety](#92-real-time-safety)
+    - [9.3 Network Safety](#93-network-safety)
+  - [10. References](#10-references)
+  - [11. 形式化定义](#11-形式化定义)
+    - [11.1 IoT系统形式化定义](#111-iot系统形式化定义)
+    - [11.2 资源约束定义](#112-资源约束定义)
+    - [11.3 安全模型定义](#113-安全模型定义)
+  - [12. 定理与证明](#12-定理与证明)
+    - [12.1 IoT系统核心定理](#121-iot系统核心定理)
+    - [12.2 设备管理定理](#122-设备管理定理)
+    - [12.3 数据处理定理](#123-数据处理定理)
+  - [13. 符号表](#13-符号表)
+    - [13.1 IoT系统符号](#131-iot系统符号)
+    - [13.2 资源管理符号](#132-资源管理符号)
+    - [13.3 安全模型符号](#133-安全模型符号)
+    - [13.4 设备模型符号](#134-设备模型符号)
+  - [14. 术语表](#14-术语表)
+    - [14.1 核心概念](#141-核心概念)
+    - [14.2 设备类型](#142-设备类型)
+    - [14.3 通信协议](#143-通信协议)
+    - [14.4 安全机制](#144-安全机制)
+    - [14.5 数据处理](#145-数据处理)
+    - [14.6 开发框架](#146-开发框架)
+    - [14.7 应用领域](#147-应用领域)
+    - [14.8 性能指标](#148-性能指标)
+  - [Rust 1.89 对齐（物联网系统与边缘计算）](#rust-189-对齐物联网系统与边缘计算)
+    - [嵌入式异步编程](#嵌入式异步编程)
+    - [实时任务调度](#实时任务调度)
+    - [边缘计算与本地处理](#边缘计算与本地处理)
+    - [低功耗优化](#低功耗优化)
+  - [附：索引锚点与导航](#附索引锚点与导航)
+    - [物联网系统定义 {#物联网系统定义}](#物联网系统定义-物联网系统定义)
+    - [嵌入式编程 {#嵌入式编程}](#嵌入式编程-嵌入式编程)
+    - [实时系统 {#实时系统}](#实时系统-实时系统)
+    - [边缘计算 {#边缘计算}](#边缘计算-边缘计算)
+    - [低功耗优化 {#低功耗优化}](#低功耗优化-低功耗优化)
+    - [传感器网络 {#传感器网络}](#传感器网络-传感器网络)
 
 ## 1. Introduction
 
@@ -1373,6 +1445,318 @@ $$\text{process}(data) \Rightarrow \text{available}(data)$$
 - **示例**: 故障率、可用性、容错能力
 - **理论映射**: 可靠性 → 质量指标
 
-"
+---
+
+## Rust 1.89 对齐（物联网系统与边缘计算）
+
+### 嵌入式异步编程
+
+```rust
+use embassy::executor::Spawner;
+use embassy::time::{Duration, Timer};
+use embassy_nrf::gpio::{Input, Output, Pull};
+use embassy_nrf::peripherals::P0_13;
+use embassy_nrf::spim::Spim;
+use embedded_hal::digital::v2::OutputPin;
+
+// 异步传感器读取
+#[embassy::task]
+async fn sensor_task(spawner: Sppawner) {
+    let mut sensor = Sensor::new();
+    
+    loop {
+        // 异步读取传感器数据
+        let data = sensor.read_async().await;
+        
+        // 处理数据
+        if let Some(processed_data) = process_sensor_data(data).await {
+            // 发送到云端
+            send_to_cloud(processed_data).await;
+        }
+        
+        // 等待下一次读取
+        Timer::after(Duration::from_secs(5)).await;
+    }
+}
+
+// 异步 GPIO 控制
+#[embassy::task]
+async fn gpio_task(mut led: Output<'static, P0_13>) {
+    loop {
+        // 异步控制 LED
+        led.set_high().unwrap();
+        Timer::after(Duration::from_millis(500)).await;
+        led.set_low().unwrap();
+        Timer::after(Duration::from_millis(500)).await;
+    }
+}
+
+// 异步 SPI 通信
+#[embassy::task]
+async fn spi_task(mut spi: Spim<'static, T>) {
+    let mut buffer = [0u8; 32];
+    
+    loop {
+        // 异步 SPI 传输
+        spi.transfer(&mut buffer).await.unwrap();
+        
+        // 处理接收到的数据
+        process_spi_data(&buffer).await;
+        
+        Timer::after(Duration::from_millis(100)).await;
+    }
+}
+```
+
+### 实时任务调度
+
+```rust
+use rtic::app;
+use rtic::cyccnt::U32Ext;
+use stm32f4xx_hal::gpio::{gpioa::PA5, Output, PushPull};
+use stm32f4xx_hal::prelude::*;
+
+// RTIC 应用定义
+#[app(device = stm32f4xx_hal::pac, peripherals = true)]
+const APP: () = {
+    struct Resources {
+        led: PA5<Output<PushPull>>,
+    }
+    
+    #[init]
+    fn init(cx: init::Context) -> init::LateResources {
+        // 初始化硬件
+        let device = cx.device;
+        let gpioa = device.GPIOA.split();
+        let led = gpioa.pa5.into_push_pull_output();
+        
+        // 启动定时器任务
+        timer::spawn().unwrap();
+        
+        init::LateResources { led }
+    }
+    
+    #[task(resources = [led])]
+    fn timer(cx: timer::Context) {
+        // 实时任务：每 1 秒切换 LED 状态
+        cx.resources.led.toggle().unwrap();
+        timer::spawn_after(1.secs()).unwrap();
+    }
+    
+    #[task(priority = 2)]
+    fn high_priority_task(_cx: high_priority_task::Context) {
+        // 高优先级任务
+        critical_section::with(|_| {
+            // 关键代码段
+        });
+    }
+    
+    #[task(priority = 1)]
+    fn low_priority_task(_cx: low_priority_task::Context) {
+        // 低优先级任务
+    }
+};
+
+// 中断处理
+#[interrupt]
+fn EXTI0() {
+    // 外部中断处理
+    high_priority_task::spawn().unwrap();
+}
+```
+
+### 边缘计算与本地处理
+
+```rust
+use tokio::sync::mpsc;
+use std::collections::HashMap;
+use serde::{Serialize, Deserialize};
+
+// 边缘计算节点
+struct EdgeNode {
+    sensors: HashMap<String, Sensor>,
+    processors: Vec<Box<dyn DataProcessor>>,
+    storage: LocalStorage,
+    network: NetworkManager,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+struct SensorData {
+    sensor_id: String,
+    timestamp: u64,
+    value: f64,
+    quality: f32,
+}
+
+// 本地数据处理
+impl EdgeNode {
+    async fn process_sensor_data(&mut self, data: SensorData) -> Result<ProcessedData, Error> {
+        // 本地数据预处理
+        let filtered_data = self.filter_data(data).await?;
+        
+        // 本地机器学习推理
+        let prediction = self.run_ml_inference(&filtered_data).await?;
+        
+        // 本地存储
+        self.storage.store(&filtered_data).await?;
+        
+        // 决定是否发送到云端
+        if self.should_send_to_cloud(&filtered_data, &prediction) {
+            self.network.send_to_cloud(&filtered_data).await?;
+        }
+        
+        Ok(ProcessedData {
+            original: filtered_data,
+            prediction,
+            local_processed: true,
+        })
+    }
+    
+    async fn run_ml_inference(&self, data: &SensorData) -> Result<f64, Error> {
+        // 简化的本地机器学习推理
+        // 在实际应用中，这里会加载预训练的模型
+        let model = self.load_local_model().await?;
+        let prediction = model.predict(data.value);
+        Ok(prediction)
+    }
+    
+    fn should_send_to_cloud(&self, data: &SensorData, prediction: &f64) -> bool {
+        // 智能决策：只在必要时发送数据到云端
+        data.quality < 0.8 || prediction.abs() > 10.0
+    }
+}
+
+// 本地存储管理
+struct LocalStorage {
+    data_buffer: Vec<SensorData>,
+    max_capacity: usize,
+}
+
+impl LocalStorage {
+    async fn store(&mut self, data: &SensorData) -> Result<(), Error> {
+        if self.data_buffer.len() >= self.max_capacity {
+            // 实现 LRU 策略
+            self.data_buffer.remove(0);
+        }
+        self.data_buffer.push(data.clone());
+        Ok(())
+    }
+    
+    async fn get_recent_data(&self, count: usize) -> Vec<SensorData> {
+        self.data_buffer
+            .iter()
+            .rev()
+            .take(count)
+            .cloned()
+            .collect()
+    }
+}
+```
+
+### 低功耗优化
+
+```rust
+use embassy::time::{Duration, Timer};
+use embedded_hal::digital::v2::InputPin;
+
+// 低功耗传感器节点
+struct LowPowerSensor {
+    sensor: Sensor,
+    radio: Radio,
+    battery_monitor: BatteryMonitor,
+    sleep_manager: SleepManager,
+}
+
+impl LowPowerSensor {
+    async fn run(&mut self) {
+        loop {
+            // 检查电池电量
+            let battery_level = self.battery_monitor.get_level();
+            
+            if battery_level < 0.1 {
+                // 电池电量低，进入深度睡眠
+                self.sleep_manager.deep_sleep(Duration::from_hours(1)).await;
+                continue;
+            }
+            
+            // 读取传感器数据
+            let data = self.sensor.read().await;
+            
+            // 检查是否需要发送数据
+            if self.should_transmit(&data) {
+                // 唤醒无线电
+                self.radio.wake_up().await;
+                
+                // 发送数据
+                self.radio.transmit(&data).await;
+                
+                // 关闭无线电以节省功耗
+                self.radio.sleep().await;
+            }
+            
+            // 进入浅睡眠模式
+            self.sleep_manager.light_sleep(Duration::from_secs(30)).await;
+        }
+    }
+    
+    fn should_transmit(&self, data: &SensorData) -> bool {
+        // 智能传输策略：只在数据变化显著时传输
+        data.value.abs() > 5.0 || data.quality < 0.9
+    }
+}
+
+// 睡眠管理器
+struct SleepManager {
+    current_mode: SleepMode,
+}
+
+enum SleepMode {
+    Active,
+    LightSleep,
+    DeepSleep,
+}
+
+impl SleepManager {
+    async fn light_sleep(&mut self, duration: Duration) {
+        self.current_mode = SleepMode::LightSleep;
+        // 实现浅睡眠模式
+        Timer::after(duration).await;
+        self.current_mode = SleepMode::Active;
+    }
+    
+    async fn deep_sleep(&mut self, duration: Duration) {
+        self.current_mode = SleepMode::DeepSleep;
+        // 实现深度睡眠模式
+        Timer::after(duration).await;
+        self.current_mode = SleepMode::Active;
+    }
+}
+```
 
 ---
+
+## 附：索引锚点与导航
+
+### 物联网系统定义 {#物联网系统定义}
+
+用于跨文档引用，统一指向本文物联网系统基础定义与范围。
+
+### 嵌入式编程 {#嵌入式编程}
+
+用于跨文档引用，统一指向嵌入式系统编程与硬件抽象。
+
+### 实时系统 {#实时系统}
+
+用于跨文档引用，统一指向实时任务调度与中断处理。
+
+### 边缘计算 {#边缘计算}
+
+用于跨文档引用，统一指向边缘计算与本地数据处理。
+
+### 低功耗优化 {#低功耗优化}
+
+用于跨文档引用，统一指向低功耗设计与电源管理。
+
+### 传感器网络 {#传感器网络}
+
+用于跨文档引用，统一指向传感器网络与数据采集。

@@ -1,10 +1,42 @@
 ﻿# 递归迭代补充：借用检查器工程实践的形式化论证与证明
 
+## 目录
+
+- [递归迭代补充：借用检查器工程实践的形式化论证与证明](#递归迭代补充借用检查器工程实践的形式化论证与证明)
+  - [目录](#目录)
+  - [1. 工程实现与工具链协同](#1-工程实现与工具链协同)
+    - [1.1 MIR 层面的实务指南 {#mir-practice}](#11-mir-层面的实务指南-mir-practice)
+    - [1.2 异步/并发工程实践 {#async-concurrency-practice}](#12-异步并发工程实践-async-concurrency-practice)
+    - [1.3 FFI/Unsafe 边界规约 {#ffi-practice}](#13-ffiunsafe-边界规约-ffi-practice)
+  - [2. 验证流程与自动化测试](#2-验证流程与自动化测试)
+  - [3. 工程应用与生态联系](#3-工程应用与生态联系)
+  - [4. 未来值值值挑战与研究展望](#4-未来值值值挑战与研究展望)
+  - [形式化证明映射（工程实践）](#形式化证明映射工程实践)
+  - [附：索引锚点与导航](#附索引锚点与导航)
+    - [MIR 实务 {#mir-practice}](#mir-实务-mir-practice)
+    - [异步并发实践 {#async-concurrency-practice}](#异步并发实践-async-concurrency-practice)
+    - [FFI/Unsafe 规约 {#ffi-practice}](#ffiunsafe-规约-ffi-practice)
+
 ## 1. 工程实现与工具链协同
 
 - **借用检查器实现的形式化建模**：递归细化借用检查器在rustc、Polonius等工具中的实现建模与验证。
 - **工程优化与性能权衡**：递归分析借用检查器在实际工程中的性能优化、错误报告、边界处理等问题。
 - **借用检查器与生态工具的集成**：递归推动借用检查器与rust-analyzer、IDE插件等生态工具的深度集成，提升开发体验与安全。
+
+### 1.1 MIR 层面的实务指南 {#mir-practice}
+
+- 在 MIR passes 观察 NLL outlives 约束；定位 borrowck 错误源头。
+- 利用 `-Zpolonius` 进行关系调试，验证 `illegal` 关系定位。
+
+### 1.2 异步/并发工程实践 {#async-concurrency-practice}
+
+- 在 `.await` 前完成临时借用；避免跨 `await` 捕获 `!Send`。
+- 作用域任务与结构化并发以避免任务泄漏与悬挂唤醒。
+
+### 1.3 FFI/Unsafe 边界规约 {#ffi-practice}
+
+- 统一采用 `NonNull<T>`/原子指针表达可空与并发写；文档化别名不变式。
+- 对外暴露 API 使用 `&mut`/`&` 明确独占/共享语义，禁止未约束裸指针逃逸。
 
 ## 2. 验证流程与自动化测试
 
@@ -12,11 +44,23 @@
 - **形式化规范与实现一致性证明**：递归论证借用检查器实现与形式化规范的一致性，确保工程落地的正确性。
 - **多工具协同与验证闭环**：递归推动多工具协同验证，形成借用检查器工程实践的验证闭环。
 
+流水线建议：
+
+- rustc borrowck 严格模式 + clippy/deny(unsafe_op_in_unsafe_fn)
+- proptest/quickcheck 生成极端借用模式
+- Miri 运行时未定义行为检查（UB）
+
 ## 3. 工程应用与生态联系
 
 - **标准库与复杂场景的递归验证**：递归形式化验证标准库、异步/并发/FFI等复杂场景下的借用规则，支撑Rust生态的安全。
 - **借用检查器工程实践与多系统集成**：递归推动借用检查器工程实践与类型系统、所有权、生命周期等多系统的集成验证。
 - **工程实践中的创新与挑战**：递归总结借用检查器工程实践中的创新点与面临的实际挑战。
+
+清单：
+
+- 宏/生成代码中的借用可视化与诊断
+- async trait 与对象安全的工程折中模式库
+- 内部可变性类型的静/动协同验证工具
 
 ## 4. 未来值值值挑战与研究展望
 
@@ -35,3 +79,19 @@
 - 并发安全：见[并发安全定理](../05_concurrency/01_formal_concurrency_model.md#并发安全定理)
 - 所有权/借用定理与案例：见[所有权与借用定理](06_theorems.md)、[案例](10_borrow_checker_case.md)
 - 泛型生命周期与约束：见[泛型生命周期](../04_generics/01_formal_generics_system.md#泛型生命周期)
+
+---
+
+## 附：索引锚点与导航
+
+### MIR 实务 {#mir-practice}
+
+统一指向 MIR/NLL/Polonius 工程实践。
+
+### 异步并发实践 {#async-concurrency-practice}
+
+统一指向 `.await`/Send/结构化并发等工程策略。
+
+### FFI/Unsafe 规约 {#ffi-practice}
+
+统一指向 FFI 边界的别名与 API 规约。

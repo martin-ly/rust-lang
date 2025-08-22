@@ -41,6 +41,16 @@
   - [形式化证明映射（HM 推断）](#形式化证明映射hm-推断)
   - [附：索引锚点与导航](#附索引锚点与导航)
     - [类型推断定义 {#类型推断定义}](#类型推断定义-类型推断定义)
+    - [类型检查算法 {#类型检查算法}](#类型检查算法-类型检查算法)
+    - [统一算法 {#统一算法}](#统一算法-统一算法)
+    - [错误恢复 {#错误恢复}](#错误恢复-错误恢复)
+    - [GAT/where 边界 {#gat-where}](#gatwhere-边界-gat-where)
+    - [impl Trait 推断 {#impl-trait}](#impl-trait-推断-impl-trait)
+    - [约束求解算法 {#constraint-solving}](#constraint-solving)
+    - [类型泛化 {#type-generalization}](#type-generalization)
+    - [闭包捕获推断 {#closure-capture}](#closure-capture)
+    - [生命周期推断 {#lifetime-inference}](#lifetime-inference)
+  - [Rust 1.89 对齐（推断边界与实践）](#rust-189-对齐推断边界与实践)
 
 ## 1. 概述 {#1-概述}
 
@@ -726,3 +736,44 @@ fn complex_inference() {
 ### 类型检查算法 {#类型检查算法}
 
 兼容性锚点：对应“6. 类型推断算法”。
+
+### 统一算法 {#统一算法}
+
+兼容性锚点：对应“5. 统一算法”与出现检查。
+
+### 错误恢复 {#错误恢复}
+
+兼容性锚点：对应“6.3 错误恢复”。
+
+### GAT/where 边界 {#gat-where}
+
+用于跨文档引用，指向 Rust 1.89 中与泛型/关联类型/where-clauses 相关的推断边界说明。
+
+### impl Trait 推断 {#impl-trait}
+
+用于跨文档引用，指向返回/参数 `impl Trait` 的推断与对象安全关系说明。
+
+### 约束求解算法 {#constraint-solving}
+
+用于跨文档引用，统一指向约束生成、统一算法、约束求解的完整流程。
+
+### 类型泛化 {#type-generalization}
+
+用于跨文档引用，统一指向类型泛化算法、自由变量计算、量化变量确定。
+
+### 闭包捕获推断 {#closure-capture}
+
+用于跨文档引用，统一指向闭包捕获列表的自动推断与显式指定策略。
+
+### 生命周期推断 {#lifetime-inference}
+
+用于跨文档引用，统一指向生命周期推断与借用检查的联合约束求解。
+
+---
+
+## Rust 1.89 对齐（推断边界与实践）
+
+- 闭包捕获推断：基于使用点推断 `Fn`/`FnMut`/`FnOnce`，在并发/async 背景下可能影响 `Send` 推导。
+- `impl Trait`：返回位置 `impl Trait` 参与单一具体类型推断；参数位置建议使用泛型 + trait bound 以避免对象安全问题。
+- GAT/where：关联类型与 where 约束在推断中提供更强约束传播；必要时添加显式注解以消除歧义。
+- 与生命周期/NLL：约束生成包含 outlives 关系，推断需与借用检查联合保证可行解。

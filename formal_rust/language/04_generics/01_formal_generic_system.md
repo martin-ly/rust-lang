@@ -355,3 +355,122 @@ Rust泛型系统提供了强大的参数化编程能力，同时保持了零成�
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  
 **维护者**: Rust语言形式化理论项目组
+
+---
+
+## Rust 1.89 对齐（GAT 稳定化与 where-clauses 细化）
+
+### 泛型关联类型（GAT）稳定化
+
+```rust
+// GAT 定义（Rust 1.89 稳定）
+trait Iterator {
+    type Item<'a> where Self: 'a;
+    fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
+}
+
+// GAT 实现
+struct SliceIter<'a, T> {
+    slice: &'a [T],
+    index: usize,
+}
+
+impl<'a, T> Iterator for SliceIter<'a, T> {
+    type Item<'b> = &'b T where 'a: 'b;
+    
+    fn next<'b>(&'b mut self) -> Option<Self::Item<'b>> {
+        if self.index < self.slice.len() {
+            let item = &self.slice[self.index];
+            self.index += 1;
+            Some(item)
+        } else {
+            None
+        }
+    }
+}
+```
+
+### where-clauses 细化
+
+```rust
+// 复杂的 where 约束
+fn complex_function<T, U, V>()
+where
+    T: Clone + Debug,
+    U: Iterator<Item = T>,
+    V: FromIterator<T>,
+    for<'a> U::Item: 'a,
+    T: 'static,
+{
+    // 函数实现
+}
+
+// 关联类型约束
+trait Container {
+    type Item;
+    type Iterator<'a>: Iterator<Item = &'a Self::Item>
+    where
+        Self: 'a,
+        Self::Item: 'a;
+    
+    fn iter<'a>(&'a self) -> Self::Iterator<'a>;
+}
+```
+
+### 对象安全与泛型
+
+```rust
+// 对象安全的泛型 trait
+trait ObjectSafeGeneric {
+    fn method(&self) -> i32;
+    fn async_method(&self) -> Pin<Box<dyn Future<Output = i32> + Send>>;
+}
+
+// 非对象安全的泛型 trait
+trait NotObjectSafeGeneric {
+    fn generic_method<T>(&self, x: T) -> i32;  // ❌ 泛型方法
+    fn method(&self) -> Self;  // ❌ 返回 Self
+}
+
+// 对象安全修复
+trait ObjectSafeFixed {
+    fn method(&self) -> i32;
+    fn async_method(&self) -> Pin<Box<dyn Future<Output = i32> + Send>>;
+    
+    // 使用关联类型替代泛型参数
+    type Output;
+    fn typed_method(&self) -> Self::Output;
+}
+```
+
+---
+
+## 附：索引锚点与导航
+
+### 泛型系统定义 {#泛型系统定义}
+
+用于跨文档引用，统一指向本文泛型系统基础定义与范围。
+
+### 参数化多态 {#参数化多态}
+
+用于跨文档引用，统一指向参数化多态性的数学基础与类型规则。
+
+### 类型约束 {#类型约束}
+
+用于跨文档引用，统一指向 trait 约束、where 子句与类型边界。
+
+### 单态化 {#单态化}
+
+用于跨文档引用，统一指向单态化过程、算法与零成本抽象保证。
+
+### 泛型关联类型 {#generic-associated-types}
+
+用于跨文档引用，统一指向 GAT 定义、实现与生命周期约束。
+
+### 对象安全 {#object-safety}
+
+用于跨文档引用，统一指向泛型 trait 的对象安全规则与修复策略。
+
+### where-clauses {#where-clauses}
+
+用于跨文档引用，统一指向 where 子句的细化约束与复杂类型关系。

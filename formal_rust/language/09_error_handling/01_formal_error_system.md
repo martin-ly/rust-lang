@@ -427,6 +427,181 @@ Rust错误处理系统通过代数数据类型和类型安全机制提供了强�
 **最后更新**: 2025-01-27  
 **维护者**: Rust语言形式化理论项目组
 
-"
+---
+
+## Rust 1.89 对齐（错误处理与恢复策略）
+
+### 异步错误处理
+
+```rust
+use tokio::time::{timeout, Duration};
+use std::future::Future;
+
+// 异步错误处理
+async fn async_error_handling() -> Result<String, Box<dyn std::error::Error>> {
+    // 超时错误处理
+    let result = timeout(
+        Duration::from_secs(5),
+        async_operation()
+    ).await?;
+    
+    Ok(result)
+}
+
+async fn async_operation() -> Result<String, std::io::Error> {
+    // 模拟异步操作
+    tokio::time::sleep(Duration::from_millis(100)).await;
+    Ok("Operation completed".to_string())
+}
+
+// 错误恢复策略
+async fn resilient_operation() -> Result<String, Box<dyn std::error::Error>> {
+    let mut attempts = 0;
+    let max_attempts = 3;
+    
+    loop {
+        match async_operation().await {
+            Ok(result) => return Ok(result),
+            Err(e) => {
+                attempts += 1;
+                if attempts >= max_attempts {
+                    return Err(Box::new(e));
+                }
+                
+                // 指数退避
+                let delay = Duration::from_secs(2_u64.pow(attempts as u32));
+                tokio::time::sleep(delay).await;
+            }
+        }
+    }
+}
+```
+
+### 错误类型转换与组合
+
+```rust
+use thiserror::Error;
+
+// 使用 thiserror 简化错误定义
+#[derive(Error, Debug)]
+enum AppError {
+    #[error("IO error: {0}")]
+    Io(#[from] std::io::Error),
+    
+    #[error("Network error: {0}")]
+    Network(#[from] reqwest::Error),
+    
+    #[error("Parse error: {0}")]
+    Parse(String),
+    
+    #[error("Timeout after {0:?}")]
+    Timeout(Duration),
+}
+
+// 错误组合
+async fn complex_operation() -> Result<String, AppError> {
+    let data = fetch_data().await?;  // Network error
+    let parsed = parse_data(&data)?; // Parse error
+    Ok(parsed)
+}
+
+async fn fetch_data() -> Result<String, AppError> {
+    let client = reqwest::Client::new();
+    let response = client
+        .get("https://api.example.com/data")
+        .timeout(Duration::from_secs(10))
+        .send()
+        .await?;
+    
+    response.text().await.map_err(AppError::Network)
+}
+
+fn parse_data(data: &str) -> Result<String, AppError> {
+    serde_json::from_str(data)
+        .map_err(|e| AppError::Parse(e.to_string()))
+}
+```
+
+### 错误上下文与追踪
+
+```rust
+use std::error::Error;
+use std::fmt;
+
+// 错误上下文
+#[derive(Debug)]
+struct ContextualError<E> {
+    context: String,
+    source: E,
+}
+
+impl<E> ContextualError<E> {
+    fn new(context: impl Into<String>, source: E) -> Self {
+        ContextualError {
+            context: context.into(),
+            source,
+        }
+    }
+}
+
+impl<E: Error> Error for ContextualError<E> {
+    fn source(&self) -> Option<&(dyn Error + 'static)> {
+        Some(&self.source)
+    }
+}
+
+impl<E> fmt::Display for ContextualError<E> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}: {}", self.context, self.source)
+    }
+}
+
+// 错误追踪
+fn operation_with_context() -> Result<String, Box<dyn Error>> {
+    let file_content = std::fs::read_to_string("config.txt")
+        .map_err(|e| ContextualError::new("Failed to read config file", e))?;
+    
+    let parsed = parse_config(&file_content)
+        .map_err(|e| ContextualError::new("Failed to parse config", e))?;
+    
+    Ok(parsed)
+}
+
+fn parse_config(content: &str) -> Result<String, Box<dyn Error>> {
+    // 解析逻辑
+    if content.is_empty() {
+        return Err("Empty config file".into());
+    }
+    Ok(content.to_string())
+}
+```
+
+---
+
+## 附：索引锚点与导航
+
+### 错误处理系统定义 {#错误处理系统定义}
+
+用于跨文档引用，统一指向本文错误处理系统基础定义与范围。
+
+### 错误类型 {#错误类型}
+
+用于跨文档引用，统一指向 Result、Option 等错误类型的定义与使用。
+
+### 错误传播 {#错误传播}
+
+用于跨文档引用，统一指向错误传播机制与 ? 操作符。
+
+### 错误恢复 {#错误恢复}
+
+用于跨文档引用，统一指向错误恢复策略与重试机制。
+
+### 异步错误处理 {#异步错误处理}
+
+用于跨文档引用，统一指向异步上下文中的错误处理与超时机制。
+
+### 错误上下文 {#错误上下文}
+
+用于跨文档引用，统一指向错误上下文与错误追踪机制。
 
 ---

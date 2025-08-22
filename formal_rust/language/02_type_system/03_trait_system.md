@@ -15,8 +15,10 @@
     - [3.1 基本Trait](#31-基本trait)
     - [3.2 泛型Trait](#32-泛型trait)
     - [3.3 关联类型Trait](#33-关联类型trait)
-    - [3.4 默认方法Trait](#34-默认方法trait)
+    - [3.4 泛型关联类型（GAT）](#34-泛型关联类型gat)
+    - [3.5 默认方法Trait](#35-默认方法trait)
   - [4. Trait实现](#4-trait实现)
+    - [4.0 Rust 1.89 对象安全与动态分发](#40-rust-189-对象安全与动态分发)
     - [4.1 基本实现](#41-基本实现)
     - [4.2 泛型实现](#42-泛型实现)
     - [4.3 条件实现](#43-条件实现)
@@ -47,6 +49,12 @@
     - [10.1 学术论文](#101-学术论文)
     - [10.2 技术文档](#102-技术文档)
     - [10.3 在线资源](#103-在线资源)
+  - [Rust 1.89 对齐（对象安全、动态分发与强制）](#rust-189-对齐对象安全动态分发与强制)
+  - [附：索引锚点与导航](#附索引锚点与导航)
+    - [对象安全 {#对象安全}](#对象安全-对象安全)
+    - [动态分发 {#动态分发}](#动态分发-动态分发)
+    - [强制与 Unsizing {#unsizing}](#强制与-unsizing-unsizing)
+    - [Auto Traits {#auto-traits}](#auto-traits-auto-traits)
 
 ## 1. 概述
 
@@ -146,7 +154,32 @@ trait Iterator {
 **关联类型Trait类型**：
 $$\text{Iterator}[\text{Item}] = \text{interface}\{\text{next}: \text{fn}(\&\text{mut } self) \to \text{Option}[\text{Item}]\}$$
 
-### 3.4 默认方法Trait
+### 3.4 泛型关联类型（GAT）
+
+**GAT定义**（Rust 1.89 稳定）：
+
+```rust
+trait StreamingIterator {
+    type Item<'a> where Self: 'a;
+    fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
+}
+
+trait LendingIterator {
+    type Item<'a> where Self: 'a;
+    fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
+}
+```
+
+**GAT类型**：
+$$\text{StreamingIterator}[\text{Item}[\alpha]] = \text{interface}\{\text{next}: \forall \alpha. \text{fn}(\&\text{mut } self) \to \text{Option}[\text{Item}[\alpha]]\}$$
+
+**GAT约束传播**：
+
+- 关联类型可以携带生命周期参数
+- 支持更精确的类型关系表达
+- 改进复杂trait组合的推断质量
+
+### 3.5 默认方法Trait
 
 **默认方法Trait定义**：
 
@@ -164,6 +197,61 @@ trait Default {
 $$\text{Default} = \text{interface}\{\text{default}: \text{fn}() \to \text{Self}, \text{is\_default}: \text{fn}(\&self) \to \text{bool}\}$$
 
 ## 4. Trait实现
+
+### 4.0 Rust 1.89 对象安全与动态分发
+
+**对象安全规则**（Rust 1.89）：
+
+```rust
+// 对象安全的trait
+trait ObjectSafe {
+    fn method(&self) -> i32;  // ✅ 对象安全
+    fn async_method(&self) -> Pin<Box<dyn Future<Output = i32> + Send>>;  // ✅ 异步方法
+}
+
+// 非对象安全的trait
+trait NotObjectSafe {
+    fn method(&self) -> Self;  // ❌ 返回Self
+    fn generic_method<T>(&self, x: T) -> i32;  // ❌ 泛型方法
+    fn async_method(&self) -> impl Future<Output = i32>;  // ❌ impl Trait返回
+}
+```
+
+**DispatchFromDyn机制**：
+
+```rust
+use std::ops::DispatchFromDyn;
+
+// 允许从具体类型到dyn Trait的转换
+impl<T: ?Sized> DispatchFromDyn<Box<T>> for Box<dyn Trait> 
+where 
+    T: Trait,
+    Box<T>: CoerceUnsized<Box<dyn Trait>>,
+{}
+
+// 与CoerceUnsized协作实现强制转换
+impl<T: ?Sized> CoerceUnsized<Box<dyn Trait>> for Box<T> 
+where 
+    T: Trait + Unsize<dyn Trait>,
+{}
+```
+
+**Auto Traits（Send/Sync）**：
+
+```rust
+// Send/Sync在trait组合中的影响
+trait AsyncTrait: Send + Sync {
+    async fn async_method(&self) -> i32;
+}
+
+// 在并发边界确保Send约束
+fn spawn_task<T>(task: T) 
+where 
+    T: Future + Send + 'static 
+{
+    // 跨线程执行
+}
+```
 
 ### 4.1 基本实现
 
@@ -819,6 +907,33 @@ Trait继承关系是正确的，不存在循环继承。
 3. **Rustlings** (2024). "Rustlings - Traits Exercises"
 
 ---
+
+## Rust 1.89 对齐（对象安全、动态分发与强制）
+
+- 对象安全：方法不得返回 `Self` 或含泛型参数；如需异步返回，采用 `Pin<Box<dyn Future<...>>>` 或 `impl Trait`（返回位置）。
+- `DispatchFromDyn`：允许从具体类型到 `dyn Trait` 的动态分发转换配合 vtable；与 `CoerceUnsized` 协作实现 `Box<T> → Box<dyn Trait>` 等强制。
+- Auto traits（Send/Sync）：受成员与捕获的影响；在 async/并发边界，确保跨线程需要的 `Send + 'static` 约束成立。
+- GAT：在关联类型中提供更精确的生命周期/型变表达，改进复杂 trait 组合的表达力与推断质量。
+
+---
+
+## 附：索引锚点与导航
+
+### 对象安全 {#对象安全}
+
+统一指向对象安全判定规则与常见修复策略。
+
+### 动态分发 {#动态分发}
+
+统一指向 `dyn Trait`、vtable、`DispatchFromDyn` 的说明。
+
+### 强制与 Unsizing {#unsizing}
+
+统一指向 `CoerceUnsized`/unsize 规则与 `Box/Arc/Rc` 场景。
+
+### Auto Traits {#auto-traits}
+
+统一指向 `Send/Sync` 在 trait 组合与异步中的要求。
 
 **文档版本**: 1.0.0  
 **最后更新**: 2025-01-27  

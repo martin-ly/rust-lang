@@ -26,6 +26,13 @@
     - [6.1 常见类型的型变特征](#61-常见类型的型变特征)
     - [6.2 型变组合](#62-型变组合)
   - [7. 型变的实际意义](#7-型变的实际意义)
+  - [补正与 Rust 1.89 要点](#补正与-rust-189-要点)
+  - [附：索引锚点与导航](#附索引锚点与导航)
+    - [型变定义 {#型变定义}](#型变定义-型变定义)
+    - [生命周期型变 {#生命周期型变}](#生命周期型变-生命周期型变)
+    - [Unsizing 与 CoerceUnsized {#unsizing}](#unsizing-与-coerceunsized-unsizing)
+    - [DispatchFromDyn {#dispatchfromdyn}](#dispatchfromdyn-dispatchfromdyn)
+    - [PhantomData 与型变控制 {#phantomdata}](#phantomdata-与型变控制-phantomdata)
 
 ## 1. 型变（Variance）基础
 
@@ -211,3 +218,37 @@ struct Complex<T, U> {
 3. **不变**确保了可变状态的安全操作，防止通过类型转换导致的内存安全问题。
 
 通过理解和正确使用型变，我们可以设计出既灵活又安全的泛型系统。
+
+---
+
+## 补正与 Rust 1.89 要点
+
+- Box/Arc/Rc 对类型参数 T 协变，并支持在 T: `Unsize<U>` 时的 DST 强制（如 `Box<Dog>` → `Box<dyn Animal>`）。`Vec<T>` 不支持元素级到 `dyn Trait` 的强制，需改用装箱或转换。
+- 引用的生命周期 `'a` 协变：`&'a T` 对 `'a` 与 `T` 协变；`&'a mut T` 对 `'a` 协变，但对 `T` 不变。
+- 原始指针：`*const T` 协变，`*mut T` 不变；`Cell<T>`、`RefCell<T>` 不变。
+- `PhantomData<T>` 缺省对 `T` 协变；可用 `PhantomData<fn(T)>` 等技巧控制方向（逆变/不变）。
+- `DispatchFromDyn`/`CoerceUnsized` 参与从具体类型到 `dyn Trait` 的强制调度与尺寸变化规则。
+
+---
+
+## 附：索引锚点与导航
+
+### 型变定义 {#型变定义}
+
+用于跨文档引用，统一指向本文型变基础定义。
+
+### 生命周期型变 {#生命周期型变}
+
+用于跨文档引用，统一指向生命周期 `'a` 的协变关系与引用的型变说明。
+
+### Unsizing 与 CoerceUnsized {#unsizing}
+
+用于跨文档引用，统一指向 Box/Arc/Rc/&/&mut 等与 DST 的强制规则。
+
+### DispatchFromDyn {#dispatchfromdyn}
+
+用于跨文档引用，统一指向从具体类型到 `dyn Trait` 的分发与强制规则。
+
+### PhantomData 与型变控制 {#phantomdata}
+
+用于跨文档引用，统一指向通过 `PhantomData` 调整型变方向的技巧。

@@ -2,21 +2,25 @@
 
 ## 摘要
 
-特征对象(Trait Objects)是 Rust 中实现运行时多态的主要机制，它允许代码以统一方式处理不同类型的值。本文探讨特征对象的理论基础、编译器实现、性能特征以及与静态分发的比较。
+特征对象(Trait Objects)是 Rust 中实现运行时多态的主要机制，它允许代码以统一方式处理不同类型的值。
+本文探讨特征对象的理论基础、编译器实现、性能特征以及与静态分发的比较。
 
 ## 理论基础
 
 ### 1. 子类型多态与动态分发
 
-特征对象基于子类型多态(Subtyping Polymorphism)理论，该理论源于面向对象编程模型。在形式系统中，子类型关系通常表示为 $S <: T$，表示 $S$ 是 $T$ 的子类型，可以在需要 $T$ 的上下文中使用。
+特征对象基于子类型多态(Subtyping Polymorphism)理论，该理论源于面向对象编程模型。
+在形式系统中，子类型关系通常表示为 $S <: T$，表示 $S$ 是 $T$ 的子类型，可以在需要 $T$ 的上下文中使用。
 
-动态分发(Dynamic Dispatch)是一种在运行时而非编译时确定调用哪个函数实现的机制。形式上，若 $f$ 是多态函数，$x$ 是多态值，则动态分发是在运行时计算：
+动态分发(Dynamic Dispatch)是一种在运行时而非编译时确定调用哪个函数实现的机制。
+形式上，若 $f$ 是多态函数，$x$ 是多态值，则动态分发是在运行时计算：
 
 $$\text{dispatch}(f, \text{type\_of}(x))(x)$$
 
 ### 2. 存在类型理论
 
-从类型理论角度看，特征对象可以视为存在类型(Existential Types)的实现。存在类型可表示为 $\exists X. T$ 其中 $X$ 是类型变量，$T$ 是包含 $X$ 的类型表达式。
+从类型理论角度看，特征对象可以视为存在类型(Existential Types)的实现。
+存在类型可表示为 $\exists X. T$ 其中 $X$ 是类型变量，$T$ 是包含 $X$ 的类型表达式。
 
 Rust 的特征对象 `dyn Trait` 对应于存在类型：$\exists X. \{ X \text{ implements } Trait \}$
 
@@ -238,7 +242,3 @@ $$\forall T. \text{ If } T: Trait_1 \text{ and } T: Trait_2 \text{ then } \text{
 6. Jung, R., Dang, H., Kang, J., & Dreyer, D. (2020). Stacked Borrows: An Aliasing Model for Rust. Proceedings of the ACM on Programming Languages.
 
 7. Rust RFC 0255: Object Safety. (2014). Retrieved from <https://github.com/rust-lang/rfcs/blob/master/text/0255-object-safety.md>
-
-"
-
----

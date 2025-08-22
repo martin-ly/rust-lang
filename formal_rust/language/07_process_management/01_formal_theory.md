@@ -115,7 +115,7 @@ struct ProcessCreation {
 \text{create\_process}(config) \rightarrow \text{Result}(\text{Process})
 ```
 
-### IPC Channel Model
+### IPC Channel Model-
 
 IPC channels implement **message passing protocols**:
 
@@ -415,7 +415,7 @@ for i in 0..4 {
 3. Operating system reclaims resources
 4. Therefore, cleanup is guaranteed
 
-### Process Isolation
+### Process Isolation-
 
 **Theorem**: Processes are isolated and cannot access each other's memory.
 
@@ -445,6 +445,172 @@ for i in 0..4 {
 ---
 
 *This document represents the formal mathematical foundation of Rust's process management and IPC system, providing rigorous definitions, proofs, and semantic models for understanding and implementing safe system-level programming in Rust.*
+
+---
+
+## Rust 1.89 对齐（进程管理与系统编程）
+
+### 异步进程管理
+
+```rust
+use tokio::process::{Command, Child};
+use std::process::Stdio;
+
+// 异步进程创建
+async fn async_process_management() -> Result<(), Box<dyn std::error::Error>> {
+    let mut child = Command::new("long_running_process")
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .spawn()?;
+    
+    // 异步等待进程完成
+    let output = child.wait_with_output().await?;
+    
+    println!("Process exited with: {}", output.status);
+    Ok(())
+}
+
+// 进程池管理
+async fn process_pool_example() {
+    let mut handles = Vec::new();
+    
+    for i in 0..4 {
+        let handle = tokio::spawn(async move {
+            let output = Command::new("worker")
+                .arg(i.to_string())
+                .output()
+                .await
+                .unwrap();
+            output
+        });
+        handles.push(handle);
+    }
+    
+    // 等待所有进程完成
+    for handle in handles {
+        let result = handle.await.unwrap();
+        println!("Worker completed: {:?}", result);
+    }
+}
+```
+
+### 安全进程间通信
+
+```rust
+use std::sync::mpsc;
+use std::process::{Command, Stdio};
+use serde::{Serialize, Deserialize};
+
+#[derive(Serialize, Deserialize)]
+struct Message {
+    id: u32,
+    data: String,
+}
+
+// 类型安全的 IPC
+fn safe_ipc_example() -> Result<(), Box<dyn std::error::Error>> {
+    let (tx, rx) = mpsc::channel::<Message>();
+    
+    // 启动子进程
+    let mut child = Command::new("child_process")
+        .stdin(Stdio::piped())
+        .stdout(Stdio::piped())
+        .spawn()?;
+    
+    // 发送消息
+    let message = Message {
+        id: 1,
+        data: "Hello from parent".to_string(),
+    };
+    
+    if let Some(stdin) = child.stdin.as_mut() {
+        serde_json::to_writer(stdin, &message)?;
+    }
+    
+    // 接收响应
+    if let Some(stdout) = child.stdout.as_mut() {
+        let response: Message = serde_json::from_reader(stdout)?;
+        println!("Received: {:?}", response);
+    }
+    
+    Ok(())
+}
+```
+
+### 资源管理与清理
+
+```rust
+use std::process::{Command, Child};
+use std::sync::Arc;
+use tokio::sync::Mutex;
+
+// 进程资源管理器
+struct ProcessManager {
+    processes: Arc<Mutex<Vec<Child>>>,
+}
+
+impl ProcessManager {
+    fn new() -> Self {
+        ProcessManager {
+            processes: Arc::new(Mutex::new(Vec::new())),
+        }
+    }
+    
+    async fn spawn_process(&self, cmd: &str) -> Result<(), Box<dyn std::error::Error>> {
+        let child = Command::new(cmd).spawn()?;
+        let mut processes = self.processes.lock().await;
+        processes.push(child);
+        Ok(())
+    }
+    
+    async fn cleanup_all(&self) {
+        let mut processes = self.processes.lock().await;
+        for child in processes.iter_mut() {
+            let _ = child.kill();
+        }
+        processes.clear();
+    }
+}
+
+// Drop trait 确保资源清理
+impl Drop for ProcessManager {
+    fn drop(&mut self) {
+        // 同步清理所有进程
+        let rt = tokio::runtime::Runtime::new().unwrap();
+        rt.block_on(async {
+            self.cleanup_all().await;
+        });
+    }
+}
+```
+
+---
+
+## 附：索引锚点与导航
+
+### 进程管理定义 {#进程管理定义}
+
+用于跨文档引用，统一指向本文进程管理基础定义与范围。
+
+### 进程间通信 {#进程间通信}
+
+用于跨文档引用，统一指向进程间通信机制（管道、套接字、共享内存、信号、消息队列）。
+
+### 进程生命周期 {#进程生命周期}
+
+用于跨文档引用，统一指向进程创建、运行、等待、终止的状态转换。
+
+### 资源管理 {#资源管理}
+
+用于跨文档引用，统一指向进程资源分配、使用、清理的完整生命周期。
+
+### 异步进程 {#异步进程}
+
+用于跨文档引用，统一指向异步进程管理与 tokio 集成。
+
+### 安全 IPC {#安全-ipc}
+
+用于跨文档引用，统一指向类型安全的进程间通信与序列化。
 "
 
 ---

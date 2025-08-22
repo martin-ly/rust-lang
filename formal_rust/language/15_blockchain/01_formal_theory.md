@@ -1214,6 +1214,339 @@ $$\text{Consistency} \land \text{Availability} \land \text{Partition\_tolerance}
 - **防护**: 价格预言机、滑点保护、流动性检查
 - **理论映射**: 闪电贷攻击 → 经济攻击
 
-"
+---
+
+## Rust 1.89 对齐（区块链系统与密码学）
+
+### 智能合约引擎
+
+```rust
+use std::collections::HashMap;
+use serde::{Serialize, Deserialize};
+use sha2::{Sha256, Digest};
+
+// 智能合约状态
+# [derive(Debug, Clone, Serialize, Deserialize)]
+struct ContractState {
+    balance: u64,
+    owner: String,
+    data: HashMap<String, String>,
+}
+
+// 智能合约 trait
+trait SmartContract {
+    fn execute(&mut self, transaction: Transaction) -> Result<TransactionResult, ContractError>;
+    fn get_state(&self) -> &ContractState;
+    fn get_address(&self) -> &str;
+}
+
+// 交易定义
+# [derive(Debug, Clone, Serialize, Deserialize)]
+struct Transaction {
+    from: String,
+    to: String,
+    value: u64,
+    data: Vec<u8>,
+    nonce: u64,
+    signature: Vec<u8>,
+}
+
+# [derive(Debug)]
+struct TransactionResult {
+    success: bool,
+    gas_used: u64,
+    return_data: Vec<u8>,
+    logs: Vec<Log>,
+}
+
+// 简单代币合约
+struct TokenContract {
+    address: String,
+    state: ContractState,
+}
+
+impl SmartContract for TokenContract {
+    fn execute(&mut self, transaction: Transaction) -> Result<TransactionResult, ContractError> {
+        // 验证签名
+        if !self.verify_signature(&transaction) {
+            return Err(ContractError::InvalidSignature);
+        }
+
+        // 执行转账
+        if transaction.value > self.state.balance {
+            return Err(ContractError::InsufficientBalance);
+        }
+
+        self.state.balance -= transaction.value;
+
+        Ok(TransactionResult {
+            success: true,
+            gas_used: 21000,
+            return_data: vec![],
+            logs: vec![],
+        })
+    }
+
+    fn get_state(&self) -> &ContractState {
+        &self.state
+    }
+
+    fn get_address(&self) -> &str {
+        &self.address
+    }
+}
+
+impl TokenContract {
+    fn verify_signature(&self, transaction: &Transaction) -> bool {
+        // 简化的签名验证
+        let message = format!("{}{}{}{}",
+            transaction.from,
+            transaction.to,
+            transaction.value,
+            transaction.nonce
+        );
+        let mut hasher = Sha256::new();
+        hasher.update(message.as_bytes());
+        let hash = hasher.finalize();
+
+        // 这里应该使用实际的签名验证逻辑
+        true
+    }
+}
+```
+
+### 共识机制实现
+
+```rust
+use tokio::sync::{mpsc, RwLock};
+use std::sync::Arc;
+use std::collections::HashMap;
+
+// 区块定义
+# [derive(Debug, Clone, Serialize, Deserialize)]
+struct Block {
+    header: BlockHeader,
+    transactions: Vec<Transaction>,
+    hash: String,
+}
+
+# [derive(Debug, Clone, Serialize, Deserialize)]
+struct BlockHeader {
+    previous_hash: String,
+    merkle_root: String,
+    timestamp: u64,
+    nonce: u64,
+    difficulty: u64,
+}
+
+// 共识节点
+struct ConsensusNode {
+    id: String,
+    peers: Arc<RwLock<HashMap<String, Peer>>>,
+    blockchain: Arc<RwLock<Vec<Block>>>,
+    pending_transactions: Arc<RwLock<Vec<Transaction>>>,
+}
+
+struct Peer {
+    id: String,
+    address: String,
+    last_seen: u64,
+}
+
+impl ConsensusNode {
+    async fn mine_block(&self) -> Result<Block, ConsensusError> {
+        let mut blockchain = self.blockchain.write().await;
+        let mut pending = self.pending_transactions.write().await;
+
+        let previous_block = blockchain.last().ok_or(ConsensusError::NoPreviousBlock)?;
+        let merkle_root = self.calculate_merkle_root(&pending);
+
+        let mut header = BlockHeader {
+            previous_hash: previous_block.hash.clone(),
+            merkle_root,
+            timestamp: std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_secs(),
+            nonce: 0,
+            difficulty: self.calculate_difficulty(&blockchain),
+        };
+
+        // 工作量证明
+        loop {
+            let block = Block {
+                header: header.clone(),
+                transactions: pending.clone(),
+                hash: self.calculate_hash(&header),
+            };
+
+            if self.verify_proof_of_work(&block) {
+                return Ok(block);
+            }
+
+            header.nonce += 1;
+        }
+    }
+
+    fn calculate_hash(&self, header: &BlockHeader) -> String {
+        let mut hasher = Sha256::new();
+        hasher.update(format!("{:?}", header).as_bytes());
+        format!("{:x}", hasher.finalize())
+    }
+
+    fn verify_proof_of_work(&self, block: &Block) -> bool {
+        let hash = &block.hash;
+        let difficulty = block.header.difficulty;
+
+        // 检查前导零的数量
+        let leading_zeros = hash.chars().take_while(|&c| c == '0').count();
+        leading_zeros >= difficulty as usize
+    }
+
+    fn calculate_merkle_root(&self, transactions: &[Transaction]) -> String {
+        if transactions.is_empty() {
+            return String::new();
+        }
+
+        let mut hashes: Vec<String> = transactions
+            .iter()
+            .map(|tx| {
+                let mut hasher = Sha256::new();
+                hasher.update(format!("{:?}", tx).as_bytes());
+                format!("{:x}", hasher.finalize())
+            })
+            .collect();
+
+        while hashes.len() > 1 {
+            let mut new_hashes = Vec::new();
+            for chunk in hashes.chunks(2) {
+                let mut hasher = Sha256::new();
+                hasher.update(chunk[0].as_bytes());
+                if chunk.len() > 1 {
+                    hasher.update(chunk[1].as_bytes());
+                }
+                new_hashes.push(format!("{:x}", hasher.finalize()));
+            }
+            hashes = new_hashes;
+        }
+
+        hashes[0].clone()
+    }
+}
+```
+
+### 密码学原语
+
+```rust
+use ed25519_dalek::{Keypair, PublicKey, SecretKey, Signature, Signer, Verifier};
+use rand::rngs::OsRng;
+use aes_gcm::{Aes256Gcm, Key, Nonce};
+use aes_gcm::aead::{Aead, NewAead};
+
+// 密钥管理
+struct KeyManager {
+    keypair: Keypair,
+}
+
+impl KeyManager {
+    fn new() -> Self {
+        let keypair = Keypair::generate(&mut OsRng);
+        KeyManager { keypair }
+    }
+
+    fn sign(&self, message: &[u8]) -> Signature {
+        self.keypair.sign(message)
+    }
+
+    fn verify(&self, message: &[u8], signature: &Signature) -> bool {
+        self.keypair.verify(message, signature).is_ok()
+    }
+
+    fn get_public_key(&self) -> PublicKey {
+        self.keypair.public
+    }
+}
+
+// 加密通信
+struct EncryptedChannel {
+    key: Key<Aes256Gcm>,
+}
+
+impl EncryptedChannel {
+    fn new(key: &[u8; 32]) -> Self {
+        let key = Key::from_slice(key);
+        EncryptedChannel { key: *key }
+    }
+
+    fn encrypt(&self, message: &[u8]) -> Result<Vec<u8>, EncryptionError> {
+        let cipher = Aes256Gcm::new(&self.key);
+        let nonce = Nonce::from_slice(b"unique nonce"); // 在实际应用中应该使用随机 nonce
+
+        cipher.encrypt(nonce, message)
+            .map_err(|_| EncryptionError::EncryptionFailed)
+    }
+
+    fn decrypt(&self, ciphertext: &[u8]) -> Result<Vec<u8>, EncryptionError> {
+        let cipher = Aes256Gcm::new(&self.key);
+        let nonce = Nonce::from_slice(b"unique nonce");
+
+        cipher.decrypt(nonce, ciphertext)
+            .map_err(|_| EncryptionError::DecryptionFailed)
+    }
+}
+
+// 零知识证明（简化实现）
+struct ZeroKnowledgeProof {
+    commitment: Vec<u8>,
+    challenge: Vec<u8>,
+    response: Vec<u8>,
+}
+
+impl ZeroKnowledgeProof {
+    fn prove(secret: &[u8], public: &[u8]) -> Self {
+        // 简化的零知识证明实现
+        let commitment = Sha256::digest(secret).to_vec();
+        let challenge = Sha256::digest(public).to_vec();
+        let response = Sha256::digest(&[&commitment, &challenge].concat()).to_vec();
+
+        ZeroKnowledgeProof {
+            commitment,
+            challenge,
+            response,
+        }
+    }
+
+    fn verify(&self, public: &[u8]) -> bool {
+        let expected_response = Sha256::digest(&[&self.commitment, &self.challenge].concat());
+        self.response == expected_response.to_vec()
+    }
+}
+```
 
 ---
+
+## 附：索引锚点与导航
+
+### 区块链系统定义 {#区块链系统定义}
+
+用于跨文档引用，统一指向本文区块链系统基础定义与范围。
+
+### 智能合约 {#智能合约}
+
+用于跨文档引用，统一指向智能合约引擎与执行环境。
+
+### 共识机制 {#共识机制}
+
+用于跨文档引用，统一指向共识算法与分布式一致性。
+
+### 密码学原语 {#密码学原语}
+
+用于跨文档引用，统一指向密码学算法与安全机制。
+
+### 网络协议 {#网络协议}
+
+用于跨文档引用，统一指向 P2P 网络与节点通信。
+
+### 安全机制 {#安全机制}
+
+用于跨文档引用，统一指向区块链安全与攻击防护。

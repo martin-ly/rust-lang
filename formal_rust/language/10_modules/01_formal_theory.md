@@ -178,6 +178,155 @@ pub use foo::bar;
 **下次评审**：2025-02-27  
 **维护者**：Rust 形式化理论团队
 
-"
+---
+
+## Rust 1.89 对齐（模块系统与可见性）
+
+### 模块可见性细化
+
+```rust
+// 细化的可见性控制
+mod outer {
+    // 仅在当前 crate 内可见
+    pub(crate) fn crate_visible() {}
+    
+    // 仅在父模块可见
+    pub(super) fn parent_visible() {}
+    
+    // 在指定路径可见
+    pub(in crate::specific::path) fn path_visible() {}
+    
+    // 完全公开
+    pub fn public() {}
+    
+    // 私有（默认）
+    fn private() {}
+}
+
+// 重导出与可见性
+mod api {
+    mod internal {
+        pub(crate) fn internal_function() {}
+    }
+    
+    // 重导出，改变可见性
+    pub use internal::internal_function;
+}
+```
+
+### 工作空间与依赖管理
+
+```rust
+// Cargo.toml - 工作空间配置
+[workspace]
+members = [
+    "core",
+    "api",
+    "cli",
+    "tests"
+]
+
+[workspace.dependencies]
+tokio = { version = "1.0", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+
+# core/Cargo.toml
+[dependencies]
+tokio.workspace = true
+
+# api/Cargo.toml
+[dependencies]
+core = { path = "../core" }
+serde.workspace = true
+```
+
+### 条件编译与特性
+
+```rust
+// 条件编译模块
+#[cfg(feature = "async")]
+mod async_impl {
+    use tokio::sync::Mutex;
+    
+    pub struct AsyncHandler {
+        state: Mutex<State>,
+    }
+    
+    impl AsyncHandler {
+        pub async fn handle(&self) -> Result<(), Error> {
+            // 异步实现
+            Ok(())
+        }
+    }
+}
+
+#[cfg(not(feature = "async"))]
+mod sync_impl {
+    use std::sync::Mutex;
+    
+    pub struct SyncHandler {
+        state: Mutex<State>,
+    }
+    
+    impl SyncHandler {
+        pub fn handle(&self) -> Result<(), Error> {
+            // 同步实现
+            Ok(())
+        }
+    }
+}
+
+// 统一接口
+#[cfg(feature = "async")]
+pub use async_impl::AsyncHandler as Handler;
+
+#[cfg(not(feature = "async"))]
+pub use sync_impl::SyncHandler as Handler;
+```
+
+### 模块重构与演化
+
+```rust
+// 模块版本兼容性
+#[deprecated(since = "2.0.0", note = "Use new_module::function instead")]
+pub mod old_module {
+    pub fn deprecated_function() {}
+}
+
+pub mod new_module {
+    pub fn function() {}
+}
+
+// 模块别名
+pub use new_module as current_module;
+```
+
+---
+
+## 附：索引锚点与导航
+
+### 模块系统定义 {#模块系统定义}
+
+用于跨文档引用，统一指向本文模块系统基础定义与范围。
+
+### 可见性规则 {#可见性规则}
+
+用于跨文档引用，统一指向模块可见性规则与访问控制。
+
+### 路径解析 {#路径解析}
+
+用于跨文档引用，统一指向模块路径解析与导入机制。
+
+### 工作空间 {#工作空间}
+
+用于跨文档引用，统一指向 Cargo 工作空间与依赖管理。
+
+### 条件编译 {#条件编译}
+
+用于跨文档引用，统一指向条件编译与特性标志。
+
+### 模块重构 {#模块重构}
+
+用于跨文档引用，统一指向模块重构与版本兼容性。
 
 ---

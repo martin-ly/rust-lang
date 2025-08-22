@@ -433,6 +433,188 @@ let sql = query!(select name from users);
 - 过程宏安全、可维护性、IDE调试体验仍是社区关注重点
 - 未来值值值可探索宏与AI驱动代码生成、自动化验证、跨平台集成等新方向
 
-"
+---
+
+## Rust 1.89 对齐（宏系统与元编程）
+
+### 过程宏改进
+
+```rust
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::{parse_macro_input, DeriveInput};
+
+// 改进的派生宏
+# [proc_macro_derive(ImprovedDebug)]
+pub fn improved_debug_derive(input: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(input as DeriveInput);
+    let name = input.ident;
+
+    // 生成改进的 Debug 实现
+    let expanded = quote! {
+        impl std::fmt::Debug for #name {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                f.debug_struct(stringify!(#name))
+                    .field("type_name", &std::any::type_name::<Self>())
+                    .finish()
+            }
+        }
+    };
+
+    TokenStream::from(expanded)
+}
+
+// 属性宏改进
+# [proc_macro_attribute]
+pub fn api_endpoint(attr: TokenStream, item: TokenStream) -> TokenStream {
+    let attr = parse_macro_input!(attr as syn::LitStr);
+    let item = parse_macro_input!(item as syn::ItemFn);
+    let fn_name = &item.sig.ident;
+
+    let expanded = quote! {
+        #item
+
+        // 自动生成路由注册
+        impl_api_route!(#fn_name, #attr);
+    };
+
+    TokenStream::from(expanded)
+}
+
+// 函数式宏改进
+# [proc_macro]
+pub fn sql_query(input: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(input as syn::LitStr);
+    let query = input.value();
+
+    // 编译时 SQL 验证
+    if !query.to_lowercase().contains("select") {
+        panic!("SQL query must contain SELECT");
+    }
+
+    let expanded = quote! {
+        {
+            let query = #query;
+            // 运行时查询执行
+            execute_query(query)
+        }
+    };
+
+    TokenStream::from(expanded)
+}
+```
+
+### 声明宏增强
+
+```rust
+// 增强的声明宏
+macro_rules! enhanced_vec {
+    // 基本用法
+    ($($x:expr),*) => {
+        {
+            let mut temp_vec = Vec::new();
+            $(temp_vec.push($x);)*
+            temp_vec
+        }
+    };
+
+    // 带类型注解
+    ($($x:expr),*; $t:ty) => {
+        {
+            let mut temp_vec: Vec<$t> = Vec::new();
+            $(temp_vec.push($x);)*
+            temp_vec
+        }
+    };
+
+    // 重复模式
+    ($x:expr; $n:expr) => {
+        {
+            let mut temp_vec = Vec::new();
+            for _ in 0..$n {
+                temp_vec.push($x);
+            }
+            temp_vec
+        }
+    };
+}
+
+// 使用示例
+fn macro_examples() {
+    let v1 = enhanced_vec![1, 2, 3];
+    let v2 = enhanced_vec![1, 2, 3; i32];
+    let v3 = enhanced_vec![42; 5];
+}
+```
+
+### 宏卫生性与调试
+
+```rust
+// 卫生性宏示例
+macro_rules! hygienic_macro {
+    ($x:expr) => {
+        {
+            let result = $x;
+            println!("Result: {:?}", result);
+            result
+        }
+    };
+}
+
+// 宏调试工具
+# [cfg(debug_assertions)]
+macro_rules! debug_macro {
+    ($($tt:tt)*) => {
+        {
+            println!("Macro expansion: {}", stringify!($($tt)*));
+            $($tt)*
+        }
+    };
+}
+
+# [cfg(not(debug_assertions))]
+macro_rules! debug_macro {
+    ($($tt:tt)*) => {
+        $($tt)*
+    };
+}
+
+// 使用示例
+fn hygienic_example() {
+    let x = 42;
+    let result = hygienic_macro!(x + 1); // 不会捕获外部变量 x
+
+    debug_macro! {
+        let y = 100;
+        println!("y = {}", y);
+    };
+}
+```
 
 ---
+
+## 附：索引锚点与导航
+
+### 宏系统定义 {#宏系统定义}
+
+用于跨文档引用，统一指向本文宏系统基础定义与范围。
+
+### 声明宏 {#声明宏}
+
+用于跨文档引用，统一指向声明宏的语法与展开规则。
+
+### 过程宏 {#过程宏}
+
+用于跨文档引用，统一指向过程宏的类型与实现。
+
+### 宏卫生性 {#宏卫生性}
+
+用于跨文档引用，统一指向宏卫生性规则与变量作用域。
+
+### 宏调试 {#宏调试}
+
+用于跨文档引用，统一指向宏调试工具与展开可视化。
+
+### 元编程 {#元编程}
+
+用于跨文档引用，统一指向元编程技术与代码生成。

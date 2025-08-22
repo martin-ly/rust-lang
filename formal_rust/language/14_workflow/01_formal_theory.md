@@ -863,6 +863,282 @@ $$\text{handle}(e, \text{handle}(e, s)) = \text{handle}(e, s)$$
 - 形式化：$\text{alert}(condition) = \text{detect}(condition) \land \text{notify}(recipients)$
 - 示例：阈值告警、异常告警
 
-"
+---
+
+## Rust 1.89 对齐（工作流系统与状态管理）
+
+### 异步工作流引擎
+
+```rust
+use tokio::sync::{mpsc, oneshot};
+use std::collections::HashMap;
+use serde::{Serialize, Deserialize};
+
+// 工作流状态
+#[derive(Debug, Clone, Serialize, Deserialize)]
+enum WorkflowState {
+    Pending,
+    Running,
+    Completed,
+    Failed(String),
+}
+
+// 工作流定义
+#[derive(Debug)]
+struct Workflow {
+    id: String,
+    state: WorkflowState,
+    steps: Vec<WorkflowStep>,
+    current_step: usize,
+}
+
+#[derive(Debug)]
+struct WorkflowStep {
+    name: String,
+    action: Box<dyn Fn() -> Result<String, String> + Send + Sync>,
+}
+
+// 异步工作流引擎
+struct AsyncWorkflowEngine {
+    workflows: HashMap<String, Workflow>,
+    tx: mpsc::Sender<WorkflowCommand>,
+}
+
+enum WorkflowCommand {
+    Start { id: String, response: oneshot::Sender<Result<(), String>> },
+    GetState { id: String, response: oneshot::Sender<Option<WorkflowState>> },
+    Stop { id: String, response: oneshot::Sender<Result<(), String>> },
+}
+
+impl AsyncWorkflowEngine {
+    fn new() -> Self {
+        let (tx, mut rx) = mpsc::channel(100);
+        let workflows = HashMap::new();
+        
+        // 启动工作流处理循环
+        tokio::spawn(async move {
+            while let Some(cmd) = rx.recv().await {
+                match cmd {
+                    WorkflowCommand::Start { id, response } => {
+                        // 启动工作流逻辑
+                        let _ = response.send(Ok(()));
+                    }
+                    WorkflowCommand::GetState { id, response } => {
+                        // 获取状态逻辑
+                        let _ = response.send(None);
+                    }
+                    WorkflowCommand::Stop { id, response } => {
+                        // 停止工作流逻辑
+                        let _ = response.send(Ok(()));
+                    }
+                }
+            }
+        });
+        
+        AsyncWorkflowEngine { workflows, tx }
+    }
+    
+    async fn start_workflow(&self, id: String) -> Result<(), String> {
+        let (response_tx, response_rx) = oneshot::channel();
+        self.tx.send(WorkflowCommand::Start { id, response: response_tx }).await
+            .map_err(|_| "Failed to send command".to_string())?;
+        response_rx.await.map_err(|_| "Failed to receive response".to_string())?
+    }
+}
+```
+
+### 状态机与持久化
+
+```rust
+use std::marker::PhantomData;
+use async_trait::async_trait;
+
+// 状态机 trait
+#[async_trait]
+trait StateMachine {
+    type State;
+    type Event;
+    type Error;
+    
+    async fn transition(&mut self, event: Self::Event) -> Result<Self::State, Self::Error>;
+    fn current_state(&self) -> Self::State;
+}
+
+// 持久化状态机
+struct PersistentStateMachine<S, E> {
+    state: S,
+    storage: Box<dyn StateStorage<S> + Send + Sync>,
+    _phantom: PhantomData<E>,
+}
+
+#[async_trait]
+trait StateStorage<S> {
+    async fn save(&self, id: &str, state: &S) -> Result<(), String>;
+    async fn load(&self, id: &str) -> Result<Option<S>, String>;
+}
+
+// 订单处理状态机
+#[derive(Debug, Clone, Serialize, Deserialize)]
+enum OrderState {
+    Created,
+    PaymentPending,
+    PaymentCompleted,
+    Shipped,
+    Delivered,
+    Cancelled,
+}
+
+#[derive(Debug)]
+enum OrderEvent {
+    PaymentReceived,
+    PaymentFailed,
+    ShipmentCreated,
+    Delivered,
+    Cancel,
+}
+
+struct OrderStateMachine {
+    state: OrderState,
+    order_id: String,
+    storage: Box<dyn StateStorage<OrderState> + Send + Sync>,
+}
+
+#[async_trait]
+impl StateMachine for OrderStateMachine {
+    type State = OrderState;
+    type Event = OrderEvent;
+    type Error = String;
+    
+    async fn transition(&mut self, event: OrderEvent) -> Result<OrderState, String> {
+        let new_state = match (&self.state, event) {
+            (OrderState::Created, OrderEvent::PaymentReceived) => OrderState::PaymentCompleted,
+            (OrderState::Created, OrderEvent::PaymentFailed) => OrderState::Cancelled,
+            (OrderState::PaymentCompleted, OrderEvent::ShipmentCreated) => OrderState::Shipped,
+            (OrderState::Shipped, OrderEvent::Delivered) => OrderState::Delivered,
+            (_, OrderEvent::Cancel) => OrderState::Cancelled,
+            _ => return Err("Invalid transition".to_string()),
+        };
+        
+        self.state = new_state.clone();
+        self.storage.save(&self.order_id, &self.state).await?;
+        Ok(new_state)
+    }
+    
+    fn current_state(&self) -> OrderState {
+        self.state.clone()
+    }
+}
+```
+
+### 工作流编排与监控
+
+```rust
+use tokio::time::{timeout, Duration};
+use std::sync::Arc;
+use tokio::sync::RwLock;
+
+// 工作流编排器
+struct WorkflowOrchestrator {
+    workflows: Arc<RwLock<HashMap<String, Workflow>>>,
+    metrics: Arc<RwLock<WorkflowMetrics>>,
+}
+
+#[derive(Debug, Default)]
+struct WorkflowMetrics {
+    total_executions: u64,
+    successful_executions: u64,
+    failed_executions: u64,
+    average_duration: Duration,
+}
+
+impl WorkflowOrchestrator {
+    async fn execute_workflow(&self, workflow_id: String) -> Result<(), String> {
+        let start_time = std::time::Instant::now();
+        
+        // 执行工作流
+        let result = self.run_workflow(&workflow_id).await;
+        
+        // 更新指标
+        let duration = start_time.elapsed();
+        let mut metrics = self.metrics.write().await;
+        metrics.total_executions += 1;
+        metrics.average_duration = Duration::from_nanos(
+            (metrics.average_duration.as_nanos() + duration.as_nanos()) / 2
+        );
+        
+        match result {
+            Ok(_) => {
+                metrics.successful_executions += 1;
+                Ok(())
+            }
+            Err(_) => {
+                metrics.failed_executions += 1;
+                Err("Workflow execution failed".to_string())
+            }
+        }
+    }
+    
+    async fn run_workflow(&self, workflow_id: &str) -> Result<(), String> {
+        // 模拟工作流执行
+        tokio::time::sleep(Duration::from_millis(100)).await;
+        Ok(())
+    }
+    
+    async fn get_metrics(&self) -> WorkflowMetrics {
+        self.metrics.read().await.clone()
+    }
+}
+
+// 监控系统
+struct WorkflowMonitor {
+    orchestrator: Arc<WorkflowOrchestrator>,
+}
+
+impl WorkflowMonitor {
+    async fn monitor_workflows(&self) {
+        loop {
+            let metrics = self.orchestrator.get_metrics().await;
+            println!("Workflow Metrics: {:?}", metrics);
+            
+            // 检查告警条件
+            if metrics.failed_executions > 10 {
+                self.send_alert("High failure rate detected").await;
+            }
+            
+            tokio::time::sleep(Duration::from_secs(30)).await;
+        }
+    }
+    
+    async fn send_alert(&self, message: &str) {
+        println!("ALERT: {}", message);
+    }
+}
+```
 
 ---
+
+## 附：索引锚点与导航
+
+### 工作流系统定义 {#工作流系统定义}
+
+用于跨文档引用，统一指向本文工作流系统基础定义与范围。
+
+### 状态机 {#状态机}
+
+用于跨文档引用，统一指向状态机理论与状态转换。
+
+### 工作流编排 {#工作流编排}
+
+用于跨文档引用，统一指向工作流编排与执行引擎。
+
+### 状态持久化 {#状态持久化}
+
+用于跨文档引用，统一指向状态持久化与恢复机制。
+
+### 工作流监控 {#工作流监控}
+
+用于跨文档引用，统一指向工作流监控与指标收集。
+
+### 错误处理 {#错误处理}
+
+用于跨文档引用，统一指向工作流错误处理与恢复策略。
