@@ -170,10 +170,18 @@
 - language/23_security_verification/performance_optimization/analysis_optimization.md：分析优化（已补充 Rust 1.89 静态分析优化、动态分析优化、内存优化、并发优化）。
 - language/23_security_verification/performance_optimization/tool_optimization.md：工具优化（已补充 Rust 1.89 工具性能优化、缓存策略、并行处理、资源管理）。
 
-#### Batch-23（计划中）
+#### Batch-23（已完成）
 
-- language/23_security_verification/advanced_topics/：高级主题
-- language/23_security_verification/future_directions/：未来方向
+- language/23_security_verification/advanced_topics/machine_learning_security.md：机器学习安全技术（已补充 Rust 1.89 对抗性攻击防护、智能安全分析、模型保护、增强机器学习安全）。
+- language/23_security_verification/advanced_topics/quantum_security.md：量子安全技术（已补充 Rust 1.89 量子密码学、后量子密码、量子安全协议、量子威胁防护）。
+- language/23_security_verification/advanced_topics/edge_computing_security.md：边缘计算安全（已补充 Rust 1.89 边缘安全架构、分布式安全、边缘设备保护、边缘网络安全）。
+- language/23_security_verification/future_directions/emerging_threats.md：新兴威胁（已补充 Rust 1.89 威胁演化、新兴攻击向量、威胁情报、预测性安全）。
+- language/23_security_verification/future_directions/security_evolution.md：安全演进（已补充 Rust 1.89 安全范式演进、自适应安全、智能安全、未来安全架构）。
+
+#### Batch-24（计划中）
+
+- language/23_security_verification/comprehensive_integration/：综合集成
+- language/23_security_verification/ecosystem_development/：生态发展
 
 - 🔄 架构设计形式化
 - 🔄 开发流程形式化
