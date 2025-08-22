@@ -129,7 +129,13 @@
 - language/03_control_flow/02_function_formal_semantics.md：函数形式化语义（已补充 Rust 1.89 函数定义语义、调用语义、类型规则、生命周期管理、异步函数、函数式编程特性）。
 - language/03_control_flow/06_control_flow_tools.md：控制流工具（已补充 Rust 1.89 静态分析工具、动态分析工具、可视化工具、调试工具、编译器工具改进）。
 
-#### Batch-17（计划中）
+#### Batch-17（已完成）
+
+- language/19_advanced_language_features/03_advanced_features_patterns.md：高级语言特征模式（已补充 Rust 1.89 特征模式定义、基础特征模式、高级特征模式、组合特征模式、模式应用案例）。
+- language/19_advanced_language_features/02_advanced_features_implementation.md：高级语言特征实现（已补充 Rust 1.89 实现机制、编译器优化、运行时性能、内存管理、性能监控分析）。
+- language/20_theoretical_perspectives/03_theoretical_patterns.md：理论模式（已补充 Rust 1.89 理论模式定义、结构模式、行为模式、并发模式、安全模式、性能模式）。
+
+#### Batch-18（计划中）
 
 - language/19_security：安全系统与密码学
 - language/20_verification：形式化验证与证明
