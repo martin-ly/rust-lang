@@ -20,22 +20,59 @@
 
 ## 目录 {#table-of-contents}
 
-1. [模块概述](#1-module-overview)
-2. [目录结构体体体](#2-directory-structure)
-3. [模块关系](#3-module-relationships)
-4. [核心概念映射](#4-core-concept-mapping)
-5. [理论框架](#5-theoretical-framework)
-6. [数学符号系统](#6-mathematical-notation)
-7. [实践指导](#7-practical-guidance)
-8. [学习路径](#8-learning-paths)
-9. [质量指标](#9-quality-indicators)
-10. [相关资源](#10-related-resources)
+- [Module 23: Rust 安全验证 {#module-23-security-verification}](#module-23-rust-安全验证-module-23-security-verification)
+  - [元数据 {#metadata}](#元数据-metadata)
+  - [目录 {#table-of-contents}](#目录-table-of-contents)
+  - [1. 模块概述 {#1-module-overview}](#1-模块概述-1-module-overview)
+    - [1.1 模块定位](#11-模块定位)
+    - [1.2 核心价值](#12-核心价值)
+    - [1.3 安全验证层次](#13-安全验证层次)
+  - [2. 目录结构体体体 {#2-directory-structure}](#2-目录结构体体体-2-directory-structure)
+    - [2.1 三层架构设计](#21-三层架构设计)
+    - [2.2 文档组织原则](#22-文档组织原则)
+  - [3. 模块关系 {#3-module-relationships}](#3-模块关系-3-module-relationships)
+    - [3.1 输入依赖](#31-输入依赖)
+    - [3.2 输出影响](#32-输出影响)
+    - [3.3 横向关联](#33-横向关联)
+  - [4. 核心概念映射 {#4-core-concept-mapping}](#4-核心概念映射-4-core-concept-mapping)
+    - [4.1 安全验证技术栈](#41-安全验证技术栈)
+    - [4.2 安全威胁模型](#42-安全威胁模型)
+  - [5. 理论框架 {#5-theoretical-framework}](#5-理论框架-5-theoretical-framework)
+    - [5.1 类型安全理论](#51-类型安全理论)
+    - [5.2 内存安全理论](#52-内存安全理论)
+    - [5.3 并发安全理论](#53-并发安全理论)
+    - [5.4 信息流安全理论](#54-信息流安全理论)
+  - [6. 数学符号系统 {#6-mathematical-notation}](#6-数学符号系统-6-mathematical-notation)
+    - [6.1 基础符号](#61-基础符号)
+    - [6.2 安全属性符号](#62-安全属性符号)
+    - [6.3 验证逻辑符号](#63-验证逻辑符号)
+  - [7. 实践指导 {#7-practical-guidance}](#7-实践指导-7-practical-guidance)
+    - [7.1 静态安全分析实践](#71-静态安全分析实践)
+    - [7.2 内存安全验证](#72-内存安全验证)
+    - [7.3 并发安全验证](#73-并发安全验证)
+    - [7.4 形式化验证实践](#74-形式化验证实践)
+  - [8. 学习路径 {#8-learning-paths}](#8-学习路径-8-learning-paths)
+    - [8.1 基础路径 (Basic Path)](#81-基础路径-basic-path)
+    - [8.2 标准路径 (Standard Path)](#82-标准路径-standard-path)
+    - [8.3 专家路径 (Expert Path)](#83-专家路径-expert-path)
+  - [9. 质量指标 {#9-quality-indicators}](#9-质量指标-9-quality-indicators)
+    - [9.1 文档完备性](#91-文档完备性)
+    - [9.2 理论深度](#92-理论深度)
+    - [9.3 实践价值](#93-实践价值)
+  - [10. 相关资源 {#10-related-resources}](#10-相关资源-10-related-resources)
+    - [10.1 依赖模块](#101-依赖模块)
+    - [10.2 验证工具](#102-验证工具)
+    - [10.3 理论资源](#103-理论资源)
+  - [批判性分析](#批判性分析)
+  - [典型案例](#典型案例)
 
 ## 1. 模块概述 {#1-module-overview}
 
 ### 1.1 模块定位
 
-Rust安全验证模块是研究和实践软件安全保证的核心模块，专注于利用形式化方法验证Rust程序的安全。本模块建立在Rust语言的内存安全、类型安全和并发安全基础之上，通过数学严格的验证方法，为关键系统和安全敏感应用提供可证明的安全保证。模块涵盖静态分析、动态验证、形式化建模、定理证明等多种验证技术，为构建高可信度的Rust系统提供完整的理论基础和实践指导。
+Rust安全验证模块是研究和实践软件安全保证的核心模块，专注于利用形式化方法验证Rust程序的安全。
+本模块建立在Rust语言的内存安全、类型安全和并发安全基础之上，通过数学严格的验证方法，为关键系统和安全敏感应用提供可证明的安全保证。
+模块涵盖静态分析、动态验证、形式化建模、定理证明等多种验证技术，为构建高可信度的Rust系统提供完整的理论基础和实践指导。
 
 ### 1.2 核心价值
 
