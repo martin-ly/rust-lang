@@ -1151,7 +1151,3 @@ $$\forall s_1, s_2 \in S: \text{safe}(s_1) \land \text{safe}(s_2) \rightarrow \t
 - **形式化**: $\text{SecurityResponse} = \text{Practices}(Detection, Response, Recovery)$
 - **示例**: 安全事件检测、安全事件响应、安全事件恢复
 - **理论映射**: 安全响应实践 → 安全响应
-
-"
-
----

@@ -1129,7 +1129,3 @@ fn verify_atomic_counter() {
 - 使用 Rust 结合 Prusti、Kani 等工具进行形式化验证。
 - Rust 在区块链、IoT 等领域实现高安全协议和系统。
 - 通过类型系统和 borrow checker 静态消除常见安全漏洞。
-
-"
-
----
