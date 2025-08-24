@@ -674,7 +674,3 @@ fn assess_learning_progress(
 7. Meyer, B. (2003). The misconceptions of programming. IEEE Computer, 36(5).
 8. Kölling, M. (2015). Lessons from the design of three educational programming environments. International Journal of People-Oriented Programming.
 9. Nystrom, B. (2014). Crafting Interpreters (for understanding programming language concepts).
-
-"
-
----

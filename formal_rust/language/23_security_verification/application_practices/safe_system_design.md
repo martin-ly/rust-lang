@@ -15,7 +15,3 @@ struct FileAccess { can_read: bool, can_write: bool }
 
 - 安全设计提升系统防护，但复杂性与动态权限管理需关注
 - 未来值值值可探索自动化安全架构生成与权限分析
-
-"
-
----

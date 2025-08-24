@@ -12,9 +12,10 @@
     - [2.4 控制流](#24-控制流)
   - [3. 高级语言特征](#3-高级语言特征)
     - [3.1 泛型系统](#31-泛型系统)
-    - [3.2 并发编程](#32-并发编程)
-    - [3.3 异步编程](#33-异步编程)
-    - [3.4 宏系统](#34-宏系统)
+    - [3.2 特质系统](#32-特质系统)
+    - [3.3 并发编程](#33-并发编程)
+    - [3.4 异步编程](#34-异步编程)
+    - [3.5 宏系统](#35-宏系统)
   - [4. 系统编程与资源管理](#4-系统编程与资源管理)
     - [4.1 进程管理](#41-进程管理)
     - [4.2 内存管理](#42-内存管理)
@@ -43,6 +44,7 @@
     - [7.7 教学与学习](#77-教学与学习)
     - [7.8 工具链生态](#78-工具链生态)
     - [7.9 生态系统架构](#79-生态系统架构)
+    - [7.10 版本特性分析](#710-版本特性分析)
   - [8. 形式化验证](#8-形式化验证)
     - [8.1 理论实践](#81-理论实践)
   - [9. 质量保证](#9-质量保证)
@@ -56,6 +58,11 @@
     - [使用指南](#使用指南)
     - [维护状态](#维护状态)
   - [11. 执行状态](#11-执行状态)
+  - [递归迭代补充：Rust语言形式化论证与证明体系总览](#递归迭代补充rust语言形式化论证与证明体系总览)
+    - [1. 理论体系与新趋势](#1-理论体系与新趋势)
+    - [2. 证明方法递归细化](#2-证明方法递归细化)
+    - [3. 工程应用与生态联系](#3-工程应用与生态联系)
+    - [4. 未来值值值挑战与研究展望](#4-未来值值值挑战与研究展望)
 
 ## 1. 概述
 
@@ -70,13 +77,14 @@
 ### 2.2 所有权与借用系统
 
 - [01_ownership_borrowing/](./01_ownership_borrowing/) - 所有权与借用机制
-- [02_ownership_borrowing/](./02_ownership_borrowing/) - 所有权系统深度分析
+- [02_ownership_borrowing/](./02_ownership_borrowing/) - 所有权系统深度分析 (计划中)
 
 ### 2.3 类型系统
 
 - [02_type_system/](./02_type_system/) - 类型系统基础
 - [03_type_system_core/](./03_type_system_core/) - 类型系统核心理论
-- [04_advanced_type_features/](./04_advanced_type_features/) - 高级类型特征
+- [04_advanced_type_system/](./04_advanced_type_system/) - 高级类型系统
+- [28_advanced_type_features/](./28_advanced_type_features/) - 高级类型特征
 - [22_formal_type_system_proofs.md](./02_type_system/22_formal_type_system_proofs.md) - 类型系统形式化证明（完整版）
 
 ### 2.4 控制流
@@ -87,17 +95,22 @@
 
 ### 3.1 泛型系统
 
-- [04_generics/](./04_generics/) - 泛型编程
+- [04_generics/](./04_generics/) - 泛型编程 (计划中)
 
-### 3.2 并发编程
+### 3.2 特质系统
+
+- [12_traits/](./12_traits/) - 特质系统
+
+### 3.3 并发编程
 
 - [05_concurrency/](./05_concurrency/) - 并发编程模型
 
-### 3.3 异步编程
+### 3.4 异步编程
 
-- [06_async_await/](./06_async_await/) - 异步编程
+- [06_async_await/](./06_async_await/) - 异步编程基础
+- [async_programming_paradigm/](./async_programming_paradigm/) - 异步编程范式理论体系（25个专题文档）
 
-### 3.4 宏系统
+### 3.5 宏系统
 
 - [07_macro_system/](./07_macro_system/) - 宏系统
 
@@ -133,7 +146,7 @@
 
 ### 6.1 网络编程
 
-- [10_networks/](./10_networks/) - 网络编程
+- [10_networks/](./10_networks/) - 网络编程 (计划中)
 
 ### 6.2 框架开发
 
@@ -205,6 +218,10 @@
 
 - [27_ecosystem_architecture/](./27_ecosystem_architecture/) - 生态系统架构
 
+### 7.10 版本特性分析
+
+- [20_version_features_analysis/](./20_version_features_analysis/) - Rust版本特性分析（1.73-1.89，20个版本专题）
+
 ## 8. 形式化验证
 
 ### 8.1 理论实践
@@ -227,8 +244,8 @@
 ### 9.3 质量检查指南
 
 - [quality_check_guide.md](./quality_check_guide.md) - 质量检查指南
-- [quality_check_progress.md](./quality_check_progress.md) - 质量检查进度
 - [markdown_format_checker.md](./markdown_format_checker.md) - Markdown格式检查器
+- [quality_check_progress.md](./quality_check_progress.md) - 质量检查进度 (计划中)
 
 ## 10. 项目完成状态
 
@@ -278,14 +295,14 @@
 ## 11. 执行状态
 
 - [EXECUTION_STATUS_V57.md](./EXECUTION_STATUS_V57.md) - 执行状态 V57
-- [EXECUTION_STATUS_V56.md](./EXECUTION_STATUS_V56.md) - 执行状态 V56
-- [EXECUTION_STATUS_V48.md](./EXECUTION_STATUS_V48.md) - 执行状态 V48
-- [PROGRESS_REPORT_V48.md](./PROGRESS_REPORT_V48.md) - 进度报告 V48
-- [BATCH_EXECUTION_PLAN_V52.md](./BATCH_EXECUTION_PLAN_V52.md) - 批量执行计划 V52
-- [BATCH_EXECUTION_PLAN_V51.md](./BATCH_EXECUTION_PLAN_V51.md) - 批量执行计划 V51
-- [BATCH_EXECUTION_PLAN_V43.md](./BATCH_EXECUTION_PLAN_V43.md) - 批量执行计划 V43
-- [content_restructuring_plan_v1.md](./content_restructuring_plan_v1.md) - 内容重构计划 V1
-- [content_analysis_report_v1.md](./content_analysis_report_v1.md) - 内容分析报告 V1
+- [EXECUTION_STATUS_V56.md](./ARCHIVE/versions/EXECUTION_STATUS_V56.md) - 执行状态 V56 (归档)
+- [EXECUTION_STATUS_V48.md](./ARCHIVE/versions/EXECUTION_STATUS_V48.md) - 执行状态 V48 (归档)
+- [PROGRESS_REPORT_V48.md](./ARCHIVE/versions/PROGRESS_REPORT_V48.md) - 进度报告 V48 (归档)
+- [BATCH_EXECUTION_PLAN_V52.md](./ARCHIVE/versions/BATCH_EXECUTION_PLAN_V52.md) - 批量执行计划 V52 (归档)
+- [BATCH_EXECUTION_PLAN_V51.md](./ARCHIVE/versions/BATCH_EXECUTION_PLAN_V51.md) - 批量执行计划 V51 (归档)
+- [BATCH_EXECUTION_PLAN_V43.md](./ARCHIVE/versions/BATCH_EXECUTION_PLAN_V43.md) - 批量执行计划 V43 (归档)
+- [content_restructuring_plan_v1.md](./ARCHIVE/versions/content_restructuring_plan_v1.md) - 内容重构计划 V1 (归档)
+- [content_analysis_report_v1.md](./ARCHIVE/versions/content_analysis_report_v1.md) - 内容分析报告 V1 (归档)
 - [main_comprehensive_index.md](./main_comprehensive_index.md) - 主综合索引
 
 ## 递归迭代补充：Rust语言形式化论证与证明体系总览

@@ -484,7 +484,3 @@ void cppConcurrency() {
 6. Marlow, S. (2010). Haskell 2010 Language Report.
 7. Donovan, A. A. A., & Kernighan, B. W. (2015). The Go Programming Language. Addison-Wesley.
 8. Lattner, C. (2014). The Swift Programming Language. Apple Inc.
-
-"
-
----

@@ -555,7 +555,3 @@ Win  macOS Linux  BSD  WASM ...
 7. Klabnik, S., & Nichols, C. (2018). The Rust Programming Language. No Starch Press.
 8. Rust RFC Book. <https://rust-lang.github.io/rfcs/>
 9. Rust Language Server Protocol. <https://github.com/rust-analyzer/rust-analyzer>
-
-"
-
----

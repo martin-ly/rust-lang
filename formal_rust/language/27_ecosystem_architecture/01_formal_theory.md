@@ -403,7 +403,3 @@ struct EmbeddedEcosystem {
 8. Rogers, E. M. (2003). Diffusion of Innovations.
 9. Strogatz, S. H. (2001). Exploring complex networks.
 10. Rust Foundation. (2025). Rust Ecosystem Report 2025.
-
-"
-
----

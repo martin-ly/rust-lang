@@ -489,7 +489,3 @@ struct VulnerabilityPropagationAnalysis {
 8. Tokio Team. (2024). "Tokio Ecosystem Overview."
 9. Actix Team. (2023). "Actix Web Framework Architecture."
 10. Embassy Team. (2024). "Embassy: Async Embedded Rust."
-
-"
-
----
