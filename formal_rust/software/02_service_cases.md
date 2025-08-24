@@ -32,6 +32,3 @@
 
 - [软件工程方法论与最佳实践](./01_methodology_best_practices.md)
 - [架构设计原理与模式](../framework/01_architecture_principles.md)
-"
-
----

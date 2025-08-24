@@ -32,7 +32,7 @@ graph TB
         Cleanup[栈清理]
     end
     
-    subgraph "栈帧结构体体体"
+    subgraph "栈帧结构体"
         RetAddr[返回地址]
         SavedRegs[保存的寄存器]
         LocalVars[局部变量]
@@ -209,7 +209,7 @@ fn parameter_passing_benchmark() {
 // 大对象传递语义
 use std::mem::size_of;
 
-// 大型结构体体体体
+// 大型结构体体
 #[derive(Clone)]
 struct LargeStruct {
     data: [u8; 8192],  // 8KB数据

@@ -12,10 +12,10 @@
 
 ## 1.1.13.1 生命周期理论基础
 
-### 1.1.13.1.1 生命周期代数结构体体体
+### 1.1.13.1.1 生命周期代数结构体
 
 **定义 1.1.13.1** (生命周期代数)
-生命周期系统构成一个偏序代数结构体体体：
+生命周期系统构成一个偏序代数结构体：
 $$\mathcal{L} = \langle \text{Lifetime}, \sqsubseteq, \sqcap, \sqcup, \top, \bot \rangle$$
 
 其中：
@@ -46,7 +46,7 @@ $$\text{BorrowState} = \langle \text{Loans}, \text{Moves}, \text{Drops}, \text{C
 // 借用检查器的理论建模
 use std::collections::{HashMap, HashSet};
 
-// 借用检查器的核心数据结构体体体
+// 借用检查器的核心数据结构体
 #[derive(Debug, Clone)]
 pub struct BorrowChecker {
     // 活跃贷款跟踪
@@ -256,7 +256,7 @@ impl BorrowChecker {
     
     // 获取place的生命周期
     fn get_place_lifetime(&self, place: &Place) -> LifetimeRegion {
-        // 简化实现：根据place的结构体体体推断生命周期
+        // 简化实现：根据place的结构体推断生命周期
         LifetimeRegion {
             id: RegionId(0),
             kind: RegionKind::ReVar(0),
@@ -697,7 +697,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ### 1.1.13.4.1 分割借用语义
 
 **定义 1.1.13.5** (分割借用)
-对于结构体体体体 $S = \{f_1: T_1, f_2: T_2, \ldots\}$，分割借用允许：
+对于结构体体 $S = \{f_1: T_1, f_2: T_2, \ldots\}$，分割借用允许：
 $$\frac{\text{disjoint}(f_i, f_j)}{\text{can\_borrow\_simultaneously}(\&s.f_i, \&\text{mut } s.f_j)}$$
 
 ```rust
@@ -837,7 +837,7 @@ impl<'a, T> InvariantMut<'a, T> {
 
 // 型变性的组合规则
 trait VarianceRules {
-    // 结构体体体体字段的型变性
+    // 结构体体字段的型变性
     type CovariantField<'a>: 'a;     // 协变
     type ContravariantField<'a>: 'a; // 逆变
     type InvariantField<'a>: 'a;     // 不变

@@ -34,17 +34,17 @@ $$\forall p \in \text{Pointer}(T). \text{address}(p) \equiv 0 \pmod{\text{align}
 **对齐规则**：
 
 - 基本类型：$\text{align}(T) = \text{size}(T)$，当 $\text{size}(T) \leq 8$
-- 结构体体体体：$\text{align}(\text{struct}) = \max_{f \in \text{fields}} \text{align}(f)$
+- 结构体：$\text{align}(\text{struct}) = \max_{f \in \text{fields}} \text{align}(f)$
 - 数组：$\text{align}([T; n]) = \text{align}(T)$
 
 ---
 
-## 1.1.15.2 结构体体体体布局算法
+## 1.1.15.2 结构体布局算法
 
 ### 1.1.15.2.1 默认Rust布局
 
-**定义 1.1.15.2** (Rust结构体体体体布局)
-对于结构体体体体 $S = \{f_1: T_1, f_2: T_2, \ldots, f_n: T_n\}$：
+**定义 1.1.15.2** (Rust结构体布局)
+对于结构体 $S = \{f_1: T_1, f_2: T_2, \ldots, f_n: T_n\}$：
 
 1. **重排序优化**：编译器可以重排字段以减少填充
 2. **对齐插入**：在字段间插入填充字节
@@ -76,7 +76,7 @@ function layout_struct(fields):
 `#[repr(C)]` 确保：
 
 1. 字段按声明顺序布局
-2. 与C结构体体体体内存布局兼容
+2. 与C结构体内存布局兼容
 3. 禁用字段重排序优化
 
 **C布局保证**：
@@ -189,7 +189,7 @@ $$\text{layout}_{\text{Rust}}(T) = \text{layout}_{\text{C}}(T) \land \text{calli
 
 - 基本数字类型：`i8`, `i16`, `i32`, `i64`, `f32`, `f64`
 - 指针类型：`*const T`, `*mut T`
-- `#[repr(C)]` 结构体体体体和枚举
+- `#[repr(C)]` 结构体和枚举
 
 ### 1.1.15.5.2 外部函数接口
 
@@ -250,7 +250,7 @@ ZST(Zero-Sized Types)的内存优化和语义保持证明。
 $$\text{semantics}(\text{optimized}(\text{ZST})) = \text{semantics}(\text{ZST})$$
 
 **理论创新32**: **对齐传播算法**
-结构体体体体字段对齐的最优化传播算法和正确性证明。
+结构体字段对齐的最优化传播算法和正确性证明。
 $$\text{optimal\_alignment}(S) = \text{fixpoint}(\text{propagate\_alignment}(S))$$
 
 **理论创新33**: **跨语言ABI安全**
