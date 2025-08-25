@@ -3,7 +3,6 @@
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
 use std::thread;
-use std::time::Duration;
 
 /// 原子计数器
 pub struct AtomicCounter {
@@ -34,7 +33,7 @@ pub struct SimpleThreadPool {
 
 impl SimpleThreadPool {
     pub fn new(size: usize) -> Self {
-        let (sender, receiver) = std::sync::mpsc::channel();
+        let (sender, receiver) = std::sync::mpsc::channel::<Box<dyn FnOnce() + Send + 'static>>();
         let receiver = Arc::new(Mutex::new(receiver));
 
         let mut workers = Vec::with_capacity(size);
@@ -116,7 +115,7 @@ mod tests {
             });
         }
         
-        thread::sleep(Duration::from_millis(100));
+        thread::sleep(std::time::Duration::from_millis(100));
         assert_eq!(counter.get(), 10);
     }
 
