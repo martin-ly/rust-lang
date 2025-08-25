@@ -6,6 +6,12 @@ resolver = "3"
 
 [dependencies]
 
+# 并行与并发
+rayon = "1.10"
+
+# 随机数
+rand = "0.8"
+
 
 
 [lib]
