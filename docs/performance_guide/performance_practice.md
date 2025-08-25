@@ -11,7 +11,13 @@
 - 内存池/对象池思路与适用边界
 - 零拷贝与切片视图（`&[T]`、`Bytes`理念）
 
-示例参见：`c08_algorithms::performance_examples::memory` {#示例_内存}
+示例参见：`c08_algorithms::performance_examples::memory_optimization` {#示例_内存}
+
+**具体实现**:
+
+- 对象池: [`ObjectPool<T>`](crates/c08_algorithms/src/performance_examples/memory_optimization.rs#ObjectPool)
+- 零拷贝缓冲区: [`ZeroCopyBuffer`](crates/c08_algorithms/src/performance_examples/memory_optimization.rs#ZeroCopyBuffer)
+- 基准测试: [`benchmarks::benchmark_performance_optimizations`](crates/c08_algorithms/src/lib.rs#benchmark_performance_optimizations)
 
 ---
 
@@ -21,7 +27,13 @@
 - 无锁与低争用结构（降低临界区与锁粒度）
 - 线程池与工作窃取（Rayon 并行迭代）
 
-示例参见：`c08_algorithms::performance_examples::concurrency` {#示例_并发}
+示例参见：`c08_algorithms::performance_examples::concurrency_optimization` {#示例_并发}
+
+**具体实现**:
+
+- 原子计数器: [`AtomicCounter`](crates/c08_algorithms/src/performance_examples/concurrency_optimization.rs#AtomicCounter)
+- 简单线程池: [`SimpleThreadPool`](crates/c08_algorithms/src/performance_examples/concurrency_optimization.rs#SimpleThreadPool)
+- 无锁栈: [`LockFreeStack<T>`](crates/c08_algorithms/src/performance_examples/concurrency_optimization.rs#LockFreeStack)
 
 ---
 
@@ -31,7 +43,13 @@
 - 常量泛型与尺寸在编译期确定
 - 内联与去抽象（零开销抽象）
 
-示例参见：`c08_algorithms::performance_examples::compile_time` {#示例_编译时}
+示例参见：`c08_algorithms::performance_examples::compile_time_optimization` {#示例_编译时}
+
+**具体实现**:
+
+- 编译时常量函数: [`fibonacci`](crates/c08_algorithms/src/performance_examples/compile_time_optimization.rs#fibonacci)
+- 编译时查找表: [`FIBONACCI_TABLE`](crates/c08_algorithms/src/performance_examples/compile_time_optimization.rs#FIBONACCI_TABLE)
+- 泛型优化向量: [`OptimizedVector<T, N>`](crates/c08_algorithms/src/performance_examples/compile_time_optimization.rs#OptimizedVector)
 
 ---
 
@@ -41,7 +59,14 @@
 - 粗粒度计时与微基准注意事项
 - 火焰图方法论（工具选择留白）
 
-示例入口：`c08_algorithms::benchmarks::*` {#示例_运行时}
+示例入口：`c08_algorithms::performance_examples::runtime_profiling` {#示例_运行时}
+
+**具体实现**:
+
+- 简单性能分析器: [`SimpleProfiler`](crates/c08_algorithms/src/performance_examples/runtime_profiling.rs#SimpleProfiler)
+- 内存监控器: [`MemoryMonitor`](crates/c08_algorithms/src/performance_examples/runtime_profiling.rs#MemoryMonitor)
+- 指标收集器: [`MetricsCollector`](crates/c08_algorithms/src/performance_examples/runtime_profiling.rs#MetricsCollector)
+- 基准测试: [`benchmarks::benchmark_performance_optimizations`](crates/c08_algorithms/src/lib.rs#benchmark_performance_optimizations)
 
 ---
 
