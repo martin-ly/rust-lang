@@ -34,7 +34,7 @@
 
 **形式化定义**：
 
-```
+```text
 Async<T> ::= Future<Output = T>
 async fn f() -> T ::= impl Future<Output = T>
 ```
@@ -211,7 +211,7 @@ impl<T, U> AsyncPipeline<T, U> {
 
 **形式化定义**：
 
-```
+```text
 ConcurrentSafe<T> ::= { data: T, lock: Mutex<T> }
 LockFree<T> ::= { data: T, atomic: AtomicPtr<T> }
 ```
@@ -363,7 +363,7 @@ impl<T> AtomicRc<T> {
 
 **形式化定义**：
 
-```
+```text
 LockFree<T> ::= { data: T, atomic: AtomicPtr<T> }
 WaitFree<T> ::= { data: T, atomic: AtomicPtr<T>, progress: Progress }
 ```
@@ -627,7 +627,7 @@ impl<K: Eq + Hash, V> LockFreeHashMap<K, V> {
 
 **形式化定义**：
 
-```
+```text
 MemoryModel ::= { operations: Set<Operation>, ordering: Ordering }
 Operation ::= Read | Write | Fence
 Ordering ::= Relaxed | Acquire | Release | AcqRel | SeqCst
@@ -819,7 +819,7 @@ impl MemoryBarrier {
 
 **形式化定义**：
 
-```
+```text
 Semaphore ::= { permits: AtomicUsize, waiters: Queue<Waiter> }
 ConditionVariable ::= { waiters: Queue<Waiter>, mutex: Mutex<()> }
 ```
@@ -1064,7 +1064,7 @@ impl<T> ReadWriteLock<T> {
 
 **形式化定义**：
 
-```
+```text
 Verified<T> ::= { x: T | P(x) }
 where P is a predicate that x satisfies
 ```
