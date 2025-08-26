@@ -10,8 +10,6 @@
 
 ---
 
-
-
 ## 报告信息
 
 - **分析文件**: `01_creational_patterns/05_prototype_pattern.md`

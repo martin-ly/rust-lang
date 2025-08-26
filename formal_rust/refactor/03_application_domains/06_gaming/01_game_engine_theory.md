@@ -10,6 +10,14 @@
 
 ---
 
+> 返回知识图谱：
+>
+> - 全局图谱: `../../01_knowledge_graph/01_global_graph.md`
+> - 分层图谱: `../../01_knowledge_graph/02_layered_graph.md`
+> - 索引与映射: `../../01_knowledge_graph/00_index.md`, `../../01_knowledge_graph/node_link_map.md`
+
+---
+
 ## 文档概述
 
 本文档建立了Rust游戏开发的完整形式化理论框架，结合Rust 1.89新特征，包括游戏引擎架构、实时渲染、物理引擎、音频系统等核心理论内容。

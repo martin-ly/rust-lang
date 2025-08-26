@@ -10,6 +10,14 @@
 
 ---
 
+> 返回知识图谱：
+>
+> - 全局图谱: `../../01_knowledge_graph/01_global_graph.md`
+> - 分层图谱: `../../01_knowledge_graph/02_layered_graph.md`
+> - 索引与映射: `../../01_knowledge_graph/00_index.md`, `../../01_knowledge_graph/node_link_map.md`
+
+---
+
 ## 文档概述
 
 本文档建立了Rust AI/ML的完整形式化理论框架，包括机器学习基础、神经网络理论、深度学习架构、优化算法等核心理论内容。

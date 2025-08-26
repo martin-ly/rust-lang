@@ -10,6 +10,14 @@
 
 ---
 
+> 返回知识图谱：
+>
+> - 全局图谱: `../../../../01_knowledge_graph/01_global_graph.md`
+> - 分层图谱: `../../../../01_knowledge_graph/02_layered_graph.md`
+> - 索引与映射: `../../../../01_knowledge_graph/00_index.md`, `../../../../01_knowledge_graph/node_link_map.md`
+
+---
+
 ## 模块概述
 
 机器学习语义模块是Rust语言形式化理论的机器学习层，涵盖了机器学习的语义分析，包括算法语义、模型语义、训练语义、推理语义等核心概念。本模块建立了严格的理论基础，为Rust语言的机器学习开发提供了形式化的框架。
