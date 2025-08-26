@@ -10,6 +10,14 @@
 
 ---
 
+> 返回知识图谱：
+>
+> - 全局图谱: `../01_knowledge_graph/01_global_graph.md`
+> - 分层图谱: `../01_knowledge_graph/02_layered_graph.md`
+> - 索引与映射: `../01_knowledge_graph/00_index.md`, `../01_knowledge_graph/node_link_map.md`
+
+---
+
 ## Rust Knowledge System Cross-Reference System
 
 **文档版本**: v1.0  
@@ -597,6 +605,8 @@ This document establishes a cross-reference system for the Rust knowledge system
 **文档状态**: 持续更新中  
 **质量目标**: 建立完整的交叉引用体系  
 **发展愿景**: 实现知识点的有机连接和高效导航
+
+参考指引：节点映射见 `../01_knowledge_graph/node_link_map.md`；综合快照与导出见 `../COMPREHENSIVE_KNOWLEDGE_GRAPH.md`。
 
 "
 

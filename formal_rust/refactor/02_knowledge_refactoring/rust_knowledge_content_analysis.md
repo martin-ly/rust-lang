@@ -10,6 +10,14 @@
 
 ---
 
+> 返回知识图谱：
+>
+> - 全局图谱: `../01_knowledge_graph/01_global_graph.md`
+> - 分层图谱: `../01_knowledge_graph/02_layered_graph.md`
+> - 索引与映射: `../01_knowledge_graph/00_index.md`, `../01_knowledge_graph/node_link_map.md`
+
+---
+
 ## Rust Knowledge Content Systematic Analysis and Refactoring
 
 **文档版本**: v1.0  
@@ -480,6 +488,8 @@ This document conducts systematic analysis of Rust-related documents in the docs
 **文档状态**: 持续更新中  
 **质量目标**: 建立世界级的Rust语言知识体系  
 **发展愿景**: 成为Rust生态系统的重要理论基础设施
+
+参考指引：节点映射见 `../01_knowledge_graph/node_link_map.md`；综合快照与导出见 `../COMPREHENSIVE_KNOWLEDGE_GRAPH.md`。
 
 "
 

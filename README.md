@@ -18,6 +18,15 @@
 
 ---
 
+## 🧭 知识图谱入口
+
+- 全局知识图谱（中/英）: `formal_rust/refactor/01_knowledge_graph/01_global_graph.md`
+- 分层知识图谱（中文）: `formal_rust/refactor/01_knowledge_graph/02_layered_graph.md`
+- 模块索引与节点映射: `formal_rust/refactor/01_knowledge_graph/00_index.md`，`formal_rust/refactor/01_knowledge_graph/node_link_map.md`
+- 综合快照与导出指引: `formal_rust/refactor/COMPREHENSIVE_KNOWLEDGE_GRAPH.md`，`formal_rust/refactor/01_knowledge_graph/README_EXPORT.md`
+
+---
+
 ## 📚 项目结构总览
 
 ### 🎯 核心理论体系
