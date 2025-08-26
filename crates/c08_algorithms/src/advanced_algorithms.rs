@@ -83,17 +83,30 @@ impl ParallelSort {
     }
     
     fn partition<T: Ord>(arr: &mut [T]) -> usize {
-        let pivot_index = arr.len() - 1;
+        let len = arr.len();
+        let last = len - 1;
+        // 三者取中：首、中、尾，降低退化到 O(n^2) 的概率（例如已排序/逆序）
+        let mid = len / 2;
+        let (a, b, c) = (0, mid, last);
+        // 选择中位数索引
+        let median = |i: usize, j: usize, k: usize, s: &mut [T]| -> usize {
+            // 比较顺序：i<=j<=k 或 k<=j<=i 都返回 j；否则返回两端较大者
+            if (s[i] <= s[j] && s[j] <= s[k]) || (s[k] <= s[j] && s[j] <= s[i]) { j }
+            else if (s[j] <= s[i] && s[i] <= s[k]) || (s[k] <= s[i] && s[i] <= s[j]) { i }
+            else { k }
+        };
+        let m = median(a, b, c, arr);
+        arr.swap(m, last);
+
+        // Lomuto 分区，以选定 pivot=arr[last]
         let mut i = 0;
-        
-        for j in 0..pivot_index {
-            if arr[j] <= arr[pivot_index] {
+        for j in 0..last {
+            if arr[j] <= arr[last] {
                 arr.swap(i, j);
                 i += 1;
             }
         }
-        
-        arr.swap(i, pivot_index);
+        arr.swap(i, last);
         i
     }
     
