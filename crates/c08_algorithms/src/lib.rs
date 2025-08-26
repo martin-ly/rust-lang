@@ -285,6 +285,19 @@ pub fn search_algorithms(query: &str) -> Vec<AlgorithmInfo> {
             algorithm.name.to_lowercase().contains(&query_lower)
                 || algorithm.description.to_lowercase().contains(&query_lower)
                 || algorithm.use_cases.iter().any(|case| case.to_lowercase().contains(&query_lower))
+                // 额外匹配：按分类的常见中文/英文关键词
+                || match algorithm.category {
+                    AlgorithmCategory::Sorting => ["排序", "sort", "quick", "merge", "radix"].iter().any(|k| query_lower.contains(k)),
+                    AlgorithmCategory::Searching => ["搜索", "search", "二分", "binary"].iter().any(|k| query_lower.contains(k)),
+                    AlgorithmCategory::Graph => ["图", "graph", "最短", "shortest"].iter().any(|k| query_lower.contains(k)),
+                    AlgorithmCategory::DynamicProgramming => ["动态规划", "dp", "dynamic"].iter().any(|k| query_lower.contains(k)),
+                    AlgorithmCategory::Greedy => ["贪心", "greedy"].iter().any(|k| query_lower.contains(k)),
+                    AlgorithmCategory::DivideAndConquer => ["分治", "divide", "conquer"].iter().any(|k| query_lower.contains(k)),
+                    AlgorithmCategory::Backtracking => ["回溯", "backtrack"].iter().any(|k| query_lower.contains(k)),
+                    AlgorithmCategory::MachineLearning => ["机器学习", "learning", "regression", "kmeans"].iter().any(|k| query_lower.contains(k)),
+                    AlgorithmCategory::Cryptography => ["密码", "crypto", "rsa", "aes", "sha"].iter().any(|k| query_lower.contains(k)),
+                    AlgorithmCategory::PerformanceOptimization => ["性能", "优化", "performance", "pool", "parallel"].iter().any(|k| query_lower.contains(k)),
+                }
         })
         .collect()
 }

@@ -332,14 +332,12 @@ pub trait UnitOfWork {
 
 /// Unit of Work实现
 pub struct UnitOfWorkImpl {
-    entities: Vec<Box<dyn Any>>,
     trackers: Vec<Box<dyn Any>>,
 }
 
 impl UnitOfWorkImpl {
     pub fn new() -> Self {
         Self {
-            entities: Vec::new(),
             trackers: Vec::new(),
         }
     }

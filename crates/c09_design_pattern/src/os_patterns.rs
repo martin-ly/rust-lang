@@ -391,14 +391,14 @@ impl SchedulingStrategy for PrioritySchedulingStrategy {
 
 /// 轮转调度策略
 pub struct RoundRobinStrategy {
-    time_quantum: u32,
+    _time_quantum: u32,
     current_index: usize,
 }
 
 impl RoundRobinStrategy {
     pub fn new(time_quantum: u32) -> Self {
         Self {
-            time_quantum,
+            _time_quantum: time_quantum,
             current_index: 0,
         }
     }
@@ -515,7 +515,8 @@ impl CreateFileCommand {
 
 impl SystemCommand for CreateFileCommand {
     fn execute(&self) -> Result<String, String> {
-        println!("创建文件: {}", self.path);
+        // 模拟使用 content，避免未读字段告警
+        println!("创建文件: {} (内容大小: {} 字节)", self.path, self.content.len());
         Ok(format!("文件 {} 创建成功", self.path))
     }
 
@@ -651,7 +652,7 @@ mod tests {
 
     #[test]
     fn test_strategy_pattern() {
-        let mut processes = vec![
+        let processes = vec![
             Process {
                 id: 1,
                 name: "Process A".to_string(),

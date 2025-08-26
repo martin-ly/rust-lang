@@ -282,7 +282,7 @@ mod tests {
 
     #[test]
     fn test_mvc_pattern() {
-        let mut repository = InMemoryUserRepository::new();
+        let repository = InMemoryUserRepository::new();
         let mut controller = UserController::new(Box::new(repository));
 
         // 创建用户

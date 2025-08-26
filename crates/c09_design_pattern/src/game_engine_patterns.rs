@@ -652,8 +652,8 @@ mod tests {
     #[test]
     fn test_observer_pattern() {
         let mut event_manager = EventManager::new();
-        let mut achievement_system = AchievementSystem::new();
-        let mut logging_system = LoggingSystem;
+        let achievement_system = AchievementSystem::new();
+        let logging_system = LoggingSystem;
         
         event_manager.subscribe(achievement_system);
         event_manager.subscribe(logging_system);

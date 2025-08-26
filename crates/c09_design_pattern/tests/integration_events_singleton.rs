@@ -1,6 +1,6 @@
 //! c09 设计模式：事件与单例 集成测试与简单基准
 
-use std::sync::{Arc, Mutex};
+// 无需直接使用 Arc/Mutex，这里仅通过返回值进行锁操作
 use std::time::Instant;
 
 use c09_design_pattern::game_engine_patterns::{

@@ -85,8 +85,11 @@ impl<T> ObjectPool<T> {
         let mut objects = Vec::with_capacity(size);
         let mut available = Vec::with_capacity(size);
         
-        for i in 0..size {
+        for _i in 0..size {
             objects.push(factory());
+        }
+        // 确保优先分配较小索引，使测试中 release(0), release(1) 生效
+        for i in (0..size).rev() {
             available.push(i);
         }
         
@@ -196,6 +199,7 @@ enum Message {
 }
 
 struct Worker {
+    #[allow(dead_code)]
     id: usize,
     thread: Option<thread::JoinHandle<()>>,
 }
@@ -698,8 +702,8 @@ mod tests {
     fn test_object_pool() {
         let mut pool = ObjectPool::new(3, || String::new());
         
-        let obj1 = pool.acquire().unwrap();
-        let obj2 = pool.acquire().unwrap();
+        let _obj1 = pool.acquire().unwrap();
+        let _obj2 = pool.acquire().unwrap();
         
         assert_eq!(pool.get_utilization(), 2.0 / 3.0);
         

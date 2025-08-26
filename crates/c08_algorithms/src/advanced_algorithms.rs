@@ -175,6 +175,7 @@ impl DistributedAlgorithms {
 
 /// 分布式共识算法 (简化版Paxos)
 pub struct PaxosNode {
+    #[allow(dead_code)]
     id: usize,
     value: Option<String>,
     accepted_value: Option<String>,
@@ -589,8 +590,9 @@ impl RSA {
         let p = Self::generate_prime(bit_length / 2);
         let q = Self::generate_prime(bit_length / 2);
         
-        let n = p * q;
-        let phi = (p - 1) * (q - 1);
+        // 使用更安全的中间宽度避免乘法溢出
+        let n = ((p as u128) * (q as u128)) as u64;
+        let phi = ((p as u128 - 1) * (q as u128 - 1)) as u64;
         
         // 选择公钥指数
         let e = 65537; // 常用的公钥指数
@@ -617,7 +619,11 @@ impl RSA {
         let mut rng = rand::thread_rng();
         
         loop {
-            let candidate = rng.gen_range(2u64.pow(bits as u32)..2u64.pow((bits + 1) as u32));
+            if bits == 0 { return 2; }
+            // 取区间 [2^(bits-1), 2^bits)，保证乘积在 u64 范围内（当 overall bit_length=2*bits）
+            let low = 1u64 << (bits as u32 - 1);
+            let high = 1u64 << (bits as u32);
+            let candidate = rng.gen_range(low..high);
             if Self::is_prime(candidate) {
                 return candidate;
             }
@@ -653,7 +659,7 @@ impl RSA {
             
             let mut is_composite = true;
             for _ in 0..s - 1 {
-                x = (x * x) % n;
+                x = (((x as u128) * (x as u128)) % (n as u128)) as u64;
                 if x == n - 1 {
                     is_composite = false;
                     break;
@@ -669,17 +675,20 @@ impl RSA {
     }
     
     fn mod_pow(mut base: u64, mut exponent: u64, modulus: u64) -> u64 {
-        let mut result = 1;
+        let mut result: u64 = 1;
+        if modulus == 1 { return 0; }
         base %= modulus;
-        
+
         while exponent > 0 {
-            if exponent % 2 == 1 {
-                result = (result * base) % modulus;
+            if (exponent & 1) == 1 {
+                let tmp = ((result as u128) * (base as u128)) % (modulus as u128);
+                result = tmp as u64;
             }
-            base = (base * base) % modulus;
-            exponent /= 2;
+            let tmp = ((base as u128) * (base as u128)) % (modulus as u128);
+            base = tmp as u64;
+            exponent >>= 1;
         }
-        
+
         result
     }
     
