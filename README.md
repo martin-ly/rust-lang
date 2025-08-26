@@ -156,6 +156,7 @@
 - **[Cargo.toml](Cargo.toml)** - 项目依赖配置
 - **[分析报告](crates/analysis-rust-2025.md)** - Rust语言2025年分析
 - **[文档缺口分析](crates/rust_documentation_gaps_analysis.md)** - 内容覆盖分析
+- **[开发者导航指南](docs/DEVELOPER_NAVIGATION_GUIDE.md)** - 导航一致性开发指南
 
 ---
 
