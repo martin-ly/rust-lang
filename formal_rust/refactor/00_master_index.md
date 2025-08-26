@@ -81,16 +81,19 @@
 
 ### 已完成模块
 
-1. **01_core_theory/** - 核心理论模块 ✅
-2. **02_design_patterns/** - 设计模式模块 ✅
-3. **03_application_domains/** - 应用领域模块 (旧版本) ✅
-4. **04_application_domains/** - 应用领域模块 (新版本) 🔄
-5. **05_performance_optimization/** - 性能优化模块 🔄
-6. **06_security_verification/** - 安全验证模块 🔄
-7. **07_software_engineering/** - 软件工程模块 🔄
-8. **08_formal_verification/** - 形式化验证模块 🔄
-9. **09_concurrency_semantics/** - 并发语义模块 🔄
-10. **10_programming_language_theory/** - 编程语言理论模块 🔄
+1. **01_knowledge_graph/** - 知识图谱模块 ✅
+   - 入口: `formal_rust/refactor/01_knowledge_graph/00_index.md`
+   - 覆盖: 全局知识图谱、分层知识图谱、多语言版本与交叉链接
+2. **01_core_theory/** - 核心理论模块 ✅
+3. **02_design_patterns/** - 设计模式模块 ✅
+4. **03_application_domains/** - 应用领域模块 (旧版本) ✅
+5. **04_application_domains/** - 应用领域模块 (新版本) 🔄
+6. **05_performance_optimization/** - 性能优化模块 🔄
+7. **06_security_verification/** - 安全验证模块 🔄
+8. **07_software_engineering/** - 软件工程模块 🔄
+9. **08_formal_verification/** - 形式化验证模块 🔄
+10. **09_concurrency_semantics/** - 并发语义模块 🔄
+11. **10_programming_language_theory/** - 编程语言理论模块 🔄
 
 ### 进行中模块
 
@@ -124,7 +127,7 @@
 
 ### 待处理模块
 
-所有主要模块已完成创建，下一步是完成各模块的子模块重构。
+所有主要模块已完成创建，新增知识图谱模块用于统一导航与交叉引用。下一步是完成各模块的子模块重构与与图谱的双向链接。
 
 ## 重构质量评估
 

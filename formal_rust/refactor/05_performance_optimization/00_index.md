@@ -8,6 +8,14 @@
 
 ---
 
+> 返回知识图谱：
+>
+> - 全局图谱: `../01_knowledge_graph/01_global_graph.md`
+> - 分层图谱: `../01_knowledge_graph/02_layered_graph.md`
+> - 索引与映射: `../01_knowledge_graph/00_index.md`, `../01_knowledge_graph/node_link_map.md`
+
+---
+
 ## 📋 模块概述
 
 本模块对Rust语言性能优化的形式化理论进行系统性重构，建立基于数学公理的性能优化理论框架。通过哲科批判性分析，将性能优化实践升华为形式化理论，为Rust程序的性能优化提供科学指导。

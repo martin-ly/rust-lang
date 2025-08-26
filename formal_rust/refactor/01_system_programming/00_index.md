@@ -31,6 +31,3 @@ impl KernelInterface {
 - [进程管理](00_index.md)
 - [设备驱动](00_index.md)
 - [系统调用](00_index.md)
-"
-
----
