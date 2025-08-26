@@ -684,30 +684,26 @@ impl RSA {
     }
     
     fn mod_inverse(a: u64, m: u64) -> u64 {
-        let mut t = 0;
-        let mut new_t = 1;
-        let mut r = m;
-        let mut new_r = a;
-        
-        while new_r != 0 {
-            let quotient = r / new_r;
-            let temp_t = t;
-            t = new_t;
-            new_t = temp_t - quotient * new_t;
-            let temp_r = r;
-            r = new_r;
-            new_r = temp_r - quotient * new_r;
+        // 扩展欧几里得算法（使用有符号整型避免无符号下溢）
+        fn egcd(a: i128, b: i128) -> (i128, i128, i128) {
+            if b == 0 {
+                (a, 1, 0)
+            } else {
+                let (g, x, y) = egcd(b, a % b);
+                (g, y, x - (a / b) * y)
+            }
         }
-        
-        if r > 1 {
+
+        let a_i = (a % m) as i128;
+        let m_i = m as i128;
+        let (g, x, _) = egcd(a_i, m_i);
+        if g != 1 {
             panic!("Modular inverse does not exist");
         }
-        
-        if t < 0 {
-            t += m;
-        }
-        
-        t
+        // 归一化到 [0, m)
+        let mut inv = x % m_i;
+        if inv < 0 { inv += m_i; }
+        inv as u64
     }
 }
 

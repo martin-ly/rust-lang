@@ -28,7 +28,7 @@ impl AtomicCounter {
 /// 简单线程池
 pub struct SimpleThreadPool {
     workers: Vec<thread::JoinHandle<()>>,
-    sender: std::sync::mpsc::Sender<Box<dyn FnOnce() + Send + 'static>>,
+    sender: Option<std::sync::mpsc::Sender<Box<dyn FnOnce() + Send + 'static>>>,
 }
 
 impl SimpleThreadPool {
@@ -47,7 +47,7 @@ impl SimpleThreadPool {
             }));
         }
 
-        SimpleThreadPool { workers, sender }
+        SimpleThreadPool { workers, sender: Some(sender) }
     }
 
     pub fn execute<F>(&self, f: F)
@@ -55,6 +55,16 @@ impl SimpleThreadPool {
         F: FnOnce() + Send + 'static,
     {
         self.sender.send(Box::new(f)).unwrap();
+    }
+}
+
+impl Drop for SimpleThreadPool {
+    fn drop(&mut self) {
+        // 通过丢弃sender关闭通道，工作线程将退出循环
+        self.sender.take();
+        for handle in self.workers.drain(..) {
+            let _ = handle.join();
+        }
     }
 }
 

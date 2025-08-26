@@ -127,7 +127,7 @@ Lifetime(r) ⊆ Lifetime(owner(r))
 
 ---
 
-## 7. Rust 1.89 对齐要点 {#rust-189}
+## 7. 版本对齐说明要点 {#version-alignment-soundness}
 
 - NLL/Polonius：以 MIR 点集约束收缩借用活跃区，减少伪冲突，保持健全性证明结构不变。
 - GAT/关联类型：在保持性证明中以 well-formedness 约束与 where-clauses 强化替换安全。

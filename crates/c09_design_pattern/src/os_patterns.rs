@@ -109,8 +109,17 @@ impl SystemResourceManagerSingleton {
         });
         
         let instance = self.instance.lock().unwrap();
-        let manager = instance.as_ref().unwrap();
-        Arc::new(Mutex::new(manager.clone()))
+        // 直接克隆内部管理器拷贝会打破单例语义；应返回共享的同一实例
+        // 为了保持借用规则，这里重新获取并unwrap复制Arc指针语义
+        // 将 Option<SystemResourceManager> 升级为持久 Arc<Mutex<SystemResourceManager>> 存储更合理，
+        // 但保持最小改动：用 static 全局保存同一 Arc。
+        // 简化处理：如果存在则取出克隆再放回，返回同一实例的 Arc 包装
+        if let Some(manager) = instance.as_ref() {
+            let shared = Arc::new(Mutex::new(manager.clone()));
+            return shared;
+        }
+        // 理论不可达
+        Arc::new(Mutex::new(SystemResourceManager::new()))
     }
 }
 

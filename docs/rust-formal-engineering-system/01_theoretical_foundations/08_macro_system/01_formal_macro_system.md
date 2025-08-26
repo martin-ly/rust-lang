@@ -435,7 +435,7 @@ let sql = query!(select name from users);
 
 ---
 
-## Rust 1.89 对齐（宏系统与元编程）
+## 版本对齐说明（宏系统与元编程） {#version-alignment-macro}
 
 ### 过程宏改进
 

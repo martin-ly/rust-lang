@@ -220,9 +220,10 @@ impl EventManager {
     }
 
     pub fn subscribe<T: Observer + 'static>(&mut self, observer: T) {
-        let type_id = TypeId::of::<T>();
+        // 将所有观察者注册到统一事件类型键，避免以具体类型键导致无法分发
+        let event_type_id = TypeId::of::<GameEvent>();
         self.observers
-            .entry(type_id)
+            .entry(event_type_id)
             .or_insert_with(Vec::new)
             .push(Box::new(observer));
     }

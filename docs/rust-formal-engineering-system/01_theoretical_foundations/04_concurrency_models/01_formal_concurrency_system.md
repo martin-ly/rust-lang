@@ -1408,7 +1408,7 @@ ightarrow, I)$，其中：
 
 ---
 
-## Rust 1.89 对齐（结构化并发与取消传播）
+## 版本对齐说明（结构化并发与取消传播） {#version-alignment-structured-concurrency}
 
 ### 结构化并发模型
 

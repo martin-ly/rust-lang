@@ -2,7 +2,7 @@
 
 ## 概述 - Overview
 
-本章节深入探讨Rust类型推导算法的数学基础，包括统一算法、类型推导的复杂度分析、以及Rust 1.89版本中的类型推导改进。
+本章节深入探讨Rust类型推导算法的数学基础，包括统一算法、类型推导的复杂度分析，并以“版本对齐说明”的方式展示代表性改进，不绑定到特定次要版本。
 
 ## 形式化理论基础 - Formal Theoretical Foundation
 
@@ -54,12 +54,12 @@ Substitution = {
 }
 ```
 
-## Rust 1.89 类型推导改进 - Rust 1.89 Type Inference Improvements
+## 类型推导改进（版本对齐说明） - Type Inference Improvements (Version-aligned)
 
 ### 1. 改进的闭包类型推导 - Enhanced Closure Type Inference
 
 ```rust
-// Rust 1.89 改进的闭包类型推导
+// 闭包类型推导示例（版本对齐说明）
 fn enhanced_closure_inference() {
     // 改进的闭包捕获推导
     let mut counter = 0;
@@ -109,7 +109,7 @@ impl ClosureTypeInference {
 ### 2. 改进的泛型类型推导 - Enhanced Generic Type Inference
 
 ```rust
-// Rust 1.89 改进的泛型类型推导
+// 泛型类型推导示例（版本对齐说明）
 fn enhanced_generic_inference<T, U, V>(items: Vec<T>, transform: impl Fn(T) -> U, filter: impl Fn(&U) -> bool) -> Vec<V>
 where
     T: Clone,
@@ -663,7 +663,7 @@ Proof TypeInferenceCompleteness {
 3. **错误恢复机制** - Error recovery mechanism
 4. **工程实践支持** - Engineering practice support
 
-### Rust 1.89 改进亮点 - Rust 1.89 Improvement Highlights
+### 改进亮点（版本对齐说明） - Improvement Highlights (Version-aligned)
 
 1. **增强的闭包类型推导** - Enhanced closure type inference
 2. **改进的泛型类型推导** - Improved generic type inference
@@ -686,7 +686,7 @@ Proof TypeInferenceCompleteness {
 - [Hindley-Milner 类型系统](#1-hindley-milner-类型系统---hindley-milner-type-system)
 - [约束生成与求解](#2-约束生成与求解---constraint-generation-and-solving)
 
-### Rust 1.89 特性锚点 - Rust 1.89 Feature Anchors
+### 特性锚点（版本对齐说明） - Feature Anchors (Version-aligned)
 
 - [改进的闭包类型推导](#1-改进的闭包类型推导---enhanced-closure-type-inference)
 - [改进的泛型类型推导](#2-改进的泛型类型推导---enhanced-generic-type-inference)

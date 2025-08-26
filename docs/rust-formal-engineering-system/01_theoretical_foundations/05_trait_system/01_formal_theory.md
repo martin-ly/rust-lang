@@ -36,7 +36,7 @@ fn print<T: Display>(x: T) { println!("{}", x.show()); }
 
 ---
 
-## Rust 1.89 对齐（Trait 系统与对象安全）
+## 版本对齐说明（Trait 系统与对象安全） {#version-alignment-trait}
 
 ### 异步 Trait
 

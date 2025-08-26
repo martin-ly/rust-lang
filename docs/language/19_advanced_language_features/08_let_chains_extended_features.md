@@ -430,7 +430,7 @@ fn debug_example(data: &Option<String>) {
 
 ### 5.1 While Let Chains
 
-**预期功能**（Rust 1.89+）:
+**预期功能（版本对齐说明/规划）**:
 
 ```rust
 // 未来可能的while let chains语法

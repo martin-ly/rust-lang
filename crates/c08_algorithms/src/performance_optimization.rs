@@ -19,6 +19,7 @@ pub struct MemoryPool {
     block_count: usize,
     free_blocks: Vec<*mut u8>,
     allocated_blocks: HashMap<*mut u8, bool>,
+    base_ptr: *mut u8,
 }
 
 impl MemoryPool {
@@ -37,6 +38,7 @@ impl MemoryPool {
             block_count,
             free_blocks,
             allocated_blocks: HashMap::new(),
+            base_ptr: memory,
         }
     }
     
@@ -63,7 +65,9 @@ impl Drop for MemoryPool {
     fn drop(&mut self) {
         let layout = Layout::from_size_align(self.block_size * self.block_count, 8).unwrap();
         unsafe {
-            dealloc(self.free_blocks[0], layout);
+            if !self.base_ptr.is_null() {
+                dealloc(self.base_ptr, layout);
+            }
         }
     }
 }

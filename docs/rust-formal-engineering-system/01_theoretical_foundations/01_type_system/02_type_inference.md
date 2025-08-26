@@ -50,7 +50,7 @@
     - [类型泛化 {#type-generalization}](#type-generalization)
     - [闭包捕获推断 {#closure-capture}](#closure-capture)
     - [生命周期推断 {#lifetime-inference}](#lifetime-inference)
-  - [Rust 1.89 对齐（推断边界与实践）](#rust-189-对齐推断边界与实践)
+  - [版本对齐说明（推断边界与实践）](#version-alignment-inference-practice)
 
 ## 1. 概述 {#1-概述}
 
@@ -747,7 +747,7 @@ fn complex_inference() {
 
 ### GAT/where 边界 {#gat-where}
 
-用于跨文档引用，指向 Rust 1.89 中与泛型/关联类型/where-clauses 相关的推断边界说明。
+用于跨文档引用，指向与泛型/关联类型/where-clauses 相关的推断边界说明（GAT 已于 Rust 1.65 稳定）。
 
 ### impl Trait 推断 {#impl-trait}
 
@@ -771,7 +771,7 @@ fn complex_inference() {
 
 ---
 
-## Rust 1.89 对齐（推断边界与实践）
+## 版本对齐说明（推断边界与实践） {#version-alignment-inference-practice}
 
 - 闭包捕获推断：基于使用点推断 `Fn`/`FnMut`/`FnOnce`，在并发/async 背景下可能影响 `Send` 推导。
 - `impl Trait`：返回位置 `impl Trait` 参与单一具体类型推断；参数位置建议使用泛型 + trait bound 以避免对象安全问题。

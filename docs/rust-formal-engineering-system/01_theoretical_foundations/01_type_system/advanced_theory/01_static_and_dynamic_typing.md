@@ -2,9 +2,9 @@
 
 ## 概述 - Overview
 
-本章节深入探讨Rust中静态类型与动态类型的形式化理论，分析类型检查的时间点、类型安全保证机制，以及Rust 1.89版本中的相关特性。
+本章节深入探讨Rust中静态类型与动态类型的形式化理论，分析类型检查的时间点、类型安全保证机制，并给出版本对齐说明下的代表性特性示例（避免绑定到特定次要版本）。
 
-This section delves into the formal theory of static and dynamic typing in Rust, analyzing the timing of type checking, type safety guarantee mechanisms, and related features in Rust 1.89.
+This section delves into the formal theory of static and dynamic typing in Rust, analyzing the timing of type checking, type safety guarantees, with version-alignment notes instead of binding to a specific minor release.
 
 ## 形式化定义 - Formal Definitions
 
@@ -60,12 +60,12 @@ RuntimeTypeInfo = {
 }
 ```
 
-## Rust 1.89 静态类型特性 - Rust 1.89 Static Typing Features
+## 静态类型特性（版本对齐说明） - Static Typing Features (Version-aligned)
 
 ### 1. 增强的类型推导 - Enhanced Type Inference
 
 ```rust
-// Rust 1.89 改进的类型推导示例
+// 类型推导示例（版本对齐说明）
 fn enhanced_type_inference() {
     // 改进的闭包类型推导
     let closure = |x| x + 1; // 自动推导为 |x: i32| -> i32
@@ -93,7 +93,7 @@ fn enhanced_type_inference() {
 ### 2. 类型状态模式增强 - Enhanced Type State Patterns
 
 ```rust
-// Rust 1.89 类型状态模式改进
+// 类型状态模式示例（版本对齐说明）
 use std::marker::PhantomData;
 
 // 类型状态标记
@@ -160,7 +160,7 @@ fn type_state_example() {
 ### 3. 改进的泛型约束 - Improved Generic Constraints
 
 ```rust
-// Rust 1.89 泛型约束改进
+// 泛型约束示例（版本对齐说明）
 use std::fmt::Debug;
 use std::ops::Add;
 
@@ -202,12 +202,12 @@ where
 }
 ```
 
-## 动态类型特性 - Dynamic Typing Features
+## 动态类型特性（版本对齐说明） - Dynamic Typing Features (Version-aligned)
 
 ### 1. Any Trait 的使用 - Usage of Any Trait
 
 ```rust
-// Rust 1.89 动态类型示例
+// 动态类型示例（版本对齐说明）
 use std::any::{Any, TypeId};
 
 // 动态类型容器
@@ -250,7 +250,7 @@ fn dynamic_typing_example() {
 ### 2. 运行时类型检查 - Runtime Type Checking
 
 ```rust
-// Rust 1.89 运行时类型检查
+// 运行时类型检查示例（版本对齐说明）
 use std::any::Any;
 
 trait RuntimeCheckable: Any {
@@ -437,12 +437,12 @@ DynamicTypeSafety = {
 }
 ```
 
-## 工程实践案例 - Engineering Practice Cases
+## 工程实践案例（版本对齐说明） - Engineering Practice Cases (Version-aligned)
 
 ### 1. 静态类型系统实践 - Static Typing Practice
 
 ```rust
-// Rust 1.89 静态类型系统工程实践
+// 静态类型系统工程实践（版本对齐说明）
 use std::collections::HashMap;
 use std::sync::{Arc, RwLock};
 
@@ -488,7 +488,7 @@ impl ServiceRegistry {
 ### 2. 动态类型系统实践 - Dynamic Typing Practice
 
 ```rust
-// Rust 1.89 动态类型系统工程实践
+// 动态类型系统工程实践（版本对齐说明）
 use std::any::{Any, TypeId};
 use serde_json::Value;
 
@@ -669,9 +669,9 @@ Theorem DynamicTypeFlexibility {
 4. **元编程能力** - Metaprogramming capabilities
 5. **动态加载** - Dynamic loading
 
-### Rust 1.89 的平衡 - Rust 1.89 Balance
+### Rust 的平衡 - Rust Balance (Version-aligned)
 
-Rust 1.89通过以下方式在静态和动态类型之间取得平衡：
+Rust 在静态和动态类型之间的典型平衡：
 
 1. **强大的静态类型系统** - 提供编译时安全保障
 2. **有限的动态类型支持** - 通过 `Any` trait 和运行时类型检查
@@ -688,7 +688,7 @@ Rust 1.89通过以下方式在静态和动态类型之间取得平衡：
 - [性能影响分析 - Performance Impact Analysis](#2-性能影响分析---performance-impact-analysis)
 - [类型安全保证 - Type Safety Guarantees](#3-类型安全保证---type-safety-guarantees)
 
-### Rust 1.89 特性锚点 - Rust 1.89 Feature Anchors
+### 特性锚点 - Feature Anchors (Version-aligned)
 
 - [增强的类型推导 - Enhanced Type Inference](#1-增强的类型推导---enhanced-type-inference)
 - [类型状态模式增强 - Enhanced Type State Patterns](#2-类型状态模式增强---enhanced-type-state-patterns)
