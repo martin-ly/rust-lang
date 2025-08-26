@@ -1,5 +1,15 @@
 # AI集成（AI Integration）
 
+---
+
+> 返回知识图谱：
+>
+> - 全局图谱: `../../refactor/01_knowledge_graph/01_global_graph.md`
+> - 分层图谱: `../../refactor/01_knowledge_graph/02_layered_graph.md`
+> - 索引与映射: `../../refactor/01_knowledge_graph/00_index.md`, `../../refactor/01_knowledge_graph/node_link_map.md`
+
+---
+
 ## 1. 工程原理与国际定义对标（Principle & International Definition）
 
 AI集成是指将人工智能算法、模型与系统架构深度融合，实现智能化决策与自动化。对标[Wikipedia: Artificial intelligence](https://en.wikipedia.org/wiki/Artificial_intelligence)定义，AI集成强调算法、模型与系统的协同。
@@ -43,3 +53,5 @@ AI integration refers to the deep fusion of AI algorithms, models, and system ar
 - [tch-rs 深度学习库](https://github.com/LaurentMazare/tch-rs)
 - [onnxruntime 推理引擎](https://github.com/microsoft/onnxruntime)
 - [Wikipedia: Artificial intelligence](https://en.wikipedia.org/wiki/Artificial_intelligence)
+
+参考指引：节点映射见 `../../refactor/01_knowledge_graph/node_link_map.md`；综合快照与导出见 `../../refactor/COMPREHENSIVE_KNOWLEDGE_GRAPH.md`。

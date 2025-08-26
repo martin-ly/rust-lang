@@ -8,6 +8,14 @@
 
 ---
 
+> 返回知识图谱：
+>
+> - 全局图谱: `01_knowledge_graph/01_global_graph.md`
+> - 分层图谱: `01_knowledge_graph/02_layered_graph.md`
+> - 索引与映射: `01_knowledge_graph/00_index.md`, `01_knowledge_graph/node_link_map.md`
+
+---
+
 ## 📋 执行摘要
 
 本报告记录了Rust形式化理论重构项目在2025年的持续推进情况。项目采用哲科批判性分析方法，对Rust语言的形式化理论进行系统性重构，建立基于数学公理的完整理论框架。
@@ -350,3 +358,5 @@ Rust形式化理论重构项目在2025年取得了重要进展，建立了完整
 - **版本**: v2025.1
 - **状态**: 持续推进中
 - **质量等级**: 钻石级 ⭐⭐⭐⭐⭐
+
+参考指引：节点映射见 `01_knowledge_graph/node_link_map.md`；综合快照与导出见 `COMPREHENSIVE_KNOWLEDGE_GRAPH.md`。

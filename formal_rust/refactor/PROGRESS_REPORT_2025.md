@@ -4,6 +4,16 @@
 **创建日期**: 2025-01-13  
 **状态**: 持续推进中  
 
+---
+
+> 返回知识图谱：
+>
+> - 全局图谱: `01_knowledge_graph/01_global_graph.md`
+> - 分层图谱: `01_knowledge_graph/02_layered_graph.md`
+> - 索引与映射: `01_knowledge_graph/00_index.md`, `01_knowledge_graph/node_link_map.md`
+
+---
+
 ## 当前进度
 
 ### 已完成模块
@@ -74,3 +84,7 @@
 - **作者**: Rust形式化理论研究团队
 - **版本**: v2025.1
 - **状态**: 持续推进中
+
+参考指引：节点映射见 `01_knowledge_graph/node_link_map.md`；综合快照与导出见 `COMPREHENSIVE_KNOWLEDGE_GRAPH.md`。
+
+---

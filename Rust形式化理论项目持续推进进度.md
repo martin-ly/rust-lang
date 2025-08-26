@@ -6,6 +6,14 @@
 
 ---
 
+> 返回知识图谱：
+>
+> - 全局图谱: `formal_rust/refactor/01_knowledge_graph/01_global_graph.md`
+> - 分层图谱: `formal_rust/refactor/01_knowledge_graph/02_layered_graph.md`
+> - 索引与映射: `formal_rust/refactor/01_knowledge_graph/00_index.md`, `formal_rust/refactor/01_knowledge_graph/node_link_map.md`
+
+---
+
 ## 📊 当前进度概览
 
 ### 第一阶段：理论深化与完善 ✅ (100%完成)
@@ -329,3 +337,7 @@
 *进度跟踪时间: 2025-01-27*  
 *当前完成度: 75%*  
 *预计完成时间: 2025年Q2*
+
+参考指引：节点映射见 `formal_rust/refactor/01_knowledge_graph/node_link_map.md`；综合快照与导出见 `formal_rust/refactor/COMPREHENSIVE_KNOWLEDGE_GRAPH.md`。
+
+---

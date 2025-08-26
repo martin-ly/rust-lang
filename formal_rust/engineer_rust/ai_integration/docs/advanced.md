@@ -1,5 +1,15 @@
 # AI集成进阶（Advanced AI Integration）
 
+---
+
+> 返回知识图谱：
+>
+> - 全局图谱: `../../../refactor/01_knowledge_graph/01_global_graph.md`
+> - 分层图谱: `../../../refactor/01_knowledge_graph/02_layered_graph.md`
+> - 索引与映射: `../../../refactor/01_knowledge_graph/00_index.md`, `../../../refactor/01_knowledge_graph/node_link_map.md`
+
+---
+
 ## 1. 哲学基础与国际定义对标（Philosophical Foundation & International Definition）
 
 AI集成不仅是技术融合，更是“智能增强”（Intelligence Augmentation, IA）与“系统协同”（System Synergy）的哲学实践。对标[Wikipedia: Artificial intelligence](https://en.wikipedia.org/wiki/Artificial_intelligence)等国际定义，AI集成强调算法、模型与系统架构的深度协作，实现自动化与智能决策。
@@ -64,3 +74,5 @@ AI集成不仅是技术融合，更是“智能增强”（Intelligence Augmenta
 - [serde 配置解析库](https://serde.rs/)
 - [Wikipedia: Artificial intelligence](https://en.wikipedia.org/wiki/Artificial_intelligence)
 - [ISO/IEC JTC 1/SC 42: Artificial intelligence](https://www.iso.org/committee/6794475.html)
+
+参考指引：节点映射见 `../../../refactor/01_knowledge_graph/node_link_map.md`；综合快照与导出见 `../../../refactor/COMPREHENSIVE_KNOWLEDGE_GRAPH.md`。

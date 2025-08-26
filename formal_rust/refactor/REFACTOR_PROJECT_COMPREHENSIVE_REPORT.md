@@ -12,6 +12,14 @@
 
 ---
 
+> 返回知识图谱：
+>
+> - 全局图谱: `01_knowledge_graph/01_global_graph.md`
+> - 分层图谱: `01_knowledge_graph/02_layered_graph.md`
+> - 索引与映射: `01_knowledge_graph/00_index.md`, `01_knowledge_graph/node_link_map.md`
+
+---
+
 ## 项目概述
 
 本项目是对Rust语言形式化理论进行全面重构和扩展的学术研究项目，历时数月，建立了更加严格、完整和前沿的Rust语言形式化理论体系。项目采用分层架构，从基础语义层到应用领域层，构建了完整的理论框架，并建立了跨层分析机制。
@@ -326,3 +334,5 @@
 - **质量等级**: 钻石级 ⭐⭐⭐⭐⭐
 
 🎯 **Rust形式化理论重构项目综合进展报告完成！** 🦀
+
+参考指引：节点映射见 `01_knowledge_graph/node_link_map.md`；综合快照与导出见 `COMPREHENSIVE_KNOWLEDGE_GRAPH.md`。

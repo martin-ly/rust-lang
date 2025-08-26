@@ -1,5 +1,15 @@
 # AI集成（AI Integration）
 
+---
+
+> 返回知识图谱：
+>
+> - 全局图谱: `../../../refactor/01_knowledge_graph/01_global_graph.md`
+> - 分层图谱: `../../../refactor/01_knowledge_graph/02_layered_graph.md`
+> - 索引与映射: `../../../refactor/01_knowledge_graph/00_index.md`, `../../../refactor/01_knowledge_graph/node_link_map.md`
+
+---
+
 ## 1. 概念定义与哲学基础（Principle & Definition）
 
 AI集成，广义上指将人工智能（Artificial Intelligence, AI）相关的算法、模型、系统架构与传统软件或硬件系统深度融合，实现智能化决策与自动化。其核心不仅是技术的叠加，更是“智能增强”（Intelligence Augmentation, IA）与“系统协同”（System Synergy）哲学的工程化实践。
@@ -74,3 +84,5 @@ Rust以类型安全、并发、生态库支持严谨的AI集成工程。
 - [serde 配置解析库](https://serde.rs/)
 - [Wikipedia: Artificial intelligence](https://en.wikipedia.org/wiki/Artificial_intelligence)
 - [ISO/IEC JTC 1/SC 42: Artificial intelligence](https://www.iso.org/committee/6794475.html)
+
+参考指引：节点映射见 `../../../refactor/01_knowledge_graph/node_link_map.md`；综合快照与导出见 `../../../refactor/COMPREHENSIVE_KNOWLEDGE_GRAPH.md`。

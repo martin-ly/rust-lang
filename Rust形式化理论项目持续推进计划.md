@@ -7,6 +7,14 @@
 
 ---
 
+> 返回知识图谱：
+>
+> - 全局图谱: `formal_rust/refactor/01_knowledge_graph/01_global_graph.md`
+> - 分层图谱: `formal_rust/refactor/01_knowledge_graph/02_layered_graph.md`
+> - 索引与映射: `formal_rust/refactor/01_knowledge_graph/00_index.md`, `formal_rust/refactor/01_knowledge_graph/node_link_map.md`
+
+---
+
 ## 📊 现状分析
 
 ### 已取得的成就
@@ -308,3 +316,5 @@
 *计划制定时间: 2025-01-27*  
 *计划版本: V2.0*  
 *执行状态: 准备启动*
+
+参考指引：节点映射见 `formal_rust/refactor/01_knowledge_graph/node_link_map.md`；综合快照与导出见 `formal_rust/refactor/COMPREHENSIVE_KNOWLEDGE_GRAPH.md`。

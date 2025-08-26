@@ -1,5 +1,15 @@
 # AI运维（AI Ops）
 
+---
+
+> 返回知识图谱：
+>
+> - 全局图谱: `../../refactor/01_knowledge_graph/01_global_graph.md`
+> - 分层图谱: `../../refactor/01_knowledge_graph/02_layered_graph.md`
+> - 索引与映射: `../../refactor/01_knowledge_graph/00_index.md`, `../../refactor/01_knowledge_graph/node_link_map.md`
+
+---
+
 ## 1. 定义与软件工程对标
 
 **AI运维（AI Ops）**指利用人工智能技术自动化IT运维流程，包括监控、告警、根因分析和自愈。软件工程wiki认为，AIOps是现代大规模系统可用性和智能化运维的关键。
@@ -39,3 +49,5 @@ task::spawn(monitor());
   A: 性能高、类型安全、生态丰富，适合高并发与安全敏感场景。
 
 ---
+
+参考指引：节点映射见 `../../refactor/01_knowledge_graph/node_link_map.md`；综合快照与导出见 `../../refactor/COMPREHENSIVE_KNOWLEDGE_GRAPH.md`。

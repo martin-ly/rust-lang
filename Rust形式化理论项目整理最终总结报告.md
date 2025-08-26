@@ -6,6 +6,16 @@
 **文档版本**: V1.0  
 **国际标准对标**: IEEE 1471, ISO/IEC 42010, W3C Knowledge Organization
 
+---
+
+> 返回知识图谱：
+>
+> - 全局图谱: `formal_rust/refactor/01_knowledge_graph/01_global_graph.md`
+> - 分层图谱: `formal_rust/refactor/01_knowledge_graph/02_layered_graph.md`
+> - 索引与映射: `formal_rust/refactor/01_knowledge_graph/00_index.md`, `formal_rust/refactor/01_knowledge_graph/node_link_map.md`
+
+---
+
 ## 执行摘要
 
 本次项目整理工作全面梳理了Rust形式化理论项目的文件结构，完成了大量重复内容的合并、占位内容的清理，以及重要文件的补充完善。通过系统性的整理工作，显著提升了项目的整体质量、结构清晰度和内容完整性。
@@ -235,3 +245,7 @@
 **报告完成时间**: 2025-01-16  
 **报告状态**: 已完成  
 **下一步计划**: 持续维护和更新
+
+参考指引：节点映射见 `formal_rust/refactor/01_knowledge_graph/node_link_map.md`；综合快照与导出见 `formal_rust/refactor/COMPREHENSIVE_KNOWLEDGE_GRAPH.md`。
+
+---
