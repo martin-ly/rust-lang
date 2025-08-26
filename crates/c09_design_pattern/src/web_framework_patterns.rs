@@ -81,13 +81,17 @@ impl UserController {
     }
 
     pub fn create_user(&mut self, username: String, email: String) -> Result<User, String> {
-        let user = User {
+        let mut user = User {
             id: 0,
             username,
             email,
             created_at: "2025-01-27".to_string(),
         };
         self.repository.save(user.clone())?;
+        // 通过查询已保存的用户集合，获取分配的最新 ID
+        if let Some(max_id) = self.repository.find_all().iter().map(|u| u.id).max() {
+            user.id = max_id;
+        }
         Ok(user)
     }
 

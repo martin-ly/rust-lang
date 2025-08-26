@@ -9,6 +9,10 @@ resolver = "3"
 name = "c02_type_system"
 path = "src/lib.rs"
 
+[[example]]
+name = "type_system_example"
+path = "examples/type_system_example.rs"
+
 [[bin]]
 name = "ts"
 path = "src/bin/main.rs"

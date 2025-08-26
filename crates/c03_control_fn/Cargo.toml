@@ -12,6 +12,10 @@ fastrace = { version = ">=0.7.0", features = ["enable"] }
 name = "c03_control_fn"
 path = "src/lib.rs"
 
+[[example]]
+name = "control_flow_example"
+path = "examples/control_flow_example.rs"
+
 [[bin]]
 name = "c03_control_fn"
 path = "src/bin/main.rs"
