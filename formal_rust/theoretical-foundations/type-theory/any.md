@@ -28,14 +28,14 @@
 
 #### 1.1 基础Any公理
 
-**公理1: Any存在性**
+**公理1: Any存在性**:
 
 ```coq
 (* Any存在性公理 *)
 Axiom AnyExistence : forall (T : Type), exists (any : Any T), AnyType any = T.
 ```
 
-**公理2: Any唯一性**
+**公理2: Any唯一性**:
 
 ```coq
 (* Any唯一性公理 *)
@@ -43,7 +43,7 @@ Axiom AnyUniqueness : forall (any1 any2 : Any T),
   AnyType any1 = AnyType any2 -> any1 = any2.
 ```
 
-**公理3: Any类型标识公理**
+**公理3: Any类型标识公理**:
 
 ```coq
 (* Any类型标识公理 *)
@@ -52,7 +52,7 @@ Axiom AnyTypeId : forall (any : Any T), exists (type_id : TypeId), TypeIdOf any 
 
 #### 1.2 动态下转型公理
 
-**公理4: 动态下转型公理**
+**公理4: 动态下转型公理**:
 
 ```coq
 (* 动态下转型公理 *)
@@ -60,7 +60,7 @@ Axiom DynamicDowncast : forall (any : Any T) (target : Type),
   exists (downcast : DynamicDowncast), Downcast any target = downcast.
 ```
 
-**公理5: 类型安全公理**
+**公理5: 类型安全公理**:
 
 ```coq
 (* 类型安全公理 *)
@@ -196,7 +196,7 @@ Fixpoint AnyImpl (T : Type) (value : T) : Any T :=
 
 #### 2.1 Any主要定理
 
-**定理1: Any存在性定理**
+**定理1: Any存在性定理**:
 
 ```coq
 Theorem AnyExistenceTheorem : forall (T : Type),
@@ -234,7 +234,7 @@ Fixpoint TypeIdImpl (T : Type) : TypeId :=
 
 #### 2.1 类型标识主要定理
 
-**定理2: 类型标识存在性定理**
+**定理2: 类型标识存在性定理**:
 
 ```coq
 Theorem TypeIdExistenceTheorem : forall (T : Type),
@@ -272,7 +272,7 @@ Fixpoint DynamicDowncastImpl (any : Any T) (target : Type) : DynamicDowncast :=
 
 #### 2.1 动态下转型主要定理
 
-**定理3: 动态下转型存在性定理**
+**定理3: 动态下转型存在性定理**:
 
 ```coq
 Theorem DynamicDowncastExistenceTheorem : forall (any : Any T) (target : Type),
@@ -315,7 +315,7 @@ Fixpoint RuntimeTypeCheckAlg (any : Any T) (target : Type) : bool :=
 
 #### 2.1 运行时类型检查主要定理
 
-**定理4: 运行时类型检查定理**
+**定理4: 运行时类型检查定理**:
 
 ```coq
 Theorem RuntimeTypeCheckTheorem : forall (any : Any T) (target : Type),
