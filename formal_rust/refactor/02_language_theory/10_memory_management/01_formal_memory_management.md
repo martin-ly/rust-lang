@@ -23,6 +23,7 @@ M = (A, S, P)
 ```
 
 其中：
+
 - `A` 是地址空间 `A = \{0, 1, 2, \ldots, 2^n - 1\}`
 - `S` 是大小函数 `S: A \rightarrow \mathbb{N}`
 - `P` 是权限函数 `P: A \rightarrow \{R, W, X, RW, RX, WX, RWX\}`
@@ -36,6 +37,7 @@ B = (a, s, p, t)
 ```
 
 其中：
+
 - `a \in A` 是起始地址
 - `s \in \mathbb{N}` 是块大小
 - `p \in P` 是权限
