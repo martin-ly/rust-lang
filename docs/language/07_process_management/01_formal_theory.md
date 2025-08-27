@@ -115,7 +115,7 @@ struct ProcessCreation {
 \text{create\_process}(config) \rightarrow \text{Result}(\text{Process})
 ```
 
-### IPC Channel Model
+### 1IPC Channel Model
 
 IPC channels implement **message passing protocols**:
 
@@ -415,7 +415,7 @@ for i in 0..4 {
 3. Operating system reclaims resources
 4. Therefore, cleanup is guaranteed
 
-### Process Isolation
+### 1Process Isolation
 
 **Theorem**: Processes are isolated and cannot access each other's memory.
 

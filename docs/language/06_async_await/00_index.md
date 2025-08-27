@@ -11,54 +11,54 @@
 
 ### 1. 理论基础层 {#理论基础层}
 
-1. [形式化异步系统](01_formal_async_system.md#异步编程概述)
-   - 异步计算模型的数学基础
-   - Future单子和组合子理论
-   - 连续传递样式(CPS)变换
+   1. [形式化异步系统](01_formal_async_system.md#异步编程概述)
+      - 异步计算模型的数学基础
+      - Future单子和组合子理论
+      - 连续传递样式(CPS)变换
 
-2. [异步编程理论](02_async_theory.md#异步理论概述)
-   - 非阻塞I/O理论框架
-   - 事件驱动编程范式
-   - 协作式多任务调度理论
+   2. [异步编程理论](02_async_theory.md#异步理论概述)
+      - 非阻塞I/O理论框架
+      - 事件驱动编程范式
+      - 协作式多任务调度理论
 
-3. [状态机转换系统](03_state_machine_theory.md#状态机理论)
-   - async/await状态机生成
-   - 暂停点和恢复机制
-   - 零成本抽象的理论保证
+   3. [状态机转换系统](03_state_machine_theory.md#状态机理论)
+      - async/await状态机生成
+      - 暂停点和恢复机制
+      - 零成本抽象的理论保证
 
 ### 2. 实现机制层 {#实现机制层}
 
-4. [Future执行模型](04_future_execution.md#future执行)
-   - Poll机制和唤醒器设计
-   - 上下文切换和任务调度
-   - 内存布局和生命周期管理
+   1. [Future执行模型](04_future_execution.md#future执行)
+      - Poll机制和唤醒器设计
+      - 上下文切换和任务调度
+      - 内存布局和生命周期管理
 
-5. [运行时系统](05_runtime_system.md#运行时系统)
-   - 执行器架构设计
-   - 任务队列和工作窃取
-   - 线程池和资源管理
+   2. [运行时系统](05_runtime_system.md#运行时系统)
+      - 执行器架构设计
+      - 任务队列和工作窃取
+      - 线程池和资源管理
 
-6. [错误处理机制](06_error_handling.md#错误处理)
-   - 异步错误传播模型
-   - 取消和超时机制
-   - 异常安全性保证
+   3. [错误处理机制](06_error_handling.md#错误处理)
+      - 异步错误传播模型
+      - 取消和超时机制
+      - 异常安全性保证
 
 ### 3. 应用实践层 {#应用实践层}
 
-7. [性能优化策略](07_performance_optimization.md#性能优化)
-   - 异步性能分析方法
-   - 内存使用优化
-   - 延迟和吞吐量调优
+   1. [性能优化策略](07_performance_optimization.md#性能优化)
+      - 异步性能分析方法
+      - 内存使用优化
+      - 延迟和吞吐量调优
 
-8. [并发模式](08_concurrency_patterns.md#并发模式)
-   - Actor模型实现
-   - 消息传递系统
-   - 流处理和背压控制
+   2. [并发模式](08_concurrency_patterns.md#并发模式)
+      - Actor模型实现
+      - 消息传递系统
+      - 流处理和背压控制
 
-9. [生态系统集成](09_ecosystem_integration.md#生态系统集成)
-   - tokio/async-std集成
-   - 异步数据库访问
-   - 网络编程应用
+   3. [生态系统集成](09_ecosystem_integration.md#生态系统集成)
+      - tokio/async-std集成
+      - 异步数据库访问
+      - 网络编程应用
 
 ## 主题概述 {#主题概述}
 
@@ -166,14 +166,14 @@ trait Future {
 **定义 6.2 (异步函数)**  
 异步函数是返回Future的语法糖：
 
-```
+```text
 async fn f(x: T) -> U ≡ fn f(x: T) -> impl Future<Output = U>
 ```
 
 **定义 6.3 (状态机转换)**  
 异步函数编译为状态机，其中每个await点对应一个状态：
 
-```
+```text
 S: State × Input → State × Poll<Output>
 ```
 
@@ -182,21 +182,21 @@ S: State × Input → State × Poll<Output>
 **定理 6.1 (零成本抽象保证)**  
 异步抽象不引入额外的运行时开销：
 
-```
+```text
 Cost(async_code) ≤ Cost(equivalent_manual_state_machine) + O(1)
 ```
 
 **定理 6.2 (内存安全性)**  
 异步代码在编译时保证内存安全：
 
-```
+```text
 ∀ async_fn. BorrowCheck(async_fn) ⊢ MemorySafe(async_fn)
 ```
 
 **定理 6.3 (组合性)**  
 Future的组合操作保持类型安全：
 
-```
+```text
 Future<A> × (A → Future<B>) → Future<B>  [单子结合律]
 ```
 
@@ -266,24 +266,24 @@ Future<A> × (A → Future<B>) → Future<B>  [单子结合律]
 
 ### 基础路径 (入门) {#基础路径}
 
-1. **理解Future概念** → [01_formal_async_system.md](01_formal_async_system.md)
-2. **掌握async/await语法** → [02_async_theory.md](02_async_theory.md)
-3. **理解状态机转换** → [03_state_machine_theory.md](03_state_machine_theory.md)
-4. **学习基础执行模型** → [04_future_execution.md](04_future_execution.md)
+  1. **理解Future概念** → [01_formal_async_system.md](01_formal_async_system.md)
+  2. **掌握async/await语法** → [02_async_theory.md](02_async_theory.md)
+  3. **理解状态机转换** → [03_state_machine_theory.md](03_state_machine_theory.md)
+  4. **学习基础执行模型** → [04_future_execution.md](04_future_execution.md)
 
 ### 标准路径 (进阶) {#标准路径}
 
-5. **运行时系统架构** → [05_runtime_system.md](05_runtime_system.md)
-6. **错误处理机制** → [06_error_handling.md](06_error_handling.md)
-7. **性能优化策略** → [07_performance_optimization.md](07_performance_optimization.md)
-8. **并发模式应用** → [08_concurrency_patterns.md](08_concurrency_patterns.md)
+  1. **运行时系统架构** → [05_runtime_system.md](05_runtime_system.md)
+  2. **错误处理机制** → [06_error_handling.md](06_error_handling.md)
+  3. **性能优化策略** → [07_performance_optimization.md](07_performance_optimization.md)
+  4. **并发模式应用** → [08_concurrency_patterns.md](08_concurrency_patterns.md)
 
 ### 专家路径 (高级) {#专家路径}
 
-9. **生态系统集成** → [09_ecosystem_integration.md](09_ecosystem_integration.md)
-10. **自定义执行器开发** → 高级实践
-11. **异步框架设计** → 架构模式
-12. **性能调优和监控** → 生产实践
+  1. **生态系统集成** → [09_ecosystem_integration.md](09_ecosystem_integration.md)
+  2. **自定义执行器开发** → 高级实践
+  3. **异步框架设计** → 架构模式
+  4. **性能调优和监控** → 生产实践
 
 ## 质量指标 {#质量指标}
 

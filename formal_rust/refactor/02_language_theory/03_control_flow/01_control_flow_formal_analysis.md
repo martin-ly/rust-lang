@@ -15,6 +15,7 @@
 $$\text{ControlFlow}(P) = (V, E, \text{Entry}, \text{Exit}) \text{ 其中 } V \text{ 是节点集合，} E \text{ 是边集合}$$
 
 **控制流图**：
+
 - **节点**：$V = \{\text{语句}, \text{表达式}, \text{函数调用}\}$
 - **边**：$E = \{(v_1, v_2) \mid v_1, v_2 \in V, \text{存在执行路径从 } v_1 \text{ 到 } v_2\}$
 - **入口**：$\text{Entry} \in V$ 表示程序入口点
@@ -24,7 +25,7 @@ $$\text{ControlFlow}(P) = (V, E, \text{Entry}, \text{Exit}) \text{ 其中 } V \t
 条件控制是基于条件表达式的执行路径选择机制。
 
 **数学表示**：
-$$\text{ConditionalControl}(c, b_1, b_2) = \begin{cases} 
+$$\text{ConditionalControl}(c, b_1, b_2) = \begin{cases}
 b_1 & \text{if } \text{Eval}(c) = \text{true} \\
 b_2 & \text{if } \text{Eval}(c) = \text{false}
 \end{cases}$$
@@ -177,23 +178,23 @@ graph TD
     A --> C[实现机制]
     A --> D[高级特性]
     A --> E[应用模式]
-    
+
     B --> B1[控制流图]
     B --> B2[操作语义]
     B --> B3[类型理论]
-    
+
     C --> C1[编译器]
     C --> C2[解释器]
     C --> C3[运行时]
-    
+
     D --> D1[模式匹配]
     D --> D2[错误处理]
     D --> D3[异步控制]
-    
+
     E --> E1[函数式编程]
     E --> E2[命令式编程]
     E --> E3[混合编程]
-    
+
     %% 跨层关系
     B1 -.-> C1
     B2 -.-> C2
@@ -214,23 +215,23 @@ graph TD
     A --> C[性能特性]
     A --> D[表达特性]
     A --> E[抽象特性]
-    
+
     B --> B1[类型安全]
     B --> B2[内存安全]
     B --> B3[所有权安全]
-    
+
     C --> C1[编译时优化]
     C --> C2[运行时优化]
     C --> C3[内联优化]
-    
+
     D --> D1[模式匹配]
     D --> D2[高阶函数]
     D --> D3[闭包]
-    
+
     E --> E1[函数抽象]
     E --> E2[控制抽象]
     E --> E3[数据抽象]
-    
+
     %% 功能间关系
     B1 -.-> C1
     B2 -.-> C2
