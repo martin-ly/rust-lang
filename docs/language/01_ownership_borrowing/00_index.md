@@ -198,14 +198,14 @@
 
 **语法定义**:
 
-```
+```text
 Expr e ::= x | λx.e | e₁ e₂ | let x = e₁ in e₂ | move e | &e | &mut e
 Type τ ::= Own T | Shr T | Mut T | τ₁ → τ₂
 ```
 
 **类型规则**:
 
-```
+```text
 Γ ⊢ x : Own T    (if x : Own T ∈ Γ)
 Γ, x : Own T ⊢ e : τ / Γ ⊢ λx.e : Own T → τ
 ```
@@ -214,14 +214,14 @@ Type τ ::= Own T | Shr T | Mut T | τ₁ → τ₂
 
 **路径分析函数**:
 
-```
+```text
 Path p ::= x | p.f | *p | p[i]
 PathSet P ::= {p₁, p₂, ..., pₙ}
 ```
 
 **冲突检测算法**:
 
-```
+```text
 conflict(P₁, P₂) = ∃p₁ ∈ P₁, p₂ ∈ P₂ : overlaps(p₁, p₂)
 ```
 
@@ -229,14 +229,14 @@ conflict(P₁, P₂) = ∃p₁ ∈ P₁, p₂ ∈ P₂ : overlaps(p₁, p₂)
 
 **生命周期约束系统**:
 
-```
+```text
 Constraint C ::= α ⊆ β | α = β | α : 'static
 ConstraintSet Φ ::= {C₁, C₂, ..., Cₙ}
 ```
 
 **统一化算法**:
 
-```
+```text
 unify(Φ) = solve(Φ) ∪ generate_fresh_vars(Φ)
 ```
 
@@ -259,14 +259,14 @@ unify(Φ) = solve(Φ) ∪ generate_fresh_vars(Φ)
 **不变式 1.1 (借用唯一性)**:
 对于任意时刻 t 和位置 l：
 
-```
+```text
 (∃ r : mutable_borrow(r, l, t)) → (∀ r' ≠ r : ¬borrows(r', l, t))
 ```
 
 **不变式 1.2 (生命周期包含)**:
 对于任意借用 r 和其目标 t：
 
-```
+```text
 lifetime(r) ⊆ lifetime(t)
 ```
 
@@ -331,53 +331,53 @@ lifetime(r) ⊆ lifetime(t)
 **质量等级**: 优秀 (>150行，完整交叉引用)  
 **维护状态**: 持续更新
 
-## 形式化理论体系
+## 1形式化理论体系
 
-### 所有权演算 (Ownership Calculus)
+### 1所有权演算 (Ownership Calculus)
 
 基于线性逻辑的所有权演算系统：
 
 **语法定义**:
 
-```
+```text
 Expr e ::= x | λx.e | e e | let x = e in e | move e | &e | &mut e
 Type τ ::= Own T | Shr T | Mut T | τ  τ
 ```
 
 **类型规则**:
 
-```
+```text
 Γ  x : Own T    (if x : Own T  Γ)
 Γ, x : Own T  e : τ / Γ  λx.e : Own T  τ
 ```
 
-### 借用检查算法
+### 1借用检查算法
 
 **路径分析函数**:
 
-```
+```text
 Path p ::= x | p.f | *p | p[i]
 PathSet P ::= {p, p, ..., p}
 ```
 
 **冲突检测算法**:
 
-```
+```text
 conflict(P, P) = p  P, p  P : overlaps(p, p)
 ```
 
-### 生命周期推导理论
+### 1生命周期推导理论
 
 **生命周期约束系统**:
 
-```
+```text
 Constraint C ::= α  β | α = β | α : 'static
 ConstraintSet Φ ::= {C, C, ..., C}
 ```
 
 ## 安全性保证深度分析
 
-### 内存安全定理集
+### 1内存安全定理集
 
 **定理 1.2 (无悬空指针)**:
  reference r, time t : valid(r, t)   allocation a : points_to(r, a)  alive(a, t)
@@ -386,18 +386,18 @@ ConstraintSet Φ ::= {C, C, ..., C}
  location l, time t : ( thread : writes(thread, l, t))  
   ( thread  thread : accesses(thread, l, t))
 
-### 借用系统不变式
+### 1借用系统不变式
 
 **不变式 1.1 (借用唯一性)**:
 对于任意时刻 t 和位置 l：
 
-```
+```text
 ( r : mutable_borrow(r, l, t))  ( r'  r : borrows(r', l, t))
 ```
 
-## 实现机制深度分析
+## 1实现机制深度分析
 
-### 编译器实现架构
+### 1编译器实现架构
 
 **MIR 表示**:
 
@@ -412,7 +412,7 @@ ConstraintSet Φ ::= {C, C, ..., C}
 3. **冲突检测**: check_conflicts(borrows)  ConflictSet
 4. **错误报告**: report_errors(conflicts)  ErrorSet
 
-### 优化策略
+### 1优化策略
 
 **非词法生命周期 (NLL)**:
 
@@ -428,20 +428,20 @@ ConstraintSet Φ ::= {C, C, ..., C}
 
 ## 扩展理论指标
 
-### 理论完整性
+### 1理论完整性
 
 - **数学形式化覆盖**: 95%+ 核心概念
 - **定理证明覆盖**: 90%+ 关键性质
 - **算法实现覆盖**: 完整的编译器实现
 
-### 实践指导价值
+### 1实践指导价值
 
 - **示例代码覆盖**: 1000+ 代码示例
 - **常见模式分析**: 50+ 设计模式
 - **错误场景分析**: 100+ 编译错误示例
 - **性能优化指导**: 完整的最佳实践
 
-### 教学适用性
+### 1教学适用性
 
 - **学习路径清晰度**: 分层递进结构
 - **概念映射完整性**: 完整的关联图谱

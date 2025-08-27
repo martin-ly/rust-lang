@@ -4,25 +4,25 @@
 
 ### 1. 理论基础 {#theoretical-foundations}
 
-1. [形式化类型系统基础](01_formal_type_system.md)
-2. [类型理论基础](02_type_theory.md)
-3. [范畴论与类型系统](03_category_theory.md)
-4. [类型安全理论](04_type_safety.md)
-5. [仿射类型理论](05_affine_types.md)
-6. [同伦类型理论](06_homotopy_types.md)
+  1. [形式化类型系统基础](01_formal_type_system.md)
+  2. [类型理论基础](02_type_theory.md)
+  3. [范畴论与类型系统](03_category_theory.md)
+  4. [类型安全理论](04_type_safety.md)
+  5. [仿射类型理论](05_affine_types.md)
+  6. [同伦类型理论](06_homotopy_types.md)
 
 ### 2. 实践应用 {#practical-applications}
 
-7. [类型设计准则](07_type_design.md)
-8. [类型转换与型变](08_type_conversion.md)
-9. [包系统理论](09_package_system.md)
-10. [高级类型理论](10_advanced_theory.md)
+  1. [类型设计准则](07_type_design.md)
+  2. [类型转换与型变](08_type_conversion.md)
+  3. [包系统理论](09_package_system.md)
+  4. [高级类型理论](10_advanced_theory.md)
 
 ### 3. 参考资料 {#references}
 
-11. [代码示例](05_examples.md)
-12. [定理证明](06_theorems.md)
-13. [参考文献](07_references.md)
+  1. [代码示例](05_examples.md)
+  2. [定理证明](06_theorems.md)
+  3. [参考文献](07_references.md)
 
 ## 主题概述 {#overview}
 
