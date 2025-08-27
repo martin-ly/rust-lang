@@ -1,5 +1,9 @@
 # 异步形式化基础理论
 
+> 面包屑：`Theoretical Foundations` → `Concurrency Models` → `Async Models` → `01_async_formal_foundations.md`
+> 前置：`00_index.md`（快速路径）
+> 后续：`01_async_semantics.md`、`10_async_execution_model.md`
+
 ## 目录
 
 - [异步形式化基础理论](#异步形式化基础理论)

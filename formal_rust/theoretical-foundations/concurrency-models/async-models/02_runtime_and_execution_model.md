@@ -1,5 +1,9 @@
 # 第 2 章：运行时与执行模型
 
+> 面包屑：`Theoretical Foundations` → `Concurrency Models` → `Async Models` → `02_runtime_and_execution_model.md`
+> 前置：`01_Async_Programming.md`、`01_async_semantics.md`
+> 后续：`09_async_runtime_system.md`、`14_async_optimization_techniques.md`
+
 - [第 2 章：运行时与执行模型](#第-2-章运行时与执行模型)
   - [1. 核心概念区分](#1-核心概念区分)
     - [1.1. `Future`：描述任务](#11-future描述任务)

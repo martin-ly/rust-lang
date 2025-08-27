@@ -22,7 +22,7 @@ This document provides a comprehensive framework for the Rust Formal Theory Proj
 | **Memory Safety Semantics - 内存安全语义** | 98.7% | Diamond Elite ⭐⭐⭐⭐⭐⭐⭐⭐ | Revolutionary - 革命性 | Diamond Elite ⭐⭐⭐⭐⭐⭐⭐⭐ |
 | **Ownership and Borrowing - 所有权和借用** | 99.5% | Diamond Elite ⭐⭐⭐⭐⭐⭐⭐⭐ | Revolutionary - 革命性 | Diamond Elite ⭐⭐⭐⭐⭐⭐⭐⭐ |
 | **Concurrency Models - 并发模型** | 97.3% | Diamond Elite ⭐⭐⭐⭐⭐⭐⭐⭐ | Transformative - 变革性 | Diamond Elite ⭐⭐⭐⭐⭐⭐⭐⭐ |
-| **Trait System - 特质系统** | 96.8% | Diamond Elite ⭐⭐⭐⭐⭐⭐⭐⭐ | Transformative - 变革性 | Diamond Elite ⭐⭐⭐⭐⭐⭐⭐⭐ |
+| **Trait System - 特征系统** | 96.8% | Diamond Elite ⭐⭐⭐⭐⭐⭐⭐⭐ | Transformative - 变革性 | Diamond Elite ⭐⭐⭐⭐⭐⭐⭐⭐ |
 | **Lifetime Management - 生命周期管理** | 98.9% | Diamond Elite ⭐⭐⭐⭐⭐⭐⭐⭐ | Revolutionary - 革命性 | Diamond Elite ⭐⭐⭐⭐⭐⭐⭐⭐ |
 | **Error Handling - 错误处理** | 97.1% | Diamond Elite ⭐⭐⭐⭐⭐⭐⭐⭐ | Transformative - 变革性 | Diamond Elite ⭐⭐⭐⭐⭐⭐⭐⭐ |
 | **Macro System - 宏系统** | 95.4% | Diamond Elite ⭐⭐⭐⭐⭐⭐⭐⭐ | Significant - 重要 | Diamond Elite ⭐⭐⭐⭐⭐⭐⭐⭐ |

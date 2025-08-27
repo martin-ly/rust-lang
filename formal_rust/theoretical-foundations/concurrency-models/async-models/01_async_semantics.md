@@ -1,5 +1,9 @@
 # Rust异步语义深度分析
 
+> 面包屑：`Theoretical Foundations` → `Concurrency Models` → `Async Models` → `01_async_semantics.md`
+> 前置：`01_Async_Programming.md`、`01_async_formal_foundations.md`
+> 后续：`10_async_execution_model.md`、`09_async_runtime_system.md`
+
 **文档版本**: 1.0  
 **创建日期**: 2025-01-27  
 **学术级别**: ⭐⭐⭐⭐⭐ 专家级  

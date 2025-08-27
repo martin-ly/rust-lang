@@ -1,5 +1,9 @@
 # 异步运行时系统
 
+> 面包屑：`Theoretical Foundations` → `Concurrency Models` → `Async Models` → `09_async_runtime_system.md`
+> 前置：`02_runtime_and_execution_model.md`
+> 后续：`14_async_optimization_techniques.md`、`21_async_future_directions.md`
+
 ## 理论定义
 
 ### 异步运行时系统的基本概念

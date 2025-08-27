@@ -1,5 +1,28 @@
 # Rust异步编程理论 - 完整形式化体系索引
 
+> 导航提示：如遇索引项与实际文件名不完全一致，请查看 `00_master_index.md` 的“当前落地文件映射”以获取对应关系与命名策略。
+
+## 🚀 快速路径（建议起点）
+
+- 入门→概览：`01_Async_Programming.md`（或 `01_async_programming_theory.md` 同类）
+- 形式化基础：`01_formal_async_foundations.md`（或 `01_async_formal_foundations.md`）
+- 语义深入：`01_async_semantics.md`
+- 执行模型：`10_async_execution_model.md`（占位，桥接到 `02_runtime_and_execution_model.md`）
+- 运行时/调度：`09_async_runtime_system.md`、`05_runtime_system.md`
+- 性能优化：`14_async_optimization_techniques.md`（占位，汇聚性能文档）
+- 调试与验证：`16_async_debugging_techniques.md`、`27_async_verification_theory.md`、`28_async_formal_proofs.md`
+
+## 🧭 常见阅读路线（模板）
+
+1) 入门→语义→执行
+   - `01_Async_Programming.md` → `01_async_formal_foundations.md`/`01_formal_async_foundations.md` → `01_async_semantics.md` → `10_async_execution_model.md`（占位，桥接到 `02_runtime_and_execution_model.md`）
+
+2) 运行时→优化→案例
+   - `02_runtime_and_execution_model.md` → `09_async_runtime_system.md` → `14_async_optimization_techniques.md`（占位，汇聚性能文档） → `40_async_summary.md`/`31_async_case_studies.md`
+
+3) 特质→验证→高级话题
+   - `00_Trait.md` → `27_async_verification_theory.md` → `28_async_formal_proofs.md` → `21_async_future_directions.md`（占位）/`38_async_emerging_patterns.md`
+
 ## 📋 索引概览
 
 **文档类型**: 异步编程理论索引 (Asynchronous Programming Theory Index)  

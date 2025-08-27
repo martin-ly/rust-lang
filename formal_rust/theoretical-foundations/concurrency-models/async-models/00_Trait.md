@@ -1,5 +1,9 @@
 # Rust异步特质理论 - 完整形式化体系
 
+> 面包屑：`Theoretical Foundations` → `Concurrency Models` → `Async Models` → `00_Trait.md`
+> 前置：`01_Async_Programming.md`、`01_async_formal_foundations.md`
+> 后续：`01_async_semantics.md`、`14_async_optimization_techniques.md`
+
 ## 📋 文档概览
 
 **文档类型**: 异步特质理论 (Asynchronous Trait Theory)  

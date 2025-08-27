@@ -1,5 +1,9 @@
 # Rust异步编程理论 - 完整形式化体系
 
+> 面包屑：`Theoretical Foundations` → `Concurrency Models` → `Async Models` → `01_Async_Programming.md`
+> 前置：`00_index.md`（快速路径）、`01_formal_async_foundations.md`
+> 后续：`01_async_semantics.md`、`10_async_execution_model.md`
+
 ## 📋 文档概览
 
 **文档类型**: 异步编程理论 (Asynchronous Programming Theory)  

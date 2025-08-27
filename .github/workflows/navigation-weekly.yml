@@ -14,16 +14,17 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Navigation Check
+        id: navigation
         shell: pwsh
         run: |
           $report = "navigation_report_$(Get-Date -Format yyyyMMdd_HHmmss).txt"
           $result = .\scripts\navigation_injector.ps1 -Root . -CheckOnly 2>&1
           $result | Out-File -FilePath $report -Encoding UTF8
           Write-Host "Saved report to $report"
-          echo "REPORT_FILE=$report" | Out-File -FilePath $env:GITHUB_ENV -Append
+          echo "report_file=$report" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
       - name: Upload Report Artifact
         uses: actions/upload-artifact@v4
         with:
           name: weekly-navigation-report
-          path: ${{ env.REPORT_FILE }}
+          path: ${{ steps.navigation.outputs.report_file }}

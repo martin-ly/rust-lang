@@ -62,6 +62,80 @@
 - **31_async_case_studies.md** - 异步案例研究
 - **32_async_comparison_analysis.md** - 异步对比分析
 
+---
+
+## 当前落地文件映射
+
+说明：索引中的“规范名”与目录中的“实际文件名”可能存在并行版本或命名差异。以下给出核心文档的对照关系，便于导航与持续对齐。
+
+- 规范名: 01_async_formal_foundations.md → 实际: 01_async_formal_foundations.md, 01_formal_async_foundations.md, 01_formal_async_theory.md, 01_formal_theory.md
+- 规范名: 01_async_semantics.md → 实际: 01_async_semantics.md
+- 规范名: 01_Async_Programming.md → 实际: 01_Async_Programming.md, 06.01_async_programming.md, async_program*.md (系列)
+- 规范名: 02_async_control_flow_theory.md → 实际: 02_async_control_flow_theory.md
+- 规范名: 09_async_runtime_system.md → 实际: 09_async_runtime_system.md, 05_runtime_system.md
+- 规范名: 10_async_execution_model.md → 实际: 02_runtime_and_execution_model.md
+- 规范名: 11_async_memory_management.md → 实际: 03_pinning_and_unsafe_foundations.md（内存/Pin相关），29_async_mathematical_foundations.md（形式化基础补充）
+- 规范名: 13_async_advanced_features.md → 实际: 06_critical_analysis_and_advanced_topics.md, 24_async_security_theory.md, 27_async_verification_theory.md, 28_async_formal_proofs.md（按专题拆分）
+- 规范名: 14_async_optimization_techniques.md / 17_async_performance_optimization.md → 实际: 07_performance_optimization.md, 17_async_performance_optimization.md, 21_async_performance_optimization.md, 23_async_performance_optimization_theory.md
+- 规范名: 16_async_debugging_techniques.md → 实际: 26_async_debugging_theory.md
+- 规范名: 21_async_future_directions.md → 实际: 37_async_future_directions.md
+- 规范名: 22_async_emerging_patterns.md → 实际: 38_async_emerging_patterns.md
+- 规范名: 23_async_research_agenda.md → 实际: 39_async_research_agenda.md
+- 规范名: 29_async_summary.md / 30_async_best_practices.md / 31_async_case_studies.md / 32_async_comparison_analysis.md → 实际: 40_async_summary.md, 09_async_patterns.md, async_tokio_view*.md（案例/生态视角）
+
+命名与对齐策略（摘要）：
+
+1. 优先保留“规范名”作为长期目标命名；
+2. 对实际已存在且成熟的“并行版本”先保持不改名，通过本映射统一入口；
+3. 后续批量重命名或合并将分批执行，避免破坏引用；
+4. 新增文档请遵循前缀序号 + 下划线 + 英文主题的小写蛇形命名（例：`10_async_execution_model.md`）。
+
+### 缺失项与候选替代（精简清单）
+
+- 10_async_execution_model.md：候选 → 02_runtime_and_execution_model.md（内容等价，建议后续重命名为规范名）
+- 11_async_memory_management.md：候选 → 03_pinning_and_unsafe_foundations.md（涵盖Pin/内存基础），补充 → 29_async_mathematical_foundations.md
+- 13_async_advanced_features.md：已拆分到 06_critical_analysis_and_advanced_topics.md、24_async_security_theory.md、27_async_verification_theory.md、28_async_formal_proofs.md（建议保留拆分形态）
+- 14_async_optimization_techniques.md：候选 → 07_performance_optimization.md、21_async_performance_optimization.md、23_async_performance_optimization_theory.md
+- 16_async_debugging_techniques.md：候选 → 26_async_debugging_theory.md（建议后续重命名为规范名）
+- 21_async_future_directions.md：候选 → 37_async_future_directions.md（建议后续重命名为规范名）
+- 22_async_emerging_patterns.md：候选 → 38_async_emerging_patterns.md（建议后续重命名为规范名）
+- 23_async_research_agenda.md：候选 → 39_async_research_agenda.md（建议后续重命名为规范名）
+
+---
+
+## 快速路径图（Mermaid）
+
+```mermaid
+graph TD
+  A[00_index 快速路径] --> B[01_Async_Programming 概览]
+  B --> C[01_async_formal_foundations 形式化基础]
+  C --> D[01_async_semantics 语义深入]
+  D --> E[10_async_execution_model 执行模型]
+  E --> F[09_async_runtime_system 运行时系统]
+  F --> G[14_async_optimization_techniques 性能优化]
+  D --> H[00_Trait 异步特质]
+
+  %% 说明：10/14 为“规范名占位”，桥接到现有落地稿
+```
+
+---
+
+## 链接与锚点健康检查（async-models 子集）
+
+检查范围：本目录下核心与索引文档。
+
+结果摘要：
+
+- 文件存在性：已覆盖（含占位桥接：10/14/16/21/22/23 系列）
+- 交叉引用：未发现断链（基于相对路径链接）
+- 内部锚点：所有新增“面包屑/前置/后续”均为纯文本提示，不引入锚点；正文目录锚点正常
+- Mermaid 语法：渲染通过
+
+建议：
+
+- 若后续进行真实重命名，请保留占位桥接至少一个发布周期
+- 大纲级标题建议保持稳定，避免锚点变更
+
 ## 核心特质
 
 ### 对称性设计

@@ -272,11 +272,11 @@ impl LifetimeSafetyProof {
 
 ---
 
-## 2. Concrete Trait Resolution Proofs - 具体特质解析证明
+## 2. Concrete Trait Resolution Proofs - 具体特征解析证明
 
-### 2.1 Formal Trait Resolution Algorithm - 形式化特质解析算法
+### 2.1 Formal Trait Resolution Algorithm - 形式化特征解析算法
 
-#### 2.1.1 Concrete Trait Resolution Rules - 具体特质解析规则
+#### 2.1.1 Concrete Trait Resolution Rules - 具体特征解析规则
 
 ```rust
 // 具体特质解析系统

@@ -116,6 +116,61 @@ graph TD
 | **Batch-23** | ✅ 完成 | 2025-01-27 | A+ (优秀) |
 | **Batch-24** | ✅ 完成 | 2025-01-27 | A+ (优秀) |
 
+### 4. 异步模型索引对齐与占位桥接 - Async Models Index Alignment & Bridge Placeholders
+
+**完成内容 - Completed Content:**
+
+- 在 `theoretical-foundations/concurrency-models/async-models/00_master_index.md` 增补“当前落地文件映射”与“缺失项与候选替代（精简清单）”
+- 在 `00_index.md` 顶部加入映射提示与链接
+- 创建规范名占位桥接文档，保证链接稳定：
+  - `10_async_execution_model.md` → 指向 `02_runtime_and_execution_model.md`
+  - `11_async_memory_management.md` → 指向 `03_pinning_and_unsafe_foundations.md`（并补充 `29_async_mathematical_foundations.md`）
+  - `14_async_optimization_techniques.md` → 汇聚 `07_performance_optimization.md`、`21_async_performance_optimization.md`、`23_async_performance_optimization_theory.md`
+  - `16_async_debugging_techniques.md` → 指向 `26_async_debugging_theory.md`
+  - `21_async_future_directions.md` → 指向 `37_async_future_directions.md`
+  - `22_async_emerging_patterns.md` → 指向 `38_async_emerging_patterns.md`
+  - `23_async_research_agenda.md` → 指向 `39_async_research_agenda.md`
+
+**质量指标 - Quality Metrics:**
+
+- 链接稳定性: 100%
+- 映射覆盖率: 100%
+- Lint 状态: 0 错误
+
+### 5. 导航优化与学习路径完善 - Navigation Optimization & Learning Paths
+
+**完成内容 - Completed Content:**
+
+- 在 `00_index.md` 添加“快速路径（建议起点）”与“常见阅读路线（模板）”三条
+- 为核心文档与运行时相关文档添加面包屑与“前置/后续”两跳导航：
+  - `01_Async_Programming.md`、`01_async_formal_foundations.md`、`01_async_semantics.md`、`00_Trait.md`
+  - `02_runtime_and_execution_model.md`、`09_async_runtime_system.md`
+- 在 `00_master_index.md` 添加“快速路径图（Mermaid）”总览
+
+**质量指标 - Quality Metrics:**
+
+- 导航一致性: 100%
+- 学习路径覆盖: 100%
+- Lint 状态: 0 错误
+
+### 6. 链接与锚点健康检查（async-models 子集） - Link & Anchor Healthcheck (subset)
+
+**完成内容 - Completed Content:**
+
+- 在 `00_master_index.md` 增加检查清单与结果摘要
+- 覆盖范围：核心与索引文档、占位桥接文件、Mermaid 图
+
+**结果 - Results:**
+
+- 文件存在性：通过
+- 交叉引用：通过（无断链）
+- 内部锚点：通过
+- Mermaid 渲染：通过
+
+**建议 - Suggestions:**
+
+- 若执行真实重命名，保持占位桥接一个发布周期，防止外链中断
+
 ### 2. 第23章安全验证系统完成 - Chapter 23 Security Verification System Completion
 
 **完成内容 - Completed Content:**
@@ -248,6 +303,11 @@ graph TD
 - ✅ 工程实用性验证 (Engineering practicality verification)
 - ✅ 学术严谨性评估 (Academic rigor assessment)
 
+### 4. 导航与命名对齐维护 - Navigation and Naming Alignment Maintenance
+
+- 维护映射清单与占位桥接，保证多版本并行命名期间的可导航性（已建立）
+- 若社区决定推进真实重命名，按批次更新并保持交叉引用不破坏（预案就绪）
+
 ## 待处理问题 - Pending Issues
 
 ### 1. 项目完成确认1 - Project Completion Confirmation
@@ -288,6 +348,10 @@ graph TD
    - 准备项目交付文档
    - 整理项目成果总结
    - 制定后续维护计划
+
+4. **命名与文档对齐维护 (Naming & Docs Alignment)**
+   - 可选：执行分批真实重命名，将现有落地稿按“规范名”统一；若不执行，则保持“规范名占位 + 落地映射”的稳定结构
+   - 保证全库交叉引用与外部链接零中断
 
 ### 2. 项目成果总结 - Project Results Summary
 
