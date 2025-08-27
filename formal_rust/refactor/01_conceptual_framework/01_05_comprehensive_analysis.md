@@ -36,7 +36,7 @@
 
 设 C 为概念集合，则每个概念 c ∈ C 可以表示为：
 
-```
+```text
 c = (position, relations, properties, hierarchy)
 ```
 
@@ -80,7 +80,7 @@ impl ComprehensiveAnalysis {
 
 #### 2.1.1 分类矩阵位置
 
-```
+```text
 position = (L2, F1, A1)  // 语言设计层, 核心机制, 系统编程
 ```
 
@@ -119,7 +119,7 @@ P(Ownership) = {
 
 #### 2.1.4 层级位置
 
-```
+```text
 hierarchy = L2  // 语言设计层
 ```
 
@@ -127,7 +127,7 @@ hierarchy = L2  // 语言设计层
 
 #### 2.2.1 分类矩阵位置
 
-```
+```text
 position = (L1, F2, A1)  // 理论基础层, 安全保证, 系统编程
 ```
 
@@ -166,7 +166,7 @@ P(TypeSystem) = {
 
 #### 2.2.4 层级位置
 
-```
+```text
 hierarchy = L1  // 理论基础层
 ```
 
@@ -174,7 +174,7 @@ hierarchy = L1  // 理论基础层
 
 #### 2.3.1 分类矩阵位置
 
-```
+```text
 position = (L3, F4, A4)  // 实现机制层, 并发处理, 分布式系统
 ```
 
@@ -213,7 +213,7 @@ P(Concurrency) = {
 
 #### 2.3.4 层级位置
 
-```
+```text
 hierarchy = L3  // 实现机制层
 ```
 
