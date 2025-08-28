@@ -278,7 +278,7 @@ Specialization allows more specific implementations to override more general one
 
 **Formal Definition:**
 
-```
+```text
 impl<T> Trait for Container<T> { /* general */ }
 impl Trait for Container<i32> { /* specific */ }
 
@@ -320,7 +320,7 @@ Specialization must follow specific rules to maintain coherence.
 
 **Rules:**
 
-```
+```text
 1. More specific impls must be more specific in all type parameters
 2. Specialization must be transitive
 3. No overlapping impls without specialization
@@ -357,7 +357,7 @@ Different strategies for implementing traits for generic types.
 
 **Strategies:**
 
-```
+```text
 1. Direct implementation: impl<T> Trait for Type<T>
 2. Conditional implementation: impl<T: Constraint> Trait for Type<T>
 3. Blanket implementation: impl<T: Constraint> Trait for T
@@ -406,7 +406,7 @@ Composing multiple implementations to build complex functionality.
 
 **Formal Definition:**
 
-```
+```text
 impl<T: Trait₁> Trait₂ for Type<T> where Type<T>: Trait₁
 {
     // Implementation that builds on Trait₁
@@ -457,7 +457,7 @@ Implementations that work with higher-order types or type constructors.
 
 **Formal Definition:**
 
-```
+```text
 impl<T, F> Trait for Type<T, F>
 where
     F: Fn(T) -> U
@@ -507,7 +507,7 @@ Implementations for types with phantom type parameters.
 
 **Formal Definition:**
 
-```
+```text
 impl<T> Trait for PhantomType<T>
 where
     PhantomType<T> contains PhantomData<T>
@@ -575,7 +575,7 @@ Rules that ensure trait implementations are unique and non-conflicting.
 
 **Rules:**
 
-```
+```text
 1. Orphan Rule: At least one of Trait or Type must be local
 2. Overlap Rule: No two implementations can overlap
 3. Specialization Rule: More specific impls override general ones
@@ -615,7 +615,7 @@ Algorithm for checking implementation coherence.
 
 **Algorithm:**
 
-```
+```text
 1. Collect all implementations for each trait-type pair
 2. Check orphan rule compliance
 3. Check for overlapping implementations
@@ -679,7 +679,7 @@ Generic implementations preserve type safety.
 
 **Proof:**
 
-```
+```text
 1. Let impl<T: Constraint> Trait for Type<T> be a generic implementation
 2. Constraint ensures T has required functionality
 3. Implementation can only use functionality guaranteed by Constraint
@@ -695,7 +695,7 @@ Specialization correctly chooses the most specific implementation.
 
 **Proof:**
 
-```
+```text
 1. Let impl₁ be more specific than impl₂
 2. impl₁ applies to a subset of types that impl₂ applies to
 3. When both apply, impl₁ is chosen
@@ -711,7 +711,7 @@ Coherence rules ensure unique trait implementations.
 
 **Proof:**
 
-```
+```text
 1. Orphan rule ensures at least one local component
 2. Overlap rule prevents conflicting implementations
 3. Specialization rule resolves ambiguities

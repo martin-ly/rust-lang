@@ -10,7 +10,7 @@ Phantom data is a type parameter that doesn't appear in the runtime representati
 
 **Formal Definition:**
 
-```
+```text
 struct PhantomType<T> {
     _phantom: PhantomData<T>,
     // T is used only at type level, not at runtime
@@ -58,7 +58,7 @@ Key properties of phantom data types.
 
 **Properties:**
 
-```
+```text
 1. Zero Runtime Cost: PhantomData<T> has size 0
 2. Type Safety: T provides compile-time type information
 3. Variance: PhantomData<T> is covariant in T
@@ -109,7 +109,7 @@ A type-level function maps types to types using associated types.
 
 **Formal Definition:**
 
-```
+```text
 trait TypeFunction {
     type Output;
 }
@@ -159,7 +159,7 @@ Type-level conditionals implement conditional logic at the type level.
 
 **Formal Definition:**
 
-```
+```text
 trait If<Condition> {
     type Output;
 }
@@ -215,7 +215,7 @@ Type-safe units prevent mixing different units of measurement.
 
 **Formal Definition:**
 
-```
+```text
 struct Unit<T> {
     value: f64,
     _phantom: PhantomData<T>,
@@ -282,7 +282,7 @@ Type-safe unit conversions using phantom types.
 
 **Formal Definition:**
 
-```
+```text
 trait UnitConversion<From, To> {
     fn convert(value: Measurement<From>) -> Measurement<To>;
 }
@@ -332,7 +332,7 @@ A state machine where states are represented as types.
 
 **Formal Definition:**
 
-```
+```text
 struct StateMachine<State> {
     data: StateData,
     _phantom: PhantomData<State>,
@@ -422,7 +422,7 @@ Type-safe state transitions that change the type parameter.
 
 **Formal Definition:**
 
-```
+```text
 trait StateTransition<From, To> {
     fn transition(state: StateMachine<From>) -> StateMachine<To>;
 }
@@ -471,7 +471,7 @@ Numbers represented as types for compile-time computation.
 
 **Formal Definition:**
 
-```
+```text
 struct Zero;
 struct Succ<N>;
 
@@ -532,7 +532,7 @@ Arithmetic operations on type-level numbers.
 
 **Formal Definition:**
 
-```
+```text
 trait Add<Rhs> {
     type Output;
 }
@@ -600,7 +600,7 @@ Lists represented as types for compile-time operations.
 
 **Formal Definition:**
 
-```
+```text
 struct Nil;
 struct Cons<Head, Tail>;
 
@@ -662,7 +662,7 @@ Operations on type-level lists.
 
 **Formal Definition:**
 
-```
+```text
 trait Append<Rhs> {
     type Output;
 }
@@ -786,7 +786,7 @@ Common patterns for using phantom data.
 
 **Patterns:**
 
-```
+```text
 1. Type Safety: Prevent mixing different types
 2. State Machines: Represent states as types
 3. Units: Prevent mixing different units
@@ -858,7 +858,7 @@ Phantom data preserves type safety without runtime cost.
 
 **Proof:**
 
-```
+```text
 1. PhantomData<T> has zero runtime size
 2. T provides compile-time type information
 3. Type checker enforces type safety using T
@@ -874,7 +874,7 @@ Type-level programming can express all computable type relationships.
 
 **Proof:**
 
-```
+```text
 1. Type-level numbers can represent natural numbers
 2. Type-level lists can represent sequences
 3. Type-level functions can represent computations
@@ -890,7 +890,7 @@ Type-level state machines prevent invalid state transitions.
 
 **Proof:**
 
-```
+```text
 1. States are represented as distinct types
 2. Transitions change the type parameter
 3. Invalid transitions cause compile errors

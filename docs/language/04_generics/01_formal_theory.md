@@ -44,7 +44,8 @@
 
 ## Introduction
 
-Rust's generics system represents a sophisticated implementation of **parametric polymorphism** grounded in **category theory** and **type theory**. This system enables the creation of type-safe, reusable abstractions while maintaining zero-cost abstractions and compile-time guarantees.
+Rust's generics system represents a sophisticated implementation of **parametric polymorphism** grounded in **category theory** and **type theory**.
+This system enables the creation of type-safe, reusable abstractions while maintaining zero-cost abstractions and compile-time guarantees.
 
 ### Key Design Principles
 

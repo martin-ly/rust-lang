@@ -6,7 +6,9 @@
 
 Rust achieves memory safety and thread safety through its unique ownership system while avoiding the runtime overhead of garbage collection. The core mechanisms of this system include borrowing, mutable borrowing, and move semantics, which together form the foundation of Rust's type system. This document explores the theoretical foundations of these mechanisms and their relationship and isomorphism with real-world resource management models.
 
-Rust语言通过其独特的所有权系统实现了内存安全与线程安全，同时避免了垃圾回收带来的运行时开销。这一系统的核心机制包括借用、可变借用和移动语义，它们共同构成了Rust的类型系统基础。本文档探讨这些机制的理论基础，以及它们与现实世界资源管理模型的关联性和同构性。
+Rust语言通过其独特的所有权系统实现了内存安全与线程安全，同时避免了垃圾回收带来的运行时开销。
+这一系统的核心机制包括借用、可变借用和移动语义，它们共同构成了Rust的类型系统基础。
+本文档探讨这些机制的理论基础，以及它们与现实世界资源管理模型的关联性和同构性。
 
 ## Table of Contents - 目录
 

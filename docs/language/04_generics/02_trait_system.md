@@ -30,7 +30,7 @@
 
 **定义 3.1** (Trait定义语法)
 
-```
+```text
 trait_def ::= trait trait_name { trait_items }
 trait_items ::= trait_item*
 trait_item ::= method_def | associated_type | associated_const
@@ -63,7 +63,7 @@ $$\frac{\Gamma, \text{Self}: \tau \vdash \text{params}: [\tau_1, ..., \tau_n] \q
 
 **定义 4.1** (Trait实现语法)
 
-```
+```text
 impl_def ::= impl trait_name for type_name { impl_items }
 impl_items ::= impl_item*
 impl_item ::= method_impl | associated_type_impl | associated_const_impl
@@ -162,7 +162,7 @@ $$\frac{\Gamma \vdash e : \tau \quad \Gamma \vdash \tau : \text{trait}}{\Gamma \
 
 **定义 6.1** (Trait约束语法)
 
-```
+```text
 trait_bound ::= type : trait_name
 where_clause ::= where { trait_bound* }
 generic_params ::= < type_param* >
@@ -209,7 +209,7 @@ fn solve_constraints(constraints: &[TraitBound]) -> Option<Vec<Impl>> {
 
 **定义 7.1** (Trait继承语法)
 
-```
+```text
 trait_def ::= trait trait_name : super_traits { trait_items }
 super_traits ::= trait_name+
 ```

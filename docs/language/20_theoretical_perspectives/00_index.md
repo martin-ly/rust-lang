@@ -46,7 +46,7 @@ Rust理论视角模块从多个学术角度深入分析Rust语言的理论基础
 
 ### 1.3 理论视角分类
 
-```
+```text
 理论视角体系
 ├── 基础数学理论
 │   ├── 类型理论
@@ -74,7 +74,7 @@ Rust理论视角模块从多个学术角度深入分析Rust语言的理论基础
 
 ### 2.1 三层架构设计
 
-```
+```text
 20_theoretical_perspectives/
 ├── theory_foundations/          # 理论基础层
 │   ├── type_theory_analysis.md # 类型理论分析
@@ -106,7 +106,7 @@ Rust理论视角模块从多个学术角度深入分析Rust语言的理论基础
 
 ### 3.1 输入依赖
 
-```
+```text
 输入依赖关系图
 01_ownership_borrowing → 20_theoretical_perspectives (所有权理论)
 02_type_system → 20_theoretical_perspectives (类型理论基础)
@@ -117,7 +117,7 @@ Rust理论视角模块从多个学术角度深入分析Rust语言的理论基础
 
 ### 3.2 输出影响
 
-```
+```text
 输出影响关系图
 20_theoretical_perspectives → 语言设计 (理论指导)
 20_theoretical_perspectives → 编译器开发 (形式化方法)
@@ -127,7 +127,7 @@ Rust理论视角模块从多个学术角度深入分析Rust语言的理论基础
 
 ### 3.3 横向关联
 
-```
+```text
 横向关联网络
 20_theoretical_perspectives ↔ 19_advanced_features (理论支撑)
 20_theoretical_perspectives ↔ 24_cross_language_comparison (比较研究)
@@ -138,7 +138,7 @@ Rust理论视角模块从多个学术角度深入分析Rust语言的理论基础
 
 ### 4.1 理论视角层次结构
 
-```
+```text
 理论视角架构
 ├── 基础理论层 (Foundation Layer)
 │   ├── 类型理论视角
@@ -228,7 +228,7 @@ Rust理论视角模块从多个学术角度深入分析Rust语言的理论基础
 
 ### 4.2 Rust特性的理论映射
 
-```
+```text
 Rust特性理论映射
 ├── 所有权系统
 │   ├── 线性类型理论
@@ -267,6 +267,7 @@ Rust类型系统可以形式化为一个四元组：
 $$\mathcal{T}_{\text{Rust}} = (\mathcal{T}, \Gamma, \vdash, \mathcal{R})$$
 
 其中：
+
 - $\mathcal{T}$ 是类型表达式集合
 - $\Gamma$ 是类型环境 $\Gamma: \text{Var} \rightarrow \text{Type}$
 - $\vdash$ 是类型判断关系
@@ -286,6 +287,7 @@ Rust中的函数形成范畴 $\mathbf{Rust}$：
 $$\mathbf{Rust} = (\text{Obj}, \text{Mor}, \circ, \text{id})$$
 
 其中：
+
 - $\text{Obj}$ 是Rust类型集合
 - $\text{Mor}(A, B)$ 是从类型$A$到类型$B$的函数集合
 - $\circ$ 是函数组合操作
@@ -305,6 +307,7 @@ Rust并发模型基于CSP理论，定义为：
 $$\mathcal{C}_{\text{Rust}} = (\mathcal{P}, \mathcal{C}, \parallel, \text{sync})$$
 
 其中：
+
 - $\mathcal{P}$ 是进程集合
 - $\mathcal{C}$ 是通道集合  
 - $\parallel$ 是并行组合操作
@@ -366,12 +369,14 @@ $$\forall P. \ \llbracket P \rrbracket = \llbracket \text{compile}(P) \rrbracket
 ### 7.1 理论应用于语言设计
 
 **设计原则映射**：
+
 1. **类型安全 → 类型理论**: 使用类型系统确保程序正确性
 2. **内存安全 → 线性逻辑**: 通过线性类型管理资源
 3. **并发安全 → 进程代数**: 基于理论模型设计并发原语
 4. **组合性 → 范畴论**: 确保语言特性的良好组合
 
 **实际应用示例**：
+
 ```rust
 // 类型理论指导的API设计
 trait Functor<F> {
@@ -401,6 +406,7 @@ impl LinearFile {
 ### 7.2 形式化验证实践
 
 **程序证明方法**：
+
 ```rust
 // 使用Prusti进行形式化验证
 use prusti_contracts::*;
@@ -421,6 +427,7 @@ fn pop<T>(v: &mut Vec<T>) -> Option<T> {
 ### 7.3 理论指导的性能优化
 
 **零成本抽象的理论基础**：
+
 ```rust
 // 基于范畴论的抽象优化
 trait Monad<M> {
@@ -445,6 +452,7 @@ fn computation() -> Result<i32, String> {
 ### 7.4 并发系统的理论设计
 
 **基于CSP的通道设计**：
+
 ```rust
 use std::sync::mpsc;
 use std::thread;
@@ -474,14 +482,17 @@ fn csp_pattern() {
 ### 8.1 基础路径 (Basic Path)
 
 **先修知识**：
+
 - 数学基础（离散数学、逻辑学）
 - Rust语言熟练应用
 - 计算机科学理论基础
 
 **学习序列**：
+
 1. 类型理论基础 → 2. 简单形式语义 → 3. 基础范畴论 → 4. 程序验证入门
 
 **实践项目**：
+
 - 简单类型检查器
 - 基础语义解释器
 - 程序正确性证明
@@ -489,14 +500,17 @@ fn csp_pattern() {
 ### 8.2 标准路径 (Standard Path)
 
 **进阶内容**：
+
 - 高级类型理论
 - 形式化方法
 - 编程语言语义学
 
 **学习序列**：
+
 1. 依赖类型理论 → 2. 进程代数 → 3. 模型检验 → 4. 定理证明
 
 **实践项目**：
+
 - 类型推断算法
 - 并发模型验证
 - 编译器正确性证明
@@ -504,14 +518,17 @@ fn csp_pattern() {
 ### 8.3 专家路径 (Expert Path)
 
 **高级主题**：
+
 - 研究前沿理论
 - 语言设计理论
 - 形式化验证技术
 
 **学习序列**：
+
 1. 前沿类型理论 → 2. 语言设计原理 → 3. 高级验证技术 → 4. 理论研究方法
 
 **实践项目**：
+
 - 新语言特性设计
 - 编译器优化验证
 - 理论成果发表
@@ -572,5 +589,6 @@ fn csp_pattern() {
 ---
 
 **文档历史**:  
+
 - 创建: 2025-07-22 - 初始版本
 - 更新: 2025-01-01 - V2.0版本，建立完整的理论视角框架

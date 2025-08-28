@@ -20,22 +20,56 @@
 
 ## 目录 {#table-of-contents}
 
-1. [模块概述](#1-module-overview)
-2. [目录结构](#2-directory-structure)
-3. [模块关系](#3-module-relationships)
-4. [核心概念映射](#4-core-concept-mapping)
-5. [理论框架](#5-theoretical-framework)
-6. [数学符号系统](#6-mathematical-notation)
-7. [实践指导](#7-practical-guidance)
-8. [学习路径](#8-learning-paths)
-9. [质量指标](#9-quality-indicators)
-10. [相关资源](#10-related-resources)
+- [Module 21: Rust 应用领域 {#module-21-application-domains}](#module-21-rust-应用领域-module-21-application-domains)
+  - [元数据 {#metadata}](#元数据-metadata)
+  - [目录 {#table-of-contents}](#目录-table-of-contents)
+  - [1. 模块概述 {#1-module-overview}](#1-模块概述-1-module-overview)
+    - [1.1 模块定位](#11-模块定位)
+    - [1.2 核心价值](#12-核心价值)
+    - [1.3 应用领域分类](#13-应用领域分类)
+  - [2. 目录结构 {#2-directory-structure}](#2-目录结构-2-directory-structure)
+    - [2.1 三层架构设计](#21-三层架构设计)
+    - [2.2 文档组织原则](#22-文档组织原则)
+  - [3. 模块关系 {#3-module-relationships}](#3-模块关系-3-module-relationships)
+    - [3.1 输入依赖](#31-输入依赖)
+    - [3.2 输出影响](#32-输出影响)
+    - [3.3 横向关联](#33-横向关联)
+  - [4. 核心概念映射 {#4-core-concept-mapping}](#4-核心概念映射-4-core-concept-mapping)
+    - [4.1 应用领域技术栈](#41-应用领域技术栈)
+    - [4.2 Rust特性与领域匹配度](#42-rust特性与领域匹配度)
+  - [5. 理论框架 {#5-theoretical-framework}](#5-理论框架-5-theoretical-framework)
+    - [5.1 领域适配性理论](#51-领域适配性理论)
+    - [5.2 架构模式理论](#52-架构模式理论)
+    - [5.3 性能预测理论](#53-性能预测理论)
+  - [6. 数学符号系统 {#6-mathematical-notation}](#6-数学符号系统-6-mathematical-notation)
+    - [6.1 基础符号](#61-基础符号)
+    - [6.2 领域特定符号](#62-领域特定符号)
+    - [6.3 性能度量符号](#63-性能度量符号)
+  - [7. 实践指导 {#7-practical-guidance}](#7-实践指导-7-practical-guidance)
+    - [7.1 系统编程最佳实践](#71-系统编程最佳实践)
+    - [7.2 Web开发架构模式](#72-web开发架构模式)
+    - [7.3 科学计算优化](#73-科学计算优化)
+    - [7.4 机器学习应用](#74-机器学习应用)
+  - [8. 学习路径 {#8-learning-paths}](#8-学习路径-8-learning-paths)
+    - [8.1 基础路径 (Basic Path)](#81-基础路径-basic-path)
+    - [8.2 标准路径 (Standard Path)](#82-标准路径-standard-path)
+    - [8.3 专家路径 (Expert Path)](#83-专家路径-expert-path)
+  - [9. 质量指标 {#9-quality-indicators}](#9-质量指标-9-quality-indicators)
+    - [9.1 文档完备性](#91-文档完备性)
+    - [9.2 理论深度](#92-理论深度)
+    - [9.3 实践价值](#93-实践价值)
+  - [10. 相关资源 {#10-related-resources}](#10-相关资源-10-related-resources)
+    - [10.1 依赖模块](#101-依赖模块)
+    - [10.2 技术生态](#102-技术生态)
+    - [10.3 学习资源](#103-学习资源)
 
 ## 1. 模块概述 {#1-module-overview}
 
 ### 1.1 模块定位
 
-Rust应用领域模块是一个综合性的研究和实践模块，探讨Rust语言在现代软件开发各个重要领域中的应用。本模块不仅分析Rust在传统系统编程中的优势，更重要的是研究其在Web开发、科学计算、机器学习、区块链、游戏开发、嵌入式系统等新兴领域中的独特价值和最佳实践。通过形式化的理论分析和大量的实践案例，为开发者选择和应用Rust提供科学的指导。
+Rust应用领域模块是一个综合性的研究和实践模块，探讨Rust语言在现代软件开发各个重要领域中的应用。
+本模块不仅分析Rust在传统系统编程中的优势，更重要的是研究其在Web开发、科学计算、机器学习、区块链、游戏开发、嵌入式系统等新兴领域中的独特价值和最佳实践。
+通过形式化的理论分析和大量的实践案例，为开发者选择和应用Rust提供科学的指导。
 
 ### 1.2 核心价值
 

@@ -28,37 +28,37 @@
 
 ### 2. 实现机制层 {#实现机制层}
 
-4. [区块链架构设计](04_blockchain_architecture.md#架构设计)
+1. [区块链架构设计](04_blockchain_architecture.md#架构设计)
    - 分层架构和模块设计
    - P2P网络和节点通信
    - 状态管理和存储引擎
 
-5. [智能合约引擎](05_smart_contract_engine.md#智能合约)
+2. [智能合约引擎](05_smart_contract_engine.md#智能合约)
    - 虚拟机设计和执行模型
    - Gas机制和资源管理
    - 合约安全性和形式化验证
 
-6. [网络协议栈](06_network_protocols.md#网络协议)
+3. [网络协议栈](06_network_protocols.md#网络协议)
    - 节点发现和连接管理
    - 区块传播和同步协议
    - 网络分区和恢复机制
 
 ### 3. 应用实践层 {#应用实践层}
 
-7. [Web3应用开发](07_web3_applications.md#web3应用)
-   - DeFi协议设计模式
-   - NFT和数字资产管理
-   - DAO治理和投票系统
+1. [Web3应用开发](07_web3_applications.md#web3应用)
+    - DeFi协议设计模式
+    - NFT和数字资产管理
+    - DAO治理和投票系统
 
-8. [性能优化策略](08_performance_optimization.md#性能优化)
-   - 分片和侧链技术
-   - 状态通道和离线扩容
-   - 并行处理和批量优化
+2. [性能优化策略](08_performance_optimization.md#性能优化)
+    - 分片和侧链技术
+    - 状态通道和离线扩容
+    - 并行处理和批量优化
 
-9. [安全与审计](09_security_audit.md#安全审计)
-   - 漏洞检测和形式化验证
-   - 攻击向量分析
-   - 安全最佳实践
+3. [安全与审计](09_security_audit.md#安全审计)
+    - 漏洞检测和形式化验证
+    - 攻击向量分析
+    - 安全最佳实践
 
 ## 主题概述 {#主题概述}
 
@@ -168,7 +168,7 @@ Rust区块链系统利用Rust的内存安全、并发安全和零成本抽象特
 **定义 15.2 (区块结构)**  
 区块是一个有序的数据结构：
 
-```
+```text
 Block_i = {
     header: {
         previous_hash: H(Block_{i-1}),
@@ -183,7 +183,7 @@ Block_i = {
 **定义 15.3 (拜占庭容错性)**  
 在n个节点的网络中，最多f个拜占庭节点时系统安全的条件：
 
-```
+```text
 n ≥ 3f + 1 ∧ ∀ honest_nodes ≥ 2f + 1
 ```
 
@@ -192,7 +192,7 @@ n ≥ 3f + 1 ∧ ∀ honest_nodes ≥ 2f + 1
 **定理 15.1 (区块链不可篡改性)**  
 在诚实多数假设下，区块链具有计算不可篡改性：
 
-```
+```text
 ∀ adversary A. Pr[A修改历史区块] ≤ negl(λ)
 ```
 
@@ -201,7 +201,7 @@ n ≥ 3f + 1 ∧ ∀ honest_nodes ≥ 2f + 1
 **定理 15.2 (共识活跃性)**  
 在网络同步假设下，诚实节点最终会达成共识：
 
-```
+```text
 ∃ T. ∀ t > T. ∀ honest_nodes n₁, n₂. 
 view(n₁, t) = view(n₂, t)
 ```
@@ -209,7 +209,7 @@ view(n₁, t) = view(n₂, t)
 **定理 15.3 (智能合约确定性)**  
 智能合约在相同输入下产生相同输出：
 
-```
+```text
 ∀ contract C, input i, state s. 
 execute(C, i, s) = (s', o) ⟹ 
 ∀ execution. execute(C, i, s) = (s', o)
@@ -309,17 +309,17 @@ execute(C, i, s) = (s', o) ⟹
 
 ### 标准路径 (进阶) {#标准路径}
 
-5. **智能合约进阶** → [05_smart_contract_engine.md](05_smart_contract_engine.md)
-6. **网络协议设计** → [06_network_protocols.md](06_network_protocols.md)
-7. **Web3应用开发** → [07_web3_applications.md](07_web3_applications.md)
-8. **性能优化技术** → [08_performance_optimization.md](08_performance_optimization.md)
+1. **智能合约进阶** → [05_smart_contract_engine.md](05_smart_contract_engine.md)
+2. **网络协议设计** → [06_network_protocols.md](06_network_protocols.md)
+3. **Web3应用开发** → [07_web3_applications.md](07_web3_applications.md)
+4. **性能优化技术** → [08_performance_optimization.md](08_performance_optimization.md)
 
 ### 专家路径 (高级) {#专家路径}
 
-9. **安全审计方法** → [09_security_audit.md](09_security_audit.md)
-10. **新兴密码学技术** → 零知识证明、后量子密码
-11. **Layer 2解决方案** → 状态通道、侧链、Rollup
-12. **跨链互操作** → 原子交换、桥接协议
+1. **安全审计方法** → [09_security_audit.md](09_security_audit.md)
+2. **新兴密码学技术** → 零知识证明、后量子密码
+3. **Layer 2解决方案** → 状态通道、侧链、Rollup
+4. **跨链互操作** → 原子交换、桥接协议
 
 ## 质量指标 {#质量指标}
 

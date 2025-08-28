@@ -150,9 +150,9 @@
 
 ### 后续主题
 
-4. **07_process**: 进程管理
-5. **08_algorithms**: 算法与数据结构
-6. **09_design_pattern**: 设计模式
+1. **07_process**: 进程管理
+2. **08_algorithms**: 算法与数据结构
+3. **09_design_pattern**: 设计模式
 
 ---
 

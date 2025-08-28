@@ -20,22 +20,56 @@
 
 ## 目录 {#table-of-contents}
 
-1. [模块概述](#1-module-overview)
-2. [目录结构](#2-directory-structure)
-3. [模块关系](#3-module-relationships)
-4. [核心概念映射](#4-core-concept-mapping)
-5. [理论框架](#5-theoretical-framework)
-6. [数学符号系统](#6-mathematical-notation)
-7. [实践指导](#7-practical-guidance)
-8. [学习路径](#8-learning-paths)
-9. [质量指标](#9-quality-indicators)
-10. [相关资源](#10-related-resources)
+- [Module 18: Rust 模型系统 {#module-18-model}](#module-18-rust-模型系统-module-18-model)
+  - [元数据 {#metadata}](#元数据-metadata)
+  - [目录 {#table-of-contents}](#目录-table-of-contents)
+  - [1. 模块概述 {#1-module-overview}](#1-模块概述-1-module-overview)
+    - [1.1 模块定位](#11-模块定位)
+    - [1.2 核心价值](#12-核心价值)
+    - [1.3 应用领域](#13-应用领域)
+  - [2. 目录结构 {#2-directory-structure}](#2-目录结构-2-directory-structure)
+    - [2.1 三层架构设计](#21-三层架构设计)
+    - [2.2 文档组织原则](#22-文档组织原则)
+  - [3. 模块关系 {#3-module-relationships}](#3-模块关系-3-module-relationships)
+    - [3.1 输入依赖](#31-输入依赖)
+    - [3.2 输出影响](#32-输出影响)
+    - [3.3 横向关联](#33-横向关联)
+  - [4. 核心概念映射 {#4-core-concept-mapping}](#4-核心概念映射-4-core-concept-mapping)
+    - [4.1 模型系统层次结构](#41-模型系统层次结构)
+    - [4.2 模型分类体系](#42-模型分类体系)
+  - [5. 理论框架 {#5-theoretical-framework}](#5-理论框架-5-theoretical-framework)
+    - [5.1 形式化模型理论](#51-形式化模型理论)
+    - [5.2 类型驱动建模理论](#52-类型驱动建模理论)
+    - [5.3 语义建模理论](#53-语义建模理论)
+  - [6. 数学符号系统 {#6-mathematical-notation}](#6-数学符号系统-6-mathematical-notation)
+    - [6.1 基础符号](#61-基础符号)
+    - [6.2 操作符](#62-操作符)
+    - [6.3 谓词和函数](#63-谓词和函数)
+  - [7. 实践指导 {#7-practical-guidance}](#7-实践指导-7-practical-guidance)
+    - [7.1 模型设计最佳实践](#71-模型设计最佳实践)
+    - [7.2 状态机建模](#72-状态机建模)
+    - [7.3 验证和测试](#73-验证和测试)
+    - [7.4 代码生成](#74-代码生成)
+  - [8. 学习路径 {#8-learning-paths}](#8-学习路径-8-learning-paths)
+    - [8.1 基础路径 (Basic Path)](#81-基础路径-basic-path)
+    - [8.2 标准路径 (Standard Path)](#82-标准路径-standard-path)
+    - [8.3 专家路径 (Expert Path)](#83-专家路径-expert-path)
+  - [9. 质量指标 {#9-quality-indicators}](#9-质量指标-9-quality-indicators)
+    - [9.1 文档完备性](#91-文档完备性)
+    - [9.2 理论深度](#92-理论深度)
+    - [9.3 实践价值](#93-实践价值)
+  - [10. 相关资源 {#10-related-resources}](#10-相关资源-10-related-resources)
+    - [10.1 依赖模块](#101-依赖模块)
+    - [10.2 外部参考](#102-外部参考)
+    - [10.3 工具和库](#103-工具和库)
 
 ## 1. 模块概述 {#1-module-overview}
 
 ### 1.1 模块定位
 
-Rust模型系统模块提供了建模、验证和模拟复杂系统的形式化框架，通过类型系统和特质系统的结合，实现高级抽象和语义表达。模型系统允许开发者以形式化方式表达、验证和推理关于系统的性质，支持从简单的领域模型到复杂的状态机和行为模型。本模块建立了完整的理论基础，为模型驱动开发、形式化验证和系统分析提供工具和方法论。
+Rust模型系统模块提供了建模、验证和模拟复杂系统的形式化框架，通过类型系统和特质系统的结合，实现高级抽象和语义表达。
+模型系统允许开发者以形式化方式表达、验证和推理关于系统的性质，支持从简单的领域模型到复杂的状态机和行为模型。
+本模块建立了完整的理论基础，为模型驱动开发、形式化验证和系统分析提供工具和方法论。
 
 ### 1.2 核心价值
 

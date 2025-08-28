@@ -5,7 +5,7 @@
 - **模块编号**: 12
 - **模块名称**: 特质系统 (Trait System)
 - **创建日期**: 2025-01-01
-- **最后更新**: 2025-06-30
+- **最后更新**: 2025-08-28
 - **版本**: v2.0
 - **维护者**: Rust语言形式化理论项目组
 
@@ -15,7 +15,7 @@
 
 - **[01_formal_theory.md](01_formal_theory.md)** - 特质系统形式化理论 (待完善)
 - **[02_trait_theory.md](02_trait_theory.md)** - 特质理论深度分析 (待完善)
-- **[03_coherence_theory.md](03_coherence_theory.md)** - 一致性理论 (待创建)
+- **[03_trait_coherence_theory.md](03_trait_coherence_theory.md)** - 一致性理论 (已完成)
 
 ### 2. 实现机制
 
@@ -130,8 +130,8 @@ Rust的特质系统是实现类型安全多态性的核心机制，基于Haskell
 
 ### 核心定理
 
-- **定理 12.1**: [全局一致性](03_coherence_theory.md#全局一致性定理) - 特质系统的全局一致性保证
-- **定理 12.2**: [孤儿规则](03_coherence_theory.md#孤儿规则定理) - 特质实现的冲突避免机制
+- **定理 12.1**: [全局一致性](03_trait_coherence_theory.md#全局一致性定理) - 特质系统的全局一致性保证
+- **定理 12.2**: [孤儿规则](03_trait_coherence_theory.md#孤儿规则定理) - 特质实现的冲突避免机制
 - **定理 12.3**: [解析唯一性](04_trait_resolution.md#解析唯一性定理) - 方法调用的唯一性解析
 - **定理 12.4**: [对象安全性](06_trait_objects.md#对象安全性定理) - 特质对象的构造条件
 - **定理 12.5**: [特化一致性](08_specialization.md#特化一致性定理) - 特化机制的一致性保证

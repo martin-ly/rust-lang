@@ -20,22 +20,57 @@
 
 ## 目录 {#table-of-contents}
 
-1. [模块概述](#1-module-overview)
-2. [目录结构](#2-directory-structure)
-3. [模块关系](#3-module-relationships)
-4. [核心概念映射](#4-core-concept-mapping)
-5. [理论框架](#5-theoretical-framework)
-6. [数学符号系统](#6-mathematical-notation)
-7. [实践指导](#7-practical-guidance)
-8. [学习路径](#8-learning-paths)
-9. [质量指标](#9-quality-indicators)
-10. [相关资源](#10-related-resources)
+- [Module 22: Rust 性能优化 {#module-22-performance-optimization}](#module-22-rust-性能优化-module-22-performance-optimization)
+  - [元数据 {#metadata}](#元数据-metadata)
+  - [目录 {#table-of-contents}](#目录-table-of-contents)
+  - [1. 模块概述 {#1-module-overview}](#1-模块概述-1-module-overview)
+    - [1.1 模块定位](#11-模块定位)
+    - [1.2 核心价值](#12-核心价值)
+    - [1.3 性能优化层次](#13-性能优化层次)
+  - [2. 目录结构 {#2-directory-structure}](#2-目录结构-2-directory-structure)
+    - [2.1 三层架构设计](#21-三层架构设计)
+    - [2.2 文档组织原则](#22-文档组织原则)
+  - [3. 模块关系 {#3-module-relationships}](#3-模块关系-3-module-relationships)
+    - [3.1 输入依赖](#31-输入依赖)
+    - [3.2 输出影响](#32-输出影响)
+    - [3.3 横向关联](#33-横向关联)
+  - [4. 核心概念映射 {#4-core-concept-mapping}](#4-核心概念映射-4-core-concept-mapping)
+    - [4.1 性能优化技术栈](#41-性能优化技术栈)
+    - [4.2 性能度量体系](#42-性能度量体系)
+  - [5. 理论框架 {#5-theoretical-framework}](#5-理论框架-5-theoretical-framework)
+    - [5.1 性能模型理论](#51-性能模型理论)
+    - [5.2 优化效果理论](#52-优化效果理论)
+    - [5.3 性能预测理论](#53-性能预测理论)
+    - [5.4 缓存理论](#54-缓存理论)
+  - [6. 数学符号系统 {#6-mathematical-notation}](#6-数学符号系统-6-mathematical-notation)
+    - [6.1 基础符号](#61-基础符号)
+    - [6.2 性能度量符号](#62-性能度量符号)
+    - [6.3 优化变换符号](#63-优化变换符号)
+  - [7. 实践指导 {#7-practical-guidance}](#7-实践指导-7-practical-guidance)
+    - [7.1 编译时优化最佳实践](#71-编译时优化最佳实践)
+    - [7.2 内存优化策略](#72-内存优化策略)
+    - [7.3 并发性能优化](#73-并发性能优化)
+    - [7.4 异步性能优化](#74-异步性能优化)
+  - [8. 学习路径 {#8-learning-paths}](#8-学习路径-8-learning-paths)
+    - [8.1 基础路径 (Basic Path)](#81-基础路径-basic-path)
+    - [8.2 标准路径 (Standard Path)](#82-标准路径-standard-path)
+    - [8.3 专家路径 (Expert Path)](#83-专家路径-expert-path)
+  - [9. 质量指标 {#9-quality-indicators}](#9-质量指标-9-quality-indicators)
+    - [9.1 文档完备性](#91-文档完备性)
+    - [9.2 理论深度](#92-理论深度)
+    - [9.3 实践价值](#93-实践价值)
+  - [10. 相关资源 {#10-related-resources}](#10-相关资源-10-related-resources)
+    - [10.1 依赖模块](#101-依赖模块)
+    - [10.2 性能工具](#102-性能工具)
+    - [10.3 优化库](#103-优化库)
 
 ## 1. 模块概述 {#1-module-overview}
 
 ### 1.1 模块定位
 
-Rust性能优化模块是系统性研究和实践高性能Rust程序设计的核心模块。本模块从理论和实践两个维度深入探讨Rust语言的性能特性，建立科学的性能分析和优化方法论。通过对编译时优化、运行时优化、内存管理、并发性能、算法优化等各个层面的深入分析，为开发者提供从微观到宏观的完整性能优化解决方案。
+Rust性能优化模块是系统性研究和实践高性能Rust程序设计的核心模块。
+本模块从理论和实践两个维度深入探讨Rust语言的性能特性，建立科学的性能分析和优化方法论。
+通过对编译时优化、运行时优化、内存管理、并发性能、算法优化等各个层面的深入分析，为开发者提供从微观到宏观的完整性能优化解决方案。
 
 ### 1.2 核心价值
 
@@ -46,7 +81,7 @@ Rust性能优化模块是系统性研究和实践高性能Rust程序设计的核
 
 ### 1.3 性能优化层次
 
-```
+```text
 Rust性能优化体系架构
 ├── 语言层面优化
 │   ├── 零成本抽象利用
@@ -84,7 +119,7 @@ Rust性能优化体系架构
 
 ### 2.1 三层架构设计
 
-```
+```text
 22_performance_optimization/
 ├── theory_foundations/          # 理论基础层
 │   ├── performance_theory.md   # 性能理论基础
@@ -116,7 +151,7 @@ Rust性能优化体系架构
 
 ### 3.1 输入依赖
 
-```
+```text
 输入依赖关系网络
 01_ownership_borrowing → 22_performance_optimization (内存管理基础)
 02_type_system → 22_performance_optimization (类型优化基础)
@@ -127,7 +162,7 @@ Rust性能优化体系架构
 
 ### 3.2 输出影响
 
-```
+```text
 输出影响关系网络
 22_performance_optimization → 应用开发质量 (性能保证)
 22_performance_optimization → 系统架构设计 (性能导向设计)
@@ -137,7 +172,7 @@ Rust性能优化体系架构
 
 ### 3.3 横向关联
 
-```
+```text
 横向关联网络
 22_performance_optimization ↔ 21_application_domains (领域特定优化)
 22_performance_optimization ↔ 23_security_verification (安全性能平衡)
@@ -148,7 +183,7 @@ Rust性能优化体系架构
 
 ### 4.1 性能优化技术栈
 
-```
+```text
 性能优化技术分类体系
 ├── 编译时优化
 │   ├── 零成本抽象
@@ -238,7 +273,7 @@ Rust性能优化体系架构
 
 ### 4.2 性能度量体系
 
-```
+```text
 性能指标分类框架
 ├── 时间性能指标
 │   ├── 延迟 (Latency)

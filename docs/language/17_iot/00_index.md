@@ -20,22 +20,55 @@
 
 ## 目录 {#table-of-contents}
 
-1. [模块概述](#1-module-overview)
-2. [目录结构](#2-directory-structure)
-3. [模块关系](#3-module-relationships)
-4. [核心概念映射](#4-core-concept-mapping)
-5. [理论框架](#5-theoretical-framework)
-6. [数学符号系统](#6-mathematical-notation)
-7. [实践指导](#7-practical-guidance)
-8. [学习路径](#8-learning-paths)
-9. [质量指标](#9-quality-indicators)
-10. [相关资源](#10-related-resources)
+- [Module 17: Rust 物联网系统 {#module-17-iot}](#module-17-rust-物联网系统-module-17-iot)
+  - [元数据 {#metadata}](#元数据-metadata)
+  - [目录 {#table-of-contents}](#目录-table-of-contents)
+  - [1. 模块概述 {#1-module-overview}](#1-模块概述-1-module-overview)
+    - [1.1 模块定位](#11-模块定位)
+    - [1.2 核心价值](#12-核心价值)
+    - [1.3 应用领域](#13-应用领域)
+  - [2. 目录结构 {#2-directory-structure}](#2-目录结构-2-directory-structure)
+    - [2.1 三层架构设计](#21-三层架构设计)
+    - [2.2 文档组织原则](#22-文档组织原则)
+  - [3. 模块关系 {#3-module-relationships}](#3-模块关系-3-module-relationships)
+    - [3.1 输入依赖](#31-输入依赖)
+    - [3.2 输出影响](#32-输出影响)
+    - [3.3 横向关联](#33-横向关联)
+  - [4. 核心概念映射 {#4-core-concept-mapping}](#4-核心概念映射-4-core-concept-mapping)
+    - [4.1 物联网系统层次结构](#41-物联网系统层次结构)
+    - [4.2 嵌入式Rust生态](#42-嵌入式rust生态)
+  - [5. 理论框架 {#5-theoretical-framework}](#5-理论框架-5-theoretical-framework)
+    - [5.1 形式化IoT系统模型](#51-形式化iot系统模型)
+    - [5.2 嵌入式系统理论](#52-嵌入式系统理论)
+    - [5.3 通信协议理论](#53-通信协议理论)
+  - [6. 数学符号系统 {#6-mathematical-notation}](#6-数学符号系统-6-mathematical-notation)
+    - [6.1 基础符号](#61-基础符号)
+    - [6.2 操作符](#62-操作符)
+    - [6.3 谓词和函数](#63-谓词和函数)
+  - [7. 实践指导 {#7-practical-guidance}](#7-实践指导-7-practical-guidance)
+    - [7.1 嵌入式Rust开发指南](#71-嵌入式rust开发指南)
+    - [7.2 IoT架构设计模式](#72-iot架构设计模式)
+    - [7.3 性能优化策略](#73-性能优化策略)
+  - [8. 学习路径 {#8-learning-paths}](#8-学习路径-8-learning-paths)
+    - [8.1 基础路径 (Basic Path)](#81-基础路径-basic-path)
+    - [8.2 标准路径 (Standard Path)](#82-标准路径-standard-path)
+    - [8.3 专家路径 (Expert Path)](#83-专家路径-expert-path)
+  - [9. 质量指标 {#9-quality-indicators}](#9-质量指标-9-quality-indicators)
+    - [9.1 文档完备性](#91-文档完备性)
+    - [9.2 理论深度](#92-理论深度)
+    - [9.3 实践价值](#93-实践价值)
+  - [10. 相关资源 {#10-related-resources}](#10-相关资源-10-related-resources)
+    - [10.1 依赖模块](#101-依赖模块)
+    - [10.2 外部参考](#102-外部参考)
+    - [10.3 标准规范](#103-标准规范)
 
 ## 1. 模块概述 {#1-module-overview}
 
 ### 1.1 模块定位
 
-Rust IoT系统模块专注于嵌入式和物联网环境中的Rust语言应用，提供从理论基础到工程实践的完整框架。物联网（Internet of Things，IoT）是通过互联网连接物理设备、传感器、执行器等，实现数据采集、处理和控制的分布式系统。本模块建立了严格的数学模型来描述IoT系统的架构、通信、安全和性能特性。
+Rust IoT系统模块专注于嵌入式和物联网环境中的Rust语言应用，提供从理论基础到工程实践的完整框架。
+物联网（Internet of Things，IoT）是通过互联网连接物理设备、传感器、执行器等，实现数据采集、处理和控制的分布式系统。
+本模块建立了严格的数学模型来描述IoT系统的架构、通信、安全和性能特性。
 
 ### 1.2 核心价值
 
@@ -46,7 +79,7 @@ Rust IoT系统模块专注于嵌入式和物联网环境中的Rust语言应用�
 
 ### 1.3 应用领域
 
-```
+```text
 IoT应用域
 ├── 智能家居系统
 │   ├── 环境监控
@@ -70,7 +103,7 @@ IoT应用域
 
 ### 2.1 三层架构设计
 
-```
+```text
 17_iot/
 ├── theory_foundations/          # 理论基础层
 │   ├── formal_iot_model.md     # 形式化IoT模型
@@ -102,7 +135,7 @@ IoT应用域
 
 ### 3.1 输入依赖
 
-```
+```text
 输入依赖关系图
 05_concurrency → 17_iot (并发模型支持)
 06_async_await → 17_iot (异步I/O操作)
@@ -113,7 +146,7 @@ IoT应用域
 
 ### 3.2 输出影响
 
-```
+```text
 输出影响关系图
 17_iot → 工业应用 (设备控制系统)
 17_iot → 智能家居 (家庭自动化)
@@ -123,7 +156,7 @@ IoT应用域
 
 ### 3.3 横向关联
 
-```
+```text
 横向关联网络
 17_iot ↔ 13_microservices (分布式架构)
 17_iot ↔ 16_webassembly (轻量级运行时)
@@ -134,7 +167,7 @@ IoT应用域
 
 ### 4.1 物联网系统层次结构
 
-```
+```text
 IoT系统架构
 ├── 设备层 (Device Layer)
 │   ├── 传感器节点
@@ -183,7 +216,7 @@ IoT系统架构
 
 ### 4.2 嵌入式Rust生态
 
-```
+```text
 嵌入式Rust技术栈
 ├── 核心语言特性
 │   ├── no_std环境

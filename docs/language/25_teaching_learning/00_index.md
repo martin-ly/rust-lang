@@ -64,7 +64,7 @@ Rust教学与学习理论
 
 **形式化表示**:
 
-```
+```text
 认知负荷总量 = 内在负荷 + 外在负荷 + 相关负荷
 CL_total = CL_intrinsic + CL_extraneous + CL_germane
 
@@ -87,7 +87,7 @@ CL_total = CL_intrinsic + CL_extraneous + CL_germane
 
 **数学模型**:
 
-```
+```text
 知识构建过程 K(t) = ∫[0,t] Construction(Experience(τ), PriorKnowledge(τ)) dτ
 
 其中:
@@ -102,7 +102,7 @@ CL_total = CL_intrinsic + CL_extraneous + CL_germane
 
 **图论模型**:
 
-```
+```text
 概念图 G = (V, E, L, W)
 - V: 概念节点集合
 - E: 概念关系边集合  
@@ -121,7 +121,7 @@ CL_total = CL_intrinsic + CL_extraneous + CL_germane
 
 Rust概念的学习复杂度定义为：
 
-```
+```text
 C(concept) = α·Abstract(concept) + β·Dependencies(concept) + γ·Novelty(concept)
 
 其中:
@@ -135,7 +135,7 @@ C(concept) = α·Abstract(concept) + β·Dependencies(concept) + γ·Novelty(con
 
 学习路径定义为概念有向无环图中的一条路径：
 
-```
+```text
 Path = [c₁, c₂, ..., cₙ]
 满足: ∀i < j, c_i 是 c_j 的先决条件
 ```
@@ -157,7 +157,7 @@ Path = [c₁, c₂, ..., cₙ]
 
 **数学表述**:
 
-```
+```text
 max Learning_Effectiveness
 s.t. CL_intrinsic : CL_extraneous : CL_germane = 3:1:2
      CL_total ≤ WM_capacity
@@ -196,9 +196,9 @@ s.t. CL_intrinsic : CL_extraneous : CL_germane = 3:1:2
 
 ### 课程设计方法论
 
-**1. 概念层次分析**
+**1. 概念层次分析**:
 
-```
+```text
 步骤:
 1. 识别所有目标概念
 2. 构建概念依赖图
@@ -207,9 +207,9 @@ s.t. CL_intrinsic : CL_extraneous : CL_germane = 3:1:2
 5. 设计学习序列
 ```
 
-**2. 认知负荷管理**
+**2. 认知负荷管理**:
 
-```
+```text
 策略:
 - 分而治之: 将复杂概念分解为简单子概念
 - 渐进暴露: 逐步引入复杂性
@@ -217,9 +217,9 @@ s.t. CL_intrinsic : CL_extraneous : CL_germane = 3:1:2
 - 多模态支持: 结合视觉、文本、代码示例
 ```
 
-**3. 实践驱动设计**
+**3. 实践驱动设计**:
 
-```
+```text
 原则:
 - 20% 理论 + 80% 实践
 - 项目导向学习
@@ -229,9 +229,9 @@ s.t. CL_intrinsic : CL_extraneous : CL_germane = 3:1:2
 
 ### 评估体系构建
 
-**1. 多维度评估模型**
+**1. 多维度评估模型**:
 
-```
+```text
 评估维度 = {
     概念理解度: [0,1],
     代码实现能力: [0,1], 
@@ -241,7 +241,7 @@ s.t. CL_intrinsic : CL_extraneous : CL_germane = 3:1:2
 }
 ```
 
-**2. 适应性评估算法**
+**2. 适应性评估算法**:
 
 ```python
 def adaptive_assessment(learner, concept_set):
@@ -257,9 +257,9 @@ def adaptive_assessment(learner, concept_set):
 
 ### 学习资源开发
 
-**1. 内容分层架构**
+**1. 内容分层架构**:
 
-```
+```text
 资源层次:
 ├── 初学者层
 │   ├── 可视化教程
@@ -275,9 +275,9 @@ def adaptive_assessment(learner, concept_set):
     └── 开源贡献
 ```
 
-**2. 自适应学习系统**
+**2. 自适应学习系统**:
 
-```
+```text
 系统组件:
 - 学习者模型: 追踪学习状态
 - 内容模型: 描述资源特性
@@ -293,7 +293,7 @@ def adaptive_assessment(learner, concept_set):
 
 **学习序列**:
 
-```
+```text
 1. 环境配置与工具链 (1周)
    - rustup, cargo基础使用
    - VS Code/RustRover配置
@@ -329,7 +329,7 @@ def adaptive_assessment(learner, concept_set):
 
 **学习序列**:
 
-```
+```text
 5. 高级类型特性 (4-6周)
    - 泛型系统
    - trait系统
@@ -358,7 +358,7 @@ def adaptive_assessment(learner, concept_set):
 
 **学习序列**:
 
-```
+```text
 9. 高级特性与宏 (6-8周)
    - 高级trait应用
    - 宏系统
@@ -380,19 +380,19 @@ def adaptive_assessment(learner, concept_set):
 
 ### 概念引入策略
 
-**1. 锚定策略**
+**1. 锚定策略**:
 
 - 从学习者熟悉的概念出发
 - 建立新旧概念之间的桥梁
 - 例如：用C++的RAII解释Rust所有权
 
-**2. 类比策略**
+**2. 类比策略**:
 
 - 使用现实世界类比
 - 例如：借用检查器类比图书馆借书系统
 - 所有权转移类比物理对象转移
 
-**3. 对比策略**
+**3. 对比策略**:
 
 - 与其他语言对比
 - 突出Rust的独特性
@@ -400,18 +400,18 @@ def adaptive_assessment(learner, concept_set):
 
 ### 实践教学策略
 
-**1. 项目导向学习**
+**1. 项目导向学习**:
 
-```
+```text
 项目序列:
 初级: 计算器、猜数字游戏
 中级: 文件处理器、简单Web服务
 高级: 操作系统组件、编译器前端
 ```
 
-**2. 错误驱动学习**
+**2. 错误驱动学习**:
 
-```
+```text
 策略:
 1. 故意引入常见错误
 2. 让学习者体验编译器错误
@@ -420,9 +420,9 @@ def adaptive_assessment(learner, concept_set):
 5. 总结错误模式
 ```
 
-**3. 代码审查教学**
+**3. 代码审查教学**:
 
-```
+```text
 流程:
 1. 学习者提交代码
 2. 同伴审查
@@ -433,19 +433,19 @@ def adaptive_assessment(learner, concept_set):
 
 ### 评估策略
 
-**1. 形成性评估**
+**1. 形成性评估**:
 
 - 实时编程练习
 - 概念检查点
 - 同伴教学评估
 
-**2. 总结性评估**  
+**2. 总结性评估**:  
 
 - 项目作品集
 - 综合能力测试
 - 实际问题解决
 
-**3. 自我评估**
+**3. 自我评估**:
 
 - 元认知意识培养
 - 学习日志记录
@@ -455,9 +455,9 @@ def adaptive_assessment(learner, concept_set):
 
 ### Rust特有认知挑战
 
-**1. 所有权概念挑战**
+**1. 所有权概念挑战**:
 
-```
+```text
 挑战类型:
 - 心智模型重构: 从垃圾回收到手动管理
 - 时间维度理解: 变量生命周期概念
@@ -470,9 +470,9 @@ def adaptive_assessment(learner, concept_set):
 - 渐进式复杂度增加
 - 大量实践练习
 
-**2. 借用检查器挑战**
+**2. 借用检查器挑战**:
 
-```
+```text
 挑战类型:
 - 规则记忆负荷: 多个借用规则
 - 错误信息理解: 编译器错误解读
@@ -485,9 +485,9 @@ def adaptive_assessment(learner, concept_set):
 - 模式识别训练
 - 重构练习专项
 
-**3. 生命周期参数挑战**
+**3. 生命周期参数挑战**:
 
-```
+```text
 挑战类型:
 - 抽象符号理解: 生命周期参数语法
 - 推理复杂度: 多个生命周期关系
@@ -504,7 +504,7 @@ def adaptive_assessment(learner, concept_set):
 
 **内在负荷优化**:
 
-```
+```text
 方法:
 - 概念分解: 将复杂概念分解为简单部分
 - 前置准备: 确保先决知识扎实
@@ -513,7 +513,7 @@ def adaptive_assessment(learner, concept_set):
 
 **外在负荷优化**:
 
-```
+```text
 方法:
 - 界面简化: 减少不必要的认知干扰
 - 信息组织: 合理的信息架构
@@ -522,7 +522,7 @@ def adaptive_assessment(learner, concept_set):
 
 **相关负荷促进**:
 
-```
+```text
 方法:
 - 图式构建: 帮助建立知识图式
 - 元认知训练: 培养学习策略
@@ -533,18 +533,18 @@ def adaptive_assessment(learner, concept_set):
 
 ### 社区学习模型
 
-**1. 实践共同体模型**
+**1. 实践共同体模型**:
 
-```
+```text
 组成要素:
 - 共同领域: Rust编程
 - 社区成员: 不同水平的学习者
 - 共同实践: 代码分享、问题解决
 ```
 
-**2. 认知学徒制模型**
+**2. 认知学徒制模型**:
 
-```
+```text
 角色分工:
 - 专家: 经验丰富的Rust开发者
 - 学徒: Rust学习者
@@ -553,19 +553,19 @@ def adaptive_assessment(learner, concept_set):
 
 ### 同伴学习策略
 
-**1. 结对编程**
+**1. 结对编程**:
 
 - 驾驶员-导航员模式
 - 技能互补配对
 - 定期角色轮换
 
-**2. 代码审查圈**
+**2. 代码审查圈**:
 
 - 小组代码审查
 - 最佳实践分享
 - 问题解决协作
 
-**3. 教学相长**
+**3. 教学相长**:
 
 - 学习者互教
 - 概念解释练习
@@ -573,9 +573,9 @@ def adaptive_assessment(learner, concept_set):
 
 ### 在线学习平台
 
-**1. 互动式学习环境**
+**1. 互动式学习环境**:
 
-```
+```text
 功能特性:
 - 在线编译器
 - 实时反馈
@@ -583,9 +583,9 @@ def adaptive_assessment(learner, concept_set):
 - 社交学习特性
 ```
 
-**2. 自适应学习系统**
+**2. 自适应学习系统**:
 
-```
+```text
 系统能力:
 - 学习路径个性化
 - 难度动态调整
