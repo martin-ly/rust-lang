@@ -984,8 +984,3 @@ graph TB
 - [Core Theory Main Index - 核心理论主索引](../../01_core_theory/00_index.md)
 - [Design Pattern Semantics - 设计模式语义](../../02_design_patterns/00_index.md)
 - [Engineering Practice Semantics - 工程实践语义](../../04_engineering_practices/00_index.md)
-
-
-"
-
----

@@ -28,6 +28,3 @@ pub fn spawn_task<F: FnOnce() + Send + 'static>(f: F) { /* ... */ }
 - [同步语义](00_index.md)
 - [异步语义](00_index.md)
 - [错误处理语义](00_index.md)
-"
-
----

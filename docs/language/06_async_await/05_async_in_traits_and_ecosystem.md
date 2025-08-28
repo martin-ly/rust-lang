@@ -1,12 +1,15 @@
 # C06-05. 异步 Trait 与生态
 
-在 Rust 中，Trait 是构建可复用和可扩展抽象的核心工具。然而，将 `async fn` 直接用在 Trait 中会带来一系列挑战，因为 `async fn` 返回的是一个匿名的、实现了 `Future` 的类型。这与 Trait 的对象安全（Object Safety）规则和静态分派机制产生了冲突。
+在 Rust 中，Trait 是构建可复用和可扩展抽象的核心工具。
+然而，将 `async fn` 直接用在 Trait 中会带来一系列挑战，因为 `async fn` 返回的是一个匿名的、实现了 `Future` 的类型。
+这与 Trait 的对象安全（Object Safety）规则和静态分派机制产生了冲突。
 
 本章将探讨在 Trait 中使用异步函数的现有解决方案，重点介绍 `async-trait` crate，并分析其在不同场景下的设计权衡。
 
 ## 1. 核心问题：`async fn` 在 Trait 中的限制
 
-原生的 `async fn` in traits 功能仍在开发中。直接在 trait 中写 `async fn` 目前存在以下限制：
+原生的 `async fn` in traits 功能仍在开发中。
+直接在 trait 中写 `async fn` 目前存在以下限制：
 
 ```rust
 trait HttpClient {
@@ -20,7 +23,8 @@ trait HttpClient {
 
 ## 2. 解决方案一：`async-trait` Crate
 
-`async-trait` crate 是目前生态系统中最流行、最稳定的解决方案。它提供了一个宏，可以无缝地将 `async fn` 添加到 Trait 中。
+`async-trait` crate 是目前生态系统中最流行、最稳定的解决方案。
+它提供了一个宏，可以无缝地将 `async fn` 添加到 Trait 中。
 
 ```rust
 use async_trait::async_trait;

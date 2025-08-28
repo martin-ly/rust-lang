@@ -1,12 +1,15 @@
 # C06-04. 异步流 (Streams) 与接收器 (Sinks)
 
-`Future` 代表一个随时间推移最终会产生的单个值。但很多时候，我们需要处理的是一系列随时间推移而产生的值，例如网络套接字的数据块、GUI 事件流或定时器滴答。
+`Future` 代表一个随时间推移最终会产生的单个值。
+但很多时候，我们需要处理的是一系列随时间推移而产生的值，例如网络套接字的数据块、GUI 事件流或定时器滴答。
 
-为了处理这种异步序列，Rust 生态系统引入了 `Stream` Trait，可以将其视为异步版本的 `Iterator`。本章将探讨 `Stream` 的核心概念、用法以及如何通过 `Sink` 向异步数据源发送数据。
+为了处理这种异步序列，Rust 生态系统引入了 `Stream` Trait，可以将其视为异步版本的 `Iterator`。
+本章将探讨 `Stream` 的核心概念、用法以及如何通过 `Sink` 向异步数据源发送数据。
 
 ## 1. `Stream` Trait
 
-`Stream` Trait 由 `futures` crate 定义，是异步生态系统的基石之一。它的定义与 `Iterator` 非常相似：
+`Stream` Trait 由 `futures` crate 定义，是异步生态系统的基石之一。
+它的定义与 `Iterator` 非常相似：
 
 ```rust
 use std::pin::Pin;
@@ -32,7 +35,8 @@ pub trait Stream {
 
 虽然可以直接实现 `Stream` Trait，但在实践中，我们通常使用 `async-stream` 或 `tokio-stream` 等库提供的宏来更方便地创建流。
 
-一个常见的任务是处理 `Stream`。`futures` crate 提供了 `StreamExt` Trait，为所有 `Stream` 类型添加了大量强大的组合子方法，类似于 `Iterator` 的适配器。
+一个常见的任务是处理 `Stream`。
+`futures` crate 提供了 `StreamExt` Trait，为所有 `Stream` 类型添加了大量强大的组合子方法，类似于 `Iterator` 的适配器。
 
 要使用这些方法，需要 `use futures::StreamExt;`。
 
@@ -70,7 +74,8 @@ async fn main() {
 
 ## 3. `Sink` Trait
 
-`Sink` 是 `Stream` 的对偶概念，代表一个可以异步**接收**值的地方。它由 `futures` crate 定义，用于抽象化异步数据写入。
+`Sink` 是 `Stream` 的对偶概念，代表一个可以异步**接收**值的地方。
+它由 `futures` crate 定义，用于抽象化异步数据写入。
 
 ```rust
 use std::pin::Pin;

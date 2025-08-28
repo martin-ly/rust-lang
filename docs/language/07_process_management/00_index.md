@@ -11,54 +11,54 @@
 
 ### 1. 理论基础层 {#理论基础层}
 
-1. [形式化进程理论](01_formal_process_theory.md#进程理论)
-   - 进程代数和π演算基础
-   - 状态转换系统建模
-   - 并发进程的形式化语义
+   1. [形式化进程理论](01_formal_process_theory.md#进程理论)
+      - 进程代数和π演算基础
+      - 状态转换系统建模
+      - 并发进程的形式化语义
 
-2. [操作系统抽象](02_os_abstraction.md#操作系统抽象)
-   - 系统调用接口设计
-   - 跨平台兼容性理论
-   - 硬件抽象层建模
+   2. [操作系统抽象](02_os_abstraction.md#操作系统抽象)
+      - 系统调用接口设计
+      - 跨平台兼容性理论
+      - 硬件抽象层建模
 
-3. [IPC通信理论](03_ipc_theory.md#ipc理论)
-   - 进程间通信的形式化模型
-   - 消息传递语义
-   - 共享内存一致性模型
+   3. [IPC通信理论](03_ipc_theory.md#ipc理论)
+      - 进程间通信的形式化模型
+      - 消息传递语义
+      - 共享内存一致性模型
 
 ### 2. 实现机制层 {#实现机制层}
 
-4. [进程生命周期管理](04_process_lifecycle.md#进程生命周期)
-   - 创建、执行、等待、终止
-   - 信号处理和异常管理
-   - 资源分配和释放策略
+   1. [进程生命周期管理](04_process_lifecycle.md#进程生命周期)
+      - 创建、执行、等待、终止
+      - 信号处理和异常管理
+      - 资源分配和释放策略
 
-5. [I/O系统设计](05_io_system.md#io系统)
-   - 文件描述符管理
-   - 缓冲和流处理
-   - 异步I/O集成
+   2. [I/O系统设计](05_io_system.md#io系统)
+      - 文件描述符管理
+      - 缓冲和流处理
+      - 异步I/O集成
 
-6. [进程间通信机制](06_ipc_mechanisms.md#ipc机制)
-   - 管道、FIFO、套接字
-   - 共享内存和信号量
-   - 消息队列和事件系统
+   3. [进程间通信机制](06_ipc_mechanisms.md#ipc机制)
+      - 管道、FIFO、套接字
+      - 共享内存和信号量
+      - 消息队列和事件系统
 
 ### 3. 应用实践层 {#应用实践层}
 
-7. [系统编程模式](07_system_programming.md#系统编程)
-   - 守护进程和服务设计
-   - 系统监控和日志记录
-   - 配置管理和热重载
+   1. [系统编程模式](07_system_programming.md#系统编程)
+      - 守护进程和服务设计
+      - 系统监控和日志记录
+      - 配置管理和热重载
 
-8. [性能优化策略](08_performance_optimization.md#性能优化)
-   - 进程池和工作队列
-   - 内存映射和零拷贝
-   - 系统资源监控
+   2. [性能优化策略](08_performance_optimization.md#性能优化)
+      - 进程池和工作队列
+      - 内存映射和零拷贝
+      - 系统资源监控
 
-9. [安全性和隔离](09_security_isolation.md#安全隔离)
-   - 权限管理和沙箱
-   - 容器化和虚拟化
-   - 安全审计和日志
+   3. [安全性和隔离](09_security_isolation.md#安全隔离)
+      - 权限管理和沙箱
+      - 容器化和虚拟化
+      - 安全审计和日志
 
 ## 主题概述 {#主题概述}
 
@@ -163,7 +163,7 @@ Rust进程管理系统提供了对操作系统进程和系统资源的安全抽�
 - s₀: 初始状态 Created
 
 **定义 7.2 (进程间通信信道)**  
-IPC信道是一个抽象数据类型 Channel<T>，支持操作：
+IPC信道是一个抽象数据类型 `Channel<T>`，支持操作：
 
 ```rust
 trait IPCChannel<T> {
@@ -176,7 +176,7 @@ trait IPCChannel<T> {
 **定义 7.3 (资源生命周期)**  
 资源生命周期遵循RAII模式：
 
-```
+```text
 ∀ resource r. acquired(r) → ∃ scope s. r ∈ s ∧ (exit(s) → released(r))
 ```
 
@@ -185,7 +185,7 @@ trait IPCChannel<T> {
 **定理 7.1 (进程安全性)**  
 Rust进程管理保证内存安全和资源安全：
 
-```
+```text
 ∀ process p. (
     MemorySafe(p) ∧ 
     ResourceSafe(p) ∧ 
@@ -196,14 +196,14 @@ Rust进程管理保证内存安全和资源安全：
 **定理 7.2 (IPC数据完整性)**  
 进程间通信保持数据完整性：
 
-```
+```text
 ∀ data d, channel c. send(c, d) → recv(c) = Some(d) ∨ recv(c) = None
 ```
 
 **定理 7.3 (资源泄漏防护)**  
 RAII机制防止资源泄漏：
 
-```
+```text
 ∀ resource r. acquired(r) → eventually(released(r))
 ```
 
@@ -277,24 +277,24 @@ RAII机制防止资源泄漏：
 
 ### 基础路径 (入门) {#基础路径}
 
-1. **进程基础概念** → [01_formal_process_theory.md](01_formal_process_theory.md)
-2. **命令行程序设计** → [02_os_abstraction.md](02_os_abstraction.md)
-3. **基础IPC机制** → [03_ipc_theory.md](03_ipc_theory.md)
-4. **文件和I/O处理** → [04_process_lifecycle.md](04_process_lifecycle.md)
+   1. **进程基础概念** → [01_formal_process_theory.md](01_formal_process_theory.md)
+   2. **命令行程序设计** → [02_os_abstraction.md](02_os_abstraction.md)
+   3. **基础IPC机制** → [03_ipc_theory.md](03_ipc_theory.md)
+   4. **文件和I/O处理** → [04_process_lifecycle.md](04_process_lifecycle.md)
 
 ### 标准路径 (进阶) {#标准路径}
 
-5. **高级IPC模式** → [05_io_system.md](05_io_system.md)
-6. **异步进程管理** → [06_ipc_mechanisms.md](06_ipc_mechanisms.md)
-7. **系统服务设计** → [07_system_programming.md](07_system_programming.md)
-8. **性能监控调优** → [08_performance_optimization.md](08_performance_optimization.md)
+   1. **高级IPC模式** → [05_io_system.md](05_io_system.md)
+   2. **异步进程管理** → [06_ipc_mechanisms.md](06_ipc_mechanisms.md)
+   3. **系统服务设计** → [07_system_programming.md](07_system_programming.md)
+   4. **性能监控调优** → [08_performance_optimization.md](08_performance_optimization.md)
 
 ### 专家路径 (高级) {#专家路径}
 
-9. **安全和隔离机制** → [09_security_isolation.md](09_security_isolation.md)
-10. **容器化技术** → 容器生态集成
-11. **分布式系统架构** → 微服务模式
-12. **实时系统开发** → 嵌入式应用
+   1. **安全和隔离机制** → [09_security_isolation.md](09_security_isolation.md)
+   2. **容器化技术** → 容器生态集成
+   3. **分布式系统架构** → 微服务模式
+   4. **实时系统开发** → 嵌入式应用
 
 ## 质量指标 {#质量指标}
 

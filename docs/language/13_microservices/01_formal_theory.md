@@ -28,8 +28,6 @@
 
 ## 1. Introduction {#1-introduction}
 
-<a id="microservices-perspective"></a>
-
 ### 1.1 Microservices in Rust: A Formal Perspective
 
 Microservices in Rust represent the decomposition of monolithic applications into small, independent services that communicate through well-defined interfaces. Unlike traditional microservices, Rust microservices are fundamentally grounded in:
@@ -38,8 +36,6 @@ Microservices in Rust represent the decomposition of monolithic applications int
 - **Memory Safety**: Services maintain Rust's memory safety guarantees across network boundaries
 - **Zero-Cost Abstractions**: Service communication provides abstraction without runtime overhead
 - **Concurrent Safety**: Services handle concurrent requests without data races
-
-<a id="formal-microservice-definition"></a>
 
 ### 1.2 Formal Definition
 
@@ -56,11 +52,7 @@ Where:
 
 ## 2. Philosophical Foundation {#2-philosophical-foundation}
 
-<a id="microservices-ontology"></a>
-
 ### 2.1 Ontology of Microservices
-
-<a id="holistic-service-theory"></a>
 
 #### 2.1.1 Holistic Service Theory
 
@@ -68,8 +60,6 @@ Microservices exist as parts of a larger system, where each service is both auto
 
 **Formal Statement**: For any microservice system $\mathcal{M}$, there exists a holistic relationship $\mathcal{H}$ such that:
 $$\mathcal{M} = \bigcup_{s \in \mathcal{S}} \mathcal{H}(s, \mathcal{M} \setminus \{s\})$$
-
-<a id="emergent-service-theory"></a>
 
 #### 2.1.2 Emergent Service Theory
 
@@ -79,18 +69,12 @@ Microservices emerge from the decomposition of complex systems into manageable, 
 $$\mathcal{M} = \lim_{n \to \infty} \text{decompose}(\mathcal{A}, n)$$
 Where $\mathcal{A}$ is the original monolithic application.
 
-<a id="service-epistemology"></a>
-
 ### 2.2 Epistemology of Service Design
-
-<a id="service-type-decomposition"></a>
 
 #### 2.2.1 Service Design as Type Decomposition
 
 Service design in Rust is fundamentally a type decomposition problem. Given a monolithic type $\tau$ and a set of boundaries $\mathcal{B}$, we seek a service decomposition $\mathcal{D}$ such that:
 $$\tau = \bigcup_{s \in \mathcal{S}} \mathcal{D}(s)$$
-
-<a id="service-communication-category-theory"></a>
 
 #### 2.2.2 Service Communication as Category Theory
 
@@ -99,11 +83,7 @@ $$(s_1 \rightarrow s_2) \rightarrow s_3 = s_1 \rightarrow (s_2 \rightarrow s_3)$
 
 ## 3. Mathematical Theory {#3-mathematical-theory}
 
-<a id="service-algebra"></a>
-
 ### 3.1 Service Algebra
-
-<a id="service-signature"></a>
 
 #### 3.1.1 Service Signature
 
@@ -117,18 +97,12 @@ Where:
 - $E$ is the set of error types
 - $S$ is the set of service states
 
-<a id="service-composition"></a>
-
 #### 3.1.2 Service Composition
 
 A service composition $\mathcal{C}$ is defined as:
 $$\mathcal{C}(s_1, s_2) = \{f \circ g \mid f \in s_1, g \in s_2, \text{type}(f) = \text{type}(g)\}$$
 
-<a id="distributed-system-theory"></a>
-
 ### 3.2 Distributed System Theory
-
-<a id="service-types"></a>
 
 #### 3.2.1 Service Types
 
@@ -137,8 +111,6 @@ A service type $\tau_s$ is defined inductively:
 $$\tau_s ::= \alpha \mid \tau_1 \rightarrow \tau_2 \mid \forall \alpha. \tau \mid \text{Service}[\tau_1, \ldots, \tau_n]$$
 
 Where $\alpha$ is a type variable and $\text{Service}[\tau_1, \ldots, \tau_n]$ is a service instantiation.
-
-<a id="service-inference-rules"></a>
 
 #### 3.2.2 Service Inference Rules
 
@@ -150,11 +122,7 @@ $$\frac{\Gamma \vdash e : \text{Service}}{\Gamma \vdash e : \tau} \quad \text{wh
 
 ## 4. Formal Models {#4-formal-models}
 
-<a id="service-interface"></a>
-
 ### 4.1 Service Interface
-
-<a id="service-trait"></a>
 
 #### 4.1.1 Service Trait
 
@@ -177,11 +145,7 @@ pub trait IntoService<S, Request, Response, Error> {
 
 **Safety Guarantee**: $\forall i_1, i_2 : I. i_1 = i_2 \Rightarrow \text{handle}(i_1) = \text{handle}(i_2)$
 
-<a id="service-discovery"></a>
-
 ### 4.2 Service Discovery
-
-<a id="service-registry"></a>
 
 #### 4.2.1 Service Registry
 
@@ -202,11 +166,7 @@ pub trait ServiceRegistry {
 }
 ```
 
-<a id="load-balancing"></a>
-
 ### 4.3 Load Balancing
-
-<a id="load-balancer"></a>
 
 #### 4.3.1 Load Balancer
 
@@ -225,11 +185,7 @@ pub trait LoadBalancer<S> {
 }
 ```
 
-<a id="circuit-breaker"></a>
-
 ### 4.4 Circuit Breaker
-
-<a id="circuit-breaker-pattern"></a>
 
 #### 4.4.1 Circuit Breaker Pattern
 
