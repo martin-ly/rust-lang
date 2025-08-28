@@ -192,7 +192,3 @@ graph TB
 - [核心理论主索引](../../01_core_theory/00_index.md)
 - [设计模式语义](../02_design_patterns/00_index.md)
 - [应用领域语义](../03_application_domains/00_index.md)
-
-"
-
----

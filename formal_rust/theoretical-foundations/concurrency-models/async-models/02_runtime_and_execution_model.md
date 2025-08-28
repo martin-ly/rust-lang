@@ -1,176 +1,617 @@
-# 第 2 章：运行时与执行模型
+# 运行时与执行模型
 
-> 面包屑：`Theoretical Foundations` → `Concurrency Models` → `Async Models` → `02_runtime_and_execution_model.md`
-> 前置：`01_Async_Programming.md`、`01_async_semantics.md`
-> 后续：`09_async_runtime_system.md`、`14_async_optimization_techniques.md`
+## 概述
 
-- [第 2 章：运行时与执行模型](#第-2-章运行时与执行模型)
-  - [1. 核心概念区分](#1-核心概念区分)
-    - [1.1. `Future`：描述任务](#11-future描述任务)
-    - [1.2. `Executor`：驱动任务](#12-executor驱动任务)
-    - [1.3. `Runtime`：提供环境](#13-runtime提供环境)
-  - [2. 执行器 (`Executor`) 的工作原理](#2-执行器-executor-的工作原理)
-    - [2.1. 核心职责](#21-核心职责)
-    - [2.2. 概念实现：一个简单的执行器](#22-概念实现一个简单的执行器)
-    - [2.3. 任务调度策略](#23-任务调度策略)
-  - [3. 运行时 (`Runtime`) 的构成](#3-运行时-runtime-的构成)
-    - [3.1. I/O 事件通知（反应器 Reactor）](#31-io-事件通知反应器-reactor)
-    - [3.2. 定时器 API](#32-定时器-api)
-    - [3.3. 任务生成 (`spawn`)](#33-任务生成-spawn)
-    - [3.4. 线程池模型](#34-线程池模型)
-  - [4. 运行时生态与对比](#4-运行时生态与对比)
-    - [4.1. 分离的哲学：优势与挑战](#41-分离的哲学优势与挑战)
-    - [4.2. 主流运行时对比](#42-主流运行时对比)
-  - [5. 总结](#5-总结)
+异步运行时是Rust异步编程生态的核心组件，负责调度和执行异步任务。本章深入探讨运行时的设计原理、执行模型、调度算法以及主流运行时（tokio、async-std）的实现差异。
 
----
+## 运行时架构
 
-## 1. 核心概念区分
-
-在 Rust 的异步世界中，`Future`、`Executor` 和 `Runtime` 是三个紧密相关但职责分明的核心概念。
-
-### 1.1. `Future`：描述任务
-
-如前一章所述，`Future` 是一个描述异步计算的惰性状态机。它本身什么也不做。
-
-### 1.2. `Executor`：驱动任务
-
-**执行器 (Executor)** 是驱动 `Future` 直至完成的核心组件。它的唯一工作就是接收任务 (`Future`)，并不断在其上调用 `.poll()` 方法。
-
-### 1.3. `Runtime`：提供环境
-
-**运行时 (Runtime)** 是一个为异步任务提供所有必要服务的"大管家"。它通常**包含**一个或多个执行器，并额外提供：
-
-- **I/O 事件源**：与操作系统交互（例如，通过 `epoll`, `kqueue`, `io_uring`），监听网络、文件等 I/O 资源的状态。
-- **定时器**：提供 `sleep` 或延时功能。
-- **任务生成接口**：如 `spawn`，用于将一个顶层 `Future` 作为一个新任务交给执行器。
-- **线程池**：用于并发地执行多个任务（在多线程运行时中）。
-
-简单来说：**`Runtime` 搭台，`Executor` 唱戏，`Future` 是剧本。**
-
-## 2. 执行器 (`Executor`) 的工作原理
-
-### 2.1. 核心职责
-
-1. **任务队列 (Task Queue)**：持有一个队列，存放所有准备好被 `poll` 的任务。
-2. **轮询循环 (Polling Loop)**：不断从队列中取出任务，调用其 `poll` 方法。
-3. **处理结果**：
-    - 如果 `poll` 返回 `Poll::Ready`，任务完成，将其丢弃。
-    - 如果 `poll` 返回 `Poll::Pending`，将任务挂起，等待 `Waker` 的通知。
-4. **响应唤醒**：当 `Waker` 被调用时，将对应的任务重新放回任务队列。
-
-### 2.2. 概念实现：一个简单的执行器
-
-为了更好地理解，我们可以勾画一个极简的、单线程的执行器。
+### 1. 核心组件
 
 ```rust
-use std::collections::VecDeque;
-use std::future::Future;
-use std::pin::Pin;
-use std::sync::{Arc, Mutex, Condvar};
-use std::task::{Context, Poll, Waker};
+// 运行时核心组件
+pub struct Runtime {
+    // 任务调度器
+    scheduler: Scheduler,
+    // I/O事件循环
+    io_driver: IoDriver,
+    // 时间驱动
+    time_driver: TimeDriver,
+    // 任务存储
+    task_storage: TaskStorage,
+}
 
-// 任务队列
-type Task = Pin<Box<dyn Future<Output = ()> + Send>>;
-let task_queue = Arc::new(Mutex::new(VecDeque::new()));
-let wake_cond = Arc::new(Condvar::new());
-
-// Waker 的实现需要将任务重新放回队列
-// (此处省略 Waker 的复杂实现细节)
-
-// 执行器的主循环
-let queue_clone = task_queue.clone();
-let cond_clone = wake_cond.clone();
-std::thread::spawn(move || {
-    loop {
-        let mut guard = queue_clone.lock().unwrap();
-        while guard.is_empty() {
-            // 如果队列为空，则等待 Waker 的通知
-            guard = cond_clone.wait(guard).unwrap();
-        }
-
-        let task = guard.pop_front().unwrap();
-        drop(guard); // 尽早释放锁
-
-        // 创建一个 Waker 并 poll 任务
-        let waker = unimplemented!(); // 需要一个能唤醒这个循环的 Waker
-        let mut context = Context::from_waker(&waker);
-        
-        if task.as_mut().poll(&mut context) == Poll::Pending {
-            // 如果任务未完成，它已经被 Waker 负责，此处无需操作
-        }
-    }
-});
-
-// spawn 函数：将 Future 添加到队列并通知执行器
-fn spawn(future: impl Future<Output = ()> + Send + 'static) {
-    let task = Box::pin(future);
-    task_queue.lock().unwrap().push_back(task);
-    wake_cond.notify_one();
+// 任务调度器
+pub struct Scheduler {
+    // 就绪任务队列
+    ready_queue: ReadyQueue,
+    // 工作线程池
+    worker_threads: Vec<WorkerThread>,
+    // 负载均衡器
+    load_balancer: LoadBalancer,
 }
 ```
 
-*注意：这是一个高度简化的概念模型，真正的 `Waker` 实现要复杂得多，通常需要 `ArcWake` Trait。*
+### 2. 执行模型
 
-### 2.3. 任务调度策略
+```rust
+// 执行器接口
+pub trait Executor {
+    fn spawn<F>(&self, future: F) -> JoinHandle<F::Output>
+    where
+        F: Future + Send + 'static,
+        F::Output: Send + 'static;
+    
+    fn block_on<F>(&self, future: F) -> F::Output
+    where
+        F: Future;
+}
 
-- **单线程执行器**: 所有任务都在同一个线程上轮询。实现简单，没有同步开销，但无法利用多核。
-- **多线程执行器**:
-  - **工作分享 (Work-Sharing)**: 维护一个全局的任务队列，多个工作线程都从这个队列中取任务。优点是实现简单，缺点是全局队列需要锁保护，容易成为性能瓶瓶颈。
-  - **工作窃取 (Work-Stealing)**: 每个工作线程都有自己的本地任务队列。当一个线程的本地队列为空时，它会去"窃取"其他线程队列中的任务来执行。这是 `tokio` 和 `Rayon` 等高性能库采用的策略，能更好地实现负载均衡并减少锁竞争。
+// 任务定义
+pub struct Task {
+    future: Pin<Box<dyn Future<Output = ()> + Send>>,
+    state: TaskState,
+    waker: Option<Waker>,
+}
+```
 
-## 3. 运行时 (`Runtime`) 的构成
+## 调度算法
 
-一个生产级的运行时远比一个简单的执行器复杂。
+### 1. 工作窃取调度
 
-### 3.1. I/O 事件通知（反应器 Reactor）
+```rust
+// 工作窃取调度器
+pub struct WorkStealingScheduler {
+    // 每个线程的本地队列
+    local_queues: Vec<LocalQueue>,
+    // 全局队列
+    global_queue: GlobalQueue,
+    // 窃取统计
+    steal_stats: StealStats,
+}
 
-这是运行时的核心功能之一。当一个异步 I/O 操作（如 `TcpStream::read`）被 `poll` 且无法立即完成时，会发生以下情况：
+impl WorkStealingScheduler {
+    fn schedule(&self, task: Task) {
+        // 优先放入当前线程的本地队列
+        if let Some(local_queue) = self.get_local_queue() {
+            if local_queue.push(task).is_ok() {
+                return;
+            }
+        }
+        
+        // 本地队列满时，放入全局队列
+        self.global_queue.push(task);
+    }
+    
+    fn steal(&self, target_thread: ThreadId) -> Option<Task> {
+        // 从其他线程的本地队列窃取任务
+        for (thread_id, local_queue) in self.local_queues.iter().enumerate() {
+            if thread_id != target_thread {
+                if let Some(task) = local_queue.steal() {
+                    return Some(task);
+                }
+            }
+        }
+        
+        // 从全局队列窃取
+        self.global_queue.pop()
+    }
+}
+```
 
-1. 该操作向运行时内部的**反应器 (Reactor)** 注册。注册内容包括：感兴趣的事件（如"可读"）和与当前任务关联的 `Waker`。
-2. `Future` 返回 `Poll::Pending`。
-3. 反应器通过 `epoll` (Linux), `kqueue` (macOS), `IOCP` (Windows) 等操作系统 API 监听大量 I/O 资源。
-4. 当操作系统通知某个资源（如套接字）变为可读时，反应器找到与之关联的 `Waker` 并调用 `wake()`。
-5. 执行器收到通知，将对应任务调度回来，再次 `poll` 时，I/O 操作现在就可以立即完成。
+### 2. 调度策略
 
-### 3.2. 定时器 API
+```rust
+// 调度策略枚举
+pub enum SchedulingPolicy {
+    // 先进先出
+    FIFO,
+    // 后进先出（减少缓存未命中）
+    LIFO,
+    // 优先级调度
+    Priority(PriorityQueue),
+    // 公平调度
+    Fair(FairScheduler),
+}
 
-运行时通常还包含一个定时器实现，允许 `Future` 在未来的特定时间点被唤醒。`async_std::task::sleep` 或 `tokio::time::sleep` 就是基于此实现的。
+// 公平调度器
+pub struct FairScheduler {
+    // 任务时间片
+    time_slice: Duration,
+    // 任务权重
+    task_weights: HashMap<TaskId, u32>,
+    // 调度历史
+    scheduling_history: Vec<SchedulingEvent>,
+}
+```
 
-### 3.3. 任务生成 (`spawn`)
+## Tokio运行时
 
-运行时提供一个用户友好的接口（如 `tokio::spawn`）来接收顶层 `Future`，将其包装成任务并交给执行器。这些 `spawn` 的函数通常要求 `Future` 是 `Send` 的（如果运行时是多线程的）和 `'static` 的（因为任务的生命周期独立于创建它的函数）。
+### 1. 架构设计
 
-### 3.4. 线程池模型
+```rust
+// Tokio运行时配置
+pub struct TokioRuntime {
+    // 多线程运行时
+    multi_thread: MultiThreadRuntime,
+    // 当前线程运行时
+    current_thread: CurrentThreadRuntime,
+    // 配置选项
+    config: RuntimeConfig,
+}
 
-多线程运行时会管理一个工作线程池。
+// 多线程运行时
+pub struct MultiThreadRuntime {
+    // 工作线程池
+    worker_threads: Vec<WorkerThread>,
+    // 阻塞线程池
+    blocking_threads: BlockingThreadPool,
+    // I/O驱动
+    io_driver: IoDriver,
+    // 时间驱动
+    time_driver: TimeDriver,
+}
 
-- **`tokio`**: 默认采用多线程、工作窃取模型，旨在最大化 CPU 密集型和 I/O 密集型混合负载的吞吐量。
-- **`async-std`**: 每个任务都会被随机分配到一个工作线程上。
+// 工作线程
+struct WorkerThread {
+    // 本地任务队列
+    local_queue: LocalQueue,
+    // 全局队列引用
+    global_queue: Arc<GlobalQueue>,
+    // 窃取目标
+    steal_targets: Vec<usize>,
+    // 线程状态
+    state: WorkerState,
+}
+```
 
-## 4. 运行时生态与对比
+### 2. 任务调度实现
 
-### 4.1. 分离的哲学：优势与挑战
+```rust
+impl WorkerThread {
+    fn run(&mut self) {
+        loop {
+            // 1. 从本地队列获取任务
+            if let Some(task) = self.local_queue.pop() {
+                self.run_task(task);
+                continue;
+            }
+            
+            // 2. 从全局队列获取任务
+            if let Some(task) = self.global_queue.pop() {
+                self.run_task(task);
+                continue;
+            }
+            
+            // 3. 尝试窃取任务
+            if let Some(task) = self.steal_task() {
+                self.run_task(task);
+                continue;
+            }
+            
+            // 4. 等待新任务
+            self.park();
+        }
+    }
+    
+    fn run_task(&mut self, task: Task) {
+        let waker = self.create_waker(task.id);
+        let mut cx = Context::from_waker(&waker);
+        
+        match task.future.poll(&mut cx) {
+            Poll::Ready(_) => {
+                // 任务完成
+                self.complete_task(task.id);
+            }
+            Poll::Pending => {
+                // 任务未完成，重新入队
+                self.reschedule_task(task);
+            }
+        }
+    }
+}
+```
 
-Rust 将语言核心（`Future`, `async/await`）与运行时分离，这是一个关键的设计决策。
+### 3. I/O事件处理
 
-- **优势**:
-  - **灵活性**: 社区可以为不同场景（通用网络、嵌入式、WebAssembly）创建高度优化的运行时。
-  - **专业化**: 运行时可以独立于语言进行创新，集成最新的操作系统特质或调度算法。
-- **挑战**:
-  - **生态碎片化**: 不同运行时的 I/O 类型和同步原语（如 `Mutex`）通常不兼容，导致库需要在它们之间做选择或提供特质开关（feature flags）。
-  - **学习成本**: 新手需要理解运行时的概念并做出选择。
+```rust
+// I/O驱动
+pub struct IoDriver {
+    // 事件循环
+    event_loop: EventLoop,
+    // 注册的文件描述符
+    registered_fds: HashMap<RawFd, Registration>,
+    // 就绪事件
+    ready_events: Vec<Event>,
+}
 
-### 4.2. 主流运行时对比
+impl IoDriver {
+    fn run(&mut self) -> io::Result<()> {
+        loop {
+            // 等待I/O事件
+            let events = self.event_loop.poll()?;
+            
+            // 处理就绪事件
+            for event in events {
+                if let Some(registration) = self.registered_fds.get(&event.fd) {
+                    // 唤醒对应的任务
+                    registration.waker.wake();
+                }
+            }
+        }
+    }
+    
+    fn register(&mut self, fd: RawFd, waker: Waker) {
+        let registration = Registration { waker };
+        self.registered_fds.insert(fd, registration);
+        self.event_loop.register(fd, EventType::Readable | EventType::Writable)?;
+    }
+}
+```
 
-| 特质 | `tokio` | `async-std` | `smol` |
-| :--- | :--- | :--- | :--- |
-| **设计哲学** | 功能全面、性能驱动 | 模仿标准库 API，易于上手 | 模块化、轻量级 |
-| **调度模型** | 多线程，工作窃取 | 多线程，工作分享 | 默认单线程，可配置 |
-| **生态系统** | 最庞大、最成熟，是事实标准 | 较小，但核心功能完备 | 实验性，专注于简洁 |
-| **主要优势** | 性能、稳定性和丰富的生态库 | 简洁、符合直觉的 API | 简单、可组合 |
-| **适用场景** | 生产级网络服务、数据库等 | 学习、中小型项目 | 嵌入式、需要自定义运行时的场景 |
+## async-std运行时
 
-## 5. 总结
+### 1. 设计哲学
 
-Rust 的异步执行模型是一个分层系统。`Future` 描述了"做什么"，执行器决定了"何时做"，而运行时则提供了"在哪里做"以及"如何与外部世界（I/O、时间）交互"的全套环境。理解这种职责分离是掌握 Rust 异步编程的关键。虽然运行时的分离带来了生态上的挑战，但也赋予了 Rust 社区巨大的灵活性，能够为各种不同的应用场景打造出最高效、最合适的异步解决方案。
+```rust
+// async-std运行时
+pub struct AsyncStdRuntime {
+    // 执行器
+    executor: Executor,
+    // I/O驱动
+    io: IoDriver,
+    // 时间驱动
+    time: TimeDriver,
+}
+
+// async-std执行器
+pub struct AsyncStdExecutor {
+    // 任务队列
+    task_queue: TaskQueue,
+    // 工作线程
+    worker_threads: Vec<WorkerThread>,
+    // 调度策略
+    scheduler: Scheduler,
+}
+```
+
+### 2. 与Tokio的差异
+
+```rust
+// 对比分析
+pub struct RuntimeComparison {
+    // 调度策略差异
+    scheduling: SchedulingComparison,
+    // 内存管理差异
+    memory_management: MemoryComparison,
+    // 性能特征差异
+    performance: PerformanceComparison,
+}
+
+pub struct SchedulingComparison {
+    // Tokio: 工作窃取 + 多级队列
+    tokio: WorkStealingMultiLevel,
+    // async-std: 工作窃取 + 单一队列
+    async_std: WorkStealingSingle,
+}
+
+pub struct MemoryComparison {
+    // Tokio: 每个任务独立分配
+    tokio: PerTaskAllocation,
+    // async-std: 批量分配 + 对象池
+    async_std: BatchAllocation,
+}
+```
+
+## 性能优化
+
+### 1. 内存分配优化
+
+```rust
+// 对象池
+pub struct ObjectPool<T> {
+    // 空闲对象
+    free_objects: Vec<T>,
+    // 对象工厂
+    factory: Box<dyn Fn() -> T>,
+    // 池大小限制
+    max_size: usize,
+}
+
+impl<T> ObjectPool<T> {
+    fn acquire(&mut self) -> T {
+        self.free_objects.pop().unwrap_or_else(|| (self.factory)())
+    }
+    
+    fn release(&mut self, obj: T) {
+        if self.free_objects.len() < self.max_size {
+            self.free_objects.push(obj);
+        }
+    }
+}
+
+// 任务分配器
+pub struct TaskAllocator {
+    // 任务对象池
+    task_pool: ObjectPool<Task>,
+    // 未来对象池
+    future_pool: ObjectPool<Pin<Box<dyn Future<Output = ()> + Send>>>,
+}
+```
+
+### 2. 缓存优化
+
+```rust
+// 缓存友好的任务队列
+pub struct CacheFriendlyQueue {
+    // 缓存行对齐的任务数组
+    tasks: Vec<Task>,
+    // 头尾指针
+    head: AtomicUsize,
+    tail: AtomicUsize,
+    // 缓存行大小
+    cache_line_size: usize,
+}
+
+impl CacheFriendlyQueue {
+    fn push(&self, task: Task) -> Result<(), Task> {
+        let tail = self.tail.load(Ordering::Relaxed);
+        let next_tail = (tail + 1) % self.tasks.len();
+        
+        if next_tail == self.head.load(Ordering::Acquire) {
+            return Err(task); // 队列满
+        }
+        
+        // 确保缓存行对齐
+        let aligned_index = (tail / self.cache_line_size) * self.cache_line_size;
+        self.tasks[aligned_index] = task;
+        self.tail.store(next_tail, Ordering::Release);
+        Ok(())
+    }
+}
+```
+
+### 3. 调度优化
+
+```rust
+// 自适应调度器
+pub struct AdaptiveScheduler {
+    // 性能监控
+    performance_monitor: PerformanceMonitor,
+    // 调度策略
+    current_strategy: SchedulingStrategy,
+    // 历史数据
+    historical_data: Vec<PerformanceData>,
+}
+
+impl AdaptiveScheduler {
+    fn adapt(&mut self) {
+        let current_performance = self.performance_monitor.get_metrics();
+        
+        // 根据性能指标调整调度策略
+        if current_performance.throughput < self.historical_data.average().throughput {
+            self.current_strategy = self.select_better_strategy();
+        }
+    }
+    
+    fn select_better_strategy(&self) -> SchedulingStrategy {
+        // 基于历史数据选择最优策略
+        let strategies = vec![
+            SchedulingStrategy::WorkStealing,
+            SchedulingStrategy::Priority,
+            SchedulingStrategy::Fair,
+        ];
+        
+        strategies.into_iter()
+            .max_by_key(|s| self.predict_performance(*s))
+            .unwrap()
+    }
+}
+```
+
+## 形式化模型
+
+### 1. 调度器状态机
+
+```rust
+// 调度器状态机定义
+pub enum SchedulerState {
+    // 空闲状态
+    Idle,
+    // 运行状态
+    Running { active_tasks: usize },
+    // 窃取状态
+    Stealing { target_thread: ThreadId },
+    // 阻塞状态
+    Blocked { reason: BlockReason },
+}
+
+// 状态转换函数
+impl SchedulerState {
+    fn transition(&mut self, event: SchedulerEvent) -> Result<(), SchedulerError> {
+        match (self, event) {
+            (SchedulerState::Idle, SchedulerEvent::TaskArrived) => {
+                *self = SchedulerState::Running { active_tasks: 1 };
+                Ok(())
+            }
+            (SchedulerState::Running { active_tasks }, SchedulerEvent::TaskCompleted) => {
+                if *active_tasks == 1 {
+                    *self = SchedulerState::Idle;
+                } else {
+                    *active_tasks -= 1;
+                }
+                Ok(())
+            }
+            // 其他状态转换...
+            _ => Err(SchedulerError::InvalidTransition),
+        }
+    }
+}
+```
+
+### 2. 性能模型
+
+```rust
+// 性能模型
+pub struct PerformanceModel {
+    // 吞吐量模型
+    throughput: ThroughputModel,
+    // 延迟模型
+    latency: LatencyModel,
+    // 资源利用率模型
+    resource_utilization: ResourceUtilizationModel,
+}
+
+pub struct ThroughputModel {
+    // 任务处理速率
+    task_processing_rate: f64,
+    // 调度开销
+    scheduling_overhead: f64,
+    // 上下文切换开销
+    context_switch_overhead: f64,
+}
+
+impl ThroughputModel {
+    fn calculate_throughput(&self, task_count: usize) -> f64 {
+        let total_overhead = self.scheduling_overhead + self.context_switch_overhead;
+        let effective_rate = self.task_processing_rate - total_overhead;
+        effective_rate * task_count as f64
+    }
+}
+```
+
+## 工程实践
+
+### 1. 运行时选择指南
+
+```rust
+// 运行时选择决策树
+pub enum RuntimeChoice {
+    // 高并发I/O密集型应用
+    Tokio,
+    // 简单异步应用
+    AsyncStd,
+    // 嵌入式/资源受限环境
+    Embassy,
+    // 自定义运行时
+    Custom,
+}
+
+impl RuntimeChoice {
+    fn select(requirements: RuntimeRequirements) -> Self {
+        match requirements {
+            RuntimeRequirements {
+                high_concurrency: true,
+                complex_scheduling: true,
+                resource_constrained: false,
+                ..
+            } => RuntimeChoice::Tokio,
+            
+            RuntimeRequirements {
+                high_concurrency: false,
+                simple_use_case: true,
+                ..
+            } => RuntimeChoice::AsyncStd,
+            
+            RuntimeRequirements {
+                resource_constrained: true,
+                ..
+            } => RuntimeChoice::Embassy,
+            
+            _ => RuntimeChoice::Custom,
+        }
+    }
+}
+```
+
+### 2. 性能调优
+
+```rust
+// 性能调优配置
+pub struct PerformanceTuning {
+    // 工作线程数
+    worker_threads: usize,
+    // 任务队列大小
+    task_queue_size: usize,
+    // 窃取批次大小
+    steal_batch_size: usize,
+    // 内存分配策略
+    allocation_strategy: AllocationStrategy,
+}
+
+impl PerformanceTuning {
+    fn optimize_for_workload(&mut self, workload: WorkloadProfile) {
+        match workload {
+            WorkloadProfile::IoIntensive => {
+                self.worker_threads = num_cpus::get() * 2;
+                self.task_queue_size = 1024;
+                self.steal_batch_size = 32;
+            }
+            WorkloadProfile::CpuIntensive => {
+                self.worker_threads = num_cpus::get();
+                self.task_queue_size = 512;
+                self.steal_batch_size = 16;
+            }
+            WorkloadProfile::Mixed => {
+                self.worker_threads = num_cpus::get() * 3 / 2;
+                self.task_queue_size = 768;
+                self.steal_batch_size = 24;
+            }
+        }
+    }
+}
+```
+
+### 3. 监控与诊断
+
+```rust
+// 运行时监控
+pub struct RuntimeMonitor {
+    // 性能指标收集器
+    metrics_collector: MetricsCollector,
+    // 事件追踪器
+    event_tracer: EventTracer,
+    // 诊断工具
+    diagnostic_tools: DiagnosticTools,
+}
+
+impl RuntimeMonitor {
+    fn collect_metrics(&self) -> RuntimeMetrics {
+        RuntimeMetrics {
+            active_tasks: self.metrics_collector.active_tasks(),
+            completed_tasks: self.metrics_collector.completed_tasks(),
+            average_latency: self.metrics_collector.average_latency(),
+            throughput: self.metrics_collector.throughput(),
+            memory_usage: self.metrics_collector.memory_usage(),
+        }
+    }
+    
+    fn diagnose_performance_issues(&self) -> Vec<PerformanceIssue> {
+        let metrics = self.collect_metrics();
+        let mut issues = Vec::new();
+        
+        if metrics.average_latency > Duration::from_millis(100) {
+            issues.push(PerformanceIssue::HighLatency);
+        }
+        
+        if metrics.memory_usage > 1024 * 1024 * 1024 { // 1GB
+            issues.push(PerformanceIssue::HighMemoryUsage);
+        }
+        
+        issues
+    }
+}
+```
+
+## 总结
+
+运行时与执行模型是异步编程系统的核心，通过精心设计的调度算法、内存管理和性能优化，实现了高效的异步任务执行。Tokio和async-std作为主流运行时，各有其设计哲学和适用场景。理解运行时的内部机制有助于开发者做出合适的技术选择和性能调优。
+
+## 交叉引用
+
+- [异步编程导论与哲学](./01_introduction_and_philosophy.md)
+- [Pinning与Unsafe基础](./03_pinning_and_unsafe_foundations.md)
+- [异步流](./04_streams_and_sinks.md)
+- [异步Trait与生态](./05_async_in_traits_and_ecosystem.md)
+- [并发与同步原语](../05_concurrency/)
+- [性能优化](../performance_optimization/)
