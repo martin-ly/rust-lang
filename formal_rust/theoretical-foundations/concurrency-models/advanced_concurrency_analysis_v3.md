@@ -219,7 +219,7 @@ impl Drop for AsyncResource {
 
 ## 并发安全模式
 
-### 定义与内涵
+### 1定义与内涵
 
 并发安全模式（Concurrent Safety Patterns）提供经过验证的并发编程模式，确保多线程程序的正确性。
 
@@ -232,7 +232,7 @@ Concurrent Safety Patterns:
 - Deadlock Free: ¬∃cycle in resource allocation
 ```
 
-### 理论基础
+### 1理论基础
 
 并发安全模式基于：
 
@@ -240,7 +240,7 @@ Concurrent Safety Patterns:
 2. **同步原语**：锁、信号量、条件变量
 3. **无锁编程**：原子操作和内存序
 
-### Rust 1.87.0中的现状
+### 1Rust 1.87.0中的现状
 
 Rust通过以下方式支持并发安全：
 
@@ -359,14 +359,14 @@ impl WorkerPool {
 }
 ```
 
-### 2025年最新发展
+### 12025年最新发展
 
 1. **Structured Concurrency** 的研究
 2. **Async Concurrency** 的增强
 3. **Memory Ordering** 的优化
 4. **Concurrency Debugging** 工具的改进
 
-### 实际应用示例
+### 1实际应用示例
 
 ```rust
 // 高级并发模式
@@ -481,7 +481,7 @@ where
 
 ## 无锁数据结构
 
-### 定义与内涵
+### 2定义与内涵
 
 无锁数据结构（Lock-Free Data Structures）通过原子操作实现并发安全，避免传统锁的开销。
 
@@ -494,7 +494,7 @@ Lock-Free Properties:
 - Obstruction-Freedom: thread makes progress when running alone
 ```
 
-### 理论基础
+### 2理论基础
 
 无锁数据结构基于：
 
@@ -502,7 +502,7 @@ Lock-Free Properties:
 2. **内存序**：Relaxed, Acquire, Release, AcqRel, SeqCst
 3. **ABA问题**：防止ABA问题的技术
 
-### Rust 1.87.0中的现状
+### 2Rust 1.87.0中的现状
 
 Rust通过以下方式支持无锁数据结构：
 
@@ -668,14 +668,14 @@ impl<T> LockFreeQueue<T> {
 }
 ```
 
-### 2025年最新发展
+### 32025年最新发展
 
 1. **Hazard Pointers** 的实现
 2. **RCU (Read-Copy Update)** 的优化
 3. **Memory Reclamation** 的改进
 4. **Performance Profiling** 工具的增强
 
-### 实际应用示例
+### 3实际应用示例
 
 ```rust
 // 高级无锁抽象
@@ -790,7 +790,7 @@ where
 
 ## 内存模型
 
-### 定义与内涵
+### 4定义与内涵
 
 内存模型（Memory Model）定义多线程程序中内存访问的语义，确保程序的正确性。
 
@@ -803,7 +803,7 @@ Memory Model:
 - Eventual Consistency: ∀x,y. Eventually(Consistent(x,y))
 ```
 
-### 理论基础
+### 4理论基础
 
 内存模型基于：
 
@@ -811,7 +811,7 @@ Memory Model:
 2. **Java内存模型**
 3. **ARM/PowerPC内存模型**
 
-### Rust 1.87.0中的现状
+### 4Rust 1.87.0中的现状
 
 Rust采用C++11风格的内存模型：
 
@@ -889,14 +889,14 @@ impl MemoryFenceExample {
 }
 ```
 
-### 2025年最新发展
+### 42025年最新发展
 
 1. **Memory Ordering** 的优化
 2. **Cache Coherence** 的改进
 3. **Memory Barriers** 的增强
 4. **Performance Analysis** 工具的完善
 
-### 实际应用示例
+### 4实际应用示例
 
 ```rust
 // 高级内存模型抽象
@@ -996,7 +996,7 @@ impl MemoryConsistencyChecker {
 
 ## 并发控制原语
 
-### 定义与内涵
+### 5定义与内涵
 
 并发控制原语（Concurrency Control Primitives）提供基础的并发同步机制。
 
@@ -1009,7 +1009,7 @@ Concurrency Primitives:
 - Condition Variable: ∀c. Wait(c) ∧ Signal(c) ⇒ Wake(c)
 ```
 
-### 理论基础
+### 5理论基础
 
 并发控制原语基于：
 
@@ -1017,7 +1017,7 @@ Concurrency Primitives:
 2. **进程代数**
 3. **时态逻辑**
 
-### Rust 1.87.0中的现状
+### 5Rust 1.87.0中的现状
 
 Rust提供丰富的并发控制原语：
 
@@ -1171,14 +1171,14 @@ impl EnhancedSemaphore {
 }
 ```
 
-### 2025年最新发展
+### 52025年最新发展
 
 1. **Adaptive Locks** 的实现
 2. **NUMA-Aware** 的优化
 3. **Power-Efficient** 的设计
 4. **Real-Time** 的保证
 
-### 实际应用示例
+### 5实际应用示例
 
 ```rust
 // 高级并发控制抽象

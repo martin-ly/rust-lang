@@ -26,3 +26,18 @@ go on  激情澎湃的 <(￣︶￣)↗[GO!]    如何做 请您自己规划保�
 
 接着上次未完成的子目录工作
 ```
+
+```text
+ rust 必须掌握的软件开源库:
+    core/alloc/std
+        │
+    tokio  ← runtime
+        │
+    futures/async-trait/crossbeam  ← 并发
+        │
+    serde/bytes/thiserror  ← 数据
+        │
+    hyper/reqwest/tonic  ← 网络
+        │
+    tracing/clap  ← 观测/CLI
+```
