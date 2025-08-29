@@ -879,7 +879,3 @@ Rust线程同步语义模型提供了：
 - [线程创建语义](01_thread_creation_semantics.md)
 - [异步编程语义](../03_error_handling_semantics/00_index.md)
 - [内存模型语义](../03_error_handling_semantics/00_index.md)
-
-"
-
----

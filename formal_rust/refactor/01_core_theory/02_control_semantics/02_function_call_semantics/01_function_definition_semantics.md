@@ -954,7 +954,3 @@ impl ContractVerifier {
 > - 下级文档: [闭包语义](04_closure_semantics.md) | [高阶函数语义](05_higher_order_functions.md)
 >
 > **深度**: ⭐⭐⭐⭐⭐ **广度**: ⭐⭐⭐⭐⭐ **完成度**: 100%
-
-"
-
----

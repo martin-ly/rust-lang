@@ -824,7 +824,3 @@ fn const_generics_example() {
 - **相关工具**: rustc, rust-analyzer, cargo
 - **更新频率**: 与Rust泛型系统演进同步
 - **维护者**: Rust基础语义分析工作组
-
-"
-
----

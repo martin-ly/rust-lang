@@ -1090,7 +1090,3 @@ impl Drop for SmartContract {
 > - 下级文档: [所有权模式](07_ownership_patterns.md)
 >
 > **深度**: ⭐⭐⭐⭐⭐ **广度**: ⭐⭐⭐⭐⭐ **完成度**: 100%
-
-"
-
----

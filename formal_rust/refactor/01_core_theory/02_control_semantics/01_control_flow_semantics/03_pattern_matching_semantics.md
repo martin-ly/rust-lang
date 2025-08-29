@@ -1248,7 +1248,3 @@ fn parser_combinator_example() {
 - **相关工具**: rustc, rust-analyzer, cargo
 - **更新频率**: 与Rust模式匹配系统演进同步
 - **维护者**: Rust控制语义分析工作组
-
-"
-
----

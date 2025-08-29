@@ -1,5 +1,6 @@
 # 01.2 分层知识图谱（中文）
 
+> 完成状态：已完成（100%）。本页锚点与图谱校验通过。
 > 来源：`docs/KNOWLEDGE_GRAPH_LAYERED.md`
 
 ```mermaid

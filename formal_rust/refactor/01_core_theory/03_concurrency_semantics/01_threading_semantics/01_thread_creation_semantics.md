@@ -735,7 +735,3 @@ fn producer_consumer_pattern() {
 - **相关工具**: rustc, cargo, rust-analyzer
 - **更新频率**: 与Rust并发模型演进同步
 - **维护者**: Rust并发语义分析工作组
-
-"
-
----

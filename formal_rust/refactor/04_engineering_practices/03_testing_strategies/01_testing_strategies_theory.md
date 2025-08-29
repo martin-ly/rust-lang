@@ -346,7 +346,3 @@ $$A(r, T) = \arg\max_{a} \text{Effectiveness}(a, T) \text{ s.t. } \text{Constrai
 ---
 
 *本文档建立了完整的测试策略形式化理论框架，为Rust工程测试提供了理论基础和实践指导。*
-
-"
-
----

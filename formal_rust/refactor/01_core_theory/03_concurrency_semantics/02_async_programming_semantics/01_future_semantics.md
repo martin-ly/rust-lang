@@ -914,7 +914,3 @@ impl<T> BatchProcessor<T> {
 ---
 
 > **链接网络**: [异步编程语义索引](00_async_programming_semantics_index.md) | [并发语义层总览](../00_concurrency_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md)
-
-"
-
----

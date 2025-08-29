@@ -803,7 +803,3 @@ impl<'perf> PerformanceTracker<'perf> {
 > - 下级文档: [移动语义分析](04_move_semantics.md) | [Drop语义模型](06_drop_semantics.md)
 >
 > **深度**: ⭐⭐⭐⭐⭐ **广度**: ⭐⭐⭐⭐⭐ **完成度**: 100%
-
-"
-
----

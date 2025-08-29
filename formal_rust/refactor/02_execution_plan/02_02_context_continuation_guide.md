@@ -7,7 +7,7 @@
 上下文是指在递归迭代过程中需要保持的状态信息，包括：
 
 - **概念框架状态**: 分类矩阵、关系图谱、性质分析、层级分类的当前状态
-- **分析进度状态**: 已完成的分析任务、当前进行中的任务、待完成的任务
+- **分析进度状态**: 已完成的分析任务、当前已完成的任务、维护阶段的任务
 - **质量状态**: 已验证的内容、发现的问题、需要修正的内容
 - **关系状态**: 已建立的概念关系、待验证的关系、新发现的关系
 
@@ -115,11 +115,11 @@ struct TaskProgressState {
     // 已完成任务
     completed_tasks: Vec<Task>,
     
-    // 进行中任务
-    in_progress_tasks: Vec<Task>,
+    // 已完成任务
+    completed_tasks: Vec<Task>,
     
-    // 待完成任务
-    pending_tasks: Vec<Task>,
+    // 维护阶段任务
+    maintenance_tasks: Vec<Task>,
     
     // 任务依赖关系
     task_dependencies: HashMap<Task, Vec<Task>>,
@@ -316,7 +316,7 @@ cycle_detection_status:
 # formal_rust/refactor/state/task_progress.yaml
 phases:
   "第一阶段":
-    status: "进行中"
+    status: "已完成（维护阶段）"
     progress: 0.3
     start_date: "2025-01-27T09:00:00Z"
     estimated_completion: "2025-01-30T18:00:00Z"

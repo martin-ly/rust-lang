@@ -1067,7 +1067,3 @@ pub enum BranchDecision {
 > - 下级文档: [函数调用语义](../02_function_call_semantics.md)
 >
 > **深度**: ⭐⭐⭐⭐⭐ **广度**: ⭐⭐⭐⭐⭐ **完成度**: 100%
-
-"
-
----

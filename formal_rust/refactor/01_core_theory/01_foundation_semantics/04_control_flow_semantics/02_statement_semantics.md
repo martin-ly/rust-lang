@@ -634,7 +634,3 @@ Rust语句语义模型提供了：
 - [表达式语义](01_expression_semantics.md)
 - [控制流语义](03_control_flow_semantics.md)
 - [内存模型语义](../02_memory_model_semantics/01_memory_layout_semantics.md)
-
-"
-
----

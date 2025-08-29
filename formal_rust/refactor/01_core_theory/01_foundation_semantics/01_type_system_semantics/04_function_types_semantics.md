@@ -266,7 +266,3 @@ fn linear_function_types() {
 ---
 
 > **链接网络**: [类型系统语义模型索引](00_type_system_semantics_index.md) | [基础语义层总览](../00_foundation_semantics_index.md) | [核心理论框架](../../00_core_theory_index.md)
-
-"
-
----
