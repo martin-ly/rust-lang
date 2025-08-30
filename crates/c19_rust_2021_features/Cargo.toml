@@ -1,0 +1,32 @@
+[package]
+name = "c19_rust_2021_features"
+version = "0.1.0"
+edition = "2021"
+resolver = "3"
+
+[dependencies]
+tokio = { version = "1.0", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+anyhow = "1.0"
+thiserror = "1.0"
+
+[lib]
+name = "c19_rust_2021_features"
+path = "src/lib.rs"
+
+[[bin]]
+name = "gat_examples"
+path = "src/bin/gat_examples.rs"
+
+[[bin]]
+name = "async_trait_examples"
+path = "src/bin/async_trait_examples.rs"
+
+[[bin]]
+name = "const_generics_examples"
+path = "src/bin/const_generics_examples.rs"
+
+[[bin]]
+name = "macro_2_0_examples"
+path = "src/bin/macro_2_0_examples.rs"

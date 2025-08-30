@@ -1,5 +1,30 @@
 # Rust 行为型设计模式理论分析
 
+## 目录
+
+- [Rust 行为型设计模式理论分析](#rust-行为型设计模式理论分析)
+  - [目录](#目录)
+  - [Rust Behavioral Design Patterns Theory Analysis](#rust-behavioral-design-patterns-theory-analysis)
+    - [1. 理论基础 / Theoretical Foundation](#1-理论基础--theoretical-foundation)
+      - [1.1 行为型模式基础理论 / Behavioral Patterns Foundation Theory](#11-行为型模式基础理论--behavioral-patterns-foundation-theory)
+      - [1.2 行为型模式架构理论 / Behavioral Patterns Architecture Theory](#12-行为型模式架构理论--behavioral-patterns-architecture-theory)
+      - [1.3 状态管理理论 / State Management Theory](#13-状态管理理论--state-management-theory)
+    - [2. 工程实践 / Engineering Practice](#2-工程实践--engineering-practice)
+      - [2.1 观察者模式实现 / Observer Pattern Implementation](#21-观察者模式实现--observer-pattern-implementation)
+      - [2.2 策略模式实现 / Strategy Pattern Implementation](#22-策略模式实现--strategy-pattern-implementation)
+      - [2.3 状态模式实现 / State Pattern Implementation](#23-状态模式实现--state-pattern-implementation)
+      - [2.4 命令模式实现 / Command Pattern Implementation](#24-命令模式实现--command-pattern-implementation)
+    - [3. 批判性分析 / Critical Analysis](#3-批判性分析--critical-analysis)
+      - [3.1 优势分析 / Advantage Analysis](#31-优势分析--advantage-analysis)
+      - [3.2 局限性讨论 / Limitation Discussion](#32-局限性讨论--limitation-discussion)
+      - [3.3 改进建议 / Improvement Suggestions](#33-改进建议--improvement-suggestions)
+    - [4. 应用案例 / Application Cases](#4-应用案例--application-cases)
+      - [4.1 事件系统应用案例 / Event System Application Case](#41-事件系统应用案例--event-system-application-case)
+    - [5. 发展趋势 / Development Trends](#5-发展趋势--development-trends)
+      - [5.1 技术发展趋势 / Technical Development Trends](#51-技术发展趋势--technical-development-trends)
+      - [5.2 生态系统发展 / Ecosystem Development](#52-生态系统发展--ecosystem-development)
+    - [6. 总结 / Summary](#6-总结--summary)
+
 ## Rust Behavioral Design Patterns Theory Analysis
 
 ### 1. 理论基础 / Theoretical Foundation

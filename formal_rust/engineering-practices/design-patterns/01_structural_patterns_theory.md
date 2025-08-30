@@ -1,5 +1,30 @@
 # Rust 结构型设计模式理论分析
 
+## 目录
+
+- [Rust 结构型设计模式理论分析](#rust-结构型设计模式理论分析)
+  - [目录](#目录)
+  - [Rust Structural Design Patterns Theory Analysis](#rust-structural-design-patterns-theory-analysis)
+    - [1. 理论基础 / Theoretical Foundation](#1-理论基础--theoretical-foundation)
+      - [1.1 结构型模式基础理论 / Structural Patterns Foundation Theory](#11-结构型模式基础理论--structural-patterns-foundation-theory)
+      - [1.2 结构型模式架构理论 / Structural Patterns Architecture Theory](#12-结构型模式架构理论--structural-patterns-architecture-theory)
+      - [1.3 内存管理理论 / Memory Management Theory](#13-内存管理理论--memory-management-theory)
+    - [2. 工程实践 / Engineering Practice](#2-工程实践--engineering-practice)
+      - [2.1 适配器模式实现 / Adapter Pattern Implementation](#21-适配器模式实现--adapter-pattern-implementation)
+      - [2.2 装饰器模式实现 / Decorator Pattern Implementation](#22-装饰器模式实现--decorator-pattern-implementation)
+      - [2.3 代理模式实现 / Proxy Pattern Implementation](#23-代理模式实现--proxy-pattern-implementation)
+      - [2.4 组合模式实现 / Composite Pattern Implementation](#24-组合模式实现--composite-pattern-implementation)
+    - [3. 批判性分析 / Critical Analysis](#3-批判性分析--critical-analysis)
+      - [3.1 优势分析 / Advantage Analysis](#31-优势分析--advantage-analysis)
+      - [3.2 局限性讨论 / Limitation Discussion](#32-局限性讨论--limitation-discussion)
+      - [3.3 改进建议 / Improvement Suggestions](#33-改进建议--improvement-suggestions)
+    - [4. 应用案例 / Application Cases](#4-应用案例--application-cases)
+      - [4.1 文件系统应用案例 / File System Application Case](#41-文件系统应用案例--file-system-application-case)
+    - [5. 发展趋势 / Development Trends](#5-发展趋势--development-trends)
+      - [5.1 技术发展趋势 / Technical Development Trends](#51-技术发展趋势--technical-development-trends)
+      - [5.2 生态系统发展 / Ecosystem Development](#52-生态系统发展--ecosystem-development)
+    - [6. 总结 / Summary](#6-总结--summary)
+
 ## Rust Structural Design Patterns Theory Analysis
 
 ### 1. 理论基础 / Theoretical Foundation

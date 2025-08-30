@@ -7,7 +7,7 @@
 **理论定义**：
 架构描述语言（ADL）用于形式化描述系统的组件、接口、连接关系与行为。
 
-**结构体体体符号**：
+**结构体符号**：
 系统 S = (C, I, L, B)
 
 - C: 组件集合
@@ -30,7 +30,7 @@ ADL 支持系统架构的可视化、验证与自动化分析。
 **理论定义**：
 组件建模关注系统中各功能单元的抽象，接口建模描述组件间的交互方式。
 
-**结构体体体符号**：
+**结构体符号**：
 Component = { name, interfaces }
 Interface = { name, methods }
 
@@ -49,7 +49,7 @@ struct Component { name: String, interfaces: Vec<Interface> }
 **理论定义**：
 系统集成关注各组件协同工作，验证确保系统满足规范与需求。
 
-**结构体体体符号**：
+**结构体符号**：
 Integration = { components, interfaces }
 Verification = { spec, test() }
 
@@ -95,7 +95,7 @@ impl Queue {
 **理论定义**：
 资源分配与调度关注系统中有限资源的最优分配与任务调度。
 
-**结构体体体符号**：
+**结构体符号**：
 Resource = { id, capacity }
 Scheduler = { assign(task), release(task) }
 
@@ -120,7 +120,7 @@ impl Scheduler {
 **理论定义**：
 故障模型描述系统中可能出现的失效类型，失效分析用于评估系统的鲁棒性。
 
-**结构体体体符号**：
+**结构体符号**：
 Fault = { type, probability }
 Analysis = { simulate(), report() }
 
@@ -143,7 +143,7 @@ impl Analysis {
 **理论定义**：
 冗余通过增加备份提升系统容错能力，容错机制保证系统在部分失效时仍能正常运行。
 
-**结构体体体符号**：
+**结构体符号**：
 Redundancy = { backup, switch() }
 FaultTolerance = { detect(), recover() }
 
@@ -167,9 +167,9 @@ impl System {
 - 4.1 可扩展性度量与理论
 
 **理论定义**：
-可扩展性度量用于评估系统在负载增加时的性能变化，理论关注系统结构体体体的可扩展性。
+可扩展性度量用于评估系统在负载增加时的性能变化，理论关注系统结构体的可扩展性。
 
-**结构体体体符号**：
+**结构体符号**：
 Scalability = { throughput(load), latency(load) }
 
 **Rust 伪代码**：
@@ -190,7 +190,7 @@ impl System {
 **理论定义**：
 动态伸缩允许系统根据负载自动扩展或收缩，弹性分析评估系统应对突发负载的能力。
 
-**结构体体体符号**：
+**结构体符号**：
 AutoScaler = { scale_up(), scale_down() }
 Elasticity = { measure(), adapt() }
 
@@ -256,19 +256,19 @@ let ok = sys.simulate_fault(&fault);
 **简要说明**：
 Rust 适合高可靠性系统的工程建模与分析。
 
-## 6. 理论贡献与方法论总结  [TODO]
+## 6. 理论贡献与方法论总结
 
 ---
 
 ### 推进计划与断点快照
 
 - [x] 目录骨架搭建
-- [ ] 系统架构小节补全
-- [ ] 性能建模小节补全
-- [ ] 可靠性分析小节补全
-- [ ] 可扩展性小节补全
-- [ ] 工程案例与代码补全
-- [ ] 理论贡献总结
+- [x] 系统架构小节补全
+- [x] 性能建模小节补全
+- [x] 可靠性分析小节补全
+- [x] 可扩展性小节补全
+- [x] 工程案例与代码补全
+- [x] 理论贡献总结
 
 - 6.1 理论贡献与方法论总结
 
@@ -324,12 +324,78 @@ Rust 系统建模适合高可靠性与高性能系统设计。
 **Rust 代码片段**：
 
 ```rust
-struct Node { id: u32, state: String }
-struct Simulator;
+struct Node { 
+    id: u32, 
+    state: String,
+    load: f64,
+    capacity: f64 
+}
+
+struct Simulator {
+    nodes: Vec<Node>,
+    time: f64
+}
+
 impl Simulator {
-    fn simulate(&self, nodes: &mut [Node]) { /* 弹性仿真逻辑 */ }
+    fn new() -> Self {
+        Self {
+            nodes: Vec::new(),
+            time: 0.0
+        }
+    }
+    
+    fn add_node(&mut self, id: u32, capacity: f64) {
+        self.nodes.push(Node {
+            id,
+            state: "idle".to_string(),
+            load: 0.0,
+            capacity
+        });
+    }
+    
+    fn simulate_load_distribution(&mut self, total_load: f64) {
+        let node_count = self.nodes.len() as f64;
+        let load_per_node = total_load / node_count;
+        
+        for node in &mut self.nodes {
+            node.load = load_per_node;
+            node.state = if node.load > node.capacity * 0.8 {
+                "overloaded".to_string()
+            } else if node.load > node.capacity * 0.5 {
+                "busy".to_string()
+            } else {
+                "idle".to_string()
+            };
+        }
+    }
+    
+    fn get_system_health(&self) -> f64 {
+        let total_capacity: f64 = self.nodes.iter().map(|n| n.capacity).sum();
+        let total_load: f64 = self.nodes.iter().map(|n| n.load).sum();
+        
+        if total_capacity > 0.0 {
+            1.0 - (total_load / total_capacity)
+        } else {
+            0.0
+        }
+    }
+}
+
+// 使用示例
+fn main() {
+    let mut sim = Simulator::new();
+    sim.add_node(1, 100.0);
+    sim.add_node(2, 150.0);
+    sim.add_node(3, 200.0);
+    
+    sim.simulate_load_distribution(300.0);
+    let health = sim.get_system_health();
+    println!("System health: {:.2}", health);
 }
 ```
+
+**简要说明**：
+Rust 提供了强大的类型安全和性能保证，使其成为系统建模和仿真的理想选择。通过严格的类型系统和所有权模型，可以构建可靠、高效的分布式系统仿真器。
 
 **理论总结**：
 
@@ -344,7 +410,7 @@ Rust 适合高可靠性分布式系统建模。
 多视图建模提升系统表达能力。
 
 **数学符号**：
-结构体体体视图 S，行为视图 B
+结构体视图 S，行为视图 B
 
 **Rust 伪代码**：
 
@@ -352,7 +418,7 @@ Rust 适合高可靠性分布式系统建模。
 trait StructureView { fn describe(&self) -> String; }
 trait BehaviorView { fn simulate(&self); }
 struct SystemModel;
-impl StructureView for SystemModel { fn describe(&self) -> String { "结构体体体".into() } }
+impl StructureView for SystemModel { fn describe(&self) -> String { "结构体".into() } }
 impl BehaviorView for SystemModel { fn simulate(&self) { /* ... */ } }
 ```
 
@@ -385,7 +451,7 @@ fn check_invariant(state: i32) -> bool {
 
 **工程案例**：
 
-- Rust + petgraph 实现系统结构体体体建模
+- Rust + petgraph 实现系统结构体建模
 
 **Rust 伪代码**：
 
@@ -400,7 +466,7 @@ g.add_edge(a, b, "link");
 **简要总结**：
 Rust 适合自动化系统建模与分析。
 
-### 7.4 系统建模未来值值值展望与生态建议
+### 7.4 系统建模未来展望与生态建议
 
 **理论总结**：
 系统建模促进复杂系统的可控性与可验证性。
@@ -443,7 +509,7 @@ Rust 适合自动化系统建模与分析。
 - 自动化建模：
 
 ```rust
-// 伪代码：自动生成系统结构体体体图
+// 伪代码：自动生成系统结构体图
 fn auto_model(components: &[&str]) -> Graph<&str, &str> {
     let mut g = Graph::new();
     for &c in components { g.add_node(c); }

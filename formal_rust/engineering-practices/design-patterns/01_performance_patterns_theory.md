@@ -1,5 +1,30 @@
 # Rust 高性能计算设计模式理论分析
 
+## 目录
+
+- [Rust 高性能计算设计模式理论分析](#rust-高性能计算设计模式理论分析)
+  - [目录](#目录)
+  - [Rust High Performance Computing Design Patterns Theory Analysis](#rust-high-performance-computing-design-patterns-theory-analysis)
+    - [1. 理论基础 / Theoretical Foundation](#1-理论基础--theoretical-foundation)
+      - [1.1 高性能计算模式基础理论 / High Performance Computing Patterns Foundation Theory](#11-高性能计算模式基础理论--high-performance-computing-patterns-foundation-theory)
+      - [1.2 高性能计算模式架构理论 / High Performance Computing Patterns Architecture Theory](#12-高性能计算模式架构理论--high-performance-computing-patterns-architecture-theory)
+      - [1.3 高性能计算模式设计理论 / High Performance Computing Pattern Design Theory](#13-高性能计算模式设计理论--high-performance-computing-pattern-design-theory)
+    - [2. 工程实践 / Engineering Practice](#2-工程实践--engineering-practice)
+      - [2.1 缓存优化模式实现 / Cache Optimization Pattern Implementation](#21-缓存优化模式实现--cache-optimization-pattern-implementation)
+      - [2.2 向量化模式实现 / Vectorization Pattern Implementation](#22-向量化模式实现--vectorization-pattern-implementation)
+      - [2.3 并发模式实现 / Parallel Pattern Implementation](#23-并发模式实现--parallel-pattern-implementation)
+      - [2.4 内存优化模式实现 / Memory Optimization Pattern Implementation](#24-内存优化模式实现--memory-optimization-pattern-implementation)
+    - [3. 批判性分析 / Critical Analysis](#3-批判性分析--critical-analysis)
+      - [3.1 优势分析 / Advantage Analysis](#31-优势分析--advantage-analysis)
+      - [3.2 局限性讨论 / Limitation Discussion](#32-局限性讨论--limitation-discussion)
+      - [3.3 改进建议 / Improvement Suggestions](#33-改进建议--improvement-suggestions)
+    - [4. 应用案例 / Application Cases](#4-应用案例--application-cases)
+      - [4.1 科学计算应用案例 / Scientific Computing Application Case](#41-科学计算应用案例--scientific-computing-application-case)
+    - [5. 发展趋势 / Development Trends](#5-发展趋势--development-trends)
+      - [5.1 技术发展趋势 / Technical Development Trends](#51-技术发展趋势--technical-development-trends)
+      - [5.2 生态系统发展 / Ecosystem Development](#52-生态系统发展--ecosystem-development)
+    - [6. 总结 / Summary](#6-总结--summary)
+
 ## Rust High Performance Computing Design Patterns Theory Analysis
 
 ### 1. 理论基础 / Theoretical Foundation

@@ -1,5 +1,30 @@
 # Rust 分布式设计模式理论分析
 
+## 目录
+
+- [Rust 分布式设计模式理论分析](#rust-分布式设计模式理论分析)
+  - [目录](#目录)
+  - [Rust Distributed Design Patterns Theory Analysis](#rust-distributed-design-patterns-theory-analysis)
+    - [1. 理论基础 / Theoretical Foundation](#1-理论基础--theoretical-foundation)
+      - [1.1 分布式模式基础理论 / Distributed Patterns Foundation Theory](#11-分布式模式基础理论--distributed-patterns-foundation-theory)
+      - [1.2 分布式模式架构理论 / Distributed Patterns Architecture Theory](#12-分布式模式架构理论--distributed-patterns-architecture-theory)
+      - [1.3 分布式模式设计理论 / Distributed Pattern Design Theory](#13-分布式模式设计理论--distributed-pattern-design-theory)
+    - [2. 工程实践 / Engineering Practice](#2-工程实践--engineering-practice)
+      - [2.1 服务发现模式实现 / Service Discovery Pattern Implementation](#21-服务发现模式实现--service-discovery-pattern-implementation)
+      - [2.2 负载均衡模式实现 / Load Balancing Pattern Implementation](#22-负载均衡模式实现--load-balancing-pattern-implementation)
+      - [2.3 故障转移模式实现 / Failover Pattern Implementation](#23-故障转移模式实现--failover-pattern-implementation)
+      - [2.4 数据分片模式实现 / Data Sharding Pattern Implementation](#24-数据分片模式实现--data-sharding-pattern-implementation)
+    - [3. 批判性分析 / Critical Analysis](#3-批判性分析--critical-analysis)
+      - [3.1 优势分析 / Advantage Analysis](#31-优势分析--advantage-analysis)
+      - [3.2 局限性讨论 / Limitation Discussion](#32-局限性讨论--limitation-discussion)
+      - [3.3 改进建议 / Improvement Suggestions](#33-改进建议--improvement-suggestions)
+    - [4. 应用案例 / Application Cases](#4-应用案例--application-cases)
+      - [4.1 微服务架构应用案例 / Microservice Architecture Application Case](#41-微服务架构应用案例--microservice-architecture-application-case)
+    - [5. 发展趋势 / Development Trends](#5-发展趋势--development-trends)
+      - [5.1 技术发展趋势 / Technical Development Trends](#51-技术发展趋势--technical-development-trends)
+      - [5.2 生态系统发展 / Ecosystem Development](#52-生态系统发展--ecosystem-development)
+    - [6. 总结 / Summary](#6-总结--summary)
+
 ## Rust Distributed Design Patterns Theory Analysis
 
 ### 1. 理论基础 / Theoretical Foundation
