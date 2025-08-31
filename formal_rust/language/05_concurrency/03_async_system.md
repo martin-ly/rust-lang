@@ -736,7 +736,3 @@ fn verify_async_safety(program: &AsyncProgram) -> bool {
 3. async-std Documentation. (2023). Async version of the Rust standard library.
 4. Futures Documentation. (2023). Zero-cost asynchronous programming in Rust.
 5. Herlihy, M., & Shavit, N. (2008). The Art of Multiprocessor Programming. Morgan Kaufmann.
-
-"
-
----

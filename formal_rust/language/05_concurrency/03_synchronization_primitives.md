@@ -209,7 +209,3 @@ fn main() {
 - **上一章 ->** `02_message_passing.md`
 - **下一章 ->** `04_parallelism_and_beyond.md`: 探讨并行计算与更高级的并发库。
 - **返回目录 ->** `_index.md`
-
-"
-
----

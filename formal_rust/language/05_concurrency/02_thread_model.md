@@ -672,7 +672,3 @@ fn verify_thread_safety(program: &Program) -> bool {
 3. Lamport, L. (1978). Time, Clocks, and the Ordering of Events in a Distributed System. Communications of the ACM.
 4. Adve, S. V., & Gharachorloo, K. (1996). Shared Memory Consistency Models: A Tutorial. IEEE Computer.
 5. Boehm, H. J., & Adve, S. V. (2008). Foundations of the C++ Concurrency Memory Model. PLDI.
-
-"
-
----

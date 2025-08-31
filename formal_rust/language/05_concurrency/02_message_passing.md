@@ -199,7 +199,3 @@ Rust 并不强迫你只使用一种模型。它的美妙之处在于，当消息
 - **上一章 ->** `01_threads_and_ownership.md`
 - **下一章 ->** `03_synchronization_primitives.md`: 探讨 `Mutex`, `RwLock` 等同步原语。
 - **返回目录 ->** `_index.md`
-
-"
-
----
