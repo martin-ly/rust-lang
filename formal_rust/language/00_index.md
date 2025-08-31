@@ -77,7 +77,7 @@
 ### 2.2 所有权与借用系统
 
 - [01_ownership_borrowing/](./01_ownership_borrowing/) - 所有权与借用机制
-- [02_ownership_borrowing/](./02_ownership_borrowing/) - 所有权系统深度分析 (计划中)
+- [02_ownership_borrowing/](./02_ownership_borrowing/) - 所有权系统深度分析
 
 ### 2.3 类型系统
 
@@ -95,7 +95,7 @@
 
 ### 3.1 泛型系统
 
-- [04_generics/](./04_generics/) - 泛型编程 (计划中)
+- [04_generics/](./04_generics/) - 泛型编程
 
 ### 3.2 特质系统
 
@@ -146,7 +146,7 @@
 
 ### 6.1 网络编程
 
-- [10_networks/](./10_networks/) - 网络编程 (计划中)
+- [10_networks/](./10_networks/) - 网络编程
 
 ### 6.2 框架开发
 

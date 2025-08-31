@@ -1,8 +1,8 @@
-﻿# 泛型关联类型 (Generic Associated Types)
+﻿# 泛型关联类型 (Generic Associated Types, GATs)
 
 ## 摘要
 
-泛型关联类型（Generic Associated Types，GATs）是 Rust 类型系统的高级特征，允许在关联类型声明中使用泛型参数。
+泛型关联类型 (Generic Associated Types, GATs) 是 Rust 类型系统的高级特征，允许在关联类型声明中使用泛型参数。
 这一特征显著提高了 Rust 特征系统的表达能力，使得以前无法或难以表达的高阶抽象成为可能。
 本文探讨 GATs 的理论基础、形式化定义及其应用场景。
 
@@ -10,7 +10,7 @@
 
 ### 1. 高阶类型抽象
 
-GATs 的核心理论基础是高阶类型抽象。从类型理论角度看，GATs 提供了一种受限的高阶类型能力，允许定义依赖于泛型参数的关联类型。
+GATs 的核心理论基础是高阶类型 (Higher-Kinded Types) 抽象。从类型理论角度看，GATs 提供了一种受限的高阶类型能力，允许定义依赖于泛型参数的关联类型。
 
 形式上，对于特征 $T$ 和关联类型 $A$，传统关联类型表示为：
 
@@ -24,8 +24,8 @@ $$A : T \times P_1 \times P_2 \times ... \times P_n \rightarrow \text{Type}$$
 
 ### 2. 类型族与依赖类型
 
-GATs 可以视为类型族（Type Families）的实现，类型族是参数化的类型级函数，将类型映射到类型。
-在依赖类型理论中，这类似于依赖类型声明，但受限于 Rust 的类型系统。
+GATs 可以视为类型族 (Type Families) 的实现，类型族是参数化的类型级函数，将类型映射到类型。
+在依赖类型 (Dependent Types) 理论中，这类似于依赖类型声明，但受限于 Rust 的类型系统。
 
 形式化表示：GAT $A<P>$ 可表述为 $\lambda P. A[P]$，其中 $A[P]$ 表示将参数 $P$ 代入 $A$ 得到的具体类型。
 

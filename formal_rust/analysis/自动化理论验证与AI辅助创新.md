@@ -126,8 +126,3 @@ fn ai_batch_theorem_verification(codebase: &str) {
     }
 }
 ```
-
----
-"
-
----

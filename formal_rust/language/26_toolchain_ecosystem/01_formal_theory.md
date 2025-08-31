@@ -25,8 +25,8 @@
   - [核心概念](#核心概念)
   - [工具链组件](#工具链组件)
     - [主要组件](#主要组件)
-    - [rustc编译器](#rustc编译器)
-    - [cargo包管理器](#cargo包管理器)
+    - [rustc 编译器](#rustc-编译器)
+    - [cargo 包管理器](#cargo-包管理器)
     - [rustup工具链管理器](#rustup工具链管理器)
     - [辅助工具](#辅助工具)
   - [生态系统架构](#生态系统架构)
@@ -256,9 +256,9 @@ Rust工具链包括以下主要组件:
 6. **rustfmt**: 代码格式化工具
 7. **rust-analyzer**: 语言服务器
 
-### rustc编译器
+### rustc 编译器
 
-rustc是Rust工具链的核心组件，负责将Rust代码编译为可执行文件或库。
+rustc 是 Rust 工具链的核心组件，负责将 Rust 代码编译为可执行文件或库。
 
 **定义 26.9** (编译过程)
 编译过程可以形式化为一系列阶段变换:
@@ -274,9 +274,9 @@ $$Compile(src) = Link \circ CodeGen \circ Optimize \circ MIRGen \circ HIRGen \ci
 借用检查 -> HIR -> MIR -> LLVM IR -> 机器代码
 ```
 
-### cargo包管理器
+### cargo 包管理器
 
-cargo是Rust的包管理器和构建系统，负责依赖管理、项目构建和发布。
+cargo 是 Rust 的包管理器和构建系统，负责依赖管理、项目构建和发布。
 
 **定义 26.10** (依赖解析)
 包 $P$ 的依赖解析是找到满足所有依赖约束的版本集合:

@@ -808,7 +808,3 @@ trait IntelligentProofAssistant {
 ---
 
 *本文档探索了Rust形式化理论的创新方向，为Rust语言的理论发展和实践应用提供了重要参考。*
-
-"
-
----

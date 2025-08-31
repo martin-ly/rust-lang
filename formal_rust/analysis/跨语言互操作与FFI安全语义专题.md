@@ -163,7 +163,3 @@ fn register_callback_wrong(cb: Callback, user_data: *mut c_void) {
 // 工程实践：推荐所有权移动（Box::into_raw）或Arc/Mutex等安全封装，避免局部变量指针传递到异步FFI
 
 ---
-
-"
-
----

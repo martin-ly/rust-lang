@@ -1,22 +1,22 @@
-﻿# 幽灵类型与零大小类型 (Phantom Types and Zero-Sized Types)
+﻿# 幻影类型与零大小类型 (Phantom Types and Zero-Sized Types, ZSTs)
 
 ## 摘要
 
-幽灵类型(Phantom Types)和零大小类型(Zero-Sized Types, ZSTs)是 Rust 类型系统中的高级特征，它们虽然在运行时不占用内存空间，但在编译时提供重要的类型安全保证。
+幻影类型 (Phantom Types) 和零大小类型 (Zero-Sized Types, ZSTs) 是 Rust 类型系统中的高级特征，它们虽然在运行时不占用内存空间，但在编译时提供重要的类型安全保证。
 本文探讨这些类型的理论基础、形式化定义以及在 Rust 中的实际应用。
 
 ## 理论基础
 
 ### 1. 幽灵类型的形式定义
 
-幽灵类型是在数据类型定义中出现但不用于存储值的类型参数。
+幻影类型是在数据类型定义中出现但不用于存储值的类型参数。
 形式上，如果数据类型 $T<P>$ 中的参数 $P$ 不出现在 $T$ 的值构造器的任何字段类型中，则 $P$ 是一个幽灵类型参数。
 
 用集合论表示，若 $T<P>$ 表示一个参数化类型，且其值构造的集合可表示为：
 
 $$\llbracket T<P> \rrbracket = \{v | v \text{ is a value of type } T<P>\}$$
 
-则当 $\forall P_1, P_2. \llbracket T<P_1> \rrbracket = \llbracket T<P_2> \rrbracket$ 时，$P$ 是幽灵类型参数。
+则当 $\forall P_1, P_2. \llbracket T<P_1> \rrbracket = \llbracket T<P_2> \rrbracket$ 时，$P$ 是幻影类型参数。
 
 ### 2. 零大小类型的形式定义
 

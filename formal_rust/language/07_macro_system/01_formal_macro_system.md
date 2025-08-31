@@ -4,7 +4,7 @@
 
 ### 1.1 宏系统定义
 
-Rust宏系统是编译时代码生成和元编程的核心机制，提供声明宏和过程宏两种主要形式。
+Rust 宏系统是编译时代码生成和元编程的核心机制，提供声明宏 (Declarative Macros) 和过程宏 (Procedural Macros) 两种主要形式。
 
 **形式化定义**:
 $$\text{MacroSystem} = (\text{MacroTypes}, \text{MacroExpansion}, \text{MacroHygiene}, \text{MacroTypeSafety})$$

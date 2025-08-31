@@ -725,7 +725,3 @@ Rust代表了编程语言理论的重要发展，虽然在表达能力方面存�
 8. Jung, R., et al. (2018). RustBelt: Securing the foundations of the Rust programming language. Journal of the ACM, 66(1), 1-34.
 9. Jung, R., et al. (2020). Iris from the ground up: A modular foundation for higher-order concurrent separation logic. Journal of Functional Programming, 30.
 10. Sergey, I., et al. (2018). Programming and proving with distributed protocols. Proceedings of the ACM on Programming Languages, 2(POPL), 1-30.
-
-"
-
----

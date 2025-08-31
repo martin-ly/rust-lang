@@ -19,15 +19,15 @@
 
 ### 2. 实现机制层
 
-4. [Future执行模型](04_future_execution.md#future执行)
-5. [运行时系统](05_runtime_system.md#运行时系统)
-6. [错误处理机制](06_error_handling.md#错误处理)
+1. [Future执行模型](04_future_execution.md#future执行)
+2. [运行时系统](05_runtime_system.md#运行时系统)
+3. [错误处理机制](06_error_handling.md#错误处理)
 
 ### 3. 应用实践层
 
-7. [性能优化策略](07_performance_optimization.md#性能优化)
-8. [并发模式](08_concurrency_patterns.md#并发模式)
-9. [生态系统集成](09_ecosystem_integration.md#生态系统集成)
+1. [性能优化策略](07_performance_optimization.md#性能优化)
+2. [并发模式](08_concurrency_patterns.md#并发模式)
+3. [生态系统集成](09_ecosystem_integration.md#生态系统集成)
 
 ---
 
@@ -231,15 +231,15 @@ Rust异步编程系统以零成本抽象为核心，融合Future单子理论、�
 
 ### 标准路径 (进阶)
 
-5. 运行时系统架构 → [05_runtime_system.md](05_runtime_system.md)
-6. 错误处理机制 → [06_error_handling.md](06_error_handling.md)
-7. 性能优化策略 → [07_performance_optimization.md](07_performance_optimization.md)
-8. 并发模式应用 → [08_concurrency_patterns.md](08_concurrency_patterns.md)
+1. 运行时系统架构 → [05_runtime_system.md](05_runtime_system.md)
+2. 错误处理机制 → [06_error_handling.md](06_error_handling.md)
+3. 性能优化策略 → [07_performance_optimization.md](07_performance_optimization.md)
+4. 并发模式应用 → [08_concurrency_patterns.md](08_concurrency_patterns.md)
 
 ### 专家路径 (高级)
 
-9. 生态系统集成 → [09_ecosystem_integration.md](09_ecosystem_integration.md)
-10. 自定义执行器开发、高级异步框架设计、性能调优与监控
+1. 生态系统集成 → [09_ecosystem_integration.md](09_ecosystem_integration.md)
+2. 自定义执行器开发、高级异步框架设计、性能调优与监控
 
 ---
 
