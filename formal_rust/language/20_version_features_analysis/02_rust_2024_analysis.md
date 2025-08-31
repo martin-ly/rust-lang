@@ -2,7 +2,7 @@
 
 ## 章节简介
 
-本章深入分析Rust 2024版本的核心特性、技术演进和工程影响，包括语言特性、标准库更新、工具链改进、生态系统发展等关键方面。
+本章深入分析Rust 2024版本的核心特性、技术演进和工程影响。
 
 ## 目录
 
@@ -11,9 +11,6 @@
 3. [标准库更新](#3-标准库更新)
 4. [工具链改进](#4-工具链改进)
 5. [生态系统发展](#5-生态系统发展)
-6. [性能优化](#6-性能优化)
-7. [安全性增强](#7-安全性增强)
-8. [工程实践](#8-工程实践)
 
 ## 1. Rust 2024概述
 
@@ -77,14 +74,6 @@ trait AsyncProcessor {
 async fn dynamic_dispatch_example() {
     let processor: Box<dyn AsyncProcessor> = Box::new(MyProcessor);
     let result = processor.process(b"test data").await;
-}
-
-async fn async_closure_enhanced() {
-    let async_closure = async |x: i32| -> i32 {
-        tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
-        x * 2
-    };
-    let result = async_closure(42).await;
 }
 
 struct MyProcessor;
@@ -187,16 +176,6 @@ impl<T, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, COLS> {
         COLS
     }
 }
-
-const fn const_generic_function_enhanced<const N: usize>(arr: [i32; N]) -> i32 {
-    let mut sum = 0;
-    let mut i = 0;
-    while i < N {
-        sum += arr[i];
-        i += 1;
-    }
-    sum
-}
 ```
 
 ### 2.4 生命周期改进
@@ -221,14 +200,6 @@ trait LifetimeGATs {
 
 fn improved_lifetime_inference(data: &[String], index: usize) -> &str {
     &data[index]
-}
-
-fn enhanced_lifetime_constraints<'a, 'b, T>(x: &'a T, y: &'b T) -> &'a T
-where
-    T: 'a + 'b + Send + Sync,
-    'b: 'a,
-{
-    x
 }
 ```
 
@@ -328,19 +299,6 @@ async fn async_channel_enhanced() {
         println!("Received: {}", message);
     }
 }
-
-async fn async_signal_handling() {
-    use tokio::signal;
-    
-    match signal::ctrl_c().await {
-        Ok(()) => {
-            println!("Received Ctrl+C, shutting down gracefully");
-        }
-        Err(err) => {
-            eprintln!("Unable to listen for shutdown signal: {}", err);
-        }
-    }
-}
 ```
 
 ### 3.3 错误处理改进
@@ -381,31 +339,6 @@ fn risky_operation() -> Result<String> {
         cause: None,
         context: Some("In risky_operation".to_string()),
     })
-}
-
-fn error_aggregation_enhanced() -> Result<()> {
-    let results = vec![
-        risky_operation(),
-        risky_operation(),
-        risky_operation(),
-    ];
-    
-    let mut errors = Vec::new();
-    for result in results {
-        if let Err(e) = result {
-            errors.push(e);
-        }
-    }
-    
-    if !errors.is_empty() {
-        return Err(CustomError {
-            message: format!("Multiple errors occurred: {}", errors.len()),
-            cause: None,
-            context: Some("In error_aggregation_enhanced".to_string()),
-        });
-    }
-    
-    Ok(())
 }
 
 fn error_recovery_strategy() -> Result<String> {
@@ -662,307 +595,9 @@ mod serialization_frameworks {
 }
 ```
 
-## 6. 性能优化
-
-### 6.1 编译时优化
-
-```rust
-fn llvm_optimizations() {
-    // 链接时优化 (LTO)
-    // 代码生成优化
-    // 内联优化
-    // 向量化优化
-    // 循环优化
-}
-
-fn memory_optimizations() {
-    // 栈分配优化
-    // 堆分配减少
-    // 内存布局优化
-    // 缓存友好
-    // 内存池
-}
-
-fn code_size_optimizations() {
-    // 死代码消除
-    // 函数内联
-    // 符号优化
-    // 字符串优化
-    // 调试信息优化
-}
-
-fn parallel_compilation() {
-    // 模块并行编译
-    // 依赖并行处理
-    // 缓存并行访问
-    // 资源管理
-    // 负载均衡
-}
-```
-
-### 6.2 运行时优化
-
-```rust
-fn zero_cost_abstractions() {
-    // 泛型优化
-    // 特征对象优化
-    // 闭包优化
-    // 迭代器优化
-    // 智能指针优化
-}
-
-fn memory_management_optimizations() {
-    // 分配器优化
-    // 垃圾回收避免
-    // 内存池
-    // 内存压缩
-    // 内存预分配
-}
-
-fn concurrency_optimizations() {
-    // 线程池优化
-    // 锁优化
-    // 原子操作优化
-    // 异步运行时优化
-    // 工作窃取调度
-}
-
-fn cache_optimizations() {
-    // CPU缓存友好
-    // 内存访问模式
-    // 数据结构优化
-    // 算法优化
-    // 预取优化
-}
-```
-
-### 6.3 基准测试
-
-```rust
-use std::time::Instant;
-
-fn performance_benchmarks() {
-    let start = Instant::now();
-    
-    for _ in 0..1000 {
-        // 测试操作
-    }
-    
-    let duration = start.elapsed();
-    println!("Benchmark took: {:?}", duration);
-}
-
-fn memory_benchmarks() {
-    let before = std::alloc::System.allocated();
-    
-    let _data = vec![0u8; 1024 * 1024];
-    
-    let after = std::alloc::System.allocated();
-    println!("Memory used: {} bytes", after - before);
-}
-
-fn concurrency_benchmarks() {
-    use std::thread;
-    use std::sync::Arc;
-    use std::sync::atomic::{AtomicUsize, Ordering};
-    
-    let counter = Arc::new(AtomicUsize::new(0));
-    let mut handles = vec![];
-    
-    for _ in 0..10 {
-        let counter = Arc::clone(&counter);
-        let handle = thread::spawn(move || {
-            for _ in 0..1000 {
-                counter.fetch_add(1, Ordering::Relaxed);
-            }
-        });
-        handles.push(handle);
-    }
-    
-    for handle in handles {
-        handle.join().unwrap();
-    }
-    
-    println!("Final count: {}", counter.load(Ordering::Relaxed));
-}
-
-async fn async_benchmarks() {
-    use tokio::sync::Mutex;
-    use std::sync::Arc;
-    
-    let counter = Arc::new(Mutex::new(0));
-    let mut tasks = vec![];
-    
-    for _ in 0..10 {
-        let counter = Arc::clone(&counter);
-        let task = tokio::spawn(async move {
-            for _ in 0..1000 {
-                let mut num = counter.lock().await;
-                *num += 1;
-            }
-        });
-        tasks.push(task);
-    }
-    
-    for task in tasks {
-        task.await.unwrap();
-    }
-    
-    println!("Final count: {}", *counter.lock().await);
-}
-```
-
-## 7. 安全性增强
-
-### 7.1 内存安全
-
-```rust
-fn ownership_improvements() {
-    // 更严格的借用检查
-    // 生命周期推理改进
-    // 错误消息优化
-    // 借用检查器优化
-    // 静态分析增强
-}
-
-fn undefined_behavior_detection() {
-    // Miri改进
-    // 静态分析
-    // 运行时检查
-    // 符号执行
-    // 模型检查
-}
-
-fn safe_abstractions() {
-    // 安全API设计
-    // 错误处理改进
-    // 类型安全增强
-    // 边界检查
-    // 验证机制
-}
-
-fn memory_leak_detection() {
-    // 静态分析
-    // 运行时检测
-    // 工具支持
-    // 最佳实践
-    // 自动化检测
-}
-```
-
-### 7.2 并发安全
-
-```rust
-use std::sync::{Arc, Mutex};
-use std::thread;
-
-fn data_race_detection() {
-    // ThreadSanitizer支持
-    // 静态分析
-    // 运行时检查
-    // 模型检查
-    // 形式化验证
-}
-
-fn safe_concurrency_primitives() {
-    let counter = Arc::new(Mutex::new(0));
-    let mut handles = vec![];
-    
-    for _ in 0..10 {
-        let counter = Arc::clone(&counter);
-        let handle = thread::spawn(move || {
-            let mut num = counter.lock().unwrap();
-            *num += 1;
-        });
-        handles.push(handle);
-    }
-    
-    for handle in handles {
-        handle.join().unwrap();
-    }
-    
-    println!("Final count: {}", *counter.lock().unwrap());
-}
-
-async fn async_safety() {
-    use tokio::sync::Mutex;
-    
-    let counter = Arc::new(Mutex::new(0));
-    let mut tasks = vec![];
-    
-    for _ in 0..10 {
-        let counter = Arc::clone(&counter);
-        let task = tokio::spawn(async move {
-            let mut num = counter.lock().await;
-            *num += 1;
-        });
-        tasks.push(task);
-    }
-    
-    for task in tasks {
-        task.await.unwrap();
-    }
-    
-    println!("Final count: {}", *counter.lock().await);
-}
-
-fn deadlock_detection() {
-    // 静态分析
-    // 运行时检测
-    // 工具支持
-    // 最佳实践
-    // 预防机制
-}
-```
-
-## 8. 工程实践
-
-### 8.1 最佳实践
-
-```rust
-fn code_organization() {
-    // 模块结构
-    // 特征设计
-    // 错误处理
-    // 配置管理
-    // 文档组织
-}
-
-fn performance_best_practices() {
-    // 零成本抽象使用
-    // 内存管理
-    // 并发设计
-    // 算法选择
-    // 缓存优化
-}
-
-fn security_best_practices() {
-    // 输入验证
-    // 错误处理
-    // 资源管理
-    // 加密使用
-    // 安全配置
-}
-
-fn testing_best_practices() {
-    // 单元测试
-    // 集成测试
-    // 属性测试
-    // 性能测试
-    // 安全测试
-}
-
-fn documentation_best_practices() {
-    // API文档
-    // 示例代码
-    // 架构文档
-    // 部署文档
-    // 维护文档
-}
-```
-
 ## 测试
 
+```rust
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -989,41 +624,6 @@ mod tests {
     }
     
     #[test]
-    fn test_concurrency_safety() {
-        let counter = Arc::new(Mutex::new(0));
-        let mut handles = vec![];
-        
-        for _ in 0..5 {
-            let counter = Arc::clone(&counter);
-            let handle = thread::spawn(move || {
-                let mut num = counter.lock().unwrap();
-                *num += 1;
-            });
-            handles.push(handle);
-        }
-        
-        for handle in handles {
-            handle.join().unwrap();
-        }
-        
-        assert_eq!(*counter.lock().unwrap(), 5);
-    }
-    
-    #[test]
-    fn test_performance_benchmarks() {
-        let start = std::time::Instant::now();
-        
-        let mut sum = 0;
-        for i in 0..1000 {
-            sum += i;
-        }
-        
-        let duration = start.elapsed();
-        assert!(duration.as_millis() < 100);
-        assert_eq!(sum, 499500);
-    }
-    
-    #[test]
     fn test_collection_improvements() {
         use std::collections::HashMap;
         
@@ -1044,9 +644,11 @@ mod tests {
         assert_eq!(result.unwrap(), "Recovered result");
     }
 }
+```
 
 ---
 
 **完成度**: 100%
 
-本章全面分析了Rust 2024版本的核心特性、技术演进和工程影响，包括语言特性、标准库更新、工具链改进、生态系统发展等关键方面。为理解Rust语言发展轨迹和2025年规划提供了历史背景和理论基础。
+本章全面分析了Rust 2024版本的核心特性、技术演进和工程影响，包括语言特性、标准库更新、工具链改进、生态系统发展等关键方面。
+为理解Rust语言发展轨迹和2025年规划提供了历史背景和理论基础。
