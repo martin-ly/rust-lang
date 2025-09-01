@@ -1,721 +1,537 @@
-# 03 异步并发原语
+# Rust 异步并发原语理论
 
-## 章节简介
-
-本章深入探讨Rust异步并发原语的设计原理、实现机制和工程实践，包括异步锁、通道、信号量、屏障等核心原语。
-特别关注2025年异步并发原语的最新发展，为构建高并发、高可靠的异步系统提供理论基础。
+**文档编号**: 06.03  
+**版本**: 1.0  
+**创建日期**: 2025-01-27  
 
 ## 目录
 
-- [03 异步并发原语](#03-异步并发原语)
-  - [章节简介](#章节简介)
+- [Rust 异步并发原语理论](#rust-异步并发原语理论)
   - [目录](#目录)
-  - [1. 并发原语概述](#1-并发原语概述)
-    - [1.1 并发原语的定义](#11-并发原语的定义)
-    - [1.2 原语分类体系](#12-原语分类体系)
-  - [2. 异步锁机制](#2-异步锁机制)
-    - [2.1 异步互斥锁](#21-异步互斥锁)
-    - [2.2 异步读写锁](#22-异步读写锁)
-    - [2.3 条件变量](#23-条件变量)
-  - [3. 异步通道系统](#3-异步通道系统)
-    - [3.1 有界通道](#31-有界通道)
-    - [3.2 无界通道](#32-无界通道)
-    - [3.3 广播通道](#33-广播通道)
-  - [4. 信号量与屏障](#4-信号量与屏障)
-    - [4.1 异步信号量](#41-异步信号量)
-    - [4.2 异步屏障](#42-异步屏障)
-  - [5. 原子操作](#5-原子操作)
-    - [5.1 原子类型](#51-原子类型)
-    - [5.2 原子引用计数](#52-原子引用计数)
-  - [6. 并发安全模式](#6-并发安全模式)
-    - [6.1 生产者-消费者模式](#61-生产者-消费者模式)
-    - [6.2 工作窃取模式](#62-工作窃取模式)
-  - [7. 2025年新特性](#7-2025年新特性)
-    - [7.1 智能锁优化](#71-智能锁优化)
-    - [7.2 自适应通道](#72-自适应通道)
-    - [7.3 并发安全保证](#73-并发安全保证)
-  - [8. 工程实践](#8-工程实践)
-    - [8.1 性能优化](#81-性能优化)
-    - [8.2 错误处理](#82-错误处理)
-    - [8.3 测试策略](#83-测试策略)
+  - [1. 异步并发原语概述](#1-异步并发原语概述)
+    - [1.1 核心概念](#11-核心概念)
+    - [1.2 理论基础](#12-理论基础)
+  - [2. Future与Promise](#2-future与promise)
+    - [2.1 Future实现](#21-future实现)
+    - [2.2 Promise模式](#22-promise模式)
+  - [3. 异步任务调度](#3-异步任务调度)
+    - [3.1 任务调度器](#31-任务调度器)
+    - [3.2 工作窃取调度](#32-工作窃取调度)
+  - [4. 并发原语实现](#4-并发原语实现)
+    - [4.1 异步锁](#41-异步锁)
+    - [4.2 异步通道](#42-异步通道)
+  - [5. 工程实践案例](#5-工程实践案例)
+    - [5.1 异步HTTP服务器](#51-异步http服务器)
+    - [5.2 异步数据库连接池](#52-异步数据库连接池)
+  - [总结](#总结)
+    - [关键要点](#关键要点)
+    - [学习建议](#学习建议)
 
-## 1. 并发原语概述
+---
 
-### 1.1 并发原语的定义
+## 1. 异步并发原语概述
 
-并发原语是构建并发系统的基础组件，提供线程安全和异步操作保证。
+### 1.1 核心概念
+
+异步并发原语是Rust异步编程的基础构建块，包括Future、Task、Executor等核心组件。
 
 ```rust
-// 并发原语的基本特征
-trait ConcurrencyPrimitive {
-    // 线程安全保证
-    fn is_thread_safe(&self) -> bool;
-    
-    // 异步操作支持
-    fn supports_async(&self) -> bool;
-    
-    // 性能特征
-    fn performance_characteristics(&self) -> PerformanceProfile;
+// 异步并发原语示例
+use std::future::Future;
+use std::pin::Pin;
+use std::task::{Context, Poll};
+
+// Future trait定义
+pub trait Future {
+    type Output;
+    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
+}
+
+// 异步任务示例
+async fn async_task() -> i32 {
+    // 异步计算
+    42
 }
 ```
 
-### 1.2 原语分类体系
+### 1.2 理论基础
+
+异步并发原语基于以下理论：
+
+- **协程理论**：轻量级并发执行单元
+- **事件驱动模型**：基于事件和回调的编程模型
+- **状态机理论**：异步操作的状态转换
+- **调度理论**：任务调度和资源管理
+
+---
+
+## 2. Future与Promise
+
+### 2.1 Future实现
 
 ```rust
-// 按功能分类
-enum PrimitiveType {
-    Lock(MutexType),           // 锁机制
-    Channel(ChannelType),      // 通道通信
-    Semaphore(SemaphoreType),  // 信号量
-    Barrier(BarrierType),      // 屏障同步
-    Atomic(AtomicType),        // 原子操作
+// Future的完整实现
+pub struct MyFuture {
+    state: FutureState,
+    waker: Option<Waker>,
 }
 
-// 按性能特征分类
-enum PerformanceProfile {
-    HighThroughput,    // 高吞吐量
-    LowLatency,        // 低延迟
-    MemoryEfficient,   // 内存高效
-    Scalable,          // 可扩展
-}
-```
-
-## 2. 异步锁机制
-
-### 2.1 异步互斥锁
-
-```rust
-use tokio::sync::Mutex;
-use std::sync::Arc;
-
-// 异步互斥锁
-struct AsyncResource {
-    data: Arc<Mutex<Vec<i32>>>,
+enum FutureState {
+    Pending,
+    Ready(i32),
+    Completed,
 }
 
-impl AsyncResource {
-    fn new() -> Self {
-        Self {
-            data: Arc::new(Mutex::new(Vec::new())),
-        }
-    }
+impl Future for MyFuture {
+    type Output = i32;
     
-    async fn add_data(&self, value: i32) {
-        let mut data = self.data.lock().await;
-        data.push(value);
-    }
-    
-    async fn get_data(&self) -> Vec<i32> {
-        let data = self.data.lock().await;
-        data.clone()
-    }
-}
-
-// 使用示例
-async fn mutex_example() {
-    let resource = AsyncResource::new();
-    
-    let handles: Vec<_> = (0..10)
-        .map(|i| {
-            let resource = resource.clone();
-            tokio::spawn(async move {
-                resource.add_data(i).await;
-            })
-        })
-        .collect();
-    
-    for handle in handles {
-        handle.await.unwrap();
-    }
-    
-    let data = resource.get_data().await;
-    println!("Data: {:?}", data);
-}
-```
-
-### 2.2 异步读写锁
-
-```rust
-use tokio::sync::RwLock;
-
-// 异步读写锁
-struct SharedData {
-    data: Arc<RwLock<HashMap<String, i32>>>,
-}
-
-impl SharedData {
-    fn new() -> Self {
-        Self {
-            data: Arc::new(RwLock::new(HashMap::new())),
-        }
-    }
-    
-    // 写操作
-    async fn write_data(&self, key: String, value: i32) {
-        let mut data = self.data.write().await;
-        data.insert(key, value);
-    }
-    
-    // 读操作
-    async fn read_data(&self, key: &str) -> Option<i32> {
-        let data = self.data.read().await;
-        data.get(key).copied()
-    }
-    
-    // 批量读操作
-    async fn read_all_data(&self) -> HashMap<String, i32> {
-        let data = self.data.read().await;
-        data.clone()
-    }
-}
-```
-
-### 2.3 条件变量
-
-```rust
-use tokio::sync::{Mutex, Condvar};
-
-// 异步条件变量
-struct AsyncCondition {
-    mutex: Arc<Mutex<bool>>,
-    condvar: Arc<Condvar>,
-}
-
-impl AsyncCondition {
-    fn new() -> Self {
-        Self {
-            mutex: Arc::new(Mutex::new(false)),
-            condvar: Arc::new(Condvar::new()),
-        }
-    }
-    
-    async fn wait_for_condition(&self) {
-        let mut condition = self.mutex.lock().await;
-        while !*condition {
-            condition = self.condvar.wait(condition).await;
-        }
-    }
-    
-    async fn signal_condition(&self) {
-        let mut condition = self.mutex.lock().await;
-        *condition = true;
-        self.condvar.notify_one();
-    }
-}
-```
-
-## 3. 异步通道系统
-
-### 3.1 有界通道
-
-```rust
-use tokio::sync::mpsc;
-
-// 有界通道
-async fn bounded_channel_example() {
-    let (tx, mut rx) = mpsc::channel(100); // 容量为100
-    
-    // 生产者
-    let producer = tokio::spawn(async move {
-        for i in 0..50 {
-            tx.send(i).await.unwrap();
-            tokio::time::sleep(Duration::from_millis(10)).await;
-        }
-    });
-    
-    // 消费者
-    let consumer = tokio::spawn(async move {
-        while let Some(value) = rx.recv().await {
-            println!("Received: {}", value);
-        }
-    });
-    
-    producer.await.unwrap();
-    consumer.await.unwrap();
-}
-```
-
-### 3.2 无界通道
-
-```rust
-use tokio::sync::mpsc;
-
-// 无界通道
-async fn unbounded_channel_example() {
-    let (tx, mut rx) = mpsc::unbounded_channel();
-    
-    // 生产者
-    let producer = tokio::spawn(async move {
-        for i in 0..1000 {
-            tx.send(i).unwrap(); // 无界通道不会阻塞
-        }
-    });
-    
-    // 消费者
-    let consumer = tokio::spawn(async move {
-        while let Some(value) = rx.recv().await {
-            println!("Received: {}", value);
-        }
-    });
-    
-    producer.await.unwrap();
-    consumer.await.unwrap();
-}
-```
-
-### 3.3 广播通道
-
-```rust
-use tokio::sync::broadcast;
-
-// 广播通道
-async fn broadcast_channel_example() {
-    let (tx, mut rx1) = broadcast::channel(16);
-    let mut rx2 = tx.subscribe();
-    
-    // 发布者
-    let publisher = tokio::spawn(async move {
-        for i in 0..10 {
-            tx.send(i).unwrap();
-            tokio::time::sleep(Duration::from_millis(100)).await;
-        }
-    });
-    
-    // 订阅者1
-    let subscriber1 = tokio::spawn(async move {
-        while let Ok(value) = rx1.recv().await {
-            println!("Subscriber 1: {}", value);
-        }
-    });
-    
-    // 订阅者2
-    let subscriber2 = tokio::spawn(async move {
-        while let Ok(value) = rx2.recv().await {
-            println!("Subscriber 2: {}", value);
-        }
-    });
-    
-    publisher.await.unwrap();
-    subscriber1.await.unwrap();
-    subscriber2.await.unwrap();
-}
-```
-
-## 4. 信号量与屏障
-
-### 4.1 异步信号量
-
-```rust
-use tokio::sync::Semaphore;
-
-// 异步信号量
-async fn semaphore_example() {
-    let semaphore = Arc::new(Semaphore::new(3)); // 最多3个并发
-    
-    let handles: Vec<_> = (0..10)
-        .map(|i| {
-            let semaphore = semaphore.clone();
-            tokio::spawn(async move {
-                let _permit = semaphore.acquire().await.unwrap();
-                println!("Task {} executing", i);
-                tokio::time::sleep(Duration::from_millis(100)).await;
-                println!("Task {} completed", i);
-            })
-        })
-        .collect();
-    
-    for handle in handles {
-        handle.await.unwrap();
-    }
-}
-```
-
-### 4.2 异步屏障
-
-```rust
-use tokio::sync::Barrier;
-
-// 异步屏障
-async fn barrier_example() {
-    let barrier = Arc::new(Barrier::new(3));
-    
-    let handles: Vec<_> = (0..3)
-        .map(|i| {
-            let barrier = barrier.clone();
-            tokio::spawn(async move {
-                println!("Task {} waiting at barrier", i);
-                barrier.wait().await;
-                println!("Task {} passed barrier", i);
-            })
-        })
-        .collect();
-    
-    for handle in handles {
-        handle.await.unwrap();
-    }
-}
-```
-
-## 5. 原子操作
-
-### 5.1 原子类型
-
-```rust
-use std::sync::atomic::{AtomicUsize, Ordering};
-
-// 原子计数器
-struct AtomicCounter {
-    count: AtomicUsize,
-}
-
-impl AtomicCounter {
-    fn new() -> Self {
-        Self {
-            count: AtomicUsize::new(0),
-        }
-    }
-    
-    fn increment(&self) -> usize {
-        self.count.fetch_add(1, Ordering::Relaxed)
-    }
-    
-    fn get(&self) -> usize {
-        self.count.load(Ordering::Relaxed)
-    }
-    
-    fn compare_exchange(&self, current: usize, new: usize) -> Result<usize, usize> {
-        self.count.compare_exchange(current, new, Ordering::AcqRel, Ordering::Acquire)
-    }
-}
-```
-
-### 5.2 原子引用计数
-
-```rust
-use std::sync::Arc;
-use std::sync::atomic::{AtomicUsize, Ordering};
-
-// 原子引用计数
-struct AtomicRefCount<T> {
-    data: T,
-    count: AtomicUsize,
-}
-
-impl<T> AtomicRefCount<T> {
-    fn new(data: T) -> Self {
-        Self {
-            data,
-            count: AtomicUsize::new(1),
-        }
-    }
-    
-    fn clone(&self) -> Arc<Self> {
-        self.count.fetch_add(1, Ordering::Relaxed);
-        Arc::new(Self {
-            data: unsafe { std::ptr::read(&self.data) },
-            count: AtomicUsize::new(1),
-        })
-    }
-    
-    fn drop(&mut self) {
-        if self.count.fetch_sub(1, Ordering::Release) == 1 {
-            std::sync::atomic::fence(Ordering::Acquire);
-            // 清理资源
+    fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
+        match self.state {
+            FutureState::Pending => {
+                // 设置waker用于后续唤醒
+                self.waker = Some(cx.waker().clone());
+                Poll::Pending
+            },
+            FutureState::Ready(value) => {
+                self.state = FutureState::Completed;
+                Poll::Ready(value)
+            },
+            FutureState::Completed => {
+                panic!("Future already completed");
+            },
         }
     }
 }
 ```
 
-## 6. 并发安全模式
-
-### 6.1 生产者-消费者模式
+### 2.2 Promise模式
 
 ```rust
-use tokio::sync::mpsc;
-
-// 生产者-消费者模式
-struct ProducerConsumer<T> {
-    tx: mpsc::Sender<T>,
-    rx: mpsc::Receiver<T>,
+// Promise实现
+pub struct Promise<T> {
+    future: SharedFuture<T>,
+    completer: Completer<T>,
 }
 
-impl<T> ProducerConsumer<T> {
-    fn new(capacity: usize) -> Self {
-        let (tx, rx) = mpsc::channel(capacity);
-        Self { tx, rx }
-    }
+pub struct SharedFuture<T> {
+    state: Arc<Mutex<FutureState<T>>>,
+}
+
+enum FutureState<T> {
+    Pending(Vec<Waker>),
+    Ready(T),
+}
+
+impl<T> Future for SharedFuture<T> {
+    type Output = T;
     
-    async fn produce(&self, item: T) -> Result<(), mpsc::error::SendError<T>> {
-        self.tx.send(item).await
-    }
-    
-    async fn consume(&mut self) -> Option<T> {
-        self.rx.recv().await
-    }
-}
-```
-
-### 6.2 工作窃取模式
-
-```rust
-use tokio::sync::mpsc;
-use std::collections::VecDeque;
-
-// 工作窃取队列
-struct WorkStealingQueue<T> {
-    local_queue: VecDeque<T>,
-    global_queue: Arc<Mutex<VecDeque<T>>>,
-}
-
-impl<T> WorkStealingQueue<T> {
-    fn new() -> Self {
-        Self {
-            local_queue: VecDeque::new(),
-            global_queue: Arc::new(Mutex::new(VecDeque::new())),
+    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
+        let mut state = self.state.lock().unwrap();
+        match &mut *state {
+            FutureState::Pending(wakers) => {
+                wakers.push(cx.waker().clone());
+                Poll::Pending
+            },
+            FutureState::Ready(value) => {
+                Poll::Ready(value.clone())
+            },
         }
-    }
-    
-    async fn push_local(&mut self, item: T) {
-        self.local_queue.push_back(item);
-    }
-    
-    async fn pop_local(&mut self) -> Option<T> {
-        self.local_queue.pop_front()
-    }
-    
-    async fn steal(&self) -> Option<T> {
-        let mut global = self.global_queue.lock().await;
-        global.pop_front()
-    }
-}
-```
-
-## 7. 2025年新特性
-
-### 7.1 智能锁优化
-
-```rust
-// 2025年：智能锁优化
-use tokio::sync::SmartMutex;
-
-struct SmartResource {
-    data: SmartMutex<Vec<i32>>,
-}
-
-impl SmartResource {
-    fn new() -> Self {
-        Self {
-            data: SmartMutex::new(Vec::new()),
-        }
-    }
-    
-    async fn optimized_access(&self) {
-        // 智能锁根据访问模式自动优化
-        let mut data = self.data.lock().await;
-        data.push(42);
-        
-        // 自动检测并优化锁的粒度
-        if data.len() > 100 {
-            // 自动切换到更细粒度的锁
-        }
-    }
-}
-```
-
-### 7.2 自适应通道
-
-```rust
-// 2025年：自适应通道
-use tokio::sync::AdaptiveChannel;
-
-async fn adaptive_channel_example() {
-    let (tx, rx) = AdaptiveChannel::new();
-    
-    // 通道根据负载自动调整容量
-    let producer = tokio::spawn(async move {
-        for i in 0..1000 {
-            tx.send(i).await.unwrap();
-        }
-    });
-    
-    let consumer = tokio::spawn(async move {
-        while let Some(value) = rx.recv().await {
-            println!("Received: {}", value);
-        }
-    });
-    
-    producer.await.unwrap();
-    consumer.await.unwrap();
-}
-```
-
-### 7.3 并发安全保证
-
-```rust
-// 2025年：并发安全保证
-use tokio::sync::guaranteed::GuaranteedMutex;
-
-struct GuaranteedResource {
-    data: GuaranteedMutex<Vec<i32>>,
-}
-
-impl GuaranteedResource {
-    fn new() -> Self {
-        Self {
-            data: GuaranteedMutex::new(Vec::new()),
-        }
-    }
-    
-    async fn safe_operation(&self) {
-        // 编译时保证并发安全
-        let mut data = self.data.lock().await;
-        data.push(42);
-        
-        // 自动检测数据竞争
-        // 自动优化锁策略
-    }
-}
-```
-
-## 8. 工程实践
-
-### 8.1 性能优化
-
-```rust
-// 性能优化实践
-use tokio::sync::Mutex;
-use std::sync::Arc;
-
-// 锁粒度优化
-struct OptimizedResource {
-    // 细粒度锁
-    counter: Arc<Mutex<usize>>,
-    data: Arc<Mutex<Vec<i32>>>,
-    metadata: Arc<Mutex<HashMap<String, String>>>,
-}
-
-impl OptimizedResource {
-    fn new() -> Self {
-        Self {
-            counter: Arc::new(Mutex::new(0)),
-            data: Arc::new(Mutex::new(Vec::new())),
-            metadata: Arc::new(Mutex::new(HashMap::new())),
-        }
-    }
-    
-    async fn increment_counter(&self) {
-        let mut counter = self.counter.lock().await;
-        *counter += 1;
-    }
-    
-    async fn add_data(&self, value: i32) {
-        let mut data = self.data.lock().await;
-        data.push(value);
-    }
-    
-    async fn update_metadata(&self, key: String, value: String) {
-        let mut metadata = self.metadata.lock().await;
-        metadata.insert(key, value);
-    }
-}
-```
-
-### 8.2 错误处理
-
-```rust
-// 错误处理实践
-use tokio::sync::{mpsc, Mutex};
-use thiserror::Error;
-
-#[derive(Error, Debug)]
-enum ConcurrencyError {
-    #[error("Channel send error: {0}")]
-    SendError(#[from] mpsc::error::SendError<i32>),
-    #[error("Lock acquisition timeout")]
-    LockTimeout,
-    #[error("Resource not available")]
-    ResourceUnavailable,
-}
-
-struct RobustResource {
-    data: Arc<Mutex<Vec<i32>>>,
-    tx: mpsc::Sender<i32>,
-}
-
-impl RobustResource {
-    async fn safe_operation(&self, value: i32) -> Result<(), ConcurrencyError> {
-        // 超时保护
-        let data = tokio::time::timeout(
-            Duration::from_secs(1),
-            self.data.lock()
-        ).await
-        .map_err(|_| ConcurrencyError::LockTimeout)??;
-        
-        // 通道发送
-        self.tx.send(value).await?;
-        
-        Ok(())
-    }
-}
-```
-
-### 8.3 测试策略
-
-```rust
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use tokio::test;
-    
-    #[test]
-    async fn test_concurrency_safety() {
-        let resource = Arc::new(Mutex::new(Vec::new()));
-        
-        let handles: Vec<_> = (0..100)
-            .map(|i| {
-                let resource = resource.clone();
-                tokio::spawn(async move {
-                    let mut data = resource.lock().await;
-                    data.push(i);
-                })
-            })
-            .collect();
-        
-        for handle in handles {
-            handle.await.unwrap();
-        }
-        
-        let data = resource.lock().await;
-        assert_eq!(data.len(), 100);
-    }
-    
-    #[test]
-    async fn test_channel_communication() {
-        let (tx, mut rx) = mpsc::channel(10);
-        
-        let producer = tokio::spawn(async move {
-            for i in 0..5 {
-                tx.send(i).await.unwrap();
-            }
-        });
-        
-        let consumer = tokio::spawn(async move {
-            let mut received = Vec::new();
-            while let Some(value) = rx.recv().await {
-                received.push(value);
-            }
-            received
-        });
-        
-        producer.await.unwrap();
-        let received = consumer.await.unwrap();
-        assert_eq!(received, vec![0, 1, 2, 3, 4]);
     }
 }
 ```
 
 ---
 
-**完成度**: 100%
+## 3. 异步任务调度
 
-本章全面介绍了Rust异步并发原语的设计原理、实现机制和工程实践，包括异步锁、通道、信号量、屏障等核心原语。特别关注2025年异步并发原语的最新发展，为构建高并发、高可靠的异步系统提供了坚实的理论基础。
+### 3.1 任务调度器
+
+```rust
+// 异步任务调度器
+pub struct AsyncExecutor {
+    task_queue: VecDeque<Task>,
+    waker_registry: HashMap<TaskId, Waker>,
+    running: bool,
+}
+
+impl AsyncExecutor {
+    pub fn new() -> Self {
+        Self {
+            task_queue: VecDeque::new(),
+            waker_registry: HashMap::new(),
+            running: false,
+        }
+    }
+    
+    pub fn spawn<F>(&mut self, future: F) -> TaskHandle
+    where
+        F: Future<Output = ()> + 'static,
+    {
+        let task = Task::new(future);
+        let handle = task.handle();
+        self.task_queue.push_back(task);
+        handle
+    }
+    
+    pub fn run(&mut self) {
+        self.running = true;
+        while self.running && !self.task_queue.is_empty() {
+            self.run_ready_tasks();
+        }
+    }
+    
+    fn run_ready_tasks(&mut self) {
+        let mut ready_tasks = Vec::new();
+        
+        // 检查所有任务是否就绪
+        for (i, task) in self.task_queue.iter_mut().enumerate() {
+            if task.is_ready() {
+                ready_tasks.push(i);
+            }
+        }
+        
+        // 执行就绪任务
+        for i in ready_tasks.into_iter().rev() {
+            let task = self.task_queue.remove(i).unwrap();
+            task.run();
+        }
+    }
+}
+```
+
+### 3.2 工作窃取调度
+
+```rust
+// 工作窃取调度器
+pub struct WorkStealingExecutor {
+    workers: Vec<Worker>,
+    global_queue: Arc<Mutex<VecDeque<Task>>>,
+}
+
+struct Worker {
+    local_queue: VecDeque<Task>,
+    global_queue: Arc<Mutex<VecDeque<Task>>>,
+    worker_id: usize,
+}
+
+impl Worker {
+    fn run(&mut self) {
+        loop {
+            // 首先从本地队列获取任务
+            if let Some(task) = self.local_queue.pop_front() {
+                task.run();
+                continue;
+            }
+            
+            // 本地队列为空，尝试从全局队列窃取
+            if let Some(task) = self.steal_from_global() {
+                task.run();
+                continue;
+            }
+            
+            // 尝试从其他worker窃取
+            if let Some(task) = self.steal_from_other_workers() {
+                task.run();
+                continue;
+            }
+            
+            // 没有任务可执行，等待
+            self.wait_for_work();
+        }
+    }
+    
+    fn steal_from_global(&self) -> Option<Task> {
+        self.global_queue.lock().unwrap().pop_front()
+    }
+    
+    fn steal_from_other_workers(&self) -> Option<Task> {
+        // 实现工作窃取逻辑
+        None
+    }
+}
+```
+
+---
+
+## 4. 并发原语实现
+
+### 4.1 异步锁
+
+```rust
+// 异步互斥锁
+pub struct AsyncMutex<T> {
+    data: UnsafeCell<T>,
+    state: AtomicUsize,
+    waiters: Mutex<Vec<Waker>>,
+}
+
+const LOCKED: usize = 1;
+const UNLOCKED: usize = 0;
+
+impl<T> AsyncMutex<T> {
+    pub fn new(data: T) -> Self {
+        Self {
+            data: UnsafeCell::new(data),
+            state: AtomicUsize::new(UNLOCKED),
+            waiters: Mutex::new(Vec::new()),
+        }
+    }
+    
+    pub async fn lock(&self) -> AsyncMutexGuard<'_, T> {
+        AsyncMutexGuard::new(self).await
+    }
+}
+
+pub struct AsyncMutexGuard<'a, T> {
+    mutex: &'a AsyncMutex<T>,
+}
+
+impl<'a, T> AsyncMutexGuard<'a, T> {
+    async fn new(mutex: &'a AsyncMutex<T>) -> Self {
+        loop {
+            // 尝试获取锁
+            if mutex.state.compare_exchange_weak(
+                UNLOCKED,
+                LOCKED,
+                Ordering::Acquire,
+                Ordering::Relaxed,
+            ).is_ok() {
+                return Self { mutex };
+            }
+            
+            // 锁被占用，等待
+            let waker = create_waker();
+            mutex.waiters.lock().unwrap().push(waker);
+            
+            // 异步等待
+            Pending.await;
+        }
+    }
+}
+```
+
+### 4.2 异步通道
+
+```rust
+// 异步通道
+pub struct AsyncChannel<T> {
+    sender: AsyncSender<T>,
+    receiver: AsyncReceiver<T>,
+}
+
+pub struct AsyncSender<T> {
+    inner: Arc<ChannelInner<T>>,
+}
+
+pub struct AsyncReceiver<T> {
+    inner: Arc<ChannelInner<T>>,
+}
+
+struct ChannelInner<T> {
+    queue: Mutex<VecDeque<T>>,
+    capacity: usize,
+    send_waiters: Mutex<Vec<Waker>>,
+    recv_waiters: Mutex<Vec<Waker>>,
+}
+
+impl<T> AsyncSender<T> {
+    pub async fn send(&self, value: T) -> Result<(), SendError<T>> {
+        loop {
+            let mut queue = self.inner.queue.lock().unwrap();
+            
+            if queue.len() < self.inner.capacity {
+                queue.push_back(value);
+                
+                // 唤醒等待的接收者
+                if let Some(waker) = self.inner.recv_waiters.lock().unwrap().pop() {
+                    waker.wake();
+                }
+                
+                return Ok(());
+            }
+            
+            // 通道已满，等待
+            let waker = create_waker();
+            self.inner.send_waiters.lock().unwrap().push(waker);
+            drop(queue);
+            
+            Pending.await;
+        }
+    }
+}
+
+impl<T> AsyncReceiver<T> {
+    pub async fn recv(&self) -> Option<T> {
+        loop {
+            let mut queue = self.inner.queue.lock().unwrap();
+            
+            if let Some(value) = queue.pop_front() {
+                // 唤醒等待的发送者
+                if let Some(waker) = self.inner.send_waiters.lock().unwrap().pop() {
+                    waker.wake();
+                }
+                
+                return Some(value);
+            }
+            
+            // 通道为空，等待
+            let waker = create_waker();
+            self.inner.recv_waiters.lock().unwrap().push(waker);
+            drop(queue);
+            
+            Pending.await;
+        }
+    }
+}
+```
+
+---
+
+## 5. 工程实践案例
+
+### 5.1 异步HTTP服务器
+
+```rust
+// 异步HTTP服务器示例
+use std::net::TcpListener;
+use std::io::{Read, Write};
+
+pub struct AsyncHttpServer {
+    listener: TcpListener,
+    executor: AsyncExecutor,
+}
+
+impl AsyncHttpServer {
+    pub async fn new(addr: &str) -> Result<Self, std::io::Error> {
+        let listener = TcpListener::bind(addr)?;
+        let executor = AsyncExecutor::new();
+        
+        Ok(Self { listener, executor })
+    }
+    
+    pub async fn run(&mut self) -> Result<(), std::io::Error> {
+        loop {
+            let (stream, _) = self.listener.accept()?;
+            
+            // 为每个连接创建异步任务
+            self.executor.spawn(async move {
+                Self::handle_connection(stream).await;
+            });
+        }
+    }
+    
+    async fn handle_connection(mut stream: TcpStream) {
+        let mut buffer = [0; 1024];
+        
+        // 异步读取请求
+        let bytes_read = stream.read(&mut buffer).await.unwrap();
+        
+        // 处理请求
+        let response = Self::process_request(&buffer[..bytes_read]).await;
+        
+        // 异步写入响应
+        stream.write_all(response.as_bytes()).await.unwrap();
+    }
+    
+    async fn process_request(request: &[u8]) -> String {
+        // 异步处理HTTP请求
+        "HTTP/1.1 200 OK\r\n\r\nHello, World!".to_string()
+    }
+}
+```
+
+### 5.2 异步数据库连接池
+
+```rust
+// 异步数据库连接池
+pub struct AsyncConnectionPool {
+    connections: Arc<Mutex<VecDeque<Connection>>>,
+    max_connections: usize,
+    waiters: Mutex<Vec<Waker>>,
+}
+
+impl AsyncConnectionPool {
+    pub fn new(max_connections: usize) -> Self {
+        Self {
+            connections: Arc::new(Mutex::new(VecDeque::new())),
+            max_connections,
+            waiters: Mutex::new(Vec::new()),
+        }
+    }
+    
+    pub async fn get_connection(&self) -> ConnectionGuard {
+        loop {
+            let mut connections = self.connections.lock().unwrap();
+            
+            if let Some(connection) = connections.pop_front() {
+                return ConnectionGuard::new(connection, self.connections.clone());
+            }
+            
+            // 没有可用连接，等待
+            let waker = create_waker();
+            self.waiters.lock().unwrap().push(waker);
+            drop(connections);
+            
+            Pending.await;
+        }
+    }
+    
+    pub fn return_connection(&self, connection: Connection) {
+        let mut connections = self.connections.lock().unwrap();
+        connections.push_back(connection);
+        
+        // 唤醒等待的请求
+        if let Some(waker) = self.waiters.lock().unwrap().pop() {
+            waker.wake();
+        }
+    }
+}
+
+pub struct ConnectionGuard {
+    connection: Option<Connection>,
+    pool: Arc<Mutex<VecDeque<Connection>>>,
+}
+
+impl ConnectionGuard {
+    fn new(connection: Connection, pool: Arc<Mutex<VecDeque<Connection>>>) -> Self {
+        Self {
+            connection: Some(connection),
+            pool,
+        }
+    }
+    
+    pub async fn execute_query(&mut self, query: &str) -> QueryResult {
+        // 执行数据库查询
+        self.connection.as_mut().unwrap().execute(query).await
+    }
+}
+
+impl Drop for ConnectionGuard {
+    fn drop(&mut self) {
+        if let Some(connection) = self.connection.take() {
+            // 将连接返回到池中
+            self.pool.lock().unwrap().push_back(connection);
+        }
+    }
+}
+```
+
+---
+
+## 总结
+
+异步并发原语是Rust异步编程的核心，提供了Future、Task、Executor等基础构建块。通过合理的调度和资源管理，可以实现高效的异步并发程序。
+
+### 关键要点
+
+1. **Future trait**：异步计算的基础抽象
+2. **任务调度**：高效的异步任务执行机制
+3. **并发原语**：异步锁、通道等同步原语
+4. **工程实践**：实际应用中的异步编程模式
+
+### 学习建议
+
+1. **理解概念**：深入理解Future、Task等核心概念
+2. **实践练习**：通过实际项目掌握异步编程
+3. **性能优化**：学习异步程序的性能优化技巧
+4. **持续学习**：关注异步编程的最新发展
