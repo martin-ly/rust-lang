@@ -44,6 +44,12 @@
 - 28 生命周期改进形式化定义: `implementation/phase1_theoretical/lifetimes/lifetime_improvements_formal_definition.md`
 - 29 第一阶段实施进度报告: `implementation/phase1_theoretical/phase1_implementation_progress_report.md`
 - 30 第一阶段完成确认报告: `implementation/phase1_theoretical/phase1_completion_confirmation.md`
+- 31 异步Trait算法实现: `implementation/phase1_theoretical/async_traits/async_trait_algorithm_implementation.md`
+- 32 泛型关联类型算法实现: `implementation/phase1_theoretical/gats/gats_algorithm_implementation.md`
+- 33 常量泛型算法实现: `implementation/phase1_theoretical/const_generics/const_generics_algorithm_implementation.md`
+- 34 生命周期算法实现: `implementation/phase1_theoretical/lifetimes/lifetime_algorithm_implementation.md`
+- 35 第一阶段第2周实施进度报告: `implementation/phase1_theoretical/phase1_week2_implementation_progress_report.md`
+- 36 第一阶段第2周完成确认报告: `implementation/phase1_theoretical/phase1_week2_completion_confirmation.md`
 
 ## 范围
 
