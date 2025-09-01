@@ -667,7 +667,3 @@ pub extern "C" fn get(arr: *const i32, idx: usize) -> i32 {
     unsafe { *arr.add(idx) } // 若idx越界，Wasm运行时可能崩溃
 }
 ```
-
-"
-
----

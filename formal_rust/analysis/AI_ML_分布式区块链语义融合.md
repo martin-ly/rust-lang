@@ -232,9 +232,3 @@ def batch_drift_check(model, input_pairs):
         if detect_drift(model, in1, in2):
             report_drift(in1, in2)
 ```
-
----
-
-"
-
----

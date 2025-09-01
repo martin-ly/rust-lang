@@ -629,7 +629,3 @@ fn main() {
     unsafe { take_str(ptr); } // error: ptr已悬垂
 }
 ```
-
-"
-
----

@@ -725,7 +725,3 @@ formal_rust/
 8. Abadi, M., & Cardelli, L. (1996). A theory of objects. Springer Science & Business Media.
 9. Harper, R. (2016). Practical foundations for programming languages. Cambridge University Press.
 10. Pierce, B. C., & Turner, D. N. (2000). Local type inference. ACM Transactions on Programming Languages and Systems (TOPLAS), 22(1), 1-44.
-
-"
-
----

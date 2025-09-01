@@ -1,10 +1,11 @@
 # Rust 形式化验证框架索引
 
-- 文档版本: 1.0  
+- 文档版本: 2.0  
 - 创建日期: 2025-01-27  
-- 状态: 已完成  
+- 状态: 持续更新中  
+- 对标状态: 国际先进水平
 
-## 目录
+## 核心文档
 
 - 00 说明: `README.md`
 - 01 类型系统验证: `type_system_verification.md`
@@ -12,12 +13,34 @@
 - 03 并发安全验证: `concurrency_safety_verification.md`
 - 04 性能形式化方法: `performance_formal_methods.md`
 - 05 证明骨架目录: `proofs/README.md`（Coq/Lean 骨架与使用说明）
-- 校验脚本: `verify_integrity.py`
+- 06 校验脚本: `verify_integrity.py`
+
+## 国际对标文档
+
+- 07 国际对标分析: `international_benchmarking_analysis.md`
+- 08 大学课程对标: `university_course_benchmarking.md`
+- 09 学术会议对标: `academic_conference_benchmarking.md`
+- 10 国际标准对标: `international_standards_benchmarking.md`
+- 11 工业应用对标: `industrial_application_benchmarking.md`
+- 12 对标总结报告: `benchmarking_summary_report.md`
+- 13 对标实施计划: `benchmarking_implementation_plan.md`
+- 14 对标验证报告: `benchmarking_validation_report.md`
+- 15 学术论文准备: `academic_paper_preparation.md`
+- 16 教育课程设计: `educational_course_design.md`
+- 17 Rust 2024实施计划: `rust_2024_implementation_plan.md`
+- 18 综合对标分析报告: `benchmarking_comprehensive_report.md`
+- 19 数学符号标准化: `mathematical_notation_standardization.md`
+- 20 形式化验证框架: `formal_verification_framework_v2.md`
+- 21 框架扩展: `formal_verification_framework_extension.md`
 
 ## 范围
 
-- 覆盖类型安全、内存安全、并发安全与性能保证的形式化定义、证明规则与工具化策略。
+- 覆盖类型安全、内存安全、并发安全与性能保证的形式化定义、证明规则与工具化策略
+- 对标国际wiki、著名大学课程和顶级学术会议标准
+- 建立国际领先的Rust形式化验证理论体系
 
 ## 产出
 
-- 可执行的验证规则与可移植的证明草案，服务于文档与代码示例的相互校验。
+- 可执行的验证规则与可移植的证明草案，服务于文档与代码示例的相互校验
+- 国际标准的理论体系和教学方法
+- 顶级会议级别的学术研究成果

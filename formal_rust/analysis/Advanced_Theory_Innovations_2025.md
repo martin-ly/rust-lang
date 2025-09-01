@@ -1075,7 +1075,3 @@ Rust语言的形式化理论创新代表了编程语言理论发展的重要里�
 8. Lamport, L. (1978). Time, clocks, and the ordering of events in a distributed system. Communications of the ACM, 21(7), 558-565.
 9. Clarke, E. M., Grumberg, O., & Peled, D. A. (1999). Model checking. MIT press.
 10. Wadler, P. (1992). The essence of functional programming. In Proceedings of the 19th ACM SIGPLAN-SIGACT symposium on Principles of programming languages (pp. 1-14).
-
-"
-
----

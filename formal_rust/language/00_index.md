@@ -220,7 +220,8 @@
 
 ### 7.10 版本特性分析
 
-- [20_version_features_analysis/](./20_version_features_analysis/) - Rust版本特性分析（1.73-1.89，20个版本专题）
+- [20_version_features_analysis/](./20_version_features_analysis/) - Rust版本特性分析
+- [latest_rust_features_benchmarking.md](./latest_rust_features_benchmarking.md) - 最新Rust语言特性国际对标分析（1.73-1.89，20个版本专题）
 
 ## 8. 形式化验证
 
