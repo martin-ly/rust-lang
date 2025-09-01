@@ -50,6 +50,12 @@
 - 34 生命周期算法实现: `implementation/phase1_theoretical/lifetimes/lifetime_algorithm_implementation.md`
 - 35 第一阶段第2周实施进度报告: `implementation/phase1_theoretical/phase1_week2_implementation_progress_report.md`
 - 36 第一阶段第2周完成确认报告: `implementation/phase1_theoretical/phase1_week2_completion_confirmation.md`
+- 37 异步Trait生命周期分析实现: `implementation/phase1_theoretical/async_traits/async_lifetime_analysis_implementation.md`
+- 38 GATs类型推导算法和类型检查器实现: `implementation/phase1_theoretical/gats/gats_type_inference_implementation.md`
+- 39 常量泛型类型检查算法和类型检查器实现: `implementation/phase1_theoretical/const_generics/const_generics_type_checker_implementation.md`
+- 40 生命周期错误诊断信息优化实现: `implementation/phase1_theoretical/lifetimes/lifetime_error_diagnosis_optimization.md`
+- 41 第一阶段第3周实施进度报告: `implementation/phase1_theoretical/phase1_week3_implementation_progress_report.md`
+- 42 第一阶段第3周完成确认报告: `implementation/phase1_theoretical/phase1_week3_completion_confirmation.md`
 
 ## 范围
 

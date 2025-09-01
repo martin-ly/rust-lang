@@ -51,7 +51,7 @@ impl GenericTrait for MyType {
 
 ### 1.2 形式化语法规则
 
-```
+```text
 GatsTraitDef ::= trait Ident { GatsTraitItems }
 GatsTraitItems ::= GatsTraitItem*
 GatsTraitItem ::= GatsTypeAlias | GatsMethod
@@ -115,7 +115,7 @@ GatsMethod ::= fn Ident<'lifetime>(Params) -> Type
 
 ### 3.1 GATs方法调用规则
 
-```
+```text
 // GATs方法调用类型推导
 Γ ⊢ e : T
 Γ ⊢ T : GenericTrait
@@ -125,7 +125,7 @@ GatsMethod ::= fn Ident<'lifetime>(Params) -> Type
 
 ### 3.2 常量GATs方法调用规则
 
-```
+```text
 // 常量GATs方法调用类型推导
 Γ ⊢ e : T
 Γ ⊢ T : GenericTrait
@@ -135,7 +135,7 @@ GatsMethod ::= fn Ident<'lifetime>(Params) -> Type
 
 ### 3.3 混合GATs方法调用规则
 
-```
+```text
 // 混合GATs方法调用类型推导
 Γ ⊢ e : T
 Γ ⊢ T : GenericTrait
