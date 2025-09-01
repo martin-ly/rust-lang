@@ -2,224 +2,202 @@
 
 ## 概述
 
-在实际的系统编程中，进程管理需要处理复杂的场景和跨平台兼容性。本章深入探讨高级进程模式，包括进程池、微服务架构、跨平台兼容性以及性能优化策略，为构建生产级的进程管理系统提供实践指导。
+本章深入探讨 Rust 进程管理的高级模式，包括进程池、微服务架构、跨平台兼容性以及性能优化策略。这些模式为构建大规模、高性能的分布式系统提供了理论基础和实践指导。
 
 ## 进程池模式
 
 ### 基础进程池
 
-进程池通过预创建和复用进程来提高性能，减少进程创建和销毁的开销。
-
 ```rust
+use std::process::{Command, Child};
 use std::sync::{Arc, Mutex, Condvar};
 use std::collections::VecDeque;
-use std::process::{Child, Command};
 use std::thread;
+use std::time::Duration;
 
 struct ProcessPool {
-    processes: Arc<Mutex<VecDeque<Child>>>,
-    max_size: usize,
-    current_size: Arc<Mutex<usize>>,
-    not_empty: Arc<Condvar>,
-    not_full: Arc<Condvar>,
+    workers: Vec<Worker>,
+    task_queue: Arc<Mutex<VecDeque<Task>>>,
+    notifier: Arc<Condvar>,
+    max_processes: usize,
+    active_processes: Arc<Mutex<usize>>,
+}
+
+struct Worker {
+    id: usize,
+    handle: Option<thread::JoinHandle<()>>,
+}
+
+struct Task {
+    command: String,
+    args: Vec<String>,
+    callback: Box<dyn FnOnce(Result<String, String>) + Send>,
 }
 
 impl ProcessPool {
-    fn new(max_size: usize) -> Self {
+    fn new(max_processes: usize) -> Self {
+        let task_queue = Arc::new(Mutex::new(VecDeque::new()));
+        let notifier = Arc::new(Condvar::new());
+        let active_processes = Arc::new(Mutex::new(0));
+        
+        let mut workers = Vec::new();
+        for i in 0..max_processes {
+            let worker = Worker {
+                id: i,
+                handle: None,
+            };
+            workers.push(worker);
+        }
+        
         ProcessPool {
-            processes: Arc::new(Mutex::new(VecDeque::new())),
-            max_size,
-            current_size: Arc::new(Mutex::new(0)),
-            not_empty: Arc::new(Condvar::new()),
-            not_full: Arc::new(Condvar::new()),
+            workers,
+            task_queue,
+            notifier,
+            max_processes,
+            active_processes,
         }
     }
     
-    fn acquire(&self, command: &str, args: &[&str]) -> Result<Child, std::io::Error> {
-        let mut processes = self.processes.lock().unwrap();
-        
-        // 等待可用进程
-        while processes.is_empty() {
-            let mut current_size = self.current_size.lock().unwrap();
-            if *current_size < self.max_size {
-                // 创建新进程
-                let child = Command::new(command)
-                    .args(args)
-                    .spawn()?;
-                *current_size += 1;
-                return Ok(child);
-            } else {
-                // 等待进程可用
-                processes = self.not_empty.wait(processes).unwrap();
-            }
-        }
-        
-        // 复用现有进程
-        Ok(processes.pop_front().unwrap())
-    }
-    
-    fn release(&self, mut child: Child) {
-        // 检查进程是否仍然活跃
-        match child.try_wait() {
-            Ok(Some(_)) => {
-                // 进程已结束，减少计数
-                let mut current_size = self.current_size.lock().unwrap();
-                *current_size -= 1;
-                self.not_full.notify_one();
-            }
-            Ok(None) => {
-                // 进程仍在运行，放回池中
-                let mut processes = self.processes.lock().unwrap();
-                processes.push_back(child);
-                self.not_empty.notify_one();
-            }
-            Err(_) => {
-                // 进程出错，减少计数
-                let mut current_size = self.current_size.lock().unwrap();
-                *current_size -= 1;
-                self.not_full.notify_one();
-            }
-        }
-    }
-}
-
-fn process_pool_example() {
-    let pool = Arc::new(ProcessPool::new(5));
-    let mut handles = vec![];
-    
-    for i in 0..10 {
-        let pool_clone = pool.clone();
-        let handle = thread::spawn(move || {
-            // 获取进程
-            let child = pool_clone.acquire("echo", &["Hello", "World"]).unwrap();
+    fn start(&mut self) {
+        for worker in &mut self.workers {
+            let task_queue = self.task_queue.clone();
+            let notifier = self.notifier.clone();
+            let active_processes = self.active_processes.clone();
             
-            // 使用进程
-            let output = child.wait_with_output().unwrap();
-            println!("Task {}: {}", i, String::from_utf8_lossy(&output.stdout));
+            let handle = thread::spawn(move || {
+                loop {
+                    let task = {
+                        let mut queue = task_queue.lock().unwrap();
+                        while queue.is_empty() {
+                            queue = notifier.wait(queue).unwrap();
+                        }
+                        queue.pop_front()
+                    };
+                    
+                    if let Some(task) = task {
+                        let mut active = active_processes.lock().unwrap();
+                        *active += 1;
+                        drop(active);
+                        
+                        let result = Self::execute_task(&task.command, &task.args);
+                        (task.callback)(result);
+                        
+                        let mut active = active_processes.lock().unwrap();
+                        *active -= 1;
+                    }
+                }
+            });
             
-            // 释放进程（在实际应用中，这里会重新初始化进程）
-            // pool_clone.release(child);
-        });
-        handles.push(handle);
+            worker.handle = Some(handle);
+        }
     }
     
-    for handle in handles {
-        handle.join().unwrap();
+    fn submit<F>(&self, command: String, args: Vec<String>, callback: F)
+    where
+        F: FnOnce(Result<String, String>) + Send + 'static,
+    {
+        let task = Task {
+            command,
+            args,
+            callback: Box::new(callback),
+        };
+        
+        {
+            let mut queue = self.task_queue.lock().unwrap();
+            queue.push_back(task);
+        }
+        
+        self.notifier.notify_one();
+    }
+    
+    fn execute_task(command: &str, args: &[String]) -> Result<String, String> {
+        match Command::new(command)
+            .args(args)
+            .output()
+        {
+            Ok(output) => {
+                if output.status.success() {
+                    Ok(String::from_utf8_lossy(&output.stdout).to_string())
+                } else {
+                    Err(String::from_utf8_lossy(&output.stderr).to_string())
+                }
+            }
+            Err(e) => Err(e.to_string()),
+        }
+    }
+    
+    fn wait_for_completion(&self) {
+        loop {
+            let active = *self.active_processes.lock().unwrap();
+            let queue_len = self.task_queue.lock().unwrap().len();
+            
+            if active == 0 && queue_len == 0 {
+                break;
+            }
+            
+            thread::sleep(Duration::from_millis(100));
+        }
     }
 }
 ```
 
-### 智能进程池
+### 动态进程池
 
 ```rust
-use std::time::{Duration, Instant};
-use std::collections::HashMap;
+use std::sync::atomic::{AtomicUsize, Ordering};
 
-struct SmartProcessPool {
-    processes: Arc<Mutex<HashMap<u64, ProcessInfo>>>,
-    max_size: usize,
-    idle_timeout: Duration,
-    health_check_interval: Duration,
+struct DynamicProcessPool {
+    base_pool: ProcessPool,
+    min_processes: usize,
+    max_processes: usize,
+    current_processes: AtomicUsize,
+    load_threshold: f64,
 }
 
-#[derive(Debug)]
-struct ProcessInfo {
-    child: Child,
-    created_at: Instant,
-    last_used: Instant,
-    use_count: u32,
-    status: ProcessStatus,
-}
-
-#[derive(Debug)]
-enum ProcessStatus {
-    Idle,
-    Busy,
-    Unhealthy,
-}
-
-impl SmartProcessPool {
-    fn new(max_size: usize, idle_timeout: Duration) -> Self {
-        let pool = SmartProcessPool {
-            processes: Arc::new(Mutex::new(HashMap::new())),
-            max_size,
-            idle_timeout,
-            health_check_interval: Duration::from_secs(30),
+impl DynamicProcessPool {
+    fn new(min_processes: usize, max_processes: usize, load_threshold: f64) -> Self {
+        DynamicProcessPool {
+            base_pool: ProcessPool::new(min_processes),
+            min_processes,
+            max_processes,
+            current_processes: AtomicUsize::new(min_processes),
+            load_threshold,
+        }
+    }
+    
+    fn adjust_pool_size(&mut self) {
+        let current = self.current_processes.load(Ordering::Relaxed);
+        let active = *self.base_pool.active_processes.lock().unwrap();
+        let queue_len = self.base_pool.task_queue.lock().unwrap().len();
+        
+        let load = if current > 0 {
+            (active as f64) / (current as f64)
+        } else {
+            0.0
         };
         
-        // 启动健康检查线程
-        let processes_clone = pool.processes.clone();
-        let idle_timeout_clone = pool.idle_timeout;
-        thread::spawn(move || {
-            loop {
-                thread::sleep(Duration::from_secs(30));
-                pool.cleanup_idle_processes();
-            }
-        });
-        
-        pool
-    }
-    
-    fn acquire(&self, command: &str, args: &[&str]) -> Result<u64, std::io::Error> {
-        let mut processes = self.processes.lock().unwrap();
-        
-        // 查找空闲进程
-        for (id, info) in processes.iter_mut() {
-            if matches!(info.status, ProcessStatus::Idle) {
-                info.status = ProcessStatus::Busy;
-                info.last_used = Instant::now();
-                info.use_count += 1;
-                return Ok(*id);
-            }
-        }
-        
-        // 创建新进程
-        if processes.len() < self.max_size {
-            let child = Command::new(command)
-                .args(args)
-                .spawn()?;
-            
-            let id = rand::random::<u64>();
-            let process_info = ProcessInfo {
-                child,
-                created_at: Instant::now(),
-                last_used: Instant::now(),
-                use_count: 1,
-                status: ProcessStatus::Busy,
-            };
-            
-            processes.insert(id, process_info);
-            Ok(id)
-        } else {
-            Err(std::io::Error::new(
-                std::io::ErrorKind::WouldBlock,
-                "Pool is full",
-            ))
+        if load > self.load_threshold && current < self.max_processes {
+            // 增加进程
+            self.scale_up();
+        } else if load < self.load_threshold / 2.0 && current > self.min_processes {
+            // 减少进程
+            self.scale_down();
         }
     }
     
-    fn release(&self, id: u64) {
-        let mut processes = self.processes.lock().unwrap();
-        if let Some(info) = processes.get_mut(&id) {
-            info.status = ProcessStatus::Idle;
-            info.last_used = Instant::now();
+    fn scale_up(&mut self) {
+        let current = self.current_processes.load(Ordering::Relaxed);
+        if current < self.max_processes {
+            self.current_processes.fetch_add(1, Ordering::Relaxed);
+            // 添加新的工作进程
         }
     }
     
-    fn cleanup_idle_processes(&self) {
-        let mut processes = self.processes.lock().unwrap();
-        let now = Instant::now();
-        let mut to_remove = vec![];
-        
-        for (id, info) in processes.iter() {
-            if matches!(info.status, ProcessStatus::Idle) 
-                && now.duration_since(info.last_used) > self.idle_timeout {
-                to_remove.push(*id);
-            }
-        }
-        
-        for id in to_remove {
-            processes.remove(&id);
+    fn scale_down(&mut self) {
+        let current = self.current_processes.load(Ordering::Relaxed);
+        if current > self.min_processes {
+            self.current_processes.fetch_sub(1, Ordering::Relaxed);
+            // 移除工作进程
         }
     }
 }
@@ -227,166 +205,199 @@ impl SmartProcessPool {
 
 ## 微服务架构
 
-### 服务发现与注册
+### 服务发现
 
 ```rust
 use std::collections::HashMap;
-use std::net::{TcpListener, TcpStream};
-use std::io::{self, Read, Write};
+use std::net::{IpAddr, SocketAddr};
+use std::sync::{Arc, RwLock};
+use std::time::{Duration, Instant};
 
 #[derive(Debug, Clone)]
-struct ServiceInfo {
+struct ServiceInstance {
     id: String,
-    name: String,
-    address: String,
-    port: u16,
+    address: SocketAddr,
     health_check_url: String,
+    last_heartbeat: Instant,
     metadata: HashMap<String, String>,
 }
 
 struct ServiceRegistry {
-    services: Arc<Mutex<HashMap<String, ServiceInfo>>>,
-    health_checker: Arc<HealthChecker>,
-}
-
-struct HealthChecker {
-    check_interval: Duration,
+    services: Arc<RwLock<HashMap<String, Vec<ServiceInstance>>>>,
+    health_check_interval: Duration,
 }
 
 impl ServiceRegistry {
     fn new() -> Self {
-        let registry = ServiceRegistry {
-            services: Arc::new(Mutex::new(HashMap::new())),
-            health_checker: Arc::new(HealthChecker {
-                check_interval: Duration::from_secs(30),
-            }),
-        };
-        
-        // 启动健康检查
-        let services_clone = registry.services.clone();
-        let health_checker = registry.health_checker.clone();
-        thread::spawn(move || {
-            loop {
-                thread::sleep(health_checker.check_interval);
-                registry.perform_health_checks();
-            }
-        });
-        
-        registry
-    }
-    
-    fn register(&self, service: ServiceInfo) -> Result<(), String> {
-        let mut services = self.services.lock().unwrap();
-        services.insert(service.id.clone(), service);
-        Ok(())
-    }
-    
-    fn deregister(&self, service_id: &str) -> Result<(), String> {
-        let mut services = self.services.lock().unwrap();
-        services.remove(service_id);
-        Ok(())
-    }
-    
-    fn discover(&self, service_name: &str) -> Vec<ServiceInfo> {
-        let services = self.services.lock().unwrap();
-        services.values()
-            .filter(|service| service.name == service_name)
-            .cloned()
-            .collect()
-    }
-    
-    fn perform_health_checks(&self) {
-        let mut services = self.services.lock().unwrap();
-        let mut to_remove = vec![];
-        
-        for (id, service) in services.iter() {
-            if !self.is_service_healthy(service) {
-                to_remove.push(id.clone());
-            }
-        }
-        
-        for id in to_remove {
-            services.remove(&id);
+        ServiceRegistry {
+            services: Arc::new(RwLock::new(HashMap::new())),
+            health_check_interval: Duration::from_secs(30),
         }
     }
     
-    fn is_service_healthy(&self, service: &ServiceInfo) -> bool {
-        // 简化的健康检查
-        match TcpStream::connect(format!("{}:{}", service.address, service.port)) {
-            Ok(_) => true,
-            Err(_) => false,
+    fn register(&self, service_name: String, instance: ServiceInstance) {
+        let mut services = self.services.write().unwrap();
+        services.entry(service_name)
+            .or_insert_with(Vec::new)
+            .push(instance);
+    }
+    
+    fn discover(&self, service_name: &str) -> Option<Vec<ServiceInstance>> {
+        let services = self.services.read().unwrap();
+        services.get(service_name).cloned()
+    }
+    
+    fn heartbeat(&self, service_id: &str) {
+        let mut services = self.services.write().unwrap();
+        for service_instances in services.values_mut() {
+            for instance in service_instances.iter_mut() {
+                if instance.id == service_id {
+                    instance.last_heartbeat = Instant::now();
+                    break;
+                }
+            }
+        }
+    }
+    
+    fn health_check(&self) {
+        let mut services = self.services.write().unwrap();
+        for service_instances in services.values_mut() {
+            service_instances.retain(|instance| {
+                instance.last_heartbeat.elapsed() < self.health_check_interval * 2
+            });
         }
     }
 }
 ```
 
-### 负载均衡器
+### 负载均衡
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
 
-enum LoadBalancingStrategy {
-    RoundRobin,
-    LeastConnections,
-    Weighted,
+trait LoadBalancer {
+    fn select_instance(&self, instances: &[ServiceInstance]) -> Option<&ServiceInstance>;
 }
 
-struct LoadBalancer {
-    services: Arc<Mutex<Vec<ServiceInfo>>>,
-    strategy: LoadBalancingStrategy,
-    current_index: AtomicUsize,
-    connection_counts: Arc<Mutex<HashMap<String, u32>>>,
+struct RoundRobinBalancer {
+    current: AtomicUsize,
 }
 
-impl LoadBalancer {
-    fn new(strategy: LoadBalancingStrategy) -> Self {
-        LoadBalancer {
-            services: Arc::new(Mutex::new(Vec::new())),
-            strategy,
-            current_index: AtomicUsize::new(0),
-            connection_counts: Arc::new(Mutex::new(HashMap::new())),
+impl RoundRobinBalancer {
+    fn new() -> Self {
+        RoundRobinBalancer {
+            current: AtomicUsize::new(0),
         }
     }
-    
-    fn add_service(&self, service: ServiceInfo) {
-        let mut services = self.services.lock().unwrap();
-        services.push(service);
-    }
-    
-    fn select_service(&self) -> Option<ServiceInfo> {
-        let services = self.services.lock().unwrap();
-        if services.is_empty() {
+}
+
+impl LoadBalancer for RoundRobinBalancer {
+    fn select_instance(&self, instances: &[ServiceInstance]) -> Option<&ServiceInstance> {
+        if instances.is_empty() {
             return None;
         }
         
-        match self.strategy {
-            LoadBalancingStrategy::RoundRobin => {
-                let index = self.current_index.fetch_add(1, Ordering::SeqCst);
-                Some(services[index % services.len()].clone())
-            }
-            LoadBalancingStrategy::LeastConnections => {
-                let connection_counts = self.connection_counts.lock().unwrap();
-                services.iter()
-                    .min_by_key(|service| connection_counts.get(&service.id).unwrap_or(&0))
-                    .cloned()
-            }
-            LoadBalancingStrategy::Weighted => {
-                // 简化的加权轮询
-                let index = self.current_index.fetch_add(1, Ordering::SeqCst);
-                Some(services[index % services.len()].clone())
-            }
+        let current = self.current.fetch_add(1, Ordering::Relaxed);
+        Some(&instances[current % instances.len()])
+    }
+}
+
+struct LeastConnectionsBalancer {
+    connections: Arc<RwLock<HashMap<String, usize>>>,
+}
+
+impl LeastConnectionsBalancer {
+    fn new() -> Self {
+        LeastConnectionsBalancer {
+            connections: Arc::new(RwLock::new(HashMap::new())),
         }
     }
     
-    fn increment_connection_count(&self, service_id: &str) {
-        let mut counts = self.connection_counts.lock().unwrap();
-        *counts.entry(service_id.to_string()).or_insert(0) += 1;
+    fn increment_connections(&self, instance_id: &str) {
+        let mut connections = self.connections.write().unwrap();
+        *connections.entry(instance_id.to_string()).or_insert(0) += 1;
     }
     
-    fn decrement_connection_count(&self, service_id: &str) {
-        let mut counts = self.connection_counts.lock().unwrap();
-        if let Some(count) = counts.get_mut(service_id) {
-            *count = count.saturating_sub(1);
+    fn decrement_connections(&self, instance_id: &str) {
+        let mut connections = self.connections.write().unwrap();
+        if let Some(count) = connections.get_mut(instance_id) {
+            if *count > 0 {
+                *count -= 1;
+            }
+        }
+    }
+}
+
+impl LoadBalancer for LeastConnectionsBalancer {
+    fn select_instance(&self, instances: &[ServiceInstance]) -> Option<&ServiceInstance> {
+        if instances.is_empty() {
+            return None;
+        }
+        
+        let connections = self.connections.read().unwrap();
+        instances.iter()
+            .min_by_key(|instance| connections.get(&instance.id).unwrap_or(&0))
+    }
+}
+```
+
+### 服务网格
+
+```rust
+use std::sync::mpsc;
+
+struct ServiceMesh {
+    registry: ServiceRegistry,
+    load_balancer: Box<dyn LoadBalancer + Send + Sync>,
+    proxy_channels: HashMap<String, mpsc::Sender<ProxyMessage>>,
+}
+
+#[derive(Debug)]
+enum ProxyMessage {
+    ForwardRequest(String, Vec<u8>),
+    Response(String, Vec<u8>),
+    HealthCheck,
+}
+
+struct ServiceProxy {
+    service_name: String,
+    mesh: Arc<ServiceMesh>,
+    request_sender: mpsc::Sender<ProxyMessage>,
+    response_receiver: mpsc::Receiver<ProxyMessage>,
+}
+
+impl ServiceProxy {
+    fn new(service_name: String, mesh: Arc<ServiceMesh>) -> Self {
+        let (request_sender, request_receiver) = mpsc::channel();
+        let (response_sender, response_receiver) = mpsc::channel();
+        
+        ServiceProxy {
+            service_name,
+            mesh,
+            request_sender,
+            response_receiver,
+        }
+    }
+    
+    fn forward_request(&self, request: Vec<u8>) -> Result<Vec<u8>, String> {
+        // 选择服务实例
+        let instances = self.mesh.registry.discover(&self.service_name)
+            .ok_or("Service not found")?;
+        
+        let instance = self.mesh.load_balancer.select_instance(&instances)
+            .ok_or("No available instances")?;
+        
+        // 转发请求
+        self.request_sender.send(ProxyMessage::ForwardRequest(
+            instance.id.clone(),
+            request
+        )).map_err(|e| e.to_string())?;
+        
+        // 等待响应
+        match self.response_receiver.recv() {
+            Ok(ProxyMessage::Response(_, response)) => Ok(response),
+            Ok(_) => Err("Unexpected message type".to_string()),
+            Err(e) => Err(e.to_string()),
         }
     }
 }
@@ -397,152 +408,178 @@ impl LoadBalancer {
 ### 平台抽象层
 
 ```rust
+use std::process::Command;
 use std::io;
 
-#[cfg(target_os = "windows")]
-mod windows {
-    use super::*;
+trait PlatformProcessManager {
+    fn create_process(&self, command: &str, args: &[String]) -> io::Result<Child>;
+    fn kill_process(&self, pid: u32) -> io::Result<()>;
+    fn get_process_info(&self, pid: u32) -> io::Result<ProcessInfo>;
+}
+
+#[derive(Debug)]
+struct ProcessInfo {
+    pid: u32,
+    parent_pid: Option<u32>,
+    command_line: String,
+    memory_usage: u64,
+    cpu_usage: f64,
+}
+
+struct UnixProcessManager;
+
+impl PlatformProcessManager for UnixProcessManager {
+    fn create_process(&self, command: &str, args: &[String]) -> io::Result<Child> {
+        Command::new(command)
+            .args(args)
+            .spawn()
+    }
     
-    pub struct ProcessManager;
+    fn kill_process(&self, pid: u32) -> io::Result<()> {
+        unsafe {
+            libc::kill(pid as i32, libc::SIGTERM);
+        }
+        Ok(())
+    }
     
-    impl ProcessManager {
-        pub fn create_process(&self, command: &str, args: &[&str]) -> io::Result<Child> {
-            use std::process::Command;
-            Command::new(command)
-                .args(args)
-                .spawn()
-        }
-        
-        pub fn kill_process(&self, pid: u32) -> io::Result<()> {
-            // Windows 特定的进程终止逻辑
-            Ok(())
-        }
+    fn get_process_info(&self, pid: u32) -> io::Result<ProcessInfo> {
+        // Unix特定的进程信息获取
+        Ok(ProcessInfo {
+            pid,
+            parent_pid: None,
+            command_line: String::new(),
+            memory_usage: 0,
+            cpu_usage: 0.0,
+        })
     }
 }
 
-#[cfg(target_os = "linux")]
-mod linux {
-    use super::*;
+struct WindowsProcessManager;
+
+impl PlatformProcessManager for WindowsProcessManager {
+    fn create_process(&self, command: &str, args: &[String]) -> io::Result<Child> {
+        Command::new(command)
+            .args(args)
+            .spawn()
+    }
     
-    pub struct ProcessManager;
+    fn kill_process(&self, pid: u32) -> io::Result<()> {
+        // Windows特定的进程终止
+        Ok(())
+    }
     
-    impl ProcessManager {
-        pub fn create_process(&self, command: &str, args: &[&str]) -> io::Result<Child> {
-            use std::process::Command;
-            Command::new(command)
-                .args(args)
-                .spawn()
-        }
-        
-        pub fn kill_process(&self, pid: u32) -> io::Result<()> {
-            // Linux 特定的进程终止逻辑
-            Ok(())
-        }
+    fn get_process_info(&self, pid: u32) -> io::Result<ProcessInfo> {
+        // Windows特定的进程信息获取
+        Ok(ProcessInfo {
+            pid,
+            parent_pid: None,
+            command_line: String::new(),
+            memory_usage: 0,
+            cpu_usage: 0.0,
+        })
     }
 }
 
-#[cfg(target_os = "macos")]
-mod macos {
-    use super::*;
-    
-    pub struct ProcessManager;
-    
-    impl ProcessManager {
-        pub fn create_process(&self, command: &str, args: &[&str]) -> io::Result<Child> {
-            use std::process::Command;
-            Command::new(command)
-                .args(args)
-                .spawn()
-        }
-        
-        pub fn kill_process(&self, pid: u32) -> io::Result<()> {
-            // macOS 特定的进程终止逻辑
-            Ok(())
-        }
-    }
-}
-
-// 统一的平台抽象
-pub struct CrossPlatformProcessManager {
-    #[cfg(target_os = "windows")]
-    manager: windows::ProcessManager,
-    #[cfg(target_os = "linux")]
-    manager: linux::ProcessManager,
-    #[cfg(target_os = "macos")]
-    manager: macos::ProcessManager,
+struct CrossPlatformProcessManager {
+    manager: Box<dyn PlatformProcessManager + Send + Sync>,
 }
 
 impl CrossPlatformProcessManager {
-    pub fn new() -> Self {
-        CrossPlatformProcessManager {
-            #[cfg(target_os = "windows")]
-            manager: windows::ProcessManager,
-            #[cfg(target_os = "linux")]
-            manager: linux::ProcessManager,
-            #[cfg(target_os = "macos")]
-            manager: macos::ProcessManager,
-        }
+    fn new() -> Self {
+        #[cfg(target_os = "windows")]
+        let manager = Box::new(WindowsProcessManager);
+        
+        #[cfg(not(target_os = "windows"))]
+        let manager = Box::new(UnixProcessManager);
+        
+        CrossPlatformProcessManager { manager }
     }
     
-    pub fn create_process(&self, command: &str, args: &[&str]) -> io::Result<Child> {
+    fn create_process(&self, command: &str, args: &[String]) -> io::Result<Child> {
         self.manager.create_process(command, args)
     }
     
-    pub fn kill_process(&self, pid: u32) -> io::Result<()> {
+    fn kill_process(&self, pid: u32) -> io::Result<()> {
         self.manager.kill_process(pid)
+    }
+    
+    fn get_process_info(&self, pid: u32) -> io::Result<ProcessInfo> {
+        self.manager.get_process_info(pid)
     }
 }
 ```
 
-### 条件编译与特征检测
+### 配置管理
 
 ```rust
-#[cfg(feature = "process_pool")]
-mod process_pool {
-    use super::*;
-    
-    pub struct AdvancedProcessPool {
-        // 高级进程池实现
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+#[derive(Debug, Serialize, Deserialize)]
+struct ProcessConfig {
+    name: String,
+    command: String,
+    args: Vec<String>,
+    working_directory: Option<String>,
+    environment: HashMap<String, String>,
+    restart_policy: RestartPolicy,
+    resource_limits: ResourceLimits,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+enum RestartPolicy {
+    Never,
+    Always,
+    OnFailure,
+    UnlessStopped,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+struct ResourceLimits {
+    max_memory: Option<u64>,
+    max_cpu: Option<f64>,
+    max_file_descriptors: Option<u32>,
+}
+
+struct ConfigManager {
+    configs: HashMap<String, ProcessConfig>,
+    platform_overrides: HashMap<String, ProcessConfig>,
+}
+
+impl ConfigManager {
+    fn new() -> Self {
+        ConfigManager {
+            configs: HashMap::new(),
+            platform_overrides: HashMap::new(),
+        }
     }
-}
-
-#[cfg(feature = "health_check")]
-mod health_check {
-    use super::*;
     
-    pub struct HealthChecker {
-        // 健康检查实现
+    fn load_config(&mut self, config: ProcessConfig) {
+        self.configs.insert(config.name.clone(), config);
     }
-}
-
-#[cfg(feature = "metrics")]
-mod metrics {
-    use super::*;
     
-    pub struct ProcessMetrics {
-        // 指标收集实现
+    fn get_config(&self, name: &str) -> Option<&ProcessConfig> {
+        // 首先检查平台特定的覆盖
+        if let Some(override_config) = self.platform_overrides.get(name) {
+            return Some(override_config);
+        }
+        
+        self.configs.get(name)
     }
-}
-
-// 根据编译时特征提供不同的功能
-pub struct ProcessManager {
-    #[cfg(feature = "process_pool")]
-    pool: Option<process_pool::AdvancedProcessPool>,
-    #[cfg(feature = "health_check")]
-    health_checker: Option<health_check::HealthChecker>,
-    #[cfg(feature = "metrics")]
-    metrics: Option<metrics::ProcessMetrics>,
-}
-
-impl ProcessManager {
-    pub fn new() -> Self {
-        ProcessManager {
-            #[cfg(feature = "process_pool")]
-            pool: Some(process_pool::AdvancedProcessPool::new()),
-            #[cfg(feature = "health_check")]
-            health_checker: Some(health_check::HealthChecker::new()),
-            #[cfg(feature = "metrics")]
-            metrics: Some(metrics::ProcessMetrics::new()),
+    
+    fn apply_platform_overrides(&mut self, platform: &str) {
+        // 根据平台应用特定的配置覆盖
+        match platform {
+            "windows" => {
+                // Windows特定的配置
+            }
+            "linux" => {
+                // Linux特定的配置
+            }
+            "macos" => {
+                // macOS特定的配置
+            }
+            _ => {}
         }
     }
 }
@@ -550,243 +587,300 @@ impl ProcessManager {
 
 ## 性能优化策略
 
-### 异步进程管理
+### 进程预热
 
 ```rust
-use tokio::process::{Command, Child};
-use tokio::sync::mpsc;
-use futures::future::{self, FutureExt};
+use std::time::{Duration, Instant};
 
-struct AsyncProcessManager {
-    command_tx: mpsc::Sender<ProcessCommand>,
+struct ProcessWarmer {
+    warmup_duration: Duration,
+    warmup_requests: usize,
 }
 
-enum ProcessCommand {
-    Create { command: String, args: Vec<String>, response_tx: oneshot::Sender<io::Result<Child>> },
-    Kill { pid: u32, response_tx: oneshot::Sender<io::Result<()>> },
-}
-
-impl AsyncProcessManager {
-    fn new() -> Self {
-        let (command_tx, mut command_rx) = mpsc::channel(100);
-        
-        // 启动异步处理循环
-        tokio::spawn(async move {
-            while let Some(command) = command_rx.recv().await {
-                match command {
-                    ProcessCommand::Create { command, args, response_tx } => {
-                        let result = Command::new(&command)
-                            .args(&args)
-                            .spawn();
-                        let _ = response_tx.send(result);
-                    }
-                    ProcessCommand::Kill { pid, response_tx } => {
-                        // 异步进程终止逻辑
-                        let result = Ok(());
-                        let _ = response_tx.send(result);
-                    }
-                }
-            }
-        });
-        
-        AsyncProcessManager { command_tx }
+impl ProcessWarmer {
+    fn new(warmup_duration: Duration, warmup_requests: usize) -> Self {
+        ProcessWarmer {
+            warmup_duration,
+            warmup_requests,
+        }
     }
     
-    async fn create_process(&self, command: String, args: Vec<String>) -> io::Result<Child> {
-        let (response_tx, response_rx) = oneshot::channel();
-        let _ = self.command_tx.send(ProcessCommand::Create {
-            command,
-            args,
-            response_tx,
-        }).await;
+    fn warmup_process(&self, process: &mut Child) -> Result<(), String> {
+        let start_time = Instant::now();
+        let mut request_count = 0;
         
-        response_rx.await.unwrap()
+        while start_time.elapsed() < self.warmup_duration && request_count < self.warmup_requests {
+            // 发送预热请求
+            self.send_warmup_request(process)?;
+            request_count += 1;
+            
+            std::thread::sleep(Duration::from_millis(10));
+        }
+        
+        Ok(())
     }
     
-    async fn kill_process(&self, pid: u32) -> io::Result<()> {
-        let (response_tx, response_rx) = oneshot::channel();
-        let _ = self.command_tx.send(ProcessCommand::Kill {
-            pid,
-            response_tx,
-        }).await;
-        
-        response_rx.await.unwrap()
+    fn send_warmup_request(&self, process: &mut Child) -> Result<(), String> {
+        // 发送轻量级的预热请求
+        Ok(())
     }
 }
 ```
 
-### 内存池优化
+### 连接池
 
 ```rust
-use std::sync::Arc;
+use std::sync::{Arc, Mutex, Condvar};
 use std::collections::VecDeque;
+use std::time::{Duration, Instant};
 
-struct MemoryPool {
-    buffers: Arc<Mutex<VecDeque<Vec<u8>>>>,
-    buffer_size: usize,
-    max_buffers: usize,
+struct Connection {
+    id: u64,
+    created_at: Instant,
+    last_used: Instant,
+    is_active: bool,
 }
 
-impl MemoryPool {
-    fn new(buffer_size: usize, max_buffers: usize) -> Self {
-        MemoryPool {
-            buffers: Arc::new(Mutex::new(VecDeque::new())),
-            buffer_size,
-            max_buffers,
+struct ConnectionPool {
+    connections: Arc<Mutex<VecDeque<Connection>>>,
+    notifier: Arc<Condvar>,
+    max_connections: usize,
+    max_idle_time: Duration,
+    cleanup_interval: Duration,
+}
+
+impl ConnectionPool {
+    fn new(max_connections: usize, max_idle_time: Duration) -> Self {
+        let pool = ConnectionPool {
+            connections: Arc::new(Mutex::new(VecDeque::new())),
+            notifier: Arc::new(Condvar::new()),
+            max_connections,
+            max_idle_time,
+            cleanup_interval: Duration::from_secs(60),
+        };
+        
+        // 启动清理线程
+        pool.start_cleanup_thread();
+        pool
+    }
+    
+    fn get_connection(&self) -> Option<Connection> {
+        let mut connections = self.connections.lock().unwrap();
+        
+        while connections.is_empty() {
+            connections = self.notifier.wait(connections).unwrap();
+        }
+        
+        connections.pop_front()
+    }
+    
+    fn return_connection(&self, mut connection: Connection) {
+        connection.last_used = Instant::now();
+        connection.is_active = false;
+        
+        let mut connections = self.connections.lock().unwrap();
+        if connections.len() < self.max_connections {
+            connections.push_back(connection);
+            self.notifier.notify_one();
         }
     }
     
-    fn acquire_buffer(&self) -> Vec<u8> {
-        let mut buffers = self.buffers.lock().unwrap();
-        if let Some(buffer) = buffers.pop_front() {
-            buffer
-        } else {
-            vec![0; self.buffer_size]
+    fn start_cleanup_thread(&self) {
+        let connections = self.connections.clone();
+        let max_idle_time = self.max_idle_time;
+        let cleanup_interval = self.cleanup_interval;
+        
+        std::thread::spawn(move || {
+            loop {
+                std::thread::sleep(cleanup_interval);
+                
+                let mut conns = connections.lock().unwrap();
+                let now = Instant::now();
+                
+                conns.retain(|conn| {
+                    now.duration_since(conn.last_used) < max_idle_time
+                });
+            }
+        });
+    }
+}
+```
+
+### 缓存策略
+
+```rust
+use std::collections::HashMap;
+use std::sync::{Arc, RwLock};
+use std::time::{Duration, Instant};
+
+struct CacheEntry<T> {
+    value: T,
+    created_at: Instant,
+    ttl: Duration,
+}
+
+struct ProcessCache<T> {
+    cache: Arc<RwLock<HashMap<String, CacheEntry<T>>>>>,
+    max_size: usize,
+    default_ttl: Duration,
+}
+
+impl<T: Clone> ProcessCache<T> {
+    fn new(max_size: usize, default_ttl: Duration) -> Self {
+        ProcessCache {
+            cache: Arc::new(RwLock::new(HashMap::new())),
+            max_size,
+            default_ttl,
         }
     }
     
-    fn release_buffer(&self, mut buffer: Vec<u8>) {
-        let mut buffers = self.buffers.lock().unwrap();
-        if buffers.len() < self.max_buffers {
-            buffer.clear();
-            buffers.push_back(buffer);
+    fn get(&self, key: &str) -> Option<T> {
+        let cache = self.cache.read().unwrap();
+        if let Some(entry) = cache.get(key) {
+            if Instant::now().duration_since(entry.created_at) < entry.ttl {
+                return Some(entry.value.clone());
+            }
         }
+        None
     }
-}
-
-struct OptimizedProcessManager {
-    memory_pool: MemoryPool,
-    process_pool: ProcessPool,
-}
-
-impl OptimizedProcessManager {
-    fn new() -> Self {
-        OptimizedProcessManager {
-            memory_pool: MemoryPool::new(4096, 100),
-            process_pool: ProcessPool::new(10),
+    
+    fn set(&self, key: String, value: T) {
+        let mut cache = self.cache.write().unwrap();
+        
+        // 检查缓存大小限制
+        if cache.len() >= self.max_size {
+            self.evict_oldest(&mut cache);
+        }
+        
+        let entry = CacheEntry {
+            value,
+            created_at: Instant::now(),
+            ttl: self.default_ttl,
+        };
+        
+        cache.insert(key, entry);
+    }
+    
+    fn evict_oldest(&self, cache: &mut HashMap<String, CacheEntry<T>>) {
+        if let Some((oldest_key, _)) = cache.iter()
+            .min_by_key(|(_, entry)| entry.created_at)
+        {
+            cache.remove(oldest_key);
         }
     }
     
-    fn execute_with_optimization(&self, command: &str, args: &[&str]) -> io::Result<Vec<u8>> {
-        // 使用内存池优化数据传输
-        let buffer = self.memory_pool.acquire_buffer();
+    fn cleanup_expired(&self) {
+        let mut cache = self.cache.write().unwrap();
+        let now = Instant::now();
         
-        // 执行进程操作
-        let result = self.process_pool.acquire(command, args)
-            .and_then(|child| child.wait_with_output());
-        
-        // 释放缓冲区
-        self.memory_pool.release_buffer(buffer);
-        
-        result.map(|output| output.stdout)
+        cache.retain(|_, entry| {
+            now.duration_since(entry.created_at) < entry.ttl
+        });
     }
 }
 ```
 
 ## 监控与诊断
 
-### 进程监控
+### 性能监控
 
 ```rust
+use std::sync::atomic::{AtomicU64, Ordering};
 use std::time::{Duration, Instant};
-use std::collections::HashMap;
 
-#[derive(Debug)]
-struct ProcessMetrics {
-    cpu_usage: f64,
-    memory_usage: u64,
+struct PerformanceMetrics {
+    total_requests: AtomicU64,
+    successful_requests: AtomicU64,
+    failed_requests: AtomicU64,
+    total_response_time: AtomicU64,
     start_time: Instant,
-    last_activity: Instant,
-    total_requests: u64,
-    failed_requests: u64,
 }
 
-struct ProcessMonitor {
-    metrics: Arc<Mutex<HashMap<u32, ProcessMetrics>>>,
-    alert_thresholds: AlertThresholds,
-}
-
-#[derive(Debug)]
-struct AlertThresholds {
-    max_cpu_usage: f64,
-    max_memory_usage: u64,
-    max_response_time: Duration,
-}
-
-impl ProcessMonitor {
+impl PerformanceMetrics {
     fn new() -> Self {
-        ProcessMonitor {
-            metrics: Arc::new(Mutex::new(HashMap::new())),
-            alert_thresholds: AlertThresholds {
-                max_cpu_usage: 80.0,
-                max_memory_usage: 1024 * 1024 * 100, // 100MB
-                max_response_time: Duration::from_secs(5),
-            },
+        PerformanceMetrics {
+            total_requests: AtomicU64::new(0),
+            successful_requests: AtomicU64::new(0),
+            failed_requests: AtomicU64::new(0),
+            total_response_time: AtomicU64::new(0),
+            start_time: Instant::now(),
         }
     }
     
-    fn record_metrics(&self, pid: u32, metrics: ProcessMetrics) {
-        let mut all_metrics = self.metrics.lock().unwrap();
-        all_metrics.insert(pid, metrics);
-    }
-    
-    fn check_alerts(&self) -> Vec<Alert> {
-        let mut alerts = Vec::new();
-        let metrics = self.metrics.lock().unwrap();
+    fn record_request(&self, success: bool, response_time: Duration) {
+        self.total_requests.fetch_add(1, Ordering::Relaxed);
         
-        for (pid, metric) in metrics.iter() {
-            if metric.cpu_usage > self.alert_thresholds.max_cpu_usage {
-                alerts.push(Alert {
-                    pid: *pid,
-                    alert_type: AlertType::HighCpuUsage,
-                    message: format!("CPU usage: {}%", metric.cpu_usage),
-                });
-            }
-            
-            if metric.memory_usage > self.alert_thresholds.max_memory_usage {
-                alerts.push(Alert {
-                    pid: *pid,
-                    alert_type: AlertType::HighMemoryUsage,
-                    message: format!("Memory usage: {} bytes", metric.memory_usage),
-                });
-            }
+        if success {
+            self.successful_requests.fetch_add(1, Ordering::Relaxed);
+        } else {
+            self.failed_requests.fetch_add(1, Ordering::Relaxed);
         }
         
-        alerts
+        self.total_response_time.fetch_add(
+            response_time.as_millis() as u64,
+            Ordering::Relaxed
+        );
+    }
+    
+    fn get_stats(&self) -> PerformanceStats {
+        let total = self.total_requests.load(Ordering::Relaxed);
+        let successful = self.successful_requests.load(Ordering::Relaxed);
+        let failed = self.failed_requests.load(Ordering::Relaxed);
+        let total_time = self.total_response_time.load(Ordering::Relaxed);
+        
+        let uptime = self.start_time.elapsed();
+        let requests_per_second = if uptime.as_secs() > 0 {
+            total as f64 / uptime.as_secs() as f64
+        } else {
+            0.0
+        };
+        
+        let average_response_time = if total > 0 {
+            Duration::from_millis(total_time / total)
+        } else {
+            Duration::from_millis(0)
+        };
+        
+        PerformanceStats {
+            total_requests: total,
+            successful_requests: successful,
+            failed_requests: failed,
+            success_rate: if total > 0 { successful as f64 / total as f64 } else { 0.0 },
+            requests_per_second,
+            average_response_time,
+            uptime,
+        }
     }
 }
 
 #[derive(Debug)]
-struct Alert {
-    pid: u32,
-    alert_type: AlertType,
-    message: String,
-}
-
-#[derive(Debug)]
-enum AlertType {
-    HighCpuUsage,
-    HighMemoryUsage,
-    ProcessHang,
-    ProcessCrash,
+struct PerformanceStats {
+    total_requests: u64,
+    successful_requests: u64,
+    failed_requests: u64,
+    success_rate: f64,
+    requests_per_second: f64,
+    average_response_time: Duration,
+    uptime: Duration,
 }
 ```
 
 ## 总结
 
-高级进程模式和跨平台兼容性是构建生产级系统的关键要素。通过进程池、微服务架构、跨平台抽象和性能优化，Rust 提供了强大的进程管理能力。
+高级模式与跨平台兼容性是构建大规模分布式系统的关键。通过进程池、微服务架构、跨平台抽象和性能优化策略，Rust 提供了强大的工具来构建高性能、可扩展的系统。
 
 ### 关键要点
 
-1. **进程池模式** - 通过复用进程提高性能和资源利用率
-2. **微服务架构** - 服务发现、负载均衡和健康检查
-3. **跨平台兼容** - 条件编译和平台抽象层
-4. **性能优化** - 异步处理、内存池和监控诊断
+1. **进程池模式** - 高效的进程管理和任务调度
+2. **微服务架构** - 服务发现、负载均衡和服务网格
+3. **跨平台兼容** - 统一的API适配不同操作系统
+4. **性能优化** - 预热、连接池和缓存策略
+5. **监控诊断** - 全面的性能监控和诊断工具
 
 ### 下一步
 
-在下一章中，我们将总结模块的核心概念，回顾最佳实践，并探讨技术发展趋势。
-
-"
+在下一章中，我们将总结整个模块的核心概念，回顾最佳实践，并展望技术发展趋势。
 
 ---
+
+*本章为 Rust 进程管理的高级应用提供了完整的理论基础和实践指导，为构建企业级分布式系统奠定了坚实基础。*
