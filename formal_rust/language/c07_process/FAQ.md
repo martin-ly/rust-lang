@@ -37,6 +37,9 @@ child.kill()?; // 发送 SIGTERM
 A: 使用 `stdin()`, `stdout()`, `stderr()` 方法：
 
 ```rust
+use std::process::{Command, Stdio};
+use std::io::Write;
+
 let mut child = Command::new("grep")
     .arg("pattern")
     .stdin(Stdio::piped())
@@ -45,6 +48,42 @@ let mut child = Command::new("grep")
 
 child.stdin.as_mut().unwrap().write_all(b"data")?;
 let output = child.wait_with_output()?;
+```
+
+### Q: 如何设置子进程的环境变量？
+
+A: 使用 `env()` 或 `envs()` 方法：
+
+```rust
+use std::collections::HashMap;
+
+let mut env_vars = HashMap::new();
+env_vars.insert("RUST_LOG", "debug");
+env_vars.insert("DATABASE_URL", "postgres://localhost/db");
+
+let child = Command::new("my_app")
+    .envs(env_vars.iter())
+    .spawn()?;
+```
+
+### Q: 如何设置子进程的工作目录？
+
+A: 使用 `current_dir()` 方法：
+
+```rust
+let child = Command::new("git")
+    .arg("status")
+    .current_dir("/path/to/repo")
+    .spawn()?;
+```
+
+### Q: 如何处理僵尸进程？
+
+A: 确保正确等待子进程完成：
+
+```rust
+let mut child = Command::new("process").spawn()?;
+let _status = child.wait()?; // 等待子进程完成，避免僵尸进程
 ```
 
 ## 进程间通信
@@ -61,6 +100,9 @@ A:
 A: 使用两个管道或套接字：
 
 ```rust
+use std::process::{Command, Stdio};
+use std::io::Write;
+
 let mut child = Command::new("process")
     .stdin(Stdio::piped())
     .stdout(Stdio::piped())
@@ -85,12 +127,72 @@ A: 取决于使用场景：
 A: 使用适当的错误处理策略：
 
 ```rust
-match ipc_operation() {
-    Ok(result) => println!("Success: {:?}", result),
-    Err(e) => {
-        eprintln!("IPC error: {}", e);
-        // 实现重试或降级逻辑
+use std::sync::mpsc;
+
+fn ipc_operation() -> Result<String, Box<dyn std::error::Error>> {
+    let (tx, rx) = mpsc::channel();
+    
+    match rx.recv_timeout(std::time::Duration::from_secs(5)) {
+        Ok(result) => Ok(result),
+        Err(mpsc::RecvTimeoutError::Timeout) => {
+            Err("IPC timeout".into())
+        }
+        Err(mpsc::RecvTimeoutError::Disconnected) => {
+            Err("IPC disconnected".into())
+        }
     }
+}
+```
+
+### Q: 如何实现命名管道？
+
+A: 在 Unix 系统上使用 `mkfifo`：
+
+```rust
+use std::fs::File;
+use std::io::{Read, Write};
+
+#[cfg(unix)]
+fn named_pipe_example() -> std::io::Result<()> {
+    let pipe_path = "/tmp/my_pipe";
+    
+    // 创建命名管道
+    unsafe {
+        use std::os::unix::fs::FileTypeExt;
+        std::os::unix::fs::mkfifo(pipe_path, 0o666)?;
+    }
+    
+    // 写入数据
+    let mut file = File::create(pipe_path)?;
+    file.write_all(b"Hello from writer!")?;
+    
+    Ok(())
+}
+```
+
+### Q: 如何实现进程间共享内存？
+
+A: 使用内存映射文件：
+
+```rust
+use memmap2::MmapMut;
+use std::fs::OpenOptions;
+
+fn shared_memory_example() -> std::io::Result<()> {
+    let file = OpenOptions::new()
+        .read(true)
+        .write(true)
+        .create(true)
+        .open("shared_data.bin")?;
+    
+    file.set_len(1024)?;
+    let mut mmap = unsafe { MmapMut::map_mut(&file)? };
+    
+    // 写入数据
+    mmap[0..8].copy_from_slice(&42u64.to_le_bytes());
+    mmap.flush()?;
+    
+    Ok(())
 }
 ```
 
@@ -98,331 +200,493 @@ match ipc_operation() {
 
 ### Q: Mutex 和 RwLock 如何选择？
 
-A:
+A: 根据访问模式选择：
 
-- **Mutex**: 适用于读写频率相当或写操作较多
-- **RwLock**: 适用于读操作远多于写操作
+- **Mutex**: 适用于独占访问，简单高效
+- **RwLock**: 适用于读多写少的场景，允许多个读取者
+
+```rust
+use std::sync::{Mutex, RwLock};
+
+// 独占访问
+let data = Mutex::new(vec![1, 2, 3]);
+let mut guard = data.lock().unwrap();
+guard.push(4);
+
+// 读写分离
+let data = RwLock::new(vec![1, 2, 3]);
+{
+    let reader = data.read().unwrap(); // 多个读取者
+    println!("{:?}", *reader);
+}
+{
+    let mut writer = data.write().unwrap(); // 单个写入者
+    writer.push(4);
+}
+```
 
 ### Q: 如何避免死锁？
 
-A:
+A: 使用一致的锁顺序和超时机制：
 
-1. 遵循固定的资源获取顺序
-2. 使用超时机制
-3. 避免嵌套锁
-4. 使用资源分配图检测
+```rust
+use std::sync::{Mutex, MutexGuard};
+use std::time::Duration;
+
+fn avoid_deadlock() {
+    let mutex1 = Mutex::new(1);
+    let mutex2 = Mutex::new(2);
+    
+    // 一致的锁顺序
+    let guard1 = mutex1.lock().unwrap();
+    let guard2 = mutex2.lock().unwrap();
+    
+    // 或者使用 try_lock 避免阻塞
+    if let Ok(guard1) = mutex1.try_lock() {
+        if let Ok(guard2) = mutex2.try_lock() {
+            // 成功获取两个锁
+        }
+    }
+}
+```
 
 ### Q: 原子操作和锁有什么区别？
 
-A:
-
-- **原子操作**: 无锁，性能高，但功能有限
-- **锁**: 功能强大，但可能有性能开销
-
-### Q: 何时使用条件变量？
-
-A: 当需要线程间协调时使用：
+A: 原子操作更轻量，适用于简单操作：
 
 ```rust
-let mutex = Arc::new(Mutex::new(false));
-let condvar = Arc::new(Condvar::new());
+use std::sync::atomic::{AtomicUsize, Ordering};
 
-// 等待条件
-let mut guard = mutex.lock().unwrap();
-while !*guard {
-    guard = condvar.wait(guard).unwrap();
+let counter = AtomicUsize::new(0);
+
+// 原子操作 - 无锁，性能高
+counter.fetch_add(1, Ordering::SeqCst);
+
+// 锁 - 适用于复杂操作
+let mutex_counter = Mutex::new(0);
+let mut guard = mutex_counter.lock().unwrap();
+*guard += 1;
+```
+
+### Q: 如何实现条件变量？
+
+A: 使用 `Condvar` 进行线程协调：
+
+```rust
+use std::sync::{Arc, Mutex, Condvar};
+use std::thread;
+
+fn condition_variable_example() {
+    let pair = Arc::new((Mutex::new(false), Condvar::new()));
+    let pair2 = pair.clone();
+    
+    // 等待线程
+    let waiter = thread::spawn(move || {
+        let (lock, cvar) = &*pair2;
+        let mut started = lock.lock().unwrap();
+        while !*started {
+            started = cvar.wait(started).unwrap();
+        }
+        println!("Condition met!");
+    });
+    
+    // 通知线程
+    thread::sleep(Duration::from_millis(100));
+    let (lock, cvar) = &*pair;
+    let mut started = lock.lock().unwrap();
+    *started = true;
+    cvar.notify_one();
+    
+    waiter.join().unwrap();
+}
+```
+
+### Q: 如何实现无锁数据结构？
+
+A: 使用原子操作和 CAS（Compare-And-Swap）：
+
+```rust
+use std::sync::atomic::{AtomicPtr, Ordering};
+use std::ptr;
+
+struct LockFreeStack<T> {
+    head: AtomicPtr<Node<T>>,
 }
 
-// 通知其他线程
-*guard = true;
-condvar.notify_one();
+struct Node<T> {
+    data: T,
+    next: AtomicPtr<Node<T>>,
+}
+
+impl<T> LockFreeStack<T> {
+    fn new() -> Self {
+        LockFreeStack {
+            head: AtomicPtr::new(ptr::null_mut()),
+        }
+    }
+    
+    fn push(&self, data: T) {
+        let new_node = Box::into_raw(Box::new(Node {
+            data,
+            next: AtomicPtr::new(ptr::null_mut()),
+        }));
+        
+        loop {
+            let head = self.head.load(Ordering::Acquire);
+            unsafe {
+                (*new_node).next.store(head, Ordering::Release);
+            }
+            
+            if self.head.compare_exchange_weak(
+                head,
+                new_node,
+                Ordering::Release,
+                Ordering::Relaxed,
+            ).is_ok() {
+                break;
+            }
+        }
+    }
+}
 ```
 
 ## 性能优化
 
-### Q: 如何提高进程创建性能？
+### Q: 如何优化进程创建的性能？
 
-A:
+A: 使用进程池和预创建：
 
-1. 使用进程池预创建进程
-2. 减少环境变量设置
-3. 使用 `spawn()` 而不是 `output()`
-4. 复用进程而不是重新创建
+```rust
+use std::sync::mpsc;
+use std::thread;
+
+struct ProcessPool {
+    workers: Vec<thread::JoinHandle<()>>,
+    sender: mpsc::Sender<ProcessTask>,
+}
+
+impl ProcessPool {
+    fn new(size: usize) -> Self {
+        let (sender, receiver) = mpsc::channel();
+        let receiver = Arc::new(Mutex::new(receiver));
+        
+        let mut workers = Vec::new();
+        for _ in 0..size {
+            let receiver = receiver.clone();
+            workers.push(thread::spawn(move || {
+                while let Ok(task) = receiver.lock().unwrap().recv() {
+                    // 处理任务
+                }
+            }));
+        }
+        
+        ProcessPool { workers, sender }
+    }
+}
+```
 
 ### Q: 如何优化 IPC 性能？
 
-A:
+A: 使用零拷贝和批量传输：
 
-1. 使用共享内存传输大数据
-2. 批量处理小消息
-3. 使用零复制技术
-4. 选择合适的 IPC 机制
+```rust
+use std::sync::Arc;
 
-### Q: 如何减少锁竞争？
+struct ZeroCopyBuffer {
+    data: Arc<[u8]>,
+    ref_count: Arc<AtomicUsize>,
+}
 
-A:
-
-1. 使用细粒度锁
-2. 减少锁持有时间
-3. 使用无锁数据结构体体体
-4. 采用读写锁分离
+impl ZeroCopyBuffer {
+    fn new(data: Vec<u8>) -> Self {
+        ZeroCopyBuffer {
+            data: Arc::from(data),
+            ref_count: Arc::new(AtomicUsize::new(1)),
+        }
+    }
+    
+    fn clone(&self) -> Self {
+        self.ref_count.fetch_add(1, Ordering::SeqCst);
+        ZeroCopyBuffer {
+            data: self.data.clone(),
+            ref_count: self.ref_count.clone(),
+        }
+    }
+}
+```
 
 ### Q: 如何监控进程性能？
 
-A:
+A: 使用性能指标和监控工具：
 
-1. 使用系统监控工具
-2. 记录关键指标
-3. 设置性能基准
-4. 进行压力测试
+```rust
+use std::time::{Duration, Instant};
+
+struct PerformanceMonitor {
+    start_time: Instant,
+    request_count: AtomicUsize,
+    total_response_time: AtomicU64,
+}
+
+impl PerformanceMonitor {
+    fn new() -> Self {
+        PerformanceMonitor {
+            start_time: Instant::now(),
+            request_count: AtomicUsize::new(0),
+            total_response_time: AtomicU64::new(0),
+        }
+    }
+    
+    fn record_request(&self, response_time: Duration) {
+        self.request_count.fetch_add(1, Ordering::Relaxed);
+        self.total_response_time.fetch_add(
+            response_time.as_millis() as u64,
+            Ordering::Relaxed
+        );
+    }
+    
+    fn get_stats(&self) -> PerformanceStats {
+        let count = self.request_count.load(Ordering::Relaxed);
+        let total_time = self.total_response_time.load(Ordering::Relaxed);
+        
+        PerformanceStats {
+            request_count: count,
+            average_response_time: if count > 0 {
+                Duration::from_millis(total_time / count as u64)
+            } else {
+                Duration::from_millis(0)
+            },
+            uptime: self.start_time.elapsed(),
+        }
+    }
+}
+```
 
 ## 错误处理
 
-### Q: 如何处理进程崩溃？
+### Q: 如何处理进程启动失败？
 
-A:
+A: 使用适当的错误处理和重试机制：
 
 ```rust
-match child.wait() {
-    Ok(status) => {
-        if !status.success() {
-            eprintln!("Process failed with status: {}", status);
+use std::process::Command;
+use std::time::Duration;
+
+fn start_process_with_retry(command: &str, max_retries: u32) -> Result<(), Box<dyn std::error::Error>> {
+    for attempt in 1..=max_retries {
+        match Command::new(command).spawn() {
+            Ok(_) => return Ok(()),
+            Err(e) => {
+                eprintln!("Attempt {} failed: {}", attempt, e);
+                if attempt < max_retries {
+                    std::thread::sleep(Duration::from_secs(1));
+                }
+            }
         }
     }
-    Err(e) => {
-        eprintln!("Process error: {}", e);
-        // 实现恢复逻辑
+    Err("Failed to start process after all retries".into())
+}
+```
+
+### Q: 如何处理 IPC 超时？
+
+A: 使用超时机制和错误恢复：
+
+```rust
+use std::sync::mpsc;
+use std::time::Duration;
+
+fn ipc_with_timeout<T>(receiver: &mpsc::Receiver<T>, timeout: Duration) -> Result<T, String> {
+    match receiver.recv_timeout(timeout) {
+        Ok(value) => Ok(value),
+        Err(mpsc::RecvTimeoutError::Timeout) => {
+            Err("IPC timeout".to_string())
+        }
+        Err(mpsc::RecvTimeoutError::Disconnected) => {
+            Err("IPC disconnected".to_string())
+        }
     }
 }
 ```
 
 ### Q: 如何处理资源泄漏？
 
-A:
-
-1. 使用 RAII 模式
-2. 实现 Drop trait
-3. 使用智能指针
-4. 定期检查资源使用
-
-### Q: 如何实现优雅关闭？
-
-A:
+A: 使用 RAII 模式和自动清理：
 
 ```rust
-// 设置信号处理器
-ctrlc::set_handler(move || {
-    println!("Shutting down gracefully...");
-    // 清理资源
-    std::process::exit(0);
-})?;
+use std::sync::{Arc, Mutex};
+use std::sync::atomic::{AtomicUsize, Ordering};
 
-// 等待信号
-loop {
-    thread::sleep(Duration::from_millis(100));
+struct ResourceManager {
+    resources: Arc<Mutex<Vec<Resource>>>,
+    ref_count: Arc<AtomicUsize>,
 }
-```
 
-### Q: 如何处理超时？
+impl ResourceManager {
+    fn new() -> Self {
+        ResourceManager {
+            resources: Arc::new(Mutex::new(Vec::new())),
+            ref_count: Arc::new(AtomicUsize::new(1)),
+        }
+    }
+    
+    fn clone(&self) -> Self {
+        self.ref_count.fetch_add(1, Ordering::SeqCst);
+        ResourceManager {
+            resources: self.resources.clone(),
+            ref_count: self.ref_count.clone(),
+        }
+    }
+}
 
-A:
-
-```rust
-use std::time::Duration;
-
-let timeout = Duration::from_secs(5);
-match child.wait_timeout(timeout)? {
-    Some(status) => println!("Process completed: {:?}", status),
-    None => {
-        child.kill()?;
-        println!("Process timed out, killed");
+impl Drop for ResourceManager {
+    fn drop(&mut self) {
+        if self.ref_count.fetch_sub(1, Ordering::SeqCst) == 1 {
+            // 最后一个引用，清理资源
+            if let Ok(mut resources) = self.resources.lock() {
+                resources.clear();
+            }
+        }
     }
 }
 ```
 
-## 跨平台兼容
+## 跨平台兼容性
 
-### Q: 如何处理平台差异？
+### Q: 如何处理不同平台的差异？
 
-A:
-
-1. 使用条件编译 `#[cfg(target_os = "linux")]`
-2. 创建平台抽象层
-3. 使用跨平台库
-4. 测试所有目标平台
-
-### Q: Windows 和 Unix 的 IPC 有什么区别？
-
-A:
-
-- **Windows**: 使用命名管道、共享内存、消息队列
-- **Unix**: 使用管道、共享内存、套接字、信号
-
-### Q: 如何实现跨平台进程管理？
-
-A:
+A: 使用条件编译和平台抽象：
 
 ```rust
 #[cfg(target_os = "windows")]
-fn create_process_windows() -> Result<Child, io::Error> {
-    // Windows 特定实现
+fn get_process_info(pid: u32) -> Result<ProcessInfo, Box<dyn std::error::Error>> {
+    // Windows 特定的实现
+    Ok(ProcessInfo::new())
 }
 
-#[cfg(target_os = "linux")]
-fn create_process_linux() -> Result<Child, io::Error> {
-    // Linux 特定实现
+#[cfg(not(target_os = "windows"))]
+fn get_process_info(pid: u32) -> Result<ProcessInfo, Box<dyn std::error::Error>> {
+    // Unix 特定的实现
+    Ok(ProcessInfo::new())
 }
 
-fn create_process() -> Result<Child, io::Error> {
-    #[cfg(target_os = "windows")]
-    return create_process_windows();
-    
-    #[cfg(target_os = "linux")]
-    return create_process_linux();
+trait PlatformProcessManager {
+    fn create_process(&self, command: &str) -> Result<Child, Box<dyn std::error::Error>>;
+    fn kill_process(&self, pid: u32) -> Result<(), Box<dyn std::error::Error>>;
 }
 ```
 
-### Q: 如何处理不同平台的信号？
+### Q: 如何处理信号？
 
-A:
+A: 使用跨平台的信号处理：
 
 ```rust
-#[cfg(target_os = "windows")]
-fn handle_signal() {
-    // Windows 信号处理
-}
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::Arc;
 
-#[cfg(target_os = "linux")]
-fn handle_signal() {
-    // Unix 信号处理
+fn signal_handling() -> Result<(), Box<dyn std::error::Error>> {
+    let running = Arc::new(AtomicBool::new(true));
+    let running_clone = running.clone();
+    
+    ctrlc::set_handler(move || {
+        running_clone.store(false, Ordering::SeqCst);
+    })?;
+    
+    while running.load(Ordering::SeqCst) {
+        // 主程序逻辑
+        std::thread::sleep(Duration::from_millis(100));
+    }
+    
+    Ok(())
 }
 ```
 
-## 安全考虑
+## 调试和诊断
 
-### Q: 如何防止命令注入？
+### Q: 如何调试进程间通信问题？
 
-A:
-
-1. 验证和清理输入
-2. 使用参数化命令
-3. 限制进程权限
-4. 使用沙箱环境
-
-### Q: 如何保护敏感数据？
-
-A:
-
-1. 使用加密通信
-2. 限制内存访问
-3. 及时清理敏感数据
-4. 使用安全通道
-
-### Q: 如何实现权限控制？
-
-A:
-
-1. 使用最小权限原则
-2. 实现访问控制列表
-3. 使用用户和组权限
-4. 审计进程活动
-
-### Q: 如何防止资源耗尽？
-
-A:
-
-1. 设置资源限制
-2. 实现资源配额
-3. 监控资源使用
-4. 实现自动清理
-
-## 调试和测试
-
-### Q: 如何调试进程间通信？
-
-A:
-
-1. 使用日志记录
-2. 添加调试信息
-3. 使用调试工具
-4. 实现错误追踪
-
-### Q: 如何测试 IPC 代码？
-
-A:
+A: 使用日志和调试工具：
 
 ```rust
-#[test]
-fn test_ipc_communication() {
-    // 设置测试环境
-    let mut child = Command::new("echo")
-        .arg("test")
-        .stdout(Stdio::piped())
-        .spawn()
-        .unwrap();
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+struct IPCDebugger {
+    message_count: AtomicUsize,
+    error_count: AtomicUsize,
+}
+
+impl IPCDebugger {
+    fn new() -> Self {
+        IPCDebugger {
+            message_count: AtomicUsize::new(0),
+            error_count: AtomicUsize::new(0),
+        }
+    }
     
-    let output = child.wait_with_output().unwrap();
-    assert!(output.status.success());
-    assert_eq!(String::from_utf8_lossy(&output.stdout).trim(), "test");
+    fn log_message(&self, message: &str) {
+        let count = self.message_count.fetch_add(1, Ordering::Relaxed);
+        println!("IPC Message #{}: {}", count + 1, message);
+    }
+    
+    fn log_error(&self, error: &str) {
+        let count = self.error_count.fetch_add(1, Ordering::Relaxed);
+        eprintln!("IPC Error #{}: {}", count + 1, error);
+    }
 }
 ```
 
-### Q: 如何模拟进程故障？
+### Q: 如何诊断性能问题？
 
-A:
+A: 使用性能分析工具和指标：
 
-1. 创建故障注入机制
-2. 使用测试框架
-3. 模拟网络故障
-4. 测试错误恢复
+```rust
+use std::time::{Duration, Instant};
 
-### Q: 如何性能测试？
+struct PerformanceProfiler {
+    measurements: Vec<Duration>,
+}
 
-A:
-
-1. 使用基准测试
-2. 测量关键指标
-3. 进行压力测试
-4. 分析性能瓶颈
-
-## 最佳实践
-
-### Q: 什么时候使用进程而不是线程？
-
-A:
-
-- 需要强隔离时
-- 需要不同的权限时
-- 需要容错性时
-- 需要跨机器分布时
-
-### Q: 如何选择合适的 IPC 机制？
-
-A:
-
-- **管道**: 简单通信，父子进程
-- **共享内存**: 大数据传输，高性能
-- **消息队列**: 异步通信，解耦
-- **套接字**: 网络通信，跨机器
-
-### Q: 如何设计可扩展的进程架构？
-
-A:
-
-1. 使用微服务架构
-2. 实现负载均衡
-3. 设计故障恢复
-4. 考虑水平扩展
-
-### Q: 如何维护进程代码？
-
-A:
-
-1. 编写清晰的文档
-2. 使用版本控制
-3. 实现自动化测试
-4. 定期代码审查
+impl PerformanceProfiler {
+    fn new() -> Self {
+        PerformanceProfiler {
+            measurements: Vec::new(),
+        }
+    }
+    
+    fn measure<F, R>(&mut self, f: F) -> R
+    where
+        F: FnOnce() -> R,
+    {
+        let start = Instant::now();
+        let result = f();
+        let duration = start.elapsed();
+        self.measurements.push(duration);
+        result
+    }
+    
+    fn get_statistics(&self) -> PerformanceStatistics {
+        if self.measurements.is_empty() {
+            return PerformanceStatistics::default();
+        }
+        
+        let total: Duration = self.measurements.iter().sum();
+        let count = self.measurements.len();
+        let average = total / count as u32;
+        
+        let min = self.measurements.iter().min().unwrap();
+        let max = self.measurements.iter().max().unwrap();
+        
+        PerformanceStatistics {
+            count,
+            total,
+            average,
+            min: *min,
+            max: *max,
+        }
+    }
+}
+```
 
 ---
 
-*本 FAQ 涵盖了进程、通信与同步机制模块的常见问题。如有其他问题，请参考相关章节或提交 Issue。*
+*本 FAQ 涵盖了进程、通信与同步机制模块中最常见的问题和解决方案，为开发者提供实用的参考指南。*
