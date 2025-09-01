@@ -37,9 +37,11 @@
 #### 1.1 GAT (Generic Associated Types) 术语统一
 
 **执行文件**:
+
 - `formal_rust/language/28_advanced_type_features/07_generic_associated_types.md`
 
 **标准化内容**:
+
 - ✅ 统一术语格式：`泛型关联类型 (Generic Associated Types, GATs)`
 - ✅ 标准化英文对照：所有首次出现都提供完整英文术语
 - ✅ 统一数学符号表示
@@ -48,9 +50,11 @@
 #### 1.2 高阶类型 (Higher-Kinded Types) 术语标准化
 
 **执行文件**:
+
 - `formal_rust/language/28_advanced_type_features/01_higher_kinded_types.md`
 
 **标准化内容**:
+
 - ✅ 统一术语格式：`高阶类型 (Higher-Kinded Types, HKTs)`
 - ✅ 标准化相关术语：一阶类型、高阶函数等
 - ✅ 统一数学符号表示
@@ -59,9 +63,11 @@
 #### 1.3 类型级编程 (Type-Level Programming) 术语标准化
 
 **执行文件**:
+
 - `formal_rust/language/28_advanced_type_features/03_type_level_programming.md`
 
 **标准化内容**:
+
 - ✅ 统一术语格式：`类型级编程 (Type-Level Programming)`
 - ✅ 标准化相关术语：依赖类型、柯里-霍华德同构等
 - ✅ 统一数学符号表示
@@ -70,9 +76,11 @@
 #### 1.4 幻影类型 (Phantom Types) 术语标准化
 
 **执行文件**:
+
 - `formal_rust/language/28_advanced_type_features/04_phantom_and_zero_sized_types.md`
 
 **标准化内容**:
+
 - ✅ 统一术语格式：`幻影类型 (Phantom Types)`
 - ✅ 标准化相关术语：零大小类型 (Zero-Sized Types, ZSTs)
 - ✅ 统一数学符号表示
@@ -83,9 +91,11 @@
 #### 2.1 分离逻辑术语标准化
 
 **执行文件**:
+
 - `formal_rust/language/05_formal_verification/01_verification_foundations.md`
 
 **标准化内容**:
+
 - ✅ 统一术语格式：`分离逻辑 (Separation Logic)`
 - ✅ 标准化线性类型理论：`线性类型理论 (Linear Type Theory)`
 - ✅ 统一数学符号表示
@@ -94,9 +104,11 @@
 #### 2.2 验证工具术语标准化
 
 **执行文件**:
+
 - `formal_rust/language/05_formal_verification/01_verification_foundations.md`
 
 **标准化内容**:
+
 - ✅ 统一 Prusti 工具描述
 - ✅ 标准化 MIRAI 工具描述
 - ✅ 统一 Creusot 工具描述
@@ -107,9 +119,11 @@
 #### 3.1 核心工具术语标准化
 
 **执行文件**:
+
 - `formal_rust/language/26_toolchain_ecosystem/01_formal_theory.md`
 
 **标准化内容**:
+
 - ✅ 统一 rustc 编译器术语：`rustc 编译器`
 - ✅ 标准化 cargo 包管理器术语：`cargo 包管理器`
 - ✅ 统一工具描述格式
@@ -118,9 +132,11 @@
 #### 3.2 工具链架构术语标准化
 
 **执行文件**:
+
 - `formal_rust/language/26_toolchain_ecosystem/00_index.md`
 
 **标准化内容**:
+
 - ✅ 统一工具链生态系统描述
 - ✅ 标准化工具集成术语
 - ✅ 统一架构描述格式
@@ -131,9 +147,11 @@
 #### 4.1 宏类型术语标准化
 
 **执行文件**:
+
 - `formal_rust/language/07_macro_system/01_formal_macro_system.md`
 
 **标准化内容**:
+
 - ✅ 统一声明宏术语：`声明宏 (Declarative Macros)`
 - ✅ 标准化过程宏术语：`过程宏 (Procedural Macros)`
 - ✅ 统一宏系统描述
@@ -142,9 +160,11 @@
 #### 4.2 宏机制术语标准化
 
 **执行文件**:
+
 - `formal_rust/language/07_macro_system/`
 
 **标准化内容**:
+
 - ✅ 统一宏展开术语
 - ✅ 标准化宏规则术语
 - ✅ 统一宏模式匹配术语
@@ -155,9 +175,11 @@
 #### 5.1 模块组织术语标准化
 
 **执行文件**:
+
 - `formal_rust/language/10_modules/01_formal_theory.md`
 
 **标准化内容**:
+
 - ✅ 统一模块术语：`模块 (Module)`
 - ✅ 标准化包术语：`包 (Crate)`
 - ✅ 统一可见性术语
@@ -166,9 +188,11 @@
 #### 5.2 模块关系术语标准化
 
 **执行文件**:
+
 - `formal_rust/language/10_modules/`
 
 **标准化内容**:
+
 - ✅ 统一导入导出术语
 - ✅ 标准化路径解析术语
 - ✅ 统一依赖关系术语

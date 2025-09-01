@@ -1,5 +1,7 @@
 ﻿# 验证理论基础
 
+**术语标准化**: 🔄 进行中 - 数学符号标准化
+
 ## 目录
 
 - [验证理论基础](#验证理论基础)
@@ -53,11 +55,11 @@
 
 ### 1. 形式化验证定义
 
-**定义 1.1**: 形式化验证是一个三元组 V = (S, P, M)，其中：
+**定义 1.1**: 形式化验证是一个三元组 $V = (S, P, M)$，其中：
 
-- S: 系统规范 (System Specification)
-- P: 程序实现 (Program Implementation)  
-- M: 验证方法 (Verification Method)
+- $S$: 系统规范 (System Specification)
+- $P$: 程序实现 (Program Implementation)  
+- $M$: 验证方法 (Verification Method)
 
 **定义 1.2**: 正确性谓词 Correct(P, S) 当且仅当：
 
