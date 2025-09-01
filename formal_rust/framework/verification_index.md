@@ -29,9 +29,21 @@
 - 16 教育课程设计: `educational_course_design.md`
 - 17 Rust 2024实施计划: `rust_2024_implementation_plan.md`
 - 18 综合对标分析报告: `benchmarking_comprehensive_report.md`
-- 19 数学符号标准化: `mathematical_notation_standardization.md`
-- 20 形式化验证框架: `formal_verification_framework_v2.md`
-- 21 框架扩展: `formal_verification_framework_extension.md`
+- 19 Rust 2024实施计划: `rust_2024_implementation_plan.md`
+- 20 实施计划完成状态报告: `implementation_completion_report.md`
+- 21 总体完成报告: `final_completion_summary.md`
+- 22 数学符号标准化: `mathematical_notation_standardization.md`
+- 23 形式化验证框架: `formal_verification_framework_v2.md`
+- 24 框架扩展: `formal_verification_framework_extension.md`
+
+## 第一阶段实施文档
+
+- 25 异步Trait形式化定义: `implementation/phase1_theoretical/async_traits/async_trait_formal_definition.md`
+- 26 GATs形式化定义: `implementation/phase1_theoretical/gats/gats_formal_definition.md`
+- 27 常量泛型形式化定义: `implementation/phase1_theoretical/const_generics/const_generics_formal_definition.md`
+- 28 生命周期改进形式化定义: `implementation/phase1_theoretical/lifetimes/lifetime_improvements_formal_definition.md`
+- 29 第一阶段实施进度报告: `implementation/phase1_theoretical/phase1_implementation_progress_report.md`
+- 30 第一阶段完成确认报告: `implementation/phase1_theoretical/phase1_completion_confirmation.md`
 
 ## 范围
 
