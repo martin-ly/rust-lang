@@ -19,7 +19,7 @@
 
 ## 目录结构
 
-```
+```text
 crates/c05_threads/
 ├── README.md                           # 模块总览
 ├── Cargo.toml                         # 依赖配置
