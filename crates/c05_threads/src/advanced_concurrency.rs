@@ -6,8 +6,8 @@
 //! - 无锁数据结构
 //! - 并发性能优化技术
 
-use std::sync::atomic::{AtomicUsize, AtomicBool, Ordering};
-use std::sync::{Arc, Mutex, Condvar};
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::{Arc, Mutex};
 use std::collections::VecDeque;
 use std::thread;
 use std::time::Duration;
@@ -65,19 +65,19 @@ impl HighPerformanceThreadPool {
         T: Send + 'static,
     {
         let (tx, rx) = crossbeam_channel::bounded(tasks.len());
-        let tasks: Vec<Box<dyn FnOnce() + Send + 'static>> = tasks
-            .into_iter()
-            .map(|task| {
-                let tx = tx.clone();
-                Box::new(move || {
-                    let result = task();
-                    let _ = tx.send(result);
-                })
-            })
-            .collect();
+        let mut task_boxes = Vec::new();
+        
+        for task in tasks {
+            let tx = tx.clone();
+            let boxed_task = Box::new(move || {
+                let result = task();
+                let _ = tx.send(result);
+            });
+            task_boxes.push(boxed_task);
+        }
         
         // 提交所有任务
-        for task in tasks {
+        for task in task_boxes {
             self.execute(task);
         }
         
@@ -446,8 +446,8 @@ pub fn parallel_reduce<T, F>(
     op: F,
 ) -> T
 where
-    T: Send + Sync + Clone,
-    F: Fn(T, &T) -> T + Send + Sync,
+    T: Send + Sync + Clone + 'static,
+    F: Fn(T, &T) -> T + Send + Sync + Clone + 'static,
 {
     if data.is_empty() {
         return identity;
@@ -461,6 +461,8 @@ where
         .map(|i| {
             let data = Arc::clone(&data);
             let results = Arc::clone(&results);
+            let identity = identity.clone();
+            let op = op.clone();
             
             thread::spawn(move || {
                 let start = i * chunk_size;
@@ -468,7 +470,7 @@ where
                 
                 if start < end {
                     let chunk = &data[start..end];
-                    let local_result = chunk.iter().fold(identity.clone(), |acc, x| op(acc, x));
+                    let local_result = chunk.iter().fold(identity, |acc, x| op(acc, x));
                     
                     let mut results = results.lock().unwrap();
                     results.push(local_result);
@@ -492,9 +494,9 @@ pub fn parallel_map<T, U, F>(
     f: F,
 ) -> Vec<U>
 where
-    T: Send + Sync,
-    U: Send + Sync + Default + Clone,
-    F: Fn(&T) -> U + Send + Sync,
+    T: Send + Sync + Clone,
+    U: Send + Sync + Default + Clone + std::fmt::Debug,
+    F: Fn(&T) -> U + Send + Sync + Clone + 'static,
 {
     if data.is_empty() {
         return Vec::new();
@@ -508,6 +510,7 @@ where
         .map(|i| {
             let data = Arc::clone(&data);
             let results = Arc::clone(&results);
+            let f = f.clone();
             
             thread::spawn(move || {
                 let start = i * chunk_size;
@@ -613,7 +616,7 @@ mod tests {
     #[test]
     fn test_parallel_map() {
         let data = vec![1, 2, 3, 4, 5];
-        let result = parallel_map(&data, 2, |x| x * 2);
+        let result = parallel_map(&data, 2, |&x| x * 2);
         
         assert_eq!(result, vec![2, 4, 6, 8, 10]);
     }

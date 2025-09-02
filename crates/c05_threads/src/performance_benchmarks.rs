@@ -6,10 +6,9 @@
 //! - 并发算法性能基准
 //! - 内存分配性能测试
 
-use std::time::{Duration, Instant};
+use std::time::Instant;
 use std::sync::{Arc, Mutex};
 use std::thread;
-use std::sync::atomic::{AtomicUsize, Ordering};
 use rayon::prelude::*;
 
 use super::advanced_concurrency::{
@@ -65,7 +64,7 @@ pub fn benchmark_thread_pools(config: &BenchmarkConfig) -> Vec<BenchmarkResult> 
     let mut results = Vec::new();
     
     // 准备测试数据
-    let data: Vec<i32> = (0..config.data_size).collect();
+    let data: Vec<i32> = (0..config.data_size as i32).collect();
     
     for &thread_count in &config.thread_counts {
         // 测试标准线程池
@@ -108,7 +107,7 @@ fn benchmark_standard_thread_pool(
     
     let avg_time = times.iter().sum::<f64>() / times.len() as f64;
     let min_time = times.iter().fold(f64::INFINITY, |a, &b| a.min(b));
-    let max_time = times.iter().fold(0.0, |a, &b| a.max(b));
+    let max_time = times.iter().fold(0.0_f64, |a, &b| a.max(b));
     
     BenchmarkResult {
         name: "标准线程池".to_string(),
@@ -148,7 +147,7 @@ fn benchmark_high_performance_thread_pool(
     
     let avg_time = times.iter().sum::<f64>() / times.len() as f64;
     let min_time = times.iter().fold(f64::INFINITY, |a, &b| a.min(b));
-    let max_time = times.iter().fold(0.0, |a, &b| a.max(b));
+    let max_time = times.iter().fold(0.0_f64, |a, &b| a.max(b));
     
     BenchmarkResult {
         name: "高性能线程池".to_string(),
@@ -193,7 +192,7 @@ fn benchmark_rayon_thread_pool(
     
     let avg_time = times.iter().sum::<f64>() / times.len() as f64;
     let min_time = times.iter().fold(f64::INFINITY, |a, &b| a.min(b));
-    let max_time = times.iter().fold(0.0, |a, &b| a.max(b));
+    let max_time = times.iter().fold(0.0_f64, |a, &b| a.max(b));
     
     BenchmarkResult {
         name: "Rayon线程池".to_string(),
@@ -257,22 +256,22 @@ fn process_data_high_performance_thread_pool(
     let chunk_size = (data.len() + 4 - 1) / 4; // 假设4个工作线程
     let mut results = vec![0; data.len()];
     
-    let tasks: Vec<Box<dyn FnOnce() + Send + 'static>> = (0..4)
-        .map(|i| {
-            let data = data.to_vec();
-            let start = i * chunk_size;
-            let end = std::cmp::min(start + chunk_size, data.len());
+    let mut tasks = Vec::new();
+    for i in 0..4 {
+        let data = data.to_vec();
+        let start = i * chunk_size;
+        let end = std::cmp::min(start + chunk_size, data.len());
+        
+        let task = move || {
+            let chunk = &data[start..end];
+            let processed_chunk: Vec<i32> = chunk.iter()
+                .map(|&x| x * 2 + 1)
+                .collect();
             
-            Box::new(move || {
-                let chunk = &data[start..end];
-                let processed_chunk: Vec<i32> = chunk.iter()
-                    .map(|&x| x * 2 + 1)
-                    .collect();
-                
-                (start, processed_chunk)
-            })
-        })
-        .collect();
+            (start, processed_chunk)
+        };
+        tasks.push(task);
+    }
     
     let task_results = pool.execute_batch(tasks);
     
@@ -335,7 +334,7 @@ fn benchmark_lock_free_ring_buffer(config: &BenchmarkConfig) -> BenchmarkResult 
     for _ in 0..config.iterations {
         let start = Instant::now();
         for i in 0..config.data_size {
-            let _ = buffer.try_push(i);
+            buffer.try_push(i).unwrap();
         }
         for _ in 0..config.data_size {
             let _ = buffer.try_pop();
@@ -345,7 +344,7 @@ fn benchmark_lock_free_ring_buffer(config: &BenchmarkConfig) -> BenchmarkResult 
     
     let avg_time = times.iter().sum::<f64>() / times.len() as f64;
     let min_time = times.iter().fold(f64::INFINITY, |a, &b| a.min(b));
-    let max_time = times.iter().fold(0.0, |a, &b| a.max(b));
+    let max_time = times.iter().fold(0.0_f64, |a, &b| a.max(b));
     
     BenchmarkResult {
         name: "无锁环形缓冲区".to_string(),
@@ -379,7 +378,7 @@ fn benchmark_lock_free_stack(config: &BenchmarkConfig) -> BenchmarkResult {
     for _ in 0..config.iterations {
         let start = Instant::now();
         for i in 0..config.data_size {
-            let _ = stack.push(i);
+            stack.push(i).unwrap();
         }
         for _ in 0..config.data_size {
             let _ = stack.pop();
@@ -389,7 +388,7 @@ fn benchmark_lock_free_stack(config: &BenchmarkConfig) -> BenchmarkResult {
     
     let avg_time = times.iter().sum::<f64>() / times.len() as f64;
     let min_time = times.iter().fold(f64::INFINITY, |a, &b| a.min(b));
-    let max_time = times.iter().fold(0.0, |a, &b| a.max(b));
+    let max_time = times.iter().fold(0.0_f64, |a, &b| a.max(b));
     
     BenchmarkResult {
         name: "无锁栈".to_string(),
@@ -433,7 +432,7 @@ fn benchmark_mutex_structures(config: &BenchmarkConfig) -> BenchmarkResult {
     
     let avg_time = times.iter().sum::<f64>() / times.len() as f64;
     let min_time = times.iter().fold(f64::INFINITY, |a, &b| a.min(b));
-    let max_time = times.iter().fold(0.0, |a, &b| a.max(b));
+    let max_time = times.iter().fold(0.0_f64, |a, &b| a.max(b));
     
     BenchmarkResult {
         name: "Mutex保护的数据结构".to_string(),
@@ -453,7 +452,7 @@ fn benchmark_mutex_structures(config: &BenchmarkConfig) -> BenchmarkResult {
 /// 并发算法性能测试
 pub fn benchmark_concurrent_algorithms(config: &BenchmarkConfig) -> Vec<BenchmarkResult> {
     let mut results = Vec::new();
-    let data: Vec<i32> = (0..config.data_size).collect();
+    let data: Vec<i32> = (0..config.data_size as i32).collect();
     
     for &thread_count in &config.thread_counts {
         // 测试并发归约
@@ -496,7 +495,7 @@ fn benchmark_parallel_reduce(
     
     let avg_time = times.iter().sum::<f64>() / times.len() as f64;
     let min_time = times.iter().fold(f64::INFINITY, |a, &b| a.min(b));
-    let max_time = times.iter().fold(0.0, |a, &b| a.max(b));
+    let max_time = times.iter().fold(0.0_f64, |a, &b| a.max(b));
     
     BenchmarkResult {
         name: "并发归约".to_string(),
@@ -535,7 +534,7 @@ fn benchmark_parallel_map(
     
     let avg_time = times.iter().sum::<f64>() / times.len() as f64;
     let min_time = times.iter().fold(f64::INFINITY, |a, &b| a.min(b));
-    let max_time = times.iter().fold(0.0, |a, &b| a.max(b));
+    let max_time = times.iter().fold(0.0_f64, |a, &b| a.max(b));
     
     BenchmarkResult {
         name: "并发映射".to_string(),
@@ -580,7 +579,7 @@ fn benchmark_rayon_algorithms(
     
     let avg_time = times.iter().sum::<f64>() / times.len() as f64;
     let min_time = times.iter().fold(f64::INFINITY, |a, &b| a.min(b));
-    let max_time = times.iter().fold(0.0, |a, &b| a.max(b));
+    let max_time = times.iter().fold(0.0_f64, |a, &b| a.max(b));
     
     BenchmarkResult {
         name: "Rayon并行算法".to_string(),
