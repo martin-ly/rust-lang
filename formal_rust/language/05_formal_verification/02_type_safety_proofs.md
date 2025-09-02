@@ -55,13 +55,11 @@
 
 ### 定理1：内存安全定理 (Memory Safety Theorem)
 
-```text
-∀ p ∈ Program, ∀ t ∈ Time, ∀ m ∈ Memory:
-  TypeCheck(p) = ✓ ⇒ 
-  (NoUseAfterFree(p, t, m) ∧ 
-   NoDoubleDestroy(p, t, m) ∧ 
-   NoNullPointerDeref(p, t, m))
-```
+$$\forall p \in \text{Program}, \forall t \in \text{Time}, \forall m \in \text{Memory}:$$
+$$\text{TypeCheck}(p) = \checkmark \implies$$
+$$(\text{NoUseAfterFree}(p, t, m) \land$$
+$$\text{NoDoubleDestroy}(p, t, m) \land$$
+$$\text{NoNullPointerDeref}(p, t, m))$$
 
 **证明思路**：
 
@@ -71,11 +69,9 @@
 
 ### 定理2：类型安全定理 (Type Safety Theorem)
 
-```text
-∀ p ∈ Program:
-  TypeCheck(p) = ✓ ⇒ 
-  (Progress(p) ∧ Preservation(p))
-```
+$$\forall p \in \text{Program}:$$
+$$\text{TypeCheck}(p) = \checkmark \implies$$
+$$(\text{Progress}(p) \land \text{Preservation}(p))$$
 
 其中：
 

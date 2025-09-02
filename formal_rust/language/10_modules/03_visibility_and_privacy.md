@@ -75,10 +75,8 @@
 
 ### 基础可见性分类
 
-```text
-Visibility ::= Private | Pub(Scope)
-Scope ::= Crate | Super | SelfMod | Path(ModulePath)
-```
+$$\text{Visibility} ::= \text{Private} \mid \text{Pub}(\text{Scope})$$
+$$\text{Scope} ::= \text{Crate} \mid \text{Super} \mid \text{SelfMod} \mid \text{Path}(\text{ModulePath})$$
 
 ### 可见性层次结构体
 

@@ -50,15 +50,15 @@
 
 ### 1. 模块系统形式化定义
 
-**定义 1.1**: 模块空间 ModuleSpace 是一个有向无环图 (DAG)：
+**定义 1.1**: 模块空间 (Module Space) 是一个有向无环图 (DAG)：
 
-```text
-ModuleSpace = (Modules, Dependencies, Resolution)
+$$\text{ModuleSpace} = (\text{Modules}, \text{Dependencies}, \text{Resolution})$$
+
 其中:
-- Modules: 模块集合
-- Dependencies: 依赖关系 ⊆ Modules × Modules  
-- Resolution: Path → Module 的解析函数
-```
+
+- $\text{Modules}$: 模块集合
+- $\text{Dependencies}$: 依赖关系 $\subseteq \text{Modules} \times \text{Modules}$  
+- $\text{Resolution}$: $\text{Path} \to \text{Module}$ 的解析函数
 
 **定义 1.2**: 模块路径解析函数：
 

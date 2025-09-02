@@ -3,7 +3,7 @@
 **文档版本**：V1.0  
 **创建日期**：2025-01-27  
 **类别**：形式化理论  
-**术语标准化**: ✅ 已完成  
+**术语标准化**: 🔄 进行中 - 模块组织术语标准化  
 **交叉引用**：[02_type_system](../02_type_system/01_formal_theory.md), [01_ownership_borrowing](../01_ownership_borrowing/01_formal_theory.md)
 
 ## 目录

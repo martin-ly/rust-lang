@@ -4,7 +4,7 @@
 
 ### 1.1 声明宏定义
 
-声明宏是Rust中最常用的宏形式，通过模式匹配和模板替换实现编译时代码生成。
+声明宏 (Declarative Macros) 是Rust中最常用的宏形式，通过模式匹配和模板替换实现编译时代码生成。
 
 **形式化定义**:
 $$\text{DeclarativeMacro} = \text{macro\_rules!} \quad \text{MacroName} \quad \text{MacroRules}$$

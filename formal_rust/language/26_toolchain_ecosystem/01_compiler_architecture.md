@@ -3,7 +3,7 @@
 **文档编号**: 26.01  
 **版本**: 1.0  
 **创建日期**: 2025-01-27  
-**术语标准化**: ✅ 已完成
+**术语标准化**: 🔄 进行中 - 工具名称翻译统一
 
 ## 目录
 
@@ -63,7 +63,7 @@ impl RustCompiler {
     }
     
     fn compile(&self, source_file: &str) -> Result<(), String> {
-        let mut cmd = Command::new("rustc");
+        let mut cmd = Command::new("rustc"); // Rust编译器
         cmd.arg(source_file)
            .arg("--target").arg(&self.target)
            .arg("-O"); // 优化级别

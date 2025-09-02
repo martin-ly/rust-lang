@@ -248,13 +248,13 @@ $$Boundary(Ecosystem) = Core \cup \{e | Compatible(e, Core)\}$$
 
 Rust工具链包括以下主要组件:
 
-1. **rustc**: Rust编译器
-2. **cargo**: 包管理器和构建工具
-3. **rustup**: 工具链管理器
-4. **rustdoc**: 文档生成工具
-5. **clippy**: 代码分析工具
-6. **rustfmt**: 代码格式化工具
-7. **rust-analyzer**: 语言服务器
+1. **rustc**: Rust编译器 (Rust Compiler)
+2. **cargo**: 包管理器和构建工具 (Package Manager and Build Tool)
+3. **rustup**: 工具链管理器 (Toolchain Manager)
+4. **rustdoc**: 文档生成工具 (Documentation Generator)
+5. **clippy**: 代码分析工具 (Code Analysis Tool)
+6. **rustfmt**: 代码格式化工具 (Code Formatter)
+7. **rust-analyzer**: 语言服务器 (Language Server)
 
 ### rustc 编译器
 

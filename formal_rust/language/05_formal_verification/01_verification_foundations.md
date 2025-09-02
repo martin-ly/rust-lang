@@ -61,11 +61,9 @@
 - $P$: 程序实现 (Program Implementation)  
 - $M$: 验证方法 (Verification Method)
 
-**定义 1.2**: 正确性谓词 Correct(P, S) 当且仅当：
+**定义 1.2**: 正确性谓词 $\text{Correct}(P, S)$ 当且仅当：
 
-```text
-∀ input i. behavior(P, i) ⊨ specification(S, i)
-```
+$$\forall \text{ input } i. \text{behavior}(P, i) \models \text{specification}(S, i)$$
 
 ### 2. Rust验证逻辑
 
@@ -83,9 +81,7 @@ x ↦ v  // x指向值v
 
 **定理 1.1**: 所有权分离性
 
-```text
-∀ x, y: &mut T. x ≠ y ⟹ heap(x) * heap(y)
-```
+$$\forall x, y: \&mut T. x \neq y \implies \text{heap}(x) * \text{heap}(y)$$
 
 #### 2.2 线性类型理论 (Linear Type Theory)
 

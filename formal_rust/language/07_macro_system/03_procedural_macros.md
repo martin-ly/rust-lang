@@ -9,11 +9,11 @@
 
 ## 概述
 
-过程宏(Procedural Macros)是Rust最强大的元编程机制，允许在编译时执行任意代码来生成、修改或分析Rust代码。本文档建立过程宏的形式化理论基础。
+过程宏 (Procedural Macros) 是Rust最强大的元编程机制，允许在编译时执行任意代码来生成、修改或分析Rust代码。本文档建立过程宏的形式化理论基础。
 
 ## 过程宏分类体系
 
-### 1. 函数式过程宏 (Function-like Macros)
+### 1. 函数式过程宏 (Function-like Procedural Macros)
 
 ```rust
 // 形式化定义
@@ -26,7 +26,7 @@ FunctionMacro: TokenStream → TokenStream
 my_macro!(input tokens) → expanded tokens
 ```
 
-### 2. 派生宏 (Derive Macros)
+### 2. 派生宏 (Derive Procedural Macros)
 
 ```rust
 // 形式化定义
@@ -41,7 +41,7 @@ struct Data { ... } → impl Debug for Data { ... }
                    → impl Clone for Data { ... }
 ```
 
-### 3. 属性宏 (Attribute Macros)
+### 3. 属性宏 (Attribute Procedural Macros)
 
 ```rust
 // 形式化定义
