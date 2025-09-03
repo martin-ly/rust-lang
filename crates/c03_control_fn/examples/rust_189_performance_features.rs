@@ -5,9 +5,9 @@
 //! - 内存布局优化
 //! - 编译时计算增强
 //! - 内联优化改进
-
-use std::alloc::{alloc, dealloc, Layout};
-use std::ptr;
+// #[warn(unused_imports)]
+// use std::alloc::{alloc, dealloc, Layout};
+// use std::ptr;
 use std::time::Instant;
 use anyhow::Result;
 
@@ -19,6 +19,7 @@ fn fast_add(a: i32, b: i32) -> i32 {
     a + b
 }
 
+#[allow(dead_code)]
 #[inline(always)]
 fn fast_multiply(a: i32, b: i32) -> i32 {
     a * b
@@ -28,6 +29,7 @@ fn fast_multiply(a: i32, b: i32) -> i32 {
 #[derive(Debug, Clone, Copy)]
 struct OptimizedCalculator;
 
+#[allow(dead_code)]
 impl OptimizedCalculator {
     /// 编译时优化的加法
     #[inline(always)]
@@ -45,11 +47,13 @@ impl OptimizedCalculator {
     #[inline(always)]
     fn complex_calculation(&self, a: i32, b: i32, c: i32) -> i32 {
         let sum = self.add(a, b);
-        self.multiply(sum, c)
+        // 使用checked_mul避免溢出
+        sum.checked_mul(c).unwrap_or(i32::MAX)
     }
 }
 
 /// 零成本抽象：编译时类型擦除
+#[allow(dead_code)]
 trait FastOperation {
     type Input;
     type Output;
@@ -58,6 +62,7 @@ trait FastOperation {
 }
 
 /// 快速加法操作
+#[allow(dead_code)]
 struct FastAdd;
 
 impl FastOperation for FastAdd {
@@ -71,6 +76,7 @@ impl FastOperation for FastAdd {
 }
 
 /// 快速乘法操作
+#[allow(dead_code)]
 struct FastMultiply;
 
 impl FastOperation for FastMultiply {
@@ -84,6 +90,7 @@ impl FastOperation for FastMultiply {
 }
 
 /// 零成本抽象：编译时多态
+#[allow(dead_code)]
 fn execute_operation<T: FastOperation>(op: &T, input: T::Input) -> T::Output {
     op.execute(input)
 }
@@ -245,6 +252,7 @@ fn optimized_math_operations(a: f64, b: f64) -> (f64, f64, f64) {
 
 /// 内联优化：字符串处理
 #[inline(always)]
+#[allow(dead_code)]
 fn optimized_string_operations(s: &str) -> (usize, bool, String) {
     let length = s.len();
     let is_empty = s.is_empty();
@@ -254,6 +262,7 @@ fn optimized_string_operations(s: &str) -> (usize, bool, String) {
 
 /// 内联优化：集合操作
 #[inline(always)]
+#[allow(dead_code)]
 fn optimized_collection_operations<T: Clone>(items: &[T]) -> (usize, bool, Vec<T>) {
     let length = items.len();
     let is_empty = items.is_empty();
@@ -367,7 +376,7 @@ fn optimization_best_practices() {
 /// 主函数
 fn main() -> Result<()> {
     println!("🚀 Rust 1.89 性能优化特性演示");
-    println!("=" * 50);
+    println!("{}", "=".repeat(50));
     
     // 1. 零成本抽象示例
     println!("\n1. 零成本抽象增强示例");

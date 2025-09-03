@@ -42,7 +42,7 @@ impl Future for MyFuture {
         match this.state {
             State::Pending => {
                 // 模拟异步操作
-                cx.waker().wake_by_ref(); // 注册唤醒器
+                cx.waker().wake_by_ref(); // 通知调度器下一轮再 poll
                 this.state = State::Ready(42); // 更新状态为 Ready
                 Poll::Pending // 返回 Pending
             }
@@ -51,4 +51,39 @@ impl Future for MyFuture {
             }
         }
     }
+}
+
+/// 展示手写 Future 的用法
+pub async fn demo_manual_future() -> i32 {
+    // 这里只是演示状态切换；真实延时应交给运行时计时器
+    MyFuture { delay: Duration::from_millis(1), state: State::Pending }.await
+}
+
+/// 展示与 tokio 计时器结合的 Future/Stream 组合子
+pub async fn demo_future_combinators() -> i32 {
+    use futures::{future, FutureExt};
+    use tokio::time::sleep;
+
+    // map/then 链式组合
+    let f1 = async { 21 };
+    let result = f1.map(|x| x * 2).await;
+
+    // select 两个 future，先完成者返回
+    let a = async {
+        sleep(Duration::from_millis(10)).await;
+        1
+    };
+    let b = async {
+        sleep(Duration::from_millis(5)).await;
+        2
+    };
+    futures::pin_mut!(a);
+    futures::pin_mut!(b);
+    let first_done = future::select(a, b).await;
+    let faster_value = match first_done {
+        future::Either::Left((va, _)) => va,
+        future::Either::Right((vb, _)) => vb,
+    };
+
+    result + faster_value
 }

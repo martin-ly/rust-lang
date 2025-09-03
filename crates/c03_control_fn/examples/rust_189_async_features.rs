@@ -6,10 +6,10 @@
 //! - 异步迭代器支持
 //! - 异步运行时优化
 
-use std::future::Future;
+//use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
-use tokio::runtime::Runtime;
+//use tokio::runtime::Runtime;
 use tokio_stream::{Stream, StreamExt};
 use futures::future::{join_all, BoxFuture};
 use anyhow::Result;
@@ -20,21 +20,24 @@ use anyhow::Result;
 /// - 动态分发
 /// - 特征对象向上转型
 /// - 零成本抽象
+#[allow(dead_code)]
 trait AsyncProcessor: Send + Sync {
     /// 异步处理数据
-    async fn process(&self, data: &[u8]) -> Result<Vec<u8>>;
+    fn process<'a>(&'a self, data: &'a [u8]) -> BoxFuture<'a, Result<Vec<u8>>>;
     
     /// 异步验证数据
-    async fn validate(&self, input: &str) -> bool;
+    fn validate<'a>(&'a self, input: &'a str) -> BoxFuture<'a, bool>;
     
     /// 异步批量处理
-    async fn batch_process(&self, items: Vec<&[u8]>) -> Result<Vec<Vec<u8>>> {
-        let mut results = Vec::new();
-        for item in items {
-            let result = self.process(item).await?;
-            results.push(result);
-        }
-        Ok(results)
+    fn batch_process<'a>(&'a self, items: Vec<&'a [u8]>) -> BoxFuture<'a, Result<Vec<Vec<u8>>>> {
+        Box::pin(async move {
+            let mut results = Vec::new();
+            for item in items {
+                let result = self.process(item).await?;
+                results.push(result);
+            }
+            Ok(results)
+        })
     }
 }
 
@@ -50,17 +53,23 @@ impl BasicProcessor {
 }
 
 impl AsyncProcessor for BasicProcessor {
-    async fn process(&self, data: &[u8]) -> Result<Vec<u8>> {
-        println!("{} 正在处理 {} 字节数据", self.name, data.len());
-        // 模拟异步处理
-        tokio::time::sleep(tokio::time::Duration::from_millis(10)).await;
-        Ok(data.to_vec())
+    fn process<'a>(&'a self, data: &'a [u8]) -> BoxFuture<'a, Result<Vec<u8>>> {
+        let name = self.name.clone();
+        Box::pin(async move {
+            println!("{} 正在处理 {} 字节数据", name, data.len());
+            // 模拟异步处理
+            tokio::time::sleep(tokio::time::Duration::from_millis(10)).await;
+            Ok(data.to_vec())
+        })
     }
     
-    async fn validate(&self, input: &str) -> bool {
-        println!("{} 正在验证输入: {}", self.name, input);
-        tokio::time::sleep(tokio::time::Duration::from_millis(5)).await;
-        !input.is_empty()
+    fn validate<'a>(&'a self, input: &'a str) -> BoxFuture<'a, bool> {
+        let name = self.name.clone();
+        Box::pin(async move {
+            println!("{} 正在验证输入: {}", name, input);
+            tokio::time::sleep(tokio::time::Duration::from_millis(5)).await;
+            !input.is_empty()
+        })
     }
 }
 
@@ -80,30 +89,38 @@ impl AdvancedProcessor {
 }
 
 impl AsyncProcessor for AdvancedProcessor {
-    async fn process(&self, data: &[u8]) -> Result<Vec<u8>> {
+    fn process<'a>(&'a self, data: &'a [u8]) -> BoxFuture<'a, Result<Vec<u8>>> {
+        let name = self.name.clone();
         let key = format!("{:?}", data);
+        let cache = self.cache.clone();
         
-        if let Some(cached) = self.cache.get(&key) {
-            println!("{} 从缓存返回结果", self.name);
-            return Ok(cached.clone());
-        }
-        
-        println!("{} 正在处理 {} 字节数据", self.name, data.len());
-        tokio::time::sleep(tokio::time::Duration::from_millis(20)).await;
-        
-        let result = data.to_vec();
-        // 注意：这里简化了，实际应该使用Arc<Mutex<>>来修改缓存
-        Ok(result)
+        Box::pin(async move {
+            if let Some(cached) = cache.get(&key) {
+                println!("{} 从缓存返回结果", name);
+                return Ok(cached.clone());
+            }
+            
+            println!("{} 正在处理 {} 字节数据", name, data.len());
+            tokio::time::sleep(tokio::time::Duration::from_millis(20)).await;
+            
+            let result = data.to_vec();
+            // 注意：这里简化了，实际应该使用Arc<Mutex<>>来修改缓存
+            Ok(result)
+        })
     }
     
-    async fn validate(&self, input: &str) -> bool {
-        println!("{} 正在高级验证输入: {}", self.name, input);
-        tokio::time::sleep(tokio::time::Duration::from_millis(10)).await;
-        input.len() > 3 && input.chars().all(|c| c.is_alphanumeric())
+    fn validate<'a>(&'a self, input: &'a str) -> BoxFuture<'a, bool> {
+        let name = self.name.clone();
+        Box::pin(async move {
+            println!("{} 正在高级验证输入: {}", name, input);
+            tokio::time::sleep(tokio::time::Duration::from_millis(10)).await;
+            input.len() > 3 && input.chars().all(|c| c.is_alphanumeric())
+        })
     }
 }
 
 /// 异步特征对象向上转型示例
+#[allow(dead_code)]
 async fn process_with_dyn(processor: &dyn AsyncProcessor, data: &[u8]) -> Result<Vec<u8>> {
     processor.process(data).await
 }
@@ -142,6 +159,7 @@ async fn async_closure_examples() {
 /// 异步迭代器示例
 /// 
 /// Rust 1.89中异步迭代器得到了更好的支持
+#[allow(dead_code)]
 struct AsyncNumberGenerator {
     start: i32,
     end: i32,
@@ -169,6 +187,7 @@ impl Stream for AsyncNumberGenerator {
         } else {
             Poll::Ready(None)
         }
+    }
 }
 
 impl AsyncNumberGenerator {
@@ -193,13 +212,10 @@ impl AsyncNumberGenerator {
 /// - 更好的任务本地存储
 /// - 优化的内存使用
 async fn runtime_optimization_examples() {
-    // 创建优化的运行时
-    let rt = Runtime::new().unwrap();
-    
     // 并行任务处理 - 40%性能提升
     let tasks: Vec<_> = (0..1000)
         .map(|i| {
-            rt.spawn(async move {
+            tokio::spawn(async move {
                 // 改进的任务本地存储
                 tokio::task::yield_now().await;
                 i * 2
@@ -219,20 +235,21 @@ async fn runtime_optimization_examples() {
 /// 异步流式处理示例
 async fn stream_processing_examples() {
     // 改进的异步流处理 - 30%性能提升
-    let numbers = tokio_stream::iter(0..1000);
+    let numbers: Vec<i32> = (0..100).collect();
     
-    // 新的并行流处理
-    let processed = numbers
+    // 简化的并行处理
+    let tasks: Vec<_> = numbers
+        .into_iter()
         .map(|x| async move { 
             tokio::time::sleep(tokio::time::Duration::from_millis(1)).await;
             x * x 
         })
-        .buffered(100) // 并行处理100个任务
-        .filter(|&x| async move { x % 2 == 0 })
-        .collect::<Vec<_>>()
-        .await;
+        .collect();
     
-    println!("流式处理了 {} 个偶数", processed.len());
+    let processed = join_all(tasks).await;
+    let even_count = processed.iter().filter(|&&x| x % 2 == 0).count();
+    
+    println!("流式处理了 {} 个偶数", even_count);
 }
 
 /// 异步取消机制改进示例
@@ -263,7 +280,7 @@ async fn cancellation_improvements() {
 #[tokio::main]
 async fn main() -> Result<()> {
     println!("🚀 Rust 1.89 异步编程特性演示");
-    println!("=" * 50);
+    println!("{}", "=".repeat(50));
     
     // 1. Async Trait 示例
     println!("\n1. Async Trait 完全支持示例");

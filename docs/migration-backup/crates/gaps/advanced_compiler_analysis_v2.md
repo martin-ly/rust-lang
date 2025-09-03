@@ -240,11 +240,11 @@ impl<T, R: Nat, C: Nat> Matrix<T, R, C> {
 
 ## 代码生成优化
 
-### 定义与内涵
+### 1定义与内涵
 
 代码生成优化通过改进目标代码质量来提升性能。
 
-### Rust 1.87.0中的实现
+### 1Rust 1.87.0中的实现
 
 ```rust
 // 内联优化
@@ -362,14 +362,14 @@ impl ZeroCopyBuffer {
 }
 ```
 
-### 2025年最新发展
+### 12025年最新发展
 
 1. **SIMD优化** 的增强
 2. **自动向量化** 的改进
 3. **循环优化** 的完善
 4. **内存布局** 的优化
 
-### 实际应用示例
+### 1实际应用示例
 
 ```rust
 // 高级代码生成抽象
@@ -477,11 +477,11 @@ impl OptimizedCodeGenerator {
 
 ## 链接时优化
 
-### 定义与内涵
+### 2定义与内涵
 
 链接时优化（Link-Time Optimization, LTO）在链接阶段进行跨模块优化。
 
-### Rust 1.87.0中的实现
+### 2Rust 1.87.0中的实现
 
 ```rust
 // 跨模块内联
@@ -566,14 +566,14 @@ pub fn use_external_function() -> i32 {
 }
 ```
 
-### 2025年最新发展
+### 32025年最新发展
 
 1. **Thin LTO** 的优化
 2. **Incremental LTO** 的实现
 3. **Profile-Guided Optimization** 的增强
 4. **Cross-Module Optimization** 的改进
 
-### 实际应用示例
+### 3实际应用示例
 
 ```rust
 // 高级链接时优化抽象

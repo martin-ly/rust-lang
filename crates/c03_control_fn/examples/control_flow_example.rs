@@ -6,7 +6,6 @@
 //! - 新的控制结构
 //! - 性能改进
 
-use std::collections::HashMap;
 use anyhow::Result;
 
 /// Rust 1.89 改进的模式匹配示例
@@ -232,7 +231,7 @@ impl ErrorHandlingImprovements {
 /// 主函数
 fn main() -> Result<()> {
     println!("🚀 Rust 1.89 控制流特性演示");
-    println!("=" * 50);
+    println!("{}", "=".repeat(50));
     
     // 1. 改进的模式匹配示例
     println!("\n1. 改进的模式匹配示例");

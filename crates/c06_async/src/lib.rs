@@ -5,3 +5,4 @@ pub mod r#await;
 pub mod futures;
 pub mod streams;
 pub mod tokio;
+pub mod utils;

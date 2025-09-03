@@ -21,7 +21,7 @@ windows = { version = "0.52", features = ["Win32_System_Threading"], optional = 
 default = ["std"]
 std = []
 tokio = ["tokio/full"]
-async-std = ["async-std"]
+async-std = ["dep:async-std"]
 windows = ["windows/Win32_System_Threading"]
 unstable = []
 

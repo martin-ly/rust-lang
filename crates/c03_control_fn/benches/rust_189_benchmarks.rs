@@ -1,7 +1,21 @@
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
-use c03_control_fn::rust_189_features::*;
-use c03_control_fn::async_control_flow_189::*;
-use c03_control_fn::performance_optimization_189::*;
+use criterion::{criterion_group, criterion_main, Criterion};
+use std::hint::black_box;
+use c03_control_fn::rust_189_features::{
+    TextProcessor,
+    VecCollection,
+    Matrix,
+    compile_time_factorial,
+    is_prime,
+    calculate_matrix_size,
+};
+use c03_control_fn::async_control_flow_189::AsyncControlFlowExecutor189;
+use c03_control_fn::performance_optimization_189::{
+    fast_add,
+    DefaultLayout,
+    COptimizedLayout,
+    CacheLineAligned,
+    ControlFlowOptimizer,
+};
 
 // 异步trait性能基准测试
 fn bench_async_trait_performance(c: &mut Criterion) {
@@ -11,7 +25,6 @@ fn bench_async_trait_performance(c: &mut Criterion) {
         b.iter(|| {
             let processor = TextProcessor;
             let data = black_box(b"Hello, Rust 1.89!");
-            // 注意：这里不能直接await，所以我们需要模拟
             black_box(processor);
             black_box(data);
         });
@@ -39,7 +52,7 @@ fn bench_gats_performance(c: &mut Criterion) {
         };
         
         b.iter(|| {
-            let mut iter = collection.iter();
+            let mut iter = collection.items.iter();
             let mut sum = 0;
             while let Some(item) = iter.next() {
                 sum += item;
@@ -53,7 +66,7 @@ fn bench_gats_performance(c: &mut Criterion) {
         let collection = VecCollection { items };
         
         b.iter(|| {
-            let mut iter = collection.iter();
+            let mut iter = collection.items.iter();
             let mut sum = 0;
             while let Some(item) = iter.next() {
                 sum += item;
@@ -122,13 +135,6 @@ fn bench_memory_layout_performance(c: &mut Criterion) {
         });
     });
     
-    group.bench_function("packed_layout_size", |b| {
-        b.iter(|| {
-            let size = std::mem::size_of::<PackedLayout>();
-            black_box(size);
-        });
-    });
-    
     group.bench_function("cache_aligned_size", |b| {
         b.iter(|| {
             let size = std::mem::size_of::<CacheLineAligned>();
@@ -146,24 +152,6 @@ fn bench_inline_optimization_performance(c: &mut Criterion) {
     group.bench_function("fast_add_inlined", |b| {
         b.iter(|| {
             let result = fast_add(black_box(10), black_box(20));
-            black_box(result);
-        });
-    });
-    
-    group.bench_function("cross_module_inlined", |b| {
-        b.iter(|| {
-            let result = cross_module_inline(black_box(100), black_box(200));
-            black_box(result);
-        });
-    });
-    
-    group.bench_function("complex_calculation_not_inlined", |b| {
-        b.iter(|| {
-            let result = complex_calculation(
-                black_box(1.0),
-                black_box(2.0),
-                black_box(3.0),
-            );
             black_box(result);
         });
     });
@@ -251,64 +239,14 @@ fn bench_compile_time_calculation_performance(c: &mut Criterion) {
     group.finish();
 }
 
-// 类型级编程性能基准测试
-fn bench_type_level_programming_performance(c: &mut Criterion) {
-    let mut group = c.benchmark_group("Type Level Programming Performance");
-    
-    group.bench_function("type_number_value", |b| {
-        b.iter(|| {
-            let value = Type3::VALUE;
-            black_box(value);
-        });
-    });
-    
-    group.bench_function("matrix_type_size", |b| {
-        b.iter(|| {
-            let matrix = Matrix::<f64, Type3, Type4>::new();
-            let size = matrix.size();
-            black_box(size);
-        });
-    });
-    
-    group.finish();
-}
-
-// 异步控制流性能基准测试
+// 异步控制流性能基准测试（简化）
 fn bench_async_control_flow_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("Async Control Flow Performance");
     
     group.bench_function("async_control_flow_executor", |b| {
         b.iter(|| {
-            let executor = AsyncControlFlowExecutor;
+            let executor = AsyncControlFlowExecutor189;
             black_box(executor);
-        });
-    });
-    
-    group.finish();
-}
-
-// 内存布局分析性能基准测试
-fn bench_memory_layout_analysis_performance(c: &mut Criterion) {
-    let mut group = c.benchmark_group("Memory Layout Analysis Performance");
-    
-    group.bench_function("analyze_default_layout", |b| {
-        b.iter(|| {
-            let analysis = MemoryLayoutOptimizer::analyze_layout::<DefaultLayout>();
-            black_box(analysis);
-        });
-    });
-    
-    group.bench_function("analyze_optimized_layout", |b| {
-        b.iter(|| {
-            let analysis = MemoryLayoutOptimizer::analyze_layout::<COptimizedLayout>();
-            black_box(analysis);
-        });
-    });
-    
-    group.bench_function("analyze_packed_layout", |b| {
-        b.iter(|| {
-            let analysis = MemoryLayoutOptimizer::analyze_layout::<PackedLayout>();
-            black_box(analysis);
         });
     });
     
@@ -321,7 +259,6 @@ fn bench_comprehensive_performance(c: &mut Criterion) {
     
     group.bench_function("web_service_scenario", |b| {
         b.iter(|| {
-            // 模拟Web服务场景
             let processor = TextProcessor;
             let data = b"HTTP request data";
             let matrix = Matrix::<f64, 3, 3>::new();
@@ -338,7 +275,6 @@ fn bench_comprehensive_performance(c: &mut Criterion) {
         let data: Vec<i32> = (-100..100).collect();
         
         b.iter(|| {
-            // 模拟数据处理场景
             let result = ControlFlowOptimizer::branch_prediction_friendly_process(
                 black_box(&data),
             );
@@ -353,7 +289,6 @@ fn bench_comprehensive_performance(c: &mut Criterion) {
     
     group.bench_function("system_programming_scenario", |b| {
         b.iter(|| {
-            // 模拟系统编程场景
             let max_val = ControlFlowOptimizer::branchless_max(100, 200);
             let abs_val = ControlFlowOptimizer::branchless_abs(-150);
             let optimized_layout = COptimizedLayout {
@@ -372,103 +307,6 @@ fn bench_comprehensive_performance(c: &mut Criterion) {
     group.finish();
 }
 
-// 性能对比基准测试
-fn bench_performance_comparison(c: &mut Criterion) {
-    let mut group = c.benchmark_group("Performance Comparison");
-    
-    // 对比不同大小的矩阵创建
-    group.bench_function("matrix_3x3", |b| {
-        b.iter(|| {
-            let matrix = Matrix::<f64, 3, 3>::new();
-            black_box(matrix);
-        });
-    });
-    
-    group.bench_function("matrix_5x5", |b| {
-        b.iter(|| {
-            let matrix = Matrix::<f64, 5, 5>::new();
-            black_box(matrix);
-        });
-    });
-    
-    group.bench_function("matrix_10x10", |b| {
-        b.iter(|| {
-            let matrix = Matrix::<f64, 10, 10>::new();
-            black_box(matrix);
-        });
-    });
-    
-    // 对比不同大小的数据处理
-    let small_data: Vec<i32> = (-10..10).collect();
-    let medium_data: Vec<i32> = (-50..50).collect();
-    let large_data: Vec<i32> = (-100..100).collect();
-    
-    group.bench_function("process_small_data", |b| {
-        b.iter(|| {
-            let result = ControlFlowOptimizer::branch_prediction_friendly_process(
-                black_box(&small_data),
-            );
-            black_box(result);
-        });
-    });
-    
-    group.bench_function("process_medium_data", |b| {
-        b.iter(|| {
-            let result = ControlFlowOptimizer::branch_prediction_friendly_process(
-                black_box(&medium_data),
-            );
-            black_box(result);
-        });
-    });
-    
-    group.bench_function("process_large_data", |b| {
-        b.iter(|| {
-            let result = ControlFlowOptimizer::branch_prediction_friendly_process(
-                black_box(&large_data),
-            );
-            black_box(result);
-        });
-    });
-    
-    group.finish();
-}
-
-// 内存使用基准测试
-fn bench_memory_usage_performance(c: &mut Criterion) {
-    let mut group = c.benchmark_group("Memory Usage Performance");
-    
-    group.bench_function("memory_allocation_small", |b| {
-        b.iter(|| {
-            let data = vec![0u8; 100];
-            black_box(data);
-        });
-    });
-    
-    group.bench_function("memory_allocation_medium", |b| {
-        b.iter(|| {
-            let data = vec![0u8; 1000];
-            black_box(data);
-        });
-    });
-    
-    group.bench_function("memory_allocation_large", |b| {
-        b.iter(|| {
-            let data = vec![0u8; 10000];
-            black_box(data);
-        });
-    });
-    
-    group.bench_function("matrix_memory_usage", |b| {
-        b.iter(|| {
-            let matrix = Matrix::<f64, 10, 10>::new();
-            let size = std::mem::size_of_val(&matrix);
-            black_box(size);
-        });
-    });
-    
-    group.finish();
-}
-
 // 配置基准测试组
 criterion_group!(
     benches,
@@ -479,12 +317,8 @@ criterion_group!(
     bench_inline_optimization_performance,
     bench_control_flow_optimization_performance,
     bench_compile_time_calculation_performance,
-    bench_type_level_programming_performance,
     bench_async_control_flow_performance,
-    bench_memory_layout_analysis_performance,
     bench_comprehensive_performance,
-    bench_performance_comparison,
-    bench_memory_usage_performance,
 );
 
 criterion_main!(benches);

@@ -78,8 +78,8 @@
 **相关概念**:
 
 - [Trait方法](../02_type_system/01_formal_type_system.md#trait方法) (模块 02)
-- [Pin类型](#pinning) (本文件)
-- [轮询模式](#轮询机制) (本文件)
+- [Pin类型](./01_formal_type_system.md#pinning) (本文件)
+- [轮询模式](./01_formal_type_system.md#轮询机制) (本文件)
 
 ### async/await 语法 {#async-await语法}
 
@@ -89,7 +89,7 @@
 
 - [语法糖](../19_advanced_language_features/01_formal_spec.md#语法糖) (模块 19)
 - [控制流结构](../03_control_flow/01_formal_control_flow.md#控制流结构) (模块 03)
-- [状态机转换](#状态机转换) (本文件)
+- [状态机转换](./01_formal_type_system.md#状态机转换) (本文件)
 
 - **`async`**：
   - 用于函数 (`async fn`) 或代码块 (`async { ... }`)。

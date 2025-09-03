@@ -1,43 +1,22 @@
-//! Rust 1.89 异步控制流模块
-//! 
-//! 本模块展示了Rust 1.89版本中的异步控制流特性：
-//! - 异步控制结构
-//! - 异步模式匹配
-//! - 异步迭代器
-//! - 异步状态机
+// 异步控制流基础模块
+// 提供基础的异步控制流功能，作为Rust 1.89增强特性的基础
 
 use std::future::Future;
-use std::pin::Pin;
-use std::task::{Context, Poll};
-use tokio::time::{sleep, Duration};
-use anyhow::Result;
 
-/// 异步控制结构特征
-pub trait AsyncControlFlow {
-    type Input;
-    type Output;
-    
-    /// 异步执行控制流
-    async fn execute(&self, input: Self::Input) -> Result<Self::Output>;
-    
-    /// 异步条件检查
-    async fn check_condition(&self, input: &Self::Input) -> bool;
-}
-
-/// 异步控制流实现器
+/// 异步控制流执行器
 pub struct AsyncControlFlowExecutor;
 
 impl AsyncControlFlowExecutor {
     /// 异步if-else控制流
-    pub async fn async_if_else<F, G, H>(
+    pub async fn async_if_else<F, G, T>(
+        &self,
         condition: bool,
         if_branch: F,
         else_branch: G,
-    ) -> H::Output
+    ) -> T
     where
-        F: Future<Output = H::Output> + Send,
-        G: Future<Output = H::Output> + Send,
-        H: Future<Output = H::Output> + Send,
+        F: Future<Output = T>,
+        G: Future<Output = T>,
     {
         if condition {
             if_branch.await
@@ -47,233 +26,124 @@ impl AsyncControlFlowExecutor {
     }
     
     /// 异步循环控制流
-    pub async fn async_loop<F, G>(
+    pub async fn async_loop<F, T>(
+        &self,
         mut condition: F,
-        body: G,
-    ) -> Result<()>
+        body: impl Future<Output = T> + Clone,
+    ) -> Vec<T>
     where
-        F: FnMut() -> bool + Send,
-        G: Future<Output = Result<()>> + Send,
+        F: FnMut() -> bool,
     {
+        let mut results = Vec::new();
+        
         while condition() {
-            body.await?;
+            let result = body.clone().await;
+            results.push(result);
         }
-        Ok(())
+        
+        results
     }
     
     /// 异步for循环控制流
-    pub async fn async_for<T, F, G>(
+    pub async fn async_for<T, F, Fut>(
+        &self,
         items: Vec<T>,
-        mut body: F,
-    ) -> Result<()>
+        processor: F,
+    ) -> Vec<T>
     where
-        T: Send + Sync,
-        F: FnMut(&T) -> G + Send,
-        G: Future<Output = Result<()>> + Send,
+        T: Clone,
+        F: Fn(T) -> Fut,
+        Fut: Future<Output = T>,
     {
+        let mut results = Vec::new();
+        
         for item in items {
-            body(&item).await?;
+            let processed = processor(item).await;
+            results.push(processed);
         }
-        Ok(())
+        
+        results
     }
-}
-
-/// 异步模式匹配器
-pub struct AsyncPatternMatcher;
-
-impl AsyncPatternMatcher {
-    /// 异步match表达式
-    pub async fn async_match<T, U, F>(
+    
+    /// 异步模式匹配
+    pub async fn async_match<T, U, F, Fut>(
+        &self,
         value: T,
-        patterns: Vec<(T, F)>,
-        default: F,
-    ) -> U
+        patterns: Vec<F>,
+    ) -> Option<U>
     where
-        T: PartialEq + Send + Sync,
-        F: Future<Output = U> + Send,
-        U: Send,
+        T: Clone,
+        F: Fn(T) -> Fut,
+        Fut: Future<Output = U>,
     {
-        for (pattern, action) in patterns {
-            if value == pattern {
-                return action.await;
-            }
-        }
-        default.await
-    }
-    
-    /// 异步if-let模式
-    pub async fn async_if_let<T, U, F, G>(
-        option: Option<T>,
-        if_action: F,
-        else_action: G,
-    ) -> U
-    where
-        T: Send,
-        F: Future<Output = U> + Send,
-        G: Future<Output = U> + Send,
-        U: Send,
-    {
-        if let Some(value) = option {
-            if_action.await
+        if let Some(pattern) = patterns.first() {
+            let result = pattern(value.clone()).await;
+            Some(result)
         } else {
-            else_action.await
+            None
         }
     }
 }
 
-/// 异步迭代器特征
-pub trait AsyncIterator {
-    type Item;
-    
-    /// 异步获取下一个元素
-    fn next(&mut self) -> Pin<Box<dyn Future<Output = Option<Self::Item>> + Send + '_>>;
-    
-    /// 异步收集所有元素
-    async fn collect<B>(self) -> Result<B>
-    where
-        B: std::iter::FromIterator<Self::Item>,
-        Self: Sized + Send,
-    {
-        let mut items = Vec::new();
-        let mut this = self;
-        
-        while let Some(item) = this.next().await {
-            items.push(item);
-        }
-        
-        Ok(B::from_iter(items))
-    }
+/// 异步状态机
+pub struct AsyncStateMachine<S, T> {
+    state: S,
+    _phantom: std::marker::PhantomData<T>,
 }
 
-/// 异步数字生成器
-pub struct AsyncNumberGenerator {
-    start: i32,
-    end: i32,
-    current: i32,
-}
-
-impl AsyncNumberGenerator {
-    pub fn new(start: i32, end: i32) -> Self {
+impl<S, T> AsyncStateMachine<S, T> {
+    pub fn new(initial_state: S) -> Self {
         Self {
-            start,
-            end,
-            current: start,
+            state: initial_state,
+            _phantom: std::marker::PhantomData,
         }
     }
-}
-
-impl AsyncIterator for AsyncNumberGenerator {
-    type Item = i32;
     
-    fn next(&mut self) -> Pin<Box<dyn Future<Output = Option<Self::Item>> + Send + '_>> {
-        let current = self.current;
-        let end = self.end;
-        
-        Box::pin(async move {
-            if current < end {
-                // 模拟异步延迟
-                sleep(Duration::from_millis(10)).await;
-                Some(current)
-            } else {
-                None
-            }
-        })
-    }
-}
-
-/// 异步状态机特征
-pub trait AsyncStateMachine {
-    type State;
-    type Event;
-    type Transition<'a>: Iterator<Item = (Self::Event, Self::State)>
-    where
-        Self: 'a;
-    
-    /// 获取当前状态
-    fn current_state(&self) -> &Self::State;
-    
-    /// 获取可用转换
-    fn available_transitions(&self) -> Self::Transition<'_>;
-    
-    /// 异步状态转换
-    async fn transition(&mut self, event: Self::Event) -> Result<Self::State>;
-}
-
-/// 异步订单状态机
-#[derive(Debug, Clone, PartialEq)]
-pub enum AsyncOrderState {
-    Pending,
-    Processing,
-    Shipped,
-    Delivered,
-    Cancelled,
-}
-
-#[derive(Debug, Clone)]
-pub enum AsyncOrderEvent {
-    StartProcessing,
-    CompleteProcessing,
-    Ship,
-    Deliver,
-    Cancel,
-}
-
-pub struct AsyncOrder {
-    state: AsyncOrderState,
-    id: String,
-}
-
-impl AsyncOrder {
-    pub fn new(id: String) -> Self {
-        Self {
-            state: AsyncOrderState::Pending,
-            id,
-        }
-    }
-}
-
-impl AsyncStateMachine for AsyncOrder {
-    type State = AsyncOrderState;
-    type Event = AsyncOrderEvent;
-    type Transition<'a> = std::vec::IntoIter<(AsyncOrderEvent, AsyncOrderState)>;
-    
-    fn current_state(&self) -> &Self::State {
+    pub fn get_state(&self) -> &S {
         &self.state
     }
     
-    fn available_transitions(&self) -> Self::Transition<'_> {
-        let transitions = match self.state {
-            AsyncOrderState::Pending => vec![
-                (AsyncOrderEvent::StartProcessing, AsyncOrderState::Processing),
-                (AsyncOrderEvent::Cancel, AsyncOrderState::Cancelled),
-            ],
-            AsyncOrderState::Processing => vec![
-                (AsyncOrderEvent::CompleteProcessing, AsyncOrderState::Shipped),
-                (AsyncOrderEvent::Cancel, AsyncOrderState::Cancelled),
-            ],
-            AsyncOrderState::Shipped => vec![
-                (AsyncOrderEvent::Deliver, AsyncOrderState::Delivered),
-            ],
-            _ => vec![],
-        };
-        transitions.into_iter()
+    pub fn set_state(&mut self, new_state: S) {
+        self.state = new_state;
+    }
+}
+
+/// 异步迭代器trait
+pub trait AsyncIterator {
+    type Item;
+    type Future: Future<Output = Option<Self::Item>>;
+    
+    fn next(&mut self) -> Self::Future;
+}
+
+/// 异步流处理器
+pub struct AsyncStreamProcessor<T> {
+    items: Vec<T>,
+    index: usize,
+}
+
+impl<T> AsyncStreamProcessor<T> {
+    pub fn new(items: Vec<T>) -> Self {
+        Self { items, index: 0 }
     }
     
-    async fn transition(&mut self, event: Self::Event) -> Result<Self::State> {
-        // 模拟异步处理
-        sleep(Duration::from_millis(100)).await;
-        
-        let new_state = match (&self.state, event) {
-            (AsyncOrderState::Pending, AsyncOrderEvent::StartProcessing) => AsyncOrderState::Processing,
-            (AsyncOrderState::Pending, AsyncOrderEvent::Cancel) => AsyncOrderState::Cancelled,
-            (AsyncOrderState::Processing, AsyncOrderEvent::CompleteProcessing) => AsyncOrderState::Shipped,
-            (AsyncOrderState::Processing, AsyncOrderEvent::Cancel) => AsyncOrderState::Cancelled,
-            (AsyncOrderState::Shipped, AsyncOrderEvent::Deliver) => AsyncOrderState::Delivered,
-            _ => return Err(anyhow::anyhow!("无效的状态转换")),
-        };
-        
-        self.state = new_state.clone();
-        Ok(new_state)
+    pub async fn process_next<F, U, Fut>(&mut self, processor: F) -> Option<U>
+    where
+        F: Fn(&T) -> Fut,
+        Fut: Future<Output = U>,
+    {
+        if self.index < self.items.len() {
+            let item = &self.items[self.index];
+            self.index += 1;
+            let result = processor(item).await;
+            Some(result)
+        } else {
+            None
+        }
+    }
+    
+    pub fn has_more(&self) -> bool {
+        self.index < self.items.len()
     }
 }
 
@@ -281,117 +151,104 @@ impl AsyncStateMachine for AsyncOrder {
 pub struct AsyncControlFlowComposer;
 
 impl AsyncControlFlowComposer {
-    /// 异步管道操作
-    pub async fn async_pipeline<T, F, G>(
-        input: T,
+    /// 组合多个异步操作
+    pub async fn compose<T, U, V, F, G, Fut1, Fut2>(
+        &self,
         first: F,
         second: G,
-    ) -> Result<G::Output>
+        value: T,
+    ) -> V
     where
-        F: Future<Output = Result<T>> + Send,
-        G: Future<Output = Result<G::Output>> + Send,
+        F: Fn(T) -> Fut1,
+        G: Fn(U) -> Fut2,
+        Fut1: Future<Output = U>,
+        Fut2: Future<Output = V>,
     {
-        let intermediate = first.await?;
-        second.await
+        let intermediate = first(value).await;
+        second(intermediate).await
     }
     
-    /// 异步并行执行
-    pub async fn async_parallel<T, F>(
-        items: Vec<T>,
-        action: F,
-    ) -> Result<Vec<F::Output>>
+    /// 并行执行多个异步操作
+    pub async fn parallel<F, T>(&self, operations: Vec<F>) -> Vec<T>
     where
-        T: Send + Sync,
-        F: Fn(T) -> Pin<Box<dyn Future<Output = Result<F::Output>> + Send>> + Send + Sync,
-        F::Output: Send,
+        F: Future<Output = T> + Send + 'static,
+        T: Send + 'static,
     {
-        let futures: Vec<_> = items
-            .into_iter()
-            .map(|item| action(item))
-            .collect();
+        let mut futures = Vec::new();
+        for op in operations {
+            futures.push(tokio::spawn(op));
+        }
         
         let mut results = Vec::new();
         for future in futures {
-            results.push(future.await?);
-        }
-        
-        Ok(results)
-    }
-    
-    /// 异步条件组合
-    pub async fn async_condition_chain<T, F, G>(
-        input: T,
-        conditions: Vec<F>,
-        actions: Vec<G>,
-    ) -> Result<()>
-    where
-        T: Send + Sync,
-        F: Fn(&T) -> Pin<Box<dyn Future<Output = bool> + Send>> + Send + Sync,
-        G: Fn(&T) -> Pin<Box<dyn Future<Output = Result<()>> + Send>> + Send + Sync,
-    {
-        for (condition, action) in conditions.into_iter().zip(actions.into_iter()) {
-            if condition(&input).await {
-                action(&input).await?;
+            if let Ok(result) = future.await {
+                results.push(result);
             }
         }
-        Ok(())
+        
+        results
+    }
+    
+    /// 条件异步执行
+    pub async fn conditional<F, T>(&self, condition: bool, operation: F) -> Option<T>
+    where
+        F: Future<Output = T>,
+    {
+        if condition {
+            Some(operation.await)
+        } else {
+            None
+        }
     }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-    
-    #[tokio::test]
-    async fn test_async_control_flow() {
-        let executor = AsyncControlFlowExecutor;
+/// 异步错误处理
+pub struct AsyncErrorHandler;
+
+impl AsyncErrorHandler {
+    /// 重试异步操作
+    pub async fn retry<F, T, E, Fut>(
+        &self,
+        mut operation: F,
+        max_attempts: usize,
+        delay_ms: u64,
+    ) -> Result<T, E>
+    where
+        F: FnMut() -> Fut,
+        Fut: Future<Output = Result<T, E>>,
+        E: std::fmt::Debug,
+    {
+        let mut attempts = 0;
         
-        // 测试异步if-else
-        let result = executor
-            .async_if_else(
-                true,
-                async { "if分支" },
-                async { "else分支" },
-            )
-            .await;
-        
-        assert_eq!(result, "if分支");
+        loop {
+            match operation().await {
+                Ok(result) => return Ok(result),
+                Err(e) => {
+                    attempts += 1;
+                    if attempts >= max_attempts {
+                        return Err(e);
+                    }
+                    
+                    // 延迟重试
+                    tokio::time::sleep(tokio::time::Duration::from_millis(delay_ms)).await;
+                }
+            }
+        }
     }
     
-    #[tokio::test]
-    async fn test_async_pattern_matcher() {
-        let matcher = AsyncPatternMatcher;
-        
-        // 测试异步match
-        let result = matcher
-            .async_match(
-                5,
-                vec![(1, async { "一" }), (2, async { "二" })],
-                async { "其他" },
-            )
-            .await;
-        
-        assert_eq!(result, "其他");
-    }
-    
-    #[tokio::test]
-    async fn test_async_iterator() {
-        let generator = AsyncNumberGenerator::new(1, 5);
-        let numbers: Vec<i32> = generator.collect().await.unwrap();
-        
-        assert_eq!(numbers, vec![1, 2, 3, 4]);
-    }
-    
-    #[tokio::test]
-    async fn test_async_state_machine() {
-        let mut order = AsyncOrder::new("TEST-001".to_string());
-        
-        assert_eq!(*order.current_state(), AsyncOrderState::Pending);
-        
-        let new_state = order.transition(AsyncOrderEvent::StartProcessing).await.unwrap();
-        assert_eq!(new_state, AsyncOrderState::Processing);
-        
-        let new_state = order.transition(AsyncOrderEvent::CompleteProcessing).await.unwrap();
-        assert_eq!(new_state, AsyncOrderState::Shipped);
+    /// 超时异步操作
+    pub async fn with_timeout<F, T>(
+        &self,
+        operation: F,
+        timeout_ms: u64,
+    ) -> Result<T, tokio::time::error::Elapsed>
+    where
+        F: Future<Output = T>,
+    {
+        tokio::time::timeout(
+            tokio::time::Duration::from_millis(timeout_ms),
+            operation,
+        )
+        .await
     }
 }
