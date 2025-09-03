@@ -54,3 +54,14 @@ cargo bench --no-run
 
 - 运行指南：`docs/run_guide.md`
 - 最佳实践：`docs/async_best_practices.md`
+
+## 基准与指标说明
+
+- 基准集：
+  - mpsc（bounded vs unbounded）与 Semaphore 管道吞吐
+  - 扩展：select/JoinSet、背压容量与限流并发参数化（见 `benches/async_benches.rs`）
+  - 建议：先 `cargo bench --no-run` 验证，再按需 `cargo bench`
+
+- 指标：
+  - Actix `/metrics` 暴露 Prometheus 文本格式（requests_total、avg_latency_ns）
+  - 结合 `Logger` 与示例中的 p50/p95 打点，辅助定位延迟问题

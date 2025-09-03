@@ -61,10 +61,17 @@ async fn metrics_handler(metrics: web::Data<Arc<Metrics>>) -> impl Responder {
     let total = metrics.requests.load(Ordering::Relaxed);
     let ns = metrics.total_ns.load(Ordering::Relaxed);
     let avg_ns = if total > 0 { ns / total } else { 0 };
-    HttpResponse::Ok().body(format!("requests_total {}\navg_latency_ns {}\n", total, avg_ns))
+    let body = format!(
+        "# HELP http_requests_total Total HTTP requests\n# TYPE http_requests_total counter\nhttp_requests_total {}\n# HELP http_avg_latency_ns Average latency in nanoseconds\n# TYPE http_avg_latency_ns gauge\nhttp_avg_latency_ns {}\n",
+        total, avg_ns
+    );
+    HttpResponse::Ok()
+        .content_type("text/plain; version=0.0.4")
+        .body(body)
 }
 
 // 简单请求计数中间件示例（可扩展为真正的中间件）
+#[allow(dead_code)]
 async fn greet_counted(path: web::Path<String>, metrics: web::Data<Arc<Metrics>>) -> impl Responder {
     metrics.requests.fetch_add(1, Ordering::Relaxed);
     greet(path).await
