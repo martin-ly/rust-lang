@@ -1,0 +1,40 @@
+# Rust 编译产物
+/target/
+**/*.rs.bk
+*.pdb
+
+# Cargo 锁定文件（对于库项目）
+# Cargo.lock
+
+# IDE 配置文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# 日志文件
+*.log
+
+# 环境变量文件
+.env
+.env.local
+
+# 临时文件
+*.tmp
+*.temp
+
+# 文档生成目录
+/doc/
+
+# 覆盖率报告
+coverage/
+*.profraw
+
+# 性能分析文件
+*.prof
+*.pgo

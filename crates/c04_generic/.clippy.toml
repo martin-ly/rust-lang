@@ -1,0 +1,43 @@
+# Clippy 代码质量检查配置
+# 项目特定的配置
+
+# 最低 Rust 版本
+msrv = "1.70"
+
+# 复杂度阈值
+cognitive-complexity-threshold = 15
+type-complexity-threshold = 25
+too-many-arguments-threshold = 8
+too-many-lines-threshold = 300
+
+# 函数参数和结构体布尔值限制
+max-fn-params-bools = 3
+max-struct-bools = 3
+max-trait-bounds = 3
+
+# 大小阈值
+array-size-threshold = 4096
+vec-box-size-threshold = 4096
+large-error-threshold = 1000
+enum-variant-size-threshold = 200
+enum-variant-name-threshold = 30
+struct-field-name-threshold = 30
+
+# 标识符阈值
+single-char-binding-names-threshold = 1
+min-ident-chars-threshold = 2
+
+# 文件大小限制
+max-include-file-size = 300
+max-suggested-slice-pattern-length = 8
+
+# 传递大小限制
+pass-by-value-size-limit = 8
+trivial-copy-size-limit = 8
+unnecessary-box-size = 8
+too-large-for-stack = 64
+stack-size-threshold = 64
+future-size-threshold = 64
+
+# 嵌套阈值
+excessive-nesting-threshold = 4

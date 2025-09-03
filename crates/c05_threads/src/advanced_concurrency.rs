@@ -11,6 +11,7 @@ use std::sync::{Arc, Mutex};
 use std::collections::VecDeque;
 use std::thread;
 use std::time::Duration;
+use std::cell::UnsafeCell;
 
 // ============================================================================
 // 高性能线程池实现
@@ -59,30 +60,23 @@ impl HighPerformanceThreadPool {
     }
     
     /// 并行执行多个任务
-    pub fn execute_batch<F, T>(&self, tasks: Vec<F>) -> Vec<T>
+    pub fn execute_batch<T>(&self, tasks: Vec<Box<dyn FnOnce() -> T + Send>>) -> Vec<T>
     where
-        F: FnOnce() -> T + Send + 'static,
         T: Send + 'static,
     {
-        let (tx, rx) = crossbeam_channel::bounded(tasks.len());
-        let mut task_boxes = Vec::new();
+        let task_count = tasks.len();
+        let (tx, rx) = crossbeam_channel::bounded(task_count);
         
         for task in tasks {
             let tx = tx.clone();
-            let boxed_task = Box::new(move || {
+            self.execute(move || {
                 let result = task();
                 let _ = tx.send(result);
             });
-            task_boxes.push(boxed_task);
-        }
-        
-        // 提交所有任务
-        for task in task_boxes {
-            self.execute(task);
         }
         
         // 收集结果
-        rx.iter().take(tasks.len()).collect()
+        rx.iter().take(task_count).collect()
     }
     
     /// 获取线程池统计信息
@@ -107,7 +101,7 @@ impl Drop for HighPerformanceThreadPool {
 
 /// 工作线程
 struct Worker {
-    id: usize,
+    _id: usize,
     thread: Option<thread::JoinHandle<()>>,
 }
 
@@ -145,7 +139,7 @@ impl Worker {
         });
         
         Self {
-            id,
+            _id: id,
             thread: Some(thread),
         }
     }
@@ -169,6 +163,7 @@ impl GlobalTaskQueue {
         }
     }
     
+    #[allow(dead_code)]
     fn push(&self, task: Box<dyn FnOnce() + Send + 'static>) {
         let mut tasks = self.tasks.lock().unwrap();
         tasks.push_back(task);
@@ -220,6 +215,8 @@ impl LocalTaskQueue {
         self.tasks.pop_front()
     }
     
+
+    #[allow(dead_code)]
     fn is_empty(&self) -> bool {
         self.tasks.is_empty()
     }
@@ -231,7 +228,7 @@ impl LocalTaskQueue {
 
 /// 无锁环形缓冲区
 pub struct LockFreeRingBuffer<T> {
-    buffer: Vec<T>,
+    buffer: UnsafeCell<Vec<T>>,
     head: AtomicUsize,
     tail: AtomicUsize,
     size: usize,
@@ -246,7 +243,7 @@ impl<T: Default + Clone> LockFreeRingBuffer<T> {
         }
         
         Self {
-            buffer,
+            buffer: UnsafeCell::new(buffer),
             head: AtomicUsize::new(0),
             tail: AtomicUsize::new(0),
             size,
@@ -263,7 +260,8 @@ impl<T: Default + Clone> LockFreeRingBuffer<T> {
         }
         
         unsafe {
-            *self.buffer.get_unchecked_mut(tail) = item;
+            let ptr = (*self.buffer.get()).as_mut_ptr().add(tail);
+            std::ptr::write(ptr, item);
         }
         
         self.tail.store(next_tail, Ordering::Release);
@@ -279,8 +277,14 @@ impl<T: Default + Clone> LockFreeRingBuffer<T> {
         }
         
         let item = unsafe {
-            self.buffer.get_unchecked(head).clone()
+            let ptr = (*self.buffer.get()).as_ptr().add(head);
+            std::ptr::read(ptr)
         };
+        // 将已读出的槽位重置为默认值，避免后续读取到已移动的值
+        unsafe {
+            let dst = (*self.buffer.get()).as_mut_ptr().add(head);
+            std::ptr::write(dst, T::default());
+        }
         
         let next_head = (head + 1) % self.size;
         self.head.store(next_head, Ordering::Release);
@@ -303,7 +307,7 @@ impl<T: Default + Clone> LockFreeRingBuffer<T> {
 /// 无锁栈
 pub struct LockFreeStack<T> {
     head: AtomicUsize,
-    nodes: Vec<StackNode<T>>,
+    nodes: UnsafeCell<Vec<StackNode<T>>>,
     free_list: AtomicUsize,
 }
 
@@ -325,7 +329,7 @@ impl<T> LockFreeStack<T> {
         
         Self {
             head: AtomicUsize::new(usize::MAX),
-            nodes,
+            nodes: UnsafeCell::new(nodes),
             free_list: AtomicUsize::new(0),
         }
     }
@@ -336,14 +340,16 @@ impl<T> LockFreeStack<T> {
         
         // 设置节点数据
         unsafe {
-            self.nodes.get_unchecked_mut(node_idx).data = Some(item);
+            let node_ptr = (*self.nodes.get()).as_mut_ptr().add(node_idx);
+            (*node_ptr).data = Some(item);
         }
         
         // 原子地更新栈顶
         loop {
             let current_head = self.head.load(Ordering::Acquire);
             unsafe {
-                self.nodes.get_unchecked_mut(node_idx).next.store(current_head, Ordering::Release);
+                let node_ptr = (*self.nodes.get()).as_mut_ptr().add(node_idx);
+                (*node_ptr).next.store(current_head, Ordering::Release);
             }
             
             if self.head.compare_exchange_weak(
@@ -369,7 +375,8 @@ impl<T> LockFreeStack<T> {
             }
             
             let next = unsafe {
-                self.nodes.get_unchecked(current_head).next.load(Ordering::Acquire)
+                let node_ptr = (*self.nodes.get()).as_ptr().add(current_head);
+                (*node_ptr).next.load(Ordering::Acquire)
             };
             
             if self.head.compare_exchange_weak(
@@ -379,7 +386,8 @@ impl<T> LockFreeStack<T> {
                 Ordering::Relaxed,
             ).is_ok() {
                 let data = unsafe {
-                    self.nodes.get_unchecked_mut(current_head).data.take()
+                    let node_ptr = (*self.nodes.get()).as_mut_ptr().add(current_head);
+                    (*node_ptr).data.take()
                 };
                 self.free_node(current_head);
                 return data;
@@ -396,7 +404,8 @@ impl<T> LockFreeStack<T> {
             }
             
             let next = unsafe {
-                self.nodes.get_unchecked(current).next.load(Ordering::Acquire)
+                let node_ptr = (*self.nodes.get()).as_ptr().add(current);
+                (*node_ptr).next.load(Ordering::Acquire)
             };
             
             if self.free_list.compare_exchange_weak(
@@ -417,7 +426,8 @@ impl<T> LockFreeStack<T> {
         
         loop {
             unsafe {
-                self.nodes.get_unchecked_mut(node_idx).next.store(current, Ordering::Release);
+                let node_ptr = (*self.nodes.get()).as_mut_ptr().add(node_idx);
+                (*node_ptr).next.store(current, Ordering::Release);
             }
             
             if self.free_list.compare_exchange_weak(
@@ -494,8 +504,8 @@ pub fn parallel_map<T, U, F>(
     f: F,
 ) -> Vec<U>
 where
-    T: Send + Sync + Clone,
-    U: Send + Sync + Default + Clone + std::fmt::Debug,
+    T: Send + Sync + Clone + 'static,
+    U: Send + Sync + Default + Clone + std::fmt::Debug + 'static,
     F: Fn(&T) -> U + Send + Sync + Clone + 'static,
 {
     if data.is_empty() {
@@ -567,10 +577,10 @@ mod tests {
         let pool = HighPerformanceThreadPool::new(4);
         
         let results = pool.execute_batch(vec![
-            || 1 + 1,
-            || 2 * 2,
-            || 3 + 3,
-            || 4 * 4,
+            Box::new(|| 1 + 1),
+            Box::new(|| 2 * 2),
+            Box::new(|| 3 + 3),
+            Box::new(|| 4 * 4),
         ]);
         
         assert_eq!(results, vec![2, 4, 6, 16]);

@@ -94,17 +94,23 @@ fn interactive_performance_demo() {
 
 /// 演示高性能线程池
 fn demo_high_performance_thread_pool(data: &[i32]) {
+    let data = data.to_vec();
     let thread_counts = [1, 2, 4, 8];
     
     for &thread_count in &thread_counts {
         let pool = HighPerformanceThreadPool::new(thread_count);
         
         let start = Instant::now();
+        let data_clone1 = data.clone();
+        let data_clone2 = data.clone();
+        let data_clone3 = data.clone();
+        let data_clone4 = data.clone();
+        
         let results = pool.execute_batch(vec![
-            || data.iter().map(|&x| x * 2).sum::<i32>(),
-            || data.iter().map(|&x| x * 3).sum::<i32>(),
-            || data.iter().map(|&x| x * 4).sum::<i32>(),
-            || data.iter().map(|&x| x * 5).sum::<i32>(),
+            Box::new(move || data_clone1.iter().map(|&x| x * 2).sum::<i32>()),
+            Box::new(move || data_clone2.iter().map(|&x| x * 3).sum::<i32>()),
+            Box::new(move || data_clone3.iter().map(|&x| x * 4).sum::<i32>()),
+            Box::new(move || data_clone4.iter().map(|&x| x * 5).sum::<i32>()),
         ]);
         let duration = start.elapsed();
         
@@ -203,6 +209,7 @@ fn demo_performance_comparison(data: &[i32]) {
 }
 
 /// 内存使用监控
+#[allow(dead_code)]
 fn monitor_memory_usage() {
     // 这里可以添加内存使用监控代码
     // 在实际应用中，可以使用jemalloc或其他内存分配器
@@ -210,6 +217,7 @@ fn monitor_memory_usage() {
 }
 
 /// 性能优化建议
+#[allow(dead_code)]
 fn provide_optimization_suggestions() {
     println!("\n💡 性能优化建议:");
     println!("  1. 使用适当数量的线程 (通常等于CPU核心数)");

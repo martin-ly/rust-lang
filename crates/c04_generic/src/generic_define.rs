@@ -95,7 +95,7 @@ pub fn print_description<T: Describable>(item: T) {
 
 //泛型集合类型
 #[allow(unused)]
-pub fn hashmap_test() -> () {
+pub fn hashmap_test() {
     let mut scores: HashMap<String, i32> = HashMap::new();
     scores.insert(String::from("Alice"), 50);
     scores.insert(String::from("Bob"), 70);

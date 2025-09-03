@@ -511,23 +511,33 @@ pub mod variable;
 
 // 重新导出主要类型 / Re-export main types
 pub use copy_move::*;
-//pub use expression::*;
-//pub use function::*;
+// pub use expression::*;
+// pub use function::*;
 pub use internal_mut::*;
-//pub use scope::*;
-//pub use variable::*;
-
+pub use scope::*;
+// pub use variable::*;
 
 /// 所有权系统版本 / Ownership System Version
 pub const VERSION: &str = "1.0.0";
 
-
-/*
-
 /// 模块初始化 / Module Initialization
-pub fn init() -> Result<(), crate::error::OwnershipError> {
+pub fn init() -> Result<(), Box<dyn std::error::Error>> {
     println!("Rust所有权和借用作用域模块已初始化 / Rust Ownership and Borrowing Scope Module Initialized");
     Ok(())
 }
 
-*/
+/// 获取模块信息 / Get Module Information
+pub fn get_module_info() -> &'static str {
+    "Rust Ownership and Borrowing Scope Module v1.0.0"
+}
+
+/// 运行测试套件 / Run Test Suite
+#[cfg(test)]
+pub fn run_tests() -> Result<(), Box<dyn std::error::Error>> {
+    println!("运行所有权和借用作用域测试套件 / Running Ownership and Borrowing Scope Test Suite");
+    
+    // 这里可以添加测试运行逻辑
+    // Add test running logic here
+    
+    Ok(())
+}

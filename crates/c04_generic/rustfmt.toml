@@ -1,0 +1,13 @@
+# Rust 代码格式化配置
+edition = "2021"
+max_width = 100
+tab_spaces = 4
+newline_style = "Unix"
+use_small_heuristics = "Default"
+merge_derives = true
+merge_imports = true
+reorder_imports = true
+reorder_modules = true
+reorder_impl_items = true
+remove_nested_parens = true
+format_code_in_doc_comments = true
