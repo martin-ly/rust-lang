@@ -99,74 +99,126 @@ fn main() {
 示例
 
 ```rust
-// 基本数据类型
+// 基本类型
 let integer: i32 = 42;
 let float: f64 = 3.14;
 let boolean: bool = true;
+let character: char = 'A';
 
-// 复合数据类型
-let tuple: (i32, f64) = (42, 3.14);
-let array: [i32; 3] = [1, 2, 3];
+// 复合类型
+let tuple: (i32, f64, char) = (42, 3.14, 'A');
+let array: [i32; 5] = [1, 2, 3, 4, 5];
+
+// 结构体类型
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let person = Person {
+    name: String::from("Alice"),
+    age: 30,
+};
 ```
 
 3. 抽象类型（Abstract Types）
 
-抽象类型通常指 trait，它们定义了一组方法的接口，但不提供具体的实现。
-实现了某个 trait 的类型可以被视为该抽象类型。
+抽象类型是指通过 trait 定义的类型，它们描述了类型的行为而不是具体的实现。
+抽象类型允许我们定义通用的接口，使得不同的类型可以实现相同的行为。
 
 示例
 
 ```rust
-trait Shape {
-    fn area(&self) -> f64; // 抽象方法
+trait Display {
+    fn display(&self) -> String;
 }
 
-struct Circle {
-    radius: f64,
+struct Text {
+    content: String,
 }
 
-impl Shape for Circle {
-    fn area(&self) -> f64 {
-        std::f64::consts::PI * self.radius * self.radius
+impl Display for Text {
+    fn display(&self) -> String {
+        format!("Text: {}", self.content)
     }
 }
-```
 
-4. 多态类型（泛型）
-
-泛型允许你定义函数、结构体、枚举和 trait，使其能够处理多种类型，而不需要在编写时指定具体类型。
-泛型在 Rust 中通过尖括号 `<T>` 来表示。
-
-示例
-
-```rust
-// 定义一个泛型函数
-fn print_value<T: std::fmt::Display>(value: T) {
-    println!("{}", value);
+struct Number {
+    value: i32,
 }
 
-// 定义一个泛型结构体
-struct Pair<T, U> {
-    first: T,
-    second: U,
+impl Display for Number {
+    fn display(&self) -> String {
+        format!("Number: {}", self.value)
+    }
+}
+
+fn print_display(item: &dyn Display) {
+    println!("{}", item.display());
 }
 
 fn main() {
-    print_value(42); // 整数
-    print_value(3.14); // 浮点数
+    let text = Text {
+        content: String::from("Hello, Rust!"),
+    };
+    let number = Number { value: 42 };
 
-    let pair = Pair { first: 1, second: "hello" }; // 泛型结构体
+    print_display(&text);   // 输出: Text: Hello, Rust!
+    print_display(&number); // 输出: Number: 42
+}
+```
+
+4. 多态类型（Polymorphic Types）
+
+多态类型是指通过泛型定义的类型，它们可以在不同的具体类型上工作。
+泛型允许我们编写可以处理多种类型的代码，而不需要为每种类型编写重复的代码。
+
+示例
+
+```rust
+// 泛型结构体
+struct Container<T> {
+    value: T,
+}
+
+impl<T> Container<T> {
+    fn new(value: T) -> Self {
+        Container { value }
+    }
+
+    fn get_value(&self) -> &T {
+        &self.value
+    }
+}
+
+// 泛型函数
+fn print_value<T: std::fmt::Display>(value: T) {
+    println!("Value: {}", value);
+}
+
+fn main() {
+    let int_container = Container::new(42);
+    let string_container = Container::new(String::from("Hello"));
+
+    println!("Int container: {}", int_container.get_value());
+    println!("String container: {}", string_container.get_value());
+
+    print_value(42);
+    print_value("Hello, Rust!");
 }
 ```
 
 总结
-- **具体类型**：在编译时已知的类型，如结构体和枚举。
-- **数据类型**：Rust 中定义的所有类型，包括基本类型和复合类型。
-- **抽象类型**：通过 trait 定义的接口，允许不同类型实现相同的方法。
-- **多态类型（泛型）**：允许定义处理多种类型的函数和数据结构，使用尖括号表示。
-通过这些概念，Rust 提供了强大的类型系统，支持安全和灵活的编程。
 
-**/
+Rust 的类型系统通过这四个层次的概念提供了强大的类型安全保证：
 
-pub mod collection;
-pub mod composite;
+- **具体类型**：提供明确的类型定义和内存布局
+- **数据类型**：涵盖所有可能的类型组合
+- **抽象类型**：通过 trait 定义类型的行为接口
+- **多态类型**：通过泛型实现代码重用和类型抽象
+
+这种层次化的设计使得 Rust 能够在保持类型安全的同时，提供灵活和高效的编程体验。
+*/
+
+// 导出Rust 1.89增强特性
+pub mod rust_189_enhancements;
