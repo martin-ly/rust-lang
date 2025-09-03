@@ -57,7 +57,7 @@ pub mod rust_189_type_composition {
     pub trait AsyncTypeComposition {
         type Future<T> where T: 'static;
         
-        async fn process_async<T: 'static>(&self, data: T) -> Self::Future<T>;
+        fn process_async<T: 'static>(&self, data: T) -> impl std::future::Future<Output = Self::Future<T>> + Send;
     }
 
     /// 6. 生命周期组合类型
@@ -81,6 +81,7 @@ pub mod rust_189_type_composition {
     }
 
     /// 7. 智能指针类型组合
+    #[allow(dead_code)]
     pub struct SmartPointerComposition<T> {
         inner: Box<T>,
         reference_count: std::rc::Rc<()>,

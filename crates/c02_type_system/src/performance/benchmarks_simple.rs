@@ -219,18 +219,34 @@ fn runtime_fibonacci(n: u32) -> u32 {
 const COMPILE_TIME_FIB_10: u32 = 55;
 
 /// 未优化内存布局
+#[allow(dead_code)]
 struct UnoptimizedLayout {
     a: u8,      // 1 byte
     b: u32,     // 4 bytes
     c: u8,      // 1 byte
 }
 
+impl UnoptimizedLayout {
+    #[allow(dead_code)]
+    fn new(a: u8, b: u32, c: u8) -> Self {
+        Self { a, b, c }
+    }
+}
+
 /// 优化内存布局
 #[repr(C)]
+#[allow(dead_code)]
 struct OptimizedLayout {
     a: u8,      // 1 byte
     b: u32,     // 4 bytes
     c: u8,      // 1 byte
+}
+
+impl OptimizedLayout {
+    #[allow(dead_code)]
+    fn new(a: u8, b: u32, c: u8) -> Self {
+        Self { a, b, c }
+    }
 }
 
 /// 运行所有性能测试

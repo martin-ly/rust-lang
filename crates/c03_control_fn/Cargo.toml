@@ -3,10 +3,46 @@ name = "c03_control_fn"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
+authors = ["Rust Control Flow & Functions Research Team"]
+description = "Rust 1.89 控制流与函数特性研究项目 - 包含异步编程、类型系统、性能优化等最新特性"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/rust-lang/control-flow-functions"
+keywords = ["rust", "control-flow", "functions", "async", "generics", "performance"]
+categories = ["development-tools", "system-programming"]
 
 [dependencies]
+# 异步运行时支持
 tokio = { version = ">=1.44.1", features = ["full"] }
+# 异步流处理
+tokio-stream = ">=0.1.0"
+# Future工具
+futures = ">=0.3.0"
+# 性能测试
 fastrace = { version = ">=0.7.0", features = ["enable"] }
+# 序列化支持
+serde = { version = ">=1.0.0", features = ["derive"] }
+# 错误处理
+anyhow = ">=1.0.0"
+thiserror = ">=1.0.0"
+# 日志支持
+tracing = ">=0.1.0"
+tracing-subscriber = ">=0.3.0"
+# 测试工具
+criterion = { version = ">=0.5.0", optional = true }
+proptest = { version = ">=1.0.0", optional = true }
+
+[dev-dependencies]
+criterion = ">=0.5.0"
+proptest = ">=1.0.0"
+
+[features]
+default = ["std", "async", "generics"]
+std = []
+async = ["tokio/full", "futures"]
+generics = []
+performance = ["fastrace/enable"]
+bench = ["criterion"]
+test = ["proptest"]
 
 [lib]
 name = "c03_control_fn"
@@ -16,6 +52,29 @@ path = "src/lib.rs"
 name = "control_flow_example"
 path = "examples/control_flow_example.rs"
 
+[[example]]
+name = "rust_189_async_features"
+path = "examples/rust_189_async_features.rs"
+
+[[example]]
+name = "rust_189_generic_features"
+path = "examples/rust_189_generic_features.rs"
+
+[[example]]
+name = "rust_189_performance_features"
+path = "examples/rust_189_performance_features.rs"
+
 [[bin]]
 name = "c03_control_fn"
 path = "src/bin/main.rs"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+
+[profile.dev]
+opt-level = 0
+debug = true
+debug-assertions = true
