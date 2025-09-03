@@ -416,3 +416,8 @@ pub mod items;
 pub mod pattern_matching;
 pub mod statements;
 pub mod async_control_flow;
+
+// Rust 1.89 最新特性模块
+pub mod rust_189_features;
+pub mod async_control_flow_189;
+pub mod performance_optimization_189;

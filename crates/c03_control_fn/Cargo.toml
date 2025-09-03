@@ -64,6 +64,10 @@ path = "examples/rust_189_generic_features.rs"
 name = "rust_189_performance_features"
 path = "examples/rust_189_performance_features.rs"
 
+[[example]]
+name = "rust_189_comprehensive_demo"
+path = "examples/rust_189_comprehensive_demo.rs"
+
 [[bin]]
 name = "c03_control_fn"
 path = "src/bin/main.rs"
