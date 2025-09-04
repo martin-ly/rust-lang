@@ -4,6 +4,16 @@
 
 ---
 
+## [Unreleased]
+
+### 📚 文档增强（对齐国际百科 & Rust 1.89）
+
+- 更新 `docs/async_algorithms.md`：补充 Sorting/Searching/Graph/MST/Topo 的异步/并行示例与最佳实践
+- 更新 `docs/algorithm_complexity.md`：补充复杂度总览、并行/异步说明与入口函数链接
+- 更新 `docs/data_structures.md`：新增 `stack` 用法示例与模块导航
+- 更新 `docs/performance_optimization.md`：并行/异步与基准操作建议
+- 更新 `README.md`：加入分治/动态规划的异步示例与文档链接
+
 ## [0.1.0] - 2025-01-27
 
 ### 🚀 重大更新

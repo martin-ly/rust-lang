@@ -817,3 +817,27 @@ fn filter_even_numbers(numbers: &[i32]) -> Vec<i32> {
 - 实际应用说明
 
 这个框架为Rust语言中的算法实现提供了坚实的理论基础和实践指导。
+
+---
+
+## 实战实现索引（Rust 1.89 与国际百科对齐）
+
+- 文档导航：
+  - 算法复杂度与评估：`crates/c08_algorithms/docs/algorithm_complexity.md`
+  - 数据结构实现：`crates/c08_algorithms/docs/data_structures.md`
+  - 异步算法指南：`crates/c08_algorithms/docs/async_algorithms.md`
+  - 性能优化：`crates/c08_algorithms/docs/performance_optimization.md`
+  - Rust 1.89 特性应用：`crates/c08_algorithms/docs/rust_189_features.md`
+
+- 核心模块入口：
+  - 排序：`crates/c08_algorithms/src/sorting/mod.rs`（`sort_sync` / `sort_parallel` / `sort_async`）
+  - 搜索：`crates/c08_algorithms/src/searching/mod.rs`（线性/二分/并行/异步）
+  - 图论：`crates/c08_algorithms/src/graph/mod.rs`（BFS/Dijkstra/MST/Topo 的同步/并行/异步）
+  - 分治：`crates/c08_algorithms/src/divide_and_conquer/mod.rs`（最大子段和、最近点对，含异步封装）
+  - 动态规划：`crates/c08_algorithms/src/dynamic_programming/mod.rs`（LCS、0-1 背包，含异步封装）
+
+- 基准：`crates/c08_algorithms/benches/alg_benches.rs`（包含排序/搜索/图/DP/分治/贪心）
+
+- 快速使用（示例位于 README 中“基础用法”）：
+  - 异步排序/搜索/图：`sort_async`、`binary_search_async`、`bfs_shortest_path_async`、`dijkstra_async`
+  - 分治/动态规划异步：`max_subarray_sum_async`、`closest_pair_async`、`lcs_async`、`knapsack_01_async`

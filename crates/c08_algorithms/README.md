@@ -74,33 +74,44 @@
 cargo add c08_algorithms
 ```
 
-### 基础用法
+### 基础用法（对齐新接口）
 
 ```rust
-use c08_algorithms::{
-    data_structure::{LinkedList, BinaryTree},
-    sorting::quick_sort,
-    searching::binary_search,
-    async_algorithms::AsyncGraphProcessor,
-};
+use c08_algorithms::sorting::{sort_sync, sort_parallel, sort_async, SortingAlgo};
+use c08_algorithms::searching::{binary_search_sync, binary_search_async, parallel_search};
+use c08_algorithms::graph::{bfs_shortest_path_sync, bfs_shortest_path_async, dijkstra_async};
+use c08_algorithms::divide_and_conquer::{max_subarray_sum_async, closest_pair_async, Point};
+use c08_algorithms::dynamic_programming::{lcs_async, knapsack_01_async};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // 基础数据结构
-    let mut list = LinkedList::new();
-    list.push_back(1);
-    list.push_back(2);
-    list.push_back(3);
-    
-    // 排序算法
-    let mut arr = vec![3, 1, 4, 1, 5, 9];
-    quick_sort(&mut arr);
-    println!("排序后: {:?}", arr);
-    
-    // 异步图处理
-    let processor = AsyncGraphProcessor::new();
-    let result = processor.process_graph("graph_data").await?;
-    
+    // 排序：同步/并行/异步
+    let mut v = vec![3, 1, 4, 1, 5, 9];
+    sort_sync(&mut v, SortingAlgo::Merge);
+    sort_parallel(&mut v, SortingAlgo::Quick);
+    let v = sort_async(v, SortingAlgo::Heap).await?;
+
+    // 搜索：同步二分、并行线性、异步二分
+    let _ = binary_search_sync(&v, &5)?;
+    let _ = parallel_search(&v, &5);
+    let _ = binary_search_async(v.clone(), 5).await?;
+
+    // 图：同步/异步 BFS 与异步 Dijkstra
+    use std::collections::HashMap;
+    let mut g: HashMap<i32, Vec<i32>> = HashMap::new();
+    g.insert(1, vec![2, 3]); g.insert(2, vec![4]); g.insert(3, vec![4]); g.insert(4, vec![]);
+    let _p = bfs_shortest_path_sync(&g, &1, &4);
+    let _p = bfs_shortest_path_async(g, 1, 4).await?;
+
+    // 分治：最大子段和（异步封装）与最近点对
+    let sum = max_subarray_sum_async(vec![-2,1,-3,4,-1,2,1,-5,4]).await?;
+    let pts = vec![Point { x: 0.0, y: 0.0 }, Point { x: 1.0, y: 0.0 }, Point { x: 2.0, y: 0.0 }];
+    let _d = closest_pair_async(pts).await?;
+
+    // 动态规划：LCS 与 0-1 背包（异步封装）
+    let _lcs = lcs_async(b"ABCBDAB".to_vec(), b"BDCABA".to_vec()).await?;
+    let _best = knapsack_01_async(vec![2,2,6,5,4], vec![6,3,5,4,6], 10).await?;
+
     Ok(())
 }
 ```
@@ -109,21 +120,21 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 🔬 性能基准
 
-### 算法性能对比
+### 运行测试与基准
 
-| 算法 | 传统实现 | Rust 1.89 优化 | 性能提升 |
-|------|----------|----------------|----------|
-| 快速排序 | 100ms | 75ms | 25% |
-| 归并排序 | 120ms | 85ms | 29% |
-| 图遍历 | 200ms | 140ms | 30% |
+```bash
+# 单元测试
+cargo test
 
-### 内存使用优化
+# 基准（本仓库新增对比组）
+cargo bench --bench alg_benches
 
-| 数据结构 | 传统实现 | Rust 1.89 优化 | 内存减少 |
-|----------|----------|----------------|----------|
-| 链表 | 100KB | 75KB | 25% |
-| 二叉树 | 200KB | 140KB | 30% |
-| 图 | 500KB | 350KB | 30% |
+# 运行 CLI 演示
+cargo run -p c08_algorithms
+
+# 扫描并生成缺失文档占位
+cargo run -p c08_algorithms --bin doc_link_scan
+```
 
 ---
 
@@ -133,24 +144,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 - [数据结构实现](docs/data_structures.md)
 - [异步算法指南](docs/async_algorithms.md)
 - [性能优化技巧](docs/performance_optimization.md)
-- [Rust 1.89 特性应用](docs/rust_189_features.md)
-
----
-
-## 🧪 测试
-
-### 运行测试
-
-```bash
-# 单元测试
-cargo test
-
-# 集成测试
-cargo test --test integration
-
-# 性能基准测试
-cargo bench
-```
+- [Rust 1.89 特性应用](docs/rust_189_features.md)（含本仓库对应接口位置与示例）
 
 ### 测试覆盖率
 
