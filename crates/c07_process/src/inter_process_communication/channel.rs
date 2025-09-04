@@ -2,7 +2,7 @@ use crate::types::{IpcConfig, Message};
 use crate::error::{IpcResult, IpcError};
 use crate::inter_process_communication::IpcChannel;
 use std::sync::{Arc, Mutex};
-use std::fs::{OpenOptions};
+use std::fs::OpenOptions;
 use std::io::{Write, BufReader, BufRead};
 use std::path::Path;
 

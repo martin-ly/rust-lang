@@ -3,7 +3,6 @@ use crate::error::{ProcessResult, ProcessError};
 use std::collections::{HashMap, VecDeque};
 use std::sync::{Arc, Mutex};
 use std::time::{Duration, SystemTime};
-use std::thread;
 
 /// 进程池配置
 #[derive(Debug, Clone)]
@@ -64,6 +63,7 @@ pub struct ProcessPool {
 }
 
 /// 池化进程
+#[allow(dead_code)]
 struct PooledProcess {
     info: ProcessInfo,
     created_at: SystemTime,
@@ -78,7 +78,6 @@ struct PooledProcess {
 enum HealthStatus {
     Healthy,
     Unhealthy,
-    Unknown,
 }
 
 impl ProcessPool {
@@ -117,7 +116,7 @@ impl ProcessPool {
     
     /// 生成新进程
     fn spawn_process(&self) -> ProcessResult<u32> {
-        let mut config = self.base_config.clone();
+        let config = self.base_config.clone();
         let pid = self.generate_process_id();
         
         // 这里应该实际启动进程，简化实现

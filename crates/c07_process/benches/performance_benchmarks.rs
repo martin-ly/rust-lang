@@ -210,7 +210,7 @@ fn benchmark_concurrency(c: &mut Criterion) {
             let mut handles = Vec::new();
             
             for _ in 0..4 {
-                let manager_clone = manager.clone();
+                let _manager_clone = manager.clone();
                 let barrier_clone = barrier.clone();
                 
                 let handle = thread::spawn(move || {

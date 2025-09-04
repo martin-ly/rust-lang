@@ -1,11 +1,15 @@
-use crate::types::{ProcessConfig, ProcessInfo, ProcessStatus};
+use crate::types::{ProcessConfig, ProcessInfo};
 use crate::error::{ProcessResult, ProcessError};
-use std::collections::HashMap;
-use std::sync::{Arc, Mutex};
-use std::time::{Duration, SystemTime};
+use std::time::SystemTime;
 
 #[cfg(feature = "async")]
 use tokio::sync::{mpsc, oneshot, RwLock as TokioRwLock, Mutex as TokioMutex};
+#[cfg(feature = "async")]
+use crate::types::ProcessStatus;
+#[cfg(feature = "async")]
+use std::collections::HashMap;
+#[cfg(feature = "async")]
+use std::time::Duration;
 
 /// 异步进程管理器
 #[cfg(feature = "async")]
@@ -284,7 +288,7 @@ impl AsyncProcessPool {
                 user_id: None,
                 group_id: None,
                 priority: None,
-                resource_limits: crate::types::ResourceLimits::default(),
+                resource_limits: ResourceLimits::default(),
             };
             
             let pid = self.manager.spawn(config).await?;

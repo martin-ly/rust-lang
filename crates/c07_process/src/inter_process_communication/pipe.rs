@@ -5,7 +5,7 @@ use serde::{Serialize, Deserialize};
 use std::fs::{OpenOptions};
 use std::io::{Write, BufReader, BufRead};
 use std::path::Path;
-use std::sync::{Arc, Mutex};
+use std::sync::Arc;
 use std::path::PathBuf;
 use std::sync::atomic::{AtomicBool};
 
@@ -18,7 +18,7 @@ pub struct NamedPipe {
 
 impl NamedPipe {
     /// 创建新的命名管道
-    pub fn new(name: &str, config: IpcConfig) -> IpcResult<Self> {
+    pub fn new(name: &str, _config: IpcConfig) -> IpcResult<Self> {
         // 在Windows上，我们使用文件作为简单的IPC机制
         let pipe_path = format!("{}.pipe", name);
         
@@ -37,7 +37,7 @@ impl NamedPipe {
     }
     
     /// 连接到现有的命名管道
-    pub fn connect(name: &str, config: IpcConfig) -> IpcResult<Self> {
+    pub fn connect(name: &str, _config: IpcConfig) -> IpcResult<Self> {
         let pipe_path = format!("{}.pipe", name);
         
         // 检查管道文件是否存在

@@ -5,6 +5,7 @@ use std::sync::{Arc, Mutex};
 use std::collections::HashMap;
 
 /// 共享内存区域实现（简化版本）
+#[allow(dead_code)]
 pub struct SharedMemoryRegion {
     name: String,
     size: usize,

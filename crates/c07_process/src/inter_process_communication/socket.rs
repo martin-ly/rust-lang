@@ -1,7 +1,7 @@
 use crate::types::{IpcConfig, Message};
 use crate::error::{IpcResult, IpcError};
 use crate::inter_process_communication::IpcChannel;
-use std::sync::{Arc, Mutex};
+use std::sync::Arc;
 use std::sync::atomic::AtomicBool;
 
 /// Unix域套接字实现（简化版本）
@@ -12,7 +12,7 @@ pub struct UnixSocket {
 
 impl UnixSocket {
     /// 创建新的Unix域套接字
-    pub fn new(path: &str, config: IpcConfig) -> IpcResult<Self> {
+    pub fn new(path: &str, _config: IpcConfig) -> IpcResult<Self> {
         // 简化实现：在Windows上使用TCP套接字
         Ok(Self {
             path: path.to_string(),
@@ -21,7 +21,7 @@ impl UnixSocket {
     }
     
     /// 连接到现有的Unix域套接字
-    pub fn connect(path: &str, config: IpcConfig) -> IpcResult<Self> {
+    pub fn connect(path: &str, _config: IpcConfig) -> IpcResult<Self> {
         Ok(Self {
             path: path.to_string(),
             is_closed: Arc::new(AtomicBool::new(false)),
@@ -55,6 +55,7 @@ impl IpcChannel for UnixSocket {
 }
 
 /// TCP套接字实现
+#[allow(dead_code)]
 pub struct TcpSocket {
     address: String,
     port: u16,
@@ -63,7 +64,7 @@ pub struct TcpSocket {
 
 impl TcpSocket {
     /// 创建新的TCP套接字
-    pub fn new(address: &str, port: u16, config: IpcConfig) -> IpcResult<Self> {
+    pub fn new(address: &str, port: u16, _config: IpcConfig) -> IpcResult<Self> {
         Ok(Self {
             address: address.to_string(),
             port,
@@ -72,7 +73,7 @@ impl TcpSocket {
     }
     
     /// 连接到现有的TCP套接字
-    pub fn connect(address: &str, port: u16, config: IpcConfig) -> IpcResult<Self> {
+    pub fn connect(address: &str, port: u16, _config: IpcConfig) -> IpcResult<Self> {
         Ok(Self {
             address: address.to_string(),
             port,

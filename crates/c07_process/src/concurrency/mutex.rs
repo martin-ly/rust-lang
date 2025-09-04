@@ -40,7 +40,7 @@ impl ProcessMutex {
 
     /// 尝试获取锁
     #[allow(dead_code)]
-    pub fn try_lock(&self) -> Option<MutexGuard> {
+    pub fn try_lock(&self) -> Option<MutexGuard<'_>> {
         if let Ok(guard) = self.inner.try_lock() {
             self.stats.lock_count.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
             Some(MutexGuard {
@@ -53,7 +53,7 @@ impl ProcessMutex {
     }
 
     /// 获取锁（阻塞）
-    pub fn lock(&self) -> SyncResult<MutexGuard> {
+    pub fn lock(&self) -> SyncResult<MutexGuard<'_>> {
         let start = Instant::now();
         
         let guard = self.inner.lock()
@@ -86,7 +86,7 @@ impl ProcessMutex {
     }
 
     /// 带超时的锁获取
-    pub fn lock_timeout(&self, timeout: Duration) -> SyncResult<MutexGuard> {
+    pub fn lock_timeout(&self, timeout: Duration) -> SyncResult<MutexGuard<'_>> {
         let start = Instant::now();
         
         loop {
@@ -106,9 +106,20 @@ impl ProcessMutex {
     pub fn is_locked(&self) -> bool {
         self.inner.try_lock().is_err()
     }
+    
+    /// 获取锁名称
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+    
+    /// 获取等待者数量（互斥锁总是0或1）
+    pub fn waiter_count(&self) -> usize {
+        if self.is_locked() { 1 } else { 0 }
+    }
 }
 
 /// 互斥锁守卫
+#[allow(dead_code)]
 pub struct MutexGuard<'a> {
     guard: std::sync::MutexGuard<'a, ()>,
     stats: Arc<MutexStats>,

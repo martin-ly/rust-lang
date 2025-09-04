@@ -10,7 +10,7 @@
 //! 
 //! fn main() -> c07_process::Result<()> {
 //!     // 创建进程管理器
-//!     let mut pm = ProcessManager::new();
+//!     let pm = ProcessManager::new();
 //!     
 //!     // 创建进程配置
 //!     let mut env = HashMap::new();
@@ -144,7 +144,7 @@ pub struct LibraryInfo {
 
 /// 获取启用的特性列表
 fn get_enabled_features() -> Vec<String> {
-    let mut features = vec!["std".to_string()];
+    let features = vec!["std".to_string()];
     
     #[cfg(feature = "async")]
     features.push("async".to_string());
@@ -180,6 +180,7 @@ pub mod prelude {
         concurrency::barrier::ProcessBarrier,
     };
 }
+
 #[cfg(test)]
 mod tests {
     use super::*;

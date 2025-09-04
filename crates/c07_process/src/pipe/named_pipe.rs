@@ -2,12 +2,13 @@ use crate::types::{IpcConfig, IpcProtocol, Message};
 use crate::error::{IpcResult, IpcError};
 use crate::inter_process_communication::IpcChannel;
 use serde::{Serialize, Deserialize};
-use std::fs::{OpenOptions};
+use std::fs::OpenOptions;
 use std::io::{Write, BufReader, BufRead};
 use std::path::Path;
 use std::sync::{Arc, Mutex};
 
 /// 命名管道实现
+#[allow(dead_code)]
 pub struct NamedPipe {
     name: String,
     config: IpcConfig,

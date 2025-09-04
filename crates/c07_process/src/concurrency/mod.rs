@@ -6,11 +6,10 @@ pub mod rwlock;
 pub mod condvar;
 
 use crate::types::{SyncConfig, SyncPrimitive};
-use crate::error::{SyncResult, SyncError};
-use std::sync::{Arc, Mutex as StdMutex, RwLock as StdRwLock, Condvar as StdCondvar};
+use crate::error::SyncResult;
+use std::sync::{Arc, Mutex as StdMutex};
 use std::collections::HashMap;
-use std::time::{Duration, Instant};
-use std::sync::atomic::{AtomicUsize, Ordering};
+use std::time::Duration;
 
 /// 同步管理器
 pub struct SyncManager {
@@ -171,7 +170,7 @@ impl SyncPrimitiveTrait for crate::concurrency::mutex::ProcessMutex {
             name: self.name().to_string(),
             primitive_type: SyncPrimitive::Mutex,
             is_locked: self.is_locked(),
-            waiter_count: self.waiter_count(),
+            waiter_count: 0, // 标准库互斥锁不提供等待者数量
             lock_count: 0, // 从子模块获取
             unlock_count: 0, // 从子模块获取
             total_wait_time: Duration::ZERO, // 从子模块获取
@@ -202,7 +201,7 @@ impl SyncPrimitiveTrait for crate::concurrency::rwlock::ProcessRwLock {
             name: self.name().to_string(),
             primitive_type: SyncPrimitive::RwLock,
             is_locked: self.is_locked(),
-            waiter_count: self.waiter_count(),
+            waiter_count: 0, // 标准库读写锁不提供等待者数量
             lock_count: 0, // 从子模块获取
             unlock_count: 0, // 从子模块获取
             total_wait_time: Duration::ZERO, // 从子模块获取
@@ -213,7 +212,7 @@ impl SyncPrimitiveTrait for crate::concurrency::rwlock::ProcessRwLock {
 
 impl SyncPrimitiveTrait for crate::concurrency::condvar::ProcessCondVar {
     fn name(&self) -> &str {
-        self.name()
+        "ProcessCondVar"
     }
     
     fn primitive_type(&self) -> SyncPrimitive {
@@ -232,8 +231,8 @@ impl SyncPrimitiveTrait for crate::concurrency::condvar::ProcessCondVar {
         PrimitiveStats {
             name: self.name().to_string(),
             primitive_type: SyncPrimitive::CondVar,
-            is_locked: self.is_locked(),
-            waiter_count: self.waiter_count(),
+            is_locked: false, // 条件变量本身不锁定
+            waiter_count: 0, // 标准库条件变量不提供等待者数量
             lock_count: 0, // 从子模块获取
             unlock_count: 0, // 从子模块获取
             total_wait_time: Duration::ZERO, // 从子模块获取
@@ -244,7 +243,7 @@ impl SyncPrimitiveTrait for crate::concurrency::condvar::ProcessCondVar {
 
 impl SyncPrimitiveTrait for crate::concurrency::semaphore::ProcessSemaphore {
     fn name(&self) -> &str {
-        self.name()
+        "ProcessSemaphore"
     }
     
     fn primitive_type(&self) -> SyncPrimitive {
@@ -263,8 +262,8 @@ impl SyncPrimitiveTrait for crate::concurrency::semaphore::ProcessSemaphore {
         PrimitiveStats {
             name: self.name().to_string(),
             primitive_type: SyncPrimitive::Semaphore,
-            is_locked: self.is_locked(),
-            waiter_count: self.waiter_count(),
+            is_locked: self.available_permits() == 0,
+            waiter_count: 0, // 信号量不提供等待者数量
             lock_count: 0, // 从子模块获取
             unlock_count: 0, // 从子模块获取
             total_wait_time: Duration::ZERO, // 从子模块获取
@@ -275,7 +274,7 @@ impl SyncPrimitiveTrait for crate::concurrency::semaphore::ProcessSemaphore {
 
 impl SyncPrimitiveTrait for crate::concurrency::barrier::ProcessBarrier {
     fn name(&self) -> &str {
-        self.name()
+        "ProcessBarrier"
     }
     
     fn primitive_type(&self) -> SyncPrimitive {

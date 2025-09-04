@@ -44,7 +44,7 @@ impl ProcessRwLock {
     }
 
     /// 尝试获取读锁
-    pub fn try_read(&self) -> Option<RwLockReadGuard> {
+    pub fn try_read(&self) -> Option<RwLockReadGuard<'_>> {
         if let Ok(guard) = self.inner.try_read() {
             self.stats.read_lock_count.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
             Some(RwLockReadGuard {
@@ -57,7 +57,7 @@ impl ProcessRwLock {
     }
 
     /// 尝试获取写锁
-    pub fn try_write(&self) -> Option<RwLockWriteGuard> {
+    pub fn try_write(&self) -> Option<RwLockWriteGuard<'_>> {
         if let Ok(guard) = self.inner.try_write() {
             self.stats.write_lock_count.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
             Some(RwLockWriteGuard {
@@ -70,7 +70,7 @@ impl ProcessRwLock {
     }
 
     /// 获取读锁
-    pub fn read(&self) -> SyncResult<RwLockReadGuard> {
+    pub fn read(&self) -> SyncResult<RwLockReadGuard<'_>> {
         let start = Instant::now();
         
         let guard = self.inner.read()
@@ -89,7 +89,7 @@ impl ProcessRwLock {
     }
 
     /// 获取写锁
-    pub fn write(&self) -> SyncResult<RwLockWriteGuard> {
+    pub fn write(&self) -> SyncResult<RwLockWriteGuard<'_>> {
         let start = Instant::now();
         
         let guard = self.inner.write()
@@ -111,9 +111,20 @@ impl ProcessRwLock {
     pub fn is_locked(&self) -> bool {
         self.inner.try_read().is_err() && self.inner.try_write().is_err()
     }
+    
+    /// 获取锁名称
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+    
+    /// 获取等待者数量
+    pub fn waiter_count(&self) -> usize {
+        0 // 标准库读写锁不提供等待者数量
+    }
 }
 
 /// 读写锁读守卫
+#[allow(dead_code)]
 pub struct RwLockReadGuard<'a> {
     guard: std::sync::RwLockReadGuard<'a, ()>,
     stats: Arc<RwLockStats>,
@@ -126,6 +137,7 @@ impl<'a> Drop for RwLockReadGuard<'a> {
 }
 
 /// 读写锁写守卫
+#[allow(dead_code)]
 pub struct RwLockWriteGuard<'a> {
     guard: std::sync::RwLockWriteGuard<'a, ()>,
     stats: Arc<RwLockStats>,
