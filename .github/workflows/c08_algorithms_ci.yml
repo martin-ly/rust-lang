@@ -1,0 +1,57 @@
+name: c08_algorithms CI
+
+on:
+  push:
+    paths:
+      - 'crates/c08_algorithms/**'
+      - '.github/workflows/c08_algorithms_ci.yml'
+  pull_request:
+    paths:
+      - 'crates/c08_algorithms/**'
+      - '.github/workflows/c08_algorithms_ci.yml'
+
+jobs:
+  ci:
+    name: fmt • clippy • build • test • doc • cov
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Rust 1.89
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.89.0
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+
+      - name: rustfmt (check)
+        run: cargo fmt -p c08_algorithms -- --check
+
+      - name: clippy (deny warnings)
+        run: cargo clippy -p c08_algorithms --all-targets -- -D warnings
+
+      - name: Build
+        run: cargo build -p c08_algorithms --verbose
+
+      - name: Test
+        run: cargo test -p c08_algorithms --verbose
+
+      - name: Doc
+        run: cargo doc -p c08_algorithms --no-deps
+
+      - name: Install cargo-llvm-cov
+        run: |
+          rustup component add llvm-tools-preview
+          cargo install cargo-llvm-cov --locked
+
+      - name: Coverage (text)
+        run: |
+          cargo llvm-cov --manifest-path crates/c08_algorithms/Cargo.toml --no-report
+

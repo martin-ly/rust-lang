@@ -82,7 +82,9 @@ async fn main() -> anyhow::Result<()> {
   - 最小生成树：`mst_kruskal_async`、`mst_prim_async`
   - 拓扑排序：`topo_sort_async`
 - 分治/动态规划：占位（将提供 `*_async` 接口并与基准联动）
+  - 回溯：`src/backtracking/mod.rs`（`nqueens_solutions_async`、`permutations_async`、`subsets_async`）
 - 字符串算法：`src/string_algorithms/mod.rs`（`kmp_search_async`、`rabin_karp_search_async`）
+  - 多模式匹配：`ac_search_async`（Trie/Aho‑Corasick 自动机）
 
 ---
 
@@ -173,6 +175,7 @@ async fn demo_async_bfs() {
 - 拓扑排序（Topological sorting）
 - KMP 字符串匹配（Knuth–Morris–Pratt algorithm）
 - Rabin–Karp 字符串搜索（Rabin–Karp string search）
+- Aho–Corasick 多模式匹配（Aho–Corasick algorithm）
 
 （以上可参见维基百科中文或英文词条获取数学定义与标准描述。）
 

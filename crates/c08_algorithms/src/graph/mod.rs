@@ -6,6 +6,42 @@ use std::cmp::Ordering;
 use std::collections::{BinaryHeap, HashMap, HashSet, VecDeque};
 use std::hash::Hash;
 
+#[cfg(feature = "with-petgraph")]
+pub mod petgraph_bridge {
+    use super::*;
+    use petgraph::graph::NodeIndex;
+    use petgraph::Graph;
+    use petgraph::algo::dijkstra as pg_dijkstra;
+
+    /// 将 HashMap<T, Vec<(T, f64)>> 装载为 petgraph 无向加权图
+    pub fn to_petgraph_undirected<T: Eq + Hash + Clone>(g: &HashMap<T, Vec<(T, f64)>>) -> (Graph<T, f64>, HashMap<T, NodeIndex>) {
+        let mut graph = Graph::<T, f64, petgraph::Undirected>::new_undirected();
+        let mut idx = HashMap::new();
+        for k in g.keys() { idx.entry(k.clone()).or_insert_with(|| graph.add_node(k.clone())); }
+        for (u, vs) in g.iter() {
+            let ui = idx[u];
+            for (v, w) in vs {
+                let vi = *idx.entry(v.clone()).or_insert_with(|| graph.add_node(v.clone()));
+                graph.update_edge(ui, vi, *w);
+            }
+        }
+        (graph, idx)
+    }
+
+    /// 用 petgraph 跑一次 Dijkstra，与自研实现做对照
+    pub fn dijkstra_compare<T: Eq + Hash + Clone>(g: &HashMap<T, Vec<(T, f64)>>, start: &T) -> HashMap<T, f64> {
+        let (pg, idx) = to_petgraph_undirected(g);
+        let s = idx[start];
+        let res = pg_dijkstra(&pg, s, None, |e| *e.weight());
+        // 映射回 HashMap<T,f64>
+        let mut out = HashMap::new();
+        for (node_idx, &d) in res.iter() {
+            out.insert(pg[node_idx].clone(), d);
+        }
+        out
+    }
+}
+
 // =========================
 // BFS 最短路径（非加权）
 // =========================
@@ -399,6 +435,398 @@ where
     Ok(tokio::task::spawn_blocking(move || topo_sort_parallel(&graph)).await?)
 }
 
+// =========================
+// Bellman-Ford 与 Floyd–Warshall
+// =========================
+
+/// Bellman-Ford：允许负权，检测负环。返回 (dist, has_negative_cycle)
+pub fn bellman_ford_sync(graph: &HashMap<usize, Vec<(usize, f64)>>, n: usize, src: usize) -> (Vec<f64>, bool) {
+    let mut dist = vec![f64::INFINITY; n];
+    dist[src] = 0.0;
+    for _ in 0..n - 1 {
+        let mut changed = false;
+        for (&u, vs) in graph.iter() {
+            let du = dist[u];
+            if du.is_infinite() { continue; }
+            for &(v, w) in vs {
+                if du + w < dist[v] { dist[v] = du + w; changed = true; }
+            }
+        }
+        if !changed { break; }
+    }
+    // 检测负环
+    let mut neg = false;
+    for (&u, vs) in graph.iter() {
+        let du = dist[u];
+        if du.is_infinite() { continue; }
+        for &(v, w) in vs { if du + w < dist[v] { neg = true; break; } }
+        if neg { break; }
+    }
+    (dist, neg)
+}
+
+pub async fn bellman_ford_async(graph: HashMap<usize, Vec<(usize, f64)>>, n: usize, src: usize) -> Result<(Vec<f64>, bool)> {
+    Ok(tokio::task::spawn_blocking(move || bellman_ford_sync(&graph, n, src)).await?)
+}
+
+/// Floyd–Warshall：多源最短路（允许负边但无负环）。返回 n×n 距离矩阵
+pub fn floyd_warshall_sync(n: usize, edges: &[(usize, usize, f64)]) -> Vec<Vec<f64>> {
+    let mut d = vec![vec![f64::INFINITY; n]; n];
+    for i in 0..n { d[i][i] = 0.0; }
+    for &(u, v, w) in edges { d[u][v] = d[u][v].min(w); }
+    for k in 0..n {
+        for i in 0..n {
+            let dik = d[i][k];
+            if dik.is_infinite() { continue; }
+            for j in 0..n {
+                let alt = dik + d[k][j];
+                if alt < d[i][j] { d[i][j] = alt; }
+            }
+        }
+    }
+    d
+}
+
+pub async fn floyd_warshall_async(n: usize, edges: Vec<(usize, usize, f64)>) -> Result<Vec<Vec<f64>>> {
+    Ok(tokio::task::spawn_blocking(move || floyd_warshall_sync(n, &edges)).await?)
+}
+
+// =========================
+// Hopcroft–Karp 二分图最大匹配（U: 0..n_left, V: 0..n_right）
+// 输入邻接：`adj[u]` 列出与之相连的右侧点 v（0..n_right）
+// =========================
+
+pub fn hopcroft_karp_sync(adj: &[Vec<usize>], n_left: usize, n_right: usize) -> (usize, Vec<Option<usize>>, Vec<Option<usize>>) {
+    assert_eq!(adj.len(), n_left);
+    let mut pair_u: Vec<Option<usize>> = vec![None; n_left];
+    let mut pair_v: Vec<Option<usize>> = vec![None; n_right];
+    let mut dist: Vec<i32> = vec![0; n_left];
+
+    let mut matching = 0usize;
+
+    fn bfs_hk(adj: &[Vec<usize>], n_left: usize, pair_u: &Vec<Option<usize>>, pair_v: &Vec<Option<usize>>, dist: &mut [i32]) -> bool {
+        let mut q = VecDeque::new();
+        for u in 0..n_left {
+            if pair_u[u].is_none() { dist[u] = 0; q.push_back(u); } else { dist[u] = -1; }
+        }
+        let mut found = false;
+        while let Some(u) = q.pop_front() {
+            for &v in &adj[u] {
+                if let Some(u2) = pair_v[v] {
+                    if dist[u2] == -1 { dist[u2] = dist[u] + 1; q.push_back(u2); }
+                } else {
+                    found = true;
+                }
+            }
+        }
+        found
+    }
+
+    fn dfs(u: usize, adj: &[Vec<usize>], dist: &mut [i32], pair_u: &mut [Option<usize>], pair_v: &mut [Option<usize>]) -> bool {
+        for &v in &adj[u] {
+            if let Some(u2) = pair_v[v] {
+                if dist[u2] == dist[u] + 1 && dfs(u2, adj, dist, pair_u, pair_v) {
+                    pair_u[u] = Some(v);
+                    pair_v[v] = Some(u);
+                    return true;
+                }
+            } else {
+                pair_u[u] = Some(v);
+                pair_v[v] = Some(u);
+                return true;
+            }
+        }
+        dist[u] = -1;
+        false
+    }
+
+    while bfs_hk(adj, n_left, &pair_u, &pair_v, &mut dist) {
+        for u in 0..n_left {
+            if pair_u[u].is_none() && dfs(u, adj, &mut dist, &mut pair_u, &mut pair_v) {
+                matching += 1;
+            }
+        }
+    }
+
+    (matching, pair_u, pair_v)
+}
+
+pub async fn hopcroft_karp_async(adj: Vec<Vec<usize>>, n_left: usize, n_right: usize) -> Result<(usize, Vec<Option<usize>>, Vec<Option<usize>>)> {
+    Ok(tokio::task::spawn_blocking(move || hopcroft_karp_sync(&adj, n_left, n_right)).await?)
+}
+// =========================
+// 强连通分量（Tarjan）
+// =========================
+
+struct TarjanState<T: Eq + Hash + Clone> {
+    index: usize,
+    index_map: HashMap<T, usize>,
+    lowlink_map: HashMap<T, usize>,
+    on_stack: HashSet<T>,
+    stack: Vec<T>,
+    sccs: Vec<Vec<T>>,
+}
+
+impl<T: Eq + Hash + Clone> TarjanState<T> {
+    fn new() -> Self {
+        Self {
+            index: 0,
+            index_map: HashMap::new(),
+            lowlink_map: HashMap::new(),
+            on_stack: HashSet::new(),
+            stack: Vec::new(),
+            sccs: Vec::new(),
+        }
+    }
+
+    fn strongconnect(&mut self, v: T, graph: &HashMap<T, Vec<T>>) {
+        self.index_map.insert(v.clone(), self.index);
+        self.lowlink_map.insert(v.clone(), self.index);
+        self.index += 1;
+        self.stack.push(v.clone());
+        self.on_stack.insert(v.clone());
+
+        if let Some(neigh) = graph.get(&v) {
+            for w in neigh {
+                let w_cl = w.clone();
+                if !self.index_map.contains_key(&w_cl) {
+                    self.strongconnect(w_cl.clone(), graph);
+                    let vlow = *self.lowlink_map.get(&v).unwrap();
+                    let wlow = *self.lowlink_map.get(&w_cl).unwrap();
+                    self.lowlink_map.insert(v.clone(), vlow.min(wlow));
+                } else if self.on_stack.contains(&w_cl) {
+                    let vlow = *self.lowlink_map.get(&v).unwrap();
+                    let widx = *self.index_map.get(&w_cl).unwrap();
+                    self.lowlink_map.insert(v.clone(), vlow.min(widx));
+                }
+            }
+        }
+
+        // 如果 v 是强连通分量的根节点
+        let v_is_root = self.lowlink_map.get(&v) == self.index_map.get(&v);
+        if v_is_root {
+            let mut comp = Vec::new();
+            loop {
+                let w = self.stack.pop().unwrap();
+                self.on_stack.remove(&w);
+                comp.push(w.clone());
+                if w == v { break; }
+            }
+            self.sccs.push(comp);
+        }
+    }
+}
+
+/// Tarjan 强连通分量（同步）：返回每个 SCC 的顶点集合
+pub fn tarjan_scc_sync<T>(graph: &HashMap<T, Vec<T>>) -> Vec<Vec<T>>
+where
+    T: Eq + Hash + Clone,
+{
+    // 收集所有出现的节点（包括仅出现在邻接中的节点）
+    let mut nodes: HashSet<T> = HashSet::new();
+    for (u, vs) in graph.iter() {
+        nodes.insert(u.clone());
+        for v in vs { nodes.insert(v.clone()); }
+    }
+
+    let mut st = TarjanState::<T>::new();
+    for v in nodes {
+        if !st.index_map.contains_key(&v) {
+            st.strongconnect(v.clone(), graph);
+        }
+    }
+    st.sccs
+}
+
+/// Tarjan 强连通分量（异步包装）
+pub async fn tarjan_scc_async<T>(graph: HashMap<T, Vec<T>>) -> Result<Vec<Vec<T>>>
+where
+    T: Eq + Hash + Clone + Send + 'static,
+{
+    Ok(tokio::task::spawn_blocking(move || tarjan_scc_sync(&graph)).await?)
+}
+
+// =========================
+// 最大流：Dinic 算法
+// =========================
+
+/// Dinic 最大流（同步）。
+/// 输入：邻接表 `graph`，其中每条边 (u -> v, cap) 为有向边容量；若要无向边请手动加双向。
+/// 返回：从 `s` 到 `t` 的最大流值。
+pub fn max_flow_dinic_sync<T>(graph: &HashMap<T, Vec<(T, i64)>>, s: &T, t: &T) -> i64
+where
+    T: Eq + Hash + Clone,
+{
+    // 压缩节点到索引
+    let mut nodes: HashMap<T, usize> = HashMap::new();
+    for (u, vs) in graph.iter() {
+        if !nodes.contains_key(u) {
+            let idx = nodes.len();
+            nodes.insert(u.clone(), idx);
+        }
+        for (v, _) in vs {
+            if !nodes.contains_key(v) {
+                let idx = nodes.len();
+                nodes.insert(v.clone(), idx);
+            }
+        }
+    }
+    if !nodes.contains_key(s) || !nodes.contains_key(t) { return 0; }
+    let n = nodes.len();
+    let si = nodes[s];
+    let ti = nodes[t];
+
+    #[derive(Clone)]
+    struct Edge { to: usize, rev: usize, cap: i64 }
+
+    let mut g: Vec<Vec<Edge>> = vec![Vec::new(); n];
+    let add_edge = |u: usize, v: usize, c: i64, g: &mut Vec<Vec<Edge>>| {
+        let from_rev = g[v].len();
+        let to_rev = g[u].len();
+        g[u].push(Edge { to: v, rev: from_rev, cap: c });
+        g[v].push(Edge { to: u, rev: to_rev, cap: 0 });
+    };
+
+    for (u, vs) in graph.iter() {
+        let ui = nodes[u];
+        for (v, c) in vs { if *c > 0 { add_edge(ui, nodes[v], *c, &mut g); } }
+    }
+
+    let mut flow: i64 = 0;
+    loop {
+        // BFS 分层
+        let mut level = vec![-1i32; n];
+        let mut q = VecDeque::new();
+        level[si] = 0;
+        q.push_back(si);
+        while let Some(u) = q.pop_front() {
+            for e in &g[u] {
+                if e.cap > 0 && level[e.to] < 0 {
+                    level[e.to] = level[u] + 1;
+                    q.push_back(e.to);
+                }
+            }
+        }
+        if level[ti] < 0 { break; }
+
+        // 当前弧优化
+        let mut it = vec![0usize; n];
+        fn dfs(u: usize, t: usize, f: i64, g: &mut [Vec<Edge>], it: &mut [usize], level: &[i32]) -> i64 {
+            if u == t { return f; }
+            let m = g[u].len();
+            while it[u] < m {
+                let i = it[u];
+                let Edge { to, rev, cap } = g[u][i].clone();
+                if cap > 0 && level[u] + 1 == level[to] {
+                    let d = dfs(to, t, f.min(cap), g, it, level);
+                    if d > 0 {
+                        // 更新残量网络
+                        g[u][i].cap -= d;
+                        let r = rev;
+                        g[to][r].cap += d;
+                        return d;
+                    }
+                }
+                it[u] += 1;
+            }
+            0
+        }
+
+        loop {
+            let pushed = dfs(si, ti, i64::MAX / 4, &mut g, &mut it, &level);
+            if pushed == 0 { break; }
+            flow += pushed;
+        }
+    }
+    flow
+}
+
+/// Dinic 最大流（异步包装）
+pub async fn max_flow_dinic_async<T>(graph: HashMap<T, Vec<(T, i64)>>, s: T, t: T) -> Result<i64>
+where
+    T: Eq + Hash + Clone + Send + 'static,
+{
+    Ok(tokio::task::spawn_blocking(move || max_flow_dinic_sync(&graph, &s, &t)).await?)
+}
+
+// =========================
+// 树上 LCA（二叉提升）
+// =========================
+
+/// 预处理 LCA（二叉提升），输入树（无向，根为 root）
+pub struct LcaBinaryLift<T: Eq + Hash + Clone> {
+    pub root: T,
+    node_to_idx: HashMap<T, usize>,
+    idx_to_node: Vec<T>,
+    up: Vec<Vec<usize>>, // up[k][v] = 2^k 祖先
+    depth: Vec<i32>,
+}
+
+impl<T: Eq + Hash + Clone> LcaBinaryLift<T> {
+    pub fn new(tree: &HashMap<T, Vec<T>>, root: T) -> Self {
+        // 压缩索引
+        let mut node_to_idx: HashMap<T, usize> = HashMap::new();
+        for (u, vs) in tree.iter() {
+            if !node_to_idx.contains_key(u) {
+                let idx = node_to_idx.len();
+                node_to_idx.insert(u.clone(), idx);
+            }
+            for v in vs {
+                if !node_to_idx.contains_key(v) {
+                    let idx = node_to_idx.len();
+                    node_to_idx.insert(v.clone(), idx);
+                }
+            }
+        }
+        let n = node_to_idx.len();
+        let mut idx_to_node = vec![root.clone(); n];
+        for (node, &i) in node_to_idx.iter() { idx_to_node[i] = node.clone(); }
+
+        let log = (n as f64).log2().ceil() as usize + 1;
+        let mut up = vec![vec![0usize; n]; log];
+        let mut depth = vec![-1i32; n];
+
+        let r = node_to_idx[&root];
+        depth[r] = 0;
+        // BFS 建树父子关系
+        let mut q = VecDeque::new();
+        q.push_back(r);
+        while let Some(u) = q.pop_front() {
+            if let Some(neigh) = tree.get(&idx_to_node[u]) {
+                for vnode in neigh {
+                    let v = node_to_idx[vnode];
+                    if depth[v] == -1 {
+                        depth[v] = depth[u] + 1;
+                        up[0][v] = u;
+                        q.push_back(v);
+                    }
+                }
+            }
+        }
+        up[0][r] = r;
+        for k in 1..log {
+            for v in 0..n { up[k][v] = up[k - 1][up[k - 1][v]]; }
+        }
+        Self { root, node_to_idx, idx_to_node, up, depth }
+    }
+
+    pub fn lca(&self, a: &T, b: &T) -> T {
+        let mut u = self.node_to_idx[a];
+        let mut v = self.node_to_idx[b];
+        if self.depth[u] < self.depth[v] { std::mem::swap(&mut u, &mut v); }
+        let diff = (self.depth[u] - self.depth[v]) as usize;
+        let mut k = 0usize;
+        let mut uu = u;
+        while (1usize << k) <= diff { if (diff >> k) & 1 == 1 { uu = self.up[k][uu]; } k += 1; }
+        u = uu;
+        if u == v { return self.idx_to_node[u].clone(); }
+        for k in (0..self.up.len()).rev() {
+            if self.up[k][u] != self.up[k][v] { u = self.up[k][u]; v = self.up[k][v]; }
+        }
+        self.idx_to_node[self.up[0][u]].clone()
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -450,6 +878,88 @@ mod tests {
         let order = topo_sort_sync(&dag).unwrap();
         let pos: HashMap<_, _> = order.iter().enumerate().map(|(i, k)| (*k, i)).collect();
         assert!(pos["A"] < pos["B"] && pos["A"] < pos["C"] && pos["B"] < pos["D"] && pos["C"] < pos["D"]);
+    }
+
+    #[test]
+    fn test_tarjan_scc() {
+        // 经典示例：
+        // 1 -> 2 -> 3 -> 1   (SCC: {1,2,3})
+        // 3 -> 4 -> 5 -> 4   (SCC: {4,5})
+        // 5 -> 6              (SCC: {6})
+        let mut g: HashMap<i32, Vec<i32>> = HashMap::new();
+        g.insert(1, vec![2]);
+        g.insert(2, vec![3]);
+        g.insert(3, vec![1, 4]);
+        g.insert(4, vec![5]);
+        g.insert(5, vec![4, 6]);
+        g.insert(6, vec![]);
+
+        let mut sccs = tarjan_scc_sync(&g);
+        for comp in &mut sccs { comp.sort(); }
+        sccs.sort_by_key(|c| (c.len(), c[0]));
+
+        assert!(sccs.contains(&vec![1,2,3]));
+        assert!(sccs.contains(&vec![4,5]));
+        assert!(sccs.contains(&vec![6]));
+    }
+
+    #[test]
+    fn test_max_flow_dinic_small() {
+        // 经典网络：S(0)->1(10), S->2(10), 1->2(2), 1->T(8), 2->T(10)
+        let s = 0;
+        let t = 3;
+        let mut g: HashMap<i32, Vec<(i32, i64)>> = HashMap::new();
+        g.insert(0, vec![(1, 10), (2, 10)]);
+        g.insert(1, vec![(2, 2), (3, 8)]);
+        g.insert(2, vec![(3, 10)]);
+        g.insert(3, vec![]);
+        let f = max_flow_dinic_sync(&g, &s, &t);
+        assert_eq!(f, 18);
+    }
+
+    #[test]
+    fn test_lca_binary_lift() {
+        // 0-1-3, 1-4, 0-2-5  树根设为 0
+        let mut tree: HashMap<i32, Vec<i32>> = HashMap::new();
+        tree.insert(0, vec![1, 2]);
+        tree.insert(1, vec![0, 3, 4]);
+        tree.insert(2, vec![0, 5]);
+        tree.insert(3, vec![1]);
+        tree.insert(4, vec![1]);
+        tree.insert(5, vec![2]);
+        let lca = LcaBinaryLift::new(&tree, 0);
+        assert_eq!(lca.lca(&3, &4), 1);
+        assert_eq!(lca.lca(&3, &5), 0);
+        assert_eq!(lca.lca(&4, &2), 0);
+    }
+
+    #[test]
+    fn test_bellman_ford_and_floyd() {
+        let mut g: HashMap<usize, Vec<(usize, f64)>> = HashMap::new();
+        g.insert(0, vec![(1, 1.0), (2, 4.0)]);
+        g.insert(1, vec![(2, 2.0), (3, 5.0)]);
+        g.insert(2, vec![(3, 1.0)]);
+        g.insert(3, vec![]);
+        let (dist, neg) = bellman_ford_sync(&g, 4, 0);
+        assert!(!neg);
+        assert_eq!(dist[3].round() as i32, 4);
+
+        let edges = vec![(0,1,1.0),(0,2,4.0),(1,2,2.0),(1,3,5.0),(2,3,1.0)];
+        let d = floyd_warshall_sync(4, &edges);
+        assert_eq!(d[0][3].round() as i32, 4);
+    }
+
+    #[test]
+    fn test_hopcroft_karp_basic() {
+        // 左 0..3, 右 0..3, 最大匹配应为 3
+        let adj = vec![
+            vec![0, 1],    // u0 -> v0,v1
+            vec![1, 2],    // u1 -> v1,v2
+            vec![0, 2],    // u2 -> v0,v2
+        ];
+        let (m, pu, _pv) = hopcroft_karp_sync(&adj, 3, 3);
+        assert_eq!(m, 3);
+        assert!(pu.iter().all(|o| o.is_some()));
     }
 }
 

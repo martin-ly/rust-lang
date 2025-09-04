@@ -49,4 +49,10 @@ cargo test -p c08_algorithms
 - 图算法优先并行化前处理（边收集/初始化），主循环谨慎并行
 - 使用 `tracing` 标注关键路径，结合 Criterion 比较同步/并行/异步包装
 
+### 字符串匹配优化
+
+- 单模式匹配：短模式可用 KMP；随机文本下 Rabin‑Karp 期望更优但需防碰撞
+- 多模式匹配：Aho‑Corasick 适合批量关键字；预构建自动机可复用；谨慎选择字母表与哈希
+- 在异步环境中对大量文本块可采用分片并行 + `spawn_blocking` 包装
+
 更多语言特性结合：见 `docs/rust_189_features.md`。

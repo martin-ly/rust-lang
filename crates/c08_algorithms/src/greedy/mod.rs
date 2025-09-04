@@ -2,6 +2,7 @@
 
 use anyhow::Result;
 use rayon::prelude::*;
+use std::collections::{BinaryHeap, HashMap};
 
 // =========================
 // 区间调度（最大不重叠区间数）
@@ -77,6 +78,128 @@ pub async fn coin_change_greedy_async(coins: Vec<i64>, amount: i64) -> Result<Ve
     Ok(tokio::task::spawn_blocking(move || coin_change_greedy_parallel(coins, amount)).await?)
 }
 
+// =========================
+// 分数背包（Fractional Knapsack）
+// =========================
+
+#[derive(Clone, Copy, Debug)]
+pub struct Item {
+    pub weight: f64,
+    pub value: f64,
+}
+
+pub fn fractional_knapsack_sync(mut items: Vec<Item>, capacity: f64) -> f64 {
+    items.sort_by(|a, b| (b.value / b.weight).partial_cmp(&(a.value / a.weight)).unwrap());
+    let mut cap = capacity;
+    let mut total = 0.0;
+    for it in items {
+        if cap <= 0.0 { break; }
+        let take = it.weight.min(cap);
+        total += (it.value / it.weight) * take;
+        cap -= take;
+    }
+    total
+}
+
+pub fn fractional_knapsack_parallel(mut items: Vec<Item>, capacity: f64) -> f64 {
+    items.par_sort_unstable_by(|a, b| (b.value / b.weight).partial_cmp(&(a.value / a.weight)).unwrap());
+    fractional_knapsack_sync(items, capacity)
+}
+
+pub async fn fractional_knapsack_async(items: Vec<Item>, capacity: f64) -> Result<f64> {
+    Ok(tokio::task::spawn_blocking(move || fractional_knapsack_parallel(items, capacity)).await?)
+}
+
+// =========================
+// Huffman 编码（构建编码表/编码/解码）
+// =========================
+
+#[derive(Clone, Debug)]
+pub struct HuffNode {
+    freq: usize,
+    ch: Option<u8>,
+    left: Option<Box<HuffNode>>,
+    right: Option<Box<HuffNode>>,
+}
+
+impl PartialEq for HuffNode { fn eq(&self, other: &Self) -> bool { self.freq == other.freq } }
+impl Eq for HuffNode {}
+impl PartialOrd for HuffNode { fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> { Some(self.cmp(other)) } }
+impl Ord for HuffNode {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // 使 BinaryHeap 作为最小堆：频率小的优先（反转）
+        other.freq.cmp(&self.freq)
+    }
+}
+
+fn build_huffman_tree(freqs: &HashMap<u8, usize>) -> Option<Box<HuffNode>> {
+    let mut heap: BinaryHeap<HuffNode> = BinaryHeap::new();
+    for (&ch, &f) in freqs.iter() {
+        heap.push(HuffNode { freq: f, ch: Some(ch), left: None, right: None });
+    }
+    if heap.is_empty() { return None; }
+    while heap.len() > 1 {
+        let a = heap.pop().unwrap();
+        let b = heap.pop().unwrap();
+        heap.push(HuffNode { freq: a.freq + b.freq, ch: None, left: Some(Box::new(a)), right: Some(Box::new(b)) });
+    }
+    heap.pop().map(Box::new)
+}
+
+fn build_codes_rec(node: &HuffNode, path: &mut Vec<char>, codes: &mut HashMap<u8, String>) {
+    if let Some(ch) = node.ch {
+        let code: String = if path.is_empty() { "0".to_string() } else { path.iter().collect() };
+        codes.insert(ch, code);
+        return;
+    }
+    if let Some(ref l) = node.left { path.push('0'); build_codes_rec(l, path, codes); path.pop(); }
+    if let Some(ref r) = node.right { path.push('1'); build_codes_rec(r, path, codes); path.pop(); }
+}
+
+pub fn huffman_build_codes(input: &str) -> (HashMap<u8, String>, Option<Box<HuffNode>>) {
+    let mut freqs: HashMap<u8, usize> = HashMap::new();
+    for &b in input.as_bytes() { *freqs.entry(b).or_insert(0) += 1; }
+    let tree = build_huffman_tree(&freqs);
+    let mut codes = HashMap::new();
+    if let Some(ref root) = tree { let mut path = Vec::new(); build_codes_rec(root, &mut path, &mut codes); }
+    (codes, tree)
+}
+
+pub fn huffman_encode(input: &str, codes: &HashMap<u8, String>) -> String {
+    let mut out = String::new();
+    for &b in input.as_bytes() { out.push_str(codes.get(&b).map(String::as_str).unwrap_or("")); }
+    out
+}
+
+pub fn huffman_decode(bits: &str, tree: &HuffNode) -> Vec<u8> {
+    let mut res = Vec::new();
+    if tree.ch.is_some() { // 单字符特殊情况
+        if let Some(ch) = tree.ch { for _ in bits.chars() { res.push(ch); } }
+        return res;
+    }
+    let mut cur = tree;
+    for c in bits.chars() {
+        cur = match c {
+            '0' => cur.left.as_deref().unwrap_or(cur),
+            '1' => cur.right.as_deref().unwrap_or(cur),
+            _ => cur,
+        };
+        if let Some(ch) = cur.ch { res.push(ch); cur = tree; }
+    }
+    res
+}
+
+pub async fn huffman_build_codes_async(input: String) -> Result<(HashMap<u8, String>, Option<Box<HuffNode>>)> {
+    Ok(tokio::task::spawn_blocking(move || huffman_build_codes(&input)).await?)
+}
+
+pub async fn huffman_encode_async(input: String, codes: HashMap<u8, String>) -> Result<String> {
+    Ok(tokio::task::spawn_blocking(move || huffman_encode(&input, &codes)).await?)
+}
+
+pub async fn huffman_decode_async(bits: String, tree: Box<HuffNode>) -> Result<Vec<u8>> {
+    Ok(tokio::task::spawn_blocking(move || huffman_decode(&bits, &tree)).await?)
+}
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -105,6 +228,29 @@ mod tests {
 
         let r2 = coin_change_greedy_parallel(coins.clone(), 41);
         assert_eq!(r2.iter().sum::<i64>(), 41);
+    }
+
+    #[test]
+    fn test_fractional_knapsack() {
+        let items = vec![
+            Item { weight: 10.0, value: 60.0 },
+            Item { weight: 20.0, value: 100.0 },
+            Item { weight: 30.0, value: 120.0 },
+        ];
+        let best = fractional_knapsack_sync(items.clone(), 50.0);
+        assert!((best - 240.0).abs() < 1e-9);
+        let best2 = fractional_knapsack_parallel(items, 50.0);
+        assert!((best2 - 240.0).abs() < 1e-9);
+    }
+
+    #[test]
+    fn test_huffman_basic() {
+        let s = "abracadabra";
+        let (codes, tree) = huffman_build_codes(s);
+        assert!(!codes.is_empty());
+        let bits = huffman_encode(s, &codes);
+        let decoded = huffman_decode(&bits, tree.as_ref().unwrap());
+        assert_eq!(String::from_utf8(decoded).unwrap(), s);
     }
 
     #[test]

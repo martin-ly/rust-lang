@@ -7,6 +7,7 @@ use c08_algorithms::divide_and_conquer::*;
 use c08_algorithms::dynamic_programming::*;
 use c08_algorithms::greedy::*;
 use c08_algorithms::string_algorithms::*;
+use c08_algorithms::backtracking::*;
 
 fn bench_sorting(c: &mut Criterion) {
     let mut group = c.benchmark_group("sorting_sync_vs_parallel");
@@ -182,13 +183,55 @@ fn bench_string_algorithms(c: &mut Criterion) {
             b.iter(|| rt.block_on(async { black_box(rabin_karp_search_async(text.clone(), pattern.clone()).await.unwrap()) }))
         });
     }
+    // AC 多模式匹配
+    for &n in &[10_000usize, 100_000] {
+        let text: String = (0..n).map(|i| char::from(((i * 97) % 26) as u8 + b'a')).collect();
+        let patterns: Vec<String> = vec!["he".into(), "she".into(), "hers".into(), "his".into()];
+        group.bench_with_input(BenchmarkId::new("ac_async", n), &n, |b, _| {
+            let rt = tokio::runtime::Runtime::new().unwrap();
+            b.iter(|| rt.block_on(async { black_box(ac_search_async(text.clone(), patterns.clone()).await.unwrap()) }))
+        });
+    }
+    group.finish();
+}
+
+fn bench_backtracking(c: &mut Criterion) {
+    let mut group = c.benchmark_group("backtracking");
+
+    // n-queens count
+    for &n in &[10usize, 11] {
+        group.bench_with_input(BenchmarkId::new("nqueens_parallel", n), &n, |b, &n| {
+            b.iter(|| black_box(nqueens_count_parallel(n)))
+        });
+        group.bench_with_input(BenchmarkId::new("nqueens_async", n), &n, |b, &n| {
+            let rt = tokio::runtime::Runtime::new().unwrap();
+            b.iter(|| rt.block_on(async { black_box(nqueens_solutions_async(n).await.unwrap().len()) }))
+        });
+    }
+
+    // permutations
+    for &n in &[8usize, 9] {
+        let data: Vec<usize> = (0..n).collect();
+        group.bench_with_input(BenchmarkId::new("perm_parallel", n), &n, |b, _| {
+            b.iter(|| black_box(permutations_parallel(data.clone())))
+        });
+    }
+
+    // subsets
+    for &n in &[16usize, 18] {
+        let data: Vec<usize> = (0..n).collect();
+        group.bench_with_input(BenchmarkId::new("subsets_parallel", n), &n, |b, _| {
+            b.iter(|| black_box(subsets_parallel(&data)))
+        });
+    }
+
     group.finish();
 }
 
 criterion_group!(
     name = benches;
     config = Criterion::default();
-    targets = bench_sorting, bench_searching, bench_graph, bench_dp_and_dac, bench_greedy, bench_string_algorithms
+    targets = bench_sorting, bench_searching, bench_graph, bench_dp_and_dac, bench_greedy, bench_string_algorithms, bench_backtracking
 );
 criterion_main!(benches);
 

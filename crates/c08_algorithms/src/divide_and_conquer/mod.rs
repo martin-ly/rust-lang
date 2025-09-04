@@ -142,6 +142,70 @@ pub async fn closest_pair_async(pts: Vec<Point>) -> Result<f64> {
     Ok(tokio::task::spawn_blocking(move || closest_pair_parallel(pts)).await?)
 }
 
+// =========================
+// 快速幂（幂/矩阵幂骨架）
+// =========================
+
+pub fn fast_pow_mod(mut base: u64, mut exp: u64, modu: u64) -> u64 {
+    if modu == 1 { return 0; }
+    let mut res = 1u64 % modu;
+    base %= modu;
+    while exp > 0 {
+        if exp & 1 == 1 { res = res.wrapping_mul(base) % modu; }
+        base = base.wrapping_mul(base) % modu;
+        exp >>= 1;
+    }
+    res
+}
+
+pub async fn fast_pow_mod_async(base: u64, exp: u64, modu: u64) -> Result<u64> {
+    Ok(tokio::task::spawn_blocking(move || fast_pow_mod(base, exp, modu)).await?)
+}
+
+// 快速矩阵幂（方阵乘法 + 幂），用于线性递推加速
+#[derive(Clone, Debug, PartialEq)]
+pub struct Matrix {
+    pub n: usize,
+    pub a: Vec<Vec<u64>>, // 简化：使用 u64 与取模外传
+}
+
+impl Matrix {
+    pub fn identity(n: usize) -> Self {
+        let mut a = vec![vec![0u64; n]; n];
+        for i in 0..n { a[i][i] = 1; }
+        Self { n, a }
+    }
+
+    pub fn mul_mod(&self, other: &Self, modu: u64) -> Self {
+        let n = self.n; assert_eq!(n, other.n);
+        let mut c = vec![vec![0u64; n]; n];
+        for i in 0..n {
+            for k in 0..n {
+                let vik = self.a[i][k] % modu;
+                if vik == 0 { continue; }
+                for j in 0..n {
+                    c[i][j] = (c[i][j] + vik.wrapping_mul(other.a[k][j] % modu)) % modu;
+                }
+            }
+        }
+        Self { n, a: c }
+    }
+
+    pub fn pow_mod(&self, mut e: u64, modu: u64) -> Self {
+        let mut base = self.clone();
+        let mut res = Matrix::identity(self.n);
+        while e > 0 {
+            if e & 1 == 1 { res = res.mul_mod(&base, modu); }
+            base = base.mul_mod(&base, modu);
+            e >>= 1;
+        }
+        res
+    }
+}
+
+pub async fn matrix_pow_mod_async(m: Matrix, e: u64, modu: u64) -> Result<Matrix> {
+    Ok(tokio::task::spawn_blocking(move || m.pow_mod(e, modu)).await?)
+}
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -165,6 +229,23 @@ mod tests {
         let d2 = closest_pair_parallel(pts);
         assert!((d1 - 1.0).abs() < 1e-9);
         assert!((d2 - 1.0).abs() < 1e-9);
+    }
+
+    #[test]
+    fn test_fast_pow_mod() {
+        assert_eq!(fast_pow_mod(2, 10, 1_000_000_007), 1024);
+        assert_eq!(fast_pow_mod(123456789, 0, 97), 1 % 97);
+    }
+
+    #[test]
+    fn test_matrix_pow() {
+        // 斐波那契矩阵 [[1,1],[1,0]]^n 乘以 [F1,F0]^T 生成 [F_{n+1}, F_n]
+        let fib = Matrix { n: 2, a: vec![vec![1,1], vec![1,0]] };
+        let modu = 1_000_000_007u64;
+        let m = fib.pow_mod(10, modu); // F_10 = 55
+        // m 应该等于 [[F_{11}, F_{10}], [F_{10}, F_9]] = [[89,55],[55,34]]
+        assert_eq!(m.a[0][1], 55);
+        assert_eq!(m.a[1][0], 55);
     }
 }
 

@@ -836,8 +836,10 @@ fn filter_even_numbers(numbers: &[i32]) -> Vec<i32> {
   - 图论：`crates/c08_algorithms/src/graph/mod.rs`（BFS/Dijkstra/MST/Topo 的同步/并行/异步）
   - 分治：`crates/c08_algorithms/src/divide_and_conquer/mod.rs`（最大子段和、最近点对，含异步封装）
   - 动态规划：`crates/c08_algorithms/src/dynamic_programming/mod.rs`（LCS、0-1 背包，含异步封装）
+  - 字符串：`crates/c08_algorithms/src/string_algorithms/mod.rs`（KMP、Rabin‑Karp、Trie/Aho‑Corasick，含异步封装）
 
 - 基准：`crates/c08_algorithms/benches/alg_benches.rs`（包含排序/搜索/图/DP/分治/贪心）
+  - 字符串算法基准：KMP/Rabin‑Karp（同步/异步），AC 多模式匹配（异步）
 
 - 快速使用（示例位于 README 中“基础用法”）：
   - 异步排序/搜索/图：`sort_async`、`binary_search_async`、`bfs_shortest_path_async`、`dijkstra_async`

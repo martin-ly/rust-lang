@@ -15,6 +15,9 @@
 - 更新 `README.md`：加入分治/动态规划的异步示例与文档链接
   - 新增 `string_algorithms` 模块（KMP/Rabin-Karp，同步与异步封装），导出至 `lib.rs`
   - 扩充基准：加入字符串算法基准组（同步/异步），并扩充分治/动态规划基准
+  - 新增 Trie/Aho‑Corasick 多模式匹配（含异步封装）；文档/README/基准同步更新
+  - 新增 `bench_report` 二进制：统一参数扫描输出 CSV，便于深度分析
+  - 新增 `docs/benchmarking_guide.md`：详细说明 bench_report 用法与常见场景
 
 ## [0.1.0] - 2025-01-27
 

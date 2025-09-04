@@ -57,12 +57,28 @@
 
 - KMP：时间 O(n + m)，空间 O(m)，其中 n 为文本长度、m 为模式长度；通过前缀函数避免回退
 - Rabin-Karp：期望时间 O(n + m)，最坏 O(n·m)；空间 O(1)；通过滚动哈希做快速筛选（碰撞需二次比较）
+- Trie/Aho‑Corasick：构建 O(Σ|P_i| + σ)，匹配 O(n + 匹配数)，空间 O(状态数)；适合多模式匹配
 
 并行/异步说明：
 
-- 当前实现提供 `kmp_search_async` 与 `rabin_karp_search_async` 的异步包装（`spawn_blocking`），便于在异步上下文中调度
+- `kmp_search_async`、`rabin_karp_search_async`、`ac_search_async` 提供异步包装（`spawn_blocking`）
 
-实现入口：`kmp_search` / `rabin_karp_search` 及其 `*_async`
+实现入口：`kmp_search` / `rabin_karp_search` / `build_trie` + `ac_search`
+
+---
+
+## 回溯算法（`src/backtracking/mod.rs`）
+
+- N 皇后：搜索空间 O(n!) 量级（实际剪枝后远小于），返回全部解或解数量
+- 全排列：总解数 n!；回溯复杂度 O(n · n!)
+- 子集生成：总解数 2^n；复杂度 O(n · 2^n)
+
+并行/异步说明：
+
+- N 皇后在首层列位并行拆分；异步以 `spawn_blocking` 包装
+- 全排列按首元素位置并行拆分；子集采用分半拆分 + 笛卡尔积合并
+
+实现入口：`nqueens_*`、`permutations_*`、`subsets_*`（均含并行/异步变体）
 
 ---
 

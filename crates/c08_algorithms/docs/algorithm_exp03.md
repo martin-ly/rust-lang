@@ -14,7 +14,8 @@
     - [3.1 归并排序 (Merge Sort)](#31-归并排序-merge-sort)
     - [3.2 快速排序 (Quick Sort)](#32-快速排序-quick-sort)
     - [3.3 堆排序 (Heap Sort)](#33-堆排序-heap-sort)
-    - [3.4 Rust标准库排序](#34-rust标准库排序)
+    - [3.4 Rust标准库排序与并行/异步实践](#34-rust标准库排序与并行异步实践)
+      - [实践：同步 / 并行 / 异步接口风格（Rust 1.89）](#实践同步--并行--异步接口风格rust-189)
   - [4. 搜索算法](#4-搜索算法)
     - [4.1 搜索问题定义](#41-搜索问题定义)
     - [4.2 线性搜索 (Linear Search)](#42-线性搜索-linear-search)
@@ -51,7 +52,12 @@
 
 ## 1. 引言：算法、数据结构与Rust
 
-算法是解决特定问题的一系列明确指令或步骤。数据结构是组织和存储数据的方式。两者紧密相连，高效的算法往往依赖于合适的数据结构。Rust作为一门注重性能、安全和并发的系统编程语言，为实现各种算法提供了强大的工具和独特的视角。其类型系统、所有权模型和丰富的标准库对算法的具体实现方式产生了显著影响。
+算法是解决特定问题的一系列明确指令或步骤。
+数据结构是组织和存储数据的方式。
+两者紧密相连，高效的算法往往依赖于合适的数据结构。
+
+Rust作为一门注重性能、安全和并发的系统编程语言，为实现各种算法提供了强大的工具和独特的视角。
+其类型系统、所有权模型和丰富的标准库对算法的具体实现方式产生了显著影响。
 
 本篇将梳理常见的算法分类，探讨其核心原理、形式化定义（如适用）、复杂度分析，并展示如何在Rust中实现它们，同时关注Rust语言特性带来的优势和挑战。
 
@@ -325,7 +331,7 @@ fn heapify<T: Ord>(arr: &mut [T], n: usize, i: usize) {
 
 - **原理解释**：保证 \( O(n \log n) \) 时间复杂度，且是原地排序。但实际性能常数因子通常比快速排序大。
 
-### 3.4 Rust标准库排序
+### 3.4 Rust标准库排序与并行/异步实践
 
 - **`Vec::sort()` / `slice::sort()`**：这是不稳定的排序，目前实现通常是基于**模式击败快速排序 (Pattern-defeating Quicksort, pdqsort)**，这是一种快速排序的变种，能抵抗某些导致 \( O(n^2) \) 性能的输入模式，性能非常好。
 - **`Vec::sort_unstable()` / `slice::sort_unstable()`**：同上。
@@ -336,6 +342,21 @@ fn heapify<T: Ord>(arr: &mut [T], n: usize, i: usize) {
 - **`slice::sort_stable()`**：(需要启用 nightly 功能或等待稳定) 提供稳定的排序，可能基于归并排序或TimSort的变种。
 
 **原理说明**：标准库的选择反映了对实践性能的重视。Pdqsort 在各种数据分布下都表现出优秀的性能，是现代不依赖稳定性的通用排序首选。
+
+#### 实践：同步 / 并行 / 异步接口风格（Rust 1.89）
+
+- 同步（CPU 密集）：直接在当前线程执行，例如 `sorting::sort_sync`, `searching::binary_search_sync`。
+- 并行（多线程）：使用 Rayon，例如 `sorting::sort_parallel`, `divide_and_conquer::max_subarray_sum_parallel`，通过 `par_iter/par_sort/par_chunks` 等。
+- 异步：对 CPU 密集任务采用 `tokio::task::spawn_blocking` 包装，例如 `sorting::sort_async`, `string_algorithms::kmp_search_async`，以便在异步环境中避免阻塞调度线程。
+
+参考实现：
+
+- 排序：`crates/c08_algorithms/src/sorting/mod.rs`
+- 搜索：`crates/c08_algorithms/src/searching/mod.rs`（含指数搜索、三分搜索）
+- 分治：`crates/c08_algorithms/src/divide_and_conquer/mod.rs`（快速幂、矩阵幂、最近点对）
+- 动态规划：`crates/c08_algorithms/src/dynamic_programming/mod.rs`（LIS、编辑距离、LCS、背包）
+- 贪心：`crates/c08_algorithms/src/greedy/mod.rs`（区间调度、分数背包、Huffman 编码）
+- 数据结构：`crates/c08_algorithms/src/data_structure`（Fenwick/SegTree/DSU/PriorityQueue）
 
 ## 4. 搜索算法
 

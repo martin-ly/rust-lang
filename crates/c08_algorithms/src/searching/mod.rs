@@ -124,6 +124,46 @@ where
     Ok(tokio::task::spawn_blocking(move || bfs_sync(&graph, &start, &target)).await?)
 }
 
+// =========================
+// 指数搜索（Exponential Search）与三分搜索（Ternary Search）
+// =========================
+
+/// 指数搜索：在有序切片中查找 target，先指数扩展边界再二分
+pub fn exponential_search_sync<T: Ord>(data: &[T], target: &T) -> Option<usize> {
+    if data.is_empty() { return None; }
+    if &data[0] == target { return Some(0); }
+    let mut bound: usize = 1;
+    while bound < data.len() && &data[bound] < target { bound <<= 1; }
+    let left = bound >> 1;
+    let right = data.len().min(bound + 1);
+    data[left..right].binary_search(target).ok().map(|i| i + left)
+}
+
+pub async fn exponential_search_async<T: Ord + Send + 'static>(data: Vec<T>, target: T) -> Result<Option<usize>> {
+    Ok(tokio::task::spawn_blocking(move || exponential_search_sync(&data, &target)).await?)
+}
+
+/// 三分搜索：对单峰实值函数在闭区间 [mut l, mut r] 上找近似极值（最大值）
+pub fn ternary_search_max<F>(mut l: f64, mut r: f64, f: F, iters: usize) -> f64
+where
+    F: Fn(f64) -> f64,
+{
+    for _ in 0..iters {
+        let m1 = l + (r - l) / 3.0;
+        let m2 = r - (r - l) / 3.0;
+        if f(m1) < f(m2) { l = m1; } else { r = m2; }
+    }
+    (l + r) / 2.0
+}
+
+pub async fn ternary_search_max_async<F>(l: f64, r: f64, f: F, iters: usize) -> Result<f64>
+where
+    F: Fn(f64) -> f64 + Send + Sync + 'static,
+{
+    let f_arc = std::sync::Arc::new(f);
+    Ok(tokio::task::spawn_blocking(move || ternary_search_max(l, r, |x| (f_arc)(x), iters)).await?)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -153,6 +193,15 @@ mod tests {
 
         assert!(dfs_sync(&g, &1, &4));
         assert_eq!(bfs_sync(&g, &1, &4), Some(2));
+    }
+
+    #[test]
+    fn test_exponential_and_ternary() {
+        let data = vec![1,2,3,4,5,6,7,8,9];
+        assert_eq!(exponential_search_sync(&data, &7), Some(6));
+        let peak_at = ternary_search_max(0.0, 6.28318, |x| (x - 3.14159).cos(), 60);
+        // 峰值位置应接近 0 或 2π（cos 最大在 0 处），这里区间包含 0
+        assert!(peak_at < 1.0 || peak_at > 5.0);
     }
 }
 

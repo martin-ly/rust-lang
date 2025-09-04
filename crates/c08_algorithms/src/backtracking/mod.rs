@@ -60,6 +60,80 @@ pub fn nqueens_count_sync(n: usize) -> usize {
     nqueens_solutions_sync(n).len()
 }
 
+// =========================
+// 全排列 / 子集生成（回溯）
+// =========================
+
+fn permute_sync_inner<T: Clone>(nums: &mut [T], start: usize, out: &mut Vec<Vec<T>>) {
+    if start == nums.len() {
+        out.push(nums.to_vec());
+        return;
+    }
+    for i in start..nums.len() {
+        nums.swap(start, i);
+        permute_sync_inner(nums, start + 1, out);
+        nums.swap(start, i);
+    }
+}
+
+pub fn permutations_sync<T: Clone + Send>(mut nums: Vec<T>) -> Vec<Vec<T>> {
+    let mut out = Vec::new();
+    permute_sync_inner(&mut nums, 0, &mut out);
+    out
+}
+
+pub fn permutations_parallel<T: Clone + Send + Sync>(nums: Vec<T>) -> Vec<Vec<T>> {
+    (0..nums.len())
+        .into_par_iter()
+        .map(|i| {
+            let mut local = Vec::new();
+            let mut arr = nums.clone();
+            arr.swap(0, i);
+            permute_sync_inner(&mut arr, 1, &mut local);
+            local
+        })
+        .flatten()
+        .collect()
+}
+
+pub async fn permutations_async<T: Clone + Send + Sync + 'static>(nums: Vec<T>) -> Result<Vec<Vec<T>>> {
+    Ok(tokio::task::spawn_blocking(move || permutations_parallel(nums)).await?)
+}
+
+pub fn subsets_sync<T: Clone>(nums: &[T]) -> Vec<Vec<T>> {
+    let n = nums.len();
+    let mut res = Vec::with_capacity(1 << n);
+    let mut cur = Vec::new();
+    fn dfs<T: Clone>(i: usize, nums: &[T], cur: &mut Vec<T>, out: &mut Vec<Vec<T>>) {
+        if i == nums.len() { out.push(cur.clone()); return; }
+        dfs(i + 1, nums, cur, out);
+        cur.push(nums[i].clone());
+        dfs(i + 1, nums, cur, out);
+        cur.pop();
+    }
+    dfs(0, nums, &mut cur, &mut res);
+    res
+}
+
+pub fn subsets_parallel<T: Clone + Send + Sync>(nums: &[T]) -> Vec<Vec<T>> {
+    let n = nums.len();
+    let half = n / 2;
+    let left = &nums[..half];
+    let right = &nums[half..];
+    let (a, b): (Vec<Vec<T>>, Vec<Vec<T>>) = rayon::join(|| subsets_sync(left), || subsets_sync(right));
+    // 笛卡尔积合并（避免借用生命周期问题：克隆 b 进入闭包）
+    a.into_par_iter()
+        .flat_map_iter(move |l| {
+            let b_local = b.clone();
+            b_local.into_iter().map(move |r| { let mut v = l.clone(); v.extend(r); v })
+        })
+        .collect()
+}
+
+pub async fn subsets_async<T: Clone + Send + Sync + 'static>(nums: Vec<T>) -> Result<Vec<Vec<T>>> {
+    Ok(tokio::task::spawn_blocking(move || subsets_parallel(&nums)).await?)
+}
+
 /// 仅返回解数量（并行）
 pub fn nqueens_count_parallel(n: usize) -> usize {
     nqueens_solutions_parallel(n).len()
@@ -84,6 +158,14 @@ mod tests {
         let rt = tokio::runtime::Runtime::new().unwrap();
         let count8 = rt.block_on(async { nqueens_solutions_async(8).await.unwrap().len() });
         assert_eq!(count8, 92);
+    }
+
+    #[test]
+    fn test_permutations_and_subsets() {
+        let p = permutations_sync(vec![1, 2, 3]);
+        assert_eq!(p.len(), 6);
+        let s = subsets_sync(&[1, 2, 3]);
+        assert_eq!(s.len(), 8);
     }
 }
 

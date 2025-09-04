@@ -1,6 +1,8 @@
 //! 字符串算法：KMP 与 Rabin-Karp（同步 / 异步）
 
 use anyhow::Result;
+#[cfg(feature = "with-aho")]
+use aho_corasick::AhoCorasick;
 
 // =========================
 // KMP
@@ -100,6 +102,230 @@ pub async fn rabin_karp_search_async(text: String, pattern: String) -> Result<Ve
     Ok(tokio::task::spawn_blocking(move || rabin_karp_search(&text, &pattern)).await?)
 }
 
+// =========================
+// Trie 与 Aho-Corasick 多模式匹配
+// =========================
+
+#[derive(Default)]
+pub struct TrieNode {
+    next: std::collections::HashMap<u8, usize>,
+    out: Vec<usize>,
+    fail: usize,
+}
+
+#[derive(Default)]
+pub struct Trie {
+    nodes: Vec<TrieNode>,
+}
+
+impl Trie {
+    pub fn new() -> Self { Self { nodes: vec![TrieNode::default()] } }
+
+    pub fn insert(&mut self, pattern: &[u8], id: usize) {
+        let mut s = 0usize;
+        for &ch in pattern {
+            let nxt = if let Some(&v) = self.nodes[s].next.get(&ch) { v } else {
+                let v = self.nodes.len();
+                self.nodes[s].next.insert(ch, v);
+                self.nodes.push(TrieNode::default());
+                v
+            };
+            s = nxt;
+        }
+        self.nodes[s].out.push(id);
+    }
+
+    pub fn build_automaton(&mut self) {
+        use std::collections::VecDeque;
+        let mut q = VecDeque::new();
+        for (&ch, &v) in self.nodes[0].next.clone().iter() {
+            self.nodes[v].fail = 0;
+            q.push_back(v);
+            // 保证根缺边填充到根
+            if !self.nodes[0].next.contains_key(&ch) {
+                self.nodes[0].next.insert(ch, v);
+            }
+        }
+        while let Some(u) = q.pop_front() {
+            let fail_u = self.nodes[u].fail;
+            let outs = self.nodes[fail_u].out.clone();
+            // 继承输出
+            for id in outs { if !self.nodes[u].out.contains(&id) { self.nodes[u].out.push(id); } }
+            let keys: Vec<u8> = self.nodes[u].next.keys().copied().collect();
+            for ch in keys {
+                let v = self.nodes[u].next[&ch];
+                // 计算 fail 指针
+                let mut f = fail_u;
+                while f != 0 && !self.nodes[f].next.contains_key(&ch) {
+                    f = self.nodes[f].fail;
+                }
+                let to = *self.nodes[f].next.get(&ch).unwrap_or(&0);
+                self.nodes[v].fail = to;
+                q.push_back(v);
+            }
+        }
+    }
+
+    /// Aho-Corasick 匹配，返回 (起始位置, 模式ID)
+    pub fn ac_search(&self, text: &[u8], patterns: &[Vec<u8>]) -> Vec<(usize, usize)> {
+        let mut res = Vec::new();
+        let mut s = 0usize;
+        for (i, &ch) in text.iter().enumerate() {
+            let mut cur = s;
+            while cur != 0 && !self.nodes[cur].next.contains_key(&ch) {
+                cur = self.nodes[cur].fail;
+            }
+            s = *self.nodes[cur].next.get(&ch).unwrap_or(&0);
+            for &pid in &self.nodes[s].out {
+                let m = patterns[pid].len();
+                if i + 1 >= m { res.push((i + 1 - m, pid)); }
+            }
+        }
+        res
+    }
+}
+
+pub fn build_trie(patterns: &[Vec<u8>]) -> Trie {
+    let mut trie = Trie::new();
+    for (id, p) in patterns.iter().enumerate() { trie.insert(p, id); }
+    trie.build_automaton();
+    trie
+}
+
+pub async fn ac_search_async(text: String, patterns: Vec<String>) -> Result<Vec<(usize, usize)>> {
+    Ok(tokio::task::spawn_blocking(move || {
+        let pats: Vec<Vec<u8>> = patterns.iter().map(|s| s.as_bytes().to_vec()).collect();
+        let trie = build_trie(&pats);
+        trie.ac_search(text.as_bytes(), &pats)
+    }).await?)
+}
+
+#[cfg(feature = "with-aho")]
+pub fn aho_search(text: &str, patterns: &[&str]) -> Vec<(usize, usize)> {
+    let ac = AhoCorasick::new(patterns).unwrap();
+    let mut res = Vec::new();
+    for mat in ac.find_iter(text) {
+        res.push((mat.start(), mat.pattern().as_usize()));
+    }
+    res
+}
+
+// =========================
+// Z-Algorithm（线性时间前缀匹配）与 Suffix Array + Kasai
+// =========================
+
+/// 计算 Z 数组：`z[i]` 为 `s` 与 `s[i..]` 的最长公共前缀长度
+pub fn z_algorithm(s: &str) -> Vec<usize> {
+    let a = s.as_bytes();
+    let n = a.len();
+    let mut z = vec![0usize; n];
+    let (mut l, mut r) = (0usize, 0usize);
+    for i in 1..n {
+        if i <= r {
+            z[i] = (r - i + 1).min(z[i - l]);
+        }
+        while i + z[i] < n && a[z[i]] == a[i + z[i]] { z[i] += 1; }
+        if i + z[i] - 1 > r { l = i; r = i + z[i] - 1; }
+    }
+    if n > 0 { z[0] = n; }
+    z
+}
+
+/// 使用 Z-Algorithm 搜索 `pattern` 在 `text` 中的所有出现位置
+pub fn z_search(text: &str, pattern: &str) -> Vec<usize> {
+    if pattern.is_empty() { return (0..=text.len()).collect(); }
+    let sep = b'\x01'; // 取一个极小可能出现在文本中的分隔符（示例）
+    let s = format!("{}{}{}", pattern, sep as char, text);
+    let z = z_algorithm(&s);
+    let m = pattern.len();
+    let mut res = Vec::new();
+    for (i, &v) in z.iter().enumerate().skip(m + 1) {
+        if v == m { res.push(i - (m + 1)); }
+    }
+    res
+}
+
+pub async fn z_search_async(text: String, pattern: String) -> Result<Vec<usize>> {
+    Ok(tokio::task::spawn_blocking(move || z_search(&text, &pattern)).await?)
+}
+
+/// 构建 Suffix Array（SA-IS 略，使用 O(n log n) 朴素倍增法）
+pub fn suffix_array(text: &str) -> Vec<usize> {
+    let n = text.len();
+    let s = text.as_bytes();
+    let mut sa: Vec<usize> = (0..n).collect();
+    let mut rank: Vec<i32> = s.iter().map(|&c| c as i32).collect();
+    let mut tmp = vec![0i32; n];
+    let mut k = 1usize;
+    while k < n {
+        sa.sort_by_key(|&i| (rank[i], if i + k < n { rank[i + k] } else { -1 }));
+        tmp[sa[0]] = 0;
+        for i in 1..n {
+            let a = sa[i - 1];
+            let b = sa[i];
+            let prev = (rank[a], if a + k < n { rank[a + k] } else { -1 });
+            let curr = (rank[b], if b + k < n { rank[b + k] } else { -1 });
+            tmp[b] = tmp[a] + if curr > prev { 1 } else { 0 };
+        }
+        for i in 0..n { rank[i] = tmp[i]; }
+        if rank[sa[n - 1]] == (n as i32 - 1) { break; }
+        k <<= 1;
+    }
+    sa
+}
+
+/// 构建 LCP（Kasai），与 SA 对应
+pub fn lcp_kasai(text: &str, sa: &[usize]) -> Vec<usize> {
+    let n = text.len();
+    let s = text.as_bytes();
+    let mut rank = vec![0usize; n];
+    for i in 0..n { rank[sa[i]] = i; }
+    let mut lcp = vec![0usize; n];
+    let mut h = 0usize;
+    for i in 0..n {
+        let r = rank[i];
+        if r > 0 {
+            let j = sa[r - 1];
+            while i + h < n && j + h < n && s[i + h] == s[j + h] { h += 1; }
+            lcp[r] = h;
+            if h > 0 { h -= 1; }
+        }
+    }
+    lcp
+}
+
+// =========================
+// Manacher 最长回文子串（线性时间）
+// =========================
+
+pub fn manacher_longest_palindrome(s: &str) -> (usize, usize) {
+    // 返回 (start, length)
+    if s.is_empty() { return (0, 0); }
+    let bytes = s.as_bytes();
+    // 扩展字符串为 T = ^#a#b#...#$
+    let mut t = Vec::with_capacity(bytes.len() * 2 + 3);
+    t.push(b'^'); t.push(b'#');
+    for &ch in bytes { t.push(ch); t.push(b'#'); }
+    t.push(b'$');
+    let n = t.len();
+    let mut p = vec![0usize; n];
+    let (mut center, mut right) = (0usize, 0usize);
+    for i in 1..n - 1 {
+        let mirror = 2 * center - i;
+        if i < right { p[i] = p[mirror].min(right - i); }
+        while t[i + 1 + p[i]] == t[i - 1 - p[i]] { p[i] += 1; }
+        if i + p[i] > right { center = i; right = i + p[i]; }
+    }
+    let (mut max_len, mut center_idx) = (0usize, 0usize);
+    for i in 1..n - 1 { if p[i] > max_len { max_len = p[i]; center_idx = i; } }
+    let start = (center_idx - max_len) / 2; // 映射回原串索引
+    (start, max_len)
+}
+
+pub async fn manacher_longest_palindrome_async(s: String) -> Result<(usize, usize)> {
+    Ok(tokio::task::spawn_blocking(move || manacher_longest_palindrome(&s)).await?)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -127,6 +353,57 @@ mod tests {
         assert_eq!(r, vec![0,1,2,3]);
         let r2 = rt.block_on(async { rabin_karp_search_async("aaaaa".into(), "aa".into()).await.unwrap() });
         assert_eq!(r2, vec![0,1,2,3]);
+    }
+
+    #[test]
+    fn test_trie_ac() {
+        let pats = vec![b"he".to_vec(), b"she".to_vec(), b"hers".to_vec(), b"his".to_vec()];
+        let trie = build_trie(&pats);
+        let text = b"ahishers";
+        let mut res = trie.ac_search(text, &pats);
+        res.sort();
+        assert!(res.contains(&(1, 3)) || res.contains(&(1, 3))); // "his" at 1
+        assert!(res.iter().any(|&(pos, id)| &pats[id] == b"she" && pos == 3));
+        assert!(res.iter().any(|&(pos, id)| &pats[id] == b"he" && (pos == 4 || pos == 5)));
+    }
+
+    #[test]
+    fn test_z_algorithm_and_search() {
+        let s = "aaaaa";
+        let z = z_algorithm(s);
+        assert_eq!(z[0], s.len());
+        assert!(z[1] >= 3);
+        let hits = z_search("ababaabababa", "ababa");
+        assert_eq!(hits, vec![0, 5, 7]);
+    }
+
+    #[test]
+    fn test_sa_kasai() {
+        let s = "banana$"; // 末尾加入哨兵保证严格后缀排序
+        let sa = suffix_array(s);
+        // 常见 banana$ 的 SA 为 [6,5,3,1,0,4,2] 或等价序，测试基本性质
+        assert_eq!(sa.len(), s.len());
+        // SA 应按后缀字典序递增
+        for i in 1..sa.len() { assert!(s[sa[i-1]..] <= s[sa[i]..]); }
+        let lcp = lcp_kasai(s, &sa);
+        assert_eq!(lcp.len(), s.len());
+        // LCP 非负且符合相邻后缀公共前缀性质
+        for i in 1..sa.len() {
+            let a = &s[sa[i-1]..];
+            let b = &s[sa[i]..];
+            let mut k = 0;
+            while k < a.len() && k < b.len() && a.as_bytes()[k] == b.as_bytes()[k] { k += 1; }
+            assert_eq!(lcp[i], k);
+        }
+    }
+
+    #[test]
+    fn test_manacher() {
+        let (_st, len) = manacher_longest_palindrome("babad");
+        assert!(len >= 3); // "bab" or "aba"
+        let (st2, len2) = manacher_longest_palindrome("cbbd");
+        assert_eq!(len2, 2);
+        assert_eq!(&"cbbd"[st2..st2+len2], "bb");
     }
 }
 

@@ -23,12 +23,14 @@ pub mod machine_learning;
 pub mod performance_optimization;
 pub mod performance_examples;
 pub mod string_algorithms;
+pub mod geometry;
+pub mod number_theory;
 
 // 示例程序
 // pub mod bin; // 暂时注释掉，避免编译错误
 
 /// 算法库版本信息
-pub const VERSION: &str = "1.0.0";
+pub const VERSION: &str = "0.1.0";
 
 /// 获取库版本信息
 pub fn get_version() -> &'static str {
@@ -490,6 +492,6 @@ mod tests {
 
     #[test]
     fn test_version() {
-        assert_eq!(get_version(), "1.0.0");
+        assert_eq!(get_version(), "0.1.0");
     }
 }
