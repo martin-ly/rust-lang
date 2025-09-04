@@ -28,5 +28,3 @@ async fn main() {
 
     let _ = tokio::join!(prod, cons);
 }
-
-

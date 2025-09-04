@@ -6,13 +6,42 @@ resolver = "3"
 
 [dependencies]
 
-# 并行与并发
+# 并行与并发 - 支持Rust 1.89异步特性
 rayon = "1.10"
+tokio = { version = "1.0", features = ["full"] }
+futures = "0.3"
 
 # 随机数
 rand = "0.8"
 
+# 性能基准测试
+criterion = { version = "0.5", optional = true }
 
+# 序列化支持
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# 错误处理
+anyhow = "1.0"
+thiserror = "1.0"
+
+# 日志支持
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# 数学计算
+num-traits = "0.2"
+num-bigint = "0.4"
+
+# 时间测量
+instant = "0.1"
+
+[dev-dependencies]
+criterion = "0.5"
+
+[features]
+default = []
+bench = ["criterion"]
 
 [lib]
 name = "c08_algorithms"
@@ -21,3 +50,19 @@ path = "src/lib.rs"
 [[bin]]
 name = "c08_algorithms"
 path = "src/bin/main.rs"
+
+[[bench]]
+name = "ml_benchmarks"
+harness = false
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+
+[profile.dev]
+opt-level = 0
+debug = true
+debug-assertions = true
+overflow-checks = true

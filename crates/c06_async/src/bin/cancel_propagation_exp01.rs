@@ -7,7 +7,7 @@ async fn subtask(name: &'static str, delay_ms: u64) -> Result<(), ()> {
     Ok(())
 }
 
-#[tokio::main(flavor = "multi_thread", worker_threads = 2)]
+#[tokio::main]
 async fn main() {
     // 通过 AbortHandle 模拟取消传播：一旦有错误，取消其它任务
     let (h1, reg1) = AbortHandle::new_pair();
@@ -38,7 +38,6 @@ async fn main() {
         }
     }
     println!("cancel propagated");
-    
 }
 
 

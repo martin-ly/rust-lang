@@ -16,6 +16,9 @@ pub mod backtracking;
 // 高级算法模块
 pub mod advanced_algorithms;
 
+// 机器学习模块
+pub mod machine_learning;
+
 // 性能优化模块
 pub mod performance_optimization;
 pub mod performance_examples;

@@ -4,6 +4,7 @@ use std::time::{Duration, Instant};
 use tokio::sync::{Mutex, RwLock};
 use tokio::time::sleep;
 use anyhow::{Result, anyhow};
+// 移除未使用的导入
 
 /// 应用配置
 #[allow(dead_code)]
@@ -58,7 +59,7 @@ impl ConfigManager {
     }
 
     /// 更新配置
-    async fn update_config(&self, new_config: AppConfig) -> Result<()> {
+    async fn update_config(&self, new_config: AppConfig) -> Result<(), anyhow::Error> {
         let mut config = self.config.write().await;
         *config = new_config;
         
@@ -271,7 +272,7 @@ impl HealthChecker {
 }
 
 /// Kubernetes 就绪探针
-async fn readiness_probe(health_checker: Arc<HealthChecker>) -> Result<()> {
+async fn readiness_probe(health_checker: Arc<HealthChecker>) -> Result<(), anyhow::Error> {
     let status = health_checker.check_health().await;
     
     if status.is_healthy() {
@@ -283,7 +284,7 @@ async fn readiness_probe(health_checker: Arc<HealthChecker>) -> Result<()> {
 }
 
 /// Kubernetes 存活探针
-async fn liveness_probe(health_checker: Arc<HealthChecker>) -> Result<()> {
+async fn liveness_probe(health_checker: Arc<HealthChecker>) -> Result<(), anyhow::Error> {
     let status = health_checker.get_status().await;
     
     if status.is_healthy() {
@@ -378,7 +379,7 @@ async fn test_kubernetes_probes(health_checker: Arc<HealthChecker>) {
 }
 
 #[tokio::main]
-async fn main() -> Result<()> {
+async fn main() -> Result<(), anyhow::Error> {
     println!("🚀 云原生特性示例启动");
     println!("{}", "=".repeat(60));
     
