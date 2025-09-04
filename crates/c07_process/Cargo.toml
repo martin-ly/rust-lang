@@ -1,8 +1,8 @@
 [package]
 name = "c07_process"
 version = "0.1.0"
-edition = "2021"
-resolver = "2"
+edition = "2024"
+resolver = "3"
 authors = ["Rust Process Management Team"]
 description = "Comprehensive process management, IPC, and synchronization library for Rust"
 license = "MIT OR Apache-2.0"

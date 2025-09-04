@@ -50,8 +50,8 @@ impl ProcessBarrier {
         self.stats.wait_count.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
         
         let generation = {
-            let gen = self.generation.lock().unwrap();
-            *gen
+            let generation_guard = self.generation.lock().unwrap();
+            *generation_guard
         };
         
         let position = {
@@ -81,8 +81,8 @@ impl ProcessBarrier {
             // 等待其他参与者
             loop {
                 let current_gen = {
-                    let gen = self.generation.lock().unwrap();
-                    *gen
+                    let generation_guard = self.generation.lock().unwrap();
+                    *generation_guard
                 };
                 
                 if current_gen != generation {
