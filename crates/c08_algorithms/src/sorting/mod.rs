@@ -10,6 +10,7 @@ pub enum SortingAlgo {
     Quick,
     Merge,
     Heap,
+    Shell,
 }
 
 /// 同步排序（原地）
@@ -21,6 +22,7 @@ where
         SortingAlgo::Quick => quicksort(data),
         SortingAlgo::Merge => mergesort_in_place(data),
         SortingAlgo::Heap => heapsort(data),
+        SortingAlgo::Shell => shell_sort(data),
     }
 }
 
@@ -33,21 +35,24 @@ where
         // 为了演示与稳定性，Quick/Heap 统一使用 Rayon 的并行排序
         SortingAlgo::Quick | SortingAlgo::Heap => data.par_sort_unstable(),
         SortingAlgo::Merge => data.par_sort(),
+        SortingAlgo::Shell => data.par_sort_unstable(),
     }
 }
 
 /// Tokio 异步排序（接收与返回 Vec）
-pub async fn sort_async<T>(mut data: Vec<T>, algo: SortingAlgo) -> Result<Vec<T>>
+pub async fn sort_async<T>(data: Vec<T>, algo: SortingAlgo) -> Result<Vec<T>>
 where
     T: Ord + Send + 'static,
 {
+    let mut d = data;
     let handle = tokio::task::spawn_blocking(move || {
         match algo {
-            SortingAlgo::Quick => data.sort_unstable(),
-            SortingAlgo::Merge => data.sort(),
-            SortingAlgo::Heap => heap_sort_vec(&mut data),
+            SortingAlgo::Quick => d.sort_unstable(),
+            SortingAlgo::Merge => d.sort(),
+            SortingAlgo::Heap => heap_sort_vec(&mut d),
+            SortingAlgo::Shell => shell_sort(&mut d),
         }
-        data
+        d
     });
     Ok(handle.await?)
 }
@@ -148,6 +153,63 @@ fn heap_sort_vec<T: Ord>(data: &mut Vec<T>) {
     heapsort(data.as_mut_slice());
 }
 
+// Shell Sort（Knuth 增量序列）
+fn shell_sort<T: Ord>(data: &mut [T]) {
+    let n = data.len();
+    let mut gap = 1;
+    while gap < n / 3 { gap = gap * 3 + 1; }
+    while gap >= 1 {
+        for i in gap..n {
+            let mut j = i;
+            while j >= gap && data[j] < data[j - gap] {
+                data.swap(j, j - gap);
+                j -= gap;
+            }
+        }
+        gap /= 3;
+    }
+}
+
+// 桶排序（浮点[0,1) 示例），每桶内部使用 sort_unstable
+pub fn bucket_sort_unit_f64(data: Vec<f64>, bucket_num: usize) -> Vec<f64> {
+    if data.is_empty() { return data; }
+    let m = bucket_num.max(1);
+    let mut buckets: Vec<Vec<f64>> = vec![Vec::new(); m];
+    for &x in &data { let idx = ((x.clamp(0.0, 0.999_999) * m as f64) as usize).min(m-1); buckets[idx].push(x); }
+    for b in &mut buckets { b.sort_unstable_by(|a,b| a.partial_cmp(b).unwrap()); }
+    let mut out = Vec::with_capacity(data.len());
+    for b in buckets { out.extend(b); }
+    out
+}
+
+// 计数排序（i32 非负）
+pub fn counting_sort_sync_i32_nonneg(data: &[i32]) -> Vec<i32> {
+    if data.is_empty() { return Vec::new(); }
+    let &max_v = data.iter().max().unwrap();
+    assert!(max_v >= 0, "counting_sort_sync_i32_nonneg requires non-negative integers");
+    let mut cnt = vec![0usize; (max_v as usize) + 1];
+    for &x in data { cnt[x as usize] += 1; }
+    let mut out = Vec::with_capacity(data.len());
+    for (v, &c) in cnt.iter().enumerate() { for _ in 0..c { out.push(v as i32); } }
+    out
+}
+
+// 基数排序（i32，处理符号：将所有数按偏移 +2^31 转换为 u32 后做 LSD，再映射回来）
+pub fn radix_sort_lsd_sync_i32(data: Vec<i32>) -> Vec<i32> {
+    let n = data.len();
+    if n <= 1 { return data; }
+    let mut a: Vec<u32> = data.into_iter().map(|x| (x as u32) ^ 0x8000_0000).collect();
+    let mut buf = vec![0u32; n];
+    for shift in (0..32).step_by(8) {
+        let mut cnt = [0usize; 256];
+        for &x in &a { cnt[((x >> shift) & 0xFF) as usize] += 1; }
+        let mut pos = [0usize; 256];
+        let mut sum = 0usize; for i in 0..256 { let c = cnt[i]; pos[i] = sum; sum += c; }
+        for &x in &a { let b = ((x >> shift) & 0xFF) as usize; let p = pos[b]; buf[p] = x; pos[b] += 1; }
+        std::mem::swap(&mut a, &mut buf);
+    }
+    a.into_iter().map(|u| ((u ^ 0x8000_0000) as i32)).collect()
+}
 // =========================
 // 计数排序 / 基数排序（u32 专用演示）
 // =========================
@@ -250,6 +312,28 @@ mod tests {
         assert_eq!(c, cp);
         let r = radix_sort_lsd_sync_u32(v.clone());
         assert!(r.windows(2).all(|w| w[0] <= w[1]));
+    }
+
+    #[test]
+    fn test_shell_and_bucket() {
+        let mut v = vec![9,1,8,2,7,3,6,4,5];
+        shell_sort(&mut v);
+        assert!(v.windows(2).all(|w| w[0] <= w[1]));
+        let data = vec![0.12, 0.03, 0.88, 0.41, 0.41, 0.0, 0.99];
+        let out = bucket_sort_unit_f64(data, 5);
+        assert!(out.windows(2).all(|w| w[0] <= w[1]));
+    }
+
+    #[test]
+    fn test_i32_counting_and_radix() {
+        let v = vec![0i32, 3, 1, 2, 2, 10, 7];
+        let c = counting_sort_sync_i32_nonneg(&v);
+        assert!(c.windows(2).all(|w| w[0] <= w[1]));
+
+        let v2 = vec![0i32, -1, 5, -100, 100, 3, -2];
+        let r = radix_sort_lsd_sync_i32(v2.clone());
+        let mut std_sorted = v2.clone(); std_sorted.sort();
+        assert_eq!(r, std_sorted);
     }
 }
 

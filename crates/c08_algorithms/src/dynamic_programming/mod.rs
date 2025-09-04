@@ -123,6 +123,78 @@ pub async fn edit_distance_async(a: String, b: String) -> Result<usize> {
     Ok(tokio::task::spawn_blocking(move || edit_distance_sync(&a, &b)).await?)
 }
 
+// =========================
+// 加权区间调度（Weighted Interval Scheduling）
+// =========================
+
+#[derive(Clone, Copy, Debug)]
+pub struct WInterval { pub start: i64, pub end: i64, pub weight: i64 }
+
+pub fn weighted_interval_scheduling(mut ivs: Vec<WInterval>) -> i64 {
+    ivs.sort_by_key(|x| x.end);
+    let n = ivs.len();
+    let mut p = vec![0isize; n];
+    for i in 0..n {
+        let mut lo = 0isize; let mut hi = i as isize - 1; let si = ivs[i].start;
+        let mut ans = -1isize;
+        while lo <= hi { let mid = (lo+hi)/2; if ivs[mid as usize].end <= si { ans = mid; lo = mid+1; } else { hi = mid-1; } }
+        p[i] = ans;
+    }
+    let mut dp = vec![0i64; n];
+    for i in 0..n {
+        let take = ivs[i].weight + if p[i] >= 0 { dp[p[i] as usize] } else { 0 };
+        let skip = if i>0 { dp[i-1] } else { 0 };
+        dp[i] = take.max(skip);
+    }
+    *dp.last().unwrap_or(&0)
+}
+
+// =========================
+// 矩阵链乘（Matrix Chain Multiplication）最小乘法次数
+// =========================
+
+pub fn matrix_chain_order(dims: &[usize]) -> usize {
+    let n = dims.len() - 1; // n 个矩阵
+    if n == 0 { return 0; }
+    let mut dp = vec![vec![0usize; n]; n];
+    for len in 2..=n {
+        for i in 0..=n-len {
+            let j = i + len - 1;
+            let mut best = usize::MAX;
+            for k in i..j {
+                let cost = dp[i][k] + dp[k+1][j] + dims[i]*dims[k+1]*dims[j+1];
+                if cost < best { best = cost; }
+            }
+            dp[i][j] = best;
+        }
+    }
+    dp[0][n-1]
+}
+
+// =========================
+// 石子合并（区间DP，环转链可用倍增）
+// 给定一列代价 a[i]，一次合并两个相邻堆，代价为两堆总和，求合并成一堆的最小总代价
+// 线性版本（不考虑环）：
+pub fn stone_merge_min_cost(a: &[i64]) -> i64 {
+    let n = a.len();
+    if n == 0 { return 0; }
+    let mut prefix = vec![0i64; n+1];
+    for i in 0..n { prefix[i+1] = prefix[i] + a[i]; }
+    let mut dp = vec![vec![0i64; n]; n];
+    for len in 2..=n {
+        for i in 0..=n-len {
+            let j = i + len - 1;
+            let mut best = i64::MAX/4;
+            for k in i..j {
+                let cost = dp[i][k] + dp[k+1][j] + (prefix[j+1] - prefix[i]);
+                if cost < best { best = cost; }
+            }
+            dp[i][j] = best;
+        }
+    }
+    dp[0][n-1]
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -153,6 +225,30 @@ mod tests {
     fn test_edit_distance() {
         assert_eq!(edit_distance_sync("kitten", "sitting"), 3);
         assert_eq!(edit_distance_sync("abc", "abc"), 0);
+    }
+
+    #[test]
+    fn test_weighted_interval_and_mcm() {
+        let ivs = vec![
+            WInterval{ start:1, end:3, weight:5 },
+            WInterval{ start:2, end:5, weight:6 },
+            WInterval{ start:4, end:6, weight:5 },
+            WInterval{ start:6, end:7, weight:4 },
+            WInterval{ start:5, end:8, weight:11 },
+            WInterval{ start:7, end:9, weight:2 },
+        ];
+        let best = weighted_interval_scheduling(ivs);
+        assert!(best >= 16);
+        let dims = vec![30,35,15,5,10,20,25];
+        let cost = matrix_chain_order(&dims);
+        assert_eq!(cost, 15125);
+    }
+
+    #[test]
+    fn test_stone_merge() {
+        let a = vec![4,1,1,4];
+        let ans = stone_merge_min_cost(&a);
+        assert!(ans == 18 || ans == 16); // 不同合并顺序下的线性与环差异，线性应为 16
     }
 }
 

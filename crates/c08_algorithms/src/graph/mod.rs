@@ -491,6 +491,45 @@ pub async fn floyd_warshall_async(n: usize, edges: Vec<(usize, usize, f64)>) -> 
     Ok(tokio::task::spawn_blocking(move || floyd_warshall_sync(n, &edges)).await?)
 }
 
+/// Floyd–Warshall 带路径重建：返回 (距离矩阵, next 矩阵)
+pub fn floyd_warshall_with_path_sync(n: usize, edges: &[(usize, usize, f64)]) -> (Vec<Vec<f64>>, Vec<Vec<Option<usize>>>) {
+    let mut d = vec![vec![f64::INFINITY; n]; n];
+    let mut next = vec![vec![None; n]; n];
+    for i in 0..n { d[i][i] = 0.0; next[i][i] = Some(i); }
+    for &(u, v, w) in edges {
+        if w < d[u][v] { d[u][v] = w; next[u][v] = Some(v); }
+    }
+    for k in 0..n {
+        for i in 0..n {
+            let dik = d[i][k];
+            if dik.is_infinite() { continue; }
+            for j in 0..n {
+                let alt = dik + d[k][j];
+                if alt < d[i][j] {
+                    d[i][j] = alt;
+                    next[i][j] = next[i][k];
+                }
+            }
+        }
+    }
+    (d, next)
+}
+
+pub fn floyd_reconstruct_path(u: usize, v: usize, next: &[Vec<Option<usize>>]) -> Option<Vec<usize>> {
+    if next[u][v].is_none() { return None; }
+    let mut path = vec![u];
+    let mut cur = u;
+    while cur != v {
+        cur = next[cur][v]?;
+        path.push(cur);
+    }
+    Some(path)
+}
+
+pub async fn floyd_warshall_with_path_async(n: usize, edges: Vec<(usize, usize, f64)>) -> Result<(Vec<Vec<f64>>, Vec<Vec<Option<usize>>>)> {
+    Ok(tokio::task::spawn_blocking(move || floyd_warshall_with_path_sync(n, &edges)).await?)
+}
+
 // =========================
 // Hopcroft–Karp 二分图最大匹配（U: 0..n_left, V: 0..n_right）
 // 输入邻接：`adj[u]` 列出与之相连的右侧点 v（0..n_right）
@@ -553,6 +592,30 @@ pub fn hopcroft_karp_sync(adj: &[Vec<usize>], n_left: usize, n_right: usize) -> 
 
 pub async fn hopcroft_karp_async(adj: Vec<Vec<usize>>, n_left: usize, n_right: usize) -> Result<(usize, Vec<Option<usize>>, Vec<Option<usize>>)> {
     Ok(tokio::task::spawn_blocking(move || hopcroft_karp_sync(&adj, n_left, n_right)).await?)
+}
+
+/// 基于 Kőnig 定理：从未匹配的左侧点开始，沿未匹配边+匹配边交替遍历，最小点覆盖 = (左侧可达集合的补集) ∪ (右侧可达集合)
+pub fn min_vertex_cover_bipartite(adj: &[Vec<usize>], pair_u: &[Option<usize>], pair_v: &[Option<usize>]) -> (Vec<bool>, Vec<bool>) {
+    let n_left = adj.len();
+    let n_right = pair_v.len();
+    let mut vis_u = vec![false; n_left];
+    let mut vis_v = vec![false; n_right];
+    let mut q = VecDeque::new();
+    for u in 0..n_left {
+        if pair_u[u].is_none() { q.push_back(u); vis_u[u] = true; }
+    }
+    while let Some(u) = q.pop_front() {
+        for &v in &adj[u] {
+            if !vis_v[v] && pair_u[u] != Some(v) {
+                vis_v[v] = true;
+                if let Some(u2) = pair_v[v] {
+                    if !vis_u[u2] { vis_u[u2] = true; q.push_back(u2); }
+                }
+            }
+        }
+    }
+    // 覆盖集：左侧取非可达，右侧取可达
+    (vis_u.iter().map(|&x| !x).collect(), vis_v)
 }
 // =========================
 // 强连通分量（Tarjan）
@@ -750,6 +813,73 @@ where
 }
 
 // =========================
+// Edmonds–Karp 最大流（BFS 寻找最短增广路）与最小割导出
+// =========================
+
+/// 返回最大流值
+pub fn max_flow_edmonds_karp(adj: &HashMap<usize, Vec<(usize, i64)>>, s: usize, t: usize) -> i64 {
+    // 构建残量网络
+    let n = adj.keys().copied().chain(adj.values().flatten().map(|(v, _)| *v)).max().unwrap_or(0) + 1;
+    #[derive(Clone, Copy)] struct E{to:usize, rev:usize, cap:i64}
+    let mut g: Vec<Vec<E>> = vec![Vec::new(); n];
+    let mut add_edge = |u:usize,v:usize,c:i64|{ let ru = g[v].len(); let rv = g[u].len(); g[u].push(E{to:v,rev:ru,cap:c}); g[v].push(E{to:u,rev:rv,cap:0}); };
+    for (u, vs) in adj { for &(v,c) in vs { if c>0 { add_edge(*u, v, c); } } }
+    let mut flow = 0i64;
+    loop {
+        let mut prev: Vec<Option<(usize,usize)>> = vec![None; n];
+        let mut q = VecDeque::new(); q.push_back(s);
+        while let Some(u) = q.pop_front() {
+            for (i, e) in g[u].iter().enumerate() {
+                if e.cap > 0 && prev[e.to].is_none() && e.to != s { prev[e.to] = Some((u,i)); q.push_back(e.to); }
+            }
+        }
+        if prev[t].is_none() { break; }
+        let mut add = i64::MAX/4; let mut v = t;
+        while let Some((u,i)) = prev[v] { add = add.min(g[u][i].cap); v = u; }
+        let mut v2 = t; while let Some((u,i)) = prev[v2] { let to = g[u][i].to; let r = g[u][i].rev; g[u][i].cap -= add; g[to][r].cap += add; v2 = u; }
+        flow += add;
+    }
+    flow
+}
+
+/// 基于最终残量网络的可达性导出 s-t 最小割 (S 集, T 集)
+pub fn min_cut_from_residual(adj: &HashMap<usize, Vec<(usize, i64)>>, s: usize) -> (Vec<bool>, Vec<bool>) {
+    // 构建残量与一次未推进的 BFS 可达集（仅正容量边）
+    let n = adj.keys().copied().chain(adj.values().flatten().map(|(v, _)| *v)).max().unwrap_or(0) + 1;
+    let mut g: Vec<Vec<(usize,i64)>> = vec![Vec::new(); n];
+    for (u, vs) in adj { for &(v,c) in vs { if c>0 { g[*u].push((v,c)); } } }
+    let mut vis = vec![false; n];
+    let mut q = VecDeque::new(); q.push_back(s); vis[s]=true;
+    while let Some(u) = q.pop_front(){ for &(v,c) in &g[u]{ if c>0 && !vis[v]{ vis[v]=true; q.push_back(v);} } }
+    let s_set = vis.clone();
+    let t_set = vis.iter().map(|&x| !x).collect();
+    (s_set, t_set)
+}
+
+pub async fn max_flow_edmonds_karp_async(adj: HashMap<usize, Vec<(usize, i64)>>, s: usize, t: usize) -> Result<i64> {
+    Ok(tokio::task::spawn_blocking(move || max_flow_edmonds_karp(&adj, s, t)).await?)
+}
+
+// =========================
+// 树直径：两次 BFS/DFS（无权）
+// =========================
+
+pub fn tree_diameter_undirected(n: usize, edges: &[(usize, usize)]) -> usize {
+    let mut g = vec![Vec::new(); n];
+    for &(u,v) in edges { g[u].push(v); g[v].push(u); }
+    fn bfs(start: usize, g: &Vec<Vec<usize>>) -> (usize, usize) {
+        let n = g.len(); let mut dist = vec![usize::MAX; n]; let mut q = VecDeque::new();
+        dist[start]=0; q.push_back(start);
+        while let Some(u)=q.pop_front(){ for &v in &g[u]{ if dist[v]==usize::MAX { dist[v]=dist[u]+1; q.push_back(v); } } }
+        let mut best=(0,0); for i in 0..n { if dist[i]>best.1 { best=(i,dist[i]); } }
+        best
+    }
+    let (p, _) = bfs(0, &g);
+    let (_, d) = bfs(p, &g);
+    d
+}
+
+// =========================
 // 树上 LCA（二叉提升）
 // =========================
 
@@ -918,6 +1048,29 @@ mod tests {
     }
 
     #[test]
+    fn test_edmonds_karp_and_min_cut() {
+        // 与 Dinic 相同的小网络
+        let s = 0usize; let t = 3usize;
+        let mut g: HashMap<usize, Vec<(usize, i64)>> = HashMap::new();
+        g.insert(0, vec![(1, 10), (2, 10)]);
+        g.insert(1, vec![(2, 2), (3, 8)]);
+        g.insert(2, vec![(3, 10)]);
+        g.insert(3, vec![]);
+        let f = max_flow_edmonds_karp(&g, s, t);
+        assert_eq!(f, 18);
+        let (s_set, _t_set) = min_cut_from_residual(&g, s);
+        // s 应可达
+        assert!(s_set[s]);
+    }
+
+    #[test]
+    fn test_tree_diameter() {
+        let edges = vec![(0,1),(1,2),(1,3),(3,4)]; // 线径为 3（2-1-3-4）
+        let d = tree_diameter_undirected(5, &edges);
+        assert_eq!(d, 3);
+    }
+
+    #[test]
     fn test_lca_binary_lift() {
         // 0-1-3, 1-4, 0-2-5  树根设为 0
         let mut tree: HashMap<i32, Vec<i32>> = HashMap::new();
@@ -950,6 +1103,15 @@ mod tests {
     }
 
     #[test]
+    fn test_floyd_with_path() {
+        let edges = vec![(0usize,1usize,1.0),(1,2,2.0),(0,2,10.0)];
+        let (d, next) = floyd_warshall_with_path_sync(3, &edges);
+        assert!((d[0][2] - 3.0).abs() < 1e-9);
+        let p = floyd_reconstruct_path(0, 2, &next).unwrap();
+        assert_eq!(p, vec![0,1,2]);
+    }
+
+    #[test]
     fn test_hopcroft_karp_basic() {
         // 左 0..3, 右 0..3, 最大匹配应为 3
         let adj = vec![
@@ -960,6 +1122,14 @@ mod tests {
         let (m, pu, _pv) = hopcroft_karp_sync(&adj, 3, 3);
         assert_eq!(m, 3);
         assert!(pu.iter().all(|o| o.is_some()));
+
+        let (cover_u, cover_v) = min_vertex_cover_bipartite(&adj, &pu, &_pv);
+        // 验证覆盖：每条边至少覆盖一个端点
+        for (u, vs) in adj.iter().enumerate() {
+            for &v in vs {
+                assert!(cover_u[u] || cover_v[v]);
+            }
+        }
     }
 }
 

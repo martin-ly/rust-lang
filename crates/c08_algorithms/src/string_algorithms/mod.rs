@@ -326,6 +326,108 @@ pub async fn manacher_longest_palindrome_async(s: String) -> Result<(usize, usiz
     Ok(tokio::task::spawn_blocking(move || manacher_longest_palindrome(&s)).await?)
 }
 
+// =========================
+// Boyer–Moore–Horspool 子串搜索
+// =========================
+
+pub fn bmh_search(text: &str, pattern: &str) -> Vec<usize> {
+    let n = text.len();
+    let m = pattern.len();
+    if m == 0 { return (0..=n).collect(); }
+    if m > n { return Vec::new(); }
+    let tb = text.as_bytes();
+    let pb = pattern.as_bytes();
+    let mut shift = [m as usize; 256];
+    for i in 0..m-1 { shift[pb[i] as usize] = m - 1 - i; }
+    let mut res = Vec::new();
+    let mut i = 0usize;
+    while i + m <= n {
+        let mut j = (m - 1) as isize;
+        while j >= 0 && pb[j as usize] == tb[i + j as usize] { j -= 1; }
+        if j < 0 { res.push(i); i += 1; }
+        else { i += shift[tb[i + m - 1] as usize]; }
+    }
+    res
+}
+
+pub async fn bmh_search_async(text: String, pattern: String) -> Result<Vec<usize>> {
+    Ok(tokio::task::spawn_blocking(move || bmh_search(&text, &pattern)).await?)
+}
+
+// =========================
+// 后缀自动机 Suffix Automaton（SAM）
+// =========================
+
+#[derive(Clone)]
+pub struct SamState {
+    pub next: std::collections::HashMap<u8, usize>,
+    pub link: isize,
+    pub len: usize,
+}
+
+#[derive(Clone)]
+pub struct SuffixAutomaton {
+    pub st: Vec<SamState>,
+    pub last: usize,
+}
+
+impl SuffixAutomaton {
+    pub fn new() -> Self {
+        Self { st: vec![SamState{ next: std::collections::HashMap::new(), link: -1, len: 0 }], last: 0 }
+    }
+    pub fn extend(&mut self, ch: u8) {
+        let cur = self.st.len();
+        self.st.push(SamState { next: std::collections::HashMap::new(), link: 0, len: self.st[self.last].len + 1 });
+        let mut p = self.last as isize;
+        while p >= 0 && !self.st[p as usize].next.contains_key(&ch) {
+            self.st[p as usize].next.insert(ch, cur);
+            p = self.st[p as usize].link;
+        }
+        if p == -1 {
+            self.st[cur].link = 0;
+        } else {
+            let q = self.st[p as usize].next[&ch];
+            if self.st[p as usize].len + 1 == self.st[q].len {
+                self.st[cur].link = q as isize;
+            } else {
+                let clone = self.st.len();
+                self.st.push(SamState { next: self.st[q].next.clone(), link: self.st[q].link, len: self.st[p as usize].len + 1 });
+                while p >= 0 && self.st[p as usize].next.get(&ch) == Some(&q) {
+                    self.st[p as usize].next.insert(ch, clone);
+                    p = self.st[p as usize].link;
+                }
+                self.st[q].link = clone as isize;
+                self.st[cur].link = clone as isize;
+            }
+        }
+        self.last = cur;
+    }
+    pub fn build_from_str(s: &str) -> Self { let mut sam = Self::new(); for &b in s.as_bytes() { sam.extend(b); } sam }
+    pub fn count_distinct_substrings(&self) -> usize {
+        let mut total = 0usize;
+        for i in 1..self.st.len() {
+            let link_len = if self.st[i].link >= 0 { self.st[self.st[i].link as usize].len } else { 0 };
+            total += self.st[i].len - link_len;
+        }
+        total
+    }
+    pub fn longest_common_substring_len(&self, t: &str) -> usize {
+        let mut v = 0usize; let mut l = 0usize; let mut best = 0usize;
+        for &ch in t.as_bytes() {
+            if let Some(&to) = self.st[v].next.get(&ch) { v = to; l += 1; }
+            else {
+                while v != 0 && !self.st[v].next.contains_key(&ch) { v = self.st[v].link as usize; }
+                if let Some(&to) = self.st[v].next.get(&ch) { l = self.st[v].len + 1; v = to; } else { l = 0; v = 0; }
+            }
+            if l > best { best = l; }
+        }
+        best
+    }
+}
+
+pub async fn sam_build_and_count_async(s: String) -> Result<(SuffixAutomaton, usize)> {
+    Ok(tokio::task::spawn_blocking(move || { let sam = SuffixAutomaton::build_from_str(&s); let cnt = sam.count_distinct_substrings(); (sam, cnt) }).await?)
+}
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -404,6 +506,21 @@ mod tests {
         let (st2, len2) = manacher_longest_palindrome("cbbd");
         assert_eq!(len2, 2);
         assert_eq!(&"cbbd"[st2..st2+len2], "bb");
+    }
+
+    #[test]
+    fn test_bmh() {
+        let t = "here is a simple example";
+        let p = "example";
+        let r = bmh_search(t, p);
+        assert_eq!(r, vec![17]);
+    }
+
+    #[test]
+    fn test_sam_basic() {
+        let sam = SuffixAutomaton::build_from_str("ababa");
+        assert_eq!(sam.count_distinct_substrings(), 9);
+        assert_eq!(sam.longest_common_substring_len("babab"), 4);
     }
 }
 

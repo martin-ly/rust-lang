@@ -164,6 +164,47 @@ where
     Ok(tokio::task::spawn_blocking(move || ternary_search_max(l, r, |x| (f_arc)(x), iters)).await?)
 }
 
+// =========================
+// 插值查找（均匀分布时优于二分）与 跳跃搜索
+// =========================
+
+/// 插值查找：适用于近似均匀分布的有序数组
+pub fn interpolation_search_sync(data: &[i64], target: i64) -> Option<usize> {
+    if data.is_empty() { return None; }
+    let (mut low, mut high) = (0usize, data.len() - 1);
+    while low <= high && target >= data[low] && target <= data[high] {
+        if data[high] == data[low] { return if data[low] == target { Some(low) } else { None }; }
+        let pos = low + (((target - data[low]) as u128 * (high - low) as u128) / ((data[high] - data[low]) as u128)) as usize;
+        if data[pos] == target { return Some(pos); }
+        if data[pos] < target { low = pos + 1; } else { if pos == 0 { break; } high = pos - 1; }
+    }
+    None
+}
+
+pub async fn interpolation_search_async(data: Vec<i64>, target: i64) -> Result<Option<usize>> {
+    Ok(tokio::task::spawn_blocking(move || interpolation_search_sync(&data, target)).await?)
+}
+
+/// 跳跃搜索：步长为 sqrt(n)，在块中线性查找
+pub fn jump_search_sync<T: Ord>(data: &[T], target: &T) -> Option<usize> {
+    let n = data.len();
+    if n == 0 { return None; }
+    let step = (n as f64).sqrt().ceil() as usize;
+    let mut prev = 0usize;
+    let mut curr = step.min(n);
+    while &data[curr - 1] < target {
+        prev = curr;
+        if prev >= n { return None; }
+        curr = (curr + step).min(n);
+    }
+    for i in prev..curr { if &data[i] == target { return Some(i); } }
+    None
+}
+
+pub async fn jump_search_async<T: Ord + Send + Sync + 'static>(data: Vec<T>, target: T) -> Result<Option<usize>> {
+    Ok(tokio::task::spawn_blocking(move || jump_search_sync(&data, &target)).await?)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -202,6 +243,13 @@ mod tests {
         let peak_at = ternary_search_max(0.0, 6.28318, |x| (x - 3.14159).cos(), 60);
         // 峰值位置应接近 0 或 2π（cos 最大在 0 处），这里区间包含 0
         assert!(peak_at < 1.0 || peak_at > 5.0);
+    }
+
+    #[test]
+    fn test_interpolation_and_jump() {
+        let v: Vec<i64> = (0..10_000).collect();
+        assert_eq!(interpolation_search_sync(&v, 1234), Some(1234));
+        assert_eq!(jump_search_sync(&v, &9876), Some(9876usize));
     }
 }
 

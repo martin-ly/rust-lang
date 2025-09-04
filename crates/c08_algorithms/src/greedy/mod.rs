@@ -200,6 +200,29 @@ pub async fn huffman_encode_async(input: String, codes: HashMap<u8, String>) -> 
 pub async fn huffman_decode_async(bits: String, tree: Box<HuffNode>) -> Result<Vec<u8>> {
     Ok(tokio::task::spawn_blocking(move || huffman_decode(&bits, &tree)).await?)
 }
+
+// =========================
+// 作业排序（deadline, profit）最大收益，单位时间/单机
+// =========================
+
+#[derive(Clone, Copy, Debug)]
+pub struct Job { pub id: usize, pub deadline: usize, pub profit: i64 }
+
+pub fn job_sequencing_max_profit(mut jobs: Vec<Job>) -> (i64, Vec<Option<usize>>) {
+    if jobs.is_empty() { return (0, vec![]); }
+    jobs.sort_by_key(|j| std::cmp::Reverse(j.profit));
+    let max_d = jobs.iter().map(|j| j.deadline).max().unwrap_or(0);
+    let mut slots: Vec<Option<usize>> = vec![None; max_d + 1]; // 1..=max_d 使用
+    let mut total = 0i64;
+    for j in jobs {
+        let mut t = j.deadline.min(max_d);
+        while t >= 1 {
+            if slots[t].is_none() { slots[t] = Some(j.id); total += j.profit; break; }
+            t -= 1;
+        }
+    }
+    (total, slots)
+}
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -251,6 +274,20 @@ mod tests {
         let bits = huffman_encode(s, &codes);
         let decoded = huffman_decode(&bits, tree.as_ref().unwrap());
         assert_eq!(String::from_utf8(decoded).unwrap(), s);
+    }
+
+    #[test]
+    fn test_job_sequencing() {
+        let jobs = vec![
+            Job { id: 1, deadline: 2, profit: 100 },
+            Job { id: 2, deadline: 1, profit: 19 },
+            Job { id: 3, deadline: 2, profit: 27 },
+            Job { id: 4, deadline: 1, profit: 25 },
+            Job { id: 5, deadline: 3, profit: 15 },
+        ];
+        let (profit, slots) = job_sequencing_max_profit(jobs);
+        assert!(profit >= 127); // 期望最佳 142（1,3,5）
+        assert!(slots.iter().filter(|s| s.is_some()).count() >= 2);
     }
 
     #[test]

@@ -1,6 +1,7 @@
 use c08_algorithms::sorting::*;
 use c08_algorithms::searching::*;
 use c08_algorithms::graph::*;
+use c08_algorithms::string_algorithms::*;
 
 #[test]
 fn test_sorting_parallel_and_async() {
@@ -105,6 +106,34 @@ fn bench_memory_pool_allocate_deallocate() {
     let dealloc_dur = t1.elapsed();
 
     eprintln!("MemoryPool allocate: {:?} | deallocate: {:?}", alloc_dur, dealloc_dur);
+}
+
+#[test]
+fn test_counting_and_radix_sorts() {
+    let v: Vec<u32> = (0..10_000u32).rev().collect();
+    let c = counting_sort_sync_u32(&v);
+    assert!(c.windows(2).all(|w| w[0] <= w[1]));
+    let cp = counting_sort_parallel_u32(&v);
+    assert_eq!(c, cp);
+    let rt = tokio::runtime::Runtime::new().unwrap();
+    let ca = rt.block_on(async { counting_sort_async_u32(v.clone()).await.unwrap() });
+    assert_eq!(cp, ca);
+
+    let r = radix_sort_lsd_sync_u32(v.clone());
+    assert!(r.windows(2).all(|w| w[0] <= w[1]));
+    let ra = rt.block_on(async { radix_sort_lsd_async_u32(v).await.unwrap() });
+    assert_eq!(r, ra);
+}
+
+#[test]
+fn test_manacher_and_floyd() {
+    let (s, l) = manacher_longest_palindrome("forgeeksskeegfor");
+    assert_eq!(&"forgeeksskeegfor"[s..s + l], "geeksskeeg");
+
+    let rt = tokio::runtime::Runtime::new().unwrap();
+    let edges = vec![(0usize,1usize,1.0),(1,2,2.0),(0,2,10.0)];
+    let d = rt.block_on(async { floyd_warshall_async(3, edges).await.unwrap() });
+    assert!((d[0][2] - 3.0).abs() < 1e-9);
 }
 
 
