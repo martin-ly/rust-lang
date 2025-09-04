@@ -82,6 +82,7 @@ use c08_algorithms::searching::{binary_search_sync, binary_search_async, paralle
 use c08_algorithms::graph::{bfs_shortest_path_sync, bfs_shortest_path_async, dijkstra_async};
 use c08_algorithms::divide_and_conquer::{max_subarray_sum_async, closest_pair_async, Point};
 use c08_algorithms::dynamic_programming::{lcs_async, knapsack_01_async};
+use c08_algorithms::string_algorithms::{kmp_search_async, rabin_karp_search_async};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -111,6 +112,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 动态规划：LCS 与 0-1 背包（异步封装）
     let _lcs = lcs_async(b"ABCBDAB".to_vec(), b"BDCABA".to_vec()).await?;
     let _best = knapsack_01_async(vec![2,2,6,5,4], vec![6,3,5,4,6], 10).await?;
+
+    // 字符串算法：KMP / Rabin-Karp（异步包装）
+    let _pos = kmp_search_async("ababcabcabababd".into(), "ababd".into()).await?;
+    let _pos2 = rabin_karp_search_async("abracadabra".into(), "abra".into()).await?;
 
     Ok(())
 }

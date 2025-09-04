@@ -6,6 +6,7 @@ use c08_algorithms::graph::*;
 use c08_algorithms::divide_and_conquer::*;
 use c08_algorithms::dynamic_programming::*;
 use c08_algorithms::greedy::*;
+use c08_algorithms::string_algorithms::*;
 
 fn bench_sorting(c: &mut Criterion) {
     let mut group = c.benchmark_group("sorting_sync_vs_parallel");
@@ -161,10 +162,33 @@ fn bench_greedy(c: &mut Criterion) {
     group.finish();
 }
 
+fn bench_string_algorithms(c: &mut Criterion) {
+    let mut group = c.benchmark_group("strings");
+    for &n in &[10_000usize, 100_000] {
+        let text: String = (0..n).map(|i| char::from(((i * 131) % 26) as u8 + b'a')).collect();
+        let pattern = "abcab".to_string();
+        group.bench_with_input(BenchmarkId::new("kmp", n), &n, |b, _| {
+            b.iter(|| black_box(kmp_search(&text, &pattern)))
+        });
+        group.bench_with_input(BenchmarkId::new("rk", n), &n, |b, _| {
+            b.iter(|| black_box(rabin_karp_search(&text, &pattern)))
+        });
+        group.bench_with_input(BenchmarkId::new("kmp_async", n), &n, |b, _| {
+            let rt = tokio::runtime::Runtime::new().unwrap();
+            b.iter(|| rt.block_on(async { black_box(kmp_search_async(text.clone(), pattern.clone()).await.unwrap()) }))
+        });
+        group.bench_with_input(BenchmarkId::new("rk_async", n), &n, |b, _| {
+            let rt = tokio::runtime::Runtime::new().unwrap();
+            b.iter(|| rt.block_on(async { black_box(rabin_karp_search_async(text.clone(), pattern.clone()).await.unwrap()) }))
+        });
+    }
+    group.finish();
+}
+
 criterion_group!(
     name = benches;
     config = Criterion::default();
-    targets = bench_sorting, bench_searching, bench_graph, bench_dp_and_dac, bench_greedy
+    targets = bench_sorting, bench_searching, bench_graph, bench_dp_and_dac, bench_greedy, bench_string_algorithms
 );
 criterion_main!(benches);
 

@@ -22,6 +22,7 @@ pub mod machine_learning;
 // 性能优化模块
 pub mod performance_optimization;
 pub mod performance_examples;
+pub mod string_algorithms;
 
 // 示例程序
 // pub mod bin; // 暂时注释掉，避免编译错误

@@ -82,6 +82,7 @@ async fn main() -> anyhow::Result<()> {
   - 最小生成树：`mst_kruskal_async`、`mst_prim_async`
   - 拓扑排序：`topo_sort_async`
 - 分治/动态规划：占位（将提供 `*_async` 接口并与基准联动）
+- 字符串算法：`src/string_algorithms/mod.rs`（`kmp_search_async`、`rabin_karp_search_async`）
 
 ---
 
@@ -170,6 +171,8 @@ async fn demo_async_bfs() {
 - Dijkstra 算法（Dijkstra's algorithm）
 - 最小生成树（Minimum spanning tree）
 - 拓扑排序（Topological sorting）
+- KMP 字符串匹配（Knuth–Morris–Pratt algorithm）
+- Rabin–Karp 字符串搜索（Rabin–Karp string search）
 
 （以上可参见维基百科中文或英文词条获取数学定义与标准描述。）
 

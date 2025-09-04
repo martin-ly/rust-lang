@@ -53,6 +53,19 @@
 
 ---
 
+## 字符串算法（`src/string_algorithms/mod.rs`）
+
+- KMP：时间 O(n + m)，空间 O(m)，其中 n 为文本长度、m 为模式长度；通过前缀函数避免回退
+- Rabin-Karp：期望时间 O(n + m)，最坏 O(n·m)；空间 O(1)；通过滚动哈希做快速筛选（碰撞需二次比较）
+
+并行/异步说明：
+
+- 当前实现提供 `kmp_search_async` 与 `rabin_karp_search_async` 的异步包装（`spawn_blocking`），便于在异步上下文中调度
+
+实现入口：`kmp_search` / `rabin_karp_search` 及其 `*_async`
+
+---
+
 ## 基准
 
 运行：

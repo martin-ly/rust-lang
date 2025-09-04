@@ -13,6 +13,8 @@
 - 更新 `docs/data_structures.md`：新增 `stack` 用法示例与模块导航
 - 更新 `docs/performance_optimization.md`：并行/异步与基准操作建议
 - 更新 `README.md`：加入分治/动态规划的异步示例与文档链接
+  - 新增 `string_algorithms` 模块（KMP/Rabin-Karp，同步与异步封装），导出至 `lib.rs`
+  - 扩充基准：加入字符串算法基准组（同步/异步），并扩充分治/动态规划基准
 
 ## [0.1.0] - 2025-01-27
 
