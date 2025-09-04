@@ -11,6 +11,9 @@
 - 批处理与调度：窗口批处理、管道限速
 - 基准：mpsc bounded vs unbounded、Semaphore 管道吞吐
 - 工具：utils（重试/超时/限流），可复用
+- 分布式：分布式锁、流式处理、背压控制
+- 微服务：服务发现、负载均衡、熔断降级
+- 云原生：配置管理、健康检查、Kubernetes 探针
 
 ## 快速上手
 
@@ -24,23 +27,20 @@ cargo build
 运行示例（更多见 docs/run_guide.md）：
 
 ```powershell
+# 基础异步示例
 cargo run --bin tokio_select_exp01
 cargo run --bin tokio_try_join_exp01
 cargo run --bin tokio_joinset_exp01
-cargo run --bin tokio_timeout_cancel_exp01
-cargo run --bin tracing_console_exp01
-cargo run --bin tokio_select_prefs_exp01
-cargo run --bin cancel_propagation_exp01
-cargo run --bin select_timeout_fallback_exp01
-cargo run --bin tokio_semaphore_limit_exp01
-cargo run --bin tokio_mpsc_backpressure_exp01
-cargo run --bin semaphore_mpsc_pipeline_exp01
-cargo run --bin mpsc_backpressure_compare_exp01
-cargo run --bin concurrent_fetch_error_handling_exp01
-cargo run --bin window_batch_semaphore_exp01
-cargo run --bin retry_backoff_exp01
-cargo run --bin task_scope_structured_concurrency_exp01
-cargo run --bin actix_web_exp01
+
+# 高级模式示例
+cargo run --bin distributed_lock_exp01
+cargo run --bin stream_processing_exp01
+cargo run --bin microservice_patterns_exp01
+cargo run --bin cloud_native_exp01
+cargo run --bin event_sourcing_exp01
+cargo run --bin distributed_consensus_exp01
+
+# 完整示例列表见 docs/run_guide.md
 ```
 
 基准（仅编译或运行）：
@@ -54,6 +54,9 @@ cargo bench --no-run
 
 - 运行指南：`docs/run_guide.md`
 - 最佳实践：`docs/async_best_practices.md`
+- 工具参考：`docs/utils_reference.md`
+- 基准结果：`docs/benchmark_results.md`
+- 高级模式：`docs/advanced_patterns_summary.md`
 
 ## 基准与指标说明
 

@@ -1,87 +1,160 @@
-use actix_web::{App, HttpResponse, HttpServer, Responder, web, middleware::Logger};
+use actix_web::{get, post, web, App, HttpServer, Responder, middleware::Logger};
 use std::sync::atomic::{AtomicU64, Ordering};
-use std::sync::Arc;
-use std::time::Duration;
+use std::time::{Duration, Instant};
+use c06_async::utils;
 
-use c06_async::utils::{SemaphoreLimiter, with_timeout};
-
+// 扩展指标结构
+#[derive(Default)]
 struct Metrics {
-    requests: AtomicU64,
-    total_ns: AtomicU64,
+    total_requests: AtomicU64,
+    total_latency: AtomicU64,
+    error_count: AtomicU64,
+    slow_requests: AtomicU64,
 }
 
-// 定义一个处理函数
+impl Metrics {
+    fn record_request(&self, latency: Duration, is_error: bool, is_slow: bool) {
+        self.total_requests.fetch_add(1, Ordering::Relaxed);
+        self.total_latency.fetch_add(latency.as_nanos() as u64, Ordering::Relaxed);
+        if is_error {
+            self.error_count.fetch_add(1, Ordering::Relaxed);
+        }
+        if is_slow {
+            self.slow_requests.fetch_add(1, Ordering::Relaxed);
+        }
+    }
+
+    fn get_avg_latency(&self) -> f64 {
+        let total = self.total_requests.load(Ordering::Relaxed);
+        if total == 0 {
+            0.0
+        } else {
+            self.total_latency.load(Ordering::Relaxed) as f64 / total as f64
+        }
+    }
+
+    fn get_error_rate(&self) -> f64 {
+        let total = self.total_requests.load(Ordering::Relaxed);
+        if total == 0 {
+            0.0
+        } else {
+            self.error_count.load(Ordering::Relaxed) as f64 / total as f64 * 100.0
+        }
+    }
+}
+
+#[get("/greet/{name}")]
 async fn greet(name: web::Path<String>) -> impl Responder {
-    HttpResponse::Ok().body(format!("Hello, {}!", name))
+    format!("Hello, {}!", name)
+}
+
+#[get("/greet2/{name}")]
+async fn greet2(name: web::Path<String>, metrics: web::Data<Metrics>) -> impl Responder {
+    let start = Instant::now();
+    let response = format!("Hello, {}!", name);
+    let latency = start.elapsed();
+    
+    metrics.record_request(latency, false, false);
+    
+    response
+}
+
+#[post("/slow")]
+async fn slow_endpoint(metrics: web::Data<Metrics>) -> impl Responder {
+    let start = Instant::now();
+    
+    // 使用 SemaphoreLimiter 进行限流
+    let limiter = utils::SemaphoreLimiter::new(2);
+    
+    let result = utils::with_timeout(
+        Duration::from_secs(5),
+        limiter.run(async {
+            tokio::time::sleep(Duration::from_millis(200)).await;
+        })
+    ).await;
+
+    let latency = start.elapsed();
+    let is_error = result.is_none(); // timeout 表示错误
+    let is_slow = latency > Duration::from_secs(1);
+    
+    metrics.record_request(latency, is_error, is_slow);
+
+    match result {
+        Some(_) => {
+            if is_slow {
+                format!("Slow request completed in {:?}", latency)
+            } else {
+                format!("Request completed in {:?}", latency)
+            }
+        }
+        None => {
+            "Request failed or timed out".to_string()
+        }
+    }
+}
+
+#[get("/metrics")]
+async fn metrics_handler(metrics: web::Data<Metrics>) -> impl Responder {
+    let total_requests = metrics.total_requests.load(Ordering::Relaxed);
+    let total_latency = metrics.total_latency.load(Ordering::Relaxed);
+    let error_count = metrics.error_count.load(Ordering::Relaxed);
+    let slow_requests = metrics.slow_requests.load(Ordering::Relaxed);
+    let avg_latency = metrics.get_avg_latency();
+    let error_rate = metrics.get_error_rate();
+
+    let prometheus_output = format!(
+        "# HELP http_requests_total Total number of HTTP requests
+# TYPE http_requests_total counter
+http_requests_total {total_requests}
+
+# HELP http_request_duration_nanoseconds_total Total duration of all requests in nanoseconds
+# TYPE http_request_duration_nanoseconds_total counter
+http_request_duration_nanoseconds_total {total_latency}
+
+# HELP http_requests_errors_total Total number of HTTP requests that resulted in errors
+# TYPE http_requests_errors_total counter
+http_requests_errors_total {error_count}
+
+# HELP http_slow_requests_total Total number of slow requests (>1s)
+# TYPE http_slow_requests_total counter
+http_slow_requests_total {slow_requests}
+
+# HELP http_request_duration_average_nanoseconds Average duration of requests in nanoseconds
+# TYPE http_request_duration_average_nanoseconds gauge
+http_request_duration_average_nanoseconds {avg_latency}
+
+# HELP http_error_rate_percentage Error rate as a percentage
+# TYPE http_error_rate_percentage gauge
+http_error_rate_percentage {error_rate}
+"
+    );
+
+    actix_web::HttpResponse::Ok()
+        .content_type("text/plain; version=0.0.4; charset=utf-8")
+        .body(prometheus_output)
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    env_logger::init();
-    let limiter = SemaphoreLimiter::new(64);
-    let metrics = Arc::new(Metrics { requests: AtomicU64::new(0), total_ns: AtomicU64::new(0) });
-
-    // 启动 HTTP 服务器
-    let limiter_data = limiter.clone();
-    let metrics_data = Arc::clone(&metrics);
+    env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
+    
+    let metrics = web::Data::new(Metrics::default());
+    
+    println!("🚀 Actix Web 服务器启动在 http://127.0.0.1:8080");
+    println!("📊 指标端点: http://127.0.0.1:8080/metrics");
+    println!("🐌 慢速端点: http://127.0.0.1:8080/slow");
+    println!("👋 问候端点: http://127.0.0.1:8080/greet/YourName");
+    
     HttpServer::new(move || {
-        let limiter = limiter_data.clone();
-        let metrics = Arc::clone(&metrics_data);
         App::new()
             .wrap(Logger::default())
-            .app_data(web::Data::new(limiter))
-            .app_data(web::Data::new(metrics))
-            .route("/greet/{name}", web::get().to(greet))
-            .route("/greet2/{name}", web::get().to(greet_with_metrics))
-            .route("/slow", web::get().to(slow_handler))
-            .route("/metrics", web::get().to(metrics_handler))
+            .app_data(metrics.clone())
+            .service(greet)
+            .service(greet2)
+            .service(slow_endpoint)
+            .service(metrics_handler)
     })
     .bind("127.0.0.1:8080")?
     .run()
     .await
-}
-
-async fn slow_handler(limiter: web::Data<SemaphoreLimiter>, metrics: web::Data<Arc<Metrics>>) -> impl Responder {
-    // 每个请求受限流；并设置超时保护
-    let fut = limiter.run(async move {
-        let start = std::time::Instant::now();
-        tokio::time::sleep(Duration::from_millis(200)).await;
-        let dur = start.elapsed().as_nanos() as u64;
-        metrics.total_ns.fetch_add(dur, Ordering::Relaxed);
-        metrics.requests.fetch_add(1, Ordering::Relaxed);
-        HttpResponse::Ok().body("slow ok")
-    });
-    match with_timeout(Duration::from_millis(150), fut).await {
-        Some(resp) => resp,
-        None => HttpResponse::GatewayTimeout().body("timeout"),
-    }
-}
-
-async fn metrics_handler(metrics: web::Data<Arc<Metrics>>) -> impl Responder {
-    let total = metrics.requests.load(Ordering::Relaxed);
-    let ns = metrics.total_ns.load(Ordering::Relaxed);
-    let avg_ns = if total > 0 { ns / total } else { 0 };
-    let body = format!(
-        "# HELP http_requests_total Total HTTP requests\n# TYPE http_requests_total counter\nhttp_requests_total {}\n# HELP http_avg_latency_ns Average latency in nanoseconds\n# TYPE http_avg_latency_ns gauge\nhttp_avg_latency_ns {}\n",
-        total, avg_ns
-    );
-    HttpResponse::Ok()
-        .content_type("text/plain; version=0.0.4")
-        .body(body)
-}
-
-// 简单请求计数中间件示例（可扩展为真正的中间件）
-#[allow(dead_code)]
-async fn greet_counted(path: web::Path<String>, metrics: web::Data<Arc<Metrics>>) -> impl Responder {
-    metrics.requests.fetch_add(1, Ordering::Relaxed);
-    greet(path).await
-}
-
-async fn greet_with_metrics(path: web::Path<String>, metrics: web::Data<Arc<Metrics>>) -> impl Responder {
-    let start = std::time::Instant::now();
-    let body = format!("Hello, {}!", path.into_inner());
-    let dur = start.elapsed().as_nanos() as u64;
-    metrics.total_ns.fetch_add(dur, Ordering::Relaxed);
-    metrics.requests.fetch_add(1, Ordering::Relaxed);
-    HttpResponse::Ok().body(body)
 }

@@ -1,146 +1,219 @@
-# c06_async 运行指南（Rust 1.89 对标）
+# 运行指南
 
-## 准备
+## 环境要求
 
-- 在工作区根目录执行命令时，先切换到本 crate：
-  - Windows PowerShell: `cd .\\crates\\c06_async`
+- Rust 1.89+
+- Windows PowerShell 或 Linux/macOS 终端
+- 网络访问（用于 HTTP 示例）
 
-## 构建
+## 基础命令
 
-```bash
+### 编译
+
+```powershell
+cd .\crates\c06_async
 cargo build
 ```
 
-## 运行默认二进制
+### 检查语法
 
-```bash
-cargo run --bin c06_async
+```powershell
+cargo check
 ```
 
-## 运行异步示例二进制
+## 运行示例
 
-- select 多路复用：
+### 基础异步示例
 
-```bash
+```powershell
+# Future 和 Stream 基础
 cargo run --bin tokio_select_exp01
-```
-
-- try_join 并行等待：
-
-```bash
 cargo run --bin tokio_try_join_exp01
-```
-
-- JoinSet 动态任务集：
-
-```bash
 cargo run --bin tokio_joinset_exp01
-```
 
-- 超时与取消：
-
-```bash
+# 超时和取消
 cargo run --bin tokio_timeout_cancel_exp01
-```
-
-- tracing 日志示例（配合 tokio 多任务）：
-
-```bash
-cargo run --bin tracing_console_exp01
-```
-
-- Actix Web 示例（含限流/超时/指标）：
-
-```bash
-cargo run --bin actix_web_exp01
-# 访问：
-# http://127.0.0.1:8080/greet/World
-# http://127.0.0.1:8080/slow
-# http://127.0.0.1:8080/metrics
-```
-
-- select 偏好/分支：
-
-```bash
-cargo run --bin tokio_select_prefs_exp01
-```
-
-- try_join、JoinSet、取消传播与降级：
-
-```bash
 cargo run --bin cancel_propagation_exp01
 cargo run --bin select_timeout_fallback_exp01
 ```
 
-- 限流与背压：
+### 并发控制示例
 
-```bash
+```powershell
+# 限流和背压
 cargo run --bin tokio_semaphore_limit_exp01
 cargo run --bin tokio_mpsc_backpressure_exp01
 cargo run --bin semaphore_mpsc_pipeline_exp01
 cargo run --bin mpsc_backpressure_compare_exp01
-```
 
-- 并发抓取与错误处理：
-
-```bash
-cargo run --bin concurrent_fetch_error_handling_exp01
-```
-
-- 窗口批处理与限速：
-
-```bash
-cargo run --bin window_batch_semaphore_exp01
-```
-
-- 重试与指数退避：
-
-```bash
-cargo run --bin retry_backoff_exp01
-```
-
-## 工具模块（utils）
-
-- 重试器：`retry_with_backoff`
-- 超时：`with_timeout`
-- 限流器：`SemaphoreLimiter`
-
-上述工具已接入部分示例（重试/降级/管道限速），可复用在你的业务代码中。
-
-- 结构化并发（JoinSet）：
-
-```bash
+# 结构化并发
 cargo run --bin task_scope_structured_concurrency_exp01
+cargo run --bin joinset_cancel_on_error_exp01
 ```
 
-- 状态/事件发布：
+### 高级模式示例
 
-```bash
+```powershell
+# 重试和错误处理
+cargo run --bin retry_backoff_exp01
+cargo run --bin concurrent_fetch_error_handling_exp01
+
+# 批处理和管道
+cargo run --bin window_batch_semaphore_exp01
+cargo run --bin mpsc_worker_pool_exp01
+
+# 状态同步
 cargo run --bin tokio_watch_exp01
 cargo run --bin tokio_broadcast_exp01
+
+# 分布式模式
+cargo run --bin distributed_lock_exp01
+cargo run --bin stream_processing_exp01
+
+# 微服务模式
+cargo run --bin microservice_patterns_exp01
+
+# 云原生特性
+cargo run --bin cloud_native_exp01
+
+# 事件溯源和一致性
+cargo run --bin event_sourcing_exp01
+cargo run --bin distributed_consensus_exp01
 ```
 
-- 优雅关闭：
+### 网络和服务器示例
 
-```bash
+```powershell
+# Actix Web 服务器
+cargo run --bin actix_web_exp01
+
+# 优雅关闭
 cargo run --bin graceful_shutdown_exp01
 ```
 
-- 工作池（有界队列）：
+### 工具和调试
 
-```bash
-cargo run --bin mpsc_worker_pool_exp01
-```
+```powershell
+# 追踪和指标
+cargo run --bin tracing_console_exp01
 
-- 断路器（示例）：
-
-```bash
+# 断路器模式
 cargo run --bin circuit_breaker_exp01
 ```
 
-## 说明与注意事项
+## 基准测试
 
-- Windows PowerShell 中不需要通过管道传给 `cat`，直接运行 `cargo run ...` 即可。
-- tracing 示例默认使用 `INFO` 日志级别，可在代码中调整 `with_max_level`。
-- 网络相关示例如 `streams::demo_buffer_unordered` 需外网访问权限，否则可能表现为空或报错。
-- 若需要调度器差异对比，可在示例中切换 `#[tokio::main]` 的 flavor（`current_thread`/`multi_thread`）。
+### 编译基准测试
+
+```powershell
+cargo bench --no-run
+```
+
+### 运行基准测试
+
+```powershell
+# 运行所有基准测试
+cargo bench
+
+# 运行特定基准测试
+cargo bench --bench async_benches -- mpsc_bounded
+cargo bench --bench async_benches -- semaphore_limiter
+
+# 生成详细报告
+cargo bench --bench async_benches -- --verbose
+```
+
+### 基准测试结果
+
+详细的性能对比结果请参考 `docs/benchmark_results.md`。
+
+## 指标和监控
+
+### Actix Web 指标端点
+
+```powershell
+# 启动服务器
+cargo run --bin actix_web_exp01
+
+# 访问指标端点（Prometheus 格式）
+curl http://127.0.0.1:8080/metrics
+```
+
+### 可用指标
+
+- `http_requests_total`: 总请求数
+- `http_request_duration_nanoseconds_total`: 总延迟时间
+- `http_requests_errors_total`: 错误请求数
+- `http_slow_requests_total`: 慢速请求数（>1s）
+- `http_request_duration_average_nanoseconds`: 平均延迟
+- `http_error_rate_percentage`: 错误率百分比
+
+### 日志配置
+
+```powershell
+# 设置日志级别
+$env:RUST_LOG="info"
+cargo run --bin actix_web_exp01
+```
+
+## 故障排除
+
+### 常见问题
+
+1. **PowerShell 执行策略**
+
+   ```powershell
+   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+   ```
+
+2. **网络访问问题**
+   - 确保防火墙允许本地连接
+   - 检查端口 8080 是否被占用
+
+3. **依赖下载失败**
+
+   ```powershell
+   cargo clean
+   cargo update
+   ```
+
+### 调试技巧
+
+1. **详细编译信息**
+
+   ```powershell
+   cargo build --verbose
+   ```
+
+2. **运行时日志**
+
+   ```powershell
+   $env:RUST_LOG="debug"
+   cargo run --bin your_binary
+   ```
+
+3. **性能分析**
+
+   ```powershell
+   cargo bench --bench async_benches -- --verbose
+   ```
+
+## 扩展开发
+
+### 添加新示例
+
+1. 在 `src/bin/` 目录下创建新的 `.rs` 文件
+2. 在 `Cargo.toml` 中添加必要的依赖
+3. 更新本文档
+
+### 添加新基准测试
+
+1. 在 `benches/async_benches.rs` 中添加测试函数
+2. 使用 `criterion` 的 `BenchmarkId` 进行参数化测试
+3. 更新 `docs/benchmark_results.md`
+
+### 添加新工具
+
+1. 在 `src/utils/` 目录下创建新模块
+2. 在 `src/utils/mod.rs` 中导出
+3. 在 `src/lib.rs` 中声明为公共模块

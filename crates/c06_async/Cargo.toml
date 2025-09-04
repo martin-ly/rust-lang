@@ -5,27 +5,28 @@ edition = "2024"
 resolver = "3"
 
 [dependencies]
-tokio = { version = ">=1.44", features = ["full"] }
-tokio-stream = ">=0.1"
-tracing = ">=0.1"
-tracing-subscriber = ">=0.3"
-reqwest = { version = "0.12", features = ["json"] }
-anyhow = ">=1.0"
-env_logger = ">=0.11"
-parking_lot = ">=0.12"
+tokio = { version = "1.0", features = ["full"] }
+futures = "0.3"
+tokio-stream = "0.1"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+anyhow = "1.0.99"
+parking_lot = "0.12"
+actix-web = "4.0"
+env_logger = "0.11"
+uuid = { version = "1.0", features = ["v4"] }
+rand = "0.8"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+reqwest = { version = "0.11", features = ["json"] }
 
 tokio-console = ">=0.1.11"
-futures = ">=0.3.31"
 crossterm = { version = ">=0.28", features = ["event-stream"] }
 
-actix-web = ">=4.10"
-actix = ">=0.11"  # 或者您需要的其他版本
-actix-rt = ">=2.5"  # 用于运行时
+actix = ">=0.11"
+actix-rt = ">=2.5"
 
-axum = ">=0.8" 
-
-serde = { version = ">=1.0.219", features = ["derive"] }
-serde_json = ">=1.0.140"
+axum = ">=0.8"
 
 [dev-dependencies]
 criterion = { version = ">=0.5", features = ["html_reports"] }
