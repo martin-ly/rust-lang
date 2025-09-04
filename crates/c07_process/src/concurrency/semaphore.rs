@@ -7,6 +7,7 @@ use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 
 /// 进程安全的信号量
+#[allow(dead_code)]
 pub struct ProcessSemaphore {
     name: String,
     permits: Arc<Mutex<usize>>,
@@ -14,6 +15,7 @@ pub struct ProcessSemaphore {
     stats: Arc<SemaphoreStats>,
 }
 
+#[allow(dead_code)]
 struct SemaphoreStats {
     acquire_count: std::sync::atomic::AtomicUsize,
     release_count: std::sync::atomic::AtomicUsize,

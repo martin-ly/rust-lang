@@ -7,6 +7,7 @@ use std::sync::{Arc, RwLock as StdRwLock};
 use std::time::Instant;
 
 /// 进程安全的读写锁
+#[allow(dead_code)]
 pub struct ProcessRwLock {
     name: String,
     inner: StdRwLock<()>,
@@ -14,6 +15,7 @@ pub struct ProcessRwLock {
     stats: Arc<RwLockStats>,
 }
 
+#[allow(dead_code)]
 struct RwLockStats {
     read_lock_count: std::sync::atomic::AtomicUsize,
     write_lock_count: std::sync::atomic::AtomicUsize,

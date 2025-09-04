@@ -13,6 +13,7 @@ categories = ["system-programming", "concurrency"]
 [dependencies]
 # 核心异步运行时（可选）
 tokio = { version = "1.0", features = ["full"], optional = true }
+tokio-util = { version = "0.7", optional = true }
 
 # 序列化支持
 serde = { version = "1.0", features = ["derive"] }
@@ -71,10 +72,14 @@ path = "src/bin/sync_demo.rs"
 name = "process_pool_demo"
 path = "src/bin/process_pool_demo.rs"
 
+[[bin]]
+name = "async_demo"
+path = "src/bin/async_demo.rs"
+
 [features]
 default = ["std"]
 std = []
-async = ["tokio"]
+async = ["tokio", "tokio-util"]
 unix = ["nix"]
 windows = []
 full = ["std", "async", "unix", "windows"]

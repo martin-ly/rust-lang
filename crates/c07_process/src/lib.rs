@@ -59,6 +59,9 @@ pub mod shared_memory;
 // Fork模块
 pub mod fork;
 
+// 异步运行时模块
+pub mod async_runtime;
+
 // 重新导出关键类型
 pub use types::{
     ProcessInfo, ProcessStatus, ProcessConfig, ProcessGroup,
@@ -71,6 +74,11 @@ pub use error::{Result, ProcessResult, IpcResult, SyncResult, ResourceResult};
 pub use process::{
     ProcessManager, ProcessBuilder, ProcessGroupManager, 
     pool::{ProcessPool, ProcessPoolConfig, LoadBalancingStrategy, AutoScalingConfig}
+};
+
+#[cfg(feature = "async")]
+pub use async_runtime::{
+    AsyncProcessManager, AsyncProcessPool, AsyncTaskScheduler, AsyncTask
 };
 
 pub use inter_process_communication::{
@@ -136,7 +144,7 @@ pub struct LibraryInfo {
 
 /// 获取启用的特性列表
 fn get_enabled_features() -> Vec<String> {
-    let features = vec!["std".to_string()];
+    let mut features = vec!["std".to_string()];
     
     #[cfg(feature = "async")]
     features.push("async".to_string());

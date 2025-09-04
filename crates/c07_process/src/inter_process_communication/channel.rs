@@ -7,6 +7,7 @@ use std::io::{Write, BufReader, BufRead};
 use std::path::Path;
 
 /// 文件系统通道实现
+#[allow(dead_code)]
 pub struct FileSystemChannel {
     name: String,
     config: IpcConfig,

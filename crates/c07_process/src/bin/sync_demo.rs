@@ -15,7 +15,7 @@ fn main() -> Result<()> {
     println!("✅ 创建读写锁: demo_rwlock");
     
     // 创建条件变量
-    let condvar = sync.create_condvar("demo_condvar")?;
+    let _condvar = sync.create_condvar("demo_condvar")?;
     println!("✅ 创建条件变量: demo_condvar");
     
     // 创建信号量

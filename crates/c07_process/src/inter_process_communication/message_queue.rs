@@ -12,9 +12,10 @@ pub struct MessageQueue {
     is_closed: Arc<Mutex<bool>>,
 }
 
+#[allow(dead_code)]
 impl MessageQueue {
     /// 创建新的消息队列
-    pub fn new(name: &str, capacity: usize, config: IpcConfig) -> IpcResult<Self> {
+    pub fn new(name: &str, capacity: usize, _config: IpcConfig) -> IpcResult<Self> {
         Ok(Self {
             name: name.to_string(),
             capacity,
@@ -24,7 +25,7 @@ impl MessageQueue {
     }
     
     /// 连接到现有的消息队列
-    pub fn connect(name: &str, config: IpcConfig) -> IpcResult<Self> {
+    pub fn connect(name: &str, _config: IpcConfig) -> IpcResult<Self> {
         Ok(Self {
             name: name.to_string(),
             capacity: 1000, // 默认容量

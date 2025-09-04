@@ -133,7 +133,7 @@ if let Some(permit) = semaphore.try_acquire() {
 
 ## 🏗️ 项目结构
 
-```
+```text
 src/
 ├── lib.rs                 # 库入口点和公共API
 ├── types/                 # 核心类型定义

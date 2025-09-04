@@ -7,6 +7,7 @@ use std::sync::{Arc, Mutex as StdMutex};
 use std::time::{Duration, Instant};
 
 /// 进程安全的互斥锁
+#[allow(dead_code)]
 pub struct ProcessMutex {
     name: String,
     inner: StdMutex<()>,
@@ -38,6 +39,7 @@ impl ProcessMutex {
     }
 
     /// 尝试获取锁
+    #[allow(dead_code)]
     pub fn try_lock(&self) -> Option<MutexGuard> {
         if let Ok(guard) = self.inner.try_lock() {
             self.stats.lock_count.fetch_add(1, std::sync::atomic::Ordering::Relaxed);

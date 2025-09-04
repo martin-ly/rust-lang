@@ -7,6 +7,7 @@ use std::sync::{Arc, Mutex, Condvar};
 use std::time::{Duration, Instant};
 
 /// 进程安全的屏障
+#[allow(dead_code)]
 pub struct ProcessBarrier {
     name: String,
     parties: usize,
@@ -17,6 +18,7 @@ pub struct ProcessBarrier {
     condvar: Arc<Condvar>,
 }
 
+#[allow(dead_code)]
 struct BarrierStats {
     wait_count: std::sync::atomic::AtomicUsize,
     total_wait_time: std::sync::atomic::AtomicUsize,

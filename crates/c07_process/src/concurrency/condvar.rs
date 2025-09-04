@@ -8,6 +8,7 @@ use std::time::{Duration, Instant};
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 /// 进程安全的条件变量
+#[allow(dead_code)]
 pub struct ProcessCondVar {
     name: String,
     inner: Condvar,
@@ -15,6 +16,7 @@ pub struct ProcessCondVar {
     stats: Arc<CondVarStats>,
 }
 
+#[allow(dead_code)]
 struct CondVarStats {
     wait_count: AtomicUsize,
     notify_count: AtomicUsize,

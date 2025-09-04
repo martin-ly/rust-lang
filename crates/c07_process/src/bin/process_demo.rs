@@ -7,15 +7,15 @@ fn main() -> Result<()> {
     // 创建进程管理器
     let mut pm = ProcessManager::new();
     
-    // 创建进程配置
+    // 创建进程配置 - 使用Windows兼容的命令
     let mut env = HashMap::new();
-    env.insert("PATH".to_string(), "/usr/bin:/bin".to_string());
+    env.insert("PATH".to_string(), "C:\\Windows\\System32".to_string());
     
     let config = ProcessConfig {
-        program: "echo".to_string(),
-        args: vec!["Hello, World!".to_string()],
+        program: "cmd".to_string(),
+        args: vec!["/c".to_string(), "echo Hello, World!".to_string()],
         env,
-        working_dir: Some("/tmp".to_string()),
+        working_dir: Some(".".to_string()), // 使用当前目录
         user_id: None,
         group_id: None,
         priority: None,
@@ -47,9 +47,9 @@ fn main() -> Result<()> {
     ipc.create_named_pipe("demo_pipe")?;
     println!("✅ 创建命名管道: demo_pipe");
     
-    // 创建Unix套接字
-    ipc.create_unix_socket("/tmp/demo_socket")?;
-    println!("✅ 创建Unix套接字: /tmp/demo_socket");
+    // 创建Unix套接字（在Windows上会使用TCP套接字）
+    ipc.create_unix_socket("demo_socket")?;
+    println!("✅ 创建套接字: demo_socket");
     
     // 创建TCP套接字
     ipc.create_tcp_socket("127.0.0.1", 8080)?;
