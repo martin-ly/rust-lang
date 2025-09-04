@@ -1,11 +1,51 @@
 [package]
 name = "c07_process"
 version = "0.1.0"
-edition = "2024"
-resolver = "3"
+edition = "2021"
+resolver = "2"
+authors = ["Rust Process Management Team"]
+description = "Comprehensive process management, IPC, and synchronization library for Rust"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/rust-lang/c07_process"
+keywords = ["process", "ipc", "synchronization", "system-programming"]
+categories = ["system-programming", "concurrency"]
 
 [dependencies]
+# 核心异步运行时（可选）
+tokio = { version = "1.0", features = ["full"], optional = true }
 
+# 序列化支持
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# 系统调用和平台特定功能
+nix = { version = "0.27", features = ["process", "user", "signal"], optional = true }
+libc = "0.2"
+
+# 内存映射和共享内存
+memmap2 = "0.9"
+shared_memory = "0.12"
+
+# 信号处理
+signal-hook = "0.3"
+
+# 错误处理
+thiserror = "1.0"
+anyhow = "1.0"
+
+# 日志记录
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# 时间处理
+chrono = { version = "0.4", features = ["serde"] }
+
+# 配置管理
+config = "0.13"
+
+[dev-dependencies]
+criterion = "0.5"
+tempfile = "3.0"
 
 [lib]
 name = "c07_process"
@@ -14,3 +54,37 @@ path = "src/lib.rs"
 [[bin]]
 name = "c07_process"
 path = "src/bin/main.rs"
+
+[[bin]]
+name = "process_demo"
+path = "src/bin/process_demo.rs"
+
+[[bin]]
+name = "ipc_demo"
+path = "src/bin/ipc_demo.rs"
+
+[[bin]]
+name = "sync_demo"
+path = "src/bin/sync_demo.rs"
+
+[[bin]]
+name = "process_pool_demo"
+path = "src/bin/process_pool_demo.rs"
+
+[features]
+default = ["std"]
+std = []
+async = ["tokio"]
+unix = ["nix"]
+windows = []
+full = ["std", "async", "unix", "windows"]
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+
+[profile.dev]
+opt-level = 0
+debug = true
