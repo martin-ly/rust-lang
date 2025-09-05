@@ -3,8 +3,106 @@ name = "c10_networks"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
+build = "build.rs"
 
 [dependencies]
+# 异步运行时
+tokio = { version = "1.0", features = ["full"] }
+async-std = "1.12"
+
+# 网络和字节处理
+bytes = { version = "1.0", features = ["serde"] }
+mio = "0.8"
+
+# 协议解析
+nom = "7.0"
+httparse = "1.8"
+url = "2.4"
+
+# 序列化和反序列化
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# 错误处理
+thiserror = "1.0"
+anyhow = "1.0"
+
+# 日志和追踪
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# 加密和安全
+ring = "0.17"
+rustls = "0.21"
+
+# 测试和基准测试
+criterion = { version = "0.5", features = ["html_reports"] }
+futures = "0.3"
+futures-util = "0.3"
+
+# P2P 与 QUIC（新增）
+libp2p = { version = "0.52", features = ["tokio", "tcp", "dns", "tls", "gossipsub", "kad", "noise", "yamux", "ping", "identify", "macros"] }
+quinn = "0.11"
+rcgen = "0.13"
+# WebSocket
+tokio-tungstenite = { version = "0.21", features = ["rustls-tls-webpki-roots"] }
+tungstenite = "0.21"
+
+# Protobuf / gRPC（对齐 tonic 0.11 → prost 0.12）
+prost = "0.12"
+tonic = { version = "0.11", features = ["transport"] }
+
+[build-dependencies]
+prost-build = "0.12"
+tonic-build = "0.11"
+protoc-bin-vendored = "3"
+
+[dev-dependencies]
+tokio-test = "0.4"
+
+[[example]]
+name = "tcp_echo_server"
+path = "examples/tcp_echo_server.rs"
+
+[[example]]
+name = "tcp_client"
+path = "examples/tcp_client.rs"
+
+[[example]]
+name = "http_client"
+path = "examples/http_client.rs"
+
+[[example]]
+name = "websocket_demo"
+path = "examples/websocket_demo.rs"
+
+[[example]]
+name = "p2p_minimal"
+path = "examples/p2p_minimal.rs"
+
+[[example]]
+name = "ws_echo_server"
+path = "examples/ws_echo_server.rs"
+
+[[example]]
+name = "ws_echo_client"
+path = "examples/ws_echo_client.rs"
+
+[[example]]
+name = "udp_echo"
+path = "examples/udp_echo.rs"
+
+[[example]]
+name = "grpc_server"
+path = "examples/grpc_server.rs"
+
+[[example]]
+name = "grpc_client"
+path = "examples/grpc_client.rs"
+
+[[bench]]
+name = "network_performance"
+harness = false
 
 
 [lib]

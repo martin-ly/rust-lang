@@ -5,8 +5,54 @@ edition = "2024"
 resolver = "3"
 
 [dependencies]
+tokio = { version = "1", features = ["rt-multi-thread", "macros"], optional = true }
+async-trait = "0.1"
+thiserror = "1"
+tracing = { version = "0.1", optional = true }
 
+# Key-Value
+redis = { version = "0.25", optional = true, default-features = false, features = ["aio", "tokio-comp"] }
 
+# SQL Databases
+tokio-postgres = { version = "0.7", optional = true }
+postgres-types = { version = "0.2", optional = true }
+mysql_async = { version = "0.34", optional = true }
+rusqlite = { version = "0.31", optional = true, features = ["bundled"] }
+
+# Message Queues / Streams
+async-nats = { version = "0.35", optional = true }
+rdkafka = { version = "0.36", optional = true, default-features = false, features = ["cmake-build"] }
+rumqttc = { version = "0.24", optional = true }
+
+# Proxies / Networking
+pingora = { version = "0.3", optional = true }
+
+[features]
+default = []
+
+# High-level toggles
+full = [
+    "kv-redis",
+    "sql-postgres",
+    "sql-mysql",
+    "sql-sqlite",
+    "mq-nats",
+    "mq-kafka",
+    "mq-mqtt",
+    "proxy-pingora",
+    "tokio"
+]
+
+# Fine-grained feature flags per middleware
+kv-redis = ["redis", "tokio"]
+sql-postgres = ["tokio-postgres", "postgres-types", "tokio"]
+sql-mysql = ["mysql_async", "tokio"]
+sql-sqlite = ["rusqlite"]
+mq-nats = ["async-nats"]
+mq-kafka = ["rdkafka", "tokio"]
+mq-mqtt = ["rumqttc", "tokio"]
+proxy-pingora = ["pingora", "tokio"]
+obs = ["tracing"]
 [lib]
 name = "c12_middlewares"
 path = "src/lib.rs"

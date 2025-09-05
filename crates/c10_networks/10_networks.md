@@ -24,7 +24,15 @@
     - [5.1 加密通信的理论基础](#51-加密通信的理论基础)
     - [5.2 数字签名与证书](#52-数字签名与证书)
   - [6. 总结](#6-总结)
-  - [7. 版本对齐说明与形式化勘误](#version-alignment-network)
+  - [7. 版本对齐说明与形式化勘误 {#version-alignment-network}](#7-版本对齐说明与形式化勘误-version-alignment-network)
+  - [附录A. P2P 网络（新增）](#附录a-p2p-网络新增)
+    - [A.1 定义与目标](#a1-定义与目标)
+    - [A.2 形式化与状态机](#a2-形式化与状态机)
+    - [A.3 Rust 抽象（伪代码）](#a3-rust-抽象伪代码)
+    - [A.4 基于 libp2p 的最小工作示例](#a4-基于-libp2p-的最小工作示例)
+    - [A.5 可达性与 NAT 穿透](#a5-可达性与-nat-穿透)
+    - [A.6 安全与信誉](#a6-安全与信誉)
+    - [A.7 测试与基准](#a7-测试与基准)
 
 ## 1. 网络协议模型
 
@@ -1218,3 +1226,126 @@ impl Certificate {
 - 缓冲区管理：示例 `VecDeque<u8>` 便于说明读写指针语义；零拷贝路径可结合 `bytes::Bytes`、`IoSlice` 等以减少拷贝；并应注意背压与水位阈值以防止放大。
 - 性能与拥塞控制：提供了慢启动/拥塞避免的抽象接口；实际实现需结合拥塞控制算法（如 CUBIC/BBR）与计时器精度做细化。
 - 安全说明：加密/签名示例为教学化伪实现，不具备安全性；工程需采用经过审计的库（如 `ring`/`rustls`），避免自实现密码学原语。
+
+### 快速开始（新增：WebSocket/UDP/gRPC）
+
+```bash
+# WebSocket 回显（开两窗）
+cargo run --example ws_echo_server
+cargo run --example ws_echo_client
+
+# UDP 回显（发送数据可用 netcat/ncat 或自写客户端）
+cargo run --example udp_echo
+
+# gRPC（开两窗）
+cargo run --example grpc_server
+cargo run --example grpc_client
+```
+
+参考实现：见 `examples/` 下对应示例源码与 `README.md` 运行指引。
+
+## 附录A. P2P 网络（新增）
+
+### A.1 定义与目标
+
+**定义**：
+P2P（Peer-to-Peer）网络是无中心协调或弱中心协调的分布式通信体系，节点既是客户端也是服务器，强调自治、可拓展与容错。
+
+**目标**：
+
+- 去中心化发现与路由
+- 端到端加密与身份认证
+- 在 NAT/防火墙环境下的可达性
+- 高效的内容/消息分发
+
+### A.2 形式化与状态机
+
+```text
+Peer = { id, keys, addrs, protocols }
+Overlay = (V, E), V=Peer 集合, E=连接集合
+Route(k) = 〈hop₁, hop₂, …, hopₙ〉 // 键 k 的路径
+```
+
+消息发布订阅：
+
+```text
+GossipSub = { join(topic), leave(topic), publish(topic, msg), on_msg(topic, msg) }
+```
+
+### A.3 Rust 抽象（伪代码）
+
+```rust
+struct PeerId(Vec<u8>);
+
+struct PeerInfo {
+    id: PeerId,
+    addresses: Vec<String>,
+    protocols: Vec<String>,
+}
+
+trait Discovery {
+    fn bootstrap(&mut self, seeds: &[PeerInfo]);
+    fn find_peer(&mut self, id: &PeerId) -> Option<PeerInfo>;
+}
+
+trait PubSub {
+    fn join(&mut self, topic: &str);
+    fn publish(&mut self, topic: &str, data: &[u8]);
+}
+```
+
+### A.4 基于 libp2p 的最小工作示例
+
+```rust
+use futures::prelude::*;
+use libp2p::{gossipsub, identity, kad, ping, identify, Multiaddr, PeerId, Swarm};
+
+#[tokio::main]
+async fn main() -> anyhow::Result<()> {
+    let key = identity::Keypair::generate_ed25519();
+    let peer_id = PeerId::from(key.public());
+
+    let transport = libp2p::tokio_development_transport(key.clone()).await?;
+
+    let gossipsub = gossipsub::Behaviour::new(
+        gossipsub::MessageAuthenticity::Signed(key.clone()),
+        gossipsub::Config::default(),
+    )?;
+
+    let kad = kad::Behaviour::new(kad::Config::default(), kad::store::MemoryStore::new(peer_id));
+    let ping = ping::Behaviour::default();
+    let identify = identify::Behaviour::new(identify::Config::new("c10/1.0".into(), key.public()));
+
+    let behaviour = libp2p::swarm::NetworkBehaviour::combine((gossipsub, kad, ping, identify));
+    let mut swarm = Swarm::new(transport, behaviour, peer_id);
+
+    Swarm::listen_on(&mut swarm, "/ip4/0.0.0.0/tcp/0".parse::<Multiaddr>()?)?;
+
+    loop {
+        match swarm.select_next_some().await {
+            libp2p::swarm::SwarmEvent::NewListenAddr { address, .. } => {
+                println!("listening on {}", address);
+            }
+            _ => {}
+        }
+    }
+}
+```
+
+### A.5 可达性与 NAT 穿透
+
+- 优先 QUIC/UDP 打洞，失败则回退中继/中转。
+- 记录多地址候选集；监测 RTT 选择最优路径。
+- 提供探测 API：STUN 探测、UPnP 端口映射尝试、外网可达性测试。
+
+### A.6 安全与信誉
+
+- 握手使用 Noise/TLS；节点标识为公钥哈希。
+- 消息签名与 anti-replay（时间戳/nonce/窗口）。
+- 基于消息有效率/滥用事件的信誉度与速率限制。
+
+### A.7 测试与基准
+
+- 单元：Kademlia 路由表操作、GossipSub 去重。
+- 集成：本地 3-5 节点组网，主题一致性。
+- 基准：发布吞吐、查找延迟、路由 hop 数统计。

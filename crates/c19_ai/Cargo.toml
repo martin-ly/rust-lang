@@ -1,0 +1,16 @@
+[package]
+name = "c19_ai"
+version = "0.1.0"
+edition = "2024"
+resolver = "3"
+description = "AI and Machine Learning with Rust"
+authors = ["Rust AI Team"]
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+tokio = { version = "1.44", features = ["full"] }
+rand = "0.8"
+
+[lib]
+name = "c19_ai"
+path = "src/lib.rs"

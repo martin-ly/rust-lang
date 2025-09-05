@@ -3,4 +3,3 @@ pub mod db;
 pub mod diesel;
 pub mod error;
 pub mod log;
-pub mod serde;
