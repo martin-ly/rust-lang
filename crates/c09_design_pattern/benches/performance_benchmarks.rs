@@ -5,7 +5,7 @@
 
 use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
 use c09_design_pattern::creational::singleton::define::Singleton;
-use c09_design_pattern::structural::flyweight::define::{OptimizedFlyweightFactory, Flyweight};
+use c09_design_pattern::structural::flyweight::define::OptimizedFlyweightFactory;
 use c09_design_pattern::structural::proxy::define::{RealSubject, Proxy, VirtualProxy, Subject};
 use c09_design_pattern::behavioral::chain_of_responsibility::define::{ConcreteHandlerA, ConcreteHandlerB, ConcreteHandlerC, Handler};
 use std::sync::Arc;
@@ -129,7 +129,7 @@ fn benchmark_chain_of_responsibility(c: &mut Criterion) {
         b.iter(|| {
             let mut handler_a = Arc::new(ConcreteHandlerA::new());
             let mut handler_b = Arc::new(ConcreteHandlerB::new());
-            let mut handler_c = Arc::new(ConcreteHandlerC::new());
+            let handler_c = Arc::new(ConcreteHandlerC::new());
             
             Arc::make_mut(&mut handler_a).set_next(handler_b.clone());
             Arc::make_mut(&mut handler_b).set_next(handler_c.clone());
@@ -142,7 +142,7 @@ fn benchmark_chain_of_responsibility(c: &mut Criterion) {
     group.bench_function("process_chain", |b| {
         let mut handler_a = Arc::new(ConcreteHandlerA::new());
         let mut handler_b = Arc::new(ConcreteHandlerB::new());
-        let mut handler_c = Arc::new(ConcreteHandlerC::new());
+        let handler_c = Arc::new(ConcreteHandlerC::new());
         
         Arc::make_mut(&mut handler_a).set_next(handler_b.clone());
         Arc::make_mut(&mut handler_b).set_next(handler_c.clone());

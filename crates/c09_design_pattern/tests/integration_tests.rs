@@ -4,7 +4,7 @@
 /// 验证模式组合使用的正确性和性能
 
 use c09_design_pattern::creational::singleton::define::Singleton;
-use c09_design_pattern::creational::abstract_factory::enum_trait::{CircleFactory, RectangleFactory, ShapeFactory};
+use c09_design_pattern::creational::abstract_factory::enum_trait::{CircleFactory, ShapeFactory};
 use c09_design_pattern::structural::proxy::define::{RealSubject, Proxy, Subject};
 use c09_design_pattern::structural::flyweight::define::{OptimizedFlyweightFactory as FlyweightFactory, Flyweight};
 use c09_design_pattern::behavioral::chain_of_responsibility::define::{ConcreteHandlerA, ConcreteHandlerB, ConcreteHandlerC, Handler};
@@ -63,7 +63,7 @@ mod integration_tests {
         // 创建责任链
         let mut handler_a = Arc::new(ConcreteHandlerA::new());
         let mut handler_b = Arc::new(ConcreteHandlerB::new());
-        let mut handler_c = Arc::new(ConcreteHandlerC::new());
+        let handler_c = Arc::new(ConcreteHandlerC::new());
         
         // 构建链
         Arc::make_mut(&mut handler_a).set_next(handler_b.clone());
