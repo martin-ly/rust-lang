@@ -1,6 +1,7 @@
 #[allow(unused)]
-trait Shape {
+pub trait Shape {
     fn draw(&self);
+    fn area(&self) -> f64;
 }
 
 #[allow(unused)]
@@ -11,6 +12,10 @@ struct Circle {
 impl Shape for Circle {
     fn draw(&self) {
         println!("Drawing a Circle with radius: {}", self.radius);
+    }
+    
+    fn area(&self) -> f64 {
+        std::f64::consts::PI * self.radius * self.radius
     }
 }
 
@@ -27,15 +32,19 @@ impl Shape for Rectangle {
             self.width, self.height
         );
     }
+    
+    fn area(&self) -> f64 {
+        self.width * self.height
+    }
 }
 
 #[allow(unused)]
-trait ShapeFactory {
+pub trait ShapeFactory {
     fn create_shape(&self) -> Box<dyn Shape>;
 }
 
 #[allow(unused)]
-struct CircleFactory;
+pub struct CircleFactory;
 
 impl ShapeFactory for CircleFactory {
     fn create_shape(&self) -> Box<dyn Shape> {
@@ -44,7 +53,7 @@ impl ShapeFactory for CircleFactory {
 }
 
 #[allow(unused)]
-struct RectangleFactory;
+pub struct RectangleFactory;
 
 impl ShapeFactory for RectangleFactory {
     fn create_shape(&self) -> Box<dyn Shape> {

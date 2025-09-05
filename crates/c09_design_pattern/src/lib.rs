@@ -18,6 +18,9 @@ pub mod database_patterns;
 pub mod game_engine_patterns;
 pub mod os_patterns;
 
+// 错误处理模块
+pub mod error_handling;
+
 // 示例程序
 // pub mod bin; // 暂时注释掉，避免编译错误
 

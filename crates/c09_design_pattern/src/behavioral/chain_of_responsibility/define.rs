@@ -1,20 +1,20 @@
 use std::sync::Arc;
 
 #[allow(unused)]
-trait Handler<T> {
+pub trait Handler<T> {
     fn set_next(&mut self, next: Arc<dyn Handler<T>>) -> Arc<dyn Handler<T>>;
     fn handle(&self, request: T);
 }
 
 #[allow(unused)]
 #[derive(Clone)]
-struct ConcreteHandlerA {
+pub struct ConcreteHandlerA {
     next_handler: Option<Arc<dyn Handler<String>>>,
 }
 
 #[allow(unused)]
 impl ConcreteHandlerA {
-    fn new() -> Self {
+    pub fn new() -> Self {
         ConcreteHandlerA { next_handler: None }
     }
 }
@@ -39,13 +39,13 @@ impl Handler<String> for ConcreteHandlerA {
 
 #[allow(unused)]
 #[derive(Clone)]
-struct ConcreteHandlerB {
+pub struct ConcreteHandlerB {
     next_handler: Option<Arc<dyn Handler<String>>>,
 }
 
 #[allow(unused)]
 impl ConcreteHandlerB {
-    fn new() -> Self {
+    pub fn new() -> Self {
         ConcreteHandlerB { next_handler: None }
     }
 }
@@ -70,13 +70,13 @@ impl Handler<String> for ConcreteHandlerB {
 
 #[allow(unused)]
 #[derive(Clone)]
-struct ConcreteHandlerC {
+pub struct ConcreteHandlerC {
     next_handler: Option<Arc<dyn Handler<String>>>,
 }
 
 #[allow(unused)]
 impl ConcreteHandlerC {
-    fn new() -> Self {
+    pub fn new() -> Self {
         ConcreteHandlerC { next_handler: None }
     }
 }

@@ -5,10 +5,15 @@ edition = "2024"
 resolver = "3"
 
 [dependencies]
-async-trait = "0.1.88"
-tokio = { version = "1.44.1", features = ["full"] }
-rayon = ">=1.10"
-crossbeam = ">=0.8"
+async-trait = "0.1.89"
+tokio = { version = "1.45.0", features = ["full"] }
+rayon = "1.11.0"
+crossbeam = "0.8.4"
+lazy_static = "1.4"
+
+[dev-dependencies]
+criterion = "0.5"
+
 [lib]
 name = "c09_design_pattern"
 path = "src/lib.rs"

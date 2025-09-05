@@ -47,7 +47,7 @@
 
 ```text
 Factory<T> = { create() → T }
-````
+```
 
 **Rust 伪代码**：
 
