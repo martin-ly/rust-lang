@@ -11,6 +11,8 @@ pub mod neural_network;
 pub mod decision_tree;
 pub mod svm;
 pub mod regression;
+pub mod kmeans;
+pub mod naive_bayes;
 
 use std::error::Error;
 use std::fmt;

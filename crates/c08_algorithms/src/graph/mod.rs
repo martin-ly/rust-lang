@@ -1131,5 +1131,320 @@ mod tests {
             }
         }
     }
+    
+    #[test]
+    fn test_tree_centroid() {
+        let mut tree = HashMap::new();
+        tree.insert(0, vec![1, 2]);
+        tree.insert(1, vec![0, 3, 4]);
+        tree.insert(2, vec![0]);
+        tree.insert(3, vec![1]);
+        tree.insert(4, vec![1]);
+        
+        let centroid = tree_centroid_sync(&tree, &0).unwrap();
+        assert_eq!(centroid, Some(1)); // 节点1是重心
+    }
+    
+    #[test]
+    fn test_hld() {
+        let mut tree = HashMap::new();
+        tree.insert(0, vec![1, 2]);
+        tree.insert(1, vec![0, 3, 4]);
+        tree.insert(2, vec![0]);
+        tree.insert(3, vec![1]);
+        tree.insert(4, vec![1]);
+        
+        let hld = HeavyLightDecomposition::new(&tree, &0);
+        assert_eq!(hld.lca(&3, &4), 1);
+        assert_eq!(hld.lca(&2, &4), 0);
+    }
+    
+    #[test]
+    fn test_tree_max_independent_set() {
+        let mut tree = HashMap::new();
+        tree.insert(0, vec![1, 2]);
+        tree.insert(1, vec![0, 3, 4]);
+        tree.insert(2, vec![0]);
+        tree.insert(3, vec![1]);
+        tree.insert(4, vec![1]);
+        
+        let max_set = tree_max_independent_set_sync(&tree, &0).unwrap();
+        assert!(max_set >= 2); // 至少可以选择2个节点
+    }
+}
+
+// =========================
+// 树形DP算法
+// =========================
+
+/// 树的重心（删除后最大连通分量最小的节点）
+pub fn tree_centroid_sync<T: Eq + Hash + Clone>(
+    tree: &HashMap<T, Vec<T>>,
+    root: &T,
+) -> Result<Option<T>> {
+    if tree.is_empty() {
+        return Ok(None);
+    }
+    
+    let mut subtree_size = HashMap::new();
+    let mut max_subtree = HashMap::new();
+    
+    // DFS 计算子树大小
+    fn dfs_size<T: Eq + Hash + Clone>(
+        tree: &HashMap<T, Vec<T>>,
+        node: &T,
+        parent: Option<&T>,
+        subtree_size: &mut HashMap<T, usize>,
+        max_subtree: &mut HashMap<T, usize>,
+    ) -> usize {
+        let mut size = 1;
+        let mut max_child_size = 0;
+        
+        if let Some(children) = tree.get(node) {
+            for child in children {
+                if parent.is_some() && parent.unwrap() == child {
+                    continue;
+                }
+                let child_size = dfs_size(tree, child, Some(node), subtree_size, max_subtree);
+                size += child_size;
+                max_child_size = max_child_size.max(child_size);
+            }
+        }
+        
+        subtree_size.insert(node.clone(), size);
+        max_subtree.insert(node.clone(), max_child_size);
+        size
+    }
+    
+    dfs_size(tree, root, None, &mut subtree_size, &mut max_subtree);
+    
+    // 找到重心
+    let total_size = subtree_size[root];
+    let mut centroid = None;
+    let mut min_max_subtree = usize::MAX;
+    
+    for (node, &max_child) in max_subtree.iter() {
+        let remaining_size = total_size - subtree_size[node];
+        let current_max = max_child.max(remaining_size);
+        
+        if current_max < min_max_subtree {
+            min_max_subtree = current_max;
+            centroid = Some(node.clone());
+        }
+    }
+    
+    Ok(centroid)
+}
+
+/// 异步版本的树重心计算
+pub async fn tree_centroid_async<T: Eq + Hash + Clone + Send + 'static>(
+    tree: HashMap<T, Vec<T>>,
+    root: T,
+) -> Result<Option<T>> {
+    tokio::task::spawn_blocking(move || {
+        tree_centroid_sync(&tree, &root)
+    })
+    .await
+    .map_err(|e| anyhow::anyhow!("异步计算失败: {}", e))?
+}
+
+/// 树链剖分（重链剖分）骨架
+#[derive(Debug, Clone)]
+pub struct HeavyLightDecomposition<T: Eq + Hash + Clone> {
+    /// 重链的根节点
+    pub chain_heads: HashMap<T, T>,
+    /// 每个节点所属的重链根
+    pub chain_id: HashMap<T, T>,
+    /// 重链中的位置
+    pub position: HashMap<T, usize>,
+    /// 父节点
+    pub parent: HashMap<T, Option<T>>,
+    /// 子树大小
+    pub subtree_size: HashMap<T, usize>,
+    /// 重儿子
+    pub heavy_child: HashMap<T, Option<T>>,
+}
+
+impl<T: Eq + Hash + Clone> HeavyLightDecomposition<T> {
+    /// 构建重链剖分
+    pub fn new(tree: &HashMap<T, Vec<T>>, root: &T) -> Self {
+        let mut hld = Self {
+            chain_heads: HashMap::new(),
+            chain_id: HashMap::new(),
+            position: HashMap::new(),
+            parent: HashMap::new(),
+            subtree_size: HashMap::new(),
+            heavy_child: HashMap::new(),
+        };
+        
+        hld.build(tree, root);
+        hld
+    }
+    
+    /// 构建重链剖分
+    fn build(&mut self, tree: &HashMap<T, Vec<T>>, root: &T) {
+        // 第一次DFS：计算子树大小和重儿子
+        self.dfs_size(tree, root, None);
+        
+        // 第二次DFS：构建重链
+        let mut pos = 0;
+        self.dfs_hld(tree, root, None, root, &mut pos);
+    }
+    
+    /// DFS计算子树大小
+    fn dfs_size(&mut self, tree: &HashMap<T, Vec<T>>, node: &T, parent: Option<&T>) -> usize {
+        let mut size = 1;
+        let mut max_child_size = 0;
+        let mut heavy = None;
+        
+        if let Some(children) = tree.get(node) {
+            for child in children {
+                if parent.is_some() && parent.unwrap() == child {
+                    continue;
+                }
+                let child_size = self.dfs_size(tree, child, Some(node));
+                size += child_size;
+                
+                if child_size > max_child_size {
+                    max_child_size = child_size;
+                    heavy = Some(child.clone());
+                }
+            }
+        }
+        
+        self.subtree_size.insert(node.clone(), size);
+        self.heavy_child.insert(node.clone(), heavy);
+        self.parent.insert(node.clone(), parent.cloned());
+        size
+    }
+    
+    /// DFS构建重链
+    fn dfs_hld(
+        &mut self,
+        tree: &HashMap<T, Vec<T>>,
+        node: &T,
+        parent: Option<&T>,
+        chain_head: &T,
+        pos: &mut usize,
+    ) {
+        self.chain_heads.insert(node.clone(), chain_head.clone());
+        self.chain_id.insert(node.clone(), chain_head.clone());
+        self.position.insert(node.clone(), *pos);
+        *pos += 1;
+        
+        // 先处理重儿子
+        if let Some(heavy) = self.heavy_child.get(node).cloned().flatten() {
+            self.dfs_hld(tree, &heavy, Some(node), chain_head, pos);
+        }
+        
+        // 再处理轻儿子
+        if let Some(children) = tree.get(node) {
+            for child in children {
+                if parent.is_some() && parent.unwrap() == child {
+                    continue;
+                }
+                if Some(child) != self.heavy_child.get(node).and_then(|h| h.as_ref()) {
+                    self.dfs_hld(tree, child, Some(node), child, pos);
+                }
+            }
+        }
+    }
+    
+    /// 查询两个节点之间的路径长度
+    pub fn path_length(&self, u: &T, v: &T) -> usize {
+        let mut len = 0;
+        let mut a = u.clone();
+        let mut b = v.clone();
+        
+        while self.chain_id[&a] != self.chain_id[&b] {
+            if self.position[&a] > self.position[&b] {
+                std::mem::swap(&mut a, &mut b);
+            }
+            
+            len += self.position[&b] - self.position[&self.chain_heads[&b]] + 1;
+            b = self.parent[&self.chain_heads[&b]].clone().unwrap_or_else(|| b.clone());
+        }
+        
+        len += (self.position[&a] as i32 - self.position[&b] as i32).abs() as usize;
+        len
+    }
+    
+    /// 查询两个节点的最近公共祖先
+    pub fn lca(&self, u: &T, v: &T) -> T {
+        let mut a = u.clone();
+        let mut b = v.clone();
+        
+        while self.chain_id[&a] != self.chain_id[&b] {
+            if self.position[&a] > self.position[&b] {
+                std::mem::swap(&mut a, &mut b);
+            }
+            b = self.parent[&self.chain_heads[&b]].clone().unwrap_or_else(|| b.clone());
+        }
+        
+        if self.position[&a] < self.position[&b] { a } else { b }
+    }
+}
+
+/// 异步版本的重链剖分构建
+pub async fn hld_build_async<T: Eq + Hash + Clone + Send + 'static>(
+    tree: HashMap<T, Vec<T>>,
+    root: T,
+) -> Result<HeavyLightDecomposition<T>> {
+    tokio::task::spawn_blocking(move || {
+        Ok(HeavyLightDecomposition::new(&tree, &root))
+    })
+    .await
+    .map_err(|e| anyhow::anyhow!("异步构建失败: {}", e))?
+}
+
+/// 树的最大独立集（树形DP）
+pub fn tree_max_independent_set_sync<T: Eq + Hash + Clone>(
+    tree: &HashMap<T, Vec<T>>,
+    root: &T,
+) -> Result<usize> {
+    let mut dp_include = HashMap::new();
+    let mut dp_exclude = HashMap::new();
+    
+    fn dfs<T: Eq + Hash + Clone>(
+        tree: &HashMap<T, Vec<T>>,
+        node: &T,
+        parent: Option<&T>,
+        dp_include: &mut HashMap<T, usize>,
+        dp_exclude: &mut HashMap<T, usize>,
+    ) {
+        let mut include = 1;
+        let mut exclude = 0;
+        
+        if let Some(children) = tree.get(node) {
+            for child in children {
+                if parent.is_some() && parent.unwrap() == child {
+                    continue;
+                }
+                dfs(tree, child, Some(node), dp_include, dp_exclude);
+                
+                include += dp_exclude[child];
+                exclude += dp_include[child].max(dp_exclude[child]);
+            }
+        }
+        
+        dp_include.insert(node.clone(), include);
+        dp_exclude.insert(node.clone(), exclude);
+    }
+    
+    dfs(tree, root, None, &mut dp_include, &mut dp_exclude);
+    
+    Ok(dp_include[root].max(dp_exclude[root]))
+}
+
+/// 异步版本的树最大独立集
+pub async fn tree_max_independent_set_async<T: Eq + Hash + Clone + Send + 'static>(
+    tree: HashMap<T, Vec<T>>,
+    root: T,
+) -> Result<usize> {
+    tokio::task::spawn_blocking(move || {
+        tree_max_independent_set_sync(&tree, &root)
+    })
+    .await
+    .map_err(|e| anyhow::anyhow!("异步计算失败: {}", e))?
 }
 
