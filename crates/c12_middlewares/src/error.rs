@@ -18,7 +18,7 @@ pub enum Error {
 
     #[cfg(feature = "mq-nats")]
     #[error("nats error: {0}")]
-    Nats(#[from] async_nats::error::Error),
+    Nats(String),
 
     #[cfg(feature = "mq-kafka")]
     #[error("kafka error: {0}")]
@@ -29,6 +29,18 @@ pub enum Error {
 
     #[error("other: {0}")]
     Other(String),
+    
+    #[cfg(feature = "mq-nats")]
+    #[error("nats subscribe error: {0}")]
+    NatsSubscribe(#[from] async_nats::SubscribeError),
+    
+    #[cfg(feature = "mq-mqtt")]
+    #[error("mqtt client error: {0}")]
+    MqttClient(#[from] rumqttc::ClientError),
+    
+    #[cfg(feature = "mq-mqtt")]
+    #[error("mqtt connection error: {0}")]
+    MqttConnection(#[from] rumqttc::ConnectionError),
 }
 
 pub type Result<T> = std::result::Result<T, Error>;

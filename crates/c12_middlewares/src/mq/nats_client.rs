@@ -1,5 +1,7 @@
 #[cfg(feature = "mq-nats")]
-use crate::mq::{MessageConsumer, MessageProducer};
+use crate::mq::mq::{MessageConsumer, MessageProducer};
+#[cfg(feature = "mq-nats")]
+use futures_util::StreamExt;
 
 #[cfg(feature = "mq-nats")]
 pub struct NatsProducer {
@@ -14,7 +16,7 @@ pub struct NatsConsumer {
 #[cfg(feature = "mq-nats")]
 impl NatsProducer {
     pub async fn connect(url: &str) -> crate::error::Result<Self> {
-        let client = async_nats::connect(url).await?;
+        let client = async_nats::connect(url).await.map_err(|e| crate::error::Error::Nats(e.to_string()))?;
         Ok(Self { client })
     }
 
@@ -22,7 +24,7 @@ impl NatsProducer {
         let retry = cfg.retry.clone();
         let url = cfg.url.clone();
         crate::util::retry_async(&retry, || async {
-            let client = async_nats::connect(url.as_str()).await?;
+            let client = async_nats::connect(url.as_str()).await.map_err(|e| crate::error::Error::Nats(e.to_string()))?;
             Ok(Self { client })
         }).await
     }
@@ -31,8 +33,8 @@ impl NatsProducer {
 #[cfg(feature = "mq-nats")]
 impl NatsConsumer {
     pub async fn connect(url: &str, subject: &str) -> crate::error::Result<Self> {
-        let client = async_nats::connect(url).await?;
-        let subscriber = client.subscribe(subject.to_string()).await?;
+        let client = async_nats::connect(url).await.map_err(|e| crate::error::Error::Nats(e.to_string()))?;
+        let subscriber = client.subscribe(subject.to_string()).await.map_err(|e| crate::error::Error::NatsSubscribe(e))?;
         Ok(Self { subscriber })
     }
 
@@ -41,8 +43,8 @@ impl NatsConsumer {
         let url = cfg.url.clone();
         let subject = cfg.subject.clone();
         crate::util::retry_async(&retry, || async {
-            let client = async_nats::connect(url.as_str()).await?;
-            let subscriber = client.subscribe(subject.to_string()).await?;
+            let client = async_nats::connect(url.as_str()).await.map_err(|e| crate::error::Error::Nats(e.to_string()))?;
+            let subscriber = client.subscribe(subject.to_string()).await.map_err(|e| crate::error::Error::NatsSubscribe(e))?;
             Ok(Self { subscriber })
         }).await
     }
@@ -52,7 +54,7 @@ impl NatsConsumer {
 #[async_trait::async_trait]
 impl MessageProducer for NatsProducer {
     async fn send(&self, topic: &str, payload: &[u8]) -> crate::error::Result<()> {
-        self.client.publish(topic.to_string(), payload.into()).await?;
+        self.client.publish(topic.to_string(), payload.to_vec().into()).await.map_err(|e| crate::error::Error::Nats(e.to_string()))?;
         Ok(())
     }
 }

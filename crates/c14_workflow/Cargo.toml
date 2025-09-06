@@ -1,12 +1,75 @@
 [package]
 name = "c14_workflow"
+version = "1.0.0"
 edition = "2024"
 resolver = "3"
+authors = ["Rust Workflow Team"]
+description = "Advanced workflow system with Rust 1.89 features, design patterns, and middleware support"
+license = "MIT"
+repository = "https://github.com/rust-lang/c14_workflow"
+keywords = ["workflow", "rust", "patterns", "middleware", "async"]
+categories = ["asynchronous", "concurrency", "web-programming"]
 
 [dependencies]
-serde = { version = "1.0", features = ["derive"] }
+# 核心依赖 / Core Dependencies
+serde = { version = "1.0", features = ["derive", "rc"] }
 serde_json = "1.0"
 thiserror = "1.0"
-tokio = { version = "1.0", features = ["full"] }
-uuid = { version = "1.0", features = ["v4"] }
-chrono = { version = "0.4", features = ["serde"] }
+anyhow = "1.0"
+
+# 异步运行时 / Async Runtime
+tokio = { version = "1.0", features = ["full", "rt-multi-thread", "macros", "sync", "time", "fs", "net", "io-util", "signal"] }
+futures = "0.3"
+async-trait = "0.1"
+
+# 并发和同步 / Concurrency and Synchronization
+parking_lot = "0.12"
+crossbeam = "0.8"
+dashmap = "5.5"
+arc-swap = "1.6"
+once_cell = "1.19"
+
+# 序列化和数据 / Serialization and Data
+uuid = { version = "1.0", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde", "clock"] }
+indexmap = { version = "2.0", features = ["serde"] }
+
+# 网络和通信 / Network and Communication
+reqwest = { version = "0.11", features = ["json", "stream"] }
+tower = "0.4"
+tower-http = { version = "0.5", features = ["cors", "trace"] }
+
+# 数据库支持 / Database Support (可选特性)
+# sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres", "chrono", "uuid"], default-features = false, optional = true }
+redis = { version = "0.24", features = ["tokio-comp", "connection-manager"], optional = true }
+
+# 监控和日志 / Monitoring and Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+metrics = "0.22"
+metrics-exporter-prometheus = "0.13"
+
+# 配置管理 / Configuration Management
+config = "0.14"
+clap = { version = "4.0", features = ["derive", "env"] }
+
+# 测试支持 / Testing Support
+[dev-dependencies]
+tokio-test = "0.4"
+criterion = { version = "0.5", features = ["html_reports"] }
+proptest = "1.4"
+mockall = "0.12"
+
+[features]
+default = ["middleware", "patterns", "rust189"]
+full = ["middleware", "patterns", "rust189", "monitoring", "persistence", "database"]
+middleware = []
+patterns = []
+rust189 = []
+monitoring = []
+persistence = []
+database = ["redis"]
+
+# [[bench]]
+# name = "workflow_bench"
+# harness = false

@@ -172,6 +172,15 @@ impl WorkflowEngine {
         Ok(instance_id)
     }
     
+    /// 获取工作流实例状态 / Get Workflow Instance State
+    pub async fn get_workflow_state(&self, instance_id: &str) -> Result<String, WorkflowError> {
+        let instances = self.instances.read().unwrap();
+        let instance = instances.get(instance_id)
+            .ok_or_else(|| WorkflowError::InstanceNotFound(instance_id.to_string()))?;
+        
+        Ok(instance.current_state.clone())
+    }
+    
     /// 处理工作流事件 / Handle Workflow Events
     pub async fn process_events(&mut self) -> Result<(), WorkflowError> {
         while let Some(receiver) = &mut self.event_receiver {

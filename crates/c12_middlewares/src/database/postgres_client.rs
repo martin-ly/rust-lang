@@ -1,5 +1,5 @@
 #[cfg(feature = "sql-postgres")]
-use crate::sql::{SqlDatabase, SqlRow};
+use crate::database::sql::{SqlDatabase, SqlRow};
 
 #[cfg(feature = "sql-postgres")]
 pub struct PostgresDb {
@@ -33,17 +33,12 @@ impl PostgresDb {
 #[async_trait::async_trait]
 impl SqlDatabase for PostgresDb {
     async fn execute(&self, sql: &str) -> crate::error::Result<u64> {
-        #[cfg(feature = "obs")]
-        let _span = tracing::info_span!("pg_execute").entered();
-        let fut = async { Ok(self.client.execute(sql, &[]).await?) };
-        let rows: u64 = crate::util::maybe_timeout(5_000, fut).await?;
+        let rows = self.client.execute(sql, &[]).await?;
         Ok(rows)
     }
 
     async fn query(&self, sql: &str) -> crate::error::Result<Vec<SqlRow>> {
-        #[cfg(feature = "obs")]
-        let _span = tracing::info_span!("pg_query").entered();
-        let rows = crate::util::maybe_timeout(5_000, async { Ok(self.client.query(sql, &[]).await?) }).await?;
+        let rows = self.client.query(sql, &[]).await?;
         let mut out = Vec::with_capacity(rows.len());
         for row in rows {
             let mut cols = Vec::with_capacity(row.len());

@@ -427,12 +427,41 @@ pub mod state;
 pub mod error;
 pub mod tools;
 
+// Rust 1.89 特性模块 / Rust 1.89 Features Module
+#[cfg(feature = "rust189")]
+pub mod rust189;
+
+// 工作流设计模式模块 / Workflow Design Patterns Module
+#[cfg(feature = "patterns")]
+pub mod patterns;
+
+// 工作流中间件模块 / Workflow Middleware Module
+#[cfg(feature = "middleware")]
+pub mod middleware;
+
+// 示例模块 / Examples Module
+pub mod examples;
+
+// 测试模块 / Tests Module
+#[cfg(test)]
+mod tests;
+
 // 重新导出主要类型 / Re-export main types
-// pub use types::*;
 pub use engine::*;
-// pub use state::*;
-pub use error::*;
+//pub use error::*;
 pub use tools::*;
+
+// 重新导出 Rust 1.89 特性 / Re-export Rust 1.89 features
+#[cfg(feature = "rust189")]
+pub use rust189::*;
+
+// 重新导出设计模式 / Re-export design patterns
+#[cfg(feature = "patterns")]
+pub use patterns::*;
+
+// 重新导出中间件 / Re-export middleware
+#[cfg(feature = "middleware")]
+pub use middleware::*;
 
 /// 工作流系统版本 / Workflow System Version
 pub const VERSION: &str = "1.0.0";

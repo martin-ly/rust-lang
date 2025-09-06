@@ -1,5 +1,5 @@
 #[cfg(feature = "sql-mysql")]
-use crate::sql::{SqlDatabase, SqlRow};
+use crate::database::sql::{SqlDatabase, SqlRow};
 
 #[cfg(feature = "sql-mysql")]
 pub struct MysqlDb {
@@ -18,22 +18,15 @@ impl MysqlDb {
 #[async_trait::async_trait]
 impl SqlDatabase for MysqlDb {
     async fn execute(&self, sql: &str) -> crate::error::Result<u64> {
-        #[cfg(feature = "obs")]
-        let _span = tracing::info_span!("mysql_execute").entered();
         let mut conn = self.pool.get_conn().await?;
-        crate::util::maybe_timeout(5_000, async {
-            conn.query_drop(sql).await?;
-            Ok(())
-        }).await?;
+        conn.query_drop(sql).await?;
         let affected = conn.affected_rows();
         Ok(affected)
     }
 
     async fn query(&self, sql: &str) -> crate::error::Result<Vec<SqlRow>> {
-        #[cfg(feature = "obs")]
-        let _span = tracing::info_span!("mysql_query").entered();
         let mut conn = self.pool.get_conn().await?;
-        let rows: Vec<mysql_async::Row> = crate::util::maybe_timeout(5_000, async { Ok(conn.query(sql).await?) }).await?;
+        let rows: Vec<mysql_async::Row> = conn.query(sql).await?;
         let mut out = Vec::with_capacity(rows.len());
         for row in rows {
             let cols = row.columns_ref().iter().enumerate().map(|(i, c)| {

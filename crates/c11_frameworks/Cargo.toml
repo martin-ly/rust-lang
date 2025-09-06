@@ -28,7 +28,7 @@ warp = { version = "0.3", optional = true }
 # 数据库与ORM
 diesel = { version = "2.2", features = ["postgres"], optional = true }
 sea-orm = { version = "0.12", optional = true, default-features = false, features = ["sqlx-postgres", "runtime-tokio-rustls"] }
-sqlx = { version = "0.8", features = ["runtime-tokio-rustls", "postgres"], optional = true }
+sqlx = { version = "0.8.6", features = ["runtime-tokio-rustls", "postgres"], optional = true, default-features = false }
 dotenvy = "0.15"
 
 # 序列化

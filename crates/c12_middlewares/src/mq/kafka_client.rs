@@ -1,5 +1,5 @@
 #[cfg(feature = "mq-kafka")]
-use crate::mq::{MessageConsumer, MessageProducer};
+use crate::mq::mq::{MessageConsumer, MessageProducer};
 
 #[cfg(feature = "mq-kafka")]
 pub struct KafkaProducer {
@@ -14,9 +14,17 @@ pub struct KafkaConsumer {
 
 #[cfg(feature = "mq-kafka")]
 impl KafkaProducer {
-    pub fn new(config: &[( &str, &str )]) -> anyhow::Result<Self> {
+    pub fn new(config: &[( &str, &str )]) -> crate::error::Result<Self> {
         let mut cfg = rdkafka::ClientConfig::new();
         for (k,v) in config { cfg.set(*k, *v); }
+        let inner = cfg.create::<rdkafka::producer::FutureProducer>()?;
+        Ok(Self { inner })
+    }
+    
+    pub fn new_with_config(kafka_config: crate::config::KafkaConfig) -> crate::error::Result<Self> {
+        let mut cfg = rdkafka::ClientConfig::new();
+        cfg.set("bootstrap.servers", kafka_config.bootstrap_servers);
+        cfg.set("message.timeout.ms", kafka_config.timeouts.op_timeout_ms.to_string());
         let inner = cfg.create::<rdkafka::producer::FutureProducer>()?;
         Ok(Self { inner })
     }
@@ -24,9 +32,21 @@ impl KafkaProducer {
 
 #[cfg(feature = "mq-kafka")]
 impl KafkaConsumer {
-    pub fn new(config: &[( &str, &str )], topics: &[&str]) -> anyhow::Result<Self> {
+    pub fn new(config: &[( &str, &str )], topics: &[&str]) -> crate::error::Result<Self> {
         let mut cfg = rdkafka::ClientConfig::new();
         for (k,v) in config { cfg.set(*k, *v); }
+        let inner = cfg.create::<rdkafka::consumer::StreamConsumer>()?;
+        inner.subscribe(topics)?;
+        Ok(Self { inner, stream: rdkafka::util::AsyncRuntimeTokio })
+    }
+    
+    pub fn new_with_config(kafka_config: crate::config::KafkaConfig, topics: &[&str]) -> crate::error::Result<Self> {
+        let mut cfg = rdkafka::ClientConfig::new();
+        cfg.set("bootstrap.servers", kafka_config.bootstrap_servers);
+        cfg.set("group.id", kafka_config.group_id);
+        cfg.set("auto.offset.reset", kafka_config.auto_offset_reset);
+        cfg.set("enable.partition.eof", "false");
+        cfg.set("session.timeout.ms", kafka_config.timeouts.op_timeout_ms.to_string());
         let inner = cfg.create::<rdkafka::consumer::StreamConsumer>()?;
         inner.subscribe(topics)?;
         Ok(Self { inner, stream: rdkafka::util::AsyncRuntimeTokio })

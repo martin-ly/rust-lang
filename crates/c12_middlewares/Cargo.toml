@@ -21,6 +21,7 @@ rusqlite = { version = "0.31", optional = true, features = ["bundled"] }
 
 # Message Queues / Streams
 async-nats = { version = "0.35", optional = true }
+futures-util = { version = "0.3", optional = true }
 rdkafka = { version = "0.36", optional = true, default-features = false, features = ["cmake-build"] }
 rumqttc = { version = "0.24", optional = true }
 
@@ -48,11 +49,14 @@ kv-redis = ["redis", "tokio"]
 sql-postgres = ["tokio-postgres", "postgres-types", "tokio"]
 sql-mysql = ["mysql_async", "tokio"]
 sql-sqlite = ["rusqlite"]
-mq-nats = ["async-nats"]
+mq-nats = ["async-nats", "futures-util"]
 mq-kafka = ["rdkafka", "tokio"]
 mq-mqtt = ["rumqttc", "tokio"]
 proxy-pingora = ["pingora", "tokio"]
 obs = ["tracing"]
+
+[dev-dependencies]
+tracing-subscriber = "0.3"
 [lib]
 name = "c12_middlewares"
 path = "src/lib.rs"

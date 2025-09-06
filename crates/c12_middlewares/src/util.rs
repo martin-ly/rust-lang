@@ -12,7 +12,7 @@ where
     loop {
         match f().await {
             Ok(v) => return Ok(v),
-            Err(e) if attempt < policy.max_retries => {
+            Err(_e) if attempt < policy.max_retries => {
                 attempt += 1;
                 let d = std::time::Duration::from_millis(delay);
                 tokio::time::sleep(d).await;

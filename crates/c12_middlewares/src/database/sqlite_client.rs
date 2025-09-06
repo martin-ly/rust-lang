@@ -1,5 +1,5 @@
 #[cfg(feature = "sql-sqlite")]
-use crate::sql::{SqlDatabase, SqlRow};
+use crate::database::sql::{SqlDatabase, SqlRow};
 
 #[cfg(feature = "sql-sqlite")]
 pub struct SqliteDb {

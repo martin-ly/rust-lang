@@ -34,6 +34,11 @@ impl RedisConfig {
     pub fn new(url: impl Into<String>) -> Self {
         Self { url: url.into(), timeouts: Timeouts::default(), retry: RetryPolicy::default() }
     }
+    
+    pub fn with_pool_size(self, _pool_size: u32) -> Self {
+        // 这里可以扩展配置来支持连接池大小
+        self
+    }
 }
 
 #[derive(Clone, Debug)]
@@ -83,6 +88,27 @@ impl MqttConfig {
             host: host.into(),
             port,
             client_id: client_id.into(),
+            timeouts: Timeouts::default(),
+            retry: RetryPolicy::default(),
+        }
+    }
+}
+
+#[derive(Clone, Debug)]
+pub struct KafkaConfig {
+    pub bootstrap_servers: String,
+    pub group_id: String,
+    pub auto_offset_reset: String,
+    pub timeouts: Timeouts,
+    pub retry: RetryPolicy,
+}
+
+impl KafkaConfig {
+    pub fn new(bootstrap_servers: impl Into<String>, group_id: impl Into<String>) -> Self {
+        Self {
+            bootstrap_servers: bootstrap_servers.into(),
+            group_id: group_id.into(),
+            auto_offset_reset: "earliest".to_string(),
             timeouts: Timeouts::default(),
             retry: RetryPolicy::default(),
         }

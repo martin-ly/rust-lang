@@ -1,5 +1,5 @@
 #[cfg(feature = "mq-mqtt")]
-use crate::mq::{MessageConsumer, MessageProducer};
+use crate::mq::mq::{MessageConsumer, MessageProducer};
 
 #[cfg(feature = "mq-mqtt")]
 pub struct MqttProducer {
@@ -8,7 +8,7 @@ pub struct MqttProducer {
 
 #[cfg(feature = "mq-mqtt")]
 pub struct MqttConsumer {
-    eventloop: rumqttc::EventLoop,
+    eventloop: std::sync::Arc<tokio::sync::Mutex<rumqttc::EventLoop>>,
 }
 
 #[cfg(feature = "mq-mqtt")]
@@ -17,7 +17,7 @@ impl MqttProducer {
         let mut opts = rumqttc::MqttOptions::new(client_id, host, port);
         opts.set_keep_alive(std::time::Duration::from_secs(5));
         let (client, eventloop) = rumqttc::AsyncClient::new(opts, 10);
-        Ok((Self { client }, MqttConsumer { eventloop }))
+        Ok((Self { client }, MqttConsumer { eventloop: std::sync::Arc::new(tokio::sync::Mutex::new(eventloop)) }))
     }
 
     pub async fn connect_with(cfg: crate::config::MqttConfig) -> crate::error::Result<(Self, MqttConsumer)> {
@@ -26,7 +26,7 @@ impl MqttProducer {
             let mut opts = rumqttc::MqttOptions::new(cfg.client_id.clone(), cfg.host.clone(), cfg.port);
             opts.set_keep_alive(std::time::Duration::from_secs(5));
             let (client, eventloop) = rumqttc::AsyncClient::new(opts, 10);
-            Ok((Self { client }, MqttConsumer { eventloop }))
+            Ok((Self { client }, MqttConsumer { eventloop: std::sync::Arc::new(tokio::sync::Mutex::new(eventloop)) }))
         }).await
     }
 }
@@ -45,7 +45,8 @@ impl MessageProducer for MqttProducer {
 impl MessageConsumer for MqttConsumer {
     async fn subscribe(&self, _topic: &str) -> crate::error::Result<()> { Ok(()) }
     async fn next(&mut self) -> crate::error::Result<Option<Vec<u8>>> {
-        match self.eventloop.poll().await? {
+        let mut eventloop = self.eventloop.lock().await;
+        match eventloop.poll().await? {
             rumqttc::Event::Incoming(rumqttc::Packet::Publish(p)) => Ok(Some(p.payload.to_vec())),
             _ => Ok(None),
         }
