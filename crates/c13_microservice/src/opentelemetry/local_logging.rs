@@ -792,6 +792,17 @@ impl LocalLogManager {
     fn write_entry_sync(&self, entry: LocalLogEntry) -> Result<()> {
         let formatted = Self::format_log_entry(&entry, &self.config)?;
         
+        // 同步路径也需要进行滚动检查
+        if Self::should_rotate(&self.current_file_size, &self.last_rotation_time, &self.config)? {
+            Self::rotate_log_file(
+                &self.current_file,
+                &self.current_file_path,
+                &self.current_file_size,
+                &self.last_rotation_time,
+                &self.config,
+            )?;
+        }
+        
         if let Some(ref mut writer) = *self.current_file.lock().unwrap() {
             writeln!(writer, "{}", formatted)?;
             writer.flush()?;
@@ -905,15 +916,16 @@ mod tests {
         let temp_dir = tempdir().unwrap();
         let config = LocalLogConfig {
             log_dir: temp_dir.path().to_path_buf(),
-            rotation_strategy: RotationStrategy::Size { max_size_bytes: 100 },
+            rotation_strategy: RotationStrategy::Size { max_size_bytes: 200 },
+            async_write: false,
             ..Default::default()
         };
 
         let manager = LocalLogManager::new(config).unwrap();
         
-        // 写入大量日志以触发轮转
-        for i in 0..100 {
-            manager.log(LocalLogLevel::Info, &format!("Test message {}", i), None);
+        // 写入日志以触发轮转（同步写入每条都会检查大小）
+        for i in 0..200 {
+            manager.log(LocalLogLevel::Info, &format!("Test message {} - some payload to increase size", i), None);
         }
         
         manager.flush().unwrap();
@@ -951,6 +963,7 @@ mod tests {
         let config = LocalLogConfig {
             log_dir: temp_dir.path().to_path_buf(),
             level: LocalLogLevel::Warn,
+            async_write: false,
             ..Default::default()
         };
 
@@ -963,8 +976,11 @@ mod tests {
         
         manager.flush().unwrap();
         
-        // 只有Warn和Error级别的日志应该被记录
+        // 刷新后缓存会被清空，改为检查文件中的有效行数（至少应包含 Warn 与 Error 两条）
         let stats = manager.get_stats();
-        assert!(stats.cache_entries >= 2);
+        let file = File::open(stats.current_file_path).unwrap();
+        let reader = BufReader::new(file);
+        let lines: Vec<_> = reader.lines().collect::<std::io::Result<_>>().unwrap();
+        assert!(lines.len() >= 2);
     }
 }

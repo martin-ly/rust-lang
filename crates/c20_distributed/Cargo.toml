@@ -1,24 +1,32 @@
 [package]
 name = "c20_distributed"
 version = "0.1.0"
-edition = "2021"
-resolver = "2"
+edition = "2024"
+resolver = "3"
 description = "Distributed System with Rust - 分布式系统"
 authors = ["Rust AI Team"]
 license = "MIT"
 repository = "https://github.com/rust-lang/c20_distributed"
 keywords = ["distributed", "system", "rust"]
 categories = ["distributed", "system", "rust"]
+rust-version = "1.89"
+
+[features]
+default = []
+# 运行时选择（默认不启用，示例/二进制可启用）
+runtime-tokio = ["dep:tokio"]
+# 共识算法选择（库级可选启用）
+consensus-raft = []
+consensus-paxos = []
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
 tokio = { version = "1.44", features = ["full"], optional = true }
 anyhow = "1.0"
 thiserror = "1.0"
+tracing = { version = "0.1", optional = true }
+tracing-subscriber = { version = "0.3", features = ["fmt", "env-filter"], optional = true }
+ahash = "0.8"
 
 [dev-dependencies]
-tempfile = "3.8"
-proptest = "1.4"
-
-[features]
-default = ["dep:tokio"]
+tokio = { version = "1.44", features = ["rt", "macros"] }

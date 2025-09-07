@@ -218,6 +218,25 @@ cargo run --example grpc_service
 cargo run --example volo_rpc_service
 ```
 
+## 📦 构建说明（features 与独立模式）
+
+- 本 crate 已合并为单一 `Cargo.toml`，通过 features 复刻“独立构建”能力：
+
+```bash
+# 最小构建（默认最小依赖）
+cargo test -p c13_microservice
+
+# 独立构建（启用重依赖：redis/sqlx/diesel）
+cargo test -p c13_microservice --features standalone
+
+# 精细启用
+cargo test -p c13_microservice --features with-redis
+cargo test -p c13_microservice --features with-sqlx
+cargo test -p c13_microservice --features with-diesel
+```
+
+- 说明：`standalone = with-redis + with-sqlx + with-diesel`。若与工作区其它 crate 出现 `libsqlite3-sys` 冲突，可仅启用 `with-diesel` 或避免启用 sqlite 后端。
+
 ## 📊 监控和可观测性
 
 ### 健康检查

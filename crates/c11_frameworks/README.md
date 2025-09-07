@@ -94,7 +94,10 @@ cargo run --example cli_example --features clap
 [features]
 default = ["web", "database", "serialization", "cli", "logging"]
 web = ["actix-web", "axum", "warp"]
-database = ["diesel", "sqlx"]
+# 默认 database 仅启用 diesel，避免与工作区 sqlite 绑定冲突
+database = ["diesel"]
+# 如需使用 sqlx，请显式开启 database-sqlx（注意与 rusqlite 的 links 冲突）
+database-sqlx = []
 serialization = ["bincode", "rmp-serde"]
 cli = ["clap", "structopt"]
 gui = ["tauri", "egui", "iced"]

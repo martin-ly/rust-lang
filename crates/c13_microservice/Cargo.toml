@@ -11,6 +11,14 @@ categories = ["web-programming", "network-programming"]
 
 # 移除工作区配置以避免冲突
 
+[features]
+default = []
+with-redis = ["dep:redis"]
+with-sqlx = ["dep:sqlx"]
+with-diesel = ["dep:diesel"]
+# 一键启用“独立构建”所需的重依赖
+standalone = ["with-redis", "with-sqlx", "with-diesel"]
+
 [dependencies]
 # 异步运行时
 tokio = { version = "1.44", features = ["full"] }
@@ -34,10 +42,9 @@ serde_json = "1.0"
 serde_yaml = "0.9"
 toml = "0.8"
 
-# 数据库 - 暂时注释掉以避免依赖冲突
-# sqlx = { version = "0.8", features = ["runtime-tokio-rustls", "postgres", "mysql", "chrono", "uuid"], default-features = false }
-# diesel = { version = "2.1", features = ["postgres", "mysql", "chrono", "uuid"] }
-# sea-orm = { version = "0.12", features = ["sqlx-postgres", "sqlx-mysql", "runtime-tokio-rustls", "macros"] }
+# 数据库（可选，standalone 特性启用）
+sqlx = { version = "0.8", features = ["runtime-tokio-rustls", "postgres", "mysql", "chrono", "uuid"], default-features = false, optional = true }
+diesel = { version = "2.1", features = ["postgres", "mysql", "chrono", "uuid"], optional = true }
 
 # 配置管理
 config = "0.14"
@@ -46,11 +53,7 @@ dotenvy = "0.15"
 # 日志和追踪
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
-# OpenTelemetry - 暂时注释掉以避免依赖冲突
-# tracing-opentelemetry = "0.23"
-# opentelemetry = { version = "0.21", features = ["rt-tokio-runtime"] }
-# opentelemetry-jaeger = "0.20"
-# opentelemetry-prometheus = "0.3"
+# OpenTelemetry 相关按需启用，避免依赖膨胀
 log = "0.4"
 slog = "2.7"
 slog-stdlog = "4.1"
@@ -61,8 +64,8 @@ prometheus = "0.13"
 metrics = "0.22"
 metrics-exporter-prometheus = "0.13"
 
-# 消息队列 - 简化版本
-redis = { version = "0.25", features = ["tokio-comp", "connection-manager"] }
+# 消息队列（可选，standalone/with-redis 启用）
+redis = { version = "0.25.4", features = ["tokio-comp", "connection-manager"], optional = true }
 
 # 认证和授权
 jsonwebtoken = "9.3"
@@ -86,12 +89,13 @@ anyhow = "1.0"
 thiserror = "1.0"
 eyre = "0.6"
 
+# CLI
+clap = { version = "4.5", features = ["derive"] }
+
 # 测试
 tokio-test = "0.4"
 mockall = "0.13"
 
-# 其他工具
-clap = { version = "4.5", features = ["derive"] }
 env_logger = "0.11"
 pretty_env_logger = "0.5"
 
@@ -155,13 +159,3 @@ path = "examples/local_logging_demo.rs"
 [[example]]
 name = "integrated_logging_demo"
 path = "examples/integrated_logging_demo.rs"
-
-[profile.release]
-opt-level = 3
-lto = true
-codegen-units = 1
-panic = "abort"
-
-[profile.dev]
-opt-level = 0
-debug = true

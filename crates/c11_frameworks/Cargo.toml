@@ -28,7 +28,7 @@ warp = { version = "0.3", optional = true }
 # 数据库与ORM
 diesel = { version = "2.2", features = ["postgres"], optional = true }
 sea-orm = { version = "0.12", optional = true, default-features = false, features = ["sqlx-postgres", "runtime-tokio-rustls"] }
-sqlx = { version = "0.8.6", features = ["runtime-tokio-rustls", "postgres"], optional = true, default-features = false }
+# sqlx 直接依赖移除以规避 sqlite 冲突
 dotenvy = "0.15"
 
 # 序列化
@@ -93,7 +93,10 @@ toml = { version = "0.8", optional = true }
 [features]
 default = ["web", "database", "serialization", "cli", "config"]
 web = ["actix-web", "axum", "warp"]
-database = ["diesel", "sqlx"]
+# 将默认 database 设为仅 diesel，避免 sqlx 冲突
+database = ["diesel"]
+# database-sqlx 特性保留占位（暂无直依赖）
+database-sqlx = []
 serialization = ["bincode", "rmp-serde"]
 cli = ["clap", "structopt"]
 gui = ["tauri", "egui", "iced"]

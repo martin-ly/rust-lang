@@ -19,7 +19,7 @@ struct Cli {
 }
 
 /// 支持的命令
-#[derive(Subcommand)]
+#[derive(Subcommand, Clone)]
 enum Commands {
     /// 启动Axum Web服务
     Axum {

@@ -40,35 +40,105 @@ use thiserror::Error;
 // 核心模块
 pub mod neural_networks;
 pub mod machine_learning;
+
+// 仅在启用任一深度学习后端时编译
+#[cfg(any(feature = "candle", feature = "tch", feature = "dfdx"))]
 pub mod deep_learning;
+
+// NLP 功能
+#[cfg(feature = "nlp")]
 pub mod nlp;
+
+// 计算机视觉
+#[cfg(feature = "vision")]
 pub mod computer_vision;
+
+// 数据处理（可能依赖较重，默认关闭，在 data 特性开启时编译）
+#[cfg(feature = "data")]
 pub mod data_processing;
+
+// 向量搜索
+#[cfg(feature = "search")]
 pub mod vector_search;
+
+// 模型管理（单独开关）
+#[cfg(feature = "management")]
 pub mod model_management;
+
+// 管道（依赖数据处理等）
+#[cfg(feature = "data")]
 pub mod pipelines;
 
 // 新增模块 - Rust 1.89 和最新 AI 功能
+#[cfg(feature = "llm")]
 pub mod llm;
+
+// 扩散模型依赖深度学习
+#[cfg(any(feature = "candle", feature = "tch", feature = "dfdx"))]
 pub mod diffusion;
+
+// 强化学习
+#[cfg(feature = "reinforcement")]
 pub mod reinforcement_learning;
+
+// 图神经网络
+#[cfg(feature = "gnn")]
 pub mod graph_neural_networks;
+
+// 时间序列
+#[cfg(feature = "timeseries")]
 pub mod time_series;
+
+// 监控
+#[cfg(feature = "monitoring")]
 pub mod monitoring;
 
 // 预导入模块
 pub mod prelude {
     pub use crate::{
-        AIEngine, AIModule, ModelType, ModelConfig, 
+        AIEngine, AIModule, ModelType, ModelConfig,
         PredictionResult, TrainingConfig, Error,
-        neural_networks::*, machine_learning::*, 
-        deep_learning::*, nlp::*, computer_vision::*,
-        data_processing::*, vector_search::*,
-        model_management::*, pipelines::*,
-        // 新增模块的预导入
-        llm::*, diffusion::*, reinforcement_learning::*,
-        graph_neural_networks::*, time_series::*, monitoring::*
+        neural_networks::*, machine_learning::*,
     };
+
+    #[cfg(any(feature = "candle", feature = "tch", feature = "dfdx"))]
+    pub use crate::deep_learning::*;
+
+    #[cfg(feature = "nlp")]
+    pub use crate::nlp::*;
+
+    #[cfg(feature = "vision")]
+    pub use crate::computer_vision::*;
+
+    #[cfg(feature = "data")]
+    pub use crate::data_processing::*;
+
+    #[cfg(feature = "search")]
+    pub use crate::vector_search::*;
+
+    #[cfg(feature = "management")]
+    pub use crate::model_management::*;
+
+    #[cfg(feature = "data")]
+    pub use crate::pipelines::*;
+
+    #[cfg(feature = "llm")]
+    pub use crate::llm::*;
+
+    #[cfg(any(feature = "candle", feature = "tch", feature = "dfdx"))]
+    pub use crate::diffusion::*;
+
+    #[cfg(feature = "reinforcement")]
+    pub use crate::reinforcement_learning::*;
+
+    #[cfg(feature = "gnn")]
+    pub use crate::graph_neural_networks::*;
+
+    #[cfg(feature = "timeseries")]
+    pub use crate::time_series::*;
+
+    #[cfg(feature = "monitoring")]
+    pub use crate::monitoring::*;
 }
 
 /// AI 引擎错误类型
@@ -177,6 +247,7 @@ impl AIModule {
 }
 
 /// AI 引擎 - 主要的 AI 系统接口
+#[allow(dead_code)]
 pub struct AIEngine {
     modules: HashMap<String, AIModule>,
     models: HashMap<String, ModelConfig>,

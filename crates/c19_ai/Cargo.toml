@@ -1,8 +1,8 @@
 [package]
 name = "c19_ai"
 version = "0.2.0"
-edition = "2021"
-resolver = "2"
+edition = "2024"
+resolver = "3"
 description = "AI and Machine Learning with Rust 1.89 - 人工智能与机器学习"
 authors = ["Rust AI Team"]
 license = "MIT"
@@ -21,7 +21,7 @@ thiserror = "1.0"
 uuid = { version = "1.0", features = ["v4", "serde"] }
 
 # 数学和数值计算 - 最新版本
-ndarray = "0.16"
+ndarray = { version = "0.16", features = ["serde"] }
 nalgebra = "0.33"
 num-traits = "0.2"
 num-complex = "0.4"
@@ -36,10 +36,8 @@ candle-transformers = { version = "0.4", optional = true }
 candle-datasets = { version = "0.4", optional = true }
 
 # 深度学习框架 - 最新版本
-burn = { version = "0.13", optional = true }
 tch = { version = "0.14", optional = true }
 dfdx = { version = "0.13", optional = true }
-tract = { version = "0.18", optional = true }
 
 # 自然语言处理 - 最新版本
 tokenizers = { version = "0.20", optional = true }
@@ -74,6 +72,7 @@ toml = "0.8"
 yaml-rust = "0.4"
 bincode = "1.3"
 ron = "0.8"
+serde_json = "1.0"
 
 # 日志和监控 - 最新版本
 tracing = "0.1"
@@ -107,17 +106,16 @@ tempfile = "3.8"
 proptest = "1.4"
 
 [features]
+# 将默认特性限制为纯 CPU 传统 ML，避免 workspace 级别的冲突
 default = ["basic-ai"]
 # 基础 AI 功能
 basic-ai = ["dep:linfa", "dep:smartcore"]
-# 深度学习框架
+# 深度学习框架（均为可选且非默认启用）
 candle = ["dep:candle-core", "dep:candle-nn", "dep:candle-transformers", "dep:candle-datasets"]
-burn = ["dep:burn"]
 tch = ["dep:tch"]
 dfdx = ["dep:dfdx"]
-tract = ["dep:tract"]
 # GPU 支持
-gpu = ["candle", "burn", "tch"]
+gpu = ["candle", "tch"]
 # 大语言模型
 llm = ["dep:llm-chain", "dep:llm-chain-openai", "dep:llm-chain-llama", "dep:llm-chain-local", "dep:llama-cpp-2"]
 # OpenAI 集成
@@ -130,6 +128,8 @@ nlp = ["dep:rust-bert", "dep:tokenizers", "dep:llm-chain"]
 data = ["dep:polars", "dep:datafusion", "dep:arrow"]
 # 向量搜索
 search = ["dep:qdrant-client", "dep:tantivy", "dep:hnsw_rs"]
+# 模型管理与管道控制
+management = []
 # 强化学习
 reinforcement = ["dep:tch"]
 # 图神经网络
@@ -138,8 +138,8 @@ gnn = ["dep:petgraph"]
 timeseries = ["dep:chrono"]
 # 监控和指标
 monitoring = ["dep:metrics", "dep:metrics-exporter-prometheus"]
-# 完整功能
-full = ["candle", "burn", "tch", "llm", "vision", "nlp", "data", "search", "reinforcement", "gnn", "timeseries", "monitoring"]
+# 完整功能（注意：这会拉入多种后端及其系统依赖）
+full = ["candle", "tch", "llm", "vision", "nlp", "data", "search", "reinforcement", "gnn", "timeseries", "monitoring"]
 
 [[bench]]
 name = "neural_network_bench"
@@ -160,35 +160,44 @@ path = "examples/basic_ml.rs"
 [[example]]
 name = "deep_learning"
 path = "examples/deep_learning.rs"
+required-features = ["candle", "tch", "dfdx"]
 
 [[example]]
 name = "nlp_pipeline"
 path = "examples/nlp_pipeline.rs"
+required-features = ["nlp"]
 
 [[example]]
 name = "computer_vision"
 path = "examples/computer_vision.rs"
+required-features = ["vision"]
 
 [[example]]
 name = "llm_chat"
 path = "examples/llm_chat.rs"
+required-features = ["llm"]
 
 [[example]]
 name = "vector_search"
 path = "examples/vector_search.rs"
+required-features = ["search", "data"]
 
 [[example]]
 name = "diffusion_model"
 path = "examples/diffusion_model.rs"
+required-features = ["candle"]
 
 [[example]]
 name = "reinforcement_learning"
 path = "examples/reinforcement_learning.rs"
+required-features = ["reinforcement"]
 
 [[example]]
 name = "graph_neural_network"
 path = "examples/graph_neural_network.rs"
+required-features = ["gnn"]
 
 [[example]]
 name = "time_series_forecasting"
 path = "examples/time_series_forecasting.rs"
+required-features = ["timeseries"]
