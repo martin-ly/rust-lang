@@ -7,12 +7,14 @@ use crate::types::*;
 use std::collections::HashMap;
 
 /// WebAssembly 运行时 / WebAssembly Runtime
+#[allow(dead_code)]
 pub struct WebAssemblyRuntime {
     modules: HashMap<String, Module>,
     memory: Vec<u8>,
     globals: HashMap<String, Value>,
 }
 
+#[allow(dead_code)]
 impl WebAssemblyRuntime {
     pub fn new() -> Self {
         Self {

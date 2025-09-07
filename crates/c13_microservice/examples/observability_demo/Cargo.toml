@@ -1,0 +1,17 @@
+[package]
+name = "observability_demo"
+version = "0.1.0"
+edition = "2021"
+authors = ["Rust Observability Demo"]
+description = "完全独立的可观测性演示项目"
+
+[workspace]
+
+[dependencies]
+tokio = { version = "1.44", features = ["full"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[[bin]]
+name = "observability_demo"
+path = "main.rs"

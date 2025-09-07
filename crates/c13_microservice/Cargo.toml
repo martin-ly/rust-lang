@@ -1,20 +1,167 @@
 [package]
 name = "c13_microservice"
-edition = "2024"
-resolver = "3"
+version = "0.1.0"
+edition = "2021"
+authors = ["Rust Microservice Team"]
+description = "现代Rust微服务框架集合，支持多种Web框架、gRPC、服务网格和云原生部署"
+license = "MIT"
+repository = "https://github.com/rust-lang/c13_microservice"
+keywords = ["microservice", "rust", "web", "grpc", "kubernetes", "async"]
+categories = ["web-programming", "network-programming"]
+
+# 移除工作区配置以避免冲突
 
 [dependencies]
-tokio = { version = ">=1.44.1", features = ["full"] }
-actix = ">=0.13"
+# 异步运行时
+tokio = { version = "1.44", features = ["full"] }
+tokio-util = "0.7"
+futures = "0.3"
+
+# Web框架
+axum = { version = "0.7", features = ["macros", "multipart", "tracing"] }
+actix-web = { version = "4.4", features = ["macros"] }
+warp = "0.3"
+tide = "0.16"
+
+# gRPC框架
+tonic = { version = "0.12", features = ["tls", "tls-roots", "prost"] }
+prost = "0.13"
+prost-types = "0.13"
+
+# 序列化
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde_yaml = "0.9"
+toml = "0.8"
+
+# 数据库 - 暂时注释掉以避免依赖冲突
+# sqlx = { version = "0.8", features = ["runtime-tokio-rustls", "postgres", "mysql", "chrono", "uuid"], default-features = false }
+# diesel = { version = "2.1", features = ["postgres", "mysql", "chrono", "uuid"] }
+# sea-orm = { version = "0.12", features = ["sqlx-postgres", "sqlx-mysql", "runtime-tokio-rustls", "macros"] }
+
+# 配置管理
+config = "0.14"
+dotenvy = "0.15"
+
+# 日志和追踪
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+# OpenTelemetry - 暂时注释掉以避免依赖冲突
+# tracing-opentelemetry = "0.23"
+# opentelemetry = { version = "0.21", features = ["rt-tokio-runtime"] }
+# opentelemetry-jaeger = "0.20"
+# opentelemetry-prometheus = "0.3"
+log = "0.4"
+slog = "2.7"
+slog-stdlog = "4.1"
+slog-scope = "4.4"
+
+# 监控和指标
+prometheus = "0.13"
+metrics = "0.22"
+metrics-exporter-prometheus = "0.13"
+
+# 消息队列 - 简化版本
+redis = { version = "0.25", features = ["tokio-comp", "connection-manager"] }
+
+# 认证和授权
+jsonwebtoken = "9.3"
+oauth2 = "4.4"
+argon2 = "0.5"
+uuid = { version = "1.10", features = ["v4", "serde"] }
+
+# HTTP客户端
+reqwest = { version = "0.12", features = ["json", "rustls-tls"] }
+hyper = { version = "1.0", features = ["full"] }
+
+# 时间处理
+chrono = { version = "0.4", features = ["serde"] }
+time = { version = "0.3", features = ["serde", "macros"] }
+
+# 压缩支持
+flate2 = "1.0"
+
+# 错误处理
+anyhow = "1.0"
+thiserror = "1.0"
+eyre = "0.6"
+
+# 测试
+tokio-test = "0.4"
+mockall = "0.13"
+
+# 其他工具
+clap = { version = "4.5", features = ["derive"] }
+env_logger = "0.11"
+pretty_env_logger = "0.5"
+
+[dev-dependencies]
+tokio-test = "0.4"
+mockall = "0.13"
+tempfile = "3.10"
 
 [lib]
 name = "c13_microservice"
 path = "src/lib.rs"
 
 [[bin]]
-name = "c13_microservice"
+name = "microservice-server"
 path = "src/bin/main.rs"
 
 [[example]]
-name = "optl_exp01"
-path = "examples/optl_exp01.rs"
+name = "simple_axum"
+path = "examples/simple_axum.rs"
+
+[[example]]
+name = "grpc_service"
+path = "examples/grpc_service.rs"
+
+[[example]]
+name = "volo_rpc_service"
+path = "examples/volo_rpc_service.rs"
+
+[[example]]
+name = "opentelemetry_demo"
+path = "examples/opentelemetry_demo.rs"
+
+[[example]]
+name = "orm_demo"
+path = "examples/orm_demo.rs"
+
+[[example]]
+name = "messaging_demo"
+path = "examples/messaging_demo.rs"
+
+[[example]]
+name = "discovery_demo"
+path = "examples/discovery_demo.rs"
+
+[[example]]
+name = "comprehensive_observability_demo"
+path = "examples/comprehensive_observability_demo.rs"
+
+[[example]]
+name = "simple_observability_demo"
+path = "examples/simple_observability_demo.rs"
+
+[[example]]
+name = "standalone_observability_demo"
+path = "examples/standalone_observability_demo.rs"
+
+[[example]]
+name = "local_logging_demo"
+path = "examples/local_logging_demo.rs"
+
+[[example]]
+name = "integrated_logging_demo"
+path = "examples/integrated_logging_demo.rs"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+
+[profile.dev]
+opt-level = 0
+debug = true

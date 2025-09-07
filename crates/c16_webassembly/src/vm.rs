@@ -7,6 +7,7 @@ use crate::types::*;
 use std::collections::HashMap;
 
 /// WebAssembly 虚拟机 / WebAssembly Virtual Machine
+#[allow(dead_code)]
 pub struct WebAssemblyVM {
     memory: Vec<u8>,
     stack: Vec<Value>,
@@ -14,6 +15,7 @@ pub struct WebAssemblyVM {
     functions: HashMap<String, Function>,
 }
 
+#[allow(dead_code)]
 impl WebAssemblyVM {
     pub fn new() -> Self {
         Self {
@@ -31,6 +33,7 @@ impl WebAssemblyVM {
 }
 
 /// 函数 / Function
+#[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct Function {
     pub name: String,

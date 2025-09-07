@@ -7,8 +7,10 @@ use crate::types::*;
 // use std::collections::HashMap;
 
 /// WebAssembly 工具 / WebAssembly Tools
+#[allow(dead_code)]
 pub struct WebAssemblyTools;
 
+#[allow(dead_code)]
 impl WebAssemblyTools {
     /// 验证 WebAssembly 模块 / Validate WebAssembly module
     pub fn validate_module(_module: &Module) -> bool {

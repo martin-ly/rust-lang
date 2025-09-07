@@ -574,6 +574,7 @@ impl Global {
 /// 
 /// 表示WebAssembly模块的导入项。
 /// Represents an import item in a WebAssembly module.
+#[allow(dead_code)]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Import {
     /// 模块名称 / Module Name
@@ -588,6 +589,7 @@ pub struct Import {
 /// 
 /// 定义导入项的类型。
 /// Defines the type of an import item.
+#[allow(dead_code)]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum ImportType {
     /// 函数导入 / Function Import
@@ -604,6 +606,7 @@ pub enum ImportType {
 /// 
 /// 表示WebAssembly模块的导出项。
 /// Represents an export item in a WebAssembly module.
+#[allow(dead_code)]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Export {
     /// 导出名称 / Export Name
@@ -618,6 +621,7 @@ pub struct Export {
 /// 
 /// 定义导出项的类型。
 /// Defines the type of an export item.
+#[allow(dead_code)]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum ExportType {
     /// 函数导出 / Function Export
@@ -634,6 +638,7 @@ pub enum ExportType {
 /// 
 /// 表示WebAssembly模块的数据段。
 /// Represents a data segment in a WebAssembly module.
+#[allow(dead_code)]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DataSegment {
     /// 数据段索引 / Data Segment Index
@@ -650,6 +655,7 @@ pub struct DataSegment {
 /// 
 /// 表示WebAssembly模块的元素段。
 /// Represents an element segment in a WebAssembly module.
+#[allow(dead_code)]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ElementSegment {
     /// 元素段索引 / Element Segment Index
@@ -666,6 +672,7 @@ pub struct ElementSegment {
 /// 
 /// 表示WebAssembly模块的自定义段。
 /// Represents a custom section in a WebAssembly module.
+#[allow(dead_code)]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CustomSection {
     /// 段名称 / Section Name
@@ -678,6 +685,7 @@ pub struct CustomSection {
 /// 
 /// 表示编译后的WebAssembly模块。
 /// Represents a compiled WebAssembly module.
+#[allow(dead_code)]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CompiledModule {
     /// WebAssembly字节码 / WebAssembly Bytecode
@@ -690,6 +698,7 @@ pub struct CompiledModule {
 /// 
 /// 包含模块的元数据信息。
 /// Contains metadata information of a module.
+#[allow(dead_code)]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ModuleMetadata {
     /// 编译时间 / Compilation Time
@@ -710,6 +719,7 @@ pub struct ModuleMetadata {
 /// 
 /// 定义编译优化的级别。
 /// Defines the level of compilation optimization.
+#[allow(dead_code)]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum OptimizationLevel {
     /// 无优化 / No Optimization
@@ -728,6 +738,7 @@ pub enum OptimizationLevel {
 /// 
 /// 表示WebAssembly函数的执行环境。
 /// Represents the execution environment of a WebAssembly function.
+#[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct ExecutionEnvironment {
     /// 内存 / Memory
@@ -788,6 +799,7 @@ impl ExecutionEnvironment {
 /// 表示验证操作的结果。
 /// Represents the result of a validation operation.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(dead_code)]
 pub struct ValidationResult {
     /// 是否有效 / Is Valid
     pub is_valid: bool,
