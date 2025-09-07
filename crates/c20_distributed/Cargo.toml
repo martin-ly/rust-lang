@@ -1,0 +1,24 @@
+[package]
+name = "c20_distributed"
+version = "0.1.0"
+edition = "2021"
+resolver = "2"
+description = "Distributed System with Rust - 分布式系统"
+authors = ["Rust AI Team"]
+license = "MIT"
+repository = "https://github.com/rust-lang/c20_distributed"
+keywords = ["distributed", "system", "rust"]
+categories = ["distributed", "system", "rust"]
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+tokio = { version = "1.44", features = ["full"], optional = true }
+anyhow = "1.0"
+thiserror = "1.0"
+
+[dev-dependencies]
+tempfile = "3.8"
+proptest = "1.4"
+
+[features]
+default = ["dep:tokio"]

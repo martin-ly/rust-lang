@@ -20,6 +20,7 @@ members = [ "crates/c01_ownership_borrow_scope",
             "crates/c17_iot", 
             "crates/c18_model",
             "crates/c19_ai",
+            "crates/c20_distributed",
             ]
 
 [profile.release]
