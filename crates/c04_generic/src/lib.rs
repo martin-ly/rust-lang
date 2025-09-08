@@ -100,6 +100,95 @@ pub mod type_inference;
 pub mod type_parameter;
 
 pub mod generic_define;
+pub mod rust_189_features;
+pub mod rust_189_gat_hrtbs;
+
+/// 成熟库示例模块
+pub mod ecosystem_examples {
+    use anyhow::{Context, Result};
+    use itertools::Itertools;
+    use rayon::prelude::*;
+    use serde::{Deserialize, Serialize};
+    use thiserror::Error;
+
+    // 1) itertools: 提供强大的迭代器适配器
+    pub fn sum_of_pairs(input: &[i32]) -> i32 {
+        input.iter().tuples().map(|(a, b)| a + b).sum()
+    }
+
+    // 2) rayon: 并行 map/reduce 示例
+    pub fn parallel_square_sum(input: &[i32]) -> i32 {
+        input.par_iter().map(|x| x * x).sum()
+    }
+
+    // 3) serde: 序列化/反序列化
+    #[derive(Debug, Serialize, Deserialize, PartialEq)]
+    pub struct User {
+        pub id: u64,
+        pub name: String,
+    }
+
+    pub fn user_to_json(user: &User) -> Result<String> {
+        serde_json::to_string(user).context("serialize user failed")
+    }
+
+    pub fn user_from_json(s: &str) -> Result<User> {
+        let u: User = serde_json::from_str(s).context("deserialize user failed")?;
+        Ok(u)
+    }
+
+    // 4) thiserror + anyhow: 统一错误处理
+    #[derive(Debug, Error)]
+    pub enum DemoError {
+        #[error("not found: {0}")]
+        NotFound(String),
+    }
+
+    pub fn find_name<'a>(names: &'a [&'a str], target: &str) -> Result<&'a str> {
+        names
+            .iter()
+            .copied()
+            .find(|&n| n == target)
+            .ok_or_else(|| DemoError::NotFound(target.to_string()).into())
+    }
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn test_sum_of_pairs() {
+            let v = vec![1, 2, 3, 4, 5, 6];
+            assert_eq!(sum_of_pairs(&v), 3 + 7 + 11);
+        }
+
+        #[test]
+        fn test_parallel_square_sum() {
+            let v = (1..=1000).collect::<Vec<_>>();
+            let seq: i32 = v.iter().map(|x| x * x).sum();
+            let par = parallel_square_sum(&v);
+            assert_eq!(seq, par);
+        }
+
+        #[test]
+        fn test_serde_roundtrip() {
+            let u = User { id: 7, name: "Alice".into() };
+            let s = user_to_json(&u).unwrap();
+            let back = user_from_json(&s).unwrap();
+            assert_eq!(u, back);
+        }
+
+        #[test]
+        fn test_anyhow_thiserror() {
+            let names = ["foo", "bar"]; 
+            let ok = find_name(&names, "foo").unwrap();
+            assert_eq!(ok, "foo");
+            let err = find_name(&names, "baz").unwrap_err();
+            let msg = format!("{err:#}");
+            assert!(msg.contains("not found: baz"));
+        }
+    }
+}
 
 /// 性能基准测试模块
 pub mod benchmarks {

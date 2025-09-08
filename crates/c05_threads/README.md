@@ -111,6 +111,14 @@ pool.execute(|| {
 - **高性能**: 基于crossbeam和rayon的高性能实现
 - **可扩展**: 支持从单核到多核的平滑扩展
 
+## Rust 1.89 对齐要点（并发方向）
+
+- 标准库 scoped 线程：更安全的跨线程借用（`thread::scope`），见 `rust_189_threads::demo_scoped_threads`
+- 消息传递：`std::mpsc` 与 `crossbeam-channel` 对比，见 `rust_189_threads::demo_mpsc_vs_crossbeam`
+- 数据并行：`rayon` 并行 map/reduce，见 `rust_189_threads::demo_rayon_parallel`
+- 高性能锁：`parking_lot::{Mutex,RwLock}`，见 `rust_189_threads::demo_parking_lot`
+- 同步原语：`Barrier` 与 `Condvar`，见 `rust_189_threads::demo_barrier_and_condvar`
+
 ## 使用示例
 
 ### 线程池示例

@@ -49,6 +49,10 @@ Rust 1.89版本带来了多项重大改进和新特性，本文档提供了所�
  2. **异步控制流**
     - 状态: 改进
     - 功能: 异步if-else、循环、match
+    - API 要点:
+      - `async_if_else<F, G, T>(condition, if_branch, else_branch) -> T`
+      - `async_loop<FnMut() -> bool, Future + Clone>(condition, body) -> Vec<T>`
+      - `async_for<T, F, Fut>(items, processor) -> Vec<T>`
     - 应用: 异步状态机
 
 ### 🧪 实验性特性

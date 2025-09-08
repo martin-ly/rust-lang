@@ -10,7 +10,7 @@ A trait bound constrains a type parameter to implement specific traits.
 
 **Formal Definition:**
 
-```
+```text
 T : Trait where:
 - T is a type parameter
 - Trait is a trait definition
@@ -45,7 +45,7 @@ Trait bounds can be specified in multiple syntactic forms.
 
 **Syntax Forms:**
 
-```
+```text
 1. Inline bounds: T : Trait₁ + Trait₂
 2. Where clauses: where T : Trait₁ + Trait₂
 3. Associated type bounds: T : Trait<AssocType = U>
@@ -90,7 +90,7 @@ Different types of constraints can be applied to type parameters.
 
 **Constraint Types:**
 
-```
+```text
 1. Trait constraints: T : Trait
 2. Associated type constraints: T::AssocType = U
 3. Lifetime constraints: T : 'a
@@ -120,7 +120,7 @@ A type T satisfies constraint C if T meets all requirements of C.
 
 **Formal Definition:**
 
-```
+```text
 T ⊨ C (T satisfies C) if:
 - For trait constraints: T implements all methods in C
 - For associated types: T::AssocType matches C's requirements
@@ -166,7 +166,7 @@ Multiple trait bounds require a type parameter to implement several traits.
 
 **Formal Definition:**
 
-```
+```text
 T : Trait₁ + Trait₂ + ... + Traitₙ where:
 - T must implement all Traitᵢ simultaneously
 - All methods from all traits are available on T
@@ -201,7 +201,7 @@ Trait bounds can be inherited through trait relationships.
 
 **Formal Definition:**
 
-```
+```text
 If Trait₁ : Trait₂ and T : Trait₁, then T : Trait₂
 where Trait₁ inherits from Trait₂
 ```
@@ -252,7 +252,7 @@ An associated type bound constrains the associated type of a trait.
 
 **Formal Definition:**
 
-```
+```text
 T : Trait<AssocType = U> where:
 - T implements Trait
 - T::AssocType = U
@@ -294,7 +294,7 @@ An associated type constraint specifies requirements on associated types.
 
 **Formal Definition:**
 
-```
+```text
 T::AssocType : Trait where:
 - T implements the trait containing AssocType
 - T::AssocType must implement Trait
@@ -331,7 +331,7 @@ A lifetime bound constrains the lifetime of a type parameter.
 
 **Formal Definition:**
 
-```
+```text
 T : 'a where:
 - T must not contain any references with lifetime shorter than 'a
 - T is valid for at least lifetime 'a
@@ -366,7 +366,7 @@ Lifetime bounds follow specific rules for validity.
 
 **Rules:**
 
-```
+```text
 1. T : 'a implies T contains no references with lifetime < 'a
 2. T : 'static implies T contains no references at all
 3. T : 'a + 'b implies T is valid for both lifetimes
@@ -400,7 +400,7 @@ Trait bound checking verifies that a type implements required traits.
 
 **Algorithm:**
 
-```
+```text
 1. For each trait bound T : Trait
 2. Check if T implements all methods in Trait
 3. Check if T satisfies all associated type requirements
@@ -458,7 +458,7 @@ Constraint satisfaction checking verifies all constraints are met.
 
 **Algorithm:**
 
-```
+```text
 1. Collect all constraints for type parameters
 2. Check trait bounds
 3. Check associated type constraints
@@ -525,7 +525,7 @@ Higher-ranked trait bounds allow quantification over lifetimes.
 
 **Formal Definition:**
 
-```
+```text
 for<'a> T : Trait<'a> where:
 - T implements Trait for all possible lifetimes 'a
 - T is universally quantified over lifetimes
@@ -558,7 +558,7 @@ Conditional trait bounds apply constraints based on other constraints.
 
 **Formal Definition:**
 
-```
+```text
 T : Trait₁ where T : Trait₂ means:
 - T must implement Trait₁
 - Trait₁ is only available when T implements Trait₂
@@ -596,7 +596,7 @@ The constraint language defines valid constraint expressions.
 
 **Grammar:**
 
-```
+```text
 Constraint ::= TraitBound | LifetimeBound | SizedBound | EqualityBound
 TraitBound ::= Type ':' Trait ('+' Trait)*
 LifetimeBound ::= Type ':' Lifetime
@@ -625,7 +625,7 @@ The logic for determining constraint satisfaction.
 
 **Rules:**
 
-```
+```text
 1. Reflexivity: T ⊨ T
 2. Transitivity: If T ⊨ U and U ⊨ V, then T ⊨ V
 3. Conjunction: T ⊨ C₁ ∧ C₂ iff T ⊨ C₁ and T ⊨ C₂
@@ -642,7 +642,7 @@ Trait bounds ensure type safety for generic functions.
 
 **Proof:**
 
-```
+```text
 1. Let f<T: Trait>(x: T) be a generic function
 2. T: Trait ensures all Trait methods are available on T
 3. All method calls on T are verified at compile time
@@ -658,7 +658,7 @@ The constraint system captures all necessary type requirements.
 
 **Proof:**
 
-```
+```text
 1. Let C be a constraint system for type T
 2. C includes all trait bounds, lifetime bounds, and sized bounds
 3. T satisfies C if and only if T meets all requirements

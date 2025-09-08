@@ -89,9 +89,79 @@ Rust的所有权系统基于线性类型理论：
 
 ## 2. Rust 1.89 新特性理论
 
-### 2.1 泛型关联类型 (GATs) 理论
+### 2.1 显式推断的常量泛型参数理论
 
 #### 2.1.1 形式化定义
+
+```rust
+// Rust 1.89 新特性：显式推断的常量泛型参数
+pub fn all_false<const LEN: usize>() -> [bool; LEN] {
+    [false; _]  // 编译器推断LEN的值
+}
+```
+
+**类型推断理论**：
+
+```mathematical
+// 常量泛型推断规则
+Γ ⊢ e: [T; N]    N = _
+------------------ (ConstInfer)
+Γ ⊢ e: [T; N']   where N' is inferred from context
+
+// 推断约束
+∀ const N: usize, ∀ T: Type:
+  [T; N] 是良类型的 ⇔ 
+  N 可以从上下文推断 ∧ T 是有效类型
+```
+
+#### 2.1.2 实现示例
+
+```rust
+// 编译时验证的常量泛型
+const fn validate_dimensions(rows: usize, cols: usize) -> bool {
+    rows > 0 && cols > 0 && rows * cols <= 1000
+}
+
+type ValidMatrix = Matrix<i32, { validate_dimensions(10, 10) as usize }>;
+
+// 证明：推断的常量泛型是类型安全的
+struct Matrix<T, const ROWS: usize, const COLS: usize> {
+    data: [[T; COLS]; ROWS],
+}
+```
+
+### 2.2 不匹配的生命周期语法警告理论
+
+#### 2.2.1 生命周期一致性检查
+
+```rust
+// Rust 1.89 新特性：mismatched_lifetime_syntaxes lint
+fn items(scores: &[u8]) -> std::slice::Iter<u8> {
+    scores.iter()  // 编译器警告生命周期语法不一致
+}
+
+// 推荐的显式生命周期标注
+fn items<'a>(scores: &'a [u8]) -> std::slice::Iter<'a, u8> {
+    scores.iter()
+}
+```
+
+**生命周期一致性理论**：
+
+```mathematical
+// 生命周期语法一致性规则
+Γ ⊢ f: &'a T -> U    Γ ⊢ g: &'b T -> V
+-------------------------------------- (LifetimeConsistency)
+Γ ⊢ f: &'a T -> U    Γ ⊢ g: &'a T -> V  if 'a = 'b
+
+// 一致性检查
+∀ lifetime 'a, 'b, ∀ type T:
+  &'a T 和 &'b T 语法一致 ⇔ 'a 和 'b 在语法上明确标注
+```
+
+### 2.3 泛型关联类型 (GATs) 理论
+
+#### 2.3.1 形式化定义
 
 ```rust
 // GATs 语法形式化
@@ -116,7 +186,7 @@ Proof:
 3. 一致性检查: 所有实现必须一致
 ```
 
-#### 2.1.2 实现示例
+#### 2.1.2 实现示例1
 
 ```rust
 // 迭代器GAT实现

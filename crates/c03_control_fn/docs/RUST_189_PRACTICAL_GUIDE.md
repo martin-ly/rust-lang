@@ -252,15 +252,16 @@ pub const PRIME_17: bool = is_prime(17);
 pub struct AsyncControlFlowExecutor;
 
 impl AsyncControlFlowExecutor {
-    // 异步if-else
-    pub async fn async_if_else<F, T>(
+    // 异步if-else（当前 API）
+    pub async fn async_if_else<F, G, T>(
         &self,
         condition: bool,
         if_branch: F,
-        else_branch: F,
+        else_branch: G,
     ) -> T
     where
         F: Future<Output = T>,
+        G: Future<Output = T>,
     {
         if condition {
             if_branch.await
@@ -269,21 +270,24 @@ impl AsyncControlFlowExecutor {
         }
     }
     
-    // 异步循环
-    pub async fn async_while<F, C>(
+    // 异步循环（当前 API）
+    pub async fn async_loop<F, T>(
         &self,
-        mut condition: C,
-        mut body: F,
-    ) -> ()
+        mut condition: F,
+        body: impl Future<Output = T> + Clone,
+    ) -> Vec<T>
     where
-        F: FnMut() -> Pin<Box<dyn Future<Output = ()> + Send + '_>>,
-        C: FnMut() -> Pin<Box<dyn Future<Output = bool> + Send + '_>>,
+        F: FnMut() -> bool,
     {
-        while condition().await {
-            body().await;
+        let mut results = Vec::new();
+        while condition() {
+            results.push(body.clone().await);
         }
+        results
     }
 }
+
+// 补充：更多可运行示例片段位于 `docs/snippets/async_control_flow_example.rs`
 ```
 
 ### 2. 控制流优化

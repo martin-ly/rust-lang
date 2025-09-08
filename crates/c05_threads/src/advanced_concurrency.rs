@@ -121,10 +121,14 @@ impl Worker {
                     continue;
                 }
                 
-                // 尝试从全局队列获取任务
-                if let Ok(task) = receiver.try_recv() {
-                    task();
-                    continue;
+                // 尝试从全局队列获取任务（感知断开以便退出）
+                match receiver.try_recv() {
+                    Ok(task) => { task(); continue; }
+                    Err(crossbeam_channel::TryRecvError::Empty) => { /* fallthrough */ }
+                    Err(crossbeam_channel::TryRecvError::Disconnected) => {
+                        // 发送端已关闭，且无更多任务可领，退出线程
+                        break;
+                    }
                 }
                 
                 // 尝试从其他线程窃取任务
@@ -237,8 +241,10 @@ pub struct LockFreeRingBuffer<T> {
 impl<T: Default + Clone> LockFreeRingBuffer<T> {
     /// 创建新的无锁环形缓冲区
     pub fn new(size: usize) -> Self {
-        let mut buffer = Vec::with_capacity(size);
-        for _ in 0..size {
+        // 使用 size+1 的内部容量以支持“可存放 size 个元素”的语义
+        let capacity = size + 1;
+        let mut buffer = Vec::with_capacity(capacity);
+        for _ in 0..capacity {
             buffer.push(T::default());
         }
         
@@ -246,7 +252,7 @@ impl<T: Default + Clone> LockFreeRingBuffer<T> {
             buffer: UnsafeCell::new(buffer),
             head: AtomicUsize::new(0),
             tail: AtomicUsize::new(0),
-            size,
+            size: capacity,
         }
     }
     

@@ -764,6 +764,9 @@ pub fn demonstrate_trait_object() {
     
     // 插件系统演示
     demonstrate_plugin_system();
+
+    // 上行转换演示（Trait upcasting）
+    demonstrate_trait_upcasting();
 }
 
 // 基本特征对象演示
@@ -846,6 +849,41 @@ fn demonstrate_plugin_system() {
     }
 }
 
+// 上行转换（Trait upcasting）
+// 当存在 `trait Sub: Super { ... }` 时，`&dyn Sub` 可自动上行转换为 `&dyn Super`
+pub trait Super {
+    fn id(&self) -> &'static str;
+}
+
+pub trait Sub: Super {
+    fn detail(&self) -> &'static str;
+}
+
+pub struct Concrete;
+
+impl Super for Concrete {
+    fn id(&self) -> &'static str { "Concrete" }
+}
+
+impl Sub for Concrete {
+    fn detail(&self) -> &'static str { "detail" }
+}
+
+fn demonstrate_trait_upcasting() {
+    println!("--- Trait Upcasting Demo ---");
+    let c = Concrete;
+    let sub_ref: &dyn Sub = &c;
+    // 上行转换到 Super
+    let super_ref: &dyn Super = sub_ref;
+    println!("super.id={} sub.detail={}", super_ref.id(), sub_ref.detail());
+
+    // Box 上行转换
+    let boxed_sub: Box<dyn Sub> = Box::new(Concrete);
+    let boxed_super: Box<dyn Super> = boxed_sub;
+    println!("boxed_super.id={}", boxed_super.id());
+    println!();
+}
+
 // 测试函数
 #[cfg(test)]
 mod tests {
@@ -906,5 +944,18 @@ mod tests {
         assert_eq!(manager.plugins.len(), 1);
         assert_eq!(manager.plugins[0].name(), "Text Plugin");
         assert_eq!(manager.plugins[0].version(), "1.0.0");
+    }
+
+    #[test]
+    fn test_trait_upcasting_refs_and_box() {
+        let c = Concrete;
+        let sub_ref: &dyn Sub = &c;
+        let super_ref: &dyn Super = sub_ref; // 上行转换
+        assert_eq!(super_ref.id(), "Concrete");
+        assert_eq!(sub_ref.detail(), "detail");
+
+        let boxed_sub: Box<dyn Sub> = Box::new(Concrete);
+        let boxed_super: Box<dyn Super> = boxed_sub; // Box 上行转换
+        assert_eq!(boxed_super.id(), "Concrete");
     }
 }

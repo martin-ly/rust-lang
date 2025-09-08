@@ -135,6 +135,12 @@ fn main() {
     c04_generic::benchmarks::benchmark_concurrency();
     c04_generic::benchmarks::benchmark_memory_usage();
     
+    // Rust 1.89 泛型特性演示
+    println!("\nRust 1.89 Generics Demos");
+    println!("========================");
+    c04_generic::rust_189_features::demonstrate_rust_189_generics();
+    c04_generic::rust_189_gat_hrtbs::demonstrate_gat_hrtb();
+    
     // 显示项目完成状态总结
     c04_generic::project_status_summary();
     

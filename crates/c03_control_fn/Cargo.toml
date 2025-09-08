@@ -43,6 +43,7 @@ generics = []
 performance = ["fastrace/enable"]
 bench = ["criterion"]
 test = ["proptest"]
+nightly = []
 
 [lib]
 name = "c03_control_fn"
@@ -67,6 +68,14 @@ path = "examples/rust_189_performance_features.rs"
 [[example]]
 name = "rust_189_comprehensive_demo"
 path = "examples/rust_189_comprehensive_demo.rs"
+
+[[example]]
+name = "rust_189_enhanced_features_demo"
+path = "examples/rust_189_enhanced_features_demo.rs"
+
+[[example]]
+name = "control_flow_functions_189"
+path = "examples/control_flow_functions_189.rs"
 
 [[bin]]
 name = "c03_control_fn"

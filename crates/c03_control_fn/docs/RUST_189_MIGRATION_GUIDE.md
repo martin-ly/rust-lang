@@ -678,18 +678,22 @@ async fn old_async_loop() {
 #### 11112 ✅ Rust 1.89新代码
 
 ```rust
-// Rust 1.89新版本 - 异步控制流执行器
+// Rust 1.89新版本 - 异步控制流执行器（当前 API）
+use std::future::Future;
+
 pub struct AsyncControlFlowExecutor;
 
 impl AsyncControlFlowExecutor {
-    pub async fn async_if_else<F, T>(
+    // if/else：分别接受两个 Future 分支
+    pub async fn async_if_else<F, G, T>(
         &self,
         condition: bool,
         if_branch: F,
-        else_branch: F,
+        else_branch: G,
     ) -> T
     where
         F: Future<Output = T>,
+        G: Future<Output = T>,
     {
         if condition {
             if_branch.await
@@ -697,35 +701,53 @@ impl AsyncControlFlowExecutor {
             else_branch.await
         }
     }
-    
-    pub async fn async_while<F, C>(
+
+    // while：以 `FnMut() -> bool` 条件与可克隆 Future 体实现
+    pub async fn async_loop<F, T>(
         &self,
-        mut condition: C,
-        mut body: F,
-    ) -> ()
+        mut condition: F,
+        body: impl Future<Output = T> + Clone,
+    ) -> Vec<T>
     where
-        F: FnMut() -> Pin<Box<dyn Future<Output = ()> + Send + '_>>,
-        C: FnMut() -> Pin<Box<dyn Future<Output = bool> + Send + '_>>,
+        F: FnMut() -> bool,
     {
-        while condition().await {
-            body().await;
+        let mut results = Vec::new();
+        while condition() {
+            results.push(body.clone().await);
         }
+        results
     }
 }
 
 // 使用异步控制流执行器
 async fn new_async_control_flow(condition: bool) -> String {
     let executor = AsyncControlFlowExecutor;
-    
-    executor
+
+    let res = executor
         .async_if_else(
             condition,
             async { async_operation_a().await },
             async { async_operation_b().await },
         )
-        .await
+        .await;
+
+    // 示例：循环执行 3 次
+    let remaining = std::cell::Cell::new(3);
+    let _results = executor
+        .async_loop(
+            || {
+                let r = remaining.get();
+                if r > 0 { remaining.set(r - 1); true } else { false }
+            },
+            std::future::ready(()),
+        )
+        .await;
+
+    res
 }
 ```
+
+附：完整示例片段参见 `docs/snippets/async_control_flow_example.rs`。
 
 #### 11113 🔧 迁移步骤
 

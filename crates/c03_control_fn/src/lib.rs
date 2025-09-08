@@ -5,6 +5,7 @@
 
 // 导出核心模块
 pub mod rust_189_features;
+pub mod rust_189_enhanced_features;
 pub mod async_control_flow;
 pub mod async_control_flow_189;
 pub mod performance_optimization_189;
@@ -24,6 +25,7 @@ pub mod statements;
 pub use async_control_flow::*;
 pub use async_control_flow_189::*;
 pub use performance_optimization_189::*;
+pub use rust_189_enhanced_features::*;
 
 // 版本信息
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");

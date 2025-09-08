@@ -19,11 +19,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     info!("启动消息队列演示示例");
     
     // RabbitMQ连接
-    let rabbitmq = RabbitMQ::new("amqp://localhost:5672".to_string());
+    let mut rabbitmq = RabbitMQ::new("amqp://localhost:5672".to_string());
     rabbitmq.connect().await?;
     
     // Kafka连接
-    let kafka = Kafka::new(vec!["localhost:9092".to_string()]);
+    let mut kafka = Kafka::new(vec!["localhost:9092".to_string()]);
     kafka.connect().await?;
     
     // NATS连接
@@ -35,7 +35,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     mqtt.connect().await?;
     
     // Redis连接
-    let redis = Redis::new("redis://localhost:6379".to_string());
+    let mut redis = Redis::new("redis://localhost:6379".to_string());
     redis.connect().await?;
     
     info!("所有消息队列连接成功");

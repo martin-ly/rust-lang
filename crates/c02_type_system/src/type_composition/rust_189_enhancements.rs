@@ -1,34 +1,143 @@
-// Rust 1.89 类型组合增强特性实现
-// 文件: rust_189_enhancements.rs
-// 创建日期: 2025-01-27
-// 版本: 1.0
+//! Rust 1.89 类型组合增强特性实现
+//! 
+//! 本模块实现了Rust 1.89版本中引入的新类型系统特性，包括：
+//! - 显式推断的常量泛型参数
+//! - 不匹配的生命周期语法警告
+//! - 增强的泛型关联类型 (GATs)
+//! - 类型别名实现特征 (TAIT)
+//! - 高级类型组合模式
+//! 
+//! # 文件信息
+//! - 文件: rust_189_enhancements.rs
+//! - 创建日期: 2025-01-27
+//! - 版本: 1.0
+//! - Rust版本: 1.89.0
 
 /// Rust 1.89 类型组合增强特性
+/// 
+/// 本模块提供了Rust 1.89版本中新增的类型系统特性的完整实现，
+/// 包括常量泛型推断、生命周期语法检查、GATs等核心功能。
 pub mod rust_189_type_composition {
 
     /// 1. 增强的泛型关联类型 (Enhanced GATs)
+    /// 
+    /// 本trait展示了Rust 1.89中GATs的增强功能，支持生命周期参数化的关联类型。
+    /// 这允许更灵活的类型组合和更精确的生命周期管理。
+    /// 
+    /// # 示例
+    /// ```rust
+    /// use c02_type_system::rust_189_enhancements::rust_189_type_composition::EnhancedContainer;
+    /// 
+    /// struct MyContainer {
+    ///     data: Vec<String>,
+    /// }
+    /// 
+    /// impl EnhancedContainer for MyContainer {
+    ///     type Item<'a> = &'a str where Self: 'a;
+    ///     type Metadata<T> = String where T: Clone;
+    ///     
+    ///     fn get<'a>(&'a self) -> Option<&'a Self::Item<'a>> {
+    ///         self.data.first().map(|s| s.as_str())
+    ///     }
+    ///     
+    ///     fn get_metadata<T: Clone>(&self) -> Option<&Self::Metadata<T>> {
+    ///         Some(&"metadata".to_string())
+    ///     }
+    /// }
+    /// ```
     pub trait EnhancedContainer {
+        /// 生命周期参数化的关联类型
+        /// 
+        /// 这个关联类型可以依赖于生命周期参数，提供更精确的类型控制。
         type Item<'a> where Self: 'a;
+        
+        /// 泛型参数化的元数据类型
+        /// 
+        /// 支持泛型参数的关联类型，允许类型级别的组合。
         type Metadata<T> where T: Clone;
         
-        fn get<'a>(&'a self) -> Option<&'a Self::Item<'a>>;
+        /// 获取生命周期受限的项
+        /// 
+        /// # 参数
+        /// - `&'a self`: 生命周期受限的self引用
+        /// 
+        /// # 返回
+        /// 返回生命周期与输入相同的项引用
+        fn get<'a>(&'a self) -> Option<Self::Item<'a>>;
+        
+        /// 获取泛型元数据
+        /// 
+        /// # 类型参数
+        /// - `T`: 必须实现Clone trait的类型
+        /// 
+        /// # 返回
+        /// 返回与类型T相关的元数据引用
         fn get_metadata<T: Clone>(&self) -> Option<&Self::Metadata<T>>;
     }
 
     /// 2. 常量泛型组合类型
+    /// 
+    /// 本结构体展示了Rust 1.89中常量泛型的增强功能，支持编译时类型验证和优化。
+    /// 常量泛型允许在类型级别进行参数化，提供零运行时开销的类型安全保证。
+    /// 
+    /// # 类型参数
+    /// - `T`: 数组元素的类型
+    /// - `N`: 数组长度，必须是编译时常量
+    /// 
+    /// # 示例
+    /// ```rust
+    /// use c02_type_system::rust_189_enhancements::rust_189_type_composition::ConstGenericArray;
+    /// 
+    /// let arr = ConstGenericArray::new([1, 2, 3, 4, 5]);
+    /// assert_eq!(arr.len(), 5);
+    /// assert!(!arr.is_empty());
+    /// ```
     pub struct ConstGenericArray<T, const N: usize> {
+        /// 内部数组数据
+        /// 
+        /// 数组长度在编译时确定，提供类型级别的长度保证。
         pub data: [T; N],
     }
 
     impl<T, const N: usize> ConstGenericArray<T, N> {
+        /// 创建新的常量泛型数组
+        /// 
+        /// # 参数
+        /// - `data`: 长度为N的数组数据
+        /// 
+        /// # 返回
+        /// 返回新创建的ConstGenericArray实例
+        /// 
+        /// # 示例
+        /// ```rust
+        /// let arr = ConstGenericArray::new([1, 2, 3]);
+        /// ```
         pub fn new(data: [T; N]) -> Self {
             Self { data }
         }
         
+        /// 获取数组长度
+        /// 
+        /// 返回编译时确定的数组长度N。
+        /// 
+        /// # 返回
+        /// 数组长度，类型为usize
+        /// 
+        /// # 性能
+        /// 此方法在编译时优化为常量，无运行时开销。
         pub fn len(&self) -> usize {
             N
         }
         
+        /// 检查数组是否为空
+        /// 
+        /// 基于编译时常量N判断数组是否为空。
+        /// 
+        /// # 返回
+        /// 如果N为0则返回true，否则返回false
+        /// 
+        /// # 性能
+        /// 此方法在编译时优化为常量，无运行时开销。
         pub fn is_empty(&self) -> bool {
             N == 0
         }

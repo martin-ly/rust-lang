@@ -104,6 +104,7 @@ cargo check
 
 - 泛型 trait 实现
 - Trait 对象（运行时多态）
+- Trait 上行转换（Trait upcasting）
 - 插件系统设计
 
 ### 4. 关联类型 (Associated Types)
@@ -129,6 +130,20 @@ cargo check
 - 自动类型推导
 - 闭包类型推断
 - 生命周期推断
+
+### 8. Rust 1.89 对齐（泛型方向）
+
+- RPITIT：在 trait 方法返回位置使用 `impl Trait`，见 `rust_189_features::rpitit`
+- 常量泛型：固定容量结构，见 `rust_189_features::const_generics::RingBuffer`
+- TAIT-like：以返回位置 `impl Trait` 近似演示迭代器组合，见 `rust_189_features::tait_like`
+- Trait 上行转换：`&dyn Sub -> &dyn Super`、`Box<dyn Sub> -> Box<dyn Super>`，见 `polymorphism::trait_object`
+
+### 9. 成熟生态库示例
+
+- itertools：迭代器适配器增强，示例 `ecosystem_examples::sum_of_pairs`
+- rayon：数据并行，示例 `ecosystem_examples::parallel_square_sum`
+- serde/serde_json：序列化与反序列化，示例 `ecosystem_examples::{user_to_json,user_from_json}`
+- anyhow/thiserror：人性化错误与定义自定义错误，示例 `ecosystem_examples::find_name`
 
 ## 🔧 技术特性
 
@@ -191,4 +206,4 @@ cargo check
 
 ---
 
-**Happy Rusting! 🦀**-
+-**Happy Rusting! 🦀**-

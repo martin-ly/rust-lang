@@ -11,6 +11,7 @@
 ### ✨ 新增Rust 1.89特性模块
 
 - **`rust_189_features`**: 异步trait、GATs、常量泛型等核心新特性
+- **`rust_189_enhanced_features`**: let_chains、cfg_boolean_literals、裸函数等增强特性
 - **`async_control_flow_189`**: 异步控制流增强、异步状态机、异步迭代器
 - **`performance_optimization_189`**: 零成本抽象增强、内存布局优化、编译时计算
 
@@ -21,6 +22,12 @@
 - **Async Trait 完全稳定化**: `async fn` 在trait中的完全支持
 - **异步闭包改进**: 更好的生命周期推断和错误诊断
 - **异步迭代器**: 原生异步迭代器支持，30%性能提升
+
+### 🔗 控制流增强
+
+- **let_chains 稳定化**: 在 if 和 while 条件中使用 && 操作符
+- **cfg_boolean_literals 稳定化**: 在条件编译中使用布尔字面量
+- **控制流优化**: 分支预测友好、无分支控制流
 
 ### 🧬 类型系统增强
 
@@ -33,6 +40,12 @@
 - **零成本抽象增强**: 更好的内联和优化
 - **内存布局优化**: 改进的结构体布局和打包
 - **编译时计算增强**: 更强大的const fn和编译时求值
+
+### 🛡️ 内存安全增强
+
+- **裸函数支持稳定化**: 完全控制函数汇编实现
+- **危险隐式引用警告**: 避免隐式指针引用风险
+- **无效空指针参数校验**: 增强内存安全性
 
 ## 📁 项目结构
 
@@ -105,6 +118,12 @@ c03_control_fn/
 
     # Rust 1.89综合特性演示（推荐）
     cargo run --example rust_189_comprehensive_demo
+
+    # Rust 1.89增强特性演示（新增）
+    cargo run --example rust_189_enhanced_features_demo
+
+    # 控制流与函数 1.89 综合示例（新增）
+    cargo run --example control_flow_functions_189
     ```
 
 3. **运行测试**

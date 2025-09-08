@@ -9,7 +9,8 @@
 
 ## 🚀 项目概述
 
-本项目完整实现了对标Rust 1.89版本的类型系统，包括核心特性、理论分析、性能测试和工程实践。项目采用多任务推进的方式，系统性地完成了以下四个核心任务：
+本项目完整实现了对标Rust 1.89版本的类型系统，包括核心特性、理论分析、性能测试和工程实践。
+项目采用多任务推进的方式，系统性地完成了以下四个核心任务：
 
 1. **完善类型系统核心模块实现** ✅
 2. **创建Rust 1.89新特性示例代码** ✅  
@@ -52,7 +53,49 @@ crates/c02_type_system/
 
 ## 🆕 Rust 1.89 核心特性
 
-### 1. 泛型关联类型 (GATs) 完全稳定
+### 1. 显式推断的常量泛型参数
+
+```rust
+// Rust 1.89 新特性：支持在常量泛型参数中使用 _
+pub fn all_false<const LEN: usize>() -> [bool; LEN] {
+    [false; _]  // 编译器会根据上下文推断LEN的值
+}
+
+// 编译时验证
+const fn validate_dimensions(rows: usize, cols: usize) -> bool {
+    rows > 0 && cols > 0 && rows * cols <= 1000
+}
+
+type ValidMatrix = Matrix<i32, { validate_dimensions(10, 10) as usize }>;
+```
+
+**特性说明**：
+
+- 支持在常量泛型参数中使用 `_` 进行推断
+- 编译器会根据上下文自动推断常量值
+- 提高代码的灵活性和简洁性
+
+### 2. 不匹配的生命周期语法警告
+
+```rust
+// Rust 1.89 新特性：mismatched_lifetime_syntaxes lint
+fn items(scores: &[u8]) -> std::slice::Iter<u8> {
+    scores.iter()  // 编译器会警告生命周期语法不一致
+}
+
+// 推荐的写法
+fn items<'a>(scores: &'a [u8]) -> std::slice::Iter<'a, u8> {
+    scores.iter()
+}
+```
+
+**特性说明**：
+
+- 新增 `mismatched_lifetime_syntaxes` lint
+- 提高代码的可读性和安全性
+- 强制显式生命周期标注
+
+### 3. 泛型关联类型 (GATs) 完全稳定
 
 ```rust
 trait AdvancedIterator {
@@ -70,7 +113,7 @@ trait AdvancedIterator {
 - 完全类型安全保证
 - 编译时优化
 
-### 2. 常量泛型高级用法
+### 4. 常量泛型高级用法
 
 ```rust
 struct Matrix<T, const ROWS: usize, const COLS: usize> {
@@ -92,7 +135,7 @@ impl<T: Default + Copy, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, CO
 - 类型级编程支持
 - 零运行时开销
 
-### 3. 类型别名实现特征 (TAIT)
+### 5. 类型别名实现特征 (TAIT)
 
 ```rust
 type AsyncProcessor = impl Future<Output = String> + Send;
@@ -111,7 +154,7 @@ async fn create_async_processor() -> AsyncProcessor {
 - 自动类型推断
 - 编译时优化
 
-### 4. 高级生命周期管理
+### 6. 高级生命周期管理
 
 ```rust
 struct LifetimeManager<'a, 'b, T> {

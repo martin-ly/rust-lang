@@ -71,6 +71,28 @@ cargo run --bin microservice-server -- volo
 cargo run --bin microservice-server -- config
 ```
 
+### 运行示例程序
+
+```bash
+# 运行简化的Axum示例
+cargo run --example simple_axum
+
+# 运行gRPC服务示例
+cargo run --example grpc_service
+
+# 运行gRPC客户端示例
+cargo run --example grpc_client_demo
+
+# 运行Volo RPC服务示例
+cargo run --example volo_rpc_service
+
+# 运行高级消息队列示例
+cargo run --example messaging_advanced_demo
+
+# 运行可观测性示例
+cargo run --example comprehensive_observability_demo
+```
+
 ### 使用配置文件
 
 ```bash
@@ -147,6 +169,46 @@ namespace = "default"
 enable_autoscaling = false
 ```
 
+## 🆕 最新功能
+
+### 增强的gRPC支持 ✅
+
+- 完整的Protocol Buffers定义
+- 自动代码生成（支持protoc编译器）
+- 类型安全的客户端和服务器
+- 健康检查支持
+- 智能编译器检测和安装脚本
+
+### 高级消息队列 ✅
+
+- 统一的消息抽象
+- 实际的消息队列连接（Redis、RabbitMQ）
+- 消息处理器模式
+- 事件驱动架构
+- 条件编译支持
+
+### 丰富的中间件功能 ✅
+
+- 请求ID追踪
+- 日志记录
+- 限流控制
+- 健康检查
+- 错误处理
+- CORS支持
+
+### 性能测试和基准测试 ✅
+
+- 全面的基准测试套件
+- 使用Criterion框架
+- 生成HTML格式的交互式报告
+- 性能优化建议
+
+### 改进的CLI工具
+
+- 支持多种服务类型启动
+- 统一的配置管理
+- 更好的错误处理
+
 ## 🔧 API示例
 
 ### Axum REST API
@@ -185,6 +247,27 @@ async fn main() -> Result<()> {
 }
 ```
 
+### gRPC客户端
+
+```rust
+use c13_microservice::grpc::GrpcClient;
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let mut client = GrpcClient::new("http://[::1]:50051").await?;
+    
+    // 创建用户
+    let user = client.create_user("张三".to_string(), "zhangsan@example.com".to_string()).await?;
+    println!("创建用户: {:?}", user);
+    
+    // 获取用户
+    let retrieved_user = client.get_user(user.id).await?;
+    println!("获取用户: {:?}", retrieved_user);
+    
+    Ok(())
+}
+```
+
 ### Volo RPC服务
 
 ```rust
@@ -199,6 +282,30 @@ async fn main() -> Result<()> {
     let config = Config::from_env()?;
     let microservice = VoloMicroservice::new(config);
     microservice.serve().await?;
+    Ok(())
+}
+```
+
+### 消息队列1
+
+```rust
+use c13_microservice::messaging::{Message, MessageQueueManager};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let mut mq_manager = MessageQueueManager::new();
+    
+    // 添加消息队列
+    mq_manager.add_redis("redis://localhost:6379".to_string());
+    mq_manager.add_rabbitmq("amqp://localhost:5672".to_string());
+    
+    // 连接所有队列
+    mq_manager.connect_all().await?;
+    
+    // 发布消息
+    let message = Message::new("user_events".to_string(), b"Hello World".to_vec());
+    mq_manager.publish_to_all(&message.topic, &message.payload).await?;
+    
     Ok(())
 }
 ```

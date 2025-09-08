@@ -13,6 +13,10 @@ path = "src/lib.rs"
 name = "type_system_example"
 path = "examples/type_system_example.rs"
 
+[[example]]
+name = "rust_189_features_demo"
+path = "examples/rust_189_features_demo.rs"
+
 [[bin]]
 name = "ts"
 path = "src/bin/main.rs"
