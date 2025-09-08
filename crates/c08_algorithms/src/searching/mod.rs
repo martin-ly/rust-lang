@@ -241,8 +241,8 @@ mod tests {
         let data = vec![1,2,3,4,5,6,7,8,9];
         assert_eq!(exponential_search_sync(&data, &7), Some(6));
         let peak_at = ternary_search_max(0.0, 6.28318, |x| (x - 3.14159).cos(), 60);
-        // 峰值位置应接近 0 或 2π（cos 最大在 0 处），这里区间包含 0
-        assert!(peak_at < 1.0 || peak_at > 5.0);
+        // cos(x - π) 的最大值位于 x≈π（或等价的 3π 等），区间 [0,2π] 内应接近 π
+        assert!((peak_at - 3.14159).abs() < 0.5);
     }
 
     #[test]

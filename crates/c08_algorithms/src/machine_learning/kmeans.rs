@@ -56,8 +56,7 @@ impl KMeans {
     }
     
     /// 找到最近的聚类中心
-    fn find_closest_center(&self, point: &DataPoint) -> usize {
-        let centers = self.centers.as_ref().unwrap();
+    fn find_closest_center_in<'a>(point: &DataPoint, centers: &'a [DataPoint]) -> usize {
         let mut min_distance = f64::INFINITY;
         let mut closest_center = 0;
         
@@ -136,7 +135,7 @@ impl UnsupervisedLearning for KMeans {
             
             // 分配每个点到最近的聚类中心
             for (i, point) in data.iter().enumerate() {
-                let closest_center = self.find_closest_center(point);
+                let closest_center = Self::find_closest_center_in(point, &centers);
                 clusters[closest_center].push(i);
             }
             
@@ -192,8 +191,9 @@ impl UnsupervisedLearning for KMeans {
         }
         
         let mut labels = Vec::with_capacity(data.len());
+        let centers = self.centers.as_ref().ok_or(MLError::ModelNotTrained)?;
         for point in data.iter() {
-            let cluster = self.find_closest_center(point);
+            let cluster = Self::find_closest_center_in(point, centers);
             labels.push(cluster as i32);
         }
         

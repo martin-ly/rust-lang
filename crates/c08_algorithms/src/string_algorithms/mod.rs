@@ -311,9 +311,19 @@ pub fn manacher_longest_palindrome(s: &str) -> (usize, usize) {
     let mut p = vec![0usize; n];
     let (mut center, mut right) = (0usize, 0usize);
     for i in 1..n - 1 {
-        let mirror = 2 * center - i;
+        let mirror = {
+            let m = (2 * center) as isize - (i as isize);
+            if m >= 0 { m as usize } else { 0 }
+        };
         if i < right { p[i] = p[mirror].min(right - i); }
-        while t[i + 1 + p[i]] == t[i - 1 - p[i]] { p[i] += 1; }
+        while {
+            let left_idx = i.checked_sub(1 + p[i]);
+            let right_idx = i + 1 + p[i];
+            match (left_idx, right_idx < n) {
+                (Some(l), true) => t[right_idx] == t[l],
+                _ => false,
+            }
+        } { p[i] += 1; }
         if i + p[i] > right { center = i; right = i + p[i]; }
     }
     let (mut max_len, mut center_idx) = (0usize, 0usize);
