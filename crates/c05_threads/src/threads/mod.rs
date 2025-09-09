@@ -2,3 +2,8 @@ pub mod creation;
 pub mod joining;
 pub mod thread_local;
 pub mod thread_pool;
+pub mod thread_affinity;
+pub mod priority_scheduling;
+pub mod resource_monitoring;
+pub mod thread_management;
+pub mod os_thread_features;

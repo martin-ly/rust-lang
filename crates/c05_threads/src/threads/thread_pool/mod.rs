@@ -1,9 +1,10 @@
 //! 线程池模块
 //! 
 //! 本模块提供线程池的基本实现，包括：
-//! - 简单线程池
-//! - 可配置线程池
-//! - 线程池性能测试
+//! 1) 简单线程池
+//! 2) 可配置线程池
+//! 3) 线程池性能测试
+//! 4) 任务结果返回（补充）
 
 use std::sync::{Arc, Mutex};
 use std::sync::mpsc::{channel, Sender, Receiver};
@@ -43,6 +44,30 @@ impl SimpleThreadPool {
     {
         if let Some(sender) = self.sender.as_ref() {
             sender.send(Box::new(f)).unwrap();
+        }
+    }
+
+    /// 执行带返回值的任务（4）：返回一个接收端用于获取结果
+    pub fn execute_with_result<F, R>(&self, f: F) -> Receiver<R>
+    where
+        F: FnOnce() -> R + Send + 'static,
+        R: Send + 'static,
+    {
+        let (tx, rx) = channel();
+        self.execute(move || {
+            let _ = tx.send(f());
+        });
+        rx
+    }
+
+    /// 尝试执行任务（发送失败时返回 false）
+    pub fn try_execute<F>(&self, f: F) -> bool
+    where
+        F: FnOnce() + Send + 'static,
+    {
+        match self.sender.as_ref() {
+            Some(sender) => sender.send(Box::new(f)).is_ok(),
+            None => false,
         }
     }
 }
@@ -98,6 +123,7 @@ impl Worker {
 pub struct ConfigurableThreadPool {
     workers: Vec<ConfigurableWorker>,
     sender: Option<Sender<Box<dyn FnOnce() + Send + 'static>>>,
+    receiver: Arc<Mutex<Receiver<Box<dyn FnOnce() + Send + 'static>>>>,
     config: ThreadPoolConfig,
 }
 
@@ -140,6 +166,7 @@ impl ConfigurableThreadPool {
         Self {
             workers,
             sender: Some(sender),
+            receiver,
             config,
         }
     }
@@ -150,11 +177,57 @@ impl ConfigurableThreadPool {
         F: FnOnce() + Send + 'static,
     {
         if let Some(sender) = self.sender.as_ref() {
-            // 如果队列满了，可以考虑动态增加线程
-            if let Err(_) = sender.send(Box::new(f)) {
-                eprintln!("任务队列已满，无法执行新任务");
-            }
+            // 若未来改为有界队列，可在此触发动态扩容
+            let _ = sender.send(Box::new(f));
         }
+    }
+
+    /// 尝试执行任务（队列关闭或满时返回 false）
+    pub fn try_execute<F>(&self, f: F) -> bool
+    where
+        F: FnOnce() + Send + 'static,
+    {
+        match self.sender.as_ref() {
+            Some(sender) => sender.send(Box::new(f)).is_ok(),
+            None => false,
+        }
+    }
+
+    /// 主动关闭线程池，停止接收新任务并让工作线程优雅退出
+    pub fn shutdown(&mut self) {
+        self.sender.take();
+    }
+
+    /// 动态扩容一次（在不超过 max_threads 时新增一个临时工作线程）
+    pub fn scale_up_once(&mut self) -> bool {
+        if self.workers.len() >= self.config.max_threads { return false; }
+        let id = self.workers.len();
+        let worker = ConfigurableWorker::new(id, Arc::clone(&self.receiver), self.config.keep_alive_time);
+        self.workers.push(worker);
+        true
+    }
+
+    /// 执行带返回值的任务，带超时；超时返回 None
+    pub fn execute_with_timeout<F, R>(&self, f: F, timeout: Duration) -> Option<R>
+    where
+        F: FnOnce() -> R + Send + 'static,
+        R: Send + 'static,
+    {
+        let rx = self.execute_with_result(f);
+        rx.recv_timeout(timeout).ok()
+    }
+
+    /// 执行带返回值的任务（4）：返回一个接收端用于获取结果
+    pub fn execute_with_result<F, R>(&self, f: F) -> Receiver<R>
+    where
+        F: FnOnce() -> R + Send + 'static,
+        R: Send + 'static,
+    {
+        let (tx, rx) = channel();
+        self.execute(move || {
+            let _ = tx.send(f());
+        });
+        rx
     }
     
     /// 获取当前线程数
@@ -295,5 +368,27 @@ mod tests {
     #[test]
     fn test_thread_pool_benchmark() {
         benchmark_thread_pools();
+    }
+
+    #[test]
+    fn test_configurable_try_execute_and_shutdown() {
+        let mut pool = ConfigurableThreadPool::new(ThreadPoolConfig::default());
+        assert!(pool.try_execute(|| {}));
+        pool.shutdown();
+        assert!(!pool.try_execute(|| {}));
+    }
+
+    #[test]
+    fn test_simple_pool_execute_with_result() {
+        let pool = SimpleThreadPool::new(2);
+        let rx = pool.execute_with_result(|| 7 * 6);
+        assert_eq!(rx.recv().unwrap(), 42);
+    }
+
+    #[test]
+    fn test_configurable_pool_execute_with_result() {
+        let pool = ConfigurableThreadPool::new(ThreadPoolConfig::default());
+        let rx = pool.execute_with_result(|| "ok".to_string());
+        assert_eq!(rx.recv().unwrap(), "ok");
     }
 }

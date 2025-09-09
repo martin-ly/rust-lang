@@ -7,6 +7,10 @@ resolver = "3"
 [dependencies]
 crossbeam = ">=0.8.1"
 crossbeam-channel = "0.5.15"
+crossbeam-queue = "0.3"
+crossbeam-utils = "0.8"
+crossbeam-epoch = "0.9"
+crossbeam-deque = "0.8"
 rayon = ">=1.10"
 parking_lot = "0.12"
 dashmap = "5.5"
@@ -27,6 +31,9 @@ tokio = ["tokio/full"]
 async-std = ["dep:async-std"]
 windows = ["windows/Win32_System_Threading"]
 unstable = []
+# added to satisfy cfg(feature = ...) usage in code
+custom_ring_buffers = []
+work_stealing_examples = []
 
 [lib]
 name = "c05_threads"
@@ -35,3 +42,14 @@ path = "src/lib.rs"
 [[bin]]
 name = "c05_threads"
 path = "src/bin/main.rs"
+
+[dev-dependencies]
+criterion = "0.5"
+
+[[bench]]
+name = "priority_channels_bench"
+harness = false
+
+[[bench]]
+name = "backpressure_bench"
+harness = false

@@ -1,10 +1,11 @@
 //! 线程创建模块
 //! 
 //! 本模块演示Rust中线程的创建方法，包括：
-//! - 基本线程创建
-//! - 线程命名
-//! - 线程栈大小设置
-//! - 线程创建最佳实践
+//! 1) 基本线程创建
+//! 2) 线程命名
+//! 3) 线程栈大小设置
+//! 4) 线程创建最佳实践
+//! 5) 线程错误处理与结果传递（补充）
 
 use std::thread;
 use std::time::Duration;
@@ -134,6 +135,23 @@ pub fn thread_best_practices() {
     println!("  数据处理结果: {}", sum);
 }
 
+/// 线程错误处理与结果传递（5）
+/// - 在线程中使用 Result 进行显式错误返回
+/// - 主线程 join 后匹配错误并处理
+pub fn thread_error_handling_example() {
+    println!("🔧 线程错误处理与结果传递示例");
+    let handle = thread::spawn(|| -> Result<i32, &'static str> {
+        // 模拟业务：可能失败
+        let ok = true;
+        if ok { Ok(100) } else { Err("业务失败") }
+    });
+    match handle.join() {
+        Ok(Ok(v)) => println!("  成功: {}", v),
+        Ok(Err(e)) => println!("  线程返回错误: {}", e),
+        Err(_) => println!("  线程发生 panic"),
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -166,5 +184,10 @@ mod tests {
     #[test]
     fn test_thread_best_practices() {
         thread_best_practices();
+    }
+
+    #[test]
+    fn test_thread_error_handling_example() {
+        thread_error_handling_example();
     }
 }

@@ -7,3 +7,8 @@ pub mod rw_lock;
 pub mod semaphore;
 pub mod shared_state;
 pub mod spinlock;
+pub mod adaptive_locks;
+pub mod priority_inheritance;
+pub mod os_specific;
+pub mod performance_monitoring;
+pub mod lockfree_barrier;
