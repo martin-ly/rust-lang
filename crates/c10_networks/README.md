@@ -29,6 +29,77 @@ C10 Networks 是一个基于 Rust 1.89 的现代网络编程库，提供了完�
 c10_networks = "0.1.0"
 ```
 
+## 📡 抓包与流量分析（libpnet 实战）
+
+本库内置基于 `libpnet` 的抓包与流量分析能力：
+
+- **ARP 解析**: 捕获并解析 ARP 数据包，提取 MAC 与 IP 映射
+- **TCP 流量监控**: 统计接口上的 TCP 包与字节数，支持周期性快照
+- **自定义 UDP 协议**: 简单编解码与回显服务，便于演示与集成
+- **异步优化**: 通过 Tokio + mpsc 构建抓包流水线（spawn_blocking 驱动 pnet）
+
+### Windows 运行前置
+
+- 安装 Npcap（管理员、启用 WinPcap 兼容）：`https://npcap.com`
+- 安装 CMake：`winget install Kitware.CMake` 或 `choco install cmake -y`
+- 安装 VS Build Tools（含 C++）：`winget install Microsoft.VisualStudio.2022.BuildTools`
+- 如需：`choco install nasm -y`
+- 取消或避免 `AWS_LC_SYS_NO_ASM=1` 的影响；重开终端
+
+一键准备（管理员 PowerShell）：
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force
+./crates/c10_networks/scripts/setup_windows_env.ps1 -WithNpcap -InstallNasm
+```
+
+### 构建与示例
+
+```powershell
+cargo build -p c10_networks --examples
+
+# ARP 抓包（需管理员）
+cargo run -p c10_networks --example arp_sniff -- "Ethernet"
+
+# TCP 监控 5 秒（需管理员）
+cargo run -p c10_networks --example tcp_monitor -- "Ethernet" 5
+
+# 自定义 UDP 协议
+# 终端1
+cargo run -p c10_networks --example udp_custom_server -- 127.0.0.1:9000
+# 终端2
+cargo run -p c10_networks --example udp_custom_demo -- 127.0.0.1:9000
+```
+
+启用 offline 特性读取 PCAP（需自备 `capture.pcap`）：
+
+```powershell
+cargo run -p c10_networks --features offline --example pcap_offline -- capture.pcap
+```
+
+启用 pcap_live 实时过滤抓包（需管理员）：
+
+```powershell
+cargo run -p c10_networks --features pcap_live --example pcap_live_tcp -- "Ethernet" "tcp port 80"
+```
+
+### 编程接口（精简）
+
+```rust
+use c10_networks::sniff::{
+  ArpSniffConfig, arp_stream, monitor_tcp_once, tcp_stats_stream,
+  UdpCustomMessage, udp_custom_roundtrip,
+};
+```
+
+- ARP（同步）：`ArpSniffer::sniff_arp_sync(cfg, Some(n)) -> Vec<ArpRecord>`
+- ARP（异步）：`arp_stream(cfg, size) -> mpsc::Receiver<ArpRecord>`
+- TCP 一次性统计：`monitor_tcp_once(iface, secs) -> TcpTrafficReport`
+- TCP 周期统计：`tcp_stats_stream(iface, interval, size) -> mpsc::Receiver<TcpStatsSnapshot>`
+- UDP 协议：`UdpCustomMessage::encode/decode`、`udp_custom_roundtrip(addr, &msg)`、`udp_custom_server(bind)`
+
+更多细节参见 `docs/libpnet_guide.md`。
+
 ## 🎯 快速开始
 
 ### HTTP 客户端示例

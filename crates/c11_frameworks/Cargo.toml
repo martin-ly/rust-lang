@@ -17,12 +17,16 @@ anyhow = "1.0"
 
 # 工作区内网络模块
 c10_networks = { path = "../c10_networks" }
-hyper = { version = "0.14", features = ["server", "http1", "http2"] }
-tokio-stream = "0.1"
+hyper = { version = "1", features = ["server", "http1", "http2"] }
+tokio-stream = { version = "0.1", features = ["net"] }
 async-stream = "0.3"
-tokio-rustls = "0.24"
-rustls = "0.21"
+tokio-rustls = "0.26"
+rustls = { version = "0.23", default-features = false, features = ["ring"] }
 rustls-pemfile = "2.1"
+rcgen = "0.12"
+hyper-util = { version = "0.1", features = ["server", "tokio"] }
+http-body-util = "0.1"
+bytes = "1"
 
 # 异步运行时
 tokio = { version = "1.44", features = ["full"] }

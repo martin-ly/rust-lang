@@ -28,13 +28,16 @@ pub mod unified_api;
 #[path = "diagnostics.rs"]
 pub mod diagnostics;
 pub mod security;
+#[cfg(any(feature = "sniff", feature = "offline", feature = "pcap_live"))]
+pub mod sniff;
 
 // 重新导出常用类型
 pub use error::{NetworkError, NetworkResult, ProtocolError, PerformanceError, SecurityError};
 pub use unified_api::NetClient;
 pub use security::acme::AcmeManager;
-pub use security::tls_reload::TlsReloader;
 pub use security::acme::Http01MemoryStore;
+#[cfg(feature = "tls")]
+pub use security::tls_reload::TlsReloader;
 
 /// 库版本信息
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");

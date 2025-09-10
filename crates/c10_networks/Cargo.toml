@@ -14,6 +14,15 @@ async-std = "1.12"
 bytes = { version = "1.0", features = ["serde"] }
 mio = "0.8"
 
+# 抓包与报文解析（libpnet）
+pnet = { version = "0.34", optional = true }
+pnet_packet = { version = "0.34", optional = true }
+pnet_datalink = { version = "0.34", optional = true }
+pnet_transport = { version = "0.34", optional = true }
+
+# 可选：离线 PCAP 支持
+pcap = { version = "2", optional = true }
+
 # 协议解析
 nom = "7.0"
 httparse = "1.8"
@@ -33,9 +42,9 @@ tracing-subscriber = "0.3"
 
 # 加密和安全
 ring = "0.17"
-rustls = "0.21"
-tokio-rustls = "0.24"
-rustls-pemfile = "2.1"
+rustls = { version = "0.23", default-features = false, features = ["ring"], optional = true }
+tokio-rustls = { version = "0.26", optional = true }
+rustls-pemfile = { version = "2", optional = true }
 
 # 测试和基准测试
 criterion = { version = "0.5", features = ["html_reports"] }
@@ -101,6 +110,26 @@ name = "udp_echo"
 path = "examples/udp_echo.rs"
 
 [[example]]
+name = "arp_sniff"
+path = "examples/arp_sniff.rs"
+
+[[example]]
+name = "tcp_monitor"
+path = "examples/tcp_monitor.rs"
+
+[[example]]
+name = "udp_custom_demo"
+path = "examples/udp_custom_demo.rs"
+
+[[example]]
+name = "pcap_offline"
+path = "examples/pcap_offline.rs"
+
+[[example]]
+name = "pcap_live_tcp"
+path = "examples/pcap_live_tcp.rs"
+
+[[example]]
 name = "dns_lookup"
 path = "examples/dns_lookup.rs"
 
@@ -144,6 +173,14 @@ harness = false
 [lib]
 name = "c10_networks"
 path = "src/lib.rs"
+
+[features]
+default = ["base"]
+base = []
+sniff = ["pnet", "pnet_packet", "pnet_datalink", "pnet_transport"]
+offline = ["pcap", "pnet_packet"]
+pcap_live = ["pcap", "pnet_packet"]
+tls = ["rustls", "tokio-rustls", "rustls-pemfile"]
 
 [[bin]]
 name = "c10_networks"

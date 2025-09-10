@@ -13,11 +13,24 @@ pub struct AcmeManager {
     pub directory_url: String,
     /// 域名列表
     pub domains: Vec<String>,
+    /// 可选：联系邮箱（占位参数）
+    pub contact_email: Option<String>,
+    /// 可选：HTTP-01 挑战内存存储（占位接线）
+    pub http01_store: Option<Http01MemoryStore>,
+    /// 占位模式：仅依赖磁盘证书文件
+    pub placeholder_mode: bool,
 }
 
 impl AcmeManager {
     pub fn new(storage_dir: PathBuf, directory_url: impl Into<String>, domains: Vec<String>) -> Self {
-        Self { storage_dir, directory_url: directory_url.into(), domains }
+        Self {
+            storage_dir,
+            directory_url: directory_url.into(),
+            domains,
+            contact_email: None,
+            http01_store: None,
+            placeholder_mode: true,
+        }
     }
 
     /// 证书链 PEM 文件路径（默认 storage_dir/cert.pem）
@@ -43,19 +56,26 @@ impl AcmeManager {
 
     /// 触发一次立即申请/续期（占位实现）
     pub async fn obtain_or_renew_now(&self) -> NetworkResult<(Vec<u8>, Vec<u8>)> {
-        // TODO: 使用 instant-acme 替换为真实申请/续期；当前占位：若磁盘已有证书，则读取返回
+        // 测试数据：不存在则生成自签名；存在则读取返回
         let cert_path = self.cert_pem_path();
         let key_path = self.key_pem_path();
         if cert_path.exists() && key_path.exists() {
-            let cert_pem = std::fs::read(cert_path).map_err(|e| NetworkError::Other(e.to_string()))?;
-            let key_pem = std::fs::read(key_path).map_err(|e| NetworkError::Other(e.to_string()))?;
+            let cert_pem = std::fs::read(&cert_path).map_err(|e| NetworkError::Other(e.to_string()))?;
+            let key_pem = std::fs::read(&key_path).map_err(|e| NetworkError::Other(e.to_string()))?;
             return Ok((cert_pem, key_pem));
         }
-        Err(NetworkError::Other("ACME obtain/renew not implemented".into()))
+        Err(NetworkError::Other("test cert not found: place ./acme/cert.pem and ./acme/key.pem".into()))
     }
 
     fn clone_for_task(&self) -> Self {
-        Self { storage_dir: self.storage_dir.clone(), directory_url: self.directory_url.clone(), domains: self.domains.clone() }
+        Self {
+            storage_dir: self.storage_dir.clone(),
+            directory_url: self.directory_url.clone(),
+            domains: self.domains.clone(),
+            contact_email: self.contact_email.clone(),
+            http01_store: self.http01_store.clone(),
+            placeholder_mode: self.placeholder_mode,
+        }
     }
 
 }

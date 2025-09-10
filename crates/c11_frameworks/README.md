@@ -71,6 +71,14 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # 构建项目
 cargo build
+
+## ⚠️ TLS 后端与 PEM 解析说明
+
+- 本仓库统一使用 `rustls = { version = "0.23", default-features = false, features = ["ring"] }`，避免在 Windows 上引入 `aws-lc-sys` 的 CMake 依赖。
+- PEM 解析采用 `rustls-pemfile`，示例中兼容多版本变体：
+  - 私钥匹配 `Pkcs8Key | PKCS8Key | Pkcs1Key | RSAKey | Sec1Key | ECKey`，并映射到 `rustls::pki_types::{PrivatePkcs8KeyDer, PrivatePkcs1KeyDer, PrivateSec1KeyDer}`。
+  - 证书匹配 `X509Certificate` 并转换为 `CertificateDer`。
+- 若需启用其它加密提供者，请在 `Cargo.toml` 中调整 `rustls` 的 feature，并确保本机具备其构建依赖（如 CMake）。
 ```
 
 ### 运行示例
