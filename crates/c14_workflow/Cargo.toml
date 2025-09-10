@@ -35,7 +35,7 @@ chrono = { version = "0.4", features = ["serde", "clock"] }
 indexmap = { version = "2.0", features = ["serde"] }
 
 # 网络和通信 / Network and Communication
-reqwest = { version = "0.11", features = ["json", "stream"] }
+reqwest = { workspace = true, features = ["json", "stream"] }
 tower = "0.4"
 tower-http = { version = "0.5", features = ["cors", "trace"] }
 
@@ -47,7 +47,7 @@ redis = { version = "0.24", features = ["tokio-comp", "connection-manager"], opt
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
 metrics = "0.22"
-metrics-exporter-prometheus = "0.13"
+metrics-exporter-prometheus = "0.17"
 
 # 配置管理 / Configuration Management
 config = "0.14"

@@ -12,31 +12,31 @@ categories = ["web-programming", "asynchronous"]
 
 [dependencies]
 # 错误处理
-thiserror = "2.0"
-anyhow = "1.0"
+thiserror = { workspace = true }
+anyhow = { workspace = true }
 
 # 工作区内网络模块
-c10_networks = { path = "../c10_networks" }
-hyper = { version = "1", features = ["server", "http1", "http2"] }
-tokio-stream = { version = "0.1", features = ["net"] }
+c10_networks = { path = "../c10_networks", features = ["tls"] }
+hyper = { workspace = true }
+tokio-stream = { workspace = true }
 async-stream = "0.3"
-tokio-rustls = "0.26"
-rustls = { version = "0.23", default-features = false, features = ["ring"] }
-rustls-pemfile = "2.1"
+tokio-rustls = { workspace = true }
+rustls = { workspace = true }
+rustls-pemfile = { workspace = true }
 rcgen = "0.12"
-hyper-util = { version = "0.1", features = ["server", "tokio"] }
+hyper-util = { workspace = true }
 http-body-util = "0.1"
-bytes = "1"
+bytes = { workspace = true }
 
 # 异步运行时
-tokio = { version = "1.44", features = ["full"] }
+tokio = { workspace = true }
 async-std = { version = "1.12", optional = true }
 
 # Web框架
-actix-web = { version = "4.4", optional = true }
-axum = { version = "0.7", optional = true }
+actix-web = { version = "4.11", optional = true }
+axum = { workspace = true, optional = true }
 rocket = { version = "0.5", optional = true }
-warp = { version = "0.3", optional = true }
+warp = { version = "0.4", optional = true }
 
 # 数据库与ORM
 diesel = { version = "2.2", features = ["postgres"], optional = true }
@@ -45,8 +45,8 @@ sea-orm = { version = "0.12", optional = true, default-features = false, feature
 dotenvy = "0.15"
 
 # 序列化
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
+serde = { workspace = true }
+serde_json = { workspace = true }
 bincode = { version = "1.3", optional = true }
 rmp-serde = { version = "1.1", optional = true }
 
@@ -70,9 +70,9 @@ tracing-subscriber = { version = "0.3", optional = true }
 env_logger = { version = "0.11", optional = true }
 
 # 其他工具
-uuid = { version = "1.8", features = ["v4", "serde"] }
-chrono = { version = "0.4", features = ["serde"] }
-reqwest = { version = "0.12", features = ["json"], optional = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+reqwest = { workspace = true, optional = true }
 
 # 安全相关
 jsonwebtoken = { version = "9.3", optional = true }

@@ -65,13 +65,13 @@ instant-acme = "0.7"
 tokio-tungstenite = { version = "0.21", features = ["rustls-tls-webpki-roots"] }
 tungstenite = "0.21"
 
-# Protobuf / gRPC（对齐 tonic 0.11 → prost 0.12）
-prost = "0.12"
-tonic = { version = "0.11", features = ["transport"] }
+# Protobuf / gRPC（使用工作区统一版本）
+prost = { workspace = true }
+tonic = { workspace = true, features = ["transport"] }
 
 [build-dependencies]
-prost-build = "0.12"
-tonic-build = "0.11"
+prost-build = { workspace = true }
+tonic-build = { workspace = true }
 protoc-bin-vendored = "3"
 
 [dev-dependencies]
@@ -124,10 +124,12 @@ path = "examples/udp_custom_demo.rs"
 [[example]]
 name = "pcap_offline"
 path = "examples/pcap_offline.rs"
+required-features = ["offline"]
 
 [[example]]
 name = "pcap_live_tcp"
 path = "examples/pcap_live_tcp.rs"
+required-features = ["pcap_live"]
 
 [[example]]
 name = "dns_lookup"

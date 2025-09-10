@@ -23,25 +23,25 @@ standalone = ["with-redis", "with-rabbitmq", "with-sqlx", "with-diesel"]
 
 [dependencies]
 # 异步运行时
-tokio = { version = "1.44", features = ["full"] }
-tokio-util = "0.7"
-futures = "0.3"
+tokio = { workspace = true }
+tokio-util = { workspace = true }
+futures = { workspace = true }
 
 # Web框架
-axum = { version = "0.7", features = ["macros", "multipart", "tracing"] }
-actix-web = { version = "4.4", features = ["macros"] }
-warp = "0.3"
+axum = { workspace = true }
+actix-web = { version = "4.11", features = ["macros"] }
+warp = "0.4"
 tide = "0.16"
 
 # gRPC框架
-tonic = { version = "0.12", features = ["tls", "tls-roots", "prost"] }
-prost = "0.13"
-prost-types = "0.13"
+tonic = { workspace = true }
+prost = { workspace = true }
+prost-types = { workspace = true }
 
 # 序列化
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-serde_yaml = "0.9"
+serde = { workspace = true }
+serde_json = { workspace = true }
+serde_yaml = { workspace = true }
 toml = "0.8"
 
 # 数据库（可选，standalone 特性启用）
@@ -53,10 +53,10 @@ config = "0.14"
 dotenvy = "0.15"
 
 # 日志和追踪
-tracing = "0.1"
-tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
 # OpenTelemetry 相关按需启用，避免依赖膨胀
-log = "0.4"
+log = { workspace = true }
 slog = "2.7"
 slog-stdlog = "4.1"
 slog-scope = "4.4"
@@ -64,7 +64,7 @@ slog-scope = "4.4"
 # 监控和指标
 prometheus = "0.13"
 metrics = "0.22"
-metrics-exporter-prometheus = "0.13"
+metrics-exporter-prometheus = "0.17"
 
 # 消息队列（可选，standalone/with-redis/with-rabbitmq 启用）
 redis = { version = "0.25.4", features = ["tokio-comp", "connection-manager"], optional = true }
@@ -72,28 +72,28 @@ lapin = { version = "2.0", optional = true }
 
 # 认证和授权
 jsonwebtoken = "9.3"
-oauth2 = "4.4"
+oauth2 = "5.0"
 argon2 = "0.5"
-uuid = { version = "1.10", features = ["v4", "serde"] }
+uuid = { workspace = true }
 
 # HTTP客户端
-reqwest = { version = "0.12", features = ["json", "rustls-tls"] }
-hyper = { version = "1.0", features = ["full"] }
+reqwest = { workspace = true }
+hyper = { workspace = true }
 
 # Tower中间件支持
-tower = "0.4"
-tower-http = { version = "0.5", features = ["cors", "trace", "timeout", "compression-gzip", "limit"] }
+tower = { workspace = true }
+tower-http = { workspace = true }
 
 # 时间处理
-chrono = { version = "0.4", features = ["serde"] }
-time = { version = "0.3", features = ["serde", "macros"] }
+chrono = { workspace = true }
+time = { workspace = true }
 
 # 压缩支持
 flate2 = "1.0"
 
 # 错误处理
-anyhow = "1.0"
-thiserror = "1.0"
+anyhow = { workspace = true }
+thiserror = { workspace = true }
 eyre = "0.6"
 
 # CLI
@@ -108,7 +108,7 @@ env_logger = "0.11"
 pretty_env_logger = "0.5"
 
 [build-dependencies]
-tonic-build = "0.12"
+tonic-build = { workspace = true }
 
 [dev-dependencies]
 tokio-test = "0.4"

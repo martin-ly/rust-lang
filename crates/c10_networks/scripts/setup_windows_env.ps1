@@ -1,14 +1,14 @@
 #requires -RunAsAdministrator
 param(
-    [switch]$WithNpcap = $true,
-    [switch]$InstallNasm = $false,
-    [switch]$WithNpcapSdk = $true,
+    [switch]$WithNpcap,
+    [switch]$InstallNasm,
+    [switch]$WithNpcapSdk,
     [string]$NpcapSdkUrl = "https://npcap.com/dist/npcap-sdk-1.13.zip"
 )
 
 Write-Host "[c10] Windows 环境准备: CMake / VS Build Tools / Npcap / NASM (可选)" -ForegroundColor Cyan
 
-function Ensure-Winget {
+function Test-Winget {
     if (!(Get-Command winget -ErrorAction SilentlyContinue)) {
         Write-Error "未检测到 winget，请更新到 Windows 11 或安装 App Installer 后重试。"
         exit 1
@@ -35,7 +35,7 @@ function Install-ChocoIfMissing {
     }
 }
 
-Ensure-Winget
+Test-Winget
 
 # 1) CMake
 Install-IfMissing -id "Kitware.CMake" -name "CMake"
@@ -44,7 +44,7 @@ Install-IfMissing -id "Kitware.CMake" -name "CMake"
 Install-IfMissing -id "Microsoft.VisualStudio.2022.BuildTools" -name "VS Build Tools 2022"
 
 # 3) Npcap（可交互/静默），使用官方安装器
-if ($WithNpcap) {
+if ($WithNpcap -or (-not $PSBoundParameters.ContainsKey('WithNpcap'))) {
     $npcapUrl = "https://npcap.com/dist/npcap-1.79.exe"
     $tmp = Join-Path $env:TEMP "npcap.exe"
     if (!(Test-Path $tmp)) {
@@ -62,7 +62,7 @@ if ($InstallNasm) {
 }
 
 # 5) Npcap SDK（用于链接 Packet.lib/wpcap.lib）
-if ($WithNpcapSdk) {
+if ($WithNpcapSdk -or (-not $PSBoundParameters.ContainsKey('WithNpcapSdk'))) {
     try {
         $sdkRoot = Join-Path ${env:ProgramFiles} "Npcap-SDK"
         if (!(Test-Path $sdkRoot)) {

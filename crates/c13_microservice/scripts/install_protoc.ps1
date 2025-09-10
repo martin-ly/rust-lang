@@ -8,7 +8,7 @@ if (!(Get-Command choco -ErrorAction SilentlyContinue)) {
     Write-Host "正在安装Chocolatey包管理器..." -ForegroundColor Yellow
     Set-ExecutionPolicy Bypass -Scope Process -Force
     [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-    iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 }
 
 # 安装protoc
