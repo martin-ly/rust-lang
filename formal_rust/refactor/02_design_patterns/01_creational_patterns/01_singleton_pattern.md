@@ -462,8 +462,3 @@ $$\text{SingletonFactory} = \text{Singleton} \circ \text{Factory}$$
 ---
 
 > 本文档持续更新，欢迎补充单例模式理论与工程案例。
-
-
-"
-
----
