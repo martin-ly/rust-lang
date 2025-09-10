@@ -1,6 +1,9 @@
 use crate::error::{NetworkError, NetworkResult};
 use crate::diagnostics::NetDiagnostics;
 use bytes::Bytes;
+use std::net::IpAddr;
+use std::sync::{Arc, OnceLock};
+use std::time::Duration;
 
 /// 统一的网络客户端入口，封装常见操作（示例级）
 #[derive(Clone, Default)]
@@ -8,6 +11,106 @@ pub struct NetClient;
 
 impl NetClient {
     pub fn new() -> Self { Self }
+
+    /// 选择 DNS 解析器：
+    /// - 默认：系统解析器
+    /// - 通过环境变量 C10_DNS_BACKEND 可选：system|cloudflare_doh|cloudflare_dot|google_doh|google_dot|quad9_doh|quad9_dot
+    async fn select_dns_resolver(&self) -> NetworkResult<crate::protocol::dns::DnsResolver> {
+        use crate::protocol::dns::{DnsResolver, presets};
+        let backend = std::env::var("C10_DNS_BACKEND").unwrap_or_else(|_| "system".to_string());
+        match backend.as_str() {
+            "system" => DnsResolver::from_system().await,
+            "cloudflare_doh" => {
+                let (cfg, opts) = presets::cloudflare_doh();
+                DnsResolver::from_config(cfg, opts).await
+            }
+            "cloudflare_dot" => {
+                let (cfg, opts) = presets::cloudflare_dot();
+                DnsResolver::from_config(cfg, opts).await
+            }
+            "google_doh" => {
+                let (cfg, opts) = presets::google_doh();
+                DnsResolver::from_config(cfg, opts).await
+            }
+            "google_dot" => {
+                let (cfg, opts) = presets::google_dot();
+                DnsResolver::from_config(cfg, opts).await
+            }
+            "quad9_doh" => {
+                let (cfg, opts) = presets::quad9_doh();
+                DnsResolver::from_config(cfg, opts).await
+            }
+            "quad9_dot" => {
+                let (cfg, opts) = presets::quad9_dot();
+                DnsResolver::from_config(cfg, opts).await
+            }
+            _ => DnsResolver::from_system().await,
+        }
+    }
+
+    /// DNS: 查询 A/AAAA
+    pub async fn dns_lookup_ips(&self, host: &str) -> NetworkResult<Vec<IpAddr>> {
+        static CACHE: OnceLock<Arc<crate::performance::cache::Cache<String, Vec<IpAddr>>>> = OnceLock::new();
+        let cache = CACHE.get_or_init(|| {
+            let max = std::env::var("C10_DNS_CACHE_SIZE").ok().and_then(|s| s.parse().ok()).unwrap_or(512);
+            let ttl_ms = std::env::var("C10_DNS_CACHE_TTL_MS").ok().and_then(|s| s.parse().ok()).unwrap_or(60_000);
+            Arc::new(crate::performance::cache::Cache::new(max).with_ttl(Duration::from_millis(ttl_ms)))
+        }).clone();
+        if let Some(v) = cache.get(&host.to_string()) { return Ok(v); }
+        // 多级回退：当前选择的解析器 -> Cloudflare DoH -> Google DoH
+        use crate::protocol::dns::{presets, DnsResolver};
+        let mut last_err = None;
+
+        // 1) 当前解析器
+        if let Ok(res) = self.select_dns_resolver().await {
+            match res.lookup_ips(host).await {
+                Ok(ips) if !ips.is_empty() => {
+                    cache.insert(host.to_string(), ips.clone());
+                    return Ok(ips);
+                }
+                Err(e) => last_err = Some(e),
+                _ => {}
+            }
+        }
+
+        // 2) Cloudflare DoH
+        {
+            let (cfg, opts) = presets::cloudflare_doh();
+            if let Ok(res) = DnsResolver::from_config(cfg, opts).await {
+                match res.lookup_ips(host).await {
+                    Ok(ips) if !ips.is_empty() => {
+                        cache.insert(host.to_string(), ips.clone());
+                        return Ok(ips);
+                    }
+                    Err(e) => last_err = Some(e),
+                    _ => {}
+                }
+            }
+        }
+
+        // 3) Google DoH
+        {
+            let (cfg, opts) = presets::google_doh();
+            if let Ok(res) = DnsResolver::from_config(cfg, opts).await {
+                match res.lookup_ips(host).await {
+                    Ok(ips) if !ips.is_empty() => {
+                        cache.insert(host.to_string(), ips.clone());
+                        return Ok(ips);
+                    }
+                    Err(e) => last_err = Some(e),
+                    _ => {}
+                }
+            }
+        }
+
+        Err(last_err.unwrap_or(crate::error::NetworkError::Other("dns failed".into())))
+    }
+
+    /// DNS: 逆向解析 PTR
+    pub async fn dns_reverse(&self, ip: IpAddr) -> NetworkResult<Vec<String>> {
+        let r = self.select_dns_resolver().await?;
+        r.reverse_lookup(ip).await
+    }
 
     /// WebSocket 发送文本并等待一条回显（示例）
     pub async fn ws_echo(&self, url: &str, text: &str) -> NetworkResult<String> {

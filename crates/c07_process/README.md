@@ -182,10 +182,28 @@ cargo test
 # 运行集成测试
 cargo test --test integration_tests
 
-# 运行示例程序
+# 运行示例程序（跨平台）
+# Windows PowerShell
 cargo run --bin process_demo
-cargo run --bin ipc_demo
+cargo run --bin process_pool_demo
 cargo run --bin sync_demo
+cargo run --bin timeout_demo
+cargo run --bin stdio_demo
+cargo run --bin supervisor_demo
+cargo run --bin group_demo
+cargo run --features async --bin async_stdio_demo
+cargo run --bin group_control_demo
+
+# Linux/macOS
+cargo run --bin process_demo
+cargo run --bin process_pool_demo
+cargo run --bin sync_demo
+cargo run --bin timeout_demo
+cargo run --bin stdio_demo
+cargo run --bin supervisor_demo
+cargo run --bin group_demo
+cargo run --features async --bin async_stdio_demo
+cargo run --bin group_control_demo
 ```
 
 ## 📚 API 文档
@@ -223,6 +241,11 @@ cargo run --bin process_demo
 
 演示进程创建、监控、IPC通信和同步原语的使用。
 
+跨平台注意事项：
+
+- Windows 使用 `cmd /c` 适配 `echo` 等命令；`working_dir` 设为 `.`；`PATH` 建议包含 `C:\\Windows\\System32`。
+- Linux/macOS 直接使用 `echo`，`working_dir` 设为 `/tmp` 或当前目录。
+
 ### IPC通信演示
 
 ```bash
@@ -231,6 +254,8 @@ cargo run --bin ipc_demo
 
 演示各种IPC机制的使用，包括管道、套接字、共享内存等。
 
+提示：在 Windows 平台上，"Unix 套接字" 将使用兼容实现（可能退化为 TCP 套接字）。
+
 ### 同步原语演示
 
 ```bash
@@ -238,6 +263,65 @@ cargo run --bin sync_demo
 ```
 
 演示互斥锁、读写锁、条件变量、信号量和屏障的使用。
+
+### 超时与取消演示
+
+```bash
+cargo run --bin timeout_demo
+```
+
+演示如何在超时时间内轮询等待子进程退出，并在超时后进行终止。
+支持通过环境变量配置：
+
+```bash
+# 以 1500ms 超时运行
+TIMEOUT_MS=1500 cargo run --bin timeout_demo
+```
+
+### 监控与重启演示
+
+```bash
+cargo run --bin supervisor_demo
+```
+
+演示监控与指数退避重启。可配置环境变量：
+
+```bash
+# 设置最大重启次数为 3，起始退避100ms，上限1500ms
+MAX_RESTARTS=3 BACKOFF_START_MS=100 BACKOFF_MAX_MS=1500 cargo run --bin supervisor_demo
+```
+
+### 进程组演示
+
+```bash
+cargo run --bin group_demo
+```
+
+演示 `ProcessGroupManager` 的创建、加入成员与查询。
+
+### 进程组控制演示（按组终止）
+
+```bash
+cargo run --bin group_control_demo
+```
+
+演示如何通过组信息遍历成员并逐个终止，实现“按组终止”的控制逻辑。
+
+### 标准 IO 管道演示
+
+```bash
+cargo run --bin stdio_demo
+```
+
+演示如何与子进程进行标准输入/输出交互：示例向子进程写入一行文本并读取回显，使用 `ProcessManager::write_stdin/close_stdin/read_stdout/read_stderr` 完成交互。
+
+### 异步标准 IO 演示（占位）
+
+```bash
+cargo run --features async --bin async_stdio_demo
+```
+
+预留异步标准 IO 与超时 API 的接口，当前调用会返回“未实现”错误，便于后续迭代替换为真实实现。
 
 ## 🤝 贡献
 

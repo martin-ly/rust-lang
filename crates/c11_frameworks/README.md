@@ -85,6 +85,10 @@ cargo run --example diesel_example --features diesel
 
 # 运行CLI示例
 cargo run --example cli_example --features clap
+
+# 运行 DNS via NetClient 示例（依赖 c10_networks）
+# 可通过 C10_DNS_BACKEND 切换解析后端：system|cloudflare_doh|cloudflare_dot|google_doh|google_dot|quad9_doh|quad9_dot
+cargo run -p c11_frameworks --example dns_via_netclient -- example.com
 ```
 
 ### 功能特性

@@ -10,6 +10,8 @@ use std::collections::HashMap;
 use std::process::{Command, Child, ExitStatus, Stdio};
 use std::sync::{Arc, Mutex};
 use std::time::SystemTime;
+use std::io::{Read, Write};
+use std::time::{Duration, Instant};
 
 /// 进程管理器
 pub struct ProcessManager {
@@ -133,26 +135,129 @@ impl ProcessManager {
         }
     }
 
-    /// 获取进程输出
+    /// 获取进程输出（阻塞直到进程退出，返回实际 stdout/stderr）
     pub fn get_output(&mut self, pid: u32) -> ProcessResult<std::process::Output> {
         let mut processes = self.processes.lock().unwrap();
-        
         if let Some(managed_process) = processes.get_mut(&pid) {
-            // 克隆Child以避免移动问题
-            let output = managed_process.child.try_wait()
+            // 先读取 stdout/stderr 再等待退出，避免移动 Child
+            let stdout_bytes = if let Some(stdout) = managed_process.child.stdout.as_mut() {
+                let mut buf = Vec::new();
+                let _ = stdout.read_to_end(&mut buf); // 读取失败不致命
+                buf
+            } else {
+                Vec::new()
+            };
+
+            let stderr_bytes = if let Some(stderr) = managed_process.child.stderr.as_mut() {
+                let mut buf = Vec::new();
+                let _ = stderr.read_to_end(&mut buf);
+                buf
+            } else {
+                Vec::new()
+            };
+
+            let status = managed_process.child.wait()
                 .map_err(|e| ProcessError::WaitFailed(e.to_string()))?;
-            
-            // 如果进程还在运行，返回错误
-            if output.is_none() {
-                return Err(ProcessError::WaitFailed("Process is still running".to_string()));
+
+            managed_process.info.status = ProcessStatus::Stopped;
+            processes.remove(&pid);
+
+            Ok(std::process::Output { status, stdout: stdout_bytes, stderr: stderr_bytes })
+        } else {
+            Err(ProcessError::NotFound(pid))
+        }
+    }
+
+    /// 带超时等待进程完成
+    /// 返回 Ok(Some(status)) 表示在超时时间内进程已退出；
+    /// 返回 Ok(None) 表示超时未退出；Err 表示等待过程中出错或找不到进程。
+    pub fn wait_with_timeout(&mut self, pid: u32, timeout: Duration) -> ProcessResult<Option<ExitStatus>> {
+        let start = Instant::now();
+        loop {
+            {
+                let mut processes = self.processes.lock().unwrap();
+                if let Some(managed_process) = processes.get_mut(&pid) {
+                    match managed_process.child.try_wait() {
+                        Ok(Some(status)) => {
+                            managed_process.info.status = ProcessStatus::Stopped;
+                            processes.remove(&pid);
+                            return Ok(Some(status));
+                        }
+                        Ok(None) => {
+                            // 继续等待
+                        }
+                        Err(e) => {
+                            return Err(ProcessError::WaitFailed(e.to_string()));
+                        }
+                    }
+                } else {
+                    return Err(ProcessError::NotFound(pid));
+                }
             }
-            
-            // 简化实现，返回空的输出
-            Ok(std::process::Output {
-                status: output.unwrap(),
-                stdout: Vec::new(),
-                stderr: Vec::new(),
-            })
+
+            if start.elapsed() >= timeout {
+                return Ok(None);
+            }
+
+            std::thread::sleep(Duration::from_millis(20));
+        }
+    }
+
+    /// 向子进程标准输入写入数据（不自动关闭stdin）
+    pub fn write_stdin(&mut self, pid: u32, data: &[u8]) -> ProcessResult<()> {
+        let mut processes = self.processes.lock().unwrap();
+        if let Some(managed_process) = processes.get_mut(&pid) {
+            if let Some(stdin) = managed_process.child.stdin.as_mut() {
+                stdin.write_all(data).map_err(ProcessError::Io)?;
+                stdin.flush().map_err(ProcessError::Io)?;
+                Ok(())
+            } else {
+                Err(ProcessError::InvalidConfig("stdin not available".to_string()))
+            }
+        } else {
+            Err(ProcessError::NotFound(pid))
+        }
+    }
+
+    /// 关闭子进程标准输入，向子进程发出EOF
+    pub fn close_stdin(&mut self, pid: u32) -> ProcessResult<()> {
+        let mut processes = self.processes.lock().unwrap();
+        if let Some(managed_process) = processes.get_mut(&pid) {
+            // 将stdin设置为None即关闭
+            managed_process.child.stdin.take();
+            Ok(())
+        } else {
+            Err(ProcessError::NotFound(pid))
+        }
+    }
+
+    /// 读取子进程标准输出的全部可用数据（阻塞直到EOF或无数据可读）
+    pub fn read_stdout(&mut self, pid: u32) -> ProcessResult<Vec<u8>> {
+        let mut processes = self.processes.lock().unwrap();
+        if let Some(managed_process) = processes.get_mut(&pid) {
+            if let Some(stdout) = managed_process.child.stdout.as_mut() {
+                let mut buf = Vec::new();
+                stdout.read_to_end(&mut buf).map_err(ProcessError::Io)?;
+                Ok(buf)
+            } else {
+                Err(ProcessError::InvalidConfig("stdout not available".to_string()))
+            }
+        } else {
+            Err(ProcessError::NotFound(pid))
+        }
+    }
+
+    /// 读取子进程标准错误的全部可用数据
+    pub fn read_stderr(&mut self, pid: u32) -> ProcessResult<Vec<u8>> {
+        let mut processes = self.processes.lock().unwrap();
+        if let Some(managed_process) = processes.get_mut(&pid) {
+            if let Some(stderr) = managed_process.child.stderr.as_mut() {
+                let mut buf = Vec::new();
+                stderr.read_to_end(&mut buf).map_err(ProcessError::Io)?;
+                Ok(buf)
+            } else {
+                Err(ProcessError::InvalidConfig("stderr not available".to_string()))
+            }
         } else {
             Err(ProcessError::NotFound(pid))
         }

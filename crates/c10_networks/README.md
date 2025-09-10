@@ -119,6 +119,46 @@ c10_networks/
 └── p2p/               # P2P（身份、发现、DHT、PubSub、NAT）
 ```
 
+## 🔎 DNS（基于 Hickory-DNS）
+
+快速查询示例：
+
+```rust
+use c10_networks::protocol::dns::{DnsResolver, presets};
+
+#[tokio::main]
+async fn main() -> anyhow::Result<()> {
+    // 系统解析
+    let sys = DnsResolver::from_system().await?;
+    let ips = sys.lookup_ips("example.com").await?;
+    println!("A/AAAA: {:?}", ips);
+
+    // Cloudflare DoH
+    let (cfg, opts) = presets::cloudflare_doh();
+    let doh = DnsResolver::from_config(cfg, opts).await?;
+    let txt = doh.lookup_txt("example.com").await?;
+    println!("TXT: {:?}", txt);
+    Ok(())
+}
+```
+
+更多细节见 `docs/dns_hickory_integration.md` 与示例 `examples/dns_lookup.rs`。
+
+### 一体化示例与脚本
+
+- 直接运行示例：
+  - `cargo run --example dns_doh_dot -- example.com`
+  - `cargo run --example dns_custom_ns -- internal.service.local`
+  - `cargo run --example dns_records -- example.com`
+  - `cargo run --example dns_ptr`
+  - `cargo run --example dns_negative_cache -- nonexistent.example.invalid`
+- 脚本（可一键运行）：
+  - Windows：`scripts/run_examples.ps1 -Domain example.com -SkipNetTests`
+  - Bash：`scripts/run_examples.sh example.com`（跳过外网：`export C10_SKIP_NETWORK_TESTS=1`）
+- 统一命令（需安装 just）：
+  - `just dns-all example.com`
+  - `just test-skip-net`
+
 ## 🔧 Rust 1.89 新特性应用
 
 ## 🌐 P2P 最小示例（基于 libp2p）

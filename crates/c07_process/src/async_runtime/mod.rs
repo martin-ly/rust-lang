@@ -10,6 +10,8 @@ use crate::types::ProcessStatus;
 use std::collections::HashMap;
 #[cfg(feature = "async")]
 use std::time::Duration;
+#[cfg(feature = "async")]
+use std::process::ExitStatus;
 
 /// 异步进程管理器
 #[cfg(feature = "async")]
@@ -68,6 +70,31 @@ impl AsyncProcessManager {
             next_pid,
             command_sender,
         }
+    }
+
+    /// 异步写入标准输入（当前为占位实现）
+    pub async fn write_stdin(&self, _pid: u32, _data: &[u8]) -> ProcessResult<()> {
+        Err(ProcessError::InvalidConfig("Async stdio not implemented".to_string()))
+    }
+
+    /// 关闭标准输入（当前为占位实现）
+    pub async fn close_stdin(&self, _pid: u32) -> ProcessResult<()> {
+        Err(ProcessError::InvalidConfig("Async stdio not implemented".to_string()))
+    }
+
+    /// 读取标准输出（当前为占位实现）
+    pub async fn read_stdout(&self, _pid: u32) -> ProcessResult<Vec<u8>> {
+        Err(ProcessError::InvalidConfig("Async stdio not implemented".to_string()))
+    }
+
+    /// 读取标准错误（当前为占位实现）
+    pub async fn read_stderr(&self, _pid: u32) -> ProcessResult<Vec<u8>> {
+        Err(ProcessError::InvalidConfig("Async stdio not implemented".to_string()))
+    }
+
+    /// 带超时等待（当前为占位实现）
+    pub async fn wait_with_timeout(&self, _pid: u32, _timeout: Duration) -> ProcessResult<Option<ExitStatus>> {
+        Err(ProcessError::InvalidConfig("Async wait_with_timeout not implemented".to_string()))
     }
     
     /// 异步启动进程

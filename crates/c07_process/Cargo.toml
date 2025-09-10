@@ -76,6 +76,30 @@ path = "src/bin/process_pool_demo.rs"
 name = "async_demo"
 path = "src/bin/async_demo.rs"
 
+[[bin]]
+name = "timeout_demo"
+path = "src/bin/timeout_demo.rs"
+
+[[bin]]
+name = "stdio_demo"
+path = "src/bin/stdio_demo.rs"
+
+[[bin]]
+name = "supervisor_demo"
+path = "src/bin/supervisor_demo.rs"
+
+[[bin]]
+name = "group_demo"
+path = "src/bin/group_demo.rs"
+
+[[bin]]
+name = "async_stdio_demo"
+path = "src/bin/async_stdio_demo.rs"
+
+[[bin]]
+name = "group_control_demo"
+path = "src/bin/group_control_demo.rs"
+
 [features]
 default = ["std"]
 std = []

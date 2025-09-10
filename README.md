@@ -152,6 +152,15 @@
 - **[进度报告](CONTINUATION_PROGRESS_REPORT.md)** - 项目发展历程
 - **[Crates文档结构](crates/readme.md)** - 实践模块详细说明
 
+### 🧪 示例与演示（网络/DNS）
+
+- DoH/DoT 级联回退：`cargo run -p c10_networks --example dns_doh_dot -- example.com`
+- 自定义 NameServer：`cargo run -p c10_networks --example dns_custom_ns -- internal.service.local`
+- 逆向解析 PTR：`cargo run -p c10_networks --example dns_ptr`
+- 综合记录（MX/SRV/TXT）：`cargo run -p c10_networks --example dns_records -- example.com`
+- 负缓存演示：`cargo run -p c10_networks --example dns_negative_cache -- nonexistent.example.invalid`
+- 跳过外网测试：`C10_SKIP_NETWORK_TESTS=1 cargo test -p c10_networks`
+
 ### 🛠️ 开发工具
 
 - **[Cargo.toml](Cargo.toml)** - 项目依赖配置

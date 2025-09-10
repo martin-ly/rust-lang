@@ -15,6 +15,15 @@ categories = ["web-programming", "asynchronous"]
 thiserror = "2.0"
 anyhow = "1.0"
 
+# 工作区内网络模块
+c10_networks = { path = "../c10_networks" }
+hyper = { version = "0.14", features = ["server", "http1", "http2"] }
+tokio-stream = "0.1"
+async-stream = "0.3"
+tokio-rustls = "0.24"
+rustls = "0.21"
+rustls-pemfile = "2.1"
+
 # 异步运行时
 tokio = { version = "1.44", features = ["full"] }
 async-std = { version = "1.12", optional = true }
@@ -132,6 +141,11 @@ required-features = ["actix-web"]
 [[example]]
 name = "axum_example"
 path = "examples/axum_example.rs"
+required-features = ["axum"]
+
+[[example]]
+name = "axum_acme_autoreload"
+path = "examples/axum_acme_autoreload.rs"
 required-features = ["axum"]
 
 [[example]]

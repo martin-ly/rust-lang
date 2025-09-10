@@ -27,9 +27,14 @@ pub mod p2p;
 pub mod unified_api;
 #[path = "diagnostics.rs"]
 pub mod diagnostics;
+pub mod security;
 
 // 重新导出常用类型
 pub use error::{NetworkError, NetworkResult, ProtocolError, PerformanceError, SecurityError};
+pub use unified_api::NetClient;
+pub use security::acme::AcmeManager;
+pub use security::tls_reload::TlsReloader;
+pub use security::acme::Http01MemoryStore;
 
 /// 库版本信息
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");

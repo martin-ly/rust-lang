@@ -34,17 +34,34 @@ async fn main() -> Result<()> {
     
     // 创建进程配置
     let mut env = HashMap::new();
-    env.insert("PATH".to_string(), "/usr/bin:/bin".to_string());
-    
-    let config = ProcessConfig {
-        program: "echo".to_string(),
-        args: vec!["Hello from async process".to_string()],
-        env,
-        working_dir: Some("/tmp".to_string()),
-        user_id: None,
-        group_id: None,
-        priority: None,
-        resource_limits: ResourceLimits::default(),
+    if cfg!(windows) {
+        env.insert("PATH".to_string(), "C:\\Windows\\System32".to_string());
+    } else {
+        env.insert("PATH".to_string(), "/usr/bin:/bin".to_string());
+    }
+
+    let config = if cfg!(windows) {
+        ProcessConfig {
+            program: "cmd".to_string(),
+            args: vec!["/c".to_string(), "echo Hello from async process".to_string()],
+            env,
+            working_dir: Some(".".to_string()),
+            user_id: None,
+            group_id: None,
+            priority: None,
+            resource_limits: ResourceLimits::default(),
+        }
+    } else {
+        ProcessConfig {
+            program: "echo".to_string(),
+            args: vec!["Hello from async process".to_string()],
+            env,
+            working_dir: Some("/tmp".to_string()),
+            user_id: None,
+            group_id: None,
+            priority: None,
+            resource_limits: ResourceLimits::default(),
+        }
     };
     
     // 异步启动进程
