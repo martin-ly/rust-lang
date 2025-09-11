@@ -10,3 +10,43 @@ thiserror = "1.0"
 tokio = { version = "1.0", features = ["full"] }
 uuid = { version = "1.0", features = ["v4"] }
 chrono = { version = "0.4", features = ["serde"] }
+rdkafka = { version = "0.36", optional = true, features = ["tokio", "cmake-build"] }
+influxdb2 = { version = "0.4", optional = true }
+openssl = { version = "0.10", optional = true, features = ["vendored"] }
+
+[dev-dependencies]
+rumqttc = "0.24"
+coap-lite = "0.13"
+opentelemetry = "0.23"
+opentelemetry_sdk = { version = "0.23", features = ["rt-tokio"] }
+opentelemetry-stdout = "0.2"
+opentelemetry-otlp = { version = "0.16", features = ["http-json", "grpc-tonic"] }
+tonic = { version = "0.11", default-features = false, features = ["transport"] }
+anyhow = "1.0"
+sha2 = "0.10"
+hex = "0.4"
+hyper = { version = "0.14", features = ["full"] }
+prometheus = "0.13"
+rustls = "0.21"
+rustls-pemfile = "1.0"
+
+[features]
+default = []
+kafka = ["dep:rdkafka"]
+influx = ["dep:influxdb2"]
+openssl-examples = ["dep:openssl"]
+
+[[example]]
+name = "kafka_producer"
+path = "examples/kafka_producer.rs"
+required-features = ["kafka"]
+
+[[example]]
+name = "influx_write"
+path = "examples/influx_write.rs"
+required-features = ["influx"]
+
+[[example]]
+name = "coap_dtls_openssl"
+path = "examples/coap_dtls_openssl.rs"
+required-features = ["openssl-examples"]

@@ -49,6 +49,21 @@ impl EmbeddedDevice {
     pub fn add_actuator(&mut self, actuator: Actuator) {
         self.actuators.push(actuator);
     }
+
+    /// 读取指定传感器的值（按 id）/ Read sensor value by id
+    pub fn read_sensor(&self, id: &str) -> Option<f64> {
+        self.sensors.iter().find(|s| s.id == id).map(|s| s.value)
+    }
+
+    /// 写入执行器状态（按 id）/ Write actuator state by id
+    pub fn write_actuator(&mut self, id: &str, state: bool) -> bool {
+        if let Some(act) = self.actuators.iter_mut().find(|a| a.id == id) {
+            act.state = state;
+            true
+        } else {
+            false
+        }
+    }
 }
 
 /// 设备类型 / Device Type
@@ -68,3 +83,31 @@ pub enum DeviceStatus {
     Error,
     Maintenance,
 } 
+
+/// 数字输出抽象 / Digital Output Abstraction
+pub trait DigitalOutput {
+    fn set_high(&mut self);
+    fn set_low(&mut self);
+}
+
+/// 数字输入抽象 / Digital Input Abstraction
+pub trait DigitalInput {
+    fn is_high(&self) -> bool;
+    fn is_low(&self) -> bool { !self.is_high() }
+}
+
+/// I2C 抽象（极简）/ I2C Abstraction (minimal)
+pub trait I2cBus {
+    fn write(&mut self, addr: u8, bytes: &[u8]) -> Result<(), &'static str>;
+    fn read(&mut self, addr: u8, buf: &mut [u8]) -> Result<(), &'static str>;
+}
+
+/// SPI 抽象（极简）/ SPI Abstraction (minimal)
+pub trait SpiBus {
+    fn transfer(&mut self, tx: &[u8], rx: &mut [u8]) -> Result<(), &'static str>;
+}
+
+/// 设备引导到上线状态 / Bring up device to Online
+pub fn bring_up_device(dev: &mut EmbeddedDevice) {
+    dev.status = DeviceStatus::Online;
+}

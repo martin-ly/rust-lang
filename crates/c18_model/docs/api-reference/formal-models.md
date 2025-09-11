@@ -1,8 +1,153 @@
-# 1. 形式化方法模型 API 参考
+# 形式化方法模型 API 参考
+
+> 返回索引：`docs/README.md`
+
+## 概述
+
+本节涵盖有限状态机、时序逻辑与进程代数等形式化方法核心组件的 API。示例仅展示典型用法，具体模块路径以实际代码为准。
+
+> 导航：如需从业务状态机到协议验证的端到端流程，请参阅 `guides/fsm-to-protocol.md`；关于系统建模的更大粒度组织与推进，参阅 `guides/system-modeling.md`。
+
+## 基础类型与结构
+
+### State
+
+- **描述**: 状态机中的状态，通常以字符串或枚举标识。
+- **核心接口**:
+  - `new(name: impl Into<String>) -> State`
+  - `name(&self) -> &str`
+
+### Transition
+
+- **描述**: 状态间转换，包含源、目标与可选的守卫/动作。
+- **核心接口**:
+  - `new(from: StateId, to: StateId, label: impl Into<String>) -> Transition`
+  - 可能的扩展字段: `guard`, `action`
+
+### FiniteStateMachine {#finitestatemachine}
+
+- **描述**: 有限状态机，支持添加状态、转换与运行时推进。
+- **核心接口**:
+  - `new(initial: impl Into<String>) -> FiniteStateMachine`
+  - `add_state(state: State) -> StateId`
+  - `add_transition(t: Transition)`
+  - `current(&self) -> &State`
+  - `step(event: &str) -> Result<(), Error>`
+
+示例:
+
+```rust
+use c18_model::FiniteStateMachine;
+
+let mut fsm = FiniteStateMachine::new("idle");
+// let s_work = fsm.add_state(State::new("working"));
+// fsm.add_transition(Transition::new(s_idle, s_work, "start"));
+// fsm.step("start")?;
+```
+
+## 时序逻辑
+
+### TemporalFormula
+
+- **描述**: LTL/CTL 等时序逻辑公式的抽象表示。
+- **核心接口**:
+  - `and(a, b)`, `or(a, b)`, `not(a)`
+  - `globally(p)`, `eventually(p)`, `until(p, q)`
+
+### TemporalModelChecker {#temporalmodelchecker}
+
+- **描述**: 时序逻辑模型检查器，对给定模型验证公式是否成立。
+- **核心接口**:
+  - `new() -> TemporalModelChecker`
+  - `check<M: KripkeLike>(model: &M, formula: &TemporalFormula) -> CheckResult`
+
+示例:
+
+```rust
+// let formula = TemporalFormula::globally(prop!("safe"));
+// let result = TemporalModelChecker::new().check(&model, &formula);
+// assert!(result.is_satisfied());
+```
+
+## 进程代数
+
+### ProcessTerm
+
+- **描述**: 进程代数项（如 CCS/CSP 风格）。
+- **核心构造**:
+  - `nil()`, `action(a)`, `seq(p, q)`, `par(p, q)`, `choice(p, q)`
+
+### ProcessAlgebraInterpreter {#processalgebrainterpreter}
+
+- **描述**: 对进程项进行语义解释与执行/等价性分析。
+- **核心接口**:
+  - `simulate(term: &ProcessTerm, steps: usize) -> Trace`
+  - `bisimilar(a: &ProcessTerm, b: &ProcessTerm) -> bool`
+
+## 错误处理
+
+- 统一错误类型 `Error`（或 `ModelError`），建议使用 `thiserror` 风格枚举。
+- 常见错误: `InvalidState`, `NoTransition`, `UnsatisfiedGuard`, `Timeout`。
+
+> 一致性说明：本页 `FiniteStateMachine`/`TemporalModelChecker` 的接口与指南示例保持等价层级；若签名存在轻微差异，以示例所示用法为准，面向“可达性/死锁/反例生成”的能力保持一致。
+
+## 性能与实现建议
+
+- 使用紧凑的状态/转换表示（如 `u32` 索引）提升性能。
+- 对频繁查询的边集建立邻接索引或压缩结构。
+- 对模型检查使用 BDD/SAT/bitset 优化（按需）。
+
+## 示例与最佳实践
+
+1. 将状态定义为小而稳定的集合，避免运行时频繁分配。
+2. 对外暴露不可变视图，内部使用 `Vec`/`IndexMap` 管理标识与名称映射。
+3. 测试覆盖: 单步转移、不可达、死锁、公式边界用例。
+
+## 版本
+
+- 适配版本: 0.2.0（Rust 1.70+）
+
+## 快速索引
+
+- 状态机：`State`、`Transition`、`FiniteStateMachine`
+- 时序逻辑：`TemporalFormula`、`TemporalModelChecker`
+- 进程代数：`ProcessTerm`、`ProcessAlgebraInterpreter`
+
+跨页跳转：
+
+- 指南（状态机→协议验证）：`guides/fsm-to-protocol.md`
+- 指南（系统建模推进）：`guides/system-modeling.md`
+
+## 术语表
+
+- 可达性（Reachability）：从初始状态出发能到达的状态集合。
+- 死锁（Deadlock）：无任何后继转换的状态。
+- 不变式（Invariant）：在所有可达状态上都成立的性质。
+- 反例（Counterexample）：违背性质的执行路径示例。
+
+## 1. 形式化方法模型 API 参考
 
 ## 1.1 目录
 
-- [1. 形式化方法模型 API 参考](#1-形式化方法模型-api-参考)
+- [形式化方法模型 API 参考](#形式化方法模型-api-参考)
+  - [概述](#概述)
+  - [基础类型与结构](#基础类型与结构)
+    - [State](#state)
+    - [Transition](#transition)
+    - [FiniteStateMachine {#finitestatemachine}](#finitestatemachine-finitestatemachine)
+  - [时序逻辑](#时序逻辑)
+    - [TemporalFormula](#temporalformula)
+    - [TemporalModelChecker {#temporalmodelchecker}](#temporalmodelchecker-temporalmodelchecker)
+  - [进程代数](#进程代数)
+    - [ProcessTerm](#processterm)
+    - [ProcessAlgebraInterpreter {#processalgebrainterpreter}](#processalgebrainterpreter-processalgebrainterpreter)
+  - [错误处理](#错误处理)
+  - [性能与实现建议](#性能与实现建议)
+  - [示例与最佳实践](#示例与最佳实践)
+  - [版本](#版本)
+  - [快速索引](#快速索引)
+  - [术语表](#术语表)
+  - [1. 形式化方法模型 API 参考](#1-形式化方法模型-api-参考)
   - [1.1 目录](#11-目录)
   - [1.2 概述](#12-概述)
   - [1.3 基础形式化模型](#13-基础形式化模型)

@@ -689,3 +689,129 @@ pub const DEFAULT_TIME_SLICE: Duration = Duration::from_millis(10);
 pub const MAX_TASK_EXECUTION_TIME: Duration = Duration::from_secs(60);
 pub const MIN_TASK_PERIOD: Duration = Duration::from_millis(1);
 pub const MAX_TASK_PERIOD: Duration = Duration::from_secs(3600); 
+
+// --- LwM2M 最小对象/资源建模 ---
+
+/// LwM2M 资源值（简化） / LwM2M Resource Value (simplified)
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub enum Lwm2mValue {
+    Integer(i64),
+    Float(f64),
+    Boolean(bool),
+    String(String),
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_lwm2m_read_write() {
+        let mut obj = Lwm2mObject {
+            object_id: 1,
+            instances: vec![Lwm2mInstance {
+                instance_id: 0,
+                resources: vec![Lwm2mResource { id: 10, readable: true, writable: true, executable: false, value: Some(Lwm2mValue::Integer(1)) }],
+            }],
+        };
+        assert_eq!(obj.read(0, 10), Some(Lwm2mValue::Integer(1)));
+        assert!(obj.write(0, 10, Lwm2mValue::Integer(2)));
+        assert_eq!(obj.read(0, 10), Some(Lwm2mValue::Integer(2)));
+    }
+
+    #[test]
+    fn test_opcua_node_read_write() {
+        let mut node = UaObjectNode {
+            node_id: UaNodeId("n".into()),
+            browse_name: "root".into(),
+            variables: vec![UaVariableNode { node_id: UaNodeId("v".into()), browse_name: "Mode".into(), value: serde_json::json!("auto"), writable: true }],
+        };
+        assert_eq!(node.read("Mode").unwrap(), serde_json::json!("auto"));
+        assert!(node.write("Mode", serde_json::json!("manual")));
+        assert_eq!(node.read("Mode").unwrap(), serde_json::json!("manual"));
+    }
+}
+
+/// LwM2M 资源 / LwM2M Resource
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Lwm2mResource {
+    pub id: u16,
+    pub readable: bool,
+    pub writable: bool,
+    pub executable: bool,
+    pub value: Option<Lwm2mValue>,
+}
+
+/// LwM2M 对象实例 / LwM2M Object Instance
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Lwm2mInstance {
+    pub instance_id: u16,
+    pub resources: Vec<Lwm2mResource>,
+}
+
+/// LwM2M 对象 / LwM2M Object
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Lwm2mObject {
+    pub object_id: u16,
+    pub instances: Vec<Lwm2mInstance>,
+}
+
+impl Lwm2mObject {
+    /// 读取资源（O/I/R）/ Read a resource (by object/instance/resource)
+    pub fn read(&self, instance_id: u16, resource_id: u16) -> Option<Lwm2mValue> {
+        self.instances
+            .iter()
+            .find(|i| i.instance_id == instance_id)
+            .and_then(|i| i.resources.iter().find(|r| r.id == resource_id))
+            .and_then(|r| if r.readable { r.value.clone() } else { None })
+    }
+
+    /// 写资源（可写）/ Write a resource if writable
+    pub fn write(&mut self, instance_id: u16, resource_id: u16, value: Lwm2mValue) -> bool {
+        if let Some(inst) = self.instances.iter_mut().find(|i| i.instance_id == instance_id) {
+            if let Some(res) = inst.resources.iter_mut().find(|r| r.id == resource_id) {
+                if res.writable { res.value = Some(value); return true; }
+            }
+        }
+        false
+    }
+}
+
+// --- OPC UA 基本节点建模（极简） ---
+
+/// OPC UA 节点ID（简化） / OPC UA NodeId (simplified)
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
+pub struct UaNodeId(pub String);
+
+/// OPC UA 变量节点 / OPC UA Variable Node
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct UaVariableNode {
+    pub node_id: UaNodeId,
+    pub browse_name: String,
+    pub value: serde_json::Value,
+    pub writable: bool,
+}
+
+/// OPC UA 对象节点（聚合变量）/ OPC UA Object Node (aggregates variables)
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct UaObjectNode {
+    pub node_id: UaNodeId,
+    pub browse_name: String,
+    pub variables: Vec<UaVariableNode>,
+}
+
+impl UaObjectNode {
+    pub fn read(&self, browse_name: &str) -> Option<serde_json::Value> {
+        self.variables
+            .iter()
+            .find(|v| v.browse_name == browse_name)
+            .map(|v| v.value.clone())
+    }
+
+    pub fn write(&mut self, browse_name: &str, value: serde_json::Value) -> bool {
+        if let Some(v) = self.variables.iter_mut().find(|v| v.browse_name == browse_name) {
+            if v.writable { v.value = value; return true; }
+        }
+        false
+    }
+}

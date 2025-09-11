@@ -1,0 +1,11 @@
+[book]
+authors = ["c18_model maintainers"]
+language = "zh-CN"
+multilingual = false
+src = "."
+title = "c18_model 文档"
+
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "navy"
+no-section-label = false

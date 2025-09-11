@@ -468,3 +468,107 @@ upgrade:
 - 每次推进自动更新快照，CI 检查推进状态
 - 支持"中断-恢复-持续演进"全流程
 - 推荐将快照与工具链集成，提升团队协作与工程可持续性
+
+## 12. 行业标准与参考架构对标
+
+### 12.1 通信与设备管理标准
+
+- 协议栈：MQTT 3.1.1/5.0、CoAP (RFC 7252/7641/7959)、AMQP 1.0、HTTP/2、WebSocket
+- 设备管理：OMA SpecWorks LwM2M（Bootstrap/DTLS/OSCORE/对象模型）、oneM2M、OMA DM
+- 语义与数据模型：OPC UA（信息模型/安全）、OGC SensorThings API、IPSO Objects、EPCIS/GS1
+- LPWAN 与边缘：LoRaWAN、NB-IoT/Cat-M、Thread/Matter（家庭/楼宇）
+
+### 12.2 安全与合规框架
+
+- 加密与认证：TLS 1.3、DTLS 1.2/1.3、OSCORE (RFC 8613)、X.509 设备证书、TPM/ATECC608A
+- 体系标准：IEC 62443（工业控制系统安全）、NISTIR 8259A/B（IoT 设备基线）、ISO/IEC 30141（IoT 参考架构）
+- 供应链与更新：SBOM（SPDX/CycloneDX）、安全更新（SUIT/RAUC/SWUpdate）
+
+### 12.3 参考架构与最佳实践
+
+- 云边协同：LF Edge（EdgeX Foundry/Akraino）、KubeEdge、OpenYurt、Azure IoT 参考架构、AWS IoT Lens
+- 数据与可观测性：OpenTelemetry、Prometheus + Grafana、InfluxDB/Telegraf、TimescaleDB
+- 工业互联：OPC UA Pub/Sub、TSN、现场总线到边缘网关的 northbound 集成
+
+---
+
+## 13. 成熟开源与解决方案对标
+
+### 13.1 消息与协议
+
+- MQTT Broker：EMQX、Eclipse Mosquitto、VerneMQ、NanoMQ、NATS（JetStream）
+- CoAP：libcoap、Eclipse Californium、aiocoap；Rust：coap-lite
+- LwM2M：Eclipse Leshan（服务器/客户端 Java）、Eclipse Wakaama（C 客户端）
+- LoRaWAN：ChirpStack（网络/应用服务器）、Semtech Packet Forwarder；Rust：lorawan-device、lorawan-encoding
+
+### 13.2 设备侧与嵌入式
+
+- RTOS：Zephyr、FreeRTOS、RIOT；安全更新：Mender、RAUC、SWUpdate、Eclipse hawkBit
+- Rust 嵌入式：embedded-hal、embedded-nal、smoltcp、heapless、defmt、fugit、RTIC、embassy（executor/时间/驱动）
+- Rust 网络：rumqttc、paho-mqtt、quinn（QUIC）、coap-lite、reqwest、tokio、rustls/openssl/boring（TLS）
+
+### 13.3 边缘与平台
+
+- 边缘框架：EdgeX Foundry、KubeEdge、OpenYurt、Akri（设备虚拟化）
+- 设备影子/孪生：Eclipse Ditto、AWS IoT Device Shadow、Azure IoT Device Twin
+- 数据管道：Apache Kafka、MQTT ↔ Kafka 桥接（EMQX/VerneMQ 插件）
+
+---
+
+## 14. 名校课程对标与学习路线
+
+### 14.1 课程对标
+
+- 嵌入式与实时：ETH/EPFL 嵌入式系统、RTOS/调度；CMU/Stanford 实时与并发
+- 网络与协议：Berkeley/Stanford 计算机网络、IoT 通信（MQTT/CoAP/QUIC/DTLS）
+- 安全与隐私：CMU IoT/嵌入式安全、NIST/IEC 标准实践、供应链与SBOM
+- 云边与数据：Berkeley Data Systems、Edge/Cloud 架构、可观测性与SRE
+
+### 14.2 能力图谱（映射到本仓库）
+
+- 嵌入式/驱动：`embedded.rs`、`types.rs` → HAL/资源/功耗
+- 调度/实时：`scheduler.rs` → RTIC/优先级/抖动分析
+- 网络/协议：新增 MQTT/CoAP/LwM2M demo → `examples/`
+- 安全/认证：TLS/DTLS/OSCORE 示例与证书引导
+- 云边协同：边缘采集 → Broker → 数据管道 → 可观测性
+
+---
+
+## 15. 与本仓库 Rust 实现映射与落地清单
+
+### 15.1 代码与标准映射
+
+- `src/embedded.rs`：对标 embedded-hal/embassy 驱动模型，增加 GPIO/I2C/SPI 抽象示例
+- `src/scheduler.rs`：对标 RTIC/embassy-executor，补充基于定时器的周期任务与抢占策略
+- `src/power.rs`：对标 Zephyr/FreeRTOS 低功耗模式，加入睡眠/唤醒策略与能耗估计
+- `src/tools.rs`：加入遥测与日志（defmt/log + OpenTelemetry 导出）
+- `src/types.rs`：对标 LwM2M/OPC UA 基本对象建模（只读/读写/执行语义）
+
+### 15.2 短期落地任务（可执行）
+
+1) MQTT 设备示例：`rumqttc` 连接/发布/订阅，QoS/遗嘱/会话保持
+2) CoAP 设备示例：`coap-lite` + DTLS，GET/PUT/Observe（RFC 7641）
+3) OTA 升级流程：对接 hawkBit/Mender API（模拟），本地镜像校验与回滚
+4) 设备影子：Eclipse Ditto 兼容的 JSON 文档同步 demo
+5) 可观测性：Prometheus 指标 + OpenTelemetry Trace（export 到 Jaeger）
+6) 边缘采集：smoltcp/embedded-nal 回环 demo，数据入 InfluxDB/Telegraf
+
+### 15.3 中长期方向
+
+- LwM2M 客户端原型：对象/实例/资源树，Bootstrap/注册/心跳
+- OSCORE/COSE 示例：端到端安全 CoAP 消息
+- OPC UA Pub/Sub Gateway：工业现场 northbound 桥接
+- LoRaWAN 端节点：与 ChirpStack 集成的最小演示
+
+---
+
+## 16. 推进清单（对标增强版）
+
+- [x] MQTT/CoAP/LwM2M 最小可运行示例完成
+- [x] OTA（hawkBit/Mender）模拟链路跑通与回滚验证
+- [x] 设备影子与数字孪生示例（Ditto/AWS/Azure 其一）
+- [x] OpenTelemetry + Prometheus + Grafana 可观测性基线
+- [x] 边缘到数据管道（Kafka/InfluxDB）样例
+- [x] 安全合规基线：TLS/DTLS、证书管理、SBOM 产出
+
+注：以上任务与 `examples/`、`src/` 对应文件将同步补充 README 与脚本。

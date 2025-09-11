@@ -80,16 +80,7 @@ impl MM1Queue {
 
 ### 3. 并发安全
 
-Rust的并发模型确保多线程环境下的安全性：
-
-```rust
-use rayon::prelude::*;
-
-fn parallel_kmeans(data: &[Vec<f64>], k: usize) -> Vec<usize> {
-    // 并行计算聚类中心
-    data.par_iter().map(|_| 0).collect()
-}
-```
+Rust 的并发模型确保多线程环境下的安全性；本库当前示例以串行为主，便于理解核心算法。
 
 ### 4. 零成本抽象
 
@@ -176,17 +167,14 @@ cargo test --example system_modeling_examples
 
 1. **添加更多算法** - 可以继续添加更多机器学习算法和系统建模技术
 2. **性能优化** - 使用Rust的性能分析工具优化关键路径
-3. **并行化** - 利用Rust的并发特性实现并行算法
-4. **可视化** - 集成图表库来可视化模型结果
-5. **Web接口** - 使用Rust的Web框架创建API接口
+3. **可视化** - 可结合外部工具对结果进行绘图
+4. **Web接口** - 使用 Rust Web 框架创建 API 接口
 
 ## 依赖项说明
 
 - `fastrand` - 快速随机数生成
 - `petgraph` - 图数据结构
-- `rayon` - 数据并行处理
 - `serde` - 序列化和反序列化
 - `thiserror` - 错误处理
-- `tokio` - 异步运行时
 - `uuid` - 唯一标识符生成
 - `chrono` - 日期和时间处理

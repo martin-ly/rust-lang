@@ -1,0 +1,20 @@
+{
+  "title": "IoT Overview",
+  "timezone": "browser",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Temperature",
+      "targets": [
+        {
+          "query": "from(bucket: v.defaultBucket) |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"iot_temp\")"
+        }
+      ],
+      "gridPos": {"w": 24, "h": 8, "x": 0, "y": 0}
+    }
+  ],
+  "schemaVersion": 37,
+  "version": 1
+}
+
+

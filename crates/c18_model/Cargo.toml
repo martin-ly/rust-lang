@@ -21,8 +21,7 @@ serde_json = "1.0"
 # 错误处理
 thiserror = "1.0"
 
-# 异步运行时
-tokio = { version = "1.0", features = ["full"], optional = true }
+# 已裁剪：异步运行时
 
 # UUID生成
 uuid = { version = "1.0", features = ["v4"] }
@@ -36,8 +35,7 @@ fastrand = "2.0"
 # 图算法
 petgraph = "0.6"
 
-# 并行计算
-rayon = { version = "1.8", optional = true }
+# 已裁剪：并行计算
 
 # 数值计算
 num-traits = "0.2"
@@ -66,29 +64,9 @@ doc-comment = "0.3"
 default = ["std"]
 std = []
 no-std = []
-async = ["tokio"]
-visualization = []
-benchmarks = []
-parallel = ["rayon"]
+## 已裁剪：async/visualization/benchmarks/parallel 等特性
 
-# 可选依赖
-[dependencies.nalgebra]
-version = "0.32"
-optional = true
-features = ["serde-serialize"]
-
-[dependencies.plotly]
-version = "0.8"
-optional = true
-
-[dependencies.wasm-bindgen]
-version = "0.2"
-optional = true
-
-[target.'cfg(target_arch = "wasm32")'.dependencies]
-wasm-bindgen = "0.2"
-js-sys = "0.3"
-web-sys = "0.3"
+# 已裁剪：nalgebra / plotly / wasm-bindgen 及 wasm 目标依赖
 
 # [[bench]]
 # name = "queueing_bench"

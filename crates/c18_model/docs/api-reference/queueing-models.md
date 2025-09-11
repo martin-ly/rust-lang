@@ -1,8 +1,142 @@
-# 3. 排队论模型 API 参考
+# 排队论模型 API 参考
+
+> 返回索引：`docs/README.md`
+
+## 概述
+
+提供 M/M/1、M/M/c 等经典排队系统的建模与分析 API，以及性能/可靠性/可扩展性分析工具。
+
+## 主要类型
+
+### MM1Queue {#mm1queue}
+
+- **构造**: `new(lambda: f64, mu: f64) -> MM1Queue`
+- **接口**:
+  - `utilization(&self) -> f64`  // ρ = λ/μ
+  - `avg_num_in_system(&self) -> f64` // L = ρ/(1-ρ)
+  - `avg_wait_time(&self) -> f64` // W = 1/(μ-λ)
+
+### MMcQueue {#mmcqueue}
+
+- **构造**: `new(lambda: f64, mu: f64, c: usize) -> MMcQueue`
+- **接口**:
+  - `utilization(&self) -> f64`  // ρ = λ/(cμ)
+  - `avg_num_in_queue(&self) -> f64`  // Lq (Erlang-C)
+  - `avg_wait_time(&self) -> f64`     // Wq (Erlang-C)
+
+## 分析工具
+
+### PerformanceAnalyzer {#performanceanalyzer}
+
+- 计算吞吐、延迟、并发、利用率等综合指标。
+
+### ReliabilityAnalyzer {#reliabilityanalyzer}
+
+- 评估失效率、MTBF、可用性等可靠性指标。
+
+### ScalabilityAnalyzer {#scalabilityanalyzer}
+
+- 进行扩展性分析与容量规划（横向/纵向扩展）。
+
+## 结果类型
+
+### SimulationResult {#simulationresult}
+
+- 字段示例: `throughput`, `latency_p50/p95/p99`, `queue_lengths`。
+
+### ScalingResult {#scalingresult}
+
+- 字段示例: `speedup`, `efficiency`, `bottlenecks`。
+
+### MetricStatistics {#metricstatistics}
+
+- 字段示例: `mean`, `std_dev`, `min`, `max`。
+
+## 数学公式
+
+### M/M/1 关键公式
+
+- 稳定条件: λ < μ
+- ρ = λ/μ
+- L = ρ/(1-ρ)
+- W = 1/(μ-λ)
+
+符号与单位：
+
+- λ（到达率）：单位 1/s 或 req/s
+- μ（服务率）：单位 1/s 或 req/s
+- L（平均队长/系统内人数）：无量纲
+- W（平均等待/响应时间）：单位 s
+
+### M/M/c 关键公式（Erlang-C）
+
+- 稳定条件: λ < cμ
+- 记 a = λ/μ，ρ = a/c，P0 = [∑_{n=0}^{c-1} a^n/n! + a^c/(c!(1-ρ))]^{-1}
+- 等待概率（队列非空）: C = a^c/(c!(1-ρ)) · P0
+- 平均队长: Lq = C · ρ/(1-ρ)
+- 平均等待: Wq = Lq/λ
+
+## 示例
+
+```rust
+use c18_model::{MM1Queue, MMcQueue};
+
+let q = MM1Queue::new(1.0, 2.0);
+assert!(q.utilization() < 1.0);
+println!("W = {}", q.avg_wait_time());
+
+let qc = MMcQueue::new(10.0, 6.0, 2);
+println!("ρ = {:.3}", qc.utilization());
+println!("Wq = {:.3}", qc.avg_wait_time());
+```
+
+## 错误处理与边界
+
+- 非法参数: 负率、零服务率、ρ ≥ 1 等需显式报错。
+- 数值稳定性: 接近不稳定边界时建议提供警告或高精度路径。
+- 服务器数 c=0、非整数等参数必须拒绝；极端 a^c/c! 计算需采取对数域或 Kahan 求和避免溢出。
+
+参数校验清单：
+
+- λ ≥ 0, μ > 0, c ∈ ℕ 且 c ≥ 1
+- 稳定性：M/M/1 要求 λ < μ；M/M/c 要求 λ < cμ
+- 容量（若有限）：capacity ≥ 1
+
+## 最佳实践
+
+1. 在构造时完成参数规范化与校验。
+2. 提供闭式解与数值法双路径，按条件选择。
+3. 对外暴露单位/维度文档，避免混用。
+
+## 版本
+
+- 适配版本: 0.2.0（Rust 1.70+）
+
+## 3. 排队论模型 API 参考
 
 ## 3.1 目录
 
-- [3. 排队论模型 API 参考](#3-排队论模型-api-参考)
+- [排队论模型 API 参考](#排队论模型-api-参考)
+  - [概述](#概述)
+  - [主要类型](#主要类型)
+    - [MM1Queue {#mm1queue}](#mm1queue-mm1queue)
+    - [MMcQueue {#mmcqueue}](#mmcqueue-mmcqueue)
+  - [分析工具](#分析工具)
+    - [PerformanceAnalyzer {#performanceanalyzer}](#performanceanalyzer-performanceanalyzer)
+    - [ReliabilityAnalyzer {#reliabilityanalyzer}](#reliabilityanalyzer-reliabilityanalyzer)
+    - [ScalabilityAnalyzer {#scalabilityanalyzer}](#scalabilityanalyzer-scalabilityanalyzer)
+  - [结果类型](#结果类型)
+    - [SimulationResult {#simulationresult}](#simulationresult-simulationresult)
+    - [ScalingResult {#scalingresult}](#scalingresult-scalingresult)
+    - [MetricStatistics {#metricstatistics}](#metricstatistics-metricstatistics)
+  - [数学公式](#数学公式)
+    - [M/M/1 关键公式](#mm1-关键公式)
+    - [M/M/c 关键公式（Erlang-C）](#mmc-关键公式erlang-c)
+  - [示例](#示例)
+  - [错误处理与边界](#错误处理与边界)
+  - [最佳实践](#最佳实践)
+  - [版本](#版本)
+  - [3. 排队论模型 API 参考](#3-排队论模型-api-参考)
   - [3.1 目录](#31-目录)
   - [3.2 概述](#32-概述)
   - [3.3 主要类型](#33-主要类型)

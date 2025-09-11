@@ -1,5 +1,7 @@
 ﻿# 系统建模（形式化推进目录）
 
+> 返回索引：`docs/README.md`
+
 ## 1. 系统架构的形式化
 
 ### 1.1 架构描述语言与模型
@@ -576,7 +578,9 @@ fn auto_model(components: &[&str]) -> Graph<&str, &str> {
     for &c in components { g.add_node(c); }
     g
 }
-```请持续推进
+```
+
+> 延伸阅读：参见 `api-reference/formal-models.md` 的 `FiniteStateMachine` 与 `TemporalModelChecker`，以及指南 `fsm-to-protocol.md` 的验证流程。
 
 - 智能分析：
 
@@ -616,3 +620,14 @@ verify:
 - 每次推进自动更新快照，CI 检查推进状态
 - 支持"中断-恢复-持续演进"全流程
 - 推荐将快照与工具链集成，提升团队协作与工程可持续性
+
+---
+
+## 示例索引与快速跳转
+
+- 性能建模（排队论，M/M/1）：见“2.1 排队论与性能分析”与 `api-reference/queueing-models.md`
+- 资源调度示例（简单 Scheduler）：见“2.2 资源分配与调度”
+- 故障模拟与可靠性分析：见“3.1/3.2”与 `api-reference/formal-models.md`
+- 动态伸缩/弹性：见“4.2”
+- 分布式仿真示例（节点负载分配）：见“6.4”
+- 状态机与模型检查端到端：`guides/fsm-to-protocol.md`
