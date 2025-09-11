@@ -10,8 +10,6 @@
 
 ---
 
-
-
 ---
 
 ## 1. 理论基础与形式化建模
@@ -123,10 +121,8 @@ $$
 
 | 操作         | 时间复杂度 | 空间复杂度 |
 |--------------|------------|------------|
-| 解释         | $O(n)$     | $O(h)$/树高 |
-| 语法树优化   |:---:|:---:|:---:| $O(n)$     |:---:|:---:|:---:| $O(n)$/节点 |:---:|:---:|:---:|
-
-
+| 解释         | $O(n)$     | $O(h)$/树高|
+| 语法树优化    | $O(n)$     |$O(n)$/节点 |
 
 ---
 
@@ -183,7 +179,6 @@ graph TD
 1. Gamma, E., et al. "Design Patterns: Elements of Reusable Object-Oriented Software"
 2. Pierce, B. C. "Types and Programming Languages"
 3. Mac Lane, S. "Categories for the Working Mathematician"
-
 
 "
 

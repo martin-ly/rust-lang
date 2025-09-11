@@ -18,13 +18,71 @@
 - 监督学习：训练集 D = {(x₁, y₁), ..., (xₙ, yₙ)}, 求 f̂ = argmin_f L(f(X), Y)
 - 无监督学习：训练集 D = {x₁, ..., xₙ}, 求结构体体体 S = g(D)
 
-**Rust 伪代码**：
+**Rust 完整实现**：
 
 ```rust
-// 监督学习
-fn train_supervised<X, Y, F: Fn(&X) -> Y>(data: &[(X, Y)], model: F) { /* ... */ }
-// 无监督学习
-fn cluster<X>(data: &[X]) { /* ... */ }
+#[derive(Debug, Clone)]
+pub struct LinearRegression {
+    pub weights: Vec<f64>,
+    pub bias: f64,
+    pub learning_rate: f64,
+    pub max_iterations: usize,
+}
+
+impl LinearRegression {
+    pub fn new(learning_rate: f64, max_iterations: usize) -> Self {
+        Self {
+            weights: Vec::new(),
+            bias: 0.0,
+            learning_rate,
+            max_iterations,
+        }
+    }
+    
+    pub fn fit(&mut self, x: &[Vec<f64>], y: &[f64]) -> Result<(), String> {
+        if x.is_empty() || y.is_empty() {
+            return Err("训练数据不能为空".to_string());
+        }
+        
+        let n_features = x[0].len();
+        self.weights = vec![0.0; n_features];
+        self.bias = 0.0;
+        
+        // 梯度下降训练
+        for iteration in 0..self.max_iterations {
+            let mut total_loss = 0.0;
+            let mut weight_gradients = vec![0.0; n_features];
+            let mut bias_gradient = 0.0;
+            
+            for i in 0..x.len() {
+                let prediction = self.predict_single(&x[i]);
+                let error = prediction - y[i];
+                total_loss += error * error;
+                
+                for j in 0..n_features {
+                    weight_gradients[j] += error * x[i][j];
+                }
+                bias_gradient += error;
+            }
+            
+            // 更新参数
+            for j in 0..n_features {
+                self.weights[j] -= self.learning_rate * weight_gradients[j] / x.len() as f64;
+            }
+            self.bias -= self.learning_rate * bias_gradient / x.len() as f64;
+        }
+        
+        Ok(())
+    }
+    
+    fn predict_single(&self, x: &[f64]) -> f64 {
+        let mut prediction = self.bias;
+        for (i, &feature) in x.iter().enumerate() {
+            prediction += self.weights[i] * feature;
+        }
+        prediction
+    }
+}
 ```
 
 **简要说明**：

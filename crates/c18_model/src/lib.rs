@@ -1,100 +1,163 @@
-//! c18_model - 模型系统分析
+//! c18_model - Rust理论模型实现库
 //! 
-//! 本库提供了软件架构、设计模式、形式化方法、领域特定语言、
-//! AI/ML集成和跨语言互操作性等功能的实现。
+//! 本库使用Rust语言实现各种理论模型，包括：
+//! - 系统建模：排队论、性能分析、可靠性建模
+//! - 机器学习：线性回归、逻辑回归、聚类、决策树
+//! - 形式化方法：状态机、时序逻辑、进程代数
+//! - 数学建模：概率模型、统计模型、优化算法
 
-pub mod architecture;
-pub mod patterns;
-pub mod formal_methods;
-pub mod domain_specific_languages;
-pub mod ai_ml_integration;
-pub mod cross_language_interoperability;
+// 核心模型模块
+pub mod queueing_models;      // 排队论模型
+pub mod ml_models;           // 机器学习模型
+pub mod formal_models;       // 形式化方法模型
+pub mod math_models;         // 数学建模
+pub mod performance_models;  // 性能分析模型
+
+// 标准和合规性模块
+pub mod standards_compliance; // 标准合规性检查
+pub mod university_course_alignment; // 大学课程对标
+pub mod maturity_models;     // 成熟度模型
+pub mod enterprise_frameworks; // 企业架构框架
+
+// 工具和实用程序
+pub mod utils;               // 通用工具函数
+pub mod visualization;       // 可视化支持
+pub mod benchmarks;         // 性能基准测试
+
+// 核心基础设施
+pub mod config;             // 配置管理
+pub mod error;              // 统一错误处理
 
 // 重新导出主要类型和trait
-pub use architecture::{
-    ArchitectureDescription, ArchitectureViewpoint, ArchitectureView, ArchitectureModel,
-    ArchitectureElement, ArchitectureRelationship, Concern, Stakeholder, ElementType,
-    RelationshipType, ConcernCategory, Interface, InterfaceType, Operation, Parameter,
-    ParameterDirection, ModelKind, QualityScore, QualityAttributeEvaluator,
-    ArchitectureDescriptionBuilder, StandardViewpoints, QualityAttributes,
-    microservice_example,
+pub use queueing_models::{
+    MM1Queue, MMcQueue, PerformanceAnalyzer, ReliabilityAnalyzer, 
+    ScalabilityAnalyzer, SimulationResult, ScalingResult,
 };
 
-pub use patterns::{
-    singleton, builder, factory, observer, strategy, producer_consumer,
-    functional, error_handling,
+pub use ml_models::{
+    LinearRegression, LogisticRegression, KMeans, DecisionTree, DecisionTreeNode,
 };
 
-pub use formal_methods::{
-    formal_languages, verification, transformation, implementations, tools,
+pub use formal_models::{
+    State, Transition, FiniteStateMachine, TemporalFormula, TemporalModelChecker,
+    ProcessTerm, ProcessAlgebraInterpreter, FormalMethodsToolkit, ModelCheckingResult,
+    // 高级形式化方法
+    formal_languages, verification, transformation, implementations, advanced_tools,
 };
 
-pub use domain_specific_languages::{
-    embedded_dsl, query_builder, state_machine_dsl, config_dsl, dsl_toolkit,
+pub use math_models::{
+    ProbabilityDistribution, NormalDistribution, ExponentialDistribution, PoissonDistribution,
+    MonteCarloSimulator, NumericalIntegrator, IntegrationMethod, GradientDescentOptimizer,
+    StatisticalTools,
 };
 
-pub use ai_ml_integration::{
-    type_safe_ml, nlp, blockchain, quantum_computing, ai_ml_toolkit,
+pub use performance_models::{
+    PerformanceMetrics, LoadGenerator, LoadPattern, CapacityPlanner, SystemConfiguration,
+    PerformanceRequirements, CapacityAnalysis, ScalingRecommendation, Priority,
+    PerformancePredictor, PredictionModel,
 };
 
-pub use cross_language_interoperability::{
-    ffi_safety, type_conversion, memory_management, interoperability_toolkit,
+
+pub use utils::{
+    MathUtils, StatisticsUtils, DataUtils, ValidationUtils, Logger, LogLevel, LogMessage,
 };
 
-/// 模型系统分析的主要入口点
+// 核心基础设施重新导出
+pub use config::{
+    ModelConfig, ConfigManager, PrecisionConfig, PerformanceConfig, VisualizationConfig,
+    LogLevel as ConfigLogLevel,
+};
+
+pub use error::{
+    ModelError, ErrorSeverity, ErrorContext, ContextualError, ErrorHandler,
+    Result as ModelResult, ContextualResult,
+};
+
+pub use visualization::{
+    Chart, ChartType, ChartConfig, Dataset, DataPoint, ChartBuilder, VisualizationUtils,
+};
+
+pub use benchmarks::{
+    Benchmarker, BenchmarkResult, BenchmarkConfig, AlgorithmBenchmarker, MemoryBenchmarker,
+    ConcurrencyBenchmarker, BenchmarkSuite,
+};
+
+// 标准和合规性重新导出
+pub use standards_compliance::{
+    StandardComplianceChecker, ArchitectureStandard, ComplianceLevel, IssueSeverity,
+    ComplianceResult, ArchitectureDescription, ArchitectureDescriptionBuilder, ArchitectureViewpoint, ArchitectureView,
+    ArchitectureModel, ArchitectureElement, ArchitectureRelationship, Concern, Stakeholder,
+    ElementType, RelationshipType, ConcernCategory, Interface, InterfaceType, Operation,
+    Parameter, ParameterDirection, ModelKind,
+};
+
+pub use university_course_alignment::{
+    CourseAlignmentAnalyzer, University, CourseAlignmentAnalysis, LearningPathPlanner,
+    LearningPath, LearningPhase, AssessmentMethod, CourseTopic, UniversityCourse,
+};
+
+pub use maturity_models::{
+    MaturityAssessor, MaturityModel, MaturityLevel, AssessmentResult, ProcessArea,
+    ProcessAreaAssessment, ProcessCategory, Practice,
+};
+
+pub use enterprise_frameworks::{
+    EnterpriseArchitectureAnalyzer, EnterpriseFramework, EnterpriseArchitectureModel,
+    ArchitecturePrinciple, ArchitectureStandard as FrameworkArchitectureStandard,
+    ArchitectureGuideline, PrincipleCategory, StandardCategory, GuidelineCategory,
+};
+
+/// Rust理论模型实现库的主要入口点
 pub struct ModelSystemAnalyzer {
-    pub architecture: architecture::ArchitectureDescription,
-    pub formal_methods: formal_methods::tools::FormalMethodsToolkit,
-    pub dsl: domain_specific_languages::dsl_toolkit::DSLToolkit,
-    pub ai_ml: ai_ml_integration::ai_ml_toolkit::AIMLToolkit,
-    pub interoperability: cross_language_interoperability::interoperability_toolkit::InteroperabilityToolkit,
+    pub queueing_models: queueing_models::MM1Queue,
+    pub ml_models: ml_models::LinearRegression,
+    pub formal_models: formal_models::FormalMethodsToolkit,
+    pub math_models: math_models::StatisticalTools,
+    pub performance_models: PerformanceAnalyzer,
+    pub benchmarks: benchmarks::BenchmarkSuite,
 }
 
 impl ModelSystemAnalyzer {
     /// 创建新的模型系统分析器
     pub fn new() -> Self {
         Self {
-            architecture: architecture::ArchitectureDescription {
-                id: "default_arch".to_string(),
-                name: "Default Architecture".to_string(),
-                version: "1.0.0".to_string(),
-                viewpoints: Vec::new(),
-                views: Vec::new(),
-                models: Vec::new(),
-                concerns: Vec::new(),
-                stakeholders: Vec::new(),
-            },
-            formal_methods: formal_methods::tools::FormalMethodsToolkit::new(),
-            dsl: domain_specific_languages::dsl_toolkit::DSLToolkit::new(),
-            ai_ml: ai_ml_integration::ai_ml_toolkit::AIMLToolkit::new(),
-            interoperability: cross_language_interoperability::interoperability_toolkit::InteroperabilityToolkit::new(),
+            queueing_models: queueing_models::MM1Queue::new(1.0, 2.0),
+            ml_models: ml_models::LinearRegression::new(0.01, 1000),
+            formal_models: formal_models::FormalMethodsToolkit::new(),
+            math_models: math_models::StatisticalTools,
+            performance_models: PerformanceAnalyzer::new(),
+            benchmarks: benchmarks::BenchmarkSuite::new(),
         }
     }
 
-    /// 分析软件架构
-    pub fn analyze_architecture(&self) -> &architecture::ArchitectureDescription {
-        &self.architecture
+    /// 分析排队论模型
+    pub fn analyze_queueing_models(&self) -> &queueing_models::MM1Queue {
+        &self.queueing_models
     }
 
-
-    /// 分析形式化方法
-    pub fn analyze_formal_methods(&self) -> &formal_methods::tools::FormalMethodsToolkit {
-        &self.formal_methods
+    /// 分析机器学习模型
+    pub fn analyze_ml_models(&self) -> &ml_models::LinearRegression {
+        &self.ml_models
     }
 
-    /// 分析领域特定语言
-    pub fn analyze_dsl(&self) -> &domain_specific_languages::dsl_toolkit::DSLToolkit {
-        &self.dsl
+    /// 分析形式化方法模型
+    pub fn analyze_formal_models(&self) -> &formal_models::FormalMethodsToolkit {
+        &self.formal_models
     }
 
-    /// 分析AI/ML集成
-    pub fn analyze_ai_ml(&self) -> &ai_ml_integration::ai_ml_toolkit::AIMLToolkit {
-        &self.ai_ml
+    /// 分析数学模型
+    pub fn analyze_math_models(&self) -> &math_models::StatisticalTools {
+        &self.math_models
     }
 
-    /// 分析跨语言互操作性
-    pub fn analyze_interoperability(&self) -> &cross_language_interoperability::interoperability_toolkit::InteroperabilityToolkit {
-        &self.interoperability
+    /// 分析性能模型
+    pub fn analyze_performance_models(&self) -> &PerformanceAnalyzer {
+        &self.performance_models
+    }
+
+    /// 运行基准测试
+    pub fn run_benchmarks(&mut self) -> String {
+        self.benchmarks.run_full_suite()
     }
 }
 
@@ -111,51 +174,58 @@ mod tests {
     #[test]
     fn test_model_system_analyzer_creation() {
         let analyzer = ModelSystemAnalyzer::new();
-        assert_eq!(analyzer.architecture.name, "Default Architecture");
+        assert_eq!(analyzer.queueing_models.arrival_rate, 1.0);
+        assert_eq!(analyzer.queueing_models.service_rate, 2.0);
     }
 
     #[test]
     fn test_model_system_analyzer_default() {
         let analyzer = ModelSystemAnalyzer::default();
-        assert_eq!(analyzer.architecture.name, "Default Architecture");
+        assert_eq!(analyzer.queueing_models.arrival_rate, 1.0);
     }
 
     #[test]
-    fn test_architecture_analysis() {
+    fn test_queueing_models_analysis() {
         let analyzer = ModelSystemAnalyzer::new();
-        let architecture = analyzer.analyze_architecture();
-        assert_eq!(architecture.name, "Default Architecture");
+        let queue = analyzer.analyze_queueing_models();
+        assert_eq!(queue.utilization(), 0.5);
     }
 
-
     #[test]
-    fn test_formal_methods_analysis() {
+    fn test_ml_models_analysis() {
         let analyzer = ModelSystemAnalyzer::new();
-        let formal_methods = analyzer.analyze_formal_methods();
-        assert!(formal_methods.verify_algebraic_property("associativity"));
+        let ml_model = analyzer.analyze_ml_models();
+        assert_eq!(ml_model.learning_rate, 0.01);
+        assert_eq!(ml_model.max_iterations, 1000);
     }
 
     #[test]
-    fn test_dsl_analysis() {
+    fn test_formal_models_analysis() {
         let analyzer = ModelSystemAnalyzer::new();
-        let dsl = analyzer.analyze_dsl();
-        let expression = dsl.create_complex_expression();
-        assert_eq!(expression.evaluate(), 16.0);
+        let formal_models = analyzer.analyze_formal_models();
+        assert!(formal_models.verify_algebraic_property("associativity"));
     }
 
     #[test]
-    fn test_ai_ml_analysis() {
+    fn test_math_models_analysis() {
         let analyzer = ModelSystemAnalyzer::new();
-        let ai_ml = analyzer.analyze_ai_ml();
-        let ml_result = ai_ml.run_ml_prediction(&[1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]);
-        assert_eq!(ml_result.len(), 1);
+        let _math_models = analyzer.analyze_math_models();
+        let data = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+        assert_eq!(math_models::StatisticalTools::mean(&data), 3.0);
     }
 
     #[test]
-    fn test_interoperability_analysis() {
+    fn test_performance_models_analysis() {
+        let analyzer = ModelSystemAnalyzer::new();
+        let performance_models = analyzer.analyze_performance_models();
+        // 测试性能分析器创建
+        assert_eq!(performance_models.average_metric("test"), None);
+    }
+
+    #[test]
+    fn test_benchmarks() {
         let mut analyzer = ModelSystemAnalyzer::new();
-        let interoperability = &mut analyzer.interoperability;
-        let address = interoperability.safe_allocate(1024).unwrap();
-        assert!(interoperability.safe_deallocate(address).is_ok());
+        let report = analyzer.run_benchmarks();
+        assert!(report.contains("完整基准测试套件"));
     }
 }

@@ -15,11 +15,43 @@
 - L: 连接关系
 - B: 行为约束
 
-**Rust 伪代码**：
+**Rust 完整实现**：
 
 ```rust
-struct Component { name: String, interfaces: Vec<String> }
-struct System { components: Vec<Component>, links: Vec<(String, String)> }
+#[derive(Debug, Clone)]
+pub struct Component {
+    pub name: String,
+    pub interfaces: Vec<Interface>,
+}
+
+#[derive(Debug, Clone)]
+pub struct Interface {
+    pub name: String,
+    pub methods: Vec<String>,
+}
+
+#[derive(Debug, Clone)]
+pub struct System {
+    pub components: Vec<Component>,
+    pub links: Vec<(String, String)>,
+}
+
+impl System {
+    pub fn new() -> Self {
+        Self {
+            components: Vec::new(),
+            links: Vec::new(),
+        }
+    }
+    
+    pub fn add_component(&mut self, component: Component) {
+        self.components.push(component);
+    }
+    
+    pub fn add_link(&mut self, from: String, to: String) {
+        self.links.push((from, to));
+    }
+}
 ```
 
 **简要说明**：
@@ -77,13 +109,42 @@ impl Verification {
 M/M/1 排队模型：λ（到达率），μ（服务率），L（平均队长），W（平均等待时间）
 L = λ/(μ-λ), W = 1/(μ-λ)
 
-**Rust 伪代码**：
+**Rust 完整实现**：
 
 ```rust
-struct Queue { lambda: f64, mu: f64 }
-impl Queue {
-    fn avg_length(&self) -> f64 { self.lambda / (self.mu - self.lambda) }
-    fn avg_wait(&self) -> f64 { 1.0 / (self.mu - self.lambda) }
+#[derive(Debug, Clone)]
+pub struct MM1Queue {
+    pub arrival_rate: f64,    // λ 到达率
+    pub service_rate: f64,    // μ 服务率
+    pub capacity: Option<usize>,
+}
+
+impl MM1Queue {
+    pub fn new(arrival_rate: f64, service_rate: f64) -> Self {
+        Self {
+            arrival_rate,
+            service_rate,
+            capacity: None,
+        }
+    }
+    
+    pub fn utilization(&self) -> f64 {
+        self.arrival_rate / self.service_rate
+    }
+    
+    pub fn average_queue_length(&self) -> Result<f64, String> {
+        if self.utilization() >= 1.0 {
+            return Err("系统不稳定：利用率 >= 1.0".to_string());
+        }
+        Ok(self.arrival_rate / (self.service_rate - self.arrival_rate))
+    }
+    
+    pub fn average_waiting_time(&self) -> Result<f64, String> {
+        if self.utilization() >= 1.0 {
+            return Err("系统不稳定：利用率 >= 1.0".to_string());
+        }
+        Ok(1.0 / (self.service_rate - self.arrival_rate))
+    }
 }
 ```
 

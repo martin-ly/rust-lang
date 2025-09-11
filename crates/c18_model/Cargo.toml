@@ -1,13 +1,129 @@
 [package]
 name = "c18_model"
-version = "0.1.0"
-edition = "2024"
-resolver = "3"
+version = "0.2.0"
+edition = "2021"
+authors = ["c18_model Contributors <contributors@c18model.dev>"]
+description = "Rust implementation of theoretical models for system modeling, machine learning, and formal methods"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/c18model/c18_model"
+documentation = "https://docs.rs/c18_model"
+homepage = "https://c18model.dev"
+keywords = ["rust", "modeling", "machine-learning", "formal-methods", "mathematics", "queueing-theory", "statistics"]
+categories = ["science", "algorithms", "mathematics", "simulation"]
+readme = "README.md"
+rust-version = "1.70"
 
 [dependencies]
+# 序列化和反序列化
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+
+# 错误处理
 thiserror = "1.0"
-tokio = { version = "1.0", features = ["full"] }
+
+# 异步运行时
+tokio = { version = "1.0", features = ["full"], optional = true }
+
+# UUID生成
 uuid = { version = "1.0", features = ["v4"] }
+
+# 时间处理
 chrono = { version = "0.4", features = ["serde"] }
+
+# 随机数生成
+fastrand = "2.0"
+
+# 图算法
+petgraph = "0.6"
+
+# 并行计算
+rayon = { version = "1.8", optional = true }
+
+# 数值计算
+num-traits = "0.2"
+num-derive = "0.3"
+
+# 统计计算
+statrs = "0.16"
+
+# 数学函数
+libm = "0.2"
+
+[dev-dependencies]
+# 基准测试
+criterion = { version = "0.5", features = ["html_reports"] }
+
+# 属性测试
+proptest = "1.0"
+
+# 测试工具
+tempfile = "3.0"
+
+# 文档测试
+doc-comment = "0.3"
+
+[features]
+default = ["std"]
+std = []
+no-std = []
+async = ["tokio"]
+visualization = []
+benchmarks = []
+parallel = ["rayon"]
+
+# 可选依赖
+[dependencies.nalgebra]
+version = "0.32"
+optional = true
+features = ["serde-serialize"]
+
+[dependencies.plotly]
+version = "0.8"
+optional = true
+
+[dependencies.wasm-bindgen]
+version = "0.2"
+optional = true
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"
+js-sys = "0.3"
+web-sys = "0.3"
+
+# [[bench]]
+# name = "queueing_bench"
+# harness = false
+
+# [[bench]]
+# name = "ml_bench"
+# harness = false
+
+# [[bench]]
+# name = "formal_bench"
+# harness = false
+
+# [[bench]]
+# name = "math_bench"
+# harness = false
+
+[profile.dev]
+opt-level = 0
+debug = true
+split-debuginfo = "unpacked"
+
+[profile.release]
+opt-level = 3
+debug = false
+lto = true
+codegen-units = 1
+panic = "abort"
+
+[profile.bench]
+opt-level = 3
+debug = false
+lto = true
+codegen-units = 1
+
+[profile.test]
+opt-level = 1
+debug = true
