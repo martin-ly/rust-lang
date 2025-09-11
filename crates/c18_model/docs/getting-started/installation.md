@@ -24,7 +24,7 @@ cargo --version
 
 ```toml
 [dependencies]
-c18_model = "0.1.0"
+c18_model = "0.2.0"
 ```
 
 ### 方法二：使用 cargo add
@@ -82,7 +82,7 @@ c18_model 安装成功！
 
 ```toml
 [dependencies]
-c18_model = { version = "0.1.0", features = ["visualization", "benchmarks"] }
+c18_model = { version = "0.2.0", features = ["visualization", "benchmarks"] }
 ```
 
 ## 故障排除

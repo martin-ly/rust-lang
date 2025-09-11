@@ -318,19 +318,19 @@ impl Chart {
         json.push_str("  \"datasets\": [\n");
         
         for (i, dataset) in self.datasets.iter().enumerate() {
-            json.push_str(&format!("    {{\n"));
+            json.push_str("    {\n");
             json.push_str(&format!("      \"name\": \"{}\",\n", dataset.name));
             json.push_str(&format!("      \"color\": \"{}\",\n", dataset.color));
             json.push_str(&format!("      \"data_points\": {}\n", dataset.data.len()));
-            json.push_str(&format!("    }}"));
+            json.push_str("    }");
             if i < self.datasets.len() - 1 {
-                json.push_str(",");
+                json.push(',');
             }
-            json.push_str("\n");
+            json.push('\n');
         }
         
         json.push_str("  ]\n");
-        json.push_str("}");
+        json.push('}');
         json
     }
 }

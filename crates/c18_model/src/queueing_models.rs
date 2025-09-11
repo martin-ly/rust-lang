@@ -222,7 +222,7 @@ impl PerformanceAnalyzer {
 
     /// 记录性能指标
     pub fn record_metric(&mut self, name: &str, value: f64) {
-        self.metrics.entry(name.to_string()).or_insert_with(Vec::new).push(value);
+        self.metrics.entry(name.to_string()).or_default().push(value);
     }
 
     /// 计算平均性能指标

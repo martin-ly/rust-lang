@@ -96,11 +96,7 @@ impl Benchmarker {
         }
 
         let end_memory = self.get_memory_usage();
-        let memory_usage = if end_memory > start_memory {
-            end_memory - start_memory
-        } else {
-            0
-        };
+        let memory_usage = end_memory.saturating_sub(start_memory);
 
         let total_duration: Duration = durations.iter().sum();
         let avg_duration = total_duration / durations.len() as u32;
@@ -216,7 +212,7 @@ impl Benchmarker {
             report.push_str(&format!("内存使用量: {} bytes\n", result.memory_usage));
             report.push_str(&format!("吞吐量: {:.2} ops/sec\n", result.throughput));
             report.push_str(&format!("错误次数: {}\n", result.error_count));
-            report.push_str("\n");
+            report.push('\n');
         }
 
         // 性能对比
@@ -255,7 +251,7 @@ impl AlgorithmBenchmarker {
     /// 测试排序算法性能
     pub fn benchmark_sorting<F>(&self, name: &str, sort_fn: F, data_size: usize) -> BenchmarkResult
     where
-        F: Fn(&mut [i32]) -> (),
+        F: Fn(&mut [i32]),
     {
         let mut benchmarker = Benchmarker::new(BenchmarkConfig::default());
         

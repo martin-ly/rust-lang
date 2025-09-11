@@ -15,7 +15,7 @@ cd my_model_project
 
 ```toml
 [dependencies]
-c18_model = "0.1.0"
+c18_model = "0.2.0"
 ```
 
 ## 示例 1：排队论模型
