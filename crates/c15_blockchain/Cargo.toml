@@ -1,7 +1,13 @@
 [package]
 name = "c15_blockchain"
-edition = "2024"
-resolver = "3"
+version = "0.1.0"
+edition = "2021"
+authors = ["Rust Blockchain Team"]
+description = "区块链应用演示 - 展示 Rust 1.89 特性在区块链开发中的应用"
+license = "MIT"
+repository = "https://github.com/rust-lang/c15_blockchain"
+keywords = ["blockchain", "rust", "cryptocurrency", "consensus"]
+categories = ["cryptography", "algorithms", "data-structures"]
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
@@ -13,3 +19,23 @@ rand = "0.8"
 tokio = { version = "1.0", features = ["full"] }
 uuid = { version = "1.0", features = ["v4"] }
 chrono = { version = "0.4", features = ["serde"] }
+
+# Rust 1.89 特性支持
+[features]
+default = []
+ffi = []  # 启用 FFI 功能
+advanced = ["ffi"]  # 高级功能
+
+# 开发依赖
+[dev-dependencies]
+criterion = "0.5"
+proptest = "1.0"
+
+# 示例
+[[example]]
+name = "basic_blockchain"
+path = "examples/basic_blockchain.rs"
+
+[[example]]
+name = "rust_189_demo"
+path = "examples/rust_189_demo.rs"

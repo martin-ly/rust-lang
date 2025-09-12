@@ -2,7 +2,7 @@ use rayon::prelude::*;
 
 // 定义一个并行归约函数
 #[allow(unused)]
-fn parallel_reduction<T, F>(data: &[T], reducer: F) -> T
+pub fn parallel_reduction<T, F>(data: &[T], reducer: F) -> T
 where
     T: Send + Sync + Copy + std::ops::Add<Output = T>,
     F: Fn(T, T) -> T + Sync + Send,

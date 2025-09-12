@@ -21,11 +21,17 @@ pub mod os_patterns;
 // 错误处理模块
 pub mod error_handling;
 
+// Rust 1.89 新特性演示模块
+pub mod rust_189_features;
+
+// 性能基准测试模块
+pub mod performance_benchmarks;
+
 // 示例程序
 // pub mod bin; // 暂时注释掉，避免编译错误
 
 /// 设计模式库版本信息
-pub const VERSION: &str = "1.0.0";
+pub const VERSION: &str = "1.0.1";
 
 /// 获取库版本信息
 pub fn get_version() -> &'static str {
@@ -43,6 +49,17 @@ pub enum PatternCategory {
     DomainSpecific,
 }
 
+/// 执行模型：同步/异步/混合
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+pub enum ExecutionModel {
+    /// 纯同步：阻塞式执行
+    Sync,
+    /// 纯异步：基于 async/await 或事件驱动
+    Async,
+    /// 混合：同步为主，提供异步适配；或异步内部含阻塞边界
+    Hybrid,
+}
+
 /// 设计模式信息
 #[derive(Debug, Clone)]
 pub struct PatternInfo {
@@ -50,6 +67,8 @@ pub struct PatternInfo {
     pub category: PatternCategory,
     pub description: String,
     pub use_cases: Vec<String>,
+    /// 执行模型（同步/异步/混合）
+    pub execution_model: ExecutionModel,
 }
 
 /// 获取所有设计模式信息
@@ -65,6 +84,7 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
                 "配置管理器".to_string(),
                 "日志记录器".to_string(),
             ],
+            execution_model: ExecutionModel::Sync,
         },
         PatternInfo {
             name: "Factory".to_string(),
@@ -75,6 +95,7 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
                 "UI组件工厂".to_string(),
                 "数据库连接工厂".to_string(),
             ],
+            execution_model: ExecutionModel::Sync,
         },
         PatternInfo {
             name: "Builder".to_string(),
@@ -85,6 +106,7 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
                 "HTTP请求构建器".to_string(),
                 "配置对象构建器".to_string(),
             ],
+            execution_model: ExecutionModel::Sync,
         },
         
         // 结构型模式
@@ -97,6 +119,7 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
                 "API版本兼容".to_string(),
                 "数据格式转换".to_string(),
             ],
+            execution_model: ExecutionModel::Hybrid,
         },
         PatternInfo {
             name: "Decorator".to_string(),
@@ -107,6 +130,7 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
                 "缓存装饰器".to_string(),
                 "权限检查装饰器".to_string(),
             ],
+            execution_model: ExecutionModel::Hybrid,
         },
         PatternInfo {
             name: "Proxy".to_string(),
@@ -117,6 +141,7 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
                 "虚拟代理".to_string(),
                 "保护代理".to_string(),
             ],
+            execution_model: ExecutionModel::Hybrid,
         },
         
         // 行为型模式
@@ -129,6 +154,7 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
                 "数据绑定".to_string(),
                 "消息通知".to_string(),
             ],
+            execution_model: ExecutionModel::Hybrid,
         },
         PatternInfo {
             name: "Strategy".to_string(),
@@ -139,6 +165,7 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
                 "支付方式策略".to_string(),
                 "压缩算法策略".to_string(),
             ],
+            execution_model: ExecutionModel::Sync,
         },
         PatternInfo {
             name: "Command".to_string(),
@@ -149,6 +176,7 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
                 "宏命令".to_string(),
                 "队列请求".to_string(),
             ],
+            execution_model: ExecutionModel::Hybrid,
         },
         
         // 并行模式
@@ -161,6 +189,7 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
                 "并行搜索".to_string(),
                 "并行计算".to_string(),
             ],
+            execution_model: ExecutionModel::Sync,
         },
         PatternInfo {
             name: "Fork-Join".to_string(),
@@ -171,6 +200,7 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
                 "并行矩阵乘法".to_string(),
                 "并行图像处理".to_string(),
             ],
+            execution_model: ExecutionModel::Sync,
         },
         
         // 并发模式
@@ -183,6 +213,7 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
                 "游戏服务器".to_string(),
                 "分布式系统".to_string(),
             ],
+            execution_model: ExecutionModel::Async,
         },
         PatternInfo {
             name: "Channel".to_string(),
@@ -193,6 +224,7 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
                 "工作队列".to_string(),
                 "事件流处理".to_string(),
             ],
+            execution_model: ExecutionModel::Hybrid,
         },
         
         // 领域特定模式
@@ -205,6 +237,7 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
                 "桌面应用".to_string(),
                 "移动应用".to_string(),
             ],
+            execution_model: ExecutionModel::Hybrid,
         },
         PatternInfo {
             name: "Repository".to_string(),
@@ -215,6 +248,7 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
                 "缓存管理".to_string(),
                 "API集成".to_string(),
             ],
+            execution_model: ExecutionModel::Hybrid,
         },
         PatternInfo {
             name: "Component".to_string(),
@@ -225,6 +259,7 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
                 "模拟系统".to_string(),
                 "可视化应用".to_string(),
             ],
+            execution_model: ExecutionModel::Sync,
         },
     ]
 }
@@ -247,6 +282,14 @@ pub fn search_patterns(query: &str) -> Vec<PatternInfo> {
                 || pattern.description.to_lowercase().contains(&query_lower)
                 || pattern.use_cases.iter().any(|case| case.to_lowercase().contains(&query_lower))
         })
+        .collect()
+}
+
+/// 按执行模型获取设计模式
+pub fn get_patterns_by_execution_model(model: ExecutionModel) -> Vec<PatternInfo> {
+    get_all_patterns()
+        .into_iter()
+        .filter(|p| p.execution_model == model)
         .collect()
 }
 
@@ -297,6 +340,6 @@ mod tests {
 
     #[test]
     fn test_version() {
-        assert_eq!(get_version(), "1.0.0");
+        assert_eq!(get_version(), "1.0.1");
     }
 }

@@ -70,3 +70,28 @@ pub fn test_abstract_factory() {
     circle.draw(); // 输出: Drawing a Circle with radius: 5
     rectangle.draw(); // 输出: Drawing a Rectangle with width: 4 and height: 3
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_abstract_factory01() {
+        test_abstract_factory();
+    }
+    
+    #[test]
+    fn test_circle_factory() {
+        let factory = CircleFactory;
+        let circle = factory.create_shape();
+        assert_eq!(circle.radius, 5.0);
+    }
+    
+    #[test]
+    fn test_rectangle_factory() {
+        let factory = RectangleFactory;
+        let rectangle = factory.create_shape();
+        assert_eq!(rectangle.width, 4.0);
+        assert_eq!(rectangle.height, 3.0);
+    }
+}

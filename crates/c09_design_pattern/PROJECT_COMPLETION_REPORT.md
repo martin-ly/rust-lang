@@ -320,6 +320,21 @@ c09_design_pattern项目成功完成了所有预定目标，实现了基于Rust 
 
 这个项目为Rust生态系统贡献了重要的设计模式实现参考，将有助于推动Rust在更多领域的应用和发展。
 
+## 本次改进（2025-09）
+
+### 执行模型分类（同步/异步/混合）
+
+- 新增 `ExecutionModel`（Sync/Async/Hybrid）与 `get_patterns_by_execution_model` 检索函数。
+- 在 `PatternInfo` 中增加 `execution_model` 字段，并为既有模式补全标注。
+- 文档增强：`README.md` 与 `09_design_patterns.md` 增补“同步 vs 异步”分类与综述。
+- 测试补强：在 `tests/integration_tests.rs` 增加执行模型查询的断言，保障一致性。
+
+后续建议：
+
+1. 为 `src/concurrency/asynchronous/*` 提供基于 Tokio 的更贴近生产的示例。
+2. 引入基于执行模型的测试分组与覆盖率维度统计。
+3. 在 README 增加“同步/异步/混合选择”决策树图示，辅助工程选型。
+
 ---
 
 **项目完成时间**：2025年1月  

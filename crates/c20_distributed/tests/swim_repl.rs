@@ -5,7 +5,7 @@ impl SwimTransport for DummyPing { fn ping(&self, _to: &str) -> bool { true } }
 
 #[test]
 fn swim_probe_alive() {
-    let node = swim::SwimNode { node_id: "n0".into(), transport: DummyPing };
+    let node = swim::SwimNode { node_id: "n0".into(), transport: DummyPing, probe_interval_ms: 500, fanout: 2 };
     let ev = node.probe("n1");
     assert_eq!(ev.state, swim::SwimMemberState::Alive);
 }

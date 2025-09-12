@@ -22,6 +22,53 @@ impl QuorumPolicy for MajorityQuorum {
     }
 }
 
+// ---------------- Read/Write 可插拔仲裁（不破坏现有 API） ----------------
+
+pub trait ReadQuorumPolicy {
+    fn required_read_acks(total: usize, level: ConsistencyLevel) -> usize;
+}
+
+pub trait WriteQuorumPolicy {
+    fn required_write_acks(total: usize, level: ConsistencyLevel) -> usize;
+}
+
+pub struct MajorityRead;
+pub struct MajorityWrite;
+
+impl ReadQuorumPolicy for MajorityRead {
+    fn required_read_acks(total: usize, level: ConsistencyLevel) -> usize {
+        MajorityQuorum::required_acks(total, level)
+    }
+}
+
+impl WriteQuorumPolicy for MajorityWrite {
+    fn required_write_acks(total: usize, level: ConsistencyLevel) -> usize {
+        MajorityQuorum::required_acks(total, level)
+    }
+}
+
+/// 读/写仲裁可分别配置的组合策略
+pub struct CompositeQuorum<R, W> {
+    _r: std::marker::PhantomData<R>,
+    _w: std::marker::PhantomData<W>,
+}
+
+impl<R, W> CompositeQuorum<R, W> {
+    pub fn required_read(total: usize, level: ConsistencyLevel) -> usize
+    where
+        R: ReadQuorumPolicy,
+    {
+        R::required_read_acks(total, level)
+    }
+
+    pub fn required_write(total: usize, level: ConsistencyLevel) -> usize
+    where
+        W: WriteQuorumPolicy,
+    {
+        W::required_write_acks(total, level)
+    }
+}
+
 use std::collections::HashMap;
 
 pub struct LocalReplicator<ID> {

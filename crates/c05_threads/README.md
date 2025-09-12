@@ -1,5 +1,7 @@
 # Rust 线程编程模块 (c05_threads)
 
+> 导航：返回 [`rust-formal-engineering-system`](../../rust-formal-engineering-system/README.md) · 同步范式 [`01_synchronous/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/01_synchronous/00_index.md) · 异步范式 [`02_async/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/02_async/00_index.md)
+
 本模块展示了Rust 1.89中线程编程的各种高级特性，包括作用域线程、工作窃取、无锁数据结构、高级同步原语等。
 
 ## 快速开始

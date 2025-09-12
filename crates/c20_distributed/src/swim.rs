@@ -22,6 +22,9 @@ pub trait SwimTransport {
 pub struct SwimNode<T: SwimTransport> {
     pub node_id: String,
     pub transport: T,
+    // 参数化：探测周期与 fanout 等（占位，便于测试调优）
+    pub probe_interval_ms: u64,
+    pub fanout: usize,
 }
 
 impl<T: SwimTransport> SwimNode<T> {
@@ -40,6 +43,12 @@ impl<T: SwimTransport> SwimNode<T> {
             }
         }
         SwimEvent { node_id: target.to_string(), state: SwimMemberState::Suspect }
+    }
+
+    pub fn params(mut self, probe_interval_ms: u64, fanout: usize) -> Self {
+        self.probe_interval_ms = probe_interval_ms;
+        self.fanout = fanout;
+        self
     }
 }
 
@@ -78,6 +87,17 @@ impl MembershipView {
             let ent = self.members.entry(node.clone()).or_insert(MemberInfo { state: info.state, version: info.version });
             if info.version.0 > ent.version.0 { *ent = info.clone(); }
         }
+    }
+
+    /// 基于当前成员集，执行一次“轮次”的事件生成（示意）：
+    /// - 将可达节点标记为 Alive，不可达（外部注入）则标记为 Suspect。
+    pub fn one_round_events<T: SwimTransport>(&self, node: &SwimNode<T>, peers: impl IntoIterator<Item=String>) -> Vec<SwimEvent> {
+        let mut evs = Vec::new();
+        for p in peers {
+            let ev = node.probe(&p);
+            evs.push(ev);
+        }
+        evs
     }
 }
 

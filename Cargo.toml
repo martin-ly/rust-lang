@@ -24,10 +24,39 @@ members = [ "crates/c01_ownership_borrow_scope",
             ]
 
 [profile.release]
+
+#opt-level = "s" 和 opt-level = "z" 专门针对减小二进制体积设计
+#"s"：在保持较好性能的同时尽可能减小体积
+#"z"：最大程度地优化体积，可能牺牲少量性能
 opt-level = 3
+
+#链接时优化（Link Time Optimization, LTO）允许编译器跨 crate 边界进行整体优化，消除冗余代码和数据。
+#lto = "fat" 这种配置下，编译器会在链接阶段对所有代码进行全局优化，通常能减少 20-30% 的体积。
+#对于对体积有极端要求的场景，可以使用 "thin" 替代 "fat"，在优化效果和编译时间之间取得平衡。
 lto = true
+
+# codegen-units = 1 表示单个代码生成单元，即每个 crate 都独立编译。
+# 这种配置下，每个 crate 的编译速度会更快，但可能会牺牲一些整体优化效果。
+# 如果希望获得更好的优化效果，可以将 codegen-units 设置为更大的值（如 256）。
 codegen-units = 1
+
+#去除调试符号是减小二进制体积最有效的方法之一。
+#strip = true
+strip = "symbols"
+
+# 默认情况下，Rust 在 panic 时会进行栈展开，提供详细的调用栈信息。
+# 但在生产环境中，特别是对于命令行工具和小型服务，立即终止程序可能是更合适的选择：
+# 这种配置不仅减小了二进制体积（因为它不需要包含栈展开的代码），还能略微提升性能。
 panic = "abort"
+
+# LTO 通过全局代码分析消除了未被使用的函数和数据；
+# 调整优化级别使编译器优先选择空间效率更高的指令序列；
+# 去除调试符号直接移除了大量的辅助信息；
+# 改变 panic 策略避免了栈展开代码的引入；
+# Musl 工具链则提供了一个更精简的标准库实现。
+# 从编译流程角度看，这些优化发生在不同的阶段：
+#  LTO 在链接阶段工作，优化级别影响编译中期决策，而去除符号和 panic 策略则影响前期的代码生成策略。
+#  这种多阶段的优化组合确保了最终生成的二进制文件既小巧又高效。
 
 [profile.dev]
 opt-level = 0
@@ -35,7 +64,17 @@ debug = true
 debug-assertions = true
 overflow-checks = true
 
-# 工作区级别的依赖版本统一
+[profile.test]
+opt-level = 1
+debug = true
+
+[profile.bench]
+opt-level = 3
+debug = false
+lto = true
+codegen-units = 1
+
+# 工作区级别的依赖版本统一 begin
 [workspace.dependencies]
 # 网络和 HTTP 相关 - 严格版本约束
 reqwest = { version = "=0.12.23", features = ["json", "rustls-tls"] }
@@ -103,4 +142,4 @@ url = "=2.5.7"
 bytes = "=1.10.1"
 indexmap = "=2.11.1"
 
-# 依赖版本约束 - 在工作区依赖中统一版本
+# 依赖版本约束 - 在工作区依赖中统一版本 end

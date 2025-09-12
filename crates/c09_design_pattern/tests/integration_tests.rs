@@ -8,6 +8,7 @@ use c09_design_pattern::creational::abstract_factory::enum_trait::{CircleFactory
 use c09_design_pattern::structural::proxy::define::{RealSubject, Proxy, Subject};
 use c09_design_pattern::structural::flyweight::define::{OptimizedFlyweightFactory as FlyweightFactory, Flyweight};
 use c09_design_pattern::behavioral::chain_of_responsibility::define::{ConcreteHandlerA, ConcreteHandlerB, ConcreteHandlerC, Handler};
+use c09_design_pattern::{get_version, get_patterns_by_execution_model, ExecutionModel};
 
 #[cfg(test)]
 mod integration_tests {
@@ -36,6 +37,20 @@ mod integration_tests {
         
         // 两个工厂应该是同一个实例（通过内容比较）
         assert_eq!(factory.create_shape().area(), factory2.create_shape().area());
+    }
+
+    /// 测试：执行模型分类查询基础正确性
+    #[test]
+    fn test_execution_model_query() {
+        assert_eq!(get_version(), "1.0.1");
+
+        let sync = get_patterns_by_execution_model(ExecutionModel::Sync);
+        let asyncs = get_patterns_by_execution_model(ExecutionModel::Async);
+        let hybrid = get_patterns_by_execution_model(ExecutionModel::Hybrid);
+
+        assert!(sync.iter().any(|p| p.name == "Singleton" || p.name == "Builder"));
+        assert!(asyncs.iter().any(|p| p.name == "Actor"));
+        assert!(hybrid.iter().any(|p| p.name == "Proxy" || p.name == "Observer"));
     }
 
     /// 测试代理模式与享元模式的集成

@@ -1,5 +1,7 @@
 # Rust 泛型理论项目 (c04_generic)
 
+> 导航：返回 [`rust-formal-engineering-system`](../../rust-formal-engineering-system/README.md) · 设计模式 [`03_design_patterns/00_index.md`](../../rust-formal-engineering-system/03_design_patterns/00_index.md) · 编程范式 [`02_programming_paradigms/`](../../rust-formal-engineering-system/02_programming_paradigms/)
+
 这是一个全面的 Rust 泛型编程理论学习和实践项目，涵盖了 Rust 中泛型系统的各个方面。
 
 ## 🎯 项目目标

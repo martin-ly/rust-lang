@@ -30,3 +30,13 @@ ahash = "0.8"
 
 [dev-dependencies]
 tokio = { version = "1.44", features = ["rt", "macros"] }
+criterion = { version = "0.5", default-features = false, features = ["cargo_bench_support"] }
+proptest = "1.5"
+
+[[bench]]
+name = "ack_distribution_criterion"
+harness = false
+
+[[bench]]
+name = "ack_distribution"
+harness = false

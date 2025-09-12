@@ -1,5 +1,7 @@
 # c06_async - Rust 1.89 异步专题
 
+> 导航：返回 [`rust-formal-engineering-system`](../../rust-formal-engineering-system/README.md) · 异步范式 [`02_async/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/02_async/00_index.md) · 同步范式 [`01_synchronous/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/01_synchronous/00_index.md)
+
 本包系统演示 Rust 1.89 语境下的异步编程（Tokio/futures 生态）：
 
 - 基础：async/await、Future/Stream、Tokio 运行时

@@ -2,6 +2,7 @@
 //! 
 //! 本模块提供了区块链相关的工具函数。
 //! This module provides blockchain-related utility functions.
+#![allow(dead_code)]
 
 use crate::types::*;
 // use std::collections::HashMap;

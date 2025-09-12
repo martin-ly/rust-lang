@@ -5,6 +5,22 @@
 格式基于[Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
 项目遵循[语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.0.1] - 2025-09-11
+
+### 新增（1.0.1）
+
+- 执行模型分类：新增 `ExecutionModel`（Sync/Async/Hybrid），并为既有模式补充标注。
+- API：`get_patterns_by_execution_model(ExecutionModel)` 用于按执行模型检索模式。
+- 文档：`README.md` 与 `09_design_patterns.md` 增补“同步 vs 异步”分类与综述。
+- 测试：在 `tests/integration_tests.rs` 增加执行模型查询的集成测试。
+- 新模块：`concurrency::asynchronous::control`（并发限流 `RateLimiter`、超时 `run_with_timeout`），含异步测试；README 补充限流+超时示例。
+
+### 变更（1.0.1）
+
+- `PatternInfo` 结构新增字段 `execution_model`（向后兼容地扩展库内部枚举清单）。
+
+---
+
 ## [1.0.0] - 2025-01-XX
 
 ### 新增

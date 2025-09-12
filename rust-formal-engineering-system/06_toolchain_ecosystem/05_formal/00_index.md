@@ -1,0 +1,39 @@
+# 形式化工具（Formal Tools）索引
+
+## 目标
+
+- 在关键模块引入自动化/半自动化验证，提升正确性与可维护性。
+
+## 工具
+
+- Kani：基于模型检查的验证（`cargo kani`）
+- Prusti：基于规范注解的验证（`cargo prusti`）
+- Creusot：依赖 Coq 的证明体系（实验性）
+
+## 快速开始
+
+```bash
+# Kani（需安装 kani 工具链）
+cargo install kani-verifier
+cargo kani --help
+
+# Prusti（参考官方安装脚本）
+cargo install prusti-launch
+cargo prusti --help
+```
+
+## CI 集成建议
+
+- 对关键并发结构和 unsafe 模块建立最小验证集的 CI job（按周跑）
+- 将验证日志与证明工件归档，失败时阻断合并并回填工单
+
+## 建议流程
+
+1) 选择核心性质（如不死锁、队列有界、无越界访问）
+2) 编写最小规格与 harness
+3) 本地跑工具并修复问题后提交规格与结果
+
+## 导航
+
+- 返回工具链：[`../00_index.md`](../00_index.md)
+- 质量保障：[`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)

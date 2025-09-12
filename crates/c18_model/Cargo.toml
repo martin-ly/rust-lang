@@ -84,24 +84,4 @@ no-std = []
 # name = "math_bench"
 # harness = false
 
-[profile.dev]
-opt-level = 0
-debug = true
-split-debuginfo = "unpacked"
-
-[profile.release]
-opt-level = 3
-debug = false
-lto = true
-codegen-units = 1
-panic = "abort"
-
-[profile.bench]
-opt-level = 3
-debug = false
-lto = true
-codegen-units = 1
-
-[profile.test]
-opt-level = 1
-debug = true
+# Profile configurations are managed at workspace root level

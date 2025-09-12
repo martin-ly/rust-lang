@@ -34,7 +34,7 @@
 
 ```toml
 [dependencies]
-c09_design_pattern = "0.1.0"
+c09_design_pattern = "1.0.1"
 ```
 
 ### 基本使用
@@ -68,7 +68,73 @@ fn main() -> Result<(), DesignPatternError> {
 }
 ```
 
+### 异步示例
+
+```rust
+use c09_design_pattern::{ExecutionModel, get_patterns_by_execution_model};
+
+#[tokio::main]
+async fn main() {
+    let async_patterns = get_patterns_by_execution_model(ExecutionModel::Async);
+    println!("Async patterns: {}", async_patterns.len());
+
+    // 启动一个简单的异步任务
+    let handle = tokio::spawn(async {
+        tokio::time::sleep(std::time::Duration::from_millis(50)).await;
+        "task done"
+    });
+
+    let result = handle.await.unwrap();
+    assert_eq!(result, "task done");
+}
+```
+
+#### 限流与超时组合示例
+
+```rust
+use c09_design_pattern::concurrency::asynchronous::control::{RateLimiter, run_with_timeout};
+
+#[tokio::main]
+async fn main() {
+    let limiter = RateLimiter::new(2);
+
+    // 同时只允许2个并发任务，且每个任务有超时保护
+    let mut handles = Vec::new();
+    for i in 0..5u32 {
+        let permit = limiter.acquire().await; // 拿到许可
+        handles.push(tokio::spawn(async move {
+            let _permit = permit; // 持有期间占用并发额度
+            let work = async move {
+                tokio::time::sleep(std::time::Duration::from_millis(30)).await;
+                format!("job {} done", i)
+            };
+            run_with_timeout(std::time::Duration::from_millis(50), work).await
+        }));
+    }
+
+    for h in handles {
+        let res = h.await.unwrap();
+        assert!(res.is_ok());
+    }
+}
+```
+
 ## 模式分类
+
+### 按执行模型分类（同步 vs 异步）
+
+- **同步 (Sync)**：阻塞式执行，适合 CPU 绑定、确定性流程。
+- **异步 (Async)**：基于 `async/await` 或事件驱动，适合 IO 绑定与高并发。
+- **混合 (Hybrid)**：对外提供同步接口，内部用异步；或反之，通过边界适配器桥接。
+
+示例获取列表：
+
+```rust
+use c09_design_pattern::{get_patterns_by_execution_model, ExecutionModel};
+
+let async_patterns = get_patterns_by_execution_model(ExecutionModel::Async);
+assert!(async_patterns.iter().any(|p| p.name.contains("Actor") || p.name.contains("Channel")));
+```
 
 ### 创建型模式 (Creational Patterns)
 
@@ -236,6 +302,11 @@ cargo bench
 - 更新相关文档
 
 ## 版本历史
+
+### v1.0.1 (2025-09)
+
+- 新增执行模型分类（Sync/Async/Hybrid），提供 `get_patterns_by_execution_model`。
+- 文档增加“同步 vs 异步”综述与示例；新增相关集成测试。
 
 ### v1.0.0 (2025-01)
 

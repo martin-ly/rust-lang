@@ -8,7 +8,7 @@ impl SwimTransport for StubTransport {
 
 #[test]
 fn indirect_probe_can_rescue() {
-    let node = SwimNode { node_id: "n0".into(), transport: StubTransport { fail_direct: true, indirect_ok: true } };
+    let node = SwimNode { node_id: "n0".into(), transport: StubTransport { fail_direct: true, indirect_ok: true }, probe_interval_ms: 1000, fanout: 3 };
     let ev = node.probe_indirect("n1", ["n2", "n3"].iter().copied());
     assert_eq!(ev.state, SwimMemberState::Alive);
 }

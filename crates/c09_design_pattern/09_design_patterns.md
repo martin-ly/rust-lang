@@ -4,6 +4,7 @@
 
 - [设计模式](#设计模式)
   - [目录](#目录)
+  - [0. 执行模型综述：同步 vs 异步](#0-执行模型综述同步-vs-异步)
   - [1. 创建型模式](#1-创建型模式)
     - [1.1 工厂模式的形式化](#11-工厂模式的形式化)
     - [1.2 工厂方法模式的形式化](#12-工厂方法模式的形式化)
@@ -35,6 +36,53 @@
     - [4.2 领导者-跟随者模式](#42-领导者-跟随者模式)
     - [4.3 生产者-消费者模式](#43-生产者-消费者模式)
   - [5. 总结](#5-总结)
+
+## 0. 执行模型综述：同步 vs 异步
+
+**定义**：
+
+- 同步 (Sync)：调用方在当前线程上阻塞直至完成。
+- 异步 (Async)：调用立即返回，通过 `Future`、回调或事件循环在准备好时继续。
+- 混合 (Hybrid)：对外暴露某一模型，内部通过边界适配器桥接另一个模型。
+
+**判定准则**：
+
+- 若主要交互对象是 CPU 计算且不需要等待 IO，则倾向同步。
+- 若主要交互对象涉及网络/磁盘/计时器等 IO 等待，则倾向异步。
+- 若模式需要既服务同步调用者又复用异步基础设施，选择混合。
+
+**Rust 实践**：
+
+```rust
+use c09_design_pattern::{ExecutionModel, get_patterns_by_execution_model};
+
+// 异步侧：Actor/Channel 等模式
+let async_side = get_patterns_by_execution_model(ExecutionModel::Async);
+
+// 同步侧：Singleton/Factory/Builder/并行迭代器 等
+let sync_side = get_patterns_by_execution_model(ExecutionModel::Sync);
+
+// 混合：Proxy/Decorator/Observer/Repository 等
+let hybrid_side = get_patterns_by_execution_model(ExecutionModel::Hybrid);
+```
+
+**设计影响**：
+
+- API 形态：`fn foo(&self) -> T` vs `async fn foo(&self) -> T`。
+- 错误传播：同步 `Result<T, E>` vs 异步 `Result<T, E>` 包裹在 `Future` 中。
+- 资源管理：同步临界区用 `Mutex`，异步需 `tokio::sync::Mutex` 或避免阻塞。
+
+**对比表（概要）**：
+
+| 维度 | 同步 (Sync) | 异步 (Async) | 混合 (Hybrid) |
+|---|---|---|---|
+| 典型场景 | CPU 计算、确定性步骤 | IO 密集、高并发连接 | 同步对外 + 异步内部或反向 |
+| API 形态 | 阻塞函数 | `async fn`/`Future` | 组合/适配 |
+| 复杂度 | 低 | 中-高 | 中-高 |
+| 线程模型 | 多线程/无特定要求 | 事件循环 + 任务 | 双栈：同步/异步边界 |
+| 典型模式 | Singleton/Factory/Builder | Actor/Channel/Event-driven | Proxy/Decorator/Observer/Repository |
+
+> 选择建议：优先按“是否等待 IO”为一号判断，其次看是否需兼容现有同步接口，再考虑团队对异步生态（Tokio、异步锁、执行器）的掌握程度。
 
 ## 1. 创建型模式
 

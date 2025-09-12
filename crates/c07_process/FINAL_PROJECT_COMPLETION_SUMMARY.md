@@ -112,6 +112,41 @@
 
 ## 使用示例
 
+### 特性矩阵
+
+```text
+Feature        含义                                 依赖
+---------      -----------------------------------  -----------------
+std            启用标准库（默认）                    -
+async          启用异步运行时与API                    tokio, tokio-util
+unix           启用 Unix 平台增强（nix）              nix
+windows        启用 Windows 平台增强                  -
+full           组合特性（std+async+unix+windows）     上述全部
+```
+
+启用方式示例：
+
+```bash
+cargo build --features async
+cargo build --features full
+```
+
+### 二进制清单（与 Cargo.toml 对齐）
+
+```text
+process_demo        基础进程管理演示
+ipc_demo            IPC 通信演示
+sync_demo           同步原语演示
+process_pool_demo   进程池演示
+async_demo          异步功能演示（需 --features async）
+timeout_demo        超时控制示例
+stdio_demo          标准IO交互示例
+supervisor_demo     监控与重启示例
+group_demo          进程组演示
+async_stdio_demo    异步标准IO占位（需 --features async）
+group_control_demo  进程组控制演示
+```
+
 ### 基础进程管理
 
 ```rust
@@ -218,17 +253,25 @@ crates/c07_process/
 
 ### 系统要求
 
-- **Rust版本**：1.70+
+- **Rust版本（MSRV）**：1.70+
 - **操作系统**：Windows 10+, Linux, macOS
 - **内存**：建议4GB+
 - **CPU**：建议多核处理器
 
+平台说明：
+
+- 启用 `unix` 特性时提供基于 `nix` 的增强能力（信号、用户组、部分进程操作）。
+- Windows 平台默认可用；部分 Unix 专属能力在 Windows 上以兼容实现或禁用呈现。
+
+更多细节参阅 `README.md`。
+
 ### 安装方式
 
 ```bash
-# 从源码安装
+# 从源码安装（工作区根目录）
 git clone <repository>
-cd c07_process
+cd rust-lang
+cd crates/c07_process
 cargo build --release
 
 # 启用异步功能
@@ -239,6 +282,54 @@ cargo test
 
 # 运行性能基准测试
 cargo bench
+```
+
+```powershell
+# Windows PowerShell（工作区根目录）
+git clone <repository>
+Set-Location .\rust-lang\crates\c07_process
+cargo build --release
+
+# 启用异步功能
+cargo build --release --features async
+
+# 运行测试
+cargo test
+
+# 运行性能基准测试
+cargo bench
+```
+
+运行二进制示例：
+
+```bash
+# 在 crates/c07_process 目录下
+cargo run --bin process_demo
+cargo run --bin ipc_demo
+cargo run --bin sync_demo
+cargo run --bin process_pool_demo
+cargo run --bin async_demo --features async
+```
+
+```powershell
+# 在 crates/c07_process 目录下
+cargo run --bin process_demo
+cargo run --bin ipc_demo
+cargo run --bin sync_demo
+cargo run --bin process_pool_demo
+cargo run --bin async_demo --features async
+```
+
+从工作区根目录运行（可选）：
+
+```bash
+cargo run -p c07_process --bin process_demo
+cargo run -p c07_process --bin async_demo --features async
+```
+
+```powershell
+cargo run -p c07_process --bin process_demo
+cargo run -p c07_process --bin async_demo --features async
 ```
 
 ### 配置说明
@@ -317,3 +408,22 @@ cargo bench
 **文档完整性**：⭐⭐⭐⭐⭐  
 **示例程序**：✅ 全部正常运行  
 **生产就绪度**：⭐⭐⭐⭐⭐
+
+## 参考与链接
+
+- 源码入口：`crates/c07_process/`
+- 关键目录：
+  - `src/process/` 进程管理
+  - `src/inter_process_communication/` IPC 通信
+  - `src/concurrency/` 同步原语
+  - `src/async_runtime/` 异步运行时
+  - `src/bin/` 示例程序
+- 使用指南与更多说明：参阅 `crates/c07_process/README.md`
+
+## 问题反馈
+
+- 如发现文档或示例问题，请在仓库提交 Issue，并附带：
+  - 操作系统与版本（如 Windows 11 / Ubuntu 24.04）
+  - Rust 版本（`rustc --version`）
+  - 执行命令与完整输出
+  - 期望行为与实际结果

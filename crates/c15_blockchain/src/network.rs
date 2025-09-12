@@ -2,6 +2,7 @@
 //! 
 //! 本模块实现了区块链网络通信功能。
 //! This module implements blockchain network communication functionality.
+#![allow(dead_code)]
 
 // use crate::types::*;
 // use std::collections::HashMap;

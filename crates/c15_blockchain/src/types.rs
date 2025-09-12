@@ -2,6 +2,7 @@
 //! 
 //! 本模块定义了区块链系统的核心数据类型和结构。
 //! This module defines the core data types and structures for the blockchain system.
+#![allow(dead_code)]
 
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;

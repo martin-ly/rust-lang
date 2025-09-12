@@ -1,5 +1,7 @@
 # Rust 1.89 控制流与函数特性研究项目 🚀
 
+> 导航：返回 [`rust-formal-engineering-system`](../../rust-formal-engineering-system/README.md) · 同步范式 [`01_synchronous/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/01_synchronous/00_index.md) · 异步范式 [`02_async/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/02_async/00_index.md)
+
 [![Rust Version](https://img.shields.io/badge/rust-1.89.0+-blue.svg)](https://www.rust-lang.org/)
 [![Edition](https://img.shields.io/badge/edition-2024-red.svg)](https://doc.rust-lang.org/edition-guide/)
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](LICENSE)
