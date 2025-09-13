@@ -439,6 +439,10 @@ pub mod patterns;
 #[cfg(feature = "middleware")]
 pub mod middleware;
 
+// 国际标准对标模块 / International Standards Benchmarking Module
+#[cfg(feature = "international_standards")]
+pub mod international_standards;
+
 // 示例模块 / Examples Module
 pub mod examples;
 
@@ -463,8 +467,12 @@ pub use patterns::*;
 #[cfg(feature = "middleware")]
 pub use middleware::*;
 
+// 重新导出国际标准 / Re-export international standards
+#[cfg(feature = "international_standards")]
+pub use international_standards::*;
+
 /// 工作流系统版本 / Workflow System Version
-pub const VERSION: &str = "1.0.0";
+pub const VERSION: &str = "1.89.0";
 
 /// 模块初始化 / Module Initialization
 pub fn init() -> Result<(), crate::error::WorkflowError> {

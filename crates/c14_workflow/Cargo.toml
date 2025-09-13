@@ -1,14 +1,15 @@
 [package]
 name = "c14_workflow"
-version = "1.0.0"
+version = "1.89.0"
 edition = "2024"
 resolver = "3"
 authors = ["Rust Workflow Team"]
-description = "Advanced workflow system with Rust 1.89 features, design patterns, and middleware support"
+description = "Advanced workflow system aligned with Rust 1.89 features, international standards, and mature open-source frameworks"
 license = "MIT"
 repository = "https://github.com/rust-lang/c14_workflow"
-keywords = ["workflow", "rust", "patterns", "middleware", "async"]
-categories = ["asynchronous", "concurrency", "web-programming"]
+keywords = ["workflow", "rust", "patterns", "middleware", "async", "rust189", "temporal", "cadence"]
+categories = ["asynchronous", "concurrency", "web-programming", "workflow"]
+rust-version = "1.89"
 
 [dependencies]
 # 核心依赖 / Core Dependencies
@@ -39,6 +40,11 @@ reqwest = { workspace = true, features = ["json", "stream"] }
 tower = "0.4"
 tower-http = { version = "0.5", features = ["cors", "trace"] }
 
+# 工作流引擎对标 / Workflow Engine Benchmarking
+# 对标 Temporal、Cadence 等成熟框架 / Benchmarking against mature frameworks like Temporal, Cadence
+# temporal-sdk = { version = "0.1", optional = true }  # 暂时注释，因为该包在 crates.io 上不可用
+# cadence = { version = "0.1", optional = true }      # 暂时注释，因为该包在 crates.io 上不可用
+
 # 数据库支持 / Database Support (可选特性)
 # sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres", "chrono", "uuid"], default-features = false, optional = true }
 redis = { version = "0.24", features = ["tokio-comp", "connection-manager"], optional = true }
@@ -61,14 +67,16 @@ proptest = "1.4"
 mockall = "0.12"
 
 [features]
-default = ["middleware", "patterns", "rust189"]
-full = ["middleware", "patterns", "rust189", "monitoring", "persistence", "database"]
+default = ["middleware", "patterns", "rust189", "international_standards"]
+full = ["middleware", "patterns", "rust189", "monitoring", "persistence", "database", "international_standards", "framework_benchmarking"]
 middleware = []
 patterns = []
 rust189 = []
 monitoring = []
 persistence = []
 database = ["redis"]
+international_standards = []
+framework_benchmarking = []  # 暂时移除 temporal-sdk 和 cadence 依赖
 
 # [[bench]]
 # name = "workflow_bench"

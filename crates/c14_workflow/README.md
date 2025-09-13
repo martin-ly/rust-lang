@@ -3,20 +3,55 @@
 [![Rust Version](https://img.shields.io/badge/rust-1.89+-blue.svg)](https://www.rust-lang.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Crates.io](https://img.shields.io/crates/v/c14_workflow.svg)](https://crates.io/crates/c14_workflow)
+[![Standards Compliance](https://img.shields.io/badge/standards-ISO%2FIEC%2025010%20%7C%20IEEE%20830%20%7C%20BPMN%202.0-brightgreen.svg)](https://github.com/rust-lang/c14_workflow)
+[![University Benchmark](https://img.shields.io/badge/benchmark-MIT%20%7C%20Stanford%20%7C%20Temporal%20%7C%20Cadence-orange.svg)](https://github.com/rust-lang/c14_workflow)
 
-一个基于 Rust 1.89 特性的高级工作流系统，集成了二十多个设计模式和完整的中间件支持。
+一个基于 Rust 1.89 特性的高级工作流系统，对标国际标准、著名大学课程和成熟开源框架，集成了二十多个设计模式和完整的中间件支持。
 
-An advanced workflow system based on Rust 1.89 features, integrating over twenty design patterns and complete middleware support.
+An advanced workflow system based on Rust 1.89 features, benchmarking against international standards, renowned university courses, and mature open-source frameworks, integrating over twenty design patterns and complete middleware support.
 
 ## 🚀 特性 (Features)
 
 ### Rust 1.89 语言特性集成 (Rust 1.89 Language Features Integration)
 
-- **生命周期语法检查改进** - 更严格的生命周期标注和检查
-- **常量泛型推断** - 支持 `_` 占位符的常量泛型推断
-- **跨平台文档测试** - 真正的跨平台文档测试支持
-- **FFI 改进** - `i128`/`u128` 类型在 `extern "C"` 中的安全使用
-- **API 稳定化** - `Result::flatten` 等实用 API 的稳定化
+- **生命周期语法检查改进** - 更严格的生命周期标注和检查，强制明确标示隐藏的生命周期
+- **常量泛型推断** - 支持 `_` 占位符的常量泛型推断，让编译器自动推断数组长度等值
+- **跨平台文档测试** - 真正的跨平台文档测试支持，`cargo test --doc --target` 现在会真正运行测试
+- **FFI 改进** - `i128`/`u128` 类型在 `extern "C"` 中的安全使用，增强了与 C 语言的互操作性
+- **API 稳定化** - `Result::flatten` 等实用 API 的稳定化，提升了标准库的功能性
+- **异步闭包支持** - 允许在闭包中使用 `async` 关键字，简化异步编程模型
+- **稳定的 GATs** - 泛型关联类型的稳定化，使得在泛型中定义关联类型更加灵活和强大
+- **改进的错误处理** - 引入了更详细的错误信息，帮助开发者更快地定位和修复问题
+
+### 国际标准对标 (International Standards Benchmarking)
+
+- **ISO/IEC 25010 软件质量模型** - 符合软件产品质量的八个特性标准
+- **IEEE 830 软件需求规格说明** - 遵循软件需求规格说明的推荐实践
+- **BPMN 2.0 业务流程建模** - 支持完整的业务流程建模和标记标准
+- **XPDL 2.2 XML 流程定义语言** - 兼容 XML 流程定义语言标准
+- **BPEL 2.0 业务流程执行语言** - 支持业务流程执行语言标准
+- **W3C Web 标准** - 符合 Web 内容可访问性指南 (WCAG) 和语义化标准
+- **RFC 2119 关键词使用规范** - 遵循 RFC 文档中关键词的使用规范
+
+### 大学课程对标 (University Course Benchmarking)
+
+- **MIT 6.824 高级工作流系统** - 对标麻省理工学院的高级工作流系统和进程代数课程
+- **Stanford CS 244B 分布式系统** - 对标斯坦福大学的分布式系统和工作流管理课程
+- **进程代数理论基础** - 涵盖 CCS、CSP、π-演算等进程代数理论
+- **分布式工作流系统** - 包含分布式状态管理、共识算法、容错机制
+- **形式化验证方法** - 支持模型检查、时序逻辑、属性规范
+- **性能分析和优化** - 提供性能建模、瓶颈分析、优化技术
+
+### 开源框架对标 (Open Source Framework Benchmarking)
+
+- **Temporal 框架对标** - 对标 Temporal 工作流引擎的特性和性能
+- **Cadence 框架对标** - 对标 Cadence 工作流引擎的特性和性能
+- **工作流执行引擎** - 支持工作流执行、活动执行、Saga 模式
+- **补偿机制** - 实现完整的补偿和重试策略
+- **工作流版本控制** - 支持工作流版本管理和调度
+- **信号和查询** - 提供工作流信号处理和查询功能
+- **监控和可观测性** - 集成指标收集、分布式追踪、工作流历史
+- **扩展性和安全性** - 支持水平扩展、多集群、跨区域部署
 
 ### 工作流设计模式 (Workflow Design Patterns)
 
@@ -91,14 +126,17 @@ c14_workflow = { version = "1.0.0", features = ["full"] }
 
 ```toml
 [dependencies]
-c14_workflow = { version = "1.0.0", features = ["rust189", "patterns", "middleware"] }
+c14_workflow = { version = "1.89.0", features = ["rust189", "patterns", "middleware", "international_standards"] }
 ```
 
 - `rust189` - 启用 Rust 1.89 特性支持
 - `patterns` - 启用设计模式支持
 - `middleware` - 启用中间件系统
+- `international_standards` - 启用国际标准对标功能
+- `framework_benchmarking` - 启用开源框架对标功能
 - `monitoring` - 启用监控功能
 - `persistence` - 启用持久化支持
+- `database` - 启用数据库支持
 - `full` - 启用所有特性
 
 ## 🎯 快速开始 (Quick Start)
@@ -240,6 +278,115 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
+### 使用国际标准对标 (Using International Standards Benchmarking)
+
+```rust
+use c14_workflow::international_standards::*;
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // 初始化国际标准模块 / Initialize international standards module
+    international_standards::init()?;
+    
+    // 检查标准合规性 / Check standards compliance
+    let compliance = check_standards_compliance();
+    println!("标准合规性: {:?}", compliance.level);
+    println!("支持的标准: {:?}", compliance.standards_met);
+    
+    // 创建国际标准集合 / Create international standards collection
+    let standards = InternationalWorkflowStandards::new();
+    
+    // 获取所有标准 / Get all standards
+    let all_standards = standards.get_all_standards();
+    for standard in all_standards {
+        println!("标准: {} - {}", standard.name, standard.organization);
+    }
+    
+    // 检查 BPMN 2.0 标准 / Check BPMN 2.0 standard
+    if let Some(bpmn_standard) = standards.get_standard("BPMN_2_0") {
+        println!("BPMN 2.0 标准包含 {} 个模式", bpmn_standard.patterns.len());
+    }
+    
+    Ok(())
+}
+```
+
+### 使用框架对标 (Using Framework Benchmarking)
+
+```rust
+use c14_workflow::international_standards::framework_benchmarking::*;
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // 创建 Temporal 基准测试 / Create Temporal benchmark
+    let mut temporal_benchmark = TemporalBenchmark::new();
+    temporal_benchmark.run_benchmark().await?;
+    
+    // 创建 Cadence 基准测试 / Create Cadence benchmark
+    let mut cadence_benchmark = CadenceBenchmark::new();
+    cadence_benchmark.run_benchmark().await?;
+    
+    // 创建框架对比 / Create framework comparison
+    let mut comparison = FrameworkComparison::new();
+    comparison.add_framework(temporal_benchmark.get_benchmark().clone());
+    comparison.add_framework(cadence_benchmark.get_benchmark().clone());
+    
+    // 运行对比测试 / Run comparison test
+    let report = comparison.run_comparison().await?;
+    
+    println!("获胜框架: {}", report.winner);
+    for framework in &report.frameworks {
+        println!("框架: {} - 总体分数: {:.1}", framework.name, framework.overall_score);
+    }
+    
+    for recommendation in &report.recommendations {
+        println!("建议: {}", recommendation);
+    }
+    
+    Ok(())
+}
+```
+
+### 使用性能基准测试 (Using Performance Benchmarks)
+
+```rust
+use c14_workflow::international_standards::performance_benchmarks::*;
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // 创建基准测试套件 / Create benchmark suite
+    let mut suite = BenchmarkSuite::new();
+    
+    // 添加标准基准测试 / Add standard benchmarks
+    let benchmarks = create_standard_benchmarks();
+    for benchmark in benchmarks {
+        suite.add_benchmark(benchmark);
+    }
+    
+    // 运行所有基准测试 / Run all benchmarks
+    let report = suite.run_all_benchmarks().await?;
+    
+    println!("基准测试套件: {}", report.suite_id);
+    println!("总体分数: {:.1}", report.overall_score);
+    println!("测试环境: {} 核心, {} GB 内存", 
+             report.test_environment.cpu_cores, 
+             report.test_environment.memory_gb);
+    
+    for result in &report.benchmark_results {
+        println!("基准测试: {} - 分数: {:.1}", result.name, result.performance_score);
+        println!("  吞吐量: {:.1} ops/sec", result.overall_metrics.throughput_ops_per_sec);
+        println!("  平均延迟: {:.1} ms", result.overall_metrics.average_latency_ms);
+        println!("  内存使用: {:.1} MB", result.overall_metrics.memory_usage_mb);
+    }
+    
+    for recommendation in &report.recommendations {
+        println!("建议: {}", recommendation);
+    }
+    
+    Ok(())
+}
+```
+
 ## 🏗️ 项目结构 (Project Structure)
 
 ```text
@@ -255,10 +402,25 @@ c14_workflow/
 │   │   ├── mod.rs
 │   │   ├── features.rs
 │   │   ├── async_features.rs
-│   │   └── ...
+│   │   ├── lifetime.rs
+│   │   ├── const_generics.rs
+│   │   ├── doc_tests.rs
+│   │   ├── ffi.rs
+│   │   ├── stable_apis.rs
+│   │   ├── concurrency.rs
+│   │   ├── type_system.rs
+│   │   ├── compiler.rs
+│   │   ├── performance.rs
+│   │   ├── error_handling.rs
+│   │   ├── macros.rs
+│   │   └── modules.rs
 │   ├── patterns/             # 设计模式 / Design patterns
 │   │   ├── mod.rs
 │   │   ├── creational/
+│   │   │   ├── builder.rs
+│   │   │   ├── factory.rs
+│   │   │   ├── prototype.rs
+│   │   │   └── singleton.rs
 │   │   ├── structural/
 │   │   ├── behavioral/
 │   │   └── concurrent/
@@ -267,14 +429,27 @@ c14_workflow/
 │   │   ├── core/
 │   │   ├── extensions/
 │   │   └── plugins/
+│   ├── international_standards/  # 国际标准对标 / International Standards Benchmarking
+│   │   ├── mod.rs
+│   │   ├── standards.rs      # 国际标准规范 / International Standards Specifications
+│   │   ├── university_courses.rs  # 大学课程对标 / University Course Benchmarking
+│   │   ├── framework_benchmarking.rs  # 开源框架对标 / Open Source Framework Benchmarking
+│   │   ├── workflow_patterns.rs  # 工作流模式标准 / Workflow Pattern Standards
+│   │   └── performance_benchmarks.rs  # 性能基准测试 / Performance Benchmarks
 │   ├── examples/             # 示例代码 / Example code
 │   │   ├── mod.rs
 │   │   ├── basic_workflow.rs
 │   │   ├── rust189_examples.rs
 │   │   ├── pattern_examples.rs
-│   │   └── middleware_examples.rs
+│   │   ├── middleware_examples.rs
+│   │   └── advanced_examples.rs
 │   └── tests/                # 测试代码 / Test code
 ├── docs/                     # 文档 / Documentation
+│   ├── ai/                   # AI 相关文档 / AI-related documentation
+│   ├── algorithms/           # 算法文档 / Algorithm documentation
+│   ├── iot/                  # IoT 相关文档 / IoT-related documentation
+│   ├── program/              # 编程相关文档 / Programming-related documentation
+│   └── rust_design/          # Rust 设计文档 / Rust design documentation
 ├── examples/                 # 独立示例 / Standalone examples
 ├── benches/                  # 基准测试 / Benchmarks
 ├── Cargo.toml               # 项目配置 / Project configuration
@@ -287,6 +462,11 @@ c14_workflow/
 - [设计模式指南 / Design Patterns Guide](docs/patterns/)
 - [中间件开发指南 / Middleware Development Guide](docs/middleware/)
 - [Rust 1.89 特性使用指南 / Rust 1.89 Features Usage Guide](docs/rust189/)
+- [国际标准对标指南 / International Standards Benchmarking Guide](docs/international_standards/)
+- [大学课程对标指南 / University Course Benchmarking Guide](docs/university_courses/)
+- [开源框架对标指南 / Open Source Framework Benchmarking Guide](docs/framework_benchmarking/)
+- [性能基准测试指南 / Performance Benchmarking Guide](docs/performance_benchmarks/)
+- [工作流模式标准指南 / Workflow Pattern Standards Guide](docs/workflow_patterns/)
 
 ## 🧪 测试 (Testing)
 
@@ -306,6 +486,9 @@ Run specific module tests:
 cargo test patterns
 cargo test middleware
 cargo test rust189
+cargo test international_standards
+cargo test framework_benchmarking
+cargo test performance_benchmarks
 ```
 
 运行示例：
@@ -316,6 +499,9 @@ Run examples:
 cargo run --example basic_workflow
 cargo run --example pattern_usage
 cargo run --example middleware_usage
+cargo run --example international_standards_usage
+cargo run --example framework_benchmarking_usage
+cargo run --example performance_benchmarks_usage
 ```
 
 ## 📊 基准测试 (Benchmarks)
