@@ -1,6 +1,15 @@
 # c17_iot
 
-Rust IoT 示例与参考实现，覆盖通信（MQTT/CoAP/TLS）、设备建模（LwM2M/OPC UA）、可观测性（Prom/OTEL/Jaeger）、边缘采集、OTA、数据管道（Kafka/InfluxDB）。
+Rust IoT 示例与参考实现，基于2025年IoT行业标准架构设计，对标国际著名大学研究成果。覆盖通信（MQTT/CoAP/TLS）、设备建模（LwM2M/OPC UA）、可观测性（Prom/OTEL/Jaeger）、边缘计算、安全框架、隐私保护、数据管道（Kafka/InfluxDB）。
+
+## 🚀 2025年标准对标特性
+
+- **国际标准支持**：ISO/IEC 30141、IEC 62443、NIST IoT基线
+- **大学研究成果**：MIT边缘智能、Stanford隐私保护、Berkeley分布式系统
+- **增强安全框架**：TLS 1.3、DTLS、OSCORE、X.509证书管理
+- **边缘计算增强**：云边协同、智能调度、资源管理
+- **可观测性完善**：OpenTelemetry、Prometheus、智能告警
+- **隐私保护**：零知识证明、差分隐私、安全多方计算
 
 ## 快速开始
 
