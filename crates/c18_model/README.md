@@ -8,7 +8,7 @@
 - 入门指南：`docs/getting-started/`
 - 贡献指南：`docs/development/contributing.md`
 
-## 快速开始
+## 快速开始y
 
 ```bash
 # 编译检查
@@ -26,3 +26,5 @@ cargo test -p c18_model
 ## 设计说明
 
 项目已去除异步/并行/可视化/基准测试及相关依赖，聚焦最小稳定内核，便于学习与集成。
+
+并发/异步对标与工程实践文档入口：`docs/concurrency/README.md`（含 Rust 1.89 对标、模型映射与工程范式）。

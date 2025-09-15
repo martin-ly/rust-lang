@@ -661,6 +661,23 @@ impl ServiceDiscoveryManager {
         self.service_cache.read().unwrap().clone()
     }
 
+    /// 设置缓存直接写入（替换或合并）
+    pub fn set_cache_for(&self, service_name: &str, instances: Vec<ServiceInstance>, replace: bool) {
+        let mut cache = self.service_cache.write().unwrap();
+        if replace {
+            cache.insert(service_name.to_string(), instances);
+        } else {
+            let entry = cache.entry(service_name.to_string()).or_insert_with(Vec::new);
+            entry.extend(instances);
+        }
+    }
+
+    /// 清空指定服务的缓存
+    pub fn clear_cache_for(&self, service_name: &str) {
+        let mut cache = self.service_cache.write().unwrap();
+        cache.remove(service_name);
+    }
+
     /// 清理过期服务
     pub fn cleanup_expired_services(&mut self) {
         let mut cache = self.service_cache.write().unwrap();

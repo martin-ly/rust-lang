@@ -27,3 +27,10 @@
 ## IoT
 
 - [IoT 专题](iot/README.md)
+
+## 并发与异步
+
+- [并发/异步总览](concurrency/README.md)
+- [Rust 1.89 对标](concurrency/rust189.md)
+- [模型映射（CSP/Actor/结构化并发）](concurrency/models.md)
+- [工程范式（默认安全与可靠性栈）](concurrency/engineering.md)

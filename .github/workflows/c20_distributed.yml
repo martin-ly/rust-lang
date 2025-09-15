@@ -35,4 +35,7 @@ jobs:
       - name: Cargo build examples
         run: cargo build -p c20_distributed --examples
 
+      - name: Build discovery example with observability feature
+        run: cargo build -p c20_distributed --features observability --example e2e_discovery_lb_config
+
 

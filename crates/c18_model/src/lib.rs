@@ -68,6 +68,9 @@ pub use error::{
 
 // 已裁剪：可视化、基准测试与标准合规模块的对外导出
 
+// 并发/异步统一能力抽象（占位模块，不引入运行时依赖）
+pub mod runtime_abi;
+
 /// Rust理论模型实现库的主要入口点
 pub struct ModelSystemAnalyzer {
     pub queueing_models: queueing_models::MM1Queue,

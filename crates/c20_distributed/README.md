@@ -63,6 +63,51 @@
 
 4) 修改 `app.json` 并保存，观察控制台输出变化（限流/熔断/混沌/策略切换均可热更新）。
 
+## 参考输出（Expected Logs）
+
+### 联动示例：服务发现 + 负载均衡 + 动态配置
+
+```text
+[config] lb.strategy = RoundRobin, instances = 2
+tick=0 req=0 -> user-service 127.0.0.1:8080 ok=true
+tick=0 req=1 -> user-service 127.0.0.1:8081 ok=true
+[override] switch to RoundRobin
+[override] switch to ConsistentHash
+[override] enable chaos: latency/drop/partition
+```
+
+### 仅治理热更新（限流/熔断/ACL）
+
+```text
+[governance] rl(cap=50,refill=50), cb(th=5,open_ms=1000)
+0: result=false
+1: result=true
+...
+10: rate-limited
+...
+22: circuit-open
+```
+
+### 仅混沌注入
+
+```text
+[chaos] latency=10ms jitter=5ms drop_rate=0.1 partition=false
+0: ok
+1: dropped
+2: ok
+...
+```
+
+### 仅负载均衡策略切换
+
+```text
+tick=0 req=0 -> user-service 127.0.0.1:8080
+tick=0 req=1 -> user-service 127.0.0.1:8081
+[switch] -> WeightedRoundRobin
+[switch] -> Random
+[switch] -> ConsistentHash
+```
+
 ## 配置键约定（示例）
 
 以下键通过 `ConfigManager` 可热更新，示例在 `examples/e2e_discovery_lb_config.rs`：

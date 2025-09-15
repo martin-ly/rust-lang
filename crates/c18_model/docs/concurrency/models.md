@@ -1,0 +1,16 @@
+# 模型映射：CSP / Actor / 结构化并发
+
+## CSP（通道与进程）
+
+- Rust 映射：有界 MPSC 通道 + `Send`/`Sync` 边界 + `?Sized` 所有权转移
+- 反模式：无界队列、无超时/取消的阻塞等待
+
+## Actor（消息驱动的隔离体）
+
+- Rust 映射：`tokio::mpsc`/`crossbeam-channel` + 独占状态 + 背压策略
+- 关键：重入与有序性、邮箱容量、度量与限流
+
+## 结构化并发
+
+- Rust 映射：作用域内 `spawn` + 取消与超时的显式传播 + `JoinSet`
+- 关键：任务生命周期与资源释放、`Drop` 与未决 `Future` 的处理

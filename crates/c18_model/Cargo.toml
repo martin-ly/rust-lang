@@ -60,28 +60,62 @@ tempfile = "3.0"
 # 文档测试
 doc-comment = "0.3"
 
+# 并发模型验证
+loom = "0.7"
+
 [features]
 default = ["std"]
 std = []
 no-std = []
 ## 已裁剪：async/visualization/benchmarks/parallel 等特性
 
+# 运行时/示例适配（通过 features 选择，依赖为可选）
+tokio-adapter = ["dep:tokio", "dep:tokio-util"]
+async-std-adapter = ["dep:async-std", "dep:async-channel"]
+tower-examples = ["dep:tower", "dep:http", "dep:hyper"]
+c20-integration = ["dep:c20_distributed"]
+
+[dependencies.tokio]
+version = "1"
+features = ["rt-multi-thread", "sync", "time"]
+optional = true
+
+[dependencies.tokio-util]
+version = "0.7"
+features = ["rt"]
+optional = true
+
+[dependencies.async-std]
+version = "1"
+features = ["attributes"]
+optional = true
+
+[dependencies.async-channel]
+version = "2"
+optional = true
+
+[dependencies.tower]
+version = "0.4"
+features = ["limit", "timeout", "retry", "util"]
+optional = true
+
+[dependencies.http]
+version = "0.2"
+optional = true
+
+[dependencies.hyper]
+version = "0.14"
+features = ["client", "http1", "tcp"]
+optional = true
+
+[dependencies.c20_distributed]
+path = "../c20_distributed"
+optional = true
+
 # 已裁剪：nalgebra / plotly / wasm-bindgen 及 wasm 目标依赖
 
-# [[bench]]
-# name = "queueing_bench"
-# harness = false
-
-# [[bench]]
-# name = "ml_bench"
-# harness = false
-
-# [[bench]]
-# name = "formal_bench"
-# harness = false
-
-# [[bench]]
-# name = "math_bench"
-# harness = false
+[[bench]]
+name = "concurrency_bench"
+harness = false
 
 # Profile configurations are managed at workspace root level

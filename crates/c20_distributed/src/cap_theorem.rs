@@ -14,6 +14,10 @@ pub struct CAPManager {
     consistency_history: Vec<ConsistencyDecision>,
     last_partition_check: Instant,
     partition_check_interval: Duration,
+    /// 历史容量上限（超过后触发裁剪）
+    history_capacity: usize,
+    /// 每次裁剪的批量大小
+    history_prune_batch: usize,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -34,6 +38,8 @@ impl CAPManager {
             consistency_history: Vec::new(),
             last_partition_check: Instant::now(),
             partition_check_interval: Duration::from_millis(1000),
+            history_capacity: 1000,
+            history_prune_batch: 100,
         }
     }
 
@@ -50,6 +56,13 @@ impl CAPManager {
     /// 设置分区检测间隔
     pub fn with_partition_check_interval(mut self, interval: Duration) -> Self {
         self.partition_check_interval = interval;
+        self
+    }
+
+    /// 设置历史容量与裁剪批量
+    pub fn with_history_limits(mut self, capacity: usize, prune_batch: usize) -> Self {
+        self.history_capacity = capacity.max(1);
+        self.history_prune_batch = prune_batch.max(1).min(self.history_capacity);
         self
     }
 
@@ -76,9 +89,10 @@ impl CAPManager {
         self.consistency_history.push(decision);
         self.last_partition_check = now;
 
-        // 保持历史记录在合理范围内
-        if self.consistency_history.len() > 1000 {
-            self.consistency_history.drain(0..100);
+        // 保持历史记录在合理范围内（可配置）
+        if self.consistency_history.len() > self.history_capacity {
+            let drain_len = self.history_prune_batch.min(self.consistency_history.len());
+            self.consistency_history.drain(0..drain_len);
         }
 
         selected_level
@@ -126,6 +140,24 @@ impl CAPManager {
     /// 更新策略
     pub fn update_strategy(&mut self, new_strategy: CAPStrategy) {
         self.strategy = new_strategy;
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::consistency::CAPStrategy;
+    use crate::swim::MembershipView;
+
+    #[test]
+    fn test_history_prune_limits() {
+        let mut m = CAPManager::new(CAPStrategy::Balanced)
+            .with_history_limits(5, 2);
+        let view = MembershipView::new("me".to_string());
+        for _ in 0..10 {
+            let _ = m.select_consistency_level(&view);
+        }
+        assert!(m.consistency_history.len() <= 5);
     }
 }
 

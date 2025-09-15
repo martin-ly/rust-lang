@@ -54,6 +54,18 @@ impl EnhancedSwimTransport {
         }
     }
 
+    pub fn with_timeout(mut self, timeout: Duration) -> Self {
+        self.timeout = timeout; self
+    }
+
+    pub fn with_max_retries(mut self, max_retries: usize) -> Self {
+        self.max_retries = max_retries; self
+    }
+
+    pub fn with_network_delay(mut self, delay: Duration) -> Self {
+        self.network_delay = delay; self
+    }
+
     fn simulate_network_call(&self, success_rate: f64) -> bool {
         // 模拟网络调用的成功率和延迟
         use std::collections::hash_map::DefaultHasher;
