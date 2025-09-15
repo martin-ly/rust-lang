@@ -3,10 +3,10 @@ use c20_distributed::swim::{MembershipView, SwimMemberState};
 #[test]
 fn view_merge_prefers_newer_version() {
     let mut a = MembershipView::new("a".into());
-    a.local_update("n1", SwimMemberState::Alive);
+    a.local_update("n1", SwimMemberState::Alive, 1);
     let mut b = a.clone();
     // b bumps n1 to Suspect with higher version
-    b.local_update("n1", SwimMemberState::Suspect);
+    b.local_update("n1", SwimMemberState::Suspect, 2);
     // a merges from b
     let payload = b.gossip_payload();
     a.merge_from(&payload);

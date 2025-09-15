@@ -16,7 +16,9 @@ pub struct MajorityQuorum;
 impl QuorumPolicy for MajorityQuorum {
     fn required_acks(total: usize, level: ConsistencyLevel) -> usize {
         match level {
-            ConsistencyLevel::Strong | ConsistencyLevel::Quorum => (total / 2) + 1,
+            ConsistencyLevel::Strong | ConsistencyLevel::Linearizable | ConsistencyLevel::Quorum => (total / 2) + 1,
+            ConsistencyLevel::Sequential | ConsistencyLevel::Causal => (total / 2) + 1,
+            ConsistencyLevel::Session | ConsistencyLevel::MonotonicRead | ConsistencyLevel::MonotonicWrite => (total / 2) + 1,
             ConsistencyLevel::Eventual => 1,
         }
     }

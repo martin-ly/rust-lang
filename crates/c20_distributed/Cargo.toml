@@ -18,9 +18,12 @@ runtime-tokio = ["dep:tokio"]
 # 共识算法选择（库级可选启用）
 consensus-raft = []
 consensus-paxos = []
+# 可观测性（启用 tracing 输出）
+observability = ["dep:tracing", "dep:tracing-subscriber"]
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
 tokio = { version = "1.44", features = ["full"], optional = true }
 anyhow = "1.0"
 thiserror = "1.0"

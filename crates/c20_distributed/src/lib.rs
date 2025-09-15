@@ -31,6 +31,13 @@ pub mod codec;
 pub mod swim;
 pub mod replication;
 pub mod transactions;
+pub mod cap_theorem;
+pub mod byzantine_fault_tolerance;
+pub mod service_discovery;
+pub mod load_balancing;
+pub mod config_management;
+pub mod chaos;
+pub mod security;
 
 #[cfg(feature = "consensus-raft")]
 pub mod consensus_raft;
@@ -40,14 +47,50 @@ pub use membership::{ClusterNodeId, ClusterMembership};
 pub use topology::{ClusterTopology, ShardId};
 pub use consensus::{ConsensusRole, ConsensusApi};
 pub use partitioning::{Partitioner, HashPartitioner};
-pub use consistency::ConsistencyLevel;
+pub use consistency::{
+    ConsistencyLevel, CAPStrategy, VectorClock, 
+    SessionConsistencyManager, MonotonicConsistencyManager
+};
 pub use transport::{RpcClient, RpcServer};
 pub use storage::{StateMachineStorage, LogStorage};
 pub use scheduling::{LogicalClock, TimerService};
 pub use codec::{BinaryCodec, BytesCodec, StringUtf8Codec};
-pub use swim::{SwimMemberState, SwimEvent, SwimTransport};
+pub use swim::{
+    SwimMemberState, SwimEvent, SwimTransport, SwimNode, 
+    MembershipView, EnhancedSwimTransport
+};
 pub use replication::{Replicator, QuorumPolicy, MajorityQuorum};
 pub use transactions::{Saga, SagaStep};
+pub use cap_theorem::{
+    CAPManager, CAPAnalyzer, PartitionDetector, PartitionStats,
+    ConsistencyDecision, PerformanceMetrics, CAPAnalysisReport
+};
+pub use byzantine_fault_tolerance::{
+    PBFTNode, ByzantineNetwork, ByzantineMessage, ByzantineNodeState,
+    PreparedCertificate, ViewChangeCertificate, ByzantineNetworkStats
+};
+pub use service_discovery::{
+    ServiceInstance, DiscoveryStrategy, ServiceDiscoveryConfig,
+    DnsServiceDiscovery, ConfigServiceDiscovery, RegistryServiceDiscovery,
+    ServiceDiscoveryManager, HealthChecker
+};
+pub use load_balancing::{
+    LoadBalancingStrategy, ServerStats, RoundRobinBalancer, WeightedRoundRobinBalancer,
+    LeastConnectionsBalancer, ConsistentHashBalancer, RandomBalancer, WeightedRandomBalancer,
+    LeastResponseTimeBalancer, GeographicBalancer, LoadBalancerManager
+};
+pub use config_management::{
+    ConfigValue, ConfigSource, InMemorySource, FileSource, EnvSource,
+    ConfigSnapshot, ConfigManager
+};
+pub use chaos::{ChaosConfig, ChaosInjector};
+pub use security::{
+    Principal, Resource, Action, AclRule, AclManager,
+    AuditEvent, Auditor,
+    RateLimitConfig, TokenBucket,
+    CircuitState, CircuitConfig, CircuitBreaker,
+    Governance,
+};
 
 #[cfg(feature = "consensus-raft")]
 pub use consensus_raft::{RaftState, Term, LogIndex, AppendEntriesReq, AppendEntriesResp, RequestVoteReq, RequestVoteResp, RaftNode, MinimalRaft};
