@@ -74,7 +74,7 @@ debug = false
 lto = true
 codegen-units = 1
 
-# 工作区级别的依赖版本统一 - 更新到最新稳定版本
+# 工作区级别的依赖版本统一 - 2025年最新稳定版本
 [workspace.dependencies]
 # 网络和 HTTP 相关 - 最新稳定版本
 reqwest = { version = "0.12", features = ["json", "rustls-tls"] }
@@ -95,7 +95,7 @@ tower-http = { version = "0.6", features = ["cors", "trace", "timeout", "compres
 crossterm = "0.29"
 
 # gRPC 相关 - 最新稳定版本
-tonic = { version = "0.12", features = ["tls", "tls-roots", "prost"] }
+tonic = { version = "0.12", features = ["tls", "tls-roots"] }
 tonic-build = "0.12"
 prost = "0.13"
 prost-build = "0.13"
@@ -141,5 +141,20 @@ uuid = { version = "1.18", features = ["v4", "serde"] }
 url = "2.5"
 bytes = "1.10"
 indexmap = "2.11"
+
+# 性能测试和基准测试
+criterion = "0.7"
+
+# 配置管理
+config = "0.15"
+
+# 并发和同步
+crossbeam = "0.8"
+rayon = "1.11"
+dashmap = "6.1"
+
+# 测试相关
+mockall = "0.13"
+proptest = "1.7"
 
 # 依赖版本约束 - 在工作区依赖中统一版本 end

@@ -48,8 +48,8 @@ toml = "0.8"
 sqlx = { version = "0.8", features = ["runtime-tokio-rustls", "postgres", "mysql", "chrono", "uuid"], default-features = false, optional = true }
 diesel = { version = "2.1", features = ["postgres", "mysql", "chrono", "uuid"], optional = true }
 
-# 配置管理 - 更新到最新版本
-config = "0.15"
+# 配置管理 - 使用工作区统一版本
+config = { workspace = true }
 dotenvy = "0.15"
 
 # 日志和追踪 - 使用工作区统一版本
@@ -61,7 +61,7 @@ slog = "2.7"
 slog-stdlog = "4.1"
 slog-scope = "4.4"
 
-# 监控和指标 - 更新到最新版本
+# 监控和指标 - 使用工作区统一版本
 prometheus = "0.14"
 metrics = "0.24"
 metrics-exporter-prometheus = "0.17"
@@ -99,9 +99,9 @@ eyre = "0.6"
 # CLI - 更新到最新版本
 clap = { version = "4.5", features = ["derive"] }
 
-# 测试 - 更新到最新版本
+# 测试 - 使用工作区统一版本
 tokio-test = "0.4"
-mockall = "0.13"
+mockall = { workspace = true }
 async-trait = "0.1"
 
 env_logger = "0.11"
@@ -112,10 +112,10 @@ tonic-build = { workspace = true }
 
 [dev-dependencies]
 tokio-test = "0.4"
-mockall = "0.13"
+mockall = { workspace = true }
 tempfile = "3.10"
-criterion = { version = "0.5", features = ["html_reports"] }
-futures = "0.3"
+criterion = { workspace = true, features = ["html_reports"] }
+futures = { workspace = true }
 
 [lib]
 name = "c13_microservice"

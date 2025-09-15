@@ -2,7 +2,8 @@
 //! 
 //! 测试Axum微服务的性能表现
 
-use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
+use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId};
+use std::hint::black_box;
 use axum::{
     routing::get,
     Router,

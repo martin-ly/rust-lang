@@ -2,7 +2,8 @@
 //! 
 //! 测试Redis和RabbitMQ消息队列的性能表现
 
-use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
+use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId};
+use std::hint::black_box;
 use tokio::runtime::Runtime;
 
 use c13_microservice::messaging::{

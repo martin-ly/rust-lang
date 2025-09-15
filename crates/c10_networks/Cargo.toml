@@ -46,8 +46,8 @@ rustls = { workspace = true, optional = true }
 tokio-rustls = { workspace = true, optional = true }
 rustls-pemfile = { workspace = true, optional = true }
 
-# 测试和基准测试
-criterion = { version = "0.7", features = ["html_reports"] }
+# 测试和基准测试 - 使用工作区统一版本
+criterion = { workspace = true, features = ["html_reports"] }
 futures = { workspace = true }
 futures-util = { workspace = true }
 
