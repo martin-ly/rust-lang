@@ -1,4 +1,5 @@
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{criterion_group, criterion_main, Criterion};
+use std::hint::black_box;
 
 fn neural_network_benchmark(c: &mut Criterion) {
     c.bench_function("neural_network_forward", |b| {

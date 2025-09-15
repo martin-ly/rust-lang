@@ -59,10 +59,10 @@ impl KMeans {
         }
         
         use rand::seq::SliceRandom;
-        use rand::thread_rng;
         
         let mut indices: Vec<usize> = (0..data.len()).collect();
-        indices.shuffle(&mut thread_rng());
+        use rand::rngs::ThreadRng;
+        indices.shuffle(&mut ThreadRng::default());
         
         let centroids = indices[..self.k]
             .iter()

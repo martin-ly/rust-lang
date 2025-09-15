@@ -304,7 +304,8 @@ pub struct ApiKeyManager;
 impl ApiKeyManager {
     /// 生成API密钥
     pub fn generate_api_key() -> String {
-        let mut rng = rand::thread_rng();
+        use rand::{Rng, rngs::ThreadRng};
+        let mut rng = ThreadRng::default();
         let key_bytes: [u8; 32] = rng.gen();
         general_purpose::STANDARD.encode(key_bytes)
     }

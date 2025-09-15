@@ -5,31 +5,43 @@ edition = "2024"
 resolver = "3"
 
 [dependencies]
-tokio = { version = "1.0", features = ["full"] }
-futures = "0.3"
-tokio-stream = "0.1"
-tracing = "0.1"
-tracing-subscriber = "0.3"
-anyhow = "1.0.99"
+# 异步运行时 - 使用工作区统一版本
+tokio = { workspace = true }
+futures = { workspace = true }
+tokio-stream = { workspace = true }
+
+# 日志和追踪 - 使用工作区统一版本
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+anyhow = { workspace = true }
+
+# 并发原语 - 更新到最新版本
 parking_lot = "0.12"
+
+# Web框架 - 更新到最新版本
 actix-web = "4.11"
+actix = "0.13"
+actix-rt = "2.11"
+
+# 日志
 env_logger = "0.11"
-uuid = { version = "1.0", features = ["v4"] }
-rand = "0.8"
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
+
+# 其他工具 - 使用工作区统一版本
+uuid = { workspace = true }
+rand = "0.9"
+serde = { workspace = true }
+serde_json = { workspace = true }
 reqwest = { workspace = true, features = ["json"] }
 
-tokio-console = ">=0.1.11"
+# 终端和调试工具 - 更新到最新版本
+tokio-console = "0.1"
 crossterm = { workspace = true, features = ["event-stream"] }
 
-actix = ">=0.11"
-actix-rt = ">=2.5"
-
+# Web框架 - 使用工作区统一版本
 axum = { workspace = true }
 
 [dev-dependencies]
-criterion = { version = "0.5", features = ["html_reports"] }
+criterion = { version = "0.7", features = ["html_reports"] }
 
 [lib]
 name = "c06_async"

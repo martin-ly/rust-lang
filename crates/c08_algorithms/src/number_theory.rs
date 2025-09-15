@@ -33,7 +33,6 @@ pub fn is_prime(n: u64) -> bool { is_probable_prime_u64(n) }
 
 fn f_rho(x: u128, c: u128, n: u128) -> u128 { (x.saturating_mul(x).saturating_add(c)) % n }
 
-use rand::Rng;
 
 fn gcd_u128(mut a: u128, mut b: u128) -> u128 {
     while b != 0 { let r = a % b; a = b; b = r; }
@@ -41,10 +40,11 @@ fn gcd_u128(mut a: u128, mut b: u128) -> u128 {
 }
 pub fn pollard_rho(n: u128) -> u128 {
     if n % 2 == 0 { return 2; }
-    let mut rng = rand::thread_rng();
+    use rand::{Rng, rngs::ThreadRng};
+    let mut rng = ThreadRng::default();
     loop {
-        let c = rng.gen_range(1..n);
-        let mut x = rng.gen_range(0..n);
+        let c = rng.random_range(1..n);
+        let mut x = rng.random_range(0..n);
         let mut y = x;
         let mut d: u128 = 1;
         while d == 1 {

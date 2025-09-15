@@ -6,8 +6,8 @@ use nom::{
     IResult,
     bytes::complete::{tag, take},
     number::complete::{be_u32, be_u64, be_u16},
-    sequence::tuple,
     combinator::map,
+    Parser,
 };
 // use std::fmt; // 暂时注释掉未使用的导入
 
@@ -72,13 +72,13 @@ impl PacketParser {
 
     /// 解析单个数据包
     fn parse_packet<'a>(&self, input: &'a [u8]) -> IResult<&'a [u8], super::Packet> {
-        let (input, (packet_type_raw, length, timestamp, sequence_number, flags)) = tuple((
+        let (input, (packet_type_raw, length, timestamp, sequence_number, flags)) = (
             be_u32, // packet_type (作为 u32)
             be_u32, // length
             be_u64, // timestamp
             be_u64, // sequence_number
             be_u32, // flags
-        ))(input)?;
+        ).parse(input)?;
 
         let packet_type = match packet_type_raw {
             0 => super::PacketType::Raw,
@@ -130,21 +130,21 @@ impl HttpRequestParser {
         let (input, method) = map(
             nom::bytes::complete::take_until(" "),
             |s: &[u8]| String::from_utf8_lossy(s).to_string()
-        )(input)?;
+        ).parse(input)?;
         
         let (input, _) = tag(" ")(input)?;
         
         let (input, uri) = map(
             nom::bytes::complete::take_until(" "),
             |s: &[u8]| String::from_utf8_lossy(s).to_string()
-        )(input)?;
+        ).parse(input)?;
         
         let (input, _) = tag(" ")(input)?;
         
         let (input, version) = map(
             nom::bytes::complete::take_until("\r\n"),
             |s: &[u8]| String::from_utf8_lossy(s).to_string()
-        )(input)?;
+        ).parse(input)?;
         
         let (input, _) = tag("\r\n")(input)?;
         
@@ -165,7 +165,7 @@ impl HttpRequestParser {
             let (new_remaining, header_line) = map(
                 nom::bytes::complete::take_until("\r\n"),
                 |s: &[u8]| String::from_utf8_lossy(s).to_string()
-            )(remaining)?;
+            ).parse(remaining)?;
 
             let (new_remaining, _) = tag("\r\n")(new_remaining)?;
 

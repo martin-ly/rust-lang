@@ -3,8 +3,6 @@
 //! 本模块提供了 K-means 聚类算法的基础实现
 
 use super::*;
-use rand::seq::SliceRandom;
-use rand::thread_rng;
 use rand::Rng;
 
 /// K-means 聚类器
@@ -74,11 +72,13 @@ impl KMeans {
     /// 初始化聚类中心（K-means++ 方法）
     fn initialize_centers(&self, data: &Dataset) -> Dataset {
         let mut centers = Vec::with_capacity(self.k);
-        let mut rng = thread_rng();
+        use rand::rngs::ThreadRng;
+        let mut rng = ThreadRng::default();
         
         // 随机选择第一个中心
-        if let Some(first_center) = data.choose(&mut rng) {
-            centers.push(first_center.clone());
+        if !data.is_empty() {
+            let first_idx = rng.random_range(0..data.len());
+            centers.push(data[first_idx].clone());
         }
         
         // 使用 K-means++ 选择剩余中心
@@ -97,7 +97,7 @@ impl KMeans {
             
             // 根据距离概率选择下一个中心
             let mut cumulative = 0.0;
-            let random_value: f64 = rng.gen_range(0.0..total_distance);
+            let random_value: f64 = rng.random_range(0.0..total_distance);
             
             for (i, &distance) in distances.iter().enumerate() {
                 cumulative += distance;

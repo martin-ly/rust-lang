@@ -44,15 +44,15 @@ serde_json = { workspace = true }
 serde_yaml = { workspace = true }
 toml = "0.8"
 
-# 数据库（可选，standalone 特性启用）
+# 数据库（可选，standalone 特性启用）- 更新到最新版本
 sqlx = { version = "0.8", features = ["runtime-tokio-rustls", "postgres", "mysql", "chrono", "uuid"], default-features = false, optional = true }
 diesel = { version = "2.1", features = ["postgres", "mysql", "chrono", "uuid"], optional = true }
 
-# 配置管理
-config = "0.14"
+# 配置管理 - 更新到最新版本
+config = "0.15"
 dotenvy = "0.15"
 
-# 日志和追踪
+# 日志和追踪 - 使用工作区统一版本
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
 # OpenTelemetry 相关按需启用，避免依赖膨胀
@@ -61,45 +61,45 @@ slog = "2.7"
 slog-stdlog = "4.1"
 slog-scope = "4.4"
 
-# 监控和指标
-prometheus = "0.13"
-metrics = "0.22"
+# 监控和指标 - 更新到最新版本
+prometheus = "0.14"
+metrics = "0.24"
 metrics-exporter-prometheus = "0.17"
 
-# 消息队列（可选，standalone/with-redis/with-rabbitmq 启用）
-redis = { version = "0.25.4", features = ["tokio-comp", "connection-manager"], optional = true }
-lapin = { version = "2.0", optional = true }
+# 消息队列（可选，standalone/with-redis/with-rabbitmq 启用）- 更新到最新版本
+redis = { version = "0.32", features = ["tokio-comp", "connection-manager"], optional = true }
+lapin = { version = "2.5", optional = true }
 
-# 认证和授权
+# 认证和授权 - 更新到最新版本
 jsonwebtoken = "9.3"
 oauth2 = "5.0"
 argon2 = "0.5"
 uuid = { workspace = true }
 
-# HTTP客户端
+# HTTP客户端 - 使用工作区统一版本
 reqwest = { workspace = true }
 hyper = { workspace = true }
 
-# Tower中间件支持
+# Tower中间件支持 - 使用工作区统一版本
 tower = { workspace = true }
 tower-http = { workspace = true }
 
-# 时间处理
+# 时间处理 - 使用工作区统一版本
 chrono = { workspace = true }
 time = { workspace = true }
 
 # 压缩支持
 flate2 = "1.0"
 
-# 错误处理
+# 错误处理 - 使用工作区统一版本
 anyhow = { workspace = true }
 thiserror = { workspace = true }
 eyre = "0.6"
 
-# CLI
+# CLI - 更新到最新版本
 clap = { version = "4.5", features = ["derive"] }
 
-# 测试
+# 测试 - 更新到最新版本
 tokio-test = "0.4"
 mockall = "0.13"
 async-trait = "0.1"

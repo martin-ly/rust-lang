@@ -12,22 +12,22 @@ categories = ["science", "machine-learning", "algorithms"]
 rust-version = "1.89"
 
 [dependencies]
-# 核心依赖 - 更新到最新版本
-serde = { version = "1.0", features = ["derive"] }
-tokio = { version = "1.45", features = ["full"] }
-rand = "0.8"
-anyhow = "1.0"
-thiserror = "1.0"
-uuid = { version = "1.0", features = ["v4", "serde"] }
+# 核心依赖 - 使用工作区统一版本
+serde = { workspace = true }
+tokio = { workspace = true }
+rand = "0.9"
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+uuid = { workspace = true }
 
-# 数学和数值计算 - 最新版本
+# 数学和数值计算 - 更新到最新版本
 ndarray = { version = "0.16", features = ["serde"] }
-nalgebra = "0.33"
+nalgebra = "0.34"
 num-traits = "0.2"
 num-complex = "0.4"
 approx = "0.5"
 
-# 机器学习核心库 - 最新版本
+# 机器学习核心库 - 使用可用版本
 linfa = { version = "0.7", optional = true }
 smartcore = { version = "0.4", optional = true }
 candle-core = { version = "0.4", optional = true }
@@ -35,11 +35,11 @@ candle-nn = { version = "0.4", optional = true }
 candle-transformers = { version = "0.4", optional = true }
 candle-datasets = { version = "0.4", optional = true }
 
-# 深度学习框架 - 最新版本
+# 深度学习框架 - 使用可用版本
 tch = { version = "0.14", optional = true }
 dfdx = { version = "0.13", optional = true }
 
-# 自然语言处理 - 最新版本
+# 自然语言处理 - 使用可用版本
 tokenizers = { version = "0.20", optional = true }
 rust-bert = { version = "0.22", optional = true }
 llm-chain = { version = "0.12", optional = true }
@@ -47,46 +47,46 @@ llm-chain-openai = { version = "0.12", optional = true }
 llm-chain-llama = { version = "0.12", optional = true }
 llm-chain-local = { version = "0.12", optional = true }
 
-# 计算机视觉 - 最新版本
+# 计算机视觉 - 使用可用版本
 opencv = { version = "0.90", optional = true }
 image = { version = "0.25", optional = true }
 imageproc = { version = "0.25", optional = true }
 
-# 数据处理 - 最新版本
+# 数据处理 - 使用可用版本
 polars = { version = "0.50", features = ["lazy", "temporal", "strings", "dtype-categorical", "dtype-struct"], optional = true }
 datafusion = { version = "42.0", optional = true }
 arrow = { version = "55.0", optional = true }
 
-# 向量数据库和搜索 - 最新版本
+# 向量数据库和搜索 - 使用可用版本
 qdrant-client = { version = "1.8", optional = true }
 tantivy = { version = "0.25", optional = true }
 hnsw_rs = { version = "0.2", optional = true }
 
-# 网络和API - 最新版本
-reqwest = { version = "0.12", features = ["json", "stream", "multipart"] }
+# 网络和API - 使用工作区统一版本
+reqwest = { workspace = true }
 async-openai = { version = "0.20", optional = true }
 openai = { version = "1.0", optional = true }
 
-# 序列化和配置 - 最新版本
+# 序列化和配置 - 使用可用版本
 toml = "0.8"
 yaml-rust = "0.4"
 bincode = "1.3"
 ron = "0.8"
-serde_json = "1.0"
+serde_json = { workspace = true }
 
-# 日志和监控 - 最新版本
-tracing = "0.1"
-tracing-subscriber = "0.3"
-metrics = { version = "0.23", optional = true }
-metrics-exporter-prometheus = { version = "0.13", optional = true }
+# 日志和监控 - 使用工作区统一版本
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+metrics = { version = "0.24", optional = true }
+metrics-exporter-prometheus = { version = "0.17", optional = true }
 
-# 并发和性能 - 最新版本
-rayon = "1.10"
+# 并发和性能 - 使用可用版本
+rayon = "1.11"
 crossbeam = "0.8"
 dashmap = "6.0"
 
-# 测试和基准测试 - 最新版本
-criterion = { version = "0.5", features = ["html_reports"] }
+# 测试和基准测试 - 更新到最新版本
+criterion = { version = "0.7", features = ["html_reports"] }
 proptest = "1.4"
 
 # 新增：AI 特定依赖
@@ -94,9 +94,9 @@ proptest = "1.4"
 llama-cpp-2 = { version = "0.1", optional = true }
 # 图神经网络
 petgraph = { version = "0.6", optional = true }
-# 时间序列
-chrono = { version = "0.4", features = ["serde"], optional = true }
-# 配置管理
+# 时间序列 - 使用工作区统一版本
+chrono = { workspace = true, optional = true }
+# 配置管理 - 使用可用版本
 config = "0.14"
 # 错误处理增强
 miette = "7.0"

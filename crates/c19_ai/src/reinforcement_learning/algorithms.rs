@@ -202,10 +202,11 @@ impl ReplayBuffer {
         }
         
         let mut batch = Vec::new();
-        let mut rng = rand::thread_rng();
+        use rand::{Rng, rngs::ThreadRng};
+        let mut rng = ThreadRng::default();
         
         for _ in 0..batch_size {
-            let idx = rng.gen_range(0..self.size);
+            let idx = rng.random_range(0..self.size);
             batch.push((
                 self.states[idx].clone(),
                 self.actions[idx].clone(),

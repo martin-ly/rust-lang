@@ -2,18 +2,19 @@ use c08_algorithms::machine_learning::*;
 use c08_algorithms::machine_learning::clustering::*;
 use c08_algorithms::machine_learning::neural_network::*;
 use c08_algorithms::machine_learning::regression::*;
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{criterion_group, criterion_main, Criterion};
+use std::hint::black_box;
 
 fn generate_synthetic_data(n_samples: usize, n_features: usize) -> (Dataset, Labels) {
-    use rand::Rng;
-    let mut rng = rand::thread_rng();
+    use rand::{Rng, rngs::ThreadRng};
+    let mut rng = ThreadRng::default();
     
     let mut data = Vec::with_capacity(n_samples);
     let mut labels = Vec::with_capacity(n_samples);
     
     for _ in 0..n_samples {
         let sample: Vec<f64> = (0..n_features)
-            .map(|_| rng.gen_range(-1.0..1.0))
+            .map(|_| rng.random_range(-1.0..1.0))
             .collect();
         
         // 简单的分类规则：特征和大于0为类别1，否则为类别0
@@ -27,19 +28,19 @@ fn generate_synthetic_data(n_samples: usize, n_features: usize) -> (Dataset, Lab
 }
 
 fn generate_regression_data(n_samples: usize, n_features: usize) -> (Dataset, Vec<f64>) {
-    use rand::Rng;
-    let mut rng = rand::thread_rng();
+    use rand::{Rng, rngs::ThreadRng};
+    let mut rng = ThreadRng::default();
     
     let mut data = Vec::with_capacity(n_samples);
     let mut targets = Vec::with_capacity(n_samples);
     
     for _ in 0..n_samples {
         let sample: Vec<f64> = (0..n_features)
-            .map(|_| rng.gen_range(-1.0..1.0))
+            .map(|_| rng.random_range(-1.0..1.0))
             .collect();
         
         // 线性关系：y = sum(x) + noise
-        let target = sample.iter().sum::<f64>() + rng.gen_range(-0.1..0.1);
+        let target = sample.iter().sum::<f64>() + rng.random_range(-0.1..0.1);
         
         data.push(sample);
         targets.push(target);

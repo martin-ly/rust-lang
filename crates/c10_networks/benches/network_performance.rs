@@ -2,7 +2,8 @@
 //! 
 //! 这个模块包含了 c10_networks 库的性能基准测试
 
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{criterion_group, criterion_main, Criterion};
+use std::hint::black_box;
 use c10_networks::{
     socket::{TcpConfig, TcpSocket},
     protocol::http::{HttpRequest, HttpMethod, HttpVersion, HttpStatusCode},

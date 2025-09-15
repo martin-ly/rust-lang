@@ -400,8 +400,8 @@ impl Hash {
     
     /// 随机哈希 / Random Hash
     pub fn random() -> Self {
-        use rand::Rng;
-        let mut rng = rand::thread_rng();
+        use rand::{Rng, rngs::ThreadRng};
+        let mut rng = ThreadRng::default();
         let mut bytes = [0u8; 32];
         rng.fill(&mut bytes);
         Self { bytes }

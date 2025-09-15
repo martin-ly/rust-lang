@@ -74,72 +74,72 @@ debug = false
 lto = true
 codegen-units = 1
 
-# 工作区级别的依赖版本统一 begin
+# 工作区级别的依赖版本统一 - 更新到最新稳定版本
 [workspace.dependencies]
-# 网络和 HTTP 相关 - 严格版本约束
-reqwest = { version = "=0.12.23", features = ["json", "rustls-tls"] }
-hyper = { version = "=1.7.0", features = ["full"] }
-hyper-util = "=0.1.16"
-hyper-rustls = "=0.27.7"
-hyper-tls = "=0.6.0"
-hyper-timeout = "=0.5.2"
-h2 = "=0.4.12"
+# 网络和 HTTP 相关 - 最新稳定版本
+reqwest = { version = "0.12", features = ["json", "rustls-tls"] }
+hyper = { version = "1.7", features = ["full"] }
+hyper-util = "0.1"
+hyper-rustls = "0.27"
+hyper-tls = "0.6"
+hyper-timeout = "0.5"
+h2 = "0.4"
 
-# Web 框架 - 严格版本约束避免冲突
-axum = { version = "=0.8.4", features = ["macros", "multipart", "tracing"] }
-axum-core = "=0.5.2"
-tower = "=0.5.2"
-tower-http = { version = "=0.6.6", features = ["cors", "trace", "timeout", "compression-gzip"] }
+# Web 框架 - 最新稳定版本
+axum = { version = "0.8", features = ["macros", "multipart", "tracing"] }
+axum-core = "0.5"
+tower = "0.5"
+tower-http = { version = "0.6", features = ["cors", "trace", "timeout", "compression-gzip"] }
 
-# 终端UI库 - 严格版本约束
-crossterm = "=0.29.0"
+# 终端UI库
+crossterm = "0.29"
 
-# gRPC 相关 - 严格版本约束
-tonic = { version = "=0.12.3", features = ["tls", "tls-roots", "prost"] }
-tonic-build = "=0.12.3"
-prost = "=0.13.5"
-prost-build = "=0.13.5"
-prost-derive = "=0.13.5"
-prost-types = "=0.13.5"
+# gRPC 相关 - 最新稳定版本
+tonic = { version = "0.12", features = ["tls", "tls-roots", "prost"] }
+tonic-build = "0.12"
+prost = "0.13"
+prost-build = "0.13"
+prost-derive = "0.13"
+prost-types = "0.13"
 
-# TLS 和加密 - 严格版本约束
-rustls = { version = "=0.23.31", features = ["ring"] }
-rustls-webpki = "=0.103.4"
-rustls-pemfile = "=2.2.0"
-tokio-rustls = "=0.26.2"
-ring = "=0.17.14"
-webpki-roots = "=1.0.2"
+# TLS 和加密 - 最新稳定版本
+rustls = { version = "0.23", features = ["ring"] }
+rustls-webpki = "0.103"
+rustls-pemfile = "2.2"
+tokio-rustls = "0.26"
+ring = "0.17"
+webpki-roots = "1.0"
 
-# 错误处理 - 严格版本约束
-thiserror = "=2.0.16"
-anyhow = "=1.0.99"
+# 错误处理 - 最新稳定版本
+thiserror = "2.0"
+anyhow = "1.0"
 
-# 序列化 - 严格版本约束
-serde = { version = "=1.0.219", features = ["derive"] }
-serde_json = "=1.0.143"
-serde_yaml = "=0.9.34"
+# 序列化 - 最新稳定版本
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde_yaml = "0.9"
 
-# 异步运行时 - 严格版本约束
-tokio = { version = "=1.47.1", features = ["full"] }
-tokio-util = "=0.7.16"
-tokio-stream = "=0.1.17"
-tokio-tungstenite = "=0.21.0"
-futures = "=0.3.31"
-futures-util = "=0.3.31"
+# 异步运行时 - 最新稳定版本
+tokio = { version = "1.47", features = ["full"] }
+tokio-util = "0.7"
+tokio-stream = "0.1"
+tokio-tungstenite = "0.27"
+futures = "0.3"
+futures-util = "0.3"
 
-# 日志和追踪 - 严格版本约束
-tracing = "=0.1.41"
-tracing-subscriber = { version = "=0.3.20", features = ["env-filter", "json"] }
-log = "=0.4.28"
+# 日志和追踪 - 最新稳定版本
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+log = "0.4"
 
-# 时间处理 - 严格版本约束
-chrono = { version = "=0.4.42", features = ["serde"] }
-time = { version = "=0.3.43", features = ["serde", "macros"] }
+# 时间处理 - 最新稳定版本
+chrono = { version = "0.4", features = ["serde"] }
+time = { version = "0.3", features = ["serde", "macros"] }
 
-# 其他常用库 - 严格版本约束
-uuid = { version = "=1.18.1", features = ["v4", "serde"] }
-url = "=2.5.7"
-bytes = "=1.10.1"
-indexmap = "=2.11.1"
+# 其他常用库 - 最新稳定版本
+uuid = { version = "1.18", features = ["v4", "serde"] }
+url = "2.5"
+bytes = "1.10"
+indexmap = "2.11"
 
 # 依赖版本约束 - 在工作区依赖中统一版本 end

@@ -116,10 +116,10 @@ impl NetClient {
     pub async fn ws_echo(&self, url: &str, text: &str) -> NetworkResult<String> {
         use futures_util::{SinkExt, StreamExt};
         let url = url::Url::parse(url).map_err(|e| NetworkError::Other(e.to_string()))?;
-        let (mut ws, _resp) = tokio_tungstenite::connect_async(url)
+        let (mut ws, _resp) = tokio_tungstenite::connect_async(url.as_str())
             .await
             .map_err(|e| NetworkError::Connection(e.to_string()))?;
-        ws.send(tokio_tungstenite::tungstenite::Message::Text(text.to_string()))
+        ws.send(tokio_tungstenite::tungstenite::Message::Text(text.to_string().into()))
             .await
             .map_err(|e| NetworkError::Other(e.to_string()))?;
         if let Some(msg) = ws.next().await {

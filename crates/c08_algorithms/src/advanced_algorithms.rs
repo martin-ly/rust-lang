@@ -9,7 +9,6 @@
 use std::sync::{Arc, Mutex};
 use std::collections::HashMap;
 use rayon::prelude::*;
-use rand::Rng;
 
 /// 并行排序算法实现
 pub struct ParallelSort;
@@ -383,12 +382,12 @@ impl KMeans {
     }
     
     fn initialize_centroids(&mut self, data: &[Vec<f64>]) {
-        use rand::Rng;
-        let mut rng = rand::thread_rng();
+        use rand::{Rng, rngs::ThreadRng};
+        let mut rng = ThreadRng::default();
         
         self.centroids.clear();
         for _ in 0..self.k {
-            let random_index = rng.gen_range(0..data.len());
+            let random_index = rng.random_range(0..data.len());
             self.centroids.push(data[random_index].clone());
         }
     }
@@ -628,15 +627,15 @@ impl RSA {
     }
     
     fn generate_prime(bits: usize) -> u64 {
-        use rand::Rng;
-        let mut rng = rand::thread_rng();
+        use rand::{Rng, rngs::ThreadRng};
+        let mut rng = ThreadRng::default();
         
         loop {
             if bits == 0 { return 2; }
             // 取区间 [2^(bits-1), 2^bits)，保证乘积在 u64 范围内（当 overall bit_length=2*bits）
             let low = 1u64 << (bits as u32 - 1);
             let high = 1u64 << (bits as u32);
-            let candidate = rng.gen_range(low..high);
+            let candidate = rng.random_range(low..high);
             if Self::is_prime(candidate) {
                 return candidate;
             }
@@ -644,6 +643,8 @@ impl RSA {
     }
     
     fn is_prime(n: u64) -> bool {
+        use rand::{Rng, rngs::ThreadRng};
+        
         if n < 2 {
             return false;
         }
@@ -663,7 +664,7 @@ impl RSA {
         
         // Miller-Rabin素性测试
         for _ in 0..5 {
-            let a = rand::thread_rng().gen_range(2..n);
+            let a = ThreadRng::default().random_range(2..n);
             let mut x = Self::mod_pow(a, d, n);
             
             if x == 1 || x == n - 1 {

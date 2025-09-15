@@ -105,9 +105,9 @@ impl LoadBalancer {
                 instances.iter().min_by(|a, b| a.load.partial_cmp(&b.load).unwrap())
             }
             LoadBalancingStrategy::Random => {
-                use rand::Rng;
-                let mut rng = rand::thread_rng();
-                let index = rng.gen_range(0..instances.len());
+                use rand::{Rng, rngs::ThreadRng};
+                let mut rng = ThreadRng::default();
+                let index = rng.random_range(0..instances.len());
                 instances.get(index)
             }
         }
