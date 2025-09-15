@@ -17,8 +17,15 @@
 - 异步背压与丢弃策略的 form/check 一致性定义
 - MIR 级别的不可变借用强化与诊断提升原型
 
+## 相关索引
+
+- 理论基础（类型系统与形式化）：[`../01_theoretical_foundations/01_type_system/00_index.md`](../01_theoretical_foundations/01_type_system/00_index.md)
+- 编程范式（并发与异步研究）：[`../02_programming_paradigms/02_async/00_index.md`](../02_programming_paradigms/02_async/00_index.md)
+- 质量保障（形式化验证工具）：[`../10_quality_assurance/00_index.md`](../10_quality_assurance/00_index.md)
+
 ## 导航
 
 - 返回根：[`rust-formal-engineering-system/README.md`](../README.md)
 - 理论基础：[`../01_theoretical_foundations/00_index.md`](../01_theoretical_foundations/00_index.md)
 - 质量保障：[`../10_quality_assurance/00_index.md`](../10_quality_assurance/00_index.md)
+- 返回项目根：[`../README.md`](../README.md)

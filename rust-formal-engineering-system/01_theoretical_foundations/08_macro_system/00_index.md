@@ -12,7 +12,20 @@
 - `syn`/`quote` 解析与生成
 - 错误定位与 `Span` 使用
 
+## 实践与样例（Practice）
+
+- 宏开发：参见 [crates/c04_generic](../../../crates/c04_generic/)
+- 过程宏：[crates/c09_design_pattern](../../../crates/c09_design_pattern/)
+- 代码生成：[crates/c03_control_fn](../../../crates/c03_control_fn/)
+
+## 相关索引
+
+- 类型系统（宏与类型系统交互）：[`../01_type_system/00_index.md`](../01_type_system/00_index.md)
+- 工具链生态（宏工具）：[`../../06_toolchain_ecosystem/00_index.md`](../../06_toolchain_ecosystem/00_index.md)
+- 质量保障（宏测试）：[`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)
+
 ## 导航
 
 - 返回理论基础：[`../00_index.md`](../00_index.md)
 - 工具链生态：[`../../06_toolchain_ecosystem/00_index.md`](../../06_toolchain_ecosystem/00_index.md)
+- 返回项目根：[`../../README.md`](../../README.md)

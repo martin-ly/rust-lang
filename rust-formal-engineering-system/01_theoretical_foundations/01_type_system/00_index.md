@@ -36,15 +36,15 @@
 
 ## 实践与样例（Practice）
 
-- 泛型与抽象：参见 `crates/c04_generic/`
-- 函数式与控制流：`crates/c03_control_fn/`
-- 并发与异步：`crates/c05_threads/`、`crates/c06_async/`
-- 分布式与一致性：`crates/c20_distributed/`
+- 泛型与抽象：参见 [crates/c04_generic](../../../crates/c04_generic/)
+- 函数式与控制流：[crates/c03_control_fn](../../../crates/c03_control_fn/)
+- 并发与异步：[crates/c05_threads](../../../crates/c05_threads/)、[crates/c06_async](../../../crates/c06_async/)
+- 分布式与一致性：[crates/c20_distributed](../../../crates/c20_distributed/)
 
 关联示例：在共识最小实现中，生命周期与借用规则可通过“作用域回调”降低 'static 约束：
 
 ```rust
-// 详见 crates/c20_distributed/src/consensus_raft.rs
+// 详见 ../../../crates/c20_distributed/src/consensus_raft.rs
 use c20_distributed::consensus_raft::{MinimalRaft, RaftNode, AppendEntriesReq, Term, LogIndex};
 
 let mut raft: MinimalRaft<Vec<u8>> = MinimalRaft::new();
@@ -67,9 +67,16 @@ assert_eq!(buf, vec![b"x".to_vec()]);
 - 语言层：`crates/c04_generic/`、`crates/c03_control_fn/`
 - 并发层：`crates/c05_threads/`、`crates/c06_async/`
 
+## 相关索引
+
+- 编程范式（同步/异步）：[../../02_programming_paradigms/01_synchronous/00_index.md](../../02_programming_paradigms/01_synchronous/00_index.md) ・ [../../02_programming_paradigms/02_async/00_index.md](../../02_programming_paradigms/02_async/00_index.md)
+- 质量保障（类型相关 QA）：[../../10_quality_assurance/00_index.md](../../10_quality_assurance/00_index.md)
+- 设计模式（ADT/状态机建模）：[../../03_design_patterns/00_index.md](../../03_design_patterns/00_index.md)
+
 ## 导航
 
 - 返回理论基础：[`../00_index.md`](../00_index.md)
 - 数学基础：[`../10_mathematical_foundations/00_index.md`](../10_mathematical_foundations/00_index.md)
 - 宏系统：[`../08_macro_system/00_index.md`](../08_macro_system/00_index.md)
 - 错误处理：[`../07_error_handling/00_index.md`](../07_error_handling/00_index.md)
+- 返回项目根：[`../../README.md`](../../README.md)

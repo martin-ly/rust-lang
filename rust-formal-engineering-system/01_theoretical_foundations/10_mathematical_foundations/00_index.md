@@ -13,7 +13,20 @@
 - 迭代器/组合子 = 函子/单子式组合
 - 错误/结果 = 和类型与代数法则（结合律/分配律）
 
+## 实践与样例（Practice）
+
+- 函数式编程：参见 [crates/c03_control_fn](../../../crates/c03_control_fn/)
+- 泛型与抽象：[crates/c04_generic](../../../crates/c04_generic/)
+- 算法与数据结构：[crates/c08_algorithms](../../../crates/c08_algorithms/)
+
+## 相关索引
+
+- 类型系统（代数数据类型）：[`../01_type_system/00_index.md`](../01_type_system/00_index.md)
+- 编程范式（函数式）：[`../../02_programming_paradigms/03_functional/00_index.md`](../../02_programming_paradigms/03_functional/00_index.md)
+- 设计模式（函数式模式）：[`../../03_design_patterns/00_index.md`](../../03_design_patterns/00_index.md)
+
 ## 导航
 
 - 返回理论基础：[`../00_index.md`](../00_index.md)
 - 设计模式：[`../../03_design_patterns/00_index.md`](../../03_design_patterns/00_index.md)
+- 返回项目根：[`../../README.md`](../../README.md)

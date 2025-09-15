@@ -30,10 +30,17 @@
 - 返回根：[`rust-formal-engineering-system/README.md`](../README.md)
 - 编程范式：[`../02_programming_paradigms/`](../02_programming_paradigms/)
 - 质量保障：[`../10_quality_assurance/`](../10_quality_assurance/)
+- 返回项目根：[`../README.md`](../README.md)
 
 ## 配套示例（跨仓库）
 
-- 泛型与抽象：工作区 `crates/c04_generic/`
-- 控制流与函数式：`crates/c03_control_fn/`
-- 并发与异步：`crates/c05_threads/`、`crates/c06_async/`
-- 分布式一致性与 SWIM：`crates/c20_distributed/`
+- 泛型与抽象：工作区 [crates/c04_generic/](../../crates/c04_generic/)
+- 控制流与函数式：[crates/c03_control_fn/](../../crates/c03_control_fn/)
+- 并发与异步：[crates/c05_threads/](../../crates/c05_threads/)、[crates/c06_async/](../../crates/c06_async/)
+- 分布式一致性与 SWIM：[crates/c20_distributed/](../../crates/c20_distributed/)
+
+## 相关索引
+
+- 编程范式（理论在实践中的应用）：[`../02_programming_paradigms/01_synchronous/00_index.md`](../02_programming_paradigms/01_synchronous/00_index.md) ・ [`../02_programming_paradigms/02_async/00_index.md`](../02_programming_paradigms/02_async/00_index.md)
+- 质量保障（形式化验证工具）：[`../10_quality_assurance/00_index.md`](../10_quality_assurance/00_index.md)
+- 研究议程（前沿理论方向）：[`../09_research_agenda/00_index.md`](../09_research_agenda/00_index.md)

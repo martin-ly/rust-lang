@@ -6,10 +6,10 @@
 
 ## 示例入口（仓库映射）
 
-- 线程与同步：`crates/c05_threads/README.md`
-- 异步与 Tokio：`crates/c06_async/README.md`
-- 网络与协议：`crates/c10_networks/README.md`
-- 微服务样板：`crates/c13_microservice/README.md`
+- 线程与同步：[crates/c05_threads/README.md](../../crates/c05_threads/README.md)
+- 异步与 Tokio：[crates/c06_async/README.md](../../crates/c06_async/README.md)
+- 网络与协议：[crates/c10_networks/README.md](../../crates/c10_networks/README.md)
+- 微服务样板：[crates/c13_microservice/README.md](../../crates/c13_microservice/README.md)
 
 ### 子目录导航
 
@@ -34,8 +34,15 @@
 - Bash 脚本：`scripts/*.sh`（如 `c03_control_fn/build.sh`、`c04_generic/build.sh`）
 - 可选使用 `just`：根目录 `justfile` 提供统一别名（如 `just dns-all`）
 
+## 相关索引
+
+- 软件工程（示例工程化）：[`../05_software_engineering/00_index.md`](../05_software_engineering/00_index.md)
+- 应用领域（各领域示例）：[`../04_application_domains/00_index.md`](../04_application_domains/00_index.md)
+- 质量保障（示例测试与验证）：[`../10_quality_assurance/00_index.md`](../10_quality_assurance/00_index.md)
+
 ## 导航
 
 - 返回根：[`rust-formal-engineering-system/README.md`](../README.md)
 - 设计模式：[`../03_design_patterns/00_index.md`](../03_design_patterns/00_index.md)
 - 工具链生态：[`../06_toolchain_ecosystem/00_index.md`](../06_toolchain_ecosystem/00_index.md)
+- 返回项目根：[`../README.md`](../README.md)

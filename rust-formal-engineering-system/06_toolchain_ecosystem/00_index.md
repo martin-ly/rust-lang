@@ -13,6 +13,14 @@
 - 基准与剖析：`criterion`、`perf`/`vtune`/`WPA`、`pprof`
 - 形式化：`kani`、`prusti`、`creusot`
 
+## 常用命令导航（最小）
+
+- Lint：`cargo clippy -- -D warnings`
+- Format：`cargo fmt --all`
+- Fuzz（示例）：`cargo fuzz run fuzz_target_1`
+- Miri：`cargo +nightly miri test`
+- Bench：`cargo bench -p <crate>` 或 `--no-run`
+
 ## 仓库参考
 
 - 质量保障：[`../10_quality_assurance/00_index.md`](../10_quality_assurance/00_index.md)
@@ -22,3 +30,4 @@
 
 - 返回根：[`rust-formal-engineering-system/README.md`](../README.md)
 - 软件工程：[`../05_software_engineering/00_index.md`](../05_software_engineering/00_index.md)
+- 质量保障：[`../10_quality_assurance/00_index.md`](../10_quality_assurance/00_index.md)

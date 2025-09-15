@@ -13,13 +13,20 @@
 
 ## 实践与示例
 
-- 设计模式：`crates/c09_design_pattern/`
-- 泛型与 trait：`crates/c04_generic/`
-- 控制与函数：`crates/c03_control_fn/`
+- 设计模式：[crates/c09_design_pattern](../../../crates/c09_design_pattern/)
+- 泛型与 trait：[crates/c04_generic](../../../crates/c04_generic/)
+- 控制与函数：[crates/c03_control_fn](../../../crates/c03_control_fn/)
+
+## 相关索引
+
+- 理论基础（Trait 系统）：[`../../01_theoretical_foundations/05_trait_system/00_index.md`](../../01_theoretical_foundations/05_trait_system/00_index.md)
+- 设计模式（面向对象模式）：[`../../03_design_patterns/00_index.md`](../../03_design_patterns/00_index.md)
+- 质量保障（面向对象测试）：[`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)
 
 ## 导航
 
-- 返回范式总览：[`../`](../)
+- 返回范式总览：[`../00_index.md`](../00_index.md)
 - 函数式范式：[`../03_functional/00_index.md`](../03_functional/00_index.md)
 - 同步范式：[`../01_synchronous/00_index.md`](../01_synchronous/00_index.md)
 - 异步范式：[`../02_async/00_index.md`](../02_async/00_index.md)
+- 返回项目根：[`../../README.md`](../../README.md)

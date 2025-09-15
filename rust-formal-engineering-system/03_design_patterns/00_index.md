@@ -22,9 +22,15 @@
 
 ## 仓库内参考
 
-- 设计模式示例：`crates/c09_design_pattern/`（包含多类示例与文档）
-- 控制与函数：`crates/c03_control_fn/`
-- 泛型与 trait：`crates/c04_generic/`
+- 设计模式示例：[crates/c09_design_pattern](../../crates/c09_design_pattern/)
+- 控制与函数：[crates/c03_control_fn](../../crates/c03_control_fn/)
+- 泛型与 trait：[crates/c04_generic](../../crates/c04_generic/)
+
+## 相关索引
+
+- 类型系统（ADT/状态机建模）：[../01_theoretical_foundations/01_type_system/00_index.md](../01_theoretical_foundations/01_type_system/00_index.md)
+- 编程范式（同步/异步）：[../02_programming_paradigms/01_synchronous/00_index.md](../02_programming_paradigms/01_synchronous/00_index.md) ・ [../02_programming_paradigms/02_async/00_index.md](../02_programming_paradigms/02_async/00_index.md)
+- 质量保障（模式实现的测试与验证）：[../10_quality_assurance/00_index.md](../10_quality_assurance/00_index.md)
 
 ## 推荐阅读路径
 
@@ -37,3 +43,4 @@
 - 返回根：[`rust-formal-engineering-system/README.md`](../README.md)
 - 编程范式：[`02_programming_paradigms/`](../02_programming_paradigms/)
 - 质量保障：[`10_quality_assurance/`](../10_quality_assurance/)
+- 返回项目根：[`../README.md`](../README.md)

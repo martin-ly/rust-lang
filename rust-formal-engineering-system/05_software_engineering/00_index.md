@@ -16,8 +16,15 @@
 
 - 质量专题：[`../10_quality_assurance/00_index.md`](../10_quality_assurance/00_index.md)
 - 设计模式：[`../03_design_patterns/00_index.md`](../03_design_patterns/00_index.md)
+- 实用示例：[`../08_practical_examples/00_index.md`](../08_practical_examples/00_index.md)
+
+## 相关索引
+
+- 编程范式（同步/异步）：[`../02_programming_paradigms/01_synchronous/00_index.md`](../02_programming_paradigms/01_synchronous/00_index.md) ・ [`../02_programming_paradigms/02_async/00_index.md`](../02_programming_paradigms/02_async/00_index.md)
+- 应用领域（各领域工程实践）：[`../04_application_domains/00_index.md`](../04_application_domains/00_index.md)
 
 ## 导航
 
 - 返回根：[`rust-formal-engineering-system/README.md`](../README.md)
 - 工具链生态：[`../06_toolchain_ecosystem/00_index.md`](../06_toolchain_ecosystem/00_index.md)
+- 返回项目根：[`../README.md`](../README.md)

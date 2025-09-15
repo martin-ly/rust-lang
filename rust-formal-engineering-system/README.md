@@ -23,9 +23,24 @@
 
 ## 快速导航
 
-- 编程范式总览：[`02_programming_paradigms/`](./02_programming_paradigms/)，同步范式索引见 [`01_synchronous/00_index.md`](./02_programming_paradigms/01_synchronous/00_index.md)
-- 设计模式总览：[`03_design_patterns/`](./03_design_patterns/)
-- 质量保障总览：[`10_quality_assurance/`](./10_quality_assurance/)
+### 核心模块
+
+- 理论基础：[`01_theoretical_foundations/`](./01_theoretical_foundations/) - 类型系统、所有权、并发模型
+- 编程范式：[`02_programming_paradigms/`](./02_programming_paradigms/) - 同步/异步、函数式、面向对象
+- 设计模式：[`03_design_patterns/`](./03_design_patterns/) - 创建型、结构型、行为型模式
+- 质量保障：[`10_quality_assurance/`](./10_quality_assurance/) - 测试、验证、度量
+
+### 实践模块
+
+- 应用领域：[`04_application_domains/`](./04_application_domains/) - 系统、网络、嵌入式、AI
+- 软件工程：[`05_software_engineering/`](./05_software_engineering/) - 需求、设计、测试、运维
+- 工具链生态：[`06_toolchain_ecosystem/`](./06_toolchain_ecosystem/) - Cargo、Clippy、Miri、Fuzz
+- 实用示例：[`08_practical_examples/`](./08_practical_examples/) - 最佳实践与样板
+
+### 扩展模块
+
+- 跨语言比较：[`07_cross_language_comparison/`](./07_cross_language_comparison/) - C/C++、Go、Haskell、Zig
+- 研究议程：[`09_research_agenda/`](./09_research_agenda/) - 前沿方向与问题列表
 
 ## 构建与使用
 
@@ -52,6 +67,14 @@
 - 统一结构：每个子模块建议包含 1) 目的、2) 术语、3) 核心概念、4) 实践、5) 参考。
 - 统一链接：尽量使用相对路径链接同项目内文档；新增文档请更新相应上层 `00_index.md`。
 - 完整贡献细则：参见 [`CONTRIBUTING.md`](./CONTRIBUTING.md)
+
+## 新增主题最小步骤（Minimal Steps）
+
+1) 在目标目录创建 `00_index.md`，包含：目的、术语、核心概念、仓库内示例链接、导航。
+2) 在相邻上层 `00_index.md` 添加该目录的相对链接。
+3) 在本 README 的“快速导航”或相关总览处补充入口（如适用）。
+4) 若涉及代码示例，在对应 `crates/*` 的 README 顶部加入返回到本目录的导航。
+5) 运行 Markdown Lint，确保标题/列表周围空行、代码块围栏规范。
 
 ## 里程碑
 
