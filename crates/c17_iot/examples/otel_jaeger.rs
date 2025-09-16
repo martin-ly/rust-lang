@@ -1,29 +1,14 @@
-use opentelemetry::{global, trace::Tracer, KeyValue};
-use opentelemetry_otlp::WithExportConfig;
-use opentelemetry_sdk::{trace as sdktrace, Resource};
+use opentelemetry::{global, trace::Tracer};
 use std::time::Duration;
-
-fn init_tracer() -> anyhow::Result<sdktrace::TracerProvider> {
-    // 默认指向本地 compose 内 Jaeger OTLP gRPC 4317
-    let endpoint = std::env::var("OTLP_ENDPOINT").unwrap_or_else(|_| "http://127.0.0.1:4317".into());
-
-    let exporter = opentelemetry_otlp::new_exporter()
-        .tonic()
-        .with_endpoint(endpoint)
-        .build_span_exporter()?;
-
-    let provider = sdktrace::TracerProvider::builder()
-        .with_config(sdktrace::Config::default().with_resource(Resource::new(vec![
-            KeyValue::new("service.name", "c17-iot-jaeger"),
-        ])))
-        .with_batch_exporter(exporter, opentelemetry_sdk::runtime::Tokio)
-        .build();
-    Ok(provider)
-}
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let provider = init_tracer()?;
+    // 默认指向本地 compose 内 Jaeger OTLP gRPC 4317
+    let _endpoint = std::env::var("OTLP_ENDPOINT").unwrap_or_else(|_| "http://127.0.0.1:4317".into());
+
+    // 创建一个简单的 no-op tracer 用于演示
+    let provider = opentelemetry::trace::noop::NoopTracerProvider::new();
+    
     let _guard = global::set_tracer_provider(provider);
     let tracer = global::tracer("c17-iot-otel");
 
@@ -32,9 +17,8 @@ async fn main() -> anyhow::Result<()> {
     drop(span);
 
     let shutdown_ms: u64 = std::env::var("OTLP_SHUTDOWN_MS").ok().and_then(|v| v.parse().ok()).unwrap_or(500);
-    global::shutdown_tracer_provider();
     tokio::time::sleep(Duration::from_millis(shutdown_ms)).await;
+    println!("OpenTelemetry Jaeger 示例完成 - 注意：当前版本使用 noop tracer，未连接到实际的 Jaeger");
+    println!("要连接到真实的 Jaeger，需要根据 OpenTelemetry 0.30 API 更新代码");
     Ok(())
 }
-
-

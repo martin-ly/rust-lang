@@ -17,16 +17,18 @@ openssl = { version = "0.10", optional = true, features = ["vendored"] }
 [dev-dependencies]
 rumqttc = "0.25.0"
 coap-lite = "0.13"
-opentelemetry = "0.23"
-opentelemetry_sdk = { version = "0.23", features = ["rt-tokio"] }
-opentelemetry-stdout = "0.2"
-opentelemetry-otlp = { version = "0.16", features = ["http-json", "grpc-tonic"] }
+opentelemetry = "0.30"
+opentelemetry_sdk = { version = "0.30", features = ["rt-tokio"] }
+opentelemetry-stdout = "0.30"
+opentelemetry-otlp = { version = "0.30", features = ["http-json", "grpc-tonic"] }
 tonic = { workspace = true }
 anyhow = { workspace = true }
 sha2 = "0.10"
 hex = "0.4"
-hyper = { version = "0.14", features = ["full"] }
-prometheus = "0.13"
+hyper = { workspace = true, features = ["full"] }
+hyper-util = { workspace = true }
+http = { workspace = true }
+prometheus = "0.14"
 rustls = { workspace = true }
 rustls-pemfile = { workspace = true }
 

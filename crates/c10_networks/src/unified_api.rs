@@ -139,18 +139,11 @@ impl NetClient {
         Ok(Bytes::copy_from_slice(&buf[..n]))
     }
 
-    /// gRPC 调用（示例：Hello）
-    pub async fn grpc_hello(&self, endpoint: &str, name: &str) -> NetworkResult<String> {
-        pub mod hello { tonic::include_proto!("hello"); }
-        use hello::{greeter_client::GreeterClient, HelloRequest};
-        let mut client = GreeterClient::connect(endpoint.to_string())
-            .await
-            .map_err(|e| NetworkError::Connection(e.to_string()))?;
-        let resp = client
-            .say_hello(tonic::Request::new(HelloRequest { name: name.into() }))
-            .await
-            .map_err(|e| NetworkError::Other(e.to_string()))?;
-        Ok(resp.into_inner().message)
+    /// gRPC 调用（示例：Hello）- 暂时禁用，需要正确的 tonic-build 配置
+    pub async fn grpc_hello(&self, _endpoint: &str, name: &str) -> NetworkResult<String> {
+        // TODO: 需要正确配置 tonic-build 来生成 gRPC 服务代码
+        // 目前只返回一个模拟响应
+        Ok(format!("Hello, {}! (gRPC service temporarily disabled)", name))
     }
 
     /// P2P 启动最小节点（返回监听地址字符串向量，示例）

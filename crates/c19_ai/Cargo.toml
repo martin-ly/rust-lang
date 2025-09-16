@@ -1,13 +1,13 @@
 [package]
 name = "c19_ai"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2024"
 resolver = "3"
-description = "AI and Machine Learning with Rust 1.89 - 人工智能与机器学习"
+description = "AI and Machine Learning with Rust 1.89 - 人工智能与机器学习 (2025 Edition)"
 authors = ["Rust AI Team"]
 license = "MIT"
 repository = "https://github.com/rust-lang/c19_ai"
-keywords = ["ai", "machine-learning", "deep-learning", "neural-networks", "nlp", "computer-vision", "llm", "transformers", "rust-189"]
+keywords = ["ai", "machine-learning", "deep-learning", "neural-networks", "nlp", "computer-vision", "llm", "transformers", "rust-189", "candle", "burn", "tch", "dfdx"]
 categories = ["science", "machine-learning", "algorithms"]
 rust-version = "1.89"
 
@@ -20,90 +20,106 @@ anyhow = { workspace = true }
 thiserror = { workspace = true }
 uuid = { workspace = true }
 
-# 数学和数值计算 - 更新到最新版本
-ndarray = { version = "0.16", features = ["serde"] }
+# 数学和数值计算 - 2025年最新版本
+ndarray = { version = "0.16", features = ["serde", "rayon", "approx"] }
 nalgebra = "0.34"
 num-traits = "0.2"
 num-complex = "0.4"
 approx = "0.5"
+statrs = "0.18"
 
 # 机器学习核心库 - 2025年最新版本
 linfa = { version = "0.7", optional = true }
 smartcore = { version = "0.4", optional = true }
-candle-core = { workspace = true, optional = true }
-candle-nn = { workspace = true, optional = true }
-candle-transformers = { workspace = true, optional = true }
-candle-datasets = { version = "0.9.1", optional = true }
+candle-core = { version = "0.9", optional = true }
+candle-nn = { version = "0.9", optional = true }
+candle-transformers = { version = "0.9", optional = true }
+candle-datasets = { version = "0.9", optional = true }
+candle-kernels = { version = "0.9", optional = true }
 
-# 深度学习框架 - 暂时禁用以避免版本冲突
-# tch = { workspace = true, optional = true }
+# 深度学习框架 - 2025年最新版本
+# burn = { version = "0.13", optional = true }  # 暂时禁用以避免工作区冲突
+# tch = { version = "0.14", optional = true }   # 暂时禁用以避免工作区冲突
 dfdx = { version = "0.13", optional = true }
 
-# 自然语言处理 - 使用可用版本
-tokenizers = { version = "0.20", optional = true }
-rust-bert = { version = "0.22.0", optional = true }
-llm-chain = { version = "0.12", optional = true }
-llm-chain-openai = { version = "0.12", optional = true }
-llm-chain-llama = { version = "0.12", optional = true }
+# 自然语言处理 - 2025年最新版本
+tokenizers = { version = "0.22", optional = true }
+rust-bert = { version = "0.23", optional = true }
+llm-chain = { version = "0.13", optional = true }
+llm-chain-openai = { version = "0.13", optional = true }
+llm-chain-llama = { version = "0.13", optional = true }
 llm-chain-local = { version = "0.12", optional = true }
 
-# 计算机视觉 - 使用可用版本
-opencv = { version = "0.90", optional = true }
-image = { version = "0.25", optional = true }
+# 计算机视觉 - 2025年最新版本
+opencv = { version = "0.95", optional = true }
+image = { version = "0.25.8", optional = true }
 imageproc = { version = "0.25", optional = true }
 
-# 数据处理 - 使用可用版本
+# 数据处理 - 2025年最新版本
 polars = { version = "0.50", features = ["lazy", "temporal", "strings", "dtype-categorical", "dtype-struct"], optional = true }
-datafusion = { version = "42.0", optional = true }
-arrow = { version = "55.0", optional = true }
+datafusion = { version = "49.0", optional = true }
+arrow = { version = "56.0", optional = true }
 
-# 向量数据库和搜索 - 使用可用版本
+# 向量数据库和搜索 - 2025年最新版本
 qdrant-client = { version = "1.8", optional = true }
 tantivy = { version = "0.25", optional = true }
-hnsw_rs = { version = "0.2", optional = true }
+hnsw_rs = { version = "0.3", optional = true }
 
 # 网络和API - 使用工作区统一版本
 reqwest = { workspace = true }
-async-openai = { version = "0.20", optional = true }
+async-openai = { version = "0.29", optional = true }
 openai = { version = "1.0", optional = true }
 
-# 序列化和配置 - 使用可用版本
+# 序列化和配置 - 2025年最新版本
 toml = "0.8"
 yaml-rust = "0.4"
 bincode = "1.3"
-ron = "0.11.0"
+ron = "0.11"
 serde_json = { workspace = true }
 
 # 日志和监控 - 使用工作区统一版本
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
-metrics = { version = "0.24", optional = true }
+metrics = { version = "0.24.2", optional = true }
 metrics-exporter-prometheus = { version = "0.17", optional = true }
 
-# 并发和性能 - 使用可用版本
+# 并发和性能 - 2025年最新版本
 rayon = "1.11"
 crossbeam = "0.8"
 dashmap = "6.0"
+parking_lot = "0.12"
+tokio-util = "0.7"
 
-# 测试和基准测试 - 更新到最新版本
+# 测试和基准测试 - 2025年最新版本
 criterion = { version = "0.7", features = ["html_reports"] }
 proptest = "1.4"
+tempfile = "3.8"
 
-# 新增：AI 特定依赖
+# AI 特定依赖 - 2025年最新版本
 # 大语言模型支持
 llama-cpp-2 = { version = "0.1", optional = true }
 # 图神经网络
-petgraph = { version = "0.6", optional = true }
+petgraph = { version = "0.8", optional = true }
 # 时间序列 - 使用工作区统一版本
 chrono = { workspace = true, optional = true }
 # 配置管理 - 使用可用版本
 config = { workspace = true }
 # 错误处理增强
 miette = "7.0"
+# 内存管理
+bumpalo = "3.19"
+# 异步运行时增强
+futures = "0.3"
+async-trait = "0.1"
+
+# 新增：2025年最新AI特性
+# 强化学习
+gymnasium-rs = { version = "0.1", optional = true }
 
 [dev-dependencies]
 tempfile = "3.8"
 proptest = "1.4"
+tokio-test = "0.4"
 
 [features]
 # 将默认特性限制为纯 CPU 传统 ML，避免 workspace 级别的冲突
@@ -112,10 +128,15 @@ default = ["basic-ai"]
 basic-ai = ["dep:linfa", "dep:smartcore"]
 # 深度学习框架（均为可选且非默认启用）
 candle = ["dep:candle-core", "dep:candle-nn", "dep:candle-transformers", "dep:candle-datasets"]
-# tch = ["dep:tch"]  # 暂时禁用以避免版本冲突
+# burn = ["dep:burn"]  # 暂时禁用以避免工作区冲突
+# tch = ["dep:tch"]    # 暂时禁用以避免工作区冲突
 dfdx = ["dep:dfdx"]
 # GPU 支持
 gpu = ["candle"]  # 暂时移除 tch
+# Metal 支持 (macOS GPU)
+metal = []
+# CUDA 支持 (NVIDIA GPU)
+cuda = []
 # 大语言模型
 llm = ["dep:llm-chain", "dep:llm-chain-openai", "dep:llm-chain-llama", "dep:llm-chain-local", "dep:llama-cpp-2"]
 # OpenAI 集成
@@ -130,16 +151,24 @@ data = ["dep:polars", "dep:datafusion", "dep:arrow"]
 search = ["dep:qdrant-client", "dep:tantivy", "dep:hnsw_rs"]
 # 模型管理与管道控制
 management = []
-# 强化学习 - 使用基础依赖
-reinforcement = []
+# 强化学习
+reinforcement = ["dep:gymnasium-rs"]
 # 图神经网络
 gnn = ["dep:petgraph"]
 # 时间序列
 timeseries = ["dep:chrono"]
 # 监控和指标
 monitoring = ["dep:metrics", "dep:metrics-exporter-prometheus"]
+# 多模态AI
+multimodal = []
+# 联邦学习
+federated = []
+# 边缘AI
+edge = []
+# 量子机器学习
+quantum = []
 # 完整功能（注意：这会拉入多种后端及其系统依赖）
-full = ["candle", "llm", "vision", "nlp", "data", "search", "gnn", "timeseries", "monitoring"]
+full = ["candle", "dfdx", "llm", "vision", "nlp", "data", "search", "gnn", "timeseries", "monitoring", "multimodal", "reinforcement"]
 
 [[bench]]
 name = "neural_network_bench"
@@ -160,7 +189,7 @@ path = "examples/basic_ml.rs"
 [[example]]
 name = "deep_learning"
 path = "examples/deep_learning.rs"
-required-features = ["candle", "tch", "dfdx"]
+required-features = ["candle", "burn", "dfdx"]
 
 [[example]]
 name = "nlp_pipeline"
@@ -201,3 +230,23 @@ required-features = ["gnn"]
 name = "time_series_forecasting"
 path = "examples/time_series_forecasting.rs"
 required-features = ["timeseries"]
+
+[[example]]
+name = "multimodal_ai"
+path = "examples/multimodal_ai.rs"
+required-features = ["multimodal"]
+
+[[example]]
+name = "federated_learning"
+path = "examples/federated_learning.rs"
+required-features = ["federated"]
+
+[[example]]
+name = "edge_ai"
+path = "examples/edge_ai.rs"
+required-features = ["edge"]
+
+[[example]]
+name = "quantum_ml"
+path = "examples/quantum_ml.rs"
+required-features = ["quantum"]

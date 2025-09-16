@@ -84,6 +84,7 @@ hyper-rustls = "0.27.7"
 hyper-tls = "0.6.0"
 hyper-timeout = "0.5.2"
 h2 = "0.4.12"
+http = "1.3.1"
 
 # Web 框架 - 最新稳定版本
 axum = { version = "0.8.4", features = ["macros", "multipart", "tracing"] }
@@ -95,12 +96,14 @@ tower-http = { version = "0.6.6", features = ["cors", "trace", "timeout", "compr
 crossterm = "0.29"
 
 # gRPC 相关 - 最新稳定版本
-tonic = { version = "0.12", features = ["tls", "tls-roots"] }
-tonic-build = "0.12"
-prost = "0.13.5"
-prost-build = "0.13.5"
-prost-derive = "0.13.5"
-prost-types = "0.13.5"
+tonic = { version = "0.14.2", features = ["tls-ring", "tls-webpki-roots"] }
+tonic-build = "0.14.2"
+tonic-prost = "0.14.2"
+tonic-prost-build = "0.14.2"
+prost = "0.14.1"
+prost-build = "0.14.1"
+prost-derive = "0.14.1"
+prost-types = "0.14.1"
 
 # TLS 和加密 - 最新稳定版本
 rustls = { version = "0.23.31", features = ["ring"] }
@@ -159,6 +162,7 @@ toml = "0.9.6"
 crossbeam = "0.8.4"
 rayon = "1.11.0"
 dashmap = "6.1.0"
+parking_lot = "0.12.4"
 
 # 测试相关
 mockall = "0.13.1"
@@ -169,6 +173,7 @@ candle-core = "0.9.1"
 candle-nn = "0.9.1"
 candle-transformers = "0.9.1"
 tch = "0.20.0"
+petgraph = "0.8.2"
 
 # Web 和 GUI 框架 - 2025年最新稳定版本
 tauri = "2.8.5"

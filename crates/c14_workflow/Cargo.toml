@@ -24,9 +24,9 @@ futures = { workspace = true }
 async-trait = "0.1"
 
 # 并发和同步 / Concurrency and Synchronization
-parking_lot = "0.12"
-crossbeam = "0.8"
-dashmap = "5.5"
+parking_lot = { workspace = true }
+crossbeam = { workspace = true }
+dashmap = { workspace = true }
 arc-swap = "1.6"
 once_cell = "1.19"
 
@@ -37,8 +37,8 @@ indexmap = { version = "2.0", features = ["serde"] }
 
 # 网络和通信 / Network and Communication
 reqwest = { workspace = true, features = ["json", "stream"] }
-tower = "0.4"
-tower-http = { version = "0.5", features = ["cors", "trace"] }
+tower = { workspace = true }
+tower-http = { workspace = true, features = ["cors", "trace"] }
 
 # 工作流引擎对标 / Workflow Engine Benchmarking
 # 对标 Temporal、Cadence 等成熟框架 / Benchmarking against mature frameworks like Temporal, Cadence

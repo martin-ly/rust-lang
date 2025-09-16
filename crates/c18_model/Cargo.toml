@@ -33,7 +33,7 @@ chrono = { workspace = true }
 fastrand = "2.0"
 
 # 图算法
-petgraph = "0.6"
+petgraph = { workspace = true }
 
 # 已裁剪：并行计算
 

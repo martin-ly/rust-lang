@@ -34,7 +34,7 @@ serde_json = { workspace = true }
 reqwest = { workspace = true, features = ["json"] }
 
 # 终端和调试工具 - 更新到最新版本
-tokio-console = "0.1"
+tokio-console = "0.1.13"
 crossterm = { workspace = true, features = ["event-stream"] }
 
 # Web框架 - 使用工作区统一版本

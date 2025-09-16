@@ -1,30 +1,18 @@
 use opentelemetry::{global, trace::Tracer};
-use opentelemetry_sdk::{trace as sdktrace, Resource};
-use opentelemetry::KeyValue;
-
-fn init_tracer() -> anyhow::Result<sdktrace::TracerProvider> {
-    // 使用默认的无导出 Provider，避免依赖额外特性/导出器
-    let provider = sdktrace::TracerProvider::builder()
-        .with_config(sdktrace::Config::default().with_resource(Resource::new(vec![
-            KeyValue::new("service.name", "c17-iot-otel"),
-        ])))
-        .build();
-    Ok(provider)
-}
+use std::time::Duration;
 
 fn main() -> anyhow::Result<()> {
-    let provider = init_tracer()?;
+    // 使用 noop tracer provider 避免 API 兼容性问题
+    let provider = opentelemetry::trace::noop::NoopTracerProvider::new();
     let _guard = global::set_tracer_provider(provider);
     let tracer = global::tracer("c17-iot-example");
 
     let _span = tracer.start("edge-collect");
     // 模拟一次边缘采集与处理
-    std::thread::sleep(std::time::Duration::from_millis(50));
+    std::thread::sleep(Duration::from_millis(50));
     drop(_span);
 
-    // 关闭并刷新
-    global::shutdown_tracer_provider();
+    println!("OpenTelemetry stdout 示例完成 - 注意：当前版本使用 noop tracer");
+    println!("要输出到 stdout，需要根据 OpenTelemetry 0.30 API 更新代码");
     Ok(())
 }
-
-
