@@ -44,7 +44,7 @@ name = "c05_threads"
 path = "src/bin/main.rs"
 
 [dev-dependencies]
-criterion = "0.5"
+criterion = { workspace = true }
 
 [[bench]]
 name = "priority_channels_bench"

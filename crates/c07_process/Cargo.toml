@@ -42,10 +42,10 @@ tracing-subscriber = { workspace = true }
 chrono = { workspace = true }
 
 # 配置管理
-config = "0.13"
+config = { workspace = true }
 
 [dev-dependencies]
-criterion = "0.5"
+criterion = { workspace = true }
 tempfile = "3.0"
 
 [lib]

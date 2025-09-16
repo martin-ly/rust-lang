@@ -21,7 +21,7 @@ opentelemetry = "0.23"
 opentelemetry_sdk = { version = "0.23", features = ["rt-tokio"] }
 opentelemetry-stdout = "0.2"
 opentelemetry-otlp = { version = "0.16", features = ["http-json", "grpc-tonic"] }
-tonic = { version = "0.11", default-features = false, features = ["transport"] }
+tonic = { workspace = true }
 anyhow = { workspace = true }
 sha2 = "0.10"
 hex = "0.4"

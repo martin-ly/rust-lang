@@ -56,13 +56,13 @@ metrics = "0.22"
 metrics-exporter-prometheus = "0.17"
 
 # 配置管理 / Configuration Management
-config = "0.14"
+config = { workspace = true }
 clap = { version = "4.0", features = ["derive", "env"] }
 
 # 测试支持 / Testing Support
 [dev-dependencies]
 tokio-test = "0.4"
-criterion = { version = "0.5", features = ["html_reports"] }
+criterion = { workspace = true, features = ["html_reports"] }
 proptest = "1.4"
 mockall = "0.12"
 

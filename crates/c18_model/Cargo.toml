@@ -49,7 +49,7 @@ libm = "0.2"
 
 [dev-dependencies]
 # 基准测试
-criterion = { version = "0.5", features = ["html_reports"] }
+criterion = { workspace = true, features = ["html_reports"] }
 
 # 属性测试
 proptest = "1.0"

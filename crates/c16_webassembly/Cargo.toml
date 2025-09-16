@@ -11,5 +11,5 @@ anyhow = { workspace = true }
 tokio = { workspace = true }
 uuid = { workspace = true }
 chrono = { workspace = true }
-log = "0.4"
-env_logger = "0.10"
+log = { workspace = true }
+env_logger = "0.11"

@@ -12,7 +12,7 @@ crossbeam = "0.8.4"
 lazy_static = "1.4"
 
 [dev-dependencies]
-criterion = "0.5"
+criterion = { workspace = true }
 
 [lib]
 name = "c09_design_pattern"

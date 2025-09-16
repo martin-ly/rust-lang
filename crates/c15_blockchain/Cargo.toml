@@ -28,7 +28,7 @@ advanced = ["ffi"]  # 高级功能
 
 # 开发依赖
 [dev-dependencies]
-criterion = "0.5"
+criterion = { workspace = true }
 proptest = "1.0"
 
 # 示例
