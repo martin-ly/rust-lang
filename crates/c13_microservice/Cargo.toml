@@ -1,13 +1,15 @@
 [package]
 name = "c13_microservice"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
+resolver = "3"
 authors = ["Rust Microservice Team"]
 description = "现代Rust微服务框架集合，支持多种Web框架、gRPC、服务网格和云原生部署"
 license = "MIT"
 repository = "https://github.com/rust-lang/c13_microservice"
 keywords = ["microservice", "rust", "web", "grpc", "kubernetes", "async"]
 categories = ["web-programming", "network-programming"]
+rust-version = "1.89"
 
 # 移除工作区配置以避免冲突
 
@@ -28,7 +30,7 @@ futures = { workspace = true }
 
 # Web框架
 axum = { workspace = true }
-actix-web = { version = "4.11", features = ["macros"] }
+actix-web = { version = "4", features = ["macros"] }
 warp = "0.4"
 tide = "0.16"
 
@@ -44,11 +46,11 @@ serde_yaml = { workspace = true }
 toml = { workspace = true }
 
 # 数据库（可选，standalone 特性启用）- 使用工作区统一版本
-diesel = { version = "2.1", features = ["postgres", "mysql", "chrono", "uuid"], optional = true }
+diesel = { version = "2.2", features = ["postgres", "mysql", "chrono", "uuid"], optional = true }
 
 # 配置管理 - 使用工作区统一版本
 config = { workspace = true }
-dotenvy = "0.15"
+dotenvy = { workspace = true }
 
 # 日志和追踪 - 使用工作区统一版本
 tracing = { workspace = true }
@@ -60,9 +62,9 @@ slog-stdlog = "4.1"
 slog-scope = "4.4"
 
 # 监控和指标 - 使用工作区统一版本
-prometheus = "0.14"
-metrics = "0.24"
-metrics-exporter-prometheus = "0.17"
+prometheus = { workspace = true }
+metrics = { workspace = true }
+metrics-exporter-prometheus = { workspace = true }
 
 # 消息队列（可选，standalone/with-redis/with-rabbitmq 启用）- 更新到最新版本
 redis = { version = "0.32.5", features = ["tokio-comp", "connection-manager"], optional = true }
@@ -98,11 +100,11 @@ eyre = "0.6"
 clap = { version = "4.5", features = ["derive"] }
 
 # 测试 - 使用工作区统一版本
-tokio-test = "0.4"
+tokio-test = { workspace = true }
 mockall = { workspace = true }
-async-trait = "0.1"
+async-trait = { workspace = true }
 
-env_logger = "0.11"
+env_logger = "0.11.5"
 pretty_env_logger = "0.5"
 
 [build-dependencies]
@@ -111,9 +113,9 @@ prost-build = { workspace = true }
 protoc-bin-vendored = "3"
 
 [dev-dependencies]
-tokio-test = "0.4"
+tokio-test = { workspace = true }
 mockall = { workspace = true }
-tempfile = "3.10"
+tempfile = { workspace = true }
 criterion = { workspace = true, features = ["html_reports"] }
 futures = { workspace = true }
 

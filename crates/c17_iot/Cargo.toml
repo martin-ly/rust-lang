@@ -2,6 +2,7 @@
 name = "c17_iot"
 edition = "2024"
 resolver = "3"
+rust-version = "1.89"
 
 [dependencies]
 serde = { workspace = true }
@@ -15,20 +16,20 @@ influxdb2 = { version = "0.4", optional = true }
 openssl = { version = "0.10", optional = true, features = ["vendored"] }
 
 [dev-dependencies]
-rumqttc = "0.25.0"
+rumqttc = "0.25"
 coap-lite = "0.13"
-opentelemetry = "0.30"
-opentelemetry_sdk = { version = "0.30", features = ["rt-tokio"] }
-opentelemetry-stdout = "0.30"
-opentelemetry-otlp = { version = "0.30", features = ["http-json", "grpc-tonic"] }
+opentelemetry = { workspace = true }
+opentelemetry_sdk = { workspace = true }
+opentelemetry-stdout = { workspace = true }
+opentelemetry-otlp = { workspace = true }
 tonic = { workspace = true }
 anyhow = { workspace = true }
-sha2 = "0.10"
-hex = "0.4"
+sha2 = { workspace = true }
+hex = { workspace = true }
 hyper = { workspace = true, features = ["full"] }
 hyper-util = { workspace = true }
 http = { workspace = true }
-prometheus = "0.14"
+prometheus = { workspace = true }
 rustls = { workspace = true }
 rustls-pemfile = { workspace = true }
 

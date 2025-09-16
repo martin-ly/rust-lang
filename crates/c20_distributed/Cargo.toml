@@ -34,7 +34,7 @@ ahash = "0.8"
 [dev-dependencies]
 tokio = { workspace = true }
 criterion = { workspace = true, features = ["cargo_bench_support"] }
-proptest = "1.5"
+proptest = { workspace = true }
 
 [[bench]]
 name = "ack_distribution_criterion"

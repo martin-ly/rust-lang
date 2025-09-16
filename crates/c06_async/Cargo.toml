@@ -3,6 +3,7 @@ name = "c06_async"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
+rust-version = "1.89"
 
 [dependencies]
 # 异步运行时 - 使用工作区统一版本
@@ -16,32 +17,32 @@ tracing-subscriber = { workspace = true }
 anyhow = { workspace = true }
 
 # 并发原语 - 更新到最新版本
-parking_lot = "0.12"
+parking_lot = { workspace = true }
 
 # Web框架 - 更新到最新版本
-actix-web = "4.11"
-actix = "0.13"
-actix-rt = "2.11"
+actix-web = { workspace = true }
+actix = { workspace = true }
+actix-rt = { workspace = true }
 
 # 日志
-env_logger = "0.11"
+env_logger = "0.11.5"
 
 # 其他工具 - 使用工作区统一版本
 uuid = { workspace = true }
-rand = "0.9"
+rand = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 reqwest = { workspace = true, features = ["json"] }
 
 # 终端和调试工具 - 更新到最新版本
-tokio-console = "0.1.13"
+tokio-console = { workspace = true }
 crossterm = { workspace = true, features = ["event-stream"] }
 
 # Web框架 - 使用工作区统一版本
 axum = { workspace = true }
 
 [dev-dependencies]
-criterion = { version = "0.7", features = ["html_reports"] }
+criterion = { workspace = true, features = ["html_reports"] }
 
 [lib]
 name = "c06_async"

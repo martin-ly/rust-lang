@@ -14,7 +14,7 @@ categories = ["development-tools", "system-programming"]
 # 异步运行时支持
 tokio = { workspace = true }
 # 异步流处理
-tokio-stream = ">=0.1.0"
+tokio-stream = { workspace = true }
 # Future工具
 futures = { workspace = true, optional = true }
 # 性能测试
@@ -29,11 +29,11 @@ tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
 # 测试工具
 criterion = { workspace = true, optional = true }
-proptest = { version = ">=1.0.0", optional = true }
+proptest = { workspace = true, optional = true }
 
 [dev-dependencies]
 criterion = { workspace = true }
-proptest = ">=1.0.0"
+proptest = { workspace = true }
 
 [features]
 default = ["std", "async", "generics"]

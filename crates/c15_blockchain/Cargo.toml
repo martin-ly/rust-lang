@@ -1,21 +1,23 @@
 [package]
 name = "c15_blockchain"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
+resolver = "3"
 authors = ["Rust Blockchain Team"]
 description = "区块链应用演示 - 展示 Rust 1.89 特性在区块链开发中的应用"
 license = "MIT"
 repository = "https://github.com/rust-lang/c15_blockchain"
 keywords = ["blockchain", "rust", "cryptocurrency", "consensus"]
 categories = ["cryptography", "algorithms", "data-structures"]
+rust-version = "1.89"
 
 [dependencies]
 serde = { workspace = true }
 serde_json = { workspace = true }
 thiserror = { workspace = true }
-bincode = "1.3"
-sha2 = "0.10"
-rand = "0.8"
+bincode = { workspace = true }
+sha2 = { workspace = true }
+rand = { workspace = true }
 tokio = { workspace = true }
 uuid = { workspace = true }
 chrono = { workspace = true }
@@ -29,7 +31,7 @@ advanced = ["ffi"]  # 高级功能
 # 开发依赖
 [dev-dependencies]
 criterion = { workspace = true }
-proptest = "1.0"
+proptest = { workspace = true }
 
 # 示例
 [[example]]

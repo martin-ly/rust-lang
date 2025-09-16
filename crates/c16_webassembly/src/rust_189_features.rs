@@ -271,7 +271,7 @@ pub mod ffi_examples {
     
         // 外部 C 函数声明，支持 128 位整数
     // External C function declarations supporting 128-bit integers
-    extern "C" {
+    unsafe extern "C" {
         // 计算 128 位整数平方
         // Calculate 128-bit integer square
         fn square_i128(value: i128) -> i128;

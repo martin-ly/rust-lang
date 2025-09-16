@@ -8,12 +8,12 @@ rust-version = "1.89"
 [dependencies]
 
 # 并行与并发 - 使用工作区统一版本
-rayon = "1.11"
+rayon = { workspace = true }
 tokio = { workspace = true }
 futures = { workspace = true }
 
 # 随机数 - 更新到最新版本
-rand = "0.9"
+rand = { workspace = true }
 
 # 性能基准测试 - 更新到最新版本
 criterion = { version = "0.7", optional = true }
@@ -42,7 +42,7 @@ petgraph = { version = "0.8", optional = true }
 aho-corasick = { version = "1.1", optional = true }
 
 [dev-dependencies]
-criterion = "0.7"
+criterion = { workspace = true }
 
 [features]
 default = []

@@ -3,24 +3,24 @@ name = "c05_threads"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
-
+rust-version = "1.89"
 [dependencies]
-crossbeam = ">=0.8.1"
-crossbeam-channel = "0.5.15"
+crossbeam = { workspace = true }
+crossbeam-channel = "0.5"
 crossbeam-queue = "0.3"
 crossbeam-utils = "0.8"
 crossbeam-epoch = "0.9"
 crossbeam-deque = "0.8"
-rayon = ">=1.10"
-parking_lot = "0.12"
-dashmap = "5.5"
+rayon = { workspace = true }
+parking_lot = { workspace = true }
+dashmap = { workspace = true }
 flume = "0.11"
 tokio = { workspace = true, optional = true }
-async-std = { version = "1.12", optional = true }
-num_cpus = "1.16"
-libc = "0.2"
+async-std = { version = "1", optional = true }
+num_cpus = { workspace = true }
+libc = { workspace = true }
 windows = { version = "0.62", features = ["Win32_System_Threading"], optional = true }
-once_cell = "1"
+once_cell = { workspace = true }
 anyhow = { workspace = true }
 thiserror = { workspace = true }
 

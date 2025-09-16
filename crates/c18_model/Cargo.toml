@@ -1,7 +1,9 @@
 [package]
 name = "c18_model"
 version = "0.2.0"
-edition = "2021"
+edition = "2024"
+resolver = "3"
+
 authors = ["c18_model Contributors <contributors@c18model.dev>"]
 description = "Rust implementation of theoretical models for system modeling, machine learning, and formal methods"
 license = "MIT OR Apache-2.0"
@@ -11,7 +13,7 @@ homepage = "https://c18model.dev"
 keywords = ["rust", "modeling", "machine-learning", "formal-methods", "mathematics", "queueing-theory", "statistics"]
 categories = ["science", "algorithms", "mathematics", "simulation"]
 readme = "README.md"
-rust-version = "1.70"
+rust-version = "1.89"
 
 [dependencies]
 # 序列化和反序列化
@@ -47,15 +49,24 @@ statrs = "0.18"
 # 数学函数
 libm = "0.2"
 
+# 运行时/示例适配基础依赖（对齐到 workspace 或最新主线）
+tokio = { workspace = true, features = ["rt-multi-thread", "sync", "time"], optional = true }
+tokio-util = { workspace = true, features = ["rt"], optional = true }
+async-std = { version = "1", features = ["attributes"], optional = true }
+async-channel = { version = "2", optional = true }
+tower = { workspace = true, features = ["limit", "timeout", "retry", "util"], optional = true }
+http = { workspace = true, optional = true }
+hyper = { workspace = true, features = ["client", "http1"], optional = true }
+
 [dev-dependencies]
 # 基准测试
 criterion = { workspace = true, features = ["html_reports"] }
 
 # 属性测试
-proptest = "1.0"
+proptest = { workspace = true }
 
 # 测试工具
-tempfile = "3.0"
+tempfile = { workspace = true }
 
 # 文档测试
 doc-comment = "0.3"
@@ -74,39 +85,6 @@ tokio-adapter = ["dep:tokio", "dep:tokio-util"]
 async-std-adapter = ["dep:async-std", "dep:async-channel"]
 tower-examples = ["dep:tower", "dep:http", "dep:hyper"]
 c20-integration = ["dep:c20_distributed"]
-
-[dependencies.tokio]
-version = "1"
-features = ["rt-multi-thread", "sync", "time"]
-optional = true
-
-[dependencies.tokio-util]
-version = "0.7"
-features = ["rt"]
-optional = true
-
-[dependencies.async-std]
-version = "1"
-features = ["attributes"]
-optional = true
-
-[dependencies.async-channel]
-version = "2"
-optional = true
-
-[dependencies.tower]
-version = "0.5"
-features = ["limit", "timeout", "retry", "util"]
-optional = true
-
-[dependencies.http]
-version = "0.2"
-optional = true
-
-[dependencies.hyper]
-version = "0.14"
-features = ["client", "http1", "tcp"]
-optional = true
 
 [dependencies.c20_distributed]
 path = "../c20_distributed"

@@ -4,15 +4,16 @@ version = "0.1.0"
 edition = "2024"
 resolver = "3"
 build = "build.rs"
+rust-version = "1.89"
 
 [dependencies]
 # 异步运行时 - 使用工作区统一版本
 tokio = { workspace = true }
-async-std = "1.12"
+async-std = { workspace = true }
 
 # 网络和字节处理 - 使用工作区统一版本
 bytes = { workspace = true, features = ["serde"] }
-mio = "1.0"
+mio = { workspace = true }
 
 # 抓包与报文解析（libpnet）- 更新到最新版本
 pnet = { version = "0.35", optional = true }
@@ -58,12 +59,12 @@ hickory-proto = "0.24"
 # P2P 与 QUIC（新增）- 更新到最新版本
 libp2p = { version = "0.56", features = ["tokio", "tcp", "dns", "tls", "gossipsub", "kad", "noise", "yamux", "ping", "identify", "macros"] }
 quinn = "0.11"
-rcgen = "0.14.4"
+rcgen = { workspace = true }
 # ACME（证书自动签发/续期）- 更新到最新版本
 instant-acme = "0.8"
 # WebSocket - 使用工作区统一版本
 tokio-tungstenite = { workspace = true, features = ["rustls-tls-webpki-roots"] }
-tungstenite = "0.27"
+tungstenite = { workspace = true }
 
 # Protobuf / gRPC（使用工作区统一版本）
 prost = { workspace = true }
@@ -71,13 +72,13 @@ tonic = { workspace = true, features = ["transport"] }
 tonic-prost = { workspace = true }
 
 [build-dependencies]
-prost-build = "0.14.1"
-tonic-build = "0.14.2"
-tonic-prost-build = "0.14.2"
+prost-build = { workspace = true }
+tonic-build = { workspace = true }
+tonic-prost-build = { workspace = true }
 protoc-bin-vendored = "3"
 
 [dev-dependencies]
-tokio-test = "0.4"
+tokio-test = { workspace = true }
 
 [[example]]
 name = "tcp_echo_server"

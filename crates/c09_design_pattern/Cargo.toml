@@ -3,12 +3,13 @@ name = "c09_design_pattern"
 version = "1.0.1"
 edition = "2024"
 resolver = "3"
+rust-version = "1.89"
 
 [dependencies]
-async-trait = "0.1.89"
+async-trait = "0.1"
 tokio = { workspace = true }
-rayon = "1.11.0"
-crossbeam = "0.8.4"
+rayon = { workspace = true }
+crossbeam = { workspace = true }
 lazy_static = "1.4"
 
 [dev-dependencies]

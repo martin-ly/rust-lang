@@ -1278,7 +1278,7 @@ pub fn lifetime_example<'a>(input: &'a str) -> &'a str {
 // 演示 i128 和 u128 类型在 extern "C" 函数中的使用
 // Demonstrates use of i128 and u128 types in extern "C" functions
 #[allow(dead_code)]
-extern "C" {
+unsafe extern "C" {
     // 外部C函数，支持128位整数 / External C function supporting 128-bit integers
     fn external_i128_function(value: i128) -> i128;
     // 外部C函数，支持128位无符号整数 / External C function supporting 128-bit unsigned integers

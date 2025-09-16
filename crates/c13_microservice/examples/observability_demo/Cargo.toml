@@ -8,9 +8,9 @@ description = "完全独立的可观测性演示项目"
 [workspace]
 
 [dependencies]
-tokio = { version = "1.44", features = ["full"] }
-tracing = "0.1"
-tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tokio = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true, features = ["env-filter"] }
 
 [[bin]]
 name = "observability_demo"

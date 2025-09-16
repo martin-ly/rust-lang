@@ -9,19 +9,20 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-lang/c07_process"
 keywords = ["process", "ipc", "synchronization", "system-programming"]
 categories = ["system-programming", "concurrency"]
+rust-version = "1.89"
 
 [dependencies]
 # 核心异步运行时（可选）
 tokio = { workspace = true, optional = true }
-tokio-util = { version = "0.7", optional = true }
+tokio-util = { workspace = true, optional = true }
 
 # 序列化支持
 serde = { workspace = true }
 serde_json = { workspace = true }
 
 # 系统调用和平台特定功能
-nix = { version = "0.27", features = ["process", "user", "signal"], optional = true }
-libc = "0.2"
+nix = { version = "0.29", features = ["process", "user", "signal"], optional = true }
+libc = { workspace = true }
 
 # 内存映射和共享内存
 memmap2 = "0.9"
@@ -46,7 +47,7 @@ config = { workspace = true }
 
 [dev-dependencies]
 criterion = { workspace = true }
-tempfile = "3.0"
+tempfile = { workspace = true }
 
 [lib]
 name = "c07_process"
