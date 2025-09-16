@@ -3,11 +3,10 @@
 use crate::error::{NetworkError, NetworkResult};
 use bytes::{Bytes, BytesMut};
 use nom::{
-    IResult,
+    IResult, Parser,
     bytes::complete::{tag, take},
-    number::complete::{be_u32, be_u64, be_u16},
     combinator::map,
-    Parser,
+    number::complete::{be_u16, be_u32, be_u64},
 };
 // use std::fmt; // 暂时注释掉未使用的导入
 
@@ -38,7 +37,7 @@ impl PacketParser {
         if self.buffer.len() + data.len() > self.max_packet_size {
             return Err(NetworkError::Other("Buffer overflow".to_string()));
         }
-        
+
         self.buffer.extend_from_slice(data);
         Ok(())
     }
@@ -55,7 +54,7 @@ impl PacketParser {
                 let _consumed = self.buffer.len() - remaining.len();
                 let remaining_data = Bytes::copy_from_slice(remaining);
                 self.buffer = BytesMut::from(remaining);
-                
+
                 Ok(Some(ParseResult {
                     packet,
                     remaining: remaining_data,
@@ -64,9 +63,7 @@ impl PacketParser {
             Err(nom::Err::Incomplete(_)) => {
                 Ok(None) // 需要更多数据
             }
-            Err(e) => {
-                Err(NetworkError::Other(format!("Parse error: {:?}", e)))
-            }
+            Err(e) => Err(NetworkError::Other(format!("Parse error: {:?}", e))),
         }
     }
 
@@ -78,7 +75,8 @@ impl PacketParser {
             be_u64, // timestamp
             be_u64, // sequence_number
             be_u32, // flags
-        ).parse(input)?;
+        )
+            .parse(input)?;
 
         let packet_type = match packet_type_raw {
             0 => super::PacketType::Raw,
@@ -99,10 +97,13 @@ impl PacketParser {
             flags,
         };
 
-        Ok((input, super::Packet {
-            header,
-            payload: Bytes::copy_from_slice(payload),
-        }))
+        Ok((
+            input,
+            super::Packet {
+                header,
+                payload: Bytes::copy_from_slice(payload),
+            },
+        ))
     }
 
     /// 清空解析缓冲区
@@ -127,32 +128,34 @@ pub struct HttpRequestParser;
 impl HttpRequestParser {
     /// 解析 HTTP 请求行
     pub fn parse_request_line(input: &[u8]) -> IResult<&[u8], (String, String, String)> {
-        let (input, method) = map(
-            nom::bytes::complete::take_until(" "),
-            |s: &[u8]| String::from_utf8_lossy(s).to_string()
-        ).parse(input)?;
-        
+        let (input, method) = map(nom::bytes::complete::take_until(" "), |s: &[u8]| {
+            String::from_utf8_lossy(s).to_string()
+        })
+        .parse(input)?;
+
         let (input, _) = tag(" ")(input)?;
-        
-        let (input, uri) = map(
-            nom::bytes::complete::take_until(" "),
-            |s: &[u8]| String::from_utf8_lossy(s).to_string()
-        ).parse(input)?;
-        
+
+        let (input, uri) = map(nom::bytes::complete::take_until(" "), |s: &[u8]| {
+            String::from_utf8_lossy(s).to_string()
+        })
+        .parse(input)?;
+
         let (input, _) = tag(" ")(input)?;
-        
-        let (input, version) = map(
-            nom::bytes::complete::take_until("\r\n"),
-            |s: &[u8]| String::from_utf8_lossy(s).to_string()
-        ).parse(input)?;
-        
+
+        let (input, version) = map(nom::bytes::complete::take_until("\r\n"), |s: &[u8]| {
+            String::from_utf8_lossy(s).to_string()
+        })
+        .parse(input)?;
+
         let (input, _) = tag("\r\n")(input)?;
-        
+
         Ok((input, (method, uri, version)))
     }
 
     /// 解析 HTTP 头部
-    pub fn parse_headers(input: &[u8]) -> IResult<&[u8], std::collections::HashMap<String, String>> {
+    pub fn parse_headers(
+        input: &[u8],
+    ) -> IResult<&[u8], std::collections::HashMap<String, String>> {
         let mut headers = std::collections::HashMap::new();
         let mut remaining = input;
 
@@ -162,10 +165,11 @@ impl HttpRequestParser {
                 break;
             }
 
-            let (new_remaining, header_line) = map(
-                nom::bytes::complete::take_until("\r\n"),
-                |s: &[u8]| String::from_utf8_lossy(s).to_string()
-            ).parse(remaining)?;
+            let (new_remaining, header_line) =
+                map(nom::bytes::complete::take_until("\r\n"), |s: &[u8]| {
+                    String::from_utf8_lossy(s).to_string()
+                })
+                .parse(remaining)?;
 
             let (new_remaining, _) = tag("\r\n")(new_remaining)?;
 
@@ -219,11 +223,13 @@ impl WebSocketFrameParser {
 
         let (input, payload) = take(actual_length as usize)(input)?;
 
-        let opcode = crate::protocol::websocket::WebSocketOpcode::from_u8(opcode)
-            .map_err(|_| nom::Err::Error(nom::error::Error::new(input, nom::error::ErrorKind::Tag)))?;
+        let opcode =
+            crate::protocol::websocket::WebSocketOpcode::from_u8(opcode).map_err(|_| {
+                nom::Err::Error(nom::error::Error::new(input, nom::error::ErrorKind::Tag))
+            })?;
 
         let mut payload_bytes = payload.to_vec();
-        
+
         // 解掩码
         if mask {
             if let Some(key) = masking_key {
@@ -273,13 +279,13 @@ mod tests {
     #[test]
     fn test_packet_parser() {
         let mut parser = PacketParser::new(1024);
-        
+
         // 创建测试数据包
         let packet = super::super::Packet::new(
             super::super::PacketType::Raw,
-            Bytes::copy_from_slice(b"test data")
+            Bytes::copy_from_slice(b"test data"),
         );
-        
+
         // 序列化数据包（简化版本）
         let mut data = BytesMut::new();
         data.extend_from_slice(&0u32.to_be_bytes()); // packet_type
@@ -288,9 +294,9 @@ mod tests {
         data.extend_from_slice(&0u64.to_be_bytes()); // sequence_number
         data.extend_from_slice(&0u32.to_be_bytes()); // flags
         data.extend_from_slice(&packet.payload); // payload
-        
+
         parser.feed(&data).unwrap();
-        
+
         let result = parser.parse().unwrap().unwrap();
         assert_eq!(result.packet.packet_type(), &super::super::PacketType::Raw);
         assert_eq!(result.packet.payload, Bytes::copy_from_slice(b"test data"));
@@ -299,12 +305,13 @@ mod tests {
     #[test]
     fn test_http_request_parser() {
         let request = b"GET /api/test HTTP/1.1\r\nHost: example.com\r\n\r\n";
-        
-        let (remaining, (method, uri, version)) = HttpRequestParser::parse_request_line(request).unwrap();
+
+        let (remaining, (method, uri, version)) =
+            HttpRequestParser::parse_request_line(request).unwrap();
         assert_eq!(method, "GET");
         assert_eq!(uri, "/api/test");
         assert_eq!(version, "HTTP/1.1");
-        
+
         let (remaining, headers) = HttpRequestParser::parse_headers(remaining).unwrap();
         assert_eq!(headers.get("Host"), Some(&"example.com".to_string()));
         assert!(remaining.is_empty());
@@ -315,10 +322,13 @@ mod tests {
         // 创建简单的 WebSocket 文本帧
         let mut frame_data = vec![0x81, 0x05]; // FIN=1, opcode=1 (text), mask=0, length=5
         frame_data.extend_from_slice(b"hello");
-        
+
         let (remaining, frame) = WebSocketFrameParser::parse_frame(&frame_data).unwrap();
         assert!(frame.fin);
-        assert_eq!(frame.opcode, crate::protocol::websocket::WebSocketOpcode::Text);
+        assert_eq!(
+            frame.opcode,
+            crate::protocol::websocket::WebSocketOpcode::Text
+        );
         assert_eq!(frame.payload, Bytes::copy_from_slice(b"hello"));
         assert!(remaining.is_empty());
     }

@@ -1,13 +1,10 @@
 //! 微服务主程序
-//! 
+//!
 //! 展示如何使用c13_microservice框架构建和运行微服务。
 
 use c13_microservice::{
-    axum::AxumMicroservice,
-    actix::ActixMicroservice,
-    grpc::GrpcMicroservice,
+    actix::ActixMicroservice, axum::AxumMicroservice, grpc::GrpcMicroservice, prelude::Config,
     volo::VoloMicroservice,
-    prelude::Config,
 };
 use clap::{Parser, Subcommand};
 use tracing_subscriber;
@@ -59,12 +56,10 @@ enum Commands {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 初始化日志
-    tracing_subscriber::fmt()
-        .with_env_filter("info")
-        .init();
-    
+    tracing_subscriber::fmt().with_env_filter("info").init();
+
     let cli = Cli::parse();
-    
+
     match cli.command {
         Commands::Axum { config } => {
             run_axum_service(config).await?;
@@ -82,17 +77,17 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             show_config(config).await?;
         }
     }
-    
+
     Ok(())
 }
 
 /// 运行Axum服务
 async fn run_axum_service(config_path: Option<String>) -> Result<(), Box<dyn std::error::Error>> {
     tracing::info!("启动Axum微服务");
-    
+
     let config = load_config(config_path)?;
     let microservice = AxumMicroservice::new(config);
-    
+
     microservice.serve().await?;
     Ok(())
 }
@@ -100,10 +95,10 @@ async fn run_axum_service(config_path: Option<String>) -> Result<(), Box<dyn std
 /// 运行Actix-Web服务
 async fn run_actix_service(config_path: Option<String>) -> Result<(), Box<dyn std::error::Error>> {
     tracing::info!("启动Actix-Web微服务");
-    
+
     let config = load_config(config_path)?;
     let microservice = ActixMicroservice::new(config);
-    
+
     microservice.serve().await?;
     Ok(())
 }
@@ -111,10 +106,10 @@ async fn run_actix_service(config_path: Option<String>) -> Result<(), Box<dyn st
 /// 运行gRPC服务
 async fn run_grpc_service(config_path: Option<String>) -> Result<(), Box<dyn std::error::Error>> {
     tracing::info!("启动gRPC微服务");
-    
+
     let config = load_config(config_path)?;
     let microservice = GrpcMicroservice::new(config);
-    
+
     microservice.serve().await?;
     Ok(())
 }
@@ -122,10 +117,10 @@ async fn run_grpc_service(config_path: Option<String>) -> Result<(), Box<dyn std
 /// 运行Volo RPC服务
 async fn run_volo_service(config_path: Option<String>) -> Result<(), Box<dyn std::error::Error>> {
     tracing::info!("启动Volo RPC微服务");
-    
+
     let config = load_config(config_path)?;
     let microservice = VoloMicroservice::new(config);
-    
+
     microservice.serve().await?;
     Ok(())
 }
@@ -133,12 +128,12 @@ async fn run_volo_service(config_path: Option<String>) -> Result<(), Box<dyn std
 /// 显示配置信息
 async fn show_config(config_path: Option<String>) -> Result<(), Box<dyn std::error::Error>> {
     let config = load_config(config_path)?;
-    
+
     println!("微服务配置信息:");
     println!("  服务名称: {}", config.service.name);
     println!("  服务版本: {}", config.service.version);
     println!("  监听地址: {}", config.service_address());
-    
+
     Ok(())
 }
 
@@ -151,7 +146,7 @@ fn load_config(config_path: Option<String>) -> Result<Config, Box<dyn std::error
         tracing::info!("从环境变量加载配置");
         Config::from_env()?
     };
-    
+
     config.validate()?;
     Ok(config)
 }

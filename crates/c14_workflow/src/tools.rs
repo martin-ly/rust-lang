@@ -1,10 +1,10 @@
 //! # 工作流工具模块 / Workflow Tools Module
-//! 
+//!
 //! 本模块提供了工作流系统的各种工具函数和实用程序。
 //! This module provides various utility functions and tools for the workflow system.
 
-use crate::types::*;
 use crate::error::*;
+use crate::types::*;
 use std::collections::HashMap;
 use std::time::Duration;
 
@@ -16,18 +16,22 @@ impl WorkflowValidator {
     pub fn validate_workflow(definition: &WorkflowDefinition) -> Result<(), WorkflowError> {
         // 基本验证逻辑
         if definition.states.is_empty() {
-            return Err(WorkflowError::ValidationError("工作流必须包含至少一个状态".to_string()));
+            return Err(WorkflowError::ValidationError(
+                "工作流必须包含至少一个状态".to_string(),
+            ));
         }
-        
+
         if definition.initial_state.is_empty() {
-            return Err(WorkflowError::ValidationError("工作流必须指定初始状态".to_string()));
+            return Err(WorkflowError::ValidationError(
+                "工作流必须指定初始状态".to_string(),
+            ));
         }
-        
+
         // 验证初始状态存在
         if !definition.states.contains(&definition.initial_state) {
             return Err(WorkflowError::ValidationError("初始状态不存在".to_string()));
         }
-        
+
         Ok(())
     }
 }
@@ -40,14 +44,14 @@ impl WorkflowAnalyzer {
     pub fn analyze_complexity(definition: &WorkflowDefinition) -> WorkflowComplexity {
         let state_count = definition.states.len();
         let transition_count = definition.transitions.len();
-        
+
         let complexity = match (state_count, transition_count) {
             (s, t) if s <= 5 && t <= 10 => ComplexityLevel::Low,
             (s, t) if s <= 15 && t <= 30 => ComplexityLevel::Medium,
             (s, t) if s <= 30 && t <= 60 => ComplexityLevel::High,
             _ => ComplexityLevel::VeryHigh,
         };
-        
+
         WorkflowComplexity {
             state_count,
             transition_count,
@@ -80,30 +84,31 @@ impl PerformanceAnalyzer {
     /// 分析工作流性能瓶颈 / Analyze workflow performance bottlenecks
     pub fn analyze_bottlenecks(instances: &[WorkflowInstance]) -> Vec<PerformanceBottleneck> {
         let mut bottlenecks = Vec::new();
-        
+
         // 分析状态停留时间
         let mut state_durations: HashMap<String, Vec<Duration>> = HashMap::new();
-        
+
         for instance in instances {
             for (i, record) in instance.history.iter().enumerate() {
                 if i > 0 {
                     // 计算与前一个记录的时间差作为停留时间
                     let prev_record = &instance.history[i - 1];
                     let duration = record.timestamp.duration_since(prev_record.timestamp);
-                    state_durations.entry(prev_record.from_state.clone())
+                    state_durations
+                        .entry(prev_record.from_state.clone())
                         .or_insert_with(Vec::new)
                         .push(duration);
                 }
             }
         }
-        
+
         // 识别瓶颈状态
         for (state_name, durations) in state_durations {
             if !durations.is_empty() {
                 let total_duration = durations.iter().sum::<Duration>();
                 let avg_duration = total_duration / durations.len() as u32;
                 let max_duration = durations.iter().max().unwrap_or(&Duration::ZERO);
-                
+
                 if avg_duration > Duration::from_secs(60) {
                     bottlenecks.push(PerformanceBottleneck {
                         state_name,
@@ -114,7 +119,7 @@ impl PerformanceAnalyzer {
                 }
             }
         }
-        
+
         bottlenecks.sort_by(|a, b| b.avg_duration.cmp(&a.avg_duration));
         bottlenecks
     }
@@ -139,7 +144,7 @@ impl OptimizationAdvisor {
         bottlenecks: &[PerformanceBottleneck],
     ) -> Vec<OptimizationSuggestion> {
         let mut suggestions = Vec::new();
-        
+
         // 基于瓶颈生成建议
         for bottleneck in bottlenecks {
             suggestions.push(OptimizationSuggestion {
@@ -152,7 +157,7 @@ impl OptimizationAdvisor {
                 priority: SuggestionPriority::High,
             });
         }
-        
+
         // 基于工作流结构生成建议
         if definition.states.len() > 20 {
             suggestions.push(OptimizationSuggestion {
@@ -162,7 +167,7 @@ impl OptimizationAdvisor {
                 priority: SuggestionPriority::Medium,
             });
         }
-        
+
         suggestions
     }
 }
@@ -193,4 +198,4 @@ pub struct OptimizationSuggestion {
     pub suggestion_type: OptimizationType,
     pub description: String,
     pub priority: SuggestionPriority,
-} 
+}

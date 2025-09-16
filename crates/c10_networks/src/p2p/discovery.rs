@@ -10,5 +10,3 @@ pub trait Discovery {
     fn bootstrap(&mut self, seeds: &[PeerInfo]);
     fn find_peer(&self, id_hex: &str) -> Option<PeerInfo>;
 }
-
-

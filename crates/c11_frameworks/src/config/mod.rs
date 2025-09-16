@@ -1,5 +1,5 @@
 //! 配置管理模块
-//! 
+//!
 //! 提供统一的配置管理功能，支持多种配置源和格式
 
 use serde::{Deserialize, Serialize};
@@ -89,7 +89,7 @@ impl AppConfig {
     /// 从环境变量加载配置
     pub fn from_env() -> Result<Self, Box<dyn std::error::Error>> {
         let mut config = Self::default();
-        
+
         // 从环境变量覆盖配置
         if let Ok(host) = env::var("SERVER_HOST") {
             config.server.host = host;
@@ -103,10 +103,10 @@ impl AppConfig {
         if let Ok(level) = env::var("LOG_LEVEL") {
             config.logging.level = level;
         }
-        
+
         Ok(config)
     }
-    
+
     /// 从文件加载配置
     #[cfg(feature = "config")]
     pub fn from_file<P: AsRef<Path>>(path: P) -> Result<Self, Box<dyn std::error::Error>> {
@@ -114,20 +114,20 @@ impl AppConfig {
         let config: AppConfig = toml::from_str(&content)?;
         Ok(config)
     }
-    
+
     /// 从文件加载配置（无toml依赖版本）
     #[cfg(not(feature = "config"))]
     pub fn from_file<P: AsRef<Path>>(path: P) -> Result<Self, Box<dyn std::error::Error>> {
         Err("TOML support not enabled. Please enable the 'config' feature.".into())
     }
-    
+
     /// 从多个源合并配置
     pub fn from_sources(
         file_path: Option<&str>,
         env_prefix: Option<&str>,
     ) -> Result<Self, Box<dyn std::error::Error>> {
         let mut config = Self::default();
-        
+
         // 从文件加载
         if let Some(path) = file_path {
             if Path::new(path).exists() {
@@ -135,31 +135,35 @@ impl AppConfig {
                 config = file_config;
             }
         }
-        
+
         // 从环境变量覆盖
         if let Some(prefix) = env_prefix {
             config.override_from_env(prefix)?;
         }
-        
+
         Ok(config)
     }
-    
+
     /// 从环境变量覆盖配置
     fn override_from_env(&mut self, prefix: &str) -> Result<(), Box<dyn std::error::Error>> {
         let env_vars: HashMap<String, String> = env::vars()
             .filter(|(key, _)| key.starts_with(prefix))
             .collect();
-        
+
         for (key, value) in env_vars {
             let config_key = key.trim_start_matches(prefix).trim_start_matches('_');
             self.set_config_value(config_key, &value)?;
         }
-        
+
         Ok(())
     }
-    
+
     /// 设置配置值
-    fn set_config_value(&mut self, key: &str, value: &str) -> Result<(), Box<dyn std::error::Error>> {
+    fn set_config_value(
+        &mut self,
+        key: &str,
+        value: &str,
+    ) -> Result<(), Box<dyn std::error::Error>> {
         match key.to_lowercase().as_str() {
             "server_host" => self.server.host = value.to_string(),
             "server_port" => self.server.port = value.parse()?,
@@ -180,34 +184,34 @@ impl AppConfig {
         }
         Ok(())
     }
-    
+
     /// 验证配置
     pub fn validate(&self) -> Result<(), Vec<String>> {
         let mut errors = Vec::new();
-        
+
         if self.server.port == 0 {
             errors.push("服务器端口不能为0".to_string());
         }
-        
+
         if self.server.timeout == 0 {
             errors.push("服务器超时时间不能为0".to_string());
         }
-        
+
         if self.database.max_connections < self.database.min_connections {
             errors.push("数据库最大连接数不能小于最小连接数".to_string());
         }
-        
+
         if !["debug", "info", "warn", "error"].contains(&self.logging.level.as_str()) {
             errors.push("无效的日志级别".to_string());
         }
-        
+
         if errors.is_empty() {
             Ok(())
         } else {
             Err(errors)
         }
     }
-    
+
     /// 保存配置到文件
     #[cfg(feature = "config")]
     pub fn save_to_file<P: AsRef<Path>>(&self, path: P) -> Result<(), Box<dyn std::error::Error>> {
@@ -215,7 +219,7 @@ impl AppConfig {
         fs::write(path, content)?;
         Ok(())
     }
-    
+
     /// 保存配置到文件（无toml依赖版本）
     #[cfg(not(feature = "config"))]
     pub fn save_to_file<P: AsRef<Path>>(&self, _path: P) -> Result<(), Box<dyn std::error::Error>> {
@@ -234,27 +238,27 @@ impl ConfigBuilder {
             config: AppConfig::default(),
         }
     }
-    
+
     pub fn server_host(mut self, host: String) -> Self {
         self.config.server.host = host;
         self
     }
-    
+
     pub fn server_port(mut self, port: u16) -> Self {
         self.config.server.port = port;
         self
     }
-    
+
     pub fn database_url(mut self, url: String) -> Self {
         self.config.database.url = url;
         self
     }
-    
+
     pub fn log_level(mut self, level: String) -> Self {
         self.config.logging.level = level;
         self
     }
-    
+
     pub fn enable_feature(mut self, feature: &str, enabled: bool) -> Self {
         match feature {
             "metrics" => self.config.features.enable_metrics = enabled,
@@ -265,7 +269,7 @@ impl ConfigBuilder {
         }
         self
     }
-    
+
     pub fn build(self) -> AppConfig {
         self.config
     }
@@ -275,7 +279,7 @@ impl ConfigBuilder {
 mod tests {
     use super::*;
     use tempfile::NamedTempFile;
-    
+
     #[test]
     fn test_default_config() {
         let config = AppConfig::default();
@@ -283,18 +287,23 @@ mod tests {
         assert_eq!(config.server.port, 8080);
         assert_eq!(config.database.url, "postgresql://localhost/mydb");
     }
-    
+
     #[test]
     fn test_config_validation() {
         let mut config = AppConfig::default();
         assert!(config.validate().is_ok());
-        
+
         config.server.port = 0;
         let result = config.validate();
         assert!(result.is_err());
-        assert!(result.unwrap_err().iter().any(|e| e.contains("端口不能为0")));
+        assert!(
+            result
+                .unwrap_err()
+                .iter()
+                .any(|e| e.contains("端口不能为0"))
+        );
     }
-    
+
     #[test]
     fn test_config_builder() {
         let config = ConfigBuilder::new()
@@ -304,29 +313,29 @@ mod tests {
             .log_level("debug".to_string())
             .enable_feature("metrics", false)
             .build();
-        
+
         assert_eq!(config.server.host, "0.0.0.0");
         assert_eq!(config.server.port, 3000);
         assert_eq!(config.database.url, "postgresql://test");
         assert_eq!(config.logging.level, "debug");
         assert!(!config.features.enable_metrics);
     }
-    
+
     #[test]
     #[cfg(feature = "config")]
     fn test_config_file_operations() -> Result<(), Box<dyn std::error::Error>> {
         let config = AppConfig::default();
         let temp_file = NamedTempFile::new()?;
         let file_path = temp_file.path();
-        
+
         // 保存配置
         config.save_to_file(file_path)?;
-        
+
         // 加载配置
         let loaded_config = AppConfig::from_file(file_path)?;
         assert_eq!(config.server.host, loaded_config.server.host);
         assert_eq!(config.server.port, loaded_config.server.port);
-        
+
         Ok(())
     }
 }

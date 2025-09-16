@@ -1,5 +1,5 @@
 //! 线程 join 与结果汇聚
-//! 
+//!
 //! 1) 基本 join
 //! 2) 多线程 join 汇聚结果
 //! 3) 带“超时等待”的 join（用通道模拟）
@@ -79,4 +79,3 @@ mod tests {
         assert!(join_with_panic_handling());
     }
 }
-

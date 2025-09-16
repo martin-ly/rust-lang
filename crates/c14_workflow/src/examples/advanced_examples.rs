@@ -1,5 +1,5 @@
 //! # 高级工作流示例 / Advanced Workflow Examples
-//! 
+//!
 //! 本模块展示了如何使用高级工作流特性来构建复杂的工作流系统。
 //! This module demonstrates how to use advanced workflow features to build complex workflow systems.
 
@@ -10,22 +10,22 @@ use serde_json::json;
 /// 运行高级示例 / Run advanced examples
 pub async fn run_advanced_examples() -> Result<(), Box<dyn std::error::Error>> {
     tracing::info!("开始运行高级示例 / Starting advanced examples");
-    
+
     // 示例1：复杂工作流编排 / Example 1: Complex workflow orchestration
     complex_workflow_orchestration_example().await?;
-    
+
     // 示例2：分布式工作流 / Example 2: Distributed workflow
     distributed_workflow_example().await?;
-    
+
     // 示例3：工作流监控和告警 / Example 3: Workflow monitoring and alerting
     workflow_monitoring_alerting_example().await?;
-    
+
     // 示例4：工作流版本管理 / Example 4: Workflow version management
     workflow_version_management_example().await?;
-    
+
     // 示例5：工作流性能优化 / Example 5: Workflow performance optimization
     workflow_performance_optimization_example().await?;
-    
+
     tracing::info!("高级示例运行完成 / Advanced examples completed");
     Ok(())
 }
@@ -33,10 +33,10 @@ pub async fn run_advanced_examples() -> Result<(), Box<dyn std::error::Error>> {
 /// 复杂工作流编排示例 / Complex workflow orchestration example
 async fn complex_workflow_orchestration_example() -> Result<(), Box<dyn std::error::Error>> {
     tracing::info!("运行复杂工作流编排示例 / Running complex workflow orchestration example");
-    
+
     // 创建复杂工作流编排器 / Create complex workflow orchestrator
     let orchestrator = ComplexWorkflowOrchestrator::new();
-    
+
     // 定义工作流步骤 / Define workflow steps
     let steps = vec![
         WorkflowStep {
@@ -88,7 +88,7 @@ async fn complex_workflow_orchestration_example() -> Result<(), Box<dyn std::err
             }),
         },
     ];
-    
+
     // 创建工作流定义 / Create workflow definition
     let workflow_def = ComplexWorkflowDefinition {
         id: "complex_workflow".to_string(),
@@ -105,21 +105,24 @@ async fn complex_workflow_orchestration_example() -> Result<(), Box<dyn std::err
             "complexity": "high"
         }),
     };
-    
+
     // 执行工作流 / Execute workflow
     let execution_result = orchestrator.execute_workflow(workflow_def).await?;
-    tracing::info!("复杂工作流执行结果 / Complex workflow execution result: {:?}", execution_result);
-    
+    tracing::info!(
+        "复杂工作流执行结果 / Complex workflow execution result: {:?}",
+        execution_result
+    );
+
     Ok(())
 }
 
 /// 分布式工作流示例 / Distributed workflow example
 async fn distributed_workflow_example() -> Result<(), Box<dyn std::error::Error>> {
     tracing::info!("运行分布式工作流示例 / Running distributed workflow example");
-    
+
     // 创建分布式工作流管理器 / Create distributed workflow manager
     let manager = DistributedWorkflowManager::new();
-    
+
     // 定义分布式节点 / Define distributed nodes
     let nodes = vec![
         DistributedNode {
@@ -150,17 +153,19 @@ async fn distributed_workflow_example() -> Result<(), Box<dyn std::error::Error>
             load: 0.2,
         },
     ];
-    
+
     // 注册节点 / Register nodes
     for node in nodes {
         manager.register_node(node).await?;
     }
-    
+
     // 创建分布式工作流 / Create distributed workflow
     let distributed_workflow = DistributedWorkflow {
         id: "distributed_workflow".to_string(),
         name: "分布式数据处理工作流 / Distributed Data Processing Workflow".to_string(),
-        description: "跨多个节点处理数据的工作流 / Workflow for processing data across multiple nodes".to_string(),
+        description:
+            "跨多个节点处理数据的工作流 / Workflow for processing data across multiple nodes"
+                .to_string(),
         version: "1.0.0".to_string(),
         node_assignments: vec![
             NodeAssignment {
@@ -186,25 +191,30 @@ async fn distributed_workflow_example() -> Result<(), Box<dyn std::error::Error>
             "fault_tolerant": true
         }),
     };
-    
+
     // 执行分布式工作流 / Execute distributed workflow
-    let execution_result = manager.execute_distributed_workflow(distributed_workflow).await?;
-    tracing::info!("分布式工作流执行结果 / Distributed workflow execution result: {:?}", execution_result);
-    
+    let execution_result = manager
+        .execute_distributed_workflow(distributed_workflow)
+        .await?;
+    tracing::info!(
+        "分布式工作流执行结果 / Distributed workflow execution result: {:?}",
+        execution_result
+    );
+
     // 获取节点状态 / Get node status
     let node_status = manager.get_node_status().await;
     tracing::info!("节点状态 / Node status: {:?}", node_status);
-    
+
     Ok(())
 }
 
 /// 工作流监控和告警示例 / Workflow monitoring and alerting example
 async fn workflow_monitoring_alerting_example() -> Result<(), Box<dyn std::error::Error>> {
     tracing::info!("运行工作流监控和告警示例 / Running workflow monitoring and alerting example");
-    
+
     // 创建工作流监控器 / Create workflow monitor
     let monitor = WorkflowMonitor::new();
-    
+
     // 配置监控指标 / Configure monitoring metrics
     let metrics = vec![
         MonitoringMetric {
@@ -229,12 +239,12 @@ async fn workflow_monitoring_alerting_example() -> Result<(), Box<dyn std::error
             labels: vec!["workflow_id".to_string(), "error_type".to_string()],
         },
     ];
-    
+
     // 注册监控指标 / Register monitoring metrics
     for metric in metrics {
         monitor.register_metric(metric).await?;
     }
-    
+
     // 配置告警规则 / Configure alerting rules
     let alert_rules = vec![
         AlertRule {
@@ -268,58 +278,87 @@ async fn workflow_monitoring_alerting_example() -> Result<(), Box<dyn std::error
             enabled: true,
         },
     ];
-    
+
     // 注册告警规则 / Register alerting rules
     for rule in alert_rules {
         monitor.register_alert_rule(rule).await?;
     }
-    
+
     // 模拟工作流执行和监控 / Simulate workflow execution and monitoring
     let workflow_id = "monitored_workflow";
     let start_time = std::time::Instant::now();
-    
+
     // 模拟工作流执行 / Simulate workflow execution
     tokio::time::sleep(std::time::Duration::from_secs(2)).await;
-    
+
     let execution_time = start_time.elapsed().as_secs_f64();
-    
+
     // 记录监控指标 / Record monitoring metrics
-    monitor.record_metric("workflow_execution_time", execution_time, vec![
-        ("workflow_id", workflow_id),
-        ("workflow_type", "data_processing"),
-    ]).await?;
-    
-    monitor.record_metric("workflow_success_rate", 98.5, vec![
-        ("workflow_id", workflow_id),
-    ]).await?;
-    
-    monitor.record_metric("workflow_error_count", 2.0, vec![
-        ("workflow_id", workflow_id),
-        ("error_type", "validation_error"),
-    ]).await?;
-    
+    monitor
+        .record_metric(
+            "workflow_execution_time",
+            execution_time,
+            vec![
+                ("workflow_id", workflow_id),
+                ("workflow_type", "data_processing"),
+            ],
+        )
+        .await?;
+
+    monitor
+        .record_metric(
+            "workflow_success_rate",
+            98.5,
+            vec![("workflow_id", workflow_id)],
+        )
+        .await?;
+
+    monitor
+        .record_metric(
+            "workflow_error_count",
+            2.0,
+            vec![
+                ("workflow_id", workflow_id),
+                ("error_type", "validation_error"),
+            ],
+        )
+        .await?;
+
     // 检查告警 / Check alerts
     let alerts = monitor.check_alerts().await?;
-    tracing::info!("检查到 {} 个告警 / Found {} alerts", alerts.len(), alerts.len());
-    
+    tracing::info!(
+        "检查到 {} 个告警 / Found {} alerts",
+        alerts.len(),
+        alerts.len()
+    );
+
     for alert in &alerts {
-        tracing::warn!("告警: {} - {} / Alert: {} - {}", alert.rule_name, alert.message, alert.rule_name, alert.message);
+        tracing::warn!(
+            "告警: {} - {} / Alert: {} - {}",
+            alert.rule_name,
+            alert.message,
+            alert.rule_name,
+            alert.message
+        );
     }
-    
+
     // 获取监控仪表板数据 / Get monitoring dashboard data
     let dashboard_data = monitor.get_dashboard_data().await?;
-    tracing::info!("监控仪表板数据 / Monitoring dashboard data: {:?}", dashboard_data);
-    
+    tracing::info!(
+        "监控仪表板数据 / Monitoring dashboard data: {:?}",
+        dashboard_data
+    );
+
     Ok(())
 }
 
 /// 工作流版本管理示例 / Workflow version management example
 async fn workflow_version_management_example() -> Result<(), Box<dyn std::error::Error>> {
     tracing::info!("运行工作流版本管理示例 / Running workflow version management example");
-    
+
     // 创建工作流版本管理器 / Create workflow version manager
     let version_manager = WorkflowVersionManager::new();
-    
+
     // 创建初始版本 / Create initial version
     let initial_version = WorkflowVersion {
         id: "workflow_v1".to_string(),
@@ -335,9 +374,9 @@ async fn workflow_version_management_example() -> Result<(), Box<dyn std::error:
         status: VersionStatus::Draft,
         tags: vec!["initial".to_string()],
     };
-    
+
     version_manager.create_version(initial_version).await?;
-    
+
     // 创建新版本 / Create new version
     let new_version = WorkflowVersion {
         id: "workflow_v2".to_string(),
@@ -354,72 +393,136 @@ async fn workflow_version_management_example() -> Result<(), Box<dyn std::error:
         status: VersionStatus::Draft,
         tags: vec!["enhanced".to_string()],
     };
-    
+
     version_manager.create_version(new_version).await?;
-    
+
     // 发布版本 / Publish version
-    version_manager.publish_version("workflow_v2", "1.1.0").await?;
-    
+    version_manager
+        .publish_version("workflow_v2", "1.1.0")
+        .await?;
+
     // 获取版本历史 / Get version history
-    let version_history = version_manager.get_version_history("data_processing_workflow").await?;
-    tracing::info!("版本历史 / Version history: {} 个版本 / {} versions", version_history.len(), version_history.len());
-    
+    let version_history = version_manager
+        .get_version_history("data_processing_workflow")
+        .await?;
+    tracing::info!(
+        "版本历史 / Version history: {} 个版本 / {} versions",
+        version_history.len(),
+        version_history.len()
+    );
+
     for version in &version_history {
-        tracing::info!("版本: {} - {} / Version: {} - {}", version.version, version.description, version.version, version.description);
+        tracing::info!(
+            "版本: {} - {} / Version: {} - {}",
+            version.version,
+            version.description,
+            version.version,
+            version.description
+        );
     }
-    
+
     // 比较版本 / Compare versions
-    let comparison = version_manager.compare_versions("workflow_v1", "workflow_v2").await?;
+    let comparison = version_manager
+        .compare_versions("workflow_v1", "workflow_v2")
+        .await?;
     tracing::info!("版本比较结果 / Version comparison result: {:?}", comparison);
-    
+
     // 回滚到旧版本 / Rollback to old version
-    version_manager.rollback_to_version("data_processing_workflow", "1.0.0").await?;
+    version_manager
+        .rollback_to_version("data_processing_workflow", "1.0.0")
+        .await?;
     tracing::info!("已回滚到版本 1.0.0 / Rolled back to version 1.0.0");
-    
+
     // 获取当前活跃版本 / Get current active version
-    let active_version = version_manager.get_active_version("data_processing_workflow").await?;
+    let active_version = version_manager
+        .get_active_version("data_processing_workflow")
+        .await?;
     if let Some(version) = active_version {
-        tracing::info!("当前活跃版本: {} / Current active version: {}", version.version, version.version);
+        tracing::info!(
+            "当前活跃版本: {} / Current active version: {}",
+            version.version,
+            version.version
+        );
     }
-    
+
     Ok(())
 }
 
 /// 工作流性能优化示例 / Workflow performance optimization example
 async fn workflow_performance_optimization_example() -> Result<(), Box<dyn std::error::Error>> {
     tracing::info!("运行工作流性能优化示例 / Running workflow performance optimization example");
-    
+
     // 创建工作流性能分析器 / Create workflow performance analyzer
     let analyzer = WorkflowPerformanceAnalyzer::new();
-    
+
     // 分析工作流性能 / Analyze workflow performance
-    let performance_analysis = analyzer.analyze_workflow_performance("data_processing_workflow").await?;
-    tracing::info!("工作流性能分析结果 / Workflow performance analysis result: {:?}", performance_analysis);
-    
+    let performance_analysis = analyzer
+        .analyze_workflow_performance("data_processing_workflow")
+        .await?;
+    tracing::info!(
+        "工作流性能分析结果 / Workflow performance analysis result: {:?}",
+        performance_analysis
+    );
+
     // 识别性能瓶颈 / Identify performance bottlenecks
-    let bottlenecks = analyzer.identify_bottlenecks("data_processing_workflow").await?;
-    tracing::info!("识别到 {} 个性能瓶颈 / Identified {} performance bottlenecks", bottlenecks.len(), bottlenecks.len());
-    
+    let bottlenecks = analyzer
+        .identify_bottlenecks("data_processing_workflow")
+        .await?;
+    tracing::info!(
+        "识别到 {} 个性能瓶颈 / Identified {} performance bottlenecks",
+        bottlenecks.len(),
+        bottlenecks.len()
+    );
+
     for bottleneck in &bottlenecks {
-        tracing::warn!("性能瓶颈: {} - {} / Performance bottleneck: {} - {}", bottleneck.step_id, bottleneck.description, bottleneck.step_id, bottleneck.description);
+        tracing::warn!(
+            "性能瓶颈: {} - {} / Performance bottleneck: {} - {}",
+            bottleneck.step_id,
+            bottleneck.description,
+            bottleneck.step_id,
+            bottleneck.description
+        );
     }
-    
+
     // 生成优化建议 / Generate optimization suggestions
-    let suggestions = analyzer.generate_optimization_suggestions("data_processing_workflow").await?;
-    tracing::info!("生成 {} 个优化建议 / Generated {} optimization suggestions", suggestions.len(), suggestions.len());
-    
+    let suggestions = analyzer
+        .generate_optimization_suggestions("data_processing_workflow")
+        .await?;
+    tracing::info!(
+        "生成 {} 个优化建议 / Generated {} optimization suggestions",
+        suggestions.len(),
+        suggestions.len()
+    );
+
     for suggestion in &suggestions {
-        tracing::info!("优化建议: {} - {} / Optimization suggestion: {} - {}", suggestion.step_id, suggestion.description, suggestion.step_id, suggestion.description);
+        tracing::info!(
+            "优化建议: {} - {} / Optimization suggestion: {} - {}",
+            suggestion.step_id,
+            suggestion.description,
+            suggestion.step_id,
+            suggestion.description
+        );
     }
-    
+
     // 应用性能优化 / Apply performance optimizations
-    let optimization_result = analyzer.apply_optimizations("data_processing_workflow", &suggestions).await?;
-    tracing::info!("性能优化应用结果 / Performance optimization application result: {:?}", optimization_result);
-    
+    let optimization_result = analyzer
+        .apply_optimizations("data_processing_workflow", &suggestions)
+        .await?;
+    tracing::info!(
+        "性能优化应用结果 / Performance optimization application result: {:?}",
+        optimization_result
+    );
+
     // 测量优化效果 / Measure optimization effects
-    let before_optimization = analyzer.measure_workflow_performance("data_processing_workflow").await?;
-    tracing::info!("优化前性能: {:?} / Performance before optimization: {:?}", before_optimization, before_optimization);
-    
+    let before_optimization = analyzer
+        .measure_workflow_performance("data_processing_workflow")
+        .await?;
+    tracing::info!(
+        "优化前性能: {:?} / Performance before optimization: {:?}",
+        before_optimization,
+        before_optimization
+    );
+
     // 模拟优化后的性能 / Simulate performance after optimization
     let after_optimization = WorkflowPerformanceMetrics {
         execution_time: std::time::Duration::from_secs(120),
@@ -428,13 +531,22 @@ async fn workflow_performance_optimization_example() -> Result<(), Box<dyn std::
         throughput: 1000.0,
         error_rate: 0.01,
     };
-    
-    tracing::info!("优化后性能: {:?} / Performance after optimization: {:?}", after_optimization, after_optimization);
-    
+
+    tracing::info!(
+        "优化后性能: {:?} / Performance after optimization: {:?}",
+        after_optimization,
+        after_optimization
+    );
+
     // 计算性能提升 / Calculate performance improvement
-    let improvement = analyzer.calculate_performance_improvement(&before_optimization, &after_optimization);
-    tracing::info!("性能提升: {:?} / Performance improvement: {:?}", improvement, improvement);
-    
+    let improvement =
+        analyzer.calculate_performance_improvement(&before_optimization, &after_optimization);
+    tracing::info!(
+        "性能提升: {:?} / Performance improvement: {:?}",
+        improvement,
+        improvement
+    );
+
     Ok(())
 }
 
@@ -447,11 +559,14 @@ impl ComplexWorkflowOrchestrator {
     fn new() -> Self {
         Self
     }
-    
-    async fn execute_workflow(&self, _workflow: ComplexWorkflowDefinition) -> Result<WorkflowExecutionResult, Box<dyn std::error::Error>> {
+
+    async fn execute_workflow(
+        &self,
+        _workflow: ComplexWorkflowDefinition,
+    ) -> Result<WorkflowExecutionResult, Box<dyn std::error::Error>> {
         // 模拟复杂工作流执行 / Simulate complex workflow execution
         tokio::time::sleep(std::time::Duration::from_millis(100)).await;
-        
+
         Ok(WorkflowExecutionResult {
             workflow_id: "complex_workflow".to_string(),
             status: ExecutionStatus::Completed,
@@ -535,12 +650,18 @@ impl DistributedWorkflowManager {
     fn new() -> Self {
         Self
     }
-    
-    async fn register_node(&self, _node: DistributedNode) -> Result<(), Box<dyn std::error::Error>> {
+
+    async fn register_node(
+        &self,
+        _node: DistributedNode,
+    ) -> Result<(), Box<dyn std::error::Error>> {
         Ok(())
     }
-    
-    async fn execute_distributed_workflow(&self, _workflow: DistributedWorkflow) -> Result<WorkflowExecutionResult, Box<dyn std::error::Error>> {
+
+    async fn execute_distributed_workflow(
+        &self,
+        _workflow: DistributedWorkflow,
+    ) -> Result<WorkflowExecutionResult, Box<dyn std::error::Error>> {
         Ok(WorkflowExecutionResult {
             workflow_id: "distributed_workflow".to_string(),
             status: ExecutionStatus::Completed,
@@ -550,7 +671,7 @@ impl DistributedWorkflowManager {
             error_message: None,
         })
     }
-    
+
     async fn get_node_status(&self) -> Vec<NodeStatus> {
         vec![NodeStatus::Active, NodeStatus::Active, NodeStatus::Active]
     }
@@ -622,23 +743,34 @@ impl WorkflowMonitor {
     fn new() -> Self {
         Self
     }
-    
-    async fn register_metric(&self, _metric: MonitoringMetric) -> Result<(), Box<dyn std::error::Error>> {
+
+    async fn register_metric(
+        &self,
+        _metric: MonitoringMetric,
+    ) -> Result<(), Box<dyn std::error::Error>> {
         Ok(())
     }
-    
-    async fn register_alert_rule(&self, _rule: AlertRule) -> Result<(), Box<dyn std::error::Error>> {
+
+    async fn register_alert_rule(
+        &self,
+        _rule: AlertRule,
+    ) -> Result<(), Box<dyn std::error::Error>> {
         Ok(())
     }
-    
-    async fn record_metric(&self, _name: &str, _value: f64, _labels: Vec<(&str, &str)>) -> Result<(), Box<dyn std::error::Error>> {
+
+    async fn record_metric(
+        &self,
+        _name: &str,
+        _value: f64,
+        _labels: Vec<(&str, &str)>,
+    ) -> Result<(), Box<dyn std::error::Error>> {
         Ok(())
     }
-    
+
     async fn check_alerts(&self) -> Result<Vec<Alert>, Box<dyn std::error::Error>> {
         Ok(vec![])
     }
-    
+
     async fn get_dashboard_data(&self) -> Result<serde_json::Value, Box<dyn std::error::Error>> {
         Ok(json!({
             "metrics": {},
@@ -714,28 +846,49 @@ impl WorkflowVersionManager {
     fn new() -> Self {
         Self
     }
-    
-    async fn create_version(&self, _version: WorkflowVersion) -> Result<(), Box<dyn std::error::Error>> {
+
+    async fn create_version(
+        &self,
+        _version: WorkflowVersion,
+    ) -> Result<(), Box<dyn std::error::Error>> {
         Ok(())
     }
-    
-    async fn publish_version(&self, _version_id: &str, _version: &str) -> Result<(), Box<dyn std::error::Error>> {
+
+    async fn publish_version(
+        &self,
+        _version_id: &str,
+        _version: &str,
+    ) -> Result<(), Box<dyn std::error::Error>> {
         Ok(())
     }
-    
-    async fn get_version_history(&self, _workflow_id: &str) -> Result<Vec<WorkflowVersion>, Box<dyn std::error::Error>> {
+
+    async fn get_version_history(
+        &self,
+        _workflow_id: &str,
+    ) -> Result<Vec<WorkflowVersion>, Box<dyn std::error::Error>> {
         Ok(vec![])
     }
-    
-    async fn compare_versions(&self, _version1: &str, _version2: &str) -> Result<serde_json::Value, Box<dyn std::error::Error>> {
+
+    async fn compare_versions(
+        &self,
+        _version1: &str,
+        _version2: &str,
+    ) -> Result<serde_json::Value, Box<dyn std::error::Error>> {
         Ok(json!({"changes": []}))
     }
-    
-    async fn rollback_to_version(&self, _workflow_id: &str, _version: &str) -> Result<(), Box<dyn std::error::Error>> {
+
+    async fn rollback_to_version(
+        &self,
+        _workflow_id: &str,
+        _version: &str,
+    ) -> Result<(), Box<dyn std::error::Error>> {
         Ok(())
     }
-    
-    async fn get_active_version(&self, _workflow_id: &str) -> Result<Option<WorkflowVersion>, Box<dyn std::error::Error>> {
+
+    async fn get_active_version(
+        &self,
+        _workflow_id: &str,
+    ) -> Result<Option<WorkflowVersion>, Box<dyn std::error::Error>> {
         Ok(None)
     }
 }
@@ -771,24 +924,40 @@ impl WorkflowPerformanceAnalyzer {
     fn new() -> Self {
         Self
     }
-    
-    async fn analyze_workflow_performance(&self, _workflow_id: &str) -> Result<serde_json::Value, Box<dyn std::error::Error>> {
+
+    async fn analyze_workflow_performance(
+        &self,
+        _workflow_id: &str,
+    ) -> Result<serde_json::Value, Box<dyn std::error::Error>> {
         Ok(json!({"analysis": "completed"}))
     }
-    
-    async fn identify_bottlenecks(&self, _workflow_id: &str) -> Result<Vec<PerformanceBottleneck>, Box<dyn std::error::Error>> {
+
+    async fn identify_bottlenecks(
+        &self,
+        _workflow_id: &str,
+    ) -> Result<Vec<PerformanceBottleneck>, Box<dyn std::error::Error>> {
         Ok(vec![])
     }
-    
-    async fn generate_optimization_suggestions(&self, _workflow_id: &str) -> Result<Vec<OptimizationSuggestion>, Box<dyn std::error::Error>> {
+
+    async fn generate_optimization_suggestions(
+        &self,
+        _workflow_id: &str,
+    ) -> Result<Vec<OptimizationSuggestion>, Box<dyn std::error::Error>> {
         Ok(vec![])
     }
-    
-    async fn apply_optimizations(&self, _workflow_id: &str, _suggestions: &[OptimizationSuggestion]) -> Result<serde_json::Value, Box<dyn std::error::Error>> {
+
+    async fn apply_optimizations(
+        &self,
+        _workflow_id: &str,
+        _suggestions: &[OptimizationSuggestion],
+    ) -> Result<serde_json::Value, Box<dyn std::error::Error>> {
         Ok(json!({"optimizations": "applied"}))
     }
-    
-    async fn measure_workflow_performance(&self, _workflow_id: &str) -> Result<WorkflowPerformanceMetrics, Box<dyn std::error::Error>> {
+
+    async fn measure_workflow_performance(
+        &self,
+        _workflow_id: &str,
+    ) -> Result<WorkflowPerformanceMetrics, Box<dyn std::error::Error>> {
         Ok(WorkflowPerformanceMetrics {
             execution_time: std::time::Duration::from_secs(180),
             memory_usage: 512 * 1024 * 1024, // 512MB
@@ -797,8 +966,12 @@ impl WorkflowPerformanceAnalyzer {
             error_rate: 0.05,
         })
     }
-    
-    fn calculate_performance_improvement(&self, before: &WorkflowPerformanceMetrics, after: &WorkflowPerformanceMetrics) -> serde_json::Value {
+
+    fn calculate_performance_improvement(
+        &self,
+        before: &WorkflowPerformanceMetrics,
+        after: &WorkflowPerformanceMetrics,
+    ) -> serde_json::Value {
         json!({
             "execution_time_improvement": (before.execution_time.as_secs_f64() - after.execution_time.as_secs_f64()) / before.execution_time.as_secs_f64() * 100.0,
             "memory_usage_improvement": (before.memory_usage - after.memory_usage) as f64 / before.memory_usage as f64 * 100.0,
@@ -838,31 +1011,31 @@ struct WorkflowPerformanceMetrics {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[tokio::test]
     async fn test_complex_workflow_orchestration_example() {
         let result = complex_workflow_orchestration_example().await;
         assert!(result.is_ok());
     }
-    
+
     #[tokio::test]
     async fn test_distributed_workflow_example() {
         let result = distributed_workflow_example().await;
         assert!(result.is_ok());
     }
-    
+
     #[tokio::test]
     async fn test_workflow_monitoring_alerting_example() {
         let result = workflow_monitoring_alerting_example().await;
         assert!(result.is_ok());
     }
-    
+
     #[tokio::test]
     async fn test_workflow_version_management_example() {
         let result = workflow_version_management_example().await;
         assert!(result.is_ok());
     }
-    
+
     #[tokio::test]
     async fn test_workflow_performance_optimization_example() {
         let result = workflow_performance_optimization_example().await;

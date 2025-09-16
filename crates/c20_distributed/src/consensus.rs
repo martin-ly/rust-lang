@@ -8,4 +8,3 @@ pub enum ConsensusRole {
 pub trait ConsensusApi {
     fn role(&self) -> ConsensusRole;
 }
-

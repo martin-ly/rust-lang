@@ -1,5 +1,5 @@
 //! 通用工具函数
-//! 
+//!
 //! 本模块提供了各种通用工具函数，包括数学计算、数据处理、
 //! 错误处理、日志记录等。使用Rust的类型安全特性确保工具的可靠性。
 
@@ -27,7 +27,7 @@ impl MathUtils {
         if k == 0 || k == n {
             return 1;
         }
-        
+
         let k = k.min(n - k);
         let mut result = 1;
         for i in 0..k {
@@ -70,7 +70,7 @@ impl MathUtils {
         if n % 2 == 0 {
             return false;
         }
-        
+
         let sqrt_n = (n as f64).sqrt() as usize;
         for i in (3..=sqrt_n).step_by(2) {
             if n % i == 0 {
@@ -96,7 +96,7 @@ impl MathUtils {
         if n <= 1 {
             return n;
         }
-        
+
         let mut a = 0;
         let mut b = 1;
         for _ in 2..=n {
@@ -115,7 +115,7 @@ impl MathUtils {
         if x == 0.0 {
             return 0.0;
         }
-        
+
         let mut guess = x / 2.0;
         for _ in 0..10 {
             guess = (guess + x / guess) / 2.0;
@@ -151,10 +151,10 @@ impl StatisticsUtils {
         if data.is_empty() {
             return 0.0;
         }
-        
+
         data.sort_by(|a, b| a.partial_cmp(b).unwrap());
         let n = data.len();
-        
+
         if n % 2 == 0 {
             (data[n / 2 - 1] + data[n / 2]) / 2.0
         } else {
@@ -167,13 +167,13 @@ impl StatisticsUtils {
         if data.is_empty() {
             return None;
         }
-        
+
         let mut counts = HashMap::new();
         for &value in data {
             let key = format!("{:.6}", value);
             *counts.entry(key).or_insert(0) += 1;
         }
-        
+
         let max_count = counts.values().max()?;
         for (key, &count) in &counts {
             if count == *max_count {
@@ -188,11 +188,9 @@ impl StatisticsUtils {
         if data.len() <= 1 {
             return 0.0;
         }
-        
+
         let mean = Self::mean(data);
-        let sum_squared_diff: f64 = data.iter()
-            .map(|&x| (x - mean).powi(2))
-            .sum();
+        let sum_squared_diff: f64 = data.iter().map(|&x| (x - mean).powi(2)).sum();
         sum_squared_diff / (data.len() - 1) as f64
     }
 
@@ -206,19 +204,17 @@ impl StatisticsUtils {
         if data.len() <= 2 {
             return 0.0;
         }
-        
+
         let mean = Self::mean(data);
         let std_dev = Self::standard_deviation(data);
-        
+
         if std_dev == 0.0 {
             return 0.0;
         }
-        
+
         let n = data.len() as f64;
-        let sum_cubed_diff: f64 = data.iter()
-            .map(|&x| ((x - mean) / std_dev).powi(3))
-            .sum();
-        
+        let sum_cubed_diff: f64 = data.iter().map(|&x| ((x - mean) / std_dev).powi(3)).sum();
+
         sum_cubed_diff / n
     }
 
@@ -227,19 +223,17 @@ impl StatisticsUtils {
         if data.len() <= 3 {
             return 0.0;
         }
-        
+
         let mean = Self::mean(data);
         let std_dev = Self::standard_deviation(data);
-        
+
         if std_dev == 0.0 {
             return 0.0;
         }
-        
+
         let n = data.len() as f64;
-        let sum_fourth_diff: f64 = data.iter()
-            .map(|&x| ((x - mean) / std_dev).powi(4))
-            .sum();
-        
+        let sum_fourth_diff: f64 = data.iter().map(|&x| ((x - mean) / std_dev).powi(4)).sum();
+
         sum_fourth_diff / n - 3.0
     }
 
@@ -248,19 +242,21 @@ impl StatisticsUtils {
         if x.len() != y.len() || x.is_empty() {
             return 0.0;
         }
-        
+
         let mean_x = Self::mean(x);
         let mean_y = Self::mean(y);
-        
-        let numerator: f64 = x.iter().zip(y.iter())
+
+        let numerator: f64 = x
+            .iter()
+            .zip(y.iter())
             .map(|(&xi, &yi)| (xi - mean_x) * (yi - mean_y))
             .sum();
-        
+
         let sum_sq_x: f64 = x.iter().map(|&xi| (xi - mean_x).powi(2)).sum();
         let sum_sq_y: f64 = y.iter().map(|&yi| (yi - mean_y).powi(2)).sum();
-        
+
         let denominator = (sum_sq_x * sum_sq_y).sqrt();
-        
+
         if denominator == 0.0 {
             0.0
         } else {
@@ -273,11 +269,11 @@ impl StatisticsUtils {
         if data.is_empty() {
             return 0.0;
         }
-        
+
         data.sort_by(|a, b| a.partial_cmp(b).unwrap());
         let n = data.len();
         let index = (percentile / 100.0) * (n - 1) as f64;
-        
+
         if index.fract() == 0.0 {
             data[index as usize]
         } else {
@@ -311,14 +307,14 @@ impl DataUtils {
         if data.is_empty() {
             return Vec::new();
         }
-        
+
         let mean = StatisticsUtils::mean(data);
         let std_dev = StatisticsUtils::standard_deviation(data);
-        
+
         if std_dev == 0.0 {
             return vec![0.0; data.len()];
         }
-        
+
         data.iter().map(|&x| (x - mean) / std_dev).collect()
     }
 
@@ -327,15 +323,17 @@ impl DataUtils {
         if data.is_empty() {
             return Vec::new();
         }
-        
+
         let min_val = data.iter().fold(f64::INFINITY, |a, &b| a.min(b));
         let max_val = data.iter().fold(f64::NEG_INFINITY, |a, &b| a.max(b));
-        
+
         if max_val == min_val {
             return vec![0.5; data.len()];
         }
-        
-        data.iter().map(|&x| (x - min_val) / (max_val - min_val)).collect()
+
+        data.iter()
+            .map(|&x| (x - min_val) / (max_val - min_val))
+            .collect()
     }
 
     /// 数据平滑（移动平均）
@@ -343,10 +341,14 @@ impl DataUtils {
         if data.is_empty() || window_size == 0 {
             return Vec::new();
         }
-        
+
         let mut smoothed = Vec::new();
         for i in 0..data.len() {
-            let start = if i >= window_size { i - window_size + 1 } else { 0 };
+            let start = if i >= window_size {
+                i - window_size + 1
+            } else {
+                0
+            };
             let end = i + 1;
             let window = &data[start..end];
             smoothed.push(StatisticsUtils::mean(window));
@@ -359,7 +361,7 @@ impl DataUtils {
         if data.len() <= 1 {
             return Vec::new();
         }
-        
+
         data.windows(2).map(|w| w[1] - w[0]).collect()
     }
 
@@ -367,14 +369,14 @@ impl DataUtils {
     pub fn deduplicate(data: &[f64]) -> Vec<f64> {
         let mut unique = Vec::new();
         let mut seen = std::collections::HashSet::new();
-        
+
         for &value in data {
             let key = format!("{:.6}", value);
             if seen.insert(key) {
                 unique.push(value);
             }
         }
-        
+
         unique
     }
 
@@ -383,23 +385,23 @@ impl DataUtils {
         if data.is_empty() || num_bins == 0 {
             return Vec::new();
         }
-        
+
         let min_val = data.iter().fold(f64::INFINITY, |a, &b| a.min(b));
         let max_val = data.iter().fold(f64::NEG_INFINITY, |a, &b| a.max(b));
-        
+
         if max_val == min_val {
             return vec![data.to_vec()];
         }
-        
+
         let bin_width = (max_val - min_val) / num_bins as f64;
         let mut bins = vec![Vec::new(); num_bins];
-        
+
         for &value in data {
             let bin_index = ((value - min_val) / bin_width).floor() as usize;
             let bin_index = bin_index.min(num_bins - 1);
             bins[bin_index].push(value);
         }
-        
+
         bins
     }
 }
@@ -440,9 +442,10 @@ impl ValidationUtils {
     /// 验证数值范围
     pub fn validate_range(value: f64, min: f64, max: f64) -> Result<(), ModelError> {
         if value < min || value > max {
-            Err(ModelError::ValidationError(
-                format!("值 {} 超出范围 [{}, {}]", value, min, max)
-            ))
+            Err(ModelError::ValidationError(format!(
+                "值 {} 超出范围 [{}, {}]",
+                value, min, max
+            )))
         } else {
             Ok(())
         }
@@ -451,9 +454,10 @@ impl ValidationUtils {
     /// 验证非负值
     pub fn validate_non_negative(value: f64) -> Result<(), ModelError> {
         if value < 0.0 {
-            Err(ModelError::ValidationError(
-                format!("值 {} 不能为负数", value)
-            ))
+            Err(ModelError::ValidationError(format!(
+                "值 {} 不能为负数",
+                value
+            )))
         } else {
             Ok(())
         }
@@ -462,9 +466,10 @@ impl ValidationUtils {
     /// 验证正值
     pub fn validate_positive(value: f64) -> Result<(), ModelError> {
         if value <= 0.0 {
-            Err(ModelError::ValidationError(
-                format!("值 {} 必须为正数", value)
-            ))
+            Err(ModelError::ValidationError(format!(
+                "值 {} 必须为正数",
+                value
+            )))
         } else {
             Ok(())
         }
@@ -473,9 +478,10 @@ impl ValidationUtils {
     /// 验证概率值
     pub fn validate_probability(value: f64) -> Result<(), ModelError> {
         if value < 0.0 || value > 1.0 {
-            Err(ModelError::ValidationError(
-                format!("概率值 {} 必须在 [0, 1] 范围内", value)
-            ))
+            Err(ModelError::ValidationError(format!(
+                "概率值 {} 必须在 [0, 1] 范围内",
+                value
+            )))
         } else {
             Ok(())
         }
@@ -484,9 +490,11 @@ impl ValidationUtils {
     /// 验证数据长度
     pub fn validate_data_length(data: &[f64], expected_length: usize) -> Result<(), ModelError> {
         if data.len() != expected_length {
-            Err(ModelError::DataError(
-                format!("数据长度 {} 与期望长度 {} 不匹配", data.len(), expected_length)
-            ))
+            Err(ModelError::DataError(format!(
+                "数据长度 {} 与期望长度 {} 不匹配",
+                data.len(),
+                expected_length
+            )))
         } else {
             Ok(())
         }
@@ -506,16 +514,19 @@ impl ValidationUtils {
         if matrix.is_empty() {
             return Err(ModelError::DataError("矩阵不能为空".to_string()));
         }
-        
+
         let expected_cols = matrix[0].len();
         for (i, row) in matrix.iter().enumerate() {
             if row.len() != expected_cols {
-                return Err(ModelError::DataError(
-                    format!("矩阵第 {} 行长度 {} 与期望长度 {} 不匹配", i, row.len(), expected_cols)
-                ));
+                return Err(ModelError::DataError(format!(
+                    "矩阵第 {} 行长度 {} 与期望长度 {} 不匹配",
+                    i,
+                    row.len(),
+                    expected_cols
+                )));
             }
         }
-        
+
         Ok(())
     }
 }
@@ -641,7 +652,7 @@ mod tests {
         let data = vec![1.0, 2.0, 3.0, 4.0, 5.0];
         let standardized = DataUtils::standardize(&data);
         assert_eq!(standardized.len(), data.len());
-        
+
         let normalized = DataUtils::normalize(&data);
         assert_eq!(normalized.len(), data.len());
         assert_eq!(normalized[0], 0.0);
@@ -665,7 +676,7 @@ mod tests {
         logger.debug("调试消息");
         logger.warn("警告消息");
         logger.error("错误消息");
-        
+
         let messages = logger.get_messages();
         assert_eq!(messages.len(), 3); // debug消息被过滤
     }

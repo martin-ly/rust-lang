@@ -29,18 +29,28 @@ impl SqlDatabase for MysqlDb {
         let rows: Vec<mysql_async::Row> = conn.query(sql).await?;
         let mut out = Vec::with_capacity(rows.len());
         for row in rows {
-            let cols = row.columns_ref().iter().enumerate().map(|(i, c)| {
-                let name = c.name_str().to_string();
-                let val = row.as_ref(i).map(|v| format!("{v:?}")).unwrap_or_default();
-                (name, val)
-            }).collect();
+            let cols = row
+                .columns_ref()
+                .iter()
+                .enumerate()
+                .map(|(i, c)| {
+                    let name = c.name_str().to_string();
+                    let val = row.as_ref(i).map(|v| format!("{v:?}")).unwrap_or_default();
+                    (name, val)
+                })
+                .collect();
             out.push(SqlRow(cols));
         }
         Ok(out)
     }
 
-    async fn begin(&self) -> crate::error::Result<()> { self.execute("BEGIN").await.map(|_| ()) }
-    async fn commit(&self) -> crate::error::Result<()> { self.execute("COMMIT").await.map(|_| ()) }
-    async fn rollback(&self) -> crate::error::Result<()> { self.execute("ROLLBACK").await.map(|_| ()) }
+    async fn begin(&self) -> crate::error::Result<()> {
+        self.execute("BEGIN").await.map(|_| ())
+    }
+    async fn commit(&self) -> crate::error::Result<()> {
+        self.execute("COMMIT").await.map(|_| ())
+    }
+    async fn rollback(&self) -> crate::error::Result<()> {
+        self.execute("ROLLBACK").await.map(|_| ())
+    }
 }
-

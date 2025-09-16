@@ -1,11 +1,11 @@
 // 条件变量模块
 // 这个模块提供了进程安全的条件变量实现
 
-use crate::types::SyncConfig;
 use crate::error::SyncResult;
+use crate::types::SyncConfig;
+use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, Condvar, MutexGuard};
 use std::time::{Duration, Instant};
-use std::sync::atomic::{AtomicUsize, Ordering};
 
 /// 进程安全的条件变量
 #[allow(dead_code)]
@@ -43,17 +43,21 @@ impl ProcessCondVar {
     /// 等待条件满足
     pub fn wait<'a, T>(&self, guard: MutexGuard<'a, T>) -> SyncResult<MutexGuard<'a, T>> {
         let start = Instant::now();
-        
+
         self.stats.wait_count.fetch_add(1, Ordering::Relaxed);
-        
-        let guard = self.inner.wait(guard)
+
+        let guard = self
+            .inner
+            .wait(guard)
             .map_err(|e| crate::error::SyncError::CondVarError(e.to_string()))?;
-        
+
         let wait_time = start.elapsed();
         let wait_time_ns = wait_time.as_nanos() as usize;
-        
-        self.stats.total_wait_time.fetch_add(wait_time_ns, Ordering::Relaxed);
-        
+
+        self.stats
+            .total_wait_time
+            .fetch_add(wait_time_ns, Ordering::Relaxed);
+
         Ok(guard)
     }
 
@@ -64,17 +68,21 @@ impl ProcessCondVar {
         timeout: Duration,
     ) -> SyncResult<MutexGuard<'a, T>> {
         let start = Instant::now();
-        
+
         self.stats.wait_count.fetch_add(1, Ordering::Relaxed);
-        
-        let (guard, _) = self.inner.wait_timeout(guard, timeout)
+
+        let (guard, _) = self
+            .inner
+            .wait_timeout(guard, timeout)
             .map_err(|e| crate::error::SyncError::CondVarError(e.to_string()))?;
-        
+
         let wait_time = start.elapsed();
         let wait_time_ns = wait_time.as_nanos() as usize;
-        
-        self.stats.total_wait_time.fetch_add(wait_time_ns, Ordering::Relaxed);
-        
+
+        self.stats
+            .total_wait_time
+            .fetch_add(wait_time_ns, Ordering::Relaxed);
+
         Ok(guard)
     }
 

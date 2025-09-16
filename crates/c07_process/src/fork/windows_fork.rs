@@ -12,7 +12,7 @@ impl WindowsFork {
     pub fn new() -> Self {
         Self { is_child: false }
     }
-    
+
     /// 创建子进程（Windows上的替代方案）
     pub fn create_child(&self) -> Result<ForkResult> {
         // Windows上使用CreateProcess创建子进程
@@ -26,11 +26,11 @@ impl Fork for WindowsFork {
         // Windows不支持fork，返回失败
         Ok(ForkResult::Failed)
     }
-    
+
     fn is_child(&self) -> bool {
         self.is_child
     }
-    
+
     fn is_parent(&self) -> bool {
         !self.is_child
     }

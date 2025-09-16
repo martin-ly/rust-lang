@@ -31,5 +31,3 @@ pub fn spawn_multi_thread_tasks() -> i32 {
         a + b
     })
 }
-
-

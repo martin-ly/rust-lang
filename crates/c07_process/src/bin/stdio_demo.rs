@@ -1,7 +1,7 @@
 use c07_process::prelude::*;
 use std::collections::HashMap;
 // use std::io::{
-//     //Read, 
+//     //Read,
 //     //Write
 // };
 
@@ -21,7 +21,11 @@ fn main() -> Result<()> {
     let config = if cfg!(windows) {
         ProcessConfig {
             program: "powershell".to_string(),
-            args: vec!["-NoProfile".to_string(), "-Command".to_string(), "$input | ForEach-Object { $_ }".to_string()],
+            args: vec![
+                "-NoProfile".to_string(),
+                "-Command".to_string(),
+                "$input | ForEach-Object { $_ }".to_string(),
+            ],
             env,
             working_dir: Some(".".to_string()),
             user_id: None,
@@ -55,7 +59,9 @@ fn main() -> Result<()> {
     let err = pm.read_stderr(pid)?;
 
     println!("📤 子进程stdout: {}", String::from_utf8_lossy(&out));
-    if !err.is_empty() { println!("⚠️ 子进程stderr: {}", String::from_utf8_lossy(&err)); }
+    if !err.is_empty() {
+        println!("⚠️ 子进程stderr: {}", String::from_utf8_lossy(&err));
+    }
 
     // 确保进程退出
     let _ = pm.wait_with_timeout(pid, std::time::Duration::from_secs(1))?;
@@ -63,5 +69,3 @@ fn main() -> Result<()> {
     println!("🎉 标准IO演示完成");
     Ok(())
 }
-
-

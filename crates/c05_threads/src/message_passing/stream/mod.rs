@@ -2,8 +2,8 @@
 //! 注意：这是同步阻塞迭代器，适用于简单消费场景。
 
 use crossbeam_channel::Receiver;
-use std::time::{Duration, Instant};
 use std::thread::sleep;
+use std::time::{Duration, Instant};
 
 pub struct ReceiverStream<T> {
     receiver: Receiver<T>,
@@ -31,7 +31,9 @@ impl<T> ReceiverStream<T> {
 
     /// 消费 self，返回阻塞迭代器
     pub fn into_iter(self) -> ReceiverIntoIter<T> {
-        ReceiverIntoIter { inner: self.receiver }
+        ReceiverIntoIter {
+            inner: self.receiver,
+        }
     }
 
     /// 轻量 map 适配器：返回惰性迭代器
@@ -64,7 +66,11 @@ impl<T> ReceiverStream<T> {
     }
 
     /// 在总超时 total_timeout 内持续消费，单次取元素超时 per_item_timeout
-    pub fn take_until_timeout(&self, total_timeout: Duration, per_item_timeout: Duration) -> Vec<T> {
+    pub fn take_until_timeout(
+        &self,
+        total_timeout: Duration,
+        per_item_timeout: Duration,
+    ) -> Vec<T> {
         let start = Instant::now();
         let mut out = Vec::new();
         while start.elapsed() < total_timeout {
@@ -105,7 +111,9 @@ impl<T> ReceiverStream<T> {
         // 后续元素：在剩余窗口内尽量多取
         while out.len() < batch_size {
             let elapsed = start.elapsed();
-            if elapsed >= max_wait { break; }
+            if elapsed >= max_wait {
+                break;
+            }
             let remain = max_wait - elapsed;
             if let Some(v) = self.next_once_with_timeout(remain) {
                 out.push(v);

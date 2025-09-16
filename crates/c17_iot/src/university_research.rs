@@ -1,5 +1,5 @@
 //! # 国际著名大学IoT研究成果对标实现
-//! 
+//!
 //! 本模块实现了基于MIT、Stanford、Berkeley等著名大学研究成果的IoT系统增强功能。
 
 use serde::{Deserialize, Serialize};
@@ -549,7 +549,7 @@ impl EdgeIntelligence {
             data_processor: DataProcessor::new(),
         }
     }
-    
+
     /// 执行推理
     pub fn infer(&self, _input_data: &[f32], _model_id: &str) -> Result<Vec<f32>, String> {
         // 实现推理逻辑

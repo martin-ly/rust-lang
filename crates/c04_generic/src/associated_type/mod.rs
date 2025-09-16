@@ -48,7 +48,7 @@ trait Container<T> {
 ```rust
 trait Iterator {
     type Item;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
     fn count(&self) -> usize;
 }
@@ -60,7 +60,7 @@ struct Counter {
 
 impl Iterator for Counter {
     type Item = u32;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         if self.count < self.max {
             self.count += 1;
@@ -69,7 +69,7 @@ impl Iterator for Counter {
             None
         }
     }
-    
+
     fn count(&self) -> usize {
         self.count as usize
     }
@@ -82,7 +82,7 @@ impl Iterator for Counter {
 trait Graph {
     type Node;
     type Edge;
-    
+
     fn nodes(&self) -> Vec<&Self::Node>;
     fn edges(&self) -> Vec<&Self::Edge>;
     fn add_node(&mut self, node: Self::Node);
@@ -97,19 +97,19 @@ struct SimpleGraph {
 impl Graph for SimpleGraph {
     type Node = String;
     type Edge = (String, String);
-    
+
     fn nodes(&self) -> Vec<&Self::Node> {
         self.nodes.iter().collect()
     }
-    
+
     fn edges(&self) -> Vec<&Self::Node> {
         self.edges.iter().flat_map(|(a, b)| vec![a, b]).collect()
     }
-    
+
     fn add_node(&mut self, node: Self::Node) {
         self.nodes.push(node);
     }
-    
+
     fn add_edge(&mut self, edge: Self::Edge) {
         self.edges.push(edge);
     }
@@ -122,7 +122,7 @@ impl Graph for SimpleGraph {
 trait Collection<T> {
     type Iterator: Iterator<Item = T>;
     type Key;
-    
+
     fn iter(&self) -> Self::Iterator;
     fn get(&self, key: &Self::Key) -> Option<&T>;
     fn insert(&mut self, key: Self::Key, value: T);
@@ -139,16 +139,16 @@ where
 {
     type Iterator = std::collections::hash_map::Values<'static, K, V>;
     type Key = K;
-    
+
     fn iter(&self) -> Self::Iterator {
         // 这里需要处理生命周期问题
         unimplemented!()
     }
-    
+
     fn get(&self, key: &Self::Key) -> Option<&V> {
         self.data.get(key)
     }
-    
+
     fn insert(&mut self, key: Self::Key, value: V) {
         self.data.insert(key, value);
     }
@@ -163,7 +163,7 @@ where
 trait Stream {
     type Item;
     type Error;
-    
+
     fn next(&mut self) -> Result<Option<Self::Item>, Self::Error>;
     fn peek(&self) -> Result<Option<&Self::Item>, Self::Error>;
 }
@@ -176,7 +176,7 @@ struct NumberStream {
 impl Stream for NumberStream {
     type Item = i32;
     type Error = String;
-    
+
     fn next(&mut self) -> Result<Option<Self::Item>, Self::Error> {
         if self.position < self.numbers.len() {
             let item = self.numbers[self.position];
@@ -186,7 +186,7 @@ impl Stream for NumberStream {
             Ok(None)
         }
     }
-    
+
     fn peek(&self) -> Result<Option<&Self::Item>, Self::Error> {
         if self.position < self.numbers.len() {
             Ok(Some(&self.numbers[self.position]))
@@ -204,7 +204,7 @@ trait Database {
     type Connection;
     type Transaction;
     type Error;
-    
+
     fn connect(&self) -> Result<Self::Connection, Self::Error>;
     fn begin_transaction(&self, conn: &mut Self::Connection) -> Result<Self::Transaction, Self::Error>;
     fn commit(&self, transaction: Self::Transaction) -> Result<(), Self::Error>;
@@ -216,15 +216,15 @@ impl Database for SqliteDatabase {
     type Connection = String; // 简化为字符串
     type Transaction = String;
     type Error = String;
-    
+
     fn connect(&self) -> Result<Self::Connection, Self::Error> {
         Ok("sqlite_connection".to_string())
     }
-    
+
     fn begin_transaction(&self, _conn: &mut Self::Connection) -> Result<Self::Transaction, Self::Error> {
         Ok("sqlite_transaction".to_string())
     }
-    
+
     fn commit(&self, _transaction: Self::Transaction) -> Result<(), Self::Error> {
         Ok(())
     }
@@ -238,7 +238,7 @@ trait Protocol {
     type Message;
     type Response;
     type Error;
-    
+
     fn encode(&self, message: &Self::Message) -> Result<Vec<u8>, Self::Error>;
     fn decode(&self, data: &[u8]) -> Result<Self::Message, Self::Error>;
     fn process(&self, message: Self::Message) -> Result<Self::Response, Self::Error>;
@@ -250,15 +250,15 @@ impl Protocol for HttpProtocol {
     type Message = String;
     type Response = String;
     type Error = String;
-    
+
     fn encode(&self, message: &Self::Message) -> Result<Vec<u8>, Self::Error> {
         Ok(message.as_bytes().to_vec())
     }
-    
+
     fn decode(&self, data: &[u8]) -> Result<Self::Message, Self::Error> {
         String::from_utf8(data.to_vec()).map_err(|e| e.to_string())
     }
-    
+
     fn process(&self, message: Self::Message) -> Result<Self::Response, Self::Error> {
         Ok(format!("HTTP Response: {}", message))
     }
@@ -273,7 +273,7 @@ impl Protocol for HttpProtocol {
 trait AdvancedIterator {
     type Item: Clone + std::fmt::Debug;
     type Key: std::hash::Hash + Eq;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
     fn key(&self) -> Option<&Self::Key>;
 }
@@ -290,7 +290,7 @@ where
 {
     type Item = V;
     type Key = K;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         if self.position < self.items.len() {
             let item = self.items[self.position].1.clone();
@@ -300,7 +300,7 @@ where
             None
         }
     }
-    
+
     fn key(&self) -> Option<&Self::Key> {
         if self.position < self.items.len() {
             Some(&self.items[self.position].0)
@@ -317,7 +317,7 @@ where
 trait Storage<'a> {
     type Item: 'a;
     type Iterator: Iterator<Item = &'a Self::Item>;
-    
+
     fn iter(&'a self) -> Self::Iterator;
     fn get(&'a self, index: usize) -> Option<&'a Self::Item>;
 }
@@ -332,11 +332,11 @@ where
 {
     type Item = T;
     type Iterator = std::slice::Iter<'a, T>;
-    
+
     fn iter(&'a self) -> Self::Iterator {
         self.items.iter()
     }
-    
+
     fn get(&'a self, index: usize) -> Option<&'a Self::Item> {
         self.items.get(index)
     }
@@ -377,7 +377,7 @@ type KeyValueList<K, V> = Vec<(K, V)>;
 // 基本关联类型示例
 pub trait Iterator {
     type Item;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
     fn count(&self) -> usize;
 }
@@ -389,7 +389,7 @@ pub struct Counter {
 
 impl Iterator for Counter {
     type Item = u32;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         if self.count < self.max {
             self.count += 1;
@@ -398,7 +398,7 @@ impl Iterator for Counter {
             None
         }
     }
-    
+
     fn count(&self) -> usize {
         self.count as usize
     }
@@ -408,7 +408,7 @@ impl Iterator for Counter {
 pub trait Graph {
     type Node;
     type Edge;
-    
+
     fn nodes(&self) -> Vec<&Self::Node>;
     fn edges(&self) -> Vec<&Self::Edge>;
     fn add_node(&mut self, node: Self::Node);
@@ -423,19 +423,19 @@ pub struct SimpleGraph {
 impl Graph for SimpleGraph {
     type Node = String;
     type Edge = (String, String);
-    
+
     fn nodes(&self) -> Vec<&Self::Node> {
         self.nodes.iter().collect()
     }
-    
+
     fn edges(&self) -> Vec<&Self::Edge> {
         self.edges.iter().collect()
     }
-    
+
     fn add_node(&mut self, node: Self::Node) {
         self.nodes.push(node);
     }
-    
+
     fn add_edge(&mut self, edge: Self::Edge) {
         self.edges.push(edge);
     }
@@ -460,7 +460,7 @@ impl SimpleGraph {
 pub trait Stream {
     type Item;
     type Error;
-    
+
     fn next(&mut self) -> Result<Option<Self::Item>, Self::Error>;
     fn peek(&self) -> Result<Option<&Self::Item>, Self::Error>;
 }
@@ -473,7 +473,7 @@ pub struct NumberStream {
 impl Stream for NumberStream {
     type Item = i32;
     type Error = String;
-    
+
     fn next(&mut self) -> Result<Option<Self::Item>, Self::Error> {
         if self.position < self.numbers.len() {
             let item = self.numbers[self.position];
@@ -483,7 +483,7 @@ impl Stream for NumberStream {
             Ok(None)
         }
     }
-    
+
     fn peek(&self) -> Result<Option<&Self::Item>, Self::Error> {
         if self.position < self.numbers.len() {
             Ok(Some(&self.numbers[self.position]))
@@ -507,9 +507,12 @@ pub trait Database {
     type Connection;
     type Transaction;
     type Error;
-    
+
     fn connect(&self) -> Result<Self::Connection, Self::Error>;
-    fn begin_transaction(&self, conn: &mut Self::Connection) -> Result<Self::Transaction, Self::Error>;
+    fn begin_transaction(
+        &self,
+        conn: &mut Self::Connection,
+    ) -> Result<Self::Transaction, Self::Error>;
     fn commit(&self, transaction: Self::Transaction) -> Result<(), Self::Error>;
 }
 
@@ -519,15 +522,18 @@ impl Database for SqliteDatabase {
     type Connection = String;
     type Transaction = String;
     type Error = String;
-    
+
     fn connect(&self) -> Result<Self::Connection, Self::Error> {
         Ok("sqlite_connection".to_string())
     }
-    
-    fn begin_transaction(&self, _conn: &mut Self::Connection) -> Result<Self::Transaction, Self::Error> {
+
+    fn begin_transaction(
+        &self,
+        _conn: &mut Self::Connection,
+    ) -> Result<Self::Transaction, Self::Error> {
         Ok("sqlite_transaction".to_string())
     }
-    
+
     fn commit(&self, _transaction: Self::Transaction) -> Result<(), Self::Error> {
         Ok(())
     }
@@ -537,7 +543,7 @@ impl Database for SqliteDatabase {
 pub trait AdvancedIterator {
     type Item: Clone + std::fmt::Debug;
     type Key: std::hash::Hash + Eq;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
     fn key(&self) -> Option<&Self::Key>;
 }
@@ -554,7 +560,7 @@ where
 {
     type Item = V;
     type Key = K;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         if self.position < self.items.len() {
             let item = self.items[self.position].1.clone();
@@ -564,7 +570,7 @@ where
             None
         }
     }
-    
+
     fn key(&self) -> Option<&Self::Key> {
         if self.position < self.items.len() {
             Some(&self.items[self.position].0)
@@ -576,29 +582,26 @@ where
 
 impl<K, V> KeyValueIterator<K, V> {
     pub fn new(items: Vec<(K, V)>) -> Self {
-        KeyValueIterator {
-            items,
-            position: 0,
-        }
+        KeyValueIterator { items, position: 0 }
     }
 }
 
 // 演示函数
 pub fn demonstrate_associated_types() {
     println!("=== Associated Types Demonstration ===\n");
-    
+
     // 基本迭代器演示
     demonstrate_basic_iterator();
-    
+
     // 图结构演示
     demonstrate_graph();
-    
+
     // 流处理演示
     demonstrate_stream();
-    
+
     // 数据库抽象演示
     demonstrate_database();
-    
+
     // 高级迭代器演示
     demonstrate_advanced_iterator();
 }
@@ -606,14 +609,14 @@ pub fn demonstrate_associated_types() {
 // 基本迭代器演示
 fn demonstrate_basic_iterator() {
     println!("--- Basic Iterator Demo ---");
-    
+
     let mut counter = Counter { count: 0, max: 5 };
-    
+
     println!("Counter values:");
     while let Some(value) = counter.next() {
         println!("  {}", value);
     }
-    
+
     println!("Total count: {}", counter.count());
     println!();
 }
@@ -621,16 +624,16 @@ fn demonstrate_basic_iterator() {
 // 图结构演示
 fn demonstrate_graph() {
     println!("--- Graph Demo ---");
-    
+
     let mut graph = SimpleGraph::new();
-    
+
     graph.add_node("A".to_string());
     graph.add_node("B".to_string());
     graph.add_node("C".to_string());
-    
+
     graph.add_edge(("A".to_string(), "B".to_string()));
     graph.add_edge(("B".to_string(), "C".to_string()));
-    
+
     println!("Nodes: {:?}", graph.nodes());
     println!("Edges: {:?}", graph.edges());
     println!();
@@ -639,9 +642,9 @@ fn demonstrate_graph() {
 // 流处理演示
 fn demonstrate_stream() {
     println!("--- Stream Demo ---");
-    
+
     let mut stream = NumberStream::new(vec![1, 2, 3, 4, 5]);
-    
+
     println!("Stream values:");
     while let Ok(Some(value)) = stream.next() {
         println!("  {}", value);
@@ -652,18 +655,18 @@ fn demonstrate_stream() {
 // 数据库抽象演示
 fn demonstrate_database() {
     println!("--- Database Demo ---");
-    
+
     let db = SqliteDatabase;
-    
+
     match db.connect() {
         Ok(conn) => {
             println!("Connected: {}", conn);
-            
+
             let mut conn_mut = conn;
             match db.begin_transaction(&mut conn_mut) {
                 Ok(transaction) => {
                     println!("Transaction started: {}", transaction);
-                    
+
                     match db.commit(transaction) {
                         Ok(()) => println!("Transaction committed successfully"),
                         Err(e) => println!("Commit error: {}", e),
@@ -680,15 +683,15 @@ fn demonstrate_database() {
 // 高级迭代器演示
 fn demonstrate_advanced_iterator() {
     println!("--- Advanced Iterator Demo ---");
-    
+
     let items = vec![
         ("key1".to_string(), "value1".to_string()),
         ("key2".to_string(), "value2".to_string()),
         ("key3".to_string(), "value3".to_string()),
     ];
-    
+
     let mut iterator = KeyValueIterator::new(items);
-    
+
     println!("Key-value pairs:");
     while let Some(value) = iterator.next() {
         if let Some(key) = iterator.key() {
@@ -702,65 +705,65 @@ fn demonstrate_advanced_iterator() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_counter() {
         let mut counter = Counter { count: 0, max: 3 };
-        
+
         assert_eq!(counter.next(), Some(1));
         assert_eq!(counter.next(), Some(2));
         assert_eq!(counter.next(), Some(3));
         assert_eq!(counter.next(), None);
         assert_eq!(counter.count(), 3);
     }
-    
+
     #[test]
     fn test_simple_graph() {
         let mut graph = SimpleGraph::new();
-        
+
         graph.add_node("A".to_string());
         graph.add_node("B".to_string());
-        
+
         assert_eq!(graph.nodes().len(), 2);
         assert_eq!(graph.edges().len(), 0);
-        
+
         graph.add_edge(("A".to_string(), "B".to_string()));
         assert_eq!(graph.edges().len(), 1);
     }
-    
+
     #[test]
     fn test_number_stream() {
         let mut stream = NumberStream::new(vec![1, 2, 3]);
-        
+
         assert_eq!(stream.next().unwrap().unwrap(), 1);
         assert_eq!(stream.next().unwrap().unwrap(), 2);
         assert_eq!(stream.next().unwrap().unwrap(), 3);
         assert_eq!(stream.next().unwrap(), None);
     }
-    
+
     #[test]
     fn test_sqlite_database() {
         let db = SqliteDatabase;
-        
+
         let conn = db.connect().unwrap();
         assert_eq!(conn, "sqlite_connection");
-        
+
         let mut conn_mut = conn;
         let transaction = db.begin_transaction(&mut conn_mut).unwrap();
         assert_eq!(transaction, "sqlite_transaction");
-        
+
         assert!(db.commit(transaction).is_ok());
     }
-    
+
     #[test]
     fn test_key_value_iterator() {
         let items = vec![
             ("key1".to_string(), "value1".to_string()),
             ("key2".to_string(), "value2".to_string()),
         ];
-        
+
         let mut iterator = KeyValueIterator::new(items);
-        
+
         assert_eq!(iterator.next(), Some("value1".to_string()));
         assert_eq!(iterator.next(), Some("value2".to_string()));
         assert_eq!(iterator.next(), None);

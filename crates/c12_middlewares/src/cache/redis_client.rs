@@ -14,7 +14,9 @@ impl RedisStore {
     pub async fn connect(url: &str) -> crate::error::Result<Self> {
         let client = redis::Client::open(url)?;
         let conn = client.get_multiplexed_tokio_connection().await?;
-        Ok(Self { conn: tokio::sync::Mutex::new(conn) })
+        Ok(Self {
+            conn: tokio::sync::Mutex::new(conn),
+        })
     }
 
     pub async fn connect_with(cfg: crate::config::RedisConfig) -> crate::error::Result<Self> {
@@ -23,8 +25,11 @@ impl RedisStore {
         crate::util::retry_async(&retry, || async {
             let client = redis::Client::open(url.as_str())?;
             let conn = client.get_multiplexed_tokio_connection().await?;
-            Ok(Self { conn: tokio::sync::Mutex::new(conn) })
-        }).await
+            Ok(Self {
+                conn: tokio::sync::Mutex::new(conn),
+            })
+        })
+        .await
     }
 }
 
@@ -35,7 +40,9 @@ impl KeyValueStore for RedisStore {
         let mut guard = self.conn.lock().await;
         let mut cmd = redis::cmd("GET");
         cmd.arg(key);
-        let res: Option<Vec<u8>> = crate::util::maybe_timeout(2_000, async { Ok(cmd.query_async(&mut *guard).await?) }).await?;
+        let res: Option<Vec<u8>> =
+            crate::util::maybe_timeout(2_000, async { Ok(cmd.query_async(&mut *guard).await?) })
+                .await?;
         Ok(res)
     }
 
@@ -43,7 +50,10 @@ impl KeyValueStore for RedisStore {
         let mut guard = self.conn.lock().await;
         let mut cmd = redis::cmd("SET");
         cmd.arg(key).arg(value);
-        crate::util::maybe_timeout(2_000, async { Ok::<(), crate::error::Error>(cmd.query_async(&mut *guard).await?) }).await?;
+        crate::util::maybe_timeout(2_000, async {
+            Ok::<(), crate::error::Error>(cmd.query_async(&mut *guard).await?)
+        })
+        .await?;
         Ok(())
     }
 
@@ -51,8 +61,9 @@ impl KeyValueStore for RedisStore {
         let mut guard = self.conn.lock().await;
         let mut cmd = redis::cmd("DEL");
         cmd.arg(key);
-        let _: i64 = crate::util::maybe_timeout(2_000, async { Ok(cmd.query_async(&mut *guard).await?) }).await?;
+        let _: i64 =
+            crate::util::maybe_timeout(2_000, async { Ok(cmd.query_async(&mut *guard).await?) })
+                .await?;
         Ok(())
     }
 }
-

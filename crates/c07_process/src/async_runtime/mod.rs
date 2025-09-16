@@ -1,17 +1,17 @@
+use crate::error::{ProcessError, ProcessResult};
 use crate::types::{ProcessConfig, ProcessInfo};
-use crate::error::{ProcessResult, ProcessError};
 use std::time::SystemTime;
 
-#[cfg(feature = "async")]
-use tokio::sync::{mpsc, oneshot, RwLock as TokioRwLock, Mutex as TokioMutex};
 #[cfg(feature = "async")]
 use crate::types::ProcessStatus;
 #[cfg(feature = "async")]
 use std::collections::HashMap;
 #[cfg(feature = "async")]
+use std::process::ExitStatus;
+#[cfg(feature = "async")]
 use std::time::Duration;
 #[cfg(feature = "async")]
-use std::process::ExitStatus;
+use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock, mpsc, oneshot};
 
 /// 异步进程管理器
 #[cfg(feature = "async")]
@@ -56,15 +56,15 @@ impl AsyncProcessManager {
         let (command_sender, mut command_receiver) = mpsc::channel(100);
         let processes = Arc::new(TokioRwLock::new(HashMap::new()));
         let next_pid = Arc::new(TokioMutex::new(1000));
-        
+
         // 启动命令处理任务
         let processes_clone = processes.clone();
         let next_pid_clone = next_pid.clone();
-        
+
         tokio::spawn(async move {
             Self::command_handler(command_receiver, processes_clone, next_pid_clone).await;
         });
-        
+
         Self {
             processes,
             next_pid,
@@ -74,94 +74,116 @@ impl AsyncProcessManager {
 
     /// 异步写入标准输入（当前为占位实现）
     pub async fn write_stdin(&self, _pid: u32, _data: &[u8]) -> ProcessResult<()> {
-        Err(ProcessError::InvalidConfig("Async stdio not implemented".to_string()))
+        Err(ProcessError::InvalidConfig(
+            "Async stdio not implemented".to_string(),
+        ))
     }
 
     /// 关闭标准输入（当前为占位实现）
     pub async fn close_stdin(&self, _pid: u32) -> ProcessResult<()> {
-        Err(ProcessError::InvalidConfig("Async stdio not implemented".to_string()))
+        Err(ProcessError::InvalidConfig(
+            "Async stdio not implemented".to_string(),
+        ))
     }
 
     /// 读取标准输出（当前为占位实现）
     pub async fn read_stdout(&self, _pid: u32) -> ProcessResult<Vec<u8>> {
-        Err(ProcessError::InvalidConfig("Async stdio not implemented".to_string()))
+        Err(ProcessError::InvalidConfig(
+            "Async stdio not implemented".to_string(),
+        ))
     }
 
     /// 读取标准错误（当前为占位实现）
     pub async fn read_stderr(&self, _pid: u32) -> ProcessResult<Vec<u8>> {
-        Err(ProcessError::InvalidConfig("Async stdio not implemented".to_string()))
+        Err(ProcessError::InvalidConfig(
+            "Async stdio not implemented".to_string(),
+        ))
     }
 
     /// 带超时等待（当前为占位实现）
-    pub async fn wait_with_timeout(&self, _pid: u32, _timeout: Duration) -> ProcessResult<Option<ExitStatus>> {
-        Err(ProcessError::InvalidConfig("Async wait_with_timeout not implemented".to_string()))
+    pub async fn wait_with_timeout(
+        &self,
+        _pid: u32,
+        _timeout: Duration,
+    ) -> ProcessResult<Option<ExitStatus>> {
+        Err(ProcessError::InvalidConfig(
+            "Async wait_with_timeout not implemented".to_string(),
+        ))
     }
-    
+
     /// 异步启动进程
     pub async fn spawn(&self, config: ProcessConfig) -> ProcessResult<u32> {
         let (response_sender, response_receiver) = oneshot::channel();
-        
+
         let command = AsyncCommand::Spawn {
             config,
             response: response_sender,
         };
-        
-        self.command_sender.send(command).await
+
+        self.command_sender
+            .send(command)
+            .await
             .map_err(|_| ProcessError::StartFailed("Failed to send spawn command".to_string()))?;
-        
-        response_receiver.await
-            .map_err(|_| ProcessError::StartFailed("Failed to receive spawn response".to_string()))?
+
+        response_receiver.await.map_err(|_| {
+            ProcessError::StartFailed("Failed to receive spawn response".to_string())
+        })?
     }
-    
+
     /// 异步终止进程
     pub async fn kill(&self, pid: u32) -> ProcessResult<()> {
         let (response_sender, response_receiver) = oneshot::channel();
-        
+
         let command = AsyncCommand::Kill {
             pid,
             response: response_sender,
         };
-        
-        self.command_sender.send(command).await
-            .map_err(|_| ProcessError::TerminationFailed("Failed to send kill command".to_string()))?;
-        
-        response_receiver.await
-            .map_err(|_| ProcessError::TerminationFailed("Failed to receive kill response".to_string()))?
+
+        self.command_sender.send(command).await.map_err(|_| {
+            ProcessError::TerminationFailed("Failed to send kill command".to_string())
+        })?;
+
+        response_receiver.await.map_err(|_| {
+            ProcessError::TerminationFailed("Failed to receive kill response".to_string())
+        })?
     }
-    
+
     /// 异步获取进程信息
     pub async fn get_info(&self, pid: u32) -> ProcessResult<ProcessInfo> {
         let (response_sender, response_receiver) = oneshot::channel();
-        
+
         let command = AsyncCommand::GetInfo {
             pid,
             response: response_sender,
         };
-        
-        self.command_sender.send(command).await
+
+        self.command_sender
+            .send(command)
+            .await
             .map_err(|_| ProcessError::NotFound(pid))?;
-        
-        response_receiver.await
+
+        response_receiver
+            .await
             .map_err(|_| ProcessError::NotFound(pid))?
     }
-    
+
     /// 异步获取所有进程
     pub async fn list_all(&self) -> Vec<ProcessInfo> {
         let (response_sender, response_receiver) = oneshot::channel();
-        
+
         let command = AsyncCommand::ListAll {
             response: response_sender,
         };
-        
+
         if let Ok(()) = self.command_sender.send(command).await {
             if let Ok(result) = response_receiver.await {
                 return result;
             }
         }
-        
+
         Vec::new()
     }
-    
+
     /// 命令处理器
     async fn command_handler(
         mut receiver: mpsc::Receiver<AsyncCommand>,
@@ -189,7 +211,7 @@ impl AsyncProcessManager {
             }
         }
     }
-    
+
     /// 处理启动进程命令
     async fn handle_spawn(
         config: ProcessConfig,
@@ -200,10 +222,10 @@ impl AsyncProcessManager {
         *next_pid_guard += 1;
         let pid = *next_pid_guard;
         drop(next_pid_guard);
-        
+
         let (status_sender, _status_receiver) = mpsc::channel(10);
         let (output_sender, _output_receiver) = mpsc::channel(100);
-        
+
         let info = ProcessInfo {
             pid,
             name: config.program.clone(),
@@ -214,32 +236,32 @@ impl AsyncProcessManager {
             parent_pid: None,
             children_pids: Vec::new(),
         };
-        
+
         let managed_process = AsyncManagedProcess {
             info: info.clone(),
             status_sender,
             output_sender,
         };
-        
+
         processes.write().await.insert(pid, managed_process);
-        
+
         // 在实际实现中，这里应该启动真正的进程
         // 现在只是模拟
         tokio::spawn(async move {
             // 模拟进程运行
             tokio::time::sleep(Duration::from_millis(100)).await;
         });
-        
+
         Ok(pid)
     }
-    
+
     /// 处理终止进程命令
     async fn handle_kill(
         pid: u32,
         processes: &Arc<TokioRwLock<HashMap<u32, AsyncManagedProcess>>>,
     ) -> ProcessResult<()> {
         let mut processes_guard = processes.write().await;
-        
+
         if let Some(process) = processes_guard.get_mut(&pid) {
             process.info.status = ProcessStatus::Stopped;
             Ok(())
@@ -247,30 +269,28 @@ impl AsyncProcessManager {
             Err(ProcessError::NotFound(pid))
         }
     }
-    
+
     /// 处理获取进程信息命令
     async fn handle_get_info(
         pid: u32,
         processes: &Arc<TokioRwLock<HashMap<u32, AsyncManagedProcess>>>,
     ) -> ProcessResult<ProcessInfo> {
         let processes_guard = processes.read().await;
-        
+
         if let Some(process) = processes_guard.get(&pid) {
             Ok(process.info.clone())
         } else {
             Err(ProcessError::NotFound(pid))
         }
     }
-    
+
     /// 处理列出所有进程命令
     async fn handle_list_all(
         processes: &Arc<TokioRwLock<HashMap<u32, AsyncManagedProcess>>>,
     ) -> Vec<ProcessInfo> {
         let processes_guard = processes.read().await;
-        
-        processes_guard.values()
-            .map(|p| p.info.clone())
-            .collect()
+
+        processes_guard.values().map(|p| p.info.clone()).collect()
     }
 }
 
@@ -290,20 +310,20 @@ impl AsyncProcessPool {
         let manager = AsyncProcessManager::new().await;
         let available_processes = Arc::new(TokioMutex::new(Vec::new()));
         let busy_processes = Arc::new(TokioMutex::new(HashMap::new()));
-        
+
         let pool = Self {
             manager,
             pool_size,
             available_processes,
             busy_processes,
         };
-        
+
         // 预启动进程
         pool.initialize_pool().await?;
-        
+
         Ok(pool)
     }
-    
+
     /// 初始化进程池
     async fn initialize_pool(&self) -> ProcessResult<()> {
         for _ in 0..self.pool_size {
@@ -317,38 +337,43 @@ impl AsyncProcessPool {
                 priority: None,
                 resource_limits: ResourceLimits::default(),
             };
-            
+
             let pid = self.manager.spawn(config).await?;
             self.available_processes.lock().await.push(pid);
         }
-        
+
         Ok(())
     }
-    
+
     /// 异步获取可用进程
     pub async fn get_process(&self) -> ProcessResult<u32> {
         let mut available = self.available_processes.lock().await;
-        
+
         if let Some(pid) = available.pop() {
-            self.busy_processes.lock().await.insert(pid, SystemTime::now());
+            self.busy_processes
+                .lock()
+                .await
+                .insert(pid, SystemTime::now());
             Ok(pid)
         } else {
-            Err(ProcessError::ResourceExhausted("No available processes in pool".to_string()))
+            Err(ProcessError::ResourceExhausted(
+                "No available processes in pool".to_string(),
+            ))
         }
     }
-    
+
     /// 异步释放进程回池
     pub async fn release_process(&self, pid: u32) -> ProcessResult<()> {
         self.busy_processes.lock().await.remove(&pid);
         self.available_processes.lock().await.push(pid);
         Ok(())
     }
-    
+
     /// 异步获取进程池统计
     pub async fn get_stats(&self) -> ProcessPoolStats {
         let available_count = self.available_processes.lock().await.len();
         let busy_count = self.busy_processes.lock().await.len();
-        
+
         ProcessPoolStats {
             total_processes: self.pool_size,
             available_processes: available_count,
@@ -391,24 +416,24 @@ impl AsyncTaskScheduler {
             workers: Arc::new(TokioMutex::new(Vec::new())),
         }
     }
-    
+
     /// 启动调度器
     pub async fn start(&self) {
         let task_queue = self.task_queue.clone();
         let workers = self.workers.clone();
-        
+
         for worker_id in 0..self.worker_count {
             let task_queue_clone = task_queue.clone();
             let workers_clone = workers.clone();
-            
+
             let worker_handle = tokio::spawn(async move {
                 Self::worker_loop(worker_id, task_queue_clone, workers_clone).await;
             });
-            
+
             workers.lock().await.push(worker_handle);
         }
     }
-    
+
     /// 添加任务
     pub async fn add_task(&self, task: AsyncTask) {
         let mut queue = self.task_queue.lock().await;
@@ -416,7 +441,7 @@ impl AsyncTaskScheduler {
         // 按优先级排序
         queue.sort_by_key(|t| std::cmp::Reverse(t.priority));
     }
-    
+
     /// 工作循环
     async fn worker_loop(
         worker_id: usize,
@@ -428,7 +453,7 @@ impl AsyncTaskScheduler {
                 let mut queue = task_queue.lock().await;
                 queue.pop()
             };
-            
+
             if let Some(task) = task {
                 // 处理任务
                 tokio::time::sleep(Duration::from_millis(50)).await; // 模拟任务处理
@@ -449,19 +474,23 @@ impl AsyncProcessManager {
     pub async fn new() -> Self {
         Self
     }
-    
+
     pub async fn spawn(&self, _config: ProcessConfig) -> ProcessResult<u32> {
-        Err(ProcessError::StartFailed("Async feature not enabled".to_string()))
+        Err(ProcessError::StartFailed(
+            "Async feature not enabled".to_string(),
+        ))
     }
-    
+
     pub async fn kill(&self, _pid: u32) -> ProcessResult<()> {
-        Err(ProcessError::TerminationFailed("Async feature not enabled".to_string()))
+        Err(ProcessError::TerminationFailed(
+            "Async feature not enabled".to_string(),
+        ))
     }
-    
+
     pub async fn get_info(&self, _pid: u32) -> ProcessResult<ProcessInfo> {
         Err(ProcessError::NotFound(0))
     }
-    
+
     pub async fn list_all(&self) -> Vec<ProcessInfo> {
         Vec::new()
     }
@@ -473,17 +502,23 @@ pub struct AsyncProcessPool;
 #[cfg(not(feature = "async"))]
 impl AsyncProcessPool {
     pub async fn new(_pool_size: usize) -> ProcessResult<Self> {
-        Err(ProcessError::StartFailed("Async feature not enabled".to_string()))
+        Err(ProcessError::StartFailed(
+            "Async feature not enabled".to_string(),
+        ))
     }
-    
+
     pub async fn get_process(&self) -> ProcessResult<u32> {
-        Err(ProcessError::ResourceExhausted("Async feature not enabled".to_string()))
+        Err(ProcessError::ResourceExhausted(
+            "Async feature not enabled".to_string(),
+        ))
     }
-    
+
     pub async fn release_process(&self, _pid: u32) -> ProcessResult<()> {
-        Err(ProcessError::TerminationFailed("Async feature not enabled".to_string()))
+        Err(ProcessError::TerminationFailed(
+            "Async feature not enabled".to_string(),
+        ))
     }
-    
+
     pub async fn get_stats(&self) -> ProcessPoolStats {
         ProcessPoolStats {
             total_processes: 0,
@@ -506,8 +541,8 @@ impl AsyncTaskScheduler {
     pub fn new(_worker_count: usize) -> Self {
         Self
     }
-    
+
     pub async fn start(&self) {}
-    
+
     pub async fn add_task(&self, _task: AsyncTask) {}
 }

@@ -1,5 +1,5 @@
 //! 回归算法实现
-//! 
+//!
 //! 本模块提供了回归算法的实现，包括线性回归等
 
 use super::*;
@@ -24,7 +24,7 @@ impl LinearRegression {
             is_fitted: false,
         }
     }
-    
+
     /// 获取模型参数
     pub fn parameters(&self) -> Option<(Vec<f64>, f64)> {
         if let (Some(coef), Some(intercept)) = (&self.coefficients, &self.intercept) {
@@ -49,17 +49,17 @@ impl Regression for LinearRegression {
                 actual: targets.len(),
             });
         }
-        
+
         if data.is_empty() {
             return Err(MLError::InvalidInput("数据集不能为空".to_string()));
         }
-        
+
         let n_samples = data.len();
         let n_features = data[0].len();
-        
+
         // 使用最小二乘法求解
         // X^T * X * beta = X^T * y
-        
+
         // 构建设计矩阵 (添加截距项)
         let mut x_matrix = vec![vec![0.0; n_features + 1]; n_samples];
         for (i, sample) in data.iter().enumerate() {
@@ -68,7 +68,7 @@ impl Regression for LinearRegression {
                 x_matrix[i][j + 1] = value;
             }
         }
-        
+
         // 计算 X^T * X
         let mut xtx = vec![vec![0.0; n_features + 1]; n_features + 1];
         for i in 0..=n_features {
@@ -78,7 +78,7 @@ impl Regression for LinearRegression {
                 }
             }
         }
-        
+
         // 计算 X^T * y
         let mut xty = vec![0.0; n_features + 1];
         for i in 0..=n_features {
@@ -86,13 +86,13 @@ impl Regression for LinearRegression {
                 xty[i] += x_matrix[k][i] * targets[k];
             }
         }
-        
+
         // 解线性方程组 (简化版本：使用高斯消元法)
         let mut augmented = xtx;
         for i in 0..=n_features {
             augmented[i].push(xty[i]);
         }
-        
+
         // 高斯消元
         for i in 0..=n_features {
             // 寻找主元
@@ -103,12 +103,12 @@ impl Regression for LinearRegression {
                 }
             }
             augmented.swap(i, max_row);
-            
+
             // 如果主元为0，矩阵奇异
             if augmented[i][i].abs() < 1e-10 {
                 return Err(MLError::TrainingFailed("矩阵奇异，无法求解".to_string()));
             }
-            
+
             // 消元
             for k in i + 1..=n_features {
                 let factor = augmented[k][i] / augmented[i][i];
@@ -117,7 +117,7 @@ impl Regression for LinearRegression {
                 }
             }
         }
-        
+
         // 回代求解
         let mut solution = vec![0.0; n_features + 1];
         for i in (0..=n_features).rev() {
@@ -127,19 +127,19 @@ impl Regression for LinearRegression {
             }
             solution[i] /= augmented[i][i];
         }
-        
+
         self.intercept = Some(solution[0]);
         self.coefficients = Some(solution[1..].to_vec());
         self.is_fitted = true;
-        
+
         Ok(())
     }
-    
+
     fn predict(&self, sample: &DataPoint) -> MLResult<f64> {
         if !self.is_fitted {
             return Err(MLError::ModelNotTrained);
         }
-        
+
         if let (Some(coef), Some(intercept)) = (&self.coefficients, &self.intercept) {
             if sample.len() != coef.len() {
                 return Err(MLError::DimensionMismatch {
@@ -147,12 +147,14 @@ impl Regression for LinearRegression {
                     actual: sample.len(),
                 });
             }
-            
-            let prediction = intercept + sample.iter()
-                .zip(coef.iter())
-                .map(|(x, w)| x * w)
-                .sum::<f64>();
-                
+
+            let prediction = intercept
+                + sample
+                    .iter()
+                    .zip(coef.iter())
+                    .map(|(x, w)| x * w)
+                    .sum::<f64>();
+
             Ok(prediction)
         } else {
             Err(MLError::ModelNotTrained)
@@ -163,39 +165,34 @@ impl Regression for LinearRegression {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_linear_regression() {
         let mut lr = LinearRegression::new();
-        
+
         // 简单的线性关系: y = 2x + 1
-        let data = vec![
-            vec![1.0],
-            vec![2.0],
-            vec![3.0],
-            vec![4.0],
-        ];
+        let data = vec![vec![1.0], vec![2.0], vec![3.0], vec![4.0]];
         let targets = vec![3.0, 5.0, 7.0, 9.0];
-        
+
         let result = lr.train(&data, &targets);
         assert!(result.is_ok());
-        
+
         // 测试预测
         let prediction = lr.predict(&vec![5.0]).unwrap();
         assert!((prediction - 11.0).abs() < 0.1); // 允许一定误差
-        
+
         // 测试参数
         let (coef, intercept) = lr.parameters().unwrap();
         assert!((coef[0] - 2.0).abs() < 0.1);
         assert!((intercept - 1.0).abs() < 0.1);
     }
-    
+
     #[test]
     fn test_mse_calculation() {
         let lr = LinearRegression::new();
         let data = vec![vec![1.0], vec![2.0]];
         let targets = vec![2.0, 4.0];
-        
+
         let mse = lr.mse(&data, &targets);
         // 模型未训练，应该返回错误
         assert!(mse.is_err());

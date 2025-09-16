@@ -1,5 +1,5 @@
+use crate::error::{ProcessError, ProcessResult};
 use crate::types::{ProcessConfig, ProcessInfo, ProcessStatus};
-use crate::error::{ProcessResult, ProcessError};
 use std::collections::{HashMap, VecDeque};
 use std::sync::{Arc, Mutex};
 use std::time::{Duration, SystemTime};
@@ -92,13 +92,13 @@ impl ProcessPool {
             last_scale_check: Arc::new(Mutex::new(SystemTime::now())),
             base_config,
         };
-        
+
         // 初始化进程池
         pool.initialize_pool()?;
-        
+
         Ok(pool)
     }
-    
+
     /// 初始化进程池
     fn initialize_pool(&self) -> ProcessResult<()> {
         for _ in 0..self.config.initial_processes {
@@ -106,19 +106,19 @@ impl ProcessPool {
         }
         Ok(())
     }
-    
+
     /// 生成新的进程ID
     fn generate_process_id(&self) -> u32 {
         let mut next_id = self.next_process_id.lock().unwrap();
         *next_id += 1;
         *next_id
     }
-    
+
     /// 生成新进程
     fn spawn_process(&self) -> ProcessResult<u32> {
         let config = self.base_config.clone();
         let pid = self.generate_process_id();
-        
+
         // 这里应该实际启动进程，简化实现
         let info = ProcessInfo {
             pid,
@@ -130,7 +130,7 @@ impl ProcessPool {
             parent_pid: None,
             children_pids: Vec::new(),
         };
-        
+
         let pooled_process = PooledProcess {
             info,
             created_at: SystemTime::now(),
@@ -139,55 +139,63 @@ impl ProcessPool {
             current_requests: 0,
             health_status: HealthStatus::Healthy,
         };
-        
+
         // 添加到进程池
         self.processes.lock().unwrap().insert(pid, pooled_process);
         self.available_processes.lock().unwrap().push_back(pid);
-        
+
         Ok(pid)
     }
-    
+
     /// 获取可用进程
     pub fn get_process(&self) -> ProcessResult<u32> {
         // 检查是否需要自动扩展
         self.check_auto_scaling()?;
-        
+
         let mut available = self.available_processes.lock().unwrap();
-        
+
         if let Some(pid) = available.pop_front() {
             // 标记进程为忙碌状态
-            self.busy_processes.lock().unwrap().insert(pid, SystemTime::now());
-            
+            self.busy_processes
+                .lock()
+                .unwrap()
+                .insert(pid, SystemTime::now());
+
             // 更新进程使用统计
             if let Some(process) = self.processes.lock().unwrap().get_mut(&pid) {
                 process.current_requests += 1;
                 process.total_requests += 1;
                 process.last_used = SystemTime::now();
             }
-            
+
             Ok(pid)
         } else {
             // 没有可用进程，尝试创建新进程
             if self.can_spawn_more_processes() {
                 let new_pid = self.spawn_process()?;
-                self.busy_processes.lock().unwrap().insert(new_pid, SystemTime::now());
+                self.busy_processes
+                    .lock()
+                    .unwrap()
+                    .insert(new_pid, SystemTime::now());
                 Ok(new_pid)
             } else {
-                Err(ProcessError::ResourceExhausted("No available processes in pool".to_string()))
+                Err(ProcessError::ResourceExhausted(
+                    "No available processes in pool".to_string(),
+                ))
             }
         }
     }
-    
+
     /// 释放进程回池
     pub fn release_process(&self, pid: u32) -> ProcessResult<()> {
         // 从忙碌状态移除
         self.busy_processes.lock().unwrap().remove(&pid);
-        
+
         // 更新进程状态
         if let Some(process) = self.processes.lock().unwrap().get_mut(&pid) {
             process.current_requests = process.current_requests.saturating_sub(1);
         }
-        
+
         // 检查进程是否仍然健康
         if self.is_process_healthy(pid)? {
             // 重新加入可用队列
@@ -196,10 +204,10 @@ impl ProcessPool {
             // 标记为不健康，稍后清理
             self.mark_process_unhealthy(pid)?;
         }
-        
+
         Ok(())
     }
-    
+
     /// 检查进程健康状态
     fn is_process_healthy(&self, pid: u32) -> ProcessResult<bool> {
         // 简化实现，实际应该检查进程是否响应
@@ -210,7 +218,7 @@ impl ProcessPool {
             Err(ProcessError::NotFound(pid))
         }
     }
-    
+
     /// 标记进程为不健康
     fn mark_process_unhealthy(&self, pid: u32) -> ProcessResult<()> {
         if let Some(process) = self.processes.lock().unwrap().get_mut(&pid) {
@@ -218,44 +226,48 @@ impl ProcessPool {
         }
         Ok(())
     }
-    
+
     /// 检查是否可以生成更多进程
     fn can_spawn_more_processes(&self) -> bool {
         let current_count = self.processes.lock().unwrap().len();
         current_count < self.config.max_processes
     }
-    
+
     /// 检查自动扩展
     fn check_auto_scaling(&self) -> ProcessResult<()> {
         if !self.config.auto_scaling.enabled {
             return Ok(());
         }
-        
+
         let mut last_check = self.last_scale_check.lock().unwrap();
         let now = SystemTime::now();
-        
-        if now.duration_since(*last_check).unwrap_or(Duration::ZERO) < self.config.auto_scaling.check_interval {
+
+        if now.duration_since(*last_check).unwrap_or(Duration::ZERO)
+            < self.config.auto_scaling.check_interval
+        {
             return Ok(());
         }
-        
+
         *last_check = now;
-        
+
         // 获取系统资源使用情况
         let cpu_usage = self.get_average_cpu_usage();
         let memory_usage = self.get_average_memory_usage();
-        
+
         // 检查是否需要扩展
-        if cpu_usage > self.config.auto_scaling.cpu_threshold 
-            || memory_usage > self.config.auto_scaling.memory_threshold {
+        if cpu_usage > self.config.auto_scaling.cpu_threshold
+            || memory_usage > self.config.auto_scaling.memory_threshold
+        {
             self.scale_up()?;
-        } else if cpu_usage < self.config.auto_scaling.cpu_threshold * 0.5 
-            && memory_usage < self.config.auto_scaling.memory_threshold * 0.5 {
+        } else if cpu_usage < self.config.auto_scaling.cpu_threshold * 0.5
+            && memory_usage < self.config.auto_scaling.memory_threshold * 0.5
+        {
             self.scale_down()?;
         }
-        
+
         Ok(())
     }
-    
+
     /// 扩展进程池
     fn scale_up(&self) -> ProcessResult<()> {
         let current_count = self.processes.lock().unwrap().len();
@@ -264,7 +276,7 @@ impl ProcessPool {
         }
         Ok(())
     }
-    
+
     /// 收缩进程池
     fn scale_down(&self) -> ProcessResult<()> {
         let current_count = self.processes.lock().unwrap().len();
@@ -274,51 +286,52 @@ impl ProcessPool {
         }
         Ok(())
     }
-    
+
     /// 移除最不活跃的进程
     fn remove_least_active_process(&self) -> ProcessResult<()> {
         let mut processes = self.processes.lock().unwrap();
         let mut available = self.available_processes.lock().unwrap();
-        
-        if let Some((&pid, _)) = processes.iter()
+
+        if let Some((&pid, _)) = processes
+            .iter()
             .filter(|(pid, _)| available.contains(pid))
-            .min_by_key(|(_, process)| process.last_used) {
-            
+            .min_by_key(|(_, process)| process.last_used)
+        {
             processes.remove(&pid);
             available.retain(|&p| p != pid);
         }
-        
+
         Ok(())
     }
-    
+
     /// 获取平均CPU使用率
     fn get_average_cpu_usage(&self) -> f64 {
         let processes = self.processes.lock().unwrap();
         if processes.is_empty() {
             return 0.0;
         }
-        
+
         let total: f64 = processes.values().map(|p| p.info.cpu_usage).sum();
         total / processes.len() as f64
     }
-    
+
     /// 获取平均内存使用率
     fn get_average_memory_usage(&self) -> f64 {
         let processes = self.processes.lock().unwrap();
         if processes.is_empty() {
             return 0.0;
         }
-        
+
         let total: u64 = processes.values().map(|p| p.info.memory_usage).sum();
         (total / processes.len() as u64) as f64
     }
-    
+
     /// 获取进程池统计信息
     pub fn get_stats(&self) -> ProcessPoolStats {
         let processes = self.processes.lock().unwrap();
         let available = self.available_processes.lock().unwrap();
         let busy = self.busy_processes.lock().unwrap();
-        
+
         ProcessPoolStats {
             total_processes: processes.len(),
             available_processes: available.len(),
@@ -330,26 +343,27 @@ impl ProcessPool {
             timestamp: SystemTime::now(),
         }
     }
-    
+
     /// 清理不健康的进程
     pub fn cleanup_unhealthy_processes(&self) -> ProcessResult<usize> {
         let mut removed_count = 0;
         let mut processes = self.processes.lock().unwrap();
         let mut available = self.available_processes.lock().unwrap();
         let mut busy = self.busy_processes.lock().unwrap();
-        
-        let unhealthy_pids: Vec<u32> = processes.iter()
+
+        let unhealthy_pids: Vec<u32> = processes
+            .iter()
             .filter(|(_, process)| process.health_status == HealthStatus::Unhealthy)
             .map(|(&pid, _)| pid)
             .collect();
-        
+
         for pid in unhealthy_pids {
             processes.remove(&pid);
             available.retain(|&p| p != pid);
             busy.remove(&pid);
             removed_count += 1;
         }
-        
+
         Ok(removed_count)
     }
 }

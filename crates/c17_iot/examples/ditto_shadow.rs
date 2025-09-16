@@ -21,8 +21,16 @@ fn main() -> anyhow::Result<()> {
     println!("shadow document:\n{}", payload);
 
     // 计算需要下发的变更
-    let desired_led = shadow.desired.get("led").and_then(|v| v.as_bool()).unwrap_or(false);
-    let reported_led = shadow.reported.get("led").and_then(|v| v.as_bool()).unwrap_or(false);
+    let desired_led = shadow
+        .desired
+        .get("led")
+        .and_then(|v| v.as_bool())
+        .unwrap_or(false);
+    let reported_led = shadow
+        .reported
+        .get("led")
+        .and_then(|v| v.as_bool())
+        .unwrap_or(false);
     if desired_led != reported_led {
         println!("action: set led -> {}", desired_led);
     } else {
@@ -30,5 +38,3 @@ fn main() -> anyhow::Result<()> {
     }
     Ok(())
 }
-
-

@@ -10,5 +10,3 @@ pub enum Reachability {
 pub trait NatTraversal {
     fn detect(&self) -> Reachability;
 }
-
-

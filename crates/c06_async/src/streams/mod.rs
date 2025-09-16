@@ -2,8 +2,8 @@ use std::pin::Pin;
 use std::task::{Context, Poll};
 use std::time::Duration;
 
-use futures::{stream, Stream, StreamExt};
-use tokio::time::{interval, Interval};
+use futures::{Stream, StreamExt, stream};
+use tokio::time::{Interval, interval};
 
 /// 一个简单的基于 `tokio::time::interval` 的自定义 Stream
 pub struct TickStream {
@@ -79,4 +79,3 @@ pub async fn demo_tick_stream(ticks: u64, period: Duration) -> Vec<u64> {
     let s = TickStream::new(ticks, period);
     s.collect::<Vec<_>>().await
 }
-

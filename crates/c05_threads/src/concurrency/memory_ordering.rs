@@ -16,5 +16,3 @@ pub fn relaxed_increment(counter: &AtomicUsize) -> usize {
 pub fn seqcst_increment(counter: &AtomicUsize) -> usize {
     counter.fetch_add(1, Ordering::SeqCst)
 }
-
-

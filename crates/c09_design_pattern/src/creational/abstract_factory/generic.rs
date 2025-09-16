@@ -79,14 +79,14 @@ mod tests {
     fn test_abstract_factory01() {
         test_abstract_factory();
     }
-    
+
     #[test]
     fn test_circle_factory() {
         let factory = CircleFactory;
         let circle = factory.create_shape();
         assert_eq!(circle.radius, 5.0);
     }
-    
+
     #[test]
     fn test_rectangle_factory() {
         let factory = RectangleFactory;

@@ -47,7 +47,10 @@ impl SimpleThreadPool {
             }));
         }
 
-        SimpleThreadPool { workers, sender: Some(sender) }
+        SimpleThreadPool {
+            workers,
+            sender: Some(sender),
+        }
     }
 
     pub fn execute<F>(&self, f: F)
@@ -97,7 +100,7 @@ impl<T> LockFreeStack<T> {
         if current == 0 {
             return None;
         }
-        
+
         self.head.fetch_sub(1, Ordering::Relaxed);
         let mut data = self.data.lock().unwrap();
         data.pop().flatten()
@@ -111,7 +114,7 @@ mod tests {
     #[test]
     fn test_atomic_counter() {
         let counter = AtomicCounter::new();
-        
+
         assert_eq!(counter.increment(), 0);
         assert_eq!(counter.increment(), 1);
         assert_eq!(counter.get(), 2);
@@ -121,14 +124,14 @@ mod tests {
     fn test_simple_thread_pool() {
         let pool = SimpleThreadPool::new(2);
         let counter = Arc::new(AtomicCounter::new());
-        
+
         for _ in 0..10 {
             let counter = Arc::clone(&counter);
             pool.execute(move || {
                 counter.increment();
             });
         }
-        
+
         thread::sleep(std::time::Duration::from_millis(100));
         assert_eq!(counter.get(), 10);
     }
@@ -136,10 +139,10 @@ mod tests {
     #[test]
     fn test_lock_free_stack() {
         let stack = LockFreeStack::new();
-        
+
         stack.push(1);
         stack.push(2);
-        
+
         assert_eq!(stack.pop(), Some(2));
         assert_eq!(stack.pop(), Some(1));
         assert_eq!(stack.pop(), None);

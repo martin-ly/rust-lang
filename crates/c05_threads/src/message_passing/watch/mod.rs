@@ -31,10 +31,19 @@ struct State<T> {
 
 pub fn channel<T>(initial: T) -> (Sender<T>, Receiver<T>) {
     let inner = Arc::new(Inner {
-        state: Mutex::new(State { value: initial, version: 0, closed: false }),
+        state: Mutex::new(State {
+            value: initial,
+            version: 0,
+            closed: false,
+        }),
         cv: Condvar::new(),
     });
-    (Sender { inner: inner.clone() }, Receiver { inner })
+    (
+        Sender {
+            inner: inner.clone(),
+        },
+        Receiver { inner },
+    )
 }
 
 impl<T> Sender<T> {

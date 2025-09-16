@@ -1,8 +1,8 @@
 //! # 国际标准对标模块 / International Standards Benchmarking Module
-//! 
+//!
 //! 本模块对标国际 wiki、著名大学课程以及成熟的开源软件框架，
 //! 确保 c14_workflow 项目符合国际最佳实践和标准。
-//! 
+//!
 //! This module benchmarks against international wikis, renowned university courses,
 //! and mature open-source software frameworks to ensure c14_workflow project
 //! adheres to international best practices and standards.
@@ -23,28 +23,22 @@ pub mod workflow_patterns;
 pub mod performance_benchmarks;
 
 /// 重新导出主要模块 / Re-export main modules
-pub use standards::{
-    WorkflowStandard, InternationalWorkflowStandards
-};
+pub use standards::{InternationalWorkflowStandards, WorkflowStandard};
 
 pub use university_courses::{
-    MITWorkflowCourse, StanfordWorkflowCourse, 
-    UniversityCourseBenchmark, CourseCurriculum
+    CourseCurriculum, MITWorkflowCourse, StanfordWorkflowCourse, UniversityCourseBenchmark,
 };
 
 pub use framework_benchmarking::{
-    TemporalBenchmark, CadenceBenchmark, 
-    FrameworkComparison, BenchmarkResult
+    BenchmarkResult, CadenceBenchmark, FrameworkComparison, TemporalBenchmark,
 };
 
 pub use workflow_patterns::{
-    WorkflowPatternStandard, PatternCompliance,
-    InternationalPatternLibrary
+    InternationalPatternLibrary, PatternCompliance, WorkflowPatternStandard,
 };
 
 pub use performance_benchmarks::{
-    PerformanceBenchmark, BenchmarkSuite,
-    PerformanceMetrics, BenchmarkReport
+    BenchmarkReport, BenchmarkSuite, PerformanceBenchmark, PerformanceMetrics,
 };
 
 /// 国际标准版本信息 / International Standards Version Information
@@ -53,14 +47,25 @@ pub const BENCHMARK_VERSION: &str = "1.89.0";
 
 /// 初始化国际标准模块 / Initialize International Standards Module
 pub fn init() -> Result<(), Box<dyn std::error::Error>> {
-    println!("🌍 初始化国际标准对标模块 / Initializing International Standards Benchmarking Module");
-    println!("📚 标准版本: {} / Standards Version: {}", STANDARDS_VERSION, STANDARDS_VERSION);
-    println!("⚡ 基准版本: {} / Benchmark Version: {}", BENCHMARK_VERSION, BENCHMARK_VERSION);
-    
+    println!(
+        "🌍 初始化国际标准对标模块 / Initializing International Standards Benchmarking Module"
+    );
+    println!(
+        "📚 标准版本: {} / Standards Version: {}",
+        STANDARDS_VERSION, STANDARDS_VERSION
+    );
+    println!(
+        "⚡ 基准版本: {} / Benchmark Version: {}",
+        BENCHMARK_VERSION, BENCHMARK_VERSION
+    );
+
     // 检查标准合规性 / Check standards compliance
     let compliance = check_standards_compliance();
-    println!("✅ 标准合规性: {:?} / Standards Compliance: {:?}", compliance.level, compliance.level);
-    
+    println!(
+        "✅ 标准合规性: {:?} / Standards Compliance: {:?}",
+        compliance.level, compliance.level
+    );
+
     Ok(())
 }
 
@@ -100,7 +105,7 @@ pub enum ComplianceLevel {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_standards_compliance() {
         let compliance = check_standards_compliance();
@@ -108,7 +113,7 @@ mod tests {
         assert!(compliance.compliance_score >= 90.0);
         assert!(!compliance.standards_met.is_empty());
     }
-    
+
     #[test]
     fn test_standards_version() {
         assert_eq!(STANDARDS_VERSION, "2025.1");

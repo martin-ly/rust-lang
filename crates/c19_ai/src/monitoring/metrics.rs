@@ -1,5 +1,5 @@
 //! 监控指标
-//! 
+//!
 //! 提供 AI 系统的监控和指标收集功能
 
 use serde::{Deserialize, Serialize};
@@ -43,7 +43,7 @@ impl MetricsCollector {
             start_time: Instant::now(),
         }
     }
-    
+
     /// 记录指标
     pub fn record(&mut self, name: String, value: f64, labels: HashMap<String, String>) {
         let metric = Metric {
@@ -55,12 +55,12 @@ impl MetricsCollector {
         };
         self.metrics.insert(name, metric);
     }
-    
+
     /// 获取指标
     pub fn get_metric(&self, name: &str) -> Option<&Metric> {
         self.metrics.get(name)
     }
-    
+
     /// 获取所有指标
     pub fn get_all_metrics(&self) -> &HashMap<String, Metric> {
         &self.metrics

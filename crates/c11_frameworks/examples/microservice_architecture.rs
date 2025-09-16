@@ -1,5 +1,5 @@
 //! 微服务架构示例
-//! 
+//!
 //! 展示Rust微服务架构的高级特性，包括：
 //! - 服务发现与注册
 //! - 负载均衡
@@ -9,20 +9,20 @@
 //! - 消息队列集成
 
 use axum::{
+    Router,
     extract::{Path, Query, State},
     http::StatusCode,
     response::Json,
     routing::{get, post},
-    Router,
 };
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
-use tokio::sync::{RwLock, Mutex};
+use tokio::sync::{Mutex, RwLock};
 use tokio::time::timeout;
+use tracing::{error, info, instrument, warn};
 use uuid::Uuid;
-use tracing::{info, warn, error, instrument};
 
 /// 服务注册中心
 #[derive(Debug, Clone)]
@@ -84,9 +84,9 @@ pub struct CircuitBreaker {
 /// 熔断器状态
 #[derive(Debug, Clone, PartialEq)]
 pub enum CircuitState {
-    Closed,    // 正常状态
-    Open,      // 熔断状态
-    HalfOpen,  // 半开状态
+    Closed,   // 正常状态
+    Open,     // 熔断状态
+    HalfOpen, // 半开状态
 }
 
 /// 分布式追踪上下文
@@ -226,7 +226,7 @@ impl ServiceRegistry {
             services: Arc::new(RwLock::new(HashMap::new())),
         }
     }
-    
+
     /// 注册服务实例
     pub async fn register(&self, instance: ServiceInstance) -> Result<(), String> {
         let mut services = self.services.write().await;
@@ -236,7 +236,7 @@ impl ServiceRegistry {
             .push(instance);
         Ok(())
     }
-    
+
     /// 注销服务实例
     pub async fn deregister(&self, service_name: &str, instance_id: &str) -> Result<(), String> {
         let mut services = self.services.write().await;
@@ -248,13 +248,13 @@ impl ServiceRegistry {
         }
         Ok(())
     }
-    
+
     /// 发现服务实例
     pub async fn discover(&self, service_name: &str) -> Result<Vec<ServiceInstance>, String> {
         let services = self.services.read().await;
         Ok(services.get(service_name).cloned().unwrap_or_default())
     }
-    
+
     /// 健康检查
     pub async fn health_check(&self, service_name: &str) -> Result<Vec<ServiceInstance>, String> {
         let mut services = self.services.write().await;
@@ -269,14 +269,14 @@ impl ServiceRegistry {
                 };
                 instance.last_heartbeat = Instant::now();
             }
-            
+
             // 过滤掉不健康的实例
             instances.retain(|instance| instance.status == ServiceStatus::Healthy);
         }
-        
+
         Ok(services.get(service_name).cloned().unwrap_or_default())
     }
-    
+
     /// 检查实例健康状态
     async fn check_instance_health(&self, instance: &ServiceInstance) -> bool {
         // 模拟健康检查逻辑
@@ -295,7 +295,7 @@ impl ServiceDiscovery {
             },
         }
     }
-    
+
     /// 调用远程服务
     #[instrument(skip(self))]
     pub async fn call_service(
@@ -310,18 +310,18 @@ impl ServiceDiscovery {
         if instances.is_empty() {
             return Err(format!("服务 {} 没有可用实例", service_name));
         }
-        
+
         // 负载均衡选择实例
         let instance = self.load_balancer.select_instance(&instances)?;
-        
+
         // 构建请求URL
         let url = format!("http://{}:{}{}", instance.address, instance.port, endpoint);
-        
+
         // 发送HTTP请求
         let start = Instant::now();
         let response = self.send_http_request(&url, method, body).await?;
         let duration = start.elapsed();
-        
+
         Ok(ServiceResponse {
             status_code: response.status_code,
             headers: response.headers,
@@ -329,7 +329,7 @@ impl ServiceDiscovery {
             duration,
         })
     }
-    
+
     /// 发送HTTP请求
     async fn send_http_request(
         &self,
@@ -339,7 +339,7 @@ impl ServiceDiscovery {
     ) -> Result<ServiceResponse, String> {
         // 模拟HTTP请求
         tokio::time::sleep(Duration::from_millis(50)).await;
-        
+
         Ok(ServiceResponse {
             status_code: 200,
             headers: HashMap::new(),
@@ -351,11 +351,14 @@ impl ServiceDiscovery {
 
 impl LoadBalancer {
     /// 选择服务实例
-    pub fn select_instance(&self, instances: &[ServiceInstance]) -> Result<ServiceInstance, String> {
+    pub fn select_instance(
+        &self,
+        instances: &[ServiceInstance],
+    ) -> Result<ServiceInstance, String> {
         if instances.is_empty() {
             return Err("没有可用的服务实例".to_string());
         }
-        
+
         match self.strategy {
             LoadBalanceStrategy::RoundRobin => {
                 // 简化实现，随机选择
@@ -387,14 +390,14 @@ impl CircuitBreaker {
             state: Arc::new(Mutex::new(CircuitState::Closed)),
         }
     }
-    
+
     /// 执行操作
     pub async fn execute<F, T>(&self, operation: F) -> Result<T, String>
     where
         F: std::future::Future<Output = Result<T, String>>,
     {
         let state = self.state.lock().await;
-        
+
         match *state {
             CircuitState::Open => {
                 return Err("熔断器开启，拒绝请求".to_string());
@@ -448,23 +451,26 @@ impl ConfigCenter {
             configs: Arc::new(RwLock::new(HashMap::new())),
         }
     }
-    
+
     /// 获取配置
     pub async fn get_config(&self, key: &str) -> Option<serde_json::Value> {
         let configs = self.configs.read().await;
         configs.get(key).cloned()
     }
-    
+
     /// 设置配置
     pub async fn set_config(&self, key: String, value: serde_json::Value) {
         let mut configs = self.configs.write().await;
         configs.insert(key, value);
     }
-    
+
     /// 监听配置变化
-    pub async fn watch_config(&self, key: &str) -> tokio::sync::watch::Receiver<Option<serde_json::Value>> {
+    pub async fn watch_config(
+        &self,
+        key: &str,
+    ) -> tokio::sync::watch::Receiver<Option<serde_json::Value>> {
         let (tx, rx) = tokio::sync::watch::channel(self.get_config(key).await);
-        
+
         // 简化实现，在实际应用中会监听配置变化事件
         tokio::spawn({
             let configs = self.configs.clone();
@@ -480,7 +486,7 @@ impl ConfigCenter {
                 }
             }
         });
-        
+
         rx
     }
 }
@@ -492,23 +498,34 @@ impl MessageQueue {
             consumers: Arc::new(RwLock::new(HashMap::new())),
         }
     }
-    
+
     /// 创建生产者
     pub async fn create_producer(&self, topic: String, config: ProducerConfig) {
-        let producer = MessageProducer { topic: topic.clone(), config };
+        let producer = MessageProducer {
+            topic: topic.clone(),
+            config,
+        };
         let mut producers = self.producers.write().await;
         producers.insert(topic, producer);
     }
-    
+
     /// 创建消费者
     pub async fn create_consumer(&self, topic: String, group_id: String, config: ConsumerConfig) {
-        let consumer = MessageConsumer { topic: topic.clone(), group_id, config };
+        let consumer = MessageConsumer {
+            topic: topic.clone(),
+            group_id,
+            config,
+        };
         let mut consumers = self.consumers.write().await;
         consumers.insert(topic, consumer);
     }
-    
+
     /// 发送消息
-    pub async fn send_message(&self, topic: &str, message: serde_json::Value) -> Result<(), String> {
+    pub async fn send_message(
+        &self,
+        topic: &str,
+        message: serde_json::Value,
+    ) -> Result<(), String> {
         let producers = self.producers.read().await;
         if let Some(_producer) = producers.get(topic) {
             // 模拟发送消息
@@ -518,7 +535,7 @@ impl MessageQueue {
             Err(format!("主题 {} 没有生产者", topic))
         }
     }
-    
+
     /// 消费消息
     pub async fn consume_message(&self, topic: &str) -> Result<Option<serde_json::Value>, String> {
         let consumers = self.consumers.read().await;
@@ -547,7 +564,7 @@ impl UserService {
             message_queue,
         }
     }
-    
+
     /// 获取用户信息
     pub async fn get_user(&self, user_id: &str) -> Result<User, String> {
         // 模拟从数据库获取用户
@@ -558,7 +575,7 @@ impl UserService {
             created_at: chrono::Utc::now(),
         })
     }
-    
+
     /// 创建用户
     pub async fn create_user(&self, name: String, email: String) -> Result<User, String> {
         let user = User {
@@ -567,12 +584,12 @@ impl UserService {
             email,
             created_at: chrono::Utc::now(),
         };
-        
+
         // 发送用户创建事件
         self.message_queue
             .send_message("user.created", serde_json::to_value(&user).unwrap())
             .await?;
-        
+
         Ok(user)
     }
 }
@@ -593,20 +610,28 @@ impl OrderService {
             message_queue,
         }
     }
-    
+
     /// 创建订单
-    pub async fn create_order(&self, user_id: String, items: Vec<OrderItem>) -> Result<Order, String> {
+    pub async fn create_order(
+        &self,
+        user_id: String,
+        items: Vec<OrderItem>,
+    ) -> Result<Order, String> {
         // 验证用户是否存在
-        let user_response = self.discovery
+        let user_response = self
+            .discovery
             .call_service("user-service", &format!("/users/{}", user_id), "GET", None)
             .await?;
-        
+
         if user_response.status_code != 200 {
             return Err("用户不存在".to_string());
         }
-        
-        let total_amount = items.iter().map(|item| item.price * item.quantity as f64).sum();
-        
+
+        let total_amount = items
+            .iter()
+            .map(|item| item.price * item.quantity as f64)
+            .sum();
+
         let order = Order {
             id: Uuid::new_v4().to_string(),
             user_id,
@@ -615,28 +640,35 @@ impl OrderService {
             status: OrderStatus::Pending,
             created_at: chrono::Utc::now(),
         };
-        
+
         // 发送订单创建事件
         self.message_queue
             .send_message("order.created", serde_json::to_value(&order).unwrap())
             .await?;
-        
+
         Ok(order)
     }
-    
+
     /// 更新订单状态
-    pub async fn update_order_status(&self, order_id: String, status: OrderStatus) -> Result<(), String> {
+    pub async fn update_order_status(
+        &self,
+        order_id: String,
+        status: OrderStatus,
+    ) -> Result<(), String> {
         // 模拟更新订单状态
         info!("更新订单 {} 状态为 {:?}", order_id, status);
-        
+
         // 发送订单状态更新事件
         self.message_queue
-            .send_message("order.status.updated", serde_json::json!({
-                "order_id": order_id,
-                "status": status
-            }))
+            .send_message(
+                "order.status.updated",
+                serde_json::json!({
+                    "order_id": order_id,
+                    "status": status
+                }),
+            )
             .await?;
-        
+
         Ok(())
     }
 }
@@ -658,24 +690,45 @@ async fn create_microservice_app() -> MicroserviceApp {
     let circuit_breaker = CircuitBreaker::new(5, Duration::from_secs(10));
     let config_center = ConfigCenter::new();
     let message_queue = MessageQueue::new();
-    
+
     // 初始化配置
-    config_center.set_config("database.url".to_string(), serde_json::json!("postgresql://localhost/microservice")).await;
-    config_center.set_config("redis.url".to_string(), serde_json::json!("redis://localhost:6379")).await;
-    
+    config_center
+        .set_config(
+            "database.url".to_string(),
+            serde_json::json!("postgresql://localhost/microservice"),
+        )
+        .await;
+    config_center
+        .set_config(
+            "redis.url".to_string(),
+            serde_json::json!("redis://localhost:6379"),
+        )
+        .await;
+
     // 创建消息队列生产者和消费者
-    message_queue.create_producer("user.created".to_string(), ProducerConfig {
-        batch_size: 100,
-        timeout: Duration::from_secs(5),
-        retry_count: 3,
-    }).await;
-    
-    message_queue.create_consumer("order.created".to_string(), "order-service".to_string(), ConsumerConfig {
-        auto_commit: true,
-        max_poll_records: 100,
-        session_timeout: Duration::from_secs(30),
-    }).await;
-    
+    message_queue
+        .create_producer(
+            "user.created".to_string(),
+            ProducerConfig {
+                batch_size: 100,
+                timeout: Duration::from_secs(5),
+                retry_count: 3,
+            },
+        )
+        .await;
+
+    message_queue
+        .create_consumer(
+            "order.created".to_string(),
+            "order-service".to_string(),
+            ConsumerConfig {
+                auto_commit: true,
+                max_poll_records: 100,
+                session_timeout: Duration::from_secs(30),
+            },
+        )
+        .await;
+
     let user_service = UserService::new(
         "user-service-1".to_string(),
         discovery.clone(),
@@ -683,7 +736,7 @@ async fn create_microservice_app() -> MicroserviceApp {
         config_center.clone(),
         message_queue.clone(),
     );
-    
+
     let order_service = OrderService::new(
         "order-service-1".to_string(),
         discovery,
@@ -691,7 +744,7 @@ async fn create_microservice_app() -> MicroserviceApp {
         config_center.clone(),
         message_queue.clone(),
     );
-    
+
     MicroserviceApp {
         registry,
         user_service,
@@ -735,7 +788,7 @@ async fn create_user_handler(
 ) -> Result<Json<User>, (StatusCode, String)> {
     let name = payload["name"].as_str().unwrap_or("").to_string();
     let email = payload["email"].as_str().unwrap_or("").to_string();
-    
+
     match app.user_service.create_user(name, email).await {
         Ok(user) => Ok(Json(user)),
         Err(e) => Err((StatusCode::INTERNAL_SERVER_ERROR, e)),
@@ -749,8 +802,9 @@ async fn create_order_handler(
 ) -> Result<Json<Order>, (StatusCode, String)> {
     let user_id = payload["user_id"].as_str().unwrap_or("").to_string();
     let items = payload["items"].as_array().unwrap_or(&vec![]);
-    
-    let order_items: Vec<OrderItem> = items.iter()
+
+    let order_items: Vec<OrderItem> = items
+        .iter()
         .filter_map(|item| {
             Some(OrderItem {
                 product_id: item["product_id"].as_str()?.to_string(),
@@ -759,7 +813,7 @@ async fn create_order_handler(
             })
         })
         .collect();
-    
+
     match app.order_service.create_order(user_id, order_items).await {
         Ok(order) => Ok(Json(order)),
         Err(e) => Err((StatusCode::INTERNAL_SERVER_ERROR, e)),
@@ -781,8 +835,12 @@ async fn update_order_status_handler(
         "Cancelled" => OrderStatus::Cancelled,
         _ => return Err((StatusCode::BAD_REQUEST, "无效的订单状态".to_string())),
     };
-    
-    match app.order_service.update_order_status(order_id, status).await {
+
+    match app
+        .order_service
+        .update_order_status(order_id, status)
+        .await
+    {
         Ok(_) => Ok(StatusCode::OK),
         Err(e) => Err((StatusCode::INTERNAL_SERVER_ERROR, e)),
     }
@@ -794,10 +852,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     tracing_subscriber::fmt()
         .with_env_filter(tracing_subscriber::EnvFilter::from_default_env())
         .init();
-    
+
     // 创建微服务应用
     let app = create_microservice_app().await;
-    
+
     // 注册服务实例
     let user_service_instance = ServiceInstance {
         id: "user-service-1".to_string(),
@@ -809,7 +867,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         last_heartbeat: Instant::now(),
         status: ServiceStatus::Healthy,
     };
-    
+
     let order_service_instance = ServiceInstance {
         id: "order-service-1".to_string(),
         name: "order-service".to_string(),
@@ -820,39 +878,39 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         last_heartbeat: Instant::now(),
         status: ServiceStatus::Healthy,
     };
-    
+
     app.registry.register(user_service_instance).await?;
     app.registry.register(order_service_instance).await?;
-    
+
     // 创建路由
     let user_router = user_routes(app.clone()).await;
     let order_router = order_routes(app.clone()).await;
-    
+
     // 启动用户服务
     let user_listener = tokio::net::TcpListener::bind("127.0.0.1:3001").await?;
     info!("用户服务启动在 http://127.0.0.1:3001");
-    
+
     tokio::spawn(async move {
         axum::serve(user_listener, user_router).await.unwrap();
     });
-    
+
     // 启动订单服务
     let order_listener = tokio::net::TcpListener::bind("127.0.0.1:3002").await?;
     info!("订单服务启动在 http://127.0.0.1:3002");
-    
+
     axum::serve(order_listener, order_router).await?;
-    
+
     Ok(())
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[tokio::test]
     async fn test_service_registry() {
         let registry = ServiceRegistry::new();
-        
+
         let instance = ServiceInstance {
             id: "test-1".to_string(),
             name: "test-service".to_string(),
@@ -863,48 +921,59 @@ mod tests {
             last_heartbeat: Instant::now(),
             status: ServiceStatus::Healthy,
         };
-        
+
         registry.register(instance).await.unwrap();
-        
+
         let instances = registry.discover("test-service").await.unwrap();
         assert_eq!(instances.len(), 1);
         assert_eq!(instances[0].id, "test-1");
     }
-    
+
     #[tokio::test]
     async fn test_circuit_breaker() {
         let circuit_breaker = CircuitBreaker::new(3, Duration::from_millis(100));
-        
+
         // 测试成功操作
         let result = circuit_breaker.execute(async { Ok("success") }).await;
         assert_eq!(result, Ok("success"));
-        
+
         // 测试失败操作
-        let result = circuit_breaker.execute(async { Err("failure".to_string()) }).await;
+        let result = circuit_breaker
+            .execute(async { Err("failure".to_string()) })
+            .await;
         assert!(result.is_err());
     }
-    
+
     #[tokio::test]
     async fn test_config_center() {
         let config_center = ConfigCenter::new();
-        
-        config_center.set_config("test.key".to_string(), serde_json::json!("test.value")).await;
-        
+
+        config_center
+            .set_config("test.key".to_string(), serde_json::json!("test.value"))
+            .await;
+
         let value = config_center.get_config("test.key").await;
         assert_eq!(value, Some(serde_json::json!("test.value")));
     }
-    
+
     #[tokio::test]
     async fn test_message_queue() {
         let message_queue = MessageQueue::new();
-        
-        message_queue.create_producer("test-topic".to_string(), ProducerConfig {
-            batch_size: 10,
-            timeout: Duration::from_secs(5),
-            retry_count: 3,
-        }).await;
-        
-        let result = message_queue.send_message("test-topic", serde_json::json!("test message")).await;
+
+        message_queue
+            .create_producer(
+                "test-topic".to_string(),
+                ProducerConfig {
+                    batch_size: 10,
+                    timeout: Duration::from_secs(5),
+                    retry_count: 3,
+                },
+            )
+            .await;
+
+        let result = message_queue
+            .send_message("test-topic", serde_json::json!("test message"))
+            .await;
         assert!(result.is_ok());
     }
 }

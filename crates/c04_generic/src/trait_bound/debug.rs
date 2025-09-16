@@ -93,7 +93,7 @@ fn main() {
         name: String::from("Alice"),
         age: 30,
     };
-    
+
     println!("Debug: {:?}", person);
     println!("Pretty debug: {:#?}", person);
 }
@@ -116,14 +116,14 @@ fn process_data(data: &[i32]) -> Result<(), String> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_person_debug() {
         let person = Person {
             name: String::from("Bob"),
             age: 25,
         };
-        
+
         let debug_str = format!("{:?}", person);
         assert!(debug_str.contains("Bob"));
         assert!(debug_str.contains("25"));
@@ -246,30 +246,30 @@ pub fn demonstrate_debug() {
         value: 42,
         active: true,
     };
-    
+
     println!("Basic debug: {:?}", example);
     println!("Pretty debug: {:#?}", example);
-    
+
     // 手动实现的调试
     let manual = ManualDebugExample {
         data: vec![1, 2, 3, 4, 5],
         metadata: String::from("Sample data"),
     };
-    
+
     println!("Manual debug: {:?}", manual);
-    
+
     // 泛型容器调试
     let container = DebugContainer {
         value: vec![10, 20, 30],
         description: String::from("Number container"),
     };
-    
+
     println!("Container debug: {:?}", container);
-    
+
     // 枚举调试
     let status = DebugStatus::Working { progress: 0.75 };
     println!("Status debug: {:?}", status);
-    
+
     let error_status = DebugStatus::Error {
         message: String::from("Something went wrong"),
     };
@@ -280,7 +280,7 @@ pub fn demonstrate_debug() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_debug_example() {
         let example = DebugExample {
@@ -288,20 +288,20 @@ mod tests {
             value: 100,
             active: false,
         };
-        
+
         let debug_str = format!("{:?}", example);
         assert!(debug_str.contains("Test"));
         assert!(debug_str.contains("100"));
         assert!(debug_str.contains("false"));
     }
-    
+
     #[test]
     fn test_manual_debug() {
         let manual = ManualDebugExample {
             data: vec![1, 2, 3],
             metadata: String::from("Test metadata"),
         };
-        
+
         let debug_str = format!("{:?}", manual);
         assert!(debug_str.contains("ManualDebugExample"));
         assert!(debug_str.contains("length"));

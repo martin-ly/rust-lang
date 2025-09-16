@@ -1,8 +1,8 @@
 //! # Rust 1.89 特性模块 / Rust 1.89 Features Module
-//! 
+//!
 //! 本模块实现了 Rust 1.89 版本的新特性和改进，包括生命周期语法检查改进、
 //! 常量泛型推断、跨平台文档测试、FFI 改进和 API 稳定化。
-//! 
+//!
 //! This module implements new features and improvements in Rust 1.89, including
 //! lifetime syntax checking improvements, const generic inference, cross-platform
 //! documentation tests, FFI improvements, and API stabilization.
@@ -46,52 +46,68 @@ pub mod error_handling;
 /// 宏系统改进 / Macro System Improvements
 pub mod macros;
 
+pub mod features;
 /// 模块系统改进 / Module System Improvements
 pub mod modules;
-pub mod features;
 
 /// 重新导出主要特性 / Re-export main features
 // 生命周期特性 / Lifetime features
 pub use lifetime::LifetimeChecker;
 
 // 常量泛型特性 / Const generics features
-pub use const_generics::{ConstGenericArray, ConstGenericInferencer, ConstArray, ConstMatrix, ConstPlaceholder};
+pub use const_generics::{
+    ConstArray, ConstGenericArray, ConstGenericInferencer, ConstMatrix, ConstPlaceholder,
+};
 
 // 文档测试特性 / Documentation test features
-pub use doc_tests::{CrossPlatformDocTestRunner, DocTestGenerator, DocTestConfig, PlatformTestResult};
+pub use doc_tests::{
+    CrossPlatformDocTestRunner, DocTestConfig, DocTestGenerator, PlatformTestResult,
+};
 
 // FFI 特性 / FFI features
-pub use ffi::{FFIBindingGenerator, FFISafeWrapper, FFIConverter, FFI128Bit as FFI128BitFromFFI};
+pub use ffi::{FFI128Bit as FFI128BitFromFFI, FFIBindingGenerator, FFIConverter, FFISafeWrapper};
 
 // 稳定化 API / Stable APIs
 pub use stable_apis::StableResult;
 
 // 异步特性 / Async features
-pub use async_features::{AsyncWorkflowExecutor, AsyncWorkflowBuilder, AsyncStreamProcessor, TaskPriority, TaskResult, WorkflowResult as AsyncWorkflowResult};
+pub use async_features::{
+    AsyncStreamProcessor, AsyncWorkflowBuilder, AsyncWorkflowExecutor, TaskPriority, TaskResult,
+    WorkflowResult as AsyncWorkflowResult,
+};
 
 // 并发特性 / Concurrency features
-pub use concurrency::{ConcurrentWorkflowExecutor, ConcurrentTaskPool, ConcurrentBarrier, WorkflowResult as ConcurrentWorkflowResult};
+pub use concurrency::{
+    ConcurrentBarrier, ConcurrentTaskPool, ConcurrentWorkflowExecutor,
+    WorkflowResult as ConcurrentWorkflowResult,
+};
 
 // 类型系统特性 / Type system features
-pub use type_system::{TypeSystemChecker, TypeInferencer, TypeSafeWrapper, TypeConverter};
+pub use type_system::{TypeConverter, TypeInferencer, TypeSafeWrapper, TypeSystemChecker};
 
 // 编译器特性 / Compiler features
-pub use compiler::{CompilerConfig, CompilationCache, ErrorReporter, CompilationPerformanceMonitor};
+pub use compiler::{
+    CompilationCache, CompilationPerformanceMonitor, CompilerConfig, ErrorReporter,
+};
 
 // 性能特性 / Performance features
-pub use performance::{PerformanceOptimizer, PerformanceProfiler, PerformanceTimer, PerformanceStatistics};
+pub use performance::{
+    PerformanceOptimizer, PerformanceProfiler, PerformanceStatistics, PerformanceTimer,
+};
 
 // 错误处理特性 / Error handling features
 pub use error_handling::{ErrorHandler, ErrorRecoverer, ImprovedError};
 
 // 宏特性 / Macro features
-pub use macros::{MacroExpander, MacroDebugger, MacroTestFramework};
+pub use macros::{MacroDebugger, MacroExpander, MacroTestFramework};
 
 // 模块特性 / Module features
 pub use modules::{ModuleManager, ModuleResolver, ModuleVisibility};
 
 // 核心特性 / Core features
-pub use features::{LifetimeAware, CrossPlatformTest, StabilizedAPI, WorkflowRust189Features, FFI128Bit};
+pub use features::{
+    CrossPlatformTest, FFI128Bit, LifetimeAware, StabilizedAPI, WorkflowRust189Features,
+};
 
 /// Rust 1.89 版本信息 / Rust 1.89 Version Information
 pub const RUST_VERSION: &str = "1.89.0";
@@ -167,7 +183,7 @@ impl FeatureSupport {
             && self.macro_improvements
             && self.module_improvements
     }
-    
+
     /// 获取支持的特性数量 / Get number of supported features
     pub fn supported_count(&self) -> usize {
         [
@@ -195,28 +211,28 @@ impl FeatureSupport {
 /// 初始化 Rust 1.89 特性模块 / Initialize Rust 1.89 Features Module
 pub fn init() -> Result<(), Box<dyn std::error::Error>> {
     let support = check_feature_support();
-    
+
     if support.all_supported() {
         println!("✅ 所有 Rust 1.89 特性都已支持 / All Rust 1.89 features are supported");
     } else {
         println!("⚠️  部分 Rust 1.89 特性未支持 / Some Rust 1.89 features are not supported");
         println!("支持的特性数量: {}/14", support.supported_count());
     }
-    
+
     Ok(())
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_feature_support_check() {
         let support = check_feature_support();
         assert!(support.all_supported());
         assert_eq!(support.supported_count(), 14);
     }
-    
+
     #[test]
     fn test_rust_version() {
         assert_eq!(RUST_VERSION, "1.89.0");

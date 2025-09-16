@@ -34,7 +34,9 @@ pub fn read_heavy_demo(readers: usize, writers: usize, iters: usize) -> usize {
     }
 
     let mut total_reads = 0usize;
-    for h in handles { total_reads += h.join().unwrap(); }
+    for h in handles {
+        total_reads += h.join().unwrap();
+    }
     total_reads
 }
 

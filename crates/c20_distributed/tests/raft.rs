@@ -7,7 +7,9 @@ mod raft_smoke {
         let _s = RaftState::Follower;
         let _t = Term(1);
         let _i = LogIndex(0);
-        let _ = AppendEntriesResp { term: _t, success: true };
+        let _ = AppendEntriesResp {
+            term: _t,
+            success: true,
+        };
     }
 }
-

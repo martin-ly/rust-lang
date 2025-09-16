@@ -1,11 +1,11 @@
 //! 强化学习算法
-//! 
+//!
 //! 包含各种强化学习算法的实现
 
-use serde::{Deserialize, Serialize};
-use ndarray::{Array1, Array2, Array3};
 use anyhow::Result;
+use ndarray::{Array1, Array2, Array3};
 use rand::Rng;
+use serde::{Deserialize, Serialize};
 
 /// 强化学习算法类型
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -103,16 +103,16 @@ pub struct NeuralNetwork {
 pub trait RLEnvironment {
     /// 重置环境
     fn reset(&mut self) -> Array1<f32>;
-    
+
     /// 执行动作
     fn step(&mut self, action: &Array1<f32>) -> (Array1<f32>, f32, bool, serde_json::Value);
-    
+
     /// 获取状态空间大小
     fn state_space_size(&self) -> usize;
-    
+
     /// 获取动作空间大小
     fn action_space_size(&self) -> usize;
-    
+
     /// 渲染环境
     fn render(&self) -> Option<Array3<f32>>;
 }
@@ -175,9 +175,16 @@ impl ReplayBuffer {
             size: 0,
         }
     }
-    
+
     /// 添加经验
-    pub fn add(&mut self, state: Array1<f32>, action: Array1<f32>, reward: f32, next_state: Array1<f32>, done: bool) {
+    pub fn add(
+        &mut self,
+        state: Array1<f32>,
+        action: Array1<f32>,
+        reward: f32,
+        next_state: Array1<f32>,
+        done: bool,
+    ) {
         if self.size < self.capacity {
             self.states.push(state);
             self.actions.push(action);
@@ -194,17 +201,20 @@ impl ReplayBuffer {
         }
         self.position = (self.position + 1) % self.capacity;
     }
-    
+
     /// 采样批次
-    pub fn sample(&self, batch_size: usize) -> Result<Vec<(Array1<f32>, Array1<f32>, f32, Array1<f32>, bool)>> {
+    pub fn sample(
+        &self,
+        batch_size: usize,
+    ) -> Result<Vec<(Array1<f32>, Array1<f32>, f32, Array1<f32>, bool)>> {
         if self.size < batch_size {
             return Err(anyhow::anyhow!("缓冲区大小不足"));
         }
-        
+
         let mut batch = Vec::new();
         use rand::{Rng, rngs::ThreadRng};
         let mut rng = ThreadRng::default();
-        
+
         for _ in 0..batch_size {
             let idx = rng.random_range(0..self.size);
             batch.push((
@@ -215,10 +225,10 @@ impl ReplayBuffer {
                 self.dones[idx],
             ));
         }
-        
+
         Ok(batch)
     }
-    
+
     /// 获取缓冲区大小
     pub fn size(&self) -> usize {
         self.size
@@ -229,7 +239,7 @@ impl RLAgent {
     /// 创建新的强化学习智能体
     pub fn new(config: RLConfig) -> Self {
         let replay_buffer = ReplayBuffer::new(config.buffer_size);
-        
+
         Self {
             config,
             q_network: None,
@@ -239,7 +249,7 @@ impl RLAgent {
             training_steps: 0,
         }
     }
-    
+
     /// 选择动作
     pub fn select_action(&self, state: &Array1<f32>, training: bool) -> Array1<f32> {
         if training && rand::random::<f32>() < self.config.epsilon {
@@ -250,22 +260,25 @@ impl RLAgent {
             self.get_action(state)
         }
     }
-    
+
     /// 获取动作
     fn get_action(&self, state: &Array1<f32>) -> Array1<f32> {
         // 这里应该使用神经网络进行前向传播
         // 目前只是返回随机动作作为占位符
         Array1::from_vec(vec![rand::random::<f32>(), rand::random::<f32>()])
     }
-    
+
     /// 训练智能体
-    pub fn train(&mut self, batch: &[(Array1<f32>, Array1<f32>, f32, Array1<f32>, bool)]) -> Result<f32> {
+    pub fn train(
+        &mut self,
+        batch: &[(Array1<f32>, Array1<f32>, f32, Array1<f32>, bool)],
+    ) -> Result<f32> {
         // 这里应该实现具体的训练逻辑
         // 目前只是返回一个占位符损失值
         self.training_steps += 1;
         Ok(0.1)
     }
-    
+
     /// 更新目标网络
     pub fn update_target_network(&mut self) {
         if self.training_steps % self.config.target_update_freq == 0 {
@@ -273,7 +286,7 @@ impl RLAgent {
             tracing::info!("更新目标网络");
         }
     }
-    
+
     /// 衰减探索率
     pub fn decay_epsilon(&mut self) {
         if self.config.epsilon > self.config.epsilon_min {
@@ -284,28 +297,32 @@ impl RLAgent {
 
 impl RLTrainer {
     /// 创建新的训练器
-    pub fn new(agent: RLAgent, environment: Box<dyn RLEnvironment>, training_config: TrainingConfig) -> Self {
+    pub fn new(
+        agent: RLAgent,
+        environment: Box<dyn RLEnvironment>,
+        training_config: TrainingConfig,
+    ) -> Self {
         Self {
             agent,
             environment,
             training_config,
         }
     }
-    
+
     /// 开始训练
     pub fn train(&mut self) -> Result<TrainingResult> {
         let start_time = std::time::Instant::now();
         let mut episode_rewards = Vec::new();
-        
+
         for episode in 0..self.training_config.max_episodes {
             let mut state = self.environment.reset();
             let mut episode_reward = 0.0;
             let mut steps = 0;
-            
+
             loop {
                 let action = self.agent.select_action(&state, true);
                 let (next_state, reward, done, _) = self.environment.step(&action);
-                
+
                 // 添加到经验回放缓冲区
                 self.agent.replay_buffer.add(
                     state.clone(),
@@ -314,39 +331,45 @@ impl RLTrainer {
                     next_state.clone(),
                     done,
                 );
-                
+
                 episode_reward += reward;
                 state = next_state;
                 steps += 1;
-                
+
                 // 训练智能体
                 if self.agent.replay_buffer.size() >= self.agent.config.batch_size {
-                    if let Ok(batch) = self.agent.replay_buffer.sample(self.agent.config.batch_size) {
+                    if let Ok(batch) = self
+                        .agent
+                        .replay_buffer
+                        .sample(self.agent.config.batch_size)
+                    {
                         let _loss = self.agent.train(&batch)?;
                     }
                 }
-                
+
                 if done || steps >= self.training_config.max_steps {
                     break;
                 }
             }
-            
+
             episode_rewards.push(episode_reward);
             self.agent.decay_epsilon();
             self.agent.update_target_network();
-            
+
             // 记录日志
             if episode % self.training_config.log_frequency == 0 {
-                let avg_reward: f32 = episode_rewards.iter().sum::<f32>() / episode_rewards.len() as f32;
+                let avg_reward: f32 =
+                    episode_rewards.iter().sum::<f32>() / episode_rewards.len() as f32;
                 tracing::info!("Episode {}: 平均奖励 = {:.2}", episode, avg_reward);
             }
         }
-        
+
         let training_time = start_time.elapsed().as_secs_f64();
-        let average_reward: f32 = episode_rewards.iter().sum::<f32>() / episode_rewards.len() as f32;
+        let average_reward: f32 =
+            episode_rewards.iter().sum::<f32>() / episode_rewards.len() as f32;
         let max_reward = episode_rewards.iter().fold(0.0, |a, &b| a.max(b));
         let min_reward = episode_rewards.iter().fold(f32::INFINITY, |a, &b| a.min(b));
-        
+
         Ok(TrainingResult {
             episodes: self.training_config.max_episodes,
             average_reward,
@@ -391,27 +414,27 @@ impl Default for TrainingConfig {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_replay_buffer() {
         let mut buffer = ReplayBuffer::new(100);
-        
+
         let state = Array1::from_vec(vec![1.0, 2.0, 3.0]);
         let action = Array1::from_vec(vec![0.5, 0.5]);
         let reward = 1.0;
         let next_state = Array1::from_vec(vec![2.0, 3.0, 4.0]);
         let done = false;
-        
+
         buffer.add(state, action, reward, next_state, done);
-        
+
         assert_eq!(buffer.size(), 1);
     }
-    
+
     #[test]
     fn test_rl_agent_creation() {
         let config = RLConfig::default();
         let agent = RLAgent::new(config);
-        
+
         assert_eq!(agent.training_steps, 0);
     }
 }

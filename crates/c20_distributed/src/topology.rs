@@ -22,7 +22,12 @@ pub struct ConsistentHashRing {
 }
 
 impl ConsistentHashRing {
-    pub fn new(replicas: u32) -> Self { Self { ring: BTreeMap::new(), replicas } }
+    pub fn new(replicas: u32) -> Self {
+        Self {
+            ring: BTreeMap::new(),
+            replicas,
+        }
+    }
 
     pub fn add_node(&mut self, node: &str) {
         for r in 0..self.replicas {
@@ -39,20 +44,31 @@ impl ConsistentHashRing {
             (node, r).hash(&mut h);
             keys.push(h.finish());
         }
-        for k in keys { self.ring.remove(&k); }
+        for k in keys {
+            self.ring.remove(&k);
+        }
     }
 
     pub fn route<K: Hash>(&self, key: &K) -> Option<&str> {
-        if self.ring.is_empty() { return None; }
+        if self.ring.is_empty() {
+            return None;
+        }
         let mut h = ahash::AHasher::default();
         key.hash(&mut h);
         let k = h.finish();
-        let (_, node) = self.ring.range(k..).next().or_else(|| self.ring.iter().next()).unwrap();
+        let (_, node) = self
+            .ring
+            .range(k..)
+            .next()
+            .or_else(|| self.ring.iter().next())
+            .unwrap();
         Some(node.as_str())
     }
 
     pub fn nodes_for<K: Hash>(&self, key: &K, replicas: usize) -> Vec<String> {
-        if self.ring.is_empty() || replicas == 0 { return Vec::new(); }
+        if self.ring.is_empty() || replicas == 0 {
+            return Vec::new();
+        }
         let mut h = ahash::AHasher::default();
         key.hash(&mut h);
         let k = h.finish();
@@ -61,10 +77,11 @@ impl ConsistentHashRing {
         for (_, n) in self.ring.range(k..).chain(self.ring.iter()) {
             if seen.insert(n) {
                 res.push(n.clone());
-                if res.len() == replicas { break; }
+                if res.len() == replicas {
+                    break;
+                }
             }
         }
         res
     }
 }
-

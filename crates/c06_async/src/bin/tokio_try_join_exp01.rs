@@ -15,5 +15,3 @@ async fn main() {
         Err(e) => eprintln!("try_join error: {}", e),
     }
 }
-
-

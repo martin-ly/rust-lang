@@ -26,15 +26,15 @@ pub struct NewUser {
 // 模拟数据库操作（实际使用中需要真实的数据库连接）
 fn simulate_diesel_operations() {
     println!("=== Diesel ORM 示例 ===");
-    
+
     // 模拟创建用户
     let new_user = NewUser {
         name: "张三".to_string(),
         email: "zhangsan@example.com".to_string(),
     };
-    
+
     println!("创建用户: {:?}", new_user);
-    
+
     // 模拟查询用户
     let user = User {
         id: 1,
@@ -42,17 +42,19 @@ fn simulate_diesel_operations() {
         email: "zhangsan@example.com".to_string(),
         created_at: chrono::Utc::now().naive_utc(),
     };
-    
+
     println!("查询到的用户: {:?}", user);
-    
+
     // 模拟更新用户
     println!("更新用户 ID: 1, 新名称: 李四");
-    
+
     // 模拟删除用户
     println!("删除用户 ID: 1");
-    
+
     println!("\n=== 实际使用步骤 ===");
-    println!("1. 设置环境变量: export DATABASE_URL=\"postgresql://user:password@localhost/dbname\"");
+    println!(
+        "1. 设置环境变量: export DATABASE_URL=\"postgresql://user:password@localhost/dbname\""
+    );
     println!("2. 创建迁移: diesel migration generate create_users");
     println!("3. 运行迁移: diesel migration run");
     println!("4. 使用 diesel_cli 生成 schema.rs");
@@ -64,15 +66,15 @@ fn simulate_diesel_operations() {
 fn real_database_operations() -> Result<(), Box<dyn std::error::Error>> {
     // 模拟数据库操作（实际使用中需要真实的数据库连接和schema）
     println!("模拟数据库操作:");
-    
+
     // 模拟创建用户
     let new_user = NewUser {
         name: "张三".to_string(),
         email: "zhangsan@example.com".to_string(),
     };
-    
+
     println!("模拟创建用户: {:?}", new_user);
-    
+
     // 模拟查询用户
     let user = User {
         id: 1,
@@ -80,21 +82,21 @@ fn real_database_operations() -> Result<(), Box<dyn std::error::Error>> {
         email: "zhangsan@example.com".to_string(),
         created_at: chrono::Utc::now().naive_utc(),
     };
-    
+
     println!("模拟查询用户: {:?}", user);
-    
+
     // 模拟更新用户
     println!("模拟更新用户 ID: 1, 新名称: 李四");
-    
+
     // 模拟删除用户
     println!("模拟删除用户 ID: 1");
-    
+
     Ok(())
 }
 
 fn main() {
     simulate_diesel_operations();
-    
+
     // 如果有数据库连接，可以取消注释下面的代码
     // if let Err(e) = real_database_operations() {
     //     eprintln!("数据库操作错误: {}", e);

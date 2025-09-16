@@ -64,25 +64,31 @@ impl TcpStateMachine {
     /// 创建新的状态机
     pub fn new() -> Self {
         let mut table = HashMap::new();
-        
+
         // 定义状态转换规则
         table.insert((TcpState::Closed, TcpEvent::Open), TcpState::Listen);
         table.insert((TcpState::Listen, TcpEvent::Receive), TcpState::SynReceived);
-        table.insert((TcpState::SynReceived, TcpEvent::Send), TcpState::Established);
+        table.insert(
+            (TcpState::SynReceived, TcpEvent::Send),
+            TcpState::Established,
+        );
         table.insert((TcpState::Established, TcpEvent::Close), TcpState::FinWait1);
         table.insert((TcpState::FinWait1, TcpEvent::Receive), TcpState::FinWait2);
         table.insert((TcpState::FinWait2, TcpEvent::Receive), TcpState::TimeWait);
         table.insert((TcpState::TimeWait, TcpEvent::Timeout), TcpState::Closed);
-        
+
         Self {
             current_state: TcpState::Closed,
             transition_table: table,
         }
     }
-    
+
     /// 执行状态转换
     pub fn transition(&mut self, event: TcpEvent) -> Result<(), NetworkError> {
-        if let Some(new_state) = self.transition_table.get(&(self.current_state.clone(), event.clone())) {
+        if let Some(new_state) = self
+            .transition_table
+            .get(&(self.current_state.clone(), event.clone()))
+        {
             self.current_state = new_state.clone();
             Ok(())
         } else {
@@ -92,15 +98,16 @@ impl TcpStateMachine {
             )))
         }
     }
-    
+
     /// 获取当前状态
     pub fn current_state(&self) -> &TcpState {
         &self.current_state
     }
-    
+
     /// 检查是否可以执行事件
     pub fn can_execute(&self, event: &TcpEvent) -> bool {
-        self.transition_table.contains_key(&(self.current_state.clone(), event.clone()))
+        self.transition_table
+            .contains_key(&(self.current_state.clone(), event.clone()))
     }
 }
 
@@ -120,7 +127,7 @@ mod tests {
         assert!(!TcpState::Closed.can_receive_data());
         assert!(TcpState::Closed.is_closed());
         assert!(!TcpState::Closed.is_established());
-        
+
         assert!(TcpState::Established.can_send_data());
         assert!(TcpState::Established.can_receive_data());
         assert!(!TcpState::Established.is_closed());
@@ -130,13 +137,13 @@ mod tests {
     #[test]
     fn test_tcp_state_machine() {
         let mut state_machine = TcpStateMachine::new();
-        
+
         assert_eq!(*state_machine.current_state(), TcpState::Closed);
-        
+
         // 测试有效转换
         assert!(state_machine.transition(TcpEvent::Open).is_ok());
         assert_eq!(*state_machine.current_state(), TcpState::Listen);
-        
+
         // 测试无效转换
         assert!(state_machine.transition(TcpEvent::Close).is_err());
         assert_eq!(*state_machine.current_state(), TcpState::Listen);
@@ -145,7 +152,7 @@ mod tests {
     #[test]
     fn test_tcp_state_machine_can_execute() {
         let state_machine = TcpStateMachine::new();
-        
+
         assert!(state_machine.can_execute(&TcpEvent::Open));
         assert!(!state_machine.can_execute(&TcpEvent::Close));
     }

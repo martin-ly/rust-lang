@@ -30,5 +30,3 @@ impl ConcurrentCounter {
         self.count.load(Ordering::Relaxed)
     }
 }
-
-

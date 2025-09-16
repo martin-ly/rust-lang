@@ -1,15 +1,15 @@
 //! # Rust所有权和借用作用域模块 / Rust Ownership and Borrowing Scope Module
-//! 
+//!
 //! 本模块提供了完整的Rust所有权系统和借用作用域的理论体系和实现框架。
 //! This module provides a complete theoretical system and implementation framework for Rust ownership and borrowing scope.
-//! 
+//!
 //! ## 理论基础 / Theoretical Foundation
-//! 
+//!
 //! ### 线性类型理论 / Linear Type Theory
-//! 
+//!
 //! Rust的所有权系统基于线性类型理论，确保每个值在任意时刻只有一个所有者。
 //! Rust's ownership system is based on linear type theory, ensuring that each value has exactly one owner at any given time.
-//! 
+//!
 //! ```rust
 //! /// 线性类型特征 / Linear Type Trait
 //! pub trait LinearType {
@@ -28,12 +28,12 @@
 //!     fn borrow_mut(&mut self) -> &mut Self;
 //! }
 //! ```
-//! 
+//!
 //! ### 生命周期理论 / Lifetime Theory
-//! 
+//!
 //! 生命周期系统确保引用的有效性，防止悬垂引用和内存安全问题。
 //! The lifetime system ensures reference validity, preventing dangling references and memory safety issues.
-//! 
+//!
 //! ```rust
 //! /// 生命周期特征 / Lifetime Trait
 //! pub trait Lifetime<'a> {
@@ -52,12 +52,12 @@
 //!         'a: 'b;
 //! }
 //! ```
-//! 
+//!
 //! ### 借用检查器理论 / Borrow Checker Theory
-//! 
+//!
 //! 借用检查器通过静态分析确保内存安全和线程安全。
 //! The borrow checker ensures memory safety and thread safety through static analysis.
-//! 
+//!
 //! ```rust
 //! /// 借用检查器特征 / Borrow Checker Trait
 //! pub trait BorrowChecker {
@@ -74,15 +74,15 @@
 //!     fn detect_dangling_refs(&self, references: &[Reference]) -> DanglingRefResult;
 //! }
 //! ```
-//! 
+//!
 //! ## 工程实践 / Engineering Practice
-//! 
+//!
 //! ### 所有权模式实现 / Ownership Pattern Implementation
-//! 
+//!
 //! ```rust
 //! use std::collections::HashMap;
 //! use std::sync::{Arc, Mutex};
-//! 
+//!
 //! /// 所有权管理器 / Ownership Manager
 //! pub struct OwnershipManager {
 //!     /// 所有权映射 / Ownership Mapping
@@ -92,7 +92,7 @@
 //!     /// 生命周期跟踪 / Lifetime Tracking
 //!     lifetime_tracker: Arc<Mutex<LifetimeTracker>>,
 //! }
-//! 
+//!
 //! impl OwnershipManager {
 //!     /// 创建所有权管理器 / Create Ownership Manager
 //!     pub fn new() -> Self {
@@ -158,9 +158,9 @@
 //!     }
 //! }
 //! ```
-//! 
+//!
 //! ### 作用域管理机制 / Scope Management Mechanisms
-//! 
+//!
 //! ```rust
 //! /// 作用域管理器 / Scope Manager
 //! pub struct ScopeManager {
@@ -171,7 +171,7 @@
 //!     /// 生命周期映射 / Lifetime Mapping
 //!     lifetime_map: HashMap<String, Lifetime>,
 //! }
-//! 
+//!
 //! impl ScopeManager {
 //!     /// 创建作用域管理器 / Create Scope Manager
 //!     pub fn new() -> Self {
@@ -225,9 +225,9 @@
 //!     }
 //! }
 //! ```
-//! 
+//!
 //! ### 内存安全保证 / Memory Safety Guarantees
-//! 
+//!
 //! ```rust
 //! /// 内存安全检查器 / Memory Safety Checker
 //! pub struct MemorySafetyChecker {
@@ -238,7 +238,7 @@
 //!     /// 数据竞争检测器 / Data Race Detector
 //!     data_race_detector: DataRaceDetector,
 //! }
-//! 
+//!
 //! impl MemorySafetyChecker {
 //!     /// 创建内存安全检查器 / Create Memory Safety Checker
 //!     pub fn new() -> Self {
@@ -290,123 +290,123 @@
 //!     }
 //! }
 //! ```
-//! 
+//!
 //! ## 批判性分析 / Critical Analysis
-//! 
+//!
 //! ### 优势分析 / Advantage Analysis
-//! 
+//!
 //! #### 技术优势 / Technical Advantages
-//! 
+//!
 //! 1. **内存安全保证 / Memory Safety Guarantees**
 //!    - 编译时检查防止内存泄漏和悬垂引用
 //!    - Compile-time checks prevent memory leaks and dangling references
 //!    - 零成本抽象，运行时无性能开销
 //!    - Zero-cost abstractions with no runtime performance overhead
-//! 
+//!
 //! 2. **线程安全保证 / Thread Safety Guarantees**
 //!    - 借用检查器防止数据竞争
 //!    - Borrow checker prevents data races
 //!    - 所有权系统确保线程间安全的数据共享
 //!    - Ownership system ensures safe data sharing between threads
-//! 
+//!
 //! 3. **类型安全保证 / Type Safety Guarantees**
 //!    - 强类型系统防止类型错误
 //!    - Strong type system prevents type errors
 //!    - 生命周期系统确保引用有效性
 //!    - Lifetime system ensures reference validity
-//! 
+//!
 //! #### 性能优势 / Performance Advantages
-//! 
+//!
 //! 1. **零成本抽象 / Zero-cost Abstractions**
 //!    - 所有权检查在编译时完成
 //!    - Ownership checks are completed at compile time
 //!    - 运行时无额外开销
 //!    - No additional runtime overhead
-//! 
+//!
 //! 2. **内存效率 / Memory Efficiency**
 //!    - 确定性内存管理
 //!    - Deterministic memory management
 //!    - 无垃圾回收开销
 //!    - No garbage collection overhead
-//! 
+//!
 //! ### 局限性讨论 / Limitation Discussion
-//! 
+//!
 //! #### 技术限制 / Technical Limitations
-//! 
+//!
 //! 1. **学习曲线 / Learning Curve**
 //!    - 所有权和借用概念对新手较难理解
 //!    - Ownership and borrowing concepts are difficult for beginners to understand
 //!    - 生命周期注解增加了复杂性
 //!    - Lifetime annotations increase complexity
-//! 
+//!
 //! 2. **编译时间 / Compilation Time**
 //!    - 借用检查增加了编译时间
 //!    - Borrow checking increases compilation time
 //!    - 复杂的所有权关系可能导致编译错误
 //!    - Complex ownership relationships may cause compilation errors
-//! 
+//!
 //! #### 表达能力限制 / Expressiveness Limitations
-//! 
+//!
 //! 1. **借用限制 / Borrowing Limitations**
 //!    - 同时只能有一个可变借用或多个不可变借用
 //!    - Can only have one mutable borrow or multiple immutable borrows at the same time
 //!    - 某些模式需要重构代码
 //!    - Some patterns require code restructuring
-//! 
+//!
 //! 2. **生命周期复杂性 / Lifetime Complexity**
 //!    - 复杂的生命周期关系难以理解
 //!    - Complex lifetime relationships are difficult to understand
 //!    - 某些场景需要显式生命周期注解
 //!    - Some scenarios require explicit lifetime annotations
-//! 
+//!
 //! ### 改进建议 / Improvement Suggestions
-//! 
+//!
 //! #### 短期改进 / Short-term Improvements
-//! 
+//!
 //! 1. **开发工具改进 / Development Tool Improvements**
 //!    - 提供更好的借用检查错误信息
 //!    - Provide better borrow checker error messages
 //!    - 所有权可视化工具
 //!    - Ownership visualization tools
-//! 
+//!
 //! 2. **文档完善 / Documentation Enhancement**
 //!    - 提供更多所有权模式示例
 //!    - Provide more ownership pattern examples
 //!    - 生命周期最佳实践指南
 //!    - Lifetime best practices guide
-//! 
+//!
 //! #### 中期规划 / Medium-term Planning
-//! 
+//!
 //! 1. **编译器优化 / Compiler Optimizations**
 //!    - 改进借用检查算法
 //!    - Improve borrow checking algorithms
 //!    - 减少编译时间
 //!    - Reduce compilation time
-//! 
+//!
 //! 2. **语言特性扩展 / Language Feature Extensions**
 //!    - 更灵活的所有权模式
 //!    - More flexible ownership patterns
 //!    - 简化的生命周期语法
 //!    - Simplified lifetime syntax
-//! 
+//!
 //! #### 长期愿景 / Long-term Vision
-//! 
+//!
 //! 1. **理论发展 / Theoretical Development**
 //!    - 改进线性类型理论
 //!    - Improve linear type theory
 //!    - 探索新的内存安全模型
 //!    - Explore new memory safety models
-//! 
+//!
 //! 2. **生态系统扩展 / Ecosystem Expansion**
 //!    - 开发更多所有权相关的工具
 //!    - Develop more ownership-related tools
 //!    - 建立最佳实践标准
 //!    - Establish best practice standards
-//! 
+//!
 //! ## 生态系统 / Ecosystem
-//! 
+//!
 //! ### 工具链支持 / Toolchain Support
-//! 
+//!
 //! ```rust
 //! /// 所有权分析工具 / Ownership Analysis Tools
 //! pub mod tools {
@@ -420,9 +420,9 @@
 //!     pub struct LifetimeAnalyzer;
 //! }
 //! ```
-//! 
+//!
 //! ### 社区实践 / Community Practices
-//! 
+//!
 //! 1. **设计模式 / Design Patterns**
 //!    - RAII模式（资源获取即初始化）
 //!    - RAII pattern (Resource Acquisition Is Initialization)
@@ -430,7 +430,7 @@
 //!    - Smart pointer patterns
 //!    - 借用模式
 //!    - Borrowing patterns
-//! 
+//!
 //! 2. **最佳实践 / Best Practices**
 //!    - 最小化可变性
 //!    - Minimize mutability
@@ -438,26 +438,26 @@
 //!    - Prefer immutable borrows
 //!    - 合理使用生命周期
 //!    - Use lifetimes appropriately
-//! 
+//!
 //! ### 发展趋势 / Development Trends
-//! 
+//!
 //! 1. **编译器改进 / Compiler Improvements**
 //!    - 更智能的借用检查
 //!    - Smarter borrow checking
 //!    - 更好的错误信息
 //!    - Better error messages
-//! 
+//!
 //! 2. **语言特性 / Language Features**
 //!    - 更灵活的所有权系统
 //!    - More flexible ownership system
 //!    - 简化的生命周期语法
 //!    - Simplified lifetime syntax
-//! 
+//!
 //! ## 使用示例 / Usage Examples
-//! 
+//!
 //! ```rust
 //! use crate::ownership::{OwnershipManager, ScopeManager, MemorySafetyChecker};
-//! 
+//!
 //! fn main() -> Result<(), Box<dyn std::error::Error>> {
 //!     // 创建所有权管理器 / Create ownership manager
 //!     let ownership_manager = OwnershipManager::new();
@@ -522,7 +522,9 @@ pub const VERSION: &str = "1.0.0";
 
 /// 模块初始化 / Module Initialization
 pub fn init() -> Result<(), Box<dyn std::error::Error>> {
-    println!("Rust所有权和借用作用域模块已初始化 / Rust Ownership and Borrowing Scope Module Initialized");
+    println!(
+        "Rust所有权和借用作用域模块已初始化 / Rust Ownership and Borrowing Scope Module Initialized"
+    );
     Ok(())
 }
 
@@ -535,9 +537,9 @@ pub fn get_module_info() -> &'static str {
 #[cfg(test)]
 pub fn run_tests() -> Result<(), Box<dyn std::error::Error>> {
     println!("运行所有权和借用作用域测试套件 / Running Ownership and Borrowing Scope Test Suite");
-    
+
     // 这里可以添加测试运行逻辑
     // Add test running logic here
-    
+
     Ok(())
 }

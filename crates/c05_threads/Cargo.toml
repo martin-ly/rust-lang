@@ -45,6 +45,7 @@ path = "src/bin/main.rs"
 
 [dev-dependencies]
 criterion = { workspace = true }
+loom = { version = "0.7", default-features = false }
 
 [[bench]]
 name = "priority_channels_bench"

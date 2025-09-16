@@ -12,4 +12,3 @@ impl ClusterMembership {
         self.nodes.iter().any(|n| n == node)
     }
 }
-

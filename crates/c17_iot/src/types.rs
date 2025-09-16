@@ -1,5 +1,5 @@
 //! # IoT系统核心类型定义 / IoT System Core Type Definitions
-//! 
+//!
 //! 本模块定义了IoT系统的核心数据类型和结构。
 //! This module defines the core data types and structures for the IoT system.
 
@@ -8,7 +8,7 @@ use serde::{Deserialize, Serialize};
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
 /// 实时任务 / Real-time Task
-/// 
+///
 /// 表示IoT系统中的实时任务。
 /// Represents a real-time task in the IoT system.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -35,7 +35,13 @@ pub struct RealTimeTask {
 
 impl RealTimeTask {
     /// 创建新的实时任务 / Create New Real-time Task
-    pub fn new(name: String, task_type: TaskType, priority: Priority, execution_time: Duration, deadline: Duration) -> Self {
+    pub fn new(
+        name: String,
+        task_type: TaskType,
+        priority: Priority,
+        execution_time: Duration,
+        deadline: Duration,
+    ) -> Self {
         Self {
             id: TaskId::new(),
             name,
@@ -51,9 +57,15 @@ impl RealTimeTask {
                 .as_secs(),
         }
     }
-    
+
     /// 创建周期性任务 / Create Periodic Task
-    pub fn new_periodic(name: String, task_type: TaskType, priority: Priority, execution_time: Duration, period: Duration) -> Self {
+    pub fn new_periodic(
+        name: String,
+        task_type: TaskType,
+        priority: Priority,
+        execution_time: Duration,
+        period: Duration,
+    ) -> Self {
         Self {
             id: TaskId::new(),
             name,
@@ -69,12 +81,12 @@ impl RealTimeTask {
                 .as_secs(),
         }
     }
-    
+
     /// 检查是否满足截止时间 / Check Deadline Satisfaction
     pub fn meets_deadline(&self, completion_time: Duration) -> bool {
         completion_time <= self.deadline
     }
-    
+
     /// 获取剩余时间 / Get Remaining Time
     pub fn get_remaining_time(&self, current_time: Duration) -> Duration {
         if current_time >= self.deadline {
@@ -83,26 +95,26 @@ impl RealTimeTask {
             self.deadline - current_time
         }
     }
-    
+
     /// 验证任务 / Validate Task
     pub fn validate(&self) -> ValidationResult {
         let mut errors = Vec::new();
-        
+
         // 检查执行时间 / Check Execution Time
         if self.execution_time.is_zero() {
             errors.push(ValidationError::InvalidExecutionTime);
         }
-        
+
         // 检查截止时间 / Check Deadline
         if self.deadline.is_zero() {
             errors.push(ValidationError::InvalidDeadline);
         }
-        
+
         // 检查执行时间是否超过截止时间 / Check if Execution Time Exceeds Deadline
         if self.execution_time > self.deadline {
             errors.push(ValidationError::ExecutionTimeExceedsDeadline);
         }
-        
+
         // 检查周期性任务的周期 / Check Periodic Task Period
         if let Some(period) = self.period {
             if period.is_zero() {
@@ -112,7 +124,7 @@ impl RealTimeTask {
                 errors.push(ValidationError::PeriodLessThanExecutionTime);
             }
         }
-        
+
         ValidationResult {
             is_valid: errors.is_empty(),
             errors,
@@ -121,7 +133,7 @@ impl RealTimeTask {
 }
 
 /// 任务ID / Task ID
-/// 
+///
 /// 唯一标识一个实时任务。
 /// Uniquely identifies a real-time task.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
@@ -135,7 +147,7 @@ impl TaskId {
     pub fn new() -> Self {
         use std::sync::atomic::{AtomicU64, Ordering};
         static COUNTER: AtomicU64 = AtomicU64::new(1);
-        
+
         Self {
             id: COUNTER.fetch_add(1, Ordering::Relaxed),
         }
@@ -143,7 +155,7 @@ impl TaskId {
 }
 
 /// 任务类型 / Task Type
-/// 
+///
 /// 定义实时任务的类型。
 /// Defines the type of a real-time task.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -163,7 +175,7 @@ pub enum TaskType {
 }
 
 /// 任务优先级 / Task Priority
-/// 
+///
 /// 定义任务的优先级。
 /// Defines the priority of a task.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, PartialOrd, Ord)]
@@ -181,7 +193,7 @@ pub enum Priority {
 }
 
 /// 任务状态 / Task Status
-/// 
+///
 /// 定义任务的执行状态。
 /// Defines the execution status of a task.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -201,7 +213,7 @@ pub enum TaskStatus {
 }
 
 /// 调度策略 / Scheduling Policy
-/// 
+///
 /// 定义实时调度器的调度策略。
 /// Defines the scheduling policy of a real-time scheduler.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -219,7 +231,7 @@ pub enum SchedulingPolicy {
 }
 
 /// 调度决策 / Scheduling Decision
-/// 
+///
 /// 表示调度器的决策结果。
 /// Represents the decision result of a scheduler.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -235,7 +247,7 @@ pub struct SchedulingDecision {
 }
 
 /// 调度原因 / Scheduling Reason
-/// 
+///
 /// 定义任务被选中的原因。
 /// Defines the reason why a task was selected.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -253,7 +265,7 @@ pub enum SchedulingReason {
 }
 
 /// 电源状态 / Power State
-/// 
+///
 /// 定义设备的电源状态。
 /// Defines the power state of a device.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
@@ -271,7 +283,7 @@ pub enum PowerState {
 }
 
 /// 电源配置 / Power Configuration
-/// 
+///
 /// 定义电源状态的配置参数。
 /// Defines configuration parameters for power states.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -299,7 +311,7 @@ impl PowerConfig {
             transition_time: Duration::from_micros(10),
         }
     }
-    
+
     /// 创建空闲状态配置 / Create Idle State Configuration
     pub fn idle() -> Self {
         Self {
@@ -310,7 +322,7 @@ impl PowerConfig {
             transition_time: Duration::from_micros(100),
         }
     }
-    
+
     /// 创建睡眠状态配置 / Create Sleep State Configuration
     pub fn sleep() -> Self {
         Self {
@@ -321,7 +333,7 @@ impl PowerConfig {
             transition_time: Duration::from_millis(10),
         }
     }
-    
+
     /// 创建深度睡眠状态配置 / Create Deep Sleep State Configuration
     pub fn deep_sleep() -> Self {
         Self {
@@ -335,7 +347,7 @@ impl PowerConfig {
 }
 
 /// 节能策略 / Energy Saving Strategy
-/// 
+///
 /// 定义节能策略的类型。
 /// Defines the type of energy saving strategy.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -353,7 +365,7 @@ pub enum EnergySavingStrategy {
 }
 
 /// 策略结果 / Strategy Result
-/// 
+///
 /// 表示节能策略的执行结果。
 /// Represents the execution result of an energy saving strategy.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -367,7 +379,7 @@ pub struct StrategyResult {
 }
 
 /// 性能影响 / Performance Impact
-/// 
+///
 /// 定义策略对性能的影响。
 /// Defines the impact of a strategy on performance.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -381,7 +393,7 @@ pub struct PerformanceImpact {
 }
 
 /// 功耗优化结果 / Power Optimization Result
-/// 
+///
 /// 表示功耗优化的结果。
 /// Represents the result of power optimization.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -407,21 +419,24 @@ impl PowerOptimizationResult {
             },
         }
     }
-    
+
     /// 添加策略结果 / Add Strategy Result
     pub fn add_strategy_result(&mut self, _strategy: EnergySavingStrategy, result: StrategyResult) {
         self.strategy_results.push(result.clone());
         self.total_energy_saved += result.energy_saved;
-        
+
         // 更新总体性能影响 / Update Overall Performance Impact
-        self.overall_performance_impact.response_time_impact += result.performance_impact.response_time_impact;
-        self.overall_performance_impact.throughput_impact += result.performance_impact.throughput_impact;
-        self.overall_performance_impact.reliability_impact += result.performance_impact.reliability_impact;
+        self.overall_performance_impact.response_time_impact +=
+            result.performance_impact.response_time_impact;
+        self.overall_performance_impact.throughput_impact +=
+            result.performance_impact.throughput_impact;
+        self.overall_performance_impact.reliability_impact +=
+            result.performance_impact.reliability_impact;
     }
 }
 
 /// 系统状态 / System Status
-/// 
+///
 /// 表示IoT系统的运行状态。
 /// Represents the operational status of an IoT system.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -441,7 +456,7 @@ pub struct SystemStatus {
 }
 
 /// 设备状态 / Device Status
-/// 
+///
 /// 表示IoT设备的状态。
 /// Represents the status of an IoT device.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -459,7 +474,7 @@ pub struct DeviceStatus {
 }
 
 /// 设备类型 / Device Type
-/// 
+///
 /// 定义IoT设备的类型。
 /// Defines the type of an IoT device.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -477,7 +492,7 @@ pub enum DeviceType {
 }
 
 /// 连接状态 / Connection Status
-/// 
+///
 /// 定义设备的连接状态。
 /// Defines the connection status of a device.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -493,7 +508,7 @@ pub enum ConnectionStatus {
 }
 
 /// 健康状态 / Health Status
-/// 
+///
 /// 定义设备的健康状态。
 /// Defines the health status of a device.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -509,7 +524,7 @@ pub enum HealthStatus {
 }
 
 /// 通信状态 / Communication Status
-/// 
+///
 /// 表示通信系统的状态。
 /// Represents the status of the communication system.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -527,7 +542,7 @@ pub struct CommunicationStatus {
 }
 
 /// 通信协议 / Communication Protocol
-/// 
+///
 /// 定义IoT通信协议。
 /// Defines IoT communication protocols.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -549,7 +564,7 @@ pub enum CommunicationProtocol {
 }
 
 /// 任务状态摘要 / Task Status Summary
-/// 
+///
 /// 表示任务状态的摘要信息。
 /// Represents summary information of task status.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -569,7 +584,7 @@ pub struct TaskStatusSummary {
 }
 
 /// 验证结果 / Validation Result
-/// 
+///
 /// 表示验证操作的结果。
 /// Represents the result of a validation operation.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -581,7 +596,7 @@ pub struct ValidationResult {
 }
 
 /// 验证错误 / Validation Error
-/// 
+///
 /// 定义验证过程中可能出现的错误。
 /// Defines errors that may occur during validation.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -603,7 +618,7 @@ pub enum ValidationError {
 }
 
 /// 调度器错误 / Scheduler Error
-/// 
+///
 /// 定义调度器可能出现的错误。
 /// Defines errors that may occur in the scheduler.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -621,7 +636,7 @@ pub enum SchedulerError {
 }
 
 /// 电源错误 / Power Error
-/// 
+///
 /// 定义电源管理可能出现的错误。
 /// Defines errors that may occur in power management.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -639,7 +654,7 @@ pub enum PowerError {
 }
 
 /// 系统错误 / System Error
-/// 
+///
 /// 定义IoT系统可能出现的错误。
 /// Defines errors that may occur in the IoT system.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -665,7 +680,7 @@ pub enum SystemError {
 }
 
 /// IoT错误 / IoT Error
-/// 
+///
 /// 定义IoT系统的通用错误。
 /// Defines common errors for the IoT system.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -688,7 +703,7 @@ pub const MIN_TASK_PRIORITY: u32 = 0;
 pub const DEFAULT_TIME_SLICE: Duration = Duration::from_millis(10);
 pub const MAX_TASK_EXECUTION_TIME: Duration = Duration::from_secs(60);
 pub const MIN_TASK_PERIOD: Duration = Duration::from_millis(1);
-pub const MAX_TASK_PERIOD: Duration = Duration::from_secs(3600); 
+pub const MAX_TASK_PERIOD: Duration = Duration::from_secs(3600);
 
 // --- LwM2M 最小对象/资源建模 ---
 
@@ -711,7 +726,13 @@ mod tests {
             object_id: 1,
             instances: vec![Lwm2mInstance {
                 instance_id: 0,
-                resources: vec![Lwm2mResource { id: 10, readable: true, writable: true, executable: false, value: Some(Lwm2mValue::Integer(1)) }],
+                resources: vec![Lwm2mResource {
+                    id: 10,
+                    readable: true,
+                    writable: true,
+                    executable: false,
+                    value: Some(Lwm2mValue::Integer(1)),
+                }],
             }],
         };
         assert_eq!(obj.read(0, 10), Some(Lwm2mValue::Integer(1)));
@@ -724,7 +745,12 @@ mod tests {
         let mut node = UaObjectNode {
             node_id: UaNodeId("n".into()),
             browse_name: "root".into(),
-            variables: vec![UaVariableNode { node_id: UaNodeId("v".into()), browse_name: "Mode".into(), value: serde_json::json!("auto"), writable: true }],
+            variables: vec![UaVariableNode {
+                node_id: UaNodeId("v".into()),
+                browse_name: "Mode".into(),
+                value: serde_json::json!("auto"),
+                writable: true,
+            }],
         };
         assert_eq!(node.read("Mode").unwrap(), serde_json::json!("auto"));
         assert!(node.write("Mode", serde_json::json!("manual")));
@@ -768,9 +794,16 @@ impl Lwm2mObject {
 
     /// 写资源（可写）/ Write a resource if writable
     pub fn write(&mut self, instance_id: u16, resource_id: u16, value: Lwm2mValue) -> bool {
-        if let Some(inst) = self.instances.iter_mut().find(|i| i.instance_id == instance_id) {
+        if let Some(inst) = self
+            .instances
+            .iter_mut()
+            .find(|i| i.instance_id == instance_id)
+        {
             if let Some(res) = inst.resources.iter_mut().find(|r| r.id == resource_id) {
-                if res.writable { res.value = Some(value); return true; }
+                if res.writable {
+                    res.value = Some(value);
+                    return true;
+                }
             }
         }
         false
@@ -809,8 +842,15 @@ impl UaObjectNode {
     }
 
     pub fn write(&mut self, browse_name: &str, value: serde_json::Value) -> bool {
-        if let Some(v) = self.variables.iter_mut().find(|v| v.browse_name == browse_name) {
-            if v.writable { v.value = value; return true; }
+        if let Some(v) = self
+            .variables
+            .iter_mut()
+            .find(|v| v.browse_name == browse_name)
+        {
+            if v.writable {
+                v.value = value;
+                return true;
+            }
         }
         false
     }

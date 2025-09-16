@@ -8,8 +8,12 @@ pub trait BinaryCodec<T> {
 pub struct BytesCodec;
 
 impl BinaryCodec<Vec<u8>> for BytesCodec {
-    fn encode(&self, value: &Vec<u8>) -> Vec<u8> { value.clone() }
-    fn decode(&self, bytes: &[u8]) -> Option<Vec<u8>> { Some(bytes.to_vec()) }
+    fn encode(&self, value: &Vec<u8>) -> Vec<u8> {
+        value.clone()
+    }
+    fn decode(&self, bytes: &[u8]) -> Option<Vec<u8>> {
+        Some(bytes.to_vec())
+    }
 }
 
 /// 使用 UTF-8 的 `String` 编解码器
@@ -17,7 +21,10 @@ impl BinaryCodec<Vec<u8>> for BytesCodec {
 pub struct StringUtf8Codec;
 
 impl BinaryCodec<String> for StringUtf8Codec {
-    fn encode(&self, value: &String) -> Vec<u8> { value.as_bytes().to_vec() }
-    fn decode(&self, bytes: &[u8]) -> Option<String> { std::str::from_utf8(bytes).ok().map(|s| s.to_string()) }
+    fn encode(&self, value: &String) -> Vec<u8> {
+        value.as_bytes().to_vec()
+    }
+    fn decode(&self, bytes: &[u8]) -> Option<String> {
+        std::str::from_utf8(bytes).ok().map(|s| s.to_string())
+    }
 }
-

@@ -1,16 +1,16 @@
 //! 消息队列性能基准测试
-//! 
+//!
 //! 测试Redis和RabbitMQ消息队列的性能表现
 
-use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId};
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 use tokio::runtime::Runtime;
 
 use c13_microservice::messaging::{
-        redis_impl::{RedisMessageQueue, RedisConfig},
-        rabbitmq_impl::{RabbitMQMessageQueue, RabbitMQConfig},
-        Message,
-    };
+    Message,
+    rabbitmq_impl::{RabbitMQConfig, RabbitMQMessageQueue},
+    redis_impl::{RedisConfig, RedisMessageQueue},
+};
 
 /// 基准测试：Redis消息队列创建性能
 fn benchmark_redis_queue_creation(c: &mut Criterion) {
@@ -27,13 +27,11 @@ fn benchmark_redis_queue_creation(c: &mut Criterion) {
 fn benchmark_redis_connection(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
     let config = RedisConfig::default();
-    
+
     c.bench_function("redis_connection", |b| {
         b.iter(|| {
             let mut queue = RedisMessageQueue::new(config.clone());
-            let result = rt.block_on(async {
-                queue.connect().await
-            });
+            let result = rt.block_on(async { queue.connect().await });
             black_box(result)
         })
     });
@@ -44,18 +42,16 @@ fn benchmark_redis_publish(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
     let config = RedisConfig::default();
     let mut queue = RedisMessageQueue::new(config);
-    
+
     // 预先连接
     rt.block_on(async {
         queue.connect().await.unwrap();
     });
-    
+
     c.bench_function("redis_publish", |b| {
         b.iter(|| {
             let message = b"test message";
-            let result = rt.block_on(async {
-                queue.publish("test_channel", message).await
-            });
+            let result = rt.block_on(async { queue.publish("test_channel", message).await });
             black_box(result)
         })
     });
@@ -66,17 +62,15 @@ fn benchmark_redis_subscribe(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
     let config = RedisConfig::default();
     let mut queue = RedisMessageQueue::new(config);
-    
+
     // 预先连接
     rt.block_on(async {
         queue.connect().await.unwrap();
     });
-    
+
     c.bench_function("redis_subscribe", |b| {
         b.iter(|| {
-            let result = rt.block_on(async {
-                queue.subscribe("test_channel").await
-            });
+            let result = rt.block_on(async { queue.subscribe("test_channel").await });
             black_box(result)
         })
     });
@@ -87,42 +81,36 @@ fn benchmark_redis_queue_operations(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
     let config = RedisConfig::default();
     let mut queue = RedisMessageQueue::new(config);
-    
+
     // 预先连接
     rt.block_on(async {
         queue.connect().await.unwrap();
     });
-    
+
     let mut group = c.benchmark_group("redis_queue_operations");
-    
+
     group.bench_function("lpush", |b| {
         b.iter(|| {
             let message = b"test message";
-            let result = rt.block_on(async {
-                queue.lpush("test_queue", message).await
-            });
+            let result = rt.block_on(async { queue.lpush("test_queue", message).await });
             black_box(result)
         })
     });
-    
+
     group.bench_function("rpop", |b| {
         b.iter(|| {
-            let result = rt.block_on(async {
-                queue.rpop("test_queue").await
-            });
+            let result = rt.block_on(async { queue.rpop("test_queue").await });
             black_box(result)
         })
     });
-    
+
     group.bench_function("brpop", |b| {
         b.iter(|| {
-            let result = rt.block_on(async {
-                queue.brpop("test_queue", 1).await
-            });
+            let result = rt.block_on(async { queue.brpop("test_queue", 1).await });
             black_box(result)
         })
     });
-    
+
     group.finish();
 }
 
@@ -131,35 +119,31 @@ fn benchmark_redis_key_value_operations(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
     let config = RedisConfig::default();
     let mut queue = RedisMessageQueue::new(config);
-    
+
     // 预先连接
     rt.block_on(async {
         queue.connect().await.unwrap();
     });
-    
+
     let mut group = c.benchmark_group("redis_key_value_operations");
-    
+
     group.bench_function("set", |b| {
         b.iter(|| {
             let key = "test_key";
             let value = b"test value";
-            let result = rt.block_on(async {
-                queue.set(key, value, Some(3600)).await
-            });
+            let result = rt.block_on(async { queue.set(key, value, Some(3600)).await });
             black_box(result)
         })
     });
-    
+
     group.bench_function("get", |b| {
         b.iter(|| {
             let key = "test_key";
-            let result = rt.block_on(async {
-                queue.get(key).await
-            });
+            let result = rt.block_on(async { queue.get(key).await });
             black_box(result)
         })
     });
-    
+
     group.finish();
 }
 
@@ -178,13 +162,11 @@ fn benchmark_rabbitmq_queue_creation(c: &mut Criterion) {
 fn benchmark_rabbitmq_connection(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
     let config = RabbitMQConfig::default();
-    
+
     c.bench_function("rabbitmq_connection", |b| {
         b.iter(|| {
             let mut queue = RabbitMQMessageQueue::new(config.clone());
-            let result = rt.block_on(async {
-                queue.connect().await
-            });
+            let result = rt.block_on(async { queue.connect().await });
             black_box(result)
         })
     });
@@ -195,7 +177,7 @@ fn benchmark_rabbitmq_publish(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
     let config = RabbitMQConfig::default();
     let mut queue = RabbitMQMessageQueue::new(config);
-    
+
     // 预先连接和设置
     rt.block_on(async {
         queue.connect().await.unwrap();
@@ -203,13 +185,11 @@ fn benchmark_rabbitmq_publish(c: &mut Criterion) {
         queue.declare_queue().await.unwrap();
         queue.bind_queue().await.unwrap();
     });
-    
+
     c.bench_function("rabbitmq_publish", |b| {
         b.iter(|| {
             let message = b"test message";
-            let result = rt.block_on(async {
-                queue.publish("test.routing", message).await
-            });
+            let result = rt.block_on(async { queue.publish("test.routing", message).await });
             black_box(result)
         })
     });
@@ -231,14 +211,14 @@ fn benchmark_concurrent_messaging(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
     let config = RedisConfig::default();
     let mut queue = RedisMessageQueue::new(config);
-    
+
     // 预先连接
     rt.block_on(async {
         queue.connect().await.unwrap();
     });
-    
+
     let mut group = c.benchmark_group("concurrent_messaging");
-    
+
     for concurrency in [1, 10, 100].iter() {
         group.bench_with_input(
             BenchmarkId::new("concurrent", concurrency),
@@ -251,7 +231,7 @@ fn benchmark_concurrent_messaging(c: &mut Criterion) {
             },
         );
     }
-    
+
     group.finish();
 }
 
@@ -260,14 +240,14 @@ fn benchmark_batch_messaging(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
     let config = RedisConfig::default();
     let mut queue = RedisMessageQueue::new(config);
-    
+
     // 预先连接
     rt.block_on(async {
         queue.connect().await.unwrap();
     });
-    
+
     let mut group = c.benchmark_group("batch_messaging");
-    
+
     for batch_size in [10, 100, 1000].iter() {
         group.bench_with_input(
             BenchmarkId::new("batch_size", batch_size),
@@ -280,7 +260,7 @@ fn benchmark_batch_messaging(c: &mut Criterion) {
             },
         );
     }
-    
+
     group.finish();
 }
 

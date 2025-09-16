@@ -1,5 +1,5 @@
 //! # 边缘计算增强模块
-//! 
+//!
 //! 基于LF Edge、KubeEdge等架构的边缘计算实现
 
 use serde::{Deserialize, Serialize};
@@ -848,7 +848,10 @@ mod tests {
             },
             status: NodeStatus {
                 health: HealthStatus::Healthy,
-                last_heartbeat: SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs(),
+                last_heartbeat: SystemTime::now()
+                    .duration_since(UNIX_EPOCH)
+                    .unwrap()
+                    .as_secs(),
                 uptime: Duration::from_secs(3600),
                 load_average: LoadAverage {
                     one_minute: 0.5,

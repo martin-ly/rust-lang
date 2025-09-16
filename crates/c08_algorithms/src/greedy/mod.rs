@@ -61,7 +61,9 @@ pub fn coin_change_greedy_sync(mut coins: Vec<i64>, mut amount: i64) -> Vec<i64>
             amount -= c;
             res.push(c);
         }
-        if amount == 0 { break; }
+        if amount == 0 {
+            break;
+        }
     }
     res
 }
@@ -89,11 +91,17 @@ pub struct Item {
 }
 
 pub fn fractional_knapsack_sync(mut items: Vec<Item>, capacity: f64) -> f64 {
-    items.sort_by(|a, b| (b.value / b.weight).partial_cmp(&(a.value / a.weight)).unwrap());
+    items.sort_by(|a, b| {
+        (b.value / b.weight)
+            .partial_cmp(&(a.value / a.weight))
+            .unwrap()
+    });
     let mut cap = capacity;
     let mut total = 0.0;
     for it in items {
-        if cap <= 0.0 { break; }
+        if cap <= 0.0 {
+            break;
+        }
         let take = it.weight.min(cap);
         total += (it.value / it.weight) * take;
         cap -= take;
@@ -102,7 +110,11 @@ pub fn fractional_knapsack_sync(mut items: Vec<Item>, capacity: f64) -> f64 {
 }
 
 pub fn fractional_knapsack_parallel(mut items: Vec<Item>, capacity: f64) -> f64 {
-    items.par_sort_unstable_by(|a, b| (b.value / b.weight).partial_cmp(&(a.value / a.weight)).unwrap());
+    items.par_sort_unstable_by(|a, b| {
+        (b.value / b.weight)
+            .partial_cmp(&(a.value / a.weight))
+            .unwrap()
+    });
     fractional_knapsack_sync(items, capacity)
 }
 
@@ -122,9 +134,17 @@ pub struct HuffNode {
     right: Option<Box<HuffNode>>,
 }
 
-impl PartialEq for HuffNode { fn eq(&self, other: &Self) -> bool { self.freq == other.freq } }
+impl PartialEq for HuffNode {
+    fn eq(&self, other: &Self) -> bool {
+        self.freq == other.freq
+    }
+}
 impl Eq for HuffNode {}
-impl PartialOrd for HuffNode { fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> { Some(self.cmp(other)) } }
+impl PartialOrd for HuffNode {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
 impl Ord for HuffNode {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         // 使 BinaryHeap 作为最小堆：频率小的优先（反转）
@@ -135,46 +155,82 @@ impl Ord for HuffNode {
 fn build_huffman_tree(freqs: &HashMap<u8, usize>) -> Option<Box<HuffNode>> {
     let mut heap: BinaryHeap<HuffNode> = BinaryHeap::new();
     for (&ch, &f) in freqs.iter() {
-        heap.push(HuffNode { freq: f, ch: Some(ch), left: None, right: None });
+        heap.push(HuffNode {
+            freq: f,
+            ch: Some(ch),
+            left: None,
+            right: None,
+        });
     }
-    if heap.is_empty() { return None; }
+    if heap.is_empty() {
+        return None;
+    }
     while heap.len() > 1 {
         let a = heap.pop().unwrap();
         let b = heap.pop().unwrap();
-        heap.push(HuffNode { freq: a.freq + b.freq, ch: None, left: Some(Box::new(a)), right: Some(Box::new(b)) });
+        heap.push(HuffNode {
+            freq: a.freq + b.freq,
+            ch: None,
+            left: Some(Box::new(a)),
+            right: Some(Box::new(b)),
+        });
     }
     heap.pop().map(Box::new)
 }
 
 fn build_codes_rec(node: &HuffNode, path: &mut Vec<char>, codes: &mut HashMap<u8, String>) {
     if let Some(ch) = node.ch {
-        let code: String = if path.is_empty() { "0".to_string() } else { path.iter().collect() };
+        let code: String = if path.is_empty() {
+            "0".to_string()
+        } else {
+            path.iter().collect()
+        };
         codes.insert(ch, code);
         return;
     }
-    if let Some(ref l) = node.left { path.push('0'); build_codes_rec(l, path, codes); path.pop(); }
-    if let Some(ref r) = node.right { path.push('1'); build_codes_rec(r, path, codes); path.pop(); }
+    if let Some(ref l) = node.left {
+        path.push('0');
+        build_codes_rec(l, path, codes);
+        path.pop();
+    }
+    if let Some(ref r) = node.right {
+        path.push('1');
+        build_codes_rec(r, path, codes);
+        path.pop();
+    }
 }
 
 pub fn huffman_build_codes(input: &str) -> (HashMap<u8, String>, Option<Box<HuffNode>>) {
     let mut freqs: HashMap<u8, usize> = HashMap::new();
-    for &b in input.as_bytes() { *freqs.entry(b).or_insert(0) += 1; }
+    for &b in input.as_bytes() {
+        *freqs.entry(b).or_insert(0) += 1;
+    }
     let tree = build_huffman_tree(&freqs);
     let mut codes = HashMap::new();
-    if let Some(ref root) = tree { let mut path = Vec::new(); build_codes_rec(root, &mut path, &mut codes); }
+    if let Some(ref root) = tree {
+        let mut path = Vec::new();
+        build_codes_rec(root, &mut path, &mut codes);
+    }
     (codes, tree)
 }
 
 pub fn huffman_encode(input: &str, codes: &HashMap<u8, String>) -> String {
     let mut out = String::new();
-    for &b in input.as_bytes() { out.push_str(codes.get(&b).map(String::as_str).unwrap_or("")); }
+    for &b in input.as_bytes() {
+        out.push_str(codes.get(&b).map(String::as_str).unwrap_or(""));
+    }
     out
 }
 
 pub fn huffman_decode(bits: &str, tree: &HuffNode) -> Vec<u8> {
     let mut res = Vec::new();
-    if tree.ch.is_some() { // 单字符特殊情况
-        if let Some(ch) = tree.ch { for _ in bits.chars() { res.push(ch); } }
+    if tree.ch.is_some() {
+        // 单字符特殊情况
+        if let Some(ch) = tree.ch {
+            for _ in bits.chars() {
+                res.push(ch);
+            }
+        }
         return res;
     }
     let mut cur = tree;
@@ -184,12 +240,17 @@ pub fn huffman_decode(bits: &str, tree: &HuffNode) -> Vec<u8> {
             '1' => cur.right.as_deref().unwrap_or(cur),
             _ => cur,
         };
-        if let Some(ch) = cur.ch { res.push(ch); cur = tree; }
+        if let Some(ch) = cur.ch {
+            res.push(ch);
+            cur = tree;
+        }
     }
     res
 }
 
-pub async fn huffman_build_codes_async(input: String) -> Result<(HashMap<u8, String>, Option<Box<HuffNode>>)> {
+pub async fn huffman_build_codes_async(
+    input: String,
+) -> Result<(HashMap<u8, String>, Option<Box<HuffNode>>)> {
     Ok(tokio::task::spawn_blocking(move || huffman_build_codes(&input)).await?)
 }
 
@@ -206,10 +267,16 @@ pub async fn huffman_decode_async(bits: String, tree: Box<HuffNode>) -> Result<V
 // =========================
 
 #[derive(Clone, Copy, Debug)]
-pub struct Job { pub id: usize, pub deadline: usize, pub profit: i64 }
+pub struct Job {
+    pub id: usize,
+    pub deadline: usize,
+    pub profit: i64,
+}
 
 pub fn job_sequencing_max_profit(mut jobs: Vec<Job>) -> (i64, Vec<Option<usize>>) {
-    if jobs.is_empty() { return (0, vec![]); }
+    if jobs.is_empty() {
+        return (0, vec![]);
+    }
     jobs.sort_by_key(|j| std::cmp::Reverse(j.profit));
     let max_d = jobs.iter().map(|j| j.deadline).max().unwrap_or(0);
     let mut slots: Vec<Option<usize>> = vec![None; max_d + 1]; // 1..=max_d 使用
@@ -217,7 +284,11 @@ pub fn job_sequencing_max_profit(mut jobs: Vec<Job>) -> (i64, Vec<Option<usize>>
     for j in jobs {
         let mut t = j.deadline.min(max_d);
         while t >= 1 {
-            if slots[t].is_none() { slots[t] = Some(j.id); total += j.profit; break; }
+            if slots[t].is_none() {
+                slots[t] = Some(j.id);
+                total += j.profit;
+                break;
+            }
             t -= 1;
         }
     }
@@ -256,9 +327,18 @@ mod tests {
     #[test]
     fn test_fractional_knapsack() {
         let items = vec![
-            Item { weight: 10.0, value: 60.0 },
-            Item { weight: 20.0, value: 100.0 },
-            Item { weight: 30.0, value: 120.0 },
+            Item {
+                weight: 10.0,
+                value: 60.0,
+            },
+            Item {
+                weight: 20.0,
+                value: 100.0,
+            },
+            Item {
+                weight: 30.0,
+                value: 120.0,
+            },
         ];
         let best = fractional_knapsack_sync(items.clone(), 50.0);
         assert!((best - 240.0).abs() < 1e-9);
@@ -279,11 +359,31 @@ mod tests {
     #[test]
     fn test_job_sequencing() {
         let jobs = vec![
-            Job { id: 1, deadline: 2, profit: 100 },
-            Job { id: 2, deadline: 1, profit: 19 },
-            Job { id: 3, deadline: 2, profit: 27 },
-            Job { id: 4, deadline: 1, profit: 25 },
-            Job { id: 5, deadline: 3, profit: 15 },
+            Job {
+                id: 1,
+                deadline: 2,
+                profit: 100,
+            },
+            Job {
+                id: 2,
+                deadline: 1,
+                profit: 19,
+            },
+            Job {
+                id: 3,
+                deadline: 2,
+                profit: 27,
+            },
+            Job {
+                id: 4,
+                deadline: 1,
+                profit: 25,
+            },
+            Job {
+                id: 5,
+                deadline: 3,
+                profit: 15,
+            },
         ];
         let (profit, slots) = job_sequencing_max_profit(jobs);
         assert!(profit >= 127); // 期望最佳 142（1,3,5）
@@ -302,4 +402,3 @@ mod tests {
         assert_eq!(r.iter().sum::<i64>(), 18);
     }
 }
-

@@ -10,5 +10,3 @@ pub trait Dht {
     fn put(&mut self, key: &DhtKey, value: DhtValue);
     fn get(&self, key: &DhtKey) -> Option<DhtValue>;
 }
-
-

@@ -1,5 +1,5 @@
-use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;
+use std::sync::atomic::{AtomicU64, Ordering};
 use std::time::{Duration, Instant};
 
 #[derive(Clone)]
@@ -16,7 +16,14 @@ struct Inner {
 
 impl CircuitBreaker {
     pub fn new(fail_threshold: u64, open_window: Duration) -> Self {
-        Self { inner: Arc::new(Inner { failures: AtomicU64::new(0), opened_at: parking_lot::Mutex::new(None), fail_threshold, open_window }) }
+        Self {
+            inner: Arc::new(Inner {
+                failures: AtomicU64::new(0),
+                opened_at: parking_lot::Mutex::new(None),
+                fail_threshold,
+                open_window,
+            }),
+        }
     }
 
     pub async fn run<F, T, E>(&self, fut: F) -> Result<T, E>
@@ -27,7 +34,9 @@ impl CircuitBreaker {
         {
             let mut opened = self.inner.opened_at.lock();
             if let Some(t) = *opened {
-                if t.elapsed() < self.inner.open_window { return Err(self.synthetic_err()); }
+                if t.elapsed() < self.inner.open_window {
+                    return Err(self.synthetic_err());
+                }
                 *opened = None; // half-open: 允许一次尝试
             }
         }
@@ -52,5 +61,3 @@ impl CircuitBreaker {
         panic!("circuit open")
     }
 }
-
-

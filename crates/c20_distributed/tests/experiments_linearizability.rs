@@ -18,6 +18,8 @@ fn linearizability_mutex_increment() {
             *g += 1;
         }));
     }
-    for h in handles { h.join().unwrap(); }
+    for h in handles {
+        h.join().unwrap();
+    }
     assert_eq!(*counter.lock().unwrap(), ops);
 }

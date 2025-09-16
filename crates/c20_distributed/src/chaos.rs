@@ -1,5 +1,5 @@
 //! 混沌注入模块
-//! 
+//!
 //! 提供可配置的延迟、丢包、抖动、网络分区等模拟能力，便于在本地与测试环境复现故障场景。
 
 use std::collections::HashSet;
@@ -40,22 +40,34 @@ pub struct ChaosInjector {
 }
 
 impl ChaosInjector {
-    pub fn new(cfg: ChaosConfig) -> Self { Self { cfg } }
+    pub fn new(cfg: ChaosConfig) -> Self {
+        Self { cfg }
+    }
 
-    pub fn update(&mut self, cfg: ChaosConfig) { self.cfg = cfg; }
+    pub fn update(&mut self, cfg: ChaosConfig) {
+        self.cfg = cfg;
+    }
 
     /// 根据配置注入延迟（含抖动）
     pub fn inject_latency(&self) {
-        if self.cfg.latency_ms == 0 && self.cfg.jitter_ms == 0 { return; }
+        if self.cfg.latency_ms == 0 && self.cfg.jitter_ms == 0 {
+            return;
+        }
         let base = self.cfg.latency_ms as i64;
-        let jitter = if self.cfg.jitter_ms == 0 { 0 } else { (Instant::now().elapsed().as_nanos() as i64 % (self.cfg.jitter_ms as i64 + 1)) as i64 };
+        let jitter = if self.cfg.jitter_ms == 0 {
+            0
+        } else {
+            (Instant::now().elapsed().as_nanos() as i64 % (self.cfg.jitter_ms as i64 + 1)) as i64
+        };
         let dur_ms = (base + jitter).max(0) as u64;
         thread::sleep(Duration::from_millis(dur_ms));
     }
 
     /// 根据概率决定是否丢弃
     pub fn should_drop(&self) -> bool {
-        if self.cfg.drop_rate <= 0.0 { return false; }
+        if self.cfg.drop_rate <= 0.0 {
+            return false;
+        }
         use std::collections::hash_map::DefaultHasher;
         use std::hash::{Hash, Hasher};
         let mut h = DefaultHasher::new();
@@ -69,5 +81,3 @@ impl ChaosInjector {
         self.cfg.partition_enabled && self.cfg.partition_peers.contains(peer)
     }
 }
-
-

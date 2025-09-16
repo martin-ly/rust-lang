@@ -1,10 +1,10 @@
 //! 内存池实现
 
 use crate::error::{NetworkError, NetworkResult};
+use bytes::Bytes;
+use std::collections::VecDeque;
 use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
-use std::collections::VecDeque;
-use bytes::Bytes;
 
 /// 内存池统计信息
 #[derive(Debug, Clone, Default)]
@@ -82,7 +82,7 @@ impl MemoryPool {
     pub fn new(pool_size: usize) -> Self {
         let block_size = 1024; // 与测试用例“只有1个块”的预期一致
         let max_blocks = pool_size / block_size;
-        
+
         let mut blocks = VecDeque::new();
         for _ in 0..max_blocks {
             blocks.push_back(MemoryBlock::new(block_size));
@@ -107,9 +107,10 @@ impl MemoryPool {
     /// 分配内存
     pub fn allocate(&self, size: usize) -> NetworkResult<PooledBytes> {
         if size > self.block_size {
-            return Err(NetworkError::Other(
-                format!("Requested size {} exceeds block size {}", size, self.block_size)
-            ));
+            return Err(NetworkError::Other(format!(
+                "Requested size {} exceeds block size {}",
+                size, self.block_size
+            )));
         }
 
         let mut blocks = self.blocks.lock().unwrap();
@@ -119,14 +120,15 @@ impl MemoryPool {
         for (index, block) in blocks.iter_mut().enumerate() {
             if !block.is_allocated() {
                 block.allocate();
-                
+
                 // 更新统计信息
                 stats.total_allocations += 1;
                 stats.current_allocations += 1;
                 stats.used_size += block.size;
                 stats.free_size -= block.size;
-                stats.average_allocation_size = stats.used_size as f64 / stats.current_allocations as f64;
-                
+                stats.average_allocation_size =
+                    stats.used_size as f64 / stats.current_allocations as f64;
+
                 if stats.used_size > stats.peak_usage {
                     stats.peak_usage = stats.used_size;
                 }
@@ -140,7 +142,7 @@ impl MemoryPool {
             }
         }
 
-                    Err(NetworkError::Other("Memory pool exhausted".to_string()))
+        Err(NetworkError::Other("Memory pool exhausted".to_string()))
     }
 
     /// 获取统计信息
@@ -287,7 +289,7 @@ impl Drop for PooledBytes {
         if let Some(block) = blocks.get_mut(self.block_index) {
             if block.is_allocated() {
                 block.deallocate();
-                
+
                 // 更新统计信息
                 stats.total_deallocations += 1;
                 stats.current_allocations -= 1;
@@ -338,7 +340,8 @@ impl MemoryPoolManager {
 
     /// 获取所有内存池的统计信息
     pub fn get_all_stats(&self) -> std::collections::HashMap<String, PoolStats> {
-        self.pools.iter()
+        self.pools
+            .iter()
             .map(|(name, pool)| (name.clone(), pool.get_stats()))
             .collect()
     }
@@ -367,31 +370,31 @@ mod tests {
     #[tokio::test]
     async fn test_memory_pool_basic() -> NetworkResult<()> {
         let pool = MemoryPool::new(1024);
-        
+
         // 分配内存
         let mut bytes = pool.allocate(512)?;
         assert_eq!(bytes.len(), 512);
         assert!(!bytes.is_empty());
-        
+
         // 写入数据
         bytes.copy_from_slice(b"test data");
         assert_eq!(bytes.as_slice(), Bytes::copy_from_slice(b"test data"));
-        
+
         // 检查统计信息
         let stats = pool.get_stats();
         assert_eq!(stats.current_allocations, 1);
         assert_eq!(stats.used_size, 1024); // 块大小
-        
+
         Ok(())
     }
 
     #[tokio::test]
     async fn test_memory_pool_exhaustion() {
         let pool = MemoryPool::new(1024); // 只有1个块
-        
+
         // 分配第一个块
         let _bytes1 = pool.allocate(512).unwrap();
-        
+
         // 尝试分配第二个块应该失败
         assert!(pool.allocate(512).is_err());
     }
@@ -399,38 +402,38 @@ mod tests {
     #[tokio::test]
     async fn test_memory_pool_cleanup() -> NetworkResult<()> {
         let pool = MemoryPool::new(2048);
-        
+
         // 分配内存
         let _bytes = pool.allocate(512)?;
-        
+
         // 清理
         pool.cleanup().await?;
-        
+
         // 检查统计信息
         let stats = pool.get_stats();
         assert_eq!(stats.current_allocations, 0);
         assert_eq!(stats.used_size, 0);
-        
+
         Ok(())
     }
 
     #[tokio::test]
     async fn test_memory_pool_manager() -> NetworkResult<()> {
         let mut manager = MemoryPoolManager::new(1024);
-        
+
         // 创建内存池
         let pool = manager.create_pool("test".to_string(), Some(2048));
-        
+
         // 分配内存
         let _bytes = pool.allocate(512)?;
-        
+
         // 获取统计信息
         let stats = manager.get_all_stats();
         assert!(stats.contains_key("test"));
-        
+
         // 清理
         manager.cleanup_all().await?;
-        
+
         Ok(())
     }
 
@@ -438,11 +441,11 @@ mod tests {
     fn test_pooled_bytes() {
         let pool = MemoryPool::new(1024);
         let mut bytes = pool.allocate(100).unwrap();
-        
+
         // 测试数据操作
         bytes.copy_from_slice(b"hello");
         assert_eq!(bytes.as_slice(), Bytes::copy_from_slice(b"hello"));
-        
+
         // 测试可变操作
         bytes.copy_from_slice(b"Hello");
         assert_eq!(bytes.as_slice(), Bytes::copy_from_slice(b"Hello"));

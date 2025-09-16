@@ -1,5 +1,5 @@
 //! # 增强可观测性模块
-//! 
+//!
 //! 集成OpenTelemetry、Prometheus、Grafana等可观测性工具
 
 use serde::{Deserialize, Serialize};

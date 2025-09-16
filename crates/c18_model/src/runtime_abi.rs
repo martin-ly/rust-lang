@@ -53,5 +53,3 @@ pub trait Instrument {
         Self: Sized,
         Fut: Future;
 }
-
-

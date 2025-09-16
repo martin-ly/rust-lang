@@ -1,10 +1,10 @@
 //! 数据库系统设计模式应用
-//! 
+//!
 //! 本模块展示了在数据库系统中应用各种设计模式的实践案例，
 //! 包括DAO、Active Record、Unit of Work等经典模式。
 
-use std::collections::HashMap;
 use std::any::Any;
+use std::collections::HashMap;
 
 // ============================================================================
 // DAO (Data Access Object) 模式
@@ -30,7 +30,7 @@ impl MockDatabaseConnection {
         let mut data = HashMap::new();
         data.insert("users".to_string(), Vec::new());
         data.insert("products".to_string(), Vec::new());
-        
+
         Self {
             data,
             in_transaction: false,
@@ -46,7 +46,7 @@ impl DatabaseConnection for MockDatabaseConnection {
             user.insert("id".to_string(), "1".to_string());
             user.insert("name".to_string(), "John Doe".to_string());
             user.insert("email".to_string(), "john@example.com".to_string());
-            
+
             if let Some(users) = self.data.get_mut("users") {
                 users.push(user);
             }
@@ -110,7 +110,7 @@ impl UserDao for UserDaoImpl {
     fn find_by_id(&self, id: i32) -> Result<Option<User>, String> {
         let query = format!("SELECT * FROM users WHERE id = {}", id);
         let results = self.connection.query(&query)?;
-        
+
         if let Some(row) = results.first() {
             let user = User {
                 id: Some(id),
@@ -126,7 +126,7 @@ impl UserDao for UserDaoImpl {
     fn find_all(&self) -> Result<Vec<User>, String> {
         let query = "SELECT * FROM users";
         let results = self.connection.query(query)?;
-        
+
         let users = results
             .into_iter()
             .map(|row| User {
@@ -135,7 +135,7 @@ impl UserDao for UserDaoImpl {
                 email: row.get("email").cloned().unwrap_or_default(),
             })
             .collect();
-        
+
         Ok(users)
     }
 
@@ -174,8 +174,12 @@ impl UserDao for UserDaoImpl {
 pub trait ActiveRecord {
     fn save(&mut self) -> Result<(), String>;
     fn delete(&mut self) -> Result<(), String>;
-    fn find_by_id(id: i32) -> Result<Option<Self>, String> where Self: Sized;
-    fn find_all() -> Result<Vec<Self>, String> where Self: Sized;
+    fn find_by_id(id: i32) -> Result<Option<Self>, String>
+    where
+        Self: Sized;
+    fn find_all() -> Result<Vec<Self>, String>
+    where
+        Self: Sized;
 }
 
 /// 产品实体（Active Record实现）
@@ -208,7 +212,10 @@ impl ActiveRecord for Product {
             // 更新
             let query = format!(
                 "UPDATE products SET name = '{}', price = {}, description = '{}' WHERE id = {}",
-                self.name, self.price, self.description, self.id.unwrap()
+                self.name,
+                self.price,
+                self.description,
+                self.id.unwrap()
             );
             // 这里应该执行数据库操作
             println!("执行更新: {}", query);
@@ -323,9 +330,15 @@ impl<T> EntityTracker<T> {
 
 /// Unit of Work接口
 pub trait UnitOfWork {
-    fn register_new<T>(&mut self, entity: T) where T: 'static;
-    fn register_dirty<T>(&mut self, entity: T) where T: 'static;
-    fn register_deleted<T>(&mut self, entity: T) where T: 'static;
+    fn register_new<T>(&mut self, entity: T)
+    where
+        T: 'static;
+    fn register_dirty<T>(&mut self, entity: T)
+    where
+        T: 'static;
+    fn register_deleted<T>(&mut self, entity: T)
+    where
+        T: 'static;
     fn commit(&mut self) -> Result<(), String>;
     fn rollback(&mut self) -> Result<(), String>;
 }
@@ -344,19 +357,28 @@ impl UnitOfWorkImpl {
 }
 
 impl UnitOfWork for UnitOfWorkImpl {
-    fn register_new<T>(&mut self, entity: T) where T: 'static {
+    fn register_new<T>(&mut self, entity: T)
+    where
+        T: 'static,
+    {
         let mut tracker = EntityTracker::new(entity);
         tracker.mark_as_added();
         self.trackers.push(Box::new(tracker));
     }
 
-    fn register_dirty<T>(&mut self, entity: T) where T: 'static {
+    fn register_dirty<T>(&mut self, entity: T)
+    where
+        T: 'static,
+    {
         let mut tracker = EntityTracker::new(entity);
         tracker.mark_as_modified();
         self.trackers.push(Box::new(tracker));
     }
 
-    fn register_deleted<T>(&mut self, entity: T) where T: 'static {
+    fn register_deleted<T>(&mut self, entity: T)
+    where
+        T: 'static,
+    {
         let mut tracker = EntityTracker::new(entity);
         tracker.mark_as_deleted();
         self.trackers.push(Box::new(tracker));
@@ -365,18 +387,20 @@ impl UnitOfWork for UnitOfWorkImpl {
     fn commit(&mut self) -> Result<(), String> {
         // 模拟提交事务
         println!("提交事务，处理 {} 个实体", self.trackers.len());
-        
+
         for tracker in &self.trackers {
             if let Some(user_tracker) = tracker.downcast_ref::<EntityTracker<User>>() {
                 match user_tracker.get_state() {
                     EntityState::Added => println!("添加用户: {:?}", user_tracker.get_entity()),
                     EntityState::Modified => println!("修改用户: {:?}", user_tracker.get_entity()),
                     EntityState::Deleted => println!("删除用户: {:?}", user_tracker.get_entity()),
-                    EntityState::Unchanged => println!("用户未变更: {:?}", user_tracker.get_entity()),
+                    EntityState::Unchanged => {
+                        println!("用户未变更: {:?}", user_tracker.get_entity())
+                    }
                 }
             }
         }
-        
+
         self.trackers.clear();
         Ok(())
     }
@@ -480,16 +504,16 @@ mod tests {
     fn test_dao_pattern() {
         let connection = MockDatabaseConnection::new();
         let mut dao = UserDaoImpl::new(Box::new(connection));
-        
+
         let user = User {
             id: None,
             name: "Test User".to_string(),
             email: "test@example.com".to_string(),
         };
-        
+
         let id = dao.save(&user).unwrap();
         assert_eq!(id, 1);
-        
+
         let found_user = dao.find_by_id(1).unwrap();
         assert!(found_user.is_some());
     }
@@ -501,16 +525,16 @@ mod tests {
             99.99,
             "这是一个测试产品".to_string(),
         );
-        
+
         // 保存产品
         product.save().unwrap();
         assert!(product.id.is_some());
-        
+
         // 查找产品
         let found_product = Product::find_by_id(1).unwrap();
         assert!(found_product.is_some());
         assert_eq!(found_product.unwrap().name, "示例产品");
-        
+
         // 查找所有产品
         let all_products = Product::find_all().unwrap();
         assert_eq!(all_products.len(), 2);
@@ -519,25 +543,25 @@ mod tests {
     #[test]
     fn test_unit_of_work_pattern() {
         let mut unit_of_work = UnitOfWorkImpl::new();
-        
+
         let user1 = User {
             id: None,
             name: "User 1".to_string(),
             email: "user1@example.com".to_string(),
         };
-        
+
         let user2 = User {
             id: Some(2),
             name: "User 2".to_string(),
             email: "user2@example.com".to_string(),
         };
-        
+
         // 注册新实体
         unit_of_work.register_new(user1);
-        
+
         // 注册修改的实体
         unit_of_work.register_dirty(user2);
-        
+
         // 提交事务
         unit_of_work.commit().unwrap();
     }
@@ -545,19 +569,19 @@ mod tests {
     #[test]
     fn test_repository_with_unit_of_work() {
         let mut repository = UserRepository::new();
-        
+
         let user = User {
             id: None,
             name: "Test User".to_string(),
             email: "test@example.com".to_string(),
         };
-        
+
         // 添加用户
         repository.add(user).unwrap();
-        
+
         // 提交事务
         repository.commit().unwrap();
-        
+
         // 查找用户
         let found_user = repository.find_by_id(1).unwrap();
         assert!(found_user.is_some());

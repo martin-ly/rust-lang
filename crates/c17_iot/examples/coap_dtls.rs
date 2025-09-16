@@ -11,5 +11,3 @@ fn main() -> anyhow::Result<()> {
     println!("TODO: integrate DTLS transport (rustls/openssl/mbedtls binding)");
     Ok(())
 }
-
-

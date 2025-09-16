@@ -1,5 +1,5 @@
 //! # WebAssembly系统核心类型定义 / WebAssembly System Core Type Definitions
-//! 
+//!
 //! 本模块定义了WebAssembly系统的核心数据类型和结构。
 //! This module defines the core data types and structures for the WebAssembly system.
 
@@ -9,7 +9,7 @@ use std::time::Duration;
 use thiserror::Error;
 
 /// WebAssembly值类型 / WebAssembly Value Type
-/// 
+///
 /// 表示WebAssembly中的基本数据类型。
 /// Represents basic data types in WebAssembly.
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq)]
@@ -50,7 +50,7 @@ impl Value {
             Value::V128(_) => ValueType::V128,
         }
     }
-    
+
     /// 转换为i32 / Convert to i32
     pub fn as_i32(&self) -> Option<i32> {
         match self {
@@ -58,7 +58,7 @@ impl Value {
             _ => None,
         }
     }
-    
+
     /// 转换为i64 / Convert to i64
     pub fn as_i64(&self) -> Option<i64> {
         match self {
@@ -66,7 +66,7 @@ impl Value {
             _ => None,
         }
     }
-    
+
     /// 转换为f32 / Convert to f32
     pub fn as_f32(&self) -> Option<f32> {
         match self {
@@ -74,7 +74,7 @@ impl Value {
             _ => None,
         }
     }
-    
+
     /// 转换为f64 / Convert to f64
     pub fn as_f64(&self) -> Option<f64> {
         match self {
@@ -82,7 +82,7 @@ impl Value {
             _ => None,
         }
     }
-    
+
     /// 转换为i128 (Rust 1.89 FFI支持) / Convert to i128 (Rust 1.89 FFI Support)
     pub fn as_i128(&self) -> Option<i128> {
         match self {
@@ -90,7 +90,7 @@ impl Value {
             _ => None,
         }
     }
-    
+
     /// 转换为u128 (Rust 1.89 FFI支持) / Convert to u128 (Rust 1.89 FFI Support)
     pub fn as_u128(&self) -> Option<u128> {
         match self {
@@ -98,7 +98,7 @@ impl Value {
             _ => None,
         }
     }
-    
+
     /// 转换为V128 SIMD向量 / Convert to V128 SIMD Vector
     pub fn as_v128(&self) -> Option<[u8; 16]> {
         match self {
@@ -109,7 +109,7 @@ impl Value {
 }
 
 /// 值类型 / Value Type
-/// 
+///
 /// 定义WebAssembly的基本值类型。
 /// Defines basic value types in WebAssembly.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -135,7 +135,7 @@ pub enum ValueType {
 }
 
 /// WebAssembly模块 / WebAssembly Module
-/// 
+///
 /// 表示一个完整的WebAssembly模块。
 /// Represents a complete WebAssembly module.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -182,44 +182,44 @@ impl Module {
             custom_sections: Vec::new(),
         }
     }
-    
+
     /// 添加函数 / Add Function
     pub fn add_function(&mut self, function: Function) {
         self.functions.push(function);
     }
-    
+
     /// 添加内存 / Add Memory
     pub fn add_memory(&mut self, memory: Memory) {
         self.memories.push(memory);
     }
-    
+
     /// 验证模块 / Validate Module
     pub fn validate(&self) -> ValidationResult {
         let mut errors = Vec::new();
-        
+
         // 验证函数 / Validate Functions
         for function in &self.functions {
             if let Err(e) = function.validate() {
                 errors.push(e);
             }
         }
-        
+
         // 验证内存 / Validate Memories
         for memory in &self.memories {
             if let Err(e) = memory.validate() {
                 errors.push(e);
             }
         }
-        
+
         // 验证导入导出 / Validate Imports and Exports
         self.validate_imports_exports(&mut errors);
-        
+
         ValidationResult {
             is_valid: errors.is_empty(),
             errors,
         }
     }
-    
+
     /// 验证导入导出 / Validate Imports and Exports
     fn validate_imports_exports(&self, errors: &mut Vec<ValidationError>) {
         // 检查导出名称唯一性 / Check Export Name Uniqueness
@@ -233,7 +233,7 @@ impl Module {
 }
 
 /// 模块ID / Module ID
-/// 
+///
 /// 唯一标识一个WebAssembly模块。
 /// Uniquely identifies a WebAssembly module.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
@@ -247,7 +247,7 @@ impl ModuleId {
     pub fn new() -> Self {
         use std::sync::atomic::{AtomicU64, Ordering};
         static COUNTER: AtomicU64 = AtomicU64::new(1);
-        
+
         Self {
             id: COUNTER.fetch_add(1, Ordering::Relaxed),
         }
@@ -255,7 +255,7 @@ impl ModuleId {
 }
 
 /// WebAssembly函数 / WebAssembly Function
-/// 
+///
 /// 表示WebAssembly模块中的一个函数。
 /// Represents a function in a WebAssembly module.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -290,54 +290,57 @@ impl Function {
             func_type,
         }
     }
-    
+
     /// 验证函数 / Validate Function
     pub fn validate(&self) -> Result<(), ValidationError> {
         // 检查参数类型 / Check Parameter Types
         if self.params.len() != self.func_type.params.len() {
-            return Err(ValidationError::ParameterTypeMismatch { 
+            return Err(ValidationError::ParameterTypeMismatch {
                 expected: ValueType::I32, // 简化实现
-                actual: ValueType::I32 
+                actual: ValueType::I32,
             });
         }
-        
+
         // 检查返回类型 / Check Return Types
         if self.results.len() != self.func_type.results.len() {
-            return Err(ValidationError::ReturnTypeMismatch { 
+            return Err(ValidationError::ReturnTypeMismatch {
                 expected: ValueType::I32, // 简化实现
-                actual: ValueType::I32 
+                actual: ValueType::I32,
             });
         }
-        
+
         // 验证函数体 / Validate Function Body
         self.validate_body()?;
-        
+
         Ok(())
     }
-    
+
     /// 验证函数体 / Validate Function Body
     fn validate_body(&self) -> Result<(), ValidationError> {
         let mut stack = Vec::new();
-        
+
         for instruction in &self.body {
             match instruction {
                 Instruction::I32Const(_) => stack.push(ValueType::I32),
                 Instruction::I64Const(_) => stack.push(ValueType::I64),
                 Instruction::F32Const(_) => stack.push(ValueType::F32),
                 Instruction::F64Const(_) => stack.push(ValueType::F64),
-                Instruction::I32Add | Instruction::I32Sub | Instruction::I32Mul | Instruction::I32Div => {
+                Instruction::I32Add
+                | Instruction::I32Sub
+                | Instruction::I32Mul
+                | Instruction::I32Div => {
                     if stack.len() < 2 {
-                        return Err(ValidationError::StackUnderflow { 
-                            required: 2, 
-                            available: stack.len() 
+                        return Err(ValidationError::StackUnderflow {
+                            required: 2,
+                            available: stack.len(),
                         });
                     }
                     let a = stack.pop().unwrap();
                     let b = stack.pop().unwrap();
                     if a != ValueType::I32 || b != ValueType::I32 {
-                        return Err(ValidationError::TypeMismatch { 
-                            expected: ValueType::I32, 
-                            actual: a 
+                        return Err(ValidationError::TypeMismatch {
+                            expected: ValueType::I32,
+                            actual: a,
                         });
                     }
                     stack.push(ValueType::I32);
@@ -345,9 +348,9 @@ impl Function {
                 Instruction::Return => {
                     // 检查返回类型匹配 / Check Return Type Match
                     if stack.len() != self.results.len() {
-                        return Err(ValidationError::ReturnTypeMismatch { 
+                        return Err(ValidationError::ReturnTypeMismatch {
                             expected: ValueType::I32, // 简化实现
-                            actual: ValueType::I32 
+                            actual: ValueType::I32,
                         });
                     }
                     break;
@@ -358,13 +361,13 @@ impl Function {
                 }
             }
         }
-        
+
         Ok(())
     }
 }
 
 /// 函数类型 / Function Type
-/// 
+///
 /// 定义函数的签名类型。
 /// Defines the signature type of a function.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -376,7 +379,7 @@ pub struct FunctionType {
 }
 
 /// WebAssembly指令 / WebAssembly Instruction
-/// 
+///
 /// 表示WebAssembly虚拟机的一条指令。
 /// Represents an instruction in the WebAssembly virtual machine.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -424,7 +427,7 @@ pub enum Instruction {
 }
 
 /// WebAssembly内存 / WebAssembly Memory
-/// 
+///
 /// 表示WebAssembly模块的内存。
 /// Represents memory in a WebAssembly module.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -451,57 +454,57 @@ impl Memory {
             data: vec![0; size as usize],
         }
     }
-    
+
     /// 验证内存 / Validate Memory
     pub fn validate(&self) -> Result<(), ValidationError> {
         // 检查初始大小 / Check Initial Size
         if self.initial == 0 {
             return Err(ValidationError::InvalidMemorySize { size: self.initial });
         }
-        
+
         // 检查最大大小 / Check Maximum Size
         if let Some(max) = self.maximum {
             if max < self.initial {
                 return Err(ValidationError::InvalidMemorySize { size: max });
             }
         }
-        
+
         // 检查数据大小 / Check Data Size
         let expected_size = self.initial * PAGE_SIZE;
         if self.data.len() != expected_size as usize {
-            return Err(ValidationError::MemoryDataSizeMismatch { 
-                expected: expected_size as usize, 
-                actual: self.data.len() 
+            return Err(ValidationError::MemoryDataSizeMismatch {
+                expected: expected_size as usize,
+                actual: self.data.len(),
             });
         }
-        
+
         Ok(())
     }
-    
+
     /// 读取内存 / Read Memory
     pub fn read(&self, address: u32, size: u32) -> Result<Vec<u8>, MemoryError> {
         let end_address = address + size;
         if end_address > self.data.len() as u32 {
             return Err(MemoryError::OutOfBounds);
         }
-        
+
         Ok(self.data[address as usize..end_address as usize].to_vec())
     }
-    
+
     /// 写入内存 / Write Memory
     pub fn write(&mut self, address: u32, data: &[u8]) -> Result<(), MemoryError> {
         let end_address = address + data.len() as u32;
         if end_address > self.data.len() as u32 {
             return Err(MemoryError::OutOfBounds);
         }
-        
+
         self.data[address as usize..end_address as usize].copy_from_slice(data);
         Ok(())
     }
 }
 
 /// WebAssembly表 / WebAssembly Table
-/// 
+///
 /// 表示WebAssembly模块的函数表。
 /// Represents a function table in a WebAssembly module.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -530,35 +533,35 @@ impl Table {
             data: vec![None; initial as usize],
         }
     }
-    
+
     /// 验证表 / Validate Table
     pub fn validate(&self) -> Result<(), ValidationError> {
         // 检查初始大小 / Check Initial Size
         if self.initial == 0 {
             return Err(ValidationError::InvalidTableSize { size: self.initial });
         }
-        
+
         // 检查最大大小 / Check Maximum Size
         if let Some(max) = self.maximum {
             if max < self.initial {
                 return Err(ValidationError::InvalidTableSize { size: max });
             }
         }
-        
+
         // 检查数据大小 / Check Data Size
         if self.data.len() != self.initial as usize {
-            return Err(ValidationError::TableDataSizeMismatch { 
-                expected: self.initial as usize, 
-                actual: self.data.len() 
+            return Err(ValidationError::TableDataSizeMismatch {
+                expected: self.initial as usize,
+                actual: self.data.len(),
             });
         }
-        
+
         Ok(())
     }
 }
 
 /// 元素类型 / Element Type
-/// 
+///
 /// 定义表的元素类型。
 /// Defines the element type of a table.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -599,7 +602,7 @@ pub struct GlobalType {
 }
 
 /// 全局变量 / Global Variable
-/// 
+///
 /// 表示WebAssembly模块的全局变量。
 /// Represents a global variable in a WebAssembly module.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -626,23 +629,23 @@ impl Global {
             init_value,
         }
     }
-    
+
     /// 验证全局变量 / Validate Global Variable
     pub fn validate(&self) -> Result<(), ValidationError> {
         // 检查值类型匹配 / Check Value Type Match
         if self.init_value.get_type() != self.value_type {
-            return Err(ValidationError::TypeMismatch { 
-                expected: self.value_type.clone(), 
-                actual: self.init_value.get_type() 
+            return Err(ValidationError::TypeMismatch {
+                expected: self.value_type.clone(),
+                actual: self.init_value.get_type(),
             });
         }
-        
+
         Ok(())
     }
 }
 
 /// 导入 / Import
-/// 
+///
 /// 表示WebAssembly模块的导入项。
 /// Represents an import item in a WebAssembly module.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -657,7 +660,7 @@ pub struct Import {
 }
 
 /// 导入类型 / Import Type
-/// 
+///
 /// 定义导入项的类型。
 /// Defines the type of an import item.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -673,7 +676,7 @@ pub enum ImportType {
 }
 
 /// 导出 / Export
-/// 
+///
 /// 表示WebAssembly模块的导出项。
 /// Represents an export item in a WebAssembly module.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -688,7 +691,7 @@ pub struct Export {
 }
 
 /// 导出类型 / Export Type
-/// 
+///
 /// 定义导出项的类型。
 /// Defines the type of an export item.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -704,7 +707,7 @@ pub enum ExportType {
 }
 
 /// 数据段 / Data Segment
-/// 
+///
 /// 表示WebAssembly模块的数据段。
 /// Represents a data segment in a WebAssembly module.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -720,7 +723,7 @@ pub struct DataSegment {
 }
 
 /// 元素段 / Element Segment
-/// 
+///
 /// 表示WebAssembly模块的元素段。
 /// Represents an element segment in a WebAssembly module.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -736,7 +739,7 @@ pub struct ElementSegment {
 }
 
 /// 自定义段 / Custom Section
-/// 
+///
 /// 表示WebAssembly模块的自定义段。
 /// Represents a custom section in a WebAssembly module.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -748,7 +751,7 @@ pub struct CustomSection {
 }
 
 /// 编译模块 / Compiled Module
-/// 
+///
 /// 表示编译后的WebAssembly模块。
 /// Represents a compiled WebAssembly module.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -760,7 +763,7 @@ pub struct CompiledModule {
 }
 
 /// 模块元数据 / Module Metadata
-/// 
+///
 /// 包含模块的元数据信息。
 /// Contains metadata information of a module.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -780,7 +783,7 @@ pub struct ModuleMetadata {
 }
 
 /// 优化级别 / Optimization Level
-/// 
+///
 /// 定义编译优化的级别。
 /// Defines the level of compilation optimization.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -798,7 +801,7 @@ pub enum OptimizationLevel {
 }
 
 /// 执行环境 / Execution Environment
-/// 
+///
 /// 表示WebAssembly函数的执行环境。
 /// Represents the execution environment of a WebAssembly function.
 #[allow(dead_code)]
@@ -825,41 +828,41 @@ impl ExecutionEnvironment {
             module_id,
         }
     }
-    
+
     /// 压栈 / Push to Stack
     pub fn push(&mut self, value: Value) {
         self.stack.push(value);
     }
-    
+
     /// 出栈 / Pop from Stack
     pub fn pop(&mut self) -> Option<Value> {
         self.stack.pop()
     }
-    
+
     /// 读取内存 / Read Memory
     pub fn read_memory(&self, address: u32, size: u32) -> Result<Vec<u8>, MemoryError> {
         let end_address = address + size;
         if end_address > self.memory.len() as u32 {
             return Err(MemoryError::OutOfBounds);
         }
-        
+
         Ok(self.memory[address as usize..end_address as usize].to_vec())
     }
-    
+
     /// 写入内存 / Write Memory
     pub fn write_memory(&mut self, address: u32, data: &[u8]) -> Result<(), MemoryError> {
         let end_address = address + data.len() as u32;
         if end_address > self.memory.len() as u32 {
             return Err(MemoryError::OutOfBounds);
         }
-        
+
         self.memory[address as usize..end_address as usize].copy_from_slice(data);
         Ok(())
     }
 }
 
 /// 验证结果 / Validation Result
-/// 
+///
 /// 表示验证操作的结果。
 /// Represents the result of a validation operation.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -872,7 +875,7 @@ pub struct ValidationResult {
 }
 
 /// 验证错误 / Validation Error
-/// 
+///
 /// 定义验证过程中可能出现的错误。
 /// Defines errors that may occur during validation.
 #[derive(Debug, Clone, Serialize, Deserialize, Error)]
@@ -880,13 +883,22 @@ pub struct ValidationResult {
 pub enum ValidationError {
     /// 参数类型不匹配 / Parameter Type Mismatch
     #[error("参数类型不匹配: 期望 {expected:?}, 实际 {actual:?}")]
-    ParameterTypeMismatch { expected: ValueType, actual: ValueType },
+    ParameterTypeMismatch {
+        expected: ValueType,
+        actual: ValueType,
+    },
     /// 返回类型不匹配 / Return Type Mismatch
     #[error("返回类型不匹配: 期望 {expected:?}, 实际 {actual:?}")]
-    ReturnTypeMismatch { expected: ValueType, actual: ValueType },
+    ReturnTypeMismatch {
+        expected: ValueType,
+        actual: ValueType,
+    },
     /// 类型不匹配 / Type Mismatch
     #[error("类型不匹配: 期望 {expected:?}, 实际 {actual:?}")]
-    TypeMismatch { expected: ValueType, actual: ValueType },
+    TypeMismatch {
+        expected: ValueType,
+        actual: ValueType,
+    },
     /// 栈下溢 / Stack Underflow
     #[error("栈下溢: 需要 {required} 个元素，但只有 {available} 个")]
     StackUnderflow { required: usize, available: usize },
@@ -917,7 +929,7 @@ pub enum ValidationError {
 }
 
 /// 编译错误 / Compilation Error
-/// 
+///
 /// 定义编译过程中可能出现的错误。
 /// Defines errors that may occur during compilation.
 #[derive(Debug, Clone, Serialize, Deserialize, Error)]
@@ -941,7 +953,7 @@ pub enum CompilationError {
 }
 
 /// 运行时错误 / Runtime Error
-/// 
+///
 /// 定义运行时可能出现的错误。
 /// Defines errors that may occur during runtime.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -962,7 +974,7 @@ pub enum RuntimeError {
 }
 
 /// 内存错误 / Memory Error
-/// 
+///
 /// 定义内存操作可能出现的错误。
 /// Defines errors that may occur during memory operations.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -977,7 +989,7 @@ pub enum MemoryError {
 }
 
 /// 安全错误 / Security Error
-/// 
+///
 /// 定义安全相关错误。
 /// Defines security-related errors.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -994,7 +1006,7 @@ pub enum SecurityError {
 }
 
 /// WebAssembly错误 / WebAssembly Error
-/// 
+///
 /// 定义WebAssembly系统的通用错误。
 /// Defines common errors for the WebAssembly system.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -1012,7 +1024,7 @@ pub enum WebAssemblyError {
 }
 
 /// 执行结果 / Execution Result
-/// 
+///
 /// 表示函数执行的结果。
 /// Represents the result of function execution.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -1028,7 +1040,7 @@ pub struct ExecutionResult {
 }
 
 /// 性能分析 / Performance Analysis
-/// 
+///
 /// 表示性能分析的结果。
 /// Represents the result of performance analysis.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -1046,7 +1058,7 @@ pub struct PerformanceAnalysis {
 }
 
 /// 优化结果 / Optimization Result
-/// 
+///
 /// 表示优化操作的结果。
 /// Represents the result of an optimization operation.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -1062,7 +1074,7 @@ pub struct OptimizationResult {
 }
 
 /// 正确性验证 / Correctness Verification
-/// 
+///
 /// 表示正确性验证的结果。
 /// Represents the result of correctness verification.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -1076,7 +1088,7 @@ pub struct CorrectnessVerification {
 }
 
 /// 测试用例 / Test Case
-/// 
+///
 /// 表示一个测试用例。
 /// Represents a test case.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -1106,7 +1118,7 @@ pub const MAX_FUNCTION_RETURNS: u32 = 1000;
 pub const MAX_LOCAL_VARIABLES: u32 = 50000;
 
 /// Rust 1.89 常量泛型推断示例 / Rust 1.89 Const Generic Inference Example
-/// 
+///
 /// 使用下划线让编译器自动推断常量泛型参数的值
 /// Use underscore to let compiler automatically infer const generic parameter values
 #[allow(dead_code)]
@@ -1115,7 +1127,7 @@ pub fn create_wasm_array<const LEN: usize>() -> [Value; LEN] {
 }
 
 /// WebAssembly 2.0 批量内存操作 / WebAssembly 2.0 Bulk Memory Operations
-/// 
+///
 /// 支持批量内存复制和填充操作
 /// Supports bulk memory copy and fill operations
 #[allow(dead_code)]
@@ -1184,7 +1196,7 @@ pub struct TableFill {
 }
 
 /// WebAssembly 2.0 尾调用优化 / WebAssembly 2.0 Tail Call Optimization
-/// 
+///
 /// 支持尾调用优化，减少调用栈深度
 /// Supports tail call optimization to reduce call stack depth
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -1196,7 +1208,7 @@ pub struct TailCall {
 }
 
 /// WebAssembly 2.0 宿主绑定 / WebAssembly 2.0 Host Bindings
-/// 
+///
 /// 允许Wasm模块直接操作JavaScript/DOM对象
 /// Allows Wasm modules to directly manipulate JavaScript/DOM objects
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -1223,7 +1235,7 @@ pub enum HostBindingType {
 }
 
 /// WebAssembly 2.0 接口类型 / WebAssembly 2.0 Interface Types
-/// 
+///
 /// 支持更丰富的类型系统，包括字符串、记录等
 /// Supports richer type system including strings, records, etc.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -1241,7 +1253,10 @@ pub enum InterfaceType {
     /// 可选类型 / Optional Type
     Optional(Box<InterfaceType>),
     /// 结果类型 / Result Type
-    Result { ok: Option<Box<InterfaceType>>, err: Option<Box<InterfaceType>> },
+    Result {
+        ok: Option<Box<InterfaceType>>,
+        err: Option<Box<InterfaceType>>,
+    },
 }
 
 /// 记录字段 / Record Field
@@ -1263,7 +1278,7 @@ pub struct VariantCase {
 }
 
 /// Rust 1.89 生命周期语法检查示例 / Rust 1.89 Lifetime Syntax Check Example
-/// 
+///
 /// 演示新的生命周期语法检查功能
 /// Demonstrates new lifetime syntax check functionality
 #[allow(dead_code)]
@@ -1274,7 +1289,7 @@ pub fn lifetime_example<'a>(input: &'a str) -> &'a str {
 }
 
 // Rust 1.89 FFI 改进示例 / Rust 1.89 FFI Improvement Example
-// 
+//
 // 演示 i128 和 u128 类型在 extern "C" 函数中的使用
 // Demonstrates use of i128 and u128 types in extern "C" functions
 #[allow(dead_code)]
@@ -1291,4 +1306,4 @@ pub unsafe fn call_external_128bit_functions() -> (i128, u128) {
     let i128_result = unsafe { external_i128_function(42i128) };
     let u128_result = unsafe { external_u128_function(42u128) };
     (i128_result, u128_result)
-} 
+}

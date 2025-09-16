@@ -35,7 +35,10 @@ impl FromStr for HttpMethod {
             "PATCH" => Ok(HttpMethod::PATCH),
             "TRACE" => Ok(HttpMethod::TRACE),
             "CONNECT" => Ok(HttpMethod::CONNECT),
-            _ => Err(NetworkError::Protocol(format!("Unknown HTTP method: {}", s))),
+            _ => Err(NetworkError::Protocol(format!(
+                "Unknown HTTP method: {}",
+                s
+            ))),
         }
     }
 }
@@ -72,7 +75,10 @@ impl FromStr for HttpVersion {
             "HTTP/1.0" => Ok(HttpVersion::Http1_0),
             "HTTP/1.1" => Ok(HttpVersion::Http1_1),
             "HTTP/2.0" => Ok(HttpVersion::Http2_0),
-            _ => Err(NetworkError::Protocol(format!("Unknown HTTP version: {}", s))),
+            _ => Err(NetworkError::Protocol(format!(
+                "Unknown HTTP version: {}",
+                s
+            ))),
         }
     }
 }
@@ -194,40 +200,45 @@ mod tests {
 
     #[test]
     fn test_http_version_parsing() {
-        assert_eq!(HttpVersion::from_str("HTTP/1.1").unwrap(), HttpVersion::Http1_1);
-        assert_eq!(HttpVersion::from_str("HTTP/2.0").unwrap(), HttpVersion::Http2_0);
+        assert_eq!(
+            HttpVersion::from_str("HTTP/1.1").unwrap(),
+            HttpVersion::Http1_1
+        );
+        assert_eq!(
+            HttpVersion::from_str("HTTP/2.0").unwrap(),
+            HttpVersion::Http2_0
+        );
         assert!(HttpVersion::from_str("HTTP/3.0").is_err());
     }
 
     #[test]
     fn test_http_request_creation() {
-        let mut request = HttpRequest::new(
-            HttpMethod::GET,
-            "/test",
-            HttpVersion::Http1_1,
-        );
-        
+        let mut request = HttpRequest::new(HttpMethod::GET, "/test", HttpVersion::Http1_1);
+
         request.add_header("Content-Type", "application/json");
         request.set_body(b"test body".as_slice());
-        
+
         assert_eq!(request.method, HttpMethod::GET);
         assert_eq!(request.uri, "/test");
-        assert_eq!(request.headers.get("Content-Type"), Some(&"application/json".to_string()));
+        assert_eq!(
+            request.headers.get("Content-Type"),
+            Some(&"application/json".to_string())
+        );
         assert_eq!(request.body, Bytes::from("test body"));
     }
 
     #[test]
     fn test_http_response_creation() {
-        let mut response = HttpResponse::new(
-            HttpVersion::Http1_1,
-            HttpStatusCode::ok(),
-        );
-        
+        let mut response = HttpResponse::new(HttpVersion::Http1_1, HttpStatusCode::ok());
+
         response.add_header("Content-Type", "text/html");
         response.set_body(b"<html></html>".as_slice());
-        
+
         assert_eq!(response.status.code, 200);
-        assert_eq!(response.headers.get("Content-Type"), Some(&"text/html".to_string()));
+        assert_eq!(
+            response.headers.get("Content-Type"),
+            Some(&"text/html".to_string())
+        );
         assert_eq!(response.body, Bytes::from("<html></html>"));
     }
 }

@@ -1,9 +1,9 @@
 // 最小 loom 并发验证示例：两个线程对计数器加一，验证无死锁与线性化
 
-use loom::sync::atomic::{AtomicUsize, Ordering};
 use loom::sync::Arc;
-use loom::thread;
 use loom::sync::Mutex;
+use loom::sync::atomic::{AtomicUsize, Ordering};
+use loom::thread;
 
 #[test]
 fn loom_counter() {
@@ -23,7 +23,11 @@ fn loom_counter() {
         t2.join().unwrap();
 
         let v = counter.load(Ordering::SeqCst);
-        assert!(v == 1 || v == 2, "value should be 1 or 2 under exploration, got {}", v);
+        assert!(
+            v == 1 || v == 2,
+            "value should be 1 or 2 under exploration, got {}",
+            v
+        );
     });
 }
 
@@ -50,5 +54,3 @@ fn loom_mutex_counter() {
         assert_eq!(v, 2);
     });
 }
-
-

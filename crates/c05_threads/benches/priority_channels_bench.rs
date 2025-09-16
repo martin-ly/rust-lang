@@ -1,6 +1,6 @@
-use criterion::{criterion_group, criterion_main, Criterion};
-use std::hint::black_box;
 use c05_threads::message_passing::{priority_channels as full, priority_channels_simple as simple};
+use criterion::{Criterion, criterion_group, criterion_main};
+use std::hint::black_box;
 
 fn bench_simple(c: &mut Criterion) {
     c.bench_function("simple_priority_channel_send_recv_10k", |b| {
@@ -27,7 +27,9 @@ fn bench_full(c: &mut Criterion) {
             }
             let mut sum = 0u64;
             for _ in 0..10_000 {
-                if let Some(v) = ch.try_recv() { sum = sum.wrapping_add(v as u64); }
+                if let Some(v) = ch.try_recv() {
+                    sum = sum.wrapping_add(v as u64);
+                }
             }
             black_box(sum)
         })
@@ -39,14 +41,22 @@ fn bench_dynamic(c: &mut Criterion) {
         b.iter(|| {
             let ch = full::DynamicPriorityChannel::new(|data: &i32| {
                 // 短小数据优先（示意）
-                if *data < 1000 { 1 } else if *data < 5000 { 2 } else { 3 }
+                if *data < 1000 {
+                    1
+                } else if *data < 5000 {
+                    2
+                } else {
+                    3
+                }
             });
             for i in 0..10_000 {
                 let _ = ch.send(i);
             }
             let mut sum = 0u64;
             for _ in 0..10_000 {
-                if let Some(v) = ch.recv() { sum = sum.wrapping_add(v as u64); }
+                if let Some(v) = ch.recv() {
+                    sum = sum.wrapping_add(v as u64);
+                }
             }
             black_box(sum)
         })
@@ -63,7 +73,9 @@ fn bench_fair(c: &mut Criterion) {
             }
             let mut sum = 0u64;
             for _ in 0..10_000 {
-                if let Some(v) = ch.recv() { sum = sum.wrapping_add(v as u64); }
+                if let Some(v) = ch.recv() {
+                    sum = sum.wrapping_add(v as u64);
+                }
             }
             black_box(sum)
         })

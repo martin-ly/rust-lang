@@ -1,10 +1,10 @@
 //! # C19 AI - 人工智能与机器学习 (2025 Edition)
-//! 
+//!
 //! 这是一个基于 Rust 1.89 的现代化 AI 和机器学习库，集成了最新的开源 AI 框架和工具。
 //! 支持 2025 年最新的 AI 技术栈，包括 Candle、Burn、Tch、DFDx 等深度学习框架。
-//! 
+//!
 //! ## 主要特性
-//! 
+//!
 //! - 🤖 **机器学习**: 支持监督学习、无监督学习和强化学习
 //! - 🧠 **深度学习**: 集成 Candle 0.10、Burn 0.15、Tch 0.16、DFDx 0.15 等现代深度学习框架
 //! - 🗣️ **自然语言处理**: 支持 BERT、GPT、LLaMA 等预训练模型
@@ -16,12 +16,12 @@
 //! - 🔗 **联邦学习**: 支持分布式和隐私保护的机器学习
 //! - ⚡ **边缘AI**: 支持移动端和边缘设备部署
 //! - 🧮 **量子机器学习**: 探索量子计算在机器学习中的应用
-//! 
+//!
 //! ## 快速开始
-//! 
+//!
 //! ```rust
 //! use c19_ai::prelude::*;
-//! 
+//!
 //! #[tokio::main]
 //! async fn main() -> Result<(), Box<dyn std::error::Error>> {
 //!     // 创建 AI 引擎
@@ -43,8 +43,8 @@ use std::collections::HashMap;
 use thiserror::Error;
 
 // 核心模块
-pub mod neural_networks;
 pub mod machine_learning;
+pub mod neural_networks;
 
 // 深度学习框架支持
 #[cfg(any(feature = "candle", feature = "dfdx"))]
@@ -125,9 +125,8 @@ pub mod quantum_ml;
 // 预导入模块
 pub mod prelude {
     pub use crate::{
-        AIEngine, AIModule, ModelType, ModelConfig,
-        PredictionResult, TrainingConfig, Error,
-        neural_networks::*, machine_learning::*,
+        AIEngine, AIModule, Error, ModelConfig, ModelType, PredictionResult, TrainingConfig,
+        machine_learning::*, neural_networks::*,
     };
 
     #[cfg(any(feature = "candle", feature = "dfdx"))]
@@ -193,37 +192,37 @@ pub mod prelude {
 pub enum Error {
     #[error("模型加载失败: {0}")]
     ModelLoadError(String),
-    
+
     #[error("推理失败: {0}")]
     InferenceError(String),
-    
+
     #[error("训练失败: {0}")]
     TrainingError(String),
-    
+
     #[error("数据处理错误: {0}")]
     DataProcessingError(String),
-    
+
     #[error("配置错误: {0}")]
     ConfigError(String),
-    
+
     #[error("IO 错误: {0}")]
     IoError(#[from] std::io::Error),
-    
+
     #[error("序列化错误: {0}")]
     SerializationError(#[from] serde_json::Error),
-    
+
     #[error("网络错误: {0}")]
     NetworkError(#[from] reqwest::Error),
-    
+
     #[error("多模态处理错误: {0}")]
     MultimodalError(String),
-    
+
     #[error("联邦学习错误: {0}")]
     FederatedError(String),
-    
+
     #[error("边缘AI错误: {0}")]
     EdgeError(String),
-    
+
     #[error("量子计算错误: {0}")]
     QuantumError(String),
 }
@@ -329,37 +328,42 @@ impl AIModule {
             supported_devices: vec!["cpu".to_string()],
         }
     }
-    
+
     /// 添加能力
     pub fn add_capability(&mut self, capability: String) {
         self.capabilities.push(capability);
     }
-    
+
     /// 设置框架
     pub fn set_framework(&mut self, framework: String) {
         self.framework = Some(framework);
     }
-    
+
     /// 添加支持的设备
     pub fn add_device(&mut self, device: String) {
         if !self.supported_devices.contains(&device) {
             self.supported_devices.push(device);
         }
     }
-    
+
     /// 获取模块信息
     pub fn get_info(&self) -> String {
-        let framework_info = self.framework.as_ref()
+        let framework_info = self
+            .framework
+            .as_ref()
             .map(|f| format!(" ({})", f))
             .unwrap_or_default();
-        format!("AI模块: {} v{}{} - {}", self.name, self.version, framework_info, self.description)
+        format!(
+            "AI模块: {} v{}{} - {}",
+            self.name, self.version, framework_info, self.description
+        )
     }
-    
+
     /// 获取能力列表
     pub fn get_capabilities(&self) -> &[String] {
         &self.capabilities
     }
-    
+
     /// 检查是否支持设备
     pub fn supports_device(&self, device: &str) -> bool {
         self.supported_devices.contains(&device.to_string())
@@ -410,26 +414,26 @@ pub struct DeviceManager {
 impl DeviceManager {
     pub fn new() -> Self {
         let devices = vec!["cpu".to_string()];
-        
+
         // 检测可用的GPU设备
         #[cfg(feature = "cuda")]
         if std::env::var("CUDA_VISIBLE_DEVICES").is_ok() {
             devices.push("cuda".to_string());
         }
-        
+
         #[cfg(feature = "metal")]
         devices.push("metal".to_string());
-        
+
         Self {
             available_devices: devices,
             current_device: "cpu".to_string(),
         }
     }
-    
+
     pub fn get_available_devices(&self) -> &[String] {
         &self.available_devices
     }
-    
+
     pub fn set_device(&mut self, device: String) -> Result<(), Error> {
         if self.available_devices.contains(&device) {
             self.current_device = device;
@@ -438,7 +442,7 @@ impl DeviceManager {
             Err(Error::ConfigError(format!("设备 {} 不可用", device)))
         }
     }
-    
+
     pub fn get_current_device(&self) -> &str {
         &self.current_device
     }
@@ -454,7 +458,7 @@ impl AIEngine {
             device_manager: DeviceManager::new(),
         }
     }
-    
+
     /// 使用配置创建 AI 引擎
     pub fn with_config(config: EngineConfig) -> Self {
         Self {
@@ -464,29 +468,37 @@ impl AIEngine {
             device_manager: DeviceManager::new(),
         }
     }
-    
+
     /// 注册 AI 模块
     pub fn register_module(&mut self, module: AIModule) {
         self.modules.insert(module.name.clone(), module);
     }
-    
+
     /// 加载模型
     pub async fn load_model(&mut self, model_name: &str) -> Result<(), Error> {
-        tracing::info!("加载模型: {} 到设备: {}", model_name, self.device_manager.get_current_device());
-        
+        tracing::info!(
+            "加载模型: {} 到设备: {}",
+            model_name,
+            self.device_manager.get_current_device()
+        );
+
         // 这里将集成实际的模型加载逻辑
         // 根据不同的框架和模型类型进行加载
-        
+
         Ok(())
     }
-    
+
     /// 进行预测
     pub async fn predict(&self, input: &str) -> Result<PredictionResult, Error> {
-        tracing::info!("进行预测: {} 使用设备: {}", input, self.device_manager.get_current_device());
-        
+        tracing::info!(
+            "进行预测: {} 使用设备: {}",
+            input,
+            self.device_manager.get_current_device()
+        );
+
         // 这里将集成实际的预测逻辑
         // 根据模型类型和框架进行推理
-        
+
         Ok(PredictionResult {
             predictions: vec![0.8, 0.2],
             confidence: 0.85,
@@ -500,32 +512,32 @@ impl AIEngine {
             }),
         })
     }
-    
+
     /// 训练模型
     pub async fn train(&mut self, config: TrainingConfig) -> Result<(), Error> {
         tracing::info!("开始训练模型，配置: {:?}", config);
-        
+
         // 这里将集成实际的训练逻辑
         // 支持分布式训练、混合精度等现代特性
-        
+
         Ok(())
     }
-    
+
     /// 获取已注册的模块
     pub fn get_modules(&self) -> &HashMap<String, AIModule> {
         &self.modules
     }
-    
+
     /// 获取已加载的模型
     pub fn get_models(&self) -> &HashMap<String, ModelConfig> {
         &self.models
     }
-    
+
     /// 获取设备管理器
     pub fn get_device_manager(&self) -> &DeviceManager {
         &self.device_manager
     }
-    
+
     /// 设置设备
     pub fn set_device(&mut self, device: String) -> Result<(), Error> {
         self.device_manager.set_device(device)
@@ -542,10 +554,8 @@ impl Default for AIEngine {
 pub fn create_default_modules() -> Vec<AIModule> {
     vec![
         {
-            let mut ml_module = AIModule::new(
-                "机器学习".to_string(),
-                "支持各种机器学习算法".to_string(),
-            );
+            let mut ml_module =
+                AIModule::new("机器学习".to_string(), "支持各种机器学习算法".to_string());
             ml_module.add_capability("分类".to_string());
             ml_module.add_capability("回归".to_string());
             ml_module.add_capability("聚类".to_string());
@@ -617,62 +627,66 @@ pub fn create_default_modules() -> Vec<AIModule> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_ai_module() {
         let mut ai = AIModule::new("测试模块".to_string(), "测试描述".to_string());
         ai.add_capability("测试能力".to_string());
         ai.set_framework("candle".to_string());
         ai.add_device("cuda".to_string());
-        
+
         assert_eq!(ai.get_info(), "AI模块: 测试模块 v0.3.0 (candle) - 测试描述");
         assert_eq!(ai.get_capabilities(), &["测试能力"]);
         assert!(ai.supports_device("cuda"));
     }
-    
+
     #[test]
     fn test_ai_engine() {
         let mut engine = AIEngine::new();
         let module = AIModule::new("测试模块".to_string(), "测试描述".to_string());
-        
+
         engine.register_module(module);
         assert_eq!(engine.get_modules().len(), 1);
-        
+
         // 测试设备管理
         assert!(engine.set_device("cpu".to_string()).is_ok());
         assert!(engine.set_device("invalid_device".to_string()).is_err());
     }
-    
+
     #[test]
     fn test_default_modules() {
         let modules = create_default_modules();
         assert_eq!(modules.len(), 6);
-        
+
         let ml_module = &modules[0];
         assert_eq!(ml_module.name, "机器学习");
         assert!(ml_module.capabilities.contains(&"分类".to_string()));
         assert_eq!(ml_module.framework, Some("linfa".to_string()));
-        
+
         let multimodal_module = &modules[4];
         assert_eq!(multimodal_module.name, "多模态AI");
-        assert!(multimodal_module.capabilities.contains(&"图文理解".to_string()));
+        assert!(
+            multimodal_module
+                .capabilities
+                .contains(&"图文理解".to_string())
+        );
     }
-    
+
     #[tokio::test]
     async fn test_ai_engine_async() {
         let engine = AIEngine::new();
         let result = engine.predict("测试输入").await.unwrap();
-        
+
         assert_eq!(result.predictions.len(), 2);
         assert!(result.confidence > 0.0);
         assert!(result.model_info.is_some());
     }
-    
+
     #[test]
     fn test_device_manager() {
         let device_manager = DeviceManager::new();
         let devices = device_manager.get_available_devices();
-        
+
         assert!(devices.contains(&"cpu".to_string()));
         assert_eq!(device_manager.get_current_device(), "cpu");
     }

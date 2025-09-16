@@ -1,14 +1,17 @@
 use c07_process::prelude::*;
 use std::collections::HashMap;
-use std::time::Duration;
 use std::env;
+use std::time::Duration;
 
 fn main() -> Result<()> {
     println!("⏱️ 超时与取消演示");
 
     let mut env = HashMap::new();
     if cfg!(windows) {
-        env.insert("PATH".to_string(), "C\\:Windows\\System32".replace(':', ":")); // 占位，不依赖 PATH
+        env.insert(
+            "PATH".to_string(),
+            "C\\:Windows\\System32".replace(':', ":"),
+        ); // 占位，不依赖 PATH
     } else {
         env.insert("PATH".to_string(), "/usr/bin:/bin".to_string());
     }
@@ -45,7 +48,10 @@ fn main() -> Result<()> {
     println!("✅ 启动长任务进程，PID: {}", pid);
 
     // 支持通过环境变量 TIMEOUT_MS 配置超时时间
-    let timeout_ms: u64 = env::var("TIMEOUT_MS").ok().and_then(|v| v.parse().ok()).unwrap_or(1000);
+    let timeout_ms: u64 = env::var("TIMEOUT_MS")
+        .ok()
+        .and_then(|v| v.parse().ok())
+        .unwrap_or(1000);
     // 等待超时
     match pm.wait_with_timeout(pid, Duration::from_millis(timeout_ms))? {
         Some(status) => {
@@ -60,5 +66,3 @@ fn main() -> Result<()> {
 
     Ok(())
 }
-
-

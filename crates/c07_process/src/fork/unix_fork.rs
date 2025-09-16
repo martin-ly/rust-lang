@@ -11,7 +11,7 @@ impl UnixFork {
     pub fn new() -> Self {
         Self { is_child: false }
     }
-    
+
     /// 执行fork操作
     pub fn do_fork(&self) -> Result<ForkResult> {
         // 这里应该调用libc::fork()
@@ -24,11 +24,11 @@ impl Fork for UnixFork {
     fn fork(&self) -> Result<ForkResult> {
         self.do_fork()
     }
-    
+
     fn is_child(&self) -> bool {
         self.is_child
     }
-    
+
     fn is_parent(&self) -> bool {
         !self.is_child
     }

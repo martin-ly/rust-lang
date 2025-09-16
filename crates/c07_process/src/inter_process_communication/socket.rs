@@ -1,6 +1,6 @@
-use crate::types::{IpcConfig, Message};
-use crate::error::{IpcResult, IpcError};
+use crate::error::{IpcError, IpcResult};
 use crate::inter_process_communication::IpcChannel;
+use crate::types::{IpcConfig, Message};
 use std::sync::Arc;
 use std::sync::atomic::AtomicBool;
 
@@ -19,7 +19,7 @@ impl UnixSocket {
             is_closed: Arc::new(AtomicBool::new(false)),
         })
     }
-    
+
     /// 连接到现有的Unix域套接字
     pub fn connect(path: &str, _config: IpcConfig) -> IpcResult<Self> {
         Ok(Self {
@@ -34,21 +34,22 @@ impl IpcChannel for UnixSocket {
         // 简化实现
         Ok(())
     }
-    
+
     fn receive_message(&self) -> IpcResult<Message<Vec<u8>>> {
         // 简化实现
         Err(IpcError::ReceiveFailed("Not implemented".to_string()))
     }
-    
+
     fn is_closed(&self) -> bool {
         self.is_closed.load(std::sync::atomic::Ordering::Relaxed)
     }
-    
+
     fn close(&mut self) -> IpcResult<()> {
-        self.is_closed.store(true, std::sync::atomic::Ordering::Relaxed);
+        self.is_closed
+            .store(true, std::sync::atomic::Ordering::Relaxed);
         Ok(())
     }
-    
+
     fn name(&self) -> &str {
         &self.path
     }
@@ -71,7 +72,7 @@ impl TcpSocket {
             is_closed: Arc::new(AtomicBool::new(false)),
         })
     }
-    
+
     /// 连接到现有的TCP套接字
     pub fn connect(address: &str, port: u16, _config: IpcConfig) -> IpcResult<Self> {
         Ok(Self {
@@ -87,21 +88,22 @@ impl IpcChannel for TcpSocket {
         // 简化实现
         Ok(())
     }
-    
+
     fn receive_message(&self) -> IpcResult<Message<Vec<u8>>> {
         // 简化实现
         Err(IpcError::ReceiveFailed("Not implemented".to_string()))
     }
-    
+
     fn is_closed(&self) -> bool {
         self.is_closed.load(std::sync::atomic::Ordering::Relaxed)
     }
-    
+
     fn close(&mut self) -> IpcResult<()> {
-        self.is_closed.store(true, std::sync::atomic::Ordering::Relaxed);
+        self.is_closed
+            .store(true, std::sync::atomic::Ordering::Relaxed);
         Ok(())
     }
-    
+
     fn name(&self) -> &str {
         &self.address
     }

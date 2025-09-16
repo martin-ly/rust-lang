@@ -1,12 +1,11 @@
+use std::sync::{
+    Arc,
+    atomic::{AtomicBool, Ordering},
+};
 use std::thread;
 use std::time::Duration;
-use std::sync::{Arc, atomic::{AtomicBool, Ordering}};
 
-use c05_threads::message_passing::{
-    mpsc,
-    stream::ReceiverStream,
-    backpressure_handling as bp,
-};
+use c05_threads::message_passing::{backpressure_handling as bp, mpsc, stream::ReceiverStream};
 
 fn main() {
     // 通过背压通道控制生产速率（多线程共享，需 Arc 包裹）
@@ -21,7 +20,9 @@ fn main() {
         thread::spawn(move || {
             let mut sent = 0u64;
             for i in 0..10_000 {
-                if ch.send(i).is_ok() { sent += 1; }
+                if ch.send(i).is_ok() {
+                    sent += 1;
+                }
             }
             println!("producer sent accepted = {}", sent);
         })

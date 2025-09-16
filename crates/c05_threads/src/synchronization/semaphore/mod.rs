@@ -13,7 +13,9 @@ pub struct Semaphore {
 
 impl Semaphore {
     pub fn new(permits: usize) -> Self {
-        Self { inner: Arc::new((Mutex::new(permits), Condvar::new())) }
+        Self {
+            inner: Arc::new((Mutex::new(permits), Condvar::new())),
+        }
     }
 
     pub fn acquire(&self) {
@@ -53,7 +55,9 @@ pub fn throttle_concurrency(tasks: usize, max_parallel: usize) -> usize {
         }));
     }
 
-    for h in handles { h.join().unwrap(); }
+    for h in handles {
+        h.join().unwrap();
+    }
     *completed.lock().unwrap()
 }
 

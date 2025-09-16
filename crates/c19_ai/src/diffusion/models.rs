@@ -1,10 +1,10 @@
 //! 扩散模型定义
-//! 
+//!
 //! 包含各种扩散模型的实现
 
-use serde::{Deserialize, Serialize};
-use ndarray::{Array3, Array4};
 use anyhow::Result;
+use ndarray::{Array3, Array4};
+use serde::{Deserialize, Serialize};
 
 /// 扩散模型类型
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -93,18 +93,23 @@ pub struct TextEncoderModel {
 pub trait DiffusionModelTrait {
     /// 加载模型
     fn load(&mut self, config: DiffusionModelConfig) -> Result<()>;
-    
+
     /// 生成图像
     fn generate(&self, prompt: &str, num_images: usize) -> Result<Vec<GeneratedImage>>;
-    
+
     /// 文本到图像
     fn text_to_image(&self, prompt: &str, negative_prompt: Option<&str>) -> Result<GeneratedImage>;
-    
+
     /// 图像到图像
     fn image_to_image(&self, image: &Array3<f32>, prompt: &str) -> Result<GeneratedImage>;
-    
+
     /// 图像修复
-    fn inpainting(&self, image: &Array3<f32>, mask: &Array3<f32>, prompt: &str) -> Result<GeneratedImage>;
+    fn inpainting(
+        &self,
+        image: &Array3<f32>,
+        mask: &Array3<f32>,
+        prompt: &str,
+    ) -> Result<GeneratedImage>;
 }
 
 /// 生成的图像
@@ -162,7 +167,7 @@ impl DiffusionModel {
             text_encoder: None,
         }
     }
-    
+
     /// 加载模型权重
     pub fn load_weights(&mut self, weights_path: &str) -> Result<()> {
         // 这里应该实现实际的权重加载逻辑
@@ -170,22 +175,22 @@ impl DiffusionModel {
         tracing::info!("加载模型权重: {}", weights_path);
         Ok(())
     }
-    
+
     /// 获取模型配置
     pub fn get_config(&self) -> &DiffusionModelConfig {
         &self.config
     }
-    
+
     /// 设置 UNet 模型
     pub fn set_unet(&mut self, unet: UnetModel) {
         self.unet = Some(unet);
     }
-    
+
     /// 设置 VAE 模型
     pub fn set_vae(&mut self, vae: VaeModel) {
         self.vae = Some(vae);
     }
-    
+
     /// 设置文本编码器
     pub fn set_text_encoder(&mut self, text_encoder: TextEncoderModel) {
         self.text_encoder = Some(text_encoder);
@@ -221,16 +226,19 @@ impl Default for GenerationParameters {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_diffusion_model_creation() {
         let config = DiffusionModelConfig::default();
         let model = DiffusionModel::new(config);
-        
-        assert!(matches!(model.config.model_type, DiffusionModelType::StableDiffusion));
+
+        assert!(matches!(
+            model.config.model_type,
+            DiffusionModelType::StableDiffusion
+        ));
         assert_eq!(model.config.image_size, (512, 512));
     }
-    
+
     #[test]
     fn test_generation_parameters() {
         let params = GenerationParameters {
@@ -239,7 +247,7 @@ mod tests {
             guidance_scale: 8.0,
             ..Default::default()
         };
-        
+
         assert_eq!(params.prompt, "a beautiful landscape");
         assert_eq!(params.num_steps, 50);
         assert_eq!(params.guidance_scale, 8.0);

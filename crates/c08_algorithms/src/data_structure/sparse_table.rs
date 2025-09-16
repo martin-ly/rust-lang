@@ -14,7 +14,9 @@ impl<T: Copy> SparseTable<T> {
     {
         let n = arr.len();
         let mut log = vec![0usize; n + 1];
-        for i in 2..=n { log[i] = log[i / 2] + 1; }
+        for i in 2..=n {
+            log[i] = log[i / 2] + 1;
+        }
         let kmax = log[n] + 1;
         let mut st: Vec<Vec<T>> = vec![vec![arr[0]; n]; kmax];
         st[0].clone_from_slice(arr);
@@ -57,5 +59,3 @@ mod tests {
         assert_eq!(st.query_idempotent(4, 8, |x, y| x.min(y)), 0);
     }
 }
-
-

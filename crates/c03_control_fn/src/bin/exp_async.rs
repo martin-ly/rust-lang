@@ -5,7 +5,7 @@ use tokio::time::sleep;
 #[tokio::main]
 async fn main() {
     println!("🚀 异步闭包示例开始");
-    
+
     // 使用 FnOnce 的闭包
     let once_closure = || {
         // 这里可以执行一些计算
@@ -29,6 +29,6 @@ async fn main() {
     println!("Sleeping for 1 seconds...");
     sleep(Duration::from_secs(1)).await;
     println!("Awake!");
-    
+
     println!("✅ 异步闭包示例完成");
 }

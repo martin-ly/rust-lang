@@ -1,8 +1,8 @@
-use criterion::{criterion_group, criterion_main, Criterion};
-use std::hint::black_box;
+use c20_distributed::consistency::ConsistencyLevel;
 use c20_distributed::replication::MajorityQuorum;
 use c20_distributed::replication::QuorumPolicy;
-use c20_distributed::consistency::ConsistencyLevel;
+use criterion::{Criterion, criterion_group, criterion_main};
+use std::hint::black_box;
 
 fn bench_ack(c: &mut Criterion) {
     c.bench_function("ack_quorum_table", |b| {
@@ -18,5 +18,3 @@ fn bench_ack(c: &mut Criterion) {
 
 criterion_group!(benches, bench_ack);
 criterion_main!(benches);
-
-

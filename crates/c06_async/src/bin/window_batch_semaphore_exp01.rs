@@ -8,7 +8,10 @@ async fn main() {
     let ticker = tokio::time::interval(Duration::from_millis(20));
     let mut idx: u32 = 0;
     let stream = IntervalStream::new(ticker)
-        .map(move |_| { idx += 1; idx - 1 })
+        .map(move |_| {
+            idx += 1;
+            idx - 1
+        })
         .take(100);
 
     let sem = Arc::new(tokio::sync::Semaphore::new(4));
@@ -39,5 +42,3 @@ async fn main() {
         });
     }
 }
-
-

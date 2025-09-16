@@ -19,4 +19,3 @@ fn ring_rebalance_minimal_change() {
     let after = ring.route(&"user-42").unwrap().to_string();
     assert!(before == after || (before != after));
 }
-

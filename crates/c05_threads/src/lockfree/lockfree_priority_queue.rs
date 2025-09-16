@@ -7,7 +7,8 @@ pub struct LockFreePriorityQueue<T> {
 
 impl<T> LockFreePriorityQueue<T> {
     pub fn new() -> Self {
-        Self { _marker: PhantomData }
+        Self {
+            _marker: PhantomData,
+        }
     }
 }
-

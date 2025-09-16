@@ -1,10 +1,10 @@
 //! Rust 1.89 控制流与函数：综合示例
 
+use c03_control_fn::async_control_flow as acf;
 use c03_control_fn::rust_189_enhanced_features::{
     cfg_boolean_literals_189, dangerous_implicit_autorefs_189, invalid_null_arguments_189,
     let_chains_189, naked_functions_189,
 };
-use c03_control_fn::async_control_flow as acf;
 
 #[allow(dead_code)]
 #[tokio::main]
@@ -32,29 +32,27 @@ async fn main() {
 
     // 5) 异步控制流：if/loop/for + 组合器
     let exec = acf::AsyncControlFlowExecutor;
-    let value = exec
-        .async_if_else(true, async { 10 }, async { 0 })
-        .await;
+    let value = exec.async_if_else(true, async { 10 }, async { 0 }).await;
     println!("async_if_else -> {}", value);
 
     let counter = std::rc::Rc::new(std::cell::Cell::new(0));
     let remaining = std::cell::Cell::new(3);
     let counter_c = counter.clone();
     exec.async_loop(
-            move || {
-                let r = remaining.get();
-                if r > 0 {
-                    // 在条件检查时自增计数并递减剩余次数
-                    counter_c.set(counter_c.get() + 1);
-                    remaining.set(r - 1);
-                    true
-                } else {
-                    false
-                }
-            },
-            std::future::ready(()),
-        )
-        .await;
+        move || {
+            let r = remaining.get();
+            if r > 0 {
+                // 在条件检查时自增计数并递减剩余次数
+                counter_c.set(counter_c.get() + 1);
+                remaining.set(r - 1);
+                true
+            } else {
+                false
+            }
+        },
+        std::future::ready(()),
+    )
+    .await;
     println!("async_loop counter -> {}", counter.get());
 
     let items = vec![1, 2, 3, 4, 5];

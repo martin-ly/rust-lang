@@ -1,8 +1,8 @@
 // 信号量模块
 // 这个模块提供了进程安全的信号量实现
 
-use crate::types::SyncConfig;
 use crate::error::SyncResult;
+use crate::types::SyncConfig;
 use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 
@@ -42,10 +42,12 @@ impl ProcessSemaphore {
     /// 尝试获取许可
     pub fn try_acquire(&self) -> Option<SemaphorePermit> {
         let mut permits = self.permits.lock().unwrap();
-        
+
         if *permits > 0 {
             *permits -= 1;
-            self.stats.acquire_count.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+            self.stats
+                .acquire_count
+                .fetch_add(1, std::sync::atomic::Ordering::Relaxed);
             Some(SemaphorePermit {
                 semaphore: Arc::clone(&self.permits),
                 stats: Arc::clone(&self.stats),
@@ -58,16 +60,16 @@ impl ProcessSemaphore {
     /// 获取许可（阻塞）
     pub fn acquire(&self) -> SyncResult<SemaphorePermit> {
         let start = Instant::now();
-        
+
         loop {
             if let Some(permit) = self.try_acquire() {
                 return Ok(permit);
             }
-            
+
             if self.config.timeout != Duration::ZERO && start.elapsed() >= self.config.timeout {
                 return Err(crate::error::SyncError::Timeout(self.config.timeout));
             }
-            
+
             std::thread::yield_now();
         }
     }
@@ -75,16 +77,16 @@ impl ProcessSemaphore {
     /// 带超时的许可获取
     pub fn acquire_timeout(&self, timeout: Duration) -> SyncResult<SemaphorePermit> {
         let start = Instant::now();
-        
+
         loop {
             if let Some(permit) = self.try_acquire() {
                 return Ok(permit);
             }
-            
+
             if start.elapsed() >= timeout {
                 return Err(crate::error::SyncError::Timeout(timeout));
             }
-            
+
             std::thread::yield_now();
         }
     }
@@ -93,7 +95,7 @@ impl ProcessSemaphore {
     pub fn available_permits(&self) -> usize {
         *self.permits.lock().unwrap()
     }
-    
+
     /// 检查信号量是否被锁定
     pub fn is_locked(&self) -> bool {
         self.available_permits() == 0
@@ -110,6 +112,8 @@ impl Drop for SemaphorePermit {
     fn drop(&mut self) {
         let mut permits = self.semaphore.lock().unwrap();
         *permits += 1;
-        self.stats.release_count.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+        self.stats
+            .release_count
+            .fetch_add(1, std::sync::atomic::Ordering::Relaxed);
     }
 }

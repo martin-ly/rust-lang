@@ -1,16 +1,24 @@
-use c10_networks::protocol::dns::{presets, DnsResolver};
+use c10_networks::protocol::dns::{DnsResolver, presets};
 use std::time::Duration;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let domain = std::env::args().nth(1).unwrap_or_else(|| "example.com".to_string());
+    let domain = std::env::args()
+        .nth(1)
+        .unwrap_or_else(|| "example.com".to_string());
 
     // 优先 DoH（Cloudflare）→ Google DoH → Cloudflare DoT → Google DoT → System
-    let ips = if let Ok(v) = try_cloudflare_doh(&domain).await { v }
-    else if let Ok(v) = try_google_doh(&domain).await { v }
-    else if let Ok(v) = try_cloudflare_dot(&domain).await { v }
-    else if let Ok(v) = try_google_dot(&domain).await { v }
-    else { try_system(&domain).await? };
+    let ips = if let Ok(v) = try_cloudflare_doh(&domain).await {
+        v
+    } else if let Ok(v) = try_google_doh(&domain).await {
+        v
+    } else if let Ok(v) = try_cloudflare_dot(&domain).await {
+        v
+    } else if let Ok(v) = try_google_dot(&domain).await {
+        v
+    } else {
+        try_system(&domain).await?
+    };
 
     println!("{} => {:?}", domain, ips);
     Ok(())
@@ -48,5 +56,3 @@ async fn try_system(domain: &str) -> anyhow::Result<Vec<std::net::IpAddr>> {
     let r = DnsResolver::from_system().await?;
     Ok(r.lookup_ips(domain).await?)
 }
-
-

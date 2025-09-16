@@ -1,9 +1,9 @@
 //! 文本补全功能
-//! 
+//!
 //! 提供文本补全和生成功能
 
-use serde::{Deserialize, Serialize};
 use anyhow::Result;
+use serde::{Deserialize, Serialize};
 
 /// 补全请求
 #[derive(Debug, Clone, Serialize, Deserialize)]

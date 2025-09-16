@@ -1,5 +1,5 @@
 #[cfg(feature = "consensus-raft")]
-use c20_distributed::consensus_raft::{MinimalRaft, RaftNode, AppendEntriesReq, Term, LogIndex};
+use c20_distributed::consensus_raft::{AppendEntriesReq, LogIndex, MinimalRaft, RaftNode, Term};
 #[cfg(feature = "consensus-raft")]
 use std::sync::{Arc, Mutex};
 

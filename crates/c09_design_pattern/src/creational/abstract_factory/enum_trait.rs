@@ -13,7 +13,7 @@ impl Shape for Circle {
     fn draw(&self) {
         println!("Drawing a Circle with radius: {}", self.radius);
     }
-    
+
     fn area(&self) -> f64 {
         std::f64::consts::PI * self.radius * self.radius
     }
@@ -32,7 +32,7 @@ impl Shape for Rectangle {
             self.width, self.height
         );
     }
-    
+
     fn area(&self) -> f64 {
         self.width * self.height
     }

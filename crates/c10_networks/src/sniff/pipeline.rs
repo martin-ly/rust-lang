@@ -1,12 +1,12 @@
 use crate::error::{NetworkError, NetworkResult};
 use crate::sniff::{ArpRecord, ArpSniffConfig};
 use pnet_datalink::{self as datalink, Channel, Config};
+use pnet_packet::Packet;
 use pnet_packet::arp::{ArpHardwareTypes, ArpOperations, ArpPacket};
 use pnet_packet::ethernet::{EtherTypes, EthernetPacket};
 use pnet_packet::ip::IpNextHeaderProtocols;
 use pnet_packet::ipv4::Ipv4Packet;
 use pnet_packet::tcp::TcpPacket;
-use pnet_packet::Packet;
 use std::net::{IpAddr, Ipv4Addr};
 use std::time::{Duration, Instant, SystemTime};
 use tokio::sync::mpsc;
@@ -25,7 +25,10 @@ pub struct TcpStatsSnapshot {
 }
 
 /// 启动 ARP 抓包异步流，返回一个 mpsc Receiver
-pub async fn arp_stream(cfg: ArpSniffConfig, channel_size: usize) -> NetworkResult<mpsc::Receiver<ArpRecord>> {
+pub async fn arp_stream(
+    cfg: ArpSniffConfig,
+    channel_size: usize,
+) -> NetworkResult<mpsc::Receiver<ArpRecord>> {
     let (tx, rx) = mpsc::channel(channel_size.max(1));
 
     let iface = super::arp::ArpSniffer::pick_interface(cfg.iface_name.as_deref())
@@ -44,7 +47,9 @@ pub async fn arp_stream(cfg: ArpSniffConfig, channel_size: usize) -> NetworkResu
         let _ = tx_dl; // 保持发送端在作用域内
         while let Ok(frame) = rx_dl.next() {
             if let Some(rec) = parse_arp_frame(frame) {
-                if tx.blocking_send(rec).is_err() { break; }
+                if tx.blocking_send(rec).is_err() {
+                    break;
+                }
             }
         }
     });
@@ -54,19 +59,39 @@ pub async fn arp_stream(cfg: ArpSniffConfig, channel_size: usize) -> NetworkResu
 
 fn parse_arp_frame(frame: &[u8]) -> Option<ArpRecord> {
     let eth = EthernetPacket::new(frame)?;
-    if eth.get_ethertype() != EtherTypes::Arp { return None; }
+    if eth.get_ethertype() != EtherTypes::Arp {
+        return None;
+    }
     let arp = ArpPacket::new(eth.payload())?;
-    if arp.get_hardware_type() != ArpHardwareTypes::Ethernet { return None; }
+    if arp.get_hardware_type() != ArpHardwareTypes::Ethernet {
+        return None;
+    }
     let sender_mac = format!("{}", eth.get_source());
     let target_mac = Some(format!("{}", eth.get_destination()));
     let sender_ip = IpAddr::V4(Ipv4Addr::from(arp.get_sender_proto_addr()));
     let target_ip = IpAddr::V4(Ipv4Addr::from(arp.get_target_proto_addr()));
-    let op = match arp.get_operation() { ArpOperations::Request => "request", ArpOperations::Reply => "reply", _ => "other" }.to_string();
-    Some(ArpRecord { sender_mac, sender_ip, target_mac, target_ip, op, at: SystemTime::now() })
+    let op = match arp.get_operation() {
+        ArpOperations::Request => "request",
+        ArpOperations::Reply => "reply",
+        _ => "other",
+    }
+    .to_string();
+    Some(ArpRecord {
+        sender_mac,
+        sender_ip,
+        target_mac,
+        target_ip,
+        op,
+        at: SystemTime::now(),
+    })
 }
 
 /// 启动 TCP 统计异步流：定期输出一个统计快照
-pub async fn tcp_stats_stream(iface_name: Option<&str>, interval: Duration, channel_size: usize) -> NetworkResult<mpsc::Receiver<TcpStatsSnapshot>> {
+pub async fn tcp_stats_stream(
+    iface_name: Option<&str>,
+    interval: Duration,
+    channel_size: usize,
+) -> NetworkResult<mpsc::Receiver<TcpStatsSnapshot>> {
     let (tx, rx) = mpsc::channel(channel_size.max(1));
     let iface = super::arp::ArpSniffer::pick_interface(iface_name)
         .ok_or_else(|| NetworkError::Configuration("no suitable interface".into()))?;
@@ -104,8 +129,14 @@ pub async fn tcp_stats_stream(iface_name: Option<&str>, interval: Duration, chan
 
             if last_tick.elapsed() >= interval {
                 let now = Instant::now();
-                let snap = TcpStatsSnapshot { total: total.clone(), since: last_tick, until: now };
-                if tx.blocking_send(snap).is_err() { break; }
+                let snap = TcpStatsSnapshot {
+                    total: total.clone(),
+                    since: last_tick,
+                    until: now,
+                };
+                if tx.blocking_send(snap).is_err() {
+                    break;
+                }
                 last_tick = now;
             }
         }
@@ -113,5 +144,3 @@ pub async fn tcp_stats_stream(iface_name: Option<&str>, interval: Duration, chan
 
     Ok(rx)
 }
-
-

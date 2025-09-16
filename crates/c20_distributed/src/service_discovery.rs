@@ -1,12 +1,12 @@
 //! 服务发现模块
-//! 
+//!
 //! 提供基于DNS和配置的服务发现机制，支持多种服务发现策略
 
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::net::{IpAddr, SocketAddr};
 use std::sync::{Arc, RwLock};
 use std::time::{Duration, Instant};
-use serde::{Deserialize, Serialize};
 
 /// 服务实例信息
 #[derive(Debug, Clone, PartialEq)]
@@ -161,7 +161,7 @@ impl DnsServiceDiscovery {
         }
 
         self.last_query = Instant::now();
-        
+
         // 模拟DNS解析结果
         match service_name {
             "user-service" => Ok(vec![
@@ -179,7 +179,7 @@ impl DnsServiceDiscovery {
     /// 强制查询DNS记录（忽略时间间隔）
     pub fn force_query_dns(&mut self, service_name: &str) -> Result<Vec<SocketAddr>, String> {
         self.last_query = Instant::now();
-        
+
         // 模拟DNS解析结果
         match service_name {
             "user-service" => Ok(vec![
@@ -221,10 +221,10 @@ impl ConfigServiceDiscovery {
         }
 
         self.last_reload = Instant::now();
-        
+
         // 模拟从配置文件加载服务
         let mut services = HashMap::new();
-        
+
         // 模拟用户服务
         let user_services = vec![
             ServiceInstance::new(
@@ -235,7 +235,8 @@ impl ConfigServiceDiscovery {
                     ("version".to_string(), "1.0.0".to_string()),
                     ("region".to_string(), "us-east-1".to_string()),
                 ]),
-            ).with_weight(10),
+            )
+            .with_weight(10),
             ServiceInstance::new(
                 "user-2".to_string(),
                 "user-service".to_string(),
@@ -244,7 +245,8 @@ impl ConfigServiceDiscovery {
                     ("version".to_string(), "1.0.0".to_string()),
                     ("region".to_string(), "us-west-1".to_string()),
                 ]),
-            ).with_weight(5),
+            )
+            .with_weight(5),
         ];
         services.insert("user-service".to_string(), user_services);
 
@@ -258,7 +260,8 @@ impl ConfigServiceDiscovery {
                     ("version".to_string(), "2.0.0".to_string()),
                     ("region".to_string(), "us-east-1".to_string()),
                 ]),
-            ).with_weight(8),
+            )
+            .with_weight(8),
         ];
         services.insert("order-service".to_string(), order_services);
 
@@ -269,10 +272,10 @@ impl ConfigServiceDiscovery {
     /// 强制从配置文件加载服务（忽略时间间隔）
     pub fn force_load_services(&mut self) -> Result<(), String> {
         self.last_reload = Instant::now();
-        
+
         // 模拟从配置文件加载服务
         let mut services = HashMap::new();
-        
+
         // 模拟用户服务
         let user_services = vec![
             ServiceInstance::new(
@@ -283,7 +286,8 @@ impl ConfigServiceDiscovery {
                     ("version".to_string(), "1.0.0".to_string()),
                     ("region".to_string(), "us-east-1".to_string()),
                 ]),
-            ).with_weight(10),
+            )
+            .with_weight(10),
             ServiceInstance::new(
                 "user-2".to_string(),
                 "user-service".to_string(),
@@ -292,7 +296,8 @@ impl ConfigServiceDiscovery {
                     ("version".to_string(), "1.0.0".to_string()),
                     ("region".to_string(), "us-west-1".to_string()),
                 ]),
-            ).with_weight(5),
+            )
+            .with_weight(5),
         ];
         services.insert("user-service".to_string(), user_services);
 
@@ -306,7 +311,8 @@ impl ConfigServiceDiscovery {
                     ("version".to_string(), "2.0.0".to_string()),
                     ("region".to_string(), "us-east-1".to_string()),
                 ]),
-            ).with_weight(8),
+            )
+            .with_weight(8),
         ];
         services.insert("order-service".to_string(), order_services);
 
@@ -316,10 +322,7 @@ impl ConfigServiceDiscovery {
 
     /// 获取服务实例
     pub fn get_services(&self, service_name: &str) -> Vec<ServiceInstance> {
-        self.services
-            .get(service_name)
-            .cloned()
-            .unwrap_or_default()
+        self.services.get(service_name).cloned().unwrap_or_default()
     }
 }
 
@@ -353,7 +356,11 @@ impl RegistryServiceDiscovery {
     }
 
     /// 注销服务
-    pub fn unregister_service(&mut self, service_name: &str, instance_id: &str) -> Result<(), String> {
+    pub fn unregister_service(
+        &mut self,
+        service_name: &str,
+        instance_id: &str,
+    ) -> Result<(), String> {
         if let Some(instances) = self.registered_services.get_mut(service_name) {
             instances.retain(|instance| instance.id != instance_id);
             if instances.is_empty() {
@@ -370,7 +377,7 @@ impl RegistryServiceDiscovery {
         }
 
         self.last_heartbeat = Instant::now();
-        
+
         // 模拟心跳发送
         for instances in self.registered_services.values_mut() {
             for instance in instances.iter_mut() {
@@ -383,7 +390,7 @@ impl RegistryServiceDiscovery {
     /// 强制发送心跳（忽略时间间隔）
     pub fn force_send_heartbeat(&mut self) -> Result<(), String> {
         self.last_heartbeat = Instant::now();
-        
+
         // 模拟心跳发送
         for instances in self.registered_services.values_mut() {
             for instance in instances.iter_mut() {
@@ -434,7 +441,7 @@ impl HealthChecker {
         }
 
         self.last_check = Instant::now();
-        
+
         for instance in instances.iter_mut() {
             // 模拟健康检查
             let is_healthy = self.simulate_health_check(&instance);
@@ -445,7 +452,7 @@ impl HealthChecker {
     /// 强制检查服务健康状态（忽略时间间隔）
     pub fn force_check_health(&mut self, instances: &mut [ServiceInstance]) {
         self.last_check = Instant::now();
-        
+
         for instance in instances.iter_mut() {
             // 模拟健康检查
             let is_healthy = self.simulate_health_check(&instance);
@@ -479,26 +486,56 @@ impl ServiceDiscoveryManager {
 
         // 根据策略初始化相应的发现器
         match config.strategy {
-            DiscoveryStrategy::Dns { dns_server, query_interval } => {
+            DiscoveryStrategy::Dns {
+                dns_server,
+                query_interval,
+            } => {
                 manager.dns_discovery = Some(DnsServiceDiscovery::new(dns_server, query_interval));
             }
-            DiscoveryStrategy::Config { config_path, reload_interval } => {
-                manager.config_discovery = Some(ConfigServiceDiscovery::new(config_path, reload_interval));
+            DiscoveryStrategy::Config {
+                config_path,
+                reload_interval,
+            } => {
+                manager.config_discovery =
+                    Some(ConfigServiceDiscovery::new(config_path, reload_interval));
             }
-            DiscoveryStrategy::Registry { registry_url, heartbeat_interval } => {
-                manager.registry_discovery = Some(RegistryServiceDiscovery::new(registry_url, heartbeat_interval));
+            DiscoveryStrategy::Registry {
+                registry_url,
+                heartbeat_interval,
+            } => {
+                manager.registry_discovery = Some(RegistryServiceDiscovery::new(
+                    registry_url,
+                    heartbeat_interval,
+                ));
             }
-            DiscoveryStrategy::Hybrid { primary, fallback: _ } => {
+            DiscoveryStrategy::Hybrid {
+                primary,
+                fallback: _,
+            } => {
                 // 初始化主要和备用发现器
                 match *primary {
-                    DiscoveryStrategy::Dns { dns_server, query_interval } => {
-                        manager.dns_discovery = Some(DnsServiceDiscovery::new(dns_server, query_interval));
+                    DiscoveryStrategy::Dns {
+                        dns_server,
+                        query_interval,
+                    } => {
+                        manager.dns_discovery =
+                            Some(DnsServiceDiscovery::new(dns_server, query_interval));
                     }
-                    DiscoveryStrategy::Config { config_path, reload_interval } => {
-                        manager.config_discovery = Some(ConfigServiceDiscovery::new(config_path, reload_interval));
+                    DiscoveryStrategy::Config {
+                        config_path,
+                        reload_interval,
+                    } => {
+                        manager.config_discovery =
+                            Some(ConfigServiceDiscovery::new(config_path, reload_interval));
                     }
-                    DiscoveryStrategy::Registry { registry_url, heartbeat_interval } => {
-                        manager.registry_discovery = Some(RegistryServiceDiscovery::new(registry_url, heartbeat_interval));
+                    DiscoveryStrategy::Registry {
+                        registry_url,
+                        heartbeat_interval,
+                    } => {
+                        manager.registry_discovery = Some(RegistryServiceDiscovery::new(
+                            registry_url,
+                            heartbeat_interval,
+                        ));
                     }
                     _ => {}
                 }
@@ -510,7 +547,10 @@ impl ServiceDiscoveryManager {
     }
 
     /// 发现服务实例
-    pub fn discover_services(&mut self, service_name: &str) -> Result<Vec<ServiceInstance>, String> {
+    pub fn discover_services(
+        &mut self,
+        service_name: &str,
+    ) -> Result<Vec<ServiceInstance>, String> {
         // 首先检查缓存
         {
             let cache = self.service_cache.read().unwrap();
@@ -521,7 +561,7 @@ impl ServiceDiscoveryManager {
                     .filter(|instance| !instance.is_expired(self.config.service_ttl))
                     .cloned()
                     .collect();
-                
+
                 if !valid_instances.is_empty() {
                     return Ok(valid_instances);
                 }
@@ -571,14 +611,22 @@ impl ServiceDiscoveryManager {
                     DiscoveryStrategy::Config { .. } => {
                         if let Some(ref mut config) = self.config_discovery {
                             config.force_load_services()?;
-                            Ok(config.get_services(service_name).into_iter().map(|i| i.address).collect())
+                            Ok(config
+                                .get_services(service_name)
+                                .into_iter()
+                                .map(|i| i.address)
+                                .collect())
                         } else {
                             Err("Config discovery not initialized".to_string())
                         }
                     }
                     DiscoveryStrategy::Registry { .. } => {
                         if let Some(ref registry) = self.registry_discovery {
-                            Ok(registry.get_services(service_name).into_iter().map(|i| i.address).collect())
+                            Ok(registry
+                                .get_services(service_name)
+                                .into_iter()
+                                .map(|i| i.address)
+                                .collect())
                         } else {
                             Err("Registry discovery not initialized".to_string())
                         }
@@ -628,7 +676,8 @@ impl ServiceDiscoveryManager {
         {
             let mut cache = self.service_cache.write().unwrap();
             let service_name = instance.name.clone();
-            cache.entry(service_name)
+            cache
+                .entry(service_name)
                 .or_insert_with(Vec::new)
                 .push(instance);
         }
@@ -637,7 +686,11 @@ impl ServiceDiscoveryManager {
     }
 
     /// 注销服务实例
-    pub fn unregister_service(&mut self, service_name: &str, instance_id: &str) -> Result<(), String> {
+    pub fn unregister_service(
+        &mut self,
+        service_name: &str,
+        instance_id: &str,
+    ) -> Result<(), String> {
         if let Some(ref mut registry) = self.registry_discovery {
             registry.unregister_service(service_name, instance_id)?;
         }
@@ -662,12 +715,19 @@ impl ServiceDiscoveryManager {
     }
 
     /// 设置缓存直接写入（替换或合并）
-    pub fn set_cache_for(&self, service_name: &str, instances: Vec<ServiceInstance>, replace: bool) {
+    pub fn set_cache_for(
+        &self,
+        service_name: &str,
+        instances: Vec<ServiceInstance>,
+        replace: bool,
+    ) {
         let mut cache = self.service_cache.write().unwrap();
         if replace {
             cache.insert(service_name.to_string(), instances);
         } else {
-            let entry = cache.entry(service_name.to_string()).or_insert_with(Vec::new);
+            let entry = cache
+                .entry(service_name.to_string())
+                .or_insert_with(Vec::new);
             entry.extend(instances);
         }
     }
@@ -734,13 +794,16 @@ mod tests {
         .with_weight(10);
 
         assert_eq!(instance.weight, 10);
-        assert_eq!(instance.health_check_url, Some("http://localhost:8080/health".to_string()));
+        assert_eq!(
+            instance.health_check_url,
+            Some("http://localhost:8080/health".to_string())
+        );
     }
 
     #[test]
     fn test_dns_service_discovery() {
         let mut dns = DnsServiceDiscovery::new("8.8.8.8".to_string(), Duration::from_secs(30));
-        
+
         let result = dns.force_query_dns("user-service");
         assert!(result.is_ok());
         let addresses = result.unwrap();
@@ -749,11 +812,12 @@ mod tests {
 
     #[test]
     fn test_config_service_discovery() {
-        let mut config = ConfigServiceDiscovery::new("services.json".to_string(), Duration::from_secs(30));
-        
+        let mut config =
+            ConfigServiceDiscovery::new("services.json".to_string(), Duration::from_secs(30));
+
         let result = config.force_load_services();
         assert!(result.is_ok());
-        
+
         let services = config.get_services("user-service");
         assert!(!services.is_empty());
         assert_eq!(services[0].name, "user-service");
@@ -761,8 +825,11 @@ mod tests {
 
     #[test]
     fn test_registry_service_discovery() {
-        let mut registry = RegistryServiceDiscovery::new("http://localhost:8500".to_string(), Duration::from_secs(30));
-        
+        let mut registry = RegistryServiceDiscovery::new(
+            "http://localhost:8500".to_string(),
+            Duration::from_secs(30),
+        );
+
         let instance = ServiceInstance::new(
             "test-1".to_string(),
             "test-service".to_string(),
@@ -772,7 +839,7 @@ mod tests {
 
         let result = registry.register_service(instance);
         assert!(result.is_ok());
-        
+
         let services = registry.get_services("test-service");
         assert_eq!(services.len(), 1);
         assert_eq!(services[0].id, "test-1");
@@ -792,7 +859,7 @@ mod tests {
         };
 
         let mut manager = ServiceDiscoveryManager::new(config);
-        
+
         let result = manager.discover_services("user-service");
         assert!(result.is_ok());
         let instances = result.unwrap();
@@ -802,7 +869,7 @@ mod tests {
     #[test]
     fn test_health_checker() {
         let mut checker = HealthChecker::new(Duration::from_secs(1));
-        
+
         let mut instances = vec![
             ServiceInstance::new(
                 "test-1".to_string(),
@@ -819,7 +886,7 @@ mod tests {
         ];
 
         checker.force_check_health(&mut instances);
-        
+
         assert!(instances[0].is_healthy);
         assert!(!instances[1].is_healthy);
     }

@@ -14,5 +14,3 @@ fn main() -> anyhow::Result<()> {
 fn main() {
     println!("coap-dtls-openssl: 未启用特性 `openssl-examples`，跳过 OpenSSL 依赖");
 }
-
-

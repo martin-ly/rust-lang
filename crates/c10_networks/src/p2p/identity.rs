@@ -10,5 +10,3 @@ impl NodeIdentity {
         Self { peer_id_hex }
     }
 }
-
-

@@ -1,8 +1,8 @@
 //! # 模块系统改进 / Module System Improvements
-//! 
+//!
 //! Rust 1.89 在模块系统方面进行了重要改进，包括更好的模块解析、
 //! 改进的模块可见性和更灵活的模块组织。
-//! 
+//!
 //! Rust 1.89 has made important improvements in the module system, including
 //! better module resolution, improved module visibility, and more flexible module organization.
 
@@ -11,7 +11,7 @@ use std::path::Path;
 use std::sync::Arc;
 
 /// 模块解析器 / Module Resolver
-/// 
+///
 /// 提供模块解析和加载功能。
 /// Provides module resolution and loading functionality.
 pub struct ModuleResolver {
@@ -154,50 +154,63 @@ impl ModuleResolver {
             resolution_strategy: ResolutionStrategy::Smart,
         }
     }
-    
+
     /// 添加搜索路径 / Add search path
     pub fn add_search_path(&mut self, path: String) {
         if !self.search_paths.contains(&path) {
             self.search_paths.push(path);
         }
     }
-    
+
     /// 设置解析策略 / Set resolution strategy
     pub fn set_resolution_strategy(&mut self, strategy: ResolutionStrategy) {
         self.resolution_strategy = strategy;
     }
-    
+
     /// 解析模块 / Resolve module
-    pub fn resolve_module(&mut self, module_name: &str) -> Result<Arc<Module>, ModuleResolutionError> {
+    pub fn resolve_module(
+        &mut self,
+        module_name: &str,
+    ) -> Result<Arc<Module>, ModuleResolutionError> {
         // 检查缓存 / Check cache
         if let Some(module) = self.module_cache.get(module_name) {
             return Ok(module.clone());
         }
-        
+
         // 解析模块 / Resolve module
         let module = self.resolve_module_from_paths(module_name)?;
-        
+
         // 缓存模块 / Cache module
-        self.module_cache.insert(module_name.to_string(), module.clone());
-        
+        self.module_cache
+            .insert(module_name.to_string(), module.clone());
+
         Ok(module)
     }
-    
+
     /// 从路径解析模块 / Resolve module from paths
-    fn resolve_module_from_paths(&self, module_name: &str) -> Result<Arc<Module>, ModuleResolutionError> {
+    fn resolve_module_from_paths(
+        &self,
+        module_name: &str,
+    ) -> Result<Arc<Module>, ModuleResolutionError> {
         for search_path in &self.search_paths {
             let module_path = Path::new(search_path).join(format!("{}.rs", module_name));
-            
+
             if module_path.exists() {
                 return self.load_module_from_file(&module_path, module_name);
             }
         }
-        
-        Err(ModuleResolutionError::ModuleNotFound(module_name.to_string()))
+
+        Err(ModuleResolutionError::ModuleNotFound(
+            module_name.to_string(),
+        ))
     }
-    
+
     /// 从文件加载模块 / Load module from file
-    fn load_module_from_file(&self, path: &Path, name: &str) -> Result<Arc<Module>, ModuleResolutionError> {
+    fn load_module_from_file(
+        &self,
+        path: &Path,
+        name: &str,
+    ) -> Result<Arc<Module>, ModuleResolutionError> {
         // 简化的模块加载 / Simplified module loading
         let module = Module {
             name: name.to_string(),
@@ -217,26 +230,36 @@ impl ModuleResolver {
                 categories: Vec::new(),
             },
         };
-        
+
         Ok(Arc::new(module))
     }
-    
+
     /// 获取模块依赖 / Get module dependencies
-    pub fn get_module_dependencies(&self, module_name: &str) -> Result<Vec<ModuleDependency>, ModuleResolutionError> {
-        let module = self.module_cache.get(module_name)
+    pub fn get_module_dependencies(
+        &self,
+        module_name: &str,
+    ) -> Result<Vec<ModuleDependency>, ModuleResolutionError> {
+        let module = self
+            .module_cache
+            .get(module_name)
             .ok_or_else(|| ModuleResolutionError::ModuleNotFound(module_name.to_string()))?;
-        
+
         Ok(module.dependencies.clone())
     }
-    
+
     /// 获取模块导出 / Get module exports
-    pub fn get_module_exports(&self, module_name: &str) -> Result<Vec<ModuleExport>, ModuleResolutionError> {
-        let module = self.module_cache.get(module_name)
+    pub fn get_module_exports(
+        &self,
+        module_name: &str,
+    ) -> Result<Vec<ModuleExport>, ModuleResolutionError> {
+        let module = self
+            .module_cache
+            .get(module_name)
             .ok_or_else(|| ModuleResolutionError::ModuleNotFound(module_name.to_string()))?;
-        
+
         Ok(module.exports.clone())
     }
-    
+
     /// 清除缓存 / Clear cache
     pub fn clear_cache(&mut self) {
         self.module_cache.clear();
@@ -248,16 +271,16 @@ impl ModuleResolver {
 pub enum ModuleResolutionError {
     #[error("模块未找到 / Module not found: {0}")]
     ModuleNotFound(String),
-    
+
     #[error("循环依赖 / Circular dependency: {0}")]
     CircularDependency(String),
-    
+
     #[error("版本冲突 / Version conflict: {0}")]
     VersionConflict(String),
-    
+
     #[error("权限不足 / Insufficient permissions: {0}")]
     InsufficientPermissions(String),
-    
+
     #[error("解析失败 / Resolution failed: {0}")]
     ResolutionFailed(String),
 }
@@ -318,26 +341,27 @@ impl ModuleManager {
             },
         }
     }
-    
+
     /// 加载模块 / Load module
     pub fn load_module(&mut self, module_name: &str) -> Result<Arc<Module>, ModuleResolutionError> {
         // 检查是否已加载 / Check if already loaded
         if let Some(module) = self.loaded_modules.get(module_name) {
             return Ok(module.clone());
         }
-        
+
         // 解析模块 / Resolve module
         let module = self.resolver.resolve_module(module_name)?;
-        
+
         // 加载模块 / Load module
-        self.loaded_modules.insert(module_name.to_string(), module.clone());
-        
+        self.loaded_modules
+            .insert(module_name.to_string(), module.clone());
+
         // 更新模块图 / Update module graph
         self.update_module_graph(&module);
-        
+
         Ok(module)
     }
-    
+
     /// 更新模块图 / Update module graph
     fn update_module_graph(&mut self, module: &Module) {
         let node = ModuleNode {
@@ -346,9 +370,9 @@ impl ModuleManager {
             dependencies: module.dependencies.iter().map(|d| d.name.clone()).collect(),
             dependents: Vec::new(),
         };
-        
+
         self.module_graph.nodes.insert(module.name.clone(), node);
-        
+
         // 添加依赖边 / Add dependency edges
         for dependency in &module.dependencies {
             let edge = ModuleEdge {
@@ -356,34 +380,35 @@ impl ModuleManager {
                 to: dependency.name.clone(),
                 edge_type: EdgeType::Dependency,
             };
-            
+
             self.module_graph.edges.push(edge);
         }
     }
-    
+
     /// 获取模块图 / Get module graph
     pub fn get_module_graph(&self) -> &ModuleGraph {
         &self.module_graph
     }
-    
+
     /// 检查循环依赖 / Check for circular dependencies
     pub fn check_circular_dependencies(&self) -> Result<(), ModuleResolutionError> {
         let mut visited = std::collections::HashSet::new();
         let mut rec_stack = std::collections::HashSet::new();
-        
+
         for node_name in self.module_graph.nodes.keys() {
             if !visited.contains(node_name) {
                 if self.dfs_check_cycle(node_name, &mut visited, &mut rec_stack) {
-                    return Err(ModuleResolutionError::CircularDependency(
-                        format!("Circular dependency detected involving {}", node_name)
-                    ));
+                    return Err(ModuleResolutionError::CircularDependency(format!(
+                        "Circular dependency detected involving {}",
+                        node_name
+                    )));
                 }
             }
         }
-        
+
         Ok(())
     }
-    
+
     /// 深度优先搜索检查循环 / DFS check for cycles
     fn dfs_check_cycle(
         &self,
@@ -393,7 +418,7 @@ impl ModuleManager {
     ) -> bool {
         visited.insert(node_name.to_string());
         rec_stack.insert(node_name.to_string());
-        
+
         if let Some(node) = self.module_graph.nodes.get(node_name) {
             for dependency in &node.dependencies {
                 if !visited.contains(dependency) {
@@ -405,28 +430,28 @@ impl ModuleManager {
                 }
             }
         }
-        
+
         rec_stack.remove(node_name);
         false
     }
-    
+
     /// 获取模块拓扑排序 / Get module topological sort
     pub fn get_topological_sort(&self) -> Result<Vec<String>, ModuleResolutionError> {
         self.check_circular_dependencies()?;
-        
+
         let mut visited = std::collections::HashSet::new();
         let mut stack = Vec::new();
-        
+
         for node_name in self.module_graph.nodes.keys() {
             if !visited.contains(node_name) {
                 self.dfs_topological_sort(node_name, &mut visited, &mut stack);
             }
         }
-        
+
         stack.reverse();
         Ok(stack)
     }
-    
+
     /// 深度优先搜索拓扑排序 / DFS topological sort
     fn dfs_topological_sort(
         &self,
@@ -435,7 +460,7 @@ impl ModuleManager {
         stack: &mut Vec<String>,
     ) {
         visited.insert(node_name.to_string());
-        
+
         if let Some(node) = self.module_graph.nodes.get(node_name) {
             for dependency in &node.dependencies {
                 if !visited.contains(dependency) {
@@ -443,7 +468,7 @@ impl ModuleManager {
                 }
             }
         }
-        
+
         stack.push(node_name.to_string());
     }
 }
@@ -451,12 +476,12 @@ impl ModuleManager {
 /// 模块工具函数 / Module Utility Functions
 pub mod utils {
     use super::*;
-    
+
     /// 验证模块名称 / Validate module name
     pub fn validate_module_name(name: &str) -> bool {
         !name.is_empty() && name.chars().all(|c| c.is_alphanumeric() || c == '_')
     }
-    
+
     /// 规范化模块路径 / Normalize module path
     pub fn normalize_module_path(path: &str) -> String {
         path.replace("::", "/")
@@ -464,7 +489,7 @@ pub mod utils {
             .trim_start_matches('/')
             .to_string()
     }
-    
+
     /// 解析模块路径 / Parse module path
     pub fn parse_module_path(path: &str) -> Vec<String> {
         path.split("::")
@@ -472,17 +497,14 @@ pub mod utils {
             .map(|s| s.to_string())
             .collect()
     }
-    
+
     /// 构建模块路径 / Build module path
     pub fn build_module_path(parts: &[String]) -> String {
         parts.join("::")
     }
-    
+
     /// 检查模块可见性 / Check module visibility
-    pub fn check_module_visibility(
-        module: &Module,
-        requester: &str,
-    ) -> bool {
+    pub fn check_module_visibility(module: &Module, requester: &str) -> bool {
         match &module.visibility {
             ModuleVisibility::Public => true,
             ModuleVisibility::Private => false,
@@ -490,17 +512,17 @@ pub mod utils {
             ModuleVisibility::Internal => true, // 简化的内部可见性检查 / Simplified internal visibility check
         }
     }
-    
+
     /// 生成模块文档 / Generate module documentation
     pub fn generate_module_documentation(module: &Module) -> String {
         let mut doc = String::new();
-        
+
         doc.push_str(&format!("# Module: {}\n\n", module.name));
-        
+
         if let Some(description) = &module.metadata.description {
             doc.push_str(&format!("{}\n\n", description));
         }
-        
+
         if !module.exports.is_empty() {
             doc.push_str("## Exports\n\n");
             for export in &module.exports {
@@ -508,15 +530,18 @@ pub mod utils {
             }
             doc.push_str("\n");
         }
-        
+
         if !module.dependencies.is_empty() {
             doc.push_str("## Dependencies\n\n");
             for dependency in &module.dependencies {
-                doc.push_str(&format!("- `{}` (v{})\n", dependency.name, dependency.version));
+                doc.push_str(&format!(
+                    "- `{}` (v{})\n",
+                    dependency.name, dependency.version
+                ));
             }
             doc.push_str("\n");
         }
-        
+
         doc
     }
 }
@@ -524,41 +549,41 @@ pub mod utils {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_module_resolver() {
         let mut resolver = ModuleResolver::new();
         resolver.add_search_path("/test/path".to_string());
         resolver.set_resolution_strategy(ResolutionStrategy::Strict);
-        
+
         assert_eq!(resolver.search_paths.len(), 1);
         assert_eq!(resolver.resolution_strategy, ResolutionStrategy::Strict);
     }
-    
+
     #[test]
     fn test_module_manager() {
         let manager = ModuleManager::new();
-        
+
         // 测试循环依赖检查 / Test circular dependency check
         let result = manager.check_circular_dependencies();
         assert!(result.is_ok());
     }
-    
+
     #[test]
     fn test_module_utils() {
         assert!(utils::validate_module_name("test_module"));
         assert!(!utils::validate_module_name("test-module"));
-        
+
         let normalized = utils::normalize_module_path("::test::module::");
         assert_eq!(normalized, "test/module");
-        
+
         let parts = utils::parse_module_path("test::module::submodule");
         assert_eq!(parts, vec!["test", "module", "submodule"]);
-        
+
         let path = utils::build_module_path(&["test".to_string(), "module".to_string()]);
         assert_eq!(path, "test::module");
     }
-    
+
     #[test]
     fn test_module_visibility() {
         let module = Module {
@@ -579,7 +604,7 @@ mod tests {
                 categories: Vec::new(),
             },
         };
-        
+
         assert!(utils::check_module_visibility(&module, "any_requester"));
     }
 }

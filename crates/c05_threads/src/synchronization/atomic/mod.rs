@@ -1,11 +1,11 @@
 //! 原子类型与内存序
-//! 
+//!
 //! 涵盖 `AtomicBool`/`AtomicUsize` 基本操作、`Ordering` 含义、
 //! `compare_exchange` 与自旋计数器示例。
 
 use std::hint;
-use std::sync::atomic::{fence, AtomicBool, AtomicUsize, Ordering};
 use std::sync::Arc;
+use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering, fence};
 use std::thread;
 use std::time::Duration;
 
@@ -26,7 +26,11 @@ pub fn atomic_basics_demo() {
     // SeqCst 提供全局的强序（通常性能更差）
     fence(Ordering::SeqCst);
 
-    println!("atomic counter={}, seen={}", counter.load(Ordering::Relaxed), seen);
+    println!(
+        "atomic counter={}, seen={}",
+        counter.load(Ordering::Relaxed),
+        seen
+    );
 }
 
 /// compare_exchange 常见用法
@@ -59,8 +63,7 @@ pub fn spin_increment(num_threads: usize, iters_per_thread: usize) -> usize {
                 // 使用 fetch_add 是最佳实践；这里演示 CAS 自旋写法
                 loop {
                     let cur = c.load(Ordering::Relaxed);
-                    if c
-                        .compare_exchange(cur, cur + 1, Ordering::AcqRel, Ordering::Acquire)
+                    if c.compare_exchange(cur, cur + 1, Ordering::AcqRel, Ordering::Acquire)
                         .is_ok()
                     {
                         break;
@@ -72,7 +75,9 @@ pub fn spin_increment(num_threads: usize, iters_per_thread: usize) -> usize {
         }));
     }
 
-    for h in handles { h.join().unwrap(); }
+    for h in handles {
+        h.join().unwrap();
+    }
     shared.load(Ordering::Relaxed)
 }
 

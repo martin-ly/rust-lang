@@ -1,10 +1,10 @@
 // Actix Web 示例
 // 运行命令: cargo run --example actix_web_example --features actix-web
 
-use actix_web::{web, App, HttpServer, Result, middleware::Logger, HttpResponse};
+use actix_web::{App, HttpResponse, HttpServer, Result, middleware::Logger, web};
 use serde::{Deserialize, Serialize};
-use std::sync::Mutex;
 use std::collections::HashMap;
+use std::sync::Mutex;
 
 #[derive(Deserialize, Serialize, Clone)]
 struct User {
@@ -30,7 +30,10 @@ async fn get_user(path: web::Path<u32>, data: web::Data<UserStorage>) -> Result<
     }
 }
 
-async fn create_user(user: web::Json<CreateUser>, data: web::Data<UserStorage>) -> Result<HttpResponse> {
+async fn create_user(
+    user: web::Json<CreateUser>,
+    data: web::Data<UserStorage>,
+) -> Result<HttpResponse> {
     let mut users = data.lock().unwrap();
     let id = users.len() as u32 + 1;
     let new_user = User {
@@ -55,11 +58,11 @@ async fn health_check() -> Result<HttpResponse> {
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     // env_logger::init(); // 需要启用logging特性
-    
+
     let user_storage = web::Data::new(UserStorage::new(HashMap::new()));
-    
+
     println!("启动 Actix Web 服务器在 http://127.0.0.1:8080");
-    
+
     HttpServer::new(move || {
         App::new()
             .app_data(user_storage.clone())
@@ -69,7 +72,7 @@ async fn main() -> std::io::Result<()> {
                     .route("/users/{id}", web::get().to(get_user))
                     .route("/users", web::post().to(create_user))
                     .route("/users", web::get().to(list_users))
-                    .route("/health", web::get().to(health_check))
+                    .route("/health", web::get().to(health_check)),
             )
     })
     .bind("127.0.0.1:8080")?

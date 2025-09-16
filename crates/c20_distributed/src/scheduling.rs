@@ -21,4 +21,3 @@ impl TimerService for TokioTimer {
         });
     }
 }
-

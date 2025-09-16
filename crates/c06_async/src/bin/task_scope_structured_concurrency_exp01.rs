@@ -14,5 +14,3 @@ async fn main() {
     });
     while set.join_next().await.is_some() {}
 }
-
-

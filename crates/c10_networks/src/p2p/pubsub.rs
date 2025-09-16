@@ -4,5 +4,3 @@ pub trait PubSub {
     fn join(&mut self, topic: &str);
     fn publish(&mut self, topic: &str, data: &[u8]);
 }
-
-

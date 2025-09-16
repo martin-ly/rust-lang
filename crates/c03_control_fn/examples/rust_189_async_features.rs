@@ -1,5 +1,5 @@
 //! Rust 1.89 异步编程特性示例
-//! 
+//!
 //! 本示例展示了Rust 1.89版本中的异步编程增强特性：
 //! - async fn trait 完全稳定化
 //! - 异步闭包改进
@@ -10,12 +10,12 @@
 use std::pin::Pin;
 use std::task::{Context, Poll};
 //use tokio::runtime::Runtime;
-use tokio_stream::{Stream, StreamExt};
-use futures::future::{join_all, BoxFuture};
 use anyhow::Result;
+use futures::future::{BoxFuture, join_all};
+use tokio_stream::{Stream, StreamExt};
 
 /// Rust 1.89 Async Trait 完全支持示例
-/// 
+///
 /// 在Rust 1.89中，async fn trait已经完全稳定，支持：
 /// - 动态分发
 /// - 特征对象向上转型
@@ -24,10 +24,10 @@ use anyhow::Result;
 trait AsyncProcessor: Send + Sync {
     /// 异步处理数据
     fn process<'a>(&'a self, data: &'a [u8]) -> BoxFuture<'a, Result<Vec<u8>>>;
-    
+
     /// 异步验证数据
     fn validate<'a>(&'a self, input: &'a str) -> BoxFuture<'a, bool>;
-    
+
     /// 异步批量处理
     fn batch_process<'a>(&'a self, items: Vec<&'a [u8]>) -> BoxFuture<'a, Result<Vec<Vec<u8>>>> {
         Box::pin(async move {
@@ -62,7 +62,7 @@ impl AsyncProcessor for BasicProcessor {
             Ok(data.to_vec())
         })
     }
-    
+
     fn validate<'a>(&'a self, input: &'a str) -> BoxFuture<'a, bool> {
         let name = self.name.clone();
         Box::pin(async move {
@@ -93,22 +93,22 @@ impl AsyncProcessor for AdvancedProcessor {
         let name = self.name.clone();
         let key = format!("{:?}", data);
         let cache = self.cache.clone();
-        
+
         Box::pin(async move {
             if let Some(cached) = cache.get(&key) {
                 println!("{} 从缓存返回结果", name);
                 return Ok(cached.clone());
             }
-            
+
             println!("{} 正在处理 {} 字节数据", name, data.len());
             tokio::time::sleep(tokio::time::Duration::from_millis(20)).await;
-            
+
             let result = data.to_vec();
             // 注意：这里简化了，实际应该使用Arc<Mutex<>>来修改缓存
             Ok(result)
         })
     }
-    
+
     fn validate<'a>(&'a self, input: &'a str) -> BoxFuture<'a, bool> {
         let name = self.name.clone();
         Box::pin(async move {
@@ -126,7 +126,7 @@ async fn process_with_dyn(processor: &dyn AsyncProcessor, data: &[u8]) -> Result
 }
 
 /// 异步闭包改进示例
-/// 
+///
 /// Rust 1.89中异步闭包有了显著改进：
 /// - 更好的生命周期推断
 /// - 改进的错误诊断
@@ -137,11 +137,11 @@ async fn async_closure_examples() {
         tokio::time::sleep(tokio::time::Duration::from_millis(x as u64)).await;
         x * 2
     };
-    
+
     // 使用异步闭包
     let result = async_operation(100).await;
     println!("异步闭包结果: {}", result);
-    
+
     // 异步闭包与迭代器结合
     let numbers = vec![1, 2, 3, 4, 5];
     let async_operations: Vec<_> = numbers
@@ -151,13 +151,13 @@ async fn async_closure_examples() {
             n * n
         })
         .collect();
-    
+
     let results = join_all(async_operations).await;
     println!("异步闭包迭代结果: {:?}", results);
 }
 
 /// 异步迭代器示例
-/// 
+///
 /// Rust 1.89中异步迭代器得到了更好的支持
 #[allow(dead_code)]
 struct AsyncNumberGenerator {
@@ -178,7 +178,7 @@ impl AsyncNumberGenerator {
 
 impl Stream for AsyncNumberGenerator {
     type Item = i32;
-    
+
     fn poll_next(mut self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Option<Self::Item>> {
         if self.current < self.end {
             let current = self.current;
@@ -194,19 +194,19 @@ impl AsyncNumberGenerator {
     /// 异步处理生成的数字
     async fn process_numbers(&mut self) -> Vec<i32> {
         let mut results = Vec::new();
-        
+
         while let Some(number) = self.next().await {
             // 模拟异步处理
             tokio::time::sleep(tokio::time::Duration::from_millis(5)).await;
             results.push(number * 2);
         }
-        
+
         results
     }
 }
 
 /// 异步运行时优化示例
-/// 
+///
 /// Rust 1.89中异步运行时有了显著改进：
 /// - 改进的工作窃取调度器
 /// - 更好的任务本地存储
@@ -222,13 +222,11 @@ async fn runtime_optimization_examples() {
             })
         })
         .collect();
-    
+
     // 批量等待API
     let results = join_all(tasks).await;
-    let sum: i32 = results.into_iter()
-        .map(|r| r.unwrap())
-        .sum();
-    
+    let sum: i32 = results.into_iter().map(|r| r.unwrap()).sum();
+
     println!("并行任务处理总和: {}", sum);
 }
 
@@ -236,19 +234,19 @@ async fn runtime_optimization_examples() {
 async fn stream_processing_examples() {
     // 改进的异步流处理 - 30%性能提升
     let numbers: Vec<i32> = (0..100).collect();
-    
+
     // 简化的并行处理
     let tasks: Vec<_> = numbers
         .into_iter()
-        .map(|x| async move { 
+        .map(|x| async move {
             tokio::time::sleep(tokio::time::Duration::from_millis(1)).await;
-            x * x 
+            x * x
         })
         .collect();
-    
+
     let processed = join_all(tasks).await;
     let even_count = processed.iter().filter(|&&x| x % 2 == 0).count();
-    
+
     println!("流式处理了 {} 个偶数", even_count);
 }
 
@@ -264,11 +262,11 @@ async fn cancellation_improvements() {
         }
         "任务完成"
     });
-    
+
     // 等待一段时间后取消
     tokio::time::sleep(tokio::time::Duration::from_millis(500)).await;
     task.abort();
-    
+
     match task.await {
         Ok(result) => println!("任务结果: {:?}", result),
         Err(aborted) if aborted.is_cancelled() => println!("任务被取消"),
@@ -281,41 +279,41 @@ async fn cancellation_improvements() {
 async fn main() -> Result<()> {
     println!("🚀 Rust 1.89 异步编程特性演示");
     println!("{}", "=".repeat(50));
-    
+
     // 1. Async Trait 示例
     println!("\n1. Async Trait 完全支持示例");
     let basic = BasicProcessor::new("基础处理器".to_string());
     let advanced = AdvancedProcessor::new("高级处理器".to_string());
-    
+
     let data = b"Hello, Rust 1.89!";
     let result1 = basic.process(data).await?;
     let result2 = advanced.process(data).await?;
-    
+
     println!("基础处理器结果: {:?}", result1);
     println!("高级处理器结果: {:?}", result2);
-    
+
     // 2. 异步闭包示例
     println!("\n2. 异步闭包改进示例");
     async_closure_examples().await;
-    
+
     // 3. 异步迭代器示例
     println!("\n3. 异步迭代器示例");
     let mut generator = AsyncNumberGenerator::new(1, 10);
     let processed = generator.process_numbers().await;
     println!("异步生成器结果: {:?}", processed);
-    
+
     // 4. 运行时优化示例
     println!("\n4. 异步运行时优化示例");
     runtime_optimization_examples().await;
-    
+
     // 5. 流式处理示例
     println!("\n5. 异步流式处理示例");
     stream_processing_examples().await;
-    
+
     // 6. 取消机制示例
     println!("\n6. 异步取消机制示例");
     cancellation_improvements().await;
-    
+
     println!("\n✅ Rust 1.89 异步特性演示完成！");
     Ok(())
 }

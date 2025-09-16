@@ -4,13 +4,24 @@
 //! - Windows: IOCP
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum TriggerMode { Level, Edge }
+pub enum TriggerMode {
+    Level,
+    Edge,
+}
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum Interest { Readable, Writable, ReadWrite }
+pub enum Interest {
+    Readable,
+    Writable,
+    ReadWrite,
+}
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub struct Event { pub fd: i32, pub readable: bool, pub writable: bool }
+pub struct Event {
+    pub fd: i32,
+    pub readable: bool,
+    pub writable: bool,
+}
 
 pub trait EventLoop {
     fn register(&mut self, fd: i32, interest: Interest, mode: TriggerMode) -> bool;
@@ -25,12 +36,24 @@ pub trait EventLoop {
 mod backend {
     use super::*;
     pub struct EventLoopImpl;
-    impl EventLoopImpl { pub fn new() -> Self { Self } }
+    impl EventLoopImpl {
+        pub fn new() -> Self {
+            Self
+        }
+    }
     impl EventLoop for EventLoopImpl {
-        fn register(&mut self, _fd: i32, _interest: Interest, _mode: TriggerMode) -> bool { true }
-        fn reregister(&mut self, _fd: i32, _interest: Interest, _mode: TriggerMode) -> bool { true }
-        fn deregister(&mut self, _fd: i32) -> bool { true }
-        fn poll(&mut self, _timeout_ms: i32) -> Vec<Event> { Vec::new() }
+        fn register(&mut self, _fd: i32, _interest: Interest, _mode: TriggerMode) -> bool {
+            true
+        }
+        fn reregister(&mut self, _fd: i32, _interest: Interest, _mode: TriggerMode) -> bool {
+            true
+        }
+        fn deregister(&mut self, _fd: i32) -> bool {
+            true
+        }
+        fn poll(&mut self, _timeout_ms: i32) -> Vec<Event> {
+            Vec::new()
+        }
     }
 }
 
@@ -38,12 +61,24 @@ mod backend {
 mod backend {
     use super::*;
     pub struct EventLoopImpl;
-    impl EventLoopImpl { pub fn new() -> Self { Self } }
+    impl EventLoopImpl {
+        pub fn new() -> Self {
+            Self
+        }
+    }
     impl EventLoop for EventLoopImpl {
-        fn register(&mut self, _fd: i32, _interest: Interest, _mode: TriggerMode) -> bool { true }
-        fn reregister(&mut self, _fd: i32, _interest: Interest, _mode: TriggerMode) -> bool { true }
-        fn deregister(&mut self, _fd: i32) -> bool { true }
-        fn poll(&mut self, _timeout_ms: i32) -> Vec<Event> { Vec::new() }
+        fn register(&mut self, _fd: i32, _interest: Interest, _mode: TriggerMode) -> bool {
+            true
+        }
+        fn reregister(&mut self, _fd: i32, _interest: Interest, _mode: TriggerMode) -> bool {
+            true
+        }
+        fn deregister(&mut self, _fd: i32) -> bool {
+            true
+        }
+        fn poll(&mut self, _timeout_ms: i32) -> Vec<Event> {
+            Vec::new()
+        }
     }
 }
 
@@ -51,25 +86,55 @@ mod backend {
 mod backend {
     use super::*;
     pub struct EventLoopImpl;
-    impl EventLoopImpl { pub fn new() -> Self { Self } }
+    impl EventLoopImpl {
+        pub fn new() -> Self {
+            Self
+        }
+    }
     impl EventLoop for EventLoopImpl {
-        fn register(&mut self, _fd: i32, _interest: Interest, _mode: TriggerMode) -> bool { true }
-        fn reregister(&mut self, _fd: i32, _interest: Interest, _mode: TriggerMode) -> bool { true }
-        fn deregister(&mut self, _fd: i32) -> bool { true }
-        fn poll(&mut self, _timeout_ms: i32) -> Vec<Event> { Vec::new() }
+        fn register(&mut self, _fd: i32, _interest: Interest, _mode: TriggerMode) -> bool {
+            true
+        }
+        fn reregister(&mut self, _fd: i32, _interest: Interest, _mode: TriggerMode) -> bool {
+            true
+        }
+        fn deregister(&mut self, _fd: i32) -> bool {
+            true
+        }
+        fn poll(&mut self, _timeout_ms: i32) -> Vec<Event> {
+            Vec::new()
+        }
     }
 }
 
-#[cfg(not(any(target_os = "linux", target_os = "windows", target_os = "macos", target_os = "freebsd", target_os = "openbsd")))]
+#[cfg(not(any(
+    target_os = "linux",
+    target_os = "windows",
+    target_os = "macos",
+    target_os = "freebsd",
+    target_os = "openbsd"
+)))]
 mod backend {
     use super::*;
     pub struct EventLoopImpl;
-    impl EventLoopImpl { pub fn new() -> Self { Self } }
+    impl EventLoopImpl {
+        pub fn new() -> Self {
+            Self
+        }
+    }
     impl EventLoop for EventLoopImpl {
-        fn register(&mut self, _fd: i32, _interest: Interest, _mode: TriggerMode) -> bool { true }
-        fn reregister(&mut self, _fd: i32, _interest: Interest, _mode: TriggerMode) -> bool { true }
-        fn deregister(&mut self, _fd: i32) -> bool { true }
-        fn poll(&mut self, _timeout_ms: i32) -> Vec<Event> { Vec::new() }
+        fn register(&mut self, _fd: i32, _interest: Interest, _mode: TriggerMode) -> bool {
+            true
+        }
+        fn reregister(&mut self, _fd: i32, _interest: Interest, _mode: TriggerMode) -> bool {
+            true
+        }
+        fn deregister(&mut self, _fd: i32) -> bool {
+            true
+        }
+        fn poll(&mut self, _timeout_ms: i32) -> Vec<Event> {
+            Vec::new()
+        }
     }
 }
 
@@ -81,5 +146,3 @@ pub fn minimal_demo() {
     let _ = el.register(0, Interest::Readable, TriggerMode::Level);
     let _events = el.poll(10);
 }
-
-

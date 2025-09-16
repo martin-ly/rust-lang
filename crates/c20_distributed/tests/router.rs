@@ -1,5 +1,5 @@
-use c20_distributed::topology::ConsistentHashRing;
 use c20_distributed::partitioning::HashRingRouter;
+use c20_distributed::topology::ConsistentHashRing;
 
 #[test]
 fn route_owner_exists() {
@@ -10,4 +10,3 @@ fn route_owner_exists() {
     let owner = router.owner_of(&"k-01");
     assert!(owner.is_some());
 }
-

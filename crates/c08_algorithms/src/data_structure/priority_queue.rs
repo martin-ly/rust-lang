@@ -22,8 +22,16 @@ pub struct PriorityQueue<T> {
 impl<T: Ord> PriorityQueue<T> {
     pub fn new(kind: HeapKind) -> Self {
         match kind {
-            HeapKind::Max => Self { kind, max_heap: BinaryHeap::new(), min_heap: BinaryHeap::new() },
-            HeapKind::Min => Self { kind, max_heap: BinaryHeap::new(), min_heap: BinaryHeap::new() },
+            HeapKind::Max => Self {
+                kind,
+                max_heap: BinaryHeap::new(),
+                min_heap: BinaryHeap::new(),
+            },
+            HeapKind::Min => Self {
+                kind,
+                max_heap: BinaryHeap::new(),
+                min_heap: BinaryHeap::new(),
+            },
         }
     }
 
@@ -48,22 +56,32 @@ impl<T: Ord> PriorityQueue<T> {
         }
     }
 
-    pub fn len(&self) -> usize { self.max_heap.len().max(self.min_heap.len()) }
-    pub fn is_empty(&self) -> bool { self.len() == 0 }
+    pub fn len(&self) -> usize {
+        self.max_heap.len().max(self.min_heap.len())
+    }
+    pub fn is_empty(&self) -> bool {
+        self.len() == 0
+    }
 
     /// 批量推入（同步）
     pub fn extend<I: IntoIterator<Item = T>>(&mut self, iter: I) {
-        for v in iter { self.push(v); }
+        for v in iter {
+            self.push(v);
+        }
     }
 }
 
 /// 异步批量构建一个堆并返回（CPU 密集：spawn_blocking）
-pub async fn build_heap_async<T: Ord + Send + 'static>(kind: HeapKind, data: Vec<T>) -> Result<PriorityQueue<T>> {
+pub async fn build_heap_async<T: Ord + Send + 'static>(
+    kind: HeapKind,
+    data: Vec<T>,
+) -> Result<PriorityQueue<T>> {
     Ok(tokio::task::spawn_blocking(move || {
         let mut pq = PriorityQueue::new(kind);
         pq.extend(data);
         pq
-    }).await?)
+    })
+    .await?)
 }
 
 #[cfg(test)]
@@ -91,9 +109,11 @@ mod tests {
     #[test]
     fn test_build_heap_async() {
         let rt = tokio::runtime::Runtime::new().unwrap();
-        let pq = rt.block_on(async { build_heap_async(HeapKind::Max, vec![1,2,3]).await.unwrap() });
+        let pq = rt.block_on(async {
+            build_heap_async(HeapKind::Max, vec![1, 2, 3])
+                .await
+                .unwrap()
+        });
         assert_eq!(pq.len(), 3);
     }
 }
-
-

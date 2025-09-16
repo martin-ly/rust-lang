@@ -1,5 +1,5 @@
 //! # IoT 嵌入式系统模块 / IoT Embedded System Module
-//! 
+//!
 //! 本模块实现了 IoT 嵌入式系统的核心功能。
 //! This module implements the core functionality of IoT embedded systems.
 
@@ -41,11 +41,11 @@ impl EmbeddedDevice {
             status: DeviceStatus::Offline,
         }
     }
-    
+
     pub fn add_sensor(&mut self, sensor: Sensor) {
         self.sensors.push(sensor);
     }
-    
+
     pub fn add_actuator(&mut self, actuator: Actuator) {
         self.actuators.push(actuator);
     }
@@ -82,7 +82,7 @@ pub enum DeviceStatus {
     Offline,
     Error,
     Maintenance,
-} 
+}
 
 /// 数字输出抽象 / Digital Output Abstraction
 pub trait DigitalOutput {
@@ -93,7 +93,9 @@ pub trait DigitalOutput {
 /// 数字输入抽象 / Digital Input Abstraction
 pub trait DigitalInput {
     fn is_high(&self) -> bool;
-    fn is_low(&self) -> bool { !self.is_high() }
+    fn is_low(&self) -> bool {
+        !self.is_high()
+    }
 }
 
 /// I2C 抽象（极简）/ I2C Abstraction (minimal)

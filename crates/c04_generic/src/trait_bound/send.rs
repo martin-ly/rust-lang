@@ -75,13 +75,13 @@ use std::thread;
 
 fn main() {
     let data = vec![1, 2, 3, 4, 5];
-    
+
     // 将数据移动到新线程
     let handle = thread::spawn(move || {
         println!("Received data: {:?}", data);
         // 处理数据
     });
-    
+
     // 等待线程完成
     handle.join().unwrap();
 }
@@ -95,19 +95,19 @@ use std::thread;
 
 fn main() {
     let (tx, rx) = mpsc::channel();
-    
+
     // 发送线程
     let sender = thread::spawn(move || {
         let data = vec![1, 2, 3, 4, 5];
         tx.send(data).unwrap();
     });
-    
+
     // 接收线程
     let receiver = thread::spawn(move || {
         let received = rx.recv().unwrap();
         println!("Received: {:?}", received);
     });
-    
+
     sender.join().unwrap();
     receiver.join().unwrap();
 }
@@ -126,7 +126,7 @@ struct AsyncTask {
 
 impl Future for AsyncTask {
     type Output = Vec<i32>;
-    
+
     fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
         Poll::Ready(self.data.clone())
     }
@@ -181,14 +181,14 @@ use std::sync::Arc;
 
 fn main() {
     let data = Arc::new(vec![1, 2, 3, 4, 5]);
-    
+
     // 克隆 Arc 引用
     let data_clone = Arc::clone(&data);
-    
+
     let handle = thread::spawn(move || {
         println!("Data in thread: {:?}", data_clone);
     });
-    
+
     handle.join().unwrap();
     println!("Original data: {:?}", data);
 }
@@ -201,13 +201,13 @@ use std::sync::Mutex;
 
 fn main() {
     let data = Mutex::new(vec![1, 2, 3]);
-    
+
     let handle = thread::spawn(move || {
         let mut guard = data.lock().unwrap();
         guard.push(4);
         println!("Modified data: {:?}", guard);
     });
-    
+
     handle.join().unwrap();
 }
 ```
@@ -219,7 +219,7 @@ use std::sync::atomic::{AtomicUsize, Ordering};
 
 fn main() {
     let counter = AtomicUsize::new(0);
-    
+
     let handles: Vec<_> = (0..10).map(|_| {
         let counter = &counter;
         thread::spawn(move || {
@@ -228,11 +228,11 @@ fn main() {
             }
         })
     }).collect();
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     println!("Final count: {}", counter.load(Ordering::Relaxed));
 }
 ```
@@ -299,11 +299,11 @@ impl CustomAtomic {
             value: AtomicBool::new(initial),
         }
     }
-    
+
     fn set(&self, value: bool) {
         self.value.store(value, Ordering::Relaxed);
     }
-    
+
     fn get(&self) -> bool {
         self.value.load(Ordering::Relaxed)
     }
@@ -320,9 +320,9 @@ Send trait 为 Rust 提供了线程间安全传递的基础。
 同时需要注意安全性和性能影响。
 */
 
-use std::thread;
+use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex, mpsc};
-use std::sync::atomic::{AtomicUsize, AtomicBool, Ordering};
+use std::thread;
 
 // 基本类型自动实现 Send
 #[derive(Debug)]
@@ -353,7 +353,7 @@ pub struct CustomSendType {
 }
 
 // 手动实现 Send（通常是安全的）
-unsafe impl Send for CustomSendType { }
+unsafe impl Send for CustomSendType {}
 
 // 线程安全的数据结构
 #[derive(Debug)]
@@ -364,7 +364,7 @@ pub struct ThreadSafeData {
 }
 
 // 手动实现 Send
-unsafe impl Send for ThreadSafeData { }
+unsafe impl Send for ThreadSafeData {}
 
 impl ThreadSafeData {
     pub fn new(values: Vec<i32>) -> Self {
@@ -374,19 +374,19 @@ impl ThreadSafeData {
             active: AtomicBool::new(true),
         }
     }
-    
+
     pub fn increment(&self) {
         self.counter.fetch_add(1, Ordering::Relaxed);
     }
-    
+
     pub fn get_count(&self) -> usize {
         self.counter.load(Ordering::Relaxed)
     }
-    
+
     pub fn set_active(&self, active: bool) {
         self.active.store(active, Ordering::Relaxed);
     }
-    
+
     pub fn is_active(&self) -> bool {
         self.active.load(Ordering::Relaxed)
     }
@@ -395,19 +395,19 @@ impl ThreadSafeData {
 // 演示函数
 pub fn demonstrate_send() {
     println!("=== Send Trait Demonstration ===\n");
-    
+
     // 基本线程间数据传递
     demonstrate_basic_threading();
-    
+
     // 通道通信
     demonstrate_channel_communication();
-    
+
     // 共享状态
     demonstrate_shared_state();
-    
+
     // 原子操作
     demonstrate_atomic_operations();
-    
+
     // 自定义线程安全类型
     demonstrate_custom_send();
 }
@@ -415,21 +415,21 @@ pub fn demonstrate_send() {
 // 基本线程间数据传递
 fn demonstrate_basic_threading() {
     println!("--- Basic Threading ---");
-    
+
     let data = SendExample {
         name: "Thread Data".to_string(),
         value: 42,
         active: true,
     };
-    
+
     println!("Original data: {:?}", data);
-    
+
     // 将数据移动到新线程
     let handle = thread::spawn(move || {
         println!("Data in thread: {:?}", data);
         // 处理数据
     });
-    
+
     // 等待线程完成
     handle.join().unwrap();
     println!();
@@ -438,22 +438,22 @@ fn demonstrate_basic_threading() {
 // 通道通信
 fn demonstrate_channel_communication() {
     println!("--- Channel Communication ---");
-    
+
     let (tx, rx) = mpsc::channel();
-    
+
     // 发送线程
     let sender = thread::spawn(move || {
         let data = vec![1, 2, 3, 4, 5];
         println!("Sending data: {:?}", data);
         tx.send(data).unwrap();
     });
-    
+
     // 接收线程
     let receiver = thread::spawn(move || {
         let received = rx.recv().unwrap();
         println!("Received data: {:?}", received);
     });
-    
+
     sender.join().unwrap();
     receiver.join().unwrap();
     println!();
@@ -462,22 +462,24 @@ fn demonstrate_channel_communication() {
 // 共享状态
 fn demonstrate_shared_state() {
     println!("--- Shared State ---");
-    
+
     let shared_data = Arc::new(Mutex::new(vec![1, 2, 3, 4, 5]));
-    
-    let handles: Vec<_> = (0..3).map(|id| {
-        let data = Arc::clone(&shared_data);
-        thread::spawn(move || {
-            let mut guard = data.lock().unwrap();
-            guard.push(id + 10);
-            println!("Thread {} added value, data: {:?}", id, guard);
+
+    let handles: Vec<_> = (0..3)
+        .map(|id| {
+            let data = Arc::clone(&shared_data);
+            thread::spawn(move || {
+                let mut guard = data.lock().unwrap();
+                guard.push(id + 10);
+                println!("Thread {} added value, data: {:?}", id, guard);
+            })
         })
-    }).collect();
-    
+        .collect();
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     let final_data = shared_data.lock().unwrap();
     println!("Final shared data: {:?}", final_data);
     println!();
@@ -486,22 +488,24 @@ fn demonstrate_shared_state() {
 // 原子操作
 fn demonstrate_atomic_operations() {
     println!("--- Atomic Operations ---");
-    
+
     // 使用静态原子计数器来避免生命周期问题
     static COUNTER: AtomicUsize = AtomicUsize::new(0);
-    
-    let handles: Vec<_> = (0..5).map(|_| {
-        thread::spawn(move || {
-            for _ in 0..100 {
-                COUNTER.fetch_add(1, Ordering::Relaxed);
-            }
+
+    let handles: Vec<_> = (0..5)
+        .map(|_| {
+            thread::spawn(move || {
+                for _ in 0..100 {
+                    COUNTER.fetch_add(1, Ordering::Relaxed);
+                }
+            })
         })
-    }).collect();
-    
+        .collect();
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     println!("Final atomic count: {}", COUNTER.load(Ordering::Relaxed));
     println!();
 }
@@ -509,30 +513,36 @@ fn demonstrate_atomic_operations() {
 // 自定义线程安全类型
 fn demonstrate_custom_send() {
     println!("--- Custom Send Types ---");
-    
+
     let custom_data = CustomSendType {
         data: vec![1, 2, 3, 4, 5],
         counter: AtomicUsize::new(0),
         flag: AtomicBool::new(false),
     };
-    
+
     let thread_data = custom_data;
-    
+
     let handle = thread::spawn(move || {
         println!("Custom data in thread:");
         println!("  - Data length: {}", thread_data.data.len());
-        println!("  - Counter: {}", thread_data.counter.load(Ordering::Relaxed));
+        println!(
+            "  - Counter: {}",
+            thread_data.counter.load(Ordering::Relaxed)
+        );
         println!("  - Flag: {}", thread_data.flag.load(Ordering::Relaxed));
-        
+
         // 修改原子字段
         thread_data.counter.fetch_add(10, Ordering::Relaxed);
         thread_data.flag.store(true, Ordering::Relaxed);
-        
+
         println!("  - After modification:");
-        println!("    Counter: {}", thread_data.counter.load(Ordering::Relaxed));
+        println!(
+            "    Counter: {}",
+            thread_data.counter.load(Ordering::Relaxed)
+        );
         println!("    Flag: {}", thread_data.flag.load(Ordering::Relaxed));
     });
-    
+
     handle.join().unwrap();
     println!();
 }
@@ -540,34 +550,36 @@ fn demonstrate_custom_send() {
 // 线程安全的数据处理示例
 pub fn demonstrate_thread_safe_processing() {
     println!("--- Thread Safe Processing ---");
-    
+
     let thread_safe_data = ThreadSafeData::new(vec![1, 2, 3, 4, 5]);
-    
+
     // 创建Arc包装的数据用于在线程间共享
     let shared_data = Arc::new(thread_safe_data);
-    
-    let handles: Vec<_> = (0..3).map(|id| {
-        let data = Arc::clone(&shared_data);
-        thread::spawn(move || {
-            println!("Thread {} processing data", id);
-            
-            // 访问共享数据
-            let values = &data.values;
-            println!("  - Values: {:?}", values);
-            
-            // 修改原子字段
-            data.increment();
-            data.set_active(id % 2 == 0);
-            
-            println!("  - Counter: {}", data.get_count());
-            println!("  - Active: {}", data.is_active());
+
+    let handles: Vec<_> = (0..3)
+        .map(|id| {
+            let data = Arc::clone(&shared_data);
+            thread::spawn(move || {
+                println!("Thread {} processing data", id);
+
+                // 访问共享数据
+                let values = &data.values;
+                println!("  - Values: {:?}", values);
+
+                // 修改原子字段
+                data.increment();
+                data.set_active(id % 2 == 0);
+
+                println!("  - Counter: {}", data.get_count());
+                println!("  - Active: {}", data.is_active());
+            })
         })
-    }).collect();
-    
+        .collect();
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     // 从Arc中获取数据来访问最终状态
     let final_data = shared_data.as_ref();
     println!("Final state:");
@@ -579,7 +591,7 @@ pub fn demonstrate_thread_safe_processing() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_send_example() {
         let data = SendExample {
@@ -587,40 +599,40 @@ mod tests {
             value: 100,
             active: false,
         };
-        
+
         assert_eq!(data.name, "Test");
         assert_eq!(data.value, 100);
         assert!(!data.active);
-        
+
         // 测试可以移动到线程
         let handle = thread::spawn(move || {
             assert_eq!(data.name, "Test");
             assert_eq!(data.value, 100);
             assert!(!data.active);
         });
-        
+
         handle.join().unwrap();
     }
-    
+
     #[test]
     fn test_send_container() {
         let container = SendContainer {
             value: 42,
             metadata: "Test".to_string(),
         };
-        
+
         assert_eq!(container.value, 42);
         assert_eq!(container.metadata, "Test");
-        
+
         // 测试可以移动到线程
         let handle = thread::spawn(move || {
             assert_eq!(container.value, 42);
             assert_eq!(container.metadata, "Test");
         });
-        
+
         handle.join().unwrap();
     }
-    
+
     #[test]
     fn test_custom_send_type() {
         let custom = CustomSendType {
@@ -628,36 +640,36 @@ mod tests {
             counter: AtomicUsize::new(0),
             flag: AtomicBool::new(false),
         };
-        
+
         assert_eq!(custom.data.len(), 3);
         assert_eq!(custom.counter.load(Ordering::Relaxed), 0);
         assert!(!custom.flag.load(Ordering::Relaxed));
-        
+
         // 测试可以移动到线程
         let handle = thread::spawn(move || {
             assert_eq!(custom.data.len(), 3);
             custom.counter.fetch_add(1, Ordering::Relaxed);
             custom.flag.store(true, Ordering::Relaxed);
         });
-        
+
         handle.join().unwrap();
     }
-    
+
     #[test]
     fn test_thread_safe_data() {
         let data = ThreadSafeData::new(vec![1, 2, 3]);
-        
+
         assert_eq!(data.values.len(), 3);
         assert_eq!(data.get_count(), 0);
         assert!(data.is_active());
-        
+
         // 测试可以移动到线程
         let handle = thread::spawn(move || {
             assert_eq!(data.values.len(), 3);
             data.increment();
             data.set_active(false);
         });
-        
+
         handle.join().unwrap();
     }
 }

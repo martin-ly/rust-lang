@@ -15,7 +15,7 @@ async fn main() {
             println!("task {} done", i);
         }));
     }
-    for h in handles { let _ = h.await; }
+    for h in handles {
+        let _ = h.await;
+    }
 }
-
-

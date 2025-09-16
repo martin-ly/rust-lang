@@ -1,9 +1,9 @@
-pub mod concurrency_patterns;
 pub mod actor_model;
-pub mod work_stealing;
-pub mod scoped_threads;
 pub mod async_concurrency;
-pub mod parallel_iterators;
+pub mod cache_optimization;
+pub mod concurrency_patterns;
 pub mod concurrent_data_structures;
 pub mod memory_ordering;
-pub mod cache_optimization;
+pub mod parallel_iterators;
+pub mod scoped_threads;
+pub mod work_stealing;

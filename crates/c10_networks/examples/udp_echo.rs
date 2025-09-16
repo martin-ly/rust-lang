@@ -11,5 +11,3 @@ async fn main() -> anyhow::Result<()> {
         socket.send_to(&buf[..n], &peer).await?;
     }
 }
-
-

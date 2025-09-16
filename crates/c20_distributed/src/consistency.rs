@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use std::time::{Duration, SystemTime};
 
 /// 分布式系统一致性级别
-/// 
+///
 /// 基于CAP定理和PACELC定理，提供不同的一致性保证
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum ConsistencyLevel {
@@ -126,7 +126,7 @@ impl VectorClock {
     /// 检查是否在因果关系上先于另一个向量时钟
     pub fn happens_before(&self, other: &VectorClock) -> bool {
         let mut strictly_less = false;
-        
+
         for (node_id, &self_clock) in &self.clocks {
             let other_clock = other.clocks.get(node_id).unwrap_or(&0);
             if self_clock > *other_clock {
@@ -136,14 +136,14 @@ impl VectorClock {
                 strictly_less = true;
             }
         }
-        
+
         // 检查是否有其他节点在other中存在但在self中不存在
         for node_id in other.clocks.keys() {
             if !self.clocks.contains_key(node_id) {
                 strictly_less = true;
             }
         }
-        
+
         strictly_less
     }
 
@@ -157,14 +157,14 @@ impl VectorClock {
         if self.clocks.len() != other.clocks.len() {
             return false;
         }
-        
+
         for (node_id, &self_clock) in &self.clocks {
             let other_clock = other.clocks.get(node_id).unwrap_or(&0);
             if self_clock != *other_clock {
                 return false;
             }
         }
-        
+
         true
     }
 }
@@ -198,11 +198,14 @@ impl SessionConsistencyManager {
 
     /// 创建新会话
     pub fn create_session(&mut self, session_id: String) {
-        self.sessions.insert(session_id, SessionInfo {
-            last_read_version: None,
-            last_write_version: None,
-            created_at: SystemTime::now(),
-        });
+        self.sessions.insert(
+            session_id,
+            SessionInfo {
+                last_read_version: None,
+                last_write_version: None,
+                created_at: SystemTime::now(),
+            },
+        );
     }
 
     /// 更新会话的读版本
@@ -243,7 +246,9 @@ impl SessionConsistencyManager {
     pub fn cleanup_expired_sessions(&mut self, max_age: Duration) {
         let now = SystemTime::now();
         self.sessions.retain(|_, session| {
-            now.duration_since(session.created_at).unwrap_or(Duration::from_secs(0)) < max_age
+            now.duration_since(session.created_at)
+                .unwrap_or(Duration::from_secs(0))
+                < max_age
         });
     }
 }
@@ -277,7 +282,8 @@ impl MonotonicConsistencyManager {
                 return false; // 违反了单调读一致性
             }
         }
-        self.read_versions.insert(client_id.to_string(), version.clone());
+        self.read_versions
+            .insert(client_id.to_string(), version.clone());
         true
     }
 
@@ -288,7 +294,8 @@ impl MonotonicConsistencyManager {
                 return false; // 违反了单调写一致性
             }
         }
-        self.write_versions.insert(client_id.to_string(), version.clone());
+        self.write_versions
+            .insert(client_id.to_string(), version.clone());
         true
     }
 }
@@ -298,4 +305,3 @@ impl Default for MonotonicConsistencyManager {
         Self::new()
     }
 }
-

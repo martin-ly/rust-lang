@@ -5,7 +5,9 @@ async fn main() {
     let (tx, rx) = tokio::sync::mpsc::channel::<u32>(128);
     // 生产者
     let prod = tokio::spawn(async move {
-        for i in 0..100u32 { tx.send(i).await.unwrap(); }
+        for i in 0..100u32 {
+            tx.send(i).await.unwrap();
+        }
     });
     // 工作池
     let mut workers = Vec::new();

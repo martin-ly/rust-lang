@@ -1,8 +1,8 @@
 //! # 大学课程对标 / University Course Benchmarking
-//! 
+//!
 //! 本模块对标著名大学的工作流相关课程，包括 MIT、Stanford 等，
 //! 确保我们的实现符合学术标准和最佳实践。
-//! 
+//!
 //! This module benchmarks against renowned university courses related to workflows,
 //! including MIT, Stanford, etc., to ensure our implementation follows academic standards and best practices.
 
@@ -92,6 +92,12 @@ pub struct MITWorkflowCourse {
     benchmark: UniversityCourseBenchmark,
 }
 
+impl Default for MITWorkflowCourse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl MITWorkflowCourse {
     /// 创建 MIT 工作流课程基准测试 / Create MIT workflow course benchmark
     pub fn new() -> Self {
@@ -106,7 +112,7 @@ impl MITWorkflowCourse {
             },
         }
     }
-    
+
     /// MIT 课程大纲 / MIT curriculum
     fn mit_curriculum() -> CourseCurriculum {
         CourseCurriculum {
@@ -173,7 +179,7 @@ impl MITWorkflowCourse {
             credits: 12,
         }
     }
-    
+
     /// MIT 学习成果 / MIT learning outcomes
     fn mit_learning_outcomes() -> Vec<LearningOutcome> {
         vec![
@@ -203,7 +209,7 @@ impl MITWorkflowCourse {
             },
         ]
     }
-    
+
     /// MIT 评估标准 / MIT assessment criteria
     fn mit_assessment_criteria() -> Vec<AssessmentCriteria> {
         vec![
@@ -253,18 +259,25 @@ impl MITWorkflowCourse {
             },
         ]
     }
-    
+
     /// 获取课程基准测试 / Get course benchmark
     pub fn get_benchmark(&self) -> &UniversityCourseBenchmark {
         &self.benchmark
     }
-    
+
     /// 评估学习成果达成度 / Assess learning outcome achievement
-    pub fn assess_learning_outcome(&self, outcome_id: &str, student_performance: &StudentPerformance) -> AssessmentResult {
-        let outcome = self.benchmark.learning_outcomes.iter()
+    pub fn assess_learning_outcome(
+        &self,
+        outcome_id: &str,
+        student_performance: &StudentPerformance,
+    ) -> AssessmentResult {
+        let outcome = self
+            .benchmark
+            .learning_outcomes
+            .iter()
             .find(|lo| lo.id == outcome_id)
             .expect("Learning outcome not found");
-        
+
         let score = match outcome.category {
             LearningCategory::Knowledge => student_performance.knowledge_score,
             LearningCategory::Comprehension => student_performance.comprehension_score,
@@ -273,7 +286,7 @@ impl MITWorkflowCourse {
             LearningCategory::Synthesis => student_performance.synthesis_score,
             LearningCategory::Evaluation => student_performance.evaluation_score,
         };
-        
+
         let grade = if score >= 90.0 {
             "A".to_string()
         } else if score >= 80.0 {
@@ -285,7 +298,7 @@ impl MITWorkflowCourse {
         } else {
             "F".to_string()
         };
-        
+
         AssessmentResult {
             outcome_id: outcome_id.to_string(),
             score,
@@ -293,17 +306,23 @@ impl MITWorkflowCourse {
             feedback: self.generate_feedback(outcome, score),
         }
     }
-    
+
     /// 生成反馈 / Generate feedback
     fn generate_feedback(&self, outcome: &LearningOutcome, score: f64) -> String {
         if score >= 90.0 {
-            format!("在{}方面表现优秀，达到了课程的最高标准", outcome.description)
+            format!(
+                "在{}方面表现优秀，达到了课程的最高标准",
+                outcome.description
+            )
         } else if score >= 80.0 {
             format!("在{}方面表现良好，基本达到了课程要求", outcome.description)
         } else if score >= 70.0 {
             format!("在{}方面表现一般，需要进一步改进", outcome.description)
         } else {
-            format!("在{}方面需要显著改进，建议加强相关学习", outcome.description)
+            format!(
+                "在{}方面需要显著改进，建议加强相关学习",
+                outcome.description
+            )
         }
     }
 }
@@ -311,6 +330,12 @@ impl MITWorkflowCourse {
 /// Stanford 工作流课程 / Stanford Workflow Course
 pub struct StanfordWorkflowCourse {
     benchmark: UniversityCourseBenchmark,
+}
+
+impl Default for StanfordWorkflowCourse {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl StanfordWorkflowCourse {
@@ -327,7 +352,7 @@ impl StanfordWorkflowCourse {
             },
         }
     }
-    
+
     /// Stanford 课程大纲 / Stanford curriculum
     fn stanford_curriculum() -> CourseCurriculum {
         CourseCurriculum {
@@ -394,7 +419,7 @@ impl StanfordWorkflowCourse {
             credits: 4,
         }
     }
-    
+
     /// Stanford 学习成果 / Stanford learning outcomes
     fn stanford_learning_outcomes() -> Vec<LearningOutcome> {
         vec![
@@ -424,7 +449,7 @@ impl StanfordWorkflowCourse {
             },
         ]
     }
-    
+
     /// Stanford 评估标准 / Stanford assessment criteria
     fn stanford_assessment_criteria() -> Vec<AssessmentCriteria> {
         vec![
@@ -474,7 +499,7 @@ impl StanfordWorkflowCourse {
             },
         ]
     }
-    
+
     /// 获取课程基准测试 / Get course benchmark
     pub fn get_benchmark(&self) -> &UniversityCourseBenchmark {
         &self.benchmark
@@ -506,6 +531,12 @@ pub struct CourseComparison {
     courses: Vec<UniversityCourseBenchmark>,
 }
 
+impl Default for CourseComparison {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl CourseComparison {
     /// 创建课程对比 / Create course comparison
     pub fn new() -> Self {
@@ -513,12 +544,12 @@ impl CourseComparison {
             courses: Vec::new(),
         }
     }
-    
+
     /// 添加课程 / Add course
     pub fn add_course(&mut self, course: UniversityCourseBenchmark) {
         self.courses.push(course);
     }
-    
+
     /// 生成对比报告 / Generate comparison report
     pub fn generate_comparison_report(&self) -> CourseComparisonReport {
         let mut report = CourseComparisonReport {
@@ -527,16 +558,16 @@ impl CourseComparison {
             unique_topics: HashMap::new(),
             recommendations: Vec::new(),
         };
-        
+
         // 分析共同主题 / Analyze common topics
         report.common_topics = self.find_common_topics();
-        
+
         // 分析独特主题 / Analyze unique topics
         report.unique_topics = self.find_unique_topics();
-        
+
         // 生成建议 / Generate recommendations
         report.recommendations = self.generate_recommendations();
-        
+
         // 添加课程信息 / Add course information
         for course in &self.courses {
             report.courses.push(CourseSummary {
@@ -547,16 +578,16 @@ impl CourseComparison {
                 difficulty_level: self.calculate_average_difficulty(course),
             });
         }
-        
+
         report
     }
-    
+
     /// 查找共同主题 / Find common topics
     fn find_common_topics(&self) -> Vec<String> {
         if self.courses.is_empty() {
             return Vec::new();
         }
-        
+
         let mut common_topics = Vec::new();
         let first_course_topics: std::collections::HashSet<String> = self.courses[0]
             .curriculum
@@ -564,23 +595,26 @@ impl CourseComparison {
             .iter()
             .flat_map(|module| module.topics.clone())
             .collect();
-        
+
         for topic in first_course_topics {
             if self.courses.iter().all(|course| {
-                course.curriculum.modules.iter()
+                course
+                    .curriculum
+                    .modules
+                    .iter()
                     .any(|module| module.topics.contains(&topic))
             }) {
                 common_topics.push(topic);
             }
         }
-        
+
         common_topics
     }
-    
+
     /// 查找独特主题 / Find unique topics
     fn find_unique_topics(&self) -> HashMap<String, Vec<String>> {
         let mut unique_topics = HashMap::new();
-        
+
         for course in &self.courses {
             let course_topics: std::collections::HashSet<String> = course
                 .curriculum
@@ -588,34 +622,38 @@ impl CourseComparison {
                 .iter()
                 .flat_map(|module| module.topics.clone())
                 .collect();
-            
-            let other_topics: std::collections::HashSet<String> = self.courses
+
+            let other_topics: std::collections::HashSet<String> = self
+                .courses
                 .iter()
                 .filter(|c| c.university != course.university)
                 .flat_map(|c| c.curriculum.modules.iter())
                 .flat_map(|module| module.topics.clone())
                 .collect();
-            
-            let unique: Vec<String> = course_topics
-                .difference(&other_topics)
-                .cloned()
-                .collect();
-            
+
+            let unique: Vec<String> = course_topics.difference(&other_topics).cloned().collect();
+
             if !unique.is_empty() {
                 unique_topics.insert(course.university.clone(), unique);
             }
         }
-        
+
         unique_topics
     }
-    
+
     /// 计算平均难度 / Calculate average difficulty
     fn calculate_average_difficulty(&self, course: &UniversityCourseBenchmark) -> f64 {
-        let total_hours: u32 = course.curriculum.modules.iter()
+        let total_hours: u32 = course
+            .curriculum
+            .modules
+            .iter()
             .map(|module| module.duration_hours)
             .sum();
-        
-        let weighted_difficulty: u32 = course.curriculum.modules.iter()
+
+        let weighted_difficulty: u32 = course
+            .curriculum
+            .modules
+            .iter()
             .map(|module| {
                 let difficulty_value = match module.difficulty_level {
                     DifficultyLevel::Beginner => 1,
@@ -626,30 +664,30 @@ impl CourseComparison {
                 difficulty_value * module.duration_hours
             })
             .sum();
-        
+
         if total_hours > 0 {
             weighted_difficulty as f64 / total_hours as f64
         } else {
             0.0
         }
     }
-    
+
     /// 生成建议 / Generate recommendations
     fn generate_recommendations(&self) -> Vec<String> {
         let mut recommendations = Vec::new();
-        
+
         if self.courses.len() >= 2 {
             recommendations.push("建议结合多所大学的课程内容，形成更全面的知识体系".to_string());
         }
-        
+
         let common_topics = self.find_common_topics();
         if common_topics.len() > 5 {
             recommendations.push("共同主题较多，建议重点关注这些核心概念".to_string());
         }
-        
+
         recommendations.push("建议根据学习目标选择合适的课程难度级别".to_string());
         recommendations.push("建议结合实际项目来巩固理论知识".to_string());
-        
+
         recommendations
     }
 }
@@ -676,45 +714,48 @@ pub struct CourseComparisonReport {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_mit_workflow_course() {
         let mit_course = MITWorkflowCourse::new();
         let benchmark = mit_course.get_benchmark();
-        
-        assert_eq!(benchmark.university, "Massachusetts Institute of Technology");
+
+        assert_eq!(
+            benchmark.university,
+            "Massachusetts Institute of Technology"
+        );
         assert_eq!(benchmark.course_code, "6.824");
         assert!(!benchmark.curriculum.modules.is_empty());
         assert!(!benchmark.learning_outcomes.is_empty());
     }
-    
+
     #[test]
     fn test_stanford_workflow_course() {
         let stanford_course = StanfordWorkflowCourse::new();
         let benchmark = stanford_course.get_benchmark();
-        
+
         assert_eq!(benchmark.university, "Stanford University");
         assert_eq!(benchmark.course_code, "CS 244B");
         assert!(!benchmark.curriculum.modules.is_empty());
         assert!(!benchmark.learning_outcomes.is_empty());
     }
-    
+
     #[test]
     fn test_course_comparison() {
         let mut comparison = CourseComparison::new();
-        
+
         let mit_course = MITWorkflowCourse::new();
         let stanford_course = StanfordWorkflowCourse::new();
-        
+
         comparison.add_course(mit_course.get_benchmark().clone());
         comparison.add_course(stanford_course.get_benchmark().clone());
-        
+
         let report = comparison.generate_comparison_report();
-        
+
         assert_eq!(report.courses.len(), 2);
         assert!(!report.recommendations.is_empty());
     }
-    
+
     #[test]
     fn test_learning_outcome_assessment() {
         let mit_course = MITWorkflowCourse::new();
@@ -726,9 +767,9 @@ mod tests {
             synthesis_score: 80.0,
             evaluation_score: 85.0,
         };
-        
+
         let result = mit_course.assess_learning_outcome("LO_001", &student_performance);
-        
+
         assert_eq!(result.outcome_id, "LO_001");
         assert!(result.score > 0.0);
         assert!(!result.grade.is_empty());

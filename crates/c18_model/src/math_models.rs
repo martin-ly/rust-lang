@@ -1,5 +1,5 @@
 //! 数学建模实现
-//! 
+//!
 //! 本模块实现了各种数学建模技术，包括概率模型、统计模型、优化算法等。
 //! 使用Rust的类型安全特性确保数学计算的正确性。
 
@@ -9,16 +9,16 @@ use std::f64;
 pub trait ProbabilityDistribution {
     /// 概率密度函数
     fn pdf(&self, x: f64) -> f64;
-    
+
     /// 累积分布函数
     fn cdf(&self, x: f64) -> f64;
-    
+
     /// 生成随机样本
     fn sample(&self) -> f64;
-    
+
     /// 计算期望值
     fn mean(&self) -> f64;
-    
+
     /// 计算方差
     fn variance(&self) -> f64;
 }
@@ -37,7 +37,7 @@ impl NormalDistribution {
     pub fn new(mean: f64, std_dev: f64) -> Self {
         Self { mean, std_dev }
     }
-    
+
     /// 标准正态分布
     pub fn standard() -> Self {
         Self::new(0.0, 1.0)
@@ -50,13 +50,13 @@ impl ProbabilityDistribution for NormalDistribution {
         let exponent = -0.5 * ((x - self.mean) / self.std_dev).powi(2);
         coefficient * exponent.exp()
     }
-    
+
     fn cdf(&self, x: f64) -> f64 {
         // 简化实现：使用近似公式
         let z = (x - self.mean) / self.std_dev;
         0.5 * (1.0 + erf_approximation(z / 2.0_f64.sqrt()))
     }
-    
+
     fn sample(&self) -> f64 {
         // Box-Muller变换生成正态分布随机数
         let u1 = fastrand::f64();
@@ -64,11 +64,11 @@ impl ProbabilityDistribution for NormalDistribution {
         let z0 = (-2.0 * u1.ln()).sqrt() * (2.0 * std::f64::consts::PI * u2).cos();
         self.mean + self.std_dev * z0
     }
-    
+
     fn mean(&self) -> f64 {
         self.mean
     }
-    
+
     fn variance(&self) -> f64 {
         self.std_dev.powi(2)
     }
@@ -96,7 +96,7 @@ impl ProbabilityDistribution for ExponentialDistribution {
             0.0
         }
     }
-    
+
     fn cdf(&self, x: f64) -> f64 {
         if x >= 0.0 {
             1.0 - (-self.rate * x).exp()
@@ -104,15 +104,15 @@ impl ProbabilityDistribution for ExponentialDistribution {
             0.0
         }
     }
-    
+
     fn sample(&self) -> f64 {
         -fastrand::f64().ln() / self.rate
     }
-    
+
     fn mean(&self) -> f64 {
         1.0 / self.rate
     }
-    
+
     fn variance(&self) -> f64 {
         1.0 / self.rate.powi(2)
     }
@@ -141,7 +141,7 @@ impl ProbabilityDistribution for PoissonDistribution {
             0.0
         }
     }
-    
+
     fn cdf(&self, x: f64) -> f64 {
         if x < 0.0 {
             0.0
@@ -150,13 +150,13 @@ impl ProbabilityDistribution for PoissonDistribution {
             (0..=k).map(|i| self.pdf(i as f64)).sum()
         }
     }
-    
+
     fn sample(&self) -> f64 {
         // Knuth算法生成泊松分布随机数
         let mut k = 0;
         let mut p = 1.0;
         let l = (-self.lambda).exp();
-        
+
         loop {
             k += 1;
             p *= fastrand::f64();
@@ -164,14 +164,14 @@ impl ProbabilityDistribution for PoissonDistribution {
                 break;
             }
         }
-        
+
         (k - 1) as f64
     }
-    
+
     fn mean(&self) -> f64 {
         self.lambda
     }
-    
+
     fn variance(&self) -> f64 {
         self.lambda
     }
@@ -189,21 +189,19 @@ impl MonteCarloSimulator {
     pub fn new(sample_size: usize) -> Self {
         Self { sample_size }
     }
-    
+
     /// 模拟期望值
-    pub fn simulate_expectation<F>(&self, f: F) -> f64 
-    where 
+    pub fn simulate_expectation<F>(&self, f: F) -> f64
+    where
         F: Fn() -> f64,
     {
-        let sum: f64 = (0..self.sample_size)
-            .map(|_| f())
-            .sum();
+        let sum: f64 = (0..self.sample_size).map(|_| f()).sum();
         sum / self.sample_size as f64
     }
-    
+
     /// 模拟积分
-    pub fn simulate_integral<F>(&self, f: F, a: f64, b: f64) -> f64 
-    where 
+    pub fn simulate_integral<F>(&self, f: F, a: f64, b: f64) -> f64
+    where
         F: Fn(f64) -> f64,
     {
         let sum: f64 = (0..self.sample_size)
@@ -214,15 +212,13 @@ impl MonteCarloSimulator {
             .sum();
         (b - a) * sum / self.sample_size as f64
     }
-    
+
     /// 模拟概率
-    pub fn simulate_probability<F>(&self, event: F) -> f64 
-    where 
+    pub fn simulate_probability<F>(&self, event: F) -> f64
+    where
         F: Fn() -> bool,
     {
-        let count = (0..self.sample_size)
-            .filter(|_| event())
-            .count();
+        let count = (0..self.sample_size).filter(|_| event()).count();
         count as f64 / self.sample_size as f64
     }
 }
@@ -258,10 +254,10 @@ impl NumericalIntegrator {
             max_iterations,
         }
     }
-    
+
     /// 计算定积分
-    pub fn integrate<F>(&self, f: F, a: f64, b: f64) -> f64 
-    where 
+    pub fn integrate<F>(&self, f: F, a: f64, b: f64) -> f64
+    where
         F: Fn(f64) -> f64,
     {
         match self.method {
@@ -270,33 +266,33 @@ impl NumericalIntegrator {
             IntegrationMethod::GaussLegendre => self.gauss_legendre(f, a, b),
         }
     }
-    
+
     /// 梯形法则
-    fn trapezoidal_rule<F>(&self, f: F, a: f64, b: f64) -> f64 
-    where 
+    fn trapezoidal_rule<F>(&self, f: F, a: f64, b: f64) -> f64
+    where
         F: Fn(f64) -> f64,
     {
         let n = 1000; // 简化实现
         let h = (b - a) / n as f64;
         let mut sum = (f(a) + f(b)) / 2.0;
-        
+
         for i in 1..n {
             let x = a + i as f64 * h;
             sum += f(x);
         }
-        
+
         h * sum
     }
-    
+
     /// 辛普森法则
-    fn simpson_rule<F>(&self, f: F, a: f64, b: f64) -> f64 
-    where 
+    fn simpson_rule<F>(&self, f: F, a: f64, b: f64) -> f64
+    where
         F: Fn(f64) -> f64,
     {
         let n = 1000; // 简化实现
         let h = (b - a) / n as f64;
         let mut sum = f(a) + f(b);
-        
+
         for i in 1..n {
             let x = a + i as f64 * h;
             if i % 2 == 0 {
@@ -305,13 +301,13 @@ impl NumericalIntegrator {
                 sum += 4.0 * f(x);
             }
         }
-        
+
         h * sum / 3.0
     }
-    
+
     /// 高斯-勒让德积分
-    fn gauss_legendre<F>(&self, f: F, a: f64, b: f64) -> f64 
-    where 
+    fn gauss_legendre<F>(&self, f: F, a: f64, b: f64) -> f64
+    where
         F: Fn(f64) -> f64,
     {
         // 简化实现：使用2点高斯-勒让德公式
@@ -319,10 +315,10 @@ impl NumericalIntegrator {
         let x2 = 1.0 / 3.0_f64.sqrt();
         let w1 = 1.0;
         let w2 = 1.0;
-        
+
         let t1 = (b - a) / 2.0 * x1 + (a + b) / 2.0;
         let t2 = (b - a) / 2.0 * x2 + (a + b) / 2.0;
-        
+
         (b - a) / 2.0 * (w1 * f(t1) + w2 * f(t2))
     }
 }
@@ -331,7 +327,7 @@ impl NumericalIntegrator {
 pub trait OptimizationAlgorithm {
     /// 目标函数类型
     type ObjectiveFunction: Fn(&[f64]) -> f64;
-    
+
     /// 优化
     fn optimize(&self, f: Self::ObjectiveFunction, initial: &[f64]) -> Vec<f64>;
 }
@@ -360,50 +356,50 @@ impl GradientDescentOptimizer {
 
 impl OptimizationAlgorithm for GradientDescentOptimizer {
     type ObjectiveFunction = fn(&[f64]) -> f64;
-    
+
     fn optimize(&self, f: Self::ObjectiveFunction, initial: &[f64]) -> Vec<f64> {
         let mut x = initial.to_vec();
-        
+
         for _ in 0..self.max_iterations {
             // 计算数值梯度
             let gradient = self.numerical_gradient(f, &x);
-            
+
             // 更新参数
             for i in 0..x.len() {
                 x[i] -= self.learning_rate * gradient[i];
             }
-            
+
             // 检查收敛
             let gradient_norm = gradient.iter().map(|&g| g * g).sum::<f64>().sqrt();
             if gradient_norm < self.tolerance {
                 break;
             }
         }
-        
+
         x
     }
 }
 
 impl GradientDescentOptimizer {
     /// 计算数值梯度
-    fn numerical_gradient<F>(&self, f: F, x: &[f64]) -> Vec<f64> 
-    where 
+    fn numerical_gradient<F>(&self, f: F, x: &[f64]) -> Vec<f64>
+    where
         F: Fn(&[f64]) -> f64,
     {
         let h = 1e-6;
         let mut gradient = Vec::new();
-        
+
         for i in 0..x.len() {
             let mut x_plus = x.to_vec();
             let mut x_minus = x.to_vec();
-            
+
             x_plus[i] += h;
             x_minus[i] -= h;
-            
+
             let derivative = (f(&x_plus) - f(&x_minus)) / (2.0 * h);
             gradient.push(derivative);
         }
-        
+
         gradient
     }
 }
@@ -417,60 +413,60 @@ impl StatisticalTools {
     pub fn mean(data: &[f64]) -> f64 {
         data.iter().sum::<f64>() / data.len() as f64
     }
-    
+
     /// 计算样本方差
     pub fn variance(data: &[f64]) -> f64 {
         let mean = Self::mean(data);
-        let sum_squared_diff: f64 = data.iter()
-            .map(|&x| (x - mean).powi(2))
-            .sum();
+        let sum_squared_diff: f64 = data.iter().map(|&x| (x - mean).powi(2)).sum();
         sum_squared_diff / (data.len() - 1) as f64
     }
-    
+
     /// 计算样本标准差
     pub fn standard_deviation(data: &[f64]) -> f64 {
         Self::variance(data).sqrt()
     }
-    
+
     /// 计算相关系数
     pub fn correlation(x: &[f64], y: &[f64]) -> f64 {
         if x.len() != y.len() {
             return 0.0;
         }
-        
+
         let _n = x.len() as f64;
         let mean_x = Self::mean(x);
         let mean_y = Self::mean(y);
-        
-        let numerator: f64 = x.iter().zip(y.iter())
+
+        let numerator: f64 = x
+            .iter()
+            .zip(y.iter())
             .map(|(&xi, &yi)| (xi - mean_x) * (yi - mean_y))
             .sum();
-        
+
         let sum_sq_x: f64 = x.iter().map(|&xi| (xi - mean_x).powi(2)).sum();
         let sum_sq_y: f64 = y.iter().map(|&yi| (yi - mean_y).powi(2)).sum();
-        
+
         let denominator = (sum_sq_x * sum_sq_y).sqrt();
-        
+
         if denominator == 0.0 {
             0.0
         } else {
             numerator / denominator
         }
     }
-    
+
     /// 计算置信区间
     pub fn confidence_interval(data: &[f64], confidence_level: f64) -> (f64, f64) {
         let mean = Self::mean(data);
         let std_dev = Self::standard_deviation(data);
         let n = data.len() as f64;
-        
+
         // 简化实现：使用正态分布近似
         let z_score = match confidence_level {
             0.95 => 1.96,
             0.99 => 2.576,
             _ => 1.96,
         };
-        
+
         let margin_error = z_score * std_dev / n.sqrt();
         (mean - margin_error, mean + margin_error)
     }
@@ -493,13 +489,13 @@ fn erf_approximation(x: f64) -> f64 {
     let a4 = -1.453152027;
     let a5 = 1.061405429;
     let p = 0.3275911;
-    
+
     let sign = if x >= 0.0 { 1.0 } else { -1.0 };
     let x = x.abs();
-    
+
     let t = 1.0 / (1.0 + p * x);
     let y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * (-x * x).exp();
-    
+
     sign * y
 }
 
@@ -539,7 +535,7 @@ mod tests {
     fn test_numerical_integration() {
         let integrator = NumericalIntegrator::new(IntegrationMethod::Trapezoidal, 1e-6, 1000);
         let result = integrator.integrate(|x| x * x, 0.0, 1.0);
-        assert!((result - 1.0/3.0).abs() < 0.01);
+        assert!((result - 1.0 / 3.0).abs() < 0.01);
     }
 
     #[test]

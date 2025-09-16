@@ -1,4 +1,4 @@
-use crate::topology::{ShardId, ConsistentHashRing};
+use crate::topology::{ConsistentHashRing, ShardId};
 use std::hash::{Hash, Hasher};
 
 pub trait Partitioner<K> {
@@ -23,9 +23,10 @@ pub struct HashRingRouter {
 }
 
 impl HashRingRouter {
-    pub fn new(ring: ConsistentHashRing) -> Self { Self { ring } }
+    pub fn new(ring: ConsistentHashRing) -> Self {
+        Self { ring }
+    }
     pub fn owner_of<K: std::hash::Hash>(&self, key: &K) -> Option<String> {
         self.ring.route(key).map(|s| s.to_string())
     }
 }
-

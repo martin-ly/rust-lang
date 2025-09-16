@@ -87,7 +87,7 @@ fn main() {
         name: String::from("Alice"),
         age: 30,
     };
-    
+
     let cloned = original.clone();
     println!("Original: {:?}", original);
     println!("Cloned: {:?}", cloned);
@@ -100,7 +100,7 @@ fn main() {
 fn main() {
     let numbers = vec![1, 2, 3, 4, 5];
     let numbers_copy = numbers.clone();
-    
+
     // 现在可以同时使用两个集合
     println!("Original: {:?}", numbers);
     println!("Copy: {:?}", numbers_copy);
@@ -180,17 +180,17 @@ pub fn demonstrate_clone() {
         data: String::from("Hello, Clone!"),
         count: 42,
     };
-    
+
     let cloned = original.clone();
     println!("Original: {:?}", original);
     println!("Cloned: {:?}", cloned);
-    
+
     // 泛型容器克隆
     let container = GenericContainer {
         value: vec![1, 2, 3],
         metadata: String::from("Vector container"),
     };
-    
+
     let container_clone = container.clone();
     println!("Container: {:?}", container);
     println!("Container clone: {:?}", container_clone);

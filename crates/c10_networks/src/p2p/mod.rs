@@ -1,10 +1,10 @@
 //! P2P 模块（身份、发现、DHT、发布订阅、NAT 可达性）
 
-pub mod identity;
-pub mod discovery;
 pub mod dht;
-pub mod pubsub;
+pub mod discovery;
+pub mod identity;
 pub mod nat;
+pub mod pubsub;
 
 /// 对外暴露的最小统一接口
 pub struct P2pConfig {
@@ -13,8 +13,8 @@ pub struct P2pConfig {
 
 impl Default for P2pConfig {
     fn default() -> Self {
-        Self { node_name: "c10-p2p".into() }
+        Self {
+            node_name: "c10-p2p".into(),
+        }
     }
 }
-
-

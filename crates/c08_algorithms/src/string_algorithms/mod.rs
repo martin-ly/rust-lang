@@ -1,8 +1,8 @@
 //! 字符串算法：KMP 与 Rabin-Karp（同步 / 异步）
 
-use anyhow::Result;
 #[cfg(feature = "with-aho")]
 use aho_corasick::AhoCorasick;
+use anyhow::Result;
 
 // =========================
 // KMP
@@ -29,7 +29,9 @@ fn compute_lps(pat: &[u8]) -> Vec<usize> {
 
 /// KMP 搜索：返回所有匹配的起始下标
 pub fn kmp_search(text: &str, pattern: &str) -> Vec<usize> {
-    if pattern.is_empty() { return (0..=text.len()).collect(); }
+    if pattern.is_empty() {
+        return (0..=text.len()).collect();
+    }
     let t = text.as_bytes();
     let p = pattern.as_bytes();
     let lps = compute_lps(p);
@@ -64,8 +66,12 @@ pub async fn kmp_search_async(text: String, pattern: String) -> Result<Vec<usize
 pub fn rabin_karp_search(text: &str, pattern: &str) -> Vec<usize> {
     let n = text.len();
     let m = pattern.len();
-    if m == 0 { return (0..=n).collect(); }
-    if m > n { return Vec::new(); }
+    if m == 0 {
+        return (0..=n).collect();
+    }
+    if m > n {
+        return Vec::new();
+    }
 
     let base: u64 = 256; // ASCII 基
     let modp: u64 = 1_000_000_007; // 大素数
@@ -74,7 +80,9 @@ pub fn rabin_karp_search(text: &str, pattern: &str) -> Vec<usize> {
     let pb = pattern.as_bytes();
 
     let mut h: u64 = 1; // base^(m-1) % modp
-    for _ in 1..m { h = (h * base) % modp; }
+    for _ in 1..m {
+        h = (h * base) % modp;
+    }
 
     let mut th: u64 = 0; // text 窗口 hash
     let mut ph: u64 = 0; // pattern hash
@@ -87,7 +95,9 @@ pub fn rabin_karp_search(text: &str, pattern: &str) -> Vec<usize> {
     for i in 0..=n - m {
         if th == ph {
             // 避免碰撞，做一次直接比较
-            if &tb[i..i + m] == pb { res.push(i); }
+            if &tb[i..i + m] == pb {
+                res.push(i);
+            }
         }
         if i < n - m {
             let lead = (tb[i] as u64 * h) % modp;
@@ -119,12 +129,18 @@ pub struct Trie {
 }
 
 impl Trie {
-    pub fn new() -> Self { Self { nodes: vec![TrieNode::default()] } }
+    pub fn new() -> Self {
+        Self {
+            nodes: vec![TrieNode::default()],
+        }
+    }
 
     pub fn insert(&mut self, pattern: &[u8], id: usize) {
         let mut s = 0usize;
         for &ch in pattern {
-            let nxt = if let Some(&v) = self.nodes[s].next.get(&ch) { v } else {
+            let nxt = if let Some(&v) = self.nodes[s].next.get(&ch) {
+                v
+            } else {
                 let v = self.nodes.len();
                 self.nodes[s].next.insert(ch, v);
                 self.nodes.push(TrieNode::default());
@@ -150,7 +166,11 @@ impl Trie {
             let fail_u = self.nodes[u].fail;
             let outs = self.nodes[fail_u].out.clone();
             // 继承输出
-            for id in outs { if !self.nodes[u].out.contains(&id) { self.nodes[u].out.push(id); } }
+            for id in outs {
+                if !self.nodes[u].out.contains(&id) {
+                    self.nodes[u].out.push(id);
+                }
+            }
             let keys: Vec<u8> = self.nodes[u].next.keys().copied().collect();
             for ch in keys {
                 let v = self.nodes[u].next[&ch];
@@ -178,7 +198,9 @@ impl Trie {
             s = *self.nodes[cur].next.get(&ch).unwrap_or(&0);
             for &pid in &self.nodes[s].out {
                 let m = patterns[pid].len();
-                if i + 1 >= m { res.push((i + 1 - m, pid)); }
+                if i + 1 >= m {
+                    res.push((i + 1 - m, pid));
+                }
             }
         }
         res
@@ -187,7 +209,9 @@ impl Trie {
 
 pub fn build_trie(patterns: &[Vec<u8>]) -> Trie {
     let mut trie = Trie::new();
-    for (id, p) in patterns.iter().enumerate() { trie.insert(p, id); }
+    for (id, p) in patterns.iter().enumerate() {
+        trie.insert(p, id);
+    }
     trie.build_automaton();
     trie
 }
@@ -197,7 +221,8 @@ pub async fn ac_search_async(text: String, patterns: Vec<String>) -> Result<Vec<
         let pats: Vec<Vec<u8>> = patterns.iter().map(|s| s.as_bytes().to_vec()).collect();
         let trie = build_trie(&pats);
         trie.ac_search(text.as_bytes(), &pats)
-    }).await?)
+    })
+    .await?)
 }
 
 #[cfg(feature = "with-aho")]
@@ -224,23 +249,34 @@ pub fn z_algorithm(s: &str) -> Vec<usize> {
         if i <= r {
             z[i] = (r - i + 1).min(z[i - l]);
         }
-        while i + z[i] < n && a[z[i]] == a[i + z[i]] { z[i] += 1; }
-        if i + z[i] - 1 > r { l = i; r = i + z[i] - 1; }
+        while i + z[i] < n && a[z[i]] == a[i + z[i]] {
+            z[i] += 1;
+        }
+        if i + z[i] - 1 > r {
+            l = i;
+            r = i + z[i] - 1;
+        }
     }
-    if n > 0 { z[0] = n; }
+    if n > 0 {
+        z[0] = n;
+    }
     z
 }
 
 /// 使用 Z-Algorithm 搜索 `pattern` 在 `text` 中的所有出现位置
 pub fn z_search(text: &str, pattern: &str) -> Vec<usize> {
-    if pattern.is_empty() { return (0..=text.len()).collect(); }
+    if pattern.is_empty() {
+        return (0..=text.len()).collect();
+    }
     let sep = b'\x01'; // 取一个极小可能出现在文本中的分隔符（示例）
     let s = format!("{}{}{}", pattern, sep as char, text);
     let z = z_algorithm(&s);
     let m = pattern.len();
     let mut res = Vec::new();
     for (i, &v) in z.iter().enumerate().skip(m + 1) {
-        if v == m { res.push(i - (m + 1)); }
+        if v == m {
+            res.push(i - (m + 1));
+        }
     }
     res
 }
@@ -267,8 +303,12 @@ pub fn suffix_array(text: &str) -> Vec<usize> {
             let curr = (rank[b], if b + k < n { rank[b + k] } else { -1 });
             tmp[b] = tmp[a] + if curr > prev { 1 } else { 0 };
         }
-        for i in 0..n { rank[i] = tmp[i]; }
-        if rank[sa[n - 1]] == (n as i32 - 1) { break; }
+        for i in 0..n {
+            rank[i] = tmp[i];
+        }
+        if rank[sa[n - 1]] == (n as i32 - 1) {
+            break;
+        }
         k <<= 1;
     }
     sa
@@ -279,16 +319,22 @@ pub fn lcp_kasai(text: &str, sa: &[usize]) -> Vec<usize> {
     let n = text.len();
     let s = text.as_bytes();
     let mut rank = vec![0usize; n];
-    for i in 0..n { rank[sa[i]] = i; }
+    for i in 0..n {
+        rank[sa[i]] = i;
+    }
     let mut lcp = vec![0usize; n];
     let mut h = 0usize;
     for i in 0..n {
         let r = rank[i];
         if r > 0 {
             let j = sa[r - 1];
-            while i + h < n && j + h < n && s[i + h] == s[j + h] { h += 1; }
+            while i + h < n && j + h < n && s[i + h] == s[j + h] {
+                h += 1;
+            }
             lcp[r] = h;
-            if h > 0 { h -= 1; }
+            if h > 0 {
+                h -= 1;
+            }
         }
     }
     lcp
@@ -300,12 +346,18 @@ pub fn lcp_kasai(text: &str, sa: &[usize]) -> Vec<usize> {
 
 pub fn manacher_longest_palindrome(s: &str) -> (usize, usize) {
     // 返回 (start, length)
-    if s.is_empty() { return (0, 0); }
+    if s.is_empty() {
+        return (0, 0);
+    }
     let bytes = s.as_bytes();
     // 扩展字符串为 T = ^#a#b#...#$
     let mut t = Vec::with_capacity(bytes.len() * 2 + 3);
-    t.push(b'^'); t.push(b'#');
-    for &ch in bytes { t.push(ch); t.push(b'#'); }
+    t.push(b'^');
+    t.push(b'#');
+    for &ch in bytes {
+        t.push(ch);
+        t.push(b'#');
+    }
     t.push(b'$');
     let n = t.len();
     let mut p = vec![0usize; n];
@@ -315,7 +367,9 @@ pub fn manacher_longest_palindrome(s: &str) -> (usize, usize) {
             let m = (2 * center) as isize - (i as isize);
             if m >= 0 { m as usize } else { 0 }
         };
-        if i < right { p[i] = p[mirror].min(right - i); }
+        if i < right {
+            p[i] = p[mirror].min(right - i);
+        }
         while {
             let left_idx = i.checked_sub(1 + p[i]);
             let right_idx = i + 1 + p[i];
@@ -323,11 +377,21 @@ pub fn manacher_longest_palindrome(s: &str) -> (usize, usize) {
                 (Some(l), true) => t[right_idx] == t[l],
                 _ => false,
             }
-        } { p[i] += 1; }
-        if i + p[i] > right { center = i; right = i + p[i]; }
+        } {
+            p[i] += 1;
+        }
+        if i + p[i] > right {
+            center = i;
+            right = i + p[i];
+        }
     }
     let (mut max_len, mut center_idx) = (0usize, 0usize);
-    for i in 1..n - 1 { if p[i] > max_len { max_len = p[i]; center_idx = i; } }
+    for i in 1..n - 1 {
+        if p[i] > max_len {
+            max_len = p[i];
+            center_idx = i;
+        }
+    }
     let start = (center_idx - max_len) / 2; // 映射回原串索引
     (start, max_len)
 }
@@ -343,19 +407,31 @@ pub async fn manacher_longest_palindrome_async(s: String) -> Result<(usize, usiz
 pub fn bmh_search(text: &str, pattern: &str) -> Vec<usize> {
     let n = text.len();
     let m = pattern.len();
-    if m == 0 { return (0..=n).collect(); }
-    if m > n { return Vec::new(); }
+    if m == 0 {
+        return (0..=n).collect();
+    }
+    if m > n {
+        return Vec::new();
+    }
     let tb = text.as_bytes();
     let pb = pattern.as_bytes();
     let mut shift = [m as usize; 256];
-    for i in 0..m-1 { shift[pb[i] as usize] = m - 1 - i; }
+    for i in 0..m - 1 {
+        shift[pb[i] as usize] = m - 1 - i;
+    }
     let mut res = Vec::new();
     let mut i = 0usize;
     while i + m <= n {
         let mut j = (m - 1) as isize;
-        while j >= 0 && pb[j as usize] == tb[i + j as usize] { j -= 1; }
-        if j < 0 { res.push(i); i += 1; }
-        else { i += shift[tb[i + m - 1] as usize]; }
+        while j >= 0 && pb[j as usize] == tb[i + j as usize] {
+            j -= 1;
+        }
+        if j < 0 {
+            res.push(i);
+            i += 1;
+        } else {
+            i += shift[tb[i + m - 1] as usize];
+        }
     }
     res
 }
@@ -383,11 +459,22 @@ pub struct SuffixAutomaton {
 
 impl SuffixAutomaton {
     pub fn new() -> Self {
-        Self { st: vec![SamState{ next: std::collections::HashMap::new(), link: -1, len: 0 }], last: 0 }
+        Self {
+            st: vec![SamState {
+                next: std::collections::HashMap::new(),
+                link: -1,
+                len: 0,
+            }],
+            last: 0,
+        }
     }
     pub fn extend(&mut self, ch: u8) {
         let cur = self.st.len();
-        self.st.push(SamState { next: std::collections::HashMap::new(), link: 0, len: self.st[self.last].len + 1 });
+        self.st.push(SamState {
+            next: std::collections::HashMap::new(),
+            link: 0,
+            len: self.st[self.last].len + 1,
+        });
         let mut p = self.last as isize;
         while p >= 0 && !self.st[p as usize].next.contains_key(&ch) {
             self.st[p as usize].next.insert(ch, cur);
@@ -401,7 +488,11 @@ impl SuffixAutomaton {
                 self.st[cur].link = q as isize;
             } else {
                 let clone = self.st.len();
-                self.st.push(SamState { next: self.st[q].next.clone(), link: self.st[q].link, len: self.st[p as usize].len + 1 });
+                self.st.push(SamState {
+                    next: self.st[q].next.clone(),
+                    link: self.st[q].link,
+                    len: self.st[p as usize].len + 1,
+                });
                 while p >= 0 && self.st[p as usize].next.get(&ch) == Some(&q) {
                     self.st[p as usize].next.insert(ch, clone);
                     p = self.st[p as usize].link;
@@ -412,31 +503,60 @@ impl SuffixAutomaton {
         }
         self.last = cur;
     }
-    pub fn build_from_str(s: &str) -> Self { let mut sam = Self::new(); for &b in s.as_bytes() { sam.extend(b); } sam }
+    pub fn build_from_str(s: &str) -> Self {
+        let mut sam = Self::new();
+        for &b in s.as_bytes() {
+            sam.extend(b);
+        }
+        sam
+    }
     pub fn count_distinct_substrings(&self) -> usize {
         let mut total = 0usize;
         for i in 1..self.st.len() {
-            let link_len = if self.st[i].link >= 0 { self.st[self.st[i].link as usize].len } else { 0 };
+            let link_len = if self.st[i].link >= 0 {
+                self.st[self.st[i].link as usize].len
+            } else {
+                0
+            };
             total += self.st[i].len - link_len;
         }
         total
     }
     pub fn longest_common_substring_len(&self, t: &str) -> usize {
-        let mut v = 0usize; let mut l = 0usize; let mut best = 0usize;
+        let mut v = 0usize;
+        let mut l = 0usize;
+        let mut best = 0usize;
         for &ch in t.as_bytes() {
-            if let Some(&to) = self.st[v].next.get(&ch) { v = to; l += 1; }
-            else {
-                while v != 0 && !self.st[v].next.contains_key(&ch) { v = self.st[v].link as usize; }
-                if let Some(&to) = self.st[v].next.get(&ch) { l = self.st[v].len + 1; v = to; } else { l = 0; v = 0; }
+            if let Some(&to) = self.st[v].next.get(&ch) {
+                v = to;
+                l += 1;
+            } else {
+                while v != 0 && !self.st[v].next.contains_key(&ch) {
+                    v = self.st[v].link as usize;
+                }
+                if let Some(&to) = self.st[v].next.get(&ch) {
+                    l = self.st[v].len + 1;
+                    v = to;
+                } else {
+                    l = 0;
+                    v = 0;
+                }
             }
-            if l > best { best = l; }
+            if l > best {
+                best = l;
+            }
         }
         best
     }
 }
 
 pub async fn sam_build_and_count_async(s: String) -> Result<(SuffixAutomaton, usize)> {
-    Ok(tokio::task::spawn_blocking(move || { let sam = SuffixAutomaton::build_from_str(&s); let cnt = sam.count_distinct_substrings(); (sam, cnt) }).await?)
+    Ok(tokio::task::spawn_blocking(move || {
+        let sam = SuffixAutomaton::build_from_str(&s);
+        let cnt = sam.count_distinct_substrings();
+        (sam, cnt)
+    })
+    .await?)
 }
 #[cfg(test)]
 mod tests {
@@ -462,21 +582,33 @@ mod tests {
     fn test_async_wraps() {
         let rt = tokio::runtime::Runtime::new().unwrap();
         let r = rt.block_on(async { kmp_search_async("aaaaa".into(), "aa".into()).await.unwrap() });
-        assert_eq!(r, vec![0,1,2,3]);
-        let r2 = rt.block_on(async { rabin_karp_search_async("aaaaa".into(), "aa".into()).await.unwrap() });
-        assert_eq!(r2, vec![0,1,2,3]);
+        assert_eq!(r, vec![0, 1, 2, 3]);
+        let r2 = rt.block_on(async {
+            rabin_karp_search_async("aaaaa".into(), "aa".into())
+                .await
+                .unwrap()
+        });
+        assert_eq!(r2, vec![0, 1, 2, 3]);
     }
 
     #[test]
     fn test_trie_ac() {
-        let pats = vec![b"he".to_vec(), b"she".to_vec(), b"hers".to_vec(), b"his".to_vec()];
+        let pats = vec![
+            b"he".to_vec(),
+            b"she".to_vec(),
+            b"hers".to_vec(),
+            b"his".to_vec(),
+        ];
         let trie = build_trie(&pats);
         let text = b"ahishers";
         let mut res = trie.ac_search(text, &pats);
         res.sort();
         assert!(res.contains(&(1, 3)) || res.contains(&(1, 3))); // "his" at 1
         assert!(res.iter().any(|&(pos, id)| &pats[id] == b"she" && pos == 3));
-        assert!(res.iter().any(|&(pos, id)| &pats[id] == b"he" && (pos == 4 || pos == 5)));
+        assert!(
+            res.iter()
+                .any(|&(pos, id)| &pats[id] == b"he" && (pos == 4 || pos == 5))
+        );
     }
 
     #[test]
@@ -496,15 +628,19 @@ mod tests {
         // 常见 banana$ 的 SA 为 [6,5,3,1,0,4,2] 或等价序，测试基本性质
         assert_eq!(sa.len(), s.len());
         // SA 应按后缀字典序递增
-        for i in 1..sa.len() { assert!(s[sa[i-1]..] <= s[sa[i]..]); }
+        for i in 1..sa.len() {
+            assert!(s[sa[i - 1]..] <= s[sa[i]..]);
+        }
         let lcp = lcp_kasai(s, &sa);
         assert_eq!(lcp.len(), s.len());
         // LCP 非负且符合相邻后缀公共前缀性质
         for i in 1..sa.len() {
-            let a = &s[sa[i-1]..];
+            let a = &s[sa[i - 1]..];
             let b = &s[sa[i]..];
             let mut k = 0;
-            while k < a.len() && k < b.len() && a.as_bytes()[k] == b.as_bytes()[k] { k += 1; }
+            while k < a.len() && k < b.len() && a.as_bytes()[k] == b.as_bytes()[k] {
+                k += 1;
+            }
             assert_eq!(lcp[i], k);
         }
     }
@@ -515,7 +651,7 @@ mod tests {
         assert!(len >= 3); // "bab" or "aba"
         let (st2, len2) = manacher_longest_palindrome("cbbd");
         assert_eq!(len2, 2);
-        assert_eq!(&"cbbd"[st2..st2+len2], "bb");
+        assert_eq!(&"cbbd"[st2..st2 + len2], "bb");
     }
 
     #[test]
@@ -533,5 +669,3 @@ mod tests {
         assert_eq!(sam.longest_common_substring_len("babab"), 4);
     }
 }
-
-

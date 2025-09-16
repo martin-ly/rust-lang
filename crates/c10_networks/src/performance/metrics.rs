@@ -51,12 +51,13 @@ impl MetricsCollector {
         let mut timers = self.operation_timers.write().unwrap();
 
         // 更新操作时间映射
-        timers.entry(operation.to_string()).or_insert_with(Vec::new).push(duration);
+        timers
+            .entry(operation.to_string())
+            .or_insert_with(Vec::new)
+            .push(duration);
 
         // 计算平均操作时间
-        let total_duration: Duration = timers.values()
-            .flatten()
-            .sum();
+        let total_duration: Duration = timers.values().flatten().sum();
         let total_count: usize = timers.values().map(|v| v.len()).sum();
 
         if total_count > 0 {
@@ -70,24 +71,24 @@ impl MetricsCollector {
     pub fn record_memory_usage(&self, bytes: usize) {
         let mut metrics = self.metrics.write().unwrap();
         metrics.current_memory_usage = bytes;
-        
+
         if bytes > metrics.peak_memory_usage {
             metrics.peak_memory_usage = bytes;
         }
-        
+
         metrics.last_updated = Some(Instant::now());
     }
 
     /// 记录网络 I/O
     pub fn record_network_io(&self, bytes: usize, is_read: bool) {
         let mut metrics = self.metrics.write().unwrap();
-        
+
         if is_read {
             metrics.network_bytes_received += bytes as u64;
         } else {
             metrics.network_bytes_sent += bytes as u64;
         }
-        
+
         metrics.total_bytes_processed += bytes as u64;
         metrics.last_updated = Some(Instant::now());
     }
@@ -96,7 +97,10 @@ impl MetricsCollector {
     pub fn record_error(&self, error_type: &str) {
         let mut metrics = self.metrics.write().unwrap();
         metrics.total_errors += 1;
-        *metrics.error_counts.entry(error_type.to_string()).or_insert(0) += 1;
+        *metrics
+            .error_counts
+            .entry(error_type.to_string())
+            .or_insert(0) += 1;
         metrics.last_updated = Some(Instant::now());
     }
 
@@ -110,7 +114,7 @@ impl MetricsCollector {
         let mut metrics = self.metrics.write().unwrap();
         *metrics = PerformanceMetrics::default();
         metrics.last_updated = Some(Instant::now());
-        
+
         let mut timers = self.operation_timers.write().unwrap();
         timers.clear();
     }
@@ -138,13 +142,16 @@ impl MetricsCollector {
                 let min = durations.iter().min().copied().unwrap_or_default();
                 let max = durations.iter().max().copied().unwrap_or_default();
 
-                stats.insert(operation.clone(), OperationStats {
-                    count: durations.len(),
-                    total_time: total,
-                    average_time: average,
-                    min_time: min,
-                    max_time: max,
-                });
+                stats.insert(
+                    operation.clone(),
+                    OperationStats {
+                        count: durations.len(),
+                        total_time: total,
+                        average_time: average,
+                        min_time: min,
+                        max_time: max,
+                    },
+                );
             }
         }
 
@@ -287,7 +294,10 @@ impl PerformanceReporter {
         println!("总错误数: {}", report.metrics.total_errors);
         println!("当前内存使用: {} 字节", report.memory_stats.current_usage);
         println!("峰值内存使用: {} 字节", report.memory_stats.peak_usage);
-        println!("操作/秒: {:.2}", report.throughput_stats.operations_per_second);
+        println!(
+            "操作/秒: {:.2}",
+            report.throughput_stats.operations_per_second
+        );
         println!("字节/秒: {:.2}", report.throughput_stats.bytes_per_second);
         println!("错误率: {:.2}%", report.error_stats.error_rate);
         println!("================");
@@ -351,14 +361,14 @@ mod tests {
     #[test]
     fn test_metrics_collector() {
         let collector = MetricsCollector::new();
-        
+
         // 记录一些操作
         collector.record_operation();
         collector.record_operation();
         collector.record_memory_usage(1024);
         collector.record_network_io(512, true);
         collector.record_error("test_error");
-        
+
         let metrics = collector.get_metrics();
         assert_eq!(metrics.total_operations, 2);
         assert_eq!(metrics.current_memory_usage, 1024);
@@ -369,14 +379,14 @@ mod tests {
     #[test]
     fn test_operation_timing() {
         let collector = MetricsCollector::new();
-        
+
         // 记录操作时间
         collector.record_operation_time("test_op", Duration::from_millis(100));
         collector.record_operation_time("test_op", Duration::from_millis(200));
-        
+
         let operation_stats = collector.get_operation_stats();
         assert!(operation_stats.contains_key("test_op"));
-        
+
         let stats = &operation_stats["test_op"];
         assert_eq!(stats.count, 2);
         assert_eq!(stats.average_time, Duration::from_millis(150));
@@ -387,15 +397,15 @@ mod tests {
     #[test]
     fn test_throughput_stats() {
         let collector = MetricsCollector::new();
-        
+
         // 记录一些操作
         for _ in 0..10 {
             collector.record_operation();
         }
-        
+
         // 等待一小段时间
         thread::sleep(Duration::from_millis(10));
-        
+
         let throughput = collector.get_throughput_stats();
         assert!(throughput.operations_per_second > 0.0);
     }
@@ -403,10 +413,10 @@ mod tests {
     #[test]
     fn test_memory_stats() {
         let collector = MetricsCollector::new();
-        
+
         collector.record_memory_usage(1024);
         collector.record_memory_usage(2048);
-        
+
         let memory_stats = collector.get_memory_stats();
         assert_eq!(memory_stats.current_usage, 2048);
         assert_eq!(memory_stats.peak_usage, 2048);
@@ -416,11 +426,11 @@ mod tests {
     #[test]
     fn test_error_stats() {
         let collector = MetricsCollector::new();
-        
+
         collector.record_operation();
         collector.record_operation();
         collector.record_error("error1");
-        
+
         let error_stats = collector.get_error_stats();
         assert_eq!(error_stats.total_errors, 1);
         assert_eq!(error_stats.error_rate, 50.0);
@@ -431,7 +441,7 @@ mod tests {
     fn test_performance_reporter() {
         let collector = Arc::new(MetricsCollector::new());
         let mut reporter = PerformanceReporter::new(collector, Duration::from_millis(100));
-        
+
         let report = reporter.generate_report();
         assert!(report.uptime.as_secs() < 1);
     }
@@ -439,15 +449,15 @@ mod tests {
     #[test]
     fn test_performance_monitor() {
         let mut monitor = PerformanceMonitor::new(Duration::from_millis(100));
-        
+
         // 记录一些操作
         let collector = monitor.collector();
         collector.record_operation();
         collector.record_memory_usage(1024);
-        
+
         // 更新监控
         monitor.update();
-        
+
         // 生成最终报告
         let report = monitor.final_report();
         assert_eq!(report.metrics.total_operations, 1);

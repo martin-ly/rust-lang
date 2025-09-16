@@ -17,7 +17,11 @@ Rust 1.89 相关语言能力在泛型方向的重要对齐点（精选）：
 // 由于某些编译器通道/版本下“类型别名中的 impl Trait”可能受限，这里以
 // “函数返回位置 impl Trait”来表达与 TAIT 接近的意图（零成本迭代器组合）。
 pub mod tait_like {
-    pub fn map_then_filter<'a, T, I, F, P>(iter: I, map_fn: F, pred: P) -> impl Iterator<Item = T> + 'a
+    pub fn map_then_filter<'a, T, I, F, P>(
+        iter: I,
+        map_fn: F,
+        pred: P,
+    ) -> impl Iterator<Item = T> + 'a
     where
         I: IntoIterator + 'a,
         F: Fn(I::Item) -> T + 'a,
@@ -87,13 +91,23 @@ pub mod const_generics {
             }
         }
 
-        pub fn capacity(&self) -> usize { N }
-        pub fn len(&self) -> usize { self.len }
-        pub fn is_empty(&self) -> bool { self.len == 0 }
-        pub fn is_full(&self) -> bool { self.len == N }
+        pub fn capacity(&self) -> usize {
+            N
+        }
+        pub fn len(&self) -> usize {
+            self.len
+        }
+        pub fn is_empty(&self) -> bool {
+            self.len == 0
+        }
+        pub fn is_full(&self) -> bool {
+            self.len == N
+        }
 
         pub fn push(&mut self, item: T) -> Result<(), T> {
-            if self.is_full() { return Err(item); }
+            if self.is_full() {
+                return Err(item);
+            }
             let idx = (self.head + self.len) % N;
             self.data[idx] = Some(item);
             self.len += 1;
@@ -101,7 +115,9 @@ pub mod const_generics {
         }
 
         pub fn pop(&mut self) -> Option<T> {
-            if self.is_empty() { return None; }
+            if self.is_empty() {
+                return None;
+            }
             let idx = self.head;
             self.head = (self.head + 1) % N;
             self.len -= 1;
@@ -134,11 +150,9 @@ pub fn demonstrate_rust_189_generics() {
     // TAIT-like
     {
         let data = [1, 2, 3, 4, 5];
-        let out: Vec<_> = crate::rust_189_features::tait_like::map_then_filter(
-            &data,
-            |x| x * 3,
-            |x| *x % 2 == 0,
-        ).collect();
+        let out: Vec<_> =
+            crate::rust_189_features::tait_like::map_then_filter(&data, |x| x * 3, |x| *x % 2 == 0)
+                .collect();
         println!("TAIT-like out: {:?}", out);
     }
 
@@ -160,5 +174,3 @@ pub fn demonstrate_rust_189_generics() {
         println!("pop1={:?} pop2={:?}", rb.pop(), rb.pop());
     }
 }
-
-

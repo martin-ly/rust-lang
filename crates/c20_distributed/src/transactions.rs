@@ -6,12 +6,17 @@ pub trait SagaStep {
 }
 
 pub struct Saga {
-    steps: Vec<Box<dyn SagaStep + Send>>, 
+    steps: Vec<Box<dyn SagaStep + Send>>,
 }
 
 impl Saga {
-    pub fn new() -> Self { Self { steps: Vec::new() } }
-    pub fn then(mut self, step: Box<dyn SagaStep + Send>) -> Self { self.steps.push(step); self }
+    pub fn new() -> Self {
+        Self { steps: Vec::new() }
+    }
+    pub fn then(mut self, step: Box<dyn SagaStep + Send>) -> Self {
+        self.steps.push(step);
+        self
+    }
 
     pub fn run(self) -> Result<(), DistributedError> {
         let mut done: Vec<Box<dyn SagaStep + Send>> = Vec::new();
@@ -20,7 +25,9 @@ impl Saga {
                 Ok(_) => done.push(s),
                 Err(e) => {
                     // rollback in reverse
-                    while let Some(mut step) = done.pop() { let _ = step.compensate(); }
+                    while let Some(mut step) = done.pop() {
+                        let _ = step.compensate();
+                    }
                     return Err(e);
                 }
             }
@@ -28,4 +35,3 @@ impl Saga {
         Ok(())
     }
 }
-

@@ -1,13 +1,21 @@
+use c20_distributed::swim::{
+    MemberInfo, MembershipView, SwimMemberState, SwimNode, SwimTransport, Version,
+};
 use proptest::prelude::*;
-use c20_distributed::swim::{SwimNode, SwimTransport, SwimMemberState, MembershipView, MemberInfo, Version};
 use std::time::Duration;
 
 #[derive(Clone, Default)]
-struct MockTrans { reachable: std::collections::HashMap<String, bool> }
+struct MockTrans {
+    reachable: std::collections::HashMap<String, bool>,
+}
 
 impl SwimTransport for MockTrans {
-    fn ping(&self, to: &str) -> bool { *self.reachable.get(to).unwrap_or(&true) }
-    fn gossip(&self, _to: &str, _events: &[c20_distributed::swim::SwimEvent]) -> bool { true }
+    fn ping(&self, to: &str) -> bool {
+        *self.reachable.get(to).unwrap_or(&true)
+    }
+    fn gossip(&self, _to: &str, _events: &[c20_distributed::swim::SwimEvent]) -> bool {
+        true
+    }
 }
 
 proptest! {
@@ -34,5 +42,3 @@ proptest! {
         prop_assert_eq!(a.members.get(&moniker).unwrap().state, SwimMemberState::Faulty);
     }
 }
-
-

@@ -51,5 +51,3 @@ async fn main() {
 fn main() {
     eprintln!("启用 --features tokio-adapter 运行该示例");
 }
-
-

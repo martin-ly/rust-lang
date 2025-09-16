@@ -1,5 +1,5 @@
 //! # IoT 调度器模块 / IoT Scheduler Module
-//! 
+//!
 //! 本模块实现了 IoT 系统的任务调度功能。
 //! This module implements task scheduling functionality for IoT systems.
 
@@ -20,13 +20,15 @@ impl IoTScheduler {
             priorities: HashMap::new(),
         }
     }
-    
+
     pub fn add_task(&mut self, task: Task) {
         self.tasks.push(task);
     }
-    
+
     /// 基本：按添加顺序返回 / FIFO
-    pub fn schedule(&mut self) -> Vec<Task> { self.tasks.clone() }
+    pub fn schedule(&mut self) -> Vec<Task> {
+        self.tasks.clone()
+    }
 
     /// 按优先级从高到低（数值小优先）排序返回 / Priority order
     pub fn schedule_by_priority(&self) -> Vec<Task> {
@@ -50,7 +52,7 @@ pub struct Task {
     pub name: String,
     pub priority: u8,
     pub deadline: u64,
-} 
+}
 
 #[cfg(test)]
 mod tests {
@@ -59,8 +61,18 @@ mod tests {
     #[test]
     fn test_priority_order() {
         let mut s = IoTScheduler::new();
-        s.add_task(Task { id: "1".into(), name: "a".into(), priority: 5, deadline: 100 });
-        s.add_task(Task { id: "2".into(), name: "b".into(), priority: 1, deadline: 200 });
+        s.add_task(Task {
+            id: "1".into(),
+            name: "a".into(),
+            priority: 5,
+            deadline: 100,
+        });
+        s.add_task(Task {
+            id: "2".into(),
+            name: "b".into(),
+            priority: 1,
+            deadline: 200,
+        });
         let v = s.schedule_by_priority();
         assert_eq!(v.first().unwrap().id, "2");
     }
@@ -68,8 +80,18 @@ mod tests {
     #[test]
     fn test_edf_order() {
         let mut s = IoTScheduler::new();
-        s.add_task(Task { id: "1".into(), name: "a".into(), priority: 5, deadline: 300 });
-        s.add_task(Task { id: "2".into(), name: "b".into(), priority: 1, deadline: 100 });
+        s.add_task(Task {
+            id: "1".into(),
+            name: "a".into(),
+            priority: 5,
+            deadline: 300,
+        });
+        s.add_task(Task {
+            id: "2".into(),
+            name: "b".into(),
+            priority: 1,
+            deadline: 100,
+        });
         let v = s.schedule_edf();
         assert_eq!(v.first().unwrap().id, "2");
     }

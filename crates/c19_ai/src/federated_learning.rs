@@ -1,5 +1,5 @@
 //! # 联邦学习模块
-//! 
+//!
 //! 支持分布式和隐私保护的机器学习训练。
 
 use crate::Error;
@@ -61,19 +61,19 @@ impl FederatedLearningEngine {
             global_model: None,
         }
     }
-    
+
     /// 注册客户端
     pub fn register_client(&mut self, client: ClientInfo) {
         self.clients.insert(client.id.clone(), client);
     }
-    
+
     /// 开始联邦学习训练
     pub async fn train(&mut self) -> Result<FederatedResult, Error> {
         tracing::info!("开始联邦学习训练，客户端数量: {}", self.clients.len());
-        
+
         // 这里将集成实际的联邦学习逻辑
         // 包括模型分发、本地训练、模型聚合等步骤
-        
+
         Ok(FederatedResult {
             global_model: vec![0.1; 1000],
             training_rounds: self.config.rounds,
@@ -82,12 +82,12 @@ impl FederatedLearningEngine {
             metadata: HashMap::new(),
         })
     }
-    
+
     /// 获取全局模型
     pub fn get_global_model(&self) -> Option<&Vec<f64>> {
         self.global_model.as_ref()
     }
-    
+
     /// 更新全局模型
     pub fn update_global_model(&mut self, model: Vec<f64>) {
         self.global_model = Some(model);
@@ -107,7 +107,7 @@ pub struct FederatedResult {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_federated_config() {
         let config = FederatedConfig {
@@ -118,11 +118,11 @@ mod tests {
             privacy_budget: Some(1.0),
             aggregation_strategy: AggregationStrategy::FedAvg,
         };
-        
+
         assert_eq!(config.num_clients, 10);
         assert_eq!(config.rounds, 100);
     }
-    
+
     #[test]
     fn test_client_info() {
         let client = ClientInfo {
@@ -131,11 +131,11 @@ mod tests {
             capabilities: vec!["gpu".to_string()],
             privacy_level: PrivacyLevel::DifferentialPrivacy,
         };
-        
+
         assert_eq!(client.id, "client_1");
         assert_eq!(client.data_size, 1000);
     }
-    
+
     #[tokio::test]
     async fn test_federated_learning() {
         let config = FederatedConfig {
@@ -146,9 +146,9 @@ mod tests {
             privacy_budget: Some(1.0),
             aggregation_strategy: AggregationStrategy::FedAvg,
         };
-        
+
         let mut engine = FederatedLearningEngine::new(config);
-        
+
         // 注册客户端
         for i in 0..3 {
             let client = ClientInfo {
@@ -159,7 +159,7 @@ mod tests {
             };
             engine.register_client(client);
         }
-        
+
         let result = engine.train().await.unwrap();
         assert_eq!(result.training_rounds, 10);
         assert!(result.final_accuracy > 0.0);

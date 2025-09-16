@@ -1,11 +1,11 @@
 //! 高级gRPC服务实现
-//! 
+//!
 //! 提供更完整的gRPC服务功能，包括认证、缓存、批量操作等
 
 use std::collections::HashMap;
 use std::sync::Arc;
 use tokio::sync::RwLock;
-use tracing::{info, error};
+use tracing::{error, info};
 use uuid::Uuid;
 
 use crate::{
@@ -46,54 +46,57 @@ impl AuthService {
             users: Arc::new(RwLock::new(HashMap::new())),
         }
     }
-    
+
     /// 用户登录
     pub async fn login(&self, username: String, password: String) -> Result<AuthToken> {
         info!("用户登录尝试: {}", username);
-        
+
         // 简化的认证逻辑
         if username.is_empty() || password.is_empty() {
             return Err(Error::auth("用户名或密码不能为空".to_string()));
         }
-        
+
         let user_id = Uuid::new_v4().to_string();
         let token = Uuid::new_v4().to_string();
         let expires_at = current_timestamp_secs() + 3600; // 1小时后过期
-        
+
         let auth_token = AuthToken {
             token: token.clone(),
             user_id: user_id.clone(),
             expires_at,
             permissions: vec!["read".to_string(), "write".to_string()],
         };
-        
+
         // 存储token
         {
             let mut tokens = self.tokens.write().await;
             tokens.insert(token.clone(), auth_token.clone());
         }
-        
+
         // 创建或更新用户档案
         {
             let mut users = self.users.write().await;
-            users.insert(user_id.clone(), UserProfile {
-                id: user_id,
-                username: username.clone(),
-                email: format!("{}@example.com", username),
-                role: "user".to_string(),
-                created_at: current_timestamp_secs(),
-                last_login: Some(current_timestamp_secs()),
-            });
+            users.insert(
+                user_id.clone(),
+                UserProfile {
+                    id: user_id,
+                    username: username.clone(),
+                    email: format!("{}@example.com", username),
+                    role: "user".to_string(),
+                    created_at: current_timestamp_secs(),
+                    last_login: Some(current_timestamp_secs()),
+                },
+            );
         }
-        
+
         info!("用户登录成功: {}", username);
         Ok(auth_token)
     }
-    
+
     /// 验证token
     pub async fn validate_token(&self, token: &str) -> Result<AuthToken> {
         let tokens = self.tokens.read().await;
-        
+
         match tokens.get(token) {
             Some(auth_token) => {
                 if auth_token.expires_at > current_timestamp_secs() {
@@ -102,10 +105,10 @@ impl AuthService {
                     Err(Error::auth("Token已过期".to_string()))
                 }
             }
-            None => Err(Error::auth("无效的token".to_string()))
+            None => Err(Error::auth("无效的token".to_string())),
         }
     }
-    
+
     /// 用户登出
     pub async fn logout(&self, token: &str) -> Result<()> {
         let mut tokens = self.tokens.write().await;
@@ -113,14 +116,14 @@ impl AuthService {
         info!("用户登出成功");
         Ok(())
     }
-    
+
     /// 获取用户档案
     pub async fn get_user_profile(&self, user_id: &str) -> Result<UserProfile> {
         let users = self.users.read().await;
-        
+
         match users.get(user_id) {
             Some(profile) => Ok(profile.clone()),
-            None => Err(Error::auth("用户不存在".to_string()))
+            None => Err(Error::auth("用户不存在".to_string())),
         }
     }
 }
@@ -144,7 +147,7 @@ impl CacheService {
             cache: Arc::new(RwLock::new(HashMap::new())),
         }
     }
-    
+
     /// 设置缓存
     pub async fn set(&self, key: String, value: Vec<u8>, ttl_seconds: u64) -> Result<()> {
         let now = current_timestamp_secs();
@@ -153,19 +156,19 @@ impl CacheService {
             expires_at: now + ttl_seconds,
             created_at: now,
         };
-        
+
         let mut cache = self.cache.write().await;
         cache.insert(key.clone(), entry);
-        
+
         info!("缓存设置成功: {}", key);
         Ok(())
     }
-    
+
     /// 获取缓存
     pub async fn get(&self, key: &str) -> Result<Option<Vec<u8>>> {
         let mut cache = self.cache.write().await;
         let now = current_timestamp_secs();
-        
+
         match cache.get(key) {
             Some(entry) => {
                 if entry.expires_at > now {
@@ -183,32 +186,32 @@ impl CacheService {
             }
         }
     }
-    
+
     /// 删除缓存
     pub async fn delete(&self, key: &str) -> Result<bool> {
         let mut cache = self.cache.write().await;
         let existed = cache.remove(key).is_some();
-        
+
         if existed {
             info!("缓存删除成功: {}", key);
         } else {
             info!("缓存不存在: {}", key);
         }
-        
+
         Ok(existed)
     }
-    
+
     /// 清理过期缓存
     pub async fn cleanup_expired(&self) -> Result<usize> {
         let mut cache = self.cache.write().await;
         let now = current_timestamp_secs();
         let initial_size = cache.len();
-        
+
         cache.retain(|_, entry| entry.expires_at > now);
-        
+
         let cleaned = initial_size - cache.len();
         info!("清理过期缓存: {} 个条目", cleaned);
-        
+
         Ok(cleaned)
     }
 }
@@ -235,30 +238,30 @@ impl BatchService {
             operations: Arc::new(RwLock::new(Vec::new())),
         }
     }
-    
+
     /// 创建批量操作
     pub async fn create_batch(&self, operations: Vec<BatchOperation>) -> Result<String> {
         let batch_id = Uuid::new_v4().to_string();
         let mut ops = self.operations.write().await;
-        
+
         for mut op in operations {
             op.id = Uuid::new_v4().to_string();
             op.status = "pending".to_string();
             op.created_at = current_timestamp_secs();
             ops.push(op);
         }
-        
+
         info!("创建批量操作: {} 个操作", ops.len());
         Ok(batch_id)
     }
-    
+
     /// 执行批量操作
     pub async fn execute_batch(&self, batch_id: &str) -> Result<BatchResult> {
         let mut ops = self.operations.write().await;
         let mut success_count = 0;
         let mut failure_count = 0;
         let mut errors = Vec::new();
-        
+
         for op in ops.iter_mut() {
             match self.execute_operation(op).await {
                 Ok(_) => {
@@ -274,7 +277,7 @@ impl BatchService {
                 }
             }
         }
-        
+
         let result = BatchResult {
             batch_id: batch_id.to_string(),
             total_operations: success_count + failure_count,
@@ -283,11 +286,14 @@ impl BatchService {
             errors,
             completed_at: current_timestamp_secs(),
         };
-        
-        info!("批量操作完成: 成功 {} 个，失败 {} 个", success_count, failure_count);
+
+        info!(
+            "批量操作完成: 成功 {} 个，失败 {} 个",
+            success_count, failure_count
+        );
         Ok(result)
     }
-    
+
     /// 执行单个操作
     async fn execute_operation(&self, operation: &mut BatchOperation) -> Result<()> {
         // 简化的操作执行逻辑
@@ -306,20 +312,23 @@ impl BatchService {
                 tokio::time::sleep(tokio::time::Duration::from_millis(30)).await;
             }
             _ => {
-                return Err(Error::config(format!("未知的操作类型: {}", operation.operation_type)));
+                return Err(Error::config(format!(
+                    "未知的操作类型: {}",
+                    operation.operation_type
+                )));
             }
         }
-        
+
         Ok(())
     }
-    
+
     /// 获取批量操作状态
     pub async fn get_batch_status(&self, batch_id: &str) -> Result<BatchStatus> {
         let ops = self.operations.read().await;
         let mut pending = 0;
         let mut completed = 0;
         let mut failed = 0;
-        
+
         for op in ops.iter() {
             match op.status.as_str() {
                 "pending" => pending += 1,
@@ -328,7 +337,7 @@ impl BatchService {
                 _ => {}
             }
         }
-        
+
         Ok(BatchStatus {
             batch_id: batch_id.to_string(),
             pending,
@@ -374,11 +383,11 @@ impl AdvancedGrpcService {
             batch_service: BatchService::new(),
         }
     }
-    
+
     /// 启动高级服务
     pub async fn start(&self) -> Result<()> {
         info!("启动高级gRPC服务");
-        
+
         // 启动后台任务
         let cache_service = self.cache_service.clone();
         tokio::spawn(async move {
@@ -390,17 +399,17 @@ impl AdvancedGrpcService {
                 }
             }
         });
-        
+
         info!("高级gRPC服务启动成功");
         Ok(())
     }
-    
+
     /// 健康检查
     pub async fn health_check(&self) -> Result<HealthStatus> {
         let cache_size = self.cache_service.cache.read().await.len();
         let token_count = self.auth_service.tokens.read().await.len();
         let operation_count = self.batch_service.operations.read().await.len();
-        
+
         Ok(HealthStatus {
             status: "healthy".to_string(),
             cache_entries: cache_size,
@@ -423,46 +432,52 @@ pub struct HealthStatus {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[tokio::test]
     async fn test_auth_service() {
         let auth_service = AuthService::new();
-        
+
         // 测试登录
-        let token = auth_service.login("testuser".to_string(), "password".to_string()).await.unwrap();
+        let token = auth_service
+            .login("testuser".to_string(), "password".to_string())
+            .await
+            .unwrap();
         assert!(!token.token.is_empty());
         assert_eq!(token.user_id, token.user_id);
-        
+
         // 测试token验证
         let validated_token = auth_service.validate_token(&token.token).await.unwrap();
         assert_eq!(validated_token.token, token.token);
-        
+
         // 测试登出
         auth_service.logout(&token.token).await.unwrap();
     }
-    
+
     #[tokio::test]
     async fn test_cache_service() {
         let cache_service = CacheService::new();
-        
+
         // 测试设置和获取缓存
-        cache_service.set("key1".to_string(), b"value1".to_vec(), 60).await.unwrap();
+        cache_service
+            .set("key1".to_string(), b"value1".to_vec(), 60)
+            .await
+            .unwrap();
         let value = cache_service.get("key1").await.unwrap();
         assert_eq!(value, Some(b"value1".to_vec()));
-        
+
         // 测试删除缓存
         let deleted = cache_service.delete("key1").await.unwrap();
         assert!(deleted);
-        
+
         // 测试获取不存在的缓存
         let value = cache_service.get("key1").await.unwrap();
         assert_eq!(value, None);
     }
-    
+
     #[tokio::test]
     async fn test_batch_service() {
         let batch_service = BatchService::new();
-        
+
         let operations = vec![
             BatchOperation {
                 id: "".to_string(),
@@ -481,10 +496,10 @@ mod tests {
                 completed_at: None,
             },
         ];
-        
+
         let batch_id = batch_service.create_batch(operations).await.unwrap();
         assert!(!batch_id.is_empty());
-        
+
         let result = batch_service.execute_batch(&batch_id).await.unwrap();
         assert_eq!(result.total_operations, 2);
         assert_eq!(result.success_count, 2);

@@ -1,9 +1,9 @@
 //! 模型管理
-//! 
+//!
 //! 提供 LLM 模型的管理功能
 
-use serde::{Deserialize, Serialize};
 use anyhow::Result;
+use serde::{Deserialize, Serialize};
 
 /// 模型信息
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -25,11 +25,11 @@ impl ModelManager {
             models: std::collections::HashMap::new(),
         }
     }
-    
+
     pub fn register_model(&mut self, model: ModelInfo) {
         self.models.insert(model.name.clone(), model);
     }
-    
+
     pub fn get_model(&self, name: &str) -> Option<&ModelInfo> {
         self.models.get(name)
     }

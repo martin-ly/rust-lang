@@ -1,16 +1,16 @@
-pub mod lifecycle;
 pub mod attributes;
 pub mod control;
+pub mod lifecycle;
 pub mod monitor;
 pub mod pool;
 
+use crate::error::{ProcessError, ProcessResult};
 use crate::types::{ProcessConfig, ProcessInfo, ProcessStatus, ResourceLimits};
-use crate::error::{ProcessResult, ProcessError};
 use std::collections::HashMap;
-use std::process::{Command, Child, ExitStatus, Stdio};
+use std::io::{Read, Write};
+use std::process::{Child, Command, ExitStatus, Stdio};
 use std::sync::{Arc, Mutex};
 use std::time::SystemTime;
-use std::io::{Read, Write};
 use std::time::{Duration, Instant};
 
 /// 进程管理器
@@ -44,31 +44,32 @@ impl ProcessManager {
     /// 启动新进程
     pub fn spawn(&mut self, config: ProcessConfig) -> ProcessResult<u32> {
         let mut command = Command::new(&config.program);
-        
+
         // 设置命令行参数
         for arg in &config.args {
             command.arg(arg);
         }
-        
+
         // 设置环境变量
         for (key, value) in &config.env {
             command.env(key, value);
         }
-        
+
         // 设置工作目录
         if let Some(dir) = &config.working_dir {
             command.current_dir(dir);
         }
-        
+
         // 设置标准IO
         command.stdin(Stdio::piped());
         command.stdout(Stdio::piped());
         command.stderr(Stdio::piped());
-        
+
         // 启动进程
-        let child = command.spawn()
+        let child = command
+            .spawn()
             .map_err(|e| ProcessError::StartFailed(e.to_string()))?;
-        
+
         let pid = self.generate_pid();
         let info = ProcessInfo {
             pid,
@@ -80,14 +81,11 @@ impl ProcessManager {
             parent_pid: None,
             children_pids: Vec::new(),
         };
-        
-        let managed_process = ManagedProcess {
-            child,
-            info,
-        };
-        
+
+        let managed_process = ManagedProcess { child, info };
+
         self.processes.lock().unwrap().insert(pid, managed_process);
-        
+
         Ok(pid)
     }
 
@@ -100,17 +98,19 @@ impl ProcessManager {
     /// 等待进程完成
     pub fn wait(&mut self, pid: u32) -> ProcessResult<ExitStatus> {
         let mut processes = self.processes.lock().unwrap();
-        
+
         if let Some(managed_process) = processes.get_mut(&pid) {
-            let status = managed_process.child.wait()
+            let status = managed_process
+                .child
+                .wait()
                 .map_err(|e| ProcessError::WaitFailed(e.to_string()))?;
-            
+
             // 更新进程状态
             managed_process.info.status = ProcessStatus::Stopped;
-            
+
             // 从管理列表中移除已完成的进程
             processes.remove(&pid);
-            
+
             Ok(status)
         } else {
             Err(ProcessError::NotFound(pid))
@@ -120,15 +120,17 @@ impl ProcessManager {
     /// 异步等待进程完成
     pub async fn wait_async(&mut self, pid: u32) -> ProcessResult<ExitStatus> {
         let mut processes = self.processes.lock().unwrap();
-        
+
         if let Some(managed_process) = processes.get_mut(&pid) {
             // 简化实现，直接等待
-            let status = managed_process.child.wait()
+            let status = managed_process
+                .child
+                .wait()
                 .map_err(|e| ProcessError::WaitFailed(e.to_string()))?;
-            
+
             // 更新进程状态
             managed_process.info.status = ProcessStatus::Stopped;
-            
+
             Ok(status)
         } else {
             Err(ProcessError::NotFound(pid))
@@ -156,13 +158,19 @@ impl ProcessManager {
                 Vec::new()
             };
 
-            let status = managed_process.child.wait()
+            let status = managed_process
+                .child
+                .wait()
                 .map_err(|e| ProcessError::WaitFailed(e.to_string()))?;
 
             managed_process.info.status = ProcessStatus::Stopped;
             processes.remove(&pid);
 
-            Ok(std::process::Output { status, stdout: stdout_bytes, stderr: stderr_bytes })
+            Ok(std::process::Output {
+                status,
+                stdout: stdout_bytes,
+                stderr: stderr_bytes,
+            })
         } else {
             Err(ProcessError::NotFound(pid))
         }
@@ -171,7 +179,11 @@ impl ProcessManager {
     /// 带超时等待进程完成
     /// 返回 Ok(Some(status)) 表示在超时时间内进程已退出；
     /// 返回 Ok(None) 表示超时未退出；Err 表示等待过程中出错或找不到进程。
-    pub fn wait_with_timeout(&mut self, pid: u32, timeout: Duration) -> ProcessResult<Option<ExitStatus>> {
+    pub fn wait_with_timeout(
+        &mut self,
+        pid: u32,
+        timeout: Duration,
+    ) -> ProcessResult<Option<ExitStatus>> {
         let start = Instant::now();
         loop {
             {
@@ -212,7 +224,9 @@ impl ProcessManager {
                 stdin.flush().map_err(ProcessError::Io)?;
                 Ok(())
             } else {
-                Err(ProcessError::InvalidConfig("stdin not available".to_string()))
+                Err(ProcessError::InvalidConfig(
+                    "stdin not available".to_string(),
+                ))
             }
         } else {
             Err(ProcessError::NotFound(pid))
@@ -240,7 +254,9 @@ impl ProcessManager {
                 stdout.read_to_end(&mut buf).map_err(ProcessError::Io)?;
                 Ok(buf)
             } else {
-                Err(ProcessError::InvalidConfig("stdout not available".to_string()))
+                Err(ProcessError::InvalidConfig(
+                    "stdout not available".to_string(),
+                ))
             }
         } else {
             Err(ProcessError::NotFound(pid))
@@ -256,7 +272,9 @@ impl ProcessManager {
                 stderr.read_to_end(&mut buf).map_err(ProcessError::Io)?;
                 Ok(buf)
             } else {
-                Err(ProcessError::InvalidConfig("stderr not available".to_string()))
+                Err(ProcessError::InvalidConfig(
+                    "stderr not available".to_string(),
+                ))
             }
         } else {
             Err(ProcessError::NotFound(pid))
@@ -266,14 +284,16 @@ impl ProcessManager {
     /// 终止进程
     pub fn kill(&mut self, pid: u32) -> ProcessResult<()> {
         let mut processes = self.processes.lock().unwrap();
-        
+
         if let Some(managed_process) = processes.get_mut(&pid) {
-            managed_process.child.kill()
+            managed_process
+                .child
+                .kill()
                 .map_err(|e| ProcessError::TerminationFailed(e.to_string()))?;
-            
+
             // 更新进程状态
             managed_process.info.status = ProcessStatus::Stopped;
-            
+
             Ok(())
         } else {
             Err(ProcessError::NotFound(pid))
@@ -283,7 +303,7 @@ impl ProcessManager {
     /// 获取进程信息
     pub fn get_process_info(&self, pid: u32) -> ProcessResult<ProcessInfo> {
         let processes = self.processes.lock().unwrap();
-        
+
         if let Some(managed_process) = processes.get(&pid) {
             Ok(managed_process.info.clone())
         } else {
@@ -300,7 +320,8 @@ impl ProcessManager {
     /// 检查进程是否运行
     pub fn is_running(&self, pid: u32) -> bool {
         let processes = self.processes.lock().unwrap();
-        processes.get(&pid)
+        processes
+            .get(&pid)
             .map(|p| p.info.status == ProcessStatus::Running)
             .unwrap_or(false)
     }
@@ -314,9 +335,8 @@ impl ProcessManager {
     /// 清理已终止的进程
     pub fn cleanup_terminated(&mut self) {
         let mut processes = self.processes.lock().unwrap();
-        processes.retain(|_, managed_process| {
-            managed_process.info.status == ProcessStatus::Running
-        });
+        processes
+            .retain(|_, managed_process| managed_process.info.status == ProcessStatus::Running);
     }
 }
 
@@ -433,7 +453,7 @@ impl ProcessGroupManager {
         let mut next_pgid = self.next_pgid.lock().unwrap();
         *next_pgid += 1;
         let pgid = *next_pgid;
-        
+
         let group = ProcessGroup {
             pgid,
             leader_pid,
@@ -441,7 +461,7 @@ impl ProcessGroupManager {
             name: name.into(),
             created_at: SystemTime::now(),
         };
-        
+
         self.groups.lock().unwrap().insert(pgid, group);
         pgid
     }
@@ -449,7 +469,7 @@ impl ProcessGroupManager {
     /// 向进程组添加进程
     pub fn add_to_group(&mut self, pgid: u32, pid: u32) -> bool {
         let mut groups = self.groups.lock().unwrap();
-        
+
         if let Some(group) = groups.get_mut(&pgid) {
             if !group.member_pids.contains(&pid) {
                 group.member_pids.push(pid);
@@ -465,7 +485,7 @@ impl ProcessGroupManager {
     /// 从进程组移除进程
     pub fn remove_from_group(&mut self, pgid: u32, pid: u32) -> bool {
         let mut groups = self.groups.lock().unwrap();
-        
+
         if let Some(group) = groups.get_mut(&pgid) {
             if let Some(pos) = group.member_pids.iter().position(|&p| p == pid) {
                 group.member_pids.remove(pos);
@@ -481,7 +501,7 @@ impl ProcessGroupManager {
     /// 获取进程组信息
     pub fn get_group(&self, pgid: u32) -> Option<crate::types::ProcessGroup> {
         let groups = self.groups.lock().unwrap();
-        
+
         groups.get(&pgid).map(|g| crate::types::ProcessGroup {
             pgid: g.pgid,
             leader_pid: g.leader_pid,

@@ -133,12 +133,12 @@ use std::collections::HashMap;
 
 fn main() {
     let mut map: HashMap<Point, String> = HashMap::new();
-    
+
     let p1 = Point { x: 1, y: 2 };
     let p2 = Point { x: 1, y: 2 };
-    
+
     map.insert(p1, "First point".to_string());
-    
+
     // 由于 p1 == p2，所以 p2 也能找到相同的值
     if let Some(value) = map.get(&p2) {
         println!("Found: {}", value);
@@ -153,18 +153,18 @@ use std::collections::HashSet;
 
 fn main() {
     let mut set: HashSet<Point> = HashSet::new();
-    
+
     let points = vec![
         Point { x: 1, y: 2 },
         Point { x: 3, y: 4 },
         Point { x: 1, y: 2 }, // 重复
         Point { x: 5, y: 6 },
     ];
-    
+
     for point in points {
         set.insert(point);
     }
-    
+
     println!("Unique points: {}", set.len()); // 3
 }
 ```
@@ -184,7 +184,7 @@ impl Cache {
             data: HashMap::new(),
         }
     }
-    
+
     fn get_or_compute(&mut self, key: &str, compute: fn() -> i32) -> i32 {
         if let Some(&value) = self.data.get(key) {
             value
@@ -235,7 +235,7 @@ impl Hash for ComplexType {
         self.field1.hash(state);
         self.field2.hash(state);
         self.field3.hash(state);
-        
+
         // 添加一些"盐"来改善分布
         0x12345678u32.hash(state);
     }
@@ -279,13 +279,11 @@ pub struct HashExample {
 
 impl PartialEq for HashExample {
     fn eq(&self, other: &Self) -> bool {
-        self.name == other.name && 
-        self.value == other.value && 
-        self.active == other.active
+        self.name == other.name && self.value == other.value && self.active == other.active
     }
 }
 
-impl Eq for HashExample { }
+impl Eq for HashExample {}
 
 impl Hash for HashExample {
     fn hash<H: Hasher>(&self, state: &mut H) {
@@ -308,7 +306,7 @@ impl<T: Hash + Eq> PartialEq for HashContainer<T> {
     }
 }
 
-impl<T: Hash + Eq> Eq for HashContainer<T> { }
+impl<T: Hash + Eq> Eq for HashContainer<T> {}
 
 impl<T: Hash + Eq> Hash for HashContainer<T> {
     fn hash<H: Hasher>(&self, state: &mut H) {
@@ -336,7 +334,7 @@ impl PartialEq for HashStatus {
     }
 }
 
-impl Eq for HashStatus { }
+impl Eq for HashStatus {}
 
 impl Hash for HashStatus {
     fn hash<H: Hasher>(&self, state: &mut H) {
@@ -349,7 +347,7 @@ impl Hash for HashStatus {
             }
             HashStatus::Error(s) => {
                 2u8.hash(state); // 变体标识符
-                s.hash(state);   // 关联数据
+                s.hash(state); // 关联数据
             }
         }
     }
@@ -368,7 +366,7 @@ impl PartialEq for HashPoint {
     }
 }
 
-impl Eq for HashPoint { }
+impl Eq for HashPoint {}
 
 impl Hash for HashPoint {
     fn hash<H: Hasher>(&self, state: &mut H) {
@@ -382,51 +380,51 @@ pub fn demonstrate_hash() {
     // 基本哈希计算
     let p1 = HashPoint { x: 1, y: 2 };
     let p2 = HashPoint { x: 1, y: 2 };
-    
+
     let mut hasher1 = DefaultHasher::new();
     let mut hasher2 = DefaultHasher::new();
-    
+
     p1.hash(&mut hasher1);
     p2.hash(&mut hasher2);
-    
+
     let hash1 = hasher1.finish();
     let hash2 = hasher2.finish();
-    
+
     println!("p1 hash: {}", hash1);
     println!("p2 hash: {}", hash2);
     println!("Hashes equal: {}", hash1 == hash2); // true
-    
+
     // 结构体哈希
     let e1 = HashExample {
         name: String::from("Test"),
         value: 42,
         active: true,
     };
-    
+
     let mut hasher = DefaultHasher::new();
     e1.hash(&mut hasher);
     let hash = hasher.finish();
-    
+
     println!("Example hash: {}", hash);
-    
+
     // 枚举哈希
     let s1 = HashStatus::Active;
     let s2 = HashStatus::Error(String::from("Something went wrong"));
-    
+
     let mut hasher = DefaultHasher::new();
     s1.hash(&mut hasher);
     let hash1 = hasher.finish();
-    
+
     let mut hasher = DefaultHasher::new();
     s2.hash(&mut hasher);
     let hash2 = hasher.finish();
-    
+
     println!("Status1 hash: {}", hash1);
     println!("Status2 hash: {}", hash2);
-    
+
     // 集合操作演示
     demonstrate_collection_operations();
-    
+
     // 哈希一致性测试
     test_hash_consistency();
 }
@@ -435,36 +433,36 @@ pub fn demonstrate_hash() {
 fn demonstrate_collection_operations() {
     use std::collections::HashMap;
     use std::collections::HashSet;
-    
+
     // HashMap 使用
     let mut map: HashMap<HashPoint, String> = HashMap::new();
-    
+
     let p1 = HashPoint { x: 1, y: 2 };
     let p2 = HashPoint { x: 3, y: 4 };
     let p3 = HashPoint { x: 1, y: 2 }; // 与 p1 相等
-    
+
     map.insert(p1, "First point".to_string());
     map.insert(p2, "Second point".to_string());
-    
+
     // 由于 p1 == p3，所以 p3 也能找到相同的值
     if let Some(value) = map.get(&p3) {
         println!("Found point: {}", value);
     }
-    
+
     // HashSet 使用
     let mut set: HashSet<HashPoint> = HashSet::new();
-    
+
     let points = vec![
         HashPoint { x: 1, y: 2 },
         HashPoint { x: 3, y: 4 },
         HashPoint { x: 1, y: 2 }, // 重复
         HashPoint { x: 5, y: 6 },
     ];
-    
+
     for point in points {
         set.insert(point);
     }
-    
+
     println!("Unique points count: {}", set.len()); // 3
     println!("Set contents:");
     for point in &set {
@@ -476,21 +474,21 @@ fn demonstrate_collection_operations() {
 fn test_hash_consistency() {
     let p1 = HashPoint { x: 1, y: 2 };
     let p2 = HashPoint { x: 1, y: 2 };
-    
+
     // 测试相等性一致性
     assert_eq!(p1, p2, "Points should be equal");
-    
+
     let mut hasher1 = DefaultHasher::new();
     let mut hasher2 = DefaultHasher::new();
-    
+
     p1.hash(&mut hasher1);
     p2.hash(&mut hasher2);
-    
+
     let hash1 = hasher1.finish();
     let hash2 = hasher2.finish();
-    
+
     assert_eq!(hash1, hash2, "Equal objects should have equal hashes");
-    
+
     println!("Hash consistency test passed!");
 }
 
@@ -505,7 +503,7 @@ pub fn calculate_hash<T: Hash>(value: &T) -> u64 {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_hash_example() {
         let e1 = HashExample {
@@ -513,65 +511,65 @@ mod tests {
             value: 100,
             active: false,
         };
-        
+
         let e2 = HashExample {
             name: String::from("Test"),
             value: 100,
             active: false,
         };
-        
+
         assert_eq!(e1, e2);
-        
+
         let hash1 = calculate_hash(&e1);
         let hash2 = calculate_hash(&e2);
-        
+
         assert_eq!(hash1, hash2);
     }
-    
+
     #[test]
     fn test_point_hash() {
         let p1 = HashPoint { x: 1, y: 2 };
         let p2 = HashPoint { x: 1, y: 2 };
         let p3 = HashPoint { x: 2, y: 1 };
-        
+
         assert_eq!(p1, p2);
         assert_ne!(p1, p3);
-        
+
         let hash1 = calculate_hash(&p1);
         let hash2 = calculate_hash(&p2);
         let hash3 = calculate_hash(&p3);
-        
+
         assert_eq!(hash1, hash2);
         assert_ne!(hash1, hash3);
     }
-    
+
     #[test]
     fn test_status_hash() {
         let s1 = HashStatus::Active;
         let s2 = HashStatus::Active;
         let s3 = HashStatus::Idle;
-        
+
         assert_eq!(s1, s2);
         assert_ne!(s1, s3);
-        
+
         let hash1 = calculate_hash(&s1);
         let hash2 = calculate_hash(&s2);
         let hash3 = calculate_hash(&s3);
-        
+
         assert_eq!(hash1, hash2);
         assert_ne!(hash1, hash3);
     }
-    
+
     #[test]
     fn test_hash_consistency() {
         let p1 = HashPoint { x: 1, y: 2 };
         let p2 = HashPoint { x: 1, y: 2 };
-        
+
         assert_eq!(p1, p2);
-        
+
         let hash1 = calculate_hash(&p1);
         let hash2 = calculate_hash(&p2);
-        
+
         assert_eq!(hash1, hash2);
     }
 }

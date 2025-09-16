@@ -41,7 +41,7 @@ impl UdpSocketWrapper {
     pub async fn new(config: UdpConfig) -> NetworkResult<Self> {
         let socket = UdpSocket::bind(config.address).await?;
         let local_addr = socket.local_addr()?;
-        
+
         Ok(Self {
             socket,
             config,
@@ -53,7 +53,7 @@ impl UdpSocketWrapper {
     pub async fn bind(addr: SocketAddr) -> NetworkResult<Self> {
         let socket = UdpSocket::bind(addr).await?;
         let local_addr = socket.local_addr()?;
-        
+
         Ok(Self {
             socket,
             config: UdpConfig::default(),
@@ -64,12 +64,10 @@ impl UdpSocketWrapper {
     /// 发送数据到指定地址
     pub async fn send_to(&self, data: &[u8], addr: SocketAddr) -> NetworkResult<usize> {
         match self.config.timeout {
-            Some(timeout_duration) => {
-                timeout(timeout_duration, self.socket.send_to(data, addr))
-                    .await
-                    .map_err(|_| NetworkError::Timeout(timeout_duration))
-                    .and_then(|result| result.map_err(Into::into))
-            }
+            Some(timeout_duration) => timeout(timeout_duration, self.socket.send_to(data, addr))
+                .await
+                .map_err(|_| NetworkError::Timeout(timeout_duration))
+                .and_then(|result| result.map_err(Into::into)),
             None => self.socket.send_to(data, addr).await.map_err(Into::into),
         }
     }
@@ -77,12 +75,10 @@ impl UdpSocketWrapper {
     /// 接收数据
     pub async fn recv_from(&self, buffer: &mut [u8]) -> NetworkResult<(usize, SocketAddr)> {
         match self.config.timeout {
-            Some(timeout_duration) => {
-                timeout(timeout_duration, self.socket.recv_from(buffer))
-                    .await
-                    .map_err(|_| NetworkError::Timeout(timeout_duration))
-                    .and_then(|result| result.map_err(Into::into))
-            }
+            Some(timeout_duration) => timeout(timeout_duration, self.socket.recv_from(buffer))
+                .await
+                .map_err(|_| NetworkError::Timeout(timeout_duration))
+                .and_then(|result| result.map_err(Into::into)),
             None => self.socket.recv_from(buffer).await.map_err(Into::into),
         }
     }
@@ -96,12 +92,10 @@ impl UdpSocketWrapper {
     /// 发送数据（已连接套接字）
     pub async fn send(&self, data: &[u8]) -> NetworkResult<usize> {
         match self.config.timeout {
-            Some(timeout_duration) => {
-                timeout(timeout_duration, self.socket.send(data))
-                    .await
-                    .map_err(|_| NetworkError::Timeout(timeout_duration))
-                    .and_then(|result| result.map_err(Into::into))
-            }
+            Some(timeout_duration) => timeout(timeout_duration, self.socket.send(data))
+                .await
+                .map_err(|_| NetworkError::Timeout(timeout_duration))
+                .and_then(|result| result.map_err(Into::into)),
             None => self.socket.send(data).await.map_err(Into::into),
         }
     }
@@ -109,12 +103,10 @@ impl UdpSocketWrapper {
     /// 接收数据（已连接套接字）
     pub async fn recv(&self, buffer: &mut [u8]) -> NetworkResult<usize> {
         match self.config.timeout {
-            Some(timeout_duration) => {
-                timeout(timeout_duration, self.socket.recv(buffer))
-                    .await
-                    .map_err(|_| NetworkError::Timeout(timeout_duration))
-                    .and_then(|result| result.map_err(Into::into))
-            }
+            Some(timeout_duration) => timeout(timeout_duration, self.socket.recv(buffer))
+                .await
+                .map_err(|_| NetworkError::Timeout(timeout_duration))
+                .and_then(|result| result.map_err(Into::into)),
             None => self.socket.recv(buffer).await.map_err(Into::into),
         }
     }
@@ -143,7 +135,11 @@ impl UdpSocketWrapper {
     }
 
     /// 离开多播组
-    pub fn leave_multicast_v4(&self, multiaddr: Ipv4Addr, interface: Ipv4Addr) -> NetworkResult<()> {
+    pub fn leave_multicast_v4(
+        &self,
+        multiaddr: Ipv4Addr,
+        interface: Ipv4Addr,
+    ) -> NetworkResult<()> {
         self.socket.leave_multicast_v4(multiaddr, interface)?;
         Ok(())
     }

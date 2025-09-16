@@ -56,12 +56,16 @@ impl Future for MyFuture {
 /// 展示手写 Future 的用法
 pub async fn demo_manual_future() -> i32 {
     // 这里只是演示状态切换；真实延时应交给运行时计时器
-    MyFuture { delay: Duration::from_millis(1), state: State::Pending }.await
+    MyFuture {
+        delay: Duration::from_millis(1),
+        state: State::Pending,
+    }
+    .await
 }
 
 /// 展示与 tokio 计时器结合的 Future/Stream 组合子
 pub async fn demo_future_combinators() -> i32 {
-    use futures::{future, FutureExt};
+    use futures::{FutureExt, future};
     use tokio::time::sleep;
 
     // map/then 链式组合

@@ -3,6 +3,8 @@ use crate::error::{NetworkError, NetworkResult};
 #[cfg(feature = "offline")]
 use pcap::Capture;
 #[cfg(feature = "offline")]
+use pnet_packet::Packet;
+#[cfg(feature = "offline")]
 use pnet_packet::arp::{ArpHardwareTypes, ArpOperations, ArpPacket};
 #[cfg(feature = "offline")]
 use pnet_packet::ethernet::{EtherTypes, EthernetPacket};
@@ -14,8 +16,6 @@ use pnet_packet::ipv4::Ipv4Packet;
 use pnet_packet::tcp::TcpPacket;
 #[cfg(feature = "offline")]
 use pnet_packet::udp::UdpPacket;
-#[cfg(feature = "offline")]
-use pnet_packet::Packet;
 #[cfg(feature = "offline")]
 use std::net::{IpAddr, Ipv4Addr};
 
@@ -38,10 +38,24 @@ pub fn parse_pcap_arp(path: &str, limit: Option<usize>) -> NetworkResult<Vec<Arp
                         let target_mac = Some(format!("{}", eth.get_destination()));
                         let sender_ip = IpAddr::V4(Ipv4Addr::from(arp.get_sender_proto_addr()));
                         let target_ip = IpAddr::V4(Ipv4Addr::from(arp.get_target_proto_addr()));
-                        let op = match arp.get_operation() { ArpOperations::Request => "request", ArpOperations::Reply => "reply", _ => "other" }.to_string();
-                        out.push(ArpRecord { sender_mac, sender_ip, target_mac, target_ip, op, at: SystemTime::now() });
+                        let op = match arp.get_operation() {
+                            ArpOperations::Request => "request",
+                            ArpOperations::Reply => "reply",
+                            _ => "other",
+                        }
+                        .to_string();
+                        out.push(ArpRecord {
+                            sender_mac,
+                            sender_ip,
+                            target_mac,
+                            target_ip,
+                            op,
+                            at: SystemTime::now(),
+                        });
                         count += 1;
-                        if limit.map(|n| count >= n).unwrap_or(false) { break; }
+                        if limit.map(|n| count >= n).unwrap_or(false) {
+                            break;
+                        }
                     }
                 }
             }
@@ -52,7 +66,10 @@ pub fn parse_pcap_arp(path: &str, limit: Option<usize>) -> NetworkResult<Vec<Arp
 
 #[cfg(feature = "offline")]
 #[derive(Debug, Default, Clone)]
-pub struct TcpOfflineStats { pub packets: u64, pub bytes: u64 }
+pub struct TcpOfflineStats {
+    pub packets: u64,
+    pub bytes: u64,
+}
 
 #[cfg(feature = "offline")]
 pub fn parse_pcap_tcp_stats(path: &str) -> NetworkResult<TcpOfflineStats> {
@@ -78,7 +95,10 @@ pub fn parse_pcap_tcp_stats(path: &str) -> NetworkResult<TcpOfflineStats> {
 
 #[cfg(feature = "offline")]
 #[derive(Debug, Default, Clone)]
-pub struct UdpOfflineStats { pub packets: u64, pub bytes: u64 }
+pub struct UdpOfflineStats {
+    pub packets: u64,
+    pub bytes: u64,
+}
 
 #[cfg(feature = "offline")]
 pub fn parse_pcap_udp_stats(path: &str) -> NetworkResult<UdpOfflineStats> {
@@ -101,5 +121,3 @@ pub fn parse_pcap_udp_stats(path: &str) -> NetworkResult<UdpOfflineStats> {
     }
     Ok(stats)
 }
-
-

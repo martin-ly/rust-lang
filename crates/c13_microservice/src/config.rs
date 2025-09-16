@@ -1,11 +1,11 @@
 //! 配置管理模块
-//! 
+//!
 //! 提供统一的配置管理，支持多种配置源和环境变量。
 
 use serde::{Deserialize, Serialize};
 // use std::collections::HashMap;
-use std::path::Path;
 use crate::error::{Error, Result};
+use std::path::Path;
 
 /// 微服务配置结构
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -267,7 +267,12 @@ impl Default for CorsConfig {
     fn default() -> Self {
         Self {
             allowed_origins: vec!["*".to_string()],
-            allowed_methods: vec!["GET".to_string(), "POST".to_string(), "PUT".to_string(), "DELETE".to_string()],
+            allowed_methods: vec![
+                "GET".to_string(),
+                "POST".to_string(),
+                "PUT".to_string(),
+                "DELETE".to_string(),
+            ],
             allowed_headers: vec!["*".to_string()],
             allow_credentials: false,
         }
@@ -327,91 +332,99 @@ impl Config {
     pub fn from_file<P: AsRef<Path>>(path: P) -> Result<Self> {
         let content = std::fs::read_to_string(path)
             .map_err(|e| Error::config(format!("无法读取配置文件: {}", e)))?;
-        
+
         let config: Config = toml::from_str(&content)
             .map_err(|e| Error::config(format!("无法解析配置文件: {}", e)))?;
-        
+
         Ok(config)
     }
-    
+
     /// 从环境变量加载配置
     pub fn from_env() -> Result<Self> {
         let mut config = Config::default();
-        
+
         // 从环境变量覆盖配置
         if let Ok(name) = std::env::var("SERVICE_NAME") {
             config.service.name = name;
         }
-        
+
         if let Ok(port) = std::env::var("SERVICE_PORT") {
-            config.service.port = port.parse()
+            config.service.port = port
+                .parse()
                 .map_err(|e| Error::config(format!("无效的端口号: {}", e)))?;
         }
-        
+
         if let Ok(host) = std::env::var("SERVICE_HOST") {
             config.service.host = host;
         }
-        
+
         if let Ok(env) = std::env::var("ENVIRONMENT") {
             config.service.environment = env;
         }
-        
+
         if let Ok(db_url) = std::env::var("DATABASE_URL") {
             config.database.url = db_url;
         }
-        
+
         if let Ok(log_level) = std::env::var("LOG_LEVEL") {
             config.logging.level = log_level;
         }
-        
+
         if let Ok(jwt_secret) = std::env::var("JWT_SECRET") {
             config.security.jwt_secret = jwt_secret;
         }
-        
+
         Ok(config)
     }
-    
+
     /// 验证配置
     pub fn validate(&self) -> Result<()> {
         if self.service.name.is_empty() {
             return Err(Error::config("服务名称不能为空"));
         }
-        
+
         if self.service.port == 0 {
             return Err(Error::config("服务端口不能为0"));
         }
-        
+
         if self.database.url.is_empty() {
             return Err(Error::config("数据库URL不能为空"));
         }
-        
+
         if self.security.jwt_secret.is_empty() {
             return Err(Error::config("JWT密钥不能为空"));
         }
-        
+
         Ok(())
     }
-    
+
     /// 获取服务地址
     pub fn service_address(&self) -> String {
         format!("{}:{}", self.service.host, self.service.port)
     }
-    
+
     /// 获取健康检查URL
     pub fn health_check_url(&self) -> String {
-        format!("http://{}{}", self.service_address(), self.service.health_check_path)
+        format!(
+            "http://{}{}",
+            self.service_address(),
+            self.service.health_check_path
+        )
     }
-    
+
     /// 获取指标URL
     pub fn metrics_url(&self) -> String {
-        format!("http://{}:{}{}", self.service.host, self.monitoring.metrics_port, self.monitoring.metrics_path)
+        format!(
+            "http://{}:{}{}",
+            self.service.host, self.monitoring.metrics_port, self.monitoring.metrics_path
+        )
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_default_config() {
         let config = Config::default();
@@ -419,16 +432,16 @@ mod tests {
         assert_eq!(config.service.port, 3000);
         assert_eq!(config.database.url, "postgresql://localhost/microservice");
     }
-    
+
     #[test]
     fn test_config_validation() {
         let mut config = Config::default();
         assert!(config.validate().is_ok());
-        
+
         config.service.name = String::new();
         assert!(config.validate().is_err());
     }
-    
+
     #[test]
     fn test_service_address() {
         let config = Config::default();

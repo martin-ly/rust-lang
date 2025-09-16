@@ -1,4 +1,4 @@
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 use std::time::Duration;
 
@@ -11,11 +11,15 @@ fn bench_mpsc(c: &mut Criterion) {
             rt.block_on(async {
                 let (tx, mut rx) = tokio::sync::mpsc::channel::<u32>(32);
                 let prod = tokio::spawn(async move {
-                    for i in 0..10_000u32 { tx.send(i).await.unwrap(); }
+                    for i in 0..10_000u32 {
+                        tx.send(i).await.unwrap();
+                    }
                 });
                 let cons = tokio::spawn(async move {
                     let mut sum = 0u64;
-                    while let Some(v) = rx.recv().await { sum += v as u64; }
+                    while let Some(v) = rx.recv().await {
+                        sum += v as u64;
+                    }
                     black_box(sum);
                 });
                 let _ = tokio::join!(prod, cons);
@@ -28,11 +32,15 @@ fn bench_mpsc(c: &mut Criterion) {
             rt.block_on(async {
                 let (tx, mut rx) = tokio::sync::mpsc::unbounded_channel::<u32>();
                 let prod = tokio::spawn(async move {
-                    for i in 0..10_000u32 { tx.send(i).unwrap(); }
+                    for i in 0..10_000u32 {
+                        tx.send(i).unwrap();
+                    }
                 });
                 let cons = tokio::spawn(async move {
                     let mut sum = 0u64;
-                    while let Some(v) = rx.recv().await { sum += v as u64; }
+                    while let Some(v) = rx.recv().await {
+                        sum += v as u64;
+                    }
                     black_box(sum);
                 });
                 let _ = tokio::join!(prod, cons);
@@ -53,7 +61,9 @@ fn bench_semaphore_pipeline(c: &mut Criterion) {
                 let (tx, mut rx) = tokio::sync::mpsc::channel::<u32>(128);
                 let sem = Arc::new(tokio::sync::Semaphore::new(4));
                 let prod = tokio::spawn(async move {
-                    for i in 0..5_000u32 { tx.send(i).await.unwrap(); }
+                    for i in 0..5_000u32 {
+                        tx.send(i).await.unwrap();
+                    }
                 });
                 let cons = {
                     let sem = Arc::clone(&sem);
@@ -104,9 +114,13 @@ fn bench_select_and_joinset(c: &mut Criterion) {
         b.iter(|| {
             rt.block_on(async {
                 let mut set = tokio::task::JoinSet::new();
-                for i in 0..100u32 { set.spawn(async move { i }); }
+                for i in 0..100u32 {
+                    set.spawn(async move { i });
+                }
                 let mut sum = 0u64;
-                while let Some(r) = set.join_next().await { sum += r.unwrap() as u64; }
+                while let Some(r) = set.join_next().await {
+                    sum += r.unwrap() as u64;
+                }
                 black_box(sum);
             })
         })
@@ -123,11 +137,15 @@ fn bench_backpressure_limit(c: &mut Criterion) {
                 rt.block_on(async {
                     let (tx, mut rx) = tokio::sync::mpsc::channel::<u32>(cap);
                     let prod = tokio::spawn(async move {
-                        for i in 0..2000u32 { tx.send(i).await.unwrap(); }
+                        for i in 0..2000u32 {
+                            tx.send(i).await.unwrap();
+                        }
                     });
                     let cons = tokio::spawn(async move {
                         let mut sum = 0u64;
-                        while let Some(v) = rx.recv().await { sum += v as u64; }
+                        while let Some(v) = rx.recv().await {
+                            sum += v as u64;
+                        }
                         black_box(sum);
                     });
                     let _ = tokio::join!(prod, cons);
@@ -152,7 +170,9 @@ fn bench_backpressure_limit(c: &mut Criterion) {
                             black_box(1u64)
                         }));
                     }
-                    for h in handles { let _ = h.await; }
+                    for h in handles {
+                        let _ = h.await;
+                    }
                 })
             })
         });
@@ -161,5 +181,3 @@ fn bench_backpressure_limit(c: &mut Criterion) {
 }
 
 criterion_group!(extended, bench_select_and_joinset, bench_backpressure_limit);
-
-

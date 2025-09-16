@@ -1,5 +1,5 @@
 //! # 区块链系统核心类型定义 / Blockchain System Core Type Definitions
-//! 
+//!
 //! 本模块定义了区块链系统的核心数据类型和结构。
 //! This module defines the core data types and structures for the blockchain system.
 #![allow(dead_code)]
@@ -9,7 +9,7 @@ use std::collections::HashMap;
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
 /// 区块链节点 / Blockchain Node
-/// 
+///
 /// 表示区块链网络中的一个节点。
 /// Represents a node in the blockchain network.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -37,7 +37,7 @@ impl BlockchainNode {
             .duration_since(UNIX_EPOCH)
             .unwrap()
             .as_secs();
-        
+
         Self {
             id,
             address,
@@ -48,7 +48,7 @@ impl BlockchainNode {
             last_active: now,
         }
     }
-    
+
     /// 更新活跃时间 / Update Active Time
     pub fn update_activity(&mut self) {
         self.last_active = SystemTime::now()
@@ -56,20 +56,20 @@ impl BlockchainNode {
             .unwrap()
             .as_secs();
     }
-    
+
     /// 检查节点是否活跃 / Check if Node is Active
     pub fn is_active(&self, timeout: Duration) -> bool {
         let now = SystemTime::now()
             .duration_since(UNIX_EPOCH)
             .unwrap()
             .as_secs();
-        
+
         now - self.last_active < timeout.as_secs()
     }
 }
 
 /// 节点类型 / Node Type
-/// 
+///
 /// 定义区块链节点的不同类型。
 /// Defines different types of blockchain nodes.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -85,7 +85,7 @@ pub enum NodeType {
 }
 
 /// 节点状态 / Node Status
-/// 
+///
 /// 定义节点的运行状态。
 /// Defines the operational status of a node.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -101,7 +101,7 @@ pub enum NodeStatus {
 }
 
 /// 区块链区块 / Blockchain Block
-/// 
+///
 /// 表示区块链中的一个区块。
 /// Represents a block in the blockchain.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -119,9 +119,9 @@ pub struct Block {
 impl Block {
     /// 创建新的区块 / Create New Block
     pub fn new(header: BlockHeader, transactions: Vec<Transaction>) -> Self {
-        let size = std::mem::size_of_val(&header) as u64 + 
-                   transactions.iter().map(|tx| tx.size).sum::<u64>();
-        
+        let size = std::mem::size_of_val(&header) as u64
+            + transactions.iter().map(|tx| tx.size).sum::<u64>();
+
         Self {
             header,
             transactions,
@@ -132,25 +132,24 @@ impl Block {
                 .as_secs(),
         }
     }
-    
+
     /// 计算区块哈希 / Calculate Block Hash
     pub fn calculate_hash(&self) -> Hash {
         let header_bytes = bincode::serialize(&self.header).unwrap();
         Hash::from_sha256(&header_bytes)
     }
-    
+
     /// 验证区块 / Validate Block
     pub fn validate(&self) -> ValidationResult {
         // 验证区块头 / Validate Block Header
         let header_valid = self.header.validate();
-        
+
         // 验证交易 / Validate Transactions
-        let transactions_valid = self.transactions.iter()
-            .all(|tx| tx.validate().is_valid);
-        
+        let transactions_valid = self.transactions.iter().all(|tx| tx.validate().is_valid);
+
         // 验证大小限制 / Validate Size Limit
         let size_valid = self.size <= MAX_BLOCK_SIZE;
-        
+
         ValidationResult {
             is_valid: header_valid && transactions_valid && size_valid,
             errors: vec![],
@@ -159,7 +158,7 @@ impl Block {
 }
 
 /// 区块头 / Block Header
-/// 
+///
 /// 包含区块的元数据信息。
 /// Contains metadata information of a block.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -196,7 +195,7 @@ impl BlockHeader {
             size: 0,
         }
     }
-    
+
     /// 验证区块头 / Validate Block Header
     pub fn validate(&self) -> bool {
         // 检查时间戳 / Check Timestamp
@@ -204,22 +203,21 @@ impl BlockHeader {
             .duration_since(UNIX_EPOCH)
             .unwrap()
             .as_secs();
-        
-        let timestamp_valid = self.timestamp <= now && 
-                             now - self.timestamp < MAX_BLOCK_TIME;
-        
+
+        let timestamp_valid = self.timestamp <= now && now - self.timestamp < MAX_BLOCK_TIME;
+
         // 检查难度 / Check Difficulty
         let difficulty_valid = self.difficulty > 0;
-        
+
         // 检查哈希 / Check Hash
         let hash_valid = !self.prev_hash.is_zero();
-        
+
         timestamp_valid && difficulty_valid && hash_valid
     }
 }
 
 /// 交易 / Transaction
-/// 
+///
 /// 表示区块链中的一笔交易。
 /// Represents a transaction in the blockchain.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -244,9 +242,8 @@ impl Transaction {
     /// 创建新的交易 / Create New Transaction
     pub fn new(inputs: Vec<TransactionInput>, outputs: Vec<TransactionOutput>, fee: u64) -> Self {
         let id = TransactionId::new();
-        let size = std::mem::size_of_val(&inputs) as u64 + 
-                   std::mem::size_of_val(&outputs) as u64;
-        
+        let size = std::mem::size_of_val(&inputs) as u64 + std::mem::size_of_val(&outputs) as u64;
+
         Self {
             id,
             inputs,
@@ -260,59 +257,59 @@ impl Transaction {
             signature: Signature::default(),
         }
     }
-    
+
     /// 验证交易 / Validate Transaction
     pub fn validate(&self) -> ValidationResult {
         // 验证输入输出 / Validate Inputs and Outputs
         let io_valid = !self.inputs.is_empty() && !self.outputs.is_empty();
-        
+
         // 验证费用 / Validate Fee
         let fee_valid = self.fee >= MIN_TRANSACTION_FEE;
-        
+
         // 验证大小 / Validate Size
         let size_valid = self.size <= MAX_TRANSACTION_SIZE;
-        
+
         // 验证签名 / Validate Signature
         let signature_valid = self.verify_signature();
-        
+
         ValidationResult {
             is_valid: io_valid && fee_valid && size_valid && signature_valid,
             errors: self.collect_validation_errors(),
         }
     }
-    
+
     /// 验证签名 / Verify Signature
     fn verify_signature(&self) -> bool {
         // 实现签名验证逻辑 / Implement signature verification logic
         true // 简化实现 / Simplified implementation
     }
-    
+
     /// 收集验证错误 / Collect Validation Errors
     fn collect_validation_errors(&self) -> Vec<ValidationError> {
         let mut errors = Vec::new();
-        
+
         if self.inputs.is_empty() {
             errors.push(ValidationError::EmptyInputs);
         }
-        
+
         if self.outputs.is_empty() {
             errors.push(ValidationError::EmptyOutputs);
         }
-        
+
         if self.fee < MIN_TRANSACTION_FEE {
             errors.push(ValidationError::InsufficientFee);
         }
-        
+
         if self.size > MAX_TRANSACTION_SIZE {
             errors.push(ValidationError::TransactionTooLarge);
         }
-        
+
         errors
     }
 }
 
 /// 交易输入 / Transaction Input
-/// 
+///
 /// 表示交易的输入。
 /// Represents a transaction input.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -328,7 +325,7 @@ pub struct TransactionInput {
 }
 
 /// 交易输出 / Transaction Output
-/// 
+///
 /// 表示交易的输出。
 /// Represents a transaction output.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -342,7 +339,7 @@ pub struct TransactionOutput {
 }
 
 /// 交易ID / Transaction ID
-/// 
+///
 /// 唯一标识一笔交易。
 /// Uniquely identifies a transaction.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
@@ -358,7 +355,7 @@ impl TransactionId {
             hash: Hash::random(),
         }
     }
-    
+
     /// 从哈希创建 / Create from Hash
     pub fn from_hash(hash: Hash) -> Self {
         Self { hash }
@@ -366,7 +363,7 @@ impl TransactionId {
 }
 
 /// 哈希值 / Hash Value
-/// 
+///
 /// 表示区块链中的哈希值。
 /// Represents a hash value in the blockchain.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
@@ -380,24 +377,24 @@ impl Hash {
     pub fn zero() -> Self {
         Self { bytes: [0; 32] }
     }
-    
+
     /// 检查是否为零哈希 / Check if Zero Hash
     pub fn is_zero(&self) -> bool {
         self.bytes.iter().all(|&b| b == 0)
     }
-    
+
     /// 从SHA256创建 / Create from SHA256
     pub fn from_sha256(data: &[u8]) -> Self {
-        use sha2::{Sha256, Digest};
+        use sha2::{Digest, Sha256};
         let mut hasher = Sha256::new();
         hasher.update(data);
         let result = hasher.finalize();
-        
+
         let mut bytes = [0u8; 32];
         bytes.copy_from_slice(&result);
         Self { bytes }
     }
-    
+
     /// 随机哈希 / Random Hash
     pub fn random() -> Self {
         use rand::{Rng, rngs::ThreadRng};
@@ -409,7 +406,7 @@ impl Hash {
 }
 
 /// 公钥 / Public Key
-/// 
+///
 /// 表示密码学公钥。
 /// Represents a cryptographic public key.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -419,7 +416,7 @@ pub struct PublicKey {
 }
 
 /// 私钥 / Private Key
-/// 
+///
 /// 表示密码学私钥。
 /// Represents a cryptographic private key.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -429,7 +426,7 @@ pub struct PrivateKey {
 }
 
 /// 数字签名 / Digital Signature
-/// 
+///
 /// 表示数字签名。
 /// Represents a digital signature.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -445,7 +442,7 @@ impl Default for Signature {
 }
 
 /// 智能合约 / Smart Contract
-/// 
+///
 /// 表示区块链上的智能合约。
 /// Represents a smart contract on the blockchain.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -479,7 +476,7 @@ impl SmartContract {
             version: "1.0.0".to_string(),
         }
     }
-    
+
     /// 执行合约方法 / Execute Contract Method
     pub fn execute(&mut self, _method: &str, _args: &[u8]) -> ExecutionResult {
         // 实现合约执行逻辑 / Implement contract execution logic
@@ -492,7 +489,7 @@ impl SmartContract {
 }
 
 /// 执行结果 / Execution Result
-/// 
+///
 /// 表示智能合约执行的结果。
 /// Represents the result of smart contract execution.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -506,7 +503,7 @@ pub struct ExecutionResult {
 }
 
 /// 验证结果 / Validation Result
-/// 
+///
 /// 表示验证操作的结果。
 /// Represents the result of a validation operation.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -518,7 +515,7 @@ pub struct ValidationResult {
 }
 
 /// 验证错误 / Validation Error
-/// 
+///
 /// 定义验证过程中可能出现的错误。
 /// Defines errors that may occur during validation.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -540,7 +537,7 @@ pub enum ValidationError {
 }
 
 /// 共识错误 / Consensus Error
-/// 
+///
 /// 定义共识过程中可能出现的错误。
 /// Defines errors that may occur during consensus.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -556,7 +553,7 @@ pub enum ConsensusError {
 }
 
 /// 合约错误 / Contract Error
-/// 
+///
 /// 定义智能合约相关的错误。
 /// Defines smart contract related errors.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -574,7 +571,7 @@ pub enum ContractError {
 }
 
 /// 网络错误 / Network Error
-/// 
+///
 /// 定义网络相关的错误。
 /// Defines network related errors.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -590,7 +587,7 @@ pub enum NetworkError {
 }
 
 /// 区块链错误 / Blockchain Error
-/// 
+///
 /// 定义区块链系统的通用错误。
 /// Defines common errors for the blockchain system.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -611,4 +608,4 @@ pub enum BlockchainError {
 pub const MAX_BLOCK_SIZE: u64 = 1_000_000; // 1MB
 pub const MAX_TRANSACTION_SIZE: u64 = 100_000; // 100KB
 pub const MIN_TRANSACTION_FEE: u64 = 1000; // 1000 satoshis
-pub const MAX_BLOCK_TIME: u64 = 600; // 10 minutes 
+pub const MAX_BLOCK_TIME: u64 = 600; // 10 minutes

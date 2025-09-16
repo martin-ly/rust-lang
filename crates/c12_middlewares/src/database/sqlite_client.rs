@@ -10,7 +10,9 @@ pub struct SqliteDb {
 impl SqliteDb {
     pub fn connect_memory() -> crate::error::Result<Self> {
         let conn = rusqlite::Connection::open_in_memory()?;
-        Ok(Self { conn: std::sync::Arc::new(conn) })
+        Ok(Self {
+            conn: std::sync::Arc::new(conn),
+        })
     }
 }
 
@@ -23,7 +25,8 @@ impl SqlDatabase for SqliteDb {
         let affected = tokio::task::spawn_blocking(move || -> crate::error::Result<u64> {
             let rows = conn.execute(&sql_owned, [])? as u64;
             Ok(rows)
-        }).await?;
+        })
+        .await?;
         affected
     }
 
@@ -32,16 +35,23 @@ impl SqlDatabase for SqliteDb {
         let sql_owned = sql.to_owned();
         let rows = tokio::task::spawn_blocking(move || -> crate::error::Result<Vec<SqlRow>> {
             let mut stmt = conn.prepare(&sql_owned)?;
-            let column_names: Vec<String> = stmt.column_names().iter().map(|s| s.to_string()).collect();
+            let column_names: Vec<String> =
+                stmt.column_names().iter().map(|s| s.to_string()).collect();
             let map = stmt.query_map([], |_| Ok(()))?; // 占位遍历
             let mut out = Vec::new();
             for _ in map {
-                let row = SqlRow(column_names.iter().cloned().map(|c| (c, String::new())).collect());
+                let row = SqlRow(
+                    column_names
+                        .iter()
+                        .cloned()
+                        .map(|c| (c, String::new()))
+                        .collect(),
+                );
                 out.push(row);
             }
             Ok(out)
-        }).await?;
+        })
+        .await?;
         rows
     }
 }
-

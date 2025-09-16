@@ -1,9 +1,9 @@
 //! 扩散调度器
-//! 
+//!
 //! 提供各种扩散模型的调度器
 
-use serde::{Deserialize, Serialize};
 use anyhow::Result;
+use serde::{Deserialize, Serialize};
 
 /// 调度器类型
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -33,7 +33,7 @@ impl DiffusionScheduler {
     pub fn new(config: SchedulerConfig) -> Self {
         Self { config }
     }
-    
+
     pub fn get_timesteps(&self) -> Vec<usize> {
         (0..self.config.num_steps).collect()
     }

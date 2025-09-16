@@ -1,9 +1,9 @@
 use libp2p::{
-    core::upgrade,
-    gossipsub, identify, identity, kad, ping,
-    noise, tcp, yamux,
-    swarm::{SwarmEvent, NetworkBehaviour},
     Multiaddr, PeerId, Transport,
+    core::upgrade,
+    gossipsub, identify, identity, kad, noise, ping,
+    swarm::{NetworkBehaviour, SwarmEvent},
+    tcp, yamux,
 };
 use std::time::Duration;
 
@@ -43,7 +43,12 @@ async fn main() -> anyhow::Result<()> {
     let identify = identify::Behaviour::new(identify::Config::new("c10/1.0".into(), key.public()));
 
     let topic = gossipsub::IdentTopic::new("c10-demo");
-    let mut behaviour = MyBehaviour { gossipsub, kademlia, ping, identify };
+    let mut behaviour = MyBehaviour {
+        gossipsub,
+        kademlia,
+        ping,
+        identify,
+    };
     let _ = behaviour.gossipsub.subscribe(&topic);
     let mut swarm = libp2p::Swarm::new(
         transport,
@@ -75,5 +80,3 @@ async fn main() -> anyhow::Result<()> {
         }
     }
 }
-
-

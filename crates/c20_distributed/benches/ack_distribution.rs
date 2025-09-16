@@ -1,7 +1,7 @@
 #![allow(unused)]
+use c20_distributed::consistency::ConsistencyLevel;
 use c20_distributed::replication::MajorityQuorum;
 use c20_distributed::replication::QuorumPolicy;
-use c20_distributed::consistency::ConsistencyLevel;
 
 #[allow(dead_code)]
 fn simulate_ack(total: usize, ok: usize) -> (usize, usize) {
@@ -27,5 +27,3 @@ fn main() {
         println!("ok={ok} need={need} pass={pass}");
     }
 }
-
-

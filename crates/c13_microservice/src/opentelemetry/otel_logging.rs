@@ -1,15 +1,15 @@
 //! 结构化日志模块
 
+use anyhow::Result;
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-use std::time::{SystemTime, UNIX_EPOCH, Duration};
-use std::sync::{Arc, Mutex, RwLock};
 use std::fs::OpenOptions;
 use std::io::Write;
-use std::thread;
 use std::sync::mpsc;
-use tracing::{debug, info, warn, error};
-use serde::{Serialize, Deserialize};
-use anyhow::Result;
+use std::sync::{Arc, Mutex, RwLock};
+use std::thread;
+use std::time::{Duration, SystemTime, UNIX_EPOCH};
+use tracing::{debug, error, info, warn};
 
 /// 异步日志写入器
 #[derive(Debug)]
@@ -22,7 +22,7 @@ impl AsyncLogWriter {
     pub fn new(slog_logger: Arc<SlogLogger>) -> Self {
         let (sender, receiver) = mpsc::channel();
         let slog_logger_clone = slog_logger.clone();
-        
+
         let worker_handle = thread::spawn(move || {
             while let Ok(entry) = receiver.recv() {
                 if let Err(e) = slog_logger_clone.write_log(entry) {
@@ -30,23 +30,26 @@ impl AsyncLogWriter {
                 }
             }
         });
-        
+
         Self {
             sender,
             worker_handle: Some(worker_handle),
         }
     }
-    
+
     pub fn send_log(&self, entry: LogEntry) -> Result<()> {
-        self.sender.send(entry)
+        self.sender
+            .send(entry)
             .map_err(|e| anyhow::anyhow!("Failed to send log entry: {}", e))?;
         Ok(())
     }
-    
+
     pub fn shutdown(mut self) -> Result<()> {
         drop(self.sender);
         if let Some(handle) = self.worker_handle.take() {
-            handle.join().map_err(|_| anyhow::anyhow!("Failed to join log worker thread"))?;
+            handle
+                .join()
+                .map_err(|_| anyhow::anyhow!("Failed to join log worker thread"))?;
         }
         Ok(())
     }
@@ -67,20 +70,23 @@ impl LogLevelFilter {
             LogLevel::Warn,
             LogLevel::Error,
         ];
-        
-        let min_level_index = all_levels.iter().position(|l| std::mem::discriminant(l) == std::mem::discriminant(&min_level)).unwrap_or(0);
+
+        let min_level_index = all_levels
+            .iter()
+            .position(|l| std::mem::discriminant(l) == std::mem::discriminant(&min_level))
+            .unwrap_or(0);
         let enabled_levels = all_levels.into_iter().skip(min_level_index).collect();
-        
+
         Self {
             min_level,
             enabled_levels,
         }
     }
-    
+
     pub fn is_enabled(&self, level: &LogLevel) -> bool {
         self.enabled_levels.contains(level)
     }
-    
+
     pub fn set_min_level(&mut self, level: LogLevel) {
         self.min_level = level.clone();
         let all_levels = vec![
@@ -89,8 +95,11 @@ impl LogLevelFilter {
             LogLevel::Warn,
             LogLevel::Error,
         ];
-        
-        let min_level_index = all_levels.iter().position(|l| std::mem::discriminant(l) == std::mem::discriminant(&level)).unwrap_or(0);
+
+        let min_level_index = all_levels
+            .iter()
+            .position(|l| std::mem::discriminant(l) == std::mem::discriminant(&level))
+            .unwrap_or(0);
         self.enabled_levels = all_levels.into_iter().skip(min_level_index).collect();
     }
 }
@@ -114,7 +123,7 @@ impl StructuredLogger {
         let mut default_fields = HashMap::new();
         default_fields.insert("service.name".to_string(), service_name.clone());
         default_fields.insert("service.version".to_string(), service_version.clone());
-        
+
         Self {
             service_name,
             service_version,
@@ -127,28 +136,28 @@ impl StructuredLogger {
             flush_interval: Duration::from_secs(5),
         }
     }
-    
+
     /// 设置SlogLogger
     pub fn set_slog_logger(&mut self, slog_logger: Arc<SlogLogger>) {
         self.slog_logger = Some(slog_logger.clone());
         self.async_writer = Some(AsyncLogWriter::new(slog_logger));
     }
-    
+
     /// 设置日志级别过滤器
     pub fn set_level_filter(&mut self, min_level: LogLevel) {
         self.level_filter.set_min_level(min_level);
     }
-    
+
     /// 设置缓冲区大小
     pub fn set_buffer_size(&mut self, size: usize) {
         self.buffer_size = size;
     }
-    
+
     /// 设置刷新间隔
     pub fn set_flush_interval(&mut self, interval: Duration) {
         self.flush_interval = interval;
     }
-    
+
     /// 验证日志字段
     fn validate_fields(&self, fields: &HashMap<String, String>) -> Result<()> {
         for (key, value) in fields {
@@ -164,7 +173,7 @@ impl StructuredLogger {
         }
         Ok(())
     }
-    
+
     /// 刷新日志缓冲区
     pub fn flush_buffer(&self) -> Result<()> {
         if let Ok(mut buffer) = self.log_buffer.write() {
@@ -180,7 +189,7 @@ impl StructuredLogger {
         }
         Ok(())
     }
-    
+
     /// 获取缓冲区中的日志数量
     pub fn get_buffer_size(&self) -> usize {
         if let Ok(buffer) = self.log_buffer.read() {
@@ -189,7 +198,7 @@ impl StructuredLogger {
             0
         }
     }
-    
+
     /// 获取最近的日志条目
     pub fn get_recent_logs(&self, count: usize) -> Vec<LogEntry> {
         if let Ok(buffer) = self.log_buffer.read() {
@@ -198,13 +207,13 @@ impl StructuredLogger {
             Vec::new()
         }
     }
-    
+
     pub fn log(&self, level: LogLevel, message: &str, fields: Option<HashMap<String, String>>) {
         // 检查日志级别是否启用
         if !self.level_filter.is_enabled(&level) {
             return;
         }
-        
+
         let mut log_fields = self.default_fields.clone();
         if let Some(fields) = fields {
             // 验证字段
@@ -214,12 +223,12 @@ impl StructuredLogger {
             }
             log_fields.extend(fields);
         }
-        
+
         let timestamp = SystemTime::now()
             .duration_since(UNIX_EPOCH)
             .unwrap()
             .as_millis();
-        
+
         let log_entry = LogEntry {
             timestamp: timestamp.to_string(),
             level: level.to_string(),
@@ -229,11 +238,11 @@ impl StructuredLogger {
             thread_id: Some(format!("{:?}", std::thread::current().id())),
             fields: log_fields,
         };
-        
+
         // 添加到缓冲区
         if let Ok(mut buffer) = self.log_buffer.write() {
             buffer.push(log_entry.clone());
-            
+
             // 如果缓冲区满了，刷新
             if buffer.len() >= self.buffer_size {
                 drop(buffer); // 释放锁
@@ -242,7 +251,7 @@ impl StructuredLogger {
                 }
             }
         }
-        
+
         // 使用异步写入器或直接写入
         if let Some(async_writer) = &self.async_writer {
             if let Err(e) = async_writer.send_log(log_entry.clone()) {
@@ -253,7 +262,7 @@ impl StructuredLogger {
                 eprintln!("Failed to write log: {}", e);
             }
         }
-        
+
         // 同时使用tracing进行日志记录
         match level {
             LogLevel::Debug => debug!("{:?}", log_entry),
@@ -262,23 +271,23 @@ impl StructuredLogger {
             LogLevel::Error => error!("{:?}", log_entry),
         }
     }
-    
+
     pub fn debug(&self, message: &str, fields: Option<HashMap<String, String>>) {
         self.log(LogLevel::Debug, message, fields);
     }
-    
+
     pub fn info(&self, message: &str, fields: Option<HashMap<String, String>>) {
         self.log(LogLevel::Info, message, fields);
     }
-    
+
     pub fn warn(&self, message: &str, fields: Option<HashMap<String, String>>) {
         self.log(LogLevel::Warn, message, fields);
     }
-    
+
     pub fn error(&self, message: &str, fields: Option<HashMap<String, String>>) {
         self.log(LogLevel::Error, message, fields);
     }
-    
+
     /// 记录HTTP请求日志
     pub fn log_http_request(&self, method: &str, path: &str, status_code: u16, duration_ms: u64) {
         let mut fields = HashMap::new();
@@ -286,16 +295,20 @@ impl StructuredLogger {
         fields.insert("http.path".to_string(), path.to_string());
         fields.insert("http.status_code".to_string(), status_code.to_string());
         fields.insert("http.duration_ms".to_string(), duration_ms.to_string());
-        
+
         let level = if status_code >= 400 {
             LogLevel::Warn
         } else {
             LogLevel::Info
         };
-        
-        self.log(level, &format!("HTTP {} {} - {}", method, path, status_code), Some(fields));
+
+        self.log(
+            level,
+            &format!("HTTP {} {} - {}", method, path, status_code),
+            Some(fields),
+        );
     }
-    
+
     /// 记录数据库查询日志
     pub fn log_database_query(&self, query: &str, duration_ms: u64, rows_affected: Option<u64>) {
         let mut fields = HashMap::new();
@@ -304,10 +317,10 @@ impl StructuredLogger {
         if let Some(rows) = rows_affected {
             fields.insert("db.rows_affected".to_string(), rows.to_string());
         }
-        
+
         self.info("Database query executed", Some(fields));
     }
-    
+
     /// 记录错误日志
     pub fn log_error(&self, error: &str, context: Option<HashMap<String, String>>) {
         let mut fields = HashMap::new();
@@ -315,26 +328,35 @@ impl StructuredLogger {
         if let Some(context) = context {
             fields.extend(context);
         }
-        
+
         self.error("An error occurred", Some(fields));
     }
-    
+
     /// 记录性能指标日志
-    pub fn log_performance(&self, operation: &str, duration_ms: u64, additional_fields: Option<HashMap<String, String>>) {
+    pub fn log_performance(
+        &self,
+        operation: &str,
+        duration_ms: u64,
+        additional_fields: Option<HashMap<String, String>>,
+    ) {
         let mut fields = HashMap::new();
         fields.insert("operation".to_string(), operation.to_string());
         fields.insert("duration_ms".to_string(), duration_ms.to_string());
         if let Some(additional) = additional_fields {
             fields.extend(additional);
         }
-        
+
         let level = if duration_ms > 1000 {
             LogLevel::Warn
         } else {
             LogLevel::Info
         };
-        
-        self.log(level, &format!("Performance: {} took {}ms", operation, duration_ms), Some(fields));
+
+        self.log(
+            level,
+            &format!("Performance: {} took {}ms", operation, duration_ms),
+            Some(fields),
+        );
     }
 }
 
@@ -410,15 +432,15 @@ pub struct SlogLogger {
 
 impl SlogLogger {
     pub fn new(config: LogConfig) -> Self {
-        Self { 
+        Self {
             config,
             file_writer: None,
         }
     }
-    
+
     pub fn init(&mut self) -> Result<(), Box<dyn std::error::Error>> {
         info!("Initializing Slog logger with config: {:?}", self.config);
-        
+
         // 如果启用文件输出，创建文件写入器
         if self.config.enable_file {
             if let Some(file_path) = &self.config.file_path {
@@ -426,24 +448,24 @@ impl SlogLogger {
                 if let Some(parent) = std::path::Path::new(file_path).parent() {
                     std::fs::create_dir_all(parent)?;
                 }
-                
+
                 let file = OpenOptions::new()
                     .create(true)
                     .append(true)
                     .open(file_path)?;
-                
+
                 self.file_writer = Some(Arc::new(Mutex::new(file)));
                 info!("File logging enabled: {}", file_path);
             }
         }
-        
+
         Ok(())
     }
-    
+
     /// 写入日志条目
     pub fn write_log(&self, entry: LogEntry) -> Result<(), Box<dyn std::error::Error>> {
         let formatted_log = self.format_log_entry(&entry)?;
-        
+
         // 控制台输出
         if self.config.enable_console {
             match entry.level.as_str() {
@@ -454,7 +476,7 @@ impl SlogLogger {
                 _ => info!("{}", formatted_log),
             }
         }
-        
+
         // 文件输出
         if self.config.enable_file {
             if let Some(writer) = &self.file_writer {
@@ -463,45 +485,46 @@ impl SlogLogger {
                 file.flush()?;
             }
         }
-        
+
         Ok(())
     }
-    
+
     /// 格式化日志条目
     fn format_log_entry(&self, entry: &LogEntry) -> Result<String, Box<dyn std::error::Error>> {
         match self.config.format.as_str() {
-            "json" => {
-                Ok(serde_json::to_string(entry)?)
-            },
+            "json" => Ok(serde_json::to_string(entry)?),
             "text" => {
                 let mut formatted = String::new();
-                
+
                 if self.config.include_timestamp {
                     formatted.push_str(&format!("[{}] ", entry.timestamp));
                 }
-                
+
                 formatted.push_str(&format!("{} ", entry.level));
-                formatted.push_str(&format!("{}:{} ", entry.service_name, entry.service_version));
-                
+                formatted.push_str(&format!(
+                    "{}:{} ",
+                    entry.service_name, entry.service_version
+                ));
+
                 if let Some(thread_id) = &entry.thread_id {
                     formatted.push_str(&format!("[{}] ", thread_id));
                 }
-                
+
                 formatted.push_str(&entry.message);
-                
+
                 if !entry.fields.is_empty() {
                     formatted.push_str(" | ");
                     for (key, value) in &entry.fields {
                         formatted.push_str(&format!("{}={} ", key, value));
                     }
                 }
-                
+
                 Ok(formatted)
-            },
+            }
             _ => Ok(serde_json::to_string(entry)?),
         }
     }
-    
+
     /// 检查是否需要日志轮转
     pub fn check_rotation(&self) -> Result<(), Box<dyn std::error::Error>> {
         if let Some(file_path) = &self.config.file_path {
@@ -515,16 +538,16 @@ impl SlogLogger {
         }
         Ok(())
     }
-    
+
     /// 执行日志轮转
     fn rotate_log_file(&self, file_path: &str) -> Result<(), Box<dyn std::error::Error>> {
         let max_files = self.config.max_files.unwrap_or(5);
-        
+
         // 删除最旧的文件
         for i in (1..max_files).rev() {
             let old_file = format!("{}.{}", file_path, i);
             let new_file = format!("{}.{}", file_path, i + 1);
-            
+
             if std::path::Path::new(&old_file).exists() {
                 if i == max_files - 1 {
                     std::fs::remove_file(&old_file)?;
@@ -533,12 +556,12 @@ impl SlogLogger {
                 }
             }
         }
-        
+
         // 重命名当前文件
         if std::path::Path::new(file_path).exists() {
             std::fs::rename(file_path, &format!("{}.1", file_path))?;
         }
-        
+
         info!("Log file rotated: {}", file_path);
         Ok(())
     }
@@ -550,7 +573,7 @@ impl SlogLogger {
 pub struct LogAggregator {
     logs: Arc<RwLock<Vec<LogEntry>>>,
     max_logs: usize,
-    
+
     aggregation_window: Duration,
 }
 
@@ -562,11 +585,11 @@ impl LogAggregator {
             aggregation_window,
         }
     }
-    
+
     pub fn add_log(&self, entry: LogEntry) {
         if let Ok(mut logs) = self.logs.write() {
             logs.push(entry);
-            
+
             // 保持最大日志数量
             if logs.len() > self.max_logs {
                 let excess = logs.len() - self.max_logs;
@@ -574,7 +597,7 @@ impl LogAggregator {
             }
         }
     }
-    
+
     pub fn get_logs_by_level(&self, level: &str) -> Vec<LogEntry> {
         if let Ok(logs) = self.logs.read() {
             logs.iter()
@@ -585,7 +608,7 @@ impl LogAggregator {
             Vec::new()
         }
     }
-    
+
     pub fn get_logs_by_time_range(&self, start_time: u64, end_time: u64) -> Vec<LogEntry> {
         if let Ok(logs) = self.logs.read() {
             logs.iter()
@@ -602,19 +625,19 @@ impl LogAggregator {
             Vec::new()
         }
     }
-    
+
     pub fn get_error_logs(&self) -> Vec<LogEntry> {
         self.get_logs_by_level("ERROR")
     }
-    
+
     pub fn get_warning_logs(&self) -> Vec<LogEntry> {
         self.get_logs_by_level("WARN")
     }
-    
+
     pub fn get_log_statistics(&self) -> LogStatistics {
         if let Ok(logs) = self.logs.read() {
             let mut stats = LogStatistics::default();
-            
+
             for log in logs.iter() {
                 match log.level.as_str() {
                     "DEBUG" => stats.debug_count += 1,
@@ -624,14 +647,14 @@ impl LogAggregator {
                     _ => {}
                 }
             }
-            
+
             stats.total_count = logs.len();
             stats
         } else {
             LogStatistics::default()
         }
     }
-    
+
     pub fn clear_old_logs(&self, cutoff_time: u64) -> usize {
         if let Ok(mut logs) = self.logs.write() {
             let initial_count = logs.len();
@@ -667,7 +690,7 @@ impl LogStatistics {
             self.error_count as f64 / self.total_count as f64
         }
     }
-    
+
     pub fn warning_rate(&self) -> f64 {
         if self.total_count == 0 {
             0.0
@@ -679,65 +702,67 @@ impl LogStatistics {
 
 /// 初始化日志系统
 pub fn init_logging(config: LogConfig) -> Result<(), Box<dyn std::error::Error>> {
-    info!("Initializing logging system with level: {}, format: {}, output: {}", 
-          config.level, config.format, config.output);
+    info!(
+        "Initializing logging system with level: {}, format: {}, output: {}",
+        config.level, config.format, config.output
+    );
     Ok(())
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_structured_logger() {
         let logger = StructuredLogger::new("test_service".to_string(), "1.0.0".to_string());
-        
+
         let mut fields = HashMap::new();
         fields.insert("user_id".to_string(), "123".to_string());
-        
+
         // 这些调用不会panic，只是记录日志
         logger.info("Test message", Some(fields));
         logger.error("Error message", None);
     }
-    
+
     #[test]
     fn test_http_request_logging() {
         let logger = StructuredLogger::new("test_service".to_string(), "1.0.0".to_string());
-        
+
         logger.log_http_request("GET", "/api/users", 200, 150);
         logger.log_http_request("POST", "/api/users", 400, 50);
     }
-    
+
     #[test]
     fn test_database_query_logging() {
         let logger = StructuredLogger::new("test_service".to_string(), "1.0.0".to_string());
-        
+
         logger.log_database_query("SELECT * FROM users", 25, Some(10));
         logger.log_database_query("INSERT INTO users", 15, Some(1));
     }
-    
+
     #[test]
     fn test_error_logging() {
         let logger = StructuredLogger::new("test_service".to_string(), "1.0.0".to_string());
-        
+
         let mut context = HashMap::new();
         context.insert("user_id".to_string(), "123".to_string());
         context.insert("operation".to_string(), "create_user".to_string());
-        
+
         logger.log_error("Database connection failed", Some(context));
     }
-    
+
     #[test]
     fn test_performance_logging() {
         let logger = StructuredLogger::new("test_service".to_string(), "1.0.0".to_string());
-        
+
         let mut fields = HashMap::new();
         fields.insert("cache_hit".to_string(), "true".to_string());
-        
+
         logger.log_performance("user_lookup", 50, Some(fields));
         logger.log_performance("heavy_computation", 1500, None);
     }
-    
+
     #[test]
     fn test_log_config() {
         let config = LogConfig::default();
@@ -745,7 +770,7 @@ mod tests {
         assert_eq!(config.format, "json");
         assert_eq!(config.output, "stdout");
     }
-    
+
     #[test]
     fn test_slog_logger() {
         let config = LogConfig::default();

@@ -1,8 +1,8 @@
 use crate::error::{NetworkError, NetworkResult};
 use pnet_datalink::{self as datalink, Channel, Config, NetworkInterface};
+use pnet_packet::Packet;
 use pnet_packet::arp::{ArpHardwareTypes, ArpOperations, ArpPacket};
 use pnet_packet::ethernet::{EtherTypes, EthernetPacket};
-use pnet_packet::Packet;
 use std::net::{IpAddr, Ipv4Addr};
 use std::time::SystemTime;
 
@@ -24,7 +24,10 @@ pub struct ArpSniffConfig {
 
 impl Default for ArpSniffConfig {
     fn default() -> Self {
-        Self { iface_name: None, promiscuous: true }
+        Self {
+            iface_name: None,
+            promiscuous: true,
+        }
     }
 }
 
@@ -40,11 +43,16 @@ impl ArpSniffer {
         if let Some(hint) = name_hint {
             interfaces.into_iter().find(|i| i.name == hint)
         } else {
-            interfaces.into_iter().find(|i| !i.is_loopback() && !i.ips.is_empty())
+            interfaces
+                .into_iter()
+                .find(|i| !i.is_loopback() && !i.ips.is_empty())
         }
     }
 
-    pub fn sniff_arp_sync(cfg: ArpSniffConfig, limit: Option<usize>) -> NetworkResult<Vec<ArpRecord>> {
+    pub fn sniff_arp_sync(
+        cfg: ArpSniffConfig,
+        limit: Option<usize>,
+    ) -> NetworkResult<Vec<ArpRecord>> {
         let iface = Self::pick_interface(cfg.iface_name.as_deref())
             .ok_or_else(|| NetworkError::Configuration("no suitable interface".into()))?;
 
@@ -78,9 +86,13 @@ impl ArpSniffer {
 
 fn parse_arp_frame(frame: &[u8]) -> Option<ArpRecord> {
     let eth = EthernetPacket::new(frame)?;
-    if eth.get_ethertype() != EtherTypes::Arp { return None; }
+    if eth.get_ethertype() != EtherTypes::Arp {
+        return None;
+    }
     let arp = ArpPacket::new(eth.payload())?;
-    if arp.get_hardware_type() != ArpHardwareTypes::Ethernet { return None; }
+    if arp.get_hardware_type() != ArpHardwareTypes::Ethernet {
+        return None;
+    }
 
     let sender_mac = format!("{}", eth.get_source());
     let target_mac = Some(format!("{}", eth.get_destination()));
@@ -90,9 +102,17 @@ fn parse_arp_frame(frame: &[u8]) -> Option<ArpRecord> {
         ArpOperations::Request => "request",
         ArpOperations::Reply => "reply",
         _ => "other",
-    }.to_string();
+    }
+    .to_string();
 
-    Some(ArpRecord { sender_mac, sender_ip, target_mac, target_ip, op, at: SystemTime::now() })
+    Some(ArpRecord {
+        sender_mac,
+        sender_ip,
+        target_mac,
+        target_ip,
+        op,
+        at: SystemTime::now(),
+    })
 }
 
 #[cfg(test)]

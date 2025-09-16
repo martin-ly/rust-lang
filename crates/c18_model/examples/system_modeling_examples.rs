@@ -1,5 +1,5 @@
 //! 系统建模的Rust实现示例
-//! 
+//!
 //! 本文件展示了如何使用Rust实现各种系统建模技术，
 //! 包括排队论、性能分析、可靠性建模等。
 
@@ -7,7 +7,7 @@ use std::collections::HashMap;
 use std::time::{Duration, Instant};
 
 /// 排队论模型 - M/M/1 排队系统
-/// 
+///
 /// 实现经典的M/M/1排队模型，用于分析系统性能
 #[derive(Debug, Clone)]
 pub struct MM1Queue {
@@ -71,7 +71,7 @@ impl MM1Queue {
 }
 
 /// 性能分析器
-/// 
+///
 /// 用于分析系统性能指标
 #[derive(Debug)]
 pub struct PerformanceAnalyzer {
@@ -87,14 +87,17 @@ impl PerformanceAnalyzer {
 
     /// 记录性能指标
     pub fn record_metric(&mut self, name: &str, value: f64) {
-        self.metrics.entry(name.to_string()).or_insert_with(Vec::new).push(value);
+        self.metrics
+            .entry(name.to_string())
+            .or_insert_with(Vec::new)
+            .push(value);
     }
 
     /// 计算平均性能指标
     pub fn average_metric(&self, name: &str) -> Option<f64> {
-        self.metrics.get(name).map(|values| {
-            values.iter().sum::<f64>() / values.len() as f64
-        })
+        self.metrics
+            .get(name)
+            .map(|values| values.iter().sum::<f64>() / values.len() as f64)
     }
 
     /// 计算性能指标的标准差
@@ -105,10 +108,9 @@ impl PerformanceAnalyzer {
         }
 
         let mean = values.iter().sum::<f64>() / values.len() as f64;
-        let variance = values.iter()
-            .map(|v| (v - mean).powi(2))
-            .sum::<f64>() / (values.len() - 1) as f64;
-        
+        let variance =
+            values.iter().map(|v| (v - mean).powi(2)).sum::<f64>() / (values.len() - 1) as f64;
+
         Some(variance.sqrt())
     }
 
@@ -116,25 +118,30 @@ impl PerformanceAnalyzer {
     pub fn generate_report(&self) -> String {
         let mut report = String::new();
         report.push_str("=== 性能分析报告 ===\n");
-        
+
         for (metric_name, values) in &self.metrics {
             let avg = self.average_metric(metric_name).unwrap_or(0.0);
             let std_dev = self.metric_std_dev(metric_name).unwrap_or(0.0);
             let min = values.iter().fold(f64::INFINITY, |a, &b| a.min(b));
             let max = values.iter().fold(f64::NEG_INFINITY, |a, &b| a.max(b));
-            
+
             report.push_str(&format!(
                 "{}: 平均={:.2}, 标准差={:.2}, 最小值={:.2}, 最大值={:.2}, 样本数={}\n",
-                metric_name, avg, std_dev, min, max, values.len()
+                metric_name,
+                avg,
+                std_dev,
+                min,
+                max,
+                values.len()
             ));
         }
-        
+
         report
     }
 }
 
 /// 可靠性分析器
-/// 
+///
 /// 用于分析系统可靠性指标
 #[derive(Debug, Clone)]
 pub struct ReliabilityAnalyzer {
@@ -199,20 +206,18 @@ impl ReliabilityAnalyzer {
 
         while current_time < duration {
             // 计算到下次故障的时间
-            let time_to_failure = Duration::from_secs_f64(
-                -1.0 / self.failure_rate * (1.0 - fastrand::f64()).ln()
-            );
-            
+            let time_to_failure =
+                Duration::from_secs_f64(-1.0 / self.failure_rate * (1.0 - fastrand::f64()).ln());
+
             if current_time + time_to_failure <= duration {
                 total_uptime += time_to_failure;
                 current_time += time_to_failure;
                 failure_count += 1;
-                
+
                 // 计算修复时间
-                let repair_time = Duration::from_secs_f64(
-                    -1.0 / self.repair_rate * (1.0 - fastrand::f64()).ln()
-                );
-                
+                let repair_time =
+                    Duration::from_secs_f64(-1.0 / self.repair_rate * (1.0 - fastrand::f64()).ln());
+
                 if current_time + repair_time <= duration {
                     total_downtime += repair_time;
                     current_time += repair_time;
@@ -246,7 +251,7 @@ pub struct SimulationResult {
 }
 
 /// 可扩展性分析器
-/// 
+///
 /// 用于分析系统可扩展性
 #[derive(Debug)]
 pub struct ScalabilityAnalyzer {
@@ -288,30 +293,30 @@ fn main() {
     // 1. 排队论示例
     println!("1. M/M/1 排队系统分析");
     let queue = MM1Queue::new(2.0, 3.0);
-    
+
     match queue.average_queue_length() {
         Ok(length) => println!("   平均队长: {:.2}", length),
         Err(e) => println!("   错误: {}", e),
     }
-    
+
     match queue.average_waiting_time() {
         Ok(time) => println!("   平均等待时间: {:.2} 秒", time),
         Err(e) => println!("   错误: {}", e),
     }
-    
+
     println!("   系统利用率: {:.2}%", queue.utilization() * 100.0);
     println!();
 
     // 2. 性能分析示例
     println!("2. 性能分析");
     let mut analyzer = PerformanceAnalyzer::new();
-    
+
     // 模拟一些性能数据
     for i in 0..100 {
         analyzer.record_metric("响应时间", 100.0 + (i as f64 * 0.1));
         analyzer.record_metric("吞吐量", 1000.0 - (i as f64 * 0.5));
     }
-    
+
     println!("{}", analyzer.generate_report());
 
     // 3. 可靠性分析示例
@@ -319,29 +324,46 @@ fn main() {
     let mut reliability = ReliabilityAnalyzer::new();
     reliability.add_component("CPU".to_string(), 0.0001, 0.01);
     reliability.add_component("内存".to_string(), 0.0002, 0.02);
-    
-    println!("   系统可用性: {:.2}%", reliability.system_availability() * 100.0);
-    println!("   平均故障间隔时间: {:.2} 小时", reliability.mean_time_between_failures() / 3600.0);
-    println!("   平均修复时间: {:.2} 小时", reliability.mean_time_to_repair() / 3600.0);
-    
+
+    println!(
+        "   系统可用性: {:.2}%",
+        reliability.system_availability() * 100.0
+    );
+    println!(
+        "   平均故障间隔时间: {:.2} 小时",
+        reliability.mean_time_between_failures() / 3600.0
+    );
+    println!(
+        "   平均修复时间: {:.2} 小时",
+        reliability.mean_time_to_repair() / 3600.0
+    );
+
     // 运行可靠性模拟
     let simulation_result = reliability.simulate_system(Duration::from_secs(86400)); // 24小时
     println!("   模拟结果 (24小时):");
-    println!("     可用性: {:.2}%", simulation_result.availability * 100.0);
+    println!(
+        "     可用性: {:.2}%",
+        simulation_result.availability * 100.0
+    );
     println!("     故障次数: {}", simulation_result.failure_count);
     println!();
 
     // 4. 可扩展性分析示例
     println!("4. 可扩展性分析");
     let scalability = ScalabilityAnalyzer::new(1000.0, 100.0);
-    
+
     for scale in [1.0, 2.0, 4.0, 8.0] {
         let throughput = scalability.scaled_throughput(scale);
         let latency = scalability.scaled_latency(scale);
         let efficiency = scalability.scaling_efficiency(scale);
-        
-        println!("   扩展 {}x: 吞吐量={:.0}, 延迟={:.1}ms, 效率={:.1}%", 
-                scale, throughput, latency, efficiency * 100.0);
+
+        println!(
+            "   扩展 {}x: 吞吐量={:.0}, 延迟={:.1}ms, 效率={:.1}%",
+            scale,
+            throughput,
+            latency,
+            efficiency * 100.0
+        );
     }
 }
 
@@ -370,7 +392,7 @@ mod tests {
         analyzer.record_metric("test", 1.0);
         analyzer.record_metric("test", 2.0);
         analyzer.record_metric("test", 3.0);
-        
+
         assert_eq!(analyzer.average_metric("test"), Some(2.0));
     }
 

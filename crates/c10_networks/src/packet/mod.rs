@@ -1,5 +1,5 @@
 //! 数据包处理模块
-//! 
+//!
 //! 本模块提供了基于 Rust 1.89 的数据包处理功能，
 //! 包括数据包解析、序列化、缓冲管理等功能。
 
@@ -7,7 +7,7 @@ pub mod buffer;
 pub mod parser;
 pub mod serializer;
 
-pub use buffer::{PacketBuffer, BufferError};
+pub use buffer::{BufferError, PacketBuffer};
 pub use parser::{PacketParser, ParseResult};
 pub use serializer::{PacketSerializer, SerializeResult};
 
@@ -168,7 +168,7 @@ impl PacketBuilder {
     pub fn build(self) -> Packet {
         let length = self.payload.len() as u32;
         let mut header = PacketHeader::new(self.packet_type, length).with_flags(self.flags);
-        
+
         if let Some(seq) = self.sequence_number {
             header.sequence_number = Some(seq);
         }
@@ -326,7 +326,7 @@ mod tests {
     fn test_packet_creation() {
         let payload = Bytes::copy_from_slice(b"test data");
         let packet = Packet::new(PacketType::Raw, payload.clone());
-        
+
         assert_eq!(packet.packet_type(), &PacketType::Raw);
         assert_eq!(packet.payload_length(), payload.len());
         assert!(!packet.is_empty());
@@ -350,13 +350,13 @@ mod tests {
     #[test]
     fn test_packet_stats() {
         let mut stats = PacketStats::new();
-        
+
         let packet1 = Packet::new(PacketType::Raw, Bytes::copy_from_slice(b"data1"));
         let packet2 = Packet::new(PacketType::Http, Bytes::copy_from_slice(b"data2"));
-        
+
         stats.add_packet(&packet1);
         stats.add_packet(&packet2);
-        
+
         assert_eq!(stats.total_packets, 2);
         assert_eq!(stats.packets_of_type(&PacketType::Raw), 1);
         assert_eq!(stats.packets_of_type(&PacketType::Http), 1);

@@ -2,9 +2,11 @@ use hyper::body::Incoming;
 use hyper::service::service_fn;
 use hyper::{Method, Request, Response, StatusCode};
 use hyper_util::rt::TokioExecutor;
-use hyper_util::server::conn::auto::Builder;
 use hyper_util::rt::TokioIo;
-use prometheus::{Encoder, TextEncoder, IntCounter, IntGauge, register_int_counter, register_int_gauge};
+use hyper_util::server::conn::auto::Builder;
+use prometheus::{
+    Encoder, IntCounter, IntGauge, TextEncoder, register_int_counter, register_int_gauge,
+};
 use std::convert::Infallible;
 use std::net::SocketAddr;
 use std::time::Duration;
@@ -81,5 +83,3 @@ async fn main() -> anyhow::Result<()> {
 
     Ok(())
 }
-
-

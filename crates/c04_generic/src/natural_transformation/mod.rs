@@ -54,7 +54,7 @@ impl NaturalTransformation<A, B> for AtoB {
 ```rust
 trait Functor<A, B> {
     type Output;
-    
+
     fn map<F>(self, f: F) -> Self::Output
     where
         F: Fn(A) -> B;
@@ -64,7 +64,7 @@ struct OptionFunctor<T>(Option<T>);
 
 impl<T> Functor<T, T> for OptionFunctor<T> {
     type Output = OptionFunctor<T>;
-    
+
     fn map<F>(self, f: F) -> Self::Output
     where
         F: Fn(T) -> T,
@@ -92,7 +92,7 @@ where
 trait HigherOrderFunctor<A, B> {
     type Inner;
     type Output;
-    
+
     fn lift<F>(self, f: F) -> Self::Output
     where
         F: NaturalTransformation<A, B>;
@@ -103,7 +103,7 @@ struct VecFunctor<T>(Vec<T>);
 impl<T> HigherOrderFunctor<T, T> for VecFunctor<T> {
     type Inner = T;
     type Output = VecFunctor<T>;
-    
+
     fn lift<F>(self, _f: F) -> Self::Output
     where
         F: NaturalTransformation<T, T>,
@@ -144,7 +144,7 @@ impl NaturalTransformation<String, String> for StringTransformation {
     fn transform(&self, s: String) -> String {
         let number_converter = StringToNumber;
         let string_converter = NumberToString;
-        
+
         let number = number_converter.convert(s);
         string_converter.convert(number)
     }
@@ -172,11 +172,11 @@ impl<T> DataStructure<T> for VecStructure<T> {
     fn add(&mut self, item: T) {
         self.data.push(item);
     }
-    
+
     fn get(&self, index: usize) -> Option<&T> {
         self.data.get(index)
     }
-    
+
     fn len(&self) -> usize {
         self.data.len()
     }
@@ -186,11 +186,11 @@ impl<T> DataStructure<T> for LinkedListStructure<T> {
     fn add(&mut self, item: T) {
         self.data.push_back(item);
     }
-    
+
     fn get(&self, index: usize) -> Option<&T> {
         self.data.iter().nth(index)
     }
-    
+
     fn len(&self) -> usize {
         self.data.len()
     }
@@ -204,11 +204,11 @@ impl<T> NaturalTransformation<VecStructure<T>, LinkedListStructure<T>> for VecTo
         let mut linked_list = LinkedListStructure {
             data: std::collections::LinkedList::new(),
         };
-        
+
         for item in vec_struct.data {
             linked_list.add(item);
         }
-        
+
         linked_list
     }
 }
@@ -278,7 +278,7 @@ impl TransformComposition<String, i32, f64> for Composer {
             f: F,
             g: G,
         }
-        
+
         impl<F, G> NaturalTransformation<String, f64> for ComposedTransform<F, G>
         where
             F: NaturalTransformation<String, i32>,
@@ -289,7 +289,7 @@ impl TransformComposition<String, i32, f64> for Composer {
                 self.g.transform(intermediate)
             }
         }
-        
+
         ComposedTransform { f, g }
     }
 }
@@ -369,7 +369,7 @@ impl NaturalTransformation<A, B> for AtoB {
 // 泛型自然变换
 pub trait Functor<A, B> {
     type Output;
-    
+
     fn map<F>(self, f: F) -> Self::Output
     where
         F: Fn(A) -> B;
@@ -379,7 +379,7 @@ pub struct OptionFunctor<T>(pub Option<T>);
 
 impl<T> Functor<T, T> for OptionFunctor<T> {
     type Output = OptionFunctor<T>;
-    
+
     fn map<F>(self, f: F) -> Self::Output
     where
         F: Fn(T) -> T,
@@ -427,7 +427,7 @@ impl NaturalTransformation<String, String> for StringTransformation {
     fn transform(&self, s: String) -> String {
         let number_converter = StringToNumber;
         let string_converter = NumberToString;
-        
+
         let number = number_converter.convert(s);
         string_converter.convert(number)
     }
@@ -453,15 +453,15 @@ impl<T> DataStructure<T> for VecStructure<T> {
     fn add(&mut self, item: T) {
         self.data.push(item);
     }
-    
+
     fn get(&self, index: usize) -> Option<&T> {
         self.data.get(index)
     }
-    
+
     fn len(&self) -> usize {
         self.data.len()
     }
-    
+
     fn is_empty(&self) -> bool {
         self.data.is_empty()
     }
@@ -471,15 +471,15 @@ impl<T> DataStructure<T> for LinkedListStructure<T> {
     fn add(&mut self, item: T) {
         self.data.push_back(item);
     }
-    
+
     fn get(&self, index: usize) -> Option<&T> {
         self.data.iter().nth(index)
     }
-    
+
     fn len(&self) -> usize {
         self.data.len()
     }
-    
+
     fn is_empty(&self) -> bool {
         self.data.is_empty()
     }
@@ -493,11 +493,11 @@ impl<T> NaturalTransformation<VecStructure<T>, LinkedListStructure<T>> for VecTo
         let mut linked_list = LinkedListStructure {
             data: std::collections::LinkedList::new(),
         };
-        
+
         for item in vec_struct.data {
             linked_list.add(item);
         }
-        
+
         linked_list
     }
 }
@@ -564,19 +564,19 @@ impl ConditionalTransformation<String, i32> for ConditionalConverter {
 // 演示函数
 pub fn demonstrate_natural_transformation() {
     println!("=== Natural Transformation Demonstration ===\n");
-    
+
     // 基本变换演示
     demonstrate_basic_transformation();
-    
+
     // 类型转换演示
     demonstrate_type_conversion();
-    
+
     // 数据结构变换演示
     demonstrate_data_structure_transformation();
-    
+
     // 错误处理变换演示
     demonstrate_error_handling_transformation();
-    
+
     // 条件变换演示
     demonstrate_conditional_transformation();
 }
@@ -584,10 +584,10 @@ pub fn demonstrate_natural_transformation() {
 // 基本变换演示
 fn demonstrate_basic_transformation() {
     println!("--- Basic Transformation Demo ---");
-    
+
     let a = A { value: 42 };
     let transformer = AtoB;
-    
+
     let b = transformer.transform(a);
     println!("A's value: 42");
     println!("B's value: {}", b.value);
@@ -597,10 +597,10 @@ fn demonstrate_basic_transformation() {
 // 类型转换演示
 fn demonstrate_type_conversion() {
     println!("--- Type Conversion Demo ---");
-    
+
     let string_value = "123".to_string();
     let transformer = StringTransformation;
-    
+
     let result = transformer.transform(string_value);
     println!("Original string: 123");
     println!("Transformed string: {}", result);
@@ -610,15 +610,17 @@ fn demonstrate_type_conversion() {
 // 数据结构变换演示
 fn demonstrate_data_structure_transformation() {
     println!("--- Data Structure Transformation Demo ---");
-    
-    let vec_struct = VecStructure { data: vec![1, 2, 3, 4, 5] };
+
+    let vec_struct = VecStructure {
+        data: vec![1, 2, 3, 4, 5],
+    };
     let transformer = VecToLinkedList;
-    
+
     println!("Vector structure length: {}", vec_struct.len());
-    
+
     let linked_list_struct = transformer.transform(vec_struct);
     println!("LinkedList structure length: {}", linked_list_struct.len());
-    
+
     if let Some(value) = linked_list_struct.get(2) {
         println!("Value at index 2: {}", value);
     }
@@ -628,15 +630,15 @@ fn demonstrate_data_structure_transformation() {
 // 错误处理变换演示
 fn demonstrate_error_handling_transformation() {
     println!("--- Error Handling Transformation Demo ---");
-    
+
     let string_error = "Something went wrong".to_string();
     let io_error = std::io::Error::new(std::io::ErrorKind::NotFound, "File not found");
-    
+
     let handler = UnifiedErrorHandler;
-    
+
     let string_result = handler.transform(string_error);
     let io_result = handler.transform(io_error);
-    
+
     println!("String error result: {}", string_result);
     println!("IO error result: {}", io_result);
     println!();
@@ -645,15 +647,15 @@ fn demonstrate_error_handling_transformation() {
 // 条件变换演示
 fn demonstrate_conditional_transformation() {
     println!("--- Conditional Transformation Demo ---");
-    
+
     let converter = ConditionalConverter;
-    
+
     let valid_string = "42".to_string();
     let invalid_string = "not a number".to_string();
-    
+
     let valid_result = converter.transform_if(valid_string, |s| s.parse::<i32>().is_ok());
     let invalid_result = converter.transform_if(invalid_string, |s| s.parse::<i32>().is_ok());
-    
+
     println!("Valid string transformation: {:?}", valid_result);
     println!("Invalid string transformation: {:?}", invalid_result);
     println!();
@@ -663,53 +665,55 @@ fn demonstrate_conditional_transformation() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_basic_transformation() {
         let a = A { value: 42 };
         let transformer = AtoB;
         let b = transformer.transform(a);
-        
+
         assert_eq!(b.value, "42");
     }
-    
+
     #[test]
     fn test_string_transformation() {
         let transformer = StringTransformation;
         let result = transformer.transform("123".to_string());
-        
+
         assert_eq!(result, "123");
     }
-    
+
     #[test]
     fn test_vec_to_linked_list() {
-        let vec_struct = VecStructure { data: vec![1, 2, 3] };
+        let vec_struct = VecStructure {
+            data: vec![1, 2, 3],
+        };
         let transformer = VecToLinkedList;
-        
+
         assert_eq!(vec_struct.len(), 3);
-        
+
         let linked_list_struct = transformer.transform(vec_struct);
         assert_eq!(linked_list_struct.len(), 3);
-        
+
         if let Some(value) = linked_list_struct.get(1) {
             assert_eq!(*value, 2);
         }
     }
-    
+
     #[test]
     fn test_error_handling_transformation() {
         let handler = UnifiedErrorHandler;
         let string_error = "Test error".to_string();
-        
+
         let result = handler.transform(string_error);
         assert!(result.contains("String error: Test error"));
     }
-    
+
     #[test]
     fn test_conditional_transformation() {
         let converter = ConditionalConverter;
         let valid_string = "42".to_string();
-        
+
         let result = converter.transform_if(valid_string, |s| s.parse::<i32>().is_ok());
         assert_eq!(result, Some(42));
     }

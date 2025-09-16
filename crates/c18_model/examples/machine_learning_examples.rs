@@ -1,5 +1,5 @@
 //! 机器学习的Rust实现示例
-//! 
+//!
 //! 本文件展示了如何使用Rust实现各种机器学习算法，
 //! 包括线性回归、逻辑回归、KMeans聚类、决策树等。
 
@@ -7,7 +7,7 @@ use std::collections::HashMap;
 use std::f64;
 
 /// 线性回归模型
-/// 
+///
 /// 实现最小二乘法线性回归
 #[derive(Debug, Clone)]
 pub struct LinearRegression {
@@ -39,7 +39,7 @@ impl LinearRegression {
         self.bias = 0.0;
 
         let n_samples = x.len();
-        
+
         for iteration in 0..self.max_iterations {
             let mut total_loss = 0.0;
             let mut weight_gradients = vec![0.0; n_features];
@@ -69,7 +69,7 @@ impl LinearRegression {
             if iteration % 100 == 0 {
                 println!("迭代 {}: 平均损失 = {:.6}", iteration, avg_loss);
             }
-            
+
             if avg_loss < 1e-6 {
                 println!("在第 {} 次迭代后收敛", iteration);
                 break;
@@ -97,21 +97,21 @@ impl LinearRegression {
     pub fn score(&self, x: &[Vec<f64>], y: &[f64]) -> f64 {
         let predictions = self.predict(x);
         let y_mean = y.iter().sum::<f64>() / y.len() as f64;
-        
-        let ss_res: f64 = y.iter().zip(&predictions)
+
+        let ss_res: f64 = y
+            .iter()
+            .zip(&predictions)
             .map(|(&actual, &pred)| (actual - pred).powi(2))
             .sum();
-        
-        let ss_tot: f64 = y.iter()
-            .map(|&actual| (actual - y_mean).powi(2))
-            .sum();
-        
+
+        let ss_tot: f64 = y.iter().map(|&actual| (actual - y_mean).powi(2)).sum();
+
         1.0 - ss_res / ss_tot
     }
 }
 
 /// 逻辑回归模型
-/// 
+///
 /// 实现二分类逻辑回归
 #[derive(Debug, Clone)]
 pub struct LogisticRegression {
@@ -148,7 +148,7 @@ impl LogisticRegression {
         self.bias = 0.0;
 
         let n_samples = x.len();
-        
+
         for iteration in 0..self.max_iterations {
             let mut total_loss = 0.0;
             let mut weight_gradients = vec![0.0; n_features];
@@ -158,7 +158,7 @@ impl LogisticRegression {
             for i in 0..n_samples {
                 let prediction = self.predict_probability(&x[i]);
                 let error = prediction - y[i];
-                
+
                 // 交叉熵损失
                 total_loss += -(y[i] * prediction.ln() + (1.0 - y[i]) * (1.0 - prediction).ln());
 
@@ -196,15 +196,23 @@ impl LogisticRegression {
 
     /// 预测类别
     pub fn predict(&self, x: &[Vec<f64>]) -> Vec<f64> {
-        x.iter().map(|sample| {
-            if self.predict_probability(sample) > 0.5 { 1.0 } else { 0.0 }
-        }).collect()
+        x.iter()
+            .map(|sample| {
+                if self.predict_probability(sample) > 0.5 {
+                    1.0
+                } else {
+                    0.0
+                }
+            })
+            .collect()
     }
 
     /// 计算准确率
     pub fn accuracy(&self, x: &[Vec<f64>], y: &[f64]) -> f64 {
         let predictions = self.predict(x);
-        let correct: usize = y.iter().zip(&predictions)
+        let correct: usize = y
+            .iter()
+            .zip(&predictions)
             .map(|(&actual, &pred)| if (actual - pred).abs() < 1e-6 { 1 } else { 0 })
             .sum();
         correct as f64 / y.len() as f64
@@ -212,7 +220,7 @@ impl LogisticRegression {
 }
 
 /// KMeans聚类算法
-/// 
+///
 /// 实现KMeans聚类算法
 #[derive(Debug, Clone)]
 pub struct KMeans {
@@ -235,7 +243,8 @@ impl KMeans {
 
     /// 计算欧几里得距离
     fn euclidean_distance(&self, a: &[f64], b: &[f64]) -> f64 {
-        a.iter().zip(b.iter())
+        a.iter()
+            .zip(b.iter())
             .map(|(x, y)| (x - y).powi(2))
             .sum::<f64>()
             .sqrt()
@@ -260,11 +269,11 @@ impl KMeans {
         for iteration in 0..self.max_iterations {
             // 分配每个点到最近的质心
             let mut clusters: Vec<Vec<usize>> = vec![Vec::new(); self.k];
-            
+
             for (i, sample) in x.iter().enumerate() {
                 let mut min_distance = f64::INFINITY;
                 let mut closest_centroid = 0;
-                
+
                 for (j, centroid) in self.centroids.iter().enumerate() {
                     let distance = self.euclidean_distance(sample, centroid);
                     if distance < min_distance {
@@ -272,7 +281,7 @@ impl KMeans {
                         closest_centroid = j;
                     }
                 }
-                
+
                 clusters[closest_centroid].push(i);
             }
 
@@ -328,20 +337,22 @@ impl KMeans {
 
     /// 预测聚类标签
     pub fn predict(&self, x: &[Vec<f64>]) -> Vec<usize> {
-        x.iter().map(|sample| {
-            let mut min_distance = f64::INFINITY;
-            let mut closest_centroid = 0;
-            
-            for (j, centroid) in self.centroids.iter().enumerate() {
-                let distance = self.euclidean_distance(sample, centroid);
-                if distance < min_distance {
-                    min_distance = distance;
-                    closest_centroid = j;
+        x.iter()
+            .map(|sample| {
+                let mut min_distance = f64::INFINITY;
+                let mut closest_centroid = 0;
+
+                for (j, centroid) in self.centroids.iter().enumerate() {
+                    let distance = self.euclidean_distance(sample, centroid);
+                    if distance < min_distance {
+                        min_distance = distance;
+                        closest_centroid = j;
+                    }
                 }
-            }
-            
-            closest_centroid
-        }).collect()
+
+                closest_centroid
+            })
+            .collect()
     }
 
     /// 计算轮廓系数
@@ -359,7 +370,8 @@ impl KMeans {
                     if labels[i] == labels[j] {
                         intra_cluster_distances.push(distance);
                     } else {
-                        inter_cluster_distances.entry(labels[j])
+                        inter_cluster_distances
+                            .entry(labels[j])
                             .or_insert_with(Vec::new)
                             .push(distance);
                     }
@@ -375,7 +387,8 @@ impl KMeans {
             let b = if inter_cluster_distances.is_empty() {
                 0.0
             } else {
-                inter_cluster_distances.values()
+                inter_cluster_distances
+                    .values()
                     .map(|distances| distances.iter().sum::<f64>() / distances.len() as f64)
                     .fold(f64::INFINITY, f64::min)
             };
@@ -395,17 +408,19 @@ impl KMeans {
 /// 决策树节点
 #[derive(Debug, Clone)]
 pub enum DecisionTreeNode {
-    Leaf { class: f64 },
-    Internal { 
-        feature: usize, 
-        threshold: f64, 
-        left: Box<DecisionTreeNode>, 
-        right: Box<DecisionTreeNode> 
+    Leaf {
+        class: f64,
+    },
+    Internal {
+        feature: usize,
+        threshold: f64,
+        left: Box<DecisionTreeNode>,
+        right: Box<DecisionTreeNode>,
     },
 }
 
 /// 决策树分类器
-/// 
+///
 /// 实现简单的决策树分类器
 #[derive(Debug, Clone)]
 pub struct DecisionTree {
@@ -439,7 +454,7 @@ impl DecisionTree {
 
         let total = labels.len() as f64;
         let mut gini = 1.0;
-        
+
         for &count in counts.values() {
             let probability = count as f64 / total;
             gini -= probability * probability;
@@ -459,12 +474,12 @@ impl DecisionTree {
             values.sort_by(|a, b| a.partial_cmp(b).unwrap());
 
             for i in 1..values.len() {
-                let threshold = (values[i-1] + values[i]) / 2.0;
-                
+                let threshold = (values[i - 1] + values[i]) / 2.0;
+
                 // 手动分割数据，因为partition的返回类型不匹配
                 let mut left_y = Vec::new();
                 let mut right_y = Vec::new();
-                
+
                 for (sample, &label) in x.iter().zip(y.iter()) {
                     if sample[feature] <= threshold {
                         left_y.push(label);
@@ -479,8 +494,9 @@ impl DecisionTree {
 
                 let left_gini = self.gini_impurity(&left_y);
                 let right_gini = self.gini_impurity(&right_y);
-                
-                let weighted_gini = (left_y.len() as f64 * left_gini + right_y.len() as f64 * right_gini) 
+
+                let weighted_gini = (left_y.len() as f64 * left_gini
+                    + right_y.len() as f64 * right_gini)
                     / (left_y.len() + right_y.len()) as f64;
 
                 if weighted_gini < best_gini {
@@ -502,7 +518,11 @@ impl DecisionTree {
     fn build_tree(&self, x: &[Vec<f64>], y: &[f64], depth: usize) -> DecisionTreeNode {
         // 检查停止条件
         if depth >= self.max_depth || y.len() < self.min_samples_split {
-            let class = if y.iter().sum::<f64>() / y.len() as f64 > 0.5 { 1.0 } else { 0.0 };
+            let class = if y.iter().sum::<f64>() / y.len() as f64 > 0.5 {
+                1.0
+            } else {
+                0.0
+            };
             return DecisionTreeNode::Leaf { class };
         }
 
@@ -518,7 +538,7 @@ impl DecisionTree {
             let mut left_y = Vec::new();
             let mut right_x = Vec::new();
             let mut right_y = Vec::new();
-            
+
             for (sample, &label) in x.iter().zip(y.iter()) {
                 if sample[feature] <= threshold {
                     left_x.push(sample.clone());
@@ -530,7 +550,11 @@ impl DecisionTree {
             }
 
             if left_x.is_empty() || right_x.is_empty() {
-                let class = if y.iter().sum::<f64>() / y.len() as f64 > 0.5 { 1.0 } else { 0.0 };
+                let class = if y.iter().sum::<f64>() / y.len() as f64 > 0.5 {
+                    1.0
+                } else {
+                    0.0
+                };
                 return DecisionTreeNode::Leaf { class };
             }
 
@@ -544,7 +568,11 @@ impl DecisionTree {
                 right: Box::new(right_child),
             }
         } else {
-            let class = if y.iter().sum::<f64>() / y.len() as f64 > 0.5 { 1.0 } else { 0.0 };
+            let class = if y.iter().sum::<f64>() / y.len() as f64 > 0.5 {
+                1.0
+            } else {
+                0.0
+            };
             DecisionTreeNode::Leaf { class }
         }
     }
@@ -563,7 +591,12 @@ impl DecisionTree {
     fn predict_single(&self, x: &[f64], node: &DecisionTreeNode) -> f64 {
         match node {
             DecisionTreeNode::Leaf { class } => *class,
-            DecisionTreeNode::Internal { feature, threshold, left, right } => {
+            DecisionTreeNode::Internal {
+                feature,
+                threshold,
+                left,
+                right,
+            } => {
                 if x[*feature] <= *threshold {
                     self.predict_single(x, left)
                 } else {
@@ -576,7 +609,9 @@ impl DecisionTree {
     /// 预测
     pub fn predict(&self, x: &[Vec<f64>]) -> Vec<f64> {
         if let Some(ref root) = self.root {
-            x.iter().map(|sample| self.predict_single(sample, root)).collect()
+            x.iter()
+                .map(|sample| self.predict_single(sample, root))
+                .collect()
         } else {
             vec![0.0; x.len()]
         }
@@ -585,7 +620,9 @@ impl DecisionTree {
     /// 计算准确率
     pub fn accuracy(&self, x: &[Vec<f64>], y: &[f64]) -> f64 {
         let predictions = self.predict(x);
-        let correct: usize = y.iter().zip(&predictions)
+        let correct: usize = y
+            .iter()
+            .zip(&predictions)
             .map(|(&actual, &pred)| if (actual - pred).abs() < 1e-6 { 1 } else { 0 })
             .sum();
         correct as f64 / y.len() as f64
@@ -608,10 +645,10 @@ fn main() {
 
     let mut lr = LinearRegression::new(0.01, 1000);
     lr.fit(&x, &y).unwrap();
-    
+
     let predictions = lr.predict(&x);
     let score = lr.score(&x, &y);
-    
+
     println!("   预测结果: {:?}", predictions);
     println!("   R²分数: {:.4}", score);
     println!();
@@ -630,10 +667,10 @@ fn main() {
 
     let mut log_reg = LogisticRegression::new(0.1, 1000);
     log_reg.fit(&x_binary, &y_binary).unwrap();
-    
+
     let predictions = log_reg.predict(&x_binary);
     let accuracy = log_reg.accuracy(&x_binary, &y_binary);
-    
+
     println!("   预测结果: {:?}", predictions);
     println!("   准确率: {:.4}", accuracy);
     println!();
@@ -652,10 +689,10 @@ fn main() {
 
     let mut kmeans = KMeans::new(2, 100, 1e-4);
     kmeans.fit(&x_cluster).unwrap();
-    
+
     let labels = kmeans.predict(&x_cluster);
     let silhouette = kmeans.silhouette_score(&x_cluster, &labels);
-    
+
     println!("   聚类标签: {:?}", labels);
     println!("   轮廓系数: {:.4}", silhouette);
     println!("   质心: {:?}", kmeans.centroids);
@@ -677,10 +714,10 @@ fn main() {
 
     let mut tree = DecisionTree::new(3, 2);
     tree.fit(&x_tree, &y_tree).unwrap();
-    
+
     let predictions = tree.predict(&x_tree);
     let accuracy = tree.accuracy(&x_tree, &y_tree);
-    
+
     println!("   预测结果: {:?}", predictions);
     println!("   准确率: {:.4}", accuracy);
 }
@@ -693,10 +730,10 @@ mod tests {
     fn test_linear_regression() {
         let x = vec![vec![1.0], vec![2.0], vec![3.0]];
         let y = vec![2.0, 4.0, 6.0];
-        
+
         let mut lr = LinearRegression::new(0.01, 100);
         lr.fit(&x, &y).unwrap();
-        
+
         let predictions = lr.predict(&x);
         assert!(predictions[0] > 1.0 && predictions[0] < 3.0);
     }
@@ -705,21 +742,26 @@ mod tests {
     fn test_logistic_regression() {
         let x = vec![vec![1.0], vec![2.0], vec![3.0], vec![4.0]];
         let y = vec![0.0, 0.0, 1.0, 1.0];
-        
+
         let mut log_reg = LogisticRegression::new(0.1, 100);
         log_reg.fit(&x, &y).unwrap();
-        
+
         let accuracy = log_reg.accuracy(&x, &y);
         assert!(accuracy >= 0.0 && accuracy <= 1.0);
     }
 
     #[test]
     fn test_kmeans() {
-        let x = vec![vec![1.0, 1.0], vec![2.0, 2.0], vec![10.0, 10.0], vec![11.0, 11.0]];
-        
+        let x = vec![
+            vec![1.0, 1.0],
+            vec![2.0, 2.0],
+            vec![10.0, 10.0],
+            vec![11.0, 11.0],
+        ];
+
         let mut kmeans = KMeans::new(2, 10, 1e-4);
         kmeans.fit(&x).unwrap();
-        
+
         let labels = kmeans.predict(&x);
         assert_eq!(labels.len(), x.len());
     }
@@ -728,10 +770,10 @@ mod tests {
     fn test_decision_tree() {
         let x = vec![vec![1.0], vec![2.0], vec![3.0], vec![4.0]];
         let y = vec![0.0, 0.0, 1.0, 1.0];
-        
+
         let mut tree = DecisionTree::new(2, 1);
         tree.fit(&x, &y).unwrap();
-        
+
         let accuracy = tree.accuracy(&x, &y);
         assert!(accuracy >= 0.0 && accuracy <= 1.0);
     }

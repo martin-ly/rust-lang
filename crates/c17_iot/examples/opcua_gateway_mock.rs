@@ -28,5 +28,3 @@ fn main() {
     println!("write Mode -> {}", ok);
     println!("Mode={}", obj.read("Mode").unwrap());
 }
-
-

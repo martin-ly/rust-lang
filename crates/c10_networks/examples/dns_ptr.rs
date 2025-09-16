@@ -8,5 +8,3 @@ async fn main() -> anyhow::Result<()> {
     println!("PTR => {:?}", names);
     Ok(())
 }
-
-

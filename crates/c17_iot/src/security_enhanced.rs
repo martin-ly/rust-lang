@@ -1,5 +1,5 @@
 //! # 增强安全框架
-//! 
+//!
 //! 基于2025年最新安全标准，集成TLS 1.3、DTLS、OSCORE等安全协议
 
 use serde::{Deserialize, Serialize};
@@ -689,8 +689,15 @@ impl RevocationList {
     pub fn new() -> Self {
         Self {
             issuer: String::new(),
-            this_update: SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs(),
-            next_update: SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs() + 86400,
+            this_update: SystemTime::now()
+                .duration_since(UNIX_EPOCH)
+                .unwrap()
+                .as_secs(),
+            next_update: SystemTime::now()
+                .duration_since(UNIX_EPOCH)
+                .unwrap()
+                .as_secs()
+                + 86400,
             revoked_certificates: Vec::new(),
         }
     }

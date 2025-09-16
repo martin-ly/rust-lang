@@ -1,0 +1,38 @@
+[advisories]
+ignore = []
+severity-threshold = "medium"
+
+[licenses]
+unlicensed = "deny"
+allow = [
+    "Apache-2.0",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "ISC",
+    "MIT",
+    "Unicode-DFS-2016",
+    "Zlib",
+]
+copyleft = "warn"
+default = "deny"
+confidence-threshold = 0.8
+
+[licenses.private]
+ignore = true
+
+[bans]
+multiple-versions = "warn"
+wildcards = "deny"
+highlight = "all"
+
+[[bans.deny]]
+name = "openssl"
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+
+[[sources.allow-registry]]
+name = "https://github.com/rust-lang/crates.io-index"
+
+

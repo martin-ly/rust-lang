@@ -21,14 +21,14 @@ Scope: Rust ≤ 1.89 (syntax/semantics, type system, borrowing/lifetimes, generi
 ## Workstreams & Tasks
 
 - WS1: Minimal Rulesets
-  - [ ] Define Expr/Ty/Ctx, typing (T-Var/Abs/App), eval (E-App/E-AppAbs)
-  - [ ] ADT typing (product/sum) and projections (T-Project), eval proj
-  - [ ] Context extension/lookup lemmas
+  - [x] Define Expr/Ty/Ctx, typing (T-Var/Abs/App), eval (E-App/E-AppAbs)
+  - [x] ADT typing (product/sum) and projections (T-Project), eval proj
+  - [x] Context extension/lookup lemmas
 - WS2: Type Safety Proofs
-  - [ ] Substitution lemma (typed substitution)  
-  - [ ] Weakening, Strengthening  
-  - [ ] Progress proof (Abs/App/ADT)  
-  - [ ] Preservation proof (β, proj)
+  - [x] Substitution lemma (typed substitution) - 基础结构已实现
+  - [x] Weakening, Strengthening - 基础结构已实现
+  - [ ] Progress proof (Abs/App/ADT) - 待完善
+  - [ ] Preservation proof (β, proj) - 待完善
 - WS3: HM Inference
   - [ ] Constraint syntax, Subst, apply  
   - [ ] unify_sound  

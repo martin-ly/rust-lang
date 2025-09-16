@@ -1,5 +1,5 @@
 //! # 多模态AI模块
-//! 
+//!
 //! 支持文本、图像、音频等多模态数据的处理和融合。
 
 use crate::Error;
@@ -63,17 +63,17 @@ impl MultimodalAI {
             models: HashMap::new(),
         }
     }
-    
+
     /// 注册多模态模型
     pub fn register_model(&mut self, config: MultimodalModelConfig) {
         self.models.insert(config.name.clone(), config);
     }
-    
+
     /// 处理多模态数据
     pub async fn process(&self, inputs: Vec<MultimodalData>) -> Result<MultimodalResult, Error> {
         // 这里将集成实际的多模态处理逻辑
         tracing::info!("处理多模态数据，输入数量: {}", inputs.len());
-        
+
         Ok(MultimodalResult {
             predictions: vec![0.9, 0.1],
             confidence: 0.95,
@@ -101,7 +101,7 @@ impl Default for MultimodalAI {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_multimodal_data() {
         let data = MultimodalData {
@@ -109,22 +109,20 @@ mod tests {
             data: b"Hello, world!".to_vec(),
             metadata: HashMap::new(),
         };
-        
+
         assert_eq!(data.modality, ModalityType::Text);
         assert_eq!(data.data, b"Hello, world!");
     }
-    
+
     #[tokio::test]
     async fn test_multimodal_ai() {
         let ai = MultimodalAI::new();
-        let inputs = vec![
-            MultimodalData {
-                modality: ModalityType::Text,
-                data: b"Hello".to_vec(),
-                metadata: HashMap::new(),
-            }
-        ];
-        
+        let inputs = vec![MultimodalData {
+            modality: ModalityType::Text,
+            data: b"Hello".to_vec(),
+            metadata: HashMap::new(),
+        }];
+
         let result = ai.process(inputs).await.unwrap();
         assert_eq!(result.predictions.len(), 2);
         assert!(result.confidence > 0.0);

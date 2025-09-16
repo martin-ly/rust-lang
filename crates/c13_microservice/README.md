@@ -486,3 +486,15 @@ spec:
 ---
 
 **注意**: 这是一个示例项目，展示了如何使用Rust构建现代微服务。在生产环境中使用前，请确保进行充分的测试和安全审查。
+
+## 📡 可观测性一键运行（OTLP）
+
+- 启动观测性栈：`scripts/observability/start-stack.ps1`
+- 环境变量：
+  - `OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317`（gRPC）或 `http://localhost:4318`（HTTP）
+  - `OTEL_TRACES_SAMPLER=parentbased_always_on`
+  - `OTEL_SERVICE_NAME=c13-microservice`
+- 运行可观测性示例：
+  - `cargo run -p c13_microservice --example simple_observability_demo`
+  - 或 `cargo run -p c13_microservice --example comprehensive_observability_demo`
+- 验证：Grafana `http://localhost:3000`、Prometheus `http://localhost:9090`

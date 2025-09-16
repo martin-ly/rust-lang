@@ -1,10 +1,10 @@
 //! 强化学习环境
-//! 
+//!
 //! 提供强化学习环境的接口和实现
 
-use serde::{Deserialize, Serialize};
-use ndarray::Array1;
 use anyhow::Result;
+use ndarray::Array1;
+use serde::{Deserialize, Serialize};
 
 /// 环境状态
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -45,7 +45,7 @@ impl RLEnvironment for SimpleEnvironment {
         self.current_state = Array1::zeros(self.state_space_size);
         self.current_state.clone()
     }
-    
+
     fn step(&mut self, _action: &Array1<f32>) -> EnvironmentState {
         // 简单的环境逻辑
         EnvironmentState {
@@ -55,11 +55,11 @@ impl RLEnvironment for SimpleEnvironment {
             info: serde_json::Value::Null,
         }
     }
-    
+
     fn state_space_size(&self) -> usize {
         self.state_space_size
     }
-    
+
     fn action_space_size(&self) -> usize {
         self.action_space_size
     }

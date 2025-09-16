@@ -21,17 +21,28 @@ impl UdpCustomMessage {
     }
 
     pub fn decode(b: &[u8]) -> NetworkResult<Self> {
-        if b.len() < 4 { return Err(NetworkError::Protocol("short packet".into())); }
+        if b.len() < 4 {
+            return Err(NetworkError::Protocol("short packet".into()));
+        }
         let version = b[0];
         let msg_type = b[1];
         let len = u16::from_be_bytes([b[2], b[3]]) as usize;
-        if b.len() < 4 + len { return Err(NetworkError::Protocol("invalid length".into())); }
-        let payload = b[4..4+len].to_vec();
-        Ok(Self { version, msg_type, payload })
+        if b.len() < 4 + len {
+            return Err(NetworkError::Protocol("invalid length".into()));
+        }
+        let payload = b[4..4 + len].to_vec();
+        Ok(Self {
+            version,
+            msg_type,
+            payload,
+        })
     }
 }
 
-pub async fn udp_custom_roundtrip(addr: &str, msg: &UdpCustomMessage) -> NetworkResult<UdpCustomMessage> {
+pub async fn udp_custom_roundtrip(
+    addr: &str,
+    msg: &UdpCustomMessage,
+) -> NetworkResult<UdpCustomMessage> {
     let sock = tokio::net::UdpSocket::bind("127.0.0.1:0").await?;
     let data = msg.encode();
     sock.send_to(&data, addr).await?;
@@ -63,7 +74,11 @@ mod tests {
 
     #[test]
     fn encode_decode_roundtrip() {
-        let msg = UdpCustomMessage { version: 1, msg_type: 7, payload: b"abc".to_vec() };
+        let msg = UdpCustomMessage {
+            version: 1,
+            msg_type: 7,
+            payload: b"abc".to_vec(),
+        };
         let b = msg.encode();
         let got = UdpCustomMessage::decode(&b).unwrap();
         assert_eq!(got, msg);
@@ -71,8 +86,10 @@ mod tests {
 
     #[test]
     fn decode_short_packet() {
-        let err = UdpCustomMessage::decode(&[1,2,0]).unwrap_err();
-        match err { NetworkError::Protocol(_) => {}, _ => panic!("expect protocol error") }
+        let err = UdpCustomMessage::decode(&[1, 2, 0]).unwrap_err();
+        match err {
+            NetworkError::Protocol(_) => {}
+            _ => panic!("expect protocol error"),
+        }
     }
 }
-

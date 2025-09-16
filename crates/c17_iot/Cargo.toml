@@ -23,6 +23,7 @@ opentelemetry_sdk = { workspace = true }
 opentelemetry-stdout = { workspace = true }
 opentelemetry-otlp = { workspace = true }
 tonic = { workspace = true }
+tower = { workspace = true }
 anyhow = { workspace = true }
 sha2 = { workspace = true }
 hex = { workspace = true }

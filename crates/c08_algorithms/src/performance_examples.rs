@@ -1,14 +1,14 @@
 //! 性能优化实践示例模块
-//! 
+//!
 //! 本模块提供四个主要性能优化领域的实践示例：
 //! - 内存优化 (Memory Optimization)
 //! - 并发性能优化 (Concurrency Performance Optimization)  
 //! - 编译时优化 (Compile-time Optimization)
 //! - 运行时性能分析 (Runtime Performance Analysis)
 
-pub mod memory_optimization;
-pub mod concurrency_optimization;
 pub mod compile_time_optimization;
+pub mod concurrency_optimization;
+pub mod memory_optimization;
 pub mod runtime_profiling;
 
 use std::time::{Duration, Instant};
@@ -35,26 +35,26 @@ impl PerformanceBenchmarker {
     }
 
     /// 运行基准测试
-    pub fn benchmark<F>(&mut self, name: &str, iterations: usize, f: F) -> BenchmarkResult 
+    pub fn benchmark<F>(&mut self, name: &str, iterations: usize, f: F) -> BenchmarkResult
     where
         F: Fn() -> (),
     {
         let start = Instant::now();
-        
+
         for _ in 0..iterations {
             f();
         }
-        
+
         let duration = start.elapsed();
         let avg_duration = duration / iterations as u32;
-        
+
         let result = BenchmarkResult {
             name: name.to_string(),
             duration: avg_duration,
             memory_usage: None,
             throughput: None,
         };
-        
+
         self.results.push(result.clone());
         result
     }
@@ -121,14 +121,14 @@ impl PerformanceProfiler {
     }
 
     /// 测量函数执行时间
-    pub fn measure<F, T>(&mut self, name: &str, f: F) -> T 
+    pub fn measure<F, T>(&mut self, name: &str, f: F) -> T
     where
         F: FnOnce() -> T,
     {
         let start = Instant::now();
         let result = f();
         let duration = start.elapsed();
-        
+
         self.measurements.push((name.to_string(), duration));
         result
     }
@@ -141,11 +141,11 @@ impl PerformanceProfiler {
     /// 生成性能报告
     pub fn generate_report(&self) -> String {
         let mut report = String::from("=== 性能分析报告 ===\n");
-        
+
         for (name, duration) in &self.measurements {
             report.push_str(&format!("{}: {:?}\n", name, duration));
         }
-        
+
         report.push_str("=====================");
         report
     }
@@ -160,11 +160,11 @@ mod tests {
     #[test]
     fn test_benchmarker() {
         let mut benchmarker = PerformanceBenchmarker::new();
-        
+
         let result = benchmarker.benchmark("test_function", 100, || {
             thread::sleep(Duration::from_millis(1));
         });
-        
+
         assert!(!result.name.is_empty());
         assert!(result.duration > Duration::from_nanos(0));
     }
@@ -173,7 +173,7 @@ mod tests {
     fn test_memory_monitor() {
         let mut monitor = MemoryMonitor::new();
         monitor.start_monitoring();
-        
+
         let usage = monitor.get_current_usage();
         assert!(usage.is_some());
     }
@@ -181,12 +181,12 @@ mod tests {
     #[test]
     fn test_profiler() {
         let mut profiler = PerformanceProfiler::new();
-        
+
         let result = profiler.measure("test_measurement", || {
             thread::sleep(Duration::from_millis(10));
             42
         });
-        
+
         assert_eq!(result, 42);
         assert_eq!(profiler.get_measurements().len(), 1);
     }

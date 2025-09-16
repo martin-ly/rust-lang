@@ -1,10 +1,10 @@
 //! 图神经网络模型
-//! 
+//!
 //! 包含各种图神经网络模型的实现
 
-use serde::{Deserialize, Serialize};
-use ndarray::{Array1, Array2};
 use anyhow::Result;
+use ndarray::{Array1, Array2};
+use serde::{Deserialize, Serialize};
 
 /// 图神经网络类型
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -53,9 +53,13 @@ impl GNNModel {
             layers: Vec::new(),
         }
     }
-    
+
     /// 前向传播
-    pub fn forward(&self, node_features: &Array2<f32>, adjacency_matrix: &Array2<f32>) -> Result<Array2<f32>> {
+    pub fn forward(
+        &self,
+        node_features: &Array2<f32>,
+        adjacency_matrix: &Array2<f32>,
+    ) -> Result<Array2<f32>> {
         // 这里应该实现实际的图神经网络前向传播
         // 目前只是返回输入特征作为占位符
         Ok(node_features.clone())

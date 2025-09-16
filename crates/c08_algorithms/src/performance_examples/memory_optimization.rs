@@ -9,7 +9,7 @@ pub struct ObjectPool<T> {
 }
 
 impl<T> ObjectPool<T> {
-    pub fn new<F>(factory: F) -> Self 
+    pub fn new<F>(factory: F) -> Self
     where
         F: Fn() -> T + 'static,
     {
@@ -47,24 +47,24 @@ impl ZeroCopyBuffer {
     pub fn write(&mut self, data: &[u8]) -> usize {
         let available = self.data.len() - self.write_pos;
         let to_write = data.len().min(available);
-        
+
         if to_write > 0 {
             self.data[self.write_pos..self.write_pos + to_write].copy_from_slice(&data[..to_write]);
             self.write_pos += to_write;
         }
-        
+
         to_write
     }
 
     pub fn read(&mut self, buffer: &mut [u8]) -> usize {
         let available = self.write_pos - self.read_pos;
         let to_read = buffer.len().min(available);
-        
+
         if to_read > 0 {
             buffer[..to_read].copy_from_slice(&self.data[self.read_pos..self.read_pos + to_read]);
             self.read_pos += to_read;
         }
-        
+
         to_read
     }
 }
@@ -76,13 +76,13 @@ mod tests {
     #[test]
     fn test_object_pool() {
         let mut pool = ObjectPool::new(|| String::from("test"));
-        
+
         let obj1 = pool.acquire();
         let obj2 = pool.acquire();
-        
+
         assert_eq!(obj1, "test");
         assert_eq!(obj2, "test");
-        
+
         pool.release(obj1);
         pool.release(obj2);
     }
@@ -91,10 +91,10 @@ mod tests {
     fn test_zero_copy_buffer() {
         let mut buffer = ZeroCopyBuffer::new(100);
         let test_data = b"Hello";
-        
+
         let written = buffer.write(test_data);
         assert_eq!(written, 5);
-        
+
         let mut read_buffer = [0u8; 5];
         let read = buffer.read(&mut read_buffer);
         assert_eq!(read, 5);

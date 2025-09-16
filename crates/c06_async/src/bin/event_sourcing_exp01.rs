@@ -1,8 +1,8 @@
+use anyhow::{Result, anyhow};
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::sync::Arc;
 use tokio::sync::RwLock;
-use anyhow::{Result, anyhow};
-use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 /// 领域事件基类
@@ -57,7 +57,7 @@ impl User {
             .duration_since(std::time::UNIX_EPOCH)
             .unwrap_or_default()
             .as_secs();
-        
+
         Self {
             id: Uuid::new_v4().to_string(),
             username,
@@ -122,7 +122,7 @@ impl EventStore {
         let aggregate_events = events
             .entry(event.aggregate_id.clone())
             .or_insert_with(Vec::new);
-        
+
         let event_type = event.event_type.clone();
         let aggregate_id = event.aggregate_id.clone();
         aggregate_events.push(event);
@@ -156,7 +156,7 @@ impl CommandHandler {
     /// 创建用户
     async fn create_user(&self, username: String, email: String) -> Result<String> {
         let user = User::new(username, email);
-        
+
         let event = DomainEvent::new(
             &user.id,
             "UserCreated",
@@ -164,7 +164,7 @@ impl CommandHandler {
                 "username": user.username,
                 "email": user.email,
                 "status": "active"
-            })
+            }),
         );
 
         self.event_store.store_event(event).await?;
@@ -173,7 +173,12 @@ impl CommandHandler {
     }
 
     /// 更新用户
-    async fn update_user(&self, user_id: &str, username: Option<String>, email: Option<String>) -> Result<()> {
+    async fn update_user(
+        &self,
+        user_id: &str,
+        username: Option<String>,
+        email: Option<String>,
+    ) -> Result<()> {
         let events = self.event_store.get_events(user_id).await;
         if events.is_empty() {
             return Err(anyhow!("用户不存在: {}", user_id));
@@ -187,11 +192,7 @@ impl CommandHandler {
             data.insert("email".to_string(), serde_json::Value::String(email));
         }
 
-        let event = DomainEvent::new(
-            user_id,
-            "UserUpdated",
-            serde_json::Value::Object(data)
-        );
+        let event = DomainEvent::new(user_id, "UserUpdated", serde_json::Value::Object(data));
 
         self.event_store.store_event(event).await?;
         println!("✅ 用户已更新: {}", user_id);
@@ -210,7 +211,7 @@ impl CommandHandler {
             "UserStatusChanged",
             serde_json::json!({
                 "status": status
-            })
+            }),
         );
 
         self.event_store.store_event(event).await?;
@@ -252,11 +253,11 @@ impl QueryHandler {
         for (aggregate_id, events) in events_by_aggregate {
             let mut user = User::new("".to_string(), "".to_string());
             user.id = aggregate_id.clone();
-            
+
             for event in events {
                 user.apply_event(&event);
             }
-            
+
             read_models.insert(aggregate_id, user);
         }
 
@@ -284,9 +285,9 @@ impl QueryHandler {
             .filter(|user| {
                 matches!(
                     (status, &user.status),
-                    ("active", UserStatus::Active) |
-                    ("inactive", UserStatus::Inactive) |
-                    ("suspended", UserStatus::Suspended)
+                    ("active", UserStatus::Active)
+                        | ("inactive", UserStatus::Inactive)
+                        | ("suspended", UserStatus::Suspended)
                 )
             })
             .cloned()
@@ -306,7 +307,7 @@ impl EventSourcingSystem {
         let event_store = Arc::new(EventStore::new());
         let command_handler = Arc::new(CommandHandler::new(Arc::clone(&event_store)));
         let query_handler = Arc::new(QueryHandler::new(Arc::clone(&event_store)));
-        
+
         Self {
             event_store,
             command_handler,
@@ -321,27 +322,27 @@ impl EventSourcingSystem {
 
         // 1. 创建用户
         println!("\n📝 创建用户...");
-        let user1_id = self.command_handler.create_user(
-            "alice".to_string(),
-            "alice@example.com".to_string()
-        ).await?;
+        let user1_id = self
+            .command_handler
+            .create_user("alice".to_string(), "alice@example.com".to_string())
+            .await?;
 
-        let user2_id = self.command_handler.create_user(
-            "bob".to_string(),
-            "bob@example.com".to_string()
-        ).await?;
+        let user2_id = self
+            .command_handler
+            .create_user("bob".to_string(), "bob@example.com".to_string())
+            .await?;
 
         // 2. 更新用户
         println!("\n📝 更新用户...");
-        self.command_handler.update_user(
-            &user1_id,
-            Some("alice_updated".to_string()),
-            None
-        ).await?;
+        self.command_handler
+            .update_user(&user1_id, Some("alice_updated".to_string()), None)
+            .await?;
 
         // 3. 更改用户状态
         println!("\n📝 更改用户状态...");
-        self.command_handler.change_user_status(&user2_id, "suspended").await?;
+        self.command_handler
+            .change_user_status(&user2_id, "suspended")
+            .await?;
 
         // 4. 构建读取模型
         println!("\n📊 构建读取模型...");
@@ -366,8 +367,10 @@ impl EventSourcingSystem {
         println!("\n📜 事件历史...");
         let events = self.event_store.get_all_events().await;
         for event in events {
-            println!("  {}: {} -> {} (v{})", 
-                event.timestamp, event.event_type, event.aggregate_id, event.version);
+            println!(
+                "  {}: {} -> {} (v{})",
+                event.timestamp, event.event_type, event.aggregate_id, event.version
+            );
         }
 
         println!("\n{}", "=".repeat(50));

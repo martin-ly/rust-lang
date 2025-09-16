@@ -1,32 +1,38 @@
+use std::sync::{
+    Arc,
+    atomic::{AtomicBool, Ordering},
+};
 use std::thread;
 use std::time::{Duration, Instant};
-use std::sync::{Arc, atomic::{AtomicBool, Ordering}};
 
-use c05_threads::message_passing::{channel, mpsc, stream::ReceiverStream, sync_channel, watch};
 use c05_threads::message_passing::backpressure_handling as bp;
+use c05_threads::message_passing::{channel, mpsc, stream::ReceiverStream, sync_channel, watch};
 
 #[test]
 fn test_channel_helpers_send_all_and_drain() {
     let (tx, rx) = channel::channel::<i32>();
     channel::send_all(&tx, 0..3).unwrap();
     let v = channel::drain_n(&rx, 2);
-    assert_eq!(v, vec![0,1]);
+    assert_eq!(v, vec![0, 1]);
     assert_eq!(rx.recv().unwrap(), 2);
 }
 
 #[test]
 fn test_mpsc_helpers_send_all_and_try_recv_timeout() {
     let (tx, rx) = mpsc::unbounded::<i32>();
-    mpsc::send_all(&tx, [10,11,12]).unwrap();
-    assert_eq!(mpsc::try_recv_timeout(&rx, Duration::from_millis(1)), Some(10));
+    mpsc::send_all(&tx, [10, 11, 12]).unwrap();
+    assert_eq!(
+        mpsc::try_recv_timeout(&rx, Duration::from_millis(1)),
+        Some(10)
+    );
 }
 
 #[test]
 fn test_sync_channel_helpers() {
     let (tx, rx) = sync_channel::sync_channel::<i32>(2);
-    sync_channel::send_all(&tx, [5,6]).unwrap();
+    sync_channel::send_all(&tx, [5, 6]).unwrap();
     let drained = sync_channel::drain_n(&rx, 3);
-    assert_eq!(drained, vec![5,6]);
+    assert_eq!(drained, vec![5, 6]);
 }
 
 #[test]
@@ -34,7 +40,9 @@ fn test_std_channel_basic() {
     let (tx, rx) = channel::channel::<i32>();
     thread::spawn(move || {
         tx.send(10).unwrap();
-    }).join().unwrap();
+    })
+    .join()
+    .unwrap();
     assert_eq!(rx.recv().unwrap(), 10);
 }
 
@@ -44,7 +52,9 @@ fn test_crossbeam_unbounded_basic() {
     thread::spawn(move || {
         tx.send("a").unwrap();
         tx.send("b").unwrap();
-    }).join().unwrap();
+    })
+    .join()
+    .unwrap();
     assert_eq!(rx.recv().unwrap(), "a");
     assert_eq!(rx.recv().unwrap(), "b");
 }
@@ -152,8 +162,12 @@ fn test_receiver_stream_try_next() {
 fn test_receiver_stream_next_batch_max_and_take_until_timeout() {
     let (tx, rx) = mpsc::unbounded::<i32>();
     thread::spawn(move || {
-        for i in 0..5 { tx.send(i).unwrap(); }
-    }).join().unwrap();
+        for i in 0..5 {
+            tx.send(i).unwrap();
+        }
+    })
+    .join()
+    .unwrap();
     let stream = ReceiverStream::new(rx);
     let batch = stream.next_batch_max(3, Duration::from_millis(5));
     assert_eq!(batch.len(), 3);
@@ -167,15 +181,30 @@ fn test_receiver_stream_next_batch_max_and_take_until_timeout() {
 #[test]
 fn test_stream_rate_limit_iter_and_batch_with_max_wait() {
     let (tx, rx) = mpsc::unbounded::<i32>();
-    thread::spawn(move || { for i in 0..5 { tx.send(i).unwrap(); } }).join().unwrap();
+    thread::spawn(move || {
+        for i in 0..5 {
+            tx.send(i).unwrap();
+        }
+    })
+    .join()
+    .unwrap();
     let stream = ReceiverStream::new(rx);
     let start = Instant::now();
-    let v: Vec<_> = stream.rate_limit_iter(Duration::from_millis(1)).take(5).collect();
+    let v: Vec<_> = stream
+        .rate_limit_iter(Duration::from_millis(1))
+        .take(5)
+        .collect();
     assert_eq!(v.len(), 5);
     assert!(start.elapsed() >= Duration::from_millis(4));
 
     let (tx2, rx2) = mpsc::unbounded::<i32>();
-    thread::spawn(move || { for i in 0..3 { tx2.send(i).unwrap(); } }).join().unwrap();
+    thread::spawn(move || {
+        for i in 0..3 {
+            tx2.send(i).unwrap();
+        }
+    })
+    .join()
+    .unwrap();
     let stream2 = ReceiverStream::new(rx2);
     let batch = stream2.next_batch_with_max_wait(5, Duration::from_millis(5));
     assert!(!batch.is_empty());
@@ -204,7 +233,9 @@ fn test_bridge_to_mpsc_max_forward_and_stop() {
     let mut count = 0;
     while let Ok(_v) = rx.recv_timeout(Duration::from_millis(50)) {
         count += 1;
-        if count >= 10 { break; }
+        if count >= 10 {
+            break;
+        }
     }
     // 通知停止
     stop.store(true, Ordering::Relaxed);
@@ -216,7 +247,9 @@ fn test_bridge_to_mpsc_max_forward_and_stop() {
 #[test]
 fn test_bridge_to_mpsc_rate_limited() {
     let bp_ch = Arc::new(bp::DroppingBackpressureChannel::new(64, 0.99));
-    for i in 0..20 { let _ = bp_ch.send(i); }
+    for i in 0..20 {
+        let _ = bp_ch.send(i);
+    }
     let (tx, rx) = mpsc::unbounded::<i32>();
     let stop = Arc::new(AtomicBool::new(false));
     let j = {
@@ -224,11 +257,22 @@ fn test_bridge_to_mpsc_rate_limited() {
         let txc = tx.clone();
         let stopc = Arc::clone(&stop);
         thread::spawn(move || {
-            bp::bridge_to_mpsc_rate_limited::<i32, _>(ch, txc, Duration::from_millis(1), Some(5), Some(stopc));
+            bp::bridge_to_mpsc_rate_limited::<i32, _>(
+                ch,
+                txc,
+                Duration::from_millis(1),
+                Some(5),
+                Some(stopc),
+            );
         })
     };
     let mut cnt = 0;
-    while let Ok(_v) = rx.recv_timeout(Duration::from_millis(20)) { cnt += 1; if cnt >= 5 { break; } }
+    while let Ok(_v) = rx.recv_timeout(Duration::from_millis(20)) {
+        cnt += 1;
+        if cnt >= 5 {
+            break;
+        }
+    }
     stop.store(true, Ordering::Relaxed);
     j.join().unwrap();
     assert_eq!(cnt, 5);

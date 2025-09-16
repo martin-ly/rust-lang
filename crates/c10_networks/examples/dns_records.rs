@@ -4,7 +4,9 @@ use c10_networks::protocol::dns::DnsResolver;
 async fn main() -> anyhow::Result<()> {
     let r = DnsResolver::from_system().await?;
 
-    let domain = std::env::args().nth(1).unwrap_or_else(|| "example.com".to_string());
+    let domain = std::env::args()
+        .nth(1)
+        .unwrap_or_else(|| "example.com".to_string());
 
     let mx = r.lookup_mx(&domain).await?;
     println!("MX => {:?}", mx);
@@ -19,5 +21,3 @@ async fn main() -> anyhow::Result<()> {
 
     Ok(())
 }
-
-

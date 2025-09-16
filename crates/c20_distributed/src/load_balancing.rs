@@ -1,13 +1,13 @@
 //! 负载均衡模块
-//! 
+//!
 //! 提供多种负载均衡策略，包括轮询、加权轮询、最少连接、一致性哈希等
 
 use std::collections::HashMap;
 use std::hash::{Hash, Hasher};
 use std::net::SocketAddr;
 // use std::sync::{Arc, RwLock}; // 暂时未使用
-use std::time::{Duration, Instant};
 use serde::{Deserialize, Serialize};
+use std::time::{Duration, Instant};
 
 use crate::service_discovery::ServiceInstance;
 
@@ -93,14 +93,14 @@ impl ServerStats {
         } else {
             self.failed_requests += 1;
         }
-        
+
         // 更新平均响应时间
         if self.total_requests == 1 {
             self.avg_response_time = response_time;
         } else {
             // 使用指数移动平均
             let alpha = 0.1; // 平滑因子
-            let new_avg = self.avg_response_time.as_nanos() as f64 * (1.0 - alpha) 
+            let new_avg = self.avg_response_time.as_nanos() as f64 * (1.0 - alpha)
                 + response_time.as_nanos() as f64 * alpha;
             self.avg_response_time = Duration::from_nanos(new_avg as u64);
         }
@@ -246,11 +246,12 @@ impl LeastConnectionsBalancer {
         let mut selected_server = None;
 
         for server in &self.servers {
-            let connections = self.server_stats
+            let connections = self
+                .server_stats
                 .get(&server.address)
                 .map(|stats| stats.connections)
                 .unwrap_or(0);
-            
+
             if connections < min_connections {
                 min_connections = connections;
                 selected_server = Some(server);
@@ -272,7 +273,9 @@ impl LeastConnectionsBalancer {
         self.servers = servers;
         // 保留现有统计信息，添加新服务器的统计信息
         for server in &self.servers {
-            self.server_stats.entry(server.address).or_insert_with(ServerStats::default);
+            self.server_stats
+                .entry(server.address)
+                .or_insert_with(ServerStats::default);
         }
     }
 }
@@ -299,7 +302,7 @@ impl ConsistentHashBalancer {
     /// 构建哈希环
     fn build_hash_ring(&mut self) {
         self.hash_ring.clear();
-        
+
         for server in &self.servers {
             for i in 0..self.virtual_nodes {
                 let virtual_node = format!("{}:{}", server.address, i);
@@ -307,7 +310,7 @@ impl ConsistentHashBalancer {
                 self.hash_ring.push((hash, server.address));
             }
         }
-        
+
         self.hash_ring.sort_by_key(|(hash, _)| *hash);
     }
 
@@ -326,14 +329,14 @@ impl ConsistentHashBalancer {
         }
 
         let key_hash = self.hash(key);
-        
+
         // 找到第一个大于等于key_hash的节点
         for (hash, address) in &self.hash_ring {
             if *hash >= key_hash {
                 return self.servers.iter().find(|s| s.address == *address);
             }
         }
-        
+
         // 如果没有找到，返回第一个节点（环的起点）
         self.servers.first()
     }
@@ -395,7 +398,11 @@ impl WeightedRandomBalancer {
             servers.len().hash(&mut h);
             h.finish() | 1 // 避免为0
         };
-        Self { servers, total_weight, rng_state: seed }
+        Self {
+            servers,
+            total_weight,
+            rng_state: seed,
+        }
     }
 
     /// 加权随机选择服务器
@@ -460,11 +467,12 @@ impl LeastResponseTimeBalancer {
         let mut selected_server = None;
 
         for server in &self.servers {
-            let response_time = self.server_stats
+            let response_time = self
+                .server_stats
                 .get(&server.address)
                 .map(|stats| stats.avg_response_time)
                 .unwrap_or(Duration::from_millis(0));
-            
+
             if response_time < min_response_time {
                 min_response_time = response_time;
                 selected_server = Some(server);
@@ -475,7 +483,12 @@ impl LeastResponseTimeBalancer {
     }
 
     /// 记录服务器响应时间
-    pub fn record_response_time(&mut self, address: SocketAddr, response_time: Duration, success: bool) {
+    pub fn record_response_time(
+        &mut self,
+        address: SocketAddr,
+        response_time: Duration,
+        success: bool,
+    ) {
         if let Some(stats) = self.server_stats.get_mut(&address) {
             stats.record_request(response_time, success);
         }
@@ -485,7 +498,9 @@ impl LeastResponseTimeBalancer {
     pub fn update_servers(&mut self, servers: Vec<ServiceInstance>) {
         self.servers = servers;
         for server in &self.servers {
-            self.server_stats.entry(server.address).or_insert_with(ServerStats::default);
+            self.server_stats
+                .entry(server.address)
+                .or_insert_with(ServerStats::default);
         }
     }
 }
@@ -501,7 +516,7 @@ impl GeographicBalancer {
     /// 创建基于地理位置的负载均衡器
     pub fn new(servers: Vec<ServiceInstance>, client_location: String) -> Self {
         let mut location_mapping = HashMap::new();
-        
+
         // 根据服务器的元数据构建位置映射
         for server in &servers {
             if let Some(region) = server.metadata.get("region") {
@@ -542,7 +557,7 @@ impl GeographicBalancer {
     pub fn update_servers(&mut self, servers: Vec<ServiceInstance>) {
         self.servers = servers;
         self.location_mapping.clear();
-        
+
         for server in &self.servers {
             if let Some(region) = server.metadata.get("region") {
                 self.location_mapping
@@ -589,7 +604,11 @@ impl LoadBalancerManager {
     }
 
     /// 初始化负载均衡器
-    fn initialize_balancer(&mut self, strategy: LoadBalancingStrategy, servers: Vec<ServiceInstance>) {
+    fn initialize_balancer(
+        &mut self,
+        strategy: LoadBalancingStrategy,
+        servers: Vec<ServiceInstance>,
+    ) {
         match strategy {
             LoadBalancingStrategy::RoundRobin => {
                 self.round_robin = Some(RoundRobinBalancer::new(servers));
@@ -621,9 +640,7 @@ impl LoadBalancerManager {
     /// 选择服务器
     pub fn select_server(&mut self, key: Option<&str>) -> Option<&ServiceInstance> {
         match &self.strategy {
-            LoadBalancingStrategy::RoundRobin => {
-                self.round_robin.as_mut()?.select_server()
-            }
+            LoadBalancingStrategy::RoundRobin => self.round_robin.as_mut()?.select_server(),
             LoadBalancingStrategy::WeightedRoundRobin => {
                 self.weighted_round_robin.as_mut()?.select_server()
             }
@@ -637,25 +654,19 @@ impl LoadBalancerManager {
                     self.consistent_hash.as_ref()?.select_server("default")
                 }
             }
-            LoadBalancingStrategy::Random => {
-                self.random.as_ref()?.select_server()
-            }
-            LoadBalancingStrategy::WeightedRandom => {
-                self.weighted_random.as_mut()?.select_server()
-            }
+            LoadBalancingStrategy::Random => self.random.as_ref()?.select_server(),
+            LoadBalancingStrategy::WeightedRandom => self.weighted_random.as_mut()?.select_server(),
             LoadBalancingStrategy::LeastResponseTime => {
                 self.least_response_time.as_mut()?.select_server()
             }
-            LoadBalancingStrategy::Geographic { .. } => {
-                self.geographic.as_ref()?.select_server()
-            }
+            LoadBalancingStrategy::Geographic { .. } => self.geographic.as_ref()?.select_server(),
         }
     }
 
     /// 更新服务器列表
     pub fn update_servers(&mut self, servers: Vec<ServiceInstance>) {
         self.servers = servers.clone();
-        
+
         match &self.strategy {
             LoadBalancingStrategy::RoundRobin => {
                 if let Some(ref mut balancer) = self.round_robin {
@@ -719,7 +730,12 @@ impl LoadBalancerManager {
     }
 
     /// 记录响应时间（用于最少响应时间策略）
-    pub fn record_response_time(&mut self, address: SocketAddr, response_time: Duration, success: bool) {
+    pub fn record_response_time(
+        &mut self,
+        address: SocketAddr,
+        response_time: Duration,
+        success: bool,
+    ) {
         if let Some(ref mut balancer) = self.least_response_time {
             balancer.record_response_time(address, response_time, success);
         }
@@ -738,19 +754,22 @@ mod tests {
                 "test-service".to_string(),
                 SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8080),
                 HashMap::from([("region".to_string(), "us-east-1".to_string())]),
-            ).with_weight(10),
+            )
+            .with_weight(10),
             ServiceInstance::new(
                 "server-2".to_string(),
                 "test-service".to_string(),
                 SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8081),
                 HashMap::from([("region".to_string(), "us-west-1".to_string())]),
-            ).with_weight(5),
+            )
+            .with_weight(5),
             ServiceInstance::new(
                 "server-3".to_string(),
                 "test-service".to_string(),
                 SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8082),
                 HashMap::from([("region".to_string(), "us-east-1".to_string())]),
-            ).with_weight(8),
+            )
+            .with_weight(8),
         ]
     }
 
@@ -758,12 +777,12 @@ mod tests {
     fn test_round_robin_balancer() {
         let servers = create_test_servers();
         let mut balancer = RoundRobinBalancer::new(servers.clone());
-        
+
         let p1 = balancer.select_server().unwrap().address.port();
         let p2 = balancer.select_server().unwrap().address.port();
         let p3 = balancer.select_server().unwrap().address.port();
         let p4 = balancer.select_server().unwrap().address.port();
-        
+
         assert_eq!(p1, 8080);
         assert_eq!(p2, 8081);
         assert_eq!(p3, 8082);
@@ -774,37 +793,41 @@ mod tests {
     fn test_weighted_round_robin_balancer() {
         let servers = create_test_servers();
         let mut balancer = WeightedRoundRobinBalancer::new(servers);
-        
+
         // 测试多次选择，验证权重分布
         let mut selections = Vec::new();
-        for _ in 0..23 { // 总权重是23
+        for _ in 0..23 {
+            // 总权重是23
             if let Some(server) = balancer.select_server() {
                 selections.push(server.address.port());
             }
         }
-        
+
         // 验证权重分布
         let count_8080 = selections.iter().filter(|&&p| p == 8080).count();
         let count_8081 = selections.iter().filter(|&&p| p == 8081).count();
         let count_8082 = selections.iter().filter(|&&p| p == 8082).count();
-        
+
         assert_eq!(count_8080, 10); // 权重10
-        assert_eq!(count_8081, 5);  // 权重5
-        assert_eq!(count_8082, 8);  // 权重8
+        assert_eq!(count_8081, 5); // 权重5
+        assert_eq!(count_8082, 8); // 权重8
     }
 
     #[test]
     fn test_least_connections_balancer() {
         let servers = create_test_servers();
         let mut balancer = LeastConnectionsBalancer::new(servers);
-        
+
         // 初始选择应该选择连接数为0的服务器
         let server = balancer.select_server().unwrap();
         assert_eq!(server.address.port(), 8080);
-        
+
         // 增加第一个服务器的连接数
-        balancer.update_connections(SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8080), 1);
-        
+        balancer.update_connections(
+            SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8080),
+            1,
+        );
+
         // 现在应该选择其他服务器
         let server = balancer.select_server().unwrap();
         assert_ne!(server.address.port(), 8080);
@@ -814,12 +837,12 @@ mod tests {
     fn test_consistent_hash_balancer() {
         let servers = create_test_servers();
         let balancer = ConsistentHashBalancer::new(servers, 100);
-        
+
         // 相同key应该选择相同服务器
         let server1 = balancer.select_server("test-key").unwrap();
         let server2 = balancer.select_server("test-key").unwrap();
         assert_eq!(server1.address, server2.address);
-        
+
         // 不同key可能选择不同服务器
         let _server3 = balancer.select_server("different-key").unwrap();
         // 注意：由于哈希的随机性，这里不保证一定不同
@@ -829,7 +852,7 @@ mod tests {
     fn test_random_balancer() {
         let servers = create_test_servers();
         let balancer = RandomBalancer::new(servers);
-        
+
         // 多次选择应该能选到不同的服务器
         let mut found_servers = std::collections::HashSet::new();
         for _ in 0..100 {
@@ -837,7 +860,7 @@ mod tests {
                 found_servers.insert(server.address.port());
             }
         }
-        
+
         // 应该能找到多个不同的服务器
         assert!(found_servers.len() > 1);
     }
@@ -846,7 +869,7 @@ mod tests {
     fn test_weighted_random_balancer() {
         let servers = create_test_servers();
         let mut balancer = WeightedRandomBalancer::new(servers);
-        
+
         // 多次选择验证权重分布
         let mut selections = Vec::new();
         for _ in 0..1000 {
@@ -854,12 +877,12 @@ mod tests {
                 selections.push(server.address.port());
             }
         }
-        
+
         // 验证权重分布（允许一定的随机性）
         let count_8080 = selections.iter().filter(|&&p| p == 8080).count();
         let count_8081 = selections.iter().filter(|&&p| p == 8081).count();
         let count_8082 = selections.iter().filter(|&&p| p == 8082).count();
-        
+
         // 权重高的服务器被选中的次数应该更多
         assert!(count_8080 > count_8081);
         assert!(count_8082 > count_8081);
@@ -869,32 +892,36 @@ mod tests {
     fn test_least_response_time_balancer() {
         let servers = create_test_servers();
         let mut balancer = LeastResponseTimeBalancer::new(servers);
-        
+
         // 记录第一个服务器的响应时间
         balancer.record_response_time(
             SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8080),
             Duration::from_millis(100),
             true,
         );
-        
+
         // 记录第二个服务器的响应时间（更快）
         balancer.record_response_time(
             SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8081),
             Duration::from_millis(50),
             true,
         );
-        
+
         // 现在应该选择响应时间更快的服务器
         let server = balancer.select_server().unwrap();
         // 可能选择8081（更快），如果多台均未打点则可能返回默认第一台
-        assert!(server.address.port() == 8081 || server.address.port() == 8080 || server.address.port() == 8082);
+        assert!(
+            server.address.port() == 8081
+                || server.address.port() == 8080
+                || server.address.port() == 8082
+        );
     }
 
     #[test]
     fn test_geographic_balancer() {
         let servers = create_test_servers();
         let balancer = GeographicBalancer::new(servers, "us-east-1".to_string());
-        
+
         // 应该选择us-east-1区域的服务器
         let server = balancer.select_server().unwrap();
         assert_eq!(server.address.port(), 8080); // 第一个us-east-1服务器
@@ -904,10 +931,10 @@ mod tests {
     fn test_load_balancer_manager() {
         let servers = create_test_servers();
         let mut manager = LoadBalancerManager::new(LoadBalancingStrategy::RoundRobin, servers);
-        
+
         let server = manager.select_server(None).unwrap();
         assert_eq!(server.address.port(), 8080);
-        
+
         // 测试策略切换
         manager.update_strategy(LoadBalancingStrategy::Random);
         let server = manager.select_server(None).unwrap();
@@ -918,19 +945,19 @@ mod tests {
     #[test]
     fn test_server_stats() {
         let mut stats = ServerStats::default();
-        
+
         assert_eq!(stats.connections, 0);
         assert_eq!(stats.total_requests, 0);
         assert_eq!(stats.success_rate(), 1.0);
-        
+
         stats.update_connections(5);
         assert_eq!(stats.connections, 5);
-        
+
         stats.record_request(Duration::from_millis(100), true);
         assert_eq!(stats.total_requests, 1);
         assert_eq!(stats.successful_requests, 1);
         assert_eq!(stats.success_rate(), 1.0);
-        
+
         stats.record_request(Duration::from_millis(200), false);
         assert_eq!(stats.total_requests, 2);
         assert_eq!(stats.failed_requests, 1);
@@ -947,9 +974,11 @@ mod tests {
             LoadBalancingStrategy::Random,
             LoadBalancingStrategy::WeightedRandom,
             LoadBalancingStrategy::LeastResponseTime,
-            LoadBalancingStrategy::Geographic { client_location: "us-east-1".to_string() },
+            LoadBalancingStrategy::Geographic {
+                client_location: "us-east-1".to_string(),
+            },
         ];
-        
+
         for strategy in strategies {
             let json = serde_json::to_string(&strategy).unwrap();
             let deserialized: LoadBalancingStrategy = serde_json::from_str(&json).unwrap();

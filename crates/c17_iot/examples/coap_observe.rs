@@ -28,7 +28,11 @@ fn main() -> anyhow::Result<()> {
         let resp = Packet::from_bytes(&buf[..n])?;
         match resp.header.code {
             MessageClass::Response(code) => {
-                println!("coap resp code={:?} payload={:?}", code, String::from_utf8_lossy(&resp.payload));
+                println!(
+                    "coap resp code={:?} payload={:?}",
+                    code,
+                    String::from_utf8_lossy(&resp.payload)
+                );
             }
             _ => println!("coap unknown message"),
         }
@@ -38,5 +42,3 @@ fn main() -> anyhow::Result<()> {
 
     Ok(())
 }
-
-

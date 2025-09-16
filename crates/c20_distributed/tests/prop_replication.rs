@@ -1,7 +1,7 @@
-use proptest::prelude::*;
-use c20_distributed::replication::{LocalReplicator, MajorityQuorum, QuorumPolicy};
 use c20_distributed::consistency::ConsistencyLevel;
+use c20_distributed::replication::{LocalReplicator, MajorityQuorum, QuorumPolicy};
 use c20_distributed::topology::ConsistentHashRing;
+use proptest::prelude::*;
 
 proptest! {
     #[test]
@@ -32,5 +32,3 @@ proptest! {
         prop_assert_eq!(res.is_ok(), ok >= need);
     }
 }
-
-

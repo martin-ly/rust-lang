@@ -7,7 +7,11 @@ pub struct RetryPolicy {
 
 impl Default for RetryPolicy {
     fn default() -> Self {
-        Self { max_retries: 3, initial_backoff_ms: 100, max_backoff_ms: 2_000 }
+        Self {
+            max_retries: 3,
+            initial_backoff_ms: 100,
+            max_backoff_ms: 2_000,
+        }
     }
 }
 
@@ -19,7 +23,10 @@ pub struct Timeouts {
 
 impl Default for Timeouts {
     fn default() -> Self {
-        Self { connect_timeout_ms: 5_000, op_timeout_ms: 5_000 }
+        Self {
+            connect_timeout_ms: 5_000,
+            op_timeout_ms: 5_000,
+        }
     }
 }
 
@@ -32,9 +39,13 @@ pub struct RedisConfig {
 
 impl RedisConfig {
     pub fn new(url: impl Into<String>) -> Self {
-        Self { url: url.into(), timeouts: Timeouts::default(), retry: RetryPolicy::default() }
+        Self {
+            url: url.into(),
+            timeouts: Timeouts::default(),
+            retry: RetryPolicy::default(),
+        }
     }
-    
+
     pub fn with_pool_size(self, _pool_size: u32) -> Self {
         // 这里可以扩展配置来支持连接池大小
         self
@@ -50,7 +61,11 @@ pub struct PostgresConfig {
 
 impl PostgresConfig {
     pub fn new(url: impl Into<String>) -> Self {
-        Self { url: url.into(), timeouts: Timeouts::default(), retry: RetryPolicy::default() }
+        Self {
+            url: url.into(),
+            timeouts: Timeouts::default(),
+            retry: RetryPolicy::default(),
+        }
     }
 }
 
@@ -114,4 +129,3 @@ impl KafkaConfig {
         }
     }
 }
-

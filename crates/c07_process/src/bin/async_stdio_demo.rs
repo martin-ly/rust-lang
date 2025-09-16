@@ -1,7 +1,7 @@
 #[cfg(feature = "async")]
-use c07_process::prelude::*;
-#[cfg(feature = "async")]
 use c07_process::AsyncProcessManager;
+#[cfg(feature = "async")]
+use c07_process::prelude::*;
 #[cfg(feature = "async")]
 use std::collections::HashMap;
 
@@ -60,5 +60,3 @@ fn main() {
     println!("❌ 异步功能未启用");
     println!("请使用 --features async 重新编译以启用异步功能");
 }
-
-

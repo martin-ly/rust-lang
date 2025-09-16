@@ -9,7 +9,7 @@ PartialOrd trait 继承自 PartialEq：
 ```rust
 pub trait PartialOrd<Rhs = Self>: PartialEq<Rhs> {
     fn partial_cmp(&self, other: &Rhs) -> Option<Ordering>;
-    
+
     fn lt(&self, other: &Rhs) -> bool { ... }
     fn le(&self, other: &Rhs) -> bool { ... }
     fn gt(&self, other: &Rhs) -> bool { ... }
@@ -59,11 +59,11 @@ impl PartialEq for Point {
 impl PartialOrd for Point {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
         // 处理 NaN 情况
-        if self.x.is_nan() || self.y.is_nan() || 
+        if self.x.is_nan() || self.y.is_nan() ||
            other.x.is_nan() || other.y.is_nan() {
             return None;
         }
-        
+
         // 先比较 x，再比较 y
         self.x.partial_cmp(&other.x)
             .and_then(|ord| if ord == Ordering::Equal {
@@ -149,7 +149,7 @@ fn main() {
     let x = 3.14;
     let y = 2.71;
     let nan = f64::NAN;
-    
+
     println!("x < y: {}", x < y);           // true
     println!("x > y: {}", x > y);           // false
     println!("x < nan: {}", x < nan);       // false
@@ -165,7 +165,7 @@ fn main() {
     let p1 = Point { x: 1.0, y: 2.0 };
     let p2 = Point { x: 3.0, y: 4.0 };
     let p3 = Point { x: f64::NAN, y: 5.0 };
-    
+
     if let Some(ord) = p1.partial_cmp(&p2) {
         match ord {
             Ordering::Less => println!("p1 < p2"),
@@ -173,7 +173,7 @@ fn main() {
             Ordering::Greater => println!("p1 > p2"),
         }
     }
-    
+
     // p3 包含 NaN，无法比较
     if p1.partial_cmp(&p3).is_none() {
         println!("Cannot compare with NaN");
@@ -192,7 +192,7 @@ fn find_min<T: PartialOrd>(items: &[T]) -> Option<&T> {
 
 fn main() {
     let numbers = vec![3.14, 2.71, 1.41, f64::NAN, 2.23];
-    
+
     if let Some(min) = find_min(&numbers) {
         println!("Minimum: {}", min);
     }
@@ -297,26 +297,26 @@ pub struct PartialOrdExample {
 
 impl PartialEq for PartialOrdExample {
     fn eq(&self, other: &Self) -> bool {
-        self.name == other.name && 
-        self.value == other.value && 
-        self.priority == other.priority
+        self.name == other.name && self.value == other.value && self.priority == other.priority
     }
 }
 
 impl PartialOrd for PartialOrdExample {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
         // 先按优先级排序，再按值排序，最后按名称排序
-        self.priority.partial_cmp(&other.priority)
-            .and_then(|ord| if ord == Ordering::Equal {
-                self.value.partial_cmp(&other.value)
-                    .map(|ord| if ord == Ordering::Equal {
+        self.priority.partial_cmp(&other.priority).and_then(|ord| {
+            if ord == Ordering::Equal {
+                self.value.partial_cmp(&other.value).map(|ord| {
+                    if ord == Ordering::Equal {
                         self.name.cmp(&other.name)
                     } else {
                         ord
-                    })
+                    }
+                })
             } else {
                 Some(ord)
-            })
+            }
+        })
     }
 }
 
@@ -336,33 +336,36 @@ impl<T: PartialOrd> PartialEq for PartialOrdContainer<T> {
 impl<T: PartialOrd> PartialOrd for PartialOrdContainer<T> {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
         // 先比较值，再比较元数据
-        self.value.partial_cmp(&other.value)
-            .map(|ord| if ord == Ordering::Equal {
+        self.value.partial_cmp(&other.value).map(|ord| {
+            if ord == Ordering::Equal {
                 self.metadata.cmp(&other.metadata)
             } else {
                 ord
-            })
+            }
+        })
     }
 }
 
 // 状态枚举
 #[derive(Debug)]
 pub enum PartialOrdStatus {
-    Idle,      // 0
-    Active,    // 1
-    Working,   // 2
-    Complete,  // 3
-    Error,     // 4
+    Idle,     // 0
+    Active,   // 1
+    Working,  // 2
+    Complete, // 3
+    Error,    // 4
 }
 
 impl PartialEq for PartialOrdStatus {
     fn eq(&self, other: &Self) -> bool {
-        matches!((self, other),
-            (PartialOrdStatus::Idle, PartialOrdStatus::Idle) |
-            (PartialOrdStatus::Active, PartialOrdStatus::Active) |
-            (PartialOrdStatus::Working, PartialOrdStatus::Working) |
-            (PartialOrdStatus::Complete, PartialOrdStatus::Complete) |
-            (PartialOrdStatus::Error, PartialOrdStatus::Error))
+        matches!(
+            (self, other),
+            (PartialOrdStatus::Idle, PartialOrdStatus::Idle)
+                | (PartialOrdStatus::Active, PartialOrdStatus::Active)
+                | (PartialOrdStatus::Working, PartialOrdStatus::Working)
+                | (PartialOrdStatus::Complete, PartialOrdStatus::Complete)
+                | (PartialOrdStatus::Error, PartialOrdStatus::Error)
+        )
     }
 }
 
@@ -402,18 +405,18 @@ impl PartialEq for PartialOrdPoint {
 impl PartialOrd for PartialOrdPoint {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
         // 处理 NaN 情况
-        if self.x.is_nan() || self.y.is_nan() || 
-           other.x.is_nan() || other.y.is_nan() {
+        if self.x.is_nan() || self.y.is_nan() || other.x.is_nan() || other.y.is_nan() {
             return None;
         }
-        
+
         // 先比较 x，再比较 y
-        self.x.partial_cmp(&other.x)
-            .and_then(|ord| if ord == Ordering::Equal {
+        self.x.partial_cmp(&other.x).and_then(|ord| {
+            if ord == Ordering::Equal {
                 self.y.partial_cmp(&other.y)
             } else {
                 Some(ord)
-            })
+            }
+        })
     }
 }
 
@@ -423,55 +426,61 @@ pub fn demonstrate_partial_ord() {
     let p1 = PartialOrdPoint { x: 1.0, y: 2.0 };
     let p2 = PartialOrdPoint { x: 1.0, y: 3.0 };
     let p3 = PartialOrdPoint { x: 2.0, y: 1.0 };
-    
+
     println!("p1 < p2: {}", p1 < p2); // true
     println!("p1 < p3: {}", p1 < p3); // true
     println!("p2 < p3: {}", p2 < p3); // true
-    
+
     // 浮点数 NaN 处理
-    let nan_point = PartialOrdPoint { x: f64::NAN, y: 2.0 };
+    let nan_point = PartialOrdPoint {
+        x: f64::NAN,
+        y: 2.0,
+    };
     let normal_point = PartialOrdPoint { x: 1.0, y: 2.0 };
-    
+
     println!("normal_point < nan_point: {}", normal_point < nan_point); // false
     println!("nan_point < normal_point: {}", nan_point < normal_point); // false
-    
+
     // false NaN比较
-    let nan_point2 = PartialOrdPoint { x: f64::NAN, y: 3.0 };
+    let nan_point2 = PartialOrdPoint {
+        x: f64::NAN,
+        y: 3.0,
+    };
     println!("nan_point == nan_point2: {}", (nan_point == nan_point2));
-    
+
     // 结构体比较
     let e1 = PartialOrdExample {
         name: String::from("Alice"),
         value: 100.0,
         priority: 1,
     };
-    
+
     let e2 = PartialOrdExample {
         name: String::from("Bob"),
         value: 100.0,
         priority: 2,
     };
-    
+
     let e3 = PartialOrdExample {
         name: String::from("Charlie"),
         value: 200.0,
         priority: 1,
     };
-    
+
     println!("e1 < e2: {}", e1 < e2); // true (优先级不同)
     println!("e1 < e3: {}", e1 < e3); // true (优先级相同，值不同)
-    
+
     // 枚举比较
     let s1 = PartialOrdStatus::Idle;
     let s2 = PartialOrdStatus::Active;
     let s3 = PartialOrdStatus::Complete;
-    
+
     println!("s1 < s2: {}", s1 < s2); // true
     println!("s2 < s3: {}", s2 < s3); // true
-    
+
     // 浮点数比较演示
     demonstrate_float_comparison();
-    
+
     // 部分比较演示
     demonstrate_partial_comparison();
 }
@@ -481,17 +490,17 @@ fn demonstrate_float_comparison() {
     let x = std::f64::consts::PI;
     let y = 2.71;
     let nan = f64::NAN;
-    
+
     println!("Float comparison:");
-    println!("x < y: {}", x < y);           // true
-    println!("x > y: {}", x > y);           // false
-    println!("x < nan: {}", x < nan);       // false
-    println!("nan < x: {}", nan < x);       // false
-    
+    println!("x < y: {}", x < y); // true
+    println!("x > y: {}", x > y); // false
+    println!("x < nan: {}", x < nan); // false
+    println!("nan < x: {}", nan < x); // false
+
     // false NaN比较
     let nan2 = f64::NAN;
     println!("nan == nan2: {}", (nan == nan2));
-    
+
     // 使用 partial_cmp
     if let Some(ord) = x.partial_cmp(&y) {
         match ord {
@@ -500,7 +509,7 @@ fn demonstrate_float_comparison() {
             Ordering::Greater => println!("x > y"),
         }
     }
-    
+
     if x.partial_cmp(&nan).is_none() {
         println!("Cannot compare x with NaN");
     }
@@ -511,10 +520,13 @@ fn demonstrate_partial_comparison() {
     let points = [
         PartialOrdPoint { x: 1.0, y: 2.0 },
         PartialOrdPoint { x: 3.0, y: 4.0 },
-        PartialOrdPoint { x: f64::NAN, y: 5.0 },
+        PartialOrdPoint {
+            x: f64::NAN,
+            y: 5.0,
+        },
         PartialOrdPoint { x: 2.0, y: 3.0 },
     ];
-    
+
     println!("Partial comparison:");
     for (i, p1) in points.iter().enumerate() {
         for (j, p2) in points.iter().enumerate() {
@@ -535,16 +547,16 @@ fn demonstrate_partial_comparison() {
 
 // 泛型函数示例
 pub fn find_min_partial<T: PartialOrd>(items: &[T]) -> Option<&T> {
-    items.iter().min_by(|a, b| {
-        a.partial_cmp(b).unwrap_or(Ordering::Equal)
-    })
+    items
+        .iter()
+        .min_by(|a, b| a.partial_cmp(b).unwrap_or(Ordering::Equal))
 }
 
 // 测试函数
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_partial_ord_example() {
         let e1 = PartialOrdExample {
@@ -552,52 +564,55 @@ mod tests {
             value: 100.0,
             priority: 1,
         };
-        
+
         let e2 = PartialOrdExample {
             name: String::from("Bob"),
             value: 100.0,
             priority: 2,
         };
-        
+
         assert!(e1 < e2); // 优先级不同
         assert!(e2 > e1);
     }
-    
+
     #[test]
     fn test_point_partial_ord() {
         let p1 = PartialOrdPoint { x: 1.0, y: 2.0 };
         let p2 = PartialOrdPoint { x: 1.0, y: 3.0 };
         let p3 = PartialOrdPoint { x: 2.0, y: 1.0 };
-        
+
         assert!(p1 < p2);
         assert!(p1 < p3);
         assert!(p2 < p3);
     }
-    
+
     #[test]
     fn test_nan_comparison() {
-        let nan_point = PartialOrdPoint { x: f64::NAN, y: 2.0 };
+        let nan_point = PartialOrdPoint {
+            x: f64::NAN,
+            y: 2.0,
+        };
         let normal_point = PartialOrdPoint { x: 1.0, y: 2.0 };
-        
+
         assert!(nan_point.partial_cmp(&normal_point).is_none());
         assert!(normal_point.partial_cmp(&nan_point).is_none());
     }
-    
+
     #[test]
     fn test_status_partial_ord() {
         let s1 = PartialOrdStatus::Idle;
         let s2 = PartialOrdStatus::Active;
         let s3 = PartialOrdStatus::Complete;
-        
+
         assert!(s1 < s2);
         assert!(s2 < s3);
         assert!(s1 < s3); // 传递性
     }
-    
+
     #[test]
     fn test_find_min_partial() {
         let items = vec![std::f64::consts::PI, 2.71, 1.41, 2.23];
-        
+
         assert_eq!(find_min_partial(&items), Some(&1.41));
     }
 }

@@ -1,10 +1,10 @@
 //! # 工作流工厂模式 / Workflow Factory Pattern
-//! 
+//!
 //! 本模块实现了工作流工厂模式，根据类型创建不同的工作流实例。
 //! This module implements the workflow factory pattern, creating different workflow instances based on type.
 
-use crate::patterns::{WorkflowPattern, PatternCategory, WorkflowContext, WorkflowResult};
-use crate::types::{WorkflowDefinition, StateTransition};
+use crate::patterns::{PatternCategory, WorkflowContext, WorkflowPattern, WorkflowResult};
+use crate::types::{StateTransition, WorkflowDefinition};
 use serde_json::json;
 use std::collections::HashMap;
 
@@ -29,12 +29,12 @@ impl WorkflowFactory {
         let mut factory = Self {
             workflow_templates: std::collections::HashMap::new(),
         };
-        
+
         // 注册默认工作流模板 / Register default workflow templates
         factory.register_default_templates();
         factory
     }
-    
+
     /// 注册默认工作流模板 / Register default workflow templates
     fn register_default_templates(&mut self) {
         // 数据处理工作流 / Data processing workflow
@@ -81,9 +81,9 @@ impl WorkflowFactory {
                     meta.insert("complexity".to_string(), json!("medium"));
                     meta
                 },
-            }
+            },
         );
-        
+
         // API 集成工作流 / API integration workflow
         self.workflow_templates.insert(
             WorkflowType::ApiIntegration,
@@ -130,15 +130,15 @@ impl WorkflowFactory {
                 ],
                 initial_state: "prepare".to_string(),
                 final_states: vec!["complete".to_string()],
-                  metadata: {
+                metadata: {
                     let mut meta = std::collections::HashMap::new();
                     meta.insert("category".to_string(), json!("api_integration"));
                     meta.insert("complexity".to_string(), json!("high"));
                     meta
                 },
-            }
+            },
         );
-        
+
         // 文件操作工作流 / File operation workflow
         self.workflow_templates.insert(
             WorkflowType::FileOperation,
@@ -169,37 +169,49 @@ impl WorkflowFactory {
                 ],
                 initial_state: "check_file".to_string(),
                 final_states: vec!["save_result".to_string()],
-                  metadata: {
+                metadata: {
                     let mut meta = std::collections::HashMap::new();
                     meta.insert("category".to_string(), json!("file_operation"));
                     meta.insert("complexity".to_string(), json!("low"));
                     meta
                 },
-            }
+            },
         );
     }
-    
+
     /// 创建工作流实例 / Create workflow instance
-    pub fn create_workflow(&self, workflow_type: &WorkflowType, custom_name: Option<String>) -> Result<WorkflowDefinition, String> {
-        let template = self.workflow_templates.get(workflow_type)
-            .ok_or_else(|| format!("不支持的工作流类型 / Unsupported workflow type: {:?}", workflow_type))?;
-        
+    pub fn create_workflow(
+        &self,
+        workflow_type: &WorkflowType,
+        custom_name: Option<String>,
+    ) -> Result<WorkflowDefinition, String> {
+        let template = self.workflow_templates.get(workflow_type).ok_or_else(|| {
+            format!(
+                "不支持的工作流类型 / Unsupported workflow type: {:?}",
+                workflow_type
+            )
+        })?;
+
         let mut workflow = template.clone();
-        
+
         if let Some(name) = custom_name {
             workflow.name = name;
         } else {
-            workflow.name = format!("{}_{}", workflow.name, uuid::Uuid::new_v4().to_string()[..8].to_string());
+            workflow.name = format!(
+                "{}_{}",
+                workflow.name,
+                uuid::Uuid::new_v4().to_string()[..8].to_string()
+            );
         }
-        
+
         Ok(workflow)
     }
-    
+
     /// 注册自定义工作流模板 / Register custom workflow template
     pub fn register_template(&mut self, workflow_type: WorkflowType, template: WorkflowDefinition) {
         self.workflow_templates.insert(workflow_type, template);
     }
-    
+
     /// 获取支持的工作流类型 / Get supported workflow types
     pub fn get_supported_types(&self) -> Vec<WorkflowType> {
         self.workflow_templates.keys().cloned().collect()
@@ -225,23 +237,25 @@ impl WorkflowPattern for WorkflowFactoryPattern {
     fn name(&self) -> &str {
         &self.name
     }
-    
+
     fn description(&self) -> &str {
         "根据类型创建不同工作流实例的工厂模式 / Factory pattern for creating different workflow instances based on type"
     }
-    
+
     fn category(&self) -> PatternCategory {
         PatternCategory::Creational
     }
-    
+
     fn apply(&self, context: &WorkflowContext) -> Result<WorkflowResult, String> {
         tracing::info!("应用工作流工厂模式 / Applying workflow factory pattern");
-        
+
         // 从上下文数据中提取工厂参数 / Extract factory parameters from context data
-        let workflow_type_str = context.data.get("type")
+        let workflow_type_str = context
+            .data
+            .get("type")
             .and_then(|v| v.as_str())
             .unwrap_or("data_processing");
-        
+
         let workflow_type = match workflow_type_str {
             "data_processing" => WorkflowType::DataProcessing,
             "api_integration" => WorkflowType::ApiIntegration,
@@ -249,14 +263,16 @@ impl WorkflowPattern for WorkflowFactoryPattern {
             "database_operation" => WorkflowType::DatabaseOperation,
             custom => WorkflowType::Custom(custom.to_string()),
         };
-        
-        let custom_name = context.data.get("custom_name")
+
+        let custom_name = context
+            .data
+            .get("custom_name")
             .and_then(|v| v.as_str())
             .map(|s| s.to_string());
-        
+
         // 使用工厂模式创建工作流 / Use factory pattern to create workflow
         let workflow_def = self.factory.create_workflow(&workflow_type, custom_name)?;
-        
+
         let result = WorkflowResult {
             success: true,
             data: json!({
@@ -266,21 +282,24 @@ impl WorkflowPattern for WorkflowFactoryPattern {
                 "created_workflow": workflow_def,
                 "factory_method": "create_workflow"
             }),
-            message: "工作流工厂模式应用成功 / Workflow factory pattern applied successfully".to_string(),
+            message: "工作流工厂模式应用成功 / Workflow factory pattern applied successfully"
+                .to_string(),
         };
-        
+
         Ok(result)
     }
-    
+
     fn validate(&self, context: &WorkflowContext) -> Result<(), String> {
         if context.data.get("type").is_none() {
             return Err("工作流类型不能为空 / Workflow type cannot be empty".to_string());
         }
-        
-        let workflow_type_str = context.data.get("type")
+
+        let workflow_type_str = context
+            .data
+            .get("type")
             .and_then(|v| v.as_str())
             .unwrap_or("");
-        
+
         // 检查是否支持该工作流类型 / Check if workflow type is supported
         let workflow_type = match workflow_type_str {
             "data_processing" => WorkflowType::DataProcessing,
@@ -289,11 +308,14 @@ impl WorkflowPattern for WorkflowFactoryPattern {
             "database_operation" => WorkflowType::DatabaseOperation,
             _ => WorkflowType::Custom(workflow_type_str.to_string()),
         };
-        
+
         if !self.factory.workflow_templates.contains_key(&workflow_type) {
-            return Err(format!("不支持的工作流类型 / Unsupported workflow type: {}", workflow_type_str));
+            return Err(format!(
+                "不支持的工作流类型 / Unsupported workflow type: {}",
+                workflow_type_str
+            ));
         }
-        
+
         Ok(())
     }
 }
@@ -301,35 +323,38 @@ impl WorkflowPattern for WorkflowFactoryPattern {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_workflow_factory() {
         let factory = WorkflowFactory::new();
-        
+
         // 测试创建数据处理工作流 / Test creating data processing workflow
         let workflow = factory.create_workflow(&WorkflowType::DataProcessing, None);
         assert!(workflow.is_ok());
         let def = workflow.unwrap();
         assert!(def.name.contains("data_processing_workflow"));
         assert_eq!(def.states.len(), 4);
-        
+
         // 测试创建 API 集成工作流 / Test creating API integration workflow
-        let workflow = factory.create_workflow(&WorkflowType::ApiIntegration, Some("custom_api".to_string()));
+        let workflow = factory.create_workflow(
+            &WorkflowType::ApiIntegration,
+            Some("custom_api".to_string()),
+        );
         assert!(workflow.is_ok());
         let def = workflow.unwrap();
         assert_eq!(def.name, "custom_api");
-        
+
         // 测试不支持的类型 / Test unsupported type
         let workflow = factory.create_workflow(&WorkflowType::DatabaseOperation, None);
         assert!(workflow.is_err());
     }
-    
+
     #[test]
     fn test_workflow_factory_pattern() {
         let pattern = WorkflowFactoryPattern::new();
         assert_eq!(pattern.name(), "WorkflowFactory");
         assert_eq!(pattern.category(), PatternCategory::Creational);
-        
+
         let context = WorkflowContext {
             workflow_id: "test_workflow".to_string(),
             data: json!({
@@ -338,33 +363,33 @@ mod tests {
             }),
             metadata: std::collections::HashMap::new(),
         };
-        
+
         let result = pattern.apply(&context).unwrap();
         assert!(result.success);
         assert_eq!(result.data["workflow_type"], "data_processing");
     }
-    
+
     #[test]
     fn test_workflow_factory_validation() {
         let pattern = WorkflowFactoryPattern::new();
-        
+
         // 测试缺少类型 / Test missing type
         let context = WorkflowContext {
             workflow_id: "test_workflow".to_string(),
             data: json!({}),
             metadata: std::collections::HashMap::new(),
         };
-        
+
         let result = pattern.validate(&context);
         assert!(result.is_err());
-        
+
         // 测试不支持的类型 / Test unsupported type
         let context = WorkflowContext {
             workflow_id: "test_workflow".to_string(),
             data: json!({"type": "unsupported_type"}),
             metadata: std::collections::HashMap::new(),
         };
-        
+
         let result = pattern.validate(&context);
         assert!(result.is_err());
     }

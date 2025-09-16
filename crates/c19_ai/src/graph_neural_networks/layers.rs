@@ -1,10 +1,10 @@
 //! 图神经网络层
-//! 
+//!
 //! 提供图神经网络层的实现
 
-use serde::{Deserialize, Serialize};
-use ndarray::{Array1, Array2};
 use anyhow::Result;
+use ndarray::{Array1, Array2};
+use serde::{Deserialize, Serialize};
 
 /// 图神经网络层类型
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -33,7 +33,7 @@ impl GNNLayer {
             bias: Array1::zeros(output_dim),
         }
     }
-    
+
     pub fn forward(&self, input: &Array2<f32>, adjacency: &Array2<f32>) -> Result<Array2<f32>> {
         // 图神经网络层的前向传播
         Ok(input.clone())

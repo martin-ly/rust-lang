@@ -1,14 +1,14 @@
 //! Rust 1.89 控制流与函数特性研究项目
-//! 
+//!
 //! 本项目专注于控制流与函数系统的深度分析和实践应用，
 //! 涵盖了异步编程增强、类型系统增强、性能优化特性等核心新特性。
 
 // 导出核心模块
-pub mod rust_189_features;
-pub mod rust_189_enhanced_features;
 pub mod async_control_flow;
 pub mod async_control_flow_189;
 pub mod performance_optimization_189;
+pub mod rust_189_enhanced_features;
+pub mod rust_189_features;
 
 // 导出子模块
 pub mod closure;
@@ -39,12 +39,12 @@ impl ProjectInfo {
     pub fn version() -> &'static str {
         VERSION
     }
-    
+
     /// 获取支持的Rust版本
     pub fn rust_version() -> &'static str {
         RUST_VERSION
     }
-    
+
     /// 获取项目描述
     pub fn description() -> &'static str {
         "Rust 1.89 控制流与函数特性研究项目"
@@ -55,22 +55,26 @@ impl ProjectInfo {
 pub fn init() {
     // 设置日志
     tracing_subscriber::fmt::init();
-    
-    println!("🚀 {} v{} 初始化完成", ProjectInfo::description(), ProjectInfo::version());
+
+    println!(
+        "🚀 {} v{} 初始化完成",
+        ProjectInfo::description(),
+        ProjectInfo::version()
+    );
     println!("📦 支持 Rust {}", ProjectInfo::rust_version());
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_project_info() {
         assert_eq!(ProjectInfo::version(), VERSION);
         assert_eq!(ProjectInfo::rust_version(), RUST_VERSION);
         assert!(!ProjectInfo::description().is_empty());
     }
-    
+
     #[test]
     fn test_init() {
         // 测试初始化函数不会panic

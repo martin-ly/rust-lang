@@ -1,7 +1,7 @@
 //! 运行时性能分析实践示例
 
-use std::time::{Duration, Instant};
 use std::collections::HashMap;
+use std::time::{Duration, Instant};
 
 /// 简单性能分析器
 pub struct SimpleProfiler {
@@ -16,19 +16,19 @@ impl SimpleProfiler {
     }
 
     /// 测量函数执行时间
-    pub fn measure<F, T>(&mut self, name: &str, f: F) -> T 
+    pub fn measure<F, T>(&mut self, name: &str, f: F) -> T
     where
         F: FnOnce() -> T,
     {
         let start = Instant::now();
         let result = f();
         let duration = start.elapsed();
-        
+
         self.measurements
             .entry(name.to_string())
             .or_insert_with(Vec::new)
             .push(duration);
-        
+
         result
     }
 
@@ -43,19 +43,23 @@ impl SimpleProfiler {
     /// 生成简单报告
     pub fn generate_report(&self) -> String {
         let mut report = String::from("=== 性能分析报告 ===\n");
-        
+
         for (name, durations) in &self.measurements {
             let total: Duration = durations.iter().sum();
             let avg = total / durations.len() as u32;
             let min = durations.iter().min().unwrap();
             let max = durations.iter().max().unwrap();
-            
+
             report.push_str(&format!(
                 "{}: 平均={:?}, 最小={:?}, 最大={:?}, 次数={}\n",
-                name, avg, min, max, durations.len()
+                name,
+                avg,
+                min,
+                max,
+                durations.len()
             ));
         }
-        
+
         report.push_str("=====================");
         report
     }
@@ -137,14 +141,14 @@ mod tests {
     #[test]
     fn test_simple_profiler() {
         let mut profiler = SimpleProfiler::new();
-        
+
         profiler.measure("test_function", || {
             thread::sleep(Duration::from_millis(10));
         });
-        
+
         let avg_time = profiler.get_average_time("test_function");
         assert!(avg_time.is_some());
-        
+
         if let Some(avg) = avg_time {
             assert!(avg > Duration::from_millis(5));
         }
@@ -154,10 +158,10 @@ mod tests {
     fn test_memory_monitor() {
         let mut monitor = MemoryMonitor::new();
         monitor.start_monitoring();
-        
+
         let usage = monitor.get_current_usage();
         assert!(usage.is_some());
-        
+
         let growth = monitor.calculate_growth();
         assert!(growth.is_some());
     }
@@ -165,10 +169,10 @@ mod tests {
     #[test]
     fn test_metrics_collector() {
         let mut collector = MetricsCollector::new();
-        
+
         collector.record_metric("latency", 100.0);
         collector.increment_counter("requests");
-        
+
         assert_eq!(collector.get_metric("latency"), Some(100.0));
         assert_eq!(collector.get_counter("requests"), Some(1));
     }

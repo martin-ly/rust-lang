@@ -5,8 +5,8 @@
 #[cfg(feature = "c20-integration")]
 #[tokio::main(flavor = "current_thread")]
 async fn main() {
+    use c18_model::runtime_tokio::{TokioCancellationToken, TokioSpawner, TokioTimer};
     use core::time::Duration;
-    use c18_model::runtime_tokio::{TokioCancellationToken, TokioTimer, TokioSpawner};
     let spawner = TokioSpawner;
     let timer = TokioTimer;
     let cancel = TokioCancellationToken::new();
@@ -32,5 +32,3 @@ fn main() {
         "示例需要启用特性：`c20-integration,tokio-adapter`\n运行：cargo run -p c18_model --example c20_integration_demo --features c20-integration,tokio-adapter"
     );
 }
-
-

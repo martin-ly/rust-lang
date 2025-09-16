@@ -1,5 +1,5 @@
 //! 监控和可观测性示例
-//! 
+//!
 //! 展示Rust应用的监控和可观测性特性，包括：
 //! - 指标收集和导出
 //! - 分布式追踪
@@ -10,32 +10,16 @@
 //! - 错误追踪
 
 use axum::{
+    Json, Router,
     extract::{Request, State},
     http::{HeaderMap, StatusCode},
     middleware,
     response::{IntoResponse, Response},
     routing::{get, post},
-    Json, Router,
 };
-use serde::{Deserialize, Serialize};
-use std::{
-    collections::HashMap,
-    sync::{
-        atomic::{AtomicU64, AtomicUsize, Ordering},
-        Arc, Mutex,
-    },
-    time::{Duration, Instant, SystemTime, UNIX_EPOCH},
-};
-use tokio::{
-    sync::{broadcast, mpsc, RwLock},
-    time::{interval, sleep},
-};
-use tracing::{info, warn, error, debug, instrument, span, Level};
-use uuid::Uuid;
 use opentelemetry::{
-    global,
+    KeyValue, global,
     trace::{Span, Tracer},
-    KeyValue,
 };
 use opentelemetry_sdk::{
     export::metrics::aggregation,
@@ -44,9 +28,24 @@ use opentelemetry_sdk::{
 };
 use opentelemetry_stdout::{ExporterBuilder, SpanExporter};
 use prometheus::{
-    Counter, Gauge, Histogram, Registry, TextEncoder,
-    labels, opts, IntCounter, IntGauge, IntHistogram,
+    Counter, Gauge, Histogram, IntCounter, IntGauge, IntHistogram, Registry, TextEncoder, labels,
+    opts,
 };
+use serde::{Deserialize, Serialize};
+use std::{
+    collections::HashMap,
+    sync::{
+        Arc, Mutex,
+        atomic::{AtomicU64, AtomicUsize, Ordering},
+    },
+    time::{Duration, Instant, SystemTime, UNIX_EPOCH},
+};
+use tokio::{
+    sync::{RwLock, broadcast, mpsc},
+    time::{interval, sleep},
+};
+use tracing::{Level, debug, error, info, instrument, span, warn};
+use uuid::Uuid;
 
 /// 应用状态
 #[derive(Clone)]
@@ -257,44 +256,36 @@ pub struct DashboardData {
 impl MetricsCollector {
     pub fn new() -> Self {
         let registry = Registry::new();
-        
-        let request_count = Counter::new(
-            "http_requests_total",
-            "Total number of HTTP requests",
-        ).unwrap();
-        
+
+        let request_count =
+            Counter::new("http_requests_total", "Total number of HTTP requests").unwrap();
+
         let request_duration = Histogram::new(
             "http_request_duration_seconds",
             "HTTP request duration in seconds",
-        ).unwrap();
-        
-        let active_connections = Gauge::new(
-            "active_connections",
-            "Number of active connections",
-        ).unwrap();
-        
-        let error_count = Counter::new(
-            "http_errors_total",
-            "Total number of HTTP errors",
-        ).unwrap();
-        
-        let memory_usage = Gauge::new(
-            "memory_usage_bytes",
-            "Memory usage in bytes",
-        ).unwrap();
-        
-        let cpu_usage = Gauge::new(
-            "cpu_usage_percent",
-            "CPU usage percentage",
-        ).unwrap();
-        
+        )
+        .unwrap();
+
+        let active_connections =
+            Gauge::new("active_connections", "Number of active connections").unwrap();
+
+        let error_count = Counter::new("http_errors_total", "Total number of HTTP errors").unwrap();
+
+        let memory_usage = Gauge::new("memory_usage_bytes", "Memory usage in bytes").unwrap();
+
+        let cpu_usage = Gauge::new("cpu_usage_percent", "CPU usage percentage").unwrap();
+
         registry.register(Box::new(request_count.clone())).unwrap();
-        registry.register(Box::new(request_duration.clone())).unwrap();
-        registry.register(Box::new(active_connections.clone())).unwrap();
+        registry
+            .register(Box::new(request_duration.clone()))
+            .unwrap();
+        registry
+            .register(Box::new(active_connections.clone()))
+            .unwrap();
         registry.register(Box::new(error_count.clone())).unwrap();
         registry.register(Box::new(memory_usage.clone())).unwrap();
         registry.register(Box::new(cpu_usage.clone())).unwrap();
-        
+
         Self {
             request_count,
             request_duration,
@@ -305,34 +296,39 @@ impl MetricsCollector {
             custom_metrics: Arc::new(RwLock::new(HashMap::new())),
         }
     }
-    
+
     /// 记录请求
     pub fn record_request(&self, method: &str, path: &str, status: u16, duration: Duration) {
         self.request_count.inc();
         self.request_duration.observe(duration.as_secs_f64());
-        
+
         if status >= 400 {
             self.error_count.inc();
         }
     }
-    
+
     /// 更新连接数
     pub fn update_connections(&self, count: usize) {
         self.active_connections.set(count as f64);
     }
-    
+
     /// 更新内存使用
     pub fn update_memory_usage(&self, bytes: usize) {
         self.memory_usage.set(bytes as f64);
     }
-    
+
     /// 更新CPU使用
     pub fn update_cpu_usage(&self, percent: f64) {
         self.cpu_usage.set(percent);
     }
-    
+
     /// 添加自定义指标
-    pub async fn add_custom_metric(&self, name: String, value: f64, labels: HashMap<String, String>) {
+    pub async fn add_custom_metric(
+        &self,
+        name: String,
+        value: f64,
+        labels: HashMap<String, String>,
+    ) {
         let metric = CustomMetric {
             name: name.clone(),
             value,
@@ -342,26 +338,29 @@ impl MetricsCollector {
                 .unwrap()
                 .as_secs(),
         };
-        
+
         let mut metrics = self.custom_metrics.write().await;
         metrics.insert(name, metric);
     }
-    
+
     /// 获取所有指标
     pub async fn get_all_metrics(&self) -> HashMap<String, f64> {
         let mut metrics = HashMap::new();
-        
+
         metrics.insert("request_count".to_string(), self.request_count.get());
         metrics.insert("error_count".to_string(), self.error_count.get());
-        metrics.insert("active_connections".to_string(), self.active_connections.get());
+        metrics.insert(
+            "active_connections".to_string(),
+            self.active_connections.get(),
+        );
         metrics.insert("memory_usage".to_string(), self.memory_usage.get());
         metrics.insert("cpu_usage".to_string(), self.cpu_usage.get());
-        
+
         let custom_metrics = self.custom_metrics.read().await;
         for (name, metric) in custom_metrics.iter() {
             metrics.insert(name.clone(), metric.value);
         }
-        
+
         metrics
     }
 }
@@ -380,41 +379,49 @@ impl HealthChecker {
             })),
         }
     }
-    
+
     /// 添加健康检查
     pub async fn add_check(&self, check: HealthCheck) {
         let mut checks = self.checks.write().await;
         checks.insert(check.name.clone(), check);
     }
-    
+
     /// 运行健康检查
     pub async fn run_checks(&self) -> HealthStatus {
         let checks = self.checks.read().await;
         let mut results = HashMap::new();
         let mut overall = HealthLevel::Healthy;
-        
+
         for (name, check) in checks.iter() {
             let start = Instant::now();
             let result = self.run_single_check(check).await;
             let duration = start.elapsed();
-            
+
             let check_result = CheckResult {
-                status: if result { HealthLevel::Healthy } else { HealthLevel::Unhealthy },
-                message: if result { "OK".to_string() } else { "Failed".to_string() },
+                status: if result {
+                    HealthLevel::Healthy
+                } else {
+                    HealthLevel::Unhealthy
+                },
+                message: if result {
+                    "OK".to_string()
+                } else {
+                    "Failed".to_string()
+                },
                 duration,
                 timestamp: SystemTime::now()
                     .duration_since(UNIX_EPOCH)
                     .unwrap()
                     .as_secs(),
             };
-            
+
             if !result {
                 overall = HealthLevel::Unhealthy;
             }
-            
+
             results.insert(name.clone(), check_result);
         }
-        
+
         let status = HealthStatus {
             overall,
             checks: results,
@@ -423,13 +430,13 @@ impl HealthChecker {
                 .unwrap()
                 .as_secs(),
         };
-        
+
         let mut current_status = self.status.write().await;
         *current_status = status.clone();
-        
+
         status
     }
-    
+
     /// 运行单个健康检查
     async fn run_single_check(&self, check: &HealthCheck) -> bool {
         // 模拟健康检查逻辑
@@ -452,7 +459,7 @@ impl HealthChecker {
             _ => false,
         }
     }
-    
+
     /// 获取健康状态
     pub async fn get_status(&self) -> HealthStatus {
         let status = self.status.read().await;
@@ -468,29 +475,29 @@ impl AlertManager {
             notifiers: Arc::new(RwLock::new(Vec::new())),
         }
     }
-    
+
     /// 添加告警规则
     pub async fn add_rule(&self, rule: AlertRule) {
         let mut rules = self.rules.write().await;
         rules.push(rule);
     }
-    
+
     /// 添加通知器
     pub async fn add_notifier(&self, notifier: Box<dyn Notifier + Send + Sync>) {
         let mut notifiers = self.notifiers.write().await;
         notifiers.push(notifier);
     }
-    
+
     /// 检查告警规则
     pub async fn check_rules(&self, metrics: &HashMap<String, f64>) {
         let rules = self.rules.read().await;
         let mut alerts = self.alerts.write().await;
-        
+
         for rule in rules.iter() {
             if !rule.enabled {
                 continue;
             }
-            
+
             // 简化的规则检查逻辑
             let should_alert = match rule.condition.as_str() {
                 "cpu_usage > 80" => metrics.get("cpu_usage").map_or(false, |&v| v > 80.0),
@@ -498,7 +505,7 @@ impl AlertManager {
                 "error_rate > 5" => metrics.get("error_rate").map_or(false, |&v| v > 5.0),
                 _ => false,
             };
-            
+
             if should_alert {
                 let alert = Alert {
                     id: Uuid::new_v4().to_string(),
@@ -512,9 +519,9 @@ impl AlertManager {
                     resolved: false,
                     resolved_at: None,
                 };
-                
+
                 alerts.push(alert.clone());
-                
+
                 // 发送通知
                 let notifiers = self.notifiers.read().await;
                 for notifier in notifiers.iter() {
@@ -525,7 +532,7 @@ impl AlertManager {
             }
         }
     }
-    
+
     /// 获取活跃告警
     pub async fn get_active_alerts(&self) -> Vec<Alert> {
         let alerts = self.alerts.read().await;
@@ -541,24 +548,24 @@ impl LogAggregator {
             max_logs,
         }
     }
-    
+
     /// 添加日志条目
     pub async fn add_log(&self, entry: LogEntry) {
         let mut logs = self.logs.write().await;
         logs.push(entry);
-        
+
         // 限制日志数量
         if logs.len() > self.max_logs {
             logs.drain(0..logs.len() - self.max_logs);
         }
     }
-    
+
     /// 添加过滤器
     pub async fn add_filter(&self, filter: LogFilter) {
         let mut filters = self.filters.write().await;
         filters.push(filter);
     }
-    
+
     /// 查询日志
     pub async fn query_logs(&self, level: Option<String>, source: Option<String>) -> Vec<LogEntry> {
         let logs = self.logs.read().await;
@@ -579,16 +586,16 @@ impl LogAggregator {
             .cloned()
             .collect()
     }
-    
+
     /// 获取日志统计
     pub async fn get_log_stats(&self) -> HashMap<String, usize> {
         let logs = self.logs.read().await;
         let mut stats = HashMap::new();
-        
+
         for log in logs.iter() {
             *stats.entry(log.level.clone()).or_insert(0) += 1;
         }
-        
+
         stats
     }
 }
@@ -600,7 +607,7 @@ impl PerformanceMonitor {
             thresholds: Arc::new(RwLock::new(HashMap::new())),
         }
     }
-    
+
     /// 记录性能指标
     pub async fn record_metric(&self, name: String, value: f64, unit: String) {
         let metric = PerformanceMetric {
@@ -612,31 +619,34 @@ impl PerformanceMonitor {
                 .unwrap()
                 .as_secs(),
         };
-        
+
         let mut metrics = self.metrics.write().await;
         metrics.insert(name, metric);
     }
-    
+
     /// 设置阈值
     pub async fn set_threshold(&self, name: String, threshold: f64) {
         let mut thresholds = self.thresholds.write().await;
         thresholds.insert(name, threshold);
     }
-    
+
     /// 检查阈值
     pub async fn check_thresholds(&self) -> Vec<String> {
         let metrics = self.metrics.read().await;
         let thresholds = self.thresholds.read().await;
         let mut violations = Vec::new();
-        
+
         for (name, metric) in metrics.iter() {
             if let Some(&threshold) = thresholds.get(name) {
                 if metric.value > threshold {
-                    violations.push(format!("{} 超过阈值: {} > {}", name, metric.value, threshold));
+                    violations.push(format!(
+                        "{} 超过阈值: {} > {}",
+                        name, metric.value, threshold
+                    ));
                 }
             }
         }
-        
+
         violations
     }
 }
@@ -648,9 +658,15 @@ impl ErrorTracker {
             patterns: Arc::new(RwLock::new(Vec::new())),
         }
     }
-    
+
     /// 记录错误
-    pub async fn record_error(&self, error_type: String, message: String, stack_trace: String, context: HashMap<String, String>) {
+    pub async fn record_error(
+        &self,
+        error_type: String,
+        message: String,
+        stack_trace: String,
+        context: HashMap<String, String>,
+    ) {
         let error_entry = ErrorEntry {
             id: Uuid::new_v4().to_string(),
             error_type: error_type.clone(),
@@ -663,10 +679,10 @@ impl ErrorTracker {
             context,
             trace_id: None,
         };
-        
+
         let mut errors = self.errors.write().await;
         errors.push(error_entry);
-        
+
         // 更新错误模式
         let mut patterns = self.patterns.write().await;
         if let Some(pattern) = patterns.iter_mut().find(|p| p.pattern == error_type) {
@@ -695,11 +711,12 @@ impl ErrorTracker {
             });
         }
     }
-    
+
     /// 获取错误统计
     pub async fn get_error_stats(&self) -> HashMap<String, usize> {
         let patterns = self.patterns.read().await;
-        patterns.iter()
+        patterns
+            .iter()
             .map(|p| (p.pattern.clone(), p.count.load(Ordering::Relaxed)))
             .collect()
     }
@@ -713,7 +730,7 @@ impl Notifier for ConsoleNotifier {
         println!("🚨 告警: {} - {}", alert.severity, alert.message);
         Ok(())
     }
-    
+
     fn name(&self) -> &str {
         "console"
     }
@@ -730,7 +747,7 @@ impl Notifier for EmailNotifier {
         info!("发送邮件到 {}: {}", self.email, alert.message);
         Ok(())
     }
-    
+
     fn name(&self) -> &str {
         "email"
     }
@@ -746,23 +763,29 @@ pub async fn monitoring_middleware(
     let start = Instant::now();
     let method = request.method().to_string();
     let path = request.uri().path().to_string();
-    
+
     // 创建追踪span
     let span = state.tracer.start("http_request");
     span.set_attribute(KeyValue::new("http.method", method.clone()));
     span.set_attribute(KeyValue::new("http.path", path.clone()));
-    
+
     let response = next.run(request).await;
     let duration = start.elapsed();
     let status = response.status().as_u16();
-    
+
     // 记录指标
-    state.metrics.record_request(&method, &path, status, duration);
-    
+    state
+        .metrics
+        .record_request(&method, &path, status, duration);
+
     // 记录日志
     let log_entry = LogEntry {
         id: Uuid::new_v4().to_string(),
-        level: if status >= 400 { "ERROR".to_string() } else { "INFO".to_string() },
+        level: if status >= 400 {
+            "ERROR".to_string()
+        } else {
+            "INFO".to_string()
+        },
         message: format!("{} {} - {}", method, path, status),
         timestamp: SystemTime::now()
             .duration_since(UNIX_EPOCH)
@@ -773,33 +796,27 @@ pub async fn monitoring_middleware(
         trace_id: Some(span.span_context().trace_id().to_string()),
         span_id: Some(span.span_context().span_id().to_string()),
     };
-    
+
     state.log_aggregator.add_log(log_entry).await;
-    
+
     span.end();
     response
 }
 
 /// 健康检查端点
-async fn health_check(
-    State(state): State<AppState>,
-) -> Json<HealthStatus> {
+async fn health_check(State(state): State<AppState>) -> Json<HealthStatus> {
     let status = state.health_checker.run_checks().await;
     Json(status)
 }
 
 /// 指标端点
-async fn metrics(
-    State(state): State<AppState>,
-) -> String {
+async fn metrics(State(state): State<AppState>) -> String {
     let metrics = state.metrics.get_all_metrics().await;
     serde_json::to_string_pretty(&metrics).unwrap()
 }
 
 /// 告警端点
-async fn alerts(
-    State(state): State<AppState>,
-) -> Json<Vec<Alert>> {
+async fn alerts(State(state): State<AppState>) -> Json<Vec<Alert>> {
     let alerts = state.alert_manager.get_active_alerts().await;
     Json(alerts)
 }
@@ -816,17 +833,15 @@ async fn logs(
 }
 
 /// 仪表板端点
-async fn dashboard(
-    State(state): State<AppState>,
-) -> Json<DashboardData> {
+async fn dashboard(State(state): State<AppState>) -> Json<DashboardData> {
     let metrics = state.metrics.get_all_metrics().await;
     let health_status = state.health_checker.get_status().await;
     let recent_alerts = state.alert_manager.get_active_alerts().await;
-    
+
     let error_rate = metrics.get("error_rate").copied().unwrap_or(0.0);
     let response_time = metrics.get("response_time").copied().unwrap_or(0.0);
     let throughput = metrics.get("throughput").copied().unwrap_or(0.0);
-    
+
     let dashboard_data = DashboardData {
         metrics,
         health_status,
@@ -835,7 +850,7 @@ async fn dashboard(
         response_time,
         throughput,
     };
-    
+
     Json(dashboard_data)
 }
 
@@ -858,63 +873,71 @@ fn create_app(state: AppState) -> Router {
 async fn init_monitoring() -> AppState {
     // 初始化指标收集器
     let metrics = Arc::new(MetricsCollector::new());
-    
+
     // 初始化追踪器
-    let tracer = Arc::new(
-        global::tracer("monitoring-example")
-    );
-    
+    let tracer = Arc::new(global::tracer("monitoring-example"));
+
     // 初始化健康检查器
     let health_checker = Arc::new(HealthChecker::new());
-    
+
     // 添加健康检查
-    health_checker.add_check(HealthCheck {
-        name: "database".to_string(),
-        check_fn: "check_database".to_string(),
-        timeout: Duration::from_secs(5),
-        interval: Duration::from_secs(30),
-        last_check: None,
-        last_result: None,
-    }).await;
-    
-    health_checker.add_check(HealthCheck {
-        name: "redis".to_string(),
-        check_fn: "check_redis".to_string(),
-        timeout: Duration::from_secs(3),
-        interval: Duration::from_secs(30),
-        last_check: None,
-        last_result: None,
-    }).await;
-    
+    health_checker
+        .add_check(HealthCheck {
+            name: "database".to_string(),
+            check_fn: "check_database".to_string(),
+            timeout: Duration::from_secs(5),
+            interval: Duration::from_secs(30),
+            last_check: None,
+            last_result: None,
+        })
+        .await;
+
+    health_checker
+        .add_check(HealthCheck {
+            name: "redis".to_string(),
+            check_fn: "check_redis".to_string(),
+            timeout: Duration::from_secs(3),
+            interval: Duration::from_secs(30),
+            last_check: None,
+            last_result: None,
+        })
+        .await;
+
     // 初始化告警管理器
     let alert_manager = Arc::new(AlertManager::new());
-    
+
     // 添加告警规则
-    alert_manager.add_rule(AlertRule {
-        name: "high_cpu_usage".to_string(),
-        condition: "cpu_usage > 80".to_string(),
-        severity: AlertSeverity::Warning,
-        duration: Duration::from_secs(60),
-        enabled: true,
-    }).await;
-    
-    alert_manager.add_rule(AlertRule {
-        name: "high_memory_usage".to_string(),
-        condition: "memory_usage > 90".to_string(),
-        severity: AlertSeverity::Critical,
-        duration: Duration::from_secs(30),
-        enabled: true,
-    }).await;
-    
+    alert_manager
+        .add_rule(AlertRule {
+            name: "high_cpu_usage".to_string(),
+            condition: "cpu_usage > 80".to_string(),
+            severity: AlertSeverity::Warning,
+            duration: Duration::from_secs(60),
+            enabled: true,
+        })
+        .await;
+
+    alert_manager
+        .add_rule(AlertRule {
+            name: "high_memory_usage".to_string(),
+            condition: "memory_usage > 90".to_string(),
+            severity: AlertSeverity::Critical,
+            duration: Duration::from_secs(30),
+            enabled: true,
+        })
+        .await;
+
     // 添加通知器
     alert_manager.add_notifier(Box::new(ConsoleNotifier)).await;
-    alert_manager.add_notifier(Box::new(EmailNotifier {
-        email: "admin@example.com".to_string(),
-    })).await;
-    
+    alert_manager
+        .add_notifier(Box::new(EmailNotifier {
+            email: "admin@example.com".to_string(),
+        }))
+        .await;
+
     // 初始化日志聚合器
     let log_aggregator = Arc::new(LogAggregator::new(10000));
-    
+
     AppState {
         metrics,
         tracer,
@@ -927,23 +950,23 @@ async fn init_monitoring() -> AppState {
 /// 监控任务
 async fn monitoring_task(state: AppState) {
     let mut interval = interval(Duration::from_secs(10));
-    
+
     loop {
         interval.tick().await;
-        
+
         // 收集系统指标
         let metrics = state.metrics.get_all_metrics().await;
-        
+
         // 模拟系统指标
         state.metrics.update_memory_usage(1024 * 1024 * 100).await; // 100MB
         state.metrics.update_cpu_usage(45.0).await; // 45%
-        
+
         // 检查告警规则
         state.alert_manager.check_rules(&metrics).await;
-        
+
         // 运行健康检查
         state.health_checker.run_checks().await;
-        
+
         info!("监控任务执行完成");
     }
 }
@@ -954,91 +977,95 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     tracing_subscriber::fmt()
         .with_env_filter(tracing_subscriber::EnvFilter::from_default_env())
         .init();
-    
+
     // 初始化监控系统
     let state = init_monitoring().await;
-    
+
     // 启动监控任务
     let state_clone = state.clone();
     tokio::spawn(monitoring_task(state_clone));
-    
+
     // 创建应用
     let app = create_app(state);
-    
+
     // 启动服务器
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await?;
     info!("监控服务器启动在 http://0.0.0.0:3000");
-    
+
     axum::serve(listener, app).await?;
-    
+
     Ok(())
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[tokio::test]
     async fn test_metrics_collector() {
         let collector = MetricsCollector::new();
-        
+
         collector.record_request("GET", "/test", 200, Duration::from_millis(100));
         collector.update_connections(10);
         collector.update_memory_usage(1024 * 1024);
         collector.update_cpu_usage(50.0);
-        
+
         let metrics = collector.get_all_metrics().await;
         assert!(metrics.contains_key("request_count"));
         assert!(metrics.contains_key("active_connections"));
         assert!(metrics.contains_key("memory_usage"));
         assert!(metrics.contains_key("cpu_usage"));
     }
-    
+
     #[tokio::test]
     async fn test_health_checker() {
         let checker = HealthChecker::new();
-        
-        checker.add_check(HealthCheck {
-            name: "test".to_string(),
-            check_fn: "test_check".to_string(),
-            timeout: Duration::from_secs(5),
-            interval: Duration::from_secs(30),
-            last_check: None,
-            last_result: None,
-        }).await;
-        
+
+        checker
+            .add_check(HealthCheck {
+                name: "test".to_string(),
+                check_fn: "test_check".to_string(),
+                timeout: Duration::from_secs(5),
+                interval: Duration::from_secs(30),
+                last_check: None,
+                last_result: None,
+            })
+            .await;
+
         let status = checker.run_checks().await;
         assert_eq!(status.overall, HealthLevel::Healthy);
         assert!(status.checks.contains_key("test"));
     }
-    
+
     #[tokio::test]
     async fn test_alert_manager() {
         let manager = AlertManager::new();
-        
-        manager.add_rule(AlertRule {
-            name: "test_rule".to_string(),
-            condition: "cpu_usage > 80".to_string(),
-            severity: AlertSeverity::Warning,
-            duration: Duration::from_secs(60),
-            enabled: true,
-        }).await;
-        
+
+        manager
+            .add_rule(AlertRule {
+                name: "test_rule".to_string(),
+                condition: "cpu_usage > 80".to_string(),
+                severity: AlertSeverity::Warning,
+                duration: Duration::from_secs(60),
+                enabled: true,
+            })
+            .await;
+
         manager.add_notifier(Box::new(ConsoleNotifier)).await;
-        
+
         let mut metrics = HashMap::new();
         metrics.insert("cpu_usage".to_string(), 85.0);
-        
+
         manager.check_rules(&metrics).await;
-        
+
         let alerts = manager.get_active_alerts().await;
         assert!(!alerts.is_empty());
     }
-    
+
     #[tokio::test]
     async fn test_log_aggregator() {
         let aggregator = LogAggregator::new(1000);
-        
+
         let log_entry = LogEntry {
             id: Uuid::new_v4().to_string(),
             level: "INFO".to_string(),
@@ -1052,41 +1079,47 @@ mod tests {
             trace_id: None,
             span_id: None,
         };
-        
+
         aggregator.add_log(log_entry).await;
-        
+
         let logs = aggregator.query_logs(Some("INFO".to_string()), None).await;
         assert_eq!(logs.len(), 1);
-        
+
         let stats = aggregator.get_log_stats().await;
         assert_eq!(stats.get("INFO"), Some(&1));
     }
-    
+
     #[tokio::test]
     async fn test_performance_monitor() {
         let monitor = PerformanceMonitor::new();
-        
-        monitor.record_metric("response_time".to_string(), 100.0, "ms".to_string()).await;
-        monitor.set_threshold("response_time".to_string(), 200.0).await;
-        
+
+        monitor
+            .record_metric("response_time".to_string(), 100.0, "ms".to_string())
+            .await;
+        monitor
+            .set_threshold("response_time".to_string(), 200.0)
+            .await;
+
         let violations = monitor.check_thresholds().await;
         assert!(violations.is_empty());
     }
-    
+
     #[tokio::test]
     async fn test_error_tracker() {
         let tracker = ErrorTracker::new();
-        
+
         let mut context = HashMap::new();
         context.insert("user_id".to_string(), "123".to_string());
-        
-        tracker.record_error(
-            "ValidationError".to_string(),
-            "Invalid input".to_string(),
-            "stack trace".to_string(),
-            context,
-        ).await;
-        
+
+        tracker
+            .record_error(
+                "ValidationError".to_string(),
+                "Invalid input".to_string(),
+                "stack trace".to_string(),
+                context,
+            )
+            .await;
+
         let stats = tracker.get_error_stats().await;
         assert_eq!(stats.get("ValidationError"), Some(&1));
     }

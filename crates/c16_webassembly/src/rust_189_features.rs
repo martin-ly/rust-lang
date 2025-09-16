@@ -1,12 +1,12 @@
 //! # Rust 1.89 特性与 WebAssembly 2.0 集成示例
-//! 
+//!
 //! 本模块展示了 Rust 1.89 的新特性如何与 WebAssembly 2.0 的最新功能集成。
 //! This module demonstrates how Rust 1.89's new features integrate with WebAssembly 2.0's latest capabilities.
 
 use crate::types::*;
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use thiserror::Error;
-use serde::{Deserialize, Serialize};
 
 /// Rust 1.89 常量泛型推断在 WebAssembly 中的应用
 /// Application of Rust 1.89 const generic inference in WebAssembly
@@ -25,7 +25,7 @@ impl<const N: usize> WasmArrayBuilder<N> {
             data: [Value::I32(0); N],
         }
     }
-    
+
     /// 填充数组
     /// Fill array
     pub fn fill_with(&mut self, value: Value) {
@@ -33,7 +33,7 @@ impl<const N: usize> WasmArrayBuilder<N> {
             self.data[i] = value.clone();
         }
     }
-    
+
     /// 获取数组数据
     /// Get array data
     pub fn data(&self) -> &[Value; N] {
@@ -57,21 +57,22 @@ impl BulkMemoryManager {
             operations: Vec::new(),
         }
     }
-    
+
     /// 执行批量内存复制
     /// Execute bulk memory copy
     pub fn bulk_copy(&mut self, src: u32, dst: u32, size: u32) -> Result<(), MemoryError> {
         let src_end = src + size;
         let dst_end = dst + size;
-        
+
         if src_end > self.memory.len() as u32 || dst_end > self.memory.len() as u32 {
             return Err(MemoryError::OutOfBounds);
         }
-        
+
         // 使用 Rust 1.89 的改进错误处理
         // Use Rust 1.89's improved error handling
-        self.memory.copy_within(src as usize..src_end as usize, dst as usize);
-        
+        self.memory
+            .copy_within(src as usize..src_end as usize, dst as usize);
+
         // 记录操作
         // Record operation
         let operation = BulkMemoryOperations {
@@ -81,23 +82,23 @@ impl BulkMemoryManager {
             table_fill: Vec::new(),
         };
         self.operations.push(operation);
-        
+
         Ok(())
     }
-    
+
     /// 执行批量内存填充
     /// Execute bulk memory fill
     pub fn bulk_fill(&mut self, addr: u32, value: u8, size: u32) -> Result<(), MemoryError> {
         let end_addr = addr + size;
-        
+
         if end_addr > self.memory.len() as u32 {
             return Err(MemoryError::OutOfBounds);
         }
-        
+
         // 使用 Rust 1.89 的改进性能
         // Use Rust 1.89's improved performance
         self.memory[addr as usize..end_addr as usize].fill(value);
-        
+
         // 记录操作
         // Record operation
         let operation = BulkMemoryOperations {
@@ -107,7 +108,7 @@ impl BulkMemoryManager {
             table_fill: Vec::new(),
         };
         self.operations.push(operation);
-        
+
         Ok(())
     }
 }
@@ -128,14 +129,18 @@ impl TailCallOptimizer {
             optimization_enabled: true,
         }
     }
-    
+
     /// 执行尾调用
     /// Execute tail call
-    pub fn execute_tail_call(&mut self, target: u32, args: Vec<Value>) -> Result<Value, RuntimeError> {
+    pub fn execute_tail_call(
+        &mut self,
+        target: u32,
+        args: Vec<Value>,
+    ) -> Result<Value, RuntimeError> {
         if !self.optimization_enabled {
             return Err(RuntimeError::ExecutionError("尾调用优化未启用".to_string()));
         }
-        
+
         // 检查是否为尾调用
         // Check if it's a tail call
         if self.call_stack.len() > 0 {
@@ -143,10 +148,10 @@ impl TailCallOptimizer {
             // Replace current call stack top
             self.call_stack.pop();
         }
-        
+
         let tail_call = TailCall { target, args };
         self.call_stack.push(tail_call);
-        
+
         // 模拟执行
         // Simulate execution
         Ok(Value::I32(42))
@@ -181,10 +186,15 @@ impl HostBindingManager {
             }),
         }
     }
-    
+
     /// 注册宿主绑定
     /// Register host binding
-    pub fn register_binding(&mut self, name: String, binding_type: HostBindingType, target: String) {
+    pub fn register_binding(
+        &mut self,
+        name: String,
+        binding_type: HostBindingType,
+        target: String,
+    ) {
         let binding = HostBinding {
             name: name.clone(),
             binding_type,
@@ -192,10 +202,14 @@ impl HostBindingManager {
         };
         self.bindings.insert(name, binding);
     }
-    
+
     /// 调用 JavaScript 函数
     /// Call JavaScript function
-    pub fn call_javascript_function(&self, name: &str, _args: Vec<Value>) -> Result<Value, RuntimeError> {
+    pub fn call_javascript_function(
+        &self,
+        name: &str,
+        _args: Vec<Value>,
+    ) -> Result<Value, RuntimeError> {
         if let Some(binding) = self.bindings.get(name) {
             match binding.binding_type {
                 HostBindingType::JavaScriptFunction => {
@@ -203,7 +217,9 @@ impl HostBindingManager {
                     // Simulate JavaScript function call
                     Ok(Value::I32(0)) // 简化实现
                 }
-                _ => Err(RuntimeError::ExecutionError("不是 JavaScript 函数绑定".to_string())),
+                _ => Err(RuntimeError::ExecutionError(
+                    "不是 JavaScript 函数绑定".to_string(),
+                )),
             }
         } else {
             Err(RuntimeError::FunctionNotFound)
@@ -226,16 +242,20 @@ impl InterfaceTypeHandler {
             type_registry: HashMap::new(),
         }
     }
-    
+
     /// 注册接口类型
     /// Register interface type
     pub fn register_type(&mut self, name: String, interface_type: InterfaceType) {
         self.type_registry.insert(name, interface_type);
     }
-    
+
     /// 验证接口类型
     /// Validate interface type
-    pub fn validate_interface_type(&self, name: &str, value: &Value) -> Result<(), ValidationError> {
+    pub fn validate_interface_type(
+        &self,
+        name: &str,
+        value: &Value,
+    ) -> Result<(), ValidationError> {
         if let Some(interface_type) = self.type_registry.get(name) {
             match interface_type {
                 InterfaceType::Basic(value_type) => {
@@ -268,28 +288,28 @@ impl InterfaceTypeHandler {
 #[allow(dead_code)]
 pub mod ffi_examples {
     use super::*;
-    
-        // 外部 C 函数声明，支持 128 位整数
+
+    // 外部 C 函数声明，支持 128 位整数
     // External C function declarations supporting 128-bit integers
     unsafe extern "C" {
         // 计算 128 位整数平方
         // Calculate 128-bit integer square
         fn square_i128(value: i128) -> i128;
-        
+
         // 计算 128 位无符号整数平方
         // Calculate 128-bit unsigned integer square
         fn square_u128(value: u128) -> u128;
     }
-    
+
     /// 调用外部 128 位整数函数
     /// Call external 128-bit integer functions
     pub unsafe fn call_128bit_functions() -> Result<(i128, u128), RuntimeError> {
         let i128_input = 123456789012345678901234567890i128;
         let u128_input = 987654321098765432109876543210u128;
-        
+
         let i128_result = unsafe { square_i128(i128_input) };
         let u128_result = unsafe { square_u128(u128_input) };
-        
+
         Ok((i128_result, u128_result))
     }
 }
@@ -299,7 +319,7 @@ pub mod ffi_examples {
 #[allow(dead_code)]
 pub mod lifetime_examples {
     use super::*;
-    
+
     /// 演示生命周期语法检查
     /// Demonstrate lifetime syntax check
     pub fn process_wasm_string<'a>(input: &'a str) -> &'a str {
@@ -307,7 +327,7 @@ pub mod lifetime_examples {
         // Rust 1.89 new feature: use consistent lifetime annotations
         input
     }
-    
+
     /// 处理 WebAssembly 模块引用
     /// Process WebAssembly module reference
     pub fn process_module_reference<'a>(module: &'a Module) -> &'a Module {
@@ -351,20 +371,26 @@ impl SimdProcessor {
             simd_instructions: Vec::new(),
         }
     }
-    
+
     /// 执行 SIMD 操作
     /// Execute SIMD operation
-    pub fn execute_simd(&mut self, instruction: SimdInstruction, operands: [Value; 2]) -> Result<Value, RuntimeError> {
+    pub fn execute_simd(
+        &mut self,
+        instruction: SimdInstruction,
+        operands: [Value; 2],
+    ) -> Result<Value, RuntimeError> {
         // 检查操作数类型
         // Check operand types
         if !matches!(operands[0], Value::V128(_)) || !matches!(operands[1], Value::V128(_)) {
-            return Err(RuntimeError::TypeError("SIMD 操作需要 V128 类型操作数".to_string()));
+            return Err(RuntimeError::TypeError(
+                "SIMD 操作需要 V128 类型操作数".to_string(),
+            ));
         }
-        
+
         // 记录指令
         // Record instruction
         self.simd_instructions.push(instruction.clone());
-        
+
         // 模拟 SIMD 操作
         // Simulate SIMD operation
         match instruction {
@@ -401,22 +427,18 @@ impl Rust189Wasm2Integration {
             simd_processor: SimdProcessor::new(),
         }
     }
-    
+
     /// 初始化系统
     /// Initialize system
     pub fn initialize(&mut self) -> Result<(), ValidationError> {
         // 注册接口类型
         // Register interface types
-        self.interface_type_handler.register_type(
-            "string".to_string(),
-            InterfaceType::String,
-        );
-        
-        self.interface_type_handler.register_type(
-            "i32".to_string(),
-            InterfaceType::Basic(ValueType::I32),
-        );
-        
+        self.interface_type_handler
+            .register_type("string".to_string(), InterfaceType::String);
+
+        self.interface_type_handler
+            .register_type("i32".to_string(), InterfaceType::Basic(ValueType::I32));
+
         // 注册宿主绑定
         // Register host bindings
         self.host_binding_manager.register_binding(
@@ -424,15 +446,15 @@ impl Rust189Wasm2Integration {
             HostBindingType::JavaScriptFunction,
             "console".to_string(),
         );
-        
+
         Ok(())
     }
-    
+
     /// 执行综合测试
     /// Execute comprehensive test
     pub fn run_comprehensive_test(&mut self) -> Result<TestResult, ValidationError> {
         let mut test_result = TestResult::new();
-        
+
         // 测试批量内存操作
         // Test bulk memory operations
         if let Err(e) = self.bulk_memory_manager.bulk_copy(0, 100, 50) {
@@ -440,7 +462,7 @@ impl Rust189Wasm2Integration {
         } else {
             test_result.add_success("批量内存复制成功".to_string());
         }
-        
+
         // 测试尾调用优化
         // Test tail call optimization
         let args = vec![Value::I32(42)];
@@ -449,25 +471,31 @@ impl Rust189Wasm2Integration {
         } else {
             test_result.add_success("尾调用优化成功".to_string());
         }
-        
+
         // 测试宿主绑定
         // Test host bindings
         let js_args = vec![Value::I32(42)]; // 简化实现
-        if let Err(e) = self.host_binding_manager.call_javascript_function("console.log", js_args) {
+        if let Err(e) = self
+            .host_binding_manager
+            .call_javascript_function("console.log", js_args)
+        {
             test_result.add_error(format!("宿主绑定失败: {}", e));
         } else {
             test_result.add_success("宿主绑定成功".to_string());
         }
-        
+
         // 测试 SIMD 操作
         // Test SIMD operations
         let simd_operands = [Value::V128([1; 16]), Value::V128([2; 16])];
-        if let Err(e) = self.simd_processor.execute_simd(SimdInstruction::V128Add, simd_operands) {
+        if let Err(e) = self
+            .simd_processor
+            .execute_simd(SimdInstruction::V128Add, simd_operands)
+        {
             test_result.add_error(format!("SIMD 操作失败: {}", e));
         } else {
             test_result.add_success("SIMD 操作成功".to_string());
         }
-        
+
         Ok(test_result)
     }
 }
@@ -490,19 +518,19 @@ impl TestResult {
             errors: Vec::new(),
         }
     }
-    
+
     /// 添加成功结果
     /// Add success result
     pub fn add_success(&mut self, message: String) {
         self.successes.push(message);
     }
-    
+
     /// 添加错误结果
     /// Add error result
     pub fn add_error(&mut self, message: String) {
         self.errors.push(message);
     }
-    
+
     /// 检查是否全部成功
     /// Check if all successful
     pub fn is_all_success(&self) -> bool {

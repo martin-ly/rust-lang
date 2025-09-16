@@ -113,11 +113,11 @@ fn main() {
     // 使用 From
     let point = Point::from((10, 20));
     let point_array = Point::from([30, 40]);
-    
+
     // 使用 Into
     let tuple: (i32, i32) = (50, 60);
     let point: Point = tuple.into();
-    
+
     let array: [i32; 2] = [70, 80];
     let point: Point = array.into();
 }
@@ -277,7 +277,11 @@ pub struct FromIntoExample {
 // 从元组转换
 impl From<(String, i32, bool)> for FromIntoExample {
     fn from((name, value, active): (String, i32, bool)) -> Self {
-        FromIntoExample { name, value, active }
+        FromIntoExample {
+            name,
+            value,
+            active,
+        }
     }
 }
 
@@ -297,7 +301,7 @@ impl From<String> for FromIntoExample {
     fn from(name: String) -> Self {
         FromIntoExample {
             name,
-            value: 0,    // 默认值
+            value: 0,      // 默认值
             active: false, // 默认值
         }
     }
@@ -392,57 +396,58 @@ pub fn demonstrate_from_into() {
     let point1 = FromIntoPoint::from((10, 20));
     let point2 = FromIntoPoint::from([30, 40]);
     let point3 = FromIntoPoint::from(50);
-    
+
     println!("Point1: {:?}", point1);
     println!("Point2: {:?}", point2);
     println!("Point3: {:?}", point3);
-    
+
     // 基本 Into 转换
     let tuple: (i32, i32) = (60, 70);
     let point4: FromIntoPoint = tuple.into();
-    
+
     let array: [i32; 2] = [80, 90];
     let point5: FromIntoPoint = array.into();
-    
+
     let value: i32 = 100;
     let point6: FromIntoPoint = value.into();
-    
+
     println!("Point4: {:?}", point4);
     println!("Point5: {:?}", point5);
     println!("Point6: {:?}", point6);
-    
+
     // 结构体转换
     let example1 = FromIntoExample::from(("Alice".to_string(), 42, true));
     let example2 = FromIntoExample::from(("Bob", 100));
     let example3 = FromIntoExample::from("Charlie".to_string());
-    
+
     println!("Example1: {:?}", example1);
     println!("Example2: {:?}", example2);
     println!("Example3: {:?}", example3);
-    
+
     // 枚举转换
     let status1 = FromIntoStatus::from("Something went wrong".to_string());
     let status2 = FromIntoStatus::from("Another error");
     let status3 = FromIntoStatus::from(0);
     let status4 = FromIntoStatus::from(1);
     let status5 = FromIntoStatus::from(999);
-    
+
     println!("Status1: {:?}", status1);
     println!("Status2: {:?}", status2);
     println!("Status3: {:?}", status3);
     println!("Status4: {:?}", status4);
     println!("Status5: {:?}", status5);
-    
+
     // 泛型容器转换
     let container1: FromIntoContainer<i32> = 42.into();
-    let container2: FromIntoContainer<i32> = FromIntoContainer::from((100, "Custom metadata".to_string()));
-    
+    let container2: FromIntoContainer<i32> =
+        FromIntoContainer::from((100, "Custom metadata".to_string()));
+
     println!("Container1: {:?}", container1);
     println!("Container2: {:?}", container2);
-    
+
     // 链式转换演示
     demonstrate_chained_conversions();
-    
+
     // 函数参数转换演示
     demonstrate_function_conversions();
 }
@@ -453,7 +458,7 @@ fn demonstrate_chained_conversions() {
     let point: FromIntoPoint = 42i32.into();
     let string = format!("Point: {:?}", point);
     println!("Chain result: {}", string);
-    
+
     // 元组 -> Point -> 字符串表示
     let tuple = (10, 20);
     let point: FromIntoPoint = tuple.into();
@@ -467,26 +472,26 @@ fn demonstrate_function_conversions() {
         let point = point.into();
         println!("Processing point: {:?}", point);
     }
-    
+
     fn process_example<E: Into<FromIntoExample>>(example: E) {
         let example = example.into();
         println!("Processing example: {:?}", example);
     }
-    
+
     fn process_status<S: Into<FromIntoStatus>>(status: S) {
         let status = status.into();
         println!("Processing status: {:?}", status);
     }
-    
+
     // 使用不同类型的参数
     process_point((1, 2));
     process_point([3, 4]);
     process_point(5);
-    
+
     process_example(("Alice".to_string(), 42, true));
     process_example(("Bob", 100));
     process_example("Charlie".to_string());
-    
+
     process_status("Error message".to_string());
     process_status("Another error");
     process_status(0);
@@ -502,10 +507,7 @@ pub struct CustomError {
 
 impl From<String> for CustomError {
     fn from(message: String) -> Self {
-        CustomError {
-            message,
-            code: -1,
-        }
+        CustomError { message, code: -1 }
     }
 }
 
@@ -531,28 +533,28 @@ impl From<i32> for CustomError {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_point_from_tuple() {
         let point = FromIntoPoint::from((1, 2));
         assert_eq!(point.x, 1);
         assert_eq!(point.y, 2);
     }
-    
+
     #[test]
     fn test_point_from_array() {
         let point = FromIntoPoint::from([3, 4]);
         assert_eq!(point.x, 3);
         assert_eq!(point.y, 4);
     }
-    
+
     #[test]
     fn test_point_from_value() {
         let point = FromIntoPoint::from(5);
         assert_eq!(point.x, 5);
         assert_eq!(point.y, 5);
     }
-    
+
     #[test]
     fn test_example_from_tuple() {
         let example = FromIntoExample::from(("Test".to_string(), 100, true));
@@ -560,7 +562,7 @@ mod tests {
         assert_eq!(example.value, 100);
         assert_eq!(example.active, true);
     }
-    
+
     #[test]
     fn test_status_from_string() {
         let status = FromIntoStatus::from("Error message");
@@ -569,16 +571,16 @@ mod tests {
             _ => panic!("Expected Error variant"),
         }
     }
-    
+
     #[test]
     fn test_status_from_code() {
         let status = FromIntoStatus::from(0);
         assert!(matches!(status, FromIntoStatus::Idle));
-        
+
         let status = FromIntoStatus::from(1);
         assert!(matches!(status, FromIntoStatus::Active));
     }
-    
+
     #[test]
     fn test_into_conversion() {
         let tuple = (10, 20);

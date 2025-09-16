@@ -1,20 +1,20 @@
 //! 排队论模型实现
-//! 
+//!
 //! 本模块实现了各种排队论模型，包括M/M/1、M/M/c、M/G/1等经典模型。
 //! 使用Rust的类型安全特性确保模型参数的正确性和计算结果的可靠性。
 
 use std::collections::HashMap;
 
 /// M/M/1 排队系统
-/// 
+///
 /// 实现经典的M/M/1排队模型，用于分析单服务器排队系统的性能。
-/// 
+///
 /// # 数学公式
 /// - 利用率: ρ = λ/μ
 /// - 平均队长: L = λ/(μ-λ) (当 ρ < 1)
 /// - 平均等待时间: W = 1/(μ-λ) (当 ρ < 1)
 /// - 平均响应时间: R = W + 1/μ
-/// 
+///
 /// # 参数
 /// - λ (arrival_rate): 到达率
 /// - μ (service_rate): 服务率
@@ -31,11 +31,11 @@ pub struct MM1Queue {
 
 impl MM1Queue {
     /// 创建新的M/M/1排队系统
-    /// 
+    ///
     /// # 参数
     /// - `arrival_rate`: 到达率 λ
     /// - `service_rate`: 服务率 μ
-    /// 
+    ///
     /// # 返回
     /// 返回无限容量的M/M/1排队系统
     pub fn new(arrival_rate: f64, service_rate: f64) -> Self {
@@ -47,7 +47,7 @@ impl MM1Queue {
     }
 
     /// 创建有限容量的排队系统
-    /// 
+    ///
     /// # 参数
     /// - `arrival_rate`: 到达率 λ
     /// - `service_rate`: 服务率 μ
@@ -61,7 +61,7 @@ impl MM1Queue {
     }
 
     /// 计算系统利用率 (ρ = λ/μ)
-    /// 
+    ///
     /// # 返回
     /// 系统利用率，范围 [0, ∞)
     pub fn utilization(&self) -> f64 {
@@ -69,7 +69,7 @@ impl MM1Queue {
     }
 
     /// 计算平均队长 (L = λ/(μ-λ))
-    /// 
+    ///
     /// # 返回
     /// - `Ok(f64)`: 平均队长
     /// - `Err(String)`: 系统不稳定（利用率 >= 1.0）
@@ -81,7 +81,7 @@ impl MM1Queue {
     }
 
     /// 计算平均等待时间 (W = 1/(μ-λ))
-    /// 
+    ///
     /// # 返回
     /// - `Ok(f64)`: 平均等待时间
     /// - `Err(String)`: 系统不稳定（利用率 >= 1.0）
@@ -93,7 +93,7 @@ impl MM1Queue {
     }
 
     /// 计算系统响应时间 (包括服务时间)
-    /// 
+    ///
     /// # 返回
     /// - `Ok(f64)`: 平均响应时间
     /// - `Err(String)`: 系统不稳定（利用率 >= 1.0）
@@ -102,7 +102,7 @@ impl MM1Queue {
     }
 
     /// 计算系统中平均客户数
-    /// 
+    ///
     /// # 返回
     /// - `Ok(f64)`: 系统中平均客户数
     /// - `Err(String)`: 系统不稳定（利用率 >= 1.0）
@@ -111,7 +111,7 @@ impl MM1Queue {
     }
 
     /// 检查系统稳定性
-    /// 
+    ///
     /// # 返回
     /// `true` 如果系统稳定（利用率 < 1.0），否则 `false`
     pub fn is_stable(&self) -> bool {
@@ -119,7 +119,7 @@ impl MM1Queue {
     }
 
     /// 计算系统阻塞概率（仅适用于有限容量系统）
-    /// 
+    ///
     /// # 返回
     /// - `Some(f64)`: 阻塞概率（仅当系统有容量限制时）
     /// - `None`: 无限容量系统
@@ -128,11 +128,11 @@ impl MM1Queue {
             if !self.is_stable() {
                 return Some(1.0);
             }
-            
+
             let rho = self.utilization();
             let numerator = rho.powi(capacity as i32);
             let denominator: f64 = (0..=capacity).map(|i| rho.powi(i as i32)).sum();
-            
+
             Some(numerator / denominator)
         } else {
             None
@@ -141,7 +141,7 @@ impl MM1Queue {
 }
 
 /// M/M/c 排队系统
-/// 
+///
 /// 实现多服务器排队模型，用于分析多服务器排队系统的性能。
 #[derive(Debug, Clone)]
 pub struct MMcQueue {
@@ -187,13 +187,12 @@ impl MMcQueue {
         for n in 0..self.servers {
             p0_sum += (c * rho).powi(n as i32) / factorial(n);
         }
-        p0_sum += (c * rho).powi(self.servers as i32) / 
-                  (factorial(self.servers) * (1.0 - rho));
+        p0_sum += (c * rho).powi(self.servers as i32) / (factorial(self.servers) * (1.0 - rho));
         let p0 = 1.0 / p0_sum;
 
         // 计算平均队长
-        let lq = p0 * (c * rho).powi(self.servers as i32) * rho / 
-                 (factorial(self.servers) * (1.0 - rho).powi(2));
+        let lq = p0 * (c * rho).powi(self.servers as i32) * rho
+            / (factorial(self.servers) * (1.0 - rho).powi(2));
 
         Ok(lq)
     }
@@ -205,7 +204,7 @@ impl MMcQueue {
 }
 
 /// 性能分析器
-/// 
+///
 /// 用于收集和分析系统性能指标
 #[derive(Debug)]
 pub struct PerformanceAnalyzer {
@@ -222,23 +221,25 @@ impl PerformanceAnalyzer {
 
     /// 记录性能指标
     pub fn record_metric(&mut self, name: &str, value: f64) {
-        self.metrics.entry(name.to_string()).or_default().push(value);
+        self.metrics
+            .entry(name.to_string())
+            .or_default()
+            .push(value);
     }
 
     /// 计算平均性能指标
     pub fn average_metric(&self, name: &str) -> Option<f64> {
-        self.metrics.get(name).map(|values| {
-            values.iter().sum::<f64>() / values.len() as f64
-        })
+        self.metrics
+            .get(name)
+            .map(|values| values.iter().sum::<f64>() / values.len() as f64)
     }
 
     /// 计算性能指标的标准差
     pub fn std_dev_metric(&self, name: &str) -> Option<f64> {
         self.metrics.get(name).map(|values| {
             let mean = values.iter().sum::<f64>() / values.len() as f64;
-            let variance = values.iter()
-                .map(|&x| (x - mean).powi(2))
-                .sum::<f64>() / values.len() as f64;
+            let variance =
+                values.iter().map(|&x| (x - mean).powi(2)).sum::<f64>() / values.len() as f64;
             variance.sqrt()
         })
     }
@@ -246,38 +247,38 @@ impl PerformanceAnalyzer {
     /// 获取性能指标的最小值
     pub fn min_metric(&self, name: &str) -> Option<f64> {
         self.metrics.get(name).and_then(|values| {
-            values.iter().fold(None, |min, &x| {
-                Some(min.map_or(x, |m: f64| m.min(x)))
-            })
+            values
+                .iter()
+                .fold(None, |min, &x| Some(min.map_or(x, |m: f64| m.min(x))))
         })
     }
 
     /// 获取性能指标的最大值
     pub fn max_metric(&self, name: &str) -> Option<f64> {
         self.metrics.get(name).and_then(|values| {
-            values.iter().fold(None, |max, &x| {
-                Some(max.map_or(x, |m: f64| m.max(x)))
-            })
+            values
+                .iter()
+                .fold(None, |max, &x| Some(max.map_or(x, |m: f64| m.max(x))))
         })
     }
 
     /// 生成性能报告
     pub fn generate_report(&self) -> String {
         let mut report = String::from("=== 性能分析报告 ===\n");
-        
+
         for (name, values) in &self.metrics {
             let avg = self.average_metric(name).unwrap_or(0.0);
             let std_dev = self.std_dev_metric(name).unwrap_or(0.0);
             let min = self.min_metric(name).unwrap_or(0.0);
             let max = self.max_metric(name).unwrap_or(0.0);
             let count = values.len();
-            
+
             report.push_str(&format!(
                 "{}: 平均={:.2}, 标准差={:.2}, 最小值={:.2}, 最大值={:.2}, 样本数={}\n",
                 name, avg, std_dev, min, max, count
             ));
         }
-        
+
         report
     }
 }
@@ -289,7 +290,7 @@ impl Default for PerformanceAnalyzer {
 }
 
 /// 可靠性分析器
-/// 
+///
 /// 用于分析系统可靠性指标
 #[derive(Debug)]
 pub struct ReliabilityAnalyzer {
@@ -325,7 +326,7 @@ impl ReliabilityAnalyzer {
             // 正常运行时间
             let uptime = fastrand::f64() * self.mtbf;
             current_time += uptime;
-            
+
             if current_time < duration_hours {
                 // 故障时间
                 let downtime = fastrand::f64() * self.mttr;
@@ -336,7 +337,7 @@ impl ReliabilityAnalyzer {
         }
 
         let simulated_availability = (duration_hours - total_downtime) / duration_hours;
-        
+
         SimulationResult {
             duration_hours,
             failures,
@@ -356,7 +357,7 @@ pub struct SimulationResult {
 }
 
 /// 可扩展性分析器
-/// 
+///
 /// 用于分析系统扩展性能
 #[derive(Debug)]
 pub struct ScalabilityAnalyzer {
@@ -382,7 +383,7 @@ impl ScalabilityAnalyzer {
     pub fn analyze_scaling(&self, scale_factor: f64) -> ScalingResult {
         let throughput = self.base_throughput * scale_factor * self.scaling_efficiency;
         let latency = self.base_latency / scale_factor;
-        
+
         ScalingResult {
             scale_factor,
             throughput,
@@ -393,7 +394,8 @@ impl ScalabilityAnalyzer {
 
     /// 分析多个扩展级别
     pub fn analyze_multiple_scales(&self, scales: &[f64]) -> Vec<ScalingResult> {
-        scales.iter()
+        scales
+            .iter()
             .map(|&scale| self.analyze_scaling(scale))
             .collect()
     }
@@ -448,7 +450,7 @@ mod tests {
         let mut analyzer = PerformanceAnalyzer::new();
         analyzer.record_metric("throughput", 100.0);
         analyzer.record_metric("throughput", 200.0);
-        
+
         assert_eq!(analyzer.average_metric("throughput"), Some(150.0));
         assert_eq!(analyzer.min_metric("throughput"), Some(100.0));
         assert_eq!(analyzer.max_metric("throughput"), Some(200.0));
@@ -465,7 +467,7 @@ mod tests {
     fn test_scalability_analyzer() {
         let analyzer = ScalabilityAnalyzer::new(1000.0, 100.0, 0.8);
         let result = analyzer.analyze_scaling(2.0);
-        
+
         assert_eq!(result.scale_factor, 2.0);
         assert_eq!(result.throughput, 1600.0);
         assert_eq!(result.latency, 50.0);

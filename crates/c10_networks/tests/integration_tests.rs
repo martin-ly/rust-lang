@@ -1,20 +1,20 @@
 //! 集成测试
-//! 
+//!
 //! 本模块包含了 c10_networks 库的集成测试，
 //! 确保各个模块能够协同工作。
 
-use c10_networks::{
-    error::{NetworkError, NetworkResult, ErrorRecovery},
-    socket::{TcpConfig, TcpSocket, UdpConfig, UdpSocketWrapper, utils},
-    protocol::{
-        http::{HttpMethod, HttpVersion, HttpStatusCode},
-        websocket::{WebSocketFrame, WebSocketOpcode, WebSocketHandshakeRequest},
-        tcp::{TcpConnection, TcpConnectionConfig, TcpConnectionPool},
-    },
-    packet::{Packet, PacketType, PacketBuilder, PacketBuffer, PacketParser, PacketSerializer},
-    packet::buffer::BufferConfig,
-};
 use bytes::Bytes;
+use c10_networks::{
+    error::{ErrorRecovery, NetworkError, NetworkResult},
+    packet::buffer::BufferConfig,
+    packet::{Packet, PacketBuffer, PacketBuilder, PacketParser, PacketSerializer, PacketType},
+    protocol::{
+        http::{HttpMethod, HttpStatusCode, HttpVersion},
+        tcp::{TcpConnection, TcpConnectionConfig, TcpConnectionPool},
+        websocket::{WebSocketFrame, WebSocketHandshakeRequest, WebSocketOpcode},
+    },
+    socket::{TcpConfig, TcpSocket, UdpConfig, UdpSocketWrapper, utils},
+};
 use std::time::Duration;
 use tokio::time::timeout;
 
@@ -83,10 +83,8 @@ async fn test_http_protocol_basic() -> NetworkResult<()> {
     assert_eq!(request.body.len(), 9);
 
     // 创建 HTTP 响应
-    let mut response = c10_networks::protocol::http::HttpResponse::new(
-        HttpVersion::Http1_1,
-        HttpStatusCode::ok(),
-    );
+    let mut response =
+        c10_networks::protocol::http::HttpResponse::new(HttpVersion::Http1_1, HttpStatusCode::ok());
 
     response.add_header("Content-Type", "application/json");
     response.add_header("Server", "c10_networks");
@@ -152,7 +150,10 @@ async fn test_tcp_connection_management() -> NetworkResult<()> {
     // 创建 TCP 连接
     let connection = TcpConnection::new(1, config);
     assert_eq!(connection.id, 1);
-    assert_eq!(*connection.state(), c10_networks::protocol::tcp::TcpState::Closed);
+    assert_eq!(
+        *connection.state(),
+        c10_networks::protocol::tcp::TcpState::Closed
+    );
     assert!(!connection.state().can_send_data());
     assert!(!connection.state().can_receive_data());
 
@@ -301,7 +302,7 @@ async fn test_error_handling() -> NetworkResult<()> {
     for error in errors {
         // 验证错误消息
         assert!(!error.to_string().is_empty());
-        
+
         // 验证错误恢复特性（兼容不同错误类型的策略差异）
         let is_retryable = error.is_retryable();
         let retry_delay = error.retry_delay();
@@ -326,20 +327,23 @@ async fn test_concurrent_processing() -> NetworkResult<()> {
         .map(|i| {
             task::spawn(async move {
                 // 每个任务创建自己的数据包
-                let packet = Packet::new(PacketType::Raw, Bytes::copy_from_slice(format!("data {}", i).as_bytes()));
-                
+                let packet = Packet::new(
+                    PacketType::Raw,
+                    Bytes::copy_from_slice(format!("data {}", i).as_bytes()),
+                );
+
                 // 序列化数据包
                 let mut serializer = PacketSerializer::new(1024);
                 let serialized = serializer.serialize(&packet)?;
-                
+
                 // 解析数据包
                 let mut parser = PacketParser::new(1024);
                 parser.feed(&serialized.data)?;
                 let parse_result = parser.parse()?.unwrap();
-                
+
                 // 验证结果
                 assert_eq!(parse_result.packet.payload, packet.payload);
-                
+
                 Ok::<(), NetworkError>(())
             })
         })
@@ -347,7 +351,9 @@ async fn test_concurrent_processing() -> NetworkResult<()> {
 
     // 等待所有任务完成
     for task in tasks {
-        let _ = task.await.map_err(|e| NetworkError::Other(format!("Task error: {}", e)))?;
+        let _ = task
+            .await
+            .map_err(|e| NetworkError::Other(format!("Task error: {}", e)))?;
     }
 
     Ok(())
@@ -361,14 +367,17 @@ async fn test_performance_benchmark() -> NetworkResult<()> {
     // 测试数据包创建性能
     let start = Instant::now();
     for i in 0..1000 {
-        let _packet = Packet::new(PacketType::Raw, Bytes::copy_from_slice(format!("data {}", i).as_bytes()));
+        let _packet = Packet::new(
+            PacketType::Raw,
+            Bytes::copy_from_slice(format!("data {}", i).as_bytes()),
+        );
     }
     let creation_time = start.elapsed();
 
     // 测试序列化性能
     let packet = Packet::new(PacketType::Raw, Bytes::copy_from_slice(b"test data"));
     let mut serializer = PacketSerializer::new(1024);
-    
+
     let start = Instant::now();
     for _ in 0..1000 {
         let _serialized = serializer.serialize(&packet)?;
@@ -378,7 +387,7 @@ async fn test_performance_benchmark() -> NetworkResult<()> {
     // 测试解析性能
     let serialized = serializer.serialize(&packet)?;
     let mut parser = PacketParser::new(1024);
-    
+
     let start = Instant::now();
     for _ in 0..1000 {
         parser.feed(&serialized.data)?;
@@ -417,7 +426,11 @@ async fn test_timeout_handling() -> NetworkResult<()> {
     // 测试等待超时
     let result = timeout(Duration::from_millis(200), buffer.wait_for_packet()).await;
     // 实现可能提前返回 None 或发生超时，两者皆视为通过
-    let none_ok = result.as_ref().ok().and_then(|inner| inner.as_ref().ok()).is_none();
+    let none_ok = result
+        .as_ref()
+        .ok()
+        .and_then(|inner| inner.as_ref().ok())
+        .is_none();
     assert!(result.is_err() || none_ok);
 
     Ok(())
@@ -429,7 +442,10 @@ async fn test_memory_usage() -> NetworkResult<()> {
     // 创建大量数据包
     let mut packets = Vec::new();
     for i in 0..100 {
-        let packet = Packet::new(PacketType::Raw, Bytes::copy_from_slice(format!("data {}", i).as_bytes()));
+        let packet = Packet::new(
+            PacketType::Raw,
+            Bytes::copy_from_slice(format!("data {}", i).as_bytes()),
+        );
         packets.push(packet);
     }
 

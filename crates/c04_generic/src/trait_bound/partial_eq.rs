@@ -88,7 +88,7 @@ fn main() {
     let p1 = Point { x: 1, y: 2 };
     let p2 = Point { x: 1, y: 2 };
     let p3 = Point { x: 2, y: 1 };
-    
+
     println!("p1 == p2: {}", p1 == p2); // true
     println!("p1 == p3: {}", p1 == p3); // false
     println!("p1 != p3: {}", p1 != p3); // true
@@ -104,7 +104,7 @@ fn main() {
         Point { x: 3, y: 4 },
         Point { x: 1, y: 2 }, // 重复
     ];
-    
+
     // 移除重复项
     points.dedup();
     println!("Unique points: {:?}", points);
@@ -121,7 +121,7 @@ fn find_item<T: PartialEq>(items: &[T], target: &T) -> Option<usize> {
 fn main() {
     let numbers = vec![1, 2, 3, 4, 5];
     let target = 3;
-    
+
     if let Some(index) = find_item(&numbers, &target) {
         println!("Found {} at index {}", target, index);
     }
@@ -173,7 +173,7 @@ impl PartialEq<&str> for String {
 fn main() {
     let s = String::from("hello");
     let str_ref = "hello";
-    
+
     println!("s == str_ref: {}", s == str_ref); // true
 }
 ```
@@ -219,9 +219,7 @@ pub struct PartialEqExample {
 
 impl PartialEq for PartialEqExample {
     fn eq(&self, other: &Self) -> bool {
-        self.name == other.name && 
-        self.value == other.value && 
-        self.active == other.active
+        self.name == other.name && self.value == other.value && self.active == other.active
     }
 }
 
@@ -273,7 +271,7 @@ impl PartialEq for PartialEqPoint {
         if self.y.is_nan() && other.y.is_nan() {
             return self.x.is_nan() && other.x.is_nan();
         }
-        
+
         self.x == other.x && self.y == other.y
     }
 }
@@ -284,69 +282,75 @@ pub fn demonstrate_partial_eq() {
     let p1 = PartialEqPoint { x: 1.0, y: 2.0 };
     let p2 = PartialEqPoint { x: 1.0, y: 2.0 };
     let p3 = PartialEqPoint { x: 2.0, y: 1.0 };
-    
+
     println!("p1 == p2: {}", p1 == p2); // true
     println!("p1 == p3: {}", p1 == p3); // false
     println!("p1 != p3: {}", p1 != p3); // true
-    
+
     // 浮点数 NaN 处理
-    let nan_point = PartialEqPoint { x: f64::NAN, y: f64::NAN };
-    let another_nan = PartialEqPoint { x: f64::NAN, y: f64::NAN };
-    
+    let nan_point = PartialEqPoint {
+        x: f64::NAN,
+        y: f64::NAN,
+    };
+    let another_nan = PartialEqPoint {
+        x: f64::NAN,
+        y: f64::NAN,
+    };
+
     println!("nan_point == another_nan: {}", nan_point == another_nan); // true
-    
+
     // 结构体相等性
     let e1 = PartialEqExample {
         name: String::from("Test"),
         value: 42,
         active: true,
     };
-    
+
     let e2 = PartialEqExample {
         name: String::from("Test"),
         value: 42,
         active: true,
     };
-    
+
     let e3 = PartialEqExample {
         name: String::from("Different"),
         value: 42,
         active: true,
     };
-    
+
     println!("e1 == e2: {}", e1 == e2); // true
     println!("e1 == e3: {}", e1 == e3); // false
-    
+
     // 枚举相等性
     let s1 = PartialEqStatus::Active;
     let s2 = PartialEqStatus::Active;
     let s3 = PartialEqStatus::Error(String::from("Something went wrong"));
     let s4 = PartialEqStatus::Error(String::from("Something went wrong"));
     let s5 = PartialEqStatus::Error(String::from("Different error"));
-    
+
     println!("s1 == s2: {}", s1 == s2); // true
     println!("s3 == s4: {}", s3 == s4); // true
     println!("s3 == s5: {}", s3 == s5); // false
-    
+
     // 泛型容器相等性
     let c1 = PartialEqContainer {
         value: 100,
         metadata: String::from("Container 1"),
     };
-    
+
     let c2 = PartialEqContainer {
         value: 100,
         metadata: String::from("Container 1"),
     };
-    
+
     let c3 = PartialEqContainer {
         value: 200,
         metadata: String::from("Container 1"),
     };
-    
+
     println!("c1 == c2: {}", c1 == c2); // true
     println!("c1 == c3: {}", c1 == c3); // false
-    
+
     // 集合操作演示
     demonstrate_collection_operations();
 }
@@ -359,13 +363,13 @@ fn demonstrate_collection_operations() {
         PartialEqPoint { x: 1.0, y: 2.0 }, // 重复
         PartialEqPoint { x: 5.0, y: 6.0 },
     ];
-    
+
     println!("Original points: {:?}", points);
-    
+
     // 移除重复项
     points.dedup();
     println!("After dedup: {:?}", points);
-    
+
     // 查找特定点
     let target = PartialEqPoint { x: 3.0, y: 4.0 };
     if let Some(index) = points.iter().position(|p| p == &target) {
@@ -382,7 +386,7 @@ pub fn find_item<T: PartialEq>(items: &[T], target: &T) -> Option<usize> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_partial_eq_example() {
         let e1 = PartialEqExample {
@@ -390,56 +394,62 @@ mod tests {
             value: 100,
             active: false,
         };
-        
+
         let e2 = PartialEqExample {
             name: String::from("Test"),
             value: 100,
             active: false,
         };
-        
+
         let e3 = PartialEqExample {
             name: String::from("Different"),
             value: 100,
             active: false,
         };
-        
+
         assert_eq!(e1, e2);
         assert_ne!(e1, e3);
     }
-    
+
     #[test]
     fn test_point_partial_eq() {
         let p1 = PartialEqPoint { x: 1.0, y: 2.0 };
         let p2 = PartialEqPoint { x: 1.0, y: 2.0 };
         let p3 = PartialEqPoint { x: 2.0, y: 1.0 };
-        
+
         assert_eq!(p1, p2);
         assert_ne!(p1, p3);
     }
-    
+
     #[test]
     fn test_nan_equality() {
-        let nan_point = PartialEqPoint { x: f64::NAN, y: f64::NAN };
-        let another_nan = PartialEqPoint { x: f64::NAN, y: f64::NAN };
-        
+        let nan_point = PartialEqPoint {
+            x: f64::NAN,
+            y: f64::NAN,
+        };
+        let another_nan = PartialEqPoint {
+            x: f64::NAN,
+            y: f64::NAN,
+        };
+
         assert_eq!(nan_point, another_nan);
     }
-    
+
     #[test]
     fn test_status_partial_eq() {
         let s1 = PartialEqStatus::Active;
         let s2 = PartialEqStatus::Active;
         let s3 = PartialEqStatus::Idle;
-        
+
         assert_eq!(s1, s2);
         assert_ne!(s1, s3);
     }
-    
+
     #[test]
     fn test_find_item() {
         let items = vec![1, 2, 3, 4, 5];
         let target = 3;
-        
+
         assert_eq!(find_item(&items, &target), Some(2));
         assert_eq!(find_item(&items, &6), None);
     }

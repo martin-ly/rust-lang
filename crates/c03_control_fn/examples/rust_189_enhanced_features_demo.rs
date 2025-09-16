@@ -1,5 +1,5 @@
 //! Rust 1.89 增强特性演示
-//! 
+//!
 //! 本示例展示 Rust 1.89 版本的最新特性：
 //! - let_chains 特性稳定化
 //! - cfg_boolean_literals 特性稳定化
@@ -17,33 +17,37 @@ async fn main() {
 
     // 运行所有增强特性演示
     Rust189EnhancedFeatures::run_all_demonstrations();
-    
+
     println!();
     println!("📋 Rust 1.89 特性列表:");
     println!("========================");
-    
+
     let features = Rust189EnhancedFeatures::get_feature_list();
     for (i, feature) in features.iter().enumerate() {
         println!("{}. {}", i + 1, feature);
     }
-    
+
     println!();
     println!("🔍 特性支持状态检查:");
     println!("====================");
-    
+
     let support_status = Rust189EnhancedFeatures::check_feature_support();
     for (feature, supported) in support_status {
-        let status = if supported { "✅ 支持" } else { "❌ 不支持" };
+        let status = if supported {
+            "✅ 支持"
+        } else {
+            "❌ 不支持"
+        };
         println!("{}: {}", feature, status);
     }
-    
+
     println!();
     println!("🎯 实际应用场景演示:");
     println!("====================");
-    
+
     // 实际应用场景演示
     demonstrate_real_world_usage();
-    
+
     println!();
     println!("✅ 演示完成！");
 }
@@ -51,13 +55,13 @@ async fn main() {
 /// 实际应用场景演示
 fn demonstrate_real_world_usage() {
     println!("=== 实际应用场景演示 ===");
-    
+
     // 场景1：用户权限检查
     demonstrate_user_permission_check();
-    
+
     // 场景2：配置管理
     demonstrate_configuration_management();
-    
+
     // 场景3：错误处理
     demonstrate_error_handling();
 }
@@ -65,20 +69,24 @@ fn demonstrate_real_world_usage() {
 /// 用户权限检查场景
 fn demonstrate_user_permission_check() {
     println!("--- 用户权限检查场景 ---");
-    
+
     #[derive(Debug)]
     struct User {
         id: u32,
         role: Option<String>,
         permissions: Vec<String>,
     }
-    
+
     let user = User {
         id: 12345,
         role: Some("admin".to_string()),
-        permissions: vec!["read".to_string(), "write".to_string(), "delete".to_string()],
+        permissions: vec![
+            "read".to_string(),
+            "write".to_string(),
+            "delete".to_string(),
+        ],
     };
-    
+
     // 使用 let_chains 进行复杂的权限检查
     if let Some(role) = &user.role
         && role == "admin"
@@ -94,20 +102,20 @@ fn demonstrate_user_permission_check() {
 /// 配置管理场景
 fn demonstrate_configuration_management() {
     println!("--- 配置管理场景 ---");
-    
+
     #[derive(Debug)]
     struct Config {
         database_url: Option<String>,
         api_key: Option<String>,
         debug_mode: bool,
     }
-    
+
     let config = Config {
         database_url: Some("postgresql://localhost:5432/mydb".to_string()),
         api_key: Some("secret_key_123".to_string()),
         debug_mode: true,
     };
-    
+
     // 使用 let_chains 进行配置验证
     if let Some(db_url) = &config.database_url
         && db_url.starts_with("postgresql://")
@@ -127,11 +135,11 @@ fn demonstrate_configuration_management() {
 /// 错误处理场景
 fn demonstrate_error_handling() {
     println!("--- 错误处理场景 ---");
-    
+
     // 模拟文件操作
     let file_path = "/path/to/file.txt";
     let file_content = Some("Hello, World!".to_string());
-    
+
     // 使用 let_chains 进行错误处理
     if let Some(content) = file_content
         && !content.is_empty()
@@ -168,13 +176,13 @@ fn _demonstrate_platform_specific_features() {
 /// 性能优化演示
 fn _demonstrate_performance_optimizations() {
     println!("--- 性能优化演示 ---");
-    
+
     // 使用常量泛型进行编译时优化
     const MATRIX_SIZE: usize = 1000;
     let _matrix: [[f64; MATRIX_SIZE]; MATRIX_SIZE] = [[0.0; MATRIX_SIZE]; MATRIX_SIZE];
-    
+
     println!("✅ 创建了 {}x{} 的矩阵", MATRIX_SIZE, MATRIX_SIZE);
-    
+
     // 编译时计算
     const FACTORIAL_10: u64 = {
         let mut result = 1;
@@ -185,7 +193,7 @@ fn _demonstrate_performance_optimizations() {
         }
         result
     };
-    
+
     println!("✅ 编译时计算的 10! = {}", FACTORIAL_10);
 }
 

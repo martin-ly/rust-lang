@@ -17,7 +17,9 @@ pub struct InMemoryRpcServer {
 }
 
 impl InMemoryRpcServer {
-    pub fn new() -> Self { Self::default() }
+    pub fn new() -> Self {
+        Self::default()
+    }
 }
 
 impl RpcServer for InMemoryRpcServer {
@@ -35,13 +37,21 @@ pub struct InMemoryRpcClient {
 }
 
 impl InMemoryRpcClient {
-    pub fn new(server: InMemoryRpcServer) -> Self { Self { server } }
+    pub fn new(server: InMemoryRpcServer) -> Self {
+        Self { server }
+    }
 }
 
 impl RpcClient for InMemoryRpcClient {
     fn call(&self, method: &str, payload: &[u8]) -> Result<Vec<u8>, DistributedError> {
-        let handlers = self.server.handlers.read().map_err(|_| DistributedError::Network("lock poisoned".into()))?;
-        let f = handlers.get(method).ok_or_else(|| DistributedError::Network(format!("method not found: {}", method)))?;
+        let handlers = self
+            .server
+            .handlers
+            .read()
+            .map_err(|_| DistributedError::Network("lock poisoned".into()))?;
+        let f = handlers
+            .get(method)
+            .ok_or_else(|| DistributedError::Network(format!("method not found: {}", method)))?;
         Ok(f(payload))
     }
 }
@@ -73,7 +83,9 @@ impl<C: RpcClient> RpcClient for RetryClient<C> {
                     }
                     return Ok(v);
                 }
-                Err(e) => { last_err = Some(e); }
+                Err(e) => {
+                    last_err = Some(e);
+                }
             }
             if let Some(base) = self.policy.backoff_base_ms {
                 let delay = base.saturating_mul(1u64 << attempt.min(16));
@@ -83,4 +95,3 @@ impl<C: RpcClient> RpcClient for RetryClient<C> {
         Err(last_err.unwrap_or_else(|| DistributedError::Network("retry failed".into())))
     }
 }
-

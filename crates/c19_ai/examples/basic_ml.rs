@@ -13,5 +13,3 @@ fn main() {
     }
     println!("basic_ml avg_y={:.3}", sum / 10.0);
 }
-
-

@@ -260,10 +260,7 @@ where
         items: &mut HashMap<K, CacheItem<V>>,
         stats: &mut CacheStats,
     ) {
-        if let Some((key_to_remove, _)) = items
-            .iter()
-            .min_by_key(|(_, item)| item.last_accessed)
-        {
+        if let Some((key_to_remove, _)) = items.iter().min_by_key(|(_, item)| item.last_accessed) {
             let key = key_to_remove.clone();
             items.remove(&key);
             stats.evictions += 1;
@@ -357,7 +354,8 @@ impl CacheManager {
     /// 获取所有缓存的统计信息
     pub fn get_all_stats(&self) -> HashMap<String, CacheStats> {
         let caches = self.caches.read().unwrap();
-        caches.iter()
+        caches
+            .iter()
             .map(|(name, cache)| (name.clone(), cache.get_stats()))
             .collect()
     }
@@ -381,15 +379,15 @@ mod tests {
     #[test]
     fn test_cache_basic() {
         let cache = Cache::new(10);
-        
+
         // 插入值
         cache.insert("key1".to_string(), "value1".to_string());
         assert_eq!(cache.len(), 1);
-        
+
         // 获取值
         let value = cache.get(&"key1".to_string());
         assert_eq!(value, Some("value1".to_string()));
-        
+
         // 获取不存在的值
         let value = cache.get(&"key2".to_string());
         assert_eq!(value, None);
@@ -398,10 +396,10 @@ mod tests {
     #[test]
     fn test_cache_ttl() {
         let cache = Cache::new(10).with_ttl(Duration::from_millis(100));
-        
+
         cache.insert("key1".to_string(), "value1".to_string());
         assert_eq!(cache.get(&"key1".to_string()), Some("value1".to_string()));
-        
+
         // 等待过期
         thread::sleep(Duration::from_millis(150));
         assert_eq!(cache.get(&"key1".to_string()), None);
@@ -410,10 +408,10 @@ mod tests {
     #[test]
     fn test_cache_max_idle_time() {
         let cache = Cache::new(10).with_max_idle_time(Duration::from_millis(100));
-        
+
         cache.insert("key1".to_string(), "value1".to_string());
         assert_eq!(cache.get(&"key1".to_string()), Some("value1".to_string()));
-        
+
         // 等待空闲时间过期
         thread::sleep(Duration::from_millis(150));
         assert_eq!(cache.get(&"key1".to_string()), None);
@@ -422,14 +420,14 @@ mod tests {
     #[test]
     fn test_cache_eviction() {
         let cache = Cache::new(2);
-        
+
         cache.insert("key1".to_string(), "value1".to_string());
         cache.insert("key2".to_string(), "value2".to_string());
         cache.insert("key3".to_string(), "value3".to_string());
-        
+
         // 应该驱逐一个项
         assert_eq!(cache.len(), 2);
-        
+
         // 检查统计信息
         let stats = cache.get_stats();
         assert!(stats.evictions > 0);
@@ -438,16 +436,16 @@ mod tests {
     #[test]
     fn test_lru_cache() {
         let cache = LruCache::new(2);
-        
+
         cache.insert("key1".to_string(), "value1".to_string());
         cache.insert("key2".to_string(), "value2".to_string());
-        
+
         // 访问 key1 使其成为最近使用的
         cache.get(&"key1".to_string());
-        
+
         // 插入新项，应该驱逐 key2
         cache.insert("key3".to_string(), "value3".to_string());
-        
+
         assert_eq!(cache.get(&"key1".to_string()), Some("value1".to_string()));
         assert_eq!(cache.get(&"key2".to_string()), None);
         assert_eq!(cache.get(&"key3".to_string()), Some("value3".to_string()));
@@ -456,11 +454,11 @@ mod tests {
     #[test]
     fn test_cache_stats() {
         let cache = Cache::new(10);
-        
+
         cache.insert("key1".to_string(), "value1".to_string());
         cache.get(&"key1".to_string());
         cache.get(&"key2".to_string()); // 未命中
-        
+
         let stats = cache.get_stats();
         assert_eq!(stats.hits, 1);
         assert_eq!(stats.misses, 1);
@@ -470,13 +468,13 @@ mod tests {
     #[test]
     fn test_cache_manager() {
         let manager = CacheManager::new();
-        
+
         let cache1 = manager.create_cache("cache1".to_string(), 10);
         let cache2 = manager.create_cache("cache2".to_string(), 20);
-        
+
         cache1.insert("key1".to_string(), "value1".to_string());
         cache2.insert("key2".to_string(), "value2".to_string());
-        
+
         let all_stats = manager.get_all_stats();
         assert_eq!(all_stats.len(), 2);
         assert!(all_stats.contains_key("cache1"));

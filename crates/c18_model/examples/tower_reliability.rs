@@ -11,19 +11,21 @@ fn main() {
 }
 
 #[cfg(feature = "tower-examples")]
-use std::time::Duration;
-#[cfg(feature = "tower-examples")]
-use tower::{Service, ServiceBuilder, util::BoxService};
-#[cfg(feature = "tower-examples")]
 use http::{Request, Response};
 #[cfg(feature = "tower-examples")]
 use hyper::Body;
+#[cfg(feature = "tower-examples")]
+use std::time::Duration;
+#[cfg(feature = "tower-examples")]
+use tower::{Service, ServiceBuilder, util::BoxService};
 
 #[allow(dead_code)]
 #[derive(Debug, thiserror::Error)]
 enum DemoError {
-    #[error("timeout")] Timeout,
-    #[error("service error")] Service,
+    #[error("timeout")]
+    Timeout,
+    #[error("service error")]
+    Service,
 }
 
 #[cfg(feature = "tower-examples")]
@@ -51,5 +53,3 @@ async fn main() {
         }
     }
 }
-
-

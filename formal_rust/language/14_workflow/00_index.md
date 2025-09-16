@@ -13,27 +13,27 @@
 
 ### 1. 理论基础
 
-- **[01_formal_theory.md](01_formal_theory.md)** - 工作流系统形式化理论
-- **[02_workflow_models.md](02_workflow_models.md)** - 工作流计算模型
-- **[03_process_algebra.md](03_process_algebra.md)** - 进程代数理论 (待创建)
+- **[01_workflow_theory.md](01_workflow_theory.md)** - 工作流系统形式化理论 ✅
+- **[02_workflow_models.md](02_workflow_models.md)** - 工作流计算模型 ✅
+- **[03_process_algebra.md](03_process_algebra.md)** - 进程代数理论 ✅
 
 ### 2. 执行模型
 
-- **[04_execution_engine.md](04_execution_engine.md)** - 工作流执行引擎 (待创建)
-- **[05_state_management.md](05_state_management.md)** - 状态管理机制 (待创建)
-- **[06_scheduling_theory.md](06_scheduling_theory.md)** - 调度理论 (待创建)
+- **[04_execution_engine.md](04_execution_engine.md)** - 工作流执行引擎 ✅
+- **[05_state_management.md](05_state_management.md)** - 状态管理机制 ✅
+- **[06_scheduling_theory.md](06_scheduling_theory.md)** - 调度理论 ✅
 
 ### 3. 组合模式
 
-- **[07_workflow_patterns.md](07_workflow_patterns.md)** - 工作流设计模式 (待创建)
-- **[08_orchestration.md](08_orchestration.md)** - 服务编排模式 (待创建)
-- **[09_choreography.md](09_choreography.md)** - 服务协调模式 (待创建)
+- **[07_workflow_patterns.md](07_workflow_patterns.md)** - 工作流设计模式 ✅
+- **[08_orchestration.md](08_orchestration.md)** - 服务编排模式 ✅
+- **[09_choreography.md](09_choreography.md)** - 服务协调模式 ✅
 
 ### 4. 高级特征
 
-- **[10_fault_tolerance.md](10_fault_tolerance.md)** - 容错与恢复机制 (待创建)
-- **[11_monitoring.md](11_monitoring.md)** - 工作流监控 (待创建)
-- **[12_optimization.md](12_optimization.md)** - 性能优化策略 (待创建)
+- **[10_fault_tolerance.md](10_fault_tolerance.md)** - 容错与恢复机制 ✅
+- **[11_monitoring.md](11_monitoring.md)** - 工作流监控 ✅
+- **[12_optimization.md](12_optimization.md)** - 性能优化策略 ✅
 
 ## 主题概述
 

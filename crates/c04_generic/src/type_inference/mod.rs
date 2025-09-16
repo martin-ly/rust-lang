@@ -72,10 +72,10 @@ fn main() {
 fn main() {
     // 闭包类型推断
     let add_one = |x| x + 1; // 类型推断：x和返回值的类型被推断为i32
-    
+
     let result = add_one(5);
     println!("Result: {}", result); // 输出: Result: 6
-    
+
     // 带类型的闭包
     let multiply: fn(i32, i32) -> i32 = |a, b| a * b;
     let product = multiply(3, 4);
@@ -88,20 +88,20 @@ fn main() {
 ```rust
 fn main() {
     let numbers = [1, 2, 3, 4, 5];
-    
+
     // 迭代器类型推断
     let doubled: Vec<i32> = numbers.iter()
         .map(|&x| x * 2) // 类型推断：x的类型被推断为i32
         .collect();
-    
+
     println!("Doubled: {:?}", doubled); // 输出: Doubled: [2, 4, 6, 8, 10]
-    
+
     // 过滤和映射
     let filtered: Vec<i32> = numbers.iter()
         .filter(|&&x| x > 2) // 类型推断：x的类型被推断为i32
         .map(|&x| x * 3)     // 类型推断：x的类型被推断为i32
         .collect();
-    
+
     println!("Filtered and tripled: {:?}", filtered); // 输出: Filtered and tripled: [9, 12, 15]
 }
 ```
@@ -119,11 +119,11 @@ fn main() {
     let character = 'a';        // 推断为 char
     let string = "hello";       // 推断为 &str
     let owned_string = String::from("world"); // 推断为 String
-    
+
     // 数组类型推断
     let array = [1, 2, 3, 4, 5]; // 推断为 [i32; 5]
     let matrix = [[1, 2], [3, 4]]; // 推断为 [[i32; 2]; 2]
-    
+
     // 向量类型推断
     let vector = [1, 2, 3]; // 推断为 [i32; 3]
     let string_vector = ["a", "b", "c"]; // 推断为 [&str; 3]
@@ -171,11 +171,11 @@ impl<T> Container<T> {
     fn new() -> Self {
         Container { items: Vec::new() }
     }
-    
+
     fn add(&mut self, item: T) {
         self.items.push(item);
     }
-    
+
     fn get(&self, index: usize) -> Option<&T> {
         self.items.get(index)
     }
@@ -184,7 +184,7 @@ impl<T> Container<T> {
 fn main() {
     let mut container = Container::new(); // 类型推断：T的类型被推断为i32
     container.add(42);
-    
+
     if let Some(item) = container.get(0) {
         println!("Item: {}", item);
     }
@@ -198,7 +198,7 @@ fn main() {
 ```rust
 trait Iterator {
     type Item;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
 }
 
@@ -209,7 +209,7 @@ struct NumberIterator {
 
 impl Iterator for NumberIterator {
     type Item = i32; // 关联类型
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         if self.current < self.max {
             let result = self.current;
@@ -223,7 +223,7 @@ impl Iterator for NumberIterator {
 
 fn main() {
     let mut iterator = NumberIterator { current: 1, max: 4 };
-    
+
     // 类型推断：item的类型被推断为i32
     while let Some(item) = iterator.next() {
         println!("Item: {}", item);
@@ -245,7 +245,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 fn main() {
     let string1 = "short";
     let string2 = "longer";
-    
+
     // 生命周期推断：'a被推断为string1和string2的生命周期
     let result = longest(string1, string2);
     println!("Longest: {}", result);
@@ -264,7 +264,7 @@ where
 
 fn main() {
     let numbers = vec![3, 1, 4, 1, 5];
-    
+
     // 类型推断：T被推断为i32，约束PartialOrd被自动推断
     if let Some(max) = find_max(&numbers) {
         println!("Maximum: {}", max);
@@ -299,33 +299,33 @@ fn main() {
 // 基本类型推断示例
 pub fn demonstrate_basic_inference() {
     println!("=== Basic Type Inference Demo ===\n");
-    
+
     // 基本类型推断
-    let integer = 42;           // 推断为 i32
-    let float = std::f64::consts::PI;           // 推断为 f64
-    let boolean = true;         // 推断为 bool
-    let character = 'a';        // 推断为 char
-    let string = "hello";       // 推断为 &str
+    let integer = 42; // 推断为 i32
+    let float = std::f64::consts::PI; // 推断为 f64
+    let boolean = true; // 推断为 bool
+    let character = 'a'; // 推断为 char
+    let string = "hello"; // 推断为 &str
     let owned_string = String::from("world"); // 推断为 String
-    
+
     println!("Integer: {} (type: i32)", integer);
     println!("Float: {} (type: f64)", float);
     println!("Boolean: {} (type: bool)", boolean);
     println!("Character: {} (type: char)", character);
     println!("String slice: {} (type: &str)", string);
     println!("Owned string: {} (type: String)", owned_string);
-    
+
     // 数组类型推断
     let array = [1, 2, 3, 4, 5]; // 推断为 [i32; 5]
     let matrix = [[1, 2], [3, 4]]; // 推断为 [[i32; 2]; 2]
-    
+
     println!("Array: {:?} (type: [i32; 5])", array);
     println!("Matrix: {:?} (type: [[i32; 2]; 2])", matrix);
-    
+
     // 向量类型推断
     let vector = [1, 2, 3]; // 推断为 [i32; 3]
     let string_vector = ["a", "b", "c"]; // 推断为 [&str; 3]
-    
+
     println!("Vector: {:?} (type: [i32; 3])", vector);
     println!("String vector: {:?} (type: [&str; 3])", string_vector);
     println!();
@@ -342,46 +342,50 @@ pub fn multiply<T: std::ops::Mul<Output = T> + Copy>(a: T, b: T) -> T {
 
 pub fn demonstrate_generic_inference() {
     println!("--- Generic Function Inference Demo ---");
-    
+
     // 整数类型推断
     let int_result = add(5, 10); // 类型推断：T被推断为i32
     println!("Integer addition: 5 + 10 = {} (type: i32)", int_result);
-    
+
     // 浮点数类型推断
     let float_result = add(std::f64::consts::PI, 2.86); // 类型推断：T被推断为f64
     println!("Float addition: 3.14 + 2.86 = {} (type: f64)", float_result);
-    
+
     // 乘法类型推断
     let product = multiply(6, 7); // 类型推断：T被推断为i32
     println!("Integer multiplication: 6 * 7 = {} (type: i32)", product);
-    
+
     let float_product = multiply(2.5, 3.0); // 类型推断：T被推断为f64
-    println!("Float multiplication: 2.5 * 3.0 = {} (type: f64)", float_product);
+    println!(
+        "Float multiplication: 2.5 * 3.0 = {} (type: f64)",
+        float_product
+    );
     println!();
 }
 
 // 闭包中的类型推断
 pub fn demonstrate_closure_inference() {
     println!("--- Closure Inference Demo ---");
-    
+
     // 基本闭包类型推断
     let add_one = |x| x + 1; // 类型推断：x和返回值的类型被推断为i32
     let result = add_one(5);
     println!("Add one: 5 + 1 = {} (type: i32)", result);
-    
+
     // 带类型的闭包
     let multiply: fn(i32, i32) -> i32 = |a, b| a * b;
     let product = multiply(3, 4);
     println!("Multiply: 3 * 4 = {} (type: i32)", product);
-    
+
     // 复杂闭包类型推断
     let process_numbers = |numbers: &[i32]| {
-        numbers.iter()
+        numbers
+            .iter()
             .filter(|&&x| x > 2)
             .map(|&x| x * 2)
             .collect::<Vec<i32>>()
     };
-    
+
     let numbers = vec![1, 2, 3, 4, 5];
     let processed = process_numbers(&numbers);
     println!("Processed numbers: {:?} (type: Vec<i32>)", processed);
@@ -391,31 +395,34 @@ pub fn demonstrate_closure_inference() {
 // 迭代器中的类型推断
 pub fn demonstrate_iterator_inference() {
     println!("--- Iterator Inference Demo ---");
-    
+
     let numbers = [1, 2, 3, 4, 5];
-    
+
     // 基本迭代器类型推断
-    let doubled: Vec<i32> = numbers.iter()
+    let doubled: Vec<i32> = numbers
+        .iter()
         .map(|&x| x * 2) // 类型推断：x的类型被推断为i32
         .collect();
-    
+
     println!("Doubled: {:?} (type: Vec<i32>)", doubled);
-    
+
     // 过滤和映射
-    let filtered: Vec<i32> = numbers.iter()
+    let filtered: Vec<i32> = numbers
+        .iter()
         .filter(|&&x| x > 2) // 类型推断：x的类型被推断为i32
-        .map(|&x| x * 3)     // 类型推断：x的类型被推断为i32
+        .map(|&x| x * 3) // 类型推断：x的类型被推断为i32
         .collect();
-    
+
     println!("Filtered and tripled: {:?} (type: Vec<i32>)", filtered);
-    
+
     // 链式操作
-    let result: Vec<i32> = numbers.iter()
+    let result: Vec<i32> = numbers
+        .iter()
         .enumerate()
         .filter(|(i, x)| i % 2 == 0 && **x > 1)
         .map(|(_, x)| x * x)
         .collect();
-    
+
     println!("Complex transformation: {:?} (type: Vec<i32>)", result);
     println!();
 }
@@ -429,19 +436,19 @@ impl<T> Container<T> {
     pub fn new() -> Self {
         Container { items: Vec::new() }
     }
-    
+
     pub fn add(&mut self, item: T) {
         self.items.push(item);
     }
-    
+
     pub fn get(&self, index: usize) -> Option<&T> {
         self.items.get(index)
     }
-    
+
     pub fn len(&self) -> usize {
         self.items.len()
     }
-    
+
     pub fn is_empty(&self) -> bool {
         self.items.is_empty()
     }
@@ -455,24 +462,27 @@ impl<T> Default for Container<T> {
 
 pub fn demonstrate_struct_inference() {
     println!("--- Struct Inference Demo ---");
-    
+
     let mut container = Container::new(); // 类型推断：T的类型被推断为i32
     container.add(42);
     container.add(100);
-    
+
     println!("Container length: {} (type: usize)", container.len());
-    
+
     if let Some(item) = container.get(0) {
         println!("First item: {} (type: i32)", item);
     }
-    
+
     // 字符串容器
     let mut string_container = Container::new(); // 类型推断：T的类型被推断为String
     string_container.add("hello".to_string());
     string_container.add("world".to_string());
-    
-    println!("String container length: {} (type: usize)", string_container.len());
-    
+
+    println!(
+        "String container length: {} (type: usize)",
+        string_container.len()
+    );
+
     if let Some(item) = string_container.get(0) {
         println!("First string: {} (type: String)", item);
     }
@@ -482,7 +492,7 @@ pub fn demonstrate_struct_inference() {
 // 关联类型推断
 pub trait Iterator {
     type Item;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
     fn count(&self) -> usize;
 }
@@ -494,7 +504,7 @@ pub struct NumberIterator {
 
 impl Iterator for NumberIterator {
     type Item = i32; // 关联类型
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         if self.current < self.max {
             let result = self.current;
@@ -504,7 +514,7 @@ impl Iterator for NumberIterator {
             None
         }
     }
-    
+
     fn count(&self) -> usize {
         (self.max - self.current) as usize
     }
@@ -512,37 +522,33 @@ impl Iterator for NumberIterator {
 
 pub fn demonstrate_associated_type_inference() {
     println!("--- Associated Type Inference Demo ---");
-    
+
     let mut iterator = NumberIterator { current: 1, max: 4 };
-    
+
     // 类型推断：item的类型被推断为i32（来自关联类型Item）
     while let Some(item) = iterator.next() {
         println!("Item: {} (type: i32)", item);
     }
-    
+
     println!("Remaining count: {} (type: usize)", iterator.count());
     println!();
 }
 
 // 生命周期推断
 pub fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-    if x.len() > y.len() {
-        x
-    } else {
-        y
-    }
+    if x.len() > y.len() { x } else { y }
 }
 
 pub fn demonstrate_lifetime_inference() {
     println!("--- Lifetime Inference Demo ---");
-    
+
     let string1 = "short";
     let string2 = "longer";
-    
+
     // 生命周期推断：'a被推断为string1和string2的生命周期
     let result = longest(string1, string2);
     println!("Longest: {} (lifetime inferred)", result);
-    
+
     // 嵌套作用域中的生命周期
     {
         let inner_string = "very long string";
@@ -569,46 +575,49 @@ where
 
 pub fn demonstrate_constraint_inference() {
     println!("--- Constraint Inference Demo ---");
-    
+
     let numbers = vec![3, 1, 4, 1, 5];
-    
+
     // 类型推断：T被推断为i32，约束PartialOrd被自动推断
     if let Some(max) = find_max(&numbers) {
         println!("Maximum: {} (type: i32, constraint: PartialOrd)", max);
     }
-    
+
     let mut numbers_to_sort = numbers.clone();
     // 类型推断：T被推断为i32，约束Ord被自动推断
     sort_items(&mut numbers_to_sort);
-    println!("Sorted: {:?} (type: Vec<i32>, constraint: Ord)", numbers_to_sort);
+    println!(
+        "Sorted: {:?} (type: Vec<i32>, constraint: Ord)",
+        numbers_to_sort
+    );
     println!();
 }
 
 // 主演示函数
 pub fn demonstrate_type_inference() {
     println!("=== Type Inference Demonstration ===\n");
-    
+
     // 基本类型推断演示
     demonstrate_basic_inference();
-    
+
     // 泛型函数类型推断演示
     demonstrate_generic_inference();
-    
+
     // 闭包类型推断演示
     demonstrate_closure_inference();
-    
+
     // 迭代器类型推断演示
     demonstrate_iterator_inference();
-    
+
     // 结构体类型推断演示
     demonstrate_struct_inference();
-    
+
     // 关联类型推断演示
     demonstrate_associated_type_inference();
-    
+
     // 生命周期推断演示
     demonstrate_lifetime_inference();
-    
+
     // 类型约束推断演示
     demonstrate_constraint_inference();
 }
@@ -617,48 +626,48 @@ pub fn demonstrate_type_inference() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_add_inference() {
         let result = add(5, 10);
         assert_eq!(result, 15);
     }
-    
+
     #[test]
     fn test_multiply_inference() {
         let result = multiply(3, 4);
         assert_eq!(result, 12);
     }
-    
+
     #[test]
     fn test_container_inference() {
         let mut container = Container::new();
         container.add(42);
         container.add(100);
-        
+
         assert_eq!(container.len(), 2);
         assert_eq!(*container.get(0).unwrap(), 42);
         assert_eq!(*container.get(1).unwrap(), 100);
     }
-    
+
     #[test]
     fn test_number_iterator() {
         let mut iterator = NumberIterator { current: 1, max: 4 };
-        
+
         assert_eq!(iterator.next(), Some(1));
         assert_eq!(iterator.next(), Some(2));
         assert_eq!(iterator.next(), Some(3));
         assert_eq!(iterator.next(), None);
         assert_eq!(iterator.count(), 0);
     }
-    
+
     #[test]
     fn test_find_max() {
         let numbers = vec![3, 1, 4, 1, 5];
         let max = find_max(&numbers);
         assert_eq!(max, Some(&5));
     }
-    
+
     #[test]
     fn test_sort_items() {
         let mut numbers = vec![3, 1, 4, 1, 5];

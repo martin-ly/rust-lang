@@ -1,5 +1,5 @@
 //! 编译时优化实践示例
-//! 
+//!
 //! 本模块演示Rust中的编译时优化技术：
 //! - const fn 函数
 //! - 泛型优化
@@ -7,7 +7,7 @@
 //! - 零成本抽象
 
 /// 编译时常量函数
-/// 
+///
 /// 在编译时计算，运行时零开销
 pub const fn fibonacci(n: u32) -> u32 {
     match n {
@@ -118,10 +118,10 @@ mod tests {
     #[test]
     fn test_optimized_vector() {
         let mut vec: OptimizedVector<i32, 5> = OptimizedVector::new();
-        
+
         assert!(vec.push(1).is_ok());
         assert!(vec.push(2).is_ok());
-        
+
         assert_eq!(vec.get(0), Some(&1));
         assert_eq!(vec.get(1), Some(&2));
         assert_eq!(vec.len(), 2);

@@ -63,7 +63,7 @@ fn main() {
         Box::new(Circle { radius: 5.0 }),
         Box::new(Square { side: 10.0 }),
     ];
-    
+
     for shape in shapes {
         shape.draw();
     }
@@ -105,13 +105,13 @@ fn process_text(processor: &dyn Processor, text: &str) -> String {
 
 fn main() {
     let text = "Hello, Rust!";
-    
+
     let processors: Vec<Box<dyn Processor>> = vec![
         Box::new(UppercaseProcessor),
         Box::new(LowercaseProcessor),
         Box::new(ReverseProcessor),
     ];
-    
+
     for processor in processors {
         let result = process_text(processor.as_ref(), text);
         println!("Result: {}", result);
@@ -143,11 +143,11 @@ impl Storage for MemoryStorage {
     fn store(&mut self, key: &str, value: &str) {
         self.data.insert(key.to_string(), value.to_string());
     }
-    
+
     fn retrieve(&self, key: &str) -> Option<&str> {
         self.data.get(key).map(|s| s.as_str())
     }
-    
+
     fn remove(&mut self, key: &str) -> Option<String> {
         self.data.remove(key)
     }
@@ -158,11 +158,11 @@ impl Storage for FileStorage {
         self.data.insert(key.to_string(), value.to_string());
         // 这里可以添加文件写入逻辑
     }
-    
+
     fn retrieve(&self, key: &str) -> Option<&str> {
         self.data.get(key).map(|s| s.as_str())
     }
-    
+
     fn remove(&mut self, key: &str) -> Option<String> {
         self.data.remove(key)
     }
@@ -205,11 +205,11 @@ impl Plugin for TextPlugin {
     fn name(&self) -> &str {
         "Text Plugin"
     }
-    
+
     fn execute(&self, input: &str) -> String {
         input.to_uppercase()
     }
-    
+
     fn version(&self) -> &str {
         "1.0.0"
     }
@@ -219,7 +219,7 @@ impl Plugin for MathPlugin {
     fn name(&self) -> &str {
         "Math Plugin"
     }
-    
+
     fn execute(&self, input: &str) -> String {
         if let Ok(num) = input.parse::<f64>() {
             format!("Square: {}, Cube: {}", num * num, num * num * num)
@@ -227,7 +227,7 @@ impl Plugin for MathPlugin {
             "Invalid number".to_string()
         }
     }
-    
+
     fn version(&self) -> &str {
         "1.0.0"
     }
@@ -237,7 +237,7 @@ impl Plugin for CryptoPlugin {
     fn name(&self) -> &str {
         "Crypto Plugin"
     }
-    
+
     fn execute(&self, input: &str) -> String {
         // 简单的ROT13加密
         input.chars()
@@ -252,7 +252,7 @@ impl Plugin for CryptoPlugin {
             })
             .collect()
     }
-    
+
     fn version(&self) -> &str {
         "1.0.0"
     }
@@ -268,11 +268,11 @@ impl PluginManager {
             plugins: Vec::new(),
         }
     }
-    
+
     fn add_plugin(&mut self, plugin: Box<dyn Plugin>) {
         self.plugins.push(plugin);
     }
-    
+
     fn execute_all(&self, input: &str) {
         for plugin in &self.plugins {
             println!("Plugin: {} (v{})", plugin.name(), plugin.version());
@@ -307,7 +307,7 @@ impl EventHandler for LoggingHandler {
     fn handle(&self, event: &Event) {
         println!("[LOG] {:?}", event);
     }
-    
+
     fn priority(&self) -> u8 {
         1
     }
@@ -317,7 +317,7 @@ impl EventHandler for NotificationHandler {
     fn handle(&self, event: &Event) {
         println!("[NOTIFICATION] Sending notification for event: {}", event.event_type);
     }
-    
+
     fn priority(&self) -> u8 {
         2
     }
@@ -327,7 +327,7 @@ impl EventHandler for DatabaseHandler {
     fn handle(&self, event: &Event) {
         println!("[DATABASE] Storing event in database: {}", event.event_type);
     }
-    
+
     fn priority(&self) -> u8 {
         3
     }
@@ -343,13 +343,13 @@ impl EventDispatcher {
             handlers: Vec::new(),
         }
     }
-    
+
     fn add_handler(&mut self, handler: Box<dyn EventHandler>) {
         self.handlers.push(handler);
         // 按优先级排序
         self.handlers.sort_by(|a, b| a.priority().cmp(&b.priority()));
     }
-    
+
     fn dispatch(&self, event: Event) {
         for handler in &self.handlers {
             handler.handle(&event);
@@ -381,12 +381,12 @@ impl ConfigProvider for EnvironmentConfig {
     fn get(&self, key: &str) -> Option<String> {
         std::env::var(key).ok()
     }
-    
+
     fn set(&mut self, _key: &str, _value: String) {
         // 环境变量通常是只读的
         eprintln!("Cannot set environment variable");
     }
-    
+
     fn remove(&mut self, _key: &str) -> bool {
         eprintln!("Cannot remove environment variable");
         false
@@ -397,12 +397,12 @@ impl ConfigProvider for FileConfig {
     fn get(&self, key: &str) -> Option<String> {
         self.data.get(key).cloned()
     }
-    
+
     fn set(&mut self, key: &str, value: String) {
         self.data.insert(key.to_string(), value);
         // 这里可以添加文件写入逻辑
     }
-    
+
     fn remove(&mut self, key: &str) -> bool {
         self.data.remove(key).is_some()
     }
@@ -413,11 +413,11 @@ impl ConfigProvider for DatabaseConfig {
         // 这里可以实现数据库查询逻辑
         None
     }
-    
+
     fn set(&mut self, _key: &str, _value: String) {
         // 这里可以实现数据库写入逻辑
     }
-    
+
     fn remove(&mut self, _key: &str) -> bool {
         // 这里可以实现数据库删除逻辑
         false
@@ -602,11 +602,11 @@ impl Storage for MemoryStorage {
     fn store(&mut self, key: &str, value: &str) {
         self.data.insert(key.to_string(), value.to_string());
     }
-    
+
     fn retrieve(&self, key: &str) -> Option<&str> {
         self.data.get(key).map(|s| s.as_str())
     }
-    
+
     fn remove(&mut self, key: &str) -> Option<String> {
         self.data.remove(key)
     }
@@ -617,11 +617,11 @@ impl Storage for FileStorage {
         self.data.insert(key.to_string(), value.to_string());
         // 这里可以添加文件写入逻辑
     }
-    
+
     fn retrieve(&self, key: &str) -> Option<&str> {
         self.data.get(key).map(|s| s.as_str())
     }
-    
+
     fn remove(&mut self, key: &str) -> Option<String> {
         self.data.remove(key)
     }
@@ -665,11 +665,11 @@ impl Plugin for TextPlugin {
     fn name(&self) -> &str {
         "Text Plugin"
     }
-    
+
     fn execute(&self, input: &str) -> String {
         input.to_uppercase()
     }
-    
+
     fn version(&self) -> &str {
         "1.0.0"
     }
@@ -679,7 +679,7 @@ impl Plugin for MathPlugin {
     fn name(&self) -> &str {
         "Math Plugin"
     }
-    
+
     fn execute(&self, input: &str) -> String {
         if let Ok(num) = input.parse::<f64>() {
             format!("Square: {}, Cube: {}", num * num, num * num * num)
@@ -687,7 +687,7 @@ impl Plugin for MathPlugin {
             "Invalid number".to_string()
         }
     }
-    
+
     fn version(&self) -> &str {
         "1.0.0"
     }
@@ -697,10 +697,11 @@ impl Plugin for CryptoPlugin {
     fn name(&self) -> &str {
         "Crypto Plugin"
     }
-    
+
     fn execute(&self, input: &str) -> String {
         // 简单的ROT13加密
-        input.chars()
+        input
+            .chars()
             .map(|c| {
                 if c.is_ascii_alphabetic() {
                     let base = if c.is_ascii_lowercase() { b'a' } else { b'A' };
@@ -712,7 +713,7 @@ impl Plugin for CryptoPlugin {
             })
             .collect()
     }
-    
+
     fn version(&self) -> &str {
         "1.0.0"
     }
@@ -728,11 +729,11 @@ impl PluginManager {
             plugins: Vec::new(),
         }
     }
-    
+
     pub fn add_plugin(&mut self, plugin: Box<dyn Plugin>) {
         self.plugins.push(plugin);
     }
-    
+
     pub fn execute_all(&self, input: &str) {
         for plugin in &self.plugins {
             println!("Plugin: {} (v{})", plugin.name(), plugin.version());
@@ -752,16 +753,16 @@ impl Default for PluginManager {
 // 演示函数
 pub fn demonstrate_trait_object() {
     println!("=== Trait Object Demonstration ===\n");
-    
+
     // 基本特征对象演示
     demonstrate_basic_trait_object();
-    
+
     // 处理器演示
     demonstrate_processors();
-    
+
     // 存储演示
     demonstrate_storage();
-    
+
     // 插件系统演示
     demonstrate_plugin_system();
 
@@ -772,12 +773,12 @@ pub fn demonstrate_trait_object() {
 // 基本特征对象演示
 fn demonstrate_basic_trait_object() {
     println!("--- Basic Trait Object Demo ---");
-    
+
     let shapes: Vec<Box<dyn Drawable>> = vec![
         Box::new(Circle { radius: 5.0 }),
         Box::new(Square { side: 10.0 }),
     ];
-    
+
     for shape in shapes {
         shape.draw();
     }
@@ -787,15 +788,15 @@ fn demonstrate_basic_trait_object() {
 // 处理器演示
 fn demonstrate_processors() {
     println!("--- Processor Demo ---");
-    
+
     let text = "Hello, Rust!";
-    
+
     let processors: Vec<Box<dyn Processor>> = vec![
         Box::new(UppercaseProcessor),
         Box::new(LowercaseProcessor),
         Box::new(ReverseProcessor),
     ];
-    
+
     for processor in processors {
         let result = processor.process(text);
         println!("Result: {}", result);
@@ -806,23 +807,20 @@ fn demonstrate_processors() {
 // 存储演示
 fn demonstrate_storage() {
     println!("--- Storage Demo ---");
-    
+
     let mut memory_storage = MemoryStorage::new();
     let mut file_storage = FileStorage::new("config.txt".to_string());
-    
-    let storages: Vec<&mut dyn Storage> = vec![
-        &mut memory_storage,
-        &mut file_storage,
-    ];
-    
+
+    let storages: Vec<&mut dyn Storage> = vec![&mut memory_storage, &mut file_storage];
+
     for storage in storages {
         storage.store("key1", "value1");
         storage.store("key2", "value2");
-        
+
         if let Some(value) = storage.retrieve("key1") {
             println!("Retrieved: {}", value);
         }
-        
+
         if let Some(removed) = storage.remove("key2") {
             println!("Removed: {}", removed);
         }
@@ -833,15 +831,15 @@ fn demonstrate_storage() {
 // 插件系统演示
 fn demonstrate_plugin_system() {
     println!("--- Plugin System Demo ---");
-    
+
     let mut manager = PluginManager::new();
-    
+
     manager.add_plugin(Box::new(TextPlugin));
     manager.add_plugin(Box::new(MathPlugin));
     manager.add_plugin(Box::new(CryptoPlugin));
-    
+
     let test_inputs = vec!["hello", "42", "secret"];
-    
+
     for input in test_inputs {
         println!("Input: {}", input);
         manager.execute_all(input);
@@ -862,11 +860,15 @@ pub trait Sub: Super {
 pub struct Concrete;
 
 impl Super for Concrete {
-    fn id(&self) -> &'static str { "Concrete" }
+    fn id(&self) -> &'static str {
+        "Concrete"
+    }
 }
 
 impl Sub for Concrete {
-    fn detail(&self) -> &'static str { "detail" }
+    fn detail(&self) -> &'static str {
+        "detail"
+    }
 }
 
 fn demonstrate_trait_upcasting() {
@@ -875,7 +877,11 @@ fn demonstrate_trait_upcasting() {
     let sub_ref: &dyn Sub = &c;
     // 上行转换到 Super
     let super_ref: &dyn Super = sub_ref;
-    println!("super.id={} sub.detail={}", super_ref.id(), sub_ref.detail());
+    println!(
+        "super.id={} sub.detail={}",
+        super_ref.id(),
+        sub_ref.detail()
+    );
 
     // Box 上行转换
     let boxed_sub: Box<dyn Sub> = Box::new(Concrete);
@@ -888,7 +894,7 @@ fn demonstrate_trait_upcasting() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_circle_draw() {
         let circle = Circle { radius: 5.0 };
@@ -897,50 +903,50 @@ mod tests {
         // 这里我们只是验证可以创建特征对象，实际绘制是副作用
         assert!(true);
     }
-    
+
     #[test]
     fn test_square_draw() {
         let square = Square { side: 10.0 };
         let _drawable: Box<dyn Drawable> = Box::new(square);
         assert!(true);
     }
-    
+
     #[test]
     fn test_uppercase_processor() {
         let processor = UppercaseProcessor;
         let result = processor.process("hello");
         assert_eq!(result, "HELLO");
     }
-    
+
     #[test]
     fn test_lowercase_processor() {
         let processor = LowercaseProcessor;
         let result = processor.process("WORLD");
         assert_eq!(result, "world");
     }
-    
+
     #[test]
     fn test_reverse_processor() {
         let processor = ReverseProcessor;
         let result = processor.process("rust");
         assert_eq!(result, "tsur");
     }
-    
+
     #[test]
     fn test_memory_storage() {
         let mut storage = MemoryStorage::new();
         storage.store("key1", "value1");
-        
+
         assert_eq!(storage.retrieve("key1"), Some("value1"));
         assert_eq!(storage.remove("key1"), Some("value1".to_string()));
         assert_eq!(storage.retrieve("key1"), None);
     }
-    
+
     #[test]
     fn test_plugin_manager() {
         let mut manager = PluginManager::new();
         manager.add_plugin(Box::new(TextPlugin));
-        
+
         assert_eq!(manager.plugins.len(), 1);
         assert_eq!(manager.plugins[0].name(), "Text Plugin");
         assert_eq!(manager.plugins[0].version(), "1.0.0");

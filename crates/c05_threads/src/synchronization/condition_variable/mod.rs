@@ -8,8 +8,17 @@ use std::thread;
 use std::time::{Duration, Instant};
 
 /// 简单的有界队列：生产者/消费者
-pub fn bounded_queue_demo(capacity: usize, producers: usize, consumers: usize, items: usize) -> usize {
-    let queue = Arc::new((Mutex::new(VecDeque::<usize>::new()), Condvar::new(), Condvar::new()));
+pub fn bounded_queue_demo(
+    capacity: usize,
+    producers: usize,
+    consumers: usize,
+    items: usize,
+) -> usize {
+    let queue = Arc::new((
+        Mutex::new(VecDeque::<usize>::new()),
+        Condvar::new(),
+        Condvar::new(),
+    ));
 
     let mut handles = Vec::new();
 
@@ -42,7 +51,9 @@ pub fn bounded_queue_demo(capacity: usize, producers: usize, consumers: usize, i
                 let mut buf = lock.lock().unwrap();
                 while buf.is_empty() {
                     // 若消费总数已达目标，退出
-                    if *total.lock().unwrap() >= total_target { return; }
+                    if *total.lock().unwrap() >= total_target {
+                        return;
+                    }
                     buf = not_empty.wait(buf).unwrap();
                 }
                 if let Some(_v) = buf.pop_front() {
@@ -53,7 +64,9 @@ pub fn bounded_queue_demo(capacity: usize, producers: usize, consumers: usize, i
         }));
     }
 
-    for h in handles { h.join().unwrap(); }
+    for h in handles {
+        h.join().unwrap();
+    }
     *consumed_total.lock().unwrap()
 }
 
@@ -74,11 +87,9 @@ pub fn wait_with_timeout_demo(timeout_ms: u64) -> bool {
     });
 
     let done = lock.lock().unwrap();
-    let res = cvar.wait_timeout_while(
-        done,
-        Duration::from_millis(timeout_ms),
-        |d| !*d,
-    ).unwrap();
+    let res = cvar
+        .wait_timeout_while(done, Duration::from_millis(timeout_ms), |d| !*d)
+        .unwrap();
 
     let (_guard, wait_result) = res;
     let timed_out = wait_result.timed_out();

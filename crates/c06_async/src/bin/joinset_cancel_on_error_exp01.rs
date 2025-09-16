@@ -6,7 +6,9 @@ async fn main() {
     for i in 0..6u32 {
         set.spawn(async move {
             tokio::time::sleep(Duration::from_millis(50 * i as u64)).await;
-            if i == 3 { anyhow::bail!("task {} failed", i); }
+            if i == 3 {
+                anyhow::bail!("task {} failed", i);
+            }
             Ok::<u32, _>(i)
         });
     }
@@ -25,5 +27,3 @@ async fn main() {
         }
     }
 }
-
-

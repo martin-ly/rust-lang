@@ -1,10 +1,10 @@
 //! 模型注册表
-//! 
+//!
 //! 提供模型版本控制、元数据管理和发现功能
 
+use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-use chrono::{DateTime, Utc};
 
 /// 模型注册表
 #[derive(Debug, Clone)]
@@ -123,13 +123,18 @@ impl ModelRegistry {
             config,
         }
     }
-    
+
     /// 注册模型
-    pub fn register_model(&mut self, name: String, description: String, tags: Vec<String>) -> Result<(), String> {
+    pub fn register_model(
+        &mut self,
+        name: String,
+        description: String,
+        tags: Vec<String>,
+    ) -> Result<(), String> {
         if self.models.contains_key(&name) {
             return Err(format!("模型 '{}' 已存在", name));
         }
-        
+
         let now = Utc::now();
         let entry = ModelEntry {
             name: name.clone(),
@@ -140,64 +145,79 @@ impl ModelRegistry {
             created_at: now,
             updated_at: now,
         };
-        
+
         self.models.insert(name, entry);
         Ok(())
     }
-    
+
     /// 添加模型版本
-    pub fn add_model_version(&mut self, model_name: &str, version: ModelVersion) -> Result<(), String> {
-        let entry = self.models.get_mut(model_name)
+    pub fn add_model_version(
+        &mut self,
+        model_name: &str,
+        version: ModelVersion,
+    ) -> Result<(), String> {
+        let entry = self
+            .models
+            .get_mut(model_name)
             .ok_or_else(|| format!("模型 '{}' 不存在", model_name))?;
-        
+
         // 检查版本是否已存在
         if entry.versions.iter().any(|v| v.version == version.version) {
             return Err(format!("版本 '{}' 已存在", version.version));
         }
-        
+
         // 检查版本数量限制
         if entry.versions.len() >= self.config.max_versions_per_model {
             if self.config.auto_cleanup {
                 self.cleanup_old_versions(entry)?;
             } else {
-                return Err(format!("模型版本数量超过限制 {}", self.config.max_versions_per_model));
+                return Err(format!(
+                    "模型版本数量超过限制 {}",
+                    self.config.max_versions_per_model
+                ));
             }
         }
-        
+
         entry.versions.push(version);
         entry.updated_at = Utc::now();
-        
+
         // 更新最新版本
         self.update_latest_version(entry);
-        
+
         Ok(())
     }
-    
+
     /// 获取模型信息
     pub fn get_model(&self, name: &str) -> Result<&ModelEntry, String> {
-        self.models.get(name)
+        self.models
+            .get(name)
             .ok_or_else(|| format!("模型 '{}' 不存在", name))
     }
-    
+
     /// 获取模型版本
     pub fn get_model_version(&self, name: &str, version: &str) -> Result<&ModelVersion, String> {
         let entry = self.get_model(name)?;
-        entry.versions.iter()
+        entry
+            .versions
+            .iter()
             .find(|v| v.version == version)
             .ok_or_else(|| format!("模型 '{}' 的版本 '{}' 不存在", name, version))
     }
-    
+
     /// 获取最新版本
     pub fn get_latest_version(&self, name: &str) -> Result<&ModelVersion, String> {
         let entry = self.get_model(name)?;
-        entry.versions.iter()
+        entry
+            .versions
+            .iter()
             .find(|v| v.version == entry.latest_version)
             .ok_or_else(|| format!("模型 '{}' 没有有效版本", name))
     }
-    
+
     /// 列出所有模型
     pub fn list_models(&self) -> Vec<ModelSummary> {
-        self.models.values()
+        self.models
+            .values()
             .map(|entry| ModelSummary {
                 name: entry.name.clone(),
                 latest_version: entry.latest_version.clone(),
@@ -209,16 +229,20 @@ impl ModelRegistry {
             })
             .collect()
     }
-    
+
     /// 搜索模型
     pub fn search_models(&self, query: &str) -> Vec<ModelSummary> {
         let query_lower = query.to_lowercase();
-        
-        self.models.values()
+
+        self.models
+            .values()
             .filter(|entry| {
-                entry.name.to_lowercase().contains(&query_lower) ||
-                entry.description.to_lowercase().contains(&query_lower) ||
-                entry.tags.iter().any(|tag| tag.to_lowercase().contains(&query_lower))
+                entry.name.to_lowercase().contains(&query_lower)
+                    || entry.description.to_lowercase().contains(&query_lower)
+                    || entry
+                        .tags
+                        .iter()
+                        .any(|tag| tag.to_lowercase().contains(&query_lower))
             })
             .map(|entry| ModelSummary {
                 name: entry.name.clone(),
@@ -231,13 +255,12 @@ impl ModelRegistry {
             })
             .collect()
     }
-    
+
     /// 按标签过滤模型
     pub fn filter_by_tags(&self, tags: &[String]) -> Vec<ModelSummary> {
-        self.models.values()
-            .filter(|entry| {
-                tags.iter().all(|tag| entry.tags.contains(tag))
-            })
+        self.models
+            .values()
+            .filter(|entry| tags.iter().all(|tag| entry.tags.contains(tag)))
             .map(|entry| ModelSummary {
                 name: entry.name.clone(),
                 latest_version: entry.latest_version.clone(),
@@ -249,58 +272,68 @@ impl ModelRegistry {
             })
             .collect()
     }
-    
+
     /// 删除模型
     pub fn delete_model(&mut self, name: &str) -> Result<(), String> {
-        self.models.remove(name)
+        self.models
+            .remove(name)
             .ok_or_else(|| format!("模型 '{}' 不存在", name))?;
         Ok(())
     }
-    
+
     /// 删除模型版本
     pub fn delete_model_version(&mut self, name: &str, version: &str) -> Result<(), String> {
-        let entry = self.models.get_mut(name)
+        let entry = self
+            .models
+            .get_mut(name)
             .ok_or_else(|| format!("模型 '{}' 不存在", name))?;
-        
+
         let initial_len = entry.versions.len();
         entry.versions.retain(|v| v.version != version);
-        
+
         if entry.versions.len() == initial_len {
             return Err(format!("版本 '{}' 不存在", version));
         }
-        
+
         // 更新最新版本
         self.update_latest_version(entry);
         entry.updated_at = Utc::now();
-        
+
         Ok(())
     }
-    
+
     /// 更新模型状态
-    pub fn update_model_status(&mut self, name: &str, version: &str, status: ModelStatus) -> Result<(), String> {
-        let entry = self.models.get_mut(name)
+    pub fn update_model_status(
+        &mut self,
+        name: &str,
+        version: &str,
+        status: ModelStatus,
+    ) -> Result<(), String> {
+        let entry = self
+            .models
+            .get_mut(name)
             .ok_or_else(|| format!("模型 '{}' 不存在", name))?;
-        
-        let model_version = entry.versions.iter_mut()
+
+        let model_version = entry
+            .versions
+            .iter_mut()
             .find(|v| v.version == version)
             .ok_or_else(|| format!("版本 '{}' 不存在", version))?;
-        
+
         model_version.status = status;
         entry.updated_at = Utc::now();
-        
+
         Ok(())
     }
-    
+
     /// 获取注册表统计信息
     pub fn get_statistics(&self) -> RegistryStatistics {
         let total_models = self.models.len();
-        let total_versions: usize = self.models.values()
-            .map(|entry| entry.versions.len())
-            .sum();
-        
+        let total_versions: usize = self.models.values().map(|entry| entry.versions.len()).sum();
+
         let status_counts = self.get_status_counts();
         let framework_counts = self.get_framework_counts();
-        
+
         RegistryStatistics {
             total_models,
             total_versions,
@@ -313,54 +346,61 @@ impl ModelRegistry {
             framework_counts,
         }
     }
-    
+
     /// 更新最新版本
     fn update_latest_version(&self, entry: &mut ModelEntry) {
-        if let Some(latest) = entry.versions.iter()
-            .max_by(|a, b| a.version.cmp(&b.version)) {
+        if let Some(latest) = entry
+            .versions
+            .iter()
+            .max_by(|a, b| a.version.cmp(&b.version))
+        {
             entry.latest_version = latest.version.clone();
         }
     }
-    
+
     /// 清理旧版本
     fn cleanup_old_versions(&self, entry: &mut ModelEntry) -> Result<(), String> {
         if entry.versions.len() <= self.config.max_versions_per_model {
             return Ok(());
         }
-        
+
         // 按创建时间排序，保留最新的版本
-        entry.versions.sort_by(|a, b| b.created_at.cmp(&a.created_at));
-        
+        entry
+            .versions
+            .sort_by(|a, b| b.created_at.cmp(&a.created_at));
+
         // 删除超出限制的版本
         let to_remove = entry.versions.len() - self.config.max_versions_per_model;
         entry.versions.truncate(self.config.max_versions_per_model);
-        
+
         Ok(())
     }
-    
+
     /// 获取状态统计
     fn get_status_counts(&self) -> HashMap<ModelStatus, usize> {
         let mut counts = HashMap::new();
-        
+
         for entry in self.models.values() {
             for version in &entry.versions {
                 *counts.entry(version.status.clone()).or_insert(0) += 1;
             }
         }
-        
+
         counts
     }
-    
+
     /// 获取框架统计
     fn get_framework_counts(&self) -> HashMap<String, usize> {
         let mut counts = HashMap::new();
-        
+
         for entry in self.models.values() {
             for version in &entry.versions {
-                *counts.entry(version.model_info.framework.clone()).or_insert(0) += 1;
+                *counts
+                    .entry(version.model_info.framework.clone())
+                    .or_insert(0) += 1;
             }
         }
-        
+
         counts
     }
 }
@@ -402,40 +442,46 @@ impl Default for RegistryConfig {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_model_registry_creation() {
         let config = RegistryConfig::default();
         let registry = ModelRegistry::new("test_registry".to_string(), config);
-        
+
         assert_eq!(registry.name, "test_registry");
         assert_eq!(registry.models.len(), 0);
     }
-    
+
     #[test]
     fn test_register_model() {
-        let mut registry = ModelRegistry::new("test_registry".to_string(), RegistryConfig::default());
-        
-        registry.register_model(
-            "test_model".to_string(),
-            "测试模型".to_string(),
-            vec!["test".to_string(), "demo".to_string()],
-        ).unwrap();
-        
+        let mut registry =
+            ModelRegistry::new("test_registry".to_string(), RegistryConfig::default());
+
+        registry
+            .register_model(
+                "test_model".to_string(),
+                "测试模型".to_string(),
+                vec!["test".to_string(), "demo".to_string()],
+            )
+            .unwrap();
+
         assert_eq!(registry.models.len(), 1);
         assert!(registry.models.contains_key("test_model"));
     }
-    
+
     #[test]
     fn test_add_model_version() {
-        let mut registry = ModelRegistry::new("test_registry".to_string(), RegistryConfig::default());
-        
-        registry.register_model(
-            "test_model".to_string(),
-            "测试模型".to_string(),
-            vec!["test".to_string()],
-        ).unwrap();
-        
+        let mut registry =
+            ModelRegistry::new("test_registry".to_string(), RegistryConfig::default());
+
+        registry
+            .register_model(
+                "test_model".to_string(),
+                "测试模型".to_string(),
+                vec!["test".to_string()],
+            )
+            .unwrap();
+
         let model_info = ModelInfo {
             name: "test_model".to_string(),
             format: "onnx".to_string(),
@@ -445,7 +491,7 @@ mod tests {
             framework: "pytorch".to_string(),
             architecture: "resnet".to_string(),
         };
-        
+
         let version = ModelVersion {
             version: "1.0.0".to_string(),
             model_info,
@@ -463,55 +509,66 @@ mod tests {
             created_by: "test_user".to_string(),
             status: ModelStatus::Development,
         };
-        
+
         registry.add_model_version("test_model", version).unwrap();
-        
+
         let entry = registry.get_model("test_model").unwrap();
         assert_eq!(entry.versions.len(), 1);
         assert_eq!(entry.latest_version, "1.0.0");
     }
-    
+
     #[test]
     fn test_search_models() {
-        let mut registry = ModelRegistry::new("test_registry".to_string(), RegistryConfig::default());
-        
-        registry.register_model(
-            "image_classifier".to_string(),
-            "图像分类模型".to_string(),
-            vec!["vision".to_string(), "classification".to_string()],
-        ).unwrap();
-        
-        registry.register_model(
-            "text_analyzer".to_string(),
-            "文本分析模型".to_string(),
-            vec!["nlp".to_string(), "analysis".to_string()],
-        ).unwrap();
-        
+        let mut registry =
+            ModelRegistry::new("test_registry".to_string(), RegistryConfig::default());
+
+        registry
+            .register_model(
+                "image_classifier".to_string(),
+                "图像分类模型".to_string(),
+                vec!["vision".to_string(), "classification".to_string()],
+            )
+            .unwrap();
+
+        registry
+            .register_model(
+                "text_analyzer".to_string(),
+                "文本分析模型".to_string(),
+                vec!["nlp".to_string(), "analysis".to_string()],
+            )
+            .unwrap();
+
         let results = registry.search_models("image");
         assert_eq!(results.len(), 1);
         assert_eq!(results[0].name, "image_classifier");
     }
-    
+
     #[test]
     fn test_filter_by_tags() {
-        let mut registry = ModelRegistry::new("test_registry".to_string(), RegistryConfig::default());
-        
-        registry.register_model(
-            "model1".to_string(),
-            "模型1".to_string(),
-            vec!["vision".to_string(), "classification".to_string()],
-        ).unwrap();
-        
-        registry.register_model(
-            "model2".to_string(),
-            "模型2".to_string(),
-            vec!["vision".to_string(), "detection".to_string()],
-        ).unwrap();
-        
+        let mut registry =
+            ModelRegistry::new("test_registry".to_string(), RegistryConfig::default());
+
+        registry
+            .register_model(
+                "model1".to_string(),
+                "模型1".to_string(),
+                vec!["vision".to_string(), "classification".to_string()],
+            )
+            .unwrap();
+
+        registry
+            .register_model(
+                "model2".to_string(),
+                "模型2".to_string(),
+                vec!["vision".to_string(), "detection".to_string()],
+            )
+            .unwrap();
+
         let results = registry.filter_by_tags(&["vision".to_string()]);
         assert_eq!(results.len(), 2);
-        
-        let results = registry.filter_by_tags(&["vision".to_string(), "classification".to_string()]);
+
+        let results =
+            registry.filter_by_tags(&["vision".to_string(), "classification".to_string()]);
         assert_eq!(results.len(), 1);
         assert_eq!(results[0].name, "model1");
     }

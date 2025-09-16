@@ -1,5 +1,5 @@
 //! Rust 1.89 增强特性模块
-//! 
+//!
 //! 本模块包含 Rust 1.89 版本的最新特性实现，包括：
 //! - let_chains 特性稳定化
 //! - cfg_boolean_literals 特性稳定化
@@ -28,10 +28,11 @@ pub mod let_chains_189 {
     /// let_chains 特性演示
     pub fn demonstrate_let_chains() {
         println!("=== Rust 1.89 let_chains 特性演示 ===");
-        
+
         // 使用 let_chains 进行复杂条件判断
         if let UserStatus::Active(id, name) = get_current_user_status()
-            && id >= 10000 && id < 99999
+            && id >= 10000
+            && id < 99999
             && name.len() > 5
         {
             println!("✅ 找到符合条件的用户：ID {}, 名字 '{}'", id, name);
@@ -41,7 +42,7 @@ pub mod let_chains_189 {
 
         // 更复杂的 let_chains 示例
         let data = vec![Some(42), Some(100), None, Some(200)];
-        
+
         for (i, item) in data.iter().enumerate() {
             if let Some(value) = item
                 && *value > 50
@@ -68,7 +69,7 @@ pub mod let_chains_189 {
 
     pub fn demonstrate_nested_let_chains() {
         println!("=== 嵌套结构体 let_chains 演示 ===");
-        
+
         let user = User {
             id: 12345,
             profile: Some(UserProfile {
@@ -84,8 +85,10 @@ pub mod let_chains_189 {
             && email.contains("@")
             && user.id > 1000
         {
-            println!("✅ 用户 {} (ID: {}) 有有效的邮箱: {}", 
-                     profile.name, user.id, email);
+            println!(
+                "✅ 用户 {} (ID: {}) 有有效的邮箱: {}",
+                profile.name, user.id, email
+            );
         } else {
             println!("❌ 用户信息不完整或无效");
         }
@@ -123,16 +126,16 @@ pub mod cfg_boolean_literals_189 {
     /// 条件编译演示
     pub fn demonstrate_cfg_boolean_literals() {
         println!("=== Rust 1.89 cfg_boolean_literals 特性演示 ===");
-        
+
         feature_always_on();
-        
+
         // 根据平台调用不同的功能
         #[cfg(target_os = "linux")]
         linux_specific_feature();
-        
+
         #[cfg(target_os = "windows")]
         windows_specific_feature();
-        
+
         // feature_never_on(); // 此函数未被编译，无法调用
     }
 
@@ -160,11 +163,7 @@ pub mod naked_functions_189 {
         #[naked]
         pub extern "C" fn simple_naked_function() {
             unsafe {
-                asm!(
-                    "nop",
-                    "ret",
-                    options(noreturn)
-                );
+                asm!("nop", "ret", options(noreturn));
             }
         }
 
@@ -187,13 +186,13 @@ pub mod naked_functions_189 {
     /// 裸函数演示（安全版本）
     pub fn demonstrate_naked_functions() {
         println!("=== Rust 1.89 裸函数支持演示 ===");
-        
+
         #[cfg(all(feature = "nightly", target_arch = "x86_64"))]
         {
             println!("✅ 裸函数支持已启用（需要 nightly 版本）");
             // 注意：实际调用裸函数需要特殊的环境和配置
         }
-        
+
         #[cfg(not(all(feature = "nightly", target_arch = "x86_64")))]
         {
             println!("ℹ️ 裸函数支持需要 nightly 版本和 asm! 宏");
@@ -207,17 +206,17 @@ pub mod dangerous_implicit_autorefs_189 {
     /// 演示危险隐式引用
     pub fn demonstrate_dangerous_implicit_autorefs() {
         println!("=== Rust 1.89 危险隐式引用警告演示 ===");
-        
+
         let mut x = 42;
         let ptr = &mut x as *mut i32;
-        
+
         // 这种用法可能会触发危险隐式引用警告
         // 编译器会提醒显式管理指针借用
         unsafe {
             let value = *ptr;
             println!("✅ 通过指针获取值: {}", value);
         }
-        
+
         // 更安全的做法
         let value = unsafe { *ptr };
         println!("✅ 更安全的指针访问: {}", value);
@@ -226,10 +225,10 @@ pub mod dangerous_implicit_autorefs_189 {
     /// 演示正确的指针使用方式
     pub fn demonstrate_safe_pointer_usage() {
         println!("=== 安全的指针使用方式 ===");
-        
+
         let mut data = vec![1, 2, 3, 4, 5];
         let ptr = data.as_mut_ptr();
-        
+
         // 安全的指针操作
         unsafe {
             for i in 0..data.len() {
@@ -246,20 +245,20 @@ pub mod invalid_null_arguments_189 {
     /// 演示无效空指针参数校验
     pub fn demonstrate_invalid_null_arguments() {
         println!("=== Rust 1.89 无效空指针参数校验演示 ===");
-        
+
         // 创建空指针
         let null_ptr: *const i32 = std::ptr::null();
-        
+
         // 这种用法可能会触发无效空指针参数警告
         // 编译器会提醒避免传递非法空指针
         if null_ptr.is_null() {
             println!("✅ 检测到空指针，避免使用");
         }
-        
+
         // 更安全的做法
         let valid_data = 42;
         let valid_ptr = &valid_data as *const i32;
-        
+
         if !valid_ptr.is_null() {
             unsafe {
                 let value = *valid_ptr;
@@ -271,10 +270,10 @@ pub mod invalid_null_arguments_189 {
     /// 演示安全的指针参数传递
     pub fn demonstrate_safe_pointer_arguments() {
         println!("=== 安全的指针参数传递 ===");
-        
+
         let data = vec![1, 2, 3, 4, 5];
         let ptr = data.as_ptr();
-        
+
         // 安全的指针传递
         process_pointer_safely(ptr, data.len());
     }
@@ -285,7 +284,7 @@ pub mod invalid_null_arguments_189 {
             println!("❌ 接收到空指针，无法处理");
             return;
         }
-        
+
         unsafe {
             for i in 0..len {
                 let value = *ptr.add(i);
@@ -303,33 +302,33 @@ impl Rust189EnhancedFeatures {
     pub fn run_all_demonstrations() {
         println!("🚀 Rust 1.89 增强特性综合演示");
         println!("=====================================");
-        
+
         // let_chains 特性演示
         let_chains_189::demonstrate_let_chains();
         let_chains_189::demonstrate_nested_let_chains();
-        
+
         println!();
-        
+
         // cfg_boolean_literals 特性演示
         cfg_boolean_literals_189::demonstrate_cfg_boolean_literals();
-        
+
         println!();
-        
+
         // 裸函数支持演示
         naked_functions_189::demonstrate_naked_functions();
-        
+
         println!();
-        
+
         // 危险隐式引用警告演示
         dangerous_implicit_autorefs_189::demonstrate_dangerous_implicit_autorefs();
         dangerous_implicit_autorefs_189::demonstrate_safe_pointer_usage();
-        
+
         println!();
-        
+
         // 无效空指针参数校验演示
         invalid_null_arguments_189::demonstrate_invalid_null_arguments();
         invalid_null_arguments_189::demonstrate_safe_pointer_arguments();
-        
+
         println!();
         println!("✅ Rust 1.89 增强特性演示完成");
     }
@@ -348,22 +347,25 @@ impl Rust189EnhancedFeatures {
     /// 检查特性支持状态
     pub fn check_feature_support() -> std::collections::HashMap<String, bool> {
         let mut support_status = std::collections::HashMap::new();
-        
+
         // let_chains 特性（稳定）
         support_status.insert("let_chains".to_string(), true);
-        
+
         // cfg_boolean_literals 特性（稳定）
         support_status.insert("cfg_boolean_literals".to_string(), true);
-        
+
         // naked_functions 特性（需要 nightly）
-        support_status.insert("naked_functions".to_string(), cfg!(all(feature = "nightly", target_arch = "x86_64")));
-        
+        support_status.insert(
+            "naked_functions".to_string(),
+            cfg!(all(feature = "nightly", target_arch = "x86_64")),
+        );
+
         // dangerous_implicit_autorefs 特性（稳定）
         support_status.insert("dangerous_implicit_autorefs".to_string(), true);
-        
+
         // invalid_null_arguments 特性（稳定）
         support_status.insert("invalid_null_arguments".to_string(), true);
-        
+
         support_status
     }
 }
@@ -388,12 +390,20 @@ mod tests {
     #[test]
     fn test_feature_support_check() {
         let support_status = Rust189EnhancedFeatures::check_feature_support();
-        
+
         // 检查稳定特性
         assert!(support_status.get("let_chains").unwrap_or(&false));
         assert!(support_status.get("cfg_boolean_literals").unwrap_or(&false));
-        assert!(support_status.get("dangerous_implicit_autorefs").unwrap_or(&false));
-        assert!(support_status.get("invalid_null_arguments").unwrap_or(&false));
+        assert!(
+            support_status
+                .get("dangerous_implicit_autorefs")
+                .unwrap_or(&false)
+        );
+        assert!(
+            support_status
+                .get("invalid_null_arguments")
+                .unwrap_or(&false)
+        );
     }
 
     #[test]

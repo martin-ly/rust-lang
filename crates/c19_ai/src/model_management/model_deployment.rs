@@ -1,10 +1,10 @@
 //! 模型部署
-//! 
+//!
 //! 提供模型部署、服务化和监控功能
 
+use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-use chrono::{DateTime, Utc};
 
 /// 模型部署器
 #[derive(Debug, Clone)]
@@ -134,11 +134,11 @@ impl ModelDeployer {
             config,
         }
     }
-    
+
     /// 部署模型
     pub fn deploy_model(&mut self, request: DeploymentRequest) -> Result<String, String> {
         let deployment_id = format!("deploy-{}", uuid::Uuid::new_v4());
-        
+
         let deployment = ModelDeployment {
             id: deployment_id.clone(),
             name: request.name,
@@ -152,24 +152,26 @@ impl ModelDeployer {
             created_at: Utc::now(),
             updated_at: Utc::now(),
         };
-        
+
         self.deployments.insert(deployment_id.clone(), deployment);
-        
+
         // 模拟部署过程
         self.simulate_deployment(&deployment_id)?;
-        
+
         Ok(deployment_id)
     }
-    
+
     /// 获取部署信息
     pub fn get_deployment(&self, deployment_id: &str) -> Result<&ModelDeployment, String> {
-        self.deployments.get(deployment_id)
+        self.deployments
+            .get(deployment_id)
             .ok_or_else(|| format!("部署 '{}' 不存在", deployment_id))
     }
-    
+
     /// 列出所有部署
     pub fn list_deployments(&self) -> Vec<DeploymentSummary> {
-        self.deployments.values()
+        self.deployments
+            .values()
             .map(|deployment| DeploymentSummary {
                 id: deployment.id.clone(),
                 name: deployment.name.clone(),
@@ -182,66 +184,84 @@ impl ModelDeployer {
             })
             .collect()
     }
-    
+
     /// 更新部署
-    pub fn update_deployment(&mut self, deployment_id: &str, config: DeploymentConfig) -> Result<(), String> {
-        let deployment = self.deployments.get_mut(deployment_id)
+    pub fn update_deployment(
+        &mut self,
+        deployment_id: &str,
+        config: DeploymentConfig,
+    ) -> Result<(), String> {
+        let deployment = self
+            .deployments
+            .get_mut(deployment_id)
             .ok_or_else(|| format!("部署 '{}' 不存在", deployment_id))?;
-        
+
         deployment.config = config;
         deployment.status = DeploymentStatus::Updating;
         deployment.updated_at = Utc::now();
-        
+
         // 模拟更新过程
         self.simulate_update(deployment_id)?;
-        
+
         Ok(())
     }
-    
+
     /// 停止部署
     pub fn stop_deployment(&mut self, deployment_id: &str) -> Result<(), String> {
-        let deployment = self.deployments.get_mut(deployment_id)
+        let deployment = self
+            .deployments
+            .get_mut(deployment_id)
             .ok_or_else(|| format!("部署 '{}' 不存在", deployment_id))?;
-        
+
         deployment.status = DeploymentStatus::Stopped;
         deployment.updated_at = Utc::now();
-        
+
         Ok(())
     }
-    
+
     /// 删除部署
     pub fn delete_deployment(&mut self, deployment_id: &str) -> Result<(), String> {
-        self.deployments.remove(deployment_id)
+        self.deployments
+            .remove(deployment_id)
             .ok_or_else(|| format!("部署 '{}' 不存在", deployment_id))?;
         Ok(())
     }
-    
+
     /// 获取部署指标
-    pub fn get_deployment_metrics(&self, deployment_id: &str) -> Result<&DeploymentMetrics, String> {
+    pub fn get_deployment_metrics(
+        &self,
+        deployment_id: &str,
+    ) -> Result<&DeploymentMetrics, String> {
         let deployment = self.get_deployment(deployment_id)?;
         Ok(&deployment.metrics)
     }
-    
+
     /// 更新部署指标
-    pub fn update_deployment_metrics(&mut self, deployment_id: &str, metrics: DeploymentMetrics) -> Result<(), String> {
-        let deployment = self.deployments.get_mut(deployment_id)
+    pub fn update_deployment_metrics(
+        &mut self,
+        deployment_id: &str,
+        metrics: DeploymentMetrics,
+    ) -> Result<(), String> {
+        let deployment = self
+            .deployments
+            .get_mut(deployment_id)
             .ok_or_else(|| format!("部署 '{}' 不存在", deployment_id))?;
-        
+
         deployment.metrics = metrics;
         deployment.updated_at = Utc::now();
-        
+
         Ok(())
     }
-    
+
     /// 健康检查
     pub fn health_check(&self, deployment_id: &str) -> Result<HealthStatus, String> {
         let deployment = self.get_deployment(deployment_id)?;
-        
+
         let is_healthy = match deployment.status {
             DeploymentStatus::Running => true,
             _ => false,
         };
-        
+
         Ok(HealthStatus {
             deployment_id: deployment_id.to_string(),
             is_healthy,
@@ -254,12 +274,14 @@ impl ModelDeployer {
             },
         })
     }
-    
+
     /// 模拟部署过程
     fn simulate_deployment(&mut self, deployment_id: &str) -> Result<(), String> {
-        let deployment = self.deployments.get_mut(deployment_id)
+        let deployment = self
+            .deployments
+            .get_mut(deployment_id)
             .ok_or_else(|| format!("部署 '{}' 不存在", deployment_id))?;
-        
+
         // 模拟部署过程：创建端点
         let endpoint = Endpoint {
             name: "api".to_string(),
@@ -268,35 +290,39 @@ impl ModelDeployer {
             port: 8080,
             path: format!("/api/v1/{}", deployment.name),
         };
-        
+
         deployment.endpoints.push(endpoint);
         deployment.status = DeploymentStatus::Running;
         deployment.updated_at = Utc::now();
-        
+
         Ok(())
     }
-    
+
     /// 模拟更新过程
     fn simulate_update(&mut self, deployment_id: &str) -> Result<(), String> {
-        let deployment = self.deployments.get_mut(deployment_id)
+        let deployment = self
+            .deployments
+            .get_mut(deployment_id)
             .ok_or_else(|| format!("部署 '{}' 不存在", deployment_id))?;
-        
+
         deployment.status = DeploymentStatus::Running;
         deployment.updated_at = Utc::now();
-        
+
         Ok(())
     }
-    
+
     /// 获取部署统计信息
     pub fn get_deployment_statistics(&self) -> DeploymentStatistics {
         let total_deployments = self.deployments.len();
-        let running_deployments = self.deployments.values()
+        let running_deployments = self
+            .deployments
+            .values()
             .filter(|d| matches!(d.status, DeploymentStatus::Running))
             .count();
-        
+
         let status_counts = self.get_status_counts();
         let type_counts = self.get_type_counts();
-        
+
         DeploymentStatistics {
             total_deployments,
             running_deployments,
@@ -305,26 +331,28 @@ impl ModelDeployer {
             type_counts,
         }
     }
-    
+
     /// 获取状态统计
     fn get_status_counts(&self) -> HashMap<DeploymentStatus, usize> {
         let mut counts = HashMap::new();
-        
+
         for deployment in self.deployments.values() {
             *counts.entry(deployment.status.clone()).or_insert(0) += 1;
         }
-        
+
         counts
     }
-    
+
     /// 获取类型统计
     fn get_type_counts(&self) -> HashMap<DeploymentType, usize> {
         let mut counts = HashMap::new();
-        
+
         for deployment in self.deployments.values() {
-            *counts.entry(deployment.deployment_type.clone()).or_insert(0) += 1;
+            *counts
+                .entry(deployment.deployment_type.clone())
+                .or_insert(0) += 1;
         }
-        
+
         counts
     }
 }
@@ -438,20 +466,21 @@ impl Default for DeploymentMetrics {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_model_deployer_creation() {
         let config = DeploymentConfig::default();
         let deployer = ModelDeployer::new("test_deployer".to_string(), config);
-        
+
         assert_eq!(deployer.name, "test_deployer");
         assert_eq!(deployer.deployments.len(), 0);
     }
-    
+
     #[test]
     fn test_deploy_model() {
-        let mut deployer = ModelDeployer::new("test_deployer".to_string(), DeploymentConfig::default());
-        
+        let mut deployer =
+            ModelDeployer::new("test_deployer".to_string(), DeploymentConfig::default());
+
         let request = DeploymentRequest {
             name: "test_deployment".to_string(),
             model_name: "test_model".to_string(),
@@ -459,20 +488,21 @@ mod tests {
             deployment_type: DeploymentType::RestAPI,
             config: None,
         };
-        
+
         let deployment_id = deployer.deploy_model(request).unwrap();
         assert!(!deployment_id.is_empty());
-        
+
         let deployment = deployer.get_deployment(&deployment_id).unwrap();
         assert_eq!(deployment.name, "test_deployment");
         assert_eq!(deployment.model_name, "test_model");
         assert!(matches!(deployment.status, DeploymentStatus::Running));
     }
-    
+
     #[test]
     fn test_list_deployments() {
-        let mut deployer = ModelDeployer::new("test_deployer".to_string(), DeploymentConfig::default());
-        
+        let mut deployer =
+            ModelDeployer::new("test_deployer".to_string(), DeploymentConfig::default());
+
         let request = DeploymentRequest {
             name: "test_deployment".to_string(),
             model_name: "test_model".to_string(),
@@ -480,18 +510,19 @@ mod tests {
             deployment_type: DeploymentType::RestAPI,
             config: None,
         };
-        
+
         deployer.deploy_model(request).unwrap();
-        
+
         let deployments = deployer.list_deployments();
         assert_eq!(deployments.len(), 1);
         assert_eq!(deployments[0].name, "test_deployment");
     }
-    
+
     #[test]
     fn test_health_check() {
-        let mut deployer = ModelDeployer::new("test_deployer".to_string(), DeploymentConfig::default());
-        
+        let mut deployer =
+            ModelDeployer::new("test_deployer".to_string(), DeploymentConfig::default());
+
         let request = DeploymentRequest {
             name: "test_deployment".to_string(),
             model_name: "test_model".to_string(),
@@ -499,18 +530,19 @@ mod tests {
             deployment_type: DeploymentType::RestAPI,
             config: None,
         };
-        
+
         let deployment_id = deployer.deploy_model(request).unwrap();
-        
+
         let health = deployer.health_check(&deployment_id).unwrap();
         assert!(health.is_healthy);
         assert!(matches!(health.status, DeploymentStatus::Running));
     }
-    
+
     #[test]
     fn test_stop_deployment() {
-        let mut deployer = ModelDeployer::new("test_deployer".to_string(), DeploymentConfig::default());
-        
+        let mut deployer =
+            ModelDeployer::new("test_deployer".to_string(), DeploymentConfig::default());
+
         let request = DeploymentRequest {
             name: "test_deployment".to_string(),
             model_name: "test_model".to_string(),
@@ -518,10 +550,10 @@ mod tests {
             deployment_type: DeploymentType::RestAPI,
             config: None,
         };
-        
+
         let deployment_id = deployer.deploy_model(request).unwrap();
         deployer.stop_deployment(&deployment_id).unwrap();
-        
+
         let deployment = deployer.get_deployment(&deployment_id).unwrap();
         assert!(matches!(deployment.status, DeploymentStatus::Stopped));
     }

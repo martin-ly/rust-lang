@@ -1,11 +1,32 @@
 use c20_distributed::transactions::{Saga, SagaStep};
-use std::sync::{Arc, atomic::{AtomicUsize, Ordering}};
+use std::sync::{
+    Arc,
+    atomic::{AtomicUsize, Ordering},
+};
 
 struct OkStep(Arc<AtomicUsize>);
-impl SagaStep for OkStep { fn execute(&mut self) -> Result<(), c20_distributed::DistributedError> { self.0.fetch_add(1, Ordering::SeqCst); Ok(()) } fn compensate(&mut self) -> Result<(), c20_distributed::DistributedError> { Ok(()) } }
+impl SagaStep for OkStep {
+    fn execute(&mut self) -> Result<(), c20_distributed::DistributedError> {
+        self.0.fetch_add(1, Ordering::SeqCst);
+        Ok(())
+    }
+    fn compensate(&mut self) -> Result<(), c20_distributed::DistributedError> {
+        Ok(())
+    }
+}
 
 struct FailStep(Arc<AtomicUsize>);
-impl SagaStep for FailStep { fn execute(&mut self) -> Result<(), c20_distributed::DistributedError> { Err(c20_distributed::DistributedError::Configuration("fail".into())) } fn compensate(&mut self) -> Result<(), c20_distributed::DistributedError> { self.0.fetch_add(1, Ordering::SeqCst); Ok(()) } }
+impl SagaStep for FailStep {
+    fn execute(&mut self) -> Result<(), c20_distributed::DistributedError> {
+        Err(c20_distributed::DistributedError::Configuration(
+            "fail".into(),
+        ))
+    }
+    fn compensate(&mut self) -> Result<(), c20_distributed::DistributedError> {
+        self.0.fetch_add(1, Ordering::SeqCst);
+        Ok(())
+    }
+}
 
 #[test]
 fn saga_rollback_on_failure() {
@@ -17,4 +38,3 @@ fn saga_rollback_on_failure() {
     let _ = saga.run();
     assert_eq!(c.load(Ordering::SeqCst), 1);
 }
-

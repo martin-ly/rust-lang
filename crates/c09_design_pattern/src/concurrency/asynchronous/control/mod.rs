@@ -1,6 +1,6 @@
 use std::sync::Arc;
-use tokio::sync::{Semaphore, OwnedSemaphorePermit};
-use tokio::time::{timeout, Duration};
+use tokio::sync::{OwnedSemaphorePermit, Semaphore};
+use tokio::time::{Duration, timeout};
 
 pub struct RateLimiter {
     semaphore: Arc<Semaphore>,
@@ -19,7 +19,9 @@ impl RateLimiter {
         self.semaphore.clone().acquire_owned().await.unwrap()
     }
 
-    pub fn capacity(&self) -> usize { self.max_permits }
+    pub fn capacity(&self) -> usize {
+        self.max_permits
+    }
 }
 
 pub async fn run_with_timeout<F, T>(dur: Duration, fut: F) -> Result<T, &'static str>
@@ -41,7 +43,8 @@ mod tests {
         let res = run_with_timeout(Duration::from_millis(50), async {
             tokio::time::sleep(Duration::from_millis(10)).await;
             42
-        }).await;
+        })
+        .await;
         assert_eq!(res.unwrap(), 42);
     }
 
@@ -50,7 +53,8 @@ mod tests {
         let res = run_with_timeout(Duration::from_millis(10), async {
             tokio::time::sleep(Duration::from_millis(50)).await;
             42
-        }).await;
+        })
+        .await;
         assert!(matches!(res, Err("timeout")));
     }
 
@@ -64,12 +68,12 @@ mod tests {
         // 尝试短暂等待以验证第三个无法立即获取
         let sem = limiter.semaphore.clone();
         let try_third = tokio::spawn(async move {
-            tokio::time::timeout(Duration::from_millis(20), sem.acquire_owned()).await.is_ok()
+            tokio::time::timeout(Duration::from_millis(20), sem.acquire_owned())
+                .await
+                .is_ok()
         });
 
         let acquired_third = try_third.await.unwrap();
         assert!(!acquired_third);
     }
 }
-
-

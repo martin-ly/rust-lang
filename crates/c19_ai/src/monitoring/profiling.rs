@@ -1,5 +1,5 @@
 //! 性能分析
-//! 
+//!
 //! 提供 AI 系统的性能分析功能
 
 use serde::{Deserialize, Serialize};
@@ -28,18 +28,18 @@ impl PerformanceProfiler {
             start_time: Instant::now(),
         }
     }
-    
+
     pub fn start_timer(&self, name: String) -> PerformanceTimer {
         PerformanceTimer {
             name,
             start_time: Instant::now(),
         }
     }
-    
+
     pub fn record_metric(&mut self, metric: PerformanceMetric) {
         self.metrics.insert(metric.name.clone(), metric);
     }
-    
+
     pub fn get_metrics(&self) -> &HashMap<String, PerformanceMetric> {
         &self.metrics
     }

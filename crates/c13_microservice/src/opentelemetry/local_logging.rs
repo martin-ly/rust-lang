@@ -1,5 +1,5 @@
 //! 本地日志模块
-//! 
+//!
 //! 提供完整的本地日志功能，包括：
 //! - 日志滚动（按大小和时间）
 //! - 日志压缩
@@ -8,21 +8,21 @@
 //! - 异步写入
 //! - 性能优化
 
-use std::collections::HashMap;
-use std::fs::{File, OpenOptions, create_dir_all, remove_file, rename, metadata};
-use std::io::{Write, BufWriter, BufRead, BufReader};
-use std::path::{Path, PathBuf};
-use std::sync::{Arc, Mutex};
-use std::sync::mpsc::{self, Receiver, Sender};
-use std::thread::{self, JoinHandle};
-use std::time::{SystemTime, Duration, Instant};
-use std::fmt;
+use anyhow::{Context, Result};
 use chrono::{DateTime, Local};
-use flate2::write::GzEncoder;
 use flate2::Compression;
-use serde::{Serialize, Deserialize};
-use anyhow::{Result, Context};
-use tracing::{debug, info, warn, error};
+use flate2::write::GzEncoder;
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+use std::fmt;
+use std::fs::{File, OpenOptions, create_dir_all, metadata, remove_file, rename};
+use std::io::{BufRead, BufReader, BufWriter, Write};
+use std::path::{Path, PathBuf};
+use std::sync::mpsc::{self, Receiver, Sender};
+use std::sync::{Arc, Mutex};
+use std::thread::{self, JoinHandle};
+use std::time::{Duration, Instant, SystemTime};
+use tracing::{debug, error, info, warn};
 
 /// 日志级别
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
@@ -52,7 +52,10 @@ pub enum RotationStrategy {
     /// 按时间滚动
     Time { interval_hours: u32 },
     /// 按大小和时间滚动
-    SizeAndTime { max_size_bytes: u64, interval_hours: u32 },
+    SizeAndTime {
+        max_size_bytes: u64,
+        interval_hours: u32,
+    },
 }
 
 /// 压缩策略
@@ -105,7 +108,7 @@ impl Default for LocalLogConfig {
             level: LocalLogLevel::Info,
             rotation_strategy: RotationStrategy::SizeAndTime {
                 max_size_bytes: 10 * 1024 * 1024, // 10MB
-                interval_hours: 24, // 24小时
+                interval_hours: 24,               // 24小时
             },
             compression_strategy: CompressionStrategy::Delayed { days: 1 },
             max_files: 10,
@@ -158,7 +161,7 @@ impl LogCache {
 
     pub fn add_entry(&mut self, entry: LocalLogEntry) -> bool {
         let entry_size = self.estimate_entry_size(&entry);
-        
+
         // 如果添加这个条目会超过缓存大小，返回false
         if self.current_size + entry_size > self.max_size {
             return false;
@@ -188,7 +191,11 @@ impl LogCache {
         let mut size = entry.message.len();
         size += entry.module.as_ref().map_or(0, |m| m.len());
         size += entry.thread_id.as_ref().map_or(0, |t| t.len());
-        size += entry.fields.iter().map(|(k, v)| k.len() + v.len()).sum::<usize>();
+        size += entry
+            .fields
+            .iter()
+            .map(|(k, v)| k.len() + v.len())
+            .sum::<usize>();
         size += 100; // 时间戳和其他元数据的估算大小
         size
     }
@@ -257,7 +264,7 @@ impl LocalLogManager {
         let now = Local::now();
         let date_str = now.format("%Y-%m-%d").to_string();
         let time_str = now.format("%H-%M-%S").to_string();
-        
+
         let filename = match &config.rotation_strategy {
             RotationStrategy::Time { .. } | RotationStrategy::SizeAndTime { .. } => {
                 format!("{}_{}_{}.log", config.file_prefix, date_str, time_str)
@@ -273,7 +280,7 @@ impl LocalLogManager {
     /// 打开当前日志文件
     fn open_current_log_file(&self) -> Result<()> {
         let file_path = self.current_file_path.lock().unwrap().clone();
-        
+
         // 确保目录存在
         if let Some(parent) = file_path.parent() {
             create_dir_all(parent)?;
@@ -400,7 +407,7 @@ impl LocalLogManager {
                     last_rotation_time,
                     config,
                 )?;
-                
+
                 // 重新尝试添加
                 let mut cache_guard = cache.lock().unwrap();
                 cache_guard.add_entry(entry.clone());
@@ -459,7 +466,7 @@ impl LocalLogManager {
             for entry in entries {
                 let formatted = Self::format_log_entry(entry, config)?;
                 writeln!(writer, "{}", formatted)?;
-                
+
                 // 更新文件大小
                 *current_file_size.lock().unwrap() += formatted.len() as u64 + 1; // +1 for newline
             }
@@ -480,14 +487,15 @@ impl LocalLogManager {
         let now = SystemTime::now();
 
         match &config.rotation_strategy {
-            RotationStrategy::Size { max_size_bytes } => {
-                Ok(current_size >= *max_size_bytes)
-            }
+            RotationStrategy::Size { max_size_bytes } => Ok(current_size >= *max_size_bytes),
             RotationStrategy::Time { interval_hours } => {
                 let interval = Duration::from_secs(*interval_hours as u64 * 3600);
                 Ok(now.duration_since(last_rotation)? >= interval)
             }
-            RotationStrategy::SizeAndTime { max_size_bytes, interval_hours } => {
+            RotationStrategy::SizeAndTime {
+                max_size_bytes,
+                interval_hours,
+            } => {
                 let size_rotation = current_size >= *max_size_bytes;
                 let interval = Duration::from_secs(*interval_hours as u64 * 3600);
                 let time_rotation = now.duration_since(last_rotation)? >= interval;
@@ -545,11 +553,11 @@ impl LocalLogManager {
     /// 清理旧文件
     fn cleanup_old_files(log_dir: &Path, file_prefix: &str, max_files: u32) -> Result<()> {
         let mut log_files = Vec::new();
-        
+
         for entry in std::fs::read_dir(log_dir)? {
             let entry = entry?;
             let path = entry.path();
-            
+
             if path.is_file() {
                 if let Some(filename) = path.file_name().and_then(|n| n.to_str()) {
                     if filename.starts_with(file_prefix) && filename.ends_with(".log") {
@@ -579,54 +587,56 @@ impl LocalLogManager {
     /// 格式化日志条目
     fn format_log_entry(entry: &LocalLogEntry, config: &LocalLogConfig) -> Result<String> {
         match config.format {
-            LogFormat::Json => {
-                Ok(serde_json::to_string(entry)?)
-            }
+            LogFormat::Json => Ok(serde_json::to_string(entry)?),
             LogFormat::Text => {
                 let mut formatted = String::new();
-                
+
                 if config.include_timestamp {
-                    formatted.push_str(&format!("[{}] ", entry.timestamp.format("%Y-%m-%d %H:%M:%S%.3f")));
+                    formatted.push_str(&format!(
+                        "[{}] ",
+                        entry.timestamp.format("%Y-%m-%d %H:%M:%S%.3f")
+                    ));
                 }
-                
+
                 formatted.push_str(&format!("{} ", entry.level));
-                
+
                 if let Some(ref module) = entry.module {
                     formatted.push_str(&format!("[{}] ", module));
                 }
-                
+
                 if config.include_thread_id {
                     if let Some(ref thread_id) = entry.thread_id {
                         formatted.push_str(&format!("[{}] ", thread_id));
                     }
                 }
-                
+
                 formatted.push_str(&entry.message);
-                
+
                 if !entry.fields.is_empty() {
                     formatted.push_str(" | ");
                     for (key, value) in &entry.fields {
                         formatted.push_str(&format!("{}={} ", key, value));
                     }
                 }
-                
+
                 Ok(formatted)
             }
             LogFormat::Compact => {
                 let mut formatted = String::new();
-                formatted.push_str(&format!("{} {} {}", 
+                formatted.push_str(&format!(
+                    "{} {} {}",
                     entry.timestamp.format("%H:%M:%S%.3f"),
                     entry.level,
                     entry.message
                 ));
-                
+
                 if !entry.fields.is_empty() {
                     formatted.push_str(" |");
                     for (key, value) in &entry.fields {
                         formatted.push_str(&format!(" {}={}", key, value));
                     }
                 }
-                
+
                 Ok(formatted)
             }
         }
@@ -659,7 +669,9 @@ impl LocalLogManager {
             thread::sleep(Duration::from_secs(60)); // 每分钟检查一次
 
             if last_compression.elapsed() >= compression_interval {
-                if let Err(e) = Self::compress_log_files(&log_dir, &compression_strategy, &file_prefix) {
+                if let Err(e) =
+                    Self::compress_log_files(&log_dir, &compression_strategy, &file_prefix)
+                {
                     eprintln!("Failed to compress log files: {}", e);
                 }
                 last_compression = Instant::now();
@@ -687,25 +699,21 @@ impl LocalLogManager {
     }
 
     /// 压缩符合条件的文件
-    fn compress_eligible_files(
-        log_dir: &Path,
-        file_prefix: &str,
-        delay: Duration,
-    ) -> Result<()> {
+    fn compress_eligible_files(log_dir: &Path, file_prefix: &str, delay: Duration) -> Result<()> {
         for entry in std::fs::read_dir(log_dir)? {
             let entry = entry?;
             let path = entry.path();
-            
+
             if path.is_file() {
                 if let Some(filename) = path.file_name().and_then(|n| n.to_str()) {
-                    if filename.starts_with(file_prefix) 
-                        && filename.ends_with(".log") 
-                        && !filename.ends_with(".gz") {
-                        
+                    if filename.starts_with(file_prefix)
+                        && filename.ends_with(".log")
+                        && !filename.ends_with(".gz")
+                    {
                         if let Ok(metadata) = entry.metadata() {
                             let modified = metadata.modified()?;
                             let now = SystemTime::now();
-                            
+
                             if now.duration_since(modified)? >= delay {
                                 Self::compress_file(&path)?;
                             }
@@ -720,32 +728,40 @@ impl LocalLogManager {
     /// 压缩单个文件
     fn compress_file(file_path: &Path) -> Result<()> {
         let compressed_path = file_path.with_extension("log.gz");
-        
+
         // 读取原文件
         let file = File::open(file_path)?;
         let reader = BufReader::new(file);
-        
+
         // 创建压缩文件
         let compressed_file = File::create(&compressed_path)?;
         let mut encoder = GzEncoder::new(compressed_file, Compression::default());
-        
+
         // 压缩内容
         for line in reader.lines() {
             let line = line?;
             writeln!(encoder, "{}", line)?;
         }
-        
+
         encoder.finish()?;
-        
+
         // 删除原文件
         remove_file(file_path)?;
-        
-        info!("Compressed log file: {:?} -> {:?}", file_path, compressed_path);
+
+        info!(
+            "Compressed log file: {:?} -> {:?}",
+            file_path, compressed_path
+        );
         Ok(())
     }
 
     /// 记录日志
-    pub fn log(&self, level: LocalLogLevel, message: &str, fields: Option<HashMap<String, String>>) {
+    pub fn log(
+        &self,
+        level: LocalLogLevel,
+        message: &str,
+        fields: Option<HashMap<String, String>>,
+    ) {
         if level < self.config.level {
             return;
         }
@@ -791,9 +807,13 @@ impl LocalLogManager {
     /// 同步写入日志条目
     fn write_entry_sync(&self, entry: LocalLogEntry) -> Result<()> {
         let formatted = Self::format_log_entry(&entry, &self.config)?;
-        
+
         // 同步路径也需要进行滚动检查
-        if Self::should_rotate(&self.current_file_size, &self.last_rotation_time, &self.config)? {
+        if Self::should_rotate(
+            &self.current_file_size,
+            &self.last_rotation_time,
+            &self.config,
+        )? {
             Self::rotate_log_file(
                 &self.current_file,
                 &self.current_file_path,
@@ -802,15 +822,15 @@ impl LocalLogManager {
                 &self.config,
             )?;
         }
-        
+
         if let Some(ref mut writer) = *self.current_file.lock().unwrap() {
             writeln!(writer, "{}", formatted)?;
             writer.flush()?;
-            
+
             // 更新文件大小
             *self.current_file_size.lock().unwrap() += formatted.len() as u64 + 1;
         }
-        
+
         Ok(())
     }
 
@@ -818,7 +838,7 @@ impl LocalLogManager {
     pub fn get_stats(&self) -> LogStats {
         let cache_guard = self.cache.lock().unwrap();
         let current_size = *self.current_file_size.lock().unwrap();
-        
+
         LogStats {
             cache_entries: cache_guard.len(),
             cache_size_bytes: cache_guard.current_size,
@@ -863,12 +883,16 @@ impl LocalLogManager {
         }
 
         if let Some(handle) = self.worker_handle.take() {
-            handle.join().map_err(|_| anyhow::anyhow!("Failed to join async writer thread"))?;
+            handle
+                .join()
+                .map_err(|_| anyhow::anyhow!("Failed to join async writer thread"))?;
         }
 
         // 关闭压缩器
         if let Some(handle) = self.compression_handle.take() {
-            handle.join().map_err(|_| anyhow::anyhow!("Failed to join compression thread"))?;
+            handle
+                .join()
+                .map_err(|_| anyhow::anyhow!("Failed to join compression thread"))?;
         }
 
         info!("Local log manager shutdown completed");
@@ -916,20 +940,26 @@ mod tests {
         let temp_dir = tempdir().unwrap();
         let config = LocalLogConfig {
             log_dir: temp_dir.path().to_path_buf(),
-            rotation_strategy: RotationStrategy::Size { max_size_bytes: 200 },
+            rotation_strategy: RotationStrategy::Size {
+                max_size_bytes: 200,
+            },
             async_write: false,
             ..Default::default()
         };
 
         let manager = LocalLogManager::new(config).unwrap();
-        
+
         // 写入日志以触发轮转（同步写入每条都会检查大小）
         for i in 0..200 {
-            manager.log(LocalLogLevel::Info, &format!("Test message {} - some payload to increase size", i), None);
+            manager.log(
+                LocalLogLevel::Info,
+                &format!("Test message {} - some payload to increase size", i),
+                None,
+            );
         }
-        
+
         manager.flush().unwrap();
-        
+
         // 检查是否创建了多个日志文件
         let entries: Vec<_> = fs::read_dir(temp_dir.path()).unwrap().collect();
         assert!(entries.len() > 1);
@@ -952,7 +982,13 @@ mod tests {
         // 检查是否创建了压缩文件
         let entries: Vec<_> = fs::read_dir(temp_dir.path()).unwrap().collect();
         let has_gz_file = entries.iter().any(|entry| {
-            entry.as_ref().unwrap().path().extension().and_then(|s| s.to_str()) == Some("gz")
+            entry
+                .as_ref()
+                .unwrap()
+                .path()
+                .extension()
+                .and_then(|s| s.to_str())
+                == Some("gz")
         });
         assert!(has_gz_file);
     }
@@ -968,14 +1004,14 @@ mod tests {
         };
 
         let manager = LocalLogManager::new(config).unwrap();
-        
+
         manager.log(LocalLogLevel::Debug, "Debug message", None);
         manager.log(LocalLogLevel::Info, "Info message", None);
         manager.log(LocalLogLevel::Warn, "Warn message", None);
         manager.log(LocalLogLevel::Error, "Error message", None);
-        
+
         manager.flush().unwrap();
-        
+
         // 刷新后缓存会被清空，改为检查文件中的有效行数（至少应包含 Warn 与 Error 两条）
         let stats = manager.get_stats();
         let file = File::open(stats.current_file_path).unwrap();

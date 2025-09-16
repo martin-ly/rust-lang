@@ -1,5 +1,5 @@
 //! WebSocket 协议实现模块
-//! 
+//!
 //! 本模块提供了基于 Rust 1.89 的 WebSocket 协议实现，
 //! 包括握手、帧处理、消息传递等功能。
 
@@ -7,7 +7,7 @@ pub mod frame;
 pub mod handshake;
 
 pub use frame::{WebSocketFrame, WebSocketOpcode};
-pub use handshake::{WebSocketHandshakeRequest, WebSocketHandshakeResponse, WebSocketClient};
+pub use handshake::{WebSocketClient, WebSocketHandshakeRequest, WebSocketHandshakeResponse};
 
 // use crate::error::{NetworkError, NetworkResult}; // 暂时注释掉未使用的导入
 use std::collections::HashMap;
@@ -64,8 +64,11 @@ mod tests {
         assert_eq!(connection.state, WebSocketState::Connecting);
         assert!(!connection.is_open());
         assert!(!connection.is_closed());
-        
+
         connection.add_header("User-Agent", "MyClient/1.0");
-        assert_eq!(connection.headers.get("User-Agent"), Some(&"MyClient/1.0".to_string()));
+        assert_eq!(
+            connection.headers.get("User-Agent"),
+            Some(&"MyClient/1.0".to_string())
+        );
     }
 }

@@ -7,7 +7,10 @@ use std::future::Future;
 
 /// 异步trait实现示例（避免在trait中直接使用 async fn）
 pub trait AsyncProcessor {
-    fn process(&self, data: &[u8]) -> impl Future<Output = Result<Vec<u8>, Box<dyn std::error::Error + Send + Sync>>> + Send;
+    fn process(
+        &self,
+        data: &[u8],
+    ) -> impl Future<Output = Result<Vec<u8>, Box<dyn std::error::Error + Send + Sync>>> + Send;
     fn validate(&self, input: &str) -> impl Future<Output = bool> + Send;
 }
 
@@ -15,14 +18,18 @@ pub trait AsyncProcessor {
 pub struct TextProcessor;
 
 impl AsyncProcessor for TextProcessor {
-    fn process(&self, data: &[u8]) -> impl Future<Output = Result<Vec<u8>, Box<dyn std::error::Error + Send + Sync>>> + Send {
+    fn process(
+        &self,
+        data: &[u8],
+    ) -> impl Future<Output = Result<Vec<u8>, Box<dyn std::error::Error + Send + Sync>>> + Send
+    {
         async move {
             // 模拟异步处理
             tokio::time::sleep(tokio::time::Duration::from_millis(10)).await;
             Ok(data.to_vec())
         }
     }
-    
+
     fn validate(&self, input: &str) -> impl Future<Output = bool> + Send {
         async move { !input.is_empty() }
     }
@@ -32,7 +39,7 @@ impl AsyncProcessor for TextProcessor {
 pub trait DataProcessor {
     type Input;
     type Output;
-    
+
     fn process(&self, input: &Self::Input) -> Self::Output;
 }
 
@@ -42,7 +49,7 @@ pub struct SimpleProcessor;
 impl DataProcessor for SimpleProcessor {
     type Input = String;
     type Output = usize;
-    
+
     fn process(&self, input: &Self::Input) -> Self::Output {
         input.len()
     }
@@ -64,7 +71,7 @@ impl<T: Display + Clone> AdvancedProcessor<T> {
 impl<T: Display + Clone> DataProcessor for AdvancedProcessor<T> {
     type Input = T;
     type Output = String;
-    
+
     fn process(&self, input: &Self::Input) -> Self::Output {
         format!("Processed: {}", input)
     }
@@ -79,23 +86,23 @@ impl<T> VecWrapper<T> {
     pub fn new() -> Self {
         Self { data: Vec::new() }
     }
-    
+
     pub fn push(&mut self, item: T) {
         self.data.push(item);
     }
-    
+
     pub fn len(&self) -> usize {
         self.data.len()
     }
-    
+
     pub fn is_empty(&self) -> bool {
         self.data.is_empty()
     }
-    
+
     pub fn iter(&self) -> std::slice::Iter<'_, T> {
         self.data.iter()
     }
-    
+
     pub fn iter_mut(&mut self) -> std::slice::IterMut<'_, T> {
         self.data.iter_mut()
     }
@@ -113,7 +120,7 @@ pub trait Collection {
     type Iterator<'a>: Iterator<Item = &'a Self::Item>
     where
         Self: 'a;
-    
+
     fn iter(&self) -> Self::Iterator<'_>;
 }
 
@@ -124,10 +131,11 @@ pub struct VecCollection<T> {
 
 impl<T> Collection for VecCollection<T> {
     type Item = T;
-    type Iterator<'a> = std::slice::Iter<'a, T>
+    type Iterator<'a>
+        = std::slice::Iter<'a, T>
     where
         Self: 'a;
-    
+
     fn iter(&self) -> Self::Iterator<'_> {
         self.items.iter()
     }
@@ -136,10 +144,11 @@ impl<T> Collection for VecCollection<T> {
 /// 为VecWrapper实现Collection trait
 impl<T> Collection for VecWrapper<T> {
     type Item = T;
-    type Iterator<'a> = std::slice::Iter<'a, T>
+    type Iterator<'a>
+        = std::slice::Iter<'a, T>
     where
         Self: 'a;
-    
+
     fn iter(&self) -> Self::Iterator<'_> {
         self.data.iter()
     }
@@ -156,7 +165,7 @@ impl<T: Default + Copy, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, CO
             data: [[T::default(); COLS]; ROWS],
         }
     }
-    
+
     pub fn get(&self, row: usize, col: usize) -> Option<&T> {
         if row < ROWS && col < COLS {
             Some(&self.data[row][col])
@@ -164,7 +173,7 @@ impl<T: Default + Copy, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, CO
             None
         }
     }
-    
+
     pub fn set(&mut self, row: usize, col: usize, value: T) -> bool {
         if row < ROWS && col < COLS {
             self.data[row][col] = value;
@@ -173,7 +182,7 @@ impl<T: Default + Copy, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, CO
             false
         }
     }
-    
+
     pub fn dimensions() -> (usize, usize) {
         (ROWS, COLS)
     }

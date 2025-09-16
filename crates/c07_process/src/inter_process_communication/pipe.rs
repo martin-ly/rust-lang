@@ -1,13 +1,13 @@
-use crate::types::{IpcConfig, IpcProtocol, Message};
-use crate::error::{IpcResult, IpcError};
+use crate::error::{IpcError, IpcResult};
 use crate::inter_process_communication::IpcChannel;
-use serde::{Serialize, Deserialize};
-use std::fs::{OpenOptions};
-use std::io::{Write, BufReader, BufRead};
+use crate::types::{IpcConfig, IpcProtocol, Message};
+use serde::{Deserialize, Serialize};
+use std::fs::OpenOptions;
+use std::io::{BufRead, BufReader, Write};
 use std::path::Path;
-use std::sync::Arc;
 use std::path::PathBuf;
-use std::sync::atomic::{AtomicBool};
+use std::sync::Arc;
+use std::sync::atomic::AtomicBool;
 
 /// 命名管道实现
 pub struct NamedPipe {
@@ -21,111 +21,114 @@ impl NamedPipe {
     pub fn new(name: &str, _config: IpcConfig) -> IpcResult<Self> {
         // 在Windows上，我们使用文件作为简单的IPC机制
         let pipe_path = format!("{}.pipe", name);
-        
+
         // 创建管道文件
         let _file = OpenOptions::new()
             .create(true)
             .write(true)
             .open(&pipe_path)
             .map_err(|e| IpcError::ConnectionFailed(e.to_string()))?;
-        
+
         Ok(Self {
             name: name.to_string(),
             file_path: PathBuf::from(&pipe_path),
             is_closed: Arc::new(AtomicBool::new(false)),
         })
     }
-    
+
     /// 连接到现有的命名管道
     pub fn connect(name: &str, _config: IpcConfig) -> IpcResult<Self> {
         let pipe_path = format!("{}.pipe", name);
-        
+
         // 检查管道文件是否存在
         if !Path::new(&pipe_path).exists() {
-            return Err(IpcError::ConnectionFailed(format!("Pipe '{}' not found", name)));
+            return Err(IpcError::ConnectionFailed(format!(
+                "Pipe '{}' not found",
+                name
+            )));
         }
-        
+
         Ok(Self {
             name: name.to_string(),
             file_path: PathBuf::from(&pipe_path),
             is_closed: Arc::new(AtomicBool::new(false)),
         })
     }
-    
+
     /// 发送消息
     pub fn send<T: Serialize + Send>(&self, msg: Message<T>) -> IpcResult<()> {
         let pipe_path = format!("{}.pipe", self.name);
-        
+
         // 序列化消息
-        let json = serde_json::to_string(&msg)
-            .map_err(|e| IpcError::SerializationError(e.to_string()))?;
-        
+        let json =
+            serde_json::to_string(&msg).map_err(|e| IpcError::SerializationError(e.to_string()))?;
+
         // 写入管道文件
         let mut file = OpenOptions::new()
             .write(true)
             .append(true)
             .open(&pipe_path)
             .map_err(|e| IpcError::SendFailed(e.to_string()))?;
-        
-        writeln!(file, "{}", json)
-            .map_err(|e| IpcError::SendFailed(e.to_string()))?;
-        
+
+        writeln!(file, "{}", json).map_err(|e| IpcError::SendFailed(e.to_string()))?;
+
         Ok(())
     }
-    
+
     /// 接收消息
     pub fn receive<T: for<'de> Deserialize<'de> + Send>(&self) -> IpcResult<Message<T>> {
         let pipe_path = format!("{}.pipe", self.name);
-        
+
         // 读取管道文件
         let file = OpenOptions::new()
             .read(true)
             .open(&pipe_path)
             .map_err(|e| IpcError::ReceiveFailed(e.to_string()))?;
-        
+
         let reader = BufReader::new(file);
         let mut lines = reader.lines();
-        
+
         // 读取最后一行（最新的消息）
         let mut last_line = String::new();
         while let Some(Ok(line)) = lines.next() {
             last_line = line;
         }
-        
+
         if last_line.is_empty() {
             return Err(IpcError::ReceiveFailed("No message available".to_string()));
         }
-        
+
         // 反序列化消息
         let msg: Message<T> = serde_json::from_str(&last_line)
             .map_err(|e| IpcError::DeserializationError(e.to_string()))?;
-        
+
         Ok(msg)
     }
-    
+
     /// 检查管道是否关闭
     pub fn is_closed(&self) -> bool {
         self.is_closed.load(std::sync::atomic::Ordering::Relaxed)
     }
-    
+
     /// 关闭管道
     pub fn close(&mut self) -> IpcResult<()> {
-        self.is_closed.store(true, std::sync::atomic::Ordering::Relaxed);
-        
+        self.is_closed
+            .store(true, std::sync::atomic::Ordering::Relaxed);
+
         // 删除管道文件
         if self.file_path.exists() {
             std::fs::remove_file(&self.file_path)
                 .map_err(|e| IpcError::ConnectionFailed(e.to_string()))?;
         }
-        
+
         Ok(())
     }
-    
+
     /// 获取管道名称
     pub fn name(&self) -> &str {
         &self.name
     }
-    
+
     /// 获取协议类型
     pub fn protocol(&self) -> IpcProtocol {
         IpcProtocol::Pipe
@@ -146,19 +149,19 @@ impl IpcChannel for NamedPipe {
         };
         self.send(msg_clone)
     }
-    
+
     fn receive_message(&self) -> IpcResult<Message<Vec<u8>>> {
         self.receive()
     }
-    
+
     fn name(&self) -> &str {
         self.name()
     }
-    
+
     fn is_closed(&self) -> bool {
         self.is_closed()
     }
-    
+
     fn close(&mut self) -> IpcResult<()> {
         self.close()
     }

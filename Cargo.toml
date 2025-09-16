@@ -117,11 +117,9 @@ rcgen = "0.14"
 dotenvy = "0.15"
 tempfile = "3"
 
-# gRPC 相关 - 最新稳定版本
-tonic = { version = "0.14.2", features = ["tls-ring", "tls-webpki-roots"] }
+# gRPC 相关 - 与 opentelemetry-otlp-0.30.0 兼容的版本
+tonic = { version = "0.14.2", features = ["transport", "tls-ring", "tls-webpki-roots", "channel"] }
 tonic-build = "0.14.2"
-tonic-prost = "0.14.2"
-tonic-prost-build = "0.14.2"
 prost = "0.14.1"
 prost-build = "0.14.1"
 prost-derive = "0.14.1"
@@ -158,11 +156,12 @@ tracing = "0.1.41"
 tracing-subscriber = { version = "0.3.20", features = ["env-filter", "json"] }
 log = "0.4.28"
 prometheus = "0.14"
-tracing-opentelemetry = "0.27"
-opentelemetry = "0.30"
-opentelemetry_sdk = { version = "0.30", features = ["rt-tokio"] }
-opentelemetry-otlp = { version = "0.30", features = ["http-json", "grpc-tonic"] }
-opentelemetry-stdout = "0.30"
+tracing-opentelemetry = "0.30"
+opentelemetry = "0.30.0"
+opentelemetry_sdk = { version = "0.30.0", features = ["rt-tokio"] }
+opentelemetry-otlp = { version = "0.30.0", features = ["http-json", "grpc-tonic"] }
+opentelemetry-stdout = "0.30.0"
+opentelemetry-proto = "0.30.0"
 
 # 指标 - 统一版本
 metrics = "0.24"

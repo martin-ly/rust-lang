@@ -1,15 +1,15 @@
 //! # 跨平台文档测试 / Cross-platform Documentation Tests
-//! 
+//!
 //! Rust 1.89 在跨平台文档测试方面进行了重要改进，提供了真正的
 //! 跨平台文档测试支持。
-//! 
+//!
 //! Rust 1.89 has made important improvements in cross-platform documentation tests,
 //! providing true cross-platform documentation test support.
 
 use std::path::Path;
 
 /// 跨平台文档测试运行器 / Cross-platform Documentation Test Runner
-/// 
+///
 /// 提供跨平台的文档测试执行功能。
 /// Provides cross-platform documentation test execution functionality.
 #[allow(dead_code)]
@@ -60,23 +60,23 @@ impl CrossPlatformDocTestRunner {
             test_config: config,
         }
     }
-    
+
     /// 运行跨平台文档测试 / Run cross-platform documentation tests
     pub async fn run_tests(&self, source_file: &Path) -> Result<DocTestResult, DocTestError> {
         let mut results = Vec::new();
-        
+
         for platform in &self.target_platforms {
             let result = self.run_test_for_platform(source_file, platform).await?;
             results.push(result);
         }
-        
+
         let overall_success = results.iter().all(|r| r.success);
         Ok(DocTestResult {
             platform_results: results,
             overall_success,
         })
     }
-    
+
     /// 为特定平台运行测试 / Run test for specific platform
     async fn run_test_for_platform(
         &self,
@@ -84,12 +84,12 @@ impl CrossPlatformDocTestRunner {
         platform: &Platform,
     ) -> Result<PlatformTestResult, DocTestError> {
         let start_time = std::time::Instant::now();
-        
+
         // 模拟跨平台测试执行 / Simulate cross-platform test execution
         let success = self.simulate_platform_test(source_file, platform).await?;
-        
+
         let execution_time = start_time.elapsed();
-        
+
         Ok(PlatformTestResult {
             platform: platform.clone(),
             success,
@@ -97,7 +97,7 @@ impl CrossPlatformDocTestRunner {
             output: format!("Test executed on {:?}", platform),
         })
     }
-    
+
     /// 模拟平台测试 / Simulate platform test
     async fn simulate_platform_test(
         &self,
@@ -114,19 +114,19 @@ impl CrossPlatformDocTestRunner {
             Platform::WebAssembly => Ok(true),
         }
     }
-    
+
     /// 检查平台支持 / Check platform support
     pub fn check_platform_support(&self, platform: &Platform) -> bool {
         self.target_platforms.contains(platform)
     }
-    
+
     /// 添加目标平台 / Add target platform
     pub fn add_target_platform(&mut self, platform: Platform) {
         if !self.target_platforms.contains(&platform) {
             self.target_platforms.push(platform);
         }
     }
-    
+
     /// 移除目标平台 / Remove target platform
     pub fn remove_target_platform(&mut self, platform: &Platform) {
         self.target_platforms.retain(|p| p != platform);
@@ -154,18 +154,15 @@ impl DocTestResult {
     pub fn successful_platforms(&self) -> usize {
         self.platform_results.iter().filter(|r| r.success).count()
     }
-    
+
     /// 获取失败平台数量 / Get failed platform count
     pub fn failed_platforms(&self) -> usize {
         self.platform_results.iter().filter(|r| !r.success).count()
     }
-    
+
     /// 获取总执行时间 / Get total execution time
     pub fn total_execution_time(&self) -> std::time::Duration {
-        self.platform_results
-            .iter()
-            .map(|r| r.execution_time)
-            .sum()
+        self.platform_results.iter().map(|r| r.execution_time).sum()
     }
 }
 
@@ -174,16 +171,16 @@ impl DocTestResult {
 pub enum DocTestError {
     #[error("平台不支持 / Platform not supported: {0:?}")]
     PlatformNotSupported(Platform),
-    
+
     #[error("测试执行失败 / Test execution failed: {0}")]
     TestExecutionFailed(String),
-    
+
     #[error("超时 / Timeout: {0}")]
     Timeout(String),
-    
+
     #[error("文件读取失败 / File read failed: {0}")]
     FileReadFailed(String),
-    
+
     #[error("编译失败 / Compilation failed: {0}")]
     CompilationFailed(String),
 }
@@ -219,7 +216,7 @@ impl DocTestGenerator {
             platform_configs: std::collections::HashMap::new(),
         }
     }
-    
+
     /// 生成跨平台测试代码 / Generate cross-platform test code
     pub fn generate_test_code(
         &self,
@@ -227,26 +224,28 @@ impl DocTestGenerator {
         target_platforms: &[Platform],
     ) -> Result<String, DocTestError> {
         let mut test_code = String::new();
-        
+
         test_code.push_str("//! 跨平台文档测试 / Cross-platform documentation tests\n");
         test_code.push_str("//! \n");
-        test_code.push_str("//! 此测试将在以下平台运行 / This test will run on the following platforms:\n");
-        
+        test_code.push_str(
+            "//! 此测试将在以下平台运行 / This test will run on the following platforms:\n",
+        );
+
         for platform in target_platforms {
             test_code.push_str(&format!("//! - {:?}\n", platform));
         }
-        
+
         test_code.push_str("\n");
         test_code.push_str(source_code);
-        
+
         Ok(test_code)
     }
-    
+
     /// 添加平台配置 / Add platform configuration
     pub fn add_platform_config(&mut self, platform: Platform, config: PlatformConfig) {
         self.platform_configs.insert(platform, config);
     }
-    
+
     /// 获取平台配置 / Get platform configuration
     pub fn get_platform_config(&self, platform: &Platform) -> Option<&PlatformConfig> {
         self.platform_configs.get(platform)
@@ -260,23 +259,28 @@ impl TemplateEngine {
             templates: std::collections::HashMap::new(),
         }
     }
-    
+
     /// 添加模板 / Add template
     pub fn add_template(&mut self, name: String, template: String) {
         self.templates.insert(name, template);
     }
-    
+
     /// 渲染模板 / Render template
-    pub fn render_template(&self, name: &str, variables: &std::collections::HashMap<String, String>) -> Result<String, DocTestError> {
-        let template = self.templates.get(name)
-            .ok_or_else(|| DocTestError::TestExecutionFailed(format!("Template not found: {}", name)))?;
-        
+    pub fn render_template(
+        &self,
+        name: &str,
+        variables: &std::collections::HashMap<String, String>,
+    ) -> Result<String, DocTestError> {
+        let template = self.templates.get(name).ok_or_else(|| {
+            DocTestError::TestExecutionFailed(format!("Template not found: {}", name))
+        })?;
+
         let mut result = template.clone();
-        
+
         for (key, value) in variables {
             result = result.replace(&format!("{{{{{}}}}}", key), value);
         }
-        
+
         Ok(result)
     }
 }
@@ -284,7 +288,7 @@ impl TemplateEngine {
 /// 文档测试工具函数 / Documentation Test Utility Functions
 pub mod utils {
     use super::*;
-    
+
     /// 检测当前平台 / Detect current platform
     pub fn detect_current_platform() -> Platform {
         if cfg!(target_os = "windows") {
@@ -303,7 +307,7 @@ pub mod utils {
             Platform::Linux // 默认 / Default
         }
     }
-    
+
     /// 检查平台兼容性 / Check platform compatibility
     pub fn check_platform_compatibility(platform: &Platform) -> bool {
         match platform {
@@ -315,7 +319,7 @@ pub mod utils {
             Platform::WebAssembly => cfg!(target_arch = "wasm32"),
         }
     }
-    
+
     /// 生成平台特定的测试代码 / Generate platform-specific test code
     pub fn generate_platform_specific_test(platform: &Platform) -> String {
         match platform {
@@ -328,7 +332,7 @@ pub mod utils {
                     assert!(true);
                 }
                 "#
-            },
+            }
             Platform::Linux => {
                 r#"
                 #[cfg(target_os = "linux")]
@@ -338,7 +342,7 @@ pub mod utils {
                     assert!(true);
                 }
                 "#
-            },
+            }
             Platform::MacOS => {
                 r#"
                 #[cfg(target_os = "macos")]
@@ -348,7 +352,7 @@ pub mod utils {
                     assert!(true);
                 }
                 "#
-            },
+            }
             _ => {
                 r#"
                 #[test]
@@ -358,66 +362,72 @@ pub mod utils {
                 }
                 "#
             }
-        }.to_string()
+        }
+        .to_string()
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_cross_platform_doc_test_runner() {
         let config = DocTestConfig::default();
         let runner = CrossPlatformDocTestRunner::new(config);
-        
+
         assert!(runner.check_platform_support(&Platform::Windows));
         assert!(runner.check_platform_support(&Platform::Linux));
         assert!(runner.check_platform_support(&Platform::MacOS));
     }
-    
+
     #[test]
     fn test_doc_test_generator() {
         let generator = DocTestGenerator::new();
-        
+
         let source_code = "fn test_function() { assert!(true); }";
         let platforms = vec![Platform::Windows, Platform::Linux];
-        
-        let test_code = generator.generate_test_code(source_code, &platforms).unwrap();
+
+        let test_code = generator
+            .generate_test_code(source_code, &platforms)
+            .unwrap();
         assert!(test_code.contains("Cross-platform documentation tests"));
         assert!(test_code.contains("Windows"));
         assert!(test_code.contains("Linux"));
     }
-    
+
     #[test]
     fn test_template_engine() {
         let mut engine = TemplateEngine::new();
         engine.add_template("test".to_string(), "Hello {{name}}!".to_string());
-        
+
         let mut variables = std::collections::HashMap::new();
         variables.insert("name".to_string(), "World".to_string());
-        
+
         let result = engine.render_template("test", &variables).unwrap();
         assert_eq!(result, "Hello World!");
     }
-    
+
     #[test]
     fn test_platform_detection() {
         let platform = utils::detect_current_platform();
-        assert!(matches!(platform, Platform::Windows | Platform::Linux | Platform::MacOS));
+        assert!(matches!(
+            platform,
+            Platform::Windows | Platform::Linux | Platform::MacOS
+        ));
     }
-    
+
     #[test]
     fn test_platform_compatibility() {
         let current_platform = utils::detect_current_platform();
         assert!(utils::check_platform_compatibility(&current_platform));
     }
-    
+
     #[test]
     fn test_platform_specific_test_generation() {
         let windows_test = utils::generate_platform_specific_test(&Platform::Windows);
         assert!(windows_test.contains("target_os = \"windows\""));
-        
+
         let linux_test = utils::generate_platform_specific_test(&Platform::Linux);
         assert!(linux_test.contains("target_os = \"linux\""));
     }

@@ -1,8 +1,8 @@
 //! gRPC性能基准测试
-//! 
+//!
 //! 测试gRPC微服务的性能表现
 
-use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId};
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 use tokio::runtime::Runtime;
 
@@ -36,18 +36,16 @@ fn benchmark_user_service_creation(c: &mut Criterion) {
 fn benchmark_user_creation(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
     let service = UserServiceImpl::new();
-    
+
     c.bench_function("user_creation", |b| {
         b.iter(|| {
             let request = user_service::CreateUserRequest {
                 name: "测试用户".to_string(),
                 email: "test@example.com".to_string(),
             };
-            
+
             // 同步执行异步操作
-            let result = rt.block_on(async {
-                service.create_user(request).await
-            });
+            let result = rt.block_on(async { service.create_user(request).await });
             black_box(result)
         })
     });
@@ -57,7 +55,7 @@ fn benchmark_user_creation(c: &mut Criterion) {
 fn benchmark_user_retrieval(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
     let service = UserServiceImpl::new();
-    
+
     // 预先创建一个用户
     let user = rt.block_on(async {
         let request = user_service::CreateUserRequest {
@@ -66,17 +64,15 @@ fn benchmark_user_retrieval(c: &mut Criterion) {
         };
         service.create_user(request).await.unwrap()
     });
-    
+
     c.bench_function("user_retrieval", |b| {
         b.iter(|| {
             let request = user_service::GetUserRequest {
                 id: user.id.clone(),
             };
-            
+
             // 同步执行异步操作
-            let result = rt.block_on(async {
-                service.get_user(request).await
-            });
+            let result = rt.block_on(async { service.get_user(request).await });
             black_box(result)
         })
     });
@@ -86,7 +82,7 @@ fn benchmark_user_retrieval(c: &mut Criterion) {
 fn benchmark_user_update(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
     let service = UserServiceImpl::new();
-    
+
     // 预先创建一个用户
     let user = rt.block_on(async {
         let request = user_service::CreateUserRequest {
@@ -95,7 +91,7 @@ fn benchmark_user_update(c: &mut Criterion) {
         };
         service.create_user(request).await.unwrap()
     });
-    
+
     c.bench_function("user_update", |b| {
         b.iter(|| {
             let request = user_service::UpdateUserRequest {
@@ -103,11 +99,9 @@ fn benchmark_user_update(c: &mut Criterion) {
                 name: Some("更新用户".to_string()),
                 email: None,
             };
-            
+
             // 同步执行异步操作
-            let result = rt.block_on(async {
-                service.update_user(request).await
-            });
+            let result = rt.block_on(async { service.update_user(request).await });
             black_box(result)
         })
     });
@@ -117,7 +111,7 @@ fn benchmark_user_update(c: &mut Criterion) {
 fn benchmark_user_deletion(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
     let service = UserServiceImpl::new();
-    
+
     c.bench_function("user_deletion", |b| {
         b.iter(|| {
             // 每次测试都创建一个新用户
@@ -125,18 +119,12 @@ fn benchmark_user_deletion(c: &mut Criterion) {
                 name: "测试用户".to_string(),
                 email: "test@example.com".to_string(),
             };
-            let user = rt.block_on(async {
-                service.create_user(create_request).await.unwrap()
-            });
-            
-            let delete_request = user_service::DeleteUserRequest {
-                id: user.id,
-            };
-            
+            let user = rt.block_on(async { service.create_user(create_request).await.unwrap() });
+
+            let delete_request = user_service::DeleteUserRequest { id: user.id };
+
             // 同步执行异步操作
-            let result = rt.block_on(async {
-                service.delete_user(delete_request).await
-            });
+            let result = rt.block_on(async { service.delete_user(delete_request).await });
             black_box(result)
         })
     });
@@ -146,7 +134,7 @@ fn benchmark_user_deletion(c: &mut Criterion) {
 fn benchmark_user_listing(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
     let service = UserServiceImpl::new();
-    
+
     // 预先创建一些用户
     rt.block_on(async {
         for i in 0..100 {
@@ -157,18 +145,16 @@ fn benchmark_user_listing(c: &mut Criterion) {
             service.create_user(request).await.unwrap();
         }
     });
-    
+
     c.bench_function("user_listing", |b| {
         b.iter(|| {
             let request = user_service::ListUsersRequest {
                 page: 1,
                 page_size: 10,
             };
-            
+
             // 同步执行异步操作
-            let result = rt.block_on(async {
-                service.list_users(request).await
-            });
+            let result = rt.block_on(async { service.list_users(request).await });
             black_box(result)
         })
     });
@@ -178,17 +164,15 @@ fn benchmark_user_listing(c: &mut Criterion) {
 fn benchmark_health_check(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
     let service = UserServiceImpl::new();
-    
+
     c.bench_function("health_check", |b| {
         b.iter(|| {
             let request = user_service::HealthCheckRequest {
                 service: "user_service".to_string(),
             };
-            
+
             // 同步执行异步操作
-            let result = rt.block_on(async {
-                service.health_check(request).await
-            });
+            let result = rt.block_on(async { service.health_check(request).await });
             black_box(result)
         })
     });
@@ -197,7 +181,7 @@ fn benchmark_health_check(c: &mut Criterion) {
 /// 基准测试：并发操作性能
 fn benchmark_concurrent_operations(c: &mut Criterion) {
     let mut group = c.benchmark_group("concurrent_operations");
-    
+
     for concurrency in [1, 10, 100].iter() {
         group.bench_with_input(
             BenchmarkId::new("concurrent", concurrency),
@@ -210,14 +194,14 @@ fn benchmark_concurrent_operations(c: &mut Criterion) {
             },
         );
     }
-    
+
     group.finish();
 }
 
 /// 基准测试：批量操作性能
 fn benchmark_batch_operations(c: &mut Criterion) {
     let mut group = c.benchmark_group("batch_operations");
-    
+
     for batch_size in [10, 100, 1000].iter() {
         group.bench_with_input(
             BenchmarkId::new("batch_size", batch_size),
@@ -230,7 +214,7 @@ fn benchmark_batch_operations(c: &mut Criterion) {
             },
         );
     }
-    
+
     group.finish();
 }
 

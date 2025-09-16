@@ -2,8 +2,8 @@
 //! - 使用 `Arc<AtomicBool>` 进行跨线程停止信号
 //! - 使用 `Arc<Mutex<T>>` 维护共享可变状态
 
-use std::sync::{Arc, Mutex};
 use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::Duration;
 
@@ -20,7 +20,9 @@ pub fn cooperative_cancellation(workers: usize, ticks: usize) -> usize {
             let mut local = 0usize;
             while !c.load(Ordering::Acquire) {
                 local += 1;
-                if local >= ticks { break; }
+                if local >= ticks {
+                    break;
+                }
                 thread::sleep(Duration::from_millis(1));
             }
             *p.lock().unwrap() += local;
@@ -31,7 +33,9 @@ pub fn cooperative_cancellation(workers: usize, ticks: usize) -> usize {
     thread::sleep(Duration::from_millis((ticks as u64).min(10)));
     cancel.store(true, Ordering::Release);
 
-    for h in handles { h.join().unwrap(); }
+    for h in handles {
+        h.join().unwrap();
+    }
     *progress.lock().unwrap()
 }
 
@@ -43,11 +47,15 @@ pub fn shared_vec_sum(workers: usize, each: usize) -> usize {
         let d = Arc::clone(&data);
         handles.push(thread::spawn(move || {
             let mut local = 0usize;
-            for i in 0..each { local += id + i; }
+            for i in 0..each {
+                local += id + i;
+            }
             d.lock().unwrap().push(local);
         }));
     }
-    for h in handles { h.join().unwrap(); }
+    for h in handles {
+        h.join().unwrap();
+    }
     data.lock().unwrap().iter().sum()
 }
 

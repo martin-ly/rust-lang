@@ -1,5 +1,5 @@
 //! 性能分析模型实现
-//! 
+//!
 //! 本模块实现了各种性能分析模型，包括系统性能建模、负载测试、
 //! 容量规划、性能预测等。使用Rust的类型安全特性确保性能分析的准确性。
 
@@ -77,7 +77,12 @@ pub enum LoadPattern {
     /// 正弦波负载
     SineWave { amplitude: f64, period: Duration },
     /// 突发负载
-    Burst { base_rate: f64, burst_rate: f64, burst_duration: Duration, burst_interval: Duration },
+    Burst {
+        base_rate: f64,
+        burst_rate: f64,
+        burst_duration: Duration,
+        burst_interval: Duration,
+    },
 }
 
 impl LoadGenerator {
@@ -112,7 +117,10 @@ impl LoadGenerator {
     fn get_current_rate(&self, elapsed: Duration) -> f64 {
         match &self.load_pattern {
             LoadPattern::Constant => self.target_throughput,
-            LoadPattern::LinearGrowth { start_rate, end_rate } => {
+            LoadPattern::LinearGrowth {
+                start_rate,
+                end_rate,
+            } => {
                 let progress = elapsed.as_secs_f64() / self.duration.as_secs_f64();
                 start_rate + (end_rate - start_rate) * progress
             }
@@ -126,11 +134,18 @@ impl LoadGenerator {
                 current_rate
             }
             LoadPattern::SineWave { amplitude, period } => {
-                let phase = 2.0 * std::f64::consts::PI * elapsed.as_secs_f64() / period.as_secs_f64();
+                let phase =
+                    2.0 * std::f64::consts::PI * elapsed.as_secs_f64() / period.as_secs_f64();
                 self.target_throughput + amplitude * phase.sin()
             }
-            LoadPattern::Burst { base_rate, burst_rate, burst_duration, burst_interval } => {
-                let cycle_time = elapsed.as_secs_f64() % (burst_interval.as_secs_f64() + burst_duration.as_secs_f64());
+            LoadPattern::Burst {
+                base_rate,
+                burst_rate,
+                burst_duration,
+                burst_interval,
+            } => {
+                let cycle_time = elapsed.as_secs_f64()
+                    % (burst_interval.as_secs_f64() + burst_duration.as_secs_f64());
                 if cycle_time < burst_duration.as_secs_f64() {
                     *burst_rate
                 } else {
@@ -145,25 +160,25 @@ impl LoadGenerator {
         // 简化的性能模拟
         let mut metrics = PerformanceMetrics::new();
         metrics.throughput = current_rate;
-        
+
         // 响应时间与负载成反比关系
         metrics.response_time = 100.0 + (current_rate / 10.0);
-        
+
         // CPU使用率与负载成正比
         metrics.cpu_usage = (current_rate / 20.0).min(100.0);
-        
+
         // 内存使用率相对稳定
         metrics.memory_usage = 50.0 + (current_rate / 50.0);
-        
+
         // 错误率在高负载时增加
         metrics.error_rate = if current_rate > 500.0 {
             (current_rate - 500.0) / 100.0
         } else {
             0.0
         };
-        
+
         metrics.concurrent_users = (current_rate / 2.0) as usize;
-        
+
         metrics
     }
 }
@@ -247,7 +262,8 @@ impl CapacityPlanner {
     /// 计算CPU容量
     fn calculate_cpu_capacity(&self) -> f64 {
         // 简化的CPU容量计算
-        let cpu_per_core = self.requirements.target_throughput / self.current_config.cpu_cores as f64;
+        let cpu_per_core =
+            self.requirements.target_throughput / self.current_config.cpu_cores as f64;
         (cpu_per_core / 100.0) * 100.0 // 假设每个核心能处理100 req/s
     }
 
@@ -263,7 +279,8 @@ impl CapacityPlanner {
     fn calculate_network_capacity(&self) -> f64 {
         // 简化的网络容量计算
         let bytes_per_request = 1024.0; // 1KB per request
-        let required_bandwidth = self.requirements.target_throughput * bytes_per_request * 8.0 / 1_000_000.0; // Mbps
+        let required_bandwidth =
+            self.requirements.target_throughput * bytes_per_request * 8.0 / 1_000_000.0; // Mbps
         (required_bandwidth / self.current_config.network_bandwidth_mbps) * 100.0
     }
 
@@ -447,7 +464,10 @@ pub enum PredictionModel {
 
 impl PerformancePredictor {
     /// 创建新的性能预测器
-    pub fn new(historical_data: Vec<PerformanceMetrics>, prediction_model: PredictionModel) -> Self {
+    pub fn new(
+        historical_data: Vec<PerformanceMetrics>,
+        prediction_model: PredictionModel,
+    ) -> Self {
         Self {
             historical_data,
             prediction_model,
@@ -458,8 +478,12 @@ impl PerformancePredictor {
     pub fn predict(&self, steps_ahead: usize) -> Vec<PerformanceMetrics> {
         match &self.prediction_model {
             PredictionModel::LinearRegression => self.predict_linear_regression(steps_ahead),
-            PredictionModel::ExponentialSmoothing { alpha } => self.predict_exponential_smoothing(steps_ahead, *alpha),
-            PredictionModel::MovingAverage { window_size } => self.predict_moving_average(steps_ahead, *window_size),
+            PredictionModel::ExponentialSmoothing { alpha } => {
+                self.predict_exponential_smoothing(steps_ahead, *alpha)
+            }
+            PredictionModel::MovingAverage { window_size } => {
+                self.predict_moving_average(steps_ahead, *window_size)
+            }
             PredictionModel::ARIMA { p, d, q } => self.predict_arima(steps_ahead, *p, *d, *q),
         }
     }
@@ -467,7 +491,7 @@ impl PerformancePredictor {
     /// 线性回归预测
     fn predict_linear_regression(&self, steps_ahead: usize) -> Vec<PerformanceMetrics> {
         let mut predictions = Vec::new();
-        
+
         if self.historical_data.len() < 2 {
             return predictions;
         }
@@ -494,7 +518,7 @@ impl PerformancePredictor {
         for i in 0..steps_ahead {
             let x = (n + i) as f64;
             let predicted_throughput = slope * x + intercept;
-            
+
             let mut metrics = PerformanceMetrics::new();
             metrics.throughput = predicted_throughput.max(0.0);
             metrics.response_time = 100.0 + (predicted_throughput / 10.0);
@@ -506,7 +530,7 @@ impl PerformancePredictor {
                 0.0
             };
             metrics.concurrent_users = (predicted_throughput / 2.0) as usize;
-            
+
             predictions.push(metrics);
         }
 
@@ -514,9 +538,13 @@ impl PerformancePredictor {
     }
 
     /// 指数平滑预测
-    fn predict_exponential_smoothing(&self, steps_ahead: usize, alpha: f64) -> Vec<PerformanceMetrics> {
+    fn predict_exponential_smoothing(
+        &self,
+        steps_ahead: usize,
+        alpha: f64,
+    ) -> Vec<PerformanceMetrics> {
         let mut predictions = Vec::new();
-        
+
         if self.historical_data.is_empty() {
             return predictions;
         }
@@ -540,7 +568,7 @@ impl PerformancePredictor {
                 0.0
             };
             metrics.concurrent_users = (smoothed_throughput / 2.0) as usize;
-            
+
             predictions.push(metrics);
         }
 
@@ -548,9 +576,13 @@ impl PerformancePredictor {
     }
 
     /// 移动平均预测
-    fn predict_moving_average(&self, steps_ahead: usize, window_size: usize) -> Vec<PerformanceMetrics> {
+    fn predict_moving_average(
+        &self,
+        steps_ahead: usize,
+        window_size: usize,
+    ) -> Vec<PerformanceMetrics> {
         let mut predictions = Vec::new();
-        
+
         if self.historical_data.len() < window_size {
             return predictions;
         }
@@ -575,7 +607,7 @@ impl PerformancePredictor {
                 0.0
             };
             metrics.concurrent_users = (moving_avg / 2.0) as usize;
-            
+
             predictions.push(metrics);
         }
 
@@ -583,7 +615,13 @@ impl PerformancePredictor {
     }
 
     /// ARIMA预测（简化实现）
-    fn predict_arima(&self, steps_ahead: usize, _p: usize, _d: usize, _q: usize) -> Vec<PerformanceMetrics> {
+    fn predict_arima(
+        &self,
+        steps_ahead: usize,
+        _p: usize,
+        _d: usize,
+        _q: usize,
+    ) -> Vec<PerformanceMetrics> {
         // 简化实现：使用移动平均
         self.predict_moving_average(steps_ahead, 5)
     }
@@ -602,19 +640,15 @@ mod tests {
         metrics.cpu_usage = 50.0;
         metrics.memory_usage = 60.0;
         metrics.error_rate = 1.0;
-        
+
         let score = metrics.performance_score();
         assert!(score > 0.0 && score <= 1.0);
     }
 
     #[test]
     fn test_load_generator() {
-        let generator = LoadGenerator::new(
-            100.0,
-            LoadPattern::Constant,
-            Duration::from_secs(10)
-        );
-        
+        let generator = LoadGenerator::new(100.0, LoadPattern::Constant, Duration::from_secs(10));
+
         let metrics = generator.generate_load();
         assert!(!metrics.is_empty());
     }
@@ -627,7 +661,7 @@ mod tests {
             storage_gb: 100.0,
             network_bandwidth_mbps: 1000.0,
         };
-        
+
         let requirements = PerformanceRequirements {
             target_throughput: 500.0,
             max_response_time: 200.0,
@@ -635,10 +669,10 @@ mod tests {
             max_memory_usage: 80.0,
             max_error_rate: 5.0,
         };
-        
+
         let planner = CapacityPlanner::new(config, requirements);
         let analysis = planner.analyze_current_capacity();
-        
+
         assert!(analysis.overall_capacity >= 0.0);
     }
 
@@ -662,12 +696,10 @@ mod tests {
                 concurrent_users: 60,
             },
         ];
-        
-        let predictor = PerformancePredictor::new(
-            historical_data,
-            PredictionModel::LinearRegression
-        );
-        
+
+        let predictor =
+            PerformancePredictor::new(historical_data, PredictionModel::LinearRegression);
+
         let predictions = predictor.predict(3);
         assert_eq!(predictions.len(), 3);
     }

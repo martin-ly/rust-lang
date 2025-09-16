@@ -1,5 +1,5 @@
 //! 分布式系统模块
-//! 
+//!
 //! 对齐 Rust 1.89 特性，提供分布式系统基础能力：成员管理、拓扑、共识抽象、分区与一致性、故障与恢复等。
 
 /// 分布式系统配置
@@ -18,79 +18,76 @@ impl Default for DistributedConfig {
     }
 }
 
-pub mod errors;
-pub mod membership;
-pub mod topology;
-pub mod consensus;
-pub mod partitioning;
-pub mod consistency;
-pub mod transport;
-pub mod storage;
-pub mod scheduling;
-pub mod codec;
-pub mod swim;
-pub mod replication;
-pub mod transactions;
-pub mod cap_theorem;
 pub mod byzantine_fault_tolerance;
-pub mod service_discovery;
-pub mod load_balancing;
-pub mod config_management;
+pub mod cap_theorem;
 pub mod chaos;
+pub mod codec;
+pub mod config_management;
+pub mod consensus;
+pub mod consistency;
+pub mod errors;
+pub mod load_balancing;
+pub mod membership;
+pub mod partitioning;
+pub mod replication;
+pub mod scheduling;
 pub mod security;
+pub mod service_discovery;
+pub mod storage;
+pub mod swim;
+pub mod topology;
+pub mod transactions;
+pub mod transport;
 
 #[cfg(feature = "consensus-raft")]
 pub mod consensus_raft;
 
-pub use errors::DistributedError;
-pub use membership::{ClusterNodeId, ClusterMembership};
-pub use topology::{ClusterTopology, ShardId};
-pub use consensus::{ConsensusRole, ConsensusApi};
-pub use partitioning::{Partitioner, HashPartitioner};
-pub use consistency::{
-    ConsistencyLevel, CAPStrategy, VectorClock, 
-    SessionConsistencyManager, MonotonicConsistencyManager
-};
-pub use transport::{RpcClient, RpcServer};
-pub use storage::{StateMachineStorage, LogStorage};
-pub use scheduling::{LogicalClock, TimerService};
-pub use codec::{BinaryCodec, BytesCodec, StringUtf8Codec};
-pub use swim::{
-    SwimMemberState, SwimEvent, SwimTransport, SwimNode, 
-    MembershipView, EnhancedSwimTransport
-};
-pub use replication::{Replicator, QuorumPolicy, MajorityQuorum};
-pub use transactions::{Saga, SagaStep};
-pub use cap_theorem::{
-    CAPManager, CAPAnalyzer, PartitionDetector, PartitionStats,
-    ConsistencyDecision, PerformanceMetrics, CAPAnalysisReport
-};
 pub use byzantine_fault_tolerance::{
-    PBFTNode, ByzantineNetwork, ByzantineMessage, ByzantineNodeState,
-    PreparedCertificate, ViewChangeCertificate, ByzantineNetworkStats
+    ByzantineMessage, ByzantineNetwork, ByzantineNetworkStats, ByzantineNodeState, PBFTNode,
+    PreparedCertificate, ViewChangeCertificate,
 };
-pub use service_discovery::{
-    ServiceInstance, DiscoveryStrategy, ServiceDiscoveryConfig,
-    DnsServiceDiscovery, ConfigServiceDiscovery, RegistryServiceDiscovery,
-    ServiceDiscoveryManager, HealthChecker
-};
-pub use load_balancing::{
-    LoadBalancingStrategy, ServerStats, RoundRobinBalancer, WeightedRoundRobinBalancer,
-    LeastConnectionsBalancer, ConsistentHashBalancer, RandomBalancer, WeightedRandomBalancer,
-    LeastResponseTimeBalancer, GeographicBalancer, LoadBalancerManager
-};
-pub use config_management::{
-    ConfigValue, ConfigSource, InMemorySource, FileSource, EnvSource,
-    ConfigSnapshot, ConfigManager
+pub use cap_theorem::{
+    CAPAnalysisReport, CAPAnalyzer, CAPManager, ConsistencyDecision, PartitionDetector,
+    PartitionStats, PerformanceMetrics,
 };
 pub use chaos::{ChaosConfig, ChaosInjector};
-pub use security::{
-    Principal, Resource, Action, AclRule, AclManager,
-    AuditEvent, Auditor,
-    RateLimitConfig, TokenBucket,
-    CircuitState, CircuitConfig, CircuitBreaker,
-    Governance,
+pub use codec::{BinaryCodec, BytesCodec, StringUtf8Codec};
+pub use config_management::{
+    ConfigManager, ConfigSnapshot, ConfigSource, ConfigValue, EnvSource, FileSource, InMemorySource,
 };
+pub use consensus::{ConsensusApi, ConsensusRole};
+pub use consistency::{
+    CAPStrategy, ConsistencyLevel, MonotonicConsistencyManager, SessionConsistencyManager,
+    VectorClock,
+};
+pub use errors::DistributedError;
+pub use load_balancing::{
+    ConsistentHashBalancer, GeographicBalancer, LeastConnectionsBalancer,
+    LeastResponseTimeBalancer, LoadBalancerManager, LoadBalancingStrategy, RandomBalancer,
+    RoundRobinBalancer, ServerStats, WeightedRandomBalancer, WeightedRoundRobinBalancer,
+};
+pub use membership::{ClusterMembership, ClusterNodeId};
+pub use partitioning::{HashPartitioner, Partitioner};
+pub use replication::{MajorityQuorum, QuorumPolicy, Replicator};
+pub use scheduling::{LogicalClock, TimerService};
+pub use security::{
+    AclManager, AclRule, Action, AuditEvent, Auditor, CircuitBreaker, CircuitConfig, CircuitState,
+    Governance, Principal, RateLimitConfig, Resource, TokenBucket,
+};
+pub use service_discovery::{
+    ConfigServiceDiscovery, DiscoveryStrategy, DnsServiceDiscovery, HealthChecker,
+    RegistryServiceDiscovery, ServiceDiscoveryConfig, ServiceDiscoveryManager, ServiceInstance,
+};
+pub use storage::{LogStorage, StateMachineStorage};
+pub use swim::{
+    EnhancedSwimTransport, MembershipView, SwimEvent, SwimMemberState, SwimNode, SwimTransport,
+};
+pub use topology::{ClusterTopology, ShardId};
+pub use transactions::{Saga, SagaStep};
+pub use transport::{RpcClient, RpcServer};
 
 #[cfg(feature = "consensus-raft")]
-pub use consensus_raft::{RaftState, Term, LogIndex, AppendEntriesReq, AppendEntriesResp, RequestVoteReq, RequestVoteResp, RaftNode, MinimalRaft};
+pub use consensus_raft::{
+    AppendEntriesReq, AppendEntriesResp, LogIndex, MinimalRaft, RaftNode, RaftState,
+    RequestVoteReq, RequestVoteResp, Term,
+};

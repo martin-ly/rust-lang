@@ -1,5 +1,5 @@
 use std::time::Duration;
-use tracing::{info, instrument, Level};
+use tracing::{Level, info, instrument};
 
 #[tokio::main(flavor = "multi_thread", worker_threads = 2)]
 async fn main() {
@@ -33,5 +33,3 @@ async fn job_b() {
     });
     let _ = tokio::join!(h1, h2);
 }
-
-

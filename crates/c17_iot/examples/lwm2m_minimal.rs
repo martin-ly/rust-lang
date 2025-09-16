@@ -7,21 +7,24 @@ fn main() {
         instances: vec![Lwm2mInstance {
             instance_id: 0,
             resources: vec![
-                Lwm2mResource { // 5700: Sensor Value
+                Lwm2mResource {
+                    // 5700: Sensor Value
                     id: 5700,
                     readable: true,
                     writable: false,
                     executable: false,
                     value: Some(Lwm2mValue::Float(21.5)),
                 },
-                Lwm2mResource { // 5601: Min Measured Value
+                Lwm2mResource {
+                    // 5601: Min Measured Value
                     id: 5601,
                     readable: true,
                     writable: false,
                     executable: false,
                     value: Some(Lwm2mValue::Float(20.0)),
                 },
-                Lwm2mResource { // 5602: Max Measured Value
+                Lwm2mResource {
+                    // 5602: Max Measured Value
                     id: 5602,
                     readable: true,
                     writable: false,
@@ -54,5 +57,3 @@ fn main() {
     let ok2 = obj.write(0, 5900, Lwm2mValue::String("high-precision".into()));
     println!("write cfg result = {}", ok2);
 }
-
-

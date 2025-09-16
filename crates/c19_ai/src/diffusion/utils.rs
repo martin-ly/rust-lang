@@ -1,5 +1,5 @@
 //! 扩散模型工具
-//! 
+//!
 //! 提供扩散模型的辅助工具
 
 use anyhow::Result;
@@ -14,13 +14,13 @@ impl DiffusionUtils {
             .map(|i| i as f32 / num_steps as f32)
             .collect()
     }
-    
+
     /// 添加噪声
     pub fn add_noise(signal: &[f32], noise: &[f32], alpha: f32) -> Result<Vec<f32>> {
         if signal.len() != noise.len() {
             return Err(anyhow::anyhow!("信号和噪声长度不匹配"));
         }
-        
+
         Ok(signal
             .iter()
             .zip(noise.iter())

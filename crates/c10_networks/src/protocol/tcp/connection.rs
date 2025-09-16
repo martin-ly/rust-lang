@@ -1,7 +1,7 @@
 //! TCP 连接管理
 
 use crate::error::{NetworkError, NetworkResult};
-use crate::socket::{TcpSocket, TcpConfig};
+use crate::socket::{TcpConfig, TcpSocket};
 use bytes::BytesMut;
 use std::net::SocketAddr;
 use std::time::{Duration, Instant};
@@ -82,8 +82,13 @@ impl TcpConnection {
 
     /// 建立连接
     pub async fn connect(&mut self) -> NetworkResult<()> {
-        if !self.state_machine.can_execute(&super::state::TcpEvent::Open) {
-            return Err(NetworkError::Protocol("Invalid state for connection".to_string()));
+        if !self
+            .state_machine
+            .can_execute(&super::state::TcpEvent::Open)
+        {
+            return Err(NetworkError::Protocol(
+                "Invalid state for connection".to_string(),
+            ));
         }
 
         let tcp_config = TcpConfig {
@@ -96,18 +101,21 @@ impl TcpConnection {
 
         let mut socket = TcpSocket::new(tcp_config);
         socket.connect().await?;
-        
+
         self.socket = Some(socket);
-        self.state_machine.transition(super::state::TcpEvent::Open)?;
+        self.state_machine
+            .transition(super::state::TcpEvent::Open)?;
         self.last_activity = Instant::now();
-        
+
         Ok(())
     }
 
     /// 发送数据
     pub async fn send(&mut self, data: &[u8]) -> NetworkResult<usize> {
         if !self.state_machine.current_state().can_send_data() {
-            return Err(NetworkError::Protocol("Connection not established".to_string()));
+            return Err(NetworkError::Protocol(
+                "Connection not established".to_string(),
+            ));
         }
 
         if let Some(ref mut socket) = self.socket {
@@ -122,7 +130,9 @@ impl TcpConnection {
     /// 接收数据
     pub async fn receive(&mut self, buffer: &mut [u8]) -> NetworkResult<usize> {
         if !self.state_machine.current_state().can_receive_data() {
-            return Err(NetworkError::Protocol("Connection not established".to_string()));
+            return Err(NetworkError::Protocol(
+                "Connection not established".to_string(),
+            ));
         }
 
         if let Some(ref mut socket) = self.socket {
@@ -136,16 +146,22 @@ impl TcpConnection {
 
     /// 关闭连接
     pub async fn close(&mut self) -> NetworkResult<()> {
-        if !self.state_machine.can_execute(&super::state::TcpEvent::Close) {
-            return Err(NetworkError::Protocol("Invalid state for close".to_string()));
+        if !self
+            .state_machine
+            .can_execute(&super::state::TcpEvent::Close)
+        {
+            return Err(NetworkError::Protocol(
+                "Invalid state for close".to_string(),
+            ));
         }
 
-        self.state_machine.transition(super::state::TcpEvent::Close)?;
-        
+        self.state_machine
+            .transition(super::state::TcpEvent::Close)?;
+
         if let Some(socket) = self.socket.take() {
             drop(socket); // 关闭连接
         }
-        
+
         Ok(())
     }
 
@@ -179,10 +195,8 @@ impl TcpConnection {
     pub fn update_congestion_window(&mut self) {
         if self.congestion_window < self.slow_start_threshold {
             // 慢启动阶段
-            self.congestion_window = std::cmp::min(
-                self.congestion_window * 2,
-                self.slow_start_threshold
-            );
+            self.congestion_window =
+                std::cmp::min(self.congestion_window * 2, self.slow_start_threshold);
         } else {
             // 拥塞避免阶段
             self.congestion_window += 1;
@@ -191,10 +205,7 @@ impl TcpConnection {
 
     /// 处理拥塞（快速重传）
     pub fn handle_congestion(&mut self) {
-        self.slow_start_threshold = std::cmp::max(
-            self.congestion_window / 2,
-            2
-        );
+        self.slow_start_threshold = std::cmp::max(self.congestion_window / 2, 2);
         self.congestion_window = 1;
     }
 }
@@ -222,7 +233,7 @@ mod tests {
     async fn test_tcp_connection_creation() {
         let config = TcpConnectionConfig::default();
         let connection = TcpConnection::new(1, config);
-        
+
         assert_eq!(connection.id, 1);
         assert_eq!(*connection.state(), TcpState::Closed);
         assert!(!connection.state().can_send_data());
@@ -233,14 +244,14 @@ mod tests {
     async fn test_tcp_congestion_control() {
         let config = TcpConnectionConfig::default();
         let mut connection = TcpConnection::new(1, config);
-        
+
         // 测试慢启动
         connection.update_congestion_window();
         assert_eq!(connection.congestion_window, 2);
-        
+
         connection.update_congestion_window();
         assert_eq!(connection.congestion_window, 4);
-        
+
         // 测试拥塞处理
         connection.handle_congestion();
         assert_eq!(connection.congestion_window, 1);
@@ -252,7 +263,7 @@ mod tests {
         let config = TcpConnectionConfig::default();
         let connection = TcpConnection::new(1, config);
         let stats = connection.get_stats();
-        
+
         assert_eq!(stats.id, 1);
         assert_eq!(stats.state, TcpState::Closed);
         assert_eq!(stats.send_buffer_size, 0);

@@ -1,10 +1,10 @@
 //! 统一错误处理模块
-//! 
+//!
 //! 本模块提供了统一的错误处理机制，包括错误类型定义、
 //! 错误转换、错误格式化等。使用Rust的Result类型确保错误安全处理。
 
-use thiserror::Error;
 use std::fmt;
+use thiserror::Error;
 
 /// 模型错误类型
 #[derive(Error, Debug)]
@@ -12,63 +12,63 @@ pub enum ModelError {
     /// 数学计算错误
     #[error("数学计算错误: {0}")]
     MathError(String),
-    
+
     /// 数据验证错误
     #[error("数据验证错误: {0}")]
     ValidationError(String),
-    
+
     /// 配置错误
     #[error("配置错误: {0}")]
     ConfigError(String),
-    
+
     /// 计算错误
     #[error("计算错误: {0}")]
     ComputationError(String),
-    
+
     /// IO错误
     #[error("IO错误: {0}")]
     IoError(String),
-    
+
     /// 序列化错误
     #[error("序列化错误: {0}")]
     SerializationError(String),
-    
+
     /// 数值溢出错误
     #[error("数值溢出错误: {0}")]
     OverflowError(String),
-    
+
     /// 除零错误
     #[error("除零错误: {0}")]
     DivisionByZeroError(String),
-    
+
     /// 收敛失败错误
     #[error("算法收敛失败: {0}")]
     ConvergenceError(String),
-    
+
     /// 维度不匹配错误
     #[error("维度不匹配: {0}")]
     DimensionMismatchError(String),
-    
+
     /// 参数范围错误
     #[error("参数超出有效范围: {0}")]
     ParameterRangeError(String),
-    
+
     /// 系统不稳定错误
     #[error("系统不稳定: {0}")]
     SystemUnstableError(String),
-    
+
     /// 内存不足错误
     #[error("内存不足: {0}")]
     OutOfMemoryError(String),
-    
+
     /// 超时错误
     #[error("操作超时: {0}")]
     TimeoutError(String),
-    
+
     /// 不支持的操作错误
     #[error("不支持的操作: {0}")]
     UnsupportedOperationError(String),
-    
+
     /// 内部错误
     #[error("内部错误: {0}")]
     InternalError(String),
@@ -99,12 +99,16 @@ impl Clone for ModelError {
             ModelError::OverflowError(msg) => ModelError::OverflowError(msg.clone()),
             ModelError::DivisionByZeroError(msg) => ModelError::DivisionByZeroError(msg.clone()),
             ModelError::ConvergenceError(msg) => ModelError::ConvergenceError(msg.clone()),
-            ModelError::DimensionMismatchError(msg) => ModelError::DimensionMismatchError(msg.clone()),
+            ModelError::DimensionMismatchError(msg) => {
+                ModelError::DimensionMismatchError(msg.clone())
+            }
             ModelError::ParameterRangeError(msg) => ModelError::ParameterRangeError(msg.clone()),
             ModelError::SystemUnstableError(msg) => ModelError::SystemUnstableError(msg.clone()),
             ModelError::OutOfMemoryError(msg) => ModelError::OutOfMemoryError(msg.clone()),
             ModelError::TimeoutError(msg) => ModelError::TimeoutError(msg.clone()),
-            ModelError::UnsupportedOperationError(msg) => ModelError::UnsupportedOperationError(msg.clone()),
+            ModelError::UnsupportedOperationError(msg) => {
+                ModelError::UnsupportedOperationError(msg.clone())
+            }
             ModelError::InternalError(msg) => ModelError::InternalError(msg.clone()),
         }
     }
@@ -415,7 +419,10 @@ mod tests {
 
         assert_eq!(context.location, "test_location");
         assert_eq!(context.additional_info.len(), 2);
-        assert_eq!(context.additional_info.get("key1"), Some(&"value1".to_string()));
+        assert_eq!(
+            context.additional_info.get("key1"),
+            Some(&"value1".to_string())
+        );
     }
 
     #[test]

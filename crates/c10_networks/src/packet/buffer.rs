@@ -73,24 +73,24 @@ impl PacketBuffer {
     /// 添加数据包到缓冲区
     pub fn push(&mut self, packet: super::Packet) -> Result<(), BufferError> {
         let packet_size = packet.total_size();
-        
+
         // 检查缓冲区是否已满
         if self.packets.len() >= self.config.max_packets {
             return Err(BufferError::Full);
         }
-        
+
         if self.total_size + packet_size > self.config.max_size {
             return Err(BufferError::Overflow);
         }
 
         self.total_size += packet_size;
         self.packets.push_back(packet);
-        
+
         // 自动刷新检查
         if self.config.auto_flush && self.should_flush() {
             self.flush();
         }
-        
+
         Ok(())
     }
 
@@ -116,8 +116,7 @@ impl PacketBuffer {
 
     /// 检查缓冲区是否已满
     pub fn is_full(&self) -> bool {
-        self.packets.len() >= self.config.max_packets || 
-        self.total_size >= self.config.max_size
+        self.packets.len() >= self.config.max_packets || self.total_size >= self.config.max_size
     }
 
     /// 获取缓冲区中的数据包数量
@@ -162,14 +161,14 @@ impl PacketBuffer {
     pub async fn wait_for_packet(&mut self) -> NetworkResult<super::Packet> {
         let timeout_duration = self.config.timeout.unwrap_or(Duration::from_secs(30));
         let start = Instant::now();
-        
+
         while self.is_empty() {
             if start.elapsed() > timeout_duration {
                 return Err(BufferError::Timeout.into());
             }
             tokio::time::sleep(Duration::from_millis(10)).await;
         }
-        
+
         self.pop().ok_or_else(|| BufferError::Empty.into())
     }
 
@@ -177,13 +176,13 @@ impl PacketBuffer {
     pub fn drain(&mut self, max_count: usize) -> Vec<super::Packet> {
         let mut result = Vec::new();
         let count = std::cmp::min(max_count, self.packets.len());
-        
+
         for _ in 0..count {
             if let Some(packet) = self.pop() {
                 result.push(packet);
             }
         }
-        
+
         result
     }
 
@@ -191,7 +190,7 @@ impl PacketBuffer {
     pub fn filter_by_type(&mut self, packet_type: &super::PacketType) -> Vec<super::Packet> {
         let mut result = Vec::new();
         let mut remaining = VecDeque::new();
-        
+
         while let Some(packet) = self.packets.pop_front() {
             if packet.packet_type() == packet_type {
                 result.push(packet);
@@ -199,7 +198,7 @@ impl PacketBuffer {
                 remaining.push_back(packet);
             }
         }
-        
+
         self.packets = remaining;
         self.recalculate_size();
         result
@@ -207,9 +206,7 @@ impl PacketBuffer {
 
     /// 重新计算缓冲区大小
     fn recalculate_size(&mut self) {
-        self.total_size = self.packets.iter()
-            .map(|p| p.total_size())
-            .sum();
+        self.total_size = self.packets.iter().map(|p| p.total_size()).sum();
     }
 }
 
@@ -253,7 +250,7 @@ impl RingBuffer {
 
         let available = self.capacity - self.size;
         let to_write = std::cmp::min(data.len(), available);
-        
+
         if to_write == 0 {
             return Err(BufferError::Full);
         }
@@ -274,7 +271,7 @@ impl RingBuffer {
         }
 
         let to_read = std::cmp::min(buffer.len(), self.size);
-        
+
         for i in 0..to_read {
             buffer[i] = self.buffer[self.head];
             self.head = (self.head + 1) % self.capacity;
@@ -320,16 +317,16 @@ mod tests {
     fn test_packet_buffer_basic() {
         let config = BufferConfig::default();
         let mut buffer = PacketBuffer::new(config);
-        
+
         let packet = super::super::Packet::new(
             super::super::PacketType::Raw,
-            Bytes::copy_from_slice(b"test data")
+            Bytes::copy_from_slice(b"test data"),
         );
-        
+
         assert!(buffer.push(packet.clone()).is_ok());
         assert!(!buffer.is_empty());
         assert_eq!(buffer.len(), 1);
-        
+
         let popped = buffer.pop().unwrap();
         assert_eq!(popped.payload, packet.payload);
         assert!(buffer.is_empty());
@@ -343,14 +340,14 @@ mod tests {
             ..Default::default()
         };
         let mut buffer = PacketBuffer::new(config);
-        
+
         // 添加大量数据包直到溢出
         for i in 0..20 {
             let packet = super::super::Packet::new(
                 super::super::PacketType::Raw,
-                Bytes::copy_from_slice(format!("data {}", i).as_bytes())
+                Bytes::copy_from_slice(format!("data {}", i).as_bytes()),
             );
-            
+
             if i < 10 {
                 assert!(buffer.push(packet).is_ok());
             } else {
@@ -362,13 +359,13 @@ mod tests {
     #[test]
     fn test_ring_buffer() {
         let mut ring = RingBuffer::new(10);
-        
+
         // 写入数据
         let data = b"hello";
         assert_eq!(ring.write(data).unwrap(), 5);
         assert_eq!(ring.used(), 5);
         assert_eq!(ring.available(), 5);
-        
+
         // 读取数据
         let mut buffer = [0u8; 10];
         assert_eq!(ring.read(&mut buffer).unwrap(), 5);
@@ -380,12 +377,12 @@ mod tests {
     #[test]
     fn test_ring_buffer_overflow() {
         let mut ring = RingBuffer::new(5);
-        
+
         // 写入超过容量的数据
         let data = b"hello world";
         assert_eq!(ring.write(data).unwrap(), 5);
         assert!(ring.is_full());
-        
+
         // 再次写入应该失败
         assert!(ring.write(b"x").is_err());
     }

@@ -1,5 +1,5 @@
 //! 网络编程错误处理模块
-//! 
+//!
 //! 本模块定义了网络编程中使用的各种错误类型，
 //! 利用 Rust 1.89 的新特性提供更好的错误处理体验。
 
@@ -12,43 +12,43 @@ pub enum NetworkError {
     /// IO 错误
     #[error("IO error: {0}")]
     Io(#[from] std::io::Error),
-    
+
     /// 协议解析错误
     #[error("Protocol error: {0}")]
     Protocol(String),
-    
+
     /// 超时错误
     #[error("Timeout after {0:?}")]
     Timeout(Duration),
-    
+
     /// 连接错误
     #[error("Connection error: {0}")]
     Connection(String),
-    
+
     /// 认证错误
     #[error("Authentication error: {0}")]
     Authentication(String),
-    
+
     /// 加密错误
     #[error("Encryption error: {0}")]
     Encryption(String),
-    
+
     /// 配置错误
     #[error("Configuration error: {0}")]
     Configuration(String),
-    
+
     /// 其他错误
     #[error("Other error: {0}")]
     Other(String),
-    
+
     /// 缓冲区错误
     #[error("Buffer error: {0}")]
     Buffer(String),
-    
+
     /// 序列化/反序列化错误
     #[error("Serialization error: {0}")]
     Serialization(#[from] serde_json::Error),
-    
+
     /// URL 解析错误
     #[error("URL parsing error: {0}")]
     Url(#[from] url::ParseError),
@@ -63,19 +63,19 @@ pub enum ProtocolError {
     /// HTTP 协议错误
     #[error("HTTP error: {status} - {message}")]
     Http { status: u16, message: String },
-    
+
     /// WebSocket 协议错误
     #[error("WebSocket error: {0}")]
     WebSocket(String),
-    
+
     /// TCP 协议错误
     #[error("TCP error: {0}")]
     Tcp(String),
-    
+
     /// UDP 协议错误
     #[error("UDP error: {0}")]
     Udp(String),
-    
+
     /// DNS 协议错误
     #[error("DNS error: {0}")]
     Dns(String),
@@ -87,15 +87,15 @@ pub enum PerformanceError {
     /// 连接池耗尽
     #[error("Connection pool exhausted")]
     PoolExhausted,
-    
+
     /// 速率限制
     #[error("Rate limit exceeded: {limit} requests per {period:?}")]
     RateLimit { limit: u64, period: Duration },
-    
+
     /// 内存不足
     #[error("Insufficient memory: required {required}, available {available}")]
     InsufficientMemory { required: usize, available: usize },
-    
+
     /// 负载过高
     #[error("High load: {load}%")]
     HighLoad { load: f64 },
@@ -107,15 +107,15 @@ pub enum SecurityError {
     /// 证书验证失败
     #[error("Certificate verification failed: {0}")]
     CertificateVerification(String),
-    
+
     /// 签名验证失败
     #[error("Signature verification failed: {0}")]
     SignatureVerification(String),
-    
+
     /// 权限不足
     #[error("Insufficient permissions: {0}")]
     InsufficientPermissions(String),
-    
+
     /// 恶意请求
     #[error("Malicious request detected: {0}")]
     MaliciousRequest(String),
@@ -125,10 +125,10 @@ pub enum SecurityError {
 pub trait ErrorRecovery {
     /// 是否可以重试
     fn is_retryable(&self) -> bool;
-    
+
     /// 获取重试延迟
     fn retry_delay(&self) -> Option<Duration>;
-    
+
     /// 获取最大重试次数
     fn max_retries(&self) -> Option<u32>;
 }
@@ -150,7 +150,7 @@ impl ErrorRecovery for NetworkError {
             _ => false,
         }
     }
-    
+
     fn retry_delay(&self) -> Option<Duration> {
         match self {
             NetworkError::Timeout(_) => Some(Duration::from_millis(100)),
@@ -159,7 +159,7 @@ impl ErrorRecovery for NetworkError {
             _ => None,
         }
     }
-    
+
     fn max_retries(&self) -> Option<u32> {
         match self {
             NetworkError::Timeout(_) => Some(3),
@@ -216,7 +216,7 @@ impl ErrorStats {
             _ => {}
         }
     }
-    
+
     /// 获取错误率
     pub fn error_rate(&self, total_operations: u64) -> f64 {
         if total_operations == 0 {
@@ -236,7 +236,10 @@ mod tests {
     fn test_error_recovery() {
         let timeout_error = NetworkError::Timeout(Duration::from_secs(5));
         assert!(timeout_error.is_retryable());
-        assert_eq!(timeout_error.retry_delay(), Some(Duration::from_millis(100)));
+        assert_eq!(
+            timeout_error.retry_delay(),
+            Some(Duration::from_millis(100))
+        );
         assert_eq!(timeout_error.max_retries(), Some(3));
     }
 
@@ -244,7 +247,7 @@ mod tests {
     fn test_error_stats() {
         let mut stats = ErrorStats::default();
         let io_error = NetworkError::Io(IoError::new(ErrorKind::TimedOut, "test"));
-        
+
         stats.record_error(&io_error);
         assert_eq!(stats.total_errors, 1);
         assert_eq!(stats.io_errors, 1);
@@ -257,7 +260,7 @@ mod tests {
             status: 404,
             message: "Not Found".to_string(),
         };
-        
+
         assert_eq!(format!("{}", http_error), "HTTP error: 404 - Not Found");
     }
 }

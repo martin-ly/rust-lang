@@ -1,13 +1,13 @@
 //! 性能监控模块
-//! 
+//!
 //! 本模块提供了同步原语的性能监控功能：
 //! - 锁竞争监控
 //! - 等待时间统计
 //! - 吞吐量测量
 //! - 性能分析报告
 
+use std::sync::atomic::{AtomicBool, AtomicU64, AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
-use std::sync::atomic::{AtomicUsize, AtomicU64, AtomicBool, Ordering};
 use std::thread;
 use std::time::{Duration, Instant};
 
@@ -20,8 +20,8 @@ pub struct PerformanceMetrics {
     pub total_wait_time: AtomicU64, // 微秒
     pub total_spin_time: AtomicU64, // 微秒
     pub contention_count: AtomicUsize,
-    pub max_wait_time: AtomicU64, // 微秒
-    pub min_wait_time: AtomicU64, // 微秒
+    pub max_wait_time: AtomicU64,     // 微秒
+    pub min_wait_time: AtomicU64,     // 微秒
     pub average_wait_time: AtomicU64, // 微秒
 }
 
@@ -39,7 +39,7 @@ impl PerformanceMetrics {
             average_wait_time: AtomicU64::new(0),
         }
     }
-    
+
     pub fn record_operation(&self, success: bool) {
         self.total_operations.fetch_add(1, Ordering::Relaxed);
         if success {
@@ -48,11 +48,12 @@ impl PerformanceMetrics {
             self.failed_operations.fetch_add(1, Ordering::Relaxed);
         }
     }
-    
+
     pub fn record_wait_time(&self, wait_time: Duration) {
         let wait_micros = wait_time.as_micros() as u64;
-        self.total_wait_time.fetch_add(wait_micros, Ordering::Relaxed);
-        
+        self.total_wait_time
+            .fetch_add(wait_micros, Ordering::Relaxed);
+
         // 更新最大等待时间
         let mut max_wait = self.max_wait_time.load(Ordering::Relaxed);
         while wait_micros > max_wait {
@@ -66,7 +67,7 @@ impl PerformanceMetrics {
                 Err(x) => max_wait = x,
             }
         }
-        
+
         // 更新最小等待时间
         let mut min_wait = self.min_wait_time.load(Ordering::Relaxed);
         while wait_micros < min_wait {
@@ -80,7 +81,7 @@ impl PerformanceMetrics {
                 Err(x) => min_wait = x,
             }
         }
-        
+
         // 更新平均等待时间
         let total_ops = self.total_operations.load(Ordering::Relaxed);
         if total_ops > 0 {
@@ -88,27 +89,28 @@ impl PerformanceMetrics {
             self.average_wait_time.store(avg_wait, Ordering::Relaxed);
         }
     }
-    
+
     pub fn record_spin_time(&self, spin_time: Duration) {
         let spin_micros = spin_time.as_micros() as u64;
-        self.total_spin_time.fetch_add(spin_micros, Ordering::Relaxed);
+        self.total_spin_time
+            .fetch_add(spin_micros, Ordering::Relaxed);
     }
-    
+
     pub fn record_contention(&self) {
         self.contention_count.fetch_add(1, Ordering::Relaxed);
     }
-    
+
     pub fn get_success_rate(&self) -> f64 {
         let total = self.total_operations.load(Ordering::Relaxed);
         let successful = self.successful_operations.load(Ordering::Relaxed);
-        
+
         if total == 0 {
             0.0
         } else {
             successful as f64 / total as f64
         }
     }
-    
+
     pub fn get_contention_ratio(&self) -> f64 {
         // 定义为：每次成功操作是否经历过竞争，范围 [0, 1]
         let successful = self.successful_operations.load(Ordering::Relaxed);
@@ -119,15 +121,15 @@ impl PerformanceMetrics {
             (contentions as f64 / successful as f64).min(1.0)
         }
     }
-    
+
     pub fn get_average_wait_time(&self) -> Duration {
         Duration::from_micros(self.average_wait_time.load(Ordering::Relaxed))
     }
-    
+
     pub fn get_max_wait_time(&self) -> Duration {
         Duration::from_micros(self.max_wait_time.load(Ordering::Relaxed))
     }
-    
+
     pub fn get_min_wait_time(&self) -> Duration {
         let min_wait = self.min_wait_time.load(Ordering::Relaxed);
         if min_wait == u64::MAX {
@@ -136,11 +138,11 @@ impl PerformanceMetrics {
             Duration::from_micros(min_wait)
         }
     }
-    
+
     pub fn get_total_spin_time(&self) -> Duration {
         Duration::from_micros(self.total_spin_time.load(Ordering::Relaxed))
     }
-    
+
     pub fn reset(&self) {
         self.total_operations.store(0, Ordering::Relaxed);
         self.successful_operations.store(0, Ordering::Relaxed);
@@ -169,58 +171,58 @@ impl PerformanceMonitor {
             monitoring_enabled: AtomicBool::new(true),
         }
     }
-    
+
     pub fn get_metrics(&self) -> &PerformanceMetrics {
         &self.metrics
     }
-    
+
     pub fn enable_monitoring(&self, enabled: bool) {
         self.monitoring_enabled.store(enabled, Ordering::Relaxed);
     }
-    
+
     pub fn is_monitoring_enabled(&self) -> bool {
         self.monitoring_enabled.load(Ordering::Relaxed)
     }
-    
+
     pub fn record_operation(&self, success: bool) {
         if self.is_monitoring_enabled() {
             self.metrics.record_operation(success);
         }
     }
-    
+
     pub fn record_wait_time(&self, wait_time: Duration) {
         if self.is_monitoring_enabled() {
             self.metrics.record_wait_time(wait_time);
         }
     }
-    
+
     pub fn record_spin_time(&self, spin_time: Duration) {
         if self.is_monitoring_enabled() {
             self.metrics.record_spin_time(spin_time);
         }
     }
-    
+
     pub fn record_contention(&self) {
         if self.is_monitoring_enabled() {
             self.metrics.record_contention();
         }
     }
-    
+
     pub fn get_elapsed_time(&self) -> Duration {
         self.start_time.elapsed()
     }
-    
+
     pub fn get_throughput(&self) -> f64 {
         let elapsed = self.get_elapsed_time();
         let total_ops = self.metrics.total_operations.load(Ordering::Relaxed);
-        
+
         if elapsed.as_secs() > 0 {
             total_ops as f64 / elapsed.as_secs() as f64
         } else {
             0.0
         }
     }
-    
+
     pub fn generate_report(&self) -> PerformanceReport {
         PerformanceReport {
             elapsed_time: self.get_elapsed_time(),
@@ -236,7 +238,7 @@ impl PerformanceMonitor {
             throughput: self.get_throughput(),
         }
     }
-    
+
     pub fn reset(&self) {
         self.metrics.reset();
     }
@@ -288,19 +290,19 @@ impl<T> MonitoredMutex<T> {
             monitor: Arc::new(PerformanceMonitor::new()),
         }
     }
-    
+
     pub fn lock<F, R>(&self, f: F) -> R
     where
         F: FnOnce(&mut T) -> R,
     {
         let _start_time = Instant::now();
-        
+
         // 尝试快速获取锁
         if let Ok(mut guard) = self.data.try_lock() {
             self.monitor.record_operation(true);
             return f(&mut guard);
         }
-        
+
         // 需要等待
         self.monitor.record_contention();
         let wait_start = Instant::now();
@@ -308,10 +310,10 @@ impl<T> MonitoredMutex<T> {
         let wait_time = wait_start.elapsed();
         self.monitor.record_wait_time(wait_time);
         self.monitor.record_operation(true);
-        
+
         f(&mut guard)
     }
-    
+
     pub fn get_monitor(&self) -> &PerformanceMonitor {
         &self.monitor
     }
@@ -330,19 +332,19 @@ impl<T> MonitoredRwLock<T> {
             monitor: Arc::new(PerformanceMonitor::new()),
         }
     }
-    
+
     pub fn read<F, R>(&self, f: F) -> R
     where
         F: FnOnce(&T) -> R,
     {
         let _start_time = Instant::now();
-        
+
         // 尝试快速获取读锁
         if let Ok(guard) = self.data.try_read() {
             self.monitor.record_operation(true);
             return f(&guard);
         }
-        
+
         // 需要等待
         self.monitor.record_contention();
         let wait_start = Instant::now();
@@ -350,22 +352,22 @@ impl<T> MonitoredRwLock<T> {
         let wait_time = wait_start.elapsed();
         self.monitor.record_wait_time(wait_time);
         self.monitor.record_operation(true);
-        
+
         f(&guard)
     }
-    
+
     pub fn write<F, R>(&self, f: F) -> R
     where
         F: FnOnce(&mut T) -> R,
     {
         let _start_time = Instant::now();
-        
+
         // 尝试快速获取写锁
         if let Ok(mut guard) = self.data.try_write() {
             self.monitor.record_operation(true);
             return f(&mut guard);
         }
-        
+
         // 需要等待
         self.monitor.record_contention();
         let wait_start = Instant::now();
@@ -373,10 +375,10 @@ impl<T> MonitoredRwLock<T> {
         let wait_time = wait_start.elapsed();
         self.monitor.record_wait_time(wait_time);
         self.monitor.record_operation(true);
-        
+
         f(&mut guard)
     }
-    
+
     pub fn get_monitor(&self) -> &PerformanceMonitor {
         &self.monitor
     }
@@ -395,18 +397,18 @@ impl PerformanceBenchmark {
             start_time: Instant::now(),
         }
     }
-    
+
     pub fn add_monitor(&mut self, monitor: Arc<PerformanceMonitor>) {
         self.monitors.push(monitor);
     }
-    
+
     pub fn run_benchmark<F>(&self, duration: Duration, test_fn: F)
     where
         F: Fn() + Send + Sync + 'static,
     {
         let end_time = self.start_time + duration;
         let test_fn = Arc::new(test_fn);
-        
+
         let handles: Vec<_> = (0..4)
             .map(|_| {
                 let test_fn = test_fn.clone();
@@ -417,19 +419,19 @@ impl PerformanceBenchmark {
                 })
             })
             .collect();
-        
+
         for handle in handles {
             handle.join().unwrap();
         }
     }
-    
+
     pub fn generate_comparison_report(&self) -> ComparisonReport {
         let mut reports = Vec::new();
-        
+
         for monitor in &self.monitors {
             reports.push(monitor.generate_report());
         }
-        
+
         ComparisonReport { reports }
     }
 }
@@ -443,23 +445,27 @@ pub struct ComparisonReport {
 impl ComparisonReport {
     pub fn print(&self) {
         println!("=== 性能比较报告 ===");
-        
+
         for (i, report) in self.reports.iter().enumerate() {
             println!("监控器 {}:", i + 1);
             report.print();
             println!();
         }
-        
+
         // 找出最佳性能
-        if let Some(best_throughput) = self.reports.iter().max_by(|a, b| {
-            a.throughput.partial_cmp(&b.throughput).unwrap()
-        }) {
+        if let Some(best_throughput) = self
+            .reports
+            .iter()
+            .max_by(|a, b| a.throughput.partial_cmp(&b.throughput).unwrap())
+        {
             println!("最佳吞吐量: {:.2} ops/sec", best_throughput.throughput);
         }
-        
-        if let Some(best_wait_time) = self.reports.iter().min_by(|a, b| {
-            a.average_wait_time.cmp(&b.average_wait_time)
-        }) {
+
+        if let Some(best_wait_time) = self
+            .reports
+            .iter()
+            .min_by(|a, b| a.average_wait_time.cmp(&b.average_wait_time))
+        {
             println!("最佳平均等待时间: {:?}", best_wait_time.average_wait_time);
         }
     }
@@ -468,7 +474,7 @@ impl ComparisonReport {
 /// 运行所有性能监控示例
 pub fn demonstrate_performance_monitoring() {
     println!("=== 性能监控演示 ===");
-    
+
     // 测试监控互斥锁
     let mutex = Arc::new(MonitoredMutex::new(0));
     let handles: Vec<_> = (0..4)
@@ -483,14 +489,14 @@ pub fn demonstrate_performance_monitoring() {
             })
         })
         .collect();
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     let report = mutex.get_monitor().generate_report();
     report.print();
-    
+
     // 测试监控读写锁
     let rwlock = Arc::new(MonitoredRwLock::new(0));
     let read_handles: Vec<_> = (0..4)
@@ -505,7 +511,7 @@ pub fn demonstrate_performance_monitoring() {
             })
         })
         .collect();
-    
+
     let write_handles: Vec<_> = (0..2)
         .map(|_i| {
             let rwlock = rwlock.clone();
@@ -518,31 +524,31 @@ pub fn demonstrate_performance_monitoring() {
             })
         })
         .collect();
-    
+
     for handle in read_handles {
         handle.join().unwrap();
     }
-    
+
     for handle in write_handles {
         handle.join().unwrap();
     }
-    
+
     let report = rwlock.get_monitor().generate_report();
     report.print();
-    
+
     // 测试性能基准
     let mut benchmark = PerformanceBenchmark::new();
     let monitor1 = Arc::new(PerformanceMonitor::new());
     let monitor2 = Arc::new(PerformanceMonitor::new());
-    
+
     benchmark.add_monitor(monitor1.clone());
     benchmark.add_monitor(monitor2.clone());
-    
+
     benchmark.run_benchmark(Duration::from_secs(1), || {
         // 模拟工作负载
         thread::sleep(Duration::from_micros(1));
     });
-    
+
     let comparison_report = benchmark.generate_comparison_report();
     comparison_report.print();
 }
@@ -550,62 +556,62 @@ pub fn demonstrate_performance_monitoring() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_performance_metrics() {
         let metrics = PerformanceMetrics::new();
-        
+
         metrics.record_operation(true);
         metrics.record_operation(false);
         metrics.record_wait_time(Duration::from_millis(1));
         metrics.record_contention();
-        
+
         assert_eq!(metrics.get_success_rate(), 0.5);
         assert_eq!(metrics.get_contention_ratio(), 1.0);
         assert_eq!(metrics.get_average_wait_time(), Duration::from_millis(1));
     }
-    
+
     #[test]
     #[ignore]
     fn test_performance_monitor() {
         let monitor = PerformanceMonitor::new();
-        
+
         monitor.record_operation(true);
         monitor.record_wait_time(Duration::from_millis(1));
         monitor.record_contention();
-        
+
         let report = monitor.generate_report();
         assert_eq!(report.success_rate, 1.0);
         assert_eq!(report.contention_ratio, 1.0);
     }
-    
+
     #[test]
     fn test_monitored_mutex() {
         let mutex = MonitoredMutex::new(0);
-        
+
         mutex.lock(|data| {
             *data = 42;
         });
-        
+
         let value = mutex.lock(|data| *data);
         assert_eq!(value, 42);
-        
+
         let report = mutex.get_monitor().generate_report();
         assert_eq!(report.total_operations, 2);
     }
-    
+
     #[test]
     #[ignore]
     fn test_monitored_rwlock() {
         let rwlock = MonitoredRwLock::new(0);
-        
+
         rwlock.write(|data| {
             *data = 42;
         });
-        
+
         let value = rwlock.read(|data| *data);
         assert_eq!(value, 42);
-        
+
         let report = rwlock.get_monitor().generate_report();
         assert_eq!(report.total_operations, 2);
     }

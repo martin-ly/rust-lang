@@ -6,7 +6,7 @@
 #[tokio::main(flavor = "current_thread")]
 async fn main() {
     use c18_model::runtime_abi::Channel as _;
-    use c18_model::runtime_tokio::{TokioCancellationToken, TokioSpawner, TokioChannel};
+    use c18_model::runtime_tokio::{TokioCancellationToken, TokioChannel, TokioSpawner};
 
     let spawner = TokioSpawner;
     let cancel = TokioCancellationToken::new();
@@ -42,5 +42,3 @@ async fn main() {
 fn main() {
     eprintln!("启用 --features tokio-adapter 运行该示例");
 }
-
-

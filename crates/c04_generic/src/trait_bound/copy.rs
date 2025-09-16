@@ -91,7 +91,7 @@ impl Clone for Status {
 fn main() {
     let point1 = Point { x: 10, y: 20 };
     let point2 = point1; // 复制，不是移动
-    
+
     println!("Point1: {:?}", point1); // 仍然可用
     println!("Point2: {:?}", point2);
 }
@@ -108,7 +108,7 @@ fn process_point(p: Point) -> Point {
 fn main() {
     let original = Point { x: 5, y: 10 };
     let result = process_point(original);
-    
+
     println!("Original: {:?}", original); // 仍然可用
     println!("Result: {:?}", result);
 }
@@ -119,12 +119,12 @@ fn main() {
 ```rust
 fn main() {
     let numbers = vec![1, 2, 3, 4, 5];
-    
+
     // 由于 i32 实现了 Copy，这里进行复制
     for num in numbers.iter() {
         println!("Number: {}", num);
     }
-    
+
     // numbers 仍然可用
     println!("All numbers: {:?}", numbers);
 }
@@ -165,7 +165,7 @@ pub struct CopyExample {
     pub y: i32,
 }
 
-impl Copy for CopyExample { }
+impl Copy for CopyExample {}
 
 impl Clone for CopyExample {
     fn clone(&self) -> Self {
@@ -180,7 +180,7 @@ pub struct CopyContainer<T: Copy> {
     pub flag: bool,
 }
 
-impl<T: Copy> Copy for CopyContainer<T> { }
+impl<T: Copy> Copy for CopyContainer<T> {}
 
 impl<T: Copy> Clone for CopyContainer<T> {
     fn clone(&self) -> Self {
@@ -196,7 +196,7 @@ pub enum CopyStatus {
     Complete,
 }
 
-impl Copy for CopyStatus { }
+impl Copy for CopyStatus {}
 
 impl Clone for CopyStatus {
     fn clone(&self) -> Self {
@@ -209,27 +209,27 @@ pub fn demonstrate_copy() {
     // 基本复制
     let point1 = CopyExample { x: 10, y: 20 };
     let point2 = point1; // 复制操作
-    
+
     println!("Point1: {:?}", point1); // 仍然可用
     println!("Point2: {:?}", point2);
-    
+
     // 泛型容器复制
     let container1 = CopyContainer {
         value: 42,
         flag: true,
     };
     let container2 = container1; // 复制操作
-    
+
     println!("Container1: {:?}", container1); // 仍然可用
     println!("Container2: {:?}", container2);
-    
+
     // 枚举复制
     let status1 = CopyStatus::Ready;
     let status2 = status1; // 复制操作
-    
+
     println!("Status1: {:?}", status1); // 仍然可用
     println!("Status2: {:?}", status2);
-    
+
     // 函数参数复制
     let result = process_copy_example(point1);
     println!("Processed result: {:?}", result);

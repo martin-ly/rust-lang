@@ -1,7 +1,7 @@
 use futures_util::{SinkExt, StreamExt};
 use tokio::net::TcpListener;
-use tokio_tungstenite::tungstenite::Message;
 use tokio_tungstenite::accept_async;
+use tokio_tungstenite::tungstenite::Message;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -14,8 +14,12 @@ async fn main() -> anyhow::Result<()> {
             if let Ok(mut ws) = accept_async(stream).await {
                 while let Some(msg) = ws.next().await {
                     match msg {
-                        Ok(Message::Text(t)) => { let _ = ws.send(Message::Text(t)).await; }
-                        Ok(Message::Binary(b)) => { let _ = ws.send(Message::Binary(b)).await; }
+                        Ok(Message::Text(t)) => {
+                            let _ = ws.send(Message::Text(t)).await;
+                        }
+                        Ok(Message::Binary(b)) => {
+                            let _ = ws.send(Message::Binary(b)).await;
+                        }
                         Ok(Message::Close(_)) => break,
                         _ => {}
                     }
@@ -24,5 +28,3 @@ async fn main() -> anyhow::Result<()> {
         });
     }
 }
-
-

@@ -5,11 +5,13 @@ async fn main() {
         while rx.changed().await.is_ok() {
             let v = *rx.borrow();
             println!("watch got {v}");
-            if v == 5 { break; }
+            if v == 5 {
+                break;
+            }
         }
     });
-    for i in 1..=5 { let _ = tx.send(i); }
+    for i in 1..=5 {
+        let _ = tx.send(i);
+    }
     let _ = h.await;
 }
-
-

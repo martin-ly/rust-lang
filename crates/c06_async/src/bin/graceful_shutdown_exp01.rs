@@ -20,5 +20,3 @@ async fn main() {
     let _ = worker.await;
     println!("main: bye");
 }
-
-

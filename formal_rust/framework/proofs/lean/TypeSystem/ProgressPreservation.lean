@@ -21,19 +21,26 @@ theorem preservation {e e' : Expr} {t : Ty}
   -- TODO: induction on hs; use substitution lemma
   admit
 
-axiom substitution_lemma
+/-- Substitution lemma -/
+lemma substitution_lemma
   (Γ : Ctx) (x : Nat) (tx : Ty) (e : Expr) (te : Ty) (v : Expr) :
-  HasType Γ v tx → HasType Γ e te → HasType Γ e te
+  HasType Γ v tx → HasType (tx :: Γ) e te → HasType Γ (CoreMinimal.subst x v e) te := by
+  -- TODO: 实现 substitution 证明
+  admit
 
-/-- Weakening lemma (placeholder) -/
-axiom weakening_lemma
+/-- Weakening lemma -/
+lemma weakening_lemma
   (Γ : Ctx) (Δ : Ctx) (e : Expr) (t : Ty) :
-  HasType Γ e t → HasType Γ e t
+  HasType Γ e t → HasType (Γ ++ Δ) e t := by
+  -- TODO: 实现 weakening 证明
+  admit
 
-/-- Strengthening lemma (placeholder) -/
-axiom strengthening_lemma
+/-- Strengthening lemma -/
+lemma strengthening_lemma
   (Γ : Ctx) (x : Nat) (tx : Ty) (Δ : Ctx) (e : Expr) (t : Ty) :
-  HasType Γ e t → HasType Γ e t
+  HasType (Γ ++ [tx] ++ Δ) e t → HasType (Γ ++ Δ) e t := by
+  -- TODO: 实现 strengthening 证明
+  admit
 
 /-- Preservation skeleton for β-reduction (AppAbs) case. -/
 theorem preservation_appabs

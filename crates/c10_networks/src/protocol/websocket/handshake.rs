@@ -52,11 +52,11 @@ impl WebSocketHandshakeRequest {
     /// 编码为 HTTP 请求
     pub fn encode(&self) -> String {
         let mut request = format!("{} {} {}\r\n", self.method, self.uri, self.version);
-        
+
         for (name, value) in &self.headers {
             request.push_str(&format!("{}: {}\r\n", name, value));
         }
-        
+
         request.push_str("\r\n");
         request
     }
@@ -100,12 +100,15 @@ impl WebSocketHandshakeResponse {
 
     /// 编码为 HTTP 响应
     pub fn encode(&self) -> String {
-        let mut response = format!("{} {} {}\r\n", self.version, self.status_code, self.status_text);
-        
+        let mut response = format!(
+            "{} {} {}\r\n",
+            self.version, self.status_code, self.status_text
+        );
+
         for (name, value) in &self.headers {
             response.push_str(&format!("{}: {}\r\n", name, value));
         }
-        
+
         response.push_str("\r\n");
         response
     }
@@ -139,7 +142,7 @@ mod tests {
         request.set_websocket_key("dGhlIHNhbXBsZSBub25jZQ==");
         request.set_websocket_version("13");
         request.set_upgrade();
-        
+
         let encoded = request.encode();
         assert!(encoded.contains("GET /chat HTTP/1.1"));
         assert!(encoded.contains("Host: example.com"));
@@ -152,7 +155,7 @@ mod tests {
         let mut response = WebSocketHandshakeResponse::new(101, "Switching Protocols");
         response.set_websocket_accept("s3pPLMBiTxaQ9kYGzzhZRbK+xOo=");
         response.set_upgrade();
-        
+
         let encoded = response.encode();
         assert!(encoded.contains("HTTP/1.1 101 Switching Protocols"));
         assert!(encoded.contains("Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo="));
@@ -163,7 +166,7 @@ mod tests {
     fn test_websocket_client() {
         let key = WebSocketClient::generate_key();
         assert!(!key.is_empty());
-        
+
         let accept = WebSocketClient::calculate_accept(&key);
         assert!(!accept.is_empty());
     }

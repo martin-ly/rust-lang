@@ -4,7 +4,7 @@
 use std::time::Instant;
 
 use c09_design_pattern::game_engine_patterns::{
-    EventManager, AchievementSystem, LoggingSystem, GameEvent, Position
+    AchievementSystem, EventManager, GameEvent, LoggingSystem, Position,
 };
 use c09_design_pattern::os_patterns::SystemResourceManagerSingleton;
 
@@ -16,7 +16,14 @@ fn integration_event_dispatch_throughput() {
 
     let t0 = Instant::now();
     for i in 0..10_000u64 {
-        em.publish(GameEvent::PlayerMoved { entity_id: i, new_position: Position { x: 1.0, y: 2.0, z: 0.0 } });
+        em.publish(GameEvent::PlayerMoved {
+            entity_id: i,
+            new_position: Position {
+                x: 1.0,
+                y: 2.0,
+                z: 0.0,
+            },
+        });
     }
     let dur = t0.elapsed();
     eprintln!("Event dispatch 10k took {:?}", dur);
@@ -38,5 +45,3 @@ fn integration_singleton_shared_instance() {
         assert_eq!(mgr.get_process_count(), 1);
     }
 }
-
-

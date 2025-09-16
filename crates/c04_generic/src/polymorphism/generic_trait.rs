@@ -40,11 +40,11 @@ impl<T> Storage<T> for MemoryStorage<T> {
     fn store(&mut self, item: T) {
         self.items.push(item);
     }
-    
+
     fn retrieve(&self, id: usize) -> Option<&T> {
         self.items.get(id)
     }
-    
+
     fn remove(&mut self, id: usize) -> Option<T> {
         if id < self.items.len() {
             Some(self.items.remove(id))
@@ -60,7 +60,7 @@ impl<T> Storage<T> for MemoryStorage<T> {
 ```rust
 use std::fmt::Display;
 
-trait Printable<T> 
+trait Printable<T>
 where
     T: Display + Clone,
 {
@@ -77,7 +77,7 @@ where
     fn print(&self, item: &T) {
         println!("Item: {}", item);
     }
-    
+
     fn print_all(&self, items: &[T]) {
         for (i, item) in items.iter().enumerate() {
             println!("{}: {}", i, item);
@@ -91,13 +91,13 @@ where
 ```rust
 trait Iterator {
     type Item;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
 }
 
 trait Container<T> {
     type Iterator: Iterator<Item = T>;
-    
+
     fn iter(&self) -> Self::Iterator;
     fn add(&mut self, item: T);
 }
@@ -108,11 +108,11 @@ struct VecContainer<T> {
 
 impl<T> Container<T> for VecContainer<T> {
     type Iterator = std::vec::IntoIter<T>;
-    
+
     fn iter(self) -> Self::Iterator {
         self.items.into_iter()
     }
-    
+
     fn add(&mut self, item: T) {
         self.items.push(item);
     }
@@ -140,7 +140,7 @@ impl<T> Collection<T> for DynamicArray<T> {
     fn add(&mut self, item: T) {
         self.items.push(item);
     }
-    
+
     fn remove(&mut self, index: usize) -> Option<T> {
         if index < self.items.len() {
             Some(self.items.remove(index))
@@ -148,15 +148,15 @@ impl<T> Collection<T> for DynamicArray<T> {
             None
         }
     }
-    
+
     fn get(&self, index: usize) -> Option<&T> {
         self.items.get(index)
     }
-    
+
     fn len(&self) -> usize {
         self.items.len()
     }
-    
+
     fn is_empty(&self) -> bool {
         self.items.is_empty()
     }
@@ -179,7 +179,7 @@ impl<T> Collection<T> for LinkedList<T> {
         });
         self.head = Some(new_node);
     }
-    
+
     fn remove(&mut self, index: usize) -> Option<T> {
         if index == 0 {
             self.head.take().map(|node| node.data)
@@ -195,7 +195,7 @@ impl<T> Collection<T> for LinkedList<T> {
             current.take().map(|node| node.data)
         }
     }
-    
+
     fn get(&self, index: usize) -> Option<&T> {
         let mut current = &self.head;
         for _ in 0..index {
@@ -207,7 +207,7 @@ impl<T> Collection<T> for LinkedList<T> {
         }
         current.as_ref().map(|node| &node.data)
     }
-    
+
     fn len(&self) -> usize {
         let mut count = 0;
         let mut current = &self.head;
@@ -217,7 +217,7 @@ impl<T> Collection<T> for LinkedList<T> {
         }
         count
     }
-    
+
     fn is_empty(&self) -> bool {
         self.head.is_none()
     }
@@ -242,7 +242,7 @@ where
         input.sort();
         input
     }
-    
+
     fn name(&self) -> &str {
         "Quick Sort"
     }
@@ -260,7 +260,7 @@ where
     fn execute(&self, input: Vec<T>) -> Vec<T> {
         input.into_iter().filter(|x| (self.predicate)(x)).collect()
     }
-    
+
     fn name(&self) -> &str {
         "Filter"
     }
@@ -281,7 +281,7 @@ impl Factory<String> for StringFactory {
     fn create(&self) -> String {
         String::new()
     }
-    
+
     fn create_with_params(&self, params: Vec<String>) -> String {
         params.join(" ")
     }
@@ -293,7 +293,7 @@ impl Factory<i32> for NumberFactory {
     fn create(&self) -> i32 {
         0
     }
-    
+
     fn create_with_params(&self, params: Vec<String>) -> i32 {
         params.iter()
             .filter_map(|s| s.parse::<i32>().ok())
@@ -409,11 +409,11 @@ impl<T> MemoryStorage<T> {
     pub fn new() -> Self {
         MemoryStorage { items: Vec::new() }
     }
-    
+
     pub fn len(&self) -> usize {
         self.items.len()
     }
-    
+
     pub fn is_empty(&self) -> bool {
         self.items.is_empty()
     }
@@ -429,11 +429,11 @@ impl<T> Storage<T> for MemoryStorage<T> {
     fn store(&mut self, item: T) {
         self.items.push(item);
     }
-    
+
     fn retrieve(&self, id: usize) -> Option<&T> {
         self.items.get(id)
     }
-    
+
     fn remove(&mut self, id: usize) -> Option<T> {
         if id < self.items.len() {
             Some(self.items.remove(id))
@@ -444,7 +444,7 @@ impl<T> Storage<T> for MemoryStorage<T> {
 }
 
 // 带约束的泛型特征
-pub trait Printable<T> 
+pub trait Printable<T>
 where
     T: Display + Clone,
 {
@@ -461,7 +461,7 @@ where
     fn print(&self, item: &T) {
         println!("Item: {}", item);
     }
-    
+
     fn print_all(&self, items: &[T]) {
         for (i, item) in items.iter().enumerate() {
             println!("{}: {}", i, item);
@@ -499,7 +499,7 @@ impl<T> Collection<T> for DynamicArray<T> {
     fn add(&mut self, item: T) {
         self.items.push(item);
     }
-    
+
     fn remove(&mut self, index: usize) -> Option<T> {
         if index < self.items.len() {
             Some(self.items.remove(index))
@@ -507,15 +507,15 @@ impl<T> Collection<T> for DynamicArray<T> {
             None
         }
     }
-    
+
     fn get(&self, index: usize) -> Option<&T> {
         self.items.get(index)
     }
-    
+
     fn len(&self) -> usize {
         self.items.len()
     }
-    
+
     fn is_empty(&self) -> bool {
         self.items.is_empty()
     }
@@ -537,7 +537,7 @@ where
         input.sort();
         input
     }
-    
+
     fn name(&self) -> &str {
         "Quick Sort"
     }
@@ -555,7 +555,7 @@ where
     fn execute(&self, input: Vec<T>) -> Vec<T> {
         input.into_iter().filter(|x| (self.predicate)(x)).collect()
     }
-    
+
     fn name(&self) -> &str {
         "Filter"
     }
@@ -573,7 +573,7 @@ impl Factory<String> for StringFactory {
     fn create(&self) -> String {
         String::new()
     }
-    
+
     fn create_with_params(&self, params: Vec<String>) -> String {
         params.join(" ")
     }
@@ -585,30 +585,28 @@ impl Factory<i32> for NumberFactory {
     fn create(&self) -> i32 {
         0
     }
-    
+
     fn create_with_params(&self, params: Vec<String>) -> i32 {
-        params.iter()
-            .filter_map(|s| s.parse::<i32>().ok())
-            .sum()
+        params.iter().filter_map(|s| s.parse::<i32>().ok()).sum()
     }
 }
 
 // 演示函数
 pub fn demonstrate_generic_trait() {
     println!("=== Generic Trait Demonstration ===\n");
-    
+
     // 存储演示
     demonstrate_storage();
-    
+
     // 打印演示
     demonstrate_printable();
-    
+
     // 集合演示
     demonstrate_collection();
-    
+
     // 算法演示
     demonstrate_algorithm();
-    
+
     // 工厂演示
     demonstrate_factory();
 }
@@ -616,24 +614,24 @@ pub fn demonstrate_generic_trait() {
 // 存储演示
 fn demonstrate_storage() {
     println!("--- Storage Demo ---");
-    
+
     let mut storage: MemoryStorage<String> = MemoryStorage::new();
-    
+
     storage.store("Hello".to_string());
     storage.store("World".to_string());
     storage.store("Rust".to_string());
-    
+
     println!("Stored items:");
     for i in 0..storage.len() {
         if let Some(item) = storage.retrieve(i) {
             println!("  {}: {}", i, item);
         }
     }
-    
+
     if let Some(removed) = storage.remove(1) {
         println!("Removed: {}", removed);
     }
-    
+
     println!("After removal:");
     for i in 0..storage.len() {
         if let Some(item) = storage.retrieve(i) {
@@ -646,10 +644,10 @@ fn demonstrate_storage() {
 // 打印演示
 fn demonstrate_printable() {
     println!("--- Printable Demo ---");
-    
+
     let printer = ConsolePrinter;
     let items = vec!["Apple", "Banana", "Cherry"];
-    
+
     printer.print(&items[0]);
     printer.print_all(&items);
     println!();
@@ -658,24 +656,24 @@ fn demonstrate_printable() {
 // 集合演示
 fn demonstrate_collection() {
     println!("--- Collection Demo ---");
-    
+
     let mut array: DynamicArray<i32> = DynamicArray::new();
-    
+
     array.add(10);
     array.add(20);
     array.add(30);
-    
+
     println!("Array length: {}", array.len());
     println!("Is empty: {}", array.is_empty());
-    
+
     if let Some(item) = array.get(1) {
         println!("Item at index 1: {}", item);
     }
-    
+
     if let Some(removed) = array.remove(0) {
         println!("Removed item: {}", removed);
     }
-    
+
     println!("After removal, length: {}", array.len());
     println!();
 }
@@ -683,17 +681,20 @@ fn demonstrate_collection() {
 // 算法演示
 fn demonstrate_algorithm() {
     println!("--- Algorithm Demo ---");
-    
+
     let sorter: SortingAlgorithm = SortingAlgorithm;
     let numbers: Vec<i32> = vec![3, 1, 4, 1, 5, 9, 2, 6];
-    
+
     println!("Original: {:?}", numbers);
     let sorted = sorter.execute(numbers);
     println!("Sorted: {:?}", sorted);
-    println!("Algorithm: {}", <SortingAlgorithm as Algorithm<Vec<i32>, Vec<i32>>>::name(&sorter));
-    
-    let filter: FilteringAlgorithm<fn(&i32) -> bool> = FilteringAlgorithm { 
-        predicate: |&x| x > 5 
+    println!(
+        "Algorithm: {}",
+        <SortingAlgorithm as Algorithm<Vec<i32>, Vec<i32>>>::name(&sorter)
+    );
+
+    let filter: FilteringAlgorithm<fn(&i32) -> bool> = FilteringAlgorithm {
+        predicate: |&x| x > 5,
     };
     let filtered = filter.execute(sorted);
     println!("Filtered (>5): {:?}", filtered);
@@ -704,20 +705,24 @@ fn demonstrate_algorithm() {
 // 工厂演示
 fn demonstrate_factory() {
     println!("--- Factory Demo ---");
-    
+
     let string_factory = StringFactory;
     let number_factory = NumberFactory;
-    
+
     let empty_string = string_factory.create();
-    let custom_string = string_factory.create_with_params(
-        vec!["Hello".to_string(), "Rust".to_string(), "World".to_string()]
-    );
-    
+    let custom_string = string_factory.create_with_params(vec![
+        "Hello".to_string(),
+        "Rust".to_string(),
+        "World".to_string(),
+    ]);
+
     let default_number = number_factory.create();
-    let sum_number = number_factory.create_with_params(
-        vec!["10".to_string(), "20".to_string(), "30".to_string()]
-    );
-    
+    let sum_number = number_factory.create_with_params(vec![
+        "10".to_string(),
+        "20".to_string(),
+        "30".to_string(),
+    ]);
+
     println!("Empty string: '{}'", empty_string);
     println!("Custom string: '{}'", custom_string);
     println!("Default number: {}", default_number);
@@ -729,78 +734,79 @@ fn demonstrate_factory() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_memory_storage() {
         let mut storage: MemoryStorage<i32> = MemoryStorage::new();
-        
+
         storage.store(10);
         storage.store(20);
-        
+
         assert_eq!(storage.len(), 2);
         assert_eq!(storage.retrieve(0), Some(&10));
         assert_eq!(storage.retrieve(1), Some(&20));
-        
+
         assert_eq!(storage.remove(0), Some(10));
         assert_eq!(storage.len(), 1);
     }
-    
+
     #[test]
     fn test_dynamic_array() {
         let mut array: DynamicArray<String> = DynamicArray::new();
-        
+
         array.add("Hello".to_string());
         array.add("World".to_string());
-        
+
         assert_eq!(array.len(), 2);
         assert!(!array.is_empty());
         assert_eq!(array.get(0), Some(&"Hello".to_string()));
-        
+
         assert_eq!(array.remove(0), Some("Hello".to_string()));
         assert_eq!(array.len(), 1);
     }
-    
+
     #[test]
     fn test_sorting_algorithm() {
         let sorter: SortingAlgorithm = SortingAlgorithm;
         let numbers: Vec<i32> = vec![3, 1, 4, 1, 5];
         let sorted = sorter.execute(numbers);
-        
+
         assert_eq!(sorted, vec![1, 1, 3, 4, 5]);
-        assert_eq!(<SortingAlgorithm as Algorithm<Vec<i32>, Vec<i32>>>::name(&sorter), "Quick Sort");
+        assert_eq!(
+            <SortingAlgorithm as Algorithm<Vec<i32>, Vec<i32>>>::name(&sorter),
+            "Quick Sort"
+        );
     }
-    
+
     #[test]
     fn test_filtering_algorithm() {
-        let filter: FilteringAlgorithm<fn(&i32) -> bool> = FilteringAlgorithm { 
-            predicate: |&x| x > 3 
+        let filter: FilteringAlgorithm<fn(&i32) -> bool> = FilteringAlgorithm {
+            predicate: |&x| x > 3,
         };
         let numbers = vec![1, 2, 3, 4, 5, 6];
         let filtered = filter.execute(numbers);
-        
+
         assert_eq!(filtered, vec![4, 5, 6]);
         assert_eq!(filter.name(), "Filter");
     }
-    
+
     #[test]
     fn test_factories() {
         let string_factory = StringFactory;
         let number_factory = NumberFactory;
-        
+
         let empty_string = string_factory.create();
         assert_eq!(empty_string, "");
-        
-        let custom_string = string_factory.create_with_params(
-            vec!["A".to_string(), "B".to_string()]
-        );
+
+        let custom_string =
+            string_factory.create_with_params(vec!["A".to_string(), "B".to_string()]);
         assert_eq!(custom_string, "A B");
-        
+
         let default_number = number_factory.create();
         assert_eq!(default_number, 0);
-        
-        let sum_number = number_factory.create_with_params(
-            vec!["10".to_string(), "20".to_string()]
-        );
+
+        let sum_number =
+            number_factory.create_with_params(vec!["10".to_string(), "20".to_string()]);
         assert_eq!(sum_number, 30);
     }
 }

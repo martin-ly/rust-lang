@@ -1,19 +1,19 @@
 //! # 工作流引擎核心实现 / Workflow Engine Core Implementation
-//! 
+//!
 //! 本模块提供了工作流引擎的完整实现，包括事件处理、状态管理和性能优化。
 //! This module provides the complete implementation of the workflow engine, including event processing, state management, and performance optimization.
 
-use crate::types::*;
 use crate::error::*;
+use crate::types::*;
+use serde_json::Value;
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex, RwLock};
+use std::time::Instant;
 use tokio::sync::mpsc;
 use tokio::time::Duration;
-use std::time::Instant;
-use serde_json::Value;
 
 /// 工作流引擎 / Workflow Engine
-/// 
+///
 /// 核心工作流执行引擎，负责管理工作流定义、实例和事件处理。
 /// Core workflow execution engine responsible for managing workflow definitions, instances, and event processing.
 pub struct WorkflowEngine {
@@ -63,12 +63,12 @@ impl WorkflowEngine {
     pub fn new() -> Self {
         Self::with_config(EngineConfig::default())
     }
-    
+
     /// 使用配置创建工作流引擎 / Create Workflow Engine with Configuration
     pub fn with_config(config: EngineConfig) -> Self {
         let (event_sender, event_receiver) = mpsc::channel(config.event_queue_size);
         let performance_monitor = Arc::new(PerformanceMonitor::new());
-        
+
         Self {
             workflows: Arc::new(RwLock::new(HashMap::new())),
             instances: Arc::new(RwLock::new(HashMap::new())),
@@ -78,29 +78,33 @@ impl WorkflowEngine {
             config,
         }
     }
-    
+
     /// 注册工作流定义 / Register Workflow Definition
-    pub async fn register_workflow(&self, name: String, definition: WorkflowDefinition) -> Result<(), WorkflowError> {
+    pub async fn register_workflow(
+        &self,
+        name: String,
+        definition: WorkflowDefinition,
+    ) -> Result<(), WorkflowError> {
         let start_time = Instant::now();
-        
+
         // 验证工作流定义 / Validate workflow definition
         if let Err(e) = definition.validate() {
             return Err(WorkflowError::ValidationError(e.to_string()));
         }
-        
+
         // 检查循环依赖 / Check for circular dependencies
         if crate::types::utils::has_cycles(&definition) {
             return Err(WorkflowError::ValidationError(
-                "Circular dependency detected".to_string()
+                "Circular dependency detected".to_string(),
             ));
         }
-        
+
         // 存储工作流定义 / Store workflow definition
         {
             let mut workflows = self.workflows.write().unwrap();
             workflows.insert(name.clone(), definition);
         }
-        
+
         // 记录性能指标 / Record performance metrics
         if self.config.enable_performance_monitoring {
             self.performance_monitor.record_operation(
@@ -109,57 +113,60 @@ impl WorkflowEngine {
                 Some(name),
             );
         }
-        
+
         Ok(())
     }
-    
+
     /// 启动工作流实例 / Start Workflow Instance
-    pub async fn start_workflow(&self, name: &str, initial_data: WorkflowData) -> Result<String, WorkflowError> {
+    pub async fn start_workflow(
+        &self,
+        name: &str,
+        initial_data: WorkflowData,
+    ) -> Result<String, WorkflowError> {
         let start_time = Instant::now();
-        
+
         // 检查工作流定义是否存在 / Check if workflow definition exists
         let _definition = {
             let workflows = self.workflows.read().unwrap();
-            workflows.get(name)
+            workflows
+                .get(name)
                 .ok_or_else(|| WorkflowError::WorkflowNotFound(name.to_string()))?
                 .clone()
         };
-        
+
         // 检查并发实例数限制 / Check concurrent instance limit
         {
             let instances = self.instances.read().unwrap();
             if instances.len() >= self.config.max_concurrent_instances {
                 return Err(WorkflowError::ResourceLimitExceeded(
-                    "Maximum concurrent instances reached".to_string()
+                    "Maximum concurrent instances reached".to_string(),
                 ));
             }
         }
-        
+
         // 创建实例ID / Create instance ID
         let instance_id = crate::types::utils::generate_instance_id();
-        
+
         // 创建工作流实例 / Create workflow instance
-        let instance = WorkflowInstance::new(
-            instance_id.clone(),
-            name.to_string(),
-            initial_data,
-        );
-        
+        let instance = WorkflowInstance::new(instance_id.clone(), name.to_string(), initial_data);
+
         // 存储实例 / Store instance
         {
             let mut instances = self.instances.write().unwrap();
             instances.insert(instance_id.clone(), instance);
         }
-        
+
         // 发送启动事件 / Send start event
         let event = WorkflowEvent::Start {
             instance_id: instance_id.clone(),
             workflow_name: name.to_string(),
         };
-        
-        self.event_sender.send(event).await
+
+        self.event_sender
+            .send(event)
+            .await
             .map_err(|_| WorkflowError::EventChannelClosed)?;
-        
+
         // 记录性能指标 / Record performance metrics
         if self.config.enable_performance_monitoring {
             self.performance_monitor.record_operation(
@@ -168,33 +175,46 @@ impl WorkflowEngine {
                 Some(instance_id.clone()),
             );
         }
-        
+
         Ok(instance_id)
     }
-    
+
     /// 获取工作流实例状态 / Get Workflow Instance State
     pub async fn get_workflow_state(&self, instance_id: &str) -> Result<String, WorkflowError> {
         let instances = self.instances.read().unwrap();
-        let instance = instances.get(instance_id)
+        let instance = instances
+            .get(instance_id)
             .ok_or_else(|| WorkflowError::InstanceNotFound(instance_id.to_string()))?;
-        
+
         Ok(instance.current_state.clone())
     }
-    
+
     /// 处理工作流事件 / Handle Workflow Events
     pub async fn process_events(&mut self) -> Result<(), WorkflowError> {
         while let Some(receiver) = &mut self.event_receiver {
             if let Some(event) = receiver.recv().await {
                 let start_time = Instant::now();
-                
+
                 match event {
-                    WorkflowEvent::Start { instance_id, workflow_name } => {
+                    WorkflowEvent::Start {
+                        instance_id,
+                        workflow_name,
+                    } => {
                         self.handle_start_event(instance_id, workflow_name).await?;
                     }
-                    WorkflowEvent::StateTransition { instance_id, from_state, to_state, data } => {
-                        self.handle_state_transition_event(instance_id, from_state, to_state, data).await?;
+                    WorkflowEvent::StateTransition {
+                        instance_id,
+                        from_state,
+                        to_state,
+                        data,
+                    } => {
+                        self.handle_state_transition_event(instance_id, from_state, to_state, data)
+                            .await?;
                     }
-                    WorkflowEvent::Complete { instance_id, result } => {
+                    WorkflowEvent::Complete {
+                        instance_id,
+                        result,
+                    } => {
                         self.handle_complete_event(instance_id, result).await?;
                     }
                     WorkflowEvent::Error { instance_id, error } => {
@@ -204,7 +224,7 @@ impl WorkflowEngine {
                         self.handle_timeout_event(instance_id, state).await?;
                     }
                 }
-                
+
                 // 记录事件处理性能 / Record event processing performance
                 if self.config.enable_performance_monitoring {
                     self.performance_monitor.record_operation(
@@ -217,20 +237,25 @@ impl WorkflowEngine {
                 break;
             }
         }
-        
+
         Ok(())
     }
-    
+
     /// 处理启动事件 / Handle Start Event
-    async fn handle_start_event(&self, instance_id: String, workflow_name: String) -> Result<(), WorkflowError> {
+    async fn handle_start_event(
+        &self,
+        instance_id: String,
+        workflow_name: String,
+    ) -> Result<(), WorkflowError> {
         // 获取工作流定义 / Get workflow definition
         let definition = {
             let workflows = self.workflows.read().unwrap();
-            workflows.get(&workflow_name)
+            workflows
+                .get(&workflow_name)
                 .ok_or_else(|| WorkflowError::WorkflowNotFound(workflow_name.clone()))?
                 .clone()
         };
-        
+
         // 更新实例状态 / Update instance state
         {
             let mut instances = self.instances.write().unwrap();
@@ -239,7 +264,7 @@ impl WorkflowEngine {
                 instance.updated_at = Instant::now();
             }
         }
-        
+
         // 发送状态转换事件 / Send state transition event
         let event = WorkflowEvent::StateTransition {
             instance_id: instance_id.clone(),
@@ -247,13 +272,15 @@ impl WorkflowEngine {
             to_state: definition.initial_state,
             data: None,
         };
-        
-        self.event_sender.send(event).await
+
+        self.event_sender
+            .send(event)
+            .await
             .map_err(|_| WorkflowError::EventChannelClosed)?;
-        
+
         Ok(())
     }
-    
+
     /// 处理状态转换事件 / Handle State Transition Event
     async fn handle_state_transition_event(
         &self,
@@ -269,7 +296,7 @@ impl WorkflowEngine {
                 instance.transition(to_state.clone(), data);
             }
         }
-        
+
         // 检查是否为最终状态 / Check if final state
         let is_final = {
             let workflows = self.workflows.read().unwrap();
@@ -279,23 +306,29 @@ impl WorkflowEngine {
                 false
             }
         };
-        
+
         if is_final {
             // 发送完成事件 / Send complete event
             let event = WorkflowEvent::Complete {
                 instance_id: instance_id.clone(),
                 result: serde_json::json!({"status": "completed", "final_state": to_state}),
             };
-            
-            self.event_sender.send(event).await
+
+            self.event_sender
+                .send(event)
+                .await
                 .map_err(|_| WorkflowError::EventChannelClosed)?;
         }
-        
+
         Ok(())
     }
-    
+
     /// 处理完成事件 / Handle Complete Event
-    async fn handle_complete_event(&self, instance_id: String, result: Value) -> Result<(), WorkflowError> {
+    async fn handle_complete_event(
+        &self,
+        instance_id: String,
+        result: Value,
+    ) -> Result<(), WorkflowError> {
         // 更新实例状态 / Update instance state
         {
             let mut instances = self.instances.write().unwrap();
@@ -303,12 +336,16 @@ impl WorkflowEngine {
                 instance.complete(result);
             }
         }
-        
+
         Ok(())
     }
-    
+
     /// 处理错误事件 / Handle Error Event
-    async fn handle_error_event(&self, instance_id: String, error: String) -> Result<(), WorkflowError> {
+    async fn handle_error_event(
+        &self,
+        instance_id: String,
+        error: String,
+    ) -> Result<(), WorkflowError> {
         // 更新实例状态 / Update instance state
         {
             let mut instances = self.instances.write().unwrap();
@@ -316,12 +353,16 @@ impl WorkflowEngine {
                 instance.mark_error(error);
             }
         }
-        
+
         Ok(())
     }
-    
+
     /// 处理超时事件 / Handle Timeout Event
-    async fn handle_timeout_event(&self, instance_id: String, state: String) -> Result<(), WorkflowError> {
+    async fn handle_timeout_event(
+        &self,
+        instance_id: String,
+        state: String,
+    ) -> Result<(), WorkflowError> {
         // 更新实例状态 / Update instance state
         {
             let mut instances = self.instances.write().unwrap();
@@ -329,43 +370,46 @@ impl WorkflowEngine {
                 instance.mark_error(format!("Timeout in state: {}", state));
             }
         }
-        
+
         Ok(())
     }
-    
+
     /// 获取工作流实例 / Get Workflow Instance
     pub fn get_instance(&self, instance_id: &str) -> Option<WorkflowInstance> {
         let instances = self.instances.read().unwrap();
         instances.get(instance_id).cloned()
     }
-    
+
     /// 获取所有实例 / Get All Instances
     pub fn get_all_instances(&self) -> Vec<WorkflowInstance> {
         let instances = self.instances.read().unwrap();
         instances.values().cloned().collect()
     }
-    
+
     /// 获取性能统计 / Get Performance Statistics
     pub fn get_performance_stats(&self) -> PerformanceStats {
         self.performance_monitor.get_stats()
     }
-    
+
     /// 清理完成的实例 / Clean Up Completed Instances
     pub async fn cleanup_completed_instances(&self) -> Result<usize, WorkflowError> {
         let mut instances = self.instances.write().unwrap();
         let initial_count = instances.len();
-        
+
         instances.retain(|_, instance| {
-            matches!(instance.status, WorkflowStatus::Running | WorkflowStatus::Paused)
+            matches!(
+                instance.status,
+                WorkflowStatus::Running | WorkflowStatus::Paused
+            )
         });
-        
+
         let removed_count = initial_count - instances.len();
         Ok(removed_count)
     }
 }
 
 /// 性能监控器 / Performance Monitor
-/// 
+///
 /// 监控工作流引擎的性能指标。
 /// Monitor performance metrics of the workflow engine.
 pub struct PerformanceMonitor {
@@ -404,7 +448,7 @@ impl OperationStats {
             last_call: None,
         }
     }
-    
+
     /// 更新统计信息 / Update Statistics
     pub fn update(&mut self, execution_time: Duration) {
         self.call_count += 1;
@@ -442,7 +486,7 @@ impl OverallStats {
             last_activity: None,
         }
     }
-    
+
     /// 更新统计信息 / Update Statistics
     pub fn update(&mut self, execution_time: Duration) {
         self.total_operations += 1;
@@ -460,28 +504,35 @@ impl PerformanceMonitor {
             overall_stats: Arc::new(Mutex::new(OverallStats::new())),
         }
     }
-    
+
     /// 记录操作 / Record Operation
-    pub fn record_operation(&self, operation_name: &str, execution_time: Duration, _context: Option<String>) {
+    pub fn record_operation(
+        &self,
+        operation_name: &str,
+        execution_time: Duration,
+        _context: Option<String>,
+    ) {
         // 更新操作统计 / Update operation statistics
         {
             let mut operations = self.operations.lock().unwrap();
-            let stats = operations.entry(operation_name.to_string()).or_insert_with(OperationStats::new);
+            let stats = operations
+                .entry(operation_name.to_string())
+                .or_insert_with(OperationStats::new);
             stats.update(execution_time);
         }
-        
+
         // 更新总体统计 / Update overall statistics
         {
             let mut overall_stats = self.overall_stats.lock().unwrap();
             overall_stats.update(execution_time);
         }
     }
-    
+
     /// 获取统计信息 / Get Statistics
     pub fn get_stats(&self) -> PerformanceStats {
         let operations = self.operations.lock().unwrap();
         let overall_stats = self.overall_stats.lock().unwrap();
-        
+
         PerformanceStats {
             operations: operations.clone(),
             overall: overall_stats.clone(),
@@ -499,7 +550,7 @@ pub struct PerformanceStats {
 }
 
 /// 工作流引擎构建器 / Workflow Engine Builder
-/// 
+///
 /// 提供流式API来配置和创建工作流引擎。
 /// Provides fluent API to configure and create workflow engines.
 pub struct WorkflowEngineBuilder {
@@ -513,37 +564,37 @@ impl WorkflowEngineBuilder {
             config: EngineConfig::default(),
         }
     }
-    
+
     /// 设置最大并发实例数 / Set Maximum Concurrent Instances
     pub fn max_concurrent_instances(mut self, max: usize) -> Self {
         self.config.max_concurrent_instances = max;
         self
     }
-    
+
     /// 设置事件队列大小 / Set Event Queue Size
     pub fn event_queue_size(mut self, size: usize) -> Self {
         self.config.event_queue_size = size;
         self
     }
-    
+
     /// 设置默认超时 / Set Default Timeout
     pub fn default_timeout(mut self, timeout: Duration) -> Self {
         self.config.default_timeout = timeout;
         self
     }
-    
+
     /// 启用性能监控 / Enable Performance Monitoring
     pub fn enable_performance_monitoring(mut self, enable: bool) -> Self {
         self.config.enable_performance_monitoring = enable;
         self
     }
-    
+
     /// 启用持久化 / Enable Persistence
     pub fn enable_persistence(mut self, enable: bool) -> Self {
         self.config.enable_persistence = enable;
         self
     }
-    
+
     /// 构建工作流引擎 / Build Workflow Engine
     pub fn build(self) -> WorkflowEngine {
         WorkflowEngine::with_config(self.config)
@@ -551,7 +602,7 @@ impl WorkflowEngineBuilder {
 }
 
 /// 工作流引擎管理器 / Workflow Engine Manager
-/// 
+///
 /// 管理多个工作流引擎实例。
 /// Manage multiple workflow engine instances.
 pub struct WorkflowEngineManager {
@@ -566,28 +617,28 @@ impl WorkflowEngineManager {
             engines: Arc::new(RwLock::new(HashMap::new())),
         }
     }
-    
+
     /// 添加引擎 / Add Engine
     pub fn add_engine(&self, name: String, engine: WorkflowEngine) {
         let mut engines = self.engines.write().unwrap();
         engines.insert(name, Arc::new(engine));
     }
-    
+
     /// 获取引擎 / Get Engine
     pub fn get_engine(&self, name: &str) -> Option<Arc<WorkflowEngine>> {
         let engines = self.engines.read().unwrap();
         engines.get(name).cloned()
     }
-    
+
     /// 移除引擎 / Remove Engine
     pub fn remove_engine(&self, name: &str) -> Option<Arc<WorkflowEngine>> {
         let mut engines = self.engines.write().unwrap();
         engines.remove(name)
     }
-    
+
     /// 获取所有引擎名称 / Get All Engine Names
     pub fn get_engine_names(&self) -> Vec<String> {
         let engines = self.engines.read().unwrap();
         engines.keys().cloned().collect()
     }
-} 
+}

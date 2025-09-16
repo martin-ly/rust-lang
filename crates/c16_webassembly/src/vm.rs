@@ -1,5 +1,5 @@
 //! # WebAssembly 虚拟机模块 / WebAssembly Virtual Machine Module
-//! 
+//!
 //! 本模块实现了 WebAssembly 虚拟机的核心功能。
 //! This module implements the core functionality of the WebAssembly virtual machine.
 
@@ -25,7 +25,7 @@ impl WebAssemblyVM {
             functions: HashMap::new(),
         }
     }
-    
+
     pub fn execute(&mut self, _module: &Module) -> Result<(), WebAssemblyError> {
         // 基本执行逻辑
         Ok(())
@@ -40,4 +40,4 @@ pub struct Function {
     pub params: Vec<ValueType>,
     pub results: Vec<ValueType>,
     pub code: Vec<u8>,
-} 
+}

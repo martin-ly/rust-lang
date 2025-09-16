@@ -1,13 +1,7 @@
 use std::thread;
 use std::time::Duration;
 
-use c05_threads::message_passing::{
-    channel,
-    mpsc,
-    stream::ReceiverStream,
-    sync_channel,
-    watch,
-};
+use c05_threads::message_passing::{channel, mpsc, stream::ReceiverStream, sync_channel, watch};
 
 fn demo_std_channel() {
     let (tx, rx) = channel::channel::<i32>();
@@ -77,7 +71,8 @@ fn demo_receiver_stream() {
     let mut sum = 0;
     for v in ReceiverStream::new(rx) {
         sum += v;
-        if sum >= 15 { // 收满后退出
+        if sum >= 15 {
+            // 收满后退出
             break;
         }
     }

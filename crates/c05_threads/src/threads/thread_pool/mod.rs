@@ -1,13 +1,13 @@
 //! 线程池模块
-//! 
+//!
 //! 本模块提供线程池的基本实现，包括：
 //! 1) 简单线程池
 //! 2) 可配置线程池
 //! 3) 线程池性能测试
 //! 4) 任务结果返回（补充）
 
+use std::sync::mpsc::{Receiver, Sender, channel};
 use std::sync::{Arc, Mutex};
-use std::sync::mpsc::{channel, Sender, Receiver};
 use std::thread;
 use std::time::Duration;
 
@@ -21,22 +21,22 @@ impl SimpleThreadPool {
     /// 创建新的线程池
     pub fn new(size: usize) -> Self {
         assert!(size > 0);
-        
+
         let (sender, receiver) = channel();
         let receiver = Arc::new(Mutex::new(receiver));
-        
+
         let mut workers = Vec::with_capacity(size);
-        
+
         for id in 0..size {
             workers.push(Worker::new(id, Arc::clone(&receiver)));
         }
-        
+
         Self {
             workers,
             sender: Some(sender),
         }
     }
-    
+
     /// 执行任务
     pub fn execute<F>(&self, f: F)
     where
@@ -76,7 +76,7 @@ impl Drop for SimpleThreadPool {
     fn drop(&mut self) {
         // 关闭发送端
         self.sender.take();
-        
+
         // 等待所有工作线程完成
         for worker in &mut self.workers {
             if let Some(thread) = worker.thread.take() {
@@ -98,7 +98,7 @@ impl Worker {
         let thread = thread::spawn(move || {
             loop {
                 let message = receiver.lock().unwrap().recv();
-                
+
                 match message {
                     Ok(job) => {
                         println!("  工作线程 {} 执行任务", id);
@@ -111,7 +111,7 @@ impl Worker {
                 }
             }
         });
-        
+
         Self {
             id,
             thread: Some(thread),
@@ -152,17 +152,21 @@ impl ConfigurableThreadPool {
     pub fn new(config: ThreadPoolConfig) -> Self {
         assert!(config.min_threads > 0);
         assert!(config.max_threads >= config.min_threads);
-        
+
         let (sender, receiver) = channel();
         let receiver = Arc::new(Mutex::new(receiver));
-        
+
         let mut workers = Vec::with_capacity(config.max_threads);
-        
+
         // 创建最小数量的工作线程
         for id in 0..config.min_threads {
-            workers.push(ConfigurableWorker::new(id, Arc::clone(&receiver), config.keep_alive_time));
+            workers.push(ConfigurableWorker::new(
+                id,
+                Arc::clone(&receiver),
+                config.keep_alive_time,
+            ));
         }
-        
+
         Self {
             workers,
             sender: Some(sender),
@@ -170,7 +174,7 @@ impl ConfigurableThreadPool {
             config,
         }
     }
-    
+
     /// 执行任务
     pub fn execute<F>(&self, f: F)
     where
@@ -200,9 +204,12 @@ impl ConfigurableThreadPool {
 
     /// 动态扩容一次（在不超过 max_threads 时新增一个临时工作线程）
     pub fn scale_up_once(&mut self) -> bool {
-        if self.workers.len() >= self.config.max_threads { return false; }
+        if self.workers.len() >= self.config.max_threads {
+            return false;
+        }
         let id = self.workers.len();
-        let worker = ConfigurableWorker::new(id, Arc::clone(&self.receiver), self.config.keep_alive_time);
+        let worker =
+            ConfigurableWorker::new(id, Arc::clone(&self.receiver), self.config.keep_alive_time);
         self.workers.push(worker);
         true
     }
@@ -229,12 +236,12 @@ impl ConfigurableThreadPool {
         });
         rx
     }
-    
+
     /// 获取当前线程数
     pub fn thread_count(&self) -> usize {
         self.workers.len()
     }
-    
+
     /// 获取配置信息
     pub fn config(&self) -> &ThreadPoolConfig {
         &self.config
@@ -244,7 +251,7 @@ impl ConfigurableThreadPool {
 impl Drop for ConfigurableThreadPool {
     fn drop(&mut self) {
         self.sender.take();
-        
+
         for worker in &mut self.workers {
             if let Some(thread) = worker.thread.take() {
                 let _ = thread.join();
@@ -262,14 +269,14 @@ struct ConfigurableWorker {
 
 impl ConfigurableWorker {
     fn new(
-        id: usize, 
+        id: usize,
         receiver: Arc<Mutex<Receiver<Box<dyn FnOnce() + Send + 'static>>>>,
         keep_alive_time: Duration,
     ) -> Self {
         let thread = thread::spawn(move || {
             loop {
                 let message = receiver.lock().unwrap().recv_timeout(keep_alive_time);
-                
+
                 match message {
                     Ok(job) => {
                         println!("  可配置工作线程 {} 执行任务", id);
@@ -282,7 +289,7 @@ impl ConfigurableWorker {
                 }
             }
         });
-        
+
         Self {
             id,
             thread: Some(thread),
@@ -293,26 +300,26 @@ impl ConfigurableWorker {
 /// 线程池性能测试
 pub fn benchmark_thread_pools() {
     println!("🔧 线程池性能测试");
-    
+
     let data_size: usize = 100_000;
     let data: Vec<i32> = (0..data_size as i32).collect();
-    
+
     // 测试简单线程池
     println!("  测试简单线程池...");
     let start = std::time::Instant::now();
     let pool = SimpleThreadPool::new(4);
-    
+
     for chunk in data.chunks(data_size / 4) {
         let chunk = chunk.to_vec();
         pool.execute(move || {
             let _sum: i32 = chunk.iter().sum();
         });
     }
-    
+
     drop(pool); // 等待所有任务完成
     let duration = start.elapsed();
     println!("    简单线程池耗时: {:?}", duration);
-    
+
     // 测试可配置线程池
     println!("  测试可配置线程池...");
     let start = std::time::Instant::now();
@@ -322,16 +329,16 @@ pub fn benchmark_thread_pools() {
         keep_alive_time: Duration::from_secs(30),
         queue_size: 100,
     };
-    
+
     let pool = ConfigurableThreadPool::new(config);
-    
+
     for chunk in data.chunks(data_size / 4) {
         let chunk = chunk.to_vec();
         pool.execute(move || {
             let _sum: i32 = chunk.iter().sum();
         });
     }
-    
+
     drop(pool);
     let duration = start.elapsed();
     println!("    可配置线程池耗时: {:?}", duration);
@@ -340,31 +347,31 @@ pub fn benchmark_thread_pools() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_simple_thread_pool() {
         let pool = SimpleThreadPool::new(2);
-        
+
         let (tx, rx) = channel();
-        
+
         pool.execute(move || {
             tx.send(42).unwrap();
         });
-        
+
         let result = rx.recv().unwrap();
         assert_eq!(result, 42);
     }
-    
+
     #[test]
     fn test_configurable_thread_pool() {
         let config = ThreadPoolConfig::default();
         let pool = ConfigurableThreadPool::new(config);
-        
+
         assert_eq!(pool.thread_count(), 2);
         assert_eq!(pool.config().min_threads, 2);
         assert_eq!(pool.config().max_threads, 16);
     }
-    
+
     #[test]
     fn test_thread_pool_benchmark() {
         benchmark_thread_pools();

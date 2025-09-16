@@ -187,12 +187,7 @@ pub struct Message<T> {
 
 impl<T> Message<T> {
     /// 创建新消息
-    pub fn new(
-        id: u64,
-        message_type: impl Into<String>,
-        data: T,
-        source_pid: u32,
-    ) -> Self {
+    pub fn new(id: u64, message_type: impl Into<String>, data: T, source_pid: u32) -> Self {
         Self {
             id,
             message_type: message_type.into(),

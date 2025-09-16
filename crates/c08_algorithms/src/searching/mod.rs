@@ -41,10 +41,7 @@ pub async fn linear_search_async<T>(data: Vec<T>, target: T) -> Result<Option<us
 where
     T: PartialEq + Send + 'static,
 {
-    Ok(tokio::task::spawn_blocking(move || {
-        data.iter().position(|x| x == &target)
-    })
-    .await?)
+    Ok(tokio::task::spawn_blocking(move || data.iter().position(|x| x == &target)).await?)
 }
 
 /// 异步二分搜索（spawn_blocking 包裹，要求已排序）
@@ -130,16 +127,28 @@ where
 
 /// 指数搜索：在有序切片中查找 target，先指数扩展边界再二分
 pub fn exponential_search_sync<T: Ord>(data: &[T], target: &T) -> Option<usize> {
-    if data.is_empty() { return None; }
-    if &data[0] == target { return Some(0); }
+    if data.is_empty() {
+        return None;
+    }
+    if &data[0] == target {
+        return Some(0);
+    }
     let mut bound: usize = 1;
-    while bound < data.len() && &data[bound] < target { bound <<= 1; }
+    while bound < data.len() && &data[bound] < target {
+        bound <<= 1;
+    }
     let left = bound >> 1;
     let right = data.len().min(bound + 1);
-    data[left..right].binary_search(target).ok().map(|i| i + left)
+    data[left..right]
+        .binary_search(target)
+        .ok()
+        .map(|i| i + left)
 }
 
-pub async fn exponential_search_async<T: Ord + Send + 'static>(data: Vec<T>, target: T) -> Result<Option<usize>> {
+pub async fn exponential_search_async<T: Ord + Send + 'static>(
+    data: Vec<T>,
+    target: T,
+) -> Result<Option<usize>> {
     Ok(tokio::task::spawn_blocking(move || exponential_search_sync(&data, &target)).await?)
 }
 
@@ -151,7 +160,11 @@ where
     for _ in 0..iters {
         let m1 = l + (r - l) / 3.0;
         let m2 = r - (r - l) / 3.0;
-        if f(m1) < f(m2) { l = m1; } else { r = m2; }
+        if f(m1) < f(m2) {
+            l = m1;
+        } else {
+            r = m2;
+        }
     }
     (l + r) / 2.0
 }
@@ -161,7 +174,10 @@ where
     F: Fn(f64) -> f64 + Send + Sync + 'static,
 {
     let f_arc = std::sync::Arc::new(f);
-    Ok(tokio::task::spawn_blocking(move || ternary_search_max(l, r, |x| (f_arc)(x), iters)).await?)
+    Ok(
+        tokio::task::spawn_blocking(move || ternary_search_max(l, r, |x| (f_arc)(x), iters))
+            .await?,
+    )
 }
 
 // =========================
@@ -170,13 +186,28 @@ where
 
 /// 插值查找：适用于近似均匀分布的有序数组
 pub fn interpolation_search_sync(data: &[i64], target: i64) -> Option<usize> {
-    if data.is_empty() { return None; }
+    if data.is_empty() {
+        return None;
+    }
     let (mut low, mut high) = (0usize, data.len() - 1);
     while low <= high && target >= data[low] && target <= data[high] {
-        if data[high] == data[low] { return if data[low] == target { Some(low) } else { None }; }
-        let pos = low + (((target - data[low]) as u128 * (high - low) as u128) / ((data[high] - data[low]) as u128)) as usize;
-        if data[pos] == target { return Some(pos); }
-        if data[pos] < target { low = pos + 1; } else { if pos == 0 { break; } high = pos - 1; }
+        if data[high] == data[low] {
+            return if data[low] == target { Some(low) } else { None };
+        }
+        let pos = low
+            + (((target - data[low]) as u128 * (high - low) as u128)
+                / ((data[high] - data[low]) as u128)) as usize;
+        if data[pos] == target {
+            return Some(pos);
+        }
+        if data[pos] < target {
+            low = pos + 1;
+        } else {
+            if pos == 0 {
+                break;
+            }
+            high = pos - 1;
+        }
     }
     None
 }
@@ -188,20 +219,31 @@ pub async fn interpolation_search_async(data: Vec<i64>, target: i64) -> Result<O
 /// 跳跃搜索：步长为 sqrt(n)，在块中线性查找
 pub fn jump_search_sync<T: Ord>(data: &[T], target: &T) -> Option<usize> {
     let n = data.len();
-    if n == 0 { return None; }
+    if n == 0 {
+        return None;
+    }
     let step = (n as f64).sqrt().ceil() as usize;
     let mut prev = 0usize;
     let mut curr = step.min(n);
     while &data[curr - 1] < target {
         prev = curr;
-        if prev >= n { return None; }
+        if prev >= n {
+            return None;
+        }
         curr = (curr + step).min(n);
     }
-    for i in prev..curr { if &data[i] == target { return Some(i); } }
+    for i in prev..curr {
+        if &data[i] == target {
+            return Some(i);
+        }
+    }
     None
 }
 
-pub async fn jump_search_async<T: Ord + Send + Sync + 'static>(data: Vec<T>, target: T) -> Result<Option<usize>> {
+pub async fn jump_search_async<T: Ord + Send + Sync + 'static>(
+    data: Vec<T>,
+    target: T,
+) -> Result<Option<usize>> {
     Ok(tokio::task::spawn_blocking(move || jump_search_sync(&data, &target)).await?)
 }
 
@@ -238,7 +280,7 @@ mod tests {
 
     #[test]
     fn test_exponential_and_ternary() {
-        let data = vec![1,2,3,4,5,6,7,8,9];
+        let data = vec![1, 2, 3, 4, 5, 6, 7, 8, 9];
         assert_eq!(exponential_search_sync(&data, &7), Some(6));
         let peak_at = ternary_search_max(0.0, 6.28318, |x| (x - 3.14159).cos(), 60);
         // cos(x - π) 的最大值位于 x≈π（或等价的 3π 等），区间 [0,2π] 内应接近 π
@@ -252,4 +294,3 @@ mod tests {
         assert_eq!(jump_search_sync(&v, &9876), Some(9876usize));
     }
 }
-

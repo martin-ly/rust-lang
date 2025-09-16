@@ -1,5 +1,5 @@
 //! 操作系统设计模式应用
-//! 
+//!
 //! 本模块展示了在操作系统开发中应用各种设计模式的实践案例，
 //! 包括Singleton、Factory、Strategy等经典模式。
 
@@ -31,7 +31,7 @@ impl SystemResourceManager {
         if self.memory_pool.contains_key(&name) {
             return Err("内存块已存在".to_string());
         }
-        
+
         let memory = vec![0u8; size];
         self.memory_pool.insert(name, memory);
         println!("分配内存: {} 字节", size);
@@ -55,11 +55,12 @@ impl SystemResourceManager {
     }
 
     pub fn close_file(&mut self, handle: u32) -> Result<(), String> {
-        let path = self.file_handles
+        let path = self
+            .file_handles
             .iter()
             .find(|(_, h)| **h == handle)
             .map(|(p, _)| p.clone());
-        
+
         if let Some(path) = path {
             self.file_handles.remove(&path);
             println!("关闭文件: 句柄 {}", handle);
@@ -95,7 +96,9 @@ pub struct SystemResourceManagerSingleton {
 
 impl SystemResourceManagerSingleton {
     pub fn new() -> Self {
-        Self { instance: OnceLock::new() }
+        Self {
+            instance: OnceLock::new(),
+        }
     }
 
     pub fn get_instance(&self) -> Arc<Mutex<SystemResourceManager>> {
@@ -170,8 +173,10 @@ impl Device for CPUDevice {
 
     fn initialize(&mut self) -> Result<(), String> {
         self.status.is_online = true;
-        println!("CPU设备 {} 初始化完成 ({} 核, {:.1} GHz)", 
-            self.id, self.cores, self.frequency);
+        println!(
+            "CPU设备 {} 初始化完成 ({} 核, {:.1} GHz)",
+            self.id, self.cores, self.frequency
+        );
         Ok(())
     }
 
@@ -218,8 +223,11 @@ impl Device for MemoryDevice {
 
     fn initialize(&mut self) -> Result<(), String> {
         self.status.is_online = true;
-        println!("内存设备 {} 初始化完成 ({} MB)", 
-            self.id, self.capacity / 1024 / 1024);
+        println!(
+            "内存设备 {} 初始化完成 ({} MB)",
+            self.id,
+            self.capacity / 1024 / 1024
+        );
         Ok(())
     }
 
@@ -266,8 +274,11 @@ impl Device for DiskDevice {
 
     fn initialize(&mut self) -> Result<(), String> {
         self.status.is_online = true;
-        println!("磁盘设备 {} 初始化完成 ({} GB)", 
-            self.id, self.capacity / 1024 / 1024 / 1024);
+        println!(
+            "磁盘设备 {} 初始化完成 ({} GB)",
+            self.id,
+            self.capacity / 1024 / 1024 / 1024
+        );
         Ok(())
     }
 
@@ -284,26 +295,48 @@ impl Device for DiskDevice {
 
 /// 设备工厂接口
 pub trait DeviceFactory {
-    fn create_device(&self, device_type: DeviceType, id: String, params: HashMap<String, String>) -> Box<dyn Device>;
+    fn create_device(
+        &self,
+        device_type: DeviceType,
+        id: String,
+        params: HashMap<String, String>,
+    ) -> Box<dyn Device>;
 }
 
 /// 设备工厂实现
 pub struct OSDeviceFactory;
 
 impl DeviceFactory for OSDeviceFactory {
-    fn create_device(&self, device_type: DeviceType, id: String, params: HashMap<String, String>) -> Box<dyn Device> {
+    fn create_device(
+        &self,
+        device_type: DeviceType,
+        id: String,
+        params: HashMap<String, String>,
+    ) -> Box<dyn Device> {
         match device_type {
             DeviceType::CPU => {
-                let cores = params.get("cores").and_then(|s| s.parse().ok()).unwrap_or(4);
-                let frequency = params.get("frequency").and_then(|s| s.parse().ok()).unwrap_or(2.4);
+                let cores = params
+                    .get("cores")
+                    .and_then(|s| s.parse().ok())
+                    .unwrap_or(4);
+                let frequency = params
+                    .get("frequency")
+                    .and_then(|s| s.parse().ok())
+                    .unwrap_or(2.4);
                 Box::new(CPUDevice::new(id, cores, frequency))
             }
             DeviceType::Memory => {
-                let capacity = params.get("capacity").and_then(|s| s.parse().ok()).unwrap_or(8 * 1024 * 1024 * 1024);
+                let capacity = params
+                    .get("capacity")
+                    .and_then(|s| s.parse().ok())
+                    .unwrap_or(8 * 1024 * 1024 * 1024);
                 Box::new(MemoryDevice::new(id, capacity))
             }
             DeviceType::Disk => {
-                let capacity = params.get("capacity").and_then(|s| s.parse().ok()).unwrap_or(500 * 1024 * 1024 * 1024);
+                let capacity = params
+                    .get("capacity")
+                    .and_then(|s| s.parse().ok())
+                    .unwrap_or(500 * 1024 * 1024 * 1024);
                 Box::new(DiskDevice::new(id, capacity))
             }
             _ => {
@@ -412,18 +445,18 @@ impl SchedulingStrategy for RoundRobinStrategy {
 
         let mut index = self.current_index;
         let start_index = index;
-        
+
         loop {
             if processes[index].remaining_time > 0 {
                 return Some(index);
             }
-            
+
             index = (index + 1) % processes.len();
             if index == start_index {
                 break;
             }
         }
-        
+
         None
     }
 
@@ -458,27 +491,29 @@ impl ProcessScheduler {
 
     pub fn run_simulation(&mut self, time_steps: u32) {
         println!("开始进程调度模拟，使用策略: {}", self.strategy.get_name());
-        
+
         for _step in 0..time_steps {
             if let Some(process_index) = self.strategy.select_next_process(&self.processes) {
                 let process = &mut self.processes[process_index];
-                
+
                 if process.remaining_time > 0 {
                     let execution_time = std::cmp::min(process.remaining_time, 1);
                     process.remaining_time -= execution_time;
-                    
-                    println!("时间 {}: 执行进程 {} (剩余时间: {})", 
-                        self.current_time, process.name, process.remaining_time);
-                    
+
+                    println!(
+                        "时间 {}: 执行进程 {} (剩余时间: {})",
+                        self.current_time, process.name, process.remaining_time
+                    );
+
                     if process.remaining_time == 0 {
                         println!("进程 {} 执行完成！", process.name);
                     }
                 }
             }
-            
+
             self.current_time += 1;
         }
-        
+
         println!("调度模拟完成");
     }
 
@@ -516,7 +551,11 @@ impl CreateFileCommand {
 impl SystemCommand for CreateFileCommand {
     fn execute(&self) -> Result<String, String> {
         // 模拟使用 content，避免未读字段告警
-        println!("创建文件: {} (内容大小: {} 字节)", self.path, self.content.len());
+        println!(
+            "创建文件: {} (内容大小: {} 字节)",
+            self.path,
+            self.content.len()
+        );
         Ok(format!("文件 {} 创建成功", self.path))
     }
 
@@ -577,7 +616,7 @@ impl SystemCommandManager {
 
     pub fn execute_all(&mut self) -> Vec<Result<String, String>> {
         let mut results = Vec::new();
-        
+
         for command in &self.commands {
             match command.execute() {
                 Ok(result) => {
@@ -590,7 +629,7 @@ impl SystemCommandManager {
                 }
             }
         }
-        
+
         results
     }
 
@@ -622,12 +661,13 @@ mod tests {
     fn test_singleton_pattern() {
         let singleton = SystemResourceManagerSingleton::new();
         let manager = singleton.get_instance();
-        
+
         {
             let mut mgr = manager.lock().unwrap();
-            mgr.allocate_memory("test_memory".to_string(), 1024).unwrap();
+            mgr.allocate_memory("test_memory".to_string(), 1024)
+                .unwrap();
             mgr.create_process();
-            
+
             assert_eq!(mgr.get_memory_usage(), 1024);
             assert_eq!(mgr.get_process_count(), 1);
         }
@@ -639,11 +679,11 @@ mod tests {
         let mut params = HashMap::new();
         params.insert("cores".to_string(), "8".to_string());
         params.insert("frequency".to_string(), "3.2".to_string());
-        
+
         let device = factory.create_device(DeviceType::CPU, "cpu0".to_string(), params);
         assert_eq!(device.get_type(), DeviceType::CPU);
         assert_eq!(device.get_id(), "cpu0");
-        
+
         let mut device = device;
         device.initialize().unwrap();
         let status = device.get_status();
@@ -670,34 +710,32 @@ mod tests {
                 remaining_time: 3,
             },
         ];
-        
+
         let fcfs_strategy = FirstComeFirstServeStrategy;
         let sjf_strategy = ShortestJobFirstStrategy;
-        
+
         let next_fcfs = fcfs_strategy.select_next_process(&processes);
         let next_sjf = sjf_strategy.select_next_process(&processes);
-        
+
         assert_eq!(next_fcfs, Some(0)); // FCFS选择第一个到达的
-        assert_eq!(next_sjf, Some(1));  // SJF选择剩余时间最短的
+        assert_eq!(next_sjf, Some(1)); // SJF选择剩余时间最短的
     }
 
     #[test]
     fn test_command_pattern() {
         let mut command_manager = SystemCommandManager::new();
-        
-        let create_file_cmd = CreateFileCommand::new(
-            "/tmp/test.txt".to_string(),
-            "Hello, World!".to_string(),
-        );
-        
+
+        let create_file_cmd =
+            CreateFileCommand::new("/tmp/test.txt".to_string(), "Hello, World!".to_string());
+
         let create_dir_cmd = CreateDirectoryCommand::new("/tmp/test_dir".to_string());
-        
+
         command_manager.add_command(Box::new(create_file_cmd));
         command_manager.add_command(Box::new(create_dir_cmd));
-        
+
         let results = command_manager.execute_all();
         assert_eq!(results.len(), 2);
-        
+
         let commands = command_manager.list_commands();
         assert_eq!(commands.len(), 2);
         assert!(commands[0].contains("创建文件"));

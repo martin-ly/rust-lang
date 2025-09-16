@@ -4,7 +4,10 @@ mod run {
     pub fn main() {
         let args: Vec<String> = std::env::args().collect();
         let iface = args.get(1).cloned();
-        let cfg = ArpSniffConfig { iface_name: iface, promiscuous: true };
+        let cfg = ArpSniffConfig {
+            iface_name: iface,
+            promiscuous: true,
+        };
         match ArpSniffer::sniff_arp_sync(cfg, Some(10)) {
             Ok(records) => {
                 for r in records {
@@ -18,7 +21,7 @@ mod run {
 
 #[cfg(not(feature = "sniff"))]
 fn main() {
-    eprintln!("This example requires feature 'sniff'.\nTry: cargo run -p c10_networks --features sniff --example arp_sniff -- \"Ethernet\"");
+    eprintln!(
+        "This example requires feature 'sniff'.\nTry: cargo run -p c10_networks --features sniff --example arp_sniff -- \"Ethernet\""
+    );
 }
-
-

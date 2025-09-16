@@ -1,5 +1,5 @@
-use crate::errors::DistributedError;
 use crate::codec::BinaryCodec;
+use crate::errors::DistributedError;
 
 pub trait LogStorage<E> {
     fn append(&mut self, entry: E) -> Result<u64, DistributedError>;
@@ -22,13 +22,19 @@ pub struct InMemoryIdempotency<ID: std::hash::Hash + Eq> {
 }
 
 impl<ID: std::hash::Hash + Eq + Clone> IdempotencyStore<ID> for InMemoryIdempotency<ID> {
-    fn seen(&self, id: &ID) -> bool { self.set.contains(id) }
-    fn record(&mut self, id: ID) { self.set.insert(id); }
+    fn seen(&self, id: &ID) -> bool {
+        self.set.contains(id)
+    }
+    fn record(&mut self, id: ID) {
+        self.set.insert(id);
+    }
 }
 
 pub trait SnapshotStorage<S> {
     fn save_snapshot(&mut self, state: &S) -> Result<(), DistributedError>;
-    fn load_snapshot(&self) -> Result<Option<S>, DistributedError> where S: Clone;
+    fn load_snapshot(&self) -> Result<Option<S>, DistributedError>
+    where
+        S: Clone;
 }
 
 // ---------------- File-based persistence (minimal) ----------------
@@ -40,19 +46,33 @@ pub struct FileLogStorage<C: BinaryCodec<E>, E> {
 }
 
 impl<C: BinaryCodec<E>, E> FileLogStorage<C, E> {
-    pub fn new(path: std::path::PathBuf, codec: C) -> Self { Self { path, codec, _marker: std::marker::PhantomData } }
+    pub fn new(path: std::path::PathBuf, codec: C) -> Self {
+        Self {
+            path,
+            codec,
+            _marker: std::marker::PhantomData,
+        }
+    }
 }
 
 impl<C: BinaryCodec<E>, E> LogStorage<E> for FileLogStorage<C, E> {
     fn append(&mut self, entry: E) -> Result<u64, DistributedError> {
-        use std::io::{Write, Seek, SeekFrom};
+        use std::io::{Seek, SeekFrom, Write};
         let bytes = self.codec.encode(&entry);
-        let mut f = std::fs::OpenOptions::new().create(true).append(true).read(true).open(&self.path)
+        let mut f = std::fs::OpenOptions::new()
+            .create(true)
+            .append(true)
+            .read(true)
+            .open(&self.path)
             .map_err(|e| DistributedError::Storage(e.to_string()))?;
         let len = bytes.len() as u64;
-        f.write_all(&len.to_le_bytes()).map_err(|e| DistributedError::Storage(e.to_string()))?;
-        f.write_all(&bytes).map_err(|e| DistributedError::Storage(e.to_string()))?;
-        let pos = f.seek(SeekFrom::End(0)).map_err(|e| DistributedError::Storage(e.to_string()))?;
+        f.write_all(&len.to_le_bytes())
+            .map_err(|e| DistributedError::Storage(e.to_string()))?;
+        f.write_all(&bytes)
+            .map_err(|e| DistributedError::Storage(e.to_string()))?;
+        let pos = f
+            .seek(SeekFrom::End(0))
+            .map_err(|e| DistributedError::Storage(e.to_string()))?;
         Ok(pos)
     }
 }
@@ -64,7 +84,13 @@ pub struct FileSnapshot<C: BinaryCodec<S>, S: Clone> {
 }
 
 impl<C: BinaryCodec<S>, S: Clone> FileSnapshot<C, S> {
-    pub fn new(path: std::path::PathBuf, codec: C) -> Self { Self { path, codec, _marker: std::marker::PhantomData } }
+    pub fn new(path: std::path::PathBuf, codec: C) -> Self {
+        Self {
+            path,
+            codec,
+            _marker: std::marker::PhantomData,
+        }
+    }
 }
 
 impl<C: BinaryCodec<S>, S: Clone> SnapshotStorage<S> for FileSnapshot<C, S> {
@@ -102,9 +128,17 @@ pub struct InMemoryLogStorage<E> {
 }
 
 impl<E> InMemoryLogStorage<E> {
-    pub fn new() -> Self { Self { entries: Vec::new() } }
-    pub fn len(&self) -> usize { self.entries.len() }
-    pub fn is_empty(&self) -> bool { self.entries.is_empty() }
+    pub fn new() -> Self {
+        Self {
+            entries: Vec::new(),
+        }
+    }
+    pub fn len(&self) -> usize {
+        self.entries.len()
+    }
+    pub fn is_empty(&self) -> bool {
+        self.entries.is_empty()
+    }
 }
 
 impl<E> LogStorage<E> for InMemoryLogStorage<E> {
@@ -113,4 +147,3 @@ impl<E> LogStorage<E> for InMemoryLogStorage<E> {
         Ok(self.entries.len() as u64)
     }
 }
-

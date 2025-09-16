@@ -1,17 +1,17 @@
 //! # 性能优化 / Performance Optimizations
-//! 
+//!
 //! Rust 1.89 在性能优化方面进行了重要改进，包括更好的编译器优化、
 //! 改进的内存管理和更高效的执行。
-//! 
+//!
 //! Rust 1.89 has made important improvements in performance optimization, including
 //! better compiler optimizations, improved memory management, and more efficient execution.
 
-use std::time::{Duration, Instant};
-use std::sync::Arc;
 use std::collections::HashMap;
+use std::sync::Arc;
+use std::time::{Duration, Instant};
 
 /// 性能分析器 / Performance Profiler
-/// 
+///
 /// 提供性能分析和优化功能。
 /// Provides performance analysis and optimization functionality.
 pub struct PerformanceProfiler {
@@ -60,7 +60,7 @@ impl PerformanceProfiler {
             config,
         }
     }
-    
+
     /// 开始性能测量 / Start performance measurement
     pub fn start_measurement(&self, name: String) -> PerformanceTimer {
         PerformanceTimer {
@@ -70,38 +70,38 @@ impl PerformanceProfiler {
             config: self.config.clone(),
         }
     }
-    
+
     /// 记录性能测量 / Record performance measurement
     pub fn record_measurement(&self, measurement: PerformanceMeasurement) {
         let mut measurements = self.measurements.lock().unwrap();
-        
+
         if measurements.len() >= self.config.max_measurements {
             measurements.remove(0);
         }
-        
+
         measurements.push(measurement);
     }
-    
+
     /// 获取性能统计 / Get performance statistics
     pub fn get_statistics(&self) -> PerformanceStatistics {
         let measurements = self.measurements.lock().unwrap();
-        
+
         if measurements.is_empty() {
             return PerformanceStatistics::default();
         }
-        
+
         let total_duration: Duration = measurements.iter().map(|m| m.duration).sum();
         let avg_duration = total_duration / measurements.len() as u32;
-        
+
         let min_duration = measurements.iter().map(|m| m.duration).min().unwrap();
         let max_duration = measurements.iter().map(|m| m.duration).max().unwrap();
-        
+
         let total_memory: usize = measurements.iter().map(|m| m.memory_usage).sum();
         let avg_memory = total_memory / measurements.len();
-        
+
         let total_cpu: f64 = measurements.iter().map(|m| m.cpu_usage).sum();
         let avg_cpu = total_cpu / measurements.len() as f64;
-        
+
         PerformanceStatistics {
             total_measurements: measurements.len(),
             total_duration,
@@ -114,7 +114,7 @@ impl PerformanceProfiler {
             average_cpu_usage: avg_cpu,
         }
     }
-    
+
     /// 清除测量数据 / Clear measurement data
     pub fn clear_measurements(&self) {
         let mut measurements = self.measurements.lock().unwrap();
@@ -136,7 +136,7 @@ impl PerformanceTimer {
         let duration = self.start_time.elapsed();
         let memory_usage = self.get_memory_usage();
         let cpu_usage = self.get_cpu_usage();
-        
+
         let measurement = PerformanceMeasurement {
             name: self.name,
             duration,
@@ -145,11 +145,11 @@ impl PerformanceTimer {
             timestamp: self.start_time,
             metadata: HashMap::new(),
         };
-        
+
         self.profiler.lock().unwrap().push(measurement.clone());
         measurement
     }
-    
+
     /// 获取内存使用量 / Get memory usage
     fn get_memory_usage(&self) -> usize {
         if self.config.enable_memory_profiling {
@@ -159,7 +159,7 @@ impl PerformanceTimer {
             0
         }
     }
-    
+
     /// 获取 CPU 使用率 / Get CPU usage
     fn get_cpu_usage(&self) -> f64 {
         if self.config.enable_cpu_profiling {
@@ -262,8 +262,8 @@ impl Default for PerformanceTargets {
         Self {
             max_duration: Duration::from_millis(100),
             max_memory_usage: 1024 * 1024, // 1MB
-            max_cpu_usage: 80.0, // 80%
-            target_throughput: 1000.0, // 1000 operations per second
+            max_cpu_usage: 80.0,           // 80%
+            target_throughput: 1000.0,     // 1000 operations per second
         }
     }
 }
@@ -276,13 +276,13 @@ impl PerformanceOptimizer {
             performance_targets: targets,
         }
     }
-    
+
     /// 添加优化规则 / Add optimization rule
     pub fn add_rule(&mut self, rule: OptimizationRule) {
         self.optimization_rules.push(rule);
         self.optimization_rules.sort_by_key(|r| r.priority);
     }
-    
+
     /// 分析性能并应用优化 / Analyze performance and apply optimizations
     pub async fn analyze_and_optimize(
         &self,
@@ -290,7 +290,7 @@ impl PerformanceOptimizer {
     ) -> Result<OptimizationResult, OptimizationError> {
         let statistics = profiler.get_statistics();
         let mut applied_optimizations = Vec::new();
-        
+
         for rule in &self.optimization_rules {
             if self.should_apply_rule(rule, &statistics) {
                 match self.apply_optimization(rule).await {
@@ -303,15 +303,19 @@ impl PerformanceOptimizer {
                 }
             }
         }
-        
+
         Ok(OptimizationResult {
             applied_optimizations,
             performance_improvement: self.calculate_improvement(&statistics),
         })
     }
-    
+
     /// 检查是否应该应用规则 / Check if rule should be applied
-    fn should_apply_rule(&self, rule: &OptimizationRule, statistics: &PerformanceStatistics) -> bool {
+    fn should_apply_rule(
+        &self,
+        rule: &OptimizationRule,
+        statistics: &PerformanceStatistics,
+    ) -> bool {
         match &rule.condition {
             OptimizationCondition::DurationExceeds(threshold) => {
                 statistics.average_duration > *threshold
@@ -328,7 +332,7 @@ impl PerformanceOptimizer {
             }
         }
     }
-    
+
     /// 应用优化 / Apply optimization
     async fn apply_optimization(&self, rule: &OptimizationRule) -> Result<(), OptimizationError> {
         match &rule.action {
@@ -348,27 +352,29 @@ impl PerformanceOptimizer {
                 // 实现并行执行 / Implement parallel execution
                 Ok(())
             }
-            OptimizationAction::Custom(action) => {
-                action()
-            }
+            OptimizationAction::Custom(action) => action(),
         }
     }
-    
+
     /// 计算性能改进 / Calculate performance improvement
     fn calculate_improvement(&self, statistics: &PerformanceStatistics) -> f64 {
         // 简化的性能改进计算 / Simplified performance improvement calculation
-        let duration_improvement = if statistics.average_duration > self.performance_targets.max_duration {
-            (statistics.average_duration.as_nanos() as f64) / (self.performance_targets.max_duration.as_nanos() as f64)
-        } else {
-            1.0
-        };
-        
-        let memory_improvement = if statistics.average_memory_usage > self.performance_targets.max_memory_usage {
-            (statistics.average_memory_usage as f64) / (self.performance_targets.max_memory_usage as f64)
-        } else {
-            1.0
-        };
-        
+        let duration_improvement =
+            if statistics.average_duration > self.performance_targets.max_duration {
+                (statistics.average_duration.as_nanos() as f64)
+                    / (self.performance_targets.max_duration.as_nanos() as f64)
+            } else {
+                1.0
+            };
+
+        let memory_improvement =
+            if statistics.average_memory_usage > self.performance_targets.max_memory_usage {
+                (statistics.average_memory_usage as f64)
+                    / (self.performance_targets.max_memory_usage as f64)
+            } else {
+                1.0
+            };
+
         (duration_improvement + memory_improvement) / 2.0
     }
 }
@@ -385,10 +391,10 @@ pub struct OptimizationResult {
 pub enum OptimizationError {
     #[error("优化失败 / Optimization failed: {0}")]
     OptimizationFailed(String),
-    
+
     #[error("规则应用失败 / Rule application failed: {0}")]
     RuleApplicationFailed(String),
-    
+
     #[error("性能目标未达成 / Performance target not met: {0}")]
     PerformanceTargetNotMet(String),
 }
@@ -396,7 +402,7 @@ pub enum OptimizationError {
 /// 性能工具函数 / Performance Utility Functions
 pub mod utils {
     use super::*;
-    
+
     /// 测量函数执行时间 / Measure function execution time
     pub fn measure_execution_time<F, R>(f: F) -> (R, Duration)
     where
@@ -407,7 +413,7 @@ pub mod utils {
         let duration = start.elapsed();
         (result, duration)
     }
-    
+
     /// 测量异步函数执行时间 / Measure async function execution time
     pub async fn measure_async_execution_time<F, R>(f: F) -> (R, Duration)
     where
@@ -418,19 +424,15 @@ pub mod utils {
         let duration = start.elapsed();
         (result, duration)
     }
-    
+
     /// 获取当前内存使用量 / Get current memory usage
     pub fn get_current_memory_usage() -> usize {
         // 简化的内存使用量获取 / Simplified memory usage retrieval
         std::mem::size_of::<usize>()
     }
-    
+
     /// 检查性能是否满足目标 / Check if performance meets target
-    pub fn check_performance_target(
-        duration: Duration,
-        target: Duration,
-        tolerance: f64,
-    ) -> bool {
+    pub fn check_performance_target(duration: Duration, target: Duration, tolerance: f64) -> bool {
         let ratio = duration.as_nanos() as f64 / target.as_nanos() as f64;
         ratio <= (1.0 + tolerance)
     }
@@ -439,52 +441,52 @@ pub mod utils {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_performance_profiler() {
         let config = ProfilerConfig::default();
         let profiler = PerformanceProfiler::new(config);
-        
+
         let timer = profiler.start_measurement("test_operation".to_string());
         std::thread::sleep(Duration::from_millis(10));
         let measurement = timer.end();
-        
+
         assert_eq!(measurement.name, "test_operation");
         assert!(measurement.duration >= Duration::from_millis(10));
-        
+
         let statistics = profiler.get_statistics();
         assert_eq!(statistics.total_measurements, 1);
     }
-    
+
     #[test]
     fn test_performance_optimizer() {
         let targets = PerformanceTargets::default();
         let mut optimizer = PerformanceOptimizer::new(targets);
-        
+
         let rule = OptimizationRule {
             name: "test_rule".to_string(),
             condition: OptimizationCondition::DurationExceeds(Duration::from_millis(50)),
             action: OptimizationAction::OptimizeAlgorithm,
             priority: 1,
         };
-        
+
         optimizer.add_rule(rule);
         assert_eq!(optimizer.optimization_rules.len(), 1);
     }
-    
+
     #[test]
     fn test_performance_utils() {
         let (result, duration) = utils::measure_execution_time(|| {
             std::thread::sleep(Duration::from_millis(5));
             42
         });
-        
+
         assert_eq!(result, 42);
         assert!(duration >= Duration::from_millis(5));
-        
+
         let memory_usage = utils::get_current_memory_usage();
         assert!(memory_usage > 0);
-        
+
         let target = Duration::from_millis(10);
         let actual = Duration::from_millis(8);
         assert!(utils::check_performance_target(actual, target, 0.2));

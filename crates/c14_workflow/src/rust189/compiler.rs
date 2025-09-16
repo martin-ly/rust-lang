@@ -1,8 +1,8 @@
 //! # 编译器改进 / Compiler Improvements
-//! 
+//!
 //! Rust 1.89 在编译器方面进行了重要改进，包括更好的编译优化、
 //! 改进的错误报告和更高效的编译过程。
-//! 
+//!
 //! Rust 1.89 has made important improvements in the compiler, including
 //! better compilation optimizations, improved error reporting, and more efficient compilation process.
 
@@ -11,7 +11,7 @@ use std::path::Path;
 use std::time::{Duration, Instant};
 
 /// 编译器配置 / Compiler Configuration
-/// 
+///
 /// 提供编译器配置和优化选项。
 /// Provides compiler configuration and optimization options.
 pub struct CompilerConfig {
@@ -259,37 +259,48 @@ impl Compiler {
             performance_monitor: CompilationPerformanceMonitor::new(),
         }
     }
-    
+
     /// 编译项目 / Compile project
-    pub async fn compile_project(&mut self, project_path: &Path) -> Result<CompilationResult, CompilationError> {
+    pub async fn compile_project(
+        &mut self,
+        project_path: &Path,
+    ) -> Result<CompilationResult, CompilationError> {
         let start_time = Instant::now();
-        
+
         // 检查缓存 / Check cache
         let cache_key = self.generate_cache_key(project_path);
         if let Some(cached_result) = self.compilation_cache.get(&cache_key) {
             self.performance_monitor.record_cache_hit();
             return Ok(cached_result);
         }
-        
+
         // 执行编译 / Execute compilation
         let result = self.execute_compilation(project_path).await?;
-        
+
         // 记录性能指标 / Record performance metrics
         let compilation_time = start_time.elapsed();
-        self.performance_monitor.record_compilation_time(compilation_time);
-        
+        self.performance_monitor
+            .record_compilation_time(compilation_time);
+
         // 缓存结果 / Cache result
         self.compilation_cache.insert(cache_key, result.clone());
-        
+
         Ok(result)
     }
-    
+
     /// 执行编译 / Execute compilation
-    async fn execute_compilation(&self, project_path: &Path) -> Result<CompilationResult, CompilationError> {
+    async fn execute_compilation(
+        &self,
+        project_path: &Path,
+    ) -> Result<CompilationResult, CompilationError> {
         // 简化的编译执行 / Simplified compilation execution
         let result = CompilationResult {
             success: true,
-            output_path: Some(format!("{}/target/debug/{}", project_path.display(), "main")),
+            output_path: Some(format!(
+                "{}/target/debug/{}",
+                project_path.display(),
+                "main"
+            )),
             compilation_time: Duration::from_millis(1000),
             warnings: Vec::new(),
             errors: Vec::new(),
@@ -306,20 +317,25 @@ impl Compiler {
                 optimization_applied: vec!["basic_optimization".to_string()],
             },
         };
-        
+
         Ok(result)
     }
-    
+
     /// 生成缓存键 / Generate cache key
     fn generate_cache_key(&self, project_path: &Path) -> String {
-        format!("{}:{:?}:{:?}", project_path.display(), self.config.optimization_level, self.config.target_architecture)
+        format!(
+            "{}:{:?}:{:?}",
+            project_path.display(),
+            self.config.optimization_level,
+            self.config.target_architecture
+        )
     }
-    
+
     /// 获取编译统计 / Get compilation statistics
     pub fn get_compilation_statistics(&self) -> CompilationStatistics {
         self.performance_monitor.get_statistics()
     }
-    
+
     /// 清除缓存 / Clear cache
     pub fn clear_cache(&mut self) {
         self.compilation_cache.clear();
@@ -335,7 +351,7 @@ impl CompilationCache {
             cache_hit_rate: 0.0,
         }
     }
-    
+
     /// 获取缓存条目 / Get cache entry
     pub fn get(&self, key: &str) -> Option<CompilationResult> {
         if let Some(entry) = self.cache_entries.get(key) {
@@ -344,37 +360,40 @@ impl CompilationCache {
             None
         }
     }
-    
+
     /// 插入缓存条目 / Insert cache entry
     pub fn insert(&mut self, key: String, result: CompilationResult) {
         if self.cache_entries.len() >= self.max_cache_size {
             self.evict_oldest_entry();
         }
-        
+
         let entry = CacheEntry {
             key: key.clone(),
             result,
             timestamp: Instant::now(),
             access_count: 0,
         };
-        
+
         self.cache_entries.insert(key, entry);
     }
-    
+
     /// 驱逐最旧的条目 / Evict oldest entry
     fn evict_oldest_entry(&mut self) {
-        if let Some(oldest_key) = self.cache_entries.iter()
+        if let Some(oldest_key) = self
+            .cache_entries
+            .iter()
             .min_by_key(|(_, entry)| entry.timestamp)
-            .map(|(key, _)| key.clone()) {
+            .map(|(key, _)| key.clone())
+        {
             self.cache_entries.remove(&oldest_key);
         }
     }
-    
+
     /// 清除缓存 / Clear cache
     pub fn clear(&mut self) {
         self.cache_entries.clear();
     }
-    
+
     /// 获取缓存统计 / Get cache statistics
     pub fn get_statistics(&self) -> CacheStatistics {
         CacheStatistics {
@@ -395,69 +414,87 @@ impl ErrorReporter {
             verbose_output: false,
         }
     }
-    
+
     /// 报告错误 / Report error
     pub async fn report_error(&self, error: &CompilationError) -> Result<(), ReportingError> {
         let formatted_error = self.format_error(error);
         self.output_error(formatted_error).await
     }
-    
+
     /// 报告警告 / Report warning
     pub async fn report_warning(&self, warning: &CompilationWarning) -> Result<(), ReportingError> {
         let formatted_warning = self.format_warning(warning);
         self.output_warning(formatted_warning).await
     }
-    
+
     /// 格式化错误 / Format error
     fn format_error(&self, error: &CompilationError) -> String {
         match self.error_format {
             ErrorFormat::Text => {
-                format!("Error: {} at {}:{}:{}", error.message, error.file_path, error.line_number, error.column_number)
+                format!(
+                    "Error: {} at {}:{}:{}",
+                    error.message, error.file_path, error.line_number, error.column_number
+                )
             }
-            ErrorFormat::Json => {
-                serde_json::json!({
-                    "type": "error",
-                    "message": error.message,
-                    "file": error.file_path,
-                    "line": error.line_number,
-                    "column": error.column_number,
-                    "error_type": error.error_type
-                }).to_string()
-            }
+            ErrorFormat::Json => serde_json::json!({
+                "type": "error",
+                "message": error.message,
+                "file": error.file_path,
+                "line": error.line_number,
+                "column": error.column_number,
+                "error_type": error.error_type
+            })
+            .to_string(),
             ErrorFormat::Structured => {
-                format!("ERROR: {} | {}:{}:{} | {:?}", error.message, error.file_path, error.line_number, error.column_number, error.error_type)
+                format!(
+                    "ERROR: {} | {}:{}:{} | {:?}",
+                    error.message,
+                    error.file_path,
+                    error.line_number,
+                    error.column_number,
+                    error.error_type
+                )
             }
             ErrorFormat::Custom(_) => {
                 format!("Custom error: {}", error.message)
             }
         }
     }
-    
+
     /// 格式化警告 / Format warning
     fn format_warning(&self, warning: &CompilationWarning) -> String {
         match self.error_format {
             ErrorFormat::Text => {
-                format!("Warning: {} at {}:{}:{}", warning.message, warning.file_path, warning.line_number, warning.column_number)
+                format!(
+                    "Warning: {} at {}:{}:{}",
+                    warning.message, warning.file_path, warning.line_number, warning.column_number
+                )
             }
-            ErrorFormat::Json => {
-                serde_json::json!({
-                    "type": "warning",
-                    "message": warning.message,
-                    "file": warning.file_path,
-                    "line": warning.line_number,
-                    "column": warning.column_number,
-                    "warning_type": warning.warning_type
-                }).to_string()
-            }
+            ErrorFormat::Json => serde_json::json!({
+                "type": "warning",
+                "message": warning.message,
+                "file": warning.file_path,
+                "line": warning.line_number,
+                "column": warning.column_number,
+                "warning_type": warning.warning_type
+            })
+            .to_string(),
             ErrorFormat::Structured => {
-                format!("WARNING: {} | {}:{}:{} | {:?}", warning.message, warning.file_path, warning.line_number, warning.column_number, warning.warning_type)
+                format!(
+                    "WARNING: {} | {}:{}:{} | {:?}",
+                    warning.message,
+                    warning.file_path,
+                    warning.line_number,
+                    warning.column_number,
+                    warning.warning_type
+                )
             }
             ErrorFormat::Custom(_) => {
                 format!("Custom warning: {}", warning.message)
             }
         }
     }
-    
+
     /// 输出错误 / Output error
     async fn output_error(&self, formatted_error: String) -> Result<(), ReportingError> {
         match &self.output_destination {
@@ -466,7 +503,8 @@ impl ErrorReporter {
                 Ok(())
             }
             OutputDestination::File(path) => {
-                tokio::fs::write(path, formatted_error).await
+                tokio::fs::write(path, formatted_error)
+                    .await
                     .map_err(|e| ReportingError::OutputFailed(e.to_string()))?;
                 Ok(())
             }
@@ -480,7 +518,7 @@ impl ErrorReporter {
             }
         }
     }
-    
+
     /// 输出警告 / Output warning
     async fn output_warning(&self, formatted_warning: String) -> Result<(), ReportingError> {
         match &self.output_destination {
@@ -489,7 +527,8 @@ impl ErrorReporter {
                 Ok(())
             }
             OutputDestination::File(path) => {
-                tokio::fs::write(path, formatted_warning).await
+                tokio::fs::write(path, formatted_warning)
+                    .await
                     .map_err(|e| ReportingError::OutputFailed(e.to_string()))?;
                 Ok(())
             }
@@ -515,22 +554,22 @@ impl CompilationPerformanceMonitor {
             cpu_usage: Vec::new(),
         }
     }
-    
+
     /// 记录编译时间 / Record compilation time
     pub fn record_compilation_time(&mut self, time: Duration) {
         self.compilation_times.push(time);
     }
-    
+
     /// 记录缓存命中 / Record cache hit
     pub fn record_cache_hit(&mut self) {
         self.cache_hit_rates.push(1.0);
     }
-    
+
     /// 记录缓存未命中 / Record cache miss
     pub fn record_cache_miss(&mut self) {
         self.cache_hit_rates.push(0.0);
     }
-    
+
     /// 获取统计信息 / Get statistics
     pub fn get_statistics(&self) -> CompilationStatistics {
         CompilationStatistics {
@@ -541,7 +580,7 @@ impl CompilationPerformanceMonitor {
             average_cpu_usage: self.calculate_average_cpu_usage(),
         }
     }
-    
+
     /// 计算平均编译时间 / Calculate average compilation time
     fn calculate_average_compilation_time(&self) -> Duration {
         if self.compilation_times.is_empty() {
@@ -551,7 +590,7 @@ impl CompilationPerformanceMonitor {
             total / self.compilation_times.len() as u32
         }
     }
-    
+
     /// 计算缓存命中率 / Calculate cache hit rate
     fn calculate_cache_hit_rate(&self) -> f64 {
         if self.cache_hit_rates.is_empty() {
@@ -560,7 +599,7 @@ impl CompilationPerformanceMonitor {
             self.cache_hit_rates.iter().sum::<f64>() / self.cache_hit_rates.len() as f64
         }
     }
-    
+
     /// 计算平均 CPU 使用率 / Calculate average CPU usage
     fn calculate_average_cpu_usage(&self) -> f64 {
         if self.cpu_usage.is_empty() {
@@ -597,7 +636,7 @@ pub struct CacheStatistics {
 pub enum ReportingError {
     #[error("输出失败 / Output failed: {0}")]
     OutputFailed(String),
-    
+
     #[error("格式化失败 / Formatting failed: {0}")]
     FormattingFailed(String),
 }
@@ -605,7 +644,7 @@ pub enum ReportingError {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_compiler_config() {
         let config = CompilerConfig::default();
@@ -613,11 +652,11 @@ mod tests {
         assert_eq!(config.target_architecture, TargetArchitecture::X86_64);
         assert_eq!(config.target_os, TargetOS::Linux);
     }
-    
+
     #[test]
     fn test_compilation_cache() {
         let mut cache = CompilationCache::new();
-        
+
         let result = CompilationResult {
             success: true,
             output_path: Some("test_output".to_string()),
@@ -637,18 +676,18 @@ mod tests {
                 optimization_applied: Vec::new(),
             },
         };
-        
+
         cache.insert("test_key".to_string(), result);
-        
+
         let cached_result = cache.get("test_key");
         assert!(cached_result.is_some());
         assert!(cached_result.unwrap().success);
     }
-    
+
     #[test]
     fn test_error_reporter() {
         let reporter = ErrorReporter::new();
-        
+
         let error = CompilationError {
             message: "Test error".to_string(),
             file_path: "test.rs".to_string(),
@@ -657,20 +696,20 @@ mod tests {
             error_type: ErrorType::SyntaxError,
             suggestion: None,
         };
-        
+
         let formatted = reporter.format_error(&error);
         assert!(formatted.contains("Test error"));
         assert!(formatted.contains("test.rs"));
     }
-    
+
     #[test]
     fn test_performance_monitor() {
         let mut monitor = CompilationPerformanceMonitor::new();
-        
+
         monitor.record_compilation_time(Duration::from_millis(1000));
         monitor.record_cache_hit();
         monitor.record_cache_miss();
-        
+
         let stats = monitor.get_statistics();
         assert_eq!(stats.total_compilations, 1);
         assert_eq!(stats.average_compilation_time, Duration::from_millis(1000));

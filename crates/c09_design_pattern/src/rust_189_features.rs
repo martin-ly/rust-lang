@@ -1,10 +1,10 @@
 //! Rust 1.89 新特性演示模块
-//! 
+//!
 //! 本模块展示了如何在设计模式中充分利用 Rust 1.89 的新特性
 
 use std::cell::Cell;
-use std::sync::OnceLock;
 use std::ptr;
+use std::sync::OnceLock;
 
 /// 演示 Cell::update 方法的使用
 /// 这是 Rust 1.89 中新增的原子更新方法
@@ -100,9 +100,7 @@ pub struct ArrayConversionDemo {
 
 impl ArrayConversionDemo {
     pub fn new() -> Self {
-        Self {
-            data: Vec::new(),
-        }
+        Self { data: Vec::new() }
     }
 
     /// 从固定大小数组创建
@@ -237,7 +235,7 @@ pub fn demonstrate_rust_189_features() {
     let cell_demo = CellUpdateDemo::new();
     let new_value = cell_demo.increment_counter();
     println!("更新后的计数器值: {}", new_value);
-    
+
     cell_demo.set_data("Hello, Rust 1.89!".to_string());
     println!("设置的数据: {:?}", cell_demo.get_data());
 
@@ -246,7 +244,7 @@ pub fn demonstrate_rust_189_features() {
     let mut ptr_demo = PointerDefaultDemo::new(42);
     println!("指针 ID: {}", ptr_demo.get_id());
     println!("初始指针值: {:?}", ptr_demo.get_pointer());
-    
+
     ptr_demo.set_pointer(100);
     println!("设置后的指针值: {:?}", ptr_demo.get_pointer());
 
@@ -255,10 +253,10 @@ pub fn demonstrate_rust_189_features() {
     let array = [1, 2, 3, 4, 5];
     let conversion_demo = ArrayConversionDemo::from_array(array);
     println!("从数组创建的数据: {:?}", conversion_demo.get_data());
-    
+
     let boxed = conversion_demo.to_boxed_slice();
     println!("转换为 Box<[T]>: {:?}", boxed);
-    
+
     let back_to_demo = ArrayConversionDemo::from_boxed_slice(boxed);
     println!("从 Box<[T]> 转换回: {:?}", back_to_demo.get_data());
 
@@ -266,23 +264,21 @@ pub fn demonstrate_rust_189_features() {
     println!("\n4. 高级单例演示:");
     let singleton = AdvancedSingleton::new();
     singleton.set_metadata("单例元数据".to_string());
-    
-    let instance = singleton.get_or_init(|| {
-        "单例实例".to_string()
-    });
+
+    let instance = singleton.get_or_init(|| "单例实例".to_string());
     println!("单例实例: {}", instance);
     println!("单例元数据: {:?}", singleton.get_metadata());
 
     // 5. 网络套接字演示
     println!("\n5. 网络套接字增强演示:");
     let socket_demo = SocketDemo::new();
-    
+
     #[cfg(unix)]
     socket_demo.demonstrate_as_fd();
-    
+
     #[cfg(windows)]
     socket_demo.demonstrate_as_handle();
-    
+
     #[cfg(not(any(unix, windows)))]
     socket_demo.demonstrate_generic();
 
@@ -299,7 +295,7 @@ mod tests {
         let value = demo.increment_counter();
         assert_eq!(value, 1);
         assert_eq!(demo.get_counter(), 1);
-        
+
         demo.set_data("test".to_string());
         assert_eq!(demo.get_data(), Some("test".to_string()));
     }
@@ -309,7 +305,7 @@ mod tests {
         let mut demo = PointerDefaultDemo::new(123);
         assert_eq!(demo.get_id(), 123);
         assert_eq!(demo.get_pointer(), None);
-        
+
         demo.set_pointer(456);
         assert_eq!(demo.get_pointer(), Some(456));
     }
@@ -319,7 +315,7 @@ mod tests {
         let array = [1, 2, 3];
         let demo = ArrayConversionDemo::from_array(array);
         assert_eq!(demo.get_data(), &[1, 2, 3]);
-        
+
         let boxed = demo.to_boxed_slice();
         let back_demo = ArrayConversionDemo::from_boxed_slice(boxed);
         assert_eq!(back_demo.get_data(), &[1, 2, 3]);
@@ -329,7 +325,7 @@ mod tests {
     fn test_advanced_singleton() {
         let singleton = AdvancedSingleton::new();
         singleton.set_metadata("test metadata".to_string());
-        
+
         let instance = singleton.get_or_init(|| "test instance".to_string());
         assert_eq!(instance, "test instance");
         assert_eq!(singleton.get_metadata(), Some("test metadata".to_string()));

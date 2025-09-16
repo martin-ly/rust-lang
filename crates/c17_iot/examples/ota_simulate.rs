@@ -19,5 +19,3 @@ fn main() -> anyhow::Result<()> {
     println!("after active={}", active);
     Ok(())
 }
-
-

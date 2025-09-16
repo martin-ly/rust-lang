@@ -52,15 +52,15 @@ impl TcpSocket {
     /// 作为客户端连接到服务器
     pub async fn connect(&mut self) -> NetworkResult<()> {
         let stream = TcpStream::connect(self.config.address).await?;
-        
+
         if self.config.tcp_nodelay {
             stream.set_nodelay(true)?;
         }
-        
+
         self.local_addr = Some(stream.local_addr()?);
         self.peer_addr = Some(stream.peer_addr()?);
         self.stream = Some(stream);
-        
+
         Ok(())
     }
 
@@ -68,12 +68,10 @@ impl TcpSocket {
     pub async fn read(&mut self, buffer: &mut [u8]) -> NetworkResult<usize> {
         if let Some(ref mut stream) = self.stream {
             match self.config.timeout {
-                Some(timeout_duration) => {
-                    timeout(timeout_duration, stream.read(buffer))
-                        .await
-                        .map_err(|_| NetworkError::Timeout(timeout_duration))
-                        .and_then(|result| result.map_err(Into::into))
-                }
+                Some(timeout_duration) => timeout(timeout_duration, stream.read(buffer))
+                    .await
+                    .map_err(|_| NetworkError::Timeout(timeout_duration))
+                    .and_then(|result| result.map_err(Into::into)),
                 None => stream.read(buffer).await.map_err(Into::into),
             }
         } else {
@@ -85,12 +83,10 @@ impl TcpSocket {
     pub async fn write(&mut self, data: &[u8]) -> NetworkResult<usize> {
         if let Some(ref mut stream) = self.stream {
             match self.config.timeout {
-                Some(timeout_duration) => {
-                    timeout(timeout_duration, stream.write(data))
-                        .await
-                        .map_err(|_| NetworkError::Timeout(timeout_duration))
-                        .and_then(|result| result.map_err(Into::into))
-                }
+                Some(timeout_duration) => timeout(timeout_duration, stream.write(data))
+                    .await
+                    .map_err(|_| NetworkError::Timeout(timeout_duration))
+                    .and_then(|result| result.map_err(Into::into)),
                 None => stream.write(data).await.map_err(Into::into),
             }
         } else {
@@ -131,14 +127,14 @@ impl TcpListenerWrapper {
     pub async fn accept(&self) -> NetworkResult<(TcpSocket, SocketAddr)> {
         let (stream, peer_addr) = self.listener.accept().await?;
         let local_addr = stream.local_addr()?;
-        
+
         let socket = TcpSocket {
             stream: Some(stream),
             config: self.config.clone(),
             local_addr: Some(local_addr),
             peer_addr: Some(peer_addr),
         };
-        
+
         Ok((socket, peer_addr))
     }
 

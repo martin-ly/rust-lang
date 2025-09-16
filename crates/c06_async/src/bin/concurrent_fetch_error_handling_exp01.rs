@@ -1,7 +1,7 @@
+use c06_async::utils::circuit_breaker::CircuitBreaker;
+use c06_async::utils::{retry_with_backoff, with_timeout};
 use futures::stream::{self, StreamExt};
 use std::time::Instant;
-use c06_async::utils::{retry_with_backoff, with_timeout};
-use c06_async::utils::circuit_breaker::CircuitBreaker;
 
 #[tokio::main(flavor = "multi_thread", worker_threads = 2)]
 async fn main() {
@@ -27,7 +27,9 @@ async fn main() {
                         let r = c.get(&u).send().await.map_err(|e| anyhow::anyhow!(e))?;
                         let status = r.status();
                         let len = r.bytes().await.map_err(|e| anyhow::anyhow!(e))?.len();
-                        if !status.is_success() { return Err(anyhow::anyhow!("status {:?}", status)); }
+                        if !status.is_success() {
+                            return Err(anyhow::anyhow!("status {:?}", status));
+                        }
                         Ok::<_, anyhow::Error>((status, len))
                     });
                     match with_timeout(std::time::Duration::from_millis(500), fut).await {
@@ -48,7 +50,10 @@ async fn main() {
     let mut latencies = Vec::new();
     for r in results {
         match r {
-            Ok((status, len, ms)) => { println!("ok {status} len={len} {ms}ms"); latencies.push(ms); }
+            Ok((status, len, ms)) => {
+                println!("ok {status} len={len} {ms}ms");
+                latencies.push(ms);
+            }
             Err(e) => println!("err {e}"),
         }
     }
@@ -60,5 +65,3 @@ async fn main() {
         println!("p50={}ms p95={}ms (n={})", p50, p95, latencies.len());
     }
 }
-
-

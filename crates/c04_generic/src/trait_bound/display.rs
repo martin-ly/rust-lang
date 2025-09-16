@@ -88,19 +88,19 @@ fn main() {
 ```rust
 fn main() {
     let point = Point { x: 10, y: 20 };
-    
+
     // 基本输出
     println!("{}", point);
-    
+
     // 宽度控制
     println!("{:10}", point);
-    
+
     // 左对齐
     println!("{:<10}", point);
-    
+
     // 右对齐
     println!("{:>10}", point);
-    
+
     // 居中对齐
     println!("{:^10}", point);
 }
@@ -156,10 +156,10 @@ fn process_point(p: Point) -> Result<(), String> {
 impl std::fmt::Display for Config {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         if self.debug {
-            write!(f, "Config(debug: true, timeout: {}, retries: {})", 
+            write!(f, "Config(debug: true, timeout: {}, retries: {})",
                    self.timeout, self.retries)
         } else {
-            write!(f, "Config(timeout: {}, retries: {})", 
+            write!(f, "Config(timeout: {}, retries: {})",
                    self.timeout, self.retries)
         }
     }
@@ -213,8 +213,11 @@ pub struct DisplayExample {
 
 impl std::fmt::Display for DisplayExample {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{} (value: {}, active: {})", 
-               self.name, self.value, self.active)
+        write!(
+            f,
+            "{} (value: {}, active: {})",
+            self.name, self.value, self.active
+        )
     }
 }
 
@@ -275,36 +278,39 @@ pub fn demonstrate_display() {
         value: 42,
         active: true,
     };
-    
+
     println!("Example: {}", example);
-    
+
     // 格式化选项
     println!("Example: {:20}", example);
     println!("Example: {:<20}", example);
     println!("Example: {:>20}", example);
     println!("Example: {:^20}", example);
-    
+
     // 泛型容器显示
     let container = DisplayContainer {
         value: 100,
         description: String::from("Number container"),
     };
-    
+
     println!("Container: {}", container);
-    
+
     // 状态显示
     let status = DisplayStatus::Working { progress: 0.75 };
     println!("Status: {}", status);
-    
+
     let error_status = DisplayStatus::Error {
         message: String::from("Something went wrong"),
     };
     println!("Error status: {}", error_status);
-    
+
     // 几何点显示
-    let point = Point { x: std::f64::consts::PI, y: std::f64::consts::E };
+    let point = Point {
+        x: std::f64::consts::PI,
+        y: std::f64::consts::E,
+    };
     println!("Point: {}", point);
-    
+
     // 错误处理示例
     let result = process_display_example(example);
     match result {
@@ -325,7 +331,7 @@ fn process_display_example(example: DisplayExample) -> Result<(), String> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_display_example() {
         let example = DisplayExample {
@@ -333,20 +339,20 @@ mod tests {
             value: 100,
             active: false,
         };
-        
+
         let display_str = format!("{}", example);
         assert!(display_str.contains("Test"));
         assert!(display_str.contains("100"));
         assert!(display_str.contains("false"));
     }
-    
+
     #[test]
     fn test_point_display() {
         let point = Point { x: 1.5, y: 2.5 };
         let display_str = format!("{}", point);
         assert_eq!(display_str, "(1.50, 2.50)");
     }
-    
+
     #[test]
     fn test_status_display() {
         let status = DisplayStatus::Working { progress: 0.5 };

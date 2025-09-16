@@ -18,10 +18,10 @@ pub use windows_fork::WindowsFork;
 pub trait Fork {
     /// 分叉当前进程
     fn fork(&self) -> crate::error::Result<ForkResult>;
-    
+
     /// 检查是否为子进程
     fn is_child(&self) -> bool;
-    
+
     /// 检查是否为父进程
     fn is_parent(&self) -> bool;
 }
@@ -42,12 +42,12 @@ impl ForkResult {
     pub fn is_parent(&self) -> bool {
         matches!(self, ForkResult::Parent)
     }
-    
+
     /// 检查是否为子进程
     pub fn is_child(&self) -> bool {
         matches!(self, ForkResult::Child)
     }
-    
+
     /// 检查是否失败
     pub fn is_failed(&self) -> bool {
         matches!(self, ForkResult::Failed)

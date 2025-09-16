@@ -22,7 +22,7 @@ impl Image {
             data: vec![0.0; width * height * channels],
         }
     }
-    
+
     /// 从数据创建图像
     pub fn from_data(width: usize, height: usize, channels: usize, data: Vec<f64>) -> Self {
         Self {
@@ -32,7 +32,7 @@ impl Image {
             data,
         }
     }
-    
+
     /// 获取像素值
     pub fn get_pixel(&self, x: usize, y: usize, channel: usize) -> f64 {
         if x < self.width && y < self.height && channel < self.channels {
@@ -42,7 +42,7 @@ impl Image {
             0.0
         }
     }
-    
+
     /// 设置像素值
     pub fn set_pixel(&mut self, x: usize, y: usize, channel: usize, value: f64) {
         if x < self.width && y < self.height && channel < self.channels {
@@ -50,13 +50,13 @@ impl Image {
             self.data[index] = value;
         }
     }
-    
+
     /// 图像归一化
     pub fn normalize(&mut self) {
         let min_val = self.data.iter().fold(f64::INFINITY, |a, &b| a.min(b));
         let max_val = self.data.iter().fold(f64::NEG_INFINITY, |a, &b| a.max(b));
         let range = max_val - min_val;
-        
+
         if range > 0.0 {
             for pixel in &mut self.data {
                 *pixel = (*pixel - min_val) / range;
@@ -78,7 +78,7 @@ impl ImageFilter {
         let mut kernel = vec![vec![0.0; size]; size];
         let center = size / 2;
         let mut sum = 0.0;
-        
+
         for i in 0..size {
             for j in 0..size {
                 let x = (i as i32 - center as i32) as f64;
@@ -88,20 +88,20 @@ impl ImageFilter {
                 sum += value;
             }
         }
-        
+
         // 归一化
         for i in 0..size {
             for j in 0..size {
                 kernel[i][j] /= sum;
             }
         }
-        
+
         Self {
             kernel,
             kernel_size: size,
         }
     }
-    
+
     /// 创建边缘检测滤波器
     pub fn sobel_x() -> Self {
         Self {
@@ -113,7 +113,7 @@ impl ImageFilter {
             kernel_size: 3,
         }
     }
-    
+
     /// 创建边缘检测滤波器
     pub fn sobel_y() -> Self {
         Self {
@@ -125,17 +125,17 @@ impl ImageFilter {
             kernel_size: 3,
         }
     }
-    
+
     /// 应用滤波器
     pub fn apply(&self, image: &Image) -> Image {
         let mut result = Image::new(image.width, image.height, image.channels);
         let half_kernel = self.kernel_size / 2;
-        
+
         for y in half_kernel..image.height - half_kernel {
             for x in half_kernel..image.width - half_kernel {
                 for c in 0..image.channels {
                     let mut sum = 0.0;
-                    
+
                     for ky in 0..self.kernel_size {
                         for kx in 0..self.kernel_size {
                             let pixel_x = x + kx - half_kernel;
@@ -144,12 +144,12 @@ impl ImageFilter {
                             sum += pixel_value * self.kernel[ky][kx];
                         }
                     }
-                    
+
                     result.set_pixel(x, y, c, sum);
                 }
             }
         }
-        
+
         result
     }
 }
@@ -188,7 +188,7 @@ impl FeatureDetector {
             threshold,
         }
     }
-    
+
     /// 检测特征点
     pub fn detect(&self, image: &Image) -> Vec<FeaturePoint> {
         match self.detector_type {
@@ -198,38 +198,40 @@ impl FeatureDetector {
             DetectorType::FAST => self.detect_fast(image),
         }
     }
-    
+
     /// Harris角点检测
     fn detect_harris(&self, image: &Image) -> Vec<FeaturePoint> {
         let mut features = Vec::new();
         let sobel_x = ImageFilter::sobel_x();
         let sobel_y = ImageFilter::sobel_y();
-        
+
         let grad_x = sobel_x.apply(image);
         let grad_y = sobel_y.apply(image);
-        
+
         // 简化的Harris角点检测
         for y in 1..image.height - 1 {
             for x in 1..image.width - 1 {
                 let mut ixx = 0.0;
                 let mut iyy = 0.0;
                 let mut ixy = 0.0;
-                
+
                 for dy in -1..=1 {
                     for dx in -1..=1 {
-                        let gx = grad_x.get_pixel((x as i32 + dx) as usize, (y as i32 + dy) as usize, 0);
-                        let gy = grad_y.get_pixel((x as i32 + dx) as usize, (y as i32 + dy) as usize, 0);
-                        
+                        let gx =
+                            grad_x.get_pixel((x as i32 + dx) as usize, (y as i32 + dy) as usize, 0);
+                        let gy =
+                            grad_y.get_pixel((x as i32 + dx) as usize, (y as i32 + dy) as usize, 0);
+
                         ixx += gx * gx;
                         iyy += gy * gy;
                         ixy += gx * gy;
                     }
                 }
-                
+
                 let det = ixx * iyy - ixy * ixy;
                 let trace = ixx + iyy;
                 let response = det - 0.04 * trace * trace;
-                
+
                 if response > self.threshold {
                     features.push(FeaturePoint {
                         x: x as f64,
@@ -241,24 +243,25 @@ impl FeatureDetector {
                 }
             }
         }
-        
+
         features
     }
-    
+
     /// SIFT特征检测（简化版）
     fn detect_sift(&self, image: &Image) -> Vec<FeaturePoint> {
         let mut features = Vec::new();
-        
+
         // 简化的SIFT检测
         for y in 8..image.height - 8 {
             for x in 8..image.width - 8 {
                 let mut sum = 0.0;
                 for dy in -8..8 {
                     for dx in -8..8 {
-                        sum += image.get_pixel((x as i32 + dx) as usize, (y as i32 + dy) as usize, 0);
+                        sum +=
+                            image.get_pixel((x as i32 + dx) as usize, (y as i32 + dy) as usize, 0);
                     }
                 }
-                
+
                 if sum > self.threshold {
                     features.push(FeaturePoint {
                         x: x as f64,
@@ -270,25 +273,28 @@ impl FeatureDetector {
                 }
             }
         }
-        
+
         features
     }
-    
+
     /// ORB特征检测（简化版）
     fn detect_orb(&self, image: &Image) -> Vec<FeaturePoint> {
         let mut features = Vec::new();
-        
+
         // 简化的ORB检测
         for y in 4..image.height - 4 {
             for x in 4..image.width - 4 {
                 let center = image.get_pixel(x, y, 0);
                 let mut brighter = 0;
                 let mut darker = 0;
-                
+
                 for dy in -4..=4 {
                     for dx in -4..=4 {
-                        if dx == 0 && dy == 0 { continue; }
-                        let pixel = image.get_pixel((x as i32 + dx) as usize, (y as i32 + dy) as usize, 0);
+                        if dx == 0 && dy == 0 {
+                            continue;
+                        }
+                        let pixel =
+                            image.get_pixel((x as i32 + dx) as usize, (y as i32 + dy) as usize, 0);
                         if pixel > center + 0.1 {
                             brighter += 1;
                         } else if pixel < center - 0.1 {
@@ -296,7 +302,7 @@ impl FeatureDetector {
                         }
                     }
                 }
-                
+
                 if brighter > 8 || darker > 8 {
                     features.push(FeaturePoint {
                         x: x as f64,
@@ -308,27 +314,28 @@ impl FeatureDetector {
                 }
             }
         }
-        
+
         features
     }
-    
+
     /// FAST特征检测（简化版）
     fn detect_fast(&self, image: &Image) -> Vec<FeaturePoint> {
         let mut features = Vec::new();
-        
+
         // 简化的FAST检测
         for y in 3..image.height - 3 {
             for x in 3..image.width - 3 {
                 let center = image.get_pixel(x, y, 0);
                 let mut consecutive = 0;
                 let mut max_consecutive = 0;
-                
+
                 for i in 0..16 {
                     let angle = i as f64 * std::f64::consts::PI / 8.0;
                     let dx = (3.0 * angle.cos()) as i32;
                     let dy = (3.0 * angle.sin()) as i32;
-                    let pixel = image.get_pixel((x as i32 + dx) as usize, (y as i32 + dy) as usize, 0);
-                    
+                    let pixel =
+                        image.get_pixel((x as i32 + dx) as usize, (y as i32 + dy) as usize, 0);
+
                     if pixel > center + 0.1 {
                         consecutive += 1;
                         max_consecutive = max_consecutive.max(consecutive);
@@ -336,7 +343,7 @@ impl FeatureDetector {
                         consecutive = 0;
                     }
                 }
-                
+
                 if max_consecutive >= 9 {
                     features.push(FeaturePoint {
                         x: x as f64,
@@ -348,7 +355,7 @@ impl FeatureDetector {
                 }
             }
         }
-        
+
         features
     }
 }
@@ -384,7 +391,7 @@ impl ImageSegmenter {
             num_segments,
         }
     }
-    
+
     /// 分割图像
     pub fn segment(&self, image: &Image) -> SegmentationResult {
         match self.method {
@@ -394,38 +401,39 @@ impl ImageSegmenter {
             SegmentationMethod::MeanShift => self.meanshift_segmentation(image),
         }
     }
-    
+
     /// K-means分割
     fn kmeans_segmentation(&self, image: &Image) -> SegmentationResult {
         let mut segments = vec![Vec::new(); self.num_segments];
-        
+
         // 简化的K-means分割
         for y in 0..image.height {
             for x in 0..image.width {
                 let pixel_value = image.get_pixel(x, y, 0);
-                let segment_id = ((pixel_value * self.num_segments as f64) as usize).min(self.num_segments - 1);
+                let segment_id =
+                    ((pixel_value * self.num_segments as f64) as usize).min(self.num_segments - 1);
                 segments[segment_id].push((x, y));
             }
         }
-        
+
         SegmentationResult {
             segments,
             num_segments: self.num_segments,
         }
     }
-    
+
     /// 分水岭分割（简化版）
     fn watershed_segmentation(&self, image: &Image) -> SegmentationResult {
         // 简化的分水岭算法
         self.kmeans_segmentation(image)
     }
-    
+
     /// 图割分割（简化版）
     fn graphcut_segmentation(&self, image: &Image) -> SegmentationResult {
         // 简化的图割算法
         self.kmeans_segmentation(image)
     }
-    
+
     /// 均值漂移分割（简化版）
     fn meanshift_segmentation(&self, image: &Image) -> SegmentationResult {
         // 简化的均值漂移算法
@@ -436,7 +444,7 @@ impl ImageSegmenter {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_image_creation() {
         let image = Image::new(100, 100, 3);
@@ -445,14 +453,14 @@ mod tests {
         assert_eq!(image.channels, 3);
         assert_eq!(image.data.len(), 30000);
     }
-    
+
     #[test]
     fn test_image_pixel_operations() {
         let mut image = Image::new(10, 10, 1);
         image.set_pixel(5, 5, 0, 0.5);
         assert_eq!(image.get_pixel(5, 5, 0), 0.5);
     }
-    
+
     #[test]
     fn test_image_filter() {
         let image = Image::new(10, 10, 1);
@@ -461,7 +469,7 @@ mod tests {
         assert_eq!(result.width, image.width);
         assert_eq!(result.height, image.height);
     }
-    
+
     #[test]
     fn test_feature_detector() {
         let image = Image::new(100, 100, 1);
@@ -470,7 +478,7 @@ mod tests {
         // 验证特征检测器能够正常工作，返回有效的结果
         // 注意：对于空白图像，可能检测不到特征点，这是正常的
     }
-    
+
     #[test]
     fn test_image_segmenter() {
         let image = Image::new(50, 50, 1);

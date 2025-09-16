@@ -49,4 +49,3 @@ mod tests {
         assert_eq!(b, 1);
     }
 }
-

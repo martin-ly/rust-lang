@@ -1,10 +1,10 @@
 //! Web框架设计模式应用
-//! 
+//!
 //! 本模块展示了在Web框架中应用各种设计模式的实践案例，
 //! 包括MVC、MVVM、Repository等经典模式。
 
-use std::collections::HashMap;
 use std::any::Any;
+use std::collections::HashMap;
 
 // ============================================================================
 // MVC (Model-View-Controller) 模式
@@ -268,8 +268,7 @@ impl Repository<Article> for ArticleRepository {
         self.articles
             .values()
             .filter(|article| {
-                article.title.contains(criteria)
-                    || article.content.contains(criteria)
+                article.title.contains(criteria) || article.content.contains(criteria)
             })
             .cloned()
             .collect()

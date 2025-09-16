@@ -1,5 +1,5 @@
 //! RabbitMQ消息队列实现
-//! 
+//!
 //! 提供基于lapin crate的实际RabbitMQ连接和消息队列功能
 
 // use std::collections::HashMap; // 暂时未使用
@@ -55,14 +55,19 @@ impl RabbitMQMessageQueue {
             connected: Arc::new(RwLock::new(false)),
         }
     }
-    
+
     /// 连接到RabbitMQ服务器
     pub async fn connect(&mut self) -> Result<()> {
         info!("连接RabbitMQ服务器: {}", self.config.url);
-        
+
         #[cfg(feature = "with-rabbitmq")]
         {
-            match lapin::Connection::connect(&self.config.url, lapin::ConnectionProperties::default()).await {
+            match lapin::Connection::connect(
+                &self.config.url,
+                lapin::ConnectionProperties::default(),
+            )
+            .await
+            {
                 Ok(connection) => {
                     match connection.create_channel().await {
                         Ok(channel) => {
@@ -70,14 +75,20 @@ impl RabbitMQMessageQueue {
                             self.channel = Some(channel);
                             *self.connected.write().await = true;
                             info!("RabbitMQ连接成功");
-                            
+
                             // 设置QoS
                             if let Some(ref channel) = self.channel {
-                                if let Err(e) = channel.basic_qos(self.config.prefetch_count, lapin::options::BasicQosOptions::default()).await {
+                                if let Err(e) = channel
+                                    .basic_qos(
+                                        self.config.prefetch_count,
+                                        lapin::options::BasicQosOptions::default(),
+                                    )
+                                    .await
+                                {
                                     warn!("设置QoS失败: {}", e);
                                 }
                             }
-                            
+
                             Ok(())
                         }
                         Err(e) => {
@@ -92,7 +103,7 @@ impl RabbitMQMessageQueue {
                 }
             }
         }
-        
+
         #[cfg(not(feature = "with-rabbitmq"))]
         {
             warn!("RabbitMQ功能未启用，请添加 'with-rabbitmq' feature");
@@ -100,15 +111,15 @@ impl RabbitMQMessageQueue {
             Ok(())
         }
     }
-    
+
     /// 声明交换器
     pub async fn declare_exchange(&self) -> Result<()> {
         if !*self.connected.read().await {
             return Err(Error::config("RabbitMQ未连接".to_string()));
         }
-        
+
         info!("声明RabbitMQ交换器: {}", self.config.exchange);
-        
+
         #[cfg(feature = "with-rabbitmq")]
         {
             if let Some(ref channel) = self.channel {
@@ -137,22 +148,22 @@ impl RabbitMQMessageQueue {
                 Err(Error::config("RabbitMQ通道不可用".to_string()))
             }
         }
-        
+
         #[cfg(not(feature = "with-rabbitmq"))]
         {
             info!("模拟声明RabbitMQ交换器: {}", self.config.exchange);
             Ok(())
         }
     }
-    
+
     /// 声明队列
     pub async fn declare_queue(&self) -> Result<()> {
         if !*self.connected.read().await {
             return Err(Error::config("RabbitMQ未连接".to_string()));
         }
-        
+
         info!("声明RabbitMQ队列: {}", self.config.queue);
-        
+
         #[cfg(feature = "with-rabbitmq")]
         {
             if let Some(ref channel) = self.channel {
@@ -180,22 +191,25 @@ impl RabbitMQMessageQueue {
                 Err(Error::config("RabbitMQ通道不可用".to_string()))
             }
         }
-        
+
         #[cfg(not(feature = "with-rabbitmq"))]
         {
             info!("模拟声明RabbitMQ队列: {}", self.config.queue);
             Ok(())
         }
     }
-    
+
     /// 绑定队列到交换器
     pub async fn bind_queue(&self) -> Result<()> {
         if !*self.connected.read().await {
             return Err(Error::config("RabbitMQ未连接".to_string()));
         }
-        
-        info!("绑定队列到交换器: {} -> {}", self.config.queue, self.config.exchange);
-        
+
+        info!(
+            "绑定队列到交换器: {} -> {}",
+            self.config.queue, self.config.exchange
+        );
+
         #[cfg(feature = "with-rabbitmq")]
         {
             if let Some(ref channel) = self.channel {
@@ -222,22 +236,25 @@ impl RabbitMQMessageQueue {
                 Err(Error::config("RabbitMQ通道不可用".to_string()))
             }
         }
-        
+
         #[cfg(not(feature = "with-rabbitmq"))]
         {
             info!("模拟绑定队列到交换器");
             Ok(())
         }
     }
-    
+
     /// 发布消息
     pub async fn publish(&self, routing_key: &str, _message: &[u8]) -> Result<()> {
         if !*self.connected.read().await {
             return Err(Error::config("RabbitMQ未连接".to_string()));
         }
-        
-        info!("发布消息到RabbitMQ: {} -> {}", routing_key, self.config.exchange);
-        
+
+        info!(
+            "发布消息到RabbitMQ: {} -> {}",
+            routing_key, self.config.exchange
+        );
+
         #[cfg(feature = "with-rabbitmq")]
         {
             if let Some(ref channel) = self.channel {
@@ -264,14 +281,14 @@ impl RabbitMQMessageQueue {
                 Err(Error::config("RabbitMQ通道不可用".to_string()))
             }
         }
-        
+
         #[cfg(not(feature = "with-rabbitmq"))]
         {
             info!("模拟发布消息到RabbitMQ: {}", routing_key);
             Ok(())
         }
     }
-    
+
     /// 消费消息
     pub async fn consume<F>(&self, mut handler: F) -> Result<()>
     where
@@ -280,9 +297,9 @@ impl RabbitMQMessageQueue {
         if !*self.connected.read().await {
             return Err(Error::config("RabbitMQ未连接".to_string()));
         }
-        
+
         info!("开始消费RabbitMQ队列: {}", self.config.queue);
-        
+
         #[cfg(feature = "with-rabbitmq")]
         {
             if let Some(ref channel) = self.channel {
@@ -295,25 +312,31 @@ impl RabbitMQMessageQueue {
                     )
                     .await
                     .map_err(|e| Error::config(format!("创建消费者失败: {}", e)))?;
-                
+
                 info!("消费者创建成功，开始处理消息...");
-                
+
                 while let Some(delivery) = consumer.next().await {
                     match delivery {
                         Ok(delivery) => {
                             info!("收到消息，处理中...");
-                            
+
                             match handler(delivery.data) {
                                 Ok(_) => {
                                     // 确认消息
-                                    if let Err(e) = delivery.ack(lapin::options::BasicAckOptions::default()).await {
+                                    if let Err(e) = delivery
+                                        .ack(lapin::options::BasicAckOptions::default())
+                                        .await
+                                    {
                                         error!("确认消息失败: {}", e);
                                     }
                                 }
                                 Err(e) => {
                                     error!("处理消息失败: {}", e);
                                     // 拒绝消息
-                                    if let Err(e) = delivery.nack(lapin::options::BasicNackOptions::default()).await {
+                                    if let Err(e) = delivery
+                                        .nack(lapin::options::BasicNackOptions::default())
+                                        .await
+                                    {
                                         error!("拒绝消息失败: {}", e);
                                     }
                                 }
@@ -324,13 +347,13 @@ impl RabbitMQMessageQueue {
                         }
                     }
                 }
-                
+
                 Ok(())
             } else {
                 Err(Error::config("RabbitMQ通道不可用".to_string()))
             }
         }
-        
+
         #[cfg(not(feature = "with-rabbitmq"))]
         {
             info!("模拟消费RabbitMQ队列: {}", self.config.queue);
@@ -339,12 +362,12 @@ impl RabbitMQMessageQueue {
             Ok(())
         }
     }
-    
+
     /// 检查连接状态
     pub async fn is_connected(&self) -> bool {
         *self.connected.read().await
     }
-    
+
     /// 断开连接
     pub async fn disconnect(&mut self) -> Result<()> {
         info!("断开RabbitMQ连接");
@@ -356,7 +379,7 @@ impl RabbitMQMessageQueue {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[tokio::test]
     async fn test_rabbitmq_config() {
         let config = RabbitMQConfig::default();
@@ -364,40 +387,40 @@ mod tests {
         assert_eq!(config.exchange, "microservice.exchange");
         assert_eq!(config.queue, "microservice.queue");
     }
-    
+
     #[tokio::test]
     async fn test_rabbitmq_message_queue_creation() {
         let config = RabbitMQConfig::default();
         let _queue = RabbitMQMessageQueue::new(config);
         assert!(true); // 如果能创建成功就说明测试通过
     }
-    
+
     #[tokio::test]
     async fn test_rabbitmq_connection_simulation() {
         let config = RabbitMQConfig::default();
         let mut queue = RabbitMQMessageQueue::new(config);
-        
+
         // 测试连接（模拟模式）
         let result = queue.connect().await;
         assert!(result.is_ok());
         assert!(queue.is_connected().await);
-        
+
         // 测试声明交换器（模拟模式）
         let result = queue.declare_exchange().await;
         assert!(result.is_ok());
-        
+
         // 测试声明队列（模拟模式）
         let result = queue.declare_queue().await;
         assert!(result.is_ok());
-        
+
         // 测试绑定队列（模拟模式）
         let result = queue.bind_queue().await;
         assert!(result.is_ok());
-        
+
         // 测试发布消息（模拟模式）
         let result = queue.publish("test.routing", b"test message").await;
         assert!(result.is_ok());
-        
+
         // 测试断开连接
         let result = queue.disconnect().await;
         assert!(result.is_ok());

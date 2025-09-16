@@ -1,6 +1,6 @@
-use c08_algorithms::sorting::*;
-use c08_algorithms::searching::*;
 use c08_algorithms::graph::*;
+use c08_algorithms::searching::*;
+use c08_algorithms::sorting::*;
 use c08_algorithms::string_algorithms::*;
 
 #[test]
@@ -51,14 +51,14 @@ fn test_graph_async_bfs_and_dijkstra() {
     assert!(path == vec![1, 2, 4] || path == vec![1, 3, 4]);
 
     // Weighted graph for Dijkstra
-    let mut wg: std::collections::HashMap<&str, Vec<(&str, f64)>> = std::collections::HashMap::new();
+    let mut wg: std::collections::HashMap<&str, Vec<(&str, f64)>> =
+        std::collections::HashMap::new();
     wg.insert("A", vec![("B", 1.0), ("C", 4.0)]);
     wg.insert("B", vec![("C", 2.0), ("D", 5.0)]);
     wg.insert("C", vec![("D", 1.0)]);
     wg.insert("D", vec![]);
 
-    let (dist, _prev) = rt
-        .block_on(async { dijkstra_async(wg, "A").await.unwrap() });
+    let (dist, _prev) = rt.block_on(async { dijkstra_async(wg, "A").await.unwrap() });
     assert_eq!(dist.get("D").copied().unwrap().round() as i32, 4);
 }
 // c08 算法并行与内存集成基准（轻量）
@@ -83,7 +83,10 @@ fn bench_parallel_quicksort_vs_std_sort() {
     // 校验正确性
     assert_eq!(data1, data2);
 
-    eprintln!("std::sort: {:?} | parallel_quicksort: {:?}", std_dur, par_dur);
+    eprintln!(
+        "std::sort: {:?} | parallel_quicksort: {:?}",
+        std_dur, par_dur
+    );
 }
 
 #[test]
@@ -105,7 +108,10 @@ fn bench_memory_pool_allocate_deallocate() {
     }
     let dealloc_dur = t1.elapsed();
 
-    eprintln!("MemoryPool allocate: {:?} | deallocate: {:?}", alloc_dur, dealloc_dur);
+    eprintln!(
+        "MemoryPool allocate: {:?} | deallocate: {:?}",
+        alloc_dur, dealloc_dur
+    );
 }
 
 #[test]
@@ -131,9 +137,7 @@ fn test_manacher_and_floyd() {
     assert_eq!(&"forgeeksskeegfor"[s..s + l], "geeksskeeg");
 
     let rt = tokio::runtime::Runtime::new().unwrap();
-    let edges = vec![(0usize,1usize,1.0),(1,2,2.0),(0,2,10.0)];
+    let edges = vec![(0usize, 1usize, 1.0), (1, 2, 2.0), (0, 2, 10.0)];
     let d = rt.block_on(async { floyd_warshall_async(3, edges).await.unwrap() });
     assert!((d[0][2] - 3.0).abs() < 1e-9);
 }
-
-

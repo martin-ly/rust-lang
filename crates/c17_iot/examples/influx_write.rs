@@ -1,7 +1,7 @@
 #[cfg(feature = "influx")]
-use influxdb2::models::DataPoint;
-#[cfg(feature = "influx")]
 use influxdb2::Client;
+#[cfg(feature = "influx")]
+use influxdb2::models::DataPoint;
 
 #[cfg(feature = "influx")]
 #[tokio::main]
@@ -29,5 +29,3 @@ fn main() {
         "This example requires the 'influx' feature. Run with: cargo run -p c17_iot --example influx_write --features influx"
     );
 }
-
-

@@ -11,7 +11,9 @@ impl PostgresDb {
     pub async fn connect(url: &str) -> crate::error::Result<Self> {
         let (client, connection) = tokio_postgres::connect(url, tokio_postgres::NoTls).await?;
         tokio::spawn(async move {
-            if let Err(e) = connection.await { eprintln!("postgres connection error: {e}"); }
+            if let Err(e) = connection.await {
+                eprintln!("postgres connection error: {e}");
+            }
         });
         Ok(Self { client })
     }
@@ -20,12 +22,16 @@ impl PostgresDb {
         let url = cfg.url.clone();
         let retry = cfg.retry.clone();
         crate::util::retry_async(&retry, || async {
-            let (client, connection) = tokio_postgres::connect(url.as_str(), tokio_postgres::NoTls).await?;
+            let (client, connection) =
+                tokio_postgres::connect(url.as_str(), tokio_postgres::NoTls).await?;
             tokio::spawn(async move {
-                if let Err(e) = connection.await { eprintln!("postgres connection error: {e}"); }
+                if let Err(e) = connection.await {
+                    eprintln!("postgres connection error: {e}");
+                }
             });
             Ok(Self { client })
-        }).await
+        })
+        .await
     }
 }
 
@@ -57,13 +63,15 @@ impl SqlDatabase for PostgresDb {
     }
 
     async fn begin(&self) -> crate::error::Result<()> {
-        let _ = self.execute("BEGIN").await?; Ok(())
+        let _ = self.execute("BEGIN").await?;
+        Ok(())
     }
     async fn commit(&self) -> crate::error::Result<()> {
-        let _ = self.execute("COMMIT").await?; Ok(())
+        let _ = self.execute("COMMIT").await?;
+        Ok(())
     }
     async fn rollback(&self) -> crate::error::Result<()> {
-        let _ = self.execute("ROLLBACK").await?; Ok(())
+        let _ = self.execute("ROLLBACK").await?;
+        Ok(())
     }
 }
-

@@ -1,18 +1,18 @@
 //! TCP 协议实现模块
-//! 
+//!
 //! 本模块提供了基于 Rust 1.89 的 TCP 协议实现，
 //! 包括连接管理、状态机、流量控制等功能。
 
-pub mod state;
 pub mod connection;
+pub mod state;
 
-pub use state::{TcpState, TcpEvent, TcpStateMachine};
 pub use connection::{TcpConnection, TcpConnectionConfig, TcpConnectionStats};
+pub use state::{TcpEvent, TcpState, TcpStateMachine};
 
 use crate::error::{NetworkError, NetworkResult};
+use std::collections::HashMap;
 use std::time::Duration;
 use tokio::sync::Mutex;
-use std::collections::HashMap;
 
 /// TCP 连接池
 #[allow(unused)]
@@ -38,7 +38,7 @@ impl TcpConnectionPool {
     /// 创建新连接
     pub async fn create_connection(&self, config: TcpConnectionConfig) -> NetworkResult<u64> {
         let mut connections = self.connections.lock().await;
-        
+
         if connections.len() >= self.max_connections {
             return Err(NetworkError::Other("Connection pool exhausted".to_string()));
         }
@@ -133,12 +133,12 @@ mod tests {
     #[tokio::test]
     async fn test_tcp_connection_pool() {
         let pool = TcpConnectionPool::new(10, Duration::from_secs(30));
-        
+
         let config = TcpConnectionConfig::default();
         let connection_id = pool.create_connection(config).await.unwrap();
-        
+
         assert_eq!(connection_id, 0);
-        
+
         let stats = pool.get_stats().await;
         assert_eq!(stats.total_connections, 1);
     }
@@ -146,16 +146,16 @@ mod tests {
     #[tokio::test]
     async fn test_tcp_connection_pool_cleanup() {
         let pool = TcpConnectionPool::new(10, Duration::from_millis(100));
-        
+
         let config = TcpConnectionConfig::default();
         let _connection_id = pool.create_connection(config).await.unwrap();
-        
+
         // 等待超时
         tokio::time::sleep(Duration::from_millis(200)).await;
-        
+
         let cleaned = pool.cleanup_timeout_connections().await;
         assert_eq!(cleaned, 1);
-        
+
         let stats = pool.get_stats().await;
         assert_eq!(stats.total_connections, 0);
     }

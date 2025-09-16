@@ -5,7 +5,9 @@ mod run {
     use c10_networks::sniff::{parse_pcap_arp, parse_pcap_tcp_stats, parse_pcap_udp_stats};
 
     pub fn main() {
-        let path = std::env::args().nth(1).unwrap_or_else(|| "capture.pcap".to_string());
+        let path = std::env::args()
+            .nth(1)
+            .unwrap_or_else(|| "capture.pcap".to_string());
         match run(&path) {
             Ok(()) => {}
             Err(e) => eprintln!("error: {}", e),
@@ -26,7 +28,7 @@ mod run {
 
 #[cfg(not(feature = "offline"))]
 fn main() {
-    eprintln!("This example requires feature 'offline'.\nTry: cargo run -p c10_networks --features offline --example pcap_offline -- capture.pcap");
+    eprintln!(
+        "This example requires feature 'offline'.\nTry: cargo run -p c10_networks --features offline --example pcap_offline -- capture.pcap"
+    );
 }
-
-

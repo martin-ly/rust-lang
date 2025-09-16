@@ -1,10 +1,10 @@
 use c07_process::prelude::*;
 use std::collections::HashMap;
+use std::env;
 use std::time::{
     Duration,
     //Instant,
 };
-use std::env;
 
 fn main() -> Result<()> {
     println!("🛡️ 进程监控与重启策略演示");
@@ -46,10 +46,19 @@ fn main() -> Result<()> {
     let mut pm = ProcessManager::new();
 
     // 指数退避参数（可配置）
-    let max_restarts: u32 = env::var("MAX_RESTARTS").ok().and_then(|v| v.parse().ok()).unwrap_or(5);
+    let max_restarts: u32 = env::var("MAX_RESTARTS")
+        .ok()
+        .and_then(|v| v.parse().ok())
+        .unwrap_or(5);
     let mut attempt = 0u32;
-    let mut backoff_ms: u64 = env::var("BACKOFF_START_MS").ok().and_then(|v| v.parse().ok()).unwrap_or(100);
-    let backoff_max_ms: u64 = env::var("BACKOFF_MAX_MS").ok().and_then(|v| v.parse().ok()).unwrap_or(2000);
+    let mut backoff_ms: u64 = env::var("BACKOFF_START_MS")
+        .ok()
+        .and_then(|v| v.parse().ok())
+        .unwrap_or(100);
+    let backoff_max_ms: u64 = env::var("BACKOFF_MAX_MS")
+        .ok()
+        .and_then(|v| v.parse().ok())
+        .unwrap_or(2000);
 
     while attempt < max_restarts {
         attempt += 1;
@@ -77,5 +86,3 @@ fn main() -> Result<()> {
     println!("🎉 监控与重启演示完成");
     Ok(())
 }
-
-

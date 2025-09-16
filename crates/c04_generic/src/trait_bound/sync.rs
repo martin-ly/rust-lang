@@ -83,7 +83,7 @@ use std::sync::Arc;
 
 fn main() {
     let data = Arc::new(vec![1, 2, 3, 4, 5]);
-    
+
     let handles: Vec<_> = (0..3).map(|id| {
         let data = Arc::clone(&data);
         thread::spawn(move || {
@@ -91,7 +91,7 @@ fn main() {
             // 多个线程可以同时读取 data
         })
     }).collect();
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
@@ -111,7 +111,7 @@ struct Config {
 }
 
 // 全局配置，多个线程共享
-static GLOBAL_CONFIG: once_cell::sync::Lazy<Arc<Config>> = 
+static GLOBAL_CONFIG: once_cell::sync::Lazy<Arc<Config>> =
     once_cell::sync::Lazy::new(|| {
         Arc::new(Config {
             max_threads: 4,
@@ -128,7 +128,7 @@ fn main() {
             println!("Thread {}: timeout = {}", id, config.timeout);
         })
     }).collect();
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
@@ -153,7 +153,7 @@ impl Cache {
         cache.insert("key2".to_string(), "value2".to_string());
         Cache { data: cache }
     }
-    
+
     fn get(&self, key: &str) -> Option<&String> {
         self.data.get(key)
     }
@@ -161,7 +161,7 @@ impl Cache {
 
 fn main() {
     let cache = Arc::new(Cache::new());
-    
+
     let handles: Vec<_> = (0..3).map(|id| {
         let cache = Arc::clone(&cache);
         thread::spawn(move || {
@@ -173,7 +173,7 @@ fn main() {
             }
         })
     }).collect();
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
@@ -225,14 +225,14 @@ use std::sync::Arc;
 
 fn main() {
     let data = Arc::new(vec![1, 2, 3, 4, 5]);
-    
+
     let handles: Vec<_> = (0..3).map(|_| {
         let data = Arc::clone(&data);
         thread::spawn(move || {
             println!("Data in thread: {:?}", data);
         })
     }).collect();
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
@@ -246,7 +246,7 @@ use std::sync::{Arc, Mutex};
 
 fn main() {
     let data = Arc::new(Mutex::new(vec![1, 2, 3]));
-    
+
     let handles: Vec<_> = (0..3).map(|id| {
         let data = Arc::clone(&data);
         thread::spawn(move || {
@@ -255,7 +255,7 @@ fn main() {
             println!("Thread {}: data = {:?}", id, guard);
         })
     }).collect();
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
@@ -269,7 +269,7 @@ use std::sync::{Arc, RwLock};
 
 fn main() {
     let data = Arc::new(RwLock::new(vec![1, 2, 3, 4, 5]));
-    
+
     // 多个读取线程
     let read_handles: Vec<_> = (0..3).map(|id| {
         let data = Arc::clone(&data);
@@ -278,7 +278,7 @@ fn main() {
             println!("Reader {}: data = {:?}", id, *guard);
         })
     }).collect();
-    
+
     // 一个写入线程
     let write_handle = {
         let data = Arc::clone(&data);
@@ -288,7 +288,7 @@ fn main() {
             println!("Writer: added 100, data = {:?}", *guard);
         })
     };
-    
+
     for handle in read_handles {
         handle.join().unwrap();
     }
@@ -358,11 +358,11 @@ impl CustomAtomic {
             value: AtomicBool::new(initial),
         }
     }
-    
+
     fn set(&self, value: bool) {
         self.value.store(value, Ordering::Relaxed);
     }
-    
+
     fn get(&self) -> bool {
         self.value.load(Ordering::Relaxed)
     }
@@ -379,9 +379,9 @@ Sync trait 为 Rust 提供了线程间安全共享引用的基础。
 同时需要注意安全性和性能影响。
 */
 
-use std::thread;
+use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::{Arc, RwLock};
-use std::sync::atomic::{AtomicUsize, AtomicBool, Ordering};
+use std::thread;
 
 // 基本类型自动实现 Sync
 #[derive(Debug)]
@@ -412,7 +412,7 @@ pub struct CustomSyncType {
 }
 
 // 手动实现 Sync（通常是安全的）
-unsafe impl Sync for CustomSyncType { }
+unsafe impl Sync for CustomSyncType {}
 
 // 线程安全的数据结构
 #[derive(Debug)]
@@ -423,7 +423,7 @@ pub struct ThreadSafeData {
 }
 
 // 手动实现 Sync
-unsafe impl Sync for ThreadSafeData { }
+unsafe impl Sync for ThreadSafeData {}
 
 impl ThreadSafeData {
     pub fn new(values: Vec<i32>) -> Self {
@@ -433,19 +433,19 @@ impl ThreadSafeData {
             active: AtomicBool::new(true),
         }
     }
-    
+
     pub fn increment(&self) {
         self.counter.fetch_add(1, Ordering::Relaxed);
     }
-    
+
     pub fn get_count(&self) -> usize {
         self.counter.load(Ordering::Relaxed)
     }
-    
+
     pub fn set_active(&self, active: bool) {
         self.active.store(active, Ordering::Relaxed);
     }
-    
+
     pub fn is_active(&self) -> bool {
         self.active.load(Ordering::Relaxed)
     }
@@ -454,19 +454,19 @@ impl ThreadSafeData {
 // 演示函数
 pub fn demonstrate_sync() {
     println!("=== Sync Trait Demonstration ===\n");
-    
+
     // 基本线程间数据共享
     demonstrate_basic_sharing();
-    
+
     // 只读数据共享
     demonstrate_readonly_sharing();
-    
+
     // 读写锁使用
     demonstrate_rwlock_usage();
-    
+
     // 原子操作共享
     demonstrate_atomic_sharing();
-    
+
     // 自定义线程安全类型
     demonstrate_custom_sync();
 }
@@ -474,22 +474,24 @@ pub fn demonstrate_sync() {
 // 基本线程间数据共享
 fn demonstrate_basic_sharing() {
     println!("--- Basic Data Sharing ---");
-    
+
     let data = Arc::new(SyncExample {
         name: "Shared Data".to_string(),
         value: 42,
         active: true,
     });
-    
+
     println!("Original data: {:?}", data);
-    
-    let handles: Vec<_> = (0..3).map(|id| {
-        let data = Arc::clone(&data);
-        thread::spawn(move || {
-            println!("Thread {}: data = {:?}", id, data);
+
+    let handles: Vec<_> = (0..3)
+        .map(|id| {
+            let data = Arc::clone(&data);
+            thread::spawn(move || {
+                println!("Thread {}: data = {:?}", id, data);
+            })
         })
-    }).collect();
-    
+        .collect();
+
     for handle in handles {
         handle.join().unwrap();
     }
@@ -499,18 +501,20 @@ fn demonstrate_basic_sharing() {
 // 只读数据共享
 fn demonstrate_readonly_sharing() {
     println!("--- Read-Only Data Sharing ---");
-    
+
     let cache = Arc::new(vec![1, 2, 3, 4, 5]);
-    
-    let handles: Vec<_> = (0..3).map(|id| {
-        let cache = Arc::clone(&cache);
-        thread::spawn(move || {
-            println!("Thread {}: cache length = {}", id, cache.len());
-            println!("Thread {}: first value = {}", id, cache[0]);
-            println!("Thread {}: last value = {}", id, cache[cache.len() - 1]);
+
+    let handles: Vec<_> = (0..3)
+        .map(|id| {
+            let cache = Arc::clone(&cache);
+            thread::spawn(move || {
+                println!("Thread {}: cache length = {}", id, cache.len());
+                println!("Thread {}: first value = {}", id, cache[0]);
+                println!("Thread {}: last value = {}", id, cache[cache.len() - 1]);
+            })
         })
-    }).collect();
-    
+        .collect();
+
     for handle in handles {
         handle.join().unwrap();
     }
@@ -520,18 +524,20 @@ fn demonstrate_readonly_sharing() {
 // 读写锁使用
 fn demonstrate_rwlock_usage() {
     println!("--- Read-Write Lock Usage ---");
-    
+
     let data = Arc::new(RwLock::new(vec![1, 2, 3, 4, 5]));
-    
+
     // 多个读取线程
-    let read_handles: Vec<_> = (0..3).map(|id| {
-        let data = Arc::clone(&data);
-        thread::spawn(move || {
-            let guard = data.read().unwrap();
-            println!("Reader {}: data = {:?}", id, *guard);
+    let read_handles: Vec<_> = (0..3)
+        .map(|id| {
+            let data = Arc::clone(&data);
+            thread::spawn(move || {
+                let guard = data.read().unwrap();
+                println!("Reader {}: data = {:?}", id, *guard);
+            })
         })
-    }).collect();
-    
+        .collect();
+
     // 一个写入线程
     let write_handle = {
         let data = Arc::clone(&data);
@@ -541,7 +547,7 @@ fn demonstrate_rwlock_usage() {
             println!("Writer: added 100, data = {:?}", *guard);
         })
     };
-    
+
     for handle in read_handles {
         handle.join().unwrap();
     }
@@ -552,58 +558,76 @@ fn demonstrate_rwlock_usage() {
 // 原子操作共享
 fn demonstrate_atomic_sharing() {
     println!("--- Atomic Operations Sharing ---");
-    
+
     let shared_counter = Arc::new(AtomicUsize::new(0));
-    
-    let handles: Vec<_> = (0..5).map(|_| {
-        let counter = Arc::clone(&shared_counter);
-        thread::spawn(move || {
-            for _ in 0..100 {
-                counter.fetch_add(1, Ordering::Relaxed);
-            }
+
+    let handles: Vec<_> = (0..5)
+        .map(|_| {
+            let counter = Arc::clone(&shared_counter);
+            thread::spawn(move || {
+                for _ in 0..100 {
+                    counter.fetch_add(1, Ordering::Relaxed);
+                }
+            })
         })
-    }).collect();
-    
+        .collect();
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
-    println!("Final shared counter: {}", shared_counter.load(Ordering::Relaxed));
+
+    println!(
+        "Final shared counter: {}",
+        shared_counter.load(Ordering::Relaxed)
+    );
     println!();
 }
 
 // 自定义线程安全类型
 fn demonstrate_custom_sync() {
     println!("--- Custom Sync Types ---");
-    
+
     let custom_data = CustomSyncType {
         data: vec![1, 2, 3, 4, 5],
         counter: AtomicUsize::new(0),
         flag: AtomicBool::new(false),
     };
-    
+
     let shared_data = Arc::new(custom_data);
-    
-    let handles: Vec<_> = (0..3).map(|id| {
-        let data = Arc::clone(&shared_data);
-        thread::spawn(move || {
-            println!("Thread {}: data length = {}", id, data.data.len());
-            println!("Thread {}: counter = {}", id, data.counter.load(Ordering::Relaxed));
-            println!("Thread {}: flag = {}", id, data.flag.load(Ordering::Relaxed));
-            
-            // 修改原子字段
-            data.counter.fetch_add(id + 1, Ordering::Relaxed);
-            data.flag.store(true, Ordering::Relaxed);
+
+    let handles: Vec<_> = (0..3)
+        .map(|id| {
+            let data = Arc::clone(&shared_data);
+            thread::spawn(move || {
+                println!("Thread {}: data length = {}", id, data.data.len());
+                println!(
+                    "Thread {}: counter = {}",
+                    id,
+                    data.counter.load(Ordering::Relaxed)
+                );
+                println!(
+                    "Thread {}: flag = {}",
+                    id,
+                    data.flag.load(Ordering::Relaxed)
+                );
+
+                // 修改原子字段
+                data.counter.fetch_add(id + 1, Ordering::Relaxed);
+                data.flag.store(true, Ordering::Relaxed);
+            })
         })
-    }).collect();
-    
+        .collect();
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     let final_data = shared_data.as_ref();
     println!("Final state:");
-    println!("  - Counter: {}", final_data.counter.load(Ordering::Relaxed));
+    println!(
+        "  - Counter: {}",
+        final_data.counter.load(Ordering::Relaxed)
+    );
     println!("  - Flag: {}", final_data.flag.load(Ordering::Relaxed));
     println!();
 }
@@ -612,7 +636,7 @@ fn demonstrate_custom_sync() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_sync_example() {
         let data = SyncExample {
@@ -620,11 +644,11 @@ mod tests {
             value: 100,
             active: false,
         };
-        
+
         assert_eq!(data.name, "Test");
         assert_eq!(data.value, 100);
         assert!(!data.active);
-        
+
         // 测试可以跨线程共享引用
         let shared_data = Arc::new(data);
         let handle = thread::spawn(move || {
@@ -632,30 +656,30 @@ mod tests {
             assert_eq!(shared_data.value, 100);
             assert!(!shared_data.active);
         });
-        
+
         handle.join().unwrap();
     }
-    
+
     #[test]
     fn test_sync_container() {
         let container = SyncContainer {
             value: 42,
             metadata: "Test".to_string(),
         };
-        
+
         assert_eq!(container.value, 42);
         assert_eq!(container.metadata, "Test");
-        
+
         // 测试可以跨线程共享引用
         let shared_container = Arc::new(container);
         let handle = thread::spawn(move || {
             assert_eq!(shared_container.value, 42);
             assert_eq!(shared_container.metadata, "Test");
         });
-        
+
         handle.join().unwrap();
     }
-    
+
     #[test]
     fn test_custom_sync_type() {
         let custom = CustomSyncType {
@@ -663,11 +687,11 @@ mod tests {
             counter: AtomicUsize::new(0),
             flag: AtomicBool::new(false),
         };
-        
+
         assert_eq!(custom.data.len(), 3);
         assert_eq!(custom.counter.load(Ordering::Relaxed), 0);
         assert!(!custom.flag.load(Ordering::Relaxed));
-        
+
         // 测试可以跨线程共享引用
         let shared_custom = Arc::new(custom);
         let handle = thread::spawn(move || {
@@ -675,18 +699,18 @@ mod tests {
             shared_custom.counter.fetch_add(1, Ordering::Relaxed);
             shared_custom.flag.store(true, Ordering::Relaxed);
         });
-        
+
         handle.join().unwrap();
     }
-    
+
     #[test]
     fn test_thread_safe_data() {
         let data = ThreadSafeData::new(vec![1, 2, 3]);
-        
+
         assert_eq!(data.values.len(), 3);
         assert_eq!(data.get_count(), 0);
         assert!(data.is_active());
-        
+
         // 测试可以跨线程共享引用
         let shared_data = Arc::new(data);
         let handle = thread::spawn(move || {
@@ -694,7 +718,7 @@ mod tests {
             shared_data.increment();
             shared_data.set_active(false);
         });
-        
+
         handle.join().unwrap();
     }
 }

@@ -27,9 +27,12 @@ pub struct OpenTelemetryConfig {
 impl Default for OpenTelemetryConfig {
     fn default() -> Self {
         let mut resource_attributes = HashMap::new();
-        resource_attributes.insert("deployment.environment".to_string(), "development".to_string());
+        resource_attributes.insert(
+            "deployment.environment".to_string(),
+            "development".to_string(),
+        );
         resource_attributes.insert("service.instance.id".to_string(), "1".to_string());
-        
+
         Self {
             jaeger_endpoint: "http://localhost:14268/api/traces".to_string(),
             service_name: "microservice".to_string(),
@@ -65,7 +68,7 @@ pub fn custom_config(
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_default_config() {
         let config = OpenTelemetryConfig::default();
@@ -75,7 +78,7 @@ mod tests {
         assert!(config.metrics_enabled);
         assert!(config.logging_enabled);
     }
-    
+
     #[test]
     fn test_custom_config() {
         let config = custom_config(
@@ -83,7 +86,7 @@ mod tests {
             "2.0.0".to_string(),
             "http://jaeger:14268/api/traces".to_string(),
         );
-        
+
         assert_eq!(config.service_name, "my-service");
         assert_eq!(config.service_version, "2.0.0");
         assert_eq!(config.jaeger_endpoint, "http://jaeger:14268/api/traces");

@@ -1,7 +1,7 @@
+use crate::consistency::ConsistencyLevel;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::time::{Duration, SystemTime};
-use crate::consistency::ConsistencyLevel;
 
 /// 拜占庭容错节点状态
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -98,7 +98,7 @@ impl PBFTNode {
     /// 创建新的PBFT节点
     pub fn new(node_id: String, total_nodes: usize) -> Self {
         let max_faulty_nodes = (total_nodes - 1) / 3; // PBFT要求最多1/3的节点是拜占庭节点
-        
+
         Self {
             node_id,
             view: 0,
@@ -123,13 +123,16 @@ impl PBFTNode {
     }
 
     /// 处理请求消息
-    pub fn handle_request(&mut self, message: ByzantineMessage) -> Result<Vec<ByzantineMessage>, String> {
+    pub fn handle_request(
+        &mut self,
+        message: ByzantineMessage,
+    ) -> Result<Vec<ByzantineMessage>, String> {
         if let ByzantineMessage::Request { id, content, .. } = message.clone() {
             // 检查是否是主节点
             if self.is_primary() {
                 self.sequence += 1;
                 let digest = self.compute_digest(&content);
-                
+
                 // 创建准备消息
                 let prepare_message = ByzantineMessage::Prepare {
                     view: self.view,
@@ -138,9 +141,9 @@ impl PBFTNode {
                     sender: self.node_id.clone(),
                     timestamp: SystemTime::now(),
                 };
-                
+
                 self.pending_requests.insert(id.clone(), message);
-                
+
                 Ok(vec![prepare_message])
             } else {
                 Err("只有主节点可以处理请求".to_string())
@@ -151,26 +154,36 @@ impl PBFTNode {
     }
 
     /// 处理准备消息
-    pub fn handle_prepare(&mut self, message: ByzantineMessage) -> Result<Vec<ByzantineMessage>, String> {
-        if let ByzantineMessage::Prepare { view, sequence, digest, .. } = message.clone() {
+    pub fn handle_prepare(
+        &mut self,
+        message: ByzantineMessage,
+    ) -> Result<Vec<ByzantineMessage>, String> {
+        if let ByzantineMessage::Prepare {
+            view,
+            sequence,
+            digest,
+            ..
+        } = message.clone()
+        {
             // 验证消息
             if !self.validate_prepare_message(&message) {
                 return Err("无效的准备消息".to_string());
             }
-            
+
             // 收集准备消息
             let key = format!("{}-{}", view, sequence);
-            let certificate = self.prepared_certificates.entry(key.clone()).or_insert_with(|| {
-                PreparedCertificate {
+            let certificate = self
+                .prepared_certificates
+                .entry(key.clone())
+                .or_insert_with(|| PreparedCertificate {
                     view,
                     sequence,
                     digest: digest.clone(),
                     prepare_messages: Vec::new(),
-                }
-            });
-            
+                });
+
             certificate.prepare_messages.push(message);
-            
+
             // 检查是否收集到足够的准备消息
             if certificate.prepare_messages.len() >= self.quorum_size() {
                 // 创建预提交消息
@@ -181,7 +194,7 @@ impl PBFTNode {
                     sender: self.node_id.clone(),
                     timestamp: SystemTime::now(),
                 };
-                
+
                 Ok(vec![pre_commit_message])
             } else {
                 Ok(vec![])
@@ -192,20 +205,29 @@ impl PBFTNode {
     }
 
     /// 处理预提交消息
-    pub fn handle_pre_commit(&mut self, message: ByzantineMessage) -> Result<Vec<ByzantineMessage>, String> {
-        if let ByzantineMessage::PreCommit { view, sequence, digest, .. } = message.clone() {
+    pub fn handle_pre_commit(
+        &mut self,
+        message: ByzantineMessage,
+    ) -> Result<Vec<ByzantineMessage>, String> {
+        if let ByzantineMessage::PreCommit {
+            view,
+            sequence,
+            digest,
+            ..
+        } = message.clone()
+        {
             // 验证消息
             if !self.validate_pre_commit_message(&message) {
                 return Err("无效的预提交消息".to_string());
             }
-            
+
             // 收集预提交消息
             let key = format!("{}-{}", view, sequence);
             let mut pre_commit_count = 0;
-            
+
             // 这里应该维护预提交消息的收集，简化实现
             pre_commit_count += 1;
-            
+
             // 检查是否收集到足够的预提交消息
             if pre_commit_count >= self.quorum_size() {
                 // 提交请求
@@ -214,7 +236,7 @@ impl PBFTNode {
                         self.committed_requests.insert(key.clone(), content.clone());
                     }
                 }
-                
+
                 // 创建提交消息
                 let commit_message = ByzantineMessage::Commit {
                     view,
@@ -223,7 +245,7 @@ impl PBFTNode {
                     sender: self.node_id.clone(),
                     timestamp: SystemTime::now(),
                 };
-                
+
                 Ok(vec![commit_message])
             } else {
                 Ok(vec![])
@@ -240,12 +262,12 @@ impl PBFTNode {
             if !self.validate_commit_message(&message) {
                 return Err("无效的提交消息".to_string());
             }
-            
+
             // 这里应该收集提交消息并执行最终提交
             // 简化实现，直接标记为已提交
             let key = format!("{}-{}", view, sequence);
             println!("节点 {} 提交了请求 {}", self.node_id, key);
-            
+
             Ok(())
         } else {
             Err("无效的消息类型".to_string())
@@ -264,24 +286,30 @@ impl PBFTNode {
 
     /// 验证准备消息
     fn validate_prepare_message(&self, message: &ByzantineMessage) -> bool {
-        if let ByzantineMessage::Prepare { view, sequence, sender, .. } = message {
+        if let ByzantineMessage::Prepare {
+            view,
+            sequence,
+            sender,
+            ..
+        } = message
+        {
             // 检查视图号
             if *view != self.view {
                 return false;
             }
-            
+
             // 检查序列号
             if *sequence <= self.sequence {
                 return false;
             }
-            
+
             // 检查发送者状态
             if let Some(state) = self.node_states.get(sender) {
                 if *state == ByzantineNodeState::Byzantine {
                     return false;
                 }
             }
-            
+
             true
         } else {
             false
@@ -290,24 +318,30 @@ impl PBFTNode {
 
     /// 验证预提交消息
     fn validate_pre_commit_message(&self, message: &ByzantineMessage) -> bool {
-        if let ByzantineMessage::PreCommit { view, sequence, sender, .. } = message {
+        if let ByzantineMessage::PreCommit {
+            view,
+            sequence,
+            sender,
+            ..
+        } = message
+        {
             // 检查视图号
             if *view != self.view {
                 return false;
             }
-            
+
             // 检查序列号
             if *sequence <= self.sequence {
                 return false;
             }
-            
+
             // 检查发送者状态
             if let Some(state) = self.node_states.get(sender) {
                 if *state == ByzantineNodeState::Byzantine {
                     return false;
                 }
             }
-            
+
             true
         } else {
             false
@@ -316,24 +350,30 @@ impl PBFTNode {
 
     /// 验证提交消息
     fn validate_commit_message(&self, message: &ByzantineMessage) -> bool {
-        if let ByzantineMessage::Commit { view, sequence, sender, .. } = message {
+        if let ByzantineMessage::Commit {
+            view,
+            sequence,
+            sender,
+            ..
+        } = message
+        {
             // 检查视图号
             if *view != self.view {
                 return false;
             }
-            
+
             // 检查序列号
             if *sequence <= self.sequence {
                 return false;
             }
-            
+
             // 检查发送者状态
             if let Some(state) = self.node_states.get(sender) {
                 if *state == ByzantineNodeState::Byzantine {
                     return false;
                 }
             }
-            
+
             true
         } else {
             false
@@ -344,7 +384,7 @@ impl PBFTNode {
     fn compute_digest(&self, content: &[u8]) -> String {
         use std::collections::hash_map::DefaultHasher;
         use std::hash::{Hash, Hasher};
-        
+
         let mut hasher = DefaultHasher::new();
         content.hash(&mut hasher);
         format!("{:x}", hasher.finish())
@@ -352,17 +392,22 @@ impl PBFTNode {
 
     /// 标记节点为拜占庭节点
     pub fn mark_node_byzantine(&mut self, node_id: &str) {
-        self.node_states.insert(node_id.to_string(), ByzantineNodeState::Byzantine);
+        self.node_states
+            .insert(node_id.to_string(), ByzantineNodeState::Byzantine);
     }
 
     /// 标记节点为正常节点
     pub fn mark_node_honest(&mut self, node_id: &str) {
-        self.node_states.insert(node_id.to_string(), ByzantineNodeState::Honest);
+        self.node_states
+            .insert(node_id.to_string(), ByzantineNodeState::Honest);
     }
 
     /// 获取节点状态
     pub fn get_node_state(&self, node_id: &str) -> ByzantineNodeState {
-        self.node_states.get(node_id).copied().unwrap_or(ByzantineNodeState::Unknown)
+        self.node_states
+            .get(node_id)
+            .copied()
+            .unwrap_or(ByzantineNodeState::Unknown)
     }
 
     /// 检查是否应该触发视图变更
@@ -377,16 +422,16 @@ impl PBFTNode {
         if !self.should_trigger_view_change() {
             return Err("不需要视图变更".to_string());
         }
-        
+
         self.view += 1;
-        
+
         let view_change_message = ByzantineMessage::ViewChange {
             new_view: self.view,
             sender: self.node_id.clone(),
             prepared_certificates: self.prepared_certificates.values().cloned().collect(),
             timestamp: SystemTime::now(),
         };
-        
+
         Ok(vec![view_change_message])
     }
 }
@@ -404,12 +449,12 @@ impl ByzantineNetwork {
     /// 创建新的拜占庭网络
     pub fn new(total_nodes: usize, network_delay: Duration, message_loss_rate: f64) -> Self {
         let mut nodes = HashMap::new();
-        
+
         for i in 0..total_nodes {
             let node_id = format!("node_{}", i);
             nodes.insert(node_id.clone(), PBFTNode::new(node_id, total_nodes));
         }
-        
+
         Self {
             nodes,
             message_queue: Vec::new(),
@@ -424,7 +469,7 @@ impl ByzantineNetwork {
         if self.should_drop_message() {
             return Ok(()); // 消息丢失
         }
-        
+
         self.message_queue.push(message);
         Ok(())
     }
@@ -432,11 +477,11 @@ impl ByzantineNetwork {
     /// 处理消息队列
     pub fn process_messages(&mut self) -> Result<(), String> {
         let messages = std::mem::take(&mut self.message_queue);
-        
+
         for message in messages {
             self.route_message(message)?;
         }
-        
+
         Ok(())
     }
 
@@ -450,7 +495,7 @@ impl ByzantineNetwork {
             ByzantineMessage::ViewChange { sender, .. } => sender.clone(),
             ByzantineMessage::NewView { sender, .. } => sender.clone(),
         };
-        
+
         if let Some(node) = self.nodes.get_mut(&target_node) {
             let responses = match &message {
                 ByzantineMessage::Request { .. } => node.handle_request(message)?,
@@ -458,20 +503,20 @@ impl ByzantineNetwork {
                 ByzantineMessage::PreCommit { .. } => {
                     let responses = node.handle_pre_commit(message)?;
                     responses
-                },
+                }
                 ByzantineMessage::Commit { .. } => {
                     node.handle_commit(message)?;
                     vec![]
-                },
+                }
                 _ => vec![],
             };
-            
+
             // 发送响应消息
             for response in responses {
                 self.send_message(response)?;
             }
         }
-        
+
         Ok(())
     }
 
@@ -479,23 +524,25 @@ impl ByzantineNetwork {
     fn should_drop_message(&self) -> bool {
         use std::collections::hash_map::DefaultHasher;
         use std::hash::{Hash, Hasher};
-        
+
         let mut hasher = DefaultHasher::new();
         std::time::Instant::now().hash(&mut hasher);
         let hash = hasher.finish();
         let random = (hash % 100) as f64 / 100.0;
-        
+
         random < self.message_loss_rate
     }
 
     /// 获取网络统计信息
     pub fn get_network_stats(&self) -> ByzantineNetworkStats {
         let total_nodes = self.nodes.len();
-        let byzantine_nodes = self.nodes.values()
+        let byzantine_nodes = self
+            .nodes
+            .values()
             .flat_map(|node| node.node_states.values())
             .filter(|&&state| state == ByzantineNodeState::Byzantine)
             .count();
-        
+
         ByzantineNetworkStats {
             total_nodes,
             byzantine_nodes,

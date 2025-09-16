@@ -1,15 +1,15 @@
 //! # Rust工作流系统模块 / Rust Workflow System Module
-//! 
+//!
 //! 本模块提供了完整的Rust工作流系统理论体系和实现框架。
 //! This module provides a complete theoretical system and implementation framework for Rust workflow systems.
-//! 
+//!
 //! ## 理论基础 / Theoretical Foundation
-//! 
+//!
 //! ### 进程代数理论 / Process Algebra Theory
-//! 
+//!
 //! 工作流系统基于进程代数理论，通过形式化方法描述并发进程的行为和交互。
 //! Workflow systems are based on process algebra theory, using formal methods to describe the behavior and interaction of concurrent processes.
-//! 
+//!
 //! ```rust
 //! /// 进程代数基本操作 / Basic Process Algebra Operations
 //! pub trait ProcessAlgebra {
@@ -29,12 +29,12 @@
 //!         T: ProcessAlgebra;
 //! }
 //! ```
-//! 
+//!
 //! ### 状态机理论 / State Machine Theory
-//! 
+//!
 //! 工作流系统通过状态机理论实现状态转换和事件驱动的执行模型。
 //! Workflow systems implement state transitions and event-driven execution models through state machine theory.
-//! 
+//!
 //! ```rust
 //! /// 状态机定义 / State Machine Definition
 //! pub trait StateMachine {
@@ -49,21 +49,21 @@
 //!     fn execute_action(&self, state: &Self::State) -> Option<Self::Action>;
 //! }
 //! ```
-//! 
+//!
 //! ### 分布式协调理论 / Distributed Coordination Theory
-//! 
+//!
 //! 在分布式环境中，工作流系统需要协调多个节点的执行状态。
 //! In distributed environments, workflow systems need to coordinate execution states across multiple nodes.
-//! 
+//!
 //! ## 工程实践 / Engineering Practice
-//! 
+//!
 //! ### 工作流引擎实现 / Workflow Engine Implementation
-//! 
+//!
 //! ```rust
 //! use std::collections::HashMap;
 //! use std::sync::{Arc, Mutex};
 //! use tokio::sync::mpsc;
-//! 
+//!
 //! /// 工作流引擎 / Workflow Engine
 //! pub struct WorkflowEngine {
 //!     /// 工作流定义 / Workflow Definitions
@@ -74,7 +74,7 @@
 //!     event_sender: mpsc::Sender<WorkflowEvent>,
 //!     event_receiver: mpsc::Receiver<WorkflowEvent>,
 //! }
-//! 
+//!
 //! impl WorkflowEngine {
 //!     /// 创建工作流引擎 / Create Workflow Engine
 //!     pub fn new() -> Self {
@@ -135,9 +135,9 @@
 //!     }
 //! }
 //! ```
-//! 
+//!
 //! ### 状态管理机制 / State Management Mechanisms
-//! 
+//!
 //! ```rust
 //! /// 执行状态 / Execution State
 //! #[derive(Debug, Clone)]
@@ -153,7 +153,7 @@
 //!     /// 最后更新时间 / Last Update Time
 //!     pub updated_at: std::time::Instant,
 //! }
-//! 
+//!
 //! impl ExecutionState {
 //!     /// 创建新的执行状态 / Create New Execution State
 //!     pub fn new(data: WorkflowData) -> Self {
@@ -182,9 +182,9 @@
 //!     }
 //! }
 //! ```
-//! 
+//!
 //! ### 错误处理策略 / Error Handling Strategies
-//! 
+//!
 //! ```rust
 //! /// 工作流错误类型 / Workflow Error Types
 //! #[derive(Debug, thiserror::Error)]
@@ -207,7 +207,7 @@
 //!     #[error("数据序列化错误 / Data serialization error: {0}")]
 //!     SerializationError(#[from] serde_json::Error),
 //! }
-//! 
+//!
 //! /// 错误恢复策略 / Error Recovery Strategies
 //! pub trait ErrorRecovery {
 //!     /// 重试策略 / Retry Strategy
@@ -220,123 +220,123 @@
 //!     fn execute_compensation(&self, compensation_action: String) -> Result<(), WorkflowError>;
 //! }
 //! ```
-//! 
+//!
 //! ## 批判性分析 / Critical Analysis
-//! 
+//!
 //! ### 优势分析 / Advantage Analysis
-//! 
+//!
 //! #### 技术优势 / Technical Advantages
-//! 
+//!
 //! 1. **类型安全保证 / Type Safety Guarantees**
 //!    - Rust的所有权系统确保工作流状态的内存安全
 //!    - Rust's ownership system ensures memory safety of workflow states
 //!    - 编译时检查防止数据竞争和并发错误
 //!    - Compile-time checks prevent data races and concurrency errors
-//! 
+//!
 //! 2. **零成本抽象 / Zero-cost Abstractions**
 //!    - 工作流引擎的抽象层不引入运行时开销
 //!    - Abstraction layers of workflow engine introduce no runtime overhead
 //!    - 高性能的事件处理机制
 //!    - High-performance event processing mechanisms
-//! 
+//!
 //! 3. **并发安全 / Concurrency Safety**
 //!    - 基于Rust的并发原语实现线程安全
 //!    - Thread safety implemented using Rust's concurrency primitives
 //!    - 无锁数据结构提高性能
 //!    - Lock-free data structures improve performance
-//! 
+//!
 //! #### 性能优势 / Performance Advantages
-//! 
+//!
 //! 1. **内存效率 / Memory Efficiency**
 //!    - 无垃圾回收，内存使用可预测
 //!    - No garbage collection, predictable memory usage
 //!    - 栈分配减少堆分配开销
 //!    - Stack allocation reduces heap allocation overhead
-//! 
+//!
 //! 2. **执行效率 / Execution Efficiency**
 //!    - 编译优化生成高效机器码
 //!    - Compiler optimizations generate efficient machine code
 //!    - 异步执行提高吞吐量
 //!    - Asynchronous execution improves throughput
-//! 
+//!
 //! ### 局限性讨论 / Limitation Discussion
-//! 
+//!
 //! #### 技术限制 / Technical Limitations
-//! 
+//!
 //! 1. **学习曲线 / Learning Curve**
 //!    - 所有权和借用规则对新手较难理解
 //!    - Ownership and borrowing rules are difficult for beginners to understand
 //!    - 工作流系统的复杂性增加了学习成本
 //!    - Complexity of workflow systems increases learning cost
-//! 
+//!
 //! 2. **生态系统限制 / Ecosystem Limitations**
 //!    - 工作流相关的库和工具相对较少
 //!    - Relatively fewer libraries and tools for workflow systems
 //!    - 社区支持不如其他语言成熟
 //!    - Community support is less mature compared to other languages
-//! 
+//!
 //! #### 性能限制 / Performance Limitations
-//! 
+//!
 //! 1. **编译时间 / Compilation Time**
 //!    - 复杂的工作流定义可能导致较长编译时间
 //!    - Complex workflow definitions may lead to long compilation times
 //!    - 增量编译在某些场景下效果有限
 //!    - Incremental compilation has limited effectiveness in some scenarios
-//! 
+//!
 //! 2. **内存使用 / Memory Usage**
 //!    - 大型工作流实例可能占用较多内存
 //!    - Large workflow instances may consume significant memory
 //!    - 状态历史记录需要内存管理策略
 //!    - State history requires memory management strategies
-//! 
+//!
 //! ### 改进建议 / Improvement Suggestions
-//! 
+//!
 //! #### 短期改进 / Short-term Improvements
-//! 
+//!
 //! 1. **开发工具改进 / Development Tool Improvements**
 //!    - 提供更好的IDE支持和调试工具
 //!    - Provide better IDE support and debugging tools
 //!    - 工作流可视化编辑器
 //!    - Workflow visual editor
-//! 
+//!
 //! 2. **文档完善 / Documentation Enhancement**
 //!    - 提供更多示例和最佳实践
 //!    - Provide more examples and best practices
 //!    - 交互式教程和在线演示
 //!    - Interactive tutorials and online demos
-//! 
+//!
 //! #### 中期规划 / Medium-term Planning
-//! 
+//!
 //! 1. **生态系统扩展 / Ecosystem Expansion**
 //!    - 开发更多工作流相关的库和框架
 //!    - Develop more workflow-related libraries and frameworks
 //!    - 与现有工作流引擎的互操作性
 //!    - Interoperability with existing workflow engines
-//! 
+//!
 //! 2. **性能优化 / Performance Optimization**
 //!    - 进一步优化内存使用模式
 //!    - Further optimize memory usage patterns
 //!    - 改进并发处理能力
 //!    - Improve concurrent processing capabilities
-//! 
+//!
 //! #### 长期愿景 / Long-term Vision
-//! 
+//!
 //! 1. **标准化 / Standardization**
 //!    - 参与工作流标准的制定
 //!    - Participate in workflow standard development
 //!    - 建立Rust工作流生态系统标准
 //!    - Establish Rust workflow ecosystem standards
-//! 
+//!
 //! 2. **技术创新 / Technical Innovation**
 //!    - 探索新的工作流模型和算法
 //!    - Explore new workflow models and algorithms
 //!    - 与AI和机器学习技术的集成
 //!    - Integration with AI and machine learning technologies
-//! 
+//!
 //! ## 生态系统 / Ecosystem
-//! 
+//!
 //! ### 工具链支持 / Toolchain Support
-//! 
+//!
 //! ```rust
 //! /// 工作流开发工具 / Workflow Development Tools
 //! pub mod tools {
@@ -350,40 +350,40 @@
 //!     pub struct WorkflowVisualizer;
 //! }
 //! ```
-//! 
+//!
 //! ### 社区实践 / Community Practices
-//! 
+//!
 //! 1. **开源项目 / Open Source Projects**
 //!    - 多个开源工作流引擎项目
 //!    - Multiple open source workflow engine projects
 //!    - 活跃的社区贡献
 //!    - Active community contributions
-//! 
+//!
 //! 2. **最佳实践 / Best Practices**
 //!    - 工作流设计模式
 //!    - Workflow design patterns
 //!    - 性能优化指南
 //!    - Performance optimization guides
-//! 
+//!
 //! ### 发展趋势 / Development Trends
-//! 
+//!
 //! 1. **云原生工作流 / Cloud-native Workflows**
 //!    - 与Kubernetes的深度集成
 //!    - Deep integration with Kubernetes
 //!    - 微服务架构支持
 //!    - Microservice architecture support
-//! 
+//!
 //! 2. **事件驱动架构 / Event-driven Architecture**
 //!    - 响应式工作流设计
 //!    - Reactive workflow design
 //!    - 流式处理能力
 //!    - Stream processing capabilities
-//! 
+//!
 //! ## 使用示例 / Usage Examples
-//! 
+//!
 //! ```rust
 //! use crate::workflow::{WorkflowEngine, WorkflowDefinition, WorkflowData};
-//! 
+//!
 //! #[tokio::main]
 //! async fn main() -> Result<(), Box<dyn std::error::Error>> {
 //!     // 创建工作流引擎 / Create workflow engine
@@ -421,11 +421,11 @@
 //! ```
 
 // 核心类型定义 / Core Type Definitions
-pub mod types;
 pub mod engine;
-pub mod state;
 pub mod error;
+pub mod state;
 pub mod tools;
+pub mod types;
 
 // Rust 1.89 特性模块 / Rust 1.89 Features Module
 #[cfg(feature = "rust189")]
@@ -478,4 +478,4 @@ pub const VERSION: &str = "1.89.0";
 pub fn init() -> Result<(), crate::error::WorkflowError> {
     println!("Rust工作流系统模块已初始化 / Rust Workflow System Module Initialized");
     Ok(())
-} 
+}

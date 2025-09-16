@@ -1,8 +1,8 @@
-use crate::types::{IpcConfig, Message};
-use crate::error::{IpcResult, IpcError};
+use crate::error::{IpcError, IpcResult};
 use crate::inter_process_communication::IpcChannel;
-use std::sync::{Arc, Mutex};
+use crate::types::{IpcConfig, Message};
 use std::collections::HashMap;
+use std::sync::{Arc, Mutex};
 
 /// 共享内存区域实现（简化版本）
 #[allow(dead_code)]
@@ -25,7 +25,7 @@ impl SharedMemoryRegion {
             data: Arc::new(Mutex::new(HashMap::new())),
         })
     }
-    
+
     /// 连接到现有的共享内存区域
     pub fn connect(name: &str, config: IpcConfig) -> IpcResult<Self> {
         Ok(Self {
@@ -41,22 +41,22 @@ impl SharedMemoryRegion {
 impl IpcChannel for SharedMemoryRegion {
     fn send_message(&self, msg: &Message<Vec<u8>>) -> IpcResult<()> {
         let key = format!("msg_{}", msg.id);
-        let data = serde_json::to_vec(&msg)
-            .map_err(|e| IpcError::SerializationError(e.to_string()))?;
-        
+        let data =
+            serde_json::to_vec(&msg).map_err(|e| IpcError::SerializationError(e.to_string()))?;
+
         let mut shared_data = self.data.lock().unwrap();
         shared_data.insert(key, data);
-        
+
         Ok(())
     }
-    
+
     fn receive_message(&self) -> IpcResult<Message<Vec<u8>>> {
         let shared_data = self.data.lock().unwrap();
-        
+
         // 查找最新的消息
         let mut latest_key = None;
         let mut latest_id = 0u64;
-        
+
         for key in shared_data.keys() {
             if key.starts_with("msg_") {
                 if let Ok(id) = key[4..].parse::<u64>() {
@@ -67,7 +67,7 @@ impl IpcChannel for SharedMemoryRegion {
                 }
             }
         }
-        
+
         if let Some(key) = latest_key {
             if let Some(data) = shared_data.get(&key) {
                 let msg: Message<Vec<u8>> = serde_json::from_slice(data)
@@ -75,25 +75,25 @@ impl IpcChannel for SharedMemoryRegion {
                 return Ok(msg);
             }
         }
-        
+
         Err(IpcError::ReceiveFailed("No message available".to_string()))
     }
-    
+
     fn is_closed(&self) -> bool {
         *self.is_closed.lock().unwrap()
     }
-    
+
     fn close(&mut self) -> IpcResult<()> {
         let mut closed = self.is_closed.lock().unwrap();
         *closed = true;
-        
+
         // 清理数据
         let mut shared_data = self.data.lock().unwrap();
         shared_data.clear();
-        
+
         Ok(())
     }
-    
+
     fn name(&self) -> &str {
         &self.name
     }

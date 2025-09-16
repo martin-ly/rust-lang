@@ -1,45 +1,80 @@
 //! 数论基础：快速幂、扩展欧几里得、模逆、Miller–Rabin、Pollard Rho
 
 pub fn mod_pow(mut a: u128, mut e: u128, m: u128) -> u128 {
-    let mut r = 1u128; a %= m;
-    while e > 0 { if e & 1 == 1 { r = r.saturating_mul(a) % m; } a = a.saturating_mul(a) % m; e >>= 1; }
+    let mut r = 1u128;
+    a %= m;
+    while e > 0 {
+        if e & 1 == 1 {
+            r = r.saturating_mul(a) % m;
+        }
+        a = a.saturating_mul(a) % m;
+        e >>= 1;
+    }
     r
 }
 
 pub fn egcd(a: i128, b: i128) -> (i128, i128, i128) {
-    if b == 0 { (a.abs(), a.signum(), 0) } else { let (g, x, y) = egcd(b, a % b); (g, y, x - (a / b) * y) }
+    if b == 0 {
+        (a.abs(), a.signum(), 0)
+    } else {
+        let (g, x, y) = egcd(b, a % b);
+        (g, y, x - (a / b) * y)
+    }
 }
 
 pub fn mod_inv(a: i128, m: i128) -> Option<i128> {
-    let (g, x, _) = egcd(a, m); if g != 1 { None } else { Some((x % m + m) % m) }
+    let (g, x, _) = egcd(a, m);
+    if g != 1 { None } else { Some((x % m + m) % m) }
 }
 
 fn is_probable_prime_u64(n: u64) -> bool {
-    if n < 2 { return false; }
-    for p in [2u64,3,5,7,11,13,17,19,23,29,31,37] { if n % p == 0 { return n == p; } }
+    if n < 2 {
+        return false;
+    }
+    for p in [2u64, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37] {
+        if n % p == 0 {
+            return n == p;
+        }
+    }
     let d = (n - 1) >> (n - 1).trailing_zeros();
     let s = (n - 1).trailing_zeros();
     let bases: [u64; 7] = [2, 325, 9375, 28178, 450775, 9780504, 1795265022]; // 对 64-bit 完整
     'a: for &a in &bases {
         let mut x = mod_pow(a as u128 % n as u128, d as u128, n as u128) as u64;
-        if x == 1 || x == n - 1 { continue; }
-        for _ in 1..s { x = ((x as u128 * x as u128) % n as u128) as u64; if x == n - 1 { continue 'a; } }
+        if x == 1 || x == n - 1 {
+            continue;
+        }
+        for _ in 1..s {
+            x = ((x as u128 * x as u128) % n as u128) as u64;
+            if x == n - 1 {
+                continue 'a;
+            }
+        }
         return false;
     }
     true
 }
 
-pub fn is_prime(n: u64) -> bool { is_probable_prime_u64(n) }
+pub fn is_prime(n: u64) -> bool {
+    is_probable_prime_u64(n)
+}
 
-fn f_rho(x: u128, c: u128, n: u128) -> u128 { (x.saturating_mul(x).saturating_add(c)) % n }
-
+fn f_rho(x: u128, c: u128, n: u128) -> u128 {
+    (x.saturating_mul(x).saturating_add(c)) % n
+}
 
 fn gcd_u128(mut a: u128, mut b: u128) -> u128 {
-    while b != 0 { let r = a % b; a = b; b = r; }
+    while b != 0 {
+        let r = a % b;
+        a = b;
+        b = r;
+    }
     a
 }
 pub fn pollard_rho(n: u128) -> u128 {
-    if n % 2 == 0 { return 2; }
+    if n % 2 == 0 {
+        return 2;
+    }
     use rand::{Rng, rngs::ThreadRng};
     let mut rng = ThreadRng::default();
     loop {
@@ -53,7 +88,9 @@ pub fn pollard_rho(n: u128) -> u128 {
             let diff = if x > y { x - y } else { y - x };
             d = gcd_u128(diff, n);
         }
-        if d != n { return d; }
+        if d != n {
+            return d;
+        }
     }
 }
 
@@ -73,5 +110,3 @@ mod tests {
         assert!(f == 7 || f == 13);
     }
 }
-
-

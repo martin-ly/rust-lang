@@ -6,7 +6,9 @@
 #[tokio::main(flavor = "current_thread")]
 async fn main() {
     use c18_model::runtime_abi::Channel as _;
-    use c18_model::runtime_tokio::{TokioCancellationToken, TokioTimer, TokioSpawner, TokioChannel};
+    use c18_model::runtime_tokio::{
+        TokioCancellationToken, TokioChannel, TokioSpawner, TokioTimer,
+    };
     use core::time::Duration;
 
     let spawner = TokioSpawner;
@@ -20,8 +22,12 @@ async fn main() {
         let tx = tx.clone();
         async move {
             for i in 0..100u32 {
-                if cancel.is_cancelled() { break; }
-                if tx.send(i).await.is_err() { break; }
+                if cancel.is_cancelled() {
+                    break;
+                }
+                if tx.send(i).await.is_err() {
+                    break;
+                }
             }
         }
     });
@@ -55,5 +61,3 @@ async fn main() {
 fn main() {
     eprintln!("启用 --features tokio-adapter 运行该示例");
 }
-
-

@@ -6,15 +6,24 @@ use rayon::prelude::*;
 /// 检查在 `row` 行把皇后放在 `col` 是否安全
 fn is_safe(partial: &[usize], row: usize, col: usize) -> bool {
     for (r, &c) in partial.iter().enumerate() {
-        if c == col { return false; }
+        if c == col {
+            return false;
+        }
         let dr = row as isize - r as isize;
         let dc = col as isize - c as isize;
-        if dr.abs() == dc.abs() { return false; }
+        if dr.abs() == dc.abs() {
+            return false;
+        }
     }
     true
 }
 
-fn solve_sync_inner(n: usize, row: usize, partial: &mut Vec<usize>, solutions: &mut Vec<Vec<usize>>) {
+fn solve_sync_inner(
+    n: usize,
+    row: usize,
+    partial: &mut Vec<usize>,
+    solutions: &mut Vec<Vec<usize>>,
+) {
     if row == n {
         solutions.push(partial.clone());
         return;
@@ -96,7 +105,9 @@ pub fn permutations_parallel<T: Clone + Send + Sync>(nums: Vec<T>) -> Vec<Vec<T>
         .collect()
 }
 
-pub async fn permutations_async<T: Clone + Send + Sync + 'static>(nums: Vec<T>) -> Result<Vec<Vec<T>>> {
+pub async fn permutations_async<T: Clone + Send + Sync + 'static>(
+    nums: Vec<T>,
+) -> Result<Vec<Vec<T>>> {
     Ok(tokio::task::spawn_blocking(move || permutations_parallel(nums)).await?)
 }
 
@@ -105,7 +116,10 @@ pub fn subsets_sync<T: Clone>(nums: &[T]) -> Vec<Vec<T>> {
     let mut res = Vec::with_capacity(1 << n);
     let mut cur = Vec::new();
     fn dfs<T: Clone>(i: usize, nums: &[T], cur: &mut Vec<T>, out: &mut Vec<Vec<T>>) {
-        if i == nums.len() { out.push(cur.clone()); return; }
+        if i == nums.len() {
+            out.push(cur.clone());
+            return;
+        }
         dfs(i + 1, nums, cur, out);
         cur.push(nums[i].clone());
         dfs(i + 1, nums, cur, out);
@@ -120,12 +134,17 @@ pub fn subsets_parallel<T: Clone + Send + Sync>(nums: &[T]) -> Vec<Vec<T>> {
     let half = n / 2;
     let left = &nums[..half];
     let right = &nums[half..];
-    let (a, b): (Vec<Vec<T>>, Vec<Vec<T>>) = rayon::join(|| subsets_sync(left), || subsets_sync(right));
+    let (a, b): (Vec<Vec<T>>, Vec<Vec<T>>) =
+        rayon::join(|| subsets_sync(left), || subsets_sync(right));
     // 笛卡尔积合并（避免借用生命周期问题：克隆 b 进入闭包）
     a.into_par_iter()
         .flat_map_iter(move |l| {
             let b_local = b.clone();
-            b_local.into_iter().map(move |r| { let mut v = l.clone(); v.extend(r); v })
+            b_local.into_iter().map(move |r| {
+                let mut v = l.clone();
+                v.extend(r);
+                v
+            })
         })
         .collect()
 }
@@ -168,4 +187,3 @@ mod tests {
         assert_eq!(s.len(), 8);
     }
 }
-

@@ -25,18 +25,27 @@ impl WebSocketOpcode {
             0x8 => Ok(WebSocketOpcode::Close),
             0x9 => Ok(WebSocketOpcode::Ping),
             0xA => Ok(WebSocketOpcode::Pong),
-            _ => Err(NetworkError::Protocol(format!("Invalid WebSocket opcode: {}", value))),
+            _ => Err(NetworkError::Protocol(format!(
+                "Invalid WebSocket opcode: {}",
+                value
+            ))),
         }
     }
 
     /// 检查是否为控制帧
     pub fn is_control_frame(&self) -> bool {
-        matches!(self, WebSocketOpcode::Close | WebSocketOpcode::Ping | WebSocketOpcode::Pong)
+        matches!(
+            self,
+            WebSocketOpcode::Close | WebSocketOpcode::Ping | WebSocketOpcode::Pong
+        )
     }
 
     /// 检查是否为数据帧
     pub fn is_data_frame(&self) -> bool {
-        matches!(self, WebSocketOpcode::Text | WebSocketOpcode::Binary | WebSocketOpcode::Continuation)
+        matches!(
+            self,
+            WebSocketOpcode::Text | WebSocketOpcode::Binary | WebSocketOpcode::Continuation
+        )
     }
 }
 
@@ -66,7 +75,10 @@ impl WebSocketFrame {
 
     /// 创建文本帧
     pub fn text(text: &str) -> Self {
-        Self::new(WebSocketOpcode::Text, Bytes::copy_from_slice(text.as_bytes()))
+        Self::new(
+            WebSocketOpcode::Text,
+            Bytes::copy_from_slice(text.as_bytes()),
+        )
     }
 
     /// 创建二进制帧
@@ -77,15 +89,15 @@ impl WebSocketFrame {
     /// 创建关闭帧
     pub fn close(code: Option<u16>, reason: Option<&str>) -> Self {
         let mut payload = Vec::new();
-        
+
         if let Some(code) = code {
             payload.extend_from_slice(&code.to_be_bytes());
         }
-        
+
         if let Some(reason) = reason {
             payload.extend_from_slice(reason.as_bytes());
         }
-        
+
         Self::new(WebSocketOpcode::Close, payload.into())
     }
 
@@ -108,13 +120,19 @@ mod tests {
 
     #[test]
     fn test_websocket_opcode() {
-        assert_eq!(WebSocketOpcode::from_u8(0x1).unwrap(), WebSocketOpcode::Text);
-        assert_eq!(WebSocketOpcode::from_u8(0x8).unwrap(), WebSocketOpcode::Close);
+        assert_eq!(
+            WebSocketOpcode::from_u8(0x1).unwrap(),
+            WebSocketOpcode::Text
+        );
+        assert_eq!(
+            WebSocketOpcode::from_u8(0x8).unwrap(),
+            WebSocketOpcode::Close
+        );
         assert!(WebSocketOpcode::from_u8(0xF).is_err());
-        
+
         assert!(WebSocketOpcode::Close.is_control_frame());
         assert!(!WebSocketOpcode::Text.is_control_frame());
-        
+
         assert!(WebSocketOpcode::Text.is_data_frame());
         assert!(!WebSocketOpcode::Close.is_data_frame());
     }
@@ -125,11 +143,11 @@ mod tests {
         assert_eq!(text_frame.opcode, WebSocketOpcode::Text);
         assert_eq!(text_frame.payload, Bytes::from("Hello, World!"));
         assert!(text_frame.fin);
-        
+
         let binary_frame = WebSocketFrame::binary(&[1, 2, 3, 4]);
         assert_eq!(binary_frame.opcode, WebSocketOpcode::Binary);
         assert_eq!(binary_frame.payload, Bytes::from(&[1, 2, 3, 4][..]));
-        
+
         let close_frame = WebSocketFrame::close(Some(1000), Some("Normal closure"));
         assert_eq!(close_frame.opcode, WebSocketOpcode::Close);
     }

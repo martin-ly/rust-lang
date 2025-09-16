@@ -1,13 +1,13 @@
 //! Axum Web框架模块
-//! 
+//!
 //! 提供基于Axum的现代Web微服务实现，支持RESTful API、WebSocket、中间件等。
 
 use axum::{
+    Router,
     extract::{Path, Query, State},
     http::StatusCode,
     response::Json,
     routing::get,
-    Router,
 };
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -18,8 +18,8 @@ use tracing::info;
 use crate::{
     config::Config,
     error::{Error, Result},
-    utils::{HealthCheck, PaginationParams, PaginatedResponse, SuccessResponse},
-    middleware::{MiddlewareBuilder, CorsConfig, RateLimitConfig},
+    middleware::{CorsConfig, MiddlewareBuilder, RateLimitConfig},
+    utils::{HealthCheck, PaginatedResponse, PaginationParams, SuccessResponse},
 };
 
 /// Axum微服务应用
@@ -37,7 +37,6 @@ pub struct User {
     pub created_at: u64,
 }
 
-
 /// 应用状态
 #[derive(Clone)]
 pub struct AppState {
@@ -54,47 +53,46 @@ impl AxumMicroservice {
         };
 
         let router = Self::create_router(state);
-        
+
         Self { config, router }
     }
-    
+
     /// 创建路由
     fn create_router(state: AppState) -> Router {
         Router::new()
             // 健康检查
             .route("/health", get(health_check))
             .route("/health/detailed", get(detailed_health_check))
-            
             // 用户API - 简化路由
             .route("/users", get(list_users))
             .route("/users/:id", get(get_user))
-            
             // 指标端点
             .route("/metrics", get(metrics))
-            
             // 应用状态
             .with_state(state)
     }
-    
+
     /// 获取路由器
     pub fn router(self) -> Router {
         self.router
     }
-    
+
     /// 启动服务器
     pub async fn serve(self) -> Result<()> {
         let config = self.config.clone();
         let app = self.router();
         let addr = format!("{}:{}", config.service.host, config.service.port);
-        
+
         info!("启动Axum微服务: {}", addr);
-        
-        let listener = tokio::net::TcpListener::bind(&addr).await
+
+        let listener = tokio::net::TcpListener::bind(&addr)
+            .await
             .map_err(|e| Error::config(format!("无法绑定地址 {}: {}", addr, e)))?;
-        
-        axum::serve(listener, app).await
+
+        axum::serve(listener, app)
+            .await
             .map_err(|e| Error::config(format!("服务器启动失败: {}", e)))?;
-        
+
         Ok(())
     }
 }
@@ -110,7 +108,7 @@ async fn detailed_health_check(State(state): State<AppState>) -> Json<HealthChec
         state.config.service.version.clone(),
         0, // 这里应该计算实际运行时间
     );
-    
+
     Json(health)
 }
 
@@ -121,17 +119,16 @@ async fn list_users(
 ) -> std::result::Result<Json<PaginatedResponse<User>>, StatusCode> {
     let users = state.users.read().await;
     let user_list: Vec<User> = users.values().cloned().collect();
-    
+
     let pagination = PaginationParams {
         page: params.page,
         page_size: params.page_size,
         total: Some(user_list.len() as u64),
     };
-    
+
     let response = PaginatedResponse::new(user_list, pagination);
     Ok(Json(response))
 }
-
 
 /// 获取单个用户
 async fn get_user(
@@ -139,7 +136,7 @@ async fn get_user(
     Path(id): Path<String>,
 ) -> std::result::Result<Json<SuccessResponse<User>>, StatusCode> {
     let users = state.users.read().await;
-    
+
     match users.get(&id) {
         Some(user) => {
             let response = SuccessResponse::new(user.clone(), "用户获取成功".to_string());
@@ -148,7 +145,6 @@ async fn get_user(
         None => Err(StatusCode::NOT_FOUND),
     }
 }
-
 
 /// 指标端点
 async fn metrics(State(state): State<AppState>) -> String {
@@ -180,21 +176,20 @@ pub fn create_app_with_middleware(config: Config) -> Router {
         .metrics();
 
     let router = AxumMicroservice::create_router(state);
-    
+
     router
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[tokio::test]
     async fn test_health_check() {
         let result = health_check().await;
         assert_eq!(result, "OK");
     }
-    
-    
+
     #[test]
     fn test_axum_microservice_creation() {
         let config = Config::default();

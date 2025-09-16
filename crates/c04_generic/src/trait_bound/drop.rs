@@ -102,7 +102,7 @@ fn main() {
         path: "example.txt".to_string(),
         file: std::fs::File::open("example.txt").ok(),
     };
-    
+
     // 当 handle 离开作用域时，文件会自动关闭
 }
 ```
@@ -122,14 +122,14 @@ impl<T> GuardedResource<T> {
     fn new(data: T) -> Self {
         let mutex = Mutex::new(());
         let _guard = mutex.lock().ok();
-        
+
         GuardedResource {
             data,
             mutex,
             _guard,
         }
     }
-    
+
     fn access(&self) -> &T {
         &self.data
     }
@@ -158,7 +158,7 @@ impl MemoryPool {
             capacity,
         }
     }
-    
+
     fn allocate(&mut self, size: usize) -> Option<&mut [u8]> {
         if self.data.len() + size <= self.capacity {
             let start = self.data.len();
@@ -254,14 +254,14 @@ pub struct DropExample {
 impl Drop for DropExample {
     fn drop(&mut self) {
         println!("Dropping resource: {}", self.name);
-        
+
         // 清理资源
         if self.active {
             println!("  - Resource was active, performing cleanup");
             self.data.clear();
             self.active = false;
         }
-        
+
         println!("  - Resource cleanup completed");
     }
 }
@@ -276,12 +276,12 @@ pub struct DropContainer<T> {
 impl<T> Drop for DropContainer<T> {
     fn drop(&mut self) {
         println!("Dropping container with metadata: {}", self.metadata);
-        
+
         if self.cleanup_required {
             println!("  - Container requires cleanup");
             // 执行清理操作
         }
-        
+
         println!("  - Container cleanup completed");
     }
 }
@@ -301,7 +301,7 @@ impl FileHandle {
             file_size: 0,
         }
     }
-    
+
     pub fn read(&mut self, data: &mut [u8]) -> usize {
         if self.is_open {
             // 模拟读取操作
@@ -319,11 +319,11 @@ impl Drop for FileHandle {
         if self.is_open {
             println!("Closing file: {}", self.path);
             println!("  - File size: {} bytes", self.file_size);
-            
+
             // 关闭文件
             self.is_open = false;
             self.file_size = 0;
-            
+
             println!("  - File closed successfully");
         }
     }
@@ -344,7 +344,7 @@ impl MemoryPool {
             allocated: 0,
         }
     }
-    
+
     pub fn allocate(&mut self, size: usize) -> Option<&mut [u8]> {
         if self.allocated + size <= self.capacity {
             let start = self.data.len();
@@ -355,7 +355,7 @@ impl MemoryPool {
             None
         }
     }
-    
+
     pub fn get_usage(&self) -> f64 {
         self.allocated as f64 / self.capacity as f64
     }
@@ -367,12 +367,12 @@ impl Drop for MemoryPool {
         println!("  - Capacity: {} bytes", self.capacity);
         println!("  - Allocated: {} bytes", self.allocated);
         println!("  - Usage: {:.1}%", self.get_usage() * 100.0);
-        
+
         // 清理内存
         self.data.clear();
         self.data.shrink_to_fit();
         self.allocated = 0;
-        
+
         println!("  - Memory pool released successfully");
     }
 }
@@ -388,13 +388,10 @@ impl<T> GuardedResource<T> {
         // 使用静态 Mutex 来避免生命周期问题
         static STATIC_MUTEX: Mutex<()> = Mutex::new(());
         let _guard = STATIC_MUTEX.lock().ok();
-        
-        GuardedResource {
-            data,
-            _guard,
-        }
+
+        GuardedResource { data, _guard }
     }
-    
+
     pub fn access(&self) -> &T {
         &self.data
     }
@@ -403,10 +400,10 @@ impl<T> GuardedResource<T> {
 impl<T> Drop for GuardedResource<T> {
     fn drop(&mut self) {
         println!("Releasing lock on guarded resource");
-        
+
         // 锁会在 drop 时自动释放
         self._guard = None;
-        
+
         println!("  - Lock released successfully");
     }
 }
@@ -414,7 +411,7 @@ impl<T> Drop for GuardedResource<T> {
 // 演示函数
 pub fn demonstrate_drop() {
     println!("=== Drop Trait Demonstration ===\n");
-    
+
     // 基本资源清理
     {
         let resource = DropExample {
@@ -422,56 +419,56 @@ pub fn demonstrate_drop() {
             data: vec![1, 2, 3, 4, 5],
             active: true,
         };
-        
+
         println!("Created resource: {}", resource.name);
         println!("Resource data length: {}", resource.data.len());
-        
+
         // 资源会在作用域结束时自动 drop
     }
     println!();
-    
+
     // 文件句柄清理
     {
         let mut file = FileHandle::new("example.txt".to_string());
-        
+
         let mut buffer = [0u8; 512];
         let bytes_read = file.read(&mut buffer);
-        
+
         println!("Read {} bytes from file", bytes_read);
         println!("File is open: {}", file.is_open);
-        
+
         // 文件会在作用域结束时自动关闭
     }
     println!();
-    
+
     // 内存池清理
     {
         let mut pool = MemoryPool::new(1024);
-        
+
         if let Some(_memory) = pool.allocate(256) {
             println!("Allocated 256 bytes from pool");
             println!("Pool usage: {:.1}%", pool.get_usage() * 100.0);
         }
-        
+
         if let Some(_memory) = pool.allocate(128) {
             println!("Allocated 128 bytes from pool");
             println!("Pool usage: {:.1}%", pool.get_usage() * 100.0);
         }
-        
+
         // 内存池会在作用域结束时自动释放
     }
     println!();
-    
+
     // 锁保护资源清理
     {
         let resource = GuardedResource::new("Protected Data".to_string());
-        
+
         println!("Accessing protected resource: {}", resource.access());
-        
+
         // 锁会在作用域结束时自动释放
     }
     println!();
-    
+
     // 泛型容器清理
     {
         let container = DropContainer {
@@ -479,13 +476,13 @@ pub fn demonstrate_drop() {
             metadata: "Test Container".to_string(),
             cleanup_required: true,
         };
-        
+
         println!("Created container with value: {}", container.value);
-        
+
         // 容器会在作用域结束时自动清理
     }
     println!();
-    
+
     println!("=== All resources have been cleaned up ===");
 }
 
@@ -504,12 +501,12 @@ impl ConditionalResource {
             cleanup_count: 0,
         }
     }
-    
+
     pub fn mark_dirty(&mut self) {
         self.needs_cleanup = true;
         self.cleanup_count += 1;
     }
-    
+
     pub fn cleanup(&mut self) {
         if self.needs_cleanup {
             println!("  - Performing cleanup (attempt #{})", self.cleanup_count);
@@ -521,14 +518,14 @@ impl ConditionalResource {
 impl Drop for ConditionalResource {
     fn drop(&mut self) {
         println!("Dropping conditional resource: {}", self.name);
-        
+
         if self.needs_cleanup {
             println!("  - Resource needs cleanup");
             self.cleanup();
         } else {
             println!("  - Resource is clean, no cleanup needed");
         }
-        
+
         println!("  - Conditional resource cleanup completed");
     }
 }
@@ -550,21 +547,21 @@ impl ChainedResource {
             tertiary_cleanup_done: false,
         }
     }
-    
+
     pub fn cleanup_primary(&mut self) {
         if !self.primary_cleanup_done {
             println!("  - Performing primary cleanup");
             self.primary_cleanup_done = true;
         }
     }
-    
+
     pub fn cleanup_secondary(&mut self) {
         if !self.secondary_cleanup_done {
             println!("  - Performing secondary cleanup");
             self.secondary_cleanup_done = true;
         }
     }
-    
+
     pub fn cleanup_tertiary(&mut self) {
         if !self.tertiary_cleanup_done {
             println!("  - Performing tertiary cleanup");
@@ -576,12 +573,12 @@ impl ChainedResource {
 impl Drop for ChainedResource {
     fn drop(&mut self) {
         println!("Dropping chained resource: {}", self.name);
-        
+
         // 按顺序清理资源
         self.cleanup_primary();
         self.cleanup_secondary();
         self.cleanup_tertiary();
-        
+
         println!("  - Chained resource cleanup completed");
     }
 }
@@ -590,7 +587,7 @@ impl Drop for ChainedResource {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_drop_example() {
         let resource = DropExample {
@@ -598,63 +595,63 @@ mod tests {
             data: vec![1, 2, 3],
             active: true,
         };
-        
+
         assert_eq!(resource.name, "Test");
         assert_eq!(resource.data.len(), 3);
         assert!(resource.active);
-        
+
         // 资源会在测试结束时自动 drop
     }
-    
+
     #[test]
     fn test_file_handle() {
         let file = FileHandle::new("test.txt".to_string());
-        
+
         assert_eq!(file.path, "test.txt");
         assert!(file.is_open);
         assert_eq!(file.file_size, 0);
-        
+
         // 文件会在测试结束时自动关闭
     }
-    
+
     #[test]
     fn test_memory_pool() {
         let mut pool = MemoryPool::new(1024);
-        
+
         assert_eq!(pool.capacity, 1024);
         assert_eq!(pool.allocated, 0);
-        
+
         if let Some(memory) = pool.allocate(256) {
             assert_eq!(memory.len(), 256);
             assert_eq!(pool.allocated, 256);
         }
-        
+
         // 内存池会在测试结束时自动释放
     }
-    
+
     #[test]
     fn test_conditional_resource() {
         let mut resource = ConditionalResource::new("Test".to_string(), false);
-        
+
         assert_eq!(resource.name, "Test");
         assert!(!resource.needs_cleanup);
-        
+
         resource.mark_dirty();
         assert!(resource.needs_cleanup);
         assert_eq!(resource.cleanup_count, 1);
-        
+
         // 资源会在测试结束时自动清理
     }
-    
+
     #[test]
     fn test_chained_resource() {
         let resource = ChainedResource::new("Test".to_string());
-        
+
         assert_eq!(resource.name, "Test");
         assert!(!resource.primary_cleanup_done);
         assert!(!resource.secondary_cleanup_done);
         assert!(!resource.tertiary_cleanup_done);
-        
+
         // 资源会在测试结束时自动清理
     }
 }

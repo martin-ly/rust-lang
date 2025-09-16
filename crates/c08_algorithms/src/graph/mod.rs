@@ -9,19 +9,26 @@ use std::hash::Hash;
 #[cfg(feature = "with-petgraph")]
 pub mod petgraph_bridge {
     use super::*;
-    use petgraph::graph::NodeIndex;
     use petgraph::Graph;
     use petgraph::algo::dijkstra as pg_dijkstra;
+    use petgraph::graph::NodeIndex;
 
     /// 将 HashMap<T, Vec<(T, f64)>> 装载为 petgraph 无向加权图
-    pub fn to_petgraph_undirected<T: Eq + Hash + Clone>(g: &HashMap<T, Vec<(T, f64)>>) -> (Graph<T, f64>, HashMap<T, NodeIndex>) {
+    pub fn to_petgraph_undirected<T: Eq + Hash + Clone>(
+        g: &HashMap<T, Vec<(T, f64)>>,
+    ) -> (Graph<T, f64>, HashMap<T, NodeIndex>) {
         let mut graph = Graph::<T, f64, petgraph::Undirected>::new_undirected();
         let mut idx = HashMap::new();
-        for k in g.keys() { idx.entry(k.clone()).or_insert_with(|| graph.add_node(k.clone())); }
+        for k in g.keys() {
+            idx.entry(k.clone())
+                .or_insert_with(|| graph.add_node(k.clone()));
+        }
         for (u, vs) in g.iter() {
             let ui = idx[u];
             for (v, w) in vs {
-                let vi = *idx.entry(v.clone()).or_insert_with(|| graph.add_node(v.clone()));
+                let vi = *idx
+                    .entry(v.clone())
+                    .or_insert_with(|| graph.add_node(v.clone()));
                 graph.update_edge(ui, vi, *w);
             }
         }
@@ -29,7 +36,10 @@ pub mod petgraph_bridge {
     }
 
     /// 用 petgraph 跑一次 Dijkstra，与自研实现做对照
-    pub fn dijkstra_compare<T: Eq + Hash + Clone>(g: &HashMap<T, Vec<(T, f64)>>, start: &T) -> HashMap<T, f64> {
+    pub fn dijkstra_compare<T: Eq + Hash + Clone>(
+        g: &HashMap<T, Vec<(T, f64)>>,
+        start: &T,
+    ) -> HashMap<T, f64> {
         let (pg, idx) = to_petgraph_undirected(g);
         let s = idx[start];
         let res = pg_dijkstra(&pg, s, None, |e| *e.weight());
@@ -47,7 +57,11 @@ pub mod petgraph_bridge {
 // =========================
 
 /// 同步 BFS 返回最短路径（若不可达返回 None）
-pub fn bfs_shortest_path_sync<T>(graph: &HashMap<T, Vec<T>>, start: &T, target: &T) -> Option<Vec<T>>
+pub fn bfs_shortest_path_sync<T>(
+    graph: &HashMap<T, Vec<T>>,
+    start: &T,
+    target: &T,
+) -> Option<Vec<T>>
 where
     T: Eq + Hash + Clone,
 {
@@ -74,7 +88,11 @@ where
 }
 
 /// 并行 BFS：按层并行展开 frontier
-pub fn bfs_shortest_path_parallel<T>(graph: &HashMap<T, Vec<T>>, start: &T, target: &T) -> Option<Vec<T>>
+pub fn bfs_shortest_path_parallel<T>(
+    graph: &HashMap<T, Vec<T>>,
+    start: &T,
+    target: &T,
+) -> Option<Vec<T>>
 where
     T: Eq + Hash + Clone + Sync + Send,
 {
@@ -96,7 +114,10 @@ where
         frontier.clear();
         for n in next {
             if visited.insert(n.clone()) {
-                prev.insert(n.clone(), prev_candidate(&prev, graph, &n).unwrap_or(start.clone()));
+                prev.insert(
+                    n.clone(),
+                    prev_candidate(&prev, graph, &n).unwrap_or(start.clone()),
+                );
                 frontier.push(n);
             }
         }
@@ -105,11 +126,18 @@ where
 }
 
 /// 异步 BFS（spawn_blocking 包裹）
-pub async fn bfs_shortest_path_async<T>(graph: HashMap<T, Vec<T>>, start: T, target: T) -> Result<Option<Vec<T>>>
+pub async fn bfs_shortest_path_async<T>(
+    graph: HashMap<T, Vec<T>>,
+    start: T,
+    target: T,
+) -> Result<Option<Vec<T>>>
 where
     T: Eq + Hash + Clone + Send + 'static,
 {
-    Ok(tokio::task::spawn_blocking(move || bfs_shortest_path_sync(&graph, &start, &target)).await?)
+    Ok(
+        tokio::task::spawn_blocking(move || bfs_shortest_path_sync(&graph, &start, &target))
+            .await?,
+    )
 }
 
 fn reconstruct_path<T>(prev: HashMap<T, T>, start: &T, target: &T) -> Vec<T>
@@ -163,7 +191,10 @@ impl<N: Eq> Eq for State<N> {}
 impl<N: Eq> Ord for State<N> {
     fn cmp(&self, other: &Self) -> Ordering {
         // 反转以实现最小堆效果
-        other.cost.partial_cmp(&self.cost).unwrap_or(Ordering::Equal)
+        other
+            .cost
+            .partial_cmp(&self.cost)
+            .unwrap_or(Ordering::Equal)
     }
 }
 
@@ -174,7 +205,10 @@ impl<N: Eq> PartialOrd for State<N> {
 }
 
 /// 同步 Dijkstra：返回 (距离表, 前驱表)
-pub fn dijkstra_sync<T>(graph: &HashMap<T, Vec<(T, f64)>>, start: &T) -> (HashMap<T, f64>, HashMap<T, T>)
+pub fn dijkstra_sync<T>(
+    graph: &HashMap<T, Vec<(T, f64)>>,
+    start: &T,
+) -> (HashMap<T, f64>, HashMap<T, T>)
 where
     T: Eq + Hash + Clone,
 {
@@ -183,7 +217,10 @@ where
     let mut heap = BinaryHeap::new();
 
     dist.insert(start.clone(), 0.0);
-    heap.push(State { cost: 0.0, node: start.clone() });
+    heap.push(State {
+        cost: 0.0,
+        node: start.clone(),
+    });
 
     while let Some(State { cost, node }) = heap.pop() {
         if cost > *dist.get(&node).unwrap_or(&f64::INFINITY) {
@@ -195,7 +232,10 @@ where
                 if next < *dist.get(n).unwrap_or(&f64::INFINITY) {
                     dist.insert(n.clone(), next);
                     prev.insert(n.clone(), node.clone());
-                    heap.push(State { cost: next, node: n.clone() });
+                    heap.push(State {
+                        cost: next,
+                        node: n.clone(),
+                    });
                 }
             }
         }
@@ -205,7 +245,10 @@ where
 }
 
 /// 异步 Dijkstra（spawn_blocking 包裹）
-pub async fn dijkstra_async<T>(graph: HashMap<T, Vec<(T, f64)>>, start: T) -> Result<(HashMap<T, f64>, HashMap<T, T>)>
+pub async fn dijkstra_async<T>(
+    graph: HashMap<T, Vec<(T, f64)>>,
+    start: T,
+) -> Result<(HashMap<T, f64>, HashMap<T, T>)>
 where
     T: Eq + Hash + Clone + Send + 'static,
 {
@@ -249,10 +292,17 @@ where
         }
     }
 
-    fn union<T: Eq + Hash + Clone>(parent: &mut HashMap<T, T>, rank: &mut HashMap<T, usize>, x: T, y: T) -> bool {
+    fn union<T: Eq + Hash + Clone>(
+        parent: &mut HashMap<T, T>,
+        rank: &mut HashMap<T, usize>,
+        x: T,
+        y: T,
+    ) -> bool {
         let mut rx = find(parent, x);
         let mut ry = find(parent, y);
-        if rx == ry { return false; }
+        if rx == ry {
+            return false;
+        }
         let rx_rank = *rank.get(&rx).unwrap_or(&0);
         let ry_rank = *rank.get(&ry).unwrap_or(&0);
         if rx_rank < ry_rank {
@@ -299,28 +349,46 @@ where
             let root = find(parent, p.clone());
             parent.insert(x.clone(), root.clone());
             root
-        } else { x }
+        } else {
+            x
+        }
     }
-    fn union<T: Eq + Hash + Clone>(parent: &mut HashMap<T, T>, rank: &mut HashMap<T, usize>, x: T, y: T) -> bool {
+    fn union<T: Eq + Hash + Clone>(
+        parent: &mut HashMap<T, T>,
+        rank: &mut HashMap<T, usize>,
+        x: T,
+        y: T,
+    ) -> bool {
         let mut rx = find(parent, x);
         let mut ry = find(parent, y);
-        if rx == ry { return false; }
+        if rx == ry {
+            return false;
+        }
         let rx_rank = *rank.get(&rx).unwrap_or(&0);
         let ry_rank = *rank.get(&ry).unwrap_or(&0);
-        if rx_rank < ry_rank { std::mem::swap(&mut rx, &mut ry); }
+        if rx_rank < ry_rank {
+            std::mem::swap(&mut rx, &mut ry);
+        }
         parent.insert(ry.clone(), rx.clone());
-        if rx_rank == ry_rank { rank.entry(rx).and_modify(|r| *r += 1).or_insert(1); }
+        if rx_rank == ry_rank {
+            rank.entry(rx).and_modify(|r| *r += 1).or_insert(1);
+        }
         true
     }
     let mut total = 0.0;
     let mut mst = Vec::new();
     for (u, v, w) in edges {
-        if union(&mut parent, &mut rank, u.clone(), v.clone()) { total += w; mst.push((u, v, w)); }
+        if union(&mut parent, &mut rank, u.clone(), v.clone()) {
+            total += w;
+            mst.push((u, v, w));
+        }
     }
     (total, mst)
 }
 
-pub async fn mst_kruskal_async<T>(graph: HashMap<T, Vec<(T, f64)>>) -> Result<(f64, Vec<(T, T, f64)>)>
+pub async fn mst_kruskal_async<T>(
+    graph: HashMap<T, Vec<(T, f64)>>,
+) -> Result<(f64, Vec<(T, T, f64)>)>
 where
     T: Eq + Hash + Clone + Send + Sync + 'static,
 {
@@ -333,10 +401,22 @@ where
     T: Eq + Hash + Clone,
 {
     #[derive(Clone, PartialEq)]
-    struct Edge<T> { w: f64, u: T, v: T }
+    struct Edge<T> {
+        w: f64,
+        u: T,
+        v: T,
+    }
     impl<T: Eq> Eq for Edge<T> {}
-    impl<T: Eq> Ord for Edge<T> { fn cmp(&self, other: &Self) -> Ordering { other.w.partial_cmp(&self.w).unwrap_or(Ordering::Equal) } }
-    impl<T: Eq> PartialOrd for Edge<T> { fn partial_cmp(&self, other: &Self) -> Option<Ordering> { Some(self.cmp(other)) } }
+    impl<T: Eq> Ord for Edge<T> {
+        fn cmp(&self, other: &Self) -> Ordering {
+            other.w.partial_cmp(&self.w).unwrap_or(Ordering::Equal)
+        }
+    }
+    impl<T: Eq> PartialOrd for Edge<T> {
+        fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+            Some(self.cmp(other))
+        }
+    }
 
     let mut total = 0.0;
     let mut mst = Vec::new();
@@ -346,17 +426,33 @@ where
     let s = start.clone();
     visited.insert(s.clone());
     if let Some(neigh) = graph.get(&s) {
-        for (v, w) in neigh { heap.push(Edge { w: *w, u: s.clone(), v: v.clone() }); }
+        for (v, w) in neigh {
+            heap.push(Edge {
+                w: *w,
+                u: s.clone(),
+                v: v.clone(),
+            });
+        }
     }
     while let Some(Edge { w, u: _, v }) = heap.pop() {
-        if visited.contains(&v) { continue; }
+        if visited.contains(&v) {
+            continue;
+        }
         total += w; // 加入树
         let new_v = v.clone();
         // 需知道 u-v 结构，u 不再使用，这里保存 parent 需要额外信息，简化：从 visited 中任取连接边（我们从堆中取出的就是连接边）
         mst.push((start.clone(), new_v.clone(), w));
         visited.insert(new_v.clone());
         if let Some(neigh) = graph.get(&new_v) {
-            for (nv, nw) in neigh { if !visited.contains(nv) { heap.push(Edge { w: *nw, u: new_v.clone(), v: nv.clone() }); } }
+            for (nv, nw) in neigh {
+                if !visited.contains(nv) {
+                    heap.push(Edge {
+                        w: *nw,
+                        u: new_v.clone(),
+                        v: nv.clone(),
+                    });
+                }
+            }
         }
     }
     (total, mst)
@@ -371,7 +467,10 @@ where
     mst_prim_sync(graph, start)
 }
 
-pub async fn mst_prim_async<T>(graph: HashMap<T, Vec<(T, f64)>>, start: T) -> Result<(f64, Vec<(T, T, f64)>)>
+pub async fn mst_prim_async<T>(
+    graph: HashMap<T, Vec<(T, f64)>>,
+    start: T,
+) -> Result<(f64, Vec<(T, T, f64)>)>
 where
     T: Eq + Hash + Clone + Send + Sync + 'static,
 {
@@ -389,7 +488,9 @@ where
     let mut indeg: HashMap<T, usize> = HashMap::new();
     for (u, vs) in graph {
         indeg.entry(u.clone()).or_insert(0);
-        for v in vs { *indeg.entry(v.clone()).or_insert(0) += 1; }
+        for v in vs {
+            *indeg.entry(v.clone()).or_insert(0) += 1;
+        }
     }
     let mut q: VecDeque<T> = indeg
         .iter()
@@ -402,11 +503,20 @@ where
         res.push(u.clone());
         if let Some(vs) = graph.get(&u) {
             for v in vs {
-                if let Some(d) = indeg_mut.get_mut(v) { *d -= 1; if *d == 0 { q.push_back(v.clone()); } }
+                if let Some(d) = indeg_mut.get_mut(v) {
+                    *d -= 1;
+                    if *d == 0 {
+                        q.push_back(v.clone());
+                    }
+                }
             }
         }
     }
-    if res.len() == indeg_mut.len() { Some(res) } else { None }
+    if res.len() == indeg_mut.len() {
+        Some(res)
+    } else {
+        None
+    }
 }
 
 pub fn topo_sort_parallel<T>(graph: &HashMap<T, Vec<T>>) -> Option<Vec<T>>
@@ -424,7 +534,9 @@ where
             vec
         })
         .collect();
-    for (k, inc) in entries { *indeg.entry(k).or_insert(0) += inc; }
+    for (k, inc) in entries {
+        *indeg.entry(k).or_insert(0) += inc;
+    }
     topo_sort_sync(graph)
 }
 
@@ -440,69 +552,115 @@ where
 // =========================
 
 /// Bellman-Ford：允许负权，检测负环。返回 (dist, has_negative_cycle)
-pub fn bellman_ford_sync(graph: &HashMap<usize, Vec<(usize, f64)>>, n: usize, src: usize) -> (Vec<f64>, bool) {
+pub fn bellman_ford_sync(
+    graph: &HashMap<usize, Vec<(usize, f64)>>,
+    n: usize,
+    src: usize,
+) -> (Vec<f64>, bool) {
     let mut dist = vec![f64::INFINITY; n];
     dist[src] = 0.0;
     for _ in 0..n - 1 {
         let mut changed = false;
         for (&u, vs) in graph.iter() {
             let du = dist[u];
-            if du.is_infinite() { continue; }
+            if du.is_infinite() {
+                continue;
+            }
             for &(v, w) in vs {
-                if du + w < dist[v] { dist[v] = du + w; changed = true; }
+                if du + w < dist[v] {
+                    dist[v] = du + w;
+                    changed = true;
+                }
             }
         }
-        if !changed { break; }
+        if !changed {
+            break;
+        }
     }
     // 检测负环
     let mut neg = false;
     for (&u, vs) in graph.iter() {
         let du = dist[u];
-        if du.is_infinite() { continue; }
-        for &(v, w) in vs { if du + w < dist[v] { neg = true; break; } }
-        if neg { break; }
+        if du.is_infinite() {
+            continue;
+        }
+        for &(v, w) in vs {
+            if du + w < dist[v] {
+                neg = true;
+                break;
+            }
+        }
+        if neg {
+            break;
+        }
     }
     (dist, neg)
 }
 
-pub async fn bellman_ford_async(graph: HashMap<usize, Vec<(usize, f64)>>, n: usize, src: usize) -> Result<(Vec<f64>, bool)> {
+pub async fn bellman_ford_async(
+    graph: HashMap<usize, Vec<(usize, f64)>>,
+    n: usize,
+    src: usize,
+) -> Result<(Vec<f64>, bool)> {
     Ok(tokio::task::spawn_blocking(move || bellman_ford_sync(&graph, n, src)).await?)
 }
 
 /// Floyd–Warshall：多源最短路（允许负边但无负环）。返回 n×n 距离矩阵
 pub fn floyd_warshall_sync(n: usize, edges: &[(usize, usize, f64)]) -> Vec<Vec<f64>> {
     let mut d = vec![vec![f64::INFINITY; n]; n];
-    for i in 0..n { d[i][i] = 0.0; }
-    for &(u, v, w) in edges { d[u][v] = d[u][v].min(w); }
+    for i in 0..n {
+        d[i][i] = 0.0;
+    }
+    for &(u, v, w) in edges {
+        d[u][v] = d[u][v].min(w);
+    }
     for k in 0..n {
         for i in 0..n {
             let dik = d[i][k];
-            if dik.is_infinite() { continue; }
+            if dik.is_infinite() {
+                continue;
+            }
             for j in 0..n {
                 let alt = dik + d[k][j];
-                if alt < d[i][j] { d[i][j] = alt; }
+                if alt < d[i][j] {
+                    d[i][j] = alt;
+                }
             }
         }
     }
     d
 }
 
-pub async fn floyd_warshall_async(n: usize, edges: Vec<(usize, usize, f64)>) -> Result<Vec<Vec<f64>>> {
+pub async fn floyd_warshall_async(
+    n: usize,
+    edges: Vec<(usize, usize, f64)>,
+) -> Result<Vec<Vec<f64>>> {
     Ok(tokio::task::spawn_blocking(move || floyd_warshall_sync(n, &edges)).await?)
 }
 
 /// Floyd–Warshall 带路径重建：返回 (距离矩阵, next 矩阵)
-pub fn floyd_warshall_with_path_sync(n: usize, edges: &[(usize, usize, f64)]) -> (Vec<Vec<f64>>, Vec<Vec<Option<usize>>>) {
+pub fn floyd_warshall_with_path_sync(
+    n: usize,
+    edges: &[(usize, usize, f64)],
+) -> (Vec<Vec<f64>>, Vec<Vec<Option<usize>>>) {
     let mut d = vec![vec![f64::INFINITY; n]; n];
     let mut next = vec![vec![None; n]; n];
-    for i in 0..n { d[i][i] = 0.0; next[i][i] = Some(i); }
+    for i in 0..n {
+        d[i][i] = 0.0;
+        next[i][i] = Some(i);
+    }
     for &(u, v, w) in edges {
-        if w < d[u][v] { d[u][v] = w; next[u][v] = Some(v); }
+        if w < d[u][v] {
+            d[u][v] = w;
+            next[u][v] = Some(v);
+        }
     }
     for k in 0..n {
         for i in 0..n {
             let dik = d[i][k];
-            if dik.is_infinite() { continue; }
+            if dik.is_infinite() {
+                continue;
+            }
             for j in 0..n {
                 let alt = dik + d[k][j];
                 if alt < d[i][j] {
@@ -515,8 +673,14 @@ pub fn floyd_warshall_with_path_sync(n: usize, edges: &[(usize, usize, f64)]) ->
     (d, next)
 }
 
-pub fn floyd_reconstruct_path(u: usize, v: usize, next: &[Vec<Option<usize>>]) -> Option<Vec<usize>> {
-    if next[u][v].is_none() { return None; }
+pub fn floyd_reconstruct_path(
+    u: usize,
+    v: usize,
+    next: &[Vec<Option<usize>>],
+) -> Option<Vec<usize>> {
+    if next[u][v].is_none() {
+        return None;
+    }
     let mut path = vec![u];
     let mut cur = u;
     while cur != v {
@@ -526,7 +690,10 @@ pub fn floyd_reconstruct_path(u: usize, v: usize, next: &[Vec<Option<usize>>]) -
     Some(path)
 }
 
-pub async fn floyd_warshall_with_path_async(n: usize, edges: Vec<(usize, usize, f64)>) -> Result<(Vec<Vec<f64>>, Vec<Vec<Option<usize>>>)> {
+pub async fn floyd_warshall_with_path_async(
+    n: usize,
+    edges: Vec<(usize, usize, f64)>,
+) -> Result<(Vec<Vec<f64>>, Vec<Vec<Option<usize>>>)> {
     Ok(tokio::task::spawn_blocking(move || floyd_warshall_with_path_sync(n, &edges)).await?)
 }
 
@@ -535,7 +702,11 @@ pub async fn floyd_warshall_with_path_async(n: usize, edges: Vec<(usize, usize, 
 // 输入邻接：`adj[u]` 列出与之相连的右侧点 v（0..n_right）
 // =========================
 
-pub fn hopcroft_karp_sync(adj: &[Vec<usize>], n_left: usize, n_right: usize) -> (usize, Vec<Option<usize>>, Vec<Option<usize>>) {
+pub fn hopcroft_karp_sync(
+    adj: &[Vec<usize>],
+    n_left: usize,
+    n_right: usize,
+) -> (usize, Vec<Option<usize>>, Vec<Option<usize>>) {
     assert_eq!(adj.len(), n_left);
     let mut pair_u: Vec<Option<usize>> = vec![None; n_left];
     let mut pair_v: Vec<Option<usize>> = vec![None; n_right];
@@ -543,16 +714,30 @@ pub fn hopcroft_karp_sync(adj: &[Vec<usize>], n_left: usize, n_right: usize) -> 
 
     let mut matching = 0usize;
 
-    fn bfs_hk(adj: &[Vec<usize>], n_left: usize, pair_u: &Vec<Option<usize>>, pair_v: &Vec<Option<usize>>, dist: &mut [i32]) -> bool {
+    fn bfs_hk(
+        adj: &[Vec<usize>],
+        n_left: usize,
+        pair_u: &Vec<Option<usize>>,
+        pair_v: &Vec<Option<usize>>,
+        dist: &mut [i32],
+    ) -> bool {
         let mut q = VecDeque::new();
         for u in 0..n_left {
-            if pair_u[u].is_none() { dist[u] = 0; q.push_back(u); } else { dist[u] = -1; }
+            if pair_u[u].is_none() {
+                dist[u] = 0;
+                q.push_back(u);
+            } else {
+                dist[u] = -1;
+            }
         }
         let mut found = false;
         while let Some(u) = q.pop_front() {
             for &v in &adj[u] {
                 if let Some(u2) = pair_v[v] {
-                    if dist[u2] == -1 { dist[u2] = dist[u] + 1; q.push_back(u2); }
+                    if dist[u2] == -1 {
+                        dist[u2] = dist[u] + 1;
+                        q.push_back(u2);
+                    }
                 } else {
                     found = true;
                 }
@@ -561,7 +746,13 @@ pub fn hopcroft_karp_sync(adj: &[Vec<usize>], n_left: usize, n_right: usize) -> 
         found
     }
 
-    fn dfs(u: usize, adj: &[Vec<usize>], dist: &mut [i32], pair_u: &mut [Option<usize>], pair_v: &mut [Option<usize>]) -> bool {
+    fn dfs(
+        u: usize,
+        adj: &[Vec<usize>],
+        dist: &mut [i32],
+        pair_u: &mut [Option<usize>],
+        pair_v: &mut [Option<usize>],
+    ) -> bool {
         for &v in &adj[u] {
             if let Some(u2) = pair_v[v] {
                 if dist[u2] == dist[u] + 1 && dfs(u2, adj, dist, pair_u, pair_v) {
@@ -590,26 +781,40 @@ pub fn hopcroft_karp_sync(adj: &[Vec<usize>], n_left: usize, n_right: usize) -> 
     (matching, pair_u, pair_v)
 }
 
-pub async fn hopcroft_karp_async(adj: Vec<Vec<usize>>, n_left: usize, n_right: usize) -> Result<(usize, Vec<Option<usize>>, Vec<Option<usize>>)> {
+pub async fn hopcroft_karp_async(
+    adj: Vec<Vec<usize>>,
+    n_left: usize,
+    n_right: usize,
+) -> Result<(usize, Vec<Option<usize>>, Vec<Option<usize>>)> {
     Ok(tokio::task::spawn_blocking(move || hopcroft_karp_sync(&adj, n_left, n_right)).await?)
 }
 
 /// 基于 Kőnig 定理：从未匹配的左侧点开始，沿未匹配边+匹配边交替遍历，最小点覆盖 = (左侧可达集合的补集) ∪ (右侧可达集合)
-pub fn min_vertex_cover_bipartite(adj: &[Vec<usize>], pair_u: &[Option<usize>], pair_v: &[Option<usize>]) -> (Vec<bool>, Vec<bool>) {
+pub fn min_vertex_cover_bipartite(
+    adj: &[Vec<usize>],
+    pair_u: &[Option<usize>],
+    pair_v: &[Option<usize>],
+) -> (Vec<bool>, Vec<bool>) {
     let n_left = adj.len();
     let n_right = pair_v.len();
     let mut vis_u = vec![false; n_left];
     let mut vis_v = vec![false; n_right];
     let mut q = VecDeque::new();
     for u in 0..n_left {
-        if pair_u[u].is_none() { q.push_back(u); vis_u[u] = true; }
+        if pair_u[u].is_none() {
+            q.push_back(u);
+            vis_u[u] = true;
+        }
     }
     while let Some(u) = q.pop_front() {
         for &v in &adj[u] {
             if !vis_v[v] && pair_u[u] != Some(v) {
                 vis_v[v] = true;
                 if let Some(u2) = pair_v[v] {
-                    if !vis_u[u2] { vis_u[u2] = true; q.push_back(u2); }
+                    if !vis_u[u2] {
+                        vis_u[u2] = true;
+                        q.push_back(u2);
+                    }
                 }
             }
         }
@@ -673,7 +878,9 @@ impl<T: Eq + Hash + Clone> TarjanState<T> {
                 let w = self.stack.pop().unwrap();
                 self.on_stack.remove(&w);
                 comp.push(w.clone());
-                if w == v { break; }
+                if w == v {
+                    break;
+                }
             }
             self.sccs.push(comp);
         }
@@ -689,7 +896,9 @@ where
     let mut nodes: HashSet<T> = HashSet::new();
     for (u, vs) in graph.iter() {
         nodes.insert(u.clone());
-        for v in vs { nodes.insert(v.clone()); }
+        for v in vs {
+            nodes.insert(v.clone());
+        }
     }
 
     let mut st = TarjanState::<T>::new();
@@ -734,25 +943,43 @@ where
             }
         }
     }
-    if !nodes.contains_key(s) || !nodes.contains_key(t) { return 0; }
+    if !nodes.contains_key(s) || !nodes.contains_key(t) {
+        return 0;
+    }
     let n = nodes.len();
     let si = nodes[s];
     let ti = nodes[t];
 
     #[derive(Clone)]
-    struct Edge { to: usize, rev: usize, cap: i64 }
+    struct Edge {
+        to: usize,
+        rev: usize,
+        cap: i64,
+    }
 
     let mut g: Vec<Vec<Edge>> = vec![Vec::new(); n];
     let add_edge = |u: usize, v: usize, c: i64, g: &mut Vec<Vec<Edge>>| {
         let from_rev = g[v].len();
         let to_rev = g[u].len();
-        g[u].push(Edge { to: v, rev: from_rev, cap: c });
-        g[v].push(Edge { to: u, rev: to_rev, cap: 0 });
+        g[u].push(Edge {
+            to: v,
+            rev: from_rev,
+            cap: c,
+        });
+        g[v].push(Edge {
+            to: u,
+            rev: to_rev,
+            cap: 0,
+        });
     };
 
     for (u, vs) in graph.iter() {
         let ui = nodes[u];
-        for (v, c) in vs { if *c > 0 { add_edge(ui, nodes[v], *c, &mut g); } }
+        for (v, c) in vs {
+            if *c > 0 {
+                add_edge(ui, nodes[v], *c, &mut g);
+            }
+        }
     }
 
     let mut flow: i64 = 0;
@@ -770,12 +997,23 @@ where
                 }
             }
         }
-        if level[ti] < 0 { break; }
+        if level[ti] < 0 {
+            break;
+        }
 
         // 当前弧优化
         let mut it = vec![0usize; n];
-        fn dfs(u: usize, t: usize, f: i64, g: &mut [Vec<Edge>], it: &mut [usize], level: &[i32]) -> i64 {
-            if u == t { return f; }
+        fn dfs(
+            u: usize,
+            t: usize,
+            f: i64,
+            g: &mut [Vec<Edge>],
+            it: &mut [usize],
+            level: &[i32],
+        ) -> i64 {
+            if u == t {
+                return f;
+            }
             let m = g[u].len();
             while it[u] < m {
                 let i = it[u];
@@ -797,7 +1035,9 @@ where
 
         loop {
             let pushed = dfs(si, ti, i64::MAX / 4, &mut g, &mut it, &level);
-            if pushed == 0 { break; }
+            if pushed == 0 {
+                break;
+            }
             flow += pushed;
         }
     }
@@ -819,44 +1059,119 @@ where
 /// 返回最大流值
 pub fn max_flow_edmonds_karp(adj: &HashMap<usize, Vec<(usize, i64)>>, s: usize, t: usize) -> i64 {
     // 构建残量网络
-    let n = adj.keys().copied().chain(adj.values().flatten().map(|(v, _)| *v)).max().unwrap_or(0) + 1;
-    #[derive(Clone, Copy)] struct E{to:usize, rev:usize, cap:i64}
+    let n = adj
+        .keys()
+        .copied()
+        .chain(adj.values().flatten().map(|(v, _)| *v))
+        .max()
+        .unwrap_or(0)
+        + 1;
+    #[derive(Clone, Copy)]
+    struct E {
+        to: usize,
+        rev: usize,
+        cap: i64,
+    }
     let mut g: Vec<Vec<E>> = vec![Vec::new(); n];
-    let mut add_edge = |u:usize,v:usize,c:i64|{ let ru = g[v].len(); let rv = g[u].len(); g[u].push(E{to:v,rev:ru,cap:c}); g[v].push(E{to:u,rev:rv,cap:0}); };
-    for (u, vs) in adj { for &(v,c) in vs { if c>0 { add_edge(*u, v, c); } } }
-    let mut flow = 0i64;
-    loop {
-        let mut prev: Vec<Option<(usize,usize)>> = vec![None; n];
-        let mut q = VecDeque::new(); q.push_back(s);
-        while let Some(u) = q.pop_front() {
-            for (i, e) in g[u].iter().enumerate() {
-                if e.cap > 0 && prev[e.to].is_none() && e.to != s { prev[e.to] = Some((u,i)); q.push_back(e.to); }
+    let mut add_edge = |u: usize, v: usize, c: i64| {
+        let ru = g[v].len();
+        let rv = g[u].len();
+        g[u].push(E {
+            to: v,
+            rev: ru,
+            cap: c,
+        });
+        g[v].push(E {
+            to: u,
+            rev: rv,
+            cap: 0,
+        });
+    };
+    for (u, vs) in adj {
+        for &(v, c) in vs {
+            if c > 0 {
+                add_edge(*u, v, c);
             }
         }
-        if prev[t].is_none() { break; }
-        let mut add = i64::MAX/4; let mut v = t;
-        while let Some((u,i)) = prev[v] { add = add.min(g[u][i].cap); v = u; }
-        let mut v2 = t; while let Some((u,i)) = prev[v2] { let to = g[u][i].to; let r = g[u][i].rev; g[u][i].cap -= add; g[to][r].cap += add; v2 = u; }
+    }
+    let mut flow = 0i64;
+    loop {
+        let mut prev: Vec<Option<(usize, usize)>> = vec![None; n];
+        let mut q = VecDeque::new();
+        q.push_back(s);
+        while let Some(u) = q.pop_front() {
+            for (i, e) in g[u].iter().enumerate() {
+                if e.cap > 0 && prev[e.to].is_none() && e.to != s {
+                    prev[e.to] = Some((u, i));
+                    q.push_back(e.to);
+                }
+            }
+        }
+        if prev[t].is_none() {
+            break;
+        }
+        let mut add = i64::MAX / 4;
+        let mut v = t;
+        while let Some((u, i)) = prev[v] {
+            add = add.min(g[u][i].cap);
+            v = u;
+        }
+        let mut v2 = t;
+        while let Some((u, i)) = prev[v2] {
+            let to = g[u][i].to;
+            let r = g[u][i].rev;
+            g[u][i].cap -= add;
+            g[to][r].cap += add;
+            v2 = u;
+        }
         flow += add;
     }
     flow
 }
 
 /// 基于最终残量网络的可达性导出 s-t 最小割 (S 集, T 集)
-pub fn min_cut_from_residual(adj: &HashMap<usize, Vec<(usize, i64)>>, s: usize) -> (Vec<bool>, Vec<bool>) {
+pub fn min_cut_from_residual(
+    adj: &HashMap<usize, Vec<(usize, i64)>>,
+    s: usize,
+) -> (Vec<bool>, Vec<bool>) {
     // 构建残量与一次未推进的 BFS 可达集（仅正容量边）
-    let n = adj.keys().copied().chain(adj.values().flatten().map(|(v, _)| *v)).max().unwrap_or(0) + 1;
-    let mut g: Vec<Vec<(usize,i64)>> = vec![Vec::new(); n];
-    for (u, vs) in adj { for &(v,c) in vs { if c>0 { g[*u].push((v,c)); } } }
+    let n = adj
+        .keys()
+        .copied()
+        .chain(adj.values().flatten().map(|(v, _)| *v))
+        .max()
+        .unwrap_or(0)
+        + 1;
+    let mut g: Vec<Vec<(usize, i64)>> = vec![Vec::new(); n];
+    for (u, vs) in adj {
+        for &(v, c) in vs {
+            if c > 0 {
+                g[*u].push((v, c));
+            }
+        }
+    }
     let mut vis = vec![false; n];
-    let mut q = VecDeque::new(); q.push_back(s); vis[s]=true;
-    while let Some(u) = q.pop_front(){ for &(v,c) in &g[u]{ if c>0 && !vis[v]{ vis[v]=true; q.push_back(v);} } }
+    let mut q = VecDeque::new();
+    q.push_back(s);
+    vis[s] = true;
+    while let Some(u) = q.pop_front() {
+        for &(v, c) in &g[u] {
+            if c > 0 && !vis[v] {
+                vis[v] = true;
+                q.push_back(v);
+            }
+        }
+    }
     let s_set = vis.clone();
     let t_set = vis.iter().map(|&x| !x).collect();
     (s_set, t_set)
 }
 
-pub async fn max_flow_edmonds_karp_async(adj: HashMap<usize, Vec<(usize, i64)>>, s: usize, t: usize) -> Result<i64> {
+pub async fn max_flow_edmonds_karp_async(
+    adj: HashMap<usize, Vec<(usize, i64)>>,
+    s: usize,
+    t: usize,
+) -> Result<i64> {
     Ok(tokio::task::spawn_blocking(move || max_flow_edmonds_karp(&adj, s, t)).await?)
 }
 
@@ -866,12 +1181,30 @@ pub async fn max_flow_edmonds_karp_async(adj: HashMap<usize, Vec<(usize, i64)>>,
 
 pub fn tree_diameter_undirected(n: usize, edges: &[(usize, usize)]) -> usize {
     let mut g = vec![Vec::new(); n];
-    for &(u,v) in edges { g[u].push(v); g[v].push(u); }
+    for &(u, v) in edges {
+        g[u].push(v);
+        g[v].push(u);
+    }
     fn bfs(start: usize, g: &Vec<Vec<usize>>) -> (usize, usize) {
-        let n = g.len(); let mut dist = vec![usize::MAX; n]; let mut q = VecDeque::new();
-        dist[start]=0; q.push_back(start);
-        while let Some(u)=q.pop_front(){ for &v in &g[u]{ if dist[v]==usize::MAX { dist[v]=dist[u]+1; q.push_back(v); } } }
-        let mut best=(0,0); for i in 0..n { if dist[i]>best.1 { best=(i,dist[i]); } }
+        let n = g.len();
+        let mut dist = vec![usize::MAX; n];
+        let mut q = VecDeque::new();
+        dist[start] = 0;
+        q.push_back(start);
+        while let Some(u) = q.pop_front() {
+            for &v in &g[u] {
+                if dist[v] == usize::MAX {
+                    dist[v] = dist[u] + 1;
+                    q.push_back(v);
+                }
+            }
+        }
+        let mut best = (0, 0);
+        for i in 0..n {
+            if dist[i] > best.1 {
+                best = (i, dist[i]);
+            }
+        }
         best
     }
     let (p, _) = bfs(0, &g);
@@ -910,7 +1243,9 @@ impl<T: Eq + Hash + Clone> LcaBinaryLift<T> {
         }
         let n = node_to_idx.len();
         let mut idx_to_node = vec![root.clone(); n];
-        for (node, &i) in node_to_idx.iter() { idx_to_node[i] = node.clone(); }
+        for (node, &i) in node_to_idx.iter() {
+            idx_to_node[i] = node.clone();
+        }
 
         let log = (n as f64).log2().ceil() as usize + 1;
         let mut up = vec![vec![0usize; n]; log];
@@ -935,23 +1270,43 @@ impl<T: Eq + Hash + Clone> LcaBinaryLift<T> {
         }
         up[0][r] = r;
         for k in 1..log {
-            for v in 0..n { up[k][v] = up[k - 1][up[k - 1][v]]; }
+            for v in 0..n {
+                up[k][v] = up[k - 1][up[k - 1][v]];
+            }
         }
-        Self { root, node_to_idx, idx_to_node, up, depth }
+        Self {
+            root,
+            node_to_idx,
+            idx_to_node,
+            up,
+            depth,
+        }
     }
 
     pub fn lca(&self, a: &T, b: &T) -> T {
         let mut u = self.node_to_idx[a];
         let mut v = self.node_to_idx[b];
-        if self.depth[u] < self.depth[v] { std::mem::swap(&mut u, &mut v); }
+        if self.depth[u] < self.depth[v] {
+            std::mem::swap(&mut u, &mut v);
+        }
         let diff = (self.depth[u] - self.depth[v]) as usize;
         let mut k = 0usize;
         let mut uu = u;
-        while (1usize << k) <= diff { if (diff >> k) & 1 == 1 { uu = self.up[k][uu]; } k += 1; }
+        while (1usize << k) <= diff {
+            if (diff >> k) & 1 == 1 {
+                uu = self.up[k][uu];
+            }
+            k += 1;
+        }
         u = uu;
-        if u == v { return self.idx_to_node[u].clone(); }
+        if u == v {
+            return self.idx_to_node[u].clone();
+        }
         for k in (0..self.up.len()).rev() {
-            if self.up[k][u] != self.up[k][v] { u = self.up[k][u]; v = self.up[k][v]; }
+            if self.up[k][u] != self.up[k][v] {
+                u = self.up[k][u];
+                v = self.up[k][v];
+            }
         }
         self.idx_to_node[self.up[0][u]].clone()
     }
@@ -1007,7 +1362,12 @@ mod tests {
         dag.insert("D", vec![]);
         let order = topo_sort_sync(&dag).unwrap();
         let pos: HashMap<_, _> = order.iter().enumerate().map(|(i, k)| (*k, i)).collect();
-        assert!(pos["A"] < pos["B"] && pos["A"] < pos["C"] && pos["B"] < pos["D"] && pos["C"] < pos["D"]);
+        assert!(
+            pos["A"] < pos["B"]
+                && pos["A"] < pos["C"]
+                && pos["B"] < pos["D"]
+                && pos["C"] < pos["D"]
+        );
     }
 
     #[test]
@@ -1025,11 +1385,13 @@ mod tests {
         g.insert(6, vec![]);
 
         let mut sccs = tarjan_scc_sync(&g);
-        for comp in &mut sccs { comp.sort(); }
+        for comp in &mut sccs {
+            comp.sort();
+        }
         sccs.sort_by_key(|c| (c.len(), c[0]));
 
-        assert!(sccs.contains(&vec![1,2,3]));
-        assert!(sccs.contains(&vec![4,5]));
+        assert!(sccs.contains(&vec![1, 2, 3]));
+        assert!(sccs.contains(&vec![4, 5]));
         assert!(sccs.contains(&vec![6]));
     }
 
@@ -1050,7 +1412,8 @@ mod tests {
     #[test]
     fn test_edmonds_karp_and_min_cut() {
         // 与 Dinic 相同的小网络
-        let s = 0usize; let t = 3usize;
+        let s = 0usize;
+        let t = 3usize;
         let mut g: HashMap<usize, Vec<(usize, i64)>> = HashMap::new();
         g.insert(0, vec![(1, 10), (2, 10)]);
         g.insert(1, vec![(2, 2), (3, 8)]);
@@ -1065,7 +1428,7 @@ mod tests {
 
     #[test]
     fn test_tree_diameter() {
-        let edges = vec![(0,1),(1,2),(1,3),(3,4)]; // 线径为 3（2-1-3-4）
+        let edges = vec![(0, 1), (1, 2), (1, 3), (3, 4)]; // 线径为 3（2-1-3-4）
         let d = tree_diameter_undirected(5, &edges);
         assert_eq!(d, 3);
     }
@@ -1097,27 +1460,33 @@ mod tests {
         assert!(!neg);
         assert_eq!(dist[3].round() as i32, 4);
 
-        let edges = vec![(0,1,1.0),(0,2,4.0),(1,2,2.0),(1,3,5.0),(2,3,1.0)];
+        let edges = vec![
+            (0, 1, 1.0),
+            (0, 2, 4.0),
+            (1, 2, 2.0),
+            (1, 3, 5.0),
+            (2, 3, 1.0),
+        ];
         let d = floyd_warshall_sync(4, &edges);
         assert_eq!(d[0][3].round() as i32, 4);
     }
 
     #[test]
     fn test_floyd_with_path() {
-        let edges = vec![(0usize,1usize,1.0),(1,2,2.0),(0,2,10.0)];
+        let edges = vec![(0usize, 1usize, 1.0), (1, 2, 2.0), (0, 2, 10.0)];
         let (d, next) = floyd_warshall_with_path_sync(3, &edges);
         assert!((d[0][2] - 3.0).abs() < 1e-9);
         let p = floyd_reconstruct_path(0, 2, &next).unwrap();
-        assert_eq!(p, vec![0,1,2]);
+        assert_eq!(p, vec![0, 1, 2]);
     }
 
     #[test]
     fn test_hopcroft_karp_basic() {
         // 左 0..3, 右 0..3, 最大匹配应为 3
         let adj = vec![
-            vec![0, 1],    // u0 -> v0,v1
-            vec![1, 2],    // u1 -> v1,v2
-            vec![0, 2],    // u2 -> v0,v2
+            vec![0, 1], // u0 -> v0,v1
+            vec![1, 2], // u1 -> v1,v2
+            vec![0, 2], // u2 -> v0,v2
         ];
         let (m, pu, _pv) = hopcroft_karp_sync(&adj, 3, 3);
         assert_eq!(m, 3);
@@ -1131,7 +1500,7 @@ mod tests {
             }
         }
     }
-    
+
     #[test]
     fn test_tree_centroid() {
         let mut tree = HashMap::new();
@@ -1140,11 +1509,11 @@ mod tests {
         tree.insert(2, vec![0]);
         tree.insert(3, vec![1]);
         tree.insert(4, vec![1]);
-        
+
         let centroid = tree_centroid_sync(&tree, &0).unwrap();
         assert_eq!(centroid, Some(1)); // 节点1是重心
     }
-    
+
     #[test]
     fn test_hld() {
         let mut tree = HashMap::new();
@@ -1153,12 +1522,12 @@ mod tests {
         tree.insert(2, vec![0]);
         tree.insert(3, vec![1]);
         tree.insert(4, vec![1]);
-        
+
         let hld = HeavyLightDecomposition::new(&tree, &0);
         assert_eq!(hld.lca(&3, &4), 1);
         assert_eq!(hld.lca(&2, &4), 0);
     }
-    
+
     #[test]
     fn test_tree_max_independent_set() {
         let mut tree = HashMap::new();
@@ -1167,7 +1536,7 @@ mod tests {
         tree.insert(2, vec![0]);
         tree.insert(3, vec![1]);
         tree.insert(4, vec![1]);
-        
+
         let max_set = tree_max_independent_set_sync(&tree, &0).unwrap();
         assert!(max_set >= 2); // 至少可以选择2个节点
     }
@@ -1185,10 +1554,10 @@ pub fn tree_centroid_sync<T: Eq + Hash + Clone>(
     if tree.is_empty() {
         return Ok(None);
     }
-    
+
     let mut subtree_size = HashMap::new();
     let mut max_subtree = HashMap::new();
-    
+
     // DFS 计算子树大小
     fn dfs_size<T: Eq + Hash + Clone>(
         tree: &HashMap<T, Vec<T>>,
@@ -1199,7 +1568,7 @@ pub fn tree_centroid_sync<T: Eq + Hash + Clone>(
     ) -> usize {
         let mut size = 1;
         let mut max_child_size = 0;
-        
+
         if let Some(children) = tree.get(node) {
             for child in children {
                 if parent.is_some() && parent.unwrap() == child {
@@ -1210,29 +1579,29 @@ pub fn tree_centroid_sync<T: Eq + Hash + Clone>(
                 max_child_size = max_child_size.max(child_size);
             }
         }
-        
+
         subtree_size.insert(node.clone(), size);
         max_subtree.insert(node.clone(), max_child_size);
         size
     }
-    
+
     dfs_size(tree, root, None, &mut subtree_size, &mut max_subtree);
-    
+
     // 找到重心
     let total_size = subtree_size[root];
     let mut centroid = None;
     let mut min_max_subtree = usize::MAX;
-    
+
     for (node, &max_child) in max_subtree.iter() {
         let remaining_size = total_size - subtree_size[node];
         let current_max = max_child.max(remaining_size);
-        
+
         if current_max < min_max_subtree {
             min_max_subtree = current_max;
             centroid = Some(node.clone());
         }
     }
-    
+
     Ok(centroid)
 }
 
@@ -1241,11 +1610,9 @@ pub async fn tree_centroid_async<T: Eq + Hash + Clone + Send + 'static>(
     tree: HashMap<T, Vec<T>>,
     root: T,
 ) -> Result<Option<T>> {
-    tokio::task::spawn_blocking(move || {
-        tree_centroid_sync(&tree, &root)
-    })
-    .await
-    .map_err(|e| anyhow::anyhow!("异步计算失败: {}", e))?
+    tokio::task::spawn_blocking(move || tree_centroid_sync(&tree, &root))
+        .await
+        .map_err(|e| anyhow::anyhow!("异步计算失败: {}", e))?
 }
 
 /// 树链剖分（重链剖分）骨架
@@ -1276,27 +1643,27 @@ impl<T: Eq + Hash + Clone> HeavyLightDecomposition<T> {
             subtree_size: HashMap::new(),
             heavy_child: HashMap::new(),
         };
-        
+
         hld.build(tree, root);
         hld
     }
-    
+
     /// 构建重链剖分
     fn build(&mut self, tree: &HashMap<T, Vec<T>>, root: &T) {
         // 第一次DFS：计算子树大小和重儿子
         self.dfs_size(tree, root, None);
-        
+
         // 第二次DFS：构建重链
         let mut pos = 0;
         self.dfs_hld(tree, root, None, root, &mut pos);
     }
-    
+
     /// DFS计算子树大小
     fn dfs_size(&mut self, tree: &HashMap<T, Vec<T>>, node: &T, parent: Option<&T>) -> usize {
         let mut size = 1;
         let mut max_child_size = 0;
         let mut heavy = None;
-        
+
         if let Some(children) = tree.get(node) {
             for child in children {
                 if parent.is_some() && parent.unwrap() == child {
@@ -1304,20 +1671,20 @@ impl<T: Eq + Hash + Clone> HeavyLightDecomposition<T> {
                 }
                 let child_size = self.dfs_size(tree, child, Some(node));
                 size += child_size;
-                
+
                 if child_size > max_child_size {
                     max_child_size = child_size;
                     heavy = Some(child.clone());
                 }
             }
         }
-        
+
         self.subtree_size.insert(node.clone(), size);
         self.heavy_child.insert(node.clone(), heavy);
         self.parent.insert(node.clone(), parent.cloned());
         size
     }
-    
+
     /// DFS构建重链
     fn dfs_hld(
         &mut self,
@@ -1331,12 +1698,12 @@ impl<T: Eq + Hash + Clone> HeavyLightDecomposition<T> {
         self.chain_id.insert(node.clone(), chain_head.clone());
         self.position.insert(node.clone(), *pos);
         *pos += 1;
-        
+
         // 先处理重儿子
         if let Some(heavy) = self.heavy_child.get(node).cloned().flatten() {
             self.dfs_hld(tree, &heavy, Some(node), chain_head, pos);
         }
-        
+
         // 再处理轻儿子
         if let Some(children) = tree.get(node) {
             for child in children {
@@ -1349,39 +1716,47 @@ impl<T: Eq + Hash + Clone> HeavyLightDecomposition<T> {
             }
         }
     }
-    
+
     /// 查询两个节点之间的路径长度
     pub fn path_length(&self, u: &T, v: &T) -> usize {
         let mut len = 0;
         let mut a = u.clone();
         let mut b = v.clone();
-        
+
         while self.chain_id[&a] != self.chain_id[&b] {
             if self.position[&a] > self.position[&b] {
                 std::mem::swap(&mut a, &mut b);
             }
-            
+
             len += self.position[&b] - self.position[&self.chain_heads[&b]] + 1;
-            b = self.parent[&self.chain_heads[&b]].clone().unwrap_or_else(|| b.clone());
+            b = self.parent[&self.chain_heads[&b]]
+                .clone()
+                .unwrap_or_else(|| b.clone());
         }
-        
+
         len += (self.position[&a] as i32 - self.position[&b] as i32).abs() as usize;
         len
     }
-    
+
     /// 查询两个节点的最近公共祖先
     pub fn lca(&self, u: &T, v: &T) -> T {
         let mut a = u.clone();
         let mut b = v.clone();
-        
+
         while self.chain_id[&a] != self.chain_id[&b] {
             if self.position[&a] > self.position[&b] {
                 std::mem::swap(&mut a, &mut b);
             }
-            b = self.parent[&self.chain_heads[&b]].clone().unwrap_or_else(|| b.clone());
+            b = self.parent[&self.chain_heads[&b]]
+                .clone()
+                .unwrap_or_else(|| b.clone());
         }
-        
-        if self.position[&a] < self.position[&b] { a } else { b }
+
+        if self.position[&a] < self.position[&b] {
+            a
+        } else {
+            b
+        }
     }
 }
 
@@ -1390,11 +1765,9 @@ pub async fn hld_build_async<T: Eq + Hash + Clone + Send + 'static>(
     tree: HashMap<T, Vec<T>>,
     root: T,
 ) -> Result<HeavyLightDecomposition<T>> {
-    tokio::task::spawn_blocking(move || {
-        Ok(HeavyLightDecomposition::new(&tree, &root))
-    })
-    .await
-    .map_err(|e| anyhow::anyhow!("异步构建失败: {}", e))?
+    tokio::task::spawn_blocking(move || Ok(HeavyLightDecomposition::new(&tree, &root)))
+        .await
+        .map_err(|e| anyhow::anyhow!("异步构建失败: {}", e))?
 }
 
 /// 树的最大独立集（树形DP）
@@ -1404,7 +1777,7 @@ pub fn tree_max_independent_set_sync<T: Eq + Hash + Clone>(
 ) -> Result<usize> {
     let mut dp_include = HashMap::new();
     let mut dp_exclude = HashMap::new();
-    
+
     fn dfs<T: Eq + Hash + Clone>(
         tree: &HashMap<T, Vec<T>>,
         node: &T,
@@ -1414,25 +1787,25 @@ pub fn tree_max_independent_set_sync<T: Eq + Hash + Clone>(
     ) {
         let mut include = 1;
         let mut exclude = 0;
-        
+
         if let Some(children) = tree.get(node) {
             for child in children {
                 if parent.is_some() && parent.unwrap() == child {
                     continue;
                 }
                 dfs(tree, child, Some(node), dp_include, dp_exclude);
-                
+
                 include += dp_exclude[child];
                 exclude += dp_include[child].max(dp_exclude[child]);
             }
         }
-        
+
         dp_include.insert(node.clone(), include);
         dp_exclude.insert(node.clone(), exclude);
     }
-    
+
     dfs(tree, root, None, &mut dp_include, &mut dp_exclude);
-    
+
     Ok(dp_include[root].max(dp_exclude[root]))
 }
 
@@ -1441,10 +1814,7 @@ pub async fn tree_max_independent_set_async<T: Eq + Hash + Clone + Send + 'stati
     tree: HashMap<T, Vec<T>>,
     root: T,
 ) -> Result<usize> {
-    tokio::task::spawn_blocking(move || {
-        tree_max_independent_set_sync(&tree, &root)
-    })
-    .await
-    .map_err(|e| anyhow::anyhow!("异步计算失败: {}", e))?
+    tokio::task::spawn_blocking(move || tree_max_independent_set_sync(&tree, &root))
+        .await
+        .map_err(|e| anyhow::anyhow!("异步计算失败: {}", e))?
 }
-

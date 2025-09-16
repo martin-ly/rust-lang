@@ -1,5 +1,5 @@
 //! c18_model - Rust理论模型实现库
-//! 
+//!
 //! 本库使用Rust语言实现各种理论模型，包括：
 //! - 系统建模：排队论、性能分析、可靠性建模
 //! - 机器学习：线性回归、逻辑回归、聚类、决策树
@@ -7,63 +7,71 @@
 //! - 数学建模：概率模型、统计模型、优化算法
 
 // 核心模型模块
-pub mod queueing_models;      // 排队论模型
-pub mod ml_models;           // 机器学习模型
-pub mod formal_models;       // 形式化方法模型
-pub mod math_models;         // 数学建模
-pub mod performance_models;  // 性能分析模型
+pub mod formal_models; // 形式化方法模型
+pub mod math_models; // 数学建模
+pub mod ml_models; // 机器学习模型
+pub mod performance_models;
+pub mod queueing_models; // 排队论模型 // 性能分析模型
 
 // 工具和实用程序
-pub mod utils;               // 通用工具函数
+pub mod utils; // 通用工具函数
 // 已裁剪：可视化与基准测试模块
 
 // 核心基础设施
-pub mod config;             // 配置管理
-pub mod error;              // 统一错误处理
+pub mod config; // 配置管理
+pub mod error; // 统一错误处理
 
 // 重新导出主要类型和trait
 pub use queueing_models::{
-    MM1Queue, MMcQueue, PerformanceAnalyzer, ReliabilityAnalyzer, 
-    ScalabilityAnalyzer, SimulationResult, ScalingResult,
+    MM1Queue, MMcQueue, PerformanceAnalyzer, ReliabilityAnalyzer, ScalabilityAnalyzer,
+    ScalingResult, SimulationResult,
 };
 
-pub use ml_models::{
-    LinearRegression, LogisticRegression, KMeans, DecisionTree, DecisionTreeNode,
-};
+pub use ml_models::{DecisionTree, DecisionTreeNode, KMeans, LinearRegression, LogisticRegression};
 
 pub use formal_models::{
-    State, Transition, FiniteStateMachine, TemporalFormula, TemporalModelChecker,
-    ProcessTerm, ProcessAlgebraInterpreter, FormalMethodsToolkit, ModelCheckingResult,
+    FiniteStateMachine,
+    FormalMethodsToolkit,
+    ModelCheckingResult,
+    ProcessAlgebraInterpreter,
+    ProcessTerm,
+    State,
+    TemporalFormula,
+    TemporalModelChecker,
+    Transition,
+    advanced_tools,
     // 高级形式化方法
-    formal_languages, verification, transformation, implementations, advanced_tools,
+    formal_languages,
+    implementations,
+    transformation,
+    verification,
 };
 
 pub use math_models::{
-    ProbabilityDistribution, NormalDistribution, ExponentialDistribution, PoissonDistribution,
-    MonteCarloSimulator, NumericalIntegrator, IntegrationMethod, GradientDescentOptimizer,
+    ExponentialDistribution, GradientDescentOptimizer, IntegrationMethod, MonteCarloSimulator,
+    NormalDistribution, NumericalIntegrator, PoissonDistribution, ProbabilityDistribution,
     StatisticalTools,
 };
 
 pub use performance_models::{
-    PerformanceMetrics, LoadGenerator, LoadPattern, CapacityPlanner, SystemConfiguration,
-    PerformanceRequirements, CapacityAnalysis, ScalingRecommendation, Priority,
-    PerformancePredictor, PredictionModel,
+    CapacityAnalysis, CapacityPlanner, LoadGenerator, LoadPattern, PerformanceMetrics,
+    PerformancePredictor, PerformanceRequirements, PredictionModel, Priority,
+    ScalingRecommendation, SystemConfiguration,
 };
 
-
 pub use utils::{
-    MathUtils, StatisticsUtils, DataUtils, ValidationUtils, Logger, LogLevel, LogMessage,
+    DataUtils, LogLevel, LogMessage, Logger, MathUtils, StatisticsUtils, ValidationUtils,
 };
 
 // 核心基础设施重新导出
 pub use config::{
-    ModelConfig, ConfigManager, PrecisionConfig, PerformanceConfig, VisualizationConfig,
-    LogLevel as ConfigLogLevel,
+    ConfigManager, LogLevel as ConfigLogLevel, ModelConfig, PerformanceConfig, PrecisionConfig,
+    VisualizationConfig,
 };
 
 pub use error::{
-    ModelError, ErrorSeverity, ErrorContext, ContextualError, ErrorHandler,
-    Result as ModelResult, ContextualResult,
+    ContextualError, ContextualResult, ErrorContext, ErrorHandler, ErrorSeverity, ModelError,
+    Result as ModelResult,
 };
 
 // 已裁剪：可视化、基准测试与标准合规模块的对外导出

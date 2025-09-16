@@ -90,7 +90,7 @@ impl Default for Status {
 fn main() {
     let config = Config::default();
     println!("Default config: {:?}", config);
-    
+
     // 部分使用默认值
     let custom_config = Config {
         timeout: 60,
@@ -106,7 +106,7 @@ fn main() {
     let mut vec: Vec<i32> = Vec::default();
     vec.push(1);
     vec.push(2);
-    
+
     let mut map: HashMap<String, i32> = HashMap::default();
     map.insert("key".to_string(), 42);
 }
@@ -282,39 +282,39 @@ pub fn demonstrate_default() {
     // 基本默认值
     let example = DefaultExample::default();
     println!("Default example: {:?}", example);
-    
+
     // 部分使用默认值
     let custom_example = DefaultExample {
         name: String::from("Custom Name"),
         ..DefaultExample::default()
     };
     println!("Custom example: {:?}", custom_example);
-    
+
     // 泛型容器默认值
     let int_container = DefaultContainer::<i32>::default();
     let string_container = DefaultContainer::<String>::default();
-    
+
     println!("Int container: {:?}", int_container);
     println!("String container: {:?}", string_container);
-    
+
     // 配置默认值
     let config = Config::default();
     println!("Default config: {:?}", config);
-    
+
     let debug_config = Config {
         debug: true,
         ..Config::default()
     };
     println!("Debug config: {:?}", debug_config);
-    
+
     // 枚举默认值
     let status = DefaultStatus::default();
     println!("Default status: {:?}", status);
-    
+
     // 集合默认值
     let vec: Vec<i32> = vec![1, 2];
     println!("Vector: {:?}", vec);
-    
+
     let mut map: std::collections::HashMap<String, i32> = std::collections::HashMap::default();
     map.insert("key".to_string(), 42);
     println!("HashMap: {:?}", map);
@@ -329,7 +329,7 @@ pub fn create_default_container<T: Default>() -> DefaultContainer<T> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_default_example() {
         let default = DefaultExample::default();
@@ -337,7 +337,7 @@ mod tests {
         assert_eq!(default.count, 0);
         assert_eq!(default.active, false);
     }
-    
+
     #[test]
     fn test_config_default() {
         let config = Config::default();
@@ -345,13 +345,13 @@ mod tests {
         assert_eq!(config.retries, 3);
         assert_eq!(config.debug, false);
     }
-    
+
     #[test]
     fn test_status_default() {
         let status = DefaultStatus::default();
         assert!(matches!(status, DefaultStatus::Idle));
     }
-    
+
     #[test]
     fn test_container_default() {
         let container = DefaultContainer::<i32>::default();

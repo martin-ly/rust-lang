@@ -2,11 +2,11 @@
 // 运行命令: cargo run --example axum_example --features axum
 
 use axum::{
+    Router,
     extract::{Path, State},
     http::StatusCode,
     response::Json,
     routing::{get, post},
-    Router,
 };
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -40,7 +40,10 @@ impl AppState {
     }
 }
 
-async fn get_user(Path(id): Path<u32>, State(state): State<AppState>) -> Result<Json<User>, StatusCode> {
+async fn get_user(
+    Path(id): Path<u32>,
+    State(state): State<AppState>,
+) -> Result<Json<User>, StatusCode> {
     let users = state.users.lock().unwrap();
     match users.get(&id) {
         Some(user) => Ok(Json(user.clone())),
@@ -48,7 +51,10 @@ async fn get_user(Path(id): Path<u32>, State(state): State<AppState>) -> Result<
     }
 }
 
-async fn create_user(State(state): State<AppState>, Json(payload): Json<CreateUser>) -> Result<Json<User>, StatusCode> {
+async fn create_user(
+    State(state): State<AppState>,
+    Json(payload): Json<CreateUser>,
+) -> Result<Json<User>, StatusCode> {
     let mut users = state.users.lock().unwrap();
     let id = users.len() as u32 + 1;
     let user = User {
@@ -72,7 +78,7 @@ async fn health_check() -> &'static str {
 #[tokio::main]
 async fn main() {
     let app_state = AppState::new();
-    
+
     let app = Router::new()
         .route("/api/v1/users/:id", get(get_user))
         .route("/api/v1/users", post(create_user))
@@ -82,6 +88,6 @@ async fn main() {
 
     let listener = TcpListener::bind("0.0.0.0:3000").await.unwrap();
     println!("启动 Axum 服务器在 http://0.0.0.0:3000");
-    
+
     axum::serve(listener, app).await.unwrap();
 }

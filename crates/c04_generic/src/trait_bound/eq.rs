@@ -80,7 +80,7 @@ enum Status {
 
 impl PartialEq for Status {
     fn eq(&self, other: &Self) -> bool {
-        matches!((self, other), 
+        matches!((self, other),
             (Status::Active, Status::Active) |
             (Status::Inactive, Status::Inactive) |
             (Status::Error, Status::Error))
@@ -99,13 +99,13 @@ use std::collections::HashSet;
 
 fn main() {
     let mut set: HashSet<Point> = HashSet::new();
-    
+
     let p1 = Point { x: 1, y: 2 };
     let p2 = Point { x: 1, y: 2 };
-    
+
     set.insert(p1);
     set.insert(p2); // 不会插入，因为 p1 == p2
-    
+
     println!("Set size: {}", set.len()); // 输出: 1
 }
 ```
@@ -119,9 +119,9 @@ fn main() {
         Point { x: 1, y: 2 },
         Point { x: 2, y: 3 },
     ];
-    
+
     points.sort(); // 需要 Ord trait，但 Ord 要求 Eq
-    
+
     for point in points {
         println!("{:?}", point);
     }
@@ -134,7 +134,7 @@ fn main() {
 fn find_duplicates<T: Eq + Clone>(items: &[T]) -> Vec<T> {
     let mut duplicates = Vec::new();
     let mut seen = Vec::new();
-    
+
     for item in items {
         if seen.contains(item) {
             duplicates.push(item.clone());
@@ -142,7 +142,7 @@ fn find_duplicates<T: Eq + Clone>(items: &[T]) -> Vec<T> {
             seen.push(item.clone());
         }
     }
-    
+
     duplicates
 }
 ```
@@ -240,13 +240,11 @@ pub struct EqExample {
 
 impl PartialEq for EqExample {
     fn eq(&self, other: &Self) -> bool {
-        self.name == other.name && 
-        self.value == other.value && 
-        self.active == other.active
+        self.name == other.name && self.value == other.value && self.active == other.active
     }
 }
 
-impl Eq for EqExample { }
+impl Eq for EqExample {}
 
 // 泛型容器
 #[derive(Debug)]
@@ -261,7 +259,7 @@ impl<T: Eq> PartialEq for EqContainer<T> {
     }
 }
 
-impl<T: Eq> Eq for EqContainer<T> { }
+impl<T: Eq> Eq for EqContainer<T> {}
 
 // 状态枚举
 #[derive(Debug)]
@@ -273,14 +271,16 @@ pub enum EqStatus {
 
 impl PartialEq for EqStatus {
     fn eq(&self, other: &Self) -> bool {
-        matches!((self, other),
-            (EqStatus::Idle, EqStatus::Idle) |
-            (EqStatus::Active, EqStatus::Active) |
-            (EqStatus::Error, EqStatus::Error))
+        matches!(
+            (self, other),
+            (EqStatus::Idle, EqStatus::Idle)
+                | (EqStatus::Active, EqStatus::Active)
+                | (EqStatus::Error, EqStatus::Error)
+        )
     }
 }
 
-impl Eq for EqStatus { }
+impl Eq for EqStatus {}
 
 // 几何点
 #[derive(Debug, Clone)]
@@ -295,7 +295,7 @@ impl PartialEq for EqPoint {
     }
 }
 
-impl Eq for EqPoint { }
+impl Eq for EqPoint {}
 
 // 演示函数
 pub fn demonstrate_eq() {
@@ -303,60 +303,60 @@ pub fn demonstrate_eq() {
     let p1 = EqPoint { x: 1, y: 2 };
     let p2 = EqPoint { x: 1, y: 2 };
     let p3 = EqPoint { x: 2, y: 1 };
-    
+
     println!("p1 == p2: {}", p1 == p2); // true
     println!("p1 == p3: {}", p1 == p3); // false
     println!("p1 != p3: {}", p1 != p3); // true
-    
+
     // 结构体相等性
     let e1 = EqExample {
         name: String::from("Test"),
         value: 42,
         active: true,
     };
-    
+
     let e2 = EqExample {
         name: String::from("Test"),
         value: 42,
         active: true,
     };
-    
+
     let e3 = EqExample {
         name: String::from("Different"),
         value: 42,
         active: true,
     };
-    
+
     println!("e1 == e2: {}", e1 == e2); // true
     println!("e1 == e3: {}", e1 == e3); // false
-    
+
     // 枚举相等性
     let s1 = EqStatus::Active;
     let s2 = EqStatus::Active;
     let s3 = EqStatus::Idle;
-    
+
     println!("s1 == s2: {}", s1 == s2); // true
     println!("s1 == s3: {}", s1 == s3); // false
-    
+
     // 泛型容器相等性
     let c1 = EqContainer {
         value: 100,
         metadata: String::from("Container 1"),
     };
-    
+
     let c2 = EqContainer {
         value: 100,
         metadata: String::from("Container 1"),
     };
-    
+
     let c3 = EqContainer {
         value: 200,
         metadata: String::from("Container 1"),
     };
-    
+
     println!("c1 == c2: {}", c1 == c2); // true
     println!("c1 == c3: {}", c1 == c3); // false
-    
+
     // 等价关系测试
     test_equivalence_properties();
 }
@@ -366,22 +366,22 @@ fn test_equivalence_properties() {
     let p1 = EqPoint { x: 1, y: 2 };
     let p2 = EqPoint { x: 1, y: 2 };
     let p3 = EqPoint { x: 1, y: 2 };
-    
+
     // 自反性: p1 == p1
     // 自反性测试
     let p1_copy = p1.clone();
     assert!(p1 == p1_copy, "Reflexivity failed");
-    
+
     // 对称性: 如果 p1 == p2，那么 p2 == p1
     if p1 == p2 {
         assert!(p2 == p1, "Symmetry failed");
     }
-    
+
     // 传递性: 如果 p1 == p2 且 p2 == p3，那么 p1 == p3
     if p1 == p2 && p2 == p3 {
         assert!(p1 == p3, "Transitivity failed");
     }
-    
+
     println!("All equivalence properties satisfied!");
 }
 
@@ -389,7 +389,7 @@ fn test_equivalence_properties() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_eq_example() {
         let e1 = EqExample {
@@ -397,39 +397,39 @@ mod tests {
             value: 100,
             active: false,
         };
-        
+
         let e2 = EqExample {
             name: String::from("Test"),
             value: 100,
             active: false,
         };
-        
+
         let e3 = EqExample {
             name: String::from("Different"),
             value: 100,
             active: false,
         };
-        
+
         assert_eq!(e1, e2);
         assert_ne!(e1, e3);
     }
-    
+
     #[test]
     fn test_point_eq() {
         let p1 = EqPoint { x: 1, y: 2 };
         let p2 = EqPoint { x: 1, y: 2 };
         let p3 = EqPoint { x: 2, y: 1 };
-        
+
         assert_eq!(p1, p2);
         assert_ne!(p1, p3);
     }
-    
+
     #[test]
     fn test_status_eq() {
         let s1 = EqStatus::Active;
         let s2 = EqStatus::Active;
         let s3 = EqStatus::Idle;
-        
+
         assert_eq!(s1, s2);
         assert_ne!(s1, s3);
     }

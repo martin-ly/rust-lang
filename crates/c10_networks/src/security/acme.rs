@@ -22,7 +22,11 @@ pub struct AcmeManager {
 }
 
 impl AcmeManager {
-    pub fn new(storage_dir: PathBuf, directory_url: impl Into<String>, domains: Vec<String>) -> Self {
+    pub fn new(
+        storage_dir: PathBuf,
+        directory_url: impl Into<String>,
+        domains: Vec<String>,
+    ) -> Self {
         Self {
             storage_dir,
             directory_url: directory_url.into(),
@@ -34,10 +38,14 @@ impl AcmeManager {
     }
 
     /// 证书链 PEM 文件路径（默认 storage_dir/cert.pem）
-    pub fn cert_pem_path(&self) -> PathBuf { self.storage_dir.join("cert.pem") }
+    pub fn cert_pem_path(&self) -> PathBuf {
+        self.storage_dir.join("cert.pem")
+    }
 
     /// 私钥 PEM 文件路径（默认 storage_dir/key.pem）
-    pub fn key_pem_path(&self) -> PathBuf { self.storage_dir.join("key.pem") }
+    pub fn key_pem_path(&self) -> PathBuf {
+        self.storage_dir.join("key.pem")
+    }
 
     /// 启动后台续期任务（占位实现）
     pub async fn spawn_renew_task(&self) -> NetworkResult<()> {
@@ -60,11 +68,15 @@ impl AcmeManager {
         let cert_path = self.cert_pem_path();
         let key_path = self.key_pem_path();
         if cert_path.exists() && key_path.exists() {
-            let cert_pem = std::fs::read(&cert_path).map_err(|e| NetworkError::Other(e.to_string()))?;
-            let key_pem = std::fs::read(&key_path).map_err(|e| NetworkError::Other(e.to_string()))?;
+            let cert_pem =
+                std::fs::read(&cert_path).map_err(|e| NetworkError::Other(e.to_string()))?;
+            let key_pem =
+                std::fs::read(&key_path).map_err(|e| NetworkError::Other(e.to_string()))?;
             return Ok((cert_pem, key_pem));
         }
-        Err(NetworkError::Other("test cert not found: place ./acme/cert.pem and ./acme/key.pem".into()))
+        Err(NetworkError::Other(
+            "test cert not found: place ./acme/cert.pem and ./acme/key.pem".into(),
+        ))
     }
 
     fn clone_for_task(&self) -> Self {
@@ -77,7 +89,6 @@ impl AcmeManager {
             placeholder_mode: self.placeholder_mode,
         }
     }
-
 }
 
 /// 简易的 HTTP-01 挑战存储（token -> keyAuthorization）
@@ -87,7 +98,11 @@ pub struct Http01MemoryStore {
 }
 
 impl Http01MemoryStore {
-    pub fn new() -> Self { Self { inner: Arc::new(RwLock::new(HashMap::new())) } }
+    pub fn new() -> Self {
+        Self {
+            inner: Arc::new(RwLock::new(HashMap::new())),
+        }
+    }
 
     pub async fn set(&self, token: String, key_authorization: String) {
         self.inner.write().await.insert(token, key_authorization);
@@ -101,5 +116,3 @@ impl Http01MemoryStore {
         self.inner.write().await.remove(token);
     }
 }
-
-

@@ -1,53 +1,53 @@
 //! 错误处理模块
-//! 
+//!
 //! 提供统一的错误处理机制，支持多种错误类型和错误链
 
-use thiserror::Error;
 use serde::{Deserialize, Serialize};
 use std::fmt;
+use thiserror::Error;
 
 /// 应用错误类型
 #[derive(Error, Debug, Clone, Serialize, Deserialize)]
 pub enum AppError {
     #[error("配置错误: {message}")]
     Config { message: String },
-    
+
     #[error("数据库错误: {message}")]
     Database { message: String },
-    
+
     #[error("网络错误: {message}")]
     Network { message: String },
-    
+
     #[error("认证错误: {message}")]
     Authentication { message: String },
-    
+
     #[error("授权错误: {message}")]
     Authorization { message: String },
-    
+
     #[error("验证错误: {message}")]
     Validation { message: String },
-    
+
     #[error("业务逻辑错误: {message}")]
     Business { message: String },
-    
+
     #[error("内部服务器错误: {message}")]
     Internal { message: String },
-    
+
     #[error("外部服务错误: {service} - {message}")]
     External { service: String, message: String },
-    
+
     #[error("超时错误: {operation}")]
     Timeout { operation: String },
-    
+
     #[error("资源未找到: {resource}")]
     NotFound { resource: String },
-    
+
     #[error("资源已存在: {resource}")]
     Conflict { resource: String },
-    
+
     #[error("请求过大: {size} bytes")]
     PayloadTooLarge { size: usize },
-    
+
     #[error("请求频率限制: {limit} requests per {period}")]
     RateLimited { limit: u32, period: String },
 }
@@ -81,7 +81,7 @@ impl AppError {
             AppError::RateLimited { .. } => ErrorSeverity::Low,
         }
     }
-    
+
     /// 获取错误代码
     pub fn code(&self) -> &'static str {
         match self {
@@ -101,7 +101,7 @@ impl AppError {
             AppError::RateLimited { .. } => "RATE_LIMITED",
         }
     }
-    
+
     /// 检查是否可重试
     pub fn is_retryable(&self) -> bool {
         match self {
@@ -113,7 +113,7 @@ impl AppError {
             _ => false,
         }
     }
-    
+
     /// 检查是否为客户端错误
     pub fn is_client_error(&self) -> bool {
         match self {
@@ -127,7 +127,7 @@ impl AppError {
             _ => false,
         }
     }
-    
+
     /// 检查是否为服务器错误
     pub fn is_server_error(&self) -> bool {
         match self {
@@ -175,27 +175,27 @@ impl ContextualError {
             context: ErrorContext::default(),
         }
     }
-    
+
     pub fn with_context(mut self, context: ErrorContext) -> Self {
         self.context = context;
         self
     }
-    
+
     pub fn with_request_id(mut self, request_id: String) -> Self {
         self.context.request_id = Some(request_id);
         self
     }
-    
+
     pub fn with_user_id(mut self, user_id: String) -> Self {
         self.context.user_id = Some(user_id);
         self
     }
-    
+
     pub fn with_source(mut self, source: String) -> Self {
         self.context.source = Some(source);
         self
     }
-    
+
     pub fn with_metadata(mut self, key: String, value: String) -> Self {
         self.context.metadata.insert(key, value);
         self
@@ -223,72 +223,75 @@ pub type AppResult<T> = Result<T, ContextualError>;
 /// 错误处理工具函数
 pub mod utils {
     use super::*;
-    
+
     /// 将标准错误转换为应用错误
     pub fn from_std_error(error: Box<dyn std::error::Error + Send + Sync>) -> ContextualError {
         ContextualError::new(AppError::Internal {
             message: error.to_string(),
         })
     }
-    
+
     /// 从字符串创建配置错误
     pub fn config_error(message: impl Into<String>) -> ContextualError {
         ContextualError::new(AppError::Config {
             message: message.into(),
         })
     }
-    
+
     /// 从字符串创建数据库错误
     pub fn database_error(message: impl Into<String>) -> ContextualError {
         ContextualError::new(AppError::Database {
             message: message.into(),
         })
     }
-    
+
     /// 从字符串创建网络错误
     pub fn network_error(message: impl Into<String>) -> ContextualError {
         ContextualError::new(AppError::Network {
             message: message.into(),
         })
     }
-    
+
     /// 从字符串创建验证错误
     pub fn validation_error(message: impl Into<String>) -> ContextualError {
         ContextualError::new(AppError::Validation {
             message: message.into(),
         })
     }
-    
+
     /// 从字符串创建业务错误
     pub fn business_error(message: impl Into<String>) -> ContextualError {
         ContextualError::new(AppError::Business {
             message: message.into(),
         })
     }
-    
+
     /// 创建资源未找到错误
     pub fn not_found_error(resource: impl Into<String>) -> ContextualError {
         ContextualError::new(AppError::NotFound {
             resource: resource.into(),
         })
     }
-    
+
     /// 创建资源冲突错误
     pub fn conflict_error(resource: impl Into<String>) -> ContextualError {
         ContextualError::new(AppError::Conflict {
             resource: resource.into(),
         })
     }
-    
+
     /// 创建超时错误
     pub fn timeout_error(operation: impl Into<String>) -> ContextualError {
         ContextualError::new(AppError::Timeout {
             operation: operation.into(),
         })
     }
-    
+
     /// 创建外部服务错误
-    pub fn external_error(service: impl Into<String>, message: impl Into<String>) -> ContextualError {
+    pub fn external_error(
+        service: impl Into<String>,
+        message: impl Into<String>,
+    ) -> ContextualError {
         ContextualError::new(AppError::External {
             service: service.into(),
             message: message.into(),

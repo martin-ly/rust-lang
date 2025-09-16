@@ -1,10 +1,10 @@
 //! 时间序列模型
-//! 
+//!
 //! 包含各种时间序列预测模型的实现
 
-use serde::{Deserialize, Serialize};
-use ndarray::{Array1, Array2};
 use anyhow::Result;
+use ndarray::{Array1, Array2};
+use serde::{Deserialize, Serialize};
 
 /// 时间序列模型类型
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -45,7 +45,7 @@ impl TimeSeriesModel {
             weights: Vec::new(),
         }
     }
-    
+
     /// 预测
     pub fn predict(&self, input: &Array2<f32>) -> Result<Array2<f32>> {
         // 这里应该实现实际的时间序列预测

@@ -1,9 +1,9 @@
 //! 模型提供商
-//! 
+//!
 //! 提供不同 LLM 提供商的接口
 
-use serde::{Deserialize, Serialize};
 use anyhow::Result;
+use serde::{Deserialize, Serialize};
 
 /// 提供商类型
 #[derive(Debug, Clone, Serialize, Deserialize)]

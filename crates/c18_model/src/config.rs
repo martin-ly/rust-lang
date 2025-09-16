@@ -1,5 +1,5 @@
 //! 配置管理模块
-//! 
+//!
 //! 本模块提供了统一的配置管理功能，包括默认配置、配置验证、
 //! 配置序列化等。使用Rust的类型安全特性确保配置的正确性。
 
@@ -155,14 +155,12 @@ impl ModelConfig {
 
     /// 从JSON字符串加载配置
     pub fn from_json(json: &str) -> Result<Self, String> {
-        serde_json::from_str(json)
-            .map_err(|e| format!("配置解析错误: {}", e))
+        serde_json::from_str(json).map_err(|e| format!("配置解析错误: {}", e))
     }
 
     /// 将配置保存为JSON字符串
     pub fn to_json(&self) -> Result<String, String> {
-        serde_json::to_string_pretty(self)
-            .map_err(|e| format!("配置序列化错误: {}", e))
+        serde_json::to_string_pretty(self).map_err(|e| format!("配置序列化错误: {}", e))
     }
 
     /// 验证配置
@@ -294,8 +292,8 @@ impl ConfigManager {
 
     /// 从文件加载配置
     pub fn load_from_file(&mut self, path: &str) -> Result<(), String> {
-        let content = std::fs::read_to_string(path)
-            .map_err(|e| format!("读取配置文件失败: {}", e))?;
+        let content =
+            std::fs::read_to_string(path).map_err(|e| format!("读取配置文件失败: {}", e))?;
         let config = ModelConfig::from_json(&content)?;
         self.update_config(config)
     }
@@ -303,8 +301,7 @@ impl ConfigManager {
     /// 保存配置到文件
     pub fn save_to_file(&self, path: &str) -> Result<(), String> {
         let content = self.config.to_json()?;
-        std::fs::write(path, content)
-            .map_err(|e| format!("保存配置文件失败: {}", e))
+        std::fs::write(path, content).map_err(|e| format!("保存配置文件失败: {}", e))
     }
 
     /// 重置为默认配置
@@ -373,8 +370,11 @@ mod tests {
         let config = ModelConfig::default();
         let json = config.to_json().unwrap();
         let parsed_config = ModelConfig::from_json(&json).unwrap();
-        
-        assert_eq!(config.precision.default_precision, parsed_config.precision.default_precision);
+
+        assert_eq!(
+            config.precision.default_precision,
+            parsed_config.precision.default_precision
+        );
         assert_eq!(config.log_level, parsed_config.log_level);
     }
 
@@ -382,7 +382,7 @@ mod tests {
     fn test_config_manager() {
         let manager = ConfigManager::new();
         assert!(manager.get_config().validate().is_ok());
-        
+
         let summary = manager.get_summary();
         assert!(summary.contains("配置摘要"));
         assert!(summary.contains("默认精度"));
@@ -392,7 +392,7 @@ mod tests {
     fn test_custom_config() {
         let mut config = ModelConfig::default();
         config.set_custom("test_key".to_string(), serde_json::json!("test_value"));
-        
+
         let value = config.get_custom("test_key");
         assert!(value.is_some());
         assert_eq!(value.unwrap(), &serde_json::json!("test_value"));
@@ -412,7 +412,7 @@ mod tests {
         let config = ModelConfig::new()
             .with_log_level(LogLevel::Debug)
             .with_logging(true);
-        
+
         assert_eq!(config.log_level, LogLevel::Debug);
         assert!(config.enable_logging);
     }

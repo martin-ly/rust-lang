@@ -7,5 +7,3 @@ pub async fn demo_sleep() -> u64 {
     tokio::time::sleep(Duration::from_millis(1)).await;
     1
 }
-
-

@@ -13,7 +13,11 @@ fn retry_backoff_sequence_and_deadline_budget() {
     let mut budget = 50i64;
     let costs = [10i64, 20, 25];
     let mut attempts = 0;
-    for c in costs { if budget - c > 0 { budget -= c; attempts += 1; } }
+    for c in costs {
+        if budget - c > 0 {
+            budget -= c;
+            attempts += 1;
+        }
+    }
     assert_eq!(attempts, 2);
 }
-

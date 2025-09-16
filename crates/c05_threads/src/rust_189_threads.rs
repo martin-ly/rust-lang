@@ -13,7 +13,9 @@ pub fn demo_scoped_threads() {
     thread::scope(|s| {
         let mut_ref = &mut data;
         s.spawn(move || {
-            for x in mut_ref.iter_mut() { *x *= 2; }
+            for x in mut_ref.iter_mut() {
+                *x *= 2;
+            }
         });
         s.spawn(|| {
             // 可以并行做其他只读操作
@@ -27,17 +29,26 @@ pub fn demo_mpsc_vs_crossbeam() {
     // std::mpsc
     let (tx, rx) = mpsc::channel();
     let t = thread::spawn(move || {
-        for i in 0..5 { tx.send(i).unwrap(); }
+        for i in 0..5 {
+            tx.send(i).unwrap();
+        }
     });
     let mut collected = Vec::new();
-    while let Ok(v) = rx.recv() { collected.push(v); if v == 4 { break; } }
+    while let Ok(v) = rx.recv() {
+        collected.push(v);
+        if v == 4 {
+            break;
+        }
+    }
     t.join().unwrap();
     println!("std::mpsc collected: {:?}", collected);
 
     // crossbeam-channel
     let (tx, rx) = crossbeam_channel::unbounded();
     let t = thread::spawn(move || {
-        for i in 0..5 { tx.send(i).unwrap(); }
+        for i in 0..5 {
+            tx.send(i).unwrap();
+        }
     });
     let out: Vec<_> = rx.iter().take(5).collect();
     t.join().unwrap();
@@ -61,7 +72,9 @@ pub fn demo_parking_lot() {
     thread::scope(|s| {
         for _ in 0..4 {
             s.spawn(|| {
-                for _ in 0..1000 { *counter.lock() += 1; }
+                for _ in 0..1000 {
+                    *counter.lock() += 1;
+                }
             });
         }
         s.spawn(|| {
@@ -130,23 +143,41 @@ pub fn demonstrate_rust_189_threads() {
 mod tests {
     use super::*;
     #[test]
-    fn test_scoped_threads_runs() { demo_scoped_threads(); }
+    fn test_scoped_threads_runs() {
+        demo_scoped_threads();
+    }
     #[test]
-    fn test_mpsc_vs_crossbeam_runs() { demo_mpsc_vs_crossbeam(); }
+    fn test_mpsc_vs_crossbeam_runs() {
+        demo_mpsc_vs_crossbeam();
+    }
     #[test]
-    fn test_rayon_parallel_runs() { demo_rayon_parallel(); }
+    fn test_rayon_parallel_runs() {
+        demo_rayon_parallel();
+    }
     #[test]
-    fn test_parking_lot_runs() { demo_parking_lot(); }
+    fn test_parking_lot_runs() {
+        demo_parking_lot();
+    }
     #[test]
-    fn test_barrier_condvar_runs() { demo_barrier_and_condvar(); }
+    fn test_barrier_condvar_runs() {
+        demo_barrier_and_condvar();
+    }
     #[test]
-    fn test_once_cell_once_lock_runs() { demo_once_cell_and_once_lock(); }
+    fn test_once_cell_once_lock_runs() {
+        demo_once_cell_and_once_lock();
+    }
     #[test]
-    fn test_thread_local_runs() { demo_thread_local(); }
+    fn test_thread_local_runs() {
+        demo_thread_local();
+    }
     #[test]
-    fn test_sync_channel_backpressure_runs() { demo_sync_channel_backpressure(); }
+    fn test_sync_channel_backpressure_runs() {
+        demo_sync_channel_backpressure();
+    }
     #[test]
-    fn test_concurrency_error_handling_runs() { demo_concurrency_error_handling(); }
+    fn test_concurrency_error_handling_runs() {
+        demo_concurrency_error_handling();
+    }
 }
 
 // 其他对齐示例：OnceCell/OnceLock、thread_local!、sync_channel 背压、并发错误处理
@@ -209,7 +240,7 @@ pub fn demo_sync_channel_backpressure() {
 
 pub fn demo_concurrency_error_handling() {
     use anyhow::{Context, Result};
-    use crossbeam_channel::{bounded, RecvTimeoutError};
+    use crossbeam_channel::{RecvTimeoutError, bounded};
     use std::time::Duration;
     use thiserror::Error;
 
@@ -227,12 +258,12 @@ pub fn demo_concurrency_error_handling() {
         match rx.recv_timeout(Duration::from_millis(5)) {
             Ok(v) => Ok(v),
             Err(RecvTimeoutError::Timeout) => Err(ChanError::Timeout).context("recv with timeout"),
-            Err(RecvTimeoutError::Disconnected) => Err(ChanError::Disconnected).context("recv with timeout"),
+            Err(RecvTimeoutError::Disconnected) => {
+                Err(ChanError::Disconnected).context("recv with timeout")
+            }
         }
     }
 
     let res = try_recv_with_timeout();
     println!("concurrency error handling: {}", res.unwrap_err());
 }
-
-

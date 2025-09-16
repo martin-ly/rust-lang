@@ -9,8 +9,13 @@ pub struct DisjointSet {
 impl DisjointSet {
     pub fn new(n: usize) -> Self {
         let mut parent = vec![0; n];
-        for i in 0..n { parent[i] = i; }
-        Self { parent, rank: vec![0; n] }
+        for i in 0..n {
+            parent[i] = i;
+        }
+        Self {
+            parent,
+            rank: vec![0; n],
+        }
     }
 
     pub fn find(&mut self, x: usize) -> usize {
@@ -24,10 +29,16 @@ impl DisjointSet {
     pub fn union(&mut self, a: usize, b: usize) -> bool {
         let mut ra = self.find(a);
         let mut rb = self.find(b);
-        if ra == rb { return false; }
-        if self.rank[ra] < self.rank[rb] { std::mem::swap(&mut ra, &mut rb); }
+        if ra == rb {
+            return false;
+        }
+        if self.rank[ra] < self.rank[rb] {
+            std::mem::swap(&mut ra, &mut rb);
+        }
         self.parent[rb] = ra;
-        if self.rank[ra] == self.rank[rb] { self.rank[ra] += 1; }
+        if self.rank[ra] == self.rank[rb] {
+            self.rank[ra] += 1;
+        }
         true
     }
 }
@@ -48,5 +59,3 @@ mod tests {
         assert_eq!(r0, r2);
     }
 }
-
-

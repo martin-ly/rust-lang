@@ -1,8 +1,8 @@
 //! 形式化方法模型实现
-//! 
+//!
 //! 本模块实现了各种形式化方法，包括有限状态机、时序逻辑、模型检查、
 //! 进程代数等。使用Rust的类型安全特性确保形式化模型的正确性。
-//! 
+//!
 //! 本模块包含：
 //! - 基础形式化模型：状态机、时序逻辑、进程代数
 //! - 高级形式化方法：形式化描述语言、验证技术、模型转换
@@ -20,9 +20,14 @@ pub mod formal_languages {
     pub trait AlgebraicLanguage {
         type Element;
         type Operation;
-        
+
         fn identity(&self) -> Self::Element;
-        fn operation(&self, op: Self::Operation, a: Self::Element, b: Self::Element) -> Self::Element;
+        fn operation(
+            &self,
+            op: Self::Operation,
+            a: Self::Element,
+            b: Self::Element,
+        ) -> Self::Element;
         fn inverse(&self, element: Self::Element) -> Option<Self::Element>;
     }
 
@@ -30,7 +35,7 @@ pub mod formal_languages {
     pub trait LogicLanguage {
         type Formula;
         type Connective;
-        
+
         fn conjunction(&self, a: Self::Formula, b: Self::Formula) -> Self::Formula;
         fn disjunction(&self, a: Self::Formula, b: Self::Formula) -> Self::Formula;
         fn negation(&self, formula: Self::Formula) -> Self::Formula;
@@ -41,7 +46,7 @@ pub mod formal_languages {
     pub trait SetLanguage {
         type Element;
         type Set;
-        
+
         fn empty_set(&self) -> Self::Set;
         fn singleton(&self, element: Self::Element) -> Self::Set;
         fn union(&self, a: Self::Set, b: Self::Set) -> Self::Set;
@@ -53,7 +58,7 @@ pub mod formal_languages {
     pub trait ProcessLanguage {
         type Process;
         type Action;
-        
+
         fn nil(&self) -> Self::Process;
         fn action(&self, action: Self::Action) -> Self::Process;
         fn choice(&self, a: Self::Process, b: Self::Process) -> Self::Process;
@@ -68,7 +73,7 @@ pub mod verification {
     pub trait TheoremProving {
         type Theorem;
         type Proof;
-        
+
         fn prove(&self, theorem: Self::Theorem) -> Result<Self::Proof, String>;
         fn verify_proof(&self, proof: Self::Proof) -> bool;
     }
@@ -77,15 +82,19 @@ pub mod verification {
     pub trait ModelChecking {
         type Model;
         type Property;
-        
+
         fn check_property(&self, model: Self::Model, property: Self::Property) -> bool;
-        fn find_counterexample(&self, model: Self::Model, property: Self::Property) -> Option<Self::Model>;
+        fn find_counterexample(
+            &self,
+            model: Self::Model,
+            property: Self::Property,
+        ) -> Option<Self::Model>;
     }
 
     /// 等价性检查
     pub trait EquivalenceChecking {
         type System;
-        
+
         fn are_equivalent(&self, system1: Self::System, system2: Self::System) -> bool;
         fn find_difference(&self, system1: Self::System, system2: Self::System) -> Option<String>;
     }
@@ -96,7 +105,7 @@ pub mod transformation {
     /// 代数转换
     pub trait AlgebraicTransformation {
         type Expression;
-        
+
         fn simplify(&self, expression: Self::Expression) -> Self::Expression;
         fn factorize(&self, expression: Self::Expression) -> Self::Expression;
         fn expand(&self, expression: Self::Expression) -> Self::Expression;
@@ -106,7 +115,7 @@ pub mod transformation {
     pub trait CategoryTheory {
         type Object;
         type Morphism;
-        
+
         fn identity(&self, object: Self::Object) -> Self::Morphism;
         fn compose(&self, f: Self::Morphism, g: Self::Morphism) -> Self::Morphism;
         fn is_isomorphic(&self, a: Self::Object, b: Self::Object) -> bool;
@@ -118,7 +127,7 @@ pub mod transformation {
 // ============================================================================
 
 /// 状态机状态
-/// 
+///
 /// 表示有限状态机中的一个状态，包含状态ID和属性。
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct State {
@@ -155,7 +164,7 @@ impl State {
 }
 
 /// 状态转换
-/// 
+///
 /// 表示状态机中的转换，包含源状态、目标状态、事件、条件和动作。
 #[derive(Debug, Clone)]
 pub struct Transition {
@@ -197,7 +206,7 @@ impl Transition {
 }
 
 /// 有限状态机
-/// 
+///
 /// 实现有限状态机，支持状态转换、死锁检测、可达性分析等功能。
 #[derive(Debug, Clone)]
 pub struct FiniteStateMachine {
@@ -217,7 +226,7 @@ impl FiniteStateMachine {
         let mut states = HashMap::new();
         let initial = State::new(initial_state.clone());
         states.insert(initial_state.clone(), initial);
-        
+
         Self {
             states,
             transitions: Vec::new(),
@@ -276,7 +285,10 @@ impl FiniteStateMachine {
             self.current_state = new_state;
             Ok(())
         } else {
-            Err(format!("无法从状态 '{}' 通过事件 '{}' 转换", self.current_state, event))
+            Err(format!(
+                "无法从状态 '{}' 通过事件 '{}' 转换",
+                self.current_state, event
+            ))
         }
     }
 
@@ -301,7 +313,7 @@ impl FiniteStateMachine {
     pub fn get_reachable_states(&self) -> HashSet<String> {
         let mut reachable = HashSet::new();
         let mut queue = VecDeque::new();
-        
+
         queue.push_back(self.initial_state.clone());
         reachable.insert(self.initial_state.clone());
 
@@ -320,7 +332,7 @@ impl FiniteStateMachine {
     /// 检查死锁
     pub fn has_deadlock(&self) -> bool {
         let reachable_states = self.get_reachable_states();
-        
+
         for state_id in &reachable_states {
             let mut has_outgoing = false;
             for transition in &self.transitions {
@@ -333,21 +345,21 @@ impl FiniteStateMachine {
                 return true;
             }
         }
-        
+
         false
     }
 
     /// 检查不变式
     pub fn check_invariant(&self, invariant: &str) -> bool {
         let reachable_states = self.get_reachable_states();
-        
+
         for state_id in &reachable_states {
             let state = &self.states[state_id];
             if !state.satisfies(invariant) {
                 return false;
             }
         }
-        
+
         true
     }
 }
@@ -376,7 +388,7 @@ pub enum TemporalFormula {
 }
 
 /// 时序逻辑模型检查器
-/// 
+///
 /// 实现线性时序逻辑（LTL）的模型检查功能。
 #[derive(Debug)]
 pub struct TemporalModelChecker {
@@ -393,62 +405,68 @@ impl TemporalModelChecker {
     /// 检查公式
     pub fn check_formula(&self, formula: &TemporalFormula) -> bool {
         let reachable_states = self.fsm.get_reachable_states();
-        
+
         for state_id in &reachable_states {
             if !self.check_formula_at_state(formula, state_id, &reachable_states) {
                 return false;
             }
         }
-        
+
         true
     }
 
     /// 在特定状态检查公式
-    fn check_formula_at_state(&self, formula: &TemporalFormula, state_id: &str, reachable_states: &HashSet<String>) -> bool {
+    fn check_formula_at_state(
+        &self,
+        formula: &TemporalFormula,
+        state_id: &str,
+        reachable_states: &HashSet<String>,
+    ) -> bool {
         match formula {
-            TemporalFormula::Atomic(prop) => {
-                self.fsm.states[state_id].satisfies(prop)
-            }
-            TemporalFormula::Not(f) => {
-                !self.check_formula_at_state(f, state_id, reachable_states)
-            }
+            TemporalFormula::Atomic(prop) => self.fsm.states[state_id].satisfies(prop),
+            TemporalFormula::Not(f) => !self.check_formula_at_state(f, state_id, reachable_states),
             TemporalFormula::And(f1, f2) => {
-                self.check_formula_at_state(f1, state_id, reachable_states) &&
-                self.check_formula_at_state(f2, state_id, reachable_states)
+                self.check_formula_at_state(f1, state_id, reachable_states)
+                    && self.check_formula_at_state(f2, state_id, reachable_states)
             }
             TemporalFormula::Or(f1, f2) => {
-                self.check_formula_at_state(f1, state_id, reachable_states) ||
-                self.check_formula_at_state(f2, state_id, reachable_states)
+                self.check_formula_at_state(f1, state_id, reachable_states)
+                    || self.check_formula_at_state(f2, state_id, reachable_states)
             }
             TemporalFormula::Implies(f1, f2) => {
-                !self.check_formula_at_state(f1, state_id, reachable_states) ||
-                self.check_formula_at_state(f2, state_id, reachable_states)
+                !self.check_formula_at_state(f1, state_id, reachable_states)
+                    || self.check_formula_at_state(f2, state_id, reachable_states)
             }
             TemporalFormula::Globally(f) => {
                 // 简化实现：检查所有可达状态
-                reachable_states.iter().all(|s| {
-                    self.check_formula_at_state(f, s, reachable_states)
-                })
+                reachable_states
+                    .iter()
+                    .all(|s| self.check_formula_at_state(f, s, reachable_states))
             }
             TemporalFormula::Finally(f) => {
                 // 简化实现：检查是否存在满足公式的状态
-                reachable_states.iter().any(|s| {
-                    self.check_formula_at_state(f, s, reachable_states)
-                })
+                reachable_states
+                    .iter()
+                    .any(|s| self.check_formula_at_state(f, s, reachable_states))
             }
             TemporalFormula::Next(f) => {
                 // 简化实现：检查所有后继状态
-                self.fsm.transitions.iter()
+                self.fsm
+                    .transitions
+                    .iter()
                     .filter(|t| t.from == *state_id)
                     .all(|t| self.check_formula_at_state(f, &t.to, reachable_states))
             }
             TemporalFormula::Until(f1, f2) => {
                 // 简化实现：检查直到条件
-                self.check_formula_at_state(f2, state_id, reachable_states) ||
-                (self.check_formula_at_state(f1, state_id, reachable_states) &&
-                 self.fsm.transitions.iter()
-                     .filter(|t| t.from == *state_id)
-                     .any(|t| self.check_formula_at_state(formula, &t.to, reachable_states)))
+                self.check_formula_at_state(f2, state_id, reachable_states)
+                    || (self.check_formula_at_state(f1, state_id, reachable_states)
+                        && self
+                            .fsm
+                            .transitions
+                            .iter()
+                            .filter(|t| t.from == *state_id)
+                            .any(|t| self.check_formula_at_state(formula, &t.to, reachable_states)))
             }
         }
     }
@@ -456,29 +474,30 @@ impl TemporalModelChecker {
     /// 生成反例
     pub fn generate_counterexample(&self, formula: &TemporalFormula) -> Option<Vec<String>> {
         let reachable_states = self.fsm.get_reachable_states();
-        
+
         for state_id in &reachable_states {
             if !self.check_formula_at_state(formula, state_id, &reachable_states) {
                 // 简化实现：返回一个简单的路径
                 let mut path = Vec::new();
                 let mut current = state_id.clone();
                 path.push(current.clone());
-                
+
                 // 生成一个简单的路径
                 for _ in 0..10 {
-                    if let Some(transition) = self.fsm.transitions.iter()
-                        .find(|t| t.from == current) {
+                    if let Some(transition) =
+                        self.fsm.transitions.iter().find(|t| t.from == current)
+                    {
                         current = transition.to.clone();
                         path.push(current.clone());
                     } else {
                         break;
                     }
                 }
-                
+
                 return Some(path);
             }
         }
-        
+
         None
     }
 }
@@ -499,7 +518,7 @@ pub enum ProcessTerm {
 }
 
 /// 进程代数解释器
-/// 
+///
 /// 实现进程代数的执行和等价性检查。
 #[derive(Debug)]
 pub struct ProcessAlgebraInterpreter {
@@ -560,17 +579,17 @@ impl ProcessAlgebraInterpreter {
         // 简化的等价性检查：比较执行轨迹
         let _trace1 = self.execute(p1);
         let _trace2 = self.execute(p2);
-        
+
         // 多次执行以确保随机性
         for _ in 0..10 {
             let trace1 = self.execute(p1);
             let trace2 = self.execute(p2);
-            
+
             if trace1 != trace2 {
                 return false;
             }
         }
-        
+
         true
     }
 }
@@ -593,7 +612,7 @@ pub struct ModelCheckingResult {
 }
 
 /// 形式化方法工具包
-/// 
+///
 /// 提供形式化方法的综合工具集。
 #[derive(Debug)]
 pub struct FormalMethodsToolkit {
@@ -634,7 +653,7 @@ impl FormalMethodsToolkit {
     /// 执行模型检查
     pub fn model_check(&self, formula: &TemporalFormula) -> ModelCheckingResult {
         let start_time = std::time::Instant::now();
-        
+
         if let Some(ref checker) = self.model_checker {
             let satisfied = checker.check_formula(formula);
             let counterexample = if !satisfied {
@@ -642,7 +661,7 @@ impl FormalMethodsToolkit {
             } else {
                 None
             };
-            
+
             ModelCheckingResult {
                 satisfied,
                 counterexample,
@@ -683,7 +702,12 @@ pub mod implementations {
             0
         }
 
-        fn operation(&self, op: Self::Operation, a: Self::Element, b: Self::Element) -> Self::Element {
+        fn operation(
+            &self,
+            op: Self::Operation,
+            a: Self::Element,
+            b: Self::Element,
+        ) -> Self::Element {
             match op.as_str() {
                 "add" => a + b,
                 "multiply" => a * b,
@@ -763,7 +787,8 @@ pub mod implementations {
         }
 
         fn intersection(&self, a: Self::Set, b: Self::Set) -> Self::Set {
-            let elements: Vec<T> = a.elements
+            let elements: Vec<T> = a
+                .elements
                 .into_iter()
                 .filter(|e| b.elements.contains(e))
                 .collect();
@@ -839,7 +864,11 @@ pub mod implementations {
             model.contains(&property)
         }
 
-        fn find_counterexample(&self, model: Self::Model, property: Self::Property) -> Option<Self::Model> {
+        fn find_counterexample(
+            &self,
+            model: Self::Model,
+            property: Self::Property,
+        ) -> Option<Self::Model> {
             if self.check_property(model.clone(), property) {
                 None
             } else {
@@ -966,7 +995,8 @@ pub mod advanced_tools {
         /// 验证进程等价性
         pub fn verify_process_equivalence(&self, process1: &str, process2: &str) -> bool {
             use verification::EquivalenceChecking;
-            self.equivalence_checker.are_equivalent(process1.to_string(), process2.to_string())
+            self.equivalence_checker
+                .are_equivalent(process1.to_string(), process2.to_string())
         }
     }
 
@@ -984,14 +1014,18 @@ mod tests {
     #[test]
     fn test_finite_state_machine() {
         let mut fsm = FiniteStateMachine::new("idle".to_string());
-        
-        let working_state = State::new("working".to_string())
-            .with_property("busy".to_string(), true);
+
+        let working_state =
+            State::new("working".to_string()).with_property("busy".to_string(), true);
         fsm.add_state(working_state);
-        
-        let transition = Transition::new("idle".to_string(), "working".to_string(), "start".to_string());
+
+        let transition = Transition::new(
+            "idle".to_string(),
+            "working".to_string(),
+            "start".to_string(),
+        );
         fsm.add_transition(transition);
-        
+
         assert_eq!(fsm.get_current_state().id, "idle");
         assert!(fsm.transition("start").is_ok());
         assert_eq!(fsm.get_current_state().id, "working");
@@ -1000,13 +1034,17 @@ mod tests {
     #[test]
     fn test_reachable_states() {
         let mut fsm = FiniteStateMachine::new("idle".to_string());
-        
+
         let working_state = State::new("working".to_string());
         fsm.add_state(working_state);
-        
-        let transition = Transition::new("idle".to_string(), "working".to_string(), "start".to_string());
+
+        let transition = Transition::new(
+            "idle".to_string(),
+            "working".to_string(),
+            "start".to_string(),
+        );
         fsm.add_transition(transition);
-        
+
         let reachable = fsm.get_reachable_states();
         assert!(reachable.contains("idle"));
         assert!(reachable.contains("working"));
@@ -1015,13 +1053,12 @@ mod tests {
     #[test]
     fn test_temporal_model_checking() {
         let mut fsm = FiniteStateMachine::new("idle".to_string());
-        let safe_state = State::new("safe".to_string())
-            .with_property("safe".to_string(), true);
+        let safe_state = State::new("safe".to_string()).with_property("safe".to_string(), true);
         fsm.add_state(safe_state);
-        
+
         let checker = TemporalModelChecker::new(fsm);
         let formula = TemporalFormula::Atomic("safe".to_string());
-        
+
         // 简化测试
         assert!(!checker.check_formula(&formula));
     }
@@ -1030,7 +1067,7 @@ mod tests {
     fn test_process_algebra() {
         let mut interpreter = ProcessAlgebraInterpreter::new();
         let process = ProcessTerm::Prefix("a".to_string(), Box::new(ProcessTerm::Nil));
-        
+
         let trace = interpreter.execute(&process);
         assert_eq!(trace, vec!["a"]);
     }
@@ -1046,7 +1083,7 @@ mod tests {
     fn test_natural_number_algebra() {
         use formal_languages::AlgebraicLanguage;
         let algebra = implementations::NaturalNumberAlgebra;
-        
+
         assert_eq!(algebra.identity(), 0);
         assert_eq!(algebra.operation("add".to_string(), 3, 4), 7);
         assert_eq!(algebra.operation("multiply".to_string(), 3, 4), 12);
@@ -1057,12 +1094,18 @@ mod tests {
     fn test_propositional_logic() {
         use formal_languages::LogicLanguage;
         let logic = implementations::PropositionalLogic;
-        
+
         let formula_a = "P".to_string();
         let formula_b = "Q".to_string();
-        
-        assert_eq!(logic.conjunction(formula_a.clone(), formula_b.clone()), "(P ∧ Q)");
-        assert_eq!(logic.disjunction(formula_a.clone(), formula_b.clone()), "(P ∨ Q)");
+
+        assert_eq!(
+            logic.conjunction(formula_a.clone(), formula_b.clone()),
+            "(P ∧ Q)"
+        );
+        assert_eq!(
+            logic.disjunction(formula_a.clone(), formula_b.clone()),
+            "(P ∨ Q)"
+        );
         assert_eq!(logic.negation(formula_a.clone()), "¬P");
         assert_eq!(logic.implication(formula_a, formula_b), "(P → Q)");
     }
@@ -1072,13 +1115,13 @@ mod tests {
         use formal_languages::SetLanguage;
         let set1 = implementations::FiniteSet::new(vec![1, 2, 3]);
         let set2 = implementations::FiniteSet::new(vec![3, 4, 5]);
-        
+
         assert!(set1.contains(&2));
         assert!(!set1.contains(&4));
-        
+
         let union = set1.union(set1.clone(), set2.clone());
         assert_eq!(union.size(), 5);
-        
+
         let intersection = set1.intersection(set1.clone(), set2.clone());
         assert_eq!(intersection.size(), 1);
     }
@@ -1087,11 +1130,11 @@ mod tests {
     fn test_process_calculus() {
         use formal_languages::ProcessLanguage;
         let calculus = implementations::ProcessCalculus;
-        
+
         let process1 = calculus.action("send".to_string());
         let process2 = calculus.action("receive".to_string());
         let choice = calculus.choice(process1, process2);
-        
+
         assert_eq!(choice, "(send.0 + receive.0)");
     }
 
@@ -1099,10 +1142,10 @@ mod tests {
     fn test_theorem_proving() {
         use verification::TheoremProving;
         let prover = implementations::SimpleTheoremProver;
-        
+
         let proof = prover.prove("identity property".to_string());
         assert!(proof.is_ok());
-        
+
         let verification = prover.verify_proof(proof.unwrap());
         assert!(verification);
     }
@@ -1111,10 +1154,10 @@ mod tests {
     fn test_model_checking() {
         use verification::ModelChecking;
         let checker = implementations::SimpleModelChecker;
-        
+
         let model = "system with property".to_string();
         let property = "property".to_string();
-        
+
         assert!(checker.check_property(model.clone(), property.clone()));
         assert!(checker.find_counterexample(model, property).is_none());
     }
@@ -1123,11 +1166,11 @@ mod tests {
     fn test_equivalence_checking() {
         use verification::EquivalenceChecking;
         let checker = implementations::SimpleEquivalenceChecker;
-        
+
         let system1 = "system1".to_string();
         let system2 = "system1".to_string();
         let system3 = "system2".to_string();
-        
+
         assert!(checker.are_equivalent(system1.clone(), system2));
         assert!(!checker.are_equivalent(system1, system3));
     }
@@ -1136,12 +1179,12 @@ mod tests {
     fn test_algebraic_transformation() {
         use transformation::AlgebraicTransformation;
         let transformer = implementations::AlgebraicTransformer;
-        
+
         let expression = "x^2 + x".to_string();
         let simplified = transformer.simplify(expression.clone());
         let factorized = transformer.factorize(expression.clone());
         let expanded = transformer.expand(expression);
-        
+
         assert_eq!(simplified, "x^2 + x");
         assert_eq!(factorized, "x(x + 1)");
         assert_eq!(expanded, "x^2 + x");
@@ -1151,11 +1194,11 @@ mod tests {
     fn test_category_theory() {
         use transformation::CategoryTheory;
         let category = implementations::SimpleCategory;
-        
+
         let object = "A".to_string();
         let identity = category.identity(object.clone());
         let morphism = category.compose("f".to_string(), "g".to_string());
-        
+
         assert_eq!(identity, "id_A");
         assert_eq!(morphism, "f ∘ g");
         assert!(category.is_isomorphic(object.clone(), object));
@@ -1164,7 +1207,7 @@ mod tests {
     #[test]
     fn test_advanced_formal_methods_toolkit() {
         let toolkit = advanced_tools::AdvancedFormalMethodsToolkit::new();
-        
+
         assert!(toolkit.verify_algebraic_property("associativity"));
         assert!(toolkit.check_logical_formula("P → Q"));
         assert!(toolkit.verify_process_equivalence("process1", "process1"));

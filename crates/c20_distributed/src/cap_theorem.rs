@@ -1,11 +1,11 @@
+use crate::consistency::{CAPStrategy, ConsistencyLevel};
+use crate::swim::MembershipView;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::time::{Duration, Instant, SystemTime};
-use crate::consistency::{ConsistencyLevel, CAPStrategy};
-use crate::swim::MembershipView;
 
 /// CAP定理权衡管理器
-/// 
+///
 /// 根据网络分区状态动态调整一致性级别和可用性策略
 #[derive(Debug, Clone)]
 pub struct CAPManager {
@@ -67,13 +67,17 @@ impl CAPManager {
     }
 
     /// 根据当前状态选择一致性级别
-    pub fn select_consistency_level(&mut self, membership_view: &MembershipView) -> ConsistencyLevel {
+    pub fn select_consistency_level(
+        &mut self,
+        membership_view: &MembershipView,
+    ) -> ConsistencyLevel {
         let now = Instant::now();
-        let is_partitioned = if now.duration_since(self.last_partition_check) >= self.partition_check_interval {
-            self.partition_detector.detect_partition(membership_view)
-        } else {
-            self.partition_detector.is_currently_partitioned()
-        };
+        let is_partitioned =
+            if now.duration_since(self.last_partition_check) >= self.partition_check_interval {
+                self.partition_detector.detect_partition(membership_view)
+            } else {
+                self.partition_detector.is_currently_partitioned()
+            };
 
         let selected_level = self.strategy.select_consistency_level(is_partitioned);
         let reasoning = self.generate_reasoning(is_partitioned, selected_level);
@@ -103,17 +107,20 @@ impl CAPManager {
         match (self.strategy, is_partitioned, level) {
             (CAPStrategy::ConsistencyPartition, _, ConsistencyLevel::Strong) => {
                 "CP策略：优先保证一致性，选择强一致性".to_string()
-            },
+            }
             (CAPStrategy::AvailabilityPartition, _, ConsistencyLevel::Eventual) => {
                 "AP策略：优先保证可用性，选择最终一致性".to_string()
-            },
+            }
             (CAPStrategy::Balanced, true, ConsistencyLevel::Causal) => {
                 "平衡策略：检测到分区，选择因果一致性".to_string()
-            },
+            }
             (CAPStrategy::Balanced, false, ConsistencyLevel::Linearizable) => {
                 "平衡策略：无分区，选择线性一致性".to_string()
-            },
-            _ => format!("策略：{:?}，分区状态：{}，选择：{:?}", self.strategy, is_partitioned, level),
+            }
+            _ => format!(
+                "策略：{:?}，分区状态：{}，选择：{:?}",
+                self.strategy, is_partitioned, level
+            ),
         }
     }
 
@@ -151,8 +158,7 @@ mod tests {
 
     #[test]
     fn test_history_prune_limits() {
-        let mut m = CAPManager::new(CAPStrategy::Balanced)
-            .with_history_limits(5, 2);
+        let mut m = CAPManager::new(CAPStrategy::Balanced).with_history_limits(5, 2);
         let view = MembershipView::new("me".to_string());
         for _ in 0..10 {
             let _ = m.select_consistency_level(&view);
@@ -209,7 +215,7 @@ impl PartitionDetector {
     /// 检测网络分区
     pub fn detect_partition(&mut self, membership_view: &MembershipView) -> bool {
         self.stats.total_checks += 1;
-        
+
         let alive_members = membership_view.alive_members();
         if alive_members.len() <= 1 {
             return false; // 单个节点或没有活跃节点不算分区
@@ -217,17 +223,17 @@ impl PartitionDetector {
 
         // 更新连接矩阵
         self.update_connectivity_matrix(&alive_members);
-        
+
         // 计算连通性
         let connectivity_ratio = self.calculate_connectivity_ratio(&alive_members);
         self.stats.connectivity_ratio = connectivity_ratio;
-        
+
         let is_partitioned = connectivity_ratio < self.partition_threshold;
-        
+
         if is_partitioned {
             self.stats.partition_detected_count += 1;
         }
-        
+
         self.last_connectivity_check = Instant::now();
         is_partitioned
     }
@@ -236,8 +242,11 @@ impl PartitionDetector {
     fn update_connectivity_matrix(&mut self, alive_members: &[String]) {
         // 模拟网络连接检测
         for node1 in alive_members {
-            let connections = self.connectivity_matrix.entry(node1.clone()).or_insert_with(HashMap::new);
-            
+            let connections = self
+                .connectivity_matrix
+                .entry(node1.clone())
+                .or_insert_with(HashMap::new);
+
             for node2 in alive_members {
                 if node1 != node2 {
                     // 模拟连接检测（实际实现中这里会是真实的网络检测）
@@ -255,12 +264,12 @@ impl PartitionDetector {
         // 现在使用随机模拟
         use std::collections::hash_map::DefaultHasher;
         use std::hash::{Hash, Hasher};
-        
+
         let mut hasher = DefaultHasher::new();
         std::time::Instant::now().hash(&mut hasher);
         let hash = hasher.finish();
         let random = (hash % 100) as f64 / 100.0;
-        
+
         random > 0.2 // 80%的连接成功率
     }
 
@@ -271,12 +280,12 @@ impl PartitionDetector {
         // 现在使用随机模拟
         use std::collections::hash_map::DefaultHasher;
         use std::hash::{Hash, Hasher};
-        
+
         let mut hasher = DefaultHasher::new();
         std::time::Instant::now().hash(&mut hasher);
         let hash = hasher.finish();
         let random = (hash % 100) as f64 / 100.0;
-        
+
         random > 0.2 // 80%的连接成功率
     }
 
@@ -287,12 +296,12 @@ impl PartitionDetector {
         // 现在使用随机模拟
         use std::collections::hash_map::DefaultHasher;
         use std::hash::{Hash, Hasher};
-        
+
         let mut hasher = DefaultHasher::new();
         std::time::Instant::now().hash(&mut hasher);
         let hash = hasher.finish();
         let random = (hash % 100) as f64 / 100.0;
-        
+
         random > 0.2 // 80%的连接成功率
     }
 
@@ -380,7 +389,7 @@ impl CAPAnalyzer {
     /// 记录一致性决策
     pub fn record_decision(&mut self, decision: ConsistencyDecision) {
         self.decision_history.push(decision);
-        
+
         // 保持历史记录在合理范围内
         if self.decision_history.len() > 10000 {
             self.decision_history.drain(0..1000);
@@ -402,21 +411,25 @@ impl CAPAnalyzer {
             if decision.is_partitioned {
                 partition_count += 1;
             }
-            
-            *consistency_level_usage.entry(decision.selected_level).or_insert(0) += 1;
+
+            *consistency_level_usage
+                .entry(decision.selected_level)
+                .or_insert(0) += 1;
             *strategy_usage.entry(decision.strategy).or_insert(0) += 1;
         }
 
         let partition_rate = partition_count as f64 / total_decisions as f64;
-        
+
         // 计算最常用的一致性级别
-        let most_used_level = consistency_level_usage.iter()
+        let most_used_level = consistency_level_usage
+            .iter()
             .max_by_key(|(_, count)| *count)
             .map(|(level, _)| *level)
             .unwrap_or(ConsistencyLevel::Eventual);
 
         // 计算最常用的策略
-        let most_used_strategy = strategy_usage.iter()
+        let most_used_strategy = strategy_usage
+            .iter()
             .max_by_key(|(_, count)| *count)
             .map(|(strategy, _)| *strategy)
             .unwrap_or(CAPStrategy::Balanced);
@@ -433,7 +446,11 @@ impl CAPAnalyzer {
     }
 
     /// 生成优化建议
-    fn generate_recommendations(&self, partition_rate: f64, most_used_level: ConsistencyLevel) -> Vec<String> {
+    fn generate_recommendations(
+        &self,
+        partition_rate: f64,
+        most_used_level: ConsistencyLevel,
+    ) -> Vec<String> {
         let mut recommendations = Vec::new();
 
         if partition_rate > 0.3 {
@@ -447,13 +464,14 @@ impl CAPAnalyzer {
         match most_used_level {
             ConsistencyLevel::Strong | ConsistencyLevel::Linearizable => {
                 recommendations.push("当前主要使用强一致性，注意监控可用性指标".to_string());
-            },
+            }
             ConsistencyLevel::Eventual => {
                 recommendations.push("当前主要使用最终一致性，注意监控数据一致性指标".to_string());
-            },
+            }
             ConsistencyLevel::Causal => {
-                recommendations.push("当前使用因果一致性，这是平衡一致性和可用性的好选择".to_string());
-            },
+                recommendations
+                    .push("当前使用因果一致性，这是平衡一致性和可用性的好选择".to_string());
+            }
             _ => {}
         }
 

@@ -1,5 +1,5 @@
 //! 模型加载器
-//! 
+//!
 //! 提供各种格式的模型加载和保存功能
 
 use serde::{Deserialize, Serialize};
@@ -88,11 +88,11 @@ impl ModelLoader {
             config,
         }
     }
-    
+
     /// 加载模型
     pub fn load_model(&self, model_path: &str) -> Result<LoadResult, String> {
         let start_time = std::time::Instant::now();
-        
+
         // 验证文件存在
         if !Path::new(model_path).exists() {
             return Ok(LoadResult {
@@ -102,15 +102,15 @@ impl ModelLoader {
                 load_time_ms: start_time.elapsed().as_millis() as u64,
             });
         }
-        
+
         // 检测模型格式
         let format = self.detect_format(model_path)?;
-        
+
         // 检查文件大小
         let file_size = std::fs::metadata(model_path)
             .map_err(|e| format!("无法读取文件元数据: {}", e))?
             .len() as usize;
-        
+
         if file_size > self.config.max_model_size_mb * 1024 * 1024 {
             return Ok(LoadResult {
                 success: false,
@@ -119,12 +119,12 @@ impl ModelLoader {
                 load_time_ms: start_time.elapsed().as_millis() as u64,
             });
         }
-        
+
         // 加载模型
         let model_info = self.load_model_by_format(model_path, &format)?;
-        
+
         let load_time = start_time.elapsed().as_millis() as u64;
-        
+
         Ok(LoadResult {
             success: true,
             model_info: Some(model_info),
@@ -132,27 +132,29 @@ impl ModelLoader {
             load_time_ms: load_time,
         })
     }
-    
+
     /// 批量加载模型
     pub fn load_models(&self, model_paths: &[String]) -> Vec<LoadResult> {
-        model_paths.iter()
-            .map(|path| self.load_model(path).unwrap_or_else(|e| LoadResult {
-                success: false,
-                model_info: None,
-                error_message: Some(e),
-                load_time_ms: 0,
-            }))
+        model_paths
+            .iter()
+            .map(|path| {
+                self.load_model(path).unwrap_or_else(|e| LoadResult {
+                    success: false,
+                    model_info: None,
+                    error_message: Some(e),
+                    load_time_ms: 0,
+                })
+            })
             .collect()
     }
-    
+
     /// 保存模型
     pub fn save_model(&self, model_info: &ModelInfo, output_path: &str) -> Result<(), String> {
         // 验证输出目录
         if let Some(parent) = Path::new(output_path).parent() {
-            std::fs::create_dir_all(parent)
-                .map_err(|e| format!("无法创建输出目录: {}", e))?;
+            std::fs::create_dir_all(parent).map_err(|e| format!("无法创建输出目录: {}", e))?;
         }
-        
+
         // 根据格式保存模型
         match model_info.format {
             ModelFormat::ONNX => self.save_onnx_model(model_info, output_path),
@@ -162,15 +164,16 @@ impl ModelLoader {
             ModelFormat::Custom(_) => Err("不支持自定义格式保存".to_string()),
         }
     }
-    
+
     /// 检测模型格式
     fn detect_format(&self, model_path: &str) -> Result<ModelFormat, String> {
         let path = Path::new(model_path);
-        let extension = path.extension()
+        let extension = path
+            .extension()
             .and_then(|ext| ext.to_str())
             .unwrap_or("")
             .to_lowercase();
-        
+
         match extension.as_str() {
             "onnx" => Ok(ModelFormat::ONNX),
             "pt" | "pth" => Ok(ModelFormat::PyTorch),
@@ -182,33 +185,37 @@ impl ModelLoader {
             }
         }
     }
-    
+
     /// 通过文件头检测格式
     fn detect_format_by_header(&self, model_path: &str) -> Result<ModelFormat, String> {
-        let mut file = std::fs::File::open(model_path)
-            .map_err(|e| format!("无法打开文件: {}", e))?;
-        
+        let mut file =
+            std::fs::File::open(model_path).map_err(|e| format!("无法打开文件: {}", e))?;
+
         let mut header = [0u8; 16];
         use std::io::Read;
         file.read_exact(&mut header)
             .map_err(|e| format!("无法读取文件头: {}", e))?;
-        
+
         // 检查 ONNX 文件头
         if header.starts_with(b"\x08\x01\x12") {
             return Ok(ModelFormat::ONNX);
         }
-        
+
         // 检查 PyTorch 文件头
         if header.starts_with(b"PK\x03\x04") {
             return Ok(ModelFormat::PyTorch);
         }
-        
+
         // 默认返回自定义格式
         Ok(ModelFormat::Custom("unknown".to_string()))
     }
-    
+
     /// 根据格式加载模型
-    fn load_model_by_format(&self, model_path: &str, format: &ModelFormat) -> Result<ModelInfo, String> {
+    fn load_model_by_format(
+        &self,
+        model_path: &str,
+        format: &ModelFormat,
+    ) -> Result<ModelInfo, String> {
         match format {
             ModelFormat::ONNX => self.load_onnx_model(model_path),
             ModelFormat::PyTorch => self.load_pytorch_model(model_path),
@@ -217,37 +224,39 @@ impl ModelLoader {
             ModelFormat::Custom(name) => self.load_custom_model(model_path, name),
         }
     }
-    
+
     /// 加载 ONNX 模型
     fn load_onnx_model(&self, model_path: &str) -> Result<ModelInfo, String> {
         // 简化实现：创建模拟的模型信息
         let file_size = std::fs::metadata(model_path)
             .map_err(|e| format!("无法读取文件元数据: {}", e))?
             .len() as usize;
-        
+
         Ok(ModelInfo {
-            name: Path::new(model_path).file_stem()
+            name: Path::new(model_path)
+                .file_stem()
                 .and_then(|s| s.to_str())
                 .unwrap_or("unknown")
                 .to_string(),
             format: ModelFormat::ONNX,
             size_bytes: file_size,
             input_shape: vec![1, 3, 224, 224], // 假设的图像输入
-            output_shape: vec![1, 1000], // 假设的分类输出
+            output_shape: vec![1, 1000],       // 假设的分类输出
             metadata: HashMap::new(),
             created_at: chrono::Utc::now().to_rfc3339(),
             version: "1.0.0".to_string(),
         })
     }
-    
+
     /// 加载 PyTorch 模型
     fn load_pytorch_model(&self, model_path: &str) -> Result<ModelInfo, String> {
         let file_size = std::fs::metadata(model_path)
             .map_err(|e| format!("无法读取文件元数据: {}", e))?
             .len() as usize;
-        
+
         Ok(ModelInfo {
-            name: Path::new(model_path).file_stem()
+            name: Path::new(model_path)
+                .file_stem()
                 .and_then(|s| s.to_str())
                 .unwrap_or("unknown")
                 .to_string(),
@@ -260,15 +269,16 @@ impl ModelLoader {
             version: "1.0.0".to_string(),
         })
     }
-    
+
     /// 加载 TensorFlow 模型
     fn load_tensorflow_model(&self, model_path: &str) -> Result<ModelInfo, String> {
         let file_size = std::fs::metadata(model_path)
             .map_err(|e| format!("无法读取文件元数据: {}", e))?
             .len() as usize;
-        
+
         Ok(ModelInfo {
-            name: Path::new(model_path).file_stem()
+            name: Path::new(model_path)
+                .file_stem()
                 .and_then(|s| s.to_str())
                 .unwrap_or("unknown")
                 .to_string(),
@@ -281,15 +291,16 @@ impl ModelLoader {
             version: "1.0.0".to_string(),
         })
     }
-    
+
     /// 加载 Candle 模型
     fn load_candle_model(&self, model_path: &str) -> Result<ModelInfo, String> {
         let file_size = std::fs::metadata(model_path)
             .map_err(|e| format!("无法读取文件元数据: {}", e))?
             .len() as usize;
-        
+
         Ok(ModelInfo {
-            name: Path::new(model_path).file_stem()
+            name: Path::new(model_path)
+                .file_stem()
                 .and_then(|s| s.to_str())
                 .unwrap_or("unknown")
                 .to_string(),
@@ -302,15 +313,16 @@ impl ModelLoader {
             version: "1.0.0".to_string(),
         })
     }
-    
+
     /// 加载自定义模型
     fn load_custom_model(&self, model_path: &str, format_name: &str) -> Result<ModelInfo, String> {
         let file_size = std::fs::metadata(model_path)
             .map_err(|e| format!("无法读取文件元数据: {}", e))?
             .len() as usize;
-        
+
         Ok(ModelInfo {
-            name: Path::new(model_path).file_stem()
+            name: Path::new(model_path)
+                .file_stem()
                 .and_then(|s| s.to_str())
                 .unwrap_or("unknown")
                 .to_string(),
@@ -323,7 +335,7 @@ impl ModelLoader {
             version: "1.0.0".to_string(),
         })
     }
-    
+
     /// 保存 ONNX 模型
     fn save_onnx_model(&self, _model_info: &ModelInfo, output_path: &str) -> Result<(), String> {
         // 简化实现：创建空文件
@@ -331,56 +343,60 @@ impl ModelLoader {
             .map_err(|e| format!("无法保存 ONNX 模型: {}", e))?;
         Ok(())
     }
-    
+
     /// 保存 PyTorch 模型
     fn save_pytorch_model(&self, _model_info: &ModelInfo, output_path: &str) -> Result<(), String> {
         std::fs::write(output_path, b"PyTorch model placeholder")
             .map_err(|e| format!("无法保存 PyTorch 模型: {}", e))?;
         Ok(())
     }
-    
+
     /// 保存 TensorFlow 模型
-    fn save_tensorflow_model(&self, _model_info: &ModelInfo, output_path: &str) -> Result<(), String> {
+    fn save_tensorflow_model(
+        &self,
+        _model_info: &ModelInfo,
+        output_path: &str,
+    ) -> Result<(), String> {
         std::fs::write(output_path, b"TensorFlow model placeholder")
             .map_err(|e| format!("无法保存 TensorFlow 模型: {}", e))?;
         Ok(())
     }
-    
+
     /// 保存 Candle 模型
     fn save_candle_model(&self, _model_info: &ModelInfo, output_path: &str) -> Result<(), String> {
         std::fs::write(output_path, b"Candle model placeholder")
             .map_err(|e| format!("无法保存 Candle 模型: {}", e))?;
         Ok(())
     }
-    
+
     /// 获取支持的格式列表
     pub fn get_supported_formats(&self) -> &[ModelFormat] {
         &self.supported_formats
     }
-    
+
     /// 验证模型文件
     pub fn validate_model(&self, model_path: &str) -> Result<ValidationResult, String> {
         let mut result = ValidationResult::new();
-        
+
         // 检查文件存在
         if !Path::new(model_path).exists() {
             result.add_error("文件不存在".to_string());
             return Ok(result);
         }
-        
+
         // 检查文件大小
         let file_size = std::fs::metadata(model_path)
             .map_err(|e| format!("无法读取文件元数据: {}", e))?
             .len() as usize;
-        
+
         if file_size == 0 {
             result.add_error("文件为空".to_string());
         }
-        
+
         if file_size > self.config.max_model_size_mb * 1024 * 1024 {
             result.add_warning(format!("文件过大: {} MB", file_size / 1024 / 1024));
         }
-        
+
         // 检查格式
         match self.detect_format(model_path) {
             Ok(format) => {
@@ -390,7 +406,7 @@ impl ModelLoader {
                 result.add_warning(format!("无法检测格式: {}", e));
             }
         }
-        
+
         Ok(result)
     }
 }
@@ -413,16 +429,16 @@ impl ValidationResult {
             info: Vec::new(),
         }
     }
-    
+
     pub fn add_error(&mut self, error: String) {
         self.errors.push(error);
         self.is_valid = false;
     }
-    
+
     pub fn add_warning(&mut self, warning: String) {
         self.warnings.push(warning);
     }
-    
+
     pub fn add_info(&mut self, info: String) {
         self.info.push(info);
     }
@@ -445,60 +461,60 @@ mod tests {
     use super::*;
     use std::fs;
     use tempfile::tempdir;
-    
+
     #[test]
     fn test_model_loader_creation() {
         let config = LoaderConfig::default();
         let loader = ModelLoader::new("/tmp".to_string(), config);
-        
+
         assert!(!loader.supported_formats.is_empty());
         assert!(loader.supported_formats.contains(&ModelFormat::ONNX));
     }
-    
+
     #[test]
     fn test_format_detection() {
         let config = LoaderConfig::default();
         let loader = ModelLoader::new("/tmp".to_string(), config);
-        
+
         // 测试扩展名检测
         let format = loader.detect_format("model.onnx").unwrap();
         assert!(matches!(format, ModelFormat::ONNX));
-        
+
         let format = loader.detect_format("model.pt").unwrap();
         assert!(matches!(format, ModelFormat::PyTorch));
     }
-    
+
     #[test]
     fn test_model_validation() {
         let temp_dir = tempdir().unwrap();
         let model_path = temp_dir.path().join("test_model.onnx");
-        
+
         // 创建测试文件
         fs::write(&model_path, b"test model data").unwrap();
-        
+
         let config = LoaderConfig::default();
         let loader = ModelLoader::new("/tmp".to_string(), config);
-        
+
         let result = loader.validate_model(model_path.to_str().unwrap()).unwrap();
         assert!(result.is_valid);
         assert!(result.errors.is_empty());
     }
-    
+
     #[test]
     fn test_model_loading() {
         let temp_dir = tempdir().unwrap();
         let model_path = temp_dir.path().join("test_model.onnx");
-        
+
         // 创建测试文件
         fs::write(&model_path, b"test model data").unwrap();
-        
+
         let config = LoaderConfig::default();
         let loader = ModelLoader::new("/tmp".to_string(), config);
-        
+
         let result = loader.load_model(model_path.to_str().unwrap()).unwrap();
         assert!(result.success);
         assert!(result.model_info.is_some());
-        
+
         let model_info = result.model_info.unwrap();
         assert_eq!(model_info.name, "test_model");
         assert!(matches!(model_info.format, ModelFormat::ONNX));

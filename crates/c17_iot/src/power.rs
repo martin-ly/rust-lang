@@ -1,5 +1,5 @@
 //! # IoT 电源管理模块 / IoT Power Management Module
-//! 
+//!
 //! 本模块实现了 IoT 设备的电源管理功能。
 //! This module implements power management functionality for IoT devices.
 
@@ -21,18 +21,21 @@ impl PowerManager {
             consumption_history: Vec::new(),
         }
     }
-    
+
     pub fn get_battery_level(&self) -> f64 {
         self.battery_level
     }
-    
+
     pub fn set_power_mode(&mut self, mode: PowerMode) {
         self.power_mode = mode;
     }
 
     /// 记录一次功耗样本 / Record a power consumption sample
     pub fn record_consumption(&mut self, timestamp: u64, consumption: f64) {
-        self.consumption_history.push(PowerConsumption { timestamp, consumption });
+        self.consumption_history.push(PowerConsumption {
+            timestamp,
+            consumption,
+        });
         // 简化：按消耗线性降低电量
         if consumption > 0.0 {
             let delta = (consumption / 1000.0).min(self.battery_level);
@@ -65,4 +68,4 @@ pub enum PowerMode {
 pub struct PowerConsumption {
     pub timestamp: u64,
     pub consumption: f64,
-} 
+}

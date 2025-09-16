@@ -13,12 +13,12 @@ fn main() {
 #[cfg(any(feature = "sniff", feature = "offline", feature = "pcap_live"))]
 #[tokio::main]
 async fn main() {
-    let addr = std::env::args().nth(1).unwrap_or_else(|| "127.0.0.1:9000".to_string());
+    let addr = std::env::args()
+        .nth(1)
+        .unwrap_or_else(|| "127.0.0.1:9000".to_string());
     let bind: SocketAddr = addr.parse().expect("invalid addr");
     println!("udp_custom_server listening on {}", bind);
     if let Err(e) = udp_custom_server(bind).await {
         eprintln!("server error: {e}");
     }
 }
-
-

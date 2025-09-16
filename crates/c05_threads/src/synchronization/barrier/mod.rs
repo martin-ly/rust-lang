@@ -23,7 +23,9 @@ pub fn basic_barrier(num_threads: usize) {
         }));
     }
 
-    for h in handles { h.join().unwrap(); }
+    for h in handles {
+        h.join().unwrap();
+    }
 }
 
 /// 多阶段同步：同一批线程跨多个阶段使用同一个屏障
@@ -43,7 +45,9 @@ pub fn multi_phase_barrier(num_threads: usize, phases: usize) {
         }));
     }
 
-    for h in handles { h.join().unwrap(); }
+    for h in handles {
+        h.join().unwrap();
+    }
 }
 
 /// 分批执行：把任务切成多批，每批次末尾用屏障等待
@@ -51,7 +55,11 @@ pub fn batched_parallel_sum(nums: &[u64], batch_size: usize, workers: usize) -> 
     assert!(workers > 0 && batch_size > 0);
     let barrier = Arc::new(Barrier::new(workers));
     let shared_nums = Arc::new(nums.to_vec());
-    let partials = Arc::new((0..workers).map(|_| std::sync::Mutex::new(0u64)).collect::<Vec<_>>());
+    let partials = Arc::new(
+        (0..workers)
+            .map(|_| std::sync::Mutex::new(0u64))
+            .collect::<Vec<_>>(),
+    );
 
     let mut handles = Vec::new();
     for id in 0..workers {
@@ -65,7 +73,9 @@ pub fn batched_parallel_sum(nums: &[u64], batch_size: usize, workers: usize) -> 
                 let end = ((round + 1) * workers * batch_size + id * batch_size).min(data.len());
                 let end = end.min(start + batch_size);
                 let mut local = 0u64;
-                for x in &data[start..end] { local += *x; }
+                for x in &data[start..end] {
+                    local += *x;
+                }
                 *parts[id].lock().unwrap() += local;
 
                 // 本轮结束，等待其它线程
@@ -76,7 +86,9 @@ pub fn batched_parallel_sum(nums: &[u64], batch_size: usize, workers: usize) -> 
         }));
     }
 
-    for h in handles { h.join().unwrap(); }
+    for h in handles {
+        h.join().unwrap();
+    }
     partials.iter().map(|m| *m.lock().unwrap()).sum()
 }
 

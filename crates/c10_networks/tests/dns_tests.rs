@@ -10,7 +10,10 @@ async fn dns_lookup_system_smoke() {
     let r = c10_networks::protocol::dns::DnsResolver::from_system()
         .await
         .expect("system resolver init");
-    let ips = r.lookup_ips("example.com").await.expect("resolve example.com");
+    let ips = r
+        .lookup_ips("example.com")
+        .await
+        .expect("resolve example.com");
     assert!(!ips.is_empty());
 }
 
@@ -37,5 +40,3 @@ async fn dns_doh_txt() {
     let r = DnsResolver::from_config(cfg, opts).await.expect("resolver");
     let _ = r.lookup_txt("example.com").await.expect("txt");
 }
-
-

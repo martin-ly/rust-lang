@@ -30,8 +30,16 @@ pub fn break_cycle_demo() -> String {
         _children: Mutex<Vec<Arc<Node>>>,
     }
 
-    let root = Arc::new(Node { name: "root".into(), parent: Mutex::new(Weak::new()), _children: Mutex::new(vec![]) });
-    let child = Arc::new(Node { name: "child".into(), parent: Mutex::new(Weak::new()), _children: Mutex::new(vec![]) });
+    let root = Arc::new(Node {
+        name: "root".into(),
+        parent: Mutex::new(Weak::new()),
+        _children: Mutex::new(vec![]),
+    });
+    let child = Arc::new(Node {
+        name: "child".into(),
+        parent: Mutex::new(Weak::new()),
+        _children: Mutex::new(vec![]),
+    });
 
     // 关联父子
     *child.parent.lock().unwrap() = Arc::downgrade(&root);
@@ -41,7 +49,11 @@ pub fn break_cycle_demo() -> String {
     // 使用 Weak 可以在 root 释放后，使 child.parent 升级失败
     drop(root);
     let up = child.parent.lock().unwrap().upgrade();
-    if up.is_none() { "broken".into() } else { "leak".into() }
+    if up.is_none() {
+        "broken".into()
+    } else {
+        "leak".into()
+    }
 }
 
 /// 对比：Arc<Mutex<T>> 与 Arc<RwLock<T>>
@@ -78,7 +90,9 @@ pub fn mutex_vs_rwlock(readers: usize, writers: usize, iters: usize) -> (usize, 
     }
 
     let mut total = 0usize;
-    for t in h { total += t.join().unwrap(); }
+    for t in h {
+        total += t.join().unwrap();
+    }
     (total, *m.lock().unwrap() + *r.read().unwrap())
 }
 

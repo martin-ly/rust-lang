@@ -1,18 +1,18 @@
 //! 大语言模型聊天示例
-//! 
+//!
 //! 展示如何使用 LLM 进行对话
 
-use c19_ai::prelude::*;
 use anyhow::Result;
+use c19_ai::prelude::*;
 
 #[tokio::main]
 async fn main() -> Result<()> {
     // 初始化日志
     tracing_subscriber::fmt::init();
-    
+
     println!("🤖 大语言模型聊天示例");
     println!("========================");
-    
+
     // 创建聊天配置
     let config = ChatConfig {
         model: "gpt-3.5-turbo".to_string(),
@@ -21,38 +21,38 @@ async fn main() -> Result<()> {
         system_prompt: Some("你是一个有用的AI助手，请用中文回答问题。".to_string()),
         ..Default::default()
     };
-    
+
     // 创建聊天会话
     let mut session = ChatSession::new("demo-session".to_string(), config);
-    
+
     // 添加系统消息
     session.add_system_message("你好！我是你的AI助手，有什么可以帮助你的吗？".to_string());
-    
+
     // 模拟对话
     let user_messages = vec![
         "你好，请介绍一下Rust编程语言",
         "Rust在AI领域有什么优势？",
-        "能给我一个简单的Rust AI代码示例吗？"
+        "能给我一个简单的Rust AI代码示例吗？",
     ];
-    
+
     for (i, user_msg) in user_messages.iter().enumerate() {
         println!("\n👤 用户: {}", user_msg);
-        
+
         // 添加用户消息
         session.add_user_message(user_msg.to_string());
-        
+
         // 模拟AI响应（实际应用中会调用真实的LLM API）
         let ai_response = generate_ai_response(user_msg, i);
         println!("🤖 AI: {}", ai_response);
-        
+
         // 添加AI响应
         session.add_assistant_message(ai_response);
-        
+
         // 显示会话摘要
         let summary = session.get_summary();
         println!("📊 会话摘要: {} 条消息", summary.message_count);
     }
-    
+
     println!("\n✅ 聊天示例完成！");
     Ok(())
 }

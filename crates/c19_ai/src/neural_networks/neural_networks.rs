@@ -44,7 +44,7 @@ impl NeuralNetwork {
     pub fn new(input_size: usize, hidden_sizes: Vec<usize>, output_size: usize) -> Self {
         let mut layers = Vec::new();
         let mut prev_size = input_size;
-        
+
         // 创建隐藏层
         for &hidden_size in &hidden_sizes {
             layers.push(NeuralLayer {
@@ -54,28 +54,28 @@ impl NeuralNetwork {
             });
             prev_size = hidden_size;
         }
-        
+
         // 创建输出层
         layers.push(NeuralLayer {
             weights: vec![vec![0.0; prev_size]; output_size],
             biases: vec![0.0; output_size],
             activation: ActivationFunction::Linear,
         });
-        
+
         Self {
             layers,
             input_size,
             output_size,
         }
     }
-    
+
     /// 前向传播
     pub fn forward(&self, input: &[f64]) -> Vec<f64> {
         let mut current = input.to_vec();
-        
+
         for layer in &self.layers {
             let mut next = Vec::new();
-            
+
             for (i, bias) in layer.biases.iter().enumerate() {
                 let mut sum = *bias;
                 for (j, &weight) in layer.weights[i].iter().enumerate() {
@@ -85,18 +85,18 @@ impl NeuralNetwork {
                 }
                 next.push(layer.activation.apply(sum));
             }
-            
+
             current = next;
         }
-        
+
         current
     }
-    
+
     /// 随机初始化权重
     pub fn random_init(&mut self) {
         use std::collections::hash_map::DefaultHasher;
         use std::hash::{Hash, Hasher};
-        
+
         for layer in &mut self.layers {
             for i in 0..layer.weights.len() {
                 for j in 0..layer.weights[i].len() {
@@ -106,7 +106,7 @@ impl NeuralNetwork {
                     layer.weights[i][j] = (hash as f64 / u64::MAX as f64) * 2.0 - 1.0;
                 }
             }
-            
+
             for i in 0..layer.biases.len() {
                 let mut hasher = DefaultHasher::new();
                 i.hash(&mut hasher);
@@ -120,7 +120,7 @@ impl NeuralNetwork {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_neural_network_creation() {
         let network = NeuralNetwork::new(2, vec![3, 4], 1);
@@ -128,24 +128,24 @@ mod tests {
         assert_eq!(network.output_size, 1);
         assert_eq!(network.layers.len(), 3);
     }
-    
+
     #[test]
     fn test_forward_propagation() {
         let mut network = NeuralNetwork::new(2, vec![2], 1);
         network.random_init();
-        
+
         let input = vec![1.0, 0.5];
         let output = network.forward(&input);
-        
+
         assert_eq!(output.len(), 1);
     }
-    
+
     #[test]
     fn test_activation_functions() {
         let relu = ActivationFunction::ReLU;
         assert_eq!(relu.apply(5.0), 5.0);
         assert_eq!(relu.apply(-3.0), 0.0);
-        
+
         let sigmoid = ActivationFunction::Sigmoid;
         assert!(sigmoid.apply(0.0) > 0.4 && sigmoid.apply(0.0) < 0.6);
     }

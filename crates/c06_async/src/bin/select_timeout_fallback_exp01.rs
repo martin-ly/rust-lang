@@ -1,5 +1,5 @@
-use std::time::Duration;
 use c06_async::utils::with_timeout;
+use std::time::Duration;
 
 async fn primary() -> Option<&'static str> {
     tokio::time::sleep(Duration::from_millis(200)).await;
@@ -20,5 +20,3 @@ async fn main() {
     };
     println!("result: {}", result);
 }
-
-

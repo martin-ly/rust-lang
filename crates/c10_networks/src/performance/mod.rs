@@ -1,20 +1,20 @@
 //! 性能优化模块
-//! 
+//!
 //! 本模块提供了基于 Rust 1.89 的性能优化功能，
 //! 包括内存池、零拷贝优化、缓存管理等。
 
-pub mod memory_pool;
 pub mod cache;
+pub mod memory_pool;
 pub mod metrics;
 
-pub use memory_pool::{MemoryPool, PooledBytes};
 pub use cache::{Cache, CacheStats};
-pub use metrics::{PerformanceMetrics, MetricsCollector};
+pub use memory_pool::{MemoryPool, PooledBytes};
+pub use metrics::{MetricsCollector, PerformanceMetrics};
 
 use crate::error::{NetworkError, NetworkResult};
+use bytes::Bytes;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
-use bytes::Bytes;
 
 /// 性能配置
 #[derive(Debug, Clone)]
@@ -93,13 +93,13 @@ impl PerformanceManager {
     pub async fn cleanup(&self) -> NetworkResult<()> {
         // 清理内存池
         self.memory_pool.cleanup().await?;
-        
+
         // 清理缓存
         self.cache.cleanup().await?;
-        
+
         // 重置指标
         self.metrics.reset();
-        
+
         Ok(())
     }
 
@@ -107,13 +107,13 @@ impl PerformanceManager {
     pub async fn optimize(&self) -> NetworkResult<()> {
         // 执行垃圾回收
         self.memory_pool.gc().await?;
-        
+
         // 清理过期缓存项
         self.cache.cleanup_expired().await?;
-        
+
         // 更新指标
         self.metrics.update();
-        
+
         Ok(())
     }
 }
@@ -209,7 +209,7 @@ impl<T> BatchProcessor<T> {
     /// 添加项目到批次
     pub fn add(&mut self, item: T) -> Option<Vec<T>> {
         self.items.push(item);
-        
+
         if self.items.len() >= self.batch_size || self.should_flush() {
             Some(self.flush())
         } else {
@@ -281,7 +281,7 @@ impl PerformanceMonitor {
         let metrics = self.metrics.get_metrics();
         let uptime = self.start_time.elapsed();
         let time_since_last_check = self.last_check.elapsed();
-        
+
         PerformanceReport {
             uptime,
             time_since_last_check,
@@ -292,9 +292,13 @@ impl PerformanceMonitor {
     }
 
     /// 计算吞吐量
-    fn calculate_throughput(&self, metrics: &PerformanceMetrics, duration: Duration) -> ThroughputStats {
+    fn calculate_throughput(
+        &self,
+        metrics: &PerformanceMetrics,
+        duration: Duration,
+    ) -> ThroughputStats {
         let duration_secs = duration.as_secs_f64();
-        
+
         ThroughputStats {
             operations_per_second: metrics.total_operations as f64 / duration_secs,
             bytes_per_second: metrics.total_bytes_processed as f64 / duration_secs,
@@ -347,14 +351,16 @@ impl OperationTimer {
     /// 完成操作并记录时间
     pub fn finish(self) {
         let duration = self.start_time.elapsed();
-        self.metrics.record_operation_time(&self.operation, duration);
+        self.metrics
+            .record_operation_time(&self.operation, duration);
     }
 }
 
 impl Drop for OperationTimer {
     fn drop(&mut self) {
         let duration = self.start_time.elapsed();
-        self.metrics.record_operation_time(&self.operation, duration);
+        self.metrics
+            .record_operation_time(&self.operation, duration);
     }
 }
 
@@ -392,10 +398,10 @@ mod tests {
     async fn test_performance_manager() -> NetworkResult<()> {
         let config = PerformanceConfig::default();
         let manager = PerformanceManager::new(config);
-        
+
         let stats = manager.get_stats();
         assert!(stats.uptime.as_secs() < 1);
-        
+
         manager.cleanup().await?;
         Ok(())
     }
@@ -404,27 +410,27 @@ mod tests {
     async fn test_zero_copy_buffer() -> NetworkResult<()> {
         let pool = Arc::new(MemoryPool::new(1024));
         let mut buffer = ZeroCopyBuffer::new(pool, 100)?;
-        
+
         assert_eq!(buffer.len(), 100);
         assert!(!buffer.is_empty());
-        
+
         buffer.set_length(50)?;
         assert_eq!(buffer.len(), 50);
-        
+
         Ok(())
     }
 
     #[tokio::test]
     async fn test_batch_processor() {
         let mut processor = BatchProcessor::new(5, Duration::from_millis(100));
-        
+
         // 添加项目
         for i in 0..3 {
             assert!(processor.add(i).is_none());
         }
-        
+
         assert_eq!(processor.current_size(), 3);
-        
+
         // 强制刷新
         let batch = processor.flush();
         assert_eq!(batch.len(), 3);
@@ -435,12 +441,12 @@ mod tests {
     async fn test_performance_monitor() {
         let metrics = Arc::new(MetricsCollector::new());
         let monitor = PerformanceMonitor::new(metrics.clone());
-        
+
         // 记录一些操作
         monitor.record_memory_usage(1024);
         monitor.record_network_io(512, true);
         monitor.record_error("test_error");
-        
+
         let report = monitor.get_report();
         assert!(report.uptime.as_secs() < 1);
         assert_eq!(report.metrics.total_errors, 1);

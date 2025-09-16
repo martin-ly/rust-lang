@@ -1,10 +1,14 @@
 use c10_networks::protocol::dns::DnsResolver;
-use hickory_resolver::config::{NameServerConfig, NameServerConfigGroup, Protocol, ResolverConfig, ResolverOpts};
+use hickory_resolver::config::{
+    NameServerConfig, NameServerConfigGroup, Protocol, ResolverConfig, ResolverOpts,
+};
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let domain = std::env::args().nth(1).unwrap_or_else(|| "internal.service.local".to_string());
+    let domain = std::env::args()
+        .nth(1)
+        .unwrap_or_else(|| "internal.service.local".to_string());
 
     let mut group = NameServerConfigGroup::with_capacity(2);
     group.push(NameServerConfig::new(
@@ -27,5 +31,3 @@ async fn main() -> anyhow::Result<()> {
     println!("{} => {:?}", domain, ips);
     Ok(())
 }
-
-

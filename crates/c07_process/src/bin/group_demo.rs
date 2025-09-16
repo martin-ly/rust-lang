@@ -1,5 +1,5 @@
-use c07_process::prelude::*;
 use c07_process::ProcessGroupManager;
+use c07_process::prelude::*;
 use std::collections::HashMap;
 
 fn main() -> Result<()> {
@@ -53,7 +53,10 @@ fn main() -> Result<()> {
     let _ = pgm.add_to_group(pgid, pid3);
 
     if let Some(group) = pgm.get_group(pgid) {
-        println!("📋 进程组 {}: leader={}, members={:?}", group.pgid, group.leader_pid, group.member_pids);
+        println!(
+            "📋 进程组 {}: leader={}, members={:?}",
+            group.pgid, group.leader_pid, group.member_pids
+        );
     }
 
     // 等待退出
@@ -64,5 +67,3 @@ fn main() -> Result<()> {
     println!("🎉 进程组演示完成");
     Ok(())
 }
-
-

@@ -1,11 +1,11 @@
 //! 机器学习管道
-//! 
+//!
 //! 提供端到端的机器学习工作流
 
+use crate::data_processing::{DataFrame, DataPreprocessor, FeatureEngineer};
+use crate::machine_learning::{Dataset, MLAlgorithm, MLTrainer};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-use crate::data_processing::{DataFrame, DataPreprocessor, FeatureEngineer};
-use crate::machine_learning::{MLTrainer, MLAlgorithm, Dataset};
 
 /// 机器学习管道
 #[derive(Debug, Clone)]
@@ -153,22 +153,22 @@ impl MLPipeline {
             config,
         }
     }
-    
+
     /// 添加管道步骤
     pub fn add_step(&mut self, step: PipelineStep) {
         self.steps.push(step);
     }
-    
+
     /// 执行管道
     pub fn execute(&self, input_data: Option<DataFrame>) -> Result<PipelineResult, String> {
         let start_time = std::time::Instant::now();
         let mut step_results = Vec::new();
         let mut current_data = input_data;
-        
+
         for (i, step) in self.steps.iter().enumerate() {
             let step_start = std::time::Instant::now();
             let step_name = format!("step_{}", i);
-            
+
             match self.execute_step(step, current_data) {
                 Ok((output_data, metrics)) => {
                     let step_result = StepResult {
@@ -180,7 +180,7 @@ impl MLPipeline {
                         error_message: None,
                     };
                     step_results.push(step_result);
-                    
+
                     // 更新当前数据（如果是 DataFrame）
                     if let Some(data) = current_data {
                         // 这里可以添加数据转换逻辑
@@ -197,7 +197,7 @@ impl MLPipeline {
                         error_message: Some(error.clone()),
                     };
                     step_results.push(step_result);
-                    
+
                     return Ok(PipelineResult {
                         success: false,
                         execution_time_ms: start_time.elapsed().as_millis() as u64,
@@ -208,9 +208,9 @@ impl MLPipeline {
                 }
             }
         }
-        
+
         let execution_time = start_time.elapsed().as_millis() as u64;
-        
+
         Ok(PipelineResult {
             success: true,
             execution_time_ms: execution_time,
@@ -223,18 +223,23 @@ impl MLPipeline {
             error_message: None,
         })
     }
-    
+
     /// 执行单个步骤
-    fn execute_step(&self, step: &PipelineStep, input_data: Option<DataFrame>) -> Result<(serde_json::Value, HashMap<String, f64>), String> {
+    fn execute_step(
+        &self,
+        step: &PipelineStep,
+        input_data: Option<DataFrame>,
+    ) -> Result<(serde_json::Value, HashMap<String, f64>), String> {
         match step {
-            PipelineStep::DataLoader(config) => {
-                self.execute_data_loader(config)
-            }
+            PipelineStep::DataLoader(config) => self.execute_data_loader(config),
             PipelineStep::Preprocessing(preprocessor) => {
                 if let Some(data) = input_data {
                     let processed_data = preprocessor.fit_transform(data)?;
                     let metrics = HashMap::new();
-                    Ok((serde_json::json!({"processed_rows": processed_data.len()}), metrics))
+                    Ok((
+                        serde_json::json!({"processed_rows": processed_data.len()}),
+                        metrics,
+                    ))
                 } else {
                     Err("预处理步骤需要输入数据".to_string())
                 }
@@ -243,7 +248,10 @@ impl MLPipeline {
                 if let Some(data) = input_data {
                     let engineered_data = engineer.fit_transform(data)?;
                     let metrics = HashMap::new();
-                    Ok((serde_json::json!({"engineered_columns": engineered_data.column_count()}), metrics))
+                    Ok((
+                        serde_json::json!({"engineered_columns": engineered_data.column_count()}),
+                        metrics,
+                    ))
                 } else {
                     Err("特征工程步骤需要输入数据".to_string())
                 }
@@ -259,22 +267,34 @@ impl MLPipeline {
             }
         }
     }
-    
+
     /// 执行数据加载
-    fn execute_data_loader(&self, config: &DataLoaderConfig) -> Result<(serde_json::Value, HashMap<String, f64>), String> {
+    fn execute_data_loader(
+        &self,
+        config: &DataLoaderConfig,
+    ) -> Result<(serde_json::Value, HashMap<String, f64>), String> {
         match &config.source {
             DataSource::File(path) => {
                 // 模拟文件加载
                 let metrics = HashMap::new();
-                Ok((serde_json::json!({"loaded_from": path, "format": format!("{:?}", config.format)}), metrics))
+                Ok((
+                    serde_json::json!({"loaded_from": path, "format": format!("{:?}", config.format)}),
+                    metrics,
+                ))
             }
             DataSource::Database(connection) => {
                 let metrics = HashMap::new();
-                Ok((serde_json::json!({"loaded_from": "database", "connection": connection}), metrics))
+                Ok((
+                    serde_json::json!({"loaded_from": "database", "connection": connection}),
+                    metrics,
+                ))
             }
             DataSource::API(url) => {
                 let metrics = HashMap::new();
-                Ok((serde_json::json!({"loaded_from": "api", "url": url}), metrics))
+                Ok((
+                    serde_json::json!({"loaded_from": "api", "url": url}),
+                    metrics,
+                ))
             }
             DataSource::Memory => {
                 let metrics = HashMap::new();
@@ -282,26 +302,34 @@ impl MLPipeline {
             }
         }
     }
-    
+
     /// 执行模型训练
-    fn execute_model_training(&self, training_step: &TrainingStep, input_data: Option<DataFrame>) -> Result<(serde_json::Value, HashMap<String, f64>), String> {
+    fn execute_model_training(
+        &self,
+        training_step: &TrainingStep,
+        input_data: Option<DataFrame>,
+    ) -> Result<(serde_json::Value, HashMap<String, f64>), String> {
         if let Some(data) = input_data {
             let trainer = MLTrainer::new(training_step.algorithm.clone());
             let result = trainer.train(&data.into());
-            
+
             let mut metrics = HashMap::new();
             metrics.insert("training_success".to_string(), 1.0);
-            
+
             Ok((serde_json::json!({"training_result": result}), metrics))
         } else {
             Err("模型训练需要输入数据".to_string())
         }
     }
-    
+
     /// 执行模型评估
-    fn execute_model_evaluation(&self, eval_step: &EvaluationStep, _input_data: Option<DataFrame>) -> Result<(serde_json::Value, HashMap<String, f64>), String> {
+    fn execute_model_evaluation(
+        &self,
+        eval_step: &EvaluationStep,
+        _input_data: Option<DataFrame>,
+    ) -> Result<(serde_json::Value, HashMap<String, f64>), String> {
         let mut metrics = HashMap::new();
-        
+
         // 模拟评估指标
         for metric in &eval_step.metrics {
             match metric.as_str() {
@@ -312,35 +340,41 @@ impl MLPipeline {
                 _ => metrics.insert(metric.clone(), 0.85),
             };
         }
-        
+
         Ok((serde_json::json!({"evaluation_completed": true}), metrics))
     }
-    
+
     /// 执行模型部署
-    fn execute_model_deployment(&self, deploy_step: &DeploymentStep) -> Result<(serde_json::Value, HashMap<String, f64>), String> {
+    fn execute_model_deployment(
+        &self,
+        deploy_step: &DeploymentStep,
+    ) -> Result<(serde_json::Value, HashMap<String, f64>), String> {
         let mut metrics = HashMap::new();
         metrics.insert("deployment_success".to_string(), 1.0);
-        
-        Ok((serde_json::json!({
-            "deployment_type": deploy_step.deployment_type,
-            "endpoint_created": true
-        }), metrics))
+
+        Ok((
+            serde_json::json!({
+                "deployment_type": deploy_step.deployment_type,
+                "endpoint_created": true
+            }),
+            metrics,
+        ))
     }
-    
+
     /// 验证管道配置
     pub fn validate(&self) -> Result<ValidationReport, String> {
         let mut report = ValidationReport::new();
-        
+
         // 检查管道名称
         if self.name.is_empty() {
             report.add_error("管道名称不能为空".to_string());
         }
-        
+
         // 检查步骤数量
         if self.steps.is_empty() {
             report.add_error("管道必须包含至少一个步骤".to_string());
         }
-        
+
         // 检查每个步骤
         for (i, step) in self.steps.iter().enumerate() {
             match step {
@@ -357,13 +391,15 @@ impl MLPipeline {
                 _ => {}
             }
         }
-        
+
         Ok(report)
     }
-    
+
     /// 获取管道摘要
     pub fn get_summary(&self) -> PipelineSummary {
-        let step_types: Vec<String> = self.steps.iter()
+        let step_types: Vec<String> = self
+            .steps
+            .iter()
             .map(|step| match step {
                 PipelineStep::DataLoader(_) => "DataLoader".to_string(),
                 PipelineStep::Preprocessing(_) => "Preprocessing".to_string(),
@@ -373,7 +409,7 @@ impl MLPipeline {
                 PipelineStep::ModelDeployment(_) => "ModelDeployment".to_string(),
             })
             .collect();
-        
+
         PipelineSummary {
             name: self.name.clone(),
             version: self.config.version.clone(),
@@ -401,12 +437,12 @@ impl ValidationReport {
             warnings: Vec::new(),
         }
     }
-    
+
     pub fn add_error(&mut self, error: String) {
         self.errors.push(error);
         self.is_valid = false;
     }
-    
+
     pub fn add_warning(&mut self, warning: String) {
         self.warnings.push(warning);
     }
@@ -441,64 +477,66 @@ impl Default for PipelineConfig {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::data_processing::{DataPreprocessor, PreprocessingStep, MissingValueStrategy};
-    
+    use crate::data_processing::{DataPreprocessor, MissingValueStrategy, PreprocessingStep};
+
     #[test]
     fn test_pipeline_creation() {
         let config = PipelineConfig::default();
         let pipeline = MLPipeline::new("test_pipeline".to_string(), config);
-        
+
         assert_eq!(pipeline.name, "test_pipeline");
         assert_eq!(pipeline.steps.len(), 0);
     }
-    
+
     #[test]
     fn test_add_pipeline_steps() {
         let mut pipeline = MLPipeline::new("test_pipeline".to_string(), PipelineConfig::default());
-        
+
         let data_loader_config = DataLoaderConfig {
             source: DataSource::File("data.csv".to_string()),
             format: DataFormat::CSV,
             options: HashMap::new(),
         };
-        
+
         pipeline.add_step(PipelineStep::DataLoader(data_loader_config));
-        
+
         let mut preprocessor = DataPreprocessor::new("test_preprocessor".to_string());
-        preprocessor.add_step(PreprocessingStep::HandleMissingValues(MissingValueStrategy::FillWithMean));
+        preprocessor.add_step(PreprocessingStep::HandleMissingValues(
+            MissingValueStrategy::FillWithMean,
+        ));
         pipeline.add_step(PipelineStep::Preprocessing(preprocessor));
-        
+
         assert_eq!(pipeline.steps.len(), 2);
     }
-    
+
     #[test]
     fn test_pipeline_validation() {
         let mut pipeline = MLPipeline::new("test_pipeline".to_string(), PipelineConfig::default());
-        
+
         let data_loader_config = DataLoaderConfig {
             source: DataSource::File("data.csv".to_string()),
             format: DataFormat::CSV,
             options: HashMap::new(),
         };
-        
+
         pipeline.add_step(PipelineStep::DataLoader(data_loader_config));
-        
+
         let report = pipeline.validate().unwrap();
         assert!(report.is_valid);
     }
-    
+
     #[test]
     fn test_pipeline_summary() {
         let mut pipeline = MLPipeline::new("test_pipeline".to_string(), PipelineConfig::default());
-        
+
         let data_loader_config = DataLoaderConfig {
             source: DataSource::File("data.csv".to_string()),
             format: DataFormat::CSV,
             options: HashMap::new(),
         };
-        
+
         pipeline.add_step(PipelineStep::DataLoader(data_loader_config));
-        
+
         let summary = pipeline.get_summary();
         assert_eq!(summary.name, "test_pipeline");
         assert_eq!(summary.step_count, 1);

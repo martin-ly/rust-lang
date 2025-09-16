@@ -14,4 +14,3 @@ fn view_merge_prefers_newer_version() {
     assert_eq!(n1.state, SwimMemberState::Suspect);
     assert_eq!(n1.version.0, 2);
 }
-

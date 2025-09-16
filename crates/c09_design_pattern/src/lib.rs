@@ -1,22 +1,22 @@
 //! Rust设计模式实践案例库
-//! 
+//!
 //! 本库提供了Rust中各种设计模式的完整实现和实际应用案例，
 //! 包括基础设计模式、高级设计模式以及在特定领域的应用。
 
 // 基础设计模式模块
+pub mod behavioral;
 pub mod creational;
 pub mod structural;
-pub mod behavioral;
 
 // 高级设计模式模块
-pub mod parallel;
 pub mod concurrency;
+pub mod parallel;
 
 // 领域特定设计模式应用
-pub mod web_framework_patterns;
 pub mod database_patterns;
 pub mod game_engine_patterns;
 pub mod os_patterns;
+pub mod web_framework_patterns;
 
 // 错误处理模块
 pub mod error_handling;
@@ -108,7 +108,6 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
             ],
             execution_model: ExecutionModel::Sync,
         },
-        
         // 结构型模式
         PatternInfo {
             name: "Adapter".to_string(),
@@ -143,7 +142,6 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
             ],
             execution_model: ExecutionModel::Hybrid,
         },
-        
         // 行为型模式
         PatternInfo {
             name: "Observer".to_string(),
@@ -178,7 +176,6 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
             ],
             execution_model: ExecutionModel::Hybrid,
         },
-        
         // 并行模式
         PatternInfo {
             name: "Parallel Iterator".to_string(),
@@ -202,7 +199,6 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
             ],
             execution_model: ExecutionModel::Sync,
         },
-        
         // 并发模式
         PatternInfo {
             name: "Actor".to_string(),
@@ -226,7 +222,6 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
             ],
             execution_model: ExecutionModel::Hybrid,
         },
-        
         // 领域特定模式
         PatternInfo {
             name: "MVC".to_string(),
@@ -280,7 +275,10 @@ pub fn search_patterns(query: &str) -> Vec<PatternInfo> {
         .filter(|pattern| {
             pattern.name.to_lowercase().contains(&query_lower)
                 || pattern.description.to_lowercase().contains(&query_lower)
-                || pattern.use_cases.iter().any(|case| case.to_lowercase().contains(&query_lower))
+                || pattern
+                    .use_cases
+                    .iter()
+                    .any(|case| case.to_lowercase().contains(&query_lower))
         })
         .collect()
 }
@@ -301,13 +299,11 @@ mod tests {
     fn test_get_all_patterns() {
         let patterns = get_all_patterns();
         assert!(!patterns.is_empty());
-        
+
         // 检查是否包含所有分类
-        let categories: std::collections::HashSet<_> = patterns
-            .iter()
-            .map(|p| p.category.clone())
-            .collect();
-        
+        let categories: std::collections::HashSet<_> =
+            patterns.iter().map(|p| p.category.clone()).collect();
+
         assert!(categories.contains(&PatternCategory::Creational));
         assert!(categories.contains(&PatternCategory::Structural));
         assert!(categories.contains(&PatternCategory::Behavioral));
@@ -320,7 +316,7 @@ mod tests {
     fn test_get_patterns_by_category() {
         let creational_patterns = get_patterns_by_category(PatternCategory::Creational);
         assert!(!creational_patterns.is_empty());
-        
+
         for pattern in creational_patterns {
             assert_eq!(pattern.category, PatternCategory::Creational);
         }
@@ -330,10 +326,10 @@ mod tests {
     fn test_search_patterns() {
         let results = search_patterns("singleton");
         assert!(!results.is_empty());
-        
+
         let results = search_patterns("web");
         assert!(!results.is_empty());
-        
+
         let results = search_patterns("nonexistent");
         assert!(results.is_empty());
     }

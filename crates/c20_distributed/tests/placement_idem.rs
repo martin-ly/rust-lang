@@ -1,5 +1,5 @@
-use c20_distributed::topology::ConsistentHashRing;
 use c20_distributed::storage::{IdempotencyStore, InMemoryIdempotency};
+use c20_distributed::topology::ConsistentHashRing;
 
 #[test]
 fn nodes_for_returns_distinct_nodes() {
@@ -19,4 +19,3 @@ fn idempotency_prevents_duplicate() {
     idem.record(id.clone());
     assert!(idem.seen(&id));
 }
-

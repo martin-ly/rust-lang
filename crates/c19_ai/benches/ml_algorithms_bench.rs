@@ -1,4 +1,4 @@
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 
 fn ml_algorithms_benchmark(c: &mut Criterion) {
@@ -12,10 +12,10 @@ fn ml_algorithms_benchmark(c: &mut Criterion) {
             let sum_y: f32 = y.iter().sum();
             let sum_xy: f32 = x.iter().zip(y.iter()).map(|(a, b)| a * b).sum();
             let sum_x2: f32 = x.iter().map(|a| a * a).sum();
-            
+
             let slope = (n * sum_xy - sum_x * sum_y) / (n * sum_x2 - sum_x * sum_x);
             let intercept = (sum_y - slope * sum_x) / n;
-            
+
             black_box((slope, intercept))
         })
     });

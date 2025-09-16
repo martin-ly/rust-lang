@@ -6,7 +6,11 @@ use std::collections::{HashMap, HashSet, VecDeque};
 pub struct NodeId(pub String);
 
 #[derive(Debug, Clone)]
-pub struct Edge { pub from: NodeId, pub to: NodeId, pub weight: u32 }
+pub struct Edge {
+    pub from: NodeId,
+    pub to: NodeId,
+    pub weight: u32,
+}
 
 #[derive(Debug, Default)]
 pub struct TopologyGraph {
@@ -15,12 +19,19 @@ pub struct TopologyGraph {
 }
 
 impl TopologyGraph {
-    pub fn new() -> Self { Self::default() }
-    pub fn add_node(&mut self, id: NodeId) { self.nodes.insert(id); }
+    pub fn new() -> Self {
+        Self::default()
+    }
+    pub fn add_node(&mut self, id: NodeId) {
+        self.nodes.insert(id);
+    }
     pub fn add_edge(&mut self, from: NodeId, to: NodeId, weight: u32) {
         self.nodes.insert(from.clone());
         self.nodes.insert(to.clone());
-        self.adj.entry(from.clone()).or_default().push(Edge{ from, to, weight });
+        self.adj
+            .entry(from.clone())
+            .or_default()
+            .push(Edge { from, to, weight });
     }
 
     /// 简化版 BFS 路由发现
@@ -31,7 +42,9 @@ impl TopologyGraph {
         q.push_back(src.clone());
         seen.insert(src.clone());
         while let Some(n) = q.pop_front() {
-            if &n == dst { break; }
+            if &n == dst {
+                break;
+            }
             if let Some(edges) = self.adj.get(&n) {
                 for e in edges {
                     if !seen.contains(&e.to) {
@@ -42,17 +55,19 @@ impl TopologyGraph {
                 }
             }
         }
-        if !seen.contains(dst) { return None; }
+        if !seen.contains(dst) {
+            return None;
+        }
         let mut path = vec![dst.clone()];
         let mut cur = dst.clone();
         while let Some(p) = prev.get(&cur).cloned() {
             path.push(p.clone());
-            if &p == src { break; }
+            if &p == src {
+                break;
+            }
             cur = p;
         }
         path.reverse();
         Some(path)
     }
 }
-
-

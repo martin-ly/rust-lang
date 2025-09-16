@@ -1,17 +1,17 @@
 //! Rust高级算法实现库
-//! 
+//!
 //! 本库提供了Rust中各种高级算法的完整实现，
 //! 包括排序、搜索、图算法、机器学习算法、密码学算法等。
 
 // 基础算法模块
-pub mod sorting;
-pub mod searching;
+pub mod backtracking;
 pub mod data_structure;
 pub mod divide_and_conquer;
 pub mod dynamic_programming;
 pub mod graph;
 pub mod greedy;
-pub mod backtracking;
+pub mod searching;
+pub mod sorting;
 
 // 高级算法模块
 pub mod advanced_algorithms;
@@ -20,11 +20,11 @@ pub mod advanced_algorithms;
 pub mod machine_learning;
 
 // 性能优化模块
-pub mod performance_optimization;
-pub mod performance_examples;
-pub mod string_algorithms;
 pub mod geometry;
 pub mod number_theory;
+pub mod performance_examples;
+pub mod performance_optimization;
+pub mod string_algorithms;
 
 // 示例程序
 // pub mod bin; // 暂时注释掉，避免编译错误
@@ -103,7 +103,6 @@ pub fn get_all_algorithms() -> Vec<AlgorithmInfo> {
                 "内存受限环境".to_string(),
             ],
         },
-        
         // 搜索算法
         AlgorithmInfo {
             name: "二分搜索".to_string(),
@@ -141,7 +140,6 @@ pub fn get_all_algorithms() -> Vec<AlgorithmInfo> {
                 "社交网络分析".to_string(),
             ],
         },
-        
         // 图算法
         AlgorithmInfo {
             name: "Dijkstra算法".to_string(),
@@ -167,7 +165,6 @@ pub fn get_all_algorithms() -> Vec<AlgorithmInfo> {
                 "电路设计".to_string(),
             ],
         },
-        
         // 动态规划
         AlgorithmInfo {
             name: "最长公共子序列".to_string(),
@@ -193,7 +190,6 @@ pub fn get_all_algorithms() -> Vec<AlgorithmInfo> {
                 "装载问题".to_string(),
             ],
         },
-        
         // 机器学习算法
         AlgorithmInfo {
             name: "线性回归".to_string(),
@@ -219,7 +215,6 @@ pub fn get_all_algorithms() -> Vec<AlgorithmInfo> {
                 "数据挖掘".to_string(),
             ],
         },
-        
         // 密码学算法
         AlgorithmInfo {
             name: "RSA加密".to_string(),
@@ -245,7 +240,6 @@ pub fn get_all_algorithms() -> Vec<AlgorithmInfo> {
                 "区块链".to_string(),
             ],
         },
-        
         // 性能优化
         AlgorithmInfo {
             name: "内存池".to_string(),
@@ -319,45 +313,47 @@ impl AlgorithmBenchmark {
             results: std::collections::HashMap::new(),
         }
     }
-    
+
     pub fn run_benchmark<F>(&mut self, name: &str, iterations: usize, test_fn: F)
-    where F: Fn() {
+    where
+        F: Fn(),
+    {
         let start = std::time::Instant::now();
-        
+
         for _ in 0..iterations {
             test_fn();
         }
-        
+
         let duration = start.elapsed();
         self.results
             .entry(name.to_string())
             .or_insert_with(Vec::new)
             .push(duration);
     }
-    
+
     pub fn get_average_time(&self, name: &str) -> Option<std::time::Duration> {
         self.results.get(name).map(|durations| {
             let total: std::time::Duration = durations.iter().sum();
             total / durations.len() as u32
         })
     }
-    
+
     pub fn generate_report(&self) -> String {
         let mut report = String::from("算法性能基准测试报告\n");
         report.push_str("========================\n\n");
-        
+
         for (name, durations) in &self.results {
             let avg = durations.iter().sum::<std::time::Duration>() / durations.len() as u32;
             let min = durations.iter().min().unwrap();
             let max = durations.iter().max().unwrap();
-            
+
             report.push_str(&format!("{}:\n", name));
             report.push_str(&format!("  平均时间: {:?}\n", avg));
             report.push_str(&format!("  最短时间: {:?}\n", min));
             report.push_str(&format!("  最长时间: {:?}\n", max));
             report.push_str(&format!("  测试次数: {}\n\n", durations.len()));
         }
-        
+
         report
     }
 }
@@ -367,35 +363,40 @@ pub struct ComplexityAnalyzer;
 
 impl ComplexityAnalyzer {
     /// 分析算法的时间复杂度
-    pub fn analyze_time_complexity<F>(test_fn: F, input_sizes: &[usize]) -> Vec<(usize, std::time::Duration)>
-    where F: Fn(usize) {
+    pub fn analyze_time_complexity<F>(
+        test_fn: F,
+        input_sizes: &[usize],
+    ) -> Vec<(usize, std::time::Duration)>
+    where
+        F: Fn(usize),
+    {
         let mut results = Vec::new();
-        
+
         for &size in input_sizes {
             let start = std::time::Instant::now();
             test_fn(size);
             let duration = start.elapsed();
             results.push((size, duration));
         }
-        
+
         results
     }
-    
+
     /// 估算算法的时间复杂度
     pub fn estimate_complexity(results: &[(usize, std::time::Duration)]) -> String {
         if results.len() < 2 {
             return "数据不足".to_string();
         }
-        
+
         let (size1, time1) = results[0];
         let (size2, time2) = results[results.len() - 1];
-        
+
         let ratio = size2 as f64 / size1 as f64;
         let time_ratio = time2.as_nanos() as f64 / time1.as_nanos() as f64;
-        
+
         let log_ratio = ratio.ln();
         let log_time_ratio = time_ratio.ln();
-        
+
         let complexity = if log_time_ratio < 1.5 {
             "O(1)"
         } else if log_time_ratio < log_ratio * 1.2 {
@@ -409,7 +410,7 @@ impl ComplexityAnalyzer {
         } else {
             "O(n³) 或更高"
         };
-        
+
         complexity.to_string()
     }
 }
@@ -422,13 +423,11 @@ mod tests {
     fn test_get_all_algorithms() {
         let algorithms = get_all_algorithms();
         assert!(!algorithms.is_empty());
-        
+
         // 检查是否包含所有分类
-        let categories: std::collections::HashSet<_> = algorithms
-            .iter()
-            .map(|a| &a.category)
-            .collect();
-        
+        let categories: std::collections::HashSet<_> =
+            algorithms.iter().map(|a| &a.category).collect();
+
         assert!(categories.contains(&AlgorithmCategory::Sorting));
         assert!(categories.contains(&AlgorithmCategory::Searching));
         assert!(categories.contains(&AlgorithmCategory::Graph));
@@ -442,7 +441,7 @@ mod tests {
     fn test_get_algorithms_by_category() {
         let sorting_algorithms = get_algorithms_by_category(AlgorithmCategory::Sorting);
         assert!(!sorting_algorithms.is_empty());
-        
+
         for algorithm in sorting_algorithms {
             assert_eq!(algorithm.category, AlgorithmCategory::Sorting);
         }
@@ -452,10 +451,10 @@ mod tests {
     fn test_search_algorithms() {
         let results = search_algorithms("排序");
         assert!(!results.is_empty());
-        
+
         let results = search_algorithms("quick");
         assert!(!results.is_empty());
-        
+
         let results = search_algorithms("nonexistent");
         assert!(results.is_empty());
     }
@@ -463,12 +462,12 @@ mod tests {
     #[test]
     fn test_algorithm_benchmark() {
         let mut benchmark = AlgorithmBenchmark::new();
-        
+
         benchmark.run_benchmark("测试算法", 100, || {
             // 模拟算法执行
             std::thread::sleep(std::time::Duration::from_micros(100));
         });
-        
+
         let avg_time = benchmark.get_average_time("测试算法");
         assert!(avg_time.is_some());
         assert!(avg_time.unwrap() >= std::time::Duration::from_micros(100));
@@ -477,15 +476,18 @@ mod tests {
     #[test]
     fn test_complexity_analyzer() {
         let input_sizes = vec![100, 1000, 10000];
-        let results = ComplexityAnalyzer::analyze_time_complexity(|size| {
-            // 模拟O(n)算法
-            for _ in 0..size {
-                std::thread::sleep(std::time::Duration::from_nanos(1));
-            }
-        }, &input_sizes);
-        
+        let results = ComplexityAnalyzer::analyze_time_complexity(
+            |size| {
+                // 模拟O(n)算法
+                for _ in 0..size {
+                    std::thread::sleep(std::time::Duration::from_nanos(1));
+                }
+            },
+            &input_sizes,
+        );
+
         assert_eq!(results.len(), 3);
-        
+
         let complexity = ComplexityAnalyzer::estimate_complexity(&results);
         assert!(!complexity.is_empty());
     }

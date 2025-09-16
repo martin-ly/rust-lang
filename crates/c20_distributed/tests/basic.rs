@@ -6,4 +6,3 @@ fn smoke_exports_exist() {
     let _ = ConsistencyLevel::Quorum;
     let _ = LogicalClock::default();
 }
-

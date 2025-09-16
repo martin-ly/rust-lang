@@ -1,10 +1,10 @@
 //! 强化学习智能体
-//! 
+//!
 //! 提供强化学习智能体的实现
 
-use serde::{Deserialize, Serialize};
-use ndarray::Array1;
 use anyhow::Result;
+use ndarray::Array1;
+use serde::{Deserialize, Serialize};
 
 /// 智能体类型
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -37,13 +37,16 @@ impl RLAgent {
             training_steps: 0,
         }
     }
-    
+
     pub fn select_action(&self, state: &Array1<f32>) -> Array1<f32> {
         // 简单的动作选择逻辑
         Array1::zeros(2)
     }
-    
-    pub fn train(&mut self, batch: &[(Array1<f32>, Array1<f32>, f32, Array1<f32>, bool)]) -> Result<f32> {
+
+    pub fn train(
+        &mut self,
+        batch: &[(Array1<f32>, Array1<f32>, f32, Array1<f32>, bool)],
+    ) -> Result<f32> {
         self.training_steps += 1;
         Ok(0.1)
     }

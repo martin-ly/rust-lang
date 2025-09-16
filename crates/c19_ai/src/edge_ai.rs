@@ -1,5 +1,5 @@
 //! # 边缘AI模块
-//! 
+//!
 //! 支持移动端和边缘设备的AI模型部署和推理。
 
 use crate::Error;
@@ -100,12 +100,12 @@ impl EdgeAIEngine {
             optimized_models: HashMap::new(),
         }
     }
-    
+
     /// 注册边缘设备
     pub fn register_device(&mut self, device: EdgeDevice) {
         self.devices.insert(device.id.clone(), device);
     }
-    
+
     /// 优化模型以适应边缘设备
     pub async fn optimize_model(
         &mut self,
@@ -113,27 +113,30 @@ impl EdgeAIEngine {
         target_device_id: String,
         config: ModelOptimizationConfig,
     ) -> Result<OptimizedModel, Error> {
-        let device = self.devices.get(&target_device_id)
+        let device = self
+            .devices
+            .get(&target_device_id)
             .ok_or_else(|| Error::EdgeError(format!("设备 {} 未找到", target_device_id)))?;
-        
+
         tracing::info!("为设备 {} 优化模型 {}", target_device_id, model_id);
-        
+
         // 这里将集成实际的模型优化逻辑
         // 包括量化、剪枝、知识蒸馏等
-        
+
         let optimized_model = OptimizedModel {
             original_model_id: model_id.clone(),
             optimization_config: config,
-            model_size_mb: 10, // 优化后的模型大小
+            model_size_mb: 10,     // 优化后的模型大小
             inference_time_ms: 50, // 推理时间
-            accuracy: 0.95, // 保持的准确率
+            accuracy: 0.95,        // 保持的准确率
             device_compatibility: vec![target_device_id],
         };
-        
-        self.optimized_models.insert(model_id, optimized_model.clone());
+
+        self.optimized_models
+            .insert(model_id, optimized_model.clone());
         Ok(optimized_model)
     }
-    
+
     /// 在边缘设备上进行推理
     pub async fn infer_on_device(
         &self,
@@ -141,16 +144,20 @@ impl EdgeAIEngine {
         model_id: &str,
         input_data: Vec<f64>,
     ) -> Result<EdgeInferenceResult, Error> {
-        let device = self.devices.get(device_id)
+        let device = self
+            .devices
+            .get(device_id)
             .ok_or_else(|| Error::EdgeError(format!("设备 {} 未找到", device_id)))?;
-        
-        let model = self.optimized_models.get(model_id)
+
+        let model = self
+            .optimized_models
+            .get(model_id)
             .ok_or_else(|| Error::EdgeError(format!("模型 {} 未找到", model_id)))?;
-        
+
         tracing::info!("在设备 {} 上使用模型 {} 进行推理", device_id, model_id);
-        
+
         // 这里将集成实际的边缘推理逻辑
-        
+
         Ok(EdgeInferenceResult {
             predictions: vec![0.8, 0.2],
             confidence: 0.9,
@@ -160,12 +167,12 @@ impl EdgeAIEngine {
             model_id: model_id.to_string(),
         })
     }
-    
+
     /// 获取设备列表
     pub fn get_devices(&self) -> &HashMap<String, EdgeDevice> {
         &self.devices
     }
-    
+
     /// 获取优化后的模型列表
     pub fn get_optimized_models(&self) -> &HashMap<String, OptimizedModel> {
         &self.optimized_models
@@ -192,7 +199,7 @@ impl Default for EdgeAIEngine {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_edge_device() {
         let device = EdgeDevice {
@@ -214,16 +221,16 @@ mod tests {
                 battery_life_hours: Some(24.0),
             },
         };
-        
+
         assert_eq!(device.id, "mobile_1");
         assert_eq!(device.capabilities.cpu_cores, 8);
         assert_eq!(device.constraints.max_power_watts, 5.0);
     }
-    
+
     #[tokio::test]
     async fn test_edge_ai_engine() {
         let mut engine = EdgeAIEngine::new();
-        
+
         let device = EdgeDevice {
             id: "test_device".to_string(),
             device_type: EdgeDeviceType::Mobile,
@@ -243,31 +250,29 @@ mod tests {
                 battery_life_hours: Some(12.0),
             },
         };
-        
+
         engine.register_device(device);
-        
+
         let config = ModelOptimizationConfig {
             quantization: QuantizationType::Int8,
             pruning: true,
             knowledge_distillation: false,
             model_compression: CompressionType::Pruning,
         };
-        
-        let optimized_model = engine.optimize_model(
-            "test_model".to_string(),
-            "test_device".to_string(),
-            config,
-        ).await.unwrap();
-        
+
+        let optimized_model = engine
+            .optimize_model("test_model".to_string(), "test_device".to_string(), config)
+            .await
+            .unwrap();
+
         assert_eq!(optimized_model.original_model_id, "test_model");
         assert!(optimized_model.accuracy > 0.0);
-        
-        let result = engine.infer_on_device(
-            "test_device",
-            "test_model",
-            vec![1.0, 2.0, 3.0],
-        ).await.unwrap();
-        
+
+        let result = engine
+            .infer_on_device("test_device", "test_model", vec![1.0, 2.0, 3.0])
+            .await
+            .unwrap();
+
         assert_eq!(result.device_id, "test_device");
         assert!(result.confidence > 0.0);
     }

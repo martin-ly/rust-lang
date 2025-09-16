@@ -20,11 +20,16 @@ pub mod gat_demo {
     }
 
     impl<T> VecProvider<T> {
-        pub fn new(data: Vec<T>) -> Self { Self { data } }
+        pub fn new(data: Vec<T>) -> Self {
+            Self { data }
+        }
     }
 
     impl<T> SliceProvider for VecProvider<T> {
-        type Item<'a> = &'a T where Self: 'a;
+        type Item<'a>
+            = &'a T
+        where
+            Self: 'a;
 
         fn get<'a>(&'a self, idx: usize) -> Option<Self::Item<'a>> {
             self.data.get(idx)

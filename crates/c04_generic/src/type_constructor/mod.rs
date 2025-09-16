@@ -76,7 +76,7 @@ impl<T> Container<T> {
             capacity,
         }
     }
-    
+
     fn add(&mut self, item: T) -> bool {
         if self.items.len() < self.capacity {
             self.items.push(item);
@@ -85,15 +85,15 @@ impl<T> Container<T> {
             false
         }
     }
-    
+
     fn get(&self, index: usize) -> Option<&T> {
         self.items.get(index)
     }
-    
+
     fn len(&self) -> usize {
         self.items.len()
     }
-    
+
     fn is_full(&self) -> bool {
         self.items.len() >= self.capacity
     }
@@ -140,7 +140,7 @@ impl Processor<String> for StringProcessor {
     fn process(&self, input: String) -> String {
         input.to_uppercase()
     }
-    
+
     fn validate(&self, input: &String) -> bool {
         !input.is_empty()
     }
@@ -150,7 +150,7 @@ impl Processor<i32> for NumberProcessor {
     fn process(&self, input: i32) -> i32 {
         input * 2
     }
-    
+
     fn validate(&self, input: &i32) -> bool {
         *input > 0
     }
@@ -170,23 +170,23 @@ impl<T> Stack<T> {
     fn new() -> Self {
         Stack { items: Vec::new() }
     }
-    
+
     fn push(&mut self, item: T) {
         self.items.push(item);
     }
-    
+
     fn pop(&mut self) -> Option<T> {
         self.items.pop()
     }
-    
+
     fn peek(&self) -> Option<&T> {
         self.items.last()
     }
-    
+
     fn is_empty(&self) -> bool {
         self.items.is_empty()
     }
-    
+
     fn len(&self) -> usize {
         self.items.len()
     }
@@ -200,11 +200,11 @@ impl<T> Queue<T> {
     fn new() -> Self {
         Queue { items: Vec::new() }
     }
-    
+
     fn enqueue(&mut self, item: T) {
         self.items.push(item);
     }
-    
+
     fn dequeue(&mut self) -> Option<T> {
         if self.items.is_empty() {
             None
@@ -212,15 +212,15 @@ impl<T> Queue<T> {
             Some(self.items.remove(0))
         }
     }
-    
+
     fn front(&self) -> Option<&T> {
         self.items.first()
     }
-    
+
     fn is_empty(&self) -> bool {
         self.items.is_empty()
     }
-    
+
     fn len(&self) -> usize {
         self.items.len()
     }
@@ -243,15 +243,15 @@ impl Numeric for i32 {
     fn add(&self, other: &Self) -> Self {
         self + other
     }
-    
+
     fn subtract(&self, other: &Self) -> Self {
         self - other
     }
-    
+
     fn multiply(&self, other: &Self) -> Self {
         self * other
     }
-    
+
     fn divide(&self, other: &Self) -> Option<Self> {
         if *other == 0 {
             None
@@ -265,15 +265,15 @@ impl Numeric for f64 {
     fn add(&self, other: &Self) -> Self {
         self + other
     }
-    
+
     fn subtract(&self, other: &Self) -> Self {
         self - other
     }
-    
+
     fn multiply(&self, other: &Self) -> Self {
         self * other
     }
-    
+
     fn divide(&self, other: &Self) -> Option<Self> {
         if *other == 0.0 {
             None
@@ -313,11 +313,11 @@ impl<T> DataContainer<T> {
     fn new(data: T, metadata: String) -> Self {
         DataContainer { data, metadata }
     }
-    
+
     fn get_data(&self) -> &T {
         &self.data
     }
-    
+
     fn get_metadata(&self) -> &str {
         &self.metadata
     }
@@ -327,7 +327,7 @@ impl<T: std::fmt::Display> Serializable for DataContainer<T> {
     fn serialize(&self) -> String {
         format!("Data: {}, Metadata: {}", self.data, self.metadata)
     }
-    
+
     fn deserialize(_data: &str) -> Option<Self> {
         // 这里可以实现实际的反序列化逻辑
         None
@@ -342,7 +342,7 @@ impl<T: std::fmt::Display> Serializable for DataContainer<T> {
 ```rust
 trait Iterator {
     type Item;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
     fn count(&self) -> usize;
 }
@@ -354,7 +354,7 @@ struct NumberIterator {
 
 impl Iterator for NumberIterator {
     type Item = i32;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         if self.current < self.max {
             let result = self.current;
@@ -364,7 +364,7 @@ impl Iterator for NumberIterator {
             None
         }
     }
-    
+
     fn count(&self) -> usize {
         (self.max - self.current) as usize
     }
@@ -386,15 +386,15 @@ impl<'a, T> ReferenceContainer<'a, T> {
             reference_count: 1,
         }
     }
-    
+
     fn get_data(&self) -> &'a T {
         self.data
     }
-    
+
     fn increment_reference(&mut self) {
         self.reference_count += 1;
     }
-    
+
     fn decrement_reference(&mut self) -> bool {
         if self.reference_count > 0 {
             self.reference_count -= 1;
@@ -439,11 +439,11 @@ impl<T, U> Pair<T, U> {
     pub fn new(first: T, second: U) -> Self {
         Pair { first, second }
     }
-    
+
     pub fn first(&self) -> &T {
         &self.first
     }
-    
+
     pub fn second(&self) -> &U {
         &self.second
     }
@@ -462,7 +462,7 @@ impl<T> Container<T> {
             capacity,
         }
     }
-    
+
     pub fn add(&mut self, item: T) -> bool {
         if self.items.len() < self.capacity {
             self.items.push(item);
@@ -471,19 +471,19 @@ impl<T> Container<T> {
             false
         }
     }
-    
+
     pub fn get(&self, index: usize) -> Option<&T> {
         self.items.get(index)
     }
-    
+
     pub fn len(&self) -> usize {
         self.items.len()
     }
-    
+
     pub fn is_empty(&self) -> bool {
         self.items.is_empty()
     }
-    
+
     pub fn is_full(&self) -> bool {
         self.items.len() >= self.capacity
     }
@@ -524,7 +524,7 @@ impl Processor<String> for StringProcessor {
     fn process(&self, input: String) -> String {
         input.to_uppercase()
     }
-    
+
     fn validate(&self, input: &String) -> bool {
         !input.is_empty()
     }
@@ -534,7 +534,7 @@ impl Processor<i32> for NumberProcessor {
     fn process(&self, input: i32) -> i32 {
         input * 2
     }
-    
+
     fn validate(&self, input: &i32) -> bool {
         *input > 0
     }
@@ -549,23 +549,23 @@ impl<T> Stack<T> {
     pub fn new() -> Self {
         Stack { items: Vec::new() }
     }
-    
+
     pub fn push(&mut self, item: T) {
         self.items.push(item);
     }
-    
+
     pub fn pop(&mut self) -> Option<T> {
         self.items.pop()
     }
-    
+
     pub fn peek(&self) -> Option<&T> {
         self.items.last()
     }
-    
+
     pub fn is_empty(&self) -> bool {
         self.items.is_empty()
     }
-    
+
     pub fn len(&self) -> usize {
         self.items.len()
     }
@@ -585,11 +585,11 @@ impl<T> Queue<T> {
     pub fn new() -> Self {
         Queue { items: Vec::new() }
     }
-    
+
     pub fn enqueue(&mut self, item: T) {
         self.items.push(item);
     }
-    
+
     pub fn dequeue(&mut self) -> Option<T> {
         if self.items.is_empty() {
             None
@@ -597,15 +597,15 @@ impl<T> Queue<T> {
             Some(self.items.remove(0))
         }
     }
-    
+
     pub fn front(&self) -> Option<&T> {
         self.items.first()
     }
-    
+
     pub fn is_empty(&self) -> bool {
         self.items.is_empty()
     }
-    
+
     pub fn len(&self) -> usize {
         self.items.len()
     }
@@ -631,15 +631,15 @@ impl Numeric for i32 {
     fn add(&self, other: &Self) -> Self {
         self + other
     }
-    
+
     fn subtract(&self, other: &Self) -> Self {
         self - other
     }
-    
+
     fn multiply(&self, other: &Self) -> Self {
         self * other
     }
-    
+
     fn divide(&self, other: &Self) -> Option<Self> {
         if *other == 0 {
             None
@@ -653,15 +653,15 @@ impl Numeric for f64 {
     fn add(&self, other: &Self) -> Self {
         self + other
     }
-    
+
     fn subtract(&self, other: &Self) -> Self {
         self - other
     }
-    
+
     fn multiply(&self, other: &Self) -> Self {
         self * other
     }
-    
+
     fn divide(&self, other: &Self) -> Option<Self> {
         if *other == 0.0 {
             None
@@ -698,11 +698,11 @@ impl<T> DataContainer<T> {
     pub fn new(data: T, metadata: String) -> Self {
         DataContainer { data, metadata }
     }
-    
+
     pub fn get_data(&self) -> &T {
         &self.data
     }
-    
+
     pub fn get_metadata(&self) -> &str {
         &self.metadata
     }
@@ -712,7 +712,7 @@ impl<T: std::fmt::Display> Serializable for DataContainer<T> {
     fn serialize(&self) -> String {
         format!("Data: {}, Metadata: {}", self.data, self.metadata)
     }
-    
+
     fn deserialize(_data: &str) -> Option<Self> {
         // 这里可以实现实际的反序列化逻辑
         None
@@ -722,7 +722,7 @@ impl<T: std::fmt::Display> Serializable for DataContainer<T> {
 // 关联类型示例
 pub trait Iterator {
     type Item;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
     fn count(&self) -> usize;
 }
@@ -734,7 +734,7 @@ pub struct NumberIterator {
 
 impl Iterator for NumberIterator {
     type Item = i32;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         if self.current < self.max {
             let result = self.current;
@@ -744,7 +744,7 @@ impl Iterator for NumberIterator {
             None
         }
     }
-    
+
     fn count(&self) -> usize {
         (self.max - self.current) as usize
     }
@@ -763,15 +763,15 @@ impl<'a, T> ReferenceContainer<'a, T> {
             reference_count: 1,
         }
     }
-    
+
     pub fn get_data(&self) -> &'a T {
         self.data
     }
-    
+
     pub fn increment_reference(&mut self) {
         self.reference_count += 1;
     }
-    
+
     pub fn decrement_reference(&mut self) -> bool {
         if self.reference_count > 0 {
             self.reference_count -= 1;
@@ -785,31 +785,31 @@ impl<'a, T> ReferenceContainer<'a, T> {
 // 演示函数
 pub fn demonstrate_type_constructors() {
     println!("=== Type Constructors Demonstration ===\n");
-    
+
     // 基本泛型演示
     demonstrate_basic_generics();
-    
+
     // 容器演示
     demonstrate_containers();
-    
+
     // 算法演示
     demonstrate_algorithms();
-    
+
     // 处理器演示
     demonstrate_processors();
-    
+
     // 数据结构演示
     demonstrate_data_structures();
-    
+
     // 数学运算演示
     demonstrate_math_operations();
-    
+
     // 序列化演示
     demonstrate_serialization();
-    
+
     // 迭代器演示
     demonstrate_iterators();
-    
+
     // 生命周期演示
     demonstrate_lifetimes();
 }
@@ -817,10 +817,10 @@ pub fn demonstrate_type_constructors() {
 // 基本泛型演示
 fn demonstrate_basic_generics() {
     println!("--- Basic Generics Demo ---");
-    
+
     let pair1 = Pair::new(1, "hello");
     let pair2 = Pair::new(std::f64::consts::PI, true);
-    
+
     println!("Pair1: first={}, second={}", pair1.first(), pair1.second());
     println!("Pair2: first={}, second={}", pair2.first(), pair2.second());
     println!();
@@ -829,14 +829,14 @@ fn demonstrate_basic_generics() {
 // 容器演示
 fn demonstrate_containers() {
     println!("--- Container Demo ---");
-    
+
     let mut container: Container<i32> = Container::new(5);
-    
+
     for i in 1..=6 {
         let success = container.add(i);
         println!("Added {}: {}", i, success);
     }
-    
+
     println!("Container length: {}", container.len());
     println!("Is full: {}", container.is_full());
     println!();
@@ -845,17 +845,17 @@ fn demonstrate_containers() {
 // 算法演示
 fn demonstrate_algorithms() {
     println!("--- Algorithm Demo ---");
-    
+
     let numbers = vec![3, 1, 4, 1, 5, 9, 2, 6];
     let mut sorted_numbers = numbers.clone();
-    
+
     if let Some(max) = find_max(&numbers) {
         println!("Maximum value: {}", max);
     }
-    
+
     sort_items(&mut sorted_numbers);
     println!("Sorted numbers: {:?}", sorted_numbers);
-    
+
     let filtered = filter_items(&numbers, |&x| x > 5);
     println!("Numbers greater than 5: {:?}", filtered);
     println!();
@@ -864,18 +864,18 @@ fn demonstrate_algorithms() {
 // 处理器演示
 fn demonstrate_processors() {
     println!("--- Processor Demo ---");
-    
+
     let string_processor = StringProcessor;
     let number_processor = NumberProcessor;
-    
+
     let test_string = "hello world".to_string();
     let test_number = 42;
-    
+
     if string_processor.validate(&test_string) {
         let processed = string_processor.process(test_string);
         println!("Processed string: {}", processed);
     }
-    
+
     if number_processor.validate(&test_number) {
         let processed = number_processor.process(test_number);
         println!("Processed number: {}", processed);
@@ -886,24 +886,24 @@ fn demonstrate_processors() {
 // 数据结构演示
 fn demonstrate_data_structures() {
     println!("--- Data Structure Demo ---");
-    
+
     // Stack 演示
     let mut stack: Stack<i32> = Stack::new();
     for i in 1..=5 {
         stack.push(i);
     }
-    
+
     println!("Stack operations:");
     while let Some(item) = stack.pop() {
         println!("  Popped: {}", item);
     }
-    
+
     // Queue 演示
     let mut queue: Queue<String> = Queue::new();
     for word in ["hello", "world", "rust"].iter() {
         queue.enqueue(word.to_string());
     }
-    
+
     println!("Queue operations:");
     while let Some(item) = queue.dequeue() {
         println!("  Dequeued: {}", item);
@@ -914,19 +914,19 @@ fn demonstrate_data_structures() {
 // 数学运算演示
 fn demonstrate_math_operations() {
     println!("--- Math Operations Demo ---");
-    
+
     let a = 10;
     let b = 3;
-    
+
     println!("Operations with i32:");
     println!("  {} + {} = {:?}", a, b, calculate(&a, &b, '+'));
     println!("  {} - {} = {:?}", a, b, calculate(&a, &b, '-'));
     println!("  {} * {} = {:?}", a, b, calculate(&a, &b, '*'));
     println!("  {} / {} = {:?}", a, b, calculate(&a, &b, '/'));
-    
+
     let x = 10.5;
     let y = 2.0;
-    
+
     println!("Operations with f64:");
     println!("  {} + {} = {:?}", x, y, calculate(&x, &y, '+'));
     println!("  {} / {} = {:?}", x, y, calculate(&x, &y, '/'));
@@ -936,10 +936,10 @@ fn demonstrate_math_operations() {
 // 序列化演示
 fn demonstrate_serialization() {
     println!("--- Serialization Demo ---");
-    
+
     let container = DataContainer::new(42, "Important number".to_string());
     let serialized = container.serialize();
-    
+
     println!("Serialized data: {}", serialized);
     println!();
 }
@@ -947,9 +947,9 @@ fn demonstrate_serialization() {
 // 迭代器演示
 fn demonstrate_iterators() {
     println!("--- Iterator Demo ---");
-    
+
     let mut iterator = NumberIterator { current: 1, max: 5 };
-    
+
     println!("Number iterator:");
     while let Some(number) = iterator.next() {
         println!("  {}", number);
@@ -961,14 +961,14 @@ fn demonstrate_iterators() {
 // 生命周期演示
 fn demonstrate_lifetimes() {
     println!("--- Lifetime Demo ---");
-    
+
     let data = 42;
     let mut container = ReferenceContainer::new(&data);
-    
+
     println!("Reference count: {}", container.reference_count);
     container.increment_reference();
     println!("After increment: {}", container.reference_count);
-    
+
     let decremented = container.decrement_reference();
     println!("Decrement successful: {}", decremented);
     println!("Final count: {}", container.reference_count);
@@ -979,114 +979,114 @@ fn demonstrate_lifetimes() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_pair() {
         let pair = Pair::new(1, "hello");
         assert_eq!(*pair.first(), 1);
         assert_eq!(*pair.second(), "hello");
     }
-    
+
     #[test]
     fn test_container() {
         let mut container = Container::new(3);
-        
+
         assert!(container.add(1));
         assert!(container.add(2));
         assert!(container.add(3));
         assert!(!container.add(4)); // 超出容量
-        
+
         assert_eq!(container.len(), 3);
         assert!(container.is_full());
     }
-    
+
     #[test]
     fn test_find_max() {
         let numbers = vec![3, 1, 4, 1, 5];
         let max = find_max(&numbers);
         assert_eq!(max, Some(&5));
     }
-    
+
     #[test]
     fn test_sort_items() {
         let mut numbers = vec![3, 1, 4, 1, 5];
         sort_items(&mut numbers);
         assert_eq!(numbers, vec![1, 1, 3, 4, 5]);
     }
-    
+
     #[test]
     fn test_filter_items() {
         let numbers = vec![1, 2, 3, 4, 5];
         let filtered = filter_items(&numbers, |&x| x > 3);
         assert_eq!(filtered, vec![&4, &5]);
     }
-    
+
     #[test]
     fn test_stack() {
         let mut stack = Stack::new();
         stack.push(1);
         stack.push(2);
-        
+
         assert_eq!(stack.pop(), Some(2));
         assert_eq!(stack.pop(), Some(1));
         assert_eq!(stack.pop(), None);
     }
-    
+
     #[test]
     fn test_queue() {
         let mut queue = Queue::new();
         queue.enqueue("hello".to_string());
         queue.enqueue("world".to_string());
-        
+
         assert_eq!(queue.dequeue(), Some("hello".to_string()));
         assert_eq!(queue.dequeue(), Some("world".to_string()));
         assert_eq!(queue.dequeue(), None);
     }
-    
+
     #[test]
     fn test_numeric_i32() {
         let a = 10;
         let b = 3;
-        
+
         assert_eq!(a.add(&b), 13);
         assert_eq!(a.subtract(&b), 7);
         assert_eq!(a.multiply(&b), 30);
         assert_eq!(a.divide(&b), Some(3));
         assert_eq!(a.divide(&0), None);
     }
-    
+
     #[test]
     fn test_calculate() {
         let a = 10;
         let b = 3;
-        
+
         assert_eq!(calculate(&a, &b, '+'), Some(13));
         assert_eq!(calculate(&a, &b, '-'), Some(7));
         assert_eq!(calculate(&a, &b, '*'), Some(30));
         assert_eq!(calculate(&a, &b, '/'), Some(3));
         assert_eq!(calculate(&a, &b, '?'), None);
     }
-    
+
     #[test]
     fn test_number_iterator() {
         let mut iterator = NumberIterator { current: 1, max: 4 };
-        
+
         assert_eq!(iterator.next(), Some(1));
         assert_eq!(iterator.next(), Some(2));
         assert_eq!(iterator.next(), Some(3));
         assert_eq!(iterator.next(), None);
         assert_eq!(iterator.count(), 0);
     }
-    
+
     #[test]
     fn test_reference_container() {
         let data = 42;
         let mut container = ReferenceContainer::new(&data);
-        
+
         assert_eq!(container.reference_count, 1);
         container.increment_reference();
         assert_eq!(container.reference_count, 2);
-        
+
         assert!(container.decrement_reference());
         assert_eq!(container.reference_count, 1);
     }

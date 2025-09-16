@@ -37,17 +37,17 @@ impl Dataset {
             feature_names,
         }
     }
-    
+
     /// 添加数据点
     pub fn add_point(&mut self, features: Vec<f64>, label: Option<f64>) {
         self.data.push(DataPoint { features, label });
     }
-    
+
     /// 获取特征数量
     pub fn feature_count(&self) -> usize {
         self.feature_names.len()
     }
-    
+
     /// 获取数据点数量
     pub fn size(&self) -> usize {
         self.data.len()
@@ -71,7 +71,7 @@ impl LinearRegression {
             learning_rate,
         }
     }
-    
+
     /// 预测
     pub fn predict(&self, features: &[f64]) -> f64 {
         let mut prediction = self.bias;
@@ -80,7 +80,7 @@ impl LinearRegression {
         }
         prediction
     }
-    
+
     /// 训练模型
     pub fn train(&mut self, dataset: &Dataset, epochs: usize) {
         for _ in 0..epochs {
@@ -88,12 +88,12 @@ impl LinearRegression {
                 if let Some(label) = point.label {
                     let prediction = self.predict(&point.features);
                     let error = label - prediction;
-                    
+
                     // 更新权重
                     for (i, &feature) in point.features.iter().enumerate() {
                         self.weights[i] += self.learning_rate * error * feature;
                     }
-                    
+
                     // 更新偏置
                     self.bias += self.learning_rate * error;
                 }
@@ -117,15 +117,15 @@ impl KMeans {
             k,
         }
     }
-    
+
     /// 训练模型
     pub fn fit(&mut self, dataset: &Dataset) {
         if dataset.data.is_empty() {
             return;
         }
-        
+
         let feature_count = dataset.feature_count();
-        
+
         // 随机初始化质心
         self.centroids.clear();
         for _ in 0..self.k {
@@ -135,16 +135,16 @@ impl KMeans {
             }
             self.centroids.push(centroid);
         }
-        
+
         // 迭代优化
         for _ in 0..100 {
             let mut clusters: Vec<Vec<usize>> = vec![Vec::new(); self.k];
-            
+
             // 分配数据点到最近的质心
             for (i, point) in dataset.data.iter().enumerate() {
                 let mut min_distance = f64::INFINITY;
                 let mut closest_centroid = 0;
-                
+
                 for (j, centroid) in self.centroids.iter().enumerate() {
                     let distance = self.euclidean_distance(&point.features, centroid);
                     if distance < min_distance {
@@ -152,15 +152,16 @@ impl KMeans {
                         closest_centroid = j;
                     }
                 }
-                
+
                 clusters[closest_centroid].push(i);
             }
-            
+
             // 更新质心
             for (i, cluster) in clusters.iter().enumerate() {
                 if !cluster.is_empty() {
                     for j in 0..feature_count {
-                        let sum: f64 = cluster.iter()
+                        let sum: f64 = cluster
+                            .iter()
                             .map(|&idx| dataset.data[idx].features[j])
                             .sum();
                         self.centroids[i][j] = sum / cluster.len() as f64;
@@ -169,12 +170,12 @@ impl KMeans {
             }
         }
     }
-    
+
     /// 预测数据点属于哪个聚类
     pub fn predict(&self, features: &[f64]) -> usize {
         let mut min_distance = f64::INFINITY;
         let mut closest_centroid = 0;
-        
+
         for (i, centroid) in self.centroids.iter().enumerate() {
             let distance = self.euclidean_distance(features, centroid);
             if distance < min_distance {
@@ -182,13 +183,14 @@ impl KMeans {
                 closest_centroid = i;
             }
         }
-        
+
         closest_centroid
     }
-    
+
     /// 计算欧几里得距离
     fn euclidean_distance(&self, a: &[f64], b: &[f64]) -> f64 {
-        a.iter().zip(b.iter())
+        a.iter()
+            .zip(b.iter())
             .map(|(x, y)| (x - y).powi(2))
             .sum::<f64>()
             .sqrt()
@@ -205,7 +207,7 @@ impl MLTrainer {
     pub fn new(algorithm: MLAlgorithm) -> Self {
         Self { algorithm }
     }
-    
+
     /// 训练模型
     pub fn train(&self, dataset: &Dataset) -> String {
         match &self.algorithm {
@@ -227,31 +229,31 @@ impl MLTrainer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_dataset_creation() {
         let mut dataset = Dataset::new(vec!["feature1".to_string(), "feature2".to_string()]);
         dataset.add_point(vec![1.0, 2.0], Some(3.0));
         dataset.add_point(vec![2.0, 3.0], Some(5.0));
-        
+
         assert_eq!(dataset.size(), 2);
         assert_eq!(dataset.feature_count(), 2);
     }
-    
+
     #[test]
     fn test_linear_regression() {
         let mut dataset = Dataset::new(vec!["x".to_string()]);
         dataset.add_point(vec![1.0], Some(2.0));
         dataset.add_point(vec![2.0], Some(4.0));
         dataset.add_point(vec![3.0], Some(6.0));
-        
+
         let mut model = LinearRegression::new(1, 0.01);
         model.train(&dataset, 100);
-        
+
         let prediction = model.predict(&[4.0]);
         assert!(prediction > 7.0 && prediction < 9.0);
     }
-    
+
     #[test]
     fn test_kmeans() {
         let mut dataset = Dataset::new(vec!["x".to_string(), "y".to_string()]);
@@ -259,10 +261,10 @@ mod tests {
         dataset.add_point(vec![1.1, 1.1], None);
         dataset.add_point(vec![5.0, 5.0], None);
         dataset.add_point(vec![5.1, 5.1], None);
-        
+
         let mut model = KMeans::new(2);
         model.fit(&dataset);
-        
+
         let cluster = model.predict(&[1.0, 1.0]);
         assert!(cluster < 2);
     }

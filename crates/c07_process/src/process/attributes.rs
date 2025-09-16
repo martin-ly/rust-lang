@@ -1,5 +1,5 @@
-use crate::types::{ProcessConfig, ResourceLimits};
 use crate::error::ProcessResult;
+use crate::types::{ProcessConfig, ResourceLimits};
 use std::collections::HashMap;
 
 /// 进程属性管理器
@@ -14,20 +14,24 @@ impl ProcessAttributesManager {
             configs: HashMap::new(),
         }
     }
-    
+
     /// 设置进程配置
     pub fn set_config(&mut self, pid: u32, config: ProcessConfig) -> ProcessResult<()> {
         self.configs.insert(pid, config);
         Ok(())
     }
-    
+
     /// 获取进程配置
     pub fn get_config(&self, pid: u32) -> Option<&ProcessConfig> {
         self.configs.get(&pid)
     }
-    
+
     /// 更新资源限制
-    pub fn update_resource_limits(&mut self, pid: u32, limits: ResourceLimits) -> ProcessResult<()> {
+    pub fn update_resource_limits(
+        &mut self,
+        pid: u32,
+        limits: ResourceLimits,
+    ) -> ProcessResult<()> {
         if let Some(config) = self.configs.get_mut(&pid) {
             config.resource_limits = limits;
             Ok(())
@@ -35,7 +39,7 @@ impl ProcessAttributesManager {
             Err(crate::error::ProcessError::NotFound(pid))
         }
     }
-    
+
     /// 设置环境变量
     pub fn set_env_var(&mut self, pid: u32, key: String, value: String) -> ProcessResult<()> {
         if let Some(config) = self.configs.get_mut(&pid) {
@@ -45,7 +49,7 @@ impl ProcessAttributesManager {
             Err(crate::error::ProcessError::NotFound(pid))
         }
     }
-    
+
     /// 获取环境变量
     pub fn get_env_var(&self, pid: u32, key: &str) -> Option<&String> {
         self.configs.get(&pid)?.env.get(key)

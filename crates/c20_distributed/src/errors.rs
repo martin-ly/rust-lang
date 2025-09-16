@@ -11,4 +11,3 @@ pub enum DistributedError {
     #[error("storage error: {0}")]
     Storage(String),
 }
-

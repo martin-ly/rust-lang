@@ -19,4 +19,3 @@ mod raft_state_flow {
         assert_eq!(r.current_term().0, 1);
     }
 }
-

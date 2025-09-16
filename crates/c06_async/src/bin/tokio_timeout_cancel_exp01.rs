@@ -1,5 +1,5 @@
-use std::time::Duration;
 use futures::future::{AbortHandle, Abortable};
+use std::time::Duration;
 
 #[tokio::main(flavor = "multi_thread", worker_threads = 2)]
 async fn main() {
@@ -15,15 +15,16 @@ async fn main() {
 
     // 取消控制：使用 futures 的 AbortHandle/Abortable
     let (handle, reg) = AbortHandle::new_pair();
-    let task = Abortable::new(async {
-        tokio::time::sleep(Duration::from_secs(1)).await;
-        println!("long job done");
-    }, reg);
+    let task = Abortable::new(
+        async {
+            tokio::time::sleep(Duration::from_secs(1)).await;
+            println!("long job done");
+        },
+        reg,
+    );
     let h = tokio::spawn(task);
     tokio::time::sleep(Duration::from_millis(100)).await;
     handle.abort();
     let _ = h.await;
     println!("aborted");
 }
-
-

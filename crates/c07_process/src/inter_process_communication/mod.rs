@@ -1,5 +1,5 @@
+use crate::error::{IpcError, IpcResult};
 use crate::types::{IpcConfig, Message};
-use crate::error::{IpcResult, IpcError};
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 
@@ -7,16 +7,16 @@ use std::sync::{Arc, Mutex};
 pub trait IpcChannel: Send + Sync {
     /// 发送消息
     fn send_message(&self, msg: &Message<Vec<u8>>) -> IpcResult<()>;
-    
+
     /// 接收消息
     fn receive_message(&self) -> IpcResult<Message<Vec<u8>>>;
-    
+
     /// 获取通道名称
     fn name(&self) -> &str;
-    
+
     /// 检查通道是否已关闭
     fn is_closed(&self) -> bool;
-    
+
     /// 关闭通道
     fn close(&mut self) -> IpcResult<()>;
 }
@@ -100,7 +100,7 @@ impl IpcManager {
         channels.insert(name.to_string(), Box::new(queue));
         Ok(())
     }
-    
+
     /// 创建文件系统通道
     pub fn create_file_system_channel(&mut self, name: &str) -> IpcResult<()> {
         let fs = channel::FileSystemChannel::new(name, self.config.clone())?;
@@ -254,10 +254,8 @@ impl IpcConnector {
 }
 
 // 子模块声明
-pub mod pipe;
-pub mod socket;
-pub mod shared_memory;
-pub mod message_queue;
 pub mod channel;
-
-
+pub mod message_queue;
+pub mod pipe;
+pub mod shared_memory;
+pub mod socket;

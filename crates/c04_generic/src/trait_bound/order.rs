@@ -155,9 +155,9 @@ fn main() {
         Point { x: 2, y: 3 },
         Point { x: 1, y: 1 },
     ];
-    
+
     points.sort(); // 使用 Ord 进行排序
-    
+
     for point in points {
         println!("{:?}", point);
     }
@@ -171,11 +171,11 @@ use std::collections::BTreeSet;
 
 fn main() {
     let mut set: BTreeSet<Point> = BTreeSet::new();
-    
+
     set.insert(Point { x: 3, y: 1 });
     set.insert(Point { x: 1, y: 2 });
     set.insert(Point { x: 2, y: 3 });
-    
+
     // BTreeSet 会自动保持有序
     for point in &set {
         println!("{:?}", point);
@@ -196,11 +196,11 @@ fn find_max<T: Ord>(items: &[T]) -> Option<&T> {
 
 fn main() {
     let numbers = vec![3, 1, 4, 1, 5, 9, 2, 6];
-    
+
     if let Some(min) = find_min(&numbers) {
         println!("Minimum: {}", min);
     }
-    
+
     if let Some(max) = find_max(&numbers) {
         println!("Maximum: {}", max);
     }
@@ -299,13 +299,11 @@ pub struct OrdExample {
 
 impl PartialEq for OrdExample {
     fn eq(&self, other: &Self) -> bool {
-        self.name == other.name && 
-        self.value == other.value && 
-        self.priority == other.priority
+        self.name == other.name && self.value == other.value && self.priority == other.priority
     }
 }
 
-impl Eq for OrdExample { }
+impl Eq for OrdExample {}
 
 impl PartialOrd for OrdExample {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
@@ -316,7 +314,8 @@ impl PartialOrd for OrdExample {
 impl Ord for OrdExample {
     fn cmp(&self, other: &Self) -> Ordering {
         // 先按优先级排序，再按值排序，最后按名称排序
-        self.priority.cmp(&other.priority)
+        self.priority
+            .cmp(&other.priority)
             .then(self.value.cmp(&other.value))
             .then(self.name.cmp(&other.name))
     }
@@ -335,7 +334,7 @@ impl<T: Ord> PartialEq for OrdContainer<T> {
     }
 }
 
-impl<T: Ord> Eq for OrdContainer<T> { }
+impl<T: Ord> Eq for OrdContainer<T> {}
 
 impl<T: Ord> PartialOrd for OrdContainer<T> {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
@@ -346,32 +345,36 @@ impl<T: Ord> PartialOrd for OrdContainer<T> {
 impl<T: Ord> Ord for OrdContainer<T> {
     fn cmp(&self, other: &Self) -> Ordering {
         // 先比较值，再比较元数据
-        self.value.cmp(&other.value).then(self.metadata.cmp(&other.metadata))
+        self.value
+            .cmp(&other.value)
+            .then(self.metadata.cmp(&other.metadata))
     }
 }
 
 // 状态枚举
 #[derive(Debug)]
 pub enum OrdStatus {
-    Idle,      // 0
-    Active,    // 1
-    Working,   // 2
-    Complete,  // 3
-    Error,     // 4
+    Idle,     // 0
+    Active,   // 1
+    Working,  // 2
+    Complete, // 3
+    Error,    // 4
 }
 
 impl PartialEq for OrdStatus {
     fn eq(&self, other: &Self) -> bool {
-        matches!((self, other),
-            (OrdStatus::Idle, OrdStatus::Idle) |
-            (OrdStatus::Active, OrdStatus::Active) |
-            (OrdStatus::Working, OrdStatus::Working) |
-            (OrdStatus::Complete, OrdStatus::Complete) |
-            (OrdStatus::Error, OrdStatus::Error))
+        matches!(
+            (self, other),
+            (OrdStatus::Idle, OrdStatus::Idle)
+                | (OrdStatus::Active, OrdStatus::Active)
+                | (OrdStatus::Working, OrdStatus::Working)
+                | (OrdStatus::Complete, OrdStatus::Complete)
+                | (OrdStatus::Error, OrdStatus::Error)
+        )
     }
 }
 
-impl Eq for OrdStatus { }
+impl Eq for OrdStatus {}
 
 impl PartialOrd for OrdStatus {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
@@ -412,7 +415,7 @@ impl PartialEq for OrdPoint {
     }
 }
 
-impl Eq for OrdPoint { }
+impl Eq for OrdPoint {}
 
 impl PartialOrd for OrdPoint {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
@@ -433,44 +436,44 @@ pub fn demonstrate_ord() {
     let p1 = OrdPoint { x: 1, y: 2 };
     let p2 = OrdPoint { x: 1, y: 3 };
     let p3 = OrdPoint { x: 2, y: 1 };
-    
+
     println!("p1 < p2: {}", p1 < p2); // true
     println!("p1 < p3: {}", p1 < p3); // true
     println!("p2 < p3: {}", p2 < p3); // true
-    
+
     // 结构体比较
     let e1 = OrdExample {
         name: String::from("Alice"),
         value: 100,
         priority: 1,
     };
-    
+
     let e2 = OrdExample {
         name: String::from("Bob"),
         value: 100,
         priority: 2,
     };
-    
+
     let e3 = OrdExample {
         name: String::from("Charlie"),
         value: 200,
         priority: 1,
     };
-    
+
     println!("e1 < e2: {}", e1 < e2); // true (优先级不同)
     println!("e1 < e3: {}", e1 < e3); // true (优先级相同，值不同)
-    
+
     // 枚举比较
     let s1 = OrdStatus::Idle;
     let s2 = OrdStatus::Active;
     let s3 = OrdStatus::Complete;
-    
+
     println!("s1 < s2: {}", s1 < s2); // true
     println!("s2 < s3: {}", s2 < s3); // true
-    
+
     // 排序演示
     demonstrate_sorting();
-    
+
     // 集合操作演示
     demonstrate_collection_operations();
 }
@@ -484,13 +487,13 @@ fn demonstrate_sorting() {
         OrdPoint { x: 1, y: 1 },
         OrdPoint { x: 3, y: 3 },
     ];
-    
+
     println!("Before sorting: {:?}", points);
-    
+
     points.sort(); // 使用 Ord 进行排序
-    
+
     println!("After sorting: {:?}", points);
-    
+
     // 反向排序
     points.sort_by(|a, b| b.cmp(a));
     println!("After reverse sorting: {:?}", points);
@@ -499,14 +502,14 @@ fn demonstrate_sorting() {
 // 集合操作演示
 fn demonstrate_collection_operations() {
     use std::collections::BTreeSet;
-    
+
     let mut set: BTreeSet<OrdPoint> = BTreeSet::new();
-    
+
     set.insert(OrdPoint { x: 3, y: 1 });
     set.insert(OrdPoint { x: 1, y: 2 });
     set.insert(OrdPoint { x: 2, y: 3 });
     set.insert(OrdPoint { x: 1, y: 1 });
-    
+
     println!("BTreeSet (automatically sorted):");
     for point in &set {
         println!("  {:?}", point);
@@ -526,7 +529,7 @@ pub fn find_max<T: Ord>(items: &[T]) -> Option<&T> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_ord_example() {
         let e1 = OrdExample {
@@ -534,39 +537,39 @@ mod tests {
             value: 100,
             priority: 1,
         };
-        
+
         let e2 = OrdExample {
             name: String::from("Bob"),
             value: 100,
             priority: 2,
         };
-        
+
         assert!(e1 < e2); // 优先级不同
         assert!(e2 > e1);
     }
-    
+
     #[test]
     fn test_point_ord() {
         let p1 = OrdPoint { x: 1, y: 2 };
         let p2 = OrdPoint { x: 1, y: 3 };
         let p3 = OrdPoint { x: 2, y: 1 };
-        
+
         assert!(p1 < p2);
         assert!(p1 < p3);
         assert!(p2 < p3);
     }
-    
+
     #[test]
     fn test_status_ord() {
         let s1 = OrdStatus::Idle;
         let s2 = OrdStatus::Active;
         let s3 = OrdStatus::Complete;
-        
+
         assert!(s1 < s2);
         assert!(s2 < s3);
         assert!(s1 < s3); // 传递性
     }
-    
+
     #[test]
     fn test_sorting() {
         let mut points = vec![
@@ -574,18 +577,18 @@ mod tests {
             OrdPoint { x: 1, y: 2 },
             OrdPoint { x: 2, y: 3 },
         ];
-        
+
         points.sort();
-        
+
         assert_eq!(points[0], OrdPoint { x: 1, y: 2 });
         assert_eq!(points[1], OrdPoint { x: 2, y: 3 });
         assert_eq!(points[2], OrdPoint { x: 3, y: 1 });
     }
-    
+
     #[test]
     fn test_find_min_max() {
         let items = vec![3, 1, 4, 1, 5, 9, 2, 6];
-        
+
         assert_eq!(find_min(&items), Some(&1));
         assert_eq!(find_max(&items), Some(&9));
     }

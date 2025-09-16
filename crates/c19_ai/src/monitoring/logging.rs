@@ -1,5 +1,5 @@
 //! 日志记录
-//! 
+//!
 //! 提供 AI 系统的日志记录功能
 
 use serde::{Deserialize, Serialize};
@@ -35,7 +35,7 @@ impl AILogger {
             entries: Vec::new(),
         }
     }
-    
+
     pub fn log(&mut self, level: LogLevel, message: String, fields: HashMap<String, String>) {
         let entry = LogEntry {
             level,
@@ -48,7 +48,7 @@ impl AILogger {
         };
         self.entries.push(entry);
     }
-    
+
     pub fn get_entries(&self) -> &[LogEntry] {
         &self.entries
     }

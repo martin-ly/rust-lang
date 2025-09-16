@@ -1,11 +1,11 @@
 pub mod prelude {
+    pub use crate::database::sql::{SqlDatabase, SqlRow};
     pub use crate::kv::KeyValueStore;
     pub use crate::mq::mq::{MessageConsumer, MessageProducer};
-    pub use crate::database::sql::{SqlDatabase, SqlRow};
 }
 
-pub mod kv;
 pub mod config;
+pub mod kv;
 pub mod util;
 
 mod error;
@@ -14,13 +14,13 @@ pub use error::Error;
 // 数据库模块
 pub mod database {
     pub mod sql;
-    
+
     #[cfg(feature = "sql-postgres")]
     pub mod postgres_client;
-    
+
     #[cfg(feature = "sql-mysql")]
     pub mod mysql_client;
-    
+
     #[cfg(feature = "sql-sqlite")]
     pub mod sqlite_client;
 }
@@ -34,13 +34,13 @@ pub mod cache {
 // 消息队列模块
 pub mod mq {
     pub mod mq;
-    
+
     #[cfg(feature = "mq-nats")]
     pub mod nats_client;
-    
+
     #[cfg(feature = "mq-kafka")]
     pub mod kafka_client;
-    
+
     #[cfg(feature = "mq-mqtt")]
     pub mod mqtt_client;
 }
@@ -50,4 +50,3 @@ pub mod http {
     #[cfg(feature = "proxy-pingora")]
     pub mod pingora_proxy;
 }
-

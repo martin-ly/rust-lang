@@ -8,7 +8,10 @@ mod run {
         match monitor_tcp_once(iface, sec) {
             Ok(rep) => {
                 println!("duration: {:?}", rep.duration);
-                println!("total packets: {} bytes: {}", rep.total.packets, rep.total.bytes);
+                println!(
+                    "total packets: {} bytes: {}",
+                    rep.total.packets, rep.total.bytes
+                );
                 for (k, v) in rep.by_flow.iter().take(50) {
                     println!("{} -> packets: {} bytes: {}", k, v.packets, v.bytes);
                 }
@@ -20,7 +23,7 @@ mod run {
 
 #[cfg(not(feature = "sniff"))]
 fn main() {
-    eprintln!("This example requires feature 'sniff'.\nTry: cargo run -p c10_networks --features sniff --example tcp_monitor -- \"Ethernet\" 5");
+    eprintln!(
+        "This example requires feature 'sniff'.\nTry: cargo run -p c10_networks --features sniff --example tcp_monitor -- \"Ethernet\" 5"
+    );
 }
-
-
