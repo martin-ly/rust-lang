@@ -42,7 +42,7 @@ prost-types = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 serde_yaml = { workspace = true }
-toml = "0.8"
+toml = { workspace = true }
 
 # 数据库（可选，standalone 特性启用）- 更新到最新版本
 sqlx = { version = "0.8.0", features = ["runtime-tokio-rustls", "postgres", "mysql", "chrono", "uuid"], default-features = false, optional = true }

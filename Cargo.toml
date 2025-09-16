@@ -76,9 +76,9 @@ codegen-units = 1
 
 # 工作区级别的依赖版本统一 - 2025年最新稳定版本
 [workspace.dependencies]
-# 网络和 HTTP 相关 - 最新稳定版本
+# 网络和 HTTP 相关 - 2025年最新稳定版本
 reqwest = { version = "0.12.23", features = ["json", "rustls-tls"] }
-hyper = { version = "1.7", features = ["full"] }
+hyper = { version = "1.7.0", features = ["full"] }
 hyper-util = "0.1.17"
 hyper-rustls = "0.27.7"
 hyper-tls = "0.6.0"
@@ -114,10 +114,11 @@ webpki-roots = "1.0.2"
 thiserror = "2.0.16"
 anyhow = "1.0.99"
 
-# 序列化 - 最新稳定版本
+# 序列化 - 2025年最新稳定版本
 serde = { version = "1.0.224", features = ["derive"] }
 serde_json = "1.0.145"
 serde_yaml = "0.9.34"
+bincode = "1.3.3"
 
 # 异步运行时 - 最新稳定版本
 tokio = { version = "1.47.1", features = ["full"] }
@@ -136,17 +137,23 @@ log = "0.4.28"
 chrono = { version = "0.4.42", features = ["serde"] }
 time = { version = "0.3.43", features = ["serde", "macros"] }
 
-# 其他常用库 - 最新稳定版本
+# 其他常用库 - 2025年最新稳定版本
 uuid = { version = "1.18.1", features = ["v4", "serde"] }
 url = "2.5.7"
 bytes = "1.10.1"
 indexmap = "2.11.3"
+
+# 数据库和存储 - 2025年最新稳定版本
+sea-orm = { version = "1.1.16", features = ["sqlx-postgres", "runtime-tokio-rustls"] }
+redis = "0.32.5"
+rusqlite = "0.37.0"
 
 # 性能测试和基准测试
 criterion = "0.7"
 
 # 配置管理
 config = "0.15.16"
+toml = "0.9.6"
 
 # 并发和同步
 crossbeam = "0.8.4"
@@ -156,5 +163,16 @@ dashmap = "6.1.0"
 # 测试相关
 mockall = "0.13.1"
 proptest = "1.7"
+
+# AI 和机器学习 - 2025年最新稳定版本
+candle-core = "0.9.1"
+candle-nn = "0.9.1"
+candle-transformers = "0.9.1"
+tch = "0.20.0"
+
+# Web 和 GUI 框架 - 2025年最新稳定版本
+tauri = "2.8.5"
+egui = "0.32.3"
+iced = "0.13.1"
 
 # 依赖版本约束 - 在工作区依赖中统一版本 end

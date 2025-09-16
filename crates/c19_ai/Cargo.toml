@@ -27,21 +27,21 @@ num-traits = "0.2"
 num-complex = "0.4"
 approx = "0.5"
 
-# 机器学习核心库 - 使用可用版本
+# 机器学习核心库 - 2025年最新版本
 linfa = { version = "0.7", optional = true }
 smartcore = { version = "0.4", optional = true }
-candle-core = { version = "0.4", optional = true }
-candle-nn = { version = "0.4", optional = true }
-candle-transformers = { version = "0.4", optional = true }
-candle-datasets = { version = "0.4", optional = true }
+candle-core = { workspace = true, optional = true }
+candle-nn = { workspace = true, optional = true }
+candle-transformers = { workspace = true, optional = true }
+candle-datasets = { version = "0.9.1", optional = true }
 
-# 深度学习框架 - 使用可用版本
-tch = { version = "0.17.0", optional = true }
+# 深度学习框架 - 暂时禁用以避免版本冲突
+# tch = { workspace = true, optional = true }
 dfdx = { version = "0.13", optional = true }
 
 # 自然语言处理 - 使用可用版本
 tokenizers = { version = "0.20", optional = true }
-rust-bert = { version = "0.23.0", optional = true }
+rust-bert = { version = "0.22.0", optional = true }
 llm-chain = { version = "0.12", optional = true }
 llm-chain-openai = { version = "0.12", optional = true }
 llm-chain-llama = { version = "0.12", optional = true }
@@ -112,10 +112,10 @@ default = ["basic-ai"]
 basic-ai = ["dep:linfa", "dep:smartcore"]
 # 深度学习框架（均为可选且非默认启用）
 candle = ["dep:candle-core", "dep:candle-nn", "dep:candle-transformers", "dep:candle-datasets"]
-tch = ["dep:tch"]
+# tch = ["dep:tch"]  # 暂时禁用以避免版本冲突
 dfdx = ["dep:dfdx"]
 # GPU 支持
-gpu = ["candle", "tch"]
+gpu = ["candle"]  # 暂时移除 tch
 # 大语言模型
 llm = ["dep:llm-chain", "dep:llm-chain-openai", "dep:llm-chain-llama", "dep:llm-chain-local", "dep:llama-cpp-2"]
 # OpenAI 集成
@@ -130,8 +130,8 @@ data = ["dep:polars", "dep:datafusion", "dep:arrow"]
 search = ["dep:qdrant-client", "dep:tantivy", "dep:hnsw_rs"]
 # 模型管理与管道控制
 management = []
-# 强化学习
-reinforcement = ["dep:tch"]
+# 强化学习 - 使用基础依赖
+reinforcement = []
 # 图神经网络
 gnn = ["dep:petgraph"]
 # 时间序列
@@ -139,7 +139,7 @@ timeseries = ["dep:chrono"]
 # 监控和指标
 monitoring = ["dep:metrics", "dep:metrics-exporter-prometheus"]
 # 完整功能（注意：这会拉入多种后端及其系统依赖）
-full = ["candle", "tch", "llm", "vision", "nlp", "data", "search", "reinforcement", "gnn", "timeseries", "monitoring"]
+full = ["candle", "llm", "vision", "nlp", "data", "search", "gnn", "timeseries", "monitoring"]
 
 [[bench]]
 name = "neural_network_bench"

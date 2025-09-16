@@ -42,7 +42,7 @@ pub mod neural_networks;
 pub mod machine_learning;
 
 // 仅在启用任一深度学习后端时编译
-#[cfg(any(feature = "candle", feature = "tch", feature = "dfdx"))]
+#[cfg(any(feature = "candle", feature = "dfdx"))]
 pub mod deep_learning;
 
 // NLP 功能
@@ -74,7 +74,7 @@ pub mod pipelines;
 pub mod llm;
 
 // 扩散模型依赖深度学习
-#[cfg(any(feature = "candle", feature = "tch", feature = "dfdx"))]
+#[cfg(any(feature = "candle", feature = "dfdx"))]
 pub mod diffusion;
 
 // 强化学习
@@ -101,7 +101,7 @@ pub mod prelude {
         neural_networks::*, machine_learning::*,
     };
 
-    #[cfg(any(feature = "candle", feature = "tch", feature = "dfdx"))]
+    #[cfg(any(feature = "candle", feature = "dfdx"))]
     pub use crate::deep_learning::*;
 
     #[cfg(feature = "nlp")]
@@ -125,7 +125,7 @@ pub mod prelude {
     #[cfg(feature = "llm")]
     pub use crate::llm::*;
 
-    #[cfg(any(feature = "candle", feature = "tch", feature = "dfdx"))]
+    #[cfg(any(feature = "candle", feature = "dfdx"))]
     pub use crate::diffusion::*;
 
     #[cfg(feature = "reinforcement")]
