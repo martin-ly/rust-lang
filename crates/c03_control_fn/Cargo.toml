@@ -12,7 +12,7 @@ categories = ["development-tools", "system-programming"]
 
 [dependencies]
 # 异步运行时支持
-tokio = { version = ">=1.44.1", features = ["full"] }
+tokio = { workspace = true }
 # 异步流处理
 tokio-stream = ">=0.1.0"
 # Future工具
