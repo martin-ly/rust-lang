@@ -23,7 +23,7 @@ fastrace = { version = ">=0.7.0", features = ["enable"] }
 serde = { version = ">=1.0.0", features = ["derive"] }
 # 错误处理
 anyhow = ">=1.0.0"
-thiserror = ">=1.0.0"
+thiserror = { workspace = true }
 # 日志支持
 tracing = ">=0.1.0"
 tracing-subscriber = ">=0.3.0"

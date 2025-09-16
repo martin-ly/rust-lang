@@ -31,7 +31,7 @@ shared_memory = "0.12"
 signal-hook = "0.3"
 
 # 错误处理
-thiserror = "1.0"
+thiserror = { workspace = true }
 anyhow = "1.0"
 
 # 日志记录
