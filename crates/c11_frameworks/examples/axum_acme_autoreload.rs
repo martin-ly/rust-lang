@@ -141,9 +141,9 @@ fn pem_to_key(pem: &[u8]) -> anyhow::Result<PrivateKeyDer<'static>> {
 }
 
 fn self_signed_cert() -> anyhow::Result<(&'static [u8], &'static [u8])> {
-    let cert = rcgen::generate_simple_self_signed(["localhost".to_string()])?;
-    let cert_pem = cert.serialize_pem()?.into_bytes();
-    let key_pem = cert.serialize_private_key_pem().into_bytes();
+    let rcgen::CertifiedKey { cert, signing_key } = rcgen::generate_simple_self_signed(["localhost".to_string()])?;
+    let cert_pem = cert.pem().into_bytes();
+    let key_pem = signing_key.serialize_pem().into_bytes();
     // 将 Vec 泄漏为 'static 以简化示例生命周期
     let cert_pem_static: &'static [u8] = Box::leak(cert_pem.into_boxed_slice());
     let key_pem_static: &'static [u8] = Box::leak(key_pem.into_boxed_slice());

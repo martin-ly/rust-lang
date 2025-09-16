@@ -45,7 +45,7 @@ serde_yaml = { workspace = true }
 toml = "0.8"
 
 # 数据库（可选，standalone 特性启用）- 更新到最新版本
-sqlx = { version = "0.8", features = ["runtime-tokio-rustls", "postgres", "mysql", "chrono", "uuid"], default-features = false, optional = true }
+sqlx = { version = "0.8.0", features = ["runtime-tokio-rustls", "postgres", "mysql", "chrono", "uuid"], default-features = false, optional = true }
 diesel = { version = "2.1", features = ["postgres", "mysql", "chrono", "uuid"], optional = true }
 
 # 配置管理 - 使用工作区统一版本
@@ -67,7 +67,7 @@ metrics = "0.24"
 metrics-exporter-prometheus = "0.17"
 
 # 消息队列（可选，standalone/with-redis/with-rabbitmq 启用）- 更新到最新版本
-redis = { version = "0.32", features = ["tokio-comp", "connection-manager"], optional = true }
+redis = { version = "0.32.5", features = ["tokio-comp", "connection-manager"], optional = true }
 lapin = { version = "2.5", optional = true }
 
 # 认证和授权 - 更新到最新版本

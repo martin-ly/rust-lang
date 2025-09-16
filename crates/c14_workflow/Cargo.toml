@@ -47,7 +47,7 @@ tower-http = { version = "0.5", features = ["cors", "trace"] }
 
 # 数据库支持 / Database Support (可选特性)
 # sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres", "chrono", "uuid"], default-features = false, optional = true }
-redis = { version = "0.24", features = ["tokio-comp", "connection-manager"], optional = true }
+redis = { version = "0.32.5", features = ["tokio-comp", "connection-manager"], optional = true }
 
 # 监控和日志 / Monitoring and Logging
 tracing = { workspace = true }
