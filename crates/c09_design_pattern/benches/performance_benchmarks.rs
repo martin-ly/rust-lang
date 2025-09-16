@@ -3,7 +3,8 @@
 /// 使用Criterion框架进行设计模式的性能基准测试
 /// 测试各种模式在不同场景下的性能表现
 
-use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
+use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId};
+use std::hint::black_box;
 use c09_design_pattern::creational::singleton::define::Singleton;
 use c09_design_pattern::structural::flyweight::define::OptimizedFlyweightFactory;
 use c09_design_pattern::structural::proxy::define::{RealSubject, Proxy, VirtualProxy, Subject};

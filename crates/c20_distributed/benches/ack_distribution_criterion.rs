@@ -1,4 +1,5 @@
-use criterion::{criterion_group, criterion_main, Criterion, black_box};
+use criterion::{criterion_group, criterion_main, Criterion};
+use std::hint::black_box;
 use c20_distributed::replication::MajorityQuorum;
 use c20_distributed::replication::QuorumPolicy;
 use c20_distributed::consistency::ConsistencyLevel;
