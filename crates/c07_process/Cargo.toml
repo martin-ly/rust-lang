@@ -16,8 +16,8 @@ tokio = { workspace = true, optional = true }
 tokio-util = { version = "0.7", optional = true }
 
 # 序列化支持
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
+serde = { workspace = true }
+serde_json = { workspace = true }
 
 # 系统调用和平台特定功能
 nix = { version = "0.27", features = ["process", "user", "signal"], optional = true }
@@ -32,7 +32,7 @@ signal-hook = "0.3"
 
 # 错误处理
 thiserror = { workspace = true }
-anyhow = "1.0"
+anyhow = { workspace = true }
 
 # 日志记录
 tracing = "0.1"

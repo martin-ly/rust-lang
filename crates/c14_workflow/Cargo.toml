@@ -13,14 +13,14 @@ rust-version = "1.89"
 
 [dependencies]
 # 核心依赖 / Core Dependencies
-serde = { version = "1.0", features = ["derive", "rc"] }
-serde_json = "1.0"
+serde = { workspace = true }
+serde_json = { workspace = true }
 thiserror = { workspace = true }
-anyhow = "1.0"
+anyhow = { workspace = true }
 
 # 异步运行时 / Async Runtime
 tokio = { workspace = true }
-futures = "0.3"
+futures = { workspace = true }
 async-trait = "0.1"
 
 # 并发和同步 / Concurrency and Synchronization

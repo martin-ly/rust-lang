@@ -21,7 +21,7 @@ rusqlite = { version = "0.32", optional = true, features = ["bundled"] }
 
 # Message Queues / Streams
 async-nats = { version = "0.35", optional = true }
-futures-util = { version = "0.3", optional = true }
+futures-util = { workspace = true, optional = true }
 rdkafka = { version = "0.36", optional = true, default-features = false, features = ["cmake-build"] }
 rumqttc = { version = "0.24", optional = true }
 

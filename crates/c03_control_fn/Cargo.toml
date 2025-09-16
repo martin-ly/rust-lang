@@ -16,13 +16,13 @@ tokio = { workspace = true }
 # 异步流处理
 tokio-stream = ">=0.1.0"
 # Future工具
-futures = { version = ">=0.3.0", optional = true }
+futures = { workspace = true, optional = true }
 # 性能测试
 fastrace = { version = ">=0.7.0", features = ["enable"] }
 # 序列化支持
-serde = { version = ">=1.0.0", features = ["derive"] }
+serde = { workspace = true }
 # 错误处理
-anyhow = ">=1.0.0"
+anyhow = { workspace = true }
 thiserror = { workspace = true }
 # 日志支持
 tracing = ">=0.1.0"
