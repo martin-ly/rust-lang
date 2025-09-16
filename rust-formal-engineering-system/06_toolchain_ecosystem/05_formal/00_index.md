@@ -37,3 +37,11 @@ cargo prusti --help
 
 - 返回工具链：[`../00_index.md`](../00_index.md)
 - 质量保障：[`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)
+
+---
+
+别名与规范说明：
+
+- 本页为形式化工具专题页，编号为 `05_formal`。与“05_code_analysis”编号冲突已通过规范入口化处理：
+  - 代码分析规范入口：[`../05_code_analysis/00_index.md`](../05_code_analysis/00_index.md)
+  - 形式化工具亦在质量保障综述中：[`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)

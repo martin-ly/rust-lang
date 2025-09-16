@@ -32,3 +32,11 @@ cargo +nightly miri test -p c05_threads
 
 - 返回工具链：[`../00_index.md`](../00_index.md)
 - 质量保障：[`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)
+
+---
+
+别名与规范说明：
+
+- 本页为 Miri 专题页，编号为 `03_miri`。与“03_build_tools”编号冲突已通过规范入口化处理：
+  - 构建工具规范入口：[`../03_build_tools/00_index.md`](../03_build_tools/00_index.md)
+  - Miri 在代码分析/运行时检查的综述入口：[`../05_code_analysis/00_index.md`](../05_code_analysis/00_index.md)

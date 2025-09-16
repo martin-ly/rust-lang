@@ -46,7 +46,7 @@
 
 - 文档：直接浏览各目录下的 `*.md`。
 - 代码：配套示例位于仓库 `crates/` 与 `formal_rust/`、`rust-formal-engineering-system` 相关子目录。
-- 建议使用 `just` 或 `cargo` 脚本执行示例（根目录含 `justfile`）。
+- 建议统一使用 `cargo` 命令执行示例（本仓库不再依赖 `justfile`）。
 
 ## 运行指南
 

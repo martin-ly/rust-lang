@@ -6,7 +6,7 @@
 
 ## 工具速览
 
-- 构建与脚本：`cargo`、`just`、工作区管理
+- 构建与脚本：`cargo`、工作区管理
 - 代码质量：`clippy`、`cargo udeps`、格式化
 - 运行时检查：`miri`、`asan/tsan/lsan`
 - 模糊测试：`cargo-fuzz`、AFL++

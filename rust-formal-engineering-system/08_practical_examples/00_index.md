@@ -32,7 +32,7 @@
 
 - Windows PowerShell 脚本：在相应 crate 的 `scripts/*.ps1` 目录（如 `c10_networks/scripts/`）
 - Bash 脚本：`scripts/*.sh`（如 `c03_control_fn/build.sh`、`c04_generic/build.sh`）
-- 可选使用 `just`：根目录 `justfile` 提供统一别名（如 `just dns-all`）
+- 统一使用 `cargo` 与脚本目录，不再依赖根目录 `justfile`
 
 ## 相关索引
 

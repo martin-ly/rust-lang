@@ -42,3 +42,11 @@ brew install afl-fuzz
 
 - 返回工具链：[`../00_index.md`](../00_index.md)
 - 质量保障：[`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)
+
+---
+
+别名与规范说明：
+
+- 本页为 Fuzz 专题页，编号为 `04_fuzz`。与“04_testing_frameworks”编号冲突已通过规范入口化处理：
+  - 测试框架规范入口：[`../04_testing_frameworks/00_index.md`](../04_testing_frameworks/00_index.md)
+  - Fuzz 作为质量保障的补充手段，相关综述也可在：[`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)

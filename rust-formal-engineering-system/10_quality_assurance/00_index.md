@@ -37,6 +37,16 @@
 - Kani：`cargo kani`
 - Prusti：参见官方文档与 `cargo prusti`
 
+## 规范入口（工具链映射）
+
+- 包管理：[`../06_toolchain_ecosystem/02_package_manager/00_index.md`](../06_toolchain_ecosystem/02_package_manager/00_index.md)
+- 构建工具：[`../06_toolchain_ecosystem/03_build_tools/00_index.md`](../06_toolchain_ecosystem/03_build_tools/00_index.md)
+- 测试框架：[`../06_toolchain_ecosystem/04_testing_frameworks/00_index.md`](../06_toolchain_ecosystem/04_testing_frameworks/00_index.md)
+- 代码分析：[`../06_toolchain_ecosystem/05_code_analysis/00_index.md`](../06_toolchain_ecosystem/05_code_analysis/00_index.md)
+- 运行时检查（Miri）：[`../06_toolchain_ecosystem/03_miri/00_index.md`](../06_toolchain_ecosystem/03_miri/00_index.md)
+- 模糊测试：[`../06_toolchain_ecosystem/04_fuzz/00_index.md`](../06_toolchain_ecosystem/04_fuzz/00_index.md)
+- 形式化工具：[`../06_toolchain_ecosystem/05_formal/00_index.md`](../06_toolchain_ecosystem/05_formal/00_index.md)
+
 ## 导航
 
 - 返回根：[`rust-formal-engineering-system/README.md`](../README.md)
