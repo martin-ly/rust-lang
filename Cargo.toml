@@ -147,9 +147,10 @@ bytes = "1.10.1"
 indexmap = "2.11.3"
 
 # 数据库和存储 - 2025年最新稳定版本
-sea-orm = { version = "1.1.16", features = ["sqlx-postgres", "runtime-tokio-rustls"] }
+sea-orm = { version = "1.1.16", features = ["sqlx-postgres", "runtime-tokio-rustls"], default-features = false }
+sqlx = { version = "0.8.6", features = ["runtime-tokio-rustls", "postgres", "mysql", "sqlite", "chrono", "uuid"], default-features = false }
 redis = "0.32.5"
-rusqlite = "0.37.0"
+rusqlite = { version = "0.37.0", default-features = false }
 
 # 性能测试和基准测试
 criterion = "0.7"

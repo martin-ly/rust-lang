@@ -15,11 +15,10 @@ categories = ["web-programming", "network-programming"]
 default = []
 with-redis = ["dep:redis"]
 with-rabbitmq = ["dep:lapin"]
-with-sqlx = ["dep:sqlx"]
 with-diesel = ["dep:diesel"]
 grpc-generated = []
 # 一键启用"独立构建"所需的重依赖
-standalone = ["with-redis", "with-rabbitmq", "with-sqlx", "with-diesel"]
+standalone = ["with-redis", "with-rabbitmq", "with-diesel"]
 
 [dependencies]
 # 异步运行时
@@ -44,8 +43,7 @@ serde_json = { workspace = true }
 serde_yaml = { workspace = true }
 toml = { workspace = true }
 
-# 数据库（可选，standalone 特性启用）- 更新到最新版本
-sqlx = { version = "0.8.0", features = ["runtime-tokio-rustls", "postgres", "mysql", "chrono", "uuid"], default-features = false, optional = true }
+# 数据库（可选，standalone 特性启用）- 使用工作区统一版本
 diesel = { version = "2.1", features = ["postgres", "mysql", "chrono", "uuid"], optional = true }
 
 # 配置管理 - 使用工作区统一版本

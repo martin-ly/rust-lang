@@ -42,7 +42,7 @@ num-traits = "0.2"
 num-derive = "0.3"
 
 # 统计计算
-statrs = "0.16"
+statrs = "0.18"
 
 # 数学函数
 libm = "0.2"
@@ -95,7 +95,7 @@ version = "2"
 optional = true
 
 [dependencies.tower]
-version = "0.4"
+version = "0.5"
 features = ["limit", "timeout", "retry", "util"]
 optional = true
 
