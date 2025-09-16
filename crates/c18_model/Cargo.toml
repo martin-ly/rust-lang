@@ -24,10 +24,10 @@ thiserror = { workspace = true }
 # 已裁剪：异步运行时
 
 # UUID生成
-uuid = { version = "1.0", features = ["v4"] }
+uuid = { workspace = true }
 
 # 时间处理
-chrono = { version = "0.4", features = ["serde"] }
+chrono = { workspace = true }
 
 # 随机数生成
 fastrand = "2.0"

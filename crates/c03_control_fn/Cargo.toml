@@ -25,8 +25,8 @@ serde = { workspace = true }
 anyhow = { workspace = true }
 thiserror = { workspace = true }
 # 日志支持
-tracing = ">=0.1.0"
-tracing-subscriber = ">=0.3.0"
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
 # 测试工具
 criterion = { version = "0.5", optional = true }
 proptest = { version = ">=1.0.0", optional = true }
