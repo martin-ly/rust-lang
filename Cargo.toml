@@ -86,7 +86,7 @@ hyper-timeout = "0.5"
 h2 = "0.4"
 
 # Web 框架 - 最新稳定版本
-axum = { version = "0.8", features = ["macros", "multipart", "tracing"] }
+axum = { version = "0.8.4", features = ["macros", "multipart", "tracing"] }
 axum-core = "0.5"
 tower = "0.5"
 tower-http = { version = "0.6", features = ["cors", "trace", "timeout", "compression-gzip"] }
@@ -97,10 +97,10 @@ crossterm = "0.29"
 # gRPC 相关 - 最新稳定版本
 tonic = { version = "0.12", features = ["tls", "tls-roots"] }
 tonic-build = "0.12"
-prost = "0.13"
-prost-build = "0.13"
-prost-derive = "0.13"
-prost-types = "0.13"
+prost = "0.13.5"
+prost-build = "0.13.5"
+prost-derive = "0.13.5"
+prost-types = "0.13.5"
 
 # TLS 和加密 - 最新稳定版本
 rustls = { version = "0.23", features = ["ring"] }
@@ -111,16 +111,16 @@ ring = "0.17"
 webpki-roots = "1.0"
 
 # 错误处理 - 最新稳定版本
-thiserror = "2.0"
-anyhow = "1.0"
+thiserror = "2.0.16"
+anyhow = "1.0.99"
 
 # 序列化 - 最新稳定版本
-serde = { version = "1.0", features = ["derive"] }
+serde = { version = "1.0.224", features = ["derive"] }
 serde_json = "1.0"
 serde_yaml = "0.9"
 
 # 异步运行时 - 最新稳定版本
-tokio = { version = "1.47", features = ["full"] }
+tokio = { version = "1.47.1", features = ["full"] }
 tokio-util = "0.7"
 tokio-stream = "0.1"
 tokio-tungstenite = "0.27"
@@ -128,16 +128,16 @@ futures = "0.3"
 futures-util = "0.3"
 
 # 日志和追踪 - 最新稳定版本
-tracing = "0.1"
+tracing = "0.1.41"
 tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
 log = "0.4"
 
 # 时间处理 - 最新稳定版本
-chrono = { version = "0.4", features = ["serde"] }
+chrono = { version = "0.4.42", features = ["serde"] }
 time = { version = "0.3", features = ["serde", "macros"] }
 
 # 其他常用库 - 最新稳定版本
-uuid = { version = "1.18", features = ["v4", "serde"] }
+uuid = { version = "1.18.1", features = ["v4", "serde"] }
 url = "2.5"
 bytes = "1.10"
 indexmap = "2.11"
@@ -146,15 +146,15 @@ indexmap = "2.11"
 criterion = "0.7"
 
 # 配置管理
-config = "0.15"
+config = "0.15.16"
 
 # 并发和同步
-crossbeam = "0.8"
-rayon = "1.11"
+crossbeam = "0.8.4"
+rayon = "1.11.0"
 dashmap = "6.1"
 
 # 测试相关
-mockall = "0.13"
+mockall = "0.13.1"
 proptest = "1.7"
 
 # 依赖版本约束 - 在工作区依赖中统一版本 end
