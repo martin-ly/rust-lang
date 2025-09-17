@@ -1,7 +1,5 @@
-use tonic::{Request, Response, Status, transport::Server};
-
-// 包含生成的protobuf代码
-include!(concat!(env!("OUT_DIR"), "/hello.rs"));
+use tonic::{Request, Response, Status};
+use c10_networks::hello::{HelloRequest, HelloReply};
 
 // 手动定义gRPC服务trait
 #[tonic::async_trait]
@@ -13,6 +11,7 @@ pub trait Greeter: Send + Sync + 'static {
 }
 
 // 简化的gRPC服务器实现
+#[allow(dead_code)]
 pub struct GreeterServer<T: Greeter> {
     inner: T,
 }
@@ -24,6 +23,7 @@ impl<T: Greeter> GreeterServer<T> {
 }
 
 #[derive(Default, Clone)]
+#[allow(dead_code)]
 struct MyGreeter;
 
 #[tonic::async_trait]
@@ -44,31 +44,47 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let greeter = MyGreeter::default();
     
     // 创建一个简单的HTTP服务器来演示protobuf消息的使用
-    let addr = "127.0.0.1:8080".parse()?;
+    let addr: std::net::SocketAddr = "127.0.0.1:8080".parse()?;
     println!("HTTP Greeter server listening on {}", addr);
     
     // 使用axum创建一个简单的HTTP服务器
     use axum::{
-        extract::Query,
+        extract::{Query, State},
         response::Json,
         routing::get,
         Router,
     };
     use serde::Deserialize;
-    use std::collections::HashMap;
+    use serde_json::json;
     
     #[derive(Deserialize)]
     struct Params {
         name: Option<String>,
     }
     
-    async fn hello_handler(Query(params): Query<Params>) -> Json<HelloReply> {
-        let name = params.name.unwrap_or_else(|| "World".to_string());
-        let reply = greeter.say_hello(Request::new(HelloRequest { name })).await.unwrap();
-        Json(reply.into_inner())
+    #[derive(Clone)]
+    struct AppState {
+        greeter: MyGreeter,
     }
-    
-    let app = Router::new().route("/hello", get(hello_handler));
+
+    async fn hello_handler(
+        State(state): State<AppState>,
+        Query(params): Query<Params>,
+    ) -> Json<serde_json::Value> {
+        let name = params.name.unwrap_or_else(|| "World".to_string());
+        let reply = state
+            .greeter
+            .say_hello(Request::new(HelloRequest { name }))
+            .await
+            .unwrap()
+            .into_inner();
+        // 避免直接对 prost 生成的类型做 Json 序列化（其未实现 Serialize）
+        Json(json!({ "message": reply.message }))
+    }
+
+    let app = Router::new()
+        .route("/hello", get(hello_handler))
+        .with_state(AppState { greeter });
     
     let listener = tokio::net::TcpListener::bind(addr).await?;
     axum::serve(listener, app).await?;

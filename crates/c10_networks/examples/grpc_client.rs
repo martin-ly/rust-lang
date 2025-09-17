@@ -1,9 +1,5 @@
-use hello::HelloRequest;
-use hello::greeter_client::GreeterClient;
-
-pub mod hello {
-    tonic::include_proto!("hello");
-}
+use c10_networks::hello::HelloRequest;
+use c10_networks::hello::greeter_client::GreeterClient;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {

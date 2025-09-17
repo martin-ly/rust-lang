@@ -44,3 +44,8 @@ pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 /// 库名称
 pub const NAME: &str = env!("CARGO_PKG_NAME");
+
+// 导出由 tonic-build 生成的 protobuf/gRPC 模块
+pub mod hello {
+    tonic::include_proto!("hello");
+}

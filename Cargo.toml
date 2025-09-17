@@ -159,9 +159,9 @@ prometheus = "0.14"
 tracing-opentelemetry = "0.30"
 opentelemetry = "0.30.0"
 opentelemetry_sdk = { version = "0.30.0", features = ["rt-tokio"] }
-opentelemetry-otlp = { version = "0.30.0", features = ["http-json", "grpc-tonic"] }
+opentelemetry-otlp = { version = "0.30.0", features = ["http-json"] }
 opentelemetry-stdout = "0.30.0"
-opentelemetry-proto = "0.30.0"
+opentelemetry-proto = { version = "0.30.0", features = ["gen-tonic"] }
 
 # 指标 - 统一版本
 metrics = "0.24"
