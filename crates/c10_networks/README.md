@@ -1,10 +1,48 @@
 # C10 Networks - Rust 1.89 网络编程库
 
-> 导航：返回 [`rust-formal-engineering-system`](../../rust-formal-engineering-system/README.md) · 质量保障 [`10_quality_assurance/00_index.md`](../../rust-formal-engineering-system/10_quality_assurance/00_index.md) · 异步范式 [`02_async/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/02_async/00_index.md) · 同步范式 [`01_synchronous/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/01_synchronous/00_index.md)
+> 导航：返回 [`rust-formal-engineering-system`](../../rust-formal-engineering-system/README.md) · 质量保障 [`10_quality_assurance/00_index.md`](../../rust-formal-engineering-system/10_quality_assurance/00_index.md) · 异步范式 [`02_async/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/02_async/00_index.md) · 同步范式 [`01_synchronous/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/01_synchronous/00_index.md) · 响应式 [`07_reactive/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/07_reactive/00_index.md) · 事件驱动 [`08_event_driven/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/08_event_driven/00_index.md) · Actor [`09_actor_model/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/09_actor_model/00_index.md) · 基准指南 [`11_benchmark_minimal_guide.md`](../../rust-formal-engineering-system/02_programming_paradigms/11_benchmark_minimal_guide.md)
 
 [![Rust](https://img.shields.io/badge/rust-1.89+-orange.svg)](https://www.rust-lang.org/)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](../../LICENSE)
 [![Crates.io](https://img.shields.io/crates/v/c10_networks.svg)](https://crates.io/crates/c10_networks)
+
+> 适用范围：Rust 1.89+ · Tokio 1.35+。文档风格遵循 `docs/STYLE.md`。
+
+## 目录
+
+- [C10 Networks - Rust 1.89 网络编程库](#c10-networks---rust-189-网络编程库)
+  - [目录](#目录)
+  - [概述](#概述)
+  - [🚀 特性](#-特性)
+  - [📦 安装](#-安装)
+  - [📡 抓包与流量分析（libpnet 实战）](#-抓包与流量分析libpnet-实战)
+    - [Windows 运行前置](#windows-运行前置)
+    - [构建与示例](#构建与示例)
+    - [编程接口（精简）](#编程接口精简)
+  - [🎯 快速开始](#-快速开始)
+    - [HTTP 客户端示例](#http-客户端示例)
+    - [错误处理示例](#错误处理示例)
+    - [异步网络服务器示例](#异步网络服务器示例)
+  - [📚 模块结构](#-模块结构)
+  - [🔎 DNS（基于 Hickory-DNS）](#-dns基于-hickory-dns)
+    - [一体化示例与脚本](#一体化示例与脚本)
+  - [🔧 Rust 1.89 新特性应用](#-rust-189-新特性应用)
+  - [🌐 P2P 最小示例（基于 libp2p）](#-p2p-最小示例基于-libp2p)
+    - [生命周期语法检查](#生命周期语法检查)
+    - [常量泛型推断](#常量泛型推断)
+    - [Result::flatten 方法](#resultflatten-方法)
+  - [🧪 测试](#-测试)
+  - [🧩 统一 API 示例](#-统一-api-示例)
+  - [🛠️ 网络诊断快速使用](#️-网络诊断快速使用)
+  - [🔁 带重试的统一 API](#-带重试的统一-api)
+  - [📊 性能特性](#-性能特性)
+    - [基准与指南](#基准与指南)
+  - [🔒 安全特性](#-安全特性)
+  - [📈 监控和诊断](#-监控和诊断)
+  - [🤝 贡献](#-贡献)
+  - [📄 许可证](#-许可证)
+  - [🔗 相关链接](#-相关链接)
+  - [📞 支持](#-支持)
 
 ## 概述
 
@@ -400,6 +438,13 @@ async fn main() -> c10_networks::NetworkResult<()> {
 - **内存优化**: 智能缓冲区管理
 - **并发处理**: 支持高并发网络连接
 
+### 基准与指南
+
+- 最小基准指南：[`rust-formal-engineering-system/02_programming_paradigms/11_benchmark_minimal_guide.md`](../../rust-formal-engineering-system/02_programming_paradigms/11_benchmark_minimal_guide.md)
+- 异步基准：参见 `crates/c06_async/benches/`
+- 同步/并行基准（通道/背压对照）：参见 `crates/c05_threads/benches/`
+- 网络最小基准（本仓库）：[`docs/benchmark_minimal_guide.md`](docs/benchmark_minimal_guide.md)
+
 ## 🔒 安全特性
 
 - **TLS/SSL 支持**: 基于 `rustls` 的安全通信
@@ -417,11 +462,11 @@ async fn main() -> c10_networks::NetworkResult<()> {
 
 ## 🤝 贡献
 
-欢迎贡献代码！请查看 [CONTRIBUTING.md](CONTRIBUTING.md) 了解贡献指南。
+欢迎贡献代码！请查看 [CONTRIBUTING.md](../../rust-formal-engineering-system/CONTRIBUTING.md) 了解贡献指南。
 
 ## 📄 许可证
 
-本项目采用 MIT 许可证。详情请查看 [LICENSE](LICENSE) 文件。
+本项目采用 MIT 许可证。详情请查看 [LICENSE](../../LICENSE) 文件。
 
 ## 🔗 相关链接
 

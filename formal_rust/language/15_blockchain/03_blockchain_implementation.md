@@ -36,6 +36,9 @@
   - [10. 思维导图](#10-思维导图)
   - [批判性分析](#批判性分析)
   - [典型案例](#典型案例)
+    - [与 Rust 的语义映射（补充）](#与-rust-的语义映射补充)
+    - [练习与思考](#练习与思考)
+    - [快速导航](#快速导航)
 
 ---
 
@@ -498,6 +501,25 @@ fn verify_transaction_signature(tx: &Transaction, signature: &Signature, verifyi
 - Parity（Polkadot）底层协议全部采用 Rust 实现。
 - Solana 区块链的高性能智能合约虚拟机基于 Rust 开发。
 
-"
+### 与 Rust 的语义映射（补充）
+
+- 状态机复制 ↔ `trait StateMachine { fn apply(&mut self, cmd) -> Result<()> }`
+- 区块/交易 ↔ `struct Block`, `struct Transaction`，统一序列化格式保证哈希一致
+- 验证与共识 ↔ `async` 通信、`mpsc` 消息、`tokio::time::timeout` 超时
+- Merkle 与签名 ↔ `sha2`/`blake3`、`ed25519-dalek`/`k256`
+
+### 练习与思考
+
+1. 基于本文形式化定义，实现最小 UTXO/Account 模型各一套，并用属性测试验证交易有效性与不变量。
+2. 为 `isValidBlock` 补充 PoW/PoS 两套校验路径，比较验证复杂度与吞吐影响。
+3. 编写链重组（reorg）原型：在模拟分叉和网络延迟下，验证最终选择规则对一致性与活性的影响。
+
+### 快速导航
+
+- 区块链理论：`01_blockchain_theory.md`
+- 密码学系统：`02_cryptographic_systems.md`
+- 共识机制：`03_consensus_mechanisms.md`
+- 智能合约引擎：`05_smart_contract_engine.md`
+- 模型理论：`../../18_model/01_model_theory.md`
 
 ---

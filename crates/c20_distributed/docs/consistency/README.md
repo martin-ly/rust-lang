@@ -57,3 +57,75 @@
 - Wiki：`CAP theorem`、`Consistency models`、`Linearizability`、`Causal consistency`
 - 课程：MIT 6.824 Lectures on Replication/Consistency；UWash CSE452 Consistency
 - 论文：Spanner（TrueTime 与外部一致性）、Dynamo/Cassandra（最终一致与反熵）、Bayou（会话与因果）
+
+## 练习与思考
+
+1. 实现一个支持多种一致性级别的分布式存储系统，包括线性一致性、因果一致性和最终一致性。
+2. 设计一个向量时钟系统，用于跟踪分布式系统中的因果依赖关系。
+3. 构建一个会话一致性保证机制，确保客户端能够读取到自己写入的数据。
+4. 开发一个一致性模型验证工具，能够检测分布式系统中的一致性违规。
+
+## 快速导航
+
+- 分布式系统总纲：`../README.md`
+- 共识机制：`../consensus/README.md`
+- 复制机制：`../replication/README.md`
+- 故障处理：`../failure/README.md`
+
+---
+
+## R/W 法定人数与语义矩阵
+
+设副本数 \(N\)，读写分别取 \(R, W\)：
+
+- 线性一致读的充分条件（基于法定人数）：\(R + W > N\) 且写入由单主在任期内提交
+- 写写冲突避免：\(W > N/2\)
+- 读延迟-一致性权衡：较小 \(R\) 减少延迟但更易读到旧值
+
+常见配置：
+
+```text
+Strong  -> R = Majority, W = Majority
+Quorum  -> R, W 可独立配置但满足 R + W > N
+Eventual-> R = 1, W = 1（或任意），后台反熵收敛
+```
+
+## 读写路径示例（与 Raft 结合）
+
+```rust
+use c20_distributed::{consistency::ConsistencyLevel, replication::Replicator};
+
+fn write_quorum(rep: &Replicator, key: &str, val: Vec<u8>) -> anyhow::Result<()> {
+    rep.write(key, val, ConsistencyLevel::Quorum)?; // 内部根据 N 计算 required_acks
+    Ok(())
+}
+
+fn read_strong(rep: &Replicator, key: &str) -> anyhow::Result<Option<Vec<u8>>> {
+    // 若结合 Raft，读路径建议使用 read_index 或租约读
+    rep.read(key, ConsistencyLevel::Strong)
+}
+```
+
+## 常见问题与排错
+
+- 现象：Quorum 配置下仍读到旧值
+  - 排查：是否满足 `R + W > N`；写入是否在任期内提交；读路径是否绕过了读屏障（read_index/lease）
+  - 建议：将只读操作接入 `read_index` 或在租约无效时回退
+
+- 现象：扩容后热点倾斜导致某些副本过载
+  - 排查：一致性哈希虚拟节点数是否过小；是否存在热点键
+  - 建议：增大虚拟节点数并结合读写分离/缓存
+
+- 现象：Eventual 下长时间不收敛
+  - 排查：gossip/repair 周期与反熵带宽限制；反熵对象是否过大
+  - 建议：对大对象使用校验/分块修复；提升反熵并发度与频率
+
+## 与测试/基准联动
+
+- 测试：`tests/replication_local.rs`、`tests/consistency_matrix.rs`（规划）
+- 基准：观察不同 N 与 Level 下 `required_acks` 导致的尾延迟差异
+
+## 进一步实验建议
+
+- Jepsen 思路：在分区/重连/时钟抖动下，验证 Strong/Quorum 的线性化读通过率
+- 会话语义：注入跨会话因果依赖，验证会话向量/Token 的过滤正确性

@@ -85,3 +85,102 @@ let _resp = r.handle_append_entries(req).unwrap();
 - Wiki：`Paxos`, `Raft`, `EPaxos`, `Viewstamped Replication`
 - 课程：MIT 6.824（Labs 2/3）、Berkeley CS262A 共识模块
 - 论文：Paxos Made Simple、Raft：In Search of an Understandable Consensus、EPaxos、VR Revisited
+
+## 练习与思考
+
+1. 实现一个完整的Raft共识算法，包括领导者选举、日志复制和快照功能。
+2. 设计一个支持网络分区的共识协议，在分区恢复后能够自动合并状态。
+3. 构建一个多主复制系统，使用EPaxos算法实现低延迟的并行提交。
+4. 开发一个共识性能测试框架，测量不同网络条件下的延迟和吞吐量。
+
+## 快速导航
+
+- 分布式系统总纲：`../README.md`
+- 一致性模型：`../consistency/README.md`
+- 复制机制：`../replication/README.md`
+- 故障处理：`../failure/README.md`
+
+---
+
+## API 映射与代码定位
+
+- 核心抽象：`src/consensus.rs`（`ConsensusApi`、`ConsensusRole`、`LogEntry`、`CommitIndex`）
+- Raft 最小实现（条件：feature `consensus-raft`）：`src/consensus_raft/*.rs`
+- 相关支撑：
+  - 定时/时钟：`src/scheduling.rs`（`TimerService`、`LogicalClock`）
+  - 存储：`src/storage.rs`（`LogStorage`、`StateMachineStorage`、快照）
+  - 传输：`src/transport.rs`（RPC/消息抽象）
+
+快速导航到常用符号：
+
+```text
+RaftNode::handle_append_entries        -> src/consensus_raft/append.rs
+RaftNode::handle_request_vote          -> src/consensus_raft/vote.rs
+Leader 复制与提交推进（commit_index）  -> src/consensus_raft/leader.rs
+快照/截断（如启用）                   -> src/storage.rs / src/consensus_raft/snapshot.rs
+```
+
+## 如何运行与测试
+
+- 运行最小示例：
+
+```powershell
+cargo run -p c20_distributed --example e2e_replication
+# 如开启 Raft：
+cargo test -p c20_distributed --features consensus-raft --test raft_minimal -- --nocapture
+```
+
+- 推荐日志与随机种子：
+
+```powershell
+$env:RUST_LOG="info,c20_distributed=debug"; $env:RUST_BACKTRACE=1
+cargo test -p c20_distributed --features consensus-raft -- --nocapture
+```
+
+- 性能/功能基线：
+  - 领导者选举收敛时间（稳定网络）：< 2× 选举超时上界
+  - 日志冲突回退后重同步成功率：100%（在无丢包/超时场景）
+  - 快照恢复时间：随快照大小线性增长；恢复后 `commit_index` 与应用状态一致
+
+## 常见问题与排错（FAQ/Troubleshooting）
+
+- 现象：频繁双领导者（split brain）
+  - 排查：选举超时区间是否过窄；心跳周期是否过大导致误判；时钟抖动/线程阻塞
+  - 建议：`E in [300ms, 900ms]` 且 `T≈100ms` 起步，确保不同节点 E 不同步
+
+- 现象：日志复制卡住，`commit_index` 不前进
+  - 排查：多数派是否可达；`prev_log_index/term` 回退逻辑是否正确；是否错误地跨任期提交
+  - 建议：开启 `trace` 日志，记录每次冲突回退的目标 index/term
+
+- 现象：读取到了旧值
+  - 排查：是否实现了 `read_index` 或安全的租约读；领导者身份是否在读时仍然有效
+  - 建议：在不安全时钟环境下降级为 `read_index`
+
+## 配置与特性开关
+
+- `features = ["consensus-raft"]`：启用最小 Raft 接口与实现
+- 关键参数：
+  - `heartbeat_interval_ms`（心跳周期）
+  - `election_timeout_range_ms = [min, max]`（随机选举超时区间）
+  - `install_snapshot_threshold`（触发快照/截断阈值，若实现）
+
+## 示例：线性化读（Read Index）骨架
+
+```rust
+use c20_distributed::consensus_raft::{MinimalRaft, RaftNode};
+
+fn linearizable_read<R: RaftNode>(raft: &mut R) -> anyhow::Result<Vec<u8>> {
+    // 1) 多数派心跳确认领导者仍然有效并获取 commit_index
+    let read_barrier = raft.read_index()?; // 假设接口存在于最小实现中
+    // 2) 等待本地应用层追至 read_barrier
+    raft.wait_applied(read_barrier)?;
+    // 3) 安全读取
+    Ok(raft.read_state()?)
+}
+```
+
+## 进一步实验建议
+
+- 分区注入：将集群划分为两半，验证仅多数派侧可前进；合并后检查日志冲突解决与单调性
+- 时钟异常：模拟时钟回拨/停顿，验证租约读的降级路径
+- 快照鲁棒性：在截断点附近反复崩溃恢复，确保状态机终态一致

@@ -121,7 +121,7 @@
 - 客户关系管理
 - 物流跟踪
 
-### 13. [社交媒体 (Social Media)](./social_media/README.md)
+### 13. 社交媒体 (Social Media)（暂缺，待补充）
 
 - 社交网络平台
 - 内容推荐系统
@@ -130,7 +130,7 @@
 - 用户分析
 - 内容审核
 
-### 14. [企业软件 (Enterprise Software)](./enterprise/README.md)
+### 14. 企业软件 (Enterprise Software)（暂缺，待补充）
 
 - 企业资源规划
 - 客户关系管理
@@ -139,7 +139,7 @@
 - 业务流程自动化
 - 企业集成
 
-### 15. [移动应用 (Mobile Applications)](./mobile/README.md)
+### 15. 移动应用 (Mobile Applications)（暂缺，待补充）
 
 - 移动应用开发
 - 跨平台框架

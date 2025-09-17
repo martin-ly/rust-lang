@@ -92,6 +92,24 @@ fn verify_chain(chain: &[Block]) -> bool {
 ---
 > 本节为Rust区块链系统的理论补充，后续可继续扩展智能合约安全、跨链协议、零知识证明等高级特征。
 
-"
+### 与 Rust 的语义映射（补充）
+
+- 形式系统 ↔ crate 分层：`core`(数据结构) / `consensus` / `network` / `vm`
+- 证明目标 ↔ 测试与模型检查：`proptest`、线性化检查、Kani/Creusot
+- 不变量 ↔ 单元测试中的断言与属性
+
+### 练习与思考
+
+1. 用 Hoare 三元组为 `apply_block` 写出前/后置条件与不变量，并在测试中验证。
+2. 设计一个最小 PBFT 模型（消息/阶段/阈值），给出可验证的安全/活性断言并仿真。
+3. 将“链式完整性”形式化为可执行的链验证器，注入错误数据集并统计误检/漏检。
+
+### 快速导航
+
+- 区块链理论：`01_blockchain_theory.md`
+- 密码学系统：`02_cryptographic_systems.md`
+- 共识机制：`03_consensus_mechanisms.md`
+- 智能合约引擎：`05_smart_contract_engine.md`
+- 模型理论：`../../18_model/01_model_theory.md`
 
 ---

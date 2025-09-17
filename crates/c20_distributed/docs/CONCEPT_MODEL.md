@@ -26,3 +26,42 @@
 - `transactions::{Saga, SagaStep}`（补偿编排）；`storage::{StateMachineStorage, IdempotencyStore}`（确定性/幂等）。
 
 后续将为每个概念补充：形式化定义（数学/逻辑）、可验证性质、测试/实验模版。
+
+## 形式化定义占位（示例）
+
+- Quorum：令节点集合 \(V\)，法定人数族 \(\mathcal{Q} = \{Q \subseteq V : |Q| > |V|/2\}\)。性质：\(\forall Q_i, Q_j \in \mathcal{Q}, Q_i \cap Q_j \neq \emptyset\)。
+- 线性一致：存在映射 \(h\) 将操作历史嵌入全序，满足实时先后与顺序语义。
+- 一致性哈希：令哈希环区间分布近似均匀，虚拟节点数 \(R\) 提升负载平衡性，E[迁移比例]≈\(1/|V|\)。
+
+## 可验证检查点
+
+- 多数派：构造不同 N、Level 的 ACK 表，验证写后读的可见性与单调性。
+- 哈希环：扩容/缩容实验记录键迁移比例与倾斜度（P95/P99）。
+- Saga：注入中间失败与重复补偿，验证不变式保持与幂等性。
+
+## 示例导航
+
+- 复制与一致性：`cargo test -p c20_distributed --test replication_local`
+- 哈希与再均衡：`cargo test -p c20_distributed --test hashring_properties`
+- Saga 补偿：`cargo test -p c20_distributed --test saga` 或 `cargo run -p c20_distributed --example e2e_saga`
+
+## 🔗 快速导航
+
+- 模型理论：`../../formal_rust/language/18_model/01_model_theory.md`
+- AI系统：`../c19_ai/docs/FAQ.md`
+- WebAssembly：`../../formal_rust/language/16_webassembly/FAQ.md`
+- IoT系统：`../../formal_rust/language/17_iot/FAQ.md`
+- 区块链：`../../formal_rust/language/15_blockchain/FAQ.md`
+
+## 关联导航
+
+- 范式索引：Actor 模型（消息驱动/监督）[`../../../rust-formal-engineering-system/02_programming_paradigms/09_actor_model/00_index.md`](../../../rust-formal-engineering-system/02_programming_paradigms/09_actor_model/00_index.md)
+- 范式索引：事件驱动（事件循环/总线/溯源）[`../../../rust-formal-engineering-system/02_programming_paradigms/08_event_driven/00_index.md`](../../../rust-formal-engineering-system/02_programming_paradigms/08_event_driven/00_index.md)
+
+## 联动与命令
+
+- 文档：`WIKI_MAPPING.md`、`COURSE_ALIGNMENT.md`、`EXPERIMENT_GUIDE.md`、`ROADMAP.md`
+- 命令：
+  - 测试：`cargo test -p c20_distributed -- --nocapture`
+  - 示例：`cargo run -p c20_distributed --example e2e_saga`
+  - 基准：`cargo bench -p c20_distributed`

@@ -26,8 +26,33 @@
 - 可重复性：随机种子固定、场景脚本化、指标统一采集（tracing/metrics）。
 - 安全网：灰度/金丝雀发布、自动回滚、读写保护闸。
 
+## 实验脚手架与历史检查
+
+- 建议在 `tests/` 中提供历史记录器（append-only），格式 JSON/CSV；引入最小线化检查或会话保证检查。
+- 通过 feature `testing-sim` 启用网络仿真器：控制延迟/丢包/乱序/重复。
+- 将检查结果与指标一起输出，便于回归与可视化。
+
+## 注意事项（混沌）
+
+- 将“故障注入”与“限流/熔断”联动，避免级联故障。
+- 在多租户环境中隔离混沌作用域；使用专用命名空间与资源配额。
+
 ## 进一步阅读
 
 - Wiki：`Chaos engineering`, `Jepsen`、`Linearizability`
 - 课程：MIT 6.824（Labs, Testing）、UWash CSE452（Testing distributed systems）
 - 论文/实践：Jepsen 报告合集、Netflix Chaos Monkey、Porcupine（线性化检测）
+
+## 练习与思考
+
+1. 搭建最小Jepsen风格历史检查：生成并发操作、注入分区与时钟抖动、导出历史并用Porcupine验证线性化。
+2. 设计可重复仿真框架：固定随机种子、脚本化故障场景、统一指标采集用于回归对比。
+3. 构建混沌实验编排器：与限流/熔断联动，验证避免级联故障的策略有效性。
+4. 将一致性检查与指标/trace打通，产出带证据的验证报告（历史+追踪+指标）。
+
+## 快速导航
+
+- 分布式系统总纲：`../README.md`
+- 一致性模型：`../consistency/README.md`
+- 故障处理：`../failure/README.md`
+- 可观测性：`../observability/README.md`

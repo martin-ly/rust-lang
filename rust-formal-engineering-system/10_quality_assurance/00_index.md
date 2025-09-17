@@ -29,6 +29,37 @@
 5) 形式化：对高风险模块采用 Kani/Prusti 做关键属性验证
 6) 指标：统一 `/metrics` 输出，持续观测与 SLO 追踪
 
+### 并发/异步专项最小清单
+
+- 构建与干跑：
+  - `cargo bench -p c05_threads --no-run | cat`
+  - `cargo bench -p c06_async --no-run | cat`
+- 运行与记录：
+  - `cargo bench -p c05_threads | cat`、`cargo bench -p c06_async | cat`
+  - 记录吞吐与 p95/p99；变更容量/并发/批量参数
+- 可观测性：
+  - 启用 `tracing`/metrics，在微服务端 `/metrics` 导出
+- 交叉参考：
+  - 最小基准指南：[`../02_programming_paradigms/11_benchmark_minimal_guide.md`](../02_programming_paradigms/11_benchmark_minimal_guide.md)
+  - 并发/并行/响应式索引页中的文件级清单
+
+### 链接健壮性检查（指南）
+
+- 统一规则：优先相对路径；异步范式使用 `02_async` 主目录，`02_asynchronous` 仅保留跳转页。
+- 新增文档：更新上层 `00_index.md` 与根 README 快速导航（如适用）。
+- 快速检查：
+  - IDE 中批量打开最近改动的链接并跳转验证。
+  - Windows PowerShell：可用简易脚本遍历仓库内相对链接并检测目标是否存在（待工具脚本加入 `scripts/`）。
+  - CI：建议加一条 `markdown-link-check` 步骤（可选）。
+
+#### 脚本（Windows PowerShell）
+
+```powershell
+./scripts/ci/check_markdown_links.ps1
+```
+
+返回非零代表存在断链。可在 CI 中直接作为步骤执行。
+
 ## 工具速查
 
 - Clippy：`cargo clippy -- -D warnings`

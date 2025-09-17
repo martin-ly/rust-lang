@@ -37,3 +37,17 @@
 - Wiki：`FLP impossibility`、`Byzantine fault`、`Failure detector`
 - 课程：MIT 6.824（Fault Tolerance）、UWash CSE452（Failure & Time）
 - 论文：PBFT、Tendermint、HotStuff、Viewstamped Replication、Raft
+
+## 练习与思考
+
+1. 实现一个故障检测器，能够区分网络分区、节点崩溃和网络延迟，并提供相应的恢复策略。
+2. 设计一个拜占庭容错系统，支持动态节点加入和离开，并保证系统在恶意节点存在时的安全性。
+3. 构建一个故障注入测试框架，能够模拟各种故障场景并验证系统的容错能力。
+4. 开发一个故障恢复协调器，在故障发生后能够自动选择最优的恢复策略并执行。
+
+## 快速导航
+
+- 分布式系统总纲：`../README.md`
+- 共识机制：`../consensus/README.md`
+- 复制机制：`../replication/README.md`
+- 存储系统：`../storage/README.md`

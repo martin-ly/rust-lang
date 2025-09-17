@@ -39,62 +39,62 @@
 
 ### 🔧 语言特性 (Language Features)
 
-- [GAT - Generic Associated Types](./language_features/gat_analysis.md)
-- [Async Trait](./language_features/async_trait_analysis.md)
-- [Const Generics](./language_features/const_generics_analysis.md)
-- [Macro 2.0](./language_features/macro2_analysis.md)
-- [Advanced Type System](./language_features/advanced_type_system.md)
+- [GAT - Generic Associated Types](./01_language_features/gat_analysis.md)
+- [Async Trait](./01_language_features/async_trait_analysis.md)
+- [Const Generics](./01_language_features/const_generics_analysis.md)
+- [Macro 2.0](./01_language_features/macro_2_analysis.md)
+- [Advanced Type System](./03_advanced_language_features/advanced_type_system.md)
 
 ### 🧠 理论视角 (Theoretical Perspectives)
 
-- [认知科学视角](./theoretical_perspectives/cognitive_science.md)
-- [神经科学视角](./theoretical_perspectives/neuroscience.md)
-- [数据科学视角](./theoretical_perspectives/data_science.md)
-- [语言学视角](./theoretical_perspectives/linguistics.md)
-- [形式化方法](./theoretical_perspectives/formal_methods.md)
+- [认知科学视角](./02_theoretical_perspectives/cognitive_science.md)
+- [神经科学视角](./02_theoretical_perspectives/neuroscience.md)
+- [数据科学视角](./02_theoretical_perspectives/data_science.md)
+- [语言学视角](./02_theoretical_perspectives/linguistics.md)
+- [形式化方法](./06_security_verification/formal_verification.md)
 
 ### 🤖 应用领域 (Application Domains)
 
-- [AI/ML与Rust](./application_domains/ai_ml_rust.md)
-- [量子计算](./application_domains/quantum_computing.md)
-- [游戏开发](./application_domains/game_development.md)
-- [分布式系统](./application_domains/distributed_systems.md)
-- [密码学与安全](./application_domains/cryptography_security.md)
+- [AI/ML与Rust](./04_application_domains/ai_ml_rust.md)
+- [量子计算](./quantum_computing_rust_analysis.md)
+- [游戏开发](./04_application_domains/distributed_systems.md)（占位）
+- [分布式系统](./04_application_domains/distributed_systems.md)
+- [密码学与安全](./06_security_verification/formal_verification.md)
 
 ### ⚡ 性能与优化 (Performance & Optimization)
 
-- [性能分析工具](./performance_optimization/performance_analysis.md)
-- [编译器优化](./performance_optimization/compiler_optimization.md)
-- [内存优化](./performance_optimization/memory_optimization.md)
-- [并发优化](./performance_optimization/concurrency_optimization.md)
+- [性能分析工具](./05_performance_optimization/performance_analysis.md)
+- [编译器优化](./05_performance_optimization/compiler_optimization.md)
+- [内存优化](./advanced_memory_management_analysis.md)
+- [并发优化](./advanced_concurrency_analysis.md)
 
 ### 🛡️ 安全与验证 (Security & Verification)
 
-- [形式化验证](./security_verification/formal_verification.md)
-- [静态分析](./security_verification/static_analysis.md)
-- [安全模式](./security_verification/security_patterns.md)
-- [漏洞分析](./security_verification/vulnerability_analysis.md)
+- [形式化验证](./06_security_verification/formal_verification.md)
+- [静态分析](./06_security_verification/static_analysis.md)
+- 安全模式：暂缺（待补充）
+- 漏洞分析：暂缺（待补充）
 
 ### 🔄 跨语言比较 (Cross-Language Comparison)
 
-- [系统编程语言比较](./cross_language_comparison/system_languages.md)
-- [内存管理模型](./cross_language_comparison/memory_models.md)
-- [并发模型](./cross_language_comparison/concurrency_models.md)
-- [类型系统比较](./cross_language_comparison/type_systems.md)
+- [系统编程语言比较](./07_cross_language_comparison/system_languages.md)
+- 内存管理模型：暂缺（待补充）
+- 并发模型：暂缺（待补充）
+- 类型系统比较：暂缺（待补充）
 
 ### 📚 教学与学习 (Teaching & Learning)
 
-- [学习科学](./teaching_learning/learning_science.md)
-- [个性化学习路径](./teaching_learning/personalized_learning.md)
-- [评估与反馈](./teaching_learning/assessment_feedback.md)
-- [教学策略](./teaching_learning/teaching_strategies.md)
+- [学习科学](./08_teaching_learning/learning_science.md)
+- [个性化学习路径](./08_teaching_learning/personalized_learning.md)
+- [评估与反馈](./08_teaching_learning/assessment_feedback.md)
+- 教学策略：暂缺（待补充）
 
 ### 🛠️ 工具链与生态系统 (Toolchain & Ecosystem)
 
-- [编译器内部机制](./toolchain_ecosystem/compiler_internals.md)
-- [包管理深度分析](./toolchain_ecosystem/package_management.md)
-- [开发工具集成](./toolchain_ecosystem/development_tools.md)
-- [生态系统分析](./toolchain_ecosystem/ecosystem_analysis.md)
+- [编译器内部机制](./09_toolchain_ecosystem/compiler_internals.md)
+- [包管理深度分析](./09_toolchain_ecosystem/package_management.md)
+- 开发工具集成：暂缺（待补充）
+- 生态系统分析：暂缺（待补充）
 
 ---
 

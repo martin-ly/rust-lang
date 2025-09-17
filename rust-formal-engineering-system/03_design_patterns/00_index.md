@@ -29,7 +29,9 @@
 ## 相关索引
 
 - 类型系统（ADT/状态机建模）：[../01_theoretical_foundations/01_type_system/00_index.md](../01_theoretical_foundations/01_type_system/00_index.md)
-- 编程范式（同步/异步）：[../02_programming_paradigms/01_synchronous/00_index.md](../02_programming_paradigms/01_synchronous/00_index.md) ・ [../02_programming_paradigms/02_async/00_index.md](../02_programming_paradigms/02_async/00_index.md)
+- 编程范式（同步/异步/响应式/事件驱动/Actor）：
+  - [同步](../02_programming_paradigms/01_synchronous/00_index.md) ・ [异步](../02_programming_paradigms/02_async/00_index.md)
+  - [响应式](../02_programming_paradigms/07_reactive/00_index.md) ・ [事件驱动](../02_programming_paradigms/08_event_driven/00_index.md) ・ [Actor](../02_programming_paradigms/09_actor_model/00_index.md)
 - 质量保障（模式实现的测试与验证）：[../10_quality_assurance/00_index.md](../10_quality_assurance/00_index.md)
 
 ## 推荐阅读路径

@@ -55,11 +55,19 @@
 - 基准：`cargo bench -p <crate>`（或 `--no-run` 先行）
 - Windows PowerShell 示例请参考各 crate 的 README 顶部导航链接
 
+### 快速入口：基准与范式
+
+- 最小基准指南：[`02_programming_paradigms/11_benchmark_minimal_guide.md`](./02_programming_paradigms/11_benchmark_minimal_guide.md)
+- 异步范式：[`02_programming_paradigms/02_async/00_index.md`](./02_programming_paradigms/02_async/00_index.md)
+- 同步范式：[`02_programming_paradigms/01_synchronous/00_index.md`](./02_programming_paradigms/01_synchronous/00_index.md)
+
 ## 常见问题（FAQ）
 
 - 链接跳转失败？优先相对路径；确认目录层级；参考 [`CONTRIBUTING.md`](./CONTRIBUTING.md)
 - 新建目录如何纳入导航？创建 `00_index.md` 并更新上级索引/根导航
-- 如何选择同步/异步？参考 [`01_synchronous/00_index.md`](./02_programming_paradigms/01_synchronous/00_index.md) 与 [`02_async/00_index.md`](./02_programming_paradigms/02_async/00_index.md)
+- 如何选择同步/异步？参考 [`02_programming_paradigms/01_synchronous/00_index.md`](./02_programming_paradigms/01_synchronous/00_index.md) 与 [`02_programming_paradigms/02_async/00_index.md`](./02_programming_paradigms/02_async/00_index.md)
+- 目录别名说明：异步范式主目录为 `02_async`；`02_asynchronous` 为兼容别名，仅含说明页与单一跳转；新增链接统一指向主目录。若历史链接指向 `02_asynchronous`，将通过该页跳转至主目录。
+- 快速入口：[`异步范式主目录`](./02_programming_paradigms/02_async/00_index.md) ・ [`异步别名说明`](./02_programming_paradigms/02_asynchronous/00_index.md)
 
 ## 贡献指南（简要）
 

@@ -7,6 +7,14 @@
 **维护者**: Rust形式化团队  
 **文档版本**: 3.0  
 
+## 快速导航
+
+- 密码学系统：`02_cryptographic_systems.md`
+- 共识机制：`03_consensus_mechanisms.md`
+- 智能合约：`05_smart_contract_engine.md`
+- 常见问题：`FAQ.md`
+- 完成总结：`COMPLETION_SUMMARY.md`
+
 ## 目录结构体体体 {#目录结构体体体}
 
 ### 1. 理论基础层 {#理论基础层}
@@ -402,6 +410,29 @@ execute(C, i, s) = (s', o) ⟹
 - 推动区块链体系相关的跨平台标准和社区协作，促进 Rust 在多领域的广泛应用。
 
 ---
+
+### 与 Rust 的语义映射（补充）
+
+- 区块链系统 ↔ `struct Blockchain` 与 `trait ConsensusEngine`
+- 状态转换 ↔ `fn apply_transaction(&mut State, Transaction) -> Result<(), Error>`
+- 共识协议 ↔ `async fn participate_consensus(&mut Node) -> ConsensusResult`
+- 密码学原语 ↔ `sha2`、`ed25519-dalek`、`secp256k1` 等库
+
+### 练习与思考
+
+1. 实现一个支持分片的区块链系统，包括分片分配、跨分片交易路由和状态同步机制。
+2. 设计一个智能合约形式化验证框架，支持自动化的安全属性检查和漏洞检测。
+3. 构建一个跨链互操作协议，实现不同区块链网络间的资产和数据交换。
+4. 开发一个DeFi协议平台，包括AMM、借贷和衍生品等核心功能。
+
+### 快速导航（补充）
+
+- 区块链理论：`01_blockchain_theory.md`
+- 密码学系统：`02_cryptographic_systems.md`
+- 共识机制：`03_consensus_mechanisms.md`
+- 智能合约引擎：`05_smart_contract_engine.md`
+- 网络协议：`06_network_protocols.md`
+- 模型理论：`../../18_model/01_model_theory.md`
 
 ## 批判性分析（未来值值值展望）1
 

@@ -219,7 +219,7 @@ rust-formal-engineering-system/
 ├── 02_programming_paradigms/ (编程范式)
 │   ├── 00_index.md
 │   ├── 01_synchronous/
-│   ├── 02_asynchronous/
+│   ├── 02_async/
 │   ├── 03_functional/
 │   ├── 04_object_oriented/
 │   ├── 05_concurrent/

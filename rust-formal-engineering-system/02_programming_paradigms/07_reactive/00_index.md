@@ -33,6 +33,25 @@
 - 网络编程：[crates/c10_networks](../../../crates/c10_networks/)
 - 微服务：[crates/c13_microservice](../../../crates/c13_microservice/)
 
+### 文件级清单（精选）
+
+- `crates/c06_async/examples/`：
+  - `tokio_exp01.rs`：基础 `Stream`/任务协作
+  - `axum_exp01.rs`：HTTP 端点与请求流处理
+- `crates/c06_async/benches/`：
+  - `async_benches.rs`：mpsc（bounded/unbounded）、Semaphore 管道吞吐
+- `crates/c05_threads/examples/`（对照）：
+  - `stream_backpressure_demo.rs`、`stream_rate_batch_demo.rs`：同步流与背压/限速
+- 微服务示例（`crates/c13_microservice/examples/`）：
+- `simple_observability_demo.rs`、`comprehensive_observability_demo.rs`：指标/追踪下的响应式链路
+- `axum_rest_api.rs`：请求-响应流处理
+
+### 关联基准与指南
+
+- 最小基准指南：[`../11_benchmark_minimal_guide.md`](../11_benchmark_minimal_guide.md)
+- 同步基准：[`../../../crates/c05_threads/benches/`](../../../crates/c05_threads/benches/)
+- 异步基准：[`../../../crates/c06_async/benches/`](../../../crates/c06_async/benches/)
+
 ## 相关索引
 
 - 异步范式：[`../02_async/00_index.md`](../02_async/00_index.md)

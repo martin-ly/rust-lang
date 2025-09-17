@@ -33,6 +33,22 @@
 - 线程与同步：[crates/c05_threads](../../../crates/c05_threads/)
 - 异步编程：[crates/c06_async](../../../crates/c06_async/)
 
+### 文件级清单（精选）
+
+- `crates/c08_algorithms/src/`：
+  - `performance_examples/memory_optimization.rs`：布局/局部性与带宽
+  - `performance_examples/concurrency_optimization.rs`：并行迭代与批处理
+  - `performance_examples/compile_time_optimization.rs`：内联/泛型消除开销
+  - `sorting/`、`graph/`：可并行化算法骨架
+- `crates/c05_threads/src/`：
+  - `paralelism/numa_aware.rs`、`paralelism/advanced_parallel_algorithms.rs`
+
+### 关联基准与指南
+
+- 最小基准指南：[`../11_benchmark_minimal_guide.md`](../11_benchmark_minimal_guide.md)
+- 同步/并行基准：[`../../../crates/c05_threads/benches/`](../../../crates/c05_threads/benches/)
+- 异步/管道基准：[`../../../crates/c06_async/benches/`](../../../crates/c06_async/benches/)
+
 ## 相关索引
 
 - 并发范式：[`../05_concurrent/00_index.md`](../05_concurrent/00_index.md)

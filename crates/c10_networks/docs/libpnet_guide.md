@@ -1,16 +1,20 @@
 # libpnet 实战指南（C10 Networks）
 
+> 适用范围：Rust 1.89+，Tokio 1.35+；Windows 需安装 Npcap；Linux 需 root 或 `CAP_NET_RAW`。
+
 ## 概览
 
 - 抓包通道：基于 `pnet_datalink::channel` 的以太网帧捕获
 - 协议解析：`pnet_packet::{ethernet, arp, ipv4, tcp}`
 - 异步整合：Tokio + `spawn_blocking` + `mpsc` 实现抓包流水线
+- 离线 PCAP：启用 `offline` feature 解析本地 `pcap`
 
 ## 环境准备（Windows）
 
 1) 安装 Npcap（管理员，启用 WinPcap 兼容）
 2) 安装 CMake、VS Build Tools（C++）、NASM（可选）
 3) 确保未设置 `AWS_LC_SYS_NO_ASM=1`（或重开终端）
+4) 以管理员运行 PowerShell 以便原始套接字/抓包
 
 ## Linux/macOS 注意事项
 
@@ -76,3 +80,8 @@ let arp = parse_pcap_arp("capture.pcap", Some(20))?;
 let tcp = parse_pcap_tcp_stats("capture.pcap")?;
 println!("arp_records={} tcp_packets={} tcp_bytes={}", arp.len(), tcp.packets, tcp.bytes);
 ```
+
+## 关联与示例
+
+- 示例：`examples/sniff_arp.rs`、`examples/monitor_tcp.rs`
+- CI/权限：部分示例需要管理员/root；CI 中默认跳过依赖原始套接字的测试

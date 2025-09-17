@@ -15,18 +15,18 @@
 
 - **[01_formal_concurrency_system.md](01_formal_concurrency_system.md)** - 并发系统形式化理论 (待完善)
 - **[02_concurrency_theory.md](02_concurrency_theory.md)** - 并发理论深度分析 (待完善)
-- **[03_thread_safety.md](03_thread_safety.md)** - 线程安全理论 (待创建)
+- 03_thread_safety.md（暂缺，待补充） - 线程安全理论
 
 ### 2. 同步机制
 
-- **[04_synchronization_primitives.md](04_synchronization_primitives.md)** - 同步原语设计 (待创建)
-- **[05_atomic_operations.md](05_atomic_operations.md)** - 原子操作理论 (待创建)
-- **[06_memory_ordering.md](06_memory_ordering.md)** - 内存序理论 (待创建)
+- 04_synchronization_primitives.md（暂缺，待补充） - 同步原语设计
+- 05_atomic_operations.md（暂缺，待补充） - 原子操作理论
+- 06_memory_ordering.md（暂缺，待补充） - 内存序理论
 
 ### 3. 通信模式
 
-- **[07_message_passing.md](07_message_passing.md)** - 消息传递机制 (待创建)
-- **[08_shared_memory.md](08_shared_memory.md)** - 共享内存模型 (待创建)
+- 07_message_passing.md（暂缺，待补充） - 消息传递机制
+- 08_shared_memory.md（暂缺，待补充） - 共享内存模型
 
 ## 主题概述
 
@@ -122,25 +122,25 @@ Rust并发系统是基于所有权模型和类型系统的安全并发编程框�
 
 ### 基础定义
 
-- **定义 05.1**: [线程安全](03_thread_safety.md#线程安全定义) - 多线程环境下的安全性
+- **定义 05.1**: 线程安全（暂缺） - 多线程环境下的安全性
 - **定义 05.2**: [数据竞争](01_formal_concurrency_system.md#数据竞争定义) - 并发访问的竞争条件
-- **定义 05.3**: [死锁](02_concurrency_theory.md#死锁定义) - 资源竞争的死锁状态
-- **定义 05.4**: [原子性](05_atomic_operations.md#原子性定义) - 不可分割的操作性质
-- **定义 05.5**: [内存序](06_memory_ordering.md#内存序定义) - 内存操作的顺序约束
+- **定义 05.3**: 死锁（参见 02_concurrency_theory.md，暂缺） - 资源竞争的死锁状态
+- **定义 05.4**: 原子性（暂缺） - 不可分割的操作性质
+- **定义 05.5**: 内存序（暂缺） - 内存操作的顺序约束
 
 ### 核心定理
 
 - **定理 05.1**: [数据竞争免疫](01_formal_concurrency_system.md#数据竞争免疫定理) - Rust的数据竞争预防保证
 - **定理 05.2**: [死锁检测](02_concurrency_theory.md#死锁检测定理) - 死锁的静态检测能力
-- **定理 05.3**: [内存安全](03_thread_safety.md#内存安全定理) - 并发环境下的内存安全
-- **定理 05.4**: [原子操作正确性](05_atomic_operations.md#原子操作正确性定理) - 原子操作的正确性保证
+- **定理 05.3**: 内存安全（暂缺） - 并发环境下的内存安全
+- **定理 05.4**: 原子操作正确性（暂缺） - 原子操作的正确性保证
 
 ### 并发原理
 
 - **原理 05.1**: [所有权原理](01_formal_concurrency_system.md#所有权原理) - 并发环境下的所有权语义
-- **原理 05.2**: [类型安全原理](03_thread_safety.md#类型安全原理) - Send/Sync特质的安全原理
-- **原理 05.3**: [消息传递原理](07_message_passing.md#消息传递原理) - CSP模型的实现原理
-- **原理 05.4**: [无锁原理](05_atomic_operations.md#无锁原理) - 无锁数据结构的设计原理
+- **原理 05.2**: 类型安全原理（暂缺） - Send/Sync特质的安全原理
+- **原理 05.3**: 消息传递原理（暂缺） - CSP模型的实现原理
+- **原理 05.4**: 无锁原理（暂缺） - 无锁数据结构的设计原理
 
 ## 数学符号说明
 

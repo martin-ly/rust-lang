@@ -33,6 +33,26 @@
 - 网络事件处理：[crates/c10_networks](../../../crates/c10_networks/)
 - 微服务事件：[crates/c13_microservice](../../../crates/c13_microservice/)
 
+### 文件级清单（精选）
+
+- `crates/c06_async/examples/`：
+  - `axum_exp01.rs`：HTTP 事件处理与异步路由
+  - `tokio_exp01.rs`：事件循环与 select 协作示例
+- `crates/c06_async/benches/`：
+  - `async_benches.rs`：mpsc、Semaphore 参数化吞吐
+- 对照（同步端）：`crates/c05_threads/examples/` 中的背压/限速示例
+- 微服务示例（`crates/c13_microservice/examples/`）：
+- `simple_axum.rs`：最小 REST 事件入口
+- `grpc_service.rs` / `grpc_client_demo.rs`：RPC 事件管道
+- `messaging_demo.rs` / `messaging_advanced_demo.rs`：消息事件驱动
+- `observability_demo*`：事件链路观测
+
+### 关联基准与指南
+
+- 最小基准指南：[`../11_benchmark_minimal_guide.md`](../11_benchmark_minimal_guide.md)
+- 同步基准：[`../../../crates/c05_threads/benches/`](../../../crates/c05_threads/benches/)
+- 异步基准：[`../../../crates/c06_async/benches/`](../../../crates/c06_async/benches/)
+
 ## 相关索引
 
 - 响应式范式：[`../07_reactive/00_index.md`](../07_reactive/00_index.md)

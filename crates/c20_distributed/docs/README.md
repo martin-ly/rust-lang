@@ -37,6 +37,14 @@
 
 各专题文档末尾提供具体参考与实现接口对照表。
 
+## 🔗 快速导航
+
+- 模型理论：`../../formal_rust/language/18_model/01_model_theory.md`
+- AI系统：`../c19_ai/docs/FAQ.md`
+- WebAssembly：`../../formal_rust/language/16_webassembly/FAQ.md`
+- IoT系统：`../../formal_rust/language/17_iot/FAQ.md`
+- 区块链：`../../formal_rust/language/15_blockchain/FAQ.md`
+
 ## 分布式系统（Rust 1.89 对齐）
 
 - 课程参考：MIT 6.824/6.5840、CMU 15-440/15-418、Stanford CS244B、Berkeley CS262A
@@ -114,8 +122,36 @@ let id = "op-1".to_string();
 repl.replicate_idempotent(&id, &nodes, b"cmd".to_vec(), ConsistencyLevel::Quorum).unwrap();
 ```
 
+## 快速开始
+
+- 运行单元测试：`cargo test -p c20_distributed`
+- 运行示例：`cargo run -p c20_distributed --example e2e_saga`
+- 查看实验说明：`docs/EXPERIMENT_GUIDE.md`
+- 查看路线图：`docs/ROADMAP.md`
+
+## 如何选择一致性级别
+
+- Strong/Quorum：读写延迟更高，但可避免陈旧读；适合强一致 KV/元数据。
+- Eventual：吞吐更高、延迟更低，允许短暂陈旧；适合日志/时间序列等。
+- 建议：先以 Quorum 写 + 读多数派作为基线，再按 SLA 调整。
+
+## 常见陷阱
+
+- 见 `docs/PITFALLS.md`：多数派边界、Eventual 读旧值、一致性哈希倾斜、Saga 幂等、SWIM 参数等。
+
+## 实验入口
+
+- 复制与一致性、Saga、哈希环、SWIM、基准：详见 `docs/EXPERIMENT_GUIDE.md`。
+
 ## 测试导航
 
 - 共识/复制：`tests/raft*.rs`, `tests/replication*`
 - 传输/重试：`tests/retry*.rs`, `tests/pipeline.rs`
 - SWIM/成员视图：`tests/swim_*.rs`, `tests/router.rs`
+
+## 练习与思考
+
+1. 设计一条“路由→放置→复制→一致性→幂等→补偿”的最小流水线，基于内存后端实现端到端一致写入，并使用属性测试验证线性化。
+2. 实现一个最小 Raft 原型：领导者选举、日志复制、快照；在 `tokio::time::timeout` 下注入网络分区和超时，评估活性与恢复时间。
+3. 基于 Merkle 树实现反熵同步，比较 Range Diff 与 Merkle Diff 的带宽与延迟差异，给出实验数据与图表。
+4. 设计 Saga 事务编排，给出可重试与幂等策略，注入失败场景验证补偿正确性与可观测性指标。

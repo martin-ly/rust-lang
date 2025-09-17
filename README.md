@@ -91,12 +91,12 @@
 ### 🔬 编程语言比较 (docs/Programming_Language/)
 
 - **[Rust vs C++](docs/Programming_Language/lang_compare/rust_cpp.md)** - 系统编程语言对比
-- **[Rust vs Go](docs/Programming_Language/lang_compare/rust_go.md)** - 并发编程语言对比
-- **[Rust vs Python](docs/Programming_Language/lang_compare/rust_python.md)** - 脚本语言与系统语言对比
-- **[Rust vs TypeScript](docs/Programming_Language/lang_compare/rust_typescript.md)** - 类型系统对比
-- **[Rust vs JavaScript](docs/Programming_Language/lang_compare/rust_javascript.md)** - 动态语言与静态语言对比
-- **[Rust vs C](docs/Programming_Language/lang_compare/rust_c.md)** - 底层编程语言对比
-- **[Rust vs Assembly](docs/Programming_Language/lang_compare/rust_assembly.md)** - 汇编语言对比
+- Rust vs Go：暂缺（待补充）
+- Rust vs Python：暂缺（待补充）
+- Rust vs TypeScript：暂缺（待补充）
+- Rust vs JavaScript：暂缺（待补充）
+- Rust vs C：暂缺（待补充）
+- Rust vs Assembly：暂缺（待补充）
 
 ---
 
@@ -148,8 +148,8 @@
 
 ### 📋 项目文档
 
-- **[项目完成公告](FORMAL_RUST_COMPLETION_ANNOUNCEMENT.md)** - 重大成就详情
-- **[进度报告](CONTINUATION_PROGRESS_REPORT.md)** - 项目发展历程
+- 项目完成公告：暂缺（待补充）
+- 进度报告：暂缺（待补充）
 - **[Crates文档结构](crates/readme.md)** - 实践模块详细说明
 
 ### 🧪 示例与演示（网络/DNS）
@@ -196,9 +196,9 @@
 
 如果您在使用过程中遇到任何问题，或有改进建议，欢迎通过以下方式联系：
 
-- **项目问题**: 请查看[问题反馈](formal_rust/language/quality_check_guide.md)
-- **内容建议**: 参考[内容标准](formal_rust/language/content_standards.md)
-- **理论讨论**: 参与[理论框架](formal_rust/language/theory_framework.md)讨论
+- 项目问题：请查看 `formal_rust/language/quality_check_guide.md`（如缺失将后续补齐）
+- 内容建议：参考 `formal_rust/language/content_standardization_plan.md`
+- 理论讨论：参与 `formal_rust/language/theory_framework.md` 讨论（如缺失将后续补齐）
 
 ---
 

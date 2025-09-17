@@ -2,6 +2,54 @@
 
 本指南介绍 `c10_networks` 如何基于 Hickory-DNS（原 trust-dns）实现现代 DNS 解析，包括系统解析、DoT（DNS over TLS）、DoH（DNS over HTTPS）、常见记录查询与逆向解析，并给出最佳实践与性能/安全建议。
 
+> 适用范围：Rust 1.89+，Tokio 1.35+；`hickory-resolver 0.24`。
+
+快速链接：
+
+- 示例代码：`examples/`（如 `dns_lookup.rs`、`dns_doh_dot.rs`、`dns_records.rs`）
+- 测试：`tests/dns_tests.rs`（可通过环境变量跳过外网）
+
+## 目录
+
+- [DNS 解析机制与 Hickory-DNS 集成指南（Rust 1.89）](#dns-解析机制与-hickory-dns-集成指南rust-189)
+  - [目录](#目录)
+  - [理论剖析：从域名到 IP 的旅程（1.1/1.2/1.3）](#理论剖析从域名到-ip-的旅程111213)
+    - [1.1 DNS 基础理论：从域名到 IP 的旅程](#11-dns-基础理论从域名到-ip-的旅程)
+    - [1.2 Rust 标准库 DNS 解析的局限性](#12-rust-标准库-dns-解析的局限性)
+    - [1.3 Hickory-DNS 的引入：纯 Rust 的 DNS](#13-hickory-dns-的引入纯-rust-的-dns)
+  - [1. 依赖](#1-依赖)
+  - [2. 快速开始](#2-快速开始)
+  - [基本 DNS 解析实例：规避启动错误](#基本-dns-解析实例规避启动错误)
+  - [高级配置：自定义 NameServer 以高效解决错误](#高级配置自定义-nameserver-以高效解决错误)
+  - [3. API 一览](#3-api-一览)
+  - [4. 预设解析器](#4-预设解析器)
+  - [5. 最佳实践](#5-最佳实践)
+  - [6. 安全建议](#6-安全建议)
+  - [7. 调试技巧](#7-调试技巧)
+  - [8. 示例与测试](#8-示例与测试)
+    - [环境变量](#环境变量)
+    - [一键运行脚本（可选）](#一键运行脚本可选)
+  - [9. 迁移自 trust-dns](#9-迁移自-trust-dns)
+  - [10. 错误分类与排查流程](#10-错误分类与排查流程)
+  - [11. 超时、重试与并发查询策略](#11-超时重试与并发查询策略)
+  - [12. 缓存策略与一致性](#12-缓存策略与一致性)
+  - [13. DoT/DoH 配置细节与证书校验](#13-dotdoh-配置细节与证书校验)
+  - [14. 跨平台系统配置说明](#14-跨平台系统配置说明)
+  - [15. 更多示例](#15-更多示例)
+    - [15.1 逆向解析（PTR）](#151-逆向解析ptr)
+    - [15.2 MX/SRV/TXT 查询](#152-mxsrvtxt-查询)
+    - [15.3 将域名解析为 SocketAddr](#153-将域名解析为-socketaddr)
+  - [16. 与统一入口（unified\_api::NetClient）的集成](#16-与统一入口unified_apinetclient的集成)
+    - [16.1 CI/测试策略与网络可选跳过](#161-ci测试策略与网络可选跳过)
+  - [17. 性能基准建议](#17-性能基准建议)
+  - [18. DNSSEC：完整性与来源认证](#18-dnssec完整性与来源认证)
+  - [19. EDNS（扩展 DNS）与大包处理](#19-edns扩展-dns与大包处理)
+  - [20. 企业内网与 Split-Horizon（多视图）](#20-企业内网与-split-horizon多视图)
+  - [21. GeoDNS 与全局负载均衡](#21-geodns-与全局负载均衡)
+  - [22. 安全加固与最小权限配置](#22-安全加固与最小权限配置)
+    - [22.1 DoT 的 SNI 与证书固定（Pinning）](#221-dot-的-sni-与证书固定pinning)
+    - [22.2 Pinning 实操提示](#222-pinning-实操提示)
+
 ## 理论剖析：从域名到 IP 的旅程（1.1/1.2/1.3）
 
 ### 1.1 DNS 基础理论：从域名到 IP 的旅程
@@ -40,6 +88,12 @@
 hickory-resolver = { version = "0.24", features = ["tokio-runtime", "system-config", "dns-over-https-rustls", "dns-over-tls-rustls"] }
 hickory-proto = "0.24"
 ```
+
+兼容性与构建环境：
+
+- Rust 编译器：建议 Rust 1.89+（与本仓库最低版本一致）。
+- Tokio：1.35+，启用 `rt-multi-thread`, `macros`。
+- 平台：Windows 需正常网络与证书存储；容器最小镜像可能缺少根证书，需要随应用打包。
 
 ## 2. 快速开始
 

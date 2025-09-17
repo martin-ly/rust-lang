@@ -22,7 +22,7 @@
 5. [运行时系统](05_runtime_system.md)
 6. [错误处理机制](06_error_handling.md)
 7. [性能优化策略](07_performance_optimization.md)
-8. [并发模式](08_concurrency_patterns.md)
+8. [并发模式](../08_concurrency_patterns.md)
 9. [生态系统集成](09_ecosystem_integration.md)
 
 ---
@@ -39,11 +39,11 @@
 
 ## 交叉借用
 
-- [所有权与借用](../01_ownership_borrowing/)
-- [类型系统与Send/Sync](../02_type_system/)
-- [并发与同步原语](../05_concurrency/)
-- [分离逻辑与异步安全](../05_formal_verification/)
-- [生态工具链](../26_toolchain_ecosystem/)
+- 所有权与借用（占位）
+- 类型系统与Send/Sync（占位）
+- 并发与同步原语（占位）
+- 分离逻辑与异步安全（占位）
+- 生态工具链（占位）
 
 ---
 

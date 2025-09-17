@@ -25,6 +25,20 @@
 - 课程：MIT 6.824（Fault detection & Membership）
 - 论文：SWIM、Lifeguard、Gossip-based failure detection
 
+## 练习与思考
+
+1. 基于 SWIM 实现成员探测模拟器：支持可疑/确认状态、间接探测与gossip传播，测量收敛时间与误报率。
+2. 设计视图与拓扑联动：当某分区大量 Suspect 时，自动提升副本因子或触发多路读降级策略。
+3. 在高延迟长尾环境中调参：对比默认SWIM、Lifeguard变体的误报率与收敛延迟。
+4. 构建故障风暴抑制策略：在大规模状态变更时整形 gossip 速率，验证抖动对收敛的影响。
+
+## 快速导航
+
+- 分布式系统总纲：`../README.md`
+- 故障处理：`../failure/README.md`
+- 拓扑与放置：`../topology/README.md`
+- 复制机制：`../replication/README.md`
+
 ## 成员管理（Membership）
 
 - 覆盖：静态/动态成员、配置变更、故障探测（SWIM）

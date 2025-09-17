@@ -2,6 +2,8 @@
 
 与成熟开源中间件对标的统一接口与特性开关集合，面向 Rust 1.89：
 
+> 适用范围：Rust 1.89+；文档风格遵循 `../../c10_networks/docs/STYLE.md`。
+
 - Key-Value: Redis（`kv-redis`）
 - SQL: Postgres（`sql-postgres`）、MySQL（`sql-mysql`）、SQLite（`sql-sqlite`）
 - 消息与流: NATS（`mq-nats`）、Kafka（`mq-kafka`）、MQTT（`mq-mqtt`）
@@ -21,6 +23,18 @@ c12_middlewares = { version = "0.1", features = ["kv-redis", "sql-postgres"] }
 features = ["full"]
 ```
 
+### 特性矩阵（概览）
+
+- `kv-redis`: 连接/池化、超时、批量（MGET/MSET）、Pipeline、Lua、Pub/Sub
+- `sql-postgres`: 执行/查询、事务、批量、类型映射、配置化、可观测
+- `sql-mysql`: 执行/查询、事务、类型映射、配置化
+- `sql-sqlite`: 轻量内嵌/文件 DB、事务
+- `mq-nats`: 发送/订阅、低延迟；JetStream 规划中
+- `mq-kafka`: 最小骨架（参见 `kafka_pingora.md` 路线图）
+- `mq-mqtt`: QoS0/1/2、会话
+- `proxy-pingora`: 最小反代占位；路由/中间件/TLS 规划中
+- `obs`: tracing 可观测增强（建议与 `tokio` 搭配）
+
 ### 统一接口
 
 - `kv::KeyValueStore`
@@ -31,21 +45,6 @@ features = ["full"]
 
 提供统一配置结构（`config::*`）与通用异步重试（`util::retry_async`）：
 
-### 错误处理
-
-统一错误类型 `c12_middlewares::Error`，支持各中间件错误自动转换：
-
-```rust
-use c12_middlewares::Error;
-
-match result {
-    Ok(v) => println!("成功: {:?}", v),
-    Err(Error::Redis(e)) => println!("Redis 错误: {}", e),
-    Err(Error::Postgres(e)) => println!("Postgres 错误: {}", e),
-    Err(e) => println!("其他错误: {}", e),
-}
-```
-
 ### 可观测性
 
 启用 `obs` 特性获得 tracing 支持：
@@ -55,7 +54,7 @@ match result {
 #[cfg(feature = "obs")]
 tracing_subscriber::fmt::init();
 
-// 自动在关键操作中记录 span
+// 关键操作自动记录 span
 ```
 
 ### 事务支持
@@ -93,7 +92,10 @@ store.mset(pairs).await?;
 let values = store.mget(&["key1", "key2"]).await?;
 
 // SQL 批量执行
-let sqls = ["INSERT INTO users (name) VALUES ('Alice')", "INSERT INTO users (name) VALUES ('Bob')"];
+let sqls = [
+    "INSERT INTO users (name) VALUES ('Alice')",
+    "INSERT INTO users (name) VALUES ('Bob')",
+];
 let results = db.batch_execute(&sqls).await?;
 ```
 
@@ -135,7 +137,62 @@ let (_p, _c) = c12_middlewares::mqtt_client::MqttProducer::connect_with(
 ).await?;
 ```
 
-### 示例
+## 平台兼容
+
+- 操作系统：Linux、macOS、Windows（x86_64/arm64，以依赖库支持为准）
+- 运行时：建议 `tokio` 1.x；启用 `obs` 时需 `tracing` 生态
+- Kafka：需系统安装 `librdkafka`（Windows 可通过 vcpkg/预编译包，WSL 推荐）
+- SQLite：Windows 与 Linux 路径/权限差异较大，建议使用绝对路径
+
+## 版本与特性依赖
+
+- Rust：1.89+
+- 必选特性：按需启用 `kv-redis`、`sql-*`、`mq-*`、`proxy-pingora`
+- 可选特性：`obs` 用于 tracing；与 `tokio`/`tracing-subscriber` 协作
+
+## 故障排查（Troubleshooting）
+
+- 连接失败：
+  - 校验网络可达与鉴权；增加连接超时；本地优先用 `localhost`/环回地址
+  - 容器/WSL：确认端口映射、DNS 与防火墙策略
+- 超时与重试：
+  - 对非幂等写操作避免自动重试；为幂等读操作设置最大重试次数与退避
+- 资源与池化：
+  - 连接池过小会导致队列等待，过大可能放大后端压力；以 P95/P99 为依据调参
+- 可观测性：
+  - 启用 `obs` 查看关键 span；关注错误分布、慢查询/慢命令
+
+## 安全与合规
+
+- 传输层安全：
+  - Kafka/SQL/Redis 等在公有网络建议启用 TLS；校验证书与主机名
+- 鉴权与凭据：
+  - 使用最小权限账户；凭据通过环境变量/密钥管理服务注入，避免硬编码
+- 数据安全：
+  - 谨慎在日志中打印敏感字段；按需启用字段脱敏与审计
+
+## 性能基线与建议
+
+- Redis：优先使用 MGET/MSET/Pipeline；热点键启用 TTL 与就地更新，避免大 key
+- SQL：为热点查询建索引；批量写入与参数化优先；长事务拆分
+- MQ：消费者幂等与批量确认；对堆积实施背压与限速
+
+## 本地环境快速启动
+
+```powershell
+# Windows PowerShell 示例（如使用 WSL/Docker 视环境调整）
+# Redis（Docker）
+docker run -p 6379:6379 --name redis -d redis:7
+
+# Postgres（Docker）
+docker run -e POSTGRES_PASSWORD=pass -e POSTGRES_USER=user -e POSTGRES_DB=db \
+  -p 5432:5432 --name pg -d postgres:16
+
+# NATS（Docker）
+docker run -p 4222:4222 --name nats -d nats:2
+```
+
+## 示例与命令
 
 运行示例二进制打印启用特性：
 
@@ -159,4 +216,12 @@ cargo run --example comprehensive_demo --features kv-redis,sql-postgres,tokio
 cargo check --example basic_usage --features kv-redis,sql-postgres,tokio
 ```
 
-更多具体中间件接入示例将陆续补充。
+## 子文档
+
+- Redis: `docs/redis.md`
+- SQL: `docs/sql.md`
+- 消息与流: `docs/mq.md`
+- Pingora: `docs/pingora.md`
+- Kafka 与 Pingora 现状与路线图: `docs/kafka_pingora.md`
+
+> 更多具体中间件接入示例与最佳实践将陆续补充，如需优先支持某项能力，请在 issue 中注明场景、SLO 与 MVP 范围。

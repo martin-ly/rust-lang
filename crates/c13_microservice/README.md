@@ -1,6 +1,6 @@
 # Rust 微服务框架集合
 
-> 导航：返回 [`rust-formal-engineering-system`](../../rust-formal-engineering-system/README.md) · 质量保障 [`10_quality_assurance/00_index.md`](../../rust-formal-engineering-system/10_quality_assurance/00_index.md) · 网络模块 [`crates/c10_networks`](../c10_networks/)
+> 导航：返回 [`rust-formal-engineering-system`](../../rust-formal-engineering-system/README.md) · 质量保障 [`10_quality_assurance/00_index.md`](../../rust-formal-engineering-system/10_quality_assurance/00_index.md) · 网络模块 [`crates/c10_networks`](../c10_networks/) · 异步范式 [`02_async/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/02_async/00_index.md) · 事件驱动 [`08_event_driven/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/08_event_driven/00_index.md) · Actor [`09_actor_model/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/09_actor_model/00_index.md) · 基准指南 [`11_benchmark_minimal_guide.md`](../../rust-formal-engineering-system/02_programming_paradigms/11_benchmark_minimal_guide.md)
 
 这是一个全面的Rust微服务框架集合，支持多种Web框架、gRPC、服务网格和云原生部署。结合Rust 1.89的最新语言特性，提供高性能、安全、可扩展的微服务解决方案。
 
@@ -327,6 +327,15 @@ cargo run --example grpc_service
 cargo run --example volo_rpc_service
 ```
 
+## 🔗 范式与示例对照
+
+- 响应式：[`07_reactive/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/07_reactive/00_index.md)
+  - `examples/simple_observability_demo.rs`、`examples/comprehensive_observability_demo.rs`、`examples/axum_rest_api.rs`
+- 事件驱动：[`08_event_driven/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/08_event_driven/00_index.md)
+  - `examples/simple_axum.rs`、`examples/grpc_service.rs`、`examples/grpc_client_demo.rs`、`examples/messaging_demo.rs`、`examples/messaging_advanced_demo.rs`
+- Actor：[`09_actor_model/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/09_actor_model/00_index.md)
+  - `examples/volo_rpc_service.rs`、`examples/messaging_advanced_demo.rs`、`examples/advanced_grpc_demo.rs`
+
 ## 📦 构建说明（features 与独立模式）
 
 - 本 crate 已合并为单一 `Cargo.toml`，通过 features 复刻“独立构建”能力：
@@ -464,7 +473,7 @@ spec:
 
 ## 📄 许可证
 
-本项目采用MIT许可证。详见[LICENSE](LICENSE)文件。
+本项目采用MIT许可证。详见[LICENSE](../../LICENSE)文件。
 
 ## 🙏 致谢
 

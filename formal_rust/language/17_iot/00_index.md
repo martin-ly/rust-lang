@@ -5,6 +5,14 @@
 **Last Updated**: 2025-01-01  
 **Maintainer**: Rust Language Team  
 
+## 快速导航
+
+- IoT理论：`01_iot_theory.md`
+- IoT实现：`02_iot_implementation.md`
+- 形式化系统：`01_formal_iot_system.md`
+- 常见问题：`FAQ.md`
+- 完成总结：`COMPLETION_SUMMARY.md`
+
 ## 元数据 {#metadata}
 
 | 属性 | 值 |

@@ -5,7 +5,7 @@
 ### 1. 理论基础 {#theoretical-foundations}
 
   1. [形式化类型系统基础](01_formal_type_system.md)
-  2. [类型理论基础](02_type_theory.md)
+  2. 类型理论基础（暂缺，待补充）
   3. [范畴论与类型系统](03_category_theory.md)
   4. [类型安全理论](04_type_safety.md)
   5. [仿射类型理论](05_affine_types.md)
@@ -21,8 +21,8 @@
 ### 3. 参考资料 {#references}
 
   1. [代码示例](05_examples.md)
-  2. [定理证明](06_theorems.md)
-  3. [参考文献](07_references.md)
+  2. 定理证明（暂缺，待补充）
+  3. 参考文献（暂缺，待补充）
 
 ## 主题概述 {#overview}
 

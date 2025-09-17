@@ -33,6 +33,25 @@
 - 分布式系统：[crates/c20_distributed](../../../crates/c20_distributed/)
 - 微服务：[crates/c13_microservice](../../../crates/c13_microservice/)
 
+### 文件级清单（精选）
+
+- `crates/c06_async/examples/`：
+  - `tokio_exp01.rs`：任务与消息协作（Actor 基元）
+  - `axum_exp01.rs`：HTTP 入口 + 后端 Actor 化处理的雏形
+- `crates/c06_async/benches/`：
+  - `async_benches.rs`：通道/信号量吞吐（Actor 邮箱/流量控制对照）
+- 分布式对照：`crates/c20_distributed/`（共识/复制状态机，可映射为 Actor 集群）
+- 微服务示例（`crates/c13_microservice/examples/`）：
+- `volo_rpc_service.rs`：RPC 服务进程可 Actor 化
+- `messaging_advanced_demo.rs`：消息路由与处理器组合
+- `advanced_grpc_demo.rs`：复杂 RPC 交互（可映射 Actor 会话）
+
+### 关联基准与指南
+
+- 最小基准指南：[`../11_benchmark_minimal_guide.md`](../11_benchmark_minimal_guide.md)
+- 同步基准：[`../../../crates/c05_threads/benches/`](../../../crates/c05_threads/benches/)
+- 异步基准：[`../../../crates/c06_async/benches/`](../../../crates/c06_async/benches/)
+
 ## 相关索引
 
 - 并发范式：[`../05_concurrent/00_index.md`](../05_concurrent/00_index.md)

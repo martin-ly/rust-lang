@@ -1068,12 +1068,31 @@ impl SecureBlockchain {
 }
 ```
 
+### 与 Rust 的语义映射（补充）
+
+- 区块链系统 ↔ `struct Blockchain` 与 `trait ConsensusEngine`
+- 智能合约 ↔ `trait SmartContract` 与 `struct ContractExecutor`
+- 密码学原语 ↔ `sha2`、`ed25519-dalek`、`secp256k1` 等库
+- 并发安全 ↔ `Arc<RwLock<T>>`、`Mutex<T>`、`tokio::spawn` 等
+
+### 练习与思考
+
+1. 实现一个完整的区块链系统，包括PoW共识、P2P网络和智能合约执行引擎。
+2. 设计一个支持多种共识机制的区块链框架，能够动态切换PoW、PoS和PBFT。
+3. 构建一个智能合约安全分析工具，能够检测重入攻击、整数溢出等常见漏洞。
+4. 开发一个区块链性能优化系统，包括分片、状态通道和并行处理机制。
+
+### 快速导航
+
+- 区块链理论：`01_blockchain_theory.md`
+- 密码学系统：`02_cryptographic_systems.md`
+- 共识机制：`03_consensus_mechanisms.md`
+- 智能合约引擎：`05_smart_contract_engine.md`
+- 网络协议：`06_network_protocols.md`
+- 模型理论：`../../18_model/01_model_theory.md`
+
 ---
 
 **文档状态**: 完成  
 **最后更新**: 2025-01-27  
 **维护者**: Rust形式化理论项目组
-
-"
-
----

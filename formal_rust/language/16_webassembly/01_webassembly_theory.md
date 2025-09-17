@@ -26,6 +26,14 @@
     - [SIMD 优化 {#simd-优化}](#simd-优化-simd-优化)
     - [内存优化 {#内存优化}](#内存优化-内存优化)
     - [跨平台编译 {#跨平台编译}](#跨平台编译-跨平台编译)
+  - [记号与术语约定](#记号与术语约定)
+  - [与 Rust 的语义映射](#与-rust-的语义映射)
+  - [示例与反例](#示例与反例)
+    - [示例：高性能数值计算](#示例高性能数值计算)
+    - [反例：不安全的 WASM 内存访问](#反例不安全的-wasm-内存访问)
+  - [练习](#练习)
+  - [交叉引用与落地资源](#交叉引用与落地资源)
+    - [快速导航](#快速导航)
 
 ---
 
@@ -790,3 +798,120 @@ pub fn process_data(data: &[u8]) -> Vec<u8> {
 ### 跨平台编译 {#跨平台编译}
 
 用于跨文档引用，统一指向跨平台编译与条件优化。
+
+## 记号与术语约定
+
+为保证全文一致，采用如下记号约定：
+
+- **WebAssembly模块**：$M$ 表示模块；$T$ 表示类型集合；$F$ 表示函数集合；$G$ 表示全局变量集合
+- **内存与栈**：$\text{Memory}$ 表示线性内存；$\text{Stack}$ 表示操作数栈；$\text{Local}$ 表示局部变量
+- **指令与执行**：$I$ 表示指令；$\text{PC}$ 表示程序计数器；$\text{Frame}$ 表示调用栈帧
+- **类型系统**：$\text{i32}, \text{i64}, \text{f32}, \text{f64}$ 表示数值类型；$\text{ref}$ 表示引用类型
+
+术语对照（WebAssembly语境）：
+
+- **WebAssembly (WASM)**：低级二进制指令格式，基于栈机器的虚拟机架构
+- **线性内存 (Linear Memory)**：连续的一维字节数组，提供内存访问接口
+- **栈机器 (Stack Machine)**：基于操作数栈的虚拟机执行模型
+- **WASI (WebAssembly System Interface)**：WebAssembly 系统接口标准
+
+## 与 Rust 的语义映射
+
+为了将 WebAssembly 理论映射到 Rust 实现，给出从形式化定义到语言构件的对应关系：
+
+- **模块结构 ↔ Crate 与模块系统**：`lib.rs` 对应 WASM 模块，`mod` 对应函数导出
+- **类型映射 ↔ Rust 类型系统**：`i32` ↔ `i32`，`f64` ↔ `f64`，复杂类型通过序列化处理
+- **内存管理 ↔ 所有权与借用**：WASM 线性内存对应 Rust 的堆分配，借用检查确保内存安全
+- **函数调用 ↔ 函数接口**：`#[wasm_bindgen]` 宏实现 Rust 函数到 WASM 的绑定
+- **异步执行 ↔ Future 与 async/await**：WASM 异步执行对应 Rust 的异步编程模型
+
+示意性规则（非强制）：
+
+1. 若 WASM 函数 $f: \text{i32} \rightarrow \text{i32}$ 对应 Rust 函数 `fn f(x: i32) -> i32`
+2. 对 WASM 线性内存访问，可用 `unsafe` 块配合指针操作，或使用 `wasm-bindgen` 的安全包装
+3. 若 WASM 模块需要与 JS 互操作，可用 `#[wasm_bindgen]` 导出接口
+
+实际落地工具链（示例）：
+
+- 编译工具：`wasm-pack`, `wasm-bindgen`, `wasm-opt` 等构建工具
+- 运行时：`wasmtime`, `wasmer`, `wasm3` 等 WASM 运行时
+- 互操作：`js-sys`, `web-sys` 等 JavaScript 绑定
+- 优化：`wasm-opt`, `twiggy` 等分析和优化工具
+
+## 示例与反例
+
+### 示例：高性能数值计算
+
+设需要在 WASM 中实现矩阵乘法 $C = A \times B$，其中 $A, B, C$ 为 $n \times n$ 矩阵：
+
+在 Rust 中可表达为（示意）：
+
+```rust
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+pub fn matrix_multiply(
+    a: &[f32], 
+    b: &[f32], 
+    result: &mut [f32], 
+    size: usize
+) {
+    for i in 0..size {
+        for j in 0..size {
+            let mut sum = 0.0;
+            for k in 0..size {
+                sum += a[i * size + k] * b[k * size + j];
+            }
+            result[i * size + j] = sum;
+        }
+    }
+}
+
+#[wasm_bindgen]
+pub fn simd_matrix_multiply(
+    a: &[f32], 
+    b: &[f32], 
+    result: &mut [f32], 
+    size: usize
+) {
+    // 使用 SIMD 指令优化
+    #[cfg(target_feature = "simd128")]
+    unsafe {
+        // SIMD 实现
+    }
+}
+```
+
+该实现通过 WASM 提供接近原生的性能，同时保持内存安全。
+
+### 反例：不安全的 WASM 内存访问
+
+若直接使用原始指针进行 WASM 内存操作而不进行边界检查，可能导致内存越界访问，破坏 WASM 的沙箱安全模型。
+
+## 练习
+
+1. 实现一个 WASM 模块，支持大整数运算（加法、乘法），并比较与 JavaScript 实现的性能差异。
+2. 设计一个 WASM 与 JavaScript 的双向数据交换接口，支持复杂对象序列化和反序列化。
+3. 使用 WASI 接口实现文件操作，包括读取、写入和目录遍历，并处理错误情况。
+4. 实现一个基于 WASM 的图像处理库，支持滤镜、缩放等操作，并优化内存使用。
+
+## 交叉引用与落地资源
+
+- 编译理论：`03_compilation_theory.md`
+- Rust到WASM：`04_rust_to_wasm.md`
+- 类型映射：`05_type_mapping.md`
+- 优化策略：`06_optimization.md`
+- 运行时：`07_wasm_runtime.md`
+- 模型理论：`../../18_model/01_model_theory.md`
+- IoT系统：`../../17_iot/FAQ.md`
+- 分布式系统：`../../../crates/c20_distributed/docs/FAQ.md`
+- AI系统：`../../../crates/c19_ai/docs/FAQ.md`
+
+- 区块链：`../../15_blockchain/FAQ.md`
+
+### 快速导航
+
+- 模型理论：`../../18_model/01_model_theory.md`
+- IoT FAQ：`../../17_iot/FAQ.md`
+- 分布式系统FAQ：`../../../crates/c20_distributed/docs/FAQ.md`
+- AI系统FAQ：`../../../crates/c19_ai/docs/FAQ.md`

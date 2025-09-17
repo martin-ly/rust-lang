@@ -567,6 +567,189 @@ impl Blockchain {
 - Rust 开发的 DeFi 应用在 Solana、Polkadot 等链上实现高性能交易。
 - Rust 用于区块链浏览器、钱包等应用层工具开发。
 
-"
+### 与 Rust 的语义映射（补充）
+
+- 区块链应用 ↔ `struct BlockchainApp` 与 `trait ApplicationLayer`
+- 智能合约 ↔ `trait SmartContract` 与 `struct ContractExecutor`
+- DeFi协议 ↔ `struct DeFiProtocol` 与 `trait LiquidityProvider`
+- 跨链桥接 ↔ `struct CrossChainBridge` 与 `trait AssetTransfer`
+
+### 练习与思考
+
+1. 实现一个完整的DeFi协议，包括AMM、流动性挖矿和治理机制。
+2. 设计一个跨链资产桥接系统，支持不同区块链网络间的资产转移。
+3. 构建一个智能合约开发框架，提供模板、测试工具和部署脚本。
+4. 开发一个区块链数据分析平台，提供链上数据的可视化和分析功能。
+
+### 快速导航
+
+- 区块链理论：`01_blockchain_theory.md`
+- 智能合约引擎：`05_smart_contract_engine.md`
+- 网络协议：`06_network_protocols.md`
+- 模型理论：`../../18_model/01_model_theory.md`
+
+## 记号与术语约定
+
+为保证全文一致，采用如下记号约定：
+
+- **状态与转换**：$\Sigma$ 表示系统状态；$\Sigma_0$ 表示初始状态；$\Sigma \rightarrow \Sigma'$ 表示状态转换
+- **事务与区块**：$T$ 表示事务；$B$ 表示区块；$\text{Chain} = \{B_0, B_1, \ldots, B_n\}$ 表示区块链
+- **密码学原语**：$H$ 表示哈希函数；$S_{sk}(m)$ 表示签名；$V_{pk}(m, \sigma)$ 表示验证
+- **共识与安全**：$\text{Consensus}$ 表示共识协议；$\text{Safety}$ 表示安全性；$\text{Liveness}$ 表示活性
+
+术语对照（区块链应用语境）：
+
+- **状态转换系统 (State Transition System)**：描述系统状态如何通过事务进行转换的数学模型
+- **不可篡改性 (Immutability)**：一旦数据被记录在区块链上，极难甚至不可能被修改或删除
+- **分布式共识 (Distributed Consensus)**：分布式网络中节点就账本状态达成一致的算法
+- **形式化验证 (Formal Verification)**：使用数学方法证明系统满足特定性质的过程
+
+## 与 Rust 的语义映射
+
+为了将区块链应用理论映射到 Rust 实现，给出从形式化定义到语言构件的对应关系：
+
+- **状态管理 ↔ 状态机模式**：使用 `enum State` 和 `trait StateMachine` 表达状态转换逻辑
+- **事务处理 ↔ 命令模式**：通过 `trait Command` 和 `trait CommandHandler` 实现事务处理
+- **区块构建 ↔ 建造者模式**：使用 `struct BlockBuilder` 逐步构建区块
+- **链式存储 ↔ 持久化存储**：通过 `trait Storage` 实现区块链数据的持久化
+- **共识协议 ↔ 异步任务**：使用 `tokio::spawn` 和消息传递实现共识算法
+
+示意性规则（非强制）：
+
+1. 若状态转换 $\Sigma \rightarrow \Sigma'$ 对应函数 `fn apply_transaction(&mut State, Transaction) -> Result<(), Error>`
+2. 对区块验证，可用 `fn validate_block(&Block, &Block) -> Result<(), ValidationError>`
+3. 若需要共识参与，可用 `async fn participate_consensus(&mut Node) -> ConsensusResult`
+
+实际落地工具链（示例）：
+
+- 密码学：`sha2`, `ed25519-dalek`, `secp256k1` 等密码学库
+- 序列化：`serde`, `bincode` 等序列化工具
+- 存储：`rocksdb`, `sled` 等嵌入式数据库
+- 网络：`tokio`, `quinn`, `libp2p` 等异步网络框架
+
+## 示例与反例
+
+### 示例：简单状态机实现
+
+设需要实现一个支持转账的账户状态机：
+
+在 Rust 中可表达为（示意）：
+
+```rust
+use std::collections::HashMap;
+use serde::{Serialize, Deserialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Account {
+    pub address: String,
+    pub balance: u64,
+    pub nonce: u64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Transfer {
+    pub from: String,
+    pub to: String,
+    pub amount: u64,
+    pub nonce: u64,
+    pub signature: Vec<u8>,
+}
+
+#[derive(Debug, Clone)]
+pub struct StateMachine {
+    accounts: HashMap<String, Account>,
+}
+
+impl StateMachine {
+    pub fn new() -> Self {
+        Self {
+            accounts: HashMap::new(),
+        }
+    }
+    
+    pub fn apply_transaction(&mut self, transfer: &Transfer) -> Result<(), StateError> {
+        // 验证签名
+        self.verify_signature(transfer)?;
+        
+        // 检查账户余额
+        let from_account = self.accounts.get(&transfer.from)
+            .ok_or(StateError::AccountNotFound)?;
+        
+        if from_account.balance < transfer.amount {
+            return Err(StateError::InsufficientBalance);
+        }
+        
+        if from_account.nonce != transfer.nonce {
+            return Err(StateError::InvalidNonce);
+        }
+        
+        // 执行转账
+        let mut from_account = from_account.clone();
+        from_account.balance -= transfer.amount;
+        from_account.nonce += 1;
+        
+        let mut to_account = self.accounts.get(&transfer.to)
+            .cloned()
+            .unwrap_or_else(|| Account {
+                address: transfer.to.clone(),
+                balance: 0,
+                nonce: 0,
+            });
+        to_account.balance += transfer.amount;
+        
+        self.accounts.insert(transfer.from.clone(), from_account);
+        self.accounts.insert(transfer.to.clone(), to_account);
+        
+        Ok(())
+    }
+    
+    fn verify_signature(&self, transfer: &Transfer) -> Result<(), StateError> {
+        // 实现签名验证逻辑
+        // 这里简化处理
+        Ok(())
+    }
+    
+    pub fn get_account(&self, address: &str) -> Option<&Account> {
+        self.accounts.get(address)
+    }
+    
+    pub fn get_state_hash(&self) -> [u8; 32] {
+        // 计算状态哈希
+        use sha2::{Sha256, Digest};
+        let mut hasher = Sha256::new();
+        for (address, account) in &self.accounts {
+            hasher.update(address.as_bytes());
+            hasher.update(&account.balance.to_le_bytes());
+            hasher.update(&account.nonce.to_le_bytes());
+        }
+        hasher.finalize().into()
+    }
+}
+```
+
+该实现通过状态机模式确保状态转换的原子性和一致性。
+
+### 反例：非原子性状态更新
+
+若状态更新不是原子性的，可能导致部分更新成功、部分更新失败，破坏系统的一致性。
+
+## 练习
+
+1. 实现一个完整的区块链状态机，支持账户创建、转账、合约部署等操作，并用属性测试验证其正确性。
+2. 设计一个分片区块链系统，将状态分为多个分片，每个分片独立处理事务，并处理跨分片交易。
+3. 实现一个智能合约执行引擎，支持图灵完备的合约语言，并确保执行的安全性和可预测性。
+4. 设计一个区块链升级机制，支持协议升级和向后兼容性，并处理状态迁移和分叉问题。
+
+## 交叉引用与落地资源
+
+- 区块链理论：`01_blockchain_theory.md`
+- 共识机制：`03_consensus_mechanisms.md`
+- 智能合约：`05_smart_contract_engine.md`
+- 密码学系统：`02_cryptographic_systems.md`
+- 模型理论：`../../18_model/01_model_theory.md`
+- IoT系统：`../../17_iot/FAQ.md`
+- 分布式系统：`../../../crates/c20_distributed/docs/FAQ.md`
+- AI系统：`../../../crates/c19_ai/docs/FAQ.md`
+- WebAssembly：`../../16_webassembly/FAQ.md`
 
 ---

@@ -405,6 +405,7 @@ RO(code) = optimize(code, runtime_constraints)
 - [形式化模型理论](01_formal_model_theory.md)
 - [形式化模型系统](01_formal_model_system.md)
 - [模型设计模式](03_model_patterns.md)
+- [常见问题解答](FAQ.md)
 
 ### 8.2 相关模块
 
@@ -419,6 +420,10 @@ RO(code) = optimize(code, runtime_constraints)
 - [实现模式理论](../09_design_patterns/02_implementation_patterns.md)
 - [代码生成理论](../07_macro_system/01_code_generation.md)
 - [优化理论](../22_performance_optimization/01_optimization_theory.md)
+
+### 8.4 快速导航
+
+- 返回模块索引：`INDEX.md`
 
 ---
 

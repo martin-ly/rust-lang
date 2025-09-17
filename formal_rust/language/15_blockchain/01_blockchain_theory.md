@@ -18,6 +18,14 @@
     - [15.2.5 攻击模型与防御](#1525-攻击模型与防御)
   - [批判性分析](#批判性分析)
   - [典型案例](#典型案例)
+  - [记号与术语约定](#记号与术语约定)
+  - [与 Rust 的语义映射](#与-rust-的语义映射)
+  - [示例与反例](#示例与反例)
+    - [示例：简单区块链实现](#示例简单区块链实现)
+    - [反例：中心化控制的伪区块链](#反例中心化控制的伪区块链)
+  - [练习](#练习)
+  - [交叉引用与落地资源](#交叉引用与落地资源)
+    - [快速导航](#快速导航)
 
 ---
 
@@ -383,6 +391,119 @@ impl SecurityAnalyzer {
 
 后续将继续补充"15.3 智能合约与形式化验证""15.4 区块链应用与扩展"等章节，保持内容递进与学术规范。
 
-"
+## 记号与术语约定
+
+为保证全文一致，采用如下记号约定：
+
+- **区块链结构**：$B_i$ 表示第 $i$ 个区块；$H(B_i)$ 表示区块 $B_i$ 的哈希值；$\text{prev\_hash}(B_i)$ 表示前一个区块的哈希引用
+- **交易与状态**：$T_j$ 表示第 $j$ 个交易；$\text{State}_i$ 表示第 $i$ 个区块后的状态；$\text{MerkleRoot}(T)$ 表示交易集合 $T$ 的默克尔根
+- **共识与安全**：$\text{PoW}(B)$ 表示区块 $B$ 的工作量证明；$\text{PoS}(B)$ 表示权益证明；$\text{Byzantine}(n, f)$ 表示 $n$ 个节点中最多 $f$ 个拜占庭节点
+- **密码学原语**：$H$ 表示哈希函数；$S_{sk}(m)$ 表示用私钥 $sk$ 对消息 $m$ 的签名；$V_{pk}(m, \sigma)$ 表示用公钥 $pk$ 验证签名
+
+术语对照（区块链语境）：
+
+- **区块链 (Blockchain)**：通过密码学链接的区块序列，形成不可篡改的分布式账本
+- **共识机制 (Consensus Mechanism)**：分布式网络中节点就账本状态达成一致的算法
+- **智能合约 (Smart Contract)**：在区块链上自动执行的代码，具有确定性和不可篡改性
+- **去中心化 (Decentralization)**：无单点控制，由网络节点共同维护和验证的系统特性
+
+## 与 Rust 的语义映射
+
+为了将区块链理论映射到 Rust 实现，给出从形式化定义到语言构件的对应关系：
+
+- **区块结构 ↔ 结构体与枚举**：`struct Block` 包含 `prev_hash`, `merkle_root`, `transactions`, `nonce` 等字段
+- **状态转换 ↔ 状态机模式**：使用 `enum State` 和 `trait StateMachine` 表达状态转换逻辑
+- **共识算法 ↔ 异步任务与消息传递**：通过 `tokio::spawn` 和 `mpsc` 实现节点间通信
+- **密码学操作 ↔ 类型安全接口**：使用 `trait` 定义哈希、签名等密码学原语的统一接口
+- **不可变性 ↔ 所有权系统**：利用 Rust 的所有权系统确保数据不被意外修改
+
+示意性规则（非强制）：
+
+1. 若区块 $B_i$ 对应类型 `Block`，则哈希函数 $H(B_i)$ 可视为 `fn hash(&Block) -> Hash256`
+2. 对状态转换 $\text{State}_i \rightarrow \text{State}_{i+1}$，可用 `fn apply_transaction(&mut State, Transaction) -> Result<(), Error>`
+3. 若共识协议要求节点间通信，可用 `async fn consensus_round(&mut Node) -> ConsensusResult`
+
+实际落地工具链（示例）：
+
+- 密码学层：`sha2`, `ed25519-dalek`, `secp256k1` 等成熟库
+- 网络层：`tokio`, `quinn` (QUIC), `libp2p` 等异步网络框架
+- 存储层：`rocksdb`, `sled` 等嵌入式数据库
+- 序列化：`serde`, `bincode` 等高效序列化工具
+
+## 示例与反例
+
+### 示例：简单区块链实现
+
+设区块链包含区块序列 $B_0, B_1, \ldots, B_n$，每个区块 $B_i$ 包含：
+
+- 前一个区块的哈希：$\text{prev\_hash}(B_i) = H(B_{i-1})$
+- 交易默克尔根：$\text{merkle\_root}(B_i) = \text{MerkleRoot}(\{T_1, T_2, \ldots, T_k\})$
+- 工作量证明：$\text{nonce}(B_i)$ 使得 $H(B_i) < \text{target}$
+
+在 Rust 中可表达为（示意）：
+
+```rust
+use sha2::{Sha256, Digest};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Block {
+    pub index: u64,
+    pub prev_hash: [u8; 32],
+    pub merkle_root: [u8; 32],
+    pub transactions: Vec<Transaction>,
+    pub nonce: u64,
+    pub timestamp: u64,
+}
+
+impl Block {
+    pub fn hash(&self) -> [u8; 32] {
+        let mut hasher = Sha256::new();
+        hasher.update(&self.index.to_le_bytes());
+        hasher.update(&self.prev_hash);
+        hasher.update(&self.merkle_root);
+        hasher.update(&self.nonce.to_le_bytes());
+        hasher.update(&self.timestamp.to_le_bytes());
+        hasher.finalize().into()
+    }
+    
+    pub fn is_valid(&self, prev_block: &Block) -> bool {
+        self.prev_hash == prev_block.hash() &&
+        self.merkle_root == self.calculate_merkle_root() &&
+        self.hash() < TARGET_DIFFICULTY
+    }
+}
+```
+
+该实现通过类型系统确保区块结构的完整性，通过哈希验证确保链的不可篡改性。
+
+### 反例：中心化控制的伪区块链
+
+若系统存在单点控制或可被管理员任意修改，则不符合区块链的去中心化和不可篡改特性。此类系统虽然可能使用类似的数据结构，但缺乏区块链的核心安全保证。
+
+## 练习
+
+1. 实现一个简单的默克尔树，支持插入、删除和成员性证明，并用属性测试验证其正确性。
+2. 设计一个基于权益证明的共识算法，包括验证者选择、区块提议和投票机制，并用 Rust 实现原型。
+3. 分析 51% 攻击对区块链安全性的影响，设计检测和缓解机制，并给出形式化安全证明框架。
+4. 实现一个状态机复制系统，支持故障恢复和网络分区处理，并用模型检查验证其一致性性质。
+
+## 交叉引用与落地资源
+
+- 密码学基础：`02_cryptographic_systems.md`
+- 共识机制：`03_consensus_mechanisms.md`
+- 智能合约：`05_smart_contract_engine.md`
+- 模型理论：`../../18_model/01_model_theory.md`
+- IoT系统：`../../17_iot/FAQ.md`
+- 分布式系统：`../../../crates/c20_distributed/docs/FAQ.md`
+- AI系统：`../../../crates/c19_ai/docs/FAQ.md`
+- WebAssembly：`../../16_webassembly/FAQ.md`
+
+### 快速导航
+
+- 模型理论：`../../18_model/01_model_theory.md`
+- 密码学系统：`02_cryptographic_systems.md`
+- 共识机制：`03_consensus_mechanisms.md`
+- 分布式系统FAQ：`../../../crates/c20_distributed/docs/FAQ.md`
+- AI系统FAQ：`../../../crates/c19_ai/docs/FAQ.md`
 
 ---

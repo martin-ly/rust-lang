@@ -25,7 +25,7 @@
 ### 2. [编程范式](./02_programming_paradigms/)
 
 - **01_synchronous/** - 同步编程
-- **02_asynchronous/** - 异步编程
+- **02_async/** - 异步编程
 - **03_functional/** - 函数式编程
 - **04_object_oriented/** - 面向对象编程
 - **05_concurrent/** - 并发编程

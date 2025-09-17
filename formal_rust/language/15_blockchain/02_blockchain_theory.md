@@ -43,6 +43,9 @@
   - [11. 思维导图](#11-思维导图)
   - [批判性分析](#批判性分析)
   - [典型案例](#典型案例)
+    - [与 Rust 的语义映射（补充）](#与-rust-的语义映射补充)
+    - [练习与思考](#练习与思考)
+    - [快速导航](#快速导航)
 
 ## 1. 引言：区块链与形式化方法
 
@@ -1093,6 +1096,24 @@ function ModelCheck(Protocol P, Property φ):
 - Rust 实现的 Substrate 框架支持多链并行和可插拔共识。
 - Rust 用于开发高性能 Layer2 扩展方案。
 
-"
+### 与 Rust 的语义映射（补充）
+
+- 形式模型 ↔ `struct`/`enum` 抽象；性质 ↔ 测试断言与属性测试
+- PoW/PoS 验证 ↔ 可插拔验证器 `trait ConsensusVerifier { fn verify(&self, header: &Header) -> bool }`
+- 默克尔/签名 ↔ `sha2`/`blake3` 与 `ed25519-dalek`/`k256`
+
+### 练习与思考
+
+1. 将“最终一致性”概率界形式化为可计算函数，绘制 p 与 k 的关系曲线并解释工程含义。
+2. 将双花成功概率的推导用仿真实验复现，给出不同网络延迟 z 的对比。
+3. 为“可验证历史记录”编写线性化检查测试，注入乱序与延迟并验证。
+
+### 快速导航
+
+- 区块链理论：`01_blockchain_theory.md`
+- 密码学系统：`02_cryptographic_systems.md`
+- 共识机制：`03_consensus_mechanisms.md`
+- 智能合约引擎：`05_smart_contract_engine.md`
+- 模型理论：`../../18_model/01_model_theory.md`
 
 ---

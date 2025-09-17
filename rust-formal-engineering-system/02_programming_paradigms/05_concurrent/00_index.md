@@ -33,6 +33,26 @@
 - 异步编程：[crates/c06_async](../../../crates/c06_async/)
 - 分布式系统：[crates/c20_distributed](../../../crates/c20_distributed/)
 
+### 文件级清单（精选）
+
+- 同步并发（`crates/c05_threads/examples/`）：
+  - `message_passing_demo.rs`：标准库 channel、crossbeam mpsc、watch 对比
+  - `priority_channels_demo.rs`：带优先级消息通道
+  - `stream_backpressure_demo.rs`：同步流与丢弃型背压
+  - `stream_rate_batch_demo.rs`：限速与批处理
+  - `backpressure_overview_demo.rs`：四种背压策略对照
+- 同步基准（`crates/c05_threads/benches/`）：
+  - `concurrency_benchmark.rs`、`priority_channels_bench.rs`、`backpressure_bench.rs`
+- 异步示例/基准：
+  - `crates/c06_async/examples/tokio_exp01.rs`、`crates/c06_async/examples/axum_exp01.rs`
+  - `crates/c06_async/benches/async_benches.rs`
+
+### 关联基准与指南
+
+- 最小基准指南：[`../11_benchmark_minimal_guide.md`](../11_benchmark_minimal_guide.md)
+- 同步基准：[`../../../crates/c05_threads/benches/`](../../../crates/c05_threads/benches/)
+- 异步基准：[`../../../crates/c06_async/benches/`](../../../crates/c06_async/benches/)
+
 ## 相关索引
 
 - 理论基础（并发模型）：[`../../01_theoretical_foundations/04_concurrency_models/00_index.md`](../../01_theoretical_foundations/04_concurrency_models/00_index.md)

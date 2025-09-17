@@ -13,15 +13,15 @@
 
 ### 2. 分析与优化 {#analysis-and-optimization}
 
-1. [控制流分析](02_control_flow_analysis.md)
-2. [控制流优化](03_control_flow_optimization.md)
-3. [模式匹配系统](02_pattern_matching_system.md)
+1. 控制流分析（暂缺，待补充）
+2. 控制流优化（暂缺，待补充）
+3. 模式匹配系统（暂缺，待补充）
 
 ### 3. 参考资料 {#references}
 
-1. [代码示例](04_examples.md)
-2. [定理证明](06_theorems.md)
-3. [参考文献](07_references.md)
+1. 代码示例（暂缺，待补充）
+2. 定理证明（暂缺，待补充）
+3. 参考文献（暂缺，待补充）
 
 ## 主题概述 {#overview}
 
@@ -72,7 +72,7 @@ Rust控制流系统提供了强大的程序执行控制能力，与所有权、�
 |------|----------|----------|
 | 所有权转移 | [模块 01: 所有权与借用](../01_ownership_borrowing/01_formal_ownership_system.md#所有权转移) | 01, 03 |
 | 类型安全 | [模块 02: 类型系统](../02_type_system/04_type_safety.md#类型安全) | 02, 23 |
-| 模式匹配 | [模块 03: 控制流](02_pattern_matching_system.md#模式匹配定义) | 03, 19 |
+| 模式匹配 | 模式匹配系统（暂缺） | 03, 19 |
 | 异步控制流 | [模块 06: 异步/等待](../06_async_await/01_formal_async_model.md#异步控制流) | 06, 03 |
 | 错误处理 | [模块 09: 错误处理](../09_error_handling/01_formal_error_model.md#错误处理模型) | 09, 03 |
 | 函数式编程 | [模块 20: 理论视角](../20_theoretical_perspectives/01_programming_paradigms.md#函数式编程) | 20, 03 |
@@ -128,8 +128,8 @@ Rust控制流系统提供了强大的程序执行控制能力，与所有权、�
 | 控制流 | [执行模型](../22_performance_optimization/01_formal_optimization_theory.md#执行模型) | 控制流是执行模型的核心组成部分 |
 | 模式匹配 | [代数数据类型](../02_type_system/01_formal_type_system.md#代数数据类型定义) | 模式匹配提供了对代数数据类型的解构机制 |
 | 条件控制 | [类型安全](../02_type_system/04_type_safety.md#类型安全) | 条件控制依赖类型安全保证分支类型一致性 |
-| 函数控制 | [闭包](../19_advanced_language_features/05_closures.md) | 函数控制与闭包共享函数调用语义 |
-| 错误处理 | [Result类型](../09_error_handling/01_formal_error_model.md) | 错误处理使用Result类型表示可能的失败 |
+| 函数控制 | 闭包（暂缺） | 函数控制与闭包共享函数调用语义 |
+| 错误处理 | Result类型（暂缺） | 错误处理使用Result类型表示可能的失败 |
 
 ## 数学符号说明 {#mathematical-notation}
 

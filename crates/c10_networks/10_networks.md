@@ -1,8 +1,18 @@
 ﻿# 网络编程
 
+> 适用范围：Rust 1.89+；本章为 `c10_networks` 的索引与导航，风格遵循 `docs/STYLE.md`。
+
+## 导航
+
+- 运行指南：`README.md`
+- DNS 集成：`docs/dns_hickory_integration.md`
+- 抓包指南：`docs/libpnet_guide.md`
+- 基准建议：`docs/benchmark_minimal_guide.md`
+
 ## 目录
 
 - [网络编程](#网络编程)
+  - [导航](#导航)
   - [目录](#目录)
   - [1. 网络协议模型](#1-网络协议模型)
     - [1.1 OSI/TCP-IP 协议栈的形式化](#11-ositcp-ip-协议栈的形式化)
@@ -25,6 +35,7 @@
     - [5.2 数字签名与证书](#52-数字签名与证书)
   - [6. 总结](#6-总结)
   - [7. 版本对齐说明与形式化勘误 {#version-alignment-network}](#7-版本对齐说明与形式化勘误-version-alignment-network)
+    - [快速开始（新增：WebSocket/UDP/gRPC）](#快速开始新增websocketudpgrpc)
   - [附录A. P2P 网络（新增）](#附录a-p2p-网络新增)
     - [A.1 定义与目标](#a1-定义与目标)
     - [A.2 形式化与状态机](#a2-形式化与状态机)

@@ -46,3 +46,17 @@ fn apply_entry<S: StateMachineStorage>(sm: &mut S, entry: &[u8]) {
 - Wiki：`Write-ahead logging`, `Log-structured storage`, `Copy-on-write`
 - 课程：MIT 6.824（Lab：Raft snapshots）、CMU 15-445（日志与恢复）
 - 论文/实践：Raft 论文附录（快照）、LSM-Tree、RocksDB/Peacock/Bitcask 设计文档
+
+## 练习与思考
+
+1. 实现一个完整的WAL系统，支持日志分段、校验和验证以及崩溃恢复。
+2. 设计一个快照管理系统，能够自动创建快照、压缩存储并支持增量快照。
+3. 构建一个存储引擎抽象层，支持多种底层存储后端（RocksDB、LSM-Tree等）。
+4. 开发一个存储性能监控工具，能够分析I/O模式、检测热点数据并提供优化建议。
+
+## 快速导航
+
+- 分布式系统总纲：`../README.md`
+- 共识机制：`../consensus/README.md`
+- 复制机制：`../replication/README.md`
+- 故障处理：`../failure/README.md`
