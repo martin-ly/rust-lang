@@ -85,7 +85,10 @@ Ok(())
 # async fn tx() -> anyhow::Result<()> {
 #[cfg(any(feature = "sql-postgres", feature = "sql-mysql", feature = "sql-sqlite"))]
 {
-    let db = /* 按对应后端 connect(...) */ todo!();
+    // 以 Postgres 为例；MySQL/SQLite 请替换为对应客户端
+    let db = c12_middlewares::postgres_client::PostgresDb::connect(
+        "postgres://user:pass@localhost/db"
+    ).await?;
     db.begin().await?;
     if let Err(e) = db.execute("INSERT INTO users (name) VALUES ('Alice')").await {
         db.rollback().await?;

@@ -26,6 +26,7 @@
     - [实践建议](#实践建议)
     - [未来方向](#未来方向)
     - [参考资料](#参考资料)
+  - [工程落地与验证（收口）](#工程落地与验证收口)
 
 ## 概念定义
 
@@ -674,3 +675,23 @@ mod language_evolution {
 - [Pragmatics](https://en.wikipedia.org/wiki/Pragmatics)
 - [Language Acquisition](https://en.wikipedia.org/wiki/Language_acquisition)
 - [Rust Programming Language](https://www.rust-lang.org/)
+
+---
+
+## 工程落地与验证（收口）
+
+- 从语言学到工程映射
+  - 语法→AST/类型检查：语法/语义规则落地到解析与类型系统
+  - 语用→API 设计：意图清晰（命名/错误语义/不可变优先）
+  - 习得→文档与示例：循序渐进示例与常错提醒
+- 工具链与门禁
+  - 静态/格式/依赖门禁；术语与锚点一致性
+  - 文档 lint：示例可编译、代码块测试（doctest）
+- 测试矩阵（摘要）
+
+| 维度 | 场景 | 期望 | 工具 |
+|---|---|---|---|
+| 语法 | 模糊句式 | 拒绝/明确错误 | parser tests |
+| 语义 | 歧义表达 | 唯一解析 | type-check tests |
+| 语用 | API 语义 | 错误清晰、可恢复 | 单元/属性 |
+| 文档 | 代码示例 | 可编译可运行 | doctest |

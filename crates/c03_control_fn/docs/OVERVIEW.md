@@ -36,3 +36,28 @@
 - 增补错误处理与 `Result`/`?` 的边界案例与最佳实践
 - 增补迭代器与闭包在控制流中的协同示例
 - 与 `c06_async` 的 async/await 场景互链
+
+#### 错误处理边界案例（补全）
+
+- From/Into 错误映射； anyhow vs thiserror；早返回与资源释放（RAII）
+- 样例：
+
+```rust
+fn parse(data: &str) -> Result<u32, std::num::ParseIntError> { data.parse() }
+
+fn process(s: &str) -> anyhow::Result<()> {
+    let n = parse(s)?; // 边界：错误类型不一致时用 `map_err` 或 `?` + `From`
+    println!("{}", n);
+    Ok(())
+}
+```
+
+#### 迭代器与闭包（补全）
+
+```rust
+let sum: i64 = (0..1_000).filter(|x| x % 2 == 0).map(|x| x as i64).sum();
+```
+
+#### 互链
+
+- 与 `c06_async`：错误传播与 `?` 在 `async fn` 中的使用、`Result<_, anyhow::Error>` 的边界

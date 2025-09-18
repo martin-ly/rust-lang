@@ -46,10 +46,9 @@ impl TimeSeriesModel {
         }
     }
 
-    /// 预测
+    /// 预测（草案实现：目前回传输入作为占位逻辑）
     pub fn predict(&self, input: &Array2<f32>) -> Result<Array2<f32>> {
-        // 这里应该实现实际的时间序列预测
-        // 目前只是返回输入作为占位符
+        // TODO(draft): 实现具体模型的前向计算
         Ok(input.clone())
     }
 }

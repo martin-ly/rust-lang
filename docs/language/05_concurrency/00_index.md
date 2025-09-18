@@ -13,20 +13,20 @@
 
 ### 1. 理论基础
 
-- **[01_formal_concurrency_system.md](01_formal_concurrency_system.md)** - 并发系统形式化理论 (待完善)
-- **[02_concurrency_theory.md](02_concurrency_theory.md)** - 并发理论深度分析 (待完善)
-- 03_thread_safety.md（暂缺，待补充） - 线程安全理论
+- **[01_formal_concurrency_system.md](01_formal_concurrency_system.md)** - 并发系统形式化理论（初稿完成）
+- **[02_concurrency_theory.md](02_concurrency_theory.md)** - 并发理论深度分析（初稿完成）
+- 03_thread_safety.md（草案） - 线程安全理论
 
 ### 2. 同步机制
 
-- 04_synchronization_primitives.md（暂缺，待补充） - 同步原语设计
-- 05_atomic_operations.md（暂缺，待补充） - 原子操作理论
-- 06_memory_ordering.md（暂缺，待补充） - 内存序理论
+- 04_synchronization_primitives.md（草案） - 同步原语设计
+- 05_atomic_operations.md（草案） - 原子操作理论
+- 06_memory_ordering.md（草案） - 内存序理论
 
 ### 3. 通信模式
 
-- 07_message_passing.md（暂缺，待补充） - 消息传递机制
-- 08_shared_memory.md（暂缺，待补充） - 共享内存模型
+- 07_message_passing.md（草案） - 消息传递机制
+- 08_shared_memory.md（草案） - 共享内存模型
 
 ## 主题概述
 

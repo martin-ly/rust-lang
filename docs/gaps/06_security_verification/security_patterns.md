@@ -85,6 +85,7 @@
       - [挑战1](#挑战1)
       - [机遇1](#机遇1)
     - [结论](#结论)
+  - [工具化门禁清单（可执行）](#工具化门禁清单可执行)
 
 ---
 
@@ -1467,6 +1468,25 @@ Rust 的安全模式为软件安全提供了新的范式。
 ---
 
 **参考文献**:
+
+---
+
+## 工具化门禁清单（可执行）
+
+- 静态与格式
+  - `cargo fmt --check`、`cargo clippy -D warnings`
+  - `cargo deny check`（许可/漏洞）
+- 性质与验证
+  - 属性测试：`proptest` 覆盖边界与不变式
+  - 模型检查：`kani` 针对小状态空间核心模块
+  - 并发现象：`loom` 探索互斥/顺序与最小反例归档
+  - 契约验证：`creusot`/`prusti` 对关键不变量执行
+- Unsafe 边界
+  - 必须文档化不变量与别名规则，PR 模板勾选
+  - 新增/修改 Unsafe 代码需附验证报告摘要
+- 门禁策略
+  - 关键 crate 合并前：性质→测试可追溯矩阵齐备
+  - 失败用例与最小反例需入库并回归
 
 1. Klabnik, S., & Nichols, C. (2019). The Rust Programming Language. No Starch Press.
 2. Blandy, J., & Orendorff, J. (2017). Programming Rust: Fast, Safe Systems Development. O'Reilly Media.

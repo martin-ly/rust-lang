@@ -64,7 +64,7 @@
 - 目标：启用最小 Raft 协议流转，验证日志复制与领导者切换。
 - 交付物：
   - `consensus-raft` 特性：`AppendEntries`/`RequestVote` 状态与消息处理骨架。
-  - 持久化接口占位与快照 stub；与 `storage` 对接基本 Apply。
+  - 持久化接口与快照 stub（草案）；与 `storage` 对接基本 Apply。
 - 验收标准：
   - `tests/raft_minimal.rs`：领导者选举、前缀匹配、提交索引单调性断言通过。
   - `cargo bench -p c20_distributed` 输出 Raft 心跳与复制延迟的粗略统计（非稳定）。

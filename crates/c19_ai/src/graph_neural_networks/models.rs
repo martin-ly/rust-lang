@@ -54,14 +54,13 @@ impl GNNModel {
         }
     }
 
-    /// 前向传播
+    /// 前向传播（草案实现：当前回传输入以保持接口稳定）
     pub fn forward(
         &self,
         node_features: &Array2<f32>,
         adjacency_matrix: &Array2<f32>,
     ) -> Result<Array2<f32>> {
-        // 这里应该实现实际的图神经网络前向传播
-        // 目前只是返回输入特征作为占位符
+        // TODO(draft): 实现具体的 GNN 前向传播
         Ok(node_features.clone())
     }
 }

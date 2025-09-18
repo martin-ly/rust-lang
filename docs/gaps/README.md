@@ -57,7 +57,7 @@
 
 - [AI/ML与Rust](./04_application_domains/ai_ml_rust.md)
 - [量子计算](./quantum_computing_rust_analysis.md)
-- [游戏开发](./04_application_domains/distributed_systems.md)（占位）
+- [游戏开发](./04_application_domains/distributed_systems.md)（草案，后续补充网络同步/帧同步与反作弊）
 - [分布式系统](./04_application_domains/distributed_systems.md)
 - [密码学与安全](./06_security_verification/formal_verification.md)
 
@@ -79,22 +79,22 @@
 
 - [系统编程语言比较](./07_cross_language_comparison/system_languages.md)
 - [内存管理模型](./07_cross_language_comparison/memory_management_models.md)
-- 并发模型：暂缺（待补充）
-- 类型系统比较：暂缺（待补充）
+- [并发模型](./07_cross_language_comparison/concurrency_models.md)
+- [类型系统比较](./07_cross_language_comparison/type_systems.md)
 
 ### 📚 教学与学习 (Teaching & Learning)
 
 - [学习科学](./08_teaching_learning/learning_science.md)
 - [个性化学习路径](./08_teaching_learning/personalized_learning.md)
 - [评估与反馈](./08_teaching_learning/assessment_feedback.md)
-- 教学策略：暂缺（待补充）
+- [教学策略](./08_teaching_learning/teaching_strategies.md)
 
 ### 🛠️ 工具链与生态系统 (Toolchain & Ecosystem)
 
 - [编译器内部机制](./09_toolchain_ecosystem/compiler_internals.md)
 - [包管理深度分析](./09_toolchain_ecosystem/package_management.md)
-- 开发工具集成：暂缺（待补充）
-- 生态系统分析：暂缺（待补充）
+- [开发工具集成](./09_toolchain_ecosystem/dev_tools_integration.md)
+- [生态系统分析](./09_toolchain_ecosystem/ecosystem_analysis.md)
 
 ---
 

@@ -110,14 +110,14 @@ Qed.
 Theorem progress : forall e t,
   has_type empty e t -> value e \/ exists e', step e e'.
 Proof.
-  (* TODO: structure induction on typing derivation; cases for Abs/App/Pair/Fst *)
-Admitted.
+  (* TODO(draft): structure induction on typing derivation; cases for Abs/App/Pair/Fst *)
+  Admitted.
 
 Theorem preservation : forall Gamma e e' t,
   has_type Gamma e t -> step e e' -> exists Gamma', has_type Gamma' e' t.
 Proof.
-  (* TODO: induction on step; use substitution lemma. *)
-Admitted.
+  (* TODO(draft): induction on step; use substitution lemma. *)
+  Admitted.
 
 (* Preservation skeleton: beta-reduction (AppAbs) case *)
 Lemma preservation_appabs : forall (Gamma : TypeEnv) (x : nat) (tx t : Type) (e v : Expr),
@@ -125,8 +125,8 @@ Lemma preservation_appabs : forall (Gamma : TypeEnv) (x : nat) (tx t : Type) (e 
   has_type Gamma v tx ->
   exists Gamma', has_type Gamma' (subst 0 v e) t.
 Proof.
-  (* TODO: inversion on typing of abstraction to obtain body typing, then substitution. *)
-Admitted.
+  (* TODO(draft): inversion on typing of abstraction to obtain body typing, then substitution. *)
+  Admitted.
 
 (* Notes:
    - Placeholders will be replaced by concrete proofs once auxiliary lemmas are provided.

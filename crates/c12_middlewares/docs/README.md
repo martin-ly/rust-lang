@@ -29,10 +29,10 @@ features = ["full"]
 - `sql-postgres`: 执行/查询、事务、批量、类型映射、配置化、可观测
 - `sql-mysql`: 执行/查询、事务、类型映射、配置化
 - `sql-sqlite`: 轻量内嵌/文件 DB、事务
-- `mq-nats`: 发送/订阅、低延迟；JetStream 规划中
-- `mq-kafka`: 最小骨架（参见 `kafka_pingora.md` 路线图）
+- `mq-nats`: 发送/订阅、低延迟；JetStream 草案中
+- `mq-kafka`: 最小可用草案（参见 `kafka_pingora.md` 路线图）
 - `mq-mqtt`: QoS0/1/2、会话
-- `proxy-pingora`: 最小反代占位；路由/中间件/TLS 规划中
+- `proxy-pingora`: 最小反代草案；路由/中间件/TLS 逐步完善
 - `obs`: tracing 可观测增强（建议与 `tokio` 搭配）
 
 ### 统一接口

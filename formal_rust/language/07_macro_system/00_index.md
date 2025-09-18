@@ -13,20 +13,20 @@
 
 ### 1. 理论基础
 
-- **[01_formal_macro_system.md](01_formal_macro_system.md)** - 宏系统形式化理论 (待完善)
-- **[02_macro_theory.md](02_macro_theory.md)** - 宏理论深度分析 (待完善)
-- **[03_hygiene_theory.md](03_hygiene_theory.md)** - 卫生宏理论 (待创建)
+- **[01_formal_macro_system.md](01_formal_macro_system.md)** - 宏系统形式化理论（初稿完成）
+- **[02_macro_theory.md](02_macro_theory.md)** - 宏理论深度分析（初稿完成）
+- **[03_hygiene_theory.md](03_hygiene_theory.md)** - 卫生宏理论（初稿完成）
 
 ### 2. 宏类型与实现
 
-- **[04_declarative_macros.md](04_declarative_macros.md)** - 声明宏实现 (待创建)
-- **[05_procedural_macros.md](05_procedural_macros.md)** - 过程宏理论 (待创建)
-- **[06_attribute_macros.md](06_attribute_macros.md)** - 属性宏设计 (待创建)
+- **[04_declarative_macros.md](04_declarative_macros.md)** - 声明宏实现（已就绪）
+- **[05_procedural_macros.md](05_procedural_macros.md)** - 过程宏理论（已就绪）
+- **[06_attribute_macros.md](06_attribute_macros.md)** - 属性宏设计（已就绪）
 
 ### 3. 高级应用
 
-- **[07_dsl_construction.md](07_dsl_construction.md)** - DSL构建技术 (待创建)
-- **[08_code_generation.md](08_code_generation.md)** - 代码生成理论 (待创建)
+- **[07_dsl_construction.md](07_dsl_construction.md)** - DSL构建技术（已就绪）
+- **[08_code_generation.md](08_code_generation.md)** - 代码生成理论（初稿完成）
 
 ## 主题概述
 

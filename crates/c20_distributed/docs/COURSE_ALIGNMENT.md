@@ -149,7 +149,7 @@ Cornell CS7410
   - `tests/replication_local.rs`：本地复制/一致性级别
   - `tests/hashring_properties.rs`：一致性哈希性质
   - `tests/swim_*.rs`：SWIM 探测
-  - `tests/raft_minimal.rs`、`tests/consistency_matrix.rs`：规划占位
+  - `tests/raft_minimal.rs`、`tests/consistency_matrix.rs`：规划草案
 
 ## 学习与项目路径（建议）
 

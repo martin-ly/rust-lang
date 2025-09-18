@@ -27,8 +27,8 @@ Scope: Rust ≤ 1.89 (syntax/semantics, type system, borrowing/lifetimes, generi
 - WS2: Type Safety Proofs
   - [x] Substitution lemma (typed substitution) - 基础结构已实现
   - [x] Weakening, Strengthening - 基础结构已实现
-  - [ ] Progress proof (Abs/App/ADT) - 待完善
-  - [ ] Preservation proof (β, proj) - 待完善
+- [ ] Progress proof (Abs/App/ADT) - 草案进行中
+- [ ] Preservation proof (β, proj) - 草案进行中
 - WS3: HM Inference
   - [ ] Constraint syntax, Subst, apply  
   - [ ] unify_sound  

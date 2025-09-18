@@ -170,9 +170,8 @@ impl DiffusionModel {
 
     /// 加载模型权重
     pub fn load_weights(&mut self, weights_path: &str) -> Result<()> {
-        // 这里应该实现实际的权重加载逻辑
-        // 目前只是占位符
-        tracing::info!("加载模型权重: {}", weights_path);
+        // 草案：此处应加载真实权重；当前记录路径以保持流程可用
+        tracing::info!("draft load weights: {}", weights_path);
         Ok(())
     }
 

@@ -51,7 +51,7 @@ Ok(())
 }
 ```
 
-## Kafka 示例（占位，接口将迭代）
+## Kafka 示例（最小可用草案）
 
 ```rust
 use c12_middlewares::mq::{MessageProducer, MessageConsumer};
@@ -59,26 +59,24 @@ use c12_middlewares::mq::{MessageProducer, MessageConsumer};
 # async fn demo_kafka() -> anyhow::Result<()> {
 #[cfg(feature = "mq-kafka")]
 {
-    let producer = c12_middlewares::kafka_client::KafkaProducer::new(&[
-        ("bootstrap.servers", "localhost:9092"),
-    ])?;
+    use c12_middlewares::kafka_client::{KafkaConfig, KafkaProducer, KafkaConsumer};
 
-    let mut consumer = c12_middlewares::kafka_client::KafkaConsumer::new(&[
-        ("bootstrap.servers", "localhost:9092"),
-        ("group.id", "g1"),
-        ("enable.partition.eof", "false"),
-        ("auto.offset.reset", "earliest"),
-    ], &["t"]) ?;
+    let cfg = KafkaConfig::new("localhost:9092", "g1")
+        .with_idempotent_producer(true)
+        .with_auto_offset_reset("earliest");
 
-    producer.send("t", b"hello").await?;
-    let _msg = consumer.next().await?;
+    let producer = KafkaProducer::new_with_config(&cfg)?;
+    let mut consumer = KafkaConsumer::new_with_config(&cfg, &["t"]) ?;
+
+    producer.send("t", b"hello").await?; // 幂等生产建议开启
+    let _msg = consumer.next().await?;      // 消费后按策略提交位点
 }
 Ok(())
 }
 ```
 
-- 可靠性：至少一次；生产者幂等与消费者位点提交将后续提供配置化封装。
-- 安全：SASL/TLS、ACL、分区与顺序保证、再均衡处理等将在 MVP 实装后补充。
+- 可靠性：至少一次；建议开启幂等生产与按处理成功后提交位点的策略。
+- 安全：SASL/TLS、ACL、分区与顺序保证、再均衡处理见 `kafka_pingora.md` 路线图。
 
 ### Windows/WSL 环境准备（rdkafka）
 

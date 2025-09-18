@@ -1,6 +1,99 @@
-# 形式化模型理论
+# 形式化模型理论（Formal Model Theory for Software Systems）
+
+## 目录
+
+- 概述
+- 数学基础与符号
+- 系统模型的分层结构
+- 语义保真与精化关系
+- 不变式、约束与性质证明
+- 可组合性与模块化语义
+- Rust 语义映射（所有权/生命周期/类型）
+- 与验证工具链的对接
+- 示例（精化证明与性质保持）
+- 参考文献
+
+---
 
 ## 概述
+
+本文建立面向软件系统的通用形式化模型理论框架，聚焦“语义保真（semantics-preserving）”与“可组合性（compositionality）”。该框架既可覆盖领域模型（Domain Model）、运行时模型（Runtime Model）、协议/流程模型（Protocol/Workflow Model），也支持面向实现的精化与验证。
+
+## 数学基础与符号
+
+- 语言与结构：一阶（或多阶）语言 \(\mathcal{L}\)，结构 \(\mathcal{M} = (|\mathcal{M}|, I)\)。
+- 行为模型：带转移关系的结构 \(\mathcal{S} = (S, \rightarrow, L)\)，其中 \(S\) 为状态集，\(\rightarrow\subseteq S\times S\) 为转移，\(L: S\to 2^{\mathsf{AP}}\) 贴标。
+- 规格语言：Hoare 逻辑、时序逻辑（LTL/CTL）、约束逻辑等。
+- 记号：\(\mathcal{M} \models \phi\) 表示模型满足性质 \(\phi\)；\(\sqsubseteq\) 表示精化/抽象的偏序。
+
+## 系统模型的分层结构
+
+我们采用四层建模：
+
+1) 概念层（Conceptual）：实体、值对象、关系、聚合根、领域事件。
+2) 行为层（Behavioral）：状态、转移、守卫、动作、不变式与后置条件。
+3) 协议层（Protocol）：交互、消息顺序、因果关系、一致性与隔离性约束。
+4) 部署层（Deployment）：节点、拓扑、故障模型、时钟与网络假设。
+
+定义 2.1（分层模型）：\(\mathcal{M} = (\mathcal{E},\mathcal{B},\mathcal{P},\mathcal{D})\)，其中每层均以逻辑语言给出并带有跨层约束（例如部署层故障影响协议层超时与重试策略）。
+
+## 语义保真与精化关系
+
+定义 3.1（语义映射）：\(\llbracket - \rrbracket: \text{Spec} \to \text{Model}\) 将规格映射到模型类。若实现 \(Impl\) 与模型 \(\mathcal{M}\) 之间存在保持性质的映射 \(h\)，记 \(Impl \preceq_h \mathcal{M}\)。
+
+定义 3.2（精化）：\(\mathcal{M}_1 \sqsubseteq \mathcal{M}_2\) 当且仅当 \(\forall \phi \in \Phi\colon \mathcal{M}_2 \models \phi \Rightarrow \mathcal{M}_1 \models \phi\)。这里 \(\Phi\) 为关注的性质类（安全/活性/时序/资源）。
+
+定理 3.3（传递性）：若 \(\mathcal{M}_0 \sqsubseteq \mathcal{M}_1\) 且 \(\mathcal{M}_1 \sqsubseteq \mathcal{M}_2\)，则 \(\mathcal{M}_0 \sqsubseteq \mathcal{M}_2\)。
+
+## 不变式、约束与性质证明
+
+- 不变式 \(Inv\)：对所有可达状态保持为真。证明可用归纳：初始成立且对每次转移保持。
+- 约束 \(C\)：类型层（静态）与运行层（动态）协同；违反约束的转移应不可达或被拒绝。
+- 证明方法：Hoare 三元组、分离逻辑、等式推理、仿真关系（simulation/bisimulation）。
+
+定理 4.1（不变式保持）：若 \(Init\Rightarrow Inv\) 且 \(Inv\land G \Rightarrow [T]Inv\)（对任意守卫 \(G\) 与转移 \(T\)），则所有可达状态满足 \(Inv\)。
+
+## 可组合性与模块化语义
+
+定义 5.1（组件与组合）：组件 \(C_i=(S_i,\rightarrow_i,\mathcal{I}_i)\)，并行组成为 \(\parallel_i C_i\)。
+
+定理 5.2（组合保真）：若每个组件满足局部性质 \(\phi_i\) 且组合规则满足独立性/干预边界，则 \(\parallel_i C_i\) 满足期望的全局性质 \(\Phi\)。
+
+技术要点：接口契约、帧规则（frame rule）、不变量分解、权限与所有权分配。
+
+## Rust 语义映射（所有权/生命周期/类型）
+
+- 所有权映射：资源在任一时刻只有唯一可变拥有者；共享通过不可变借用或受控同步原语。
+- 生命周期映射：引用寿命为区间约束，跨组件引用必须经由显式协议转移（如消息所有权转移）。
+- 类型与约束：trait 作为逻辑谓词；关联类型/常量表达模型族参数化；GATs 建模高阶索引关系。
+
+结论：在该映射下，许多安全性质等价为“类型可通过 + 借用检查 + trait 约束可证”。
+
+## 与验证工具链的对接
+
+- 静态层：Rustc 类型/借用检查、Clippy 规则、`#![deny(unsafe_op_in_unsafe_fn)]` 等。
+- 形式化层：Prusti/Creusot（前置条件/后置条件/不变式）、Kani（模型检查）、Loom（并发探索）。
+- 生成式检查：Proptest 属性测试作为有限模型证据，配合边界缩小与对照证明。
+
+## 示例（精化证明与性质保持）
+
+示例 1（领域操作 → 事务实现）：
+
+- 规格：账户转账 `transfer(a,b,x)` 保持恒等式 `sum(balance)=const` 与不变量 `balance>=0`。
+- 模型：单机事务 + 锁语义；分布式时使用二阶段提交 + 幂等保障。
+- 证明要点：操作线性化、失败回滚、重试与去重；在 Rust 中以类型化事务句柄与 RAII 实现。
+
+## 参考文献
+
+1) Hoare, C. A. R. Communicating Sequential Processes.
+2) Lamport, L. Specifying Systems (TLA+).
+3) Abadi & Lamport. The Existence of Refinement Mappings.
+4) Reynolds. Separation Logic.
+5) Rust Team. The Rust Reference; The Rustonomicon.
+
+## 形式化模型理论
+
+## 概述1
 
 形式化模型理论是数学逻辑与计算机科学的交叉领域，为程序语义、类型系统和形式化验证提供严格的数学基础。本章深入探讨形式化模型理论的核心概念、构造技术和在Rust中的应用。
 
@@ -501,7 +594,7 @@ impl BoundedModelChecker {
 
 通过建立完整的形式化模型理论，为计算机科学中的形式化方法提供了坚实的数学基础，为构建更可靠、更安全的软件系统提供了理论支撑。
 
-## 参考文献
+## 参考文献1
 
 1. Chang, C. C., & Keisler, H. J. (2012). Model theory. Elsevier.
 2. Hodges, W. (1993). Model theory. Cambridge University Press.

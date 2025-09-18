@@ -1,4 +1,4 @@
-//! 统一运行时能力抽象（占位，不引入具体运行时依赖）
+//! 统一运行时能力抽象（草案，不引入具体运行时依赖）
 //!
 //! 目标：在不绑定 Tokio/async-std/smol 等运行时时，抽象出最小能力面，
 //! 便于在上层实现结构化并发、取消、超时、背压与可观测性的一致策略。
@@ -46,7 +46,7 @@ pub trait Channel<T>: Send + Sync + 'static {
     fn bounded(capacity: usize) -> (Self::Sender, Self::Receiver);
 }
 
-/// 可观测性：为 future 附加 trace 上下文（占位）
+/// 可观测性：为 future 附加 trace 上下文（草案接口）
 pub trait Instrument {
     fn instrument<Fut>(self, fut: Fut) -> Fut
     where

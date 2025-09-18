@@ -34,3 +34,41 @@
 
 - 扩展并行算法与内存局部性的系统化评测
 - 与 `c05_threads`/`c06_async` 的并发/异步算法案例互链
+
+### 并行算法与内存局部性评测（补全）
+
+- 指标与方法
+  - 性能：吞吐、P95/P99 延迟、加速比/效率、Amdahl/Gustafson 分析
+  - 局部性：缓存命中率、带宽利用、NUMA 跨节点访问比
+  - 工具：`criterion`、`perf`/`vtune`/`likwid`、`tokio-console`（异步路径）
+
+- 基准骨架
+
+```rust
+use criterion::{criterion_group, criterion_main, Criterion, black_box};
+
+fn bench_par_map(c: &mut Criterion) {
+    c.bench_function("par_map_1m", |b| {
+        b.iter(|| {
+            let v: Vec<u64> = (0..1_000_000).collect();
+            let s: u64 = v.chunks(1024)
+                .map(|chunk| chunk.iter().map(|x| x + 1).sum::<u64>())
+                .sum();
+            black_box(s)
+        })
+    });
+}
+
+criterion_group!(benches, bench_par_map);
+criterion_main!(benches);
+```
+
+- 设计建议
+  - 分块大小与预取：按缓存层次（L1/L2/L3）调优，避免 false sharing
+  - 任务调度：`rayon`/`tokio` 的工作窃取与异步执行器差异
+  - 数据布局：`Vec<Struct>` → `Struct of Arrays` 在 SIMD/缓存上的优势
+
+### 互链
+
+- 与 `c05_threads`：线程池/工作窃取/同步原语的选型与代价
+- 与 `c06_async`：异步算法的背压与任务切换开销测量

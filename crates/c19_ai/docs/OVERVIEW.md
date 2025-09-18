@@ -40,3 +40,33 @@
 
 - 增补模型注册与部署端到端示例
 - 与 `c18_model` 的建模与验证互链
+
+### 模型注册与部署（端到端示例，补全）
+
+- 注册流程
+  - 模型产物：架构/权重/版本/签名；元数据：任务、指标、依赖
+  - 存储：对象存储（版本化）、索引数据库（标签/检索）
+
+- 部署与路由
+  - 推理服务：多副本、健康检查、灰度/金丝雀；路由按标签/版本/权重
+  - 观测：QPS、P95/P99、错误率、SLO 警报
+
+- 伪代码骨架
+
+```rust
+struct ModelMeta { name: String, version: String, task: String }
+
+fn register(meta: &ModelMeta, artifact_uri: &str) -> anyhow::Result<()> {
+    // 写入索引与版本存储，生成可追溯指纹
+    Ok(())
+}
+
+async fn route_infer(req: InferenceReq) -> anyhow::Result<InferenceResp> {
+    // 依据标签/权重选择副本，转发并聚合指标
+    Ok(InferenceResp::default())
+}
+```
+
+- 与 `c18_model` 互链
+  - 将形式化性质（幂等、单调、上界时延）映射为属性测试与 CI 门禁
+  - 部署前跑通 `c18_model` 的验证用例，生成合规报告

@@ -1,9 +1,66 @@
-# 密码学系统设计
+# 密码学系统设计（Cryptographic Systems for Blockchain in Rust）
+
+## 目录
+
+- 概述
+- 哈希函数（抗碰撞/抗预映像/二次预映像）
+- 数字签名（ECDSA/EdDSA/BLS）
+- 零知识证明（zk-SNARK/zk-STARK/PLONK）
+- 同态加密（部分/全同态）
+- 多方安全计算（MPC）
+- Rust 工具链与实现要点
+- 安全验证与审计要点
+- 参考文献
 
 ## 概述
 
-密码学系统是区块链技术的核心基础，提供了数据完整性、身份认证和隐私保护等关键功能。
-本章介绍区块链中使用的各种密码学原语和系统设计。
+区块链的安全性依赖密码学原语的正确性与实现安全。本文聚焦原语性质、参数选择、实现注意事项与验证路径。
+
+## 哈希函数
+
+- 性质：抗碰撞、抗预映像、抗二次预映像；
+- 选择：SHA-2/3、BLAKE2/3；
+- Rust：`sha2`, `sha3`, `blake3`；并行哈希与流式接口；恒时实现避免侧信道。
+
+## 数字签名
+
+- ECDSA/Ed25519/BLS12-381；门限签名与聚合签名；
+- Rust：`ed25519-dalek`, `k256`, `blst`; 注意随机数质量、域参数与签名域分离（domain separation）。
+
+## 零知识证明
+
+- 电路/约束系统（R1CS/PLONKish）；可信设置与透明证明；
+- Rust：`bellperson`, `halo2`, `arkworks`；参数管理、约束计数、验证性能。
+
+## 同态加密
+
+- 部分同态/近似同态/全同态；明文空间、噪声预算；
+- Rust：`concrete`, `tfhe-rs`；密钥管理与性能折中。
+
+## 多方安全计算（MPC）
+
+- 半诚实/恶意模型；秘密共享、OT、Garbled Circuits；
+- Rust：`mpc` 生态（示例引用），网络抽象与抗回放/重放保护。
+
+## Rust 工具链与实现要点
+
+- 常量时间实现、防侧信道；`no_std` 与硬件加速；
+- FFI 边界的内存与未定义行为；
+- 属性测试与向量测试，KAT/wycheproof 用例集成。
+
+## 安全验证与审计要点
+
+- 不变式：密钥不可泄漏、随机数唯一、域分离正确；
+- 形式化：规范→约束→证明草案；
+- 自动化：`cargo-audit`, `cargo-geiger`, fuzz 与 Kani/Creusot 关键路径验证。
+
+## 参考文献
+
+1) Menezes et al. Handbook of Applied Cryptography.
+2) Bernstein et al. Cryptography in NaCl and Ed25519.
+3) Ben-Sasson et al. Scalable zk Systems.
+
+## 密码学系统设计（补充导航）
 
 ### 读者指引与快速导航
 
@@ -260,6 +317,28 @@ pub fn verify_signature(pk: &PublicKey, msg: &[u8], sig: &Signature) -> bool {
 2. **随机数生成**：密码学安全的随机数
 3. **侧信道攻击**：防护时序攻击和功耗分析
 4. **量子抗性**：考虑量子计算威胁
+
+### 安全门禁清单（密码学专用）
+
+- 依赖与实现
+  - 禁止自研原语；仅使用经审计的库（RustCrypto、dalek、blst、arkworks 等）
+  - 固定版本与供应链门禁：`cargo deny`/`audit` + SBOM（`cargo auditable`）
+- 恒时与侧信道
+  - 必须使用恒时实现；关键路径开启 `crossbeam_utils::CachePadded` 等微优化避免泄漏
+  - PR 必附恒时性说明或库侧证据（文档/审计报告/benchmark 差分）
+- 随机数与域分离
+  - 统一 `rand_core`/`getrandom`，禁止非加密 RNG；签名 `k` 唯一且不可重用
+  - 域分离标签统一定义并测试覆盖（防重放/跨协议混淆）
+- 测试与验证
+  - KAT：集成 wycheproof/官方向量；属性测试边界与畸形输入
+  - 模糊：对解析/编码/DER/ASN.1 路径开启 `cargo fuzz`
+  - 形式化/模型检查：对核心电路或协议握手用 Kani/Creusot 覆盖关键不变式
+- Unsafe 与 FFI
+  - FFI 边界必须文档化内存/别名/生命周期不变式；Miri/ASAN/UBSan 作业通过
+  - 禁止泄漏机密到日志/错误；`zeroize`/`secrecy` 管理机密内存
+- 运行与部署
+  - 打开硬件加速前的等价性与常数时间再验证；不同 CPU 微架构做差分基准
+  - 引入批量验证/预计算前后，必须给出安全模型与退化路径
 
 ## 交叉引用与进一步阅读
 
@@ -599,6 +678,8 @@ impl Ed25519Signer {
 
 ### 同态加密实现
 
+> 注意：以下为教学用简化示例，严禁用于生产环境。
+
 **定义 2.13** (同态加密)
 同态加密允许在加密数据上直接进行计算，而不需要先解密。
 
@@ -648,76 +729,9 @@ impl HomomorphicEncryption {
 }
 ```
 
-### 零知识证明系统1
+### 零知识证明系统（补充说明）
 
-**定义 2.14** (零知识证明)
-零知识证明允许证明者向验证者证明某个陈述为真，而不泄露任何额外信息。
-
-```rust
-use sha2::{Sha256, Digest};
-use std::collections::HashMap;
-
-pub struct ZeroKnowledgeProof {
-    commitment: Vec<u8>,
-    challenge: Vec<u8>,
-    response: Vec<u8>,
-}
-
-pub struct ZKProver {
-    secret: Vec<u8>,
-    random: Vec<u8>,
-}
-
-impl ZKProver {
-    pub fn new(secret: Vec<u8>) -> Self {
-        Self {
-            secret,
-            random: vec![0; 32],
-        }
-    }
-    
-    pub fn generate_commitment(&mut self) -> Vec<u8> {
-        let mut hasher = Sha256::new();
-        hasher.update(&self.secret);
-        hasher.update(&self.random);
-        self.commitment = hasher.finalize().to_vec();
-        self.commitment.clone()
-    }
-    
-    pub fn generate_response(&self, challenge: &[u8]) -> Vec<u8> {
-        let mut hasher = Sha256::new();
-        hasher.update(&self.secret);
-        hasher.update(challenge);
-        hasher.finalize().to_vec()
-    }
-}
-
-pub struct ZKVerifier {
-    public_info: Vec<u8>,
-}
-
-impl ZKVerifier {
-    pub fn new(public_info: Vec<u8>) -> Self {
-        Self { public_info }
-    }
-    
-    pub fn generate_challenge(&self) -> Vec<u8> {
-        let mut hasher = Sha256::new();
-        hasher.update(&self.public_info);
-        hasher.update(b"challenge");
-        hasher.finalize().to_vec()
-    }
-    
-    pub fn verify_proof(&self, commitment: &[u8], response: &[u8], challenge: &[u8]) -> bool {
-        let mut hasher = Sha256::new();
-        hasher.update(response);
-        hasher.update(challenge);
-        let expected_commitment = hasher.finalize();
-        
-        commitment == expected_commitment.as_slice()
-    }
-}
-```
+有关 zk 证明的工程与形式化示例，见前文“零知识证明理论”章节与 `arkworks/halo2` 示例。
 
 ### 门限签名系统
 
@@ -842,6 +856,8 @@ impl BatchMerkleProof {
 
 ### 可验证随机函数
 
+> 注意：以下为教学用简化示例，严禁用于生产环境。
+
 **定义 2.17** (可验证随机函数)
 可验证随机函数生成可验证的随机输出。
 
@@ -886,85 +902,14 @@ impl VerifiableRandomFunction {
 }
 ```
 
-## 性能优化1
+## 性能优化（补充）
 
 ### 批量签名验证
 
 **定义 2.18** (批量验证)
 批量验证同时验证多个签名，提高效率。
 
-```rust
-pub struct BatchVerifier {
-    signatures: Vec<Signature>,
-    public_keys: Vec<PublicKey>,
-    messages: Vec<Vec<u8>>,
-}
-
-impl BatchVerifier {
-    pub fn new() -> Self {
-        Self {
-            signatures: Vec::new(),
-            public_keys: Vec::new(),
-            messages: Vec::new(),
-        }
-    }
-    
-    pub fn add_signature(&mut self, signature: Signature, public_key: PublicKey, message: Vec<u8>) {
-        self.signatures.push(signature);
-        self.public_keys.push(public_key);
-        self.messages.push(message);
-    }
-    
-    pub fn verify_batch(&self) -> bool {
-        // 使用随机线性组合进行批量验证
-        let mut combined_signature = Signature::default();
-        let mut combined_public_key = PublicKey::default();
-        let mut combined_message = Vec::new();
-        
-        for i in 0..self.signatures.len() {
-            let random_factor = self.generate_random_factor(i);
-            
-            // 组合签名
-            combined_signature = self.combine_signatures(&combined_signature, &self.signatures[i], random_factor);
-            
-            // 组合公钥
-            combined_public_key = self.combine_public_keys(&combined_public_key, &self.public_keys[i], random_factor);
-            
-            // 组合消息
-            combined_message = self.combine_messages(&combined_message, &self.messages[i], random_factor);
-        }
-        
-        // 验证组合签名
-        self.verify_single_signature(&combined_signature, &combined_public_key, &combined_message)
-    }
-    
-    fn generate_random_factor(&self, index: usize) -> u64 {
-        // 使用确定性随机数生成
-        (index as u64 * 12345) % 1000000007
-    }
-    
-    fn combine_signatures(&self, a: &Signature, b: &Signature, factor: u64) -> Signature {
-        // 简化的签名组合
-        Signature::default() // 实际实现需要具体的签名组合算法
-    }
-    
-    fn combine_public_keys(&self, a: &PublicKey, b: &PublicKey, factor: u64) -> PublicKey {
-        // 简化的公钥组合
-        PublicKey::default() // 实际实现需要具体的公钥组合算法
-    }
-    
-    fn combine_messages(&self, a: &[u8], b: &[u8], factor: u64) -> Vec<u8> {
-        let mut combined = a.to_vec();
-        combined.extend_from_slice(b);
-        combined
-    }
-    
-    fn verify_single_signature(&self, signature: &Signature, public_key: &PublicKey, message: &[u8]) -> bool {
-        // 验证单个签名
-        true // 实际实现需要具体的签名验证算法
-    }
-}
-```
+注：批量签名验证请基于具体曲线库提供的批验 API 与安全建议实现，避免自定义不完备的组合算法。
 
 ### 预计算优化
 
@@ -1078,7 +1023,7 @@ impl SideChannelProtection {
 
 ## 高级密码学原语
 
-### 同态加密
+### 同态加密1
 
 **定义 2.21** (同态加密)
 
@@ -1328,7 +1273,7 @@ impl NTRUKeyPair {
 }
 ```
 
-## 总结1
+## 总结（补充）
 
 区块链密码学系统提供了完整的安全基础设施，包括：
 
@@ -1341,7 +1286,7 @@ impl NTRUKeyPair {
 
 通过合理选择和实现这些密码学技术，可以构建安全、高效的区块链系统。
 
-## 参考文献
+## 参考文献（补充）
 
 1. Katz, J., & Lindell, Y. (2014). Introduction to modern cryptography. CRC press.
 2. Menezes, A. J., Van Oorschot, P. C., & Vanstone, S. A. (2018). Handbook of applied cryptography. CRC press.

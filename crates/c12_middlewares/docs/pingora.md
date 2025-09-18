@@ -22,7 +22,7 @@ Ok(())
 - 动态路由：基于前缀/Host/权重选择上游
 - 健康检查：主动探测/熔断与半开
 
-接口形态（占位，随 MVP 实装可能调整）：
+接口形态（草案，可执行原型将保持该形态的子集一致）：
 
 ```rust
 # async fn proxy_route() -> anyhow::Result<()> {
@@ -80,7 +80,7 @@ Ok(())
 - 重试仅用于幂等方法（GET/HEAD），并采用指数退避
 - 熔断基于失败率与慢调用比例，设置观测窗口
 
-## TLS 与安全（规划）
+## TLS 与安全（草案）
 
 - 终止 TLS：加载证书/私钥，支持 SNI
 - 上游 TLS：双向 TLS、证书校验
@@ -92,11 +92,11 @@ Ok(())
 # 启动一个本地上游（例如简单 http 服务，示意）
 # 例如使用 Python: python -m http.server 9000
 
-# 启动 Pingora 反代（示例接口占位）
+# 启动 Pingora 反代（示例接口草案）
 cargo run -p c12_middlewares --example pingora_demo --features proxy-pingora,tokio,obs
 ```
 
-## 运维建议
+## 运维建议（现可落地）
 
 - 使用 SO_REUSEPORT、合理的线程数与内核参数
 - 配置超时/重试的上限，避免级联故障

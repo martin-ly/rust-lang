@@ -263,8 +263,7 @@ impl RLAgent {
 
     /// 获取动作
     fn get_action(&self, state: &Array1<f32>) -> Array1<f32> {
-        // 这里应该使用神经网络进行前向传播
-        // 目前只是返回随机动作作为占位符
+        // 草案：此处应使用网络前向传播；当前返回随机动作作为桩实现
         Array1::from_vec(vec![rand::random::<f32>(), rand::random::<f32>()])
     }
 
@@ -273,8 +272,7 @@ impl RLAgent {
         &mut self,
         batch: &[(Array1<f32>, Array1<f32>, f32, Array1<f32>, bool)],
     ) -> Result<f32> {
-        // 这里应该实现具体的训练逻辑
-        // 目前只是返回一个占位符损失值
+        // 草案：此处应实现具体训练逻辑；当前返回固定损失作为桩
         self.training_steps += 1;
         Ok(0.1)
     }

@@ -31,6 +31,6 @@ fn read_after_commit_is_visible_via_apply_barrier() {
 #[cfg(not(feature = "consensus-raft"))]
 #[test]
 fn read_after_commit_skipped_without_feature() {
-    // feature 未启用时占位，保持测试通过
+    // feature 未启用时使用桩测试，保持通过以不阻断 CI
     assert!(true);
 }

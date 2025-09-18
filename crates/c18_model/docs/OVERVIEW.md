@@ -48,3 +48,41 @@
 
 - 补充模型验证工具链与 CI 集成示例
 - 与 `c14_workflow` 的状态机/编排互链
+
+### 模型验证工具链与 CI 集成（补全）
+
+- 本地工具链
+  - 性质测试：`proptest`/`quickcheck` 定义不变量与代数律
+  - 模型检查（可选）：`kani`/`prusti`/`crest` 等工具按需引入
+  - 负载与性能：`criterion` 微基准；`tokio-console`/`tracing` 观测并发性质
+
+- 目录与约定
+  - `tests/properties/*.rs`：不变量/等价性/幂等性测试
+  - `benches/*.rs`：关键算子与状态机步进的基准
+  - `models/*.md`：形式化规范与可检验断言的映射
+
+- CI 集成（GitHub Actions 示例片段）
+
+```yaml
+name: model-ci
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo test --all --all-features --locked
+      - run: cargo clippy --all --all-features -- -D warnings
+      - run: cargo fmt --all -- --check
+  benches:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo bench --all || true # 基准不作为阻断
+```
+
+- 互链
+  - 与 `c14_workflow`：将状态机规范转化为属性测试与模型检查约束
+  - 与 `c20_distributed`：共享一致性与时序不变量的测试基元
