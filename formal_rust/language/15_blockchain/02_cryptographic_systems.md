@@ -2,7 +2,8 @@
 
 ## 概述
 
-密码学系统是区块链技术的核心基础，提供了数据完整性、身份认证和隐私保护等关键功能。本章介绍区块链中使用的各种密码学原语和系统设计。
+密码学系统是区块链技术的核心基础，提供了数据完整性、身份认证和隐私保护等关键功能。
+本章介绍区块链中使用的各种密码学原语和系统设计。
 
 ### 读者指引与快速导航
 
@@ -97,6 +98,76 @@
 
 **定义 2.5** (zk-SNARKs)
 zk-SNARKs (零知识简洁非交互式知识论证) 是一种零知识证明系统，具有：
+
+1. **简洁性**：证明大小与电路大小无关
+2. **非交互性**：证明者与验证者之间无需交互
+3. **零知识性**：不泄露任何关于秘密输入的信息
+4. **可验证性**：验证时间与电路大小无关
+
+**算法 2.3** (zk-SNARKs 构造)
+
+```text
+输入: 电路 C, 公开输入 x, 秘密输入 w
+输出: 证明 π
+
+1. 设置阶段 (Setup)
+   - 生成证明密钥 pk 和验证密钥 vk
+   
+2. 证明阶段 (Prove)
+   - 计算 π = Prove(pk, x, w)
+   
+3. 验证阶段 (Verify)
+   - 返回 Verify(vk, x, π)
+```
+
+**Rust 实现示例**：
+
+```rust
+use ark_ec::PairingEngine;
+use ark_ff::Field;
+use ark_poly::univariate::DensePolynomial;
+
+#[derive(Debug, Clone)]
+pub struct ZkSnarkProof<E: PairingEngine> {
+    pub a: E::G1Affine,
+    pub b: E::G2Affine,
+    pub c: E::G1Affine,
+}
+
+#[derive(Debug, Clone)]
+pub struct ZkSnarkVerificationKey<E: PairingEngine> {
+    pub alpha_g1: E::G1Affine,
+    pub beta_g1: E::G1Affine,
+    pub beta_g2: E::G2Affine,
+    pub gamma_g2: E::G2Affine,
+    pub delta_g1: E::G1Affine,
+    pub delta_g2: E::G2Affine,
+    pub gamma_abc_g1: Vec<E::G1Affine>,
+}
+
+impl<E: PairingEngine> ZkSnarkProof<E> {
+    pub fn verify(
+        &self,
+        vk: &ZkSnarkVerificationKey<E>,
+        public_inputs: &[E::Fr],
+    ) -> bool {
+        // 验证配对等式
+        let left = E::pairing(self.a, self.b);
+        let right = E::pairing(
+            vk.alpha_g1,
+            vk.beta_g2
+        ) + E::pairing(
+            self.c,
+            vk.gamma_g2
+        );
+        
+        left == right
+    }
+}
+```
+
+**安全性质 4.A**（知识可提取性）
+在离散对数假设下，zk-SNARKs 满足知识可提取性，即如果验证者接受证明，则证明者确实知道满足电路约束的秘密输入。
 
 - 简洁性：证明大小固定
 - 非交互性：不需要证明者和验证者之间的交互
@@ -524,9 +595,504 @@ impl Ed25519Signer {
 - Common Criteria - 信息技术安全评估标准
 - NIST SP 800-57 - 密钥管理建议
 
+## 高级密码学应用
+
+### 同态加密实现
+
+**定义 2.13** (同态加密)
+同态加密允许在加密数据上直接进行计算，而不需要先解密。
+
+```rust
+use std::collections::HashMap;
+
+pub struct HomomorphicEncryption {
+    public_key: PublicKey,
+    private_key: PrivateKey,
+    modulus: u64,
+}
+
+impl HomomorphicEncryption {
+    pub fn new() -> Self {
+        let (public_key, private_key) = Self::generate_keypair();
+        Self {
+            public_key,
+            private_key,
+            modulus: 1000000007, // 大素数
+        }
+    }
+    
+    pub fn encrypt(&self, plaintext: u64) -> u64 {
+        // 简化的同态加密实现
+        (plaintext * self.public_key) % self.modulus
+    }
+    
+    pub fn decrypt(&self, ciphertext: u64) -> u64 {
+        // 简化的同态解密实现
+        (ciphertext * self.private_key) % self.modulus
+    }
+    
+    pub fn add_encrypted(&self, a: u64, b: u64) -> u64 {
+        // 同态加法
+        (a + b) % self.modulus
+    }
+    
+    pub fn multiply_encrypted(&self, a: u64, b: u64) -> u64 {
+        // 同态乘法
+        (a * b) % self.modulus
+    }
+    
+    fn generate_keypair() -> (u64, u64) {
+        // 简化的密钥生成
+        (12345, 54321)
+    }
+}
+```
+
+### 零知识证明系统1
+
+**定义 2.14** (零知识证明)
+零知识证明允许证明者向验证者证明某个陈述为真，而不泄露任何额外信息。
+
+```rust
+use sha2::{Sha256, Digest};
+use std::collections::HashMap;
+
+pub struct ZeroKnowledgeProof {
+    commitment: Vec<u8>,
+    challenge: Vec<u8>,
+    response: Vec<u8>,
+}
+
+pub struct ZKProver {
+    secret: Vec<u8>,
+    random: Vec<u8>,
+}
+
+impl ZKProver {
+    pub fn new(secret: Vec<u8>) -> Self {
+        Self {
+            secret,
+            random: vec![0; 32],
+        }
+    }
+    
+    pub fn generate_commitment(&mut self) -> Vec<u8> {
+        let mut hasher = Sha256::new();
+        hasher.update(&self.secret);
+        hasher.update(&self.random);
+        self.commitment = hasher.finalize().to_vec();
+        self.commitment.clone()
+    }
+    
+    pub fn generate_response(&self, challenge: &[u8]) -> Vec<u8> {
+        let mut hasher = Sha256::new();
+        hasher.update(&self.secret);
+        hasher.update(challenge);
+        hasher.finalize().to_vec()
+    }
+}
+
+pub struct ZKVerifier {
+    public_info: Vec<u8>,
+}
+
+impl ZKVerifier {
+    pub fn new(public_info: Vec<u8>) -> Self {
+        Self { public_info }
+    }
+    
+    pub fn generate_challenge(&self) -> Vec<u8> {
+        let mut hasher = Sha256::new();
+        hasher.update(&self.public_info);
+        hasher.update(b"challenge");
+        hasher.finalize().to_vec()
+    }
+    
+    pub fn verify_proof(&self, commitment: &[u8], response: &[u8], challenge: &[u8]) -> bool {
+        let mut hasher = Sha256::new();
+        hasher.update(response);
+        hasher.update(challenge);
+        let expected_commitment = hasher.finalize();
+        
+        commitment == expected_commitment.as_slice()
+    }
+}
+```
+
+### 门限签名系统
+
+**定义 2.15** (门限签名)
+门限签名允许n个参与方中的任意t个参与方共同生成有效签名。
+
+```rust
+use std::collections::HashMap;
+
+pub struct ThresholdSignature {
+    threshold: usize,
+    total_participants: usize,
+    shares: HashMap<usize, Vec<u8>>,
+}
+
+impl ThresholdSignature {
+    pub fn new(threshold: usize, total_participants: usize) -> Self {
+        Self {
+            threshold,
+            total_participants,
+            shares: HashMap::new(),
+        }
+    }
+    
+    pub fn generate_shares(&mut self, secret: &[u8]) -> HashMap<usize, Vec<u8>> {
+        // 简化的秘密分享实现
+        let mut shares = HashMap::new();
+        
+        for i in 1..=self.total_participants {
+            let mut share = secret.to_vec();
+            share.push(i as u8);
+            shares.insert(i, share);
+        }
+        
+        self.shares = shares.clone();
+        shares
+    }
+    
+    pub fn combine_shares(&self, participant_shares: &HashMap<usize, Vec<u8>>) -> Option<Vec<u8>> {
+        if participant_shares.len() < self.threshold {
+            return None;
+        }
+        
+        // 简化的秘密重构
+        let mut combined = vec![0; 32];
+        for (_, share) in participant_shares {
+            for (i, &byte) in share.iter().enumerate() {
+                if i < combined.len() {
+                    combined[i] ^= byte;
+                }
+            }
+        }
+        
+        Some(combined)
+    }
+    
+    pub fn sign_with_shares(&self, message: &[u8], shares: &HashMap<usize, Vec<u8>>) -> Option<Vec<u8>> {
+        if shares.len() < self.threshold {
+            return None;
+        }
+        
+        let secret = self.combine_shares(shares)?;
+        let mut signature = secret;
+        signature.extend_from_slice(message);
+        
+        Some(signature)
+    }
+}
+```
+
+## 区块链特定密码学
+
+### 默克尔证明优化
+
+**定义 2.16** (批量默克尔证明)
+批量默克尔证明允许同时验证多个元素的成员性。
+
+```rust
+pub struct BatchMerkleProof {
+    leaves: Vec<[u8; 32]>,
+    proof_paths: Vec<Vec<[u8; 32]>>,
+    root: [u8; 32],
+}
+
+impl BatchMerkleProof {
+    pub fn new(leaves: Vec<[u8; 32]>, proof_paths: Vec<Vec<[u8; 32]>>, root: [u8; 32]) -> Self {
+        Self {
+            leaves,
+            proof_paths,
+            root,
+        }
+    }
+    
+    pub fn verify_batch(&self) -> bool {
+        for (i, (leaf, proof_path)) in self.leaves.iter().zip(self.proof_paths.iter()).enumerate() {
+            if !self.verify_single_proof(*leaf, proof_path, i) {
+                return false;
+            }
+        }
+        true
+    }
+    
+    fn verify_single_proof(&self, leaf: [u8; 32], proof_path: &[[u8; 32]], index: usize) -> bool {
+        let mut current = leaf;
+        let mut current_index = index;
+        
+        for sibling in proof_path {
+            let combined = if current_index % 2 == 0 {
+                [&current[..], &sibling[..]].concat()
+            } else {
+                [&sibling[..], &current[..]].concat()
+            };
+            
+            current = Sha256Hasher.hash(&combined);
+            current_index /= 2;
+        }
+        
+        current == self.root
+    }
+}
+```
+
+### 可验证随机函数
+
+**定义 2.17** (可验证随机函数)
+可验证随机函数生成可验证的随机输出。
+
+```rust
+pub struct VerifiableRandomFunction {
+    secret_key: [u8; 32],
+    public_key: [u8; 32],
+}
+
+impl VerifiableRandomFunction {
+    pub fn new() -> Self {
+        let secret_key = [0; 32]; // 实际应用中应使用安全的随机数
+        let public_key = Sha256Hasher.hash(&secret_key);
+        
+        Self {
+            secret_key,
+            public_key,
+        }
+    }
+    
+    pub fn evaluate(&self, input: &[u8]) -> ([u8; 32], [u8; 64]) {
+        let mut hasher = Sha256::new();
+        hasher.update(&self.secret_key);
+        hasher.update(input);
+        let output = hasher.finalize().into();
+        
+        let mut proof = [0; 64];
+        proof[..32].copy_from_slice(&self.secret_key);
+        proof[32..].copy_from_slice(input);
+        
+        (output, proof)
+    }
+    
+    pub fn verify(&self, input: &[u8], output: &[u8; 32], proof: &[u8; 64]) -> bool {
+        let mut hasher = Sha256::new();
+        hasher.update(&proof[..32]);
+        hasher.update(input);
+        let expected_output = hasher.finalize().into();
+        
+        output == &expected_output
+    }
+}
+```
+
+## 性能优化1
+
+### 批量签名验证
+
+**定义 2.18** (批量验证)
+批量验证同时验证多个签名，提高效率。
+
+```rust
+pub struct BatchVerifier {
+    signatures: Vec<Signature>,
+    public_keys: Vec<PublicKey>,
+    messages: Vec<Vec<u8>>,
+}
+
+impl BatchVerifier {
+    pub fn new() -> Self {
+        Self {
+            signatures: Vec::new(),
+            public_keys: Vec::new(),
+            messages: Vec::new(),
+        }
+    }
+    
+    pub fn add_signature(&mut self, signature: Signature, public_key: PublicKey, message: Vec<u8>) {
+        self.signatures.push(signature);
+        self.public_keys.push(public_key);
+        self.messages.push(message);
+    }
+    
+    pub fn verify_batch(&self) -> bool {
+        // 使用随机线性组合进行批量验证
+        let mut combined_signature = Signature::default();
+        let mut combined_public_key = PublicKey::default();
+        let mut combined_message = Vec::new();
+        
+        for i in 0..self.signatures.len() {
+            let random_factor = self.generate_random_factor(i);
+            
+            // 组合签名
+            combined_signature = self.combine_signatures(&combined_signature, &self.signatures[i], random_factor);
+            
+            // 组合公钥
+            combined_public_key = self.combine_public_keys(&combined_public_key, &self.public_keys[i], random_factor);
+            
+            // 组合消息
+            combined_message = self.combine_messages(&combined_message, &self.messages[i], random_factor);
+        }
+        
+        // 验证组合签名
+        self.verify_single_signature(&combined_signature, &combined_public_key, &combined_message)
+    }
+    
+    fn generate_random_factor(&self, index: usize) -> u64 {
+        // 使用确定性随机数生成
+        (index as u64 * 12345) % 1000000007
+    }
+    
+    fn combine_signatures(&self, a: &Signature, b: &Signature, factor: u64) -> Signature {
+        // 简化的签名组合
+        Signature::default() // 实际实现需要具体的签名组合算法
+    }
+    
+    fn combine_public_keys(&self, a: &PublicKey, b: &PublicKey, factor: u64) -> PublicKey {
+        // 简化的公钥组合
+        PublicKey::default() // 实际实现需要具体的公钥组合算法
+    }
+    
+    fn combine_messages(&self, a: &[u8], b: &[u8], factor: u64) -> Vec<u8> {
+        let mut combined = a.to_vec();
+        combined.extend_from_slice(b);
+        combined
+    }
+    
+    fn verify_single_signature(&self, signature: &Signature, public_key: &PublicKey, message: &[u8]) -> bool {
+        // 验证单个签名
+        true // 实际实现需要具体的签名验证算法
+    }
+}
+```
+
+### 预计算优化
+
+**定义 2.19** (预计算表)
+预计算表存储常用计算结果，提高性能。
+
+```rust
+pub struct PrecomputationTable {
+    base_point: [u8; 32],
+    table: Vec<[u8; 32]>,
+    table_size: usize,
+}
+
+impl PrecomputationTable {
+    pub fn new(base_point: [u8; 32], table_size: usize) -> Self {
+        let mut table = Vec::with_capacity(table_size);
+        
+        // 预计算基点的倍数
+        let mut current = base_point;
+        for _ in 0..table_size {
+            table.push(current);
+            current = self.double_point(current);
+        }
+        
+        Self {
+            base_point,
+            table,
+            table_size,
+        }
+    }
+    
+    pub fn scalar_multiply(&self, scalar: u64) -> [u8; 32] {
+        let mut result = [0; 32];
+        let mut remaining = scalar;
+        
+        for i in 0..self.table_size {
+            if remaining & 1 == 1 {
+                result = self.add_points(result, self.table[i]);
+            }
+            remaining >>= 1;
+        }
+        
+        result
+    }
+    
+    fn double_point(&self, point: [u8; 32]) -> [u8; 32] {
+        // 简化的点倍乘
+        Sha256Hasher.hash(&point)
+    }
+    
+    fn add_points(&self, a: [u8; 32], b: [u8; 32]) -> [u8; 32] {
+        // 简化的点加法
+        let mut combined = a.to_vec();
+        combined.extend_from_slice(&b);
+        Sha256Hasher.hash(&combined)
+    }
+}
+```
+
+## 安全分析
+
+### 侧信道攻击防护
+
+**定义 2.20** (侧信道攻击)
+侧信道攻击通过分析物理实现来获取密钥信息。
+
+```rust
+pub struct SideChannelProtection {
+    mask: [u8; 32],
+}
+
+impl SideChannelProtection {
+    pub fn new() -> Self {
+        Self {
+            mask: [0; 32], // 实际应用中应使用安全的随机数
+        }
+    }
+    
+    pub fn masked_operation<F>(&self, input: &[u8], operation: F) -> Vec<u8>
+    where
+        F: Fn(&[u8]) -> Vec<u8>,
+    {
+        // 使用掩码保护操作
+        let masked_input = self.apply_mask(input);
+        let masked_output = operation(&masked_input);
+        self.remove_mask(&masked_output)
+    }
+    
+    fn apply_mask(&self, input: &[u8]) -> Vec<u8> {
+        input.iter().zip(self.mask.iter()).map(|(a, b)| a ^ b).collect()
+    }
+    
+    fn remove_mask(&self, input: &[u8]) -> Vec<u8> {
+        input.iter().zip(self.mask.iter()).map(|(a, b)| a ^ b).collect()
+    }
+    
+    pub fn constant_time_compare(&self, a: &[u8], b: &[u8]) -> bool {
+        if a.len() != b.len() {
+            return false;
+        }
+        
+        let mut result = 0u8;
+        for (byte_a, byte_b) in a.iter().zip(b.iter()) {
+            result |= byte_a ^ byte_b;
+        }
+        
+        result == 0
+    }
+}
+```
+
+## 总结1
+
+区块链密码学系统提供了完整的安全基础设施，包括：
+
+1. **基础密码学原语**：哈希函数、数字签名、加密
+2. **高级密码学技术**：同态加密、零知识证明、门限签名
+3. **区块链特定应用**：默克尔证明、可验证随机函数
+4. **性能优化**：批量验证、预计算、并行处理
+5. **安全防护**：侧信道攻击防护、常数时间操作
+
+通过合理选择和实现这些密码学技术，可以构建安全、高效的区块链系统。
+
 ## 参考文献
 
 1. Katz, J., & Lindell, Y. (2014). Introduction to modern cryptography. CRC press.
 2. Menezes, A. J., Van Oorschot, P. C., & Vanstone, S. A. (2018). Handbook of applied cryptography. CRC press.
 3. Goldreich, O. (2001). Foundations of cryptography: volume 1, basic tools. Cambridge university press.
 4. Boneh, D., & Shoup, V. (2020). A graduate course in applied cryptography. Draft 0.5.
+5. Gentry, C. (2009). Fully homomorphic encryption using ideal lattices. STOC 2009.
+6. Goldwasser, S., Micali, S., & Rackoff, C. (1989). The knowledge complexity of interactive proof systems. SIAM Journal on Computing, 18(1), 186-208.

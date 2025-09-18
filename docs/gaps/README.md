@@ -72,13 +72,13 @@
 
 - [形式化验证](./06_security_verification/formal_verification.md)
 - [静态分析](./06_security_verification/static_analysis.md)
-- 安全模式：暂缺（待补充）
-- 漏洞分析：暂缺（待补充）
+- [安全模式](./06_security_verification/security_patterns.md)
+- [漏洞分析](./06_security_verification/vulnerability_analysis.md)
 
 ### 🔄 跨语言比较 (Cross-Language Comparison)
 
 - [系统编程语言比较](./07_cross_language_comparison/system_languages.md)
-- 内存管理模型：暂缺（待补充）
+- [内存管理模型](./07_cross_language_comparison/memory_management_models.md)
 - 并发模型：暂缺（待补充）
 - 类型系统比较：暂缺（待补充）
 

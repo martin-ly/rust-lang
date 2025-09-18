@@ -1,1266 +1,733 @@
-﻿# WebAssembly系统常见问题解答 (FAQ)
+﻿# WebAssembly 常见问题解答
 
-## 编译相关问题
+## 概述
 
-### Q1: 如何将Rust代码编译为WebAssembly?
+本文档回答关于WebAssembly（WASM）在Rust中的使用、优化和部署的常见问题，帮助开发者更好地理解和应用WebAssembly技术。
 
-**A**: 使用wasm-pack工具可以将Rust代码编译为WebAssembly：
+## 基础概念
 
-```bash
-# 安装wasm-pack
-cargo install wasm-pack
+### Q1: 什么是WebAssembly？
 
-# 编译为WebAssembly
-wasm-pack build --target web
+**A:** WebAssembly（WASM）是一种低级字节码格式，设计用于在Web浏览器中高效执行。
+它提供了一种在Web上运行高性能代码的方式，支持多种编程语言编译到WASM。
 
-# 编译为Node.js
-wasm-pack build --target nodejs
+**特点：**
 
-# 编译为通用目标
-wasm-pack build --target bundler
+- 高性能执行
+- 跨平台兼容
+- 安全沙箱环境
+- 支持多种编程语言
+- 与JavaScript互操作
+
+### Q2: 为什么选择Rust开发WebAssembly？
+
+**A:** Rust是开发WebAssembly的理想选择：
+
+1. **零成本抽象**：编译后的WASM代码性能优异
+2. **内存安全**：避免常见的内存错误
+3. **无垃圾回收**：减少运行时开销
+4. **丰富的工具链**：wasm-pack等工具支持
+5. **类型安全**：编译时错误检查
+
+### Q3: WebAssembly与JavaScript的区别是什么？
+
+**A:** 主要区别：
+
+| 方面 | JavaScript | WebAssembly |
+|------|------------|-------------|
+| 执行方式 | 解释执行 | 编译执行 |
+| 性能 | 相对较慢 | 接近原生性能 |
+| 内存管理 | 垃圾回收 | 手动管理 |
+| 类型系统 | 动态类型 | 静态类型 |
+| 调试 | 容易调试 | 需要特殊工具 |
+| 生态系统 | 丰富 | 相对较新 |
+
+## 开发环境
+
+### Q4: 如何设置Rust WebAssembly开发环境？
+
+**A:** 环境设置步骤：
+
+1. **安装Rust工具链**
+
+   ```bash
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   ```
+
+2. **安装wasm-pack**
+
+   ```bash
+   curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+   ```
+
+3. **创建新项目**
+
+   ```bash
+   wasm-pack new my-wasm-project
+   cd my-wasm-project
+   ```
+
+4. **构建项目**
+
+   ```bash
+   wasm-pack build
+   ```
+
+### Q5: 如何配置Cargo.toml用于WebAssembly？
+
+**A:** 配置示例：
+
+```toml
+[package]
+name = "my-wasm-project"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
+js-sys = "0.3"
+web-sys = "0.3"
+
+[dependencies.web-sys]
+version = "0.3"
+features = [
+  "console",
+  "Document",
+  "Element",
+  "HtmlElement",
+  "Window",
+]
 ```
 
-**理论映射**: 编译函数 $C: \text{Rust} \rightarrow \text{WebAssembly}$ 保持语义等价性。
+## 基础开发
 
-### Q2: 编译时出现类型错误怎么办?
+### Q6: 如何创建简单的WebAssembly函数？
 
-**A**: 检查Rust类型到WebAssembly类型的映射：
-
-```rust
-// 正确的类型映射
-#[wasm_bindgen]
-pub fn add(a: i32, b: i32) -> i32 {
-    a + b
-}
-
-// 避免使用复杂类型
-#[wasm_bindgen]
-pub fn process_string(s: &str) -> String {
-    s.to_uppercase()
-}
-```
-
-**理论映射**: 类型映射函数 $\text{types}: \text{RustTypes} \rightarrow \text{WasmTypes}$ 必须保持类型安全。
-
-### Q3: 如何处理编译优化问题?
-
-**A**: 使用编译优化策略：
-
-```rust
-// 启用优化
-[profile.release]
-opt-level = 3
-lto = true
-codegen-units = 1
-
-// 使用wasm-opt进行后处理优化
-wasm-opt -O4 -o optimized.wasm input.wasm
-```
-
-**理论映射**: 优化函数 $\text{optimize}: \text{IR} \rightarrow \text{OptimizedIR}$ 保持语义等价性。
-
-### Q4: 编译后的文件太大怎么办?
-
-**A**: 使用多种优化策略：
-
-```bash
-# 启用代码压缩
-wasm-pack build --release
-
-# 使用wasm-opt进行优化
-wasm-opt -Os -o small.wasm input.wasm
-
-# 启用LTO优化
-RUSTFLAGS="-C lto=fat" wasm-pack build
-```
-
-**理论映射**: 代码大小优化保持功能等价性 $\text{size\_optimize}(module) \equiv module$。
-
-## 运行时问题
-
-### Q5: WebAssembly运行时如何工作?
-
-**A**: WebAssembly运行时提供执行环境：
-
-```javascript
-// 加载WebAssembly模块
-const wasmModule = await WebAssembly.instantiateStreaming(
-    fetch('module.wasm'),
-    importObject
-);
-
-// 调用函数
-const result = wasmModule.instance.exports.add(1, 2);
-```
-
-**理论映射**: 运行时环境 $\mathcal{R} = (\text{Engine}, \text{Memory}, \text{API})$ 提供执行支持。
-
-### Q6: 如何处理内存管理问题?
-
-**A**: WebAssembly使用线性内存模型：
-
-```rust
-#[wasm_bindgen]
-pub fn allocate_memory(size: usize) -> *mut u8 {
-    let mut memory = Vec::with_capacity(size);
-    let ptr = memory.as_mut_ptr();
-    std::mem::forget(memory);
-    ptr
-}
-
-#[wasm_bindgen]
-pub fn free_memory(ptr: *mut u8, size: usize) {
-    unsafe {
-        let _memory = Vec::from_raw_parts(ptr, size, size);
-    }
-}
-```
-
-**理论映射**: 线性内存 $\text{Memory} = \text{Array}[\text{Byte}]$ 提供连续地址空间。
-
-### Q7: 如何实现异常处理?
-
-**A**: WebAssembly支持异常处理：
-
-```rust
-#[wasm_bindgen]
-pub fn safe_division(a: f64, b: f64) -> Result<f64, String> {
-    if b == 0.0 {
-        Err("Division by zero".to_string())
-    } else {
-        Ok(a / b)
-    }
-}
-```
-
-**理论映射**: 异常处理保持程序安全 $\text{safe}(P) \Rightarrow \text{safe}(\text{handle\_exception}(P))$。
-
-### Q8: 如何优化运行时性能?
-
-**A**: 使用多种性能优化技术：
-
-```rust
-// 使用SIMD指令
-#[target_feature(enable = "simd128")]
-pub unsafe fn vector_add(a: &[f32], b: &[f32]) -> Vec<f32> {
-    // SIMD实现
-}
-
-// 使用并行处理
-#[wasm_bindgen]
-pub fn parallel_process(data: &[u8]) -> Vec<u8> {
-    // 并行处理实现
-}
-```
-
-**理论映射**: 性能优化保持语义等价性 $\text{performance}(P_{\text{optimized}}) \geq \text{performance}(P_{\text{original}})$。
-
-## 互操作问题
-
-### Q9: 如何与JavaScript互操作?
-
-**A**: 使用wasm-bindgen进行互操作：
+**A:** 基础函数示例：
 
 ```rust
 use wasm_bindgen::prelude::*;
 
+// 导入console.log
 #[wasm_bindgen]
-pub struct Calculator {
-    value: f64,
+extern "C" {
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(s: &str);
 }
 
+// 定义console.log宏
+macro_rules! console_log {
+    ($($t:tt)*) => (log(&format_args!($($t)*).to_string()))
+}
+
+// 导出函数到JavaScript
 #[wasm_bindgen]
-impl Calculator {
-    pub fn new() -> Calculator {
-        Calculator { value: 0.0 }
+pub fn greet(name: &str) {
+    console_log!("Hello, {}!", name);
+}
+
+// 计算斐波那契数列
+#[wasm_bindgen]
+pub fn fibonacci(n: u32) -> u32 {
+    match n {
+        0 => 0,
+        1 => 1,
+        _ => fibonacci(n - 1) + fibonacci(n - 2),
     }
-    
-    pub fn add(&mut self, x: f64) {
-        self.value += x;
-    }
-    
-    pub fn get_value(&self) -> f64 {
-        self.value
-    }
+}
+
+// 处理数组
+#[wasm_bindgen]
+pub fn sum_array(arr: &[i32]) -> i32 {
+    arr.iter().sum()
 }
 ```
 
-**理论映射**: 互操作函数 $\text{interop}: \text{WasmModule} \leftrightarrow \text{JavaScript}$ 保持类型安全。
+### Q7: 如何在WebAssembly中处理字符串？
 
-### Q10: 如何实现系统接口调用?
-
-**A**: 使用WASI或自定义宿主函数：
-
-```rust
-// 使用WASI
-use std::fs;
-use std::io::{Read, Write};
-
-#[wasm_bindgen]
-pub fn read_file(path: &str) -> Result<String, String> {
-    let mut file = fs::File::open(path)
-        .map_err(|e| e.to_string())?;
-    let mut contents = String::new();
-    file.read_to_string(&mut contents)
-        .map_err(|e| e.to_string())?;
-    Ok(contents)
-}
-```
-
-**理论映射**: 系统调用接口 $\text{Syscall}: \text{WasmModule} \times \text{HostAPI} \rightarrow \text{Result}$。
-
-### Q11: 如何处理数据类型转换?
-
-**A**: 实现类型转换机制：
-
-```rust
-#[wasm_bindgen]
-pub fn convert_types() {
-    // 数字类型转换
-    let int_val: i32 = 42;
-    let float_val: f64 = int_val as f64;
-    
-    // 字符串转换
-    let string_val = "Hello, WASM!";
-    let js_string = JsValue::from_str(string_val);
-}
-```
-
-**理论映射**: 类型转换函数 $\text{convert}: \text{RustType} \rightarrow \text{WasmType}$ 保持类型安全。
-
-### Q12: 如何实现回调机制?
-
-**A**: 使用JavaScript回调函数：
+**A:** 字符串处理方式：
 
 ```rust
 use wasm_bindgen::prelude::*;
+use js_sys::JsString;
 
+// 从JavaScript接收字符串
 #[wasm_bindgen]
-pub fn process_with_callback(data: &[u8], callback: js_sys::Function) -> Result<(), JsValue> {
-    for (i, &byte) in data.iter().enumerate() {
-        let result = callback.call1(&JsValue::NULL, &JsValue::from_f64(i as f64))?;
-        // 处理回调结果
-    }
-    Ok(())
+pub fn process_string(input: &str) -> String {
+    format!("Processed: {}", input.to_uppercase())
+}
+
+// 返回字符串给JavaScript
+#[wasm_bindgen]
+pub fn get_greeting() -> String {
+    "Hello from WebAssembly!".to_string()
+}
+
+// 处理JavaScript字符串
+#[wasm_bindgen]
+pub fn process_js_string(js_str: &JsString) -> String {
+    let rust_str = js_str.as_string().unwrap_or_default();
+    format!("Length: {}", rust_str.len())
 }
 ```
 
-**理论映射**: 回调机制 $\text{callback}: \text{WasmFunction} \leftrightarrow \text{JavaScriptFunction}$。
+### Q8: 如何在WebAssembly中处理数组？
 
-## 性能问题
-
-### Q13: WebAssembly性能如何?
-
-**A**: WebAssembly提供接近原生的性能：
+**A:** 数组处理示例：
 
 ```rust
-// 高性能数值计算
+use wasm_bindgen::prelude::*;
+use js_sys::Array;
+
+// 处理i32数组
 #[wasm_bindgen]
-pub fn matrix_multiply(a: &[f64], b: &[f64], size: usize) -> Vec<f64> {
-    let mut result = vec![0.0; size * size];
-    
-    for i in 0..size {
-        for j in 0..size {
-            for k in 0..size {
-                result[i * size + j] += a[i * size + k] * b[k * size + j];
-            }
+pub fn process_i32_array(arr: &[i32]) -> i32 {
+    arr.iter().sum()
+}
+
+// 创建并返回数组
+#[wasm_bindgen]
+pub fn create_array() -> Array {
+    let array = Array::new();
+    array.push(&JsValue::from(1));
+    array.push(&JsValue::from(2));
+    array.push(&JsValue::from(3));
+    array
+}
+
+// 处理JavaScript数组
+#[wasm_bindgen]
+pub fn process_js_array(js_array: &Array) -> i32 {
+    let mut sum = 0;
+    for i in 0..js_array.length() {
+        if let Some(value) = js_array.get(i).as_f64() {
+            sum += value as i32;
         }
     }
-    
-    result
-}
-```
-
-**理论映射**: 性能模型 $\text{performance}(P_{\text{Wasm}}) \approx \text{performance}(P_{\text{Native}})$。
-
-### Q14: 如何优化内存使用?
-
-**A**: 使用内存优化策略：
-
-```rust
-// 使用内存池
-#[wasm_bindgen]
-pub struct MemoryPool {
-    pool: Vec<Vec<u8>>,
-}
-
-impl MemoryPool {
-    pub fn new() -> Self {
-        Self { pool: Vec::new() }
-    }
-    
-    pub fn allocate(&mut self, size: usize) -> &mut [u8] {
-        if let Some(buffer) = self.pool.pop() {
-            if buffer.len() >= size {
-                return &mut buffer[..size];
-            }
-        }
-        let mut new_buffer = vec![0; size];
-        let result = &mut new_buffer[..size];
-        self.pool.push(new_buffer);
-        result
-    }
-}
-```
-
-**理论映射**: 内存优化 $\text{memory\_optimize}: \text{MemoryLayout} \rightarrow \text{OptimizedLayout}$。
-
-### Q15: 如何实现并行计算?
-
-**A**: 使用Web Workers或SIMD指令：
-
-```rust
-// 使用SIMD进行并行计算
-#[target_feature(enable = "simd128")]
-pub unsafe fn parallel_sum(data: &[f32]) -> f32 {
-    let mut sum = 0.0f32;
-    let chunk_size = 4; // SIMD向量大小
-    
-    for chunk in data.chunks(chunk_size) {
-        // SIMD并行计算
-        let simd_chunk = std::simd::Simd::from_slice(chunk);
-        sum += simd_chunk.reduce_sum();
-    }
-    
     sum
 }
 ```
 
-**理论映射**: 并行执行 $\text{parallel}: \text{Tasks} \rightarrow \text{ConcurrentExecution}$。
+## 内存管理
 
-### Q16: 如何监控性能指标?
+### Q9: WebAssembly中如何管理内存？
 
-**A**: 使用性能监控工具：
+**A:** 内存管理策略：
 
 ```rust
+use wasm_bindgen::prelude::*;
+use std::collections::HashMap;
+
+// 全局状态管理
+static mut GLOBAL_DATA: Option<HashMap<String, i32>> = None;
+
 #[wasm_bindgen]
-pub struct PerformanceMonitor {
-    start_time: f64,
-    measurements: Vec<f64>,
+pub fn init_global_data() {
+    unsafe {
+        GLOBAL_DATA = Some(HashMap::new());
+    }
 }
 
-impl PerformanceMonitor {
+#[wasm_bindgen]
+pub fn set_value(key: &str, value: i32) {
+    unsafe {
+        if let Some(ref mut data) = GLOBAL_DATA {
+            data.insert(key.to_string(), value);
+        }
+    }
+}
+
+#[wasm_bindgen]
+pub fn get_value(key: &str) -> Option<i32> {
+    unsafe {
+        GLOBAL_DATA.as_ref().and_then(|data| data.get(key).copied())
+    }
+}
+
+// 内存池管理
+pub struct MemoryPool {
+    data: Vec<Vec<u8>>,
+    free_indices: Vec<usize>,
+}
+
+impl MemoryPool {
     pub fn new() -> Self {
         Self {
-            start_time: 0.0,
-            measurements: Vec::new(),
+            data: Vec::new(),
+            free_indices: Vec::new(),
         }
     }
     
-    pub fn start_measurement(&mut self) {
-        self.start_time = web_sys::window()
-            .unwrap()
-            .performance()
-            .unwrap()
-            .now();
+    pub fn allocate(&mut self, size: usize) -> usize {
+        if let Some(index) = self.free_indices.pop() {
+            self.data[index] = vec![0; size];
+            index
+        } else {
+            let index = self.data.len();
+            self.data.push(vec![0; size]);
+            index
+        }
     }
     
-    pub fn end_measurement(&mut self) -> f64 {
-        let end_time = web_sys::window()
-            .unwrap()
-            .performance()
-            .unwrap()
-            .now();
-        let duration = end_time - self.start_time;
-        self.measurements.push(duration);
-        duration
+    pub fn deallocate(&mut self, index: usize) {
+        if index < self.data.len() {
+            self.data[index].clear();
+            self.free_indices.push(index);
+        }
     }
 }
 ```
 
-**理论映射**: 性能监控 $\text{monitor}: \text{Performance} \rightarrow \text{Metrics}$。
+### Q10: 如何避免WebAssembly中的内存泄漏？
 
-## 调试问题
-
-### Q17: 如何调试WebAssembly代码?
-
-**A**: 使用多种调试工具：
+**A:** 避免内存泄漏的方法：
 
 ```rust
-// 添加调试信息
+use wasm_bindgen::prelude::*;
+use std::rc::Rc;
+use std::cell::RefCell;
+
+// 使用Rc和RefCell管理共享所有权
 #[wasm_bindgen]
-pub fn debug_function(input: i32) -> i32 {
-    // 使用console.log进行调试
-    web_sys::console::log_1(&format!("Input: {}", input).into());
+pub struct SharedData {
+    data: Rc<RefCell<Vec<i32>>>,
+}
+
+#[wasm_bindgen]
+impl SharedData {
+    #[wasm_bindgen(constructor)]
+    pub fn new() -> Self {
+        Self {
+            data: Rc::new(RefCell::new(Vec::new())),
+        }
+    }
     
-    let result = input * 2;
+    pub fn add_value(&self, value: i32) {
+        self.data.borrow_mut().push(value);
+    }
     
-    web_sys::console::log_1(&format!("Output: {}", result).into());
+    pub fn get_length(&self) -> usize {
+        self.data.borrow().len()
+    }
+}
+
+// 实现Drop trait确保资源清理
+impl Drop for SharedData {
+    fn drop(&mut self) {
+        // 清理资源
+        self.data.borrow_mut().clear();
+    }
+}
+```
+
+## 性能优化
+
+### Q11: 如何优化WebAssembly性能？
+
+**A:** 性能优化策略：
+
+```rust
+use wasm_bindgen::prelude::*;
+
+// 使用SIMD指令
+#[wasm_bindgen]
+pub fn vectorized_sum(arr: &[f32]) -> f32 {
+    let mut sum = 0.0;
+    let chunks = arr.chunks_exact(4);
+    let remainder = chunks.remainder();
+    
+    // 处理4个元素一组的块
+    for chunk in chunks {
+        sum += chunk[0] + chunk[1] + chunk[2] + chunk[3];
+    }
+    
+    // 处理剩余元素
+    for &value in remainder {
+        sum += value;
+    }
+    
+    sum
+}
+
+// 避免不必要的内存分配
+#[wasm_bindgen]
+pub fn efficient_string_processing(input: &str) -> String {
+    let mut result = String::with_capacity(input.len());
+    for ch in input.chars() {
+        if ch.is_alphabetic() {
+            result.push(ch.to_uppercase().next().unwrap_or(ch));
+        }
+    }
     result
 }
-```
 
-**理论映射**: 调试支持 $\text{debug}: \text{WasmModule} \rightarrow \text{DebugInfo}$。
+// 使用缓存避免重复计算
+use std::collections::HashMap;
 
-### Q18: 如何处理运行时错误?
+static mut CACHE: Option<HashMap<u32, u32>> = None;
 
-**A**: 实现错误处理机制：
-
-```rust
 #[wasm_bindgen]
-pub fn safe_operation(input: &str) -> Result<String, String> {
-    if input.is_empty() {
-        return Err("Input cannot be empty".to_string());
+pub fn cached_fibonacci(n: u32) -> u32 {
+    unsafe {
+        if CACHE.is_none() {
+            CACHE = Some(HashMap::new());
+        }
+        
+        if let Some(ref mut cache) = CACHE {
+            if let Some(&cached) = cache.get(&n) {
+                return cached;
+            }
+            
+            let result = match n {
+                0 => 0,
+                1 => 1,
+                _ => cached_fibonacci(n - 1) + cached_fibonacci(n - 2),
+            };
+            
+            cache.insert(n, result);
+            result
+        } else {
+            0
+        }
     }
-    
-    if input.len() > 1000 {
-        return Err("Input too long".to_string());
-    }
-    
-    Ok(input.to_uppercase())
 }
 ```
 
-**理论映射**: 错误处理 $\text{error\_handle}: \text{Error} \rightarrow \text{Result}$。
+### Q12: 如何减少WebAssembly包大小？
 
-### Q19: 如何分析内存泄漏?
+**A:** 减少包大小的方法：
 
-**A**: 使用内存分析工具：
+1. **优化Cargo.toml**
+
+   ```toml
+   [profile.release]
+   lto = true
+   codegen-units = 1
+   panic = "abort"
+   strip = true
+   ```
+
+2. **使用wasm-opt优化**
+
+   ```bash
+   wasm-opt -Oz -o optimized.wasm input.wasm
+   ```
+
+3. **移除未使用的代码**
+
+   ```rust
+   // 使用条件编译
+   #[cfg(target_arch = "wasm32")]
+   use web_sys::console;
+   
+   // 避免使用大型依赖
+   // 使用no_std环境
+   #![no_std]
+   ```
+
+4. **代码分割**
+
+   ```rust
+   // 将功能模块化
+   pub mod math {
+       pub fn add(a: i32, b: i32) -> i32 {
+           a + b
+       }
+   }
+   
+   pub mod string {
+       pub fn process(s: &str) -> String {
+           s.to_uppercase()
+       }
+   }
+   ```
+
+## 与JavaScript交互
+
+### Q13: 如何在WebAssembly中调用JavaScript函数？
+
+**A:** 调用JavaScript函数：
 
 ```rust
+use wasm_bindgen::prelude::*;
+
+// 导入JavaScript函数
 #[wasm_bindgen]
-pub struct MemoryAnalyzer {
-    allocations: HashMap<usize, usize>,
+extern "C" {
+    #[wasm_bindgen(js_namespace = Math)]
+    fn random() -> f64;
+    
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(s: &str);
+    
+    // 自定义JavaScript函数
+    #[wasm_bindgen(js_name = "myCustomFunction")]
+    fn my_custom_function(value: i32) -> String;
 }
 
-impl MemoryAnalyzer {
-    pub fn new() -> Self {
+// 使用导入的函数
+#[wasm_bindgen]
+pub fn use_js_functions() {
+    let random_value = random();
+    log(&format!("Random value: {}", random_value));
+    
+    let result = my_custom_function(42);
+    log(&format!("Custom function result: {}", result));
+}
+
+// 定义JavaScript可调用的函数
+#[wasm_bindgen]
+pub fn rust_function(input: &str) -> String {
+    format!("Rust processed: {}", input)
+}
+```
+
+### Q14: 如何在WebAssembly中处理DOM操作？
+
+**A:** DOM操作示例：
+
+```rust
+use wasm_bindgen::prelude::*;
+use web_sys::{Document, Element, HtmlElement, Window};
+
+#[wasm_bindgen]
+pub fn manipulate_dom() -> Result<(), JsValue> {
+    let window = web_sys::window().unwrap();
+    let document = window.document().unwrap();
+    
+    // 创建元素
+    let div = document.create_element("div")?;
+    div.set_text_content(Some("Hello from WebAssembly!"));
+    
+    // 设置样式
+    div.set_attribute("style", "color: red; font-size: 20px;")?;
+    
+    // 添加到页面
+    let body = document.body().unwrap();
+    body.append_child(&div)?;
+    
+    Ok(())
+}
+
+#[wasm_bindgen]
+pub fn update_element_content(element_id: &str, content: &str) -> Result<(), JsValue> {
+    let window = web_sys::window().unwrap();
+    let document = window.document().unwrap();
+    
+    if let Some(element) = document.get_element_by_id(element_id) {
+        element.set_text_content(Some(content));
+    }
+    
+    Ok(())
+}
+```
+
+## 错误处理
+
+### Q15: 如何在WebAssembly中处理错误？
+
+**A:** 错误处理策略：
+
+```rust
+use wasm_bindgen::prelude::*;
+use js_sys::Error;
+
+// 自定义错误类型
+#[wasm_bindgen]
+pub struct WasmError {
+    message: String,
+}
+
+#[wasm_bindgen]
+impl WasmError {
+    #[wasm_bindgen(constructor)]
+    pub fn new(message: &str) -> Self {
         Self {
-            allocations: HashMap::new(),
+            message: message.to_string(),
         }
     }
     
-    pub fn track_allocation(&mut self, ptr: usize, size: usize) {
-        self.allocations.insert(ptr, size);
+    #[wasm_bindgen(getter)]
+    pub fn message(&self) -> String {
+        self.message.clone()
+    }
+}
+
+// 错误处理函数
+#[wasm_bindgen]
+pub fn safe_divide(a: f64, b: f64) -> Result<f64, WasmError> {
+    if b == 0.0 {
+        Err(WasmError::new("Division by zero"))
+    } else {
+        Ok(a / b)
+    }
+}
+
+// 使用Result类型
+#[wasm_bindgen]
+pub fn process_data(data: &[i32]) -> Result<i32, WasmError> {
+    if data.is_empty() {
+        return Err(WasmError::new("Empty data array"));
     }
     
-    pub fn track_deallocation(&mut self, ptr: usize) {
-        self.allocations.remove(&ptr);
-    }
-    
-    pub fn get_memory_usage(&self) -> usize {
-        self.allocations.values().sum()
+    let sum: i32 = data.iter().sum();
+    if sum < 0 {
+        Err(WasmError::new("Negative sum"))
+    } else {
+        Ok(sum)
     }
 }
 ```
 
-**理论映射**: 内存分析 $\text{memory\_analyze}: \text{Memory} \rightarrow \text{MemoryReport}$。
+## 调试和测试
 
-### Q20: 如何验证代码正确性?
+### Q16: 如何调试WebAssembly代码？
 
-**A**: 使用形式化验证和测试：
+**A:** 调试方法：
+
+1. **使用console.log**
+
+   ```rust
+   use wasm_bindgen::prelude::*;
+   
+   #[wasm_bindgen]
+   extern "C" {
+       #[wasm_bindgen(js_namespace = console)]
+       fn log(s: &str);
+   }
+   
+   macro_rules! console_log {
+       ($($t:tt)*) => (log(&format_args!($($t)*).to_string()))
+   }
+   
+   #[wasm_bindgen]
+   pub fn debug_function(input: &str) {
+       console_log!("Input: {}", input);
+       // 处理逻辑
+       console_log!("Processing complete");
+   }
+   ```
+
+2. **使用wasm-pack的调试模式**
+
+   ```bash
+   wasm-pack build --dev
+   ```
+
+3. **使用浏览器开发者工具**
+   - 在Chrome DevTools中设置断点
+   - 使用Source Maps进行调试
+
+### Q17: 如何测试WebAssembly代码？
+
+**A:** 测试策略：
 
 ```rust
+use wasm_bindgen::prelude::*;
+use wasm_bindgen_test::*;
+
+// 单元测试
 #[cfg(test)]
 mod tests {
     use super::*;
     
     #[test]
-    fn test_safe_operation() {
-        assert_eq!(safe_operation("hello").unwrap(), "HELLO");
-        assert!(safe_operation("").is_err());
+    fn test_fibonacci() {
+        assert_eq!(fibonacci(0), 0);
+        assert_eq!(fibonacci(1), 1);
+        assert_eq!(fibonacci(10), 55);
     }
     
     #[test]
-    fn test_memory_safety() {
-        let mut analyzer = MemoryAnalyzer::new();
-        let ptr = 0x1000;
-        analyzer.track_allocation(ptr, 1024);
-        assert_eq!(analyzer.get_memory_usage(), 1024);
-        analyzer.track_deallocation(ptr);
-        assert_eq!(analyzer.get_memory_usage(), 0);
+    fn test_sum_array() {
+        let arr = [1, 2, 3, 4, 5];
+        assert_eq!(sum_array(&arr), 15);
     }
+}
+
+// WebAssembly特定测试
+#[wasm_bindgen_test]
+fn test_wasm_function() {
+    let result = fibonacci(5);
+    assert_eq!(result, 5);
+}
+
+// 集成测试
+#[wasm_bindgen_test]
+fn test_dom_manipulation() {
+    let result = manipulate_dom();
+    assert!(result.is_ok());
 }
 ```
 
-**理论映射**: 代码验证 $\text{verify}: \text{Code} \rightarrow \text{Correctness}$。
-
-## 部署问题
-
-### Q21: 如何部署WebAssembly应用?
-
-**A**: 使用多种部署策略：
-
-```bash
-# 构建生产版本
-wasm-pack build --release --target web
-
-# 部署到Web服务器
-cp pkg/* /var/www/html/
-
-# 部署到CDN
-aws s3 cp pkg/ s3://my-bucket/ --recursive
-
-# 部署到云函数
-wasm-pack build --target nodejs
-```
-
-**理论映射**: 部署函数 $\text{deploy}: \text{WasmModule} \rightarrow \text{Deployment}$。
-
-### Q22: 如何实现版本管理?
-
-**A**: 使用版本控制策略：
-
-```rust
-#[wasm_bindgen]
-pub struct VersionManager {
-    version: String,
-    compatibility: Vec<String>,
-}
-
-impl VersionManager {
-    pub fn new(version: &str) -> Self {
-        Self {
-            version: version.to_string(),
-            compatibility: vec!["1.0.0".to_string(), "1.1.0".to_string()],
-        }
-    }
-    
-    pub fn is_compatible(&self, other_version: &str) -> bool {
-        self.compatibility.contains(&other_version.to_string())
-    }
-}
-```
-
-**理论映射**: 版本管理 $\text{version\_manage}: \text{Version} \rightarrow \text{Compatibility}$。
-
-### Q23: 如何实现热更新?
-
-**A**: 使用模块热更新机制：
-
-```javascript
-// 热更新实现
-async function hotUpdate(newModuleUrl) {
-    const newModule = await WebAssembly.instantiateStreaming(
-        fetch(newModuleUrl),
-        importObject
-    );
-    
-    // 替换旧模块
-    currentModule = newModule;
-    
-    // 通知应用更新
-    notifyModuleUpdate();
-}
-```
-
-**理论映射**: 热更新 $\text{hot\_update}: \text{OldModule} \rightarrow \text{NewModule}$。
-
-### Q24: 如何监控部署状态?
-
-**A**: 实现部署监控：
-
-```rust
-#[wasm_bindgen]
-pub struct DeploymentMonitor {
-    status: String,
-    metrics: HashMap<String, f64>,
-}
-
-impl DeploymentMonitor {
-    pub fn new() -> Self {
-        Self {
-            status: "deployed".to_string(),
-            metrics: HashMap::new(),
-        }
-    }
-    
-    pub fn update_status(&mut self, status: &str) {
-        self.status = status.to_string();
-    }
-    
-    pub fn record_metric(&mut self, name: &str, value: f64) {
-        self.metrics.insert(name.to_string(), value);
-    }
-}
-```
-
-**理论映射**: 部署监控 $\text{deploy\_monitor}: \text{Deployment} \rightarrow \text{Status}$。
-
-## 安全问题
-
-### Q25: WebAssembly是否安全?
-
-**A**: WebAssembly提供多层安全机制：
-
-```rust
-// 沙箱执行示例
-#[wasm_bindgen]
-pub fn sandboxed_operation(input: &str) -> Result<String, String> {
-    // 输入验证
-    if input.len() > 1000 {
-        return Err("Input too large".to_string());
-    }
-    
-    // 资源限制
-    if input.contains("dangerous") {
-        return Err("Dangerous input detected".to_string());
-    }
-    
-    // 安全处理
-    Ok(input.to_uppercase())
-}
-```
-
-**理论映射**: 安全保证 $\text{safe}(P_{\text{Wasm}}) \Rightarrow \text{sandboxed}(P_{\text{Wasm}})$。
-
-### Q26: 如何防止内存攻击?
-
-**A**: 使用内存安全机制：
-
-```rust
-#[wasm_bindgen]
-pub fn safe_memory_access(ptr: usize, size: usize, memory_size: usize) -> Result<(), String> {
-    // 边界检查
-    if ptr + size > memory_size {
-        return Err("Memory access out of bounds".to_string());
-    }
-    
-    // 对齐检查
-    if ptr % 4 != 0 {
-        return Err("Unaligned memory access".to_string());
-    }
-    
-    Ok(())
-}
-```
-
-**理论映射**: 内存安全 $\forall \text{addr}, \text{size}: \text{addr} + \text{size} \leq |\text{Memory}|$。
-
-### Q27: 如何实现访问控制?
-
-**A**: 使用权限控制机制：
-
-```rust
-#[wasm_bindgen]
-pub struct AccessControl {
-    permissions: HashMap<String, Vec<String>>,
-}
-
-impl AccessControl {
-    pub fn new() -> Self {
-        let mut permissions = HashMap::new();
-        permissions.insert("user".to_string(), vec!["read".to_string()]);
-        permissions.insert("admin".to_string(), vec!["read".to_string(), "write".to_string()]);
-        
-        Self { permissions }
-    }
-    
-    pub fn check_permission(&self, user: &str, action: &str) -> bool {
-        if let Some(user_permissions) = self.permissions.get(user) {
-            user_permissions.contains(&action.to_string())
-        } else {
-            false
-        }
-    }
-}
-```
-
-**理论映射**: 访问控制 $\text{access\_control}: \text{User} \times \text{Action} \rightarrow \text{Permission}$。
-
-### Q28: 如何审计安全事件?
-
-**A**: 实现安全审计机制：
-
-```rust
-#[wasm_bindgen]
-pub struct SecurityAuditor {
-    events: Vec<SecurityEvent>,
-}
-
-#[derive(Serialize, Deserialize)]
-pub struct SecurityEvent {
-    timestamp: f64,
-    event_type: String,
-    details: String,
-    severity: String,
-}
-
-impl SecurityAuditor {
-    pub fn new() -> Self {
-        Self { events: Vec::new() }
-    }
-    
-    pub fn log_event(&mut self, event_type: &str, details: &str, severity: &str) {
-        let event = SecurityEvent {
-            timestamp: web_sys::window()
-                .unwrap()
-                .performance()
-                .unwrap()
-                .now(),
-            event_type: event_type.to_string(),
-            details: details.to_string(),
-            severity: severity.to_string(),
-        };
-        self.events.push(event);
-    }
-}
-```
-
-**理论映射**: 安全审计 $\text{security\_audit}: \text{Event} \rightarrow \text{AuditLog}$。
-
-## 兼容性问题
-
-### Q29: 如何确保跨浏览器兼容性?
-
-**A**: 使用兼容性检查和polyfill：
-
-```rust
-#[wasm_bindgen]
-pub fn check_wasm_support() -> bool {
-    // 检查WebAssembly支持
-    web_sys::window()
-        .unwrap()
-        .WebAssembly()
-        .is_some()
-}
-
-#[wasm_bindgen]
-pub fn get_wasm_features() -> JsValue {
-    let features = js_sys::Object::new();
-    
-    // 检查SIMD支持
-    if web_sys::WebAssembly::simd_supported() {
-        js_sys::Reflect::set(&features, &"simd".into(), &true.into()).unwrap();
-    }
-    
-    // 检查线程支持
-    if web_sys::WebAssembly::threads_supported() {
-        js_sys::Reflect::set(&features, &"threads".into(), &true.into()).unwrap();
-    }
-    
-    features.into()
-}
-```
-
-**理论映射**: 兼容性检查 $\text{compatibility\_check}: \text{Environment} \rightarrow \text{Support}$。
-
-### Q30: 如何处理版本兼容性?
-
-**A**: 实现版本兼容性管理：
-
-```rust
-#[wasm_bindgen]
-pub struct CompatibilityManager {
-    current_version: String,
-    supported_versions: Vec<String>,
-}
-
-impl CompatibilityManager {
-    pub fn new(version: &str) -> Self {
-        Self {
-            current_version: version.to_string(),
-            supported_versions: vec![
-                "1.0.0".to_string(),
-                "1.1.0".to_string(),
-                "1.2.0".to_string(),
-            ],
-        }
-    }
-    
-    pub fn is_compatible(&self, version: &str) -> bool {
-        self.supported_versions.contains(&version.to_string())
-    }
-    
-    pub fn migrate_data(&self, old_version: &str, data: &str) -> Result<String, String> {
-        // 数据迁移逻辑
-        match old_version {
-            "1.0.0" => Ok(data.to_string()),
-            "1.1.0" => Ok(data.to_string()),
-            _ => Err("Unsupported version".to_string()),
-        }
-    }
-}
-```
-
-**理论映射**: 版本兼容性 $\text{version\_compatibility}: \text{Version} \times \text{Version} \rightarrow \text{Compatible}$。
-
-## 进阶问题
-
-### Q21: WebAssembly的安全隔离机制是什么？
-
-A: WebAssembly提供多层安全隔离：
-
-1. **沙箱执行环境**：
-
-    ```rust
-    use wasmtime::{Engine, Module, Store, Instance};
-
-    pub struct WasmSandbox {
-        engine: Engine,
-        store: Store<()>,
-    }
-
-    impl WasmSandbox {
-        pub fn new() -> Self {
-            let engine = Engine::default();
-            let store = Store::new(&engine, ());
-            
-            Self { engine, store }
-        }
-        
-        pub fn execute_isolated(&mut self, wasm_bytes: &[u8]) -> Result<(), WasmError> {
-            // 创建隔离的模块实例
-            let module = Module::new(&self.engine, wasm_bytes)?;
-            let instance = Instance::new(&mut self.store, &module, &[])?;
-            
-            // 在沙箱中执行，无法访问主机系统
-            // 只能通过预定义的接口与主机交互
-            Ok(())
-        }
-    }
-    ```
-
-2. **内存隔离**：
-
-```rust
-use wasmtime::{Memory, MemoryType};
-
-pub struct IsolatedMemory {
-    memory: Memory,
-    size_limit: u32,
-}
-
-impl IsolatedMemory {
-    pub fn new(size_limit: u32) -> Self {
-        let memory_type = MemoryType::new(1, Some(size_limit));
-        let memory = Memory::new(&mut store, memory_type).unwrap();
-        
-        Self { memory, size_limit }
-    }
-    
-    pub fn read_safe(&self, offset: u32, len: u32) -> Result<Vec<u8>, MemoryError> {
-        if offset + len > self.size_limit {
-            return Err(MemoryError::OutOfBounds);
-        }
-        
-        let data = self.memory.read(&self.store, offset as usize, len as usize)?;
-        Ok(data.to_vec())
-    }
-}
-```
-
-### Q22: 如何优化WebAssembly的性能？
-
-A: WebAssembly性能优化策略：
-
-1. **编译优化**：
-
-    ```rust
-    // Cargo.toml 配置
-    [profile.release]
-    opt-level = "z"  # 优化大小
-    lto = true       # 链接时优化
-    codegen-units = 1
-    panic = "abort"
-
-    # 使用 wasm-opt 进一步优化
-    # wasm-opt -Oz -s 1000 target/wasm32-unknown-unknown/release/your_module.wasm
-    ```
-
-2. **内存管理优化**：
-
-    ```rust
-    use std::alloc::{GlobalAlloc, Layout, System};
-
-    pub struct WasmAllocator;
-
-    unsafe impl GlobalAlloc for WasmAllocator {
-        unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
-            // 使用WebAssembly的线性内存
-            System.alloc(layout)
-        }
-        
-        unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
-            System.dealloc(ptr, layout);
-        }
-    }
-
-    #[global_allocator]
-    static ALLOCATOR: WasmAllocator = WasmAllocator;
-    ```
-
-3. **SIMD优化**：
-
-```rust
-use std::arch::wasm32::*;
-
-pub fn simd_vector_add(a: &[f32], b: &[f32]) -> Vec<f32> {
-    let mut result = Vec::with_capacity(a.len());
-    
-    for chunk in a.chunks_exact(4).zip(b.chunks_exact(4)) {
-        let (a_chunk, b_chunk) = chunk;
-        
-        // 使用SIMD指令
-        let a_simd = f32x4_load(a_chunk.as_ptr() as *const f32);
-        let b_simd = f32x4_load(b_chunk.as_ptr() as *const f32);
-        let sum = f32x4_add(a_simd, b_simd);
-        
-        // 存储结果
-        let mut output = [0.0; 4];
-        f32x4_store(output.as_mut_ptr() as *mut f32, sum);
-        result.extend_from_slice(&output);
-    }
-    
-    result
-}
-```
-
-### Q23: Rust到WebAssembly的类型映射规则是什么？
-
-A: 类型映射规则与最佳实践：
-
-```rust
-use wasm_bindgen::prelude::*;
-
-// 基本类型映射
-#[wasm_bindgen]
-pub struct Point {
-    x: f64,
-    y: f64,
-}
-
-#[wasm_bindgen]
-impl Point {
-    #[wasm_bindgen(constructor)]
-    pub fn new(x: f64, y: f64) -> Point {
-        Point { x, y }
-    }
-    
-    #[wasm_bindgen(getter)]
-    pub fn x(&self) -> f64 {
-        self.x
-    }
-    
-    #[wasm_bindgen(setter)]
-    pub fn set_x(&mut self, x: f64) {
-        self.x = x;
-    }
-    
-    // 复杂类型需要序列化
-    pub fn to_json(&self) -> String {
-        serde_json::to_string(self).unwrap()
-    }
-}
-
-// 错误处理映射
-#[wasm_bindgen]
-pub enum WasmError {
-    InvalidInput,
-    ComputationError,
-    MemoryError,
-}
-
-impl From<serde_json::Error> for WasmError {
-    fn from(_: serde_json::Error) -> Self {
-        WasmError::InvalidInput
-    }
-}
-
-// 异步函数映射
-#[wasm_bindgen]
-pub async fn async_computation(input: &str) -> Result<String, WasmError> {
-    // 异步计算逻辑
-    tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
-    Ok(format!("Processed: {}", input))
-}
-```
-
-### Q24: 如何在WebAssembly中实现多线程？
-
-A: WebAssembly多线程实现：
-
-```rust
-use wasm_bindgen::prelude::*;
-use web_sys::{Worker, MessageEvent, DedicatedWorkerGlobalScope};
-
-#[wasm_bindgen]
-pub struct WasmWorker {
-    worker: Worker,
-}
-
-#[wasm_bindgen]
-impl WasmWorker {
-    #[wasm_bindgen(constructor)]
-    pub fn new() -> Result<WasmWorker, JsValue> {
-        let worker = Worker::new("./worker.js")?;
-        Ok(WasmWorker { worker })
-    }
-    
-    pub fn post_message(&self, data: &str) -> Result<(), JsValue> {
-        self.worker.post_message(&JsValue::from_str(data))?;
-        Ok(())
-    }
-    
-    pub fn set_onmessage(&self, callback: &js_sys::Function) {
-        self.worker.set_onmessage(Some(callback));
-    }
-}
-
-// 共享内存实现
-use std::sync::atomic::{AtomicU32, Ordering};
-
-#[wasm_bindgen]
-pub struct SharedCounter {
-    counter: AtomicU32,
-}
-
-#[wasm_bindgen]
-impl SharedCounter {
-    #[wasm_bindgen(constructor)]
-    pub fn new() -> SharedCounter {
-        SharedCounter {
-            counter: AtomicU32::new(0),
-        }
-    }
-    
-    pub fn increment(&self) -> u32 {
-        self.counter.fetch_add(1, Ordering::SeqCst)
-    }
-    
-    pub fn get(&self) -> u32 {
-        self.counter.load(Ordering::SeqCst)
-    }
-}
-```
-
-### Q25: WebAssembly与JavaScript的互操作性如何实现？
-
-A: 互操作性实现策略：
-
-```rust
-use wasm_bindgen::prelude::*;
-use js_sys::{Object, Reflect, Array};
-
-// 1. 直接调用JavaScript函数
-#[wasm_bindgen]
-extern "C" {
-    #[wasm_bindgen(js_namespace = console)]
-    fn log(s: &str);
-    
-    #[wasm_bindgen(js_namespace = Math)]
-    fn random() -> f64;
-}
-
-// 2. 传递复杂对象
-#[wasm_bindgen]
-pub fn process_js_object(obj: &Object) -> Result<String, JsValue> {
-    let name = Reflect::get(obj, &JsValue::from_str("name"))?
-        .as_string()
-        .unwrap_or_default();
-    
-    let age = Reflect::get(obj, &JsValue::from_str("age"))?
-        .as_f64()
-        .unwrap_or(0.0) as u32;
-    
-    Ok(format!("Name: {}, Age: {}", name, age))
-}
-
-// 3. 返回JavaScript对象
-#[wasm_bindgen]
-pub fn create_js_object(name: &str, age: u32) -> Object {
-    let obj = Object::new();
-    Reflect::set(&obj, &JsValue::from_str("name"), &JsValue::from_str(name)).unwrap();
-    Reflect::set(&obj, &JsValue::from_str("age"), &JsValue::from_f64(age as f64)).unwrap();
-    obj
-}
-
-// 4. 处理JavaScript数组
-#[wasm_bindgen]
-pub fn process_js_array(arr: &Array) -> Array {
-    let result = Array::new();
-    
-    for i in 0..arr.length() {
-        if let Some(value) = arr.get(i).as_f64() {
-            result.push(&JsValue::from_f64(value * 2.0));
-        }
-    }
-    
-    result
-}
-
-// 5. 异步JavaScript调用
-#[wasm_bindgen]
-pub async fn fetch_data(url: &str) -> Result<String, JsValue> {
-    let promise = js_sys::Reflect::get(
-        &js_sys::global(),
-        &JsValue::from_str("fetch")
-    )?;
-    
-    let response = js_sys::Reflect::apply(
-        &promise,
-        &js_sys::global(),
-        &Array::of1(&JsValue::from_str(url))
-    )?;
-    
-    // 处理响应...
-    Ok("Data fetched".to_string())
-}
-```
-
-### Q26: WebAssembly的内存管理最佳实践是什么？
-
-A: 内存管理策略：
-
-```rust
-use std::alloc::{GlobalAlloc, Layout, System};
-use std::ptr::NonNull;
-
-// 1. 自定义分配器
-pub struct WasmAllocator {
-    base_ptr: *mut u8,
-    current_offset: usize,
-    total_size: usize,
-}
-
-unsafe impl GlobalAlloc for WasmAllocator {
-    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
-        let align = layout.align();
-        let size = layout.size();
-        
-        // 对齐到下一个边界
-        let aligned_offset = (self.current_offset + align - 1) & !(align - 1);
-        
-        if aligned_offset + size > self.total_size {
-            return std::ptr::null_mut();
-        }
-        
-        self.base_ptr.add(aligned_offset)
-    }
-    
-    unsafe fn dealloc(&self, _ptr: *mut u8, _layout: Layout) {
-        // WebAssembly中通常不需要显式释放
-        // 内存会在模块卸载时自动回收
-    }
-}
-
-// 2. 内存池管理
-pub struct MemoryPool {
-    blocks: Vec<MemoryBlock>,
-    free_blocks: Vec<usize>,
-}
-
-struct MemoryBlock {
-    ptr: *mut u8,
-    size: usize,
-    in_use: bool,
-}
-
-impl MemoryPool {
-    pub fn new(total_size: usize, block_size: usize) -> Self {
-        let num_blocks = total_size / block_size;
-        let mut blocks = Vec::with_capacity(num_blocks);
-        let mut free_blocks = Vec::with_capacity(num_blocks);
-        
-        for i in 0..num_blocks {
-            let ptr = unsafe { System.alloc(Layout::from_size_align(block_size, 8).unwrap()) };
-            blocks.push(MemoryBlock {
-                ptr,
-                size: block_size,
-                in_use: false,
-            });
-            free_blocks.push(i);
-        }
-        
-        Self { blocks, free_blocks }
-    }
-    
-    pub fn allocate(&mut self, size: usize) -> Option<*mut u8> {
-        for &block_idx in &self.free_blocks {
-            if self.blocks[block_idx].size >= size {
-                self.blocks[block_idx].in_use = true;
-                self.free_blocks.retain(|&x| x != block_idx);
-                return Some(self.blocks[block_idx].ptr);
-            }
-        }
-        None
-    }
-    
-    pub fn deallocate(&mut self, ptr: *mut u8) {
-        for (i, block) in self.blocks.iter_mut().enumerate() {
-            if block.ptr == ptr && block.in_use {
-                block.in_use = false;
-                self.free_blocks.push(i);
-                break;
-            }
-        }
-    }
-}
-
-// 3. 零拷贝数据传输
-#[wasm_bindgen]
-pub struct ZeroCopyBuffer {
-    data: Vec<u8>,
-    offset: usize,
-}
-
-#[wasm_bindgen]
-impl ZeroCopyBuffer {
-    #[wasm_bindgen(constructor)]
-    pub fn new(size: usize) -> ZeroCopyBuffer {
-        ZeroCopyBuffer {
-            data: vec![0; size],
-            offset: 0,
-        }
-    }
-    
-    pub fn write(&mut self, input: &[u8]) -> Result<usize, JsValue> {
-        let remaining = self.data.len() - self.offset;
-        let write_size = std::cmp::min(input.len(), remaining);
-        
-        self.data[self.offset..self.offset + write_size].copy_from_slice(&input[..write_size]);
-        self.offset += write_size;
-        
-        Ok(write_size)
-    }
-    
-    pub fn read(&self, start: usize, len: usize) -> Result<Vec<u8>, JsValue> {
-        if start + len > self.data.len() {
-            return Err(JsValue::from_str("Out of bounds"));
-        }
-        
-        Ok(self.data[start..start + len].to_vec())
-    }
-}
-```
-
-## 交叉引用与扩展阅读
-
-### 相关文档
-
-- WebAssembly理论：`01_webassembly_theory.md`
-- WebAssembly实现：`02_webassembly_implementation.md`
-- 编译理论：`03_compilation_theory.md`
-- Rust到WASM：`04_rust_to_wasm.md`
-
-### 外部资源
-
-- [wasm-bindgen](https://github.com/rustwasm/wasm-bindgen) - Rust与JavaScript绑定
-- [wasm-pack](https://github.com/rustwasm/wasm-pack) - WebAssembly打包工具
-- [wasmtime](https://github.com/bytecodealliance/wasmtime) - WebAssembly运行时
-- [WebAssembly规范](https://webassembly.github.io/spec/) - 官方规范文档
-
-### 快速导航
-
-- 模型理论（Rust语义映射）：`../18_model/01_model_theory.md`
-- IoT常见问题：`../17_iot/FAQ.md`
-- 分布式系统FAQ：`../../crates/c20_distributed/docs/FAQ.md`
-- AI系统FAQ：`../../crates/c19_ai/docs/FAQ.md`
-
-### 练习与思考
-
-1. 将一个包含 `Vec<f32>` 数据处理的 Rust 函数迁移到 WASM，比较 `-O3` 与 `-Oz` 下的体积与性能变化，解释优化权衡。
-2. 设计一个 `wasm-bindgen` 互操作接口，要求在 JS 中传入复杂对象并在 Rust 内进行校验与序列化；给出边界条件测试。
-3. 在 `wasmtime` 运行时中开启 `SIMD` 与 `wasi`，编写基准程序评估内存、CPU 使用与延迟并给出结果分析。
-
-### 性能优化工具
-
-- [wasm-opt](https://github.com/WebAssembly/binaryen) - WebAssembly优化器
-- [twiggy](https://github.com/rustwasm/twiggy) - WebAssembly分析工具
-- [wasm-bindgen-test](https://github.com/rustwasm/wasm-bindgen) - WebAssembly测试框架
-
----
-
-**文档状态**: 完成  
-**最后更新**: 2025-01-27  
-**维护者**: Rust形式化理论项目组
+## 部署和分发
+
+### Q18: 如何部署WebAssembly应用？
+
+**A:** 部署方式：
+
+1. **静态文件部署**
+
+   ```html
+   <!DOCTYPE html>
+   <html>
+   <head>
+       <meta charset="utf-8">
+       <title>WebAssembly App</title>
+   </head>
+   <body>
+       <script type="module">
+           import init, { fibonacci } from './pkg/my_wasm_project.js';
+           
+           async function run() {
+               await init();
+               const result = fibonacci(10);
+               console.log(result);
+           }
+           
+           run();
+       </script>
+   </body>
+   </html>
+   ```
+
+2. **使用构建工具**
+
+   ```javascript
+   // webpack.config.js
+   module.exports = {
+       experiments: {
+           asyncWebAssembly: true,
+       },
+   };
+   ```
+
+3. **CDN分发**
+
+   ```html
+   <script src="https://unpkg.com/my-wasm-package@1.0.0/pkg/my_wasm_project.js"></script>
+   ```
+
+## 总结
+
+WebAssembly为Rust开发者提供了在Web上运行高性能代码的能力。通过理解这些常见问题和解决方案，可以更好地开发和部署WebAssembly应用。
+
+**关键要点：**
+
+1. 正确设置开发环境
+2. 理解内存管理
+3. 优化性能
+4. 处理与JavaScript的交互
+5. 实现错误处理
+6. 进行调试和测试
+7. 选择合适的部署方式
+
+## 相关资源
+
+- [WebAssembly官方文档](https://webassembly.org/)
+- [wasm-pack文档](https://rustwasm.github.io/wasm-pack/)
+- [Rust WebAssembly Book](https://rustwasm.github.io/docs/book/)
+- [WebAssembly Studio](https://webassembly.studio/)
