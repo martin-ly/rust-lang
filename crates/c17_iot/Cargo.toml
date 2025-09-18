@@ -54,3 +54,7 @@ required-features = ["influx"]
 name = "coap_dtls_openssl"
 path = "examples/coap_dtls_openssl.rs"
 required-features = ["openssl-examples"]
+
+[[example]]
+name = "coap_dtls"
+path = "examples/coap_dtls.rs"

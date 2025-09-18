@@ -1,5 +1,7 @@
 /-! Rust Type System: Progress & Preservation (Skeleton) -/
 
+set_option sorryPermitted true
+
 import «TypeSystem».CoreMinimal
 
 open Ty Expr
@@ -12,35 +14,35 @@ abbrev empty : Ctx := ∅
 theorem progress (e : Expr) (t : Ty)
   (h : HasType empty e t) : Value e ∨ ∃ e', Step e e' := by
   -- TODO(draft): induction on h; cases for Abs/App/ADT/Ref/…
-  admit
+  sorry
 
 variable {Γ : Ctx}
 
 theorem preservation {e e' : Expr} {t : Ty}
   (ht : HasType Γ e t) (hs : Step e e') : ∃ Γ', HasType Γ' e' t := by
   -- TODO(draft): induction on hs; use substitution lemma
-  admit
+  sorry
 
 /-- Substitution lemma -/
 lemma substitution_lemma
   (Γ : Ctx) (x : Nat) (tx : Ty) (e : Expr) (te : Ty) (v : Expr) :
   HasType Γ v tx → HasType (tx :: Γ) e te → HasType Γ (CoreMinimal.subst x v e) te := by
   -- TODO(draft): 实现 substitution 证明
-  admit
+  sorry
 
 /-- Weakening lemma -/
 lemma weakening_lemma
   (Γ : Ctx) (Δ : Ctx) (e : Expr) (t : Ty) :
   HasType Γ e t → HasType (Γ ++ Δ) e t := by
   -- TODO(draft): 实现 weakening 证明
-  admit
+  sorry
 
 /-- Strengthening lemma -/
 lemma strengthening_lemma
   (Γ : Ctx) (x : Nat) (tx : Ty) (Δ : Ctx) (e : Expr) (t : Ty) :
   HasType (Γ ++ [tx] ++ Δ) e t → HasType (Γ ++ Δ) e t := by
   -- TODO(draft): 实现 strengthening 证明
-  admit
+  sorry
 
 /-- Preservation skeleton for β-reduction (AppAbs) case. -/
 theorem preservation_appabs
@@ -49,7 +51,7 @@ theorem preservation_appabs
   (hv   : HasType Γ v tx)
   : ∃ Γ', HasType Γ' (CoreMinimal.subst 0 v e) t := by
   -- TODO(draft): Inversion on habs to get HasType (tx :: Γ) e t; then substitution
-  admit
+  sorry
 
 /- Notes:
  - Replace placeholders with project-specific syntax and rules

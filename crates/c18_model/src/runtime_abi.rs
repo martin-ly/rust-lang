@@ -8,7 +8,7 @@ use core::time::Duration;
 
 /// 任务生成与阻塞任务网关
 pub trait Spawner {
-    type JoinHandle<T>: Future<Output = T> + Send + 'static;
+    type JoinHandle<T: 'static>: Future<Output = T> + Send + 'static;
 
     fn spawn<F, T>(&self, fut: F) -> Self::JoinHandle<T>
     where
@@ -52,4 +52,72 @@ pub trait Instrument {
     where
         Self: Sized,
         Fut: Future;
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use core::pin::Pin;
+    use core::task::{Context, Poll};
+    use std::boxed::Box;
+
+    struct DummySpawner;
+    impl Spawner for DummySpawner {
+        type JoinHandle<T> = Pin<Box<dyn Future<Output = T> + Send + 'static>> where T: 'static;
+        fn spawn<F, T>(&self, _fut: F) -> Self::JoinHandle<T>
+        where
+            F: Future<Output = T> + Send + 'static,
+            T: Send + 'static,
+        {
+            Box::pin(_fut)
+        }
+        fn spawn_blocking<F, T>(&self, _f: F) -> Self::JoinHandle<T>
+        where
+            F: FnOnce() -> T + Send + 'static,
+            T: Send + 'static,
+        {
+            Box::pin(async move { _f() })
+        }
+    }
+
+    struct Ready;
+    impl Future for Ready {
+        type Output = ();
+        fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> { Poll::Ready(()) }
+    }
+
+    struct DummyTimer;
+    impl Timer for DummyTimer {
+        type SleepFuture = Ready;
+        fn sleep(&self, _dur: Duration) -> Self::SleepFuture { Ready }
+    }
+
+    #[derive(Clone)]
+    struct DummyCancel;
+    impl CancellationToken for DummyCancel {
+        type Cancelled<'a> = Ready where Self: 'a;
+        fn is_cancelled(&self) -> bool { false }
+        fn cancelled(&self) -> Self::Cancelled<'_> { Ready }
+    }
+
+    struct DummyChan;
+    impl<T> Channel<T> for DummyChan {
+        type Sender = ();
+        type Receiver = ();
+        fn bounded(_capacity: usize) -> (Self::Sender, Self::Receiver) { ((), ()) }
+    }
+
+    struct DummyInstr;
+    impl Instrument for DummyInstr {
+        fn instrument<Fut>(self, fut: Fut) -> Fut where Fut: Future { fut }
+    }
+
+    #[test]
+    fn abi_traits_compile_with_dummy_impls() {
+        let _sp = DummySpawner;
+        let _tm = DummyTimer;
+        let _ct = DummyCancel;
+        let _ = <DummyChan as Channel<u8>>::bounded(1);
+        let _ = DummyInstr.instrument(Ready);
+    }
 }
