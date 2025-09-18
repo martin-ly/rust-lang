@@ -1076,6 +1076,258 @@ impl SideChannelProtection {
 }
 ```
 
+## 高级密码学原语
+
+### 同态加密
+
+**定义 2.21** (同态加密)
+
+同态加密允许在加密数据上直接进行计算，而无需解密。设 $E$ 是加密函数，$D$ 是解密函数，$f$ 是计算函数，则：
+
+$$D(f(E(x_1), E(x_2))) = f(x_1, x_2)$$
+
+**算法 2.8** (Paillier同态加密)
+
+```rust
+use num_bigint::{BigInt, BigUint, ToBigInt};
+use num_traits::{Zero, One};
+
+#[derive(Debug, Clone)]
+pub struct PaillierKeyPair {
+    pub public_key: PaillierPublicKey,
+    pub private_key: PaillierPrivateKey,
+}
+
+#[derive(Debug, Clone)]
+pub struct PaillierPublicKey {
+    pub n: BigUint,
+    pub g: BigUint,
+}
+
+#[derive(Debug, Clone)]
+pub struct PaillierPrivateKey {
+    pub lambda: BigUint,
+    pub mu: BigUint,
+}
+
+impl PaillierKeyPair {
+    pub fn generate(bit_length: usize) -> Self {
+        // 生成两个大素数 p, q
+        let p = generate_prime(bit_length / 2);
+        let q = generate_prime(bit_length / 2);
+        let n = &p * &q;
+        let g = &n + BigUint::one();
+        
+        // 计算私钥参数
+        let lambda = lcm(&p - BigUint::one(), &q - BigUint::one());
+        let mu = mod_inverse(&l(&g, &n, &lambda), &n);
+        
+        Self {
+            public_key: PaillierPublicKey { n, g },
+            private_key: PaillierPrivateKey { lambda, mu },
+        }
+    }
+    
+    pub fn encrypt(&self, message: &BigUint) -> BigUint {
+        let r = generate_random(&self.public_key.n);
+        let n_squared = &self.public_key.n * &self.public_key.n;
+        
+        // c = g^m * r^n mod n^2
+        let g_m = mod_pow(&self.public_key.g, message, &n_squared);
+        let r_n = mod_pow(&r, &self.public_key.n, &n_squared);
+        
+        (g_m * r_n) % n_squared
+    }
+    
+    pub fn decrypt(&self, ciphertext: &BigUint) -> BigUint {
+        let n_squared = &self.public_key.n * &self.public_key.n;
+        
+        // m = L(c^lambda mod n^2) * mu mod n
+        let c_lambda = mod_pow(ciphertext, &self.private_key.lambda, &n_squared);
+        let l_value = l(&c_lambda, &self.public_key.n, &self.private_key.lambda);
+        
+        (l_value * &self.private_key.mu) % &self.public_key.n
+    }
+    
+    pub fn add_homomorphic(&self, c1: &BigUint, c2: &BigUint) -> BigUint {
+        let n_squared = &self.public_key.n * &self.public_key.n;
+        (c1 * c2) % n_squared
+    }
+    
+    pub fn multiply_homomorphic(&self, ciphertext: &BigUint, scalar: &BigUint) -> BigUint {
+        let n_squared = &self.public_key.n * &self.public_key.n;
+        mod_pow(ciphertext, scalar, &n_squared)
+    }
+}
+
+fn l(u: &BigUint, n: &BigUint, lambda: &BigUint) -> BigUint {
+    (u - BigUint::one()) / n
+}
+```
+
+### 多方计算
+
+**定义 2.22** (多方计算)
+
+多方计算(MPC)允许多个参与方在不泄露各自私有输入的情况下，共同计算一个函数的结果。
+
+**算法 2.9** (秘密共享)
+
+```rust
+use std::collections::HashMap;
+
+#[derive(Debug, Clone)]
+pub struct SecretSharing {
+    pub threshold: usize,
+    pub total_shares: usize,
+}
+
+impl SecretSharing {
+    pub fn new(threshold: usize, total_shares: usize) -> Self {
+        assert!(threshold <= total_shares);
+        Self { threshold, total_shares }
+    }
+    
+    pub fn share_secret(&self, secret: &BigUint, prime: &BigUint) -> Vec<(usize, BigUint)> {
+        // 生成随机多项式 f(x) = secret + a1*x + a2*x^2 + ... + a(t-1)*x^(t-1)
+        let mut coefficients = vec![secret.clone()];
+        
+        for _ in 1..self.threshold {
+            coefficients.push(generate_random(prime));
+        }
+        
+        // 计算每个参与方的份额
+        let mut shares = Vec::new();
+        for i in 1..=self.total_shares {
+            let x = BigUint::from(i);
+            let share = self.evaluate_polynomial(&coefficients, &x, prime);
+            shares.push((i, share));
+        }
+        
+        shares
+    }
+    
+    pub fn reconstruct_secret(&self, shares: &[(usize, BigUint)], prime: &BigUint) -> BigUint {
+        assert!(shares.len() >= self.threshold);
+        
+        let mut secret = BigUint::zero();
+        
+        for (i, (xi, yi)) in shares.iter().enumerate() {
+            let mut lagrange = BigUint::one();
+            
+            for (j, (xj, _)) in shares.iter().enumerate() {
+                if i != j {
+                    let numerator = (prime + prime - xj) % prime;
+                    let denominator = (prime + xi - xj) % prime;
+                    let inv_denominator = mod_inverse(&denominator, prime);
+                    lagrange = (lagrange * numerator * inv_denominator) % prime;
+                }
+            }
+            
+            secret = (secret + (yi * lagrange) % prime) % prime;
+        }
+        
+        secret
+    }
+    
+    fn evaluate_polynomial(&self, coefficients: &[BigUint], x: &BigUint, prime: &BigUint) -> BigUint {
+        let mut result = BigUint::zero();
+        let mut x_power = BigUint::one();
+        
+        for coefficient in coefficients {
+            result = (result + (coefficient * &x_power) % prime) % prime;
+            x_power = (x_power * x) % prime;
+        }
+        
+        result
+    }
+}
+```
+
+## 后量子密码学
+
+### 格基密码学
+
+**定义 2.23** (格)
+
+格是 $\mathbb{R}^n$ 中向量的离散子群，由基向量 $B = \{b_1, b_2, \ldots, b_k\}$ 生成：
+
+$$\mathcal{L}(B) = \left\{\sum_{i=1}^k z_i b_i : z_i \in \mathbb{Z}\right\}$$
+
+**算法 2.10** (NTRU加密)
+
+```rust
+#[derive(Debug, Clone)]
+pub struct NTRUParameters {
+    pub n: usize,    // 多项式度数
+    pub p: i32,      // 小模数
+    pub q: i32,      // 大模数
+}
+
+#[derive(Debug, Clone)]
+pub struct NTRUKeyPair {
+    pub public_key: NTRUPublicKey,
+    pub private_key: NTRUPrivateKey,
+}
+
+#[derive(Debug, Clone)]
+pub struct NTRUPublicKey {
+    pub h: Polynomial,
+}
+
+#[derive(Debug, Clone)]
+pub struct NTRUPrivateKey {
+    pub f: Polynomial,
+    pub fp: Polynomial, // f的逆元
+}
+
+impl NTRUKeyPair {
+    pub fn generate(params: &NTRUParameters) -> Self {
+        // 生成私钥多项式 f
+        let f = generate_ternary_polynomial(params.n);
+        
+        // 计算 f 的逆元 fp
+        let fp = polynomial_inverse(&f, params.p);
+        
+        // 生成随机多项式 g
+        let g = generate_ternary_polynomial(params.n);
+        
+        // 计算公钥 h = p * g * fp mod q
+        let p_g = polynomial_multiply(&Polynomial::constant(params.p), &g);
+        let h = polynomial_multiply(&p_g, &fp);
+        let h = polynomial_mod(&h, params.q);
+        
+        Self {
+            public_key: NTRUPublicKey { h },
+            private_key: NTRUPrivateKey { f, fp },
+        }
+    }
+    
+    pub fn encrypt(&self, message: &Polynomial, params: &NTRUParameters) -> Polynomial {
+        // 生成随机多项式 r
+        let r = generate_ternary_polynomial(params.n);
+        
+        // 计算密文 c = r * h + m mod q
+        let r_h = polynomial_multiply(&r, &self.public_key.h);
+        let c = polynomial_add(&r_h, message);
+        polynomial_mod(&c, params.q)
+    }
+    
+    pub fn decrypt(&self, ciphertext: &Polynomial, params: &NTRUParameters) -> Polynomial {
+        // 计算 a = f * c mod q
+        let a = polynomial_multiply(&self.private_key.f, ciphertext);
+        let a = polynomial_mod(&a, params.q);
+        
+        // 中心化 a
+        let a = polynomial_center(&a, params.q);
+        
+        // 计算 m = fp * a mod p
+        let m = polynomial_multiply(&self.private_key.fp, &a);
+        polynomial_mod(&m, params.p)
+    }
+}
+```
+
 ## 总结1
 
 区块链密码学系统提供了完整的安全基础设施，包括：
@@ -1083,8 +1335,9 @@ impl SideChannelProtection {
 1. **基础密码学原语**：哈希函数、数字签名、加密
 2. **高级密码学技术**：同态加密、零知识证明、门限签名
 3. **区块链特定应用**：默克尔证明、可验证随机函数
-4. **性能优化**：批量验证、预计算、并行处理
-5. **安全防护**：侧信道攻击防护、常数时间操作
+4. **后量子密码学**：格基密码学、基于哈希的签名
+5. **性能优化**：批量验证、预计算、并行处理
+6. **安全防护**：侧信道攻击防护、常数时间操作
 
 通过合理选择和实现这些密码学技术，可以构建安全、高效的区块链系统。
 
