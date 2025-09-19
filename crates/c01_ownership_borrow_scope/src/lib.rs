@@ -58,238 +58,53 @@
 //! 借用检查器通过静态分析确保内存安全和线程安全。
 //! The borrow checker ensures memory safety and thread safety through static analysis.
 //!
-//! ```rust
-//! /// 借用检查器特征 / Borrow Checker Trait
-//! pub trait BorrowChecker {
-//!     /// 借用规则 / Borrowing Rules
-//!     fn check_borrow_rules(&self, borrows: &[Borrow]) -> BorrowCheckResult;
-//!     
-//!     /// 生命周期检查 / Lifetime Check
-//!     fn check_lifetimes(&self, lifetimes: &[Lifetime]) -> LifetimeCheckResult;
-//!     
-//!     /// 数据竞争检测 / Data Race Detection
-//!     fn detect_data_races(&self, accesses: &[MemoryAccess]) -> DataRaceResult;
-//!     
-//!     /// 悬垂引用检测 / Dangling Reference Detection
-//!     fn detect_dangling_refs(&self, references: &[Reference]) -> DanglingRefResult;
-//! }
-//! ```
+//! 借用检查器通过静态分析确保内存安全和线程安全。
+//! The borrow checker ensures memory safety and thread safety through static analysis.
+//!
+//! 主要功能包括：
+//! Main functions include:
+//! - 借用规则检查 / Borrow rule checking
+//! - 生命周期验证 / Lifetime validation
+//! - 数据竞争检测 / Data race detection
+//! - 悬垂引用检测 / Dangling reference detection
 //!
 //! ## 工程实践 / Engineering Practice
 //!
 //! ### 所有权模式实现 / Ownership Pattern Implementation
 //!
-//! ```rust
-//! use std::collections::HashMap;
-//! use std::sync::{Arc, Mutex};
+//! 所有权管理器负责跟踪和管理程序中的所有权关系。
+//! The ownership manager is responsible for tracking and managing ownership relationships in the program.
 //!
-//! /// 所有权管理器 / Ownership Manager
-//! pub struct OwnershipManager {
-//!     /// 所有权映射 / Ownership Mapping
-//!     ownership_map: Arc<Mutex<HashMap<String, Owner>>>,
-//!     /// 借用记录 / Borrow Records
-//!     borrow_records: Arc<Mutex<HashMap<String, Vec<Borrow>>>>,
-//!     /// 生命周期跟踪 / Lifetime Tracking
-//!     lifetime_tracker: Arc<Mutex<LifetimeTracker>>,
-//! }
-//!
-//! impl OwnershipManager {
-//!     /// 创建所有权管理器 / Create Ownership Manager
-//!     pub fn new() -> Self {
-//!         Self {
-//!             ownership_map: Arc::new(Mutex::new(HashMap::new())),
-//!             borrow_records: Arc::new(Mutex::new(HashMap::new())),
-//!             lifetime_tracker: Arc::new(Mutex::new(LifetimeTracker::new())),
-//!         }
-//!     }
-//!     
-//!     /// 转移所有权 / Transfer Ownership
-//!     pub fn transfer_ownership(&self, from: String, to: String, value: Value) -> Result<(), OwnershipError> {
-//!         let mut ownership_map = self.ownership_map.lock().unwrap();
-//!         
-//!         // 检查当前所有者 / Check current owner
-//!         if let Some(current_owner) = ownership_map.get(&from) {
-//!             if current_owner.can_transfer(&value) {
-//!                 // 转移所有权 / Transfer ownership
-//!                 ownership_map.remove(&from);
-//!                 ownership_map.insert(to, Owner::new(value));
-//!                 Ok(())
-//!             } else {
-//!                 Err(OwnershipError::TransferNotAllowed)
-//!             }
-//!         } else {
-//!             Err(OwnershipError::OwnerNotFound)
-//!         }
-//!     }
-//!     
-//!     /// 创建借用 / Create Borrow
-//!     pub fn create_borrow(&self, owner: String, borrower: String, borrow_type: BorrowType) -> Result<Borrow, BorrowError> {
-//!         let mut borrow_records = self.borrow_records.lock().unwrap();
-//!         
-//!         // 检查借用规则 / Check borrowing rules
-//!         if self.check_borrow_rules(&owner, &borrower, borrow_type) {
-//!             let borrow = Borrow::new(owner.clone(), borrower, borrow_type);
-//!             
-//!             borrow_records.entry(owner).or_insert_with(Vec::new).push(borrow.clone());
-//!             Ok(borrow)
-//!         } else {
-//!             Err(BorrowError::BorrowRuleViolation)
-//!         }
-//!     }
-//!     
-//!     /// 检查借用规则 / Check Borrowing Rules
-//!     fn check_borrow_rules(&self, owner: &str, borrower: &str, borrow_type: BorrowType) -> bool {
-//!         let borrow_records = self.borrow_records.lock().unwrap();
-//!         
-//!         if let Some(borrows) = borrow_records.get(owner) {
-//!             match borrow_type {
-//!                 BorrowType::Immutable => {
-//!                     // 可以有多个不可变借用 / Can have multiple immutable borrows
-//!                     !borrows.iter().any(|b| b.borrow_type == BorrowType::Mutable)
-//!                 }
-//!                 BorrowType::Mutable => {
-//!                     // 可变借用时不能有其他借用 / No other borrows when mutable borrow exists
-//!                     borrows.is_empty()
-//!                 }
-//!             }
-//!         } else {
-//!             true
-//!         }
-//!     }
-//! }
-//! ```
+//! 主要功能包括：
+//! Main functions include:
+//! - 所有权转移 / Ownership transfer
+//! - 借用管理 / Borrow management
+//! - 生命周期跟踪 / Lifetime tracking
+//! - 内存安全检查 / Memory safety checking
 //!
 //! ### 作用域管理机制 / Scope Management Mechanisms
 //!
-//! ```rust
-//! /// 作用域管理器 / Scope Manager
-//! pub struct ScopeManager {
-//!     /// 作用域栈 / Scope Stack
-//!     scope_stack: Vec<Scope>,
-//!     /// 变量映射 / Variable Mapping
-//!     variable_map: HashMap<String, Variable>,
-//!     /// 生命周期映射 / Lifetime Mapping
-//!     lifetime_map: HashMap<String, Lifetime>,
-//! }
+//! 作用域管理器负责管理程序中的变量作用域和生命周期。
+//! The scope manager is responsible for managing variable scopes and lifetimes in the program.
 //!
-//! impl ScopeManager {
-//!     /// 创建作用域管理器 / Create Scope Manager
-//!     pub fn new() -> Self {
-//!         Self {
-//!             scope_stack: Vec::new(),
-//!             variable_map: HashMap::new(),
-//!             lifetime_map: HashMap::new(),
-//!         }
-//!     }
-//!     
-//!     /// 进入作用域 / Enter Scope
-//!     pub fn enter_scope(&mut self, scope_name: String) {
-//!         let scope = Scope::new(scope_name);
-//!         self.scope_stack.push(scope);
-//!     }
-//!     
-//!     /// 退出作用域 / Exit Scope
-//!     pub fn exit_scope(&mut self) -> Result<(), ScopeError> {
-//!         if let Some(scope) = self.scope_stack.pop() {
-//!             // 清理作用域中的变量 / Clean up variables in scope
-//!             for variable_name in scope.variables {
-//!                 self.variable_map.remove(&variable_name);
-//!             }
-//!             Ok(())
-//!         } else {
-//!             Err(ScopeError::NoScopeToExit)
-//!         }
-//!     }
-//!     
-//!     /// 声明变量 / Declare Variable
-//!     pub fn declare_variable(&mut self, name: String, value: Value, lifetime: Option<Lifetime>) -> Result<(), VariableError> {
-//!         // 检查变量名是否已存在 / Check if variable name already exists
-//!         if self.variable_map.contains_key(&name) {
-//!             return Err(VariableError::VariableAlreadyExists);
-//!         }
-//!         
-//!         let variable = Variable::new(name.clone(), value, lifetime);
-//!         self.variable_map.insert(name, variable);
-//!         
-//!         // 添加到当前作用域 / Add to current scope
-//!         if let Some(current_scope) = self.scope_stack.last_mut() {
-//!             current_scope.variables.push(name);
-//!         }
-//!         
-//!         Ok(())
-//!     }
-//!     
-//!     /// 查找变量 / Find Variable
-//!     pub fn find_variable(&self, name: &str) -> Option<&Variable> {
-//!         self.variable_map.get(name)
-//!     }
-//! }
-//! ```
+//! 主要功能包括：
+//! Main functions include:
+//! - 作用域栈管理 / Scope stack management
+//! - 变量声明和查找 / Variable declaration and lookup
+//! - 生命周期跟踪 / Lifetime tracking
+//! - 作用域清理 / Scope cleanup
 //!
 //! ### 内存安全保证 / Memory Safety Guarantees
 //!
-//! ```rust
-//! /// 内存安全检查器 / Memory Safety Checker
-//! pub struct MemorySafetyChecker {
-//!     /// 内存分配跟踪 / Memory Allocation Tracking
-//!     allocation_tracker: AllocationTracker,
-//!     /// 引用有效性检查 / Reference Validity Checker
-//!     reference_checker: ReferenceChecker,
-//!     /// 数据竞争检测器 / Data Race Detector
-//!     data_race_detector: DataRaceDetector,
-//! }
+//! 内存安全检查器负责确保程序的内存安全性。
+//! The memory safety checker is responsible for ensuring memory safety in the program.
 //!
-//! impl MemorySafetyChecker {
-//!     /// 创建内存安全检查器 / Create Memory Safety Checker
-//!     pub fn new() -> Self {
-//!         Self {
-//!             allocation_tracker: AllocationTracker::new(),
-//!             reference_checker: ReferenceChecker::new(),
-//!             data_race_detector: DataRaceDetector::new(),
-//!         }
-//!     }
-//!     
-//!     /// 检查内存安全 / Check Memory Safety
-//!     pub fn check_memory_safety(&self, program: &Program) -> MemorySafetyReport {
-//!         let mut report = MemorySafetyReport::new();
-//!         
-//!         // 检查内存分配 / Check memory allocations
-//!         let allocation_report = self.allocation_tracker.check_allocations(program);
-//!         report.add_allocation_report(allocation_report);
-//!         
-//!         // 检查引用有效性 / Check reference validity
-//!         let reference_report = self.reference_checker.check_references(program);
-//!         report.add_reference_report(reference_report);
-//!         
-//!         // 检查数据竞争 / Check data races
-//!         let data_race_report = self.data_race_detector.detect_races(program);
-//!         report.add_data_race_report(data_race_report);
-//!         
-//!         report
-//!     }
-//!     
-//!     /// 验证所有权规则 / Validate Ownership Rules
-//!     pub fn validate_ownership_rules(&self, ownership_graph: &OwnershipGraph) -> OwnershipValidationResult {
-//!         let mut result = OwnershipValidationResult::new();
-//!         
-//!         // 检查单一所有权 / Check single ownership
-//!         for node in ownership_graph.nodes() {
-//!             if ownership_graph.get_owners(node).len() > 1 {
-//!                 result.add_violation(OwnershipViolation::MultipleOwners);
-//!             }
-//!         }
-//!         
-//!         // 检查借用规则 / Check borrowing rules
-//!         for edge in ownership_graph.edges() {
-//!             if !self.validate_borrow_rules(edge) {
-//!                 result.add_violation(OwnershipViolation::InvalidBorrow);
-//!             }
-//!         }
-//!         
-//!         result
-//!     }
-//! }
-//! ```
+//! 主要功能包括：
+//! Main functions include:
+//! - 内存分配跟踪 / Memory allocation tracking
+//! - 引用有效性检查 / Reference validity checking
+//! - 数据竞争检测 / Data race detection
+//! - 所有权规则验证 / Ownership rule validation
 //!
 //! ## 批判性分析 / Critical Analysis
 //!
@@ -456,41 +271,30 @@
 //! ## 使用示例 / Usage Examples
 //!
 //! ```rust
-//! use crate::ownership::{OwnershipManager, ScopeManager, MemorySafetyChecker};
+//! use c01_ownership_borrow_scope::rust_190_features::{ImprovedBorrowChecker, BorrowType};
+//! use c01_ownership_borrow_scope::scope::{ScopeManager, ScopeType};
 //!
 //! fn main() -> Result<(), Box<dyn std::error::Error>> {
-//!     // 创建所有权管理器 / Create ownership manager
-//!     let ownership_manager = OwnershipManager::new();
+//!     // 创建改进的借用检查器 / Create improved borrow checker
+//!     let mut borrow_checker = ImprovedBorrowChecker::new();
 //!     
 //!     // 创建作用域管理器 / Create scope manager
 //!     let mut scope_manager = ScopeManager::new();
 //!     
-//!     // 创建内存安全检查器 / Create memory safety checker
-//!     let safety_checker = MemorySafetyChecker::new();
-//!     
 //!     // 进入作用域 / Enter scope
-//!     scope_manager.enter_scope("main".to_string());
+//!     scope_manager.enter_scope("main".to_string(), ScopeType::Block);
 //!     
-//!     // 声明变量 / Declare variable
-//!     scope_manager.declare_variable(
-//!         "x".to_string(),
-//!         Value::Integer(42),
-//!         Some(Lifetime::new("'a"))
-//!     )?;
-//!     
-//!     // 转移所有权 / Transfer ownership
-//!     ownership_manager.transfer_ownership(
-//!         "scope1".to_string(),
-//!         "scope2".to_string(),
-//!         Value::String("hello".to_string())
-//!     )?;
-//!     
-//!     // 创建借用 / Create borrow
-//!     ownership_manager.create_borrow(
+//!     // 创建不可变借用 / Create immutable borrow
+//!     let borrow_result = borrow_checker.create_borrow(
 //!         "owner".to_string(),
 //!         "borrower".to_string(),
 //!         BorrowType::Immutable
-//!     )?;
+//!     );
+//!     
+//!     match borrow_result {
+//!         Ok(borrow) => println!("借用创建成功 / Borrow created successfully: {:?}", borrow),
+//!         Err(e) => println!("借用创建失败 / Borrow creation failed: {:?}", e),
+//!     }
 //!     
 //!     // 退出作用域 / Exit scope
 //!     scope_manager.exit_scope()?;
@@ -510,6 +314,7 @@ pub mod internal_mut;
 pub mod scope;
 pub mod variable;
 pub mod ownership_utils;
+pub mod rust_190_features;
 
 // 重新导出主要类型 / Re-export main types
 // 使用具体的导出而不是通配符导出以避免名称冲突 / Use specific exports instead of wildcard exports to avoid name conflicts
@@ -582,6 +387,48 @@ pub use ownership_utils::{
     safe_borrow_check,
     safe_mutable_borrow_check,
     safe_lifetime_check,
+};
+
+// 从 rust_190_features 模块导出 / Export from rust_190_features module
+pub use rust_190_features::{
+    // 改进的借用检查器 / Improved borrow checker
+    ImprovedBorrowChecker,
+    BorrowRecord as Rust190BorrowRecord,
+    BorrowCheckResult,
+    BorrowStatistics as Rust190BorrowStatistics,
+    // 增强的生命周期推断 / Enhanced lifetime inference
+    LifetimeParam,
+    LifetimeInferencer,
+    InferenceRule,
+    // 新的智能指针特性 / New smart pointer features
+    SmartPointerType,
+    SmartPointerManager,
+    // 优化的作用域管理 / Optimized scope management
+    ScopeType as Rust190ScopeType,
+    ScopeInfo,
+    OptimizedScopeManager,
+    ScopeOptimizer,
+    OptimizationRule,
+    ScopeStatistics,
+    // 增强的并发安全 / Enhanced concurrency safety
+    ConcurrencySafetyChecker,
+    ThreadInfo,
+    ThreadStatus,
+    LockInfo,
+    LockType,
+    DataRaceDetector,
+    AccessRecord,
+    AccessType,
+    DetectionRule,
+    DataRaceReport,
+    // 智能内存管理 / Smart memory management
+    SmartMemoryManager,
+    AllocationRecord,
+    AllocationType,
+    MemoryUsageStatistics,
+    // 主要功能函数 / Main function functions
+    run_all_rust_190_features_examples,
+    get_rust_190_features_info,
 };
 
 /// 所有权系统版本 / Ownership System Version

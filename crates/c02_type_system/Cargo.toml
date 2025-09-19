@@ -3,7 +3,7 @@ name = "c02_type_system"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
-rust-version = "1.89"
+rust-version = "1.90"
 
 
 [lib]
@@ -21,6 +21,14 @@ path = "examples/rust_189_features_demo.rs"
 [[example]]
 name = "rust_189_comprehensive_demo"
 path = "examples/rust_189_comprehensive_demo.rs"
+
+[[example]]
+name = "rust_190_features_demo"
+path = "examples/rust_190_features_demo.rs"
+
+[[example]]
+name = "rust_190_comprehensive_demo"
+path = "examples/rust_190_comprehensive_demo.rs"
 
 [[bin]]
 name = "ts"

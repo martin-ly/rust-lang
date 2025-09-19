@@ -231,56 +231,105 @@ match result {
 }
 ```
 
+### 6. 统一执行助手 (`ExecHelper`)
+
+将并发控制（信号量）、超时和重试整合为一个调用入口。
+
+```rust
+pub struct ExecHelper { /* 内部持有 SemaphoreLimiter */ }
+
+impl ExecHelper {
+    pub fn new(concurrency: usize) -> Self;
+
+    pub async fn run_with_policies<F, Fut, T, E>(
+        &self,
+        make_fut: F,
+        max_attempts: u32,
+        start_delay: Duration,
+        timeout: Duration,
+    ) -> Result<Option<T>, E>
+    where
+        F: FnMut(u32) -> Fut + Send + 'static,
+        Fut: Future<Output = Result<T, E>>,
+        T: Send + 'static,
+        E: Send + 'static;
+}
+```
+
+返回语义：
+
+- `Ok(Some(T))`: 成功（在超时前完成，且重试链路成功）
+- `Ok(None)`: 超时（在给定超时内未完成）
+- `Err(E)`: 重试已用尽或遇到不可重试错误
+
+示例用法：
+
+```rust
+let exec = ExecHelper::new(8);
+let out = exec
+    .run_with_policies(
+        |attempt| async move {
+            // 你的异步操作（可能失败）
+            do_request().await
+        },
+        3,
+        Duration::from_millis(100),
+        Duration::from_secs(1),
+    )
+    .await;
+```
+
 ## 断路器模式 (`circuit_breaker`)
 
 ### 概述
 
-断路器模式用于防止系统级联故障，当依赖服务出现问题时，快速失败而不是等待超时。
+断路器模式用于防止系统级联故障：当短时间内连续失败达到阈值时，断路器进入打开状态，一段时间内直接拒绝请求（快速失败），等待恢复窗口结束后再进入半开状态试探。
 
-### 核心结构
+### 现有实现（示例版）
+
+签名与内部结构（简化示例，适用于教学）：
 
 ```rust
-pub struct CircuitBreaker {
-    failure_threshold: u32,
-    recovery_timeout: Duration,
-    state: Arc<Mutex<CircuitState>>,
-}
+#[derive(Clone)]
+pub struct CircuitBreaker { /* 内部计数、打开时间、阈值、窗口等 */ }
 
-enum CircuitState {
-    Closed { failure_count: u32 },
-    Open { opened_at: Instant },
-    HalfOpen,
+impl CircuitBreaker {
+    pub fn new(fail_threshold: u64, open_window: Duration) -> Self;
+
+    // 运行一个返回 Result<T, E> 的异步操作；失败计数达阈值后打开断路器。
+    pub async fn run<F, T, E>(&self, fut: F) -> Result<T, E>
+    where
+        F: Future<Output = Result<T, E>>;
 }
 ```
+
+注意：示例版在断路器打开时会触发 `panic!("circuit open")`（synthetic_err），用于突出演示“快速失败”效果。在生产中请改为返回自定义错误类型而非 panic。
 
 ### 使用示例
 
 ```rust
-use c06_async::utils::CircuitBreaker;
+use c06_async::utils::circuit_breaker::CircuitBreaker;
 use std::time::Duration;
 
 let breaker = CircuitBreaker::new(3, Duration::from_secs(30));
 
-let result = breaker.call(async {
-    // 可能失败的操作
-    if rand::random::<bool>() {
-        Ok("success")
-    } else {
-        Err("operation failed")
-    }
-}).await;
+let res = breaker
+    .run(async {
+        // 可能失败的异步操作
+        Err::<(), _>(anyhow::anyhow!("remote error"))
+    })
+    .await;
 
-match result {
-    Ok(value) => println!("Success: {}", value),
-    Err(CircuitBreakerError::ServiceError(e)) => println!("Service error: {}", e),
-    Err(CircuitBreakerError::CircuitOpen) => println!("Circuit is open"),
+match res {
+    Ok(_) => println!("ok"),
+    Err(e) => println!("service error: {e:#}")
 }
 ```
 
 ### 配置参数
 
-- `failure_threshold`: 失败阈值，达到后打开断路器
-- `recovery_timeout`: 恢复超时时间，断路器打开后等待的时间
+- `fail_threshold`: 失败阈值（达到后进入打开态）
+- `open_window`: 打开窗口时长（窗口内直接快速失败；到期后进入半开态试探）
 
 ## 最佳实践
 

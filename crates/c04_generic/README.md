@@ -140,7 +140,13 @@ cargo check
 - TAIT-like：以返回位置 `impl Trait` 近似演示迭代器组合，见 `rust_189_features::tait_like`
 - Trait 上行转换：`&dyn Sub -> &dyn Super`、`Box<dyn Sub> -> Box<dyn Super>`，见 `polymorphism::trait_object`
 
-### 9. 成熟生态库示例
+### 9. Rust 1.90 全面指南与示例
+
+- 文档：`docs/RUST_190_COMPREHENSIVE_GUIDE.md`
+- 示例：`src/rust_190_features.rs`
+- 运行测试：`cargo test -q rust_190_features`
+
+### 10. 成熟生态库示例
 
 - itertools：迭代器适配器增强，示例 `ecosystem_examples::sum_of_pairs`
 - rayon：数据并行，示例 `ecosystem_examples::parallel_square_sum`

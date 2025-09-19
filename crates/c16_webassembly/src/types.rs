@@ -754,6 +754,7 @@ pub struct CustomSection {
 ///
 /// 表示编译后的WebAssembly模块。
 /// Represents a compiled WebAssembly module.
+#[allow(dead_code)]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CompiledModule {
     /// WebAssembly字节码 / WebAssembly Bytecode
@@ -767,6 +768,7 @@ pub struct CompiledModule {
 /// 包含模块的元数据信息。
 /// Contains metadata information of a module.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(dead_code)]
 pub struct ModuleMetadata {
     /// 编译时间 / Compilation Time
     pub compiled_at: u64,
@@ -787,6 +789,7 @@ pub struct ModuleMetadata {
 /// 定义编译优化的级别。
 /// Defines the level of compilation optimization.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(dead_code)]
 pub enum OptimizationLevel {
     /// 无优化 / No Optimization
     None,
@@ -1028,6 +1031,7 @@ pub enum WebAssemblyError {
 /// 表示函数执行的结果。
 /// Represents the result of function execution.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(dead_code)]
 pub struct ExecutionResult {
     /// 返回值 / Return Value
     pub return_value: Option<Value>,
@@ -1044,6 +1048,7 @@ pub struct ExecutionResult {
 /// 表示性能分析的结果。
 /// Represents the result of performance analysis.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(dead_code)]
 pub struct PerformanceAnalysis {
     /// 执行时间 / Execution Time
     pub execution_time: Duration,
@@ -1062,6 +1067,7 @@ pub struct PerformanceAnalysis {
 /// 表示优化操作的结果。
 /// Represents the result of an optimization operation.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(dead_code)]
 pub struct OptimizationResult {
     /// 原始模块 / Original Module
     pub original_module: Module,
@@ -1078,6 +1084,7 @@ pub struct OptimizationResult {
 /// 表示正确性验证的结果。
 /// Represents the result of correctness verification.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(dead_code)]
 pub struct CorrectnessVerification {
     /// 是否正确 / Is Correct
     pub is_correct: bool,
@@ -1092,6 +1099,7 @@ pub struct CorrectnessVerification {
 /// 表示一个测试用例。
 /// Represents a test case.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(dead_code)]
 pub struct TestCase {
     /// 输入参数 / Input Parameters
     pub inputs: Vec<Value>,

@@ -1,12 +1,67 @@
 # Rust 异步最佳实践（多线程/多任务）
 
-- 并发控制：优先使用 `Semaphore` 限流；通道容量应与处理速率匹配。
-- 背压策略：`mpsc::channel`（有界）可传递背压；`unbounded` 适合少量突发但需注意内存增长。
-- 取消与超时：统一使用 `timeout` + 取消信号（如 `AbortHandle`）在出错/超时时快速收尾。
-- 结构化并发：使用 `JoinSet` 在作用域内启动/等待任务；出错时 `abort_all`。
-- select 策略：必要时用 `biased;` 控制偏好；为每分支设计超时/降级路径。
-- I/O 并发：`buffer_unordered` 合理设置并发度；对失败结果分类处理。
-- 批处理与限速：窗口化 + `Semaphore` 控制批量处理并发与节奏。
-- 观测与调试：集成 `tracing`，必要时配合 console/metrics；记录超时和取消原因。
+## 1. 并发与背压
 
-参见示例：`*_exp01.rs` 系列与 `benches/async_benches.rs`。
+- 通道容量匹配吞吐：生产速率 ≤ 消费速率 × 容量/延迟；优先 bounded mpsc
+- 限流优先级：先 `Semaphore` 控并发，再按需速率限制（token bucket/interval）
+- 并发流：`buffer_unordered(N)` 控制在途 N 个，配合有界队列形成稳态
+
+示例：`tokio_mpsc_backpressure_exp01.rs`、`semaphore_mpsc_pipeline_exp01.rs`、`stream_buffer_unordered_exp01.rs`
+
+## 2. 结构化并发
+
+- 入口统一：`#[tokio::main(flavor = "multi_thread")]`
+- 动态集合：`JoinSet` 收集结果，错误即触发作用域内取消
+- 已知组合：优先 `try_join!` 短路错误
+
+示例：`tokio_joinset_exp01.rs`、`tokio_try_join_exp01.rs`
+
+## 3. 超时与取消
+
+- 外层总超时：请求级/批次级；内层步骤分别设置合理超时
+- 取消传播：`select!` 驱动快速收敛；Drop 中释放资源（许可、FD）
+- 统一工具：封装 `with_timeout` + `CancelScope` 形成一致语义
+
+示例：`tokio_timeout_cancel_exp01.rs`、`timeout_cancel_scope_exp01.rs`
+
+## 4. 错误处理与重试
+
+- 错误分级：可重试（5xx/网络抖动）vs 不可重试（4xx/语义错误）
+- 重试上限 + 指数退避；结合熔断避免雪崩
+- 日志要带上下文：URL、重试次数、最终失败原因
+
+示例：`retry_backoff_exp01.rs`、`concurrent_fetch_error_handling_exp01.rs`
+
+## 5. 共享状态与锁
+
+- 避免持锁 await；缩小临界区
+- 读多写少用 `RwLock`；需要原子复合操作用 `Mutex` + 批量处理
+- 事件通知用 `Notify`，替代忙等
+
+示例：`tokio_sync_mutex_exp01.rs`、`tokio_sync_rwlock_exp01.rs`、`tokio_sync_notify_exp01.rs`
+
+## 6. !Send 与 LocalSet
+
+- `Rc/RefCell` 等 !Send 放在 `LocalSet`；跨线程必须 `Send + 'static`
+- 与运行时交叉时，明确切换边界（`spawn_local` vs `spawn`）
+
+示例：`localset_nonsend_exp01.rs`
+
+## 7. 可观测性
+
+- `tracing` 埋点：入队/出队/开始/结束/错误；统计 p50/p95
+- 开发期可启用 `tokio-console`；生产接入 metrics 导出
+
+示例：`tracing_console_exp01.rs`
+
+## 8. 性能与基准
+
+- 在 `benches/async_benches.rs` 参数化并发度与容量；记录吞吐与尾延迟
+- 报告落地至 `docs/benchmark_results.md`，与配置联动
+
+## 9. 代码风格
+
+- 小函数、显式命名、早返回；出错路径和取消路径显式
+- 避免在持锁与 Drop 内复杂逻辑
+
+参见：`docs/async_style_guide.md`、`docs/async_advanced_topics.md`

@@ -150,7 +150,7 @@ fn bench_dp_and_dac(c: &mut Criterion) {
 
     // DP 0-1 Knapsack
     let weights: Vec<usize> = (0..2000).map(|i| 1 + (i as usize % 10)).collect();
-    let values: Vec<i64> = (0..2000).map(|i| ((i * 37 % 101) as i64)).collect();
+    let values: Vec<i64> = (0..2000).map(|i| i as i64 * 37_i64 % 101_i64).collect();
     let cap: usize = 1000;
     group.bench_function("knapsack_sync", |bch| {
         bch.iter(|| black_box(knapsack_01_sync(&weights, &values, cap)))

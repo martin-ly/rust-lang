@@ -26,6 +26,9 @@ cargo check
 ### 基础异步示例
 
 ```powershell
+# 最小示例
+cargo run --bin async_minimal_exp01
+
 # Future 和 Stream 基础
 cargo run --bin tokio_select_exp01
 cargo run --bin tokio_try_join_exp01
@@ -57,14 +60,19 @@ cargo run --bin joinset_cancel_on_error_exp01
 # 重试和错误处理
 cargo run --bin retry_backoff_exp01
 cargo run --bin concurrent_fetch_error_handling_exp01
+cargo run --bin concurrent_fetch_reqwest_exp01
 
 # 批处理和管道
 cargo run --bin window_batch_semaphore_exp01
 cargo run --bin mpsc_worker_pool_exp01
+cargo run --bin stream_buffer_unordered_exp01
 
 # 状态同步
 cargo run --bin tokio_watch_exp01
 cargo run --bin tokio_broadcast_exp01
+
+# !Send 与 LocalSet
+cargo run --bin localset_nonsend_exp01
 
 # 分布式模式
 cargo run --bin distributed_lock_exp01
@@ -79,6 +87,9 @@ cargo run --bin cloud_native_exp01
 # 事件溯源和一致性
 cargo run --bin event_sourcing_exp01
 cargo run --bin distributed_consensus_exp01
+
+# 异步文件 I/O
+cargo run --bin tokio_fs_async_io_exp01
 ```
 
 ### 网络和服务器示例
@@ -99,6 +110,9 @@ cargo run --bin tracing_console_exp01
 
 # 断路器模式
 cargo run --bin circuit_breaker_exp01
+
+# utils 组合演示
+cargo run --bin utils_demo_exp01
 ```
 
 ## 基准测试

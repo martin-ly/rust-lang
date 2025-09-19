@@ -100,19 +100,62 @@ for _ in 0..100 {  // 控制在合理范围内
 
 ## 运行基准测试
 
-```bash
+```powershell
+# 进入目录
+cd .\crates\c06_async
+
 # 编译基准测试
 cargo bench --no-run
 
-# 运行所有基准测试
-cargo bench
+# 运行所有基准
+cargo bench --bench async_benches
 
-# 运行特定基准测试
-cargo bench --bench async_benches -- mpsc_bounded
-
-# 生成详细报告
+# 详细输出
 cargo bench --bench async_benches -- --verbose
 ```
+
+### 结果占位模板（待填）
+
+#### joinset_concurrency / join_all_concurrency
+
+| 并发度 | JoinSet ops/s | join_all ops/s | 备注 |
+|---:|---:|---:|---|
+| 1 | | | |
+| 2 | | | |
+| 4 | | | |
+| 8 | | | |
+| 16 | | | |
+
+#### mpsc_bounded_vs_unbounded
+
+| 模式 | 总量 | 吞吐 | 备注 |
+|---|---:|---:|---|
+| bounded32_10k | 10,000 | | |
+| unbounded_10k | 10,000 | | |
+
+#### semaphore_pipeline_throughput
+
+| 并发度 | 总量 | 吞吐 | 备注 |
+|---:|---:|---:|---|
+| 4 | 5,000 | | |
+
+#### select_joinset
+
+| 用例 | 指标 | 值 | 备注 |
+|---|---|---:|---|
+| select_two_timers | tick 次数 | 100 | 1ms/2ms 交错 |
+| joinset_spawn_100 | 累加 | | |
+
+#### backpressure_limit
+
+| 配置 | 总量 | 吞吐 | 备注 |
+|---|---:|---:|---|
+| bounded_cap_8 | 2,000 | | |
+| bounded_cap_32 | 2,000 | | |
+| bounded_cap_128 | 2,000 | | |
+| semaphore_conc_2 | 500 任务 | | |
+| semaphore_conc_4 | 500 任务 | | |
+| semaphore_conc_8 | 500 任务 | | |
 
 ## 环境信息
 

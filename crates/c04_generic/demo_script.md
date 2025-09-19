@@ -25,6 +25,8 @@ cargo check
 ```bash
 # 运行所有测试
 cargo test
+# 运行 Rust 1.90 示例模块的测试
+cargo test -q rust_190_features
 
 # 预期结果：90 个测试全部通过
 # test result: ok. 90 passed; 0 failed; 0 ignored; 0 measured

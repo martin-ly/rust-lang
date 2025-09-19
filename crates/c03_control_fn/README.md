@@ -2,7 +2,7 @@
 
 > 导航：返回 [`rust-formal-engineering-system`](../../rust-formal-engineering-system/README.md) · 同步范式 [`01_synchronous/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/01_synchronous/00_index.md) · 异步范式 [`02_async/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/02_async/00_index.md)
 
-[![Rust Version](https://img.shields.io/badge/rust-1.89.0+-blue.svg)](https://www.rust-lang.org/)
+[![Rust Version](https://img.shields.io/badge/rust-1.90.0+-blue.svg)](https://www.rust-lang.org/)
 [![Edition](https://img.shields.io/badge/edition-2024-red.svg)](https://doc.rust-lang.org/edition-guide/)
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](LICENSE)
 
@@ -106,8 +106,41 @@ c03_control_fn/
 2. **运行示例**
 
     ```bash
-    # 控制流特性示例
-    cargo run --example control_flow_example
+    # 1.90 控制流概览（新）
+    cargo run --example control_flow_overview
+
+    # 1.90 模式匹配进阶（新）
+    cargo run --example pattern_matching_advanced
+
+    # 1.90 闭包与 Fn* 特征（新）
+    cargo run --example closures_and_fn_traits
+
+    # 1.90 循环与迭代器控制流（新）
+    cargo run --example loops_and_iterators_control
+
+    # 1.90 错误处理控制流（新）
+    cargo run --example error_handling_control_flow
+
+    # 1.90 match 人体工学与绑定（新）
+    cargo run --example match_ergonomics_and_binding
+
+    # 1.90 标记块与带值 break（新）
+    cargo run --example labeled_blocks_and_break_values
+
+    # 1.90 while/if let 链（新）
+    cargo run --example while_if_let_chains
+
+    # 1.90 let-else 模式手册（新）
+    cargo run --example let_else_patterns_handbook
+
+    # 1.90 发散类型 ! 实战（新）
+    cargo run --example never_type_practices
+
+    # 1.90 try 块进阶（新）
+    cargo run --example try_blocks_advanced
+
+    # 1.90 控制流性能实践（新）
+    cargo run --example control_flow_performance_practices
 
     # 异步特性示例
     cargo run --example rust_189_async_features
@@ -287,7 +320,22 @@ panic = "abort"
 
 ### 项目文档
 
-- [特性总结文档](docs/RUST_189_FEATURES_SUMMARY.md)
+- [控制流总览（1.90）](docs/control_flow_overview_1_90.md)
+- [模式匹配进阶（1.90）](docs/pattern_matching_advanced_1_90.md)
+- [闭包与 Fn* 特征（1.90）](docs/closures_and_fn_traits_1_90.md)
+- [循环与迭代器控制流（1.90）](docs/loops_and_iterators_control_1_90.md)
+- [错误处理控制流（1.90）](docs/error_handling_control_flow_1_90.md)
+
+- [match 人体工学与绑定（1.90）](docs/match_ergonomics_and_binding_1_90.md)
+- [标记块与带值 break（1.90）](docs/labeled_blocks_and_break_values_1_90.md)
+- [while/if let 链（1.90）](docs/while_if_let_chains_1_90.md)
+- [let-else 模式手册（1.90）](docs/let_else_patterns_handbook_1_90.md)
+- [发散类型 ! 实战（1.90）](docs/never_type_practices_1_90.md)
+
+- [try 块进阶（1.90）](docs/try_blocks_advanced_1_90.md)
+- [控制流性能与工程准则（1.90）](docs/control_flow_performance_practices_1_90.md)
+
+- [特性总结文档（1.89）](docs/RUST_189_FEATURES_SUMMARY.md)
 - [代码示例](examples/)
 - [API文档](src/)
 

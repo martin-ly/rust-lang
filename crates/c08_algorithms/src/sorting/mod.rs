@@ -254,7 +254,7 @@ pub fn radix_sort_lsd_sync_i32(data: Vec<i32>) -> Vec<i32> {
         }
         std::mem::swap(&mut a, &mut buf);
     }
-    a.into_iter().map(|u| ((u ^ 0x8000_0000) as i32)).collect()
+    a.into_iter().map(|u| (u ^ 0x8000_0000) as i32).collect()
 }
 // =========================
 // 计数排序 / 基数排序（u32 专用演示）

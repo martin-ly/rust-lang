@@ -6,16 +6,7 @@
 
 ## 目录
 
-1. [Rust 1.89 新特性概览](#rust-189-新特性概览)
-2. [RPITIT (Return Position Impl Trait In Traits)](#rpitit-return-position-impl-trait-in-traits)
-3. [增强的常量泛型](#增强的常量泛型)
-4. [改进的 Trait 上行转换](#改进的-trait-上行转换)
-5. [类型推断改进](#类型推断改进)
-6. [生命周期推断增强](#生命周期推断增强)
-7. [新的泛型约束语法](#新的泛型约束语法)
-8. [最佳实践和性能优化](#最佳实践和性能优化)
-9. [实际应用案例](#实际应用案例)
-10. [迁移指南](#迁移指南)
+- [Rust 1.89 泛型编程全面指南](#rust-189-泛型编程全面指南)
 
 ## Rust 1.89 新特性概览
 
@@ -50,11 +41,11 @@ Rust 1.89 版本在泛型编程方面带来了多项重要改进：
 
 ## RPITIT (Return Position Impl Trait In Traits)
 
-### 基本概念
+### RPITIT：基本概念
 
 RPITIT 允许在 trait 方法中直接返回 `impl Trait`，而不需要定义关联类型。
 
-### 基本语法
+### RPITIT：基本语法
 
 ```rust
 // 传统方式 - 使用关联类型
@@ -69,7 +60,7 @@ trait DataProcessor<T> {
 }
 ```
 
-### 详细示例
+### RPITIT：详细示例
 
 ```rust
 pub trait DataProcessor<T> {
@@ -117,11 +108,11 @@ impl DataProcessor<i32> for NumberProcessor {
 
 ## 增强的常量泛型
 
-### 基本概念
+### 常量泛型：基本概念
 
 常量泛型允许在类型参数中使用常量值，Rust 1.89 对此进行了重要改进。
 
-### 基本语法
+### 常量泛型：基本语法
 
 ```rust
 // 固定大小矩阵
@@ -138,7 +129,7 @@ struct RingBuffer<T, const CAPACITY: usize> {
 }
 ```
 
-### 详细示例
+### 常量泛型：详细示例
 
 ```rust
 #[derive(Debug, Clone, PartialEq)]
@@ -185,11 +176,11 @@ impl<T: Default + Copy, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, CO
 
 ## 改进的 Trait 上行转换
 
-### 基本概念
+### Trait 上行转换：基本概念
 
 Trait 上行转换允许将子 trait 的对象转换为父 trait 的对象。
 
-### 基本语法
+### Trait 上行转换：基本语法
 
 ```rust
 // 基础 trait
@@ -209,7 +200,7 @@ fn process_shape(shape: &dyn Drawable) -> (f64, f64) {
 }
 ```
 
-### 详细示例
+### Trait 上行转换：详细示例
 
 ```rust
 pub struct ShapeManager {
@@ -238,11 +229,11 @@ impl ShapeManager {
 
 ## 类型推断改进
 
-### 基本概念
+### 类型推断：基本概念
 
 Rust 1.89 改进了类型推断算法，能够更好地处理复杂的泛型场景。
 
-### 改进示例
+### 类型推断：改进示例
 
 ```rust
 // Rust 1.89 可以更好地推断复杂泛型类型
@@ -258,7 +249,7 @@ let strings: Vec<String> = converter.convert_batch(numbers, |x| {
 });
 ```
 
-### 复杂场景
+### 类型推断：复杂场景
 
 ```rust
 // 多级泛型推断
@@ -284,7 +275,7 @@ let flattened: Vec<i32> = data
 
 ## 生命周期推断增强
 
-### 基本概念
+### 生命周期推断：基本概念
 
 Rust 1.89 改进了生命周期参数的自动推断，减少了手动标注的需求。
 
@@ -317,7 +308,7 @@ impl<'a, T> DataHolder<'a, T> {
 }
 ```
 
-### 多生命周期参数
+### 生命周期推断：多生命周期参数
 
 ```rust
 pub struct MultiLifetimeHolder<'a, 'b, T, U> {
@@ -345,7 +336,7 @@ impl<'a, 'b, T, U> MultiLifetimeHolder<'a, 'b, T, U> {
 
 ## 新的泛型约束语法
 
-### 基本概念
+### 泛型约束语法：基本概念
 
 Rust 1.89 引入了更灵活和强大的泛型约束语法。
 

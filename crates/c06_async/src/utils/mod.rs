@@ -86,3 +86,36 @@ where
 }
 
 pub mod circuit_breaker;
+
+/// 统一执行助手：并发控制 + 超时 + 重试
+pub struct ExecHelper {
+    limiter: SemaphoreLimiter,
+}
+
+impl ExecHelper {
+    pub fn new(concurrency: usize) -> Self {
+        Self { limiter: SemaphoreLimiter::new(concurrency) }
+    }
+
+    pub async fn run_with_policies<F, Fut, T, E>(
+        &self,
+        make_fut: F,
+        max_attempts: u32,
+        start_delay: Duration,
+        timeout: Duration,
+    ) -> Result<Option<T>, E>
+    where
+        F: FnMut(u32) -> Fut + Send + 'static,
+        Fut: Future<Output = Result<T, E>>,
+        T: Send + 'static,
+        E: Send + 'static,
+    {
+        let fut = retry_with_backoff(make_fut, max_attempts, start_delay);
+        let run = self.limiter.run(async move { with_timeout(timeout, fut).await });
+        match run.await {
+            Some(Ok(v)) => Ok(Some(v)),
+            Some(Err(e)) => Err(e),
+            None => Ok(None),
+        }
+    }
+}

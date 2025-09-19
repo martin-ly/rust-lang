@@ -108,6 +108,8 @@ pub mod basic_syntax;
 
 /// Rust 1.89 全面特性展示模块 - 展示 Rust 1.89 版本的新特性和改进
 pub mod rust_189_comprehensive;
+/// Rust 1.90 特性与基础语法演示模块
+pub mod rust_190_features;
 
 /// 高级泛型模式和设计模式示例模块 - 展示使用泛型实现的设计模式
 pub mod advanced_patterns;

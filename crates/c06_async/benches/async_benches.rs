@@ -1,6 +1,63 @@
-use criterion::{Criterion, criterion_group, criterion_main};
+use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
 use std::hint::black_box;
 use std::time::Duration;
+
+// 基准目标：对比不同并发度下 JoinSet 与 join_all 的吞吐（简化原型，避免 async feature）
+
+fn bench_joinset_concurrency(c: &mut Criterion) {
+    let mut group = c.benchmark_group("joinset_concurrency");
+    for conc in [1usize, 2, 4, 8, 16] {
+        group.throughput(Throughput::Elements(conc as u64));
+        group.measurement_time(Duration::from_secs(5));
+        group.bench_with_input(BenchmarkId::from_parameter(conc), &conc, |b, &concurrency| {
+            b.iter(|| {
+                let rt = tokio::runtime::Runtime::new().unwrap();
+                rt.block_on(async move {
+                    use tokio::task::JoinSet;
+                    let mut set = JoinSet::new();
+                    for _ in 0..concurrency {
+                        set.spawn(async {
+                            tokio::time::sleep(Duration::from_millis(1)).await;
+                            1u64
+                        });
+                    }
+                    let mut sum = 0u64;
+                    while let Some(r) = set.join_next().await {
+                        sum += r.unwrap();
+                    }
+                    sum
+                })
+            });
+        });
+    }
+    group.finish();
+}
+
+fn bench_join_all_concurrency(c: &mut Criterion) {
+    let mut group = c.benchmark_group("join_all_concurrency");
+    for conc in [1usize, 2, 4, 8, 16] {
+        group.throughput(Throughput::Elements(conc as u64));
+        group.measurement_time(Duration::from_secs(5));
+        group.bench_with_input(BenchmarkId::from_parameter(conc), &conc, |b, &concurrency| {
+            b.iter(|| {
+                let rt = tokio::runtime::Runtime::new().unwrap();
+                rt.block_on(async move {
+                    let tasks: Vec<_> = (0..concurrency)
+                        .map(|_| async {
+                            tokio::time::sleep(Duration::from_millis(1)).await;
+                            1u64
+                        })
+                        .collect();
+                    let vals = futures::future::join_all(tasks).await;
+                    vals.into_iter().sum::<u64>()
+                })
+            });
+        });
+    }
+    group.finish();
+}
+
+// 下面继续定义更多基准项，并在文件末尾统一注册多个 group 与 main
 
 fn bench_mpsc(c: &mut Criterion) {
     let mut g = c.benchmark_group("mpsc_bounded_vs_unbounded");
@@ -87,8 +144,7 @@ fn bench_semaphore_pipeline(c: &mut Criterion) {
     g.finish();
 }
 
-criterion_group!(benches, bench_mpsc, bench_semaphore_pipeline);
-criterion_main!(benches);
+// 统一在末尾注册
 
 fn bench_select_and_joinset(c: &mut Criterion) {
     let mut g = c.benchmark_group("select_joinset");
@@ -146,7 +202,7 @@ fn bench_backpressure_limit(c: &mut Criterion) {
                         while let Some(v) = rx.recv().await {
                             sum += v as u64;
                         }
-                        black_box(sum);
+                    black_box(sum);
                     });
                     let _ = tokio::join!(prod, cons);
                 })
@@ -180,4 +236,10 @@ fn bench_backpressure_limit(c: &mut Criterion) {
     g.finish();
 }
 
-criterion_group!(extended, bench_select_and_joinset, bench_backpressure_limit);
+// 统一在末尾注册
+
+// 统一注册所有基准组
+criterion_group!(group_core, bench_joinset_concurrency, bench_join_all_concurrency);
+criterion_group!(group_queue, bench_mpsc, bench_semaphore_pipeline);
+criterion_group!(group_extra, bench_select_and_joinset, bench_backpressure_limit);
+criterion_main!(group_core, group_queue, group_extra);
