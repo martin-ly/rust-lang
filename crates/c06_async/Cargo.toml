@@ -33,6 +33,7 @@ rand = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 reqwest = { workspace = true, features = ["json"] }
+prometheus = "0.13"
 
 # 终端和调试工具 - 更新到最新版本
 tokio-console = { workspace = true }

@@ -12,16 +12,24 @@ struct Inner {
     opened_at: parking_lot::Mutex<Option<Instant>>,
     fail_threshold: u64,
     open_window: Duration,
+    half_open_max_calls: u32,
+    half_open_calls: AtomicU64,
 }
 
 impl CircuitBreaker {
     pub fn new(fail_threshold: u64, open_window: Duration) -> Self {
+        Self::new_with_half_open_max(fail_threshold, open_window, 1)
+    }
+
+    pub fn new_with_half_open_max(fail_threshold: u64, open_window: Duration, half_open_max_calls: u32) -> Self {
         Self {
             inner: Arc::new(Inner {
                 failures: AtomicU64::new(0),
                 opened_at: parking_lot::Mutex::new(None),
                 fail_threshold,
                 open_window,
+                half_open_max_calls,
+                half_open_calls: AtomicU64::new(0),
             }),
         }
     }
@@ -37,19 +45,27 @@ impl CircuitBreaker {
                 if t.elapsed() < self.inner.open_window {
                     return Err(self.synthetic_err());
                 }
-                *opened = None; // half-open: 允许一次尝试
+                // 半开状态：检查是否超过最大调用次数
+                let calls = self.inner.half_open_calls.load(Ordering::Relaxed);
+                if calls >= self.inner.half_open_max_calls as u64 {
+                    return Err(self.synthetic_err());
+                }
+                self.inner.half_open_calls.fetch_add(1, Ordering::Relaxed);
+                *opened = None; // half-open: 允许尝试
             }
         }
 
         match fut.await {
             Ok(v) => {
                 self.inner.failures.store(0, Ordering::Relaxed);
+                self.inner.half_open_calls.store(0, Ordering::Relaxed);
                 Ok(v)
             }
             Err(e) => {
                 let f = self.inner.failures.fetch_add(1, Ordering::Relaxed) + 1;
                 if f >= self.inner.fail_threshold {
                     *self.inner.opened_at.lock() = Some(Instant::now());
+                    self.inner.half_open_calls.store(0, Ordering::Relaxed);
                 }
                 Err(e)
             }

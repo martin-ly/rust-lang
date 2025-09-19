@@ -66,6 +66,18 @@ cargo run --bin concurrent_fetch_reqwest_exp01
 cargo run --bin window_batch_semaphore_exp01
 cargo run --bin mpsc_worker_pool_exp01
 cargo run --bin stream_buffer_unordered_exp01
+cargo run --bin pipeline_helper_exp01
+cargo run --bin http_ingest_pipeline_exp01
+
+# 配置驱动策略
+cargo run --bin strategy_from_config_exp01
+cargo run --bin advanced_strategy_exp01
+
+# Prometheus 指标
+cargo run --bin metrics_prometheus_exp01
+# 端到端流水线指标导出
+# pipeline_helper_exp01 暴露 http://127.0.0.1:9898/metrics
+# http_ingest_pipeline_exp01 暴露 http://127.0.0.1:9899/metrics
 
 # 状态同步
 cargo run --bin tokio_watch_exp01
@@ -113,6 +125,9 @@ cargo run --bin circuit_breaker_exp01
 
 # utils 组合演示
 cargo run --bin utils_demo_exp01
+
+# ExecHelper 增强示例（判定 + 截止时间）
+cargo run --bin exec_helper_advanced_exp01
 ```
 
 ## 基准测试

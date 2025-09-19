@@ -239,7 +239,5 @@ fn bench_backpressure_limit(c: &mut Criterion) {
 // 统一在末尾注册
 
 // 统一注册所有基准组
-criterion_group!(group_core, bench_joinset_concurrency, bench_join_all_concurrency);
-criterion_group!(group_queue, bench_mpsc, bench_semaphore_pipeline);
-criterion_group!(group_extra, bench_select_and_joinset, bench_backpressure_limit);
-criterion_main!(group_core, group_queue, group_extra);
+criterion_group!(benches, bench_joinset_concurrency, bench_join_all_concurrency, bench_mpsc, bench_semaphore_pipeline, bench_select_and_joinset, bench_backpressure_limit);
+criterion_main!(benches);

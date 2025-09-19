@@ -279,6 +279,71 @@ let out = exec
     .await;
 ```
 
+增强 API：
+
+```rust
+pub async fn run_with_decider_and_deadline<F, Fut, T, E, D>(
+    &self,
+    make_fut: F,
+    is_retryable: D,
+    max_attempts: u32,
+    start_delay: Duration,
+    deadline: Instant,
+) -> Result<Option<T>, E>
+where
+    F: FnMut(u32) -> Fut + Send + 'static,
+    Fut: Future<Output = Result<T, E>> + Send + 'static,
+    D: FnMut(&E) -> bool + Send + 'static,
+    T: Send + 'static,
+    E: Send + 'static;
+```
+
+语义：在整体截止时间 `deadline` 内进行带判定的重试；成功返回 `Ok(Some(T))`，不可重试/重试耗尽返回 `Err(E)`；超时返回 `Ok(None)`。
+
+### 7. 简单令牌桶限速器 (`SimpleTokenBucket`)
+
+用于基于令牌桶算法的速率限制（异步安全）。
+
+```rust
+#[derive(Clone)]
+pub struct SimpleTokenBucket { /* 内部状态：容量、令牌数、补充速率、上次时间 */ }
+
+impl SimpleTokenBucket {
+    pub fn new(capacity: u32, refill_per_sec: u32) -> Self;
+    pub async fn acquire(&self, permits: u32);
+}
+```
+
+注意：不会在持锁期间 `await`，避免跨 await 携带 mutex guard。
+
+### 8. 策略构建器 (`ExecStrategyBuilder`)
+
+以构建器方式配置并发、重试、退避、超时/截止、熔断与限速，并返回可运行的 `ExecStrategyRunner`。
+
+```rust
+let breaker = CircuitBreaker::new(5, Duration::from_secs(30));
+let bucket = SimpleTokenBucket::new(20, 20);
+
+let runner = ExecStrategyBuilder::new()
+    .concurrency(8)
+    .attempts(5)
+    .start_delay(Duration::from_millis(50))
+    .timeout(Duration::from_secs(2))
+    .breaker(breaker)
+    .token_bucket(bucket)
+    .build();
+
+let res = runner
+    .run(
+        |attempt| async move {
+            // 你的操作
+            Ok::<_, anyhow::Error>(attempt)
+        },
+        Some(|_e: &anyhow::Error| true), // 可重试判定
+    )
+    .await;
+```
+
 ## 断路器模式 (`circuit_breaker`)
 
 ### 概述
@@ -301,6 +366,22 @@ impl CircuitBreaker {
     where
         F: Future<Output = Result<T, E>>;
 }
+```
+
+从配置构建：
+
+```rust
+use c06_async::utils::{ExecStrategyBuilder, StrategyConfig};
+let cfg: StrategyConfig = serde_json::from_str(r#"{
+  "concurrency": 8,
+  "max_attempts": 5,
+  "start_delay_ms": 50,
+  "timeout_ms": 2000,
+  "deadline_ms": null,
+  "enable_breaker": true,
+  "token_bucket": {"capacity":20, "refill_per_sec":20}
+}"#)?;
+let runner = ExecStrategyBuilder::from_config(&cfg).build();
 ```
 
 注意：示例版在断路器打开时会触发 `panic!("circuit open")`（synthetic_err），用于突出演示“快速失败”效果。在生产中请改为返回自定义错误类型而非 panic。

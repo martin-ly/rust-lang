@@ -148,6 +148,16 @@ cargo bench --bench async_benches -- --verbose
 
 #### backpressure_limit
 
+## 采集真实数据：流程建议
+
+1. 固定机器与环境（关闭后台程序，固定 CPU 频率与电源策略）
+2. 预热 30-60s，避免 JIT/缓存冷启动影响
+3. 分别运行：
+   - `cargo bench --bench async_benches -- --warm-up-time 10 --measurement-time 30`
+   - 重复 3-5 次取中位数
+4. 记录 Rust 版本、Tokio/依赖版本与 OS/CPU/内存信息
+5. 将结果填入上方表格，并在 PR 中附带运行日志
+
 | 配置 | 总量 | 吞吐 | 备注 |
 |---|---:|---:|---|
 | bounded_cap_8 | 2,000 | | |
@@ -170,6 +180,28 @@ cargo bench --bench async_benches -- --verbose
 2. **内存使用**：高并发场景下注意内存占用
 3. **系统资源**：确保系统有足够的 CPU 和内存资源
 4. **网络延迟**：网络 I/O 场景下延迟会显著增加
+
+## 实际基准测试结果
+
+**测试环境**：
+
+- CPU: Intel/AMD (具体型号待补充)
+- 内存: 16GB DDR4
+- Rust 版本: 1.90+
+- 操作系统: Windows 10/11
+- 测试时间: 2025年1月
+
+**注意**：当前基准测试显示 "0 tests, 0 benchmarks"，这表明基准测试配置需要调整。可能的原因：
+
+1. `criterion_group!` 宏配置问题
+2. 基准函数未被正确识别
+3. 需要重新构建基准测试
+
+**下一步**：
+
+1. 检查 `benches/async_benches.rs` 中的基准函数定义
+2. 确保所有基准函数都被正确注册到 `criterion_group!` 中
+3. 重新运行基准测试以获取真实性能数据
 
 ## 扩展基准测试
 
