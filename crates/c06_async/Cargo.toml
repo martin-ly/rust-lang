@@ -3,7 +3,7 @@ name = "c06_async"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
-rust-version = "1.89"
+rust-version = "1.90"
 
 [dependencies]
 # 异步运行时 - 使用工作区统一版本
@@ -35,6 +35,14 @@ serde_json = { workspace = true }
 reqwest = { workspace = true, features = ["json"] }
 prometheus = "0.13"
 
+# Rust 1.90 新特性支持
+num_cpus = { workspace = true }
+rayon = { workspace = true }
+
+# 异步生态系统分析支持
+async-trait = "0.1"
+chrono = { version = "0.4", features = ["serde"] }
+
 # 终端和调试工具 - 更新到最新版本
 tokio-console = { workspace = true }
 crossterm = { workspace = true, features = ["event-stream"] }
@@ -43,7 +51,7 @@ crossterm = { workspace = true, features = ["event-stream"] }
 axum = { workspace = true }
 
 [dev-dependencies]
-criterion = { workspace = true, features = ["html_reports"] }
+criterion = { workspace = true, features = ["html_reports", "async_tokio"] }
 
 [lib]
 name = "c06_async"

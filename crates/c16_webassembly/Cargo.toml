@@ -65,10 +65,10 @@ no_std = []
 bench = ["criterion"]
 test = ["proptest"]
 
-[[bench]]
-name = "wasm_benchmarks"
-harness = false
-required-features = ["bench"]
+# [[bench]]
+# name = "wasm_benchmarks"
+# harness = false
+# required-features = ["bench"]
 
 [profile.release]
 opt-level = 3

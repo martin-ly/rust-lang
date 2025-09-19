@@ -572,9 +572,9 @@ pub enum RuntimeError {
 // Add String variant to Value for testing support
 #[allow(dead_code)]
 impl Value {
-    /// 创建字符串值
-    /// Create string value
-    pub fn string(_s: String) -> Self {
+    /// 创建字符串值（测试用）
+    /// Create string value (for testing)
+    pub fn create_string_value(_s: String) -> Self {
         // 这里需要根据实际的接口类型实现进行调整
         // This needs to be adjusted based on actual interface type implementation
         Value::I32(0) // 简化实现

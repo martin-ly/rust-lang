@@ -65,7 +65,7 @@ where
     /// 
     /// # 示例
     /// ```rust
-    /// use c03_control_fn::rust_189_basic_syntax::Rust189BasicSyntax;
+    /// use c03_control_fn::rust_189_basic_syntax::{Rust189BasicSyntax, State};
     /// 
     /// let demo = Rust189BasicSyntax::new(42);
     /// assert_eq!(demo.data, 42);

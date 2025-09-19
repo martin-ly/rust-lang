@@ -1,7 +1,15 @@
-//! Rust 1.89 控制流与函数特性研究项目
+//! Rust 1.90 控制流与函数特性研究项目
 //!
 //! 本项目专注于控制流与函数系统的深度分析和实践应用，
 //! 涵盖了异步编程增强、类型系统增强、性能优化特性等核心新特性。
+//! 
+//! ## Rust 1.90 新特性
+//! 
+//! - **异步Drop**: 异步资源清理支持
+//! - **异步生成器**: 原生异步迭代器支持
+//! - **Polonius借用检查器**: 更精确的借用分析
+//! - **下一代特质求解器**: 更快的编译和更好的错误消息
+//! - **并行前端**: 并行编译支持
 
 // 导出核心模块
 pub mod async_control_flow;
@@ -9,6 +17,12 @@ pub mod async_control_flow_189;
 pub mod performance_optimization_189;
 pub mod rust_189_enhanced_features;
 pub mod rust_189_features;
+
+// 导出Rust 1.90新特性模块
+pub mod rust_190_features;
+pub mod async_control_flow_190;
+pub mod performance_optimization_190;
+pub mod formal_verification_190;
 
 // 导出基础语法模块
 pub mod basic_syntax;
@@ -31,13 +45,19 @@ pub use async_control_flow_189::*;
 pub use performance_optimization_189::*;
 pub use rust_189_enhanced_features::*;
 
+// 重新导出Rust 1.90新特性
+pub use rust_190_features::*;
+pub use async_control_flow_190::*;
+pub use performance_optimization_190::*;
+pub use formal_verification_190::*;
+
 // 重新导出基础语法模块
 pub use basic_syntax::*;
 pub use rust_189_basic_syntax::*;
 
 // 版本信息
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
-pub const RUST_VERSION: &str = "1.89.0";
+pub const RUST_VERSION: &str = "1.90.0";
 
 /// 项目信息
 pub struct ProjectInfo;
@@ -55,7 +75,7 @@ impl ProjectInfo {
 
     /// 获取项目描述
     pub fn description() -> &'static str {
-        "Rust 1.89 控制流与函数特性研究项目"
+        "Rust 1.90 控制流与函数特性研究项目"
     }
 }
 

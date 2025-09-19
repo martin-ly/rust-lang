@@ -302,7 +302,7 @@ impl Value {
                 }
             }
             _ => Err(ValidationError::TypeMismatch {
-                expected: value_type,
+                expected: value_type.clone(),
                 actual: value_type, // 简化实现
             }),
         }
