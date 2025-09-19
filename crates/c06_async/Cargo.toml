@@ -42,6 +42,7 @@ rayon = { workspace = true }
 # 异步生态系统分析支持
 async-trait = "0.1"
 chrono = { version = "0.4", features = ["serde"] }
+smol = "2.0"
 
 # 终端和调试工具 - 更新到最新版本
 tokio-console = { workspace = true }

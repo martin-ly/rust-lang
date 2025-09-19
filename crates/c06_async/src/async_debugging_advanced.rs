@@ -8,16 +8,14 @@
 //! 5. 实时监控和可视化
 
 use std::sync::Arc;
-use std::sync::atomic::{AtomicU64, AtomicBool, Ordering};
-use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
-use std::collections::{HashMap, VecDeque, BTreeMap};
-use std::fmt;
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::time::{Duration, Instant, SystemTime};
+use std::collections::HashMap;
 use anyhow::Result;
-use tokio::sync::{Mutex, RwLock, mpsc, oneshot};
+use tokio::sync::{Mutex, RwLock, mpsc};
 use tokio::time::{sleep, timeout, interval};
 use serde::{Deserialize, Serialize};
-use tracing::{info, warn, error, debug, info_span, Level, Span};
-use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt, EnvFilter};
+use tracing::{info, error, debug};
 use uuid::Uuid;
 
 /// 异步执行流跟踪器
@@ -109,6 +107,8 @@ pub struct FlowMetrics {
 }
 
 /// 异步执行流管理器
+#[allow(dead_code)]
+#[derive(Clone)]
 pub struct AsyncExecutionFlowManager {
     flows: Arc<RwLock<HashMap<String, ExecutionFlow>>>,
     active_flows: Arc<RwLock<HashMap<String, String>>>, // task_id -> flow_id
@@ -117,6 +117,7 @@ pub struct AsyncExecutionFlowManager {
     config: FlowManagerConfig,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct FlowManagerConfig {
     /// 最大保留流程数
@@ -143,6 +144,7 @@ impl Default for FlowManagerConfig {
     }
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub enum FlowEvent {
     FlowStarted(String, String), // flow_id, name
@@ -154,6 +156,7 @@ pub enum FlowEvent {
 }
 
 impl AsyncExecutionFlowManager {
+    #[allow(dead_code)]
     pub fn new(config: FlowManagerConfig) -> Self {
         let (event_sender, mut event_receiver) = mpsc::unbounded_channel();
         let flows = Arc::new(RwLock::new(HashMap::new()));
@@ -169,9 +172,10 @@ impl AsyncExecutionFlowManager {
         };
         
         // 启动事件处理任务
+        let manager_clone = manager.clone();
         tokio::spawn(async move {
             while let Some(event) = event_receiver.recv().await {
-                manager.handle_flow_event(event).await;
+                manager_clone.handle_flow_event(event).await;
             }
         });
         
@@ -209,7 +213,7 @@ impl AsyncExecutionFlowManager {
             flows.insert(flow_id.clone(), flow);
         }
         
-        self.event_sender.send(FlowEvent::FlowStarted(flow_id.clone(), name)).unwrap();
+        self.event_sender.send(FlowEvent::FlowStarted(flow_id.clone(), name.clone())).unwrap();
         
         info!(
             flow_id = %flow_id,
@@ -258,7 +262,7 @@ impl AsyncExecutionFlowManager {
         self.event_sender.send(FlowEvent::StepStarted(
             flow_id.to_string(),
             step_id.clone(),
-            name,
+            name.clone(),
         )).unwrap();
         
         debug!(
@@ -494,12 +498,14 @@ impl AsyncMetricsCollector {
 
 /// 异步调试装饰器
 /// 提供自动化的调试功能，包括执行流跟踪、性能监控等
+#[allow(dead_code)]
 pub struct AsyncDebugDecorator {
     flow_manager: Arc<AsyncExecutionFlowManager>,
     metrics_collector: Arc<AsyncMetricsCollector>,
     debug_config: DebugConfig,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct DebugConfig {
     /// 是否启用自动跟踪
@@ -719,7 +725,7 @@ impl ExecutionFlowVisualizer {
         let flow = self.flow_manager.get_flow(flow_id).await
             .ok_or_else(|| anyhow::anyhow!("执行流不存在: {}", flow_id))?;
         
-        let mut report = FlowReport {
+        let report = FlowReport {
             flow_id: flow_id.to_string(),
             flow_name: flow.name.clone(),
             start_time: flow.start_time,

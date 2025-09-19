@@ -11,37 +11,68 @@ use std::sync::Arc;
 use std::time::{Duration, Instant};
 use std::collections::HashMap;
 use anyhow::Result;
-use tokio::sync::{Mutex, RwLock, mpsc, oneshot};
-use tokio::time::{sleep, timeout};
+use tokio::sync::{Mutex, RwLock};
+use tokio::time::sleep;
 use serde::{Deserialize, Serialize};
-use tracing::{info, warn, error, debug, info_span, Level};
+use tracing::{info, error};
 use uuid::Uuid;
 
-/// 异步运行时抽象接口
-#[async_trait::async_trait]
-pub trait AsyncRuntime: Send + Sync {
-    /// 运行时名称
-    fn name(&self) -> &str;
+/// 异步运行时枚举
+#[derive(Debug, Clone)]
+pub enum AsyncRuntime {
+    Tokio(TokioRuntime),
+    Smol(SmolRuntime),
+}
+
+impl AsyncRuntime {
+    pub fn name(&self) -> &str {
+        match self {
+            AsyncRuntime::Tokio(_) => "Tokio",
+            AsyncRuntime::Smol(_) => "Smol",
+        }
+    }
     
-    /// 启动运行时
-    async fn start(&self) -> Result<()>;
+    pub async fn start(&self) -> Result<()> {
+        match self {
+            AsyncRuntime::Tokio(rt) => rt.start().await,
+            AsyncRuntime::Smol(rt) => rt.start().await,
+        }
+    }
     
-    /// 停止运行时
-    async fn stop(&self) -> Result<()>;
+    pub async fn stop(&self) -> Result<()> {
+        match self {
+            AsyncRuntime::Tokio(rt) => rt.stop().await,
+            AsyncRuntime::Smol(rt) => rt.stop().await,
+        }
+    }
     
-    /// 执行异步任务
-    async fn spawn<F, T>(&self, future: F) -> Result<T>
+    pub async fn spawn<F, T>(&self, future: F) -> Result<T>
     where
         F: std::future::Future<Output = T> + Send + 'static,
-        T: Send + 'static;
+        T: Send + 'static,
+    {
+        match self {
+            AsyncRuntime::Tokio(rt) => rt.spawn(future).await,
+            AsyncRuntime::Smol(rt) => rt.spawn(future).await,
+        }
+    }
     
-    /// 阻塞等待任务完成
-    async fn block_on<F, T>(&self, future: F) -> Result<T>
+    pub async fn block_on<F, T>(&self, future: F) -> Result<T>
     where
-        F: std::future::Future<Output = T>;
+        F: std::future::Future<Output = T>,
+    {
+        match self {
+            AsyncRuntime::Tokio(rt) => rt.block_on(future).await,
+            AsyncRuntime::Smol(rt) => rt.block_on(future).await,
+        }
+    }
     
-    /// 获取运行时状态
-    async fn get_status(&self) -> RuntimeStatus;
+    pub async fn get_status(&self) -> RuntimeStatus {
+        match self {
+            AsyncRuntime::Tokio(rt) => rt.get_status().await,
+            AsyncRuntime::Smol(rt) => rt.get_status().await,
+        }
+    }
 }
 
 /// 运行时状态
@@ -57,6 +88,7 @@ pub struct RuntimeStatus {
 }
 
 /// Tokio运行时实现
+#[derive(Debug, Clone)]
 pub struct TokioRuntime {
     runtime: Arc<tokio::runtime::Runtime>,
     status: Arc<Mutex<RuntimeStatus>>,
@@ -82,27 +114,22 @@ impl TokioRuntime {
     }
 }
 
-#[async_trait::async_trait]
-impl AsyncRuntime for TokioRuntime {
-    fn name(&self) -> &str {
-        "Tokio"
-    }
-    
-    async fn start(&self) -> Result<()> {
+impl TokioRuntime {
+    pub async fn start(&self) -> Result<()> {
         let mut status = self.status.lock().await;
         status.is_running = true;
         info!("Tokio运行时已启动");
         Ok(())
     }
     
-    async fn stop(&self) -> Result<()> {
+    pub async fn stop(&self) -> Result<()> {
         let mut status = self.status.lock().await;
         status.is_running = false;
         info!("Tokio运行时已停止");
         Ok(())
     }
     
-    async fn spawn<F, T>(&self, future: F) -> Result<T>
+    pub async fn spawn<F, T>(&self, future: F) -> Result<T>
     where
         F: std::future::Future<Output = T> + Send + 'static,
         T: Send + 'static,
@@ -112,7 +139,7 @@ impl AsyncRuntime for TokioRuntime {
         Ok(result)
     }
     
-    async fn block_on<F, T>(&self, future: F) -> Result<T>
+    pub async fn block_on<F, T>(&self, future: F) -> Result<T>
     where
         F: std::future::Future<Output = T>,
     {
@@ -120,13 +147,14 @@ impl AsyncRuntime for TokioRuntime {
         Ok(result)
     }
     
-    async fn get_status(&self) -> RuntimeStatus {
+    pub async fn get_status(&self) -> RuntimeStatus {
         let status = self.status.lock().await;
         status.clone()
     }
 }
 
 /// Smol运行时实现
+#[derive(Debug, Clone)]
 pub struct SmolRuntime {
     executor: Arc<smol::Executor<'static>>,
     status: Arc<Mutex<RuntimeStatus>>,
@@ -150,27 +178,22 @@ impl SmolRuntime {
     }
 }
 
-#[async_trait::async_trait]
-impl AsyncRuntime for SmolRuntime {
-    fn name(&self) -> &str {
-        "Smol"
-    }
-    
-    async fn start(&self) -> Result<()> {
+impl SmolRuntime {
+    pub async fn start(&self) -> Result<()> {
         let mut status = self.status.lock().await;
         status.is_running = true;
         info!("Smol运行时已启动");
         Ok(())
     }
     
-    async fn stop(&self) -> Result<()> {
+    pub async fn stop(&self) -> Result<()> {
         let mut status = self.status.lock().await;
         status.is_running = false;
         info!("Smol运行时已停止");
         Ok(())
     }
     
-    async fn spawn<F, T>(&self, future: F) -> Result<T>
+    pub async fn spawn<F, T>(&self, future: F) -> Result<T>
     where
         F: std::future::Future<Output = T> + Send + 'static,
         T: Send + 'static,
@@ -179,7 +202,7 @@ impl AsyncRuntime for SmolRuntime {
         Ok(result)
     }
     
-    async fn block_on<F, T>(&self, future: F) -> Result<T>
+    pub async fn block_on<F, T>(&self, future: F) -> Result<T>
     where
         F: std::future::Future<Output = T>,
     {
@@ -187,7 +210,7 @@ impl AsyncRuntime for SmolRuntime {
         Ok(result)
     }
     
-    async fn get_status(&self) -> RuntimeStatus {
+    pub async fn get_status(&self) -> RuntimeStatus {
         let status = self.status.lock().await;
         status.clone()
     }
@@ -195,10 +218,10 @@ impl AsyncRuntime for SmolRuntime {
 
 /// 异步运行时管理器
 /// 实现聚合模式，统一管理多个运行时
+#[allow(dead_code)]
 pub struct AsyncRuntimeManager {
-    runtimes: Arc<RwLock<HashMap<String, Arc<dyn AsyncRuntime>>>>,
+    runtimes: Arc<RwLock<HashMap<String, AsyncRuntime>>>,
     default_runtime: String,
-    task_distributor: Arc<TaskDistributor>,
 }
 
 impl AsyncRuntimeManager {
@@ -206,12 +229,11 @@ impl AsyncRuntimeManager {
         Self {
             runtimes: Arc::new(RwLock::new(HashMap::new())),
             default_runtime,
-            task_distributor: Arc::new(TaskDistributor::new()),
         }
     }
     
     /// 注册运行时
-    pub async fn register_runtime(&self, name: String, runtime: Arc<dyn AsyncRuntime>) -> Result<()> {
+    pub async fn register_runtime(&self, name: String, runtime: AsyncRuntime) -> Result<()> {
         let mut runtimes = self.runtimes.write().await;
         runtimes.insert(name.clone(), runtime);
         info!("运行时已注册: {}", name);
@@ -219,13 +241,13 @@ impl AsyncRuntimeManager {
     }
     
     /// 获取运行时
-    pub async fn get_runtime(&self, name: &str) -> Option<Arc<dyn AsyncRuntime>> {
+    pub async fn get_runtime(&self, name: &str) -> Option<AsyncRuntime> {
         let runtimes = self.runtimes.read().await;
         runtimes.get(name).cloned()
     }
     
     /// 获取默认运行时
-    pub async fn get_default_runtime(&self) -> Option<Arc<dyn AsyncRuntime>> {
+    pub async fn get_default_runtime(&self) -> Option<AsyncRuntime> {
         self.get_runtime(&self.default_runtime).await
     }
     
@@ -252,7 +274,7 @@ impl AsyncRuntimeManager {
     /// 智能任务分发
     pub async fn spawn_task<F, T>(
         &self,
-        task_name: String,
+        _task_name: String,
         future: F,
         preferred_runtime: Option<String>,
     ) -> Result<T>
@@ -264,12 +286,8 @@ impl AsyncRuntimeManager {
         let runtime = self.get_runtime(&runtime_name).await
             .ok_or_else(|| anyhow::anyhow!("运行时不存在: {}", runtime_name))?;
         
-        // 使用任务分发器进行智能分发
-        let result = self.task_distributor.distribute_task(
-            task_name,
-            runtime,
-            future,
-        ).await?;
+        // 直接执行任务
+        let result = runtime.spawn(future).await?;
         
         Ok(result)
     }
@@ -288,198 +306,10 @@ impl AsyncRuntimeManager {
     }
 }
 
-/// 任务分发器
-/// 实现策略模式，根据任务特性选择最优运行时
-pub struct TaskDistributor {
-    strategies: Arc<RwLock<HashMap<String, Box<dyn TaskDistributionStrategy>>>>,
-}
-
-impl TaskDistributor {
-    pub fn new() -> Self {
-        let strategies = Arc::new(RwLock::new(HashMap::new()));
-        let distributor = Self { strategies };
-        
-        // 注册默认策略
-        tokio::spawn(async {
-            distributor.register_strategy(
-                "default".to_string(),
-                Box::new(DefaultDistributionStrategy::new()),
-            ).await;
-            
-            distributor.register_strategy(
-                "performance".to_string(),
-                Box::new(PerformanceDistributionStrategy::new()),
-            ).await;
-            
-            distributor.register_strategy(
-                "resource_aware".to_string(),
-                Box::new(ResourceAwareDistributionStrategy::new()),
-            ).await;
-        });
-        
-        distributor
-    }
-    
-    async fn register_strategy(
-        &self,
-        name: String,
-        strategy: Box<dyn TaskDistributionStrategy>,
-    ) {
-        let mut strategies = self.strategies.write().await;
-        strategies.insert(name, strategy);
-    }
-    
-    async fn distribute_task<F, T>(
-        &self,
-        task_name: String,
-        runtime: Arc<dyn AsyncRuntime>,
-        future: F,
-    ) -> Result<T>
-    where
-        F: std::future::Future<Output = T> + Send + 'static,
-        T: Send + 'static,
-    {
-        // 根据任务名称选择分发策略
-        let strategy_name = self.select_strategy(&task_name).await;
-        let strategies = self.strategies.read().await;
-        
-        if let Some(strategy) = strategies.get(&strategy_name) {
-            strategy.execute_task(task_name, runtime, future).await
-        } else {
-            // 使用默认策略
-            runtime.spawn(future).await
-        }
-    }
-    
-    async fn select_strategy(&self, task_name: &str) -> String {
-        // 根据任务名称选择策略
-        if task_name.contains("network") || task_name.contains("http") {
-            "performance".to_string()
-        } else if task_name.contains("compute") || task_name.contains("cpu") {
-            "resource_aware".to_string()
-        } else {
-            "default".to_string()
-        }
-    }
-}
-
-/// 任务分发策略接口
-#[async_trait::async_trait]
-pub trait TaskDistributionStrategy: Send + Sync {
-    async fn execute_task<F, T>(
-        &self,
-        task_name: String,
-        runtime: Arc<dyn AsyncRuntime>,
-        future: F,
-    ) -> Result<T>
-    where
-        F: std::future::Future<Output = T> + Send + 'static,
-        T: Send + 'static;
-}
-
-/// 默认分发策略
-pub struct DefaultDistributionStrategy;
-
-impl DefaultDistributionStrategy {
-    pub fn new() -> Self {
-        Self
-    }
-}
-
-#[async_trait::async_trait]
-impl TaskDistributionStrategy for DefaultDistributionStrategy {
-    async fn execute_task<F, T>(
-        &self,
-        task_name: String,
-        runtime: Arc<dyn AsyncRuntime>,
-        future: F,
-    ) -> Result<T>
-    where
-        F: std::future::Future<Output = T> + Send + 'static,
-        T: Send + 'static,
-    {
-        info!("使用默认策略执行任务: {}", task_name);
-        runtime.spawn(future).await
-    }
-}
-
-/// 性能优化分发策略
-pub struct PerformanceDistributionStrategy;
-
-impl PerformanceDistributionStrategy {
-    pub fn new() -> Self {
-        Self
-    }
-}
-
-#[async_trait::async_trait]
-impl TaskDistributionStrategy for PerformanceDistributionStrategy {
-    async fn execute_task<F, T>(
-        &self,
-        task_name: String,
-        runtime: Arc<dyn AsyncRuntime>,
-        future: F,
-    ) -> Result<T>
-    where
-        F: std::future::Future<Output = T> + Send + 'static,
-        T: Send + 'static,
-    {
-        info!("使用性能优化策略执行任务: {}", task_name);
-        
-        // 添加性能监控
-        let start_time = Instant::now();
-        let result = runtime.spawn(future).await?;
-        let execution_time = start_time.elapsed();
-        
-        info!(
-            task_name = %task_name,
-            execution_time_ms = execution_time.as_millis(),
-            "任务执行完成"
-        );
-        
-        Ok(result)
-    }
-}
-
-/// 资源感知分发策略
-pub struct ResourceAwareDistributionStrategy;
-
-impl ResourceAwareDistributionStrategy {
-    pub fn new() -> Self {
-        Self
-    }
-}
-
-#[async_trait::async_trait]
-impl TaskDistributionStrategy for ResourceAwareDistributionStrategy {
-    async fn execute_task<F, T>(
-        &self,
-        task_name: String,
-        runtime: Arc<dyn AsyncRuntime>,
-        future: F,
-    ) -> Result<T>
-    where
-        F: std::future::Future<Output = T> + Send + 'static,
-        T: Send + 'static,
-    {
-        info!("使用资源感知策略执行任务: {}", task_name);
-        
-        // 检查运行时状态
-        let status = runtime.get_status().await;
-        if status.cpu_usage > 80.0 {
-            warn!("运行时CPU使用率过高: {:.1}%", status.cpu_usage);
-        }
-        
-        if status.memory_usage > 1024 * 1024 * 1024 { // 1GB
-            warn!("运行时内存使用过高: {} MB", status.memory_usage / 1024 / 1024);
-        }
-        
-        runtime.spawn(future).await
-    }
-}
 
 /// 异步任务包装器
 /// 实现装饰器模式，为任务添加额外功能
+#[allow(dead_code)]
 pub struct AsyncTaskWrapper<T> {
     inner: T,
     task_id: String,
@@ -511,7 +341,7 @@ impl<T> AsyncTaskWrapper<T> {
                 self.logger.log_task_success(&self.task_id, execution_time).await;
             }
             Err(e) => {
-                self.logger.log_task_failure(&self.task_id, execution_time, e).await;
+                self.logger.log_task_failure(&self.task_id, execution_time, &e.to_string()).await;
             }
         }
         
@@ -524,10 +354,11 @@ impl<T> AsyncTaskWrapper<T> {
 pub trait AsyncLogger: Send + Sync {
     async fn log_task_start(&self, task_id: &str);
     async fn log_task_success(&self, task_id: &str, execution_time: Duration);
-    async fn log_task_failure(&self, task_id: &str, execution_time: Duration, error: &dyn std::fmt::Display);
+    async fn log_task_failure(&self, task_id: &str, execution_time: Duration, error: &str);
 }
 
 /// 简单异步日志记录器实现
+#[allow(dead_code)]
 pub struct SimpleAsyncLogger;
 
 #[async_trait::async_trait]
@@ -544,7 +375,7 @@ impl AsyncLogger for SimpleAsyncLogger {
         );
     }
     
-    async fn log_task_failure(&self, task_id: &str, execution_time: Duration, error: &dyn std::fmt::Display) {
+    async fn log_task_failure(&self, task_id: &str, execution_time: Duration, error: &str) {
         error!(
             task_id = %task_id,
             execution_time_ms = execution_time.as_millis(),
@@ -556,6 +387,7 @@ impl AsyncLogger for SimpleAsyncLogger {
 
 /// 异步同步转换器
 /// 提供异步和同步代码之间的转换功能
+#[allow(dead_code)]
 pub struct AsyncSyncConverter {
     runtime_manager: Arc<AsyncRuntimeManager>,
 }
@@ -624,8 +456,8 @@ pub async fn demonstrate_async_ecosystem_integration() -> Result<()> {
     let runtime_manager = Arc::new(AsyncRuntimeManager::new("tokio".to_string()));
     
     // 2. 注册运行时
-    let tokio_runtime = Arc::new(TokioRuntime::new()) as Arc<dyn AsyncRuntime>;
-    let smol_runtime = Arc::new(SmolRuntime::new()) as Arc<dyn AsyncRuntime>;
+    let tokio_runtime = AsyncRuntime::Tokio(TokioRuntime::new());
+    let smol_runtime = AsyncRuntime::Smol(SmolRuntime::new());
     
     runtime_manager.register_runtime("tokio".to_string(), tokio_runtime).await?;
     runtime_manager.register_runtime("smol".to_string(), smol_runtime).await?;
@@ -734,7 +566,7 @@ mod tests {
     #[tokio::test]
     async fn test_runtime_manager() {
         let manager = AsyncRuntimeManager::new("tokio".to_string());
-        let tokio_runtime = Arc::new(TokioRuntime::new()) as Arc<dyn AsyncRuntime>;
+        let tokio_runtime = AsyncRuntime::Tokio(TokioRuntime::new());
         
         manager.register_runtime("tokio".to_string(), tokio_runtime).await.unwrap();
         manager.start_all().await.unwrap();
@@ -763,7 +595,7 @@ mod tests {
     #[tokio::test]
     async fn test_async_sync_converter() {
         let manager = Arc::new(AsyncRuntimeManager::new("tokio".to_string()));
-        let tokio_runtime = Arc::new(TokioRuntime::new()) as Arc<dyn AsyncRuntime>;
+        let tokio_runtime = AsyncRuntime::Tokio(TokioRuntime::new());
         manager.register_runtime("tokio".to_string(), tokio_runtime).await.unwrap();
         manager.start_all().await.unwrap();
         

@@ -3,7 +3,7 @@ fn main() {
 
     let proto_dir = "proto";
     if std::path::Path::new(proto_dir).exists() {
-        println!("cargo:warning=Proto directory exists, compiling protobuf files");
+        // println!("cargo:warning=Proto directory exists, compiling protobuf files");
 
         // 使用 vendored protoc，避免本地未安装导致失败
         unsafe {
@@ -19,7 +19,7 @@ fn main() {
             .compile_protos(&["proto/hello.proto"], &["proto"]) // (files, includes)
             .expect("failed to compile protos with tonic-prost-build");
 
-        println!("cargo:warning=Protobuf compilation completed");
+        // println!("cargo:warning=Protobuf compilation completed");
     } else {
         println!("cargo:warning=Proto directory does not exist");
     }
