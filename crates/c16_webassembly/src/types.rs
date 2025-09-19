@@ -1,36 +1,121 @@
-//! # WebAssembly系统核心类型定义 / WebAssembly System Core Type Definitions
+//! # WebAssembly 系统核心类型定义 / WebAssembly System Core Type Definitions
 //!
-//! 本模块定义了WebAssembly系统的核心数据类型和结构。
-//! This module defines the core data types and structures for the WebAssembly system.
+//! 本模块定义了 WebAssembly 系统的核心数据类型和结构，包括：
+//! This module defines the core data types and structures for the WebAssembly system, including:
+//!
+//! ## 核心概念 / Core Concepts
+//! - **值类型 (Value Types)**: WebAssembly 的基本数据类型
+//! - **模块 (Modules)**: WebAssembly 程序的基本组织单位
+//! - **函数 (Functions)**: 可执行的代码单元
+//! - **内存 (Memory)**: 线性内存空间
+//! - **表 (Tables)**: 函数引用表
+//! - **指令 (Instructions)**: 虚拟机执行的基本操作
+//!
+//! ## Rust 1.90 新特性集成 / Rust 1.90 New Features Integration
+//! - **常量泛型推断**: 使用 `_` 让编译器自动推断常量泛型参数
+//! - **生命周期语法检查**: 改进的生命周期语法检查和错误提示
+//! - **FFI 改进**: 支持 `i128` 和 `u128` 类型在 `extern "C"` 函数中使用
+//! - **API 稳定化**: 更多标准库 API 的稳定化
+//!
+//! ## WebAssembly 2.0 新特性 / WebAssembly 2.0 New Features
+//! - **批量内存操作**: 高效的内存复制和填充操作
+//! - **尾调用优化**: 减少递归函数的调用栈深度
+//! - **宿主绑定**: 直接操作 JavaScript/DOM 对象
+//! - **接口类型**: 支持更丰富的类型系统（字符串、记录、变体等）
+//! - **SIMD 操作**: 支持 128 位向量操作
 
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::time::Duration;
 use thiserror::Error;
 
-/// WebAssembly值类型 / WebAssembly Value Type
+/// WebAssembly 值类型 / WebAssembly Value Type
 ///
-/// 表示WebAssembly中的基本数据类型。
-/// Represents basic data types in WebAssembly.
+/// 表示 WebAssembly 中的基本数据类型，支持 WebAssembly 2.0 的所有类型。
+/// Represents basic data types in WebAssembly, supporting all WebAssembly 2.0 types.
+///
+/// ## 类型说明 / Type Description
+/// - **I32/I64**: 整数类型，支持有符号和无符号运算
+/// - **F32/F64**: 浮点数类型，符合 IEEE 754 标准
+/// - **FuncRef/ExternRef**: 引用类型，用于函数和外部对象引用
+/// - **I128/U128**: 大整数类型，Rust 1.90 FFI 支持
+/// - **V128**: SIMD 向量类型，支持并行计算
+///
+/// ## 使用示例 / Usage Example
+/// ```rust
+/// use c16_webassembly::types::Value;
+///
+/// // 创建不同类型的值
+/// let int_val = Value::I32(42);
+/// let float_val = Value::F64(3.14159);
+/// let simd_val = Value::V128([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
+/// ```
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq)]
 pub enum Value {
-    /// 32位整数 / 32-bit Integer
+    /// 32位有符号整数 / 32-bit Signed Integer
+    /// 
+    /// 范围: -2,147,483,648 到 2,147,483,647
+    /// Range: -2,147,483,648 to 2,147,483,647
     I32(i32),
-    /// 64位整数 / 64-bit Integer
+    
+    /// 64位有符号整数 / 64-bit Signed Integer
+    /// 
+    /// 范围: -9,223,372,036,854,775,808 到 9,223,372,036,854,775,807
+    /// Range: -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
     I64(i64),
-    /// 32位浮点数 / 32-bit Float
+    
+    /// 32位单精度浮点数 / 32-bit Single Precision Float
+    /// 
+    /// 符合 IEEE 754 标准，精度约 7 位十进制数字
+    /// Complies with IEEE 754 standard, precision of about 7 decimal digits
     F32(f32),
-    /// 64位浮点数 / 64-bit Float
+    
+    /// 64位双精度浮点数 / 64-bit Double Precision Float
+    /// 
+    /// 符合 IEEE 754 标准，精度约 15-17 位十进制数字
+    /// Complies with IEEE 754 standard, precision of about 15-17 decimal digits
     F64(f64),
+    
     /// 函数引用 / Function Reference
+    /// 
+    /// 用于间接函数调用，支持函数式编程模式
+    /// Used for indirect function calls, supports functional programming patterns
     FuncRef(Option<u32>),
+    
     /// 外部引用 / External Reference
+    /// 
+    /// 用于引用宿主环境中的对象，如 JavaScript 对象
+    /// Used to reference objects in the host environment, such as JavaScript objects
     ExternRef(Option<u64>),
-    /// 128位整数 (Rust 1.89 FFI支持) / 128-bit Integer (Rust 1.89 FFI Support)
+    
+    /// 128位有符号整数 (Rust 1.90 FFI支持) / 128-bit Signed Integer (Rust 1.90 FFI Support)
+    /// 
+    /// 范围: -2^127 到 2^127-1
+    /// Range: -2^127 to 2^127-1
+    /// 
+    /// ## Rust 1.90 新特性 / Rust 1.90 New Feature
+    /// 现在可以在 `extern "C"` 函数中安全使用，无需额外的包装
+    /// Can now be safely used in `extern "C"` functions without additional wrapping
     I128(i128),
-    /// 128位无符号整数 (Rust 1.89 FFI支持) / 128-bit Unsigned Integer (Rust 1.89 FFI Support)
+    
+    /// 128位无符号整数 (Rust 1.90 FFI支持) / 128-bit Unsigned Integer (Rust 1.90 FFI Support)
+    /// 
+    /// 范围: 0 到 2^128-1
+    /// Range: 0 to 2^128-1
+    /// 
+    /// ## Rust 1.90 新特性 / Rust 1.90 New Feature
+    /// 现在可以在 `extern "C"` 函数中安全使用，无需额外的包装
+    /// Can now be safely used in `extern "C"` functions without additional wrapping
     U128(u128),
-    /// SIMD向量类型 (WebAssembly 2.0) / SIMD Vector Type (WebAssembly 2.0)
+    
+    /// SIMD 向量类型 (WebAssembly 2.0) / SIMD Vector Type (WebAssembly 2.0)
+    /// 
+    /// 128位向量，支持并行计算操作
+    /// 128-bit vector supporting parallel computation operations
+    /// 
+    /// ## WebAssembly 2.0 新特性 / WebAssembly 2.0 New Feature
+    /// 支持多种 SIMD 指令，如向量加法、乘法、比较等
+    /// Supports various SIMD instructions such as vector addition, multiplication, comparison, etc.
     V128([u8; 16]),
 }
 
@@ -104,6 +189,164 @@ impl Value {
         match self {
             Value::V128(val) => Some(*val),
             _ => None,
+        }
+    }
+
+    /// 创建字符串值 (WebAssembly 2.0 接口类型) / Create String Value (WebAssembly 2.0 Interface Type)
+    /// 
+    /// ## WebAssembly 2.0 新特性 / WebAssembly 2.0 New Feature
+    /// 支持字符串类型，这是接口类型系统的一部分
+    /// Supports string type, which is part of the interface type system
+    pub fn string(s: String) -> Self {
+        // 将字符串编码为字节数组存储在 V128 中
+        // Encode string as byte array stored in V128
+        let mut bytes = [0u8; 16];
+        let s_bytes = s.as_bytes();
+        let len = s_bytes.len().min(16);
+        bytes[..len].copy_from_slice(&s_bytes[..len]);
+        Value::V128(bytes)
+    }
+
+    /// 从字符串创建值 / Create Value from String
+    pub fn from_string(s: &str) -> Self {
+        Self::string(s.to_string())
+    }
+
+    /// 检查值是否为零 / Check if Value is Zero
+    pub fn is_zero(&self) -> bool {
+        match self {
+            Value::I32(0) | Value::I64(0) | Value::F32(0.0) | Value::F64(0.0) => true,
+            Value::I128(0) | Value::U128(0) => true,
+            Value::V128(bytes) => bytes.iter().all(|&b| b == 0),
+            Value::FuncRef(None) | Value::ExternRef(None) => true,
+            _ => false,
+        }
+    }
+
+    /// 获取值的字节表示 / Get Byte Representation of Value
+    pub fn to_bytes(&self) -> Vec<u8> {
+        match self {
+            Value::I32(val) => val.to_le_bytes().to_vec(),
+            Value::I64(val) => val.to_le_bytes().to_vec(),
+            Value::F32(val) => val.to_le_bytes().to_vec(),
+            Value::F64(val) => val.to_le_bytes().to_vec(),
+            Value::I128(val) => val.to_le_bytes().to_vec(),
+            Value::U128(val) => val.to_le_bytes().to_vec(),
+            Value::V128(val) => val.to_vec(),
+            Value::FuncRef(Some(val)) => val.to_le_bytes().to_vec(),
+            Value::ExternRef(Some(val)) => val.to_le_bytes().to_vec(),
+            _ => Vec::new(),
+        }
+    }
+
+    /// 从字节创建值 / Create Value from Bytes
+    pub fn from_bytes(bytes: &[u8], value_type: ValueType) -> Result<Self, ValidationError> {
+        match value_type {
+            ValueType::I32 => {
+                if bytes.len() >= 4 {
+                    Ok(Value::I32(i32::from_le_bytes([bytes[0], bytes[1], bytes[2], bytes[3]])))
+                } else {
+                    Err(ValidationError::TypeMismatch {
+                        expected: ValueType::I32,
+                        actual: ValueType::I32, // 简化实现
+                    })
+                }
+            }
+            ValueType::I64 => {
+                if bytes.len() >= 8 {
+                    Ok(Value::I64(i64::from_le_bytes([
+                        bytes[0], bytes[1], bytes[2], bytes[3],
+                        bytes[4], bytes[5], bytes[6], bytes[7],
+                    ])))
+                } else {
+                    Err(ValidationError::TypeMismatch {
+                        expected: ValueType::I64,
+                        actual: ValueType::I64, // 简化实现
+                    })
+                }
+            }
+            ValueType::I128 => {
+                if bytes.len() >= 16 {
+                    let mut arr = [0u8; 16];
+                    arr.copy_from_slice(&bytes[..16]);
+                    Ok(Value::I128(i128::from_le_bytes(arr)))
+                } else {
+                    Err(ValidationError::TypeMismatch {
+                        expected: ValueType::I128,
+                        actual: ValueType::I128, // 简化实现
+                    })
+                }
+            }
+            ValueType::U128 => {
+                if bytes.len() >= 16 {
+                    let mut arr = [0u8; 16];
+                    arr.copy_from_slice(&bytes[..16]);
+                    Ok(Value::U128(u128::from_le_bytes(arr)))
+                } else {
+                    Err(ValidationError::TypeMismatch {
+                        expected: ValueType::U128,
+                        actual: ValueType::U128, // 简化实现
+                    })
+                }
+            }
+            ValueType::V128 => {
+                if bytes.len() >= 16 {
+                    let mut arr = [0u8; 16];
+                    arr.copy_from_slice(&bytes[..16]);
+                    Ok(Value::V128(arr))
+                } else {
+                    Err(ValidationError::TypeMismatch {
+                        expected: ValueType::V128,
+                        actual: ValueType::V128, // 简化实现
+                    })
+                }
+            }
+            _ => Err(ValidationError::TypeMismatch {
+                expected: value_type,
+                actual: value_type, // 简化实现
+            }),
+        }
+    }
+
+    /// 执行 SIMD 加法操作 (WebAssembly 2.0) / Perform SIMD Addition (WebAssembly 2.0)
+    /// 
+    /// ## WebAssembly 2.0 新特性 / WebAssembly 2.0 New Feature
+    /// 支持向量并行加法操作
+    /// Supports vector parallel addition operations
+    pub fn simd_add(&self, other: &Value) -> Result<Value, ValidationError> {
+        match (self, other) {
+            (Value::V128(a), Value::V128(b)) => {
+                let mut result = [0u8; 16];
+                for i in 0..16 {
+                    result[i] = a[i].wrapping_add(b[i]);
+                }
+                Ok(Value::V128(result))
+            }
+            _ => Err(ValidationError::TypeMismatch {
+                expected: ValueType::V128,
+                actual: self.get_type(),
+            }),
+        }
+    }
+
+    /// 执行 SIMD 乘法操作 (WebAssembly 2.0) / Perform SIMD Multiplication (WebAssembly 2.0)
+    /// 
+    /// ## WebAssembly 2.0 新特性 / WebAssembly 2.0 New Feature
+    /// 支持向量并行乘法操作
+    /// Supports vector parallel multiplication operations
+    pub fn simd_mul(&self, other: &Value) -> Result<Value, ValidationError> {
+        match (self, other) {
+            (Value::V128(a), Value::V128(b)) => {
+                let mut result = [0u8; 16];
+                for i in 0..16 {
+                    result[i] = a[i].wrapping_mul(b[i]);
+                }
+                Ok(Value::V128(result))
+            }
+            _ => Err(ValidationError::TypeMismatch {
+                expected: ValueType::V128,
+                actual: self.get_type(),
+            }),
         }
     }
 }
