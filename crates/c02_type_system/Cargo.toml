@@ -18,6 +18,10 @@ path = "examples/type_system_example.rs"
 name = "rust_189_features_demo"
 path = "examples/rust_189_features_demo.rs"
 
+[[example]]
+name = "rust_189_comprehensive_demo"
+path = "examples/rust_189_comprehensive_demo.rs"
+
 [[bin]]
 name = "ts"
 path = "src/bin/main.rs"

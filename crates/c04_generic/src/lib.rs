@@ -103,6 +103,18 @@ pub mod generic_define;
 pub mod rust_189_features;
 pub mod rust_189_gat_hrtbs;
 
+/// 基础语法模块 - 提供 Rust 泛型编程的基础语法和概念
+pub mod basic_syntax;
+
+/// Rust 1.89 全面特性展示模块 - 展示 Rust 1.89 版本的新特性和改进
+pub mod rust_189_comprehensive;
+
+/// 高级泛型模式和设计模式示例模块 - 展示使用泛型实现的设计模式
+pub mod advanced_patterns;
+
+/// 实用示例模块 - 展示实际项目中的泛型编程应用
+pub mod practical_examples;
+
 /// 成熟库示例模块
 pub mod ecosystem_examples {
     use anyhow::{Context, Result};

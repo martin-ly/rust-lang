@@ -11,6 +11,11 @@ use c04_generic::{
     },
     type_constructor::*,
     type_inference::*,
+    // 新增模块
+    basic_syntax::*,
+    rust_189_comprehensive::*,
+    advanced_patterns::*,
+    practical_examples::*,
 };
 
 fn main() {
@@ -120,6 +125,30 @@ fn main() {
     c04_generic::benchmarks::benchmark_generic_functions();
     c04_generic::benchmarks::benchmark_concurrency();
     c04_generic::benchmarks::benchmark_memory_usage();
+
+    // 9. 基础语法演示（包含 Rust 1.89 新特性）
+    println!("9. Basic Syntax (with Rust 1.89 Features)");
+    println!("==========================================");
+    demonstrate_basic_syntax();
+    println!();
+
+    // 10. Rust 1.89 全面特性演示
+    println!("10. Rust 1.89 Comprehensive Features");
+    println!("====================================");
+    demonstrate_rust_189_comprehensive();
+    println!();
+
+    // 11. 高级模式演示
+    println!("11. Advanced Patterns");
+    println!("=====================");
+    demonstrate_advanced_patterns();
+    println!();
+
+    // 12. 实用示例演示
+    println!("12. Practical Examples");
+    println!("======================");
+    demonstrate_practical_examples();
+    println!();
 
     // Rust 1.89 泛型特性演示
     println!("\nRust 1.89 Generics Demos");

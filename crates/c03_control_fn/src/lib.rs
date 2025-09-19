@@ -10,6 +10,10 @@ pub mod performance_optimization_189;
 pub mod rust_189_enhanced_features;
 pub mod rust_189_features;
 
+// 导出基础语法模块
+pub mod basic_syntax;
+pub mod rust_189_basic_syntax;
+
 // 导出子模块
 pub mod closure;
 pub mod control_struct;
@@ -26,6 +30,10 @@ pub use async_control_flow::*;
 pub use async_control_flow_189::*;
 pub use performance_optimization_189::*;
 pub use rust_189_enhanced_features::*;
+
+// 重新导出基础语法模块
+pub use basic_syntax::*;
+pub use rust_189_basic_syntax::*;
 
 // 版本信息
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");

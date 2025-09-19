@@ -502,20 +502,87 @@
 //! ```
 
 // 核心类型定义 / Core Type Definitions
+pub mod basic_syntax;
 pub mod copy_move;
 pub mod expression;
 pub mod function;
 pub mod internal_mut;
 pub mod scope;
 pub mod variable;
+pub mod ownership_utils;
 
 // 重新导出主要类型 / Re-export main types
-pub use copy_move::*;
-// pub use expression::*;
-// pub use function::*;
-pub use internal_mut::*;
-pub use scope::*;
-// pub use variable::*;
+// 使用具体的导出而不是通配符导出以避免名称冲突 / Use specific exports instead of wildcard exports to avoid name conflicts
+
+// 从 basic_syntax 模块导出 / Export from basic_syntax module
+pub use basic_syntax::{
+    ownership_basics,
+    borrowing_basics,
+    lifetime_basics,
+    scope_basics,
+    smart_pointer_basics,
+    error_handling_basics,
+    concurrency_basics,
+    performance_basics,
+    testing_basics,
+    module_basics,
+    OwnershipError,
+    run_all_basic_syntax_examples,
+    // 重命名以避免与下面的函数冲突 / Rename to avoid conflict with function below
+    get_basic_syntax_info as basic_syntax_info,
+};
+
+// 从 copy_move 模块导出 / Export from copy_move module
+pub use copy_move::{
+    factory,
+    strategy,
+    r#struct,
+};
+
+// 从 internal_mut 模块导出 / Export from internal_mut module
+pub use internal_mut::{
+    cell,
+    refcell,
+    threads,
+    unsafecell,
+};
+
+// 从 scope 模块导出 / Export from scope module
+pub use scope::{
+    ScopeType,
+    Scope,
+    ScopeError,
+    ScopeManager,
+    VariableInfo,
+    ScopeAnalyzer,
+};
+
+// 从 ownership_utils 模块导出 / Export from ownership_utils module
+pub use ownership_utils::{
+    OwnershipTracker,
+    OwnershipRecord,
+    OwnershipStatistics,
+    BorrowTracker,
+    BorrowRecord,
+    BorrowType,
+    BorrowStatistics,
+    LifetimeTracker,
+    LifetimeRecord,
+    LifetimeStatistics,
+    OwnershipSystemManager,
+    SystemStatistics,
+    PerformanceAnalyzer,
+    PerformanceMetric,
+    // 注意：这里重命名了冲突的错误类型 / Note: Renamed conflicting error types here
+    OwnershipError as UtilsOwnershipError,
+    BorrowError as UtilsBorrowError,
+    LifetimeError as UtilsLifetimeError,
+    // 实用函数 / Utility functions
+    safe_ownership_transfer,
+    safe_borrow_check,
+    safe_mutable_borrow_check,
+    safe_lifetime_check,
+};
 
 /// 所有权系统版本 / Ownership System Version
 pub const VERSION: &str = "1.0.0";
@@ -542,4 +609,14 @@ pub fn run_tests() -> Result<(), Box<dyn std::error::Error>> {
     // Add test running logic here
 
     Ok(())
+}
+
+/// 运行基础语法示例 / Run Basic Syntax Examples
+pub fn run_basic_syntax_examples() {
+    basic_syntax::run_all_basic_syntax_examples();
+}
+
+/// 获取基础语法信息 / Get Basic Syntax Information
+pub fn get_basic_syntax_info() -> &'static str {
+    basic_syntax::get_basic_syntax_info()
 }

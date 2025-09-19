@@ -35,9 +35,10 @@ go on  激情澎湃的 <(￣︶￣)↗[GO!]    如何做 请您自己规划保�
         │
     futures/async-trait/crossbeam  ← 并发
         │
-    serde/bytes/thiserror  ← 数据
+    serde/bytes/config/chrono  ← 数据
         │
     hyper/reqwest/tonic  ← 网络
         │
-    tracing/clap  ← 观测/CLI
+    tracing/clap/thiserror/anyhow  ← 观测/CLI/诊断
+    bytes + parking_lot + rayon <-
 ```

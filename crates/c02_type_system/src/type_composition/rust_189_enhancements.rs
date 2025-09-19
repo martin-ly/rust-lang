@@ -96,6 +96,7 @@ pub mod rust_189_type_composition {
     /// assert_eq!(arr.len(), 5);
     /// assert!(!arr.is_empty());
     /// ```
+    #[derive(Debug)]
     pub struct ConstGenericArray<T, const N: usize> {
         /// 内部数组数据
         ///
@@ -200,6 +201,7 @@ pub mod rust_189_type_composition {
 
     /// 7. 智能指针类型组合
     #[allow(dead_code)]
+    #[derive(Debug)]
     pub struct SmartPointerComposition<T> {
         inner: Box<T>,
         reference_count: std::rc::Rc<()>,
