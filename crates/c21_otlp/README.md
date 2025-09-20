@@ -298,9 +298,22 @@ docker run -p 4317:4317 -p 4318:4318 otel/opentelemetry-collector
 cargo test --test integration
 ```
 
-## 📚 API文档
+## 📚 文档导航
 
-### 主要类型
+### 2025年综合分析文档
+
+- **[OTLP国际标准分析](docs/standards/OTLP_INTERNATIONAL_STANDARDS_2025.md)** - 协议标准、软件堆栈、云原生集成
+- **[同步异步控制流分析](docs/sync_async/OTLP_SYNC_ASYNC_CONTROL_FLOW_2025.md)** - 控制流、执行流、数据流设计
+- **[算法和设计模式](docs/algorithms/OTLP_ALGORITHMS_DESIGN_PATTERNS_2025.md)** - 核心算法、设计模式、架构组合
+- **[采样控制和动态调整](docs/sampling/OTLP_SAMPLING_CONTROL_2025.md)** - 日志采集、采样策略、动态调整
+- **[递归和调度组合](docs/advanced/OTLP_RECURSIVE_MIXED_SCHEDULING_2025.md)** - 递归处理、混合执行、智能调度
+- **[执行流组织](docs/flow_organization/OTLP_EXECUTION_FLOW_ORGANIZATION_2025.md)** - 执行流、控制流、数据流组织
+- **[综合使用示例](docs/examples/OTLP_COMPREHENSIVE_USAGE_EXAMPLES_2025.md)** - 基础用法、高级特性、实际应用
+- **[文档索引](docs/OTLP_2025_COMPREHENSIVE_DOCUMENTATION_INDEX.md)** - 完整文档导航和使用指南
+
+### API文档
+
+#### 主要类型
 
 - `OtlpClient`: OTLP客户端主接口
 - `OtlpConfig`: 客户端配置
@@ -308,7 +321,7 @@ cargo test --test integration
 - `ExportResult`: 导出结果
 - `OtlpError`: 错误类型
 
-### 数据模型
+#### 数据模型
 
 - `TraceData`: 追踪数据
 - `MetricData`: 指标数据
@@ -316,7 +329,7 @@ cargo test --test integration
 - `AttributeValue`: 属性值
 - `SpanStatus`: 跨度状态
 
-### 传输协议
+#### 传输协议
 
 - `TransportProtocol`: 传输协议枚举
 - `GrpcTransport`: gRPC传输实现
