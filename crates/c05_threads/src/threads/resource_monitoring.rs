@@ -88,6 +88,12 @@ pub struct SystemStats {
     pub last_updated: Instant,
 }
 
+impl Default for SystemResourceMonitor {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SystemResourceMonitor {
     pub fn new() -> Self {
         Self {
@@ -333,8 +339,7 @@ impl PerformanceProfiler {
 
     pub fn generate_profile_report(&self, thread_id: usize) -> Option<ProfileReport> {
         let profile_data = self.profile_data.lock().unwrap();
-        if let Some(data) = profile_data.get(&thread_id) {
-            Some(ProfileReport {
+        profile_data.get(&thread_id).map(|data| ProfileReport {
                 thread_id: data.thread_id,
                 total_function_calls: data.function_calls.values().sum(),
                 total_execution_time: data.execution_times.values().sum(),
@@ -345,9 +350,6 @@ impl PerformanceProfiler {
                 execution_times: data.execution_times.clone(),
                 memory_allocations: data.memory_allocations.clone(),
             })
-        } else {
-            None
-        }
     }
 
     pub fn enable_profiling(&self, enabled: bool) {
@@ -418,7 +420,7 @@ pub fn demonstrate_resource_monitoring() {
                     let start_time = Instant::now();
 
                     // 模拟工作负载
-                    let _ = (0..1000).fold(0, |acc, x| acc + x);
+                    let _ = (0..1000).sum::<i32>();
 
                     let execution_time = start_time.elapsed();
 

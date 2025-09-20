@@ -13,6 +13,12 @@ pub struct IoTScheduler {
     priorities: HashMap<String, u8>,
 }
 
+impl Default for IoTScheduler {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl IoTScheduler {
     pub fn new() -> Self {
         Self {

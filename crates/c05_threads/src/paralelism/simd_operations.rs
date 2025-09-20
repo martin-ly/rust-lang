@@ -630,13 +630,13 @@ pub fn demonstrate_simd_operations() {
 
     // 测试自动向量化
     let start = std::time::Instant::now();
-    let auto_sum = AutoVectorization::sum_array(&a.data());
+    let auto_sum = AutoVectorization::sum_array(a.data());
     let elapsed = start.elapsed();
     println!("自动向量化数组求和结果: {}", auto_sum);
     println!("自动向量化数组求和耗时: {:?}", elapsed);
 
     let start = std::time::Instant::now();
-    let auto_product = AutoVectorization::multiply_arrays(&a.data(), &b.data());
+    let auto_product = AutoVectorization::multiply_arrays(a.data(), b.data());
     let elapsed = start.elapsed();
     println!("自动向量化数组乘法结果: {:?}", auto_product);
     println!("自动向量化数组乘法耗时: {:?}", elapsed);

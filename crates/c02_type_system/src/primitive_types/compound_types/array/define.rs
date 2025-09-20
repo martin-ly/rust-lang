@@ -40,7 +40,7 @@ value1, value2, ..., valueN 是数组的初始值。
 */
 
 #[allow(unused)]
-pub fn test_array() -> () {
+pub fn test_array() {
     // 定义一个包含 5 个整数的数组
     let numbers: [i32; 5] = [1, 2, 3, 4, 5];
 
@@ -65,7 +65,7 @@ pub fn test_array() -> () {
 }
 
 #[allow(unused)]
-pub fn test_array_str() -> () {
+pub fn test_array_str() {
     // 定义一个包含字符串的数组
     let fruits: [&str; 4] = ["Apple", "Banana", "Cherry", "Date"];
 
@@ -85,7 +85,7 @@ pub fn test_array_str() -> () {
 }
 
 #[allow(unused)]
-pub fn test_array_string() -> () {
+pub fn test_array_string() {
     // 定义一个包含 3 个 String 类型的数组
     let mut fruits: [String; 3] = [
         String::from("Apple"),
@@ -115,7 +115,7 @@ pub fn test_array_string() -> () {
 }
 
 #[allow(unused)]
-pub fn test_array_copy() -> () {
+pub fn test_array_copy() {
     let arr1 = [1, 2, 3]; // 包含 Copy 类型的数组
     let arr2 = arr1; // 这里发生的是复制，而不是移动
 
@@ -124,25 +124,25 @@ pub fn test_array_copy() -> () {
 }
 
 #[allow(unused)]
-pub fn test_array_clone() -> () {
+pub fn test_array_clone() {
     let arr1 = [1, 2, 3]; // 定义一个数组
-    let arr2 = arr1.clone(); // 克隆 arr1，arr2 拥有 arr1 的副本
+    let arr2 = arr1; // 克隆 arr1，arr2 拥有 arr1 的副本
 
     println!("{:?}", arr1); // 打印 arr1: [1, 2, 3]
     println!("{:?}", arr2); // 打印 arr2: [1, 2, 3]
 }
 
 #[allow(unused)]
-pub fn test_array_clone_str() -> () {
+pub fn test_array_clone_str() {
     let arr1 = ["Apple", "Banana", "Cherry"];
-    let arr2 = arr1.clone();
+    let arr2 = arr1;
 
     println!("{:?}", arr1); // arr1 仍然有效: ["Apple", "Banana", "Cherry"]
     println!("{:?}", arr2); // 打印 arr2: ["Apple", "Banana", "Cherry"]
 }
 
 #[allow(unused)]
-pub fn test_array_clone_string() -> () {
+pub fn test_array_clone_string() {
     let arr1 = [
         String::from("Apple"),
         String::from("Banana"),

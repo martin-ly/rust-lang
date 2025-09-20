@@ -2,7 +2,7 @@ use crate::error::{NetworkError, NetworkResult};
 use rustls::ServerConfig;
 use rustls::crypto::ring;
 use rustls::pki_types::{
-    CertificateDer, PrivateKeyDer, PrivatePkcs1KeyDer, PrivatePkcs8KeyDer, PrivateSec1KeyDer,
+    CertificateDer, PrivateKeyDer,
 };
 use rustls::version::TLS13;
 use std::sync::Arc;
@@ -44,7 +44,7 @@ fn pemfile_to_certs(pem: &[u8]) -> NetworkResult<Vec<CertificateDer<'static>>> {
     {
         rest = r;
         if let rustls_pemfile::Item::X509Certificate(der) = block {
-            certs.push(CertificateDer::from(der));
+            certs.push(der);
         }
     }
     if certs.is_empty() {
@@ -62,13 +62,13 @@ fn pemfile_to_key(pem: &[u8]) -> NetworkResult<PrivateKeyDer<'static>> {
         match block {
             // 转换为 pki_types
             rustls_pemfile::Item::Pkcs8Key(der) => {
-                return Ok(PrivateKeyDer::from(PrivatePkcs8KeyDer::from(der)));
+                return Ok(PrivateKeyDer::from(der));
             }
             rustls_pemfile::Item::Pkcs1Key(der) => {
-                return Ok(PrivateKeyDer::from(PrivatePkcs1KeyDer::from(der)));
+                return Ok(PrivateKeyDer::from(der));
             }
             rustls_pemfile::Item::Sec1Key(der) => {
-                return Ok(PrivateKeyDer::from(PrivateSec1KeyDer::from(der)));
+                return Ok(PrivateKeyDer::from(der));
             }
             _ => {}
         }

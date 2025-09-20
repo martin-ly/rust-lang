@@ -175,9 +175,9 @@ pub fn create_app_with_middleware(config: Config) -> Router {
         .rate_limit(rate_limit_config)
         .metrics();
 
-    let router = AxumMicroservice::create_router(state);
+    
 
-    router
+    AxumMicroservice::create_router(state)
 }
 
 #[cfg(test)]

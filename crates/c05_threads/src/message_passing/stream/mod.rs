@@ -37,11 +37,11 @@ impl<T> ReceiverStream<T> {
     }
 
     /// 轻量 map 适配器：返回惰性迭代器
-    pub fn map<U, F>(self, mut f: F) -> impl Iterator<Item = U>
+    pub fn map<U, F>(self, f: F) -> impl Iterator<Item = U>
     where
         F: FnMut(T) -> U,
     {
-        self.into_iter().map(move |item| f(item))
+        self.into_iter().map(f)
     }
 
     /// 轻量 filter 适配器：返回惰性迭代器
@@ -86,13 +86,12 @@ impl<T> ReceiverStream<T> {
     /// 以近似速率限制生成迭代器（每个元素之间最小间隔 min_interval）
     pub fn rate_limit_iter(self, min_interval: Duration) -> impl Iterator<Item = T> {
         let mut last = Instant::now();
-        self.into_iter().map(move |item| {
+        self.into_iter().inspect(move |_item| {
             let elapsed = last.elapsed();
             if elapsed < min_interval {
                 sleep(min_interval - elapsed);
             }
             last = Instant::now();
-            item
         })
     }
 

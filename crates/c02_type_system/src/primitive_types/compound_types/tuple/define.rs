@@ -33,7 +33,7 @@ value1, value2, ..., valueN 是元组中元素的值。
 */
 
 #[allow(unused)]
-pub fn test_tuple() -> () {
+pub fn test_tuple() {
     // 定义一个元组，包含一个整数、一个浮点数和一个字符串
     let person: (i32, f64, &str) = (30, 5.9, "Alice");
 
@@ -53,7 +53,7 @@ pub fn test_tuple() -> () {
 }
 
 #[allow(unused)]
-pub fn test_tuple_string() -> () {
+pub fn test_tuple_string() {
     // 定义一个元组，包含一个字符串、一个整数和一个浮点数
     let person: (String, i32, f64) = (String::from("Alice"), 30, 5.9);
 
@@ -75,7 +75,7 @@ pub fn test_tuple_string() -> () {
 }
 
 #[allow(unused)]
-pub fn test_tuple_copy() -> () {
+pub fn test_tuple_copy() {
     let tuple1 = (1, 2.5); // 包含 Copy 类型的元组
     let tuple2 = tuple1; // 这里发生的是复制，而不是移动
 
@@ -84,7 +84,7 @@ pub fn test_tuple_copy() -> () {
 }
 
 #[allow(unused)]
-pub fn test_tuple_clone() -> () {
+pub fn test_tuple_clone() {
     let tuple1 = (String::from("Hello"), 42); // 包含 String 类型的元组
     let tuple2 = tuple1.clone(); // 克隆 tuple1，tuple2 拥有 tuple1 的副本
 

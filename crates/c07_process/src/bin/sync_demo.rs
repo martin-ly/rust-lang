@@ -60,7 +60,7 @@ fn main() -> Result<()> {
 
     // 测试屏障
     println!("🚧 等待屏障...");
-    if let Ok(_) = barrier.wait() {
+    if barrier.wait().is_ok() {
         println!("🚧 屏障已通过");
     }
 

@@ -57,7 +57,7 @@ impl ChaosInjector {
         let jitter = if self.cfg.jitter_ms == 0 {
             0
         } else {
-            (Instant::now().elapsed().as_nanos() as i64 % (self.cfg.jitter_ms as i64 + 1)) as i64
+            Instant::now().elapsed().as_nanos() as i64 % (self.cfg.jitter_ms as i64 + 1)
         };
         let dur_ms = (base + jitter).max(0) as u64;
         thread::sleep(Duration::from_millis(dur_ms));

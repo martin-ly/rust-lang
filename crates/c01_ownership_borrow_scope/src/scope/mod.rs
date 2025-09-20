@@ -171,6 +171,12 @@ impl VariableInfo {
     }
 }
 
+impl Default for ScopeManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ScopeManager {
     /// 创建新的作用域管理器 / Create New Scope Manager
     pub fn new() -> Self {

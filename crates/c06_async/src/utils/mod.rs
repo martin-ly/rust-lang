@@ -119,7 +119,7 @@ impl ExecHelper {
     {
         let fut = async move {
             // 重试链路（带自定义可重试判定支持：通过闭包内部自行决定错误）
-            retry_with_backoff(|attempt| make_fut(attempt), max_attempts, start_delay).await
+            retry_with_backoff(&mut make_fut, max_attempts, start_delay).await
         };
 
         // 统一为一个 Boxed Future，避免 async block 类型不一致
@@ -129,7 +129,7 @@ impl ExecHelper {
             let b = breaker.clone();
             Box::pin(async move { b.run(fut).await })
         } else {
-            Box::pin(async move { fut.await })
+            Box::pin(fut)
         };
 
         let run = self.limiter.run(async move { with_timeout(timeout, fut).await });
@@ -181,7 +181,7 @@ impl ExecHelper {
             let b = breaker.clone();
             Box::pin(async move { b.run(fut).await })
         } else {
-            Box::pin(async move { fut.await })
+            Box::pin(fut)
         };
 
         // 将截止时间转为剩余超时，循环检查
@@ -211,6 +211,12 @@ pub struct ExecStrategyBuilder {
     deadline: Option<std::time::Instant>,
     breaker: Option<circuit_breaker::CircuitBreaker>,
     token_bucket: Option<SimpleTokenBucket>,
+}
+
+impl Default for ExecStrategyBuilder {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl ExecStrategyBuilder {

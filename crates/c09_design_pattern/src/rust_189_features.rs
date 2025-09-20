@@ -13,6 +13,12 @@ pub struct CellUpdateDemo {
     data: Cell<Option<String>>,
 }
 
+impl Default for CellUpdateDemo {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl CellUpdateDemo {
     pub fn new() -> Self {
         Self {
@@ -98,6 +104,12 @@ pub struct ArrayConversionDemo {
     data: Vec<i32>,
 }
 
+impl Default for ArrayConversionDemo {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ArrayConversionDemo {
     pub fn new() -> Self {
         Self { data: Vec::new() }
@@ -139,6 +151,12 @@ impl ArrayConversionDemo {
 pub struct AdvancedSingleton<T> {
     instance: OnceLock<T>,
     metadata: Cell<Option<String>>,
+}
+
+impl<T> Default for AdvancedSingleton<T> {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl<T> AdvancedSingleton<T> {
@@ -200,6 +218,12 @@ pub struct SocketDemo {
 }
 
 #[cfg(windows)]
+impl Default for SocketDemo {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SocketDemo {
     pub fn new() -> Self {
         Self {}

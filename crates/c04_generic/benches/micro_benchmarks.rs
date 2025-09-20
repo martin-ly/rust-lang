@@ -2,7 +2,9 @@
 //! 
 //! 本文件提供可运行的基准测试，对比不同实现的性能特征。
 
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{criterion_group, criterion_main, Criterion};
+use std::hint::black_box;
+use futures::executor::block_on;
 
 // 导入我们的示例代码
 use c04_generic::rust_190_features::*;

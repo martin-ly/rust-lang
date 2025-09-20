@@ -31,8 +31,8 @@ impl SimpleFactory {
     // 创建产品的方法
     fn create_product(product_type: &str) -> Option<Box<dyn Product>> {
         match product_type {
-            "A" => Some(Box::new(ConcreteProductA::default())),
-            "B" => Some(Box::new(ConcreteProductB::default())),
+            "A" => Some(Box::new(ConcreteProductA)),
+            "B" => Some(Box::new(ConcreteProductB)),
             _ => None,
         }
     }

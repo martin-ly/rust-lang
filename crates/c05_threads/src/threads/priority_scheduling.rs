@@ -135,6 +135,12 @@ pub struct ThreadPriorityScheduler {
     priority_boost_enabled: AtomicBool,
 }
 
+impl Default for ThreadPriorityScheduler {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ThreadPriorityScheduler {
     pub fn new() -> Self {
         Self {
@@ -403,6 +409,12 @@ pub struct RealTimeScheduler {
     scheduler: Arc<ThreadPriorityScheduler>,
     deadline_monitor: Arc<Mutex<HashMap<usize, Instant>>>,
     missed_deadlines: Arc<Mutex<HashMap<usize, usize>>>,
+}
+
+impl Default for RealTimeScheduler {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl RealTimeScheduler {

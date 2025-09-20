@@ -6,17 +6,18 @@ resolver = "3"
 rust-version = "1.90"
 
 [dependencies]
-itertools = "0.13"
+itertools = "0.14.0"
 rayon = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 anyhow = { workspace = true }
 thiserror = { workspace = true }
-array-init = "2"
+array-init = "2.1.0"
 proc_macro_derive = { path = "proc_macro_derive" }
+futures = "0.3.31"
 
 [dev-dependencies]
-criterion = { version = "0.5", features = ["html_reports"] }
+criterion = { workspace = true }
 
 
 [lib]

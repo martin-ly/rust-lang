@@ -286,16 +286,14 @@ impl PacketFilter {
 
         // 检查大小
         let packet_size = packet.payload.len();
-        if let Some(min_size) = self.min_size {
-            if packet_size < min_size {
+        if let Some(min_size) = self.min_size
+            && packet_size < min_size {
                 return false;
             }
-        }
-        if let Some(max_size) = self.max_size {
-            if packet_size > max_size {
+        if let Some(max_size) = self.max_size
+            && packet_size > max_size {
                 return false;
             }
-        }
 
         // 检查序列号
         if let Some((start, end)) = self.sequence_range {

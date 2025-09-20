@@ -546,6 +546,12 @@ pub mod generic_methods {
         items: Vec<T>,
     }
 
+    impl<T> Default for Container<T> {
+        fn default() -> Self {
+            Self::new()
+        }
+    }
+
     impl<T> Container<T> {
         /// 创建新的空容器
         /// 
@@ -1114,6 +1120,12 @@ pub mod advanced_patterns {
         _phantom: PhantomData<T>,
     }
 
+    impl<T> Default for TypeMarker<T> {
+        fn default() -> Self {
+            Self::new()
+        }
+    }
+
     impl<T> TypeMarker<T> {
         /// 创建新的类型标记
         /// 
@@ -1256,6 +1268,12 @@ pub mod advanced_patterns {
     #[derive(Debug)]
     pub struct Builder<T> {
         parts: Vec<T>,
+    }
+
+    impl<T> Default for Builder<T> {
+        fn default() -> Self {
+            Self::new()
+        }
     }
 
     impl<T> Builder<T> {
@@ -1714,7 +1732,7 @@ pub mod rust_189_new_features {
         {
             data.into_iter()
                 .flatten()
-                .filter_map(|x| x)
+                .flatten()
                 .collect()
         }
 

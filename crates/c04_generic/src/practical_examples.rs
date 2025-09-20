@@ -36,6 +36,12 @@ pub mod data_structures {
         count: usize,
     }
 
+    impl<T, const CAPACITY: usize> Default for RingBuffer<T, CAPACITY> {
+        fn default() -> Self {
+            Self::new()
+        }
+    }
+
     impl<T, const CAPACITY: usize> RingBuffer<T, CAPACITY> {
         /// 创建新的环形缓冲区
         pub fn new() -> Self {
@@ -111,6 +117,16 @@ pub mod data_structures {
         access_order: Vec<K>,
     }
 
+    impl<K, V, const CAPACITY: usize> Default for LRUCache<K, V, CAPACITY>
+    where
+            K: Clone + Eq + std::hash::Hash,
+            V: Clone,
+     {
+        fn default() -> Self {
+            Self::new()
+        }
+    }
+
     impl<K, V, const CAPACITY: usize> LRUCache<K, V, CAPACITY>
     where
         K: Clone + Eq + std::hash::Hash,
@@ -178,6 +194,12 @@ pub mod data_structures {
     #[derive(Debug, Clone)]
     pub struct Stack<T> {
         items: Vec<T>,
+    }
+
+    impl<T> Default for Stack<T> {
+        fn default() -> Self {
+            Self::new()
+        }
     }
 
     impl<T> Stack<T> {
@@ -854,6 +876,11 @@ pub mod performance {
         /// 获取缓存大小
         pub fn len(&self) -> usize {
             self.cache.len()
+        }
+
+        /// 检查缓存是否为空
+        pub fn is_empty(&self) -> bool {
+            self.cache.is_empty()
         }
     }
 

@@ -20,6 +20,12 @@ pub struct PerformanceBenchmark {
     results: Arc<Mutex<HashMap<String, Vec<Duration>>>>,
 }
 
+impl Default for PerformanceBenchmark {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl PerformanceBenchmark {
     pub fn new() -> Self {
         Self {
@@ -83,6 +89,12 @@ impl PerformanceBenchmark {
 /// 并行编译优化演示
 pub struct ParallelCompilationDemo {
     workers: usize,
+}
+
+impl Default for ParallelCompilationDemo {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl ParallelCompilationDemo {
@@ -156,6 +168,12 @@ pub struct TraitSolverPerformanceDemo {
     cache: Arc<Mutex<HashMap<String, usize>>>,
 }
 
+impl Default for TraitSolverPerformanceDemo {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl TraitSolverPerformanceDemo {
     pub fn new() -> Self {
         Self {
@@ -214,6 +232,12 @@ impl TraitSolverPerformanceDemo {
 /// 借用检查器性能演示
 pub struct BorrowCheckerPerformanceDemo {
     data: Arc<Mutex<HashMap<String, String>>>,
+}
+
+impl Default for BorrowCheckerPerformanceDemo {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl BorrowCheckerPerformanceDemo {

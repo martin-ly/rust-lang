@@ -71,9 +71,9 @@ impl MiddlewareBuilder {
     }
 
     /// 构建中间件栈
-    pub fn build(self) -> () {
+    pub fn build(self) {
         // 简化的构建实现
-        ()
+        
     }
 }
 
@@ -131,17 +131,17 @@ pub struct AuthConfig {
 /// 简化的中间件函数
 pub fn request_id() -> impl Clone {
     // 简化的请求ID中间件
-    ()
+    
 }
 
 pub fn health_check() -> impl Clone {
     // 简化的健康检查中间件
-    ()
+    
 }
 
 pub fn error_handler() -> impl Clone {
     // 简化的错误处理中间件
-    ()
+    
 }
 
 #[cfg(test)]

@@ -411,6 +411,12 @@ pub struct DeviceManager {
     current_device: String,
 }
 
+impl Default for DeviceManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl DeviceManager {
     pub fn new() -> Self {
         let devices = vec!["cpu".to_string()];

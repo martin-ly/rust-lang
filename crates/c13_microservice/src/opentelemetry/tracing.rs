@@ -58,6 +58,12 @@ pub struct TraceContextPropagator {
     headers: HashMap<String, String>,
 }
 
+impl Default for TraceContextPropagator {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl TraceContextPropagator {
     pub fn new() -> Self {
         Self {
@@ -119,7 +125,7 @@ impl TraceContextPropagator {
 
 // 线程本地追踪上下文存储
 thread_local! {
-    static CURRENT_CONTEXT: RefCell<Option<TraceContext>> = RefCell::new(None);
+    static CURRENT_CONTEXT: RefCell<Option<TraceContext>> = const { RefCell::new(None) };
 }
 
 /// 追踪上下文管理器
@@ -160,6 +166,12 @@ impl TraceContextManager {
             Self::clear_current_context();
         }
         result
+    }
+}
+
+impl Default for TraceContext {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -516,7 +528,7 @@ impl Tracer {
 
                 traces
                     .entry(span.context.trace_id.clone())
-                    .or_insert_with(Vec::new)
+                    .or_default()
                     .push(span_json);
             }
 

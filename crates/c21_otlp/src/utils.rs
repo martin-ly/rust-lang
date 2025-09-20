@@ -8,6 +8,12 @@ use crate::error::Result;
 /// 压缩工具
 pub struct CompressionUtils;
 
+impl Default for CompressionUtils {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl CompressionUtils {
     /// 创建新的压缩工具实例
     pub fn new() -> Self {
@@ -154,11 +160,7 @@ impl TimeUtils {
 
     /// 计算持续时间（纳秒）
     pub fn duration_nanos(start: u64, end: u64) -> u64 {
-        if end >= start {
-            end - start
-        } else {
-            0
-        }
+        end.saturating_sub(start)
     }
 
     /// 格式化持续时间
@@ -332,7 +334,7 @@ impl BatchUtils {
             return total_items;
         }
         
-        (total_items + max_batches - 1) / max_batches
+        total_items.div_ceil(max_batches)
     }
 
     /// 验证批处理大小

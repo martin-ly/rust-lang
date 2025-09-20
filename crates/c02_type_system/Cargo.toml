@@ -40,4 +40,4 @@ serde = { workspace = true }
 serde_json = { workspace = true }
 
 [target.'cfg(not(target_env = "msvc"))'.dependencies]
-jemallocator = ">=0.5.4"
+jemallocator = "0.5.4"

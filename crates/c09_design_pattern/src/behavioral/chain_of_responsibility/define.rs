@@ -13,6 +13,12 @@ pub struct ConcreteHandlerA {
 }
 
 #[allow(unused)]
+impl Default for ConcreteHandlerA {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ConcreteHandlerA {
     pub fn new() -> Self {
         ConcreteHandlerA { next_handler: None }
@@ -44,6 +50,12 @@ pub struct ConcreteHandlerB {
 }
 
 #[allow(unused)]
+impl Default for ConcreteHandlerB {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ConcreteHandlerB {
     pub fn new() -> Self {
         ConcreteHandlerB { next_handler: None }
@@ -75,6 +87,12 @@ pub struct ConcreteHandlerC {
 }
 
 #[allow(unused)]
+impl Default for ConcreteHandlerC {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ConcreteHandlerC {
     pub fn new() -> Self {
         ConcreteHandlerC { next_handler: None }

@@ -94,6 +94,12 @@ pub struct SystemResourceManagerSingleton {
     instance: OnceLock<Arc<Mutex<SystemResourceManager>>>,
 }
 
+impl Default for SystemResourceManagerSingleton {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SystemResourceManagerSingleton {
     pub fn new() -> Self {
         Self {
@@ -600,6 +606,12 @@ impl SystemCommand for CreateDirectoryCommand {
 pub struct SystemCommandManager {
     commands: Vec<Box<dyn SystemCommand>>,
     history: Vec<Box<dyn SystemCommand>>,
+}
+
+impl Default for SystemCommandManager {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl SystemCommandManager {

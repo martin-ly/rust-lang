@@ -104,38 +104,17 @@ impl AppError {
 
     /// 检查是否可重试
     pub fn is_retryable(&self) -> bool {
-        match self {
-            AppError::Network { .. } => true,
-            AppError::Database { .. } => true,
-            AppError::External { .. } => true,
-            AppError::Timeout { .. } => true,
-            AppError::Internal { .. } => true,
-            _ => false,
-        }
+        matches!(self, AppError::Network { .. } | AppError::Database { .. } | AppError::External { .. } | AppError::Timeout { .. } | AppError::Internal { .. })
     }
 
     /// 检查是否为客户端错误
     pub fn is_client_error(&self) -> bool {
-        match self {
-            AppError::Validation { .. } => true,
-            AppError::Authentication { .. } => true,
-            AppError::Authorization { .. } => true,
-            AppError::NotFound { .. } => true,
-            AppError::Conflict { .. } => true,
-            AppError::PayloadTooLarge { .. } => true,
-            AppError::RateLimited { .. } => true,
-            _ => false,
-        }
+        matches!(self, AppError::Validation { .. } | AppError::Authentication { .. } | AppError::Authorization { .. } | AppError::NotFound { .. } | AppError::Conflict { .. } | AppError::PayloadTooLarge { .. } | AppError::RateLimited { .. })
     }
 
     /// 检查是否为服务器错误
     pub fn is_server_error(&self) -> bool {
-        match self {
-            AppError::Internal { .. } => true,
-            AppError::Database { .. } => true,
-            AppError::Config { .. } => true,
-            _ => false,
-        }
+        matches!(self, AppError::Internal { .. } | AppError::Database { .. } | AppError::Config { .. })
     }
 }
 

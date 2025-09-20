@@ -6,7 +6,7 @@
 use std::cell::RefCell;
 
 thread_local! {
-    static COUNTER: RefCell<u32> = RefCell::new(0);
+    static COUNTER: RefCell<u32> = const { RefCell::new(0) };
 }
 
 pub fn tls_increment() -> u32 {
@@ -18,7 +18,7 @@ pub fn tls_increment() -> u32 {
 
 /// 在线程里使用 TLS（3）
 pub fn tls_in_threads() -> (u32, u32) {
-    let h = std::thread::spawn(|| tls_increment());
+    let h = std::thread::spawn(tls_increment);
     let a = tls_increment();
     let b = h.join().unwrap();
     (a, b)

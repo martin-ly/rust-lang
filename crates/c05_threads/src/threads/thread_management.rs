@@ -327,6 +327,12 @@ pub struct Message {
     pub timestamp: Instant,
 }
 
+impl Default for ThreadCommunicationManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ThreadCommunicationManager {
     pub fn new() -> Self {
         Self {
@@ -384,7 +390,9 @@ pub fn demonstrate_thread_management() {
         .map(|i| {
             let manager = manager.clone();
             thread::spawn(move || {
-                let thread_id = manager
+                
+
+                manager
                     .create_thread(format!("TestThread-{}", i), 2, move || {
                         for j in 0..100 {
                             thread::sleep(Duration::from_millis(1));
@@ -393,9 +401,7 @@ pub fn demonstrate_thread_management() {
                             }
                         }
                     })
-                    .unwrap();
-
-                thread_id
+                    .unwrap()
             })
         })
         .collect();

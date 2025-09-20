@@ -194,6 +194,12 @@ impl AsyncResource for FileResource {
     }
 }
 
+impl Default for AsyncResourceManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncResourceManager {
     /// 创建新的异步资源管理器
     pub fn new() -> Self {

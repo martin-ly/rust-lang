@@ -55,7 +55,7 @@ Rust 提供了多种整数类型，位操作可以应用于这些类型。整数
 */
 
 #[allow(unused)]
-pub fn test_bit_operation() -> () {
+pub fn test_bit_operation() {
     let a: u8 = 5; // 二进制: 0000 0101
     let b: u8 = 3; // 二进制: 0000 0011
     println!("--------------------------------");
@@ -110,7 +110,7 @@ pub fn test_bit_operation() -> () {
 */
 
 #[allow(unused)]
-pub fn test_bit_operation_2() -> () {
+pub fn test_bit_operation_2() {
     let signed: i8 = 5; // 有符号整数
     let unsigned: u8 = 5; // 无符号整数
     println!("--------------------------------");

@@ -183,6 +183,12 @@ pub mod enhanced_const_generics {
         len: usize,
     }
 
+    impl<T, const CAPACITY: usize> Default for RingBuffer<T, CAPACITY> {
+        fn default() -> Self {
+            Self::new()
+        }
+    }
+
     impl<T, const CAPACITY: usize> RingBuffer<T, CAPACITY> {
         pub fn new() -> Self {
             Self {
@@ -345,6 +351,12 @@ pub mod enhanced_const_generics {
         shapes: Vec<Box<dyn Drawable>>,
     }
 
+    impl Default for ShapeManager {
+        fn default() -> Self {
+            Self::new()
+        }
+    }
+
     impl ShapeManager {
         pub fn new() -> Self {
             Self {
@@ -436,6 +448,12 @@ pub mod type_inference_improvements {
         _phantom_u: PhantomData<U>,
     }
 
+    impl<T, U> Default for DataConverter<T, U> {
+        fn default() -> Self {
+            Self::new()
+        }
+    }
+
     impl<T, U> DataConverter<T, U> {
         pub fn new() -> Self {
             Self {
@@ -491,7 +509,7 @@ pub mod type_inference_improvements {
         let flattened: Vec<i32> = data
             .into_iter()
             .flatten()
-            .filter_map(|x| x)
+            .flatten()
             .collect();
         
         println!("扁平化结果: {:?}", flattened);
@@ -635,6 +653,12 @@ pub mod new_generic_constraint_syntax {
     /// 通用处理器实现
     pub struct GenericProcessor<T> {
         _phantom: PhantomData<T>,
+    }
+
+    impl<T> Default for GenericProcessor<T> {
+        fn default() -> Self {
+            Self::new()
+        }
     }
 
     impl<T> GenericProcessor<T> {

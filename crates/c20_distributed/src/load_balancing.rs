@@ -275,7 +275,7 @@ impl LeastConnectionsBalancer {
         for server in &self.servers {
             self.server_stats
                 .entry(server.address)
-                .or_insert_with(ServerStats::default);
+                .or_default();
         }
     }
 }
@@ -500,7 +500,7 @@ impl LeastResponseTimeBalancer {
         for server in &self.servers {
             self.server_stats
                 .entry(server.address)
-                .or_insert_with(ServerStats::default);
+                .or_default();
         }
     }
 }
@@ -562,7 +562,7 @@ impl GeographicBalancer {
             if let Some(region) = server.metadata.get("region") {
                 self.location_mapping
                     .entry(region.clone())
-                    .or_insert_with(Vec::new)
+                    .or_default()
                     .push(server.address);
             }
         }

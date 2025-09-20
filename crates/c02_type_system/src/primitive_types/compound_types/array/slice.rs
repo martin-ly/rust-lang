@@ -47,7 +47,7 @@
 */
 
 #[allow(unused)]
-pub fn test_array_slice_define() -> () {
+pub fn test_array_slice_define() {
     // 定义一个数组
     let arr = [1, 2, 3, 4, 5];
 
@@ -73,21 +73,21 @@ pub fn test_array_slice_define() -> () {
 }
 
 #[allow(unused)]
-pub fn test_array_slice() -> () {
+pub fn test_array_slice() {
     let numbers: [i32; 5] = [1, 2, 3, 4, 5];
     let slice: &[i32] = &numbers[1..3]; // 创建一个从索引 1 到索引 3 的切片
     println!("Slice: {:?}", slice); // 打印: Slice: [2, 3]
 }
 
 #[allow(unused)]
-pub fn test_array_slice_str() -> () {
+pub fn test_array_slice_str() {
     let fruits: [&str; 4] = ["Apple", "Banana", "Cherry", "Date"];
     let slice: &[&str] = &fruits[1..3]; // 创建一个从索引 1 到索引 3 的切片
     println!("Slice: {:?}", slice); // 打印: Slice: ["Banana", "Cherry"]
 }
 
 #[allow(unused)]
-pub fn test_array_slice_string() -> () {
+pub fn test_array_slice_string() {
     let fruits: [String; 4] = [
         String::from("Apple"),
         String::from("Banana"),
@@ -100,7 +100,7 @@ pub fn test_array_slice_string() -> () {
 }
 
 #[allow(unused)]
-pub fn test_array_slice_string_mut_ref() -> () {
+pub fn test_array_slice_string_mut_ref() {
     let mut fruits: [String; 4] = [
         String::from("Apple"),
         String::from("Banana"),
@@ -114,7 +114,7 @@ pub fn test_array_slice_string_mut_ref() -> () {
 }
 
 #[allow(unused)]
-pub fn test_slice_assign() -> () {
+pub fn test_slice_assign() {
     let arr = [10, 20, 30, 40, 50];
     println!("Original array: {:?}", arr);
     // 创建一个不可变切片，引用数组的后 3 个元素
@@ -136,7 +136,7 @@ pub fn test_slice_assign() -> () {
 }
 
 #[allow(unused)]
-pub fn test_mut_slice_assign() -> () {
+pub fn test_mut_slice_assign() {
     let mut arr = [10, 20, 30, 40, 50];
     println!("Original array: {:?}", arr);
 
@@ -162,7 +162,7 @@ pub fn test_mut_slice_assign() -> () {
 }
 
 #[allow(unused)]
-pub fn test_slice_to_vec() -> () {
+pub fn test_slice_to_vec() {
     // 定义一个向量
     let vec = vec![1, 2, 3, 4, 5];
     println!("Original vector: {:?}", vec);
@@ -186,7 +186,7 @@ pub fn test_slice_to_vec() -> () {
 }
 
 #[allow(unused)]
-pub fn test_slice_iter() -> () {
+pub fn test_slice_iter() {
     let mut arr = [1, 2, 3, 4, 5];
     println!("Original array: {:?}", arr);
 

@@ -32,7 +32,7 @@ uuid = { workspace = true }
 chrono = { workspace = true }
 
 # 随机数生成
-fastrand = "2.0"
+fastrand = "2.0.0"
 
 # 图算法
 petgraph = { workspace = true }
@@ -40,20 +40,20 @@ petgraph = { workspace = true }
 # 已裁剪：并行计算
 
 # 数值计算
-num-traits = "0.2"
-num-derive = "0.3"
+num-traits = "0.2.0"
+num-derive = "0.3.0"
 
 # 统计计算
-statrs = "0.18"
+statrs = "0.18.0"
 
 # 数学函数
-libm = "0.2"
+libm = "0.2.0"
 
 # 运行时/示例适配基础依赖（对齐到 workspace 或最新主线）
 tokio = { workspace = true, features = ["rt-multi-thread", "sync", "time"], optional = true }
 tokio-util = { workspace = true, features = ["rt"], optional = true }
-async-std = { version = "1", features = ["attributes"], optional = true }
-async-channel = { version = "2", optional = true }
+async-std = { version = "1.0.0", features = ["attributes"], optional = true }
+async-channel = { version = "2.0.0", optional = true }
 tower = { workspace = true, features = ["limit", "timeout", "retry", "util"], optional = true }
 http = { workspace = true, optional = true }
 hyper = { workspace = true, features = ["client", "http1"], optional = true }
@@ -69,10 +69,10 @@ proptest = { workspace = true }
 tempfile = { workspace = true }
 
 # 文档测试
-doc-comment = "0.3"
+doc-comment = "0.3.0"
 
 # 并发模型验证
-loom = "0.7"
+loom = "0.7.0"
 
 [features]
 default = ["std"]

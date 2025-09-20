@@ -37,6 +37,12 @@ pub struct OptimizedVector<T, const N: usize> {
     len: usize,
 }
 
+impl<T: Copy + Default, const N: usize> Default for OptimizedVector<T, N> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<T: Copy + Default, const N: usize> OptimizedVector<T, N> {
     pub fn new() -> Self {
         Self {

@@ -23,6 +23,12 @@ pub struct PerformanceBenchmark {
     results: Arc<Mutex<HashMap<String, Vec<Duration>>>>,
 }
 
+impl Default for PerformanceBenchmark {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl PerformanceBenchmark {
     /// 创建新的性能基准测试工具
     pub fn new() -> Self {
@@ -265,6 +271,12 @@ impl UnoptimizedStruct {
 /// 展示Rust 1.90编译时计算的增强功能。
 pub struct CompileTimeComputation {
     pub values: [i32; 10],
+}
+
+impl Default for CompileTimeComputation {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl CompileTimeComputation {

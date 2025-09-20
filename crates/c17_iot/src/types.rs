@@ -142,6 +142,12 @@ pub struct TaskId {
     pub id: u64,
 }
 
+impl Default for TaskId {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl TaskId {
     /// 创建新任务ID / Create New Task ID
     pub fn new() -> Self {
@@ -404,6 +410,12 @@ pub struct PowerOptimizationResult {
     pub total_energy_saved: f32,
     /// 总体性能影响 / Overall Performance Impact
     pub overall_performance_impact: PerformanceImpact,
+}
+
+impl Default for PowerOptimizationResult {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl PowerOptimizationResult {
@@ -798,14 +810,11 @@ impl Lwm2mObject {
             .instances
             .iter_mut()
             .find(|i| i.instance_id == instance_id)
-        {
-            if let Some(res) = inst.resources.iter_mut().find(|r| r.id == resource_id) {
-                if res.writable {
+            && let Some(res) = inst.resources.iter_mut().find(|r| r.id == resource_id)
+                && res.writable {
                     res.value = Some(value);
                     return true;
                 }
-            }
-        }
         false
     }
 }
@@ -846,12 +855,10 @@ impl UaObjectNode {
             .variables
             .iter_mut()
             .find(|v| v.browse_name == browse_name)
-        {
-            if v.writable {
+            && v.writable {
                 v.value = value;
                 return true;
             }
-        }
         false
     }
 }

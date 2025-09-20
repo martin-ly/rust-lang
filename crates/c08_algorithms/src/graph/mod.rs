@@ -678,9 +678,7 @@ pub fn floyd_reconstruct_path(
     v: usize,
     next: &[Vec<Option<usize>>],
 ) -> Option<Vec<usize>> {
-    if next[u][v].is_none() {
-        return None;
-    }
+    next[u][v]?;
     let mut path = vec![u];
     let mut cur = u;
     while cur != v {
@@ -810,12 +808,11 @@ pub fn min_vertex_cover_bipartite(
         for &v in &adj[u] {
             if !vis_v[v] && pair_u[u] != Some(v) {
                 vis_v[v] = true;
-                if let Some(u2) = pair_v[v] {
-                    if !vis_u[u2] {
+                if let Some(u2) = pair_v[v]
+                    && !vis_u[u2] {
                         vis_u[u2] = true;
                         q.push_back(u2);
                     }
-                }
             }
         }
     }
@@ -1734,7 +1731,7 @@ impl<T: Eq + Hash + Clone> HeavyLightDecomposition<T> {
                 .unwrap_or_else(|| b.clone());
         }
 
-        len += (self.position[&a] as i32 - self.position[&b] as i32).abs() as usize;
+        len += (self.position[&a] as i32 - self.position[&b] as i32).unsigned_abs() as usize;
         len
     }
 

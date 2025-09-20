@@ -70,7 +70,7 @@ impl ParallelSort {
 
             // 并行重排
             let mut output = vec![0; arr.len()];
-            for (_i, &num) in arr.iter().enumerate() {
+            for &num in arr.iter() {
                 let digit = ((num >> shift) & 0xFF) as usize;
                 let pos = counts[digit] - 1;
                 output[pos] = num;
@@ -160,7 +160,7 @@ impl DistributedAlgorithms {
         G: Fn(V, U) -> V + Send + Sync,
     {
         // 数据分片
-        let chunk_size = (data.len() + num_workers - 1) / num_workers;
+        let chunk_size = data.len().div_ceil(num_workers);
         let chunks: Vec<Vec<T>> = data
             .chunks(chunk_size)
             .map(|chunk| chunk.to_vec())
@@ -248,11 +248,10 @@ where
 
     pub fn put(&self, key: K, value: V) {
         let node_id = self.hash_key(&key);
-        if let Some(node) = self.nodes.get(&node_id) {
-            if let Ok(mut node_data) = node.lock() {
+        if let Some(node) = self.nodes.get(&node_id)
+            && let Ok(mut node_data) = node.lock() {
                 node_data.insert(key, value);
             }
-        }
     }
 
     pub fn get(&self, key: &K) -> Option<V> {
@@ -583,12 +582,10 @@ impl DecisionTree {
                 } else {
                     0.0
                 }
+            } else if let Some(ref right) = node.right {
+                self.predict_recursive(right, features)
             } else {
-                if let Some(ref right) = node.right {
-                    self.predict_recursive(right, features)
-                } else {
-                    0.0
-                }
+                0.0
             }
         } else {
             0.0
@@ -662,13 +659,13 @@ impl RSA {
         if n == 2 {
             return true;
         }
-        if n % 2 == 0 {
+        if n.is_multiple_of(2) {
             return false;
         }
 
         let mut d = n - 1;
         let mut s = 0;
-        while d % 2 == 0 {
+        while d.is_multiple_of(2) {
             d /= 2;
             s += 1;
         }
@@ -908,6 +905,12 @@ pub struct SHA256 {
     state: [u32; 8],
 }
 
+impl Default for SHA256 {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SHA256 {
     pub fn new() -> Self {
         Self {
@@ -924,7 +927,7 @@ impl SHA256 {
 
         // 填充
         message.push(0x80);
-        while (message.len() + 8) % 64 != 0 {
+        while !(message.len() + 8).is_multiple_of(64) {
             message.push(0x00);
         }
 

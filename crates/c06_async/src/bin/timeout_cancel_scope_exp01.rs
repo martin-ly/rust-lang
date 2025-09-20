@@ -6,10 +6,7 @@ async fn with_timeout_cancel<F, T>(dur: Duration, fut: F) -> Option<T>
 where
     F: Future<Output = T>,
 {
-    match tokio::time::timeout(dur, fut).await {
-        Ok(v) => Some(v),
-        Err(_) => None,
-    }
+    (tokio::time::timeout(dur, fut).await).ok()
 }
 
 #[tokio::main(flavor = "multi_thread", worker_threads = 2)]
@@ -34,7 +31,7 @@ async fn main() {
         reg,
     ));
 
-    if with_timeout_cancel(Duration::from_millis(200), async { t.await })
+    if with_timeout_cancel(Duration::from_millis(200), t)
         .await
         .is_none()
     {

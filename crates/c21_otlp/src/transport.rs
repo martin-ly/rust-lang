@@ -242,7 +242,7 @@ impl HttpTransport {
 
     /// 构建HTTP请求
     fn build_request(&self, data: Vec<u8>) -> Result<reqwest::RequestBuilder> {
-        let mut request = self.client.post(&self.config.http_endpoint())
+        let mut request = self.client.post(self.config.http_endpoint())
             .header("content-type", "application/json")
             .body(data);
 

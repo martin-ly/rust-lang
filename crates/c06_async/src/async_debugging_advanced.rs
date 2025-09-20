@@ -281,12 +281,11 @@ impl AsyncExecutionFlowManager {
         
         {
             let mut flows = self.flows.write().await;
-            if let Some(flow) = flows.get_mut(flow_id) {
-                if let Some(step) = flow.steps.iter_mut().find(|s| s.step_id == step_id) {
+            if let Some(flow) = flows.get_mut(flow_id)
+                && let Some(step) = flow.steps.iter_mut().find(|s| s.step_id == step_id) {
                     step.end_time = Some(end_time);
                     step.status = StepStatus::Completed;
                 }
-            }
         }
         
         self.event_sender.send(FlowEvent::StepCompleted(
@@ -309,13 +308,12 @@ impl AsyncExecutionFlowManager {
         
         {
             let mut flows = self.flows.write().await;
-            if let Some(flow) = flows.get_mut(flow_id) {
-                if let Some(step) = flow.steps.iter_mut().find(|s| s.step_id == step_id) {
+            if let Some(flow) = flows.get_mut(flow_id)
+                && let Some(step) = flow.steps.iter_mut().find(|s| s.step_id == step_id) {
                     step.end_time = Some(end_time);
                     step.status = StepStatus::Failed;
                     step.error = Some(error.clone());
                 }
-            }
         }
         
         self.event_sender.send(FlowEvent::StepFailed(
@@ -432,6 +430,12 @@ pub struct SystemMetrics {
     pub failed_tasks: u64,
     pub network_connections: u64,
     pub database_connections: u64,
+}
+
+impl Default for AsyncMetricsCollector {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AsyncMetricsCollector {

@@ -35,10 +35,7 @@ pub fn join_with_timeout_simulated(timeout_ms: u64) -> Option<i32> {
         thread::sleep(Duration::from_millis(50));
         let _ = tx.send(7);
     });
-    match rx.recv_timeout(Duration::from_millis(timeout_ms)) {
-        Ok(v) => Some(v),
-        Err(_) => None,
-    }
+    rx.recv_timeout(Duration::from_millis(timeout_ms)).ok()
 }
 
 /// join 错误处理与 panic 传播（4）
@@ -46,10 +43,7 @@ pub fn join_with_panic_handling() -> bool {
     let handle = thread::spawn(|| {
         panic!("boom");
     });
-    match handle.join() {
-        Ok(_) => false,
-        Err(_) => true,
-    }
+    handle.join().is_err()
 }
 
 #[cfg(test)]

@@ -82,7 +82,7 @@ async fn main() -> anyhow::Result<()> {
                 )
                 .await;
             handled += 1;
-            if handled % 50 == 0 { tracing::info!(handled, "progress"); }
+            if handled.is_multiple_of(50) { tracing::info!(handled, "progress"); }
             let el = start.elapsed().as_secs_f64(); proc_latency.observe(el);
             if res.is_err() { errors.with_label_values(&["worker"]).inc(); } else { ingested.with_label_values(&["done"]).inc(); }
             tracing::info!(job = job.as_str(), ?res, "ingest handled");

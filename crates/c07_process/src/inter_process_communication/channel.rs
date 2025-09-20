@@ -63,7 +63,7 @@ impl IpcChannel for FileSystemChannel {
 
         // 写入通道文件
         let mut file = OpenOptions::new()
-            .write(true)
+            
             .append(true)
             .open(&file_path)
             .map_err(|e| IpcError::SendFailed(e.to_string()))?;

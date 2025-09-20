@@ -232,12 +232,7 @@ pub fn jump_search_sync<T: Ord>(data: &[T], target: &T) -> Option<usize> {
         }
         curr = (curr + step).min(n);
     }
-    for i in prev..curr {
-        if &data[i] == target {
-            return Some(i);
-        }
-    }
-    None
+    (prev..curr).find(|&i| &data[i] == target)
 }
 
 pub async fn jump_search_async<T: Ord + Send + Sync + 'static>(

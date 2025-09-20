@@ -253,6 +253,12 @@ pub struct PerformanceData {
     pub last_updated: u64,
 }
 
+impl Default for PerformanceMonitor {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl PerformanceMonitor {
     pub fn new() -> Self {
         Self {
@@ -320,16 +326,14 @@ impl PerformanceMonitor {
 
     /// 检查性能告警
     fn check_performance_alerts(&self, operation: &str, duration_ms: f64) {
-        if let Ok(thresholds) = self.alert_thresholds.read() {
-            if let Some(threshold) = thresholds.get(operation) {
-                if duration_ms > *threshold {
+        if let Ok(thresholds) = self.alert_thresholds.read()
+            && let Some(threshold) = thresholds.get(operation)
+                && duration_ms > *threshold {
                     warn!(
                         "Performance alert: {} took {}ms, exceeding threshold of {}ms",
                         operation, duration_ms, threshold
                     );
                 }
-            }
-        }
     }
 
     /// 获取操作性能数据
@@ -443,6 +447,12 @@ impl ToString for ErrorSeverity {
     }
 }
 
+impl Default for ErrorTracker {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ErrorTracker {
     pub fn new() -> Self {
         Self {
@@ -524,20 +534,16 @@ impl ErrorTracker {
 
     /// 检查错误告警
     fn check_error_alerts(&self, error_type: &str) {
-        if let Ok(thresholds) = self.alert_thresholds.read() {
-            if let Some(threshold) = thresholds.get(error_type) {
-                if let Ok(patterns) = self.error_patterns.read() {
-                    if let Some(count) = patterns.get(error_type) {
-                        if *count >= *threshold {
+        if let Ok(thresholds) = self.alert_thresholds.read()
+            && let Some(threshold) = thresholds.get(error_type)
+                && let Ok(patterns) = self.error_patterns.read()
+                    && let Some(count) = patterns.get(error_type)
+                        && *count >= *threshold {
                             error!(
                                 "Error alert: {} errors of type '{}' exceeded threshold of {}",
                                 count, error_type, threshold
                             );
                         }
-                    }
-                }
-            }
-        }
     }
 
     /// 获取错误统计

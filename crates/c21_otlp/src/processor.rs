@@ -114,11 +114,10 @@ impl DataFilter for AttributeFilter {
 
         // 检查排除的属性
         for (key, excluded_value) in &self.excluded_attributes {
-            if let Some(actual_value) = data.resource_attributes.get(key) {
-                if actual_value == excluded_value {
+            if let Some(actual_value) = data.resource_attributes.get(key)
+                && actual_value == excluded_value {
                     return false;
                 }
-            }
         }
 
         true
@@ -389,11 +388,9 @@ impl OtlpProcessor {
     ) -> Result<Vec<TelemetryData>> {
         // 应用过滤器
         if !filters.is_empty() {
-            batch = batch.into_iter()
-                .filter(|data| {
+            batch.retain(|data| {
                     filters.iter().all(|filter| filter.filter(data))
-                })
-                .collect();
+                });
         }
 
         // 应用聚合器

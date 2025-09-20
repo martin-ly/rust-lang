@@ -444,6 +444,12 @@ pub struct CrossPlatformThreadFeatures {
     macos_thread_pool: macos_threads::MacOSThreadPool,
 }
 
+impl Default for CrossPlatformThreadFeatures {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl CrossPlatformThreadFeatures {
     pub fn new() -> Self {
         Self {

@@ -21,6 +21,12 @@ pub struct LockStats {
     pub contention_count: AtomicUsize,
 }
 
+impl Default for LockStats {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl LockStats {
     pub fn new() -> Self {
         Self {

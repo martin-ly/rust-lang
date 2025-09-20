@@ -149,6 +149,12 @@ pub struct TraitSolverDemo {
     cache: Arc<Mutex<HashMap<String, usize>>>,
 }
 
+impl Default for TraitSolverDemo {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl TraitSolverDemo {
     pub fn new() -> Self {
         Self {
@@ -194,6 +200,12 @@ impl TraitSolverDemo {
 /// 并行前端编译优化演示
 pub struct ParallelFrontendDemo {
     workers: usize,
+}
+
+impl Default for ParallelFrontendDemo {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl ParallelFrontendDemo {

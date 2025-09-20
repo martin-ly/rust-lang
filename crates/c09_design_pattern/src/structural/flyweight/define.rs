@@ -50,6 +50,12 @@ pub struct OptimizedFlyweightFactory {
     id_counter: u32,
 }
 
+impl Default for OptimizedFlyweightFactory {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl OptimizedFlyweightFactory {
     pub fn new() -> Self {
         Self {

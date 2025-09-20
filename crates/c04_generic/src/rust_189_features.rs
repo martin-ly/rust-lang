@@ -81,6 +81,12 @@ pub mod const_generics {
         len: usize,
     }
 
+    impl<T, const N: usize> Default for RingBuffer<T, N> {
+        fn default() -> Self {
+            Self::new()
+        }
+    }
+
     impl<T, const N: usize> RingBuffer<T, N> {
         pub fn new() -> Self {
             // 使用数组初始化需要 Copy/Clone；这里用 Option::None; N>0 时可工作

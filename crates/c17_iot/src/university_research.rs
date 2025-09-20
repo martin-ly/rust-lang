@@ -540,6 +540,12 @@ pub enum WidgetType {
     Text,
 }
 
+impl Default for EdgeIntelligence {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl EdgeIntelligence {
     /// 创建新的边缘智能系统
     pub fn new() -> Self {
@@ -557,12 +563,24 @@ impl EdgeIntelligence {
     }
 }
 
+impl Default for InferenceEngine {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl InferenceEngine {
     pub fn new() -> Self {
         Self {
             models: HashMap::new(),
             inference_pipeline: InferencePipeline::new(),
         }
+    }
+}
+
+impl Default for InferencePipeline {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -576,6 +594,12 @@ impl InferencePipeline {
     }
 }
 
+impl Default for ModelManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ModelManager {
     pub fn new() -> Self {
         Self {
@@ -583,6 +607,12 @@ impl ModelManager {
             model_versions: HashMap::new(),
             update_strategy: UpdateStrategy::RollingUpdate,
         }
+    }
+}
+
+impl Default for DataProcessor {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -596,12 +626,24 @@ impl DataProcessor {
     }
 }
 
+impl Default for PreprocessingPipeline {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl PreprocessingPipeline {
     pub fn new() -> Self {
         Self {
             stages: Vec::new(),
             output_format: DataFormat::JSON,
         }
+    }
+}
+
+impl Default for FeatureExtractor {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -614,6 +656,12 @@ impl FeatureExtractor {
     }
 }
 
+impl Default for FeatureStore {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl FeatureStore {
     pub fn new() -> Self {
         Self {
@@ -623,12 +671,24 @@ impl FeatureStore {
     }
 }
 
+impl Default for DataQualityChecker {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl DataQualityChecker {
     pub fn new() -> Self {
         Self {
             quality_metrics: Vec::new(),
             thresholds: HashMap::new(),
         }
+    }
+}
+
+impl Default for PrivacyPreservingIoT {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -642,12 +702,24 @@ impl PrivacyPreservingIoT {
     }
 }
 
+impl Default for ZeroKnowledgeProofs {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ZeroKnowledgeProofs {
     pub fn new() -> Self {
         Self {
             proof_system: ProofSystem::ZkSNARK,
             verification_keys: HashMap::new(),
         }
+    }
+}
+
+impl Default for DifferentialPrivacy {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -661,6 +733,12 @@ impl DifferentialPrivacy {
     }
 }
 
+impl Default for SecureMPC {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SecureMPC {
     pub fn new() -> Self {
         Self {
@@ -668,6 +746,12 @@ impl SecureMPC {
             participants: Vec::new(),
             security_parameter: 128,
         }
+    }
+}
+
+impl Default for DistributedIoT {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -681,6 +765,12 @@ impl DistributedIoT {
     }
 }
 
+impl Default for ConsensusAlgorithm {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ConsensusAlgorithm {
     pub fn new() -> Self {
         Self {
@@ -688,6 +778,12 @@ impl ConsensusAlgorithm {
             parameters: ConsensusParameters::new(),
             performance_metrics: ConsensusMetrics::new(),
         }
+    }
+}
+
+impl Default for ConsensusParameters {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -701,6 +797,12 @@ impl ConsensusParameters {
     }
 }
 
+impl Default for ConsensusMetrics {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ConsensusMetrics {
     pub fn new() -> Self {
         Self {
@@ -708,6 +810,12 @@ impl ConsensusMetrics {
             throughput: 0.0,
             consensus_rate: 0.0,
         }
+    }
+}
+
+impl Default for FaultTolerance {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -721,6 +829,12 @@ impl FaultTolerance {
     }
 }
 
+impl Default for FailureDetection {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl FailureDetection {
     pub fn new() -> Self {
         Self {
@@ -728,6 +842,12 @@ impl FailureDetection {
             timeout_threshold: Duration::from_secs(5),
             detection_algorithm: DetectionAlgorithm::Heartbeat,
         }
+    }
+}
+
+impl Default for RecoveryMechanism {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -741,6 +861,12 @@ impl RecoveryMechanism {
     }
 }
 
+impl Default for RedundancyStrategy {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl RedundancyStrategy {
     pub fn new() -> Self {
         Self {
@@ -748,6 +874,12 @@ impl RedundancyStrategy {
             placement_strategy: PlacementStrategy::RoundRobin,
             consistency_level: ConsistencyLevel::Strong,
         }
+    }
+}
+
+impl Default for ScalabilityManager {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -761,6 +893,12 @@ impl ScalabilityManager {
     }
 }
 
+impl Default for AutoScaling {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AutoScaling {
     pub fn new() -> Self {
         Self {
@@ -768,6 +906,12 @@ impl AutoScaling {
             metrics: Vec::new(),
             thresholds: HashMap::new(),
         }
+    }
+}
+
+impl Default for LoadBalancing {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -781,6 +925,12 @@ impl LoadBalancing {
     }
 }
 
+impl Default for ResourceMonitoring {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ResourceMonitoring {
     pub fn new() -> Self {
         Self {
@@ -788,6 +938,12 @@ impl ResourceMonitoring {
             alerting: AlertingSystem::new(),
             dashboards: Vec::new(),
         }
+    }
+}
+
+impl Default for MetricsCollector {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -801,6 +957,12 @@ impl MetricsCollector {
     }
 }
 
+impl Default for AlertingSystem {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AlertingSystem {
     pub fn new() -> Self {
         Self {
@@ -808,6 +970,12 @@ impl AlertingSystem {
             notification_channels: Vec::new(),
             escalation_policy: EscalationPolicy::new(),
         }
+    }
+}
+
+impl Default for EscalationPolicy {
+    fn default() -> Self {
+        Self::new()
     }
 }
 

@@ -480,7 +480,7 @@ pub mod control_flow {
         }
 
         // 4. for 循环 - 数组/向量
-        let numbers = vec![10, 20, 30, 40, 50];
+        let numbers = [10, 20, 30, 40, 50];
         println!("for 循环 - 向量:");
         for (index, value) in numbers.iter().enumerate() {
             println!("  [{}] = {}", index, value);

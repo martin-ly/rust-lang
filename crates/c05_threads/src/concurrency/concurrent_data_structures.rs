@@ -12,6 +12,12 @@ pub struct ConcurrentCounter {
     count: AtomicUsize,
 }
 
+impl Default for ConcurrentCounter {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ConcurrentCounter {
     /// 创建新的并发计数器
     pub const fn new() -> Self {

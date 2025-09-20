@@ -110,7 +110,7 @@ impl PaginationParams {
     pub fn new(page: u32, page_size: u32) -> Self {
         Self {
             page: page.max(1),
-            page_size: page_size.max(1).min(1000), // 限制最大页面大小
+            page_size: page_size.clamp(1, 1000), // 限制最大页面大小
             total: None,
         }
     }
@@ -295,23 +295,23 @@ pub mod time {
     pub fn parse_duration(s: &str) -> Option<Duration> {
         let s = s.trim();
 
-        if s.ends_with("ms") {
-            s[..s.len() - 2]
+        if let Some(stripped) = s.strip_suffix("ms") {
+            stripped
                 .parse::<u64>()
                 .ok()
                 .map(Duration::from_millis)
-        } else if s.ends_with("s") {
-            s[..s.len() - 1]
+        } else if let Some(stripped) = s.strip_suffix("s") {
+            stripped
                 .parse::<u64>()
                 .ok()
                 .map(Duration::from_secs)
-        } else if s.ends_with("m") {
-            s[..s.len() - 1]
+        } else if let Some(stripped) = s.strip_suffix("m") {
+            stripped
                 .parse::<u64>()
                 .ok()
                 .map(|m| Duration::from_secs(m * 60))
-        } else if s.ends_with("h") {
-            s[..s.len() - 1]
+        } else if let Some(stripped) = s.strip_suffix("h") {
+            stripped
                 .parse::<u64>()
                 .ok()
                 .map(|h| Duration::from_secs(h * 3600))

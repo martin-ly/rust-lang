@@ -65,6 +65,12 @@ pub struct EntityManager {
     next_id: EntityId,
 }
 
+impl Default for EntityManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl EntityManager {
     pub fn new() -> Self {
         Self {
@@ -88,11 +94,11 @@ impl EntityManager {
 
     pub fn get_component<T: Component + 'static>(&self, entity_id: EntityId) -> Option<&T> {
         self.entities.get(&entity_id).and_then(|components| {
-            components.get(&TypeId::of::<T>()).and_then(|component| {
+            components.get(&TypeId::of::<T>()).map(|component| {
                 // 使用unsafe来绕过类型检查，因为我们知道类型是正确的
                 unsafe {
                     let ptr = component.as_ref() as *const dyn Component as *const T;
-                    Some(&*ptr)
+                    &*ptr
                 }
             })
         })
@@ -105,11 +111,11 @@ impl EntityManager {
         self.entities.get_mut(&entity_id).and_then(|components| {
             components
                 .get_mut(&TypeId::of::<T>())
-                .and_then(|component| {
+                .map(|component| {
                     // 使用unsafe来绕过类型检查，因为我们知道类型是正确的
                     unsafe {
                         let ptr = component.as_mut() as *mut dyn Component as *mut T;
-                        Some(&mut *ptr)
+                        &mut *ptr
                     }
                 })
         })
@@ -173,8 +179,8 @@ impl System for RenderSystem {
             if let (Some(position), Some(renderable)) = (
                 entity_manager.get_component::<Position>(entity_id),
                 entity_manager.get_component::<Renderable>(entity_id),
-            ) {
-                if renderable.visible {
+            )
+                && renderable.visible {
                     println!(
                         "渲染实体 {}: 位置({:.2}, {:.2}, {:.2}), 网格: {}, 纹理: {}",
                         entity_id,
@@ -185,7 +191,6 @@ impl System for RenderSystem {
                         renderable.texture_id
                     );
                 }
-            }
         }
     }
 }
@@ -224,6 +229,12 @@ pub struct EventManager {
     observers: HashMap<TypeId, Vec<Box<dyn Observer>>>,
 }
 
+impl Default for EventManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl EventManager {
     pub fn new() -> Self {
         Self {
@@ -236,7 +247,7 @@ impl EventManager {
         let event_type_id = TypeId::of::<GameEvent>();
         self.observers
             .entry(event_type_id)
-            .or_insert_with(Vec::new)
+            .or_default()
             .push(Box::new(observer));
     }
 
@@ -253,6 +264,12 @@ impl EventManager {
 /// 成就系统（观察者）
 pub struct AchievementSystem {
     achievements: HashMap<String, bool>,
+}
+
+impl Default for AchievementSystem {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AchievementSystem {
@@ -341,6 +358,12 @@ pub struct MainMenuState {
     options: Vec<String>,
 }
 
+impl Default for MainMenuState {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl MainMenuState {
     pub fn new() -> Self {
         Self {
@@ -412,6 +435,12 @@ impl MainMenuState {
 pub struct PlayingState {
     player_health: f32,
     score: u32,
+}
+
+impl Default for PlayingState {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl PlayingState {
@@ -536,6 +565,12 @@ impl GameState for GameOverState {
 /// 设置状态
 pub struct SettingsState;
 
+impl Default for SettingsState {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SettingsState {
     pub fn new() -> Self {
         Self
@@ -588,6 +623,12 @@ impl GameState for ExitState {
 /// 游戏状态管理器
 pub struct GameStateManager {
     current_state: Option<Box<dyn GameState>>,
+}
+
+impl Default for GameStateManager {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl GameStateManager {

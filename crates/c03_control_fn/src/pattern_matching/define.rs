@@ -14,7 +14,7 @@ pub fn test_pattern_match() {
     fn describe_number01(num: i32) -> &'static str {
         match num {
             0 => "零",
-            1 | 2 | 3 => "小数字",
+            1..=3 => "小数字",
             _ => "大数字",
         }
     }
@@ -50,7 +50,7 @@ pub fn test_pattern_match() {
     使用模式匹配：解构泛型具体化，类型inference；具体类型的值，值的判断等。
 */
 #[allow(unused)]
-pub fn test_pattern_match_2() -> () {
+pub fn test_pattern_match_2() {
     let value = Some(10);
     match value {
         Some(x) => println!("Value is: {}", x), // 控制结构
@@ -62,7 +62,7 @@ pub fn test_pattern_match_2() -> () {
 match可以用来解构元组、结构体和枚举等复杂数据类型。
 */
 #[allow(unused)]
-pub fn test_pattern_match_3() -> () {
+pub fn test_pattern_match_3() {
     enum Shape {
         Circle(f64),
         Rectangle(f64, f64),
@@ -93,7 +93,7 @@ pub fn test_pattern_match_3() -> () {
     泛型解构
 */
 #[allow(unused)]
-pub fn test_pattern_match_4() -> () {
+pub fn test_pattern_match_4() {
     // 定义一个泛型结构体
     struct Wrapper<T> {
         value: T,

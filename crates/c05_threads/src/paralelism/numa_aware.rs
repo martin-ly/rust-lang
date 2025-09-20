@@ -30,6 +30,12 @@ pub struct NumaTopology {
     pub total_memory: usize,
 }
 
+impl Default for NumaTopology {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl NumaTopology {
     /// 创建新的NUMA拓扑
     pub fn new() -> Self {
@@ -75,6 +81,12 @@ pub struct NumaAwareTaskAllocator {
     node_workloads: Arc<Mutex<HashMap<usize, usize>>>,
 }
 
+impl Default for NumaAwareTaskAllocator {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl NumaAwareTaskAllocator {
     /// 创建新的NUMA感知任务分配器
     pub fn new() -> Self {
@@ -109,11 +121,10 @@ impl NumaAwareTaskAllocator {
     /// 完成任务，减少工作负载
     pub fn complete_task(&self, node_id: usize) {
         let mut workloads = self.node_workloads.lock().unwrap();
-        if let Some(workload) = workloads.get_mut(&node_id) {
-            if *workload > 0 {
+        if let Some(workload) = workloads.get_mut(&node_id)
+            && *workload > 0 {
                 *workload -= 1;
             }
-        }
     }
 
     /// 获取NUMA节点工作负载
@@ -179,6 +190,12 @@ pub struct NumaAwareParallelCompute {
     topology: NumaTopology,
 }
 
+impl Default for NumaAwareParallelCompute {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl NumaAwareParallelCompute {
     /// 创建新的NUMA感知并行计算实例
     pub fn new() -> Self {
@@ -207,14 +224,12 @@ impl NumaAwareParallelCompute {
             let node_id = task_assignments[task_id];
             node_tasks
                 .entry(node_id)
-                .or_insert_with(Vec::new)
+                .or_default()
                 .push((task_id, task));
         }
 
         // 在每个NUMA节点上并行执行任务
-        let handles: Vec<_> = node_tasks
-            .into_iter()
-            .map(|(_node_id, tasks)| {
+        let handles: Vec<_> = node_tasks.into_values().map(|tasks| {
                 let results = results.clone();
 
                 thread::spawn(move || {
@@ -257,13 +272,11 @@ impl NumaAwareParallelCompute {
         let mut node_data: HashMap<usize, Vec<R>> = HashMap::new();
         for (i, item) in data.into_iter().enumerate() {
             let node_id = i % self.topology.node_count();
-            node_data.entry(node_id).or_insert_with(Vec::new).push(item);
+            node_data.entry(node_id).or_default().push(item);
         }
 
         // 在每个NUMA节点上并行归约
-        let node_results: Vec<_> = node_data
-            .into_iter()
-            .map(|(_node_id, data)| {
+        let node_results: Vec<_> = node_data.into_values().map(|data| {
                 let reduce_fn = reduce_fn.clone();
                 thread::spawn(move || {
                     if data.is_empty() {
@@ -310,14 +323,12 @@ impl NumaAwareParallelCompute {
             let node_id = i % self.topology.node_count();
             node_data
                 .entry(node_id)
-                .or_insert_with(Vec::new)
+                .or_default()
                 .push((i, item));
         }
 
         // 在每个NUMA节点上并行映射
-        let handles: Vec<_> = node_data
-            .into_iter()
-            .map(|(_node_id, data)| {
+        let handles: Vec<_> = node_data.into_values().map(|data| {
                 let results = results.clone();
                 let map_fn = map_fn.clone();
 
@@ -396,6 +407,12 @@ pub struct NumaAwareMemoryAllocator {
     node_allocations: Arc<Mutex<HashMap<usize, Vec<usize>>>>,
 }
 
+impl Default for NumaAwareMemoryAllocator {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl NumaAwareMemoryAllocator {
     /// 创建新的NUMA感知内存分配器
     pub fn new() -> Self {
@@ -412,7 +429,7 @@ impl NumaAwareMemoryAllocator {
         }
 
         let mut allocations = self.node_allocations.lock().unwrap();
-        let node_allocations = allocations.entry(node_id).or_insert_with(Vec::new);
+        let node_allocations = allocations.entry(node_id).or_default();
 
         // 简化的内存分配：返回一个虚拟地址
         let address = node_allocations.len() * size;
@@ -428,12 +445,11 @@ impl NumaAwareMemoryAllocator {
         }
 
         let mut allocations = self.node_allocations.lock().unwrap();
-        if let Some(node_allocations) = allocations.get_mut(&node_id) {
-            if address < node_allocations.len() {
+        if let Some(node_allocations) = allocations.get_mut(&node_id)
+            && address < node_allocations.len() {
                 node_allocations[address] = 0; // 标记为已释放
                 return Ok(());
             }
-        }
 
         Err(format!("无效的内存地址: {}", address))
     }

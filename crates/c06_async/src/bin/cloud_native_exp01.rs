@@ -69,7 +69,7 @@ impl ConfigManager {
         // 通知所有观察者
         let mut watchers = self.watchers.lock().await;
         watchers.retain(|sender| {
-            if let Err(_) = sender.blocking_send(config.clone()) {
+            if sender.blocking_send(config.clone()).is_err() {
                 false // 移除无效的观察者
             } else {
                 true

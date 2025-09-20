@@ -46,9 +46,8 @@ impl MemoryPool {
     }
 
     pub fn allocate(&mut self) -> Option<*mut u8> {
-        self.free_blocks.pop().map(|block| {
+        self.free_blocks.pop().inspect(|&block| {
             self.allocated_blocks.insert(block, true);
-            block
         })
     }
 
@@ -170,6 +169,12 @@ pub struct LockFreeCounter {
     value: AtomicUsize,
 }
 
+impl Default for LockFreeCounter {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl LockFreeCounter {
     pub fn new() -> Self {
         Self {
@@ -289,7 +294,7 @@ impl ConcurrentOptimizedProcessor {
 
     pub fn process_data_parallel(&self, data: Vec<i32>) -> Vec<i32> {
         let chunk_size =
-            (data.len() + self.thread_pool.workers.len() - 1) / self.thread_pool.workers.len();
+            data.len().div_ceil(self.thread_pool.workers.len());
         let results_arc = Arc::new(Mutex::new(vec![0; data.len()]));
 
         for (i, chunk) in data.chunks(chunk_size).enumerate() {
@@ -309,8 +314,8 @@ impl ConcurrentOptimizedProcessor {
         // 等待所有任务完成
         thread::sleep(Duration::from_millis(100));
 
-        let results = Arc::try_unwrap(results_arc).unwrap().into_inner().unwrap();
-        results
+        
+        Arc::try_unwrap(results_arc).unwrap().into_inner().unwrap()
     }
 
     pub fn get_processed_count(&self) -> usize {
@@ -349,6 +354,12 @@ pub const LOOKUP_TABLE: [u32; 10] = [
 pub struct OptimizedContainer<T, const N: usize> {
     data: [T; N],
     len: usize,
+}
+
+impl<T: Default + Copy, const N: usize> Default for OptimizedContainer<T, N> {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl<T: Default + Copy, const N: usize> OptimizedContainer<T, N> {
@@ -403,6 +414,12 @@ pub struct PerformanceProfiler {
     current_measurements: HashMap<String, Instant>,
 }
 
+impl Default for PerformanceProfiler {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl PerformanceProfiler {
     pub fn new() -> Self {
         Self {
@@ -421,7 +438,7 @@ impl PerformanceProfiler {
             let duration = start_time.elapsed();
             self.measurements
                 .entry(name.to_string())
-                .or_insert_with(Vec::new)
+                .or_default()
                 .push(duration);
         }
     }
@@ -470,6 +487,12 @@ pub struct BenchmarkRunner {
     profiler: PerformanceProfiler,
 }
 
+impl Default for BenchmarkRunner {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl BenchmarkRunner {
     pub fn new() -> Self {
         Self {
@@ -515,6 +538,12 @@ pub struct MemoryProfiler {
     allocations: HashMap<String, usize>,
     deallocations: HashMap<String, usize>,
     peak_usage: HashMap<String, usize>,
+}
+
+impl Default for MemoryProfiler {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl MemoryProfiler {
@@ -595,7 +624,7 @@ impl PerformanceExamples {
         pool.deallocate(block2);
 
         // 对象池示例
-        let mut object_pool = ObjectPool::new(5, || String::new());
+        let mut object_pool = ObjectPool::new(5, String::new);
         let _obj1 = object_pool.acquire().unwrap();
         let _obj2 = object_pool.acquire().unwrap();
 

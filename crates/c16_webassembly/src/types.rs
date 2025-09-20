@@ -706,11 +706,10 @@ impl Memory {
         }
 
         // 检查最大大小 / Check Maximum Size
-        if let Some(max) = self.maximum {
-            if max < self.initial {
+        if let Some(max) = self.maximum
+            && max < self.initial {
                 return Err(ValidationError::InvalidMemorySize { size: max });
             }
-        }
 
         // 检查数据大小 / Check Data Size
         let expected_size = self.initial * PAGE_SIZE;
@@ -785,11 +784,10 @@ impl Table {
         }
 
         // 检查最大大小 / Check Maximum Size
-        if let Some(max) = self.maximum {
-            if max < self.initial {
+        if let Some(max) = self.maximum
+            && max < self.initial {
                 return Err(ValidationError::InvalidTableSize { size: max });
             }
-        }
 
         // 检查数据大小 / Check Data Size
         if self.data.len() != self.initial as usize {
@@ -1533,7 +1531,7 @@ pub struct VariantCase {
 /// 演示新的生命周期语法检查功能
 /// Demonstrates new lifetime syntax check functionality
 #[allow(dead_code)]
-pub fn lifetime_example<'a>(input: &'a str) -> &'a str {
+pub fn lifetime_example(input: &str) -> &str {
     // Rust 1.89 新特性：使用一致的生命周期标注
     // Rust 1.89 new feature: use consistent lifetime annotations
     input

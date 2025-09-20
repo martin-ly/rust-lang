@@ -36,7 +36,21 @@ where
             data: [T::default(); N],
         }
     }
+}
 
+impl<T, const N: usize> Default for ConstGenericArray<T, N>
+where
+    T: Default + Clone + Copy,
+{
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl<T, const N: usize> ConstGenericArray<T, N>
+where
+    T: Default + Clone + Copy,
+{
     /// 使用推断长度创建数组 / Create array with inferred length
     pub fn with_inferred_length<const M: usize>() -> ConstGenericArray<T, M>
     where

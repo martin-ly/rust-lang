@@ -215,7 +215,7 @@ fn benchmark_rayon_thread_pool(
 
 /// 使用标准线程处理数据
 fn process_data_standard_threads(data: &[i32], thread_count: usize) -> Vec<i32> {
-    let chunk_size = (data.len() + thread_count - 1) / thread_count;
+    let chunk_size = data.len().div_ceil(thread_count);
     let data = Arc::new(data.to_vec());
     let results = Arc::new(Mutex::new(vec![0; data.len()]));
 
@@ -253,7 +253,7 @@ fn process_data_high_performance_thread_pool(
     pool: &HighPerformanceThreadPool,
     data: &[i32],
 ) -> Vec<i32> {
-    let chunk_size = (data.len() + 4 - 1) / 4; // 假设4个工作线程
+    let chunk_size = data.len().div_ceil(4); // 假设4个工作线程
     let mut results = vec![0; data.len()];
 
     let mut tasks: Vec<Box<dyn FnOnce() -> (usize, Vec<i32>) + Send>> = Vec::new();
@@ -636,7 +636,7 @@ pub fn generate_performance_report(results: &[BenchmarkResult]) -> String {
                 result.speedup,
             ));
         }
-        report.push_str("\n");
+        report.push('\n');
     }
 
     report

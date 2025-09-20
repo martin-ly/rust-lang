@@ -34,6 +34,12 @@ pub struct AsyncStateMachine190 {
     transition_count: Arc<Mutex<usize>>,
 }
 
+impl Default for AsyncStateMachine190 {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncStateMachine190 {
     pub fn new() -> Self {
         Self {
@@ -152,6 +158,12 @@ pub trait AsyncResource {
 }
 
 #[allow(unused)]
+impl Default for AsyncResourceManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncResourceManager {
     pub fn new() -> Self {
         Self {

@@ -19,7 +19,7 @@
 */
 
 #[allow(unused)]
-pub fn test_boolean_operation() -> () {
+pub fn test_boolean_operation() {
     let a: bool = true;
     let b: bool = false;
     println!("--------------------------------");

@@ -343,7 +343,7 @@ impl ClusteringMetrics {
         let mut clusters: HashMap<i32, Vec<usize>> = HashMap::new();
         for (idx, &label) in labels.iter().enumerate() {
             if label >= 0 {
-                clusters.entry(label).or_insert_with(Vec::new).push(idx);
+                clusters.entry(label).or_default().push(idx);
             }
         }
 
@@ -406,7 +406,7 @@ impl ClusteringMetrics {
         let mut clusters: HashMap<i32, Vec<usize>> = HashMap::new();
         for (idx, &label) in labels.iter().enumerate() {
             if label >= 0 {
-                clusters.entry(label).or_insert_with(Vec::new).push(idx);
+                clusters.entry(label).or_default().push(idx);
             }
         }
 

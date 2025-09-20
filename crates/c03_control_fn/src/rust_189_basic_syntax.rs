@@ -165,7 +165,7 @@ pub mod let_chains {
         }
 
         // 2. 复杂条件组合
-        let numbers = vec![1, 2, 3, 4, 5];
+        let numbers = [1, 2, 3, 4, 5];
         let threshold = 3;
 
         if let Some(first) = numbers.first() && 
@@ -238,11 +238,11 @@ pub mod let_chains {
         }
 
         // 4. 与守卫条件结合
-        let numbers = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         
         for chunk in numbers.chunks(3) {
             if let [Some(a), Some(b), Some(c)] = [
-                chunk.get(0),
+                chunk.first(),
                 chunk.get(1), 
                 chunk.get(2)
             ] && a + b + c > 10 {
@@ -534,7 +534,7 @@ pub mod enhanced_type_inference {
         println!("泛型数据: {}", data);
 
         // 3. 迭代器链式推断
-        let numbers = vec![1, 2, 3, 4, 5];
+        let numbers = [1, 2, 3, 4, 5];
         let processed: Vec<i32> = numbers
             .iter()
             .filter(|&&x| x % 2 == 0)
@@ -560,8 +560,8 @@ pub mod enhanced_type_inference {
         println!("文本处理结果: {}", result);
 
         // 2. 高阶函数类型推断
-        let numbers = vec![1, 2, 3, 4, 5];
-        let sum = numbers.iter().fold(0, |acc, &x| acc + x);
+        let numbers = [1, 2, 3, 4, 5];
+        let sum = numbers.iter().sum::<i32>();
         println!("数字总和: {}", sum);
 
         // 3. 复杂数据结构推断
@@ -588,7 +588,7 @@ pub mod enhanced_type_inference {
     }
 
     /// 处理文本
-    fn process_text<'a>(text: &'a str) -> &'a str {
+    fn process_text(text: &str) -> &str {
         text
     }
 
@@ -654,7 +654,7 @@ pub mod new_control_flow {
         println!("\n=== 新控制流基础演示 ===");
 
         // 1. 改进的 for 循环
-        let numbers = vec![1, 2, 3, 4, 5];
+        let numbers = [1, 2, 3, 4, 5];
         
         // 使用 enumerate 获取索引
         for (index, value) in numbers.iter().enumerate() {
@@ -691,7 +691,7 @@ pub mod new_control_flow {
         println!("\n=== 新控制流高级演示 ===");
 
         // 1. 复杂迭代器链
-        let numbers = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         let result: Vec<i32> = numbers
             .iter()
             .filter(|&&x| x % 2 == 0)
@@ -723,11 +723,9 @@ pub mod new_control_flow {
         }
 
         // 4. 嵌套控制流
-        let matrix = vec![
-            vec![1, 2, 3],
+        let matrix = [vec![1, 2, 3],
             vec![4, 5, 6],
-            vec![7, 8, 9],
-        ];
+            vec![7, 8, 9]];
 
         'outer: for (row_idx, row) in matrix.iter().enumerate() {
             for (col_idx, &value) in row.iter().enumerate() {
@@ -861,7 +859,7 @@ pub mod improved_error_handling {
     /// 错误转换
     fn convert_error(s: &str) -> Result<i32, CustomError> {
         s.parse::<i32>()
-            .map_err(|e| CustomError::ParseError(e))
+            .map_err(CustomError::ParseError)
     }
 
     /// 自定义结果类型

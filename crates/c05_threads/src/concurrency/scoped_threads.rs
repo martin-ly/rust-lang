@@ -35,7 +35,7 @@ impl ScopedThreadsDemo {
         // 将数据分为最多4个子切片，分别在不同线程中进行 *2 操作
         thread::scope(|s| {
             // 将可变切片划分为最多四段，保证互不重叠的可变借用
-            let quarter = (len + 3) / 4;
+            let quarter = len.div_ceil(4);
             let (s0, rem1) = self.data.split_at_mut(quarter.min(len));
             let (s1, rem2) = if !rem1.is_empty() {
                 rem1.split_at_mut(quarter.min(rem1.len()))
@@ -229,7 +229,7 @@ impl ScopedThreadsDemo {
         let start = std::time::Instant::now();
         let len = self.data.len();
         thread::scope(|s| {
-            let quarter = (len + 3) / 4;
+            let quarter = len.div_ceil(4);
             let (s0, rem1) = self.data.split_at_mut(quarter.min(len));
             let (s1, rem2) = if !rem1.is_empty() {
                 rem1.split_at_mut(quarter.min(rem1.len()))

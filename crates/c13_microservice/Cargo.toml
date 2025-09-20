@@ -30,9 +30,9 @@ futures = { workspace = true }
 
 # Web框架
 axum = { workspace = true }
-actix-web = { version = "4", features = ["macros"] }
-warp = "0.4"
-tide = "0.16"
+actix-web = { version = "4.0.0", features = ["macros"] }
+warp = "0.4.0"
+tide = "0.16.0"
 
 # gRPC框架
 tonic = { workspace = true }
@@ -46,7 +46,7 @@ serde_yaml = { workspace = true }
 toml = { workspace = true }
 
 # 数据库（可选，standalone 特性启用）- 使用工作区统一版本
-diesel = { version = "2.2", features = ["postgres", "mysql", "chrono", "uuid"], optional = true }
+diesel = { version = "2.2.0", features = ["postgres", "mysql", "chrono", "uuid"], optional = true }
 
 # 配置管理 - 使用工作区统一版本
 config = { workspace = true }
@@ -57,9 +57,9 @@ tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
 # OpenTelemetry 相关按需启用，避免依赖膨胀
 log = { workspace = true }
-slog = "2.7"
-slog-stdlog = "4.1"
-slog-scope = "4.4"
+slog = "2.7.0"
+slog-stdlog = "4.1.0"
+slog-scope = "4.4.0"
 
 # 监控和指标 - 使用工作区统一版本
 prometheus = { workspace = true }
@@ -68,12 +68,12 @@ metrics-exporter-prometheus = { workspace = true }
 
 # 消息队列（可选，standalone/with-redis/with-rabbitmq 启用）- 更新到最新版本
 redis = { version = "0.32.5", features = ["tokio-comp", "connection-manager"], optional = true }
-lapin = { version = "2.5", optional = true }
+lapin = { version = "2.5.0", optional = true }
 
 # 认证和授权 - 更新到最新版本
-jsonwebtoken = "9.3"
-oauth2 = "5.0"
-argon2 = "0.5"
+jsonwebtoken = "9.3.0"
+oauth2 = "5.0.0"
+argon2 = "0.5.0"
 uuid = { workspace = true }
 
 # HTTP客户端 - 使用工作区统一版本
@@ -89,15 +89,15 @@ chrono = { workspace = true }
 time = { workspace = true }
 
 # 压缩支持
-flate2 = "1.0"
+flate2 = "1.0.0"
 
 # 错误处理 - 使用工作区统一版本
 anyhow = { workspace = true }
 thiserror = { workspace = true }
-eyre = "0.6"
+eyre = "0.6.0"
 
 # CLI - 更新到最新版本
-clap = { version = "4.5", features = ["derive"] }
+clap = { version = "4.5.0", features = ["derive"] }
 
 # 测试 - 使用工作区统一版本
 tokio-test = { workspace = true }
@@ -105,12 +105,12 @@ mockall = { workspace = true }
 async-trait = { workspace = true }
 
 env_logger = "0.11.5"
-pretty_env_logger = "0.5"
+pretty_env_logger = "0.5.0"
 
 [build-dependencies]
 tonic-build = { workspace = true }
 prost-build = { workspace = true }
-protoc-bin-vendored = "3"
+protoc-bin-vendored = "3.0.0"
 
 [dev-dependencies]
 tokio-test = { workspace = true }

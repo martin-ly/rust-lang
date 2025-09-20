@@ -476,7 +476,7 @@ impl StatisticalTools {
 fn factorial(n: usize) -> usize {
     match n {
         0 | 1 => 1,
-        _ => (2..=n).fold(1, |acc, x| acc * x),
+        _ => (2..=n).product::<usize>(),
     }
 }
 

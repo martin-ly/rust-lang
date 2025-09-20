@@ -90,6 +90,12 @@ pub struct NetClient {
     cache: Arc<RwLock<HashMap<String, CacheEntry>>>,
 }
 
+impl Default for NetClient {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl NetClient {
     pub fn new() -> Self {
         Self::with_config(ConnectionPoolConfig::default())
@@ -400,7 +406,7 @@ impl NetClient {
                 ev = swarm.select_next_some() => {
                     if let SwarmEvent::NewListenAddr { address, .. } = ev {
                         addrs.push(address.to_string());
-                        if addrs.len() >= 1 { break; }
+                        if !addrs.is_empty() { break; }
                     }
                 }
             }

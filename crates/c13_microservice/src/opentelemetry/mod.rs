@@ -258,8 +258,8 @@ impl OpenTelemetryManager {
         }
 
         // 记录追踪
-        if self.config.tracing_enabled {
-            if let Some(mut span) = self.tracer.start_span(format!("HTTP {} {}", method, path)) {
+        if self.config.tracing_enabled
+            && let Some(mut span) = self.tracer.start_span(format!("HTTP {} {}", method, path)) {
                 span.add_attribute("http.method".to_string(), method.to_string());
                 span.add_attribute("http.path".to_string(), path.to_string());
                 span.add_attribute("http.status_code".to_string(), status_code.to_string());
@@ -274,7 +274,6 @@ impl OpenTelemetryManager {
 
                 self.tracer.finish_span(span);
             }
-        }
     }
 
     /// 记录数据库查询
@@ -307,8 +306,8 @@ impl OpenTelemetryManager {
         );
 
         // 记录追踪
-        if self.config.tracing_enabled {
-            if let Some(mut span) = self.tracer.start_span("database_query".to_string()) {
+        if self.config.tracing_enabled
+            && let Some(mut span) = self.tracer.start_span("database_query".to_string()) {
                 span.add_attribute("db.query".to_string(), query.to_string());
                 span.add_attribute(
                     "db.duration_ms".to_string(),
@@ -319,7 +318,6 @@ impl OpenTelemetryManager {
                 }
                 self.tracer.finish_span(span);
             }
-        }
     }
 
     /// 记录错误
@@ -328,8 +326,8 @@ impl OpenTelemetryManager {
         self.logger.log_error(error, context.clone());
 
         // 记录追踪
-        if self.config.tracing_enabled {
-            if let Some(mut span) = self.tracer.start_span("error".to_string()) {
+        if self.config.tracing_enabled
+            && let Some(mut span) = self.tracer.start_span("error".to_string()) {
                 span.add_attribute("error.message".to_string(), error.to_string());
                 if let Some(context) = context {
                     for (key, value) in context {
@@ -339,7 +337,6 @@ impl OpenTelemetryManager {
                 span.set_status(SpanStatus::Error(error.to_string()));
                 self.tracer.finish_span(span);
             }
-        }
     }
 
     /// 记录性能指标
@@ -360,8 +357,8 @@ impl OpenTelemetryManager {
         self.metrics.record_timer(operation, duration);
 
         // 记录追踪
-        if self.config.tracing_enabled {
-            if let Some(mut span) = self.tracer.start_span(operation.to_string()) {
+        if self.config.tracing_enabled
+            && let Some(mut span) = self.tracer.start_span(operation.to_string()) {
                 span.add_attribute(
                     "operation.duration_ms".to_string(),
                     duration.as_millis().to_string(),
@@ -373,7 +370,6 @@ impl OpenTelemetryManager {
                 }
                 self.tracer.finish_span(span);
             }
-        }
     }
 
     /// 获取系统状态

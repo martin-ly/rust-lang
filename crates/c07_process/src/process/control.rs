@@ -8,6 +8,12 @@ pub struct ProcessController {
     processes: Arc<Mutex<std::collections::HashMap<u32, ProcessInfo>>>,
 }
 
+impl Default for ProcessController {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ProcessController {
     /// 创建新的进程控制器
     pub fn new() -> Self {
@@ -45,7 +51,7 @@ impl ProcessController {
             .spawn()
             .map_err(|e| ProcessError::StartFailed(e.to_string()))?;
 
-        let pid = child.id() as u32;
+        let pid = child.id();
         let info = ProcessInfo {
             pid,
             name: config.program.clone(),

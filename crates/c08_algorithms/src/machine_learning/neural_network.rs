@@ -149,7 +149,7 @@ impl MLP {
 
         let layers = layer_sizes
             .windows(2)
-            .zip(activations.into_iter())
+            .zip(activations)
             .map(|(sizes, activation)| Layer::new(sizes[0], sizes[1], activation))
             .collect();
 

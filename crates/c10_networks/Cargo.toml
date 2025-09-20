@@ -16,17 +16,17 @@ bytes = { workspace = true, features = ["serde"] }
 mio = { workspace = true }
 
 # 抓包与报文解析（libpnet）- 更新到最新版本
-pnet = { version = "0.35", optional = true }
-pnet_packet = { version = "0.35", optional = true }
-pnet_datalink = { version = "0.35", optional = true }
-pnet_transport = { version = "0.35", optional = true }
+pnet = { version = "0.35.0", optional = true }
+pnet_packet = { version = "0.35.0", optional = true }
+pnet_datalink = { version = "0.35.0", optional = true }
+pnet_transport = { version = "0.35.0", optional = true }
 
 # 可选：离线 PCAP 支持
-pcap = { version = "2", optional = true }
+pcap = { version = "2.0.0", optional = true }
 
 # 协议解析 - 更新到最新版本
-nom = "8.0"
-httparse = "1.8"
+nom = "8.0.0"
+httparse = "1.8.0"
 url = { workspace = true }
 
 # 序列化和反序列化 - 使用工作区统一版本
@@ -53,15 +53,15 @@ futures = { workspace = true }
 futures-util = { workspace = true }
 
 # DNS 解析（Hickory-DNS，原 trust-dns）- 更新到最新版本
-hickory-resolver = { version = "0.24", features = ["tokio-runtime", "system-config", "dns-over-https-rustls", "dns-over-tls"] }
-hickory-proto = "0.24"
+hickory-resolver = { version = "0.24.4", features = ["system-config", "dns-over-https-rustls", "dns-over-rustls"] }
+hickory-proto = "0.24.4"
 
 # P2P 与 QUIC（新增）- 更新到最新版本
-libp2p = { version = "0.56", features = ["tokio", "tcp", "dns", "tls", "gossipsub", "kad", "noise", "yamux", "ping", "identify", "macros"] }
-quinn = "0.11"
+libp2p = { version = "0.56.0", features = ["tokio", "tcp", "dns", "tls", "gossipsub", "kad", "noise", "yamux", "ping", "identify", "macros"] }
+quinn = "0.11.0"
 rcgen = { workspace = true }
 # ACME（证书自动签发/续期）- 更新到最新版本
-instant-acme = "0.8"
+instant-acme = "0.8.0"
 # WebSocket - 使用工作区统一版本
 tokio-tungstenite = { workspace = true, features = ["rustls-tls-webpki-roots"] }
 tungstenite = { workspace = true }

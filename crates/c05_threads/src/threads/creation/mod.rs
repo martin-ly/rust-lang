@@ -106,7 +106,7 @@ pub fn thread_best_practices() {
     println!("🔧 线程创建最佳实践");
 
     // 1. 使用 move 闭包避免生命周期问题
-    let data = vec![1, 2, 3, 4, 5];
+    let data = [1, 2, 3, 4, 5];
     let handle = thread::spawn(move || data.iter().sum::<i32>());
 
     // 2. 合理设置线程数量

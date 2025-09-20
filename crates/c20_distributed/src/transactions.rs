@@ -9,6 +9,12 @@ pub struct Saga {
     steps: Vec<Box<dyn SagaStep + Send>>,
 }
 
+impl Default for Saga {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Saga {
     pub fn new() -> Self {
         Self { steps: Vec::new() }

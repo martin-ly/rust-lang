@@ -7,7 +7,6 @@ use c13_microservice::{
     volo::VoloMicroservice,
 };
 use clap::{Parser, Subcommand};
-use tracing_subscriber;
 
 /// 微服务命令行工具
 #[derive(Parser)]

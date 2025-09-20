@@ -148,6 +148,12 @@ async fn create_user(
 /// 中间件构建器
 pub struct MiddlewareBuilder;
 
+impl Default for MiddlewareBuilder {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl MiddlewareBuilder {
     pub fn new() -> Self {
         Self
@@ -181,8 +187,8 @@ impl MiddlewareBuilder {
         self
     }
 
-    pub fn build(self) -> () {
-        ()
+    pub fn build(self) {
+        
     }
 }
 

@@ -15,7 +15,7 @@ Rust 提供了多种与字节相关的类型和操作，最常用的类型是 `u
 */
 
 #[allow(unused)]
-pub fn test_byte_operation() -> () {
+pub fn test_byte_operation() {
     println!("--------------------------------");
     // 定义一个字节
     let byte: u8 = 255; // 最大值
@@ -53,7 +53,7 @@ pub fn test_byte_operation() -> () {
 
     println!("------------byte char--------------------");
     // 字节与字符的转换
-    let char_byte: u8 = 'A' as u8; // 将字符 'A' 转换为字节
+    let char_byte: u8 = b'A'; // 将字符 'A' 转换为字节
     println!("Byte representation of 'A': {}", char_byte); // 打印: Byte representation of 'A': 65
 }
 

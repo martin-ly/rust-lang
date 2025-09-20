@@ -9,6 +9,7 @@ use std::path::Path;
 
 /// 微服务配置结构
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Default)]
 pub struct Config {
     /// 服务配置
     pub service: ServiceConfig,
@@ -184,20 +185,6 @@ pub struct KubernetesConfig {
     pub enable_autoscaling: bool,
 }
 
-impl Default for Config {
-    fn default() -> Self {
-        Self {
-            service: ServiceConfig::default(),
-            database: DatabaseConfig::default(),
-            logging: LoggingConfig::default(),
-            monitoring: MonitoringConfig::default(),
-            security: SecurityConfig::default(),
-            service_mesh: ServiceMeshConfig::default(),
-            messaging: MessagingConfig::default(),
-            kubernetes: KubernetesConfig::default(),
-        }
-    }
-}
 
 impl Default for ServiceConfig {
     fn default() -> Self {

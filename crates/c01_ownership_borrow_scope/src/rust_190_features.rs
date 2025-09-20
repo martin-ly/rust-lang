@@ -85,6 +85,12 @@ pub struct ImprovedBorrowChecker {
     active_borrows: HashMap<String, BorrowRecord>,
 }
 
+impl Default for ImprovedBorrowChecker {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ImprovedBorrowChecker {
     /// 创建新的借用检查器 / Create new borrow checker
     pub fn new() -> Self {
@@ -163,7 +169,7 @@ impl ImprovedBorrowChecker {
                 let key = format!("{}_{}", owner, borrower);
                 
                 self.active_borrows.insert(key.clone(), borrow_record.clone());
-                self.borrow_records.entry(owner).or_insert_with(Vec::new).push(borrow_record.clone());
+                self.borrow_records.entry(owner).or_default().push(borrow_record.clone());
                 
                 Ok(borrow_record)
             }
@@ -275,6 +281,12 @@ pub struct InferenceRule {
     pub rule_fn: fn(&LifetimeParam, &LifetimeParam) -> bool,
 }
 
+impl Default for LifetimeInferencer {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl LifetimeInferencer {
     /// 创建新的生命周期推断器 / Create new lifetime inferencer
     pub fn new() -> Self {
@@ -349,6 +361,12 @@ pub struct SmartPointerManager {
     reference_counts: HashMap<String, usize>,
     /// 优化建议 / Optimization suggestions
     optimization_suggestions: Vec<String>,
+}
+
+impl Default for SmartPointerManager {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl SmartPointerManager {
@@ -493,6 +511,12 @@ pub struct OptimizationRule {
     pub rule_fn: fn(&ScopeInfo) -> bool,
 }
 
+impl Default for OptimizedScopeManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl OptimizedScopeManager {
     /// 创建新的作用域管理器 / Create new scope manager
     pub fn new() -> Self {
@@ -564,6 +588,12 @@ impl OptimizedScopeManager {
             total_variables,
             total_lifetimes,
         }
+    }
+}
+
+impl Default for ScopeOptimizer {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -715,6 +745,12 @@ pub struct DetectionRule {
     pub rule_fn: fn(&AccessRecord, &AccessRecord) -> bool,
 }
 
+impl Default for ConcurrencySafetyChecker {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ConcurrencySafetyChecker {
     /// 创建新的并发安全检查器 / Create new concurrency safety checker
     pub fn new() -> Self {
@@ -759,16 +795,21 @@ impl ConcurrencySafetyChecker {
         self.data_race_detector.record_access(access_record);
         
         // 更新线程资源列表 / Update thread resource list
-        if let Some(thread_info) = self.thread_map.get_mut(&thread_id) {
-            if !thread_info.resources.contains(&resource) {
+        if let Some(thread_info) = self.thread_map.get_mut(&thread_id)
+            && !thread_info.resources.contains(&resource) {
                 thread_info.resources.push(resource);
             }
-        }
     }
     
     /// 检测数据竞争 / Detect data races
     pub fn detect_data_races(&self) -> Vec<DataRaceReport> {
         self.data_race_detector.detect_races()
+    }
+}
+
+impl Default for DataRaceDetector {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -908,6 +949,12 @@ pub struct MemoryUsageStatistics {
     pub heap_allocations: usize,
     /// 栈分配数 / Stack allocations
     pub stack_allocations: usize,
+}
+
+impl Default for SmartMemoryManager {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl SmartMemoryManager {

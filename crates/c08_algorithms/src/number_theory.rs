@@ -32,7 +32,7 @@ fn is_probable_prime_u64(n: u64) -> bool {
         return false;
     }
     for p in [2u64, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37] {
-        if n % p == 0 {
+        if n.is_multiple_of(p) {
             return n == p;
         }
     }
@@ -72,7 +72,7 @@ fn gcd_u128(mut a: u128, mut b: u128) -> u128 {
     a
 }
 pub fn pollard_rho(n: u128) -> u128 {
-    if n % 2 == 0 {
+    if n.is_multiple_of(2) {
         return 2;
     }
     use rand::{Rng, rngs::ThreadRng};
@@ -85,7 +85,7 @@ pub fn pollard_rho(n: u128) -> u128 {
         while d == 1 {
             x = f_rho(x, c, n);
             y = f_rho(f_rho(y, c, n), c, n);
-            let diff = if x > y { x - y } else { y - x };
+            let diff = x.abs_diff(y);
             d = gcd_u128(diff, n);
         }
         if d != n {

@@ -5,7 +5,7 @@ Rust 使用 Result 和 Option 类型进行错误处理，这些类型可以被�
 */
 
 #[allow(unused)]
-pub fn test_error_handling() -> () {
+pub fn test_error_handling() {
     let x: i32 = 5;
 
     let result = Some(x).and_then(|val| val.checked_add(10));
@@ -26,7 +26,7 @@ pub fn test_error_handling() -> () {
 */
 
 #[allow(unused)]
-pub fn test_error_handling_2() -> () {
+pub fn test_error_handling_2() {
     let result: Result<i32, &str> = Ok(10);
     match result {
         Ok(value) => println!("Value is: {}", value), // 控制结构

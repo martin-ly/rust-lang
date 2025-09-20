@@ -273,6 +273,12 @@ pub struct Pipeline<T> {
     stages: Vec<Box<dyn Fn(T) -> T + Send + Sync>>,
 }
 
+impl<T> Default for Pipeline<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<T> Pipeline<T> {
     pub fn new() -> Self {
         Self { stages: Vec::new() }
@@ -355,7 +361,7 @@ where
 
     /// 执行扇出-扇入处理
     pub fn process(&self, inputs: Vec<T>) -> Vec<R> {
-        let chunk_size = (inputs.len() + self.worker_count - 1) / self.worker_count;
+        let chunk_size = inputs.len().div_ceil(self.worker_count);
 
         inputs
             .par_chunks(chunk_size)

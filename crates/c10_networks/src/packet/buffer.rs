@@ -255,8 +255,8 @@ impl RingBuffer {
             return Err(BufferError::Full);
         }
 
-        for i in 0..to_write {
-            self.buffer[self.tail] = data[i];
+        for &byte in data.iter().take(to_write) {
+            self.buffer[self.tail] = byte;
             self.tail = (self.tail + 1) % self.capacity;
         }
 
@@ -272,8 +272,8 @@ impl RingBuffer {
 
         let to_read = std::cmp::min(buffer.len(), self.size);
 
-        for i in 0..to_read {
-            buffer[i] = self.buffer[self.head];
+        for (i, &byte) in self.buffer.iter().skip(self.head).take(to_read).enumerate() {
+            buffer[i] = byte;
             self.head = (self.head + 1) % self.capacity;
         }
 

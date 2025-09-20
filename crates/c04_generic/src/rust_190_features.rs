@@ -64,6 +64,12 @@ pub struct RingBuffer<T, const N: usize> {
 	size: usize,
 }
 
+impl<T, const N: usize> Default for RingBuffer<T, N> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<T, const N: usize> RingBuffer<T, N> {
 	pub fn new() -> Self {
 		Self { data: array_init::array_init(|_| None), head: 0, tail: 0, size: 0 }
@@ -438,12 +444,10 @@ use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll, RawWaker, RawWakerVTable, Waker};
 
-pub fn async_add_generic<T>(a: T, b: T) -> impl Future<Output = i32>
+pub async fn async_add_generic<T>(a: T, b: T) -> i32
 where
 	T: Into<i32>,
-{
-	async move { a.into() + b.into() }
-}
+{ a.into() + b.into() }
 
 fn noop_clone(_: *const ()) -> RawWaker { RawWaker::new(std::ptr::null(), &NOOP_VTABLE) }
 fn noop(_: *const ()) {}

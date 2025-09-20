@@ -23,6 +23,12 @@ pub struct StdAsyncExamples {
     shared_data: Arc<Mutex<Vec<String>>>,
 }
 
+impl Default for StdAsyncExamples {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl StdAsyncExamples {
     pub fn new() -> Self {
         Self {
@@ -165,6 +171,12 @@ pub struct AsyncStdExamples {
     file_cache: Arc<Mutex<HashMap<String, String>>>,
 }
 
+impl Default for AsyncStdExamples {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncStdExamples {
     pub fn new() -> Self {
         Self {
@@ -278,6 +290,12 @@ impl AsyncStdExamples {
 #[allow(unused)]
 pub struct SmolExamples {
     task_queue: Arc<Mutex<Vec<String>>>,
+}
+
+impl Default for SmolExamples {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl SmolExamples {
@@ -396,6 +414,12 @@ impl SmolExamples {
 #[allow(unused)]
 pub struct RuntimeCompositionExamples {
     runtime_selector: Arc<Mutex<String>>,
+}
+
+impl Default for RuntimeCompositionExamples {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl RuntimeCompositionExamples {

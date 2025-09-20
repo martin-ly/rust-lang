@@ -86,8 +86,8 @@ impl User {
                 self.updated_at = event.timestamp;
             }
             "UserStatusChanged" => {
-                if let Some(data) = event.data.as_object() {
-                    if let Some(status) = data.get("status").and_then(|v| v.as_str()) {
+                if let Some(data) = event.data.as_object()
+                    && let Some(status) = data.get("status").and_then(|v| v.as_str()) {
                         self.status = match status {
                             "active" => UserStatus::Active,
                             "inactive" => UserStatus::Inactive,
@@ -95,7 +95,6 @@ impl User {
                             _ => UserStatus::Active,
                         };
                     }
-                }
                 self.updated_at = event.timestamp;
             }
             _ => {}
@@ -245,7 +244,7 @@ impl QueryHandler {
         for event in all_events {
             events_by_aggregate
                 .entry(event.aggregate_id.clone())
-                .or_insert_with(Vec::new)
+                .or_default()
                 .push(event);
         }
 

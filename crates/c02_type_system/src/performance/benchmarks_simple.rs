@@ -22,6 +22,12 @@ pub struct PerformanceAnalyzer {
     baseline: Option<String>,
 }
 
+impl Default for PerformanceAnalyzer {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl PerformanceAnalyzer {
     pub fn new() -> Self {
         Self {
@@ -41,8 +47,8 @@ impl PerformanceAnalyzer {
     pub fn analyze(&self) -> PerformanceAnalysis {
         let mut analysis = PerformanceAnalysis::new();
 
-        if let Some(baseline_name) = &self.baseline {
-            if let Some(baseline) = self.results.get(baseline_name) {
+        if let Some(baseline_name) = &self.baseline
+            && let Some(baseline) = self.results.get(baseline_name) {
                 for (name, result) in &self.results {
                     if name != baseline_name {
                         let improvement = self.calculate_improvement(baseline, result);
@@ -50,7 +56,6 @@ impl PerformanceAnalyzer {
                     }
                 }
             }
-        }
 
         analysis
     }
@@ -117,7 +122,7 @@ impl BenchmarkRunner {
 
     pub fn run<F>(&self, name: &str, f: F) -> BenchmarkResult
     where
-        F: Fn() -> (),
+        F: Fn(),
     {
         // 预热
         for _ in 0..self.warmup_iterations {

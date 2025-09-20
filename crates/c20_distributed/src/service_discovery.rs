@@ -350,7 +350,7 @@ impl RegistryServiceDiscovery {
         let service_name = instance.name.clone();
         self.registered_services
             .entry(service_name)
-            .or_insert_with(Vec::new)
+            .or_default()
             .push(instance);
         Ok(())
     }
@@ -444,7 +444,7 @@ impl HealthChecker {
 
         for instance in instances.iter_mut() {
             // 模拟健康检查
-            let is_healthy = self.simulate_health_check(&instance);
+            let is_healthy = self.simulate_health_check(instance);
             instance.update_health(is_healthy);
         }
     }
@@ -455,7 +455,7 @@ impl HealthChecker {
 
         for instance in instances.iter_mut() {
             // 模拟健康检查
-            let is_healthy = self.simulate_health_check(&instance);
+            let is_healthy = self.simulate_health_check(instance);
             instance.update_health(is_healthy);
         }
     }
@@ -678,7 +678,7 @@ impl ServiceDiscoveryManager {
             let service_name = instance.name.clone();
             cache
                 .entry(service_name)
-                .or_insert_with(Vec::new)
+                .or_default()
                 .push(instance);
         }
 
@@ -727,7 +727,7 @@ impl ServiceDiscoveryManager {
         } else {
             let entry = cache
                 .entry(service_name.to_string())
-                .or_insert_with(Vec::new);
+                .or_default();
             entry.extend(instances);
         }
     }

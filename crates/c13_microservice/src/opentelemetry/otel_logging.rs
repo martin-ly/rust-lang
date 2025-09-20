@@ -180,11 +180,10 @@ impl StructuredLogger {
             for entry in buffer.drain(..) {
                 if let Some(async_writer) = &self.async_writer {
                     async_writer.send_log(entry)?;
-                } else if let Some(slog_logger) = &self.slog_logger {
-                    if let Err(e) = slog_logger.write_log(entry) {
+                } else if let Some(slog_logger) = &self.slog_logger
+                    && let Err(e) = slog_logger.write_log(entry) {
                         eprintln!("Failed to write log: {:?}", e);
                     }
-                }
             }
         }
         Ok(())
@@ -257,11 +256,10 @@ impl StructuredLogger {
             if let Err(e) = async_writer.send_log(log_entry.clone()) {
                 eprintln!("Failed to send log to async writer: {}", e);
             }
-        } else if let Some(slog_logger) = &self.slog_logger {
-            if let Err(e) = slog_logger.write_log(log_entry.clone()) {
+        } else if let Some(slog_logger) = &self.slog_logger
+            && let Err(e) = slog_logger.write_log(log_entry.clone()) {
                 eprintln!("Failed to write log: {}", e);
             }
-        }
 
         // 同时使用tracing进行日志记录
         match level {
@@ -442,8 +440,8 @@ impl SlogLogger {
         info!("Initializing Slog logger with config: {:?}", self.config);
 
         // 如果启用文件输出，创建文件写入器
-        if self.config.enable_file {
-            if let Some(file_path) = &self.config.file_path {
+        if self.config.enable_file
+            && let Some(file_path) = &self.config.file_path {
                 // 确保日志目录存在
                 if let Some(parent) = std::path::Path::new(file_path).parent() {
                     std::fs::create_dir_all(parent)?;
@@ -457,7 +455,6 @@ impl SlogLogger {
                 self.file_writer = Some(Arc::new(Mutex::new(file)));
                 info!("File logging enabled: {}", file_path);
             }
-        }
 
         Ok(())
     }
@@ -478,13 +475,12 @@ impl SlogLogger {
         }
 
         // 文件输出
-        if self.config.enable_file {
-            if let Some(writer) = &self.file_writer {
+        if self.config.enable_file
+            && let Some(writer) = &self.file_writer {
                 let mut file = writer.lock().unwrap();
                 writeln!(file, "{}", formatted_log)?;
                 file.flush()?;
             }
-        }
 
         Ok(())
     }
@@ -527,15 +523,12 @@ impl SlogLogger {
 
     /// 检查是否需要日志轮转
     pub fn check_rotation(&self) -> Result<(), Box<dyn std::error::Error>> {
-        if let Some(file_path) = &self.config.file_path {
-            if let Ok(metadata) = std::fs::metadata(file_path) {
-                if let Some(max_size) = self.config.max_file_size {
-                    if metadata.len() > max_size {
+        if let Some(file_path) = &self.config.file_path
+            && let Ok(metadata) = std::fs::metadata(file_path)
+                && let Some(max_size) = self.config.max_file_size
+                    && metadata.len() > max_size {
                         self.rotate_log_file(file_path)?;
                     }
-                }
-            }
-        }
         Ok(())
     }
 
@@ -559,7 +552,7 @@ impl SlogLogger {
 
         // 重命名当前文件
         if std::path::Path::new(file_path).exists() {
-            std::fs::rename(file_path, &format!("{}.1", file_path))?;
+            std::fs::rename(file_path, format!("{}.1", file_path))?;
         }
 
         info!("Log file rotated: {}", file_path);

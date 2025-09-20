@@ -103,13 +103,13 @@ impl WebSocketFrame {
 
     /// 创建 Ping 帧
     pub fn ping(data: Option<&[u8]>) -> Self {
-        let payload = data.map(|d| Bytes::copy_from_slice(d)).unwrap_or_default();
+        let payload = data.map(Bytes::copy_from_slice).unwrap_or_default();
         Self::new(WebSocketOpcode::Ping, payload)
     }
 
     /// 创建 Pong 帧
     pub fn pong(data: Option<&[u8]>) -> Self {
-        let payload = data.map(|d| Bytes::copy_from_slice(d)).unwrap_or_default();
+        let payload = data.map(Bytes::copy_from_slice).unwrap_or_default();
         Self::new(WebSocketOpcode::Pong, payload)
     }
 }

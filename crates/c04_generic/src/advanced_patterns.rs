@@ -211,6 +211,12 @@ pub mod builder_pattern {
         address: Option<String>,
     }
 
+    impl Default for UserBuilder {
+        fn default() -> Self {
+            Self::new()
+        }
+    }
+
     impl UserBuilder {
         pub fn new() -> Self {
             Self {
@@ -271,6 +277,12 @@ pub mod builder_pattern {
     /// 泛型建造者管理器
     pub struct BuilderManager<T: Buildable> {
         _phantom: PhantomData<T>,
+    }
+
+    impl<T: Buildable> Default for BuilderManager<T> {
+        fn default() -> Self {
+            Self::new()
+        }
     }
 
     impl<T: Buildable> BuilderManager<T> {
@@ -388,6 +400,12 @@ pub mod strategy_pattern {
     /// 策略管理器
     pub struct StrategyManager<T> {
         strategies: HashMap<String, Box<dyn SortStrategy<T>>>,
+    }
+
+    impl<T: 'static> Default for StrategyManager<T> {
+        fn default() -> Self {
+            Self::new()
+        }
     }
 
     impl<T: 'static> StrategyManager<T> {
@@ -534,6 +552,12 @@ pub mod observer_pattern {
     pub struct GenericSubject<T> {
         observers: Vec<Box<dyn Observer<T>>>,
         data: Option<T>,
+    }
+
+    impl<T: Clone> Default for GenericSubject<T> {
+        fn default() -> Self {
+            Self::new()
+        }
     }
 
     impl<T: Clone> GenericSubject<T> {
@@ -696,10 +720,10 @@ pub mod decorator_pattern {
                 cached.clone()
             } else {
                 println!("缓存装饰器: 计算新结果");
-                let result = self.decorator.operation(input.clone());
+                
                 // 注意：这里需要可变引用，但 operation 是不可变的
                 // 在实际应用中，需要使用 RefCell 或其他内部可变性机制
-                result
+                self.decorator.operation(input.clone())
             }
         }
 
@@ -734,6 +758,12 @@ pub mod singleton_pattern {
     /// 泛型单例管理器
     pub struct SingletonManager<T> {
         instance: Arc<RwLock<Option<Arc<T>>>>,
+    }
+
+    impl<T> Default for SingletonManager<T> {
+        fn default() -> Self {
+            Self::new()
+        }
     }
 
     impl<T> SingletonManager<T> {
@@ -778,6 +808,12 @@ pub mod singleton_pattern {
     /// 配置管理器单例
     pub struct ConfigManager {
         config: HashMap<String, String>,
+    }
+
+    impl Default for ConfigManager {
+        fn default() -> Self {
+            Self::new()
+        }
     }
 
     impl ConfigManager {
@@ -957,6 +993,12 @@ pub mod singleton_pattern {
         current_index: usize,
     }
 
+    impl<T> Default for CommandInvoker<T> {
+        fn default() -> Self {
+            Self::new()
+        }
+    }
+
     impl<T> CommandInvoker<T> {
         pub fn new() -> Self {
             Self {
@@ -1093,7 +1135,7 @@ pub fn demonstrate_advanced_patterns() {
 
     println!("\n6. 单例模式演示:");
     let manager = singleton_pattern::SingletonManager::new();
-    let instance = manager.get_instance(|| singleton_pattern::ConfigManager::new()).unwrap();
+    let instance = manager.get_instance(singleton_pattern::ConfigManager::new).unwrap();
     println!("配置应用名称: {:?}", instance.get("app_name"));
 
     println!("\n7. 命令模式演示:");

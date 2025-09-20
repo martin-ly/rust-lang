@@ -166,8 +166,8 @@ impl<T> PriorityInheritanceMutex<T> {
         let mut owner = self.owner.lock().unwrap();
         if let Some(ref mut owner_info) = *owner {
             let mut registry = self.thread_registry.lock().unwrap();
-            if let Some(waiting_thread) = registry.get(&waiting_thread_id).cloned() {
-                if waiting_thread.priority > owner_info.priority {
+            if let Some(waiting_thread) = registry.get(&waiting_thread_id).cloned()
+                && waiting_thread.priority > owner_info.priority {
                     // 需要优先级继承
                     owner_info.inherit_priority(waiting_thread.priority);
 
@@ -176,7 +176,6 @@ impl<T> PriorityInheritanceMutex<T> {
                         owner_in_registry.inherit_priority(waiting_thread.priority);
                     }
                 }
-            }
         }
     }
 
@@ -370,8 +369,8 @@ impl<T> PriorityInheritanceRwLock<T> {
         let mut writer = self.writer.lock().unwrap();
         if let Some(ref mut writer_info) = *writer {
             let mut registry = self.thread_registry.lock().unwrap();
-            if let Some(waiting_thread) = registry.get(&waiting_thread_id).cloned() {
-                if waiting_thread.priority > writer_info.priority {
+            if let Some(waiting_thread) = registry.get(&waiting_thread_id).cloned()
+                && waiting_thread.priority > writer_info.priority {
                     // 需要优先级继承
                     writer_info.inherit_priority(waiting_thread.priority);
 
@@ -380,7 +379,6 @@ impl<T> PriorityInheritanceRwLock<T> {
                         writer_in_registry.inherit_priority(waiting_thread.priority);
                     }
                 }
-            }
         }
 
         // 检查读者优先级继承

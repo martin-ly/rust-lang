@@ -18,21 +18,17 @@ pub trait AsyncProcessor {
 pub struct TextProcessor;
 
 impl AsyncProcessor for TextProcessor {
-    fn process(
+    async fn process(
         &self,
         data: &[u8],
-    ) -> impl Future<Output = Result<Vec<u8>, Box<dyn std::error::Error + Send + Sync>>> + Send
+    ) -> Result<Vec<u8>, Box<dyn std::error::Error + Send + Sync>>
     {
-        async move {
-            // 模拟异步处理
-            tokio::time::sleep(tokio::time::Duration::from_millis(10)).await;
-            Ok(data.to_vec())
-        }
+        // 模拟异步处理
+        tokio::time::sleep(tokio::time::Duration::from_millis(10)).await;
+        Ok(data.to_vec())
     }
 
-    fn validate(&self, input: &str) -> impl Future<Output = bool> + Send {
-        async move { !input.is_empty() }
-    }
+    async fn validate(&self, input: &str) -> bool { !input.is_empty() }
 }
 
 /// 数据处理器trait
@@ -58,6 +54,12 @@ impl DataProcessor for SimpleProcessor {
 /// 高级处理器实现
 pub struct AdvancedProcessor<T: Display + Clone> {
     _phantom: std::marker::PhantomData<T>,
+}
+
+impl<T: Display + Clone> Default for AdvancedProcessor<T> {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl<T: Display + Clone> AdvancedProcessor<T> {
@@ -159,6 +161,12 @@ pub struct Matrix<T, const ROWS: usize, const COLS: usize> {
     data: [[T; COLS]; ROWS],
 }
 
+impl<T: Default + Copy, const ROWS: usize, const COLS: usize> Default for Matrix<T, ROWS, COLS> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<T: Default + Copy, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, COLS> {
     pub fn new() -> Self {
         Self {
@@ -219,7 +227,7 @@ pub const PRIME_17: bool = {
 };
 
 /// 生命周期推断优化示例
-pub fn process_strings<'a>(strings: &'a [String]) -> Vec<&'a str> {
+pub fn process_strings(strings: &[String]) -> Vec<&str> {
     strings.iter().map(|s| s.as_str()).collect()
 }
 
@@ -278,12 +286,12 @@ pub const fn is_prime(n: u64) -> bool {
         false
     } else if n == 2 {
         true
-    } else if n % 2 == 0 {
+    } else if n.is_multiple_of(2) {
         false
     } else {
         let mut i = 3;
         while i * i <= n {
-            if n % i == 0 {
+            if n.is_multiple_of(i) {
                 return false;
             }
             i += 2;

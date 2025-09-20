@@ -32,7 +32,7 @@ tracing-subscriber = { workspace = true }
 criterion = { workspace = true, optional = true }
 proptest = { workspace = true, optional = true }
 # 系统信息
-num_cpus = "1.0"
+num_cpus = { workspace = true }
 
 [dev-dependencies]
 criterion = { workspace = true }

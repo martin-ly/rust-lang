@@ -33,16 +33,16 @@ rand = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 reqwest = { workspace = true, features = ["json"] }
-prometheus = "0.13"
+prometheus = { workspace = true }
 
 # Rust 1.90 新特性支持
 num_cpus = { workspace = true }
 rayon = { workspace = true }
 
 # 异步生态系统分析支持
-async-trait = "0.1"
-chrono = { version = "0.4", features = ["serde"] }
-smol = "2.0"
+async-trait = { workspace = true }
+chrono = { workspace = true }
+smol = "2.0.0"
 
 # 终端和调试工具 - 更新到最新版本
 tokio-console = { workspace = true }

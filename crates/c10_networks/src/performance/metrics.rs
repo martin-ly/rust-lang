@@ -28,6 +28,12 @@ pub struct MetricsCollector {
     operation_timers: Arc<RwLock<HashMap<String, Vec<Duration>>>>,
 }
 
+impl Default for MetricsCollector {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl MetricsCollector {
     /// 创建新的指标收集器
     pub fn new() -> Self {
@@ -53,7 +59,7 @@ impl MetricsCollector {
         // 更新操作时间映射
         timers
             .entry(operation.to_string())
-            .or_insert_with(Vec::new)
+            .or_default()
             .push(duration);
 
         // 计算平均操作时间

@@ -296,6 +296,12 @@ pub trait AsyncComponent: Send + Sync {
     fn get_name(&self) -> &str;
 }
 
+impl Default for AggregationCompositionService {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AggregationCompositionService {
     pub fn new() -> Self {
         Self {

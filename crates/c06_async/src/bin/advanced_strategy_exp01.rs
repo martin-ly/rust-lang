@@ -35,7 +35,7 @@ async fn main() -> anyhow::Result<()> {
 
     // 模拟多个请求
     let client = reqwest::Client::new();
-    let urls = vec![
+    let urls = [
         "https://httpbin.org/status/200",
         "https://httpbin.org/status/500", // 会失败
         "https://httpbin.org/status/200",

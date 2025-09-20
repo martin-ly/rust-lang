@@ -130,17 +130,15 @@ impl<ID> LocalReplicator<ID> {
     where
         ID: Clone,
     {
-        if let Some(store) = &self.idempotency {
-            if store.seen(id) {
+        if let Some(store) = &self.idempotency
+            && store.seen(id) {
                 return Ok(());
             }
-        }
         let res = self.replicate_to_nodes(targets, command, level);
-        if res.is_ok() {
-            if let Some(store) = &mut self.idempotency {
+        if res.is_ok()
+            && let Some(store) = &mut self.idempotency {
                 store.record(id.clone());
             }
-        }
         res
     }
 }

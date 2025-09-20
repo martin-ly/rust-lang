@@ -88,8 +88,8 @@ pub mod ownership_basics {
 
     /// 返回所有权的函数 / Function that gives ownership
     fn gives_ownership() -> String {
-        let some_string = String::from("yours");
-        some_string // 返回所有权 / return ownership
+        
+        String::from("yours") // 返回所有权 / return ownership
     }
 
     /// 接受并返回所有权的函数 / Function that takes and gives back ownership
@@ -182,8 +182,8 @@ pub mod borrowing_basics {
     /// 正确的做法：返回所有权 / Correct approach: return ownership
     #[allow(unused)]
     fn no_dangle() -> String {
-        let s = String::from("hello");
-        s // 返回所有权 / return ownership
+        
+        String::from("hello") // 返回所有权 / return ownership
     }
 }
 
@@ -268,7 +268,7 @@ pub mod lifetime_basics {
             }
         }
 
-        &s[..]
+        s
     }
 }
 
@@ -536,7 +536,7 @@ pub mod performance_basics {
 
     /// 零成本抽象示例 / Zero-cost Abstraction Example
     pub fn zero_cost_abstraction() {
-        let numbers = vec![1, 2, 3, 4, 5];
+        let numbers = [1, 2, 3, 4, 5];
         
         // 迭代器是零成本抽象 / Iterators are zero-cost abstractions
         let sum: i32 = numbers.iter().map(|x| x * 2).sum();
@@ -938,9 +938,9 @@ pub mod rust_190_basics {
         // 使用块作用域进行精确控制 / Use block scope for precise control
         let final_result = {
             let temp_data = String::from("temporary");
-            let processed = process_data(&temp_data);
+            
             // temp_data 在这里自动释放 / temp_data is automatically released here
-            processed
+            process_data(&temp_data)
         };
         
         println!("Final result: {}", final_result);
@@ -1246,7 +1246,7 @@ pub mod rust_190_basics {
         }
         
         // 使用 Result 的便捷方法 / Use Result convenience methods
-        let numbers = vec![1, 2, 0, 4, 5];
+        let numbers = [1, 2, 0, 4, 5];
         let results: Vec<Result<i32, MathError>> = numbers.iter()
             .map(|&n| safe_divide(10, n))
             .collect();
@@ -1278,7 +1278,7 @@ pub mod rust_190_basics {
 
     /// 性能优化特性示例 / Performance Optimization Features Example
     pub fn performance_optimization_features() {
-        let numbers = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         
         // Rust 1.90 中的性能优化
         // Performance optimization in Rust 1.90
@@ -1345,7 +1345,7 @@ pub mod rust_190_basics {
         println!("Matrix sum: {}", sum);
         
         // 使用 SIMD 优化（如果可用）/ Use SIMD optimization (if available)
-        let data = vec![1, 2, 3, 4, 5, 6, 7, 8];
+        let data = [1, 2, 3, 4, 5, 6, 7, 8];
         let doubled: Vec<i32> = data.iter().map(|&x| x * 2).collect();
         println!("Doubled data: {:?}", doubled);
         

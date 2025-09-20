@@ -231,13 +231,12 @@ impl WebSocketFrameParser {
         let mut payload_bytes = payload.to_vec();
 
         // 解掩码
-        if mask {
-            if let Some(key) = masking_key {
+        if mask
+            && let Some(key) = masking_key {
                 for i in 0..payload_bytes.len() {
                     payload_bytes[i] ^= key[i % 4];
                 }
             }
-        }
 
         let frame = crate::protocol::websocket::WebSocketFrame {
             fin,

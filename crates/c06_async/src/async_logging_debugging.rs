@@ -339,6 +339,12 @@ pub struct AsyncPerformanceMonitor {
     start_time: Instant,
 }
 
+impl Default for AsyncPerformanceMonitor {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncPerformanceMonitor {
     pub fn new() -> Self {
         Self {

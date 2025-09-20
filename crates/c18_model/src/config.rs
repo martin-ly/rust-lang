@@ -8,12 +8,14 @@ use std::collections::HashMap;
 
 /// 日志级别
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Default)]
 pub enum LogLevel {
     /// 错误级别
     Error,
     /// 警告级别
     Warn,
     /// 信息级别
+    #[default]
     Info,
     /// 调试级别
     Debug,
@@ -21,11 +23,6 @@ pub enum LogLevel {
     Trace,
 }
 
-impl Default for LogLevel {
-    fn default() -> Self {
-        LogLevel::Info
-    }
-}
 
 impl std::fmt::Display for LogLevel {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -119,6 +116,7 @@ impl Default for VisualizationConfig {
 
 /// 模型配置
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Default)]
 pub struct ModelConfig {
     /// 数值精度配置
     pub precision: PrecisionConfig,
@@ -134,18 +132,6 @@ pub struct ModelConfig {
     pub custom: HashMap<String, serde_json::Value>,
 }
 
-impl Default for ModelConfig {
-    fn default() -> Self {
-        Self {
-            precision: PrecisionConfig::default(),
-            performance: PerformanceConfig::default(),
-            visualization: VisualizationConfig::default(),
-            log_level: LogLevel::default(),
-            enable_logging: false,
-            custom: HashMap::new(),
-        }
-    }
-}
 
 impl ModelConfig {
     /// 创建新的配置

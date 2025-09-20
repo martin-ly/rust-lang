@@ -56,6 +56,12 @@ pub struct SimplePriorityChannel<T> {
     queue: Arc<Mutex<VecDeque<SimplePriorityMessage<T>>>>,
 }
 
+impl<T> Default for SimplePriorityChannel<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<T> SimplePriorityChannel<T> {
     /// 创建新的简化优先级通道
     pub fn new() -> Self {

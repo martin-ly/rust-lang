@@ -54,7 +54,7 @@ impl KMeans {
     }
 
     /// 找到最近的聚类中心
-    fn find_closest_center_in<'a>(point: &DataPoint, centers: &'a [DataPoint]) -> usize {
+    fn find_closest_center_in(point: &DataPoint, centers: &[DataPoint]) -> usize {
         let mut min_distance = f64::INFINITY;
         let mut closest_center = 0;
 

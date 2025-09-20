@@ -17,7 +17,7 @@ async fn main() {
         let mut cnt = 0u32;
         while let Some(_v) = rx_b.recv().await {
             cnt += 1;
-            if cnt % 20 == 0 {
+            if cnt.is_multiple_of(20) {
                 tokio::time::sleep(Duration::from_millis(10)).await;
             }
             if cnt == total {
@@ -40,7 +40,7 @@ async fn main() {
         let mut cnt = 0u32;
         while let Some(_v) = rx_u.recv().await {
             cnt += 1;
-            if cnt % 20 == 0 {
+            if cnt.is_multiple_of(20) {
                 tokio::time::sleep(Duration::from_millis(10)).await;
             }
             if cnt == total {

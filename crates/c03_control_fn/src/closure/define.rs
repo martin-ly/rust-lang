@@ -25,7 +25,7 @@ pub fn test_closure() {
     例如，使用闭包作为参数：
 */
 #[allow(unused)]
-pub fn test_closure_2() -> () {
+pub fn test_closure_2() {
     let add = |x, y| x + y; // 闭包
     let result = add(2, 3); // 表达式
     println!("result is {}", result);

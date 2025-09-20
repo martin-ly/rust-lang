@@ -5,7 +5,7 @@ pub struct MacAddress([u8; 6]);
 
 impl MacAddress {
     pub fn parse(s: &str) -> Option<Self> {
-        let parts: Vec<&str> = s.split(|c| c == ':' || c == '-').collect();
+        let parts: Vec<&str> = s.split([':', '-']).collect();
         if parts.len() != 6 {
             return None;
         }

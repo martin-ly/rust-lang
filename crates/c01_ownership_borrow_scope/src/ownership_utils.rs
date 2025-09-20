@@ -35,6 +35,12 @@ pub struct OwnershipRecord {
     pub is_active: bool,
 }
 
+impl Default for OwnershipTracker {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl OwnershipTracker {
     /// 创建新的所有权跟踪器 / Create New Ownership Tracker
     pub fn new() -> Self {
@@ -172,6 +178,12 @@ pub enum BorrowType {
     Exclusive,
 }
 
+impl Default for BorrowTracker {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl BorrowTracker {
     /// 创建新的借用跟踪器 / Create New Borrow Tracker
     pub fn new() -> Self {
@@ -200,7 +212,7 @@ impl BorrowTracker {
             is_active: true,
         };
         
-        self.borrow_records.entry(owner_id).or_insert_with(Vec::new).push(record);
+        self.borrow_records.entry(owner_id).or_default().push(record);
         Ok(())
     }
     
@@ -295,6 +307,12 @@ pub struct LifetimeRecord {
     pub is_active: bool,
     /// 关联的引用数量 / Number of Associated References
     pub reference_count: usize,
+}
+
+impl Default for LifetimeTracker {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl LifetimeTracker {
@@ -393,6 +411,12 @@ pub struct OwnershipSystemManager {
     borrow_tracker: BorrowTracker,
     /// 生命周期跟踪器 / Lifetime Tracker
     lifetime_tracker: LifetimeTracker,
+}
+
+impl Default for OwnershipSystemManager {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl OwnershipSystemManager {
@@ -531,7 +555,7 @@ pub fn safe_mutable_borrow_check<T>(value: &mut T) -> &mut T {
 }
 
 /// 安全的生命周期检查 / Safe Lifetime Check
-pub fn safe_lifetime_check<'a, T>(value: &'a T) -> &'a T {
+pub fn safe_lifetime_check<T>(value: &T) -> &T {
     value
 }
 
@@ -552,6 +576,12 @@ pub struct PerformanceMetric {
     pub unit: String,
     /// 时间戳 / Timestamp
     pub timestamp: Instant,
+}
+
+impl Default for PerformanceAnalyzer {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl PerformanceAnalyzer {

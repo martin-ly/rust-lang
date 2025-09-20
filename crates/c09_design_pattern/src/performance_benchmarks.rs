@@ -192,6 +192,12 @@ pub struct PerformanceTestSuite {
     parallel_benchmark: ParallelBenchmark,
 }
 
+impl Default for PerformanceTestSuite {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl PerformanceTestSuite {
     pub fn new() -> Self {
         Self {

@@ -114,7 +114,7 @@ impl PBFTNode {
 
     /// 检查是否满足拜占庭容错要求
     pub fn is_byzantine_fault_tolerant(&self) -> bool {
-        self.total_nodes >= 3 * self.max_faulty_nodes + 1 && self.total_nodes >= 4
+        self.total_nodes > 3 * self.max_faulty_nodes && self.total_nodes >= 4
     }
 
     /// 获取法定人数大小
@@ -231,11 +231,10 @@ impl PBFTNode {
             // 检查是否收集到足够的预提交消息
             if pre_commit_count >= self.quorum_size() {
                 // 提交请求
-                if let Some(request) = self.pending_requests.get(&key) {
-                    if let ByzantineMessage::Request { content, .. } = request {
+                if let Some(request) = self.pending_requests.get(&key)
+                    && let ByzantineMessage::Request { content, .. } = request {
                         self.committed_requests.insert(key.clone(), content.clone());
                     }
-                }
 
                 // 创建提交消息
                 let commit_message = ByzantineMessage::Commit {
@@ -304,11 +303,10 @@ impl PBFTNode {
             }
 
             // 检查发送者状态
-            if let Some(state) = self.node_states.get(sender) {
-                if *state == ByzantineNodeState::Byzantine {
+            if let Some(state) = self.node_states.get(sender)
+                && *state == ByzantineNodeState::Byzantine {
                     return false;
                 }
-            }
 
             true
         } else {
@@ -336,11 +334,10 @@ impl PBFTNode {
             }
 
             // 检查发送者状态
-            if let Some(state) = self.node_states.get(sender) {
-                if *state == ByzantineNodeState::Byzantine {
+            if let Some(state) = self.node_states.get(sender)
+                && *state == ByzantineNodeState::Byzantine {
                     return false;
                 }
-            }
 
             true
         } else {
@@ -368,11 +365,10 @@ impl PBFTNode {
             }
 
             // 检查发送者状态
-            if let Some(state) = self.node_states.get(sender) {
-                if *state == ByzantineNodeState::Byzantine {
+            if let Some(state) = self.node_states.get(sender)
+                && *state == ByzantineNodeState::Byzantine {
                     return false;
                 }
-            }
 
             true
         } else {
@@ -501,8 +497,8 @@ impl ByzantineNetwork {
                 ByzantineMessage::Request { .. } => node.handle_request(message)?,
                 ByzantineMessage::Prepare { .. } => node.handle_prepare(message)?,
                 ByzantineMessage::PreCommit { .. } => {
-                    let responses = node.handle_pre_commit(message)?;
-                    responses
+                    
+                    node.handle_pre_commit(message)?
                 }
                 ByzantineMessage::Commit { .. } => {
                     node.handle_commit(message)?;

@@ -174,7 +174,7 @@ impl ParallelRadixSort {
     fn counting_sort(arr: &mut [i32], exp: i32) {
         let n = arr.len();
         let mut output = vec![0; n];
-        let mut count = vec![0; 10];
+        let mut count = [0; 10];
 
         // 统计每个数字的出现次数
         for &num in arr.iter() {

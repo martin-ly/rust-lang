@@ -319,6 +319,12 @@ pub struct OSSpecificPerformanceMonitor {
     average_wait_time: AtomicUsize,
 }
 
+impl Default for OSSpecificPerformanceMonitor {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl OSSpecificPerformanceMonitor {
     pub fn new() -> Self {
         Self {

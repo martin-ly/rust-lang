@@ -238,18 +238,16 @@ where
     /// 检查项是否过期
     fn is_expired(&self, item: &CacheItem<V>) -> bool {
         // 检查 TTL
-        if let Some(ttl) = self.ttl {
-            if item.age() > ttl {
+        if let Some(ttl) = self.ttl
+            && item.age() > ttl {
                 return true;
             }
-        }
 
         // 检查最大空闲时间
-        if let Some(max_idle_time) = self.max_idle_time {
-            if item.idle_time() > max_idle_time {
+        if let Some(max_idle_time) = self.max_idle_time
+            && item.idle_time() > max_idle_time {
                 return true;
             }
-        }
 
         false
     }
@@ -328,6 +326,12 @@ where
     fn cleanup(&self) -> NetworkResult<()> {
         self.clear();
         Ok(())
+    }
+}
+
+impl Default for CacheManager {
+    fn default() -> Self {
+        Self::new()
     }
 }
 

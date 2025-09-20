@@ -80,6 +80,12 @@ pub struct PriorityChannel<T: Eq> {
     capacity: Option<usize>,
 }
 
+impl<T: PartialEq + Eq> Default for PriorityChannel<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<T: PartialEq + Eq> PriorityChannel<T> {
     /// 创建新的优先级通道
     pub fn new() -> Self {
@@ -106,11 +112,10 @@ impl<T: PartialEq + Eq> PriorityChannel<T> {
         let mut queue = self.queue.lock().unwrap();
 
         // 检查容量限制
-        if let Some(capacity) = self.capacity {
-            if queue.len() >= capacity {
+        if let Some(capacity) = self.capacity
+            && queue.len() >= capacity {
                 return Err(message.into_data());
             }
-        }
 
         queue.push(message);
         self.notifier.notify_one();

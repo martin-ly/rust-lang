@@ -6,6 +6,7 @@ use std::time::{Duration, SystemTime};
 ///
 /// 基于CAP定理和PACELC定理，提供不同的一致性保证
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Default)]
 pub enum ConsistencyLevel {
     /// 强一致性 - 所有节点立即看到相同的数据
     Strong,
@@ -16,6 +17,7 @@ pub enum ConsistencyLevel {
     /// 因果一致性 - 保持因果关系
     Causal,
     /// 最终一致性 - 最终所有节点会收敛到相同状态
+    #[default]
     Eventual,
     /// 会话一致性 - 在同一会话内保持一致性
     Session,
@@ -27,11 +29,6 @@ pub enum ConsistencyLevel {
     Quorum,
 }
 
-impl Default for ConsistencyLevel {
-    fn default() -> Self {
-        ConsistencyLevel::Eventual
-    }
-}
 
 impl ConsistencyLevel {
     /// 获取一致性级别的描述
@@ -68,20 +65,17 @@ impl ConsistencyLevel {
 
 /// CAP定理权衡策略
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Default)]
 pub enum CAPStrategy {
     /// 一致性优先 (CP) - 牺牲可用性保证一致性
     ConsistencyPartition,
     /// 可用性优先 (AP) - 牺牲一致性保证可用性
     AvailabilityPartition,
     /// 平衡策略 - 在一致性和可用性之间动态权衡
+    #[default]
     Balanced,
 }
 
-impl Default for CAPStrategy {
-    fn default() -> Self {
-        CAPStrategy::Balanced
-    }
-}
 
 impl CAPStrategy {
     /// 根据网络分区状态选择一致性级别
@@ -224,21 +218,19 @@ impl SessionConsistencyManager {
 
     /// 检查读操作是否满足会话一致性
     pub fn can_read(&self, session_id: &str, current_version: &VectorClock) -> bool {
-        if let Some(session) = self.sessions.get(session_id) {
-            if let Some(ref last_read) = session.last_read_version {
+        if let Some(session) = self.sessions.get(session_id)
+            && let Some(ref last_read) = session.last_read_version {
                 return !current_version.happens_before(last_read);
             }
-        }
         true
     }
 
     /// 检查写操作是否满足会话一致性
     pub fn can_write(&self, session_id: &str, current_version: &VectorClock) -> bool {
-        if let Some(session) = self.sessions.get(session_id) {
-            if let Some(ref last_write) = session.last_write_version {
+        if let Some(session) = self.sessions.get(session_id)
+            && let Some(ref last_write) = session.last_write_version {
                 return !current_version.happens_before(last_write);
             }
-        }
         true
     }
 
@@ -277,11 +269,10 @@ impl MonotonicConsistencyManager {
 
     /// 检查单调读一致性
     pub fn check_monotonic_read(&mut self, client_id: &str, version: &VectorClock) -> bool {
-        if let Some(last_read) = self.read_versions.get(client_id) {
-            if version.happens_before(last_read) {
+        if let Some(last_read) = self.read_versions.get(client_id)
+            && version.happens_before(last_read) {
                 return false; // 违反了单调读一致性
             }
-        }
         self.read_versions
             .insert(client_id.to_string(), version.clone());
         true
@@ -289,11 +280,10 @@ impl MonotonicConsistencyManager {
 
     /// 检查单调写一致性
     pub fn check_monotonic_write(&mut self, client_id: &str, version: &VectorClock) -> bool {
-        if let Some(last_write) = self.write_versions.get(client_id) {
-            if version.happens_before(last_write) {
+        if let Some(last_write) = self.write_versions.get(client_id)
+            && version.happens_before(last_write) {
                 return false; // 违反了单调写一致性
             }
-        }
         self.write_versions
             .insert(client_id.to_string(), version.clone());
         true

@@ -6,20 +6,20 @@ resolver = "3"
 rust-version = "1.89"
 [dependencies]
 crossbeam = { workspace = true }
-crossbeam-channel = "0.5"
-crossbeam-queue = "0.3"
-crossbeam-utils = "0.8"
-crossbeam-epoch = "0.9"
-crossbeam-deque = "0.8"
+crossbeam-channel = "0.5.2"
+crossbeam-queue = "0.3.10"
+crossbeam-utils = "0.8.19"
+crossbeam-epoch = "0.9.17"
+crossbeam-deque = "0.8.5"
 rayon = { workspace = true }
 parking_lot = { workspace = true }
 dashmap = { workspace = true }
-flume = "0.11"
+flume = "0.11.0"
 tokio = { workspace = true, optional = true }
-async-std = { version = "1", optional = true }
+async-std = { workspace = true, optional = true }
 num_cpus = { workspace = true }
 libc = { workspace = true }
-windows = { version = "0.62", features = ["Win32_System_Threading"], optional = true }
+windows = { version = "0.62.0", features = ["Win32_System_Threading"], optional = true }
 once_cell = { workspace = true }
 anyhow = { workspace = true }
 thiserror = { workspace = true }
@@ -45,7 +45,7 @@ path = "src/bin/main.rs"
 
 [dev-dependencies]
 criterion = { workspace = true }
-loom = { version = "0.7", default-features = false }
+loom = { version = "0.7.0", default-features = false }
 
 [[bench]]
 name = "priority_channels_bench"

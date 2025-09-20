@@ -85,7 +85,7 @@
 ## 1. 依赖
 
 ```toml
-hickory-resolver = { version = "0.24", features = ["tokio-runtime", "system-config", "dns-over-https-rustls", "dns-over-tls-rustls"] }
+hickory-resolver = { version = "0.24.4", features = ["system-config", "dns-over-https-rustls", "dns-over-rustls"] }
 hickory-proto = "0.24"
 ```
 
@@ -271,7 +271,7 @@ async fn main() -> anyhow::Result<()> {
 
 ## 9. 迁移自 trust-dns
 
-`hickory-*` 为 trust-dns 的延续，API 兼容性总体友好。注意选择 `tokio-runtime` 与对应的 DoT/DoH feature。
+`hickory-*` 为 trust-dns 的延续，API 兼容性总体友好。注意在 0.24.4+ 版本中，`tokio-runtime` 特性已默认启用，使用 `dns-over-rustls` 替代 `dns-over-tls`。
 
 ---
 

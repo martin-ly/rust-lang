@@ -85,7 +85,7 @@ impl HierarchicalBarrier {
 
         // 创建多个层级的屏障
         while current_threads > 1 {
-            let level_threads = (current_threads + 1) / 2;
+            let level_threads = current_threads.div_ceil(2);
             levels.push(LockFreeBarrier::new(level_threads));
             current_threads = level_threads;
             level_count += 1;

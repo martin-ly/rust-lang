@@ -39,6 +39,12 @@ pub struct CacheLineAligned {
     pub data: [u8; 64],
 }
 
+impl Default for DefaultLayout {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl DefaultLayout {
     pub fn new() -> Self {
         Self {
@@ -50,6 +56,12 @@ impl DefaultLayout {
     }
 }
 
+impl Default for COptimizedLayout {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl COptimizedLayout {
     pub fn new() -> Self {
         Self {
@@ -58,6 +70,12 @@ impl COptimizedLayout {
             c: 0,
             d: 0,
         }
+    }
+}
+
+impl Default for CacheLineAligned {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -139,8 +157,8 @@ impl ControlFlowOptimizer {
             .map(|&x| {
                 // 使用位运算避免分支
                 let _is_positive = (x >> 31) & 1;
-                let abs_value = (x ^ (x >> 31)) - (x >> 31);
-                abs_value
+                
+                (x ^ (x >> 31)) - (x >> 31)
             })
             .collect()
     }

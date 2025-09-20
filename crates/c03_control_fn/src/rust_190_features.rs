@@ -129,6 +129,12 @@ pub struct BorrowCheckerDemo {
     pub metadata: HashMap<String, String>,
 }
 
+impl Default for BorrowCheckerDemo {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl BorrowCheckerDemo {
     pub fn new() -> Self {
         Self {
@@ -214,6 +220,12 @@ pub fn demonstrate_trait_solver() -> Result<(), String> {
 pub struct AlignmentDemo {
     pub data: [u8; 16],
     pub offset: usize,
+}
+
+impl Default for AlignmentDemo {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AlignmentDemo {

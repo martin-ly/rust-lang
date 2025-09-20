@@ -307,6 +307,12 @@ pub struct AlgorithmBenchmark {
     results: std::collections::HashMap<String, Vec<std::time::Duration>>,
 }
 
+impl Default for AlgorithmBenchmark {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AlgorithmBenchmark {
     pub fn new() -> Self {
         Self {
@@ -327,7 +333,7 @@ impl AlgorithmBenchmark {
         let duration = start.elapsed();
         self.results
             .entry(name.to_string())
-            .or_insert_with(Vec::new)
+            .or_default()
             .push(duration);
     }
 

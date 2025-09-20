@@ -216,7 +216,7 @@ fn calculate_histogram_stats(values: &[f64]) -> HistogramStats {
     let min = sorted_values[0];
     let max = sorted_values[count - 1];
 
-    let median = if count % 2 == 0 {
+    let median = if count.is_multiple_of(2) {
         (sorted_values[count / 2 - 1] + sorted_values[count / 2]) / 2.0
     } else {
         sorted_values[count / 2]
@@ -254,7 +254,7 @@ fn calculate_timer_stats(durations: &[Duration]) -> TimerStats {
     let min = sorted_durations[0];
     let max = sorted_durations[count - 1];
 
-    let median = if count % 2 == 0 {
+    let median = if count.is_multiple_of(2) {
         (sorted_durations[count / 2 - 1] + sorted_durations[count / 2]) / 2
     } else {
         sorted_durations[count / 2]
@@ -267,6 +267,12 @@ fn calculate_timer_stats(durations: &[Duration]) -> TimerStats {
         min,
         max,
         median,
+    }
+}
+
+impl Default for MetricsCollector {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -454,14 +460,12 @@ impl MetricsCollector {
 
     /// 刷新指标缓冲区
     pub fn flush_buffer(&self) -> Result<()> {
-        if let Some(exporter) = &self.exporter {
-            if let Ok(mut buffer) = self.metric_buffer.write() {
-                if !buffer.is_empty() {
+        if let Some(exporter) = &self.exporter
+            && let Ok(mut buffer) = self.metric_buffer.write()
+                && !buffer.is_empty() {
                     exporter.export(&buffer)?;
                     buffer.clear();
                 }
-            }
-        }
         Ok(())
     }
 

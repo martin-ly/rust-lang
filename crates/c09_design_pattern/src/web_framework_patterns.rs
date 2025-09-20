@@ -33,6 +33,12 @@ pub struct InMemoryUserRepository {
     next_id: u64,
 }
 
+impl Default for InMemoryUserRepository {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl InMemoryUserRepository {
     pub fn new() -> Self {
         Self {
@@ -158,6 +164,12 @@ pub struct UserViewModel {
     search_term: String,
 }
 
+impl Default for UserViewModel {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl UserViewModel {
     pub fn new() -> Self {
         Self {
@@ -230,6 +242,12 @@ pub struct Article {
 pub struct ArticleRepository {
     articles: HashMap<u64, Article>,
     next_id: u64,
+}
+
+impl Default for ArticleRepository {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl ArticleRepository {

@@ -295,7 +295,7 @@ pub fn karatsuba_mul(a: &str, b: &str) -> String {
         let s2 = add_str(b0, b1);
         let z1 = karatsuba(&s1, &s2);
         let mid = sub_str(&sub_str(&z1, &z0), &z2);
-        return add_str(&add_shift(&z2, 2 * m), &add_str(&add_shift(&mid, m), &z0));
+        add_str(&add_shift(&z2, 2 * m), &add_str(&add_shift(&mid, m), &z0))
     }
     fn mul_grade_school(a: &str, b: &str) -> String {
         let (a, b) = (a.as_bytes(), b.as_bytes());
@@ -329,7 +329,7 @@ pub fn karatsuba_mul(a: &str, b: &str) -> String {
     }
     fn add_shift(s: &str, k: usize) -> String {
         let mut out = s.to_string();
-        out.extend(std::iter::repeat('0').take(k));
+        out.extend(std::iter::repeat_n('0', k));
         out
     }
     strip(&karatsuba(a, b)).to_string()

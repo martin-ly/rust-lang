@@ -5,6 +5,12 @@ pub struct LockFreePriorityQueue<T> {
     _marker: PhantomData<T>,
 }
 
+impl<T> Default for LockFreePriorityQueue<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<T> LockFreePriorityQueue<T> {
     pub fn new() -> Self {
         Self {

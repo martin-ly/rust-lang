@@ -7,7 +7,6 @@ use c10_networks::{
     error::{ErrorRecovery, NetworkError, NetworkResult},
     protocol::http::{HttpMethod, HttpStatusCode, HttpVersion},
 };
-use tokio;
 
 #[tokio::main]
 async fn main() -> NetworkResult<()> {

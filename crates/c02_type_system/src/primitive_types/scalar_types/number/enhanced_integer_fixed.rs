@@ -405,7 +405,7 @@ pub mod integer_types {
             }
             
             // 安全转换为更大的类型（总是成功）
-            let i64_value: i64 = i32_value.try_into().unwrap();
+            let i64_value: i64 = i32_value.into();
             let u64_value: u64 = i32_value.try_into().unwrap();
             
             println!("安全转换 i32 {} -> i64 {}", i32_value, i64_value);

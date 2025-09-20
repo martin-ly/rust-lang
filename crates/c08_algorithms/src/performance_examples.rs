@@ -27,6 +27,12 @@ pub struct PerformanceBenchmarker {
     results: Vec<BenchmarkResult>,
 }
 
+impl Default for PerformanceBenchmarker {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl PerformanceBenchmarker {
     pub fn new() -> Self {
         Self {
@@ -37,7 +43,7 @@ impl PerformanceBenchmarker {
     /// 运行基准测试
     pub fn benchmark<F>(&mut self, name: &str, iterations: usize, f: F) -> BenchmarkResult
     where
-        F: Fn() -> (),
+        F: Fn(),
     {
         let start = Instant::now();
 
@@ -79,6 +85,12 @@ pub struct MemoryMonitor {
     initial_usage: Option<usize>,
 }
 
+impl Default for MemoryMonitor {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl MemoryMonitor {
     pub fn new() -> Self {
         Self {
@@ -111,6 +123,12 @@ impl MemoryMonitor {
 /// 性能分析器
 pub struct PerformanceProfiler {
     measurements: Vec<(String, Duration)>,
+}
+
+impl Default for PerformanceProfiler {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl PerformanceProfiler {

@@ -60,7 +60,7 @@ pub fn print_unsized_value<T: ?Sized + Debug>(value: &T, type_name: &str) {
 }
 
 #[allow(unused)]
-pub fn test_sized_type() -> () {
+pub fn test_sized_type() {
     let a: i32 = 1;
     let b: &str = "Hello, world!";
     let c: [i32; 3] = [1, 2, 3];
@@ -79,7 +79,7 @@ pub fn test_sized_type() -> () {
     print_sized_value(g, type_name::<&[i32]>());
 }
 
-pub fn test_unsized_type() -> () {
+pub fn test_unsized_type() {
     let a: &str = "Hello, world!";
     let b: &[i32] = &[1, 2, 3];
     let c: &String = &String::from("Hello, world!");

@@ -458,7 +458,7 @@ where
         return identity;
     }
 
-    let chunk_size = (data.len() + num_threads - 1) / num_threads;
+    let chunk_size = data.len().div_ceil(num_threads);
     let data = Arc::new(data.to_vec());
     let results = Arc::new(Mutex::new(Vec::new()));
 
@@ -475,7 +475,7 @@ where
 
                 if start < end {
                     let chunk = &data[start..end];
-                    let local_result = chunk.iter().fold(identity, |acc, x| op(acc, x));
+                    let local_result = chunk.iter().fold(identity, op);
 
                     let mut results = results.lock().unwrap();
                     results.push(local_result);
@@ -489,7 +489,7 @@ where
     }
 
     let results = results.lock().unwrap();
-    results.iter().fold(identity, |acc, x| op(acc, x))
+    results.iter().fold(identity, op)
 }
 
 /// 并发映射算法
@@ -503,7 +503,7 @@ where
         return Vec::new();
     }
 
-    let chunk_size = (data.len() + num_threads - 1) / num_threads;
+    let chunk_size = data.len().div_ceil(num_threads);
     let data = Arc::new(data.to_vec());
     let results = Arc::new(Mutex::new(vec![U::default(); data.len()]));
 

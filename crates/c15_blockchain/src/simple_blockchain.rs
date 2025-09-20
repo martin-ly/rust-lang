@@ -169,7 +169,7 @@ impl Block {
     fn calculate_hash(&self) -> BlockHash<32> {
         let mut hasher = Sha256::new();
         hasher.update(self.index.to_le_bytes());
-        hasher.update(&self.prev_hash.data);
+        hasher.update(self.prev_hash.data);
         hasher.update(self.timestamp.to_le_bytes());
         hasher.update(self.nonce.to_le_bytes());
 
@@ -372,11 +372,10 @@ impl Blockchain {
     /// Validate entire chain
     pub fn is_valid_chain(&self) -> bool {
         for i in 1..self.chain.len() {
-            if let Some(prev_block) = self.chain.get(i - 1) {
-                if self.chain[i].validate(prev_block).is_err() {
+            if let Some(prev_block) = self.chain.get(i - 1)
+                && self.chain[i].validate(prev_block).is_err() {
                     return false;
                 }
-            }
         }
         true
     }

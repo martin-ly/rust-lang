@@ -436,11 +436,10 @@ where
                 let node = &*current;
 
                 for (i, key) in node.keys.iter().enumerate() {
-                    if key >= start && key <= end {
-                        if let Some(value) = node.get_value(i) {
+                    if key >= start && key <= end
+                        && let Some(value) = node.get_value(i) {
                             result.push(value);
                         }
-                    }
 
                     if key > end {
                         return;

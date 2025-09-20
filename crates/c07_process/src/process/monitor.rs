@@ -24,6 +24,7 @@ pub struct PerformanceMetrics {
 
 /// 磁盘IO统计
 #[derive(Debug, Clone)]
+#[derive(Default)]
 pub struct DiskIOStats {
     pub read_bytes: u64,
     pub write_bytes: u64,
@@ -33,6 +34,7 @@ pub struct DiskIOStats {
 
 /// 网络IO统计
 #[derive(Debug, Clone)]
+#[derive(Default)]
 pub struct NetworkIOStats {
     pub bytes_sent: u64,
     pub bytes_received: u64,
@@ -254,24 +256,4 @@ impl Default for PerformanceMetrics {
     }
 }
 
-impl Default for DiskIOStats {
-    fn default() -> Self {
-        Self {
-            read_bytes: 0,
-            write_bytes: 0,
-            read_operations: 0,
-            write_operations: 0,
-        }
-    }
-}
 
-impl Default for NetworkIOStats {
-    fn default() -> Self {
-        Self {
-            bytes_sent: 0,
-            bytes_received: 0,
-            packets_sent: 0,
-            packets_received: 0,
-        }
-    }
-}

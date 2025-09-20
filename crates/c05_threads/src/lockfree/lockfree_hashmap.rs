@@ -423,6 +423,16 @@ pub struct DashMapWrapper<K, V> {
     map: DashMap<K, V>,
 }
 
+impl<K, V> Default for DashMapWrapper<K, V>
+where
+    K: Hash + Eq + Clone,
+    V: Clone,
+ {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<K, V> DashMapWrapper<K, V>
 where
     K: Hash + Eq + Clone,

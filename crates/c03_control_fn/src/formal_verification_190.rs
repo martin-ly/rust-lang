@@ -113,7 +113,7 @@ impl SmackModelCheckingDemo {
 
     /// 添加状态转换
     pub fn add_transition(&mut self, from: u32, to: u32) {
-        self.transitions.entry(from).or_insert_with(Vec::new).push(to);
+        self.transitions.entry(from).or_default().push(to);
     }
 
     /// 执行状态转换
@@ -152,15 +152,14 @@ impl SmackModelCheckingDemo {
                 return true;
             }
 
-            if visited.insert(current_state) {
-                if let Some(transitions) = self.transitions.get(&current_state) {
+            if visited.insert(current_state)
+                && let Some(transitions) = self.transitions.get(&current_state) {
                     for &next_state in transitions {
                         if !visited.contains(&next_state) {
                             queue.push_back(next_state);
                         }
                     }
                 }
-            }
         }
 
         false
@@ -315,6 +314,12 @@ impl KaniModelCheckingDemo {
 pub struct MiraiStaticAnalysisDemo {
     pub data: Vec<String>,
     pub index: usize,
+}
+
+impl Default for MiraiStaticAnalysisDemo {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl MiraiStaticAnalysisDemo {

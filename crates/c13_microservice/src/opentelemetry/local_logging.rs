@@ -367,8 +367,8 @@ impl LocalLogManager {
         }
 
         // 处理剩余的日志条目
-        if !batch.is_empty() {
-            if let Err(e) = Self::flush_batch(
+        if !batch.is_empty()
+            && let Err(e) = Self::flush_batch(
                 &batch,
                 &cache,
                 &current_file,
@@ -379,7 +379,6 @@ impl LocalLogManager {
             ) {
                 eprintln!("Failed to flush final log batch: {}", e);
             }
-        }
     }
 
     /// 刷新日志批次
@@ -558,15 +557,12 @@ impl LocalLogManager {
             let entry = entry?;
             let path = entry.path();
 
-            if path.is_file() {
-                if let Some(filename) = path.file_name().and_then(|n| n.to_str()) {
-                    if filename.starts_with(file_prefix) && filename.ends_with(".log") {
-                        if let Ok(metadata) = entry.metadata() {
+            if path.is_file()
+                && let Some(filename) = path.file_name().and_then(|n| n.to_str())
+                    && filename.starts_with(file_prefix) && filename.ends_with(".log")
+                        && let Ok(metadata) = entry.metadata() {
                             log_files.push((path, metadata.modified()?));
                         }
-                    }
-                }
-            }
         }
 
         // 按修改时间排序（最新的在前）
@@ -604,11 +600,10 @@ impl LocalLogManager {
                     formatted.push_str(&format!("[{}] ", module));
                 }
 
-                if config.include_thread_id {
-                    if let Some(ref thread_id) = entry.thread_id {
+                if config.include_thread_id
+                    && let Some(ref thread_id) = entry.thread_id {
                         formatted.push_str(&format!("[{}] ", thread_id));
                     }
-                }
 
                 formatted.push_str(&entry.message);
 
@@ -704,13 +699,12 @@ impl LocalLogManager {
             let entry = entry?;
             let path = entry.path();
 
-            if path.is_file() {
-                if let Some(filename) = path.file_name().and_then(|n| n.to_str()) {
-                    if filename.starts_with(file_prefix)
+            if path.is_file()
+                && let Some(filename) = path.file_name().and_then(|n| n.to_str())
+                    && filename.starts_with(file_prefix)
                         && filename.ends_with(".log")
                         && !filename.ends_with(".gz")
-                    {
-                        if let Ok(metadata) = entry.metadata() {
+                        && let Ok(metadata) = entry.metadata() {
                             let modified = metadata.modified()?;
                             let now = SystemTime::now();
 
@@ -718,9 +712,6 @@ impl LocalLogManager {
                                 Self::compress_file(&path)?;
                             }
                         }
-                    }
-                }
-            }
         }
         Ok(())
     }

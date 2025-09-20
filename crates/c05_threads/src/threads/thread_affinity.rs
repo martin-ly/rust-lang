@@ -50,6 +50,12 @@ pub struct PerformanceStats {
     pub last_updated: std::time::Instant,
 }
 
+impl Default for ThreadAffinityManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ThreadAffinityManager {
     pub fn new() -> Self {
         Self {
@@ -356,7 +362,7 @@ pub fn demonstrate_thread_affinity() {
             // 模拟工作负载
             for i in 0..1000 {
                 // 模拟CPU密集型工作
-                let _ = (0..1000).fold(0, |acc, x| acc + x);
+                let _ = (0..1000).sum::<i32>();
 
                 // 更新性能统计
                 let stats = PerformanceStats {

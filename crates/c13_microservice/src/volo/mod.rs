@@ -315,14 +315,14 @@ impl VoloClient {
         let request = CreateUserRequest { name, email };
         let response = self
             .client
-            .post(&format!("{}/users", self.base_url))
+            .post(format!("{}/users", self.base_url))
             .json(&request)
             .send()
             .await
-            .map_err(|e| Error::Http(e))?;
+            .map_err(Error::Http)?;
 
         if response.status().is_success() {
-            let user: User = response.json().await.map_err(|e| Error::Http(e))?;
+            let user: User = response.json().await.map_err(Error::Http)?;
             Ok(user)
         } else {
             Err(Error::Http(response.error_for_status().unwrap_err()))
@@ -333,13 +333,13 @@ impl VoloClient {
     pub async fn get_user(&self, id: String) -> Result<User> {
         let response = self
             .client
-            .get(&format!("{}/users/{}", self.base_url, id))
+            .get(format!("{}/users/{}", self.base_url, id))
             .send()
             .await
-            .map_err(|e| Error::Http(e))?;
+            .map_err(Error::Http)?;
 
         if response.status().is_success() {
-            let user: User = response.json().await.map_err(|e| Error::Http(e))?;
+            let user: User = response.json().await.map_err(Error::Http)?;
             Ok(user)
         } else {
             Err(Error::Http(response.error_for_status().unwrap_err()))
@@ -360,14 +360,14 @@ impl VoloClient {
         };
         let response = self
             .client
-            .put(&format!("{}/users/{}", self.base_url, id))
+            .put(format!("{}/users/{}", self.base_url, id))
             .json(&request)
             .send()
             .await
-            .map_err(|e| Error::Http(e))?;
+            .map_err(Error::Http)?;
 
         if response.status().is_success() {
-            let user: User = response.json().await.map_err(|e| Error::Http(e))?;
+            let user: User = response.json().await.map_err(Error::Http)?;
             Ok(user)
         } else {
             Err(Error::Http(response.error_for_status().unwrap_err()))
@@ -378,13 +378,13 @@ impl VoloClient {
     pub async fn delete_user(&self, id: String) -> Result<String> {
         let response = self
             .client
-            .delete(&format!("{}/users/{}", self.base_url, id))
+            .delete(format!("{}/users/{}", self.base_url, id))
             .send()
             .await
-            .map_err(|e| Error::Http(e))?;
+            .map_err(Error::Http)?;
 
         if response.status().is_success() {
-            let result: String = response.json().await.map_err(|e| Error::Http(e))?;
+            let result: String = response.json().await.map_err(Error::Http)?;
             Ok(result)
         } else {
             Err(Error::Http(response.error_for_status().unwrap_err()))
@@ -395,14 +395,14 @@ impl VoloClient {
     pub async fn list_users(&self, page: u32, page_size: u32) -> Result<Vec<User>> {
         let response = self
             .client
-            .get(&format!("{}/users", self.base_url))
+            .get(format!("{}/users", self.base_url))
             .query(&[("page", page), ("page_size", page_size)])
             .send()
             .await
-            .map_err(|e| Error::Http(e))?;
+            .map_err(Error::Http)?;
 
         if response.status().is_success() {
-            let users: Vec<User> = response.json().await.map_err(|e| Error::Http(e))?;
+            let users: Vec<User> = response.json().await.map_err(Error::Http)?;
             Ok(users)
         } else {
             Err(Error::Http(response.error_for_status().unwrap_err()))

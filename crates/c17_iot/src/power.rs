@@ -13,6 +13,12 @@ pub struct PowerManager {
     consumption_history: Vec<PowerConsumption>,
 }
 
+impl Default for PowerManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl PowerManager {
     pub fn new() -> Self {
         Self {

@@ -430,16 +430,12 @@ pub struct PrivateKey {
 /// 表示数字签名。
 /// Represents a digital signature.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Default)]
 pub struct Signature {
     /// 签名字节 / Signature Bytes
     pub bytes: Vec<u8>,
 }
 
-impl Default for Signature {
-    fn default() -> Self {
-        Self { bytes: Vec::new() }
-    }
-}
 
 /// 智能合约 / Smart Contract
 ///

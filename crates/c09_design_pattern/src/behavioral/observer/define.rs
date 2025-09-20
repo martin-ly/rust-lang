@@ -14,6 +14,12 @@ pub struct ConcreteSubject<T> {
     observers: Vec<Box<dyn Observer<T>>>,
 }
 
+impl<T> Default for ConcreteSubject<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<T> ConcreteSubject<T> {
     pub fn new() -> Self {
         ConcreteSubject {

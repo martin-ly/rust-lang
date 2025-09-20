@@ -94,6 +94,12 @@ pub struct TokioRuntime {
     status: Arc<Mutex<RuntimeStatus>>,
 }
 
+impl Default for TokioRuntime {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl TokioRuntime {
     pub fn new() -> Self {
         let runtime = Arc::new(
@@ -158,6 +164,12 @@ impl TokioRuntime {
 pub struct SmolRuntime {
     executor: Arc<smol::Executor<'static>>,
     status: Arc<Mutex<RuntimeStatus>>,
+}
+
+impl Default for SmolRuntime {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl SmolRuntime {

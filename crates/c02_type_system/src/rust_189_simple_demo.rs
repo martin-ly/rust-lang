@@ -130,6 +130,12 @@ pub mod simple_demo {
         pub data: [[T; COLS]; ROWS],
     }
 
+    impl<T: Default + Copy, const ROWS: usize, const COLS: usize> Default for Matrix<T, ROWS, COLS> {
+        fn default() -> Self {
+            Self::new()
+        }
+    }
+
     impl<T: Default + Copy, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, COLS> {
         /// 创建新的矩阵
         ///
@@ -198,6 +204,12 @@ pub mod simple_demo {
         ///
         /// 使用数组存储向量数据，维度在编译时确定。
         pub data: [T; DIM],
+    }
+
+    impl<T: Default + Copy, const DIM: usize> Default for Vector<T, DIM> {
+        fn default() -> Self {
+            Self::new()
+        }
     }
 
     impl<T: Default + Copy, const DIM: usize> Vector<T, DIM> {
@@ -504,7 +516,7 @@ pub fn demonstrate_all_rust_189_features() {
     println!("2. 不匹配的生命周期语法警告:");
     let data = "Hello";
     let metadata = "World";
-    let composed = simple_demo::LifetimeComposed::new(&data, &metadata);
+    let composed = simple_demo::LifetimeComposed::new(&data, metadata);
     println!("  生命周期组合: {:?}", composed);
     println!();
     

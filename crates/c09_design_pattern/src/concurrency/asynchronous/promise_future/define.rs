@@ -26,11 +26,7 @@ impl<T> Promise<T> {
         T: Clone,
     {
         let result = self.result.lock().unwrap();
-        if let Some(ref value) = *result {
-            Some(callback(value.clone()))
-        } else {
-            None
-        }
+        (*result).as_ref().map(|value| callback(value.clone()))
     }
 }
 

@@ -39,6 +39,12 @@ pub struct UserProfile {
     pub last_login: Option<u64>,
 }
 
+impl Default for AuthService {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AuthService {
     pub fn new() -> Self {
         Self {
@@ -141,6 +147,12 @@ pub struct CacheEntry {
     pub created_at: u64,
 }
 
+impl Default for CacheService {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl CacheService {
     pub fn new() -> Self {
         Self {
@@ -230,6 +242,12 @@ pub struct BatchOperation {
     pub status: String,
     pub created_at: u64,
     pub completed_at: Option<u64>,
+}
+
+impl Default for BatchService {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl BatchService {
@@ -373,6 +391,12 @@ pub struct AdvancedGrpcService {
     pub auth_service: AuthService,
     pub cache_service: CacheService,
     pub batch_service: BatchService,
+}
+
+impl Default for AdvancedGrpcService {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AdvancedGrpcService {

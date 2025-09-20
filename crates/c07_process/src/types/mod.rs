@@ -121,6 +121,7 @@ pub struct ProcessConfig {
 
 /// 资源限制结构
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Default)]
 pub struct ResourceLimits {
     /// 最大内存使用量（字节）
     pub max_memory: Option<u64>,
@@ -132,16 +133,6 @@ pub struct ResourceLimits {
     pub max_file_size: Option<u64>,
 }
 
-impl Default for ResourceLimits {
-    fn default() -> Self {
-        Self {
-            max_memory: None,
-            max_file_descriptors: None,
-            max_cpu_time: None,
-            max_file_size: None,
-        }
-    }
-}
 
 impl Default for IpcConfig {
     fn default() -> Self {

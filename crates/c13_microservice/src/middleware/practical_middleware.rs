@@ -124,6 +124,12 @@ pub struct RateLimitState {
     pub burst_tokens: Arc<RwLock<HashMap<String, u32>>>,
 }
 
+impl Default for RateLimitState {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl RateLimitState {
     pub fn new() -> Self {
         Self {
@@ -388,6 +394,12 @@ pub struct MiddlewareManager {
     pub health_check: HealthCheckMiddleware,
     pub error_handling: ErrorHandlingMiddleware,
     pub rate_limit_state: RateLimitState,
+}
+
+impl Default for MiddlewareManager {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl MiddlewareManager {

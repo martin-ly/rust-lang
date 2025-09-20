@@ -218,6 +218,12 @@ pub struct MessageQueueManager {
     pub redis: Option<Redis>,
 }
 
+impl Default for MessageQueueManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl MessageQueueManager {
     pub fn new() -> Self {
         Self {

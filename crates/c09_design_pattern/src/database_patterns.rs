@@ -25,6 +25,12 @@ pub struct MockDatabaseConnection {
     in_transaction: bool,
 }
 
+impl Default for MockDatabaseConnection {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl MockDatabaseConnection {
     pub fn new() -> Self {
         let mut data = HashMap::new();
@@ -348,6 +354,12 @@ pub struct UnitOfWorkImpl {
     trackers: Vec<Box<dyn Any>>,
 }
 
+impl Default for UnitOfWorkImpl {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl UnitOfWorkImpl {
     pub fn new() -> Self {
         Self {
@@ -428,6 +440,12 @@ pub trait Repository<T> {
 /// 用户Repository实现
 pub struct UserRepository {
     unit_of_work: UnitOfWorkImpl,
+}
+
+impl Default for UserRepository {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl UserRepository {

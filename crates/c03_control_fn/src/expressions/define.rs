@@ -6,8 +6,8 @@
 
 #[allow(unused)]
 // 表达式定义
-pub fn test_expression() -> () {
-    ()
+pub fn test_expression() {
+    
 }
 
 /*
@@ -19,7 +19,7 @@ pub fn test_expression() -> () {
     例如，一个函数项可以包含多个表达式作为其主体：
 */
 #[allow(unused)]
-pub fn test_expression_2() -> () {
+pub fn test_expression_2() {
     let x = 5; // 语句
     let y = 10; // 语句
     let z = x + y; // 表达式

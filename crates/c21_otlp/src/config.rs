@@ -136,6 +136,7 @@ impl Default for TlsConfig {
 
 /// 认证配置
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Default)]
 pub struct AuthConfig {
     /// API密钥
     pub api_key: Option<String>,
@@ -145,15 +146,6 @@ pub struct AuthConfig {
     pub custom_headers: HashMap<String, String>,
 }
 
-impl Default for AuthConfig {
-    fn default() -> Self {
-        Self {
-            api_key: None,
-            bearer_token: None,
-            custom_headers: HashMap::new(),
-        }
-    }
-}
 
 /// OTLP客户端配置
 #[derive(Debug, Clone, Serialize, Deserialize)]

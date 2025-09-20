@@ -27,6 +27,12 @@ pub struct ShapeGroup {
     pub shapes: Vec<Box<dyn Shape>>, // 使用 Box 来存储不同类型的形状
 }
 
+impl Default for ShapeGroup {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ShapeGroup {
     pub fn new() -> Self {
         ShapeGroup { shapes: Vec::new() }

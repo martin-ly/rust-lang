@@ -559,6 +559,12 @@ pub struct TimeRange {
     pub to: u64,
 }
 
+impl Default for ObservabilityStack {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ObservabilityStack {
     pub fn new() -> Self {
         Self {
@@ -571,6 +577,12 @@ impl ObservabilityStack {
     }
 }
 
+impl Default for MetricsCollector {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl MetricsCollector {
     pub fn new() -> Self {
         Self {
@@ -579,6 +591,12 @@ impl MetricsCollector {
             aggregation: AggregationConfig::new(),
             retention: RetentionConfig::new(),
         }
+    }
+}
+
+impl Default for AggregationConfig {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -597,6 +615,12 @@ impl AggregationConfig {
     }
 }
 
+impl Default for RetentionConfig {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl RetentionConfig {
     pub fn new() -> Self {
         Self {
@@ -604,6 +628,12 @@ impl RetentionConfig {
             compression_enabled: true,
             downsampling: DownsamplingConfig::new(),
         }
+    }
+}
+
+impl Default for DownsamplingConfig {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -627,6 +657,12 @@ impl DownsamplingConfig {
     }
 }
 
+impl Default for TracingCollector {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl TracingCollector {
     pub fn new() -> Self {
         Self {
@@ -635,6 +671,12 @@ impl TracingCollector {
             sampling: SamplingConfig::new(),
             context_propagation: ContextPropagation::new(),
         }
+    }
+}
+
+impl Default for SamplingConfig {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -648,12 +690,24 @@ impl SamplingConfig {
     }
 }
 
+impl Default for ContextPropagation {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ContextPropagation {
     pub fn new() -> Self {
         Self {
             propagation_formats: vec![PropagationFormat::W3CTraceContext],
             baggage_enabled: true,
         }
+    }
+}
+
+impl Default for LoggingCollector {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -665,6 +719,12 @@ impl LoggingCollector {
             filters: Vec::new(),
             formatters: Vec::new(),
         }
+    }
+}
+
+impl Default for AlertingManager {
+    fn default() -> Self {
+        Self::new()
     }
 }
 

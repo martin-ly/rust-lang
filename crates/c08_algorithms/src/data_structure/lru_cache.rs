@@ -41,11 +41,10 @@ impl<K: std::hash::Hash + Eq + Clone, V> LruCache<K, V> {
             self.touch(&key);
             return;
         }
-        if self.map.len() == self.cap {
-            if let Some(old) = self.order.pop_front() {
+        if self.map.len() == self.cap
+            && let Some(old) = self.order.pop_front() {
                 self.map.remove(&old);
             }
-        }
         self.order.push_back(key.clone());
         self.map.insert(key, (value, 0));
     }

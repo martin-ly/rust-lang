@@ -158,9 +158,7 @@ impl Trie {
             self.nodes[v].fail = 0;
             q.push_back(v);
             // 保证根缺边填充到根
-            if !self.nodes[0].next.contains_key(&ch) {
-                self.nodes[0].next.insert(ch, v);
-            }
+            self.nodes[0].next.entry(ch).or_insert(v);
         }
         while let Some(u) = q.pop_front() {
             let fail_u = self.nodes[u].fail;
@@ -332,9 +330,7 @@ pub fn lcp_kasai(text: &str, sa: &[usize]) -> Vec<usize> {
                 h += 1;
             }
             lcp[r] = h;
-            if h > 0 {
-                h -= 1;
-            }
+            h = h.saturating_sub(1);
         }
     }
     lcp
@@ -415,7 +411,7 @@ pub fn bmh_search(text: &str, pattern: &str) -> Vec<usize> {
     }
     let tb = text.as_bytes();
     let pb = pattern.as_bytes();
-    let mut shift = [m as usize; 256];
+    let mut shift = [m; 256];
     for i in 0..m - 1 {
         shift[pb[i] as usize] = m - 1 - i;
     }
@@ -455,6 +451,12 @@ pub struct SamState {
 pub struct SuffixAutomaton {
     pub st: Vec<SamState>,
     pub last: usize,
+}
+
+impl Default for SuffixAutomaton {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl SuffixAutomaton {

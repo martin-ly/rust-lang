@@ -163,7 +163,7 @@ impl HttpResponseSerializer {
         // 序列化状态行
         buffer.extend_from_slice(version.as_bytes());
         buffer.extend_from_slice(b" ");
-        buffer.extend_from_slice(&status_code.to_string().as_bytes());
+        buffer.extend_from_slice(status_code.to_string().as_bytes());
         buffer.extend_from_slice(b" ");
         buffer.extend_from_slice(status_text.as_bytes());
         buffer.extend_from_slice(b"\r\n");
@@ -220,11 +220,10 @@ impl WebSocketFrameSerializer {
         }
 
         // 掩码键
-        if frame.mask {
-            if let Some(key) = frame.masking_key {
+        if frame.mask
+            && let Some(key) = frame.masking_key {
                 buffer.extend_from_slice(&key);
             }
-        }
 
         // 载荷
         let payload = frame.payload.clone();

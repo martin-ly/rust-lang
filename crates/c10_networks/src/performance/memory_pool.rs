@@ -180,12 +180,11 @@ impl MemoryPool {
         for block in blocks.iter_mut() {
             if block.is_allocated() {
                 // 检查是否超时（超过5分钟未使用）
-                if let Some(age) = block.age() {
-                    if age > Duration::from_secs(300) {
+                if let Some(age) = block.age()
+                    && age > Duration::from_secs(300) {
                         block.deallocate();
                         deallocated += 1;
                     }
-                }
             }
         }
 
@@ -286,8 +285,8 @@ impl Drop for PooledBytes {
         let mut blocks = self.blocks.lock().unwrap();
         let mut stats = self.stats.lock().unwrap();
 
-        if let Some(block) = blocks.get_mut(self.block_index) {
-            if block.is_allocated() {
+        if let Some(block) = blocks.get_mut(self.block_index)
+            && block.is_allocated() {
                 block.deallocate();
 
                 // 更新统计信息
@@ -296,7 +295,6 @@ impl Drop for PooledBytes {
                 stats.used_size -= block.size;
                 stats.free_size += block.size;
             }
-        }
     }
 }
 

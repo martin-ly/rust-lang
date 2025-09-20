@@ -86,6 +86,12 @@ mod backend {
 mod backend {
     use super::*;
     pub struct EventLoopImpl;
+    impl Default for EventLoopImpl {
+        fn default() -> Self {
+            Self::new()
+        }
+    }
+
     impl EventLoopImpl {
         pub fn new() -> Self {
             Self

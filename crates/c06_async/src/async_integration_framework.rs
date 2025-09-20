@@ -77,6 +77,12 @@ pub struct AsyncCommonalityAnalyzer {
     runtimes: HashMap<String, AsyncRuntimeCommonality>,
 }
 
+impl Default for AsyncCommonalityAnalyzer {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncCommonalityAnalyzer {
     pub fn new() -> Self {
         let mut analyzer = Self {
@@ -353,6 +359,12 @@ pub enum AggregationStrategy {
     Pipeline,      // 管道聚合
     FanOut,        // 扇出聚合
     FanIn,         // 扇入聚合
+}
+
+impl Default for AggregationCompositionFramework {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AggregationCompositionFramework {

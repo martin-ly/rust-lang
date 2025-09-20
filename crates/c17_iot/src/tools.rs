@@ -30,7 +30,7 @@ impl IoTTools {
         let mut label_str = String::new();
         for (k, v) in labels {
             if !label_str.is_empty() {
-                label_str.push_str(",");
+                label_str.push(',');
             }
             label_str.push_str(&format!("{}={}", k, v));
         }

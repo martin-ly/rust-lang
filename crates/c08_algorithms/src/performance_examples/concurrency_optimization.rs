@@ -9,6 +9,12 @@ pub struct AtomicCounter {
     value: AtomicUsize,
 }
 
+impl Default for AtomicCounter {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AtomicCounter {
     pub fn new() -> Self {
         Self {
@@ -79,6 +85,12 @@ impl Drop for SimpleThreadPool {
 pub struct LockFreeStack<T> {
     head: Arc<AtomicUsize>,
     data: Arc<Mutex<Vec<Option<T>>>>,
+}
+
+impl<T> Default for LockFreeStack<T> {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl<T> LockFreeStack<T> {

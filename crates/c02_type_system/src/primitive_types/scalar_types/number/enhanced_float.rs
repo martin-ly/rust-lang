@@ -122,7 +122,7 @@ pub mod float_types {
 
         /// 精度和舍入
         pub fn precision_and_rounding() {
-            let value: f32 = 3.14159265359;
+            let value: f32 = 3.141_592_7;
             
             println!("f32 精度和舍入:");
             println!("  原始值: {}", value);
@@ -237,7 +237,7 @@ pub mod float_types {
 
         /// 精度和舍入
         pub fn precision_and_rounding() {
-            let value: f64 = 3.141592653589793238462643383279;
+            let value: f64 = 3.141_592_653_589_793;
             
             println!("f64 精度和舍入:");
             println!("  原始值: {}", value);

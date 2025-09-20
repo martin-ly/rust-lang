@@ -8,6 +8,12 @@ pub struct SimpleProfiler {
     measurements: HashMap<String, Vec<Duration>>,
 }
 
+impl Default for SimpleProfiler {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SimpleProfiler {
     pub fn new() -> Self {
         Self {
@@ -26,7 +32,7 @@ impl SimpleProfiler {
 
         self.measurements
             .entry(name.to_string())
-            .or_insert_with(Vec::new)
+            .or_default()
             .push(duration);
 
         result
@@ -70,6 +76,12 @@ pub struct MemoryMonitor {
     initial_usage: Option<usize>,
 }
 
+impl Default for MemoryMonitor {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl MemoryMonitor {
     pub fn new() -> Self {
         Self {
@@ -101,6 +113,12 @@ impl MemoryMonitor {
 pub struct MetricsCollector {
     metrics: HashMap<String, f64>,
     counters: HashMap<String, u64>,
+}
+
+impl Default for MetricsCollector {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl MetricsCollector {

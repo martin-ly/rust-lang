@@ -36,15 +36,14 @@ impl SupervisedLearning for DecisionTreeClassifier {
         }
 
         // 简化实现：使用第一个特征的平均值作为分割点
-        if let Some(first_sample) = data.first() {
-            if !first_sample.is_empty() {
+        if let Some(first_sample) = data.first()
+            && !first_sample.is_empty() {
                 let avg_value: f64 =
                     data.iter().map(|sample| sample[0]).sum::<f64>() / data.len() as f64;
 
                 let most_common_label = *labels.iter().max().unwrap_or(&0);
                 self.rules = Some(vec![(0, avg_value, most_common_label)]);
             }
-        }
 
         self.is_fitted = true;
         Ok(())
@@ -55,17 +54,15 @@ impl SupervisedLearning for DecisionTreeClassifier {
             return Err(MLError::ModelNotTrained);
         }
 
-        if let Some(rules) = &self.rules {
-            if let Some((feature_idx, threshold, label)) = rules.first() {
-                if sample.len() > *feature_idx {
+        if let Some(rules) = &self.rules
+            && let Some((feature_idx, threshold, label)) = rules.first()
+                && sample.len() > *feature_idx {
                     if sample[*feature_idx] >= *threshold {
                         return Ok(*label);
                     } else {
                         return Ok(0); // 默认类别
                     }
                 }
-            }
-        }
 
         Ok(0)
     }

@@ -252,8 +252,8 @@ impl OtlpExporter {
                 }
 
                 // 处理导出队列
-                if let Some(data) = export_queue.recv().await {
-                    if let Some(pool) = transport_pool.write().await.as_mut() {
+                if let Some(data) = export_queue.recv().await
+                    && let Some(pool) = transport_pool.write().await.as_mut() {
                         let result = Self::export_batch(pool, data.clone()).await;
                         
                         // 更新指标
@@ -270,7 +270,6 @@ impl OtlpExporter {
                         }
                         metrics_guard.total_data_exported += data.len() as u64;
                     }
-                }
             }
         });
     }
@@ -293,7 +292,7 @@ impl OtlpExporter {
                 Err(e) => {
                     last_error = Some(e);
                     
-                    if !RetryUtils::should_retry(attempt, self.config.retry_config.max_retries, &last_error.as_ref().unwrap()) {
+                    if !RetryUtils::should_retry(attempt, self.config.retry_config.max_retries, last_error.as_ref().unwrap()) {
                         break;
                     }
 
@@ -438,12 +437,11 @@ impl BatchExporter {
     /// 检查并处理超时的批次
     pub async fn check_timeout(&self) -> Result<Option<ExportResult>> {
         let timer_guard = self.batch_timer.read().await;
-        if let Some(timer) = *timer_guard {
-            if tokio::time::Instant::now().duration_since(timer) >= self.batch_timeout {
+        if let Some(timer) = *timer_guard
+            && tokio::time::Instant::now().duration_since(timer) >= self.batch_timeout {
                 drop(timer_guard);
                 return Ok(Some(self.flush().await?));
             }
-        }
         Ok(None)
     }
 }

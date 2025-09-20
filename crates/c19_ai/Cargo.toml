@@ -21,67 +21,67 @@ thiserror = { workspace = true }
 uuid = { workspace = true }
 
 # 数学和数值计算 - 2025年最新版本
-ndarray = { version = "0.16", features = ["serde", "rayon", "approx"] }
-nalgebra = "0.34"
-num-traits = "0.2"
-num-complex = "0.4"
-approx = "0.5"
-statrs = "0.18"
+ndarray = { version = "0.16.0", features = ["serde", "rayon", "approx"] }
+nalgebra = "0.34.0"
+num-traits = "0.2.0"
+num-complex = "0.4.0"
+approx = "0.5.0"
+statrs = "0.18.0"
 
 # 机器学习核心库 - 2025年最新版本
-linfa = { version = "0.7", optional = true }
-smartcore = { version = "0.4", optional = true }
-candle-core = { version = "0.9", optional = true }
-candle-nn = { version = "0.9", optional = true }
-candle-transformers = { version = "0.9", optional = true }
-candle-datasets = { version = "0.9", optional = true }
-candle-kernels = { version = "0.9", optional = true }
+linfa = { version = "0.7.0", optional = true }
+smartcore = { version = "0.4.0", optional = true }
+candle-core = { version = "0.9.0", optional = true }
+candle-nn = { version = "0.9.0", optional = true }
+candle-transformers = { version = "0.9.0", optional = true }
+candle-datasets = { version = "0.9.0", optional = true }
+candle-kernels = { version = "0.9.0", optional = true }
 
 # 深度学习框架 - 2025年最新版本
 # burn = { version = "0.13", optional = true }  # 暂时禁用以避免工作区冲突
 # tch = { version = "0.14", optional = true }   # 暂时禁用以避免工作区冲突
-dfdx = { version = "0.13", optional = true }
+dfdx = { version = "0.13.0", optional = true }
 
 # 自然语言处理 - 2025年最新版本
-tokenizers = { version = "0.22", optional = true }
-rust-bert = { version = "0.23", optional = true }
-llm-chain = { version = "0.13", optional = true }
-llm-chain-openai = { version = "0.13", optional = true }
-llm-chain-llama = { version = "0.13", optional = true }
-llm-chain-local = { version = "0.12", optional = true }
+tokenizers = { version = "0.22.0", optional = true }
+rust-bert = { version = "0.23.0", optional = true }
+llm-chain = { version = "0.13.0", optional = true }
+llm-chain-openai = { version = "0.13.0", optional = true }
+llm-chain-llama = { version = "0.13.0", optional = true }
+llm-chain-local = { version = "0.12.0", optional = true }
 
 # 计算机视觉 - 2025年最新版本
-opencv = { version = "0.95", optional = true }
+opencv = { version = "0.95.0", optional = true }
 image = { version = "0.25.8", optional = true }
-imageproc = { version = "0.25", optional = true }
+imageproc = { version = "0.25.0", optional = true }
 
 # 数据处理 - 2025年最新版本
-polars = { version = "0.50", features = ["lazy", "temporal", "strings", "dtype-categorical", "dtype-struct"], optional = true }
-datafusion = { version = "49.0", optional = true }
-arrow = { version = "56.0", optional = true }
+polars = { version = "0.50.0", features = ["lazy", "temporal", "strings", "dtype-categorical", "dtype-struct"], optional = true }
+datafusion = { version = "49.0.0", optional = true }
+arrow = { version = "56.0.0", optional = true }
 
 # 向量数据库和搜索 - 2025年最新版本
-qdrant-client = { version = "1.8", optional = true }
-tantivy = { version = "0.25", optional = true }
-hnsw_rs = { version = "0.3", optional = true }
+qdrant-client = { version = "1.8.0", optional = true }
+tantivy = { version = "0.25.0", optional = true }
+hnsw_rs = { version = "0.3.0", optional = true }
 
 # 网络和API - 使用工作区统一版本
 reqwest = { workspace = true }
-async-openai = { version = "0.29", optional = true }
-openai = { version = "1.0", optional = true }
+async-openai = { version = "0.29.0", optional = true }
+openai = { version = "1.0.0", optional = true }
 
 # 序列化和配置 - 2025年最新版本
 toml = { workspace = true }
-yaml-rust = "0.4"
+yaml-rust = "0.4.0"
 bincode = { workspace = true }
-ron = "0.11"
+ron = "0.11.0"
 serde_json = { workspace = true }
 
 # 日志和监控 - 使用工作区统一版本
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
 metrics = { version = "0.24.2", optional = true }
-metrics-exporter-prometheus = { version = "0.17", optional = true }
+metrics-exporter-prometheus = { version = "0.17.0", optional = true }
 
 # 并发和性能 - 统一使用工作区版本
 rayon = { workspace = true }
@@ -97,24 +97,24 @@ tempfile = { workspace = true }
 
 # AI 特定依赖 - 2025年最新版本
 # 大语言模型支持
-llama-cpp-2 = { version = "0.1", optional = true }
+llama-cpp-2 = { version = "0.1.0", optional = true }
 # 图神经网络
-petgraph = { version = "0.8", optional = true }
+petgraph = { version = "0.8.0", optional = true }
 # 时间序列 - 使用工作区统一版本
 chrono = { workspace = true, optional = true }
 # 配置管理 - 使用可用版本
 config = { workspace = true }
 # 错误处理增强
-miette = "7.0"
+miette = "7.0.0"
 # 内存管理
-bumpalo = "3.19"
+bumpalo = "3.19.0"
 # 异步运行时增强 - 使用工作区版本
 futures = { workspace = true }
 async-trait = { workspace = true }
 
 # 新增：2025年最新AI特性
 # 强化学习
-gymnasium-rs = { version = "0.1", optional = true }
+gymnasium-rs = { version = "0.1.0", optional = true }
 
 [dev-dependencies]
 tempfile = { workspace = true }

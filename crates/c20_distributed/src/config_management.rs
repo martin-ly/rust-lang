@@ -115,11 +115,10 @@ impl FileSource {
 
 impl ConfigSource for FileSource {
     fn load(&mut self) -> Result<HashMap<String, ConfigValue>, String> {
-        if let Some(ts) = self.last_loaded {
-            if ts.elapsed() < self.min_reload_interval {
+        if let Some(ts) = self.last_loaded
+            && ts.elapsed() < self.min_reload_interval {
                 return Ok(HashMap::new());
             }
-        }
         self.last_loaded = Some(Instant::now());
 
         if !self.path.exists() {
@@ -207,6 +206,12 @@ pub struct ConfigManager {
     store: HashMap<String, ConfigValue>,
     version: u64,
     subscribers: Vec<Subscriber>,
+}
+
+impl Default for ConfigManager {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl ConfigManager {

@@ -568,6 +568,12 @@ pub enum LogFormat {
     Custom(String),
 }
 
+impl Default for SecurityFramework {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SecurityFramework {
     pub fn new() -> Self {
         Self {
@@ -578,6 +584,12 @@ impl SecurityFramework {
             security_zones: Vec::new(),
             access_control: AccessControl::new(),
         }
+    }
+}
+
+impl Default for TlsManager {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -592,6 +604,12 @@ impl TlsManager {
     }
 }
 
+impl Default for CertificateValidation {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl CertificateValidation {
     pub fn new() -> Self {
         Self {
@@ -600,6 +618,12 @@ impl CertificateValidation {
             verify_expiry: true,
             trusted_cas: Vec::new(),
         }
+    }
+}
+
+impl Default for DtlsManager {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -614,6 +638,12 @@ impl DtlsManager {
     }
 }
 
+impl Default for RetransmissionConfig {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl RetransmissionConfig {
     pub fn new() -> Self {
         Self {
@@ -621,6 +651,12 @@ impl RetransmissionConfig {
             initial_timeout: Duration::from_millis(1000),
             timeout_multiplier: 2.0,
         }
+    }
+}
+
+impl Default for AntiReplayProtection {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -633,6 +669,12 @@ impl AntiReplayProtection {
     }
 }
 
+impl Default for OscoreManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl OscoreManager {
     pub fn new() -> Self {
         Self {
@@ -640,6 +682,12 @@ impl OscoreManager {
             key_derivation: KeyDerivation::new(),
             sequence_number: SequenceNumberManager::new(),
         }
+    }
+}
+
+impl Default for SecurityContext {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -654,6 +702,12 @@ impl SecurityContext {
     }
 }
 
+impl Default for KeyDerivation {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl KeyDerivation {
     pub fn new() -> Self {
         Self {
@@ -661,6 +715,12 @@ impl KeyDerivation {
             salt: Vec::new(),
             info: Vec::new(),
         }
+    }
+}
+
+impl Default for SequenceNumberManager {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -674,6 +734,12 @@ impl SequenceNumberManager {
     }
 }
 
+impl Default for CertificateManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl CertificateManager {
     pub fn new() -> Self {
         Self {
@@ -682,6 +748,12 @@ impl CertificateManager {
             certificate_chain: Vec::new(),
             revocation_list: RevocationList::new(),
         }
+    }
+}
+
+impl Default for RevocationList {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -703,6 +775,12 @@ impl RevocationList {
     }
 }
 
+impl Default for AccessControl {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AccessControl {
     pub fn new() -> Self {
         Self {
@@ -710,6 +788,12 @@ impl AccessControl {
             authorization: AuthorizationManager::new(),
             audit: AuditManager::new(),
         }
+    }
+}
+
+impl Default for AuthenticationManager {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -723,6 +807,12 @@ impl AuthenticationManager {
     }
 }
 
+impl Default for SessionManagement {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SessionManagement {
     pub fn new() -> Self {
         Self {
@@ -730,6 +820,12 @@ impl SessionManagement {
             max_sessions: 1000,
             session_storage: SessionStorage::Memory,
         }
+    }
+}
+
+impl Default for MultiFactorAuth {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -743,6 +839,12 @@ impl MultiFactorAuth {
     }
 }
 
+impl Default for MfaPolicy {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl MfaPolicy {
     pub fn new() -> Self {
         Self {
@@ -750,6 +852,12 @@ impl MfaPolicy {
             backup_codes: true,
             recovery_methods: Vec::new(),
         }
+    }
+}
+
+impl Default for AuthorizationManager {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -763,6 +871,12 @@ impl AuthorizationManager {
     }
 }
 
+impl Default for RoleBasedAccessControl {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl RoleBasedAccessControl {
     pub fn new() -> Self {
         Self {
@@ -770,6 +884,12 @@ impl RoleBasedAccessControl {
             permissions: Vec::new(),
             role_assignments: Vec::new(),
         }
+    }
+}
+
+impl Default for AttributeBasedAccessControl {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -782,6 +902,12 @@ impl AttributeBasedAccessControl {
     }
 }
 
+impl Default for AuditManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AuditManager {
     pub fn new() -> Self {
         Self {
@@ -789,6 +915,12 @@ impl AuditManager {
             retention_policy: RetentionPolicy::new(),
             log_format: LogFormat::JSON,
         }
+    }
+}
+
+impl Default for RetentionPolicy {
+    fn default() -> Self {
+        Self::new()
     }
 }
 

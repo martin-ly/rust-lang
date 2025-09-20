@@ -74,6 +74,12 @@ pub struct AsyncRuntimeAnalyzer {
     runtimes: HashMap<String, AsyncEcosystemAnalysis>,
 }
 
+impl Default for AsyncRuntimeAnalyzer {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncRuntimeAnalyzer {
     pub fn new() -> Self {
         let mut analyzer = Self {
@@ -524,7 +530,7 @@ pub async fn demonstrate_async_ecosystem_comprehensive() -> Result<()> {
     println!("\n📊 1. 异步运行时特性分析:");
     let analyzer = AsyncRuntimeAnalyzer::new();
     
-        for (_, analysis) in analyzer.get_all_analyses() {
+        for analysis in analyzer.get_all_analyses().values() {
         println!("\n  🔍 {} 运行时分析:", analysis.runtime_name);
         println!("    核心特性: {:?}", analysis.core_features);
         println!("    适用场景: {:?}", analysis.use_cases);

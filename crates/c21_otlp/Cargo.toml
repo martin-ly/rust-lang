@@ -14,11 +14,11 @@ categories = ["development-tools::debugging", "network-programming", "asynchrono
 # OpenTelemetry核心依赖 - 使用workspace版本
 opentelemetry = { workspace = true }
 opentelemetry_sdk = { workspace = true }
-opentelemetry-semantic-conventions = "0.30"
+opentelemetry-semantic-conventions = "0.30.0"
 
 # OTLP导出器和传输
 opentelemetry-otlp = { workspace = true }
-opentelemetry-http = "0.30"
+opentelemetry-http = "0.30.0"
 
 # 异步运行时和网络 - 使用workspace版本
 tokio = { workspace = true, features = ["full"] }
@@ -43,9 +43,9 @@ crossbeam = { workspace = true }
 dashmap = { workspace = true }
 
 # 压缩算法 - 升级到最新版本
-flate2 = "1.0"
-brotli = "3.4"
-zstd = "0.13"
+flate2 = "1.0.0"
+brotli = "3.4.0"
+zstd = "0.13.0"
 
 # 异步trait - 使用workspace版本
 async-trait = { workspace = true }
@@ -68,7 +68,7 @@ metrics-exporter-prometheus = { workspace = true }
 
 # 配置管理 - 使用workspace版本
 config = { workspace = true }
-clap = { version = "4.0", features = ["derive"] }
+clap = { version = "4.0.0", features = ["derive"] }
 
 # 2025年新增依赖 - 使用workspace版本
 chrono = { workspace = true }

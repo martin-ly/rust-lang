@@ -30,7 +30,7 @@ impl<const N: usize> WasmArrayBuilder<N> {
     /// Fill array
     pub fn fill_with(&mut self, value: Value) {
         for i in 0..N {
-            self.data[i] = value.clone();
+            self.data[i] = value;
         }
     }
 
@@ -143,7 +143,7 @@ impl TailCallOptimizer {
 
         // 检查是否为尾调用
         // Check if it's a tail call
-        if self.call_stack.len() > 0 {
+        if !self.call_stack.is_empty() {
             // 替换当前调用栈顶
             // Replace current call stack top
             self.call_stack.pop();
@@ -322,7 +322,7 @@ pub mod lifetime_examples {
 
     /// 演示生命周期语法检查
     /// Demonstrate lifetime syntax check
-    pub fn process_wasm_string<'a>(input: &'a str) -> &'a str {
+    pub fn process_wasm_string(input: &str) -> &str {
         // Rust 1.89 新特性：使用一致的生命周期标注
         // Rust 1.89 new feature: use consistent lifetime annotations
         input
@@ -330,7 +330,7 @@ pub mod lifetime_examples {
 
     /// 处理 WebAssembly 模块引用
     /// Process WebAssembly module reference
-    pub fn process_module_reference<'a>(module: &'a Module) -> &'a Module {
+    pub fn process_module_reference(module: &Module) -> &Module {
         // 生命周期语法检查确保引用安全
         // Lifetime syntax check ensures reference safety
         module

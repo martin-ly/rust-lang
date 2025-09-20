@@ -129,12 +129,11 @@ impl AppConfig {
         let mut config = Self::default();
 
         // 从文件加载
-        if let Some(path) = file_path {
-            if Path::new(path).exists() {
+        if let Some(path) = file_path
+            && Path::new(path).exists() {
                 let file_config = Self::from_file(path)?;
                 config = file_config;
             }
-        }
 
         // 从环境变量覆盖
         if let Some(prefix) = env_prefix {
@@ -230,6 +229,12 @@ impl AppConfig {
 /// 配置构建器
 pub struct ConfigBuilder {
     config: AppConfig,
+}
+
+impl Default for ConfigBuilder {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl ConfigBuilder {

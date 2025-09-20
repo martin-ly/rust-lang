@@ -179,12 +179,11 @@ impl CircuitBreaker {
                 }
             }
             CircuitState::Open => {
-                if let Some(t0) = self.opened_at {
-                    if t0.elapsed() >= Duration::from_millis(self.cfg.open_ms) {
+                if let Some(t0) = self.opened_at
+                    && t0.elapsed() >= Duration::from_millis(self.cfg.open_ms) {
                         self.state = CircuitState::HalfOpen;
                         self.errors = 0;
                     }
-                }
             }
             CircuitState::HalfOpen => {
                 if ok {

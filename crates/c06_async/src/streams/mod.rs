@@ -49,13 +49,13 @@ pub fn make_iter_stream(n: u32) -> impl Stream<Item = u32> {
 
 /// 展示 Stream 组合子：map/filter/take
 pub async fn demo_basic_combinators(n: u32) -> Vec<u32> {
-    let items = make_iter_stream(n)
+    
+    make_iter_stream(n)
         .map(|x| x * 2)
         .filter(|x| futures::future::ready(x % 3 == 0))
         .take(5)
         .collect::<Vec<_>>()
-        .await;
-    items
+        .await
 }
 
 /// 展示并发组合子：buffer_unordered

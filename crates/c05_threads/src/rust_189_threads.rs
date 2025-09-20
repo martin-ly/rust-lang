@@ -200,7 +200,7 @@ pub fn demo_once_cell_and_once_lock() {
 
 pub fn demo_thread_local() {
     thread_local! {
-        static TLS_COUNTER: std::cell::Cell<u32> = std::cell::Cell::new(0);
+        static TLS_COUNTER: std::cell::Cell<u32> = const { std::cell::Cell::new(0) };
     }
 
     thread::scope(|s| {

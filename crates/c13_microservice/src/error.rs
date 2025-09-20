@@ -118,9 +118,9 @@ where
         F: FnOnce() -> String,
     {
         self.map_err(|e| {
-            let error = e.into();
+            
             // 这里可以添加上下文信息到错误中
-            error
+            e.into()
         })
     }
 }

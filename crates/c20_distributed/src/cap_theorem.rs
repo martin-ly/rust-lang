@@ -245,7 +245,7 @@ impl PartitionDetector {
             let connections = self
                 .connectivity_matrix
                 .entry(node1.clone())
-                .or_insert_with(HashMap::new);
+                .or_default();
 
             for node2 in alive_members {
                 if node1 != node2 {
@@ -438,7 +438,7 @@ impl CAPAnalyzer {
             total_decisions,
             partition_rate,
             most_used_consistency_level: most_used_level,
-            most_used_strategy: most_used_strategy,
+            most_used_strategy,
             consistency_level_distribution: consistency_level_usage,
             strategy_distribution: strategy_usage,
             recommendations: self.generate_recommendations(partition_rate, most_used_level),

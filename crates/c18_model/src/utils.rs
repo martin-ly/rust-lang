@@ -15,7 +15,7 @@ impl MathUtils {
     pub fn factorial(n: usize) -> usize {
         match n {
             0 | 1 => 1,
-            _ => (2..=n).fold(1, |acc, x| acc * x),
+            _ => (2..=n).product::<usize>(),
         }
     }
 
@@ -41,7 +41,7 @@ impl MathUtils {
         if k > n {
             return 0;
         }
-        (n - k + 1..=n).fold(1, |acc, x| acc * x)
+        (n - k + 1..=n).product::<usize>()
     }
 
     /// 计算最大公约数
@@ -67,13 +67,13 @@ impl MathUtils {
         if n == 2 {
             return true;
         }
-        if n % 2 == 0 {
+        if n.is_multiple_of(2) {
             return false;
         }
 
         let sqrt_n = (n as f64).sqrt() as usize;
         for i in (3..=sqrt_n).step_by(2) {
-            if n % i == 0 {
+            if n.is_multiple_of(i) {
                 return false;
             }
         }
@@ -155,7 +155,7 @@ impl StatisticsUtils {
         data.sort_by(|a, b| a.partial_cmp(b).unwrap());
         let n = data.len();
 
-        if n % 2 == 0 {
+        if n.is_multiple_of(2) {
             (data[n / 2 - 1] + data[n / 2]) / 2.0
         } else {
             data[n / 2]
@@ -477,7 +477,7 @@ impl ValidationUtils {
 
     /// 验证概率值
     pub fn validate_probability(value: f64) -> Result<(), ModelError> {
-        if value < 0.0 || value > 1.0 {
+        if !(0.0..=1.0).contains(&value) {
             Err(ModelError::ValidationError(format!(
                 "概率值 {} 必须在 [0, 1] 范围内",
                 value

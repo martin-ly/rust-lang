@@ -25,6 +25,12 @@ pub struct PerformanceMetrics {
     pub average_wait_time: AtomicU64, // 微秒
 }
 
+impl Default for PerformanceMetrics {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl PerformanceMetrics {
     pub fn new() -> Self {
         Self {
@@ -161,6 +167,12 @@ pub struct PerformanceMonitor {
     metrics: Arc<PerformanceMetrics>,
     start_time: Instant,
     monitoring_enabled: AtomicBool,
+}
+
+impl Default for PerformanceMonitor {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl PerformanceMonitor {
@@ -388,6 +400,12 @@ impl<T> MonitoredRwLock<T> {
 pub struct PerformanceBenchmark {
     monitors: Vec<Arc<PerformanceMonitor>>,
     start_time: Instant,
+}
+
+impl Default for PerformanceBenchmark {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl PerformanceBenchmark {

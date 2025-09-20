@@ -88,12 +88,9 @@ impl ErrorHandler {
             } => self.handle_with_retry(operation, *max_attempts, *delay_ms),
             RecoveryStrategy::Fallback => self.handle_with_fallback(operation),
             RecoveryStrategy::Ignore => {
-                operation().or_else(|_| {
-                    // 返回默认值或空结果
-                    Err(DesignPatternError::ConfigurationError(
+                operation().map_err(|_| DesignPatternError::ConfigurationError(
                         "操作被忽略".to_string(),
                     ))
-                })
             }
             RecoveryStrategy::Propagate => operation(),
         }
@@ -130,16 +127,16 @@ impl ErrorHandler {
     where
         F: FnMut() -> PatternResult<T>,
     {
-        operation().or_else(|error| {
+        operation().map_err(|error| {
             // 记录错误
             self.error_count
                 .fetch_add(1, std::sync::atomic::Ordering::Relaxed);
 
             // 返回降级结果
-            Err(DesignPatternError::ConfigurationError(format!(
+            DesignPatternError::ConfigurationError(format!(
                 "降级处理: {}",
                 error
-            )))
+            ))
         })
     }
 
@@ -156,6 +153,12 @@ impl ErrorHandler {
 /// 单例模式错误处理
 pub struct SingletonErrorHandler {
     handler: ErrorHandler,
+}
+
+impl Default for SingletonErrorHandler {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl SingletonErrorHandler {
@@ -181,6 +184,12 @@ pub struct FactoryErrorHandler {
     handler: ErrorHandler,
 }
 
+impl Default for FactoryErrorHandler {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl FactoryErrorHandler {
     pub fn new() -> Self {
         Self {
@@ -199,6 +208,12 @@ impl FactoryErrorHandler {
 /// 代理模式错误处理
 pub struct ProxyErrorHandler {
     handler: ErrorHandler,
+}
+
+impl Default for ProxyErrorHandler {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl ProxyErrorHandler {
@@ -222,6 +237,12 @@ impl ProxyErrorHandler {
 /// 享元模式错误处理
 pub struct FlyweightErrorHandler {
     handler: ErrorHandler,
+}
+
+impl Default for FlyweightErrorHandler {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl FlyweightErrorHandler {

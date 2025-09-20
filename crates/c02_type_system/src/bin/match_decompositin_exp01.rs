@@ -3,7 +3,7 @@ use c02_type_system::type_decomposition::r#match::decomposition::*;
 #[allow(dead_code)]
 pub fn describe_number(num: i32) {
     match num {
-        1 | 2 | 3 => println!("One, Two, or Three"),
+        1..=3 => println!("One, Two, or Three"),
         4..=10 => println!("Between Four and Ten"),
         _ => println!("Something else"),
     }
@@ -25,7 +25,7 @@ pub fn describe(value: Option<i32>) {
 pub fn describe_number0(num: i32) {
     match num {
         n if n < 0 => println!("Negative number"),
-        n if n == 0 => println!("Zero"),
+        0 => println!("Zero"),
         n if n > 0 => println!("Positive number"),
         _ => unreachable!(), // 这个分支永远不会被匹配到
     }

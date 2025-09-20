@@ -31,8 +31,7 @@ pub mod let_chains_189 {
 
         // 使用 let_chains 进行复杂条件判断
         if let UserStatus::Active(id, name) = get_current_user_status()
-            && id >= 10000
-            && id < 99999
+            && (10000..99999).contains(&id)
             && name.len() > 5
         {
             println!("✅ 找到符合条件的用户：ID {}, 名字 '{}'", id, name);
@@ -41,7 +40,7 @@ pub mod let_chains_189 {
         }
 
         // 更复杂的 let_chains 示例
-        let data = vec![Some(42), Some(100), None, Some(200)];
+        let data = [Some(42), Some(100), None, Some(200)];
 
         for (i, item) in data.iter().enumerate() {
             if let Some(value) = item
@@ -271,7 +270,7 @@ pub mod invalid_null_arguments_189 {
     pub fn demonstrate_safe_pointer_arguments() {
         println!("=== 安全的指针参数传递 ===");
 
-        let data = vec![1, 2, 3, 4, 5];
+        let data = [1, 2, 3, 4, 5];
         let ptr = data.as_ptr();
 
         // 安全的指针传递

@@ -727,6 +727,12 @@ pub enum RoutingAction {
     Store,
 }
 
+impl Default for CloudEdgeCoordination {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl CloudEdgeCoordination {
     pub fn new() -> Self {
         Self {
@@ -735,6 +741,12 @@ impl CloudEdgeCoordination {
             task_scheduler: TaskScheduler::new(),
             data_flow_manager: DataFlowManager::new(),
         }
+    }
+}
+
+impl Default for TaskScheduler {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -749,6 +761,12 @@ impl TaskScheduler {
     }
 }
 
+impl Default for ResourceAllocator {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ResourceAllocator {
     pub fn new() -> Self {
         Self {
@@ -756,6 +774,12 @@ impl ResourceAllocator {
             resource_pools: Vec::new(),
             allocation_history: Vec::new(),
         }
+    }
+}
+
+impl Default for LoadBalancer {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -769,6 +793,12 @@ impl LoadBalancer {
     }
 }
 
+impl Default for SessionAffinity {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SessionAffinity {
     pub fn new() -> Self {
         Self {
@@ -776,6 +806,12 @@ impl SessionAffinity {
             affinity_type: AffinityType::ClientIP,
             timeout: Duration::from_secs(60 * 60),
         }
+    }
+}
+
+impl Default for DataFlowManager {
+    fn default() -> Self {
+        Self::new()
     }
 }
 

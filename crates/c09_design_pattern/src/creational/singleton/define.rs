@@ -51,7 +51,7 @@ impl<T> CellSingleton<T> {
         T: Clone + Copy,
     {
         self.instance
-            .update(|current| Some(current.unwrap_or_else(|| initializer())));
+            .update(|current| Some(current.unwrap_or_else(initializer)));
         self.instance.get().unwrap()
     }
 }
@@ -95,12 +95,12 @@ pub fn test_cell_update() {
     let cell = Cell::new(0);
 
     // 使用Cell::update进行原子更新
-    let new_value = cell.update(|current| {
+    cell.update(|current| {
         println!("当前值: {}", current);
         current + 1
     });
 
-    println!("更新后的值: {:?}", new_value);
+    println!("更新后的值: {:?}", ());
     println!("Cell中的值: {}", cell.get());
 }
 

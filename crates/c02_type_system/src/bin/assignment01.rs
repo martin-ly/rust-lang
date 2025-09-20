@@ -49,9 +49,8 @@ fn main() {
 
     //4. 嵌套解构
     let complex = (1, (2, 3), 4);
-    match complex {
-        (a, (b, c), d) => println!("a: {}, b: {}, c: {}, d: {}", a, b, c, d),
-    }
+    let (a, (b, c), d) = complex;
+    println!("a: {}, b: {}, c: {}, d: {}", a, b, c, d);
 
     struct Rectangle {
         width: u32,
@@ -82,9 +81,8 @@ fn main() {
 
     //5. 部分解构
     let numbers = (1, 2, 3, 4, 5);
-    match numbers {
-        (first, .., last) => println!("First: {}, Last: {}", first, last),
-    }
+    let (first, .., last) = numbers;
+    println!("First: {}, Last: {}", first, last);
     // 输出: First: 1, Last: 5
 
     #[allow(dead_code)]

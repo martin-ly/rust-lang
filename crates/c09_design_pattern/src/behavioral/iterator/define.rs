@@ -9,6 +9,12 @@ pub struct Collection<T> {
 }
 
 // 实现 Collection 的构造函数
+impl<T> Default for Collection<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<T> Collection<T> {
     pub fn new() -> Self {
         Collection { items: Vec::new() }
