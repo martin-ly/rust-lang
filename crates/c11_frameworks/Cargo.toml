@@ -31,7 +31,21 @@ bytes = { workspace = true }
 
 # 异步运行时
 tokio = { workspace = true }
-async-std = { version = "1", optional = true }
+# async-std 已移除，使用 tokio 替代 (async-std 已弃用)
+
+# 2025年最新前端框架 - 跨平台UI (移除GTK3依赖)
+dioxus = { workspace = true, optional = true }
+dioxus-web = { workspace = true, optional = true }
+# dioxus-desktop = { workspace = true, optional = true }  # 暂时禁用，存在GTK3安全漏洞
+leptos = { workspace = true, optional = true }
+leptos_axum = { workspace = true, optional = true }
+
+# 2025年最新桌面应用框架 (Tauri 2.0已解决GTK3安全漏洞)
+tauri = { workspace = true, optional = true }
+tauri-build = { workspace = true, optional = true }
+
+# 2025年最新高性能异步运行时
+glommio = { workspace = true, optional = true }
 
 # Web框架
 actix-web = { version = "4.0.0", optional = true }
@@ -52,11 +66,12 @@ bincode = { workspace = true }
 rmp-serde = { version = "1.1.0", optional = true }
 
 # 命令行工具
-clap = { version = "4.5.0", features = ["derive"], optional = true }
-structopt = { version = "0.3.0", optional = true }
+clap = { version = "4.5.48", features = ["derive"], optional = true }
+# structopt 已移除，使用 clap 4.x 替代 (解决 ansi_term 和 atty 安全漏洞)
 
 # GUI框架 - 使用工作区最新版本
-tauri = { workspace = true, optional = true }
+# tauri 已移除，使用 egui 替代 (解决 GTK3 安全漏洞)
+# tauri = { workspace = true, optional = true }
 egui = { workspace = true, optional = true }
 iced = { workspace = true, optional = true }
 
@@ -112,8 +127,8 @@ database = ["diesel"]
 # database-sqlx 特性保留占位（暂无直依赖）
 database-sqlx = []
 serialization = ["rmp-serde"]
-cli = ["clap", "structopt"]
-gui = ["tauri", "egui", "iced"]
+cli = ["clap"]
+gui = ["egui", "iced"]
 testing = ["criterion", "mockall", "proptest"]
 http-client = ["reqwest"]
 logging = ["tracing", "tracing-subscriber", "env_logger"]
@@ -126,6 +141,20 @@ tokio = []
 serde = []
 uuid = []
 chrono = []
+
+# 2025年最新框架特性 (Tauri 2.0已解决GTK3安全漏洞)
+dioxus = ["dep:dioxus", "dep:dioxus-web"]
+leptos = ["dep:leptos", "dep:leptos_axum"]
+tauri = ["dep:tauri", "dep:tauri-build"]
+glommio = ["dep:glommio"]
+
+# 组合特性
+modern-ui = ["dioxus", "leptos"]
+desktop-apps = ["egui", "iced", "tauri"]  # 重新启用Tauri 2.0
+high-performance = ["glommio", "performance"]
+
+[build-dependencies]
+tauri-build = { workspace = true }
 
 [dev-dependencies]
 tokio-test = { workspace = true }
@@ -198,3 +227,29 @@ required-features = ["axum", "serde", "uuid", "chrono", "opentelemetry", "promet
 name = "database_best_practices"
 path = "examples/database_best_practices.rs"
 required-features = ["serde", "uuid", "chrono"]
+
+# 2025年最新框架示例 (移除GTK3依赖)
+[[example]]
+name = "dioxus_example"
+path = "examples/dioxus_example.rs"
+required-features = ["dioxus"]
+
+[[example]]
+name = "leptos_simple_example"
+path = "examples/leptos_simple_example.rs"
+required-features = ["leptos"]
+
+[[example]]
+name = "tauri_basic_example"
+path = "examples/tauri_basic_example.rs"
+required-features = ["tauri"]
+
+[[example]]
+name = "tauri_example"
+path = "examples/tauri_example.rs"
+required-features = ["tauri"]
+
+[[example]]
+name = "tauri_simple_example"
+path = "examples/tauri_simple_example.rs"
+required-features = ["tauri"]

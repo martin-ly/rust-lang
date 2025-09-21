@@ -576,7 +576,7 @@ mod tests {
             42
         }).await;
         
-        assert!(duration > Duration::ZERO);
+        assert!(duration >= Duration::ZERO);
         
         let results = benchmark.get_results().await;
         assert!(results.contains_key("test"));

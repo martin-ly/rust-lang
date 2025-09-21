@@ -1,5 +1,5 @@
 #[cfg(feature = "consensus-raft")]
-use c20_distributed::consensus_raft::{AppendEntriesReq, LogIndex, MinimalRaft, RaftNode, Term};
+use c20_distributed::consensus_raft::{AppendEntriesReq, LogIndex, MinimalRaft, RaftNode, Snapshot, Term};
 
 #[cfg(feature = "consensus-raft")]
 #[test]
@@ -23,7 +23,12 @@ fn snapshot_truncates_log_and_resets_indices() {
         leader_commit: LogIndex(2),
     };
     let _ = raft.handle_append_entries(req2).unwrap();
-    raft.install_snapshot();
+    let snapshot = Snapshot {
+        last_included_index: LogIndex(1),
+        last_included_term: Term(1),
+        data: b"snapshot_data".to_vec(),
+    };
+    raft.install_snapshot(snapshot);
     let req3 = AppendEntriesReq {
         term: Term(2),
         leader_id: "n1".into(),

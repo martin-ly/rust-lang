@@ -89,9 +89,9 @@ pub mod llm;
 #[cfg(any(feature = "candle", feature = "dfdx"))]
 pub mod diffusion;
 
-// 强化学习
-#[cfg(feature = "reinforcement")]
-pub mod reinforcement_learning;
+// 强化学习 (暂时禁用，存在pyo3安全漏洞)
+// #[cfg(feature = "reinforcement")]
+// pub mod reinforcement_learning;
 
 // 图神经网络
 #[cfg(feature = "gnn")]
@@ -162,8 +162,8 @@ pub mod prelude {
     #[cfg(any(feature = "candle", feature = "dfdx"))]
     pub use crate::diffusion::*;
 
-    #[cfg(feature = "reinforcement")]
-    pub use crate::reinforcement_learning::*;
+    // #[cfg(feature = "reinforcement")]
+    // pub use crate::reinforcement_learning::*;  // 暂时禁用，存在pyo3安全漏洞
 
     #[cfg(feature = "gnn")]
     pub use crate::graph_neural_networks::*;

@@ -1,5 +1,11 @@
+//! 存储模块
+//! 
+//! 提供分布式存储相关的抽象和实现
+
+pub mod replication;
+
 use crate::codec::BinaryCodec;
-use crate::errors::DistributedError;
+use crate::core::errors::DistributedError;
 
 pub trait LogStorage<E> {
     fn append(&mut self, entry: E) -> Result<u64, DistributedError>;

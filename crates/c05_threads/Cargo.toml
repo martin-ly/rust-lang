@@ -16,7 +16,7 @@ parking_lot = { workspace = true }
 dashmap = { workspace = true }
 flume = "0.11.0"
 tokio = { workspace = true, optional = true }
-async-std = { workspace = true, optional = true }
+# async-std 已移除，使用 tokio 替代 (async-std 已弃用)
 num_cpus = { workspace = true }
 libc = { workspace = true }
 windows = { version = "0.62.0", features = ["Win32_System_Threading"], optional = true }
@@ -28,7 +28,7 @@ thiserror = { workspace = true }
 default = ["std"]
 std = []
 tokio = ["tokio/full"]
-async-std = ["dep:async-std"]
+# async-std 特性已移除，使用 tokio 替代
 windows = ["windows/Win32_System_Threading"]
 unstable = []
 # added to satisfy cfg(feature = ...) usage in code

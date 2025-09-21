@@ -1,9 +1,11 @@
 [package]
 name = "c08_algorithms"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
 resolver = "3"
-rust-version = "1.89"
+rust-version = "1.90"
+
+# 算法库CPU指令集优化配置在根Cargo.toml中统一管理
 
 [dependencies]
 
@@ -35,11 +37,15 @@ num-traits = "0.2.18"
 num-bigint = "0.4.4"
 
 # 时间测量
-instant = "0.1.13"
+# instant 已移除，使用 std::time::Instant 替代
 
 # 可选成熟库集成 - 更新到最新版本
 petgraph = { workspace = true, optional = true }
 aho-corasick = { version = "1.1.0", optional = true }
+
+# 系统信息
+num_cpus = { workspace = true }
+uuid = { workspace = true }
 
 [dev-dependencies]
 criterion = { workspace = true }
@@ -59,11 +65,12 @@ name = "c08_algorithms"
 path = "src/bin/main.rs"
 
 [[bench]]
-name = "ml_benchmarks"
+name = "simple_benchmarks"
 harness = false
+path = "benches/simple_benchmarks.rs"
 
-[[bench]]
-name = "alg_benches"
-harness = false
+[[example]]
+name = "comprehensive_algorithm_demo"
+path = "examples/comprehensive_algorithm_demo.rs"
 
 #[profile] moved to workspace root

@@ -6,10 +6,12 @@ resolver = "3"
 build = "build.rs"
 rust-version = "1.89"
 
+# 网络库CPU指令集优化配置在根Cargo.toml中统一管理
+
 [dependencies]
 # 异步运行时 - 使用工作区统一版本
+# async-std 已移除，使用 tokio 替代 (async-std 已弃用)
 tokio = { workspace = true }
-async-std = { workspace = true }
 
 # 网络和字节处理 - 使用工作区统一版本
 bytes = { workspace = true, features = ["serde"] }
@@ -32,6 +34,7 @@ url = { workspace = true }
 # 序列化和反序列化 - 使用工作区统一版本
 serde = { workspace = true }
 serde_json = { workspace = true }
+bincode = { workspace = true }
 
 # 错误处理 - 使用工作区统一版本
 thiserror = { workspace = true }
@@ -46,11 +49,16 @@ ring = { workspace = true }
 rustls = { workspace = true, optional = true }
 tokio-rustls = { workspace = true, optional = true }
 rustls-pemfile = { workspace = true, optional = true }
+sha2 = { workspace = true }
+aes-gcm = "0.10.3"
 
 # 测试和基准测试 - 使用工作区统一版本
 criterion = { workspace = true, features = ["html_reports"] }
 futures = { workspace = true }
 futures-util = { workspace = true }
+
+# 缓存和数据结构
+lru = "0.12.3"
 
 # DNS 解析（Hickory-DNS，原 trust-dns）- 更新到最新版本
 hickory-resolver = { version = "0.24.4", features = ["system-config", "dns-over-https-rustls", "dns-over-rustls"] }

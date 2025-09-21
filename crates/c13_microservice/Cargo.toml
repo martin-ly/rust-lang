@@ -32,7 +32,7 @@ futures = { workspace = true }
 axum = { workspace = true }
 actix-web = { version = "4.0.0", features = ["macros"] }
 warp = "0.4.0"
-tide = "0.16.0"
+# tide 已移除，使用 axum 替代 (解决 stdweb 安全漏洞)
 
 # gRPC框架
 tonic = { workspace = true }

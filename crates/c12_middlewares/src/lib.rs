@@ -47,6 +47,6 @@ pub mod mq {
 
 // HTTP 代理模块
 pub mod http {
-    #[cfg(feature = "proxy-pingora")]
+    #[cfg(feature = "proxy-nix")]
     pub mod pingora_proxy;
 }

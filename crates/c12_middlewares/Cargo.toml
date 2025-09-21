@@ -27,7 +27,9 @@ rdkafka = { version = "0.38.0", optional = true, default-features = false, featu
 rumqttc = { version = "0.25.0", optional = true }
 
 # Proxies / Networking
-pingora = { version = "0.3.0", optional = true }
+# 代理和网络库
+# pingora 已移除，存在安全漏洞 (RUSTSEC-2025-0037, RUSTSEC-2025-0070)
+nix = { version = "0.28.0", optional = true }
 
 [features]
 default = []
@@ -41,7 +43,7 @@ full = [
     "mq-nats",
     "mq-kafka",
     "mq-mqtt",
-    "proxy-pingora",
+    "proxy-nix",
     "tokio"
 ]
 
@@ -53,7 +55,7 @@ sql-sqlite = ["rusqlite"]
 mq-nats = ["async-nats", "futures-util"]
 mq-kafka = ["rdkafka", "tokio"]
 mq-mqtt = ["rumqttc", "tokio"]
-proxy-pingora = ["pingora", "tokio"]
+proxy-nix = ["nix", "tokio"]
 obs = ["tracing"]
 
 [dev-dependencies]

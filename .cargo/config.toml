@@ -1,3 +1,34 @@
-[env]
-AWS_LC_SYS_NO_ASM = "1"
-AWS_LC_SYS_PREGENERATED_BINDINGS = "1"
+# Cargo配置文件 - CPU指令集优化设置
+# 2025年最新CPU指令集支持配置
+
+[build]
+# 启用现代CPU指令集优化（保守设置）
+rustflags = [
+    "-C", "target-cpu=native",
+    "-C", "target-feature=+avx2,+fma,+sse4.2,+popcnt"
+]
+
+# 特定目标的优化设置
+[target.x86_64-unknown-linux-gnu]
+rustflags = [
+    "-C", "target-cpu=native",
+    "-C", "target-feature=+avx2,+fma,+sse4.2,+popcnt"
+]
+
+[target.x86_64-pc-windows-msvc]
+rustflags = [
+    "-C", "target-cpu=native",
+    "-C", "target-feature=+avx2,+fma,+sse4.2,+popcnt"
+]
+
+[target.aarch64-unknown-linux-gnu]
+rustflags = [
+    "-C", "target-cpu=native",
+    "-C", "target-feature=+neon,+fp-armv8"
+]
+
+[target.aarch64-apple-darwin]
+rustflags = [
+    "-C", "target-cpu=native",
+    "-C", "target-feature=+neon,+fp-armv8"
+]

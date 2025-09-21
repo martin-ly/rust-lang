@@ -27,6 +27,18 @@ pub enum ConsistencyLevel {
     MonotonicWrite,
     /// 法定人数一致性 - 基于多数节点的确认
     Quorum,
+    /// 读己写一致性 - 读操作能看到自己之前的写操作
+    ReadYourWrites,
+    /// 单调读一致性 - 读操作不会返回比之前更旧的数据
+    MonotonicReads,
+    /// 单调写一致性 - 写操作按顺序执行
+    MonotonicWrites,
+    /// 写后读一致性 - 写操作后立即的读操作能看到该写操作
+    WritesFollowReads,
+    /// 因果一致性 - 保持因果关系
+    CausalConsistency,
+    /// 强最终一致性 - 在最终一致性基础上提供更强保证
+    StrongEventual,
 }
 
 
@@ -43,6 +55,12 @@ impl ConsistencyLevel {
             ConsistencyLevel::MonotonicRead => "单调读一致性：读操作不会返回比之前更旧的数据",
             ConsistencyLevel::MonotonicWrite => "单调写一致性：写操作按顺序执行",
             ConsistencyLevel::Quorum => "法定人数一致性：基于多数节点的确认",
+            ConsistencyLevel::ReadYourWrites => "读己写一致性：读操作能看到自己之前的写操作",
+            ConsistencyLevel::MonotonicReads => "单调读一致性：读操作不会返回比之前更旧的数据",
+            ConsistencyLevel::MonotonicWrites => "单调写一致性：写操作按顺序执行",
+            ConsistencyLevel::WritesFollowReads => "写后读一致性：写操作后立即的读操作能看到该写操作",
+            ConsistencyLevel::CausalConsistency => "因果一致性：保持因果关系",
+            ConsistencyLevel::StrongEventual => "强最终一致性：在最终一致性基础上提供更强保证",
         }
     }
 
@@ -58,6 +76,37 @@ impl ConsistencyLevel {
     pub fn supports_high_availability(&self) -> bool {
         match self {
             ConsistencyLevel::Strong | ConsistencyLevel::Linearizable => false,
+            _ => true,
+        }
+    }
+
+    /// 获取一致性级别的强度（数值越大越强）
+    pub fn strength(&self) -> u8 {
+        match self {
+            ConsistencyLevel::Strong => 10,
+            ConsistencyLevel::Linearizable => 9,
+            ConsistencyLevel::Sequential => 8,
+            ConsistencyLevel::CausalConsistency => 7,
+            ConsistencyLevel::Causal => 6,
+            ConsistencyLevel::Session => 5,
+            ConsistencyLevel::ReadYourWrites => 4,
+            ConsistencyLevel::MonotonicReads | ConsistencyLevel::MonotonicRead => 3,
+            ConsistencyLevel::MonotonicWrites | ConsistencyLevel::MonotonicWrite => 3,
+            ConsistencyLevel::WritesFollowReads => 2,
+            ConsistencyLevel::Quorum => 2,
+            ConsistencyLevel::StrongEventual => 1,
+            ConsistencyLevel::Eventual => 0,
+        }
+    }
+
+    /// 检查两个一致性级别是否兼容
+    pub fn is_compatible_with(&self, other: &ConsistencyLevel) -> bool {
+        // 强一致性级别不能与弱一致性级别混合
+        match (self, other) {
+            (ConsistencyLevel::Strong, ConsistencyLevel::Eventual) => false,
+            (ConsistencyLevel::Eventual, ConsistencyLevel::Strong) => false,
+            (ConsistencyLevel::Linearizable, ConsistencyLevel::Eventual) => false,
+            (ConsistencyLevel::Eventual, ConsistencyLevel::Linearizable) => false,
             _ => true,
         }
     }
@@ -85,6 +134,33 @@ impl CAPStrategy {
             (CAPStrategy::AvailabilityPartition, _) => ConsistencyLevel::Eventual,
             (CAPStrategy::Balanced, true) => ConsistencyLevel::Causal,
             (CAPStrategy::Balanced, false) => ConsistencyLevel::Linearizable,
+        }
+    }
+
+    /// 获取策略描述
+    pub fn description(&self) -> &'static str {
+        match self {
+            CAPStrategy::ConsistencyPartition => "一致性优先 (CP) - 牺牲可用性保证一致性",
+            CAPStrategy::AvailabilityPartition => "可用性优先 (AP) - 牺牲一致性保证可用性",
+            CAPStrategy::Balanced => "平衡策略 - 在一致性和可用性之间动态权衡",
+        }
+    }
+
+    /// 获取适用场景
+    pub fn use_case(&self) -> &'static str {
+        match self {
+            CAPStrategy::ConsistencyPartition => "金融系统、关键业务数据存储",
+            CAPStrategy::AvailabilityPartition => "社交媒体、内容分发网络",
+            CAPStrategy::Balanced => "一般业务系统、混合工作负载",
+        }
+    }
+
+    /// 获取权衡说明
+    pub fn trade_off(&self) -> &'static str {
+        match self {
+            CAPStrategy::ConsistencyPartition => "强一致性但可能牺牲可用性",
+            CAPStrategy::AvailabilityPartition => "高可用性但可能牺牲一致性",
+            CAPStrategy::Balanced => "根据网络状态动态调整一致性和可用性",
         }
     }
 }
@@ -293,5 +369,149 @@ impl MonotonicConsistencyManager {
 impl Default for MonotonicConsistencyManager {
     fn default() -> Self {
         Self::new()
+    }
+}
+
+/// 高级一致性管理器
+/// 支持多种一致性模型的组合和动态切换
+#[derive(Debug, Clone)]
+pub struct AdvancedConsistencyManager {
+    session_manager: SessionConsistencyManager,
+    monotonic_manager: MonotonicConsistencyManager,
+    current_level: ConsistencyLevel,
+    client_sessions: HashMap<String, String>, // client_id -> session_id
+    read_barriers: HashMap<String, VectorClock>, // 读屏障
+    write_barriers: HashMap<String, VectorClock>, // 写屏障
+}
+
+impl AdvancedConsistencyManager {
+    /// 创建新的高级一致性管理器
+    pub fn new(initial_level: ConsistencyLevel) -> Self {
+        Self {
+            session_manager: SessionConsistencyManager::new(),
+            monotonic_manager: MonotonicConsistencyManager::new(),
+            current_level: initial_level,
+            client_sessions: HashMap::new(),
+            read_barriers: HashMap::new(),
+            write_barriers: HashMap::new(),
+        }
+    }
+
+    /// 设置一致性级别
+    pub fn set_consistency_level(&mut self, level: ConsistencyLevel) {
+        self.current_level = level;
+    }
+
+    /// 获取当前一致性级别
+    pub fn get_consistency_level(&self) -> ConsistencyLevel {
+        self.current_level
+    }
+
+    /// 为客户端创建会话
+    pub fn create_client_session(&mut self, client_id: String) -> String {
+        let session_id = format!("session_{}_{}", client_id, 
+            std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH)
+                .unwrap().as_millis());
+        self.client_sessions.insert(client_id.clone(), session_id.clone());
+        self.session_manager.create_session(session_id.clone());
+        session_id
+    }
+
+    /// 检查读操作的一致性
+    pub fn check_read_consistency(&mut self, client_id: &str, version: &VectorClock) -> bool {
+        match self.current_level {
+            ConsistencyLevel::Strong | ConsistencyLevel::Linearizable => {
+                // 强一致性：检查读屏障
+                if let Some(barrier) = self.read_barriers.get(client_id) {
+                    return !version.happens_before(barrier);
+                }
+                true
+            },
+            ConsistencyLevel::Session => {
+                if let Some(session_id) = self.client_sessions.get(client_id) {
+                    self.session_manager.can_read(session_id, version)
+                } else {
+                    true
+                }
+            },
+            ConsistencyLevel::MonotonicRead | ConsistencyLevel::MonotonicReads => {
+                self.monotonic_manager.check_monotonic_read(client_id, version)
+            },
+            ConsistencyLevel::ReadYourWrites => {
+                // 读己写一致性：检查写屏障
+                if let Some(barrier) = self.write_barriers.get(client_id) {
+                    return !version.happens_before(barrier);
+                }
+                true
+            },
+            _ => true, // 其他级别暂时返回true
+        }
+    }
+
+    /// 检查写操作的一致性
+    pub fn check_write_consistency(&mut self, client_id: &str, version: &VectorClock) -> bool {
+        match self.current_level {
+            ConsistencyLevel::Strong | ConsistencyLevel::Linearizable => {
+                // 强一致性：检查写屏障
+                if let Some(barrier) = self.write_barriers.get(client_id) {
+                    return !version.happens_before(barrier);
+                }
+                true
+            },
+            ConsistencyLevel::Session => {
+                if let Some(session_id) = self.client_sessions.get(client_id) {
+                    self.session_manager.can_write(session_id, version)
+                } else {
+                    true
+                }
+            },
+            ConsistencyLevel::MonotonicWrite | ConsistencyLevel::MonotonicWrites => {
+                self.monotonic_manager.check_monotonic_write(client_id, version)
+            },
+            _ => true, // 其他级别暂时返回true
+        }
+    }
+
+    /// 更新读屏障
+    pub fn update_read_barrier(&mut self, client_id: &str, version: VectorClock) {
+        self.read_barriers.insert(client_id.to_string(), version);
+    }
+
+    /// 更新写屏障
+    pub fn update_write_barrier(&mut self, client_id: &str, version: VectorClock) {
+        self.write_barriers.insert(client_id.to_string(), version);
+    }
+
+    /// 清理过期数据
+    pub fn cleanup(&mut self, max_age: Duration) {
+        self.session_manager.cleanup_expired_sessions(max_age);
+        // 清理过期的屏障（简化实现）
+        self.read_barriers.clear();
+        self.write_barriers.clear();
+    }
+
+    /// 获取一致性统计信息
+    pub fn get_stats(&self) -> ConsistencyStats {
+        ConsistencyStats {
+            active_sessions: self.client_sessions.len(),
+            read_barriers: self.read_barriers.len(),
+            write_barriers: self.write_barriers.len(),
+            current_level: self.current_level,
+        }
+    }
+}
+
+/// 一致性统计信息
+#[derive(Debug, Clone)]
+pub struct ConsistencyStats {
+    pub active_sessions: usize,
+    pub read_barriers: usize,
+    pub write_barriers: usize,
+    pub current_level: ConsistencyLevel,
+}
+
+impl Default for AdvancedConsistencyManager {
+    fn default() -> Self {
+        Self::new(ConsistencyLevel::Eventual)
     }
 }

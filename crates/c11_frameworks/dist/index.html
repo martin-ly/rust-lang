@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tauri 2.0 示例</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        .counter {
+            font-size: 3em;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        .info {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Tauri 2.0 桌面应用示例</h1>
+        <div class="counter" id="counter">0</div>
+        <div class="buttons">
+            <button onclick="increment()">增加</button>
+            <button onclick="decrement()">减少</button>
+            <button onclick="reset()">重置</button>
+        </div>
+        <div class="info">
+            <h3>系统信息</h3>
+            <p><strong>平台:</strong> <span id="platform">-</span></p>
+            <p><strong>架构:</strong> <span id="arch">-</span></p>
+            <p><strong>Rust版本:</strong> <span id="rust-version">-</span></p>
+            <p><strong>Tauri版本:</strong> <span id="tauri-version">-</span></p>
+        </div>
+    </div>
+
+    <script>
+        // 获取计数器值
+        async function getCounter() {
+            try {
+                const result = await window.__TAURI__.invoke('get_counter');
+                document.getElementById('counter').textContent = result;
+            } catch (error) {
+                console.error('获取计数器失败:', error);
+            }
+        }
+
+        // 增加计数器
+        async function increment() {
+            try {
+                const result = await window.__TAURI__.invoke('increment_counter');
+                document.getElementById('counter').textContent = result;
+            } catch (error) {
+                console.error('增加计数器失败:', error);
+            }
+        }
+
+        // 减少计数器
+        async function decrement() {
+            try {
+                const result = await window.__TAURI__.invoke('decrement_counter');
+                document.getElementById('counter').textContent = result;
+            } catch (error) {
+                console.error('减少计数器失败:', error);
+            }
+        }
+
+        // 重置计数器
+        async function reset() {
+            try {
+                const result = await window.__TAURI__.invoke('reset_counter');
+                document.getElementById('counter').textContent = result;
+            } catch (error) {
+                console.error('重置计数器失败:', error);
+            }
+        }
+
+        // 获取系统信息
+        async function getSystemInfo() {
+            try {
+                const info = await window.__TAURI__.invoke('get_system_info');
+                document.getElementById('platform').textContent = info.platform;
+                document.getElementById('arch').textContent = info.arch;
+                document.getElementById('rust-version').textContent = info.rust_version;
+                document.getElementById('tauri-version').textContent = info.tauri_version;
+            } catch (error) {
+                console.error('获取系统信息失败:', error);
+            }
+        }
+
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            getCounter();
+            getSystemInfo();
+        });
+    </script>
+</body>
+</html>

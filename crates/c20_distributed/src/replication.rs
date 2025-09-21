@@ -23,6 +23,12 @@ impl QuorumPolicy for MajorityQuorum {
             ConsistencyLevel::Session
             | ConsistencyLevel::MonotonicRead
             | ConsistencyLevel::MonotonicWrite => (total / 2) + 1,
+            ConsistencyLevel::ReadYourWrites
+            | ConsistencyLevel::MonotonicReads
+            | ConsistencyLevel::MonotonicWrites
+            | ConsistencyLevel::WritesFollowReads
+            | ConsistencyLevel::CausalConsistency => (total / 2) + 1,
+            ConsistencyLevel::StrongEventual => 1,
             ConsistencyLevel::Eventual => 1,
         }
     }

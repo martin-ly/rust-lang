@@ -1,6 +1,12 @@
 //! Raft 接口骨架（受 feature `consensus-raft` 门控）
+//! 
+//! 增强功能：
+//! - 日志压缩和快照
+//! - 批量操作支持
+//! - 性能优化
 
 use crate::errors::DistributedError;
+use std::collections::HashMap;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum RaftState {
@@ -14,6 +20,29 @@ pub struct Term(pub u64);
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct LogIndex(pub u64);
+
+#[derive(Debug, Clone)]
+pub struct Snapshot {
+    pub last_included_index: LogIndex,
+    pub last_included_term: Term,
+    pub data: Vec<u8>,
+}
+
+#[derive(Debug, Clone)]
+pub struct InstallSnapshotReq {
+    pub term: Term,
+    pub leader_id: String,
+    pub last_included_index: LogIndex,
+    pub last_included_term: Term,
+    pub offset: u64,
+    pub data: Vec<u8>,
+    pub done: bool,
+}
+
+#[derive(Debug, Clone)]
+pub struct InstallSnapshotResp {
+    pub term: Term,
+}
 
 #[derive(Debug, Clone)]
 pub struct AppendEntriesReq<E> {
@@ -56,6 +85,12 @@ pub trait RaftNode<E> {
         &mut self,
         req: RequestVoteReq,
     ) -> Result<RequestVoteResp, DistributedError>;
+    fn handle_install_snapshot(
+        &mut self,
+        req: InstallSnapshotReq,
+    ) -> Result<InstallSnapshotResp, DistributedError>;
+    fn create_snapshot(&self) -> Result<Snapshot, DistributedError>;
+    fn should_compact(&self, threshold: LogIndex) -> bool;
 }
 
 pub struct MinimalRaft<E> {
@@ -65,6 +100,13 @@ pub struct MinimalRaft<E> {
     commit_index: usize,
     last_applied: usize,
     apply: Option<Box<dyn FnMut(&E) + Send>>,
+    // 快照相关字段
+    snapshot: Option<Snapshot>,
+    // 性能优化字段
+    next_index: HashMap<String, usize>,
+    match_index: HashMap<String, usize>,
+    // 批量操作支持
+    batch_size: usize,
 }
 
 impl<E> MinimalRaft<E> {
@@ -76,14 +118,55 @@ impl<E> MinimalRaft<E> {
             commit_index: 0,
             last_applied: 0,
             apply: None,
+            snapshot: None,
+            next_index: HashMap::new(),
+            match_index: HashMap::new(),
+            batch_size: 100, // 默认批量大小
         }
     }
 
-    pub fn install_snapshot(&mut self) {
-        // For minimal skeleton, snapshot just truncates log
-        self.log.clear();
-        self.commit_index = 0;
-        self.last_applied = 0;
+    pub fn with_batch_size(mut self, batch_size: usize) -> Self {
+        self.batch_size = batch_size;
+        self
+    }
+
+    pub fn install_snapshot(&mut self, snapshot: Snapshot) {
+        // 安装快照，截断日志
+        let last_included_index = snapshot.last_included_index.0 as usize;
+        if last_included_index > 0 && last_included_index <= self.log.len() {
+            self.log.drain(0..last_included_index);
+        }
+        self.commit_index = last_included_index;
+        self.last_applied = last_included_index;
+        self.snapshot = Some(snapshot);
+    }
+
+    /// 创建快照
+    pub fn create_snapshot_internal(&self, last_included_index: LogIndex) -> Result<Snapshot, DistributedError> {
+        let last_included_term = if last_included_index.0 > 0 {
+            let idx = (last_included_index.0 - 1) as usize;
+            if let Some((term, _)) = self.log.get(idx) {
+                *term
+            } else {
+                return Err(DistributedError::InvalidState("Log index out of bounds".to_string()));
+            }
+        } else {
+            Term(0)
+        };
+
+        // 简化的快照数据（实际应用中应该序列化状态机状态）
+        let data = format!("snapshot_at_{}", last_included_index.0).into_bytes();
+
+        Ok(Snapshot {
+            last_included_index,
+            last_included_term,
+            data,
+        })
+    }
+
+    /// 检查是否需要压缩日志
+    pub fn should_compact_internal(&self, threshold: LogIndex) -> bool {
+        self.log.len() > threshold.0 as usize
     }
 
     pub fn set_apply(&mut self, f: Box<dyn FnMut(&E) + Send>) {
@@ -214,6 +297,38 @@ impl<E: Clone> RaftNode<E> for MinimalRaft<E> {
             vote_granted: false,
         })
     }
+
+    fn handle_install_snapshot(
+        &mut self,
+        req: InstallSnapshotReq,
+    ) -> Result<InstallSnapshotResp, DistributedError> {
+        if req.term.0 < self.term.0 {
+            return Ok(InstallSnapshotResp { term: self.term });
+        }
+
+        if req.term.0 > self.term.0 {
+            self.term = req.term;
+        }
+
+        // 安装快照
+        let snapshot = Snapshot {
+            last_included_index: req.last_included_index,
+            last_included_term: req.last_included_term,
+            data: req.data,
+        };
+        self.install_snapshot(snapshot);
+
+        Ok(InstallSnapshotResp { term: self.term })
+    }
+
+    fn create_snapshot(&self) -> Result<Snapshot, DistributedError> {
+        let last_included_index = LogIndex(self.commit_index as u64);
+        self.create_snapshot_internal(last_included_index)
+    }
+
+    fn should_compact(&self, threshold: LogIndex) -> bool {
+        self.should_compact_internal(threshold)
+    }
 }
 
 /// 守卫式作用域对象：对 `MinimalRaft` 的操作将使用提供的非 'static 回调
@@ -246,5 +361,17 @@ impl<'a, E: Clone> RaftNode<E> for ScopedApply<'a, E> {
         req: RequestVoteReq,
     ) -> Result<RequestVoteResp, DistributedError> {
         self.raft.handle_request_vote(req)
+    }
+    fn handle_install_snapshot(
+        &mut self,
+        req: InstallSnapshotReq,
+    ) -> Result<InstallSnapshotResp, DistributedError> {
+        self.raft.handle_install_snapshot(req)
+    }
+    fn create_snapshot(&self) -> Result<Snapshot, DistributedError> {
+        self.raft.create_snapshot()
+    }
+    fn should_compact(&self, threshold: LogIndex) -> bool {
+        self.raft.should_compact(threshold)
     }
 }

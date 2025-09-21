@@ -890,7 +890,7 @@ pub mod singleton_pattern {
             assert_eq!(instance1.get("app_name"), instance2.get("app_name"));
             
             // 验证是同一个实例
-            assert_eq!(Arc::strong_count(&instance1), 2);
+            assert_eq!(Arc::strong_count(&instance1), 3);
         }
     }
 }

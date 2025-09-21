@@ -1,4 +1,4 @@
-use crate::errors::DistributedError;
+use crate::core::errors::DistributedError;
 
 pub trait SagaStep {
     fn execute(&mut self) -> Result<(), DistributedError>;

@@ -8,5 +8,5 @@ fn main() {
     println!("  mq-nats: {}", cfg!(feature = "mq-nats"));
     println!("  mq-kafka: {}", cfg!(feature = "mq-kafka"));
     println!("  mq-mqtt: {}", cfg!(feature = "mq-mqtt"));
-    println!("  proxy-pingora: {}", cfg!(feature = "proxy-pingora"));
+    println!("  proxy-nix: {}", cfg!(feature = "proxy-nix"));
 }

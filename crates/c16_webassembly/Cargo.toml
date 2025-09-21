@@ -11,6 +11,8 @@ repository = "https://github.com/rust-lang/webassembly"
 keywords = ["webassembly", "wasm", "rust", "vm", "runtime"]
 categories = ["web-programming", "wasm"]
 
+# WebAssembly CPU指令集优化配置在根Cargo.toml中统一管理
+
 [dependencies]
 # 序列化和反序列化
 serde = { workspace = true, features = ["derive", "rc"] }
@@ -30,14 +32,14 @@ chrono = { workspace = true, features = ["serde"] }
 log = { workspace = true }
 env_logger = "0.11.5"
 
-# WebAssembly 相关
-wasm-bindgen = "0.2.0"
+# WebAssembly 相关 - 2025年最新版本 (支持WebAssembly 2.0)
+wasm-bindgen = "0.2.103"  # 最新稳定版本
 wasm-bindgen-futures = "0.4.0"
 js-sys = "0.3.0"
 web-sys = "0.3.0"
-wasmtime = "22.0.0"
-wasmparser = "0.220.0"
-wasm-encoder = "0.40.0"
+wasmtime = "37.0.0"  # 最新版本，支持WebAssembly 2.0
+wasmparser = "0.239.0"  # 升级到最新版本
+wasm-encoder = "0.239.0"  # 升级到最新版本
 
 # 数学和算法
 num-traits = "0.2.0"

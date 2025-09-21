@@ -1,4 +1,4 @@
-use crate::topology::{ConsistentHashRing, ShardId};
+use crate::core::topology::{ConsistentHashRing, ShardId};
 use std::hash::{Hash, Hasher};
 
 pub trait Partitioner<K> {

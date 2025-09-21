@@ -50,9 +50,9 @@ statrs = "0.18.0"
 libm = "0.2.0"
 
 # 运行时/示例适配基础依赖（对齐到 workspace 或最新主线）
+# async-std 已移除，使用 tokio 替代 (async-std 已弃用)
 tokio = { workspace = true, features = ["rt-multi-thread", "sync", "time"], optional = true }
 tokio-util = { workspace = true, features = ["rt"], optional = true }
-async-std = { version = "1.0.0", features = ["attributes"], optional = true }
 async-channel = { version = "2.0.0", optional = true }
 tower = { workspace = true, features = ["limit", "timeout", "retry", "util"], optional = true }
 http = { workspace = true, optional = true }
@@ -81,8 +81,7 @@ no-std = []
 ## 已裁剪：async/visualization/benchmarks/parallel 等特性
 
 # 运行时/示例适配（通过 features 选择，依赖为可选）
-tokio-adapter = ["dep:tokio", "dep:tokio-util"]
-async-std-adapter = ["dep:async-std", "dep:async-channel"]
+tokio-adapter = ["dep:tokio", "dep:tokio-util", "dep:async-channel"]
 tower-examples = ["dep:tower", "dep:http", "dep:hyper"]
 c20-integration = ["dep:c20_distributed"]
 
