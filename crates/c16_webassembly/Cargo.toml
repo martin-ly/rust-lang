@@ -17,7 +17,7 @@ categories = ["web-programming", "wasm"]
 # 序列化和反序列化
 serde = { workspace = true, features = ["derive", "rc"] }
 serde_json = { workspace = true }
-serde_bytes = "0.11.0"
+serde_bytes = "0.11.19"
 
 # 错误处理
 thiserror = { workspace = true }
@@ -30,35 +30,35 @@ tokio = { workspace = true, features = ["full"] }
 uuid = { workspace = true, features = ["v4", "serde"] }
 chrono = { workspace = true, features = ["serde"] }
 log = { workspace = true }
-env_logger = "0.11.5"
+env_logger = "0.11.8"
 
 # WebAssembly 相关 - 2025年最新版本 (支持WebAssembly 2.0)
 wasm-bindgen = "0.2.103"  # 最新稳定版本
-wasm-bindgen-futures = "0.4.0"
-js-sys = "0.3.0"
-web-sys = "0.3.0"
+wasm-bindgen-futures = "0.4.53"
+js-sys = "0.3.80"
+web-sys = "0.3.80"
 wasmtime = "37.0.0"  # 最新版本，支持WebAssembly 2.0
 wasmparser = "0.239.0"  # 升级到最新版本
 wasm-encoder = "0.239.0"  # 升级到最新版本
 
 # 数学和算法
-num-traits = "0.2.0"
-num-bigint = "0.4.0"
-num-complex = "0.4.0"
+num-traits = "0.2.19"
+num-bigint = "0.4.6"
+num-complex = "0.4.6"
 
 # 内存管理
-bumpalo = "3.15.0"
+bumpalo = "3.19.0"
 
 # 性能分析
-criterion = { version = "0.5.0", optional = true }
+criterion = { version = "0.5.1", optional = true }
 
 # 测试工具
-proptest = { version = "1.4.0", optional = true }
+proptest = { version = "1.8.0", optional = true }
 
 [dev-dependencies]
-criterion = "0.5.0"
-proptest = "1.4.0"
-tempfile = "3.10.0"
+criterion = "0.5.1"
+proptest = "1.8.0"
+tempfile = "3.22.0"
 
 [features]
 default = ["std"]

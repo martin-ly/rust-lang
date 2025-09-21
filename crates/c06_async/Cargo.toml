@@ -25,7 +25,7 @@ actix = { workspace = true }
 actix-rt = { workspace = true }
 
 # 日志
-env_logger = "0.11.5"
+env_logger = "0.11.8"
 
 # 其他工具 - 使用工作区统一版本
 uuid = { workspace = true }
@@ -42,7 +42,7 @@ rayon = { workspace = true }
 # 异步生态系统分析支持
 async-trait = { workspace = true }
 chrono = { workspace = true }
-smol = "2.0.0"
+smol = "2.0.2"
 
 # 终端和调试工具 - 更新到最新版本
 tokio-console = { workspace = true }

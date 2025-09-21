@@ -120,7 +120,7 @@ axum = { version = "0.8.4", features = ["macros", "multipart", "tracing"] }
 axum-core = "0.6.1"
 tower = "0.5.2"
 tower-http = { version = "0.6.6", features = ["cors", "trace", "timeout", "compression-gzip"] }
-actix-web = "4.7.1"
+actix-web = "4.11.0"
 actix = "0.13.5"
 actix-rt = "2.11.0"
 
@@ -128,29 +128,29 @@ actix-rt = "2.11.0"
 crossterm = "0.29.0"
 
 # 2025年最新前端框架 - 跨平台UI (移除GTK3依赖)
-dioxus = "0.6.0"
-dioxus-web = "0.6.0"
+dioxus = "0.6.3"
+dioxus-web = "0.6.3"
 # dioxus-desktop = "0.6.0"  # 暂时禁用，存在GTK3安全漏洞
-leptos = "0.6.0"
-leptos_axum = "0.6.0"
+leptos = "0.6.15"
+leptos_axum = "0.6.15"
 
 # 2025年最新桌面应用框架 (Tauri 2.0已解决GTK3安全漏洞)
-tauri = "2.0.0"
-tauri-build = "2.0.0"
+tauri = "2.8.5"
+tauri-build = "2.4.1"
 
 # 其他异步生态常用依赖（统一版本）
-async-trait = "0.1.81"
-async-stream = "0.3.5"
+async-trait = "0.1.89"
+async-stream = "0.3.6"
 # async-std 已移除，使用 tokio 替代 (async-std 已弃用)
 tokio-console = "0.1.13"
-tokio-test = "0.4.3"
+tokio-test = "0.4.4"
 mio = "0.8.11"
 tungstenite = "0.27"
 rcgen = "0.14.4"
 
 # 基础依赖统一
 dotenvy = "0.15.7"
-tempfile = "3.12.1"
+tempfile = "3.22.0"
 
 # gRPC 相关 - 2025年1月最新稳定版本
 tonic = { version = "0.14.2", features = ["transport", "tls-ring", "tls-webpki-roots", "channel"] }
@@ -267,7 +267,7 @@ glommio = "0.8.0"
 
 # 安全漏洞修复 - 2025年1月
 # 替换未维护和有安全漏洞的依赖
-ahash = "0.8.0"  # 替代 fxhash (未维护)
+ahash = "0.8.12"  # 替代 fxhash (未维护)
 quote = "1.0.40"  # 替代 paste (未维护)
 proc-macro-error2 = "2.0.1"  # 替代 proc-macro-error (未维护)
 is-terminal = "0.2.0"  # 替代 atty (有安全漏洞)

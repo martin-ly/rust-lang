@@ -43,9 +43,9 @@ crossbeam = { workspace = true }
 dashmap = { workspace = true }
 
 # 压缩算法 - 升级到最新版本
-flate2 = "1.0.0"
-brotli = "3.4.0"
-zstd = "0.13.0"
+flate2 = "1.1.2"
+brotli = "3.5.0"
+zstd = "0.13.3"
 
 # 异步trait - 使用workspace版本
 async-trait = { workspace = true }
@@ -68,7 +68,7 @@ metrics-exporter-prometheus = { workspace = true }
 
 # 配置管理 - 使用workspace版本
 config = { workspace = true }
-clap = { version = "4.0.0", features = ["derive"] }
+clap = { version = "4.5.48", features = ["derive"] }
 
 # 2025年新增依赖 - 使用workspace版本
 chrono = { workspace = true }

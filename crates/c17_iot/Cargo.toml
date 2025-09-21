@@ -12,13 +12,14 @@ tokio = { workspace = true }
 uuid = { workspace = true }
 chrono = { workspace = true }
 async-trait = "0.1"
+rand = "0.8"
 rdkafka = { version = "0.38.0", optional = true, features = ["tokio", "cmake-build"] }
-influxdb2 = { version = "0.4.0", optional = true }
-openssl = { version = "0.10.0", optional = true, features = ["vendored"] }
+influxdb2 = { version = "0.4.5", optional = true }
+openssl = { version = "0.10.73", optional = true, features = ["vendored"] }
 
 [dev-dependencies]
 rumqttc = "0.25.0"
-coap-lite = "0.13.0"
+coap-lite = "0.13.3"
 opentelemetry = { workspace = true }
 opentelemetry_sdk = { workspace = true }
 opentelemetry-stdout = { workspace = true }
@@ -59,3 +60,63 @@ required-features = ["openssl-examples"]
 [[example]]
 name = "coap_dtls"
 path = "examples/coap_dtls.rs"
+
+[[example]]
+name = "performance_monitoring_demo"
+path = "examples/performance_monitoring_demo.rs"
+
+[[example]]
+name = "cache_optimization_demo"
+path = "examples/cache_optimization_demo.rs"
+
+[[example]]
+name = "integrated_iot_demo"
+path = "examples/integrated_iot_demo.rs"
+
+[[example]]
+name = "error_handling_demo"
+path = "examples/error_handling_demo.rs"
+
+[[example]]
+name = "benchmarking_demo"
+path = "examples/benchmarking_demo.rs"
+
+[[example]]
+name = "advanced_protocols_demo"
+path = "examples/advanced_protocols_demo.rs"
+
+[[example]]
+name = "memory_optimization_demo"
+path = "examples/memory_optimization_demo.rs"
+
+[[example]]
+name = "ai_integration_demo"
+path = "examples/ai_integration_demo.rs"
+
+[[example]]
+name = "blockchain_integration_demo"
+path = "examples/blockchain_integration_demo.rs"
+
+[[example]]
+name = "quantum_computing_demo"
+path = "examples/quantum_computing_demo.rs"
+
+[[example]]
+name = "edge_computing_advanced_demo"
+path = "examples/edge_computing_advanced_demo.rs"
+
+[[example]]
+name = "iot_security_advanced_demo"
+path = "examples/iot_security_advanced_demo.rs"
+
+[[example]]
+name = "digital_twin_integration_demo"
+path = "examples/digital_twin_integration_demo.rs"
+
+[[example]]
+name = "network_5g_integration_demo"
+path = "examples/network_5g_integration_demo.rs"
+
+[[example]]
+name = "iot_analytics_advanced_demo"
+path = "examples/iot_analytics_advanced_demo.rs"

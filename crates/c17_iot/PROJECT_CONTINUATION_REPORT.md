@@ -143,7 +143,7 @@ c17_iot 是一个基于 Rust 1.90 的完整 IoT 开发解决方案，提供了�
 
 ## 项目结构
 
-```
+```text
 c17_iot/
 ├── src/                          # 源代码目录
 │   ├── device_management/        # 设备管理模块

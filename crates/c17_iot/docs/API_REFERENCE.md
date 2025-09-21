@@ -52,7 +52,7 @@ sensor_network.add_sensor("temp_001", "temperature", "room1").await?;
 sensor_network.start_data_collection().await?;
 ```
 
-#### 主要方法
+#### 主要方法1
 
 - `add_sensor(sensor_id, sensor_type, location)` - 添加传感器
 - `remove_sensor(sensor_id)` - 移除传感器
@@ -98,7 +98,7 @@ let rule = Rule::new(
 rule_engine.add_rule(rule).await?;
 ```
 
-#### 主要方法
+#### 主要方法2
 
 - `add_rule(rule)` - 添加规则
 - `remove_rule(rule_id)` - 移除规则
@@ -142,7 +142,7 @@ let certificate = DeviceCertificate {
 let token = authenticator.authenticate_device("device_001", &certificate)?;
 ```
 
-#### 主要方法
+#### 主要方法3
 
 - `authenticate_device(device_id, certificate)` - 认证设备
 - `verify_token(token)` - 验证令牌
@@ -173,7 +173,7 @@ let realtime_data = dashboard.get_realtime_data().await?;
 let json_data = dashboard.export_data(c17_iot::monitoring::dashboard::ExportFormat::Json).await?;
 ```
 
-#### 主要方法
+#### 主要方法4
 
 - `update_system_status()` - 更新系统状态
 - `get_realtime_data()` - 获取实时数据
@@ -208,7 +208,7 @@ let message = Message::new(
 comm_manager.send_message(message).await?;
 ```
 
-#### 主要方法
+#### 主要方法5
 
 - `initialize()` - 初始化通信管理器
 - `connect(protocol, endpoint)` - 连接协议
@@ -248,7 +248,7 @@ let data_point = DataPoint {
 storage_manager.store_data(data_point).await?;
 ```
 
-#### 主要方法
+#### 主要方法6
 
 - `initialize()` - 初始化存储管理器
 - `store_data(data_point)` - 存储数据
@@ -284,7 +284,7 @@ gpio_manager.configure_pin(18, pin_config).await?;
 gpio_manager.set_pin_state(18, PinState::High).await?;
 ```
 
-#### 主要方法
+#### 主要方法7
 
 - `initialize()` - 初始化GPIO管理器
 - `configure_pin(pin, config)` - 配置引脚

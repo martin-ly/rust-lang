@@ -24,11 +24,11 @@ pnet_datalink = { version = "0.35.0", optional = true }
 pnet_transport = { version = "0.35.0", optional = true }
 
 # 可选：离线 PCAP 支持
-pcap = { version = "2.0.0", optional = true }
+pcap = { version = "2.3.0", optional = true }
 
 # 协议解析 - 更新到最新版本
 nom = "8.0.0"
-httparse = "1.8.0"
+httparse = "1.10.1"
 url = { workspace = true }
 
 # 序列化和反序列化 - 使用工作区统一版本
@@ -58,7 +58,7 @@ futures = { workspace = true }
 futures-util = { workspace = true }
 
 # 缓存和数据结构
-lru = "0.12.3"
+lru = "0.12.5"
 
 # DNS 解析（Hickory-DNS，原 trust-dns）- 更新到最新版本
 hickory-resolver = { version = "0.24.4", features = ["system-config", "dns-over-https-rustls", "dns-over-rustls"] }
@@ -66,10 +66,10 @@ hickory-proto = "0.24.4"
 
 # P2P 与 QUIC（新增）- 更新到最新版本
 libp2p = { version = "0.56.0", features = ["tokio", "tcp", "dns", "tls", "gossipsub", "kad", "noise", "yamux", "ping", "identify", "macros"] }
-quinn = "0.11.0"
+quinn = "0.11.9"
 rcgen = { workspace = true }
 # ACME（证书自动签发/续期）- 更新到最新版本
-instant-acme = "0.8.0"
+instant-acme = "0.8.2"
 # WebSocket - 使用工作区统一版本
 tokio-tungstenite = { workspace = true, features = ["rustls-tls-webpki-roots"] }
 tungstenite = { workspace = true }
