@@ -32,12 +32,12 @@ impl PowerManager {
         self.battery_level
     }
 
-    pub fn set_power_mode(&mut self, mode: PowerMode) {
+    pub fn set_power_mode(&mut self, mode: _mode) {
         self.power_mode = mode;
     }
 
     /// 记录一次功耗样本 / Record a power consumption sample
-    pub fn record_consumption(&mut self, timestamp: u64, consumption: f64) {
+    pub fn record_consumption(&mut self, timestamp: u64, consumption: _consumption) {
         self.consumption_history.push(PowerConsumption {
             timestamp,
             consumption,
@@ -50,7 +50,7 @@ impl PowerManager {
     }
 
     /// 估算切换到某模式的单位时间功耗 / Estimate power for a mode per unit time
-    pub fn estimate_mode_consumption(&self, mode: PowerMode) -> f64 {
+    pub fn estimate_mode_consumption(&self, mode: _mode) -> f64 {
         match mode {
             PowerMode::Normal => 100.0,
             PowerMode::LowPower => 20.0,

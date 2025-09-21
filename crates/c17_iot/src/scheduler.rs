@@ -27,7 +27,7 @@ impl IoTScheduler {
         }
     }
 
-    pub fn add_task(&mut self, task: Task) {
+    pub fn add_task(&mut self, task: _task) {
         self.tasks.push(task);
     }
 

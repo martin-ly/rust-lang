@@ -32,7 +32,7 @@ pub struct EmbeddedDevice {
 }
 
 impl EmbeddedDevice {
-    pub fn new(id: String, device_type: DeviceType) -> Self {
+    pub fn new(id: String, device_type: _device_type) -> Self {
         Self {
             id,
             device_type,
@@ -42,11 +42,11 @@ impl EmbeddedDevice {
         }
     }
 
-    pub fn add_sensor(&mut self, sensor: Sensor) {
+    pub fn add_sensor(&mut self, sensor: _sensor) {
         self.sensors.push(sensor);
     }
 
-    pub fn add_actuator(&mut self, actuator: Actuator) {
+    pub fn add_actuator(&mut self, actuator: _actuator) {
         self.actuators.push(actuator);
     }
 
@@ -56,7 +56,7 @@ impl EmbeddedDevice {
     }
 
     /// 写入执行器状态（按 id）/ Write actuator state by id
-    pub fn write_actuator(&mut self, id: &str, state: bool) -> bool {
+    pub fn write_actuator(&mut self, id: &str, state: _state) -> bool {
         if let Some(act) = self.actuators.iter_mut().find(|a| a.id == id) {
             act.state = state;
             true
