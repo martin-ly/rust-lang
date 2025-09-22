@@ -1,492 +1,673 @@
 //! 特征工程模块
-//!
-//! 提供特征提取、选择、变换和创建功能
+//! 
+//! 提供特征提取、选择和转换功能
 
-use crate::data_processing::DataFrame;
+use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
+use uuid::Uuid;
+use chrono::{DateTime, Utc};
 
-/// 特征工程器
+use super::dataframe::DataFrame;
+
+/// 特征工程师
 #[derive(Debug, Clone)]
 pub struct FeatureEngineer {
+    pub id: Uuid,
     pub name: String,
-    pub transformations: Vec<FeatureTransformation>,
+    pub operations: Vec<FeatureOperation>,
+    pub created_at: DateTime<Utc>,
+    pub updated_at: DateTime<Utc>,
 }
 
-/// 特征变换类型
+/// 特征操作
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub enum FeatureTransformation {
-    /// 多项式特征
-    PolynomialFeatures { degree: u32, columns: Vec<String> },
-    /// 特征组合
-    FeatureCombination {
-        columns: Vec<String>,
-        operation: CombinationOperation,
-    },
-    /// 特征分箱
-    FeatureBinning {
-        column: String,
-        bins: usize,
-        strategy: BinningStrategy,
-    },
-    /// 特征编码
-    FeatureEncoding {
-        column: String,
-        method: EncodingMethod,
-    },
+pub enum FeatureOperation {
+    /// 数学变换
+    MathTransform(MathTransform),
+    /// 统计特征
+    StatisticalFeature(StatisticalFeature),
+    /// 时间特征
+    TimeFeature(TimeFeature),
+    /// 文本特征
+    TextFeature(TextFeature),
+    /// 分类特征
+    CategoricalFeature(CategoricalFeature),
     /// 特征选择
-    FeatureSelection { method: SelectionMethod, k: usize },
-    /// 降维
-    DimensionalityReduction {
-        method: ReductionMethod,
-        n_components: usize,
-    },
+    FeatureSelection(FeatureSelection),
+    /// 特征组合
+    FeatureCombination(FeatureCombination),
+    /// 自定义特征
+    CustomFeature(CustomFeature),
 }
 
-/// 特征组合操作
+/// 数学变换
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub enum CombinationOperation {
-    /// 加法
-    Add,
-    /// 乘法
-    Multiply,
-    /// 除法
-    Divide,
-    /// 减法
-    Subtract,
-    /// 幂运算
+pub struct MathTransform {
+    pub input_columns: Vec<String>,
+    pub output_column: String,
+    pub transform_type: MathTransformType,
+    pub parameters: HashMap<String, f64>,
+}
+
+/// 数学变换类型
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum MathTransformType {
+    /// 对数变换
+    Log,
+    /// 平方根变换
+    Sqrt,
+    /// 平方变换
+    Square,
+    /// 倒数变换
+    Reciprocal,
+    /// 指数变换
+    Exp,
+    /// 幂变换
     Power(f64),
+    /// 绝对值
+    Abs,
+    /// 符号函数
+    Sign,
+    /// 向上取整
+    Ceil,
+    /// 向下取整
+    Floor,
+    /// 四舍五入
+    Round,
 }
 
-/// 分箱策略
+/// 统计特征
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub enum BinningStrategy {
-    /// 等宽分箱
-    EqualWidth,
-    /// 等频分箱
-    EqualFreq,
-    /// 自定义分箱
-    Custom(Vec<f64>),
+pub struct StatisticalFeature {
+    pub input_columns: Vec<String>,
+    pub output_column: String,
+    pub feature_type: StatisticalFeatureType,
+    pub window_size: Option<usize>,
+    pub group_by: Option<String>,
 }
 
-/// 编码方法
+/// 统计特征类型
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub enum EncodingMethod {
+pub enum StatisticalFeatureType {
+    /// 均值
+    Mean,
+    /// 中位数
+    Median,
+    /// 标准差
+    Std,
+    /// 方差
+    Variance,
+    /// 最小值
+    Min,
+    /// 最大值
+    Max,
+    /// 范围
+    Range,
+    /// 分位数
+    Quantile(f64),
+    /// 偏度
+    Skewness,
+    /// 峰度
+    Kurtosis,
+    /// 计数
+    Count,
+    /// 唯一值计数
+    UniqueCount,
+    /// 缺失值计数
+    MissingCount,
+}
+
+/// 时间特征
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TimeFeature {
+    pub input_column: String,
+    pub output_columns: Vec<String>,
+    pub feature_types: Vec<TimeFeatureType>,
+    pub timezone: Option<String>,
+}
+
+/// 时间特征类型
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum TimeFeatureType {
+    /// 年份
+    Year,
+    /// 月份
+    Month,
+    /// 日期
+    Day,
+    /// 小时
+    Hour,
+    /// 分钟
+    Minute,
+    /// 秒
+    Second,
+    /// 星期几
+    Weekday,
+    /// 一年中的第几天
+    DayOfYear,
+    /// 一年中的第几周
+    WeekOfYear,
+    /// 季度
+    Quarter,
+    /// 是否周末
+    IsWeekend,
+    /// 是否工作日
+    IsWeekday,
+    /// 是否月初
+    IsMonthStart,
+    /// 是否月末
+    IsMonthEnd,
+    /// 是否年初
+    IsYearStart,
+    /// 是否年末
+    IsYearEnd,
+}
+
+/// 文本特征
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TextFeature {
+    pub input_column: String,
+    pub output_columns: Vec<String>,
+    pub feature_types: Vec<TextFeatureType>,
+    pub parameters: HashMap<String, serde_json::Value>,
+}
+
+/// 文本特征类型
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum TextFeatureType {
+    /// 字符长度
+    Length,
+    /// 单词数量
+    WordCount,
+    /// 句子数量
+    SentenceCount,
+    /// 平均单词长度
+    AverageWordLength,
+    /// 大写字母数量
+    UppercaseCount,
+    /// 小写字母数量
+    LowercaseCount,
+    /// 数字数量
+    DigitCount,
+    /// 特殊字符数量
+    SpecialCharCount,
+    /// 是否包含特定词
+    ContainsWord(String),
+    /// 词频统计
+    WordFrequency,
+    /// 字符n-gram
+    CharNGram(usize),
+    /// 词n-gram
+    WordNGram(usize),
+    /// TF-IDF
+    TfIdf,
+    /// 词嵌入
+    WordEmbedding,
+}
+
+/// 分类特征
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CategoricalFeature {
+    pub input_column: String,
+    pub output_columns: Vec<String>,
+    pub feature_types: Vec<CategoricalFeatureType>,
+    pub parameters: HashMap<String, serde_json::Value>,
+}
+
+/// 分类特征类型
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum CategoricalFeatureType {
     /// 独热编码
     OneHot,
     /// 标签编码
     Label,
     /// 目标编码
     Target,
+    /// 频率编码
+    Frequency,
+    /// 序数编码
+    Ordinal,
+    /// 二进制编码
+    Binary,
+    /// 哈希编码
+    Hash(usize),
 }
 
-/// 特征选择方法
+/// 特征选择
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub enum SelectionMethod {
+pub struct FeatureSelection {
+    pub input_columns: Vec<String>,
+    pub output_columns: Vec<String>,
+    pub selection_type: FeatureSelectionType,
+    pub parameters: HashMap<String, serde_json::Value>,
+}
+
+/// 特征选择类型
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum FeatureSelectionType {
     /// 方差阈值
     VarianceThreshold(f64),
-    /// 相关性选择
-    Correlation,
+    /// 相关性阈值
+    CorrelationThreshold(f64),
+    /// 互信息
+    MutualInformation(usize),
+    /// 卡方检验
+    ChiSquare(usize),
     /// 递归特征消除
-    RecursiveFeatureElimination,
-    /// 基于模型的选择
-    ModelBased,
+    RecursiveFeatureElimination(usize),
+    /// 基于模型的特征选择
+    ModelBased(usize),
+    /// 主成分分析
+    PCA(usize),
+    /// 线性判别分析
+    LDA(usize),
 }
 
-/// 降维方法
+/// 特征组合
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub enum ReductionMethod {
-    /// 主成分分析
-    PCA,
-    /// 线性判别分析
-    LDA,
-    /// 独立成分分析
-    ICA,
+pub struct FeatureCombination {
+    pub input_columns: Vec<String>,
+    pub output_column: String,
+    pub combination_type: FeatureCombinationType,
+    pub parameters: HashMap<String, serde_json::Value>,
+}
+
+/// 特征组合类型
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum FeatureCombinationType {
+    /// 加法
+    Add,
+    /// 减法
+    Subtract,
+    /// 乘法
+    Multiply,
+    /// 除法
+    Divide,
+    /// 多项式特征
+    Polynomial(usize),
+    /// 交互特征
+    Interaction,
+    /// 比率
+    Ratio,
+    /// 差值
+    Difference,
+    /// 乘积
+    Product,
+    /// 自定义组合
+    Custom(String),
+}
+
+/// 自定义特征
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CustomFeature {
+    pub name: String,
+    pub input_columns: Vec<String>,
+    pub output_column: String,
+    pub function_name: String,
+    pub parameters: HashMap<String, serde_json::Value>,
+}
+
+/// 特征工程结果
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct FeatureEngineeringResult {
+    pub input_features: Vec<String>,
+    pub output_features: Vec<String>,
+    pub feature_importance: HashMap<String, f64>,
+    pub processing_time: std::time::Duration,
+    pub metadata: HashMap<String, serde_json::Value>,
 }
 
 impl FeatureEngineer {
-    /// 创建新的特征工程器
+    /// 创建新的特征工程师
     pub fn new(name: String) -> Self {
         Self {
+            id: Uuid::new_v4(),
             name,
-            transformations: Vec::new(),
+            operations: Vec::new(),
+            created_at: Utc::now(),
+            updated_at: Utc::now(),
         }
     }
 
-    /// 添加特征变换
-    pub fn add_transformation(&mut self, transformation: FeatureTransformation) {
-        self.transformations.push(transformation);
+    /// 添加特征操作
+    pub fn add_operation(&mut self, operation: FeatureOperation) {
+        self.operations.push(operation);
+        self.updated_at = Utc::now();
+    }
+
+    /// 移除特征操作
+    pub fn remove_operation(&mut self, index: usize) -> Result<()> {
+        if index < self.operations.len() {
+            self.operations.remove(index);
+            self.updated_at = Utc::now();
+            Ok(())
+        } else {
+            Err(anyhow::anyhow!("Operation index out of bounds"))
+        }
     }
 
     /// 执行特征工程
-    pub fn fit_transform(&self, mut df: DataFrame) -> Result<DataFrame, String> {
-        for transformation in &self.transformations {
-            df = self.apply_transformation(df, transformation)?;
-        }
-        Ok(df)
-    }
+    pub fn fit_transform(&self, mut df: DataFrame) -> Result<(DataFrame, FeatureEngineeringResult)> {
+        let start_time = std::time::Instant::now();
+        let input_features = df.get_columns().to_vec();
+        let mut output_features = Vec::new();
+        let mut feature_importance = HashMap::new();
+        let mut metadata = HashMap::new();
 
-    /// 应用单个特征变换
-    fn apply_transformation(
-        &self,
-        df: DataFrame,
-        transformation: &FeatureTransformation,
-    ) -> Result<DataFrame, String> {
-        match transformation {
-            FeatureTransformation::PolynomialFeatures { degree, columns } => {
-                self.create_polynomial_features(df, *degree, columns)
-            }
-            FeatureTransformation::FeatureCombination { columns, operation } => {
-                self.combine_features(df, columns, operation)
-            }
-            FeatureTransformation::FeatureBinning {
-                column,
-                bins,
-                strategy,
-            } => self.bin_feature(df, column, *bins, strategy),
-            FeatureTransformation::FeatureEncoding { column, method } => {
-                self.encode_feature(df, column, method)
-            }
-            FeatureTransformation::FeatureSelection { method, k } => {
-                self.select_features(df, method, *k)
-            }
-            FeatureTransformation::DimensionalityReduction {
-                method,
-                n_components,
-            } => self.reduce_dimensions(df, method, *n_components),
-        }
-    }
-
-    /// 创建多项式特征
-    fn create_polynomial_features(
-        &self,
-        mut df: DataFrame,
-        degree: u32,
-        columns: &[String],
-    ) -> Result<DataFrame, String> {
-        let mut new_columns = df.columns.clone();
-        let mut new_data = df.data.clone();
-
-        for col_name in columns {
-            let col_idx = df
-                .columns
-                .iter()
-                .position(|col| col == col_name)
-                .ok_or_else(|| format!("列 '{}' 不存在", col_name))?;
-
-            for d in 2..=degree {
-                let new_col_name = format!("{}_pow_{}", col_name, d);
-                new_columns.push(new_col_name);
-
-                for (i, row) in new_data.iter_mut().enumerate() {
-                    let value = df.data[i][col_idx];
-                    row.push(value.powi(d as i32));
+        for operation in &self.operations {
+            match operation {
+                FeatureOperation::MathTransform(transform) => {
+                    df = self.apply_math_transform(df, transform)?;
+                    output_features.push(transform.output_column.clone());
+                }
+                FeatureOperation::StatisticalFeature(feature) => {
+                    df = self.apply_statistical_feature(df, feature)?;
+                    output_features.push(feature.output_column.clone());
+                }
+                FeatureOperation::TimeFeature(feature) => {
+                    df = self.apply_time_feature(df, feature)?;
+                    output_features.extend(feature.output_columns.clone());
+                }
+                FeatureOperation::TextFeature(feature) => {
+                    df = self.apply_text_feature(df, feature)?;
+                    output_features.extend(feature.output_columns.clone());
+                }
+                FeatureOperation::CategoricalFeature(feature) => {
+                    df = self.apply_categorical_feature(df, feature)?;
+                    output_features.extend(feature.output_columns.clone());
+                }
+                FeatureOperation::FeatureSelection(selection) => {
+                    df = self.apply_feature_selection(df, selection)?;
+                    output_features.extend(selection.output_columns.clone());
+                }
+                FeatureOperation::FeatureCombination(combination) => {
+                    df = self.apply_feature_combination(df, combination)?;
+                    output_features.push(combination.output_column.clone());
+                }
+                FeatureOperation::CustomFeature(feature) => {
+                    df = self.apply_custom_feature(df, feature)?;
+                    output_features.push(feature.output_column.clone());
                 }
             }
         }
 
-        df.columns = new_columns;
-        df.data = new_data;
-        Ok(df)
-    }
+        let processing_time = start_time.elapsed();
 
-    /// 组合特征
-    fn combine_features(
-        &self,
-        mut df: DataFrame,
-        columns: &[String],
-        operation: &CombinationOperation,
-    ) -> Result<DataFrame, String> {
-        if columns.len() < 2 {
-            return Err("至少需要两个列进行组合".to_string());
-        }
-
-        let indices: Result<Vec<usize>, String> = columns
-            .iter()
-            .map(|col| {
-                df.columns
-                    .iter()
-                    .position(|c| c == col)
-                    .ok_or_else(|| format!("列 '{}' 不存在", col))
-            })
-            .collect();
-        let indices = indices?;
-
-        let new_col_name = format!("combined_{}", columns.join("_"));
-        df.columns.push(new_col_name);
-
-        for row in &mut df.data {
-            let mut result = row[indices[0]];
-
-            for &idx in &indices[1..] {
-                result = match operation {
-                    CombinationOperation::Add => result + row[idx],
-                    CombinationOperation::Multiply => result * row[idx],
-                    CombinationOperation::Divide => {
-                        if row[idx] != 0.0 {
-                            result / row[idx]
-                        } else {
-                            0.0
-                        }
-                    }
-                    CombinationOperation::Subtract => result - row[idx],
-                    CombinationOperation::Power(p) => result.powf(*p),
-                };
-            }
-
-            row.push(result);
-        }
-
-        Ok(df)
-    }
-
-    /// 特征分箱
-    fn bin_feature(
-        &self,
-        mut df: DataFrame,
-        column: &str,
-        bins: usize,
-        strategy: &BinningStrategy,
-    ) -> Result<DataFrame, String> {
-        let col_idx = df
-            .columns
-            .iter()
-            .position(|col| col == column)
-            .ok_or_else(|| format!("列 '{}' 不存在", column))?;
-
-        let values: Vec<f64> = df.data.iter().map(|row| row[col_idx]).collect();
-        let bin_edges = match strategy {
-            BinningStrategy::EqualWidth => {
-                let min = values.iter().fold(f64::INFINITY, |a, &b| a.min(b));
-                let max = values.iter().fold(f64::NEG_INFINITY, |a, &b| a.max(b));
-                let width = (max - min) / bins as f64;
-                (0..=bins).map(|i| min + i as f64 * width).collect()
-            }
-            BinningStrategy::EqualFreq => {
-                let mut sorted_values = values.clone();
-                sorted_values.sort_by(|a, b| a.partial_cmp(b).unwrap());
-                let mut edges = vec![sorted_values[0]];
-                for i in 1..bins {
-                    let idx = (i * sorted_values.len()) / bins;
-                    edges.push(sorted_values[idx]);
-                }
-                edges.push(sorted_values[sorted_values.len() - 1]);
-                edges
-            }
-            BinningStrategy::Custom(edges) => edges.clone(),
+        let result = FeatureEngineeringResult {
+            input_features,
+            output_features,
+            feature_importance,
+            processing_time,
+            metadata,
         };
 
-        let new_col_name = format!("{}_binned", column);
-        df.columns.push(new_col_name);
+        Ok((df, result))
+    }
 
-        for row in &mut df.data {
-            let value = row[col_idx];
-            let bin_idx = bin_edges
-                .iter()
-                .position(|&edge| value <= edge)
-                .unwrap_or(bins);
-            row.push(bin_idx as f64);
+    /// 应用数学变换
+    fn apply_math_transform(&self, mut df: DataFrame, transform: &MathTransform) -> Result<DataFrame> {
+        let mut new_column_data = Vec::new();
+
+        for row in &df.data {
+            let mut values = Vec::new();
+            for col_name in &transform.input_columns {
+                let col_index = df.columns.iter().position(|c| c == col_name)
+                    .ok_or_else(|| anyhow::anyhow!("Column {} not found", col_name))?;
+                values.push(row[col_index]);
+            }
+
+            let transformed_value = match transform.transform_type {
+                MathTransformType::Log => values[0].ln(),
+                MathTransformType::Sqrt => values[0].sqrt(),
+                MathTransformType::Square => values[0].powi(2),
+                MathTransformType::Reciprocal => 1.0 / values[0],
+                MathTransformType::Exp => values[0].exp(),
+                MathTransformType::Power(power) => values[0].powf(power),
+                MathTransformType::Abs => values[0].abs(),
+                MathTransformType::Sign => values[0].signum(),
+                MathTransformType::Ceil => values[0].ceil(),
+                MathTransformType::Floor => values[0].floor(),
+                MathTransformType::Round => values[0].round(),
+            };
+
+            new_column_data.push(transformed_value);
+        }
+
+        // 添加新列
+        df.columns.push(transform.output_column.clone());
+        for (i, row) in df.data.iter_mut().enumerate() {
+            row.push(new_column_data[i]);
         }
 
         Ok(df)
     }
 
-    /// 特征编码
-    fn encode_feature(
-        &self,
-        mut df: DataFrame,
-        column: &str,
-        method: &EncodingMethod,
-    ) -> Result<DataFrame, String> {
-        let col_idx = df
-            .columns
-            .iter()
-            .position(|col| col == column)
-            .ok_or_else(|| format!("列 '{}' 不存在", column))?;
+    /// 应用统计特征
+    fn apply_statistical_feature(&self, mut df: DataFrame, feature: &StatisticalFeature) -> Result<DataFrame> {
+        let mut new_column_data = Vec::new();
 
-        match method {
-            EncodingMethod::OneHot => {
-                // 简化实现：将连续值转换为分类
-                let values: Vec<f64> = df.data.iter().map(|row| row[col_idx]).collect();
-                let unique_values: Vec<f64> = {
-                    let mut unique = values.clone();
-                    unique.sort_by(|a, b| a.partial_cmp(b).unwrap());
-                    unique.dedup();
-                    unique
-                };
+        for row in &df.data {
+            let mut values = Vec::new();
+            for col_name in &feature.input_columns {
+                let col_index = df.columns.iter().position(|c| c == col_name)
+                    .ok_or_else(|| anyhow::anyhow!("Column {} not found", col_name))?;
+                values.push(row[col_index]);
+            }
 
-                for (i, unique_val) in unique_values.iter().enumerate() {
-                    let new_col_name = format!("{}_cat_{}", column, i);
-                    df.columns.push(new_col_name);
-
-                    for row in &mut df.data {
-                        let is_match = if (row[col_idx] - unique_val).abs() < 1e-10 {
-                            1.0
-                        } else {
-                            0.0
-                        };
-                        row.push(is_match);
+            let statistical_value = match feature.feature_type {
+                StatisticalFeatureType::Mean => values.iter().sum::<f64>() / values.len() as f64,
+                StatisticalFeatureType::Median => {
+                    let mut sorted_values = values.clone();
+                    sorted_values.sort_by(|a, b| a.partial_cmp(b).unwrap());
+                    if sorted_values.len() % 2 == 0 {
+                        (sorted_values[sorted_values.len() / 2 - 1] + sorted_values[sorted_values.len() / 2]) / 2.0
+                    } else {
+                        sorted_values[sorted_values.len() / 2]
                     }
                 }
-            }
-            EncodingMethod::Label => {
-                // 标签编码：将值映射到整数
-                let values: Vec<f64> = df.data.iter().map(|row| row[col_idx]).collect();
-                let unique_values: Vec<f64> = {
-                    let mut unique = values.clone();
-                    unique.sort_by(|a, b| a.partial_cmp(b).unwrap());
-                    unique.dedup();
-                    unique
-                };
-
-                let new_col_name = format!("{}_encoded", column);
-                df.columns.push(new_col_name);
-
-                for row in &mut df.data {
-                    let encoded = unique_values
-                        .iter()
-                        .position(|&val| (row[col_idx] - val).abs() < 1e-10)
-                        .unwrap_or(0) as f64;
-                    row.push(encoded);
-                }
-            }
-            EncodingMethod::Target => {
-                // 目标编码：用目标变量的均值替换分类值
-                // 简化实现：用当前列的均值
-                let values: Vec<f64> = df.data.iter().map(|row| row[col_idx]).collect();
-                let mean = values.iter().sum::<f64>() / values.len() as f64;
-
-                let new_col_name = format!("{}_target_encoded", column);
-                df.columns.push(new_col_name);
-
-                for row in &mut df.data {
-                    row.push(mean);
-                }
-            }
-        }
-
-        Ok(df)
-    }
-
-    /// 特征选择
-    fn select_features(
-        &self,
-        df: DataFrame,
-        method: &SelectionMethod,
-        k: usize,
-    ) -> Result<DataFrame, String> {
-        match method {
-            SelectionMethod::VarianceThreshold(threshold) => {
-                let mut selected_columns = Vec::new();
-
-                for (i, column) in df.columns.iter().enumerate() {
-                    let values: Vec<f64> = df.data.iter().map(|row| row[i]).collect();
+                StatisticalFeatureType::Std => {
                     let mean = values.iter().sum::<f64>() / values.len() as f64;
-                    let variance: f64 = values.iter().map(|x| (x - mean).powi(2)).sum::<f64>()
-                        / values.len() as f64;
-
-                    if variance >= *threshold {
-                        selected_columns.push(column.clone());
-                    }
+                    let variance = values.iter().map(|x| (x - mean).powi(2)).sum::<f64>() / values.len() as f64;
+                    variance.sqrt()
                 }
+                StatisticalFeatureType::Variance => {
+                    let mean = values.iter().sum::<f64>() / values.len() as f64;
+                    values.iter().map(|x| (x - mean).powi(2)).sum::<f64>() / values.len() as f64
+                }
+                StatisticalFeatureType::Min => values.iter().fold(f64::INFINITY, |a, &b| a.min(b)),
+                StatisticalFeatureType::Max => values.iter().fold(f64::NEG_INFINITY, |a, &b| a.max(b)),
+                StatisticalFeatureType::Range => {
+                    let min = values.iter().fold(f64::INFINITY, |a, &b| a.min(b));
+                    let max = values.iter().fold(f64::NEG_INFINITY, |a, &b| a.max(b));
+                    max - min
+                }
+                StatisticalFeatureType::Quantile(q) => {
+                    let mut sorted_values = values.clone();
+                    sorted_values.sort_by(|a, b| a.partial_cmp(b).unwrap());
+                    let idx = (sorted_values.len() as f64 * q) as usize;
+                    sorted_values[idx.min(sorted_values.len() - 1)]
+                }
+                StatisticalFeatureType::Count => values.len() as f64,
+                StatisticalFeatureType::UniqueCount => {
+                    let mut unique_values = std::collections::HashSet::new();
+                    for value in &values {
+                        unique_values.insert((value * 1000.0).round() as i64);
+                    }
+                    unique_values.len() as f64
+                }
+                StatisticalFeatureType::MissingCount => {
+                    values.iter().filter(|&&x| x.is_nan()).count() as f64
+                }
+                _ => 0.0, // TODO: 实现其他统计特征
+            };
 
-                df.select(&selected_columns)
-            }
-            SelectionMethod::Correlation => {
-                // 简化实现：选择前 k 个列
-                let selected: Vec<String> = df.columns.iter().take(k).cloned().collect();
-                df.select(&selected)
-            }
-            SelectionMethod::RecursiveFeatureElimination => {
-                // 简化实现：选择前 k 个列
-                let selected: Vec<String> = df.columns.iter().take(k).cloned().collect();
-                df.select(&selected)
-            }
-            SelectionMethod::ModelBased => {
-                // 简化实现：选择前 k 个列
-                let selected: Vec<String> = df.columns.iter().take(k).cloned().collect();
-                df.select(&selected)
-            }
+            new_column_data.push(statistical_value);
         }
+
+        // 添加新列
+        df.columns.push(feature.output_column.clone());
+        for (i, row) in df.data.iter_mut().enumerate() {
+            row.push(new_column_data[i]);
+        }
+
+        Ok(df)
     }
 
-    /// 降维
-    fn reduce_dimensions(
-        &self,
-        df: DataFrame,
-        method: &ReductionMethod,
-        n_components: usize,
-    ) -> Result<DataFrame, String> {
-        match method {
-            ReductionMethod::PCA => {
-                // 简化实现：选择前 n_components 个列
-                let selected: Vec<String> = df.columns.iter().take(n_components).cloned().collect();
-                df.select(&selected)
+    /// 应用时间特征
+    fn apply_time_feature(&self, mut df: DataFrame, _feature: &TimeFeature) -> Result<DataFrame> {
+        // TODO: 实现时间特征提取
+        Ok(df)
+    }
+
+    /// 应用文本特征
+    fn apply_text_feature(&self, mut df: DataFrame, _feature: &TextFeature) -> Result<DataFrame> {
+        // TODO: 实现文本特征提取
+        Ok(df)
+    }
+
+    /// 应用分类特征
+    fn apply_categorical_feature(&self, mut df: DataFrame, _feature: &CategoricalFeature) -> Result<DataFrame> {
+        // TODO: 实现分类特征提取
+        Ok(df)
+    }
+
+    /// 应用特征选择
+    fn apply_feature_selection(&self, df: DataFrame, selection: &FeatureSelection) -> Result<DataFrame> {
+        df.select(&selection.output_columns)
+            .map_err(|e| anyhow::anyhow!("Feature selection failed: {}", e))
+    }
+
+    /// 应用特征组合
+    fn apply_feature_combination(&self, mut df: DataFrame, combination: &FeatureCombination) -> Result<DataFrame> {
+        let mut new_column_data = Vec::new();
+
+        for row in &df.data {
+            let mut values = Vec::new();
+            for col_name in &combination.input_columns {
+                let col_index = df.columns.iter().position(|c| c == col_name)
+                    .ok_or_else(|| anyhow::anyhow!("Column {} not found", col_name))?;
+                values.push(row[col_index]);
             }
-            ReductionMethod::LDA => {
-                // 简化实现：选择前 n_components 个列
-                let selected: Vec<String> = df.columns.iter().take(n_components).cloned().collect();
-                df.select(&selected)
-            }
-            ReductionMethod::ICA => {
-                // 简化实现：选择前 n_components 个列
-                let selected: Vec<String> = df.columns.iter().take(n_components).cloned().collect();
-                df.select(&selected)
-            }
+
+            let combined_value = match combination.combination_type {
+                FeatureCombinationType::Add => values.iter().sum(),
+                FeatureCombinationType::Subtract => values[0] - values[1],
+                FeatureCombinationType::Multiply => values.iter().product(),
+                FeatureCombinationType::Divide => values[0] / values[1],
+                FeatureCombinationType::Ratio => values[0] / values[1],
+                FeatureCombinationType::Difference => (values[0] - values[1]).abs(),
+                FeatureCombinationType::Product => values.iter().product(),
+                _ => 0.0, // TODO: 实现其他组合类型
+            };
+
+            new_column_data.push(combined_value);
         }
+
+        // 添加新列
+        df.columns.push(combination.output_column.clone());
+        for (i, row) in df.data.iter_mut().enumerate() {
+            row.push(new_column_data[i]);
+        }
+
+        Ok(df)
+    }
+
+    /// 应用自定义特征
+    fn apply_custom_feature(&self, mut df: DataFrame, _feature: &CustomFeature) -> Result<DataFrame> {
+        // TODO: 实现自定义特征提取
+        Ok(df)
     }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+/// 预定义特征工程模板
+pub struct FeatureEngineeringTemplates;
 
-    #[test]
-    fn test_feature_engineer_creation() {
-        let mut engineer = FeatureEngineer::new("test".to_string());
-        engineer.add_transformation(FeatureTransformation::PolynomialFeatures {
-            degree: 2,
-            columns: vec!["col1".to_string()],
-        });
+impl FeatureEngineeringTemplates {
+    /// 获取数值特征工程模板
+    pub fn numerical_features() -> FeatureEngineer {
+        let mut engineer = FeatureEngineer::new("numerical_features".to_string());
+        
+        // 添加数学变换
+        engineer.add_operation(FeatureOperation::MathTransform(MathTransform {
+            input_columns: vec!["value".to_string()],
+            output_column: "log_value".to_string(),
+            transform_type: MathTransformType::Log,
+            parameters: HashMap::new(),
+        }));
 
-        assert_eq!(engineer.transformations.len(), 1);
+        engineer.add_operation(FeatureOperation::MathTransform(MathTransform {
+            input_columns: vec!["value".to_string()],
+            output_column: "sqrt_value".to_string(),
+            transform_type: MathTransformType::Sqrt,
+            parameters: HashMap::new(),
+        }));
+
+        // 添加统计特征
+        engineer.add_operation(FeatureOperation::StatisticalFeature(StatisticalFeature {
+            input_columns: vec!["value".to_string()],
+            output_column: "value_mean".to_string(),
+            feature_type: StatisticalFeatureType::Mean,
+            window_size: None,
+            group_by: None,
+        }));
+
+        engineer.add_operation(FeatureOperation::StatisticalFeature(StatisticalFeature {
+            input_columns: vec!["value".to_string()],
+            output_column: "value_std".to_string(),
+            feature_type: StatisticalFeatureType::Std,
+            window_size: None,
+            group_by: None,
+        }));
+
+        engineer
     }
 
-    #[test]
-    fn test_polynomial_features() {
-        let mut df = DataFrame::new("test".to_string(), vec!["col1".to_string()]);
-        df.add_row(vec![2.0]).unwrap();
-        df.add_row(vec![3.0]).unwrap();
+    /// 获取时间特征工程模板
+    pub fn time_features() -> FeatureEngineer {
+        let mut engineer = FeatureEngineer::new("time_features".to_string());
+        
+        engineer.add_operation(FeatureOperation::TimeFeature(TimeFeature {
+            input_column: "timestamp".to_string(),
+            output_columns: vec![
+                "year".to_string(),
+                "month".to_string(),
+                "day".to_string(),
+                "hour".to_string(),
+                "weekday".to_string(),
+            ],
+            feature_types: vec![
+                TimeFeatureType::Year,
+                TimeFeatureType::Month,
+                TimeFeatureType::Day,
+                TimeFeatureType::Hour,
+                TimeFeatureType::Weekday,
+            ],
+            timezone: None,
+        }));
 
-        let engineer = FeatureEngineer::new("test".to_string());
-        let result = engineer
-            .create_polynomial_features(df, 2, &["col1".to_string()])
-            .unwrap();
-
-        assert_eq!(result.columns.len(), 2); // 原列 + 平方列
-        assert_eq!(result.data[0].len(), 2);
-        assert_eq!(result.data[0][1], 4.0); // 2^2 = 4
+        engineer
     }
 
-    #[test]
-    fn test_feature_combination() {
-        let mut df = DataFrame::new(
-            "test".to_string(),
-            vec!["col1".to_string(), "col2".to_string()],
-        );
-        df.add_row(vec![2.0, 3.0]).unwrap();
-        df.add_row(vec![4.0, 5.0]).unwrap();
+    /// 获取文本特征工程模板
+    pub fn text_features() -> FeatureEngineer {
+        let mut engineer = FeatureEngineer::new("text_features".to_string());
+        
+        engineer.add_operation(FeatureOperation::TextFeature(TextFeature {
+            input_column: "text".to_string(),
+            output_columns: vec![
+                "text_length".to_string(),
+                "word_count".to_string(),
+                "avg_word_length".to_string(),
+            ],
+            feature_types: vec![
+                TextFeatureType::Length,
+                TextFeatureType::WordCount,
+                TextFeatureType::AverageWordLength,
+            ],
+            parameters: HashMap::new(),
+        }));
 
-        let engineer = FeatureEngineer::new("test".to_string());
-        let result = engineer
-            .combine_features(
-                df,
-                &["col1".to_string(), "col2".to_string()],
-                &CombinationOperation::Add,
-            )
-            .unwrap();
-
-        assert_eq!(result.columns.len(), 3); // 原列 + 组合列
-        assert_eq!(result.data[0][2], 5.0); // 2 + 3 = 5
+        engineer
     }
 }

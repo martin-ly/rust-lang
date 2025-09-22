@@ -45,6 +45,7 @@ use thiserror::Error;
 // 核心模块
 pub mod machine_learning;
 pub mod neural_networks;
+pub mod config;
 
 // 深度学习框架支持
 #[cfg(any(feature = "candle", feature = "dfdx"))]
@@ -121,6 +122,22 @@ pub mod edge_ai;
 // 量子机器学习
 #[cfg(feature = "quantum")]
 pub mod quantum_ml;
+
+// API模块
+#[cfg(feature = "api-server")]
+pub mod api;
+
+// 新增核心模块
+pub mod model_management;
+pub mod training;
+pub mod inference;
+pub mod validation;
+pub mod database;
+pub mod cache;
+pub mod storage;
+pub mod messaging;
+pub mod websocket;
+pub mod auth;
 
 // 预导入模块
 pub mod prelude {

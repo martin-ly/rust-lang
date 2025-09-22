@@ -71,6 +71,9 @@ arrow = { version = "56.1.0", optional = true }
 qdrant-client = { version = "1.15.0", optional = true }
 tantivy = { version = "0.25.0", optional = true }
 hnsw_rs = { version = "0.3.2", optional = true }
+# 新增：语言检测和文本处理
+whatlang = { version = "0.16.1", optional = true }
+rust-stemmers = { version = "1.2.0", optional = true }
 
 # 网络和API - 使用工作区统一版本
 reqwest = { workspace = true }
@@ -108,16 +111,48 @@ llama-cpp-2 = { version = "0.1.122", optional = true }
 # 图神经网络
 petgraph = { workspace = true, optional = true }
 # 时间序列 - 使用工作区统一版本
-chrono = { workspace = true, optional = true }
 # 配置管理 - 使用可用版本
 config = { workspace = true }
 # 错误处理增强
 miette = "7.6.0"
 # 内存管理
 bumpalo = "3.19.0"
+# 新增：安全和加密
+aes-gcm = { version = "0.10.3", optional = true }
+ring = { version = "0.17.14", optional = true }
+
+# 2025年最新AI/ML库
+# Orch - 语言模型编排库
+orch = { version = "0.0.16", optional = true }
+# Similari - 对象跟踪和相似性搜索
+similari = { version = "0.26", optional = true }
+# Faer-rs - 高性能线性代数库
+faer = { version = "0.22", optional = true }
 # 异步运行时增强 - 使用工作区版本
 futures = { workspace = true }
 async-trait = { workspace = true }
+
+# Web框架和HTTP服务器
+axum = { version = "0.7", features = ["macros", "tracing"], optional = true }
+tower = { version = "0.4", features = ["full"], optional = true }
+tower-http = { version = "0.5", features = ["cors", "trace", "compression-br", "timeout", "limit"], optional = true }
+hyper = { version = "1.0", features = ["full"], optional = true }
+
+# 序列化和反序列化 (已在上面定义)
+
+# UUID生成 (已在上面定义)
+
+# 时间处理
+chrono = { workspace = true, features = ["serde"] }
+# 加密和哈希
+sha2 = "0.10"
+argon2 = "0.5"
+md5 = "0.7"
+regex = "1.10"
+
+# 日志
+env_logger = "0.11"
+log = "0.4"
 
 # 新增：2025年最新AI特性
 # 强化学习 (暂时禁用，存在pyo3安全漏洞)
@@ -151,7 +186,7 @@ openai = ["dep:async-openai", "dep:openai", "dep:llm-chain-openai"]
 # 计算机视觉
 vision = ["dep:opencv", "dep:image", "dep:imageproc"]
 # 自然语言处理
-nlp = ["dep:rust-bert", "dep:tokenizers", "dep:llm-chain"]
+nlp = ["dep:rust-bert", "dep:tokenizers", "dep:llm-chain", "dep:whatlang", "dep:rust-stemmers"]
 # 数据处理
 data = ["dep:polars", "dep:datafusion", "dep:arrow"]
 # 向量搜索
@@ -163,9 +198,19 @@ management = []
 # 图神经网络
 gnn = ["dep:petgraph"]
 # 时间序列
-timeseries = ["dep:chrono"]
+timeseries = []
 # 监控和指标
 monitoring = ["dep:metrics", "dep:metrics-exporter-prometheus"]
+# 安全和加密
+security = ["dep:aes-gcm", "dep:ring"]
+# 文本处理增强
+text-processing = ["dep:whatlang", "dep:rust-stemmers"]
+# 2025年最新AI特性
+orch-integration = ["dep:orch"]
+computer-vision-advanced = ["dep:similari"]
+linear-algebra-advanced = ["dep:faer"]
+# REST API服务
+api-server = ["axum", "tower", "tower-http", "hyper"]
 # 多模态AI
 multimodal = []
 # 联邦学习
@@ -178,7 +223,7 @@ quantum = []
 # burn = ["dep:burn", "dep:burn-ndarray"]  # 暂时禁用，存在版本兼容性问题
 
 # 完整功能（注意：这会拉入多种后端及其系统依赖）
-full = ["candle", "dfdx", "llm", "vision", "nlp", "data", "search", "gnn", "timeseries", "monitoring", "multimodal"]
+full = ["candle", "dfdx", "llm", "vision", "nlp", "data", "search", "gnn", "timeseries", "monitoring", "multimodal", "security", "text-processing", "orch-integration", "computer-vision-advanced", "linear-algebra-advanced"]
 
 [[bench]]
 name = "neural_network_bench"
@@ -260,3 +305,13 @@ required-features = ["edge"]
 name = "quantum_ml"
 path = "examples/quantum_ml.rs"
 required-features = ["quantum"]
+
+[[example]]
+name = "latest_2025_features"
+path = "examples/latest_2025_features.rs"
+required-features = ["candle", "nlp", "data", "security"]
+
+[[example]]
+name = "api_server"
+path = "examples/api_server.rs"
+required-features = ["api-server"]

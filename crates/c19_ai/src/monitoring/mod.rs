@@ -5,7 +5,11 @@
 pub mod logging;
 pub mod metrics;
 pub mod profiling;
+pub mod collector;
+pub mod dashboard;
 
 pub use logging::*;
 pub use metrics::*;
 pub use profiling::*;
+pub use collector::*;
+pub use dashboard::*;
