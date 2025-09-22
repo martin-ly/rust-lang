@@ -42,12 +42,12 @@ impl StorageBackend for S3Storage {
         })
     }
 
-    async fn get(&self, key: &str) -> anyhow::Result<GetResult> {
+    async fn get(&self, _key: &str) -> anyhow::Result<GetResult> {
         // TODO: 实现S3下载
         Err(anyhow::anyhow!("S3 get not implemented"))
     }
 
-    async fn delete(&self, key: &str) -> anyhow::Result<()> {
+    async fn delete(&self, _key: &str) -> anyhow::Result<()> {
         // TODO: 实现S3删除
         Ok(())
     }

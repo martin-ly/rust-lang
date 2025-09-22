@@ -127,7 +127,7 @@ impl StorageBackend for LocalStorage {
         
         // 获取元数据
         let metadata = {
-            let file_metadata = self.file_metadata.read().await;
+            let _file_metadata = self.file_metadata.read().await;
             file_metadata.get(key).cloned().unwrap_or_else(|| {
                 FileMetadata::new(key.to_string(), data.len() as u64)
             })
@@ -261,13 +261,13 @@ impl StorageBackend for LocalStorage {
     }
 
     async fn get_metadata(&self, key: &str) -> anyhow::Result<Option<FileMetadata>> {
-        let file_metadata = self.file_metadata.read().await;
+        let _file_metadata = self.file_metadata.read().await;
         Ok(file_metadata.get(key).cloned())
     }
 
     async fn get_stats(&self) -> StorageStats {
         let stats = self.stats.read().await;
-        let file_metadata = self.file_metadata.read().await;
+        let _file_metadata = self.file_metadata.read().await;
         
         // 计算可用空间（简单估算）
         let available_space = 1024 * 1024 * 1024; // 1GB 默认值
