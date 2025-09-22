@@ -871,7 +871,7 @@ func main() {
 
 ---
 
-**参考文献**
+**参考文献**-
 
 1. Rust Book - Memory Management. <https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html>
 2. Java Garbage Collection. <https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/>
