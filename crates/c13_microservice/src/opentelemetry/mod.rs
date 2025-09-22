@@ -427,8 +427,17 @@ impl OpenTelemetryManager {
     }
 }
 
+impl std::fmt::Debug for OpenTelemetryManager {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("OpenTelemetryManager")
+            .field("config", &self.config)
+            .field("local_log_manager", &self.local_log_manager.is_some())
+            .finish()
+    }
+}
+
 /// 系统状态
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Clone, Serialize, Deserialize)]
 pub struct SystemStatus {
     pub tracing_enabled: bool,
     pub metrics_enabled: bool,
@@ -442,7 +451,7 @@ pub struct SystemStatus {
 }
 
 /// 导出的数据
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Clone, Serialize, Deserialize)]
 pub struct ExportedData {
     pub traces: String,
     pub metrics: String,

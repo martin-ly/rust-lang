@@ -235,6 +235,7 @@ impl HealthChecker for SystemResourceHealthChecker {
 }
 
 /// 性能监控器
+#[derive(Debug)]
 pub struct PerformanceMonitor {
     performance_data: Arc<RwLock<HashMap<String, PerformanceData>>>,
     alert_thresholds: Arc<RwLock<HashMap<String, f64>>>,
@@ -736,6 +737,16 @@ impl SystemStatusReporter {
         }
 
         HealthStatus::Healthy
+    }
+}
+
+impl std::fmt::Debug for SystemStatusReporter {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("SystemStatusReporter")
+            .field("health_checkers_count", &self.health_checkers.len())
+            .field("performance_monitor", &self.performance_monitor)
+            .field("error_tracker", &self.error_tracker)
+            .finish()
     }
 }
 

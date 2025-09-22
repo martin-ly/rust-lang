@@ -46,7 +46,6 @@ pub trait MetricExporter {
 }
 
 /// Prometheus格式导出器
-#[derive(Debug)]
 pub struct PrometheusExporter {
     name: String,
 }
@@ -790,6 +789,16 @@ impl TimerStats {
             "count={}, total={:?}, mean={:?}, min={:?}, max={:?}, median={:?}",
             self.count, self.total, self.mean, self.min, self.max, self.median
         )
+    }
+}
+
+impl std::fmt::Debug for MetricsCollector {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("MetricsCollector")
+            .field("buffer_size", &self.buffer_size)
+            .field("flush_interval", &self.flush_interval)
+            .field("exporter", &self.exporter.as_ref().map(|e| e.get_name()))
+            .finish()
     }
 }
 

@@ -9,6 +9,12 @@
 // 实用的中间件实现
 pub mod practical_middleware;
 
+// 高级中间件实现
+pub mod jwt_auth;
+pub mod request_validation;
+pub mod cache;
+pub mod distributed_tracing;
+
 use std::time::Duration;
 
 /// 中间件构建器
@@ -143,6 +149,27 @@ pub fn error_handler() -> impl Clone {
     // 简化的错误处理中间件
     
 }
+
+// 重新导出主要的中间件类型
+pub use jwt_auth::{
+    JwtAuthMiddleware, JwtConfig, JwtAuthManager, Claims, JwtUser, AuthResult, JwtError,
+};
+pub use request_validation::{
+    RequestValidationMiddleware, ValidationConfig, ValidationRequest, ValidationResult, 
+    ValidationError, ParameterRule, ParameterType, SecurityPattern,
+};
+pub use cache::{
+    CacheManager, CacheConfig, MemoryCache, HttpCacheMiddleware, HttpCacheRequest, 
+    HttpCacheResponse, CacheItem, CacheStats, CacheError,
+};
+pub use practical_middleware::{
+    MiddlewareManager, RequestTracingMiddleware, RateLimitMiddleware, 
+    HealthCheckMiddleware, ErrorHandlingMiddleware, RequestResult,
+};
+pub use distributed_tracing::{
+    DistributedTracingMiddleware, DistributedTracingConfig, TracingLogLevel,
+    TracingStats, TraceContextBuilder,
+};
 
 #[cfg(test)]
 mod tests {

@@ -52,7 +52,7 @@ pub struct TraceContext {
 }
 
 /// 追踪上下文传播器
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct TraceContextPropagator {
     #[allow(dead_code)]
     headers: HashMap<String, String>,

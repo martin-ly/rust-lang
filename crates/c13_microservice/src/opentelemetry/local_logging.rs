@@ -202,6 +202,7 @@ impl LogCache {
 }
 
 /// 本地日志管理器
+#[derive(Debug)]
 pub struct LocalLogManager {
     config: LocalLogConfig,
     cache: Arc<Mutex<LogCache>>,

@@ -1,9 +1,27 @@
 //! gRPC模块
 //!
 //! 提供基于Tonic的gRPC微服务实现，支持高性能的RPC通信。
+//! 
+//! ## 功能特性
+//! 
+//! - 完整的Tonic服务trait实现
+//! - 流式处理支持
+//! - 批量操作
+//! - 拦截器和中间件
+//! - 版本控制和乐观锁
+//! - 性能监控和指标收集
+//! - 健康检查
 
 pub mod advanced_services;
 pub mod tonic_impl;
+
+// 重新导出高级服务
+pub use advanced_services::{
+    AdvancedUserService, AdvancedGrpcServer, AdvancedGrpcClient,
+    UserData, UserStreamData, BatchUserRequest, BatchUserResponse,
+    UserOperation, OperationResult, ServiceMetrics, HealthStatus,
+    LoggingInterceptor, RateLimitInterceptor,
+};
 
 use std::collections::HashMap;
 use std::sync::Arc;

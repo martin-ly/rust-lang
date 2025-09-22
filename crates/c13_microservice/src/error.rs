@@ -32,6 +32,10 @@ pub enum Error {
     #[error("认证错误: {0}")]
     Auth(String),
 
+    /// JWT错误
+    #[error("JWT错误: {0}")]
+    Jwt(#[from] crate::middleware::JwtError),
+
     /// 服务发现错误
     #[error("服务发现错误: {0}")]
     ServiceDiscovery(String),

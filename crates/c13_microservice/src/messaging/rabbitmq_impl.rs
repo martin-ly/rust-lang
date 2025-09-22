@@ -2,6 +2,7 @@
 //!
 //! 提供基于lapin crate的实际RabbitMQ连接和消息队列功能
 
+#[allow(unused_imports)]
 // use std::collections::HashMap; // 暂时未使用
 use std::sync::Arc;
 use tokio::sync::RwLock;

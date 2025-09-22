@@ -413,6 +413,30 @@ impl MiddlewareManager {
         }
     }
 
+    /// 链式设置请求追踪中间件
+    pub fn with_request_tracing(mut self, middleware: RequestTracingMiddleware) -> Self {
+        self.request_tracing = middleware;
+        self
+    }
+
+    /// 链式设置限流中间件
+    pub fn with_rate_limit(mut self, middleware: RateLimitMiddleware) -> Self {
+        self.rate_limit = middleware;
+        self
+    }
+
+    /// 链式设置健康检查中间件
+    pub fn with_health_check(mut self, middleware: HealthCheckMiddleware) -> Self {
+        self.health_check = middleware;
+        self
+    }
+
+    /// 链式设置错误处理中间件
+    pub fn with_error_handling(mut self, middleware: ErrorHandlingMiddleware) -> Self {
+        self.error_handling = middleware;
+        self
+    }
+
     /// 处理请求
     pub async fn process_request(
         &self,

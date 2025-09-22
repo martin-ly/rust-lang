@@ -73,9 +73,14 @@ pub mod orm;
 pub mod messaging;
 // pub mod queue;
 
-// 认证和安全模块 - 暂时注释掉
-// pub mod auth;
-// pub mod security;
+// 安全模块
+pub mod security;
+
+// 服务网格模块
+pub mod service_mesh;
+
+// 性能分析模块
+pub mod performance;
 
 // Kubernetes和云原生模块 - 暂时注释掉
 // pub mod kubernetes;
