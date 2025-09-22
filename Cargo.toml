@@ -21,7 +21,7 @@ members = [ "crates/c01_ownership_borrow_scope",
             "crates/c17_iot", 
             "crates/c18_model",
             "crates/c19_ai",
-            "crates/c20_distributed", "crates/c21_otlp",
+            "crates/c20_distributed", 
             ]
 
 [workspace.package]
