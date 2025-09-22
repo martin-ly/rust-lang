@@ -7,8 +7,8 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::sync::Arc;
 use tokio::sync::RwLock;
-use uuid::Uuid;
-use chrono::{DateTime, Utc};
+// use uuid::Uuid;
+// use chrono::{DateTime, Utc};
 
 use super::message::{WebSocketMessage, WebSocketMessageType, ConnectionInfo};
 use super::client::WebSocketClient;
@@ -123,8 +123,8 @@ impl WebSocketHandler {
         clients.remove(&client_id);
         
         // 从所有房间中移除客户端
-        let mut rooms = self.rooms.write().await;
-        for room in rooms.values() {
+        let rooms = self.rooms.write().await;
+        for _room in rooms.values() {
             // TODO: 实现从房间移除客户端的逻辑
         }
         
@@ -172,9 +172,9 @@ impl WebSocketHandler {
     /// 处理房间加入
     async fn handle_room_joined(&self, room_id: String, client_id: String) -> Result<()> {
         let rooms = self.rooms.read().await;
-        if let Some(room) = rooms.get(&room_id) {
+        if let Some(_room) = rooms.get(&room_id) {
             let clients = self.clients.read().await;
-            if let Some(client) = clients.get(&client_id) {
+            if let Some(_client) = clients.get(&client_id) {
                 // TODO: 实现加入房间的逻辑
                 tracing::info!("Client {} joined room {}", client_id, room_id);
             }
@@ -185,7 +185,7 @@ impl WebSocketHandler {
     /// 处理房间离开
     async fn handle_room_left(&self, room_id: String, client_id: String) -> Result<()> {
         let rooms = self.rooms.read().await;
-        if let Some(room) = rooms.get(&room_id) {
+        if let Some(_room) = rooms.get(&room_id) {
             // TODO: 实现离开房间的逻辑
             tracing::info!("Client {} left room {}", client_id, room_id);
         }
@@ -206,7 +206,7 @@ impl WebSocketHandler {
     /// 向房间广播消息
     async fn broadcast_to_room(&self, room_id: String, message: WebSocketMessage) -> Result<()> {
         let rooms = self.rooms.read().await;
-        if let Some(room) = rooms.get(&room_id) {
+        if let Some(_room) = rooms.get(&room_id) {
             // TODO: 实现房间广播逻辑
             tracing::info!("Broadcasting message to room {}", room_id);
         }

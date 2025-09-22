@@ -11,7 +11,7 @@ use uuid::Uuid;
 use chrono::{DateTime, Utc};
 
 use super::message::{WebSocketMessage, ConnectionInfo, ConnectionStatus};
-use super::client::WebSocketClient;
+// use super::client::WebSocketClient;
 use super::room::Room;
 use super::handler::WebSocketHandler;
 use super::server::WebSocketServer;
@@ -102,7 +102,7 @@ impl WebSocketManager {
     /// 注册默认消息处理器
     async fn register_default_handlers(&self) {
         // 注册心跳处理器
-        let handler = self.handler.clone();
+        let _handler = self.handler.clone();
         self.handler.register_message_handler(
             super::message::WebSocketMessageType::Ping,
             Box::new(move |message| {
@@ -114,7 +114,7 @@ impl WebSocketManager {
         ).await;
 
         // 注册系统消息处理器
-        let handler = self.handler.clone();
+        let _handler = self.handler.clone();
         self.handler.register_message_handler(
             super::message::WebSocketMessageType::System,
             Box::new(move |message| {
@@ -220,7 +220,7 @@ impl WebSocketManager {
     /// 加入房间
     pub async fn join_room(&self, room_id: String, client_id: String) -> Result<()> {
         let rooms = self.rooms.read().await;
-        if let Some(room) = rooms.get(&room_id) {
+        if let Some(_room) = rooms.get(&room_id) {
             // TODO: 实现加入房间的逻辑
             tracing::info!("Client {} joined room {}", client_id, room_id);
             
@@ -237,7 +237,7 @@ impl WebSocketManager {
     /// 离开房间
     pub async fn leave_room(&self, room_id: String, client_id: String) -> Result<()> {
         let rooms = self.rooms.read().await;
-        if let Some(room) = rooms.get(&room_id) {
+        if let Some(_room) = rooms.get(&room_id) {
             // TODO: 实现离开房间的逻辑
             tracing::info!("Client {} left room {}", client_id, room_id);
             
@@ -252,9 +252,9 @@ impl WebSocketManager {
     }
 
     /// 向房间广播消息
-    pub async fn broadcast_to_room(&self, room_id: String, message: WebSocketMessage) -> Result<()> {
+    pub async fn broadcast_to_room(&self, room_id: String, _message: WebSocketMessage) -> Result<()> {
         let rooms = self.rooms.read().await;
-        if let Some(room) = rooms.get(&room_id) {
+        if let Some(_room) = rooms.get(&room_id) {
             // TODO: 实现房间广播逻辑
             tracing::info!("Broadcasting message to room {}", room_id);
         } else {

@@ -2,14 +2,14 @@
 //! 
 //! 提供消息路由和分发功能
 
-use serde::{Deserialize, Serialize};
+// use serde::{Deserialize, Serialize};
 use chrono::{DateTime, Utc};
 use uuid::Uuid;
 use std::collections::HashMap;
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
-use super::manager::{Message, MessagePriority};
+use super::manager::Message;
 
 /// 消息代理
 #[derive(Debug)]

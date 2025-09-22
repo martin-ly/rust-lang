@@ -5,7 +5,7 @@
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-use std::path::PathBuf;
+// use std::path::PathBuf;
 use uuid::Uuid;
 use chrono::{DateTime, Utc};
 use tokio::time::{Duration, Instant};
@@ -355,7 +355,7 @@ impl TrainingJobManager {
     /// 训练一个epoch
     async fn train_epoch(&self, job: &mut TrainingJob, epoch: usize) -> Result<()> {
         // 模拟训练过程
-        let batch_size = job.config.data_config.batch_size;
+        let _batch_size = job.config.data_config.batch_size;
         let total_batches = 100; // 假设有100个batch
 
         job.progress.total_batches = total_batches;
@@ -393,7 +393,7 @@ impl TrainingJobManager {
         job.metrics.record_metric("validation_accuracy", validation_accuracy);
 
         // 检查早停
-        if let Some(early_stopping) = &job.config.validation_config.early_stopping {
+        if let Some(_early_stopping) = &job.config.validation_config.early_stopping {
             // TODO: 实现早停逻辑
         }
 

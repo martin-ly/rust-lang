@@ -175,7 +175,7 @@ impl DataSchema {
     /// 验证数据
     pub fn validate(&self, data: &serde_json::Value) -> ValidationResult {
         let mut errors = Vec::new();
-        let mut warnings = Vec::new();
+        let warnings = Vec::new();
         let start_time = std::time::Instant::now();
 
         // 验证字段
@@ -386,7 +386,7 @@ impl DataSchema {
                     }
                 }
             }
-            Constraint::UniqueCombination(fields) => {
+            Constraint::UniqueCombination(_fields) => {
                 // 这里需要实现唯一性检查，通常需要访问整个数据集
                 // 暂时跳过实现
             }

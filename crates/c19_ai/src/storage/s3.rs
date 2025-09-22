@@ -4,7 +4,7 @@
 
 use chrono::{DateTime, Utc};
 use uuid::Uuid;
-use std::collections::HashMap;
+// use std::collections::HashMap;
 
 use super::manager::{StorageBackend, PutResult, GetResult, ListItem, StorageStats};
 use super::metadata::FileMetadata;

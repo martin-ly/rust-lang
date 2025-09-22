@@ -378,7 +378,7 @@ impl AuthManager {
     /// 刷新令牌
     pub async fn refresh_token(&self, refresh_token: &str) -> Result<LoginResponse> {
         // 验证刷新令牌
-        let claims = self.jwt_manager.validate_refresh_token(refresh_token)?;
+        let _claims = self.jwt_manager.validate_refresh_token(refresh_token)?;
 
         // 查找会话
         let session = {
@@ -665,7 +665,7 @@ impl AuthManager {
     }
 
     /// 验证双因素认证码
-    fn verify_two_factor_code(&self, user: &User, code: &str) -> Result<bool> {
+    fn verify_two_factor_code(&self, _user: &User, _code: &str) -> Result<bool> {
         // TODO: 实现TOTP验证
         Ok(true)
     }

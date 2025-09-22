@@ -296,7 +296,7 @@ impl LogManager {
     }
     
     /// 输出到文件
-    async fn output_to_file(&self, entry: &LogEntry, path: &str) {
+    async fn output_to_file(&self, entry: &LogEntry, _path: &str) {
         let formatted = self.format_log(entry);
         // TODO: 实现文件输出
         // 这里应该使用异步文件写入

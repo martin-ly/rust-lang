@@ -6,7 +6,7 @@ use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::sync::Arc;
-use tokio::sync::{RwLock, mpsc, broadcast};
+use tokio::sync::{RwLock, broadcast};
 use uuid::Uuid;
 use chrono::{DateTime, Utc};
 use std::time::Duration;
@@ -166,7 +166,7 @@ impl MessagingManager {
 
     /// 创建消息队列
     pub async fn create_queue(&self, name: String, config: Option<QueueConfig>) -> Result<Arc<MessageQueue>> {
-        let queue_config = config.unwrap_or_else(|| QueueConfig {
+        let _queue_config = config.unwrap_or_else(|| QueueConfig {
             max_size: self.config.default_queue_size,
             message_ttl: self.config.message_ttl,
             dead_letter_queue: self.config.dead_letter_queue.clone(),
@@ -195,8 +195,8 @@ impl MessagingManager {
 
     /// 创建消息生产者
     pub async fn create_producer(&self, queue_name: &str, config: Option<ProducerConfig>) -> Result<Arc<MessageProducer>> {
-        let queue = self.get_queue(queue_name).await?;
-        let producer_config = config.unwrap_or_default();
+        let _queue = self.get_queue(queue_name).await?;
+        let _producer_config = config.unwrap_or_default();
         
         let producer = Arc::new(MessageProducer::new("producer".to_string()));
 
@@ -211,8 +211,8 @@ impl MessagingManager {
 
     /// 创建消息消费者
     pub async fn create_consumer(&self, queue_name: &str, config: Option<ConsumerConfig>) -> Result<Arc<MessageConsumer>> {
-        let queue = self.get_queue(queue_name).await?;
-        let consumer_config = config.unwrap_or_default();
+        let _queue = self.get_queue(queue_name).await?;
+        let _consumer_config = config.unwrap_or_default();
         
         let consumer = Arc::new(MessageConsumer::new("consumer".to_string()));
 
@@ -408,7 +408,7 @@ impl MessagingManager {
 
         for (name, queue) in queues.iter() {
             match queue.cleanup_expired().await {
-                Ok(cleanup_result) => {
+                Ok(_cleanup_result) => {
                     // TODO: Handle cleanup result fields
                     result.deleted_messages += 0;
                     result.freed_space += 0;

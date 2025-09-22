@@ -8,7 +8,7 @@ use std::collections::HashMap;
 use std::sync::Arc;
 use tokio::sync::RwLock;
 use uuid::Uuid;
-use chrono::{DateTime, Utc};
+// use chrono::{DateTime, Utc};
 
 use super::orm::*;
 use super::connection::DatabaseManager;
@@ -74,7 +74,7 @@ impl UserRepository {
 
 #[async_trait::async_trait]
 impl Repository for UserRepository {
-    async fn find_by_id(&self, id: &str) -> Result<Option<serde_json::Value>> {
+    async fn find_by_id(&self, _id: &str) -> Result<Option<serde_json::Value>> {
         let _uuid = Uuid::parse_str(id)?;
         
         // 先检查缓存
@@ -89,12 +89,12 @@ impl Repository for UserRepository {
         Ok(None)
     }
 
-    async fn find_all(&self, limit: Option<usize>, offset: Option<usize>) -> Result<Vec<serde_json::Value>> {
+    async fn find_all(&self, _limit: Option<usize>, _offset: Option<usize>) -> Result<Vec<serde_json::Value>> {
         // TODO: 实现数据库查询
         Ok(vec![])
     }
 
-    async fn find_by_condition(&self, condition: QueryCondition) -> Result<Vec<serde_json::Value>> {
+    async fn find_by_condition(&self, _condition: QueryCondition) -> Result<Vec<serde_json::Value>> {
         // TODO: 实现条件查询
         Ok(vec![])
     }
@@ -205,17 +205,17 @@ impl ModelRepository {
 
 #[async_trait::async_trait]
 impl Repository for ModelRepository {
-    async fn find_by_id(&self, id: &str) -> Result<Option<serde_json::Value>> {
+    async fn find_by_id(&self, _id: &str) -> Result<Option<serde_json::Value>> {
         // TODO: 实现数据库查询
         Ok(None)
     }
 
-    async fn find_all(&self, limit: Option<usize>, offset: Option<usize>) -> Result<Vec<serde_json::Value>> {
+    async fn find_all(&self, _limit: Option<usize>, _offset: Option<usize>) -> Result<Vec<serde_json::Value>> {
         // TODO: 实现数据库查询
         Ok(vec![])
     }
 
-    async fn find_by_condition(&self, condition: QueryCondition) -> Result<Vec<serde_json::Value>> {
+    async fn find_by_condition(&self, _condition: QueryCondition) -> Result<Vec<serde_json::Value>> {
         // TODO: 实现条件查询
         Ok(vec![])
     }
@@ -326,17 +326,17 @@ impl TrainingJobRepository {
 
 #[async_trait::async_trait]
 impl Repository for TrainingJobRepository {
-    async fn find_by_id(&self, id: &str) -> Result<Option<serde_json::Value>> {
+    async fn find_by_id(&self, _id: &str) -> Result<Option<serde_json::Value>> {
         // TODO: 实现数据库查询
         Ok(None)
     }
 
-    async fn find_all(&self, limit: Option<usize>, offset: Option<usize>) -> Result<Vec<serde_json::Value>> {
+    async fn find_all(&self, _limit: Option<usize>, _offset: Option<usize>) -> Result<Vec<serde_json::Value>> {
         // TODO: 实现数据库查询
         Ok(vec![])
     }
 
-    async fn find_by_condition(&self, condition: QueryCondition) -> Result<Vec<serde_json::Value>> {
+    async fn find_by_condition(&self, _condition: QueryCondition) -> Result<Vec<serde_json::Value>> {
         // TODO: 实现条件查询
         Ok(vec![])
     }
@@ -447,17 +447,17 @@ impl InferenceRequestRepository {
 
 #[async_trait::async_trait]
 impl Repository for InferenceRequestRepository {
-    async fn find_by_id(&self, id: &str) -> Result<Option<serde_json::Value>> {
+    async fn find_by_id(&self, _id: &str) -> Result<Option<serde_json::Value>> {
         // TODO: 实现数据库查询
         Ok(None)
     }
 
-    async fn find_all(&self, limit: Option<usize>, offset: Option<usize>) -> Result<Vec<serde_json::Value>> {
+    async fn find_all(&self, _limit: Option<usize>, _offset: Option<usize>) -> Result<Vec<serde_json::Value>> {
         // TODO: 实现数据库查询
         Ok(vec![])
     }
 
-    async fn find_by_condition(&self, condition: QueryCondition) -> Result<Vec<serde_json::Value>> {
+    async fn find_by_condition(&self, _condition: QueryCondition) -> Result<Vec<serde_json::Value>> {
         // TODO: 实现条件查询
         Ok(vec![])
     }
@@ -562,17 +562,17 @@ impl DatasetRepository {
 
 #[async_trait::async_trait]
 impl Repository for DatasetRepository {
-    async fn find_by_id(&self, id: &str) -> Result<Option<serde_json::Value>> {
+    async fn find_by_id(&self, _id: &str) -> Result<Option<serde_json::Value>> {
         // TODO: 实现数据库查询
         Ok(None)
     }
 
-    async fn find_all(&self, limit: Option<usize>, offset: Option<usize>) -> Result<Vec<serde_json::Value>> {
+    async fn find_all(&self, _limit: Option<usize>, _offset: Option<usize>) -> Result<Vec<serde_json::Value>> {
         // TODO: 实现数据库查询
         Ok(vec![])
     }
 
-    async fn find_by_condition(&self, condition: QueryCondition) -> Result<Vec<serde_json::Value>> {
+    async fn find_by_condition(&self, _condition: QueryCondition) -> Result<Vec<serde_json::Value>> {
         // TODO: 实现条件查询
         Ok(vec![])
     }

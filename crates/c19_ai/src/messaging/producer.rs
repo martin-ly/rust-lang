@@ -2,7 +2,7 @@
 //! 
 //! 提供消息发布和生产功能
 
-use serde::{Deserialize, Serialize};
+// use serde::{Deserialize, Serialize};
 use chrono::{DateTime, Utc};
 use uuid::Uuid;
 use std::collections::HashMap;

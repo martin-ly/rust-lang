@@ -131,7 +131,7 @@ impl DatabaseManager {
     /// 断开数据库连接
     pub async fn disconnect(&self, connection_id: &str) -> Result<()> {
         let mut connections = self.connections.write().await;
-        if let Some(connection) = connections.remove(connection_id) {
+        if let Some(_connection) = connections.remove(connection_id) {
             // 这里应该实际断开连接
             println!("Disconnected from database: {}", connection_id);
         }

@@ -9,9 +9,9 @@ use std::path::PathBuf;
 use uuid::Uuid;
 use chrono::{DateTime, Utc};
 use tokio::sync::mpsc;
-use tokio::time::{Duration, Instant};
+// use tokio::time::{Duration, Instant};
 
-use crate::model_management::{ModelRegistry, ModelEntry, ModelType, Framework};
+use crate::model_management::{ModelRegistry, ModelType, Framework};
 use super::job::TrainingJob;
 use super::metrics::TrainingMetrics;
 use super::checkpoint::CheckpointManager;

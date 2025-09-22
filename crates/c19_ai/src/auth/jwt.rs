@@ -49,7 +49,7 @@ impl JwtManager {
         Self { secret }
     }
 
-    pub fn generate_token(&self, user_id: &Uuid, username: &str, roles: &[String]) -> Result<String> {
+    pub fn generate_token(&self, user_id: &Uuid, username: &str, _roles: &[String]) -> Result<String> {
         // 简化的JWT生成实现
         Ok(format!("token_{}_{}", user_id, username))
     }
@@ -59,7 +59,7 @@ impl JwtManager {
         Ok(format!("refresh_{}", user_id))
     }
 
-    pub fn validate_token(&self, token: &str) -> Result<JwtClaims> {
+    pub fn validate_token(&self, _token: &str) -> Result<JwtClaims> {
         // TODO: Implement token validation logic
         Ok(JwtClaims {
             sub: Uuid::new_v4(),
@@ -72,7 +72,7 @@ impl JwtManager {
         })
     }
 
-    pub fn validate_refresh_token(&self, refresh_token: &str) -> Result<JwtClaims> {
+    pub fn validate_refresh_token(&self, _refresh_token: &str) -> Result<JwtClaims> {
         // TODO: Implement refresh token validation logic
         Ok(JwtClaims {
             sub: Uuid::new_v4(),
