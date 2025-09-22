@@ -150,6 +150,12 @@ argon2 = "0.5"
 md5 = "0.7"
 regex = "1.10"
 
+# 数据库 (暂时禁用，存在版本冲突)
+# sqlx = { version = "0.7", features = ["runtime-tokio", "macros", "postgres", "mysql", "chrono", "uuid", "json"], optional = true }
+
+# 缓存
+redis = { version = "0.23", features = ["tokio-comp"], optional = true }
+
 # 日志
 env_logger = "0.11"
 log = "0.4"
@@ -211,8 +217,8 @@ computer-vision-advanced = ["dep:similari"]
 linear-algebra-advanced = ["dep:faer"]
 # REST API服务
 api-server = ["dep:axum", "dep:tower", "dep:tower-http", "dep:hyper"]
-# 数据库支持
-database = ["dep:sqlx"]
+# 数据库支持 (暂时禁用，存在版本冲突)
+# database = ["dep:sqlx"]
 # 缓存支持
 cache = ["dep:redis"]
 # 多模态AI

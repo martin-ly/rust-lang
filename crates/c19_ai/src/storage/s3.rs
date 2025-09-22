@@ -52,27 +52,27 @@ impl StorageBackend for S3Storage {
         Ok(())
     }
 
-    async fn exists(&self, key: &str) -> bool {
+    async fn exists(&self, _key: &str) -> bool {
         // TODO: 实现S3存在检查
         false
     }
 
-    async fn list(&self, prefix: &str, limit: Option<usize>) -> anyhow::Result<Vec<ListItem>> {
+    async fn list(&self, _prefix: &str, _limit: Option<usize>) -> anyhow::Result<Vec<ListItem>> {
         // TODO: 实现S3列表
         Ok(Vec::new())
     }
 
-    async fn copy(&self, source: &str, destination: &str) -> anyhow::Result<()> {
+    async fn copy(&self, _source: &str, _destination: &str) -> anyhow::Result<()> {
         // TODO: 实现S3复制
         Ok(())
     }
 
-    async fn move_file(&self, source: &str, destination: &str) -> anyhow::Result<()> {
+    async fn move_file(&self, _source: &str, _destination: &str) -> anyhow::Result<()> {
         // TODO: 实现S3移动
         Ok(())
     }
 
-    async fn get_metadata(&self, key: &str) -> anyhow::Result<Option<FileMetadata>> {
+    async fn get_metadata(&self, _key: &str) -> anyhow::Result<Option<FileMetadata>> {
         // TODO: 实现S3元数据获取
         Ok(None)
     }

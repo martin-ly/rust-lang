@@ -42,37 +42,37 @@ impl StorageBackend for GcsStorage {
         })
     }
 
-    async fn get(&self, key: &str) -> anyhow::Result<GetResult> {
+    async fn get(&self, _key: &str) -> anyhow::Result<GetResult> {
         // TODO: 实现GCS下载
         Err(anyhow::anyhow!("GCS get not implemented"))
     }
 
-    async fn delete(&self, key: &str) -> anyhow::Result<()> {
+    async fn delete(&self, _key: &str) -> anyhow::Result<()> {
         // TODO: 实现GCS删除
         Ok(())
     }
 
-    async fn exists(&self, key: &str) -> bool {
+    async fn exists(&self, _key: &str) -> bool {
         // TODO: 实现GCS存在检查
         false
     }
 
-    async fn list(&self, prefix: &str, limit: Option<usize>) -> anyhow::Result<Vec<ListItem>> {
+    async fn list(&self, _prefix: &str, _limit: Option<usize>) -> anyhow::Result<Vec<ListItem>> {
         // TODO: 实现GCS列表
         Ok(Vec::new())
     }
 
-    async fn copy(&self, source: &str, destination: &str) -> anyhow::Result<()> {
+    async fn copy(&self, _source: &str, _destination: &str) -> anyhow::Result<()> {
         // TODO: 实现GCS复制
         Ok(())
     }
 
-    async fn move_file(&self, source: &str, destination: &str) -> anyhow::Result<()> {
+    async fn move_file(&self, _source: &str, _destination: &str) -> anyhow::Result<()> {
         // TODO: 实现GCS移动
         Ok(())
     }
 
-    async fn get_metadata(&self, key: &str) -> anyhow::Result<Option<FileMetadata>> {
+    async fn get_metadata(&self, _key: &str) -> anyhow::Result<Option<FileMetadata>> {
         // TODO: 实现GCS元数据获取
         Ok(None)
     }

@@ -218,7 +218,7 @@ impl ModelRegistry {
             model.status = status;
             model.updated_at = Utc::now();
             let model_clone = model.clone();
-            drop(model); // 释放可变借用
+            let _ = model; // 释放可变借用
             self.save_model_metadata(&model_clone).await?;
         }
         Ok(())
@@ -234,7 +234,7 @@ impl ModelRegistry {
             model.metadata = metadata;
             model.updated_at = Utc::now();
             let model_clone = model.clone();
-            drop(model); // 释放可变借用
+            let _ = model; // 释放可变借用
             self.save_model_metadata(&model_clone).await?;
         }
         Ok(())
