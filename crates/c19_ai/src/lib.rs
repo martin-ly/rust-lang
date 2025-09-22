@@ -46,6 +46,12 @@ use thiserror::Error;
 pub mod machine_learning;
 pub mod neural_networks;
 pub mod config;
+pub mod error;
+pub mod logging;
+
+// API模块（可选特性）
+#[cfg(feature = "api-server")]
+pub mod api;
 
 // 深度学习框架支持
 #[cfg(any(feature = "candle", feature = "dfdx"))]

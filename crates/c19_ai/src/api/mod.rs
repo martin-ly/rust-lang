@@ -3,6 +3,7 @@
 //! 提供REST API的实现
 
 pub mod handlers;
+pub mod health;
 pub mod middleware;
 pub mod routes;
 pub mod server;

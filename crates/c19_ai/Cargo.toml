@@ -210,7 +210,11 @@ orch-integration = ["dep:orch"]
 computer-vision-advanced = ["dep:similari"]
 linear-algebra-advanced = ["dep:faer"]
 # REST API服务
-api-server = ["axum", "tower", "tower-http", "hyper"]
+api-server = ["dep:axum", "dep:tower", "dep:tower-http", "dep:hyper"]
+# 数据库支持
+database = ["dep:sqlx"]
+# 缓存支持
+cache = ["dep:redis"]
 # 多模态AI
 multimodal = []
 # 联邦学习

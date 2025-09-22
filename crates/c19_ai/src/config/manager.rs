@@ -2,7 +2,7 @@
 //! 
 //! 负责配置的加载、缓存和访问
 
-use super::{ConfigError, ConfigItem, ConfigValue, ConfigSource};
+use super::{ConfigError, ConfigValue, ConfigSource};
 use crate::database::DatabaseManager;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;

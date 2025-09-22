@@ -1,0 +1,223 @@
+# GitLab CI/CD Pipeline for c19_ai
+
+stages:
+  - lint
+  - test
+  - build
+  - security
+  - deploy
+
+variables:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: "/certs"
+
+# 缓存配置
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - target/
+    - .cargo/
+
+# 代码质量检查
+lint:
+  stage: lint
+  image: rust:1.75-slim
+  before_script:
+    - apt-get update && apt-get install -y libpq-dev libssl-dev pkg-config
+  script:
+    - cargo fmt --all -- --check
+    - cargo clippy --all-targets --all-features -- -D warnings
+    - cargo audit
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+# 单元测试
+test:
+  stage: test
+  image: rust:1.75-slim
+  services:
+    - name: postgres:15
+      alias: postgres
+    - name: redis:7
+      alias: redis
+  variables:
+    POSTGRES_DB: c19_ai_test
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+    DATABASE_URL: postgresql://postgres:postgres@postgres:5432/c19_ai_test
+    REDIS_URL: redis://redis:6379
+  before_script:
+    - apt-get update && apt-get install -y libpq-dev libssl-dev pkg-config
+  script:
+    - cargo test --all-features
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+# 集成测试
+integration_test:
+  stage: test
+  image: rust:1.75-slim
+  services:
+    - name: postgres:15
+      alias: postgres
+    - name: redis:7
+      alias: redis
+  variables:
+    POSTGRES_DB: c19_ai_test
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+    DATABASE_URL: postgresql://postgres:postgres@postgres:5432/c19_ai_test
+    REDIS_URL: redis://redis:6379
+  before_script:
+    - apt-get update && apt-get install -y libpq-dev libssl-dev pkg-config
+  script:
+    - cargo test --test integration_tests --features "api-server"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+# 性能测试
+benchmark:
+  stage: test
+  image: rust:1.75-slim
+  before_script:
+    - apt-get update && apt-get install -y libpq-dev libssl-dev pkg-config
+  script:
+    - cargo bench --features "api-server"
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop"
+  artifacts:
+    reports:
+      junit: target/criterion/**/*.xml
+
+# 构建Linux版本
+build_linux:
+  stage: build
+  image: rust:1.75-slim
+  before_script:
+    - apt-get update && apt-get install -y libpq-dev libssl-dev pkg-config
+  script:
+    - cargo build --release --features "api-server"
+  artifacts:
+    paths:
+      - target/release/c19_ai
+    expire_in: 1 week
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+# 构建Windows版本
+build_windows:
+  stage: build
+  image: rust:1.75
+  before_script:
+    - apt-get update && apt-get install -y libpq-dev libssl-dev pkg-config
+  script:
+    - rustup target add x86_64-pc-windows-gnu
+    - cargo build --release --target x86_64-pc-windows-gnu --features "api-server"
+  artifacts:
+    paths:
+      - target/x86_64-pc-windows-gnu/release/c19_ai.exe
+    expire_in: 1 week
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+# 构建macOS版本
+build_macos:
+  stage: build
+  image: rust:1.75
+  before_script:
+    - apt-get update && apt-get install -y libpq-dev libssl-dev pkg-config
+  script:
+    - rustup target add x86_64-apple-darwin
+    - cargo build --release --target x86_64-apple-darwin --features "api-server"
+  artifacts:
+    paths:
+      - target/x86_64-apple-darwin/release/c19_ai
+    expire_in: 1 week
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+# Docker构建
+docker_build:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
+    - docker build -t $CI_REGISTRY_IMAGE:latest .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE:latest
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+# 安全扫描
+security_scan:
+  stage: security
+  image: aquasec/trivy:latest
+  script:
+    - trivy fs --format gitlab .
+  artifacts:
+    reports:
+      container_scanning: gl-container-scanning-report.json
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
+
+# 部署到测试环境
+deploy_test:
+  stage: deploy
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache curl
+  script:
+    - echo "🚀 部署到测试环境..."
+    - curl -X POST "$TEST_DEPLOY_WEBHOOK" -H "Content-Type: application/json" -d '{"ref":"'$CI_COMMIT_SHA'"}'
+  environment:
+    name: test
+    url: https://test.c19-ai.example.com
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+# 部署到生产环境
+deploy_production:
+  stage: deploy
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache curl
+  script:
+    - echo "🚀 部署到生产环境..."
+    - curl -X POST "$PROD_DEPLOY_WEBHOOK" -H "Content-Type: application/json" -d '{"ref":"'$CI_COMMIT_SHA'"}'
+  environment:
+    name: production
+    url: https://c19-ai.example.com
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  when: manual
+
+# 清理旧镜像
+cleanup:
+  stage: deploy
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache curl
+  script:
+    - echo "🧹 清理旧镜像..."
+    - curl -X DELETE "$CI_REGISTRY_IMAGE:old" || true
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  when: manual

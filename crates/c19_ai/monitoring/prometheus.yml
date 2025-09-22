@@ -3,13 +3,8 @@ global:
   evaluation_interval: 15s
 
 rule_files:
-  - "rules/*.yml"
-
-alerting:
-  alertmanagers:
-    - static_configs:
-        - targets:
-          - alertmanager:9093
+  # - "first_rules.yml"
+  # - "second_rules.yml"
 
 scrape_configs:
   # Prometheus自身监控
@@ -17,30 +12,41 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  # C19 AI应用监控
+  # c19_ai应用监控
   - job_name: 'c19_ai'
     static_configs:
       - targets: ['c19_ai:8080']
     metrics_path: '/metrics'
-    scrape_interval: 5s
-    scrape_timeout: 3s
-
-  # Redis监控
-  - job_name: 'redis'
-    static_configs:
-      - targets: ['redis:6379']
+    scrape_interval: 10s
+    scrape_timeout: 5s
 
   # PostgreSQL监控
   - job_name: 'postgres'
     static_configs:
       - targets: ['postgres:5432']
+    scrape_interval: 30s
 
-  # Node Exporter (系统监控)
+  # Redis监控
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis:6379']
+    scrape_interval: 30s
+
+  # Nginx监控
+  - job_name: 'nginx'
+    static_configs:
+      - targets: ['nginx:80']
+    metrics_path: '/nginx_status'
+    scrape_interval: 30s
+
+  # Node Exporter（系统监控）
   - job_name: 'node'
     static_configs:
       - targets: ['node-exporter:9100']
+    scrape_interval: 15s
 
-  # cAdvisor (容器监控)
+  # cAdvisor（容器监控）
   - job_name: 'cadvisor'
     static_configs:
       - targets: ['cadvisor:8080']
+    scrape_interval: 15s
