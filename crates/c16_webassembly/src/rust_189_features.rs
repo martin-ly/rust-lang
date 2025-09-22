@@ -1,15 +1,15 @@
-//! # Rust 1.89 特性与 WebAssembly 2.0 集成示例
+//! # Rust 1.90 特性与 WebAssembly 2.0 集成示例
 //!
-//! 本模块展示了 Rust 1.89 的新特性如何与 WebAssembly 2.0 的最新功能集成。
-//! This module demonstrates how Rust 1.89's new features integrate with WebAssembly 2.0's latest capabilities.
+//! 本模块展示了 Rust 1.90 的新特性如何与 WebAssembly 2.0 的最新功能集成。
+//! This module demonstrates how Rust 1.90's new features integrate with WebAssembly 2.0's latest capabilities.
 
 use crate::types::*;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use thiserror::Error;
 
-/// Rust 1.89 常量泛型推断在 WebAssembly 中的应用
-/// Application of Rust 1.89 const generic inference in WebAssembly
+/// Rust 1.90 常量泛型推断在 WebAssembly 中的应用
+/// Application of Rust 1.90 const generic inference in WebAssembly
 pub struct WasmArrayBuilder<const N: usize> {
     data: [Value; N],
 }
@@ -20,8 +20,8 @@ impl<const N: usize> WasmArrayBuilder<N> {
     /// Create new WebAssembly array builder
     pub fn new() -> Self {
         Self {
-            // Rust 1.89 新特性：使用下划线让编译器推断常量泛型参数
-            // Rust 1.89 new feature: use underscore to let compiler infer const generic parameter
+            // Rust 1.90 新特性：使用下划线让编译器推断常量泛型参数
+            // Rust 1.90 new feature: use underscore to let compiler infer const generic parameter
             data: [Value::I32(0); N],
         }
     }
@@ -110,6 +110,31 @@ impl BulkMemoryManager {
         self.operations.push(operation);
 
         Ok(())
+    }
+
+    /// 写入内存
+    /// Write memory
+    #[allow(dead_code)]
+    pub fn write_memory(&mut self, offset: u32, data: &[u8]) -> Result<(), MemoryError> {
+        let end_offset = offset + data.len() as u32;
+        if end_offset > self.memory.len() as u32 {
+            return Err(MemoryError::OutOfBounds);
+        }
+        
+        self.memory[offset as usize..end_offset as usize].copy_from_slice(data);
+        Ok(())
+    }
+
+    /// 读取内存
+    /// Read memory
+    #[allow(dead_code)]
+    pub fn read_memory(&self, offset: u32, size: u32) -> Result<Vec<u8>, MemoryError> {
+        let end_offset = offset + size;
+        if end_offset > self.memory.len() as u32 {
+            return Err(MemoryError::OutOfBounds);
+        }
+        
+        Ok(self.memory[offset as usize..end_offset as usize].to_vec())
     }
 }
 
@@ -361,6 +386,24 @@ pub enum SimdInstruction {
     /// 向量除法
     /// Vector division
     V128Div,
+    /// 向量比较（相等）
+    /// Vector comparison (equal)
+    V128Eq,
+    /// 向量比较（大于）
+    /// Vector comparison (greater than)
+    V128Gt,
+    /// 向量比较（小于）
+    /// Vector comparison (less than)
+    V128Lt,
+    /// 向量位运算（AND）
+    /// Vector bitwise operation (AND)
+    V128And,
+    /// 向量位运算（OR）
+    /// Vector bitwise operation (OR)
+    V128Or,
+    /// 向量位运算（XOR）
+    /// Vector bitwise operation (XOR)
+    V128Xor,
 }
 
 impl SimdProcessor {
@@ -391,23 +434,99 @@ impl SimdProcessor {
         // Record instruction
         self.simd_instructions.push(instruction.clone());
 
-        // 模拟 SIMD 操作
-        // Simulate SIMD operation
+        // 执行 SIMD 操作
+        // Execute SIMD operation
         match instruction {
             SimdInstruction::V128Add => {
-                // 简化的向量加法实现
-                // Simplified vector addition implementation
+                if let (Value::V128(a), Value::V128(b)) = (operands[0], operands[1]) {
+                    let mut result = [0u8; 16];
+                    for i in 0..16 {
+                        result[i] = a[i].wrapping_add(b[i]);
+                    }
+                    Ok(Value::V128(result))
+                } else {
+                    Err(RuntimeError::TypeError("V128Add requires V128 operands".to_string()))
+                }
+            }
+            SimdInstruction::V128Sub => {
+                if let (Value::V128(a), Value::V128(b)) = (operands[0], operands[1]) {
+                    let mut result = [0u8; 16];
+                    for i in 0..16 {
+                        result[i] = a[i].wrapping_sub(b[i]);
+                    }
+                    Ok(Value::V128(result))
+                } else {
+                    Err(RuntimeError::TypeError("V128Sub requires V128 operands".to_string()))
+                }
+            }
+            SimdInstruction::V128Mul => {
+                if let (Value::V128(a), Value::V128(b)) = (operands[0], operands[1]) {
+                    let mut result = [0u8; 16];
+                    for i in 0..16 {
+                        result[i] = a[i].wrapping_mul(b[i]);
+                    }
+                    Ok(Value::V128(result))
+                } else {
+                    Err(RuntimeError::TypeError("V128Mul requires V128 operands".to_string()))
+                }
+            }
+            SimdInstruction::V128Eq => {
+                if let (Value::V128(a), Value::V128(b)) = (operands[0], operands[1]) {
+                    let mut result = [0u8; 16];
+                    for i in 0..16 {
+                        result[i] = if a[i] == b[i] { 0xFF } else { 0x00 };
+                    }
+                    Ok(Value::V128(result))
+                } else {
+                    Err(RuntimeError::TypeError("V128Eq requires V128 operands".to_string()))
+                }
+            }
+            SimdInstruction::V128And => {
+                if let (Value::V128(a), Value::V128(b)) = (operands[0], operands[1]) {
+                    let mut result = [0u8; 16];
+                    for i in 0..16 {
+                        result[i] = a[i] & b[i];
+                    }
+                    Ok(Value::V128(result))
+                } else {
+                    Err(RuntimeError::TypeError("V128And requires V128 operands".to_string()))
+                }
+            }
+            SimdInstruction::V128Or => {
+                if let (Value::V128(a), Value::V128(b)) = (operands[0], operands[1]) {
+                    let mut result = [0u8; 16];
+                    for i in 0..16 {
+                        result[i] = a[i] | b[i];
+                    }
+                    Ok(Value::V128(result))
+                } else {
+                    Err(RuntimeError::TypeError("V128Or requires V128 operands".to_string()))
+                }
+            }
+            SimdInstruction::V128Xor => {
+                if let (Value::V128(a), Value::V128(b)) = (operands[0], operands[1]) {
+                    let mut result = [0u8; 16];
+                    for i in 0..16 {
+                        result[i] = a[i] ^ b[i];
+                    }
+                    Ok(Value::V128(result))
+                } else {
+                    Err(RuntimeError::TypeError("V128Xor requires V128 operands".to_string()))
+                }
+            }
+            _ => {
+                // 其他指令的简化实现
+                // Simplified implementation for other instructions
                 Ok(Value::V128([0; 16]))
             }
-            _ => Ok(Value::V128([0; 16])),
         }
     }
 }
 
-/// 综合示例：Rust 1.89 + WebAssembly 2.0
-/// Comprehensive example: Rust 1.89 + WebAssembly 2.0
+/// 综合示例：Rust 1.90 + WebAssembly 2.0
+/// Comprehensive example: Rust 1.90 + WebAssembly 2.0
 #[allow(dead_code)]
-pub struct Rust189Wasm2Integration {
+pub struct Rust190Wasm2Integration {
     bulk_memory_manager: BulkMemoryManager,
     tail_call_optimizer: TailCallOptimizer,
     host_binding_manager: HostBindingManager,
@@ -415,7 +534,7 @@ pub struct Rust189Wasm2Integration {
     simd_processor: SimdProcessor,
 }
 
-impl Rust189Wasm2Integration {
+impl Rust190Wasm2Integration {
     /// 创建新的集成实例
     /// Create new integration instance
     pub fn new() -> Self {
@@ -578,5 +697,212 @@ impl Value {
         // 这里需要根据实际的接口类型实现进行调整
         // This needs to be adjusted based on actual interface type implementation
         Value::I32(0) // 简化实现
+    }
+}
+
+/// Rust 1.90 常量泛型高级应用
+/// Rust 1.90 const generics advanced applications
+#[allow(dead_code)]
+pub mod const_generics_advanced {
+    use super::*;
+
+    /// 编译时大小检查的 WebAssembly 缓冲区
+    /// WebAssembly buffer with compile-time size checking
+    pub struct WasmBuffer<const SIZE: usize> {
+        data: [u8; SIZE],
+        position: usize,
+    }
+
+    impl<const SIZE: usize> WasmBuffer<SIZE> {
+        /// 创建新的缓冲区
+        /// Create new buffer
+        pub fn new() -> Self {
+            Self {
+                data: [0; SIZE],
+                position: 0,
+            }
+        }
+
+        /// 写入数据
+        /// Write data
+        pub fn write(&mut self, data: &[u8]) -> Result<(), RuntimeError> {
+            if self.position + data.len() > SIZE {
+                return Err(RuntimeError::MemoryError(MemoryError::OutOfBounds));
+            }
+            
+            self.data[self.position..self.position + data.len()].copy_from_slice(data);
+            self.position += data.len();
+            Ok(())
+        }
+
+        /// 读取数据
+        /// Read data
+        pub fn read(&self, offset: usize, len: usize) -> Result<&[u8], RuntimeError> {
+            if offset + len > SIZE {
+                return Err(RuntimeError::MemoryError(MemoryError::OutOfBounds));
+            }
+            Ok(&self.data[offset..offset + len])
+        }
+
+        /// 获取当前位置
+        /// Get current position
+        pub fn position(&self) -> usize {
+            self.position
+        }
+
+        /// 重置位置
+        /// Reset position
+        pub fn reset(&mut self) {
+            self.position = 0;
+        }
+    }
+
+    /// 类型安全的 WebAssembly 函数表
+    /// Type-safe WebAssembly function table
+    pub struct WasmFunctionTable<const MAX_FUNCTIONS: usize> {
+        functions: [Option<Function>; MAX_FUNCTIONS],
+        count: usize,
+    }
+
+    impl<const MAX_FUNCTIONS: usize> WasmFunctionTable<MAX_FUNCTIONS> {
+        /// 创建新的函数表
+        /// Create new function table
+        pub fn new() -> Self {
+            Self {
+                functions: [(); MAX_FUNCTIONS].map(|_| None),
+                count: 0,
+            }
+        }
+
+        /// 添加函数
+        /// Add function
+        pub fn add_function(&mut self, func: Function) -> Result<usize, RuntimeError> {
+            if self.count >= MAX_FUNCTIONS {
+                return Err(RuntimeError::MemoryError(MemoryError::OutOfBounds));
+            }
+            
+            let index = self.count;
+            self.functions[index] = Some(func);
+            self.count += 1;
+            Ok(index)
+        }
+
+        /// 获取函数
+        /// Get function
+        pub fn get_function(&self, index: usize) -> Option<&Function> {
+            self.functions.get(index)?.as_ref()
+        }
+
+        /// 获取函数数量
+        /// Get function count
+        pub fn count(&self) -> usize {
+            self.count
+        }
+    }
+}
+
+/// Rust 1.90 FFI 改进的高级应用
+/// Rust 1.90 FFI improvements advanced applications
+#[allow(dead_code)]
+pub mod ffi_advanced {
+    use super::*;
+
+    /// 128位整数运算器
+    /// 128-bit integer calculator
+    pub struct I128Calculator;
+
+    impl I128Calculator {
+        /// 安全的 128位加法
+        /// Safe 128-bit addition
+        pub fn safe_add(a: i128, b: i128) -> Result<i128, RuntimeError> {
+            a.checked_add(b).ok_or_else(|| {
+                RuntimeError::TypeError("128位整数加法溢出".to_string())
+            })
+        }
+
+        /// 安全的 128位乘法
+        /// Safe 128-bit multiplication
+        pub fn safe_mul(a: i128, b: i128) -> Result<i128, RuntimeError> {
+            a.checked_mul(b).ok_or_else(|| {
+                RuntimeError::TypeError("128位整数乘法溢出".to_string())
+            })
+        }
+
+        /// 128位整数到 WebAssembly 值的转换
+        /// Convert 128-bit integer to WebAssembly value
+        pub fn to_wasm_value(value: i128) -> Value {
+            Value::I128(value)
+        }
+
+        /// 从 WebAssembly 值提取 128位整数
+        /// Extract 128-bit integer from WebAssembly value
+        pub fn from_wasm_value(value: &Value) -> Result<i128, RuntimeError> {
+            match value {
+                Value::I128(v) => Ok(*v),
+                _ => Err(RuntimeError::TypeError("期望 I128 类型".to_string())),
+            }
+        }
+    }
+
+    /// 无符号 128位整数运算器
+    /// Unsigned 128-bit integer calculator
+    pub struct U128Calculator;
+
+    impl U128Calculator {
+        /// 安全的 128位无符号加法
+        /// Safe 128-bit unsigned addition
+        pub fn safe_add(a: u128, b: u128) -> Result<u128, RuntimeError> {
+            a.checked_add(b).ok_or_else(|| {
+                RuntimeError::TypeError("128位无符号整数加法溢出".to_string())
+            })
+        }
+
+        /// 安全的 128位无符号乘法
+        /// Safe 128-bit unsigned multiplication
+        pub fn safe_mul(a: u128, b: u128) -> Result<u128, RuntimeError> {
+            a.checked_mul(b).ok_or_else(|| {
+                RuntimeError::TypeError("128位无符号整数乘法溢出".to_string())
+            })
+        }
+
+        /// 128位无符号整数到 WebAssembly 值的转换
+        /// Convert 128-bit unsigned integer to WebAssembly value
+        pub fn to_wasm_value(value: u128) -> Value {
+            Value::U128(value)
+        }
+
+        /// 从 WebAssembly 值提取 128位无符号整数
+        /// Extract 128-bit unsigned integer from WebAssembly value
+        pub fn from_wasm_value(value: &Value) -> Result<u128, RuntimeError> {
+            match value {
+                Value::U128(v) => Ok(*v),
+                _ => Err(RuntimeError::TypeError("期望 U128 类型".to_string())),
+            }
+        }
+    }
+}
+
+/// Rust 1.90 API 稳定化的应用
+/// Rust 1.90 API stabilization applications
+#[allow(dead_code)]
+pub mod api_stabilization {
+    use super::*;
+
+    /// 使用 Result::flatten 的错误处理
+    /// Error handling using Result::flatten
+    pub fn process_wasm_result(result: Result<Result<Value, RuntimeError>, RuntimeError>) -> Result<Value, RuntimeError> {
+        // Rust 1.90 中 Result::flatten 已稳定化
+        // Result::flatten is stabilized in Rust 1.90
+        result.flatten()
+    }
+
+    /// 文件锁应用示例
+    /// File lock application example
+    pub fn demonstrate_file_locks() -> Result<(), RuntimeError> {
+        // 这里可以展示文件锁的使用
+        // This can demonstrate file lock usage
+        // 注意：实际实现需要 std::fs::File 和相关 API
+        // Note: Actual implementation requires std::fs::File and related APIs
+        Ok(())
     }
 }

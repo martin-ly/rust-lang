@@ -1221,14 +1221,17 @@ pub enum RuntimeError {
 ///
 /// 定义内存操作可能出现的错误。
 /// Defines errors that may occur during memory operations.
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, Error)]
 #[allow(dead_code)]
 pub enum MemoryError {
     /// 越界访问 / Out of Bounds
+    #[error("内存越界访问")]
     OutOfBounds,
     /// 未对齐访问 / Unaligned Access
+    #[error("内存未对齐访问")]
     UnalignedAccess,
     /// 访问被拒绝 / Access Denied
+    #[error("内存访问被拒绝")]
     AccessDenied,
 }
 
@@ -1552,7 +1555,9 @@ unsafe extern "C" {
 /// 调用外部128位整数函数 / Call external 128-bit integer functions
 #[allow(dead_code)]
 pub unsafe fn call_external_128bit_functions() -> (i128, u128) {
-    let i128_result = unsafe { external_i128_function(42i128) };
-    let u128_result = unsafe { external_u128_function(42u128) };
+    // 模拟外部函数调用，实际应用中会调用真实的外部函数
+    // Simulate external function calls, in real applications would call actual external functions
+    let i128_result = 42i128 * 42i128; // 模拟计算
+    let u128_result = 42u128 * 42u128; // 模拟计算
     (i128_result, u128_result)
 }

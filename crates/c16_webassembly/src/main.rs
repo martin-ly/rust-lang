@@ -1,7 +1,7 @@
-//! # WebAssembly 2.0 与 Rust 1.89 集成演示
+//! # WebAssembly 2.0 与 Rust 1.90 集成演示
 //!
-//! 本程序展示了 Rust 1.89 的新特性如何与 WebAssembly 2.0 的最新功能集成。
-//! This program demonstrates how Rust 1.89's new features integrate with WebAssembly 2.0's latest capabilities.
+//! 本程序展示了 Rust 1.90 的新特性如何与 WebAssembly 2.0 的最新功能集成。
+//! This program demonstrates how Rust 1.90's new features integrate with WebAssembly 2.0's latest capabilities.
 
 mod runtime;
 mod rust_189_features;
@@ -19,12 +19,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Initialize logging
     env_logger::init();
 
-    println!("🚀 WebAssembly 2.0 + Rust 1.89 集成演示");
-    println!("🚀 WebAssembly 2.0 + Rust 1.89 Integration Demo");
+    println!("🚀 WebAssembly 2.0 + Rust 1.90 集成演示");
+    println!("🚀 WebAssembly 2.0 + Rust 1.90 Integration Demo");
     println!();
 
-    // 演示 Rust 1.89 常量泛型推断
-    // Demonstrate Rust 1.89 const generic inference
+    // 演示 Rust 1.90 常量泛型推断
+    // Demonstrate Rust 1.90 const generic inference
     demonstrate_const_generic_inference();
 
     // 演示 WebAssembly 2.0 批量内存操作
@@ -43,12 +43,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Demonstrate WebAssembly 2.0 interface types
     demonstrate_interface_types()?;
 
-    // 演示 Rust 1.89 FFI 改进
-    // Demonstrate Rust 1.89 FFI improvements
+    // 演示 Rust 1.90 FFI 改进
+    // Demonstrate Rust 1.90 FFI improvements
     demonstrate_ffi_improvements()?;
 
-    // 演示 Rust 1.89 生命周期语法检查
-    // Demonstrate Rust 1.89 lifetime syntax check
+    // 演示 Rust 1.90 生命周期语法检查
+    // Demonstrate Rust 1.90 lifetime syntax check
     demonstrate_lifetime_syntax_check();
 
     // 演示 SIMD 操作
@@ -66,11 +66,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-/// 演示 Rust 1.89 常量泛型推断
-/// Demonstrate Rust 1.89 const generic inference
+/// 演示 Rust 1.90 常量泛型推断
+/// Demonstrate Rust 1.90 const generic inference
 fn demonstrate_const_generic_inference() {
-    println!("📋 演示 Rust 1.89 常量泛型推断");
-    println!("📋 Demonstrating Rust 1.89 const generic inference");
+    println!("📋 演示 Rust 1.90 常量泛型推断");
+    println!("📋 Demonstrating Rust 1.90 const generic inference");
 
     // 创建不同大小的 WebAssembly 数组
     // Create WebAssembly arrays of different sizes
@@ -203,11 +203,11 @@ fn demonstrate_interface_types() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-/// 演示 Rust 1.89 FFI 改进
-/// Demonstrate Rust 1.89 FFI improvements
+/// 演示 Rust 1.90 FFI 改进
+/// Demonstrate Rust 1.90 FFI improvements
 fn demonstrate_ffi_improvements() -> Result<(), Box<dyn std::error::Error>> {
-    println!("🌉 演示 Rust 1.89 FFI 改进");
-    println!("🌉 Demonstrating Rust 1.89 FFI improvements");
+    println!("🌉 演示 Rust 1.90 FFI 改进");
+    println!("🌉 Demonstrating Rust 1.90 FFI improvements");
 
     // 注意：这里只是演示，实际的外部函数需要链接到相应的库
     // Note: This is just a demonstration, actual external functions need to be linked to corresponding libraries
@@ -232,11 +232,11 @@ fn demonstrate_ffi_improvements() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-/// 演示 Rust 1.89 生命周期语法检查
-/// Demonstrate Rust 1.89 lifetime syntax check
+/// 演示 Rust 1.90 生命周期语法检查
+/// Demonstrate Rust 1.90 lifetime syntax check
 fn demonstrate_lifetime_syntax_check() {
-    println!("⏰ 演示 Rust 1.89 生命周期语法检查");
-    println!("⏰ Demonstrating Rust 1.89 lifetime syntax check");
+    println!("⏰ 演示 Rust 1.90 生命周期语法检查");
+    println!("⏰ Demonstrating Rust 1.90 lifetime syntax check");
 
     let test_string = "Hello, WebAssembly!";
     let result = lifetime_examples::process_wasm_string(test_string);
@@ -285,7 +285,7 @@ fn run_comprehensive_integration_test() -> Result<(), Box<dyn std::error::Error>
     println!("🧪 运行综合集成测试");
     println!("🧪 Running comprehensive integration test");
 
-    let mut integration = Rust189Wasm2Integration::new();
+    let mut integration = Rust190Wasm2Integration::new();
 
     // 初始化系统
     // Initialize system

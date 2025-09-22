@@ -33,7 +33,32 @@ c16_webassembly 是一个基于 Rust 1.89 特性的 WebAssembly 2.0 集成项目
 
 ## 📚 文档导航
 
-### Rust WebAssembly 视图
+### 🗂️ 文档索引
+
+- [📋 文档导航索引](./NAVIGATION_INDEX.md) - 完整的文档导航指南
+- [📊 2025年9月总结报告](./WEBASSEMBLY_2025_SEPTEMBER_SUMMARY.md) - 项目完成总结
+
+### 🆕 2025年9月最新内容
+
+- [📦 最新开源库和依赖库](./2025_september/README.md) - 2025年9月最新的WebAssembly开源库
+
+### 🛠️ 开发工具
+
+- [🔒 安全工具集](./tools/security/README.md) - WebAssembly安全分析和防护工具
+- [⚡ 优化工具集](./tools/optimization/README.md) - WebAssembly性能优化工具
+
+### 📖 示例代码
+
+- [🦀 Rust 1.90新特性示例](./examples/rust_190/README.md) - Rust 1.90新特性在WebAssembly中的应用
+- [🌐 WebAssembly 2.0新特性示例](./examples/webassembly_20/README.md) - WebAssembly 2.0新特性实现
+
+### 🚀 项目案例
+
+- [☁️ 云原生项目](./projects/cloud_native/README.md) - 容器化、微服务、服务网格应用
+- [🤖 AI推理项目](./projects/ai_inference/README.md) - 机器学习模型推理和神经网络计算
+- [⛓️ 区块链项目](./projects/blockchain/README.md) - 智能合约、去中心化应用、跨链互操作
+
+### 🔬 技术视图
 
 - [Rust 1.89 特性详解](./rust_webassembly/view01.md) - Rust 1.89 新特性在 WebAssembly 中的应用
 - [WebAssembly 2.0 新特性](./rust_webassembly/view02.md) - WebAssembly 2.0 新特性详解
@@ -43,7 +68,7 @@ c16_webassembly 是一个基于 Rust 1.89 特性的 WebAssembly 2.0 集成项目
 ### 顶层与示例
 
 - [项目说明](../README.md) - 项目概述和快速开始指南
-- [章节引导](../12_webassembly.md) - 完整的 WebAssembly 2.0 与 Rust 1.89 集成指南
+- [章节引导](../12_webassembly.md) - 完整的 WebAssembly 2.0 与 Rust 1.90 集成指南
 - [源码实现](../src/) - 完整的 WebAssembly 运行时实现
 
 ## 🎯 快速开始

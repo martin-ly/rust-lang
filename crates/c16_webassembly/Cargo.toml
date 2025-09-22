@@ -5,7 +5,7 @@ edition = "2024"
 resolver = "3"
 rust-version = "1.90"
 authors = ["Rust WebAssembly Team"]
-description = "WebAssembly 2.0 与 Rust 1.90 集成演示项目 - 全面的语法、注释、示例和文档"
+description = "WebAssembly 2.0 与 Rust 1.90 集成演示项目 - 包含2025年9月最新开源库、工具链和应用案例"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-lang/webassembly"
 keywords = ["webassembly", "wasm", "rust", "vm", "runtime"]
@@ -67,8 +67,24 @@ no_std = []
 bench = ["criterion"]
 test = ["proptest"]
 
-# [[bench]]
-# name = "wasm_benchmarks"
-# harness = false
-# required-features = ["bench"]
+[[bench]]
+name = "performance_benchmarks"
+harness = false
+required-features = ["bench"]
+
+[[example]]
+name = "rust_190_demo"
+path = "examples/rust_190_demo.rs"
+
+[[example]]
+name = "webassembly_2_0_demo"
+path = "examples/webassembly_2_0_demo.rs"
+
+[[example]]
+name = "image_processing_demo"
+path = "examples/image_processing_demo.rs"
+
+[[example]]
+name = "scientific_computing_demo"
+path = "examples/scientific_computing_demo.rs"
 
