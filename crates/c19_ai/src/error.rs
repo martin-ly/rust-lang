@@ -316,6 +316,9 @@ impl From<tokio::time::error::Elapsed> for AppError {
 }
 
 // 数据库错误转换（当sqlx可用时）
+// 注意：database 特性暂时被禁用，因为存在版本冲突
+// 当重新启用 database 特性时，取消注释以下代码
+/*
 #[cfg(feature = "database")]
 impl From<sqlx::Error> for AppError {
     fn from(err: sqlx::Error) -> Self {
@@ -341,6 +344,7 @@ impl From<sqlx::Error> for AppError {
         AppError::new(code, message)
     }
 }
+*/
 
 // Redis错误转换（当redis可用时）
 #[cfg(feature = "cache")]

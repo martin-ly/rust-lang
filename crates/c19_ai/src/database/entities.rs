@@ -14,6 +14,7 @@ use super::orm::*;
 use super::connection::DatabaseManager;
 
 /// 用户仓库
+#[allow(unused)]
 #[derive(Debug)]
 pub struct UserRepository {
     db_manager: Arc<DatabaseManager>,
@@ -21,6 +22,7 @@ pub struct UserRepository {
 }
 
 impl UserRepository {
+    #[allow(unused)]
     pub fn new(db_manager: Arc<DatabaseManager>) -> Self {
         Self {
             db_manager,
@@ -74,7 +76,7 @@ impl UserRepository {
 
 #[async_trait::async_trait]
 impl Repository for UserRepository {
-    async fn find_by_id(&self, _id: &str) -> Result<Option<serde_json::Value>> {
+    async fn find_by_id(&self, id: &str) -> Result<Option<serde_json::Value>> {
         let _uuid = Uuid::parse_str(id)?;
         
         // 先检查缓存
@@ -158,6 +160,7 @@ impl Repository for UserRepository {
 }
 
 /// 模型仓库
+#[allow(unused)]
 #[derive(Debug)]
 pub struct ModelRepository {
     db_manager: Arc<DatabaseManager>,
@@ -165,6 +168,7 @@ pub struct ModelRepository {
 }
 
 impl ModelRepository {
+    #[allow(unused)]
     pub fn new(db_manager: Arc<DatabaseManager>) -> Self {
         Self {
             db_manager,
@@ -279,6 +283,7 @@ impl Repository for ModelRepository {
 }
 
 /// 训练任务仓库
+#[allow(unused)]
 #[derive(Debug)]
 pub struct TrainingJobRepository {
     db_manager: Arc<DatabaseManager>,
@@ -286,6 +291,7 @@ pub struct TrainingJobRepository {
 }
 
 impl TrainingJobRepository {
+    #[allow(unused)]
     pub fn new(db_manager: Arc<DatabaseManager>) -> Self {
         Self {
             db_manager,
@@ -400,6 +406,7 @@ impl Repository for TrainingJobRepository {
 }
 
 /// 推理请求仓库
+#[allow(unused)]
 #[derive(Debug)]
 pub struct InferenceRequestRepository {
     db_manager: Arc<DatabaseManager>,
@@ -407,6 +414,7 @@ pub struct InferenceRequestRepository {
 }
 
 impl InferenceRequestRepository {
+    #[allow(unused)]
     pub fn new(db_manager: Arc<DatabaseManager>) -> Self {
         Self {
             db_manager,
@@ -521,6 +529,7 @@ impl Repository for InferenceRequestRepository {
 }
 
 /// 数据集仓库
+#[allow(unused)]
 #[derive(Debug)]
 pub struct DatasetRepository {
     db_manager: Arc<DatabaseManager>,

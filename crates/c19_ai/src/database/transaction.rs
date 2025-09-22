@@ -13,6 +13,7 @@ use chrono::{DateTime, Utc};
 use super::connection::DatabaseManager;
 
 /// 事务管理器
+#[allow(unused)]
 #[derive(Debug)]
 pub struct TransactionManager {
     db_manager: Arc<DatabaseManager>,
@@ -21,6 +22,7 @@ pub struct TransactionManager {
 
 /// 数据库事务
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(unused)]
 pub struct Transaction {
     pub id: String,
     pub connection_id: String,
@@ -35,6 +37,7 @@ pub struct Transaction {
 
 /// 事务状态
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[allow(unused)]
 pub enum TransactionStatus {
     Created,
     Started,
@@ -45,6 +48,7 @@ pub enum TransactionStatus {
 
 /// 隔离级别
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(unused)]
 pub enum IsolationLevel {
     ReadUncommitted,
     ReadCommitted,
@@ -54,6 +58,7 @@ pub enum IsolationLevel {
 
 /// 事务操作
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(unused)]
 pub struct TransactionOperation {
     pub id: String,
     pub operation_type: OperationType,

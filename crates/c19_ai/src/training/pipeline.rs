@@ -165,6 +165,7 @@ pub enum PipelineStatus {
 
 /// 训练管道管理器
 #[derive(Debug)]
+#[allow(unused)]
 pub struct TrainingPipelineManager {
     pipelines: HashMap<String, TrainingPipeline>,
     jobs: HashMap<String, TrainingJob>,

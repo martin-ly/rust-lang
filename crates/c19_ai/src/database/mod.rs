@@ -11,11 +11,42 @@ pub mod orm;
 pub mod entities;
 pub mod schema;
 
-pub use connection::*;
-pub use models::*;
-pub use migrations::*;
-pub use repository::*;
-pub use transaction::*;
-pub use orm::*;
-pub use entities::*;
-pub use schema::*;
+// 连接模块导出
+pub use connection::{
+    DatabaseManager, DatabaseConnection, DatabaseType, DatabaseConfig, SslMode,
+    QueryBuilder, QueryType, Condition, Operator, Join, JoinType, OrderBy, SortDirection
+};
+
+// 模型模块导出
+pub use models::DatabaseModel;
+
+// 迁移模块导出
+pub use migrations::DatabaseMigrationRecord;
+
+// 仓库模块导出
+pub use repository::DatabaseRepository;
+
+// 事务模块导出
+pub use transaction::{
+    TransactionManager, Transaction, TransactionStatus, IsolationLevel,
+    TransactionOperation, OperationType, TransactionStats, TransactionBuilder, TransactionContext, TransactionError
+};
+
+// ORM模块导出
+pub use orm::{
+    OrmManager, EntityMetadata, ColumnMetadata, DataType, Constraint, IndexMetadata, IndexType,
+    RelationshipMetadata, RelationshipType, CascadeOption, QueryCondition, QueryOperator,
+    LogicalOperator, BaseEntity, UserEntity, ModelEntity, TrainingJobEntity, InferenceRequestEntity,
+    DatasetEntity, OrmTransaction
+};
+
+// 实体模块导出
+pub use entities::{
+    UserRepository, ModelRepository, TrainingJobRepository, InferenceRequestRepository,
+    DatasetRepository, ModelStats, InferenceStats, DatasetStats
+};
+
+// 模式模块导出
+pub use schema::{
+    SchemaManager, Migration, initialize_schema, get_entity_metadata
+};

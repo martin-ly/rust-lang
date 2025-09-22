@@ -80,6 +80,7 @@ impl TtlCache {
     }
 
     /// 清理过期条目
+    #[allow(unused)]
     async fn cleanup_expired(&self) -> usize {
         let mut data = self.data.write().await;
         let mut expired_keys = Vec::new();
@@ -99,6 +100,7 @@ impl TtlCache {
     }
 
     /// 执行基于TTL的淘汰
+    #[allow(unused)]
     async fn evict_expired(&self) -> bool {
         let mut data = self.data.write().await;
         let mut expired_keys = Vec::new();

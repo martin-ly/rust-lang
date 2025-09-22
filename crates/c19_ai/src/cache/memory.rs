@@ -81,6 +81,7 @@ impl MemoryCache {
     }
 
     /// 清理过期条目
+    #[allow(unused)]
     async fn cleanup_expired(&self) -> usize {
         let mut data = self.data.write().await;
         let mut expired_keys = Vec::new();
@@ -100,6 +101,7 @@ impl MemoryCache {
     }
 
     /// 执行LRU淘汰
+    #[allow(unused)]
     async fn evict_lru(&self) -> bool {
         let mut data = self.data.write().await;
         if data.len() >= self.max_size {

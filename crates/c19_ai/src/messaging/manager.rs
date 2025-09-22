@@ -19,6 +19,7 @@ use super::events::Event;
 
 /// 消息队列管理器
 #[derive(Debug)]
+#[allow(unused)]
 pub struct MessagingManager {
     queues: Arc<RwLock<HashMap<String, Arc<MessageQueue>>>>,
     producers: Arc<RwLock<HashMap<String, Arc<MessageProducer>>>>,
@@ -30,6 +31,7 @@ pub struct MessagingManager {
 
 /// 消息队列配置
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(unused)]
 pub struct MessagingConfig {
     pub default_queue_size: usize,
     pub max_message_size: usize,
@@ -60,6 +62,7 @@ impl Default for MessagingConfig {
 
 /// 消息
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(unused)]
 pub struct Message {
     pub id: String,
     pub topic: String,
@@ -75,6 +78,7 @@ pub struct Message {
 
 /// 消息优先级
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(unused)]
 pub enum MessagePriority {
     Low,
     Normal,
@@ -84,6 +88,7 @@ pub enum MessagePriority {
 
 /// 消息状态
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(unused)]
 pub enum MessageStatus {
     Pending,
     Processing,
@@ -94,6 +99,7 @@ pub enum MessageStatus {
 
 /// 消息处理结果
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(unused)]
 pub struct MessageResult {
     pub message_id: String,
     pub status: MessageStatus,
@@ -104,6 +110,7 @@ pub struct MessageResult {
 
 /// 队列统计
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(unused)]
 pub struct QueueStats {
     pub queue_name: String,
     pub message_count: u64,
@@ -132,6 +139,7 @@ impl Default for QueueStats {
 
 /// 消息订阅
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(unused)]
 pub struct MessageSubscription {
     pub id: String,
     pub topic: String,
@@ -143,6 +151,7 @@ pub struct MessageSubscription {
 
 /// 消息过滤器
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(unused)]
 pub struct MessageFilter {
     pub headers: HashMap<String, String>,
     pub payload_pattern: Option<String>,
@@ -151,6 +160,7 @@ pub struct MessageFilter {
 
 impl MessagingManager {
     /// 创建新的消息队列管理器
+    #[allow(unused)]
     pub fn new(config: MessagingConfig) -> Self {
         let (event_sender, _) = broadcast::channel(1000);
         
@@ -165,6 +175,7 @@ impl MessagingManager {
     }
 
     /// 创建消息队列
+    #[allow(unused)]
     pub async fn create_queue(&self, name: String, config: Option<QueueConfig>) -> Result<Arc<MessageQueue>> {
         let _queue_config = config.unwrap_or_else(|| QueueConfig {
             max_size: self.config.default_queue_size,
@@ -194,6 +205,7 @@ impl MessagingManager {
     }
 
     /// 创建消息生产者
+    #[allow(unused)]
     pub async fn create_producer(&self, queue_name: &str, config: Option<ProducerConfig>) -> Result<Arc<MessageProducer>> {
         let _queue = self.get_queue(queue_name).await?;
         let _producer_config = config.unwrap_or_default();

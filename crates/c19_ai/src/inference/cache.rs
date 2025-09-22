@@ -13,6 +13,7 @@ use sha2::{Sha256, Digest};
 
 /// 缓存条目
 #[derive(Debug, Clone)]
+#[allow(unused)]
 struct CacheEntry {
     response: super::InferenceResponse,
     created_at: Instant,
@@ -23,6 +24,7 @@ struct CacheEntry {
 
 /// 推理缓存统计
 #[derive(Debug, Clone, Default)]
+#[allow(unused)]
 struct CacheStatistics {
     hits: u64,
     misses: u64,
@@ -33,6 +35,7 @@ struct CacheStatistics {
 
 /// 推理缓存
 #[derive(Debug)]
+#[allow(unused)]
 pub struct InferenceCache {
     pub id: Uuid,
     pub name: String,
@@ -91,6 +94,7 @@ impl InferenceCache {
     }
 
     /// 清理过期条目
+    #[allow(unused)]
     async fn cleanup_expired(&self) -> usize {
         let mut cache = self.cache.write().await;
         let mut expired_keys = Vec::new();
@@ -110,6 +114,7 @@ impl InferenceCache {
     }
 
     /// 执行LRU淘汰
+    #[allow(unused)]
     async fn evict_lru(&self) -> bool {
         let mut cache = self.cache.write().await;
         if cache.len() >= self.max_size {
@@ -135,6 +140,7 @@ impl InferenceCache {
     }
 
     /// 获取缓存的推理结果
+    #[allow(unused)]
     pub async fn get(&self, request: &super::InferenceRequest) -> Option<super::InferenceResponse> {
         let start_time = Instant::now();
         let cache_key = self.generate_cache_key(request);
@@ -169,6 +175,7 @@ impl InferenceCache {
     }
 
     /// 缓存推理结果
+    #[allow(unused)]
     pub async fn put(&self, request: &super::InferenceRequest, response: &super::InferenceResponse) {
         let cache_key = self.generate_cache_key(request);
         let now = Instant::now();
@@ -191,6 +198,7 @@ impl InferenceCache {
     }
 
     /// 删除缓存条目
+    #[allow(unused)]
     pub async fn remove(&self, request: &super::InferenceRequest) {
         let cache_key = self.generate_cache_key(request);
         let mut cache = self.cache.write().await;
@@ -198,6 +206,7 @@ impl InferenceCache {
     }
 
     /// 清空缓存
+    #[allow(unused)]
     pub async fn clear(&self) {
         let mut cache = self.cache.write().await;
         cache.clear();
@@ -208,6 +217,7 @@ impl InferenceCache {
     }
 
     /// 获取缓存状态
+    #[allow(unused)]
     pub async fn get_status(&self) -> CacheStatus {
         let cache = self.cache.read().await;
         let stats = self.statistics.read().await;
@@ -236,12 +246,14 @@ impl InferenceCache {
     }
 
     /// 获取缓存大小
+    #[allow(unused)]
     pub async fn size(&self) -> usize {
         let cache = self.cache.read().await;
         cache.len()
     }
 
     /// 检查缓存是否为空
+    #[allow(unused)]
     pub async fn is_empty(&self) -> bool {
         self.size().await == 0
     }
@@ -261,6 +273,7 @@ impl InferenceCache {
 
 /// 缓存状态
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(unused)]
 pub struct CacheStatus {
     pub cache_size: usize,
     pub max_size: usize,

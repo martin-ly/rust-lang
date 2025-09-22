@@ -204,7 +204,7 @@ impl WebSocketHandler {
     }
 
     /// 向房间广播消息
-    async fn broadcast_to_room(&self, room_id: String, message: WebSocketMessage) -> Result<()> {
+    async fn broadcast_to_room(&self, room_id: String, _message: WebSocketMessage) -> Result<()> {
         let rooms = self.rooms.read().await;
         if let Some(_room) = rooms.get(&room_id) {
             // TODO: 实现房间广播逻辑

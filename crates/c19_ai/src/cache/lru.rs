@@ -113,6 +113,7 @@ impl LruCache {
     }
 
     /// 清理过期条目
+    #[allow(unused)]
     async fn cleanup_expired(&self) -> usize {
         let mut data = self.data.write().await;
         let mut order = self.access_order.write().await;

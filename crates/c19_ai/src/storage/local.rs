@@ -127,7 +127,7 @@ impl StorageBackend for LocalStorage {
         
         // 获取元数据
         let metadata = {
-            let _file_metadata = self.file_metadata.read().await;
+            let file_metadata = self.file_metadata.read().await;
             file_metadata.get(key).cloned().unwrap_or_else(|| {
                 FileMetadata::new(key.to_string(), data.len() as u64)
             })
@@ -261,7 +261,7 @@ impl StorageBackend for LocalStorage {
     }
 
     async fn get_metadata(&self, key: &str) -> anyhow::Result<Option<FileMetadata>> {
-        let _file_metadata = self.file_metadata.read().await;
+        let file_metadata = self.file_metadata.read().await;
         Ok(file_metadata.get(key).cloned())
     }
 

@@ -2,8 +2,8 @@
 //! 
 //! 展示如何使用配置管理系统
 
-use c19_ai::config::{ConfigManager, ConfigValue, ConfigSource};
-use std::collections::HashMap;
+use c19_ai::config::{ConfigManager, ConfigSource};
+// use std::collections::HashMap;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {

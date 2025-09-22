@@ -13,6 +13,7 @@ use std::cmp::Ordering;
 
 /// 推理队列条目
 #[derive(Debug, Clone)]
+#[allow(unused)]
 struct QueueItem {
     request: super::InferenceRequest,
     priority: u8, // 0 = Critical, 1 = High, 2 = Normal, 3 = Low
@@ -42,6 +43,7 @@ impl Ord for QueueItem {
 
 /// 推理队列状态
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(unused)]
 pub struct QueueStatus {
     pub queue_size: usize,
     pub queue_capacity: usize,
@@ -53,6 +55,7 @@ pub struct QueueStatus {
 
 /// 推理队列
 #[derive(Debug)]
+#[allow(unused)]
 pub struct InferenceQueue {
     pub id: Uuid,
     pub name: String,
@@ -67,6 +70,7 @@ pub struct InferenceQueue {
 
 impl InferenceQueue {
     /// 创建新的推理队列
+    #[allow(unused)]
     pub fn new(name: String) -> Self {
         let (sender, receiver) = mpsc::unbounded_channel();
         
@@ -91,6 +95,7 @@ impl InferenceQueue {
     }
 
     /// 创建带容量的推理队列
+    #[allow(unused)]
     pub fn with_capacity(name: String, capacity: usize) -> Self {
         let (sender, receiver) = mpsc::unbounded_channel();
         
@@ -115,6 +120,7 @@ impl InferenceQueue {
     }
 
     /// 将请求加入队列
+    #[allow(unused)]
     pub async fn enqueue(&self, request: super::InferenceRequest) -> anyhow::Result<()> {
         // 检查队列容量
         {
@@ -154,6 +160,7 @@ impl InferenceQueue {
     }
 
     /// 获取推理结果
+    #[allow(unused)]
     pub async fn get_result(&self, request_id: &str) -> anyhow::Result<Option<super::InferenceResponse>> {
         let results = self.results.read().await;
         Ok(results.get(request_id).cloned())

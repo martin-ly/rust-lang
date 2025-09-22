@@ -14,6 +14,7 @@ use super::connection::DatabaseManager;
 // use super::models::*;
 
 /// ORM管理器
+#[allow(unused)]
 pub struct OrmManager {
     db_manager: Arc<DatabaseManager>,
     entities: Arc<RwLock<HashMap<String, EntityMetadata>>>,
@@ -22,6 +23,7 @@ pub struct OrmManager {
 
 /// 实体元数据
 #[derive(Debug, Clone)]
+#[allow(unused)]
 pub struct EntityMetadata {
     pub name: String,
     pub table_name: String,
@@ -507,20 +509,20 @@ impl OrmManager {
     }
 
     /// 开始事务
-    pub async fn begin_transaction(&self) -> Result<Transaction> {
+    pub async fn begin_transaction(&self) -> Result<OrmTransaction> {
         // TODO: 实现事务开始
-        Ok(Transaction::new())
+        Ok(OrmTransaction::new())
     }
 }
 
 /// 事务
 #[derive(Debug)]
-pub struct Transaction {
+pub struct OrmTransaction {
     id: Uuid,
     is_active: bool,
 }
 
-impl Transaction {
+impl OrmTransaction {
     pub fn new() -> Self {
         Self {
             id: Uuid::new_v4(),
