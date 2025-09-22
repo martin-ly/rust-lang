@@ -15,6 +15,9 @@ categories = ["science", "algorithms", "mathematics", "simulation"]
 readme = "README.md"
 rust-version = "1.90"
 
+# Rust 1.90 新特性配置
+# Profile configurations are managed at workspace root level
+
 [dependencies]
 # 序列化和反序列化
 serde = { workspace = true }
@@ -35,19 +38,40 @@ chrono = { workspace = true }
 fastrand = "2.3.0"
 
 # 图算法
-petgraph = { workspace = true }
+petgraph = { workspace = true, optional = true }
 
 # 已裁剪：并行计算
 
-# 数值计算
+# 数值计算 - 更新到最新版本 (2025年最新)
 num-traits = "0.2.19"
 num-derive = "0.3.3"
+num-complex = { version = "0.4.5", optional = true }
+num-bigint = { version = "0.4.4", optional = true }
 
-# 统计计算
+# 统计计算 - 使用最新版本
 statrs = "0.18.0"
+nalgebra = { version = "0.33.0", optional = true }
+approx = { version = "0.5.1", optional = true }
 
-# 数学函数
+# 数学函数 - 利用 Rust 1.90 的 libm 优化
 libm = "0.2.15"
+
+# 新增：现代机器学习库集成
+candle-core = { version = "0.7.0", optional = true }
+candle-nn = { version = "0.7.0", optional = true }
+candle-transformers = { version = "0.7.0", optional = true }
+
+# 新增：高性能张量计算
+ndarray = { version = "0.15.6", optional = true }
+ndarray-stats = { version = "0.5.1", optional = true }
+
+# 新增：计算机视觉支持 (基于Kornia-rs架构)
+image = { version = "0.24.7", optional = true }
+imageproc = { version = "0.24.0", optional = true }
+
+# 高级数学库 - 暂时禁用以避免安全漏洞
+# nalgebra-lapack = { version = "0.13.0", optional = true }
+# lapack-src = { version = "0.8.0", optional = true }
 
 # 运行时/示例适配基础依赖（对齐到 workspace 或最新主线）
 # async-std 已移除，使用 tokio 替代 (async-std 已弃用)
@@ -75,19 +99,58 @@ doc-comment = "0.3.3"
 loom = "0.7.2"
 
 [features]
-default = ["std"]
+default = ["std", "enhanced-math", "advanced-algorithms"]
 std = []
 no-std = []
-## 已裁剪：async/visualization/benchmarks/parallel 等特性
+
+# Rust 1.90 增强特性
+enhanced-math = ["nalgebra", "num-complex", "num-bigint"]
+advanced-algorithms = ["petgraph"]
+parallel-computing = []
+simd-optimization = []
+
+# 新增：现代机器学习特性
+candle-ml = ["candle-core", "candle-nn", "candle-transformers"]
+tensor-computing = ["ndarray", "ndarray-stats"]
+computer-vision = ["image", "imageproc"]
 
 # 运行时/示例适配（通过 features 选择，依赖为可选）
 tokio-adapter = ["dep:tokio", "dep:tokio-util", "dep:async-channel"]
 tower-examples = ["dep:tower", "dep:http", "dep:hyper"]
 
-# 已裁剪：nalgebra / plotly / wasm-bindgen 及 wasm 目标依赖
+# 高级数学和科学计算特性
+# lapack-integration = ["nalgebra-lapack", "lapack-src"]  # 暂时禁用以避免安全漏洞
+high-precision = ["num-bigint"]
+complex-analysis = ["num-complex"]
+
+# 可视化特性（可选）
+visualization = []
+plotting = []
+
+# 性能优化特性
+vectorization = []
+gpu-acceleration = []
+
+# 完整功能
+full = [
+    "enhanced-math", 
+    "advanced-algorithms", 
+    "parallel-computing",
+    # "lapack-integration",  # 暂时禁用以避免安全漏洞
+    "high-precision",
+    "complex-analysis",
+    "visualization",
+    "candle-ml",
+    "tensor-computing",
+    "computer-vision"
+]
 
 [[bench]]
 name = "concurrency_bench"
+harness = false
+
+[[bench]]
+name = "rust_190_performance_bench"
 harness = false
 
 # Profile configurations are managed at workspace root level

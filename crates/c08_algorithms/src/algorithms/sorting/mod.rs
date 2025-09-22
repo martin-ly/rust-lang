@@ -349,7 +349,7 @@ impl ComprehensiveSortingBenchmark {
                 report.push_str(&format!("  分布式执行: {:?} (数据大小: {})\n", perf.result.execution_time, perf.data_size));
             }
             
-            report.push_str("\n");
+            report.push('\n');
         }
 
         // 性能对比分析

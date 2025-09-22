@@ -89,7 +89,7 @@ impl GeneratorAlgorithms {
         std::iter::from_fn(move || {
             let current = a;
             a = b;
-            b = current + b;
+            b += current;
             Some(current)
         })
     }
@@ -103,7 +103,7 @@ impl GeneratorAlgorithms {
         
         std::iter::from_fn(move || {
             loop {
-                if primes.iter().all(|&p| candidate % p != 0) {
+                if primes.iter().all(|&p| !candidate.is_multiple_of(p)) {
                     primes.push(candidate);
                     let result = candidate;
                     candidate += 1;

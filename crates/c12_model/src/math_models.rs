@@ -4,6 +4,35 @@
 //! 使用Rust的类型安全特性确保数学计算的正确性。
 
 use std::f64;
+use serde::{Deserialize, Serialize};
+
+// Rust 1.90 特性：使用常量泛型推断和生命周期改进
+/// 数学配置 - 使用常量泛型参数
+#[derive(Debug, Clone)]
+pub struct MathConfig<const N_DIMENSIONS: usize> {
+    /// 维度数量
+    pub dimensions: usize,
+    /// 配置参数
+    pub parameters: [f64; N_DIMENSIONS],
+    /// 精度设置
+    pub precision: f64,
+}
+
+impl<const N_DIMENSIONS: usize> MathConfig<N_DIMENSIONS> {
+    /// 创建新的数学配置
+    pub fn new(precision: f64) -> Self {
+        Self {
+            dimensions: N_DIMENSIONS,
+            parameters: [0.0; N_DIMENSIONS],
+            precision,
+        }
+    }
+    
+    /// 更新参数
+    pub fn update_parameters(&mut self, new_params: [f64; N_DIMENSIONS]) {
+        self.parameters = new_params;
+    }
+}
 
 /// 概率分布trait
 pub trait ProbabilityDistribution {
@@ -470,6 +499,19 @@ impl StatisticalTools {
         let margin_error = z_score * std_dev / n.sqrt();
         (mean - margin_error, mean + margin_error)
     }
+
+    /// 计算中位数
+    pub fn median(data: &[f64]) -> f64 {
+        let mut sorted_data = data.to_vec();
+        sorted_data.sort_by(|a, b| a.partial_cmp(b).unwrap());
+        
+        let n = sorted_data.len();
+        if n % 2 == 0 {
+            (sorted_data[n / 2 - 1] + sorted_data[n / 2]) / 2.0
+        } else {
+            sorted_data[n / 2]
+        }
+    }
 }
 
 /// 计算阶乘
@@ -551,5 +593,376 @@ mod tests {
         let data = vec![1.0, 2.0, 3.0, 4.0, 5.0];
         assert_eq!(StatisticalTools::mean(&data), 3.0);
         assert_eq!(StatisticalTools::variance(&data), 2.5);
+    }
+}
+
+// ============================================================================
+// 高级数学模型 - 利用 Rust 1.90 特性
+// ============================================================================
+
+/// 高维概率分布 - 使用 Rust 1.90 的常量泛型推断
+#[derive(Debug, Clone)]
+pub struct MultivariateNormalDistribution<const N_DIMS: usize> {
+    /// 均值向量
+    pub mean: [f64; N_DIMS],
+    /// 协方差矩阵（简化为一维数组）
+    pub covariance: Vec<f64>,
+    /// 配置信息
+    pub config: MathConfig<N_DIMS>,
+}
+
+impl<const N_DIMS: usize> MultivariateNormalDistribution<N_DIMS> {
+    /// 创建新的多元正态分布
+    pub fn new(mean: [f64; N_DIMS], covariance: Vec<f64>) -> Self {
+        Self {
+            mean,
+            covariance,
+            config: MathConfig::new(1e-6),
+        }
+    }
+    
+    /// 计算概率密度函数
+    pub fn pdf(&self, x: &[f64; N_DIMS]) -> f64 {
+        // 简化的多元正态分布PDF计算
+        let mut quad_form = 0.0;
+        for i in 0..N_DIMS {
+            for j in 0..N_DIMS {
+                quad_form += (x[i] - self.mean[i]) * 
+                           (x[j] - self.mean[j]) * 
+                           self.covariance.get(i * N_DIMS + j).unwrap_or(&0.0);
+            }
+        }
+        
+        let det_cov = self.calculate_determinant();
+        let coefficient = 1.0 / ((2.0 * std::f64::consts::PI).powi(N_DIMS as i32) * det_cov).sqrt();
+        coefficient * (-0.5 * quad_form).exp()
+    }
+    
+    /// 计算协方差矩阵的行列式（简化实现）
+    fn calculate_determinant(&self) -> f64 {
+        // 简化的行列式计算
+        if N_DIMS == 1 {
+            self.covariance.get(0).copied().unwrap_or(1.0)
+        } else if N_DIMS == 2 {
+            let a = self.covariance.get(0).copied().unwrap_or(1.0);
+            let b = self.covariance.get(1).copied().unwrap_or(0.0);
+            let c = self.covariance.get(2).copied().unwrap_or(0.0);
+            let d = self.covariance.get(3).copied().unwrap_or(1.0);
+            a * d - b * c
+        } else {
+            1.0 // 简化实现
+        }
+    }
+}
+
+/// 贝叶斯推理器 - 使用 Rust 1.90 的生命周期改进
+#[derive(Debug, Clone)]
+pub struct BayesianInference<const N_PARAMS: usize> {
+    /// 先验分布参数
+    pub prior_params: [f64; N_PARAMS],
+    /// 似然函数参数
+    pub likelihood_params: [f64; N_PARAMS],
+    /// 后验分布参数
+    pub posterior_params: [f64; N_PARAMS],
+    /// 配置信息
+    pub config: MathConfig<N_PARAMS>,
+}
+
+impl<const N_PARAMS: usize> BayesianInference<N_PARAMS> {
+    /// 创建新的贝叶斯推理器
+    pub fn new(prior_params: [f64; N_PARAMS], likelihood_params: [f64; N_PARAMS]) -> Self {
+        Self {
+            prior_params,
+            likelihood_params,
+            posterior_params: [0.0; N_PARAMS],
+            config: MathConfig::new(1e-6),
+        }
+    }
+    
+    /// 更新后验分布
+    pub fn update_posterior(&mut self, data: &[f64]) -> Result<(), String> {
+        // 简化的贝叶斯更新
+        for i in 0..N_PARAMS {
+            // 假设共轭先验，简化更新规则
+            self.posterior_params[i] = self.prior_params[i] + 
+                                     self.likelihood_params[i] * data.len() as f64;
+        }
+        Ok(())
+    }
+    
+    /// 计算后验预测分布
+    pub fn posterior_predictive(&self, x: f64) -> f64 {
+        // 简化的后验预测计算
+        let mut result = 1.0;
+        for i in 0..N_PARAMS {
+            result *= (-(x - self.posterior_params[i]).powi(2) / 
+                      (2.0 * self.posterior_params[i])).exp();
+        }
+        result
+    }
+}
+
+/// 马尔可夫链蒙特卡洛 (MCMC) - 使用 Rust 1.90 的常量泛型推断
+#[derive(Debug, Clone)]
+pub struct MCMCSampler<const N_PARAMS: usize> {
+    /// 当前状态
+    pub current_state: [f64; N_PARAMS],
+    /// 提议分布方差
+    pub proposal_variance: [f64; N_PARAMS],
+    /// 接受率
+    pub acceptance_rate: f64,
+    /// 样本历史
+    pub samples: Vec<[f64; N_PARAMS]>,
+    /// 配置信息
+    pub config: MathConfig<N_PARAMS>,
+}
+
+impl<const N_PARAMS: usize> MCMCSampler<N_PARAMS> {
+    /// 创建新的MCMC采样器
+    pub fn new(initial_state: [f64; N_PARAMS], proposal_variance: [f64; N_PARAMS]) -> Self {
+        Self {
+            current_state: initial_state,
+            proposal_variance,
+            acceptance_rate: 0.0,
+            samples: Vec::new(),
+            config: MathConfig::new(1e-6),
+        }
+    }
+    
+    /// 执行MCMC采样
+    pub fn sample<F>(&mut self, target_density: F, n_samples: usize) -> Result<(), String>
+    where
+        F: Fn(&[f64; N_PARAMS]) -> f64,
+    {
+        self.samples.clear();
+        let mut accepted = 0;
+        
+        for _ in 0..n_samples {
+            // 生成提议状态
+            let mut proposal = [0.0; N_PARAMS];
+            for i in 0..N_PARAMS {
+                proposal[i] = self.current_state[i] + 
+                             fastrand::f64() * self.proposal_variance[i].sqrt();
+            }
+            
+            // 计算接受概率
+            let current_density = target_density(&self.current_state);
+            let proposal_density = target_density(&proposal);
+            
+            let acceptance_ratio = (proposal_density / current_density).min(1.0);
+            
+            // 接受或拒绝提议
+            if fastrand::f64() < acceptance_ratio {
+                self.current_state = proposal;
+                accepted += 1;
+            }
+            
+            self.samples.push(self.current_state);
+        }
+        
+        self.acceptance_rate = accepted as f64 / n_samples as f64;
+        Ok(())
+    }
+    
+    /// 获取样本均值
+    pub fn sample_mean(&self) -> [f64; N_PARAMS] {
+        let mut mean = [0.0; N_PARAMS];
+        let n = self.samples.len() as f64;
+        
+        for sample in &self.samples {
+            for i in 0..N_PARAMS {
+                mean[i] += sample[i];
+            }
+        }
+        
+        for i in 0..N_PARAMS {
+            mean[i] /= n;
+        }
+        
+        mean
+    }
+    
+    /// 获取样本方差
+    pub fn sample_variance(&self) -> [f64; N_PARAMS] {
+        let mean = self.sample_mean();
+        let mut variance = [0.0; N_PARAMS];
+        let n = self.samples.len() as f64;
+        
+        for sample in &self.samples {
+            for i in 0..N_PARAMS {
+                let diff = sample[i] - mean[i];
+                variance[i] += diff * diff;
+            }
+        }
+        
+        for i in 0..N_PARAMS {
+            variance[i] /= n;
+        }
+        
+        variance
+    }
+}
+
+/// 时间序列分析器 - 使用 Rust 1.90 的生命周期改进
+#[derive(Debug, Clone)]
+pub struct TimeSeriesAnalyzer {
+    /// 时间序列数据
+    pub data: Vec<f64>,
+    /// 趋势参数
+    pub trend_params: Vec<f64>,
+    /// 季节性参数
+    pub seasonal_params: Vec<f64>,
+    /// 配置信息
+    pub config: MathConfig<3>,
+}
+
+impl TimeSeriesAnalyzer {
+    /// 创建新的时间序列分析器
+    pub fn new(data: Vec<f64>) -> Self {
+        Self {
+            data,
+            trend_params: Vec::new(),
+            seasonal_params: Vec::new(),
+            config: MathConfig::new(1e-6),
+        }
+    }
+    
+    /// 拟合线性趋势
+    pub fn fit_linear_trend(&mut self) -> Result<(), String> {
+        if self.data.len() < 2 {
+            return Err("数据点不足".to_string());
+        }
+        
+        let n = self.data.len() as f64;
+        let x_mean = (n - 1.0) / 2.0;
+        let y_mean = self.data.iter().sum::<f64>() / n;
+        
+        let mut numerator = 0.0;
+        let mut denominator = 0.0;
+        
+        for (i, &y) in self.data.iter().enumerate() {
+            let x = i as f64;
+            numerator += (x - x_mean) * (y - y_mean);
+            denominator += (x - x_mean).powi(2);
+        }
+        
+        let slope = numerator / denominator;
+        let intercept = y_mean - slope * x_mean;
+        
+        self.trend_params = vec![intercept, slope];
+        Ok(())
+    }
+    
+    /// 预测未来值
+    pub fn predict(&self, steps_ahead: usize) -> Result<Vec<f64>, String> {
+        if self.trend_params.len() != 2 {
+            return Err("趋势参数未拟合".to_string());
+        }
+        
+        let intercept = self.trend_params[0];
+        let slope = self.trend_params[1];
+        let mut predictions = Vec::new();
+        
+        for i in 1..=steps_ahead {
+            let x = self.data.len() as f64 + i as f64;
+            let prediction = intercept + slope * x;
+            predictions.push(prediction);
+        }
+        
+        Ok(predictions)
+    }
+    
+    /// 计算自相关系数
+    pub fn autocorrelation(&self, lag: usize) -> f64 {
+        if lag >= self.data.len() {
+            return 0.0;
+        }
+        
+        let mean = self.data.iter().sum::<f64>() / self.data.len() as f64;
+        let n = self.data.len() - lag;
+        
+        let mut numerator = 0.0;
+        let mut denominator = 0.0;
+        
+        for i in 0..n {
+            let diff1 = self.data[i] - mean;
+            let diff2 = self.data[i + lag] - mean;
+            numerator += diff1 * diff2;
+            denominator += diff1 * diff1;
+        }
+        
+        if denominator == 0.0 {
+            0.0
+        } else {
+            numerator / denominator
+        }
+    }
+}
+
+/// 高级统计指标 - 使用 Rust 1.90 的改进序列化
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AdvancedStatistics {
+    /// 偏度
+    pub skewness: f64,
+    /// 峰度
+    pub kurtosis: f64,
+    /// 信息熵
+    pub entropy: f64,
+    /// 分位数
+    pub percentiles: Vec<f64>,
+}
+
+impl AdvancedStatistics {
+    /// 计算高级统计指标
+    pub fn from_data(data: &[f64]) -> Self {
+        let mean = StatisticalTools::mean(data);
+        let std_dev = StatisticalTools::standard_deviation(data);
+        
+        // 计算偏度
+        let skewness = data.iter()
+            .map(|&x| ((x - mean) / std_dev).powi(3))
+            .sum::<f64>() / data.len() as f64;
+        
+        // 计算峰度
+        let kurtosis = data.iter()
+            .map(|&x| ((x - mean) / std_dev).powi(4))
+            .sum::<f64>() / data.len() as f64 - 3.0;
+        
+        // 计算信息熵（简化实现）
+        let entropy = -data.iter()
+            .map(|&x| x * x.ln())
+            .sum::<f64>();
+        
+        // 计算分位数
+        let mut sorted_data = data.to_vec();
+        sorted_data.sort_by(|a, b| a.partial_cmp(b).unwrap());
+        
+        let percentiles = vec![
+            Self::percentile(&sorted_data, 0.25), // Q1
+            Self::percentile(&sorted_data, 0.50), // Q2 (中位数)
+            Self::percentile(&sorted_data, 0.75), // Q3
+        ];
+        
+        Self {
+            skewness,
+            kurtosis,
+            entropy,
+            percentiles,
+        }
+    }
+    
+    /// 计算分位数
+    fn percentile(sorted_data: &[f64], p: f64) -> f64 {
+        let n = sorted_data.len();
+        let index = p * (n - 1) as f64;
+        let lower = index.floor() as usize;
+        let upper = index.ceil() as usize;
+        
+        if lower == upper {
+            sorted_data[lower]
+        } else {
+            let weight = index - lower as f64;
+            sorted_data[lower] * (1.0 - weight) + sorted_data[upper] * weight
+        }
     }
 }

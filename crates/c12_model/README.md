@@ -1,21 +1,21 @@
-# c18_model - Rust 1.89 建模与形式方法
+# c12_model - Rust 1.90 建模与形式方法
 
-[![Rust](https://img.shields.io/badge/rust-1.89+-orange.svg)](https://www.rust-lang.org/)
+[![Rust](https://img.shields.io/badge/rust-1.90+-orange.svg)](https://www.rust-lang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Crates.io](https://img.shields.io/crates/v/c18_model.svg)](https://crates.io/crates/c18_model)
 [![Documentation](https://docs.rs/c18_model/badge.svg)](https://docs.rs/c18_model)
 
-一个基于 Rust 1.89 的现代化建模与形式方法库，聚焦核心建模技术，涵盖排队论、机器学习、形式化方法、数学建模与性能模型。项目采用最小稳定内核设计，便于学习与集成，同时提供完整的理论背景和实践指导。
+一个基于 Rust 1.90 的现代化建模与形式方法库，聚焦核心建模技术，涵盖排队论、机器学习、形式化方法、数学建模与性能模型。项目采用最小稳定内核设计，充分利用 Rust 1.90 的新特性，便于学习与集成，同时提供完整的理论背景和实践指导。
 
 ## 🚀 主要特性
 
-### 🔧 Rust 1.89 语言特性集成
+### 🔧 Rust 1.90 语言特性集成
 
-- **生命周期语法检查增强** - 在模型生命周期管理中应用明确的生命周期标注
-- **常量泛型推断** - 支持不同维度的 `Model<const N: usize>` 结构体
-- **FFI 改进支持** - 支持 128 位整数，增强与 C 语言数学库的互操作
-- **API 稳定性改进** - 使用 `Result::flatten` 简化模型操作中的错误处理
-- **跨平台文档测试改进** - 支持平台特定的数值计算测试
+- **显式推断的常量参数稳定化** - 在模型配置中使用 `_` 进行常量参数推断
+- **生命周期语法一致性检查** - 在模型生命周期管理中应用明确的生命周期标注
+- **函数指针比较扩展检查** - 增强模型验证中的函数指针比较安全性
+- **标准库 API 增强** - 利用匿名管道等新 API 优化进程间通信
+- **编译器优化与平台支持扩展** - 利用最新的编译器优化提升模型计算性能
 
 ### 📊 系统建模
 

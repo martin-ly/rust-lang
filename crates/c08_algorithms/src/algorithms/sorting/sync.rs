@@ -360,7 +360,7 @@ fn radix_sort(arr: &mut [i32]) {
 fn counting_sort_by_digit(arr: &mut [i32], exp: i32) {
     let n = arr.len();
     let mut output = vec![0; n];
-    let mut count = vec![0; 10];
+    let mut count = [0; 10];
     
     // 统计每个数字的出现次数
     for &num in arr.iter() {
@@ -380,9 +380,7 @@ fn counting_sort_by_digit(arr: &mut [i32], exp: i32) {
     }
     
     // 复制回原数组
-    for i in 0..n {
-        arr[i] = output[i];
-    }
+    arr[..n].copy_from_slice(&output[..n]);
 }
 
 /// 计数排序算法
@@ -437,9 +435,7 @@ fn counting_sort(arr: &mut [i32]) {
     }
     
     // 复制回原数组
-    for i in 0..arr.len() {
-        arr[i] = output[i];
-    }
+    arr.copy_from_slice(&output[..arr.len()]);
 }
 
 /// 桶排序算法

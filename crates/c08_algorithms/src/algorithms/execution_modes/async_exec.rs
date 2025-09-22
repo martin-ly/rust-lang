@@ -418,6 +418,12 @@ pub struct AsyncPipeline<T> {
     stages: Vec<Box<dyn Fn(T) -> Pin<Box<dyn Future<Output = Result<T, Box<dyn std::error::Error + Send + Sync>>> + Send>> + Send + Sync>>,
 }
 
+impl<T> Default for AsyncPipeline<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<T> AsyncPipeline<T> {
     /// 创建新的异步管道
     pub fn new() -> Self {

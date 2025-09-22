@@ -65,6 +65,12 @@ pub struct DistributedExecutor {
     results: Arc<Mutex<HashMap<String, DistributedTaskResult<serde_json::Value>>>>,
 }
 
+impl Default for DistributedExecutor {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl DistributedExecutor {
     /// 创建新的分布式执行器
     pub fn new() -> Self {
@@ -491,6 +497,12 @@ impl DistributedBenchmarkResults {
 pub struct DistributedLoadBalancer {
     nodes: Arc<Mutex<HashMap<String, NodeInfo>>>,
     node_loads: Arc<Mutex<HashMap<String, usize>>>,
+}
+
+impl Default for DistributedLoadBalancer {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl DistributedLoadBalancer {

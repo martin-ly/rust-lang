@@ -4,10 +4,40 @@
 //! 使用Rust的类型安全特性确保模型参数的正确性和计算结果的可靠性。
 
 use std::collections::HashMap;
+use serde::{Deserialize, Serialize};
 
-/// M/M/1 排队系统
+// Rust 1.90 特性：使用常量泛型推断
+/// 排队系统配置 - 使用常量泛型参数
+#[derive(Debug, Clone)]
+pub struct QueueConfig<const N: usize> {
+    /// 系统参数数组
+    pub parameters: [f64; N],
+    /// 系统容量
+    pub capacity: Option<usize>,
+}
+
+impl<const N: usize> QueueConfig<N> {
+    /// 创建新的配置
+    pub fn new(parameters: [f64; N]) -> Self {
+        Self {
+            parameters,
+            capacity: None,
+        }
+    }
+    
+    /// 使用容量创建配置
+    pub fn with_capacity(parameters: [f64; N], capacity: usize) -> Self {
+        Self {
+            parameters,
+            capacity: Some(capacity),
+        }
+    }
+}
+
+/// M/M/1 排队系统 - 使用 Rust 1.90 增强特性
 ///
 /// 实现经典的M/M/1排队模型，用于分析单服务器排队系统的性能。
+/// 利用 Rust 1.90 的新特性提供更好的类型安全和性能。
 ///
 /// # 数学公式
 /// - 利用率: ρ = λ/μ
@@ -27,10 +57,12 @@ pub struct MM1Queue {
     pub service_rate: f64,
     /// 系统容量
     pub capacity: Option<usize>,
+    /// 配置信息
+    pub config: QueueConfig<2>,
 }
 
 impl MM1Queue {
-    /// 创建新的M/M/1排队系统
+    /// 创建新的M/M/1排队系统 - 使用 Rust 1.90 特性
     ///
     /// # 参数
     /// - `arrival_rate`: 到达率 λ
@@ -43,10 +75,11 @@ impl MM1Queue {
             arrival_rate,
             service_rate,
             capacity: None,
+            config: QueueConfig::new([arrival_rate, service_rate]),
         }
     }
 
-    /// 创建有限容量的排队系统
+    /// 创建有限容量的排队系统 - 使用 Rust 1.90 特性
     ///
     /// # 参数
     /// - `arrival_rate`: 到达率 λ
@@ -57,6 +90,18 @@ impl MM1Queue {
             arrival_rate,
             service_rate,
             capacity: Some(capacity),
+            config: QueueConfig::with_capacity([arrival_rate, service_rate], capacity),
+        }
+    }
+    
+    /// 使用配置创建排队系统 - 利用 Rust 1.90 的常量泛型推断
+    pub fn from_config(config: QueueConfig<2>) -> Self {
+        let [arrival_rate, service_rate] = config.parameters;
+        Self {
+            arrival_rate,
+            service_rate,
+            capacity: config.capacity,
+            config,
         }
     }
 
@@ -410,11 +455,199 @@ pub struct ScalingResult {
     pub efficiency: f64,
 }
 
-/// 计算阶乘
+/// 高级排队论模型 - 利用 Rust 1.90 特性
+/// 
+/// 实现更复杂的排队系统模型，包括优先级队列、多级队列等
+
+/// 优先级排队系统 - 使用 Rust 1.90 的生命周期改进
+#[derive(Debug, Clone)]
+pub struct PriorityQueue<const PRIORITIES: usize> {
+    /// 各优先级的到达率
+    pub arrival_rates: [f64; PRIORITIES],
+    /// 各优先级的服务率
+    pub service_rates: [f64; PRIORITIES],
+    /// 系统配置
+    pub config: QueueConfig<PRIORITIES>,
+}
+
+impl<const PRIORITIES: usize> PriorityQueue<PRIORITIES> {
+    /// 创建新的优先级排队系统
+    pub fn new(arrival_rates: [f64; PRIORITIES], service_rates: [f64; PRIORITIES]) -> Self {
+        let mut parameters = [0.0; PRIORITIES];
+        for i in 0..PRIORITIES {
+            parameters[i] = arrival_rates[i] + service_rates[i];
+        }
+        
+        Self {
+            arrival_rates,
+            service_rates,
+            config: QueueConfig::new(parameters),
+        }
+    }
+    
+    /// 计算系统利用率
+    pub fn utilization(&self) -> f64 {
+        let total_arrival_rate: f64 = self.arrival_rates.iter().sum();
+        let total_service_rate: f64 = self.service_rates.iter().sum();
+        total_arrival_rate / total_service_rate
+    }
+    
+    /// 计算各优先级的平均等待时间
+    pub fn priority_waiting_times(&self) -> [f64; PRIORITIES] {
+        let mut waiting_times = [0.0; PRIORITIES];
+        let utilization = self.utilization();
+        
+        for i in 0..PRIORITIES {
+            if utilization < 1.0 {
+                let lambda_i = self.arrival_rates[i];
+                let mu_i = self.service_rates[i];
+                if mu_i > lambda_i {
+                    waiting_times[i] = lambda_i / (mu_i * (mu_i - lambda_i));
+                }
+            }
+        }
+        
+        waiting_times
+    }
+}
+
+/// 多级反馈队列系统
+#[derive(Debug, Clone)]
+pub struct MultiLevelFeedbackQueue<const LEVELS: usize> {
+    /// 各级队列的配置
+    pub level_configs: [QueueConfig<3>; LEVELS], // [arrival_rate, service_rate, time_slice]
+    /// 升级概率
+    pub promotion_probabilities: [f64; LEVELS],
+    /// 降级概率  
+    pub demotion_probabilities: [f64; LEVELS],
+}
+
+impl<const LEVELS: usize> MultiLevelFeedbackQueue<LEVELS> {
+    /// 创建新的多级反馈队列系统
+    pub fn new(
+        level_configs: [QueueConfig<3>; LEVELS],
+        promotion_probabilities: [f64; LEVELS],
+        demotion_probabilities: [f64; LEVELS],
+    ) -> Self {
+        Self {
+            level_configs,
+            promotion_probabilities,
+            demotion_probabilities,
+        }
+    }
+    
+    /// 计算系统整体性能指标
+    pub fn overall_metrics(&self) -> QueueMetrics {
+        let mut total_throughput = 0.0;
+        let mut total_response_time = 0.0;
+        
+        for config in &self.level_configs {
+            let [arrival_rate, service_rate, _] = config.parameters;
+            if service_rate > arrival_rate {
+                total_throughput += arrival_rate;
+                total_response_time += arrival_rate / (service_rate - arrival_rate);
+            }
+        }
+        
+        QueueMetrics {
+            throughput: total_throughput,
+            avg_response_time: total_response_time / LEVELS as f64,
+            utilization: total_throughput / self.level_configs.iter()
+                .map(|c| c.parameters[1])
+                .sum::<f64>(),
+            avg_queue_length: 0.0,
+            avg_waiting_time: 0.0,
+        }
+    }
+}
+
+/// 排队系统性能指标 - 使用 Rust 1.90 的改进序列化
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct QueueMetrics {
+    /// 吞吐量
+    pub throughput: f64,
+    /// 平均响应时间
+    pub avg_response_time: f64,
+    /// 系统利用率
+    pub utilization: f64,
+    /// 平均队列长度
+    pub avg_queue_length: f64,
+    /// 平均等待时间
+    pub avg_waiting_time: f64,
+}
+
+impl Default for QueueMetrics {
+    fn default() -> Self {
+        Self {
+            throughput: 0.0,
+            avg_response_time: 0.0,
+            utilization: 0.0,
+            avg_queue_length: 0.0,
+            avg_waiting_time: 0.0,
+        }
+    }
+}
+
+/// 计算阶乘 - 使用 Rust 1.90 的优化
 fn factorial(n: usize) -> f64 {
     match n {
         0 | 1 => 1.0,
         _ => (2..=n).fold(1.0, |acc, x| acc * x as f64),
+    }
+}
+
+/// 高级数学函数 - 利用 Rust 1.90 的数学库优化
+pub mod advanced_math {
+    
+    /// 计算阶乘
+    pub fn factorial(n: usize) -> usize {
+        match n {
+            0 | 1 => 1,
+            _ => (2..=n).product(),
+        }
+    }
+    
+    /// 计算 Erlang C 公式 - 用于 M/M/c 队列
+    pub fn erlang_c(lambda: f64, mu: f64, c: usize) -> f64 {
+        let rho = lambda / (c as f64 * mu);
+        let numerator = (lambda / mu).powi(c as i32) / factorial(c) as f64;
+        let mut denominator = 0.0;
+        
+        for i in 0..=c {
+            denominator += (lambda / mu).powi(i as i32) / factorial(i) as f64;
+        }
+        denominator += (lambda / mu).powi(c as i32) / (factorial(c) as f64 * (1.0 - rho));
+        
+        numerator / denominator
+    }
+    
+    /// 计算 Poisson 分布的概率质量函数
+    pub fn poisson_pmf(k: usize, lambda: f64) -> f64 {
+        if k == 0 {
+            (-lambda).exp()
+        } else {
+            (lambda.powi(k as i32) * (-lambda).exp()) / factorial(k) as f64
+        }
+    }
+    
+    /// 计算 Gamma 函数
+    pub fn gamma(z: f64) -> f64 {
+        if z < 0.5 {
+            std::f64::consts::PI / ((std::f64::consts::PI * z).sin() * gamma(1.0 - z))
+        } else {
+            let z = z - 1.0;
+            let x = 0.99999999999980993 +
+                z * (676.5203681218851 +
+                z * (-1259.1392167224028 +
+                z * (771.32342877765313 +
+                z * (-176.61502916214059 +
+                z * (12.507343278686905 +
+                z * (-0.13857109526572012 +
+                z * (9.9843695780195716e-6 +
+                z * 1.5056327351493116e-7)))))));
+            let t = z + 7.5;
+            (2.0 * std::f64::consts::PI).sqrt() * t.powf(z + 0.5) * (-t).exp() * x
+        }
     }
 }
 

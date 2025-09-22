@@ -1,6 +1,6 @@
 # 贡献指南
 
-感谢您对 c18_model 项目的关注！本指南将帮助您了解如何为项目做出贡献。
+感谢您对 c12_model 项目的关注！本指南将帮助您了解如何为项目做出贡献。
 
 ## 贡献方式
 
@@ -8,7 +8,7 @@
 
 如果您发现了 bug 或有功能请求，请：
 
-1. 检查 [Issues](https://github.com/c18model/c18_model/issues) 是否已存在
+1. 检查 [Issues](https://github.com/c12model/c12_model/issues) 是否已存在
 2. 创建新的 Issue，包含：
    - 清晰的问题描述
    - 复现步骤
@@ -24,14 +24,14 @@
 2. 克隆您的 fork：
 
    ```bash
-   git clone https://github.com/your-username/c18_model.git
-   cd c18_model
+   git clone https://github.com/your-username/c12_model.git
+   cd c12_model
    ```
 
 3. 添加上游仓库：
 
    ```bash
-   git remote add upstream https://github.com/c18model/c18_model.git
+   git remote add upstream https://github.com/c12model/c12_model.git
    ```
 
 #### 开发流程
@@ -121,7 +121,7 @@
    /// 
    /// # 示例
    /// ```
-   /// use c18_model::MM1Queue;
+   /// use c12_model::MM1Queue;
    /// let queue = MM1Queue::new(1.0, 2.0);
    /// assert_eq!(queue.utilization(), 0.5);
    /// ```
@@ -153,7 +153,7 @@
 1. **使用统一的错误类型**：
 
    ```rust
-   use c18_model::{ModelError, ErrorHandler, Result as ModelResult};
+   use c12_model::{ModelError, ErrorHandler, Result as ModelResult};
    
    fn my_function() -> ModelResult<f64> {
        if condition {
@@ -183,7 +183,7 @@
 ## 项目结构
 
 ```text
-c18_model/
+c12_model/
 ├── src/                    # 源代码
 │   ├── lib.rs             # 库入口
 │   ├── config.rs          # 配置管理
@@ -320,7 +320,7 @@ Closes #123
 
 ## 致谢
 
-感谢所有为 c18_model 项目做出贡献的开发者！您的贡献使这个项目变得更好。
+感谢所有为 c12_model 项目做出贡献的开发者！您的贡献使这个项目变得更好。
 
 ---
 

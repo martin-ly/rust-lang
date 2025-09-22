@@ -13,6 +13,15 @@ pub mod ml_models; // 机器学习模型
 pub mod performance_models;
 pub mod queueing_models; // 排队论模型 // 性能分析模型
 
+// Rust 1.90 新特性模块
+pub mod rust_190_features; // Rust 1.90 新特性实现
+
+// 现代机器学习模块
+pub mod modern_ml; // 现代机器学习库集成
+
+// 计算机视觉模块
+pub mod computer_vision; // 基于Kornia-rs架构的计算机视觉
+
 // 工具和实用程序
 pub mod utils; // 通用工具函数
 // 已裁剪：可视化与基准测试模块
@@ -24,10 +33,14 @@ pub mod error; // 统一错误处理
 // 重新导出主要类型和trait
 pub use queueing_models::{
     MM1Queue, MMcQueue, PerformanceAnalyzer, ReliabilityAnalyzer, ScalabilityAnalyzer,
-    ScalingResult, SimulationResult,
+    ScalingResult, SimulationResult, QueueConfig, PriorityQueue, MultiLevelFeedbackQueue,
+    QueueMetrics, advanced_math,
 };
 
-pub use ml_models::{DecisionTree, DecisionTreeNode, KMeans, LinearRegression, LogisticRegression};
+pub use ml_models::{
+    DecisionTree, DecisionTreeNode, KMeans, LinearRegression, LogisticRegression,
+    MLConfig, SupportVectorMachine, NeuralNetwork, ActivationFunction, KernelType, MLMetrics,
+};
 
 pub use formal_models::{
     FiniteStateMachine,
@@ -50,7 +63,8 @@ pub use formal_models::{
 pub use math_models::{
     ExponentialDistribution, GradientDescentOptimizer, IntegrationMethod, MonteCarloSimulator,
     NormalDistribution, NumericalIntegrator, PoissonDistribution, ProbabilityDistribution,
-    StatisticalTools,
+    StatisticalTools, MathConfig, MultivariateNormalDistribution, BayesianInference,
+    MCMCSampler, TimeSeriesAnalyzer, AdvancedStatistics,
 };
 
 pub use performance_models::{
@@ -72,6 +86,26 @@ pub use config::{
 pub use error::{
     ContextualError, ContextualResult, ErrorContext, ErrorHandler, ErrorSeverity, ModelError,
     Result as ModelResult,
+};
+
+// Rust 1.90 新特性重新导出
+pub use rust_190_features::{
+    ModelConfig as Rust190ModelConfig, ParameterStatistics, DataProcessor, ProcessingResult, OptimizationEngine,
+    AlgorithmType, OptimizationResult, OptimizedMatrix, ExternalModelChecker, ModelCheckResult,
+    PropertyResult,
+};
+
+// 现代机器学习重新导出
+pub use modern_ml::{
+    ModernMLEngine, ModernMLConfig, ModelType, DeviceType, PrecisionType, ModelTrait,
+    TrainingData, EvaluationData, TrainingResult, EvaluationResult, ModelInfo,
+    LinearRegressionModel, LogisticRegressionModel, NeuralNetworkModel,
+};
+
+// 计算机视觉重新导出
+pub use computer_vision::{
+    ComputerVisionEngine, ComputerVisionConfig, ImageTensor, ImageTransform, ImageFilter,
+    FeatureDetector, ImageOperation, ProcessingMode,
 };
 
 // 已裁剪：可视化、基准测试与标准合规模块的对外导出
