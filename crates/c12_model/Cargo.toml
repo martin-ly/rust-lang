@@ -1,0 +1,93 @@
+[package]
+name = "c12_model"
+version = "0.2.0"
+edition = "2024"
+resolver = "3"
+
+authors = ["c12_model Contributors <contributors@c12model.dev>"]
+description = "Rust implementation of theoretical models for system modeling, machine learning, and formal methods"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/rust-lang/c12_model"
+documentation = "https://docs.rs/c12_model"
+homepage = "https://c12model.dev"
+keywords = ["rust", "modeling", "machine-learning", "formal-methods", "mathematics", "queueing-theory", "statistics"]
+categories = ["science", "algorithms", "mathematics", "simulation"]
+readme = "README.md"
+rust-version = "1.90"
+
+[dependencies]
+# 序列化和反序列化
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# 错误处理
+thiserror = { workspace = true }
+
+# 已裁剪：异步运行时
+
+# UUID生成
+uuid = { workspace = true }
+
+# 时间处理
+chrono = { workspace = true }
+
+# 随机数生成
+fastrand = "2.3.0"
+
+# 图算法
+petgraph = { workspace = true }
+
+# 已裁剪：并行计算
+
+# 数值计算
+num-traits = "0.2.19"
+num-derive = "0.3.3"
+
+# 统计计算
+statrs = "0.18.0"
+
+# 数学函数
+libm = "0.2.15"
+
+# 运行时/示例适配基础依赖（对齐到 workspace 或最新主线）
+# async-std 已移除，使用 tokio 替代 (async-std 已弃用)
+tokio = { workspace = true, features = ["rt-multi-thread", "sync", "time"], optional = true }
+tokio-util = { workspace = true, features = ["rt"], optional = true }
+async-channel = { version = "2.5.0", optional = true }
+tower = { workspace = true, features = ["limit", "timeout", "retry", "util"], optional = true }
+http = { workspace = true, optional = true }
+hyper = { workspace = true, features = ["client", "http1"], optional = true }
+
+[dev-dependencies]
+# 基准测试
+criterion = { workspace = true, features = ["html_reports"] }
+
+# 属性测试
+proptest = { workspace = true }
+
+# 测试工具
+tempfile = { workspace = true }
+
+# 文档测试
+doc-comment = "0.3.3"
+
+# 并发模型验证
+loom = "0.7.2"
+
+[features]
+default = ["std"]
+std = []
+no-std = []
+## 已裁剪：async/visualization/benchmarks/parallel 等特性
+
+# 运行时/示例适配（通过 features 选择，依赖为可选）
+tokio-adapter = ["dep:tokio", "dep:tokio-util", "dep:async-channel"]
+tower-examples = ["dep:tower", "dep:http", "dep:hyper"]
+
+# 已裁剪：nalgebra / plotly / wasm-bindgen 及 wasm 目标依赖
+
+[[bench]]
+name = "concurrency_bench"
+harness = false
+
+# Profile configurations are managed at workspace root level

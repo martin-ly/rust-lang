@@ -12,16 +12,8 @@ members = [ "crates/c01_ownership_borrow_scope",
             "crates/c08_algorithms", 
             "crates/c09_design_pattern", 
             "crates/c10_networks",  
-            "crates/c11_frameworks", 
-            "crates/c12_middlewares", 
-            "crates/c13_microservice", 
-            "crates/c14_workflow", 
-            "crates/c15_blockchain", 
-            "crates/c16_webassembly", 
-            "crates/c17_iot", 
-            "crates/c18_model",
-            "crates/c19_ai",
-            "crates/c20_distributed", 
+            "crates/c11_middlewares", 
+            "crates/c12_model",
             ]
 
 [workspace.package]
