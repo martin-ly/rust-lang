@@ -50,12 +50,6 @@
 - **[c10_networks](crates/c10_networks/)** - 网络编程与协议实现
 - **[c11_frameworks](crates/c11_frameworks/)** - Web框架与生态系统
 - **[c12_middlewares](crates/c12_middlewares/)** - 中间件与系统集成
-- **[c13_microservice](crates/c13_microservice/)** - 微服务架构与设计
-- **[c14_workflow](crates/c14_workflow/)** - 工作流引擎与业务流程
-- **[c15_blockchain](crates/c15_blockchain/)** - 区块链技术与智能合约
-- **[c16_webassembly](crates/c16_webassembly/)** - WebAssembly与跨平台
-- **[c17_iot](crates/c17_iot/)** - 物联网与嵌入式系统
-- **[c18_model](crates/c18_model/)** - 机器学习与AI模型
 
 ### 🏭 行业应用指南 (docs/industry_domains/)
 

@@ -12,6 +12,7 @@
 - **配置管理**：灵活的配置系统，支持热重载
 - **指标收集**：全面的指标收集和分析
 - **工具函数**：丰富的工具函数和扩展
+- **多环境支持**：支持操作系统、嵌入式裸机、Docker容器三种运行环境
 
 ## 快速开始
 
@@ -414,6 +415,51 @@ test_duration = "600s"
 max_concurrent_tests = 3
 ```
 
+## 运行时环境支持
+
+本框架支持三种不同的运行时环境：
+
+### 1. 操作系统环境
+
+完整的操作系统支持，包括多进程、多线程、文件系统和网络支持。
+
+```rust
+use c13_reliability::prelude::*;
+
+let mut adapter = OSEnvironmentAdapter::new();
+adapter.initialize().await?;
+let system_info = adapter.get_system_info().await?;
+```
+
+### 2. 嵌入式裸机环境
+
+无操作系统环境，直接运行在硬件上，支持中断和定时器。
+
+```rust
+use c13_reliability::prelude::*;
+
+let mut adapter = EmbeddedEnvironmentAdapter::with_config(
+    2 * 1024 * 1024, // 2MB 内存
+    2, // 2个CPU核心
+    1 * 1024 * 1024, // 1MB 磁盘
+);
+adapter.initialize().await?;
+```
+
+### 3. Docker容器环境
+
+容器化运行环境，支持资源限制监控和容器健康检查。
+
+```rust
+use c13_reliability::prelude::*;
+
+let mut adapter = ContainerEnvironmentAdapter::new();
+adapter.initialize().await?;
+let health_status = adapter.check_health().await?;
+```
+
+详细的环境支持指南请查看 [RUNTIME_ENVIRONMENTS_GUIDE.md](RUNTIME_ENVIRONMENTS_GUIDE.md)。
+
 ## 示例
 
 查看 `examples/` 目录中的示例代码：
@@ -421,6 +467,7 @@ max_concurrent_tests = 3
 - `basic_usage.rs` - 基本使用示例
 - `advanced_usage.rs` - 高级使用示例
 - `integration_example.rs` - 集成示例
+- `runtime_environment_example.rs` - 运行时环境示例
 
 ## 测试
 

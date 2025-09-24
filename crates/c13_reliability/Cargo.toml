@@ -70,6 +70,9 @@ proptest = { workspace = true, optional = true }
 # 系统信息
 sysinfo = { version = "0.30", optional = true }
 
+# 主机名获取
+hostname = { version = "0.3", optional = true }
+
 # 内存管理
 jemallocator = { version = "0.5", optional = true }
 
@@ -84,7 +87,7 @@ criterion = { workspace = true, features = ["async"] }
 tokio-test = { workspace = true }
 
 [features]
-default = ["std", "async", "monitoring", "fault-tolerance", "otlp", "logging"]
+default = ["std", "async", "monitoring", "fault-tolerance", "otlp", "logging", "os-environment"]
 std = []
 async = ["tokio", "futures", "async-trait"]
 monitoring = ["metrics", "metrics-exporter-prometheus", "sysinfo", "prometheus"]
@@ -95,6 +98,11 @@ otlp = ["opentelemetry", "opentelemetry_sdk", "opentelemetry-otlp", "tracing-ope
 otlp-stdout = ["opentelemetry-stdout"]
 otlp-proto = ["opentelemetry-proto"]
 logging = ["env_logger"]
+
+# 运行时环境支持
+os-environment = ["sysinfo", "hostname"]
+embedded-environment = []
+container-environment = []
 
 [[bench]]
 name = "reliability_benchmarks"

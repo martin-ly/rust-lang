@@ -56,6 +56,9 @@ pub mod config;
 pub mod metrics;
 pub mod utils;
 
+// 运行时环境支持
+pub mod runtime_environments;
+
 // 重新导出常用类型和函数
 pub mod prelude {
     pub use crate::error_handling::{
@@ -68,7 +71,7 @@ pub mod prelude {
     };
     pub use crate::runtime_monitoring::{
         HealthChecker, ResourceMonitor, PerformanceMonitor, 
-        AnomalyDetector, AutoRecovery, MonitoringConfig
+        AnomalyDetector, AutoRecovery, MonitoringDashboard, MonitoringConfig
     };
     pub use crate::chaos_engineering::{
         FaultInjector, ChaosScenarios, ResilienceTester, RecoveryTester
@@ -76,6 +79,11 @@ pub mod prelude {
     pub use crate::config::ReliabilityConfig;
     pub use crate::metrics::ReliabilityMetrics;
     pub use crate::utils::{DurationExt, ResultExt as UtilsResultExt};
+    pub use crate::runtime_environments::{
+        RuntimeEnvironment, RuntimeEnvironmentManager, RuntimeEnvironmentAdapter,
+        EnvironmentCapabilities, SystemInfo, ResourceUsage, HealthStatus, HealthLevel,
+        RecoveryType, OSEnvironmentAdapter, EmbeddedEnvironmentAdapter, ContainerEnvironmentAdapter
+    };
     
     // 常用标准库类型
     pub use std::time::Duration;

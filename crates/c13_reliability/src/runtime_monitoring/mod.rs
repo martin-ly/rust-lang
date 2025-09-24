@@ -13,12 +13,14 @@ pub mod resource_monitor;
 pub mod performance_monitor;
 pub mod anomaly_detection;
 pub mod auto_recovery;
+pub mod dashboard;
 
 pub use health_check::*;
 pub use resource_monitor::*;
 pub use performance_monitor::*;
 pub use anomaly_detection::*;
 pub use auto_recovery::*;
+pub use dashboard::*;
 
 /// 监控配置
 #[derive(Debug, Clone, Serialize, Deserialize)]

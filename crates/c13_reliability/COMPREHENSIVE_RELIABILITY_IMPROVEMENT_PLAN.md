@@ -31,7 +31,7 @@
 #### 1.1 创建统一错误处理库
 
 ```rust
-// crates/c00_reliability/src/error_handling/
+// crates/c13_reliability/src/error_handling/
 ├── unified_error.rs          // 统一错误类型定义
 ├── error_recovery.rs         // 错误恢复策略
 ├── error_monitoring.rs       // 错误监控和报告
@@ -55,7 +55,7 @@
 #### 2.1 完善断路器模式
 
 ```rust
-// crates/c00_reliability/src/fault_tolerance/
+// crates/c13_reliability/src/fault_tolerance/
 ├── circuit_breaker.rs        // 完整的断路器实现
 ├── retry_policies.rs         // 重试策略（指数退避、抖动等）
 ├── bulkhead.rs              // 舱壁模式
@@ -81,7 +81,7 @@
 #### 3.1 运行时监控系统
 
 ```rust
-// crates/c00_reliability/src/runtime_monitoring/
+// crates/c13_reliability/src/runtime_monitoring/
 ├── health_check.rs          // 健康检查
 ├── resource_monitor.rs      // 资源监控
 ├── performance_monitor.rs   // 性能监控
@@ -108,7 +108,7 @@
 #### 4.1 混沌工程测试
 
 ```rust
-// crates/c00_reliability/src/chaos_engineering/
+// crates/c13_reliability/src/chaos_engineering/
 ├── fault_injection.rs       // 故障注入
 ├── chaos_scenarios.rs       // 混沌场景
 ├── resilience_testing.rs    // 弹性测试

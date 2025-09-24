@@ -40,6 +40,26 @@ impl Default for AnomalyDetectionConfig {
                     detector_type: AnomalyDetectorType::Threshold,
                     enabled: true,
                 },
+                AnomalyDetectorItem {
+                    name: "time_series".to_string(),
+                    detector_type: AnomalyDetectorType::TimeSeries,
+                    enabled: true,
+                },
+                AnomalyDetectorItem {
+                    name: "pattern_matching".to_string(),
+                    detector_type: AnomalyDetectorType::PatternMatching,
+                    enabled: true,
+                },
+                AnomalyDetectorItem {
+                    name: "network_traffic".to_string(),
+                    detector_type: AnomalyDetectorType::NetworkTraffic,
+                    enabled: true,
+                },
+                AnomalyDetectorItem {
+                    name: "resource_usage".to_string(),
+                    detector_type: AnomalyDetectorType::ResourceUsage,
+                    enabled: true,
+                },
             ],
             alert_thresholds: AnomalyAlertThresholds::default(),
         }
@@ -66,6 +86,14 @@ pub enum AnomalyDetectorType {
     Threshold,
     /// 机器学习异常检测
     MachineLearning,
+    /// 时间序列异常检测
+    TimeSeries,
+    /// 模式匹配异常检测
+    PatternMatching,
+    /// 网络流量异常检测
+    NetworkTraffic,
+    /// 资源使用异常检测
+    ResourceUsage,
     /// 自定义检测器
     Custom {
         name: String,
@@ -82,6 +110,14 @@ pub struct AnomalyAlertThresholds {
     pub threshold_anomaly_threshold: f64,
     /// 机器学习异常阈值
     pub ml_anomaly_threshold: f64,
+    /// 时间序列异常阈值
+    pub time_series_threshold: f64,
+    /// 模式匹配异常阈值
+    pub pattern_matching_threshold: f64,
+    /// 网络流量异常阈值
+    pub network_traffic_threshold: f64,
+    /// 资源使用异常阈值
+    pub resource_usage_threshold: f64,
 }
 
 impl Default for AnomalyAlertThresholds {
@@ -90,6 +126,10 @@ impl Default for AnomalyAlertThresholds {
             statistical_threshold: 3.0, // 3个标准差
             threshold_anomaly_threshold: 0.8, // 80%
             ml_anomaly_threshold: 0.7, // 70%
+            time_series_threshold: 0.75, // 75%
+            pattern_matching_threshold: 0.6, // 60%
+            network_traffic_threshold: 0.85, // 85%
+            resource_usage_threshold: 0.9, // 90%
         }
     }
 }
@@ -233,6 +273,10 @@ impl AnomalyDetector {
         let result = match item.name.as_str() {
             "statistical" => StatisticalAnomalyDetectorHandler.detect().await,
             "threshold" => ThresholdAnomalyDetectorHandler.detect().await,
+            "time_series" => TimeSeriesAnomalyDetectorHandler.detect().await,
+            "pattern_matching" => PatternMatchingAnomalyDetectorHandler.detect().await,
+            "network_traffic" => NetworkTrafficAnomalyDetectorHandler.detect().await,
+            "resource_usage" => ResourceUsageAnomalyDetectorHandler.detect().await,
             _ => Ok(AnomalyDetectorItemResult {
                 name: item.name.clone(),
                 detector_type: item.detector_type.clone(),
@@ -280,6 +324,10 @@ impl AnomalyDetector {
         
         handlers.insert("statistical".to_string(), Box::new(StatisticalAnomalyDetectorHandler));
         handlers.insert("threshold".to_string(), Box::new(ThresholdAnomalyDetectorHandler));
+        handlers.insert("time_series".to_string(), Box::new(TimeSeriesAnomalyDetectorHandler));
+        handlers.insert("pattern_matching".to_string(), Box::new(PatternMatchingAnomalyDetectorHandler));
+        handlers.insert("network_traffic".to_string(), Box::new(NetworkTrafficAnomalyDetectorHandler));
+        handlers.insert("resource_usage".to_string(), Box::new(ResourceUsageAnomalyDetectorHandler));
     }
 
     /// 注册自定义检测处理器
@@ -554,5 +602,276 @@ mod tests {
         let detector = global_detector.get_detector();
         
         assert!(detector.get_last_result().is_none());
+    }
+
+    #[tokio::test]
+    async fn test_time_series_anomaly_detector() {
+        let handler = TimeSeriesAnomalyDetectorHandler;
+        let result = handler.detect().await.unwrap();
+        
+        assert_eq!(result.name, "time_series");
+        assert!(matches!(result.detector_type, AnomalyDetectorType::TimeSeries));
+        assert!(result.anomaly_score >= 0.0 && result.anomaly_score <= 1.0);
+    }
+
+    #[tokio::test]
+    async fn test_pattern_matching_anomaly_detector() {
+        let handler = PatternMatchingAnomalyDetectorHandler;
+        let result = handler.detect().await.unwrap();
+        
+        assert_eq!(result.name, "pattern_matching");
+        assert!(matches!(result.detector_type, AnomalyDetectorType::PatternMatching));
+        assert!(result.anomaly_score >= 0.0 && result.anomaly_score <= 1.0);
+        assert!(result.anomaly_details.contains_key("confidence"));
+    }
+
+    #[tokio::test]
+    async fn test_network_traffic_anomaly_detector() {
+        let handler = NetworkTrafficAnomalyDetectorHandler;
+        let result = handler.detect().await.unwrap();
+        
+        assert_eq!(result.name, "network_traffic");
+        assert!(matches!(result.detector_type, AnomalyDetectorType::NetworkTraffic));
+        assert!(result.anomaly_score >= 0.0 && result.anomaly_score <= 1.0);
+        assert!(result.anomaly_details.contains_key("bandwidth_usage"));
+        assert!(result.anomaly_details.contains_key("packet_loss"));
+    }
+
+    #[tokio::test]
+    async fn test_resource_usage_anomaly_detector() {
+        let handler = ResourceUsageAnomalyDetectorHandler;
+        let result = handler.detect().await.unwrap();
+        
+        assert_eq!(result.name, "resource_usage");
+        assert!(matches!(result.detector_type, AnomalyDetectorType::ResourceUsage));
+        assert!(result.anomaly_score >= 0.0 && result.anomaly_score <= 1.0);
+        assert!(result.anomaly_details.contains_key("cpu_usage"));
+        assert!(result.anomaly_details.contains_key("memory_usage"));
+        assert!(result.anomaly_details.contains_key("disk_usage"));
+    }
+
+    #[test]
+    fn test_anomaly_alert_thresholds_default() {
+        let thresholds = AnomalyAlertThresholds::default();
+        
+        assert_eq!(thresholds.statistical_threshold, 3.0);
+        assert_eq!(thresholds.threshold_anomaly_threshold, 0.8);
+        assert_eq!(thresholds.ml_anomaly_threshold, 0.7);
+        assert_eq!(thresholds.time_series_threshold, 0.75);
+        assert_eq!(thresholds.pattern_matching_threshold, 0.6);
+        assert_eq!(thresholds.network_traffic_threshold, 0.85);
+        assert_eq!(thresholds.resource_usage_threshold, 0.9);
+    }
+
+    #[test]
+    fn test_anomaly_detector_type_serialization() {
+        let types = vec![
+            AnomalyDetectorType::Statistical,
+            AnomalyDetectorType::Threshold,
+            AnomalyDetectorType::MachineLearning,
+            AnomalyDetectorType::TimeSeries,
+            AnomalyDetectorType::PatternMatching,
+            AnomalyDetectorType::NetworkTraffic,
+            AnomalyDetectorType::ResourceUsage,
+            AnomalyDetectorType::Custom {
+                name: "test".to_string(),
+                parameters: HashMap::new(),
+            },
+        ];
+
+        for detector_type in types {
+            let serialized = serde_json::to_string(&detector_type).unwrap();
+            let deserialized: AnomalyDetectorType = serde_json::from_str(&serialized).unwrap();
+            assert_eq!(format!("{:?}", detector_type), format!("{:?}", deserialized));
+        }
+    }
+}
+
+/// 时间序列异常检测处理器
+pub struct TimeSeriesAnomalyDetectorHandler;
+
+impl AnomalyDetectorHandler for TimeSeriesAnomalyDetectorHandler {
+    fn detect(&self) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<AnomalyDetectorItemResult, UnifiedError>> + Send>> {
+        Box::pin(async move {
+            let mut details = HashMap::new();
+            let mut state = MonitoringState::Healthy;
+            let anomaly_score;
+            let mut anomaly_detected = false;
+
+            // 模拟时间序列检测
+            use rand::Rng;
+            let mut rng = rand::rng();
+            let trend_value = rng.random_range(0.0..1.0);
+            let seasonality_value = rng.random_range(0.0..1.0);
+            
+            details.insert("trend".to_string(), if trend_value > 0.5 { "increasing".to_string() } else { "decreasing".to_string() });
+            details.insert("seasonality".to_string(), if seasonality_value > 0.3 { "detected".to_string() } else { "none".to_string() });
+            
+            anomaly_score = (trend_value + seasonality_value) / 2.0;
+            
+            // 判断是否检测到异常
+            if anomaly_score > 0.75 {
+                anomaly_detected = true;
+                state = if anomaly_score > 0.9 {
+                    MonitoringState::Error
+                } else {
+                    MonitoringState::Warning
+                };
+                details.insert("anomaly_type".to_string(), "time_series_anomaly".to_string());
+            }
+
+            Ok(AnomalyDetectorItemResult {
+                name: "time_series".to_string(),
+                detector_type: AnomalyDetectorType::TimeSeries,
+                state,
+                anomaly_score,
+                anomaly_detected,
+                anomaly_details: details,
+            })
+        })
+    }
+}
+
+/// 模式匹配异常检测处理器
+pub struct PatternMatchingAnomalyDetectorHandler;
+
+impl AnomalyDetectorHandler for PatternMatchingAnomalyDetectorHandler {
+    fn detect(&self) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<AnomalyDetectorItemResult, UnifiedError>> + Send>> {
+        Box::pin(async move {
+            let mut details = HashMap::new();
+            let mut state = MonitoringState::Healthy;
+            let anomaly_score;
+            let mut anomaly_detected = false;
+
+            // 模拟模式匹配检测
+            use rand::Rng;
+            let mut rng = rand::rng();
+            let pattern_score = rng.random_range(0.0..1.0);
+            let confidence = rng.random_range(0.0..1.0);
+            
+            details.insert("pattern_type".to_string(), 
+                if pattern_score > 0.7 { "spike".to_string() } 
+                else if pattern_score > 0.4 { "trend".to_string() } 
+                else { "normal".to_string() });
+            details.insert("confidence".to_string(), format!("{:.2}", confidence));
+            
+            anomaly_score = (pattern_score + confidence) / 2.0;
+            
+            // 判断是否检测到异常模式
+            if anomaly_score > 0.6 {
+                anomaly_detected = true;
+                state = if anomaly_score > 0.8 {
+                    MonitoringState::Error
+                } else {
+                    MonitoringState::Warning
+                };
+                details.insert("anomaly_type".to_string(), "pattern_anomaly".to_string());
+            }
+
+            Ok(AnomalyDetectorItemResult {
+                name: "pattern_matching".to_string(),
+                detector_type: AnomalyDetectorType::PatternMatching,
+                state,
+                anomaly_score,
+                anomaly_detected,
+                anomaly_details: details,
+            })
+        })
+    }
+}
+
+/// 网络流量异常检测处理器
+pub struct NetworkTrafficAnomalyDetectorHandler;
+
+impl AnomalyDetectorHandler for NetworkTrafficAnomalyDetectorHandler {
+    fn detect(&self) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<AnomalyDetectorItemResult, UnifiedError>> + Send>> {
+        Box::pin(async move {
+            let mut details = HashMap::new();
+            let mut state = MonitoringState::Healthy;
+            let anomaly_score;
+            let mut anomaly_detected = false;
+
+            // 模拟网络流量检测
+            use rand::Rng;
+            let mut rng = rand::rng();
+            let bandwidth_usage = rng.random_range(0.0..1.0);
+            let packet_loss = rng.random_range(0.0..0.1);
+            
+            details.insert("bandwidth_usage".to_string(), 
+                if bandwidth_usage > 0.8 { "high".to_string() } 
+                else if bandwidth_usage > 0.5 { "medium".to_string() } 
+                else { "low".to_string() });
+            details.insert("packet_loss".to_string(), format!("{:.1}%", packet_loss * 100.0));
+            
+            let raw_score = bandwidth_usage + packet_loss * 10.0;
+            anomaly_score = if raw_score > 1.0 { 1.0 } else { raw_score };
+            
+            // 判断是否检测到网络异常
+            if anomaly_score > 0.85 {
+                anomaly_detected = true;
+                state = if anomaly_score > 0.95 {
+                    MonitoringState::Error
+                } else {
+                    MonitoringState::Warning
+                };
+                details.insert("anomaly_type".to_string(), "network_anomaly".to_string());
+            }
+
+            Ok(AnomalyDetectorItemResult {
+                name: "network_traffic".to_string(),
+                detector_type: AnomalyDetectorType::NetworkTraffic,
+                state,
+                anomaly_score,
+                anomaly_detected,
+                anomaly_details: details,
+            })
+        })
+    }
+}
+
+/// 资源使用异常检测处理器
+pub struct ResourceUsageAnomalyDetectorHandler;
+
+impl AnomalyDetectorHandler for ResourceUsageAnomalyDetectorHandler {
+    fn detect(&self) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<AnomalyDetectorItemResult, UnifiedError>> + Send>> {
+        Box::pin(async move {
+            let mut details = HashMap::new();
+            let mut state = MonitoringState::Healthy;
+            let anomaly_score;
+            let mut anomaly_detected = false;
+
+            // 模拟资源使用检测
+            use rand::Rng;
+            let mut rng = rand::rng();
+            let cpu_usage = rng.random_range(0.0..1.0);
+            let memory_usage = rng.random_range(0.0..1.0);
+            let disk_usage = rng.random_range(0.0..1.0);
+            
+            details.insert("cpu_usage".to_string(), format!("{:.0}%", cpu_usage * 100.0));
+            details.insert("memory_usage".to_string(), format!("{:.0}%", memory_usage * 100.0));
+            details.insert("disk_usage".to_string(), format!("{:.0}%", disk_usage * 100.0));
+            
+            anomaly_score = (cpu_usage + memory_usage + disk_usage) / 3.0;
+            
+            // 判断是否检测到资源异常
+            if anomaly_score > 0.9 {
+                anomaly_detected = true;
+                state = if anomaly_score > 0.95 {
+                    MonitoringState::Error
+                } else {
+                    MonitoringState::Warning
+                };
+                details.insert("anomaly_type".to_string(), "resource_anomaly".to_string());
+            }
+
+            Ok(AnomalyDetectorItemResult {
+                name: "resource_usage".to_string(),
+                detector_type: AnomalyDetectorType::ResourceUsage,
+                state,
+                anomaly_score,
+                anomaly_detected,
+                anomaly_details: details,
+            })
+        })
     }
 }

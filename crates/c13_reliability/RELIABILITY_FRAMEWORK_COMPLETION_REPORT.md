@@ -2,7 +2,7 @@
 
 ## 项目概述
 
-本项目成功创建了一个全面的 Rust 可靠性框架 `c00_reliability`，解决了原有代码库中异常处理、容错机制和运行时行为修正不完备的问题。
+本项目成功创建了一个全面的 Rust 可靠性框架 `c13_reliability`，解决了原有代码库中异常处理、容错机制和运行时行为修正不完备的问题。
 
 ## 完成的功能模块
 
@@ -139,12 +139,12 @@
 ### 基本使用
 
 ```rust
-use c00_reliability::prelude::*;
+use c13_reliability::prelude::*;
 
 #[tokio::main]
 async fn main() -> Result<(), UnifiedError> {
     // 初始化可靠性框架
-    c00_reliability::init().await?;
+    c13_reliability::init().await?;
     
     // 创建断路器
     let circuit_breaker = CircuitBreaker::new(5, Duration::from_secs(60));
@@ -158,7 +158,7 @@ async fn main() -> Result<(), UnifiedError> {
     println!("操作结果: {}", result);
     
     // 关闭可靠性框架
-    c00_reliability::shutdown().await?;
+    c13_reliability::shutdown().await?;
     Ok(())
 }
 ```
@@ -181,7 +181,7 @@ let result = circuit_breaker
 ## 项目文件结构
 
 ```text
-crates/c00_reliability/
+crates/c13_reliability/
 ├── Cargo.toml                 # 项目配置和依赖
 ├── README.md                  # 项目说明文档
 ├── src/
