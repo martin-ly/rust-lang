@@ -329,6 +329,13 @@ c09_design_pattern项目成功完成了所有预定目标，实现了基于Rust 
 - 文档增强：`README.md` 与 `09_design_patterns.md` 增补“同步 vs 异步”分类与综述。
 - 测试补强：在 `tests/integration_tests.rs` 增加执行模型查询的断言，保障一致性。
 
+### 1.90 对齐与工程设施
+
+- MSRV 提升至 1.90（Edition 2024），统一工作区对齐到 1.90。
+- 文档：`README.md` 增补 Features/运行命令与 CI 片段；`docs/observability.md` 新增 tracing 可观测指南；`09_design_patterns.md` 增补“附录A：生态框架落地”。
+- 基准：新增 `benches/pattern_benchmarks.rs` 与可选特性 `tokio-bench`；新增 `Bench` 工作流（手动触发导出 Criterion 报告）。
+- CI：新增 `CI` 工作流（1.90/stable/beta/nightly matrix，fmt/clippy/test）。
+
 后续建议：
 
 1. 为 `src/concurrency/asynchronous/*` 提供基于 Tokio 的更贴近生产的示例。

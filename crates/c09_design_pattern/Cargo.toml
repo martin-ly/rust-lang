@@ -3,7 +3,7 @@ name = "c09_design_pattern"
 version = "1.0.1"
 edition = "2024"
 resolver = "3"
-rust-version = "1.89"
+rust-version = "1.90"
 
 [dependencies]
 async-trait = { workspace = true }
@@ -11,9 +11,20 @@ tokio = { workspace = true }
 rayon = { workspace = true }
 crossbeam = { workspace = true }
 lazy_static = "1.5.0"
+tracing = { version = "0.1", optional = true }
+tracing-subscriber = { version = "0.3", optional = true, features = ["fmt", "env-filter"] }
 
 [dev-dependencies]
 criterion = { workspace = true }
+
+[features]
+default = []
+# 启用 rayon 基准的可选门控（仅用于 benches 内部条件）
+rayon = []
+# 启用 tokio 异步基准的可选门控
+tokio-bench = []
+# 可观测示例所需的 tracing 组件
+obs-tracing = ["tracing", "tracing-subscriber"]
 
 [lib]
 name = "c09_design_pattern"

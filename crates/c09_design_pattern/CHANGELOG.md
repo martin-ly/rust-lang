@@ -7,6 +7,21 @@
 
 ## [1.0.1] - 2025-09-11
 
+## [1.0.2] - 2025-09-23
+
+### 变更（1.0.2）
+
+- MSRV 提升至 Rust 1.90（Edition 2024），对齐工作区文档与配置。
+- 文档：更新 `README.md`（Rust 1.90 新特性与生态集成）、`09_design_patterns.md`（新增“附录A：生态框架落地”）、`IMPLEMENTATION_ROADMAP.md`（全面对齐 1.90 与生态映射）。
+- 文档：新增 `docs/observability.md`（tracing 可观测指南），`README` 补充 Features/运行命令与 CI 片段。
+- 兼容性：确认在 stable 与 1.90 下构建通过；无行为变更。
+
+### 待办（1.0.2 之后）
+
+- 增加执行模型（Sync/Async/Hybrid）集成测试断言覆盖。
+- 新增 `criterion` 基准脚手架（rayon 并行 / tokio 异步）。
+- 在 README 增补选型决策树与 `tracing` 可观测示例。
+
 ### 新增（1.0.1）
 
 - 执行模型分类：新增 `ExecutionModel`（Sync/Async/Hybrid），并为既有模式补充标注。
@@ -190,7 +205,7 @@
 
 ### 兼容性
 
-- **Rust版本**：1.89+
+- **Rust版本**：1.90+
 - **Edition**：2024
 - **平台支持**：Windows, macOS, Linux
 - **架构支持**：x86_64, ARM64
