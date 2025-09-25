@@ -72,12 +72,12 @@ name = "rust_189_performance_features"
 path = "examples/rust_189_performance_features.rs"
 
 [[example]]
-name = "rust_189_comprehensive_demo"
-path = "examples/rust_189_comprehensive_demo.rs"
+name = "control_flow_rust_189_comprehensive_demo"
+path = "examples/control_flow_rust_189_comprehensive_demo.rs"
 
 [[example]]
-name = "rust_190_comprehensive_demo"
-path = "examples/rust_190_comprehensive_demo.rs"
+name = "control_flow_rust_190_comprehensive_demo"
+path = "examples/control_flow_rust_190_comprehensive_demo.rs"
 
 [[test]]
 name = "rust_190_comprehensive_tests"

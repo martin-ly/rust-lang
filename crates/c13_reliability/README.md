@@ -12,7 +12,8 @@
 - **配置管理**：灵活的配置系统，支持热重载
 - **指标收集**：全面的指标收集和分析
 - **工具函数**：丰富的工具函数和扩展
-- **多环境支持**：支持操作系统、嵌入式裸机、Docker容器三种运行环境
+- **多环境支持**：支持操作系统、嵌入式裸机、Docker 容器、Kubernetes（按需启用）
+- **云原生对齐（CNCF/OCI）**：容器运行时抽象（CRI 风格）、镜像引用解析（OCI 子集）、K8s 编排占位接口
 
 ## 快速开始
 
@@ -25,6 +26,22 @@
 c13_reliability = "0.1.0"
 tokio = { version = "1.0", features = ["full"] }
 env_logger = "0.9"
+```
+
+### 启用云原生能力（可选 Feature）
+
+```bash
+# 仅启用容器抽象（不绑定具体运行时）
+cargo build -p c13_reliability --features "containers"
+
+# 启用本地 Docker 运行时占位适配
+cargo build -p c13_reliability --features "containers,docker-runtime"
+
+# 启用 Kubernetes 占位客户端与编排抽象
+cargo build -p c13_reliability --features "kubernetes"
+
+# 启用 OCI 规范解析（oci-spec，可选）
+cargo build -p c13_reliability --features "oci"
 ```
 
 ### 基本使用
@@ -468,6 +485,23 @@ let health_status = adapter.check_health().await?;
 - `advanced_usage.rs` - 高级使用示例
 - `integration_example.rs` - 集成示例
 - `runtime_environment_example.rs` - 运行时环境示例
+- `container_minimal.rs` - 容器抽象最小示例（--features containers）
+- `orchestrator_minimal.rs` - 编排抽象示例（--features containers[,docker-runtime]）
+- `supervisor_minimal.rs` - 编排监督（重启/退避）示例（--features containers[,docker-runtime]）
+
+运行示例：
+
+```bash
+cargo run -p c13_reliability --example container_minimal --features "containers"
+cargo run -p c13_reliability --example orchestrator_minimal --features "containers,docker-runtime"
+cargo run -p c13_reliability --example supervisor_minimal --features "containers,docker-runtime"
+```
+
+Kubernetes 占位示例（仅编译验证接口，后续可替换为 kube-rs 客户端）：
+
+```bash
+cargo build -p c13_reliability --features "kubernetes,containers"
+```
 
 ## 测试
 
@@ -476,6 +510,21 @@ let health_status = adapter.check_health().await?;
 ```bash
 cargo test
 ```
+
+### 端到端（kind）验证（可选）
+
+先安装 kind 与 kubectl，然后运行：
+
+```powershell
+cd crates\c13_reliability\scripts
+./kind-e2e.ps1 -ClusterName c13-kind -Namespace default
+```
+
+该脚本会：
+
+- 启动本地 kind 集群
+- 应用 `deploy/k8s/c13-demo-pod.yaml`
+- 等待 Pod Ready 并打印状态
 
 运行示例：
 

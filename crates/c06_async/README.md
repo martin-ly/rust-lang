@@ -4,6 +4,20 @@
 
 本包系统演示 Rust 1.90 语境下的异步编程（Tokio/futures 生态），包含最新的异步编程特性：
 
+## 0. 目录（严格编号）
+
+1. 介绍与范围
+2. 2025 年新增功能
+3. Rust 1.90 新特性（异步相关）
+4. 快速上手
+5. 示例与运行脚本
+6. 测试与基准
+7. 文档导航（Tokio/Smol/Cookbook/语言特性）
+8. Rust 1.90 要点（异步相关）
+9. 基准与指标说明
+
+注：仓内所有文档逐步采用“严格编号章节 + 可点击目录”的统一格式。
+
 - 基础：async/await、Future/Stream、Tokio 运行时
 - 并发：select/try_join/JoinSet、结构化并发
 - 同步：Mutex/RwLock/Notify、mpsc/oneshot
@@ -18,7 +32,7 @@
 - 微服务：服务发现、负载均衡、熔断降级
 - 云原生：配置管理、健康检查、Kubernetes 探针
 
-## 🆕 2025年新增功能
+## 2. 🆕 2025年新增功能
 
 ### 异步生态系统全面分析
 
@@ -43,7 +57,7 @@
 - **最佳实践指南**：2025年最新的异步编程建议
 - **运行脚本**：一键运行所有演示和测试
 
-## Rust 1.90 新特性
+## 3. Rust 1.90 新特性
 
 - **异步Drop**: 异步资源清理机制
 - **异步生成器**: AsyncIterator 生态支持
@@ -56,7 +70,7 @@
 - **异步控制流增强**: 异步状态机、资源管理、错误处理
 - **性能优化**: 并行编译、特质求解器、借用检查器优化
 
-## 快速上手
+## 4. 快速上手
 
 Windows PowerShell：
 
@@ -65,7 +79,7 @@ cd .\crates\c06_async
 cargo build
 ```
 
-运行示例（更多见 docs/run_guide.md）：
+## 5. 示例与运行脚本（更多见 `docs/run_guide.md`）
 
 ```powershell
 # 异步生态系统综合演示（推荐）
@@ -93,7 +107,18 @@ cargo run --bin distributed_consensus_exp01
 # 完整示例列表见 docs/run_guide.md
 ```
 
-测试和基准：
+新增模式示例：
+
+```powershell
+cargo run --example tokio_patterns
+cargo run --example smol_patterns
+cargo run --example distributed_lock_redis
+cargo run --example stream_processing_backpressure
+cargo run --example microservice_patterns
+cargo run --example metrics_collection_prometheus
+```
+
+## 6. 测试和基准
 
 ```powershell
 # 运行综合测试
@@ -104,10 +129,14 @@ cargo bench --no-run
 # cargo bench
 ```
 
-更多说明：
+## 7. 文档导航
 
 - 运行指南：`docs/run_guide.md`
 - 最佳实践：`docs/async_best_practices.md`
+- Tokio 最佳实践（2025）：`docs/tokio_best_practices_2025.md`
+- Smol 最佳实践（2025）：`docs/smol_best_practices_2025.md`
+- Async Cookbook（Tokio/Smol 片段）：`docs/async_cookbook_tokio_smol.md`
+- Tokio Console 与 Tracing 指南：`docs/tokio_console_and_tracing.md`
 - 语言特性（Rust 1.90）：`docs/async_rust_190_overview.md` · `docs/async_language_features_190.md`
 - 异步风格规范：`docs/async_style_guide.md`
 - 异步基础语法与实践：`docs/async_basics_guide.md`
@@ -116,15 +145,18 @@ cargo bench --no-run
 - 工具参考：`docs/utils_reference.md`
 - 基准结果：`docs/benchmark_results.md`
 - 高级模式：`docs/advanced_patterns_summary.md`
+- 形式化与语义边界：`docs/formal_methods_async.md`
+- MSRV 与兼容性：`docs/msrv_and_compatibility.md`
+- 基准测试分析指南：`docs/benchmark_analysis_guide.md`
 
-## Rust 1.90 要点（异步相关）
+## 8. Rust 1.90 要点（异步相关）
 
 - 生态与兼容性：Tokio、futures、tracing 在 1.90 正常工作；本仓示例保持 1.89 可编译。
 - 诊断与可读性：1.90 提升了一些编译器提示的可读性，利于 async/await 错误定位（如生命周期/Send 约束）。
 - 规范与风格：推荐在 1.90 环境下统一使用 `#[tokio::main(flavor = "multi_thread")]` 作为默认入口，并通过 `JoinSet`/`select!` 构建结构化并发。
 - 文档与实践：详见 `docs/async_rust_190_overview.md` 与 `docs/async_style_guide.md`。
 
-## 基准与指标说明
+## 9. 基准与指标说明
 
 - 基准集：
   - mpsc（bounded vs unbounded）与 Semaphore 管道吞吐

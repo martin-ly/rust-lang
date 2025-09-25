@@ -75,7 +75,7 @@ c13_reliability是一个统一的可靠性框架，支持多种运行时环境�
 
 ## 运行时环境支持
 
-框架现在支持13种不同的运行时环境，按执行模式分为四大类：
+框架现在支持13种不同的运行时环境，按执行模式分为四大类；并提供云原生扩展（容器运行时抽象、统一编排、监督与 Kubernetes 占位）。
 
 ### 1. 原生执行环境 (Native Execution)
 
@@ -389,6 +389,31 @@ match environment {
     },
 }
 ```
+
+## 云原生扩展设计
+
+### 抽象
+
+- `container_runtime::ContainerRuntime`：对齐 CRI 的最小接口，支持 `pull_image`、`run`、`stop`、`inspect`
+- `orchestrator::Orchestrator`：统一编排接口，屏蔽本地容器与 Kubernetes 的差异
+- `orchestrator_supervisor::OrchestratorSupervisor`：重启/指数退避/失败上限与健康事件上报入口
+- `kubernetes`：占位客户端结构，后续以 `kube-rs` 替换
+
+### Feature 边界
+
+- `containers`：启用容器运行时抽象与相关类型
+- `docker-runtime`：本地 Docker 运行时占位实现（演示，默认关闭）
+- `kubernetes`：K8s 抽象与占位客户端（默认关闭）
+- `oci`：启用 `oci-spec` 解析（可选）
+
+### 线程模型与错误处理
+
+- 所有异步接口基于 `async_trait`
+- 错误通过 `UnifiedError` 统一封装，保留上下文与严重性
+
+### 指标/事件
+
+- 编排监督将把状态变更（启动、失败、退避、成功）以事件形式对接指标与日志（后续在 `runtime_monitoring` 衔接）
 
 ### 3. 策略调整
 

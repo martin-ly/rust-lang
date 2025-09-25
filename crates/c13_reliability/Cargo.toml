@@ -82,6 +82,9 @@ uuid = { workspace = true }
 # 时间处理增强
 time = { workspace = true }
 
+# OCI 规范（可选）
+oci-spec = { version = "0.6", optional = true }
+
 [dev-dependencies]
 criterion = { workspace = true, features = ["async"] }
 tokio-test = { workspace = true }
@@ -103,6 +106,16 @@ logging = ["env_logger"]
 os-environment = ["sysinfo", "hostname"]
 embedded-environment = []
 container-environment = []
+
+# 云原生/CNCF 对齐能力（可选启用）
+containers = ["container-environment"]
+virtualization = []
+# 仅在需要对接 Kubernetes 时启用。保持默认关闭避免增加构建体积。
+kubernetes = []
+# 可选本地 Docker 运行时适配（不默认启用）
+docker-runtime = []
+# 启用 OCI 规范解析
+oci = ["oci-spec"]
 
 [[bench]]
 name = "reliability_benchmarks"

@@ -2,11 +2,12 @@
 
 ## 概述
 
-c13_reliability框架现在支持三种不同的运行时环境，每种环境都有其特定的特性、限制和优化策略：
+c13_reliability框架现在支持多种运行时环境，并提供云原生扩展（CNCF/OCI/Kubernetes）。
 
 1. **操作系统环境 (Operating System)** - 完整的操作系统支持
 2. **嵌入式裸机环境 (Embedded Bare Metal)** - 无操作系统，直接运行在硬件上
 3. **Docker容器环境 (Container)** - 容器化运行环境
+4. **Kubernetes Pod 环境 (K8s)** - 编排与服务发现（按需启用）
 
 ## 环境特性对比
 
@@ -88,7 +89,7 @@ async fn main() -> Result<(), UnifiedError> {
 }
 ```
 
-### 3. Docker容器环境
+### 3. Docker 容器环境
 
 ```rust
 use c13_reliability::prelude::*;
@@ -236,7 +237,7 @@ monitor_interrupts = true
 monitor_timers = true
 ```
 
-### Docker容器环境配置
+### Docker 容器环境配置
 
 ```toml
 [runtime_environments.container]
@@ -273,6 +274,66 @@ enable_container_recovery = true
 - ✅ 进程重启
 - ✅ 服务重启
 - ✅ 系统重启
+
+## 云原生扩展（CNCF/OCI/Kubernetes）
+
+### 特性开关
+
+```toml
+[features]
+containers = []               # 容器运行时抽象（不绑定实现）
+docker-runtime = []           # 本地 Docker 占位实现
+kubernetes = []               # Kubernetes 占位客户端与抽象
+oci = ["oci-spec"]           # 启用 OCI 规范解析（可选）
+```
+
+### 容器运行时抽象
+
+```rust
+use c13_reliability::runtime_environments::container_runtime::*;
+
+let image: ImageReference = "docker.io/library/nginx:latest".parse().unwrap();
+let cfg = ContainerRunConfig {
+    image,
+    args: vec![],
+    env: vec![],
+    cpu_limit_millis: Some(500),
+    memory_limit_bytes: Some(256 * 1024 * 1024),
+    restart_policy: Some(RestartPolicy::OnFailure { max_retries: 3, backoff_secs: 5 }),
+    health_probe: None,
+};
+```
+
+### 编排与监督
+
+```rust
+use c13_reliability::runtime_environments::orchestrator::*;
+use c13_reliability::runtime_environments::orchestrator_supervisor::*;
+
+// 本地容器编排（需 --features docker-runtime）
+let orch = LocalContainerOrchestrator::new(DockerRuntime::new(), cfg);
+let sup = OrchestratorSupervisor::new(orch, BackoffPolicy::default());
+sup.ensure_running("nginx").await?;
+```
+
+### Kubernetes 占位
+
+```rust
+use c13_reliability::runtime_environments::kubernetes::*;
+
+let pod = PodSpecMini {
+    name: "c13-pod".into(),
+    image: "docker.io/library/nginx:latest".into(),
+    args: vec![],
+    env: vec![],
+    cpu_millis: Some(500),
+    memory_bytes: Some(256 * 1024 * 1024),
+    liveness: None,
+    readiness: None,
+};
+let k8s = KubernetesClientPlaceholder::new();
+// k8s.apply_pod("default", &pod).await?; // 接入 kube-rs 后启用
+```
 
 ## 最佳实践
 

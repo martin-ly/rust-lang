@@ -921,3 +921,18 @@ pub use testing_framework::{
     TestFrameworkFactory, EmbeddedTestFramework, ContainerTestFramework,
 };
 pub use simulation::{SimulationMode, SimulationConfig, SimulatedEnvironmentAdapter};
+
+// Cloud Native/CNCF 对齐：容器运行时与 K8s 编排抽象（按 feature 导出）
+#[cfg(feature = "containers")]
+pub mod container_runtime;
+#[cfg(feature = "kubernetes")]
+pub mod kubernetes;
+pub mod orchestrator;
+pub mod orchestrator_supervisor;
+
+#[cfg(feature = "containers")]
+pub use container_runtime::*;
+#[cfg(feature = "kubernetes")]
+pub use kubernetes::*;
+pub use orchestrator::*;
+pub use orchestrator_supervisor::*;
