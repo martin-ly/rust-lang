@@ -113,6 +113,11 @@ c09_design_pattern/
    - 确保所有依赖与Rust 1.89兼容
 
 2. **利用新特性优化**
+3. **异步事件总线（新增）**
+   - 引入基于 `AsyncEventHandler`（关联 Future + GATs）的 `EventBusString` 与 `EventBusGeneric`
+   - 支持背压策略（Block/DropOldest/Batch）、取消、超时近似（计数阈值）
+   - 示例：`examples/event_bus_demo.rs`，测试：`concurrency/message_passing/define.rs` 内部 `async_bus_tests`
+
    - 使用Cell::update优化单例模式
    - 利用裸指针Default简化代理模式
    - 优化数组转换提升享元模式性能

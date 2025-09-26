@@ -50,4 +50,84 @@ pub mod gats_demo {
     }
 }
 
+/// RPITIT（在 trait 方法中返回 impl Trait）示例
+pub mod rpitit_demo {
+    /// 文本源：提供按词迭代视图
+    pub trait TextSource {
+        /// 在 trait 方法中返回位置 impl Iterator（RPITIT）
+        fn words<'a>(&'a self) -> impl Iterator<Item = &'a str> + 'a;
+    }
+
+    impl TextSource for String {
+        fn words<'a>(&'a self) -> impl Iterator<Item = &'a str> + 'a {
+            self.split_whitespace()
+        }
+    }
+
+    impl TextSource for &str {
+        fn words<'a>(&'a self) -> impl Iterator<Item = &'a str> + 'a {
+            self.split_whitespace()
+        }
+    }
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn test_words_on_string() {
+            let s = String::from("hello rust 190");
+            let v: Vec<&str> = TextSource::words(&s).collect();
+            assert_eq!(v, vec!["hello", "rust", "190"]);
+        }
+
+        #[test]
+        fn test_words_on_str() {
+            let s: &str = "a b c";
+            let mut it = TextSource::words(&s);
+            assert_eq!(it.next(), Some("a"));
+            assert_eq!(it.next(), Some("b"));
+            assert_eq!(it.next(), Some("c"));
+            assert_eq!(it.next(), None);
+        }
+    }
+}
+
+/// dyn upcasting（子 trait 到父 trait 的动态上行转型）示例
+pub mod dyn_upcasting_demo {
+    pub trait Logger {
+        fn log(&self, msg: &str) -> String;
+    }
+
+    pub trait TimestampLogger: Logger {
+        fn now(&self) -> &'static str;
+    }
+
+    pub struct SimpleTs;
+
+    impl Logger for SimpleTs {
+        fn log(&self, msg: &str) -> String { format!("[{}] {}", self.now(), msg) }
+    }
+
+    impl TimestampLogger for SimpleTs {
+        fn now(&self) -> &'static str { "2025-09-26T00:00:00Z" }
+    }
+
+    #[allow(dead_code)]
+    fn take_logger(_l: &mut dyn Logger) {}
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn test_dyn_upcast() {
+            let mut ts: Box<dyn TimestampLogger> = Box::new(SimpleTs);
+            // 1.82+ 支持：&mut dyn Sub -> &mut dyn Super 的隐式上转型
+            take_logger(ts.as_mut());
+            assert!(ts.log("x").contains("x"));
+        }
+    }
+}
+
 

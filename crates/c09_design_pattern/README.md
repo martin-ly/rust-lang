@@ -241,8 +241,13 @@
   - `behavioral/chain_of_responsibility/define.rs` 的 `handle` 方法使用 `let Some(..) else { .. }` 做早退分支。
 - return-position impl Trait：
   - `structural/flyweight/define.rs` 的 `OptimizedFlyweightFactory::iter_ids` 返回 `impl Iterator<Item = u32>`。
+- RPITIT（trait 方法返回 impl Trait）：
+  - `src/rust_190_features.rs::rpitit_demo::TextSource::words` 展示在 trait 方法中返回 `impl Iterator` 的用法。
+- dyn 上行转型（dyn upcasting）：
+  - `src/rust_190_features.rs::dyn_upcasting_demo` 展示 `&mut dyn Sub` 到 `&mut dyn Super` 的隐式上转型调用场景。
 - 其他：
   - 错误处理工具 `error_handling.rs::utils::validate_input` 使用 `let-else` 提升可读性。
+  - 全局初始化从 `lazy_static` 迁移为 `std::sync::OnceLock`（见 `error_handling.rs::global_error_monitor`）。
 
 ### 示例入口与用法
 
@@ -252,7 +257,7 @@
   - 可选 Tokio 门控：启用 `--features tokio-bench` 可运行基于 Tokio 的延迟处理测试。
 - 1.90 汇总示例：
   - 模块：`rust_190_features`
-  - API：`highlights::terminate_with_panic() -> !`、`highlights::if_let_chain(..)`
+  - API：`highlights::terminate_with_panic() -> !`、`highlights::if_let_chain(..)`、`rpitit_demo::TextSource::words(..)`、`dyn_upcasting_demo`
   - 用途：演示 never 类型与 if-let 链式匹配；可在任意示例/测试中直接调用。
 - GATs 借用视图：
   - 模块：`behavioral/observer/define.rs`
@@ -268,6 +273,9 @@
 ```bash
 # async trait 示例
 cargo run -p c09_design_pattern --example async_trait_demo
+
+# 异步事件总线（背压/取消/超时近似/批处理）
+cargo run -p c09_design_pattern --example event_bus_demo
 
 # GATs 观察者示例
 cargo run -p c09_design_pattern --example gats_observer_demo
@@ -308,6 +316,19 @@ cargo bench -p c09_design_pattern -- --baseline main
 
 - 背压策略：`DropOldest`（保留最新一半示例）、`Block`（逐条处理）、`Batch(n)`（按批处理）
 - 取消/超时近似：`run_until_cancel(..., true)`、`run_with_timeout_like(events, max_events)`
+
+示例调用（详见 `examples/event_bus_demo.rs`）：
+
+```rust
+let bus = EventBusString::new(StringEventHandler);
+let events: Vec<String> = (0..5).map(|i| format!("demo-{}", i)).collect();
+block_on(bus.run_with_backpressure(&events));
+block_on(bus.run_until_cancel(&events, true));
+block_on(bus.run_with_strategy(&events, BackpressureStrategy::Block));
+block_on(bus.run_with_strategy(&events, BackpressureStrategy::DropOldest));
+block_on(bus.run_with_strategy(&events, BackpressureStrategy::Batch(2)));
+block_on(bus.run_with_timeout_like(&events, 3));
+```
 
 - 基准：
   - `benches/async_gats_benches.rs`: 异步事件总线与 GATs 观察者基准

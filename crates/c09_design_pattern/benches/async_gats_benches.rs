@@ -21,7 +21,7 @@ fn block_on<F: core::future::Future>(mut fut: F) -> F::Output {
 }
 
 fn bench_async_event_bus(c: &mut Criterion) {
-    use c09_design_pattern::concurrency::message_passing::define::async_bus::EventBusString;
+    use c09_design_pattern::concurrency::message_passing::define::async_bus::{EventBusString, BackpressureStrategy};
     use c09_design_pattern::concurrency::message_passing::define::StringEventHandler;
 
     let bus = EventBusString::new(StringEventHandler);
@@ -36,6 +36,30 @@ fn bench_async_event_bus(c: &mut Criterion) {
     c.bench_function("async_event_bus_until_cancel", |b| {
         b.iter(|| {
             block_on(bus.run_until_cancel(&events, true));
+        })
+    });
+
+    c.bench_function("async_event_bus_strategy_block", |b| {
+        b.iter(|| {
+            block_on(bus.run_with_strategy(&events, BackpressureStrategy::Block));
+        })
+    });
+
+    c.bench_function("async_event_bus_strategy_drop_oldest", |b| {
+        b.iter(|| {
+            block_on(bus.run_with_strategy(&events, BackpressureStrategy::DropOldest));
+        })
+    });
+
+    c.bench_function("async_event_bus_strategy_batch_8", |b| {
+        b.iter(|| {
+            block_on(bus.run_with_strategy(&events, BackpressureStrategy::Batch(8)));
+        })
+    });
+
+    c.bench_function("async_event_bus_timeout_like_256", |b| {
+        b.iter(|| {
+            block_on(bus.run_with_timeout_like(&events, 256));
         })
     });
 }

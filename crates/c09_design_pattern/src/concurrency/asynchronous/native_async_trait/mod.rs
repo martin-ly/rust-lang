@@ -1,5 +1,7 @@
 //! 原生 async fn in trait 示例（Rust 1.90 / Edition 2024）
 
+#![allow(async_fn_in_trait)] // 教学示例：在公开 trait 中使用 async fn，抑制 lint 提示
+
 #[allow(unused)]
 pub trait AsyncProcessor: Send + Sync {
     async fn process(&self, input: &str) -> String;

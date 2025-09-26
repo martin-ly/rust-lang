@@ -304,8 +304,10 @@ impl ErrorMonitor {
     }
 }
 
-lazy_static::lazy_static! {
-    pub static ref GLOBAL_ERROR_MONITOR: ErrorMonitor = ErrorMonitor::new(1000);
+static GLOBAL_ERROR_MONITOR: std::sync::OnceLock<ErrorMonitor> = std::sync::OnceLock::new();
+
+pub fn global_error_monitor() -> &'static ErrorMonitor {
+    GLOBAL_ERROR_MONITOR.get_or_init(|| ErrorMonitor::new(1000))
 }
 
 /// 错误处理宏
@@ -319,7 +321,7 @@ macro_rules! handle_pattern_error {
 #[macro_export]
 macro_rules! log_pattern_error {
     ($error:expr) => {
-        GLOBAL_ERROR_MONITOR.log_error($error);
+        $crate::error_handling::global_error_monitor().log_error($error);
     };
 }
 

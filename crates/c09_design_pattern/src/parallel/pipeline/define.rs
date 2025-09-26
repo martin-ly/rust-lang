@@ -64,8 +64,8 @@ pub fn make_pluggable_iter<'a>(input: &'a [i32], stages: &'a [StageFn]) -> Box<d
     let mut it: Box<dyn Iterator<Item = i32> + Send + 'a> = Box::new(input.iter().copied());
     for stage in stages {
         it = match stage {
-            StageFn::Map(f) => Box::new(it.map(move |v| f(v))),
-            StageFn::Filter(p) => Box::new(it.filter(move |v| p(&v))),
+            StageFn::Map(f) => Box::new(it.map(*f)),
+            StageFn::Filter(p) => Box::new(it.filter(*p)),
         };
     }
     it
