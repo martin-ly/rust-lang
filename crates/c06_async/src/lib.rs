@@ -9,6 +9,7 @@ pub mod utils;
 
 // Rust 1.90 新特性模块
 pub mod rust_190_features;
+pub mod rust_190_real_features;  // 真正的Rust 1.90特性实现
 pub mod async_control_flow_190;
 pub mod performance_optimization_190;
 

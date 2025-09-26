@@ -5,6 +5,7 @@
 //! - 容错机制（断路器、重试、降级）
 //! - 运行时监控和自愈
 //! - 混沌工程测试工具
+//! - Rust 1.90+ 新特性支持
 //!
 //! ## 核心特性
 //!
@@ -13,6 +14,7 @@
 //! - **运行时监控**：健康检查、性能监控、异常检测
 //! - **自动恢复**：内存泄漏检测、连接池重建、死锁恢复
 //! - **混沌工程**：故障注入、弹性测试、恢复验证
+//! - **Rust 1.90+ 特性**：支持异步闭包、泛型关联类型等最新语言特性
 //!
 //! ## 快速开始
 //!
@@ -46,6 +48,39 @@
 //!     Ok(())
 //! }
 //! ```
+//!
+//! ## Rust 1.90+ 新特性示例
+//!
+//! ```rust
+//! use c13_reliability::prelude::*;
+//!
+//! #[tokio::main]
+//! async fn main() -> Result<(), UnifiedError> {
+//!     // 演示Rust 1.90新特性
+//!     let demo = Rust190FeatureDemo::new();
+//!     
+//!     // 异步闭包示例
+//!     let results = demo.demonstrate_async_closures().await?;
+//!     println!("异步闭包结果: {:?}", results);
+//!     
+//!     // 泛型关联类型示例
+//!     let operation_result = demo.demonstrate_generic_associated_types();
+//!     println!("泛型关联类型结果: {:?}", operation_result);
+//!     
+//!     // 高级异步组合器
+//!     let combinator = AdvancedAsyncCombinator;
+//!     let chain_result = combinator.create_operation_chain(
+//!         0i32,
+//!         vec![
+//!             |x| async move { Ok::<i32, UnifiedError>(x + 1) },
+//!             |x| async move { Ok::<i32, UnifiedError>(x * 2) },
+//!         ]
+//!     ).await?;
+//!     println!("操作链结果: {}", chain_result);
+//!     
+//!     Ok(())
+//! }
+//! ```
 
 // 核心模块
 pub mod error_handling;
@@ -58,6 +93,9 @@ pub mod utils;
 
 // 运行时环境支持
 pub mod runtime_environments;
+
+// Rust 1.90+ 新特性支持
+pub mod rust_190_features;
 
 // 重新导出常用类型和函数
 pub mod prelude {
@@ -83,6 +121,10 @@ pub mod prelude {
         RuntimeEnvironment, RuntimeEnvironmentManager, RuntimeEnvironmentAdapter,
         EnvironmentCapabilities, SystemInfo, ResourceUsage, HealthStatus, HealthLevel,
         RecoveryType, OSEnvironmentAdapter, EmbeddedEnvironmentAdapter, ContainerEnvironmentAdapter
+    };
+    pub use crate::rust_190_features::{
+        Rust190FeatureDemo, AsyncClosureExample, GenericAssociatedTypeExample,
+        AdvancedAsyncCombinator, ReliabilityService, OperationResult, OperationMetadata
     };
     
     // 常用标准库类型

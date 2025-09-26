@@ -1,0 +1,125 @@
+# Cargo工作区配置文件
+# 创建时间: 2025年9月25日 14:50
+
+[workspace]
+# 工作区成员
+members = [
+    "crates/c01_ownership_borrow_scope",
+    "crates/c02_type_system",
+    "crates/c03_control_fn",
+    "crates/c04_generic",
+    "crates/c05_threads",
+    "crates/c06_async",
+    "crates/c07_process",
+    "crates/c08_algorithms",
+    "crates/c09_design_pattern",
+    "crates/c10_networks",
+    "crates/c11_middlewares",
+    "crates/c12_model",
+    "crates/c13_reliability",
+]
+
+# 排除的成员
+exclude = [
+    "target",
+    "docs",
+    "scripts",
+    "formal_rust",
+    "rust-formal-engineering-system",
+]
+
+# 工作区默认成员
+default-members = [
+    "crates/c01_ownership_borrow_scope",
+    "crates/c02_type_system",
+    "crates/c03_control_fn",
+    "crates/c04_generic",
+    "crates/c05_threads",
+    "crates/c06_async",
+    "crates/c07_process",
+    "crates/c08_algorithms",
+    "crates/c09_design_pattern",
+    "crates/c10_networks",
+    "crates/c11_middlewares",
+    "crates/c12_model",
+    "crates/c13_reliability",
+]
+
+# 工作区元数据
+[workspace.metadata]
+# 工作区名称
+name = "rust-learning-workspace"
+# 工作区描述
+description = "Rust学习项目工作区"
+# 工作区版本
+version = "0.1.0"
+# 工作区作者
+authors = ["Rust Learning Community"]
+# 工作区许可证
+license = "MIT"
+# 工作区仓库
+repository = "https://github.com/rust-learning/rust-lang"
+# 工作区文档
+documentation = "https://docs.rs/rust-learning"
+# 工作区主页
+homepage = "https://rust-learning.github.io"
+# 工作区关键词
+keywords = ["rust", "learning", "education", "tutorial", "examples"]
+# 工作区类别
+categories = ["education", "development-tools"]
+
+# 工作区依赖
+[workspace.dependencies]
+# 标准库依赖
+tokio = { version = "1.0", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+reqwest = { version = "0.11", features = ["json"] }
+clap = { version = "4.0", features = ["derive"] }
+anyhow = "1.0"
+thiserror = "1.0"
+log = "0.4"
+env_logger = "0.10"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# 测试依赖
+tokio-test = "0.4"
+tempfile = "3.0"
+criterion = "0.5"
+proptest = "1.0"
+mockall = "0.12"
+rstest = "0.18"
+
+# 开发依赖
+cargo-tarpaulin = "0.25"
+cargo-audit = "0.18"
+cargo-outdated = "0.12"
+
+# 工作区特性
+[workspace.metadata.features]
+# 默认特性
+default = ["std"]
+# 标准库特性
+std = []
+# 异步特性
+async = ["tokio"]
+# 测试特性
+test = ["tokio-test", "tempfile"]
+# 基准测试特性
+bench = ["criterion"]
+# 开发特性
+dev = ["cargo-tarpaulin", "cargo-audit", "cargo-outdated"]
+
+# 工作区配置
+[workspace.metadata.config]
+# 最小Rust版本
+min-rust-version = "1.70"
+# 目标Rust版本
+target-rust-version = "1.90"
+# 工作区类型
+workspace-type = "library"
+# 工作区语言
+language = "rust"
+# 工作区平台
+platform = "cross-platform"

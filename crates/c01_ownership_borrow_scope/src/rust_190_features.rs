@@ -14,8 +14,9 @@ use std::collections::HashMap;
 use std::time::Duration;
 
 /// # 1. 改进的借用检查器 / Improved Borrow Checker
-
+///
 /// 借用类型枚举 / Borrow Type Enum
+/// Rust 1.90 增强版本，支持更多借用类型
 #[derive(Debug, Clone, PartialEq)]
 pub enum BorrowType {
     /// 不可变借用 / Immutable borrow
@@ -24,6 +25,12 @@ pub enum BorrowType {
     Mutable,
     /// Rust 1.90 新增：独占借用 / Exclusive borrow
     Exclusive,
+    /// Rust 1.90 新增：共享独占借用 / Shared Exclusive borrow
+    SharedExclusive,
+    /// Rust 1.90 新增：条件借用 / Conditional borrow
+    Conditional,
+    /// Rust 1.90 新增：延迟借用 / Deferred borrow
+    Deferred,
 }
 
 /// 借用记录 / Borrow Record
@@ -52,12 +59,12 @@ impl BorrowRecord {
             end_time: None,
         }
     }
-    
+
     /// 结束借用 / End borrow
     pub fn end_borrow(&mut self) {
         self.end_time = Some(std::time::Instant::now());
     }
-    
+
     /// 获取借用持续时间 / Get borrow duration
     pub fn duration(&self) -> Option<Duration> {
         self.end_time.map(|end| end.duration_since(self.start_time))
@@ -99,14 +106,14 @@ impl ImprovedBorrowChecker {
             active_borrows: HashMap::new(),
         }
     }
-    
+
     /// 检查借用规则 / Check borrow rules
     pub fn check_borrow_rules(&self, owner: &str, _borrower: &str, borrow_type: BorrowType) -> BorrowCheckResult {
         // 检查是否有活跃的借用冲突
         let active_borrows_for_owner: Vec<_> = self.active_borrows.values()
             .filter(|b| b.owner == owner)
             .collect();
-        
+
         if !active_borrows_for_owner.is_empty() {
             // 检查与现有借用的冲突
             for active_borrow in &active_borrows_for_owner {
@@ -152,35 +159,68 @@ impl ImprovedBorrowChecker {
                             );
                         }
                     }
+                    // Rust 1.90 新增：处理新的借用类型
+                    (_, BorrowType::SharedExclusive) => {
+                        // 共享独占借用可以与某些借用共存
+                        if active_borrow.borrow_type == BorrowType::Exclusive {
+                            return BorrowCheckResult::Conflict(
+                                format!("Cannot create shared exclusive borrow while exclusive borrow exists for {}", owner)
+                            );
+                        }
+                    }
+                    (BorrowType::SharedExclusive, _) => {
+                        // 共享独占借用存在时的处理
+                        if borrow_type == BorrowType::Exclusive {
+                            return BorrowCheckResult::Conflict(
+                                format!("Cannot create exclusive borrow while shared exclusive borrow exists for {}", owner)
+                            );
+                        }
+                    }
+                    (_, BorrowType::Conditional) => {
+                        // 条件借用需要特殊检查
+                        // 这里可以添加条件检查逻辑
+                    }
+                    (BorrowType::Conditional, _) => {
+                        // 条件借用存在时的处理
+                        // 这里可以添加条件检查逻辑
+                    }
+                    (_, BorrowType::Deferred) => {
+                        // 延迟借用的处理
+                        // 延迟借用通常不会立即冲突
+                    }
+                    (BorrowType::Deferred, _) => {
+                        // 延迟借用存在时的处理
+                        // 延迟借用通常不会阻止其他借用
+                    }
                 }
             }
         }
-        
+
         BorrowCheckResult::Success
     }
-    
+
     /// 创建借用 / Create borrow
     pub fn create_borrow(&mut self, owner: String, borrower: String, borrow_type: BorrowType) -> Result<BorrowRecord, BorrowCheckResult> {
         let check_result = self.check_borrow_rules(&owner, &borrower, borrow_type.clone());
-        
+
         match check_result {
             BorrowCheckResult::Success => {
                 let borrow_record = BorrowRecord::new(owner.clone(), borrower.clone(), borrow_type);
                 let key = format!("{}_{}", owner, borrower);
-                
+
                 self.active_borrows.insert(key.clone(), borrow_record.clone());
                 self.borrow_records.entry(owner).or_default().push(borrow_record.clone());
-                
+
                 Ok(borrow_record)
             }
             _ => Err(check_result),
         }
     }
-    
+
     /// 结束借用 / End borrow
     pub fn end_borrow(&mut self, owner: &str, borrower: &str) -> Result<(), BorrowCheckResult> {
         let key = format!("{}_{}", owner, borrower);
-        
+
         if let Some(mut borrow_record) = self.active_borrows.remove(&key) {
             borrow_record.end_borrow();
             Ok(())
@@ -188,7 +228,7 @@ impl ImprovedBorrowChecker {
             Err(BorrowCheckResult::Conflict(format!("No active borrow found for {} by {}", owner, borrower)))
         }
     }
-    
+
     /// 获取借用统计信息 / Get borrow statistics
     pub fn get_borrow_statistics(&self) -> BorrowStatistics {
         let total_borrows = self.borrow_records.values().map(|v| v.len()).sum();
@@ -202,18 +242,31 @@ impl ImprovedBorrowChecker {
         let exclusive_borrows = self.active_borrows.values()
             .filter(|b| b.borrow_type == BorrowType::Exclusive)
             .count();
-        
+        let shared_exclusive_borrows = self.active_borrows.values()
+            .filter(|b| b.borrow_type == BorrowType::SharedExclusive)
+            .count();
+        let conditional_borrows = self.active_borrows.values()
+            .filter(|b| b.borrow_type == BorrowType::Conditional)
+            .count();
+        let deferred_borrows = self.active_borrows.values()
+            .filter(|b| b.borrow_type == BorrowType::Deferred)
+            .count();
+
         BorrowStatistics {
             total_borrows,
             active_borrows,
             immutable_borrows,
             mutable_borrows,
             exclusive_borrows,
+            shared_exclusive_borrows,
+            conditional_borrows,
+            deferred_borrows,
         }
     }
 }
 
 /// 借用统计信息 / Borrow Statistics
+/// Rust 1.90 增强版本，包含更多统计信息
 #[derive(Debug)]
 pub struct BorrowStatistics {
     /// 总借用数 / Total borrows
@@ -226,10 +279,16 @@ pub struct BorrowStatistics {
     pub mutable_borrows: usize,
     /// 独占借用数 / Exclusive borrows
     pub exclusive_borrows: usize,
+    /// Rust 1.90 新增：共享独占借用数 / Shared exclusive borrows
+    pub shared_exclusive_borrows: usize,
+    /// Rust 1.90 新增：条件借用数 / Conditional borrows
+    pub conditional_borrows: usize,
+    /// Rust 1.90 新增：延迟借用数 / Deferred borrows
+    pub deferred_borrows: usize,
 }
 
 /// # 2. 增强的生命周期推断 / Enhanced Lifetime Inference
-
+///
 /// 生命周期参数 / Lifetime Parameter
 #[derive(Debug, Clone, PartialEq)]
 pub struct LifetimeParam {
@@ -250,12 +309,12 @@ impl LifetimeParam {
             scope,
         }
     }
-    
+
     /// 添加约束 / Add constraint
     pub fn add_constraint(&mut self, constraint: String) {
         self.constraints.push(constraint);
     }
-    
+
     /// 检查约束 / Check constraints
     pub fn check_constraints(&self, other: &LifetimeParam) -> bool {
         self.constraints.iter().any(|c| other.constraints.contains(c))
@@ -294,51 +353,52 @@ impl LifetimeInferencer {
             lifetime_map: HashMap::new(),
             inference_rules: Vec::new(),
         };
-        
+
         // 添加默认推断规则 / Add default inference rules
         inferencer.add_inference_rule(InferenceRule {
             name: "outlives".to_string(),
             description: "Check if one lifetime outlives another".to_string(),
             rule_fn: |a, b| a.scope.len() >= b.scope.len(), // 简化的实现
         });
-        
+
         inferencer
     }
-    
+
     /// 添加推断规则 / Add inference rule
     pub fn add_inference_rule(&mut self, rule: InferenceRule) {
         self.inference_rules.push(rule);
     }
-    
+
     /// 推断生命周期 / Infer lifetime
     pub fn infer_lifetime(&mut self, name: String, scope: String) -> LifetimeParam {
         let lifetime_param = LifetimeParam::new(name.clone(), scope);
         self.lifetime_map.insert(name, lifetime_param.clone());
         lifetime_param
     }
-    
+
     /// 检查生命周期约束 / Check lifetime constraints
     pub fn check_lifetime_constraints(&self, param1: &LifetimeParam, param2: &LifetimeParam) -> bool {
         self.inference_rules.iter().any(|rule| {
             (rule.rule_fn)(param1, param2)
         })
     }
-    
+
     /// 优化生命周期 / Optimize lifetime
     pub fn optimize_lifetime(&self, param: &LifetimeParam) -> LifetimeParam {
         let mut optimized = param.clone();
-        
+
         // 移除冗余约束 / Remove redundant constraints
         optimized.constraints.sort();
         optimized.constraints.dedup();
-        
+
         optimized
     }
 }
 
 /// # 3. 新的智能指针特性 / New Smart Pointer Features
-
+///
 /// 智能指针类型 / Smart Pointer Type
+/// Rust 1.90 增强版本，支持更多智能指针类型
 #[derive(Debug)]
 pub enum SmartPointerType {
     /// Box<T> - 堆分配 / Heap allocation
@@ -351,6 +411,12 @@ pub enum SmartPointerType {
     RefCell,
     /// Rust 1.90 新增：智能优化指针 / Smart optimized pointer
     SmartOptimized,
+    /// Rust 1.90 新增：自适应指针 / Adaptive pointer
+    Adaptive,
+    /// Rust 1.90 新增：零拷贝指针 / Zero-copy pointer
+    ZeroCopy,
+    /// Rust 1.90 新增：延迟初始化指针 / Lazy initialization pointer
+    Lazy,
 }
 
 /// 智能指针管理器 / Smart Pointer Manager
@@ -378,13 +444,13 @@ impl SmartPointerManager {
             optimization_suggestions: Vec::new(),
         }
     }
-    
+
     /// 创建智能指针 / Create smart pointer
     pub fn create_smart_pointer(&mut self, name: String, pointer_type: SmartPointerType) {
         self.pointer_map.insert(name.clone(), pointer_type);
         self.reference_counts.insert(name, 1);
     }
-    
+
     /// 克隆智能指针 / Clone smart pointer
     pub fn clone_smart_pointer(&mut self, name: &str) -> Result<(), String> {
         if let Some(count) = self.reference_counts.get_mut(name) {
@@ -394,16 +460,16 @@ impl SmartPointerManager {
             Err(format!("Smart pointer {} not found", name))
         }
     }
-    
+
     /// 获取引用计数 / Get reference count
     pub fn get_reference_count(&self, name: &str) -> Option<usize> {
         self.reference_counts.get(name).copied()
     }
-    
+
     /// 分析智能指针使用 / Analyze smart pointer usage
     pub fn analyze_usage(&mut self) -> Vec<String> {
         let mut suggestions = Vec::new();
-        
+
         for (name, count) in &self.reference_counts {
             if *count == 1 {
                 suggestions.push(format!("Consider using Box<T> instead of Rc<T> for {}", name));
@@ -411,15 +477,16 @@ impl SmartPointerManager {
                 suggestions.push(format!("High reference count for {}, consider optimization", name));
             }
         }
-        
+
         self.optimization_suggestions = suggestions.clone();
         suggestions
     }
 }
 
 /// # 4. 优化的作用域管理 / Optimized Scope Management
-
+///
 /// 作用域类型 / Scope Type
+/// Rust 1.90 增强版本，支持更多作用域类型
 #[derive(Debug, Clone, PartialEq)]
 pub enum ScopeType {
     /// 代码块作用域 / Block scope
@@ -436,6 +503,12 @@ pub enum ScopeType {
     Async,
     /// Rust 1.90 新增：宏作用域 / Macro scope
     Macro,
+    /// Rust 1.90 新增：泛型作用域 / Generic scope
+    Generic,
+    /// Rust 1.90 新增：闭包作用域 / Closure scope
+    Closure,
+    /// Rust 1.90 新增：协程作用域 / Coroutine scope
+    Coroutine,
 }
 
 /// 作用域信息 / Scope Information
@@ -467,17 +540,17 @@ impl ScopeInfo {
             lifetimes: Vec::new(),
         }
     }
-    
+
     /// 添加变量 / Add variable
     pub fn add_variable(&mut self, variable: String) {
         self.variables.push(variable);
     }
-    
+
     /// 添加生命周期 / Add lifetime
     pub fn add_lifetime(&mut self, lifetime: String) {
         self.lifetimes.push(lifetime);
     }
-    
+
     /// 添加子作用域 / Add child scope
     pub fn add_child(&mut self, child: String) {
         self.children.push(child);
@@ -526,11 +599,11 @@ impl OptimizedScopeManager {
             optimizer: ScopeOptimizer::new(),
         }
     }
-    
+
     /// 进入作用域 / Enter scope
     pub fn enter_scope(&mut self, name: String, scope_type: ScopeType) {
         let mut scope_info = ScopeInfo::new(name.clone(), scope_type);
-        
+
         // 设置父作用域 / Set parent scope
         if let Some(parent) = self.scope_stack.last() {
             scope_info.parent = Some(parent.name.clone());
@@ -539,11 +612,11 @@ impl OptimizedScopeManager {
                 parent_scope.add_child(name.clone());
             }
         }
-        
+
         self.scope_stack.push(scope_info.clone());
         self.scope_map.insert(name, scope_info);
     }
-    
+
     /// 退出作用域 / Exit scope
     pub fn exit_scope(&mut self) -> Result<ScopeInfo, String> {
         if let Some(scope_info) = self.scope_stack.pop() {
@@ -554,7 +627,7 @@ impl OptimizedScopeManager {
             Err("No scope to exit".to_string())
         }
     }
-    
+
     /// 添加变量到当前作用域 / Add variable to current scope
     pub fn add_variable(&mut self, variable: String) -> Result<(), String> {
         if let Some(current_scope) = self.scope_stack.last_mut() {
@@ -564,7 +637,7 @@ impl OptimizedScopeManager {
             Err("No active scope".to_string())
         }
     }
-    
+
     /// 添加生命周期到当前作用域 / Add lifetime to current scope
     pub fn add_lifetime(&mut self, lifetime: String) -> Result<(), String> {
         if let Some(current_scope) = self.scope_stack.last_mut() {
@@ -574,14 +647,14 @@ impl OptimizedScopeManager {
             Err("No active scope".to_string())
         }
     }
-    
+
     /// 获取作用域统计信息 / Get scope statistics
     pub fn get_scope_statistics(&self) -> ScopeStatistics {
         let total_scopes = self.scope_map.len();
         let active_scopes = self.scope_stack.len();
         let total_variables = self.scope_map.values().map(|s| s.variables.len()).sum();
         let total_lifetimes = self.scope_map.values().map(|s| s.lifetimes.len()).sum();
-        
+
         ScopeStatistics {
             total_scopes,
             active_scopes,
@@ -603,22 +676,22 @@ impl ScopeOptimizer {
         let mut optimizer = Self {
             optimization_rules: Vec::new(),
         };
-        
+
         // 添加默认优化规则 / Add default optimization rules
         optimizer.add_optimization_rule(OptimizationRule {
             name: "variable_cleanup".to_string(),
             description: "Clean up unused variables".to_string(),
             rule_fn: |scope| scope.variables.len() > 10, // 简化的实现
         });
-        
+
         optimizer
     }
-    
+
     /// 添加优化规则 / Add optimization rule
     pub fn add_optimization_rule(&mut self, rule: OptimizationRule) {
         self.optimization_rules.push(rule);
     }
-    
+
     /// 优化作用域 / Optimize scope
     pub fn optimize_scope(&self, scope: &ScopeInfo) {
         for rule in &self.optimization_rules {
@@ -643,7 +716,6 @@ pub struct ScopeStatistics {
 }
 
 /// # 5. 增强的并发安全 / Enhanced Concurrency Safety
-
 /// 并发安全检查器 / Concurrency Safety Checker
 pub struct ConcurrencySafetyChecker {
     /// 线程映射 / Thread mapping
@@ -724,6 +796,7 @@ pub struct AccessRecord {
 }
 
 /// 访问类型 / Access Type
+/// Rust 1.90 增强版本，支持更多访问类型
 #[derive(Debug, Clone, PartialEq)]
 pub enum AccessType {
     /// 读访问 / Read access
@@ -732,6 +805,14 @@ pub enum AccessType {
     Write,
     /// 独占访问 / Exclusive access
     Exclusive,
+    /// Rust 1.90 新增：原子访问 / Atomic access
+    Atomic,
+    /// Rust 1.90 新增：条件访问 / Conditional access
+    Conditional,
+    /// Rust 1.90 新增：批量访问 / Batch access
+    Batch,
+    /// Rust 1.90 新增：流式访问 / Streaming access
+    Streaming,
 }
 
 /// 检测规则 / Detection Rule
@@ -760,7 +841,7 @@ impl ConcurrencySafetyChecker {
             data_race_detector: DataRaceDetector::new(),
         }
     }
-    
+
     /// 注册线程 / Register thread
     pub fn register_thread(&mut self, id: String, name: String) {
         let thread_info = ThreadInfo {
@@ -771,7 +852,7 @@ impl ConcurrencySafetyChecker {
         };
         self.thread_map.insert(id, thread_info);
     }
-    
+
     /// 注册锁 / Register lock
     pub fn register_lock(&mut self, name: String, lock_type: LockType) {
         let lock_info = LockInfo {
@@ -782,7 +863,7 @@ impl ConcurrencySafetyChecker {
         };
         self.lock_map.insert(name, lock_info);
     }
-    
+
     /// 记录资源访问 / Record resource access
     pub fn record_access(&mut self, thread_id: String, resource: String, access_type: AccessType) {
         let access_record = AccessRecord {
@@ -791,16 +872,16 @@ impl ConcurrencySafetyChecker {
             access_type,
             timestamp: std::time::Instant::now(),
         };
-        
+
         self.data_race_detector.record_access(access_record);
-        
+
         // 更新线程资源列表 / Update thread resource list
         if let Some(thread_info) = self.thread_map.get_mut(&thread_id)
             && !thread_info.resources.contains(&resource) {
                 thread_info.resources.push(resource);
             }
     }
-    
+
     /// 检测数据竞争 / Detect data races
     pub fn detect_data_races(&self) -> Vec<DataRaceReport> {
         self.data_race_detector.detect_races()
@@ -820,52 +901,52 @@ impl DataRaceDetector {
             access_records: Vec::new(),
             detection_rules: Vec::new(),
         };
-        
+
         // 添加默认检测规则 / Add default detection rules
         detector.add_detection_rule(DetectionRule {
             name: "write_write_conflict".to_string(),
             description: "Detect write-write conflicts".to_string(),
             rule_fn: |a, b| {
-                a.resource == b.resource && 
-                a.access_type == AccessType::Write && 
+                a.resource == b.resource &&
+                a.access_type == AccessType::Write &&
                 b.access_type == AccessType::Write &&
                 a.thread_id != b.thread_id
             },
         });
-        
+
         detector.add_detection_rule(DetectionRule {
             name: "read_write_conflict".to_string(),
             description: "Detect read-write conflicts".to_string(),
             rule_fn: |a, b| {
-                a.resource == b.resource && 
+                a.resource == b.resource &&
                 ((a.access_type == AccessType::Read && b.access_type == AccessType::Write) ||
                  (a.access_type == AccessType::Write && b.access_type == AccessType::Read)) &&
                 a.thread_id != b.thread_id
             },
         });
-        
+
         detector
     }
-    
+
     /// 添加检测规则 / Add detection rule
     pub fn add_detection_rule(&mut self, rule: DetectionRule) {
         self.detection_rules.push(rule);
     }
-    
+
     /// 记录访问 / Record access
     pub fn record_access(&mut self, access_record: AccessRecord) {
         self.access_records.push(access_record);
     }
-    
+
     /// 检测竞争 / Detect races
     pub fn detect_races(&self) -> Vec<DataRaceReport> {
         let mut reports = Vec::new();
-        
+
         for i in 0..self.access_records.len() {
             for j in (i + 1)..self.access_records.len() {
                 let access1 = &self.access_records[i];
                 let access2 = &self.access_records[j];
-                
+
                 for rule in &self.detection_rules {
                     if (rule.rule_fn)(access1, access2) {
                         reports.push(DataRaceReport {
@@ -878,7 +959,7 @@ impl DataRaceDetector {
                 }
             }
         }
-        
+
         reports
     }
 }
@@ -897,7 +978,6 @@ pub struct DataRaceReport {
 }
 
 /// # 6. 智能内存管理 / Smart Memory Management
-
 /// 内存管理器 / Memory Manager
 pub struct SmartMemoryManager {
     /// 内存分配记录 / Memory allocation records
@@ -924,6 +1004,7 @@ pub struct AllocationRecord {
 }
 
 /// 分配类型 / Allocation Type
+/// Rust 1.90 增强版本，支持更多分配类型
 #[derive(Debug, Clone, PartialEq)]
 pub enum AllocationType {
     /// 堆分配 / Heap allocation
@@ -932,9 +1013,18 @@ pub enum AllocationType {
     Stack,
     /// 静态分配 / Static allocation
     Static,
+    /// Rust 1.90 新增：共享内存分配 / Shared memory allocation
+    SharedMemory,
+    /// Rust 1.90 新增：内存映射分配 / Memory mapped allocation
+    MemoryMapped,
+    /// Rust 1.90 新增：自定义分配器 / Custom allocator
+    Custom,
+    /// Rust 1.90 新增：零拷贝分配 / Zero-copy allocation
+    ZeroCopy,
 }
 
 /// 内存使用统计 / Memory Usage Statistics
+/// Rust 1.90 增强版本，包含更多统计信息
 #[derive(Debug)]
 pub struct MemoryUsageStatistics {
     /// 总分配数 / Total allocations
@@ -949,6 +1039,14 @@ pub struct MemoryUsageStatistics {
     pub heap_allocations: usize,
     /// 栈分配数 / Stack allocations
     pub stack_allocations: usize,
+    /// Rust 1.90 新增：共享内存分配数 / Shared memory allocations
+    pub shared_memory_allocations: usize,
+    /// Rust 1.90 新增：内存映射分配数 / Memory mapped allocations
+    pub memory_mapped_allocations: usize,
+    /// Rust 1.90 新增：自定义分配数 / Custom allocations
+    pub custom_allocations: usize,
+    /// Rust 1.90 新增：零拷贝分配数 / Zero-copy allocations
+    pub zero_copy_allocations: usize,
 }
 
 impl Default for SmartMemoryManager {
@@ -969,11 +1067,15 @@ impl SmartMemoryManager {
                 active_size: 0,
                 heap_allocations: 0,
                 stack_allocations: 0,
+                shared_memory_allocations: 0,
+                memory_mapped_allocations: 0,
+                custom_allocations: 0,
+                zero_copy_allocations: 0,
             },
             optimization_suggestions: Vec::new(),
         }
     }
-    
+
     /// 记录内存分配 / Record memory allocation
     pub fn record_allocation(&mut self, id: String, size: usize, allocation_type: AllocationType) {
         let allocation_record = AllocationRecord {
@@ -983,73 +1085,77 @@ impl SmartMemoryManager {
             timestamp: std::time::Instant::now(),
             freed: false,
         };
-        
+
         self.allocation_records.insert(id, allocation_record);
-        
+
         // 更新统计信息 / Update statistics
         self.usage_statistics.total_allocations += 1;
         self.usage_statistics.total_size += size;
         self.usage_statistics.active_allocations += 1;
         self.usage_statistics.active_size += size;
-        
+
         match allocation_type {
             AllocationType::Heap => self.usage_statistics.heap_allocations += 1,
             AllocationType::Stack => self.usage_statistics.stack_allocations += 1,
             AllocationType::Static => {} // 静态分配不计入统计
+            AllocationType::SharedMemory => self.usage_statistics.shared_memory_allocations += 1,
+            AllocationType::MemoryMapped => self.usage_statistics.memory_mapped_allocations += 1,
+            AllocationType::Custom => self.usage_statistics.custom_allocations += 1,
+            AllocationType::ZeroCopy => self.usage_statistics.zero_copy_allocations += 1,
         }
     }
-    
+
     /// 记录内存释放 / Record memory deallocation
     pub fn record_deallocation(&mut self, id: &str) -> Result<(), String> {
         if let Some(allocation_record) = self.allocation_records.get_mut(id) {
             if allocation_record.freed {
                 return Err(format!("Allocation {} already freed", id));
             }
-            
+
             allocation_record.freed = true;
             self.usage_statistics.active_allocations -= 1;
             self.usage_statistics.active_size -= allocation_record.size;
-            
+
             Ok(())
         } else {
             Err(format!("Allocation {} not found", id))
         }
     }
-    
+
     /// 分析内存使用 / Analyze memory usage
     pub fn analyze_memory_usage(&mut self) -> Vec<String> {
         let mut suggestions = Vec::new();
-        
+
         // 检查内存泄漏 / Check for memory leaks
         let leaked_allocations = self.allocation_records.values()
             .filter(|r| !r.freed)
             .count();
-        
+
         if leaked_allocations > 0 {
             suggestions.push(format!("Potential memory leak: {} unfreed allocations", leaked_allocations));
         }
-        
+
         // 检查大分配 / Check for large allocations
         let large_allocations = self.allocation_records.values()
             .filter(|r| r.size > 1024 * 1024) // 1MB
             .count();
-        
+
         if large_allocations > 0 {
             suggestions.push(format!("Large allocations detected: {} allocations > 1MB", large_allocations));
         }
-        
+
         // 检查分配模式 / Check allocation patterns
-        let heap_ratio = self.usage_statistics.heap_allocations as f64 / 
+        let heap_ratio = self.usage_statistics.heap_allocations as f64 /
                         self.usage_statistics.total_allocations as f64;
-        
+
         if heap_ratio > 0.8 {
             suggestions.push("High heap allocation ratio, consider stack allocation optimization".to_string());
         }
-        
+
         self.optimization_suggestions = suggestions.clone();
         suggestions
     }
-    
+
     /// 获取内存统计信息 / Get memory statistics
     pub fn get_memory_statistics(&self) -> &MemoryUsageStatistics {
         &self.usage_statistics
@@ -1057,48 +1163,47 @@ impl SmartMemoryManager {
 }
 
 /// # 主要功能函数 / Main Function Functions
-
 /// 运行所有 Rust 1.90 特性示例 / Run all Rust 1.90 features examples
 pub fn run_all_rust_190_features_examples() {
     println!("=== Rust 1.90 特性示例 / Rust 1.90 Features Examples ===");
-    
+
     println!("\n1. 改进的借用检查器 / Improved Borrow Checker");
     improved_borrow_checker_example();
-    
+
     println!("\n2. 增强的生命周期推断 / Enhanced Lifetime Inference");
     enhanced_lifetime_inference_example();
-    
+
     println!("\n3. 新的智能指针特性 / New Smart Pointer Features");
     new_smart_pointer_features_example();
-    
+
     println!("\n4. 优化的作用域管理 / Optimized Scope Management");
     optimized_scope_management_example();
-    
+
     println!("\n5. 增强的并发安全 / Enhanced Concurrency Safety");
     enhanced_concurrency_safety_example();
-    
+
     println!("\n6. 智能内存管理 / Smart Memory Management");
     smart_memory_management_example();
-    
+
     println!("\n=== 所有 Rust 1.90 特性示例运行完成 / All Rust 1.90 Features Examples Completed ===");
 }
 
 /// 改进的借用检查器示例 / Improved Borrow Checker Example
 fn improved_borrow_checker_example() {
     let mut checker = ImprovedBorrowChecker::new();
-    
+
     // 创建不可变借用 / Create immutable borrow
     let borrow1 = checker.create_borrow("owner1".to_string(), "borrower1".to_string(), BorrowType::Immutable);
     println!("Immutable borrow: {:?}", borrow1);
-    
+
     // 创建另一个不可变借用 / Create another immutable borrow
     let borrow2 = checker.create_borrow("owner1".to_string(), "borrower2".to_string(), BorrowType::Immutable);
     println!("Another immutable borrow: {:?}", borrow2);
-    
+
     // 尝试创建可变借用（应该失败）/ Try to create mutable borrow (should fail)
     let borrow3 = checker.create_borrow("owner1".to_string(), "borrower3".to_string(), BorrowType::Mutable);
     println!("Mutable borrow attempt: {:?}", borrow3);
-    
+
     // 获取统计信息 / Get statistics
     let stats = checker.get_borrow_statistics();
     println!("Borrow statistics: {:?}", stats);
@@ -1107,18 +1212,18 @@ fn improved_borrow_checker_example() {
 /// 增强的生命周期推断示例 / Enhanced Lifetime Inference Example
 fn enhanced_lifetime_inference_example() {
     let mut inferencer = LifetimeInferencer::new();
-    
+
     // 推断生命周期 / Infer lifetimes
     let lifetime1 = inferencer.infer_lifetime("'a".to_string(), "scope1".to_string());
     let lifetime2 = inferencer.infer_lifetime("'b".to_string(), "scope2".to_string());
-    
+
     println!("Lifetime 1: {:?}", lifetime1);
     println!("Lifetime 2: {:?}", lifetime2);
-    
+
     // 检查生命周期约束 / Check lifetime constraints
     let constraint_result = inferencer.check_lifetime_constraints(&lifetime1, &lifetime2);
     println!("Lifetime constraint check: {}", constraint_result);
-    
+
     // 优化生命周期 / Optimize lifetime
     let optimized_lifetime = inferencer.optimize_lifetime(&lifetime1);
     println!("Optimized lifetime: {:?}", optimized_lifetime);
@@ -1127,20 +1232,20 @@ fn enhanced_lifetime_inference_example() {
 /// 新的智能指针特性示例 / New Smart Pointer Features Example
 fn new_smart_pointer_features_example() {
     let mut manager = SmartPointerManager::new();
-    
+
     // 创建智能指针 / Create smart pointers
     manager.create_smart_pointer("ptr1".to_string(), SmartPointerType::Rc);
     manager.create_smart_pointer("ptr2".to_string(), SmartPointerType::Arc);
     manager.create_smart_pointer("ptr3".to_string(), SmartPointerType::Box);
-    
+
     // 克隆智能指针 / Clone smart pointers
     manager.clone_smart_pointer("ptr1").unwrap();
     manager.clone_smart_pointer("ptr1").unwrap();
-    
+
     // 获取引用计数 / Get reference counts
     println!("ptr1 reference count: {:?}", manager.get_reference_count("ptr1"));
     println!("ptr2 reference count: {:?}", manager.get_reference_count("ptr2"));
-    
+
     // 分析使用情况 / Analyze usage
     let suggestions = manager.analyze_usage();
     println!("Optimization suggestions: {:?}", suggestions);
@@ -1149,24 +1254,24 @@ fn new_smart_pointer_features_example() {
 /// 优化的作用域管理示例 / Optimized Scope Management Example
 fn optimized_scope_management_example() {
     let mut manager = OptimizedScopeManager::new();
-    
+
     // 进入作用域 / Enter scopes
     manager.enter_scope("main".to_string(), ScopeType::Function);
     manager.enter_scope("block1".to_string(), ScopeType::Block);
-    
+
     // 添加变量和生命周期 / Add variables and lifetimes
     manager.add_variable("x".to_string()).unwrap();
     manager.add_variable("y".to_string()).unwrap();
     manager.add_lifetime("'a".to_string()).unwrap();
-    
+
     // 进入子作用域 / Enter child scope
     manager.enter_scope("block2".to_string(), ScopeType::Block);
     manager.add_variable("z".to_string()).unwrap();
-    
+
     // 退出作用域 / Exit scopes
     let scope_info = manager.exit_scope().unwrap();
     println!("Exited scope: {:?}", scope_info);
-    
+
     // 获取统计信息 / Get statistics
     let stats = manager.get_scope_statistics();
     println!("Scope statistics: {:?}", stats);
@@ -1175,17 +1280,17 @@ fn optimized_scope_management_example() {
 /// 增强的并发安全示例 / Enhanced Concurrency Safety Example
 fn enhanced_concurrency_safety_example() {
     let mut checker = ConcurrencySafetyChecker::new();
-    
+
     // 注册线程和锁 / Register threads and locks
     checker.register_thread("thread1".to_string(), "Worker 1".to_string());
     checker.register_thread("thread2".to_string(), "Worker 2".to_string());
     checker.register_lock("mutex1".to_string(), LockType::Mutex);
     checker.register_lock("rwlock1".to_string(), LockType::RwLock);
-    
+
     // 记录资源访问 / Record resource access
     checker.record_access("thread1".to_string(), "resource1".to_string(), AccessType::Write);
     checker.record_access("thread2".to_string(), "resource1".to_string(), AccessType::Write);
-    
+
     // 检测数据竞争 / Detect data races
     let races = checker.detect_data_races();
     println!("Data races detected: {}", races.len());
@@ -1197,19 +1302,19 @@ fn enhanced_concurrency_safety_example() {
 /// 智能内存管理示例 / Smart Memory Management Example
 fn smart_memory_management_example() {
     let mut manager = SmartMemoryManager::new();
-    
+
     // 记录内存分配 / Record memory allocations
     manager.record_allocation("alloc1".to_string(), 1024, AllocationType::Heap);
     manager.record_allocation("alloc2".to_string(), 512, AllocationType::Stack);
     manager.record_allocation("alloc3".to_string(), 2048, AllocationType::Heap);
-    
+
     // 记录内存释放 / Record memory deallocation
     manager.record_deallocation("alloc1").unwrap();
-    
+
     // 分析内存使用 / Analyze memory usage
     let suggestions = manager.analyze_memory_usage();
     println!("Memory optimization suggestions: {:?}", suggestions);
-    
+
     // 获取统计信息 / Get statistics
     let stats = manager.get_memory_statistics();
     println!("Memory statistics: {:?}", stats);

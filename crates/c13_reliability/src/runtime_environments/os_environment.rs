@@ -92,7 +92,7 @@ impl OSEnvironmentAdapter {
         // 获取当前进程信息
         if let Some(process) = self.system.process(Pid::from(std::process::id() as usize)) {
             info.insert("current_process_id".to_string(), process.pid().to_string());
-            info.insert("current_process_name".to_string(), process.name().to_string());
+            info.insert("current_process_name".to_string(), process.name().to_string_lossy().to_string());
             info.insert("current_process_memory".to_string(), process.memory().to_string());
             info.insert("current_process_cpu".to_string(), process.cpu_usage().to_string());
         }
@@ -249,7 +249,7 @@ impl RuntimeEnvironmentAdapter for OSEnvironmentAdapter {
         system.refresh_all();
         
         // 计算CPU使用率
-        let cpu_usage = system.global_cpu_info().cpu_usage();
+        let cpu_usage = system.global_cpu_usage();
         
         // 计算内存使用率
         let memory_usage_bytes = system.used_memory();
@@ -286,7 +286,7 @@ impl RuntimeEnvironmentAdapter for OSEnvironmentAdapter {
         let mut environment_specific = HashMap::new();
         
         // 检查CPU使用率
-        let cpu_usage = self.system.global_cpu_info().cpu_usage();
+        let cpu_usage = self.system.global_cpu_usage();
         let cpu_health = if cpu_usage > 90.0 {
             HealthLevel::Critical
         } else if cpu_usage > 80.0 {

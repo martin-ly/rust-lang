@@ -1,3 +1,4 @@
+#![allow(clippy::type_complexity)]
 /*
 在 Rust 中，关联类型（associated types）是与特征（traits）相关联的类型参数。
 它们允许在特征中定义一个类型，而不需要在实现特征时显式地指定该类型。
@@ -369,10 +370,11 @@ type NodeList = Vec<String>;
 type EdgeList = Vec<(String, String)>;
 type NumberList = Vec<i32>;
 type KeyValueList<K, V> = Vec<(K, V)>;
-// type IteratorResult<T, E> = Result<Option<T>, E>;
-// type PeekResult<'a, T, E> = Result<Option<&'a T>, E>;
-// type ConnectionResult<T, E> = Result<T, E>;
-// type TransactionResult<T, E> = Result<T, E>;
+// 将常见复杂返回类型提炼为类型别名，降低签名复杂度
+type IteratorResult<T, E> = Result<Option<T>, E>;
+type PeekResult<'a, T, E> = Result<Option<&'a T>, E>;
+type ConnectionResult<T, E> = Result<T, E>;
+type TransactionResult<T, E> = Result<T, E>;
 
 // 基本关联类型示例
 pub trait Iterator {
@@ -461,8 +463,8 @@ pub trait Stream {
     type Item;
     type Error;
 
-    fn next(&mut self) -> Result<Option<Self::Item>, Self::Error>;
-    fn peek(&self) -> Result<Option<&Self::Item>, Self::Error>;
+    fn next(&mut self) -> IteratorResult<Self::Item, Self::Error>;
+    fn peek(&self) -> PeekResult<'_, Self::Item, Self::Error>;
 }
 
 pub struct NumberStream {
@@ -474,7 +476,7 @@ impl Stream for NumberStream {
     type Item = i32;
     type Error = String;
 
-    fn next(&mut self) -> Result<Option<Self::Item>, Self::Error> {
+    fn next(&mut self) -> IteratorResult<Self::Item, Self::Error> {
         if self.position < self.numbers.len() {
             let item = self.numbers[self.position];
             self.position += 1;
@@ -484,7 +486,7 @@ impl Stream for NumberStream {
         }
     }
 
-    fn peek(&self) -> Result<Option<&Self::Item>, Self::Error> {
+    fn peek(&self) -> PeekResult<'_, Self::Item, Self::Error> {
         if self.position < self.numbers.len() {
             Ok(Some(&self.numbers[self.position]))
         } else {
@@ -508,11 +510,11 @@ pub trait Database {
     type Transaction;
     type Error;
 
-    fn connect(&self) -> Result<Self::Connection, Self::Error>;
+    fn connect(&self) -> ConnectionResult<Self::Connection, Self::Error>;
     fn begin_transaction(
         &self,
         conn: &mut Self::Connection,
-    ) -> Result<Self::Transaction, Self::Error>;
+    ) -> TransactionResult<Self::Transaction, Self::Error>;
     fn commit(&self, transaction: Self::Transaction) -> Result<(), Self::Error>;
 }
 
@@ -523,14 +525,14 @@ impl Database for SqliteDatabase {
     type Transaction = String;
     type Error = String;
 
-    fn connect(&self) -> Result<Self::Connection, Self::Error> {
+    fn connect(&self) -> ConnectionResult<Self::Connection, Self::Error> {
         Ok("sqlite_connection".to_string())
     }
 
     fn begin_transaction(
         &self,
         _conn: &mut Self::Connection,
-    ) -> Result<Self::Transaction, Self::Error> {
+    ) -> TransactionResult<Self::Transaction, Self::Error> {
         Ok("sqlite_transaction".to_string())
     }
 
@@ -548,6 +550,7 @@ pub trait AdvancedIterator {
     fn key(&self) -> Option<&Self::Key>;
 }
 
+#[allow(clippy::type_complexity)]
 pub struct KeyValueIterator<K, V> {
     pub items: KeyValueList<K, V>,
     pub position: usize,

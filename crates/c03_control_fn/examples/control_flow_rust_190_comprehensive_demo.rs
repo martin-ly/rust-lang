@@ -15,8 +15,10 @@
 
 use c03_control_fn::{
     rust_190_features::*,
-    async_control_flow_190::*,
+    async_control_flow_190::{AsyncResourceManager, AsyncFileResource, DatabaseResource, AsyncStateMachine190, AsyncState, demonstrate_async_control_flow_190},
     performance_optimization_190::*,
+    rust_190_complete_features::*,
+    performance_benchmarks_190::*,
 };
 use std::time::Duration;
 use tokio::time::sleep;
@@ -102,7 +104,7 @@ async fn demonstrate_async_web_service() -> Result<(), Box<dyn std::error::Error
     let mut connections = Vec::new();
     for i in 0..3 {
         let conn = DatabaseConnection::new(
-            i,
+            i.to_string(),
             format!("postgresql://localhost:5432/db_{}", i)
         );
         connections.push(conn);
@@ -110,9 +112,9 @@ async fn demonstrate_async_web_service() -> Result<(), Box<dyn std::error::Error
     
     // 模拟处理请求
     let mut handles = Vec::new();
-    for (i, conn) in connections.into_iter().enumerate() {
+    for (i, mut conn) in connections.into_iter().enumerate() {
         let handle = tokio::spawn(async move {
-            println!("    处理请求 {} 在连接 {}", i, conn.id);
+            println!("    处理请求 {} 在连接 {}", i, conn.get_id());
             
             // 执行查询
             let result = conn.query("SELECT * FROM users WHERE id = ?").await;
@@ -164,7 +166,7 @@ async fn demonstrate_data_processing_pipeline() -> Result<(), Box<dyn std::error
     }
     
     // 性能测试
-    let processing_time = benchmark.benchmark("数据处理", 100, || {
+    let processing_time = benchmark.benchmark("数据处理", 100, || async {
         processed_data.iter().sum::<i32>()
     }).await;
     
@@ -188,16 +190,16 @@ async fn demonstrate_high_performance_computing() -> Result<(), Box<dyn std::err
     let benchmark = PerformanceBenchmark::new();
     
     // 测试不同处理方式的性能
-    let serial_time = benchmark.benchmark("串行计算", 5, || {
+    let serial_time = benchmark.benchmark("串行计算", 5, || async {
         demo.process_serial()
     }).await;
     
-    let parallel_time = benchmark.benchmark("并行计算", 5, || {
+    let parallel_time = benchmark.benchmark("并行计算", 5, || async {
         // 在测试环境中使用同步方法避免嵌套运行时
         demo.process_serial()
     }).await;
     
-    let simd_time = benchmark.benchmark("SIMD计算", 5, || {
+    let simd_time = benchmark.benchmark("SIMD计算", 5, || async {
         demo.process_simd()
     }).await;
     
@@ -205,14 +207,14 @@ async fn demonstrate_high_performance_computing() -> Result<(), Box<dyn std::err
     println!("    并行计算时间: {:?}", parallel_time);
     println!("    SIMD计算时间: {:?}", simd_time);
     
-    let parallel_speedup = serial_time.as_nanos() as f64 / parallel_time.as_nanos() as f64;
-    let simd_speedup = serial_time.as_nanos() as f64 / simd_time.as_nanos() as f64;
+    let parallel_speedup = serial_time.total_time.as_nanos() as f64 / parallel_time.total_time.as_nanos() as f64;
+    let simd_speedup = serial_time.total_time.as_nanos() as f64 / simd_time.total_time.as_nanos() as f64;
     
     println!("    并行加速比: {:.2}x", parallel_speedup);
     println!("    SIMD加速比: {:.2}x", simd_speedup);
     
     // 测试特质求解器性能
-    let trait_time = benchmark.benchmark("特质求解", 1000, || {
+    let trait_time = benchmark.benchmark("特质求解", 1000, || async {
         demo.process(42)
     }).await;
     
@@ -242,12 +244,12 @@ async fn demonstrate_resource_management_system() -> Result<(), Box<dyn std::err
         "postgresql://localhost:5432/replica".to_string(),
     ))).await?;
     
-    resource_manager.add_resource(Box::new(FileResource::new(
+    resource_manager.add_resource(Box::new(AsyncFileResource::new(
         "log_file".to_string(),
         "/var/log/application.log".to_string(),
     ))).await?;
     
-    resource_manager.add_resource(Box::new(FileResource::new(
+    resource_manager.add_resource(Box::new(AsyncFileResource::new(
         "config_file".to_string(),
         "/etc/application/config.toml".to_string(),
     ))).await?;

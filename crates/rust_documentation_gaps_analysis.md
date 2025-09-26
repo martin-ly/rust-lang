@@ -121,15 +121,15 @@ graph TD
     A --> E[IntoIterator for arrays]
     A --> F[Or patterns]
     A --> G[Macro 2.0]
-    
+
     B --> B1[关联类型约束]
     B --> B2[生命周期参数]
     B --> B3[复杂类型关系]
-    
+
     C --> C1[const fn增强]
     C --> C2[编译期计算]
     C --> C3[零成本抽象]
-    
+
     D --> D1[trait对象异步]
     D --> D2[动态分发异步]
     D --> D3[性能影响分析]
@@ -212,15 +212,15 @@ graph LR
     A --> C[认知负荷理论]
     A --> D[学习迁移理论]
     A --> E[专家-新手差异]
-    
+
     B --> B1[Rust所有权心智模型]
     B --> B2[类型系统认知负荷]
     B --> B3[借用检查器理解难度]
-    
+
     C --> C1[认知负荷测量]
     C --> C2[学习曲线优化]
     C --> C3[记忆负担分析]
-    
+
     D --> D1[从其他语言迁移]
     D --> D2[概念映射关系]
     D --> D3[学习障碍识别]
@@ -233,10 +233,10 @@ graph LR
 fn main() {
     let s1 = String::from("hello");
     let s2 = s1;  // 认知负荷点：所有权转移
-    
+
     // 新手常见错误：尝试使用s1
     // println!("{}", s1);  // 编译错误
-    
+
     // 专家理解：s1已被移动，不可再使用
     println!("{}", s2);
 }
@@ -282,15 +282,15 @@ graph TD
     A --> C[语义学分析]
     A --> D[语用学分析]
     A --> E[语言习得理论]
-    
+
     B --> B1[Rust语法树结构]
     B --> B2[语法歧义分析]
     B --> B3[语法复杂度测量]
-    
+
     C --> C1[类型语义学]
     C --> C2[所有权语义学]
     C --> C3[生命周期语义学]
-    
+
     D --> D1[编程语境分析]
     D --> D2[代码风格研究]
     D --> D3[团队协作语言]
@@ -310,15 +310,15 @@ graph LR
     A --> C[深度学习]
     A --> D[自然语言处理]
     A --> E[计算机视觉]
-    
+
     B --> B1[tch-rs (PyTorch绑定)]
     B --> B2[rust-bert]
     B --> B3[burn]
-    
+
     C --> C1[神经网络实现]
     C --> C2[自动微分]
     C --> C3[GPU加速]
-    
+
     D --> D1[文本处理]
     D --> D2[语言模型]
     D --> D3[语义分析]
@@ -387,15 +387,15 @@ graph TD
     A --> C[图形渲染]
     A --> D[物理引擎]
     A --> E[音频系统]
-    
+
     B --> B1[Bevy Engine]
     B --> B2[Amethyst]
     B --> B3[ggez]
-    
+
     C --> C1[Vulkan绑定]
     C --> C2[OpenGL绑定]
     C --> C3[DirectX绑定]
-    
+
     D --> D1[Rapier2D]
     D --> D2[Rapier3D]
     D --> D3[物理模拟]
@@ -415,15 +415,15 @@ graph LR
     A --> C[情境学习理论]
     A --> D[元认知理论]
     A --> E[分布式认知]
-    
+
     B --> B1[知识建构过程]
     B --> B2[概念转变]
     B --> B3[脚手架理论]
-    
+
     C --> C1[真实编程情境]
     C --> C2[项目驱动学习]
     C --> C3[协作学习]
-    
+
     D --> D1[学习策略]
     D --> D2[自我监控]
     D --> D3[反思实践]
@@ -497,19 +497,19 @@ graph TD
     A --> C[静态分析工具]
     A --> D[性能分析工具]
     A --> E[调试工具]
-    
+
     B --> B1[rustc深入分析]
     B --> B2[LLVM集成]
     B --> B3[编译优化]
-    
+
     C --> C1[clippy深度使用]
     C --> C2[rust-analyzer]
     C --> C3[自定义lint]
-    
+
     D --> D1[perf工具]
     D --> D2[flamegraph]
     D --> D3[memory profiler]
-    
+
     E --> E1[gdb/lldb集成]
     E --> E2[远程调试]
     E --> E3[崩溃分析]
@@ -573,13 +573,13 @@ edition = "2021"
 #[cfg(test)]
 mod formal_verification {
     use prusti_contracts::*;
-    
+
     #[pure]
     #[ensures(result >= 0)]
     fn abs(x: i32) -> i32 {
         if x >= 0 { x } else { -x }
     }
-    
+
     #[requires(x >= 0)]
     #[ensures(result == x)]
     fn sqrt(x: f64) -> f64 {
@@ -620,15 +620,15 @@ impl QuantumAlgorithm {
         // Grover搜索算法实现
         let n_qubits = 4;
         let mut qubits = vec![Qubit::new(); n_qubits];
-        
+
         // 初始化叠加态
         for qubit in &mut qubits {
             qubit.hadamard();
         }
-        
+
         // Oracle应用
         oracle(&qubits);
-        
+
         // 测量结果
         qubits.iter().map(|q| q.measure()).collect::<Vec<bool>>()
     }
@@ -651,20 +651,20 @@ mod token {
         balances: ink_storage::collections::HashMap<AccountId, Balance>,
         allowances: ink_storage::collections::HashMap<(AccountId, AccountId), Balance>,
     }
-    
+
     impl Token {
         #[ink(constructor)]
         pub fn new(initial_supply: Balance) -> Self {
             let mut balances = ink_storage::collections::HashMap::new();
             balances.insert(Self::env().caller(), initial_supply);
-            
+
             Self {
                 total_supply: initial_supply,
                 balances,
                 allowances: ink_storage::collections::HashMap::new(),
             }
         }
-        
+
         #[ink(message)]
         pub fn transfer(&mut self, to: AccountId, value: Balance) -> bool {
             // 转账逻辑实现
@@ -687,19 +687,19 @@ graph LR
     A --> C[C++]
     A --> D[Zig]
     A --> E[Carbon]
-    
+
     B --> B1[内存安全]
     B --> B2[零成本抽象]
     B --> B3[并发安全]
-    
+
     C --> C1[RAII]
     C --> C2[模板元编程]
     C --> C3[智能指针]
-    
+
     D --> D1[编译时代码执行]
     D --> D2[错误处理]
     D --> D3[内存管理]
-    
+
     E --> C1[现代化C++]
     C --> C2[互操作性]
     C --> C3[性能优化]
@@ -726,19 +726,19 @@ graph TD
     A --> C[应用编程]
     A --> D[脚本编程]
     A --> E[函数式编程]
-    
+
     B --> B1[Rust]
     B --> B2[C++]
     B --> B3[Zig]
-    
+
     C --> C1[Java]
     C --> C2[C#]
     C --> C3[Go]
-    
+
     D --> D1[Python]
     D --> D2[JavaScript]
     D --> D3[Ruby]
-    
+
     E --> E1[Haskell]
     E --> E2[OCaml]
     E --> E3[F#]
@@ -775,10 +775,10 @@ impl PerformanceProfiler {
                 .build(&mut group)
                 .unwrap(),
         ];
-        
+
         Self { group, events }
     }
-    
+
     fn profile<F, R>(&mut self, f: F) -> (R, PerformanceMetrics)
     where
         F: FnOnce() -> R,
@@ -788,7 +788,7 @@ impl PerformanceProfiler {
         let result = f();
         let duration = start.elapsed();
         self.group.disable().unwrap();
-        
+
         let metrics = self.collect_metrics();
         (result, metrics)
     }
@@ -865,13 +865,13 @@ criterion_main!(benches);
 struct SecurityVulnerabilities {
     // 1. 缓冲区溢出
     buffer_overflow: Vec<u8>,
-    
+
     // 2. 整数溢出
     integer_overflow: u32,
-    
+
     // 3. 空指针解引用
     null_pointer: Option<Box<i32>>,
-    
+
     // 4. 竞态条件
     race_condition: std::sync::Mutex<i32>,
 }
@@ -880,12 +880,12 @@ impl SecurityVulnerabilities {
     fn demonstrate_vulnerabilities(&mut self) {
         // 演示各种安全漏洞
         self.buffer_overflow.push(0);
-        
+
         // 整数溢出检查
         if let Some(result) = self.integer_overflow.checked_add(1) {
             self.integer_overflow = result;
         }
-        
+
         // 安全的空指针处理
         if let Some(value) = &self.null_pointer {
             println!("Value: {}", value);
@@ -906,7 +906,7 @@ use proc_macro::TokenStream;
 #[proc_macro_attribute]
 pub fn security_check(_attr: TokenStream, item: TokenStream) -> TokenStream {
     let input = parse_macro_input!(item as ItemFn);
-    
+
     // 安全检查逻辑
     let security_checks = quote! {
         // 自动插入安全检查代码
@@ -914,7 +914,7 @@ pub fn security_check(_attr: TokenStream, item: TokenStream) -> TokenStream {
             // 调试模式下的额外检查
         }
     };
-    
+
     // 返回修改后的代码
     TokenStream::from(quote! {
         #input
@@ -937,19 +937,19 @@ graph TD
     A --> C[项目活跃度]
     A --> D[学习资源质量]
     A --> E[企业采用率]
-    
+
     B --> B1[GitHub星数]
     B --> B2[贡献者数量]
     B --> B3[新用户增长率]
-    
+
     C --> C1[代码提交频率]
     C --> C2[Issue响应时间]
     C --> C3[版本发布频率]
-    
+
     D --> D1[文档完整性]
     D --> D2[教程质量]
     D --> D3[社区支持]
-    
+
     E --> E1[大公司采用]
     E --> E2[开源项目使用]
     E --> E3[商业项目采用]
@@ -974,13 +974,13 @@ graph TD
 struct AdoptionTrends {
     // 开发者数量增长
     developer_growth: Vec<(Year, u32)>,
-    
+
     // 项目数量增长
     project_growth: Vec<(Year, u32)>,
-    
+
     // 企业采用情况
     enterprise_adoption: Vec<Company>,
-    
+
     // 技术领域分布
     domain_distribution: HashMap<Domain, f64>,
 }
@@ -1008,15 +1008,15 @@ graph TD
     A[改进优先级] --> B[高优先级]
     A --> C[中优先级]
     A --> D[低优先级]
-    
+
     B --> B1[Rust 2021 Edition特性]
     B --> B2[形式化验证工具]
     B --> B3[性能分析框架]
-    
+
     C --> C1[跨语言比较]
     C --> C2[新兴应用领域]
     C --> C3[教学系统化]
-    
+
     D --> D1[社区分析]
     D --> D2[前沿技术]
     D --> D3[工具链扩展]

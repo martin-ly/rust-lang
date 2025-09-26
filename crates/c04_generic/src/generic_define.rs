@@ -53,6 +53,7 @@ pub fn summarize_item<T: Summarizable>(item: T) {
 
 #[allow(unused)]
 // 定义一个泛型函数，要求 T 实现 PartialOrd 特征
+#[allow(clippy::type_complexity)]
 pub fn largest<T: PartialOrd>(list: &[T]) -> &T {
     let mut largest = &list[0];
 
@@ -95,6 +96,7 @@ pub fn print_description<T: Describable>(item: T) {
 
 //泛型集合类型
 #[allow(unused)]
+#[allow(clippy::type_complexity)]
 pub fn hashmap_test() {
     let mut scores: HashMap<String, i32> = HashMap::new();
     scores.insert(String::from("Alice"), 50);

@@ -2,8 +2,9 @@
 Rust 1.89 方向的 GAT（Generic Associated Types）与 HRTB（Higher-Rank Trait Bounds）精简演示。
 
 GAT 用于在关联类型中引入额外的生命周期/类型参数，使 trait 的接口表达力更强。
-HRTB 用于像 `for<'a> ...` 这类“对所有生命周期均成立”的约束，常见于函数指针/闭包接收借用数据的情况。
+HRTB 用于像 `for<'a> ...` 这类"对所有生命周期均成立"的约束，常见于函数指针/闭包接收借用数据的情况。
 */
+
 
 // 1) GAT：一个最简“只读切片访问器”接口
 pub mod gat_demo {

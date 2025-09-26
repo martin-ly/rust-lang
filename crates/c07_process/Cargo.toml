@@ -9,7 +9,7 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-lang/c07_process"
 keywords = ["process", "ipc", "synchronization", "system-programming"]
 categories = ["system-programming", "concurrency"]
-rust-version = "1.89"
+rust-version = "1.90"
 
 [dependencies]
 # 核心异步运行时（可选）
@@ -101,8 +101,28 @@ path = "src/bin/async_stdio_demo.rs"
 name = "group_control_demo"
 path = "src/bin/group_control_demo.rs"
 
+[[bin]]
+name = "rust_190_features_demo"
+path = "src/bin/rust_190_features_demo.rs"
+
+[[bin]]
+name = "enhanced_async_demo"
+path = "src/bin/enhanced_async_demo.rs"
+
+[[bin]]
+name = "enhanced_ipc_demo"
+path = "src/bin/enhanced_ipc_demo.rs"
+
+[[bin]]
+name = "enhanced_sync_demo"
+path = "src/bin/enhanced_sync_demo.rs"
+
+[[bin]]
+name = "enhanced_error_demo"
+path = "src/bin/enhanced_error_demo.rs"
+
 [features]
-default = ["std"]
+default = ["std", "async"]
 std = []
 async = ["tokio", "tokio-util"]
 unix = ["nix"]

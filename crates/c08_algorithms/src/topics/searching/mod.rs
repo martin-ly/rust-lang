@@ -793,7 +793,7 @@ mod tests {
     fn test_linear_search() {
         let data = vec![1, 3, 5, 7, 9, 11, 13];
         let result = SearchingEngine::linear_search_sync(&data, &7);
-        
+
         assert!(result.found);
         assert_eq!(result.index, Some(3));
         assert_eq!(result.value, Some(7));
@@ -804,7 +804,7 @@ mod tests {
     fn test_binary_search() {
         let data = vec![1, 3, 5, 7, 9, 11, 13];
         let result = SearchingEngine::binary_search_sync(&data, &7);
-        
+
         assert!(result.found);
         assert_eq!(result.index, Some(3));
         assert_eq!(result.value, Some(7));
@@ -815,7 +815,7 @@ mod tests {
     fn test_exponential_search() {
         let data = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
         let result = SearchingEngine::exponential_search_sync(&data, &13);
-        
+
         assert!(result.found);
         assert_eq!(result.index, Some(6));
         assert_eq!(result.value, Some(13));
@@ -826,7 +826,7 @@ mod tests {
     fn test_interpolation_search() {
         let data = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
         let result = SearchingEngine::interpolation_search_sync(&data, 13);
-        
+
         assert!(result.found);
         assert_eq!(result.index, Some(6));
         assert_eq!(result.value, Some(13));
@@ -837,7 +837,7 @@ mod tests {
     fn test_jump_search() {
         let data = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
         let result = SearchingEngine::jump_search_sync(&data, &13);
-        
+
         assert!(result.found);
         assert_eq!(result.index, Some(6));
         assert_eq!(result.value, Some(13));
@@ -852,7 +852,7 @@ mod tests {
             |x| -(x - 3.14).powi(2), // 单峰函数，最大值在 x=3.14
             50,
         );
-        
+
         assert!(result.found);
         assert!(result.value.unwrap() - 3.14 < 0.1);
         assert_eq!(result.algorithm, SearchingAlgorithm::Ternary);
@@ -869,7 +869,7 @@ mod tests {
         graph.insert(6, vec![]);
 
         let result = SearchingEngine::depth_first_search_sync(&graph, &1, &6);
-        
+
         assert!(result.found);
         assert_eq!(result.value, Some(6));
         assert_eq!(result.algorithm, SearchingAlgorithm::DepthFirst);
@@ -886,7 +886,7 @@ mod tests {
         graph.insert(6, vec![]);
 
         let result = SearchingEngine::breadth_first_search_sync(&graph, &1, &6);
-        
+
         assert!(result.found);
         assert_eq!(result.value, Some(6));
         assert_eq!(result.algorithm, SearchingAlgorithm::BreadthFirst);
@@ -896,7 +896,7 @@ mod tests {
     fn test_parallel_search() {
         let data = vec![1, 3, 5, 7, 9, 11, 13];
         let result = SearchingEngine::linear_search_parallel(&data, &7);
-        
+
         assert!(result.found);
         assert_eq!(result.index, Some(3));
         assert_eq!(result.value, Some(7));
@@ -907,7 +907,7 @@ mod tests {
     async fn test_async_search() {
         let data = vec![1, 3, 5, 7, 9, 11, 13];
         let result = SearchingEngine::linear_search_async(data, 7).await.unwrap();
-        
+
         assert!(result.found);
         assert_eq!(result.index, Some(3));
         assert_eq!(result.value, Some(7));
@@ -919,7 +919,7 @@ mod tests {
     fn test_searching_complexities() {
         let complexities = SearchingComplexity::get_all_complexities();
         assert_eq!(complexities.len(), 10);
-        
+
         let binary_complexity = complexities.iter()
             .find(|c| c.algorithm == SearchingAlgorithm::Binary)
             .unwrap();
@@ -933,7 +933,7 @@ mod tests {
     fn test_searching_validator() {
         let data = vec![1, 3, 5, 7, 9];
         let result = SearchingEngine::linear_search_sync(&data, &5);
-        
+
         assert!(SearchingValidator::validate_search_result(&data, &5, &result));
         assert!(SearchingValidator::validate_performance(&SearchResult {
             found: true,

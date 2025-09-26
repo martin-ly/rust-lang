@@ -33,6 +33,10 @@ criterion = { workspace = true, optional = true }
 proptest = { workspace = true, optional = true }
 # 系统信息
 num_cpus = { workspace = true }
+# 随机数生成
+fastrand = "2.0"
+# 时间处理
+chrono = { version = "0.4", features = ["serde"] }
 
 [dev-dependencies]
 criterion = { workspace = true }
@@ -78,6 +82,14 @@ path = "examples/control_flow_rust_189_comprehensive_demo.rs"
 [[example]]
 name = "control_flow_rust_190_comprehensive_demo"
 path = "examples/control_flow_rust_190_comprehensive_demo.rs"
+
+[[example]]
+name = "rust_190_complete_features_demo"
+path = "examples/rust_190_complete_features_demo.rs"
+
+[[example]]
+name = "rust_190_advanced_comprehensive_demo"
+path = "examples/rust_190_advanced_comprehensive_demo.rs"
 
 [[test]]
 name = "rust_190_comprehensive_tests"

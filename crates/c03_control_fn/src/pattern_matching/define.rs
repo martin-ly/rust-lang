@@ -23,7 +23,7 @@ pub fn test_pattern_match() {
     fn describe_number02(num: i32) -> &'static str {
         match num {
             n if n < 0 => "负数",
-            n if n == 0 => "零",
+            0 => "零",
             n if n > 0 => "正数",
             _ => "未知",
         }
@@ -106,9 +106,8 @@ pub fn test_pattern_match_4() {
     }
 
     fn describe_wrapper<T: std::fmt::Debug>(wrapper: Wrapper<T>) {
-        match wrapper {
-            Wrapper { value } => println!("Wrapper contains: {:?}", value),
-        }
+        let Wrapper { value } = wrapper;
+        println!("Wrapper contains: {:?}", value)
     }
 
     fn describe_option<T: std::fmt::Debug>(option: Option<T>) {

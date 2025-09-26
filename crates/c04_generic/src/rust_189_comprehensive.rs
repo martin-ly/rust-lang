@@ -1,6 +1,6 @@
 /*
  * Rust 1.89 全面特性展示模块
- * 
+ *
  * 本模块展示了 Rust 1.89 版本中与泛型相关的新特性和改进，包括：
  * 1. RPITIT (Return Position Impl Trait In Traits)
  * 2. 增强的常量泛型 (Enhanced Const Generics)
@@ -14,17 +14,26 @@ use std::fmt::{Debug, Display};
 use std::marker::PhantomData;
 use std::ops::Add;
 
+// 类型别名导入（根据需要启用）
+// use crate::type_aliases::{
+//     ThreadHandle, SharedCounter, GenericResult, Processor, Validator,
+//     IteratorType, ParIteratorType, ComplexProcessor, ComplexValidator,
+//     RingBuffer, MemoryData, SortableVec, Cache, PerformanceTimer,
+// };
+
     /// RPITIT 特性演示
-    /// 
+    ///
     /// RPITIT 允许在 trait 方法的返回位置直接使用 impl Trait
     pub mod rpitit_features {
 
     /// 数据处理器 trait - 展示 RPITIT
     pub trait DataProcessor<T> {
         /// 处理数据并返回迭代器 - 使用 RPITIT
+        #[allow(clippy::type_complexity)]
         fn process(&self, data: Vec<T>) -> impl Iterator<Item = T> + '_;
-        
+
         /// 过滤和处理数据 - 使用 RPITIT
+        #[allow(clippy::type_complexity)]
         fn filter_and_process<F>(&self, data: Vec<T>, predicate: F) -> impl Iterator<Item = T> + '_
         where
             F: Fn(&T) -> bool + 'static;
@@ -90,10 +99,10 @@ use std::ops::Add;
         fn test_rpitit_number_processor() {
             let processor = NumberProcessor::new(2);
             let data = vec![1, 2, 3, 4, 5];
-            
+
             let result: Vec<i32> = processor.process(data).collect();
             assert_eq!(result, vec![2, 4, 6, 8, 10]);
-            
+
             let filtered: Vec<i32> = processor.filter_and_process(vec![1, 2, 3, 4, 5], |&x| x % 2 == 0).collect();
             assert_eq!(filtered, vec![4, 8]);
         }
@@ -102,7 +111,7 @@ use std::ops::Add;
         fn test_rpitit_string_processor() {
             let processor = StringProcessor::new("PREFIX: ".to_string());
             let data = vec!["hello".to_string(), "world".to_string()];
-            
+
             let result: Vec<String> = processor.process(data).collect();
             assert_eq!(result, vec!["PREFIX: hello", "PREFIX: world"]);
         }
@@ -115,10 +124,12 @@ pub mod enhanced_const_generics {
 
     /// 固定大小矩阵 - 展示常量泛型
     #[derive(Debug, Clone, PartialEq)]
+    #[allow(clippy::type_complexity)]
     pub struct Matrix<T, const ROWS: usize, const COLS: usize> {
         data: [[T; COLS]; ROWS],
     }
 
+    #[allow(clippy::type_complexity)]
     impl<T: Default + Copy, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, COLS> {
         /// 创建零矩阵
         pub fn zero() -> Self {
@@ -133,7 +144,9 @@ pub mod enhanced_const_generics {
         }
 
         /// 设置元素
+        #[allow(clippy::type_complexity)]
         pub fn set(&mut self, row: usize, col: usize, value: T) -> bool {
+            #[allow(clippy::excessive_nesting)]
             if let Some(row_data) = self.data.get_mut(row) {
                 if let Some(cell) = row_data.get_mut(col) {
                     *cell = value;
@@ -146,6 +159,7 @@ pub mod enhanced_const_generics {
         /// 转置矩阵
         pub fn transpose(self) -> Matrix<T, COLS, ROWS> {
             let mut result = Matrix::<T, COLS, ROWS>::zero();
+            #[allow(clippy::excessive_nesting)]
             for i in 0..ROWS {
                 for j in 0..COLS {
                     let value = self.data[i][j];
@@ -164,6 +178,7 @@ pub mod enhanced_const_generics {
 
         fn add(self, other: Self) -> Self::Output {
             let mut result = Matrix::zero();
+            #[allow(clippy::excessive_nesting)]
             for i in 0..ROWS {
                 for j in 0..COLS {
                     let sum = self.data[i][j] + other.data[i][j];
@@ -176,6 +191,7 @@ pub mod enhanced_const_generics {
 
     /// 环形缓冲区 - 展示常量泛型
     #[derive(Debug, Clone)]
+    #[allow(clippy::type_complexity)]
     pub struct RingBuffer<T, const CAPACITY: usize> {
         data: [Option<T>; CAPACITY],
         head: usize,
@@ -189,6 +205,7 @@ pub mod enhanced_const_generics {
         }
     }
 
+    #[allow(clippy::type_complexity)]
     impl<T, const CAPACITY: usize> RingBuffer<T, CAPACITY> {
         pub fn new() -> Self {
             Self {
@@ -199,11 +216,12 @@ pub mod enhanced_const_generics {
             }
         }
 
+        #[allow(clippy::type_complexity)]
         pub fn push(&mut self, item: T) -> Result<(), T> {
             if self.len >= CAPACITY {
                 return Err(item);
             }
-            
+
             self.data[self.tail] = Some(item);
             self.tail = (self.tail + 1) % CAPACITY;
             self.len += 1;
@@ -214,7 +232,7 @@ pub mod enhanced_const_generics {
             if self.len == 0 {
                 return None;
             }
-            
+
             let item = self.data[self.head].take();
             self.head = (self.head + 1) % CAPACITY;
             self.len -= 1;
@@ -249,10 +267,10 @@ pub mod enhanced_const_generics {
             matrix.set(0, 1, 2);
             matrix.set(1, 0, 3);
             matrix.set(1, 1, 4);
-            
+
             assert_eq!(matrix.get(0, 0), Some(&1));
             assert_eq!(matrix.get(0, 1), Some(&2));
-            
+
             let transposed = matrix.transpose();
             assert_eq!(transposed.get(0, 0), Some(&1));
             assert_eq!(transposed.get(1, 0), Some(&2));
@@ -261,17 +279,17 @@ pub mod enhanced_const_generics {
         #[test]
         fn test_ring_buffer() {
             let mut buffer: RingBuffer<i32, 3> = RingBuffer::new();
-            
+
             assert!(buffer.is_empty());
             assert!(!buffer.is_full());
-            
+
             assert!(buffer.push(1).is_ok());
             assert!(buffer.push(2).is_ok());
             assert!(buffer.push(3).is_ok());
-            
+
             assert!(buffer.is_full());
             assert_eq!(buffer.len(), 3);
-            
+
             assert_eq!(buffer.pop(), Some(1));
             assert_eq!(buffer.pop(), Some(2));
             assert_eq!(buffer.pop(), Some(3));
@@ -284,6 +302,7 @@ pub mod enhanced_const_generics {
     pub mod trait_upcasting {
 
     /// 基础 trait
+    #[allow(clippy::type_complexity)]
     pub trait Shape {
         fn area(&self) -> f64;
         fn perimeter(&self) -> f64;
@@ -347,6 +366,7 @@ pub mod enhanced_const_generics {
     }
 
     /// 形状管理器 - 展示 trait 上行转换
+    #[allow(clippy::type_complexity)]
     pub struct ShapeManager {
         shapes: Vec<Box<dyn Drawable>>,
     }
@@ -364,11 +384,13 @@ pub mod enhanced_const_generics {
             }
         }
 
+        #[allow(clippy::type_complexity)]
         pub fn add_shape(&mut self, shape: Box<dyn Drawable>) {
             self.shapes.push(shape);
         }
 
         /// 上转到 Shape trait - 展示新的上行转换语法
+        #[allow(clippy::type_complexity)]
         pub fn get_total_area(&self) -> f64 {
             self.shapes.iter()
                 .map(|shape| {
@@ -391,12 +413,14 @@ pub mod enhanced_const_generics {
 
     impl ShapeProcessor {
         /// 处理形状 - 展示上行转换
+        #[allow(clippy::type_complexity)]
         pub fn process_shape(shape: &dyn Drawable) -> (f64, f64, String) {
             let shape_ref: &dyn Shape = shape;
             (shape_ref.area(), shape_ref.perimeter(), shape.color())
         }
 
         /// 批量处理形状
+        #[allow(clippy::type_complexity)]
         pub fn process_shapes(shapes: &[&dyn Drawable]) -> Vec<(f64, f64, String)> {
             shapes.iter()
                 .map(|shape| Self::process_shape(*shape))
@@ -411,26 +435,27 @@ pub mod enhanced_const_generics {
         #[test]
         fn test_trait_upcasting() {
             let mut manager = ShapeManager::new();
-            
+
             let circle = Box::new(Circle::new(
                 5.0, 0.0, 0.0, "红色".to_string()
             ));
-            
+
             manager.add_shape(circle);
-            
+
             let total_area = manager.get_total_area();
             let expected_area = std::f64::consts::PI * 25.0; // π * r²
             assert!((total_area - expected_area).abs() < 0.001);
         }
 
         #[test]
+        #[allow(clippy::type_complexity)]
         fn test_shape_processor() {
             let circle = Circle::new(3.0, 0.0, 0.0, "蓝色".to_string());
             let (area, perimeter, color) = ShapeProcessor::process_shape(&circle);
-            
+
             let expected_area = std::f64::consts::PI * 9.0;
             let expected_perimeter = 2.0 * std::f64::consts::PI * 3.0;
-            
+
             assert!((area - expected_area).abs() < 0.001);
             assert!((perimeter - expected_perimeter).abs() < 0.001);
             assert_eq!(color, "蓝色");
@@ -443,6 +468,7 @@ pub mod type_inference_improvements {
     use super::*;
 
     /// 通用数据转换器 - 展示改进的类型推断
+    #[allow(clippy::type_complexity)]
     pub struct DataConverter<T, U> {
         _phantom_t: PhantomData<T>,
         _phantom_u: PhantomData<U>,
@@ -463,6 +489,7 @@ pub mod type_inference_improvements {
         }
 
         /// 转换数据 - 展示类型推断
+        #[allow(clippy::type_complexity)]
         pub fn convert<F>(&self, input: T, converter: F) -> U
         where
             F: FnOnce(T) -> U,
@@ -471,6 +498,7 @@ pub mod type_inference_improvements {
         }
 
         /// 批量转换 - 展示复杂类型推断
+        #[allow(clippy::type_complexity)]
         pub fn convert_batch<F, I>(&self, inputs: I, converter: F) -> Vec<U>
         where
             F: Fn(T) -> U + Clone,
@@ -481,14 +509,15 @@ pub mod type_inference_improvements {
     }
 
     /// 智能类型推断示例
+    #[allow(clippy::type_complexity)]
     pub fn demonstrate_type_inference() {
         // Rust 1.89 可以更好地推断复杂泛型类型
         let converter = DataConverter::<i32, String>::new();
-        
+
         // 类型推断改进：编译器可以更好地推断闭包类型
         let result: String = converter.convert(42, |x| format!("数字: {}", x));
         println!("转换结果: {}", result);
-        
+
         // 批量转换的类型推断
         let numbers = vec![1, 2, 3, 4, 5];
         let strings: Vec<String> = converter.convert_batch(numbers, |x| {
@@ -498,22 +527,23 @@ pub mod type_inference_improvements {
     }
 
     /// 复杂的类型推断场景
+    #[allow(clippy::type_complexity)]
     pub fn complex_type_inference() {
         // 多级泛型推断
         let data: Vec<Vec<Option<i32>>> = vec![
             vec![Some(1), None, Some(3)],
             vec![None, Some(2), Some(4)],
         ];
-        
+
         // 编译器可以推断复杂的迭代器类型
         let flattened: Vec<i32> = data
             .into_iter()
             .flatten()
             .flatten()
             .collect();
-        
+
         println!("扁平化结果: {:?}", flattened);
-        
+
         // 复杂闭包的类型推断
         let processor = |x: i32| -> String {
             if x > 10 {
@@ -522,7 +552,7 @@ pub mod type_inference_improvements {
                 format!("小数: {}", x)
             }
         };
-        
+
         let results: Vec<String> = flattened.into_iter().map(processor).collect();
         println!("处理结果: {:?}", results);
     }
@@ -543,6 +573,7 @@ pub mod type_inference_improvements {
     pub mod lifetime_inference_enhancements {
 
     /// 生命周期推断改进示例
+    #[allow(clippy::type_complexity)]
     pub struct DataHolder<'a, T> {
         data: &'a T,
         metadata: String,
@@ -554,6 +585,7 @@ pub mod type_inference_improvements {
         }
 
         /// Rust 1.89 在生命周期推断方面的改进
+        #[allow(clippy::type_complexity)]
         pub fn get_data(&self) -> &'a T {
             self.data
         }
@@ -564,6 +596,7 @@ pub mod type_inference_improvements {
         }
 
         /// 复杂生命周期推断场景
+        #[allow(clippy::type_complexity)]
         pub fn process_data<F, U>(&self, processor: F) -> U
         where
             F: Fn(&T) -> U,
@@ -573,15 +606,16 @@ pub mod type_inference_improvements {
     }
 
     /// 生命周期推断改进的实际应用
+    #[allow(clippy::type_complexity)]
     pub fn demonstrate_lifetime_inference() {
         let original_data = vec![1, 2, 3, 4, 5];
         let holder = DataHolder::new(&original_data, "测试数据".to_string());
-        
+
         // Rust 1.89 可以更好地推断生命周期
         let data_ref = holder.get_data();
         println!("数据: {:?}", data_ref);
         println!("元数据: {}", holder.get_metadata());
-        
+
         // 复杂生命周期推断
         let processed_data = holder.process_data(|v| v.iter().sum::<i32>());
         println!("处理后的数据: {}", processed_data);
@@ -614,15 +648,15 @@ pub mod type_inference_improvements {
         #[test]
         fn test_lifetime_inference() {
             demonstrate_lifetime_inference();
-            
+
             let data1 = vec![1, 2, 3];
             let data2 = vec![4, 5, 6];
-            
+
             let holder = MultiLifetimeHolder::new(&data1, &data2);
             let result = holder.combine(|a, b| {
                 format!("{:?} + {:?}", a, b)
             });
-            
+
             assert!(result.contains("[1, 2, 3]"));
             assert!(result.contains("[4, 5, 6]"));
         }
@@ -634,7 +668,7 @@ pub mod new_generic_constraint_syntax {
     use super::*;
 
     /// 使用新的泛型约束语法的 trait
-    pub trait AdvancedProcessor<T> 
+    pub trait AdvancedProcessor<T>
     where
         T: Clone + Debug + PartialEq,
     {
@@ -757,7 +791,7 @@ pub mod new_generic_constraint_syntax {
                 |&x| x > 5,          // 验证器：大于5
                 |x| format!("值: {}", x), // 映射器：格式化
             );
-            
+
             assert_eq!(result, vec!["值: 6", "值: 8", "值: 10"]);
         }
     }
@@ -767,7 +801,7 @@ pub mod new_generic_constraint_syntax {
 pub fn demonstrate_rust_189_comprehensive() {
     use rpitit_features::DataProcessor;
     use new_generic_constraint_syntax::AdvancedProcessor;
-    
+
     println!("\n=== Rust 1.89 全面特性演示 ===");
 
     println!("\n1. RPITIT 特性演示:");
@@ -777,13 +811,13 @@ pub fn demonstrate_rust_189_comprehensive() {
     println!("数字处理器结果: {:?}", result);
 
     println!("\n2. 增强的常量泛型演示:");
-    let mut matrix: enhanced_const_generics::Matrix<i32, 2, 3> = 
+    let mut matrix: enhanced_const_generics::Matrix<i32, 2, 3> =
         enhanced_const_generics::Matrix::zero();
     matrix.set(0, 0, 1);
     matrix.set(1, 1, 2);
     println!("矩阵: {:?}", matrix);
 
-    let mut buffer: enhanced_const_generics::RingBuffer<i32, 5> = 
+    let mut buffer: enhanced_const_generics::RingBuffer<i32, 5> =
         enhanced_const_generics::RingBuffer::new();
     let _ = buffer.push(1);
     let _ = buffer.push(2);

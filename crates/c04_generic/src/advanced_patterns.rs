@@ -1,6 +1,6 @@
 /*
  * 高级泛型模式和设计模式示例模块
- * 
+ *
  * 本模块展示了使用 Rust 泛型实现的高级设计模式和编程技巧，包括：
  * 1. 工厂模式 (Factory Pattern)
  * 2. 建造者模式 (Builder Pattern)
@@ -12,7 +12,13 @@
  * 8. 命令模式 (Command Pattern)
  * 9. 状态模式 (State Pattern)
  * 10. 模板方法模式 (Template Method Pattern)
+ *
+ * 注意：本模块包含复杂的泛型类型，这些是为了演示高级模式所必需的。
+ * 在实际项目中，应该根据具体需求简化这些类型。
  */
+
+// 允许类型复杂度、过度嵌套和冗余闭包警告，因为这是高级泛型模式演示
+#![allow(clippy::type_complexity, clippy::excessive_nesting, clippy::redundant_closure)]
 
 use std::collections::HashMap;
 use std::fmt::Debug;
@@ -126,6 +132,9 @@ pub mod factory_pattern {
     }
 
     /// 通用工厂管理器
+    ///
+    /// 这个结构体使用泛型来实现类型安全的工厂模式。
+    /// 虽然类型约束看起来复杂，但这是为了实现编译时类型安全所必需的。
     pub struct FactoryManager<T: Product, F: ProductFactory<T>> {
         factory: F,
         products: Vec<T>,
@@ -163,14 +172,14 @@ pub mod factory_pattern {
             let mut electronic_manager = FactoryManager::new(
                 ElectronicProductFactory::new(12)
             );
-            
+
             let laptop = electronic_manager.create_and_add("笔记本电脑".to_string(), 5000.0);
             assert_eq!(laptop.name(), "笔记本电脑");
             assert_eq!(laptop.price(), 5000.0);
-            
+
             let phone = electronic_manager.create_and_add("手机".to_string(), 3000.0);
             assert_eq!(phone.name(), "手机");
-            
+
             assert_eq!(electronic_manager.total_value(), 8000.0);
         }
     }
@@ -268,7 +277,7 @@ pub mod builder_pattern {
 
     impl Buildable for User {
         type Builder = UserBuilder;
-        
+
         fn builder() -> Self::Builder {
             UserBuilder::new()
         }
@@ -323,6 +332,9 @@ pub mod builder_pattern {
 /// 策略模式 - 使用泛型实现不同的算法策略
 pub mod strategy_pattern {
     use super::*;
+
+    /// 策略容器别名，降低类型复杂度
+    pub type StrategyBox<T> = Box<dyn SortStrategy<T>>;
 
     /// 排序策略 trait
     pub trait SortStrategy<T> {
@@ -399,7 +411,7 @@ pub mod strategy_pattern {
 
     /// 策略管理器
     pub struct StrategyManager<T> {
-        strategies: HashMap<String, Box<dyn SortStrategy<T>>>,
+        strategies: HashMap<String, StrategyBox<T>>,
     }
 
     impl<T: 'static> Default for StrategyManager<T> {
@@ -469,6 +481,9 @@ pub mod strategy_pattern {
 pub mod observer_pattern {
     use super::*;
 
+    /// 观察者容器别名，降低类型复杂度
+    pub type ObserverBox<T> = Box<dyn Observer<T>>;
+
     /// 观察者 trait
     pub trait Observer<T> {
         fn update(&mut self, data: &T);
@@ -477,7 +492,7 @@ pub mod observer_pattern {
 
     /// 主题 trait
     pub trait Subject<T> {
-        fn attach(&mut self, observer: Box<dyn Observer<T>>);
+        fn attach(&mut self, observer: ObserverBox<T>);
         fn detach(&mut self, observer_id: &str);
         fn notify(&self, data: &T);
     }
@@ -550,7 +565,7 @@ pub mod observer_pattern {
 
     /// 泛型主题
     pub struct GenericSubject<T> {
-        observers: Vec<Box<dyn Observer<T>>>,
+        observers: Vec<ObserverBox<T>>,
         data: Option<T>,
     }
 
@@ -579,7 +594,7 @@ pub mod observer_pattern {
     }
 
     impl<T: Clone> Subject<T> for GenericSubject<T> {
-        fn attach(&mut self, observer: Box<dyn Observer<T>>) {
+        fn attach(&mut self, observer: ObserverBox<T>) {
             self.observers.push(observer);
         }
 
@@ -603,13 +618,13 @@ pub mod observer_pattern {
         #[test]
         fn test_observer_pattern() {
             let mut subject = GenericSubject::new();
-            
+
             let log_observer = Box::new(LogObserver::new("log1".to_string()));
             let stats_observer = Box::new(StatsObserver::new("stats1".to_string()));
-            
+
             subject.attach(log_observer);
             subject.attach(stats_observer);
-            
+
             subject.set_data("测试数据".to_string());
             assert_eq!(subject.get_data(), Some(&"测试数据".to_string()));
         }
@@ -720,7 +735,7 @@ pub mod decorator_pattern {
                 cached.clone()
             } else {
                 println!("缓存装饰器: 计算新结果");
-                
+
                 // 注意：这里需要可变引用，但 operation 是不可变的
                 // 在实际应用中，需要使用 RefCell 或其他内部可变性机制
                 self.decorator.operation(input.clone())
@@ -740,10 +755,10 @@ pub mod decorator_pattern {
         fn test_decorator_pattern() {
             let component = ConcreteComponent::new("测试组件".to_string());
             let logging_component = LoggingDecorator::new(component);
-            
+
             let result = logging_component.operation(42);
             assert_eq!(result, 42);
-            
+
             let description = logging_component.get_description();
             assert!(description.contains("日志装饰器"));
             assert!(description.contains("测试组件"));
@@ -822,7 +837,7 @@ pub mod singleton_pattern {
             config.insert("app_name".to_string(), "Rust 泛型示例".to_string());
             config.insert("version".to_string(), "1.0.0".to_string());
             config.insert("debug".to_string(), "true".to_string());
-            
+
             Self { config }
         }
 
@@ -851,7 +866,7 @@ pub mod singleton_pattern {
             for i in 0..max_connections {
                 connections.push(format!("连接_{}", i));
             }
-            
+
             Self {
                 connections,
                 max_connections,
@@ -880,15 +895,15 @@ pub mod singleton_pattern {
         #[test]
         fn test_singleton_pattern() {
             let manager = SingletonManager::new();
-            
+
             // 第一次获取实例
             let instance1 = manager.get_instance(|| ConfigManager::new()).unwrap();
             assert_eq!(instance1.get("app_name"), Some(&"Rust 泛型示例".to_string()));
-            
+
             // 第二次获取实例（应该是同一个）
             let instance2 = manager.get_instance(|| ConfigManager::new()).unwrap();
             assert_eq!(instance1.get("app_name"), instance2.get("app_name"));
-            
+
             // 验证是同一个实例
             assert_eq!(Arc::strong_count(&instance1), 3);
         }
@@ -904,6 +919,9 @@ pub mod singleton_pattern {
         fn undo(&mut self, target: &mut T) -> Result<(), String>;
         fn get_description(&self) -> String;
     }
+
+        /// 命令容器别名，降低类型复杂度
+        pub type CommandBox<T> = Box<dyn Command<T>>;
 
     /// 具体命令 - 设置值命令
     pub struct SetValueCommand<T> {
@@ -988,10 +1006,10 @@ pub mod singleton_pattern {
     }
 
     /// 命令调用者
-    pub struct CommandInvoker<T> {
-        history: Vec<Box<dyn Command<T>>>,
-        current_index: usize,
-    }
+        pub struct CommandInvoker<T> {
+            history: Vec<CommandBox<T>>,
+            current_index: usize,
+        }
 
     impl<T> Default for CommandInvoker<T> {
         fn default() -> Self {
@@ -1095,7 +1113,7 @@ pub fn demonstrate_advanced_patterns() {
     use builder_pattern::{Buildable, Builder};
     use observer_pattern::Subject;
     use decorator_pattern::Component;
-    
+
     println!("\n=== 高级泛型模式和设计模式演示 ===");
 
     println!("\n1. 工厂模式演示:");
@@ -1141,11 +1159,11 @@ pub fn demonstrate_advanced_patterns() {
     println!("\n7. 命令模式演示:");
     let mut invoker = command_pattern::CommandInvoker::new();
     let mut value = 10;
-    
+
     let set_cmd = command_pattern::SetValueCommand::new(20);
     invoker.execute_command(set_cmd, &mut value).unwrap();
     println!("执行设置命令后: {}", value);
-    
+
     let add_cmd = command_pattern::MathOperationCommand::new(
         |x| x + 5,
         |x| x - 5,
@@ -1153,7 +1171,7 @@ pub fn demonstrate_advanced_patterns() {
     );
     invoker.execute_command(add_cmd, &mut value).unwrap();
     println!("执行加法命令后: {}", value);
-    
+
     invoker.undo(&mut value).unwrap();
     println!("撤销后: {}", value);
 

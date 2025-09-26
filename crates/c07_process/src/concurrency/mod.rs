@@ -5,6 +5,10 @@ pub mod mutex;
 pub mod rwlock;
 pub mod semaphore;
 
+// 增强的同步原语功能
+#[cfg(feature = "async")]
+pub mod enhanced;
+
 use crate::error::SyncResult;
 use crate::types::{SyncConfig, SyncPrimitive};
 use std::collections::HashMap;

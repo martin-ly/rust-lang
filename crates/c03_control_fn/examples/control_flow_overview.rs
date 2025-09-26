@@ -29,13 +29,10 @@ fn find_first_even(nums: &[i32]) -> Option<i32> {
 }
 
 fn index_of(nums: &[i32], target: i32) -> Option<usize> {
-    let idx = 'search: loop {
-        for (i, &n) in nums.iter().enumerate() {
-            if n == target { break 'search Some(i); }
-        }
-        break None;
-    };
-    idx
+    for (i, &n) in nums.iter().enumerate() {
+        if n == target { return Some(i); }
+    }
+    None
 }
 
 fn never_returns() -> ! {
@@ -59,5 +56,3 @@ fn main() {
 
     let _ = std::panic::catch_unwind(|| pick(None));
 }
-
-

@@ -10,7 +10,15 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-lang/c12_model"
 documentation = "https://docs.rs/c12_model"
 homepage = "https://c12model.dev"
-keywords = ["rust", "modeling", "machine-learning", "formal-methods", "mathematics", "queueing-theory", "statistics"]
+keywords = [
+    "rust",
+    "modeling",
+    "machine-learning",
+    "formal-methods",
+    "mathematics",
+    "queueing-theory",
+    "statistics",
+]
 categories = ["science", "algorithms", "mathematics", "simulation"]
 readme = "README.md"
 rust-version = "1.90"
@@ -57,9 +65,9 @@ approx = { version = "0.5.1", optional = true }
 libm = "0.2.15"
 
 # 新增：现代机器学习库集成
-candle-core = { version = "0.7.0", optional = true }
-candle-nn = { version = "0.7.0", optional = true }
-candle-transformers = { version = "0.7.0", optional = true }
+candle-core = { version = "0.9.1", optional = true }
+candle-nn = { version = "0.9.1", optional = true }
+candle-transformers = { version = "0.9.1", optional = true }
 
 # 新增：高性能张量计算
 ndarray = { version = "0.15.6", optional = true }
@@ -75,10 +83,19 @@ imageproc = { version = "0.24.0", optional = true }
 
 # 运行时/示例适配基础依赖（对齐到 workspace 或最新主线）
 # async-std 已移除，使用 tokio 替代 (async-std 已弃用)
-tokio = { workspace = true, features = ["rt-multi-thread", "sync", "time"], optional = true }
+tokio = { workspace = true, features = [
+    "rt-multi-thread",
+    "sync",
+    "time",
+], optional = true }
 tokio-util = { workspace = true, features = ["rt"], optional = true }
 async-channel = { version = "2.5.0", optional = true }
-tower = { workspace = true, features = ["limit", "timeout", "retry", "util"], optional = true }
+tower = { workspace = true, features = [
+    "limit",
+    "timeout",
+    "retry",
+    "util",
+], optional = true }
 http = { workspace = true, optional = true }
 hyper = { workspace = true, features = ["client", "http1"], optional = true }
 
@@ -133,8 +150,8 @@ gpu-acceleration = []
 
 # 完整功能
 full = [
-    "enhanced-math", 
-    "advanced-algorithms", 
+    "enhanced-math",
+    "advanced-algorithms",
     "parallel-computing",
     # "lapack-integration",  # 暂时禁用以避免安全漏洞
     "high-precision",
@@ -142,7 +159,7 @@ full = [
     "visualization",
     "candle-ml",
     "tensor-computing",
-    "computer-vision"
+    "computer-vision",
 ]
 
 [[bench]]

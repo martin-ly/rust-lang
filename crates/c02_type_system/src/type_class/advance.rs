@@ -188,7 +188,7 @@ pub fn advance_trait_06() {
     struct Circle;
 
     impl Constants for Circle {
-        const PI: f64 = 3.14159;
+        const PI: f64 = std::f64::consts::PI;
     }
 
     println!("6. 特征的关联常量");

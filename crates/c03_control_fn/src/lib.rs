@@ -2,9 +2,9 @@
 //!
 //! 本项目专注于控制流与函数系统的深度分析和实践应用，
 //! 涵盖了异步编程增强、类型系统增强、性能优化特性等核心新特性。
-//! 
+//!
 //! ## Rust 1.90 新特性
-//! 
+//!
 //! - **异步Drop**: 异步资源清理支持
 //! - **异步生成器**: 原生异步迭代器支持
 //! - **Polonius借用检查器**: 更精确的借用分析
@@ -20,6 +20,10 @@ pub mod rust_189_features;
 
 // 导出Rust 1.90新特性模块
 pub mod rust_190_features;
+pub mod rust_190_real_implementation;  // 真正的Rust 1.90特性实现
+pub mod rust_190_complete_features;    // Rust 1.90完整特性实现
+pub mod advanced_async_control_flow_190; // 高级异步控制流
+pub mod performance_benchmarks_190;    // 性能基准测试
 pub mod async_control_flow_190;
 pub mod performance_optimization_190;
 pub mod formal_verification_190;
@@ -47,6 +51,19 @@ pub use rust_189_enhanced_features::*;
 
 // 重新导出Rust 1.90新特性
 pub use rust_190_features::*;
+pub use rust_190_real_implementation::*;  // 真正的Rust 1.90特性实现
+
+// 选择性导出rust_190_complete_features以避免名称冲突
+pub use rust_190_complete_features::{
+    AsyncClosureDemo, TupleCollectionDemo, AsyncProcessor, DataProcessor,
+    CompleteAdvancedDataProcessor, AdvancedDataProcessor, AsyncProcessorManager,
+    ProcessorWrapper, CompleteAsyncResource, CompleteAsyncResourceManager,
+    CompleteAsyncResourceManagerType, CompleteAsyncResourceType,
+    DatabaseConnection, FileResource, demonstrate_rust_190_complete_features
+};
+
+pub use advanced_async_control_flow_190::*; // 高级异步控制流
+pub use performance_benchmarks_190::*;    // 性能基准测试
 pub use async_control_flow_190::*;
 pub use performance_optimization_190::*;
 pub use formal_verification_190::*;

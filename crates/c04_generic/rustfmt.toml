@@ -1,5 +1,5 @@
 # Rust 代码格式化配置
-edition = "2021"
+edition = "2024"
 max_width = 100
 tab_spaces = 4
 newline_style = "Unix"

@@ -32,8 +32,8 @@
 
 #[allow(unused)]
 pub fn float_operation() {
-    let pi: f64 = 3.14159; // 64 位浮点数
-    let e: f32 = 2.71828; // 32 位浮点数
+    let pi: f64 = std::f64::consts::PI; // 64 位浮点数
+    let e: f32 = std::f32::consts::E; // 32 位浮点数
 
     let sum = pi + e as f64; // 将 e 转换为 f64
     println!("Sum of pi and e: {}", sum); // 打印: Sum of pi and e: 5.85987

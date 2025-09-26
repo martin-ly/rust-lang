@@ -15,15 +15,15 @@ use std::collections::HashMap;
 use std::fmt::{self, Display};
 
 /// 基础语法演示结构体
-/// 
+///
 /// 这个结构体用于演示 Rust 的基础语法特性，包括：
 /// - 结构体定义
 /// - 方法实现
 /// - 生命周期参数
 /// - 泛型参数
 #[derive(Debug, Clone, PartialEq)]
-pub struct BasicSyntaxDemo<T> 
-where 
+pub struct BasicSyntaxDemo<T>
+where
     T: Clone + PartialEq + Display,
 {
     /// 数据字段，使用泛型类型
@@ -34,22 +34,22 @@ where
     pub metadata: Option<String>,
 }
 
-impl<T> BasicSyntaxDemo<T> 
-where 
+impl<T> BasicSyntaxDemo<T>
+where
     T: Clone + PartialEq + Display,
 {
     /// 创建新的 BasicSyntaxDemo 实例
-    /// 
+    ///
     /// # 参数
     /// * `data` - 要存储的数据
-    /// 
+    ///
     /// # 返回值
     /// 返回一个新的 BasicSyntaxDemo 实例
-    /// 
+    ///
     /// # 示例
     /// ```rust
     /// use c03_control_fn::basic_syntax::BasicSyntaxDemo;
-    /// 
+    ///
     /// let demo = BasicSyntaxDemo::new(42);
     /// assert_eq!(demo.data, 42);
     /// assert_eq!(demo.count, 0);
@@ -63,14 +63,14 @@ where
     }
 
     /// 更新数据并增加计数器
-    /// 
+    ///
     /// # 参数
     /// * `new_data` - 新的数据值
-    /// 
+    ///
     /// # 示例
     /// ```rust
     /// use c03_control_fn::basic_syntax::BasicSyntaxDemo;
-    /// 
+    ///
     /// let mut demo = BasicSyntaxDemo::new(42);
     /// demo.update_data(100);
     /// assert_eq!(demo.data, 100);
@@ -82,14 +82,14 @@ where
     }
 
     /// 设置元数据
-    /// 
+    ///
     /// # 参数
     /// * `metadata` - 元数据字符串
-    /// 
+    ///
     /// # 示例
     /// ```rust
     /// use c03_control_fn::basic_syntax::BasicSyntaxDemo;
-    /// 
+    ///
     /// let mut demo = BasicSyntaxDemo::new(42);
     /// demo.set_metadata("示例数据".to_string());
     /// assert_eq!(demo.metadata, Some("示例数据".to_string()));
@@ -99,24 +99,24 @@ where
     }
 
     /// 获取数据的字符串表示
-    /// 
+    ///
     /// # 返回值
     /// 返回数据的字符串表示
-    /// 
+    ///
     /// # 示例
     /// ```rust
     /// use c03_control_fn::basic_syntax::BasicSyntaxDemo;
-    /// 
+    ///
     /// let demo = BasicSyntaxDemo::new(42);
     /// assert_eq!(demo.to_string(), "42");
     /// ```
-    pub fn to_string(&self) -> String {
+    pub fn to_string_impl(&self) -> String {
         format!("{}", self.data)
     }
 }
 
-impl<T> Display for BasicSyntaxDemo<T> 
-where 
+impl<T> Display for BasicSyntaxDemo<T>
+where
     T: Clone + PartialEq + Display,
 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -125,13 +125,13 @@ where
 }
 
 /// 变量声明与绑定演示
-/// 
+///
 /// 演示 Rust 中变量声明、绑定和可变性的各种用法
 pub mod variable_binding {
     use super::*;
 
     /// 基础变量声明演示
-    /// 
+    ///
     /// 展示 Rust 中变量的基本声明方式：
     /// - 不可变变量（默认）
     /// - 可变变量（mut 关键字）
@@ -157,9 +157,9 @@ pub mod variable_binding {
 
         // 4. 类型推断
         let inferred_int = 42;        // 推断为 i32
-        let inferred_float = 3.14;    // 推断为 f64
+        let inferred_float = std::f64::consts::PI;    // 推断为 f64
         let inferred_string = "Hello"; // 推断为 &str
-        println!("类型推断: int = {}, float = {}, string = {}", 
+        println!("类型推断: int = {}, float = {}, string = {}",
                 inferred_int, inferred_float, inferred_string);
 
         // 5. 变量遮蔽（shadowing）
@@ -172,7 +172,7 @@ pub mod variable_binding {
     }
 
     /// 复杂类型变量声明演示
-    /// 
+    ///
     /// 展示复杂数据类型的变量声明方式
     pub fn complex_type_declaration() {
         println!("\n=== 复杂类型变量声明演示 ===");
@@ -186,7 +186,7 @@ pub mod variable_binding {
         println!("切片: {:?}", slice);
 
         // 3. 元组类型
-        let tuple: (i32, f64, String) = (42, 3.14, "Rust".to_string());
+        let tuple: (i32, f64, String) = (42, std::f64::consts::PI, "Rust".to_string());
         println!("元组: {:?}", tuple);
 
         // 4. 结构体类型
@@ -218,7 +218,7 @@ pub mod variable_binding {
     }
 
     /// 模式匹配变量绑定演示
-    /// 
+    ///
     /// 展示使用模式匹配进行变量绑定的高级用法
     pub fn pattern_matching_binding() {
         println!("\n=== 模式匹配变量绑定演示 ===");
@@ -231,13 +231,13 @@ pub mod variable_binding {
         // 2. 结构体解构
         let demo = BasicSyntaxDemo::new(42);
         let BasicSyntaxDemo { data, count, metadata } = demo;
-        println!("结构体解构: data = {}, count = {}, metadata = {:?}", 
+        println!("结构体解构: data = {}, count = {}, metadata = {:?}",
                 data, count, metadata);
 
         // 3. 数组/切片解构
         let array = [1, 2, 3, 4, 5];
         let [first, second, .., last] = array;
-        println!("数组解构: first = {}, second = {}, last = {}", 
+        println!("数组解构: first = {}, second = {}, last = {}",
                 first, second, last);
 
         // 4. 枚举解构
@@ -261,13 +261,13 @@ pub mod variable_binding {
 }
 
 /// 数据类型与类型推断演示
-/// 
+///
 /// 演示 Rust 的类型系统和类型推断机制
 pub mod type_system {
     use super::*;
 
     /// 基础数据类型演示
-    /// 
+    ///
     /// 展示 Rust 的基础数据类型及其特性
     pub fn basic_data_types() {
         println!("\n=== 基础数据类型演示 ===");
@@ -295,8 +295,8 @@ pub mod type_system {
         println!("  isize: {}, usize: {}", isize, usize);
 
         // 2. 浮点数类型
-        let float32: f32 = 3.14159;
-        let float64: f64 = 3.141592653589793;
+        let float32: f32 = std::f32::consts::PI;
+        let float64: f64 = std::f64::consts::PI;
         println!("浮点数类型:");
         println!("  f32: {}, f64: {}", float32, float64);
 
@@ -318,13 +318,13 @@ pub mod type_system {
     }
 
     /// 复合数据类型演示
-    /// 
+    ///
     /// 展示 Rust 的复合数据类型
     pub fn compound_data_types() {
         println!("\n=== 复合数据类型演示 ===");
 
         // 1. 元组类型
-        let tuple: (i32, f64, char) = (42, 3.14, 'R');
+        let tuple: (i32, f64, char) = (42, std::f64::consts::PI, 'R');
         println!("元组: {:?}", tuple);
         println!("元组访问: 第一个元素 = {}", tuple.0);
 
@@ -353,14 +353,14 @@ pub mod type_system {
     }
 
     /// 类型推断演示
-    /// 
+    ///
     /// 展示 Rust 强大的类型推断能力
     pub fn type_inference() {
         println!("\n=== 类型推断演示 ===");
 
         // 1. 基础类型推断
         let x = 42;           // 推断为 i32
-        let y = 3.14;         // 推断为 f64
+        let y = std::f64::consts::PI;         // 推断为 f64
         let z = true;         // 推断为 bool
         let s = "Hello";      // 推断为 &str
 
@@ -391,13 +391,13 @@ pub mod type_system {
 }
 
 /// 控制流结构演示
-/// 
+///
 /// 演示 Rust 中的各种控制流结构
 pub mod control_flow {
     //use super::*;
 
     /// 条件语句演示
-    /// 
+    ///
     /// 展示 if、if-else、if-else if-else 语句的用法
     pub fn conditional_statements() {
         println!("\n=== 条件语句演示 ===");
@@ -451,7 +451,7 @@ pub mod control_flow {
     }
 
     /// 循环语句演示
-    /// 
+    ///
     /// 展示 loop、while、for 循环的用法
     pub fn loop_statements() {
         println!("\n=== 循环语句演示 ===");
@@ -507,7 +507,7 @@ pub mod control_flow {
     }
 
     /// 模式匹配演示
-    /// 
+    ///
     /// 展示 match 表达式的强大功能
     pub fn pattern_matching() {
         println!("\n=== 模式匹配演示 ===");
@@ -586,13 +586,13 @@ pub mod control_flow {
 }
 
 /// 函数定义与调用演示
-/// 
+///
 /// 演示 Rust 中函数的各种定义和调用方式
 pub mod functions {
     use super::*;
 
     /// 基础函数演示
-    /// 
+    ///
     /// 展示函数的基本定义和调用方式
     pub fn basic_functions() {
         println!("\n=== 基础函数演示 ===");
@@ -617,7 +617,7 @@ pub mod functions {
     }
 
     /// 高级函数特性演示
-    /// 
+    ///
     /// 展示函数的高级特性
     pub fn advanced_functions() {
         println!("\n=== 高级函数特性演示 ===");
@@ -649,7 +649,7 @@ pub mod functions {
     }
 
     /// 泛型函数演示
-    /// 
+    ///
     /// 展示泛型函数的使用
     pub fn generic_functions() {
         println!("\n=== 泛型函数演示 ===");
@@ -661,7 +661,7 @@ pub mod functions {
 
         // 2. 泛型函数与约束
         let max_int = max_value(10, 20);
-        let max_float = max_value(3.14, 2.71);
+        let max_float = max_value(std::f64::consts::PI, 2.71);
         println!("最大值: int = {}, float = {}", max_int, max_float);
 
         // 3. 泛型结构体方法
@@ -696,7 +696,7 @@ pub mod functions {
     fn find_min_max(slice: &[i32]) -> (i32, i32) {
         let mut min = slice[0];
         let mut max = slice[0];
-        
+
         for &value in slice {
             if value < min {
                 min = value;
@@ -705,7 +705,7 @@ pub mod functions {
                 max = value;
             }
         }
-        
+
         (min, max)
     }
 
@@ -746,13 +746,13 @@ pub mod functions {
 }
 
 /// 错误处理演示
-/// 
+///
 /// 演示 Rust 中的错误处理机制
 pub mod error_handling {
     use std::num::ParseIntError;
 
     /// 基础错误处理演示
-    /// 
+    ///
     /// 展示 Result 和 Option 的基本用法
     pub fn basic_error_handling() {
         println!("\n=== 基础错误处理演示 ===");
@@ -801,7 +801,7 @@ pub mod error_handling {
     }
 
     /// 高级错误处理演示
-    /// 
+    ///
     /// 展示错误处理的高级特性
     pub fn advanced_error_handling() {
         println!("\n=== 高级错误处理演示 ===");
@@ -897,7 +897,7 @@ pub mod error_handling {
 }
 
 /// 综合演示函数
-/// 
+///
 /// 运行所有基础语法演示
 pub fn run_all_demos() {
     println!("🚀 Rust 1.89 基础语法综合演示");
@@ -907,19 +907,19 @@ pub fn run_all_demos() {
     variable_binding::basic_variable_declaration();
     variable_binding::complex_type_declaration();
     variable_binding::pattern_matching_binding();
-    
+
     type_system::basic_data_types();
     type_system::compound_data_types();
     type_system::type_inference();
-    
+
     control_flow::conditional_statements();
     control_flow::loop_statements();
     control_flow::pattern_matching();
-    
+
     functions::basic_functions();
     functions::advanced_functions();
     functions::generic_functions();
-    
+
     error_handling::basic_error_handling();
     error_handling::advanced_error_handling();
 
@@ -957,7 +957,7 @@ mod tests {
     fn test_basic_syntax_demo_display() {
         let demo = BasicSyntaxDemo::new(42);
         let display_string = demo.to_string();
-        assert_eq!(display_string, "42");
+        assert_eq!(display_string, "BasicSyntaxDemo(data: 42, count: 0)");
     }
 
     #[test]
@@ -970,7 +970,7 @@ mod tests {
     #[test]
     fn test_max_value() {
         assert_eq!(functions::max_value(10, 20), 20);
-        assert_eq!(functions::max_value(3.14, 2.71), 3.14);
+        assert_eq!(functions::max_value(std::f64::consts::PI, 2.71), std::f64::consts::PI);
     }
 
     #[test]

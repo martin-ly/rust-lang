@@ -58,7 +58,7 @@ pub fn throttle_concurrency(tasks: usize, max_parallel: usize) -> usize {
     for h in handles {
         h.join().unwrap();
     }
-    *completed.lock().unwrap()
+    let x = *completed.lock().unwrap(); x
 }
 
 #[cfg(test)]

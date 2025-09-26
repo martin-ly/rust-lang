@@ -1,25 +1,20 @@
 fn find_first_even(nums: &[i32]) -> Option<i32> {
-    'out: loop {
-        for &n in nums {
-            if n % 2 == 0 { break 'out Some(n); }
-        }
-        break 'out None;
+    for &n in nums {
+        if n % 2 == 0 { return Some(n); }
     }
+    None
 }
 
 fn index_of(hay: &[i32], needle: i32) -> Option<usize> {
-    let res = 'search: loop {
-        for (i, &x) in hay.iter().enumerate() {
-            if x == needle { break 'search Some(i); }
-        }
-        break 'search None;
-    };
-    res
+    for (i, &x) in hay.iter().enumerate() {
+        if x == needle { return Some(i); }
+    }
+    None
 }
 
 fn compute() -> i32 {
     'blk: {
-        if 1 + 1 == 2 { break 'blk 10; }
+        if true { break 'blk 10; }
         0
     }
 }
@@ -29,5 +24,3 @@ fn main() {
     assert_eq!(index_of(&[10,20,30], 20), Some(1));
     assert_eq!(compute(), 10);
 }
-
-

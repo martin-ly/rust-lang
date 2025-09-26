@@ -429,6 +429,22 @@ impl<'a, T> ReferenceContainer<'a, T> {
 理解类型构造器的使用对于编写高效和安全的Rust代码至关重要。
 */
 
+use std::collections::HashMap;
+
+// 类型别名 - 简化复杂类型
+type GenVec<T> = Vec<T>;
+type GenSlice<'a, T> = &'a [T];
+type GenMutSlice<'a, T> = &'a mut [T];
+type GenOption<T> = Option<T>;
+#[allow(dead_code)]
+type GenResult<T, E> = Result<T, E>;
+#[allow(dead_code)]
+type GenHashMap<K, V> = HashMap<K, V>;
+#[allow(dead_code)]
+type GenString = String;
+#[allow(dead_code)]
+type GenFn<T, U> = fn(T) -> U;
+
 // 基本泛型结构体
 pub struct Pair<T, U> {
     pub first: T,
@@ -451,7 +467,7 @@ impl<T, U> Pair<T, U> {
 
 // 泛型容器
 pub struct Container<T> {
-    pub items: Vec<T>,
+    pub items: GenVec<T>,
     pub capacity: usize,
 }
 
@@ -472,7 +488,7 @@ impl<T> Container<T> {
         }
     }
 
-    pub fn get(&self, index: usize) -> Option<&T> {
+    pub fn get(&self, index: usize) -> GenOption<&T> {
         self.items.get(index)
     }
 
@@ -490,21 +506,21 @@ impl<T> Container<T> {
 }
 
 // 泛型算法
-pub fn find_max<T>(items: &[T]) -> Option<&T>
+pub fn find_max<T>(items: GenSlice<'_, T>) -> GenOption<&T>
 where
     T: PartialOrd,
 {
     items.iter().max_by(|a, b| a.partial_cmp(b).unwrap())
 }
 
-pub fn sort_items<T>(items: &mut [T])
+pub fn sort_items<T>(items: GenMutSlice<T>)
 where
     T: Ord,
 {
     items.sort();
 }
 
-pub fn filter_items<T, F>(items: &[T], predicate: F) -> Vec<&T>
+pub fn filter_items<T, F>(items: GenSlice<'_, T>, predicate: F) -> GenVec<&T>
 where
     F: Fn(&T) -> bool,
 {
@@ -542,7 +558,7 @@ impl Processor<i32> for NumberProcessor {
 
 // 数据结构
 pub struct Stack<T> {
-    pub items: Vec<T>,
+    pub items: GenVec<T>,
 }
 
 impl<T> Stack<T> {
@@ -554,11 +570,11 @@ impl<T> Stack<T> {
         self.items.push(item);
     }
 
-    pub fn pop(&mut self) -> Option<T> {
+    pub fn pop(&mut self) -> GenOption<T> {
         self.items.pop()
     }
 
-    pub fn peek(&self) -> Option<&T> {
+    pub fn peek(&self) -> GenOption<&T> {
         self.items.last()
     }
 
@@ -578,7 +594,7 @@ impl<T> Default for Stack<T> {
 }
 
 pub struct Queue<T> {
-    pub items: Vec<T>,
+    pub items: GenVec<T>,
 }
 
 impl<T> Queue<T> {
@@ -590,7 +606,7 @@ impl<T> Queue<T> {
         self.items.push(item);
     }
 
-    pub fn dequeue(&mut self) -> Option<T> {
+    pub fn dequeue(&mut self) -> GenOption<T> {
         if self.items.is_empty() {
             None
         } else {
@@ -598,7 +614,7 @@ impl<T> Queue<T> {
         }
     }
 
-    pub fn front(&self) -> Option<&T> {
+    pub fn front(&self) -> GenOption<&T> {
         self.items.first()
     }
 

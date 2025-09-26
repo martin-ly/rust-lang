@@ -20,5 +20,6 @@ pub mod message_passing;
 pub mod paralelism;
 pub mod performance_benchmarks;
 pub mod rust_189_threads;
+pub mod rust_190_features;
 pub mod synchronization;
 pub mod threads;

@@ -1003,7 +1003,7 @@ struct Queue<T> {
 impl<T> Queue<T> {
     fn new() -> Self {
         let sentinel = Owned::new(Node {
-            data: unsafe { std::mem::uninitialized() },
+            data: unsafe { std::mem::zeroed() },
             next: Atomic::null(),
         });
         let head = Atomic::from(sentinel);

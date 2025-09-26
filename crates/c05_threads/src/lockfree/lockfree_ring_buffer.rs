@@ -11,12 +11,12 @@ use std::sync::{
     Arc,
     atomic::{AtomicPtr, AtomicUsize, Ordering},
 };
-//use std::cell::UnsafeCell;
+#[cfg(feature = "custom_ring_buffers")]
+use std::cell::UnsafeCell;
 use crossbeam_queue::ArrayQueue;
 #[allow(unused_imports)]
 use crossbeam_utils::CachePadded;
 use std::thread;
-
 #[cfg(feature = "custom_ring_buffers")]
 /// 单生产者单消费者环形缓冲区
 ///
@@ -139,7 +139,7 @@ impl<T> SpscRingBuffer<T> {
         let consumer = thread::spawn(move || {
             let mut count = 0;
             while count < 1000 {
-                if let Some(item) = buffer_clone.try_pop() {
+                if let Some(_item) = buffer_clone.try_pop() {
                     count += 1;
                     if count % 100 == 0 {
                         println!("消费者处理了 {} 个元素", count);
@@ -424,7 +424,7 @@ impl<T> MpmcRingBuffer<T> {
                 thread::spawn(move || {
                     let mut count = 0;
                     while count < 500 {
-                        if let Some(item) = buffer.try_pop() {
+                        if let Some(_item) = buffer.try_pop() {
                             count += 1;
                             if count % 100 == 0 {
                                 println!("消费者 {} 处理了 {} 个元素", consumer_id, count);
@@ -545,7 +545,7 @@ impl<T> ScalableRingBuffer<T> {
             move || {
                 let mut count = 0;
                 while count < 1000 {
-                    if let Some(item) = buffer.try_pop() {
+                    if let Some(_item) = buffer.try_pop() {
                         count += 1;
                         if count % 100 == 0 {
                             println!("消费者处理了 {} 个元素", count);

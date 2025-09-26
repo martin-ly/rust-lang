@@ -1,0 +1,118 @@
+# Tarpaulin配置文件
+# 创建时间: 2025年9月25日 14:21
+# 优化时间: 2025年9月25日 14:30
+
+[tool.tarpaulin]
+# 最低覆盖率要求
+fail_under = 80
+
+# 输出格式
+out = ["Html", "Xml", "Stdout"]
+
+# 超时设置
+timeout = 300
+
+# 包含模式
+include_glob = ["**/*.rs"]
+
+# 排除模式
+exclude_glob = [
+    "**/target/**",
+    "**/tests/**",
+    "**/benches/**",
+    "**/examples/**",
+    "**/build.rs",
+    "**/src/bin/**",
+    "**/proc_macro_derive/**",
+]
+
+# 排除的行模式
+exclude_lines = [
+    "panic!",
+    "unreachable!",
+    "unimplemented!",
+    "todo!",
+    "#[cfg(test)]",
+    "#[test]",
+    "#[tokio::test]",
+    "#[rstest]",
+    "// #[ignore]",
+    "// ignore",
+    "// TODO:",
+    "// FIXME:",
+    "// #nocov",
+    "/* #nocov */",
+]
+
+# 覆盖率报告设置
+html_dir = "target/tarpaulin/html"
+xml_dir = "target/tarpaulin/xml"
+
+# 详细输出
+verbose = true
+
+# 工作目录
+workspace = true
+
+# 包设置
+all = true
+
+# 特性设置
+features = ["default"]
+
+# 发布模式
+release = false
+
+# 调试信息
+debug = false
+
+# 输出文件名
+output_name = "coverage"
+
+# 覆盖率类型
+coverage_type = "Line"
+
+# 分支覆盖率
+branch = false
+
+# 函数覆盖率
+functions = true
+
+# 行覆盖率
+lines = true
+
+# 区域覆盖率
+regions = false
+
+# 宏覆盖率
+macros = false
+
+# 包含宏
+include_macros = false
+
+# 包含测试
+include_tests = false
+
+# 包含示例
+include_examples = false
+
+# 包含基准测试
+include_benches = false
+
+# 包含二进制文件
+include_bins = false
+
+# 包含库
+include_lib = true
+
+# 包含工作区
+include_workspace = true
+
+# 包含依赖
+include_deps = false
+
+# 包含构建脚本
+include_build = false
+
+# 包含文档测试
+include_doc_tests = true

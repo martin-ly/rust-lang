@@ -313,9 +313,9 @@ impl HealthChecker {
         
         // 检查系统负载
         let mut sys = sysinfo::System::new_all();
-        sys.refresh_cpu();
+        sys.refresh_cpu_all();
         
-        let cpu_usage = sys.global_cpu_info().cpu_usage();
+        let cpu_usage = sys.global_cpu_usage();
         let cpu_count = sys.cpus().len();
         
         details.insert("cpu_usage".to_string(), format!("{:.2}", cpu_usage));

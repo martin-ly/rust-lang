@@ -3,7 +3,7 @@ name = "c05_threads"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
-rust-version = "1.89"
+rust-version = "1.90"
 [dependencies]
 crossbeam = { workspace = true }
 crossbeam-channel = "0.5.15"
@@ -46,6 +46,7 @@ path = "src/bin/main.rs"
 [dev-dependencies]
 criterion = { workspace = true }
 loom = { version = "0.7.2", default-features = false }
+tokio = { version = "1.0", features = ["full"] }
 
 [[bench]]
 name = "priority_channels_bench"

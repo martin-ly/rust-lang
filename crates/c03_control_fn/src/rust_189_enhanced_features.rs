@@ -156,29 +156,25 @@ pub mod naked_functions_189 {
     /// 注意：这需要 nightly 版本和 asm! 宏支持
     #[cfg(all(feature = "nightly", target_arch = "x86_64"))]
     pub mod naked_functions {
-        use std::arch::asm;
+        // 使用 nightly 的 naked_asm! 宏
 
         /// 简单的裸函数
+        #[cfg(false)]
         #[naked]
-        pub extern "C" fn simple_naked_function() {
-            unsafe {
-                asm!("nop", "ret", options(noreturn));
-            }
+        pub unsafe extern "C" fn simple_naked_function() -> ! {
+            core::arch::naked_asm!(
+                "nop\nret"
+            );
         }
 
         /// 带参数的裸函数
+        // 该示例需要更复杂的 ABI/保存约定，演示目的先禁用
+        #[cfg(false)]
         #[naked]
-        pub extern "C" fn naked_function_with_params(x: i32) -> i32 {
-            unsafe {
-                asm!(
-                    "mov eax, edi",
-                    "add eax, 1",
-                    "ret",
-                    in("edi") x,
-                    out("eax") _,
-                    options(noreturn)
-                );
-            }
+        pub unsafe extern "C" fn naked_function_with_params(_x: i32) -> i32 {
+            core::arch::naked_asm!(
+                "ret"
+            );
         }
     }
 

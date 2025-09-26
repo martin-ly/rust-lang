@@ -11,11 +11,11 @@
 //! fn main() -> c07_process::Result<()> {
 //!     // 创建进程管理器
 //!     let pm = ProcessManager::new();
-//!     
+//!
 //!     // 创建进程配置
 //!     let mut env = HashMap::new();
 //!     env.insert("PATH".to_string(), "/usr/bin:/bin".to_string());
-//!     
+//!
 //!     let config = ProcessConfig {
 //!         program: "echo".to_string(),
 //!         args: vec!["Hello, World!".to_string()],
@@ -26,11 +26,11 @@
 //!         priority: None,
 //!         resource_limits: ResourceLimits::default(),
 //!     };
-//!     
+//!
 //!     // 注意：在实际使用中，需要确保程序存在
 //!     // 这里只是演示配置的创建
 //!     println!("进程配置创建成功: {:?}", config);
-//!     
+//!
 //!     Ok(())
 //! }
 //! ```
@@ -62,6 +62,9 @@ pub mod fork;
 // 异步运行时模块
 pub mod async_runtime;
 
+// Rust 1.90 新特性模块
+pub mod rust_190_features;
+
 // 重新导出关键类型
 pub use types::{
     IpcConfig, IpcProtocol, Message, ProcessConfig, ProcessGroup, ProcessInfo, ProcessStatus,
@@ -69,6 +72,14 @@ pub use types::{
 };
 
 pub use error::{IpcResult, ProcessResult, ResourceResult, Result, SyncResult};
+
+#[cfg(feature = "async")]
+pub use error::enhanced::{
+    EnhancedErrorManager, EnhancedErrorEntry, ErrorType, ErrorSeverity, ErrorRecovery,
+    ErrorClassifier, ErrorChainTracker, ErrorNotifier, ErrorStatistics, RecoveryStrategy,
+    RecoveryResult, ErrorClassification, ErrorChain, NotificationChannel, NotificationRule,
+    Notification, ErrorManagerConfig
+};
 
 pub use process::{
     ProcessBuilder, ProcessGroupManager, ProcessManager,
@@ -78,11 +89,37 @@ pub use process::{
 #[cfg(feature = "async")]
 pub use async_runtime::{AsyncProcessManager, AsyncProcessPool, AsyncTask, AsyncTaskScheduler};
 
+#[cfg(feature = "async")]
+pub use async_runtime::enhanced::{
+    EnhancedAsyncProcessManager, ProcessOutput, ProcessMetrics,
+    PerformanceMonitor, RetryPolicy,
+};
+
+// 为避免与 error::enhanced 中的同名类型冲突，使用别名重新导出
+#[cfg(feature = "async")]
+pub use async_runtime::enhanced::{
+    ErrorRecovery as AsyncProcessErrorRecovery,
+    RecoveryStrategy as AsyncProcessRecoveryStrategy,
+};
+
 pub use inter_process_communication::{
     AsyncIpcManager, ChannelStats, IpcChannel, IpcConnector, IpcManager,
 };
 
+#[cfg(feature = "async")]
+pub use inter_process_communication::enhanced::{
+    EnhancedIpcManager, EnhancedIpcChannel, IpcMetrics, 
+    IpcPerformanceMonitor, IpcErrorRecovery, IpcRetryPolicy, IpcRecoveryStrategy
+};
+
 pub use concurrency::{PrimitiveStats, SyncManager, SyncPrimitiveTrait};
+
+#[cfg(feature = "async")]
+pub use concurrency::enhanced::{
+    EnhancedSyncManager, EnhancedMutex, EnhancedRwLock, EnhancedSemaphore, EnhancedBarrier,
+    EnhancedPrimitiveStats, SyncPerformanceMetrics, DeadlockRisk, DeadlockDetector,
+    SyncPerformanceMonitor, AdaptiveScheduler
+};
 
 pub use pipe::NamedPipe;
 pub use shared_memory::SharedMemoryRegion;
@@ -138,7 +175,9 @@ pub struct LibraryInfo {
 
 /// 获取启用的特性列表
 fn get_enabled_features() -> Vec<String> {
-    let features = vec!["std".to_string()];
+    // 使用 allow 属性来抑制条件编译导致的未使用 mut 警告
+    #[allow(unused_mut)]
+    let mut features = vec!["std".to_string()];
 
     #[cfg(feature = "async")]
     features.push("async".to_string());
@@ -189,6 +228,40 @@ pub mod prelude {
         concurrency::mutex::ProcessMutex,
         concurrency::rwlock::ProcessRwLock,
         concurrency::semaphore::ProcessSemaphore,
+    };
+
+    // Rust 1.90 新特性
+    pub use super::rust_190_features::{Rust190Features, AsyncTaskDemo, TaskStatus};
+
+    // 增强的异步功能
+    #[cfg(feature = "async")]
+    pub use super::async_runtime::enhanced::{
+        EnhancedAsyncProcessManager, ProcessOutput, ProcessMetrics, 
+        PerformanceMonitor, RetryPolicy
+    };
+
+    // 增强的IPC功能
+    #[cfg(feature = "async")]
+    pub use super::inter_process_communication::enhanced::{
+        EnhancedIpcManager, EnhancedIpcChannel, IpcMetrics, 
+        IpcPerformanceMonitor, IpcErrorRecovery, IpcRetryPolicy, IpcRecoveryStrategy
+    };
+
+    // 增强的同步原语功能
+    #[cfg(feature = "async")]
+    pub use super::concurrency::enhanced::{
+        EnhancedSyncManager, EnhancedMutex, EnhancedRwLock, EnhancedSemaphore, EnhancedBarrier,
+        EnhancedPrimitiveStats, SyncPerformanceMetrics, DeadlockRisk, DeadlockDetector,
+        SyncPerformanceMonitor, AdaptiveScheduler
+    };
+
+    // 增强的错误处理功能
+    #[cfg(feature = "async")]
+    pub use super::error::enhanced::{
+        EnhancedErrorManager, EnhancedErrorEntry, ErrorType, ErrorSeverity,
+        ErrorClassifier, ErrorChainTracker, ErrorNotifier, ErrorStatistics,
+        RecoveryResult, ErrorClassification, ErrorChain, NotificationChannel, NotificationRule,
+        Notification, ErrorManagerConfig
     };
 }
 

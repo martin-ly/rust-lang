@@ -1,11 +1,17 @@
 use crate::error::{ProcessError, ProcessResult};
-use crate::types::{ProcessConfig, ProcessInfo};
+use crate::types::{ProcessConfig, ProcessInfo, ResourceLimits};
 use std::time::SystemTime;
+
+// 增强的异步功能
+#[cfg(feature = "async")]
+pub mod enhanced;
 
 #[cfg(feature = "async")]
 use crate::types::ProcessStatus;
 #[cfg(feature = "async")]
 use std::collections::HashMap;
+#[cfg(feature = "async")]
+use std::sync::Arc;
 #[cfg(feature = "async")]
 use std::process::ExitStatus;
 #[cfg(feature = "async")]
@@ -15,6 +21,7 @@ use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock, mpsc, oneshot};
 
 /// 异步进程管理器
 #[cfg(feature = "async")]
+#[allow(dead_code)]
 pub struct AsyncProcessManager {
     processes: Arc<TokioRwLock<HashMap<u32, AsyncManagedProcess>>>,
     next_pid: Arc<TokioMutex<u32>>,
@@ -23,6 +30,7 @@ pub struct AsyncProcessManager {
 
 /// 异步管理的进程
 #[cfg(feature = "async")]
+#[allow(dead_code)]
 struct AsyncManagedProcess {
     info: ProcessInfo,
     status_sender: mpsc::Sender<ProcessStatus>,
@@ -31,6 +39,7 @@ struct AsyncManagedProcess {
 
 /// 异步命令
 #[cfg(feature = "async")]
+#[allow(dead_code)]
 enum AsyncCommand {
     Spawn {
         config: ProcessConfig,
@@ -50,10 +59,11 @@ enum AsyncCommand {
 }
 
 #[cfg(feature = "async")]
+#[allow(dead_code)]
 impl AsyncProcessManager {
     /// 创建新的异步进程管理器
     pub async fn new() -> Self {
-        let (command_sender, mut command_receiver) = mpsc::channel(100);
+        let (command_sender, command_receiver) = mpsc::channel(100);
         let processes = Arc::new(TokioRwLock::new(HashMap::new()));
         let next_pid = Arc::new(TokioMutex::new(1000));
 
@@ -296,6 +306,7 @@ impl AsyncProcessManager {
 
 /// 异步进程池
 #[cfg(feature = "async")]
+#[allow(dead_code)]
 pub struct AsyncProcessPool {
     manager: AsyncProcessManager,
     pool_size: usize,
@@ -392,6 +403,7 @@ use crate::process::pool::ProcessPoolStats;
 
 /// 异步任务调度器
 #[cfg(feature = "async")]
+#[allow(dead_code)]
 pub struct AsyncTaskScheduler {
     task_queue: Arc<TokioMutex<Vec<AsyncTask>>>,
     worker_count: usize,
@@ -399,6 +411,8 @@ pub struct AsyncTaskScheduler {
 }
 
 /// 异步任务
+#[cfg(feature = "async")]
+#[allow(dead_code)]
 pub struct AsyncTask {
     pub id: u64,
     pub name: String,
@@ -407,6 +421,7 @@ pub struct AsyncTask {
 }
 
 #[cfg(feature = "async")]
+#[allow(dead_code)]
 impl AsyncTaskScheduler {
     /// 创建新的异步任务调度器
     pub fn new(worker_count: usize) -> Self {
@@ -444,9 +459,9 @@ impl AsyncTaskScheduler {
 
     /// 工作循环
     async fn worker_loop(
-        worker_id: usize,
+        _worker_id: usize,
         task_queue: Arc<TokioMutex<Vec<AsyncTask>>>,
-        workers: Arc<TokioMutex<Vec<tokio::task::JoinHandle<()>>>>,
+        _workers: Arc<TokioMutex<Vec<tokio::task::JoinHandle<()>>>>,
     ) {
         loop {
             let task = {
@@ -454,7 +469,7 @@ impl AsyncTaskScheduler {
                 queue.pop()
             };
 
-            if let Some(task) = task {
+            if let Some(_task) = task {
                 // 处理任务
                 tokio::time::sleep(Duration::from_millis(50)).await; // 模拟任务处理
             } else {
@@ -467,6 +482,7 @@ impl AsyncTaskScheduler {
 
 /// 非异步版本的占位符实现
 #[cfg(not(feature = "async"))]
+#[allow(dead_code)]
 pub struct AsyncProcessManager;
 
 #[cfg(not(feature = "async"))]
@@ -497,6 +513,7 @@ impl AsyncProcessManager {
 }
 
 #[cfg(not(feature = "async"))]
+#[allow(dead_code)]
 pub struct AsyncProcessPool;
 
 #[cfg(not(feature = "async"))]
@@ -534,6 +551,7 @@ impl AsyncProcessPool {
 }
 
 #[cfg(not(feature = "async"))]
+#[allow(dead_code)]
 pub struct AsyncTaskScheduler;
 
 #[cfg(not(feature = "async"))]

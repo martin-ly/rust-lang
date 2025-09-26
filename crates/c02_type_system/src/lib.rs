@@ -21,3 +21,36 @@ pub use performance::*;
 pub use type_composition::rust_189_enhancements;
 pub use rust_189_simple_demo::*;
 pub use primitive_types::scalar_types::number::enhanced_integer_fixed::*;
+
+// 导出 Rust 1.90 最新特性演示
+pub mod rust_190_latest_features {
+    // 这里可以添加 Rust 1.90 最新特性的模块导出
+    // 目前通过 examples 目录中的文件进行演示
+}
+
+// 导出 Rust 1.90 高级特性模块
+pub mod rust_190_advanced_features;
+
+// 导出 WebAssembly 支持模块
+pub mod wasm_support;
+
+// 导出高级模式匹配模块
+pub mod advanced_pattern_matching;
+
+// 导出高级错误处理模块
+pub mod advanced_error_handling;
+
+// 导出类型系统验证工具模块
+pub mod type_system_validator;
+
+// 导出性能优化技巧模块
+pub mod performance_optimization;
+
+// 导出并发和异步高级特性模块
+pub mod concurrent_async_advanced;
+
+// 导出内存安全高级演示模块
+pub mod memory_safety_advanced;
+
+// 导出高级宏系统模块
+pub mod advanced_macros;

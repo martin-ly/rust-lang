@@ -6,7 +6,7 @@ use std::pin::Pin;
 use std::task::{Context, Poll};
 
 /// Rust 1.89 异步控制流新特性
-pub mod async_control_flow_189 {
+pub mod async_control_flow_features {
     /// 异步控制流演示
     pub async fn demonstrate_async_control_flow() {
         println!("Rust 1.89 异步控制流新特性演示");

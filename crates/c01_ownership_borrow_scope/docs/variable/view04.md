@@ -2173,7 +2173,7 @@ fn future_directions() {
         arr: [T; N],
         f: impl Fn(T) -> U
     ) -> [U; N] {
-        let mut result: [U; N] = unsafe { std::mem::uninitialized() };
+        let mut result: [U; N] = unsafe { std::mem::zeroed() };
         for i in 0..N {
             result[i] = f(arr[i]);
         }

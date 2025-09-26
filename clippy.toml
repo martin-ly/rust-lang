@@ -1,0 +1,228 @@
+# Clippy配置文件
+# 创建时间: 2025年9月25日 14:45
+# 更新时间: 2025年1月 - 简化配置
+
+# 最大参数数量
+too-many-arguments-threshold = 7
+
+# 最大函数复杂度
+cognitive-complexity-threshold = 10
+
+# 最大文件行数
+too-many-lines-threshold = 50
+
+# 最大trait bounds数
+max-trait-bounds = 5
+
+# 类型复杂度阈值
+type-complexity-threshold = 300
+
+# 数组大小阈值
+array-size-threshold = 100
+
+# 栈大小阈值
+stack-size-threshold = 1000
+
+# 传递值大小限制
+pass-by-value-size-limit = 200
+
+# 不必要Box大小
+unnecessary-box-size = 100
+
+# Vec Box大小阈值
+vec-box-size-threshold = 100
+
+# 琐碎复制大小限制
+trivial-copy-size-limit = 100
+
+# 栈上过大限制
+too-large-for-stack = 1000
+
+# 最大结构体布尔值数量
+max-struct-bools = 3
+
+# 最大函数参数布尔值数量
+max-fn-params-bools = 3
+
+# 最大包含文件大小
+max-include-file-size = 1000
+
+# 建议切片模式长度
+max-suggested-slice-pattern-length = 3
+
+# 最小标识符字符阈值
+min-ident-chars-threshold = 2
+
+# 单字符绑定名称阈值
+single-char-binding-names-threshold = 4
+
+# 结构体字段名称阈值
+struct-field-name-threshold = 20
+
+# 枚举变体名称阈值
+enum-variant-name-threshold = 20
+
+# 枚举变体大小阈值
+enum-variant-size-threshold = 200
+
+# 过度嵌套阈值 - 禁用过度嵌套警告
+excessive-nesting-threshold = 10
+
+# 未来大小阈值
+future-size-threshold = 128
+
+# 大错误阈值
+large-error-threshold = 200
+
+# 字面量表示阈值
+literal-representation-threshold = 10
+
+# 详细位掩码阈值
+verbose-bit-mask-threshold = 4
+
+# 大写首字母缩写激进模式
+upper-case-acronyms-aggressive = false
+
+# 通配符导入警告
+warn-on-all-wildcard-imports = false
+
+# 私有宏中的不安全宏元变量警告
+warn-unsafe-macro-metavars-in-private-macros = true
+
+# 允许的脚本
+allowed-scripts = ["py", "sh", "bat", "ps1"]
+
+# 允许的重复crates
+allowed-duplicate-crates = []
+
+# 允许的标识符前缀
+allowed-prefixes = ["_", "temp_", "unused_"]
+
+# 允许的标识符（低于最小字符数）
+allowed-idents-below-min-chars = ["x", "y", "z", "i", "j", "k"]
+
+# 允许的通配符导入
+allowed-wildcard-imports = ["std::collections::*"]
+
+# 允许的dotfiles
+allowed-dotfiles = [".gitignore", ".gitattributes"]
+
+# 允许的crates（绝对路径）
+absolute-paths-allowed-crates = ["std", "core", "alloc"]
+
+# 绝对路径最大段数
+absolute-paths-max-segments = 5
+
+# 第三方配置
+third-party = true
+
+# 避免破坏导出API
+avoid-breaking-exported-api = true
+
+# 检查私有项目
+check-private-items = false
+
+# 检查不兼容的MSRV测试
+check-incompatible-msrv-in-tests = true
+
+# 检查不一致的结构体字段初始化器
+check-inconsistent-struct-field-initializers = true
+
+# 启用原始指针启发式发送
+enable-raw-pointer-heuristic-for-send = true
+
+# 强制执行迭代器循环重新借用
+enforce-iter-loop-reborrow = true
+
+# 强制导入重命名
+enforced-import-renames = []
+
+# 最小Rust版本
+msrv = "1.90.0"
+
+# 公共下划线字段行为
+pub-underscore-fields-behavior = "PubliclyExported"
+
+# 分号内部块忽略单行
+semicolon-inside-block-ignore-singleline = true
+
+# 分号外部块忽略多行
+semicolon-outside-block-ignore-multiline = true
+
+# 标准宏大括号
+standard-macro-braces = []
+
+# 抑制常量中的限制lint
+suppress-restriction-lint-in-const = false
+
+# trait关联项目类型顺序
+trait-assoc-item-kinds-order = ["type", "const", "fn"]
+
+# 禁止的宏
+disallowed-macros = []
+
+# 禁止的方法
+disallowed-methods = []
+
+# 禁止的名称
+disallowed-names = []
+
+# 禁止的类型
+disallowed-types = []
+
+# 等待持有无效类型
+await-holding-invalid-types = []
+
+# cargo忽略发布
+cargo-ignore-publish = false
+
+# 接受属性上方的注释
+accept-comment-above-attributes = true
+
+# 接受语句上方的注释
+accept-comment-above-statement = true
+
+# 允许比较零
+allow-comparison-to-zero = false
+
+# 允许测试中的dbg
+allow-dbg-in-tests = true
+
+# 允许精确重复
+allow-exact-repetitions = false
+
+# 允许常量中的expect
+allow-expect-in-consts = false
+
+# 允许测试中的expect
+allow-expect-in-tests = true
+
+# 允许测试中的索引切片
+allow-indexing-slicing-in-tests = true
+
+# 允许混合未内联格式参数
+allow-mixed-uninlined-format-args = false
+
+# 允许原始字符串中的一个hash
+allow-one-hash-in-raw-strings = false
+
+# 允许测试中的panic
+allow-panic-in-tests = true
+
+# 允许测试中的print
+allow-print-in-tests = true
+
+# 允许私有模块开始
+allow-private-module-inception = false
+
+# 允许重命名参数
+allow-renamed-params-for = []
+
+# 允许常量中的unwrap
+allow-unwrap-in-consts = false
+
+# 允许测试中的unwrap
+allow-unwrap-in-tests = true
+
+# 允许测试中的无用vec
+allow-useless-vec-in-tests = true

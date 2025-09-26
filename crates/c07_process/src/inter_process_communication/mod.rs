@@ -259,3 +259,7 @@ pub mod message_queue;
 pub mod pipe;
 pub mod shared_memory;
 pub mod socket;
+
+// 增强的IPC功能
+#[cfg(feature = "async")]
+pub mod enhanced;

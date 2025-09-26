@@ -387,8 +387,8 @@ impl ResourceMonitorHandler for CpuResourceMonitorHandler {
 
         // 检查CPU使用情况
         let mut sys = sysinfo::System::new_all();
-        sys.refresh_cpu();
-        let cpu = sys.global_cpu_info().cpu_usage();
+        sys.refresh_cpu_all();
+        let cpu = sys.global_cpu_usage();
         usage_percent = cpu as f64;
         details.insert("cpu_usage_percent".to_string(), format!("{:.2}", usage_percent));
         

@@ -99,6 +99,9 @@ pub mod type_constructor;
 pub mod type_inference;
 pub mod type_parameter;
 
+/// 类型别名模块 - 提供项目中使用的所有复杂类型别名
+pub mod type_aliases;
+
 pub mod generic_define;
 pub mod rust_189_features;
 pub mod rust_189_gat_hrtbs;
@@ -110,6 +113,8 @@ pub mod basic_syntax;
 pub mod rust_189_comprehensive;
 /// Rust 1.90 特性与基础语法演示模块
 pub mod rust_190_features;
+/// Rust 1.90 真正的泛型特性实现
+pub mod rust_190_real_generics;
 
 /// 高级泛型模式和设计模式示例模块 - 展示使用泛型实现的设计模式
 pub mod advanced_patterns;
@@ -125,13 +130,29 @@ pub mod ecosystem_examples {
     use serde::{Deserialize, Serialize};
     use thiserror::Error;
 
+    // 类型别名 - 简化复杂类型
+    type UserResult = Result<String>;
+    type UserFromJsonResult = Result<User>;
+    #[allow(dead_code)]
+    type ParIterator<'a> = rayon::slice::Iter<'a, i32>;
+    type FindResult<'a> = Result<&'a str>;
+    #[allow(dead_code)]
+    type ChunkIterator<'a> = std::slice::ChunksExact<'a, i32>;
+    type IntSlice<'a> = &'a [i32];
+    #[allow(dead_code)]
+    type IntVec = Vec<i32>;
+    #[allow(dead_code)]
+    type Int32Slice<'a> = &'a [i32];
+    #[allow(dead_code)]
+    type Int32Vec = Vec<i32>;
+
     // 1) itertools: 提供强大的迭代器适配器
-    pub fn sum_of_pairs(input: &[i32]) -> i32 {
+    pub fn sum_of_pairs(input: IntSlice<'_>) -> i32 {
         input.iter().tuples().map(|(a, b)| a + b).sum()
     }
 
     // 2) rayon: 并行 map/reduce 示例
-    pub fn parallel_square_sum(input: &[i32]) -> i32 {
+    pub fn parallel_square_sum(input: IntSlice<'_>) -> i32 {
         input.par_iter().map(|x| x * x).sum()
     }
 
@@ -142,11 +163,11 @@ pub mod ecosystem_examples {
         pub name: String,
     }
 
-    pub fn user_to_json(user: &User) -> Result<String> {
+    pub fn user_to_json(user: &User) -> UserResult {
         serde_json::to_string(user).context("serialize user failed")
     }
 
-    pub fn user_from_json(s: &str) -> Result<User> {
+    pub fn user_from_json(s: &str) -> UserFromJsonResult {
         let u: User = serde_json::from_str(s).context("deserialize user failed")?;
         Ok(u)
     }
@@ -158,7 +179,7 @@ pub mod ecosystem_examples {
         NotFound(String),
     }
 
-    pub fn find_name<'a>(names: &'a [&'a str], target: &str) -> Result<&'a str> {
+    pub fn find_name<'a>(names: &'a [&'a str], target: &str) -> FindResult<'a> {
         names
             .iter()
             .copied()
@@ -211,12 +232,21 @@ pub mod ecosystem_examples {
 pub mod benchmarks {
     use std::time::Instant;
 
+    // 类型别名 - 简化复杂类型
+    type CounterType = i32;
+    type MutexCounter = std::sync::Mutex<CounterType>;
+    type ArcMutexCounter = std::sync::Arc<MutexCounter>;
+    type MemoryData = Vec<Vec<u8>>;
+    #[allow(dead_code)]
+    type SortableVec = Vec<i32>;
+    type IntVec = Vec<i32>;
+
     /// 泛型函数性能基准测试
     pub fn benchmark_generic_functions() {
         println!("\n=== 泛型函数性能基准测试 ===");
 
         // 测试泛型排序性能
-        let mut numbers: Vec<i32> = (0..10000).rev().collect();
+        let mut numbers: IntVec = (0..10000).rev().collect();
         let start = Instant::now();
         numbers.sort();
         let duration = start.elapsed();
@@ -245,7 +275,7 @@ pub mod benchmarks {
         use std::sync::{Arc, Mutex};
         use std::thread;
 
-        let counter = Arc::new(Mutex::new(0));
+        let counter: ArcMutexCounter = Arc::new(Mutex::new(0));
         let start = Instant::now();
 
         let handles: Vec<_> = (0..1000)
@@ -274,7 +304,7 @@ pub mod benchmarks {
         println!("\n=== 内存使用基准测试 ===");
 
         let start = Instant::now();
-        let mut data: Vec<Vec<u8>> = Vec::new();
+        let mut data: MemoryData = Vec::new();
 
         // 分配大量内存
         for i in 0..1000 {

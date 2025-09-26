@@ -17,19 +17,20 @@ use std::hint::black_box;
 use tokio::sync::Mutex;
 
 /// 性能基准测试工具
+/// 性能优化基准测试
 /// 
 /// 用于测试Rust 1.90性能优化特性的效果。
-pub struct PerformanceBenchmark {
+pub struct OptimizationBenchmark {
     results: Arc<Mutex<HashMap<String, Vec<Duration>>>>,
 }
 
-impl Default for PerformanceBenchmark {
+impl Default for OptimizationBenchmark {
     fn default() -> Self {
         Self::new()
     }
 }
 
-impl PerformanceBenchmark {
+impl OptimizationBenchmark {
     /// 创建新的性能基准测试工具
     pub fn new() -> Self {
         Self {
@@ -365,7 +366,7 @@ impl ZeroCostAbstractionDemo {
 pub async fn demonstrate_performance_optimization_190() -> Result<(), String> {
     println!("🚀 演示 Rust 1.90 性能优化特性");
 
-    let benchmark = PerformanceBenchmark::new();
+    let benchmark = OptimizationBenchmark::new();
 
     // 1. 并行编译优化演示
     println!("\n1. 并行编译优化演示:");
@@ -571,7 +572,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_performance_benchmark() {
-        let benchmark = PerformanceBenchmark::new();
+        let benchmark = OptimizationBenchmark::new();
         let duration = benchmark.benchmark("test", 10, || {
             42
         }).await;

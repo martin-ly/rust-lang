@@ -15,15 +15,15 @@ use std::fmt::{self, Display};
 use std::sync::Arc;
 
 /// Rust 1.89 基础语法新特性演示结构体
-/// 
+///
 /// 这个结构体用于演示 Rust 1.89 的基础语法新特性，包括：
 /// - 改进的泛型语法
 /// - 增强的生命周期推断
 /// - 新的模式匹配特性
 /// - 改进的错误处理
 #[derive(Debug, Clone, PartialEq)]
-pub struct Rust189BasicSyntax<T> 
-where 
+pub struct Rust189BasicSyntax<T>
+where
     T: Clone + PartialEq + Display + Send + Sync,
 {
     /// 数据字段，使用泛型类型
@@ -51,22 +51,22 @@ pub enum State {
     Error(String),
 }
 
-impl<T> Rust189BasicSyntax<T> 
-where 
+impl<T> Rust189BasicSyntax<T>
+where
     T: Clone + PartialEq + Display + Send + Sync,
 {
     /// 创建新的 Rust189BasicSyntax 实例
-    /// 
+    ///
     /// # 参数
     /// * `data` - 要存储的数据
-    /// 
+    ///
     /// # 返回值
     /// 返回一个新的 Rust189BasicSyntax 实例
-    /// 
+    ///
     /// # 示例
     /// ```rust
     /// use c03_control_fn::rust_189_basic_syntax::{Rust189BasicSyntax, State};
-    /// 
+    ///
     /// let demo = Rust189BasicSyntax::new(42);
     /// assert_eq!(demo.data, 42);
     /// assert_eq!(demo.state, State::Initialized);
@@ -81,14 +81,14 @@ where
     }
 
     /// 更新状态
-    /// 
+    ///
     /// # 参数
     /// * `new_state` - 新状态
-    /// 
+    ///
     /// # 示例
     /// ```rust
     /// use c03_control_fn::rust_189_basic_syntax::{Rust189BasicSyntax, State};
-    /// 
+    ///
     /// let mut demo = Rust189BasicSyntax::new(42);
     /// demo.update_state(State::Running);
     /// assert_eq!(demo.state, State::Running);
@@ -98,15 +98,15 @@ where
     }
 
     /// 添加元数据
-    /// 
+    ///
     /// # 参数
     /// * `key` - 键
     /// * `value` - 值
-    /// 
+    ///
     /// # 示例
     /// ```rust
     /// use c03_control_fn::rust_189_basic_syntax::Rust189BasicSyntax;
-    /// 
+    ///
     /// let mut demo = Rust189BasicSyntax::new(42);
     /// demo.add_metadata("version".to_string(), "1.0.0".to_string());
     /// assert_eq!(demo.metadata.get("version"), Some(&"1.0.0".to_string()));
@@ -116,14 +116,14 @@ where
     }
 
     /// 获取共享数据的克隆
-    /// 
+    ///
     /// # 返回值
     /// 返回共享数据的克隆
-    /// 
+    ///
     /// # 示例
     /// ```rust
     /// use c03_control_fn::rust_189_basic_syntax::Rust189BasicSyntax;
-    /// 
+    ///
     /// let demo = Rust189BasicSyntax::new(42);
     /// let shared = demo.get_shared_data();
     /// assert_eq!(*shared, 42);
@@ -133,8 +133,8 @@ where
     }
 }
 
-impl<T> Display for Rust189BasicSyntax<T> 
-where 
+impl<T> Display for Rust189BasicSyntax<T>
+where
     T: Clone + PartialEq + Display + Send + Sync,
 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -143,13 +143,13 @@ where
 }
 
 /// let_chains 稳定化演示
-/// 
+///
 /// 展示 Rust 1.89 中 let_chains 特性的强大功能
 pub mod let_chains {
     use super::*;
 
     /// 基础 let_chains 演示
-    /// 
+    ///
     /// 展示在 if 和 while 条件中使用 && 操作符的新语法
     pub fn basic_let_chains() {
         println!("=== let_chains 基础演示 ===");
@@ -157,7 +157,7 @@ pub mod let_chains {
         // 1. 基础 let_chains 语法
         let x = Some(42);
         let y = Some("hello");
-        let z = Some(3.14);
+        let z = Some(std::f64::consts::PI);
 
         // 使用 let_chains 进行多重条件检查
         if let Some(value) = x && let Some(text) = y && let Some(pi) = z {
@@ -168,11 +168,11 @@ pub mod let_chains {
         let numbers = [1, 2, 3, 4, 5];
         let threshold = 3;
 
-        if let Some(first) = numbers.first() && 
-           let Some(last) = numbers.last() && 
-           *first < threshold && 
+        if let Some(first) = numbers.first() &&
+           let Some(last) = numbers.last() &&
+           *first < threshold &&
            *last > threshold {
-            println!("数组满足条件: 首元素 {} < {}, 末元素 {} > {}", 
+            println!("数组满足条件: 首元素 {} < {}, 末元素 {} > {}",
                     first, threshold, last, threshold);
         }
 
@@ -190,7 +190,7 @@ pub mod let_chains {
     }
 
     /// 高级 let_chains 演示
-    /// 
+    ///
     /// 展示 let_chains 的高级用法和复杂场景
     pub fn advanced_let_chains() {
         println!("\n=== let_chains 高级演示 ===");
@@ -203,8 +203,8 @@ pub mod let_chains {
         ];
 
         for (name, age, job) in data {
-            if let Some(age_val) = age && 
-               let Some(job_val) = job && 
+            if let Some(age_val) = age &&
+               let Some(job_val) = job &&
                age_val >= 25 {
                 println!("{} 是 {} 岁的 {}", name, age_val, job_val);
             }
@@ -231,7 +231,7 @@ pub mod let_chains {
         ]);
 
         for (_id, user_data) in complex_data {
-            if let Some((name, Some(age))) = user_data && 
+            if let Some((name, Some(age))) = user_data &&
                age >= 18 {
                 println!("用户 {}: {} 岁", name, age);
             }
@@ -239,11 +239,11 @@ pub mod let_chains {
 
         // 4. 与守卫条件结合
         let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        
+
         for chunk in numbers.chunks(3) {
             if let [Some(a), Some(b), Some(c)] = [
                 chunk.first(),
-                chunk.get(1), 
+                chunk.get(1),
                 chunk.get(2)
             ] && a + b + c > 10 {
                 println!("大块: {} + {} + {} = {}", a, b, c, a + b + c);
@@ -252,14 +252,14 @@ pub mod let_chains {
     }
 
     /// while 循环中的 let_chains
-    /// 
+    ///
     /// 展示在 while 循环中使用 let_chains 的用法
     pub fn while_let_chains() {
         println!("\n=== while let_chains 演示 ===");
 
         // 1. 基础 while let_chains
         let mut stack = vec![Some(1), Some(2), Some(3), None, Some(4)];
-        
+
         while let Some(Some(value)) = stack.pop() && value > 0 {
             println!("处理值: {}", value);
         }
@@ -278,7 +278,7 @@ pub mod let_chains {
 
         // 3. 与迭代器结合
         let mut iter = vec![Some(1), Some(2), None, Some(3)].into_iter();
-        
+
         while let Some(Some(value)) = iter.next() && value < 3 {
             println!("迭代值: {}", value);
         }
@@ -286,12 +286,12 @@ pub mod let_chains {
 }
 
 /// cfg_boolean_literals 稳定化演示
-/// 
+///
 /// 展示 Rust 1.89 中条件编译的增强功能
 pub mod cfg_boolean_literals {
 
     /// 基础 cfg_boolean_literals 演示
-    /// 
+    ///
     /// 展示在条件编译中使用布尔字面量的新语法
     pub fn basic_cfg_boolean_literals() {
         println!("\n=== cfg_boolean_literals 基础演示 ===");
@@ -309,7 +309,7 @@ pub mod cfg_boolean_literals {
         #[cfg(all(feature = "async", feature = "performance"))]
         println!("异步性能模式已启用");
 
-        #[cfg(any(feature = "test"))]
+        #[cfg(feature = "test")]
         println!("测试模式已启用");
 
         // 3. 平台特定编译
@@ -331,7 +331,7 @@ pub mod cfg_boolean_literals {
     }
 
     /// 高级 cfg_boolean_literals 演示
-    /// 
+    ///
     /// 展示条件编译的高级用法
     pub fn advanced_cfg_boolean_literals() {
         println!("\n=== cfg_boolean_literals 高级演示 ===");
@@ -400,19 +400,19 @@ pub mod cfg_boolean_literals {
 }
 
 /// 改进的模式匹配演示
-/// 
+///
 /// 展示 Rust 1.89 中模式匹配的增强功能
 pub mod enhanced_pattern_matching {
 
     /// 基础增强模式匹配演示
-    /// 
+    ///
     /// 展示模式匹配的新特性和改进
     pub fn basic_enhanced_pattern_matching() {
         println!("\n=== 增强模式匹配基础演示 ===");
 
         // 1. 改进的切片模式
         let numbers = vec![1, 2, 3, 4, 5];
-        
+
         match numbers.as_slice() {
             [] => println!("空数组"),
             [single] => println!("单个元素: {}", single),
@@ -443,7 +443,7 @@ pub mod enhanced_pattern_matching {
     }
 
     /// 高级增强模式匹配演示
-    /// 
+    ///
     /// 展示模式匹配的高级用法
     pub fn advanced_enhanced_pattern_matching() {
         println!("\n=== 增强模式匹配高级演示 ===");
@@ -513,13 +513,13 @@ pub mod enhanced_pattern_matching {
 }
 
 /// 增强的类型推断演示
-/// 
+///
 /// 展示 Rust 1.89 中类型推断的改进
 pub mod enhanced_type_inference {
     use super::*;
 
     /// 基础增强类型推断演示
-    /// 
+    ///
     /// 展示类型推断的改进和新特性
     pub fn basic_enhanced_type_inference() {
         println!("\n=== 增强类型推断基础演示 ===");
@@ -549,7 +549,7 @@ pub mod enhanced_type_inference {
     }
 
     /// 高级增强类型推断演示
-    /// 
+    ///
     /// 展示类型推断的高级用法
     pub fn advanced_enhanced_type_inference() {
         println!("\n=== 增强类型推断高级演示 ===");
@@ -574,8 +574,8 @@ pub mod enhanced_type_inference {
     }
 
     /// 创建泛型数据
-    fn create_generic_data<T>(value: T) -> GenericData<T> 
-    where 
+    fn create_generic_data<T>(value: T) -> GenericData<T>
+    where
         T: Clone + Display,
     {
         GenericData { value }
@@ -615,8 +615,8 @@ pub mod enhanced_type_inference {
         value: T,
     }
 
-    impl<T> Display for GenericData<T> 
-    where 
+    impl<T> Display for GenericData<T>
+    where
         T: Display,
     {
         fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -643,19 +643,19 @@ pub mod enhanced_type_inference {
 }
 
 /// 新的控制流特性演示
-/// 
+///
 /// 展示 Rust 1.89 中控制流的新特性
 pub mod new_control_flow {
 
     /// 基础新控制流演示
-    /// 
+    ///
     /// 展示控制流的新特性和改进
     pub fn basic_new_control_flow() {
         println!("\n=== 新控制流基础演示 ===");
 
         // 1. 改进的 for 循环
         let numbers = [1, 2, 3, 4, 5];
-        
+
         // 使用 enumerate 获取索引
         for (index, value) in numbers.iter().enumerate() {
             println!("索引 {}: 值 {}", index, value);
@@ -670,7 +670,7 @@ pub mod new_control_flow {
 
         // 3. 新的循环控制
         let mut data = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        
+
         while let Some(value) = data.pop() {
             if value % 3 == 0 {
                 println!("找到3的倍数: {}", value);
@@ -685,7 +685,7 @@ pub mod new_control_flow {
     }
 
     /// 高级新控制流演示
-    /// 
+    ///
     /// 展示控制流的高级用法
     pub fn advanced_new_control_flow() {
         println!("\n=== 新控制流高级演示 ===");
@@ -711,7 +711,7 @@ pub mod new_control_flow {
         // 3. 复杂条件控制
         let conditions = vec![true, false, true, false, true];
         let mut true_count = 0;
-        
+
         for condition in conditions {
             if condition {
                 true_count += 1;
@@ -744,13 +744,13 @@ pub mod new_control_flow {
 }
 
 /// 改进的错误处理演示
-/// 
+///
 /// 展示 Rust 1.89 中错误处理的改进
 pub mod improved_error_handling {
     use std::num::ParseIntError;
 
     /// 基础改进错误处理演示
-    /// 
+    ///
     /// 展示错误处理的新特性和改进
     pub fn basic_improved_error_handling() {
         println!("\n=== 改进错误处理基础演示 ===");
@@ -794,7 +794,7 @@ pub mod improved_error_handling {
     }
 
     /// 高级改进错误处理演示
-    /// 
+    ///
     /// 展示错误处理的高级用法
     pub fn advanced_improved_error_handling() {
         println!("\n=== 改进错误处理高级演示 ===");
@@ -833,11 +833,11 @@ pub mod improved_error_handling {
     pub fn parse_and_validate(s: &str) -> Result<i32, String> {
         let parsed = s.parse::<i32>()
             .map_err(|_| "解析失败".to_string())?;
-        
+
         if parsed < 0 {
             return Err("值不能为负数".to_string());
         }
-        
+
         Ok(parsed)
     }
 
@@ -892,7 +892,7 @@ pub mod improved_error_handling {
 }
 
 /// 综合演示函数
-/// 
+///
 /// 运行所有 Rust 1.89 基础语法新特性演示
 pub fn run_all_rust_189_demos() {
     println!("🚀 Rust 1.89 基础语法新特性综合演示");
@@ -902,19 +902,19 @@ pub fn run_all_rust_189_demos() {
     let_chains::basic_let_chains();
     let_chains::advanced_let_chains();
     let_chains::while_let_chains();
-    
+
     cfg_boolean_literals::basic_cfg_boolean_literals();
     cfg_boolean_literals::advanced_cfg_boolean_literals();
-    
+
     enhanced_pattern_matching::basic_enhanced_pattern_matching();
     enhanced_pattern_matching::advanced_enhanced_pattern_matching();
-    
+
     enhanced_type_inference::basic_enhanced_type_inference();
     enhanced_type_inference::advanced_enhanced_type_inference();
-    
+
     new_control_flow::basic_new_control_flow();
     new_control_flow::advanced_new_control_flow();
-    
+
     improved_error_handling::basic_improved_error_handling();
     improved_error_handling::advanced_improved_error_handling();
 

@@ -102,9 +102,8 @@ pub fn base_type03() {
 #[allow(unused)]
 pub fn base_type04() {
     let tuple = (1, 2);
-    match tuple {
-        (x, y) => println!("x: {}, y: {}", x, y),
-    }
+    let (x, y) = tuple;
+    println!("x: {}, y: {}", x, y)
 }
 
 #[allow(unused)]
@@ -146,9 +145,8 @@ pub fn base_type07() {
     let my_instance = MyStruct::new(10);
 
     // 尝试在 match 中解构 MyStruct
-    match my_instance {
-        MyStruct { value } => println!("Value is: {}", value), // 这里会报错
-    }
+    let MyStruct { value } = my_instance;
+    println!("Value is: {}", value) // 这里会报错
     // error[E0277]: the trait bound `MyStruct: PartialEq` is not satisfied
     // 解决方法：实现 PartialEq trait
 }

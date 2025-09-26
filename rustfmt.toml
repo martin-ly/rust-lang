@@ -1,0 +1,59 @@
+# Rustfmt配置文件
+# 创建时间: 2025年9月25日 14:45
+
+# 最大行宽度
+max_width = 100
+
+# 缩进空格数
+tab_spaces = 4
+
+# 换行符风格
+newline_style = "Unix"
+
+# 使用字段初始化简写
+use_field_init_shorthand = true
+
+# 使用try简写
+use_try_shorthand = true
+
+# 移除尾随逗号
+trailing_comma = "Vertical"
+
+# 移除尾随分号
+trailing_semicolon = true
+
+# 移除尾随空格
+trailing_whitespace = "Always"
+
+# 格式化字符串
+format_strings = true
+
+# 格式化代码块
+format_code_in_doc_comments = true
+
+# 格式化宏调用
+format_macro_matchers = true
+
+# 格式化宏体
+format_macro_bodies = true
+
+# 格式化属性
+format_generated_files = false
+
+# 导入排序
+imports_granularity = "Module"
+
+# 导入布局
+imports_layout = "Mixed"
+
+# 导入排序
+imports_sort = "Preserve"
+
+# 使用Unicode字符
+use_unicode = true
+
+# 使用小写十六进制
+use_lower_hex = true
+
+# 使用科学计数法
+use_scientific_notation = true

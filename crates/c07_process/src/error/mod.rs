@@ -2,6 +2,10 @@ use std::io;
 use std::process::ExitStatus;
 use thiserror::Error;
 
+// 增强的错误处理功能
+#[cfg(feature = "async")]
+pub mod enhanced;
+
 /// 进程管理相关错误
 #[derive(Error, Debug)]
 pub enum ProcessError {

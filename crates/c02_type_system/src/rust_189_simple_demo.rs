@@ -366,7 +366,7 @@ pub mod simple_demo {
         /// assert_eq!(composition1.reference_count(), 2);
         /// assert_eq!(composition2.reference_count(), 2);
         /// ```
-        pub fn clone(&self) -> Self {
+        pub fn duplicate(&self) -> Self {
             Self {
                 inner: self.inner.clone(),
                 reference_count: self.reference_count.clone(),
@@ -463,12 +463,12 @@ mod tests {
 
         assert_eq!(*composition.get(), 42);
         assert_eq!(composition.reference_count(), 1);
-        
+
         *composition.get_mut() = 100;
         assert_eq!(*composition.get(), 100);
-        
+
         // 测试克隆功能
-        let cloned = composition.clone();
+        let cloned = composition.duplicate();
         assert_eq!(composition.reference_count(), 2);
         assert_eq!(cloned.reference_count(), 2);
         assert_eq!(*cloned.get(), 100);
@@ -494,24 +494,24 @@ mod tests {
 /// 包括常量泛型推断、生命周期语法警告、GATs、TAIT等。
 pub fn demonstrate_all_rust_189_features() {
     println!("=== Rust 1.89 基础语法特性演示 ===\n");
-    
+
     // 1. 显式推断的常量泛型参数
     println!("1. 显式推断的常量泛型参数:");
     let arr = simple_demo::ConstGenericArray::new([1, 2, 3, 4, 5]);
     println!("  创建数组: {:?}", arr);
     println!("  数组长度: {}", arr.len());
     println!("  是否为空: {}", arr.is_empty());
-    
+
     let matrix = simple_demo::Matrix::<i32, 3, 3>::new();
     println!("  创建矩阵: {:?}", matrix);
     println!("  矩阵行数: {}", matrix.rows());
     println!("  矩阵列数: {}", matrix.cols());
-    
+
     let vector = simple_demo::Vector::<i32, 3>::new();
     println!("  创建向量: {:?}", vector);
     println!("  向量维度: {}", vector.dim());
     println!();
-    
+
     // 2. 不匹配的生命周期语法警告
     println!("2. 不匹配的生命周期语法警告:");
     let data = "Hello";
@@ -519,29 +519,29 @@ pub fn demonstrate_all_rust_189_features() {
     let composed = simple_demo::LifetimeComposed::new(&data, metadata);
     println!("  生命周期组合: {:?}", composed);
     println!();
-    
+
     // 3. 类型别名实现特征 (TAIT)
     println!("3. 类型别名实现特征 (TAIT):");
     let processor = simple_demo::create_number_processor();
     println!("  数字处理器: {}", processor);
-    
+
     let complex = simple_demo::create_complex_type();
     let items: Vec<String> = complex.collect();
     println!("  复杂类型: {:?}", items);
     println!();
-    
+
     // 4. 高级类型组合模式
     println!("4. 高级类型组合模式:");
     let smart_pointer = simple_demo::SmartPointerComposition::new(42);
     println!("  智能指针组合: {:?}", smart_pointer);
     println!("  获取值: {}", smart_pointer.get());
     println!("  引用计数: {}", smart_pointer.reference_count());
-    
-    let cloned_pointer = smart_pointer.clone();
+
+    let cloned_pointer = smart_pointer.duplicate();
     println!("  克隆后引用计数: {}", smart_pointer.reference_count());
     println!("  克隆的值: {}", cloned_pointer.get());
     println!();
-    
+
     println!("=== 演示完成 ===");
 }
 

@@ -67,7 +67,7 @@ pub fn bounded_queue_demo(
     for h in handles {
         h.join().unwrap();
     }
-    *consumed_total.lock().unwrap()
+    let x = *consumed_total.lock().unwrap(); x
 }
 
 /// 超时等待：直到某事件发生或达到截止时间

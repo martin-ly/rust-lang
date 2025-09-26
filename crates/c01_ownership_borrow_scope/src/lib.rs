@@ -315,6 +315,7 @@ pub mod scope;
 pub mod variable;
 pub mod ownership_utils;
 pub mod rust_190_features;
+pub mod rust_190_latest_features;
 
 // 重新导出主要类型 / Re-export main types
 // 使用具体的导出而不是通配符导出以避免名称冲突 / Use specific exports instead of wildcard exports to avoid name conflicts
@@ -429,6 +430,29 @@ pub use rust_190_features::{
     // 主要功能函数 / Main function functions
     run_all_rust_190_features_examples,
     get_rust_190_features_info,
+};
+
+// 从 rust_190_latest_features 模块导出 / Export from rust_190_latest_features module
+pub use rust_190_latest_features::{
+    // 主要功能函数 / Main function functions
+    run_all_rust_190_latest_features_examples,
+    get_rust_190_latest_features_info,
+    run_async_examples,
+    // 生成器特征和实现 / Generator traits and implementations
+    SyncGenerator,
+    AsyncGenerator,
+    CustomSyncGenerator,
+    CustomAsyncGenerator,
+    // 生成器工具函数 / Generator utility functions
+    create_number_generator,
+    create_filtered_generator,
+    create_transformed_generator,
+    combine_generators,
+    zip_generators,
+    // 性能分析 / Performance analysis
+    GeneratorMetrics,
+    PerformanceAnalyzer as Rust190PerformanceAnalyzer,
+    CachedGenerator,
 };
 
 /// 所有权系统版本 / Ownership System Version

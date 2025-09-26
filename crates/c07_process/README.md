@@ -10,6 +10,8 @@
 - **跨平台**: 支持 Windows、Linux 和 macOS
 - **类型安全**: 完整的 Rust 类型系统和错误处理
 - **高性能**: 使用 Arc 和 Mutex 的并发安全设计
+- **Rust 1.90 新特性**: 充分利用最新的语言特性，包括异步闭包、改进的模式匹配等
+- **Edition 2024**: 使用最新的 Rust 2024 版本特性
 
 ## 📦 安装
 
@@ -321,7 +323,80 @@ cargo run --bin stdio_demo
 cargo run --features async --bin async_stdio_demo
 ```
 
-预留异步标准 IO 与超时 API 的接口，当前调用会返回“未实现”错误，便于后续迭代替换为真实实现。
+预留异步标准 IO 与超时 API 的接口，当前调用会返回"未实现"错误，便于后续迭代替换为真实实现。
+
+### Rust 1.90 新特性演示
+
+```bash
+cargo run --features async --bin rust_190_features_demo
+```
+
+演示 Rust 1.90 Edition 2024 的最新语言特性，包括：
+
+- 异步闭包 (Async Closures)
+- 改进的模式匹配
+- 改进的迭代器
+- 改进的错误处理
+- 改进的类型推断
+- 改进的宏系统
+- 标准库新特性
+- 改进的并发特性
+
+### 增强的异步功能演示
+
+```bash
+cargo run --features async --bin enhanced_async_demo
+```
+
+演示增强的异步进程管理功能，包括：
+
+- 完整的异步进程管理
+- 异步闭包支持
+- 性能监控
+- 错误恢复机制
+- 资源限制和连接池
+
+### 增强的IPC通信演示
+
+```bash
+cargo run --features async --bin enhanced_ipc_demo
+```
+
+演示增强的IPC通信功能，包括：
+
+- 零拷贝数据传输
+- 高性能消息队列
+- 共享内存通信
+- 性能监控和统计
+- 智能错误恢复
+
+### 增强的同步原语演示
+
+```bash
+cargo run --features async --bin enhanced_sync_demo
+```
+
+演示增强的同步原语功能，包括：
+
+- 死锁检测和预防
+- 性能监控和统计
+- 自适应锁策略
+- 高级同步原语组合
+- 智能负载均衡
+
+### 增强的错误处理演示
+
+```bash
+cargo run --features async --bin enhanced_error_demo
+```
+
+演示增强的错误处理功能，包括：
+
+- 智能错误恢复机制
+- 错误链追踪和分析
+- 自动错误分类
+- 错误通知和告警
+- 错误统计和趋势分析
 
 ## 🤝 贡献
 

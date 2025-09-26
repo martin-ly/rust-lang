@@ -7,7 +7,6 @@
 //! - NUMA感知工作窃取
 
 use std::sync::{Arc, Mutex};
-//use std::thread;
 use crossbeam_deque::{
     Injector,
     Worker,
@@ -239,7 +238,7 @@ impl<T> PriorityWorkStealingScheduler<T> {
                     loop {
                         if let Some(task) = scheduler.steal_task(worker_id) {
                             let result = task * 2;
-                            local_results.push((worker_id as u32, result));
+                            local_results.push((worker_id as u32, result as i32));
                             thread::sleep(Duration::from_millis(1));
                         } else {
                             break;
@@ -543,7 +542,7 @@ impl<T> NumaAwareWorkStealingScheduler<T> {
                         loop {
                             if let Some(task) = scheduler.steal_task(node_id, worker_id) {
                                 let result = task * 3;
-                                local_results.push((node_id, worker_id, result));
+                                local_results.push((node_id, worker_id, result as i32));
                                 thread::sleep(Duration::from_millis(1));
                             } else {
                                 break;

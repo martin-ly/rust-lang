@@ -2,11 +2,11 @@
 
 > 导航：返回 [`rust-formal-engineering-system`](../../rust-formal-engineering-system/README.md) · 同步范式 [`01_synchronous/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/01_synchronous/00_index.md) · 异步范式 [`02_async/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/02_async/00_index.md) · 最小基准指南 [`11_benchmark_minimal_guide.md`](../../rust-formal-engineering-system/02_programming_paradigms/11_benchmark_minimal_guide.md)
 
-本模块展示了Rust 1.89中线程编程的各种高级特性，包括作用域线程、工作窃取、无锁数据结构、高级同步原语等。
+本模块展示了Rust 1.90 Edition 2024中线程编程的各种高级特性，包括作用域线程、工作窃取、无锁数据结构、高级同步原语等，并充分利用了最新的语言特性。
 
 ## 快速开始
 
-- 安装 Rust 工具链：建议使用 `rustup` 并选择稳定版 (>= 1.89)
+- 安装 Rust 工具链：建议使用 `rustup` 并选择稳定版 (>= 1.90)
 - 在工作区根目录执行：
 
 ```bash
@@ -92,7 +92,24 @@ cargo bench -p c05_threads
 
 ## 主要特性
 
-### 1. 作用域线程 (Rust 1.89 新特性)
+### 0. Rust 1.90 Edition 2024 最新特性
+
+本模块充分利用了 Rust 1.90 和 Edition 2024 的最新特性：
+
+- **显式推断的常量泛型参数**: 使用 `_` 进行常量泛型参数推断
+- **改进的异步编程**: 支持 `-> impl Trait` 和 `async fn` 语法
+- **增强的类型系统**: 改进的 `!` 类型回退行为
+- **性能优化特性**: 内联汇编、SIMD 向量化、内存预取
+- **高级并发特性**: 改进的线程池、无锁数据结构、内存屏障
+
+```rust
+use c05_threads::rust_190_features;
+
+// 演示所有 Rust 1.90 特性
+rust_190_features::demonstrate_rust_190_features();
+```
+
+### 1. 作用域线程 (Rust 1.89+ 特性)
 
 ```rust
 use std::thread;
@@ -208,6 +225,16 @@ demo::run_performance_benchmarks();
 
 // 运行内存分析
 demo::run_memory_analysis();
+```
+
+### 运行 Rust 1.90 特性演示
+
+```bash
+# 运行 Rust 1.90 特性演示
+cargo run -p c05_threads --example rust_190_features_demo
+
+# 启用 tokio 特性运行异步演示
+cargo run -p c05_threads --example rust_190_features_demo --features tokio
 ```
 
 ### 运行特定模块演示

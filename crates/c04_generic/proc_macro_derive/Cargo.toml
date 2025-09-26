@@ -1,7 +1,9 @@
 [package]
 name = "proc_macro_derive"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
+resolver = "3"
+rust-version = "1.90"
 
 [lib]
 proc-macro = true
