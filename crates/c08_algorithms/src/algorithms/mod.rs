@@ -19,6 +19,8 @@ pub mod combinatorics;
 
 // Rust 2025 新特性应用
 pub mod rust_2025_features;
+// Rust 2024 成熟特性示例
+pub mod rust_2024_features;
 
 // 算法执行模式
 pub mod execution_modes;

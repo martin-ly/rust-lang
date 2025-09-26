@@ -66,9 +66,7 @@ pub async fn kmp_search_async(text: String, pattern: String) -> Result<Vec<usize
 pub fn rabin_karp_search(text: &str, pattern: &str) -> Vec<usize> {
     let n = text.len();
     let m = pattern.len();
-    if m == 0 {
-        return (0..=n).collect();
-    }
+    if m == 0 { return (0..=n).collect(); }
     if m > n {
         return Vec::new();
     }
@@ -138,9 +136,7 @@ impl Trie {
     pub fn insert(&mut self, pattern: &[u8], id: usize) {
         let mut s = 0usize;
         for &ch in pattern {
-            let nxt = if let Some(&v) = self.nodes[s].next.get(&ch) {
-                v
-            } else {
+            let nxt = if let Some(&v) = self.nodes[s].next.get(&ch) { v } else {
                 let v = self.nodes.len();
                 self.nodes[s].next.insert(ch, v);
                 self.nodes.push(TrieNode::default());
@@ -202,6 +198,11 @@ impl Trie {
             }
         }
         res
+    }
+
+    /// 返回只读节点迭代器视图（示例 API，Edition 2024：返回位置 impl Iterator）
+    pub fn nodes_iter(&self) -> impl Iterator<Item = &TrieNode> {
+        self.nodes.iter()
     }
 }
 

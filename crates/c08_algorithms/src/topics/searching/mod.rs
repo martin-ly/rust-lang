@@ -762,15 +762,10 @@ impl SearchingValidator {
         result: &SearchResult<T>,
     ) -> bool {
         if result.found {
-            if let Some(index) = result.index {
-                if index >= data.len() {
-                    return false;
-                }
-                if let Some(value) = &result.value {
-                    return data[index] == *value && value == target;
-                }
-            }
-            false
+            let Some(index) = result.index else { return false; };
+            if index >= data.len() { return false; }
+            let Some(value) = &result.value else { return false; };
+            data[index] == *value && value == target
         } else {
             // 如果没找到，验证数据中确实没有目标
             !data.iter().any(|item| item == target)

@@ -362,6 +362,43 @@ impl ComprehensiveSortingBenchmark {
         report
     }
 
+    /// 返回位置 impl Trait：按算法产出最佳用例摘要的迭代器
+    pub fn best_summary_iter(&self) -> impl Iterator<Item = String> + '_ {
+        let modes = [
+            ExecutionMode::Sync,
+            ExecutionMode::Async,
+            ExecutionMode::Parallel,
+            ExecutionMode::Distributed,
+        ];
+
+        let algorithms = [
+            SortingAlgorithm::QuickSort,
+            SortingAlgorithm::MergeSort,
+            SortingAlgorithm::HeapSort,
+            SortingAlgorithm::InsertionSort,
+            SortingAlgorithm::SelectionSort,
+            SortingAlgorithm::BubbleSort,
+            SortingAlgorithm::RadixSort,
+            SortingAlgorithm::CountingSort,
+            SortingAlgorithm::BucketSort,
+            SortingAlgorithm::TimSort,
+        ];
+
+        algorithms.into_iter().flat_map(move |alg| {
+            modes.into_iter().filter_map(move |mode| {
+                self.get_best_performance(alg, mode).map(|r| {
+                    format!(
+                        "{:?}/{:?}: {:?} (n={})",
+                        alg,
+                        mode,
+                        r.result.execution_time,
+                        r.data_size
+                    )
+                })
+            })
+        })
+    }
+
     /// 获取指定算法和模式的最佳性能
     fn get_best_performance(&self, algorithm: SortingAlgorithm, mode: ExecutionMode) -> Option<&SortingBenchmarkResult> {
         let results = match mode {

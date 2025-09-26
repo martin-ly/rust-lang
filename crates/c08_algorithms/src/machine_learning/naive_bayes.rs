@@ -87,6 +87,11 @@ impl NaiveBayesClassifier {
 
         stats
     }
+
+    /// 返回已知类别的只读迭代器（若未训练则为空）
+    pub fn classes_iter(&self) -> impl Iterator<Item = &Label> {
+        self.classes.as_ref().map(|v| v.as_slice()).into_iter().flatten()
+    }
 }
 
 impl Default for NaiveBayesClassifier {

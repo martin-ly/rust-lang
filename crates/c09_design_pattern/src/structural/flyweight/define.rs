@@ -97,6 +97,13 @@ impl OptimizedFlyweightFactory {
         let ids: Vec<u32> = self.flyweights.values().map(|f| f.get_id()).collect();
         (count, ids)
     }
+
+    /// 返回位置 impl Trait：按 ID 升序返回享元 ID 的只读迭代器
+    pub fn iter_ids(&self) -> impl Iterator<Item = u32> + '_ {
+        let mut ids: Vec<u32> = self.flyweights.values().map(|f| f.get_id()).collect();
+        ids.sort_unstable();
+        ids.into_iter()
+    }
 }
 
 // 传统享元工厂（保持向后兼容）

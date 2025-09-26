@@ -32,6 +32,11 @@ impl KMeans {
         }
     }
 
+    /// 返回聚类中心的只读迭代器（若未拟合则为空）
+    pub fn centers_iter(&self) -> impl Iterator<Item = &DataPoint> {
+        self.centers.as_ref().map(|v| v.as_slice()).into_iter().flatten()
+    }
+
     /// 设置最大迭代次数
     pub fn max_iterations(mut self, max_iter: usize) -> Self {
         self.max_iterations = max_iter;
@@ -75,11 +80,10 @@ impl KMeans {
         use rand::rngs::ThreadRng;
         let mut rng = ThreadRng::default();
 
-        // 随机选择第一个中心
-        if !data.is_empty() {
-            let first_idx = rng.random_range(0..data.len());
-            centers.push(data[first_idx].clone());
-        }
+        // 随机选择第一个中心（let-else 早返回空数据集）
+        let Some(_first) = data.first() else { return centers; };
+        let first_idx = rng.random_range(0..data.len());
+        centers.push(data[first_idx].clone());
 
         // 使用 K-means++ 选择剩余中心
         for _ in 1..self.k {

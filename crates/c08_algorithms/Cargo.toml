@@ -73,4 +73,8 @@ path = "benches/simple_benchmarks.rs"
 name = "comprehensive_algorithm_demo"
 path = "examples/comprehensive_algorithm_demo.rs"
 
+[[example]]
+name = "rust_2024_features_demo"
+path = "examples/rust_2024_features_demo.rs"
+
 #[profile] moved to workspace root

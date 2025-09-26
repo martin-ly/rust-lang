@@ -46,4 +46,30 @@ impl Benchmarker {
             cache_misses: None,
         }
     }
+
+    /// 使用 try 块聚合多次基准以返回平均结果
+    pub fn run_benchmark_try<F>(
+        algorithm_name: &str,
+        input_size: usize,
+        iterations: usize,
+        algorithm_fn: F,
+    ) -> anyhow::Result<BenchmarkResult>
+    where
+        F: Fn() -> anyhow::Result<std::time::Duration>,
+    {
+        let mut total = std::time::Duration::ZERO;
+        for _ in 0..iterations {
+            total += algorithm_fn()?;
+        }
+        let avg = total / iterations as u32;
+
+        Ok(BenchmarkResult {
+            algorithm_name: algorithm_name.to_string(),
+            input_size,
+            execution_time: avg,
+            memory_usage: 0,
+            cpu_usage: 0.0,
+            cache_misses: None,
+        })
+    }
 }

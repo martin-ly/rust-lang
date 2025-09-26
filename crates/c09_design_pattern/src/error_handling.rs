@@ -343,7 +343,10 @@ pub mod utils {
 
     /// 验证输入参数
     pub fn validate_input<T>(value: Option<T>, name: &str) -> PatternResult<T> {
-        value.ok_or_else(|| DesignPatternError::ConfigurationError(format!("{} 不能为空", name)))
+        let Some(v) = value else {
+            return Err(DesignPatternError::ConfigurationError(format!("{} 不能为空", name)));
+        };
+        Ok(v)
     }
 
     /// 验证数值范围

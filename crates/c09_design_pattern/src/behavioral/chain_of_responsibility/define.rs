@@ -35,11 +35,13 @@ impl Handler<String> for ConcreteHandlerA {
     fn handle(&self, request: String) {
         if request.contains("A") {
             println!("ConcreteHandlerA 处理请求: {}", request);
-        } else if let Some(next) = &self.next_handler {
-            next.handle(request);
-        } else {
-            println!("没有处理者处理请求: {}", request);
+            return;
         }
+        let Some(next) = &self.next_handler else {
+            println!("没有处理者处理请求: {}", request);
+            return;
+        };
+        next.handle(request);
     }
 }
 
@@ -72,11 +74,13 @@ impl Handler<String> for ConcreteHandlerB {
     fn handle(&self, request: String) {
         if request.contains("B") {
             println!("ConcreteHandlerB 处理请求: {}", request);
-        } else if let Some(next) = &self.next_handler {
-            next.handle(request);
-        } else {
-            println!("没有处理者处理请求: {}", request);
+            return;
         }
+        let Some(next) = &self.next_handler else {
+            println!("没有处理者处理请求: {}", request);
+            return;
+        };
+        next.handle(request);
     }
 }
 
@@ -109,11 +113,13 @@ impl Handler<String> for ConcreteHandlerC {
     fn handle(&self, request: String) {
         if request.contains("C") {
             println!("ConcreteHandlerC 处理请求: {}", request);
-        } else if let Some(next) = &self.next_handler {
-            next.handle(request);
-        } else {
-            println!("没有处理者处理请求: {}", request);
+            return;
         }
+        let Some(next) = &self.next_handler else {
+            println!("没有处理者处理请求: {}", request);
+            return;
+        };
+        next.handle(request);
     }
 }
 

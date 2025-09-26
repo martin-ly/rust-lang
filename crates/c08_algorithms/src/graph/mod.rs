@@ -485,6 +485,10 @@ pub fn topo_sort_sync<T>(graph: &HashMap<T, Vec<T>>) -> Option<Vec<T>>
 where
     T: Eq + Hash + Clone,
 {
+    fn zero_indegree_keys<T: Eq + Hash + Clone>(indeg: &HashMap<T, usize>) -> impl Iterator<Item = T> + '_ {
+        indeg.iter().filter_map(|(k, d)| (*d == 0).then_some(k.clone()))
+    }
+
     let mut indeg: HashMap<T, usize> = HashMap::new();
     for (u, vs) in graph {
         indeg.entry(u.clone()).or_insert(0);
@@ -492,11 +496,7 @@ where
             *indeg.entry(v.clone()).or_insert(0) += 1;
         }
     }
-    let mut q: VecDeque<T> = indeg
-        .iter()
-        .filter(|(_, d)| **d == 0)
-        .map(|(k, _)| k.clone())
-        .collect();
+    let mut q: VecDeque<T> = zero_indegree_keys(&indeg).collect();
     let mut res = Vec::new();
     let mut indeg_mut = indeg;
     while let Some(u) = q.pop_front() {
@@ -1568,7 +1568,7 @@ pub fn tree_centroid_sync<T: Eq + Hash + Clone>(
 
         if let Some(children) = tree.get(node) {
             for child in children {
-                if parent.is_some() && parent.unwrap() == child {
+                if parent.is_some_and(|p| p == child) {
                     continue;
                 }
                 let child_size = dfs_size(tree, child, Some(node), subtree_size, max_subtree);
@@ -1663,7 +1663,7 @@ impl<T: Eq + Hash + Clone> HeavyLightDecomposition<T> {
 
         if let Some(children) = tree.get(node) {
             for child in children {
-                if parent.is_some() && parent.unwrap() == child {
+                if parent.is_some_and(|p| p == child) {
                     continue;
                 }
                 let child_size = self.dfs_size(tree, child, Some(node));
@@ -1704,7 +1704,7 @@ impl<T: Eq + Hash + Clone> HeavyLightDecomposition<T> {
         // 再处理轻儿子
         if let Some(children) = tree.get(node) {
             for child in children {
-                if parent.is_some() && parent.unwrap() == child {
+                if parent.is_some_and(|p| p == child) {
                     continue;
                 }
                 if Some(child) != self.heavy_child.get(node).and_then(|h| h.as_ref()) {

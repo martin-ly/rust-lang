@@ -227,8 +227,89 @@
 
 **模块状态**: 🔄 持续开发中  
 **最后更新**: 2025年9月25日  
-**适用版本**: Rust 1.70+  
+**适用版本**: Rust 1.90，Edition 2024  
 
 ---
 
 *本模块专注于Rust设计模式的学习，提供系统性的学习路径和实践示例。如有任何问题或建议，欢迎反馈。*
+
+---
+
+## 🆕 Rust 1.90 / Edition 2024 采用情况
+
+- let-else：
+  - `behavioral/chain_of_responsibility/define.rs` 的 `handle` 方法使用 `let Some(..) else { .. }` 做早退分支。
+- return-position impl Trait：
+  - `structural/flyweight/define.rs` 的 `OptimizedFlyweightFactory::iter_ids` 返回 `impl Iterator<Item = u32>`。
+- 其他：
+  - 错误处理工具 `error_handling.rs::utils::validate_input` 使用 `let-else` 提升可读性。
+
+### 示例入口与用法
+
+- 原生 async fn in trait：
+  - 模块：`concurrency/asynchronous/native_async_trait`
+  - 运行思路：该示例带有单元测试（纯 Rust 栈内 `block_on`），可通过 `cargo test -p c09_design_pattern native_async_trait` 触发。
+  - 可选 Tokio 门控：启用 `--features tokio-bench` 可运行基于 Tokio 的延迟处理测试。
+- 1.90 汇总示例：
+  - 模块：`rust_190_features`
+  - API：`highlights::terminate_with_panic() -> !`、`highlights::if_let_chain(..)`
+  - 用途：演示 never 类型与 if-let 链式匹配；可在任意示例/测试中直接调用。
+- GATs 借用视图：
+  - 模块：`behavioral/observer/define.rs`
+  - 类型：`ObserverRef`、`BorrowingObserver`、`BorrowingSubjectString`
+  - 要点：通知时借用数据，避免多次克隆，用以展示 GATs 的借用返回。
+- 并行流水线（返回位 impl Trait）：
+  - 模块：`parallel/pipeline/define.rs`
+  - API：`make_pipeline_iter(&[i32]) -> impl Iterator<Item=i32> + Send`
+  - 要点：组合 map/filter/map，返回位 impl Trait + Send。
+
+### 运行 examples
+
+```bash
+# async trait 示例
+cargo run -p c09_design_pattern --example async_trait_demo
+
+# GATs 观察者示例
+cargo run -p c09_design_pattern --example gats_observer_demo
+
+# 流水线迭代器示例
+cargo run -p c09_design_pattern --example pipeline_iter_demo
+
+# 启用 Tokio 门控并运行测试
+cargo test -p c09_design_pattern --features tokio-bench
+```
+
+### Benchmark（Criterion）
+
+```bash
+# 运行全部基准
+cargo bench -p c09_design_pattern
+
+# 仅运行某组或某项（支持正则）
+cargo bench -p c09_design_pattern -- flyweight
+cargo bench -p c09_design_pattern -- proxy_request
+
+# 保存当前结果为基线
+cargo bench -p c09_design_pattern -- --save-baseline main
+
+# 与已保存的基线对比
+cargo bench -p c09_design_pattern -- --baseline main
+```
+
+### 新增示例与基准索引
+
+- 示例：
+  - `event_bus_demo`: 异步事件总线（async trait + GATs）
+  - `async_trait_demo`: 原生 async trait 最小示例
+  - `gats_observer_demo`: GATs 借用观察者
+  - `pipeline_iter_demo`: 返回位 impl Trait 的流水线
+
+#### 异步事件总线用法提示
+
+- 背压策略：`DropOldest`（保留最新一半示例）、`Block`（逐条处理）、`Batch(n)`（按批处理）
+- 取消/超时近似：`run_until_cancel(..., true)`、`run_with_timeout_like(events, max_events)`
+
+- 基准：
+  - `benches/async_gats_benches.rs`: 异步事件总线与 GATs 观察者基准
+
+后续规划：在不破坏稳定 API 的前提下，逐步引入原生 `async fn` in trait、GATs 等更高级特性到并发与异步子模块（视适用性与依赖生态兼容性推进）。
