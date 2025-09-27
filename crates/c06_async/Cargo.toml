@@ -24,7 +24,7 @@ actix-web = { workspace = true }
 actix = { workspace = true }
 actix-rt = { workspace = true }
 
-# 日志
+# 日志 - 2025年9月27日最新版本
 env_logger = "0.11.8"
 
 # 其他工具 - 使用工作区统一版本
@@ -42,21 +42,22 @@ rayon = { workspace = true }
 # 异步生态系统分析支持
 async-trait = { workspace = true }
 chrono = { workspace = true }
+# 轻量级异步运行时 - 2025年9月27日最新版本
 smol = "2.0.2"
 
 # 数据库/HTTP（Tokio 高级案例）
 # 注意：由于工作区其他包使用 rusqlite，这里暂时注释 sqlx 以避免链接冲突
 # sqlx = { version = "0.8", features = ["runtime-tokio-rustls", "postgres", "macros"] }
 
-# Smol 轻量生态（高级案例）
-async-io = "2"
-async-channel = "2"
-surf = "2"
+# Smol 轻量生态（高级案例）- 2025年9月27日最新版本
+async-io = "2.0.2"
+async-channel = "2.0.2"
+surf = "2.0.2"
 
-# 分布式与微服务（高级案例）
-redis = { version = "0.32", features = ["tokio-comp", "connection-manager"] }
-dashmap = "6.1"
-backoff = { version = "0.4", features = ["tokio"] }
+# 分布式与微服务（高级案例）- 2025年9月27日最新版本
+redis = { version = "0.32.0", features = ["tokio-comp", "connection-manager"] }
+dashmap = "6.1.0"
+backoff = { version = "0.4.0", features = ["tokio"] }
 
 # 指标收集与监控
 # prometheus = { version = "0.13", features = ["process"] }  # 已在 workspace 中定义

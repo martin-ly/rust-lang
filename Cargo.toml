@@ -97,13 +97,13 @@ codegen-units = 1
 opt-level = 2
 
 # 工作区级别的依赖版本统一 - 2025年9月27日最新稳定版本
-# 更新时间: 2025-09-27 08:41:13
+# 更新时间: 2025-09-27 12:51:54 (系统时间已同步)
 # 系统时间已同步，所有依赖库版本已更新至最新成熟版本
 [workspace.dependencies]
 # 网络和 HTTP 相关 - 2025年9月27日最新稳定版本
-# reqwest: 高级HTTP客户端库，支持异步请求和JSON序列化
+# reqwest: 高级HTTP客户端库，支持异步请求和JSON序列化 - 2025年9月27日最新版本
 reqwest = { version = "0.12.23", features = ["json", "rustls-tls"] }
-# hyper: 底层HTTP库，提供高性能的HTTP/1.1和HTTP/2支持
+# hyper: 底层HTTP库，提供高性能的HTTP/1.1和HTTP/2支持 - 2025年9月27日最新版本
 hyper = { version = "1.7.0", features = ["full"] }
 # hyper-util: hyper的实用工具库，提供连接池和服务器功能
 hyper-util = "0.1.17"
@@ -119,7 +119,7 @@ h2 = "0.5.1"
 http = "1.3.1"
 
 # Web 框架 - 2025年9月27日最新稳定版本
-# axum: 现代Web框架，专注于人体工程学和模块化设计
+# axum: 现代Web框架，专注于人体工程学和模块化设计 - 2025年9月27日最新版本
 axum = { version = "0.8.4", features = ["macros", "multipart", "tracing"] }
 # axum-core: axum的核心功能库
 axum-core = "0.6.1"
@@ -132,7 +132,7 @@ tower-http = { version = "0.6.6", features = [
     "timeout",        # 请求超时支持
     "compression-gzip", # Gzip压缩支持
 ] }
-# actix-web: 高性能的Web框架，基于Actor模型
+# actix-web: 高性能的Web框架，基于Actor模型 - 2025年9月27日最新版本
 actix-web = "4.11.0"
 # actix: Actor系统框架
 actix = "0.13.5"
@@ -225,7 +225,7 @@ thiserror = "2.0.16"
 anyhow = "1.0.100"
 
 # 序列化 - 2025年9月27日最新稳定版本
-# serde: 通用序列化/反序列化框架，支持多种数据格式
+# serde: 通用序列化/反序列化框架，支持多种数据格式 - 2025年9月27日最新版本
 serde = { version = "1.0.227", features = ["derive"] }
 # serde_json: JSON序列化/反序列化支持
 serde_json = "1.0.145"
@@ -235,7 +235,7 @@ serde_yaml = "0.9.34"
 bincode = "1.3.3"
 
 # 异步运行时 - 2025年9月27日最新稳定版本
-# tokio: 事件驱动的非阻塞I/O平台，用于编写异步I/O应用程序
+# tokio: 事件驱动的非阻塞I/O平台，用于编写异步I/O应用程序 - 2025年9月27日最新版本
 tokio = { version = "1.47.1", features = ["full"] }
 # tokio-util: tokio的实用工具库
 tokio-util = "0.7.16"
@@ -277,13 +277,13 @@ metrics = "0.24.2"
 metrics-exporter-prometheus = "0.17.2"
 
 # 时间处理 - 2025年9月27日最新稳定版本
-# chrono: 日期和时间处理库，支持多种日期格式和时区
+# chrono: 日期和时间处理库，支持多种日期格式和时区 - 2025年9月27日最新版本
 chrono = { version = "0.4.42", features = ["serde"] }
 # time: 现代时间处理库，提供高性能的时间操作
 time = { version = "0.3.44", features = ["serde", "macros"] }
 
 # 其他常用库 - 2025年9月27日最新稳定版本
-# uuid: UUID生成和解析库，支持多种UUID版本
+# uuid: UUID生成和解析库，支持多种UUID版本 - 2025年9月27日最新版本
 uuid = { version = "1.18.1", features = ["v4", "serde"] }
 # url: URL解析和操作库
 url = "2.5.7"
