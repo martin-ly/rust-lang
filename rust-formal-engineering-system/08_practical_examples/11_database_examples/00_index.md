@@ -1,28 +1,67 @@
 # 数据库示例（Database Examples）索引
 
-## 主题
+## 目的
 
-- ORM：SQLx、Diesel、SeaORM
-- 连接池与超时：bb8、deadpool、sqlx 的池参数
-- 迁移与版本：sqlx migrate、sea-orm-cli、diesel migration
+- 提供 Rust 数据库开发的实用示例。
+- 展示如何构建高性能的数据库应用。
 
-## 最小可运行示例
+## 核心示例
 
-- `DATABASE_URL=... cargo run -p c13_microservice --example grpc_service`
-- `DATABASE_URL=... cargo test -p c13_microservice --features with-sqlx`
+### 关系型数据库
 
-## 常见问题与排错
+- PostgreSQL 集成示例
+- MySQL 集成示例
+- SQLite 集成示例
+- 数据库连接池示例
 
-- 连接失败：检查防火墙/凭据；增大连接超时与重试次数。
-- 迁移不一致：统一使用同一迁移工具与版本；在 CI 校验迁移历史。
-- 连接池耗尽：增加池大小或优化查询；添加超时与熔断策略。
+### NoSQL 数据库
 
-## 运行
+- MongoDB 集成示例
+- Redis 集成示例
+- Cassandra 集成示例
+- DynamoDB 集成示例
 
-- 参见：`crates/c13_microservice/` 示例与 README
-- 环境变量：`DATABASE_URL=...`
+### 数据库操作
+
+- CRUD 操作示例
+- 事务处理示例
+- 查询优化示例
+- 数据迁移示例
+
+### 数据库设计
+
+- 数据模型设计
+- 索引优化
+- 查询性能优化
+- 数据一致性
+
+## 实践与样例
+
+- 数据库示例：参见 [crates/c77_database](../../../crates/c77_database/)
+- 数据存储：[crates/c78_data_storage](../../../crates/c78_data_storage/)
+- 数据访问：[crates/c79_data_access](../../../crates/c79_data_access/)
+
+### 文件级清单（精选）
+
+- `crates/c77_database/src/`：
+  - `relational_databases.rs`：关系型数据库示例
+  - `nosql_databases.rs`：NoSQL 数据库示例
+  - `database_operations.rs`：数据库操作示例
+  - `database_design.rs`：数据库设计示例
+- `crates/c78_data_storage/src/`：
+  - `data_persistence.rs`：数据持久化示例
+  - `data_caching.rs`：数据缓存示例
+  - `data_synchronization.rs`：数据同步示例
+
+## 相关索引
+
+- 理论基础（并发模型）：[`../../01_theoretical_foundations/04_concurrency_models/00_index.md`](../../01_theoretical_foundations/04_concurrency_models/00_index.md)
+- 编程范式（异步）：[`../../02_programming_paradigms/02_async/00_index.md`](../../02_programming_paradigms/02_async/00_index.md)
+- 应用领域（大数据分析）：[`../../04_application_domains/07_big_data_analytics/00_index.md`](../../04_application_domains/07_big_data_analytics/00_index.md)
 
 ## 导航
 
-- 返回实践示例：[`../00_index.md`](../00_index.md)
-- 微服务：[`../../../crates/c13_microservice`](../../../crates/c13_microservice/)
+- 返回实用示例：[`../00_index.md`](../00_index.md)
+- 嵌入式示例：[`../10_embedded_examples/00_index.md`](../10_embedded_examples/00_index.md)
+- 消息队列示例：[`../12_messaging_examples/00_index.md`](../12_messaging_examples/00_index.md)
+- 返回项目根：[`../../README.md`](../../README.md)

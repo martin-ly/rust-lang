@@ -1,28 +1,66 @@
 # 可观测性示例（Observability Examples）索引
 
-## 主题
+## 目的
 
-- 指标：Prometheus 文本格式 `/metrics`
-- 追踪：OpenTelemetry、Jaeger
-- 剖析：pprof、火焰图
+- 提供 Rust 可观测性开发的实用示例。
+- 展示如何构建可观测的系统。
 
-## 最小可运行示例
+## 核心示例
 
-- `cargo run -p c13_microservice --example comprehensive_observability_demo`
-- `OTEL_EXPORTER_OTLP_ENDPOINT=... cargo run -p c13_microservice --example comprehensive_observability_demo`
+### 日志记录
 
-## 常见问题与排错
+- 结构化日志示例
+- 日志级别管理
+- 日志聚合示例
+- 日志分析示例
 
-- 指标抓取不到：确认 `/metrics` 路由与防火墙；检查端口映射。
-- tracing 无数据：核对 OTLP/Jaeger 端点与采样比例。
-- pprof 导出失败：确认特性开关与生成的火焰图工具链。
+### 指标监控
 
-## 运行
+- 性能指标示例
+- 业务指标示例
+- 自定义指标示例
+- 指标可视化示例
 
-- 参见：`crates/c13_microservice/` 与 `crates/c10_networks/`
-- 环境变量：`OTEL_EXPORTER_OTLP_ENDPOINT=...`
+### 分布式追踪
+
+- 请求追踪示例
+- 服务依赖追踪
+- 性能分析示例
+- 错误追踪示例
+
+### 健康检查
+
+- 服务健康检查
+- 依赖健康检查
+- 自定义健康检查
+- 健康状态报告
+
+## 实践与样例
+
+- 可观测性示例：参见 [crates/c83_observability](../../../crates/c83_observability/)
+- 监控系统：[crates/c84_monitoring](../../../crates/c84_monitoring/)
+- 日志系统：[crates/c85_logging](../../../crates/c85_logging/)
+
+### 文件级清单（精选）
+
+- `crates/c83_observability/src/`：
+  - `logging_examples.rs`：日志记录示例
+  - `metrics_examples.rs`：指标监控示例
+  - `tracing_examples.rs`：分布式追踪示例
+  - `health_checks.rs`：健康检查示例
+- `crates/c84_monitoring/src/`：
+  - `performance_monitoring.rs`：性能监控示例
+  - `business_monitoring.rs`：业务监控示例
+  - `alerting_system.rs`：告警系统示例
+
+## 相关索引
+
+- 理论基础（并发模型）：[`../../01_theoretical_foundations/04_concurrency_models/00_index.md`](../../01_theoretical_foundations/04_concurrency_models/00_index.md)
+- 编程范式（异步）：[`../../02_programming_paradigms/02_async/00_index.md`](../../02_programming_paradigms/02_async/00_index.md)
+- 工具链生态（监控）：[`../../06_toolchain_ecosystem/10_monitoring/00_index.md`](../../06_toolchain_ecosystem/10_monitoring/00_index.md)
 
 ## 导航
 
-- 返回实践示例：[`../00_index.md`](../00_index.md)
-- 质量保障：[`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)
+- 返回实用示例：[`../00_index.md`](../00_index.md)
+- 消息队列示例：[`../12_messaging_examples/00_index.md`](../12_messaging_examples/00_index.md)
+- 返回项目根：[`../../README.md`](../../README.md)

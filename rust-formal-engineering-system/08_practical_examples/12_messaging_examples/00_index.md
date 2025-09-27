@@ -1,28 +1,67 @@
 # 消息队列示例（Messaging Examples）索引
 
-## 主题
+## 目的
 
-- Redis：发布/订阅、流（XADD/XREAD）
-- RabbitMQ：队列、交换器、路由键
-- 背压与重试：有界通道、确认、死信
+- 提供 Rust 消息队列开发的实用示例。
+- 展示如何构建可靠的消息传递系统。
 
-## 最小可运行示例
+## 核心示例
 
-- `REDIS_URL=... cargo run -p c13_microservice --example messaging_advanced_demo`
-- `AMQP_URL=... cargo run -p c13_microservice --example messaging_advanced_demo`
+### 消息队列系统
 
-## 常见问题与排错
+- RabbitMQ 集成示例
+- Apache Kafka 集成示例
+- Redis 消息队列示例
+- 内存消息队列示例
 
-- 连接不稳定：设置重试与指数退避；校验超时与心跳。
-- 消息堆积：确认消费者速率与背压策略；设置死信队列。
-- 序列化错误：统一使用 `serde` 与版本锁定，避免 schema 漂移。
+### 消息传递模式
 
-## 运行
+- 发布-订阅模式
+- 点对点消息传递
+- 请求-响应模式
+- 消息路由示例
 
-- 参见：`crates/c13_microservice/` 示例与 README
-- 环境变量：`REDIS_URL=...`、`AMQP_URL=...`
+### 消息处理
+
+- 消息序列化示例
+- 消息反序列化示例
+- 消息验证示例
+- 错误处理示例
+
+### 可靠性保证
+
+- 消息确认机制
+- 重试机制示例
+- 死信队列示例
+- 消息持久化示例
+
+## 实践与样例
+
+- 消息队列示例：参见 [crates/c80_messaging](../../../crates/c80_messaging/)
+- 消息传递：[crates/c81_message_passing](../../../crates/c81_message_passing/)
+- 事件驱动：[crates/c82_event_driven](../../../crates/c82_event_driven/)
+
+### 文件级清单（精选）
+
+- `crates/c80_messaging/src/`：
+  - `message_queues.rs`：消息队列示例
+  - `message_patterns.rs`：消息传递模式示例
+  - `message_processing.rs`：消息处理示例
+  - `reliability_guarantees.rs`：可靠性保证示例
+- `crates/c81_message_passing/src/`：
+  - `async_messaging.rs`：异步消息传递示例
+  - `message_routing.rs`：消息路由示例
+  - `message_batching.rs`：消息批处理示例
+
+## 相关索引
+
+- 理论基础（并发模型）：[`../../01_theoretical_foundations/04_concurrency_models/00_index.md`](../../01_theoretical_foundations/04_concurrency_models/00_index.md)
+- 编程范式（异步）：[`../../02_programming_paradigms/02_async/00_index.md`](../../02_programming_paradigms/02_async/00_index.md)
+- 设计模式（消息传递模式）：[`../../03_design_patterns/04_concurrent/00_index.md`](../../03_design_patterns/04_concurrent/00_index.md)
 
 ## 导航
 
-- 返回实践示例：[`../00_index.md`](../00_index.md)
-- 微服务：[`../../../crates/c13_microservice`](../../../crates/c13_microservice/)
+- 返回实用示例：[`../00_index.md`](../00_index.md)
+- 数据库示例：[`../11_database_examples/00_index.md`](../11_database_examples/00_index.md)
+- 可观测性示例：[`../13_observability_examples/00_index.md`](../13_observability_examples/00_index.md)
+- 返回项目根：[`../../README.md`](../../README.md)

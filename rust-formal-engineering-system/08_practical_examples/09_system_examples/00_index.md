@@ -1,29 +1,67 @@
 # 系统示例（System Examples）索引
 
-## 主题
+## 目的
 
-- 线程与并发：作用域线程、工作窃取、优先级/亲和性
-- 无锁结构：环形缓冲、并发哈希表、队列
-- 性能与剖析：bench、perf/pprof/WPA
+- 提供 Rust 系统编程的实用示例。
+- 展示如何构建系统级应用。
 
-## 最小可运行示例
+## 核心示例
 
-- `cargo run -p c05_threads --example basic`
-- `cargo run -p c05_threads --example priority_channels_demo`
-- `cargo bench -p c05_threads`
+### 系统调用
 
-## 常见问题与排错
+- 文件系统操作
+- 进程管理
+- 网络系统调用
+- 内存管理
 
-- 基准波动：固定 CPU 亲和性、关闭后台程序、稳定电源策略。
-- 数据竞争：优先使用作用域线程或无锁结构；仔细审视共享可变状态。
-- NUMA 跨节点抖动：绑定内存与线程到同一 NUMA 节点。
+### 设备驱动
 
-## 运行
+- 字符设备驱动
+- 块设备驱动
+- 网络设备驱动
+- 输入设备驱动
 
-- 参见：`crates/c05_threads/README.md`
-- `cargo run -p c05_threads --example <name>`
+### 系统工具
+
+- 命令行工具
+- 系统监控工具
+- 性能分析工具
+- 调试工具
+
+### 操作系统
+
+- 内核模块
+- 引导程序
+- 系统服务
+- 系统库
+
+## 实践与样例
+
+- 系统示例：参见 [crates/c75_system_programming](../../../crates/c75_system_programming/)
+- 嵌入式系统：[crates/c18_embedded](../../../crates/c18_embedded/)
+- 操作系统：[crates/c76_operating_system](../../../crates/c76_operating_system/)
+
+### 文件级清单（精选）
+
+- `crates/c75_system_programming/src/`：
+  - `system_calls.rs`：系统调用示例
+  - `device_drivers.rs`：设备驱动示例
+  - `system_tools.rs`：系统工具示例
+  - `os_components.rs`：操作系统组件示例
+- `crates/c18_embedded/src/`：
+  - `embedded_systems.rs`：嵌入式系统示例
+  - `real_time_systems.rs`：实时系统示例
+  - `iot_devices.rs`：IoT 设备示例
+
+## 相关索引
+
+- 理论基础（内存安全）：[`../../01_theoretical_foundations/02_memory_safety/00_index.md`](../../01_theoretical_foundations/02_memory_safety/00_index.md)
+- 编程范式（并发）：[`../../02_programming_paradigms/05_concurrent/00_index.md`](../../02_programming_paradigms/05_concurrent/00_index.md)
+- 应用领域（嵌入式）：[`../../04_application_domains/03_iot/00_index.md`](../../04_application_domains/03_iot/00_index.md)
 
 ## 导航
 
-- 返回实践示例：[`../00_index.md`](../00_index.md)
-- 线程模块：[`../../../crates/c05_threads`](../../../crates/c05_threads/)
+- 返回实用示例：[`../00_index.md`](../00_index.md)
+- Web 示例：[`../08_web_examples/00_index.md`](../08_web_examples/00_index.md)
+- 嵌入式示例：[`../10_embedded_examples/00_index.md`](../10_embedded_examples/00_index.md)
+- 返回项目根：[`../../README.md`](../../README.md)

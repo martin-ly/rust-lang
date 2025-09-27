@@ -1,33 +1,67 @@
 # Web 示例（Web Examples）索引
 
-## 框架
+## 目的
 
-- Axum、Actix-Web、Warp、Tide
+- 提供 Rust Web 开发的实用示例。
+- 展示如何构建高性能的 Web 应用。
 
-## 示例清单（摘取）
+## 核心示例
 
-- 基础路由与中间件
-- 表单与JSON处理
-- WebSocket 回显与心跳
-- 认证与授权（JWT/OAuth2）
+### Web 框架
 
-## 最小可运行示例
+- Axum 框架示例
+- Actix Web 示例
+- Warp 框架示例
+- Rocket 框架示例
 
-- `cargo run -p c10_networks --example ws_echo_server`
-- `cargo run -p c10_networks --example ws_echo_client`
+### HTTP 服务
 
-## 常见问题与排错
+- REST API 实现
+- GraphQL 服务
+- WebSocket 服务
+- 静态文件服务
 
-- 端口被占用：修改示例端口或释放占用进程。
-- CORS 问题：在中间件中显式允许来源与方法。
-- WebSocket 断开：确认心跳机制与超时时间。
+### 数据库集成
 
-## 运行
+- SQLite 集成示例
+- PostgreSQL 集成示例
+- MongoDB 集成示例
+- Redis 集成示例
 
-- 参见：`crates/c13_microservice/README.md`
-- 命令：`cargo run --example ws_echo_server` / `ws_echo_client` 等
+### 认证与授权
+
+- JWT 认证示例
+- OAuth 集成示例
+- 会话管理示例
+- 权限控制示例
+
+## 实践与样例
+
+- Web 示例：参见 [crates/c67_web_development](../../../crates/c67_web_development/)
+- 微服务：[crates/c13_microservice](../../../crates/c13_microservice/)
+- 网络编程：[crates/c10_networks](../../../crates/c10_networks/)
+
+### 文件级清单（精选）
+
+- `crates/c67_web_development/src/`：
+  - `web_frameworks.rs`：Web 框架示例
+  - `http_services.rs`：HTTP 服务示例
+  - `database_integration.rs`：数据库集成示例
+  - `authentication.rs`：认证授权示例
+- `crates/c13_microservice/src/`：
+  - `web_microservice.rs`：Web 微服务示例
+  - `api_gateway.rs`：API 网关示例
+  - `service_mesh.rs`：服务网格示例
+
+## 相关索引
+
+- 理论基础（并发模型）：[`../../01_theoretical_foundations/04_concurrency_models/00_index.md`](../../01_theoretical_foundations/04_concurrency_models/00_index.md)
+- 编程范式（异步）：[`../../02_programming_paradigms/02_async/00_index.md`](../../02_programming_paradigms/02_async/00_index.md)
+- 应用领域（云基础设施）：[`../../04_application_domains/06_cloud_infrastructure/00_index.md`](../../04_application_domains/06_cloud_infrastructure/00_index.md)
 
 ## 导航
 
-- 返回实践示例：[`../00_index.md`](../00_index.md)
-- 微服务：[`../../crates/c13_microservice`](../../../crates/c13_microservice/)
+- 返回实用示例：[`../00_index.md`](../00_index.md)
+- 异步示例：[`../07_async_examples/00_index.md`](../07_async_examples/00_index.md)
+- 系统示例：[`../09_system_examples/00_index.md`](../09_system_examples/00_index.md)
+- 返回项目根：[`../../README.md`](../../README.md)
