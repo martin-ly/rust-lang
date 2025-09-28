@@ -260,15 +260,15 @@ prometheus = "0.14.0"
 # tracing-opentelemetry: tracing与OpenTelemetry的集成
 tracing-opentelemetry = "0.31"
 # opentelemetry: OpenTelemetry的Rust实现
-opentelemetry = "0.30.0"
+opentelemetry = "0.31.0"
 # opentelemetry_sdk: OpenTelemetry SDK
-opentelemetry_sdk = { version = "0.30.0", features = ["rt-tokio"] }
+opentelemetry_sdk = { version = "0.31.0", features = ["rt-tokio"] }
 # opentelemetry-otlp: OpenTelemetry OTLP导出器
-opentelemetry-otlp = { version = "0.30.0", features = ["http-json"] }
+opentelemetry-otlp = { version = "0.31.0", features = ["http-json"] }
 # opentelemetry-stdout: OpenTelemetry标准输出导出器
-opentelemetry-stdout = "0.30.0"
+opentelemetry-stdout = "0.31.0"
 # opentelemetry-proto: OpenTelemetry协议缓冲区定义
-opentelemetry-proto = { version = "0.30.0", features = ["gen-tonic"] }
+opentelemetry-proto = { version = "0.31.0", features = ["gen-tonic"] }
 
 # 指标 - 2025年9月27日最新稳定版本
 # metrics: 指标收集库，提供高性能的指标记录

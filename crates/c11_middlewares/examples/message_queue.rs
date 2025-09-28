@@ -1,5 +1,9 @@
-//use c12_middlewares::prelude::*;
-//use c12_middlewares::config::{NatsConfig, MqttConfig};
+#[cfg(any(feature = "mq-nats", feature = "mq-mqtt"))]
+use c11_middlewares::prelude::*;
+#[cfg(feature = "mq-nats")]
+use c11_middlewares::config::NatsConfig;
+#[cfg(feature = "mq-mqtt")]
+use c11_middlewares::config::MqttConfig;
 
 #[cfg(feature = "obs")]
 fn init_tracing() {
@@ -21,12 +25,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     #[cfg(feature = "mq-nats")]
     {
         println!("\n--- NATS 发布/订阅 ---");
-        let producer = c12_middlewares::mq::nats_client::NatsProducer::connect_with(
+        let producer = c11_middlewares::mq::nats_client::NatsProducer::connect_with(
             NatsConfig::new("nats://127.0.0.1:4222", "demo.subject"),
         )
         .await?;
 
-        let mut consumer = c12_middlewares::mq::nats_client::NatsConsumer::connect_with(
+        let mut consumer = c11_middlewares::mq::nats_client::NatsConsumer::connect_with(
             NatsConfig::new("nats://127.0.0.1:4222", "demo.subject"),
         )
         .await?;
@@ -42,7 +46,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     {
         println!("\n--- MQTT 发布/订阅 ---");
         let (producer, mut consumer) =
-            c12_middlewares::mq::mqtt_client::MqttProducer::connect_with(MqttConfig::new(
+            c11_middlewares::mq::mqtt_client::MqttProducer::connect_with(MqttConfig::new(
                 "127.0.0.1",
                 1883,
                 "demo_client",

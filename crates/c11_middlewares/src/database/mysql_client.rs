@@ -1,5 +1,7 @@
 #[cfg(feature = "sql-mysql")]
 use crate::database::sql::{SqlDatabase, SqlRow};
+#[cfg(feature = "sql-mysql")]
+use mysql_async::prelude::Queryable;
 
 #[cfg(feature = "sql-mysql")]
 pub struct MysqlDb {

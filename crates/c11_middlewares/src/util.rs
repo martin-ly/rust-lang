@@ -18,7 +18,7 @@ where
                 tokio::time::sleep(d).await;
                 delay = (delay * 2).min(policy.max_backoff_ms);
                 #[cfg(feature = "obs")]
-                tracing::debug!(attempt, ?e, "retrying operation");
+                tracing::debug!(attempt, ?_e, "retrying operation");
             }
             Err(e) => return Err(e),
         }

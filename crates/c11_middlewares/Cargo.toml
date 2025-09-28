@@ -31,6 +31,9 @@ rumqttc = { version = "0.25.0", optional = true }
 # pingora 已移除，存在安全漏洞 (RUSTSEC-2025-0037, RUSTSEC-2025-0070)
 nix = { version = "0.28.0", optional = true }
 
+# High-performance async runtime
+glommio = { version = "0.8", optional = true, features = ["native-tls"] }
+
 [features]
 default = []
 
@@ -47,6 +50,19 @@ full = [
     "tokio"
 ]
 
+# Glommio high-performance runtime
+glommio-full = [
+    "kv-redis-glommio",
+    "sql-postgres-glommio",
+    "sql-mysql-glommio",
+    "sql-sqlite-glommio",
+    "mq-nats-glommio",
+    "mq-kafka-glommio",
+    "mq-mqtt-glommio",
+    "proxy-nix-glommio",
+    "glommio"
+]
+
 # Fine-grained feature flags per middleware
 kv-redis = ["redis", "tokio"]
 sql-postgres = ["tokio-postgres", "postgres-types", "tokio"]
@@ -57,6 +73,16 @@ mq-kafka = ["rdkafka", "tokio"]
 mq-mqtt = ["rumqttc", "tokio"]
 proxy-nix = ["nix", "tokio"]
 obs = ["tracing"]
+
+# Glommio-specific feature flags
+kv-redis-glommio = ["redis", "glommio"]
+sql-postgres-glommio = ["tokio-postgres", "postgres-types", "glommio"]
+sql-mysql-glommio = ["mysql_async", "glommio"]
+sql-sqlite-glommio = ["rusqlite", "glommio"]
+mq-nats-glommio = ["async-nats", "futures-util", "glommio"]
+mq-kafka-glommio = ["rdkafka", "glommio"]
+mq-mqtt-glommio = ["rumqttc", "glommio"]
+proxy-nix-glommio = ["nix", "glommio"]
 
 [dev-dependencies]
 tracing-subscriber = { workspace = true }

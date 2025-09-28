@@ -30,6 +30,10 @@ pub enum Error {
     #[error("other: {0}")]
     Other(String),
 
+    #[cfg(feature = "tokio")]
+    #[error("join error: {0}")]
+    Join(#[from] tokio::task::JoinError),
+
     #[cfg(feature = "mq-nats")]
     #[error("nats subscribe error: {0}")]
     NatsSubscribe(#[from] async_nats::SubscribeError),

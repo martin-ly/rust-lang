@@ -1,5 +1,11 @@
-//use c12_middlewares::prelude::*;
-//use c12_middlewares::config::{RedisConfig, PostgresConfig, KafkaConfig};
+#[cfg(any(feature = "kv-redis", feature = "sql-postgres", feature = "mq-kafka"))]
+use c11_middlewares::prelude::*;
+#[cfg(feature = "kv-redis")]
+use c11_middlewares::config::RedisConfig;
+#[cfg(feature = "sql-postgres")]
+use c11_middlewares::config::PostgresConfig;
+#[cfg(feature = "mq-kafka")]
+use c11_middlewares::config::KafkaConfig;
 
 #[cfg(feature = "obs")]
 fn init_tracing() {
@@ -21,7 +27,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     #[cfg(feature = "kv-redis")]
     {
         println!("\n--- Redis 批量操作 ---");
-        let store = c12_middlewares::cache::redis_client::RedisStore::connect_with(
+        let store = c11_middlewares::cache::redis_client::RedisStore::connect_with(
             RedisConfig::new("redis://127.0.0.1:6379"),
         )
         .await?;
@@ -47,7 +53,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     #[cfg(feature = "sql-postgres")]
     {
         println!("\n--- Postgres 事务与批量操作 ---");
-        let db = c12_middlewares::database::postgres_client::PostgresDb::connect_with(
+        let db = c11_middlewares::database::postgres_client::PostgresDb::connect_with(
             PostgresConfig::new("postgres://user:pass@localhost/db"),
         )
         .await?;
