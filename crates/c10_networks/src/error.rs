@@ -40,6 +40,10 @@ pub enum NetworkError {
     /// 其他错误
     #[error("Other error: {0}")]
     Other(String),
+    
+    /// 无效状态错误
+    #[error("Invalid state: {0}")]
+    InvalidState(String),
 
     /// 缓冲区错误
     #[error("Buffer error: {0}")]

@@ -58,6 +58,12 @@ criterion = { workspace = true, features = ["html_reports"] }
 futures = { workspace = true }
 futures-util = { workspace = true }
 
+# 异步trait支持
+async-trait = "0.1"
+
+# 时间处理
+chrono = { version = "0.4", features = ["serde"] }
+
 # 缓存和数据结构
 lru = "0.12.5"
 
@@ -172,6 +178,18 @@ path = "examples/dns_ptr.rs"
 [[example]]
 name = "dns_negative_cache"
 path = "examples/dns_negative_cache.rs"
+
+[[example]]
+name = "rust_190_async_features_demo"
+path = "examples/rust_190_async_features_demo.rs"
+
+[[example]]
+name = "rust_190_performance_benchmark"
+path = "examples/rust_190_performance_benchmark.rs"
+
+[[example]]
+name = "semantic_verification_demo"
+path = "examples/semantic_verification_demo.rs"
 
 [[example]]
 name = "grpc_server"

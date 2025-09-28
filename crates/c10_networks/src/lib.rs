@@ -26,6 +26,7 @@ pub mod packet;
 pub mod performance;
 pub mod protocol;
 pub mod security;
+pub mod semantics;
 #[cfg(any(feature = "sniff", feature = "offline", feature = "pcap_live"))]
 pub mod sniff;
 pub mod socket;

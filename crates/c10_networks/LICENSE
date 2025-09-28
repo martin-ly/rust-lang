@@ -1,0 +1,79 @@
+MIT License
+
+Copyright (c) 2025 C10 Networks Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+## 第三方依赖许可证
+
+本项目使用了以下开源库，感谢所有贡献者：
+
+### 核心依赖
+- **tokio** (MIT License) - 异步运行时
+- **futures** (MIT License) - 异步原语
+- **bytes** (MIT License) - 字节处理
+- **serde** (MIT License) - 序列化框架
+
+### 网络协议
+- **hyper** (MIT License) - HTTP库
+- **tokio-tungstenite** (MIT License) - WebSocket
+- **hickory-resolver** (MIT License) - DNS解析
+- **libp2p** (MIT License) - P2P网络
+- **tonic** (MIT License) - gRPC支持
+
+### 加密和安全
+- **ring** (OpenSSL License) - 加密算法
+- **rustls** (Apache-2.0/MIT License) - TLS实现
+- **quinn** (MIT License) - QUIC协议
+
+### 工具和实用程序
+- **tracing** (MIT License) - 日志和追踪
+- **chrono** (MIT License) - 时间处理
+- **async-trait** (MIT License) - 异步trait支持
+- **lru** (MIT License) - LRU缓存
+
+### 开发和测试
+- **criterion** (MIT License) - 基准测试
+- **tokio-test** (MIT License) - 测试工具
+
+---
+
+## 贡献者协议
+
+通过向本项目贡献代码，您同意您的贡献将在MIT许可证下发布。
+
+## 免责声明
+
+本软件按"现状"提供，不提供任何明示或暗示的担保，包括但不限于对适销性、特定用途适用性和非侵权性的担保。在任何情况下，作者或版权持有人都不对任何索赔、损害或其他责任负责，无论是在合同诉讼、侵权行为还是其他方面，由软件或软件的使用或其他交易引起、由此产生或与之相关的软件。
+
+## 联系方式
+
+如有任何许可证相关问题，请通过以下方式联系：
+
+- GitHub Issues: [项目Issues页面]
+- Email: [维护者邮箱]
+- 项目主页: [项目GitHub页面]
+
+---
+
+**许可证版本**: v1.0  
+**生效日期**: 2025年9月28日  
+**最后更新**: 2025年9月28日

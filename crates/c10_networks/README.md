@@ -1,16 +1,16 @@
-# C10 Networks - Rust 1.89 网络编程库
+# C10 Networks - Rust 1.90 网络编程库
 
 > 导航：返回 [`rust-formal-engineering-system`](../../rust-formal-engineering-system/README.md) · 质量保障 [`10_quality_assurance/00_index.md`](../../rust-formal-engineering-system/10_quality_assurance/00_index.md) · 异步范式 [`02_async/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/02_async/00_index.md) · 同步范式 [`01_synchronous/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/01_synchronous/00_index.md) · 响应式 [`07_reactive/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/07_reactive/00_index.md) · 事件驱动 [`08_event_driven/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/08_event_driven/00_index.md) · Actor [`09_actor_model/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/09_actor_model/00_index.md) · 基准指南 [`11_benchmark_minimal_guide.md`](../../rust-formal-engineering-system/02_programming_paradigms/11_benchmark_minimal_guide.md)
 
-[![Rust](https://img.shields.io/badge/rust-1.89+-orange.svg)](https://www.rust-lang.org/)
+[![Rust](https://img.shields.io/badge/rust-1.90+-orange.svg)](https://www.rust-lang.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](../../LICENSE)
 [![Crates.io](https://img.shields.io/crates/v/c10_networks.svg)](https://crates.io/crates/c10_networks)
 
-> 适用范围：Rust 1.89+ · Tokio 1.35+。文档风格遵循 `docs/STYLE.md`。
+> 适用范围：Rust 1.90+ · Tokio 1.35+。文档风格遵循 `docs/STYLE.md`。
 
 ## 目录
 
-- [C10 Networks - Rust 1.89 网络编程库](#c10-networks---rust-189-网络编程库)
+- [C10 Networks - Rust 1.90 网络编程库](#c10-networks---rust-190-网络编程库)
   - [目录](#目录)
   - [概述](#概述)
   - [🚀 特性](#-特性)
@@ -26,10 +26,14 @@
   - [📚 模块结构](#-模块结构)
   - [🔎 DNS（基于 Hickory-DNS）](#-dns基于-hickory-dns)
     - [一体化示例与脚本](#一体化示例与脚本)
-  - [🔧 Rust 1.89 新特性应用](#-rust-189-新特性应用)
+  - [🔧 Rust 1.90 新特性应用](#-rust-190-新特性应用)
+    - [异步Trait优化](#异步trait优化)
+    - [异步闭包改进](#异步闭包改进)
+    - [常量泛型推断](#常量泛型推断)
+    - [性能基准测试](#性能基准测试)
   - [🌐 P2P 最小示例（基于 libp2p）](#-p2p-最小示例基于-libp2p)
     - [生命周期语法检查](#生命周期语法检查)
-    - [常量泛型推断](#常量泛型推断)
+    - [常量泛型推断1](#常量泛型推断1)
     - [Result::flatten 方法](#resultflatten-方法)
   - [🧪 测试](#-测试)
   - [🧩 统一 API 示例](#-统一-api-示例)
@@ -46,11 +50,11 @@
 
 ## 概述
 
-C10 Networks 是一个基于 Rust 1.89 的现代网络编程库，提供了完整的网络编程解决方案，包括异步网络通信、多种协议支持、高性能网络工具和安全通信功能。
+C10 Networks 是一个基于 Rust 1.90 的现代网络编程库，提供了完整的网络编程解决方案，包括异步网络通信、多种协议支持、高性能网络工具和安全通信功能。
 
 ## 🚀 特性
 
-- **基于 Rust 1.89**: 充分利用最新语言特性
+- **基于 Rust 1.90**: 充分利用最新语言特性
 - **异步/await 支持**: 高性能异步网络编程
 - **多种协议支持**: HTTP/1.1, HTTP/2, WebSocket, TCP, UDP, DNS
 - **P2P 能力**: 节点发现、DHT、GossipSub、NAT 穿透（基于 libp2p）
@@ -270,7 +274,61 @@ async fn main() -> anyhow::Result<()> {
   - `just dns-all example.com`
   - `just test-skip-net`
 
-## 🔧 Rust 1.89 新特性应用
+## 🔧 Rust 1.90 新特性应用
+
+### 异步Trait优化
+
+```rust
+use c10_networks::protocol::async_traits::AsyncNetworkClient;
+
+// Rust 1.90的改进异步trait语法
+#[async_trait::async_trait]
+impl AsyncNetworkClient for MyClient {
+    async fn connect(&self, address: &str) -> NetworkResult<()> {
+        // 改进的生命周期处理
+        tokio::time::sleep(Duration::from_millis(100)).await;
+        Ok(())
+    }
+    
+    async fn send<'a>(&'a self, data: &'a [u8]) -> NetworkResult<usize> {
+        // 更好的生命周期推断
+        Ok(data.len())
+    }
+}
+```
+
+### 异步闭包改进
+
+```rust
+// Rust 1.90的异步闭包优化
+let client = NetClient::new();
+let results = futures::future::try_join_all(
+    hosts.iter().map(|host| async move {
+        // 异步闭包捕获优化
+        client.dns_lookup_ips(host).await
+    })
+).await?;
+```
+
+### 常量泛型推断
+
+```rust
+// Rust 1.90: 编译器自动推断数组长度
+fn process_packet(data: [u8; _]) -> NetworkResult<u32> {
+    let checksum = data.iter().fold(0u32, |acc, &byte| acc.wrapping_add(byte as u32));
+    Ok(checksum)
+}
+```
+
+### 性能基准测试
+
+```bash
+# 运行Rust 1.90特性演示
+cargo run --example rust_190_async_features_demo
+
+# 运行性能基准测试
+cargo run --example rust_190_performance_benchmark
+```
 
 ## 🌐 P2P 最小示例（基于 libp2p）
 
@@ -315,7 +373,7 @@ async fn handle_connection<'a>(stream: &'a TcpStream) -> NetworkResult<()> {
 }
 ```
 
-### 常量泛型推断
+### 常量泛型推断1
 
 ```rust
 // 使用 _ 让编译器推断数组长度
