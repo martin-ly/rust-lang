@@ -1,0 +1,415 @@
+# Rust 1.90 异步特性 Kubernetes 部署配置
+# 支持高可用、自动扩缩容和滚动更新
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: rust-async-190
+  labels:
+    name: rust-async-190
+    app.kubernetes.io/name: rust-async-190
+    app.kubernetes.io/version: "1.90.0"
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rust-async-config
+  namespace: rust-async-190
+  labels:
+    app.kubernetes.io/name: rust-async-190
+    app.kubernetes.io/version: "1.90.0"
+data:
+  # 应用配置
+  RUST_LOG: "info"
+  RUST_BACKTRACE: "1"
+  SERVER_HOST: "0.0.0.0"
+  SERVER_PORT: "8080"
+  
+  # 异步运行时配置
+  TOKIO_THREADS: "4"
+  TOKIO_BLOCKING_THREADS: "2"
+  
+  # 性能配置
+  MAX_CONNECTIONS: "1000"
+  CONNECTION_TIMEOUT: "30s"
+  REQUEST_TIMEOUT: "60s"
+  
+  # 监控配置
+  METRICS_ENABLED: "true"
+  HEALTH_CHECK_INTERVAL: "30s"
+  
+  # 缓存配置
+  CACHE_SIZE: "1000"
+  CACHE_TTL: "300s"
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: rust-async-secrets
+  namespace: rust-async-190
+  labels:
+    app.kubernetes.io/name: rust-async-190
+    app.kubernetes.io/version: "1.90.0"
+type: Opaque
+stringData:
+  # 数据库连接字符串
+  DATABASE_URL: "postgresql://user:password@postgres:5432/rust_async"
+  
+  # API 密钥
+  API_KEY: "your-api-key-here"
+  
+  # JWT 密钥
+  JWT_SECRET: "your-jwt-secret-here"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rust-async-190
+  namespace: rust-async-190
+  labels:
+    app.kubernetes.io/name: rust-async-190
+    app.kubernetes.io/version: "1.90.0"
+    app.kubernetes.io/component: server
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: rust-async-190
+      app.kubernetes.io/component: server
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: rust-async-190
+        app.kubernetes.io/version: "1.90.0"
+        app.kubernetes.io/component: server
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: rust-async-service-account
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+      - name: rust-async-server
+        image: rust-async-190:latest
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        - name: metrics
+          containerPort: 9090
+          protocol: TCP
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        envFrom:
+        - configMapRef:
+            name: rust-async-config
+        - secretRef:
+            name: rust-async-secrets
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          successThreshold: 1
+          failureThreshold: 3
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          successThreshold: 1
+          failureThreshold: 10
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        - name: cache
+          mountPath: /app/cache
+      volumes:
+      - name: tmp
+        emptyDir: {}
+      - name: cache
+        emptyDir: {}
+      nodeSelector:
+        kubernetes.io/os: linux
+      tolerations:
+      - key: "node-role.kubernetes.io/master"
+        operator: "Exists"
+        effect: "NoSchedule"
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                  - rust-async-190
+              topologyKey: kubernetes.io/hostname
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rust-async-service
+  namespace: rust-async-190
+  labels:
+    app.kubernetes.io/name: rust-async-190
+    app.kubernetes.io/version: "1.90.0"
+    app.kubernetes.io/component: server
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+    protocol: TCP
+  - name: metrics
+    port: 9090
+    targetPort: 9090
+    protocol: TCP
+  selector:
+    app.kubernetes.io/name: rust-async-190
+    app.kubernetes.io/component: server
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rust-async-headless
+  namespace: rust-async-190
+  labels:
+    app.kubernetes.io/name: rust-async-190
+    app.kubernetes.io/version: "1.90.0"
+    app.kubernetes.io/component: server
+spec:
+  clusterIP: None
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    app.kubernetes.io/name: rust-async-190
+    app.kubernetes.io/component: server
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rust-async-ingress
+  namespace: rust-async-190
+  labels:
+    app.kubernetes.io/name: rust-async-190
+    app.kubernetes.io/version: "1.90.0"
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/rate-limit: "100"
+    nginx.ingress.kubernetes.io/rate-limit-window: "1m"
+spec:
+  tls:
+  - hosts:
+    - rust-async.example.com
+    secretName: rust-async-tls
+  rules:
+  - host: rust-async.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: rust-async-service
+            port:
+              number: 80
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: rust-async-hpa
+  namespace: rust-async-190
+  labels:
+    app.kubernetes.io/name: rust-async-190
+    app.kubernetes.io/version: "1.90.0"
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: rust-async-190
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  - type: Pods
+    pods:
+      metric:
+        name: http_requests_per_second
+      target:
+        type: AverageValue
+        averageValue: "100"
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 10
+        periodSeconds: 60
+    scaleUp:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Percent
+        value: 50
+        periodSeconds: 60
+      - type: Pods
+        value: 2
+        periodSeconds: 60
+      selectPolicy: Max
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: rust-async-pdb
+  namespace: rust-async-190
+  labels:
+    app.kubernetes.io/name: rust-async-190
+    app.kubernetes.io/version: "1.90.0"
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: rust-async-190
+      app.kubernetes.io/component: server
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: rust-async-service-account
+  namespace: rust-async-190
+  labels:
+    app.kubernetes.io/name: rust-async-190
+    app.kubernetes.io/version: "1.90.0"
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: rust-async-role
+  namespace: rust-async-190
+  labels:
+    app.kubernetes.io/name: rust-async-190
+    app.kubernetes.io/version: "1.90.0"
+rules:
+- apiGroups: [""]
+  resources: ["configmaps", "secrets"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["get", "list", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: rust-async-role-binding
+  namespace: rust-async-190
+  labels:
+    app.kubernetes.io/name: rust-async-190
+    app.kubernetes.io/version: "1.90.0"
+subjects:
+- kind: ServiceAccount
+  name: rust-async-service-account
+  namespace: rust-async-190
+roleRef:
+  kind: Role
+  name: rust-async-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: rust-async-monitor
+  namespace: rust-async-190
+  labels:
+    app.kubernetes.io/name: rust-async-190
+    app.kubernetes.io/version: "1.90.0"
+    prometheus: kube-prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: rust-async-190
+      app.kubernetes.io/component: server
+  endpoints:
+  - port: metrics
+    interval: 30s
+    path: /metrics
+    scrapeTimeout: 10s

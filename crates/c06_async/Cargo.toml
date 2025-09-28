@@ -37,10 +37,13 @@ prometheus = { workspace = true }
 
 # Rust 1.90 新特性支持
 num_cpus = { workspace = true }
+async-trait = { workspace = true }
 rayon = { workspace = true }
 
+# 高级异步特性支持 - 2025年9月27日最新版本
+lru = "0.16.1"
+
 # 异步生态系统分析支持
-async-trait = { workspace = true }
 chrono = { workspace = true }
 # 轻量级异步运行时 - 2025年9月27日最新版本
 smol = "2.0.2"
@@ -50,12 +53,12 @@ smol = "2.0.2"
 # sqlx = { version = "0.8", features = ["runtime-tokio-rustls", "postgres", "macros"] }
 
 # Smol 轻量生态（高级案例）- 2025年9月27日最新版本
-async-io = "2.0.2"
-async-channel = "2.0.2"
-surf = "2.0.2"
+async-io = "2.6.0"
+async-channel = "2.5.0"
+surf = "2.3.2"
 
 # 分布式与微服务（高级案例）- 2025年9月27日最新版本
-redis = { version = "0.32.0", features = ["tokio-comp", "connection-manager"] }
+redis = { version = "1.0.0-alpha.1", features = ["tokio-comp", "connection-manager"] }
 dashmap = "6.1.0"
 backoff = { version = "0.4.0", features = ["tokio"] }
 

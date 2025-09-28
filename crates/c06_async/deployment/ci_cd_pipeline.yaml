@@ -1,0 +1,339 @@
+# Rust 1.90 异步特性 CI/CD 流水线配置
+# 支持多平台构建、测试和部署
+
+name: Rust 1.90 Async CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'crates/c06_async/**'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'crates/c06_async/**'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+  schedule:
+    # 每日凌晨2点运行性能基准测试
+    - cron: '0 2 * * *'
+
+env:
+  RUST_VERSION: "1.90.0"
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: full
+
+jobs:
+  # 代码质量检查
+  code_quality:
+    name: 代码质量检查
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Rust 1.90
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ env.RUST_VERSION }}
+          components: rustfmt, clippy
+          override: true
+
+      - name: 缓存依赖
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: 格式化检查
+        run: |
+          cd crates/c06_async
+          cargo fmt --all -- --check
+
+      - name: Clippy 检查
+        run: |
+          cd crates/c06_async
+          cargo clippy --all-targets --all-features -- -D warnings
+
+      - name: 安全检查
+        run: |
+          cd crates/c06_async
+          cargo audit
+
+  # 单元测试和集成测试
+  testing:
+    name: 测试套件
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        rust-version: ["1.90.0", "beta", "nightly"]
+        include:
+          - os: ubuntu-latest
+            rust-version: "1.90.0"
+            target: "x86_64-unknown-linux-gnu"
+          - os: windows-latest
+            rust-version: "1.90.0"
+            target: "x86_64-pc-windows-msvc"
+          - os: macos-latest
+            rust-version: "1.90.0"
+            target: "x86_64-apple-darwin"
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Rust ${{ matrix.rust-version }}
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ matrix.rust-version }}
+          components: rustfmt, clippy
+          override: true
+          target: ${{ matrix.target }}
+
+      - name: 缓存依赖
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ matrix.rust-version }}-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: 单元测试
+        run: |
+          cd crates/c06_async
+          cargo test --verbose
+
+      - name: 集成测试
+        run: |
+          cd crates/c06_async
+          cargo test --test integration_test_suite --verbose
+
+      - name: 文档测试
+        run: |
+          cd crates/c06_async
+          cargo test --doc
+
+      - name: 示例编译测试
+        run: |
+          cd crates/c06_async
+          cargo build --examples
+
+  # 性能基准测试
+  benchmark:
+    name: 性能基准测试
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || contains(github.event.head_commit.message, '[benchmark]')
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Rust 1.90
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ env.RUST_VERSION }}
+          override: true
+
+      - name: 缓存依赖
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: 安装基准测试工具
+        run: |
+          cd crates/c06_async
+          cargo install cargo-criterion
+
+      - name: 运行性能基准测试
+        run: |
+          cd crates/c06_async
+          cargo bench --verbose
+
+      - name: 上传基准测试结果
+        uses: actions/upload-artifact@v3
+        with:
+          name: benchmark-results
+          path: crates/c06_async/target/criterion/
+
+  # 安全扫描
+  security:
+    name: 安全扫描
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Rust 1.90
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ env.RUST_VERSION }}
+          override: true
+
+      - name: 安装安全扫描工具
+        run: |
+          cargo install cargo-audit
+          cargo install cargo-deny
+
+      - name: 漏洞扫描
+        run: |
+          cd crates/c06_async
+          cargo audit
+
+      - name: 许可证检查
+        run: |
+          cd crates/c06_async
+          cargo deny check
+
+      - name: 依赖分析
+        run: |
+          cd crates/c06_async
+          cargo tree --duplicates
+
+  # 多平台构建
+  build:
+    name: 多平台构建
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            artifact-name: linux-x86_64
+          - os: ubuntu-latest
+            target: aarch64-unknown-linux-gnu
+            artifact-name: linux-aarch64
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            artifact-name: windows-x86_64
+          - os: macos-latest
+            target: x86_64-apple-darwin
+            artifact-name: macos-x86_64
+          - os: macos-latest
+            target: aarch64-apple-darwin
+            artifact-name: macos-aarch64
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Rust 1.90
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ env.RUST_VERSION }}
+          override: true
+          target: ${{ matrix.target }}
+
+      - name: 缓存依赖
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ matrix.target }}-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: 构建发布版本
+        run: |
+          cd crates/c06_async
+          cargo build --release --target ${{ matrix.target }}
+
+      - name: 上传构建产物
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.artifact-name }}
+          path: crates/c06_async/target/${{ matrix.target }}/release/
+
+  # 部署到测试环境
+  deploy_test:
+    name: 部署到测试环境
+    runs-on: ubuntu-latest
+    needs: [code_quality, testing, security]
+    if: github.ref == 'refs/heads/develop'
+    environment: test
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 下载构建产物
+        uses: actions/download-artifact@v3
+        with:
+          name: linux-x86_64
+
+      - name: 部署到测试环境
+        run: |
+          echo "部署到测试环境..."
+          # 这里添加实际的部署脚本
+          # 例如：Docker 构建和推送、Kubernetes 部署等
+
+      - name: 运行端到端测试
+        run: |
+          echo "运行端到端测试..."
+          # 这里添加端到端测试脚本
+
+  # 部署到生产环境
+  deploy_prod:
+    name: 部署到生产环境
+    runs-on: ubuntu-latest
+    needs: [code_quality, testing, security, benchmark]
+    if: github.ref == 'refs/heads/main'
+    environment: production
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 下载构建产物
+        uses: actions/download-artifact@v3
+        with:
+          name: linux-x86_64
+
+      - name: 部署到生产环境
+        run: |
+          echo "部署到生产环境..."
+          # 这里添加实际的部署脚本
+
+      - name: 健康检查
+        run: |
+          echo "执行健康检查..."
+          # 这里添加健康检查脚本
+
+      - name: 发送部署通知
+        run: |
+          echo "发送部署通知..."
+          # 这里添加通知脚本（Slack、邮件等）
+
+  # 发布到 Cargo Registry
+  publish:
+    name: 发布到 Cargo Registry
+    runs-on: ubuntu-latest
+    needs: [code_quality, testing, security, build]
+    if: github.ref == 'refs/heads/main' && startsWith(github.event.head_commit.message, '[release]')
+    environment: crates-io
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Rust 1.90
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ env.RUST_VERSION }}
+          override: true
+
+      - name: 发布到 Cargo Registry
+        run: |
+          cd crates/c06_async
+          cargo publish --token ${{ secrets.CARGO_REGISTRY_TOKEN }}

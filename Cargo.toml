@@ -305,8 +305,8 @@ sha2 = "0.10.9"
 hex = "0.4.3"
 
 # 数据库和存储 - 2025年9月27日最新稳定版本
-# sea-orm: 异步动态ORM，支持多种数据库后端
-sea-orm = { version = "2.0.0-rc.8", features = [  # 更新至最新候选版本
+# sea-orm: 异步动态ORM，支持多种数据库后端 - 2025年9月27日最新版本
+sea-orm = { version = "2.0.0-rc.9", features = [  # 更新至最新候选版本
     "sqlx-postgres",      # PostgreSQL支持
     "runtime-tokio-rustls", # tokio运行时和rustls支持
 ], default-features = false }
@@ -319,8 +319,8 @@ sqlx = { version = "0.8.6", features = [  # 更新至最新稳定版本
     "chrono",              # 时间类型支持
     "uuid",                # UUID类型支持
 ], default-features = false }
-# redis: Redis客户端库，支持异步操作
-redis = "0.32.6"
+# redis: Redis客户端库，支持异步操作 - 2025年9月27日最新版本
+redis = "1.0.0-alpha.1"
 # rusqlite: SQLite的Rust绑定，提供类型安全的SQLite接口
 rusqlite = { version = "0.37.0", default-features = false }
 

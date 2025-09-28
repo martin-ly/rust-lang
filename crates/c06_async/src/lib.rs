@@ -7,9 +7,12 @@ pub mod streams;
 pub mod tokio;
 pub mod utils;
 
-// Rust 1.90 新特性模块
+// Rust 异步特性模块
 pub mod rust_190_features;
-pub mod rust_190_real_features;  // 真正的Rust 1.90特性实现
+pub mod rust_190_real_features;  // 真正的异步特性实现
+pub mod rust_190_real_stable_features;  // 真实稳定特性
+pub mod rust_190_advanced_features;  // 高级异步特性
+pub mod improved_async_features;  // 改进的异步特性实现
 pub mod async_control_flow_190;
 pub mod performance_optimization_190;
 

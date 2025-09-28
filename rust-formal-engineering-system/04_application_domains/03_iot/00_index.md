@@ -2,49 +2,136 @@
 
 ## 目的
 
-- 介绍 Rust 在物联网领域的应用与实践。
-- 提供嵌入式系统、传感器网络、边缘计算的技术指导。
+- 梳理 Rust 在物联网领域的应用场景与最佳实践。
+- 建立嵌入式系统与物联网设备开发的标准与架构。
+- 提供从硬件到云端的完整物联网解决方案。
 
-## 核心概念
+## 核心场景
 
-- 嵌入式系统：微控制器、实时操作系统
-- 传感器网络：数据采集、传输协议
-- 边缘计算：本地数据处理、决策
-- 通信协议：MQTT、CoAP、LoRaWAN
-- 设备管理：OTA 更新、远程配置
-- 数据存储：时序数据库、本地存储
-- 安全通信：加密、认证、授权
-- 功耗优化：低功耗设计、睡眠模式
+### 设备端开发
 
-## 与 Rust 的关联
+- **微控制器编程**：ARM Cortex-M、ESP32、Arduino 兼容
+- **实时操作系统**：FreeRTOS、RTIC、bare metal 编程
+- **传感器接口**：I2C、SPI、UART、GPIO 控制
+- **低功耗设计**：睡眠模式、唤醒源、功耗管理
 
-- 内存安全：防止嵌入式系统崩溃
-- 零成本抽象：适合资源受限环境
-- 并发安全：多任务嵌入式系统
-- 跨平台：支持多种硬件架构
+### 通信协议
 
-## 术语（Terminology）
+- **无线通信**：WiFi、蓝牙、LoRa、Zigbee、NB-IoT
+- **有线通信**：以太网、CAN 总线、RS485、Modbus
+- **物联网协议**：MQTT、CoAP、HTTP/HTTPS、WebSocket
+- **边缘计算**：本地处理、数据聚合、决策执行
 
-- 物联网（IoT）、嵌入式系统（Embedded Systems）
-- 传感器网络（Sensor Networks）、边缘计算（Edge Computing）
-- 通信协议（Communication Protocols）、设备管理（Device Management）
-- 时序数据库（Time Series Database）、功耗优化（Power Optimization）
+### 数据管理
 
-## 实践与样例
+- **数据采集**：传感器数据、设备状态、环境监测
+- **数据处理**：滤波算法、数据压缩、异常检测
+- **数据存储**：本地存储、云端同步、数据备份
+- **数据分析**：实时分析、历史趋势、预测模型
 
-- IoT 开发：参见 [crates/c17_iot](../../../crates/c17_iot/)
-- 嵌入式系统：[crates/c18_embedded](../../../crates/c18_embedded/)
-- 传感器网络：[crates/c19_sensors](../../../crates/c19_sensors/)
+## 技术架构
+
+### 设备架构
+
+- **硬件抽象层**：HAL、外设驱动、中断处理
+- **中间件层**：协议栈、通信库、数据处理
+- **应用层**：业务逻辑、用户界面、配置管理
+- **安全层**：加密通信、身份认证、固件保护
+
+### 云端架构
+
+- **设备管理**：设备注册、状态监控、远程控制
+- **数据存储**：时序数据库、关系数据库、对象存储
+- **数据处理**：流处理、批处理、机器学习
+- **应用服务**：Web API、移动应用、管理后台
+
+### 边缘计算
+
+- **边缘网关**：协议转换、数据聚合、本地决策
+- **边缘服务器**：容器化部署、微服务架构
+- **边缘 AI**：模型推理、实时分析、决策支持
+- **边缘存储**：本地缓存、数据同步、离线支持
+
+## 关键技术
+
+### 嵌入式开发
+
+- **内存管理**：静态分配、堆管理、内存映射
+- **中断处理**：中断向量、优先级管理、上下文切换
+- **时钟管理**：系统时钟、外设时钟、低功耗模式
+- **DMA 控制**：直接内存访问、数据传输优化
+
+### 通信技术
+
+- **协议实现**：TCP/IP 栈、MQTT 客户端、CoAP 服务器
+- **安全通信**：TLS/SSL、证书管理、密钥交换
+- **网络管理**：连接管理、重连机制、网络诊断
+- **数据传输**：数据压缩、批量传输、断点续传
+
+### 数据处理
+
+- **实时处理**：流式计算、事件驱动、状态机
+- **数据压缩**：算法选择、压缩率优化、解压性能
+- **异常检测**：统计方法、机器学习、规则引擎
+- **数据同步**：增量同步、冲突解决、一致性保证
+
+## 仓库映射
+
+- **网络通信**：[crates/c10_networks](../../../crates/c10_networks/) - 网络协议实现
+- **异步编程**：[crates/c06_async](../../../crates/c06_async/) - 异步任务处理
+- **算法实现**：[crates/c08_algorithms](../../../crates/c08_algorithms/) - 数据处理算法
+- **设计模式**：[crates/c09_design_pattern](../../../crates/c09_design_pattern/) - 架构模式
+- **可靠性**：[crates/c13_reliability](../../../crates/c13_reliability/) - 错误处理与监控
+
+## 最佳实践
+
+### 硬件设计
+
+- **低功耗设计**：睡眠模式、唤醒源优化、功耗分析
+- **可靠性设计**：故障检测、自动恢复、冗余设计
+- **安全性设计**：硬件安全模块、固件保护、防篡改
+- **可扩展性**：模块化设计、接口标准化、升级支持
+
+### 软件开发
+
+- **实时性保证**：任务调度、中断处理、响应时间
+- **内存效率**：内存使用优化、泄漏检测、碎片管理
+- **代码质量**：静态分析、单元测试、集成测试
+- **维护性**：代码规范、文档完善、版本管理
+
+### 系统集成
+
+- **设备管理**：自动发现、配置管理、状态监控
+- **数据管理**：数据建模、存储优化、查询性能
+- **安全管理**：身份认证、权限控制、数据加密
+- **运维管理**：远程升级、故障诊断、性能监控
+
+## 开发工具
+
+### 开发环境
+
+- **嵌入式 IDE**：VS Code、CLion、Eclipse
+- **调试工具**：GDB、OpenOCD、J-Link
+- **仿真器**：QEMU、硬件在环仿真
+- **测试工具**：单元测试、集成测试、硬件测试
+
+### 部署工具
+
+- **构建系统**：Cargo、CMake、Makefile
+- **包管理**：crates.io、私有仓库、版本管理
+- **CI/CD**：GitHub Actions、GitLab CI、Jenkins
+- **监控工具**：日志分析、性能监控、告警系统
 
 ## 相关索引
 
-- 理论基础（内存安全）：[`../../01_theoretical_foundations/02_memory_safety/00_index.md`](../../01_theoretical_foundations/02_memory_safety/00_index.md)
-- 编程范式（并发）：[`../../02_programming_paradigms/05_concurrent/00_index.md`](../../02_programming_paradigms/05_concurrent/00_index.md)
-- 应用领域（游戏开发）：[`../02_game_development/00_index.md`](../02_game_development/00_index.md)
+- **理论基础（并发模型）**：[`../../01_theoretical_foundations/04_concurrency_models/00_index.md`](../../01_theoretical_foundations/04_concurrency_models/00_index.md) - 并发安全理论
+- **编程范式（异步）**：[`../../02_programming_paradigms/02_async/00_index.md`](../../02_programming_paradigms/02_async/00_index.md) - 异步编程实践
+- **软件工程**：[`../../05_software_engineering/00_index.md`](../../05_software_engineering/00_index.md) - 工程方法论
+- **质量保障**：[`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md) - 质量标准与测试
 
 ## 导航
 
-- 返回应用领域：[`../00_index.md`](../00_index.md)
-- 游戏开发：[`../02_game_development/00_index.md`](../02_game_development/00_index.md)
-- AI/ML：[`../04_ai_ml/00_index.md`](../04_ai_ml/00_index.md)
-- 返回项目根：[`../../README.md`](../../README.md)
+- **返回应用领域**：[`../00_index.md`](../00_index.md)
+- **工具链生态**：[`../../06_toolchain_ecosystem/00_index.md`](../../06_toolchain_ecosystem/00_index.md)
+- **实用示例**：[`../../08_practical_examples/00_index.md`](../../08_practical_examples/00_index.md)
+- **返回项目根**：[`../../README.md`](../../README.md)

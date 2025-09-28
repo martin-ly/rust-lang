@@ -1,11 +1,14 @@
-//! Rust 1.90 异步编程新特性模块
+//! Rust 异步编程特性模块
 //! 
-//! 本模块实现了Rust 1.90版本中的异步编程新特性，包括：
-//! - 异步Drop (AsyncDrop)
-//! - 异步生成器 (Async Generators)
-//! - 改进的借用检查器 (Polonius)
-//! - 下一代特质求解器优化
-//! - 并行前端编译优化
+//! 本模块实现了当前稳定版本中的异步编程特性，包括：
+//! - 改进的异步性能优化
+//! - 增强的错误处理机制
+//! - 稳定的异步 Traits
+//! - 结构化并发支持
+//! - 超时控制和取消机制
+//! 
+//! 注意：AsyncDrop、Async Generators 等特性仍在开发中，
+//! 本模块提供了模拟实现以供学习和测试使用。
 
 use std::sync::Arc;
 use std::time::Duration;
@@ -14,9 +17,9 @@ use tokio::sync::{Mutex, Semaphore};
 use std::collections::HashMap;
 use anyhow::Result;
 
-/// 异步Drop模拟实现
+/// 异步资源管理模拟实现
 /// 
-/// 在Rust 1.90中，AsyncDrop trait尚未稳定，这里使用Drop trait模拟异步资源清理
+/// 注意：AsyncDrop trait 仍在开发中，这里使用 Drop trait 模拟异步资源清理
 #[derive(Debug)]
 pub struct AsyncResource {
     id: String,

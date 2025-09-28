@@ -1,18 +1,157 @@
 # 编译器（Compiler）索引
 
-## 主题
+## 目的
 
-- 编译流程：HIR → MIR → LLVM（或 Cranelift）
-- 优化要点：内联、去虚、逃逸分析、跨模块优化（LTO）
-- 诊断与建议：lint、polonius（研究）、错误改进
+- 深入理解 Rust 编译器的架构与工作原理。
+- 掌握编译优化技术与性能调优方法。
+- 建立从源码到机器码的完整知识体系。
+
+## 编译器架构
+
+### 编译流程
+
+Rust 编译器采用多阶段编译架构：
+
+1. **词法分析（Lexical Analysis）**
+   - 将源码转换为 token 流
+   - 处理注释、空白字符、标识符
+
+2. **语法分析（Syntax Analysis）**
+   - 构建抽象语法树（AST）
+   - 语法错误检测与报告
+
+3. **语义分析（Semantic Analysis）**
+   - 类型检查与推断
+   - 所有权与借用检查
+   - 生命周期分析
+
+4. **高级中间表示（HIR）**
+   - 去语法糖的抽象表示
+   - 宏展开后的代码结构
+   - 名称解析与作用域分析
+
+5. **中级中间表示（MIR）**
+   - 控制流图表示
+   - 所有权转移分析
+   - 借用检查器输入
+
+6. **代码生成**
+   - LLVM IR 生成
+   - 机器码生成
+   - 链接与优化
+
+### 后端选择
+
+- **LLVM**：默认后端，成熟稳定，优化能力强
+- **Cranelift**：实验性后端，编译速度快，适合 JIT
+- **GCC**：实验性后端，GNU 工具链集成
+
+## 优化技术
+
+### 编译时优化
+
+- **内联优化**：函数内联，减少函数调用开销
+- **去虚化**：单态化泛型，避免运行时虚函数调用
+- **逃逸分析**：确定变量的生命周期，优化内存分配
+- **死代码消除**：移除未使用的代码和变量
+- **常量折叠**：编译时计算常量表达式
+
+### 链接时优化（LTO）
+
+- **跨模块优化**：模块间函数内联和优化
+- **全局死代码消除**：移除未使用的全局符号
+- **符号合并**：合并相同的符号定义
+- **配置文件引导优化（PGO）**：基于运行时数据的优化
+
+### 目标优化
+
+- **CPU 特定优化**：针对特定 CPU 架构的指令优化
+- **向量化**：SIMD 指令生成和优化
+- **分支预测**：优化分支指令的预测性能
+- **缓存优化**：优化内存访问模式
 
 ## 工具与实践
 
-- 后端选择：`-Z codegen-backend=cranelift`（Nightly）
-- 构建优化：`RUSTFLAGS="-C target-cpu=native"`、`lto=true`、`codegen-units=1`
-- MIR 观察：`RUSTC_LOG=rustc_mir=info`（按需）
+### 编译选项
+
+```bash
+# 后端选择（Nightly）
+cargo +nightly build -Z codegen-backend=cranelift
+
+# 构建优化
+RUSTFLAGS="-C target-cpu=native -C opt-level=3 -C lto=fat"
+
+# 调试信息
+RUSTFLAGS="-C debuginfo=2"
+
+# 链接时优化
+[profile.release]
+lto = "fat"
+codegen-units = 1
+```
+
+### 性能分析
+
+```bash
+# MIR 观察
+RUSTC_LOG=rustc_mir=info cargo build
+
+# LLVM IR 输出
+RUSTFLAGS="-C llvm-args=-print-after-all" cargo build
+
+# 编译时间分析
+cargo build --timings
+
+# 代码生成分析
+cargo build -v
+```
+
+### 调试工具
+
+- **rustc 调试**：使用 `RUSTC_LOG` 环境变量启用详细日志
+- **MIR 可视化**：使用 `cargo expand` 查看宏展开
+- **LLVM 调试**：使用 LLVM 调试选项分析代码生成
+
+## 性能调优
+
+### 编译性能
+
+- **并行编译**：使用多核 CPU 并行编译
+- **增量编译**：只编译变更的代码
+- **缓存优化**：使用 sccache 等编译缓存工具
+- **依赖优化**：减少不必要的依赖
+
+### 运行时性能
+
+- **优化级别**：选择合适的 `opt-level`
+- **目标 CPU**：使用 `target-cpu=native` 针对本机优化
+- **LTO 配置**：平衡编译时间和运行时性能
+- **PGO 优化**：使用配置文件引导优化
+
+## 诊断与调试
+
+### 错误诊断
+
+- **类型错误**：详细的类型不匹配信息
+- **借用错误**：借用检查器的详细报告
+- **生命周期错误**：生命周期冲突的清晰说明
+- **宏错误**：宏展开过程中的错误定位
+
+### 性能分析1
+
+- **编译时间**：使用 `cargo build --timings` 分析
+- **代码大小**：使用 `cargo bloat` 分析二进制大小
+- **运行时性能**：使用性能分析工具（perf、valgrind）
+
+## 相关索引
+
+- **质量保障**：[`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md) - 代码质量检查
+- **性能分析**：[`../06_performance_analysis/00_index.md`](../06_performance_analysis/00_index.md) - 性能分析工具
+- **代码分析**：[`../05_code_analysis/00_index.md`](../05_code_analysis/00_index.md) - 静态分析工具
 
 ## 导航
 
-- 返回工具链生态：[`../00_index.md`](../00_index.md)
-- 质量保障：[`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)
+- **返回工具链生态**：[`../00_index.md`](../00_index.md)
+- **构建工具**：[`../03_build_tools/00_index.md`](../03_build_tools/00_index.md)
+- **质量保障**：[`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)
+- **返回项目根**：[`../../README.md`](../../README.md)
