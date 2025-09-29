@@ -69,64 +69,63 @@
 
 ### 2.2 所有权与借用系统
 
-- [01_ownership_borrowing/](./01_ownership_borrowing/) - 所有权与借用机制
+- [core/01_ownership_borrowing/](./core/01_ownership_borrowing/) - 所有权与借用机制
 - 02_ownership_borrowing/（暂缺，待补充）
 
 ### 2.3 类型系统
 
-- [02_type_system/](./02_type_system/) - 类型系统基础
-- [03_type_system_core/](./03_type_system_core/) - 类型系统核心理论
+- [core/02_type_system/](./core/02_type_system/) - 类型系统基础
 - 04_advanced_type_features/（暂缺，待补充）
 
 ### 2.4 控制流
 
-- [03_control_flow/](./03_control_flow/) - 控制流与函数
+- [core/03_control_flow/](./core/03_control_flow/) - 控制流与函数
 
 ## 3. 高级语言特性
 
 ### 3.1 泛型系统
 
-- [04_generics/](./04_generics/) - 泛型编程
+- [core/04_generics/](./core/04_generics/) - 泛型编程
 
 ### 3.2 并发编程
 
-- [05_concurrency/](./05_concurrency/) - 并发编程模型
+- [advanced/05_concurrency/](./advanced/05_concurrency/) - 并发编程模型
 
 ### 3.3 异步编程
 
-- [06_async_await/](./06_async_await/) - 异步编程
+- [advanced/06_async_await/](./advanced/06_async_await/) - 异步编程
 
 ### 3.4 宏系统
 
-- [07_macro_system/](./07_macro_system/) - 宏系统
+- [advanced/07_macro_system/](./advanced/07_macro_system/) - 宏系统
 
 ## 4. 系统编程与资源管理
 
 ### 4.1 进程管理
 
-- [07_process_management/](./07_process_management/) - 进程管理
+- [system/07_process_management/](./system/07_process_management/) - 进程管理
 
 ### 4.2 内存管理
 
-- [11_memory_management/](./11_memory_management/) - 内存管理
+- [system/11_memory_management/](./system/11_memory_management/) - 内存管理
 
 ### 4.3 错误处理
 
-- [09_error_handling/](./09_error_handling/) - 错误处理
+- [system/09_error_handling/](./system/09_error_handling/) - 错误处理
 
 ### 4.4 模块系统
 
-- [10_modules/](./10_modules/) - 模块系统
+- [system/10_modules/](./system/10_modules/) - 模块系统
 
 ## 5. 算法与设计模式
 
 ### 5.1 算法实现
 
-- [08_algorithms/](./08_algorithms/) - 算法实现
+- [advanced/08_algorithms/](./advanced/08_algorithms/) - 算法实现
 
 ### 5.2 设计模式
 
-- [09_design_patterns/](./09_design_patterns/) - 设计模式
+- [advanced/09_design_patterns/](./advanced/09_design_patterns/) - 设计模式
 
 ## 6. 应用领域
 
@@ -136,80 +135,80 @@
 
 ### 6.2 框架开发
 
-- [11_frameworks/](./11_frameworks/) - 框架开发
+- [applications/11_frameworks/](./applications/11_frameworks/) - 框架开发
 
 ### 6.3 中间件
 
-- [12_middlewares/](./12_middlewares/) - 中间件
+- [applications/12_middlewares/](./applications/12_middlewares/) - 中间件
 
 ### 6.4 微服务
 
-- [13_microservices/](./13_microservices/) - 微服务架构
+- [applications/13_microservices/](./applications/13_microservices/) - 微服务架构
 
 ### 6.5 工作流
 
-- [14_workflow/](./14_workflow/) - 工作流系统
+- [applications/14_workflow/](./applications/14_workflow/) - 工作流系统
 
 ### 6.6 区块链
 
-- [15_blockchain/](./15_blockchain/) - 区块链应用
+- [domains/15_blockchain/](./domains/15_blockchain/) - 区块链应用
 
 ### 6.7 WebAssembly
 
-- [16_webassembly/](./16_webassembly/) - WebAssembly
+- [domains/16_webassembly/](./domains/16_webassembly/) - WebAssembly
 
 ### 6.8 物联网
 
-- [17_iot/](./17_iot/) - 物联网应用
+- [domains/17_iot/](./domains/17_iot/) - 物联网应用
 
 ### 6.9 模型驱动开发
 
-- [18_model/](./18_model/) - 模型驱动开发
+- [domains/18_model/](./domains/18_model/) - 模型驱动开发
 
 ## 7. 高级主题
 
 ### 7.1 高级语言特性
 
-- [19_advanced_language_features/](./19_advanced_language_features/) - 高级语言特性
+- [research/19_advanced_language_features/](./research/19_advanced_language_features/) - 高级语言特性
 
 ### 7.2 理论视角
 
-- [20_theoretical_perspectives/](./20_theoretical_perspectives/) - 理论视角
+- [research/20_theoretical_perspectives/](./research/20_theoretical_perspectives/) - 理论视角
 
 ### 7.3 应用领域
 
-- [21_application_domains/](./21_application_domains/) - 应用领域
+- [research/21_application_domains/](./research/21_application_domains/) - 应用领域
 
 ### 7.4 性能优化
 
-- [22_performance_optimization/](./22_performance_optimization/) - 性能优化
+- [research/22_performance_optimization/](./research/22_performance_optimization/) - 性能优化
 
 ### 7.5 安全验证
 
-- [23_security_verification/](./23_security_verification/) - 安全验证
+- [research/23_security_verification/](./research/23_security_verification/) - 安全验证
 
 ### 7.6 跨语言比较
 
-- [24_cross_language_comparison/](./24_cross_language_comparison/) - 跨语言比较
+- [ecosystem/24_cross_language_comparison/](./ecosystem/24_cross_language_comparison/) - 跨语言比较
 
 ### 7.7 教学与学习
 
-- [25_teaching_learning/](./25_teaching_learning/) - 教学与学习
+- [ecosystem/25_teaching_learning/](./ecosystem/25_teaching_learning/) - 教学与学习
 
 ### 7.8 工具链生态
 
-- [26_toolchain_ecosystem/](./26_toolchain_ecosystem/) - 工具链生态
+- [ecosystem/26_toolchain_ecosystem/](./ecosystem/26_toolchain_ecosystem/) - 工具链生态
 
 ### 7.9 生态系统架构
 
-- [27_ecosystem_architecture/](./27_ecosystem_architecture/) - 生态系统架构
+- [ecosystem/27_ecosystem_architecture/](./ecosystem/27_ecosystem_architecture/) - 生态系统架构
 
 ## 8. 形式化验证
 
 ### 8.1 理论实践
 
-- [05_formal_verification/](./05_formal_verification/) - 形式化验证
-- [06_theory_practice/](./06_theory_practice/) - 理论实践
+- [verification/05_formal_verification/](./verification/05_formal_verification/) - 形式化验证
+- [verification/06_theory_practice/](./verification/06_theory_practice/) - 理论实践
 
 ## 9. 质量保证
 

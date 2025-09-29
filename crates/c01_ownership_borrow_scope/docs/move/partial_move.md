@@ -1,5 +1,13 @@
 # Partial Destructuring in Rust
 
+## 目录
+
+- [Partial Destructuring in Rust](#partial-destructuring-in-rust)
+  - [目录](#目录)
+  - [部分无效的定义](#部分无效的定义)
+  - [是否支持后续操作](#是否支持后续操作)
+  - [总结](#总结)
+
 在 Rust 中，部分解构语义（partial destructuring）指的
 是在解构一个结构体、元组、枚举或组合类型时，只提取其中的一部分成员。
 使用 `move` 关键字时，某些成员会被移动到新的变量中，而原始结构体的这些成员将不再有效。

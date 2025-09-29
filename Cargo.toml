@@ -120,7 +120,7 @@ http = "1.3.1"
 
 # Web 框架 - 2025年9月27日最新稳定版本
 # axum: 现代Web框架，专注于人体工程学和模块化设计 - 2025年9月27日最新版本
-axum = { version = "0.8.4", features = ["macros", "multipart", "tracing"] }
+axum = { version = "0.8.5", features = ["macros", "multipart", "tracing"] }
 # axum-core: axum的核心功能库
 axum-core = "0.6.1"
 # tower: 异步服务抽象层，提供中间件和超时支持
@@ -220,7 +220,7 @@ webpki-roots = "1.1.1"
 
 # 错误处理 - 2025年9月27日最新稳定版本
 # thiserror: 错误类型派生宏库，简化错误处理
-thiserror = "2.0.16"
+thiserror = "2.0.17"
 # anyhow: 灵活的错误处理库，基于std::error::Error构建
 anyhow = "1.0.100"
 
@@ -389,7 +389,7 @@ glommio = "0.9.0"  # 更新至最新稳定版本
 # ahash: 高性能哈希算法实现，替代fxhash (未维护)
 ahash = "0.8.12"
 # quote: 代码生成宏库，替代paste (未维护)
-quote = "1.0.40"
+quote = "1.0.41"
 # proc-macro-error2: 过程宏错误处理库，替代proc-macro-error (未维护)
 proc-macro-error2 = "2.0.1"
 # is-terminal: 终端检测库，替代atty (有安全漏洞)
