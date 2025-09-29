@@ -1,5 +1,24 @@
 # 🏗️ Rust架构设计模式最佳实践
 
+## 📚 目录
+
+- [🏗️ Rust架构设计模式最佳实践](#️-rust架构设计模式最佳实践)
+  - [📚 目录](#-目录)
+  - [概述](#概述)
+  - [1. 分层架构模式](#1-分层架构模式)
+    - [1.1 经典分层架构 (Classic Layered Architecture)](#11-经典分层架构-classic-layered-architecture)
+    - [1.2 六边形架构 (Hexagonal Architecture)](#12-六边形架构-hexagonal-architecture)
+  - [2. 微服务架构模式](#2-微服务架构模式)
+    - [2.1 微服务通信模式 (Microservice Communication Pattern)](#21-微服务通信模式-microservice-communication-pattern)
+    - [2.2 服务网格模式 (Service Mesh Pattern)](#22-服务网格模式-service-mesh-pattern)
+  - [3. 事件驱动架构模式](#3-事件驱动架构模式)
+    - [3.1 事件溯源模式 (Event Sourcing Pattern)](#31-事件溯源模式-event-sourcing-pattern)
+  - [4. 测试和验证](#4-测试和验证)
+  - [5. 最佳实践总结](#5-最佳实践总结)
+    - [5.1 架构设计原则](#51-架构设计原则)
+    - [5.2 架构考虑](#52-架构考虑)
+    - [5.3 技术选择](#53-技术选择)
+
 ## 概述
 
 本文档基于MIT 6.172、Stanford CS110、CMU 15-410、UC Berkeley CS61C等著名大学软件架构课程的标准，详细分析Rust架构设计的各种模式和实践技巧。

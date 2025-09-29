@@ -1,0 +1,74 @@
+{
+  "quality_check": {
+    "enabled": true,
+    "strict_mode": false,
+    "check_format": true,
+    "check_structure": true,
+    "check_links": true,
+    "exclude_patterns": [
+      "*.tmp",
+      "*.bak",
+      "node_modules/**",
+      ".git/**"
+    ]
+  },
+  "link_check": {
+    "enabled": true,
+    "check_external": true,
+    "timeout": 10,
+    "retry_count": 3,
+    "user_agent": "Rust-Software-Engineering-Doc-Checker/1.0",
+    "exclude_domains": [
+      "localhost",
+      "127.0.0.1"
+    ]
+  },
+  "format_fix": {
+    "enabled": true,
+    "auto_fix": false,
+    "backup_original": true,
+    "fix_headers": true,
+    "fix_links": true,
+    "fix_code_blocks": true,
+    "standardize_formatting": true
+  },
+  "reporting": {
+    "generate_html": true,
+    "generate_json": true,
+    "email_notification": false,
+    "email_recipients": [],
+    "report_retention_days": 30
+  },
+  "schedule": {
+    "daily_check": true,
+    "weekly_report": true,
+    "monthly_cleanup": true,
+    "check_time": "02:00",
+    "report_day": "monday"
+  },
+  "notifications": {
+    "slack_webhook": "",
+    "discord_webhook": "",
+    "teams_webhook": "",
+    "enable_console_output": true
+  },
+  "backup": {
+    "enabled": true,
+    "backup_before_fix": true,
+    "backup_retention_days": 7,
+    "backup_location": "./backups"
+  },
+  "validation": {
+    "markdown_syntax": true,
+    "yaml_front_matter": true,
+    "table_formatting": true,
+    "list_formatting": true,
+    "code_block_syntax": true
+  },
+  "performance": {
+    "max_concurrent_checks": 5,
+    "cache_results": true,
+    "cache_ttl_hours": 24,
+    "enable_progress_bar": true
+  }
+}
