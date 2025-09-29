@@ -1,3 +1,6 @@
+//! 运行：`cargo bench -p c06_async`
+//! 指标：Prometheus 暴露在 `127.0.0.1:9900/metrics`（基准启动时自动起服务）
+//! 注意：基准会创建临时 Tokio 运行时；不依赖外部服务
 use criterion::{criterion_group, criterion_main, Criterion};
 use once_cell::sync::Lazy;
 use prometheus::{Registry, IntCounter, Histogram, HistogramOpts, Opts};

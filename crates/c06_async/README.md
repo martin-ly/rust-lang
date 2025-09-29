@@ -99,7 +99,227 @@ cargo test --test integration_test_suite
 cargo bench
 ```
 
-## 示例运行
+## 📚 全面代码梳理和注释
+
+本项目已完成对 `src/`、`futures/`、`tokio/`、`smol/` 等所有代码的全面梳理，包括：
+
+### 🔍 代码梳理成果
+
+1. **futures/ 模块** - 异步编程基础
+   - ✅ `future01.rs` - Future 状态机和调度机制详解
+   - ✅ 自定义 Future 实现示例
+   - ✅ Future 组合子用法演示
+
+2. **await/ 模块** - 异步等待机制
+   - ✅ `await01.rs` - async/await 关键字详解
+   - ✅ `await02.rs` - 异步并发编程高级示例
+   - ✅ futures::join! 宏的使用
+
+3. **streams/ 模块** - 异步流处理
+   - ✅ 自定义 Stream 实现
+   - ✅ Stream 组合子操作
+   - ✅ 并发流处理技术
+
+4. **tokio/ 模块** - 异步运行时
+   - ✅ `mutex.rs` - 异步互斥锁详解
+   - ✅ `notify.rs` - 异步通知机制
+   - ✅ `rwlock.rs` - 异步读写锁
+   - ✅ 同步原语和并发控制
+
+5. **smol/ 模块** - 轻量级运行时
+   - ✅ Smol 运行时特性详解
+   - ✅ 与其他运行时的对比
+   - ✅ 使用场景和最佳实践
+
+6. **utils/ 模块** - 实用工具
+   - ✅ 重试机制和退避策略
+   - ✅ 超时控制和取消机制
+   - ✅ 熔断器和限流器
+   - ✅ 并发控制和资源管理
+
+### 📖 异步语义全面梳理
+
+创建了完整的异步语义梳理文档：
+
+- 📄 `docs/ASYNC_SEMANTICS_COMPREHENSIVE_GUIDE.md`
+- 涵盖异步编程的各个方面
+- 包含详细的代码示例和最佳实践
+- 提供常见陷阱和解决方案
+
+### 🎯 全面示例集合
+
+1. **综合演示示例**
+
+   ```bash
+   cargo run --example comprehensive_async_demo
+   ```
+
+2. **运行时对比示例**
+
+   ```bash
+   cargo run --example runtime_comparison_demo
+   ```
+
+3. **最佳实践示例**
+
+   ```bash
+   cargo run --example async_best_practices
+   ```
+
+## 示例运行（模块 → 示例 → 解释）
+
+- actix 最小示例（Actor 消息交互）：
+
+  ```bash
+  cargo run -p c06_async --example actix_basic
+  ```
+
+- utils 策略执行器最小示例（重试/退避/超时/并发）：
+
+  ```bash
+  cargo run -p c06_async --example utils_strategy_smoke
+  ```
+
+- tokio 最小示例（JoinSet/计时器）：
+
+  ```bash
+  cargo run -p c06_async --example tokio_smoke
+  ```
+
+- streams 最小示例（IntervalStream/StreamExt）：
+
+  ```bash
+  cargo run -p c06_async --example streams_smoke
+  ```
+
+- futures 最小示例（join_all）：
+
+  ```bash
+  cargo run -p c06_async --example futures_smoke
+  ```
+
+- **新增：综合异步演示**
+
+  ```bash
+  cargo run --example comprehensive_async_demo
+  ```
+
+- **新增：运行时对比演示**
+
+  ```bash
+  cargo run --example runtime_comparison_demo
+  ```
+
+- **新增：最佳实践演示**
+
+  ```bash
+  cargo run --example async_best_practices
+  ```
+
+- **新增：异步编程模式演示**
+
+  ```bash
+  cargo run --example async_patterns_demo
+  ```
+
+- **新增：异步网络编程演示**
+
+  ```bash
+  cargo run --example async_network_demo
+  ```
+
+- **新增：异步数据库和缓存演示**
+
+  ```bash
+  cargo run --example async_database_demo
+  ```
+
+- **新增：异步性能优化演示**
+
+  ```bash
+  cargo run --example async_performance_demo
+  ```
+
+- **新增：真实世界应用场景演示**
+
+  ```bash
+  cargo run --example real_world_app_demo
+  ```
+
+- **新增：高级异步工具演示**
+
+  ```bash
+  cargo run --example advanced_tools_demo
+  ```
+
+- **新增：异步测试框架演示**
+
+  ```bash
+  cargo run --example async_testing_demo
+  cargo test --example async_testing_demo
+  ```
+
+- **新增：异步监控和诊断工具演示**
+
+  ```bash
+  cargo run --example async_monitoring_demo
+  ```
+
+- **新增：异步性能基准测试**
+
+  ```bash
+  cargo bench --bench async_benchmarks
+  ```
+
+- **新增：微服务架构异步演示**
+
+  ```bash
+  cargo run --example microservices_async_demo
+  ```
+
+- **新增：分布式系统异步演示**
+
+  ```bash
+  cargo run --example distributed_systems_demo
+  ```
+
+- **新增：AI集成异步演示**
+
+  ```bash
+  cargo run --example ai_integration_demo
+  ```
+
+- **新增：区块链异步演示**
+
+  ```bash
+  cargo run --example blockchain_async_demo
+  ```
+
+- **新增：边缘计算异步演示**
+
+  ```bash
+  cargo run --example edge_computing_demo
+  ```
+
+- utils 综合示例（限速 + 熔断 + 观测）：
+
+  ```bash
+  cargo run -p c06_async --example utils_observed_limit_breaker
+  # 指标： http://127.0.0.1:9899/metrics
+  ```
+
+- utils 可配置服务（端口/限速/熔断/超时 可配置 + tracing 日志）：
+
+  ```bash
+  # 环境变量配置（可选）
+  $env:BIND_ADDR="127.0.0.1:8088"; $env:METRICS_ADDR="127.0.0.1:9899"; $env:RUST_LOG="info"
+  # 也可提供 JSON 配置文件（见 StrategyConfig 字段）
+  $env:CONFIG_PATH="configs/strategy.json"
+  cargo run -p c06_async --example utils_service
+  # 健康检查：GET http://127.0.0.1:8088/health
+  # 工作负载：POST http://127.0.0.1:8088/work  body: {"n": 7}
+  # 指标：     GET http://127.0.0.1:9899/metrics
+  ```
 
 - 最小混合样例（Actor×CSP）：
 
@@ -189,6 +409,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```
 
 ## 📊 性能基准
+
+### 运行指南
+
+```bash
+# 运行所有基准（默认）
+cargo bench -p c06_async
+
+# 可选：在浏览器查看指标（如使用 bench_with_metrics）
+# http://127.0.0.1:9900/metrics
+```
 
 ### 异步操作性能对比
 

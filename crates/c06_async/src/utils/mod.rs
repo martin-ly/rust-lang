@@ -1,3 +1,27 @@
+//! 实用工具集合（重试/超时/并发限制/熔断/令牌桶/度量与监督）
+//! 
+//! 快速用法示例：
+//! ```no_run
+//! use c06_async::utils::{ExecStrategyBuilder};
+//! use std::time::Duration;
+//! # async fn run() -> anyhow::Result<()> {
+//! let runner = ExecStrategyBuilder::new()
+//!     .concurrency(8)
+//!     .attempts(5)
+//!     .start_delay(Duration::from_millis(100))
+//!     .timeout(Duration::from_secs(2))
+//!     .build();
+//! 
+//! let res = runner.run(
+//!     |attempt| async move {
+//!         // 你的异步任务，这里简单返回 Ok，生产中可返回 Err 重试
+//!         Ok::<_, anyhow::Error>(format!("ok on attempt {}", attempt))
+//!     },
+//!     None::<fn(&anyhow::Error)->bool>,
+//! ).await?;
+//! assert!(res.is_some());
+//! # Ok(()) }
+//! ```
 use futures::future::{AbortHandle, Abortable};
 use std::future::Future;
 use std::sync::Arc;

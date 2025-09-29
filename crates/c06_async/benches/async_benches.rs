@@ -1,3 +1,5 @@
+//! 运行：`cargo bench -p c06_async`
+//! 说明：该文件包含多组异步原语基准（JoinSet、MPSC、Semaphore 等），均在本地 Tokio 运行时内执行
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
 use once_cell::sync::Lazy;
 use prometheus::{Registry, IntCounter, Histogram, HistogramOpts, Opts};

@@ -1,9 +1,13 @@
+//! Actix 最小可运行示例：定义消息/Actor，发送并接收响应。
+//! 
+//! 用法：
+//! - 库内调用异步版本：`actor_exp01().await`（需在 Actix 系统/运行时内）
+//! - 可直接在可执行入口调用同步封装：`actor_exp01_run()`（内部启动并关闭系统）
+//! 
+//! 示例参见 `examples/actix_basic.rs`。
+
 use actix::prelude::*;
-// use actix::Actor;
-// use actix::Handler;
-// use actix::Message;
-// use actix::System;
-// use actix::Context;
+use actix::System;
 
 #[allow(unused)]
 // 定义消息
@@ -35,9 +39,6 @@ impl Handler<Ping> for MyActor {
 
 #[allow(unused)]
 pub async fn actor_exp01() {
-    // 启动 Actix 系统
-    // let system = System::new();
-
     // 创建 Actor 实例
     let addr = MyActor.start();
 
@@ -45,6 +46,13 @@ pub async fn actor_exp01() {
     let response = addr.send(Ping).await.unwrap();
     println!("Received: {}", response);
 
-    // 运行系统
-    //system.run().unwrap();
+}
+
+/// 同步封装：内部创建并运行 Actix `System`，方便示例/二进制入口直接调用
+#[allow(unused)]
+pub fn actor_exp01_run() {
+    let sys = System::new();
+    sys.block_on(async {
+        actor_exp01().await;
+    });
 }
