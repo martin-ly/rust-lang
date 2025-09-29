@@ -3,7 +3,10 @@ use std::sync::Arc;
 use std::time::Duration;
 use tokio::sync::{RwLock, Mutex};
 use tokio::time::sleep;
-use tracing::info;
+use tracing::{info, instrument};
+use c06_async::utils::metrics;
+use once_cell::sync::Lazy;
+use prometheus::{Registry, IntCounter, Histogram, HistogramOpts, Opts};
 
 /// 2025年高级异步设计模式演示
 /// 包含最新的异步编程模式和最佳实践
@@ -557,42 +560,103 @@ async fn main() -> Result<()> {
         .with_env_filter("info")
         .init();
 
+    // 启动基础 /metrics 服务（仅用于本文件演示期间的观测，可选）
+    let registry = Registry::new();
+    // 注册通用 demo 指标（示例）：执行计数与耗时直方图
+    static DEMO_EXEC_TOTAL: Lazy<IntCounter> = Lazy::new(|| IntCounter::with_opts(Opts::new("demo_exec_total", "demo 执行总次数")).unwrap());
+    static DEMO_EXEC_SECONDS: Lazy<Histogram> = Lazy::new(|| Histogram::with_opts(HistogramOpts::new("demo_exec_seconds", "demo 执行耗时(秒)")).unwrap());
+    let _ = registry.register(Box::new(DEMO_EXEC_TOTAL.clone()));
+    let _ = registry.register(Box::new(DEMO_EXEC_SECONDS.clone()));
+    let metrics_handle = tokio::spawn(metrics::serve_metrics(registry.clone(), "127.0.0.1:9899"));
+
     info!("🚀 开始 2025 年高级异步设计模式演示");
 
     // 1. 异步状态机演示
-    demo_async_state_machine().await?;
+    {
+        let _t = std::time::Instant::now();
+        demo_async_state_machine().await?;
+        DEMO_EXEC_TOTAL.inc();
+        DEMO_EXEC_SECONDS.observe(_t.elapsed().as_secs_f64());
+    }
 
     // 2. 异步观察者演示
-    demo_async_observer().await?;
+    {
+        let _t = std::time::Instant::now();
+        demo_async_observer().await?;
+        DEMO_EXEC_TOTAL.inc();
+        DEMO_EXEC_SECONDS.observe(_t.elapsed().as_secs_f64());
+    }
 
     // 3. 异步命令模式演示
-    demo_async_command().await?;
+    {
+        let _t = std::time::Instant::now();
+        demo_async_command().await?;
+        DEMO_EXEC_TOTAL.inc();
+        DEMO_EXEC_SECONDS.observe(_t.elapsed().as_secs_f64());
+    }
 
     // 4. 异步责任链演示
-    demo_async_chain_of_responsibility().await?;
+    {
+        let _t = std::time::Instant::now();
+        demo_async_chain_of_responsibility().await?;
+        DEMO_EXEC_TOTAL.inc();
+        DEMO_EXEC_SECONDS.observe(_t.elapsed().as_secs_f64());
+    }
 
     // 5. 异步适配器演示
-    demo_async_adapter().await?;
+    {
+        let _t = std::time::Instant::now();
+        demo_async_adapter().await?;
+        DEMO_EXEC_TOTAL.inc();
+        DEMO_EXEC_SECONDS.observe(_t.elapsed().as_secs_f64());
+    }
 
     // 6. 异步装饰器演示
-    demo_async_decorator().await?;
+    {
+        let _t = std::time::Instant::now();
+        demo_async_decorator().await?;
+        DEMO_EXEC_TOTAL.inc();
+        DEMO_EXEC_SECONDS.observe(_t.elapsed().as_secs_f64());
+    }
 
     // 7. 异步门面演示
-    demo_async_facade().await?;
+    {
+        let _t = std::time::Instant::now();
+        demo_async_facade().await?;
+        DEMO_EXEC_TOTAL.inc();
+        DEMO_EXEC_SECONDS.observe(_t.elapsed().as_secs_f64());
+    }
 
     // 8. 异步单例演示
-    demo_async_singleton().await?;
+    {
+        let _t = std::time::Instant::now();
+        demo_async_singleton().await?;
+        DEMO_EXEC_TOTAL.inc();
+        DEMO_EXEC_SECONDS.observe(_t.elapsed().as_secs_f64());
+    }
 
     // 9. 异步建造者演示
-    demo_async_builder().await?;
+    {
+        let _t = std::time::Instant::now();
+        demo_async_builder().await?;
+        DEMO_EXEC_TOTAL.inc();
+        DEMO_EXEC_SECONDS.observe(_t.elapsed().as_secs_f64());
+    }
 
     // 10. 异步策略演示
-    demo_async_strategy().await?;
+    {
+        let _t = std::time::Instant::now();
+        demo_async_strategy().await?;
+        DEMO_EXEC_TOTAL.inc();
+        DEMO_EXEC_SECONDS.observe(_t.elapsed().as_secs_f64());
+    }
 
     info!("✅ 2025 年高级异步设计模式演示完成!");
+    let _ = metrics_handle.abort();
     Ok(())
 }
 
+#[instrument]
 async fn demo_async_state_machine() -> Result<()> {
     info!("📊 演示异步状态机模式");
 
@@ -635,6 +699,7 @@ async fn demo_async_state_machine() -> Result<()> {
     Ok(())
 }
 
+#[instrument]
 async fn demo_async_observer() -> Result<()> {
     info!("👀 演示异步观察者模式");
 
@@ -664,6 +729,7 @@ async fn demo_async_observer() -> Result<()> {
     Ok(())
 }
 
+#[instrument]
 async fn demo_async_command() -> Result<()> {
     info!("📝 演示异步命令模式");
 
@@ -692,6 +758,7 @@ async fn demo_async_command() -> Result<()> {
     Ok(())
 }
 
+#[instrument]
 async fn demo_async_chain_of_responsibility() -> Result<()> {
     info!("⛓️ 演示异步责任链模式");
 
@@ -707,6 +774,7 @@ async fn demo_async_chain_of_responsibility() -> Result<()> {
     Ok(())
 }
 
+#[instrument]
 async fn demo_async_adapter() -> Result<()> {
     info!("🔌 演示异步适配器模式");
 
@@ -719,6 +787,7 @@ async fn demo_async_adapter() -> Result<()> {
     Ok(())
 }
 
+#[instrument]
 async fn demo_async_decorator() -> Result<()> {
     info!("🎨 演示异步装饰器模式");
 
@@ -732,6 +801,7 @@ async fn demo_async_decorator() -> Result<()> {
     Ok(())
 }
 
+#[instrument]
 async fn demo_async_facade() -> Result<()> {
     info!("🏛️ 演示异步门面模式");
 
@@ -742,6 +812,7 @@ async fn demo_async_facade() -> Result<()> {
     Ok(())
 }
 
+#[instrument]
 async fn demo_async_singleton() -> Result<()> {
     info!("🔒 演示异步单例模式");
 
@@ -758,6 +829,7 @@ async fn demo_async_singleton() -> Result<()> {
     Ok(())
 }
 
+#[instrument]
 async fn demo_async_builder() -> Result<()> {
     info!("🔨 演示异步建造者模式");
 
@@ -772,6 +844,7 @@ async fn demo_async_builder() -> Result<()> {
     Ok(())
 }
 
+#[instrument]
 async fn demo_async_strategy() -> Result<()> {
     info!("⚡ 演示异步策略模式");
 

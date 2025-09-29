@@ -3,7 +3,10 @@ use std::sync::Arc;
 use std::time::{Duration, Instant};
 use tokio::sync::{RwLock, broadcast};
 use tokio::time::sleep;
-use tracing::{info, warn, error, debug};
+use tracing::{info, warn, error, debug, instrument};
+use c06_async::utils::metrics;
+use once_cell::sync::Lazy;
+use prometheus::{Registry, IntCounter, IntCounterVec, Histogram, HistogramOpts, Opts};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use uuid::Uuid;
@@ -230,6 +233,7 @@ impl AsyncAPIGateway {
         Ok(())
     }
 
+    #[instrument(skip(self, request), fields(path=%request.path, method=?request.method))]
     pub async fn process_request(&self, request: GatewayRequest) -> Result<GatewayResponse> {
         let start_time = Instant::now();
         
@@ -297,6 +301,7 @@ impl AsyncAPIGateway {
         Ok(response)
     }
 
+    #[instrument(skip(self))]
     async fn find_route(&self, path: &str, method: &HttpMethod) -> Result<Route> {
         let routes = self.routes.read().await;
         
@@ -309,6 +314,7 @@ impl AsyncAPIGateway {
         Err(anyhow::anyhow!("未找到匹配的路由: {:?} {}", method, path))
     }
 
+    #[instrument(skip(self, middleware, context), fields(mw_name=%middleware.name, mw_type=?middleware.middleware_type))]
     async fn execute_middleware(&self, middleware: &Middleware, context: &mut RequestContext) -> Result<()> {
         match middleware.middleware_type {
             MiddlewareType::Authentication => {
@@ -334,6 +340,7 @@ impl AsyncAPIGateway {
         }
     }
 
+    #[instrument(skip(self, context))]
     async fn execute_auth_middleware(&self, context: &mut RequestContext) -> Result<()> {
         // 模拟认证检查
         if let Some(auth_header) = context.request.headers.get("Authorization") {
@@ -347,6 +354,7 @@ impl AsyncAPIGateway {
         Err(anyhow::anyhow!("认证失败"))
     }
 
+    #[instrument(skip(self, context))]
     async fn execute_rate_limiting_middleware(&self, context: &mut RequestContext) -> Result<()> {
         // 简化的限流实现
         let default_ip = "127.0.0.1".to_string();
@@ -358,6 +366,7 @@ impl AsyncAPIGateway {
         if rand::rng().random::<f64>() < 0.05 {
             let mut stats = self.gateway_stats.write().await;
             stats.rate_limited_requests += 1;
+            RATE_LIMITED_TOTAL.with_label_values(&["burst"]).inc();
             
             return Err(anyhow::anyhow!("请求频率过高"));
         }
@@ -366,6 +375,7 @@ impl AsyncAPIGateway {
         Ok(())
     }
 
+    #[instrument(skip(self, context))]
     async fn execute_logging_middleware(&self, context: &mut RequestContext) -> Result<()> {
         info!("请求日志: {:?} {} {} - 用户: {:?}", 
               context.request.method, context.request.path, 
@@ -373,6 +383,7 @@ impl AsyncAPIGateway {
         Ok(())
     }
 
+    #[instrument(skip(self, context))]
     async fn execute_caching_middleware(&self, context: &mut RequestContext) -> Result<()> {
         // 模拟缓存检查
         if context.request.method == HttpMethod::GET {
@@ -380,11 +391,13 @@ impl AsyncAPIGateway {
             if rand::rng().random::<f64>() < 0.3 {
                 context.cached = true;
                 debug!("缓存命中: {}", context.request.path);
+                RATE_LIMITED_TOTAL.with_label_values(&["cache"]).inc();
             }
         }
         Ok(())
     }
 
+    #[instrument(skip(self, context))]
     async fn execute_validation_middleware(&self, context: &mut RequestContext) -> Result<()> {
         // 模拟请求验证
         if context.request.body.len() > 1024 * 1024 {
@@ -395,6 +408,7 @@ impl AsyncAPIGateway {
         Ok(())
     }
 
+    #[instrument(skip(self, route, context), fields(backend=%route.backend_service))]
     async fn forward_to_backend(&self, route: &Route, context: &RequestContext) -> Result<GatewayResponse> {
         let services = self.services.read().await;
         let service = services.get(&route.backend_service)
@@ -402,12 +416,14 @@ impl AsyncAPIGateway {
         
         // 选择服务实例
         let instance = self.select_service_instance(service).await?;
+        INSTANCE_PICK_TOTAL.with_label_values(&[&instance.id]).inc();
         
         // 模拟转发请求
         sleep(Duration::from_millis(50 + rand::rng().random_range(0..100))).await;
         
         // 模拟响应
         let status_code = if rand::rng().random::<f64>() < 0.95 { 200 } else { 500 };
+        BACKEND_STATUS_TOTAL.with_label_values(&[if status_code == 200 { "200" } else { "500" }]).inc();
         let response_time = Duration::from_millis(50 + rand::rng().random_range(0..100));
         
         let mut headers = HashMap::new();
@@ -429,6 +445,7 @@ impl AsyncAPIGateway {
         })
     }
 
+    #[instrument(skip(self, service))]
     async fn select_service_instance<'a>(&self, service: &'a BackendService) -> Result<&'a ServiceInstance> {
         let healthy_instances: Vec<&ServiceInstance> = service.instances
             .iter()
@@ -697,9 +714,24 @@ impl AsyncMetricsCollector {
     }
 }
 
+// 模块级指标（避免局部不可见）
+static GW_REQ_TOTAL: Lazy<IntCounter> = Lazy::new(|| IntCounter::with_opts(Opts::new("gateway_request_total", "网关请求总数")).unwrap());
+static GW_REQ_SECONDS: Lazy<Histogram> = Lazy::new(|| Histogram::with_opts(HistogramOpts::new("gateway_request_seconds", "网关请求耗时(秒)")).unwrap());
+static RATE_LIMITED_TOTAL: Lazy<IntCounterVec> = Lazy::new(|| IntCounterVec::new(Opts::new("gateway_rate_limited_total", "限流命中次数"), &["reason"]).unwrap());
+static BACKEND_STATUS_TOTAL: Lazy<IntCounterVec> = Lazy::new(|| IntCounterVec::new(Opts::new("gateway_backend_status_total", "后端响应状态计数"), &["status"]).unwrap());
+static INSTANCE_PICK_TOTAL: Lazy<IntCounterVec> = Lazy::new(|| IntCounterVec::new(Opts::new("gateway_instance_pick_total", "后端实例选择分布"), &["instance"]).unwrap());
+
 #[tokio::main]
 async fn main() -> Result<()> {
     tracing_subscriber::fmt::init();
+    // /metrics 暴露（网关演示：9897）
+    let registry = Registry::new();
+    let _ = registry.register(Box::new(GW_REQ_TOTAL.clone()));
+    let _ = registry.register(Box::new(GW_REQ_SECONDS.clone()));
+    let _ = registry.register(Box::new(RATE_LIMITED_TOTAL.clone()));
+    let _ = registry.register(Box::new(BACKEND_STATUS_TOTAL.clone()));
+    let _ = registry.register(Box::new(INSTANCE_PICK_TOTAL.clone()));
+    let _metrics_handle = tokio::spawn(metrics::serve_metrics(registry.clone(), "127.0.0.1:9897"));
     
     info!("🚀 开始 2025 年异步API网关演示");
 
@@ -796,6 +828,7 @@ async fn main() -> Result<()> {
     
     // 处理一些请求
     for i in 0..10 {
+        let t = std::time::Instant::now();
         let request = GatewayRequest {
             id: Uuid::new_v4().to_string(),
             method: HttpMethod::GET,
@@ -810,9 +843,13 @@ async fn main() -> Result<()> {
             Ok(response) => {
                 info!("请求处理成功: {} -> {} (耗时: {:?})", 
                       i, response.status_code, response.response_time);
+                GW_REQ_TOTAL.inc();
+                GW_REQ_SECONDS.observe(t.elapsed().as_secs_f64());
             }
             Err(e) => {
                 error!("请求处理失败: {} - {}", i, e);
+                GW_REQ_TOTAL.inc();
+                GW_REQ_SECONDS.observe(t.elapsed().as_secs_f64());
             }
         }
     }

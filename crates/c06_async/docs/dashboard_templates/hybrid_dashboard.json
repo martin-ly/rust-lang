@@ -1,0 +1,12 @@
+{
+  "title": "Actor × CSP Hybrid - Overview",
+  "panels": [
+    { "type": "timeseries", "title": "Stage Throughput", "targets": [{ "expr": "rate(stage_processed_total[1m])" }] },
+    { "type": "timeseries", "title": "Stage Dropped", "targets": [{ "expr": "rate(stage_dropped_total[1m])" }] },
+    { "type": "timeseries", "title": "Stage Latency P99", "targets": [{ "expr": "histogram_quantile(0.99, rate(stage_process_seconds_bucket[5m]))" }] },
+    { "type": "timeseries", "title": "In-flight/Mailbox", "targets": [{ "expr": "mailbox_inflight" }] }
+  ],
+  "time": { "from": "now-1h", "to": "now" },
+  "templating": { "list": [] }
+}
+

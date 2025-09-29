@@ -99,6 +99,72 @@ cargo test --test integration_test_suite
 cargo bench
 ```
 
+## 示例运行
+
+- 最小混合样例（Actor×CSP）：
+
+  ```bash
+  cargo run --example actor_csp_hybrid_minimal
+  ```
+
+- 进阶混合样例（监督 + 限速 + 指标 + 取消）：
+
+  ```bash
+  cargo run --example actor_csp_hybrid_advanced
+  # 浏览 http://127.0.0.1:9898/metrics 获取 Prometheus 指标
+  ```
+
+- API 网关样例（统一观测集成）：
+
+  ```bash
+  cargo run --example async_api_gateway_2025
+  # 浏览 http://127.0.0.1:9897/metrics 获取 Prometheus 指标
+  ```
+
+- Actor 桥接（bastion/xtra，可选特性）：
+
+  ```bash
+  cargo run --features bastion --example actor_bastion_bridge
+  cargo run --features xtra --example actor_xtra_bridge
+  ```
+
+## 选型与样例选择指南（最小 vs 进阶）
+
+- 最小样例 `actor_csp_hybrid_minimal.rs`：
+  - 适合：快速理解 Actor×CSP 连接方式与优先级邮箱 → 有界通道 → 单阶段处理。
+  - 特点：代码精简、无监督、无指标；便于拷贝至 demo/实验项目。
+
+- 进阶样例 `actor_csp_hybrid_advanced.rs`：
+  - 适合：需要监督式重启、统一取消、令牌桶限速、Prometheus 指标与 tracing spans 的工程化场景。
+  - 特点：具备可观测性与弹性控制，便于接入生产灰度环境做容量与尾延迟评估。
+
+选择建议：
+
+- 从最小样例起步，验证功能与背压；当需要稳定性、观测与限速时，再切换/升级到进阶样例。
+
+## 本地观测栈（Prometheus + Grafana）
+
+- 启动：
+
+  ```bash
+  docker compose -f deployment/docker-compose.observability.yml up -d
+  # Prometheus: http://localhost:9090  Grafana: http://localhost:3000 (admin/admin)
+  ```
+
+- 抓取配置：`configs/prometheus.yml`
+
+- 面板模板：`docs/dashboard_templates/gateway_dashboard.json`、`docs/dashboard_templates/hybrid_dashboard.json`
+
+- 一键脚本：
+
+  ```bash
+  # PowerShell
+  scripts/start_observe.ps1 -Gateway -Hybrid
+
+  # Bash
+  scripts/start_observe.sh --gateway --hybrid
+  ```
+
 ### 基本用法
 
 ```rust

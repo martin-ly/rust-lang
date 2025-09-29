@@ -87,6 +87,51 @@ where
 
 pub mod circuit_breaker;
 
+pub mod supervisor {
+    use tokio::sync::broadcast;
+    use tokio::time::{sleep, Duration};
+    use tracing::{info, warn};
+
+    pub async fn supervise<F, Fut>(name: &'static str, mut factory: F, mut shutdown_rx: broadcast::Receiver<()>)
+    where
+        F: FnMut() -> Fut + Send + 'static,
+        Fut: std::future::Future<Output = anyhow::Result<()>> + Send,
+    {
+        let mut backoff_ms = 200u64;
+        let max_backoff_ms = 10_000u64;
+        loop {
+            tokio::select! {
+                _ = shutdown_rx.recv() => { info!(component=name, "supervisor: shutdown received"); break; }
+                res = factory() => {
+                    match res {
+                        Ok(()) => { info!(component=name, "component exited gracefully"); break; }
+                        Err(e) => { warn!(component=name, error=%e, "component failed; will restart"); sleep(Duration::from_millis(backoff_ms)).await; backoff_ms = (backoff_ms.saturating_mul(2)).min(max_backoff_ms); }
+                    }
+                }
+            }
+        }
+    }
+}
+
+pub mod metrics {
+    use axum::{routing::get, Router};
+    use prometheus::{Encoder, Registry, TextEncoder};
+
+    pub async fn serve_metrics(registry: Registry, bind: &str) -> anyhow::Result<()> {
+        async fn handle_metrics(registry: Registry) -> axum::http::Response<String> {
+            let encoder = TextEncoder::new();
+            let metric_families = registry.gather();
+            let mut buffer = Vec::new();
+            let _ = encoder.encode(&metric_families, &mut buffer);
+            let body = String::from_utf8_lossy(&buffer).to_string();
+            axum::http::Response::builder().status(200).header(axum::http::header::CONTENT_TYPE, encoder.format_type()).body(body).unwrap()
+        }
+        let app = Router::new().route("/metrics", get({ let reg = registry.clone(); move || handle_metrics(reg.clone()) }));
+        let listener = tokio::net::TcpListener::bind(bind).await.map_err(|e| anyhow::anyhow!(e))?;
+        axum::serve(listener, app.into_make_service()).await.map_err(|e| anyhow::anyhow!(e))
+    }
+}
+
 /// 统一执行助手：并发控制 + 超时 + 重试
 #[derive(Clone)]
 pub struct ExecHelper {

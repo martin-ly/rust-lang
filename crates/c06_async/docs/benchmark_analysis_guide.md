@@ -1,15 +1,38 @@
 # 基准测试分析与优化指南（Rust 1.90）
 
-## 0. 目录（严格编号）
+## 目录
 
-1. 目标与范围
-2. 基准测试框架选择
-3. 性能指标定义
-4. 异步性能测试策略
-5. 常见性能瓶颈与优化
-6. 基准测试最佳实践
-7. 结果分析与报告
-8. 参考资料
+- [基准测试分析与优化指南（Rust 1.90）](#基准测试分析与优化指南rust-190)
+  - [目录](#目录)
+  - [1. 目标与范围](#1-目标与范围)
+  - [2. 基准测试框架选择](#2-基准测试框架选择)
+    - [2.1 Criterion.rs（推荐）](#21-criterionrs推荐)
+    - [2.2 自定义基准测试](#22-自定义基准测试)
+  - [3. 性能指标定义](#3-性能指标定义)
+    - [3.1 延迟指标](#31-延迟指标)
+    - [3.2 吞吐量指标](#32-吞吐量指标)
+    - [3.3 资源使用指标](#33-资源使用指标)
+  - [4. 异步性能测试策略](#4-异步性能测试策略)
+    - [4.1 并发级别测试](#41-并发级别测试)
+    - [4.2 背压测试](#42-背压测试)
+    - [4.3 内存分配测试](#43-内存分配测试)
+  - [5. 常见性能瓶颈与优化](#5-常见性能瓶颈与优化)
+    - [5.1 锁竞争](#51-锁竞争)
+    - [5.2 内存分配](#52-内存分配)
+    - [5.3 异步任务调度](#53-异步任务调度)
+    - [5.4 网络 I/O](#54-网络-io)
+  - [6. 基准测试最佳实践](#6-基准测试最佳实践)
+    - [6.1 测试环境控制](#61-测试环境控制)
+    - [6.2 预热和稳定化](#62-预热和稳定化)
+    - [6.3 多维度测试](#63-多维度测试)
+  - [7. 结果分析与报告](#7-结果分析与报告)
+    - [7.1 统计显著性](#71-统计显著性)
+    - [7.2 性能回归检测](#72-性能回归检测)
+    - [7.3 报告生成](#73-报告生成)
+  - [8. 参考资料](#8-参考资料)
+  - [9. 本仓基准测试](#9-本仓基准测试)
+    - [9.1 基准与指标联动（推荐做法）](#91-基准与指标联动推荐做法)
+    - [9.2 在基准进程内启动 `/metrics`（可选）](#92-在基准进程内启动-metrics可选)
 
 ## 1. 目标与范围
 
@@ -329,6 +352,7 @@ criterion_main!(benches);
 - `benches/async_ecosystem_benchmarks.rs`：异步生态系统性能对比
 - `benches/async_ecosystem_performance_benchmarks.rs`：详细性能分析
 - `benches/async_benches.rs`：基础异步操作基准
+- `benches/bench_with_metrics.rs`：在基准进程内启动 `/metrics` 的演示
 
 运行方式：
 
@@ -336,3 +360,52 @@ criterion_main!(benches);
 cargo bench --no-run  # 仅编译
 cargo bench           # 运行基准测试
 ```
+
+### 9.1 基准与指标联动（推荐做法）
+
+- 目的：在压测或基准期间，同时采集示例导出的 Prometheus 指标，结合 Grafana 面板观察延迟分位与吞吐变化。
+- 步骤：
+  1) 开启示例 `/metrics`（任选其一）：
+     - 混合样例：`cargo run --example actor_csp_hybrid_advanced`
+     - 网关样例：`cargo run --example async_api_gateway_2025`
+  2) 启动观测栈：`docker compose -f deployment/docker-compose.observability.yml up -d`
+  3) 运行基准：`cargo bench` 或外部压测（wrk/vegeta/ghz）
+  4) Grafana 导入面板：`docs/dashboard_templates/*.json`，观察：
+     - 网关：`gateway_request_seconds`（分位）、`gateway_request_total`（吞吐）、限流/状态/实例分布
+     - 混合：`stage_process_seconds`（分位）、`stage_processed_total`/`stage_dropped_total`
+- 建议：将“冷启动→稳态→退化→恢复”四阶段分别做时间标记（Annotation），便于关联因果。
+
+### 9.2 在基准进程内启动 `/metrics`（可选）
+
+```rust
+// 在 benches/* 内部演示如何启动 /metrics 服务（仅在本地验证使用）
+use once_cell::sync::Lazy;
+use prometheus::{Registry, IntCounter, Histogram, HistogramOpts, Opts};
+
+static BENCH_EXEC_TOTAL: Lazy<IntCounter> = Lazy::new(|| IntCounter::with_opts(Opts::new("bench_exec_total", "基准执行次数")).unwrap());
+static BENCH_EXEC_SECONDS: Lazy<Histogram> = Lazy::new(|| Histogram::with_opts(HistogramOpts::new("bench_exec_seconds", "基准耗时(秒)")).unwrap());
+
+fn start_metrics_server() -> Registry {
+    let registry = Registry::new();
+    let _ = registry.register(Box::new(BENCH_EXEC_TOTAL.clone()));
+    let _ = registry.register(Box::new(BENCH_EXEC_SECONDS.clone()));
+    // 复用项目封装的服务
+    let _ = std::thread::spawn(|| {
+        let rt = tokio::runtime::Runtime::new().unwrap();
+        rt.block_on(async {
+            let _ = c06_async::utils::metrics::serve_metrics(registry.clone(), "127.0.0.1:9900").await;
+        });
+    });
+    registry
+}
+
+// 在基准入口（如 fn main 或首次 bench 函数）调用：
+// let _reg = start_metrics_server();
+// 然后在每次迭代内：
+// let t = std::time::Instant::now();
+// ... 被测逻辑 ...
+// BENCH_EXEC_TOTAL.inc();
+// BENCH_EXEC_SECONDS.observe(t.elapsed().as_secs_f64());
+```
+
+注意：Criterion 运行机制会多进程/多迭代，建议仅在本地快速验证时开启，或改为把指标推送到 Pushgateway；CI 环境应避免端口冲突与额外干扰。

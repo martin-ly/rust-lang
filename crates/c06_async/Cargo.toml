@@ -34,6 +34,7 @@ serde = { workspace = true }
 serde_json = { workspace = true }
 reqwest = { workspace = true, features = ["json"] }
 prometheus = { workspace = true }
+once_cell = "1.20"
 
 # Rust 1.90 新特性支持
 num_cpus = { workspace = true }
@@ -73,6 +74,10 @@ crossterm = { workspace = true, features = ["event-stream"] }
 # Web框架 - 使用工作区统一版本
 axum = { workspace = true }
 
+# 可选 Actor 框架（默认不启用）
+bastion = { version = "0.4.1-alpha.1", optional = true }
+xtra = { version = "0.6", optional = true }
+
 [dev-dependencies]
 criterion = { workspace = true, features = ["html_reports", "async_tokio"] }
 
@@ -83,3 +88,8 @@ path = "src/lib.rs"
 [[bin]]
 name = "c06_async"
 path = "src/bin/main.rs"
+
+[features]
+# 可选启用的 Actor 框架集成
+bastion = ["dep:bastion"]
+xtra = ["dep:xtra"]

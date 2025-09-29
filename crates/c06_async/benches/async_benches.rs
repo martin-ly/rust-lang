@@ -1,10 +1,18 @@
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
+use once_cell::sync::Lazy;
+use prometheus::{Registry, IntCounter, Histogram, HistogramOpts, Opts};
 use std::hint::black_box;
 use std::time::Duration;
 
 // 基准目标：对比不同并发度下 JoinSet 与 join_all 的吞吐（简化原型，避免 async feature）
 
 fn bench_joinset_concurrency(c: &mut Criterion) {
+    // 基准×指标：最小联动（可选）
+    static BENCH_EXEC_TOTAL: Lazy<IntCounter> = Lazy::new(|| IntCounter::with_opts(Opts::new("bench_exec_total", "基准执行次数")).unwrap());
+    static BENCH_EXEC_SECONDS: Lazy<Histogram> = Lazy::new(|| Histogram::with_opts(HistogramOpts::new("bench_exec_seconds", "基准耗时(秒)")).unwrap());
+    let registry = Registry::new();
+    let _ = registry.register(Box::new(BENCH_EXEC_TOTAL.clone()));
+    let _ = registry.register(Box::new(BENCH_EXEC_SECONDS.clone()));
     let mut group = c.benchmark_group("joinset_concurrency");
     for conc in [1usize, 2, 4, 8, 16] {
         group.throughput(Throughput::Elements(conc as u64));
@@ -12,6 +20,7 @@ fn bench_joinset_concurrency(c: &mut Criterion) {
         group.bench_with_input(BenchmarkId::from_parameter(conc), &conc, |b, &concurrency| {
             b.iter(|| {
                 let rt = tokio::runtime::Runtime::new().unwrap();
+                let t = std::time::Instant::now();
                 rt.block_on(async move {
                     use tokio::task::JoinSet;
                     let mut set = JoinSet::new();
@@ -27,6 +36,9 @@ fn bench_joinset_concurrency(c: &mut Criterion) {
                     }
                     sum
                 })
+                ;
+                BENCH_EXEC_TOTAL.inc();
+                BENCH_EXEC_SECONDS.observe(t.elapsed().as_secs_f64());
             });
         });
     }

@@ -2,6 +2,21 @@
 
 > 目标：在 Rust 1.90 语境下，按语言要素梳理 async/await、trait bound、Send/Sync、Pin、Future、Stream 等，并给出简短示例与链接到本仓可运行代码。
 
+## 目录
+
+- [Rust 1.90 异步相关语言特性与实践对照](#rust-190-异步相关语言特性与实践对照)
+  - [目录](#目录)
+  - [1. async/await 与返回类型](#1-asyncawait-与返回类型)
+  - [2. Future 与 Pin](#2-future-与-pin)
+  - [3. Send/Sync 边界](#3-sendsync-边界)
+  - [4. 选择与并发组合器](#4-选择与并发组合器)
+  - [5. 结构化并发与 JoinSet](#5-结构化并发与-joinset)
+  - [6. 超时与时间 API](#6-超时与时间-api)
+  - [7. 通道与背压](#7-通道与背压)
+  - [8. 锁与共享状态](#8-锁与共享状态)
+  - [9. 错误处理、取消与清理](#9-错误处理取消与清理)
+  - [10. 观测与调试](#10-观测与调试)
+
 ## 1. async/await 与返回类型
 
 - `async fn foo() -> T` 实际返回 `impl Future<Output = T>`。

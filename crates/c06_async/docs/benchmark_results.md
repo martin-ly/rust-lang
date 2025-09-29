@@ -2,6 +2,32 @@
 
 本文档展示了 c06_async crate 中各种异步模式的性能对比结果。
 
+## 目录
+
+- [异步 Rust 基准测试结果对比](#异步-rust-基准测试结果对比)
+  - [目录](#目录)
+  - [基准测试概览](#基准测试概览)
+    - [1. MPSC 通道性能对比](#1-mpsc-通道性能对比)
+    - [2. Semaphore 限流性能对比](#2-semaphore-限流性能对比)
+    - [3. Select 策略性能对比](#3-select-策略性能对比)
+    - [4. JoinSet 并发控制性能](#4-joinset-并发控制性能)
+  - [性能优化建议](#性能优化建议)
+    - [1. 通道选择策略](#1-通道选择策略)
+    - [2. 限流配置](#2-限流配置)
+    - [3. 任务数量控制](#3-任务数量控制)
+  - [运行基准测试](#运行基准测试)
+    - [结果占位模板（待填）](#结果占位模板待填)
+      - [joinset\_concurrency / join\_all\_concurrency](#joinset_concurrency--join_all_concurrency)
+      - [mpsc\_bounded\_vs\_unbounded](#mpsc_bounded_vs_unbounded)
+      - [semaphore\_pipeline\_throughput](#semaphore_pipeline_throughput)
+      - [select\_joinset](#select_joinset)
+      - [backpressure\_limit](#backpressure_limit)
+  - [采集真实数据：流程建议](#采集真实数据流程建议)
+  - [环境信息](#环境信息)
+  - [注意事项](#注意事项)
+  - [实际基准测试结果](#实际基准测试结果)
+  - [扩展基准测试](#扩展基准测试)
+
 ## 基准测试概览
 
 ### 1. MPSC 通道性能对比

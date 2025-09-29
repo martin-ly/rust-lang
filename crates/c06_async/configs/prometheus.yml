@@ -1,0 +1,26 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+
+scrape_configs:
+  - job_name: 'actor_csp_hybrid'
+    static_configs:
+      - targets: ['host.docker.internal:9898', '127.0.0.1:9898']
+
+  - job_name: 'api_gateway'
+    static_configs:
+      - targets: ['host.docker.internal:9897', '127.0.0.1:9897']
+
+  - job_name: 'benchmarks'
+    static_configs:
+      - targets: ['host.docker.internal:9900', '127.0.0.1:9900']
+
+  - job_name: 'bridge_bastion'
+    static_configs:
+      - targets: ['host.docker.internal:9896', '127.0.0.1:9896']
+
+  - job_name: 'bridge_xtra'
+    static_configs:
+      - targets: ['host.docker.internal:9895', '127.0.0.1:9895']
+
+

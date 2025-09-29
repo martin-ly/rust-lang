@@ -2,13 +2,18 @@
 
 按主题提供最小可运行片段。更完整版本见 `examples/`。
 
-## 0. 目录（严格编号）
+## 目录
 
-1. 超时与取消（Tokio）
-2. 有界并发抓取（Tokio + reqwest）
-3. mpsc 背压（Tokio）
-4. Smol：最小 HTTP 获取
-5. Smol：并发任务集（FuturesUnordered）
+- [Async Cookbook：Tokio 与 Smol（可复制片段）](#async-cookbooktokio-与-smol可复制片段)
+  - [目录](#目录)
+  - [1. 超时与取消（Tokio）](#1-超时与取消tokio)
+  - [2. 有界并发抓取（Tokio + reqwest）](#2-有界并发抓取tokio--reqwest)
+  - [3. mpsc 背压（Tokio）](#3-mpsc-背压tokio)
+  - [4. Smol：最小 HTTP 获取](#4-smol最小-http-获取)
+  - [5. Smol：并发任务集（FuturesUnordered）](#5-smol并发任务集futuresunordered)
+  - [6. JoinSet + buffer\_unordered（Tokio 组合）](#6-joinset--buffer_unorderedtokio-组合)
+  - [7. Notify 用法（Tokio）](#7-notify-用法tokio)
+  - [8. Semaphore 进阶：带宽配额](#8-semaphore-进阶带宽配额)
 
 ## 1. 超时与取消（Tokio）
 
