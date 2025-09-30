@@ -2,6 +2,57 @@
 
 > 返回索引：`docs/README.md`
 
+## 📋 目录
+
+- [排队论模型 API 参考](#排队论模型-api-参考)
+  - [📋 目录](#-目录)
+  - [概述](#概述)
+  - [主要类型](#主要类型)
+    - [MM1Queue {#mm1queue}](#mm1queue-mm1queue)
+    - [MMcQueue {#mmcqueue}](#mmcqueue-mmcqueue)
+  - [分析工具](#分析工具)
+    - [PerformanceAnalyzer {#performanceanalyzer}](#performanceanalyzer-performanceanalyzer)
+    - [ReliabilityAnalyzer {#reliabilityanalyzer}](#reliabilityanalyzer-reliabilityanalyzer)
+    - [ScalabilityAnalyzer {#scalabilityanalyzer}](#scalabilityanalyzer-scalabilityanalyzer)
+  - [结果类型](#结果类型)
+    - [SimulationResult {#simulationresult}](#simulationresult-simulationresult)
+    - [ScalingResult {#scalingresult}](#scalingresult-scalingresult)
+    - [MetricStatistics {#metricstatistics}](#metricstatistics-metricstatistics)
+  - [数学公式](#数学公式)
+    - [M/M/1 关键公式](#mm1-关键公式)
+    - [M/M/c 关键公式（Erlang-C）](#mmc-关键公式erlang-c)
+  - [示例](#示例)
+  - [错误处理与边界](#错误处理与边界)
+  - [最佳实践](#最佳实践)
+  - [版本](#版本)
+  - [3. 排队论模型 API 参考](#3-排队论模型-api-参考)
+  - [3.1 目录](#31-目录)
+  - [3.2 概述](#32-概述)
+  - [3.3 主要类型](#33-主要类型)
+    - [3.3.1 MM1Queue](#331-mm1queue)
+      - [3.3.1.1 构造函数](#3311-构造函数)
+      - [3.3.1.2 主要方法](#3312-主要方法)
+      - [3.3.1.3 使用示例](#3313-使用示例)
+    - [3.3.2 MMcQueue](#332-mmcqueue)
+      - [3.3.2.1 构造函数](#3321-构造函数)
+      - [3.3.2.2 主要方法](#3322-主要方法)
+    - [3.3.3 PerformanceAnalyzer](#333-performanceanalyzer)
+      - [3.3.3.1 主要方法](#3331-主要方法)
+    - [3.3.4 ReliabilityAnalyzer](#334-reliabilityanalyzer)
+      - [3.3.4.1 主要方法](#3341-主要方法)
+    - [3.3.5 ScalabilityAnalyzer](#335-scalabilityanalyzer)
+      - [3.3.5.1 主要方法](#3351-主要方法)
+  - [3.4 结果类型](#34-结果类型)
+    - [3.4.1 SimulationResult](#341-simulationresult)
+    - [3.4.2 ScalingResult](#342-scalingresult)
+    - [3.4.3 MetricStatistics](#343-metricstatistics)
+  - [3.5 错误处理](#35-错误处理)
+  - [3.6 数学公式](#36-数学公式)
+    - [3.6.1 M/M/1 模型公式](#361-mm1-模型公式)
+    - [3.6.2 M/M/c 模型公式](#362-mmc-模型公式)
+  - [3.7 性能考虑](#37-性能考虑)
+  - [3.8 使用建议](#38-使用建议)
+
 ## 概述
 
 提供 M/M/1、M/M/c 等经典排队系统的建模与分析 API，以及性能/可靠性/可扩展性分析工具。
@@ -117,6 +168,7 @@ println!("Wq = {:.3}", qc.avg_wait_time());
 ## 3.1 目录
 
 - [排队论模型 API 参考](#排队论模型-api-参考)
+  - [📋 目录](#-目录)
   - [概述](#概述)
   - [主要类型](#主要类型)
     - [MM1Queue {#mm1queue}](#mm1queue-mm1queue)

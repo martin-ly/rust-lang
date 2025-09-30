@@ -47,6 +47,7 @@ graph TB
 ### 1. 形式化规范定义
 
 #### TCP协议规范
+
 ```rust
 // TCP状态机形式化定义
 pub struct TcpFormalSpec {
@@ -63,6 +64,7 @@ pub fn is_valid_transition(&self, from: TcpState, to: TcpState, event: TcpEvent)
 ```
 
 #### HTTP协议规范
+
 ```rust
 // HTTP协议形式化定义
 pub struct HttpFormalSpec {
@@ -81,6 +83,7 @@ pub fn is_valid_request(&self, method: &HttpMethod, headers: &HashMap<String, St
 ### 2. 不变量定义和验证
 
 #### 连接状态不变量
+
 ```rust
 // 连接状态不变量
 pub struct TcpInvariant {
@@ -110,6 +113,7 @@ pub fn check_invariant(&self, state: &ConnectionState, invariant: &TcpInvariant)
 ### 1. 状态空间探索
 
 #### 模型检查器实现
+
 ```rust
 // 模型检查器
 pub struct ModelChecker {
@@ -157,6 +161,7 @@ fn explore_state_space(&mut self, initial_state: NetworkState) -> NetworkResult<
 ### 2. TLA+集成
 
 #### TLA+规范生成
+
 ```rust
 // TLA+模型检查器
 pub struct TlaModelChecker {
@@ -190,6 +195,7 @@ pub fn generate_spec(&self, model: &SemanticModel) -> String {
 ### 1. Coq形式化证明
 
 #### 网络协议正确性证明
+
 ```coq
 (* Coq网络协议证明 *)
 Require Import Coq.Arith.Arith.
@@ -272,6 +278,7 @@ Qed.
 ### 2. Lean形式化证明
 
 #### 性能分析证明
+
 ```lean
 -- Lean网络性能模型
 import data.nat.basic
@@ -331,6 +338,7 @@ end
 ### 1. 运行时属性检查
 
 #### 属性检查器实现
+
 ```rust
 // 属性检查器trait
 pub trait PropertyChecker {
@@ -380,6 +388,7 @@ impl PropertyChecker for ConnectionPropertyChecker {
 ### 2. 安全属性验证
 
 #### 认证和加密验证
+
 ```rust
 // 安全属性检查器
 pub struct SecurityPropertyChecker {
@@ -444,6 +453,7 @@ impl PropertyChecker for SecurityPropertyChecker {
 ### 1. 验证报告生成
 
 #### 综合验证报告
+
 ```rust
 // 验证报告生成器
 pub struct VerificationReportGenerator {
@@ -505,6 +515,7 @@ impl VerificationReportGenerator {
 ### 2. 持续验证集成
 
 #### CI/CD集成
+
 ```yaml
 # GitHub Actions工作流
 name: Formal Verification
@@ -573,6 +584,7 @@ jobs:
 ### 1. 快速开始
 
 #### 基本使用
+
 ```rust
 use c10_networks::semantics::*;
 
@@ -594,6 +606,7 @@ println!("验证结果: {}", if result.success { "通过" } else { "失败" });
 ### 2. 高级用法
 
 #### 自定义属性检查器
+
 ```rust
 // 自定义属性检查器
 struct CustomPropertyChecker {
@@ -634,6 +647,7 @@ impl PropertyChecker for CustomPropertyChecker {
 ### 1. 并行验证
 
 #### 并行模型检查
+
 ```rust
 // 并行模型检查器
 pub struct ParallelModelChecker {
@@ -666,6 +680,7 @@ impl ParallelModelChecker {
 ### 2. 状态压缩
 
 #### 状态哈希和压缩
+
 ```rust
 // 状态压缩器
 pub struct StateCompressor {
@@ -706,6 +721,7 @@ impl StateCompressor {
 ### 1. 机器学习集成
 
 #### AI辅助验证
+
 ```rust
 // AI辅助属性生成
 pub struct AIPropertyGenerator {
@@ -730,6 +746,7 @@ impl AIPropertyGenerator {
 ### 2. 分布式验证
 
 #### 分布式模型检查
+
 ```rust
 // 分布式验证协调器
 pub struct DistributedVerificationCoordinator {
