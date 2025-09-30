@@ -116,7 +116,7 @@ doc-comment = "0.3.3"
 loom = "0.7.2"
 
 [features]
-default = ["std", "enhanced-math", "advanced-algorithms"]
+default = ["std", "enhanced-math", "advanced-algorithms", "tokio-adapter"]
 std = []
 no-std = []
 
@@ -170,4 +170,12 @@ harness = false
 name = "rust_190_performance_bench"
 harness = false
 
+# 速率限制延迟基准（需 tokio-adapter）
+[[bench]]
+name = "rate_limit_latency"
+harness = false
+
 # Profile configurations are managed at workspace root level
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(loom)'] }

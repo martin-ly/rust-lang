@@ -1,27 +1,29 @@
 //! 最小 Actor 模型示例：邮箱容量 + 背压 + 取消
 //! 运行：
-//!   cargo run -p c18_model --example concurrency_actor --features tokio-adapter
+//!   cargo run -p c12_model --example concurrency_actor --features tokio-adapter
 
 #[cfg(feature = "tokio-adapter")]
 #[tokio::main(flavor = "current_thread")]
 async fn main() {
-    use c18_model::runtime_abi::Channel as _;
-    use c18_model::runtime_tokio::{TokioCancellationToken, TokioChannel, TokioSpawner};
+    use tokio::sync::mpsc;
+    use tokio_util::sync::CancellationToken;
 
-    let spawner = TokioSpawner;
-    let cancel = TokioCancellationToken::new();
-    let (tx, mut rx) = <TokioChannel as c18_model::runtime_abi::Channel<&'static str>>::bounded(4);
+    let cancel = CancellationToken::new();
+    let (tx, mut rx) = mpsc::channel::<&'static str>(4);
 
-    let actor = spawner.spawn(async move {
-        let mut handled = 0usize;
-        loop {
-            tokio::select! {
-                _ = cancel.cancelled() => break handled,
-                Some(msg) = rx.recv() => {
-                    handled += 1;
-                    if msg == "stop" { break handled; }
+    let actor = tokio::spawn({
+        let cancel = cancel.clone();
+        async move {
+            let mut handled = 0usize;
+            loop {
+                tokio::select! {
+                    _ = cancel.cancelled() => break handled,
+                    Some(msg) = rx.recv() => {
+                        handled += 1;
+                        if msg == "stop" { break handled; }
+                    }
+                    else => break handled,
                 }
-                else => break handled,
             }
         }
     });
@@ -33,7 +35,7 @@ async fn main() {
     }
     let _ = tx.send("stop").await;
 
-    let handled = actor.await;
+    let handled = actor.await.unwrap();
     cancel.cancel();
     println!("actor handled={}", handled);
 }

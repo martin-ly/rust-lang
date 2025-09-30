@@ -23,3 +23,15 @@
 
 - 可选特性：`c20-integration`
 - 示例：`examples/c20_integration_demo.rs`
+
+## 进一步阅读（Rust 1.90 对齐）
+
+- 同步与异步分类与等价关系：`./async-sync-classification.md`
+- 消息队列与背压模型：`./backpressure-models.md`
+- 递归异步与组合模式：`./async-recursion.md`
+
+## 检查清单（快速自检）
+
+- 异步路径是否包含阻塞调用？如有请改为异步替代或 `spawn_blocking`。
+- 是否设置了队列容量与溢出策略？是否有度量丢弃率与p99延迟？
+- 是否定义了取消/超时/重试策略并保证可观测性？

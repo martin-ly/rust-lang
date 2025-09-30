@@ -324,6 +324,12 @@ cargo run --example mathematical_modeling
 
 # 综合演示
 cargo run --example comprehensive_demo
+
+# 异步背压示例（需要特性）
+cargo run -p c12_model --example async_backpressure_demo --features tokio-adapter,tower-examples
+
+# 递归异步与结构化并发示例
+cargo run -p c12_model --example async_recursion_examples --features tokio-adapter
 ```
 
 ## 🏗️ 架构
@@ -401,6 +407,16 @@ export PLOT_BACKEND="svg"
 export PLOT_RESOLUTION="300"
 export PLOT_THEME="default"
 ```
+
+## 🧭 新增文档导航（Rust 1.90 并发/语义/算法/架构）
+
+- 并发/异步：`docs/concurrency/async-sync-classification.md`
+- 背压模型：`docs/concurrency/backpressure-models.md`
+- 递归异步：`docs/concurrency/async-recursion.md`
+- 语言语义：`docs/formal/language-semantics.md`
+- 设计分层：`docs/architecture/design-models.md`
+- 分布式与微服务：`docs/architecture/distributed-design.md`
+- 算法模型：`docs/algorithms/models.md`
 
 ### 配置文件
 

@@ -10,6 +10,13 @@
 cargo run --example system_modeling_examples
 cargo run --example machine_learning_examples
 cargo run --example formal_methods_examples
+
+# 并发/异步与稳态示例（需要 features）
+cargo run -p c12_model --example async_backpressure_bounded --features tokio-adapter
+cargo run -p c12_model --example joinset_semaphore_divide --features tokio-adapter
+cargo run -p c12_model --example tower_client_stack --features tokio-adapter,tower-examples
+cargo run -p c12_model --example divide_and_pipeline --features tokio-adapter
+cargo run -p c12_model --example consumer_idempotent_sim --features tokio-adapter
 ```
 
 ## 示例清单
@@ -30,6 +37,8 @@ cargo run --example formal_methods_examples
 cargo run -p c18_model --example concurrency_csp --features tokio-adapter
 cargo run -p c18_model --example concurrency_actor --features tokio-adapter
 cargo run -p c18_model --example concurrency_structured --features tokio-adapter
+cargo run -p c12_model --example async_backpressure_bounded --features tokio-adapter
+cargo run -p c12_model --example tower_client_stack --features tokio-adapter,tower-examples
 ```
 
 运行方式（async-std）：

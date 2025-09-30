@@ -1,0 +1,17 @@
+{
+    "mcpServers": {
+        "chrome-devtools": {
+        "command": "npx",
+        "args": ["chrome-devtools-mcp@latest"]
+        },
+        "postgres": {
+            "command": "npx",
+            "args": [
+              "-y",
+              "@modelcontextprotocol/server-postgres",
+              "postgresql://postgres:666110@host:5432/数据库名"
+            ]
+          }
+    }
+
+}
