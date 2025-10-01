@@ -1066,4 +1066,432 @@ mod tests {
         assert!(metadata.completed_at.is_some());
         assert!(metadata.execution_time.is_some());
     }
+    
+    #[test]
+    fn test_token_bucket() {
+        let bucket = TokenBucket::new(10.0, 100);
+        assert_eq!(bucket.tokens(), 100);
+        
+        assert!(bucket.try_acquire(50).is_ok());
+        assert_eq!(bucket.tokens(), 50);
+        
+        assert!(bucket.try_acquire(60).is_err());
+        assert_eq!(bucket.tokens(), 50);
+    }
+    
+    #[test]
+    fn test_leaky_bucket() {
+        let bucket = LeakyBucket::new(10.0, 100);
+        assert_eq!(bucket.size(), 0);
+        
+        assert!(bucket.try_add(50).is_ok());
+        assert_eq!(bucket.size(), 50);
+    }
+}
+
+// ========== 高级流量控制算法 ==========
+
+/// 令牌桶算法 (Token Bucket)
+/// 
+/// 用于流量整形和限流，允许一定程度的突发流量
+/// 
+/// # 特点
+/// - 允许突发流量（桶内有足够令牌时）
+/// - 平滑限流（令牌以恒定速率补充）
+/// - 灵活配置（桶容量和令牌生成速率）
+#[derive(Debug, Clone)]
+pub struct TokenBucket {
+    /// 令牌生成速率 (tokens/second)
+    rate: f64,
+    /// 桶容量（最大令牌数）
+    capacity: usize,
+    /// 当前令牌数
+    tokens: Arc<Mutex<f64>>,
+    /// 上次更新时间
+    last_update: Arc<Mutex<Instant>>,
+}
+
+impl TokenBucket {
+    /// 创建新的令牌桶
+    pub fn new(rate: f64, capacity: usize) -> Self {
+        Self {
+            rate,
+            capacity,
+            tokens: Arc::new(Mutex::new(capacity as f64)),
+            last_update: Arc::new(Mutex::new(Instant::now())),
+        }
+    }
+    
+    /// 尝试获取指定数量的令牌
+    pub fn try_acquire(&self, count: usize) -> AsyncResult<()> {
+        self.refill()?;
+        
+        let mut tokens = self.tokens.lock()
+            .map_err(|e| ModelError::LockError(format!("Failed to lock tokens: {}", e)))?;
+        
+        if *tokens >= count as f64 {
+            *tokens -= count as f64;
+            Ok(())
+        } else {
+            Err(ModelError::RateLimitExceeded(format!(
+                "Insufficient tokens: need {}, have {:.2}",
+                count, *tokens
+            )))
+        }
+    }
+    
+    /// 阻塞等待直到获取到令牌
+    #[cfg(feature = "tokio-adapter")]
+    pub async fn acquire(&self, count: usize) -> AsyncResult<()> {
+        loop {
+            match self.try_acquire(count) {
+                Ok(()) => return Ok(()),
+                Err(_) => {
+                    // 计算需要等待的时间
+                    let wait_time = self.calculate_wait_time(count)?;
+                    sleep(wait_time).await;
+                }
+            }
+        }
+    }
+    
+    /// 补充令牌
+    fn refill(&self) -> AsyncResult<()> {
+        let now = Instant::now();
+        let mut last_update = self.last_update.lock()
+            .map_err(|e| ModelError::LockError(format!("Failed to lock last_update: {}", e)))?;
+        
+        let elapsed = now.duration_since(*last_update).as_secs_f64();
+        let new_tokens = elapsed * self.rate;
+        
+        if new_tokens > 0.0 {
+            let mut tokens = self.tokens.lock()
+                .map_err(|e| ModelError::LockError(format!("Failed to lock tokens: {}", e)))?;
+            
+            *tokens = (*tokens + new_tokens).min(self.capacity as f64);
+            *last_update = now;
+        }
+        
+        Ok(())
+    }
+    
+    /// 计算等待时间
+    fn calculate_wait_time(&self, count: usize) -> AsyncResult<Duration> {
+        let tokens = self.tokens.lock()
+            .map_err(|e| ModelError::LockError(format!("Failed to lock tokens: {}", e)))?;
+        
+        let deficit = (count as f64 - *tokens).max(0.0);
+        let wait_secs = deficit / self.rate;
+        
+        Ok(Duration::from_secs_f64(wait_secs))
+    }
+    
+    /// 获取当前令牌数
+    pub fn tokens(&self) -> usize {
+        self.tokens.lock()
+            .map(|t| *t as usize)
+            .unwrap_or(0)
+    }
+    
+    /// 获取桶容量
+    pub fn capacity(&self) -> usize {
+        self.capacity
+    }
+    
+    /// 获取令牌生成速率
+    pub fn rate(&self) -> f64 {
+        self.rate
+    }
+}
+
+/// 漏桶算法 (Leaky Bucket)
+/// 
+/// 用于流量整形，强制恒定的输出速率
+/// 
+/// # 特点
+/// - 平滑输出流量
+/// - 不允许突发（严格限流）
+/// - 简单易实现
+#[derive(Debug, Clone)]
+pub struct LeakyBucket {
+    /// 漏出速率 (items/second)
+    leak_rate: f64,
+    /// 桶容量
+    capacity: usize,
+    /// 当前桶内数据量
+    size: Arc<Mutex<usize>>,
+    /// 上次漏出时间
+    last_leak: Arc<Mutex<Instant>>,
+}
+
+impl LeakyBucket {
+    /// 创建新的漏桶
+    pub fn new(leak_rate: f64, capacity: usize) -> Self {
+        Self {
+            leak_rate,
+            capacity,
+            size: Arc::new(Mutex::new(0)),
+            last_leak: Arc::new(Mutex::new(Instant::now())),
+        }
+    }
+    
+    /// 尝试添加数据到桶中
+    pub fn try_add(&self, count: usize) -> AsyncResult<()> {
+        self.leak()?;
+        
+        let mut size = self.size.lock()
+            .map_err(|e| ModelError::LockError(format!("Failed to lock size: {}", e)))?;
+        
+        if *size + count <= self.capacity {
+            *size += count;
+            Ok(())
+        } else {
+            Err(ModelError::RateLimitExceeded(format!(
+                "Bucket overflow: capacity {}, current {}, trying to add {}",
+                self.capacity, *size, count
+            )))
+        }
+    }
+    
+    /// 阻塞等待直到可以添加数据
+    #[cfg(feature = "tokio-adapter")]
+    pub async fn add(&self, count: usize) -> AsyncResult<()> {
+        loop {
+            match self.try_add(count) {
+                Ok(()) => return Ok(()),
+                Err(_) => {
+                    // 等待一段时间让桶漏出
+                    let wait_time = self.calculate_wait_time(count)?;
+                    sleep(wait_time).await;
+                }
+            }
+        }
+    }
+    
+    /// 漏出数据
+    fn leak(&self) -> AsyncResult<()> {
+        let now = Instant::now();
+        let mut last_leak = self.last_leak.lock()
+            .map_err(|e| ModelError::LockError(format!("Failed to lock last_leak: {}", e)))?;
+        
+        let elapsed = now.duration_since(*last_leak).as_secs_f64();
+        let leaked = (elapsed * self.leak_rate) as usize;
+        
+        if leaked > 0 {
+            let mut size = self.size.lock()
+                .map_err(|e| ModelError::LockError(format!("Failed to lock size: {}", e)))?;
+            
+            *size = size.saturating_sub(leaked);
+            *last_leak = now;
+        }
+        
+        Ok(())
+    }
+    
+    /// 计算等待时间
+    fn calculate_wait_time(&self, count: usize) -> AsyncResult<Duration> {
+        let size = self.size.lock()
+            .map_err(|e| ModelError::LockError(format!("Failed to lock size: {}", e)))?;
+        
+        let overflow = (*size + count).saturating_sub(self.capacity);
+        let wait_secs = overflow as f64 / self.leak_rate;
+        
+        Ok(Duration::from_secs_f64(wait_secs))
+    }
+    
+    /// 获取当前桶内数据量
+    pub fn size(&self) -> usize {
+        self.size.lock()
+            .map(|s| *s)
+            .unwrap_or(0)
+    }
+    
+    /// 获取桶容量
+    pub fn capacity(&self) -> usize {
+        self.capacity
+    }
+    
+    /// 获取漏出速率
+    pub fn leak_rate(&self) -> f64 {
+        self.leak_rate
+    }
+}
+
+/// 滑动窗口限流器
+/// 
+/// 用于精确的时间窗口内的请求限制
+#[derive(Debug, Clone)]
+pub struct SlidingWindowRateLimiter {
+    /// 窗口大小
+    window_size: Duration,
+    /// 最大请求数
+    max_requests: usize,
+    /// 请求时间戳队列
+    timestamps: Arc<Mutex<VecDeque<Instant>>>,
+}
+
+impl SlidingWindowRateLimiter {
+    /// 创建新的滑动窗口限流器
+    pub fn new(window_size: Duration, max_requests: usize) -> Self {
+        Self {
+            window_size,
+            max_requests,
+            timestamps: Arc::new(Mutex::new(VecDeque::new())),
+        }
+    }
+    
+    /// 尝试获取许可
+    pub fn try_acquire(&self) -> AsyncResult<()> {
+        let now = Instant::now();
+        let window_start = now - self.window_size;
+        
+        let mut timestamps = self.timestamps.lock()
+            .map_err(|e| ModelError::LockError(format!("Failed to lock timestamps: {}", e)))?;
+        
+        // 移除窗口外的时间戳
+        while let Some(ts) = timestamps.front() {
+            if *ts < window_start {
+                timestamps.pop_front();
+            } else {
+                break;
+            }
+        }
+        
+        // 检查是否超过限制
+        if timestamps.len() < self.max_requests {
+            timestamps.push_back(now);
+            Ok(())
+        } else {
+            Err(ModelError::RateLimitExceeded(format!(
+                "Rate limit exceeded: {} requests in {:?}",
+                timestamps.len(), self.window_size
+            )))
+        }
+    }
+    
+    /// 获取当前窗口内的请求数
+    pub fn current_count(&self) -> usize {
+        let now = Instant::now();
+        let window_start = now - self.window_size;
+        
+        self.timestamps.lock()
+            .map(|mut ts| {
+                while let Some(t) = ts.front() {
+                    if *t < window_start {
+                        ts.pop_front();
+                    } else {
+                        break;
+                    }
+                }
+                ts.len()
+            })
+            .unwrap_or(0)
+    }
+}
+
+/// 自适应限流器
+/// 
+/// 根据系统负载动态调整限流策略
+#[derive(Debug, Clone)]
+pub struct AdaptiveRateLimiter {
+    /// 基础速率
+    base_rate: f64,
+    /// 当前速率
+    current_rate: Arc<Mutex<f64>>,
+    /// 最小速率
+    min_rate: f64,
+    /// 最大速率
+    max_rate: f64,
+    /// 成功计数
+    success_count: Arc<Mutex<usize>>,
+    /// 失败计数
+    failure_count: Arc<Mutex<usize>>,
+    /// 调整间隔
+    adjustment_interval: Duration,
+    /// 上次调整时间
+    last_adjustment: Arc<Mutex<Instant>>,
+}
+
+impl AdaptiveRateLimiter {
+    /// 创建新的自适应限流器
+    pub fn new(base_rate: f64, min_rate: f64, max_rate: f64, adjustment_interval: Duration) -> Self {
+        Self {
+            base_rate,
+            current_rate: Arc::new(Mutex::new(base_rate)),
+            min_rate,
+            max_rate,
+            success_count: Arc::new(Mutex::new(0)),
+            failure_count: Arc::new(Mutex::new(0)),
+            adjustment_interval,
+            last_adjustment: Arc::new(Mutex::new(Instant::now())),
+        }
+    }
+    
+    /// 记录成功
+    pub fn record_success(&self) -> AsyncResult<()> {
+        let mut count = self.success_count.lock()
+            .map_err(|e| ModelError::LockError(format!("Failed to lock success_count: {}", e)))?;
+        *count += 1;
+        self.adjust_rate()?;
+        Ok(())
+    }
+    
+    /// 记录失败
+    pub fn record_failure(&self) -> AsyncResult<()> {
+        let mut count = self.failure_count.lock()
+            .map_err(|e| ModelError::LockError(format!("Failed to lock failure_count: {}", e)))?;
+        *count += 1;
+        self.adjust_rate()?;
+        Ok(())
+    }
+    
+    /// 调整速率
+    fn adjust_rate(&self) -> AsyncResult<()> {
+        let now = Instant::now();
+        let mut last_adjustment = self.last_adjustment.lock()
+            .map_err(|e| ModelError::LockError(format!("Failed to lock last_adjustment: {}", e)))?;
+        
+        if now.duration_since(*last_adjustment) < self.adjustment_interval {
+            return Ok(());
+        }
+        
+        let success = *self.success_count.lock()
+            .map_err(|e| ModelError::LockError(format!("Failed to lock success_count: {}", e)))?;
+        let failure = *self.failure_count.lock()
+            .map_err(|e| ModelError::LockError(format!("Failed to lock failure_count: {}", e)))?;
+        
+        let total = success + failure;
+        if total == 0 {
+            return Ok(());
+        }
+        
+        let success_rate = success as f64 / total as f64;
+        let mut current_rate = self.current_rate.lock()
+            .map_err(|e| ModelError::LockError(format!("Failed to lock current_rate: {}", e)))?;
+        
+        // 根据成功率调整速率
+        if success_rate > 0.95 {
+            // 成功率高，增加速率
+            *current_rate = (*current_rate * 1.1).min(self.max_rate);
+        } else if success_rate < 0.85 {
+            // 成功率低，降低速率
+            *current_rate = (*current_rate * 0.9).max(self.min_rate);
+        }
+        
+        // 重置计数器
+        *self.success_count.lock()
+            .map_err(|e| ModelError::LockError(format!("Failed to lock success_count: {}", e)))? = 0;
+        *self.failure_count.lock()
+            .map_err(|e| ModelError::LockError(format!("Failed to lock failure_count: {}", e)))? = 0;
+        *last_adjustment = now;
+        
+        Ok(())
+    }
+    
+    /// 获取当前速率
+    pub fn current_rate(&self) -> f64 {
+        self.current_rate.lock()
+            .map(|r| *r)
+            .unwrap_or(self.base_rate)
+    }
 }

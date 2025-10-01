@@ -138,6 +138,8 @@ pub use language_models::{
 pub use async_models::{
     AsyncMessageQueue, AsyncTaskScheduler, AsyncStateMachine, CoroutinePool, AsyncModelEngine,
     FlowControlConfig, BackpressureStrategy, TaskPriority, AsyncMessage, AsyncResult,
+    // 高级流量控制
+    TokenBucket, LeakyBucket, SlidingWindowRateLimiter, AdaptiveRateLimiter,
 };
 
 // 异步同步模型重新导出
@@ -155,6 +157,8 @@ pub use recursive_async_models::{
 // 算法模型重新导出
 pub use algorithm_models::{
     SortingAlgorithms, SearchingAlgorithms, DynamicProgrammingAlgorithms, GreedyAlgorithms,
+    // 新增算法类型
+    StringAlgorithms, MathematicalAlgorithms,
     AlgorithmRelationshipAnalyzer, AlgorithmCharacteristics, AlgorithmComplexity, ComplexityClass,
     AlgorithmMetrics, AlgorithmResult,
 };
@@ -165,6 +169,10 @@ pub use distributed_models::{
     FailureDetector, MultiThreadTaskExecutor, CAPTheoremAnalyzer, DistributedSystemConfig,
     ConsistencyLevel, CAPProperty, SystemStatus, DistributedResult,
     LoadBalancer as DistributedLoadBalancer,
+    // 共识算法
+    PaxosProtocol, PaxosMessage,
+    TwoPhaseCommit, TwoPhaseMessage, TransactionState, VoteResult,
+    ThreePhaseCommit, ThreePhaseMessage, ThreePhaseState,
 };
 
 // 微服务模型重新导出
@@ -173,6 +181,13 @@ pub use microservice_models::{
     ConfigurationManager, ServiceInstance, MicroserviceResult,
     MiddlewareWrapper, ServiceWatcherWrapper, ConfigWatcherWrapper,
     LoadBalancer as MicroserviceLoadBalancer, RateLimiter,
+    // 服务网格
+    ServiceMesh, SidecarProxy, ProxyFeature, ProxyStats, MeshStats,
+    TrafficRule, TrafficSplit, RetryPolicy, SecurityPolicy, JwtValidation, AccessRule,
+    ObservabilityConfig,
+    LogLevel as MicroserviceLogLevel,
+    // 分布式追踪
+    DistributedTracing, Trace, Span, SpanLog, SpanStatus, TraceStatus, TracingStats,
 };
 
 // 并行并发模型重新导出
@@ -181,6 +196,11 @@ pub use parallel_concurrent_models::{
     CSPChannel, CSPProcess, CSPSystem,
     SharedMemory, TransactionalMemory,
     DataParallelExecutor, ForkJoinPool, MapReduceExecutor,
+    // 新增并行模型
+    TaskParallelExecutor, ParallelTask,
+    PipelineExecutor, PipelineStage,
+    WorkStealingScheduler, WorkStealingTask,
+    ParallelPattern, ParallelPatternAnalyzer, ParallelPatternCharacteristics,
     ConcurrencyModelAnalyzer, ConcurrencyModel, ConcurrencyModelCharacteristics,
     ConcurrentResult,
 };
@@ -189,6 +209,10 @@ pub use parallel_concurrent_models::{
 pub use program_design_models::{
     Functor, Monad, Lazy, HigherOrderFunctions, ImmutableList,
     OOPObject, BankAccount, Account, Observer, Observable, Subject,
+    // 新增反应式流和数据流模型
+    ReactiveSubscriber, ReactiveSubscription, ReactivePublisher, ReactiveProcessor,
+    ReactiveStream, ReactiveOperators,
+    DataflowNode, DataflowGraph, DataflowVariable, DataflowPipeline, DataflowCombinator,
     ProgrammingParadigmAnalyzer, ProgrammingParadigm, ParadigmCharacteristics,
     ProgramResult,
 };
@@ -201,6 +225,9 @@ pub use architecture_design_models::{
     Command, Query, CommandBus, QueryBus, CQRSModel,
     Entity, UseCase, InterfaceAdapter, UserRepository,
     Plugin, Microkernel, FaaSFunction, ServerlessPlatform,
+    // 新增架构模型
+    Filter, PipelineArchitecture, PipelineSplitter,
+    Peer, P2PNetwork, P2PTopology, P2PNetworkBuilder,
     ArchitecturePatternAnalyzer, ArchitecturePattern, ArchitectureCharacteristics,
     ArchitectureResult,
 };

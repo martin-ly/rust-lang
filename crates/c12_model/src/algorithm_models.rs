@@ -841,6 +841,774 @@ impl GreedyAlgorithms {
         metrics.set_execution_time(start_time.elapsed());
         Ok(distances)
     }
+    
+    /// Floyd-Warshall全源最短路径算法
+    /// 
+    /// 计算所有顶点对之间的最短路径
+    /// 时间复杂度: O(V³)
+    /// 空间复杂度: O(V²)
+    pub fn floyd_warshall<T>(
+        vertices: &[T],
+        edges: &[(T, T, f64)], // (from, to, weight)
+        metrics: &mut AlgorithmMetrics,
+    ) -> AlgorithmResult<HashMap<(T, T), f64>>
+    where
+        T: Clone + Eq + Hash,
+    {
+        let start_time = Instant::now();
+        let mut dist: HashMap<(T, T), f64> = HashMap::new();
+        
+        // 初始化距离矩阵
+        for v1 in vertices {
+            for v2 in vertices {
+                if v1 == v2 {
+                    dist.insert((v1.clone(), v2.clone()), 0.0);
+                } else {
+                    dist.insert((v1.clone(), v2.clone()), f64::INFINITY);
+                }
+            }
+        }
+        
+        // 设置边的权重
+        for (from, to, weight) in edges {
+            dist.insert((from.clone(), to.clone()), *weight);
+        }
+        
+        // Floyd-Warshall核心算法
+        for k in vertices {
+            for i in vertices {
+                for j in vertices {
+                    metrics.record_comparison();
+                    let ik = dist.get(&(i.clone(), k.clone())).copied().unwrap_or(f64::INFINITY);
+                    let kj = dist.get(&(k.clone(), j.clone())).copied().unwrap_or(f64::INFINITY);
+                    let ij = dist.get(&(i.clone(), j.clone())).copied().unwrap_or(f64::INFINITY);
+                    
+                    if ik + kj < ij {
+                        dist.insert((i.clone(), j.clone()), ik + kj);
+                    }
+                }
+            }
+        }
+        
+        metrics.set_execution_time(start_time.elapsed());
+        Ok(dist)
+    }
+    
+    /// Bellman-Ford最短路径算法（支持负权边）
+    /// 
+    /// 时间复杂度: O(VE)
+    /// 空间复杂度: O(V)
+    pub fn bellman_ford<T>(
+        vertices: &[T],
+        edges: &[(T, T, f64)],
+        start: &T,
+        metrics: &mut AlgorithmMetrics,
+    ) -> AlgorithmResult<HashMap<T, f64>>
+    where
+        T: Clone + Eq + Hash,
+    {
+        let start_time = Instant::now();
+        let mut distances: HashMap<T, f64> = HashMap::new();
+        
+        // 初始化距离
+        for v in vertices {
+            distances.insert(v.clone(), f64::INFINITY);
+        }
+        distances.insert(start.clone(), 0.0);
+        
+        // 松弛边 |V| - 1 次
+        for _ in 0..vertices.len() - 1 {
+            for (from, to, weight) in edges {
+                metrics.record_comparison();
+                let dist_from = distances.get(from).copied().unwrap_or(f64::INFINITY);
+                let dist_to = distances.get(to).copied().unwrap_or(f64::INFINITY);
+                
+                if dist_from + weight < dist_to {
+                    distances.insert(to.clone(), dist_from + weight);
+                }
+            }
+        }
+        
+        // 检测负权环
+        for (from, to, weight) in edges {
+            let dist_from = distances.get(from).copied().unwrap_or(f64::INFINITY);
+            let dist_to = distances.get(to).copied().unwrap_or(f64::INFINITY);
+            
+            if dist_from + weight < dist_to {
+                return Err(ModelError::ComputationError(
+                    "图中存在负权环".to_string()
+                ));
+            }
+        }
+        
+        metrics.set_execution_time(start_time.elapsed());
+        Ok(distances)
+    }
+    
+    /// Kruskal最小生成树算法
+    /// 
+    /// 时间复杂度: O(E log E)
+    /// 空间复杂度: O(V + E)
+    pub fn kruskal<T>(
+        vertices: &[T],
+        edges: &[(T, T, f64)],
+        metrics: &mut AlgorithmMetrics,
+    ) -> AlgorithmResult<Vec<(T, T, f64)>>
+    where
+        T: Clone + Eq + Hash,
+    {
+        let start_time = Instant::now();
+        let mut result = Vec::new();
+        let mut parent: HashMap<T, T> = HashMap::new();
+        let mut rank: HashMap<T, usize> = HashMap::new();
+        
+        // 初始化并查集
+        for v in vertices {
+            parent.insert(v.clone(), v.clone());
+            rank.insert(v.clone(), 0);
+        }
+        
+        // 按权重排序边
+        let mut sorted_edges = edges.to_vec();
+        sorted_edges.sort_by(|a, b| a.2.partial_cmp(&b.2).unwrap_or(Ordering::Equal));
+        
+        // 查找根节点
+        fn find<T: Clone + Eq + Hash>(parent: &mut HashMap<T, T>, x: &T) -> T {
+            let parent_x = parent.get(x).cloned().unwrap();
+            if parent_x != *x {
+                let root = find(parent, &parent_x);
+                parent.insert(x.clone(), root.clone());
+                root
+            } else {
+                x.clone()
+            }
+        }
+        
+        // 合并集合
+        fn union<T: Clone + Eq + Hash>(
+            parent: &mut HashMap<T, T>,
+            rank: &mut HashMap<T, usize>,
+            x: &T,
+            y: &T,
+        ) {
+            let root_x = find(parent, x);
+            let root_y = find(parent, y);
+            
+            if root_x != root_y {
+                let rank_x = rank.get(&root_x).copied().unwrap_or(0);
+                let rank_y = rank.get(&root_y).copied().unwrap_or(0);
+                
+                if rank_x < rank_y {
+                    parent.insert(root_x, root_y);
+                } else if rank_x > rank_y {
+                    parent.insert(root_y, root_x);
+                } else {
+                    parent.insert(root_y, root_x.clone());
+                    rank.insert(root_x, rank_x + 1);
+                }
+            }
+        }
+        
+        // 贪心选择边
+        for (from, to, weight) in sorted_edges {
+            metrics.record_comparison();
+            let root_from = find(&mut parent, &from);
+            let root_to = find(&mut parent, &to);
+            
+            if root_from != root_to {
+                result.push((from.clone(), to.clone(), weight));
+                union(&mut parent, &mut rank, &from, &to);
+                
+                if result.len() == vertices.len() - 1 {
+                    break;
+                }
+            }
+        }
+        
+        metrics.set_execution_time(start_time.elapsed());
+        Ok(result)
+    }
+    
+    /// Prim最小生成树算法
+    /// 
+    /// 时间复杂度: O(E log V)
+    /// 空间复杂度: O(V + E)
+    pub fn prim<T>(
+        graph: &HashMap<T, Vec<(T, f64)>>,
+        start: &T,
+        metrics: &mut AlgorithmMetrics,
+    ) -> AlgorithmResult<Vec<(T, T, f64)>>
+    where
+        T: Clone + Eq + Hash + Ord,
+    {
+        let start_time = Instant::now();
+        let mut result = Vec::new();
+        let mut visited = HashSet::new();
+        let mut heap: BinaryHeap<Reverse<(OrdF64, T, T)>> = BinaryHeap::new(); // (weight, from, to)
+        
+        visited.insert(start.clone());
+        
+        // 将起始顶点的所有边加入堆
+        if let Some(neighbors) = graph.get(start) {
+            for (neighbor, weight) in neighbors {
+                heap.push(Reverse((OrdF64(*weight), start.clone(), neighbor.clone())));
+            }
+        }
+        
+        while let Some(Reverse((OrdF64(weight), from, to))) = heap.pop() {
+            if visited.contains(&to) {
+                continue;
+            }
+            
+            metrics.record_comparison();
+            visited.insert(to.clone());
+            result.push((from.clone(), to.clone(), weight));
+            
+            // 将新顶点的边加入堆
+            if let Some(neighbors) = graph.get(&to) {
+                for (neighbor, w) in neighbors {
+                    if !visited.contains(neighbor) {
+                        heap.push(Reverse((OrdF64(*w), to.clone(), neighbor.clone())));
+                    }
+                }
+            }
+        }
+        
+        metrics.set_execution_time(start_time.elapsed());
+        Ok(result)
+    }
+    
+    /// 拓扑排序（Kahn算法）
+    /// 
+    /// 时间复杂度: O(V + E)
+    /// 空间复杂度: O(V)
+    pub fn topological_sort<T>(
+        graph: &HashMap<T, Vec<T>>,
+        metrics: &mut AlgorithmMetrics,
+    ) -> AlgorithmResult<Vec<T>>
+    where
+        T: Clone + Eq + Hash,
+    {
+        let start_time = Instant::now();
+        let mut in_degree: HashMap<T, usize> = HashMap::new();
+        let mut result = Vec::new();
+        let mut queue = VecDeque::new();
+        
+        // 计算所有顶点的入度
+        for (vertex, neighbors) in graph {
+            in_degree.entry(vertex.clone()).or_insert(0);
+            for neighbor in neighbors {
+                *in_degree.entry(neighbor.clone()).or_insert(0) += 1;
+            }
+        }
+        
+        // 将所有入度为0的顶点加入队列
+        for (vertex, &degree) in &in_degree {
+            if degree == 0 {
+                queue.push_back(vertex.clone());
+            }
+        }
+        
+        // Kahn算法
+        while let Some(vertex) = queue.pop_front() {
+            metrics.record_comparison();
+            result.push(vertex.clone());
+            
+            if let Some(neighbors) = graph.get(&vertex) {
+                for neighbor in neighbors {
+                    if let Some(degree) = in_degree.get_mut(neighbor) {
+                        *degree -= 1;
+                        if *degree == 0 {
+                            queue.push_back(neighbor.clone());
+                        }
+                    }
+                }
+            }
+        }
+        
+        // 检测环
+        if result.len() != in_degree.len() {
+            return Err(ModelError::ComputationError(
+                "图中存在环，无法进行拓扑排序".to_string()
+            ));
+        }
+        
+        metrics.set_execution_time(start_time.elapsed());
+        Ok(result)
+    }
+}
+
+/// 字符串算法实现
+#[derive(Debug)]
+pub struct StringAlgorithms;
+
+impl StringAlgorithms {
+    /// KMP模式匹配算法
+    /// 
+    /// 时间复杂度: O(m + n) 其中m是模式串长度，n是文本串长度
+    /// 空间复杂度: O(m)
+    pub fn kmp_search(
+        text: &str,
+        pattern: &str,
+        metrics: &mut AlgorithmMetrics,
+    ) -> AlgorithmResult<Vec<usize>> {
+        let start_time = Instant::now();
+        let mut result = Vec::new();
+        
+        if pattern.is_empty() {
+            return Ok(result);
+        }
+        
+        let text_chars: Vec<char> = text.chars().collect();
+        let pattern_chars: Vec<char> = pattern.chars().collect();
+        let m = pattern_chars.len();
+        let n = text_chars.len();
+        
+        // 构建部分匹配表（前缀函数）
+        let mut lps = vec![0; m];
+        let mut len = 0;
+        let mut i = 1;
+        
+        while i < m {
+            metrics.record_comparison();
+            if pattern_chars[i] == pattern_chars[len] {
+                len += 1;
+                lps[i] = len;
+                i += 1;
+            } else {
+                if len != 0 {
+                    len = lps[len - 1];
+                } else {
+                    lps[i] = 0;
+                    i += 1;
+                }
+            }
+        }
+        
+        // KMP搜索
+        let mut j = 0; // pattern的索引
+        i = 0; // text的索引
+        
+        while i < n {
+            metrics.record_comparison();
+            if pattern_chars[j] == text_chars[i] {
+                i += 1;
+                j += 1;
+            }
+            
+            if j == m {
+                result.push(i - j);
+                j = lps[j - 1];
+            } else if i < n && pattern_chars[j] != text_chars[i] {
+                if j != 0 {
+                    j = lps[j - 1];
+                } else {
+                    i += 1;
+                }
+            }
+        }
+        
+        metrics.set_execution_time(start_time.elapsed());
+        Ok(result)
+    }
+    
+    /// Boyer-Moore算法
+    /// 
+    /// 时间复杂度: O(n/m) 最好情况，O(mn) 最坏情况
+    /// 空间复杂度: O(k) k是字符集大小
+    pub fn boyer_moore_search(
+        text: &str,
+        pattern: &str,
+        metrics: &mut AlgorithmMetrics,
+    ) -> AlgorithmResult<Vec<usize>> {
+        let start_time = Instant::now();
+        let mut result = Vec::new();
+        
+        if pattern.is_empty() {
+            return Ok(result);
+        }
+        
+        let text_chars: Vec<char> = text.chars().collect();
+        let pattern_chars: Vec<char> = pattern.chars().collect();
+        let m = pattern_chars.len();
+        let n = text_chars.len();
+        
+        if m > n {
+            return Ok(result);
+        }
+        
+        // 构建坏字符表
+        let mut bad_char: HashMap<char, isize> = HashMap::new();
+        for (i, &ch) in pattern_chars.iter().enumerate() {
+            bad_char.insert(ch, i as isize);
+        }
+        
+        let mut s = 0; // 文本中的偏移量
+        
+        while s <= n - m {
+            let mut j = (m - 1) as isize;
+            
+            while j >= 0 && pattern_chars[j as usize] == text_chars[s + j as usize] {
+                metrics.record_comparison();
+                j -= 1;
+            }
+            
+            if j < 0 {
+                result.push(s);
+                s += if s + m < n {
+                    m - bad_char.get(&text_chars[s + m]).copied().unwrap_or(-1) as usize - 1
+                } else {
+                    1
+                };
+            } else {
+                metrics.record_comparison();
+                let bad_char_shift = j - bad_char.get(&text_chars[s + j as usize]).copied().unwrap_or(-1);
+                s += bad_char_shift.max(1) as usize;
+            }
+        }
+        
+        metrics.set_execution_time(start_time.elapsed());
+        Ok(result)
+    }
+    
+    /// Rabin-Karp算法（滚动哈希）
+    /// 
+    /// 时间复杂度: O(m + n) 平均情况
+    /// 空间复杂度: O(1)
+    pub fn rabin_karp_search(
+        text: &str,
+        pattern: &str,
+        metrics: &mut AlgorithmMetrics,
+    ) -> AlgorithmResult<Vec<usize>> {
+        let start_time = Instant::now();
+        let mut result = Vec::new();
+        
+        if pattern.is_empty() || pattern.len() > text.len() {
+            return Ok(result);
+        }
+        
+        const BASE: u64 = 256;
+        const MOD: u64 = 101;
+        
+        let text_bytes = text.as_bytes();
+        let pattern_bytes = pattern.as_bytes();
+        let m = pattern.len();
+        let n = text.len();
+        
+        // 计算 BASE^(m-1) % MOD
+        let mut h: u64 = 1;
+        for _ in 0..m - 1 {
+            h = (h * BASE) % MOD;
+        }
+        
+        // 计算模式串和第一个窗口的哈希值
+        let mut pattern_hash: u64 = 0;
+        let mut text_hash: u64 = 0;
+        
+        for i in 0..m {
+            pattern_hash = (BASE * pattern_hash + pattern_bytes[i] as u64) % MOD;
+            text_hash = (BASE * text_hash + text_bytes[i] as u64) % MOD;
+        }
+        
+        // 滑动窗口
+        for i in 0..=n - m {
+            metrics.record_comparison();
+            
+            // 哈希值匹配时，验证实际字符串
+            if pattern_hash == text_hash {
+                let mut match_found = true;
+                for j in 0..m {
+                    metrics.record_comparison();
+                    if text_bytes[i + j] != pattern_bytes[j] {
+                        match_found = false;
+                        break;
+                    }
+                }
+                if match_found {
+                    result.push(i);
+                }
+            }
+            
+            // 计算下一个窗口的哈希值
+            if i < n - m {
+                text_hash = (BASE * (text_hash + MOD - (text_bytes[i] as u64 * h) % MOD) 
+                    + text_bytes[i + m] as u64) % MOD;
+            }
+        }
+        
+        metrics.set_execution_time(start_time.elapsed());
+        Ok(result)
+    }
+    
+    /// 最长回文子串（Manacher算法）
+    /// 
+    /// 时间复杂度: O(n)
+    /// 空间复杂度: O(n)
+    pub fn longest_palindrome(
+        s: &str,
+        metrics: &mut AlgorithmMetrics,
+    ) -> AlgorithmResult<String> {
+        let start_time = Instant::now();
+        
+        if s.is_empty() {
+            return Ok(String::new());
+        }
+        
+        // 预处理字符串，在字符间插入'#'
+        let mut t = String::from("^");
+        for ch in s.chars() {
+            t.push('#');
+            t.push(ch);
+        }
+        t.push_str("#$");
+        
+        let t_chars: Vec<char> = t.chars().collect();
+        let n = t_chars.len();
+        let mut p = vec![0; n];
+        let mut center = 0;
+        let mut right = 0;
+        
+        for i in 1..n - 1 {
+            metrics.record_comparison();
+            let mirror = 2 * center - i;
+            
+            if right > i {
+                p[i] = p[mirror].min(right - i);
+            }
+            
+            // 尝试扩展回文
+            while t_chars[i + p[i] + 1] == t_chars[i - p[i] - 1] {
+                metrics.record_comparison();
+                p[i] += 1;
+            }
+            
+            // 更新中心和右边界
+            if i + p[i] > right {
+                center = i;
+                right = i + p[i];
+            }
+        }
+        
+        // 找到最长回文
+        let (max_len, center_idx) = p.iter().enumerate()
+            .max_by_key(|(_, len)| *len)
+            .map(|(idx, len)| (*len, idx))
+            .unwrap_or((0, 0));
+        
+        let start = (center_idx - max_len) / 2;
+        let result = s.chars().skip(start).take(max_len).collect();
+        
+        metrics.set_execution_time(start_time.elapsed());
+        Ok(result)
+    }
+}
+
+/// 数学算法实现
+#[derive(Debug)]
+pub struct MathematicalAlgorithms;
+
+impl MathematicalAlgorithms {
+    /// 欧几里得算法（最大公约数）
+    /// 
+    /// 时间复杂度: O(log min(a, b))
+    /// 空间复杂度: O(1)
+    pub fn gcd(mut a: i64, mut b: i64, metrics: &mut AlgorithmMetrics) -> AlgorithmResult<i64> {
+        let start_time = Instant::now();
+        
+        while b != 0 {
+            metrics.record_comparison();
+            let temp = b;
+            b = a % b;
+            a = temp;
+        }
+        
+        metrics.set_execution_time(start_time.elapsed());
+        Ok(a.abs())
+    }
+    
+    /// 扩展欧几里得算法
+    /// 
+    /// 求解 ax + by = gcd(a, b)
+    /// 返回 (gcd, x, y)
+    pub fn extended_gcd(a: i64, b: i64, metrics: &mut AlgorithmMetrics) -> AlgorithmResult<(i64, i64, i64)> {
+        let start_time = Instant::now();
+        
+        if b == 0 {
+            metrics.set_execution_time(start_time.elapsed());
+            return Ok((a, 1, 0));
+        }
+        
+        let (gcd, x1, y1) = Self::extended_gcd(b, a % b, metrics)?;
+        let x = y1;
+        let y = x1 - (a / b) * y1;
+        
+        metrics.set_execution_time(start_time.elapsed());
+        Ok((gcd, x, y))
+    }
+    
+    /// 快速幂算法
+    /// 
+    /// 计算 base^exp % mod
+    /// 时间复杂度: O(log exp)
+    pub fn fast_power(base: i64, exp: u64, modulo: i64, metrics: &mut AlgorithmMetrics) -> AlgorithmResult<i64> {
+        let start_time = Instant::now();
+        let mut result = 1i64;
+        let mut base = base % modulo;
+        let mut exp = exp;
+        
+        while exp > 0 {
+            metrics.record_comparison();
+            if exp % 2 == 1 {
+                result = (result * base) % modulo;
+            }
+            exp >>= 1;
+            base = (base * base) % modulo;
+        }
+        
+        metrics.set_execution_time(start_time.elapsed());
+        Ok(result)
+    }
+    
+    /// 埃拉托斯特尼筛法（素数筛）
+    /// 
+    /// 时间复杂度: O(n log log n)
+    /// 空间复杂度: O(n)
+    pub fn sieve_of_eratosthenes(n: usize, metrics: &mut AlgorithmMetrics) -> AlgorithmResult<Vec<usize>> {
+        let start_time = Instant::now();
+        
+        if n < 2 {
+            return Ok(Vec::new());
+        }
+        
+        let mut is_prime = vec![true; n + 1];
+        is_prime[0] = false;
+        is_prime[1] = false;
+        
+        for i in 2..=((n as f64).sqrt() as usize) {
+            if is_prime[i] {
+                metrics.record_comparison();
+                let mut j = i * i;
+                while j <= n {
+                    is_prime[j] = false;
+                    j += i;
+                }
+            }
+        }
+        
+        let primes: Vec<usize> = (2..=n)
+            .filter(|&i| is_prime[i])
+            .collect();
+        
+        metrics.set_execution_time(start_time.elapsed());
+        metrics.update_peak_memory((n + 1) * std::mem::size_of::<bool>());
+        Ok(primes)
+    }
+    
+    /// 欧拉函数（φ函数）
+    /// 
+    /// 计算小于n且与n互质的正整数个数
+    /// 时间复杂度: O(sqrt(n))
+    pub fn euler_phi(mut n: i64, metrics: &mut AlgorithmMetrics) -> AlgorithmResult<i64> {
+        let start_time = Instant::now();
+        let mut result = n;
+        let mut i = 2i64;
+        
+        while i * i <= n {
+            metrics.record_comparison();
+            if n % i == 0 {
+                while n % i == 0 {
+                    n /= i;
+                }
+                result -= result / i;
+            }
+            i += 1;
+        }
+        
+        if n > 1 {
+            result -= result / n;
+        }
+        
+        metrics.set_execution_time(start_time.elapsed());
+        Ok(result)
+    }
+    
+    /// 矩阵快速幂
+    /// 
+    /// 时间复杂度: O(n³ log exp)
+    pub fn matrix_power(
+        matrix: &[Vec<i64>],
+        exp: u64,
+        modulo: i64,
+        metrics: &mut AlgorithmMetrics,
+    ) -> AlgorithmResult<Vec<Vec<i64>>> {
+        let start_time = Instant::now();
+        let n = matrix.len();
+        
+        // 单位矩阵
+        let mut result = vec![vec![0; n]; n];
+        for i in 0..n {
+            result[i][i] = 1;
+        }
+        
+        let mut base = matrix.to_vec();
+        let mut exp = exp;
+        
+        // 矩阵乘法
+        fn matrix_multiply(a: &[Vec<i64>], b: &[Vec<i64>], modulo: i64) -> Vec<Vec<i64>> {
+            let n = a.len();
+            let mut c = vec![vec![0; n]; n];
+            for i in 0..n {
+                for j in 0..n {
+                    for k in 0..n {
+                        c[i][j] = (c[i][j] + a[i][k] * b[k][j]) % modulo;
+                    }
+                }
+            }
+            c
+        }
+        
+        while exp > 0 {
+            metrics.record_comparison();
+            if exp % 2 == 1 {
+                result = matrix_multiply(&result, &base, modulo);
+            }
+            base = matrix_multiply(&base, &base, modulo);
+            exp >>= 1;
+        }
+        
+        metrics.set_execution_time(start_time.elapsed());
+        Ok(result)
+    }
+    
+    /// 中国剩余定理
+    /// 
+    /// 求解同余方程组
+    pub fn chinese_remainder_theorem(
+        remainders: &[i64],
+        moduli: &[i64],
+        metrics: &mut AlgorithmMetrics,
+    ) -> AlgorithmResult<i64> {
+        let start_time = Instant::now();
+        
+        if remainders.len() != moduli.len() {
+            return Err(ModelError::ValidationError(
+                "余数和模数数量不匹配".to_string()
+            ));
+        }
+        
+        let prod: i64 = moduli.iter().product();
+        let mut result = 0i64;
+        
+        for i in 0..remainders.len() {
+            metrics.record_comparison();
+            let p = prod / moduli[i];
+            let (_, inv, _) = Self::extended_gcd(p, moduli[i], metrics)?;
+            result = (result + remainders[i] * inv * p) % prod;
+        }
+        
+        metrics.set_execution_time(start_time.elapsed());
+        Ok((result % prod + prod) % prod)
+    }
 }
 
 /// 算法关系分析器

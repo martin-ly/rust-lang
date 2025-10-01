@@ -96,6 +96,14 @@ pub enum ModelError {
     /// 内部错误
     #[error("内部错误: {0}")]
     InternalError(String),
+
+    /// 锁错误
+    #[error("锁错误: {0}")]
+    LockError(String),
+
+    /// 限流错误
+    #[error("限流错误: {0}")]
+    RateLimitExceeded(String),
 }
 
 /// 错误严重级别
@@ -140,6 +148,8 @@ impl Clone for ModelError {
                 ModelError::UnsupportedOperationError(msg.clone())
             }
             ModelError::InternalError(msg) => ModelError::InternalError(msg.clone()),
+            ModelError::LockError(msg) => ModelError::LockError(msg.clone()),
+            ModelError::RateLimitExceeded(msg) => ModelError::RateLimitExceeded(msg.clone()),
         }
     }
 }
@@ -182,6 +192,8 @@ impl ModelError {
             ModelError::OutOfMemoryError(_) => ErrorSeverity::Critical,
             ModelError::UnsupportedOperationError(_) => ErrorSeverity::Error,
             ModelError::InternalError(_) => ErrorSeverity::Critical,
+            ModelError::LockError(_) => ErrorSeverity::Error,
+            ModelError::RateLimitExceeded(_) => ErrorSeverity::Warning,
         }
     }
 
@@ -220,6 +232,8 @@ impl ModelError {
             ModelError::OutOfMemoryError(_) => "MEMORY_001",
             ModelError::UnsupportedOperationError(_) => "UNSUPPORTED_001",
             ModelError::InternalError(_) => "INTERNAL_001",
+            ModelError::LockError(_) => "LOCK_001",
+            ModelError::RateLimitExceeded(_) => "RATELIMIT_001",
         }
     }
 
@@ -248,6 +262,8 @@ impl ModelError {
             ModelError::OutOfMemoryError(_) => Some("减少数据规模或使用更高效的内存管理"),
             ModelError::UnsupportedOperationError(_) => Some("使用支持的操作或升级到兼容版本"),
             ModelError::InternalError(_) => Some("联系技术支持或查看详细日志"),
+            ModelError::LockError(_) => Some("检查锁的获取和释放，避免死锁"),
+            ModelError::RateLimitExceeded(_) => Some("降低请求频率或增加限流阈值"),
         }
     }
 }

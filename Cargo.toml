@@ -120,7 +120,7 @@ http = "1.3.1"
 
 # Web 框架 - 2025年9月27日最新稳定版本
 # axum: 现代Web框架，专注于人体工程学和模块化设计 - 2025年9月27日最新版本
-axum = { version = "0.8.5", features = ["macros", "multipart", "tracing"] }
+axum = { version = "0.8.6", features = ["macros", "multipart", "tracing"] }
 # axum-core: axum的核心功能库
 axum-core = "0.6.1"
 # tower: 异步服务抽象层，提供中间件和超时支持

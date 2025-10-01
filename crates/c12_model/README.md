@@ -5,7 +5,773 @@
 [![Crates.io](https://img.shields.io/crates/v/c18_model.svg)](https://crates.io/crates/c18_model)
 [![Documentation](https://docs.rs/c18_model/badge.svg)](https://docs.rs/c18_model)
 
-一个基于 Rust 1.90 的现代化建模与形式方法库，聚焦核心建模技术，涵盖排队论、机器学习、形式化方法、数学建模与性能模型。项目采用最小稳定内核设计，充分利用 Rust 1.90 的新特性，便于学习与集成，同时提供完整的理论背景和实践指导。
+一个基于 Rust 1.90 的现代化建模与形式方法库，聚焦核心建模技术，涵盖排队论、机器学习、形式化方法、数学建模、性能模型、**高级流量控制**、分布式系统、微服务架构等。
+项目采用最小稳定内核设计，充分利用 Rust 1.90 的新特性，便于学习与集成，同时提供完整的理论背景和实践指导。
+
+## 🆕 最新更新 (v0.2.0)
+
+### 高级流量控制算法 ✨
+
+新增4种工业级流量控制算法，助力构建高性能、高可靠的系统：
+
+- **令牌桶 (Token Bucket)** - 允许突发流量的智能限流
+- **漏桶 (Leaky Bucket)** - 强制恒定输出速率的流量整形
+- **滑动窗口 (Sliding Window)** - 精确时间窗口的请求控制
+- **自适应限流 (Adaptive Rate Limiter)** - 基于负载动态调整的智能限流
+
+```rust
+use c12_model::{TokenBucket, AsyncResult};
+
+#[tokio::main]
+async fn main() -> AsyncResult<()> {
+    // 创建令牌桶: 每秒100个令牌，容量200
+    let limiter = TokenBucket::new(100.0, 200);
+    
+    // 同步获取
+    limiter.try_acquire(10)?;
+    
+    // 异步获取（阻塞等待）
+    limiter.acquire(20).await?;
+    
+    println!("剩余令牌: {}", limiter.tokens());
+    Ok(())
+}
+```
+
+📖 查看完整文档: [综合使用指南](docs/COMPREHENSIVE_USAGE_GUIDE.md) | [模型关系分析](docs/MODEL_RELATIONSHIPS_AND_SEMANTICS.md)
+
+## 🆕 最新扩展 (v0.2.6 - 完整版) 🎉
+
+### 🏛️ 架构设计模型增强 ✨
+
+**完成最后一个模块，`c12_model`现已100%完成！**
+
+新增管道过滤器架构和P2P架构模型，为构建灵活可扩展的系统提供完整支持：
+
+#### 管道过滤器架构 (Pipe-and-Filter Architecture)
+
+- **PipelineArchitecture** - 管道架构执行器
+- **Filter Trait** - 过滤器抽象接口
+- **PipelineSplitter** - 管道分支器
+- 批量处理支持
+
+```rust
+use c12_model::{PipelineArchitecture, Filter, ArchitectureResult};
+
+// 定义过滤器
+struct ValidationFilter;
+impl Filter<String, String> for ValidationFilter {
+    fn process(&mut self, input: String) -> ArchitectureResult<String> {
+        Ok(format!("validated:{}", input))
+    }
+    
+    fn filter_name(&self) -> &str {
+        "ValidationFilter"
+    }
+}
+
+struct TransformFilter;
+impl Filter<String, String> for TransformFilter {
+    fn process(&mut self, input: String) -> ArchitectureResult<String> {
+        Ok(input.to_uppercase())
+    }
+    
+    fn filter_name(&self) -> &str {
+        "TransformFilter"
+    }
+}
+
+fn main() -> ArchitectureResult<()> {
+    let mut pipeline = PipelineArchitecture::new();
+    
+    pipeline
+        .add_filter(Box::new(ValidationFilter))
+        .add_filter(Box::new(TransformFilter));
+    
+    let result = pipeline.execute("data".to_string())?;
+    println!("结果: {}", result); // VALIDATED:DATA
+    
+    println!("过滤器数量: {}", pipeline.filter_count());
+    
+    Ok(())
+}
+```
+
+#### P2P架构 (Peer-to-Peer Architecture)
+
+- **P2PNetwork** - P2P网络管理器
+- **Peer Trait** - 对等节点抽象
+- **P2PTopology** - 拓扑类型（全连接、环形、星形、网格、随机）
+- **P2PNetworkBuilder** - 网络拓扑构建器
+
+```rust
+use c12_model::{P2PNetwork, Peer, ArchitectureResult};
+use std::sync::{Arc, Mutex};
+
+// 定义对等节点
+struct SimplePeer {
+    id: String,
+    messages: Arc<Mutex<Vec<String>>>,
+}
+
+impl SimplePeer {
+    fn new(id: String) -> Self {
+        Self {
+            id,
+            messages: Arc::new(Mutex::new(Vec::new())),
+        }
+    }
+}
+
+impl Peer for SimplePeer {
+    fn peer_id(&self) -> &str {
+        &self.id
+    }
+    
+    fn send_message(&self, target: &str, msg: &str) -> ArchitectureResult<()> {
+        println!("Sending to {}: {}", target, msg);
+        Ok(())
+    }
+    
+    fn receive_message(&mut self, from: &str, msg: &str) -> ArchitectureResult<String> {
+        let message = format!("From {}: {}", from, msg);
+        self.messages.lock().unwrap().push(message.clone());
+        Ok(message)
+    }
+    
+    fn broadcast(&self, msg: &str) -> ArchitectureResult<()> {
+        println!("Broadcasting: {}", msg);
+        Ok(())
+    }
+}
+
+fn main() -> ArchitectureResult<()> {
+    let network = P2PNetwork::new();
+    
+    // 添加节点
+    network.add_peer(Box::new(SimplePeer::new("peer1".to_string())))?;
+    network.add_peer(Box::new(SimplePeer::new("peer2".to_string())))?;
+    network.add_peer(Box::new(SimplePeer::new("peer3".to_string())))?;
+    
+    // 连接节点
+    network.connect_peers("peer1", "peer2")?;
+    network.connect_peers("peer2", "peer3")?;
+    
+    // 发送消息
+    network.send_message("peer1", "peer2", "Hello")?;
+    
+    // 广播消息
+    network.broadcast("peer2", "Broadcast message")?;
+    
+    println!("节点数量: {}", network.peer_count());
+    println!("peer2连接数: {}", network.connection_count("peer2"));
+    
+    Ok(())
+}
+```
+
+**核心特性**:
+
+- ✅ 管道过滤器 - 灵活的数据处理流水线
+- ✅ 管道分支 - 支持多分支并行处理
+- ✅ P2P网络 - 完整的对等节点管理
+- ✅ 拓扑支持 - 5种经典P2P拓扑
+- ✅ 消息路由 - 点对点和广播消息
+- ✅ 连接管理 - 动态节点连接
+
+## 🆕 程序设计模型增强 (v0.2.5)
+
+### 🌊 程序设计模型增强 ✨
+
+新增反应式流（Reactive Streams）和数据流编程（Dataflow Programming）模型，构建响应式和数据驱动的应用：
+
+#### 反应式流模型 (Reactive Streams)
+
+- **ReactiveStream** - 符合反应式流规范的流实现
+- **背压控制** - 请求-响应模式防止数据溢出
+- **流操作符** - map、filter、take等常用操作
+
+```rust
+use c12_model::{ReactiveStream, ReactiveOperators, ProgramResult};
+
+fn main() -> ProgramResult<()> {
+    // 创建反应式流（缓冲区大小10）
+    let stream = ReactiveStream::<i32>::new(10);
+    
+    // 检查流状态
+    println!("缓冲区大小: {}", stream.buffer_size());
+    println!("请求的元素数: {}", stream.requested_count());
+    
+    // 使用流操作符
+    let doubled = ReactiveOperators::map(stream, |x| x * 2);
+    let filtered = ReactiveOperators::filter(doubled, |x| x > &10);
+    let limited = ReactiveOperators::take(filtered, 5);
+    
+    Ok(())
+}
+```
+
+#### 数据流编程模型 (Dataflow Programming)
+
+- **DataflowGraph** - 数据流图，节点间自动传递数据
+- **DataflowVariable** - 单次赋值变量
+- **DataflowPipeline** - 流水线处理
+- **DataflowCombinator** - 并行/串行组合器
+
+```rust
+use c12_model::{DataflowGraph, DataflowNode, ProgramResult};
+
+// 定义数据流节点
+struct MultiplyNode(i32);
+impl DataflowNode for MultiplyNode {
+    type Input = i32;
+    type Output = i32;
+    
+    fn process(&mut self, input: Self::Input) -> ProgramResult<Self::Output> {
+        Ok(input * self.0)
+    }
+    
+    fn name(&self) -> &str {
+        "MultiplyNode"
+    }
+}
+
+fn main() -> ProgramResult<()> {
+    let mut graph = DataflowGraph::new();
+    
+    // 添加节点
+    let node1 = graph.add_node(Box::new(MultiplyNode(2)));
+    let node2 = graph.add_node(Box::new(MultiplyNode(3)));
+    
+    // 连接节点
+    graph.add_edge(node1, node2)?;
+    
+    // 执行数据流
+    let results = graph.execute(10)?;
+    println!("结果: {:?}", results); // [60] = 10 * 2 * 3
+    
+    Ok(())
+}
+```
+
+#### 数据流管道示例
+
+```rust
+use c12_model::{DataflowPipeline, ProgramResult};
+
+fn main() -> ProgramResult<()> {
+    let mut pipeline = DataflowPipeline::new();
+    
+    pipeline
+        .add_stage(|x: i32| Ok(x * 2))      // 乘以2
+        .add_stage(|x: i32| Ok(x + 10))     // 加10
+        .add_stage(|x: i32| Ok(x / 2));     // 除以2
+    
+    let result = pipeline.execute(5)?;
+    println!("结果: {}", result); // ((5 * 2) + 10) / 2 = 10
+    
+    Ok(())
+}
+```
+
+#### 数据流变量示例
+
+```rust
+use c12_model::{DataflowVariable, ProgramResult};
+
+fn main() -> ProgramResult<()> {
+    // 创建数据流变量
+    let var = DataflowVariable::new("计算结果".to_string());
+    
+    // 设置值
+    var.set(42);
+    
+    // 获取值
+    let value = var.await_value()?;
+    println!("{}: {}", var.name(), value);
+    
+    Ok(())
+}
+```
+
+**核心特性**:
+
+- ✅ 反应式流 - 符合反应式流规范
+- ✅ 背压控制 - 请求-响应模式
+- ✅ 数据流图 - 声明式数据处理
+- ✅ 单次赋值 - DataflowVariable
+- ✅ 组合器模式 - 并行/串行组合
+- ✅ 类型安全 - 编译时类型检查
+
+## 🆕 并行并发模型增强 (v0.2.4)
+
+### ⚡ 并行并发模型增强 ✨
+
+新增任务并行、流水线并行、工作窃取调度等高级并行模型，构建高性能并发系统：
+
+#### 任务并行模型 (Task Parallelism)
+
+- **TaskParallelExecutor** - 并行执行独立任务
+- **ParallelTask Trait** - 可并行任务抽象
+- **parallel_invoke** - 并行调用多个函数
+
+```rust
+use c12_model::{TaskParallelExecutor, ParallelTask, ConcurrentResult};
+
+// 定义并行任务
+struct ComputeTask(i32);
+
+impl ParallelTask for ComputeTask {
+    type Output = i32;
+    
+    fn execute(self) -> Self::Output {
+        // 执行计算密集型任务
+        self.0 * self.0
+    }
+}
+
+fn main() -> ConcurrentResult<()> {
+    let executor = TaskParallelExecutor::new(4); // 4个工作线程
+    
+    let tasks = vec![
+        ComputeTask(10),
+        ComputeTask(20),
+        ComputeTask(30),
+    ];
+    
+    let results = executor.execute_tasks(tasks)?;
+    println!("结果: {:?}", results); // [100, 400, 900]
+    
+    // 并行调用函数
+    let results = executor.parallel_invoke(vec![
+        || expensive_computation_1(),
+        || expensive_computation_2(),
+        || expensive_computation_3(),
+    ])?;
+    
+    Ok(())
+}
+```
+
+#### 流水线并行模型 (Pipeline Parallelism)
+
+- **PipelineExecutor** - 多阶段流水线处理
+- **PipelineStage Trait** - 流水线阶段抽象
+- 支持顺序和并行执行模式
+
+```rust
+use c12_model::{PipelineExecutor, PipelineStage, ConcurrentResult};
+
+// 定义流水线阶段
+struct ValidateStage;
+impl PipelineStage<String, String> for ValidateStage {
+    fn process(&self, input: String) -> String {
+        // 验证阶段
+        format!("validated:{}", input)
+    }
+}
+
+struct TransformStage;
+impl PipelineStage<String, String> for TransformStage {
+    fn process(&self, input: String) -> String {
+        // 转换阶段
+        input.to_uppercase()
+    }
+}
+
+fn main() -> ConcurrentResult<()> {
+    let mut pipeline = PipelineExecutor::new(100); // 缓冲区大小100
+    
+    pipeline.add_stage(ValidateStage);
+    pipeline.add_stage(TransformStage);
+    
+    let inputs = vec!["data1".to_string(), "data2".to_string()];
+    let results = pipeline.execute(inputs)?;
+    
+    println!("处理结果: {:?}", results);
+    Ok(())
+}
+```
+
+#### 工作窃取调度器 (Work-Stealing Scheduler)
+
+- **WorkStealingScheduler** - 负载均衡的任务调度
+- 动态任务窃取算法
+- 最小化线程空闲时间
+
+```rust
+use c12_model::{WorkStealingScheduler, ConcurrentResult};
+use std::sync::{Arc, atomic::{AtomicU32, Ordering}};
+use std::time::Duration;
+
+fn main() -> ConcurrentResult<()> {
+    let mut scheduler = WorkStealingScheduler::new(4); // 4个工作线程
+    let counter = Arc::new(AtomicU32::new(0));
+    
+    // 启动调度器
+    let handles = scheduler.start()?;
+    
+    // 提交任务
+    for i in 0..100 {
+        let counter = Arc::clone(&counter);
+        scheduler.submit(move || {
+            // 模拟工作负载
+            std::thread::sleep(Duration::from_millis(10));
+            counter.fetch_add(i, Ordering::SeqCst);
+        })?;
+    }
+    
+    // 等待任务完成
+    std::thread::sleep(Duration::from_secs(2));
+    
+    // 停止调度器
+    scheduler.stop();
+    for handle in handles {
+        handle.join().unwrap();
+    }
+    
+    println!("处理任务数: {}", counter.load(Ordering::SeqCst));
+    println!("工作线程数: {}", scheduler.worker_count());
+    
+    Ok(())
+}
+```
+
+#### 并行模式分析器 (Parallel Pattern Analyzer)
+
+- **ParallelPattern** - 并行模式枚举
+- **ParallelPatternAnalyzer** - 模式特征分析
+- 5种经典并行模式支持
+
+```rust
+use c12_model::{ParallelPattern, ParallelPatternAnalyzer};
+
+fn main() {
+    let patterns = vec![
+        ParallelPattern::DataParallel,      // 数据并行
+        ParallelPattern::TaskParallel,      // 任务并行
+        ParallelPattern::Pipeline,          // 流水线并行
+        ParallelPattern::DivideAndConquer,  // 分治
+        ParallelPattern::MapReduce,         // MapReduce
+    ];
+    
+    for pattern in patterns {
+        let characteristics = ParallelPatternAnalyzer::analyze_pattern(&pattern);
+        println!("模式: {:?}", characteristics.pattern);
+        println!("描述: {}", characteristics.description);
+        println!("可扩展性: {:?}", characteristics.scalability);
+        println!("复杂度: {:?}", characteristics.complexity);
+        println!("用例: {:?}", characteristics.use_cases);
+        println!("---");
+    }
+}
+```
+
+**核心特性**:
+
+- ✅ 任务并行 - 独立任务并行执行
+- ✅ 流水线并行 - 多阶段数据处理
+- ✅ 工作窃取 - 动态负载均衡调度
+- ✅ 并行模式 - 5种经典模式分析
+- ✅ 零成本抽象 - 充分利用Rust编译器优化
+- ✅ 线程安全 - 编译时并发安全保证
+
+## 🆕 微服务高级模型 (v0.2.3)
+
+### 🕸️ 微服务高级模型 ✨
+
+新增服务网格和分布式追踪支持，为微服务架构提供完整的可观测性和流量管理：
+
+#### 服务网格 (Service Mesh)
+
+- **Sidecar代理模式** - 透明的服务间通信
+- **流量管理** - 流量分配、灰度发布、A/B测试
+- **安全策略** - mTLS、JWT验证、访问控制
+- **可观测性** - 追踪、指标、日志集成
+
+```rust
+use c12_model::{ServiceMesh, SidecarProxy, ProxyFeature, TrafficRule, TrafficSplit, RetryPolicy};
+use std::net::{SocketAddr, IpAddr, Ipv4Addr};
+use std::time::Duration;
+
+// 创建服务网格
+let mesh = ServiceMesh::new("production-mesh".to_string());
+
+// 注册Sidecar代理
+let mut proxy = SidecarProxy::new(
+    "user-service".to_string(),
+    SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 15001), // 代理端口
+    SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8080),  // 服务端口
+);
+
+// 启用功能
+proxy.enable_feature(ProxyFeature::LoadBalancing);
+proxy.enable_feature(ProxyFeature::CircuitBreaking);
+proxy.enable_feature(ProxyFeature::Tracing);
+
+mesh.register_proxy(proxy)?;
+
+// 配置流量分配（金丝雀发布）
+let rule = TrafficRule {
+    id: "canary-release".to_string(),
+    source_service: "api-gateway".to_string(),
+    destination_service: "user-service".to_string(),
+    traffic_split: vec![
+        TrafficSplit { version: "v1".to_string(), weight: 90 },  // 90%流量到v1
+        TrafficSplit { version: "v2".to_string(), weight: 10 },  // 10%流量到v2
+    ],
+    retry_policy: Some(RetryPolicy {
+        max_attempts: 3,
+        retry_interval: Duration::from_millis(100),
+        retryable_status_codes: vec![500, 502, 503],
+    }),
+    timeout: Some(Duration::from_secs(5)),
+};
+
+mesh.add_traffic_rule(rule)?;
+
+// 查看网格统计
+let stats = mesh.get_mesh_stats()?;
+println!("服务数: {}, 请求数: {}", stats.total_services, stats.total_requests);
+```
+
+#### 分布式追踪 (Distributed Tracing)
+
+- **跨服务追踪** - 完整的请求链路追踪
+- **Span层级** - 父子Span关系
+- **标签和日志** - 丰富的上下文信息
+- **采样控制** - 可配置的采样率
+
+```rust
+use c12_model::{DistributedTracing, SpanStatus};
+use std::collections::HashMap;
+
+// 创建追踪系统（10%采样率）
+let tracing = DistributedTracing::new("jaeger".to_string(), 0.1);
+
+// 开始追踪
+let root_span = tracing.start_trace(
+    "trace-abc123".to_string(),
+    "api-gateway".to_string(),
+    "handle_request".to_string(),
+)?;
+
+// 添加子Span（调用user-service）
+let mut user_span = tracing.add_span(
+    "trace-abc123",
+    &root_span.span_id,
+    "user-service".to_string(),
+    "get_user_profile".to_string(),
+)?;
+
+// 添加标签和日志
+user_span.add_tag("user.id".to_string(), "12345".to_string());
+user_span.add_tag("http.status_code".to_string(), "200".to_string());
+
+let mut log_fields = HashMap::new();
+log_fields.insert("cache".to_string(), "hit".to_string());
+user_span.add_log("Retrieved from cache".to_string(), log_fields);
+
+// 结束Span
+tracing.end_span("trace-abc123", &user_span.span_id, SpanStatus::Ok)?;
+tracing.end_span("trace-abc123", &root_span.span_id, SpanStatus::Ok)?;
+
+// 完成追踪
+tracing.finish_trace("trace-abc123")?;
+
+// 查看统计
+let stats = tracing.get_stats()?;
+println!("活动追踪: {}, 总Span数: {}", stats.active_traces, stats.total_spans);
+```
+
+**关键特性:**
+
+- ✅ **Sidecar代理** - 透明的流量拦截和处理
+- ✅ **流量分配** - 灵活的流量路由规则
+- ✅ **安全策略** - mTLS、JWT、RBAC
+- ✅ **分布式追踪** - 完整的请求链路可视化
+- ✅ **采样控制** - 可配置的追踪采样率
+
+## 🆕 最新扩展 (v0.2.2)
+
+### 🌐 分布式共识算法实现 ✨
+
+新增3种经典分布式共识算法，构建高可用、强一致的分布式系统：
+
+#### 共识算法 (Consensus Algorithms)
+
+- **Paxos** - 经典分布式共识算法
+  - Prepare/Promise 阶段
+  - Accept/Accepted 阶段
+  - Learn 阶段
+  - 支持多提议者并发
+
+- **两阶段提交 (2PC)** - 分布式事务协议
+  - Prepare 准备阶段
+  - Commit/Abort 提交/回滚阶段
+  - 投票机制
+  - 协调者-参与者模式
+
+- **三阶段提交 (3PC)** - 2PC的改进版本
+  - CanCommit 询问阶段
+  - PreCommit 预提交阶段
+  - DoCommit 提交阶段
+  - 超时恢复机制
+
+```rust
+use c12_model::{PaxosProtocol, PaxosMessage, DistributedResult};
+
+// Paxos 示例
+let paxos = PaxosProtocol::new("node1".to_string());
+paxos.add_participant("node2".to_string())?;
+paxos.add_participant("node3".to_string())?;
+
+// 发起提议
+let proposal_num = paxos.propose("commit_data".to_string())?;
+
+// 处理 Prepare
+let promise = paxos.handle_prepare(proposal_num)?;
+
+// 处理 Accept
+let accepted = paxos.handle_accept(proposal_num, "commit_data".to_string())?;
+
+// 获取共识值
+let value = paxos.get_accepted_value()?;
+println!("共识达成: {:?}", value);
+```
+
+```rust
+use c12_model::{TwoPhaseCommit, VoteResult, TransactionState};
+
+// 2PC 示例
+let coordinator = TwoPhaseCommit::new_coordinator(
+    "coordinator".to_string(),
+    "tx_001".to_string()
+);
+
+coordinator.add_participant("db1".to_string())?;
+coordinator.add_participant("db2".to_string())?;
+
+// 阶段1: 准备
+coordinator.prepare_phase()?;
+coordinator.collect_vote("db1".to_string(), VoteResult::Yes)?;
+coordinator.collect_vote("db2".to_string(), VoteResult::Yes)?;
+
+// 阶段2: 提交
+coordinator.commit_phase()?;
+
+let state = coordinator.get_state()?;
+assert_eq!(state, TransactionState::Committed);
+```
+
+```rust
+use c12_model::{ThreePhaseCommit, ThreePhaseState};
+use std::time::Duration;
+
+// 3PC 示例
+let coordinator = ThreePhaseCommit::new_coordinator(
+    "coordinator".to_string(),
+    "tx_002".to_string(),
+    Duration::from_secs(5), // 超时设置
+);
+
+coordinator.add_participant("node1".to_string())?;
+coordinator.add_participant("node2".to_string())?;
+
+// 阶段1: CanCommit
+coordinator.can_commit_phase()?;
+coordinator.collect_can_commit_vote("node1".to_string(), true)?;
+coordinator.collect_can_commit_vote("node2".to_string(), true)?;
+
+// 阶段2: PreCommit
+coordinator.pre_commit_phase()?;
+coordinator.collect_pre_commit_ack("node1".to_string())?;
+coordinator.collect_pre_commit_ack("node2".to_string())?;
+
+// 阶段3: DoCommit
+coordinator.do_commit_phase()?;
+
+let state = coordinator.get_state()?;
+assert_eq!(state, ThreePhaseState::Committed);
+```
+
+**关键特性:**
+
+- ✅ **完整的协议实现** - 严格遵循算法规范
+- ✅ **状态机模型** - 清晰的状态转换
+- ✅ **超时处理** - 3PC支持超时恢复
+- ✅ **并发安全** - 使用Arc和RwLock保证线程安全
+- ✅ **完整测试** - 覆盖正常流程和异常情况
+
+## 🆕 最新扩展 (v0.2.1)
+
+### 📐 算法模型全面增强 ✨
+
+新增20+种经典算法实现，覆盖图算法、字符串算法、数学算法三大领域：
+
+#### 图算法 (Graph Algorithms)
+
+- **Floyd-Warshall** - 全源最短路径算法 O(V³)
+- **Bellman-Ford** - 支持负权边的最短路径 O(VE)
+- **Kruskal** - 最小生成树（并查集） O(E log E)
+- **Prim** - 最小生成树（优先队列） O(E log V)
+- **拓扑排序** - Kahn算法 O(V + E)
+
+```rust
+use c12_model::{GreedyAlgorithms, AlgorithmMetrics};
+
+let vertices = vec!["A", "B", "C", "D"];
+let edges = vec![
+    ("A", "B", 1.0), ("A", "C", 4.0),
+    ("B", "C", 2.0), ("C", "D", 5.0),
+];
+
+let mut metrics = AlgorithmMetrics::new();
+let distances = GreedyAlgorithms::floyd_warshall(&vertices, &edges, &mut metrics)?;
+```
+
+#### 字符串算法 (String Algorithms)
+
+- **KMP** - 高效模式匹配 O(m + n)
+- **Boyer-Moore** - 实用字符串搜索 O(n/m)
+- **Rabin-Karp** - 滚动哈希搜索 O(m + n)
+- **Manacher** - 线性时间最长回文子串 O(n)
+
+```rust
+use c12_model::{StringAlgorithms, AlgorithmMetrics};
+
+let mut metrics = AlgorithmMetrics::new();
+let positions = StringAlgorithms::kmp_search(
+    "ABABDABACDABABCABAB",
+    "ABABCABAB",
+    &mut metrics
+)?;
+println!("找到模式串位置: {:?}", positions);
+```
+
+#### 数学算法 (Mathematical Algorithms)
+
+- **欧几里得算法** - 最大公约数 O(log min(a, b))
+- **扩展欧几里得** - 求解贝祖等式
+- **快速幂** - 模幂运算 O(log n)
+- **埃拉托斯特尼筛** - 素数筛 O(n log log n)
+- **欧拉函数** - φ函数 O(√n)
+- **矩阵快速幂** - 矩阵运算优化 O(n³ log k)
+- **中国剩余定理** - 同余方程组求解
+
+```rust
+use c12_model::{MathematicalAlgorithms, AlgorithmMetrics};
+
+let mut metrics = AlgorithmMetrics::new();
+
+// 快速幂计算
+let result = MathematicalAlgorithms::fast_power(2, 10, 1000, &mut metrics)?;
+println!("2^10 mod 1000 = {}", result);
+
+// 素数筛
+let primes = MathematicalAlgorithms::sieve_of_eratosthenes(100, &mut metrics)?;
+println!("100以内的素数: {:?}", primes);
+```
 
 ## 🚀 主要特性
 

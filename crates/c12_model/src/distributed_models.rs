@@ -1057,6 +1057,576 @@ pub struct CAPAnalysis {
     pub recommendations: Vec<String>,
 }
 
+/// Paxos共识算法实现
+/// 
+/// Paxos是一种经典的分布式共识算法，能在异步网络中达成一致
+#[derive(Debug, Clone)]
+pub struct PaxosProtocol {
+    /// 节点ID
+    node_id: NodeId,
+    /// 提议编号
+    proposal_number: Arc<AtomicU64>,
+    /// 已接受的提议
+    accepted_proposal: Arc<RwLock<Option<(u64, String)>>>,
+    /// 已承诺的最大编号
+    promised_number: Arc<AtomicU64>,
+    /// 参与者列表
+    participants: Arc<RwLock<Vec<NodeId>>>,
+}
+
+/// Paxos消息类型
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum PaxosMessage {
+    /// Prepare阶段 - 准备消息 (proposal_number)
+    Prepare(u64),
+    /// Promise阶段 - 承诺消息 (proposal_number, accepted_value)
+    Promise(u64, Option<(u64, String)>),
+    /// Accept阶段 - 接受请求 (proposal_number, value)
+    Accept(u64, String),
+    /// Accepted阶段 - 已接受消息 (proposal_number, value)
+    Accepted(u64, String),
+    /// Learn阶段 - 学习消息 (value)
+    Learn(String),
+}
+
+impl PaxosProtocol {
+    /// 创建新的Paxos协议实例
+    pub fn new(node_id: NodeId) -> Self {
+        Self {
+            node_id,
+            proposal_number: Arc::new(AtomicU64::new(0)),
+            accepted_proposal: Arc::new(RwLock::new(None)),
+            promised_number: Arc::new(AtomicU64::new(0)),
+            participants: Arc::new(RwLock::new(Vec::new())),
+        }
+    }
+    
+    /// 添加参与者
+    pub fn add_participant(&self, participant: NodeId) -> DistributedResult<()> {
+        let mut participants = self.participants.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取参与者写锁: {}", e)))?;
+        
+        if !participants.contains(&participant) {
+            participants.push(participant);
+        }
+        Ok(())
+    }
+    
+    /// 提议者角色：发起提议
+    pub fn propose(&self, _value: String) -> DistributedResult<u64> {
+        // 生成唯一的提议编号
+        let proposal_num = self.proposal_number.fetch_add(1, Ordering::SeqCst);
+        Ok(proposal_num)
+    }
+    
+    /// 获取节点ID
+    pub fn node_id(&self) -> &str {
+        &self.node_id
+    }
+    
+    /// 接受者角色：处理Prepare消息
+    pub fn handle_prepare(&self, proposal_number: u64) -> DistributedResult<PaxosMessage> {
+        let promised = self.promised_number.load(Ordering::SeqCst);
+        
+        if proposal_number > promised {
+            // 更新承诺的编号
+            self.promised_number.store(proposal_number, Ordering::SeqCst);
+            
+            // 返回已接受的提议（如果有）
+            let accepted = self.accepted_proposal.read()
+                .map_err(|e| ModelError::LockError(format!("无法获取已接受提议读锁: {}", e)))?;
+            
+            Ok(PaxosMessage::Promise(proposal_number, accepted.clone()))
+        } else {
+            Err(ModelError::ComputationError(
+                format!("提议编号{}小于等于已承诺的编号{}", proposal_number, promised)
+            ))
+        }
+    }
+    
+    /// 接受者角色：处理Accept消息
+    pub fn handle_accept(&self, proposal_number: u64, value: String) -> DistributedResult<PaxosMessage> {
+        let promised = self.promised_number.load(Ordering::SeqCst);
+        
+        if proposal_number >= promised {
+            // 接受这个提议
+            let mut accepted = self.accepted_proposal.write()
+                .map_err(|e| ModelError::LockError(format!("无法获取已接受提议写锁: {}", e)))?;
+            
+            *accepted = Some((proposal_number, value.clone()));
+            Ok(PaxosMessage::Accepted(proposal_number, value))
+        } else {
+            Err(ModelError::ComputationError(
+                format!("提议编号{}小于已承诺的编号{}", proposal_number, promised)
+            ))
+        }
+    }
+    
+    /// 学习者角色：学习已达成共识的值
+    pub fn learn(&self, value: String) -> DistributedResult<()> {
+        let mut accepted = self.accepted_proposal.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取已接受提议写锁: {}", e)))?;
+        
+        *accepted = Some((self.proposal_number.load(Ordering::SeqCst), value));
+        Ok(())
+    }
+    
+    /// 获取当前已接受的值
+    pub fn get_accepted_value(&self) -> DistributedResult<Option<String>> {
+        let accepted = self.accepted_proposal.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取已接受提议读锁: {}", e)))?;
+        
+        Ok(accepted.as_ref().map(|(_, v)| v.clone()))
+    }
+}
+
+/// 两阶段提交协议（2PC）
+/// 
+/// 用于分布式事务的原子提交协议
+#[derive(Debug)]
+pub struct TwoPhaseCommit {
+    /// 协调者节点ID
+    coordinator_id: NodeId,
+    /// 参与者列表
+    participants: Arc<RwLock<Vec<NodeId>>>,
+    /// 事务状态
+    transaction_state: Arc<RwLock<TransactionState>>,
+    /// 投票结果
+    votes: Arc<RwLock<HashMap<NodeId, VoteResult>>>,
+    /// 事务ID
+    transaction_id: String,
+}
+
+/// 事务状态
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum TransactionState {
+    /// 初始状态
+    Init,
+    /// 准备阶段
+    Preparing,
+    /// 已准备
+    Prepared,
+    /// 提交阶段
+    Committing,
+    /// 已提交
+    Committed,
+    /// 回滚阶段
+    Aborting,
+    /// 已回滚
+    Aborted,
+}
+
+/// 投票结果
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum VoteResult {
+    /// 同意提交
+    Yes,
+    /// 拒绝提交
+    No,
+    /// 超时
+    Timeout,
+}
+
+/// 2PC消息类型
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum TwoPhaseMessage {
+    /// 准备请求
+    Prepare(String), // transaction_id
+    /// 投票响应
+    Vote(String, VoteResult), // transaction_id, vote
+    /// 提交命令
+    Commit(String), // transaction_id
+    /// 回滚命令
+    Abort(String), // transaction_id
+    /// 确认消息
+    Ack(String), // transaction_id
+}
+
+impl TwoPhaseCommit {
+    /// 创建新的2PC协议实例（协调者）
+    pub fn new_coordinator(coordinator_id: NodeId, transaction_id: String) -> Self {
+        Self {
+            coordinator_id,
+            participants: Arc::new(RwLock::new(Vec::new())),
+            transaction_state: Arc::new(RwLock::new(TransactionState::Init)),
+            votes: Arc::new(RwLock::new(HashMap::new())),
+            transaction_id,
+        }
+    }
+    
+    /// 添加参与者
+    pub fn add_participant(&self, participant: NodeId) -> DistributedResult<()> {
+        let mut participants = self.participants.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取参与者写锁: {}", e)))?;
+        
+        participants.push(participant);
+        Ok(())
+    }
+    
+    /// 阶段1：准备阶段（协调者发起）
+    pub fn prepare_phase(&self) -> DistributedResult<bool> {
+        // 更新状态
+        let mut state = self.transaction_state.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取事务状态写锁: {}", e)))?;
+        
+        *state = TransactionState::Preparing;
+        drop(state);
+        
+        // 这里应该向所有参与者发送Prepare消息
+        // 实际实现需要网络通信
+        
+        Ok(true)
+    }
+    
+    /// 处理投票（协调者收集投票）
+    pub fn collect_vote(&self, participant: NodeId, vote: VoteResult) -> DistributedResult<()> {
+        let mut votes = self.votes.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取投票写锁: {}", e)))?;
+        
+        votes.insert(participant, vote);
+        Ok(())
+    }
+    
+    /// 检查所有投票是否通过
+    pub fn check_votes(&self) -> DistributedResult<bool> {
+        let votes = self.votes.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取投票读锁: {}", e)))?;
+        
+        let participants = self.participants.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取参与者读锁: {}", e)))?;
+        
+        // 检查是否所有参与者都投票了
+        if votes.len() != participants.len() {
+            return Ok(false);
+        }
+        
+        // 检查是否所有投票都是Yes
+        Ok(votes.values().all(|v| *v == VoteResult::Yes))
+    }
+    
+    /// 阶段2：提交阶段
+    pub fn commit_phase(&self) -> DistributedResult<()> {
+        let mut state = self.transaction_state.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取事务状态写锁: {}", e)))?;
+        
+        if self.check_votes()? {
+            *state = TransactionState::Committing;
+            // 向所有参与者发送Commit消息
+            *state = TransactionState::Committed;
+        } else {
+            *state = TransactionState::Aborting;
+            // 向所有参与者发送Abort消息
+            *state = TransactionState::Aborted;
+        }
+        
+        Ok(())
+    }
+    
+    /// 参与者：准备事务
+    pub fn prepare_transaction(&self) -> DistributedResult<VoteResult> {
+        // 参与者检查是否可以提交
+        // 这里简化处理，实际需要检查资源、锁等
+        
+        let mut state = self.transaction_state.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取事务状态写锁: {}", e)))?;
+        
+        *state = TransactionState::Prepared;
+        Ok(VoteResult::Yes)
+    }
+    
+    /// 参与者：提交事务
+    pub fn commit_transaction(&self) -> DistributedResult<()> {
+        let mut state = self.transaction_state.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取事务状态写锁: {}", e)))?;
+        
+        *state = TransactionState::Committed;
+        Ok(())
+    }
+    
+    /// 参与者：回滚事务
+    pub fn abort_transaction(&self) -> DistributedResult<()> {
+        let mut state = self.transaction_state.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取事务状态写锁: {}", e)))?;
+        
+        *state = TransactionState::Aborted;
+        Ok(())
+    }
+    
+    /// 获取事务状态
+    pub fn get_state(&self) -> DistributedResult<TransactionState> {
+        let state = self.transaction_state.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取事务状态读锁: {}", e)))?;
+        
+        Ok(state.clone())
+    }
+    
+    /// 获取协调者ID
+    pub fn coordinator_id(&self) -> &str {
+        &self.coordinator_id
+    }
+    
+    /// 获取事务ID
+    pub fn transaction_id(&self) -> &str {
+        &self.transaction_id
+    }
+}
+
+/// 三阶段提交协议（3PC）
+/// 
+/// 2PC的改进版本，引入超时机制和CanCommit阶段
+#[derive(Debug)]
+pub struct ThreePhaseCommit {
+    /// 协调者节点ID
+    coordinator_id: NodeId,
+    /// 参与者列表
+    participants: Arc<RwLock<Vec<NodeId>>>,
+    /// 事务状态
+    transaction_state: Arc<RwLock<ThreePhaseState>>,
+    /// 投票结果
+    can_commit_votes: Arc<RwLock<HashMap<NodeId, bool>>>,
+    /// PreCommit确认
+    pre_commit_acks: Arc<RwLock<HashSet<NodeId>>>,
+    /// 事务ID
+    transaction_id: String,
+    /// 超时设置
+    timeout: Duration,
+}
+
+/// 三阶段提交状态
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum ThreePhaseState {
+    /// 初始状态
+    Init,
+    /// CanCommit阶段
+    CanCommit,
+    /// PreCommit阶段
+    PreCommit,
+    /// DoCommit阶段
+    DoCommit,
+    /// 已提交
+    Committed,
+    /// 已回滚
+    Aborted,
+}
+
+/// 3PC消息类型
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum ThreePhaseMessage {
+    /// CanCommit请求
+    CanCommit(String), // transaction_id
+    /// CanCommit响应
+    CanCommitResponse(String, bool), // transaction_id, can_commit
+    /// PreCommit请求
+    PreCommit(String), // transaction_id
+    /// PreCommit确认
+    PreCommitAck(String), // transaction_id
+    /// DoCommit请求
+    DoCommit(String), // transaction_id
+    /// DoAbort请求
+    DoAbort(String), // transaction_id
+    /// 完成确认
+    HaveCommitted(String), // transaction_id
+}
+
+impl ThreePhaseCommit {
+    /// 创建新的3PC协议实例（协调者）
+    pub fn new_coordinator(
+        coordinator_id: NodeId,
+        transaction_id: String,
+        timeout: Duration,
+    ) -> Self {
+        Self {
+            coordinator_id,
+            participants: Arc::new(RwLock::new(Vec::new())),
+            transaction_state: Arc::new(RwLock::new(ThreePhaseState::Init)),
+            can_commit_votes: Arc::new(RwLock::new(HashMap::new())),
+            pre_commit_acks: Arc::new(RwLock::new(HashSet::new())),
+            transaction_id,
+            timeout,
+        }
+    }
+    
+    /// 添加参与者
+    pub fn add_participant(&self, participant: NodeId) -> DistributedResult<()> {
+        let mut participants = self.participants.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取参与者写锁: {}", e)))?;
+        
+        participants.push(participant);
+        Ok(())
+    }
+    
+    /// 阶段1：CanCommit阶段
+    pub fn can_commit_phase(&self) -> DistributedResult<bool> {
+        let mut state = self.transaction_state.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取事务状态写锁: {}", e)))?;
+        
+        *state = ThreePhaseState::CanCommit;
+        drop(state);
+        
+        // 向所有参与者发送CanCommit请求
+        // 实际实现需要网络通信和超时处理
+        
+        Ok(true)
+    }
+    
+    /// 收集CanCommit投票
+    pub fn collect_can_commit_vote(&self, participant: NodeId, can_commit: bool) -> DistributedResult<()> {
+        let mut votes = self.can_commit_votes.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取投票写锁: {}", e)))?;
+        
+        votes.insert(participant, can_commit);
+        Ok(())
+    }
+    
+    /// 检查CanCommit投票
+    pub fn check_can_commit_votes(&self) -> DistributedResult<bool> {
+        let votes = self.can_commit_votes.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取投票读锁: {}", e)))?;
+        
+        let participants = self.participants.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取参与者读锁: {}", e)))?;
+        
+        if votes.len() != participants.len() {
+            return Ok(false);
+        }
+        
+        Ok(votes.values().all(|&v| v))
+    }
+    
+    /// 阶段2：PreCommit阶段
+    pub fn pre_commit_phase(&self) -> DistributedResult<()> {
+        let mut state = self.transaction_state.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取事务状态写锁: {}", e)))?;
+        
+        if self.check_can_commit_votes()? {
+            *state = ThreePhaseState::PreCommit;
+            // 向所有参与者发送PreCommit请求
+        } else {
+            *state = ThreePhaseState::Aborted;
+            // 向所有参与者发送Abort请求
+        }
+        
+        Ok(())
+    }
+    
+    /// 收集PreCommit确认
+    pub fn collect_pre_commit_ack(&self, participant: NodeId) -> DistributedResult<()> {
+        let mut acks = self.pre_commit_acks.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取确认写锁: {}", e)))?;
+        
+        acks.insert(participant);
+        Ok(())
+    }
+    
+    /// 检查PreCommit确认
+    pub fn check_pre_commit_acks(&self) -> DistributedResult<bool> {
+        let acks = self.pre_commit_acks.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取确认读锁: {}", e)))?;
+        
+        let participants = self.participants.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取参与者读锁: {}", e)))?;
+        
+        Ok(acks.len() == participants.len())
+    }
+    
+    /// 阶段3：DoCommit阶段
+    pub fn do_commit_phase(&self) -> DistributedResult<()> {
+        let mut state = self.transaction_state.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取事务状态写锁: {}", e)))?;
+        
+        if self.check_pre_commit_acks()? {
+            *state = ThreePhaseState::DoCommit;
+            // 向所有参与者发送DoCommit请求
+            *state = ThreePhaseState::Committed;
+        } else {
+            *state = ThreePhaseState::Aborted;
+            // 向所有参与者发送Abort请求
+        }
+        
+        Ok(())
+    }
+    
+    /// 参与者：处理CanCommit请求
+    pub fn handle_can_commit(&self) -> DistributedResult<bool> {
+        // 参与者检查是否可以提交
+        // 简化处理，实际需要检查资源可用性
+        Ok(true)
+    }
+    
+    /// 参与者：处理PreCommit请求
+    pub fn handle_pre_commit(&self) -> DistributedResult<()> {
+        let mut state = self.transaction_state.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取事务状态写锁: {}", e)))?;
+        
+        *state = ThreePhaseState::PreCommit;
+        // 准备提交（但还没有真正提交）
+        Ok(())
+    }
+    
+    /// 参与者：处理DoCommit请求
+    pub fn handle_do_commit(&self) -> DistributedResult<()> {
+        let mut state = self.transaction_state.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取事务状态写锁: {}", e)))?;
+        
+        *state = ThreePhaseState::Committed;
+        // 真正提交事务
+        Ok(())
+    }
+    
+    /// 参与者：超时处理
+    pub fn handle_timeout(&self) -> DistributedResult<()> {
+        let state = self.transaction_state.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取事务状态读锁: {}", e)))?
+            .clone();
+        
+        match state {
+            ThreePhaseState::CanCommit => {
+                // CanCommit超时：回滚
+                self.abort()?;
+            }
+            ThreePhaseState::PreCommit => {
+                // PreCommit超时：继续提交（3PC的关键改进）
+                self.handle_do_commit()?;
+            }
+            _ => {}
+        }
+        
+        Ok(())
+    }
+    
+    /// 回滚事务
+    pub fn abort(&self) -> DistributedResult<()> {
+        let mut state = self.transaction_state.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取事务状态写锁: {}", e)))?;
+        
+        *state = ThreePhaseState::Aborted;
+        Ok(())
+    }
+    
+    /// 获取事务状态
+    pub fn get_state(&self) -> DistributedResult<ThreePhaseState> {
+        let state = self.transaction_state.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取事务状态读锁: {}", e)))?;
+        
+        Ok(state.clone())
+    }
+    
+    /// 获取超时设置
+    pub fn get_timeout(&self) -> Duration {
+        self.timeout
+    }
+    
+    /// 获取协调者ID
+    pub fn coordinator_id(&self) -> &str {
+        &self.coordinator_id
+    }
+    
+    /// 获取事务ID
+    pub fn transaction_id(&self) -> &str {
+        &self.transaction_id
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -1181,5 +1751,149 @@ mod tests {
         assert!(!detector.is_suspected(&"node1".to_string()));
         
         detector.stop();
+    }
+    
+    #[test]
+    fn test_paxos_protocol() {
+        let paxos = PaxosProtocol::new("node1".to_string());
+        
+        // 测试添加参与者
+        paxos.add_participant("node2".to_string()).unwrap();
+        paxos.add_participant("node3".to_string()).unwrap();
+        
+        // 测试提议
+        let proposal_num = paxos.propose("value1".to_string()).unwrap();
+        assert_eq!(proposal_num, 0);
+        
+        // 测试Prepare阶段
+        let promise = paxos.handle_prepare(1).unwrap();
+        match promise {
+            PaxosMessage::Promise(num, _) => assert_eq!(num, 1),
+            _ => panic!("Expected Promise message"),
+        }
+        
+        // 测试Accept阶段
+        let accepted = paxos.handle_accept(1, "value1".to_string()).unwrap();
+        match accepted {
+            PaxosMessage::Accepted(num, val) => {
+                assert_eq!(num, 1);
+                assert_eq!(val, "value1");
+            }
+            _ => panic!("Expected Accepted message"),
+        }
+        
+        // 验证已接受的值
+        let value = paxos.get_accepted_value().unwrap();
+        assert_eq!(value, Some("value1".to_string()));
+    }
+    
+    #[test]
+    fn test_two_phase_commit() {
+        let tx_id = "tx_001".to_string();
+        let coordinator = TwoPhaseCommit::new_coordinator("coordinator".to_string(), tx_id.clone());
+        
+        // 添加参与者
+        coordinator.add_participant("node1".to_string()).unwrap();
+        coordinator.add_participant("node2".to_string()).unwrap();
+        
+        // 准备阶段
+        coordinator.prepare_phase().unwrap();
+        
+        // 收集投票
+        coordinator.collect_vote("node1".to_string(), VoteResult::Yes).unwrap();
+        coordinator.collect_vote("node2".to_string(), VoteResult::Yes).unwrap();
+        
+        // 检查投票
+        assert!(coordinator.check_votes().unwrap());
+        
+        // 提交阶段
+        coordinator.commit_phase().unwrap();
+        
+        // 验证最终状态
+        let state = coordinator.get_state().unwrap();
+        assert_eq!(state, TransactionState::Committed);
+    }
+    
+    #[test]
+    fn test_two_phase_commit_abort() {
+        let tx_id = "tx_002".to_string();
+        let coordinator = TwoPhaseCommit::new_coordinator("coordinator".to_string(), tx_id);
+        
+        coordinator.add_participant("node1".to_string()).unwrap();
+        coordinator.add_participant("node2".to_string()).unwrap();
+        
+        coordinator.prepare_phase().unwrap();
+        
+        // 一个参与者投反对票
+        coordinator.collect_vote("node1".to_string(), VoteResult::Yes).unwrap();
+        coordinator.collect_vote("node2".to_string(), VoteResult::No).unwrap();
+        
+        // 检查投票失败
+        assert!(!coordinator.check_votes().unwrap());
+        
+        // 提交阶段会回滚
+        coordinator.commit_phase().unwrap();
+        
+        let state = coordinator.get_state().unwrap();
+        assert_eq!(state, TransactionState::Aborted);
+    }
+    
+    #[test]
+    fn test_three_phase_commit() {
+        let tx_id = "tx_003".to_string();
+        let coordinator = ThreePhaseCommit::new_coordinator(
+            "coordinator".to_string(),
+            tx_id.clone(),
+            Duration::from_secs(5),
+        );
+        
+        // 添加参与者
+        coordinator.add_participant("node1".to_string()).unwrap();
+        coordinator.add_participant("node2".to_string()).unwrap();
+        
+        // CanCommit阶段
+        coordinator.can_commit_phase().unwrap();
+        
+        // 收集CanCommit投票
+        coordinator.collect_can_commit_vote("node1".to_string(), true).unwrap();
+        coordinator.collect_can_commit_vote("node2".to_string(), true).unwrap();
+        
+        assert!(coordinator.check_can_commit_votes().unwrap());
+        
+        // PreCommit阶段
+        coordinator.pre_commit_phase().unwrap();
+        
+        // 收集PreCommit确认
+        coordinator.collect_pre_commit_ack("node1".to_string()).unwrap();
+        coordinator.collect_pre_commit_ack("node2".to_string()).unwrap();
+        
+        assert!(coordinator.check_pre_commit_acks().unwrap());
+        
+        // DoCommit阶段
+        coordinator.do_commit_phase().unwrap();
+        
+        // 验证最终状态
+        let state = coordinator.get_state().unwrap();
+        assert_eq!(state, ThreePhaseState::Committed);
+    }
+    
+    #[test]
+    fn test_three_phase_commit_timeout() {
+        let paxos = ThreePhaseCommit::new_coordinator(
+            "coordinator".to_string(),
+            "tx_timeout".to_string(),
+            Duration::from_millis(100),
+        );
+        
+        // 验证超时设置
+        assert_eq!(paxos.get_timeout(), Duration::from_millis(100));
+        
+        // 测试PreCommit超时处理
+        paxos.handle_pre_commit().unwrap();
+        paxos.handle_timeout().unwrap();
+        
+        // PreCommit超时应该继续提交（3PC的关键特性）
+        let state = paxos.get_state().unwrap();
+        assert_eq!(state, ThreePhaseState::Committed);
     }
 }

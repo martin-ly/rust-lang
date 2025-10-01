@@ -1319,6 +1319,610 @@ impl ServiceMetrics {
     }
 }
 
+/// 服务网格 (Service Mesh)
+/// 
+/// 为微服务提供透明的网络通信、负载均衡、服务发现、
+/// 安全、监控等基础设施功能
+#[derive(Debug)]
+pub struct ServiceMesh {
+    /// 网格名称
+    name: String,
+    /// 注册的服务代理
+    proxies: Arc<RwLock<HashMap<ServiceId, SidecarProxy>>>,
+    /// 流量管理规则
+    traffic_rules: Arc<RwLock<Vec<TrafficRule>>>,
+    /// 安全策略
+    security_policies: Arc<RwLock<HashMap<ServiceId, SecurityPolicy>>>,
+    /// 可观测性配置
+    observability_config: Arc<RwLock<ObservabilityConfig>>,
+}
+
+/// Sidecar代理
+#[derive(Debug, Clone)]
+pub struct SidecarProxy {
+    /// 服务ID
+    service_id: ServiceId,
+    /// 代理地址
+    proxy_address: SocketAddr,
+    /// 服务地址
+    service_address: SocketAddr,
+    /// 启用的功能
+    enabled_features: HashSet<ProxyFeature>,
+    /// 统计信息
+    stats: ProxyStats,
+}
+
+/// 代理功能
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum ProxyFeature {
+    /// 负载均衡
+    LoadBalancing,
+    /// 熔断器
+    CircuitBreaking,
+    /// 重试
+    Retry,
+    /// 超时
+    Timeout,
+    /// TLS终止
+    TlsTermination,
+    /// 请求追踪
+    Tracing,
+    /// 指标收集
+    Metrics,
+}
+
+/// 代理统计信息
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
+pub struct ProxyStats {
+    pub total_requests: u64,
+    pub successful_requests: u64,
+    pub failed_requests: u64,
+    pub average_latency_ms: f64,
+    pub p95_latency_ms: f64,
+    pub p99_latency_ms: f64,
+}
+
+/// 流量规则
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TrafficRule {
+    /// 规则ID
+    pub id: String,
+    /// 源服务
+    pub source_service: ServiceId,
+    /// 目标服务
+    pub destination_service: ServiceId,
+    /// 流量分配
+    pub traffic_split: Vec<TrafficSplit>,
+    /// 重试策略
+    pub retry_policy: Option<RetryPolicy>,
+    /// 超时设置
+    pub timeout: Option<Duration>,
+}
+
+/// 流量分配
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TrafficSplit {
+    /// 目标版本
+    pub version: String,
+    /// 流量权重 (0-100)
+    pub weight: u32,
+}
+
+/// 重试策略
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RetryPolicy {
+    /// 最大重试次数
+    pub max_attempts: u32,
+    /// 重试间隔
+    pub retry_interval: Duration,
+    /// 可重试的错误码
+    pub retryable_status_codes: Vec<u16>,
+}
+
+/// 安全策略
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SecurityPolicy {
+    /// 启用mTLS
+    pub enable_mtls: bool,
+    /// 允许的服务列表
+    pub allowed_services: HashSet<ServiceId>,
+    /// JWT验证
+    pub jwt_validation: Option<JwtValidation>,
+    /// 访问控制
+    pub access_control: Vec<AccessRule>,
+}
+
+/// JWT验证配置
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct JwtValidation {
+    pub issuer: String,
+    pub audience: String,
+    pub public_key: String,
+}
+
+/// 访问控制规则
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessRule {
+    pub path_pattern: String,
+    pub allowed_methods: Vec<String>,
+    pub required_roles: Vec<String>,
+}
+
+/// 可观测性配置
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ObservabilityConfig {
+    /// 启用追踪
+    pub enable_tracing: bool,
+    /// 采样率 (0.0-1.0)
+    pub tracing_sample_rate: f64,
+    /// 启用指标
+    pub enable_metrics: bool,
+    /// 指标导出端点
+    pub metrics_endpoint: Option<String>,
+    /// 启用日志
+    pub enable_logging: bool,
+    /// 日志级别
+    pub log_level: LogLevel,
+}
+
+/// 日志级别
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum LogLevel {
+    Trace,
+    Debug,
+    Info,
+    Warn,
+    Error,
+}
+
+impl ServiceMesh {
+    /// 创建新的服务网格
+    pub fn new(name: String) -> Self {
+        Self {
+            name,
+            proxies: Arc::new(RwLock::new(HashMap::new())),
+            traffic_rules: Arc::new(RwLock::new(Vec::new())),
+            security_policies: Arc::new(RwLock::new(HashMap::new())),
+            observability_config: Arc::new(RwLock::new(ObservabilityConfig {
+                enable_tracing: true,
+                tracing_sample_rate: 0.1,
+                enable_metrics: true,
+                metrics_endpoint: None,
+                enable_logging: true,
+                log_level: LogLevel::Info,
+            })),
+        }
+    }
+    
+    /// 注册Sidecar代理
+    pub fn register_proxy(&self, proxy: SidecarProxy) -> MicroserviceResult<()> {
+        let mut proxies = self.proxies.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取代理写锁: {}", e)))?;
+        
+        proxies.insert(proxy.service_id.clone(), proxy);
+        Ok(())
+    }
+    
+    /// 获取代理
+    pub fn get_proxy(&self, service_id: &ServiceId) -> MicroserviceResult<Option<SidecarProxy>> {
+        let proxies = self.proxies.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取代理读锁: {}", e)))?;
+        
+        Ok(proxies.get(service_id).cloned())
+    }
+    
+    /// 添加流量规则
+    pub fn add_traffic_rule(&self, rule: TrafficRule) -> MicroserviceResult<()> {
+        let mut rules = self.traffic_rules.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取流量规则写锁: {}", e)))?;
+        
+        rules.push(rule);
+        Ok(())
+    }
+    
+    /// 设置安全策略
+    pub fn set_security_policy(&self, service_id: ServiceId, policy: SecurityPolicy) -> MicroserviceResult<()> {
+        let mut policies = self.security_policies.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取安全策略写锁: {}", e)))?;
+        
+        policies.insert(service_id, policy);
+        Ok(())
+    }
+    
+    /// 更新可观测性配置
+    pub fn update_observability_config(&self, config: ObservabilityConfig) -> MicroserviceResult<()> {
+        let mut obs_config = self.observability_config.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取可观测性配置写锁: {}", e)))?;
+        
+        *obs_config = config;
+        Ok(())
+    }
+    
+    /// 获取网格统计
+    pub fn get_mesh_stats(&self) -> MicroserviceResult<MeshStats> {
+        let proxies = self.proxies.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取代理读锁: {}", e)))?;
+        
+        let total_services = proxies.len();
+        let total_requests: u64 = proxies.values().map(|p| p.stats.total_requests).sum();
+        let successful_requests: u64 = proxies.values().map(|p| p.stats.successful_requests).sum();
+        let failed_requests: u64 = proxies.values().map(|p| p.stats.failed_requests).sum();
+        
+        let avg_latency = if total_services > 0 {
+            proxies.values().map(|p| p.stats.average_latency_ms).sum::<f64>() / total_services as f64
+        } else {
+            0.0
+        };
+        
+        Ok(MeshStats {
+            total_services,
+            total_requests,
+            successful_requests,
+            failed_requests,
+            average_latency_ms: avg_latency,
+        })
+    }
+    
+    /// 获取网格名称
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+}
+
+/// 网格统计信息
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MeshStats {
+    pub total_services: usize,
+    pub total_requests: u64,
+    pub successful_requests: u64,
+    pub failed_requests: u64,
+    pub average_latency_ms: f64,
+}
+
+impl SidecarProxy {
+    /// 创建新的Sidecar代理
+    pub fn new(service_id: ServiceId, proxy_address: SocketAddr, service_address: SocketAddr) -> Self {
+        Self {
+            service_id,
+            proxy_address,
+            service_address,
+            enabled_features: HashSet::new(),
+            stats: ProxyStats::default(),
+        }
+    }
+    
+    /// 启用功能
+    pub fn enable_feature(&mut self, feature: ProxyFeature) {
+        self.enabled_features.insert(feature);
+    }
+    
+    /// 检查功能是否启用
+    pub fn is_feature_enabled(&self, feature: &ProxyFeature) -> bool {
+        self.enabled_features.contains(feature)
+    }
+    
+    /// 更新统计信息
+    pub fn update_stats(&mut self, success: bool, latency_ms: f64) {
+        self.stats.total_requests += 1;
+        if success {
+            self.stats.successful_requests += 1;
+        } else {
+            self.stats.failed_requests += 1;
+        }
+        
+        // 简化的平均延迟计算
+        self.stats.average_latency_ms = 
+            (self.stats.average_latency_ms * (self.stats.total_requests - 1) as f64 + latency_ms) 
+            / self.stats.total_requests as f64;
+    }
+    
+    /// 获取代理地址
+    pub fn proxy_address(&self) -> &SocketAddr {
+        &self.proxy_address
+    }
+    
+    /// 获取服务地址
+    pub fn service_address(&self) -> &SocketAddr {
+        &self.service_address
+    }
+}
+
+/// 分布式追踪系统
+/// 
+/// 实现分布式追踪功能，用于追踪跨服务的请求链路
+#[derive(Debug)]
+pub struct DistributedTracing {
+    /// 追踪系统名称
+    name: String,
+    /// 活动的追踪
+    active_traces: Arc<RwLock<HashMap<String, Trace>>>,
+    /// 已完成的追踪
+    completed_traces: Arc<RwLock<VecDeque<Trace>>>,
+    /// 采样率
+    sample_rate: Arc<RwLock<f64>>,
+    /// 最大保存的追踪数量
+    max_traces: usize,
+}
+
+/// 追踪
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Trace {
+    /// 追踪ID
+    pub trace_id: String,
+    /// 根Span
+    pub root_span: Span,
+    /// 所有Span
+    pub spans: Vec<Span>,
+    /// 开始时间
+    pub start_time: SystemTime,
+    /// 结束时间
+    pub end_time: Option<SystemTime>,
+    /// 状态
+    pub status: TraceStatus,
+}
+
+/// 追踪状态
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum TraceStatus {
+    Active,
+    Completed,
+    Failed,
+}
+
+/// Span (追踪片段)
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Span {
+    /// Span ID
+    pub span_id: String,
+    /// 父Span ID
+    pub parent_span_id: Option<String>,
+    /// 追踪ID
+    pub trace_id: String,
+    /// 服务名称
+    pub service_name: String,
+    /// 操作名称
+    pub operation_name: String,
+    /// 开始时间
+    pub start_time: SystemTime,
+    /// 结束时间
+    pub end_time: Option<SystemTime>,
+    /// 持续时间(毫秒)
+    pub duration_ms: Option<f64>,
+    /// 标签
+    pub tags: HashMap<String, String>,
+    /// 日志
+    pub logs: Vec<SpanLog>,
+    /// 状态
+    pub status: SpanStatus,
+}
+
+/// Span状态
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum SpanStatus {
+    Running,
+    Ok,
+    Error,
+}
+
+/// Span日志
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SpanLog {
+    pub timestamp: SystemTime,
+    pub message: String,
+    pub fields: HashMap<String, String>,
+}
+
+impl DistributedTracing {
+    /// 创建新的分布式追踪系统
+    pub fn new(name: String, sample_rate: f64) -> Self {
+        Self {
+            name,
+            active_traces: Arc::new(RwLock::new(HashMap::new())),
+            completed_traces: Arc::new(RwLock::new(VecDeque::new())),
+            sample_rate: Arc::new(RwLock::new(sample_rate)),
+            max_traces: 1000,
+        }
+    }
+    
+    /// 开始新的追踪
+    pub fn start_trace(&self, trace_id: String, service_name: String, operation_name: String) -> MicroserviceResult<Span> {
+        // 检查采样率
+        let sample_rate = *self.sample_rate.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取采样率读锁: {}", e)))?;
+        
+        // 简化：总是采样（实际应该使用随机数）
+        if sample_rate <= 0.0 {
+            return Err(ModelError::ComputationError("采样率过低，跳过追踪".to_string()));
+        }
+        
+        let span_id = format!("{}-root", trace_id);
+        let span = Span {
+            span_id: span_id.clone(),
+            parent_span_id: None,
+            trace_id: trace_id.clone(),
+            service_name,
+            operation_name,
+            start_time: SystemTime::now(),
+            end_time: None,
+            duration_ms: None,
+            tags: HashMap::new(),
+            logs: Vec::new(),
+            status: SpanStatus::Running,
+        };
+        
+        let trace = Trace {
+            trace_id: trace_id.clone(),
+            root_span: span.clone(),
+            spans: vec![span.clone()],
+            start_time: SystemTime::now(),
+            end_time: None,
+            status: TraceStatus::Active,
+        };
+        
+        let mut traces = self.active_traces.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取活动追踪写锁: {}", e)))?;
+        
+        traces.insert(trace_id, trace);
+        
+        Ok(span)
+    }
+    
+    /// 添加子Span
+    pub fn add_span(&self, trace_id: &str, parent_span_id: &str, service_name: String, operation_name: String) -> MicroserviceResult<Span> {
+        let span_id = format!("{}-{}", trace_id, uuid::Uuid::new_v4().to_string()[..8].to_string());
+        
+        let span = Span {
+            span_id: span_id.clone(),
+            parent_span_id: Some(parent_span_id.to_string()),
+            trace_id: trace_id.to_string(),
+            service_name,
+            operation_name,
+            start_time: SystemTime::now(),
+            end_time: None,
+            duration_ms: None,
+            tags: HashMap::new(),
+            logs: Vec::new(),
+            status: SpanStatus::Running,
+        };
+        
+        let mut traces = self.active_traces.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取活动追踪写锁: {}", e)))?;
+        
+        if let Some(trace) = traces.get_mut(trace_id) {
+            trace.spans.push(span.clone());
+        } else {
+            return Err(ModelError::ValidationError(format!("追踪{}不存在", trace_id)));
+        }
+        
+        Ok(span)
+    }
+    
+    /// 结束Span
+    pub fn end_span(&self, trace_id: &str, span_id: &str, status: SpanStatus) -> MicroserviceResult<()> {
+        let mut traces = self.active_traces.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取活动追踪写锁: {}", e)))?;
+        
+        if let Some(trace) = traces.get_mut(trace_id) {
+            if let Some(span) = trace.spans.iter_mut().find(|s| s.span_id == span_id) {
+                let end_time = SystemTime::now();
+                span.end_time = Some(end_time);
+                span.status = status;
+                
+                if let Ok(duration) = end_time.duration_since(span.start_time) {
+                    span.duration_ms = Some(duration.as_secs_f64() * 1000.0);
+                }
+            }
+        }
+        
+        Ok(())
+    }
+    
+    /// 完成追踪
+    pub fn finish_trace(&self, trace_id: &str) -> MicroserviceResult<()> {
+        let mut active_traces = self.active_traces.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取活动追踪写锁: {}", e)))?;
+        
+        if let Some(mut trace) = active_traces.remove(trace_id) {
+            trace.end_time = Some(SystemTime::now());
+            trace.status = TraceStatus::Completed;
+            
+            let mut completed_traces = self.completed_traces.write()
+                .map_err(|e| ModelError::LockError(format!("无法获取已完成追踪写锁: {}", e)))?;
+            
+            // 限制保存的追踪数量
+            if completed_traces.len() >= self.max_traces {
+                completed_traces.pop_front();
+            }
+            
+            completed_traces.push_back(trace);
+        }
+        
+        Ok(())
+    }
+    
+    /// 获取追踪
+    pub fn get_trace(&self, trace_id: &str) -> MicroserviceResult<Option<Trace>> {
+        let active_traces = self.active_traces.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取活动追踪读锁: {}", e)))?;
+        
+        if let Some(trace) = active_traces.get(trace_id) {
+            return Ok(Some(trace.clone()));
+        }
+        
+        let completed_traces = self.completed_traces.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取已完成追踪读锁: {}", e)))?;
+        
+        Ok(completed_traces.iter().find(|t| t.trace_id == trace_id).cloned())
+    }
+    
+    /// 获取追踪统计
+    pub fn get_stats(&self) -> MicroserviceResult<TracingStats> {
+        let active_traces = self.active_traces.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取活动追踪读锁: {}", e)))?;
+        
+        let completed_traces = self.completed_traces.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取已完成追踪读锁: {}", e)))?;
+        
+        let total_spans: usize = completed_traces.iter().map(|t| t.spans.len()).sum();
+        
+        let avg_span_duration = if total_spans > 0 {
+            let total_duration: f64 = completed_traces.iter()
+                .flat_map(|t| &t.spans)
+                .filter_map(|s| s.duration_ms)
+                .sum();
+            total_duration / total_spans as f64
+        } else {
+            0.0
+        };
+        
+        Ok(TracingStats {
+            active_traces: active_traces.len(),
+            completed_traces: completed_traces.len(),
+            total_spans,
+            average_span_duration_ms: avg_span_duration,
+        })
+    }
+    
+    /// 设置采样率
+    pub fn set_sample_rate(&self, rate: f64) -> MicroserviceResult<()> {
+        let mut sample_rate = self.sample_rate.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取采样率写锁: {}", e)))?;
+        
+        *sample_rate = rate.max(0.0).min(1.0);
+        Ok(())
+    }
+    
+    /// 获取追踪系统名称
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+}
+
+/// 追踪统计信息
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TracingStats {
+    pub active_traces: usize,
+    pub completed_traces: usize,
+    pub total_spans: usize,
+    pub average_span_duration_ms: f64,
+}
+
+impl Span {
+    /// 添加标签
+    pub fn add_tag(&mut self, key: String, value: String) {
+        self.tags.insert(key, value);
+    }
+    
+    /// 添加日志
+    pub fn add_log(&mut self, message: String, fields: HashMap<String, String>) {
+        self.logs.push(SpanLog {
+            timestamp: SystemTime::now(),
+            message,
+            fields,
+        });
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -1466,5 +2070,187 @@ mod tests {
         assert_eq!(status.total_services, 1);
         assert_eq!(status.total_instances, 1);
         assert_eq!(status.healthy_instances, 1);
+    }
+    
+    #[test]
+    fn test_service_mesh() {
+        let mesh = ServiceMesh::new("test-mesh".to_string());
+        
+        // 创建并注册Sidecar代理
+        let mut proxy = SidecarProxy::new(
+            "service-a".to_string(),
+            SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 9000),
+            SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8080),
+        );
+        
+        proxy.enable_feature(ProxyFeature::LoadBalancing);
+        proxy.enable_feature(ProxyFeature::CircuitBreaking);
+        proxy.enable_feature(ProxyFeature::Tracing);
+        
+        mesh.register_proxy(proxy).unwrap();
+        
+        // 验证代理注册
+        let retrieved_proxy = mesh.get_proxy(&"service-a".to_string()).unwrap();
+        assert!(retrieved_proxy.is_some());
+        
+        let proxy = retrieved_proxy.unwrap();
+        assert!(proxy.is_feature_enabled(&ProxyFeature::LoadBalancing));
+        assert!(proxy.is_feature_enabled(&ProxyFeature::Tracing));
+        
+        // 添加流量规则
+        let rule = TrafficRule {
+            id: "rule1".to_string(),
+            source_service: "service-a".to_string(),
+            destination_service: "service-b".to_string(),
+            traffic_split: vec![
+                TrafficSplit { version: "v1".to_string(), weight: 80 },
+                TrafficSplit { version: "v2".to_string(), weight: 20 },
+            ],
+            retry_policy: Some(RetryPolicy {
+                max_attempts: 3,
+                retry_interval: Duration::from_millis(100),
+                retryable_status_codes: vec![500, 502, 503],
+            }),
+            timeout: Some(Duration::from_secs(5)),
+        };
+        
+        mesh.add_traffic_rule(rule).unwrap();
+        
+        // 设置安全策略
+        let mut allowed_services = HashSet::new();
+        allowed_services.insert("service-b".to_string());
+        allowed_services.insert("service-c".to_string());
+        
+        let policy = SecurityPolicy {
+            enable_mtls: true,
+            allowed_services,
+            jwt_validation: Some(JwtValidation {
+                issuer: "https://auth.example.com".to_string(),
+                audience: "service-a".to_string(),
+                public_key: "-----BEGIN PUBLIC KEY-----".to_string(),
+            }),
+            access_control: vec![
+                AccessRule {
+                    path_pattern: "/api/*".to_string(),
+                    allowed_methods: vec!["GET".to_string(), "POST".to_string()],
+                    required_roles: vec!["user".to_string()],
+                },
+            ],
+        };
+        
+        mesh.set_security_policy("service-a".to_string(), policy).unwrap();
+        
+        // 验证网格统计
+        let stats = mesh.get_mesh_stats().unwrap();
+        assert_eq!(stats.total_services, 1);
+    }
+    
+    #[test]
+    fn test_sidecar_proxy_stats() {
+        let mut proxy = SidecarProxy::new(
+            "service-a".to_string(),
+            SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 9000),
+            SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8080),
+        );
+        
+        // 模拟请求
+        proxy.update_stats(true, 10.0);
+        proxy.update_stats(true, 20.0);
+        proxy.update_stats(false, 15.0);
+        
+        assert_eq!(proxy.stats.total_requests, 3);
+        assert_eq!(proxy.stats.successful_requests, 2);
+        assert_eq!(proxy.stats.failed_requests, 1);
+        assert_eq!(proxy.stats.average_latency_ms, 15.0);
+    }
+    
+    #[test]
+    fn test_distributed_tracing() {
+        let tracing = DistributedTracing::new("test-tracer".to_string(), 1.0);
+        
+        // 开始追踪
+        let root_span = tracing.start_trace(
+            "trace-123".to_string(),
+            "api-gateway".to_string(),
+            "handle_request".to_string(),
+        ).unwrap();
+        
+        assert_eq!(root_span.service_name, "api-gateway");
+        assert_eq!(root_span.status, SpanStatus::Running);
+        
+        // 添加子Span
+        let child_span = tracing.add_span(
+            "trace-123",
+            &root_span.span_id,
+            "user-service".to_string(),
+            "get_user".to_string(),
+        ).unwrap();
+        
+        assert_eq!(child_span.parent_span_id, Some(root_span.span_id.clone()));
+        
+        // 结束Span
+        tracing.end_span("trace-123", &child_span.span_id, SpanStatus::Ok).unwrap();
+        tracing.end_span("trace-123", &root_span.span_id, SpanStatus::Ok).unwrap();
+        
+        // 完成追踪
+        tracing.finish_trace("trace-123").unwrap();
+        
+        // 验证追踪
+        let trace = tracing.get_trace("trace-123").unwrap();
+        assert!(trace.is_some());
+        
+        let trace = trace.unwrap();
+        assert_eq!(trace.status, TraceStatus::Completed);
+        assert_eq!(trace.spans.len(), 2);
+        
+        // 验证统计
+        let stats = tracing.get_stats().unwrap();
+        assert_eq!(stats.active_traces, 0);
+        assert_eq!(stats.completed_traces, 1);
+        assert_eq!(stats.total_spans, 2);
+    }
+    
+    #[test]
+    fn test_span_operations() {
+        let mut span = Span {
+            span_id: "span-1".to_string(),
+            parent_span_id: None,
+            trace_id: "trace-1".to_string(),
+            service_name: "test-service".to_string(),
+            operation_name: "test-op".to_string(),
+            start_time: SystemTime::now(),
+            end_time: None,
+            duration_ms: None,
+            tags: HashMap::new(),
+            logs: Vec::new(),
+            status: SpanStatus::Running,
+        };
+        
+        // 添加标签
+        span.add_tag("http.method".to_string(), "GET".to_string());
+        span.add_tag("http.status_code".to_string(), "200".to_string());
+        
+        assert_eq!(span.tags.len(), 2);
+        assert_eq!(span.tags.get("http.method"), Some(&"GET".to_string()));
+        
+        // 添加日志
+        let mut fields = HashMap::new();
+        fields.insert("event".to_string(), "cache_miss".to_string());
+        span.add_log("Cache miss occurred".to_string(), fields);
+        
+        assert_eq!(span.logs.len(), 1);
+        assert_eq!(span.logs[0].message, "Cache miss occurred");
+    }
+    
+    #[test]
+    fn test_tracing_sample_rate() {
+        let tracing = DistributedTracing::new("test-tracer".to_string(), 0.5);
+        
+        // 设置采样率
+        tracing.set_sample_rate(0.8).unwrap();
+        
+        // 采样率边界测试
+        tracing.set_sample_rate(-0.1).unwrap(); // 应该被限制为0.0
+        tracing.set_sample_rate(1.5).unwrap();  // 应该被限制为1.0
     }
 }
