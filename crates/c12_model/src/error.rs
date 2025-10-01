@@ -49,6 +49,34 @@ pub enum ModelError {
     #[error("维度不匹配: {0}")]
     DimensionMismatchError(String),
 
+    /// 异步错误
+    #[error("异步错误: {0}")]
+    AsyncError(String),
+
+    /// 同步错误
+    #[error("同步错误: {0}")]
+    SyncError(String),
+
+    /// 超时错误
+    #[error("超时错误: {0}")]
+    TimeoutError(String),
+
+    /// 栈溢出错误
+    #[error("栈溢出错误: {0}")]
+    StackOverflowError(String),
+
+    /// 语义错误
+    #[error("语义错误: {0}")]
+    SemanticError(String),
+
+    /// 解析错误
+    #[error("解析错误: {0}")]
+    ParseError(String),
+
+    /// 比较错误
+    #[error("比较错误: {0}")]
+    ComparisonError(String),
+
     /// 参数范围错误
     #[error("参数超出有效范围: {0}")]
     ParameterRangeError(String),
@@ -60,10 +88,6 @@ pub enum ModelError {
     /// 内存不足错误
     #[error("内存不足: {0}")]
     OutOfMemoryError(String),
-
-    /// 超时错误
-    #[error("操作超时: {0}")]
-    TimeoutError(String),
 
     /// 不支持的操作错误
     #[error("不支持的操作: {0}")]
@@ -102,10 +126,16 @@ impl Clone for ModelError {
             ModelError::DimensionMismatchError(msg) => {
                 ModelError::DimensionMismatchError(msg.clone())
             }
+            ModelError::AsyncError(msg) => ModelError::AsyncError(msg.clone()),
+            ModelError::SyncError(msg) => ModelError::SyncError(msg.clone()),
+            ModelError::TimeoutError(msg) => ModelError::TimeoutError(msg.clone()),
+            ModelError::StackOverflowError(msg) => ModelError::StackOverflowError(msg.clone()),
+            ModelError::SemanticError(msg) => ModelError::SemanticError(msg.clone()),
+            ModelError::ParseError(msg) => ModelError::ParseError(msg.clone()),
+            ModelError::ComparisonError(msg) => ModelError::ComparisonError(msg.clone()),
             ModelError::ParameterRangeError(msg) => ModelError::ParameterRangeError(msg.clone()),
             ModelError::SystemUnstableError(msg) => ModelError::SystemUnstableError(msg.clone()),
             ModelError::OutOfMemoryError(msg) => ModelError::OutOfMemoryError(msg.clone()),
-            ModelError::TimeoutError(msg) => ModelError::TimeoutError(msg.clone()),
             ModelError::UnsupportedOperationError(msg) => {
                 ModelError::UnsupportedOperationError(msg.clone())
             }
@@ -140,10 +170,16 @@ impl ModelError {
             ModelError::DivisionByZeroError(_) => ErrorSeverity::Critical,
             ModelError::ConvergenceError(_) => ErrorSeverity::Warning,
             ModelError::DimensionMismatchError(_) => ErrorSeverity::Error,
+            ModelError::AsyncError(_) => ErrorSeverity::Error,
+            ModelError::SyncError(_) => ErrorSeverity::Error,
+            ModelError::TimeoutError(_) => ErrorSeverity::Warning,
+            ModelError::StackOverflowError(_) => ErrorSeverity::Critical,
+            ModelError::SemanticError(_) => ErrorSeverity::Error,
+            ModelError::ParseError(_) => ErrorSeverity::Error,
+            ModelError::ComparisonError(_) => ErrorSeverity::Error,
             ModelError::ParameterRangeError(_) => ErrorSeverity::Warning,
             ModelError::SystemUnstableError(_) => ErrorSeverity::Critical,
             ModelError::OutOfMemoryError(_) => ErrorSeverity::Critical,
-            ModelError::TimeoutError(_) => ErrorSeverity::Warning,
             ModelError::UnsupportedOperationError(_) => ErrorSeverity::Error,
             ModelError::InternalError(_) => ErrorSeverity::Critical,
         }
@@ -172,10 +208,16 @@ impl ModelError {
             ModelError::DivisionByZeroError(_) => "DIVZERO_001",
             ModelError::ConvergenceError(_) => "CONV_001",
             ModelError::DimensionMismatchError(_) => "DIM_001",
+            ModelError::AsyncError(_) => "ASYNC_001",
+            ModelError::SyncError(_) => "SYNC_001",
+            ModelError::TimeoutError(_) => "TIMEOUT_001",
+            ModelError::StackOverflowError(_) => "STACK_001",
+            ModelError::SemanticError(_) => "SEMANTIC_001",
+            ModelError::ParseError(_) => "PARSE_001",
+            ModelError::ComparisonError(_) => "COMPARE_001",
             ModelError::ParameterRangeError(_) => "PARAM_001",
             ModelError::SystemUnstableError(_) => "UNSTABLE_001",
             ModelError::OutOfMemoryError(_) => "MEMORY_001",
-            ModelError::TimeoutError(_) => "TIMEOUT_001",
             ModelError::UnsupportedOperationError(_) => "UNSUPPORTED_001",
             ModelError::InternalError(_) => "INTERNAL_001",
         }
@@ -194,10 +236,16 @@ impl ModelError {
             ModelError::DivisionByZeroError(_) => Some("检查除数是否为零，添加边界条件处理"),
             ModelError::ConvergenceError(_) => Some("增加迭代次数或调整收敛参数"),
             ModelError::DimensionMismatchError(_) => Some("检查矩阵和向量的维度匹配"),
+            ModelError::AsyncError(_) => Some("检查异步运行时配置和任务调度"),
+            ModelError::SyncError(_) => Some("检查同步原语使用和锁顺序"),
+            ModelError::TimeoutError(_) => Some("增加超时时间或优化算法性能"),
+            ModelError::StackOverflowError(_) => Some("减少递归深度或使用迭代方式"),
+            ModelError::SemanticError(_) => Some("检查语义规则和类型系统"),
+            ModelError::ParseError(_) => Some("检查输入格式和语法规则"),
+            ModelError::ComparisonError(_) => Some("确保比较的值可比较"),
             ModelError::ParameterRangeError(_) => Some("检查参数是否在有效范围内"),
             ModelError::SystemUnstableError(_) => Some("调整系统参数以确保稳定性"),
             ModelError::OutOfMemoryError(_) => Some("减少数据规模或使用更高效的内存管理"),
-            ModelError::TimeoutError(_) => Some("增加超时时间或优化算法性能"),
             ModelError::UnsupportedOperationError(_) => Some("使用支持的操作或升级到兼容版本"),
             ModelError::InternalError(_) => Some("联系技术支持或查看详细日志"),
         }

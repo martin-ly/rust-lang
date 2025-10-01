@@ -1,17 +1,37 @@
-//! c18_model - Rust理论模型实现库
+//! c12_model - Rust理论模型实现库
 //!
 //! 本库使用Rust语言实现各种理论模型，包括：
 //! - 系统建模：排队论、性能分析、可靠性建模
 //! - 机器学习：线性回归、逻辑回归、聚类、决策树
 //! - 形式化方法：状态机、时序逻辑、进程代数
 //! - 数学建模：概率模型、统计模型、优化算法
+//! - 语言模型：词法分析、语法分析、语义分析
+//! - 异步模型：异步运行时、背压控制、流量控制
+//! - 算法模型：排序、搜索、图算法、动态规划
+//! - 分布式模型：一致性、分区容错、CAP定理
+//! - 微服务模型：服务发现、负载均衡、熔断器
+//! - 程序设计模型：函数式、面向对象、响应式编程
+//! - 架构设计模型：分层架构、六边形架构、事件驱动架构
+//! - 并行并发模型：Actor模型、CSP模型、共享内存模型
 
 // 核心模型模块
 pub mod formal_models; // 形式化方法模型
 pub mod math_models; // 数学建模
 pub mod ml_models; // 机器学习模型
-pub mod performance_models;
-pub mod queueing_models; // 排队论模型 // 性能分析模型
+pub mod performance_models; // 性能分析模型
+pub mod queueing_models; // 排队论模型
+
+// 新增的全面模型模块
+pub mod language_models; // 语言模型和语义模型
+pub mod async_models; // 异步模型和消息队列背压模型
+pub mod async_sync_models; // 异步与同步模型的分类和等价关系分析
+pub mod recursive_async_models; // 递归异步分析和示例
+pub mod algorithm_models; // 算法模型和各种算法模型的关系分析
+pub mod distributed_models; // 分布式设计机制和多线程多任务模型
+pub mod microservice_models; // 微服务设计机制和架构模型
+pub mod parallel_concurrent_models; // 并行并发模型 - Actor、CSP、共享内存模型
+pub mod program_design_models; // 程序设计模型 - 函数式、面向对象、响应式编程
+pub mod architecture_design_models; // 架构设计模型 - 分层、六边形、事件驱动架构
 
 // Rust 1.90 新特性模块
 pub mod rust_190_features; // Rust 1.90 新特性实现
@@ -106,6 +126,83 @@ pub use modern_ml::{
 pub use computer_vision::{
     ComputerVisionEngine, ComputerVisionConfig, ImageTensor, ImageTransform, ImageFilter,
     FeatureDetector, ImageOperation, ProcessingMode,
+};
+
+// 语言模型重新导出
+pub use language_models::{
+    LanguageModelEngine, Lexer, Parser, SemanticAnalyzer, Token, TokenType, ASTNode,
+    TypeAnnotation, SymbolInfo, LanguageResult,
+};
+
+// 异步模型重新导出
+pub use async_models::{
+    AsyncMessageQueue, AsyncTaskScheduler, AsyncStateMachine, CoroutinePool, AsyncModelEngine,
+    FlowControlConfig, BackpressureStrategy, TaskPriority, AsyncMessage, AsyncResult,
+};
+
+// 异步同步模型重新导出
+pub use async_sync_models::{
+    SynchronousModel, AsynchronousModel, ModelTransformer, ModelComparator, ExecutionModel,
+    ModelCharacteristics, ModelComparison, ModelEquivalence, StateMachineTransitionAnalyzer,
+};
+
+// 递归异步模型重新导出
+pub use recursive_async_models::{
+    AsyncRecursionExecutor, TailRecursionOptimizer, RecursionPatternAnalyzer, AsyncRecursionExamples,
+    RecursionConfig, RecursionMetrics, RecursionContext, TrampolineComputation, RecursiveAsyncResult,
+};
+
+// 算法模型重新导出
+pub use algorithm_models::{
+    SortingAlgorithms, SearchingAlgorithms, DynamicProgrammingAlgorithms, GreedyAlgorithms,
+    AlgorithmRelationshipAnalyzer, AlgorithmCharacteristics, AlgorithmComplexity, ComplexityClass,
+    AlgorithmMetrics, AlgorithmResult,
+};
+
+// 分布式模型重新导出
+pub use distributed_models::{
+    DistributedSystemManager, DistributedNode, ConsensusAlgorithm, VectorClock,
+    FailureDetector, MultiThreadTaskExecutor, CAPTheoremAnalyzer, DistributedSystemConfig,
+    ConsistencyLevel, CAPProperty, SystemStatus, DistributedResult,
+    LoadBalancer as DistributedLoadBalancer,
+};
+
+// 微服务模型重新导出
+pub use microservice_models::{
+    ServiceRegistry, CircuitBreaker, ApiGateway, 
+    ConfigurationManager, ServiceInstance, MicroserviceResult,
+    MiddlewareWrapper, ServiceWatcherWrapper, ConfigWatcherWrapper,
+    LoadBalancer as MicroserviceLoadBalancer, RateLimiter,
+};
+
+// 并行并发模型重新导出
+pub use parallel_concurrent_models::{
+    ActorSystem, ActorRef, ActorContext, ActorBehavior, ActorMessage,
+    CSPChannel, CSPProcess, CSPSystem,
+    SharedMemory, TransactionalMemory,
+    DataParallelExecutor, ForkJoinPool, MapReduceExecutor,
+    ConcurrencyModelAnalyzer, ConcurrencyModel, ConcurrencyModelCharacteristics,
+    ConcurrentResult,
+};
+
+// 程序设计模型重新导出
+pub use program_design_models::{
+    Functor, Monad, Lazy, HigherOrderFunctions, ImmutableList,
+    OOPObject, BankAccount, Account, Observer, Observable, Subject,
+    ProgrammingParadigmAnalyzer, ProgrammingParadigm, ParadigmCharacteristics,
+    ProgramResult,
+};
+
+// 架构设计模型重新导出
+pub use architecture_design_models::{
+    ArchitectureLayer, LayerDependencyRules, LayeredComponent,
+    Port, Adapter, InboundPort, OutboundPort, HexagonalCore,
+    Event, EventBus, EventHandler, EventStore,
+    Command, Query, CommandBus, QueryBus, CQRSModel,
+    Entity, UseCase, InterfaceAdapter, UserRepository,
+    Plugin, Microkernel, FaaSFunction, ServerlessPlatform,
+    ArchitecturePatternAnalyzer, ArchitecturePattern, ArchitectureCharacteristics,
+    ArchitectureResult,
 };
 
 // 已裁剪：可视化、基准测试与标准合规模块的对外导出
