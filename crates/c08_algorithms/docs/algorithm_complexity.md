@@ -2,6 +2,18 @@
 
 本页参考国际百科的经典复杂度结论，对齐本仓库实现，给出时间/空间复杂度与入口链接，并提示并行/异步包装的性能特征。V 表示顶点数，E 表示边数，p 表示并行线程数。
 
+## 目录
+
+- [算法复杂度与性能评估（Rust 1.89 对齐）](#算法复杂度与性能评估rust-189-对齐)
+  - [目录](#目录)
+  - [排序（`src/sorting/mod.rs`）](#排序srcsortingmodrs)
+  - [搜索（`src/searching/mod.rs`）](#搜索srcsearchingmodrs)
+  - [图论（`src/graph/mod.rs`）](#图论srcgraphmodrs)
+  - [分治与动态规划（目录占位）](#分治与动态规划目录占位)
+  - [字符串算法（`src/string_algorithms/mod.rs`）](#字符串算法srcstring_algorithmsmodrs)
+  - [回溯算法（`src/backtracking/mod.rs`）](#回溯算法srcbacktrackingmodrs)
+  - [基准](#基准)
+
 ---
 
 ## 排序（`src/sorting/mod.rs`）
