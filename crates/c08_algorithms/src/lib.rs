@@ -8,8 +8,9 @@
 //! - **Rust 1.90 特性对齐**: 完全支持最新语言特性
 //! - **主题化组织**: 按算法主题分类组织
 //! - **多实现方式**: 同步、并行、异步实现
-//! - **形式化验证**: 包含算法正确性证明
-//! - **完整文档**: 详细的算法说明和复杂度分析
+//! - **形式化验证**: 包含算法正确性证明（循环不变量、霍尔逻辑）
+//! - **完整文档**: 详细的算法说明和复杂度分析（主定理、摊还分析）
+//! - **异步模式**: Actor/Reactor/CSP三大模式完整实现
 //!
 //! ## 使用示例
 //!
@@ -26,6 +27,24 @@
 //! let data = vec![1, 3, 5, 7, 9, 11, 13];
 //! let result = SearchingEngine::binary_search_sync(&data, &7);
 //! println!("搜索结果: {:?}", result);
+//! ```
+//!
+//! ## 形式化验证示例
+//!
+//! ```rust
+//! use c08_algorithms::algorithms::formal_verification_examples::{
+//!     binary_search_verified,
+//!     insertion_sort_verified,
+//! };
+//!
+//! // 带完整证明的二分查找
+//! let arr = vec![1, 3, 5, 7, 9];
+//! assert_eq!(binary_search_verified(&arr, &5), Some(2));
+//!
+//! // 带循环不变量证明的插入排序
+//! let mut arr = vec![3, 1, 4, 1, 5];
+//! insertion_sort_verified(&mut arr);
+//! assert_eq!(arr, vec![1, 1, 3, 4, 5]);
 //! ```
 
 // 核心算法模块（Rust 1.90 特性对齐）
