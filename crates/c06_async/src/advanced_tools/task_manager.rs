@@ -39,6 +39,7 @@ pub enum TaskStatus {
 }
 
 /// 任务信息
+#[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct TaskInfo {
     pub id: Uuid,
@@ -57,6 +58,7 @@ pub struct TaskInfo {
 
 /// 任务队列项
 #[derive(Debug)]
+#[allow(dead_code)]
 struct TaskQueueItem {
     priority: TaskPriority,
     task_id: Uuid,
@@ -95,6 +97,7 @@ pub trait TaskExecutor: Send + Sync {
 
 /// 任务统计信息
 #[derive(Debug, Default, Clone)]
+#[allow(dead_code)]
 pub struct TaskStats {
     pub total_tasks: u64,
     pub pending_tasks: u64,
@@ -109,6 +112,7 @@ pub struct TaskStats {
 
 /// 异步任务管理器
 #[allow(dead_code)]
+#[derive(Clone)]
 pub struct TaskManager {
     tasks: Arc<RwLock<HashMap<Uuid, TaskInfo>>>,
     task_queue: Arc<Mutex<BinaryHeap<TaskQueueItem>>>,
@@ -478,6 +482,8 @@ impl TaskManager {
 }
 
 /// 用于任务处理的任务管理器克隆
+#[allow(dead_code)]
+#[derive(Clone)]
 struct TaskManagerClone {
     tasks: Arc<RwLock<HashMap<Uuid, TaskInfo>>>,
     task_queue: Arc<Mutex<BinaryHeap<TaskQueueItem>>>,
@@ -637,6 +643,8 @@ impl TaskManagerClone {
 }
 
 /// 简单的任务执行器实现示例
+#[allow(dead_code)]
+#[derive(Clone)]
 pub struct SimpleTaskExecutor {
     name: String,
 }

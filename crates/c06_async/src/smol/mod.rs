@@ -101,7 +101,7 @@ pub async fn demo_basic_usage() {
     println!("Smol 轻量级异步运行时演示");
 
     // 创建多个并发任务
-    let tasks: Vec<Task<i32>> = (0..5)
+    let tasks: Vec<Task<u64>> = (0..5)
         .map(|i| {
             smol::spawn(async move {
                 // 模拟一些异步工作
