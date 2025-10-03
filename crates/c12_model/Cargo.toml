@@ -49,19 +49,19 @@ async-trait = "0.1"
 fastrand = "2.3.0"
 
 # 图算法
-petgraph = { workspace = true, optional = true }
+petgraph = { version = "0.8.3", optional = true }
 
 # 已裁剪：并行计算
 
 # 数值计算 - 更新到最新版本 (2025年最新)
 num-traits = "0.2.19"
 num-derive = "0.3.3"
-num-complex = { version = "0.4.5", optional = true }
-num-bigint = { version = "0.4.4", optional = true }
+num-complex = { version = "0.4.6", optional = true }
+num-bigint = { version = "0.4.6", optional = true }
 
 # 统计计算 - 使用最新版本
 statrs = "0.18.0"
-nalgebra = { version = "0.33.0", optional = true }
+nalgebra = { version = "0.33.2", optional = true }
 approx = { version = "0.5.1", optional = true }
 
 # 数学函数 - 利用 Rust 1.90 的 libm 优化

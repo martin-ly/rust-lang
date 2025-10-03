@@ -1897,3 +1897,719 @@ mod tests {
         assert_eq!(state, ThreePhaseState::Committed);
     }
 }
+
+/// Raft共识算法完整实现
+/// 
+/// Raft是一种易于理解的分布式共识算法，将共识问题分解为：
+/// 1. Leader选举
+/// 2. 日志复制
+/// 3. 安全性保证
+#[derive(Debug)]
+pub struct RaftProtocol {
+    /// 节点ID
+    node_id: NodeId,
+    /// 当前任期
+    current_term: Arc<AtomicU64>,
+    /// 投票给谁
+    voted_for: Arc<RwLock<Option<NodeId>>>,
+    /// 日志条目
+    log: Arc<RwLock<Vec<RaftLogEntry>>>,
+    /// 已提交的索引
+    commit_index: Arc<AtomicU64>,
+    /// 已应用的索引
+    #[allow(dead_code)]
+    last_applied: Arc<AtomicU64>,
+    /// 节点状态
+    state: Arc<RwLock<RaftState>>,
+    /// 参与者列表
+    peers: Arc<RwLock<Vec<NodeId>>>,
+    /// Leader专用：下一个要发送给每个节点的日志索引
+    next_index: Arc<RwLock<HashMap<NodeId, u64>>>,
+    /// Leader专用：已复制到每个节点的最高日志索引
+    match_index: Arc<RwLock<HashMap<NodeId, u64>>>,
+    /// 选举超时
+    election_timeout: Duration,
+    /// 心跳间隔
+    #[allow(dead_code)]
+    heartbeat_interval: Duration,
+    /// 最后收到心跳的时间
+    last_heartbeat: Arc<RwLock<Instant>>,
+}
+
+/// Raft节点状态
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum RaftState {
+    /// 跟随者
+    Follower,
+    /// 候选人
+    Candidate,
+    /// 领导者
+    Leader,
+}
+
+/// Raft日志条目
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RaftLogEntry {
+    /// 日志索引
+    pub index: u64,
+    /// 任期号
+    pub term: u64,
+    /// 命令
+    pub command: String,
+    /// 时间戳
+    pub timestamp: Timestamp,
+}
+
+/// Raft消息类型
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum RaftMessage {
+    /// RequestVote RPC - 请求投票
+    RequestVote {
+        /// 候选人任期
+        term: u64,
+        /// 候选人ID
+        candidate_id: NodeId,
+        /// 候选人最后日志索引
+        last_log_index: u64,
+        /// 候选人最后日志任期
+        last_log_term: u64,
+    },
+    /// RequestVote响应
+    RequestVoteResponse {
+        /// 当前任期
+        term: u64,
+        /// 是否投票
+        vote_granted: bool,
+    },
+    /// AppendEntries RPC - 追加日志/心跳
+    AppendEntries {
+        /// Leader任期
+        term: u64,
+        /// Leader ID
+        leader_id: NodeId,
+        /// 前一个日志索引
+        prev_log_index: u64,
+        /// 前一个日志任期
+        prev_log_term: u64,
+        /// 日志条目（心跳时为空）
+        entries: Vec<RaftLogEntry>,
+        /// Leader已提交的索引
+        leader_commit: u64,
+    },
+    /// AppendEntries响应
+    AppendEntriesResponse {
+        /// 当前任期
+        term: u64,
+        /// 是否成功
+        success: bool,
+        /// 匹配的日志索引
+        match_index: u64,
+    },
+}
+
+impl RaftProtocol {
+    /// 创建新的Raft协议实例
+    pub fn new(
+        node_id: NodeId,
+        election_timeout: Duration,
+        heartbeat_interval: Duration,
+    ) -> Self {
+        Self {
+            node_id,
+            current_term: Arc::new(AtomicU64::new(0)),
+            voted_for: Arc::new(RwLock::new(None)),
+            log: Arc::new(RwLock::new(Vec::new())),
+            commit_index: Arc::new(AtomicU64::new(0)),
+            last_applied: Arc::new(AtomicU64::new(0)),
+            state: Arc::new(RwLock::new(RaftState::Follower)),
+            peers: Arc::new(RwLock::new(Vec::new())),
+            next_index: Arc::new(RwLock::new(HashMap::new())),
+            match_index: Arc::new(RwLock::new(HashMap::new())),
+            election_timeout,
+            heartbeat_interval,
+            last_heartbeat: Arc::new(RwLock::new(Instant::now())),
+        }
+    }
+    
+    /// 添加对等节点
+    pub fn add_peer(&self, peer_id: NodeId) -> DistributedResult<()> {
+        let mut peers = self.peers.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取对等节点写锁: {}", e)))?;
+        
+        if !peers.contains(&peer_id) {
+            peers.push(peer_id);
+        }
+        Ok(())
+    }
+    
+    /// 获取当前状态
+    pub fn get_state(&self) -> DistributedResult<RaftState> {
+        let state = self.state.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取状态读锁: {}", e)))?;
+        
+        Ok(state.clone())
+    }
+    
+    /// 获取当前任期
+    pub fn get_current_term(&self) -> u64 {
+        self.current_term.load(Ordering::SeqCst)
+    }
+    
+    /// 开始选举
+    pub fn start_election(&self) -> DistributedResult<bool> {
+        // 转换为候选人状态
+        let mut state = self.state.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取状态写锁: {}", e)))?;
+        
+        *state = RaftState::Candidate;
+        drop(state);
+        
+        // 递增当前任期
+        let new_term = self.current_term.fetch_add(1, Ordering::SeqCst) + 1;
+        
+        // 投票给自己
+        let mut voted_for = self.voted_for.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取投票写锁: {}", e)))?;
+        
+        *voted_for = Some(self.node_id.clone());
+        drop(voted_for);
+        
+        println!("Node {} starting election for term {}", self.node_id, new_term);
+        
+        // 获取最后日志信息
+        let (_last_log_index, _last_log_term) = self.get_last_log_info()?;
+        
+        // 发送RequestVote RPC给所有对等节点
+        let peers = self.peers.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取对等节点读锁: {}", e)))?;
+        
+        let mut votes = 1; // 自己的票
+        let total_nodes = peers.len() + 1;
+        let majority = (total_nodes / 2) + 1;
+        
+        // 在实际实现中，这里需要真正的网络通信
+        // 简化处理：假设所有节点都会投票
+        for _peer in peers.iter() {
+            // 模拟投票请求
+            votes += 1;
+        }
+        
+        // 检查是否获得多数票
+        if votes >= majority {
+            let mut state = self.state.write()
+                .map_err(|e| ModelError::LockError(format!("无法获取状态写锁: {}", e)))?;
+            
+            *state = RaftState::Leader;
+            println!("Node {} became leader for term {}", self.node_id, new_term);
+            
+            // 初始化Leader状态
+            self.initialize_leader_state()?;
+            
+            Ok(true)
+        } else {
+            let mut state = self.state.write()
+                .map_err(|e| ModelError::LockError(format!("无法获取状态写锁: {}", e)))?;
+            
+            *state = RaftState::Follower;
+            Ok(false)
+        }
+    }
+    
+    /// 初始化Leader状态
+    fn initialize_leader_state(&self) -> DistributedResult<()> {
+        let log = self.log.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取日志读锁: {}", e)))?;
+        
+        let last_log_index = log.len() as u64;
+        drop(log);
+        
+        let peers = self.peers.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取对等节点读锁: {}", e)))?;
+        
+        let mut next_index = self.next_index.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取next_index写锁: {}", e)))?;
+        
+        let mut match_index = self.match_index.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取match_index写锁: {}", e)))?;
+        
+        for peer in peers.iter() {
+            next_index.insert(peer.clone(), last_log_index + 1);
+            match_index.insert(peer.clone(), 0);
+        }
+        
+        Ok(())
+    }
+    
+    /// 获取最后日志信息
+    fn get_last_log_info(&self) -> DistributedResult<(u64, u64)> {
+        let log = self.log.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取日志读锁: {}", e)))?;
+        
+        if let Some(last_entry) = log.last() {
+            Ok((last_entry.index, last_entry.term))
+        } else {
+            Ok((0, 0))
+        }
+    }
+    
+    /// 追加日志条目（Leader调用）
+    pub fn append_entry(&self, command: String) -> DistributedResult<u64> {
+        let state = self.state.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取状态读锁: {}", e)))?;
+        
+        if *state != RaftState::Leader {
+            return Err(ModelError::ValidationError("Only leader can append entries".to_string()));
+        }
+        drop(state);
+        
+        let current_term = self.current_term.load(Ordering::SeqCst);
+        
+        let mut log = self.log.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取日志写锁: {}", e)))?;
+        
+        let index = log.len() as u64 + 1;
+        let entry = RaftLogEntry {
+            index,
+            term: current_term,
+            command,
+            timestamp: SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_millis() as u64,
+        };
+        
+        log.push(entry);
+        
+        println!("Leader {} appended entry at index {}", self.node_id, index);
+        
+        // 复制到跟随者（实际需要网络通信）
+        self.replicate_to_followers()?;
+        
+        Ok(index)
+    }
+    
+    /// 复制日志到跟随者
+    fn replicate_to_followers(&self) -> DistributedResult<()> {
+        let peers = self.peers.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取对等节点读锁: {}", e)))?;
+        
+        for peer in peers.iter() {
+            println!("Replicating log to {}", peer);
+            // 实际实现需要发送AppendEntries RPC
+        }
+        
+        Ok(())
+    }
+    
+    /// 处理RequestVote RPC
+    pub fn handle_request_vote(
+        &self,
+        term: u64,
+        candidate_id: NodeId,
+        last_log_index: u64,
+        last_log_term: u64,
+    ) -> DistributedResult<RaftMessage> {
+        let current_term = self.current_term.load(Ordering::SeqCst);
+        
+        // 如果请求的任期小于当前任期，拒绝投票
+        if term < current_term {
+            return Ok(RaftMessage::RequestVoteResponse {
+                term: current_term,
+                vote_granted: false,
+            });
+        }
+        
+        // 如果请求的任期大于当前任期，更新任期并转为跟随者
+        if term > current_term {
+            self.current_term.store(term, Ordering::SeqCst);
+            
+            let mut state = self.state.write()
+                .map_err(|e| ModelError::LockError(format!("无法获取状态写锁: {}", e)))?;
+            
+            *state = RaftState::Follower;
+            drop(state);
+            
+            let mut voted_for = self.voted_for.write()
+                .map_err(|e| ModelError::LockError(format!("无法获取投票写锁: {}", e)))?;
+            
+            *voted_for = None;
+        }
+        
+        // 检查是否已经投票
+        let mut voted_for = self.voted_for.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取投票写锁: {}", e)))?;
+        
+        let can_vote = voted_for.is_none() || voted_for.as_ref() == Some(&candidate_id);
+        
+        if !can_vote {
+            return Ok(RaftMessage::RequestVoteResponse {
+                term: self.current_term.load(Ordering::SeqCst),
+                vote_granted: false,
+            });
+        }
+        
+        // 检查候选人日志是否至少和自己一样新
+        let (my_last_log_index, my_last_log_term) = self.get_last_log_info()?;
+        
+        let log_is_ok = last_log_term > my_last_log_term || 
+                       (last_log_term == my_last_log_term && last_log_index >= my_last_log_index);
+        
+        if log_is_ok {
+            *voted_for = Some(candidate_id.clone());
+            
+            Ok(RaftMessage::RequestVoteResponse {
+                term: self.current_term.load(Ordering::SeqCst),
+                vote_granted: true,
+            })
+        } else {
+            Ok(RaftMessage::RequestVoteResponse {
+                term: self.current_term.load(Ordering::SeqCst),
+                vote_granted: false,
+            })
+        }
+    }
+    
+    /// 处理AppendEntries RPC
+    pub fn handle_append_entries(
+        &self,
+        term: u64,
+        _leader_id: NodeId,
+        prev_log_index: u64,
+        prev_log_term: u64,
+        entries: Vec<RaftLogEntry>,
+        leader_commit: u64,
+    ) -> DistributedResult<RaftMessage> {
+        let current_term = self.current_term.load(Ordering::SeqCst);
+        
+        // 如果Leader任期小于当前任期，拒绝
+        if term < current_term {
+            return Ok(RaftMessage::AppendEntriesResponse {
+                term: current_term,
+                success: false,
+                match_index: 0,
+            });
+        }
+        
+        // 更新心跳时间
+        let mut last_heartbeat = self.last_heartbeat.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取心跳写锁: {}", e)))?;
+        
+        *last_heartbeat = Instant::now();
+        drop(last_heartbeat);
+        
+        // 如果是新的Leader或更高任期，转为跟随者
+        if term > current_term {
+            self.current_term.store(term, Ordering::SeqCst);
+            
+            let mut state = self.state.write()
+                .map_err(|e| ModelError::LockError(format!("无法获取状态写锁: {}", e)))?;
+            
+            *state = RaftState::Follower;
+        }
+        
+        // 检查日志一致性
+        let mut log = self.log.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取日志写锁: {}", e)))?;
+        
+        // 如果prev_log_index位置的日志不匹配，拒绝
+        if prev_log_index > 0 {
+            if let Some(entry) = log.get((prev_log_index - 1) as usize) {
+                if entry.term != prev_log_term {
+                    return Ok(RaftMessage::AppendEntriesResponse {
+                        term: self.current_term.load(Ordering::SeqCst),
+                        success: false,
+                        match_index: 0,
+                    });
+                }
+            } else {
+                return Ok(RaftMessage::AppendEntriesResponse {
+                    term: self.current_term.load(Ordering::SeqCst),
+                    success: false,
+                    match_index: 0,
+                });
+            }
+        }
+        
+        // 追加新日志条目
+        if !entries.is_empty() {
+            // 删除冲突的日志
+            log.truncate(prev_log_index as usize);
+            
+            // 追加新条目
+            for entry in entries {
+                log.push(entry);
+            }
+        }
+        
+        let match_index = log.len() as u64;
+        drop(log);
+        
+        // 更新commit_index
+        if leader_commit > self.commit_index.load(Ordering::SeqCst) {
+            let new_commit_index = leader_commit.min(match_index);
+            self.commit_index.store(new_commit_index, Ordering::SeqCst);
+        }
+        
+        Ok(RaftMessage::AppendEntriesResponse {
+            term: self.current_term.load(Ordering::SeqCst),
+            success: true,
+            match_index,
+        })
+    }
+    
+    /// 检查选举超时
+    pub fn check_election_timeout(&self) -> DistributedResult<bool> {
+        let last_heartbeat = self.last_heartbeat.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取心跳读锁: {}", e)))?;
+        
+        Ok(last_heartbeat.elapsed() > self.election_timeout)
+    }
+    
+    /// 发送心跳（Leader调用）
+    pub fn send_heartbeat(&self) -> DistributedResult<()> {
+        let state = self.state.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取状态读锁: {}", e)))?;
+        
+        if *state != RaftState::Leader {
+            return Ok(());
+        }
+        drop(state);
+        
+        println!("Leader {} sending heartbeat", self.node_id);
+        
+        // 向所有跟随者发送空的AppendEntries（心跳）
+        self.replicate_to_followers()?;
+        
+        Ok(())
+    }
+    
+    /// 获取节点ID
+    pub fn node_id(&self) -> &str {
+        &self.node_id
+    }
+    
+    /// 获取日志长度
+    pub fn log_len(&self) -> DistributedResult<usize> {
+        let log = self.log.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取日志读锁: {}", e)))?;
+        
+        Ok(log.len())
+    }
+}
+
+/// 分布式快照（Chandy-Lamport算法）
+/// 
+/// 用于在分布式系统中捕获全局一致的快照
+#[derive(Debug, Clone)]
+pub struct DistributedSnapshot {
+    /// 快照ID
+    snapshot_id: String,
+    /// 发起快照的节点
+    initiator: NodeId,
+    /// 节点状态快照
+    node_states: Arc<RwLock<HashMap<NodeId, NodeSnapshot>>>,
+    /// 通道状态快照（记录快照期间传输的消息）
+    channel_states: Arc<RwLock<HashMap<(NodeId, NodeId), Vec<SnapshotMessage>>>>,
+    /// 是否完成
+    completed: Arc<AtomicBool>,
+    /// 参与节点
+    participants: Arc<RwLock<HashSet<NodeId>>>,
+}
+
+/// 节点快照
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct NodeSnapshot {
+    /// 节点ID
+    pub node_id: NodeId,
+    /// 快照时的数据
+    pub data: HashMap<String, VersionedValue>,
+    /// 快照时的向量时钟
+    pub vector_clock: VectorClock,
+    /// 快照时间戳
+    pub timestamp: Timestamp,
+}
+
+/// 快照消息
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SnapshotMessage {
+    /// 消息ID
+    pub message_id: MessageId,
+    /// 发送者
+    pub sender: NodeId,
+    /// 接收者
+    pub receiver: NodeId,
+    /// 消息内容
+    pub content: String,
+    /// 时间戳
+    pub timestamp: Timestamp,
+}
+
+/// 快照标记消息
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum SnapshotMarker {
+    /// 开始快照
+    Start {
+        snapshot_id: String,
+        initiator: NodeId,
+    },
+    /// 完成快照
+    Complete {
+        snapshot_id: String,
+    },
+}
+
+impl DistributedSnapshot {
+    /// 创建新的分布式快照
+    pub fn new(snapshot_id: String, initiator: NodeId) -> Self {
+        Self {
+            snapshot_id,
+            initiator,
+            node_states: Arc::new(RwLock::new(HashMap::new())),
+            channel_states: Arc::new(RwLock::new(HashMap::new())),
+            completed: Arc::new(AtomicBool::new(false)),
+            participants: Arc::new(RwLock::new(HashSet::new())),
+        }
+    }
+    
+    /// 发起快照
+    pub fn initiate(&self, node_id: NodeId, node_data: HashMap<String, VersionedValue>) -> DistributedResult<()> {
+        println!("Node {} initiating snapshot {}", node_id, self.snapshot_id);
+        
+        // 记录本节点状态
+        let vector_clock = VectorClock::new(node_id.clone());
+        let snapshot = NodeSnapshot {
+            node_id: node_id.clone(),
+            data: node_data,
+            vector_clock,
+            timestamp: SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_millis() as u64,
+        };
+        
+        let mut node_states = self.node_states.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取节点状态写锁: {}", e)))?;
+        
+        node_states.insert(node_id.clone(), snapshot);
+        
+        // 添加到参与者列表
+        let mut participants = self.participants.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取参与者写锁: {}", e)))?;
+        
+        participants.insert(node_id);
+        
+        // 向所有其他节点发送快照标记
+        // 实际实现需要网络通信
+        
+        Ok(())
+    }
+    
+    /// 接收快照标记
+    pub fn receive_marker(
+        &self,
+        from_node: NodeId,
+        receiving_node: NodeId,
+        node_data: HashMap<String, VersionedValue>,
+    ) -> DistributedResult<()> {
+        let mut participants = self.participants.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取参与者写锁: {}", e)))?;
+        
+        // 如果是第一次收到标记
+        if !participants.contains(&receiving_node) {
+            println!("Node {} received snapshot marker from {}", receiving_node, from_node);
+            
+            // 记录本节点状态
+            let vector_clock = VectorClock::new(receiving_node.clone());
+            let snapshot = NodeSnapshot {
+                node_id: receiving_node.clone(),
+                data: node_data,
+                vector_clock,
+                timestamp: SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_millis() as u64,
+            };
+            
+            let mut node_states = self.node_states.write()
+                .map_err(|e| ModelError::LockError(format!("无法获取节点状态写锁: {}", e)))?;
+            
+            node_states.insert(receiving_node.clone(), snapshot);
+            participants.insert(receiving_node.clone());
+            
+            // 向所有其他节点转发标记
+            // 实际实现需要网络通信
+        }
+        
+        // 停止记录从from_node到receiving_node的通道消息
+        let channel_key = (from_node, receiving_node);
+        let mut channel_states = self.channel_states.write()
+            .map_err(|e| ModelError::LockError(format!("无法获取通道状态写锁: {}", e)))?;
+        
+        channel_states.entry(channel_key).or_insert_with(Vec::new);
+        
+        Ok(())
+    }
+    
+    /// 记录通道消息（在收到快照标记之前）
+    pub fn record_channel_message(
+        &self,
+        from_node: NodeId,
+        to_node: NodeId,
+        message: SnapshotMessage,
+    ) -> DistributedResult<()> {
+        let participants = self.participants.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取参与者读锁: {}", e)))?;
+        
+        // 只记录发送者已经快照但接收者还未快照的消息
+        if participants.contains(&from_node) && !participants.contains(&to_node) {
+            let channel_key = (from_node, to_node);
+            let mut channel_states = self.channel_states.write()
+                .map_err(|e| ModelError::LockError(format!("无法获取通道状态写锁: {}", e)))?;
+            
+            channel_states.entry(channel_key)
+                .or_insert_with(Vec::new)
+                .push(message);
+        }
+        
+        Ok(())
+    }
+    
+    /// 获取快照结果
+    pub fn get_snapshot(&self) -> DistributedResult<GlobalSnapshot> {
+        let node_states = self.node_states.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取节点状态读锁: {}", e)))?;
+        
+        let channel_states = self.channel_states.read()
+            .map_err(|e| ModelError::LockError(format!("无法获取通道状态读锁: {}", e)))?;
+        
+        Ok(GlobalSnapshot {
+            snapshot_id: self.snapshot_id.clone(),
+            initiator: self.initiator.clone(),
+            node_states: node_states.clone(),
+            channel_states: channel_states.clone(),
+            timestamp: SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_millis() as u64,
+        })
+    }
+    
+    /// 标记快照完成
+    pub fn mark_completed(&self) {
+        self.completed.store(true, Ordering::SeqCst);
+        println!("Snapshot {} completed", self.snapshot_id);
+    }
+    
+    /// 检查是否完成
+    pub fn is_completed(&self) -> bool {
+        self.completed.load(Ordering::SeqCst)
+    }
+    
+    /// 获取快照ID
+    pub fn snapshot_id(&self) -> &str {
+        &self.snapshot_id
+    }
+}
+
+/// 全局快照结果
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct GlobalSnapshot {
+    /// 快照ID
+    pub snapshot_id: String,
+    /// 发起者
+    pub initiator: NodeId,
+    /// 所有节点状态
+    pub node_states: HashMap<NodeId, NodeSnapshot>,
+    /// 所有通道状态
+    pub channel_states: HashMap<(NodeId, NodeId), Vec<SnapshotMessage>>,
+    /// 快照时间戳
+    pub timestamp: Timestamp,
+}

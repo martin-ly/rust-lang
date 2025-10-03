@@ -23,6 +23,7 @@ pub mod queueing_models; // 排队论模型
 
 // 新增的全面模型模块
 pub mod language_models; // 语言模型和语义模型
+pub mod semantic_models; // 语义模型 - 操作语义、指称语义、公理语义
 pub mod async_models; // 异步模型和消息队列背压模型
 pub mod async_sync_models; // 异步与同步模型的分类和等价关系分析
 pub mod recursive_async_models; // 递归异步分析和示例
@@ -134,6 +135,14 @@ pub use language_models::{
     TypeAnnotation, SymbolInfo, LanguageResult,
 };
 
+// 语义模型重新导出
+pub use semantic_models::{
+    Expression, BinaryOperator, UnaryOperator, Statement, Value, Environment, Store,
+    SmallStepSemantics, BigStepSemantics, DenotationalSemantics,
+    Assertion, HoareTriple, AxiomaticSemantics, SemanticEquivalenceAnalyzer,
+    SemanticResult,
+};
+
 // 异步模型重新导出
 pub use async_models::{
     AsyncMessageQueue, AsyncTaskScheduler, AsyncStateMachine, CoroutinePool, AsyncModelEngine,
@@ -173,6 +182,10 @@ pub use distributed_models::{
     PaxosProtocol, PaxosMessage,
     TwoPhaseCommit, TwoPhaseMessage, TransactionState, VoteResult,
     ThreePhaseCommit, ThreePhaseMessage, ThreePhaseState,
+    // 新增：Raft共识算法
+    RaftProtocol, RaftState, RaftLogEntry, RaftMessage,
+    // 新增：分布式快照（Chandy-Lamport算法）
+    DistributedSnapshot, NodeSnapshot, SnapshotMessage, SnapshotMarker, GlobalSnapshot,
 };
 
 // 微服务模型重新导出
