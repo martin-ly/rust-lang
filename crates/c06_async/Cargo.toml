@@ -10,6 +10,7 @@ rust-version = "1.90"
 tokio = { workspace = true }
 futures = { workspace = true }
 tokio-stream = { workspace = true }
+tokio-util = { workspace = true }
 
 # 日志和追踪 - 使用工作区统一版本
 tracing = { workspace = true }
@@ -77,6 +78,9 @@ axum = { workspace = true }
 # 可选 Actor 框架（默认不启用）
 bastion = { version = "0.4.1-alpha.1", optional = true }
 xtra = { version = "0.6", optional = true }
+
+# 性能优化库
+bytes = "1.7"
 
 [dev-dependencies]
 criterion = { workspace = true, features = ["html_reports", "async_tokio"] }

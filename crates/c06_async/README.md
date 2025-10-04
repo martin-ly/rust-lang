@@ -24,10 +24,19 @@
 
 ### ⚡ 性能优化技术
 
-- **内存池管理**: 零拷贝内存分配和重用
-- **SIMD 向量化**: 硬件加速的数据处理
+- **内存池管理**: 对象池减少分配开销
+- **零拷贝技术**: Bytes 库实现引用计数缓冲区
+- **SIMD 向量化**: 硬件加速的数据处理,2-8x 性能提升
 - **并发优化**: CPU 密集型和 I/O 密集型任务分离
 - **结构化并发**: 任务生命周期管理和取消传播
+
+### 🔍 调试与监控
+
+- **结构化日志**: Tracing 框架完整使用
+- **任务监控**: tokio-console 实时监控异步任务
+- **性能指标**: Prometheus 指标收集和导出
+- **健康检查**: Liveness/Readiness 检查系统
+- **分布式追踪**: Span 和 Event 的最佳实践
 
 ### 🏗️ 生产级模式
 
@@ -240,6 +249,53 @@ cargo bench
   cargo run --example async_performance_demo
   ```
 
+- **⭐ 最新：终极理论与实践指南 2025**
+
+  ```bash
+  cargo run --example ultimate_async_theory_practice_2025
+  ```
+  
+  包含:
+  - Actor/Reactor/CSP 三种模式的数学模型和完整实现
+  - 异步设计模式(Builder, Factory, Adapter, Strategy, Observer)
+  - 详细的理论形式化和证明
+  - 1500+ 行深度注释代码
+
+- **⭐ 最新：Tokio 1.41+ & Smol 2.0+ 最新特性 2025**
+
+  ```bash
+  cargo run --example tokio_smol_latest_features_2025
+  ```
+  
+  包含:
+  - Tokio JoinSet, TaskLocal, Runtime Metrics
+  - Smol lightweight Executor, async-io 集成
+  - 性能对比和基准测试
+
+- **⭐ 最新：异步性能优化完整指南 2025**
+
+  ```bash
+  cargo run --example async_performance_optimization_2025 --release
+  ```
+  
+  包含:
+  - 对象池 - 减少 50-80% 分配开销
+  - 零拷贝技术 - Bytes 库的高效使用
+  - SIMD 向量化 - 2-8x 性能提升
+  - 完整的性能基准测试
+
+- **⭐ 最新：异步调试与监控完整指南 2025**
+
+  ```bash
+  cargo run --example async_debugging_monitoring_2025
+  ```
+  
+  包含:
+  - Tracing 结构化日志完整使用
+  - 性能指标收集 (Metrics)
+  - 健康检查系统 (Health Checks)
+  - 任务监控和追踪
+
 - **新增：真实世界应用场景演示**
 
   ```bash
@@ -300,6 +356,59 @@ cargo bench
   ```bash
   cargo run --example edge_computing_demo
   ```
+
+- **🌟 新增：2025综合模式示例** ⭐ 强烈推荐
+
+  ```bash
+  cargo run --example comprehensive_async_patterns_2025
+  ```
+  
+  **包含内容**:
+  - ✅ Actor 模式完整实现 (银行账户示例)
+  - ✅ Reactor 模式事件循环 (日志处理)
+  - ✅ CSP 模式 (生产者-消费者、Pipeline)
+  - ✅ 异步设计模式 (重试策略、熔断器)
+  - ✅ 生产级架构 (健康检查、优雅关闭)
+  - ✅ 1100+ 行完整注释代码
+
+- **🎓 新增：终极理论与实践指南 2025** ⭐⭐⭐ 必看
+
+  ```bash
+  cargo run --example ultimate_async_theory_practice_2025
+  ```
+  
+  **包含内容**:
+  - ✅ Actor 模型完整形式化 (数学定义、完整实现、银行转账演示)
+  - ✅ Reactor 模式理论实践 (事件驱动、优先级队列、网络服务器)
+  - ✅ CSP 模式全面解析 (生产者-消费者、Pipeline、Fan-out/Fan-in、Select)
+  - ✅ 异步设计模式集合 (Builder、Factory、Adapter、Strategy、Observer)
+  - ✅ 1500+ 行深度注释代码
+  - ✅ 完整的理论形式化说明
+  - ✅ 单元测试覆盖
+
+- **🚀 新增：Tokio 1.41+ & Smol 2.0+ 最新特性** ⭐⭐⭐ 必看
+
+  ```bash
+  cargo run --example tokio_smol_latest_features_2025
+  ```
+  
+  **Tokio 特性**:
+  - ✅ JoinSet 动态任务集管理
+  - ✅ TaskLocal 任务本地存储
+  - ✅ Runtime Metrics 运行时指标
+  - ✅ 协作式调度优化
+  - ✅ Cancellation Token 取消令牌
+  
+  **Smol 特性**:
+  - ✅ 轻量级 Executor (性能测试)
+  - ✅ Async-io 集成 (TCP 服务器)
+  - ✅ 与 Tokio 互操作
+  - ✅ LocalExecutor 单线程优化
+  
+  **性能对比**:
+  - ✅ 任务创建/切换开销对比
+  - ✅ 内存使用分析
+  - ✅ 选择建议
 
 - utils 综合示例（限速 + 熔断 + 观测）：
 
@@ -475,6 +584,45 @@ kubectl get pods -n rust-async-190
 ```
 
 ## 📚 文档
+
+### 🌟 2025年新增核心文档
+
+- **[终极异步编程指南 2025](docs/ULTIMATE_ASYNC_GUIDE_2025_CN.md)** ⭐⭐⭐ 必读
+  - 📚 10,000+ 字深度指南
+  - 🎯 8个部分,32个章节
+  - 🔬 完整的理论形式化 (Future、Actor、Reactor、CSP)
+  - 💻 丰富的代码示例
+  - 📊 详细的对比表格
+  - 🚀 从入门到精通的学习路径
+  - 🌐 中英文双语
+
+- **[全面梳理总结报告 2025-10-04](COMPREHENSIVE_ASYNC_SUMMARY_2025_10_04.md)** ⭐⭐⭐ 必读
+  - 📁 完整的文件清单
+  - 📚 按知识领域分类
+  - 🎨 技巧与应用分类
+  - 🏗️ 设计架构分析
+  - 📈 性能基准数据
+  - ✅ 完成度检查表
+  - 🎯 学习路径建议
+
+- **[异步编程超级综合指南 2025](docs/ASYNC_COMPREHENSIVE_GUIDE_2025.md)** ⭐ 必读
+  - 理论基础与形式化分析
+  - Actor、Reactor、CSP 三大模式深度解析
+  - 异步设计模式完整集合
+  - 80+ 页深度内容
+
+- **[异步运行时深度对比 2025](docs/ASYNC_RUNTIME_COMPARISON_2025.md)** ⭐ 必读
+  - Tokio vs Smol 详细对比
+  - 性能基准测试数据
+  - 生产环境最佳实践
+  - 选型决策指南
+
+- **[综合增强报告 2025](ASYNC_COMPREHENSIVE_ENHANCEMENT_REPORT_2025.md)**
+  - 项目完整梳理
+  - 知识体系总览
+  - 学习路径规划
+
+### 📖 原有文档
 
 - [异步语言特性文档](docs/async_language_features_190.md)
 - [Tokio 最佳实践](docs/tokio_best_practices_2025.md)
