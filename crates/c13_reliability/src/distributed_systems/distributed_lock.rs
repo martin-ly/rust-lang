@@ -772,6 +772,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore] // Requires Redis servers running on ports 6379, 6380, 6381
     async fn test_redlock_basic() {
         let config = RedlockConfig::new(vec![
             "redis://127.0.0.1:6379".to_string(),
