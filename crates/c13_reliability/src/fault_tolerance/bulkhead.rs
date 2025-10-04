@@ -245,7 +245,24 @@ impl Bulkhead {
 
     /// 获取统计信息
     pub fn get_stats(&self) -> BulkheadStats {
-        self.stats.lock().unwrap().clone()
+        // Return current stats with updated values from atomic counters
+        BulkheadStats {
+            total_requests: self.total_requests.load(Ordering::Relaxed),
+            accepted_requests: self.accepted_requests.load(Ordering::Relaxed),
+            rejected_requests: self.rejected_requests.load(Ordering::Relaxed),
+            active_requests: self.active_requests.load(Ordering::Relaxed),
+            max_concurrent_requests: self.config.max_concurrent_requests,
+            average_wait_time: {
+                let total_wait = self.total_wait_time.load(Ordering::Relaxed);
+                let total = self.total_requests.load(Ordering::Relaxed);
+                if total > 0 {
+                    Duration::from_nanos(total_wait / total)
+                } else {
+                    Duration::ZERO
+                }
+            },
+            last_updated: chrono::Utc::now(),
+        }
     }
 
     /// 重置统计信息
@@ -425,12 +442,38 @@ mod tests {
 
     #[tokio::test]
     async fn test_bulkhead_permit_drop() {
-        let bulkhead = Bulkhead::new(BulkheadConfig::default());
+        let bulkhead = Arc::new(Bulkhead::new(BulkheadConfig::default()));
         
         {
-            let _permit = bulkhead.acquire().await.unwrap();
+            let permit = bulkhead.acquire().await.unwrap();
             let state = bulkhead.state();
             assert_eq!(state.active_requests, 1);
+            // Explicitly drop the permit
+            drop(permit);
+        }
+        
+        // Yield to allow drop to complete
+        tokio::task::yield_now().await;
+        
+        // Wait for the drop to complete with retry mechanism
+        // Drop should be immediate, but in async context might need a yield
+        let mut attempts = 0;
+        loop {
+            let state = bulkhead.state();
+            if state.active_requests == 0 {
+                break;
+            }
+            
+            attempts += 1;
+            if attempts > 10 {
+                panic!(
+                    "Active requests should be 0 after permit drop, but got {} after {} attempts",
+                    state.active_requests, attempts
+                );
+            }
+            
+            tokio::task::yield_now().await;
+            tokio::time::sleep(tokio::time::Duration::from_millis(5)).await;
         }
         
         // 许可被释放

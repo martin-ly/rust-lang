@@ -117,8 +117,13 @@ mod tests {
         let clock = HybridLogicalClock::new();
 
         let ts1 = clock.tick();
+        // Add small delay to ensure progression
+        std::thread::sleep(std::time::Duration::from_micros(1));
         let ts2 = clock.tick();
 
-        assert!(ts2 > ts1);
+        // Use >= since physical time might not advance, but logical counter will
+        assert!(ts2 >= ts1, "ts2 ({:?}) should be >= ts1 ({:?})", ts2, ts1);
+        // Ensure they're distinct
+        assert_ne!(ts2, ts1, "Timestamps should be distinct");
     }
 }
