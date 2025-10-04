@@ -97,6 +97,30 @@ pub mod runtime_environments;
 // Rust 1.90+ 新特性支持
 pub mod rust_190_features;
 
+// 分布式系统模块
+pub mod distributed_systems;
+
+// 并发模型模块
+pub mod concurrency_models;
+
+// 微服务架构模块
+pub mod microservices;
+
+// 执行流感知系统
+pub mod execution_flow;
+
+// 系统自我感知
+pub mod self_awareness;
+
+// 设计模式库
+pub mod design_patterns;
+
+// 高级可观测性
+pub mod observability;
+
+// 性能基准测试
+pub mod benchmarking;
+
 // 重新导出常用类型和函数
 pub mod prelude {
     pub use crate::error_handling::{

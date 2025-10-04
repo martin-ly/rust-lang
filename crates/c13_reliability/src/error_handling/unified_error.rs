@@ -214,6 +214,66 @@ impl UnifiedError {
 
         details
     }
+
+    // ============================================================================
+    // Simple helper methods with minimal context (for convenience)
+    // ============================================================================
+
+    /// 创建配置错误（使用简单上下文）
+    pub fn configuration_error(message: impl Into<String>) -> Self {
+        let context = ErrorContext::new(
+            "distributed_systems",
+            "lock_operation",
+            file!(),
+            line!(),
+            ErrorSeverity::Medium,
+            "configuration",
+        );
+        Self::new(message, ErrorSeverity::Medium, "configuration", context)
+            .with_code("CFG_001")
+    }
+
+    /// 创建状态错误
+    pub fn state_error(message: impl Into<String>) -> Self {
+        let context = ErrorContext::new(
+            "distributed_systems",
+            "state_operation",
+            file!(),
+            line!(),
+            ErrorSeverity::Medium,
+            "state",
+        );
+        Self::new(message, ErrorSeverity::Medium, "state", context)
+            .with_code("STATE_001")
+    }
+
+    /// 创建资源不可用错误
+    pub fn resource_unavailable(message: impl Into<String>) -> Self {
+        let context = ErrorContext::new(
+            "distributed_systems",
+            "resource_operation",
+            file!(),
+            line!(),
+            ErrorSeverity::Medium,
+            "resource",
+        );
+        Self::new(message, ErrorSeverity::Medium, "resource", context)
+            .with_code("RES_UNAVAIL")
+    }
+
+    /// 创建未找到错误
+    pub fn not_found(message: impl Into<String>) -> Self {
+        let context = ErrorContext::new(
+            "distributed_systems",
+            "lookup_operation",
+            file!(),
+            line!(),
+            ErrorSeverity::Low,
+            "not_found",
+        );
+        Self::new(message, ErrorSeverity::Low, "not_found", context)
+            .with_code("NOT_FOUND")
+    }
 }
 
 impl fmt::Display for UnifiedError {

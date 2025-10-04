@@ -96,8 +96,8 @@ codegen-units = 1
 [profile.bench.build-override]
 opt-level = 2
 
-# 工作区级别的依赖版本统一 - 2025年9月27日最新稳定版本
-# 更新时间: 2025-09-27 12:51:54 (系统时间已同步)
+# 工作区级别的依赖版本统一 - 2025年10月4日最新稳定版本
+# 更新时间: 2025-10-04 (系统时间已同步)
 # 系统时间已同步，所有依赖库版本已更新至最新成熟版本
 [workspace.dependencies]
 # 网络和 HTTP 相关 - 2025年9月27日最新稳定版本
@@ -168,10 +168,10 @@ async-stream = "0.3.6"
 tokio-console = "0.1.13"
 # tokio-test: tokio的测试工具
 tokio-test = "0.4.4"
-# mio: 跨平台异步I/O库
-mio = "0.8.11"
-# tungstenite: WebSocket协议的Rust实现
-tungstenite = "0.27"
+# mio: 跨平台异步I/O库 - 2025年10月最新版本
+mio = "1.0.4"
+# tungstenite: WebSocket协议的Rust实现 - 2025年10月最新版本
+tungstenite = "0.28.0"
 # rcgen: X.509证书生成库
 rcgen = "0.14.4"
 
@@ -241,8 +241,8 @@ tokio = { version = "1.47.1", features = ["full"] }
 tokio-util = "0.7.16"
 # tokio-stream: tokio的流处理支持
 tokio-stream = "0.1.17"
-# tokio-tungstenite: tokio与tungstenite的集成，提供WebSocket支持
-tokio-tungstenite = "0.27.0"
+# tokio-tungstenite: tokio与tungstenite的集成，提供WebSocket支持 - 2025年10月最新版本
+tokio-tungstenite = "0.28.0"
 # futures: 异步编程的基础库
 futures = "0.3.31"
 # futures-util: futures的实用工具库
@@ -257,17 +257,17 @@ tracing-subscriber = { version = "0.3.20", features = ["env-filter", "json"] }
 log = "0.4.28"
 # prometheus: Prometheus指标收集库
 prometheus = "0.14.0"
-# tracing-opentelemetry: tracing与OpenTelemetry的集成
-tracing-opentelemetry = "0.31"
-# opentelemetry: OpenTelemetry的Rust实现
+# tracing-opentelemetry: tracing与OpenTelemetry的集成 - 2025年10月最新版本
+tracing-opentelemetry = "0.32.0"
+# opentelemetry: OpenTelemetry的Rust实现 - 2025年10月最新稳定版本
 opentelemetry = "0.31.0"
-# opentelemetry_sdk: OpenTelemetry SDK
+# opentelemetry_sdk: OpenTelemetry SDK - 2025年10月最新稳定版本
 opentelemetry_sdk = { version = "0.31.0", features = ["rt-tokio"] }
-# opentelemetry-otlp: OpenTelemetry OTLP导出器
+# opentelemetry-otlp: OpenTelemetry OTLP导出器 - 2025年10月最新稳定版本
 opentelemetry-otlp = { version = "0.31.0", features = ["http-json"] }
-# opentelemetry-stdout: OpenTelemetry标准输出导出器
+# opentelemetry-stdout: OpenTelemetry标准输出导出器 - 2025年10月最新稳定版本
 opentelemetry-stdout = "0.31.0"
-# opentelemetry-proto: OpenTelemetry协议缓冲区定义
+# opentelemetry-proto: OpenTelemetry协议缓冲区定义 - 2025年10月最新稳定版本
 opentelemetry-proto = { version = "0.31.0", features = ["gen-tonic"] }
 
 # 指标 - 2025年9月27日最新稳定版本
@@ -324,8 +324,8 @@ redis = "1.0.0-alpha.1"
 # rusqlite: SQLite的Rust绑定，提供类型安全的SQLite接口
 rusqlite = { version = "0.37.0", default-features = false }
 
-# 性能测试和基准测试 - 2025年9月27日最新稳定版本
-# criterion: 统计驱动的微基准测试库，提供详细的性能分析
+# 性能测试和基准测试 - 2025年10月4日最新稳定版本
+# criterion: 统计驱动的微基准测试库，提供详细的性能分析 - 2025年10月最新版本
 criterion = "0.7.0"
 
 # 配置管理 - 2025年9月27日最新稳定版本
@@ -380,9 +380,9 @@ iced = "0.13.1"
 # burn-ndarray = "0.10.0"  # 暂时禁用，存在版本兼容性问题
 # burn-tch 暂时禁用，与现有tch版本冲突
 
-# 2025年最新高性能异步运行时 - 2025年9月27日最新稳定版本
-# glommio: 线程每核心异步运行时，支持高并行异步应用程序
-glommio = "0.9.0"  # 更新至最新稳定版本
+# 2025年最新高性能异步运行时 - 2025年10月4日最新稳定版本
+# glommio: 线程每核心异步运行时，支持高并行异步应用程序 - 2025年10月最新版本
+glommio = "0.9.0"
 
 # 安全漏洞修复 - 2025年9月27日最新稳定版本
 # 替换未维护和有安全漏洞的依赖
@@ -396,8 +396,8 @@ proc-macro-error2 = "2.0.1"
 is-terminal = "0.2.0"
 # wasm-bindgen: WebAssembly绑定生成器，支持WebAssembly 2.0
 wasm-bindgen = "0.2.103"
-# nix: 系统调用安全封装库
-nix = "0.28.0"
+# nix: 系统调用安全封装库 - 2025年10月最新版本
+nix = "0.30.1"
 # pingora 已移除，存在安全漏洞 (RUSTSEC-2025-0037, RUSTSEC-2025-0070)
 
 # 2025年9月27日安全更新 - 修复已知安全漏洞

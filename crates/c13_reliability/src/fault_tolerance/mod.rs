@@ -16,6 +16,9 @@ pub mod bulkhead;
 pub mod timeout;
 pub mod fallback;
 pub mod config;
+pub mod rate_limiting;
+pub mod bulkhead_enhanced;
+pub mod circuit_breaker_enhanced;
 
 pub use circuit_breaker::*;
 pub use retry_policies::*;
@@ -23,6 +26,19 @@ pub use bulkhead::*;
 pub use timeout::*;
 pub use fallback::*;
 pub use config::*;
+pub use rate_limiting::*;
+
+// Re-export enhanced versions with specific names to avoid ambiguity
+pub use bulkhead_enhanced::{
+    EnhancedBulkhead, EnhancedBulkheadConfig, BulkheadStrategy, 
+    OverflowStrategy, TaskPriority, BulkheadState as EnhancedBulkheadState,
+    BulkheadStats as EnhancedBulkheadStats,
+};
+pub use circuit_breaker_enhanced::{
+    EnhancedCircuitBreaker, EnhancedCircuitBreakerConfig,
+    CircuitState, CircuitBreakerPolicy, CallResult,
+    CircuitBreakerStats as EnhancedCircuitBreakerStats,
+};
 
 /// 容错配置
 #[derive(Debug, Clone, Serialize, Deserialize)]

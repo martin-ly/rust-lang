@@ -22,6 +22,12 @@ pub use error_recovery::*;
 pub use error_monitoring::*;
 // pub use macros::*;
 
+/// Prelude module for convenient imports
+pub mod prelude {
+    pub use super::{UnifiedError, ErrorSeverity, ErrorContext};
+    pub type Result<T> = std::result::Result<T, UnifiedError>;
+}
+
 /// 错误严重程度
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum ErrorSeverity {
