@@ -149,7 +149,7 @@ dioxus = "0.7.0-rc.0"  # 更新至最新候选版本
 dioxus-web = "0.7.0-rc.0"  # 更新至最新候选版本
 # dioxus-desktop = "0.7.0-rc.0"  # 暂时禁用，存在GTK3安全漏洞
 # leptos: 全栈同构Rust Web框架，利用细粒度响应性
-leptos = "0.8.9"  # 更新至最新稳定版本
+leptos = "0.8.10"  # 更新至最新稳定版本
 leptos_axum = "0.8.9"  # 更新至最新稳定版本
 
 # 2025年最新桌面应用框架 (Tauri 2.0已解决GTK3安全漏洞)
@@ -173,7 +173,7 @@ mio = "1.0.4"
 # tungstenite: WebSocket协议的Rust实现 - 2025年10月最新版本
 tungstenite = "0.28.0"
 # rcgen: X.509证书生成库
-rcgen = "0.14.4"
+rcgen = "0.14.5"
 
 # 基础依赖统一 - 2025年9月27日最新稳定版本
 # dotenvy: 环境变量管理库，dotenv的维护良好的分支
@@ -320,7 +320,7 @@ sqlx = { version = "0.8.6", features = [  # 更新至最新稳定版本
     "uuid",                # UUID类型支持
 ], default-features = false }
 # redis: Redis客户端库，支持异步操作 - 2025年9月27日最新版本
-redis = "1.0.0-alpha.1"
+redis = "1.0.0-alpha.2"
 # rusqlite: SQLite的Rust绑定，提供类型安全的SQLite接口
 rusqlite = { version = "0.37.0", default-features = false }
 
@@ -330,7 +330,7 @@ criterion = "0.7.0"
 
 # 配置管理 - 2025年9月27日最新稳定版本
 # config: 分层配置系统，支持多种配置格式
-config = "0.15.17"  # 更新至最新稳定版本
+config = "0.15.18"  # 更新至最新稳定版本
 # toml: TOML格式的编码器和解码器
 toml = "0.9.7"
 
@@ -342,7 +342,7 @@ rayon = "1.11.0"
 # dashmap: 高性能并发HashMap，支持多线程安全访问
 dashmap = "7.0.0-rc2"  # 更新至最新候选版本
 # parking_lot: 更紧凑高效的同步原语实现
-parking_lot = "0.12.4"
+parking_lot = "0.12.5"
 
 # 测试相关 - 2025年9月27日最新稳定版本
 # mockall: 强大的模拟对象库，用于单元测试
@@ -395,7 +395,7 @@ proc-macro-error2 = "2.0.1"
 # is-terminal: 终端检测库，替代atty (有安全漏洞)
 is-terminal = "0.2.0"
 # wasm-bindgen: WebAssembly绑定生成器，支持WebAssembly 2.0
-wasm-bindgen = "0.2.103"
+wasm-bindgen = "0.2.104"
 # nix: 系统调用安全封装库 - 2025年10月最新版本
 nix = "0.30.1"
 # pingora 已移除，存在安全漏洞 (RUSTSEC-2025-0037, RUSTSEC-2025-0070)

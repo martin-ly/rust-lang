@@ -34,7 +34,7 @@ proptest = { workspace = true, optional = true }
 # 系统信息
 num_cpus = { workspace = true }
 # 随机数生成
-fastrand = "2.0"
+fastrand = "2.3"
 # 时间处理
 chrono = { version = "0.4", features = ["serde"] }
 

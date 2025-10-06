@@ -966,7 +966,8 @@ mod tests {
         let validator = TypeValidator::new();
         let int_type = Type::Primitive(PrimitiveType::I32);
         let results = validator.validate_type(&int_type);
-        assert!(!results.is_empty());
+        // 基础类型验证应该成功（无错误），所以结果可能为空
+        assert!(results.is_empty(), "基础类型验证应该没有错误");
     }
     
     #[test]

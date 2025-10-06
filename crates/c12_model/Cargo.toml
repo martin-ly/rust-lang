@@ -77,7 +77,7 @@ ndarray = { version = "0.15.6", optional = true }
 ndarray-stats = { version = "0.5.1", optional = true }
 
 # 新增：计算机视觉支持 (基于Kornia-rs架构)
-image = { version = "0.24.7", optional = true }
+image = { version = "0.24.9", optional = true }
 imageproc = { version = "0.24.0", optional = true }
 
 # 高级数学库 - 暂时禁用以避免安全漏洞

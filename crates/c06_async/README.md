@@ -46,9 +46,21 @@
 - **Health Check**: 服务健康监控
 - **Graceful Shutdown**: 优雅关闭和资源清理
 
+## 📑 完整索引
+
+**[INDEX.md](INDEX.md)** - 完整的项目索引和导航指南 ⭐⭐⭐ 强烈推荐
+
+包含内容:
+
+- 📚 所有文档的分类索引
+- 💻 所有示例的详细说明
+- 🎯 按主题、难度、场景的快速查找
+- 🎓 完整的学习路径建议
+- 📊 项目统计信息
+
 ## 📁 项目结构
 
-```text额
+```text
 crates/c06_async/
 ├── src/                           # 源代码
 │   ├── lib.rs                    # 库入口
@@ -108,11 +120,121 @@ cargo test --test integration_test_suite
 cargo bench
 ```
 
-## 📚 全面代码梳理和注释
+## 📚 全面代码梳理和注释 (2025年10月最新)
 
-本项目已完成对 `src/`、`futures/`、`tokio/`、`smol/` 等所有代码的全面梳理，包括：
+### 🌟 核心文档体系 (必读)
 
-### 🔍 代码梳理成果
+#### 1. **[知识分类体系](docs/COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md)** ⭐⭐⭐ 最重要
+
+完整的知识分类和代码示例：
+
+- **第1部分: 语言特性分类** - Future Trait, async/await, Pin/Unpin, Stream Trait, Waker 机制
+- **第2部分: 框架特性分类** - Tokio, Smol, Actix 完整特性
+- **第3部分: 库特性分类** - tokio-io, reqwest, sqlx, lapin 等
+- **第4部分: 设计模式分类** - Builder, Factory, Adapter, Observer, Strategy
+- **第5部分: 架构模式分类** - Reactor, Actor, CSP, Hybrid 模式
+- **第6部分: 技巧与应用分类** - 性能优化、错误处理、资源管理、监控调试
+- **第7部分: 学习路径建议** - 8周完整学习计划
+
+**统计**: 113+ 个知识点，180+ 个代码示例，15,000+ 字
+
+#### 2. **[最终报告 2025-10-06](异步编程全面梳理最终报告_2025_10_06.md)** ⭐⭐⭐ 中文详细报告
+
+包含所有实现细节的完整报告：
+
+- **核心交付成果** - 6个文件，27,000+ 字，3,900+ 行代码
+- **架构模式分析** - Reactor、Actor、CSP 完整形式化和实现
+- **设计模式实现** - 15+ 种设计模式完整代码
+- **性能优化技巧** - 10+ 种优化技术，包含基准测试
+- **错误处理技巧** - 5+ 种容错策略
+- **学习路径** - 从初级到高级的完整指导
+
+#### 3. **[快速入门指南](异步编程全面梳理_README_2025_10_06.md)** ⭐⭐ 快速开始
+
+- 快速开始步骤
+- 文件结构说明
+- 推荐阅读顺序
+- 学习路径建议
+
+#### 4. **[实现总结](docs/COMPREHENSIVE_ASYNC_IMPLEMENTATION_SUMMARY_2025.md)** ⭐ 技术总结
+
+- 架构模式详细分析
+- 完整度统计
+- 快速查找指南
+- 形式化分析总结
+
+#### 5. **[模式对比文档](docs/ASYNC_PATTERNS_COMPARISON_2025.md)** ⭐⭐⭐ 选型指南 (新增)
+
+- 三大架构模式全面对比 (Reactor vs Actor vs CSP)
+- 详细特性对比表 (通信、状态、并发、性能)
+- 性能基准测试结果 (吞吐量、延迟、内存、CPU)
+- 使用场景分析 (推荐/不推荐场景)
+- 代码复杂度对比
+- 学习曲线对比
+- 生态系统对比 (库、框架、工具)
+- 选型决策树 (快速选型指南)
+
+### 🎯 核心示例 (2025年最新)
+
+#### 1. **[Reactor 模式完整实现](examples/reactor_pattern_comprehensive_2025.rs)** ⭐⭐⭐
+
+```bash
+cargo run --example reactor_pattern_comprehensive_2025
+```
+
+**内容**:
+
+- 1,800+ 行完整实现
+- 形式化定义: `Reactor = (EventQueue, Handlers, Demultiplexer, EventLoop)`
+- 3个性质证明 (活性、安全性、公平性)
+- 优先级调度、批处理优化
+- 网络I/O、定时器、用户输入等实际应用
+- 性能基准测试
+
+#### 2. **[Actor 模式完整实现](examples/actor_pattern_comprehensive_2025.rs)** ⭐⭐⭐
+
+```bash
+cargo run --example actor_pattern_comprehensive_2025
+```
+
+**内容**:
+
+- 2,100+ 行完整实现
+- 形式化定义: `Actor = (State, Behavior, Mailbox, Address)`
+- 3个性质证明 (消息传递可靠性、状态一致性、容错性)
+- 银行账户系统应用 (存款、取款、转账、事务回滚)
+- Actor 生命周期管理、监督策略
+- 性能测试
+
+#### 3. **[CSP 模式完整实现](examples/csp_pattern_comprehensive_2025.rs)** ⭐⭐⭐
+
+```bash
+cargo run --example csp_pattern_comprehensive_2025
+```
+
+**内容**:
+
+- 1,100+ 行完整实现
+- 形式化定义: `Channel = (Sender<T>, Receiver<T>)`
+- 3个性质证明 (死锁自由、消息传递可靠性、公平性)
+- 数据处理流水线、分布式任务调度、实时日志聚合
+- 基本通信、Select 多路复用、性能基准测试
+
+#### 4. **[终极理论与实践指南 2025](examples/ultimate_async_theory_practice_2025.rs)** ⭐⭐⭐
+
+```bash
+cargo run --example ultimate_async_theory_practice_2025
+```
+
+**内容**:
+
+- Actor/Reactor/CSP 三种模式的数学模型和完整实现
+- 异步设计模式 (Builder, Factory, Adapter, Strategy, Observer)
+- 1,500+ 行深度注释代码
+- 完整的理论形式化说明
+- 单元测试覆盖
+
+### 🔍 代码梳理成果 (原有模块)
 
 1. **futures/ 模块** - 异步编程基础
    - ✅ `future01.rs` - Future 状态机和调度机制详解

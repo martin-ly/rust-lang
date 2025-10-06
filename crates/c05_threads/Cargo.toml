@@ -19,7 +19,7 @@ tokio = { workspace = true, optional = true }
 # async-std 已移除，使用 tokio 替代 (async-std 已弃用)
 num_cpus = { workspace = true }
 libc = { workspace = true }
-windows = { version = "0.62.0", features = ["Win32_System_Threading"], optional = true }
+windows = { version = "0.62.1", features = ["Win32_System_Threading"], optional = true }
 once_cell = { workspace = true }
 anyhow = { workspace = true }
 thiserror = { workspace = true }
@@ -46,7 +46,7 @@ path = "src/bin/main.rs"
 [dev-dependencies]
 criterion = { workspace = true }
 loom = { version = "0.7.2", default-features = false }
-tokio = { version = "1.0", features = ["full"] }
+tokio = { version = "1.47", features = ["full"] }
 
 [[bench]]
 name = "priority_channels_bench"

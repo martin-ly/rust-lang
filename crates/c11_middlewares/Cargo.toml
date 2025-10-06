@@ -12,11 +12,11 @@ thiserror = { workspace = true }
 tracing = { workspace = true, optional = true }
 
 # Key-Value
-redis = { version = "0.32.5", optional = true, default-features = false, features = ["aio", "tokio-comp"] }
+redis = { version = "0.32.7", optional = true, default-features = false, features = ["aio", "tokio-comp"] }
 
 # SQL Databases
-tokio-postgres = { version = "0.7.13", optional = true }
-postgres-types = { version = "0.2.9", optional = true }
+tokio-postgres = { version = "0.7.14", optional = true }
+postgres-types = { version = "0.2.10", optional = true }
 mysql_async = { version = "0.34.2", optional = true }
 rusqlite = { workspace = true, optional = true, features = ["bundled"] }
 

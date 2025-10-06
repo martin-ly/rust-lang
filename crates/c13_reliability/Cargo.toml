@@ -68,13 +68,13 @@ env_logger = { version = "0.11.8", optional = true }
 proptest = { workspace = true, optional = true }
 
 # 系统信息 - 2025年9月27日最新版本
-sysinfo = { version = "0.37.0", optional = true }
+sysinfo = { version = "0.37.2", optional = true }
 
 # 主机名获取 - 2025年9月27日最新版本
-hostname = { version = "0.4.0", optional = true }
+hostname = { version = "0.4.1", optional = true }
 
 # 内存管理 - 2025年9月27日最新版本
-jemallocator = { version = "0.5.0", optional = true }
+jemallocator = { version = "0.5.4", optional = true }
 
 # UUID 支持
 uuid = { workspace = true }
