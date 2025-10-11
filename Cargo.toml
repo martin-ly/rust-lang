@@ -96,8 +96,8 @@ codegen-units = 1
 [profile.bench.build-override]
 opt-level = 2
 
-# 工作区级别的依赖版本统一 - 2025年10月4日最新稳定版本
-# 更新时间: 2025-10-04 (系统时间已同步)
+# 工作区级别的依赖版本统一 - 2025年10月11日最新稳定版本
+# 更新时间: 2025-10-11 (系统时间已同步)
 # 系统时间已同步，所有依赖库版本已更新至最新成熟版本
 [workspace.dependencies]
 # 网络和 HTTP 相关 - 2025年9月27日最新稳定版本
@@ -175,7 +175,7 @@ tungstenite = "0.28.0"
 # rcgen: X.509证书生成库
 rcgen = "0.14.5"
 
-# 基础依赖统一 - 2025年9月27日最新稳定版本
+# 基础依赖统一 - 2025年10月6日最新稳定版本
 # dotenvy: 环境变量管理库，dotenv的维护良好的分支
 dotenvy = "0.15.7"
 # tempfile: 临时文件和目录管理库
@@ -215,7 +215,7 @@ rustls-pemfile = "2.2.0"
 tokio-rustls = "0.26.4"  # 更新至最新稳定版本
 # ring: 加密原语库，提供高性能的加密算法实现
 ring = "0.17.14"
-# webpki-roots: WebPKI根证书集合
+# webpki-roots: WebPKI根证书集合 - 2025年10月6日更新
 webpki-roots = "1.1.1"
 
 # 错误处理 - 2025年9月27日最新稳定版本
@@ -296,7 +296,7 @@ once_cell = "1.21.3"
 # num_cpus: CPU核心数检测库
 num_cpus = "1.17.0"
 # libc: 系统调用接口库，提供与C库的绑定
-libc = "0.2.176"
+libc = "0.2.177"
 # rand: 随机数生成库，提供高质量的随机数生成
 rand = "0.9.2"
 # sha2: SHA-2哈希算法实现
@@ -319,8 +319,8 @@ sqlx = { version = "0.8.6", features = [  # 更新至最新稳定版本
     "chrono",              # 时间类型支持
     "uuid",                # UUID类型支持
 ], default-features = false }
-# redis: Redis客户端库，支持异步操作 - 2025年9月27日最新版本
-redis = "1.0.0-alpha.2"
+# redis: Redis客户端库，支持异步操作 - 2025年10月6日最新版本
+redis = "1.0.0-rc.1"
 # rusqlite: SQLite的Rust绑定，提供类型安全的SQLite接口
 rusqlite = { version = "0.37.0", default-features = false }
 
@@ -332,7 +332,7 @@ criterion = "0.7.0"
 # config: 分层配置系统，支持多种配置格式
 config = "0.15.18"  # 更新至最新稳定版本
 # toml: TOML格式的编码器和解码器
-toml = "0.9.7"
+toml = "0.9.8"
 
 # 并发和同步 - 2025年9月27日最新稳定版本
 # crossbeam: 并发编程工具库，提供无锁数据结构和同步原语
