@@ -56,7 +56,7 @@
 
 ```text
 ┌─────────────────────────────────────────┐
-│         应用程序 (Futures)              │
+│         应用程序 (Futures)               │
 ├─────────────────────────────────────────┤
 │         Runtime API Layer               │
 │  • Task spawning                        │
@@ -71,7 +71,7 @@
 │         Reactor                         │
 │  • I/O event loop                       │
 │  • Timer management                     │
-│  • OS integration (epoll/kqueue/IOCP)  │
+│  • OS integration (epoll/kqueue/IOCP)   │
 └─────────────────────────────────────────┘
 ```
 
