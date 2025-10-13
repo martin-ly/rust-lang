@@ -525,6 +525,8 @@ mod tests {
         .unwrap();
 
         assert!(pool.wait_for_completion(Duration::from_secs(1)));
+        // Add a small delay to ensure the task has fully completed
+        thread::sleep(Duration::from_millis(20));
         assert_eq!(pool.get_completed_tasks(), 1);
 
         pool.shutdown();

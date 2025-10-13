@@ -77,7 +77,7 @@ pub fn wait_with_timeout_demo(timeout_ms: u64) -> bool {
 
     let start = Instant::now();
     let p2 = Arc::clone(&pair);
-    let _notifier = thread::spawn(move || {
+    let notifier = thread::spawn(move || {
         // 模拟：可能比超时更晚才设置完成
         thread::sleep(Duration::from_millis(timeout_ms + 10));
         let (l, cv) = &*p2;
@@ -94,6 +94,10 @@ pub fn wait_with_timeout_demo(timeout_ms: u64) -> bool {
     let (_guard, wait_result) = res;
     let timed_out = wait_result.timed_out();
     let _elapsed = start.elapsed();
+    
+    // 确保通知线程完成
+    let _ = notifier.join();
+    
     !timed_out
 }
 

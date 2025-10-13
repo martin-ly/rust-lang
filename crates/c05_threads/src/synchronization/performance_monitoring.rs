@@ -580,8 +580,8 @@ mod tests {
         let metrics = PerformanceMetrics::new();
 
         metrics.record_operation(true);
-        metrics.record_operation(false);
         metrics.record_wait_time(Duration::from_millis(1));
+        metrics.record_operation(false);
         metrics.record_contention();
 
         assert_eq!(metrics.get_success_rate(), 0.5);

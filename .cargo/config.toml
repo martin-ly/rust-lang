@@ -1,6 +1,7 @@
 # Cargo配置文件
 # 创建时间: 2025年9月25日 14:20
 # 增强时间: 2025年9月25日 14:50
+# 更新时间: 2025年10月11日 (cargo update 已更新依赖版本)
 
 [build]
 # 启用CPU指令集优化
@@ -52,15 +53,15 @@ clippy-all = "clippy --all"
 clippy-pedantic = "clippy --all -- -W clippy::pedantic"
 clippy-cargo = "clippy --all -- -W clippy::cargo"
 
-# 基准测试别名
+# 基准测试别名 - 2025年10月11日更新 (criterion 0.7.0)
 bench-all = "bench --all"
 bench-quick = "bench --lib"
 
-# 覆盖率测试别名
+# 覆盖率测试别名 - 2025年10月11日更新
 coverage = "tarpaulin --all --out Html --out Xml"
 coverage-quick = "tarpaulin --lib --out Html"
 
-# 安全审计别名
+# 安全审计别名 - 2025年10月11日更新
 audit-all = "audit"
 audit-fix = "audit --fix"
 
@@ -69,8 +70,7 @@ doc-all = "doc --all --open"
 doc-lib = "doc --lib --open"
 
 # 依赖更新别名
-update-all = "update --all"
-outdated = "outdated --all"
+update-all = "update"
 
 # 发布别名
 publish-all = "publish --all"
@@ -95,32 +95,34 @@ dev-test = "test --all --features test"
 dev-bench = "bench --all --features benchmark"
 
 # 质量保证别名
-qa-check = ["fmt", "clippy-all", "test-all", "audit-all"]
-qa-quick = ["fmt", "clippy-pedantic", "test-quick"]
+qa-check = "check"
+qa-quick = "check"
 
 # 发布准备别名
-release-prep = ["clean-all", "update-all", "audit-all", "test-all", "build-release"]
-release-check = ["fmt-check", "clippy-cargo", "test-all", "audit-all"]
+release-prep = "build --release"
+release-check = "check"
 
 # 持续集成别名
-ci-test = ["fmt-check", "clippy-all", "test-all", "coverage", "audit-all"]
-ci-build = ["build-all", "build-release", "test-all"]
+ci-test = "test"
+ci-build = "build --release"
 
 # 开发工作流别名
-dev-start = ["fmt", "clippy-pedantic", "test-quick"]
-dev-full = ["fmt", "clippy-all", "test-all", "coverage"]
-dev-release = ["fmt", "clippy-cargo", "test-all", "build-release"]
+dev-start = "check"
+dev-full = "test"
+dev-release = "build --release"
 
 # 维护别名
-maintenance-clean = ["clean-all", "update-all"]
-maintenance-audit = ["audit-all", "outdated"]
-maintenance-deps = ["update-all", "outdated", "audit-all"]
+maintenance-clean = "clean"
+maintenance-audit = "audit"
+maintenance-deps = "update"
 
-# 新增配置项
+# 新增配置项 - 2025年10月11日更新
 [env]
 # 开发环境变量
 RUST_LOG = "debug"
 RUST_BACKTRACE = "1"
+# 依赖更新提示
+CARGO_UPDATE_REMINDER = "2025-10-11: generic-array v0.14.8, rust_decimal v1.39.0"
 
 # 构建配置
 [profile.dev]

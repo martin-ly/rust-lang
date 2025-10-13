@@ -52,6 +52,7 @@ tokio-rustls = { workspace = true, optional = true }
 rustls-pemfile = { workspace = true, optional = true }
 sha2 = { workspace = true }
 aes-gcm = "0.10.3"
+generic-array = "0.14"
 
 # 测试和基准测试 - 使用工作区统一版本
 criterion = { workspace = true, features = ["html_reports"] }

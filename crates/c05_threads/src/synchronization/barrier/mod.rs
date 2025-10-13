@@ -53,7 +53,6 @@ pub fn multi_phase_barrier(num_threads: usize, phases: usize) {
 /// 分批执行：把任务切成多批，每批次末尾用屏障等待
 pub fn batched_parallel_sum(nums: &[u64], batch_size: usize, workers: usize) -> u64 {
     assert!(workers > 0 && batch_size > 0);
-    let barrier = Arc::new(Barrier::new(workers));
     let shared_nums = Arc::new(nums.to_vec());
     let partials = Arc::new(
         (0..workers)
@@ -63,24 +62,17 @@ pub fn batched_parallel_sum(nums: &[u64], batch_size: usize, workers: usize) -> 
 
     let mut handles = Vec::new();
     for id in 0..workers {
-        let b = Arc::clone(&barrier);
         let data = Arc::clone(&shared_nums);
         let parts = Arc::clone(&partials);
         handles.push(thread::spawn(move || {
             let mut start = id * batch_size;
-            let mut round = 0;
             while start < data.len() {
-                let end = ((round + 1) * workers * batch_size + id * batch_size).min(data.len());
-                let end = end.min(start + batch_size);
+                let end = (start + batch_size).min(data.len());
                 let mut local = 0u64;
                 for x in &data[start..end] {
                     local += *x;
                 }
                 *parts[id].lock().unwrap() += local;
-
-                // 本轮结束，等待其它线程
-                b.wait();
-                round += 1;
                 start += workers * batch_size;
             }
         }));

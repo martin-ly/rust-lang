@@ -65,6 +65,9 @@ pub mod async_runtime;
 // Rust 1.90 新特性模块
 pub mod rust_190_features;
 
+// 性能优化模块
+pub mod performance;
+
 // 重新导出关键类型
 pub use types::{
     IpcConfig, IpcProtocol, Message, ProcessConfig, ProcessGroup, ProcessInfo, ProcessStatus,
@@ -262,6 +265,14 @@ pub mod prelude {
         ErrorClassifier, ErrorChainTracker, ErrorNotifier, ErrorStatistics,
         RecoveryResult, ErrorClassification, ErrorChain, NotificationChannel, NotificationRule,
         Notification, ErrorManagerConfig
+    };
+
+    // 增强的性能优化功能
+    #[cfg(feature = "async")]
+    pub use super::performance::enhanced::{
+        EnhancedPerformanceManager, MemoryMonitor, CpuMonitor, IoMonitor, CacheManager,
+        PerformanceOptimizer, MemorySnapshot, CpuSnapshot, IoSnapshot, IoStats, CacheStats,
+        OptimizationResult, PerformanceReport, PerformanceConfig, ThermalState, EvictionStrategy
     };
 }
 

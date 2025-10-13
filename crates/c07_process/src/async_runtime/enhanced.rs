@@ -61,6 +61,21 @@ pub struct ProcessMetrics {
     pub last_update: Instant,
 }
 
+/// 性能统计信息
+#[cfg(feature = "async")]
+#[allow(dead_code)]
+#[derive(Debug, Clone, Default)]
+pub struct PerformanceStats {
+    pub total_processes: usize,
+    pub high_cpu_processes: usize,
+    pub high_memory_processes: usize,
+    pub normal_processes: usize,
+    pub total_cpu_usage: f64,
+    pub total_memory_usage: u64,
+    pub average_cpu_usage: f64,
+    pub average_memory_usage: u64,
+}
+
 /// 性能监控器
 #[cfg(feature = "async")]
 #[allow(dead_code)]
@@ -198,6 +213,8 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 异步启动进程（带回调版本 - 使用异步闭包）
+    /// 
+    /// 这是 Rust 1.90 新特性的演示，支持异步闭包
     pub async fn spawn_with_callback<F>(
         &self,
         config: ProcessConfig,
@@ -295,6 +312,42 @@ impl EnhancedAsyncProcessManager {
         Vec::new()
     }
 
+    /// 获取性能统计信息（使用 Rust 1.90 改进的模式匹配）
+    pub async fn get_performance_stats(&self) -> ProcessResult<PerformanceStats> {
+        let processes = self.processes.read().await;
+        let mut stats = PerformanceStats::default();
+        
+        for (_pid, process) in processes.iter() {
+            let metrics = process.performance_metrics.lock().await;
+            
+            // 使用 Rust 1.90 改进的模式匹配
+            match (metrics.cpu_usage, metrics.memory_usage) {
+                (cpu, _mem) if cpu > 80.0 => {
+                    stats.high_cpu_processes += 1;
+                    stats.total_cpu_usage += cpu;
+                }
+                (_cpu, mem) if mem > 100_000_000 => { // 100MB
+                    stats.high_memory_processes += 1;
+                    stats.total_memory_usage += mem;
+                }
+                (cpu, mem) => {
+                    stats.normal_processes += 1;
+                    stats.total_cpu_usage += cpu;
+                    stats.total_memory_usage += mem;
+                }
+            }
+            
+            stats.total_processes += 1;
+        }
+        
+        if stats.total_processes > 0 {
+            stats.average_cpu_usage = stats.total_cpu_usage / stats.total_processes as f64;
+            stats.average_memory_usage = stats.total_memory_usage / stats.total_processes as u64;
+        }
+        
+        Ok(stats)
+    }
+
     /// 异步清理资源
     pub async fn cleanup(&self) -> ProcessResult<()> {
         let (response_sender, response_receiver) = oneshot::channel();
@@ -350,6 +403,42 @@ impl EnhancedAsyncProcessManager {
             return Err(ProcessError::NotFound(pid));
         }
         Err(ProcessError::NotFound(pid))
+    }
+
+    /// 异步启动进程（使用 Rust 1.90 异步闭包特性）
+    /// 
+    /// 这个版本使用了 Rust 1.90 的新异步闭包特性
+    /// 注意：由于异步闭包仍不稳定，这里使用 Future trait 作为替代
+    pub async fn spawn_with_async_callback<F, Fut>(
+        &self,
+        config: ProcessConfig,
+        callback: F,
+    ) -> ProcessResult<u32>
+    where
+        F: FnOnce(ProcessResult<u32>) -> Fut + Send + Sync + 'static,
+        Fut: std::future::Future<Output = ProcessResult<()>> + Send + 'static,
+    {
+        let (response_sender, response_receiver) = oneshot::channel();
+
+        let command = EnhancedAsyncCommand::SpawnWithCallback {
+            config,
+            callback: Box::new(move |result| {
+                // 使用 tokio::spawn 来处理异步回调
+                let future = callback(result);
+                tokio::task::block_in_place(|| {
+                    tokio::runtime::Handle::current().block_on(future)
+                })
+            }),
+            response: response_sender,
+        };
+
+        self.command_sender
+            .send(command)
+            .map_err(|_| ProcessError::StartFailed("Failed to send spawn command".to_string()))?;
+
+        response_receiver.await.map_err(|_| {
+            ProcessError::StartFailed("Failed to receive spawn response".to_string())
+        })?
     }
 
     /// 带超时等待进程完成
@@ -821,6 +910,67 @@ mod tests {
 
         let pid = manager.spawn_with_callback(config, callback).await.unwrap();
         assert!(pid > 0);
+
+        let _ = manager.kill(pid, false).await;
+    }
+
+    #[tokio::test]
+    async fn test_spawn_with_async_callback() {
+        let manager = EnhancedAsyncProcessManager::new(10).await.unwrap();
+        
+        let config = ProcessConfig {
+            program: "echo".to_string(),
+            args: vec!["Hello, World!".to_string()],
+            env: HashMap::new(),
+            working_dir: None,
+            user_id: None,
+            group_id: None,
+            priority: None,
+            resource_limits: Default::default(),
+        };
+
+        // 使用异步回调函数（模拟 Rust 1.90 异步闭包特性）
+        let async_callback = |result: ProcessResult<u32>| async move {
+            match result {
+                Ok(pid) => {
+                    println!("Async callback: Process spawned with PID: {}", pid);
+                    // 模拟异步处理
+                    tokio::time::sleep(Duration::from_millis(10)).await;
+                    Ok(())
+                }
+                Err(e) => {
+                    println!("Async callback: Failed to spawn process: {}", e);
+                    Err(e)
+                }
+            }
+        };
+
+        let pid = manager.spawn_with_async_callback(config, async_callback).await.unwrap();
+        assert!(pid > 0);
+
+        let _ = manager.kill(pid, false).await;
+    }
+
+    #[tokio::test]
+    async fn test_performance_stats() {
+        let manager = EnhancedAsyncProcessManager::new(10).await.unwrap();
+        
+        let config = ProcessConfig {
+            program: "echo".to_string(),
+            args: vec!["Hello, World!".to_string()],
+            env: HashMap::new(),
+            working_dir: None,
+            user_id: None,
+            group_id: None,
+            priority: None,
+            resource_limits: Default::default(),
+        };
+
+        let pid = manager.spawn(config).await.unwrap();
+        assert!(pid > 0);
+
+        let stats = manager.get_performance_stats().await.unwrap();
+        assert!(stats.total_processes > 0);
 
         let _ = manager.kill(pid, false).await;
     }

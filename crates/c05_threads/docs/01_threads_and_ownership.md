@@ -2,6 +2,13 @@
 
 并发 (Concurrency) 是指程序的多个部分独立、无序执行的能力。在 Rust 中，并发编程的基石是操作系统线程，而其安全性的核心保障则来自于所有权系统。
 
+## 目录
+
+- [01. 线程与所有权 (Threads and Ownership)](#01-线程与所有权-threads-and-ownership)
+  - [目录](#目录)
+  - [1.1. 创建新线程: `thread::spawn`](#11-创建新线程-threadspawn)
+  - [1.2. `move` 闭包与所有权](#12-move-闭包与所有权)
+
 ## 1.1. 创建新线程: `thread::spawn`
 
 Rust 标准库通过 `std::thread::spawn` 函数提供了创建新线程的 API。`spawn` 函数接受一个闭包 (closure) 作为参数，这个闭包包含了新线程需要执行的代码。
@@ -68,5 +75,5 @@ fn main() {
 
 **章节导航:**
 
-* **下一章 ->** `02_message_passing.md`: 探讨如何使用通道在线程间安全地传递消息。
-* **返回目录 ->** `_index.md`
+- **下一章 ->** `02_message_passing.md`: 探讨如何使用通道在线程间安全地传递消息。
+- **返回目录 ->** `_index.md`

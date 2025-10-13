@@ -87,6 +87,7 @@ cargo check --workspace
 ## 📖 详细报告 | Detailed Report
 
 完整的更新报告请查看:
+
 - [crates/c06_async/DEPENDENCY_UPDATE_REPORT_2025_10_06.md](crates/c06_async/DEPENDENCY_UPDATE_REPORT_2025_10_06.md)
 
 ---

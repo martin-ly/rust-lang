@@ -4,6 +4,28 @@
 
 ---
 
+## 目录
+
+- [术语表 (Glossary) - C05 并发](#术语表-glossary---c05-并发)
+  - [目录](#目录)
+  - [术语](#术语)
+    - [`Arc<T>` (Atomically Reference Counted)](#arct-atomically-reference-counted)
+    - [Atomics (原子类型)](#atomics-原子类型)
+    - [Concurrency (并发)](#concurrency-并发)
+    - [Data Race (数据竞争)](#data-race-数据竞争)
+    - [Deadlock (死锁)](#deadlock-死锁)
+    - [Lock-Free (无锁编程)](#lock-free-无锁编程)
+    - [Memory Ordering (内存排序)](#memory-ordering-内存排序)
+    - [Message Passing (消息传递)](#message-passing-消息传递)
+    - [`Mutex<T>` (Mutual Exclusion)](#mutext-mutual-exclusion)
+    - [Parallelism (并行)](#parallelism-并行)
+    - [Rayon](#rayon)
+    - [`RwLock<T>` (Read-Write Lock)](#rwlockt-read-write-lock)
+    - [Send (Trait)](#send-trait)
+    - [Shared-State Concurrency (共享状态并发)](#shared-state-concurrency-共享状态并发)
+    - [Sync (Trait)](#sync-trait)
+    - [Work-Stealing (工作窃取)](#work-stealing-工作窃取)
+
 ## 术语
 
 ### `Arc<T>` (Atomically Reference Counted)

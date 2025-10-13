@@ -105,11 +105,13 @@ fn bench_encryption_decryption(c: &mut Criterion) {
         
         group.bench_with_input(BenchmarkId::new("aes_encrypt", size), size, |b, _| {
             b.iter(|| {
-                use aes_gcm::{Aes256Gcm, Key, Nonce, KeyInit};
+                use aes_gcm::{Aes256Gcm, KeyInit};
                 use aes_gcm::aead::Aead;
                 
-                let cipher = Aes256Gcm::new(&Key::<Aes256Gcm>::from_slice(key));
-                let nonce = Nonce::from_slice(b"unique nonce");
+                #[allow(deprecated)]
+                let cipher = Aes256Gcm::new_from_slice(key).unwrap();
+                #[allow(deprecated)]
+                let nonce = aes_gcm::Nonce::from_slice(b"unique nonce");
                 cipher.encrypt(nonce, data.as_ref()).unwrap()
             })
         });

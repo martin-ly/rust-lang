@@ -107,12 +107,10 @@ impl HierarchicalBarrier {
             let level_threads = self.levels[level].total_count();
             let level_thread_id = current_thread_id % level_threads;
 
+            // 所有线程都等待，但只有第一个线程返回 true
+            let result = self.levels[level].wait();
             if level_thread_id == 0 {
-                // 这个线程在当前层级是第一个
-                is_last = self.levels[level].wait();
-            } else {
-                // 这个线程在当前层级不是第一个
-                self.levels[level].wait();
+                is_last = result;
             }
 
             current_thread_id /= level_threads;
@@ -297,19 +295,22 @@ impl BarrierTrait for LockFreeBarrier {
 
 impl BarrierTrait for HierarchicalBarrier {
     fn wait(&self) -> bool {
-        self.wait()
+        // Call the actual implementation method
+        HierarchicalBarrier::wait(self)
     }
 }
 
 impl BarrierTrait for AdaptiveBarrier {
     fn wait(&self) -> bool {
-        self.wait()
+        // Call the actual implementation method
+        AdaptiveBarrier::wait(self)
     }
 }
 
 impl BarrierTrait for ReusableBarrier {
     fn wait(&self) -> bool {
-        self.wait()
+        // Call the actual implementation method
+        ReusableBarrier::wait(self)
     }
 }
 

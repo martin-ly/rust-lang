@@ -428,12 +428,21 @@ mod tests {
                 for i in 0..10 {
                     sender.send(i).unwrap();
                 }
+                // Close the sender to signal completion
+                drop(sender);
             });
 
             s.spawn(move || {
                 let mut count = 0;
-                while let Ok(_) = receiver.recv() {
-                    count += 1;
+                // Use try_recv with timeout to avoid infinite blocking
+                let start = std::time::Instant::now();
+                while count < 10 && start.elapsed() < Duration::from_secs(5) {
+                    match receiver.try_recv() {
+                        Ok(_) => count += 1,
+                        Err(_) => {
+                            std::thread::sleep(Duration::from_millis(1));
+                        }
+                    }
                 }
                 assert_eq!(count, 10);
             });
