@@ -1,3 +1,45 @@
+//! P2P 网络最小示例
+//!
+//! 这个示例展示了如何使用 libp2p 创建一个简单的 P2P 网络节点
+//!
+//! ## 功能特性
+//!
+//! - ✅ P2P 节点创建和身份管理
+//! - ✅ TCP 传输层配置
+//! - ✅ Noise 加密和 Yamux 多路复用
+//! - ✅ GossipSub 消息传播
+//! - ✅ Kademlia DHT 发现
+//! - ✅ Ping 协议保活
+//! - ✅ Identify 协议节点识别
+//!
+//! ## 运行方式
+//!
+//! ```bash
+//! # 启动第一个节点
+//! cargo run --example p2p_minimal
+//!
+//! # 在另一个终端启动第二个节点（会自动发现第一个节点）
+//! cargo run --example p2p_minimal
+//! ```
+//!
+//! ## P2P 协议栈
+//!
+//! 本示例使用了以下 P2P 协议：
+//! - **传输层**: TCP
+//! - **安全层**: Noise
+//! - **多路复用**: Yamux
+//! - **消息传播**: GossipSub
+//! - **节点发现**: Kademlia DHT
+//! - **保活机制**: Ping
+//! - **节点识别**: Identify
+//!
+//! ## 配置选项
+//!
+//! 可以通过环境变量配置节点：
+//! - `C10_P2P_LISTEN_ADDR`: 监听地址 (默认: /ip4/0.0.0.0/tcp/0)
+//! - `C10_P2P_TOPIC`: 订阅主题 (默认: c10-demo)
+//! - `C10_P2P_PUBLISH_INTERVAL`: 发布间隔 (默认: 5秒)
+
 use libp2p::{
     Multiaddr, PeerId, Transport,
     core::upgrade,
@@ -42,7 +84,17 @@ async fn main() -> anyhow::Result<()> {
     let ping = ping::Behaviour::default();
     let identify = identify::Behaviour::new(identify::Config::new("c10/1.0".into(), key.public()));
 
-    let topic = gossipsub::IdentTopic::new("c10-demo");
+    // 从环境变量读取配置
+    let topic_name = std::env::var("C10_P2P_TOPIC")
+        .unwrap_or_else(|_| "c10-demo".to_string());
+    let listen_addr = std::env::var("C10_P2P_LISTEN_ADDR")
+        .unwrap_or_else(|_| "/ip4/0.0.0.0/tcp/0".to_string());
+    let publish_interval_secs = std::env::var("C10_P2P_PUBLISH_INTERVAL")
+        .ok()
+        .and_then(|s| s.parse().ok())
+        .unwrap_or(5);
+
+    let topic = gossipsub::IdentTopic::new(&topic_name);
     let mut behaviour = MyBehaviour {
         gossipsub,
         kademlia,
@@ -57,9 +109,9 @@ async fn main() -> anyhow::Result<()> {
         libp2p::swarm::Config::with_tokio_executor(),
     );
 
-    libp2p::Swarm::listen_on(&mut swarm, "/ip4/0.0.0.0/tcp/0".parse::<Multiaddr>()?)?;
+    libp2p::Swarm::listen_on(&mut swarm, listen_addr.parse::<Multiaddr>()?)?;
 
-    let mut ticker = tokio::time::interval(Duration::from_secs(5));
+    let mut ticker = tokio::time::interval(Duration::from_secs(publish_interval_secs));
 
     loop {
         tokio::select! {

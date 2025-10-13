@@ -17,20 +17,25 @@
 ### 1.1 数学定义
 
 #### 定义1.1（递归函数）
+
 递归函数 `f` 是满足以下方程的函数：
-```
+
+```text
 f(x) = if base(x) then base_value(x) else combine(x, f(recursive_call(x)))
 ```
 
 **组成部分**：
+
 1. **基础情况**（Base Case）：`base(x)` 为真时直接返回
 2. **递归情况**（Recursive Case）：通过 `f` 的子问题定义 `f(x)`
 3. **终止性**（Termination）：递归调用参数"更小"，保证最终到达基础情况
 
 #### 定理1.1（递归函数的唯一性）
+
 在良基集合（well-founded set）上，满足上述方程的递归函数**唯一存在**。
 
 **证明**（通过不动点定理）：
+
 - 定义算子 `Φ(f)(x) = if base(x) then base_value(x) else combine(x, f(recursive_call(x)))`
 - 递归函数 `f` 是 `Φ` 的不动点：`Φ(f) = f`
 - 在完备格上，Knaster-Tarski定理保证最小不动点存在且唯一。∎
@@ -38,8 +43,10 @@ f(x) = if base(x) then base_value(x) else combine(x, f(recursive_call(x)))
 ### 1.2 计算语义
 
 #### 调用栈（Call Stack）
+
 同步递归使用调用栈：
-```
+
+```text
 f(3):
   ├─ f(2):
   │  ├─ f(1):
@@ -57,6 +64,7 @@ f(3):
 ### 2.1 同步递归
 
 #### 示例：阶乘
+
 ```rust
 fn factorial(n: u64) -> u64 {
     if n == 0 {
@@ -68,12 +76,14 @@ fn factorial(n: u64) -> u64 {
 ```
 
 **执行模型**：
+
 - 调用 `factorial(n)` → 压栈
 - 递归调用 `factorial(n-1)` → 再压栈
 - 到达基础情况 → 逐层返回，弹栈
 
 **内存布局**：
-```
+
+```text
 [factorial(3)] ← SP (栈顶)
 [factorial(2)]
 [factorial(1)]
@@ -84,6 +94,7 @@ fn factorial(n: u64) -> u64 {
 ### 2.2 异步递归
 
 #### 示例：异步阶乘（初步尝试）
+
 ```rust
 async fn factorial_async(n: u64) -> u64 {
     if n == 0 {
@@ -96,12 +107,14 @@ async fn factorial_async(n: u64) -> u64 {
 ```
 
 **问题**：
+
 - `async fn` 返回 `impl Future<Output = u64>`
 - Future的大小在编译时必须确定
 - 递归导致类型定义循环：`F = Future<Output = u64>` 且 `F` 包含 `F`
 
 **形式化**：
-```
+
+```text
 size(Future<factorial>) = size(n) + size(factorial_async(n-1))
                         = size(n) + size(Future<factorial>)
                         → ∞  (无穷大)
@@ -114,7 +127,9 @@ size(Future<factorial>) = size(n) + size(factorial_async(n-1))
 ### 3.1 类型系统挑战
 
 #### 问题1：递归类型的大小
+
 Rust要求所有类型大小在编译时已知，但递归类型无限大：
+
 ```rust
 struct RecursiveFuture {
     inner: RecursiveFuture,  // 错误：无限大小
@@ -122,6 +137,7 @@ struct RecursiveFuture {
 ```
 
 #### 解决方案：间接引用（Indirection）
+
 ```rust
 struct RecursiveFuture {
     inner: Box<RecursiveFuture>,  // OK：Box是指针，大小固定
@@ -131,6 +147,7 @@ struct RecursiveFuture {
 ### 3.2 编译器的处理
 
 #### `async fn` 的展开（desugaring）
+
 ```rust
 // 源代码
 async fn foo(x: i32) -> i32 {
@@ -146,6 +163,7 @@ fn foo(x: i32) -> impl Future<Output = i32> {
 ```
 
 对于递归函数：
+
 ```rust
 async fn factorial(n: u64) -> u64 {
     if n == 0 {
@@ -175,6 +193,7 @@ fn factorial(n: u64) -> impl Future<Output = u64> {
 ### 4.1 模式1：Box堆分配
 
 #### 实现
+
 ```rust
 use std::future::Future;
 use std::pin::Pin;
@@ -191,16 +210,19 @@ fn factorial_async(n: u64) -> Pin<Box<dyn Future<Output = u64> + Send>> {
 ```
 
 **说明**：
+
 - `Pin<Box<dyn Future>>` 是trait对象，大小固定（指针 + vtable）
 - 递归调用返回相同类型
 - 每次递归分配堆内存
 
 **性能分析**：
+
 - **时间复杂度**：O(n)（n次递归调用）
 - **空间复杂度**：O(n)（n个Box分配）
 - **堆分配次数**：O(n)
 
 #### 基准测试
+
 ```rust
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
@@ -219,6 +241,7 @@ criterion_main!(benches);
 ```
 
 **结果**（示例）：
+
 - `factorial_async(20)`: ~500ns
 - `factorial_sync(20)`: ~50ns
 - **开销**：10x（堆分配 + 异步开销）
@@ -226,6 +249,7 @@ criterion_main!(benches);
 ### 4.2 模式2：async-recursion crate
 
 #### 使用宏简化
+
 ```rust
 use async_recursion::async_recursion;
 
@@ -240,10 +264,12 @@ async fn factorial(n: u64) -> u64 {
 ```
 
 **原理**：
+
 - `#[async_recursion]` 宏自动添加 `Box::pin`
 - 等价于手动模式1
 
 **宏展开**（简化）：
+
 ```rust
 fn factorial(n: u64) -> Pin<Box<dyn Future<Output = u64> + Send>> {
     Box::pin(async move {
@@ -259,6 +285,7 @@ fn factorial(n: u64) -> Pin<Box<dyn Future<Output = u64> + Send>> {
 ### 4.3 模式3：迭代转换（Tail Call Optimization）
 
 #### 尾递归（Tail Recursion）
+
 ```rust
 // 尾递归版本
 async fn factorial_tail(n: u64, acc: u64) -> u64 {
@@ -281,6 +308,7 @@ async fn factorial_iter(n: u64) -> u64 {
 ```
 
 **优势**：
+
 - 无堆分配
 - O(1) 空间复杂度
 - 保持异步语义（yield点）
@@ -288,6 +316,7 @@ async fn factorial_iter(n: u64) -> u64 {
 ### 4.4 模式4：Stream与迭代器
 
 #### 使用Stream延迟求值
+
 ```rust
 use futures::stream::{self, Stream, StreamExt};
 use std::pin::Pin;
@@ -312,6 +341,7 @@ async fn main() {
 ```
 
 **特点**：
+
 - 惰性求值
 - 可组合
 - 适合流式处理
@@ -323,7 +353,9 @@ async fn main() {
 ### 5.1 终止性证明
 
 #### 定理5.1（同步递归的终止性）
+
 对于良基序 `<` 上的递归函数 `f`：
+
 ```rust
 fn f(n: Nat) -> T {
     if n == 0 {
@@ -333,9 +365,11 @@ fn f(n: Nat) -> T {
     }
 }
 ```
+
 若 `n ∈ ℕ`，则 `f(n)` 在有限步内终止。
 
 **证明**：
+
 1. 归纳假设：对所有 `m < n`，`f(m)` 终止
 2. 对于 `f(n)`：
    - 若 `n = 0`，直接返回，终止
@@ -345,7 +379,9 @@ fn f(n: Nat) -> T {
 3. 由归纳原理，对所有 `n`，`f(n)` 终止。∎
 
 #### 定理5.2（异步递归的终止性）
+
 对于异步递归：
+
 ```rust
 async fn f(n: Nat) -> T {
     if n == 0 {
@@ -355,9 +391,11 @@ async fn f(n: Nat) -> T {
     }
 }
 ```
+
 若 `n ∈ ℕ` 且执行器公平调度，则 `f(n)` 最终完成。
 
 **证明**：
+
 1. 同步递归证明的异步版本
 2. 关键：公平性保证每个Future最终被poll
 3. 终止性保证 `Poll::Ready` 最终到达。∎
@@ -365,9 +403,11 @@ async fn f(n: Nat) -> T {
 ### 5.2 栈安全性
 
 #### 定理5.3（Box递归的栈安全）
+
 使用 `Box::pin` 的异步递归不会栈溢出。
 
 **证明**：
+
 1. 每次递归调用分配堆内存（Box）
 2. 栈上只存储指针（固定大小）
 3. 递归深度 `d`：
@@ -379,17 +419,22 @@ async fn f(n: Nat) -> T {
 ### 5.3 语义等价性
 
 #### 定理5.4（同步-异步递归等价）
+
 对于纯函数（无副作用）：
+
 ```rust
 fn f_sync(n: u64) -> T { ... }
 async fn f_async(n: u64) -> T { ... }
 ```
+
 若两者逻辑相同，则：
-```
+
+```text
 f_sync(n) = block_on(f_async(n))
 ```
 
 **证明**：
+
 - 通过操作语义的结构归纳
 - 基础情况：直接返回值相同
 - 递归情况：假设 `f_sync(n-1) = block_on(f_async(n-1))`
@@ -404,6 +449,7 @@ f_sync(n) = block_on(f_async(n))
 ### 6.1 理论分析
 
 #### 时间复杂度对比
+
 | 实现 | 时间复杂度 | 额外开销 |
 |------|-----------|---------|
 | 同步递归 | T(n) = T(n-1) + O(1) = O(n) | 函数调用 |
@@ -412,11 +458,13 @@ f_sync(n) = block_on(f_async(n))
 | 迭代 | O(n) | 最小 |
 
 **结论**：
+
 - **同步递归**：最快，但栈有限
 - **异步Box递归**：栈安全，但慢10-50倍
 - **迭代**：最优解（当可转换时）
 
 #### 空间复杂度对比
+
 | 实现 | 栈空间 | 堆空间 | 总空间 |
 |------|--------|--------|--------|
 | 同步递归 | O(n) | O(1) | O(n) |
@@ -426,6 +474,7 @@ f_sync(n) = block_on(f_async(n))
 ### 6.2 实际基准测试
 
 #### 测试代码
+
 ```rust
 use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
 use tokio::runtime::Runtime;
@@ -480,6 +529,7 @@ criterion_main!(benches);
 ```
 
 #### 结果（示例，单位：μs）
+
 | n | sync | async | iter | async/sync | iter/sync |
 |---|------|-------|------|-----------|-----------|
 | 10 | 0.55 | 18.2 | 0.01 | 33x | 0.02x |
@@ -487,6 +537,7 @@ criterion_main!(benches);
 | 20 | 63 | 2100 | 0.01 | 33x | 0.0002x |
 
 **观察**：
+
 1. 异步递归比同步慢30-50倍（堆分配开销）
 2. 迭代版本快1000倍（O(1)空间，无递归）
 3. 对于可转换为迭代的递归，应避免异步递归
@@ -498,6 +549,7 @@ criterion_main!(benches);
 ### 7.1 互递归（Mutual Recursion）
 
 #### 问题
+
 ```rust
 async fn even(n: u64) -> bool {
     if n == 0 { true } else { odd(n - 1).await }
@@ -510,6 +562,7 @@ async fn odd(n: u64) -> bool {
 ```
 
 #### 解决方案
+
 ```rust
 use std::future::Future;
 use std::pin::Pin;
@@ -530,6 +583,7 @@ fn odd(n: u64) -> Pin<Box<dyn Future<Output = bool> + Send>> {
 ### 7.2 树的异步遍历
 
 #### 二叉树定义
+
 ```rust
 #[derive(Clone)]
 struct Node {
@@ -590,12 +644,14 @@ impl Node {
 ```
 
 **性能对比**：
+
 - **顺序遍历**：O(n) 时间，O(depth) 栈/堆
 - **并行遍历**：O(log n) 时间（完全平衡树），O(depth) 堆
 
 ### 7.3 惰性求值与Trampoline
 
 #### Trampoline模式
+
 ```rust
 enum Trampoline<T> {
     Done(T),
@@ -629,6 +685,7 @@ let result = factorial_trampoline(100000, 1).run();  // 不会栈溢出
 ```
 
 **异步Trampoline**：
+
 ```rust
 enum AsyncTrampoline<T> {
     Done(T),
@@ -654,11 +711,13 @@ impl<T> AsyncTrampoline<T> {
 ### 8.1 何时使用异步递归
 
 #### 适用场景
+
 1. **IO密集的递归**：文件系统遍历、爬虫
 2. **必须异步**：与异步生态集成
 3. **递归深度受限**：已知不会超过堆栈/堆限制
 
 #### 避免场景
+
 1. **纯计算**：斐波那契、阶乘等（用迭代）
 2. **深度递归**：超过1000层（考虑迭代或trampoline）
 3. **性能敏感**：热路径代码
@@ -666,6 +725,7 @@ impl<T> AsyncTrampoline<T> {
 ### 8.2 优化技巧
 
 #### 1. 优先转换为迭代
+
 ```rust
 // 不好：递归
 async fn sum_array(arr: &[i32]) -> i32 {
@@ -688,6 +748,7 @@ async fn sum_array(arr: &[i32]) -> i32 {
 ```
 
 #### 2. 使用尾递归优化
+
 ```rust
 // 尾递归（可优化）
 async fn sum_tail(arr: &[i32], acc: i32) -> i32 {
@@ -700,6 +761,7 @@ async fn sum_tail(arr: &[i32], acc: i32) -> i32 {
 ```
 
 #### 3. 并行化
+
 ```rust
 // 分治并行
 async fn parallel_sum(arr: &[i32]) -> i32 {
@@ -732,7 +794,7 @@ async fn parallel_sum(arr: &[i32]) -> i32 {
 
 ### 决策树
 
-```
+```text
 需要递归？
 ├─ 可转换为迭代？
 │  └─ 是 → 使用迭代（最优）
@@ -750,7 +812,7 @@ async fn parallel_sum(arr: &[i32]) -> i32 {
 **最后更新**: 2025-10-02  
 **Rust版本**: 1.90+ (Edition 2024)  
 **参考**:
+
 - "Recursion Schemes" by Patrick Thomson
 - "Async recursion in Rust" RFC
 - async-recursion crate documentation
-

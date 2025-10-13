@@ -1,6 +1,37 @@
 //! WebSocket 演示示例
 //!
 //! 这个示例展示了如何使用 c10_networks 库创建 WebSocket 帧和握手
+//!
+//! ## 功能特性
+//!
+//! - ✅ WebSocket 帧创建和解析
+//! - ✅ 握手请求和响应
+//! - ✅ 密钥生成和验证
+//! - ✅ 操作码特性演示
+//! - ✅ 完整的协议支持
+//!
+//! ## 运行方式
+//!
+//! ```bash
+//! # 运行演示
+//! cargo run --example websocket_demo
+//! ```
+//!
+//! ## WebSocket 协议支持
+//!
+//! 本示例演示了以下 WebSocket 特性：
+//! - **文本帧**: 用于传输 UTF-8 文本数据
+//! - **二进制帧**: 用于传输二进制数据
+//! - **控制帧**: Ping、Pong、Close 帧
+//! - **握手**: HTTP 升级到 WebSocket 协议
+//! - **密钥验证**: WebSocket 安全握手机制
+//!
+//! ## 配置选项
+//!
+//! 可以通过环境变量配置演示：
+//! - `C10_WS_DEMO_HOST`: 演示主机名 (默认: example.com)
+//! - `C10_WS_DEMO_PATH`: 演示路径 (默认: /chat)
+//! - `C10_WS_DEMO_KEY`: 自定义密钥 (可选)
 
 use c10_networks::{
     error::NetworkResult,
@@ -58,10 +89,17 @@ async fn main() -> NetworkResult<()> {
     // 演示 WebSocket 握手
     println!("\n🤝 演示 WebSocket 握手:");
 
+    // 从环境变量读取配置
+    let host = std::env::var("C10_WS_DEMO_HOST")
+        .unwrap_or_else(|_| "example.com".to_string());
+    let path = std::env::var("C10_WS_DEMO_PATH")
+        .unwrap_or_else(|_| "/chat".to_string());
+    let custom_key = std::env::var("C10_WS_DEMO_KEY").ok();
+
     // 创建握手请求
-    let mut request = WebSocketHandshakeRequest::new("/chat");
-    request.set_host("example.com");
-    request.set_websocket_key("dGhlIHNhbXBsZSBub25jZQ==");
+    let mut request = WebSocketHandshakeRequest::new(&path);
+    request.set_host(&host);
+    request.set_websocket_key(&custom_key.unwrap_or_else(|| "dGhlIHNhbXBsZSBub25jZQ==".to_string()));
     request.set_websocket_version("13");
     request.set_upgrade();
 
