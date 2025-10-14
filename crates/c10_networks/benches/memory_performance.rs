@@ -4,7 +4,7 @@
 
 use bytes::Bytes;
 use c10_networks::{
-    packet::{Packet, PacketBuilder, PacketStats, PacketType},
+    packet::{Packet, PacketStats, PacketType},
     performance::{memory_pool::MemoryPool, cache::Cache},
 };
 use criterion::{Criterion, criterion_group, criterion_main};
@@ -53,34 +53,34 @@ fn bench_memory_pool(c: &mut Criterion) {
 
     group.bench_function("pool_creation", |b| {
         b.iter(|| {
-            let pool = MemoryPool::new(black_box(1024), black_box(100));
+            let pool = MemoryPool::new(black_box(1024));
             black_box(pool)
         })
     });
 
     group.bench_function("pool_allocation", |b| {
-        let pool = MemoryPool::new(1024, 100);
+        let pool = MemoryPool::new(1024);
         b.iter(|| {
             let buffer = pool.allocate(black_box(512));
             black_box(buffer)
         })
     });
 
-    group.bench_function("pool_deallocation", |b| {
-        let pool = MemoryPool::new(1024, 100);
-        let buffer = pool.allocate(512);
+    group.bench_function("pool_allocation_failure", |b| {
+        let pool = MemoryPool::new(1024);
         b.iter(|| {
-            pool.deallocate(black_box(buffer.clone()));
+            let buffer = pool.allocate(black_box(2048)); // 超过块大小
+            black_box(buffer)
         })
     });
 
     group.bench_function("pool_reuse", |b| {
-        let pool = MemoryPool::new(1024, 100);
+        let pool = MemoryPool::new(1024);
         b.iter(|| {
             let buffer1 = pool.allocate(black_box(256));
             let buffer2 = pool.allocate(black_box(512));
-            pool.deallocate(buffer1);
-            pool.deallocate(buffer2);
+            // 内存池会自动管理内存，无需手动释放
+            black_box((buffer1, buffer2))
         })
     });
 
@@ -93,20 +93,20 @@ fn bench_cache_performance(c: &mut Criterion) {
 
     group.bench_function("cache_creation", |b| {
         b.iter(|| {
-            let cache = Cache::new(black_box(1000), black_box(100));
+            let cache: Cache<String, String> = Cache::new(black_box(1000));
             black_box(cache)
         })
     });
 
     group.bench_function("cache_insert", |b| {
-        let cache = Cache::new(1000, 100);
+        let cache: Cache<String, String> = Cache::new(1000);
         b.iter(|| {
             cache.insert(black_box("key".to_string()), black_box("value".to_string()));
         })
     });
 
     group.bench_function("cache_get", |b| {
-        let cache = Cache::new(1000, 100);
+        let cache: Cache<String, String> = Cache::new(1000);
         cache.insert("key".to_string(), "value".to_string());
         b.iter(|| {
             let value = cache.get(black_box(&"key".to_string()));
@@ -115,7 +115,7 @@ fn bench_cache_performance(c: &mut Criterion) {
     });
 
     group.bench_function("cache_eviction", |b| {
-        let cache = Cache::new(10, 5); // 小缓存，容易触发驱逐
+        let cache: Cache<String, String> = Cache::new(10); // 小缓存，容易触发驱逐
         b.iter(|| {
             for i in 0..20 {
                 cache.insert(format!("key{}", i), format!("value{}", i));
@@ -334,7 +334,7 @@ fn bench_concurrent_memory_allocation(c: &mut Criterion) {
     });
 
     group.bench_function("shared_memory_pool", |b| {
-        let pool = Arc::new(MemoryPool::new(1024 * 1024, 1000));
+        let pool = Arc::new(MemoryPool::new(1024 * 1024));
         
         b.iter(|| {
             let mut handles = Vec::new();
@@ -457,7 +457,7 @@ fn bench_memory_leak_detection(c: &mut Criterion) {
     });
 
     group.bench_function("weak_references", |b| {
-        use std::rc::{Rc, Weak};
+        use std::rc::Rc;
         
         b.iter(|| {
             let data = Rc::new(vec![0u8; 1024]);

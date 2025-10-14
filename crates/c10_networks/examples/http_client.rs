@@ -1,6 +1,61 @@
 //! HTTP 客户端示例
 //!
 //! 这个示例展示了如何使用 c10_networks 库创建一个 HTTP 客户端
+//!
+//! ## 📖 理论基础
+//!
+//! HTTP (超文本传输协议) 是应用层协议，用于 Web 通信：
+//!
+//! - **请求-响应模型**: 客户端发送请求，服务器返回响应
+//! - **无状态**: 每个请求独立处理
+//! - **可扩展**: 支持各种扩展和功能
+//! - **文本协议**: 人类可读的协议格式
+//!
+//! ## 🔬 实现原理
+//!
+//! ### HTTP 请求结构
+//!
+//! ```rust
+//! pub struct HttpRequest {
+//!     pub method: HttpMethod,      // GET, POST, PUT, DELETE 等
+//!     pub uri: String,            // 请求路径
+//!     pub version: HttpVersion,   // HTTP/1.1, HTTP/2 等
+//!     pub headers: HashMap<String, String>, // 请求头
+//!     pub body: Vec<u8>,          // 请求体
+//! }
+//! ```
+//!
+//! ### HTTP 响应结构
+//!
+//! ```rust
+//! pub struct HttpResponse {
+//!     pub version: HttpVersion,   // HTTP 版本
+//!     pub status: HttpStatusCode,  // 状态码
+//!     pub headers: HashMap<String, String>, // 响应头
+//!     pub body: Vec<u8>,          // 响应体
+//! }
+//! ```
+//!
+//! ## 🚀 使用场景
+//!
+//! - **Web 应用**: 构建 Web 应用和 API
+//! - **数据获取**: 从服务器获取数据
+//! - **文件传输**: 上传和下载文件
+//! - **API 调用**: 调用 RESTful API
+//!
+//! ## ⚠️ 注意事项
+//!
+//! - **错误处理**: 处理各种 HTTP 错误状态码
+//! - **超时设置**: 设置合理的请求超时时间
+//! - **重试机制**: 实现适当的重试逻辑
+//! - **安全考虑**: 注意 HTTPS 和安全头
+//!
+//! ## 🔧 运行方式
+//!
+//! ```bash
+//! # 运行 HTTP 客户端示例
+//! cargo run --example http_client
+//! ```
 
 use c10_networks::{
     error::{ErrorRecovery, NetworkResult},

@@ -1,16 +1,13 @@
-//! 异常处理性能基准测试
+//! 并发性能基准测试
 //!
-//! 这个模块包含了 c10_networks 库异常处理相关的性能基准测试
+//! 这个模块包含了 c10_networks 库并发处理相关的性能基准测试
 
-use bytes::Bytes;
 use c10_networks::{
     error::{ErrorRecovery, NetworkError, ErrorStats, ProtocolError, PerformanceError, SecurityError},
-    packet::{Packet, PacketBuilder, PacketStats, PacketType},
-    performance::{memory_pool::MemoryPool, cache::Cache},
 };
 use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
-use std::sync::{Arc, Mutex, RwLock};
+use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::Duration;
 
@@ -27,21 +24,24 @@ fn bench_error_creation(c: &mut Criterion) {
 
     group.bench_function("protocol_error", |b| {
         b.iter(|| {
-            let error = ProtocolError::InvalidHeader(black_box("test".to_string()));
+            let error = ProtocolError::Http {
+                status: black_box(400),
+                message: black_box("Bad Request".to_string()),
+            };
             black_box(error)
         })
     });
 
     group.bench_function("performance_error", |b| {
         b.iter(|| {
-            let error = PerformanceError::HighLatency(black_box(Duration::from_millis(100)));
+            let error = PerformanceError::HighLoad { load: black_box(95.0) };
             black_box(error)
         })
     });
 
     group.bench_function("security_error", |b| {
         b.iter(|| {
-            let error = SecurityError::AuthenticationFailed(black_box("test".to_string()));
+            let error = SecurityError::CertificateVerification(black_box("test".to_string()));
             black_box(error)
         })
     });
@@ -80,7 +80,8 @@ fn bench_error_recovery(c: &mut Criterion) {
     group.bench_function("should_retry", |b| {
         let error = NetworkError::Timeout(Duration::from_secs(5));
         b.iter(|| {
-            let should_retry = black_box(&error).should_retry(black_box(3));
+            let should_retry = black_box(&error).is_retryable() && 
+                black_box(&error).max_retries().map_or(false, |max| 3 < max);
             black_box(should_retry)
         })
     });
@@ -94,13 +95,13 @@ fn bench_error_stats(c: &mut Criterion) {
 
     group.bench_function("stats_creation", |b| {
         b.iter(|| {
-            let stats = ErrorStats::new();
+            let stats = ErrorStats::default();
             black_box(stats)
         })
     });
 
     group.bench_function("stats_record", |b| {
-        let mut stats = ErrorStats::new();
+        let mut stats = ErrorStats::default();
         let error = NetworkError::Timeout(Duration::from_secs(5));
         
         b.iter(|| {
@@ -109,34 +110,34 @@ fn bench_error_stats(c: &mut Criterion) {
     });
 
     group.bench_function("stats_get_count", |b| {
-        let mut stats = ErrorStats::new();
+        let mut stats = ErrorStats::default();
         let error = NetworkError::Timeout(Duration::from_secs(5));
         stats.record_error(&error);
         
         b.iter(|| {
-            let count = stats.get_error_count(black_box(&error));
+            let count = stats.timeout_errors;
             black_box(count)
         })
     });
 
     group.bench_function("stats_get_total", |b| {
-        let mut stats = ErrorStats::new();
+        let mut stats = ErrorStats::default();
         let error = NetworkError::Timeout(Duration::from_secs(5));
         stats.record_error(&error);
         
         b.iter(|| {
-            let total = stats.get_total_errors();
+            let total = stats.total_errors;
             black_box(total)
         })
     });
 
     group.bench_function("stats_reset", |b| {
-        let mut stats = ErrorStats::new();
+        let mut stats = ErrorStats::default();
         let error = NetworkError::Timeout(Duration::from_secs(5));
         stats.record_error(&error);
         
         b.iter(|| {
-            stats.reset();
+            stats = ErrorStats::default();
         })
     });
 
@@ -160,7 +161,7 @@ fn bench_error_propagation(c: &mut Criterion) {
         b.iter(|| {
             match black_box(&result) {
                 Ok(_) => black_box(0),
-                Err(e) => black_box(e.max_retries()),
+                Err(e) => black_box(e.max_retries().unwrap_or(0)),
             }
         })
     });
@@ -169,7 +170,7 @@ fn bench_error_propagation(c: &mut Criterion) {
         let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
         
         b.iter(|| {
-            let mapped = black_box(&result).map_err(|e| e.max_retries());
+            let mapped = black_box(&result).as_ref().map_err(|e| e.max_retries().unwrap_or(0));
             black_box(mapped)
         })
     });
@@ -178,7 +179,7 @@ fn bench_error_propagation(c: &mut Criterion) {
         let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
         
         b.iter(|| {
-            let chained = black_box(&result).and_then(|_| Ok(()));
+            let chained = black_box(&result).as_ref().map(|_| ());
             black_box(chained)
         })
     });
@@ -195,9 +196,9 @@ fn bench_error_handling_chain(c: &mut Criterion) {
             let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
             
             let processed = result
-                .map_err(|e| e.max_retries())
+                .map_err(|e| e.max_retries().unwrap_or(0))
                 .and_then(|_| Ok(()))
-                .map_err(|retries| NetworkError::Timeout(Duration::from_secs(retries)));
+                .map_err(|retries| NetworkError::Timeout(Duration::from_secs(retries as u64)));
             
             black_box(processed)
         })
@@ -208,11 +209,11 @@ fn bench_error_handling_chain(c: &mut Criterion) {
             let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
             
             let processed = result
-                .map_err(|e| e.max_retries())
+                .map_err(|e| e.max_retries().unwrap_or(0))
                 .and_then(|_| Ok(()))
-                .map_err(|retries| NetworkError::Timeout(Duration::from_secs(retries)))
+                .map_err(|retries| NetworkError::Timeout(Duration::from_secs(retries as u64)))
                 .and_then(|_| Ok(()))
-                .map_err(|e| e.retry_delay());
+                .map_err(|e| e.retry_delay().unwrap_or(Duration::from_millis(100)));
             
             black_box(processed)
         })
@@ -223,12 +224,12 @@ fn bench_error_handling_chain(c: &mut Criterion) {
             let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
             
             let processed = result
-                .map_err(|e| e.max_retries())
+                .map_err(|e| e.max_retries().unwrap_or(0))
                 .and_then(|_| {
                     let inner_result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(3)));
-                    inner_result.map_err(|e| e.max_retries())
+                    inner_result.map_err(|e| e.max_retries().unwrap_or(0))
                 })
-                .map_err(|retries| NetworkError::Timeout(Duration::from_secs(retries)));
+                .map_err(|retries| NetworkError::Timeout(Duration::from_secs(retries as u64)));
             
             black_box(processed)
         })
@@ -275,32 +276,30 @@ fn bench_error_logging(c: &mut Criterion) {
 fn bench_error_serialization(c: &mut Criterion) {
     let mut group = c.benchmark_group("error_serialization");
 
-    group.bench_function("error_serialize", |b| {
+    group.bench_function("error_to_string", |b| {
         let error = NetworkError::Timeout(Duration::from_secs(5));
         
         b.iter(|| {
-            let serialized = serde_json::to_string(black_box(&error)).unwrap();
+            let serialized = black_box(&error).to_string();
             black_box(serialized)
         })
     });
 
-    group.bench_function("error_deserialize", |b| {
+    group.bench_function("error_debug_format", |b| {
         let error = NetworkError::Timeout(Duration::from_secs(5));
-        let serialized = serde_json::to_string(&error).unwrap();
         
         b.iter(|| {
-            let deserialized: NetworkError = serde_json::from_str(black_box(&serialized)).unwrap();
-            black_box(deserialized)
+            let debug_str = format!("{:?}", black_box(&error));
+            black_box(debug_str)
         })
     });
 
-    group.bench_function("error_roundtrip", |b| {
+    group.bench_function("error_display_format", |b| {
         let error = NetworkError::Timeout(Duration::from_secs(5));
         
         b.iter(|| {
-            let serialized = serde_json::to_string(black_box(&error)).unwrap();
-            let deserialized: NetworkError = serde_json::from_str(&serialized).unwrap();
-            black_box(deserialized)
+            let display_str = format!("{}", black_box(&error));
+            black_box(display_str)
         })
     });
 
@@ -319,16 +318,16 @@ fn bench_error_handling_performance(c: &mut Criterion) {
                 Ok(_) => black_box(0),
                 Err(e) => {
                     let retryable = e.is_retryable();
-                    let delay = e.retry_delay();
-                    let max_retries = e.max_retries();
-                    black_box(retryable as u32 + delay.as_secs() + max_retries)
+                    let delay = e.retry_delay().unwrap_or(Duration::from_millis(100));
+                    let max_retries = e.max_retries().unwrap_or(0);
+                    black_box(retryable as u64 + delay.as_secs() + max_retries as u64)
                 }
             }
         })
     });
 
     group.bench_function("error_handling_with_stats", |b| {
-        let mut stats = ErrorStats::new();
+        let mut stats = ErrorStats::default();
         
         b.iter(|| {
             let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
@@ -338,9 +337,9 @@ fn bench_error_handling_performance(c: &mut Criterion) {
                 Err(e) => {
                     stats.record_error(&e);
                     let retryable = e.is_retryable();
-                    let delay = e.retry_delay();
-                    let max_retries = e.max_retries();
-                    black_box(retryable as u32 + delay.as_secs() + max_retries)
+                    let delay = e.retry_delay().unwrap_or(Duration::from_millis(100));
+                    let max_retries = e.max_retries().unwrap_or(0);
+                    black_box(retryable as u64 + delay.as_secs() + max_retries as u64)
                 }
             }
         })
@@ -354,9 +353,9 @@ fn bench_error_handling_performance(c: &mut Criterion) {
                 Ok(_) => black_box(0),
                 Err(e) => {
                     if e.is_retryable() {
-                        let delay = e.retry_delay();
-                        let max_retries = e.max_retries();
-                        black_box(delay.as_secs() + max_retries)
+                        let delay = e.retry_delay().unwrap_or(Duration::from_millis(100));
+                        let max_retries = e.max_retries().unwrap_or(0);
+                        black_box(delay.as_secs() + max_retries as u64)
                     } else {
                         black_box(0)
                     }
@@ -373,7 +372,7 @@ fn bench_error_handling_concurrency(c: &mut Criterion) {
     let mut group = c.benchmark_group("error_handling_concurrency");
 
     group.bench_function("concurrent_error_stats", |b| {
-        let stats = Arc::new(Mutex::new(ErrorStats::new()));
+        let stats = Arc::new(Mutex::new(ErrorStats::default()));
         
         b.iter(|| {
             let mut handles = Vec::new();
@@ -384,7 +383,7 @@ fn bench_error_handling_concurrency(c: &mut Criterion) {
                     let error = NetworkError::Timeout(Duration::from_secs(5));
                     let mut stats = stats_clone.lock().unwrap();
                     stats.record_error(&error);
-                    stats.get_total_errors()
+                    stats.total_errors
                 });
                 handles.push(handle);
             }
@@ -406,9 +405,9 @@ fn bench_error_handling_concurrency(c: &mut Criterion) {
                 let handle = thread::spawn(move || {
                     let error = NetworkError::Timeout(Duration::from_secs(5));
                     let retryable = error.is_retryable();
-                    let delay = error.retry_delay();
-                    let max_retries = error.max_retries();
-                    retryable as u32 + delay.as_secs() + max_retries
+                    let delay = error.retry_delay().unwrap_or(Duration::from_millis(100));
+                    let max_retries = error.max_retries().unwrap_or(0);
+                    retryable as u64 + delay.as_secs() + max_retries as u64
                 });
                 handles.push(handle);
             }

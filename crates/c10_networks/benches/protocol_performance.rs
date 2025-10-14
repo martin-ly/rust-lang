@@ -2,7 +2,6 @@
 //!
 //! 这个模块包含了 c10_networks 库各种网络协议的性能基准测试
 
-use bytes::Bytes;
 use c10_networks::{
     protocol::{
         http::{HttpMethod, HttpRequest, HttpStatusCode, HttpVersion},
@@ -346,13 +345,13 @@ fn bench_protocol_serialization(c: &mut Criterion) {
         })
     });
 
-    group.bench_function("tcp_connection_serialization", |b| {
+    group.bench_function("tcp_connection_debug", |b| {
         let config = TcpConnectionConfig::default();
         let connection = TcpConnection::new(1, config);
         
         b.iter(|| {
-            let serialized = serde_json::to_string(black_box(&connection)).unwrap();
-            black_box(serialized)
+            let debug_str = format!("{:?}", black_box(&connection));
+            black_box(debug_str)
         })
     });
 

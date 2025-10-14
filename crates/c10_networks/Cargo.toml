@@ -201,9 +201,20 @@ name = "grpc_client"
 path = "examples/grpc_client.rs"
 
 [[bench]]
-name = "network_performance"
+name = "concurrency_performance"
 harness = false
 
+[[bench]]
+name = "error_handling_performance"
+harness = false
+
+[[bench]]
+name = "memory_performance"
+harness = false
+
+[[bench]]
+name = "protocol_performance"
+harness = false
 
 [lib]
 name = "c10_networks"
