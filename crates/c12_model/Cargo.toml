@@ -45,7 +45,7 @@ chrono = { workspace = true }
 # Async trait support
 async-trait = "0.1"
 
-# 随机数生成
+# 随机数生成 - 2025年10月15日最新版本
 fastrand = "2.3.0"
 
 # 图算法

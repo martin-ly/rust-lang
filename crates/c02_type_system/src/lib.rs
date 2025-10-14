@@ -54,3 +54,6 @@ pub mod memory_safety_advanced;
 
 // 导出高级宏系统模块
 pub mod advanced_macros;
+
+// 导出示例模块
+pub mod examples;

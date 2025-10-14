@@ -97,13 +97,13 @@ codegen-units = 1
 opt-level = 2
 
 # 工作区级别的依赖版本统一 - 2025年10月11日最新稳定版本
-# 更新时间: 2025-10-11 (系统时间已同步)
+# 更新时间: 2025-10-15 (系统时间已同步)
 # 系统时间已同步，所有依赖库版本已更新至最新成熟版本
-# cargo update 已更新: generic-array v0.14.7 -> v0.14.8, rust_decimal v1.38.0 -> v1.39.0
+# 全面升级至2025年10月15日最新稳定版本，兼容Rust 1.90
 [workspace.dependencies]
 # 网络和 HTTP 相关 - 2025年9月27日最新稳定版本
-# reqwest: 高级HTTP客户端库，支持异步请求和JSON序列化 - 2025年9月27日最新版本
-reqwest = { version = "0.12.23", features = ["json", "rustls-tls"] }
+# reqwest: 高级HTTP客户端库，支持异步请求和JSON序列化 - 2025年10月15日最新版本
+reqwest = { version = "0.12.24", features = ["json", "rustls-tls"] }
 # hyper: 底层HTTP库，提供高性能的HTTP/1.1和HTTP/2支持 - 2025年9月27日最新版本
 hyper = { version = "1.7.0", features = ["full"] }
 # hyper-util: hyper的实用工具库，提供连接池和服务器功能
@@ -225,8 +225,8 @@ thiserror = "2.0.17"
 # anyhow: 灵活的错误处理库，基于std::error::Error构建
 anyhow = "1.0.100"
 
-# 序列化 - 2025年1月最新稳定版本
-# serde: 通用序列化/反序列化框架，支持多种数据格式 - 2025年1月最新版本
+# 序列化 - 2025年10月15日最新稳定版本
+# serde: 通用序列化/反序列化框架，支持多种数据格式 - 2025年10月15日最新版本
 serde = { version = "1.0.228", features = ["derive"] }
 # serde_json: JSON序列化/反序列化支持
 serde_json = "1.0.145"
@@ -235,9 +235,9 @@ serde_yaml = "0.9.34"
 # bincode: 二进制序列化格式，高效且紧凑
 bincode = "1.3.3"
 
-# 异步运行时 - 2025年1月最新稳定版本
-# tokio: 事件驱动的非阻塞I/O平台，用于编写异步I/O应用程序 - 2025年1月最新版本
-tokio = { version = "1.47.1", features = ["full"] }
+# 异步运行时 - 2025年10月15日最新稳定版本
+# tokio: 事件驱动的非阻塞I/O平台，用于编写异步I/O应用程序 - 2025年10月15日最新版本
+tokio = { version = "1.48.0", features = ["full"] }
 # tokio-util: tokio的实用工具库
 tokio-util = "0.7.16"
 # tokio-stream: tokio的流处理支持

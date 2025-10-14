@@ -6,13 +6,48 @@
 
 ## 🎯 快速导航
 
-### 核心概念
+### 🗂️ 主索引和导航
 
+- [📋 主索引](./00_MASTER_INDEX.md) - 完整的文档导航和索引系统
 - [📖 概述与导航](./OVERVIEW.md) - 文档结构和阅读路径
-- [🛠️ 实践指南](./PRACTICAL_GUIDE.md) - 完整的实践指导
-- [🔍 Rust 1.89 特性分析](../RUST_189_FEATURES_ANALYSIS.md) - 最新语言特性
+- [📊 重组报告](./DOCUMENTATION_REORGANIZATION_REPORT.md) - 文档重组详情
 
-### 主题分类
+### 🧮 理论基础
+
+- [📚 所有权理论](./01_theory/01_ownership_theory.md) - 所有权系统理论基础
+- [🔄 借用理论](./01_theory/02_borrowing_theory.md) - 借用系统理论分析
+- [⏱️ 生命周期理论](./01_theory/03_lifetime_theory.md) - 生命周期理论基础
+- [🛡️ 内存安全理论](./01_theory/04_memory_safety_theory.md) - 内存安全保证理论
+
+### 🔧 核心概念
+
+- [🏠 所有权基础](./02_core/01_ownership_fundamentals.md) - 所有权基础概念 ⭐⭐⭐
+- [🔄 借用系统](./02_core/02_borrowing_system.md) - 借用机制详解 ⭐⭐⭐
+- [⏱️ 生命周期注解](./02_core/03_lifetime_annotations.md) - 生命周期管理 ⭐⭐⭐
+- [🎯 作用域管理](./02_core/04_scope_management.md) - 作用域控制 ⭐⭐
+
+### 🎨 高级特性
+
+- [🚀 高级所有权模式](./03_advanced/01_advanced_ownership.md) - 高级所有权模式 ⭐⭐⭐
+- [🔄 高级借用模式](./03_advanced/02_advanced_borrowing.md) - 复杂借用模式 ⭐⭐⭐
+- [⏱️ 高级生命周期](./03_advanced/03_advanced_lifetimes.md) - 复杂生命周期 ⭐⭐⭐
+- [🧠 智能指针系统](./03_advanced/04_smart_pointers.md) - 智能指针应用 ⭐⭐
+
+### 🛡️ 安全与优化
+
+- [🛡️ 内存安全保证](./04_safety/01_memory_safety.md) - 内存安全保证 ⭐⭐⭐
+- [🔒 并发安全](./04_safety/02_concurrency_safety.md) - 并发安全检查 ⭐⭐
+- [⚡ 性能优化](./04_safety/03_performance_optimization.md) - 所有权级优化 ⭐⭐
+- [🚨 错误处理](./04_safety/04_error_handling.md) - 所有权错误处理
+
+### 🎯 实践应用
+
+- [🏗️ 设计模式](./05_practice/01_design_patterns.md) - 所有权设计模式 ⭐⭐
+- [✅ 最佳实践](./05_practice/02_best_practices.md) - 编程最佳实践 ⭐⭐⭐
+- [⚠️ 常见陷阱](./05_practice/03_common_pitfalls.md) - 常见错误和解决方案 ⭐⭐
+- [🚀 性能调优](./05_practice/04_performance_tuning.md) - 性能优化技巧 ⭐⭐⭐
+
+### 📚 历史文档
 
 #### 🏠 所有权系统
 
@@ -57,29 +92,37 @@
 
 ## 📋 学习路径
 
-### 🚀 初学者路径
+### 🚀 初学者路径 (0-3个月)
 
-1. **基础概念** → [OVERVIEW.md](./OVERVIEW.md)
-2. **所有权入门** → [ownership/view01.md](./ownership/view01.md)
-3. **借用机制** → [mutable/view01.md](./mutable/view01.md)
-4. **作用域基础** → [scope/view01.md](./scope/view01.md)
-5. **实践应用** → [PRACTICAL_GUIDE.md](./PRACTICAL_GUIDE.md)
+1. **所有权基础** → [所有权基础](./02_core/01_ownership_fundamentals.md)
+2. **借用系统** → [借用系统](./02_core/02_borrowing_system.md)
+3. **生命周期注解** → [生命周期注解](./02_core/03_lifetime_annotations.md)
+4. **作用域管理** → [作用域管理](./02_core/04_scope_management.md)
+5. **最佳实践** → [最佳实践](./05_practice/02_best_practices.md)
 
-### 🎓 进阶路径
+### 🎓 进阶路径 (3-12个月)
+
+1. **高级所有权** → [高级所有权模式](./03_advanced/01_advanced_ownership.md)
+2. **高级借用** → [高级借用模式](./03_advanced/02_advanced_borrowing.md)
+3. **智能指针** → [智能指针系统](./03_advanced/04_smart_pointers.md)
+4. **设计模式** → [设计模式](./05_practice/01_design_patterns.md)
+5. **性能优化** → [性能调优](./05_practice/04_performance_tuning.md)
+
+### 🔬 专家路径 (1年+)
+
+1. **所有权理论** → [所有权理论](./01_theory/01_ownership_theory.md)
+2. **借用理论** → [借用理论](./01_theory/02_borrowing_theory.md)
+3. **内存安全理论** → [内存安全理论](./01_theory/04_memory_safety_theory.md)
+4. **形式化验证** → [内存安全保证](./04_safety/01_memory_safety.md)
+5. **编译器实现** → [所有权理论](./01_theory/01_ownership_theory.md#51-编译器实现)
+
+### 📚 历史文档路径
 
 1. **深度分析** → [obs_rust_analysis.md](./obs_rust_analysis.md)
 2. **移动语义** → [move/move_ref_refmut_analysis.md](./move/move_ref_refmut_analysis.md)
 3. **内部可变性** → [mutable/internal_mut.md](./mutable/internal_mut.md)
 4. **作用域管理** → [scope/scope_management_guide.md](./scope/scope_management_guide.md)
-5. **性能优化** → [variable/view04.md](./variable/view04.md)
-
-### 🔬 专家路径
-
-1. **理论分析** → [rust_symmetry.md](./rust_symmetry.md)
-2. **设计对比** → [obs_vs_design.md](./obs_vs_design.md)
-3. **函数分析** → [obs_vs_function.md](./obs_vs_function.md)
-4. **变量分析** → [variable_analysis.md](./variable_analysis.md)
-5. **最新特性** → [../RUST_189_FEATURES_ANALYSIS.md](../RUST_189_FEATURES_ANALYSIS.md)
+5. **理论分析** → [rust_symmetry.md](./rust_symmetry.md)
 
 ## 🛠️ 实用工具
 

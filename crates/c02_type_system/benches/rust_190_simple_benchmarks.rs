@@ -2,7 +2,8 @@
 //!
 //! 本文件提供了 Rust 1.90 新特性的简化性能基准测试
 
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{criterion_group, criterion_main, Criterion};
+use std::hint::black_box;
 
 // 导入我们定义的类型
 use c02_type_system::rust_189_simple_demo::simple_demo::*;
