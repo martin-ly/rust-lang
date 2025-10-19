@@ -29,6 +29,15 @@
 | **FAQ** | [FAQ.md](./FAQ.md) | 常见问题解答 |
 | **术语表** | [Glossary.md](./Glossary.md) | 核心概念速查 |
 
+### 🎨 可视化学习
+
+| 类型 | 文档入口 | 说明 |
+|------|---------|------|
+| **知识图谱** | [KNOWLEDGE_GRAPH.md](./KNOWLEDGE_GRAPH.md) | 概念关系可视化 |
+| **多维矩阵** | [MULTIDIMENSIONAL_MATRIX.md](./MULTIDIMENSIONAL_MATRIX.md) | 多维度对比分析 |
+| **思维导图** | [MIND_MAP.md](./MIND_MAP.md) | 学习路径导航 |
+| **概念关系网络** | [CONCEPT_RELATIONSHIP_NETWORK.md](./CONCEPT_RELATIONSHIP_NETWORK.md) | 深度关系分析 |
+
 ---
 
 ## 🏗️ 核心内容结构

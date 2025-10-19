@@ -4,7 +4,7 @@
 
 ## 📂 目录结构
 
-```
+```text
 views/
 ├── README.md (本文档)
 ├── basic/          # 基础视角分析（view01-14）
@@ -26,11 +26,13 @@ views/
 - **view13-14**: 高级特性和未来展望
 
 **特点**:
+
 - 每个view聚焦一个特定主题
 - 提供独特的分析视角
 - 相互补充，形成完整知识网络
 
 **查看方式**:
+
 ```bash
 ls -la basic/
 ```
@@ -41,11 +43,13 @@ ls -la basic/
 
 ### 异步同步对比视角
 
-**文件**: 
+**文件**:
+
 - `rust_async_sync_view01.md` - 异步vs同步：基础对比
 - `rust_async_sync_view02.md` - 异步vs同步：深度分析
 
 **内容**:
+
 - 同步和异步的本质区别
 - 性能特征对比
 - 适用场景分析
@@ -57,9 +61,11 @@ ls -la basic/
 ### CPU异步协作视角
 
 **文件**:
+
 - `rust_cpu_async_sync_view01.md` - CPU与异步的协作模式
 
 **内容**:
+
 - CPU密集型与IO密集型
 - 异步任务的CPU利用率
 - work-stealing调度
@@ -71,11 +77,13 @@ ls -la basic/
 ### CPU/GPU异步视角
 
 **文件**:
+
 - `rust_cpu_gpu_view01.md` - CPU/GPU异步基础
 - `rust_cpu_gpu_view02.md` - 异构计算与异步
 - `rust_cpu_gpu_view03.md` - GPU加速异步应用
 
 **内容**:
+
 - 异步编程在GPU计算中的应用
 - CPU-GPU数据传输优化
 - 异步GPU kernel调度
@@ -83,6 +91,7 @@ ls -la basic/
 - WebGPU异步API
 
 **适用场景**:
+
 - 深度学习推理
 - 图形渲染
 - 科学计算
@@ -102,11 +111,13 @@ ls -la basic/
 ### 推荐阅读顺序
 
 **新手**:
+
 1. 先完成 [../guides/](../guides/) 的学习
 2. 再阅读 [../core/](../core/) 核心系列
 3. 最后查看感兴趣的view文档
 
 **有经验者**:
+
 1. 直接查找感兴趣的主题
 2. 对比不同view的分析
 3. 结合实际项目验证
@@ -114,12 +125,14 @@ ls -la basic/
 ### 查找技巧
 
 **按主题查找**:
+
 - 基础概念 → basic/view01-03
 - 运行时 → basic/view04-06
 - 性能 → basic/view07-09
 - 生态系统 → basic/view10-12
 
 **按应用场景**:
+
 - Web开发 → basic/view08, view11
 - 系统编程 → specialized/rust_cpu_async_sync_view01
 - GPU计算 → specialized/rust_cpu_gpu_view*
@@ -151,6 +164,7 @@ ls -la basic/
 ### 不要一次性读完
 
 View系列内容丰富，建议：
+
 1. 根据需求按需阅读
 2. 遇到问题时查阅相关view
 3. 定期回顾巩固理解
@@ -158,6 +172,7 @@ View系列内容丰富，建议：
 ### 结合实践
 
 每个view都可以：
+
 1. 运行相关示例代码
 2. 尝试文档中的方案
 3. 对比不同方法的效果
@@ -165,6 +180,7 @@ View系列内容丰富，建议：
 ### 做笔记
 
 View系列适合：
+
 1. 摘录关键观点
 2. 记录自己的思考
 3. 标注适用场景
@@ -174,12 +190,14 @@ View系列适合：
 ## 🔗 相关资源
 
 ### 本模块其他文档
+
 - [../guides/](../guides/) - 学习指南
 - [../core/](../core/) - 核心概念
 - [../comprehensive/](../comprehensive/) - 综合指南
 - [../runtimes/](../runtimes/) - 运行时文档
 
 ### 示例代码
+
 ```bash
 cd ../../examples/
 cargo run --example <example_name>
@@ -202,11 +220,13 @@ cargo run --example <example_name>
 ## ⚠️ 注意事项
 
 **View不是教程**: 这些文档假设读者已经：
+
 - 完成了基础学习
 - 理解了核心概念
 - 有一定实践经验
 
 **View是补充**: 用于：
+
 - 加深理解
 - 拓展视野
 - 解决特定问题
@@ -216,4 +236,3 @@ cargo run --example <example_name>
 **目录状态**: ✅ 完整  
 **文档数量**: 20个（14个基础 + 6个专题）  
 **最后更新**: 2025-10-19
-

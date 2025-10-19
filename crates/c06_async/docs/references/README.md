@@ -16,16 +16,19 @@
 ## 📖 快速查找
 
 ### 核心Trait
+
 - `Future` - 异步计算抽象
 - `Stream` - 异步迭代器
 - `Sink` - 异步接收器
 
 ### 运行时API
+
 - Tokio API参考
 - async-std API参考
 - Smol API参考
 
 ### 工具函数
+
 - 超时控制
 - 错误处理
 - 测试辅助
@@ -37,4 +40,3 @@
 - [tokio docs](https://docs.rs/tokio/)
 
 **最后更新**: 2025-10-19
-

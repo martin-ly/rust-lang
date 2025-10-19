@@ -108,6 +108,52 @@ docs/
 
 ---
 
+## 🧠 知识体系 (Knowledge System) - 新增
+
+**特点**: 知识工程方法，系统化、理论化、可视化
+
+```text
+knowledge_system/
+├── 00_KNOWLEDGE_SYSTEM_INDEX.md     # 知识体系索引
+├── README.md                         # 知识体系概览
+│
+├── 📘 概念体系 (4个文档)
+│   ├── 01_concept_ontology.md       # 概念本体 - 形式化定义
+│   ├── 02_relationship_network.md    # 关系网络 - 概念间关系
+│   ├── 03_property_space.md         # 属性空间 - 多维属性分析
+│   └── 04_reasoning_rules.md        # 推理规则 (计划中)
+│
+├── 📊 矩阵体系 (5个文档)
+│   └── 10_runtime_comparison_matrix.md  # 运行时多维对比矩阵 ⭐⭐⭐⭐⭐
+│       (11-14计划中)
+│
+├── 🧠 思维导图 (4个文档)
+│   └── 20_core_concepts_mindmap.md  # 核心概念思维导图 ⭐⭐⭐⭐⭐
+│       (21-23计划中)
+│
+└── 🔬 理论基础 (5个文档)
+    └── 30_formal_semantics.md       # 形式语义 - 数学模型 ⭐⭐⭐⭐⭐
+        (31-34计划中)
+```
+
+**核心价值**:
+
+- 🔬 **形式化**: 精确的数学定义和类型理论
+- 📊 **量化**: 多维矩阵对比和决策模型
+- 🧠 **可视化**: 思维导图和关系网络
+- 🎯 **系统化**: 从概念本体到推理规则的完整体系
+
+**快速导航**:
+
+- [知识体系概览](./knowledge_system/README.md) ⭐ 必读
+- [概念本体](./knowledge_system/01_concept_ontology.md) - 理解概念本质
+- [关系网络](./knowledge_system/02_relationship_network.md) - 理解概念联系
+- [运行时对比矩阵](./knowledge_system/10_runtime_comparison_matrix.md) - 量化对比
+- [核心概念思维导图](./knowledge_system/20_core_concepts_mindmap.md) - 整体框架
+- [形式语义](./knowledge_system/30_formal_semantics.md) - 理论基础
+
+---
+
 ## 📂 目录详解
 
 ### 📚 guides/ - 学习指南
