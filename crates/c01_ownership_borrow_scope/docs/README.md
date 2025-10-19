@@ -47,6 +47,30 @@
 - [⚠️ 常见陷阱](./05_practice/03_common_pitfalls.md) - 常见错误和解决方案 ⭐⭐
 - [🚀 性能调优](./05_practice/04_performance_tuning.md) - 性能优化技巧 ⭐⭐⭐
 
+### 📊 可视化学习资源 🌟
+
+#### 核心可视化文档
+
+- [🎨 可视化文档导航](./VISUALIZATION_INDEX.md) - 可视化学习资源统一入口 ⭐⭐⭐⭐⭐
+  - 整合知识图谱、多维矩阵、思维导图、概念关系网络
+  - 提供学习路径、使用指南、快速查找
+
+- [🗺️ 知识图谱](./KNOWLEDGE_GRAPH.md) - 完整概念关系可视化 ⭐⭐⭐⭐⭐
+  - 难度: 初级到高级 | 阅读时长: 60 分钟
+  - 5层架构、完整概念网络、学习路径图谱
+
+- [📊 多维矩阵对比](./MULTIDIMENSIONAL_MATRIX.md) - 系统性多维度对比分析 ⭐⭐⭐⭐⭐
+  - 难度: 中级到高级 | 阅读时长: 70 分钟
+  - 一维到五维矩阵、决策支持、跨语言对比
+
+- [🧠 思维导图](./MIND_MAP.md) - 学习路径与概念层次可视化 ⭐⭐⭐⭐⭐
+  - 难度: 初级到高级 | 阅读时长: 50 分钟
+  - 学习路径、概念树、问题诊断、应用场景
+
+- [🔗 概念关系网络](./CONCEPT_RELATIONSHIP_NETWORK.md) - 深度概念依赖与交互分析 ⭐⭐⭐⭐⭐
+  - 难度: 高级 | 阅读时长: 80 分钟
+  - 4层关系网络、依赖分析、影响链追踪
+
 ### 🆕 Rust 版本特性
 
 #### Rust 1.90 特性文档 🌟
@@ -125,27 +149,41 @@
 
 ### 🚀 初学者路径 (0-3个月)
 
-1. **所有权基础** → [所有权基础](./02_core/01_ownership_fundamentals.md)
-2. **借用系统** → [借用系统](./02_core/02_borrowing_system.md)
-3. **生命周期注解** → [生命周期注解](./02_core/03_lifetime_annotations.md)
-4. **作用域管理** → [作用域管理](./02_core/04_scope_management.md)
-5. **最佳实践** → [最佳实践](./05_practice/02_best_practices.md)
+**推荐起点**: [思维导图 - 初学者路径](./MIND_MAP.md#初学者学习路径0-3个月) 📊
+
+1. **可视化学习** → [知识图谱 - 核心层](./KNOWLEDGE_GRAPH.md#核心层知识图谱)
+2. **所有权基础** → [所有权基础](./02_core/01_ownership_fundamentals.md)
+3. **借用系统** → [借用系统](./02_core/02_borrowing_system.md)
+4. **生命周期注解** → [生命周期注解](./02_core/03_lifetime_annotations.md)
+5. **作用域管理** → [作用域管理](./02_core/04_scope_management.md)
+6. **最佳实践** → [最佳实践](./05_practice/02_best_practices.md)
+7. **概念对比** → [多维矩阵 - 基础对比](./MULTIDIMENSIONAL_MATRIX.md#一维矩阵核心概念对比)
 
 ### 🎓 进阶路径 (3-12个月)
 
-1. **高级所有权** → [高级所有权模式](./03_advanced/01_advanced_ownership.md)
-2. **高级借用** → [高级借用模式](./03_advanced/02_advanced_borrowing.md)
-3. **智能指针** → [智能指针系统](./03_advanced/04_smart_pointers.md)
-4. **设计模式** → [设计模式](./05_practice/01_design_patterns.md)
-5. **性能优化** → [性能调优](./05_practice/04_performance_tuning.md)
+**推荐起点**: [思维导图 - 进阶路径](./MIND_MAP.md#进阶学习路径3-12个月) 📊
+
+1. **智能指针选择** → [多维矩阵 - 智能指针矩阵](./MULTIDIMENSIONAL_MATRIX.md#智能指针选择决策矩阵)
+2. **高级所有权** → [高级所有权模式](./03_advanced/01_advanced_ownership.md)
+3. **高级借用** → [高级借用模式](./03_advanced/02_advanced_borrowing.md)
+4. **智能指针** → [智能指针系统](./03_advanced/04_smart_pointers.md)
+5. **并发模式** → [思维导图 - 并发选择](./MIND_MAP.md#并发模式选择决策树)
+6. **设计模式** → [设计模式](./05_practice/01_design_patterns.md)
+7. **性能优化** → [性能调优](./05_practice/04_performance_tuning.md)
+8. **关系理解** → [概念关系网络](./CONCEPT_RELATIONSHIP_NETWORK.md)
 
 ### 🔬 专家路径 (1年+)
 
-1. **所有权理论** → [所有权理论](./01_theory/01_ownership_theory.md)
-2. **借用理论** → [借用理论](./01_theory/02_borrowing_theory.md)
-3. **内存安全理论** → [内存安全理论](./01_theory/04_memory_safety_theory.md)
-4. **形式化验证** → [内存安全保证](./04_safety/01_memory_safety.md)
-5. **编译器实现** → [所有权理论](./01_theory/01_ownership_theory.md#51-编译器实现)
+**推荐起点**: [思维导图 - 专家路径](./MIND_MAP.md#专家学习路径1年) 📊
+
+1. **完整关系网** → [概念关系网络 - 完整网络](./CONCEPT_RELATIONSHIP_NETWORK.md)
+2. **所有权理论** → [所有权理论](./01_theory/01_ownership_theory.md)
+3. **借用理论** → [借用理论](./01_theory/02_borrowing_theory.md)
+4. **内存安全理论** → [内存安全理论](./01_theory/04_memory_safety_theory.md)
+5. **跨语言对比** → [多维矩阵 - 跨语言对比](./MULTIDIMENSIONAL_MATRIX.md#跨语言对比)
+6. **形式化验证** → [内存安全保证](./04_safety/01_memory_safety.md)
+7. **编译器实现** → [所有权理论](./01_theory/01_ownership_theory.md#51-编译器实现)
+8. **Rust 1.90 特性** → [Rust 1.90 全面指南](./06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md)
 
 ### 📚 历史文档路径
 
@@ -225,7 +263,7 @@ cargo audit
 
 ### 🚧 进行中
 
-- [ ] 可视化工具
+- [x] 可视化工具 ✅ (已完成: 知识图谱、多维矩阵、思维导图、概念关系网络)
 - [ ] 性能分析
 - [ ] 更多示例
 

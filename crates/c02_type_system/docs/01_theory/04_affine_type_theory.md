@@ -9,8 +9,19 @@
 
 - [从仿射类型论视角看待 Rust 1.90 的类型系统设计与型变](#从仿射类型论视角看待-rust-190-的类型系统设计与型变)
   - [目录](#目录)
+  - [0. 知识图谱与概念关系网络](#0-知识图谱与概念关系网络)
+    - [0.1 仿射类型论-Rust 类型系统知识图谱](#01-仿射类型论-rust-类型系统知识图谱)
+    - [0.2 概念关系多维矩阵](#02-概念关系多维矩阵)
+      - [表1: 仿射类型论概念 ↔ Rust 实现对照矩阵](#表1-仿射类型论概念--rust-实现对照矩阵)
+      - [表2: 所有权规则矩阵](#表2-所有权规则矩阵)
+      - [表3: 借用系统规则矩阵](#表3-借用系统规则矩阵)
+      - [表4: 内存安全保证矩阵](#表4-内存安全保证矩阵)
+      - [表5: 子结构规则对照表](#表5-子结构规则对照表)
+    - [0.3 仿射类型论思维导图](#03-仿射类型论思维导图)
+    - [0.4 核心概念关系网络](#04-核心概念关系网络)
   - [1. 仿射类型论与 Rust 的关系](#1-仿射类型论与-rust-的关系)
     - [1.1 核心对应关系](#11-核心对应关系)
+    - [1.2 Rust 1.90 仿射类型示例集](#12-rust-190-仿射类型示例集)
   - [2. Rust 所有权系统作为仿射类型实现](#2-rust-所有权系统作为仿射类型实现)
     - [2.1 值的移动（使用一次）](#21-值的移动使用一次)
     - [2.2 值的丢弃（使用零次）](#22-值的丢弃使用零次)
@@ -42,6 +53,309 @@
     - [12.3 未来发展方向](#123-未来发展方向)
     - [12.4 最终总结](#124-最终总结)
 
+## 0. 知识图谱与概念关系网络
+
+### 0.1 仿射类型论-Rust 类型系统知识图谱
+
+```mermaid
+graph TB
+    Affine[仿射类型论 Affine Type Theory]
+    
+    %% 理论基础
+    Affine --> LinearLogic[线性逻辑]
+    Affine --> Substructural[子结构逻辑]
+    Affine --> ResourceSemantics[资源语义]
+    
+    %% 子结构规则
+    Substructural --> Exchange[交换律 ✓]
+    Substructural --> Weakening[弱化律 ✓]
+    Substructural --> Contraction[收缩律 ✗]
+    
+    %% Rust 所有权系统
+    Affine --> Ownership[Rust 所有权]
+    Ownership --> Move[移动语义]
+    Ownership --> Borrow[借用系统]
+    Ownership --> Drop[自动释放]
+    
+    %% 移动语义
+    Move --> UseOnce[使用一次]
+    Move --> UseZero[使用零次]
+    Move --> NoUseAfterMove[移动后不可用]
+    
+    %% 借用系统
+    Borrow --> ImmBorrow[&T - 共享]
+    Borrow --> MutBorrow[&mut T - 独占]
+    
+    ImmBorrow --> MultipleReaders[多读取者]
+    MutBorrow --> SingleWriter[单写入者]
+    MutBorrow --> Exclusivity[互斥性]
+    
+    %% Copy trait 作为例外
+    Affine --> CopyException[Copy Trait]
+    CopyException --> Primitives[原始类型]
+    CopyException --> SimpleTypes[简单类型]
+    
+    %% Clone trait
+    Affine --> CloneExplicit[Clone Trait]
+    CloneExplicit --> ExplicitCopy[显式复制]
+    
+    %% 内存安全保证
+    Ownership --> MemorySafety[内存安全]
+    MemorySafety --> NoUseAfterFree[无use-after-free]
+    MemorySafety --> NoDoubleFree[无double-free]
+    MemorySafety --> NoDataRace[无数据竞争]
+    
+    %% Rust 1.90 特性
+    Ownership --> Rust190[Rust 1.90]
+    Rust190 --> NLL[非词法生命周期]
+    Rust190 --> AsyncAffine[异步仿射语义]
+    Rust190 --> PreciseBorrow[精确借用检查]
+    
+    style Affine fill:#f9f,stroke:#333,stroke-width:4px
+    style Ownership fill:#bbf,stroke:#333,stroke-width:2px
+    style MemorySafety fill:#bfb,stroke:#333,stroke-width:2px
+    style Rust190 fill:#f99,stroke:#333,stroke-width:2px
+```
+
+### 0.2 概念关系多维矩阵
+
+#### 表1: 仿射类型论概念 ↔ Rust 实现对照矩阵
+
+| 仿射类型概念 | Rust 实现 | 形式化表示 | 内存安全 | Rust 1.90 示例 |
+|-------------|----------|-----------|---------|---------------|
+| **仿射性质** | 所有权系统 | `use(x) ≤ 1` | 防止double-free | 移动语义 |
+| **使用一次** | Move语义 | `own(x) → own(y)` | 唯一所有者 | `let y = x;` |
+| **使用零次** | Drop | `drop(x)` | 自动清理 | 作用域结束 |
+| **不可重用** | 移动后失效 | `moved(x) ⇒ ¬use(x)` | 无use-after-move | 编译错误 |
+| **借用扩展** | &T, &mut T | `borrow(x)` | 临时访问 | 引用 |
+| **Copy例外** | Copy trait | `copy(x) → x` | 简单类型 | `i32`, `bool` |
+| **显式复制** | Clone trait | `x.clone()` | 程序员控制 | `.clone()` |
+| **线性蕴含** | 函数调用 | `A ⊸ B` | 资源传递 | `fn(T) -> U` |
+
+#### 表2: 所有权规则矩阵
+
+| 操作 | 所有权转移 | 原值可用 | 适用类型 | 内存开销 | 线程安全 |
+|------|----------|---------|---------|---------|---------|
+| **Move** | ✓ 转移 | ✗ 不可用 | 所有类型 | O(1) | ✓ |
+| **Copy** | ✗ 不转移 | ✓ 可用 | Copy类型 | O(sizeof) | ✓ |
+| **Clone** | ✗ 不转移 | ✓ 可用 | Clone类型 | O(n) | ✓ |
+| **&T** | ✗ 不转移 | ✓ 可用 | 所有类型 | O(1) | ✓ 多读 |
+| **&mut T** | ✗ 不转移 | ✗ 暂时不可用 | 所有类型 | O(1) | ✓ 独写 |
+
+#### 表3: 借用系统规则矩阵
+
+| 借用类型 | 数量限制 | 可读 | 可写 | 所有权冲突 | 借用冲突 | 生命周期 |
+|---------|---------|------|------|-----------|---------|---------|
+| **&T** | 无限制 | ✓ | ✗ | 与&mut冲突 | 不冲突 | 'a |
+| **&mut T** | 唯一 | ✓ | ✓ | 与所有冲突 | 与所有冲突 | 'a |
+| **无借用** | - | ✓ | ✓ | 不冲突 | 不冲突 | - |
+
+#### 表4: 内存安全保证矩阵
+
+| 安全问题 | 仿射类型防护 | Rust 实现 | 检测时机 | 运行时开销 |
+|---------|-------------|----------|---------|-----------|
+| **Use-after-free** | ✓ 移动后失效 | 所有权转移 | 编译时 | 0 |
+| **Double-free** | ✓ 至多释放一次 | Drop一次 | 编译时 | 0 |
+| **数据竞争** | ✓ 独占可变 | &mut独占 | 编译时 | 0 |
+| **悬垂指针** | ✓ 生命周期 | 借用检查 | 编译时 | 0 |
+| **内存泄漏** | ⚠️ 允许 | 循环引用 | - | - |
+
+#### 表5: 子结构规则对照表
+
+| 规则 | 经典逻辑 | 线性逻辑 | 仿射逻辑 | Rust实现 | 说明 |
+|------|---------|---------|---------|---------|------|
+| **Exchange (交换)** | ✓ | ✓ | ✓ | ✓ | 变量顺序可变 |
+| **Weakening (弱化)** | ✓ | ✗ | ✓ | ✓ Drop | 可不使用 |
+| **Contraction (收缩)** | ✓ | ✗ | ✗ | Copy限定 | 不可重用 |
+
+### 0.3 仿射类型论思维导图
+
+```text
+仿射类型论视角下的 Rust 所有权系统
+│
+├─── 1. 理论基础
+│    ├─ 1.1 线性逻辑
+│    │   ├─ 线性蕴含: A ⊸ B
+│    │   ├─ 乘法合取: A ⊗ B
+│    │   ├─ 加法析取: A ⊕ B
+│    │   └─ 指数: !A (可重用)
+│    ├─ 1.2 仿射逻辑
+│    │   ├─ 线性 + 弱化律
+│    │   ├─ 资源使用 ≤ 1 次
+│    │   └─ 允许丢弃
+│    └─ 1.3 子结构规则
+│        ├─ Exchange: ✓ 允许
+│        ├─ Weakening: ✓ 允许（Drop）
+│        └─ Contraction: ✗ 禁止（仿射性）
+│
+├─── 2. Rust 所有权系统
+│    ├─ 2.1 所有权规则
+│    │   ├─ 规则1: 每个值有唯一所有者
+│    │   ├─ 规则2: 所有者离开作用域，值被释放
+│    │   └─ 规则3: 值可以移动到新所有者
+│    ├─ 2.2 移动语义
+│    │   ├─ let y = x: 所有权转移
+│    │   ├─ x 不再可用
+│    │   └─ y 成为新所有者
+│    └─ 2.3 自动释放
+│        ├─ Drop trait
+│        ├─ RAII 模式
+│        └─ 确定性清理
+│
+├─── 3. 借用系统（仿射扩展）
+│    ├─ 3.1 不可变借用 (&T)
+│    │   ├─ 可以有多个
+│    │   ├─ 只能读取
+│    │   ├─ 不转移所有权
+│    │   └─ 借用期间原值不可变
+│    ├─ 3.2 可变借用 (&mut T)
+│    │   ├─ 只能有一个
+│    │   ├─ 可以读写
+│    │   ├─ 不转移所有权
+│    │   └─ 借用期间原值不可用
+│    └─ 3.3 借用规则
+│        ├─ 不能同时存在 &T 和 &mut T
+│        ├─ 借用生命周期不超过所有者
+│        └─ 编译时检查
+│
+├─── 4. Copy 和 Clone
+│    ├─ 4.1 Copy trait
+│    │   ├─ 隐式复制
+│    │   ├─ 位拷贝 (memcpy)
+│    │   ├─ 仅限简单类型
+│    │   └─ 违背仿射性（受控）
+│    ├─ 4.2 Clone trait
+│    │   ├─ 显式复制
+│    │   ├─ 深拷贝
+│    │   ├─ 程序员控制
+│    │   └─ .clone() 方法
+│    └─ 4.3 设计权衡
+│        ├─ Copy: 性能优化
+│        ├─ Clone: 灵活性
+│        └─ Default: 仿射性
+│
+├─── 5. 内存安全保证
+│    ├─ 5.1 编译时保证
+│    │   ├─ 无 use-after-free
+│    │   ├─ 无 double-free
+│    │   ├─ 无数据竞争
+│    │   └─ 无悬垂指针
+│    ├─ 5.2 零运行时开销
+│    │   ├─ 静态检查
+│    │   ├─ 无垃圾回收
+│    │   └─ 无引用计数（通常）
+│    └─ 5.3 类型系统强制
+│        ├─ 编译器检查
+│        ├─ 不可绕过（无unsafe）
+│        └─ 形式化保证
+│
+├─── 6. Rust 1.90 增强
+│    ├─ 6.1 非词法生命周期 (NLL)
+│    │   ├─ 更精确的作用域
+│    │   ├─ 借用提前结束
+│    │   └─ 减少误报
+│    ├─ 6.2 异步的仿射语义
+│    │   ├─ Future 捕获仿射资源
+│    │   ├─ await 消费 Future
+│    │   └─ 异步边界的所有权
+│    ├─ 6.3 精确借用检查
+│    │   ├─ Polonius算法
+│    │   ├─ 更强的推断
+│    │   └─ 更好的错误消息
+│    └─ 6.4 const fn 扩展
+│        ├─ 编译时所有权
+│        ├─ 常量求值安全
+│        └─ 零运行时开销
+│
+└─── 7. 实际应用
+     ├─ 7.1 资源管理
+     │   ├─ 文件句柄
+     │   ├─ 网络连接
+     │   └─ 锁和互斥
+     ├─ 7.2 并发安全
+     │   ├─ 线程间通信
+     │   ├─ 共享状态
+     │   └─ 消息传递
+     ├─ 7.3 API 设计
+     │   ├─ 类型安全封装
+     │   ├─ 状态机模式
+     │   └─ Builder 模式
+     └─ 7.4 性能优化
+         ├─ 零拷贝
+         ├─ 移动优化
+         └─ 编译时优化
+```
+
+### 0.4 核心概念关系网络
+
+```text
+             仿射类型论核心概念关系图
+                           
+              ┌──────────────────────┐
+              │  Affine Type Theory  │
+              │  仿射类型论           │
+              └──────────┬───────────┘
+                         │
+         ┌───────────────┼───────────────┐
+         │               │               │
+         ▼               ▼               ▼
+    ┌────────┐     ┌─────────┐     ┌─────────┐
+    │ Use ≤ 1│     │Resource │     │ Memory  │
+    │ 使用≤1 │────▶│ 资源    │────▶│ Safety  │
+    └────┬───┘     │ Semantic│     │ 安全    │
+         │         └─────────┘     └─────────┘
+         │
+         ├─ Use Once: 移动
+         └─ Use Zero: 丢弃
+
+
+         Rust 所有权系统的仿射类型实现
+                           
+              ┌──────────────────────┐
+              │  Ownership System    │
+              │  所有权系统           │
+              └──────────┬───────────┘
+                         │
+         ┌───────────────┼───────────────┐
+         │               │               │
+         ▼               ▼               ▼
+    ┌────────┐     ┌─────────┐     ┌─────────┐
+    │  Move  │     │ Borrow  │     │  Drop   │
+    │  移动  │     │ 借用    │     │  释放   │
+    └────────┘     └────┬────┘     └─────────┘
+                        │
+                ┌───────┴───────┐
+                │               │
+                ▼               ▼
+           ┌────────┐      ┌────────┐
+           │  &T    │      │ &mut T │
+           │ 共享   │      │ 独占   │
+           └────────┘      └────────┘
+           多读取者        单写入者
+
+
+         仿射性质的违背与例外
+                           
+    仿射规则: use(x) ≤ 1
+         │
+         ├─── Copy Trait (受控违背)
+         │    ├─ 原始类型: i32, bool, ...
+         │    ├─ 简单复合: (i32, i32)
+         │    └─ 无需资源管理
+         │
+         ├─── Clone Trait (显式复制)
+         │    ├─ 程序员明确
+         │    ├─ .clone() 调用
+         │    └─ 可见的开销
+         │
+         └─── 借用 (临时访问)
+              ├─ 不消费资源
+              ├─ 有限生命周期
+              └─ 返回后仍可用
+```
+
+---
+
 ## 1. 仿射类型论与 Rust 的关系
 
 仿射类型论（Affine Type Theory）是线性逻辑的一种变体，
@@ -57,6 +371,472 @@ Rust 的所有权模型与仿射类型论密切相关，
 资源使用零次或一次          值可以被丢弃或移动，但不能被使用两次
 线性类型                   所有权转移
 仿射类型                   可丢弃的资源
+```
+
+### 1.2 Rust 1.90 仿射类型示例集
+
+```rust
+// 示例集 1: 基本所有权与仿射性
+pub mod basic_ownership {
+    // 演示仿射性质：使用至多一次
+    
+    #[derive(Debug)]
+    pub struct Resource {
+        name: String,
+        data: Vec<u8>,
+    }
+    
+    impl Resource {
+        pub fn new(name: &str) -> Self {
+            println!("Creating resource: {}", name);
+            Self {
+                name: name.to_string(),
+                data: vec![1, 2, 3, 4, 5],
+            }
+        }
+    }
+    
+    impl Drop for Resource {
+        fn drop(&mut self) {
+            println!("Dropping resource: {}", self.name);
+        }
+    }
+    
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        
+        #[test]
+        fn test_use_once() {
+            // 仿射性质：使用一次
+            let resource = Resource::new("test1");
+            let _moved = resource;  // 所有权转移
+            
+            // 编译错误：resource 已被移动
+            // println!("{:?}", resource);
+        }
+        
+        #[test]
+        fn test_use_zero() {
+            // 仿射性质：使用零次（允许）
+            let _resource = Resource::new("test2");
+            // 作用域结束时自动 Drop
+        }
+        
+        #[test]
+        fn test_cannot_use_twice() {
+            let resource = Resource::new("test3");
+            let first_use = resource;
+            
+            // 编译错误：不能使用两次
+            // let second_use = resource;
+            
+            drop(first_use);
+        }
+    }
+}
+
+// 示例集 2: 借用作为仿射类型的扩展
+pub mod borrowing_extension {
+    use std::fmt::Display;
+    
+    // 借用允许临时访问而不消费资源
+    
+    pub struct Data {
+        value: i32,
+    }
+    
+    impl Data {
+        pub fn new(value: i32) -> Self {
+            Self { value }
+        }
+        
+        // 不可变借用：多个读者
+        pub fn read(&self) -> i32 {
+            self.value
+        }
+        
+        // 可变借用：独占写者
+        pub fn write(&mut self, new_value: i32) {
+            self.value = new_value;
+        }
+    }
+    
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        
+        #[test]
+        fn test_multiple_immutable_borrows() {
+            let data = Data::new(42);
+            
+            // 多个不可变借用可以共存
+            let r1 = &data;
+            let r2 = &data;
+            let r3 = &data;
+            
+            assert_eq!(r1.read(), 42);
+            assert_eq!(r2.read(), 42);
+            assert_eq!(r3.read(), 42);
+            
+            // 原值仍然可用
+            assert_eq!(data.read(), 42);
+        }
+        
+        #[test]
+        fn test_exclusive_mutable_borrow() {
+            let mut data = Data::new(42);
+            
+            // 可变借用是独占的
+            {
+                let r = &mut data;
+                r.write(100);
+                
+                // 编译错误：不能有其他借用
+                // let r2 = &data;
+                // let r3 = &mut data;
+            }
+            
+            // 可变借用结束后，原值可用
+            assert_eq!(data.read(), 100);
+        }
+        
+        #[test]
+        fn test_borrow_lifetime() {
+            let mut data = Data::new(42);
+            
+            // 借用的生命周期
+            let r1 = &data;
+            println!("Borrowed: {}", r1.read());
+            // r1 在这里结束
+            
+            // 现在可以可变借用
+            let r2 = &mut data;
+            r2.write(200);
+            
+            assert_eq!(data.read(), 200);
+        }
+    }
+}
+
+// 示例集 3: Copy trait 作为受控的收缩规则
+pub mod copy_trait_exception {
+    // Copy trait 允许有限形式的收缩（多次使用）
+    
+    #[derive(Debug, Clone, Copy, PartialEq)]
+    pub struct Point {
+        x: i32,
+        y: i32,
+    }
+    
+    impl Point {
+        pub fn new(x: i32, y: i32) -> Self {
+            Self { x, y }
+        }
+        
+        pub fn distance_from_origin(&self) -> f64 {
+            ((self.x * self.x + self.y * self.y) as f64).sqrt()
+        }
+    }
+    
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        
+        #[test]
+        fn test_copy_allows_reuse() {
+            let p1 = Point::new(3, 4);
+            
+            // Copy 类型可以"使用"多次
+            let p2 = p1;  // 复制，不是移动
+            let p3 = p1;  // 再次复制
+            
+            // 原值仍然可用
+            assert_eq!(p1, Point::new(3, 4));
+            assert_eq!(p2, Point::new(3, 4));
+            assert_eq!(p3, Point::new(3, 4));
+        }
+        
+        #[test]
+        fn test_copy_is_bitwise() {
+            let p1 = Point::new(5, 12);
+            let p2 = p1;  // 位拷贝
+            
+            assert_eq!(
+                p1.distance_from_origin(),
+                p2.distance_from_origin()
+            );
+            assert_eq!(p1.distance_from_origin(), 13.0);
+        }
+        
+        #[test]
+        fn test_primitives_are_copy() {
+            let x = 42;
+            let y = x;  // i32 实现了 Copy
+            let z = x;  // 可以再次使用
+            
+            assert_eq!(x + y + z, 126);
+        }
+    }
+}
+
+// 示例集 4: Clone trait 作为显式复制
+pub mod clone_trait {
+    // Clone 提供显式的资源复制
+    
+    #[derive(Debug, Clone, PartialEq)]
+    pub struct Buffer {
+        data: Vec<u8>,
+        name: String,
+    }
+    
+    impl Buffer {
+        pub fn new(name: &str, size: usize) -> Self {
+            println!("Creating buffer: {} ({} bytes)", name, size);
+            Self {
+                data: vec![0; size],
+                name: name.to_string(),
+            }
+        }
+        
+        pub fn write(&mut self, index: usize, value: u8) {
+            if index < self.data.len() {
+                self.data[index] = value;
+            }
+        }
+        
+        pub fn read(&self, index: usize) -> Option<u8> {
+            self.data.get(index).copied()
+        }
+    }
+    
+    impl Drop for Buffer {
+        fn drop(&mut self) {
+            println!("Dropping buffer: {}", self.name);
+        }
+    }
+    
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        
+        #[test]
+        fn test_explicit_clone() {
+            let mut buf1 = Buffer::new("original", 10);
+            buf1.write(0, 42);
+            
+            // 显式克隆
+            let buf2 = buf1.clone();
+            
+            // 两者都可用，且互不影响
+            assert_eq!(buf1.read(0), Some(42));
+            assert_eq!(buf2.read(0), Some(42));
+            
+            // buf1 和 buf2 各自有独立的Drop
+        }
+        
+        #[test]
+        fn test_clone_is_deep_copy() {
+            let mut buf1 = Buffer::new("buf1", 10);
+            buf1.write(0, 100);
+            
+            let mut buf2 = buf1.clone();
+            buf2.write(0, 200);  // 修改克隆
+            
+            // 原值不受影响
+            assert_eq!(buf1.read(0), Some(100));
+            assert_eq!(buf2.read(0), Some(200));
+        }
+    }
+}
+
+// 示例集 5: 内存安全的仿射类型保证
+pub mod memory_safety {
+    // 仿射类型如何保证内存安全
+    
+    pub struct SafePointer<T> {
+        data: Box<T>,
+    }
+    
+    impl<T> SafePointer<T> {
+        pub fn new(value: T) -> Self {
+            Self {
+                data: Box::new(value),
+            }
+        }
+        
+        // 消费self，获取内部值
+        pub fn into_inner(self) -> T {
+            *self.data
+        }
+        
+        pub fn get(&self) -> &T {
+            &self.data
+        }
+        
+        pub fn get_mut(&mut self) -> &mut T {
+            &mut self.data
+        }
+    }
+    
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        
+        #[test]
+        fn test_no_use_after_move() {
+            let ptr = SafePointer::new(vec![1, 2, 3]);
+            let inner = ptr.into_inner();
+            
+            // 编译错误：ptr 已被移动
+            // let _ = ptr.get();
+            
+            assert_eq!(inner, vec![1, 2, 3]);
+        }
+        
+        #[test]
+        fn test_no_double_free() {
+            let ptr = SafePointer::new(String::from("test"));
+            drop(ptr);
+            
+            // 编译错误：ptr 已被释放
+            // drop(ptr);  // 不能再次释放
+        }
+        
+        #[test]
+        fn test_mutable_borrow_exclusivity() {
+            let mut ptr = SafePointer::new(42);
+            
+            {
+                let r = ptr.get_mut();
+                *r = 100;
+                
+                // 编译错误：已有可变借用
+                // let r2 = ptr.get();
+            }
+            
+            assert_eq!(*ptr.get(), 100);
+        }
+    }
+}
+
+// 示例集 6: 线程安全与仿射类型
+pub mod thread_safety {
+    use std::thread;
+    
+    // 仿射类型确保线程安全
+    
+    pub struct ThreadSafeData {
+        value: Vec<i32>,
+    }
+    
+    impl ThreadSafeData {
+        pub fn new(value: Vec<i32>) -> Self {
+            Self { value }
+        }
+        
+        pub fn process(self) -> i32 {
+            self.value.iter().sum()
+        }
+    }
+    
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        
+        #[test]
+        fn test_move_to_thread() {
+            let data = ThreadSafeData::new(vec![1, 2, 3, 4, 5]);
+            
+            // 所有权转移到新线程
+            let handle = thread::spawn(move || {
+                data.process()
+            });
+            
+            // 编译错误：data 已被移动
+            // println!("{:?}", data.value);
+            
+            let result = handle.join().unwrap();
+            assert_eq!(result, 15);
+        }
+        
+        #[test]
+        fn test_no_data_race() {
+            let data = vec![1, 2, 3, 4, 5];
+            
+            // 移动所有权，防止数据竞争
+            let handle = thread::spawn(move || {
+                data.iter().sum::<i32>()
+            });
+            
+            // 编译错误：data 已被移动到线程
+            // let sum: i32 = data.iter().sum();
+            
+            let result = handle.join().unwrap();
+            assert_eq!(result, 15);
+        }
+    }
+}
+
+// 示例集 7: Rust 1.90 异步的仿射语义
+pub mod async_affine {
+    use std::future::Future;
+    use std::pin::Pin;
+    use std::task::{Context, Poll};
+    
+    // Future 具有仿射性质
+    
+    pub struct AsyncResource {
+        data: Vec<u8>,
+        ready: bool,
+    }
+    
+    impl AsyncResource {
+        pub fn new(data: Vec<u8>) -> Self {
+            Self {
+                data,
+                ready: false,
+            }
+        }
+    }
+    
+    impl Future for AsyncResource {
+        type Output = Vec<u8>;
+        
+        fn poll(mut self: Pin<&mut Self>, _cx: &mut Context<'_>) 
+            -> Poll<Self::Output> 
+        {
+            if self.ready {
+                // 消费 self，返回数据
+                Poll::Ready(std::mem::take(&mut self.data))
+            } else {
+                self.ready = true;
+                Poll::Pending
+            }
+        }
+    }
+    
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        
+        #[test]
+        fn test_future_affine() {
+            // Future 只能被 await 一次（消费）
+            let runtime = tokio::runtime::Runtime::new().unwrap();
+            
+            runtime.block_on(async {
+                let fut = AsyncResource::new(vec![1, 2, 3]);
+                let data = fut.await;
+                
+                // 编译错误：fut 已被消费
+                // let data2 = fut.await;
+                
+                assert_eq!(data, vec![1, 2, 3]);
+            });
+        }
+    }
+}
 ```
 
 ## 2. Rust 所有权系统作为仿射类型实现

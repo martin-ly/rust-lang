@@ -9,8 +9,18 @@
 
 - [从同伦类型论视角看待 Rust 1.90 的类型系统设计与型变](#从同伦类型论视角看待-rust-190-的类型系统设计与型变)
   - [目录](#目录)
+  - [0. 知识图谱与概念关系网络](#0-知识图谱与概念关系网络)
+    - [0.1 同伦类型论-Rust 类型系统知识图谱](#01-同伦类型论-rust-类型系统知识图谱)
+    - [0.2 概念关系多维矩阵](#02-概念关系多维矩阵)
+      - [表1: 同伦类型论概念 ↔ Rust 实现对照矩阵](#表1-同伦类型论概念--rust-实现对照矩阵)
+      - [表2: 所有权系统的同伦解释矩阵](#表2-所有权系统的同伦解释矩阵)
+      - [表3: 生命周期与路径空间对照表](#表3-生命周期与路径空间对照表)
+      - [表4: 型变的同伦特性矩阵](#表4-型变的同伦特性矩阵)
+    - [0.3 同伦类型论思维导图](#03-同伦类型论思维导图)
+    - [0.4 核心概念关系网络](#04-核心概念关系网络)
   - [1. 同伦类型论与 Rust 类型系统的对应关系](#1-同伦类型论与-rust-类型系统的对应关系)
     - [1.1 基本对应](#11-基本对应)
+    - [1.2 Rust 1.90 同伦结构示例集](#12-rust-190-同伦结构示例集)
   - [2. Rust 的所有权系统作为同伦结构](#2-rust-的所有权系统作为同伦结构)
     - [2.1 所有权与借用](#21-所有权与借用)
   - [3. 生命周期作为路径空间](#3-生命周期作为路径空间)
@@ -43,6 +53,297 @@
     - [10.3 未来展望](#103-未来展望)
     - [10.4 最终总结](#104-最终总结)
 
+## 0. 知识图谱与概念关系网络
+
+### 0.1 同伦类型论-Rust 类型系统知识图谱
+
+```mermaid
+graph TB
+    HoTT[同伦类型论 HoTT]
+    
+    %% 核心概念
+    HoTT --> Types[类型作为空间]
+    HoTT --> Paths[路径类型]
+    HoTT --> HLevels[同伦层级]
+    HoTT --> Univalence[一元性公理]
+    HoTT --> HITs[高阶归纳类型]
+    
+    %% 路径类型
+    Paths --> PathInduction[路径归纳]
+    Paths --> PathEquality[路径等价]
+    Paths --> PathComposition[路径复合]
+    
+    %% 同伦层级
+    HLevels --> Contractible[收缩 -2]
+    HLevels --> Proposition[命题 -1]
+    HLevels --> Set[集合 0]
+    HLevels --> Groupoid[群胚 1]
+    
+    %% Rust 映射
+    Types --> RustTypes[Rust 类型]
+    Paths --> Lifetimes[生命周期]
+    PathEquality --> TypeEquiv[类型等价]
+    
+    %% 所有权的同伦解释
+    HoTT --> Ownership[所有权系统]
+    Ownership --> OwnershipPath[所有权路径]
+    Ownership --> BorrowFiber[借用纤维]
+    
+    %% 具体Rust特性
+    RustTypes --> Primitives[原始类型]
+    RustTypes --> Structs[结构体]
+    RustTypes --> Enums[枚举]
+    
+    Lifetimes --> LifetimeParam['a, 'b, ...]
+    Lifetimes --> LifetimeConstraint['a: 'b]
+    
+    OwnershipPath --> Move[移动]
+    OwnershipPath --> Drop[释放]
+    BorrowFiber --> ImmBorrow[&T]
+    BorrowFiber --> MutBorrow[&mut T]
+    
+    %% 型变的同伦解释
+    HoTT --> Variance[型变]
+    Variance --> CovariantPath[协变路径]
+    Variance --> ContravariantPath[逆变路径]
+    Variance --> InvariantPath[不变路径]
+    
+    CovariantPath --> BoxT[Box<T>]
+    ContravariantPath --> FnParam[fn(T)]
+    InvariantPath --> MutRef[&mut T]
+    
+    %% Rust 1.90 特性
+    HoTT --> Rust190[Rust 1.90]
+    Rust190 --> GATs[GATs - 纤维族]
+    Rust190 --> AsyncTrait[Async - 路径空间]
+    Rust190 --> RPITIT[RPITIT - 存在类型]
+    
+    style HoTT fill:#f9f,stroke:#333,stroke-width:4px
+    style Paths fill:#bbf,stroke:#333,stroke-width:2px
+    style Ownership fill:#bfb,stroke:#333,stroke-width:2px
+    style RustTypes fill:#ff9,stroke:#333,stroke-width:2px
+    style Rust190 fill:#f99,stroke:#333,stroke-width:2px
+```
+
+### 0.2 概念关系多维矩阵
+
+#### 表1: 同伦类型论概念 ↔ Rust 实现对照矩阵
+
+| HoTT 概念 | Rust 实现 | 形式化表示 | 直觉解释 | Rust 1.90 示例 |
+|-----------|----------|-----------|---------|---------------|
+| **类型空间** | 类型系统 | `A : Type` | 类型是点的集合 | `i32`, `String`, `Vec<T>` |
+| **路径类型** | 生命周期 | `a =_A b` | 两点间的连续路径 | `'a`, `'static` |
+| **路径归纳** | 模式匹配 | `J-rule` | 沿路径推理 | `match` 表达式 |
+| **同伦等价** | 类型转换 | `A ≃ B` | 可逆映射 | `From/Into` trait |
+| **一元性公理** | 类型等价 | `(A = B) ≃ (A ≃ B)` | 等价即相等 | 类型安全转换 |
+| **所有权路径** | 所有权转移 | `Own(p₁) → Own(p₂)` | 单向路径遍历 | `let x = y;` (move) |
+| **借用纤维** | 借用系统 | `Fiber(Own)` | 所有权的纤维束 | `&T`, `&mut T` |
+| **生命周期参数** | 路径参数化 | `Path('a)` | 参数化路径族 | `fn foo<'a>(x: &'a T)` |
+| **h-层级** | 类型分类 | `isNType(n, A)` | 类型的复杂度 | `()` (收缩), `bool` (集合) |
+| **高阶归纳类型** | 递归类型 | `Circle` | 带路径的类型 | 递归枚举 |
+
+#### 表2: 所有权系统的同伦解释矩阵
+
+| 所有权概念 | 同伦解释 | 路径性质 | 可逆性 | 并发安全 |
+|-----------|---------|---------|-------|---------|
+| **独占所有权** | 单条路径 | 线性遍历 | 不可逆 | ✓ 线程安全 |
+| **所有权转移 (Move)** | 路径遍历 | 起点失效 | 不可逆 | ✓ 避免数据竞争 |
+| **不可变借用 (&T)** | 多条平行路径 | 可共享 | 可逆 | ✓ 读取安全 |
+| **可变借用 (&mut T)** | 独占路径 | 唯一访问 | 可逆 | ✓ 写入安全 |
+| **生命周期 'a** | 路径长度 | 时间参数 | N/A | ✓ 无悬垂指针 |
+
+#### 表3: 生命周期与路径空间对照表
+
+| 生命周期概念 | 路径解释 | 形式化 | 关系 | 示例 |
+|-------------|---------|-------|------|------|
+| **'static** | 无限长路径 | `Path∞` | 包含所有 | `static VAR: i32` |
+| **'a** | 参数化路径 | `Path('a)` | 依赖参数 | `&'a T` |
+| **'a: 'b** | 路径包含 | `Path('a) ⊇ Path('b)` | 偏序关系 | 生命周期约束 |
+| **生命周期省略** | 路径推断 | 自动推导 | 简化标注 | `fn foo(x: &i32)` |
+
+#### 表4: 型变的同伦特性矩阵
+
+| 型变类型 | 同伦函子 | 路径映射 | Rust 类型 | 安全性质 |
+|---------|---------|---------|----------|---------|
+| **协变** | 保持路径方向 | `p: A → B ⇒ F(p): F(A) → F(B)` | `Box<T>`, `Vec<T>` | 子类型安全 |
+| **逆变** | 反转路径方向 | `p: A → B ⇒ F(p): F(B) → F(A)` | `fn(T) -> U` | 参数安全 |
+| **不变** | 平凡路径空间 | 只有恒等路径 | `&mut T`, `Cell<T>` | 可变安全 |
+
+### 0.3 同伦类型论思维导图
+
+```text
+同伦类型论视角下的 Rust 类型系统
+│
+├─── 1. 基础概念
+│    ├─ 1.1 类型作为空间
+│    │   ├─ 点：类型的值
+│    │   ├─ 路径：值之间的等价性
+│    │   └─ 高阶路径：路径之间的路径
+│    ├─ 1.2 路径类型
+│    │   ├─ 恒等路径: refl_x : x = x
+│    │   ├─ 对称性: sym : (x = y) → (y = x)
+│    │   ├─ 传递性: trans : (x = y) → (y = z) → (x = z)
+│    │   └─ 函数应用: ap : (x = y) → (f(x) = f(y))
+│    └─ 1.3 同伦层级
+│        ├─ -2: 收缩类型 (isContr)
+│        ├─ -1: 命题类型 (isProp)
+│        ├─  0: 集合类型 (isSet)
+│        └─  1+: 高阶群胚
+│
+├─── 2. Rust 所有权的同伦解释
+│    ├─ 2.1 所有权作为路径
+│    │   ├─ 创建: 起点
+│    │   ├─ 移动: 路径遍历
+│    │   ├─ 释放: 终点
+│    │   └─ 不可逆: 路径单向性
+│    ├─ 2.2 借用作为纤维
+│    │   ├─ &T: 共享纤维（多条）
+│    │   ├─ &mut T: 独占纤维（唯一）
+│    │   └─ 纤维返回: 借用结束
+│    └─ 2.3 所有权状态空间
+│        ├─ Owned(place)
+│        ├─ Borrowed(places)
+│        ├─ MutBorrowed(place)
+│        └─ Dropped
+│
+├─── 3. 生命周期作为路径参数化
+│    ├─ 3.1 生命周期标注
+│    │   ├─ 'a: 路径参数
+│    │   ├─ 'static: 无限路径
+│    │   └─ 'a: 'b: 路径包含
+│    ├─ 3.2 路径空间结构
+│    │   ├─ 参数化族: &'a T
+│    │   ├─ 纤维: ∀'a, Type('a)
+│    │   └─ 路径提升: 'a → 'b
+│    └─ 3.3 生命周期推断
+│        ├─ 输入生命周期
+│        ├─ 输出生命周期
+│        └─ 省略规则
+│
+├─── 4. 型变的同伦解释
+│    ├─ 4.1 协变 (Covariant)
+│    │   ├─ 保持路径: T → U ⇒ F<T> → F<U>
+│    │   ├─ Rust 示例: Box<T>, Vec<T>
+│    │   └─ 安全性: 只读不写
+│    ├─ 4.2 逆变 (Contravariant)
+│    │   ├─ 反转路径: T → U ⇒ F<U> → F<T>
+│    │   ├─ Rust 示例: fn(T) -> U
+│    │   └─ 安全性: 参数位置
+│    └─ 4.3 不变 (Invariant)
+│        ├─ 平凡路径: 只有 id
+│        ├─ Rust 示例: &mut T, Cell<T>
+│        └─ 安全性: 既读又写
+│
+├─── 5. 高级同伦结构
+│    ├─ 5.1 一元性公理
+│    │   ├─ (A = B) ≃ (A ≃ B)
+│    │   ├─ 类型等价即相等
+│    │   └─ Rust近似: From/Into
+│    ├─ 5.2 高阶归纳类型 (HITs)
+│    │   ├─ Circle: base, loop
+│    │   ├─ Interval: 0, 1, seg
+│    │   └─ Rust编码: 递归类型 + PhantomData
+│    └─ 5.3 函数外延性
+│        ├─ (∀x, f(x) = g(x)) → (f = g)
+│        └─ Rust: trait 方法的等价
+│
+├─── 6. Rust 1.90 特性的同伦分析
+│    ├─ 6.1 泛型关联类型 (GATs)
+│    │   ├─ 同伦解释: 纤维族
+│    │   ├─ 形式化: Fiber: Lifetimes → Types
+│    │   └─ 示例: trait Container { type Item<'a>; }
+│    ├─ 6.2 异步 (Async/Await)
+│    │   ├─ Future 作为路径空间
+│    │   ├─ Poll: 路径中间点
+│    │   └─ await: 路径遍历
+│    ├─ 6.3 RPITIT
+│    │   ├─ 存在类型的编码
+│    │   └─ 路径的抽象表示
+│    └─ 6.4 Trait Upcasting
+│        ├─ 子trait到父trait的路径
+│        └─ 同伦等价的实例
+│
+└─── 7. 形式化验证与证明
+     ├─ 7.1 类型安全证明
+     │   └─ Progress + Preservation
+     ├─ 7.2 内存安全证明
+     │   ├─ 无 use-after-free
+     │   ├─ 无 double-free
+     │   └─ 无数据竞争
+     ├─ 7.3 所有权不变量
+     │   └─ 唯一所有者定理
+     └─ 7.4 借用检查正确性
+         └─ 生命周期一致性
+```
+
+### 0.4 核心概念关系网络
+
+```text
+               同伦类型论核心概念关系图
+                           
+              ┌──────────────────────┐
+              │  Homotopy Type       │
+              │  Theory (HoTT)       │
+              └──────────┬───────────┘
+                         │
+         ┌───────────────┼───────────────┐
+         │               │               │
+         ▼               ▼               ▼
+    ┌────────┐     ┌─────────┐     ┌─────────┐
+    │ Types  │────▶│  Paths  │────▶│h-Levels │
+    │ 空间   │     │  路径   │     │ 层级    │
+    └────┬───┘     └────┬────┘     └────┬────┘
+         │              │               │
+         │              │               │
+         ▼              ▼               ▼
+    ┌────────┐     ┌─────────┐     ┌─────────┐
+    │ Values │     │Equality │     │Proposit.│
+    │ 点     │     │ = 等价  │     │ 命题    │
+    └────────┘     └─────────┘     └─────────┘
+    
+         Rust 所有权系统的同伦空间模型
+                           
+              ┌──────────────────────┐
+              │  Ownership Space     │
+              │  所有权空间           │
+              └──────────┬───────────┘
+                         │
+         ┌───────────────┼───────────────┐
+         │               │               │
+         ▼               ▼               ▼
+    ┌────────┐     ┌─────────┐     ┌─────────┐
+    │ Owned  │────▶│ Moved   │────▶│ Dropped │
+    │ 拥有   │     │ 移动    │     │ 释放    │
+    └────────┘     └─────────┘     └─────────┘
+         │              
+         │  Borrow (纤维)
+         │
+         ├─────────┬─────────┐
+         │         │         │
+         ▼         ▼         ▼
+    ┌────────┐ ┌────────┐ ┌────────┐
+    │  &T    │ │  &T    │ │ &mut T │
+    │ 共享1  │ │ 共享2  │ │ 独占   │
+    └────────┘ └────────┘ └────────┘
+    
+         生命周期作为路径参数化
+                           
+    'static (∞) ────────────────────────────
+                 │
+    'a ──────────┼──────────────────────
+                 │  'a: 'static
+                 │
+    'b ──────────┼──────────
+                 │  'b: 'a
+                 │
+    'c ──────────┤
+                 │  'c: 'b
+                 
+    路径包含关系: 'a: 'b 表示 'a 的路径包含 'b 的路径
+```
+
+---
+
 ## 1. 同伦类型论与 Rust 类型系统的对应关系
 
 同伦类型论（Homotopy Type Theory, HoTT）提供了一种将类型视为空间、类型间关系视为同伦的框架。
@@ -58,6 +359,429 @@
 依赖类型              泛型约束和关联类型
 同伦层次              类型安全保证层级
 路径空间              生命周期关系
+```
+
+### 1.2 Rust 1.90 同伦结构示例集
+
+```rust
+// 示例集 1: 类型作为空间
+pub mod types_as_spaces {
+    use std::marker::PhantomData;
+    
+    // 空间中的点 (值)
+    pub struct Point<T> {
+        value: T,
+    }
+    
+    // 路径类型 (等价性)
+    pub struct Path<T> {
+        start: T,
+        end: T,
+        // 连续变形的表示
+        _path: PhantomData<fn(f64) -> T>,
+    }
+    
+    impl<T> Path<T> {
+        // 恒等路径 (refl)
+        pub fn refl(point: T) -> Self where T: Clone {
+            Path {
+                start: point.clone(),
+                end: point,
+                _path: PhantomData,
+            }
+        }
+        
+        // 路径对称 (sym)
+        pub fn sym(self) -> Path<T> {
+            Path {
+                start: self.end,
+                end: self.start,
+                _path: PhantomData,
+            }
+        }
+        
+        // 路径复合 (trans)
+        pub fn trans<U>(self, other: Path<U>) -> Path<(T, U)> {
+            Path {
+                start: (self.start, other.start),
+                end: (self.end, other.end),
+                _path: PhantomData,
+            }
+        }
+    }
+    
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        
+        #[test]
+        fn test_path_symmetry() {
+            let p = Path::refl(42);
+            let q = p.sym();
+            // sym(sym(p)) 应该等价于 p
+        }
+    }
+}
+
+// 示例集 2: 所有权的同伦空间模型
+pub mod ownership_homotopy {
+    use std::marker::PhantomData;
+    
+    // 所有权状态
+    #[derive(Debug, Clone, PartialEq)]
+    pub enum OwnershipState<T> {
+        Owned(Place, T),
+        Borrowed(Vec<Place>),
+        MutBorrowed(Place),
+        Moved,
+        Dropped,
+    }
+    
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub struct Place(usize);
+    
+    // 所有权路径 (状态转换)
+    pub struct OwnershipPath<T> {
+        from: OwnershipState<T>,
+        to: OwnershipState<T>,
+        transition: TransitionType,
+    }
+    
+    #[derive(Debug, Clone)]
+    pub enum TransitionType {
+        Move,
+        Borrow,
+        MutBorrow,
+        Return,
+        Drop,
+    }
+    
+    // 所有权空间
+    pub struct OwnershipSpace<T> {
+        current_state: OwnershipState<T>,
+        path_history: Vec<OwnershipPath<T>>,
+    }
+    
+    impl<T> OwnershipSpace<T> {
+        pub fn new(value: T) -> Self {
+            Self {
+                current_state: OwnershipState::Owned(Place(0), value),
+                path_history: Vec::new(),
+            }
+        }
+        
+        // 移动：路径遍历
+        pub fn move_to(&mut self, new_place: Place) -> Result<(), String> {
+            match &self.current_state {
+                OwnershipState::Owned(old_place, _) => {
+                    // 记录路径
+                    self.path_history.push(OwnershipPath {
+                        from: self.current_state.clone(),
+                        to: OwnershipState::Moved,
+                        transition: TransitionType::Move,
+                    });
+                    
+                    self.current_state = OwnershipState::Moved;
+                    Ok(())
+                }
+                _ => Err("Cannot move from non-owned state".to_string()),
+            }
+        }
+        
+        // 借用：创建纤维
+        pub fn borrow(&mut self, borrower: Place) -> Result<(), String> {
+            match &mut self.current_state {
+                OwnershipState::Owned(_, _) => {
+                    self.current_state = OwnershipState::Borrowed(vec![borrower]);
+                    Ok(())
+                }
+                OwnershipState::Borrowed(borrowers) => {
+                    borrowers.push(borrower);
+                    Ok(())
+                }
+                _ => Err("Cannot borrow in current state".to_string()),
+            }
+        }
+        
+        // 可变借用：独占纤维
+        pub fn borrow_mut(&mut self, borrower: Place) -> Result<(), String> {
+            match &self.current_state {
+                OwnershipState::Owned(_, _) => {
+                    self.current_state = OwnershipState::MutBorrowed(borrower);
+                    Ok(())
+                }
+                _ => Err("Cannot mut borrow: already borrowed".to_string()),
+            }
+        }
+        
+        // 验证路径不变量
+        pub fn verify_invariants(&self) -> bool {
+            match &self.current_state {
+                OwnershipState::Moved | OwnershipState::Dropped => {
+                    // 一旦移动或释放，路径不可逆
+                    true
+                }
+                OwnershipState::MutBorrowed(_) => {
+                    // 可变借用是独占的
+                    true
+                }
+                _ => true,
+            }
+        }
+    }
+    
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        
+        #[test]
+        fn test_ownership_path() {
+            let mut space = OwnershipSpace::new(42);
+            
+            // 验证初始状态
+            assert!(matches!(
+                space.current_state,
+                OwnershipState::Owned(_, 42)
+            ));
+            
+            // 移动
+            space.move_to(Place(1)).unwrap();
+            assert!(matches!(space.current_state, OwnershipState::Moved));
+            
+            // 验证路径历史
+            assert_eq!(space.path_history.len(), 1);
+        }
+        
+        #[test]
+        fn test_borrow_fiber() {
+            let mut space = OwnershipSpace::new(vec![1, 2, 3]);
+            
+            // 创建多个共享借用（平行纤维）
+            space.borrow(Place(1)).unwrap();
+            space.borrow(Place(2)).unwrap();
+            
+            assert!(matches!(
+                space.current_state,
+                OwnershipState::Borrowed(_)
+            ));
+        }
+        
+        #[test]
+        fn test_mut_borrow_exclusivity() {
+            let mut space = OwnershipSpace::new(String::from("hello"));
+            
+            // 可变借用是独占的
+            space.borrow_mut(Place(1)).unwrap();
+            
+            // 不能再次借用
+            assert!(space.borrow(Place(2)).is_err());
+            assert!(space.borrow_mut(Place(3)).is_err());
+        }
+    }
+}
+
+// 示例集 3: 生命周期作为路径参数化
+pub mod lifetime_paths {
+    use std::marker::PhantomData;
+    
+    // 生命周期路径
+    pub struct LifetimePath<'a, T> {
+        value: &'a T,
+        // 路径空间的时间参数
+        _lifetime_space: PhantomData<&'a ()>,
+    }
+    
+    impl<'a, T> LifetimePath<'a, T> {
+        pub fn new(value: &'a T) -> Self {
+            Self {
+                value,
+                _lifetime_space: PhantomData,
+            }
+        }
+        
+        // 路径缩短 ('a: 'b)
+        pub fn shorten<'b>(self) -> LifetimePath<'b, T>
+        where
+            'a: 'b,
+        {
+            LifetimePath {
+                value: self.value,
+                _lifetime_space: PhantomData,
+            }
+        }
+        
+        // 路径映射 (fmap)
+        pub fn map<U, F>(&self, f: F) -> U
+        where
+            F: FnOnce(&'a T) -> U,
+        {
+            f(self.value)
+        }
+    }
+    
+    // 生命周期包含关系 ('a: 'b)
+    pub struct LifetimeContainment<'a, 'b> {
+        _marker: PhantomData<(&'a (), &'b ())>,
+    }
+    
+    impl<'a, 'b> LifetimeContainment<'a, 'b>
+    where
+        'a: 'b,
+    {
+        pub fn witness() -> Self {
+            Self {
+                _marker: PhantomData,
+            }
+        }
+        
+        // 路径包含的传递性
+        pub fn trans<'c>(
+            self,
+            other: LifetimeContainment<'b, 'c>,
+        ) -> LifetimeContainment<'a, 'c>
+        where
+            'b: 'c,
+        {
+            LifetimeContainment {
+                _marker: PhantomData,
+            }
+        }
+    }
+    
+    // 纤维束：生命周期参数化的类型族
+    pub trait FiberBundle {
+        type Fiber<'a>: 'a;
+        
+        fn project<'a>(&'a self) -> Self::Fiber<'a>;
+    }
+    
+    // 示例：Vec 的纤维束
+    impl<T> FiberBundle for Vec<T> {
+        type Fiber<'a> = &'a [T] where T: 'a;
+        
+        fn project<'a>(&'a self) -> Self::Fiber<'a> {
+            &self[..]
+        }
+    }
+    
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        
+        #[test]
+        fn test_lifetime_path() {
+            let value = 42;
+            let path = LifetimePath::new(&value);
+            
+            // 路径映射
+            let result = path.map(|&x| x * 2);
+            assert_eq!(result, 84);
+        }
+        
+        #[test]
+        fn test_fiber_bundle() {
+            let vec = vec![1, 2, 3, 4, 5];
+            let fiber = vec.project();
+            
+            assert_eq!(fiber.len(), 5);
+            assert_eq!(fiber[0], 1);
+        }
+    }
+}
+
+// 示例集 4: 型变的同伦解释
+pub mod variance_homotopy {
+    use std::marker::PhantomData;
+    
+    // 协变函子：保持路径方向
+    pub struct CovariantFunctor<T> {
+        value: T,
+    }
+    
+    impl<T> CovariantFunctor<T> {
+        pub fn new(value: T) -> Self {
+            Self { value }
+        }
+        
+        // fmap: 保持路径方向
+        pub fn map<U, F>(self, f: F) -> CovariantFunctor<U>
+        where
+            F: FnOnce(T) -> U,
+        {
+            CovariantFunctor {
+                value: f(self.value),
+            }
+        }
+    }
+    
+    // 逆变函子：反转路径方向
+    pub struct ContravariantFunctor<T> {
+        consumer: Box<dyn Fn(T)>,
+    }
+    
+    impl<T: 'static> ContravariantFunctor<T> {
+        pub fn new<F>(consumer: F) -> Self
+        where
+            F: Fn(T) + 'static,
+        {
+            Self {
+                consumer: Box::new(consumer),
+            }
+        }
+        
+        // contramap: 反转路径方向
+        pub fn contramap<U, F>(self, f: F) -> ContravariantFunctor<U>
+        where
+            F: Fn(U) -> T + 'static,
+            U: 'static,
+        {
+            ContravariantFunctor {
+                consumer: Box::new(move |u| {
+                    (self.consumer)(f(u))
+                }),
+            }
+        }
+    }
+    
+    // 不变函子：平凡路径空间
+    pub struct InvariantFunctor<T> {
+        value: *mut T,
+        _marker: PhantomData<T>,
+    }
+    
+    impl<T> InvariantFunctor<T> {
+        // 不变函子不支持 fmap
+        // 只有恒等路径
+        pub fn identity(&self) -> &Self {
+            self
+        }
+    }
+    
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        
+        #[test]
+        fn test_covariant_path() {
+            let functor = CovariantFunctor::new(42);
+            let result = functor.map(|x| x.to_string());
+            
+            assert_eq!(result.value, "42");
+        }
+        
+        #[test]
+        fn test_contravariant_path() {
+            let mut output = String::new();
+            let functor = ContravariantFunctor::new(|s: String| {
+                // 这里只是演示，实际中output需要Arc或其他共享机制
+                println!("Received: {}", s);
+            });
+            
+            // contramap: String -> i32
+            let mapped = functor.contramap(|x: i32| x.to_string());
+        }
+    }
+}
 ```
 
 ## 2. Rust 的所有权系统作为同伦结构
