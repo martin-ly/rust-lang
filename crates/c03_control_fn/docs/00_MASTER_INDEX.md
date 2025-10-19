@@ -33,6 +33,7 @@
 
 | 类型 | 文档入口 | 说明 |
 |------|---------|------|
+| **知识体系 (NEW)** | [knowledge_system/](./knowledge_system/) | 🔥 完整知识工程体系 |
 | **知识图谱** | [KNOWLEDGE_GRAPH.md](./KNOWLEDGE_GRAPH.md) | 概念关系可视化 |
 | **多维矩阵** | [MULTIDIMENSIONAL_MATRIX.md](./MULTIDIMENSIONAL_MATRIX.md) | 多维度对比分析 |
 | **思维导图** | [MIND_MAP.md](./MIND_MAP.md) | 学习路径导航 |

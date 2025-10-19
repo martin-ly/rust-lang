@@ -18,11 +18,13 @@
 
 #### 📊 可视化学习资源
 
+- [完整学习指南](./COMPREHENSIVE_LEARNING_GUIDE.md) - **🌟 新增！** 综合学习路径导航 ⭐⭐⭐⭐⭐
 - [可视化文档导航](./VISUALIZATION_INDEX.md) - 可视化学习资源统一入口 ⭐⭐⭐⭐⭐
 - [知识图谱](./KNOWLEDGE_GRAPH.md) - 完整概念关系可视化 ⭐⭐⭐⭐⭐
 - [多维矩阵对比](./MULTIDIMENSIONAL_MATRIX.md) - 系统性多维度对比分析 ⭐⭐⭐⭐⭐
 - [思维导图](./MIND_MAP.md) - 学习路径与概念层次可视化 ⭐⭐⭐⭐⭐
 - [概念关系网络](./CONCEPT_RELATIONSHIP_NETWORK.md) - 深度概念依赖与交互分析 ⭐⭐⭐⭐⭐
+- [Rust 1.90丰富示例集成](./RUST_190_RICH_EXAMPLES_INTEGRATION.md) - **🌟 新增！** 115+示例，6000+行代码 ⭐⭐⭐⭐⭐
 
 #### 🧮 理论基础
 
