@@ -9,6 +9,27 @@
 
 ---
 
+## 📋 目录
+
+- [API 文档 (API Documentation)](#api-文档-api-documentation)
+  - [📋 目录](#-目录)
+  - [📚 API 文档](#-api-文档)
+    - [完整 API 参考](#完整-api-参考)
+  - [🎯 按模块浏览 API](#-按模块浏览-api)
+    - [容错机制 (Fault Tolerance)](#容错机制-fault-tolerance)
+    - [分布式系统 (Distributed Systems)](#分布式系统-distributed-systems)
+    - [并发模型 (Concurrency Models)](#并发模型-concurrency-models)
+    - [微服务架构 (Microservices)](#微服务架构-microservices)
+    - [可观测性 (Observability)](#可观测性-observability)
+    - [性能测试 (Benchmarking)](#性能测试-benchmarking)
+  - [📖 快速查找](#-快速查找)
+    - [按功能查找](#按功能查找)
+    - [常用模式](#常用模式)
+  - [🔗 相关资源](#-相关资源)
+  - [🛠️ 生成文档](#️-生成文档)
+
+---
+
 ## 📚 API 文档
 
 ### 完整 API 参考
@@ -37,6 +58,7 @@ use c13_reliability::fault_tolerance::{
 ```
 
 **主要接口**:
+
 - `CircuitBreaker::new()` - 创建熔断器
 - `CircuitBreaker::call()` - 使用熔断器保护调用
 - `RetryPolicy::exponential_backoff()` - 指数退避重试
@@ -110,6 +132,7 @@ use c13_reliability::benchmarking::{
 ### 常用模式
 
 **Builder 模式**:
+
 ```rust
 let config = ConfigBuilder::new()
     .option1(value1)
@@ -118,11 +141,13 @@ let config = ConfigBuilder::new()
 ```
 
 **异步操作**:
+
 ```rust
 let result = component.async_operation().await?;
 ```
 
 **错误处理**:
+
 ```rust
 use c13_reliability::error::UnifiedError;
 
@@ -154,4 +179,3 @@ cargo doc --open --no-deps
 
 **文档维护**: C13 开发团队  
 **最后审核**: 2025-10-19
-
