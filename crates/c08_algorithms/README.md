@@ -220,73 +220,92 @@ cargo run -p c08_algorithms --bin bench_report > report.csv
 
 ## 📖 文档体系
 
-### 🎯 核心理论文档（全新升级！）
+### 📍 文档导航
 
-- **[算法分类、模型与形式化体系](docs/ALGORITHM_CLASSIFICATION_AND_MODELS.md)** ⭐⭐⭐ 🆕
-  - 算法的形式化定义（五元组、图灵机、λ演算）
-  - 完整算法分类体系（设计范式、问题域）
-  - 设计范式深度解析：分治、动态规划、贪心、回溯（带完整Rust实现）
-  - 计算模型：图灵机、RAM模型、λ演算
-  - 语义模型：操作语义、指称语义、公理语义（霍尔逻辑、分离逻辑）
-  - 复杂度理论：主定理、摊还分析、渐进记号
-  - 正确性证明：循环不变量、数学归纳法、不变式变式
-  - Rust 1.90特性映射：GATs、Async Traits、Edition 2024
+**完整文档索引**: [docs/00_MASTER_INDEX.md](docs/00_MASTER_INDEX.md)  
+**文档入口**: [docs/README.md](docs/README.md)
 
-- **[设计模式与算法语义模型映射](docs/DESIGN_PATTERNS_SEMANTICS_MAPPING.md)** ⭐⭐⭐ 🆕
-  - 经典设计模式在算法中的应用（Strategy、Template Method、Iterator、Observer）
-  - 算法专属模式（Memoization、Lazy Evaluation、CPS变换）
-  - 并发模式（Actor、Pipeline）
-  - 语义模型映射（类型系统、所有权与分离逻辑、并发模型与π演算）
-  - Rust特有模式（Typestate、Newtype）
-  - 等价关系分析（算法等价性、模式等价性、同步异步等价）
-  
-- **[异步与同步算法的等价关系](docs/ASYNC_SYNC_EQUIVALENCE_ALGORITHMS.md)** ⭐⭐⭐
-  - 图灵等价性与执行语义差异
-  - 调用栈vs状态机执行模型
-  - CPS变换与形式化证明
-  - 控制流与执行流分析
-  
-- **[控制流与执行流等价性证明](docs/CONTROL_FLOW_EXECUTION_FLOW_EQUIVALENCE.md)** ⭐⭐⭐
-  - 控制流形式化定义（顺序、条件、循环）
-  - 执行流状态机模型（Future状态转换）
-  - 五大等价性定理及证明
-  - CPS变换完整推导
-  - 性能等价性分析
+本项目拥有完整的文档体系，包含 **33 个文档**，按内容类型和难度分为 6 个主要目录：
 
-### 🚀 异步编程专题（NEW！）
+### 📚 文档分类
 
-- **[Actor/Reactor模式与CSP语义模型](docs/ACTOR_REACTOR_CSP_PATTERNS.md)** ⭐⭐⭐
-  - Actor模型的形式化定义与Rust实现
-  - Reactor模式与事件驱动调度
-  - CSP通信顺序进程理论
-  - Golang CSP vs Rust Async对比
-  - 三大调度机制原理与应用
-  - 🔥 **完整示例**: `examples/actor_reactor_csp_complete.rs` - Actor/Reactor/CSP三种模式的完整实现与对比
-  
-- **[异步递归：形式化分析与实现](docs/ASYNC_RECURSION_ANALYSIS.md)** ⭐⭐⭐
-  - 递归的不动点理论
-  - 异步递归的类型系统挑战
-  - 四大实现模式（Box+Pin、宏、尾递归、Stream）
-  - 终止性与等价性证明
-  - 算法应用与性能分析
-  - 🔥 **完整示例**: `examples/async_recursion_comprehensive.rs` - 四种异步递归模式及算法应用
+#### 1. 📖 实用指南 (guides/) - ⭐~⭐⭐
 
-### 📚 实用指南
+适合日常开发和学习使用：
 
-- [算法复杂度分析](docs/algorithm_complexity.md)
-- [数据结构实现](docs/data_structures.md)
-- [异步算法指南](docs/async_algorithms.md)
-- [性能优化技巧](docs/performance_optimization.md)
-- [基准与深度分析指南](docs/benchmarking_guide.md)
-- [Rust 1.90特性应用](docs/RUST_190_FEATURES_APPLICATION.md)
-- Edition 2024 语法要点：见 `docs/Edition_2024_Features.md`
+- [算法复杂度分析](docs/guides/algorithm_complexity.md) - 时间/空间复杂度、Big-O、主定理
+- [数据结构实现](docs/guides/data_structures.md) - 线性表、树、图、高级数据结构
+- [异步算法指南](docs/guides/async_algorithms.md) - 异步编程与算法设计
+- [性能优化技巧](docs/guides/performance_optimization.md) - 编译期优化、SIMD、并行化
+- [基准测试指南](docs/guides/benchmarking_guide.md) - Criterion 使用、性能分析
 
-### 📑 完整索引
+#### 2. 🔬 理论文档 (theory/) - ⭐⭐⭐
 
-- **[文档索引与学习路线](docs/DOCUMENTATION_INDEX.md)** - 包含三条学习路线：
-  - 路线1：算法理论研究者
-  - 路线2：异步编程工程师
-  - 路线3：算法工程师
+深入的形式化理论和数学模型：
+
+- **[算法分类与形式化体系](docs/theory/ALGORITHM_CLASSIFICATION_AND_MODELS.md)** ⭐⭐⭐
+  - 算法的形式化定义、计算模型、语义模型、复杂度理论、正确性证明
+
+- **[设计模式语义映射](docs/theory/DESIGN_PATTERNS_SEMANTICS_MAPPING.md)** ⭐⭐⭐
+  - 经典设计模式、算法专属模式、并发模式、语义模型映射
+
+- **[异步同步等价关系](docs/theory/ASYNC_SYNC_EQUIVALENCE_ALGORITHMS.md)** ⭐⭐⭐
+  - 图灵等价性、执行模型对比、CPS 变换、形式化证明
+
+- **[控制流执行流等价性](docs/theory/CONTROL_FLOW_EXECUTION_FLOW_EQUIVALENCE.md)** ⭐⭐⭐
+  - 五大等价性定理、CPS 变换推导、性能等价性分析
+
+- **[Actor/Reactor/CSP 模式](docs/theory/ACTOR_REACTOR_CSP_PATTERNS.md)** ⭐⭐⭐
+  - Actor 模型、Reactor 模式、CSP 理论、形式化验证
+
+- **[异步递归分析](docs/theory/ASYNC_RECURSION_ANALYSIS.md)** ⭐⭐⭐
+  - 不动点理论、四大实现模式、终止性与等价性证明
+
+#### 3. 🚀 高级专题 (advanced/) - ⭐⭐~⭐⭐⭐
+
+14 个深入的算法专题文档，涵盖类型设计、排序、图算法、动态规划、字符串算法、数据结构、并行算法、执行模型、异步模式、优化技术、形式化验证、分布式算法、机器学习和算法工程。
+
+详见 [docs/advanced/README.md](docs/advanced/README.md)
+
+#### 4. ✨ Rust 特性 (rust-features/) - ⭐⭐
+
+Rust 1.89、1.90 和 Edition 2024 的特性应用：
+
+- [Rust 1.89 特性](docs/rust-features/rust_189_features.md)
+- [Rust 1.90 特性应用](docs/rust-features/RUST_190_FEATURES_APPLICATION.md)
+- [Edition 2024 特性](docs/rust-features/Edition_2024_Features.md)
+
+#### 5. 📚 参考资料 (references/) - ⭐~⭐⭐
+
+快速查阅和索引：
+
+- [算法索引](docs/references/algorithm_index.md) - 按类别索引所有算法
+- [算法基础教程](docs/references/08_algorithms_basics.md) - 入门教程
+
+### 🎓 学习路径
+
+详细的学习路径请查看 [docs/00_MASTER_INDEX.md](docs/00_MASTER_INDEX.md)，包括：
+
+- **初学者路径** (2-3 周) - 掌握基础算法和数据结构
+- **进阶路径** (3-4 周) - 异步编程和性能优化
+- **专家路径** (持续学习) - 理论研究和形式化方法
+
+### 🔥 推荐文档
+
+**新手必读**:
+1. [算法基础教程](docs/references/08_algorithms_basics.md)
+2. [算法复杂度分析](docs/guides/algorithm_complexity.md)
+3. [数据结构实现](docs/guides/data_structures.md)
+
+**进阶阅读**:
+1. [异步算法指南](docs/guides/async_algorithms.md)
+2. [Actor/Reactor/CSP 模式](docs/theory/ACTOR_REACTOR_CSP_PATTERNS.md)
+3. [性能优化技巧](docs/guides/performance_optimization.md)
+
+**理论深入**:
+1. [算法分类与形式化](docs/theory/ALGORITHM_CLASSIFICATION_AND_MODELS.md)
+2. [异步同步等价关系](docs/theory/ASYNC_SYNC_EQUIVALENCE_ALGORITHMS.md)
+3. [控制流执行流等价性](docs/theory/CONTROL_FLOW_EXECUTION_FLOW_EQUIVALENCE.md)
 
 ### 测试覆盖率
 

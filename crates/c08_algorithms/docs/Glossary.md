@@ -64,7 +64,7 @@ fn gcd(mut a: u64, mut b: u64) -> u64 {
 }
 ```
 
-**相关**: [algorithm_index](./algorithm_index.md)
+**相关**: [algorithm_index](./references/algorithm_index.md)
 
 ---
 
@@ -81,7 +81,7 @@ fn gcd(mut a: u64, mut b: u64) -> u64 {
 - O(n²) - 平方时间
 - O(2ⁿ) - 指数时间
 
-**相关**: [algorithm_complexity](./algorithm_complexity.md)
+**相关**: [algorithm_complexity](./guides/algorithm_complexity.md)
 
 ---
 
@@ -103,7 +103,7 @@ fn reverse(arr: &[i32]) -> Vec<i32> {
 }
 ```
 
-**相关**: [algorithm_complexity](./algorithm_complexity.md)
+**相关**: [algorithm_complexity](./guides/algorithm_complexity.md)
 
 ---
 
@@ -130,7 +130,7 @@ while x > 1 {
 }
 ```
 
-**相关**: [algorithm_complexity](./algorithm_complexity.md)
+**相关**: [algorithm_complexity](./guides/algorithm_complexity.md)
 
 ---
 
@@ -235,7 +235,7 @@ fn coin_change_greedy(amount: u32, coins: &[u32]) -> Vec<u32> {
 - 霍夫曼编码
 - 最小生成树 (Prim/Kruskal)
 
-**相关**: [algorithm_index](./algorithm_index.md)
+**相关**: [algorithm_index](./references/algorithm_index.md)
 
 ---
 
@@ -282,7 +282,7 @@ fn merge<T: Ord>(left: &[T], right: &[T], result: &mut [T]) {
 - 快速排序
 - 二分查找
 
-**相关**: [algorithm_index](./algorithm_index.md)
+**相关**: [algorithm_index](./references/algorithm_index.md)
 
 ---
 
@@ -335,7 +335,7 @@ fn is_valid(board: &[Vec<char>], row: usize, col: usize) -> bool {
 - 数独
 - 全排列
 
-**相关**: [algorithm_index](./algorithm_index.md)
+**相关**: [algorithm_index](./references/algorithm_index.md)
 
 ---
 
@@ -361,7 +361,7 @@ map.remove("key");           // O(1)
 - 链地址法 (Chaining)
 - 开放寻址 (Open Addressing)
 
-**相关**: [data_structures](./data_structures.md)
+**相关**: [data_structures](./guides/data_structures.md)
 
 ---
 
@@ -404,7 +404,7 @@ impl<T: Ord> TreeNode<T> {
 - 红黑树 (BTreeMap内部实现)
 - B树/B+树
 
-**相关**: [data_structures](./data_structures.md)
+**相关**: [data_structures](./guides/data_structures.md)
 
 ---
 
@@ -437,7 +437,7 @@ type AdjMatrix = Vec<Vec<bool>>;
 - Floyd-Warshall (全源最短路径)
 - Kruskal/Prim (最小生成树)
 
-**相关**: [algorithm_index](./algorithm_index.md)
+**相关**: [algorithm_index](./references/algorithm_index.md)
 
 ---
 
@@ -466,7 +466,7 @@ heap.peek();       // O(1) 查看最大值
 - 堆排序
 - Top K问题
 
-**相关**: [data_structures](./data_structures.md)
+**相关**: [data_structures](./guides/data_structures.md)
 
 ---
 
@@ -497,7 +497,7 @@ fn next_greater_elements(nums: Vec<i32>) -> Vec<i32> {
 }
 ```
 
-**相关**: [data_structures](./data_structures.md)
+**相关**: [data_structures](./guides/data_structures.md)
 
 ---
 
@@ -530,7 +530,7 @@ impl PrefixSum {
 
 **应用**: 区间查询
 
-**相关**: [data_structures](./data_structures.md)
+**相关**: [data_structures](./guides/data_structures.md)
 
 ---
 

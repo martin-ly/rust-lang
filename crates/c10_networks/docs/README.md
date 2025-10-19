@@ -15,9 +15,10 @@
     - [2. 核心功能](#2-核心功能)
     - [3. 高级特性](#3-高级特性)
   - [📚 核心文档](#-核心文档)
-    - [1. 基础文档](#1-基础文档)
-    - [2. 理论分析](#2-理论分析)
-    - [3. 集成指南](#3-集成指南)
+    - [1. 实践指南 (guides/)](#1-实践指南-guides)
+    - [2. 理论基础 (theory/)](#2-理论基础-theory)
+    - [3. 参考文档 (references/)](#3-参考文档-references)
+    - [4. 教程示例 (tutorials/)](#4-教程示例-tutorials)
   - [🔧 协议实现](#-协议实现)
     - [1. HTTP协议](#1-http协议)
     - [2. WebSocket协议](#2-websocket协议)
@@ -32,9 +33,9 @@
     - [2. 身份认证](#2-身份认证)
     - [3. 安全配置](#3-安全配置)
   - [📖 API 参考](#-api-参考)
-    - [1. 核心模块](#1-核心模块)
-    - [2. 高级模块](#2-高级模块)
-    - [3. 工具模块](#3-工具模块)
+    - [核心模块](#核心模块)
+    - [高级模块](#高级模块)
+    - [工具模块](#工具模块)
   - [🚀 部署运维](#-部署运维)
     - [1. 生产部署](#1-生产部署)
     - [2. 监控告警](#2-监控告警)
@@ -63,51 +64,57 @@
 
 ### 1. 新手入门
 
-- [快速开始指南](QUICK_START.md) - 5分钟上手网络编程
-- [安装配置指南](INSTALLATION.md) - 环境搭建与依赖管理
-- [基础概念介绍](CONCEPTS.md) - 网络编程核心概念
-- [概念定义与关系](CONCEPT_DEFINITIONS.md) - 网络通信概念详解
+- [快速开始指南](tutorials/QUICK_START.md) - 5分钟上手网络编程
+- [综合教程指南](tutorials/COMPREHENSIVE_TUTORIAL_GUIDE.md) - 完整学习路径
+- [概念定义与关系](theory/CONCEPT_DEFINITIONS_ENHANCED.md) - 网络通信概念详解
 
 ### 2. 核心功能
 
-- [HTTP/HTTPS 客户端](HTTP_CLIENT_GUIDE.md) - 现代HTTP客户端实现
-- [WebSocket 通信](WEBSOCKET_GUIDE.md) - 实时双向通信
-- [TCP/UDP 套接字](SOCKET_GUIDE.md) - 底层网络通信
-- [DNS 解析服务](DNS_RESOLVER_GUIDE.md) - 基于Hickory-DNS的解析
+- [HTTP/HTTPS 客户端](guides/HTTP_CLIENT_GUIDE.md) - 现代HTTP客户端实现
+- [WebSocket 通信](guides/WEBSOCKET_GUIDE.md) - 实时双向通信
+- [TCP/UDP 套接字](guides/SOCKET_GUIDE.md) - 底层网络通信
+- [DNS 解析服务](guides/DNS_RESOLVER_GUIDE.md) - 基于Hickory-DNS的解析
 
 ### 3. 高级特性
 
-- [P2P 网络](P2P_GUIDE.md) - 基于libp2p的P2P网络
-- [抓包分析](PACKET_CAPTURE_GUIDE.md) - 基于libpnet的流量分析
-- [性能监控](PERFORMANCE_MONITORING.md) - 网络性能指标收集
-- [安全通信](SECURITY_GUIDE.md) - TLS/SSL加密通信
+- [抓包分析](guides/libpnet_guide.md) - 基于libpnet的流量分析
+- [性能优化](guides/PERFORMANCE_OPTIMIZATION_GUIDE.md) - 性能调优指南
+- [安全通信](guides/SECURITY_GUIDE.md) - TLS/SSL加密通信
 
 ## 📚 核心文档
 
-### 1. 基础文档
+### 1. 实践指南 ([guides/](guides/))
 
-- [STYLE.md](STYLE.md) - 文档风格约定
-- [README.md](../README.md) - 项目主文档
-- [benchmark_minimal_guide.md](benchmark_minimal_guide.md) - 网络基准测试指南
+详细的实践指南和操作手册：
 
-### 2. 理论分析
+- 协议指南：HTTP、WebSocket、DNS、TCP/UDP
+- 实现指南：协议实现、DNS集成、流量分析
+- 性能优化：性能分析、优化、基准测试
+- 安全与部署：安全实践、部署指南
 
-- [SEMANTIC_MODEL_ANALYSIS.md](SEMANTIC_MODEL_ANALYSIS.md) - 语义模型分析
-- [FORMAL_VERIFICATION_FRAMEWORK.md](FORMAL_VERIFICATION_FRAMEWORK.md) - 形式化验证框架
-- [NETWORK_THEORY_FOUNDATION.md](NETWORK_THEORY_FOUNDATION.md) - 网络理论基础
-- [NETWORK_COMMUNICATION_THEORY.md](NETWORK_COMMUNICATION_THEORY.md) - 网络通信理论（已增强）
-- [MATHEMATICAL_FOUNDATIONS.md](MATHEMATICAL_FOUNDATIONS.md) - 数学基础理论
-- [PROTOCOL_IMPLEMENTATION_GUIDE.md](PROTOCOL_IMPLEMENTATION_GUIDE.md) - 协议实现指南
-- [PERFORMANCE_OPTIMIZATION_GUIDE.md](PERFORMANCE_OPTIMIZATION_GUIDE.md) - 性能优化指南
-- [PERFORMANCE_ANALYSIS_GUIDE.md](PERFORMANCE_ANALYSIS_GUIDE.md) - 性能分析与优化指南
-- [CONCEPT_DEFINITIONS.md](CONCEPT_DEFINITIONS.md) - 概念定义与关系
-- [EXAMPLES_GUIDE.md](EXAMPLES_GUIDE.md) - 示例代码指南
-- [API_DOCUMENTATION.md](API_DOCUMENTATION.md) - API 文档
+### 2. 理论基础 ([theory/](theory/))
 
-### 3. 集成指南
+网络编程的理论基础和形式化方法：
 
-- [libpnet_guide.md](libpnet_guide.md) - libpnet抓包实战指南
-- [dns_hickory_integration.md](dns_hickory_integration.md) - DNS解析机制与Hickory-DNS集成
+- 网络理论：通信理论、网络基础、理论机制
+- 数学基础：数学理论、性能模型
+- 形式化方法：验证框架、协议规范、形式化证明、语义分析
+- 概念定义：概念定义增强版
+
+### 3. 参考文档 ([references/](references/))
+
+API参考和规范文档：
+
+- API参考、最佳实践、文档标准
+- 文档风格指南、代码风格
+- 术语表、常见问题
+
+### 4. 教程示例 ([tutorials/](tutorials/))
+
+从入门到精通的完整教程：
+
+- 快速开始、综合教程、主题教程
+- 示例代码指南、应用场景
 
 ## 🔧 协议实现
 
@@ -186,25 +193,27 @@
 
 ## 📖 API 参考
 
-### 1. 核心模块
+详细的API文档请参见：[references/API_DOCUMENTATION.md](references/API_DOCUMENTATION.md)
 
-- [`error`](../src/error.rs) - 错误处理模块
-- [`protocol`](../src/protocol/) - 网络协议实现
-- [`socket`](../src/socket/) - 套接字封装
-- [`packet`](../src/packet/) - 数据包处理
+### 核心模块
 
-### 2. 高级模块
+- `error` - 错误处理模块
+- `protocol` - 网络协议实现
+- `socket` - 套接字封装
+- `packet` - 数据包处理
 
-- [`p2p`](../src/p2p/) - P2P网络功能
-- [`security`](../src/security/) - 安全功能
-- [`performance`](../src/performance/) - 性能优化
-- [`semantics`](../src/semantics/) - 语义分析
+### 高级模块
 
-### 3. 工具模块
+- `p2p` - P2P网络功能
+- `security` - 安全功能
+- `performance` - 性能优化
+- `semantics` - 语义分析
 
-- [`sniff`](../src/sniff/) - 抓包分析
-- [`diagnostics`](../src/diagnostics.rs) - 网络诊断
-- [`unified_api`](../src/unified_api.rs) - 统一API接口
+### 工具模块
+
+- `sniff` - 抓包分析
+- `diagnostics` - 网络诊断
+- `unified_api` - 统一API接口
 
 ## 🚀 部署运维
 
@@ -279,7 +288,7 @@
 
 ### 1. 网络理论基础（增强版）
 
-- [网络通信理论增强版](NETWORK_COMMUNICATION_THEORY_ENHANCED.md) - 网络通信理论的全面增强版本
+- [网络通信理论增强版](theory/NETWORK_COMMUNICATION_THEORY_ENHANCED.md) - 网络通信理论的全面增强版本
   - Shannon信息论模型与信道容量理论
   - OSI七层模型形式化定义
   - TCP/IP协议栈数学建模
@@ -289,7 +298,7 @@
   - 网络安全密码学基础
   - 形式化验证理论
 
-- [概念定义增强版](CONCEPT_DEFINITIONS_ENHANCED.md) - 网络通信概念的全面定义和关系分析
+- [概念定义增强版](theory/CONCEPT_DEFINITIONS_ENHANCED.md) - 网络通信概念的全面定义和关系分析
   - 网络基础概念形式化定义
   - 通信协议概念详细解释
   - 性能概念数学模型
@@ -297,7 +306,7 @@
   - 形式化概念逻辑定义
   - 概念关系图和数据模型
 
-- [数学基础](MATHEMATICAL_FOUNDATIONS.md) - 网络编程的数学基础
+- [数学基础](theory/MATHEMATICAL_FOUNDATIONS.md) - 网络编程的数学基础
   - 概率论与随机过程
   - 数论与密码学
   - 图论与网络拓扑
@@ -305,7 +314,7 @@
   - 线性代数与优化理论
   - 统计学与性能分析
 
-- [形式化证明](FORMAL_PROOFS_AND_MATHEMATICAL_ARGUMENTS.md) - 形式化证明和数学论证
+- [形式化证明](theory/FORMAL_PROOFS_AND_MATHEMATICAL_ARGUMENTS.md) - 形式化证明和数学论证
   - 协议正确性证明
   - 性能理论证明
   - 安全属性证明
@@ -313,7 +322,7 @@
   - 数学论证工具
   - 定理证明器使用
 
-- [网络理论与通信机制](NETWORK_THEORY_AND_COMMUNICATION_MECHANISMS.md) - 网络理论和通信机制
+- [网络理论与通信机制](theory/NETWORK_THEORY_AND_COMMUNICATION_MECHANISMS.md) - 网络理论和通信机制
   - 网络拓扑理论
   - 协议栈理论
   - 通信模式理论
@@ -323,7 +332,7 @@
 
 ### 2. 协议实现指南
 
-- [协议实现指南](PROTOCOL_IMPLEMENTATION_GUIDE.md) - 协议实现指南
+- [协议实现指南](guides/PROTOCOL_IMPLEMENTATION_GUIDE.md) - 协议实现指南
   - 协议实现架构与设计原则
   - TCP协议实现（状态机、数据包处理、拥塞控制、错误处理）
   - HTTP协议实现（请求处理、响应生成、头部管理、连接管理）
@@ -334,7 +343,7 @@
 
 ### 3. 性能优化指南（增强版）
 
-- [性能分析与优化增强版](PERFORMANCE_ANALYSIS_AND_OPTIMIZATION_ENHANCED.md) - 性能分析与优化的全面增强版本
+- [性能分析与优化增强版](guides/PERFORMANCE_ANALYSIS_AND_OPTIMIZATION_ENHANCED.md) - 性能分析与优化的全面增强版本
   - 性能理论基础（延迟理论模型、吞吐量理论模型、资源利用率模型、可扩展性理论）
   - 排队论应用（M/M/1队列模型、M/M/c多服务器模型、网络排队网络、优先级队列理论）
   - 网络性能模型（网络延迟模型、带宽利用率模型、拥塞控制模型、负载均衡模型）
@@ -347,7 +356,7 @@
   - 优化实践（TCP优化、HTTP优化、WebSocket优化、UDP优化）
   - 案例分析（高并发Web服务器优化、实时通信系统优化、分布式系统优化、微服务架构优化）
 
-- [性能优化指南](PERFORMANCE_OPTIMIZATION_GUIDE.md) - 性能优化指南
+- [性能优化指南](guides/PERFORMANCE_OPTIMIZATION_GUIDE.md) - 性能优化指南
   - 异步I/O优化（Tokio运行时优化、零拷贝技术、异步流处理、事件驱动架构）
   - 内存管理优化（对象池模式、内存映射、缓存优化、垃圾回收优化）
   - 网络协议优化（TCP优化、HTTP/2优化、WebSocket优化、UDP优化）
@@ -357,7 +366,7 @@
 
 ### 4. 示例代码指南（增强版）
 
-- [示例代码与应用场景增强版](EXAMPLES_AND_APPLICATIONS_ENHANCED.md) - 示例代码和实际应用场景的全面增强版本
+- [示例代码与应用场景增强版](tutorials/EXAMPLES_AND_APPLICATIONS_ENHANCED.md) - 示例代码和实际应用场景的全面增强版本
   - 基础示例（TCP客户端-服务器、HTTP客户端-服务器、WebSocket通信、UDP通信）
   - 高级示例（异步网络编程、连接池管理、负载均衡、故障恢复）
   - 实际应用场景（微服务通信、实时数据流、分布式系统、云原生应用）
@@ -365,7 +374,7 @@
   - 安全示例（TLS加密通信、身份认证、访问控制、安全监控）
   - 测试示例（单元测试、集成测试、性能测试、压力测试）
 
-- [综合教程指南](COMPREHENSIVE_TUTORIAL_GUIDE.md) - 提供完整的学习路径和教程系统
+- [综合教程指南](tutorials/COMPREHENSIVE_TUTORIAL_GUIDE.md) - 提供完整的学习路径和教程系统
   - 第一阶段：基础入门（环境准备、网络编程基础、第一个网络程序）
   - 第二阶段：协议实现（HTTP协议、WebSocket协议、UDP协议）
   - 第三阶段：高级特性（异步编程深入、连接池管理、性能优化）
@@ -375,7 +384,7 @@
 
 ### 5. API 文档生成
 
-- [API文档](API_DOCUMENTATION.md) - API接口详细说明
+- [API文档](references/API_DOCUMENTATION.md) - API接口详细说明
   - 核心API（网络连接、协议处理、异步操作、错误处理）
   - 协议API（TCP API、HTTP API、WebSocket API、UDP API）
   - 性能API（连接池、负载均衡、缓存管理、监控指标）
@@ -385,7 +394,8 @@
 
 ### 6. 文档索引
 
-- [综合文档索引](COMPREHENSIVE_DOCUMENTATION_INDEX.md) - 所有文档的完整导航和交叉引用
+- [主索引](00_MASTER_INDEX.md) - 所有文档的完整导航和交叉引用
+- [综合文档索引](COMPREHENSIVE_DOCUMENTATION_INDEX.md) - 详细的文档索引
   - 核心文档索引（入门文档、理论文档、实践文档、参考文档）
   - 协议文档索引（传输层协议、应用层协议、安全协议、自定义协议）
   - 性能文档索引（性能分析、优化指南、基准测试、监控工具）

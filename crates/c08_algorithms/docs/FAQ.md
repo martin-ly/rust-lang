@@ -46,7 +46,7 @@ fn merge_sort<T: Ord + Clone>(arr: &mut [T]) {
 }
 ```
 
-**2. 时间/空间权衡**
+**2. 时间/空间权衡**:
 
 | 算法 | 时间复杂度 | 空间复杂度 | 适用场景 |
 |------|-----------|-----------|----------|
@@ -55,7 +55,7 @@ fn merge_sort<T: Ord + Clone>(arr: &mut [T]) {
 | **堆排序** | O(n log n) | O(1) | 空间受限 |
 | **计数排序** | O(n + k) | O(k) | 整数范围小 |
 
-**3. 数据特征**
+**3. 数据特征**:
 
 - **几乎有序**: 插入排序 O(n)
 - **大量重复**: 三路快排
@@ -71,7 +71,7 @@ fn merge_sort<T: Ord + Clone>(arr: &mut [T]) {
 5. 编写基准测试验证
 ```
 
-**相关**: [algorithm_index](./algorithm_index.md) | [algorithm_complexity](./algorithm_complexity.md)
+**相关**: [algorithm_index](./references/algorithm_index.md) | [algorithm_complexity](./guides/algorithm_complexity.md)
 
 ---
 
@@ -239,7 +239,7 @@ async fn async_fibonacci(n: u64) -> u64 {
 - ⚠️ 异步开销可能超过收益
 - ⚠️ 使用`spawn_blocking`处理阻塞操作
 
-**相关**: [async_algorithms](./async_algorithms.md) | [ASYNC_RECURSION_ANALYSIS](./ASYNC_RECURSION_ANALYSIS.md)
+**相关**: [async_algorithms](./guides/async_algorithms.md) | [ASYNC_RECURSION_ANALYSIS](./theory/ASYNC_RECURSION_ANALYSIS.md)
 
 ---
 
@@ -249,7 +249,7 @@ async fn async_fibonacci(n: u64) -> u64 {
 
 性能优化需要系统化方法。
 
-**1. 基准测试**
+**1. 基准测试**:
 
 ```rust
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
@@ -269,7 +269,7 @@ criterion_group!(benches, benchmark_sort);
 criterion_main!(benches);
 ```
 
-**2. 常见优化技巧**
+**2. 常见优化技巧**:
 
 ```rust
 // ✅ 使用迭代器而非循环
@@ -290,7 +290,7 @@ let result: Vec<_> = data.par_iter()
     .collect();
 ```
 
-**3. 算法层面优化**
+**3. 算法层面优化**:
 
 ```rust
 // ❌ 递归斐波那契: O(2ⁿ)
@@ -322,7 +322,7 @@ fn fib_optimal(n: u64) -> u64 {
 }
 ```
 
-**4. 性能分析工具**
+**4. 性能分析工具**:
 
 - **Criterion**: 精确基准测试
 - **flamegraph**: 性能火焰图
@@ -338,7 +338,7 @@ fn fib_optimal(n: u64) -> u64 {
 4. 验证 (再次测量)
 ```
 
-**相关**: [performance_optimization](./performance_optimization.md) | [benchmarking_guide](./benchmarking_guide.md)
+**相关**: [performance_optimization](./guides/performance_optimization.md) | [benchmarking_guide](./guides/benchmarking_guide.md)
 
 ---
 
