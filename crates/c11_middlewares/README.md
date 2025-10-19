@@ -4,6 +4,18 @@
 
 > 📚 **[完整文档](docs/README.md)** | 🚀 **[快速导航](docs/00_MASTER_INDEX.md)** | ❓ **[常见问题](docs/FAQ.md)** | 📖 **[术语表](docs/Glossary.md)**
 
+## 🆕 2025-10-19 新增实战示例
+
+**[Rust 1.90 中间件集成实战示例集](docs/RUST_190_MIDDLEWARE_PRACTICAL_EXAMPLES.md)** ⭐⭐⭐⭐⭐
+
+- **Rust 1.90 特性**: async fn in trait、RPITIT、GAT在中间件中的应用
+- **Redis实战**: CRUD、连接池、分布式锁
+- **SQL集成**: PostgreSQL/MySQL事务处理、批量操作
+- **消息队列**: Kafka/MQTT/NATS完整示例
+- **600+ 行可运行代码**: 详细注释、生产级模式
+
+**特色**: 统一接口设计 + Rust 1.90 特性 + 实战场景！
+
 ## 🚀 主要特性
 
 ### 🔧 统一接口设计

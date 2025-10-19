@@ -1261,20 +1261,103 @@ async fn main() {
 
 ## 📝 代码位置索引
 
-| 特性 | 示例位置 | 测试位置 |
-|------|---------|---------|
-| OnceLock | `src/creational/singleton/` | `tests/singleton_tests.rs` |
-| GATs | `src/behavioral/observer/` | `tests/observer_tests.rs` |
-| async trait | `src/concurrency/asynchronous/native_async_trait/` | `tests/async_tests.rs` |
-| RPITIT | `src/parallel/pipeline/` | `tests/pipeline_tests.rs` |
-| let-else | `src/behavioral/chain_of_responsibility/` | `tests/chain_tests.rs` |
+| 特性 | 示例位置 | 测试位置 | 完整示例 |
+|------|---------|---------|---------|
+| OnceLock | `src/creational/singleton/` | `tests/singleton_tests.rs` | `examples/oncelock_singleton_comprehensive.rs` |
+| GATs | `src/behavioral/observer/` | `tests/observer_tests.rs` | `examples/gats_observer_advanced.rs` |
+| async trait | `src/concurrency/asynchronous/native_async_trait/` | `tests/async_tests.rs` | `examples/native_async_trait_app.rs` |
+| RPITIT | `src/parallel/pipeline/` | `tests/pipeline_tests.rs` | `examples/rpitit_pipeline_advanced.rs` |
+| let-else | `src/behavioral/chain_of_responsibility/` | `tests/chain_tests.rs` | `examples/let_else_chain_advanced.rs` |
+| dyn upcasting | `src/structural/adapter/` | `tests/adapter_tests.rs` | `examples/dyn_upcasting_adapter.rs` |
+
+---
+
+## 🚀 运行完整示例
+
+所有示例都可以直接运行，展示 Rust 1.90 特性的实际应用：
+
+```bash
+# OnceLock 单例模式综合示例
+cargo run --example oncelock_singleton_comprehensive
+
+# GATs 零拷贝观察者模式
+cargo run --example gats_observer_advanced
+
+# 原生 async trait 应用
+cargo run --example native_async_trait_app
+
+# RPITIT 流水线模式
+cargo run --example rpitit_pipeline_advanced
+
+# let-else 责任链模式
+cargo run --example let_else_chain_advanced
+
+# dyn upcasting 适配器模式
+cargo run --example dyn_upcasting_adapter
+```
+
+## 📊 示例特点总结
+
+| 示例 | 代码行数 | 复杂度 | 实用性 | 学习价值 |
+|------|---------|--------|--------|---------|
+| **OnceLock 综合** | ~600 | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **GATs 观察者** | ~700 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **async trait** | ~650 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **RPITIT 流水线** | ~800 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **let-else 链** | ~750 | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **dyn upcasting** | ~650 | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+
+## 💡 实际应用场景映射
+
+### OnceLock 单例模式
+
+- ✅ **全局配置管理** - 应用配置、环境变量
+- ✅ **全局日志器** - 统一日志收集
+- ✅ **全局缓存** - 内存缓存、LRU缓存
+- ✅ **连接池** - 数据库连接、HTTP客户端池
+
+### GATs 零拷贝观察者
+
+- ✅ **事件系统** - UI事件、系统事件
+- ✅ **数据流处理** - 实时数据分析
+- ✅ **监控系统** - 性能监控、日志聚合
+- ✅ **发布订阅** - 消息中间件
+
+### 原生 async trait
+
+- ✅ **异步IO** - 文件IO、网络IO
+- ✅ **Web框架** - 路由、中间件
+- ✅ **微服务** - RPC调用、服务发现
+- ✅ **数据库驱动** - 异步查询接口
+
+### RPITIT 流水线
+
+- ✅ **数据处理** - ETL流程、数据清洗
+- ✅ **编译器** - 词法分析、语法分析
+- ✅ **图像处理** - 滤镜链、图像变换
+- ✅ **日志处理** - 日志过滤、聚合
+
+### let-else 责任链
+
+- ✅ **HTTP中间件** - 认证、日志、限流
+- ✅ **请求验证** - 参数校验、权限检查
+- ✅ **错误处理** - 多级错误处理
+- ✅ **数据转换** - 多步骤转换管道
+
+### dyn upcasting
+
+- ✅ **设备管理** - IoT设备、硬件抽象
+- ✅ **插件系统** - 动态加载、接口适配
+- ✅ **UI组件** - 组件层次、事件传播
+- ✅ **协议栈** - 网络协议、OSI模型
 
 ---
 
 **贡献者**: Rust 设计模式社区  
 **基准测试环境**: Intel i7-12700K, 32GB RAM, Rust 1.90  
-**更新频率**: 随Rust版本更新
+**更新频率**: 随Rust版本更新  
+**最后更新**: 2025-10-19
 
 ---
 
-*本文档提供最新、最全面的Rust 1.90设计模式示例，持续更新中。*
+*本文档提供最新、最全面的Rust 1.90设计模式示例，持续更新中。所有示例均可直接运行，包含详细注释和测试用例。*

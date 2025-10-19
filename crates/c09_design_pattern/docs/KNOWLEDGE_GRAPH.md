@@ -414,14 +414,14 @@ graph TB
 
 **特性适配矩阵**：
 
-| Rust 1.90 特性 | 最佳适配模式 | 适配度 | 性能提升 | 示例位置 |
-|----------------|-------------|--------|---------|---------|
-| **OnceLock** | 单例 | ⭐⭐⭐⭐⭐ | 100% | `creational/singleton/` |
-| **GATs** | 观察者 | ⭐⭐⭐⭐⭐ | 零拷贝 | `behavioral/observer/` |
-| **async trait** | 异步模式 | ⭐⭐⭐⭐⭐ | 简化代码 | `concurrency/asynchronous/` |
-| **RPITIT** | 迭代器/流水线 | ⭐⭐⭐⭐ | 零开销 | `parallel/pipeline/` |
-| **let-else** | 责任链 | ⭐⭐⭐⭐ | 可读性↑ | `behavioral/chain_of_responsibility/` |
-| **dyn upcasting** | 适配器 | ⭐⭐⭐ | 灵活性↑ | `structural/adapter/` |
+| Rust 1.90 特性 | 最佳适配模式 | 适配度 | 性能提升 | 示例位置 | 完整示例 |
+|----------------|-------------|--------|---------|---------|---------|
+| **OnceLock** | 单例 | ⭐⭐⭐⭐⭐ | 100% | `creational/singleton/` | [`oncelock_singleton_comprehensive.rs`](../examples/oncelock_singleton_comprehensive.rs) |
+| **GATs** | 观察者 | ⭐⭐⭐⭐⭐ | 零拷贝 | `behavioral/observer/` | [`gats_observer_advanced.rs`](../examples/gats_observer_advanced.rs) |
+| **async trait** | 异步模式 | ⭐⭐⭐⭐⭐ | 简化代码 | `concurrency/asynchronous/` | [`native_async_trait_app.rs`](../examples/native_async_trait_app.rs) |
+| **RPITIT** | 迭代器/流水线 | ⭐⭐⭐⭐ | 零开销 | `parallel/pipeline/` | [`rpitit_pipeline_advanced.rs`](../examples/rpitit_pipeline_advanced.rs) |
+| **let-else** | 责任链 | ⭐⭐⭐⭐ | 可读性↑ | `behavioral/chain_of_responsibility/` | [`let_else_chain_advanced.rs`](../examples/let_else_chain_advanced.rs) |
+| **dyn upcasting** | 适配器 | ⭐⭐⭐ | 灵活性↑ | `structural/adapter/` | [`dyn_upcasting_adapter.rs`](../examples/dyn_upcasting_adapter.rs) |
 
 ---
 
@@ -695,12 +695,37 @@ pub mod pattern_checklist {
 - [Rust 1.90 特性示例](./RUST_190_EXAMPLES.md) - 最新特性应用
 - [综合设计模式指南](./COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) - 完整理论和实践
 
+## 🚀 快速开始
+
+运行完整示例以深入理解 Rust 1.90 特性在设计模式中的应用：
+
+```bash
+# OnceLock 单例模式 - 全局状态管理
+cargo run --example oncelock_singleton_comprehensive
+
+# GATs 观察者模式 - 零拷贝事件系统
+cargo run --example gats_observer_advanced
+
+# 原生 async trait - 异步中间件链
+cargo run --example native_async_trait_app
+
+# RPITIT 流水线 - 数据处理管道
+cargo run --example rpitit_pipeline_advanced
+
+# let-else 责任链 - HTTP 中间件
+cargo run --example let_else_chain_advanced
+
+# dyn upcasting - 设备管理系统
+cargo run --example dyn_upcasting_adapter
+```
+
 ---
 
 **文档维护者**: Rust 设计模式社区  
 **贡献方式**: 欢迎提交 PR 补充新的模式关系和组合策略  
-**许可证**: MIT/Apache-2.0
+**许可证**: MIT/Apache-2.0  
+**最后更新**: 2025-10-19
 
 ---
 
-*本知识图谱持续更新，反映最新的Rust设计模式实践和研究成果。*
+*本知识图谱持续更新，反映最新的Rust设计模式实践和研究成果。所有示例代码均可运行，包含完整的注释和测试用例。*
