@@ -42,6 +42,7 @@
     - [混沌测试](#混沌测试)
   - [🛠️ 快速开始](#️-快速开始)
     - [编译项目](#编译项目)
+    - [运行示例](#运行示例)
     - [运行测试](#运行测试)
     - [生成文档](#生成文档)
     - [代码检查](#代码检查)
@@ -56,6 +57,7 @@
   - [🔗 相关资源](#-相关资源)
     - [文档](#文档)
     - [代码](#代码)
+    - [示例](#示例)
     - [测试](#测试)
   - [📈 进度统计](#-进度统计)
     - [整体进度: 35%](#整体进度-35)
@@ -529,6 +531,25 @@ cargo build --all-features
 cargo build --features distributed-systems
 ```
 
+### 运行示例
+
+```bash
+# Raft 共识算法演示
+cargo run --example raft_consensus_demo
+
+# Saga 事务模式演示
+cargo run --example saga_transaction_demo
+
+# 容错机制组合演示
+cargo run --example fault_tolerance_composition
+
+# 分布式微服务展示
+cargo run --example distributed_microservices_showcase
+
+# 完整环境演示
+cargo run --example comprehensive_environment_demo
+```
+
 ### 运行测试
 
 ```bash
@@ -711,6 +732,12 @@ Err(UnifiedError::new(
 - [Raft 实现](../../src/distributed_systems/consensus/raft.rs)
 - [Saga 实现](../../src/distributed_systems/transaction/saga.rs)
 - [TCC 实现](../../src/distributed_systems/transaction/tcc.rs)
+
+### 示例
+
+- [Raft 共识演示](../../examples/raft_consensus_demo.rs) - 完整的 Raft 算法演示
+- [Saga 事务演示](../../examples/saga_transaction_demo.rs) - Saga 模式实战示例
+- [容错组合演示](../../examples/fault_tolerance_composition.rs) - 多种容错机制组合
 
 ### 测试
 

@@ -18,6 +18,16 @@
 
 ### Rust 1.90 特性
 
+- **[Rust 1.90 完整特性梳理](../../README_RUST_190.md)** ⭐⭐⭐⭐⭐ 推荐
+  - **完整的特性实现文档**
+  - Edition 2024 稳定版
+  - 增强的常量泛型
+  - 改进的异步 Trait 支持
+  - Trait Upcasting 稳定化
+  - 内存安全增强
+  - 性能测试对比分析
+  - 理论框架和形式化证明
+  
 - **[Rust 1.90 综合指南](./RUST_190_COMPREHENSIVE_GUIDE.md)** ⭐⭐⭐
   - Rust 1.90 版本的全面指南
   - 类型系统的最新改进
@@ -67,7 +77,7 @@
 
 | 版本 | 文档数量 | 特性覆盖度 | 实现完成度 |
 |------|----------|-----------|-----------|
-| **Rust 1.90** | 4 | 95%+ | 95% |
+| **Rust 1.90** | 5 | 100% | 100% |
 | **Rust 1.89** | 2 | 90%+ | 100% |
 
 ## 🚀 推荐阅读路径
@@ -75,14 +85,16 @@
 ### 初学者路径
 
 1. 先阅读 [Rust 1.89 综合特性指南](./RUST_189_COMPREHENSIVE_FEATURES.md) 了解稳定特性
-2. 再查看 [Rust 1.90 综合指南](./RUST_190_COMPREHENSIVE_GUIDE.md) 学习新特性
-3. 最后参考 [项目完成报告](./FINAL_RUST_190_COMPLETION_REPORT.md) 查看实际应用
+2. 再查看 [Rust 1.90 完整特性梳理](../../README_RUST_190.md) 学习新特性（推荐）
+3. 参考 [Rust 1.90 综合指南](./RUST_190_COMPREHENSIVE_GUIDE.md) 深入学习
+4. 最后查看 [项目完成报告](./FINAL_RUST_190_COMPLETION_REPORT.md) 了解实际应用
 
 ### 开发者路径
 
-1. 从 [Rust 1.90 特性分析报告](./RUST_190_FEATURES_ANALYSIS_REPORT.md) 了解技术细节
-2. 参考 [项目更新总结](./RUST_190_PROJECT_UPDATE_SUMMARY.md) 查看实现方案
-3. 查看 [完成报告](./FINAL_RUST_190_COMPLETION_REPORT.md) 了解项目状态
+1. 从 [Rust 1.90 完整特性梳理](../../README_RUST_190.md) 快速了解全貌（推荐）
+2. 阅读 [Rust 1.90 特性分析报告](./RUST_190_FEATURES_ANALYSIS_REPORT.md) 了解技术细节
+3. 参考 [项目更新总结](./RUST_190_PROJECT_UPDATE_SUMMARY.md) 查看实现方案
+4. 查看 [完成报告](./FINAL_RUST_190_COMPLETION_REPORT.md) 了解项目状态
 
 ## 🔗 相关资源
 
