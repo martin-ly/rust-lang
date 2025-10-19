@@ -1,307 +1,429 @@
-# Rust 建模与形式方法文档中心
+# C12 模型与架构：文档中心
 
-## 📋 模块概述
+> **一个基于 Rust 1.90+ 的现代化建模与形式方法库**  
+> 聚焦核心建模技术，涵盖并发模型、分布式系统、形式化方法、架构设计等
 
-c18_model 是一个聚焦核心建模技术的 Rust 实现库，涵盖排队论、机器学习、形式化方法、数学建模与性能模型。项目采用最小稳定内核设计，便于学习与集成，同时提供完整的理论背景和实践指导。
-
-## 🚀 核心特性
-
-### 系统建模
-
-- **排队论模型** - M/M/1、M/M/c、M/G/1 等经典排队模型
-- **性能模型** - 系统性能分析和预测模型
-- **可靠性模型** - 系统可靠性和可用性建模
-- **容量规划** - 基于历史数据的容量规划模型
-
-### 形式化方法
-
-- **有限状态机** - 完整的状态机建模和验证
-- **Kripke 结构** - 模态逻辑的语义结构
-- **时序逻辑** - LTL/CTL 时序逻辑支持
-- **模型检查** - 自动化的模型验证和检查
-
-### 机器学习模型
-
-- **线性回归** - 经典线性回归算法
-- **逻辑回归** - 分类问题的逻辑回归
-- **决策树** - 决策树算法实现
-- **聚类算法** - K-means 等聚类算法
-
-### 数学建模
-
-- **概率模型** - 概率分布和随机过程
-- **统计模型** - 统计分析和推断
-- **优化模型** - 线性规划和整数规划
-- **图论模型** - 图算法和网络分析
-
-## 📚 文档导航
-
-### 总览与导航
-
-- [文档索引](./README.md) - 本文档中心
-- [文档总览](./SUMMARY.md) - 完整的文档结构概览
-
-### 入门与指南
-
-- [入门指南总览](./getting-started/README.md) - 快速入门指导
-- [安装指南](./getting-started/installation.md) - 环境配置和依赖安装
-- [快速开始](./getting-started/quick-start.md) - 10 分钟内运行首个模型
-
-### 专题目录
-
-- [形式化方法](./formal/README.md) - 形式化方法理论和实践
-- [并发模型](./concurrency/README.md) - 并发和异步模型
-- [架构设计](./architecture/README.md) - 系统架构设计模式
-- [设计模式](./patterns/README.md) - 建模相关的设计模式
-- [领域建模](./domain/README.md) - 特定领域的建模方法
-- [IoT 建模](./iot/README.md) - 物联网系统建模
-- [使用指南](./guides/README.md) - 详细的使用指南
-- [开发指南](./development/README.md) - 开发和贡献指南
-
-### API 参考
-
-- [API 参考总目录](./api-reference/README.md) - API 文档导航
-- [形式化模型 API](./api-reference/formal-models.md) - 形式化方法相关 API
-- [机器学习模型 API](./api-reference/ml-models.md) - 机器学习相关 API
-- [排队论模型 API](./api-reference/queueing-models.md) - 排队论相关 API
-
-### 源码与示例
-
-- [示例目录](./examples/README.md) - 完整的示例代码
-- [源码实现](../src/) - 核心实现代码
-
-## 🎯 快速开始
-
-### 1. 环境准备
-
-```bash
-# 确保 Rust 1.70+ 已安装
-rustc --version
-
-# 克隆项目（如果尚未克隆）
-git clone <repository-url>
-cd rust-lang/crates/c18_model
-```
-
-### 2. 编译检查
-
-```bash
-# 编译检查
-cargo check -p c18_model
-```
-
-### 3. 运行示例
-
-```bash
-# 系统建模示例
-cargo run -p c18_model --example system_modeling_examples
-
-# 机器学习示例
-cargo run -p c18_model --example machine_learning_examples
-
-# 形式化方法示例
-cargo run -p c18_model --example formal_methods_examples
-```
-
-### 4. 运行测试
-
-```bash
-# 运行所有测试
-cargo test -p c18_model
-
-# 运行特定模块测试
-cargo test -p c18_model queueing
-cargo test -p c18_model formal
-cargo test -p c18_model machine_learning
-```
-
-## 🏗️ 项目结构
-
-```text
-c18_model/
-├── src/
-│   ├── lib.rs                    # 主库文件
-│   ├── types.rs                  # 核心类型定义
-│   ├── queueing/                 # 排队论模型
-│   │   ├── mm1_queue.rs         # M/M/1 排队模型
-│   │   ├── mmc_queue.rs         # M/M/c 排队模型
-│   │   └── mg1_queue.rs         # M/G/1 排队模型
-│   ├── formal/                   # 形式化方法
-│   │   ├── fsm.rs               # 有限状态机
-│   │   ├── kripke.rs            # Kripke 结构
-│   │   ├── temporal_logic.rs    # 时序逻辑
-│   │   └── model_checking.rs    # 模型检查
-│   ├── machine_learning/         # 机器学习
-│   │   ├── linear_regression.rs # 线性回归
-│   │   ├── logistic_regression.rs # 逻辑回归
-│   │   ├── decision_tree.rs     # 决策树
-│   │   └── clustering.rs        # 聚类算法
-│   ├── mathematical/             # 数学建模
-│   │   ├── probability.rs       # 概率模型
-│   │   ├── statistics.rs        # 统计模型
-│   │   ├── optimization.rs      # 优化模型
-│   │   └── graph_theory.rs      # 图论模型
-│   └── utils/                    # 工具函数
-│       ├── math.rs              # 数学工具
-│       ├── validation.rs        # 验证工具
-│       └── serialization.rs     # 序列化工具
-├── examples/                     # 示例代码
-│   ├── system_modeling_examples.rs
-│   ├── machine_learning_examples.rs
-│   └── formal_methods_examples.rs
-├── docs/                         # 文档目录
-├── tests/                        # 测试代码
-├── Cargo.toml                    # 项目配置
-└── README.md                     # 项目说明
-```
-
-## 🧪 测试与验证
-
-### 运行测试
-
-```bash
-# 运行所有测试
-cargo test -p c18_model
-
-# 运行特定模块测试
-cargo test -p c18_model queueing
-cargo test -p c18_model formal
-cargo test -p c18_model machine_learning
-cargo test -p c18_model mathematical
-```
-
-### 运行示例
-
-```bash
-# 系统建模示例
-cargo run -p c18_model --example system_modeling_examples
-
-# 机器学习示例
-cargo run -p c18_model --example machine_learning_examples
-
-# 形式化方法示例
-cargo run -p c18_model --example formal_methods_examples
-```
-
-### 代码质量检查
-
-```bash
-# 代码格式化
-cargo fmt -p c18_model
-
-# 代码检查
-cargo clippy -p c18_model
-
-# 文档生成
-cargo doc -p c18_model --open
-```
-
-## 🔬 核心模型
-
-### 排队论模型1
-
-- **M/M/1 队列** - 单服务器指数服务时间队列
-- **M/M/c 队列** - 多服务器指数服务时间队列
-- **M/G/1 队列** - 单服务器一般服务时间队列
-- **G/G/1 队列** - 一般到达和服务时间队列
-
-### 形式化方法1
-
-- **有限状态机** - 状态转换和事件处理
-- **Kripke 结构** - 模态逻辑的语义模型
-- **时序逻辑** - 线性时序逻辑 (LTL) 和计算树逻辑 (CTL)
-- **模型检查** - 自动化的属性验证
-
-### 机器学习模型1
-
-- **线性回归** - 最小二乘法线性回归
-- **逻辑回归** - 二分类和多分类逻辑回归
-- **决策树** - ID3 和 C4.5 决策树算法
-- **聚类算法** - K-means 和层次聚类
-
-### 数学建模1
-
-- **概率分布** - 常见概率分布实现
-- **统计推断** - 假设检验和置信区间
-- **优化算法** - 线性规划和整数规划
-- **图算法** - 最短路径和最小生成树
-
-## 🎓 教育价值
-
-### 学习路径
-
-1. **基础概念** - 从基本建模概念开始
-2. **数学基础** - 掌握必要的数学工具
-3. **模型实现** - 学习各种模型的实现
-4. **实践应用** - 通过实际项目加深理解
-
-### 实践项目
-
-- **系统性能分析** - 使用排队论分析系统性能
-- **状态机设计** - 设计并验证复杂状态机
-- **数据预测** - 使用机器学习进行数据预测
-- **优化问题** - 解决实际的优化问题
-
-### 参考资料
-
-- **理论背景** - 完整的理论背景和证明
-- **代码示例** - 详细的代码实现示例
-- **最佳实践** - 建模的最佳实践指南
-- **工具链** - 相关的工具和库推荐
-
-## 🌟 创新亮点
-
-### 技术创新
-
-- **最小稳定内核** - 去除复杂依赖，聚焦核心功能
-- **理论实践结合** - 完整的理论背景和实际实现
-- **模块化设计** - 高度模块化和可扩展的架构
-- **类型安全** - 充分利用 Rust 的类型系统
-
-### 架构创新
-
-- **清晰分层** - 理论层、实现层、应用层清晰分离
-- **可组合性** - 模型可以灵活组合和扩展
-- **可验证性** - 内置的模型验证和检查机制
-- **可扩展性** - 易于添加新的模型和算法
-
-### 生态创新
-
-- **教育友好** - 专为学习和教育场景设计
-- **开源协作** - 开放和协作的开发模式
-- **标准兼容** - 遵循相关领域标准和最佳实践
-- **社区驱动** - 基于社区反馈的持续改进
-
-## 📞 支持与贡献
-
-### 获取支持
-
-- 问题报告: [GitHub Issues](https://github.com/rust-lang/c18_model/issues)
-- 讨论区: [GitHub Discussions](https://github.com/rust-lang/c18_model/discussions)
-- 文档: [GitHub Wiki](https://github.com/rust-lang/c18_model/wiki)
-
-### 贡献指南
-
-1. Fork 项目
-2. 创建功能分支
-3. 编写代码和测试
-4. 提交 Pull Request
-5. 参与代码审查
-
-### 贡献类型
-
-- 功能开发 - 新模型和算法的实现
-- 性能优化 - 性能改进和优化
-- 文档完善 - 文档的改进和补充
-- 测试增强 - 测试覆盖率的提高
-- 理论贡献 - 新的理论方法和证明
-
-## 📄 许可证
-
-本项目采用 MIT 许可证。详见 [LICENSE](LICENSE) 文件。
+**文档版本**: v2.0  
+**最后更新**: 2025-10-19  
+**适用 Rust 版本**: 1.90+
 
 ---
 
-**Rust 建模与形式方法** - 让建模更简单、更安全、更高效！
+## 📋 文档导航
 
-**Rust Modeling & Formal Methods** - Making modeling simpler, safer, and more efficient!
+### 🎯 快速入口
+
+| 入口 | 说明 | 适合人群 |
+|------|------|---------|
+| [**主索引**](./00_MASTER_INDEX.md) | 完整文档导航，按角色/主题/场景分类 | 所有用户 |
+| [**项目概览**](./OVERVIEW.md) | 项目整体介绍和特性概览 | 初次了解 |
+| [**快速开始**](./tutorials/quick-start.md) | 10分钟快速入门教程 | 新手 |
+| [**常见问题**](./FAQ.md) | 常见问题解答 | 遇到问题 |
+| [**术语表**](./Glossary.md) | 专业术语解释 | 查询概念 |
+
+### 📚 核心主题
+
+```text
+┌─────────────────────────────────────────────────────────────┐
+│                      C12 建模与架构体系                      │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐          │
+│  │ 并发模型     │  │ 分布式系统   │  │ 架构设计     │         │
+│  │ Concurrency │  │ Distributed │  │ Architecture│          │
+│  └─────────────┘  └─────────────┘  └─────────────┘          │
+│                                                             │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐          │
+│  │ 形式化方法   │  │ 核心概念     │  │ 使用指南     │         │
+│  │ Formal      │  │ Core        │  │ Guides      │          │
+│  └─────────────┘  └─────────────┘  └─────────────┘          │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+#### 1. 并发模型 [concurrency/](./concurrency/)
+
+并发编程、异步模型、背压控制
+
+- **Actor模型** - 消息传递并发
+- **CSP模型** - 通信顺序进程  
+- **异步递归** - 递归异步函数
+- **背压控制** - 流量控制机制
+
+**推荐起点**: [并发模型总览](./concurrency/README.md)
+
+#### 2. 分布式系统 [distributed/](./distributed/)
+
+分布式共识、一致性、快照算法
+
+- **Raft共识** - 分布式共识算法
+- **分布式快照** - Chandy-Lamport算法
+- **向量时钟** - 因果关系追踪
+
+**推荐起点**: [Raft共识算法](./distributed/raft-consensus-comprehensive.md)
+
+#### 3. 架构设计 [architecture/](./architecture/)
+
+软件架构模式、微服务设计
+
+- **分层架构** - 经典分层模式
+- **事件驱动** - Event-Driven Architecture
+- **微服务** - Microservices patterns
+- **CQRS** - 命令查询职责分离
+
+**推荐起点**: [架构设计总览](./architecture/README.md)
+
+#### 4. 形式化方法 [formal/](./formal/)
+
+语义模型、形式化验证
+
+- **操作语义** - 小步/大步语义
+- **指称语义** - 数学函数映射
+- **公理语义** - Hoare逻辑
+- **模型检查** - 自动化验证
+
+**推荐起点**: [形式化方法总览](./formal/README.md)
+
+#### 5. 核心概念 [core/](./core/)
+
+建模基础理论
+
+- **建模概述** - 建模方法论
+- **算法模型** - 算法理论基础
+
+**推荐起点**: [建模概述](./core/modeling-overview.md)
+
+#### 6. 使用指南 [guides/](./guides/)
+
+实践指南和最佳实践
+
+- **综合指南** - 完整使用指南
+- **系统建模** - 系统建模方法
+- **机器学习** - ML模型集成
+- **状态机** - FSM到协议设计
+
+**推荐起点**: [综合使用指南](./guides/comprehensive-usage-guide.md)
+
+---
+
+## 🚀 快速开始
+
+### 第一步：安装配置
+
+参考 [安装指南](./tutorials/installation.md) 配置开发环境。
+
+```bash
+# 确保 Rust 1.90+ 已安装
+rustc --version
+
+# 克隆项目
+git clone <repository-url>
+cd rust-lang/crates/c12_model
+
+# 编译检查
+cargo check -p c12_model
+```
+
+### 第二步：运行示例
+
+```bash
+# 并发模型示例
+cargo run -p c12_model --example concurrency_models
+
+# 分布式系统示例
+cargo run -p c12_model --example distributed_consensus
+
+# 形式化方法示例
+cargo run -p c12_model --example formal_methods_examples
+```
+
+### 第三步：深入学习
+
+根据你的兴趣和需求，选择学习路径：
+
+- **并发开发者** → [并发模型](./concurrency/)
+- **分布式系统** → [分布式文档](./distributed/)
+- **架构设计** → [架构设计](./architecture/)
+- **研究学习** → [形式化方法](./formal/)
+
+---
+
+## 📚 学习路径
+
+### 🌟 初学者路径
+
+**目标**: 理解基本概念，能够使用基础模型
+
+1. **入门** (1-2天)
+   - [项目概览](./OVERVIEW.md)
+   - [快速开始](./tutorials/quick-start.md)
+   - [建模概述](./core/modeling-overview.md)
+
+2. **基础** (3-5天)
+   - [并发模型入门](./concurrency/README.md)
+   - [架构基础](./architecture/README.md)
+   - [运行示例](./examples/)
+
+3. **实践** (1周)
+   - [系统建模指南](./guides/system-modeling.md)
+   - [使用指南](./guides/comprehensive-usage-guide.md)
+   - 完成小项目
+
+**时间**: 2-3周
+
+### 🎓 中级路径
+
+**目标**: 掌握核心模型，能够设计并发和分布式系统
+
+1. **并发深入** (1-2周)
+   - [并发模型深度分析](./concurrency/concurrency-models-deep-dive.md)
+   - [异步递归](./concurrency/async-recursion.md)
+   - [背压控制](./concurrency/backpressure-models.md)
+
+2. **分布式系统** (2-3周)
+   - [Raft共识算法](./distributed/raft-consensus-comprehensive.md)
+   - [分布式快照](./distributed/distributed-snapshot-comprehensive.md)
+   - [分布式架构设计](./architecture/distributed-design.md)
+
+3. **架构设计** (1-2周)
+   - [软件设计模型](./architecture/software-design-models-comprehensive.md)
+   - [微服务机制](./architecture/microservices-mechanisms.md)
+   - [设计模式](./patterns/)
+
+**时间**: 4-7周
+
+### 🔬 高级路径
+
+**目标**: 精通形式化方法，能够进行理论研究和高级系统设计
+
+1. **形式化方法** (2-3周)
+   - [语言语义学](./formal/language-semantics.md)
+   - [语义模型](./formal/semantic-models-comprehensive.md)
+   - [状态机到协议](./guides/fsm-to-protocol.md)
+
+2. **高级主题** (2-4周)
+   - [模型分类体系](./advanced/MODEL_COMPREHENSIVE_TAXONOMY.md)
+   - [模型关系分析](./advanced/MODEL_RELATIONSHIPS_COMPREHENSIVE.md)
+   - [架构设计理论](./advanced/MODEL_ARCHITECTURE_DESIGN.md)
+
+3. **研究方向** (持续)
+   - [领域应用](./domain/)
+   - [贡献开发](./development/contributing.md)
+   - 学术研究
+
+**时间**: 8-12周及以后
+
+---
+
+## 📖 文档结构
+
+### 文档组织
+
+```text
+docs/
+├── 00_MASTER_INDEX.md          # 主导航索引 ⭐
+├── README.md                    # 本文档 - 文档中心首页
+├── OVERVIEW.md                  # 项目概览
+├── FAQ.md                       # 常见问题
+├── Glossary.md                  # 术语表
+├── SUMMARY.md                   # 文档结构总览
+│
+├── core/                        # 核心概念
+│   ├── modeling-overview.md    # 建模概述
+│   └── algorithm-models.md     # 算法模型
+│
+├── concurrency/                 # 并发模型 ⭐
+│   ├── README.md               # 并发总览
+│   ├── models.md               # 模型分类
+│   ├── async-sync-classification.md
+│   ├── async-recursion.md
+│   ├── backpressure-models.md
+│   └── ...
+│
+├── distributed/                 # 分布式系统 ⭐
+│   ├── raft-consensus-comprehensive.md
+│   └── distributed-snapshot-comprehensive.md
+│
+├── architecture/                # 架构设计 ⭐
+│   ├── README.md
+│   ├── design-models.md
+│   ├── distributed-design.md
+│   ├── software-design-models-comprehensive.md
+│   └── microservices-mechanisms.md
+│
+├── formal/                      # 形式化方法 ⭐
+│   ├── README.md
+│   ├── language-semantics.md
+│   └── semantic-models-comprehensive.md
+│
+├── guides/                      # 使用指南
+│   ├── README.md
+│   ├── comprehensive-usage-guide.md
+│   ├── system-modeling.md
+│   ├── machine-learning.md
+│   └── ...
+│
+├── tutorials/                   # 教程
+│   ├── README.md
+│   ├── installation.md
+│   └── quick-start.md
+│
+├── api/                        # API 参考
+│   ├── README.md
+│   ├── formal-models.md
+│   ├── ml-models.md
+│   └── queueing-models.md
+│
+├── examples/                    # 示例
+│   └── README.md
+│
+├── patterns/                    # 设计模式
+│   └── README.md
+│
+├── domain/                      # 领域应用
+│   └── README.md
+│
+├── development/                 # 开发指南
+│   ├── README.md
+│   └── contributing.md
+│
+├── advanced/                    # 高级主题
+│   ├── MODEL_COMPREHENSIVE_TAXONOMY.md
+│   ├── MODEL_RELATIONSHIPS_COMPREHENSIVE.md
+│   ├── MODEL_RELATIONSHIPS_AND_SEMANTICS.md
+│   └── MODEL_ARCHITECTURE_DESIGN.md
+│
+└── archives/                    # 归档文档
+    └── (历史文档和报告)
+```
+
+### 文档类型说明
+
+| 标记 | 说明 |
+|-----|------|
+| ⭐ | 核心文档，重点推荐 |
+| 📚 | 理论文档，深入学习 |
+| 🔧 | 实践文档，动手操作 |
+| 📖 | 参考文档，查阅使用 |
+
+---
+
+## 🎯 按场景查找
+
+### 我想学习并发编程
+
+1. [并发模型总览](./concurrency/README.md)
+2. [并发模型分类](./concurrency/models.md)
+3. [异步递归模型](./concurrency/async-recursion.md)
+4. [背压控制](./concurrency/backpressure-models.md)
+
+### 我想设计分布式系统
+
+1. [Raft共识算法](./distributed/raft-consensus-comprehensive.md)
+2. [分布式快照](./distributed/distributed-snapshot-comprehensive.md)
+3. [分布式架构设计](./architecture/distributed-design.md)
+4. [微服务机制](./architecture/microservices-mechanisms.md)
+
+### 我想进行形式化验证
+
+1. [形式化方法总览](./formal/README.md)
+2. [语言语义学](./formal/language-semantics.md)
+3. [语义模型](./formal/semantic-models-comprehensive.md)
+4. [状态机到协议](./guides/fsm-to-protocol.md)
+
+### 我想学习架构设计
+
+1. [架构设计总览](./architecture/README.md)
+2. [设计模型](./architecture/design-models.md)
+3. [软件设计模型](./architecture/software-design-models-comprehensive.md)
+4. [分布式架构](./architecture/distributed-design.md)
+
+---
+
+## 🔗 相关资源
+
+### 项目文档
+
+- [项目 README](../README.md) - 项目总体介绍
+- [路线图](../ROADMAP.md) - 开发路线图
+- [里程碑](../MILESTONES.md) - 项目里程碑
+- [更新日志](../CHANGELOG.md) - 版本历史
+
+### 代码资源
+
+- [源码](../src/) - 实现代码
+- [示例](../examples/) - 示例程序
+- [测试](../tests/) - 测试用例
+- [基准](../benches/) - 性能测试
+
+### 外部链接
+
+- [Rust 官方文档](https://doc.rust-lang.org/)
+- [Rust 标准库](https://doc.rust-lang.org/std/)
+- [Tokio 文档](https://tokio.rs/)
+
+---
+
+## 💡 使用建议
+
+### 如何阅读文档
+
+1. **首次访问**: 先阅读 [项目概览](./OVERVIEW.md) 了解全貌
+2. **查找内容**: 使用 [主索引](./00_MASTER_INDEX.md) 定位所需文档
+3. **循序渐进**: 按照推荐的学习路径逐步学习
+4. **动手实践**: 结合 [示例代码](./examples/) 和 [教程](./tutorials/) 实践
+5. **问题求助**: 查看 [FAQ](./FAQ.md) 或提交 Issue
+
+### 文档反馈
+
+我们欢迎任何形式的反馈：
+
+- **问题报告**: 发现文档错误或不清晰的地方
+- **改进建议**: 对文档结构和内容的建议
+- **贡献文档**: 补充缺失的文档或改进现有文档
+
+参考 [贡献指南](./development/contributing.md) 了解如何贡献。
+
+---
+
+## 📊 文档统计
+
+- **文档总数**: 50+ 篇
+- **代码示例**: 15+ 个
+- **API 文档**: 4 篇
+- **教程文档**: 3 篇
+- **覆盖主题**: 6 大类
+
+**文档更新频率**: 定期更新  
+**文档质量**: ⭐⭐⭐⭐⭐
+
+---
+
+## 📞 获取帮助
+
+### 文档问题
+
+- 查看 [FAQ](./FAQ.md)
+- 搜索 [主索引](./00_MASTER_INDEX.md)
+- 查询 [术语表](./Glossary.md)
+
+### 技术问题
+
+- [GitHub Issues](https://github.com/rust-lang/rust-lang/issues)
+- [GitHub Discussions](https://github.com/rust-lang/rust-lang/discussions)
+
+### 参与贡献
+
+- [贡献指南](./development/contributing.md)
+- [开发文档](./development/README.md)
+
+---
+
+**文档维护**: Rust 学习社区  
+**最后更新**: 2025-10-19  
+**文档版本**: v2.0  
+**适用版本**: Rust 1.90+
+
+---
+
+**开始你的学习之旅**: [主索引](./00_MASTER_INDEX.md) | [快速开始](./tutorials/quick-start.md) | [项目概览](./OVERVIEW.md)

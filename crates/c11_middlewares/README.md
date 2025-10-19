@@ -1,6 +1,8 @@
-# c11_middlewares - Rust 1.89 中间件统一接口库
+# c11_middlewares - Rust 1.90 中间件统一接口库
 
-一个基于 Rust 1.89 的现代化中间件统一接口库，提供与成熟开源中间件对标的统一接口与特性开关集合，支持 Redis、PostgreSQL、MySQL、SQLite、NATS、Kafka、MQTT 等主流中间件。
+一个基于 Rust 1.90+ 的现代化中间件统一接口库，提供与成熟开源中间件对标的统一接口与特性开关集合，支持 Redis、PostgreSQL、MySQL、SQLite、NATS、Kafka、MQTT 等主流中间件。
+
+> 📚 **[完整文档](docs/README.md)** | 🚀 **[快速导航](docs/00_MASTER_INDEX.md)** | ❓ **[常见问题](docs/FAQ.md)** | 📖 **[术语表](docs/Glossary.md)**
 
 ## 🚀 主要特性
 
@@ -11,13 +13,16 @@
 - **消息队列**: NATS、Kafka、MQTT 统一接口
 - **代理服务**: Pingora 代理支持
 
-### 🎯 Rust 1.89 特性集成
+### 🎯 Rust 1.90+ 特性集成
 
-- **生命周期语法检查增强** - 在中间件连接管理中应用明确的生命周期标注
+- **async fn in trait** - 中间件客户端统一异步接口
+- **RPITIT** - 返回位置 impl Trait in Trait，简化接口定义
+- **泛型关联类型 (GAT)** - 更灵活的连接池抽象
+- **生命周期语法增强** - 在中间件连接管理中应用明确的生命周期标注
 - **常量泛型推断** - 支持不同配置的 `Config<const N: usize>` 结构体
 - **FFI 改进支持** - 支持 128 位整数，增强与 C 语言中间件库的互操作
-- **API 稳定性改进** - 使用 `Result::flatten` 简化中间件操作中的错误处理
-- **跨平台文档测试改进** - 支持平台特定的中间件连接测试
+
+> 📘 详见 [Rust 1.90 特性指南](docs/references/RUST_190_FEATURES_GUIDE.md)
 
 ### 🛡️ 企业级特性
 
@@ -218,59 +223,71 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-## 📚 示例
+## 📚 文档与示例
 
-运行示例代码：
+### 文档
+
+| 文档 | 说明 |
+|------|------|
+| **[文档中心](docs/README.md)** | 📚 文档主入口，开始探索的最佳位置 |
+| **[快速导航](docs/00_MASTER_INDEX.md)** | 🗺️ 主索引和学习路径 |
+| **[完整索引](docs/COMPREHENSIVE_DOCUMENTATION_INDEX.md)** | 📋 综合文档索引 |
+| **[使用指南](docs/guides/)** | 🔧 各中间件详细使用指南 |
+| **[API参考](docs/references/)** | 📘 API 和配置参考 |
+| **[常见问题](docs/FAQ.md)** | ❓ FAQ |
+| **[术语表](docs/Glossary.md)** | 📖 概念和术语定义 |
+
+### 示例代码
+
+运行示例：
 
 ```bash
 # 基础使用示例（Redis + Postgres + 事务）
-cargo run --example basic_usage --features kv-redis,sql-postgres,tokio,obs
+cargo run --example middleware_basic_usage --features kv-redis,sql-postgres,tokio,obs
 
 # 消息队列示例（NATS + MQTT）
 cargo run --example message_queue --features mq-nats,mq-mqtt,tokio,obs
 
 # 综合功能演示（批量操作 + 配置化）
-cargo run --example comprehensive_demo --features kv-redis,sql-postgres,tokio
+cargo run --example middleware_comprehensive_demo --features kv-redis,sql-postgres,tokio
 
-# 仅检查编译（不运行）
-cargo check --example basic_usage --features kv-redis,sql-postgres,tokio
+# Rust 1.90 特性演示
+cargo run --example rust190_features_demo --features kv-redis,tokio
+
+# 高级模式
+cargo run --example advanced_middleware_patterns --features kv-redis,sql-postgres,tokio
 ```
 
-## 🏗️ 架构
+更多示例请查看 [examples/](examples/) 目录。
+
+## 🏗️ 项目结构
 
 ```text
-c12_middlewares/
-├── src/
-│   ├── lib.rs                    # 库入口
-│   ├── config/                   # 配置模块
-│   │   ├── redis.rs             # Redis 配置
-│   │   ├── postgres.rs          # PostgreSQL 配置
-│   │   ├── mysql.rs             # MySQL 配置
-│   │   ├── sqlite.rs            # SQLite 配置
-│   │   ├── nats.rs              # NATS 配置
-│   │   ├── kafka.rs             # Kafka 配置
-│   │   └── mqtt.rs              # MQTT 配置
-│   ├── kv/                      # Key-Value 存储
-│   │   ├── redis_client.rs      # Redis 客户端
-│   │   └── traits.rs            # 统一接口
-│   ├── sql/                     # SQL 数据库
-│   │   ├── postgres_client.rs   # PostgreSQL 客户端
-│   │   ├── mysql_client.rs      # MySQL 客户端
-│   │   ├── sqlite_client.rs     # SQLite 客户端
-│   │   └── traits.rs            # 统一接口
-│   ├── mq/                      # 消息队列
-│   │   ├── nats_client.rs       # NATS 客户端
-│   │   ├── kafka_client.rs      # Kafka 客户端
-│   │   ├── mqtt_client.rs       # MQTT 客户端
-│   │   └── traits.rs            # 统一接口
-│   ├── proxy/                   # 代理服务
-│   │   └── pingora_client.rs    # Pingora 客户端
-│   ├── util/                    # 工具模块
-│   │   ├── retry.rs             # 重试机制
-│   │   └── error.rs             # 错误处理
-│   └── prelude.rs               # 预导入模块
-├── examples/                    # 示例代码
-├── docs/                        # 文档
+c11_middlewares/
+├── src/                         # 源代码
+│   ├── lib.rs                   # 库入口
+│   ├── config.rs                # 配置模块
+│   ├── cache/                   # 缓存客户端（Redis）
+│   ├── database/                # 数据库客户端（PostgreSQL/MySQL/SQLite）
+│   ├── mq/                      # 消息队列客户端（Kafka/NATS/MQTT）
+│   ├── http/                    # HTTP 代理（Pingora）
+│   ├── util.rs                  # 工具模块
+│   └── error.rs                 # 错误处理
+├── examples/                    # 示例代码（8个）
+├── tests/                       # 测试代码
+├── docs/                        # 📚 文档中心
+│   ├── README.md                # 文档入口
+│   ├── 00_MASTER_INDEX.md       # 主索引
+│   ├── COMPREHENSIVE_DOCUMENTATION_INDEX.md  # 完整索引
+│   ├── FAQ.md                   # 常见问题
+│   ├── Glossary.md              # 术语表
+│   ├── guides/                  # 使用指南（5个）
+│   ├── references/              # 参考文档
+│   ├── tutorials/               # 教程（规划中）
+│   ├── advanced/                # 高级主题（规划中）
+│   ├── analysis/                # 技术分析（12+个）
+│   ├── reports/                 # 项目报告（11个）
+│   └── archives/                # 归档文档
 └── Cargo.toml                   # 项目配置
 ```
 
@@ -362,16 +379,47 @@ cargo bench
 3. **异步处理**: 充分利用异步特性
 4. **缓存策略**: 合理使用缓存减少数据库访问
 
+## 🎯 学习路径
+
+根据您的背景选择合适的学习路径：
+
+### 初学者（1周）
+
+1. 📖 阅读 [快速导航](docs/00_MASTER_INDEX.md)
+2. 🚀 运行 [基础示例](examples/middleware_basic_usage.rs)
+3. 📚 学习 [Redis](docs/guides/redis.md) 和 [SQL](docs/guides/sql.md) 指南
+
+### 开发者（2-3周）
+
+1. 📘 查看 [API参考](docs/references/README.md)
+2. 🔧 阅读所有 [使用指南](docs/guides/README.md)
+3. 💻 研究 [高级示例](examples/advanced_middleware_patterns.rs)
+
+### 架构师（4周+）
+
+1. 🔬 研究 [技术分析](docs/analysis/README.md)
+2. 📊 查看 [项目报告](docs/reports/README.md)
+3. 🏗️ 探索 [高级主题](docs/advanced/README.md)
+
+详细学习路径请参考 [文档中心](docs/README.md)。
+
 ## 🤝 贡献
 
-我们欢迎社区贡献！请查看 [CONTRIBUTING.md](CONTRIBUTING.md) 了解如何参与。
+我们欢迎社区贡献！
+
+### 贡献方式
+
+- 📝 完善文档
+- 🐛 报告问题
+- ✨ 提交新特性
+- 💡 分享最佳实践
 
 ### 开发设置
 
 ```bash
 # 克隆仓库
-git clone https://github.com/rust-lang/c12_middlewares.git
-cd c12_middlewares
+git clone https://github.com/rust-lang/c11_middlewares.git
+cd c11_middlewares
 
 # 安装依赖
 cargo build
@@ -380,8 +428,10 @@ cargo build
 cargo test
 
 # 运行示例
-cargo run --example basic_usage --features kv-redis,sql-postgres,tokio
+cargo run --example middleware_basic_usage --features kv-redis,sql-postgres,tokio
 ```
+
+详见 [CONTRIBUTING.md](CONTRIBUTING.md)（如有）。
 
 ## 📄 许可证
 
@@ -397,13 +447,29 @@ cargo run --example basic_usage --features kv-redis,sql-postgres,tokio
 - [Apache Kafka](https://kafka.apache.org/) - 分布式流处理平台
 - [Eclipse Mosquitto](https://mosquitto.org/) - MQTT 消息代理
 
-## 📞 支持
+## 📞 获取帮助
 
-- 📖 [文档](https://docs.rs/c12_middlewares)
-- 🐛 [问题报告](https://github.com/rust-lang/c12_middlewares/issues)
-- 💬 [讨论](https://github.com/rust-lang/c12_middlewares/discussions)
-- 📧 [邮件列表](mailto:c12-middlewares@rust-lang.org)
+### 文档资源
+
+- 📚 [文档中心](docs/README.md) - 开始探索
+- 🗺️ [快速导航](docs/00_MASTER_INDEX.md) - 主索引
+- ❓ [常见问题](docs/FAQ.md) - FAQ
+- 📖 [术语表](docs/Glossary.md) - 概念定义
+
+### 外部资源
+
+- 📖 [在线文档](https://docs.rs/c11_middlewares)（如有）
+- 🐛 [问题报告](https://github.com/rust-lang/c11_middlewares/issues)（如有）
+- 💬 [讨论区](https://github.com/rust-lang/c11_middlewares/discussions)（如有）
+
+### 相关项目
+
+- [C05 并发编程](../c05_threads/) - 线程与并发
+- [C06 异步编程](../c06_async/) - 异步与 async/await
+- [C10 网络编程](../c10_networks/) - 网络协议与通信
 
 ---
 
-**c12_middlewares** - 让 Rust 中间件开发更加统一和高效！ 🦀✨
+**c11_middlewares** - 让 Rust 中间件开发更加统一和高效！ 🦀✨
+
+**从这里开始**: [📚 文档中心](docs/README.md) | [🚀 快速导航](docs/00_MASTER_INDEX.md)

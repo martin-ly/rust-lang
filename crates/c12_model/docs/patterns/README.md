@@ -1,135 +1,458 @@
-# 设计与实现模式
+# 设计模式与最佳实践
 
-> 返回索引：`docs/README.md`
+> **建模相关的设计模式**，提供可复用的解决方案
 
-本页汇总本仓库在模型/算法/形式化相关实现中反复使用的通用模式，并给出“何时使用/不要使用”、关键要点与简单片段，便于工程落地。
-
-## 目录
-
-- 不可变核心 + 受控可变状态（Interior Mutability 最小化）
-- 构建器与校验分离（Builder + Validator）
-- 零成本抽象与内联提示（Zero-cost Abstraction, #[inline])
-- 错误分层（User/System/Assertion）
-- 类型驱动配置（Strongly-typed Config）
-- 有界资源与背压（Bounded Resource & Backpressure）
-- 策略对象与泛型组合（Strategy via trait object/generics）
-- 状态机 + 守卫（FSM + Guards）
-- 数据管道（Preprocess → Train → Eval）
-- 可观测性埋点（Tracing/Metrics）
+**最后更新**: 2025-10-19  
+**适用版本**: Rust 1.90+
 
 ---
 
-## 不可变核心 + 受控可变状态
+## 📋 概述
 
-何时使用：核心模型结构体尽量不可变，训练/仿真中的少量状态通过受控 API 推进。
+本目录收集了在建模和形式方法领域常用的设计模式，帮助开发者构建清晰、可维护的代码。
 
-要点：
+---
 
-- 对外暴露不可变视图，内部必要时使用 `RefCell/Cell` 但限定边界。
-- 将“推进”动作设计为显式方法，避免隐式共享可变引用。
+## 🎨 模式分类
+
+### 1. 并发模式 (Concurrency Patterns)
+
+#### Actor 模式
+
+**问题**: 如何实现安全的并发和状态隔离？
+
+**解决方案**: 使用 Actor 模型，通过消息传递实现并发
 
 ```rust
-pub struct ModelCore { params: Vec<f64> }
-pub struct Runner { step: usize }
+use c12_model::ActorModel;
 
-impl Runner {
-    pub fn advance(&mut self, core: &ModelCore) { self.step += core.params.len(); }
+struct MyActor {
+    state: i32,
+}
+
+impl Actor for MyActor {
+    type Message = i32;
+    
+    fn handle(&mut self, msg: Self::Message) {
+        self.state += msg;
+    }
 }
 ```
 
-## 构建器与校验分离
+**适用场景**:
 
-何时使用：初始化参数较多、需要一致性检查。
+- 需要状态隔离的并发系统
+- 消息驱动的应用
+- 分布式系统
 
-要点：
+#### CSP 模式
 
-- `Builder` 只负责收集参数；`Validator`/`try_build` 进行集中校验并给出具体错误。
+**问题**: 如何协调多个并发进程？
 
-```rust
-pub struct KMeansBuilder { pub k: usize, pub max_iter: usize }
-impl KMeansBuilder { pub fn try_build(self) -> Result<KMeans, String> { if self.k==0 {return Err("k>0".into)}; Ok(KMeans::new(self.k, self.max_iter)) } }
-```
-
-## 零成本抽象与内联提示
-
-要点：
-
-- 对热路径标注 `#[inline]`，避免不必要的虚分发；必要时以泛型实现策略。
-
-## 错误分层: 用户错误 / 系统错误 / 内部断言
-
-要点：
-
-- 对外返回可恢复错误（如维度不匹配）；系统级错误（I/O、数值不稳定）单独分类；内部不变量用断言保护并在测试覆盖。
+**解决方案**: 使用通道进行进程间通信
 
 ```rust
-pub enum ModelError { InvalidShape, Unstable, Io(std::io::Error) }
+use std::sync::mpsc;
+
+let (tx, rx) = mpsc::channel();
+
+// 生产者
+std::thread::spawn(move || {
+    tx.send(42).unwrap();
+});
+
+// 消费者
+let value = rx.recv().unwrap();
 ```
 
-## 类型驱动配置
+**适用场景**:
 
-要点：
+- 管道和过滤器架构
+- 生产者-消费者模式
+- 工作流引擎
 
-- 使用强类型承载超参数与单位（如率/时间），减少运行期错误。
+#### 背压模式
 
-## 有界资源与背压
+**问题**: 如何处理生产者速度快于消费者的情况？
 
-场景：排队/并发模拟、数据流控。
+**解决方案**: 实现背压机制控制流量
 
-要点：
+```rust
+use c12_model::TokenBucket;
 
-- 明确容量上限与丢弃/阻塞策略；将背压作为一等公民配置。
+let limiter = TokenBucket::new(100, 10);
 
-## 策略对象与泛型组合
+// 请求处理
+if limiter.try_acquire() {
+    process_request();
+} else {
+    reject_request();
+}
+```
 
-要点：
+**适用场景**:
 
-- 小规模策略数量固定时用枚举/泛型；运行时可插拔时用 trait 对象。
-
-## 状态机 + 守卫
-
-要点：
-
-- 转换前置条件显式化；提供可达性/死锁检查工具。
-
-## 数据管道（Preprocess → Train → Eval）
-
-要点：
-
-- 将预处理、训练、评估解耦；定义统一接口以便复用与测试。
-
-## 可观测性埋点（Tracing/Metrics）
-
-要点：
-
-- 关键路径埋 `tracing` span；对外暴露基础指标（吞吐、延迟、收敛轮次）。
+- 高并发系统
+- 流处理
+- API 限流
 
 ---
 
-### 快速选型
+### 2. 架构模式 (Architectural Patterns)
 
-- 配置多且需校验：优先 Builder + try_build
-- 需要热路径策略：优先泛型；需运行时切换：trait 对象
-- 高并发/容量敏感：有界资源 + 背压
+#### 分层架构
 
-### 最佳实践清单
+**问题**: 如何组织复杂系统的结构？
 
-- 明确不变式与断言；错误信息给出上下文
-- 公共 API 保持不可变输入；返回结构自描述
-- 给出小而可运行的示例与边界说明
+**解决方案**: 将系统分为多个层次
+
+```rust
+// 表示层
+mod presentation;
+
+// 业务逻辑层
+mod business_logic;
+
+// 数据访问层
+mod data_access;
+```
+
+**适用场景**:
+
+- 大型应用系统
+- 企业级应用
+- 清晰的职责分离
+
+#### 六边形架构 (端口和适配器)
+
+**问题**: 如何使核心逻辑独立于外部依赖？
+
+**解决方案**: 定义端口接口，使用适配器连接外部系统
+
+```rust
+// 端口
+trait Repository {
+    fn save(&self, data: &Data) -> Result<()>;
+}
+
+// 适配器
+struct PostgresAdapter;
+impl Repository for PostgresAdapter {
+    fn save(&self, data: &Data) -> Result<()> {
+        // PostgreSQL 实现
+    }
+}
+```
+
+**适用场景**:
+
+- 需要测试的系统
+- 多种外部集成
+- 领域驱动设计
+
+#### 事件驱动架构
+
+**问题**: 如何实现松耦合的系统交互？
+
+**解决方案**: 使用事件进行组件间通信
+
+```rust
+use c12_model::EventBus;
+
+// 发布事件
+event_bus.publish(UserCreated { id: 1 });
+
+// 订阅事件
+event_bus.subscribe(|event: UserCreated| {
+    send_welcome_email(event.id);
+});
+```
+
+**适用场景**:
+
+- 微服务架构
+- 实时系统
+- 复杂的业务流程
 
 ---
 
-## 交叉链接
+### 3. 创建型模式 (Creational Patterns)
 
-- ML 管道与评估：`guides/ml-preprocess-eval.md`
-- 状态机到协议验证：`guides/fsm-to-protocol.md`
-- 排队与扩展性：`api-reference/queueing-models.md`
-- 形式化模型 API：`api-reference/formal-models.md`
+#### Builder 模式
 
-## 常见反模式
+**问题**: 如何构建复杂对象？
 
-- 过度使用 `RefCell`/`Arc<Mutex<...>>`：优先不可变结构与最小可变边界
-- 隐式共享可变：导致竞态与顺序依赖，改为显式推进 API
-- 错误枚举过于宽泛：失去定位能力，建议分层并携带上下文
-- 无界资源：缺少容量与背压策略，易触发级联退化
+**解决方案**: 使用 Builder 模式逐步构建对象
+
+```rust
+use c12_model::ModelBuilder;
+
+let model = ModelBuilder::new()
+    .with_config(config)
+    .with_timeout(Duration::from_secs(30))
+    .build()?;
+```
+
+**适用场景**:
+
+- 复杂对象构造
+- 可选参数较多
+- 需要验证的构造过程
+
+#### 工厂模式
+
+**问题**: 如何根据条件创建不同类型的对象？
+
+**解决方案**: 使用工厂方法封装创建逻辑
+
+```rust
+enum ModelType {
+    Sequential,
+    Parallel,
+    Distributed,
+}
+
+fn create_model(model_type: ModelType) -> Box<dyn Model> {
+    match model_type {
+        ModelType::Sequential => Box::new(SequentialModel::new()),
+        ModelType::Parallel => Box::new(ParallelModel::new()),
+        ModelType::Distributed => Box::new(DistributedModel::new()),
+    }
+}
+```
+
+**适用场景**:
+
+- 多种实现的抽象
+- 插件系统
+- 策略选择
+
+---
+
+### 4. 结构型模式 (Structural Patterns)
+
+#### 适配器模式
+
+**问题**: 如何使不兼容的接口协同工作？
+
+**解决方案**: 创建适配器转换接口
+
+```rust
+trait OldInterface {
+    fn old_method(&self) -> i32;
+}
+
+trait NewInterface {
+    fn new_method(&self) -> String;
+}
+
+struct Adapter<T: OldInterface>(T);
+
+impl<T: OldInterface> NewInterface for Adapter<T> {
+    fn new_method(&self) -> String {
+        self.0.old_method().to_string()
+    }
+}
+```
+
+#### 装饰器模式
+
+**问题**: 如何动态添加功能？
+
+**解决方案**: 使用装饰器包装原对象
+
+```rust
+trait Component {
+    fn execute(&self);
+}
+
+struct LoggingDecorator<T: Component> {
+    inner: T,
+}
+
+impl<T: Component> Component for LoggingDecorator<T> {
+    fn execute(&self) {
+        println!("Before execution");
+        self.inner.execute();
+        println!("After execution");
+    }
+}
+```
+
+---
+
+### 5. 行为型模式 (Behavioral Patterns)
+
+#### 策略模式
+
+**问题**: 如何在运行时选择算法？
+
+**解决方案**: 定义策略接口，实现多种策略
+
+```rust
+trait Strategy {
+    fn execute(&self, data: &Data) -> Result<Output>;
+}
+
+struct Context<S: Strategy> {
+    strategy: S,
+}
+
+impl<S: Strategy> Context<S> {
+    fn run(&self, data: &Data) -> Result<Output> {
+        self.strategy.execute(data)
+    }
+}
+```
+
+#### 观察者模式
+
+**问题**: 如何实现一对多的通知机制？
+
+**解决方案**: 使用观察者模式
+
+```rust
+trait Observer {
+    fn update(&mut self, data: &Data);
+}
+
+struct Subject {
+    observers: Vec<Box<dyn Observer>>,
+}
+
+impl Subject {
+    fn notify(&mut self, data: &Data) {
+        for observer in &mut self.observers {
+            observer.update(data);
+        }
+    }
+}
+```
+
+---
+
+## 🎯 模式选择指南
+
+### 按问题域选择
+
+| 问题域 | 推荐模式 |
+|--------|---------|
+| 并发控制 | Actor, CSP, 背压 |
+| 系统架构 | 分层, 六边形, 事件驱动 |
+| 对象创建 | Builder, 工厂 |
+| 接口适配 | 适配器, 装饰器 |
+| 算法选择 | 策略, 状态机 |
+
+### 按规模选择
+
+| 规模 | 推荐模式 |
+|------|---------|
+| 小型项目 | Builder, 策略 |
+| 中型项目 | 分层架构, 工厂 |
+| 大型项目 | 六边形架构, 事件驱动 |
+| 分布式系统 | Actor, CQRS, 微服务 |
+
+---
+
+## 💡 最佳实践
+
+### 1. 选择合适的模式
+
+- 理解问题本质
+- 考虑系统规模
+- 评估团队能力
+- 避免过度设计
+
+### 2. 正确实现模式
+
+- 遵循模式原则
+- 保持代码简洁
+- 注重可测试性
+- 文档化决策
+
+### 3. 模式组合
+
+- 多个模式可以组合使用
+- 注意模式间的协调
+- 避免冲突和复杂度
+
+### 4. 持续改进
+
+- 定期审查设计
+- 根据反馈调整
+- 记录经验教训
+
+---
+
+## 📚 学习资源
+
+### 推荐书籍
+
+- 《设计模式：可复用面向对象软件的基础》
+- 《企业应用架构模式》
+- 《领域驱动设计》
+- 《并发编程的艺术》
+
+### 在线资源
+
+- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+- [refactoring.guru](https://refactoring.guru/design-patterns)
+- [Martin Fowler's Website](https://martinfowler.com/)
+
+### 相关文档
+
+- [架构设计](../architecture/) - 架构模式详解
+- [使用指南](../guides/) - 实践指南
+- [示例代码](../examples/) - 模式示例
+
+---
+
+## 🔄 模式演进
+
+设计模式会随着技术发展而演进：
+
+1. **传统模式** - 经典的 GoF 模式
+2. **并发模式** - 适应多核时代
+3. **分布式模式** - 云原生架构
+4. **响应式模式** - 实时系统需求
+
+---
+
+## 📝 贡献指南
+
+欢迎贡献新的模式和最佳实践！
+
+### 贡献内容
+
+- 新的设计模式
+- 模式实现示例
+- 使用案例分析
+- 最佳实践总结
+
+### 贡献流程
+
+1. 提出模式建议
+2. 提供实现示例
+3. 编写文档说明
+4. 提交 Pull Request
+
+参考 [贡献指南](../development/contributing.md)
+
+---
+
+## 🔗 相关链接
+
+- [架构设计](../architecture/README.md)
+- [并发模型](../concurrency/README.md)
+- [使用指南](../guides/README.md)
+- [API 参考](../api/README.md)
+
+---
+
+**模式维护**: 项目维护团队  
+**最后更新**: 2025-10-19  
+**反馈**: [GitHub Issues](https://github.com/rust-lang/rust-lang/issues)
+
+---
+
+**提示**: 设计模式是工具，不是目的。根据实际需求选择合适的模式！ 🎨

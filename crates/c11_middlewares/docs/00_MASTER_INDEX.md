@@ -40,9 +40,9 @@
 
 | 数据库 | 文档 | 驱动 | 源码 |
 |-------|------|------|------|
-| **PostgreSQL** | [sql.md](./sql.md) | `tokio-postgres` | `src/database/postgres_client.rs` |
-| **MySQL** | [sql.md](./sql.md) | `mysql_async` | `src/database/mysql_client.rs` |
-| **SQLite** | [sql.md](./sql.md) | `rusqlite` | `src/database/sqlite_client.rs` |
+| **PostgreSQL** | [guides/sql.md](./guides/sql.md) | `tokio-postgres` | `src/database/postgres_client.rs` |
+| **MySQL** | [guides/sql.md](./guides/sql.md) | `mysql_async` | `src/database/mysql_client.rs` |
+| **SQLite** | [guides/sql.md](./guides/sql.md) | `rusqlite` | `src/database/sqlite_client.rs` |
 
 **特性**:
 
@@ -55,7 +55,7 @@
 
 | 中间件 | 文档 | 驱动 | 源码 |
 |--------|------|------|------|
-| **Redis** | [redis.md](./redis.md) | `redis` | `src/cache/redis_client.rs` |
+| **Redis** | [guides/redis.md](./guides/redis.md) | `redis` | `src/cache/redis_client.rs` |
 
 **特性**:
 
@@ -70,9 +70,9 @@
 
 | 类型 | 文档 | 驱动 | 说明 |
 |------|------|------|------|
-| **Kafka** | [kafka_pingora.md](./kafka_pingora.md) | `rdkafka` | 高吞吐量分布式队列 |
-| **MQTT** | [mq.md](./mq.md) | `rumqttc` | IoT消息协议 |
-| **NATS** | [mq.md](./mq.md) | `async-nats` | 轻量级消息系统 |
+| **Kafka** | [guides/kafka_pingora.md](./guides/kafka_pingora.md) | `rdkafka` | 高吞吐量分布式队列 |
+| **MQTT** | [guides/mq.md](./guides/mq.md) | `rumqttc` | IoT消息协议 |
+| **NATS** | [guides/mq.md](./guides/mq.md) | `async-nats` | 轻量级消息系统 |
 
 **源码**: `src/mq/`
 
@@ -86,7 +86,7 @@
 | **负载均衡** | 多种策略 | - |
 | **缓存** | HTTP缓存 | - |
 
-**文档**: [pingora.md](./pingora.md)
+**文档**: [guides/pingora.md](./guides/pingora.md)
 
 ### 第四部分：Rust 1.90 特性
 
@@ -98,7 +98,7 @@
 | **RPITIT** | 配置构建器 | `src/rust190_optimizations.rs` |
 | **泛型关联类型** | 连接池抽象 | - |
 
-**文档**: [RUST_190_FEATURES_GUIDE.md](./RUST_190_FEATURES_GUIDE.md)
+**文档**: [references/RUST_190_FEATURES_GUIDE.md](./references/RUST_190_FEATURES_GUIDE.md)
 
 ---
 
@@ -141,36 +141,36 @@ cargo bench --bench advanced_benchmarking_demo
 
 ### 🚀 初学者路径 (1周)
 
-1. **起步**: [README](./README.md)
-2. **SQL基础**: [sql.md](./sql.md)
-3. **Redis入门**: [redis.md](./redis.md)
+1. **起步**: [README](./README.md) | [文档中心](./README.md)
+2. **SQL基础**: [guides/sql.md](./guides/sql.md)
+3. **Redis入门**: [guides/redis.md](./guides/redis.md)
 4. **实践**: 运行基础示例
 
 **推荐阅读顺序**:
 
 ```text
-README.md
+docs/README.md (文档中心)
   ↓
-sql.md (PostgreSQL/MySQL)
+guides/sql.md (PostgreSQL/MySQL)
   ↓
-redis.md
+guides/redis.md
   ↓
 examples/middleware_basic_usage.rs
 ```
 
 ### 🎓 中级路径 (2-3周)
 
-1. **消息队列**: [mq.md](./mq.md)
-2. **Kafka**: [kafka_pingora.md](./kafka_pingora.md)
-3. **Pingora**: [pingora.md](./pingora.md)
+1. **消息队列**: [guides/mq.md](./guides/mq.md)
+2. **Kafka**: [guides/kafka_pingora.md](./guides/kafka_pingora.md)
+3. **Pingora**: [guides/pingora.md](./guides/pingora.md)
 4. **性能优化**: 基准测试分析
 
 **推荐阅读顺序**:
 
 ```text
-mq.md
+guides/mq.md
   ↓
-kafka_pingora.md
+guides/kafka_pingora.md
   ↓
 examples/message_queue.rs
   ↓
@@ -179,10 +179,10 @@ examples/message_queue.rs
 
 ### 🔬 高级路径 (4周+)
 
-1. **Rust 1.90特性**: [RUST_190_FEATURES_GUIDE.md](./RUST_190_FEATURES_GUIDE.md)
+1. **Rust 1.90特性**: [references/RUST_190_FEATURES_GUIDE.md](./references/RUST_190_FEATURES_GUIDE.md)
 2. **运行时分析**: glommio集成
-3. **跨行业分析**: 生态系统研究
-4. **形式化验证**: 安全性证明
+3. **跨行业分析**: [analysis/rust190_ecosystem/02_cross_industry_analysis/](./analysis/rust190_ecosystem/02_cross_industry_analysis/)
+4. **形式化验证**: [analysis/rust190_ecosystem/01_formal_verification/](./analysis/rust190_ecosystem/01_formal_verification/)
 
 ---
 
@@ -192,25 +192,25 @@ examples/message_queue.rs
 
 | 需求 | 推荐方案 | 文档 |
 |------|---------|------|
-| 数据持久化 | PostgreSQL + Diesel/sqlx | [sql.md](./sql.md) |
-| 会话管理 | Redis | [redis.md](./redis.md) |
-| 异步任务 | Redis + Celery-like | [mq.md](./mq.md) |
+| 数据持久化 | PostgreSQL + Diesel/sqlx | [guides/sql.md](./guides/sql.md) |
+| 会话管理 | Redis | [guides/redis.md](./guides/redis.md) |
+| 异步任务 | Redis + Celery-like | [guides/mq.md](./guides/mq.md) |
 
 ### 微服务架构
 
 | 需求 | 推荐方案 | 文档 |
 |------|---------|------|
-| 服务间通信 | Kafka/NATS | [kafka_pingora.md](./kafka_pingora.md) |
-| API网关 | Pingora | [pingora.md](./pingora.md) |
-| 配置中心 | Redis | [redis.md](./redis.md) |
+| 服务间通信 | Kafka/NATS | [guides/kafka_pingora.md](./guides/kafka_pingora.md) |
+| API网关 | Pingora | [guides/pingora.md](./guides/pingora.md) |
+| 配置中心 | Redis | [guides/redis.md](./guides/redis.md) |
 
 ### 实时数据处理
 
 | 需求 | 推荐方案 | 文档 |
 |------|---------|------|
-| 流式处理 | Kafka | [kafka_pingora.md](./kafka_pingora.md) |
-| 实时缓存 | Redis | [redis.md](./redis.md) |
-| IoT消息 | MQTT | [mq.md](./mq.md) |
+| 流式处理 | Kafka | [guides/kafka_pingora.md](./guides/kafka_pingora.md) |
+| 实时缓存 | Redis | [guides/redis.md](./guides/redis.md) |
+| IoT消息 | MQTT | [guides/mq.md](./guides/mq.md) |
 
 ---
 
@@ -218,15 +218,47 @@ examples/message_queue.rs
 
 ### 项目文档
 
+- **[文档中心](./README.md)** - 📚 文档主入口
+- **[完整索引](./COMPREHENSIVE_DOCUMENTATION_INDEX.md)** - 📋 综合文档索引
 - [顶层 README](../README.md) - 项目概述
-- [综合进度报告](../COMPREHENSIVE_PROGRESS_REPORT_2025_09_28.md) - 项目状态
-- [Rust 1.90分析](../RUST_190_ENHANCEMENT_ANALYSIS.md) - 版本特性
+- [常见问题](./FAQ.md) - FAQ
+- [术语表](./Glossary.md) - 概念定义
 
-### 分析文档
+### 使用指南
 
-- [生态系统分析](../COMPREHENSIVE_RUST_190_ECOSYSTEM_ANALYSIS.md)
-- [形式化验证](../analysis/rust190_ecosystem/01_formal_verification/formal_verification_framework.md)
-- [跨行业对比](../analysis/rust190_ecosystem/02_cross_industry_analysis/cross_industry_comparison.md)
+- [SQL 数据库](./guides/sql.md) - PostgreSQL/MySQL/SQLite
+- [Redis 缓存](./guides/redis.md) - Redis 使用指南
+- [消息队列](./guides/mq.md) - NATS/MQTT
+- [Kafka](./guides/kafka_pingora.md) - Kafka 集成
+- [Pingora](./guides/pingora.md) - HTTP 代理
+
+### 参考文档
+
+- [Rust 1.90 特性](./references/RUST_190_FEATURES_GUIDE.md) - Rust 特性指南
+- [API 文档](./references/README.md) - API 和配置参考
+
+### 教程资源
+
+- [教程中心](./tutorials/README.md) - 系统化教程（规划中）
+
+### 高级主题
+
+- [高级主题](./advanced/README.md) - 深度技术内容（规划中）
+
+### 技术分析
+
+- [分析中心](./analysis/README.md) - 技术分析总览
+- [生态系统分析](./reports/COMPREHENSIVE_RUST_190_ECOSYSTEM_ANALYSIS.md)
+- [形式化验证](./analysis/rust190_ecosystem/01_formal_verification/formal_verification_framework.md)
+- [跨行业对比](./analysis/rust190_ecosystem/02_cross_industry_analysis/cross_industry_comparison.md)
+- [性能分析](./analysis/rust190_ecosystem/03_performance_benchmarks/performance_analysis.md)
+- [安全分析](./analysis/rust190_ecosystem/04_security_analysis/security_comprehensive_analysis.md)
+
+### 项目报告
+
+- [进度报告](./reports/COMPREHENSIVE_PROGRESS_REPORT_2025_09_28.md) - 项目状态
+- [技术报告](./reports/) - 所有技术报告
+- [修复总结](./reports/) - 问题修复记录
 
 ---
 
@@ -253,15 +285,18 @@ examples/message_queue.rs
 
 ### 2025-10-19
 
-- ✅ 创建主索引文档
-- ✅ 完善文档导航结构
+- ✅ 重组文档结构
+- ✅ 创建清晰的目录分类
+- ✅ 建立完整的文档索引体系
+- ✅ 更新所有文档链接
 
-### 2025年
+### 2025年9月
 
 - ✅ 集成 Rust 1.90 特性
 - ✅ 添加 Pingora 支持
 - ✅ 完善性能基准测试
 - ✅ glommio 运行时集成
+- ✅ 完成大量技术分析报告
 
 ---
 
@@ -278,5 +313,19 @@ examples/message_queue.rs
 
 **文档维护**: Rust 学习社区  
 **更新频率**: 跟随项目进度持续更新  
-**文档版本**: v1.0  
+**文档版本**: v2.0  
+**最后更新**: 2025-10-19  
 **Rust 版本**: 1.90+
+
+---
+
+## 📍 其他重要文档
+
+- **[文档中心](./README.md)** - 文档总入口
+- **[完整文档索引](./COMPREHENSIVE_DOCUMENTATION_INDEX.md)** - 查找所有文档
+- **[使用指南汇总](./guides/README.md)** - 中间件使用指南
+- **[参考文档汇总](./references/README.md)** - API 和配置参考
+- **[教程中心](./tutorials/README.md)** - 系统化教程
+- **[高级主题汇总](./advanced/README.md)** - 深度技术内容
+- **[技术分析汇总](./analysis/README.md)** - 技术分析和研究
+- **[项目报告汇总](./reports/README.md)** - 进度和技术报告
