@@ -225,7 +225,18 @@ cargo run -p c08_algorithms --bin bench_report > report.csv
 **完整文档索引**: [docs/00_MASTER_INDEX.md](docs/00_MASTER_INDEX.md)  
 **文档入口**: [docs/README.md](docs/README.md)
 
-本项目拥有完整的文档体系，包含 **33 个文档**，按内容类型和难度分为 6 个主要目录：
+本项目拥有完整的文档体系，包含 **39+ 个文档**，按内容类型和难度分为多个主要目录：
+
+### 🆕 新增学习资源 (2025-10-19)
+
+| 资源 | 说明 | 特色 |
+|------|------|------|
+| [知识图谱](docs/KNOWLEDGE_GRAPH.md) | 算法关系、依赖、演化路径 | 📊 图表化展示 |
+| [多维矩阵对比](docs/MULTIDIMENSIONAL_MATRIX_COMPARISON.md) | 全方位算法对比分析 | 🎯 决策支持 |
+| [思维导图](docs/MIND_MAP.md) | 算法学习路径可视化 | 🧠 结构化学习 |
+| [Rust 1.90 示例集](docs/RUST_190_RICH_EXAMPLES.md) | 60+ 丰富的代码示例 | 💻 实战代码 |
+| [交互式学习指南](docs/INTERACTIVE_LEARNING_GUIDE.md) | 渐进式学习路径 | 🎓 自我评估 |
+| [可视化示例库](docs/VISUAL_CODE_EXAMPLES.md) | 算法执行过程可视化 | 🎨 动画演示 |
 
 ### 📚 文档分类
 
@@ -293,16 +304,19 @@ Rust 1.89、1.90 和 Edition 2024 的特性应用：
 ### 🔥 推荐文档
 
 **新手必读**:
+
 1. [算法基础教程](docs/references/08_algorithms_basics.md)
 2. [算法复杂度分析](docs/guides/algorithm_complexity.md)
 3. [数据结构实现](docs/guides/data_structures.md)
 
 **进阶阅读**:
+
 1. [异步算法指南](docs/guides/async_algorithms.md)
 2. [Actor/Reactor/CSP 模式](docs/theory/ACTOR_REACTOR_CSP_PATTERNS.md)
 3. [性能优化技巧](docs/guides/performance_optimization.md)
 
 **理论深入**:
+
 1. [算法分类与形式化](docs/theory/ALGORITHM_CLASSIFICATION_AND_MODELS.md)
 2. [异步同步等价关系](docs/theory/ASYNC_SYNC_EQUIVALENCE_ALGORITHMS.md)
 3. [控制流执行流等价性](docs/theory/CONTROL_FLOW_EXECUTION_FLOW_EQUIVALENCE.md)

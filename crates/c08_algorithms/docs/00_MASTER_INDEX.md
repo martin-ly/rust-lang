@@ -29,18 +29,36 @@
 | [性能优化](./guides/performance_optimization.md) | 性能优化技巧 | ⭐⭐ |
 | [Rust 1.90 特性](./rust-features/RUST_190_FEATURES_APPLICATION.md) | 最新特性应用 | ⭐⭐ |
 
+### 🆕 新增资源 (2025-10-19)
+
+| 文档 | 说明 | 特色 |
+|------|------|------|
+| [知识图谱](./KNOWLEDGE_GRAPH.md) | 算法关系、依赖、演化路径 | 📊 图表化展示 |
+| [多维矩阵对比](./MULTIDIMENSIONAL_MATRIX_COMPARISON.md) | 全方位算法对比分析 | 🎯 决策支持 |
+| [思维导图](./MIND_MAP.md) | 算法学习路径可视化 | 🧠 结构化学习 |
+| [Rust 1.90 示例集](./RUST_190_RICH_EXAMPLES.md) | 丰富的代码示例 | 💻 实战代码 |
+| [交互式学习指南](./INTERACTIVE_LEARNING_GUIDE.md) | 渐进式学习路径 | 🎓 自我评估 |
+| [可视化示例库](./VISUAL_CODE_EXAMPLES.md) | 算法执行过程可视化 | 🎨 动画演示 |
+
 ---
 
 ## 🗂️ 文档目录结构
 
 ```text
 docs/
-├── 00_MASTER_INDEX.md          # 📍 本文档（主索引）
-├── README.md                   # 文档入口
-├── FAQ.md                      # 常见问题
-├── Glossary.md                 # 术语表
+├── 00_MASTER_INDEX.md                         # 📍 本文档（主索引）
+├── README.md                                  # 文档入口
+├── FAQ.md                                     # 常见问题
+├── Glossary.md                                # 术语表
 │
-├── guides/                     # 📖 实用指南（基础到中级）
+├── 🆕 KNOWLEDGE_GRAPH.md                      # 📊 算法知识图谱
+├── 🆕 MULTIDIMENSIONAL_MATRIX_COMPARISON.md   # 🎯 多维矩阵对比
+├── 🆕 MIND_MAP.md                             # 🧠 思维导图
+├── 🆕 RUST_190_RICH_EXAMPLES.md               # 💻 Rust 1.90 丰富示例
+├── 🆕 INTERACTIVE_LEARNING_GUIDE.md           # 🎓 交互式学习指南
+├── 🆕 VISUAL_CODE_EXAMPLES.md                 # 🎨 可视化示例库
+│
+├── guides/                                    # 📖 实用指南（基础到中级）
 │   ├── README.md
 │   ├── algorithm_complexity.md
 │   ├── data_structures.md
@@ -48,7 +66,7 @@ docs/
 │   ├── performance_optimization.md
 │   └── benchmarking_guide.md
 │
-├── theory/                     # 🔬 理论文档（高级）
+├── theory/                                    # 🔬 理论文档（高级）
 │   ├── README.md
 │   ├── ALGORITHM_CLASSIFICATION_AND_MODELS.md
 │   ├── FORMAL_ALGORITHM_MODELS.md
@@ -58,24 +76,24 @@ docs/
 │   ├── ACTOR_REACTOR_CSP_PATTERNS.md
 │   └── ASYNC_RECURSION_ANALYSIS.md
 │
-├── advanced/                   # 🚀 高级专题（中级到高级）
+├── advanced/                                  # 🚀 高级专题（中级到高级）
 │   ├── README.md
-│   └── algorithm_exp01-14.md   # 14个专题文档
+│   └── algorithm_exp01-14.md                  # 14个专题文档
 │
-├── rust-features/              # ✨ Rust 特性
+├── rust-features/                             # ✨ Rust 特性
 │   ├── README.md
 │   ├── rust_189_features.md
 │   ├── RUST_189_FEATURES_GUIDE.md
 │   ├── RUST_190_FEATURES_APPLICATION.md
 │   └── Edition_2024_Features.md
 │
-├── references/                 # 📚 参考资料
+├── references/                                # 📚 参考资料
 │   ├── README.md
 │   ├── algorithm_index.md
 │   ├── ALGORITHM_INDEX_RUST_189.md
 │   └── 08_algorithms_basics.md
 │
-└── archives/                   # 📦 归档文档
+└── archives/                                  # 📦 归档文档
     ├── README.md
     ├── OVERVIEW.md
     └── DOCUMENTATION_INDEX.md

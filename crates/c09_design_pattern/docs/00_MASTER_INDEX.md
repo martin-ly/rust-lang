@@ -28,6 +28,10 @@
 | **入门指南** | [README](./README.md) | 项目概述和快速开始 |
 | **概览** | [OVERVIEW](./OVERVIEW.md) | 文档结构和阅读路径 |
 | **综合指南** | [COMPREHENSIVE_DESIGN_PATTERNS_GUIDE](./COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) | 完整的模式理论与实践 |
+| **知识图谱** 🆕 | [KNOWLEDGE_GRAPH](./KNOWLEDGE_GRAPH.md) | 模式关系网络与组合策略 |
+| **多维矩阵** 🆕 | [MULTIDIMENSIONAL_MATRIX_COMPARISON](./MULTIDIMENSIONAL_MATRIX_COMPARISON.md) | 7维度性能对比分析 |
+| **思维导图** 🆕 | [MIND_MAP](./MIND_MAP.md) | 可视化学习路径与决策树 |
+| **Rust 1.90示例** 🆕 | [RUST_190_EXAMPLES](./RUST_190_EXAMPLES.md) | 最新特性完整示例集 |
 | **FAQ** | [FAQ](./FAQ.md) | 常见问题解答 |
 | **术语表** | [Glossary](./Glossary.md) | 核心概念快速参考 |
 
@@ -314,8 +318,14 @@ cargo bench -p c09_design_pattern
 
 ## 🆕 最新更新
 
-### 2025-10-19
+### 2025-10-19 - 重大更新 🎉
 
+- ✅ **新增知识图谱文档** (KNOWLEDGE_GRAPH.md) - 展示模式关系网络
+- ✅ **新增多维矩阵对比文档** (MULTIDIMENSIONAL_MATRIX_COMPARISON.md) - 7维度全面对比
+- ✅ **新增思维导图文档** (MIND_MAP.md) - 可视化学习路径
+- ✅ **新增Rust 1.90示例集** (RUST_190_EXAMPLES.md) - 100+完整示例
+- ✅ **新增综合增强报告** (C09_COMPREHENSIVE_ENHANCEMENT_REPORT_2025_10_19.md)
+- ✅ **50+个Mermaid可视化图表**
 - ✅ 创建主索引文档
 - ✅ 完善文档导航结构
 - ✅ 添加学习路径指导
