@@ -1,7 +1,7 @@
 # Rust 类型系统完整指南 - 主索引
 
-**版本**: 2.0 - 重新组织版  
-**最后更新**: 2025-01-27  
+**版本**: 2.1 - Rust 版本特性整合版  
+**最后更新**: 2025-10-19  
 **状态**: 全面重构中  
 
 ## 🎯 快速导航
@@ -50,6 +50,13 @@
 - [常见陷阱](./05_practice/03_common_pitfalls.md) - 常见错误和解决方案 ⭐⭐
 - [性能调优](./05_practice/04_performance_tuning.md) - 性能优化技巧 ⭐⭐⭐
 
+#### 🚀 Rust 版本特性
+
+- [Rust 版本特性索引](./06_rust_features/README.md) - Rust 版本特性总览 ⭐⭐⭐
+- [Rust 1.90 综合指南](./06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md) - 最新特性 ⭐⭐⭐
+- [Rust 1.90 完成报告](./06_rust_features/FINAL_RUST_190_COMPLETION_REPORT.md) - 项目实现状态 ⭐⭐
+- [Rust 1.89 综合特性](./06_rust_features/RUST_189_COMPREHENSIVE_FEATURES.md) - 稳定版特性 ⭐⭐
+
 ### 📖 按难度浏览
 
 #### 🟢 初级 (0-3个月)
@@ -96,6 +103,13 @@
 - [编译时计算](./03_advanced/04_type_inference.md)
 - [性能调优](./05_practice/04_performance_tuning.md)
 
+#### 🆕 最新特性
+
+- [Rust 1.90 综合指南](./06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md)
+- [Rust 1.90 特性分析](./06_rust_features/RUST_190_FEATURES_ANALYSIS_REPORT.md)
+- [项目更新总结](./06_rust_features/RUST_190_PROJECT_UPDATE_SUMMARY.md)
+- [完成报告](./06_rust_features/FINAL_RUST_190_COMPLETION_REPORT.md)
+
 ## 📊 文档统计
 
 | 类别 | 文档数量 | 平均长度 | 完成度 |
@@ -105,6 +119,7 @@
 | **高级特性** | 4 | 250+ 行 | 85% |
 | **安全优化** | 4 | 400+ 行 | 95% |
 | **实践应用** | 4 | 500+ 行 | 95% |
+| **Rust 版本特性** | 6 | 400+ 行 | 95% |
 
 ## 🔄 重构进度
 
@@ -117,6 +132,7 @@
 - [x] 安全优化文档完善
 - [x] 实践应用文档完善
 - [x] 交叉引用建立
+- [x] Rust 版本特性文档整理 (2025-10-19)
 
 ### 🚧 进行中
 
@@ -148,6 +164,7 @@
 
 ---
 
-**最后更新**: 2025年1月27日  
+**最后更新**: 2025年10月19日  
 **维护状态**: 活跃维护中  
-**质量等级**: 重构中
+**质量等级**: 重构中  
+**新增内容**: Rust 版本特性文档整合

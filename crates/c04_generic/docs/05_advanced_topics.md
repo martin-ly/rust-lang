@@ -1,6 +1,20 @@
 # 05. 高级泛型主题 (Advanced Generic Topics)
 
-本章探讨由 Rust 泛型系统引申出的一些更深入、更具理论性的主题，包括多态的两种主要形式，以及在类型级别进行抽象的更高层次的概念。
+> **文档定位**: 深入探讨泛型系统的高级主题，包括多态、类型构造器和高阶类型  
+> **先修知识**: [关联类型](./04_associated_types.md), 所有前置主题  
+> **相关文档**: [实践指南](./PRACTICAL_GENERICS_GUIDE.md) | [版本历史](./06_rust_features/RUST_VERSION_HISTORY_ACCURATE.md)
+
+**最后更新**: 2025-10-19  
+**适用版本**: Rust 1.75+ (包含GATs和RPITIT)  
+**难度等级**: ⭐⭐⭐⭐
+
+---
+
+## 📋 本文内容
+
+本章探讨由 Rust 泛型系统引申出的一些更深入、更具理论性的主题，包括多态的两种主要形式，以及在类型级别进行抽象的更高层次的概念。同时介绍截至2025年10月的最新泛型特性进展。
+
+---
 
 ## 5.1. Rust 中的多态 (Polymorphism)
 
@@ -94,12 +108,113 @@ impl<T> Functor<Option<_>> for ... { ... }
 
 `Functor` Trait 本身是泛型的，它泛化的不是一个具体的类型 `T`，而是一个类型构造器 `F`。
 
-**当前状态**:
-目前，**Rust 稳定版不直接支持 HKT**。这是 Rust 类型系统中最受期待也最复杂的待实现特性之一。虽然社区通过一些复杂的编码模式（如 a-la-carte 模式）进行模拟，但原生支持仍在探索中。类似 `generic_const_exprs` 等特性的发展，标志着 Rust 的类型系统正逐步变得更强大，为未来可能支持 HKT 等高级概念奠定基础。
+**当前状态 (2025年10月)**:
+目前，**Rust 稳定版不直接支持 HKT**。这是 Rust 类型系统中最受期待也最复杂的待实现特性之一。虽然社区通过一些复杂的编码模式（如 a-la-carte 模式）进行模拟，但原生支持仍在探索中。
 
 ---
 
-**章节导航:**
+## 5.4. 现代泛型特性进展 (2025年更新) 🆕
 
-* **上一章 ->** `04_associated_types.md`
-* **返回目录 ->** `_index.md`
+截至2025年10月，Rust泛型系统已经取得了重大进展：
+
+### 5.4.1. GATs - Generic Associated Types (已稳定)
+
+**稳定版本**: Rust 1.65 (2022年11月)  
+**状态**: ✅ 完全稳定
+
+GATs是Rust泛型系统的重大突破，允许在关联类型上使用泛型参数：
+
+```rust
+// GATs 实际应用示例
+trait LendingIterator {
+    type Item<'a> where Self: 'a;
+    
+    fn next(&mut self) -> Option<Self::Item<'_>>;
+}
+
+// 实现：返回可变引用的迭代器
+impl<'data, T> LendingIterator for WindowsMut<'data, T> {
+    type Item<'a> = &'a mut [T] where Self: 'a;
+    
+    fn next(&mut self) -> Option<Self::Item<'_>> {
+        // 实现细节
+        None
+    }
+}
+```
+
+**影响**: 解决了长期存在的"流式迭代器"问题，允许更灵活的trait设计。
+
+### 5.4.2. RPITIT - Return Position Impl Trait In Traits (已稳定)
+
+**稳定版本**: Rust 1.75 (2023年12月)  
+**状态**: ✅ 完全稳定
+
+RPITIT允许在trait方法中直接返回 `impl Trait`，避免了 `Box<dyn>` 的运行时开销：
+
+```rust
+// RPITIT 实际应用示例
+trait AsyncRepository {
+    // 直接返回 impl Future，无需Box
+    fn find_by_id(&self, id: u64) -> impl Future<Output = Option<String>> + Send;
+}
+
+impl AsyncRepository for MemoryRepository {
+    async fn find_by_id(&self, id: u64) -> Option<String> {
+        self.data.get(&id).cloned()
+    }
+}
+```
+
+**影响**: 简化了异步trait的定义，保持了零成本抽象。
+
+### 5.4.3. 常量泛型改进
+
+**持续改进中**: Rust 1.51+ 引入基础功能，1.89+ 改进推断
+
+```rust
+// 常量泛型 + 显式推断 (Rust 1.89+)
+pub fn all_false<const LEN: usize>() -> [bool; LEN] {
+    [false; _]  // 编译器推断 _ 为 LEN
+}
+
+// 实际应用：类型安全的固定大小缓冲区
+struct Buffer<T, const N: usize> {
+    data: [T; N],
+    len: usize,
+}
+```
+
+### 5.4.4. 未来展望
+
+**正在探索的特性**:
+
+* **specialization**: 特化（部分实现）
+* **HKT**: 高阶类型（长期目标）
+* **更好的const泛型**: 支持更复杂的常量表达式
+
+**建议**:
+
+* 使用 Rust 1.75+ 以获得所有现代泛型特性
+* 关注 [Rust Blog](https://blog.rust-lang.org/) 了解最新进展
+* 参考 [版本历史文档](./06_rust_features/RUST_VERSION_HISTORY_ACCURATE.md) 获取准确信息
+
+---
+
+## 📚 相关资源
+
+* [实践指南](./PRACTICAL_GENERICS_GUIDE.md) - 实际代码示例
+* [版本历史](./06_rust_features/RUST_VERSION_HISTORY_ACCURATE.md) - 准确的特性时间线
+* [主索引](./00_MASTER_INDEX.md) - 文档导航
+
+## 🔗 外部参考
+
+* [Rust Book - Advanced Topics](https://doc.rust-lang.org/book/ch19-00-advanced-features.html)
+* [RFC 1598: GATs](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)
+* [RFC 3425: RPITIT](https://rust-lang.github.io/rfcs/3425-return-position-impl-trait-in-traits.html)
+
+---
+
+**文档维护**: 定期更新以跟进Rust版本  
+**最后审核**: 2025-10-19  
+**下次更新**: Rust 1.91 发布后

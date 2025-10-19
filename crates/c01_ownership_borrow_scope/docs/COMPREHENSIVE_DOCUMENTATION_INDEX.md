@@ -17,6 +17,7 @@
       - [3.2 模式参考](#32-模式参考)
   - [快速导航](#快速导航)
     - [按主题分类](#按主题分类)
+      - [Rust 版本特性 🆕](#rust-版本特性-)
       - [所有权系统](#所有权系统)
       - [借用系统](#借用系统)
       - [生命周期系统](#生命周期系统)
@@ -106,6 +107,17 @@
 ## 快速导航
 
 ### 按主题分类
+
+#### Rust 版本特性 🆕
+
+- [Rust 版本特性索引](./06_rust_features/README.md) - 完整的版本特性导航
+- **Rust 1.90 文档系列**:
+  - [Rust 1.90 所有权和借用系统全面指南](./06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md) - 初级到中级（80分钟）
+  - [Rust 1.90 版本所有权、借用与作用域特性全面分析](./06_rust_features/RUST_190_COMPREHENSIVE_FEATURES.md) - 高级（70分钟）
+  - [Rust 1.90 特性增强总结](./06_rust_features/RUST_190_ENHANCEMENT_SUMMARY.md) - 中级（40分钟）
+- **Rust 1.89 文档系列**:
+  - [Rust 1.89 版本所有权、借用与作用域系统全面特性分析](./06_rust_features/RUST_189_COMPREHENSIVE_FEATURES.md) - 中级到高级（50分钟）
+  - [Rust 1.89 版本详细特性分析](./06_rust_features/RUST_189_DETAILED_FEATURES.md) - 高级（60分钟）
 
 #### 所有权系统
 

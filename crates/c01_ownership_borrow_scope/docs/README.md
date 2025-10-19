@@ -47,6 +47,37 @@
 - [⚠️ 常见陷阱](./05_practice/03_common_pitfalls.md) - 常见错误和解决方案 ⭐⭐
 - [🚀 性能调优](./05_practice/04_performance_tuning.md) - 性能优化技巧 ⭐⭐⭐
 
+### 🆕 Rust 版本特性
+
+#### Rust 1.90 特性文档 🌟
+
+- [📖 Rust 1.90 所有权和借用系统全面指南](./06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md) - 最全面的 Rust 1.90 入门指南 ⭐⭐⭐
+  - 难度: 初级到中级 | 阅读时长: 80 分钟
+  - 所有权规则、借用系统、生命周期、智能指针完整讲解
+  
+- [🔬 Rust 1.90 版本特性全面分析](./06_rust_features/RUST_190_COMPREHENSIVE_FEATURES.md) - 深度技术分析 ⭐⭐⭐
+  - 难度: 高级 | 阅读时长: 70 分钟
+  - Rust 2024 Edition、所有权增强、借用优化、作用域管理
+  
+- [📝 Rust 1.90 特性增强总结](./06_rust_features/RUST_190_ENHANCEMENT_SUMMARY.md) - 项目增强说明 ⭐⭐
+  - 难度: 中级 | 阅读时长: 40 分钟
+  - 版本升级、新增模块、文档示例、性能改进
+
+#### Rust 1.89 特性文档
+
+- [📊 Rust 1.89 全面特性分析](./06_rust_features/RUST_189_COMPREHENSIVE_FEATURES.md) - 版本核心改进 ⭐⭐
+  - 难度: 中级到高级 | 阅读时长: 50 分钟
+  - 编译器优化、生命周期增强、工具链改进
+  
+- [📋 Rust 1.89 详细特性分析](./06_rust_features/RUST_189_DETAILED_FEATURES.md) - 深入技术细节 ⭐⭐⭐
+  - 难度: 高级 | 阅读时长: 60 分钟
+  - 借用检查器详解、性能基准测试、迁移指南
+
+#### 📂 版本特性目录
+
+- [🗂️ Rust 版本特性文档索引](./06_rust_features/README.md) - 完整的版本特性导航
+  - 版本对比、学习路径建议、快速参考
+
 ### 📚 历史文档
 
 #### 🏠 所有权系统

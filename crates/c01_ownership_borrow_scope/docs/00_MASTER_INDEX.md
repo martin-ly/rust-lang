@@ -48,6 +48,15 @@
 
 - [设计模式](./05_practice/01_design_patterns.md) - 所有权设计模式 ⭐⭐
 - [最佳实践](./05_practice/02_best_practices.md) - 编程最佳实践 ⭐⭐⭐
+
+#### 🆕 Rust 版本特性
+
+- [Rust 版本特性索引](./06_rust_features/README.md) - 版本特性导航 ⭐⭐⭐
+- [Rust 1.90 全面指南](./06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md) - 最全面的入门指南 ⭐⭐⭐
+- [Rust 1.90 特性分析](./06_rust_features/RUST_190_COMPREHENSIVE_FEATURES.md) - 深度技术分析 ⭐⭐⭐
+- [Rust 1.90 增强总结](./06_rust_features/RUST_190_ENHANCEMENT_SUMMARY.md) - 项目增强说明 ⭐⭐
+- [Rust 1.89 特性分析](./06_rust_features/RUST_189_COMPREHENSIVE_FEATURES.md) - 版本核心改进 ⭐⭐
+- [Rust 1.89 详细分析](./06_rust_features/RUST_189_DETAILED_FEATURES.md) - 深入技术细节 ⭐⭐⭐
 - [常见陷阱](./05_practice/03_common_pitfalls.md) - 常见错误和解决方案 ⭐⭐
 - [性能调优](./05_practice/04_performance_tuning.md) - 性能优化技巧 ⭐⭐⭐
 

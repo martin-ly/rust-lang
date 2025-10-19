@@ -30,7 +30,7 @@
 
 ### 目录结构
 
-```
+```text
 docs/
 ├── 00_MASTER_INDEX.md              # 主索引和导航
 ├── 01_theory/                      # 理论基础
