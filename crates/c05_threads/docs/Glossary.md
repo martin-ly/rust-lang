@@ -18,7 +18,8 @@
 
 ## 目录
 
-- [术语表 (Glossary) - C05 并发](#术语表-glossary---c05-并发)
+- [C05: 术语表 (Glossary)](#c05-术语表-glossary)
+  - [📋 术语索引](#-术语索引)
   - [目录](#目录)
   - [术语](#术语)
     - [`Arc<T>` (Atomically Reference Counted)](#arct-atomically-reference-counted)

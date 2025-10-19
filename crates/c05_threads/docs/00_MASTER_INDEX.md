@@ -88,18 +88,22 @@
 **目标**: 快速掌握基本并发编程，能够编写简单的多线程程序
 
 **Day 1**: 基础概念
+
 - [README](./README.md)
 - [01_threads_and_ownership](./01_threads_and_ownership.md)
 - [01_basic_threading](./01_basic_threading.md)
 
 **Day 2**: 并发范式 - 消息传递
+
 - [02_message_passing](./02_message_passing.md)
 
 **Day 3**: 并发范式 - 共享状态
+
 - [03_synchronization_primitives](./03_synchronization_primitives.md)
 - [02_thread_synchronization](./02_thread_synchronization.md)
 
 **Day 4-5**: 实践练习
+
 - 查看 [`examples/`](../examples/) 中的示例
 - 运行测试: `cargo test -p c05_threads`
 
@@ -223,7 +227,7 @@
 
 - 并发vs并行 → [04_parallelism_and_beyond](./04_parallelism_and_beyond.md)
 - Send/Sync → [FAQ](./FAQ.md#q1-send-和-sync-到底有什么区别我总是搞混)
-- Arc<Mutex<T>> → [FAQ](./FAQ.md#q3-arcmutext-看起来很笨重它到底是怎么工作的)
+- `Arc<Mutex<T>>` → [FAQ](./FAQ.md#q3-arcmutext-看起来很笨重它到底是怎么工作的)
 
 **我遇到问题...**:
 
@@ -269,12 +273,14 @@
 ### 重要概念
 
 **核心概念**:
+
 - **Send**: 类型可以安全地在线程间传递所有权
 - **Sync**: 类型可以安全地在线程间共享引用
 - **所有权**: Rust的核心安全保障
 - **借用检查**: 编译时的安全验证
 
 **并发模式**:
+
 - **消息传递**: 通过通道通信，不共享内存
 - **共享状态**: 使用Mutex/RwLock保护共享数据
 - **无锁编程**: 使用原子操作避免锁开销
@@ -302,6 +308,7 @@
 本文档索引是在2025-10-19创建的，目前c05_threads模块正在进行文档梳理：
 
 **已发现的问题**:
+
 1. 存在重复编号的文档（需要整合）
 2. 文档格式不统一（正在统一）
 3. 部分文档需要验证版本信息
@@ -332,4 +339,3 @@
 **维护状态**: 🔧 整理中
 
 🚀 **文档梳理工作正在进行中，敬请期待！**
-

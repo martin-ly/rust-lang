@@ -1,407 +1,464 @@
 # C06 异步编程 - 主索引
 
-> **文档定位**: 本文档是C06异步编程模块的完整索引系统，提供所有文档的分类导航、学习路径和快速查找。初次访问建议从 [README.md](./README.md) 开始。
-
-## 📚 文档导航总览
-
-本索引提供 `c06_async` 模块所有文档的快速访问入口，帮助您快速找到所需的学习资源和参考文档。
+> **文档定位**: 本文档是C06异步编程模块的完整导航系统，提供清晰的文档分类和学习路径。
 
 **最后更新**: 2025-10-19  
-**文档版本**: v1.0  
+**文档版本**: v2.0 (重组后)  
 **Rust 版本**: 1.75+ (推荐 1.90+)  
-**文档状态**: 🔧 整理中 (已有67个文档)
+**文档状态**: ✅ 已重组
+
+---
+
+## 📚 文档结构总览
+
+```text
+docs/
+├── README.md                   # 📖 主入口文档
+├── 00_MASTER_INDEX.md         # 📋 本文档 - 完整导航
+├── FAQ.md                      # ❓ 常见问题
+├── Glossary.md                 # 📚 术语表
+│
+├── guides/                     # 📚 学习指南 (6个文档)
+│   ├── 01_quick_start.md
+│   ├── 02_basics.md
+│   ├── 03_advanced_topics.md
+│   ├── 04_best_practices.md
+│   ├── 05_style_guide.md
+│   └── 06_run_guide.md
+│
+├── core/                       # 🎓 核心概念系列 (6个文档)
+│   ├── 01_introduction_and_philosophy.md
+│   ├── 02_runtime_and_execution_model.md
+│   ├── 03_pinning_and_unsafe_foundations.md
+│   ├── 04_streams_and_sinks.md
+│   ├── 05_async_in_traits_and_ecosystem.md
+│   └── 06_critical_analysis_and_advanced_topics.md
+│
+├── runtimes/                   # ⚙️ 运行时指南 (4个文档)
+│   ├── 01_comparison_2025.md
+│   ├── 02_tokio_best_practices.md
+│   ├── 03_smol_best_practices.md
+│   └── 04_cookbook.md
+│
+├── patterns/                   # 📐 设计模式 (3个文档)
+│   ├── 01_patterns_comparison.md
+│   ├── 02_patterns_and_pitfalls.md
+│   └── 03_advanced_patterns.md
+│
+├── performance/                # ⚡ 性能优化 (3个文档)
+│   ├── 01_optimization_guide.md
+│   ├── 02_benchmark_analysis.md
+│   └── 03_benchmark_results.md
+│
+├── ecosystem/                  # 🌐 生态系统 (3个文档)
+│   ├── 01_ecosystem_analysis_2025.md
+│   ├── 02_language_features_190.md
+│   └── 03_formal_methods.md
+│
+├── references/                 # 📖 API参考 (3个文档)
+│   ├── api_reference.md
+│   ├── utils_reference.md
+│   └── msrv_and_compatibility.md
+│
+├── comprehensive/              # 📘 综合指南 (2个文档)
+│   ├── comprehensive_guide_2025.md
+│   └── ultimate_guide_cn.md
+│
+├── views/                      # 👁️ 多视角分析 (20个文档)
+│   ├── basic/                  # 14个基础视角
+│   └── specialized/            # 6个专题视角
+│
+├── tools/                      # 🔧 工具与配置
+│   ├── tokio_console_tracing.md
+│   └── dashboards/
+│
+└── archives/                   # 📦 归档文档
+    ├── old_readmes/
+    ├── completion_reports/
+    └── deprecated/
+```
 
 ---
 
 ## 🎯 快速开始
 
-### 新手入门
+### 🆕 第一次访问？
 
-如果您是第一次学习 Rust 异步编程，推荐按以下顺序阅读：
+**推荐路径**:
 
-1. 📖 [README](./README.md) - 模块概览和快速导航
-2. 📖 [快速开始](./quick_start.md) 或 [QUICK_START_2025](./QUICK_START_2025.md)
-3. 📖 [01_introduction_and_philosophy](./01_introduction_and_philosophy.md) - 异步编程哲学
-4. 📖 [async_basics_guide](./async_basics_guide.md) - 异步基础指南
+1. 📖 [README.md](./README.md) - 了解模块概览
+2. 📚 [guides/01_quick_start.md](./guides/01_quick_start.md) - 快速上手
+3. 🎓 [core/01_introduction_and_philosophy.md](./core/01_introduction_and_philosophy.md) - 理解哲学
 
-### 进阶学习
+### 🔍 查找特定内容？
 
-已经掌握基础？继续深入学习：
+**按主题查找**:
 
-1. 📖 [02_runtime_and_execution_model](./02_runtime_and_execution_model.md) - 运行时模型
-2. 📖 [04_streams_and_sinks](./04_streams_and_sinks.md) - 流和接收器
-3. 📖 [05_async_in_traits_and_ecosystem](./05_async_in_traits_and_ecosystem.md) - 生态系统
-4. 🚀 [RUST_ASYNC_ECOSYSTEM_COMPREHENSIVE_ANALYSIS_2025](./RUST_ASYNC_ECOSYSTEM_COMPREHENSIVE_ANALYSIS_2025.md) - 2025综合分析
+- 学习入门 → [guides/](./guides/)
+- 深入理论 → [core/](./core/)
+- 运行时选择 → [runtimes/](./runtimes/)
+- 设计模式 → [patterns/](./patterns/)
+- 性能优化 → [performance/](./performance/)
 
----
+**按问题查找**:
 
-## 📂 文档分类索引
-
-### 1️⃣ 基础入门文档
-
-#### 核心概念系列 (01-06)
-
-- 📖 **[01_introduction_and_philosophy.md](./01_introduction_and_philosophy.md)** - 异步编程哲学
-- 📖 **[02_runtime_and_execution_model.md](./02_runtime_and_execution_model.md)** - 运行时和执行模型
-- 📖 **[03_pinning_and_unsafe_foundations.md](./03_pinning_and_unsafe_foundations.md)** - Pin和Unsafe基础
-- 📖 **[04_streams_and_sinks.md](./04_streams_and_sinks.md)** - 流和接收器
-- 📖 **[05_async_in_traits_and_ecosystem.md](./05_async_in_traits_and_ecosystem.md)** - Trait中的async
-- 📖 **[06_critical_analysis_and_advanced_topics.md](./06_critical_analysis_and_advanced_topics.md)** - 深度分析
-
-#### 快速入门
-
-- 📖 **[quick_start.md](./quick_start.md)** - 快速开始指南
-- 📖 **[QUICK_START_2025.md](./QUICK_START_2025.md)** - 2025版快速开始
-- 📖 **[run_guide.md](./run_guide.md)** - 运行指南
-
-#### 基础指南
-
-- 📖 **[async_basics_guide.md](./async_basics_guide.md)** - 异步基础指南
-- 📖 **[async_rust_190_overview.md](./async_rust_190_overview.md)** - Rust 1.90概览
-
-### 2️⃣ 运行时和生态系统
-
-#### 运行时对比
-
-- 📊 **[ASYNC_RUNTIME_COMPARISON_2025.md](./ASYNC_RUNTIME_COMPARISON_2025.md)** - 运行时对比 (2025)
-- 📊 **[tokio_best_practices_2025.md](./tokio_best_practices_2025.md)** - Tokio最佳实践
-- 📊 **[smol_best_practices_2025.md](./smol_best_practices_2025.md)** - Smol最佳实践
-- 📖 **[async_cookbook_tokio_smol.md](./async_cookbook_tokio_smol.md)** - Tokio/Smol实战手册
-
-#### 生态系统分析
-
-- 🔬 **[RUST_ASYNC_ECOSYSTEM_COMPREHENSIVE_ANALYSIS_2025.md](./RUST_ASYNC_ECOSYSTEM_COMPREHENSIVE_ANALYSIS_2025.md)** - 综合分析 (2025)
-- 🔬 **[async_ecosystem_comprehensive_analysis_2025.md](./async_ecosystem_comprehensive_analysis_2025.md)** - 生态系统分析
-- 🔬 **[async_ecosystem_comprehensive_analysis.md](./async_ecosystem_comprehensive_analysis.md)** - 生态系统分析 (旧版)
-
-### 3️⃣ 进阶主题文档
-
-#### 高级特性
-
-- 📄 **[async_advanced_topics.md](./async_advanced_topics.md)** - 高级主题
-- 📄 **[03_pinning_and_unsafe_foundations.md](./03_pinning_and_unsafe_foundations.md)** - Pin和Unsafe
-- 📄 **[formal_methods_async.md](./formal_methods_async.md)** - 形式化方法
-
-#### 性能优化
-
-- ⚡ **[async_performance_optimization_2025.md](./async_performance_optimization_2025.md)** - 性能优化 (2025)
-- ⚡ **[benchmark_analysis_guide.md](./benchmark_analysis_guide.md)** - 基准测试分析
-- ⚡ **[benchmark_results.md](./benchmark_results.md)** - 基准测试结果
-
-#### 模式和实践
-
-- 📄 **[async_patterns_and_pitfalls.md](./async_patterns_and_pitfalls.md)** - 模式和陷阱
-- 📄 **[ASYNC_PATTERNS_COMPARISON_2025.md](./ASYNC_PATTERNS_COMPARISON_2025.md)** - 模式对比 (2025)
-- 📄 **[advanced_patterns_summary.md](./advanced_patterns_summary.md)** - 高级模式总结
-
-### 4️⃣ 综合指南文档
-
-#### 2025最新综合指南
-
-- 📘 **[ASYNC_COMPREHENSIVE_GUIDE_2025.md](./ASYNC_COMPREHENSIVE_GUIDE_2025.md)** - 综合指南 (2025)
-- 📘 **[ULTIMATE_ASYNC_GUIDE_2025_CN.md](./ULTIMATE_ASYNC_GUIDE_2025_CN.md)** - 终极指南 (中文,2025)
-- 📘 **[ASYNC_SEMANTICS_COMPREHENSIVE_GUIDE.md](./ASYNC_SEMANTICS_COMPREHENSIVE_GUIDE.md)** - 语义综合指南
-
-#### 实现和总结
-
-- 📘 **[COMPREHENSIVE_ASYNC_IMPLEMENTATION_SUMMARY_2025.md](./COMPREHENSIVE_ASYNC_IMPLEMENTATION_SUMMARY_2025.md)** - 实现总结
-- 📘 **[COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md](./COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md)** - 知识分类
-
-### 5️⃣ 最佳实践和参考
-
-#### 最佳实践
-
-- 📖 **[async_best_practices.md](./async_best_practices.md)** - 最佳实践
-- 📖 **[async_style_guide.md](./async_style_guide.md)** - 风格指南
-
-#### API参考
-
-- 📋 **[api_reference.md](./api_reference.md)** - API参考
-- 📋 **[utils_reference.md](./utils_reference.md)** - 工具函数参考
-
-#### 工具和监控
-
-- 🔧 **[tokio_console_and_tracing.md](./tokio_console_and_tracing.md)** - Tokio Console和追踪
-
-### 6️⃣ 参考文档
-
-#### 常用参考
-
-- ❓ **[FAQ.md](./FAQ.md)** - 常见问题解答
-- 📚 **[Glossary.md](./Glossary.md)** - 术语表
-
-#### 版本和兼容性
-
-- 🚀 **[async_language_features_190.md](./async_language_features_190.md)** - Rust 1.90语言特性
-- 📋 **[msrv_and_compatibility.md](./msrv_and_compatibility.md)** - MSRV和兼容性
-
-### 7️⃣ 视角和分析文档 (view系列)
-
-#### 主视角文档 (view01-14)
-
-- 📊 **[view01-14.md](./view01.md)** - 多个分析视角 (14个文件)
-
-#### 子目录视角
-
-- 📊 **[views/](./views/)** - 专题分析视角
-  - rust_async_sync_view01-02
-  - rust_cpu_async_sync_view01
-  - rust_cpu_gpu_view01-03
-
-### 8️⃣ 项目完成报告
-
-- 📊 **[project_completion_summary.md](./project_completion_summary.md)** - 项目完成总结
-- 📊 **[异步编程全面梳理最终报告_2025_10_06.md](./异步编程全面梳理最终报告_2025_10_06.md)** - 最终报告
-
-### 9️⃣ AI和其他
-
-- 🤖 **[ai.md](./ai.md)** - AI相关
-- 📋 **[README (2).md](./README (2).md)** - 备用README
+- 遇到问题 → [FAQ.md](./FAQ.md)
+- 不懂术语 → [Glossary.md](./Glossary.md)
+- 常见陷阱 → [patterns/02_patterns_and_pitfalls.md](./patterns/02_patterns_and_pitfalls.md)
 
 ---
 
-## 🎓 推荐学习路径
+## 📂 目录详解
 
-### 路径 1: 快速入门 (3-5 天)
+### 📚 guides/ - 学习指南
 
-**目标**: 快速掌握异步基础，能够编写简单的异步程序
+**特点**: 实践导向，循序渐进
 
-**Day 1**: 基础概念
+| 文档 | 难度 | 时长 | 说明 |
+|------|------|------|------|
+| 01_quick_start | ⭐ | 30min | 快速入门 |
+| 02_basics | ⭐⭐ | 2-3h | 基础指南 |
+| 03_advanced_topics | ⭐⭐⭐ | 4-6h | 高级主题 |
+| 04_best_practices | ⭐⭐⭐⭐ | 参考 | 最佳实践 |
+| 05_style_guide | ⭐⭐⭐ | 参考 | 代码风格 |
+| 06_run_guide | ⭐ | 15min | 运行指南 |
 
-- [README](./README.md)
-- [quick_start](./quick_start.md)
-- [01_introduction_and_philosophy](./01_introduction_and_philosophy.md)
+**查看详情**: [guides/README.md](./guides/README.md)
 
-**Day 2**: 运行时理解
+---
 
-- [02_runtime_and_execution_model](./02_runtime_and_execution_model.md)
-- [async_basics_guide](./async_basics_guide.md)
+### 🎓 core/ - 核心概念系列
 
-**Day 3**: 实践运行时
+**特点**: 理论系统，深度解析
 
-- [tokio_best_practices_2025](./tokio_best_practices_2025.md)
-- [async_cookbook_tokio_smol](./async_cookbook_tokio_smol.md)
+| 文档 | 难度 | 重要性 | 说明 |
+|------|------|--------|------|
+| 01_introduction_and_philosophy | ⭐⭐ | ⭐⭐⭐⭐⭐ | 设计哲学 |
+| 02_runtime_and_execution_model | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 执行模型 |
+| 03_pinning_and_unsafe_foundations | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | Pin机制 |
+| 04_streams_and_sinks | ⭐⭐⭐ | ⭐⭐⭐⭐ | 流处理 |
+| 05_async_in_traits_and_ecosystem | ⭐⭐⭐ | ⭐⭐⭐⭐ | Trait支持 |
+| 06_critical_analysis_and_advanced_topics | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | 深度分析 |
 
-**Day 4-5**: 动手实践
+**查看详情**: [core/README.md](./core/README.md)
 
-- 查看 [`../examples/`](../examples/) 中的89个示例
-- 运行测试: `cargo test -p c06_async`
+---
 
-### 路径 2: 系统学习 (2-3 周)
+### ⚙️ runtimes/ - 运行时指南
 
-**目标**: 系统掌握异步编程，理解各种异步特性和模式
+**特点**: 对比分析，实战指导
 
-**第 1 周**: 基础到进阶
+- **01_comparison_2025.md** - Tokio/async-std/Smol全面对比 ⭐⭐⭐⭐⭐
+- **02_tokio_best_practices.md** - Tokio生产实践 ⭐⭐⭐⭐
+- **03_smol_best_practices.md** - Smol轻量方案 ⭐⭐⭐
+- **04_cookbook.md** - 实战代码手册 ⭐⭐⭐⭐
 
-1. 核心概念系列 (Day 1-5)
-   - 01-06核心文档
-   - 异步基础指南
+**查看详情**: [runtimes/README.md](./runtimes/README.md)
 
-2. 运行时深入 (Day 6-7)
-   - 运行时对比分析
-   - Tokio和Smol最佳实践
+---
 
-**第 2 周**: 高级主题
+### 📐 patterns/ - 设计模式
 
-1. 高级特性 (Day 1-3)
-   - Pin和Unsafe
-   - 高级模式
-   - 性能优化
+**特点**: 模式总结，陷阱规避
 
-2. 生态系统 (Day 4-5)
-   - 生态系统综合分析
-   - 语言特性更新
+- **01_patterns_comparison.md** - 设计模式对比
+- **02_patterns_and_pitfalls.md** - 常见陷阱与解决方案 ⭐⭐⭐⭐⭐
+- **03_advanced_patterns.md** - 高级模式
 
-3. 项目实践 (Day 6-7)
-   - 学习示例代码
-   - 完成练习项目
+**查看详情**: [patterns/README.md](./patterns/README.md)
 
-**第 3 周**: 专家进阶
+---
 
-1. 综合指南 (Day 1-3)
-   - 2025综合分析
-   - 终极指南
+### ⚡ performance/ - 性能优化
 
-2. 实战和优化 (Day 4-7)
-   - 实际项目开发
-   - 性能调优
+**特点**: 性能分析，优化技巧
 
-### 路径 3: 专家进阶 (持续学习)
+- **01_optimization_guide.md** - 优化指南
+- **02_benchmark_analysis.md** - 基准测试方法
+- **03_benchmark_results.md** - 测试结果数据
 
-**目标**: 精通异步编程，能够设计复杂的异步系统
+**查看详情**: [performance/README.md](./performance/README.md)
 
-1. **深度理解**
-   - 研读所有综合指南
-   - 理解Pin和Unsafe
-   - 分析运行时源码
+---
 
-2. **高级应用**
-   - 自定义运行时
-   - 高性能异步系统设计
-   - 形式化方法应用
+### 🌐 ecosystem/ - 生态系统
 
-3. **持续更新**
-   - 关注 Rust 版本更新
-   - 学习最新异步特性
-   - 参与社区讨论
+**特点**: 生态分析，版本特性
+
+- **01_ecosystem_analysis_2025.md** - 2025生态全景 ⭐⭐⭐⭐⭐
+- **02_language_features_190.md** - Rust 1.90+特性
+- **03_formal_methods.md** - 形式化方法
+
+**查看详情**: [ecosystem/README.md](./ecosystem/README.md)
+
+---
+
+### 📖 references/ - API参考
+
+**特点**: 快速查阅，技术规范
+
+- **api_reference.md** - 核心API
+- **utils_reference.md** - 工具函数
+- **msrv_and_compatibility.md** - 版本兼容性
+
+**查看详情**: [references/README.md](./references/README.md)
+
+---
+
+### 📘 comprehensive/ - 综合指南
+
+**特点**: 一站式参考，全面覆盖
+
+- **comprehensive_guide_2025.md** - 2025综合指南 (1200+行) ⭐⭐⭐⭐⭐
+- **ultimate_guide_cn.md** - 终极中文指南 ⭐⭐⭐⭐⭐
+
+**查看详情**: [comprehensive/README.md](./comprehensive/README.md)
+
+---
+
+### 👁️ views/ - 多视角分析
+
+**特点**: 专题深入，多维分析
+
+- **basic/** - 14个基础视角分析
+- **specialized/** - 6个专题视角（async/sync对比、CPU/GPU异步等）
+
+**查看详情**: [views/README.md](./views/README.md)
+
+---
+
+### 🔧 tools/ - 工具与配置
+
+**特点**: 工具使用，监控配置
+
+- **tokio_console_tracing.md** - 调试监控工具
+- **dashboards/** - Grafana监控面板配置
+
+**查看详情**: [tools/README.md](./tools/README.md)
+
+---
+
+### 📦 archives/ - 归档文档
+
+**特点**: 历史保留，仅供参考
+
+- **old_readmes/** - 旧版README (3个)
+- **completion_reports/** - 完成报告 (3个)
+- **deprecated/** - 已废弃文档 (7个)
+
+⚠️ **注意**: 归档文档可能过时，优先查阅主文档
+
+**查看详情**: [archives/README.md](./archives/README.md)
+
+---
+
+## 🎓 学习路径
+
+### 路径1: 快速入门 (3-5天)
+
+**目标**: 快速掌握异步基础
+
+**Day 1-2**: 基础入门
+
+- [README.md](./README.md)
+- [guides/01_quick_start.md](./guides/01_quick_start.md)
+- [guides/02_basics.md](./guides/02_basics.md)
+
+**Day 3-4**: 运行时实践
+
+- [runtimes/01_comparison_2025.md](./runtimes/01_comparison_2025.md)
+- [runtimes/02_tokio_best_practices.md](./runtimes/02_tokio_best_practices.md)
+- 运行示例代码
+
+**Day 5**: 巩固练习
+
+- 完成5-10个示例
+- 阅读 [FAQ.md](./FAQ.md)
+
+---
+
+### 路径2: 系统学习 (2-3周)
+
+**目标**: 全面掌握异步编程
+
+**第1周**: 核心概念
+
+- [core/](./core/) 全部6个文档
+- [guides/03_advanced_topics.md](./guides/03_advanced_topics.md)
+
+**第2周**: 实践应用
+
+- [patterns/](./patterns/) 设计模式
+- [performance/](./performance/) 性能优化
+- [guides/04_best_practices.md](./guides/04_best_practices.md)
+
+**第3周**: 深入研究
+
+- [comprehensive/comprehensive_guide_2025.md](./comprehensive/comprehensive_guide_2025.md)
+- [ecosystem/01_ecosystem_analysis_2025.md](./ecosystem/01_ecosystem_analysis_2025.md)
+- 实际项目实践
+
+---
+
+### 路径3: 专家进阶 (持续)
+
+**目标**: 精通异步编程
+
+**理论精通**:
+
+- 研读所有core和comprehensive文档
+- 理解运行时实现细节
+- 掌握Pin和Unsafe机制
+
+**实践专家**:
+
+- 完成所有示例和练习
+- 自定义运行时实现
+- 高性能系统设计
+
+**持续更新**:
+
+- 跟踪最新Rust版本
+- 研究新异步特性
+- 参与社区贡献
 
 ---
 
 ## 📊 文档统计
 
-### 文档数量
+### 重组后统计
 
-| 类别 | 数量 | 说明 |
-|------|------|------|
-| **核心概念** | 6 | 01-06系列 |
-| **快速入门** | 3 | 快速开始指南 |
-| **基础指南** | 2 | 基础指南 |
-| **运行时** | 4 | 运行时对比和实践 |
-| **生态系统** | 3 | 综合分析 |
-| **高级主题** | 6 | 高级特性和优化 |
-| **综合指南** | 5 | 2025最新指南 |
-| **最佳实践** | 3 | 实践和参考 |
-| **视角分析** | 20 | view系列 |
-| **参考文档** | 4 | FAQ、术语表等 |
-| **项目报告** | 2 | 完成报告 |
-| **其他** | 9 | AI、备用等 |
-| **总计** | 67 | 内容丰富 |
+| 类别 | 文档数 | 说明 |
+|------|--------|------|
+| **学习指南** | 6 | guides/ |
+| **核心概念** | 6 | core/ |
+| **运行时** | 4 | runtimes/ |
+| **设计模式** | 3 | patterns/ |
+| **性能优化** | 3 | performance/ |
+| **生态系统** | 3 | ecosystem/ |
+| **API参考** | 3 | references/ |
+| **综合指南** | 2 | comprehensive/ |
+| **多视角** | 20 | views/ |
+| **工具配置** | 1+N | tools/ |
+| **核心文档** | 4 | README, INDEX, FAQ, Glossary |
+| **归档文档** | 13 | archives/ |
+| **总计** | **68** | 清晰分类 |
 
-### 文档质量
+### 与重组前对比
 
-- 🔧 **完整性**: 95%+ (内容非常丰富)
-- ⚠️ **一致性**: 需要标准化格式
-- ✅ **可读性**: 中文详细注释
-- 🔧 **更新性**: 包含2025最新内容
-- ⚠️ **导航性**: 需要建立统一导航
+| 指标 | 重组前 | 重组后 | 改进 |
+|------|--------|--------|------|
+| **根目录文件** | 60+ | 4 | ✅ -93% |
+| **目录层级** | 混乱 | 清晰 | ✅ 规范 |
+| **查找难度** | 困难 | 容易 | ✅ 大幅降低 |
+| **冗余文档** | 多 | 已归档 | ✅ 已清理 |
+| **导航系统** | 缺失 | 完善 | ✅ 已建立 |
 
 ---
 
-## 🔍 快速查找
+## 🔍 快速查找指南
 
-### 按关键词查找
+### 按学习阶段
 
-**异步基础**:
+- **入门新手** → [guides/01_quick_start.md](./guides/01_quick_start.md)
+- **初级学习** → [guides/02_basics.md](./guides/02_basics.md)
+- **中级进阶** → [core/](./core/) + [patterns/](./patterns/)
+- **高级深入** → [comprehensive/](./comprehensive/) + [views/](./views/)
+- **专家级别** → [core/06_critical_analysis...](./core/06_critical_analysis_and_advanced_topics.md)
 
-- async/await → [async_basics_guide](./async_basics_guide.md)
-- Future → [01_introduction_and_philosophy](./01_introduction_and_philosophy.md)
-- 异步哲学 → [01_introduction_and_philosophy](./01_introduction_and_philosophy.md)
+### 按问题类型
 
-**运行时**:
+- **怎么选运行时？** → [runtimes/01_comparison_2025.md](./runtimes/01_comparison_2025.md)
+- **Pin是什么？** → [core/03_pinning_and_unsafe_foundations.md](./core/03_pinning_and_unsafe_foundations.md)
+- **有哪些陷阱？** → [patterns/02_patterns_and_pitfalls.md](./patterns/02_patterns_and_pitfalls.md)
+- **怎么优化性能？** → [performance/01_optimization_guide.md](./performance/01_optimization_guide.md)
+- **最新特性？** → [ecosystem/02_language_features_190.md](./ecosystem/02_language_features_190.md)
 
-- Tokio → [tokio_best_practices_2025](./tokio_best_practices_2025.md)
-- Smol → [smol_best_practices_2025](./smol_best_practices_2025.md)
-- 运行时对比 → [ASYNC_RUNTIME_COMPARISON_2025](./ASYNC_RUNTIME_COMPARISON_2025.md)
+### 按使用场景
 
-**高级特性**:
-
-- Pin → [03_pinning_and_unsafe_foundations](./03_pinning_and_unsafe_foundations.md)
-- Stream → [04_streams_and_sinks](./04_streams_and_sinks.md)
-- 性能优化 → [async_performance_optimization_2025](./async_performance_optimization_2025.md)
-
-**版本特性**:
-
-- Rust 1.90 → [async_language_features_190](./async_language_features_190.md)
-- 2025更新 → [RUST_ASYNC_ECOSYSTEM_COMPREHENSIVE_ANALYSIS_2025](./RUST_ASYNC_ECOSYSTEM_COMPREHENSIVE_ANALYSIS_2025.md)
-
-### 按问题查找
-
-**我想学习...**:
-
-- 异步基础 → [async_basics_guide](./async_basics_guide.md)
-- 快速上手 → [quick_start](./quick_start.md)
-- 深入理解 → [01-06核心系列](./01_introduction_and_philosophy.md)
-
-**我想了解...**:
-
-- 运行时选择 → [ASYNC_RUNTIME_COMPARISON_2025](./ASYNC_RUNTIME_COMPARISON_2025.md)
-- 性能优化 → [async_performance_optimization_2025](./async_performance_optimization_2025.md)
-- 最佳实践 → [async_best_practices](./async_best_practices.md)
-
-**我遇到问题...**:
-
-- 常见问题 → [FAQ](./FAQ.md)
-- 术语不懂 → [Glossary](./Glossary.md)
-- 模式陷阱 → [async_patterns_and_pitfalls](./async_patterns_and_pitfalls.md)
+- **Web开发** → Tokio + Axum 相关文档
+- **CLI工具** → Smol + 轻量运行时
+- **学习项目** → async-std + 完整指南
+- **生产环境** → Tokio + 最佳实践
+- **嵌入式** → Smol + 性能优化
 
 ---
 
 ## 🔗 相关资源
 
-### 项目资源
+### 本模块资源
 
-- [主 README](../README.md) - 项目主页
-- [示例代码](../examples/) - 89个完整示例
-- [源代码](../src/) - 模块源代码
-- [测试用例](../tests/) - 测试代码
-- [基准测试](../benches/) - 性能测试
+- **代码示例**: [../examples/](../examples/) - 89个完整示例
+- **测试代码**: [../tests/](../tests/) - 单元和集成测试
+- **性能测试**: [../benches/](../benches/) - 性能基准
+- **项目配置**: [../Cargo.toml](../Cargo.toml) - 依赖配置
 
 ### 相关模块
 
-- [c04_generic](../../c04_generic/docs/00_MASTER_INDEX.md) - 泛型编程
-- [c05_threads](../../c05_threads/docs/00_MASTER_INDEX.md) - 线程并发
-- [c07_process](../../c07_process/) - 进程管理
+- [c01_ownership_borrow_scope](../../c01_ownership_borrow_scope/docs/) - 所有权基础
+- [c05_threads](../../c05_threads/docs/) - 线程并发
+- [c10_networks](../../c10_networks/) - 网络编程
 
 ### 外部资源
 
-- [Rust 官方文档 - Async](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
-- [Tokio 官方文档](https://tokio.rs/)
-- [async-std 官方文档](https://async.rs/)
-- [Smol 官方文档](https://docs.rs/smol/)
+- [Rust Async Book](https://rust-lang.github.io/async-book/) - 官方异步书
+- [Tokio Tutorial](https://tokio.rs/tokio/tutorial) - Tokio教程
+- [async-std Book](https://book.async.rs/) - async-std教程
 
 ---
 
 ## 💡 使用建议
 
-### 新用户必读
+### 📖 学习建议
 
-1. **首次访问**: 从 [README](./README.md) 开始
-2. **快速上手**: [quick_start](./quick_start.md) 或 [QUICK_START_2025](./QUICK_START_2025.md)
-3. **系统学习**: 按照推荐学习路径
-4. **快速查找**: 使用本索引的分类和搜索
+1. **循序渐进**: 从guides开始，不要直接跳到comprehensive
+2. **理论+实践**: 每学一个概念就运行相关示例
+3. **多次复习**: 核心文档(especially Pin)需要多次阅读
+4. **做笔记**: 记录关键点和自己的理解
+5. **提问讨论**: 遇到问题查FAQ或讨论
 
-### 文档特点
+### 🔍 查找建议
 
-**内容丰富**: 67个文档，覆盖全面
-**版本更新**: 包含2025最新内容
-**实践导向**: 89个示例代码
-**多种视角**: 20个view分析文档
+1. **使用目录**: 每个子目录都有README导航
+2. **关键词搜索**: 使用编辑器的搜索功能
+3. **按需阅读**: 不需要全部读完，按需查找
+4. **标记重点**: 标记常用文档便于回顾
+
+### 🚀 实践建议
+
+1. **运行示例**: 每个概念都有对应示例代码
+2. **修改尝试**: 修改示例代码加深理解
+3. **实际项目**: 将学到的应用到项目中
+4. **性能测试**: 对比不同方案的性能
 
 ---
 
 ## 📝 文档维护
 
-**维护状态**: 🔧 活跃整理中  
-**更新频率**: 跟随 Rust 版本更新  
-**最后整理**: 2025-10-19
+**维护状态**: ✅ 活跃维护  
+**重组日期**: 2025-10-19  
+**文档质量**: ⭐⭐⭐⭐⭐  
+**更新频率**: 跟随Rust版本
 
-### 待完成工作
+### 重组改进
 
-- [ ] 统一所有文档格式
-- [ ] 验证版本信息准确性
-- [ ] 整理重复和相似文档
-- [ ] 更新FAQ和Glossary
-- [ ] 创建统一的README
+✅ **清晰的层次结构** - 10个主题目录  
+✅ **统一的命名规范** - 编号+描述性名称  
+✅ **完善的导航系统** - 每个目录有README  
+✅ **消除冗余** - 归档过时和重复文档  
+✅ **易于查找** - 按主题、问题、场景分类
 
----
+### 持续改进
 
-## ⚠️ 当前状态说明
-
-本文档索引是在2025-10-19创建的，目前c06_async模块正在进行文档梳理：
-
-**模块特点**:
-
-1. 文档数量多（67个）
-2. 内容非常丰富
-3. 包含2025最新内容
-4. 需要标准化整理
-
-**整理进度**: 10% ✅ (主索引已建立)
+- [ ] 持续更新内容跟进最新Rust版本
+- [ ] 补充更多实践示例
+- [ ] 完善各文档间的交叉引用
+- [ ] 收集用户反馈优化结构
 
 ---
 
-**文档版本**: v1.0  
+**索引版本**: v2.0 (重组后)  
 **创建日期**: 2025-10-19  
-**维护状态**: 🔧 整理中
+**维护团队**: C06 Async Team
 
-🚀 **C06 Async文档体系建立中！**
+🚀 **重组完成，开始你的高效学习之旅！**

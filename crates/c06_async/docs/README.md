@@ -77,34 +77,44 @@ cargo bench
 
 **🎯 快速入门** (3-5天):
 
-1. [快速开始](./quick_start.md) - 基础概念和第一个程序
-2. [01_introduction_and_philosophy](./01_introduction_and_philosophy.md) - 理解异步哲学
-3. [async_basics_guide](./async_basics_guide.md) - 掌握基础语法
+1. [guides/01_quick_start.md](./guides/01_quick_start.md) - 基础概念和第一个程序
+2. [core/01_introduction_and_philosophy.md](./core/01_introduction_and_philosophy.md) - 理解异步哲学
+3. [guides/02_basics.md](./guides/02_basics.md) - 掌握基础语法
 
 **📚 系统学习** (2-3周):
 
-1. 核心系列01-06 - 深入理解
-2. [运行时对比](./ASYNC_RUNTIME_COMPARISON_2025.md) - 选择合适的运行时
-3. [最佳实践](./async_best_practices.md) - 编写高质量代码
+1. 核心系列 [core/](./core/) - 深入理解
+2. [runtimes/01_comparison_2025.md](./runtimes/01_comparison_2025.md) - 选择合适的运行时
+3. [guides/04_best_practices.md](./guides/04_best_practices.md) - 编写高质量代码
 
 **🚀 专家进阶** (持续):
 
-1. [2025综合指南](./RUST_ASYNC_ECOSYSTEM_COMPREHENSIVE_ANALYSIS_2025.md)
-2. [性能优化](./async_performance_optimization_2025.md)
+1. [comprehensive/comprehensive_guide_2025.md](./comprehensive/comprehensive_guide_2025.md) - 2025综合指南
+2. [performance/01_optimization_guide.md](./performance/01_optimization_guide.md) - 性能优化
 3. 实际项目开发
 
 ---
 
 ## 📚 内容结构
 
-### 📂 文档组织 (67个文档)
+### 📂 文档组织 (重组后)
 
 ```text
 c06_async/docs/
-├── 📋 00_MASTER_INDEX.md          # 主索引 - 从这里开始
-├── 📖 README.md                   # 本文档
+├── 📋 00_MASTER_INDEX.md          # 主索引 - 完整导航
+├── 📖 README.md                   # 本文档 - 快速开始
+├── ❓ FAQ.md                      # 常见问题
+├── 📚 Glossary.md                 # 术语表
 │
-├── 🎓 核心概念系列 (01-06)
+├── 📚 guides/                     # 学习指南 (6个)
+│   ├── 01_quick_start.md         # 快速开始 ⭐
+│   ├── 02_basics.md              # 基础指南
+│   ├── 03_advanced_topics.md     # 高级主题
+│   ├── 04_best_practices.md      # 最佳实践
+│   ├── 05_style_guide.md         # 代码风格
+│   └── 06_run_guide.md           # 运行指南
+│
+├── 🎓 core/                       # 核心概念系列 (6个)
 │   ├── 01_introduction_and_philosophy.md
 │   ├── 02_runtime_and_execution_model.md
 │   ├── 03_pinning_and_unsafe_foundations.md
@@ -112,51 +122,64 @@ c06_async/docs/
 │   ├── 05_async_in_traits_and_ecosystem.md
 │   └── 06_critical_analysis_and_advanced_topics.md
 │
-├── 🚀 快速入门 (3个)
-│   ├── quick_start.md
-│   ├── QUICK_START_2025.md
-│   └── async_basics_guide.md
+├── ⚙️ runtimes/                   # 运行时指南 (4个)
+│   ├── 01_comparison_2025.md     # 运行时对比 ⭐⭐⭐⭐⭐
+│   ├── 02_tokio_best_practices.md
+│   ├── 03_smol_best_practices.md
+│   └── 04_cookbook.md
 │
-├── ⚙️ 运行时和实践 (7个)
-│   ├── ASYNC_RUNTIME_COMPARISON_2025.md
-│   ├── tokio_best_practices_2025.md
-│   ├── smol_best_practices_2025.md
-│   ├── async_cookbook_tokio_smol.md
-│   └── ...
+├── 📐 patterns/                   # 设计模式 (3个)
+│   ├── 01_patterns_comparison.md
+│   ├── 02_patterns_and_pitfalls.md  # 必读 ⭐⭐⭐⭐⭐
+│   └── 03_advanced_patterns.md
 │
-├── 📘 综合指南 (5个)
-│   ├── RUST_ASYNC_ECOSYSTEM_COMPREHENSIVE_ANALYSIS_2025.md
-│   ├── ULTIMATE_ASYNC_GUIDE_2025_CN.md
-│   └── ...
+├── ⚡ performance/                # 性能优化 (3个)
+│   ├── 01_optimization_guide.md
+│   ├── 02_benchmark_analysis.md
+│   └── 03_benchmark_results.md
 │
-├── 📊 进阶主题 (20+个)
-│   ├── async_patterns_and_pitfalls.md
-│   ├── async_performance_optimization_2025.md
-│   ├── formal_methods_async.md
-│   └── ...
+├── 🌐 ecosystem/                  # 生态系统 (3个)
+│   ├── 01_ecosystem_analysis_2025.md
+│   ├── 02_language_features_190.md
+│   └── 03_formal_methods.md
 │
-├── 📚 参考文档
-│   ├── FAQ.md                     # 常见问题
-│   ├── Glossary.md                # 术语表
-│   └── api_reference.md           # API参考
+├── 📖 references/                 # API参考 (3个)
+│   ├── api_reference.md
+│   ├── utils_reference.md
+│   └── msrv_and_compatibility.md
 │
-└── 📊 分析视角 (20个view)
-    ├── view01-14.md
-    └── views/
+├── 📘 comprehensive/              # 综合指南 (2个)
+│   ├── comprehensive_guide_2025.md   # 1200+行 ⭐⭐⭐⭐⭐
+│   └── ultimate_guide_cn.md          # 中文详解 ⭐⭐⭐⭐⭐
+│
+├── 👁️ views/                      # 多视角分析 (20个)
+│   ├── basic/                    # 14个基础视角
+│   └── specialized/              # 6个专题视角
+│
+├── 🔧 tools/                      # 工具与配置
+│   ├── tokio_console_tracing.md
+│   └── dashboards/
+│
+└── 📦 archives/                   # 归档文档
+    ├── old_readmes/              # 旧README
+    ├── completion_reports/       # 完成报告
+    └── deprecated/               # 已废弃文档
 ```
 
 ### 🎯 示例代码 (89个)
 
-```text
+```bash
+# 查看所有示例
+cd ../examples && ls
+
+# 分类示例
 examples/
-├── 基础Future实现
-├── Tokio运行时使用
-├── async-std实践
-├── Smol轻量运行时
-├── Stream和Sink
-├── 并发模式
-├── 性能优化
-└── 实际应用案例
+├── 01_basics/           # 基础Future实现
+├── 02_runtimes/         # Tokio/async-std/Smol
+├── 03_streams/          # Stream和Sink
+├── 04_patterns/         # 设计模式
+├── 05_performance/      # 性能优化
+└── 06_applications/     # 实际应用
 ```
 
 ---
@@ -242,11 +265,12 @@ while let Some(item) = stream.next().await {
 
 ### 本模块资源
 
-- 📋 **[主索引](./00_MASTER_INDEX.md)** - 完整文档导航
-- ❓ **[FAQ](./FAQ.md)** - 5个核心问答
-- 📚 **[Glossary](./Glossary.md)** - 11个核心术语
-- 📖 **[核心系列01-06](./01_introduction_and_philosophy.md)** - 系统学习
-- 🚀 **[2025综合分析](./RUST_ASYNC_ECOSYSTEM_COMPREHENSIVE_ANALYSIS_2025.md)** - 最新进展
+- 📋 **[主索引](./00_MASTER_INDEX.md)** - 完整文档导航（必看）
+- ❓ **[FAQ](./FAQ.md)** - 常见问题解答
+- 📚 **[Glossary](./Glossary.md)** - 核心术语表
+- 📖 **[核心系列](./core/)** - 01-06系统学习
+- 📚 **[学习指南](./guides/)** - 实践导向教程
+- 🚀 **[综合指南](./comprehensive/)** - 2025最新全面分析
 
 ### 代码资源
 
@@ -307,11 +331,12 @@ while let Some(item) = stream.next().await {
 
 ### 文档统计
 
-- **总文档数**: 67个
+- **总文档数**: 68个（重组后）
+- **核心目录**: 10个主题分类
 - **示例代码**: 89个
-- **核心文档**: 6个 (01-06系列)
-- **综合指南**: 5个
-- **参考文档**: 4个
+- **核心系列**: 6个 (core/)
+- **学习指南**: 6个 (guides/)
+- **综合指南**: 2个 (comprehensive/)
 
 ### 技术栈
 
@@ -349,24 +374,25 @@ async-trait = "0.1"
 
 ### 按学习阶段
 
-- **第1天**: [quick_start](./quick_start.md) → [01_introduction](./01_introduction_and_philosophy.md)
-- **第2-3天**: [02_runtime](./02_runtime_and_execution_model.md) → [async_basics](./async_basics_guide.md)
-- **第4-5天**: [03_pinning](./03_pinning_and_unsafe_foundations.md) → [04_streams](./04_streams_and_sinks.md)
-- **第2周**: [05_traits](./05_async_in_traits_and_ecosystem.md) → [运行时对比](./ASYNC_RUNTIME_COMPARISON_2025.md)
-- **第3周**: [最佳实践](./async_best_practices.md) → [性能优化](./async_performance_optimization_2025.md)
+- **第1天**: [guides/01_quick_start](./guides/01_quick_start.md) → [core/01_introduction](./core/01_introduction_and_philosophy.md)
+- **第2-3天**: [core/02_runtime](./core/02_runtime_and_execution_model.md) → [guides/02_basics](./guides/02_basics.md)
+- **第4-5天**: [core/03_pinning](./core/03_pinning_and_unsafe_foundations.md) → [core/04_streams](./core/04_streams_and_sinks.md)
+- **第2周**: [core/05_traits](./core/05_async_in_traits_and_ecosystem.md) → [runtimes/01_comparison](./runtimes/01_comparison_2025.md)
+- **第3周**: [guides/04_best_practices](./guides/04_best_practices.md) → [performance/01_optimization](./performance/01_optimization_guide.md)
 
 ### 按问题类型
 
-- **如何选择运行时?** → [FAQ Q3](./FAQ.md#q3) | [运行时对比](./ASYNC_RUNTIME_COMPARISON_2025.md)
-- **Pin是什么?** → [FAQ Q2](./FAQ.md#q2) | [03_pinning](./03_pinning_and_unsafe_foundations.md)
-- **async vs 线程?** → [FAQ Q1](./FAQ.md#q1)
-- **函数颜色问题?** → [FAQ Q4](./FAQ.md#q4) | [06_critical](./06_critical_analysis_and_advanced_topics.md)
+- **如何选择运行时?** → [runtimes/01_comparison](./runtimes/01_comparison_2025.md)
+- **Pin是什么?** → [core/03_pinning](./core/03_pinning_and_unsafe_foundations.md)
+- **async vs 线程?** → [FAQ](./FAQ.md)
+- **常见陷阱?** → [patterns/02_patterns_and_pitfalls](./patterns/02_patterns_and_pitfalls.md)
+- **性能优化?** → [performance/01_optimization](./performance/01_optimization_guide.md)
 
 ### 按技术栈
 
-- **Tokio** → [tokio_best_practices_2025](./tokio_best_practices_2025.md)
-- **async-std** → [async_cookbook](./async_cookbook_tokio_smol.md)
-- **Smol** → [smol_best_practices_2025](./smol_best_practices_2025.md)
+- **Tokio** → [runtimes/02_tokio_best_practices](./runtimes/02_tokio_best_practices.md)
+- **async-std** → [runtimes/04_cookbook](./runtimes/04_cookbook.md)
+- **Smol** → [runtimes/03_smol_best_practices](./runtimes/03_smol_best_practices.md)
 
 ---
 
@@ -374,11 +400,13 @@ async-trait = "0.1"
 
 准备好了吗？选择你的路径：
 
-1. **🚀 快速体验** → [quick_start.md](./quick_start.md)
-2. **📚 系统学习** → [01_introduction_and_philosophy.md](./01_introduction_and_philosophy.md)
-3. **🔍 查找文档** → [00_MASTER_INDEX.md](./00_MASTER_INDEX.md)
+1. **🚀 快速体验** → [guides/01_quick_start.md](./guides/01_quick_start.md)
+2. **📚 系统学习** → [core/01_introduction_and_philosophy.md](./core/01_introduction_and_philosophy.md)
+3. **🔍 查找文档** → [00_MASTER_INDEX.md](./00_MASTER_INDEX.md) ⭐ 推荐先看
 4. **❓ 解决问题** → [FAQ.md](./FAQ.md)
 5. **💡 查询术语** → [Glossary.md](./Glossary.md)
+
+📋 **重要提示**: 文档已重组！请先查看 [00_MASTER_INDEX.md](./00_MASTER_INDEX.md) 了解新结构
 
 ---
 

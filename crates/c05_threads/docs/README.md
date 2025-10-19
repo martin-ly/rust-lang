@@ -38,11 +38,13 @@ cargo bench -p c05_threads
 ### 推荐学习路径
 
 **新手入门** (3-5天):
+
 1. [01_threads_and_ownership](./01_threads_and_ownership.md) - 线程与所有权
 2. [02_message_passing](./02_message_passing.md) - 消息传递
 3. [03_synchronization_primitives](./03_synchronization_primitives.md) - 同步原语
 
 **进阶学习** (1-2周):
+
 - [04_parallelism_and_beyond](./04_parallelism_and_beyond.md) - 并发与并行
 - [06_parallel_algorithms](./06_parallel_algorithms.md) - 并行算法
 - [04_lock_free_programming](./04_lock_free_programming.md) - 无锁编程
@@ -56,10 +58,12 @@ cargo bench -p c05_threads
 ### 1. 基础并发 (Foundation)
 
 #### 线程基础
+
 - **[01_threads_and_ownership.md](./01_threads_and_ownership.md)** - 线程与所有权原理
 - **[01_basic_threading.md](./01_basic_threading.md)** - 基础线程操作实践
 
 #### 并发范式
+
 - **[02_message_passing.md](./02_message_passing.md)** - 消息传递并发模型
 - **[02_thread_synchronization.md](./02_thread_synchronization.md)** - 线程同步实践
 - **[03_synchronization_primitives.md](./03_synchronization_primitives.md)** - 同步原语详解
@@ -96,6 +100,7 @@ cargo bench -p c05_threads
 ### 两种并发范式
 
 **消息传递** (Message Passing):
+
 ```rust
 use std::sync::mpsc;
 
@@ -104,6 +109,7 @@ let (tx, rx) = mpsc::channel();
 ```
 
 **共享状态** (Shared State):
+
 ```rust
 use std::sync::{Arc, Mutex};
 
@@ -130,6 +136,7 @@ let data = Arc::new(Mutex::new(0));
 ### 无畏并发
 
 Rust 的编译器确保：
+
 - ✅ 无数据竞争
 - ✅ 无悬垂指针
 - ✅ 线程安全保证
@@ -178,6 +185,7 @@ Rust 的编译器确保：
 **完成度**: 80%
 
 **最近更新**:
+
 - 2025-10-19: 创建主索引和标准化文档格式
 - 2025-01-27: 完成基础文档
 
