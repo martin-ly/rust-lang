@@ -2,6 +2,40 @@
 
 > 导航：返回 [`rust-formal-engineering-system`](../../rust-formal-engineering-system/README.md) · 同步范式 [`01_synchronous/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/01_synchronous/00_index.md) · 异步范式 [`02_async/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/02_async/00_index.md) · 最小基准指南 [`11_benchmark_minimal_guide.md`](../../rust-formal-engineering-system/02_programming_paradigms/11_benchmark_minimal_guide.md)
 
+---
+
+## 🆕 2025-10-20 重大更新
+
+**新增 4 个高质量增强文档** - 全面提升 C05 Threads 的学习体验！
+
+### 📚 核心增强文档
+
+1. **[知识图谱与概念关系](docs/theory/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)** ⭐⭐⭐⭐⭐
+   - Mermaid 可视化图表 + 概念三元组 + 技术演化时间线
+   - 完整的 Rust 类型层次映射 + Send/Sync 决策树
+   - 并发模式分类 + 性能与安全知识图
+
+2. **[多维矩阵对比分析](docs/theory/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)** ⭐⭐⭐⭐⭐
+   - 同步原语/并发模型/线程池全面对比 + 性能基准代码
+   - 无锁数据结构对比 + 通道实现对比
+   - 内存顺序对比 + 第三方库生态对比
+
+3. **[网络编程思维导图](docs/RUST_190_COMPREHENSIVE_MINDMAP.md)** ⭐⭐⭐⭐⭐
+   - ASCII 艺术知识结构 + 完整学习路径 (初/中/高级)
+   - 问题诊断树 + 性能优化金字塔
+   - 技术选型决策树 + 检查清单
+
+4. **[Rust 1.90 实战示例 Part 1](docs/RUST_190_EXAMPLES_COLLECTION.md)** ⭐⭐⭐⭐⭐
+   - 线程创建与管理 (8个示例) + thread::scope 实战
+   - Channel 消息传递 (4个示例) + 同步原语 (7个示例)
+   - 综合项目：并发 Web 爬虫 + 任务调度器
+
+**亮点**: ~800行可运行代码 | 20+对比矩阵 | 10+可视化图表 | 生产级质量
+
+> 适用范围：Rust 1.90+ · 标准库 + rayon/crossbeam/parking_lot
+
+---
+
 本模块展示了Rust 1.90 Edition 2024中线程编程的各种高级特性，包括作用域线程、工作窃取、无锁数据结构、高级同步原语等，并充分利用了最新的语言特性。
 
 ## 快速开始
