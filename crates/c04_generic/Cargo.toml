@@ -13,7 +13,6 @@ serde_json = { workspace = true }
 anyhow = { workspace = true }
 thiserror = { workspace = true }
 array-init = "2.1.0"
-proc_macro_derive = { path = "proc_macro_derive" }
 futures = "0.3.31"
 
 [dev-dependencies]
