@@ -163,21 +163,42 @@ pub trait RuntimeEnvironmentAdapter: Send + Sync {
 
 ### 形式化验证
 
-- 熔断器状态机验证
-- Raft共识正确性证明
-- 分布式事务一致性保证
+- **[形式化验证详解](./formal-verification.md)** ⭐ 新增
+  - 模型检测: Kani, TLA+
+  - 定理证明: Coq, Prusti  
+  - 符号执行: Haybale
+  - 实战案例: 熔断器、并发结构验证
+
+**预计时间**: 2小时
 
 ### 性能优化
 
-- 零成本抽象验证
-- 异步运行时优化
-- 内存使用优化
+- **[性能优化实践](./performance-optimization.md)** ⭐ 新增
+  - CPU优化: SIMD, 缓存优化
+  - 内存优化: 内存池, 零拷贝
+  - IO优化: io_uring, 批处理
+  - 并发优化: 工作窃取, 无锁结构
+  - 监控调优: 持续性能监控
+
+**预计时间**: 2.5小时
 
 ### 可靠性保证
 
-- 故障注入测试
-- 混沌工程实践
-- 弹性测试套件
+- **[混沌工程实践](./chaos-engineering.md)** ⭐ 新增
+  - 故障注入: 网络/资源/应用/依赖故障
+  - 实验设计: 稳态假设, 爆炸半径控制
+  - 工具平台: Chaos Mesh, Litmus, Toxiproxy
+  - GameDay实践与团队协作
+
+**预计时间**: 2小时
+
+- **[可观测性深度](./observability-deep-dive.md)** ⭐ 新增
+  - 三大支柱: 日志/指标/追踪完整实现
+  - RED指标: Rate, Errors, Duration
+  - 分布式追踪: OpenTelemetry集成
+  - 告警系统: 规则引擎, 多渠道通知
+
+**预计时间**: 2小时
 
 ---
 

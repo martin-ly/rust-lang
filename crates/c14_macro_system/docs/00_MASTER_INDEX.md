@@ -193,13 +193,16 @@ Rust宏系统是一个强大的元编程框架，允许在编译期进行代码�
 
 ### 04_advanced/ - 高级主题
 
-| 文档 | 难度 | 预计时间 |
-|------|------|---------|
-| [01_dsl_construction.md](./04_advanced/01_dsl_construction.md) | ⭐⭐⭐⭐ | 8小时 |
-| [02_code_generation.md](./04_advanced/02_code_generation.md) | ⭐⭐⭐⭐ | 6小时 |
-| [03_macro_debugging.md](./04_advanced/03_macro_debugging.md) | ⭐⭐⭐ | 4小时 |
-| [04_performance_considerations.md](./04_advanced/04_performance_considerations.md) | ⭐⭐⭐ | 4小时 |
-| [05_macro_testing.md](./04_advanced/05_macro_testing.md) | ⭐⭐⭐ | 4小时 |
+| 文档 | 难度 | 预计时间 | 状态 |
+|------|------|---------|------|
+| [README.md](./04_advanced/README.md) ⭐ | ⭐⭐⭐⭐ | 30分钟 | ✅ 完成 |
+| [macro_metaprogramming.md](./04_advanced/macro_metaprogramming.md) ⭐ | ⭐⭐⭐⭐⭐ | 6小时 | ✅ 完成 |
+| [dsl_construction.md](./04_advanced/dsl_construction.md) ⭐ | ⭐⭐⭐⭐⭐ | 8小时 | ✅ 完成 |
+| [macro_optimization.md](./04_advanced/macro_optimization.md) ⭐ | ⭐⭐⭐⭐ | 4小时 | ✅ 完成 |
+| [02_code_generation.md](./04_advanced/02_code_generation.md) ⭐ | ⭐⭐⭐⭐ | 6小时 | ✅ 新增 |
+| [03_macro_debugging.md](./04_advanced/03_macro_debugging.md) ⭐ | ⭐⭐⭐ | 4小时 | ✅ 新增 |
+| [05_macro_testing.md](./04_advanced/05_macro_testing.md) ⭐ | ⭐⭐⭐ | 4小时 | ✅ 新增 |
+| [COMPLETION_REPORT.md](./04_advanced/COMPLETION_REPORT.md) ⭐ | - | 15分钟 | ✅ 新增 |
 
 ### 05_practice/ - 最佳实践
 
