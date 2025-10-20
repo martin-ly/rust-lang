@@ -29,22 +29,22 @@
 
 | 资源 | 说明 | 快速链接 |
 |------|------|---------|
-| **🎓 国际对标分析报告** | 对标顶尖大学、Rust 1.90、形式化理论 | [查看报告](./COMPREHENSIVE_UNIVERSITY_ALIGNMENT_REPORT_2025.md) ⭐⭐⭐ |
-| **📊 对标执行摘要** | 快速了解国际水平对比 | [查看摘要](./UNIVERSITY_ALIGNMENT_EXECUTIVE_SUMMARY.md) ⭐⭐⭐ |
-| **⚡ 快速开始指南** | 10分钟快速上手 | [立即开始](./QUICK_START_GUIDE_2025_10_20.md) ⭐ |
+| **🎓 国际对标分析报告** | 对标顶尖大学、Rust 1.90、形式化理论 | [查看报告](./guides/COMPREHENSIVE_UNIVERSITY_ALIGNMENT_REPORT_2025.md) ⭐⭐⭐ |
+| **📊 对标执行摘要** | 快速了解国际水平对比 | [查看摘要](./reports/UNIVERSITY_ALIGNMENT_EXECUTIVE_SUMMARY.md) ⭐⭐⭐ |
+| **⚡ 快速开始指南** | 10分钟快速上手 | [立即开始](./guides/QUICK_START_GUIDE_2025_10_20.md) ⭐ |
 | **🔍 智能文档搜索** | 全文搜索工具 | [使用搜索](./tools/doc_search/README.md) ⭐ |
-| **🎓 交互式学习平台** | 练习题库 + Playground集成 | [开始练习](./INTERACTIVE_LEARNING_PLATFORM.md) ⭐ |
-| **🎉 第一阶段完成报告** | Q1路线图全部完成 | [查看报告](./PHASE1_COMPLETION_REPORT_2025_10_20.md) ⭐⭐⭐ |
-| **🔧 编译器内部机制指南** | MIR、借用检查器、LLVM后端 | [深入编译器](./RUST_COMPILER_INTERNALS_GUIDE_2025.md) ⭐⭐⭐ |
-| **🤖 AI辅助编程完整指南** | Copilot、提示词工程、AI代码审查 | [AI助力开发](./AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md) ⭐⭐⭐ |
-| **🧠 认知科学学习指南** | 元认知、记忆优化、刻意练习 | [科学学习](./COGNITIVE_SCIENCE_LEARNING_GUIDE_2025.md) ⭐⭐⭐ |
-| **🎉 第二阶段完成报告** | Q2-Q3全部任务圆满完成（96/100分）| [查看报告](./PHASE2_FINAL_COMPLETION_REPORT_2025_10_20.md) ⭐⭐⭐⭐⭐ |
-| **🎓 全局理论框架** | 跨模块理论体系分析 | [深入理论](./GLOBAL_THEORETICAL_FRAMEWORK_2025_10_20.md) ⭐ |
-| **📋 实施完成总结** | 完整工作总结 | [查看总结](./FINAL_IMPLEMENTATION_SUMMARY_2025_10_20.md) |
-| **📘 总增强报告** | 全模块增强完成总结 | [查看报告](./COMPREHENSIVE_ENHANCEMENT_FINAL_REPORT_2025_10_20.md) |
-| **📚 完整文档索引** | 35篇增强文档导航 | [浏览索引](./MASTER_DOCUMENTATION_INDEX.md) |
-| **🚀 实践项目路线图** | 10个渐进式实战项目 | [查看路线图](./PRACTICAL_PROJECTS_ROADMAP_2025_10_20.md) |
-| **🛠️ 文档工具链设计** | 6个核心学习工具 | [查看工具链](./DOCUMENTATION_TOOLCHAIN_DESIGN_2025_10_20.md) |
+| **🎓 交互式学习平台** | 练习题库 + Playground集成 | [开始练习](./guides/INTERACTIVE_LEARNING_PLATFORM.md) ⭐ |
+| **🎉 第一阶段完成报告** | Q1路线图全部完成 | [查看报告](./reports/phases/PHASE1_COMPLETION_REPORT_2025_10_20.md) ⭐⭐⭐ |
+| **🔧 编译器内部机制指南** | MIR、借用检查器、LLVM后端 | [深入编译器](./guides/RUST_COMPILER_INTERNALS_GUIDE_2025.md) ⭐⭐⭐ |
+| **🤖 AI辅助编程完整指南** | Copilot、提示词工程、AI代码审查 | [AI助力开发](./guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md) ⭐⭐⭐ |
+| **🧠 认知科学学习指南** | 元认知、记忆优化、刻意练习 | [科学学习](./guides/COGNITIVE_SCIENCE_LEARNING_GUIDE_2025.md) ⭐⭐⭐ |
+| **🎉 第二阶段完成报告** | Q2-Q3全部任务圆满完成（96/100分）| [查看报告](./reports/phases/PHASE2_FINAL_COMPLETION_REPORT_2025_10_20.md) ⭐⭐⭐⭐⭐ |
+| **🎓 全局理论框架** | 跨模块理论体系分析 | [深入理论](./guides/GLOBAL_THEORETICAL_FRAMEWORK_2025_10_20.md) ⭐ |
+| **📋 实施完成总结** | 完整工作总结 | [查看总结](./reports/FINAL_IMPLEMENTATION_SUMMARY_2025_10_20.md) |
+| **📘 总增强报告** | 全模块增强完成总结 | [查看报告](./reports/COMPREHENSIVE_ENHANCEMENT_FINAL_REPORT_2025_10_20.md) |
+| **📚 完整文档索引** | 35篇增强文档导航 | [浏览索引](./guides/MASTER_DOCUMENTATION_INDEX.md) |
+| **🚀 实践项目路线图** | 10个渐进式实战项目 | [查看路线图](./guides/PRACTICAL_PROJECTS_ROADMAP_2025_10_20.md) |
+| **🛠️ 文档工具链设计** | 6个核心学习工具 | [查看工具链](./guides/DOCUMENTATION_TOOLCHAIN_DESIGN_2025_10_20.md) |
 
 ### 🎯 每个模块现包含
 

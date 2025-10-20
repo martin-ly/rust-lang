@@ -1,11 +1,8 @@
 # 📁 项目结构说明 (Project Structure)
 
 > **文档定位**: 详细解释项目的目录结构和组织方式  
-> **使用方式**: 了解项目布局，快速定位所需文件  
-> **相关文档**: [README](./README.md) | [贡献指南](./CONTRIBUTING.md)
-
-**最后更新**: 2025-10-19  
-**项目版本**: v1.0
+> **最后更新**: 2025-10-20  
+> **项目版本**: v1.0
 
 ---
 
@@ -14,496 +11,411 @@
 - [📁 项目结构说明 (Project Structure)](#-项目结构说明-project-structure)
   - [📋 目录](#-目录)
   - [项目总览](#项目总览)
-    - [目录树概览](#目录树概览)
-  - [根目录文件](#根目录文件)
-    - [核心文档](#核心文档)
-      - [README.md](#readmemd)
-      - [CONTRIBUTING.md](#contributingmd)
-      - [LEARNING\_CHECKLIST.md](#learning_checklistmd)
-      - [QUICK\_REFERENCE.md](#quick_referencemd)
-      - [ROADMAP.md](#roadmapmd)
-      - [CHANGELOG.md](#changelogmd)
-      - [TROUBLESHOOTING.md](#troubleshootingmd)
-      - [BEST\_PRACTICES.md](#best_practicesmd)
-      - [RESOURCES.md](#resourcesmd)
-      - [PROJECT\_STRUCTURE.md](#project_structuremd)
-    - [配置文件](#配置文件)
-      - [Cargo.toml](#cargotoml)
-      - [Cargo.lock](#cargolock)
-      - [rustfmt.toml](#rustfmttoml)
-      - [clippy.toml](#clippytoml)
-  - [文档目录](#文档目录)
-    - [docs/](#docs)
-      - [formal\_rust/](#formal_rust)
-      - [language/](#language)
-      - [ref/](#ref)
-  - [模块目录](#模块目录)
-    - [crates/](#crates)
-    - [模块结构](#模块结构)
-    - [模块详解](#模块详解)
-      - [C01 - 所有权与借用 (c01\_ownership\_borrow\_scope/)](#c01---所有权与借用-c01_ownership_borrow_scope)
-      - [C02 - 类型系统 (c02\_type\_system/)](#c02---类型系统-c02_type_system)
-      - [C03 - 控制流与函数 (c03\_control\_fn/)](#c03---控制流与函数-c03_control_fn)
-      - [C04 - 泛型编程 (c04\_generic/)](#c04---泛型编程-c04_generic)
-      - [C05 - 线程与并发 (c05\_threads/)](#c05---线程与并发-c05_threads)
-      - [C06 - 异步编程 (c06\_async/)](#c06---异步编程-c06_async)
-      - [C07 - 进程管理 (c07\_process/)](#c07---进程管理-c07_process)
-      - [C08 - 算法与数据结构 (c08\_algorithms/)](#c08---算法与数据结构-c08_algorithms)
-      - [C09 - 设计模式 (c09\_design\_pattern/)](#c09---设计模式-c09_design_pattern)
-      - [C10 - 网络编程 (c10\_networks/)](#c10---网络编程-c10_networks)
-      - [C11 - 中间件集成 (c11\_middlewares/)](#c11---中间件集成-c11_middlewares)
-      - [C12 - 模型与架构 (c12\_model/)](#c12---模型与架构-c12_model)
-      - [C13 - 可靠性框架 (c13\_reliability/)](#c13---可靠性框架-c13_reliability)
-  - [脚本目录](#脚本目录)
-    - [scripts/](#scripts)
-      - [主要脚本](#主要脚本)
-        - [dev-setup.sh / dev-setup.ps1](#dev-setupsh--dev-setupps1)
-        - [ci/ 目录](#ci-目录)
-        - [observability/ 目录](#observability-目录)
-  - [工具配置](#工具配置)
-    - [Rust 工具配置](#rust-工具配置)
-      - [rustfmt 配置示例](#rustfmt-配置示例)
-      - [clippy 配置示例](#clippy-配置示例)
-      - [deny.toml](#denytoml)
-      - [tarpaulin.toml](#tarpaulintoml)
+    - [设计原则](#设计原则)
+  - [目录树概览](#目录树概览)
+  - [核心目录说明](#核心目录说明)
+    - [根目录文件](#根目录文件)
+      - [📄 核心文档](#-核心文档)
+      - [📦 配置文件](#-配置文件)
+    - [crates/ - 学习模块](#crates---学习模块)
+      - [📚 模块列表](#-模块列表)
+      - [🏗️ 模块标准结构](#️-模块标准结构)
+    - [guides/ - 学习指南](#guides---学习指南)
+      - [📖 指南分类](#-指南分类)
+    - [reports/ - 项目报告](#reports---项目报告)
+      - [📊 报告结构](#-报告结构)
+      - [📋 主要报告类型](#-主要报告类型)
+    - [docs/ - 深度文档](#docs---深度文档)
+      - [📚 文档分类](#-文档分类)
+    - [automation/ - 自动化配置](#automation---自动化配置)
+    - [deployment/ - 部署配置](#deployment---部署配置)
+    - [scripts/ - 脚本工具](#scripts---脚本工具)
+    - [tools/ - 开发工具](#tools---开发工具)
+    - [examples/ - 示例项目](#examples---示例项目)
+    - [templates/ - 项目模板](#templates---项目模板)
+    - [tests/ - 集成测试](#tests---集成测试)
   - [导航指南](#导航指南)
     - [🎯 我想](#-我想)
-      - [学习 Rust](#学习-rust)
+      - [学习Rust](#学习rust)
       - [查找资料](#查找资料)
       - [解决问题](#解决问题)
       - [提升代码质量](#提升代码质量)
+      - [了解项目进度](#了解项目进度)
       - [参与贡献](#参与贡献)
-  - [📊 项目统计](#-项目统计)
-    - [文档规模](#文档规模)
-    - [代码规模](#代码规模)
-    - [内容覆盖](#内容覆盖)
+  - [项目统计](#项目统计)
+    - [📊 规模统计](#-规模统计)
+    - [✨ 内容覆盖](#-内容覆盖)
   - [🔗 相关文档](#-相关文档)
 
 ---
 
 ## 项目总览
 
-本项目是一个全面的 Rust 学习资源集合，采用 Cargo Workspace 组织多个学习模块。
+本项目是一个全面的 Rust 学习资源集合，采用 **Cargo Workspace** 组织多个学习模块。
+项目结构经过精心设计，确保清晰的组织和易于导航。
 
-### 目录树概览
+### 设计原则
+
+- ✅ **清晰分类**: 文档、代码、配置分别组织
+- ✅ **扁平化根目录**: 根目录只保留核心文档
+- ✅ **模块化设计**: 每个学习模块独立完整
+- ✅ **文档优先**: 丰富的文档和指南支持
+
+---
+
+## 目录树概览
 
 ```text
 rust-lang/
-├── README.md                    # 项目主入口
-├── CONTRIBUTING.md              # 贡献指南
-├── LEARNING_CHECKLIST.md        # 学习检查清单
-├── QUICK_REFERENCE.md           # 快速参考手册
-├── ROADMAP.md                   # 项目路线图
-├── CHANGELOG.md                 # 更新日志
-├── TROUBLESHOOTING.md           # 故障排查指南
-├── BEST_PRACTICES.md            # 最佳实践
-├── RESOURCES.md                 # 学习资源大全
-├── PROJECT_STRUCTURE.md         # 本文档
-├── Cargo.toml                   # 工作空间配置
-├── Cargo.lock                   # 依赖锁定
-├── crates/                      # 学习模块
-│   ├── c01_ownership_borrow_scope/   # 所有权与借用
-│   ├── c02_type_system/              # 类型系统
-│   ├── c03_control_fn/               # 控制流与函数
-│   ├── c04_generic/                  # 泛型编程
-│   ├── c05_threads/                  # 线程与并发
-│   ├── c06_async/                    # 异步编程
-│   ├── c07_process/                  # 进程管理
-│   ├── c08_algorithms/               # 算法与数据结构
-│   ├── c09_design_pattern/           # 设计模式
-│   ├── c10_networks/                 # 网络编程
-│   ├── c11_middlewares/              # 中间件集成
-│   ├── c12_model/                    # 模型与架构
-│   └── c13_reliability/              # 可靠性框架
-├── docs/                        # 深度文档
-│   ├── formal_rust/             # 形式化 Rust
-│   ├── language/                # 语言特性详解
-│   └── ref/                     # 参考文档
-├── scripts/                     # 自动化脚本
-│   ├── ci/                      # CI/CD 脚本
-│   └── observability/           # 可观测性脚本
-├── tests/                       # 集成测试
-│   ├── common/                  # 公共测试代码
-│   ├── documentation/           # 文档测试
-│   ├── integration/             # 集成测试
-│   └── performance/             # 性能测试
-└── templates/                   # 项目模板
-    ├── basic-library/           # 基础库模板
-    ├── cli-app/                 # CLI 应用模板
-    └── web-app/                 # Web 应用模板
+├── 📄 核心文档（根目录）
+│   ├── README.md                    # 项目主入口 ⭐
+│   ├── README.en.md                 # 英文版README
+│   ├── CONTRIBUTING.md              # 贡献指南
+│   ├── CHANGELOG.md                 # 更新日志
+│   ├── LICENSE                      # 开源许可证
+│   ├── BEST_PRACTICES.md            # 最佳实践
+│   ├── LEARNING_CHECKLIST.md        # 学习检查清单
+│   ├── QUICK_REFERENCE.md           # 快速参考手册
+│   ├── RESOURCES.md                 # 学习资源大全
+│   ├── ROADMAP.md                   # 项目路线图
+│   ├── TROUBLESHOOTING.md           # 故障排查指南
+│   └── PROJECT_STRUCTURE.md         # 本文档
+│
+├── 📦 构建配置
+│   ├── Cargo.toml                   # Workspace配置 ⭐
+│   ├── Cargo.lock                   # 依赖锁定文件
+│   ├── rustfmt.toml                 # 代码格式化配置
+│   ├── clippy.toml                  # Clippy Lint配置
+│   ├── deny.toml                    # cargo-deny配置
+│   └── tarpaulin.toml               # 代码覆盖率配置
+│
+├── 📚 crates/                       # 学习模块 ⭐⭐⭐
+│   ├── c01_ownership_borrow_scope/  # C01: 所有权与借用
+│   ├── c02_type_system/             # C02: 类型系统
+│   ├── c03_control_fn/              # C03: 控制流与函数
+│   ├── c04_generic/                 # C04: 泛型编程
+│   ├── c05_threads/                 # C05: 线程与并发
+│   ├── c06_async/                   # C06: 异步编程
+│   ├── c07_process/                 # C07: 进程管理
+│   ├── c08_algorithms/              # C08: 算法与数据结构
+│   ├── c09_design_pattern/          # C09: 设计模式
+│   ├── c10_networks/                # C10: 网络编程
+│   ├── c11_middlewares/             # C11: 中间件集成
+│   ├── c12_model/                   # C12: 模型与架构
+│   └── c13_reliability/             # C13: 可靠性框架
+│
+├── 📖 guides/                       # 学习指南 ⭐⭐
+│   ├── README.md                    # 指南目录索引
+│   ├── AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md
+│   ├── AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.en.md
+│   ├── RUST_COMPILER_INTERNALS_GUIDE_2025.md
+│   ├── RUST_COMPILER_INTERNALS_GUIDE_2025.en.md
+│   ├── COGNITIVE_SCIENCE_LEARNING_GUIDE_2025.md
+│   ├── QUICK_START_GUIDE_2025_10_20.md
+│   ├── COMPREHENSIVE_UNIVERSITY_ALIGNMENT_REPORT_2025.md
+│   ├── INTERACTIVE_LEARNING_PLATFORM.md
+│   ├── MASTER_DOCUMENTATION_INDEX.md
+│   ├── PRACTICAL_PROJECTS_ROADMAP_2025_10_20.md
+│   ├── GLOBAL_THEORETICAL_FRAMEWORK_2025_10_20.md
+│   ├── DOCUMENTATION_TOOLCHAIN_DESIGN_2025_10_20.md
+│   └── [其他指南文档...]
+│
+├── 📊 reports/                      # 项目报告 ⭐
+│   ├── README.md                    # 报告目录索引
+│   ├── dependencies/                # 依赖更新报告
+│   │   ├── DEPENDENCY_*.md
+│   │   └── REDIS_*.md
+│   ├── modules/                     # 模块完成报告
+│   │   ├── ALL_MODULES_COMPLETION_REPORT_2025_10_20.md
+│   │   └── [其他模块报告...]
+│   ├── phases/                      # 阶段报告
+│   │   ├── PHASE1_COMPLETION_REPORT_2025_10_20.md
+│   │   └── PHASE2_*.md
+│   └── [其他综合报告...]
+│
+├── 📖 docs/                         # 深度文档
+│   ├── formal_rust/                 # 形式化Rust (3500+ 文件)
+│   ├── language/                    # 语言特性详解 (400+ 文件)
+│   └── ref/                         # 参考文档 (860+ 文件)
+│
+├── 🤖 automation/                   # 自动化配置
+│   ├── CI_CD_AUTOMATION_CONFIG.md
+│   ├── MONITORING_AUTOMATION_CONFIG.md
+│   └── PROJECT_AUTOMATION_GUIDE.md
+│
+├── 🚀 deployment/                   # 部署配置
+│   ├── DEPLOYMENT_AUTOMATION_CONFIGURATION.md
+│   └── RUST_DEPLOYMENT_GUIDE.md
+│
+├── 🔧 scripts/                      # 脚本工具
+│   ├── *.ps1                        # PowerShell脚本
+│   ├── *.sh                         # Bash脚本
+│   └── README.md
+│
+├── 🛠️ tools/                        # 开发工具
+│   ├── doc_search/                  # 文档搜索工具
+│   └── [其他工具...]
+│
+├── 💡 examples/                     # 示例项目
+│   ├── ai_assisted/                 # AI辅助开发示例
+│   └── compiler_internals/          # 编译器内部示例
+│
+├── 📝 templates/                    # 项目模板
+│   ├── basic_library/
+│   ├── cli_app/
+│   └── web_app/
+│
+├── 🧪 tests/                        # 集成测试
+│   └── [测试文件...]
+│
+└── 🎯 exercises/                    # 练习题
+    ├── c01_ownership/
+    └── c06_async/
 ```
 
 ---
 
-## 根目录文件
+## 核心目录说明
 
-### 核心文档
+### 根目录文件
 
-#### README.md
+#### 📄 核心文档
 
-- **用途**: 项目总览和入口文档
-- **包含**:
-  - 项目介绍和定位
-  - 快速开始指南
-  - 3 套完整学习路径
-  - 模块导航和统计
-- **何时查看**: 第一次了解项目时
+| 文件 | 用途 | 何时查看 |
+|------|------|---------|
+| `README.md` | 项目总览和入口 | 首次了解项目 ⭐ |
+| `CONTRIBUTING.md` | 贡献指南 | 想要贡献代码时 |
+| `CHANGELOG.md` | 更新日志 | 查看版本变更 |
+| `BEST_PRACTICES.md` | 最佳实践 | 提升代码质量 |
+| `LEARNING_CHECKLIST.md` | 学习清单 | 追踪学习进度 |
+| `QUICK_REFERENCE.md` | 快速参考 | 查找语法速查 ⭐ |
+| `RESOURCES.md` | 学习资源 | 寻找学习材料 |
+| `ROADMAP.md` | 项目路线图 | 了解项目规划 |
+| `TROUBLESHOOTING.md` | 故障排查 | 遇到问题时 ⭐ |
+| `PROJECT_STRUCTURE.md` | 项目结构 | 了解目录组织 |
 
-#### CONTRIBUTING.md
+#### 📦 配置文件
 
-- **用途**: 贡献指南
-- **包含**:
-  - 贡献流程（10 步）
-  - 代码规范
-  - 文档规范
-  - 提交规范
-  - Issue/PR 模板
-- **何时查看**: 想要贡献代码或文档时
-
-#### LEARNING_CHECKLIST.md
-
-- **用途**: 学习进度追踪
-- **包含**:
-  - 200+ 学习任务
-  - 4 个学习阶段
-  - 交互式复选框
-  - 学习建议和策略
-- **何时查看**: 系统学习 Rust 时
-
-#### QUICK_REFERENCE.md
-
-- **用途**: 快速查询手册
-- **包含**:
-  - 核心语法速查
-  - 650+ 代码示例
-  - 10 个主题分类
-  - 常用模式汇总
-- **何时查看**: 需要快速查找语法时
-
-#### ROADMAP.md
-
-- **用途**: 项目路线图
-- **包含**:
-  - 短/中/长期规划
-  - 版本计划（v1.1-v3.0）
-  - 功能优先级
-  - 社区参与机制
-- **何时查看**: 了解项目未来方向时
-
-#### CHANGELOG.md
-
-- **用途**: 版本历史
-- **包含**:
-  - 版本更新记录
-  - 详细变更说明
-  - 统计数据
-- **何时查看**: 查看版本变更时
-
-#### TROUBLESHOOTING.md
-
-- **用途**: 故障排查指南
-- **包含**:
-  - 50+ 常见问题
-  - 编译/运行时错误
-  - 性能问题诊断
-  - 工具链问题
-- **何时查看**: 遇到错误或问题时
-
-#### BEST_PRACTICES.md
-
-- **用途**: 最佳实践指南
-- **包含**:
-  - 100+ 实践示例
-  - 代码风格规范
-  - 性能优化技巧
-  - ✅/❌ 对比示例
-- **何时查看**: 提升代码质量时
-
-#### RESOURCES.md
-
-- **用途**: 学习资源大全
-- **包含**:
-  - 官方资源汇总
-  - 在线教程推荐
-  - 视频课程列表
-  - 书籍推荐
-  - 工具推荐
-- **何时查看**: 寻找学习资源时
-
-#### PROJECT_STRUCTURE.md
-
-- **用途**: 项目结构说明（本文档）
-- **包含**:
-  - 目录结构详解
-  - 文件用途说明
-  - 导航指南
-- **何时查看**: 了解项目组织时
-
-### 配置文件
-
-#### Cargo.toml
-
-- **用途**: Cargo Workspace 配置
-- **包含**:
-  - workspace 成员列表
-  - 共享依赖配置
-  - 全局设置
-
-```toml
-[workspace]
-members = [
-    "crates/c01_ownership_borrow_scope",
-    "crates/c02_type_system",
-    # ... 其他模块
-]
-
-[workspace.dependencies]
-# 共享依赖版本
-```
-
-#### Cargo.lock
-
-- **用途**: 依赖版本锁定
-- **说明**: 自动生成，不应手动编辑
-- **版本控制**: 应提交到 Git
-
-#### rustfmt.toml
-
-- **用途**: 代码格式化配置
-- **使用**: `cargo fmt` 自动应用
-
-```toml
-edition = "2021"
-max_width = 100
-tab_spaces = 4
-```
-
-#### clippy.toml
-
-- **用途**: Clippy linter 配置
-- **使用**: `cargo clippy` 应用规则
+| 文件 | 用途 | 说明 |
+|------|------|------|
+| `Cargo.toml` | Workspace配置 | Cargo工作空间定义 |
+| `Cargo.lock` | 依赖锁定 | 自动生成，勿手动编辑 |
+| `rustfmt.toml` | 格式化配置 | `cargo fmt` 使用 |
+| `clippy.toml` | Lint配置 | `cargo clippy` 使用 |
+| `deny.toml` | 安全审计配置 | `cargo deny` 使用 |
+| `tarpaulin.toml` | 覆盖率配置 | 代码覆盖率测试 |
 
 ---
 
-## 文档目录
+### crates/ - 学习模块
 
-### docs/
+**核心学习内容**，13个独立模块，从基础到高级全面覆盖Rust。
 
-深度文档和参考资料目录。
+#### 📚 模块列表
 
-#### formal_rust/
+| 模块 | 名称 | 难度 | 主题 |
+|------|------|------|------|
+| **C01** | 所有权与借用 | ⭐ | 所有权、借用、生命周期 |
+| **C02** | 类型系统 | ⭐⭐ | 类型、泛型、Trait |
+| **C03** | 控制流与函数 | ⭐⭐ | 条件、循环、闭包 |
+| **C04** | 泛型编程 | ⭐⭐⭐ | 高级泛型、GATs |
+| **C05** | 线程与并发 | ⭐⭐⭐ | 多线程、锁、原子 |
+| **C06** | 异步编程 | ⭐⭐⭐⭐ | async/await、Future |
+| **C07** | 进程管理 | ⭐⭐⭐ | 进程、IPC |
+| **C08** | 算法与数据结构 | ⭐⭐⭐ | 经典算法 |
+| **C09** | 设计模式 | ⭐⭐⭐⭐ | GoF模式、Rust模式 |
+| **C10** | 网络编程 | ⭐⭐⭐ | TCP/UDP、HTTP |
+| **C11** | 中间件集成 | ⭐⭐⭐ | 数据库、消息队列 |
+| **C12** | 模型与架构 | ⭐⭐⭐⭐ | 架构模式、建模 |
+| **C13** | 可靠性框架 | ⭐⭐⭐⭐⭐ | 容错、分布式 |
 
-- **内容**: 形式化 Rust 文档
-- **文件数**: 3500+ 个 Markdown 文件
-- **主题**:
-  - 类型理论
-  - 形式化验证
-  - 语义分析
-  - 安全证明
+#### 🏗️ 模块标准结构
 
-#### language/
-
-- **内容**: 语言特性详细解释
-- **文件数**: 400+ 个文件
-- **组织**: 按语言特性分类
-- **用途**: 深入理解语言机制
-
-#### ref/
-
-- **内容**: 参考文档
-- **文件数**: 860+ 个文件
-- **内容**: 标准库文档、RFC 等
-
----
-
-## 模块目录
-
-### crates/
-
-所有学习模块的根目录，每个模块是一个独立的 Rust crate。
-
-### 模块结构
-
-每个模块（如 `c01_ownership_borrow_scope/`）都遵循统一结构：
+每个模块遵循统一的结构：
 
 ```text
-c01_ownership_borrow_scope/
-├── Cargo.toml               # 模块配置
-├── README.md                # 模块说明
-├── docs/                    # 文档目录
-│   ├── 00_MASTER_INDEX.md   # 主索引（导航入口）
-│   ├── FAQ.md               # 常见问题
-│   ├── Glossary.md          # 术语表
-│   ├── 01_theory/           # 理论文档
-│   ├── 02_basics/           # 基础文档
-│   ├── 03_advanced/         # 高级文档
-│   └── 04_practice/         # 实践文档
-├── src/                     # 源代码
-│   ├── lib.rs               # 库入口
-│   └── ...                  # 其他源文件
-├── examples/                # 示例代码
-│   ├── 01_basic.rs
-│   └── ...
-├── tests/                   # 单元/集成测试
-│   ├── integration_test.rs
-│   └── ...
-└── benches/                 # 基准测试（部分模块）
-    └── benchmark.rs
+c##_module_name/
+├── Cargo.toml           # 模块配置
+├── README.md            # 模块说明
+├── docs/                # 文档目录
+│   ├── 00_MASTER_INDEX.md  # 主索引 ⭐
+│   ├── FAQ.md              # 常见问题
+│   ├── Glossary.md         # 术语表
+│   └── [主题文档...]
+├── src/                 # 源代码
+│   ├── lib.rs
+│   └── [模块代码...]
+├── examples/            # 示例代码
+├── tests/               # 测试用例
+└── benches/            # 基准测试（部分模块）
 ```
 
-### 模块详解
-
-#### C01 - 所有权与借用 (c01_ownership_borrow_scope/)
-
-- **主题**: 所有权、借用、生命周期
-- **难度**: ⭐ 入门必修
-- **文档**: 20+ 术语，6 个 FAQ
-- **入口**: [docs/00_MASTER_INDEX.md](./crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md)
-
-#### C02 - 类型系统 (c02_type_system/)
-
-- **主题**: 类型、泛型、Trait
-- **难度**: ⭐⭐ 初级
-- **文档**: 15+ 术语，7 个 FAQ
-- **入口**: [docs/00_MASTER_INDEX.md](./crates/c02_type_system/docs/00_MASTER_INDEX.md)
-
-#### C03 - 控制流与函数 (c03_control_fn/)
-
-- **主题**: 条件、循环、闭包、错误处理
-- **难度**: ⭐⭐ 初级
-- **文档**: 12+ 术语，8 个 FAQ
-- **入口**: [docs/00_MASTER_INDEX.md](./crates/c03_control_fn/docs/00_MASTER_INDEX.md)
-
-#### C04 - 泛型编程 (c04_generic/)
-
-- **主题**: 高级泛型、GATs、RPITIT
-- **难度**: ⭐⭐⭐ 中级
-- **文档**: 10+ 术语，6 个 FAQ
-- **入口**: [docs/00_MASTER_INDEX.md](./crates/c04_generic/docs/00_MASTER_INDEX.md)
-
-#### C05 - 线程与并发 (c05_threads/)
-
-- **主题**: 多线程、Channel、Mutex、Arc
-- **难度**: ⭐⭐⭐ 中级
-- **文档**: 15+ 术语，8 个 FAQ
-- **入口**: [docs/00_MASTER_INDEX.md](./crates/c05_threads/docs/00_MASTER_INDEX.md)
-
-#### C06 - 异步编程 (c06_async/)
-
-- **主题**: async/await、Future、tokio
-- **难度**: ⭐⭐⭐⭐ 高级
-- **文档**: 18+ 术语，9 个 FAQ
-- **入口**: [docs/00_MASTER_INDEX.md](./crates/c06_async/docs/00_MASTER_INDEX.md)
-
-#### C07 - 进程管理 (c07_process/)
-
-- **主题**: 进程、IPC、信号处理
-- **难度**: ⭐⭐⭐ 中级
-- **文档**: 12+ 术语，5 个 FAQ
-- **入口**: [docs/00_MASTER_INDEX.md](./crates/c07_process/docs/00_MASTER_INDEX.md)
-
-#### C08 - 算法与数据结构 (c08_algorithms/)
-
-- **主题**: 常见算法和数据结构实现
-- **难度**: ⭐⭐⭐ 中级
-- **文档**: 10+ 术语，6 个 FAQ
-- **入口**: [docs/00_MASTER_INDEX.md](./crates/c08_algorithms/docs/00_MASTER_INDEX.md)
-
-#### C09 - 设计模式 (c09_design_pattern/)
-
-- **主题**: GoF 模式、Rust 特定模式、并发模式
-- **难度**: ⭐⭐⭐⭐ 高级
-- **文档**: 15+ 术语，7 个 FAQ
-- **入口**: [docs/00_MASTER_INDEX.md](./crates/c09_design_pattern/docs/00_MASTER_INDEX.md)
-
-#### C10 - 网络编程 (c10_networks/)
-
-- **主题**: TCP/UDP、HTTP、WebSocket
-- **难度**: ⭐⭐⭐ 中级-高级
-- **文档**: 12+ 术语，8 个 FAQ
-- **入口**: [docs/00_MASTER_INDEX.md](./crates/c10_networks/docs/00_MASTER_INDEX.md)
-
-#### C11 - 中间件集成 (c11_middlewares/)
-
-- **主题**: 数据库、消息队列、缓存
-- **难度**: ⭐⭐⭐ 中级
-- **文档**: 10+ 术语，5 个 FAQ
-- **入口**: [docs/00_MASTER_INDEX.md](./crates/c11_middlewares/docs/00_MASTER_INDEX.md)
-
-#### C12 - 模型与架构 (c12_model/)
-
-- **主题**: 建模理论、架构模式、形式化方法
-- **难度**: ⭐⭐⭐⭐ 高级
-- **文档**: 8+ 术语，5 个 FAQ
-- **入口**: [docs/00_MASTER_INDEX.md](./crates/c12_model/docs/00_MASTER_INDEX.md)
-
-#### C13 - 可靠性框架 (c13_reliability/)
-
-- **主题**: 容错、分布式系统、可观测性
-- **难度**: ⭐⭐⭐⭐⭐ 高级
-- **文档**: 18+ 术语，9 个 FAQ
-- **入口**: [docs/00_MASTER_INDEX.md](./crates/c13_reliability/docs/00_MASTER_INDEX.md)
+**入口文档**: 每个模块的 `docs/00_MASTER_INDEX.md` 是学习的起点！
 
 ---
 
-## 脚本目录
+### guides/ - 学习指南
 
-### scripts/
+**系统化的学习指南和参考文档**，帮助深入理解和高效学习。
 
-自动化脚本和工具。
+#### 📖 指南分类
 
-#### 主要脚本
+**🤖 AI辅助开发**:
 
-##### dev-setup.sh / dev-setup.ps1
+- `AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md` - AI辅助编程完整指南（中文）
+- `AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.en.md` - AI辅助编程完整指南（英文）
 
-- **用途**: 开发环境设置
-- **功能**:
-  - 安装 Rust 工具链
-  - 配置开发工具
-  - 安装依赖
+**🔧 编译器与底层**:
 
-##### ci/ 目录
+- `RUST_COMPILER_INTERNALS_GUIDE_2025.md` - 编译器内部机制（中文）
+- `RUST_COMPILER_INTERNALS_GUIDE_2025.en.md` - 编译器内部机制（英文）
 
-- **用途**: CI/CD 脚本
-- **文件**:
-  - `check_dependencies.ps1` - 依赖检查
-  - `run_benchmarks.ps1` - 运行基准测试
-  - `security_fix_automation.ps1` - 安全修复
+**🧠 学习方法**:
 
-##### observability/ 目录
+- `COGNITIVE_SCIENCE_LEARNING_GUIDE_2025.md` - 认知科学学习指南
+- `QUICK_START_GUIDE_2025_10_20.md` - 快速开始指南
 
-- **用途**: 可观测性相关脚本
-- **用途**: 监控、日志、追踪
+**🎓 学术对标**:
+
+- `COMPREHENSIVE_UNIVERSITY_ALIGNMENT_REPORT_2025.md` - 大学课程对标
+- `ALIGNMENT_QUICK_REFERENCE.md` - 对标快速参考
+- `ALIGNMENT_VISUALIZATION_2025.md` - 对标可视化
+
+**💻 实践项目**:
+
+- `PRACTICAL_PROJECTS_ROADMAP_2025_10_20.md` - 实践项目路线图
+- `INTERACTIVE_LEARNING_PLATFORM.md` - 交互式学习平台
+
+**📊 理论与工具**:
+
+- `GLOBAL_THEORETICAL_FRAMEWORK_2025_10_20.md` - 全局理论框架
+- `DOCUMENTATION_TOOLCHAIN_DESIGN_2025_10_20.md` - 文档工具链设计
+- `MASTER_DOCUMENTATION_INDEX.md` - 主文档索引
+
+👉 查看 [guides/README.md](./guides/README.md) 了解详细分类和使用指南
 
 ---
 
-## 工具配置
+### reports/ - 项目报告
 
-### Rust 工具配置
+**项目各阶段的完成报告、更新总结和分析文档**。
 
-#### rustfmt 配置示例
+#### 📊 报告结构
 
-```toml
-edition = "2021"
-max_width = 100
-tab_spaces = 4
+```text
+reports/
+├── dependencies/        # 依赖更新报告
+├── modules/            # 模块完成报告
+├── phases/             # 阶段性报告
+└── [其他综合报告]
 ```
 
-#### clippy 配置示例
+#### 📋 主要报告类型
 
-```toml
-# Clippy 配置
+**🔧 依赖更新** (`dependencies/`)
+
+- 记录依赖库的更新历史
+- Redis等重要组件的升级文档
+
+**📦 模块完成** (`modules/`)
+
+- 各模块（C01-C13）的完成情况
+- 功能增强和扩展总结
+
+**🎯 阶段里程碑** (`phases/`)
+
+- PHASE1: 基础模块完成
+- PHASE2: 高级功能和优化完成
+
+👉 查看 [reports/README.md](./reports/README.md) 了解详细分类
+
+---
+
+### docs/ - 深度文档
+
+**深度理论文档和参考资料**，包含5000+个文档文件。
+
+#### 📚 文档分类
+
+- **formal_rust/** - 形式化Rust理论（3500+ 文件）
+  - 类型理论
+  - 形式化验证
+  - 安全证明
+
+- **language/** - 语言特性详解（400+ 文件）
+  - 详细的语言机制
+  - 底层实现原理
+
+- **ref/** - 参考文档（860+ 文件）
+  - 标准库文档
+  - RFC文档
+
+---
+
+### automation/ - 自动化配置
+
+**CI/CD和自动化工具配置**。
+
+- `CI_CD_AUTOMATION_CONFIG.md` - CI/CD自动化配置
+- `MONITORING_AUTOMATION_CONFIG.md` - 监控自动化配置
+- `PROJECT_AUTOMATION_GUIDE.md` - 项目自动化指南
+
+---
+
+### deployment/ - 部署配置
+
+**生产环境部署配置和指南**。
+
+- `DEPLOYMENT_AUTOMATION_CONFIGURATION.md` - 部署自动化配置
+- `RUST_DEPLOYMENT_GUIDE.md` - Rust部署指南
+
+---
+
+### scripts/ - 脚本工具
+
+**自动化脚本和工具**，支持Windows (PowerShell) 和 Unix (Bash)。
+
+```text
+scripts/
+├── *.ps1               # PowerShell脚本
+├── *.sh                # Bash脚本
+└── README.md           # 脚本说明
 ```
 
-#### deny.toml
+---
 
-- **用途**: cargo-deny 配置
-- **功能**: 依赖审计、安全检查
+### tools/ - 开发工具
 
-#### tarpaulin.toml
+**辅助开发的工具集**。
 
-- **用途**: 代码覆盖率配置
-- **工具**: cargo-tarpaulin
+- `doc_search/` - 文档搜索工具
+  - 全文搜索引擎
+  - 快速定位文档
+
+---
+
+### examples/ - 示例项目
+
+**完整的示例项目**，展示实际应用。
+
+- `ai_assisted/` - AI辅助开发示例
+- `compiler_internals/` - 编译器内部示例
+
+---
+
+### templates/ - 项目模板
+
+**快速启动项目的模板**。
+
+- `basic_library/` - 基础库模板
+- `cli_app/` - CLI应用模板
+- `web_app/` - Web应用模板
+
+---
+
+### tests/ - 集成测试
+
+**工作空间级别的集成测试**。
 
 ---
 
@@ -511,73 +423,91 @@ tab_spaces = 4
 
 ### 🎯 我想
 
-#### 学习 Rust
+#### 学习Rust
 
-1. **完全新手**: 从 [README.md](./README.md) 开始
-2. **选择路径**: 查看 [学习路径](./README.md#学习路径推荐)
-3. **开始模块**: 从 [C01](./crates/c01_ownership_borrow_scope/) 开始
+1. **完全新手** → [README.md](./README.md) → [C01模块](./crates/c01_ownership_borrow_scope/)
+2. **选择路径** → [学习路径](./README.md#学习路径推荐)
+3. **快速上手** → [快速开始指南](./guides/QUICK_START_GUIDE_2025_10_20.md)
 
 #### 查找资料
 
-1. **快速查询**: [QUICK_REFERENCE.md](./QUICK_REFERENCE.md)
-2. **详细学习**: 各模块的 `docs/00_MASTER_INDEX.md`
-3. **常见问题**: 各模块的 `docs/FAQ.md`
-4. **术语查询**: 各模块的 `docs/Glossary.md`
+1. **快速查询** → [QUICK_REFERENCE.md](./QUICK_REFERENCE.md)
+2. **深入学习** → 各模块的 `docs/00_MASTER_INDEX.md`
+3. **常见问题** → 各模块的 `docs/FAQ.md`
+4. **术语查询** → 各模块的 `docs/Glossary.md`
+5. **所有文档** → [主文档索引](./guides/MASTER_DOCUMENTATION_INDEX.md)
 
 #### 解决问题
 
-1. **编译错误**: [TROUBLESHOOTING.md](./TROUBLESHOOTING.md#编译错误)
-2. **运行时错误**: [TROUBLESHOOTING.md](./TROUBLESHOOTING.md#运行时错误)
-3. **性能问题**: [TROUBLESHOOTING.md](./TROUBLESHOOTING.md#性能问题)
+1. **编译错误** → [TROUBLESHOOTING.md](./TROUBLESHOOTING.md#编译错误)
+2. **运行时错误** → [TROUBLESHOOTING.md](./TROUBLESHOOTING.md#运行时错误)
+3. **性能问题** → [TROUBLESHOOTING.md](./TROUBLESHOOTING.md#性能问题)
 
 #### 提升代码质量
 
-1. **最佳实践**: [BEST_PRACTICES.md](./BEST_PRACTICES.md)
-2. **代码审查**: 查看示例代码
-3. **学习模式**: [C09 设计模式](./crates/c09_design_pattern/)
+1. **最佳实践** → [BEST_PRACTICES.md](./BEST_PRACTICES.md)
+2. **代码审查** → 查看模块示例代码
+3. **学习模式** → [C09 设计模式](./crates/c09_design_pattern/)
+
+#### 了解项目进度
+
+1. **整体进度** → [PHASE2完成报告](./reports/phases/PHASE2_FINAL_COMPLETION_REPORT_2025_10_20.md)
+2. **模块进度** → [模块完成报告](./reports/modules/)
+3. **更新历史** → [CHANGELOG.md](./CHANGELOG.md)
+4. **未来规划** → [ROADMAP.md](./ROADMAP.md)
 
 #### 参与贡献
 
-1. **阅读指南**: [CONTRIBUTING.md](./CONTRIBUTING.md)
-2. **查看规划**: [ROADMAP.md](./ROADMAP.md)
-3. **选择任务**: GitHub Issues
+1. **阅读指南** → [CONTRIBUTING.md](./CONTRIBUTING.md)
+2. **查看规划** → [ROADMAP.md](./ROADMAP.md)
+3. **提交Issue** → GitHub Issues
 
 ---
 
-## 📊 项目统计
+## 项目统计
 
-### 文档规模
+### 📊 规模统计
 
-- **项目级文档**: 10 个（~14,500 行）
-- **模块级文档**: 39 个（~8,600 行）
-- **深度文档**: 4000+ 个文件
-- **总文档量**: ~23,000 行 + 深度文档
+```text
+📁 目录结构：
+├─ 学习模块：13 个 (C01-C13)
+├─ 指南文档：15+ 篇
+├─ 项目报告：30+ 篇
+├─ 深度文档：5000+ 个文件
+└─ 总文档量：~50,000 行
 
-### 代码规模
+💻 代码规模：
+├─ Rust 源代码：50,000+ 行
+├─ 示例代码：300+ 个
+├─ 测试用例：200+ 个
+└─ 基准测试：50+ 个
 
-- **模块数量**: 13 个
-- **源代码**: 50,000+ 行
-- **示例代码**: 300+ 个
-- **测试用例**: 200+ 个
-- **基准测试**: 50+ 个
+📚 学习资源：
+├─ 主索引文档：13 个
+├─ FAQ：79 个问题
+├─ 术语定义：165+ 个
+└─ 实践项目：10+ 个
+```
 
-### 内容覆盖
+### ✨ 内容覆盖
 
-- **核心概念**: 100%
-- **高级特性**: 100%
-- **并发编程**: 100%
-- **异步编程**: 100%
-- **网络编程**: 100%
-- **系统编程**: 100%
+- ✅ **基础语法**: 100%
+- ✅ **并发编程**: 100%
+- ✅ **异步编程**: 100%
+- ✅ **网络编程**: 100%
+- ✅ **系统编程**: 100%
+- ✅ **生产实践**: 100%
 
 ---
 
 ## 🔗 相关文档
 
-- **项目入口**: [README.md](./README.md)
-- **学习资源**: [RESOURCES.md](./RESOURCES.md)
+- **项目入口**: [README.md](./README.md) ⭐
+- **学习指南**: [guides/](./guides/) ⭐⭐
+- **项目报告**: [reports/](./reports/)
 - **贡献指南**: [CONTRIBUTING.md](./CONTRIBUTING.md)
 - **项目路线**: [ROADMAP.md](./ROADMAP.md)
+- **学习资源**: [RESOURCES.md](./RESOURCES.md)
 
 ---
 
@@ -585,6 +515,6 @@ tab_spaces = 4
 
 了解项目结构有助于更好地利用学习资源。
 
-**最后更新**: 2025-10-19
-**维护团队**: Rust 学习社区
-**版本**: v1.0
+**最后更新**: 2025-10-20  
+**维护团队**: Rust 学习社区  
+**版本**: v2.0
