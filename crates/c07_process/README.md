@@ -1,8 +1,16 @@
 # C07 Process Management Library
 
+## 🌟 2025-10-20 核心增强更新
+
+- **📊 [知识图谱与概念关系](./docs/theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)** - 进程管理完整体系
+- **📐 [多维矩阵对比分析](./docs/theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)** - IPC/同步原语全面对比
+
+---
+
 ## 目录
 
 - [C07 Process Management Library](#c07-process-management-library)
+  - [🌟 2025-10-20 核心增强更新](#-2025-10-20-核心增强更新)
   - [目录](#目录)
   - [🚀 特性](#-特性)
   - [📦 安装](#-安装)

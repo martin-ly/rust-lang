@@ -1,5 +1,12 @@
 # Rust 算法与数据结构 (Rust 1.90 + Edition 2024 对齐版)
 
+## 🌟 2025-10-20 核心增强更新
+
+- **📊 [知识图谱与概念关系](./docs/theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)** - 算法与数据结构完整体系
+- **📐 [多维矩阵对比分析](./docs/theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)** - 算法/数据结构全面对比
+
+---
+
 **版本**: 0.2.0  
 **Rust版本**: 1.90.0  
 **Edition**: 2024  

@@ -1,5 +1,12 @@
 # 🦀 Rust设计模式综合学习模块
 
+## 🌟 2025-10-20 核心增强更新
+
+- **📊 [知识图谱与概念关系](./docs/theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)** - 设计模式完整体系
+- **📐 [多维矩阵对比分析](./docs/theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)** - GoF/并发模式全面对比
+
+---
+
 **模块类型**: 高级学习模块 + 形式化验证  
 **学习重点**: Rust设计模式、GoF模式、并发模式、形式化理论  
 **适用对象**: Rust中级到高级开发者、系统架构师  

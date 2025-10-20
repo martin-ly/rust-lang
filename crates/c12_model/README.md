@@ -1,5 +1,12 @@
 # c12_model - Rust 1.90 建模与形式方法
 
+## 🌟 2025-10-20 核心增强更新
+
+- **📊 [知识图谱与概念关系](./docs/theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)** - 建模与形式方法完整体系
+- **📐 [多维矩阵对比分析](./docs/theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)** - 形式化/分布式/并发模型全面对比
+
+---
+
 [![Rust](https://img.shields.io/badge/rust-1.90+-orange.svg)](https://www.rust-lang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Crates.io](https://img.shields.io/crates/v/c18_model.svg)](https://crates.io/crates/c18_model)

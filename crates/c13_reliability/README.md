@@ -1,5 +1,12 @@
 # 🛡️ c13_reliability - Rust统一可靠性框架
 
+## 🌟 2025-10-20 核心增强更新
+
+- **📊 [知识图谱与概念关系](./docs/theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)** - 可靠性与容错完整体系
+- **📐 [多维矩阵对比分析](./docs/theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)** - 熔断器/限流/事务/监控全面对比
+
+---
+
 [![Rust](https://img.shields.io/badge/rust-1.90%2B-orange.svg)](https://www.rust-lang.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](Build)
@@ -9,6 +16,7 @@
 ## 📋 目录
 
 - [🛡️ c13\_reliability - Rust统一可靠性框架](#️-c13_reliability---rust统一可靠性框架)
+  - [🌟 2025-10-20 核心增强更新](#-2025-10-20-核心增强更新)
   - [📋 目录](#-目录)
   - [🌟 特性亮点](#-特性亮点)
     - [核心能力](#核心能力)
