@@ -299,6 +299,7 @@ fn factorial(n: u32) -> u64 {
 ### Documentation Search Tool (v1.1)
 
 Features:
+
 - ✅ Full-text search with intelligent ranking
 - ✅ Regular expression search
 - ✅ Fuzzy search
@@ -333,6 +334,7 @@ We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md)
 ## 📄 License
 
 This project is dual-licensed under:
+
 - MIT License
 - Apache License 2.0
 
@@ -343,6 +345,7 @@ Choose the license that best suits your needs.
 ## 🌟 Acknowledgments
 
 Special thanks to:
+
 - The Rust community for continuous support
 - All contributors who helped improve this project
 - Educational institutions for their valuable feedback
@@ -354,7 +357,7 @@ Special thanks to:
 
 - **Issues**: [GitHub Issues](https://github.com/rust-lang/rust-lang/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/rust-lang/rust-lang/discussions)
-- **Email**: support@rust-learning.org
+- **Email**: <support@rust-learning.org>
 
 ---
 
@@ -365,4 +368,3 @@ Special thanks to:
 ---
 
 **Note**: This is an English translation of the Chinese original. Some documentation may still be in Chinese. We are actively working on translating all materials. Contributions to English documentation are especially welcome!
-
