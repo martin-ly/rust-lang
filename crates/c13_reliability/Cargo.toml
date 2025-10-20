@@ -12,6 +12,9 @@ repository = "https://github.com/rust-lang/c13_reliability"
 keywords = ["reliability", "error-handling", "fault-tolerance", "monitoring", "resilience"]
 categories = ["error-handling", "development-tools::testing"]
 
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(kani)'] }
+
 [dependencies]
 # 形式化验证工具依赖（可选）
 # prusti-contracts = { version = "0.2", optional = true }

@@ -13,7 +13,7 @@ pub struct RedisStore {
 impl RedisStore {
     pub async fn connect(url: &str) -> crate::error::Result<Self> {
         let client = redis::Client::open(url)?;
-        let conn = client.get_multiplexed_tokio_connection().await?;
+        let conn = client.get_multiplexed_async_connection().await?;
         Ok(Self {
             conn: tokio::sync::Mutex::new(conn),
         })
@@ -24,7 +24,7 @@ impl RedisStore {
         let retry = cfg.retry.clone();
         crate::util::retry_async(&retry, || async {
             let client = redis::Client::open(url.as_str())?;
-            let conn = client.get_multiplexed_tokio_connection().await?;
+            let conn = client.get_multiplexed_async_connection().await?;
             Ok(Self {
                 conn: tokio::sync::Mutex::new(conn),
             })
