@@ -39,7 +39,15 @@
    - **内核旁路**: AF_XDP高性能包处理 + eBPF网络监控
    - **综合实战**: 基于io_uring的零拷贝高性能文件服务器
 
-8. **[文档索引与导航](docs/RUST_190_PRACTICAL_EXAMPLES.md)**
+8. **[Rust 1.90 综合思维导图](docs/RUST_190_COMPREHENSIVE_MINDMAP.md)** ⭐⭐⭐⭐⭐ 🆕 (2025-10-20)
+   - **ASCII艺术图表**: 协议栈/I/O模型/应用层完整体系
+   - **io_uring + 零拷贝**: 2025最新高性能技术栈可视化
+   - **Runtime决策树**: Tokio/io_uring/AF_XDP选择指南
+   - **3级学习路径**: 初学者/进阶/专家(2-10周)
+   - **问题诊断树**: 网络错误快速定位
+   - **适合**: 快速overview、复习、知识结构梳理
+
+9. **[文档索引与导航](docs/RUST_190_PRACTICAL_EXAMPLES.md)**
    - 所有文档总索引 + 学习路径推荐
 
 📊 **完整报告**: [综合增强报告](C10_COMPREHENSIVE_ENHANCEMENT_REPORT_2025_10_19.md)

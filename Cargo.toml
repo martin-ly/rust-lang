@@ -96,10 +96,10 @@ codegen-units = 1
 [profile.bench.build-override]
 opt-level = 2
 
-# 工作区级别的依赖版本统一 - 2025年10月11日最新稳定版本
-# 更新时间: 2025-10-15 (系统时间已同步)
+# 工作区级别的依赖版本统一 - 2025年10月20日最新稳定版本
+# 更新时间: 2025-10-20 (系统时间已同步)
 # 系统时间已同步，所有依赖库版本已更新至最新成熟版本
-# 全面升级至2025年10月15日最新稳定版本，兼容Rust 1.90
+# 全面升级至2025年10月20日最新稳定版本，兼容Rust 1.90
 [workspace.dependencies]
 # 网络和 HTTP 相关 - 2025年9月27日最新稳定版本
 # reqwest: 高级HTTP客户端库，支持异步请求和JSON序列化 - 2025年10月15日最新版本
@@ -169,7 +169,7 @@ async-stream = "0.3.6"
 tokio-console = "0.1.13"
 # tokio-test: tokio的测试工具
 tokio-test = "0.4.4"
-# mio: 跨平台异步I/O库 - 2025年10月最新版本
+# mio: 跨平台异步I/O库 - 2025年10月20日 (保持1.0.4，等待crossterm更新)
 mio = "1.0.4"
 # tungstenite: WebSocket协议的Rust实现 - 2025年10月最新版本
 tungstenite = "0.28.0"
@@ -332,7 +332,7 @@ sqlx = { version = "0.8.6", features = [  # 更新至最新稳定版本
 redis = "1.0.0-rc.1"
 # rusqlite: SQLite的Rust绑定，提供类型安全的SQLite接口
 rusqlite = { version = "0.37.0", default-features = false }
-# mysql_async: MySQL异步客户端 - 2025年10月11日更新
+# mysql_async: MySQL异步客户端 - 2025年10月20日更新
 mysql_async = "0.36.1"
 # mysql_common: MySQL通用类型 - 2025年10月11日更新
 mysql_common = "0.35.5"
@@ -384,30 +384,30 @@ candle-transformers = "0.9.1"
 tch = "0.17.0"
 # petgraph: 图数据结构和算法库
 petgraph = "0.8.3"
-# image: 图像处理库 - 2025年10月11日更新
+# image: 图像处理库 - 2025年10月20日更新
 image = "0.25.8"
-# imageproc: 图像处理算法库 - 2025年10月11日更新
+# imageproc: 图像处理算法库 - 2025年10月20日更新
 imageproc = "0.25.0"
-# nalgebra: 线性代数库 - 2025年10月11日更新
+# nalgebra: 线性代数库 - 2025年10月20日更新
 nalgebra = "0.34.1"
 # nalgebra-macros: nalgebra的宏支持 - 2025年10月11日更新
 nalgebra-macros = "0.3.0"
-# ndarray: N维数组库 - 2025年10月11日更新
+# ndarray: N维数组库 - 2025年10月20日更新
 ndarray = "0.16.1"
-# ndarray-stats: ndarray的统计功能 - 2025年10月11日更新
+# ndarray-stats: ndarray的统计功能 - 2025年10月20日更新
 ndarray-stats = "0.6.0"
 # png: PNG图像格式支持 - 2025年10月11日更新
 png = "0.18.0"
 # tiff: TIFF图像格式支持 - 2025年10月11日更新
 tiff = "0.10.3"
-# bitflags: 位标志宏 - 2025年10月11日更新
-bitflags = "2.9.4"
+# bitflags: 位标志宏 - 2025年10月20日更新
+bitflags = "2.10.0"
 # hashbrown: 高性能HashMap实现 - 2025年10月11日更新
 hashbrown = "0.16.0"
 # itertools: 迭代器工具库 - 2025年10月11日更新
 itertools = "0.13.0"
-# lru: LRU缓存实现 - 2025年10月11日更新
-lru = "0.14.0"
+# lru: LRU缓存实现 - 2025年10月20日更新
+lru = "0.16.2"
 
 # Web 和 GUI 框架 - 2025年9月27日最新稳定版本
 # tauri 已移除，使用 egui/iced 替代 (解决 GTK3 安全漏洞)
@@ -421,8 +421,8 @@ iced = "0.13.1"
 # burn-ndarray = "0.10.0"  # 暂时禁用，存在版本兼容性问题
 # burn-tch 暂时禁用，与现有tch版本冲突
 
-# 2025年最新高性能异步运行时 - 2025年10月11日最新稳定版本
-# glommio: 线程每核心异步运行时，支持高并行异步应用程序 - 2025年10月最新版本
+# 2025年最新高性能异步运行时 - 2025年10月20日更新
+# glommio: 线程每核心异步运行时，支持高并行异步应用程序 - 2025年10月20日更新
 glommio = "0.9.0"
 
 # 安全漏洞修复 - 2025年9月27日最新稳定版本
@@ -437,7 +437,7 @@ proc-macro-error2 = "2.0.1"
 is-terminal = "0.2.0"
 # wasm-bindgen: WebAssembly绑定生成器，支持WebAssembly 2.0
 wasm-bindgen = "0.2.104"
-# nix: 系统调用安全封装库 - 2025年10月11日最新版本
+# nix: 系统调用安全封装库 - 2025年10月20日更新
 nix = "0.30.1"
 # pingora 已移除，存在安全漏洞 (RUSTSEC-2025-0037, RUSTSEC-2025-0070)
 

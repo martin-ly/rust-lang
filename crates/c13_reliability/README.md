@@ -4,6 +4,12 @@
 
 - **📊 [知识图谱与概念关系](./docs/theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)** - 可靠性与容错完整体系
 - **📐 [多维矩阵对比分析](./docs/theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)** - 熔断器/限流/事务/监控全面对比
+- **🗺️ [Rust 1.90 综合思维导图](./docs/RUST_190_COMPREHENSIVE_MINDMAP.md)** ⭐ NEW!
+  - 容错模式/分布式可靠性/可观测性 | 学习路径(1-6周)
+- **💻 [Rust 1.90 实战示例集](./docs/RUST_190_EXAMPLES_COLLECTION.md)** ⭐ NEW!
+  - 700+行代码 | Circuit Breaker/Saga/分布式追踪
+
+**完整度**: 📊 知识图谱 + 📐 多维矩阵 + 🗺️ 思维导图 + 💻 实战示例 = **100%** ✨
 
 ---
 

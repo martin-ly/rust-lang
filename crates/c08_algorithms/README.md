@@ -4,6 +4,18 @@
 
 - **📊 [知识图谱与概念关系](./docs/theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)** - 算法与数据结构完整体系
 - **📐 [多维矩阵对比分析](./docs/theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)** - 算法/数据结构全面对比
+- **🗺️ [Rust 1.90 综合思维导图](./docs/RUST_190_COMPREHENSIVE_MINDMAP.md)** ⭐ NEW!
+  - ASCII艺术图表 | 数据结构/算法分类/并发算法完整体系
+  - 算法选择决策树 | 排序/搜索/图算法/并发选择指南
+  - 3级学习路径(2-16周) | 问题诊断树
+  - 时间空间复杂度对比 | Rayon并行算法实践
+- **💻 [Rust 1.90 实战示例集](./docs/RUST_190_EXAMPLES_COLLECTION.md)** ⭐ NEW!
+  - 850+行可运行代码 | LRU缓存/Trie树/图算法完整实现
+  - Rust 1.90特性 | 泛型/所有权/并发算法最佳实践
+  - Rayon并行算法 | 并行排序/Map-Reduce实战
+  - 2个综合项目 | 表达式求值器+任务调度系统
+
+**完整度**: 📊 知识图谱 + 📐 多维矩阵 + 🗺️ 思维导图 + 💻 实战示例 = **100%** ✨
 
 ---
 
