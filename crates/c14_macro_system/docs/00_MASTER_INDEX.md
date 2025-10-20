@@ -6,6 +6,52 @@
 
 ---
 
+## 📋 目录
+
+- [📖 C14宏系统 - 主索引](#-c14宏系统---主索引)
+  - [📋 目录](#-目录)
+  - [🎯 模块概述](#-模块概述)
+    - [学习目标](#学习目标)
+  - [📚 学习路径](#-学习路径)
+    - [🌱 初学者路径 (2-3周)](#-初学者路径-2-3周)
+      - [Week 1: 宏基础](#week-1-宏基础)
+      - [Week 2-3: 递归宏与实践](#week-2-3-递归宏与实践)
+    - [🚀 进阶路径 (3-4周)](#-进阶路径-3-4周)
+      - [Week 4-5: 过程宏](#week-4-5-过程宏)
+      - [Week 6-7: 高级应用](#week-6-7-高级应用)
+      - [Week 8: Rust 1.90特性](#week-8-rust-190特性)
+  - [📖 文档结构](#-文档结构)
+    - [01\_theory/ - 理论基础](#01_theory---理论基础)
+    - [02\_declarative/ - 声明宏](#02_declarative---声明宏)
+    - [03\_procedural/ - 过程宏](#03_procedural---过程宏)
+    - [04\_advanced/ - 高级主题](#04_advanced---高级主题)
+    - [05\_practice/ - 最佳实践](#05_practice---最佳实践)
+    - [📦 06. Rust 1.90特性](#-06-rust-190特性)
+  - [💻 代码示例](#-代码示例)
+    - [运行示例](#运行示例)
+    - [示例列表](#示例列表)
+  - [🎓 按角色导航](#-按角色导航)
+    - [我是新手](#我是新手)
+    - [我有Rust基础](#我有rust基础)
+    - [我想深入理解](#我想深入理解)
+  - [🔍 按主题导航](#-按主题导航)
+    - [声明宏 (macro\_rules!)](#声明宏-macro_rules)
+    - [过程宏 (Procedural Macros)](#过程宏-procedural-macros)
+    - [Rust 1.90特性](#rust-190特性)
+    - [DSL与代码生成](#dsl与代码生成)
+  - [🛠️ 工具与资源](#️-工具与资源)
+    - [开发工具](#开发工具)
+    - [调试工具](#调试工具)
+  - [📚 相关资源](#-相关资源)
+    - [官方文档](#官方文档)
+    - [社区资源](#社区资源)
+    - [本模块资源](#本模块资源)
+  - [✅ 学习检查清单](#-学习检查清单)
+    - [基础知识 (必须掌握)](#基础知识-必须掌握)
+    - [进阶技能 (建议掌握)](#进阶技能-建议掌握)
+    - [高级能力 (深入方向)](#高级能力-深入方向)
+  - [🎯 下一步](#-下一步)
+
 ## 🎯 模块概述
 
 Rust宏系统是一个强大的元编程框架，允许在编译期进行代码生成和转换。本模块提供从基础到高级的系统化学习内容。
@@ -101,6 +147,15 @@ Rust宏系统是一个强大的元编程框架，允许在编译期进行代码�
 - [ ] [宏调试](./04_advanced/03_macro_debugging.md)
 - [ ] [宏测试](./04_advanced/05_macro_testing.md)
 
+#### Week 8: Rust 1.90特性
+
+**版本特性掌握**:
+
+- [ ] [Rust 1.90特性总览](./06_rust_190_features/README.md)
+- [ ] [完整特性清单](./06_rust_190_features/COMPREHENSIVE_FEATURES.md)
+- [ ] [实例代码学习](./06_rust_190_features/EXAMPLES.md)
+- [ ] 实践: 使用最新特性重构现有宏
+
 ---
 
 ## 📖 文档结构
@@ -152,6 +207,15 @@ Rust宏系统是一个强大的元编程框架，允许在编译期进行代码�
 | [02_best_practices.md](./05_practice/02_best_practices.md) | ⭐⭐ | 3小时 |
 | [03_anti_patterns.md](./05_practice/03_anti_patterns.md) | ⭐⭐ | 2小时 |
 | [04_real_world_examples.md](./05_practice/04_real_world_examples.md) | ⭐⭐⭐ | 4小时 |
+
+### 📦 06. Rust 1.90特性
+
+| 文档 | 难度 | 预计时间 |
+|------|------|---------|
+| [00_INDEX.md](./06_rust_190_features/00_INDEX.md) | ⭐ | 30分钟 |
+| [README.md](./06_rust_190_features/README.md) | ⭐⭐⭐⭐ | 4小时 |
+| [COMPREHENSIVE_FEATURES.md](./06_rust_190_features/COMPREHENSIVE_FEATURES.md) | ⭐⭐⭐⭐ | 5小时 |
+| [EXAMPLES.md](./06_rust_190_features/EXAMPLES.md) | ⭐⭐⭐ | 3小时 |
 
 ---
 
@@ -250,6 +314,23 @@ cargo run --example 04_recursive_macros
 - `06_attribute_macro_demo.rs`
 - `07_function_macro_demo.rs`
 
+### Rust 1.90特性
+
+**核心文档**:
+
+- [特性索引](./06_rust_190_features/00_INDEX.md) ⭐ 起点
+- [主指南](./06_rust_190_features/README.md) - 10大特性板块
+- [完整特性](./06_rust_190_features/COMPREHENSIVE_FEATURES.md) - 详尽列表
+- [示例集合](./06_rust_190_features/EXAMPLES.md) - 15+示例
+
+**学习重点**:
+
+- 13种片段说明符
+- 过程宏完整API
+- TokenStream优化
+- 宏卫生性增强
+- 诊断与错误报告
+
 ### DSL与代码生成
 
 **核心主题**:
@@ -342,6 +423,8 @@ trace_macros!(true);
 
 - [ ] 构建DSL
 - [ ] 优化宏性能
+- [ ] 掌握Rust 1.90最新特性
+- [ ] 理解TokenStream优化
 - [ ] 调试复杂宏
 - [ ] 设计宏API
 - [ ] 在生产环境使用宏
@@ -352,7 +435,7 @@ trace_macros!(true);
 
 根据你的学习目标选择：
 
-1. **系统学习** → 按[初学者路径](#)开始
+1. **系统学习** → 按[初学者路径](#-初学者路径-2-3周)开始
 2. **快速上手** → 直接运行[示例代码](#运行示例)
 3. **解决问题** → 查看[FAQ](./FAQ.md)
 4. **深入理解** → 阅读[理论文档](./01_theory/)
