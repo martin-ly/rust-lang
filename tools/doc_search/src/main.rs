@@ -1,6 +1,7 @@
 // 🔍 Rust 学习项目 - 智能文档搜索工具
-// 版本: v1.0
+// 版本: v1.1
 // 创建日期: 2025-10-20
+// 更新日期: 2025-10-20
 
 use std::collections::HashMap;
 use std::fs;
@@ -67,13 +68,54 @@ pub struct DocumentContent {
 /// 智能文档搜索器
 pub struct DocSearcher {
     index: DocumentIndex,
+    config: Config,
 }
 
 impl DocSearcher {
     /// 创建新的搜索器并构建索引
     pub fn new(root_path: &Path) -> Result<Self, Box<dyn std::error::Error>> {
+        let config = Config::load_or_default();
+        Self::new_with_config(root_path, config)
+    }
+    
+    /// 使用指定配置创建搜索器
+    pub fn new_with_config(root_path: &Path, config: Config) -> Result<Self, Box<dyn std::error::Error>> {
+        // 尝试从缓存加载索引
+        let index = if config.incremental_index {
+            if let Some(cache_path) = &config.cache_path.or_else(|| IndexCache::default_cache_path()) {
+                if cache_path.exists() {
+                    if let Ok(cache) = IndexCache::load(cache_path) {
+                        if cache.is_valid() && cache.metadata.source_path == root_path {
+                            println!("✅ 从缓存加载索引");
+                            cache.index
+                        } else {
+                            Self::build_and_cache_index(root_path, cache_path)?
+                        }
+                    } else {
+                        Self::build_and_cache_index(root_path, cache_path)?
+                    }
+                } else {
+                    Self::build_and_cache_index(root_path, cache_path)?
+                }
+            } else {
+                Self::build_index(root_path)?
+            }
+        } else {
+            Self::build_index(root_path)?
+        };
+        
+        Ok(Self { index, config })
+    }
+    
+    /// 构建索引并缓存
+    fn build_and_cache_index(root_path: &Path, cache_path: &Path) -> Result<DocumentIndex, Box<dyn std::error::Error>> {
         let index = Self::build_index(root_path)?;
-        Ok(Self { index })
+        
+        // 保存缓存
+        let cache = IndexCache::new(index.clone(), root_path.to_path_buf());
+        cache.save(cache_path)?;
+        
+        Ok(index)
     }
 
     /// 构建文档索引
@@ -286,6 +328,16 @@ impl DocSearcher {
 
     /// 执行搜索
     pub fn search(&self, query: &str, options: &SearchOptions) -> Vec<SearchResult> {
+        // 根据搜索模式选择不同的搜索方法
+        match &options.search_mode {
+            SearchMode::Plain => self.search_plain(query, options),
+            SearchMode::Regex => self.search_regex(query, options),
+            SearchMode::Fuzzy => self.search_fuzzy(query, options),
+        }
+    }
+    
+    /// 普通搜索
+    fn search_plain(&self, query: &str, options: &SearchOptions) -> Vec<SearchResult> {
         let mut results = Vec::new();
         let query_lower = query.to_lowercase();
         let query_terms: Vec<&str> = query_lower.split_whitespace().collect();
@@ -339,7 +391,7 @@ impl DocSearcher {
 
                 if matches > 0 && score >= options.min_score {
                     // 获取上下文
-                    let context = Self::get_context(&doc_content.lines, line_num, 2);
+                    let context = Self::get_context(&doc_content.lines, line_num, options.context_lines);
                     
                     results.push(SearchResult {
                         file_path: path.clone(),
@@ -353,6 +405,99 @@ impl DocSearcher {
             }
         }
 
+        // 排序和限制结果
+        self.finalize_results(results, options)
+    }
+    
+    /// 正则表达式搜索
+    fn search_regex(&self, pattern: &str, options: &SearchOptions) -> Vec<SearchResult> {
+        let regex_searcher = match RegexSearcher::new(pattern) {
+            Ok(s) => s,
+            Err(_) => return Vec::new(),
+        };
+        
+        let mut results = Vec::new();
+        
+        for (path, doc_content) in &self.index.documents {
+            if !self.should_include_document(doc_content, options) {
+                continue;
+            }
+            
+            let matches = regex_searcher.find_in_lines(&doc_content.lines);
+            
+            for (line_num, line_matches) in matches {
+                let score = line_matches.len() as f64 * 2.0; // 正则匹配给予更高分数
+                
+                if score >= options.min_score {
+                    let context = Self::get_context(&doc_content.lines, line_num, options.context_lines);
+                    
+                    results.push(SearchResult {
+                        file_path: path.clone(),
+                        line_number: line_num + 1,
+                        context,
+                        relevance_score: score,
+                        doc_type: doc_content.doc_type.clone(),
+                        module: doc_content.module.clone(),
+                    });
+                }
+            }
+        }
+        
+        self.finalize_results(results, options)
+    }
+    
+    /// 模糊搜索
+    fn search_fuzzy(&self, query: &str, options: &SearchOptions) -> Vec<SearchResult> {
+        let fuzzy_searcher = FuzzySearcher::new(self.config.advanced.fuzzy_threshold);
+        let mut results = Vec::new();
+        
+        for (path, doc_content) in &self.index.documents {
+            if !self.should_include_document(doc_content, options) {
+                continue;
+            }
+            
+            let matches = fuzzy_searcher.fuzzy_match_lines(query, &doc_content.lines);
+            
+            for (line_num, score) in matches {
+                if score >= options.min_score {
+                    let context = Self::get_context(&doc_content.lines, line_num, options.context_lines);
+                    
+                    results.push(SearchResult {
+                        file_path: path.clone(),
+                        line_number: line_num + 1,
+                        context,
+                        relevance_score: score * 10.0, // 归一化分数
+                        doc_type: doc_content.doc_type.clone(),
+                        module: doc_content.module.clone(),
+                    });
+                }
+            }
+        }
+        
+        self.finalize_results(results, options)
+    }
+    
+    /// 检查是否应该包含该文档
+    fn should_include_document(&self, doc_content: &DocumentContent, options: &SearchOptions) -> bool {
+        // 过滤模块
+        if let Some(module_filter) = &options.module_filter {
+            if &doc_content.module != module_filter {
+                return false;
+            }
+        }
+        
+        // 过滤文档类型
+        if let Some(type_filter) = &options.type_filter {
+            if &doc_content.doc_type != type_filter {
+                return false;
+            }
+        }
+        
+        true
+    }
+    
+    /// 完成结果处理（排序和限制）
+    fn finalize_results(&self, mut results: Vec<SearchResult>, options: &SearchOptions) -> Vec<SearchResult> {
         // 排序结果
         results.sort_by(|a, b| {
             b.relevance_score
@@ -416,6 +561,17 @@ impl DocSearcher {
     }
 }
 
+/// 搜索模式
+#[derive(Debug, Clone)]
+pub enum SearchMode {
+    /// 普通搜索
+    Plain,
+    /// 正则表达式搜索
+    Regex,
+    /// 模糊搜索
+    Fuzzy,
+}
+
 /// 搜索选项
 #[derive(Debug, Clone)]
 pub struct SearchOptions {
@@ -427,6 +583,10 @@ pub struct SearchOptions {
     pub min_score: f64,
     /// 最大结果数量
     pub max_results: usize,
+    /// 搜索模式
+    pub search_mode: SearchMode,
+    /// 上下文行数
+    pub context_lines: usize,
 }
 
 impl Default for SearchOptions {
@@ -436,6 +596,8 @@ impl Default for SearchOptions {
             type_filter: None,
             min_score: 1.0,
             max_results: 50,
+            search_mode: SearchMode::Plain,
+            context_lines: 2,
         }
     }
 }
@@ -450,6 +612,15 @@ pub struct SearchStats {
 }
 
 mod cli;
+mod config;
+mod export;
+mod cache;
+mod fuzzy;
+
+pub use config::{Config, ExportFormat};
+pub use export::export_results;
+pub use cache::{IndexCache, CacheMetadata};
+pub use fuzzy::{FuzzySearcher, RegexSearcher, SearchPattern};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     cli::run()

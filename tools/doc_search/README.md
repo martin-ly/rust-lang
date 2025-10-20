@@ -1,8 +1,9 @@
 # 🔍 Rust 文档智能搜索工具
 
-> **版本**: v1.0  
+> **版本**: v1.1  
 > **创建日期**: 2025-10-20  
-> **状态**: ✅ 完整实现
+> **更新日期**: 2025-10-20  
+> **状态**: ✅ 完整实现（v1.1功能）
 
 ---
 
@@ -39,6 +40,8 @@
 - 智能分词和相关性评分
 - 上下文预览
 - 高亮显示（命令行）
+- **新增**: 正则表达式搜索
+- **新增**: 模糊搜索
 
 ### 2. 多维过滤
 
@@ -54,7 +57,65 @@ rust-doc-search search "所有权" --module c01_ownership_borrow_scope
 rust-doc-search search "异步" --doc-type examples
 ```
 
-### 3. 文档类型支持
+### 3. 高级搜索 (v1.1新增)
+
+**正则表达式搜索**:
+
+```bash
+rust-doc-search search "\b(async|await)\b" --regex
+```
+
+**模糊搜索**:
+
+```bash
+rust-doc-search search "ownershp" --fuzzy  # 可以找到 "ownership"
+```
+
+**导出搜索结果**:
+
+```bash
+# 导出为 JSON
+rust-doc-search search "并发" -o results.json
+
+# 导出为 CSV
+rust-doc-search search "trait" -o results.csv -F csv
+
+# 导出为 Markdown
+rust-doc-search search "async" -o results.md -F markdown
+```
+
+### 4. 配置管理 (v1.1新增)
+
+**生成配置文件**:
+
+```bash
+rust-doc-search init-config
+```
+
+**自定义配置**:
+
+```toml
+# ~/.config/rust-doc-search/config.toml
+default_max_results = 20
+default_min_score = 1.0
+incremental_index = true
+enable_history = true
+
+[advanced]
+enable_regex = true
+enable_fuzzy = true
+fuzzy_threshold = 0.7
+context_lines = 2
+```
+
+### 5. 缓存管理 (v1.1新增)
+
+```bash
+# 清除缓存（强制重新构建索引）
+rust-doc-search clear-cache
+```
+
+### 6. 文档类型支持
 
 | 图标 | 类型 | 说明 |
 |------|------|------|
@@ -66,7 +127,7 @@ rust-doc-search search "异步" --doc-type examples
 | 📘 | `MainDoc` | 主文档 |
 | 🎓 | `Theory` | 理论文档 |
 
-### 4. 统计信息
+### 7. 统计信息
 
 ```bash
 rust-doc-search stats
@@ -79,7 +140,7 @@ rust-doc-search stats
 - 总关键词数
 - 文档类型分布
 
-### 5. 模块浏览
+### 8. 模块浏览
 
 ```bash
 # 列出所有模块
@@ -89,7 +150,7 @@ rust-doc-search modules
 rust-doc-search module c01_ownership_borrow_scope
 ```
 
-### 6. 关键词索引
+### 9. 关键词索引
 
 ```bash
 rust-doc-search keyword "借用"
@@ -327,7 +388,7 @@ $ rust-doc-search stats
 
 ## 开发计划
 
-### v1.0 ✅ (当前版本)
+### v1.0 ✅ (已完成)
 
 - [x] 基础搜索功能
 - [x] 多维过滤
@@ -335,13 +396,14 @@ $ rust-doc-search stats
 - [x] CLI界面
 - [x] 彩色输出
 
-### v1.1 (计划中)
+### v1.1 ✅ (当前版本)
 
-- [ ] 增量索引更新
-- [ ] 配置文件支持
-- [ ] 导出搜索结果
-- [ ] 正则表达式搜索
-- [ ] 模糊搜索
+- [x] 增量索引更新
+- [x] 配置文件支持
+- [x] 导出搜索结果（JSON/CSV/Markdown）
+- [x] 正则表达式搜索
+- [x] 模糊搜索
+- [x] 缓存管理
 
 ### v2.0 (未来)
 
