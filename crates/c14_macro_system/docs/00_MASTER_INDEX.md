@@ -27,6 +27,7 @@
     - [04\_advanced/ - 高级主题](#04_advanced---高级主题)
     - [05\_practice/ - 最佳实践](#05_practice---最佳实践)
     - [📦 06. Rust 1.90特性](#-06-rust-190特性)
+    - [🧠 理论增强 (theory\_enhanced/)](#-理论增强-theory_enhanced)
   - [💻 代码示例](#-代码示例)
     - [运行示例](#运行示例)
     - [示例列表](#示例列表)
@@ -46,6 +47,7 @@
     - [官方文档](#官方文档)
     - [社区资源](#社区资源)
     - [本模块资源](#本模块资源)
+    - [深度学习资源 ⭐](#深度学习资源-)
   - [✅ 学习检查清单](#-学习检查清单)
     - [基础知识 (必须掌握)](#基础知识-必须掌握)
     - [进阶技能 (建议掌握)](#进阶技能-建议掌握)
@@ -216,6 +218,15 @@ Rust宏系统是一个强大的元编程框架，允许在编译期进行代码�
 | [README.md](./06_rust_190_features/README.md) | ⭐⭐⭐⭐ | 4小时 |
 | [COMPREHENSIVE_FEATURES.md](./06_rust_190_features/COMPREHENSIVE_FEATURES.md) | ⭐⭐⭐⭐ | 5小时 |
 | [EXAMPLES.md](./06_rust_190_features/EXAMPLES.md) | ⭐⭐⭐ | 3小时 |
+
+### 🧠 理论增强 (theory_enhanced/)
+
+| 文档 | 难度 | 预计时间 |
+|------|------|---------|
+| [00_INDEX.md](./theory_enhanced/00_INDEX.md) | ⭐ | 20分钟 |
+| [KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md](./theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md) ⭐ | ⭐⭐⭐ | 2小时 |
+| [MULTI_DIMENSIONAL_COMPARISON_MATRIX.md](./theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md) | ⭐⭐⭐⭐ | 2小时 |
+| [MINDMAP_AND_VISUALIZATION.md](./theory_enhanced/MINDMAP_AND_VISUALIZATION.md) | ⭐⭐ | 1.5小时 |
 
 ---
 
@@ -398,6 +409,12 @@ trace_macros!(true);
 - [README](../README.md) - 模块总览
 - [FAQ](./FAQ.md) - 常见问题
 - [Glossary](./Glossary.md) - 术语表
+
+### 深度学习资源 ⭐
+
+- [知识图谱与概念关系](./theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md) - 系统化知识体系
+- [多维矩阵对比分析](./theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md) - 全方位对比
+- [思维导图与可视化](./theory_enhanced/MINDMAP_AND_VISUALIZATION.md) - 可视化学习
 
 ---
 

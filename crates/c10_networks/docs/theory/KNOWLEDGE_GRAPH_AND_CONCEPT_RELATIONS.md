@@ -43,6 +43,12 @@
   - [概念依赖关系](#概念依赖关系)
     - [1. 学习依赖路径](#1-学习依赖路径)
     - [2. 概念前置关系表](#2-概念前置关系表)
+  - [高性能I/O与数据传输知识图](#高性能io与数据传输知识图)
+    - [1. io\_uring 核心概念图谱](#1-io_uring-核心概念图谱)
+    - [2. io\_uring 关系三元组](#2-io_uring-关系三元组)
+    - [3. Apache Arrow 核心概念图谱](#3-apache-arrow-核心概念图谱)
+    - [4. Arrow 关系三元组](#4-arrow-关系三元组)
+    - [5. io\_uring + Arrow 集成场景](#5-io_uring--arrow-集成场景)
   - [总结](#总结)
     - [关键要点](#关键要点)
     - [相关文档](#相关文档)
@@ -1081,6 +1087,376 @@ graph LR
 | **gRPC** | HTTP/2, Protobuf | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
 | **连接池** | TCP, 资源管理 | ⭐⭐⭐ | ⭐⭐⭐⭐ |
 | **负载均衡** | 网络拓扑, 算法 | ⭐⭐⭐⭐ | ⭐⭐⭐ |
+| **io_uring** | Linux内核, 异步I/O | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **Apache Arrow** | 列式存储, SIMD | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+
+---
+
+## 高性能I/O与数据传输知识图
+
+### 1. io_uring 核心概念图谱
+
+```mermaid
+graph TB
+    IoUring[io_uring核心]
+    
+    %% 架构层
+    IoUring --> Architecture[架构组件]
+    Architecture --> SQ[提交队列 SQ]
+    Architecture --> CQ[完成队列 CQ]
+    Architecture --> SharedMem[共享内存]
+    Architecture --> Kernel[内核处理]
+    
+    %% SQ细节
+    SQ --> SQE[SQE条目]
+    SQE --> Opcode[操作码]
+    SQE --> FD[文件描述符]
+    SQE --> BufferInfo[缓冲区信息]
+    SQE --> Flags[标志位]
+    
+    %% CQ细节
+    CQ --> CQE[CQE条目]
+    CQE --> Result[操作结果]
+    CQE --> UserData[用户数据]
+    CQE --> CQFlags[完成标志]
+    
+    %% 高级特性
+    IoUring --> AdvancedFeatures[高级特性]
+    AdvancedFeatures --> FixedFiles[固定文件]
+    AdvancedFeatures --> FixedBuffers[固定缓冲区]
+    AdvancedFeatures --> PolledIO[轮询I/O]
+    AdvancedFeatures --> Linking[操作链接]
+    AdvancedFeatures --> ZeroCopy[零拷贝]
+    
+    %% 操作类型
+    IoUring --> Operations[操作类型]
+    Operations --> FileOps[文件操作]
+    Operations --> NetOps[网络操作]
+    Operations --> AsyncOps[异步操作]
+    
+    FileOps --> Read[读取]
+    FileOps --> Write[写入]
+    FileOps --> Fsync[同步]
+    FileOps --> OpenClose[打开/关闭]
+    
+    NetOps --> Accept[接受连接]
+    NetOps --> Connect[建立连接]
+    NetOps --> Send[发送数据]
+    NetOps --> Recv[接收数据]
+    NetOps --> SendMsg[sendmsg]
+    NetOps --> RecvMsg[recvmsg]
+    
+    %% Rust生态
+    IoUring --> RustEco[Rust生态]
+    RustEco --> IoUringRaw[io-uring crate]
+    RustEco --> TokioUring[tokio-uring]
+    RustEco --> Monoio[Monoio运行时]
+    RustEco --> Glommio[Glommio运行时]
+    
+    %% 对比传统I/O
+    IoUring --> Comparison[vs 传统I/O]
+    Comparison --> Epoll[epoll/kqueue]
+    Comparison --> Blocking[阻塞I/O]
+    Comparison --> AIO[Linux AIO]
+    
+    %% 性能优势
+    IoUring --> Performance[性能优势]
+    Performance --> LessSyscall[减少系统调用]
+    Performance --> BatchOps[批量操作]
+    Performance --> ZeroContext[零上下文切换]
+    Performance --> HighThroughput[高吞吐量]
+    Performance --> LowLatency[低延迟]
+    
+    style IoUring fill:#e1f5ff
+    style Architecture fill:#fff3e0
+    style AdvancedFeatures fill:#f3e5f5
+    style RustEco fill:#e8f5e9
+    style Performance fill:#fce4ec
+```
+
+### 2. io_uring 关系三元组
+
+```text
+# 核心关系
+(io_uring, IS_A, AsyncIOInterface)
+(SQE, IS_A, SubmissionEntry)
+(CQE, IS_A, CompletionEntry)
+(io_uring, HAS_A, SubmissionQueue)
+(io_uring, HAS_A, CompletionQueue)
+(SubmissionQueue, HAS_A, SQE[])
+(CompletionQueue, HAS_A, CQE[])
+
+# 操作关系
+(io_uring, SUPPORTS, Read)
+(io_uring, SUPPORTS, Write)
+(io_uring, SUPPORTS, Accept)
+(io_uring, SUPPORTS, Connect)
+(io_uring, SUPPORTS, Send)
+(io_uring, SUPPORTS, Recv)
+(io_uring, SUPPORTS, Splice)
+(io_uring, SUPPORTS, Fsync)
+
+# 特性关系
+(io_uring, IMPLEMENTS, ZeroCopy)
+(io_uring, IMPLEMENTS, BatchProcessing)
+(FixedBuffers, REDUCES, MemoryMapping)
+(PolledIO, ELIMINATES, Syscalls)
+(io_uring, PROVIDES, BetterThan[epoll])
+
+# Rust实现关系
+(tokio-uring, USES, io_uring)
+(Monoio, USES, io_uring)
+(Glommio, USES, io_uring)
+(tokio-uring, COMPATIBLE_WITH, Tokio)
+(Monoio, DEVELOPED_BY, ByteDance)
+(Glommio, DEVELOPED_BY, Datadog)
+
+# 性能关系
+(io_uring, FASTER_THAN, epoll)
+(io_uring, FASTER_THAN, BlockingIO)
+(io_uring, FASTER_THAN, LinuxAIO)
+(io_uring, REDUCES, ContextSwitches)
+(io_uring, INCREASES, Throughput)
+(io_uring, DECREASES, Latency)
+```
+
+### 3. Apache Arrow 核心概念图谱
+
+```mermaid
+graph TB
+    Arrow[Apache Arrow]
+    
+    %% 核心组件
+    Arrow --> CoreComponents[核心组件]
+    CoreComponents --> Schema[Schema定义]
+    CoreComponents --> Array[数组类型]
+    CoreComponents --> RecordBatch[RecordBatch]
+    CoreComponents --> Table[Table]
+    CoreComponents --> DataType[数据类型]
+    
+    %% Schema细节
+    Schema --> Field[Field定义]
+    Field --> FieldName[字段名]
+    Field --> FieldType[字段类型]
+    Field --> Nullable[可空性]
+    Field --> Metadata[元数据]
+    
+    %% 数组类型
+    Array --> PrimitiveArray[基础类型数组]
+    Array --> StringArray[字符串数组]
+    Array --> ListArray[列表数组]
+    Array --> StructArray[结构体数组]
+    Array --> DictionaryArray[字典数组]
+    
+    PrimitiveArray --> Int32Array[Int32]
+    PrimitiveArray --> Float64Array[Float64]
+    PrimitiveArray --> BoolArray[Boolean]
+    PrimitiveArray --> TimestampArray[Timestamp]
+    
+    %% 内存布局
+    Arrow --> MemoryLayout[内存布局]
+    MemoryLayout --> Columnar[列式存储]
+    MemoryLayout --> Buffers[缓冲区]
+    MemoryLayout --> Validity[有效性位图]
+    MemoryLayout --> Values[值缓冲区]
+    MemoryLayout --> Offsets[偏移量缓冲区]
+    
+    %% 零拷贝特性
+    Arrow --> ZeroCopy[零拷贝]
+    ZeroCopy --> SharedMem[共享内存]
+    ZeroCopy --> IPC[进程间通信]
+    ZeroCopy --> Flight[Arrow Flight]
+    ZeroCopy --> Mmap[内存映射]
+    
+    %% 计算内核
+    Arrow --> Compute[计算内核]
+    Compute --> Arithmetic[算术运算]
+    Compute --> Comparison[比较运算]
+    Compute --> Boolean[布尔运算]
+    Compute --> Cast[类型转换]
+    Compute --> Aggregate[聚合函数]
+    Compute --> Filter[过滤]
+    Compute --> Sort[排序]
+    
+    %% SIMD优化
+    Compute --> SIMD[SIMD优化]
+    SIMD --> Vectorization[向量化]
+    SIMD --> AVX2[AVX2指令集]
+    SIMD --> AVX512[AVX512指令集]
+    SIMD --> NEON[ARM NEON]
+    
+    %% I/O格式
+    Arrow --> IO[I/O格式]
+    IO --> ArrowIPC[Arrow IPC]
+    IO --> Parquet[Parquet]
+    IO --> CSV[CSV]
+    IO --> JSON_IO[JSON]
+    IO --> ORC[ORC]
+    
+    %% 语言绑定
+    Arrow --> Bindings[语言绑定]
+    Bindings --> ArrowRS[arrow-rs]
+    Bindings --> PyArrow[PyArrow]
+    Bindings --> ArrowJS[arrow-js]
+    Bindings --> ArrowCpp[arrow-cpp]
+    Bindings --> ArrowJava[arrow-java]
+    
+    %% Flight协议
+    Flight --> FlightServer[Flight Server]
+    Flight --> FlightClient[Flight Client]
+    Flight --> DoGet[DoGet]
+    Flight --> DoPut[DoPut]
+    Flight --> DoExchange[DoExchange]
+    
+    %% 应用场景
+    Arrow --> UseCases[应用场景]
+    UseCases --> Analytics[数据分析]
+    UseCases --> BigData[大数据传输]
+    UseCases --> ML[机器学习]
+    UseCases --> DataWarehouse[数据仓库]
+    UseCases --> StreamProcessing[流式处理]
+    
+    style Arrow fill:#e1f5ff
+    style CoreComponents fill:#fff3e0
+    style ZeroCopy fill:#f3e5f5
+    style Compute fill:#e8f5e9
+    style SIMD fill:#fce4ec
+```
+
+### 4. Arrow 关系三元组
+
+```text
+# 核心关系
+(Arrow, IS_A, ColumnarFormat)
+(RecordBatch, IS_A, DataContainer)
+(Array, IS_A, ColumnarData)
+(Schema, DEFINES, DataStructure)
+(RecordBatch, HAS_A, Schema)
+(RecordBatch, HAS_A, Array[])
+(Table, HAS_A, RecordBatch[])
+
+# 类型关系
+(Int32Array, IS_A, PrimitiveArray)
+(StringArray, IS_A, Array)
+(ListArray, IS_A, NestedArray)
+(StructArray, IS_A, NestedArray)
+(DictionaryArray, IS_A, EncodedArray)
+
+# 特性关系
+(Arrow, IMPLEMENTS, ZeroCopy)
+(Arrow, IMPLEMENTS, SIMD)
+(Arrow, IMPLEMENTS, CrossLanguage)
+(Arrow, SUPPORTS, StreamProcessing)
+(Arrow, OPTIMIZED_FOR, Analytics)
+
+# 内存关系
+(Array, USES, Buffers)
+(Buffer, STORED_IN, ContiguousMemory)
+(Validity, IS_A, Bitmap)
+(Arrow, ENABLES, SharedMemory)
+
+# I/O关系
+(Arrow, SUPPORTS, IPC)
+(Arrow, SUPPORTS, Parquet)
+(Arrow, SUPPORTS, CSV)
+(ArrowFlight, USES, gRPC)
+(ArrowFlight, TRANSMITS, RecordBatch)
+
+# 计算关系
+(ComputeKernels, OPERATE_ON, Array)
+(SIMD, ACCELERATES, ComputeKernels)
+(Vectorization, IMPROVES, Performance)
+(Filter, RETURNS, Array)
+(Aggregate, RETURNS, Scalar)
+
+# 生态关系
+(arrow-rs, IMPLEMENTS, Arrow)
+(PyArrow, BRIDGES, [Rust, Python])
+(DataFusion, USES, arrow-rs)
+(Ballista, USES, arrow-rs)
+(arrow-rs, INTEROPERABLE_WITH, PyArrow)
+
+# 性能关系
+(Arrow, FASTER_THAN, JSON)
+(Arrow, FASTER_THAN, ProtocolBuffers)
+(Arrow, MORE_EFFICIENT_THAN, RowFormat)
+(SIMD, PROVIDES, 4x-8x[Speedup])
+(ZeroCopy, ELIMINATES, Serialization)
+```
+
+### 5. io_uring + Arrow 集成场景
+
+```mermaid
+graph LR
+    Client[客户端] --> Network[网络层]
+    Network --> IoUring[io_uring异步I/O]
+    IoUring --> DataReceive[接收数据]
+    DataReceive --> ArrowParse[Arrow解析]
+    ArrowParse --> ZeroCopy[零拷贝处理]
+    ZeroCopy --> SIMD[SIMD计算]
+    SIMD --> Results[结果]
+    Results --> IoUringSend[io_uring发送]
+    IoUringSend --> Network
+    Network --> Client
+    
+    style IoUring fill:#e1f5ff
+    style ArrowParse fill:#fff3e0
+    style SIMD fill:#e8f5e9
+```
+
+**集成优势**:
+
+| 组合 | 优势 | 性能提升 | 适用场景 |
+|------|------|---------|---------|
+| **io_uring + Arrow IPC** | 网络零拷贝 + 数据零拷贝 | 5-10x | 大数据传输 |
+| **io_uring + Arrow Flight** | 异步I/O + gRPC流式 | 3-8x | 分布式查询 |
+| **io_uring + Parquet** | 高效文件I/O + 列式存储 | 4-6x | 数据仓库 |
+| **Monoio + arrow-rs** | 高性能运行时 + SIMD | 8-15x | 实时分析 |
+
+**实战代码模式**:
+
+```rust
+// io_uring + Arrow Flight 高性能数据服务
+use tokio_uring::net::TcpListener;
+use arrow_flight::{FlightData, FlightDescriptor};
+use arrow::record_batch::RecordBatch;
+
+async fn serve_arrow_data() -> Result<()> {
+    tokio_uring::start(async {
+        let listener = TcpListener::bind("0.0.0.0:8080".parse()?)?;
+        
+        loop {
+            let (stream, _) = listener.accept().await?;
+            
+            tokio_uring::spawn(async move {
+                // io_uring 零拷贝接收请求
+                let request = receive_request_zero_copy(stream).await?;
+                
+                // Arrow 查询数据（SIMD加速）
+                let batch = execute_arrow_query(&request).await?;
+                
+                // Arrow Flight 零拷贝序列化
+                let flight_data = batch.into_flight_data()?;
+                
+                // io_uring 零拷贝发送响应
+                send_response_zero_copy(stream, &flight_data).await?;
+                
+                Ok::<_, Error>(())
+            });
+        }
+    })
+}
+
+// SIMD加速的Arrow计算
+use arrow::compute::kernels::arithmetic::add;
+use arrow::array::Int32Array;
+
+fn simd_computation(a: &Int32Array, b: &Int32Array) -> Result<Int32Array> {
+    // 自动使用SIMD指令加速
+    let result = add(a, b)?;
+    Ok(result)
+}
+```
 
 ---
 

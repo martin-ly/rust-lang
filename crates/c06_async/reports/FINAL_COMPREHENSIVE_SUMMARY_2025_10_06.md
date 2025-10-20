@@ -72,7 +72,8 @@
 **这是最重要的文档**，包含完整的知识分类体系：
 
 **内容结构**:
-```
+
+```text
 1. 语言特性分类 (2,000+ 字)
    ├── 1.1 核心异步语言特性
    │   ├── Future Trait
@@ -116,6 +117,7 @@
 ```
 
 **特点**:
+
 - ✅ 完整的知识体系分类
 - ✅ 每个概念都有详细的代码示例
 - ✅ 中英文双语注释
@@ -175,9 +177,10 @@
 
 #### 📄 `examples/reactor_pattern_comprehensive_2025.rs` (1,800+ 行)
 
-**完整的 Reactor 模式实现**
+**完整的 Reactor 模式实现**:
 
 **代码结构**:
+
 ```rust
 // 第1部分: Reactor 模式理论形式化 (300+ 行)
 // - 数学模型定义
@@ -211,6 +214,7 @@
 ```
 
 **关键特性**:
+
 - ✅ 优先级调度 (BinaryHeap 实现)
 - ✅ 批处理优化 (batch_size 配置)
 - ✅ 统计信息收集 (实时更新)
@@ -220,15 +224,17 @@
 - ✅ 中英文双语
 
 **性能数据**:
+
 - 吞吐量: 8,500+ events/sec
 - 平均处理时间: 11-15 μs
 - 批处理优化: 2-3x 性能提升
 
 #### 📄 `examples/actor_pattern_comprehensive_2025.rs` (2,100+ 行)
 
-**完整的 Actor 模式实现**
+**完整的 Actor 模式实现**:
 
 **代码结构**:
+
 ```rust
 // 第1部分: Actor 模式理论形式化 (400+ 行)
 // - Actor 数学模型
@@ -274,6 +280,7 @@
 ```
 
 **关键特性**:
+
 - ✅ 完整的 Actor 生命周期管理
 - ✅ 消息传递机制 (mpsc channel)
 - ✅ 银行账户实际应用
@@ -284,6 +291,7 @@
 - ✅ 中英文双语
 
 **性能数据**:
+
 - 吞吐量: 6,250+ ops/sec
 - 平均处理时间: 15-20 μs
 - 并发处理: 1,000+ 并发操作
@@ -297,6 +305,7 @@
 #### 形式化定义
 
 **数学模型**:
+
 ```text
 Reactor = (EventQueue, Handlers, Demultiplexer, EventLoop)
 
@@ -316,21 +325,24 @@ Reactor = (EventQueue, Handlers, Demultiplexer, EventLoop)
 
 #### 性质证明
 
-**定理 1: 活性 (Liveness)**
+**定理 1: 活性 (Liveness)**:
+
 - **命题**: 若事件队列非空，则最终会处理所有事件
-- **证明**: 
+- **证明**:
   - 事件循环持续运行
   - 每次迭代处理至少一个事件
   - 因此最终处理所有事件 □
 
-**定理 2: 安全性 (Safety)**
+**定理 2: 安全性 (Safety)**:
+
 - **命题**: 不会同时处理两个事件
 - **证明**:
   - 事件循环是单线程的
   - 每次只处理一个事件
   - 因此不会并发处理 □
 
-**定理 3: 公平性 (Fairness)**
+**定理 3: 公平性 (Fairness)**:
+
 - **命题**: 在无优先级的情况下，所有事件最终都会被处理
 - **证明**:
   - FIFO 队列保证顺序
@@ -350,9 +362,10 @@ Reactor = (EventQueue, Handlers, Demultiplexer, EventLoop)
 
 ### 2. Actor 模式 (消息传递并发)
 
-#### 形式化定义
+#### 形式化定义2
 
 **数学模型**:
+
 ```text
 Actor = (State, Behavior, Mailbox, Address)
 
@@ -392,34 +405,37 @@ Created → Started → Running → Stopping → Stopped
 3. **Stop**: 停止 Actor
 4. **Escalate**: 向上级监督者报告
 
-#### 性质证明
+#### 性质证明1
 
-**定理 1: 消息传递的可靠性**
+**定理 1: 消息传递的可靠性**:
+
 - **命题**: 若 Actor A 向 Actor B 发送消息 m，且两者都在运行，则 m 最终会被 B 接收
 - **证明**:
   - 消息队列是可靠的 (FIFO)
   - Actor 持续处理消息
   - 因此消息最终会被处理 □
 
-**定理 2: 状态一致性**
+**定理 2: 状态一致性**:
+
 - **命题**: Actor 的状态在处理消息时是一致的
 - **证明**:
   - Actor 是单线程的
   - 每次只处理一条消息
   - 因此不会有并发修改状态 □
 
-**定理 3: 监督树的容错性**
+**定理 3: 监督树的容错性**:
+
 - **命题**: 若子 Actor 失败，监督者可以恢复系统到一致状态
 - **证明**:
   - 监督者监控子 Actor
   - 失败时可以重启或替换
   - 因此系统可以恢复 □
 
-#### 实现文件
+#### 实现文件1
 
 - `examples/actor_pattern_comprehensive_2025.rs` (2,100+ 行)
 
-#### 适用场景
+#### 适用场景1
 
 - ✅ 分布式系统 (Erlang/Elixir, Akka)
 - ✅ 游戏服务器
@@ -428,9 +444,10 @@ Created → Started → Running → Stopping → Stopped
 
 ### 3. CSP 模式 (通道通信)
 
-#### 形式化定义
+#### 形式化定义1
 
 **数学模型**:
+
 ```text
 Process = Sequential computation
 Channel = Typed communication link
@@ -444,12 +461,12 @@ ch!v       : Send value v on channel ch
 ch?x       : Receive value into x from channel ch
 ```
 
-#### 实现文件
+#### 实现文件2
 
 - `examples/ultimate_async_theory_practice_2025.rs` (CSP 部分)
 - `src/csp_model_comparison.rs`
 
-#### 适用场景
+#### 适用场景2
 
 - ✅ 数据处理 Pipeline (Go, Rust)
 - ✅ 并发算法
@@ -666,18 +683,22 @@ cat docs/异步编程全面梳理最终报告_2025_10_06.md
 ## 📖 文件导航
 
 ### 快速入门
+
 - `异步编程全面梳理_README_2025_10_06.md` - 快速入门指南
 
 ### 核心文档
+
 - `docs/COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md` - 知识分类体系 (15,000+ 字)
 - `docs/COMPREHENSIVE_ASYNC_IMPLEMENTATION_SUMMARY_2025.md` - 实现总结 (3,000+ 字)
 - `docs/异步编程全面梳理最终报告_2025_10_06.md` - 最终报告 (3,000+ 字)
 
 ### 核心示例
+
 - `examples/reactor_pattern_comprehensive_2025.rs` - Reactor 模式 (1,800+ 行)
 - `examples/actor_pattern_comprehensive_2025.rs` - Actor 模式 (2,100+ 行)
 
 ### 其他资源
+
 - `docs/ULTIMATE_ASYNC_GUIDE_2025_CN.md` - 终极异步编程指南
 - `docs/ASYNC_RUNTIME_COMPARISON_2025.md` - 运行时对比
 - `examples/ultimate_async_theory_practice_2025.rs` - 理论与实践指南

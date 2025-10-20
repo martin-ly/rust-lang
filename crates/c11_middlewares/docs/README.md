@@ -16,6 +16,7 @@ C11 中间件集成项目提供了一个统一的 Rust 接口来集成各类主�
 - **HTTP 代理**: Pingora
 
 **核心特性**:
+
 - ✅ 统一的接口设计
 - ✅ Rust 1.90+ 特性支持
 - ✅ 异步非阻塞
@@ -99,6 +100,7 @@ cargo run --example rust190_features_demo --features kv-redis,tokio
 > 详见 [tutorials/README.md](tutorials/README.md)
 
 系统化的教程内容（规划中）：
+
 - 🚀 快速入门系列
 - 🎓 进阶教程系列
 - 💼 实战案例系列
@@ -108,6 +110,7 @@ cargo run --example rust190_features_demo --features kv-redis,tokio
 > 详见 [advanced/README.md](advanced/README.md)
 
 深度技术内容（规划中）：
+
 - ⚡ 性能优化
 - 🏗️ 架构设计
 - 🛡️ 可靠性工程
@@ -119,6 +122,7 @@ cargo run --example rust190_features_demo --features kv-redis,tokio
 > 详见 [analysis/README.md](analysis/README.md)
 
 深度技术分析和研究：
+
 - Rust 1.90 生态系统分析
 - 形式化验证框架
 - 跨行业对比分析
@@ -131,6 +135,7 @@ cargo run --example rust190_features_demo --features kv-redis,tokio
 > 详见 [reports/README.md](reports/README.md)
 
 项目进度和技术报告：
+
 - 📈 进度报告（2份）
 - 🔬 技术报告（5份）
 - 🛠️ 修复总结（4份）
@@ -142,6 +147,7 @@ cargo run --example rust190_features_demo --features kv-redis,tokio
 **需求**: 构建 Web 应用，需要数据库和缓存
 
 **推荐路径**:
+
 1. 阅读 [guides/sql.md](guides/sql.md) - PostgreSQL 集成
 2. 阅读 [guides/redis.md](guides/redis.md) - Redis 缓存
 3. 运行 `examples/middleware_comprehensive_demo.rs`
@@ -151,6 +157,7 @@ cargo run --example rust190_features_demo --features kv-redis,tokio
 **需求**: 构建微服务，需要消息队列
 
 **推荐路径**:
+
 1. 阅读 [guides/mq.md](guides/mq.md) - NATS/MQTT
 2. 阅读 [guides/kafka_pingora.md](guides/kafka_pingora.md) - Kafka
 3. 运行 `examples/message_queue.rs`
@@ -160,6 +167,7 @@ cargo run --example rust190_features_demo --features kv-redis,tokio
 **需求**: IoT 设备数据采集和处理
 
 **推荐路径**:
+
 1. 阅读 [guides/mq.md](guides/mq.md) - MQTT 协议
 2. 阅读 [guides/redis.md](guides/redis.md) - Redis 缓存
 3. 参考 IoT 相关示例
@@ -169,6 +177,7 @@ cargo run --example rust190_features_demo --features kv-redis,tokio
 **需求**: 处理大量实时数据流
 
 **推荐路径**:
+
 1. 阅读 [guides/kafka_pingora.md](guides/kafka_pingora.md) - Kafka
 2. 阅读 [guides/redis.md](guides/redis.md) - Redis
 3. 查看性能优化文档
@@ -180,11 +189,13 @@ cargo run --example rust190_features_demo --features kv-redis,tokio
 **您是 Rust 初学者或刚接触本项目？**
 
 **推荐路径**:
+
 1. 📖 阅读 [00_MASTER_INDEX.md](00_MASTER_INDEX.md)
 2. 🚀 运行基础示例
 3. 📚 按初学者路径学习（约1周）
 
 **资源**:
+
 - [guides/](guides/) - 中间件使用指南
 - [FAQ.md](FAQ.md) - 常见问题
 - [examples/](../examples/) - 示例代码
@@ -194,11 +205,13 @@ cargo run --example rust190_features_demo --features kv-redis,tokio
 **您有 Rust 经验，想使用项目开发应用？**
 
 **推荐路径**:
+
 1. 📘 查看 [references/](references/) API 参考
 2. 🔧 阅读 [guides/](guides/) 详细指南
 3. 💻 参考 [examples/](../examples/) 示例
 
 **资源**:
+
 - [guides/](guides/) - 详细使用指南
 - [references/](references/) - API 和配置参考
 - [advanced/](advanced/) - 高级主题
@@ -208,11 +221,13 @@ cargo run --example rust190_features_demo --features kv-redis,tokio
 **您负责技术选型和架构设计？**
 
 **推荐路径**:
+
 1. 🔬 阅读 [analysis/](analysis/) 技术分析
 2. 📊 查看 [reports/](reports/) 项目报告
 3. 🏗️ 参考 [advanced/](advanced/) 架构设计
 
 **资源**:
+
 - [analysis/rust190_ecosystem/](analysis/rust190_ecosystem/) - 生态系统分析
 - [reports/](reports/) - 技术报告
 - [advanced/](advanced/) - 架构设计主题
@@ -222,11 +237,13 @@ cargo run --example rust190_features_demo --features kv-redis,tokio
 **您对技术深度和理论感兴趣？**
 
 **推荐路径**:
+
 1. 🔬 深入 [analysis/](analysis/) 技术分析
 2. 📊 研究性能基准测试
 3. 🔒 查看形式化验证框架
 
 **资源**:
+
 - [analysis/rust190_ecosystem/01_formal_verification/](analysis/rust190_ecosystem/01_formal_verification/) - 形式化验证
 - [analysis/rust190_ecosystem/02_cross_industry_analysis/](analysis/rust190_ecosystem/02_cross_industry_analysis/) - 跨行业分析
 - [analysis/rust190_ecosystem/03_performance_benchmarks/](analysis/rust190_ecosystem/03_performance_benchmarks/) - 性能分析
@@ -262,16 +279,19 @@ cargo run --example rust190_features_demo --features kv-redis,tokio
 ## 🔍 搜索帮助
 
 **查找特定主题**:
+
 1. 使用 [00_MASTER_INDEX.md](00_MASTER_INDEX.md) 快速定位
 2. 使用 [COMPREHENSIVE_DOCUMENTATION_INDEX.md](COMPREHENSIVE_DOCUMENTATION_INDEX.md) 全面查找
 3. 查看各子目录的 README
 
 **查找错误解决方案**:
+
 1. 查看 [FAQ.md](FAQ.md) 常见问题
 2. 查看 [reports/](reports/) 修复总结
 3. 搜索相关中间件的指南文档
 
 **查找示例代码**:
+
 1. 浏览 [examples/](../examples/) 目录
 2. 查看各指南中的代码示例
 3. 运行 `cargo run --example <name>` 测试
@@ -281,12 +301,14 @@ cargo run --example rust190_features_demo --features kv-redis,tokio
 我们欢迎文档贡献！
 
 **如何贡献**:
+
 1. 在对应目录创建或更新文档
 2. 遵循现有文档格式和风格
 3. 更新相关的索引和 README
 4. 提交 Pull Request
 
 **文档标准**:
+
 - 使用清晰的标题和目录
 - 提供代码示例
 - 包含使用说明
