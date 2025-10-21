@@ -6,9 +6,16 @@
 
 ---
 
+## 🚀 快速开始
+
+📖 **[按字母索引查找库 (A-Z)](./ALPHABETICAL_INDEX_2025.md)** - 60+ 个核心 Rust 库，包含用途、版本、成熟度评级和代码示例
+
+---
+
 ## 📋 目录导航
 
 - [Rust 必备开源库完整知识体系 (2025)](#rust-必备开源库完整知识体系-2025)
+  - [🚀 快速开始](#-快速开始)
   - [📋 目录导航](#-目录导航)
   - [🎯 知识体系概览](#-知识体系概览)
     - [分类方法论](#分类方法论)
@@ -21,9 +28,9 @@
     - [第3层：应用开发层 (Application Development)](#第3层应用开发层-application-development)
       - [核心类别 (12+)](#核心类别-12)
     - [第4层：领域特定层 (Domain Specific)](#第4层领域特定层-domain-specific)
-      - [核心类别 (8+)](#核心类别-8-1)
+      - [核心类别1 (8+)](#核心类别1-8)
     - [第5层：工具链层 (Toolchain)](#第5层工具链层-toolchain)
-      - [核心类别 (10+)](#核心类别-10-1)
+      - [核心类别2 (10+)](#核心类别2-10)
   - [🔄 横切关注点](#-横切关注点)
     - [核心领域 (6+)](#核心领域-6)
   - [📚 学习路径](#-学习路径)
@@ -33,10 +40,32 @@
     - [🎯 路径 4: 场景驱动 (按需学习)](#-路径-4-场景驱动-按需学习)
   - [🔍 快速索引](#-快速索引)
     - [按字母索引](#按字母索引)
-    - [A](#a)
-    - [B](#b)
-    - [C](#c)
-    - [...省略其他字母](#省略其他字母)
+    - [索引 A](#索引-a)
+    - [索引 B](#索引-b)
+    - [索引 C](#索引-c)
+    - [索引 D](#索引-d)
+    - [索引 E](#索引-e)
+    - [索引 F](#索引-f)
+    - [索引 G](#索引-g)
+    - [索引 H](#索引-h)
+    - [索引 I](#索引-i)
+    - [索引 J](#索引-j)
+    - [索引 K](#索引-k)
+    - [索引 L](#索引-l)
+    - [索引 M](#索引-m)
+    - [索引 N](#索引-n)
+    - [索引 O](#索引-o)
+    - [索引 P](#索引-p)
+    - [索引 Q](#索引-q)
+    - [索引 R](#索引-r)
+    - [索引 S](#索引-s)
+    - [索引 T](#索引-t)
+    - [索引 U](#索引-u)
+    - [索引 V](#索引-v)
+    - [索引 W](#索引-w)
+    - [索引 X](#索引-x)
+    - [索引 Y](#索引-y)
+    - [索引 Z](#索引-z)
   - [📖 使用指南](#-使用指南)
     - [对于开发者](#对于开发者)
       - [我是 Rust 新手](#我是-rust-新手)
@@ -167,7 +196,7 @@ graph TD
 
 **📁 目录**: [`04_domain_specific/`](./04_domain_specific/)
 
-#### 核心类别 (8+)
+#### 核心类别1 (8+)
 
 | 类别 | 关键库 | 必选度 | 文档 |
 |------|--------|--------|------|
@@ -188,7 +217,7 @@ graph TD
 
 **📁 目录**: [`05_toolchain/`](./05_toolchain/)
 
-#### 核心类别 (10+)
+#### 核心类别2 (10+)
 
 | 类别 | 关键库 | 必选度 | 文档 |
 |------|--------|--------|------|
@@ -300,30 +329,155 @@ graph LR
 
 ### 按字母索引
 
-[A](#a) | [B](#b) | [C](#c) | [D](#d) | [E](#e) | [F](#f) | [H](#h) | [I](#i) | [L](#l) | [M](#m) | [O](#o) | [P](#p) | [R](#r) | [S](#s) | [T](#t) | [U](#u) | [W](#w) | [Y](#y)
+📖 **[查看完整字母索引](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#-库详情索引)** - 包含所有库的详细信息、版本、成熟度评级
 
-### A
+[A](#索引-a) | [B](#索引-b) | [C](#索引-c) | [D](#索引-d) | [E](#索引-e) | [F](#索引-f) | [G](#索引-g) | [H](#索引-h) | [I](#索引-i) | [J](#索引-j) | [K](#索引-k) | [L](#索引-l) | [M](#索引-m) | [N](#索引-n) | [O](#索引-o) | [P](#索引-p) | [Q](#索引-q) | [R](#索引-r) | [S](#索引-s) | [T](#索引-t) | [U](#索引-u) | [V](#索引-v) | [W](#索引-w) | [X](#索引-x) | [Y](#索引-y) | [Z](#索引-z)
 
-- [anyhow](./cross_cutting/error_handling/anyhow.md) - 应用错误处理 ⭐⭐⭐⭐⭐
-- [argon2](./cross_cutting/cryptography/argon2.md) - 密码哈希 ⭐⭐⭐⭐
-- [async-std](./02_system_programming/async_runtime/async_std.md) - 异步运行时 ⭐⭐⭐⭐
-- [async-trait](./02_system_programming/async_runtime/async_trait.md) - 异步 trait ⭐⭐⭐⭐⭐
-- [axum](./03_application_dev/web_frameworks/axum.md) - Web 框架 ⭐⭐⭐⭐⭐
+---
 
-### B
+### 索引 A
 
-- [bevy](./04_domain_specific/game_dev/bevy.md) - 游戏引擎 ⭐⭐⭐⭐
-- [bincode](./01_infrastructure/serialization/bincode.md) - 二进制序列化 ⭐⭐⭐⭐
-- [bytes](./02_system_programming/memory/bytes.md) - 字节缓冲区 ⭐⭐⭐⭐⭐
+- **[anyhow](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#anyhow)** - 应用错误处理 ⭐⭐⭐⭐⭐
+- **[argon2](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#argon2)** - 密码哈希 ⭐⭐⭐⭐
+- **[async-nats](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#async-nats)** - NATS 消息队列客户端 ⭐⭐⭐⭐
+- **[async-std](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#async-std)** - 异步运行时 ⭐⭐⭐⭐
+- **[async-trait](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#async-trait)** - 异步 trait ⭐⭐⭐⭐⭐
+- **[axum](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#axum)** - Web 框架 ⭐⭐⭐⭐⭐
 
-### C
+### 索引 B
 
-- [chrono](./01_infrastructure/datetime/chrono.md) - 时间日期 ⭐⭐⭐⭐⭐
-- [clap](./05_toolchain/cli/clap.md) - CLI 参数解析 ⭐⭐⭐⭐⭐
-- [criterion](./05_toolchain/testing/criterion.md) - 基准测试 ⭐⭐⭐⭐⭐
-- [crossbeam](./02_system_programming/concurrency/crossbeam.md) - 并发数据结构 ⭐⭐⭐⭐⭐
+- **[bevy](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#bevy)** - 游戏引擎 ⭐⭐⭐⭐
+- **[bincode](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#bincode)** - 二进制序列化 ⭐⭐⭐⭐
+- **[bytes](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#bytes)** - 字节缓冲区 ⭐⭐⭐⭐⭐
 
-### ...省略其他字母
+### 索引 C
+
+- **[cached](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#cached)** - 内存缓存 ⭐⭐⭐⭐
+- **[chrono](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#chrono)** - 时间日期处理 ⭐⭐⭐⭐⭐
+- **[clap](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#clap)** - CLI 参数解析 ⭐⭐⭐⭐⭐
+- **[colored](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#colored)** - 终端彩色输出 ⭐⭐⭐⭐
+- **[criterion](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#criterion)** - 基准测试 ⭐⭐⭐⭐⭐
+- **[crossbeam](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#crossbeam)** - 并发数据结构 ⭐⭐⭐⭐⭐
+
+### 索引 D
+
+- **[dashmap](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#dashmap)** - 并发哈希表 ⭐⭐⭐⭐
+- **[diesel](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#diesel)** - ORM 框架 ⭐⭐⭐⭐⭐
+
+### 索引 E
+
+- **[egui](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#egui)** - 即时模式 GUI ⭐⭐⭐⭐
+
+### 索引 F
+
+- **[flume](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#flume)** - 高性能通道 ⭐⭐⭐⭐
+- **[futures](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#futures)** - 异步工具集 ⭐⭐⭐⭐⭐
+
+### 索引 G
+
+- **[getrandom](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#getrandom)** - 随机数生成器 ⭐⭐⭐⭐⭐
+
+### 索引 H
+
+- **[hyper](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#hyper)** - HTTP 底层库 ⭐⭐⭐⭐⭐
+
+### 索引 I
+
+- **[indicatif](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#indicatif)** - 进度条 ⭐⭐⭐⭐
+
+### 索引 J
+
+- **[jsonwebtoken](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#jsonwebtoken)** - JWT 认证 ⭐⭐⭐⭐
+- **[juniper](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#juniper)** - GraphQL 服务器 ⭐⭐⭐⭐
+
+### 索引 K
+
+- **[kani](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#kani)** - 形式化验证 ⭐⭐⭐
+
+### 索引 L
+
+- **[lapin](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#lapin)** - RabbitMQ 客户端 ⭐⭐⭐⭐
+- **[log](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#log)** - 日志门面 ⭐⭐⭐⭐⭐
+
+### 索引 M
+
+- **[moka](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#moka)** - 高性能缓存 ⭐⭐⭐⭐
+- **[mockall](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#mockall)** - Mock 测试 ⭐⭐⭐⭐
+
+### 索引 N
+
+- **[ndarray](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#ndarray)** - N 维数组 ⭐⭐⭐⭐⭐
+
+### 索引 O
+
+- **[oauth2](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#oauth2)** - OAuth2 认证 ⭐⭐⭐⭐
+
+### 索引 P
+
+- **[parking_lot](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#parking_lot)** - 高性能锁 ⭐⭐⭐⭐⭐
+- **[polars](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#polars)** - 数据处理框架 ⭐⭐⭐⭐⭐
+- **[proptest](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#proptest)** - 属性测试 ⭐⭐⭐⭐
+
+### 索引 Q
+
+- **[quinn](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#quinn)** - QUIC 协议 ⭐⭐⭐⭐
+
+### 索引 R
+
+- **[rand](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#rand)** - 随机数生成 ⭐⭐⭐⭐⭐
+- **[rayon](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#rayon)** - 数据并行 ⭐⭐⭐⭐⭐
+- **[rdkafka](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#rdkafka)** - Kafka 客户端 ⭐⭐⭐⭐⭐
+- **[redis](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#redis)** - Redis 客户端 ⭐⭐⭐⭐⭐
+- **[regex](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#regex)** - 正则表达式 ⭐⭐⭐⭐⭐
+- **[reqwest](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#reqwest)** - HTTP 客户端 ⭐⭐⭐⭐⭐
+- **[ring](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#ring)** - 加密库 ⭐⭐⭐⭐⭐
+- **[rocket](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#rocket)** - Web 框架 ⭐⭐⭐⭐
+- **[rustls](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#rustls)** - TLS 实现 ⭐⭐⭐⭐⭐
+
+### 索引 S
+
+- **[sea-orm](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#sea-orm)** - 异步 ORM ⭐⭐⭐⭐⭐
+- **[serde](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#serde)** - 序列化框架 ⭐⭐⭐⭐⭐
+- **[serde_json](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#serde_json)** - JSON 序列化 ⭐⭐⭐⭐⭐
+- **[smol](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#smol)** - 轻量异步运行时 ⭐⭐⭐⭐
+- **[sqlx](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#sqlx)** - 异步 SQL 驱动 ⭐⭐⭐⭐⭐
+
+### 索引 T
+
+- **[tauri](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#tauri)** - 桌面应用框架 ⭐⭐⭐⭐⭐
+- **[tera](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#tera)** - 模板引擎 ⭐⭐⭐⭐
+- **[thiserror](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#thiserror)** - 自定义错误 ⭐⭐⭐⭐⭐
+- **[time](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#time)** - 时间处理 ⭐⭐⭐⭐
+- **[tokio](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#tokio)** - 异步运行时 ⭐⭐⭐⭐⭐
+- **[tokio-tungstenite](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#tokio-tungstenite)** - WebSocket 客户端 ⭐⭐⭐⭐
+- **[tonic](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#tonic)** - gRPC 框架 ⭐⭐⭐⭐⭐
+- **[toml](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#toml)** - TOML 解析 ⭐⭐⭐⭐⭐
+- **[tower](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#tower)** - 服务抽象 ⭐⭐⭐⭐⭐
+- **[tracing](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#tracing)** - 结构化日志 ⭐⭐⭐⭐⭐
+
+### 索引 U
+
+- **[uuid](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#uuid)** - UUID 生成 ⭐⭐⭐⭐⭐
+
+### 索引 V
+
+- **[validator](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#validator)** - 数据验证 ⭐⭐⭐⭐
+
+### 索引 W
+
+- **[wasm-bindgen](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#wasm-bindgen)** - WASM 绑定 ⭐⭐⭐⭐⭐
+
+### 索引 X
+
+暂无常用库
+
+### 索引 Y
+
+- **[yew](../RUST_CRATES_ECOSYSTEM_INDEX_2025.md#yew)** - WASM 前端框架 ⭐⭐⭐⭐
+
+### 索引 Z
+
+暂无常用库
 
 ---
 
@@ -345,7 +499,7 @@ graph LR
 
 #### 我要深入学习某个库
 
-1. 在 [快速索引](#快速索引) 中找到该库
+1. 在 [快速索引](./ALPHABETICAL_INDEX_2025.md) 中找到该库
 2. 阅读详细文档和源码分析
 3. 运行 [完整示例](./examples/)
 
