@@ -45,6 +45,7 @@
 | **📚 完整文档索引** | 35篇增强文档导航 | [浏览索引](./guides/MASTER_DOCUMENTATION_INDEX.md) |
 | **🚀 实践项目路线图** | 10个渐进式实战项目 | [查看路线图](./guides/PRACTICAL_PROJECTS_ROADMAP_2025_10_20.md) |
 | **🛠️ 文档工具链设计** | 6个核心学习工具 | [查看工具链](./guides/DOCUMENTATION_TOOLCHAIN_DESIGN_2025_10_20.md) |
+| **📦 Rust 开源库生态全景指南** | 240+ 核心库完整梳理 (Rust 1.90) | [探索生态](./crates/c11_middlewares/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md) ⭐⭐⭐⭐⭐ 🔥 |
 
 ### 🎯 每个模块现包含
 
@@ -67,7 +68,7 @@
 | **🌱 入门** | 2-4 周 | C01-C03 | 掌握基础语法和核心概念 |
 | **🚀 进阶** | 4-8 周 | C04-C06 | 理解高级特性和并发编程 |
 | **⚡ 高级** | 8-12 周 | C07-C10 | 系统编程和网络应用 |
-| **🏆 专家** | 持续学习 | C11-C13 | 架构设计和生产实践 |
+| **🏆 专家** | 持续学习 | C11-C13 + 生态库 | 架构设计和生产实践 + 开源生态 |
 
 ### 📖 核心学习模块
 
@@ -103,6 +104,15 @@
 | **C11** | [中间件集成](./crates/c11_middlewares/) | 数据库、消息队列、缓存 | [📖 主索引](./crates/c11_middlewares/docs/00_MASTER_INDEX.md) |
 | **C12** | [模型与架构](./crates/c12_model/) | 架构模式、领域建模 | [📖 主索引](./crates/c12_model/docs/00_MASTER_INDEX.md) |
 | **C13** | [可靠性框架](./crates/c13_reliability/) | 容错、分布式、可观测性 | [📖 主索引](./crates/c13_reliability/docs/00_MASTER_INDEX.md) |
+
+#### 第五阶段：Rust 开源生态 🔥 新增
+
+| 资源 | 名称 | 核心内容 | 文档入口 |
+|------|------|---------|---------|
+| **生态指南** | [Rust 开源库全景](./crates/c11_middlewares/docs/essential_crates/) | 240+ 核心库详解 (Rust 1.90) | [📖 生态入口](./crates/c11_middlewares/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md) |
+| **分类体系** | [5层架构分类](./crates/c11_middlewares/docs/RUST_CRATES_CLASSIFICATION_2025.md) | 基础设施/系统/应用/领域/工具链 | [📖 查看分类](./crates/c11_middlewares/docs/RUST_CRATES_CLASSIFICATION_2025.md) |
+| **成熟度矩阵** | [库评估标准](./crates/c11_middlewares/docs/RUST_CRATES_MATURITY_MATRIX_2025.md) | S/A/B/C 评级，性能基准 | [📖 查看评级](./crates/c11_middlewares/docs/RUST_CRATES_MATURITY_MATRIX_2025.md) |
+| **生态索引** | [快速查找](./crates/c11_middlewares/docs/RUST_CRATES_ECOSYSTEM_INDEX_2025.md) | 按字母/功能/场景查找 | [📖 查看索引](./crates/c11_middlewares/docs/RUST_CRATES_ECOSYSTEM_INDEX_2025.md) |
 
 ---
 

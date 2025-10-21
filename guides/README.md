@@ -22,6 +22,14 @@ guides/
 ├── ALIGNMENT_QUICK_REFERENCE.md                          # 对标快速参考
 ├── ALIGNMENT_VISUALIZATION_2025.md                       # 对标可视化
 └── AI_NOTES.md                                           # AI相关笔记
+
+相关资源:
+└── ../crates/c11_middlewares/docs/                       # Rust 开源生态文档 🔥
+    ├── RUST_ESSENTIAL_CRATES_GUIDE_2025.md               # 生态全景指南
+    ├── RUST_CRATES_CLASSIFICATION_2025.md                # 5层架构分类
+    ├── RUST_CRATES_MATURITY_MATRIX_2025.md               # 成熟度评估矩阵
+    ├── RUST_CRATES_ECOSYSTEM_INDEX_2025.md               # 快速查找索引
+    └── essential_crates/                                 # 63个详细分类
 ```
 
 ## 📖 指南分类
@@ -143,6 +151,26 @@ guides/
 - 按主题分类
 - 按难度分级
 - 快速查找
+
+### 📦 Rust 开源生态 🔥 新增
+
+**Rust 开源库生态全景指南** ([查看](../crates/c11_middlewares/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md))
+
+完整生态文档体系：
+
+- **240+ 核心库详解** - 从 serde 到 tokio 的全面覆盖
+- **5层架构分类** - 基础设施/系统编程/应用开发/领域特定/工具链
+- **S/A/B/C 成熟度评级** - 107个常用库的详细评估
+- **470+ 代码示例** - 所有示例都可直接运行
+- **4条学习路径** - 初学者到专家的渐进式路径
+- **35+ 组性能对比** - Web框架、数据库、异步运行时实测数据
+
+**快速入口**:
+- [生态指南](../crates/c11_middlewares/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md) - 入门必读
+- [分类体系](../crates/c11_middlewares/docs/RUST_CRATES_CLASSIFICATION_2025.md) - 系统化分类
+- [成熟度矩阵](../crates/c11_middlewares/docs/RUST_CRATES_MATURITY_MATRIX_2025.md) - 技术选型
+- [生态索引](../crates/c11_middlewares/docs/RUST_CRATES_ECOSYSTEM_INDEX_2025.md) - 快速查找
+- [详细文档](../crates/c11_middlewares/docs/essential_crates/) - 63个分类目录
 
 ## 🎯 使用建议
 
