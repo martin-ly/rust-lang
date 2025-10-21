@@ -281,7 +281,13 @@ Get-ChildItem -Path "." -Recurse -Filter "README.md" |
 - [x] io (100%) ✅
 - [x] memory (100%) ✅
 - [x] unsafe (100%) ✅
-- [ ] process_system (0%)
+- [x] process_system (100%) ✅
+- [x] messaging (100%) ✅
+- [ ] testing (0%)
+- [ ] cli_tools (0%)
+- [ ] cli (0%)
+- [ ] system_prog README (0%)
+- [ ] app_dev README (0%)
 
 ### Phase 3 进度
 
