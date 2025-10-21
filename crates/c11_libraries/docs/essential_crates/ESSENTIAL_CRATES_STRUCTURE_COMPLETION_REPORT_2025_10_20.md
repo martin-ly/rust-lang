@@ -1,4 +1,4 @@
-# Rust 必备库分类目录体系完成报告
+﻿# Rust 必备库分类目录体系完成报告
 
 > **完成日期**: 2025-10-20  
 > **项目范围**: C11 Middlewares - Essential Crates  
@@ -154,7 +154,7 @@
 ## 📁 目录结构
 
 ```text
-crates/c11_middlewares/docs/essential_crates/
+crates/c11_libraries/docs/essential_crates/
 ├─ 📄 README.md                                  ⭐ 主导航 (3,500+ 行)
 ├─ 📄 ESSENTIAL_CRATES_STRUCTURE_COMPLETION_REPORT_2025_10_20.md
 │

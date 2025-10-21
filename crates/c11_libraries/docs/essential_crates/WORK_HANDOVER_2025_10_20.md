@@ -1,4 +1,4 @@
-# Essential Crates 文档改进工作交接文档
+﻿# Essential Crates 文档改进工作交接文档
 
 **交接日期**: 2025-10-20  
 **当前进度**: 6.2% (5/81文档完成)  
@@ -140,7 +140,7 @@
 
 ```powershell
 # 检查文档长度
-Get-ChildItem -Path "crates/c11_middlewares/docs/essential_crates" -Recurse -Filter "README.md" | 
+Get-ChildItem -Path "crates/c11_libraries/docs/essential_crates" -Recurse -Filter "README.md" | 
   ForEach-Object {
     $lines = (Get-Content $_.FullName | Measure-Object -Line).Lines
     if ($lines -lt 200) {
@@ -178,7 +178,7 @@ Get-ChildItem -Recurse -Filter "README.md" | ForEach-Object {
 所有规划和报告文档位于：
 
 ```text
-crates/c11_middlewares/docs/essential_crates/
+crates/c11_libraries/docs/essential_crates/
 ├── DOCUMENT_STANDARD_TEMPLATE.md          # 文档模板
 ├── DOCUMENTATION_IMPROVEMENT_PLAN.md      # 改进计划
 ├── DOCUMENTATION_QUALITY_AUDIT_REPORT_2025_10_20.md  # 质量审计
@@ -270,7 +270,7 @@ crates/c11_middlewares/docs/essential_crates/
 ## 📞 联系信息
 
 **文档维护者**: Rust 学习社区  
-**项目位置**: `crates/c11_middlewares/docs/essential_crates/`  
+**项目位置**: `crates/c11_libraries/docs/essential_crates/`  
 **最后更新**: 2025-10-20  
 **下次审查**: 建议每完成一个批次后进行
 

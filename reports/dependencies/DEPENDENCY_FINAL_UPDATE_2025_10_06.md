@@ -1,4 +1,4 @@
-# 依赖库最终更新报告 | Final Dependency Update Report
+﻿# 依赖库最终更新报告 | Final Dependency Update Report
 
 **日期**: 2025年10月6日  
 **更新时间**: 第二轮更新  
@@ -132,7 +132,7 @@ cargo check --workspace
 8. ✅ c08_algorithms
 9. ✅ c09_design_pattern
 10. ✅ c10_networks
-11. ✅ c11_middlewares (隐式)
+11. ✅ c11_libraries (隐式)
 12. ✅ c12_model
 13. ✅ c13_reliability
 

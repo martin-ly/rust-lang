@@ -1,4 +1,4 @@
-# 依赖库版本更新报告 | Dependency Update Report
+﻿# 依赖库版本更新报告 | Dependency Update Report
 
 **日期**: 2025年10月6日  
 **更新范围**: 工作空间所有 crate  
@@ -112,7 +112,7 @@
 
 ---
 
-### c11_middlewares
+### c11_libraries
 
 | 依赖名称 | 旧版本 | 新版本 | 更新类型 |
 |---------|--------|--------|---------|
@@ -179,7 +179,7 @@ cargo check --workspace
 8. ✅ c08_algorithms
 9. ✅ c09_design_pattern
 10. ✅ c10_networks
-11. ✅ c11_middlewares
+11. ✅ c11_libraries
 12. ✅ c12_model
 13. ✅ c13_reliability
 

@@ -1,12 +1,12 @@
-# Glommio 集成完成报告
+﻿# Glommio 集成完成报告
 
 **日期**: 2025年9月28日  
 **版本**: Rust 1.90.0  
-**项目**: c11_middlewares
+**项目**: c11_libraries
 
 ## 概述
 
-成功完成 Glommio 异步运行时集成到 `c11_middlewares` 项目中，实现了高性能异步 I/O 支持和运行时抽象层。
+成功完成 Glommio 异步运行时集成到 `c11_libraries` 项目中，实现了高性能异步 I/O 支持和运行时抽象层。
 
 ## 主要成就
 
@@ -147,7 +147,7 @@ cargo check --features glommio-full
 
 ### 运行时性能对比
 ```rust
-use c11_middlewares::prelude::*;
+use c11_libraries::prelude::*;
 
 #[cfg(any(feature = "tokio", all(feature = "glommio", target_os = "linux")))]
 async fn main() -> Result<()> {
@@ -208,7 +208,7 @@ async fn main() -> Result<()> {
 ### 启用 Glommio 支持
 ```toml
 [dependencies]
-c11_middlewares = { version = "0.1.0", features = ["glommio-full"] }
+c11_libraries = { version = "0.1.0", features = ["glommio-full"] }
 ```
 
 ### 运行时选择
@@ -248,7 +248,7 @@ Glommio 集成项目圆满完成，实现了：
 4. **兼容性**: 保持了完美的跨平台兼容性
 5. **可扩展性**: 为未来集成更多运行时奠定了基础
 
-这个集成不仅提升了 `c11_middlewares` 的性能表现，也为 Rust 异步编程生态系统做出了重要贡献。
+这个集成不仅提升了 `c11_libraries` 的性能表现，也为 Rust 异步编程生态系统做出了重要贡献。
 
 ---
 

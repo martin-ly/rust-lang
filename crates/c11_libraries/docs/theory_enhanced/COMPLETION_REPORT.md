@@ -1,4 +1,4 @@
-# C11 Middlewares 理论增强文档完成报告
+﻿# C11 Middlewares 理论增强文档完成报告
 
 > **报告类型**: theory_enhanced目录补充完成  
 > **实施日期**: 2025-10-20  
@@ -278,7 +278,7 @@
 ## 📁 目录结构
 
 ```text
-crates/c11_middlewares/docs/theory_enhanced/
+crates/c11_libraries/docs/theory_enhanced/
 ├── README.md                                    # 索引文档
 ├── KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md    # 知识图谱
 ├── MULTI_DIMENSIONAL_COMPARISON_MATRIX.md      # 多维对比

@@ -1,4 +1,4 @@
-//! 性能基准测试模块
+﻿//! 性能基准测试模块
 //! 
 //! 本模块提供了基于 Rust 1.90 特性的性能基准测试功能：
 //! - 常量泛型优化的基准测试
@@ -441,7 +441,7 @@ impl BenchmarkSuite {
     /// 运行完整的基准测试套件
     pub async fn run_full_suite(&mut self) -> Result<String> {
         let mut report = String::new();
-        report.push_str("=== c11_middlewares 完整基准测试套件 ===\n\n");
+        report.push_str("=== c11_libraries 完整基准测试套件 ===\n\n");
         
         // 1. 基础性能测试
         report.push_str("--- 基础性能测试 ---\n");

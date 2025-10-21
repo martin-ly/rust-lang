@@ -1,4 +1,4 @@
-# C11 开发库: 主索引 (Master Index)
+﻿# C11 开发库: 主索引 (Master Index)
 
 > **文档定位**: 开发库学习路径总导航，快速定位数据库、缓存、消息队列等资源  
 > **使用方式**: 作为学习起点，根据需求选择合适的中间件和集成方案  
@@ -129,7 +129,7 @@
 
 ```bash
 # 运行所有基准测试
-cargo bench -p c11_middlewares
+cargo bench -p c11_libraries
 
 # 运行高级基准测试
 cargo bench --bench advanced_benchmarking_demo

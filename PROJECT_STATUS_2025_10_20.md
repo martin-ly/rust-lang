@@ -1,4 +1,4 @@
-# 🎉 Rust 系统化学习项目 - 项目状态报告
+﻿# 🎉 Rust 系统化学习项目 - 项目状态报告
 
 **日期**: 2025年10月20日  
 **版本**: v1.1  
@@ -38,7 +38,7 @@
 | C08 | 算法与数据结构 | ✅ | [主索引](./crates/c08_algorithms/docs/00_MASTER_INDEX.md) |
 | C09 | 设计模式 | ✅ | [主索引](./crates/c09_design_pattern/docs/00_MASTER_INDEX.md) |
 | C10 | 网络编程 | ✅ | [主索引](./crates/c10_networks/docs/00_MASTER_INDEX.md) |
-| C11 | 中间件集成 | ✅ | [主索引](./crates/c11_middlewares/docs/00_MASTER_INDEX.md) |
+| C11 | 中间件集成 | ✅ | [主索引](./crates/c11_libraries/docs/00_MASTER_INDEX.md) |
 | C12 | 模型与架构 | ✅ | [主索引](./crates/c12_model/docs/00_MASTER_INDEX.md) |
 | C13 | 可靠性框架 | ✅ | [主索引](./crates/c13_reliability/docs/00_MASTER_INDEX.md) |
 | C14 | 宏系统 | ✅ | [主索引](./crates/c14_macro_system/docs/00_MASTER_INDEX.md) |
@@ -58,11 +58,11 @@
 
 | 文档 | 说明 | 链接 |
 |------|------|------|
-| 生态指南 | 完整生态入门 | [查看](./crates/c11_middlewares/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md) |
-| 分类体系 | 5层架构分类 | [查看](./crates/c11_middlewares/docs/RUST_CRATES_CLASSIFICATION_2025.md) |
-| 成熟度矩阵 | S/A/B/C 评级 | [查看](./crates/c11_middlewares/docs/RUST_CRATES_MATURITY_MATRIX_2025.md) |
-| 生态索引 | 快速查找 | [查看](./crates/c11_middlewares/docs/RUST_CRATES_ECOSYSTEM_INDEX_2025.md) |
-| 生态总结 | 全景总结 | [查看](./crates/c11_middlewares/docs/essential_crates/RUST_ECOSYSTEM_SUMMARY_2025.md) |
+| 生态指南 | 完整生态入门 | [查看](./crates/c11_libraries/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md) |
+| 分类体系 | 5层架构分类 | [查看](./crates/c11_libraries/docs/RUST_CRATES_CLASSIFICATION_2025.md) |
+| 成熟度矩阵 | S/A/B/C 评级 | [查看](./crates/c11_libraries/docs/RUST_CRATES_MATURITY_MATRIX_2025.md) |
+| 生态索引 | 快速查找 | [查看](./crates/c11_libraries/docs/RUST_CRATES_ECOSYSTEM_INDEX_2025.md) |
+| 生态总结 | 全景总结 | [查看](./crates/c11_libraries/docs/essential_crates/RUST_ECOSYSTEM_SUMMARY_2025.md) |
 
 #### 详细分类 (63个目录)
 
@@ -242,7 +242,7 @@ cargo build --workspace
 
 - 🌱 **完全新手**: 从 [C01](./crates/c01_ownership_borrow_scope/) 开始
 - 🚀 **有经验**: 查看 [快速开始指南](./guides/QUICK_START_GUIDE_2025_10_20.md)
-- ⚡ **Rust 老手**: 探索 [生态文档](./crates/c11_middlewares/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md) 🔥
+- ⚡ **Rust 老手**: 探索 [生态文档](./crates/c11_libraries/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md) 🔥
 
 ### 3. 开始学习
 
@@ -257,7 +257,7 @@ cargo run --example ownership_demo --package c01_ownership_borrow_scope
 cargo test --package c01_ownership_borrow_scope
 
 # 方式 4: 探索生态 🔥
-cat crates/c11_middlewares/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md
+cat crates/c11_libraries/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md
 ```
 
 ---
@@ -286,18 +286,18 @@ cat crates/c11_middlewares/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md
 
 | 文档 | 说明 | 链接 |
 |------|------|------|
-| 生态指南 | 入门必读 | [查看](./crates/c11_middlewares/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md) |
-| 分类体系 | 5层架构 | [查看](./crates/c11_middlewares/docs/RUST_CRATES_CLASSIFICATION_2025.md) |
-| 成熟度矩阵 | 技术选型 | [查看](./crates/c11_middlewares/docs/RUST_CRATES_MATURITY_MATRIX_2025.md) |
-| 生态索引 | 快速查找 | [查看](./crates/c11_middlewares/docs/RUST_CRATES_ECOSYSTEM_INDEX_2025.md) |
-| 详细文档 | 63个分类 | [查看](./crates/c11_middlewares/docs/essential_crates/) |
+| 生态指南 | 入门必读 | [查看](./crates/c11_libraries/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md) |
+| 分类体系 | 5层架构 | [查看](./crates/c11_libraries/docs/RUST_CRATES_CLASSIFICATION_2025.md) |
+| 成熟度矩阵 | 技术选型 | [查看](./crates/c11_libraries/docs/RUST_CRATES_MATURITY_MATRIX_2025.md) |
+| 生态索引 | 快速查找 | [查看](./crates/c11_libraries/docs/RUST_CRATES_ECOSYSTEM_INDEX_2025.md) |
+| 详细文档 | 63个分类 | [查看](./crates/c11_libraries/docs/essential_crates/) |
 
 ### 重要报告
 
 | 报告 | 说明 | 链接 |
 |------|------|------|
 | 生态集成报告 | 生态文档集成 | [查看](./RUST_ECOSYSTEM_INTEGRATION_REPORT_2025_10_20.md) |
-| 空目录完成报告 | 63个目录填充 | [查看](./crates/c11_middlewares/docs/essential_crates/EMPTY_DIRECTORIES_COMPLETION_REPORT_2025_10_20.md) |
+| 空目录完成报告 | 63个目录填充 | [查看](./crates/c11_libraries/docs/essential_crates/EMPTY_DIRECTORIES_COMPLETION_REPORT_2025_10_20.md) |
 | Phase 2 完成报告 | Q2-Q3 任务完成 | [查看](./reports/phases/PHASE2_FINAL_COMPLETION_REPORT_2025_10_20.md) |
 | 大学对标报告 | 国际水平对比 | [查看](./guides/COMPREHENSIVE_UNIVERSITY_ALIGNMENT_REPORT_2025.md) |
 
@@ -580,7 +580,7 @@ git push origin feature/your-feature
 
 - 🌱 新手: [从 C01 开始](./crates/c01_ownership_borrow_scope/)
 - 🚀 有经验: [快速开始指南](./guides/QUICK_START_GUIDE_2025_10_20.md)
-- ⚡ 专家: [探索生态](./crates/c11_middlewares/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md) 🔥
+- ⚡ 专家: [探索生态](./crates/c11_libraries/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md) 🔥
 
 ---
 

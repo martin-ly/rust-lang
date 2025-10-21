@@ -1,4 +1,4 @@
-# 项目梳理报告 (2025-10-20)
+﻿# 项目梳理报告 (2025-10-20)
 
 > **报告类型**: 项目清理与问题修复  
 > **执行日期**: 2025-10-20  
@@ -137,7 +137,7 @@ members = [
     "crates/c08_algorithms",
     "crates/c09_design_pattern",
     "crates/c10_networks",
-    "crates/c11_middlewares",
+    "crates/c11_libraries",
     "crates/c12_model",
     "crates/c13_reliability",
 ]
@@ -202,7 +202,7 @@ members = [
 | 8 | c08_algorithms | ✅ | 算法与数据结构 |
 | 9 | c09_design_pattern | ✅ | 设计模式 |
 | 10 | c10_networks | ✅ | 网络编程 |
-| 11 | c11_middlewares | ✅ | 中间件集成 |
+| 11 | c11_libraries | ✅ | 中间件集成 |
 | 12 | c12_model | ✅ | 模型与架构 |
 | 13 | c13_reliability | ✅ | 可靠性框架 |
 

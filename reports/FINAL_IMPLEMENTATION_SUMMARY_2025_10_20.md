@@ -1,4 +1,4 @@
-# 🎊 Rust 学习项目 - 实施完成总结
+﻿# 🎊 Rust 学习项目 - 实施完成总结
 
 > **完成日期**: 2025-10-20  
 > **项目状态**: ✅ **100% 完成**  
@@ -348,7 +348,7 @@ rust-lang/
 │   │   ├── docs/RUST_190_MODERN_NETWORK_TECHNOLOGIES_2025.md
 │   │   └── MODERN_NETWORK_TECH_UPDATE_2025_10_20.md
 │   │
-│   ├── crates/c11_middlewares/
+│   ├── crates/c11_libraries/
 │   │   └── docs/RUST_190_MIDDLEWARE_PRACTICAL_EXAMPLES.md
 │   │
 │   └── crates/c12_model/, c13_reliability/ (类似结构)

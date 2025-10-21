@@ -1,4 +1,4 @@
-# 🦀 Rust Systematic Learning Project
+﻿# 🦀 Rust Systematic Learning Project
 
 > **Project Positioning**: Complete Rust language learning system, comprehensive coverage from basics to advanced  
 > **Target Audience**: All developers who want to systematically learn Rust  
@@ -88,7 +88,7 @@ For core modules (C01-C13), each module now contains:
 
 | Module | Name | Core Content | Documentation |
 |--------|------|--------------|---------------|
-| **C11** | [Middleware Integration](./crates/c11_middlewares/) | Databases, message queues, caching | [📖 Master Index](./crates/c11_middlewares/docs/00_MASTER_INDEX.md) |
+| **C11** | [Middleware Integration](./crates/c11_libraries/) | Databases, message queues, caching | [📖 Master Index](./crates/c11_libraries/docs/00_MASTER_INDEX.md) |
 | **C12** | [Models & Architecture](./crates/c12_model/) | Architecture patterns, domain modeling | [📖 Master Index](./crates/c12_model/docs/00_MASTER_INDEX.md) |
 | **C13** | [Reliability Framework](./crates/c13_reliability/) | Fault tolerance, distributed systems, observability | [📖 Master Index](./crates/c13_reliability/docs/00_MASTER_INDEX.md) |
 

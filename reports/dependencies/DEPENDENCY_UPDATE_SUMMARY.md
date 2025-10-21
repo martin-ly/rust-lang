@@ -1,4 +1,4 @@
-# 依赖库更新摘要 | Dependency Update Summary
+﻿# 依赖库更新摘要 | Dependency Update Summary
 
 **日期**: 2025年10月6日  
 **状态**: ✅ 成功完成
@@ -35,7 +35,7 @@
 | c03_control_fn | fastrand: 2.0 → 2.3 |
 | c05_threads | windows: 0.62.0 → 0.62.1, tokio: 1.0 → 1.47 |
 | c06_async | once_cell: 1.20 → 1.21, bastion: 0.4.1-alpha.1 → 0.4.5 |
-| c11_middlewares | redis: 0.32.5 → 0.32.7, tokio-postgres: 0.7.13 → 0.7.14, postgres-types: 0.2.9 → 0.2.10 |
+| c11_libraries | redis: 0.32.5 → 0.32.7, tokio-postgres: 0.7.13 → 0.7.14, postgres-types: 0.2.9 → 0.2.10 |
 | c13_reliability | sysinfo: 0.37.0 → 0.37.2, hostname: 0.4.0 → 0.4.1, jemallocator: 0.5.0 → 0.5.4 |
 
 ---

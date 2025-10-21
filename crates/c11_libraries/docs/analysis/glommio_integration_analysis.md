@@ -1,8 +1,8 @@
-# Glommio 集成分析与论证报告
+﻿# Glommio 集成分析与论证报告
 
 ## 📋 执行摘要
 
-本报告分析了 Glommio 作为新兴高性能异步 I/O 框架在 `c11_middlewares` 项目中的集成可行性和潜在价值。
+本报告分析了 Glommio 作为新兴高性能异步 I/O 框架在 `c11_libraries` 项目中的集成可行性和潜在价值。
 Glommio 基于 io_uring 技术，提供了卓越的性能表现，特别适合高并发、低延迟的中间件应用场景。
 
 ## 🎯 Glommio 核心特性分析

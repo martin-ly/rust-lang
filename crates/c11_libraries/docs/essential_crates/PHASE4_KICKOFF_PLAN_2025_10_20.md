@@ -1,4 +1,4 @@
-# Phase 4 启动计划
+﻿# Phase 4 启动计划
 
 **创建日期**: 2025-10-20  
 **目标**: 全局统一与验证（~57 文档）  
@@ -196,7 +196,7 @@ Batch 7: 全局优化与验证
 
 ```powershell
 # 检查所有文档是否有目录
-Get-ChildItem -Path "crates/c11_middlewares/docs/essential_crates" -Filter "README.md" -Recurse | ForEach-Object {
+Get-ChildItem -Path "crates/c11_libraries/docs/essential_crates" -Filter "README.md" -Recurse | ForEach-Object {
   $content = Get-Content $_.FullName -Raw
   if ($content -notmatch "## 📋 目录") {
     Write-Host "❌ 缺少目录: $($_.FullName)" -ForegroundColor Yellow

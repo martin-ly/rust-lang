@@ -1,4 +1,4 @@
-# Rust 开源库生态文档完成报告 (2025)
+﻿# Rust 开源库生态文档完成报告 (2025)
 
 > **项目**: C11 Middlewares - Rust 开源库生态全景梳理  
 > **完成日期**: 2025-10-20  
@@ -608,14 +608,14 @@ C11 Middlewares 文档
 ## 📁 文件清单
 
 ```text
-crates/c11_middlewares/docs/
+crates/c11_libraries/docs/
 ├─ RUST_ESSENTIAL_CRATES_GUIDE_2025.md          (~8,500行)
 ├─ RUST_CRATES_CLASSIFICATION_2025.md           (~9,200行)
 ├─ RUST_CRATES_MATURITY_MATRIX_2025.md          (~7,800行)
 ├─ RUST_CRATES_ECOSYSTEM_INDEX_2025.md          (~4,500行)
 └─ RUST_CRATES_ECOSYSTEM_COMPLETION_REPORT_2025.md (本文档)
 
-crates/c11_middlewares/
+crates/c11_libraries/
 └─ README.md                                     (已更新)
 ```
 

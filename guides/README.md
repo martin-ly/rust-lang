@@ -1,4 +1,4 @@
-# 📚 学习指南与参考文档
+﻿# 📚 学习指南与参考文档
 
 本目录包含项目的各类学习指南、参考文档和技术指南。
 
@@ -24,7 +24,7 @@ guides/
 └── AI_NOTES.md                                           # AI相关笔记
 
 相关资源:
-└── ../crates/c11_middlewares/docs/                       # Rust 开源生态文档 🔥
+└── ../crates/c11_libraries/docs/                       # Rust 开源生态文档 🔥
     ├── RUST_ESSENTIAL_CRATES_GUIDE_2025.md               # 生态全景指南
     ├── RUST_CRATES_CLASSIFICATION_2025.md                # 5层架构分类
     ├── RUST_CRATES_MATURITY_MATRIX_2025.md               # 成熟度评估矩阵
@@ -154,7 +154,7 @@ guides/
 
 ### 📦 Rust 开源生态 🔥 新增
 
-**Rust 开源库生态全景指南** ([查看](../crates/c11_middlewares/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md))
+**Rust 开源库生态全景指南** ([查看](../crates/c11_libraries/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md))
 
 完整生态文档体系：
 
@@ -166,11 +166,11 @@ guides/
 - **35+ 组性能对比** - Web框架、数据库、异步运行时实测数据
 
 **快速入口**:
-- [生态指南](../crates/c11_middlewares/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md) - 入门必读
-- [分类体系](../crates/c11_middlewares/docs/RUST_CRATES_CLASSIFICATION_2025.md) - 系统化分类
-- [成熟度矩阵](../crates/c11_middlewares/docs/RUST_CRATES_MATURITY_MATRIX_2025.md) - 技术选型
-- [生态索引](../crates/c11_middlewares/docs/RUST_CRATES_ECOSYSTEM_INDEX_2025.md) - 快速查找
-- [详细文档](../crates/c11_middlewares/docs/essential_crates/) - 63个分类目录
+- [生态指南](../crates/c11_libraries/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md) - 入门必读
+- [分类体系](../crates/c11_libraries/docs/RUST_CRATES_CLASSIFICATION_2025.md) - 系统化分类
+- [成熟度矩阵](../crates/c11_libraries/docs/RUST_CRATES_MATURITY_MATRIX_2025.md) - 技术选型
+- [生态索引](../crates/c11_libraries/docs/RUST_CRATES_ECOSYSTEM_INDEX_2025.md) - 快速查找
+- [详细文档](../crates/c11_libraries/docs/essential_crates/) - 63个分类目录
 
 ## 🎯 使用建议
 

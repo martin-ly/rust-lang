@@ -1,4 +1,4 @@
-# Redis Cargo 配置指南
+﻿# Redis Cargo 配置指南
 
 **更新日期**: 2025-10-20  
 **Redis 版本**: 1.0.0-rc.2 (最新)
@@ -8,7 +8,7 @@
 本项目在以下模块中使用了 Redis：
 
 1. **c06_async** - 异步编程模块（分布式缓存示例）
-2. **c11_middlewares** - 中间件模块（KV 存储抽象）
+2. **c11_libraries** - 中间件模块（KV 存储抽象）
 3. **Workspace** - 根配置统一版本管理
 
 ## 🚀 快速开始
@@ -62,9 +62,9 @@ tokio = { workspace = true }  # 1.48.0，支持 full features
 
 **使用场景**: 异步应用、分布式缓存、微服务
 
-### 配置 2: c11_middlewares 模块 (可选特性)
+### 配置 2: c11_libraries 模块 (可选特性)
 
-**文件**: `crates/c11_middlewares/Cargo.toml`
+**文件**: `crates/c11_libraries/Cargo.toml`
 
 ```toml
 [dependencies]
@@ -552,8 +552,8 @@ redis = { version = "1.0.0-rc.2", features = ["aio", "tokio-comp"] }
 cd crates/c06_async
 cargo run --example redis_cache
 
-# c11_middlewares 模块示例
-cd crates/c11_middlewares
+# c11_libraries 模块示例
+cd crates/c11_libraries
 cargo run --example message_queue --features kv-redis
 ```
 

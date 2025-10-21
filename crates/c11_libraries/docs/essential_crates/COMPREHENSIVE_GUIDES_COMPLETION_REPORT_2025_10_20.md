@@ -1,4 +1,4 @@
-# 综合性主题指南批量创建完成报告
+﻿# 综合性主题指南批量创建完成报告
 
 > **报告日期**: 2025-10-20  
 > **报告类型**: 多任务并行推进  
@@ -250,7 +250,7 @@
 ## 📂 生成的文档结构1
 
 ```text
-crates/c11_middlewares/docs/essential_crates/guides/
+crates/c11_libraries/docs/essential_crates/guides/
 ├── RUST_MICROSERVICES_ARCHITECTURE_2025.md      (1,500行)
 ├── RUST_PERFORMANCE_OPTIMIZATION_2025.md        (1,200行)
 ├── RUST_FULLSTACK_PROJECT_2025.md               (1,100行)

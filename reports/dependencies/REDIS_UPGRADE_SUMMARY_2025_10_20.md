@@ -1,4 +1,4 @@
-# Redis 版本升级总结报告
+﻿# Redis 版本升级总结报告
 
 **升级日期**: 2025-10-20  
 **升级版本**: 0.32.7 / 1.0.0-rc.1 → 1.0.0-rc.2  
@@ -40,9 +40,9 @@
 
 ---
 
-### 3. c11_middlewares 模块
+### 3. c11_libraries 模块
 
-**文件**: `crates/c11_middlewares/Cargo.toml`
+**文件**: `crates/c11_libraries/Cargo.toml`
 
 ```diff
 - redis = { version = "0.32.7", optional = true, default-features = false, features = ["aio", "tokio-comp"] }
@@ -59,7 +59,7 @@
 
 ### 4. API 适配修复
 
-**文件**: `crates/c11_middlewares/src/cache/redis_client.rs`
+**文件**: `crates/c11_libraries/src/cache/redis_client.rs`
 
 #### 变更内容
 
@@ -120,8 +120,8 @@ let conn = client.get_multiplexed_async_connection().await?;
 ✅ cargo check -p c06_async
 Status: PASS
 
-# c11_middlewares 模块
-✅ cargo check -p c11_middlewares --features kv-redis
+# c11_libraries 模块
+✅ cargo check -p c11_libraries --features kv-redis
 Status: PASS (修复后)
 ```
 
@@ -130,7 +130,7 @@ Status: PASS (修复后)
 | 模块 | 功能 | 状态 |
 |------|------|------|
 | c06_async | 分布式缓存 | ✅ 正常 |
-| c11_middlewares | KV 存储 | ✅ 正常 |
+| c11_libraries | KV 存储 | ✅ 正常 |
 
 ## 📊 升级统计
 
@@ -272,7 +272,7 @@ Status: PASS (修复后)
 
 - [x] Workspace 配置已更新
 - [x] c06_async 配置已更新
-- [x] c11_middlewares 配置已更新
+- [x] c11_libraries 配置已更新
 - [x] API 适配已完成
 - [x] 编译测试通过
 - [x] 功能验证通过

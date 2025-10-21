@@ -1,4 +1,4 @@
-# 参考文档
+﻿# 参考文档
 
 > 本目录包含 API 参考、配置参考和 Rust 特性指南
 
@@ -136,7 +136,7 @@ let pg_config = PostgresConfig::new("postgres://user:pass@localhost/db")
 **重试机制示例**:
 
 ```rust
-use c11_middlewares::util::retry_async;
+use c11_libraries::util::retry_async;
 
 let result = retry_async(
     || async { 
@@ -241,7 +241,7 @@ MqttConfig::new("127.0.0.1", 1883, "client-1")
 **错误处理**:
 
 ```rust
-use c11_middlewares::Error;
+use c11_libraries::Error;
 
 match middleware.operation().await {
     Ok(value) => println!("Success: {:?}", value),

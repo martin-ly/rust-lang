@@ -1,4 +1,4 @@
-# 📚 Rust 学习项目 - 完整文档索引
+﻿# 📚 Rust 学习项目 - 完整文档索引
 
 > **自动生成时间**: 2025-10-20  
 > **项目版本**: Rust 1.90+ | Edition 2024  
@@ -221,11 +221,11 @@
 
 ### C11 中间件集成
 
-**模块位置**: `crates/c11_middlewares/`
+**模块位置**: `crates/c11_libraries/`
 
 **核心增强文档** (1篇):
 
-- 💻 [Rust 1.90 中间件实战示例](./crates/c11_middlewares/docs/RUST_190_MIDDLEWARE_PRACTICAL_EXAMPLES.md)
+- 💻 [Rust 1.90 中间件实战示例](./crates/c11_libraries/docs/RUST_190_MIDDLEWARE_PRACTICAL_EXAMPLES.md)
 
 **核心主题**:
 

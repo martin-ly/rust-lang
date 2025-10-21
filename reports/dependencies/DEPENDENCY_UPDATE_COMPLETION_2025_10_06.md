@@ -1,4 +1,4 @@
-# 依赖库更新完成报告 | Dependency Update Completion Report
+﻿# 依赖库更新完成报告 | Dependency Update Completion Report
 
 **日期**: 2025年10月6日  
 **完成时间**: 2025-10-06 (系统时间)  
@@ -166,7 +166,7 @@ assert!(results.is_empty(), "基础类型验证应该没有错误");
 - **once_cell**: 1.20 → 1.21
 - **bastion**: 0.4.1-alpha.1 → 0.4.5
 
-#### c11_middlewares
+#### c11_libraries
 
 - **redis**: 0.32.5 → 0.32.7
 - **tokio-postgres**: 0.7.13 → 0.7.14

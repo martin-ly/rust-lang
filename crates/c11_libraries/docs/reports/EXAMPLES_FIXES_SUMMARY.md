@@ -1,4 +1,4 @@
-# 示例文件修复总结
+﻿# 示例文件修复总结
 
 ## 修复概述
 
@@ -68,11 +68,11 @@ std::thread::sleep(Duration::from_millis(10));
 ```rust
 // 只有在需要时才导入 prelude
 #[cfg(any(feature = "kv-redis", feature = "sql-postgres"))]
-use c11_middlewares::prelude::*;
+use c11_libraries::prelude::*;
 
 // 特定特性的配置导入
 #[cfg(feature = "kv-redis")]
-use c11_middlewares::config::RedisConfig;
+use c11_libraries::config::RedisConfig;
 ```
 
 ### 示例文件结构

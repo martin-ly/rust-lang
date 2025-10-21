@@ -1,4 +1,4 @@
-# 🎯 Rust 学习检查清单 (Learning Checklist)
+﻿# 🎯 Rust 学习检查清单 (Learning Checklist)
 
 > **文档定位**: 系统化学习进度追踪工具  
 > **使用方式**: 逐项完成学习任务，标记完成状态  
@@ -380,9 +380,9 @@
 
 **学习资源**:
 
-- 📖 [主索引](./crates/c11_middlewares/docs/00_MASTER_INDEX.md)
-- ❓ [FAQ](./crates/c11_middlewares/docs/FAQ.md)
-- 📚 [术语表](./crates/c11_middlewares/docs/Glossary.md)
+- 📖 [主索引](./crates/c11_libraries/docs/00_MASTER_INDEX.md)
+- ❓ [FAQ](./crates/c11_libraries/docs/FAQ.md)
+- 📚 [术语表](./crates/c11_libraries/docs/Glossary.md)
 
 ---
 

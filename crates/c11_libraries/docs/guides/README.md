@@ -1,4 +1,4 @@
-# 中间件使用指南
+﻿# 中间件使用指南
 
 > 本目录包含各类中间件的详细使用指南和最佳实践
 
@@ -59,10 +59,10 @@
 **快速开始**:
 
 ```rust
-use c11_middlewares::sql::SqlDatabase;
+use c11_libraries::sql::SqlDatabase;
 
 // PostgreSQL
-let db = c11_middlewares::postgres_client::PostgresDb::connect(
+let db = c11_libraries::postgres_client::PostgresDb::connect(
     "postgres://user:pass@localhost/db"
 ).await?;
 
@@ -93,9 +93,9 @@ let rows = db.query("SELECT id, name FROM users").await?;
 **快速开始**:
 
 ```rust
-use c11_middlewares::kv::KeyValueStore;
+use c11_libraries::kv::KeyValueStore;
 
-let store = c11_middlewares::redis_client::RedisStore::connect(
+let store = c11_libraries::redis_client::RedisStore::connect(
     "redis://127.0.0.1:6379"
 ).await?;
 
@@ -132,14 +132,14 @@ let value = store.get("key").await?;
 
 ```rust
 // NATS
-let producer = c11_middlewares::nats_client::NatsProducer::connect(
+let producer = c11_libraries::nats_client::NatsProducer::connect(
     "nats://127.0.0.1:4222", "subject"
 ).await?;
 
 producer.publish(b"Hello, NATS!").await?;
 
 // MQTT
-let (mqtt_producer, _) = c11_middlewares::mqtt_client::MqttProducer::connect(
+let (mqtt_producer, _) = c11_libraries::mqtt_client::MqttProducer::connect(
     "127.0.0.1", 1883, "client-1"
 ).await?;
 

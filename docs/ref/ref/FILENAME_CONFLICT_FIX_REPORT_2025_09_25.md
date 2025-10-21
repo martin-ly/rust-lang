@@ -1,4 +1,4 @@
-# 文件名冲突修复报告 - 2025年9月25日
+﻿# 文件名冲突修复报告 - 2025年9月25日
 
 ## 📋 问题概述
 
@@ -25,7 +25,7 @@
 ### 4. comprehensive_demo.rs
 
 - **c06_async**: `examples/comprehensive_demo.rs`
-- **c11_middlewares**: `examples/comprehensive_demo.rs`
+- **c11_libraries**: `examples/comprehensive_demo.rs`
 
 ### 5. rust_190_features_demo.rs
 
@@ -34,7 +34,7 @@
 
 ### 6. basic_usage.rs
 
-- **c11_middlewares**: `examples/basic_usage.rs`
+- **c11_libraries**: `examples/basic_usage.rs`
 - **c13_reliability**: `examples/basic_usage.rs`
 
 ## 🔧 修复策略
@@ -46,7 +46,7 @@
 - **c02_type_system**: 保持原名（作为基础类型系统 crate）
 - **c03_control_fn**: 添加 `control_flow_` 前缀
 - **c06_async**: 添加 `async_` 前缀
-- **c11_middlewares**: 添加 `middleware_` 前缀
+- **c11_libraries**: 添加 `middleware_` 前缀
 - **c12_model**: 添加 `model_` 前缀
 - **c13_reliability**: 添加 `reliability_` 前缀
 
@@ -65,7 +65,7 @@
 - `rust_190_comprehensive_demo.rs` → `async_rust_190_comprehensive_demo.rs`
 - `comprehensive_demo.rs` → `async_comprehensive_demo.rs`
 
-#### c11_middlewares
+#### c11_libraries
 
 - `comprehensive_demo.rs` → `middleware_comprehensive_demo.rs`
 - `basic_usage.rs` → `middleware_basic_usage.rs`

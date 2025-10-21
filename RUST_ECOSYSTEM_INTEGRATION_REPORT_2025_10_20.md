@@ -1,4 +1,4 @@
-# Rust 开源生态系统集成完成报告
+﻿# Rust 开源生态系统集成完成报告
 
 **日期**: 2025年10月20日  
 **版本**: v1.0  
@@ -251,9 +251,9 @@
 
 ### 模块集成
 
-#### C11_middlewares 模块
+#### c11_libraries 模块
 
-- ✅ 所有生态文档都存放在 `crates/c11_middlewares/docs/`
+- ✅ 所有生态文档都存放在 `crates/c11_libraries/docs/`
 - ✅ 主 README 已更新，包含生态指南链接
 - ✅ 创建了完整的 `essential_crates/` 目录结构
 
@@ -265,13 +265,13 @@
 
 ```bash
 # 1. 浏览生态全景指南
-cat crates/c11_middlewares/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md
+cat crates/c11_libraries/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md
 
 # 2. 查看分类体系
-cat crates/c11_middlewares/docs/RUST_CRATES_CLASSIFICATION_2025.md
+cat crates/c11_libraries/docs/RUST_CRATES_CLASSIFICATION_2025.md
 
 # 3. 探索具体分类
-cd crates/c11_middlewares/docs/essential_crates/
+cd crates/c11_libraries/docs/essential_crates/
 
 # 4. 查看特定库文档
 cat 01_infrastructure/async_runtime/README.md
@@ -282,7 +282,7 @@ cat 03_application_dev/web_frameworks/README.md
 
 #### 初学者（1周）
 
-1. 📖 阅读 [RUST_ESSENTIAL_CRATES_GUIDE_2025.md](crates/c11_middlewares/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md)
+1. 📖 阅读 [RUST_ESSENTIAL_CRATES_GUIDE_2025.md](crates/c11_libraries/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md)
 2. 🚀 学习基础设施层（Layer 1）前5个分类
 3. 💻 运行示例代码，理解基本用法
 
@@ -341,7 +341,7 @@ rust-lang/
 ├── ROADMAP.md (已更新，标记完成状态)
 ├── RUST_ECOSYSTEM_INTEGRATION_REPORT_2025_10_20.md (本报告)
 │
-└── crates/c11_middlewares/docs/
+└── crates/c11_libraries/docs/
     ├── RUST_ESSENTIAL_CRATES_GUIDE_2025.md (入口)
     ├── RUST_CRATES_CLASSIFICATION_2025.md (分类)
     ├── RUST_CRATES_MATURITY_MATRIX_2025.md (评估)
@@ -483,17 +483,17 @@ git push origin feature/update-ecosystem-docs
 
 ### 文档入口
 
-- 📚 [生态指南入口](crates/c11_middlewares/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md)
-- 📊 [分类体系](crates/c11_middlewares/docs/RUST_CRATES_CLASSIFICATION_2025.md)
-- 🎯 [成熟度矩阵](crates/c11_middlewares/docs/RUST_CRATES_MATURITY_MATRIX_2025.md)
-- 🔍 [生态索引](crates/c11_middlewares/docs/RUST_CRATES_ECOSYSTEM_INDEX_2025.md)
+- 📚 [生态指南入口](crates/c11_libraries/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md)
+- 📊 [分类体系](crates/c11_libraries/docs/RUST_CRATES_CLASSIFICATION_2025.md)
+- 🎯 [成熟度矩阵](crates/c11_libraries/docs/RUST_CRATES_MATURITY_MATRIX_2025.md)
+- 🔍 [生态索引](crates/c11_libraries/docs/RUST_CRATES_ECOSYSTEM_INDEX_2025.md)
 
 ### 相关报告
 
-- 📝 [空目录填充完成报告](crates/c11_middlewares/docs/essential_crates/EMPTY_DIRECTORIES_COMPLETION_REPORT_2025_10_20.md)
-- 📝 [生态总结](crates/c11_middlewares/docs/essential_crates/RUST_ECOSYSTEM_SUMMARY_2025.md)
-- 📝 [Phase 1 完成报告](crates/c11_middlewares/docs/essential_crates/PHASE1_COMPLETION_REPORT_2025_10_20.md)
-- 📝 [链接验证报告](crates/c11_middlewares/docs/LINK_VALIDATION_AND_FIX_REPORT_2025_10_20.md)
+- 📝 [空目录填充完成报告](crates/c11_libraries/docs/essential_crates/EMPTY_DIRECTORIES_COMPLETION_REPORT_2025_10_20.md)
+- 📝 [生态总结](crates/c11_libraries/docs/essential_crates/RUST_ECOSYSTEM_SUMMARY_2025.md)
+- 📝 [Phase 1 完成报告](crates/c11_libraries/docs/essential_crates/PHASE1_COMPLETION_REPORT_2025_10_20.md)
+- 📝 [链接验证报告](crates/c11_libraries/docs/LINK_VALIDATION_AND_FIX_REPORT_2025_10_20.md)
 
 ---
 
@@ -515,4 +515,4 @@ git push origin feature/update-ecosystem-docs
 
 **🎊 Rust 开源生态文档体系已全面完成，生产就绪！**
 
-**开始探索**: [📚 生态指南入口](crates/c11_middlewares/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md)
+**开始探索**: [📚 生态指南入口](crates/c11_libraries/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md)

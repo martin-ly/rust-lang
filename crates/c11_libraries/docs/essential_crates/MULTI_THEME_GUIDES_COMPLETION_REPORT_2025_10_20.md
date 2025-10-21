@@ -1,4 +1,4 @@
-# 多主题深度指南创建完成报告
+﻿# 多主题深度指南创建完成报告
 
 > **生成时间**: 2025年10月20日  
 > **任务类型**: 全面多任务推进 - 新主题深度指南批量创建  
@@ -311,7 +311,7 @@
 ### 本轮新增 (3个)
 
 ```text
-crates/c11_middlewares/docs/essential_crates/guides/
+crates/c11_libraries/docs/essential_crates/guides/
 ├── RUST_PRODUCTION_DEPLOYMENT_2025.md       (~1,300行, 40+ 代码示例)
 ├── RUST_SECURITY_PROGRAMMING_2025.md        (~1,400行, 50+ 代码示例)
 └── RUST_TESTING_STRATEGY_2025.md            (~1,200行, 60+ 代码示例)
@@ -320,7 +320,7 @@ crates/c11_middlewares/docs/essential_crates/guides/
 ### 上一轮已完成 (3个)
 
 ```text
-crates/c11_middlewares/docs/essential_crates/guides/
+crates/c11_libraries/docs/essential_crates/guides/
 ├── RUST_MICROSERVICES_ARCHITECTURE_2025.md  (~1,500行, 50+ 代码示例)
 ├── RUST_PERFORMANCE_OPTIMIZATION_2025.md    (~1,200行, 35+ 代码示例)
 └── RUST_FULLSTACK_PROJECT_2025.md           (~1,100行, 35+ 代码示例)
@@ -329,7 +329,7 @@ crates/c11_middlewares/docs/essential_crates/guides/
 ### 报告文档 (2个)
 
 ```text
-crates/c11_middlewares/docs/essential_crates/
+crates/c11_libraries/docs/essential_crates/
 ├── NEW_THEME_GUIDES_COMPLETION_REPORT_2025_10_20.md      (上一轮报告)
 └── MULTI_THEME_GUIDES_COMPLETION_REPORT_2025_10_20.md    (本报告)
 ```

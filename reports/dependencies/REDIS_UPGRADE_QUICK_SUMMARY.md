@@ -1,4 +1,4 @@
-# Redis 升级快速总结
+﻿# Redis 升级快速总结
 
 **日期**: 2025-10-20  
 **状态**: ✅ 全部完成
@@ -15,8 +15,8 @@
 
 1. ✅ `Cargo.toml` (workspace)
 2. ✅ `crates/c06_async/Cargo.toml`
-3. ✅ `crates/c11_middlewares/Cargo.toml`
-4. ✅ `crates/c11_middlewares/src/cache/redis_client.rs` (API 适配)
+3. ✅ `crates/c11_libraries/Cargo.toml`
+4. ✅ `crates/c11_libraries/src/cache/redis_client.rs` (API 适配)
 5. ✅ `REDIS_CARGO_CONFIG_GUIDE.md` (文档更新)
 
 ## 🔧 主要变更
@@ -32,7 +32,7 @@
 - redis = { version = "1.0.0-rc.1", ... }
 + redis = { version = "1.0.0-rc.2", ... }
 
-# c11_middlewares
+# c11_libraries
 - redis = { version = "0.32.7", ... }
 + redis = { version = "1.0.0-rc.2", ... }
 ```
@@ -50,7 +50,7 @@
 |--------|------|
 | Workspace 编译 | ✅ 通过 |
 | c06_async 编译 | ✅ 通过 |
-| c11_middlewares 编译 | ✅ 通过 |
+| c11_libraries 编译 | ✅ 通过 |
 | API 兼容性 | ✅ 已适配 |
 | 功能测试 | ✅ 正常 |
 

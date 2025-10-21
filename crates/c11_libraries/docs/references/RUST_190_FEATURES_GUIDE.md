@@ -1,8 +1,8 @@
-# Rust 1.90 特性应用指南
+﻿# Rust 1.90 特性应用指南
 
 ## 📋 概述
 
-本指南详细介绍了如何在 `c11_middlewares` 项目中充分利用 Rust 1.90 的新语言特性，提升代码质量、性能和开发体验。
+本指南详细介绍了如何在 `c11_libraries` 项目中充分利用 Rust 1.90 的新语言特性，提升代码质量、性能和开发体验。
 
 ## 🚀 Rust 1.90 核心特性
 
@@ -125,7 +125,7 @@ impl MiddlewareType {
 ### 1. 增强配置管理
 
 ```rust
-use c11_middlewares::prelude::*;
+use c11_libraries::prelude::*;
 
 // 使用常量泛型优化配置
 let redis_config: EnhancedRedisConfig<20, 10000> = ConfigFactory::create_redis_config(
@@ -168,7 +168,7 @@ pub trait AsyncMiddleware {
 #[async_trait::async_trait]
 impl AsyncMiddleware for RedisMiddleware {
     type Connection<'a> = RedisStore;
-    type Error = c11_middlewares::Error;
+    type Error = c11_libraries::Error;
     
     async fn connect(&self) -> Result<Self::Connection<'_>, Self::Error> {
         RedisStore::connect_with(self.config.clone()).await
@@ -384,8 +384,8 @@ async fn test_performance() {
 - [Rust 1.90 发布说明](https://blog.rust-lang.org/2025/09/14/Rust-1.90.0.html)
 - [常量泛型文档](https://doc.rust-lang.org/reference/types/const-generics.html)
 - [生命周期文档](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
-- [c11_middlewares 项目文档](./README.md)
+- [c11_libraries 项目文档](./README.md)
 
 ---
 
-通过充分利用 Rust 1.90 的新特性，`c11_middlewares` 项目能够提供更安全、更高效、更易用的中间件统一接口。
+通过充分利用 Rust 1.90 的新特性，`c11_libraries` 项目能够提供更安全、更高效、更易用的中间件统一接口。

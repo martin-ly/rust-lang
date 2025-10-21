@@ -1,4 +1,4 @@
-# 📚 Rust学习项目文档索引
+﻿# 📚 Rust学习项目文档索引
 
 **创建时间**: 2025年9月25日 14:25  
 **版本**: v1.0  
@@ -112,7 +112,7 @@
 
 ### 中间件
 
-- **[crates/c11_middlewares/README.md](crates/c11_middlewares/README.md)** - 中间件学习模块
+- **[crates/c11_libraries/README.md](crates/c11_libraries/README.md)** - 中间件学习模块
 - **Web中间件**: 认证、日志、缓存
 - **系统中间件**: 消息队列、缓存系统
 
@@ -247,7 +247,7 @@
 
 1. **设计模式** → `crates/c09_design_pattern/`
 2. **网络编程** → `crates/c10_networks/`
-3. **中间件开发** → `crates/c11_middlewares/`
+3. **中间件开发** → `crates/c11_libraries/`
 4. **数据建模** → `crates/c12_model/`
 5. **可靠性工程** → `crates/c13_reliability/`
 
@@ -284,7 +284,7 @@
 - **c08**: [crates/c08_algorithms/README.md](crates/c08_algorithms/README.md)
 - **c09**: [crates/c09_design_pattern/README.md](crates/c09_design_pattern/README.md)
 - **c10**: [crates/c10_networks/README.md](crates/c10_networks/README.md)
-- **c11**: [crates/c11_middlewares/README.md](crates/c11_middlewares/README.md)
+- **c11**: [crates/c11_libraries/README.md](crates/c11_libraries/README.md)
 - **c12**: [crates/c12_model/README.md](crates/c12_model/README.md)
 - **c13**: [crates/c13_reliability/README.md](crates/c13_reliability/README.md)
 

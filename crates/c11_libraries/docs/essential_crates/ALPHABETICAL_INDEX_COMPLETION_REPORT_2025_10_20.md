@@ -1,4 +1,4 @@
-# 字母索引创建完成报告 (2025-10-20)
+﻿# 字母索引创建完成报告 (2025-10-20)
 
 > **任务完成**: 按字母索引的 Rust 必备库文档创建完成  
 > **完成日期**: 2025-10-20 | **状态**: ✅ 100% 完成
@@ -268,7 +268,7 @@ let sum: i32 = (1..1000)
 ### 文件位置10
 
 ```text
-crates/c11_middlewares/docs/
+crates/c11_libraries/docs/
 ├── essential_crates/
 │   ├── README.md (更新: 字母索引部分)
 │   ├── ALPHABETICAL_INDEX_2025.md (新增: 完整字母索引)
