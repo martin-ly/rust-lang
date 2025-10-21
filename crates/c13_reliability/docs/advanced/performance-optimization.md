@@ -73,6 +73,7 @@ impl PerformanceMetrics {
 ### 1.2 性能分析工具
 
 **perf集成**:
+
 ```rust
 use std::process::Command;
 
@@ -700,18 +701,21 @@ pub async fn sendfile_transfer(
 **场景**: HTTP API服务器
 
 **优化前**:
+
 - 吞吐量: 10,000 RPS
 - P99延迟: 500ms
 - CPU使用率: 80%
 - 内存使用: 2GB
 
 **优化措施**:
+
 1. 连接池复用
 2. 缓冲区优化
 3. SIMD加速
 4. 异步IO
 
 **优化后**:
+
 - 吞吐量: 50,000 RPS (5x)
 - P99延迟: 50ms (10x)
 - CPU使用率: 60%
@@ -803,4 +807,3 @@ impl PerformanceMonitor {
 
 - [返回高级主题](README.md)
 - [返回主索引](../00_MASTER_INDEX.md)
-

@@ -166,6 +166,7 @@ guides/
 - **35+ 组性能对比** - Web框架、数据库、异步运行时实测数据
 
 **快速入口**:
+
 - [生态指南](../crates/c11_libraries/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md) - 入门必读
 - [分类体系](../crates/c11_libraries/docs/RUST_CRATES_CLASSIFICATION_2025.md) - 系统化分类
 - [成熟度矩阵](../crates/c11_libraries/docs/RUST_CRATES_MATURITY_MATRIX_2025.md) - 技术选型
