@@ -1,13 +1,13 @@
 //! Rust 1.90 特性演示示例
 //! 
-//! 本示例展示了 c11_middlewares 库如何利用 Rust 1.90 的新特性：
+//! 本示例展示了 c11_libraries 库如何利用 Rust 1.90 的新特性：
 //! - 常量泛型推断
 //! - 泛型关联类型 (GAT)
 //! - 异步函数在 trait 中的使用
 //! - Result::flatten 的使用
 //! - 类型别名实现 trait (TAIT)
 
-use c11_middlewares::Result;
+use c11_libraries::Result;
 
 #[cfg(feature = "obs")]
 fn init_tracing() {
@@ -39,7 +39,7 @@ impl<const SIZE: usize> ConfigBuffer<SIZE> {
     
     pub fn write(&mut self, data: &[u8]) -> Result<()> {
         if self.position + data.len() > SIZE {
-            return Err(c11_middlewares::Error::Other("缓冲区溢出".to_string()));
+            return Err(c11_libraries::Error::Other("缓冲区溢出".to_string()));
         }
         
         self.data.extend_from_slice(data);
@@ -91,7 +91,7 @@ impl<const MAX_MESSAGES: usize> MessageBuffer<MAX_MESSAGES> {
     
     pub fn add_message(&mut self, message: String) -> Result<()> {
         if self.messages.len() >= MAX_MESSAGES {
-            return Err(c11_middlewares::Error::Other("消息缓冲区已满".to_string()));
+            return Err(c11_libraries::Error::Other("消息缓冲区已满".to_string()));
         }
         
         self.messages.push(message);
@@ -181,7 +181,7 @@ impl OptimizedErrorHandler {
         }
         
         if !errors.is_empty() {
-            return Err(c11_middlewares::Error::Other(format!("批量操作失败: {:?}", errors)));
+            return Err(c11_libraries::Error::Other(format!("批量操作失败: {:?}", errors)));
         }
         
         // 合并所有成功的结果
@@ -216,7 +216,7 @@ impl OptimizedErrorHandler {
             }
         }
         
-        Err(last_error.unwrap_or_else(|| c11_middlewares::Error::Other("未知错误".to_string())))
+        Err(last_error.unwrap_or_else(|| c11_libraries::Error::Other("未知错误".to_string())))
     }
 }
 
@@ -296,7 +296,7 @@ async fn main() -> std::result::Result<(), Box<dyn std::error::Error>> {
             ATTEMPT_COUNT += 1;
             let count = ATTEMPT_COUNT;
             if count < 3 {
-                Err(c11_middlewares::Error::Other(format!("模拟错误，尝试 {}", count)))
+                Err(c11_libraries::Error::Other(format!("模拟错误，尝试 {}", count)))
             } else {
                 Ok("重试成功".as_bytes().to_vec())
             }

@@ -1,6 +1,6 @@
-# c11_middlewares - Rust 1.90 中间件统一接口库
+# c11_libraries - Rust 1.90 开发库
 
-一个基于 Rust 1.90+ 的现代化中间件统一接口库，提供与成熟开源中间件对标的统一接口与特性开关集合，支持 Redis、PostgreSQL、MySQL、SQLite、NATS、Kafka、MQTT 等主流中间件。
+一个基于 Rust 1.90+ 的现代化开发库，提供与成熟开源对标的统一接口与特性开关集合，支持 Redis、PostgreSQL、MySQL、SQLite、NATS、Kafka、MQTT 等主流。
 
 > 📚 **[完整文档](docs/README.md)** | 🚀 **[快速导航](docs/00_MASTER_INDEX.md)** | ❓ **[常见问题](docs/FAQ.md)** | 📖 **[术语表](docs/Glossary.md)**
 
@@ -49,13 +49,13 @@
 
 - **ASCII艺术图表**: 数据存储/消息队列/代理服务完整体系
 - **统一接口设计模式**: 连接池/重试/事务/可观测性可视化
-- **中间件决策树**: Redis/PostgreSQL/NATS/Kafka技术选型
+- **决策树**: Redis/PostgreSQL/NATS/Kafka技术选型
 - **3级学习路径**: 初学者/进阶/专家(2-10周)
-- **问题诊断树**: 中间件错误快速定位
+- **问题诊断树**: 错误快速定位
 
-### 📚 **[Rust 1.90 中间件集成实战示例集](docs/RUST_190_MIDDLEWARE_PRACTICAL_EXAMPLES.md)** ⭐⭐⭐⭐⭐
+### 📚 **[Rust 1.90 集成实战示例集](docs/RUST_190_MIDDLEWARE_PRACTICAL_EXAMPLES.md)** ⭐⭐⭐⭐⭐
 
-- **Rust 1.90 特性**: async fn in trait、RPITIT、GAT在中间件中的应用
+- **Rust 1.90 特性**: async fn in trait、RPITIT、GAT在中的应用
 - **Redis实战**: CRUD、连接池、分布式锁
 - **SQL集成**: PostgreSQL/MySQL事务处理、批量操作
 - **消息队列**: Kafka/MQTT/NATS完整示例
@@ -74,18 +74,18 @@
 
 ### 🎯 Rust 1.90+ 特性集成
 
-- **async fn in trait** - 中间件客户端统一异步接口
+- **async fn in trait** - 客户端统一异步接口
 - **RPITIT** - 返回位置 impl Trait in Trait，简化接口定义
 - **泛型关联类型 (GAT)** - 更灵活的连接池抽象
-- **生命周期语法增强** - 在中间件连接管理中应用明确的生命周期标注
+- **生命周期语法增强** - 在连接管理中应用明确的生命周期标注
 - **常量泛型推断** - 支持不同配置的 `Config<const N: usize>` 结构体
-- **FFI 改进支持** - 支持 128 位整数，增强与 C 语言中间件库的互操作
+- **FFI 改进支持** - 支持 128 位整数，增强与 C 语言库的互操作
 
 > 📘 详见 [Rust 1.90 特性指南](docs/references/RUST_190_FEATURES_GUIDE.md)
 
 ### 🛡️ 企业级特性
 
-- **统一错误处理** - 所有中间件错误自动转换为统一错误类型
+- **统一错误处理** - 所有错误自动转换为统一错误类型
 - **异步重试机制** - 内置智能重试策略和指数退避
 - **连接池管理** - 高效的连接池和资源管理
 - **事务支持** - PostgreSQL/MySQL 完整事务支持
@@ -98,13 +98,13 @@
 
 ```toml
 [dependencies]
-c12_middlewares = "0.1.0"
+c11_libraries = "0.1.0"
 
 # 按需启用特性
-c12_middlewares = { version = "0.1.0", features = ["kv-redis", "sql-postgres"] }
+c11_libraries = { version = "0.1.0", features = ["kv-redis", "sql-postgres"] }
 
 # 或使用聚合特性
-c12_middlewares = { version = "0.1.0", features = ["full"] }
+c11_libraries = { version = "0.1.0", features = ["full"] }
 ```
 
 ### 功能特性
@@ -137,7 +137,7 @@ full = []               # 所有特性
 ### 基础使用
 
 ```rust
-use c12_middlewares::prelude::*;
+use c11_libraries::prelude::*;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -157,7 +157,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ### PostgreSQL 数据库操作
 
 ```rust
-use c12_middlewares::prelude::*;
+use c11_libraries::prelude::*;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -186,7 +186,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ### 消息队列操作
 
 ```rust
-use c12_middlewares::prelude::*;
+use c11_libraries::prelude::*;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -211,7 +211,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ### 批量操作
 
 ```rust
-use c12_middlewares::prelude::*;
+use c11_libraries::prelude::*;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -236,7 +236,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ### 错误处理
 
 ```rust
-use c12_middlewares::Error;
+use c11_libraries::Error;
 
 async fn handle_operations() -> Result<(), Error> {
     match some_operation().await {
@@ -263,7 +263,7 @@ async fn handle_operations() -> Result<(), Error> {
 ### 可观测性支持
 
 ```rust
-use c12_middlewares::prelude::*;
+use c11_libraries::prelude::*;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -291,7 +291,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 | **[文档中心](docs/README.md)** | 📚 文档主入口，开始探索的最佳位置 |
 | **[快速导航](docs/00_MASTER_INDEX.md)** | 🗺️ 主索引和学习路径 |
 | **[完整索引](docs/COMPREHENSIVE_DOCUMENTATION_INDEX.md)** | 📋 综合文档索引 |
-| **[使用指南](docs/guides/)** | 🔧 各中间件详细使用指南 |
+| **[使用指南](docs/guides/)** | 🔧 各详细使用指南 |
 | **[API参考](docs/references/)** | 📘 API 和配置参考 |
 | **[常见问题](docs/FAQ.md)** | ❓ FAQ |
 | **[术语表](docs/Glossary.md)** | 📖 概念和术语定义 |
@@ -322,7 +322,7 @@ cargo run --example advanced_middleware_patterns --features kv-redis,sql-postgre
 ## 🏗️ 项目结构
 
 ```text
-c11_middlewares/
+c11_libraries/
 ├── src/                         # 源代码
 │   ├── lib.rs                   # 库入口
 │   ├── config.rs                # 配置模块
@@ -423,7 +423,7 @@ cargo bench
 
 ### 基准测试结果
 
-| 中间件 | 操作类型 | 性能 | 内存使用 |
+|  | 操作类型 | 性能 | 内存使用 |
 |--------|----------|------|----------|
 | Redis | SET/GET | 100,000 ops/sec | 50MB |
 | PostgreSQL | INSERT/SELECT | 10,000 ops/sec | 100MB |
@@ -477,8 +477,8 @@ cargo bench
 
 ```bash
 # 克隆仓库
-git clone https://github.com/rust-lang/c11_middlewares.git
-cd c11_middlewares
+git clone https://github.com/rust-lang/c11_libraries.git
+cd c11_libraries
 
 # 安装依赖
 cargo build
@@ -517,9 +517,9 @@ cargo run --example middleware_basic_usage --features kv-redis,sql-postgres,toki
 
 ### 外部资源
 
-- 📖 [在线文档](https://docs.rs/c11_middlewares)（如有）
-- 🐛 [问题报告](https://github.com/rust-lang/c11_middlewares/issues)（如有）
-- 💬 [讨论区](https://github.com/rust-lang/c11_middlewares/discussions)（如有）
+- 📖 [在线文档](https://docs.rs/c11_libraries)（如有）
+- 🐛 [问题报告](https://github.com/rust-lang/c11_libraries/issues)（如有）
+- 💬 [讨论区](https://github.com/rust-lang/c11_libraries/discussions)（如有）
 
 ### 相关项目
 
@@ -529,6 +529,6 @@ cargo run --example middleware_basic_usage --features kv-redis,sql-postgres,toki
 
 ---
 
-**c11_middlewares** - 让 Rust 中间件开发更加统一和高效！ 🦀✨
+**c11_libraries** - 让 Rust 开发更加统一和高效！ 🦀✨
 
 **从这里开始**: [📚 文档中心](docs/README.md) | [🚀 快速导航](docs/00_MASTER_INDEX.md)

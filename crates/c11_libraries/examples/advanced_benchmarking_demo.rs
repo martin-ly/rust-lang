@@ -1,10 +1,10 @@
 //! 高级基准测试演示
 //! 
-//! 本示例展示了如何使用 c11_middlewares 的高级基准测试功能
+//! 本示例展示了如何使用 c11_libraries 的高级基准测试功能
 //! 来测试各种操作的性能，包括单线程、多线程和负载测试。
 
-use c11_middlewares::advanced_benchmarks::*;
-use c11_middlewares::{Error, Result};
+use c11_libraries::advanced_benchmarks::*;
+use c11_libraries::{Error, Result};
 use std::time::Duration;
 use std::thread;
 

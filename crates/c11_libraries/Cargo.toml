@@ -1,5 +1,5 @@
 [package]
-name = "c11_middlewares"
+name = "c11_libraries"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
@@ -87,9 +87,9 @@ proxy-nix-glommio = ["nix", "glommio"]
 [dev-dependencies]
 tracing-subscriber = { workspace = true }
 [lib]
-name = "c11_middlewares"
+name = "c11_libraries"
 path = "src/lib.rs"
 
 [[bin]]
-name = "c11_middlewares"
+name = "c11_libraries"
 path = "src/bin/main.rs"

@@ -1,16 +1,16 @@
 //! 高级中间件模式示例
 //! 
-//! 本示例展示了如何在 c11_middlewares 中使用 Rust 1.90 特性实现高级中间件模式：
+//! 本示例展示了如何在 c11_libraries 中使用 Rust 1.90 特性实现高级中间件模式：
 //! - 连接池管理
 //! - 中间件链式调用
 //! - 错误恢复机制
 //! - 性能监控
 //! - 配置热更新
 
-use c11_middlewares::prelude::*;
-// use c11_middlewares::config::{RedisConfig, PostgresConfig, NatsConfig};
-use c11_middlewares::rust190_optimizations::PerformanceStats;
-use c11_middlewares::{Error, Result};
+use c11_libraries::prelude::*;
+// use c11_libraries::config::{RedisConfig, PostgresConfig, NatsConfig};
+use c11_libraries::rust190_optimizations::PerformanceStats;
+use c11_libraries::{Error, Result};
 
 #[cfg(feature = "obs")]
 fn init_tracing() {
@@ -55,7 +55,7 @@ impl<const CHAIN_SIZE: usize> MiddlewareChain<CHAIN_SIZE> {
     }
     
     /// 执行链式调用
-    pub async fn execute_chain(&mut self, operation: &Vec<u8>) -> c11_middlewares::Result<Vec<u8>> {
+    pub async fn execute_chain(&mut self, operation: &Vec<u8>) -> c11_libraries::Result<Vec<u8>> {
         let mut result = operation.to_vec();
         
         for (i, middleware_type) in self.middlewares.iter().enumerate() {
@@ -81,7 +81,7 @@ impl<const CHAIN_SIZE: usize> MiddlewareChain<CHAIN_SIZE> {
         Ok(result)
     }
     
-    async fn process_redis(&self, data: &Vec<u8>) -> c11_middlewares::Result<Vec<u8>> {
+    async fn process_redis(&self, data: &Vec<u8>) -> c11_libraries::Result<Vec<u8>> {
         // 模拟 Redis 处理
         #[cfg(feature = "tokio")]
         tokio::time::sleep(std::time::Duration::from_millis(10)).await;
@@ -92,7 +92,7 @@ impl<const CHAIN_SIZE: usize> MiddlewareChain<CHAIN_SIZE> {
         Ok(result)
     }
     
-    async fn process_postgres(&self, data: &Vec<u8>) -> c11_middlewares::Result<Vec<u8>> {
+    async fn process_postgres(&self, data: &Vec<u8>) -> c11_libraries::Result<Vec<u8>> {
         // 模拟 PostgreSQL 处理
         #[cfg(feature = "tokio")]
         tokio::time::sleep(std::time::Duration::from_millis(20)).await;
@@ -103,7 +103,7 @@ impl<const CHAIN_SIZE: usize> MiddlewareChain<CHAIN_SIZE> {
         Ok(result)
     }
     
-    async fn process_nats(&self, data: &Vec<u8>) -> c11_middlewares::Result<Vec<u8>> {
+    async fn process_nats(&self, data: &Vec<u8>) -> c11_libraries::Result<Vec<u8>> {
         // 模拟 NATS 处理
         #[cfg(feature = "tokio")]
         tokio::time::sleep(std::time::Duration::from_millis(15)).await;
@@ -114,7 +114,7 @@ impl<const CHAIN_SIZE: usize> MiddlewareChain<CHAIN_SIZE> {
         Ok(result)
     }
     
-    async fn process_generic(&self, data: &Vec<u8>, middleware_type: &MiddlewareType) -> c11_middlewares::Result<Vec<u8>> {
+    async fn process_generic(&self, data: &Vec<u8>, middleware_type: &MiddlewareType) -> c11_libraries::Result<Vec<u8>> {
         // 通用处理逻辑
         #[cfg(feature = "tokio")]
         tokio::time::sleep(std::time::Duration::from_millis(5)).await;
@@ -223,10 +223,10 @@ impl<const METRIC_BUFFER_SIZE: usize> PerformanceMiddleware<METRIC_BUFFER_SIZE> 
     }
     
     /// 执行操作并记录性能指标
-    pub async fn execute_with_monitoring<F, Fut>(&mut self, operation: F) -> c11_middlewares::Result<Vec<u8>>
+    pub async fn execute_with_monitoring<F, Fut>(&mut self, operation: F) -> c11_libraries::Result<Vec<u8>>
     where
         F: FnOnce() -> Fut,
-        Fut: std::future::Future<Output = c11_middlewares::Result<Vec<u8>>>,
+        Fut: std::future::Future<Output = c11_libraries::Result<Vec<u8>>>,
     {
         let start_time = std::time::Instant::now();
         
@@ -334,7 +334,7 @@ impl ErrorRecoveryMiddleware {
     pub async fn execute_with_recovery<F, Fut>(&mut self, mut operation: F) -> Result<Vec<u8>>
     where
         F: FnMut() -> Fut,
-        Fut: std::future::Future<Output = c11_middlewares::Result<Vec<u8>>>,
+        Fut: std::future::Future<Output = c11_libraries::Result<Vec<u8>>>,
     {
         // 检查熔断器
         if self.circuit_breaker.is_open() {
@@ -398,17 +398,17 @@ pub struct MiddlewareFactory;
 
 impl MiddlewareFactory {
     /// 创建 Redis 中间件
-    pub fn create_redis_middleware() -> c11_middlewares::Result<PerformanceMiddleware<100>> {
+    pub fn create_redis_middleware() -> c11_libraries::Result<PerformanceMiddleware<100>> {
         Ok(PerformanceMiddleware::new(MiddlewareType::Redis))
     }
     
     /// 创建 PostgreSQL 中间件
-    pub fn create_postgres_middleware() -> c11_middlewares::Result<PerformanceMiddleware<200>> {
+    pub fn create_postgres_middleware() -> c11_libraries::Result<PerformanceMiddleware<200>> {
         Ok(PerformanceMiddleware::new(MiddlewareType::Postgres))
     }
     
     /// 创建 NATS 中间件
-    pub fn create_nats_middleware() -> c11_middlewares::Result<PerformanceMiddleware<150>> {
+    pub fn create_nats_middleware() -> c11_libraries::Result<PerformanceMiddleware<150>> {
         Ok(PerformanceMiddleware::new(MiddlewareType::Nats))
     }
     
@@ -453,7 +453,7 @@ impl<const CHAIN_SIZE: usize> AdvancedMiddlewareManager<CHAIN_SIZE> {
     }
     
     /// 初始化中间件
-    pub async fn initialize(&mut self) -> c11_middlewares::Result<()> {
+    pub async fn initialize(&mut self) -> c11_libraries::Result<()> {
         // 添加各种中间件
         let redis_config = MiddlewareConfig::new(MiddlewareType::Redis, "redis://localhost:6379".to_string());
         let postgres_config = MiddlewareConfig::new(MiddlewareType::Postgres, "postgres://localhost:5432/db".to_string());
@@ -479,7 +479,7 @@ impl<const CHAIN_SIZE: usize> AdvancedMiddlewareManager<CHAIN_SIZE> {
     }
     
     /// 执行高级操作
-    pub async fn execute_advanced_operation(&mut self, operation: &Vec<u8>) -> c11_middlewares::Result<Vec<u8>> {
+    pub async fn execute_advanced_operation(&mut self, operation: &Vec<u8>) -> c11_libraries::Result<Vec<u8>> {
         println!("开始执行高级操作，数据长度: {}", operation.len());
         
         // 使用错误恢复机制执行中间件链

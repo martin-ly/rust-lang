@@ -3,8 +3,8 @@
 //! 本示例展示了 Rust 1.90 的核心特性，包括常量泛型推断、
 //! 生命周期语法一致性检查、函数指针比较检查等。
 
-use c11_middlewares::rust190_optimizations::*;
-use c11_middlewares::{Error, Result};
+use c11_libraries::rust190_optimizations::*;
+use c11_libraries::{Error, Result};
 use std::collections::HashMap;
 
 /// Rust 1.90 特性演示：常量泛型推断

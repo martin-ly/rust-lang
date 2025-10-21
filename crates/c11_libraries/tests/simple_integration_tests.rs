@@ -1,8 +1,8 @@
 //! 简化集成测试模块
 //! 
-//! 本模块测试 c11_middlewares 各个组件之间的协作和集成功能
+//! 本模块测试 c11_libraries 各个组件之间的协作和集成功能
 
-use c11_middlewares::prelude::*;
+use c11_libraries::prelude::*;
 
 /// 测试 Rust 1.90 优化特性与基准测试的集成
 #[test]

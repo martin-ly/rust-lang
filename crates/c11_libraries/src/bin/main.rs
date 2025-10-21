@@ -1,5 +1,5 @@
 fn main() {
-    println!("c12_middlewares example");
+    println!("c11_libraries example");
     println!("features:");
     println!("  kv-redis: {}", cfg!(feature = "kv-redis"));
     println!("  sql-postgres: {}", cfg!(feature = "sql-postgres"));

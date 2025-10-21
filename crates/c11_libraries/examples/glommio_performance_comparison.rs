@@ -3,8 +3,8 @@
 //! 本示例展示了 Glommio 与 Tokio 在中间件场景下的性能对比，
 //! 包括网络 I/O、数据库操作、缓存操作等典型中间件任务。
 
-use c11_middlewares::glommio_runtime::*;
-use c11_middlewares::Result;
+use c11_libraries::glommio_runtime::*;
+use c11_libraries::Result;
 use std::time::Duration;
 use std::future::Future;
 use std::pin::Pin;

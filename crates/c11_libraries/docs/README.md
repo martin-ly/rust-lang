@@ -1,6 +1,6 @@
-# C11 中间件集成 - 文档中心
+# C11 开发库 - 文档中心
 
-> 欢迎来到 C11 中间件集成项目文档中心！本文档是您探索项目的起点。
+> 欢迎来到 C11 开发库项目文档中心！本文档是您探索项目的起点。
 
 [![Rust](https://img.shields.io/badge/rust-1.90+-orange.svg)](https://www.rust-lang.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](../../LICENSE)
@@ -8,7 +8,7 @@
 
 ## 🎯 项目简介
 
-C11 中间件集成项目提供了一个统一的 Rust 接口来集成各类主流中间件，包括：
+C11 开发库项目提供了一个统一的 Rust 接口来集成各类主流中间件，包括：
 
 - **数据库**: PostgreSQL、MySQL、SQLite
 - **缓存**: Redis
@@ -43,7 +43,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let db = PostgresDb::connect_with(pg_config).await?;
     let rows = db.query("SELECT * FROM users LIMIT 10").await?;
     
-    println!("✅ 中间件集成成功！");
+    println!("✅ 开发库成功！");
     Ok(())
 }
 ```
@@ -361,6 +361,6 @@ cargo run --example rust190_features_demo --features kv-redis,tokio
 
 ---
 
-**让 Rust 中间件集成更简单！** 🦀✨
+**让 Rust 开发库更简单！** 🦀✨
 
 **开始探索**: 从 [00_MASTER_INDEX.md](00_MASTER_INDEX.md) 开始您的旅程！

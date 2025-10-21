@@ -51,7 +51,7 @@
 
 ### 更新背景
 
-基于最新完成的 **[字母索引文档 (ALPHABETICAL_INDEX_2025.md)](./crates/c11_middlewares/docs/essential_crates/ALPHABETICAL_INDEX_2025.md)**，该文档详细列出了 60+ 个核心 Rust 库及其最新稳定版本信息。为确保项目依赖与生态最新状态保持一致，对 `Cargo.toml` 工作区依赖进行了全面更新。
+基于最新完成的 **[字母索引文档 (ALPHABETICAL_INDEX_2025.md)](./crates/c11_libraries/docs/essential_crates/ALPHABETICAL_INDEX_2025.md)**，该文档详细列出了 60+ 个核心 Rust 库及其最新稳定版本信息。为确保项目依赖与生态最新状态保持一致，对 `Cargo.toml` 工作区依赖进行了全面更新。
 
 ### 更新范围
 
@@ -401,15 +401,15 @@ codegen-units = 1
 
 ### 核心文档
 
-- **[字母索引 (ALPHABETICAL_INDEX_2025.md)](./crates/c11_middlewares/docs/essential_crates/ALPHABETICAL_INDEX_2025.md)** - 60+ 个核心库的详细信息和版本推荐
-- **[生态系统索引 (RUST_CRATES_ECOSYSTEM_INDEX_2025.md)](./crates/c11_middlewares/docs/RUST_CRATES_ECOSYSTEM_INDEX_2025.md)** - 按功能分类的完整生态系统索引
-- **[必备库指南 (RUST_ESSENTIAL_CRATES_GUIDE_2025.md)](./crates/c11_middlewares/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md)** - 详细的使用指南和最佳实践
-- **[成熟度矩阵 (RUST_CRATES_MATURITY_MATRIX_2025.md)](./crates/c11_middlewares/docs/RUST_CRATES_MATURITY_MATRIX_2025.md)** - 库的成熟度对比和技术选型指南
+- **[字母索引 (ALPHABETICAL_INDEX_2025.md)](./crates/c11_libraries/docs/essential_crates/ALPHABETICAL_INDEX_2025.md)** - 60+ 个核心库的详细信息和版本推荐
+- **[生态系统索引 (RUST_CRATES_ECOSYSTEM_INDEX_2025.md)](./crates/c11_libraries/docs/RUST_CRATES_ECOSYSTEM_INDEX_2025.md)** - 按功能分类的完整生态系统索引
+- **[必备库指南 (RUST_ESSENTIAL_CRATES_GUIDE_2025.md)](./crates/c11_libraries/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md)** - 详细的使用指南和最佳实践
+- **[成熟度矩阵 (RUST_CRATES_MATURITY_MATRIX_2025.md)](./crates/c11_libraries/docs/RUST_CRATES_MATURITY_MATRIX_2025.md)** - 库的成熟度对比和技术选型指南
 
 ### 相关报告
 
-- **[字母索引完成报告 (ALPHABETICAL_INDEX_COMPLETION_REPORT_2025_10_20.md)](./crates/c11_middlewares/docs/essential_crates/ALPHABETICAL_INDEX_COMPLETION_REPORT_2025_10_20.md)**
-- **[生态系统完成报告 (RUST_CRATES_ECOSYSTEM_COMPLETION_REPORT_2025.md)](./crates/c11_middlewares/docs/RUST_CRATES_ECOSYSTEM_COMPLETION_REPORT_2025.md)**
+- **[字母索引完成报告 (ALPHABETICAL_INDEX_COMPLETION_REPORT_2025_10_20.md)](./crates/c11_libraries/docs/essential_crates/ALPHABETICAL_INDEX_COMPLETION_REPORT_2025_10_20.md)**
+- **[生态系统完成报告 (RUST_CRATES_ECOSYSTEM_COMPLETION_REPORT_2025.md)](./crates/c11_libraries/docs/RUST_CRATES_ECOSYSTEM_COMPLETION_REPORT_2025.md)**
 
 ### 外部资源
 
