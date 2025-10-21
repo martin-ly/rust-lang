@@ -17,8 +17,8 @@
     - [基础用法](#基础用法)
     - [实战示例: HTTP 请求解析](#实战示例-http-请求解析)
   - [🦗 pest - PEG 解析器](#-pest---peg-解析器)
-    - [核心特性](#核心特性-1)
-    - [基础用法](#基础用法-1)
+    - [核心特性1](#核心特性1)
+    - [基础用法1](#基础用法1)
   - [💡 最佳实践](#-最佳实践)
     - [1. nom vs pest](#1-nom-vs-pest)
     - [2. 错误处理](#2-错误处理)
@@ -148,16 +148,16 @@ fn main() {
 
 ## 🦗 pest - PEG 解析器
 
-### 核心特性
+### 核心特性1
 
 - ✅ 声明式语法规则
 - ✅ 自动生成解析器
 - ✅ 优秀的错误报告
 - ✅ Unicode 支持
 
-### 基础用法
+### 基础用法1
 
-**1. 定义语法 (grammar.pest)**
+**1. 定义语法 (grammar.pest)**:
 
 ```pest
 WHITESPACE = _{ " " | "\t" | "\r" | "\n" }
@@ -170,7 +170,7 @@ key_value = { identifier ~ "=" ~ (number | string) }
 config = { SOI ~ key_value ~ (WHITESPACE* ~ key_value)* ~ EOI }
 ```
 
-**2. 使用解析器**
+**2. 使用解析器**:
 
 ```rust
 use pest::Parser;
@@ -203,12 +203,14 @@ fn main() {
 ### 1. nom vs pest
 
 **选择 nom**:
+
 - ✅ 需要最高性能
 - ✅ 二进制协议解析
 - ✅ 流式处理
 - ✅ 零拷贝要求
 
 **选择 pest**:
+
 - ✅ 快速原型开发
 - ✅ 复杂语法
 - ✅ 需要良好错误提示
@@ -332,4 +334,3 @@ fn parse_ini_section(input: &str) -> IResult<&str, Vec<(&str, &str)>> {
 
 **文档版本**: 1.0.0  
 **最后更新**: 2025-10-20
-

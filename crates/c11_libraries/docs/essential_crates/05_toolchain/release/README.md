@@ -6,6 +6,37 @@
 
 ---
 
+## 📋 目录
+
+- [发布管理工具 (Release Management Tools)](#发布管理工具-release-management-tools)
+  - [📋 目录](#-目录)
+  - [📋 概述](#-概述)
+  - [🔧 核心工具](#-核心工具)
+    - [1. cargo-release (推荐 🌟)](#1-cargo-release-推荐-)
+      - [基础用法](#基础用法)
+      - [release.toml 配置](#releasetoml-配置)
+    - [2. cargo-dist (推荐 💡)](#2-cargo-dist-推荐-)
+      - [初始化](#初始化)
+      - [dist.toml 配置](#disttoml-配置)
+      - [GitHub Actions 集成](#github-actions-集成)
+    - [3. git-cliff (变更日志 💡)](#3-git-cliff-变更日志-)
+      - [基础用法3](#基础用法3)
+      - [cliff.toml 配置](#clifftoml-配置)
+    - [4. semantic-release (可选)](#4-semantic-release-可选)
+      - [.releaserc.json 配置](#releasercjson-配置)
+  - [💡 最佳实践](#-最佳实践)
+    - [1. 发布检查清单](#1-发布检查清单)
+    - [2. 语义化版本规范](#2-语义化版本规范)
+    - [3. 提交规范](#3-提交规范)
+    - [4. CHANGELOG 格式](#4-changelog-格式)
+  - [📊 发布工作流](#-发布工作流)
+    - [完整发布流程](#完整发布流程)
+  - [🎯 实战场景](#-实战场景)
+    - [场景1: 首次发布](#场景1-首次发布)
+    - [场景2: 工作空间发布](#场景2-工作空间发布)
+    - [场景3: 跨平台二进制发布](#场景3-跨平台二进制发布)
+  - [🔗 相关资源](#-相关资源)
+
 ## 📋 概述
 
 发布管理工具帮助自动化版本发布流程，包括版本号管理、变更日志生成、Git 标签创建、crates.io 发布等。

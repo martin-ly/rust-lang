@@ -2,9 +2,18 @@
 
 ## 📋 目录
 
-- [概述](#概述)
-- [二进制打包](#二进制打包)
-- [库打包](#库打包)
+- [Packaging - 打包工具](#packaging---打包工具)
+  - [📋 目录](#-目录)
+  - [概述](#概述)
+  - [二进制打包](#二进制打包)
+    - [cargo-bundle](#cargo-bundle)
+    - [cargo-deb (Debian 包)](#cargo-deb-debian-包)
+  - [库打包](#库打包)
+    - [发布到 crates.io](#发布到-cratesio)
+    - [Cargo.toml 最佳实践](#cargotoml-最佳实践)
+  - [跨平台打包](#跨平台打包)
+    - [cross (交叉编译)](#cross-交叉编译)
+  - [参考资源](#参考资源)
 
 ---
 
@@ -127,4 +136,3 @@ cross build --target x86_64-pc-windows-gnu
 - [Cargo Book - Publishing](https://doc.rust-lang.org/cargo/reference/publishing.html)
 - [cargo-bundle GitHub](https://github.com/burtonageo/cargo-bundle)
 - [cargo-deb GitHub](https://github.com/kornelski/cargo-deb)
-

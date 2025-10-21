@@ -6,6 +6,44 @@
 
 ---
 
+## 📋 目录
+
+- [调试工具 (Debugging Tools)](#调试工具-debugging-tools)
+  - [📋 目录](#-目录)
+  - [📋 概述](#-概述)
+  - [🔧 核心工具](#-核心工具)
+    - [1. rust-gdb / rust-lldb (必备 ⭐⭐⭐⭐⭐)](#1-rust-gdb--rust-lldb-必备-)
+      - [基础用法](#基础用法)
+      - [GDB 常用命令](#gdb-常用命令)
+      - [调试技巧](#调试技巧)
+    - [2. cargo-expand (宏展开 🌟)](#2-cargo-expand-宏展开-)
+      - [基础用法2](#基础用法2)
+      - [示例](#示例)
+    - [3. dbg! 宏 (内置)](#3-dbg-宏-内置)
+    - [4. cargo-llvm-lines (代码膨胀分析)](#4-cargo-llvm-lines-代码膨胀分析)
+    - [5. rust-analyzer 调试功能](#5-rust-analyzer-调试功能)
+      - [VSCode 配置 (launch.json)](#vscode-配置-launchjson)
+    - [6. tracing / log (运行时调试)](#6-tracing--log-运行时调试)
+      - [使用示例](#使用示例)
+    - [7. assert 系列宏](#7-assert-系列宏)
+    - [8. 内存调试](#8-内存调试)
+      - [AddressSanitizer (ASan)](#addresssanitizer-asan)
+      - [ThreadSanitizer (TSan)](#threadsanitizer-tsan)
+      - [MemorySanitizer (MSan)](#memorysanitizer-msan)
+  - [💡 最佳实践](#-最佳实践)
+    - [1. 调试构建配置](#1-调试构建配置)
+    - [2. 条件编译调试代码](#2-条件编译调试代码)
+    - [3. 日志级别控制](#3-日志级别控制)
+    - [4. 调试宏](#4-调试宏)
+  - [📊 调试策略](#-调试策略)
+    - [调试流程](#调试流程)
+    - [常见问题调试](#常见问题调试)
+  - [🎯 实战技巧](#-实战技巧)
+    - [技巧1: 交互式调试](#技巧1-交互式调试)
+    - [技巧2: 条件日志](#技巧2-条件日志)
+    - [技巧3: 断点注入](#技巧3-断点注入)
+  - [🔗 相关资源](#-相关资源)
+
 ## 📋 概述
 
 Rust 的调试工具生态从简单的打印调试到高级的交互式调试器，从宏展开到 LLVM IR 查看，提供了全方位的调试支持。
