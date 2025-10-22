@@ -208,7 +208,7 @@ protobuf = "3.7.2" # 修复递归崩溃漏洞
 
 # TLS 和加密 - 2025年10月21日最新稳定版本
 # rustls: 现代TLS库，用Rust编写，提供高性能和安全性 - 版本 0.23+ (字母索引)
-rustls = { version = "0.23.33", features = ["ring"] }
+rustls = { version = "0.23.34", features = ["ring"] }
 # rustls-webpki: rustls的WebPKI支持
 rustls-webpki = "0.104.1"
 # rustls-pemfile: rustls的PEM文件解析支持

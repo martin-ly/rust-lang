@@ -56,6 +56,7 @@ Tier 3 参考文档层提供详尽的技术参考资料，包括 API 手册、�
 ### 01. API 参考手册
 
 **内容覆盖**:
+
 - ✅ `std::thread` 模块完整 API
   - `Thread`, `JoinHandle`, `Builder`, `ThreadId`
   - `spawn`, `current`, `sleep`, `park` 等函数
@@ -78,6 +79,7 @@ Tier 3 参考文档层提供详尽的技术参考资料，包括 API 手册、�
 ### 02. 无锁编程参考
 
 **内容覆盖**:
+
 - ✅ 无锁编程基础概念
 - ✅ 内存序（Memory Ordering）详解
   - `Relaxed`, `Acquire`, `Release`, `AcqRel`, `SeqCst`
@@ -99,6 +101,7 @@ Tier 3 参考文档层提供详尽的技术参考资料，包括 API 手册、�
 ### 03. 性能基准参考
 
 **内容覆盖**:
+
 - ✅ 基准测试工具（Criterion）使用
 - ✅ 同步原语性能对比
   - `Mutex` vs `RwLock` vs `Atomic`
@@ -173,12 +176,14 @@ Tier 3 参考文档层提供详尽的技术参考资料，包括 API 手册、�
 ### 前置知识
 
 推荐先学习以下内容：
+
 - ✅ [Tier 1: 基础概念](../tier_01_foundations/) - 理解基本概念
 - ✅ [Tier 2: 实践指南](../tier_02_guides/) - 掌握实用技能
 
 ### 后续学习
 
 完成 Tier 3 后，可以继续：
+
 - 📖 [Tier 4: 高级主题](../tier_04_advanced/) - 探索高级技术
 
 ---
@@ -186,16 +191,19 @@ Tier 3 参考文档层提供详尽的技术参考资料，包括 API 手册、�
 ## 🔧 相关资源
 
 ### 官方文档
+
 - [std::thread](https://doc.rust-lang.org/std/thread/)
 - [std::sync](https://doc.rust-lang.org/std/sync/)
 - [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/)
 
 ### 推荐书籍
+
 - "Rust Atomics and Locks" by Mara Bos
 - "The Art of Multiprocessor Programming" by Maurice Herlihy
 - "C++ Concurrency in Action" by Anthony Williams
 
 ### 相关库
+
 - [`crossbeam`](https://docs.rs/crossbeam) - 并发工具集
 - [`parking_lot`](https://docs.rs/parking_lot) - 更快的同步原语
 - [`rayon`](https://docs.rs/rayon) - 数据并行
@@ -223,4 +231,3 @@ Tier 3 参考文档层提供详尽的技术参考资料，包括 API 手册、�
 ---
 
 **文档维护**: C05 Threads Team | **最后审核**: 2025-10-22 | **质量评分**: 95/100
-

@@ -50,6 +50,7 @@ Tier 4 高级主题层深入探讨并发编程的前沿技术和系统级优化�
 ### 01. 高级并发模式
 
 **内容覆盖**:
+
 - ✅ **工作窃取（Work Stealing）**
   - 原理和算法
   - 简化实现
@@ -83,6 +84,7 @@ Tier 4 高级主题层深入探讨并发编程的前沿技术和系统级优化�
 ### 02. 系统编程优化
 
 **内容覆盖**:
+
 - ✅ **CPU 亲和性（Affinity）**
   - 绑定线程到特定核心
   - 性能提升分析
@@ -115,6 +117,7 @@ Tier 4 高级主题层深入探讨并发编程的前沿技术和系统级优化�
 ### 03. 性能工程实践
 
 **内容覆盖**:
+
 - ✅ **性能分析工具链**
   - Linux perf 工具
   - Valgrind 套件
@@ -147,6 +150,7 @@ Tier 4 高级主题层深入探讨并发编程的前沿技术和系统级优化�
 ### 04. 跨平台并发
 
 **内容覆盖**:
+
 - ✅ **平台差异概览**
   - Windows 线程模型
   - Linux NPTL 线程库
@@ -225,6 +229,7 @@ Tier 4 高级主题层深入探讨并发编程的前沿技术和系统级优化�
 ### 前置知识
 
 **必须掌握**:
+
 - ✅ [Tier 1: 基础概念](../tier_01_foundations/)
 - ✅ [Tier 2: 实践指南](../tier_02_guides/)
 - ✅ [Tier 3: 参考文档](../tier_03_references/)
@@ -232,6 +237,7 @@ Tier 4 高级主题层深入探讨并发编程的前沿技术和系统级优化�
 - ✅ 计算机体系结构基础
 
 **推荐掌握**:
+
 - 📖 Linux 内核基础
 - 📖 性能分析工具使用
 - 📖 汇编语言基础
@@ -250,6 +256,7 @@ Tier 4 高级主题层深入探讨并发编程的前沿技术和系统级优化�
 ### 复杂性警告
 
 Tier 4 的技术具有以下特点：
+
 - ⚠️ **高复杂度**: 需要深入的系统知识
 - ⚠️ **平台相关**: 部分技术依赖特定平台
 - ⚠️ **调试困难**: 问题定位需要高级工具
@@ -267,18 +274,21 @@ Tier 4 的技术具有以下特点：
 ## 🔧 相关资源
 
 ### 系统编程工具
+
 - **perf**: Linux 性能分析
 - **valgrind**: 内存分析
 - **flamegraph**: 火焰图生成
 - **bpftrace**: 动态追踪
 
 ### 推荐书籍
+
 - "Systems Performance" by Brendan Gregg
 - "The Art of Multiprocessor Programming" by Maurice Herlihy
 - "Linux System Programming" by Robert Love
 - "Computer Architecture: A Quantitative Approach" by Hennessy & Patterson
 
 ### 相关库
+
 - [`core_affinity`](https://docs.rs/core_affinity) - CPU 亲和性
 - [`thread_priority`](https://docs.rs/thread_priority) - 线程优先级
 - [`jemalloc`](https://jemalloc.net/) - 高性能分配器
@@ -306,4 +316,3 @@ Tier 4 的技术具有以下特点：
 ---
 
 **文档维护**: C05 Threads Team | **最后审核**: 2025-10-22 | **质量评分**: 95/100
-

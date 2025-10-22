@@ -32,6 +32,7 @@
 | `04_reasoning_rules.md` | 推理规则 | 理解类型推断和约束求解 |
 
 **使用建议**:
+
 - 建立全局认知 → 从 `00_KNOWLEDGE_SYSTEM_INDEX.md` 开始
 - 系统理解概念 → 阅读 01-04 系列
 - 构建概念图谱 → 结合 `02_relationship_network.md`
@@ -49,6 +50,7 @@
 | `14_evolution_timeline_matrix.md` | 演化时间线 | Rust 版本特性演化 |
 
 **使用建议**:
+
 - 技术选型 → 查阅相关对比矩阵
 - 性能优化 → 查看性能对比数据
 - 理解权衡 → 对比不同方案的优缺点
@@ -65,6 +67,7 @@
 | `23_advanced_features_mindmap.md` | 高级特性 | GAT、HRTB、类型级编程 |
 
 **使用建议**:
+
 - 快速 overview → 浏览所有思维导图
 - 复习巩固 → 定期回顾思维导图
 - 教学分享 → 使用思维导图讲解
@@ -80,6 +83,7 @@
 | `33_rust_type_system.md` | Rust 类型系统 | 所有权、借用、生命周期与泛型 |
 
 **使用建议**:
+
 - 理论深度 → 研读类型理论
 - 跨语言对比 → 学习类型类与 trait 的关系
 - 系统理解 → 完整理解 Rust 类型系统
@@ -103,10 +107,12 @@
 ### 使用场景
 
 **想看可视化**:
+
 - → `KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md`
 - → `MINDMAP_VISUALIZATION.md`
 
 **想深入对比**:
+
 - → `MULTI_DIMENSIONAL_COMPARISON_MATRIX.md`
 - 包含 7 大技术领域全面对比
 - 包含 20+ 性能对比表格（实测数据）
@@ -115,6 +121,7 @@
 - 技术选型决策矩阵
 
 **想建立体系**:
+
 - → `KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md`
 - 泛型系统概念总览
 - Trait 层次结构可视化
@@ -142,25 +149,29 @@
 | `FINAL_RUST_190_COMPLETION_REPORT.md` | Rust 1.90 完成报告 | 项目完成总结 |
 | `README.md` | Rust 特性索引 | 目录导航 |
 
-### 使用场景
+### 使用场景1
 
 **了解最新特性**:
+
 - → `RUST_190_COMPREHENSIVE_GUIDE.md`
 - → `RUST_190_FEATURES_ANALYSIS_REPORT.md`
 
 **理解演化历史**:
+
 - → `RUST_VERSION_HISTORY_ACCURATE.md`
 - 从 Rust 1.0 到 1.90 的泛型特性演化
 - 每个版本的重要变化
 - 特性稳定化时间线
 
 **版本对齐和迁移**:
+
 - → `rust_189_alignment_summary.md`
 - → `RUST_190_PROJECT_UPDATE_SUMMARY.md`
 
 ### Rust 1.90 核心特性
 
 **GAT (Generic Associated Types)** (Rust 1.65+ 稳定):
+
 ```rust
 trait LendingIterator {
     type Item<'a> where Self: 'a;
@@ -169,6 +180,7 @@ trait LendingIterator {
 ```
 
 **RPITIT** (Return Position Impl Trait In Traits) (Rust 1.75+ 稳定):
+
 ```rust
 trait Factory {
     fn create(&self) -> impl Display;
@@ -176,6 +188,7 @@ trait Factory {
 ```
 
 **async trait** (Rust 1.75+ 稳定):
+
 ```rust
 trait AsyncHandler {
     async fn handle(&self, request: Request) -> Response;
@@ -189,16 +202,19 @@ trait AsyncHandler {
 ### 按学习阶段
 
 **初学者**:
+
 - 先学习 Tier 1-2 基础和实践指南
 - 需要时查阅对比矩阵 (`knowledge_enhanced/10_*.md`)
 - 浏览思维导图建立全局认知 (`knowledge_enhanced/20_*.md`)
 
 **中级开发者**:
+
 - 深入学习 Tier 3-4 参考和高级主题
 - 研读知识图谱 (`theory_deep_dive/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md`)
 - 学习多维对比矩阵 (`theory_deep_dive/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md`)
 
 **高级开发者**:
+
 - 研究类型理论 (`knowledge_enhanced/31_*.md`)
 - 理解完整的概念体系 (`knowledge_enhanced/01_*.md` - `04_*.md`)
 - 追踪 Rust 版本特性演化 (`rust_features/`)
@@ -206,21 +222,25 @@ trait AsyncHandler {
 ### 按使用目的
 
 **建立全局认知**:
+
 1. 阅读 `theory_deep_dive/MINDMAP_VISUALIZATION.md`
 2. 浏览 `knowledge_enhanced/20_*.md` 思维导图系列
 3. 查看 `theory_deep_dive/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md`
 
 **技术选型决策**:
+
 1. 查阅 `knowledge_enhanced/10_*.md` 对比矩阵系列
 2. 阅读 `theory_deep_dive/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md`
 3. 参考性能对比数据
 
 **理论深度研究**:
+
 1. 研读 `knowledge_enhanced/31_type_theory.md`
 2. 学习 `knowledge_enhanced/32_type_classes.md`
 3. 理解 `knowledge_enhanced/01_*.md` - `04_*.md` 概念体系
 
 **追踪 Rust 特性**:
+
 1. 阅读 `rust_features/RUST_190_COMPREHENSIVE_GUIDE.md`
 2. 查看 `rust_features/RUST_VERSION_HISTORY_ACCURATE.md`
 3. 理解特性演化和稳定化过程
@@ -301,4 +321,3 @@ trait AsyncHandler {
 ---
 
 *本目录提供 C04 泛型编程的深度分析资料。适合追求深度理解和系统性学习的开发者。建议配合 Tier 1-4 文档一起使用，效果最佳。*
-
