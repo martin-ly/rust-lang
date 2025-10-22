@@ -1,0 +1,443 @@
+﻿{
+    "Statistics":  {
+                       "ValidLinks":  974,
+                       "TotalLinks":  1050,
+                       "InvalidLinks":  76,
+                       "ValidityRate":  92.76
+                   },
+    "BrokenLinks":  [
+                        {
+                            "SourceFile":  "C01_ARCHITECTURE_OPTIMIZATION_PLAN_2025_10_22.md",
+                            "LinkText":  "1.3 术语表",
+                            "LinkPath":  "tier1_foundation/1.3_术语表.md",
+                            "ResolvedPath":  "tier1_foundation\\1.3_术语表.md"
+                        },
+                        {
+                            "SourceFile":  "C01_ARCHITECTURE_OPTIMIZATION_PLAN_2025_10_22.md",
+                            "LinkText":  "1.4 常见问题",
+                            "LinkPath":  "tier1_foundation/1.4_常见问题.md",
+                            "ResolvedPath":  "tier1_foundation\\1.4_常见问题.md"
+                        },
+                        {
+                            "SourceFile":  "C01_ARCHITECTURE_OPTIMIZATION_PLAN_2025_10_22.md",
+                            "LinkText":  "2.1 所有权系统指南",
+                            "LinkPath":  "tier2_core_concepts/2.1_所有权系统指南.md",
+                            "ResolvedPath":  "tier2_core_concepts\\2.1_所有权系统指南.md"
+                        },
+                        {
+                            "SourceFile":  "C01_ARCHITECTURE_OPTIMIZATION_PLAN_2025_10_22.md",
+                            "LinkText":  "2.2 借用系统指南",
+                            "LinkPath":  "tier2_core_concepts/2.2_借用系统指南.md",
+                            "ResolvedPath":  "tier2_core_concepts\\2.2_借用系统指南.md"
+                        },
+                        {
+                            "SourceFile":  "C01_ARCHITECTURE_OPTIMIZATION_PLAN_2025_10_22.md",
+                            "LinkText":  "2.3 生命周期指南",
+                            "LinkPath":  "tier2_core_concepts/2.3_生命周期指南.md",
+                            "ResolvedPath":  "tier2_core_concepts\\2.3_生命周期指南.md"
+                        },
+                        {
+                            "SourceFile":  "C01_ARCHITECTURE_OPTIMIZATION_PLAN_2025_10_22.md",
+                            "LinkText":  "2.4 作用域管理指南",
+                            "LinkPath":  "tier2_core_concepts/2.4_作用域管理指南.md",
+                            "ResolvedPath":  "tier2_core_concepts\\2.4_作用域管理指南.md"
+                        },
+                        {
+                            "SourceFile":  "C01_ARCHITECTURE_OPTIMIZATION_PLAN_2025_10_22.md",
+                            "LinkText":  "2.5 智能指针指南",
+                            "LinkPath":  "tier2_core_concepts/2.5_智能指针指南.md",
+                            "ResolvedPath":  "tier2_core_concepts\\2.5_智能指针指南.md"
+                        },
+                        {
+                            "SourceFile":  "C01_ARCHITECTURE_OPTIMIZATION_PLAN_2025_10_22.md",
+                            "LinkText":  "3.1 Rust 1.90 特性全解析",
+                            "LinkPath":  "tier3_advanced/3.1_Rust_1.90_特性全解析.md",
+                            "ResolvedPath":  "tier3_advanced\\3.1_Rust_1.90_特性全解析.md"
+                        },
+                        {
+                            "SourceFile":  "C01_ARCHITECTURE_OPTIMIZATION_PLAN_2025_10_22.md",
+                            "LinkText":  "3.2 性能基准测试报告",
+                            "LinkPath":  "tier3_advanced/3.2_性能基准测试报告.md",
+                            "ResolvedPath":  "tier3_advanced\\3.2_性能基准测试报告.md"
+                        },
+                        {
+                            "SourceFile":  "C01_ARCHITECTURE_OPTIMIZATION_PLAN_2025_10_22.md",
+                            "LinkText":  "3.3 设计模式集",
+                            "LinkPath":  "tier3_advanced/3.3_设计模式集.md",
+                            "ResolvedPath":  "tier3_advanced\\3.3_设计模式集.md"
+                        },
+                        {
+                            "SourceFile":  "C01_ARCHITECTURE_OPTIMIZATION_PLAN_2025_10_22.md",
+                            "LinkText":  "3.4 最佳实践参考",
+                            "LinkPath":  "tier3_advanced/3.4_最佳实践参考.md",
+                            "ResolvedPath":  "tier3_advanced\\3.4_最佳实践参考.md"
+                        },
+                        {
+                            "SourceFile":  "C01_ARCHITECTURE_OPTIMIZATION_PLAN_2025_10_22.md",
+                            "LinkText":  "3.5 可视化资源集",
+                            "LinkPath":  "tier3_advanced/3.5_可视化资源集.md",
+                            "ResolvedPath":  "tier3_advanced\\3.5_可视化资源集.md"
+                        },
+                        {
+                            "SourceFile":  "C01_ARCHITECTURE_OPTIMIZATION_PLAN_2025_10_22.md",
+                            "LinkText":  "4.1 理论基础研究",
+                            "LinkPath":  "tier4_theoretical/4.1_理论基础研究.md",
+                            "ResolvedPath":  "tier4_theoretical\\4.1_理论基础研究.md"
+                        },
+                        {
+                            "SourceFile":  "C01_ARCHITECTURE_OPTIMIZATION_PLAN_2025_10_22.md",
+                            "LinkText":  "4.2 形式化验证方法",
+                            "LinkPath":  "tier4_theoretical/4.2_形式化验证方法.md",
+                            "ResolvedPath":  "tier4_theoretical\\4.2_形式化验证方法.md"
+                        },
+                        {
+                            "SourceFile":  "C01_ARCHITECTURE_OPTIMIZATION_PLAN_2025_10_22.md",
+                            "LinkText":  "4.3 编译器内部机制",
+                            "LinkPath":  "tier4_theoretical/4.3_编译器内部机制.md",
+                            "ResolvedPath":  "tier4_theoretical\\4.3_编译器内部机制.md"
+                        },
+                        {
+                            "SourceFile":  "C01_ARCHITECTURE_OPTIMIZATION_PLAN_2025_10_22.md",
+                            "LinkText":  "4.4 前沿技术探索",
+                            "LinkPath":  "tier4_theoretical/4.4_前沿技术探索.md",
+                            "ResolvedPath":  "tier4_theoretical\\4.4_前沿技术探索.md"
+                        },
+                        {
+                            "SourceFile":  "C01_PROJECT_COMPLETION_CONFIRMATION_2025_10_22.md",
+                            "LinkText":  "docs/",
+                            "LinkPath":  "./docs/",
+                            "ResolvedPath":  "docs\\"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "所有权基础语法详解",
+                            "LinkPath":  "OWNERSHIP_FUNDAMENTALS.md",
+                            "ResolvedPath":  "OWNERSHIP_FUNDAMENTALS.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "借用系统全面解析",
+                            "LinkPath":  "BORROWING_SYSTEM_COMPREHENSIVE.md",
+                            "ResolvedPath":  "BORROWING_SYSTEM_COMPREHENSIVE.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "生命周期注解详细解析",
+                            "LinkPath":  "LIFETIME_ANNOTATIONS_DETAILED.md",
+                            "ResolvedPath":  "LIFETIME_ANNOTATIONS_DETAILED.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "高级模式与最佳实践",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "Rust 1.89 版本全面特性分析",
+                            "LinkPath":  "RUST_189_COMPREHENSIVE_FEATURES.md",
+                            "ResolvedPath":  "RUST_189_COMPREHENSIVE_FEATURES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "所有权基础语法详解",
+                            "LinkPath":  "OWNERSHIP_FUNDAMENTALS.md#1-所有权基础概念",
+                            "ResolvedPath":  "OWNERSHIP_FUNDAMENTALS.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "所有权转移模式",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#1-高级所有权模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "智能指针所有权模式",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#12-智能指针所有权模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "借用系统全面解析",
+                            "LinkPath":  "BORROWING_SYSTEM_COMPREHENSIVE.md#1-借用系统基础",
+                            "ResolvedPath":  "BORROWING_SYSTEM_COMPREHENSIVE.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "借用模式优化",
+                            "LinkPath":  "BORROWING_SYSTEM_COMPREHENSIVE.md#3-借用模式详解",
+                            "ResolvedPath":  "BORROWING_SYSTEM_COMPREHENSIVE.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "借用检查器详解",
+                            "LinkPath":  "BORROWING_SYSTEM_COMPREHENSIVE.md#2-借用检查器详解",
+                            "ResolvedPath":  "BORROWING_SYSTEM_COMPREHENSIVE.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "生命周期注解详细解析",
+                            "LinkPath":  "LIFETIME_ANNOTATIONS_DETAILED.md#1-生命周期基础概念",
+                            "ResolvedPath":  "LIFETIME_ANNOTATIONS_DETAILED.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "生命周期省略规则",
+                            "LinkPath":  "LIFETIME_ANNOTATIONS_DETAILED.md#3-生命周期省略规则",
+                            "ResolvedPath":  "LIFETIME_ANNOTATIONS_DETAILED.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "生命周期在结构体中的应用",
+                            "LinkPath":  "LIFETIME_ANNOTATIONS_DETAILED.md#4-生命周期注解在结构体中的应用",
+                            "ResolvedPath":  "LIFETIME_ANNOTATIONS_DETAILED.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "内存安全设计模式",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#4-内存安全模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "内存泄漏防护模式",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#42-内存泄漏防护模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "编译时安全检查",
+                            "LinkPath":  "OWNERSHIP_FUNDAMENTALS.md#41-编译时安全检查",
+                            "ResolvedPath":  "OWNERSHIP_FUNDAMENTALS.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "线程安全模式",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#5-并发安全模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "异步安全模式",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#52-异步安全模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "数据竞争检测",
+                            "LinkPath":  "BORROWING_SYSTEM_COMPREHENSIVE.md#6-借用与并发",
+                            "ResolvedPath":  "BORROWING_SYSTEM_COMPREHENSIVE.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "零成本抽象模式",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#6-性能优化模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "内存布局优化模式",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#62-内存布局优化模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "借用性能优化",
+                            "LinkPath":  "BORROWING_SYSTEM_COMPREHENSIVE.md#8-借用系统性能分析",
+                            "ResolvedPath":  "BORROWING_SYSTEM_COMPREHENSIVE.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "所有权基础概念",
+                            "LinkPath":  "OWNERSHIP_FUNDAMENTALS.md#1-所有权基础概念",
+                            "ResolvedPath":  "OWNERSHIP_FUNDAMENTALS.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "借用规则基础",
+                            "LinkPath":  "BORROWING_SYSTEM_COMPREHENSIVE.md#1-借用系统基础",
+                            "ResolvedPath":  "BORROWING_SYSTEM_COMPREHENSIVE.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "生命周期注解语法",
+                            "LinkPath":  "LIFETIME_ANNOTATIONS_DETAILED.md#1-生命周期基础概念",
+                            "ResolvedPath":  "LIFETIME_ANNOTATIONS_DETAILED.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "所有权转移模式",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#1-高级所有权模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "借用模式优化",
+                            "LinkPath":  "BORROWING_SYSTEM_COMPREHENSIVE.md#3-借用模式详解",
+                            "ResolvedPath":  "BORROWING_SYSTEM_COMPREHENSIVE.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "生命周期省略规则",
+                            "LinkPath":  "LIFETIME_ANNOTATIONS_DETAILED.md#3-生命周期省略规则",
+                            "ResolvedPath":  "LIFETIME_ANNOTATIONS_DETAILED.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "高级所有权模式",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#1-高级所有权模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "复杂借用模式",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#2-高级借用模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "复杂生命周期模式",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#3-高级生命周期模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "Rust 1.89 版本特性",
+                            "LinkPath":  "RUST_189_COMPREHENSIVE_FEATURES.md#1-rust-189-版本核心改进",
+                            "ResolvedPath":  "RUST_189_COMPREHENSIVE_FEATURES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "内存安全模式",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#4-内存安全模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "并发安全模式",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#5-并发安全模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "内存管理",
+                            "LinkPath":  "OWNERSHIP_FUNDAMENTALS.md#4-内存安全保证",
+                            "ResolvedPath":  "OWNERSHIP_FUNDAMENTALS.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "资源管理",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#41-内存安全设计模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "性能优化",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#6-性能优化模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "线程安全",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#5-并发安全模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "异步编程",
+                            "LinkPath":  "BORROWING_SYSTEM_COMPREHENSIVE.md#62-异步编程中的借用",
+                            "ResolvedPath":  "BORROWING_SYSTEM_COMPREHENSIVE.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "数据竞争检测",
+                            "LinkPath":  "BORROWING_SYSTEM_COMPREHENSIVE.md#6-借用与并发",
+                            "ResolvedPath":  "BORROWING_SYSTEM_COMPREHENSIVE.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "API 设计",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#8-设计模式应用",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "错误处理",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#7-错误处理模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "性能优化",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#6-性能优化模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "资源管理",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#41-内存安全设计模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "性能优化",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#6-性能优化模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "内存布局优化",
+                            "LinkPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md#62-内存布局优化模式",
+                            "ResolvedPath":  "ADVANCED_PATTERNS_BEST_PRACTICES.md"
+                        },
+                        {
+                            "SourceFile":  "COMPREHENSIVE_DOCUMENTATION_INDEX.md",
+                            "LinkText":  "LICENSE",
+                            "LinkPath":  "../LICENSE",
+                            "ResolvedPath":  "SE"
+                        },
+                        {
+                            "SourceFile":  "OVERVIEW.md",
+                            "LinkText":  "PRACTICAL_GUIDE.md",
+                            "LinkPath":  "./PRACTICAL_GUIDE.md",
+                            "ResolvedPath":  "PRACTICAL_GUIDE.md"
+                        },
+                        {
+                            "SourceFile":  "OVERVIEW.md",
+                            "LinkText":  "PRACTICAL_GUIDE.md",
+                            "LinkPath":  "./PRACTICAL_GUIDE.md",
+                            "ResolvedPath":  "PRACTICAL_GUIDE.md"
+                        },
+                        {
+                            "SourceFile":  "PHASE2_TASK3.2_LINK_VALIDATION_REPORT_2025_10_22.md",
+                            "LinkText":  "所有权示例",
+                            "LinkPath":  "../examples/ownership_examples.rs",
+                            "ResolvedPath":  "les\\ownership_examples.rs"
+                        },
+                        {
+                            "SourceFile":  "06_rust_features\\README.md",
+                            "LinkText":  "基础教程文档",
+                            "LinkPath":  "../02_basics/",
+                            "ResolvedPath":  "02_basics\\"
+                        },
+                        {
+                            "SourceFile":  "06_rust_features\\README.md",
+                            "LinkText":  "FAQ 文档",
+                            "LinkPath":  "../06_references/FAQ.md",
+                            "ResolvedPath":  "06_references\\FAQ.md"
+                        },
+                        {
+                            "SourceFile":  "06_rust_features\\README.md",
+                            "LinkText":  "术语表",
+                            "LinkPath":  "../06_references/Glossary.md",
+                            "ResolvedPath":  "06_references\\Glossary.md"
+                        },
+                        {
+                            "SourceFile":  "tier1_foundation\\1.1_项目概览.md",
+                            "LinkText":  "贡献指南",
+                            "LinkPath":  "../../CONTRIBUTING.md",
+                            "ResolvedPath":  "IBUTING.md"
+                        }
+                    ],
+    "GeneratedAt":  "2025-10-22 09:57:33"
+}
