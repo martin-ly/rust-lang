@@ -12,6 +12,7 @@
 ### 1. [知识图谱与概念关系](./KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md) ⭐ 推荐起点
 
 **内容概述**:
+
 - 控制流系统知识图谱
 - 函数系统架构
 - 概念关系网络
@@ -19,6 +20,7 @@
 - 学习路径规划
 
 **适合人群**:
+
 - 系统学习者
 - 技术决策者
 - 初学者建立体系
@@ -30,6 +32,7 @@
 ### 2. [多维矩阵对比分析](./MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)
 
 **内容概述**:
+
 - 条件控制结构对比
 - 循环结构深度对比
 - 模式匹配方式对比
@@ -38,6 +41,7 @@
 - 性能特征分析
 
 **适合人群**:
+
 - 性能优化工程师
 - 技术选型人员
 - 高级开发者
@@ -49,6 +53,7 @@
 ### 3. [思维导图与可视化](./MINDMAP_VISUALIZATION.md) ✨ 新增
 
 **内容概述**:
+
 - 控制流全景思维导图
 - 条件控制流程图
 - 循环控制架构
@@ -58,6 +63,7 @@
 - 编译器优化流程
 
 **适合人群**:
+
 - 可视化学习者
 - 初学者建立直观认识
 - 教学演示
@@ -126,26 +132,31 @@ flowchart LR
 ## 🔍 按主题查找
 
 ### 条件控制
+
 - 知识图谱 → [控制流系统](./KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md#11-控制流系统概念总览)
 - 多维对比 → [条件控制结构对比](./MULTI_DIMENSIONAL_COMPARISON_MATRIX.md#1-条件控制结构对比)
 - 思维导图 → [条件控制流程图](./MINDMAP_VISUALIZATION.md#2-条件控制流程图)
 
 ### 循环控制
+
 - 知识图谱 → [循环控制概念](./KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md#11-控制流系统概念总览)
 - 多维对比 → [循环结构对比](./MULTI_DIMENSIONAL_COMPARISON_MATRIX.md#2-循环结构对比)
 - 思维导图 → [循环控制架构](./MINDMAP_VISUALIZATION.md#3-循环控制架构)
 
 ### 函数与闭包
+
 - 知识图谱 → [函数系统架构](./KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md#12-函数系统架构)
 - 多维对比 → [函数形式对比](./MULTI_DIMENSIONAL_COMPARISON_MATRIX.md#4-函数形式对比)
 - 思维导图 → [函数调用架构](./MINDMAP_VISUALIZATION.md#4-函数调用架构)
 
 ### 错误处理
+
 - 知识图谱 → [错误处理控制流](./KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md#13-错误处理控制流)
 - 多维对比 → [错误处理对比](./MULTI_DIMENSIONAL_COMPARISON_MATRIX.md#5-错误处理对比)
 - 思维导图 → [错误处理流程](./MINDMAP_VISUALIZATION.md#5-错误处理流程)
 
 ### 模式匹配
+
 - 知识图谱 → [模式匹配系统](./KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md#11-控制流系统概念总览)
 - 多维对比 → [模式匹配对比](./MULTI_DIMENSIONAL_COMPARISON_MATRIX.md#3-模式匹配对比)
 - 思维导图 → [模式匹配可视化](./MINDMAP_VISUALIZATION.md#6-模式匹配可视化)
@@ -211,6 +222,7 @@ graph TB
 ### 场景1: 初学者入门
 
 **阅读顺序**:
+
 1. [思维导图](./MINDMAP_VISUALIZATION.md) - 建立直观认识
 2. [知识图谱](./KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md) - 系统学习
 3. 基础教程实践
@@ -218,6 +230,7 @@ graph TB
 ### 场景2: 性能优化
 
 **阅读顺序**:
+
 1. [多维对比](./MULTI_DIMENSIONAL_COMPARISON_MATRIX.md#6-性能特征对比)
 2. [性能优化清单](./MULTI_DIMENSIONAL_COMPARISON_MATRIX.md#82-性能优化清单)
 3. 实践优化
@@ -225,6 +238,7 @@ graph TB
 ### 场景3: 技术选型
 
 **阅读顺序**:
+
 1. [多维对比](./MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)
 2. [技术选型决策](./MULTI_DIMENSIONAL_COMPARISON_MATRIX.md#7-技术选型决策)
 3. [知识图谱](./KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)
@@ -232,6 +246,7 @@ graph TB
 ### 场景4: 教学演示
 
 **阅读顺序**:
+
 1. [思维导图](./MINDMAP_VISUALIZATION.md) - 可视化展示
 2. [知识图谱](./KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md) - 概念讲解
 3. 基础教程配合
@@ -286,6 +301,7 @@ graph TB
 ### 文档改进
 
 欢迎提交：
+
 - 内容补充
 - 错误修正
 - 图表优化
@@ -313,4 +329,3 @@ graph TB
 - [返回模块README](../README.md)
 - [查看基础教程](../02_basics/)
 - [查看高级特性](../03_advanced/)
-
