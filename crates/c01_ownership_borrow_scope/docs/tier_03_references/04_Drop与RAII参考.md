@@ -1,0 +1,108 @@
+# Tier 3: Drop 与 RAII 参考
+
+> **文档类型**: 技术参考  
+> **适用版本**: Rust 1.90+
+
+---
+
+## Drop trait
+
+```rust
+pub trait Drop {
+    fn drop(&mut self);
+}
+```
+
+### 基本使用
+
+```rust
+struct CustomSmartPointer {
+    data: String,
+}
+
+impl Drop for CustomSmartPointer {
+    fn drop(&mut self) {
+        println!("Dropping CustomSmartPointer with data `{}`!", self.data);
+    }
+}
+
+fn main() {
+    let c = CustomSmartPointer {
+        data: String::from("my stuff"),
+    };
+    let d = CustomSmartPointer {
+        data: String::from("other stuff"),
+    };
+    println!("CustomSmartPointers created.");
+} // d 和 c 自动调用 drop
+```
+
+---
+
+## RAII 模式
+
+**Resource Acquisition Is Initialization** - 资源获取即初始化
+
+### 文件 RAII
+
+```rust
+use std::fs::File;
+use std::io::Write;
+
+fn write_file() -> std::io::Result<()> {
+    let mut file = File::create("output.txt")?; // 获取资源
+    file.write_all(b"Hello")?;
+    Ok(())
+} // file 自动关闭（Drop）
+```
+
+### 锁 RAII
+
+```rust
+use std::sync::Mutex;
+
+let data = Mutex::new(0);
+{
+    let mut num = data.lock().unwrap(); // 获取锁
+    *num += 1;
+} // 锁自动释放（Drop）
+```
+
+---
+
+## Drop 顺序
+
+1. 变量按声明的**相反顺序** drop
+2. 结构体字段按**声明顺序** drop
+3. 元组元素按**顺序** drop
+
+```rust
+struct Inner;
+struct Outer(Inner);
+
+impl Drop for Inner {
+    fn drop(&mut self) { println!("Dropping Inner!"); }
+}
+
+impl Drop for Outer {
+    fn drop(&mut self) { println!("Dropping Outer!"); }
+}
+
+fn main() {
+    let _outer = Outer(Inner);
+}
+// 输出:
+// Dropping Outer!
+// Dropping Inner!
+```
+
+---
+
+**相关文档**:
+
+- [Tier 2: 04_作用域管理实践](../tier_02_guides/04_作用域管理实践.md)
+
+---
+
+**文档维护**: Documentation Team  
+**创建日期**: 2025-10-22
