@@ -4,7 +4,7 @@
 
 - **📊 [知识图谱与概念关系](./docs/theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)** - 进程管理完整体系
 - **📐 [多维矩阵对比分析](./docs/theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)** - IPC/同步原语全面对比
-- **🗺️ [Rust 1.90 综合思维导图](./docs/RUST_190_COMPREHENSIVE_MINDMAP.md)** ⭐ NEW! 
+- **🗺️ [Rust 1.90 综合思维导图](./docs/RUST_190_COMPREHENSIVE_MINDMAP.md)** ⭐ NEW!
   - ASCII艺术图表 | 进程创建/IPC/信号完整体系
   - 跨平台设计模式 | Unix/Windows特定API对比
   - 技术选型决策树 | IPC机制/同步原语选择指南
