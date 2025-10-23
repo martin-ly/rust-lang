@@ -36,6 +36,7 @@ f(x) = if base(x) then
 ```
 
 **组成部分**:
+
 1. **基础情况** (Base Case): `base(x)` 为真时直接返回
 2. **递归情况** (Recursive Case): 通过子问题定义
 3. **终止性** (Termination): 参数单调递减，保证到达基础情况
@@ -678,7 +679,8 @@ criterion_main!(benches);
 | Box异步 | 15μs | 1.8ms | 200ms | 堆分配开销 |
 | 迭代异步 | 0.01μs | 0.02μs | 0.03μs | 最优 |
 
-**结论**: 
+**结论**:
+
 - 纯CPU计算：使用同步递归或迭代
 - IO密集：使用异步递归
 - 深度递归：转换为迭代
@@ -794,4 +796,3 @@ async fn process_batch(items: Vec<Item>) -> Result<(), Error> {
 **文档版本**: 1.0.0  
 **Rust版本**: 1.90+  
 **最后更新**: 2025-10-02
-
