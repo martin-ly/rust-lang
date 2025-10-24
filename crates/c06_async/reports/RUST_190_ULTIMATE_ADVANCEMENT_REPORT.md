@@ -165,7 +165,7 @@ pub struct ProductionAsyncApp {
 
 **运行结果**:
 
-```
+```text
 🚀 启动生产级异步应用: rust-190-production-app v1.0.0
 🔧 初始化异步服务
   ✅ 服务 api_gateway 初始化完成

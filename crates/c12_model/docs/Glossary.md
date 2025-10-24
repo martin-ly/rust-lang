@@ -4,7 +4,6 @@
 > **使用方式**: 通过术语索引快速查找定义  
 > **相关文档**: [主索引](./00_MASTER_INDEX.md) | [README](./README.md) | [FAQ](./FAQ.md)
 
-
 ## 📊 目录
 
 - [C12 模型与架构: 术语表 (Glossary)](#c12-模型与架构-术语表-glossary)
@@ -16,7 +15,6 @@
   - [ML](#ml)
   - [背压 (Backpressure)](#背压-backpressure)
   - [📚 延伸阅读](#-延伸阅读)
-
 
 **最后更新**: 2025-10-19  
 **适用版本**: Rust 1.90+  
