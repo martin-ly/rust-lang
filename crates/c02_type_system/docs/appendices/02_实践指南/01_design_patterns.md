@@ -295,3 +295,914 @@ Rust类型系统设计
     ├── 跨语言比较
     └── 实际应用案例
 ```
+# Rust 设计模式实战扩展
+
+## 🎨 创建型模式
+
+### 1. Builder 模式（构建器模式）
+
+**问题**：如何优雅地创建具有多个可选参数的复杂对象？
+
+**解决方案**：使用Builder模式，提供流畅的链式API。
+
+```rust
+#[derive(Debug, Clone)]
+pub struct HttpRequest {
+    method: String,
+    url: String,
+    headers: Vec<(String, String)>,
+    body: Option<String>,
+    timeout_ms: u64,
+}
+
+pub struct HttpRequestBuilder {
+    method: String,
+    url: String,
+    headers: Vec<(String, String)>,
+    body: Option<String>,
+    timeout_ms: u64,
+}
+
+impl HttpRequestBuilder {
+    pub fn new(method: &str, url: &str) -> Self {
+        Self {
+            method: method.to_string(),
+            url: url.to_string(),
+            headers: Vec::new(),
+            body: None,
+            timeout_ms: 5000,
+        }
+    }
+    
+    pub fn header(mut self, key: &str, value: &str) -> Self {
+        self.headers.push((key.to_string(), value.to_string()));
+        self
+    }
+    
+    pub fn body(mut self, body: String) -> Self {
+        self.body = Some(body);
+        self
+    }
+    
+    pub fn timeout(mut self, timeout_ms: u64) -> Self {
+        self.timeout_ms = timeout_ms;
+        self
+    }
+    
+    pub fn build(self) -> HttpRequest {
+        HttpRequest {
+            method: self.method,
+            url: self.url,
+            headers: self.headers,
+            body: self.body,
+            timeout_ms: self.timeout_ms,
+        }
+    }
+}
+
+// 使用示例
+fn builder_pattern_example() {
+    let request = HttpRequestBuilder::new("POST", "https://api.example.com/users")
+        .header("Content-Type", "application/json")
+        .header("Authorization", "Bearer token")
+        .body(r#"{"name": "Alice"}"#.to_string())
+        .timeout(10000)
+        .build();
+    
+    println!("Request: {:?}", request);
+}
+```
+
+---
+
+### 2. Factory 模式（工厂模式）
+
+**问题**：如何根据不同条件创建不同类型的对象？
+
+**解决方案**：使用Factory模式封装对象创建逻辑。
+
+```rust
+use std::fmt::Debug;
+
+trait Database: Debug {
+    fn connect(&self) -> Result<String, String>;
+    fn query(&self, sql: &str) -> Result<Vec<String>, String>;
+}
+
+#[derive(Debug)]
+struct PostgresDB {
+    host: String,
+    port: u16,
+}
+
+impl Database for PostgresDB {
+    fn connect(&self) -> Result<String, String> {
+        Ok(format!("Connected to Postgres at {}:{}", self.host, self.port))
+    }
+    
+    fn query(&self, sql: &str) -> Result<Vec<String>, String> {
+        Ok(vec![format!("Postgres result for: {}", sql)])
+    }
+}
+
+#[derive(Debug)]
+struct MySQLDB {
+    host: String,
+    port: u16,
+}
+
+impl Database for MySQLDB {
+    fn connect(&self) -> Result<String, String> {
+        Ok(format!("Connected to MySQL at {}:{}", self.host, self.port))
+    }
+    
+    fn query(&self, sql: &str) -> Result<Vec<String>, String> {
+        Ok(vec![format!("MySQL result for: {}", sql)])
+    }
+}
+
+// 工厂
+struct DatabaseFactory;
+
+impl DatabaseFactory {
+    fn create(db_type: &str, host: &str, port: u16) -> Result<Box<dyn Database>, String> {
+        match db_type {
+            "postgres" => Ok(Box::new(PostgresDB {
+                host: host.to_string(),
+                port,
+            })),
+            "mysql" => Ok(Box::new(MySQLDB {
+                host: host.to_string(),
+                port,
+            })),
+            _ => Err(format!("Unknown database type: {}", db_type)),
+        }
+    }
+}
+
+// 使用示例
+fn factory_pattern_example() -> Result<(), String> {
+    let db = DatabaseFactory::create("postgres", "localhost", 5432)?;
+    println!("{}", db.connect()?);
+    println!("{:?}", db.query("SELECT * FROM users")?);
+    Ok(())
+}
+```
+
+---
+
+### 3. Singleton 模式（单例模式）
+
+**问题**：如何确保一个类只有一个实例？
+
+**解决方案**：使用`lazy_static`或`once_cell`实现线程安全的单例。
+
+```rust
+use std::sync::{Arc, Mutex, Once};
+
+static INIT: Once = Once::new();
+static mut INSTANCE: Option<Arc<Mutex<Config>>> = None;
+
+#[derive(Debug, Clone)]
+struct Config {
+    api_key: String,
+    timeout_ms: u64,
+}
+
+impl Config {
+    fn global() -> Arc<Mutex<Config>> {
+        unsafe {
+            INIT.call_once(|| {
+                INSTANCE = Some(Arc::new(Mutex::new(Config {
+                    api_key: "default_key".to_string(),
+                    timeout_ms: 5000,
+                })));
+            });
+            INSTANCE.clone().unwrap()
+        }
+    }
+}
+
+// 更推荐的方式：使用 once_cell
+use once_cell::sync::Lazy;
+
+static CONFIG: Lazy<Arc<Mutex<Config>>> = Lazy::new(|| {
+    Arc::new(Mutex::new(Config {
+        api_key: "default_key".to_string(),
+        timeout_ms: 5000,
+    }))
+});
+
+fn singleton_pattern_example() {
+    // 方式1：使用Once
+    let config1 = Config::global();
+    println!("{:?}", config1.lock().unwrap());
+    
+    // 方式2：使用 Lazy (推荐)
+    let config2 = CONFIG.clone();
+    config2.lock().unwrap().api_key = "new_key".to_string();
+    println!("{:?}", config2.lock().unwrap());
+}
+```
+
+---
+
+## 🏗️ 结构型模式
+
+### 4. Adapter 模式（适配器模式）
+
+**问题**：如何让不兼容的接口协同工作？
+
+**解决方案**：创建一个适配器类，转换接口。
+
+```rust
+// 旧接口
+trait LegacyLogger {
+    fn log_message(&self, msg: &str);
+}
+
+struct OldLogger;
+
+impl LegacyLogger for OldLogger {
+    fn log_message(&self, msg: &str) {
+        println!("[OLD] {}", msg);
+    }
+}
+
+// 新接口
+trait ModernLogger {
+    fn info(&self, msg: &str);
+    fn error(&self, msg: &str);
+}
+
+// 适配器
+struct LoggerAdapter<T: LegacyLogger> {
+    legacy: T,
+}
+
+impl<T: LegacyLogger> ModernLogger for LoggerAdapter<T> {
+    fn info(&self, msg: &str) {
+        self.legacy.log_message(&format!("INFO: {}", msg));
+    }
+    
+    fn error(&self, msg: &str) {
+        self.legacy.log_message(&format!("ERROR: {}", msg));
+    }
+}
+
+// 使用示例
+fn adapter_pattern_example() {
+    let old_logger = OldLogger;
+    let adapter = LoggerAdapter { legacy: old_logger };
+    
+    adapter.info("Application started");
+    adapter.error("Something went wrong");
+}
+```
+
+---
+
+### 5. Decorator 模式（装饰器模式）
+
+**问题**：如何动态地为对象添加新功能？
+
+**解决方案**：使用装饰器包装原始对象。
+
+```rust
+trait DataSource {
+    fn read(&self) -> String;
+    fn write(&self, data: &str);
+}
+
+struct FileDataSource {
+    filename: String,
+}
+
+impl DataSource for FileDataSource {
+    fn read(&self) -> String {
+        format!("Reading from {}", self.filename)
+    }
+    
+    fn write(&self, data: &str) {
+        println!("Writing to {}: {}", self.filename, data);
+    }
+}
+
+// 加密装饰器
+struct EncryptionDecorator<T: DataSource> {
+    wrapped: T,
+}
+
+impl<T: DataSource> DataSource for EncryptionDecorator<T> {
+    fn read(&self) -> String {
+        let data = self.wrapped.read();
+        format!("Decrypted({})", data)
+    }
+    
+    fn write(&self, data: &str) {
+        let encrypted = format!("Encrypted({})", data);
+        self.wrapped.write(&encrypted);
+    }
+}
+
+// 压缩装饰器
+struct CompressionDecorator<T: DataSource> {
+    wrapped: T,
+}
+
+impl<T: DataSource> DataSource for CompressionDecorator<T> {
+    fn read(&self) -> String {
+        let data = self.wrapped.read();
+        format!("Decompressed({})", data)
+    }
+    
+    fn write(&self, data: &str) {
+        let compressed = format!("Compressed({})", data);
+        self.wrapped.write(&compressed);
+    }
+}
+
+// 使用示例
+fn decorator_pattern_example() {
+    let file = FileDataSource {
+        filename: "data.txt".to_string(),
+    };
+    
+    // 多层装饰
+    let encrypted = EncryptionDecorator { wrapped: file };
+    let compressed = CompressionDecorator { wrapped: encrypted };
+    
+    compressed.write("Secret data");
+    println!("{}", compressed.read());
+}
+```
+
+---
+
+### 6. Facade 模式（外观模式）
+
+**问题**：如何简化复杂子系统的接口？
+
+**解决方案**：提供一个统一的高层接口。
+
+```rust
+// 复杂子系统
+struct CPU {
+    temp: f32,
+}
+
+impl CPU {
+    fn freeze(&mut self) {
+        println!("CPU: Freezing");
+    }
+    
+    fn jump(&mut self, address: usize) {
+        println!("CPU: Jumping to {:#x}", address);
+    }
+    
+    fn execute(&mut self) {
+        println!("CPU: Executing");
+    }
+}
+
+struct Memory {
+    data: Vec<u8>,
+}
+
+impl Memory {
+    fn load(&mut self, address: usize, data: &[u8]) {
+        println!("Memory: Loading {} bytes at {:#x}", data.len(), address);
+        self.data.extend_from_slice(data);
+    }
+}
+
+struct HardDrive {
+    sectors: Vec<Vec<u8>>,
+}
+
+impl HardDrive {
+    fn read(&self, lba: usize, size: usize) -> Vec<u8> {
+        println!("HardDrive: Reading {} bytes from LBA {}", size, lba);
+        vec![0; size]
+    }
+}
+
+// Facade
+struct ComputerFacade {
+    cpu: CPU,
+    memory: Memory,
+    hd: HardDrive,
+}
+
+impl ComputerFacade {
+    fn new() -> Self {
+        Self {
+            cpu: CPU { temp: 37.0 },
+            memory: Memory { data: Vec::new() },
+            hd: HardDrive { sectors: Vec::new() },
+        }
+    }
+    
+    fn start(&mut self) {
+        println!("=== Computer Starting ===");
+        self.cpu.freeze();
+        
+        let boot_sector = self.hd.read(0, 512);
+        self.memory.load(0x0000, &boot_sector);
+        
+        self.cpu.jump(0x0000);
+        self.cpu.execute();
+        println!("=== Computer Started ===");
+    }
+}
+
+// 使用示例
+fn facade_pattern_example() {
+    let mut computer = ComputerFacade::new();
+    computer.start(); // 简化的启动接口
+}
+```
+
+---
+
+## 🎭 行为型模式
+
+### 7. Strategy 模式（策略模式）
+
+**问题**：如何在运行时选择算法？
+
+**解决方案**：定义一系列算法，并使它们可以互换。
+
+```rust
+trait CompressionStrategy {
+    fn compress(&self, data: &str) -> Vec<u8>;
+    fn decompress(&self, data: &[u8]) -> String;
+}
+
+struct ZipCompression;
+
+impl CompressionStrategy for ZipCompression {
+    fn compress(&self, data: &str) -> Vec<u8> {
+        println!("Compressing with ZIP");
+        data.as_bytes().to_vec()
+    }
+    
+    fn decompress(&self, data: &[u8]) -> String {
+        println!("Decompressing with ZIP");
+        String::from_utf8_lossy(data).to_string()
+    }
+}
+
+struct GzipCompression;
+
+impl CompressionStrategy for GzipCompression {
+    fn compress(&self, data: &str) -> Vec<u8> {
+        println!("Compressing with GZIP");
+        data.as_bytes().to_vec()
+    }
+    
+    fn decompress(&self, data: &[u8]) -> String {
+        println!("Decompressing with GZIP");
+        String::from_utf8_lossy(data).to_string()
+    }
+}
+
+struct Compressor {
+    strategy: Box<dyn CompressionStrategy>,
+}
+
+impl Compressor {
+    fn new(strategy: Box<dyn CompressionStrategy>) -> Self {
+        Self { strategy }
+    }
+    
+    fn set_strategy(&mut self, strategy: Box<dyn CompressionStrategy>) {
+        self.strategy = strategy;
+    }
+    
+    fn compress(&self, data: &str) -> Vec<u8> {
+        self.strategy.compress(data)
+    }
+    
+    fn decompress(&self, data: &[u8]) -> String {
+        self.strategy.decompress(data)
+    }
+}
+
+// 使用示例
+fn strategy_pattern_example() {
+    let mut compressor = Compressor::new(Box::new(ZipCompression));
+    
+    let compressed = compressor.compress("Hello World");
+    println!("Compressed: {:?}", compressed);
+    
+    // 运行时切换策略
+    compressor.set_strategy(Box::new(GzipCompression));
+    let compressed2 = compressor.compress("Hello World");
+    println!("Compressed with new strategy: {:?}", compressed2);
+}
+```
+
+---
+
+### 8. Observer 模式（观察者模式）
+
+**问题**：如何在对象状态改变时通知多个观察者？
+
+**解决方案**：定义一对多的依赖关系。
+
+```rust
+use std::cell::RefCell;
+use std::rc::Rc;
+
+trait Observer {
+    fn update(&self, temperature: f32, humidity: f32, pressure: f32);
+}
+
+struct WeatherData {
+    observers: Vec<Rc<RefCell<dyn Observer>>>,
+    temperature: f32,
+    humidity: f32,
+    pressure: f32,
+}
+
+impl WeatherData {
+    fn new() -> Self {
+        Self {
+            observers: Vec::new(),
+            temperature: 0.0,
+            humidity: 0.0,
+            pressure: 0.0,
+        }
+    }
+    
+    fn register_observer(&mut self, observer: Rc<RefCell<dyn Observer>>) {
+        self.observers.push(observer);
+    }
+    
+    fn set_measurements(&mut self, temperature: f32, humidity: f32, pressure: f32) {
+        self.temperature = temperature;
+        self.humidity = humidity;
+        self.pressure = pressure;
+        self.notify_observers();
+    }
+    
+    fn notify_observers(&self) {
+        for observer in &self.observers {
+            observer.borrow().update(self.temperature, self.humidity, self.pressure);
+        }
+    }
+}
+
+struct CurrentConditionsDisplay {
+    temperature: f32,
+    humidity: f32,
+}
+
+impl CurrentConditionsDisplay {
+    fn new() -> Self {
+        Self {
+            temperature: 0.0,
+            humidity: 0.0,
+        }
+    }
+    
+    fn display(&self) {
+        println!("Current conditions: {:.1}°C and {:.1}% humidity", 
+                 self.temperature, self.humidity);
+    }
+}
+
+impl Observer for CurrentConditionsDisplay {
+    fn update(&self, temperature: f32, humidity: f32, _pressure: f32) {
+        println!("CurrentConditionsDisplay: Temperature={:.1}°C, Humidity={:.1}%", 
+                 temperature, humidity);
+    }
+}
+
+// 使用示例
+fn observer_pattern_example() {
+    let mut weather_data = WeatherData::new();
+    
+    let display = Rc::new(RefCell::new(CurrentConditionsDisplay::new()));
+    weather_data.register_observer(display.clone());
+    
+    // 更新天气数据，自动通知所有观察者
+    weather_data.set_measurements(25.5, 65.0, 1013.0);
+    weather_data.set_measurements(26.0, 70.0, 1012.0);
+}
+```
+
+---
+
+### 9. Command 模式（命令模式）
+
+**问题**：如何将请求封装为对象？
+
+**解决方案**：使用命令对象封装请求。
+
+```rust
+trait Command {
+    fn execute(&self);
+    fn undo(&self);
+}
+
+struct Light {
+    is_on: std::cell::RefCell<bool>,
+}
+
+impl Light {
+    fn new() -> Self {
+        Self {
+            is_on: std::cell::RefCell::new(false),
+        }
+    }
+    
+    fn turn_on(&self) {
+        *self.is_on.borrow_mut() = true;
+        println!("Light is ON");
+    }
+    
+    fn turn_off(&self) {
+        *self.is_on.borrow_mut() = false;
+        println!("Light is OFF");
+    }
+}
+
+struct LightOnCommand {
+    light: std::rc::Rc<Light>,
+}
+
+impl Command for LightOnCommand {
+    fn execute(&self) {
+        self.light.turn_on();
+    }
+    
+    fn undo(&self) {
+        self.light.turn_off();
+    }
+}
+
+struct LightOffCommand {
+    light: std::rc::Rc<Light>,
+}
+
+impl Command for LightOffCommand {
+    fn execute(&self) {
+        self.light.turn_off();
+    }
+    
+    fn undo(&self) {
+        self.light.turn_on();
+    }
+}
+
+struct RemoteControl {
+    command: Option<Box<dyn Command>>,
+}
+
+impl RemoteControl {
+    fn new() -> Self {
+        Self { command: None }
+    }
+    
+    fn set_command(&mut self, command: Box<dyn Command>) {
+        self.command = Some(command);
+    }
+    
+    fn press_button(&self) {
+        if let Some(cmd) = &self.command {
+            cmd.execute();
+        }
+    }
+    
+    fn press_undo(&self) {
+        if let Some(cmd) = &self.command {
+            cmd.undo();
+        }
+    }
+}
+
+// 使用示例
+fn command_pattern_example() {
+    let light = std::rc::Rc::new(Light::new());
+    let mut remote = RemoteControl::new();
+    
+    // 设置开灯命令
+    remote.set_command(Box::new(LightOnCommand {
+        light: light.clone(),
+    }));
+    remote.press_button(); // 开灯
+    remote.press_undo();   // 撤销（关灯）
+    
+    // 设置关灯命令
+    remote.set_command(Box::new(LightOffCommand {
+        light: light.clone(),
+    }));
+    remote.press_button(); // 关灯
+}
+```
+
+---
+
+## 🦀 Rust 特有模式
+
+### 10. Newtype 模式
+
+**问题**：如何为现有类型添加新的语义和行为？
+
+**解决方案**：使用元组结构体包装类型。
+
+```rust
+// Newtype 包装器
+struct Meters(f64);
+struct Kilometers(f64);
+
+impl Meters {
+    fn to_kilometers(&self) -> Kilometers {
+        Kilometers(self.0 / 1000.0)
+    }
+}
+
+impl Kilometers {
+    fn to_meters(&self) -> Meters {
+        Meters(self.0 * 1000.0)
+    }
+}
+
+// 类型安全的ID
+struct UserId(u64);
+struct ProductId(u64);
+
+fn get_user(id: UserId) -> String {
+    format!("User with ID: {}", id.0)
+}
+
+fn get_product(id: ProductId) -> String {
+    format!("Product with ID: {}", id.0)
+}
+
+// 使用示例
+fn newtype_pattern_example() {
+    let distance = Meters(5000.0);
+    let km = distance.to_kilometers();
+    println!("Distance: {} km", km.0);
+    
+    let user_id = UserId(123);
+    let product_id = ProductId(456);
+    
+    println!("{}", get_user(user_id));
+    println!("{}", get_product(product_id));
+    
+    // 编译错误：类型不匹配
+    // get_user(product_id);
+}
+```
+
+---
+
+### 11. RAII 模式（资源获取即初始化）
+
+**问题**：如何确保资源被正确释放？
+
+**解决方案**：利用Rust的Drop trait自动管理资源。
+
+```rust
+use std::fs::File;
+use std::io::Write;
+
+struct FileGuard {
+    file: File,
+    auto_close: bool,
+}
+
+impl FileGuard {
+    fn new(path: &str) -> std::io::Result<Self> {
+        Ok(Self {
+            file: File::create(path)?,
+            auto_close: true,
+        })
+    }
+    
+    fn write(&mut self, data: &str) -> std::io::Result<()> {
+        self.file.write_all(data.as_bytes())
+    }
+}
+
+impl Drop for FileGuard {
+    fn drop(&mut self) {
+        if self.auto_close {
+            println!("FileGuard: Automatically closing file");
+        }
+    }
+}
+
+// 使用示例
+fn raii_pattern_example() -> std::io::Result<()> {
+    {
+        let mut guard = FileGuard::new("test.txt")?;
+        guard.write("Hello RAII")?;
+        // 离开作用域时自动调用Drop
+    } // FileGuard::drop() 在这里被调用
+    
+    println!("File closed automatically!");
+    Ok(())
+}
+```
+
+---
+
+### 12. Type State 模式（类型状态模式）
+
+**问题**：如何在编译时强制状态机的正确性？
+
+**解决方案**：使用类型系统表示状态。
+
+```rust
+struct Locked;
+struct Unlocked;
+
+struct Door<State> {
+    _state: std::marker::PhantomData<State>,
+}
+
+impl Door<Locked> {
+    fn new() -> Self {
+        println!("Creating a locked door");
+        Self {
+            _state: std::marker::PhantomData,
+        }
+    }
+    
+    fn unlock(self) -> Door<Unlocked> {
+        println!("Unlocking door");
+        Door {
+            _state: std::marker::PhantomData,
+        }
+    }
+}
+
+impl Door<Unlocked> {
+    fn open(&self) {
+        println!("Opening door");
+    }
+    
+    fn lock(self) -> Door<Locked> {
+        println!("Locking door");
+        Door {
+            _state: std::marker::PhantomData,
+        }
+    }
+}
+
+// 使用示例
+fn type_state_pattern_example() {
+    let door = Door::<Locked>::new();
+    
+    // 编译错误：locked的门不能打开
+    // door.open();
+    
+    let door = door.unlock();
+    door.open(); // OK: unlocked的门可以打开
+    
+    let door = door.lock();
+    // 编译错误：又locked了
+    // door.open();
+}
+```
+
+---
+
+## 📊 模式对比与选择
+
+| 模式 | 使用场景 | 优点 | 缺点 |
+|------|---------|------|------|
+| **Builder** | 复杂对象构建 | 灵活、可读性好 | 代码量大 |
+| **Factory** | 对象创建逻辑复杂 | 解耦创建和使用 | 增加类数量 |
+| **Singleton** | 全局唯一实例 | 节省资源 | 难以测试 |
+| **Adapter** | 接口不兼容 | 复用现有代码 | 增加复杂度 |
+| **Decorator** | 动态添加功能 | 灵活扩展 | 层次多时难debug |
+| **Facade** | 简化复杂系统 | 降低耦合 | 可能成为上帝对象 |
+| **Strategy** | 算法可互换 | 易扩展 | 客户端需了解策略 |
+| **Observer** | 一对多依赖 | 松耦合 | 可能内存泄漏 |
+| **Command** | 请求参数化 | 支持撤销 | 命令类膨胀 |
+| **Newtype** | 类型安全 | 零成本抽象 | 需要手动实现trait |
+| **RAII** | 资源管理 | 自动释放 | 需理解生命周期 |
+| **Type State** | 状态机 | 编译时检查 | 学习曲线陡峭 |
+
+---
+
+## 🚀 实战建议
+
+1. **优先使用Rust惯用模式**：Newtype, RAII, Type State
+2. **避免过度设计**：只在需要时使用模式
+3. **利用类型系统**：让编译器帮你检查
+4. **零成本抽象**：确保模式不影响性能
+5. **测试驱动**：为每个模式编写单元测试
+
+---
+
+**更新日期**: 2025-10-24  
+**文档版本**: 2.0  
+**维护者**: C02 Type System Team
+

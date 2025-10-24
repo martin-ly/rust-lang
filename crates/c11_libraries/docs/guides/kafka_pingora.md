@@ -25,9 +25,20 @@
     - [反向代理实现](#反向代理实现)
     - [负载均衡](#负载均衡)
     - [中间件开发](#中间件开发)
-    - [](#)
-  - [Pingora MVP 路线图（建议）](#pingora-mvp-路线图建议)
-  - [常见问题与排查](#常见问题与排查)
+    - [性能调优](#性能调优)
+  - [生产环境部署](#生产环境部署)
+    - [Kafka 生产环境配置](#kafka-生产环境配置)
+    - [Pingora 生产环境部署](#pingora-生产环境部署)
+  - [监控与可观测性](#监控与可观测性)
+    - [Kafka 监控](#kafka-监控)
+    - [Pingora 监控](#pingora-监控)
+  - [故障排查](#故障排查)
+    - [Kafka 常见问题](#kafka-常见问题)
+    - [Pingora 常见问题](#pingora-常见问题)
+  - [总结](#总结)
+    - [Kafka 核心要点](#kafka-核心要点)
+    - [Pingora 核心要点](#pingora-核心要点)
+    - [最佳实践建议](#最佳实践建议)
 
 ---
 
@@ -1022,31 +1033,453 @@ impl CircuitBreaker {
 }
 ```
 
+### 性能调优
+
+**Pingora 性能优化配置**:
+
+```rust
+use pingora::server::configuration::Opt;
+
+let opt = Opt {
+    upgrade: false,
+    daemon: false,
+    nocapture: false,
+    test: false,
+    conf: Some("/etc/pingora/conf.yaml".to_string()),
+};
+
+// 配置文件示例 (conf.yaml)
+// ---
+// version: 1
+// threads: 4  # 工作线程数
+// error_log: "/var/log/pingora/error.log"
+// pid_file: "/var/run/pingora.pid"
+// upgrade_sock: "/tmp/pingora_upgrade.sock"
+// user: nobody
+// group: nogroup
+```
+
+**连接池管理**:
+
+```rust
+use pingora::upstreams::peer::HttpPeer;
+use pingora::connectors::http::Connector;
+
+// 配置连接池
+let connector = Connector::new(Some(128));  // 最大128个连接
+
+// 连接复用
+let peer = HttpPeer::new(
+    "127.0.0.1:8080".parse()?,
+    true,  // 启用连接复用
+    "".to_string(),
+);
+```
+
 ---
 
-###
+## 生产环境部署
 
-## Pingora MVP 路线图（建议）
+### Kafka 生产环境配置
 
-- 阶段 1：最小反代
-  - 监听地址、静态上游、基础超时（连接/请求/上游）
+**Broker 配置建议**:
 
-- 阶段 2：中间件与路由
-  - 可插拔中间件：限流、重试、熔断、Tracing
-  - 路由：基于前缀/Host/权重；健康检查
+```properties
+# server.properties
 
-- 阶段 3：TLS 与安全
-  - 终止 TLS（SNI）、上游 TLS、ACL
-  - 指标：QPS/P95/P99、上游可用率
+# 基础配置
+broker.id=1
+listeners=PLAINTEXT://:9092,SSL://:9093
+advertised.listeners=PLAINTEXT://kafka1.example.com:9092
+num.network.threads=8
+num.io.threads=16
 
-## 常见问题与排查
+# 日志配置
+log.dirs=/var/kafka-logs
+num.partitions=6
+default.replication.factor=3
+min.insync.replicas=2
 
-- Kafka 无法连接：
-  - 检查 `bootstrap.servers` 可达性与安全配置；查看 broker 日志
-  - Windows 下确认 `librdkafka` 安装与动态库路径（`PATH`）
-- 消费无消息：
-  - 检查 `group.id`、`auto.offset.reset`，以及主题/分区权限
-- Pingora 502/超时：
-  - 检查上游可达性与超时设置；查看 CPU 与连接数限制
+# 日志保留
+log.retention.hours=168
+log.retention.bytes=1073741824
+log.segment.bytes=1073741824
 
-> 当你提供明确的 MVP 需求（主题数/分区、SASL/TLS、位点策略、代理路由规则等），我将据此优先实现并提供端到端示例。
+# 性能调优
+socket.send.buffer.bytes=102400
+socket.receive.buffer.bytes=102400
+socket.request.max.bytes=104857600
+num.replica.fetchers=4
+```
+
+**Topic 创建最佳实践**:
+
+```bash
+# 创建生产环境 Topic
+kafka-topics --create \
+  --bootstrap-server localhost:9092 \
+  --topic orders \
+  --partitions 12 \
+  --replication-factor 3 \
+  --config min.insync.replicas=2 \
+  --config retention.ms=604800000 \
+  --config compression.type=lz4
+
+# 查看 Topic 详情
+kafka-topics --describe \
+  --bootstrap-server localhost:9092 \
+  --topic orders
+```
+
+---
+
+### Pingora 生产环境部署
+
+**Systemd 服务配置**:
+
+```ini
+# /etc/systemd/system/pingora.service
+[Unit]
+Description=Pingora HTTP Proxy
+After=network.target
+
+[Service]
+Type=simple
+User=pingora
+Group=pingora
+WorkingDirectory=/opt/pingora
+ExecStart=/opt/pingora/bin/pingora -c /etc/pingora/conf.yaml
+Restart=always
+RestartSec=5
+LimitNOFILE=1048576
+
+[Install]
+WantedBy=multi-user.target
+```
+
+**启动和管理**:
+
+```bash
+# 启动服务
+sudo systemctl start pingora
+
+# 查看状态
+sudo systemctl status pingora
+
+# 查看日志
+sudo journalctl -u pingora -f
+
+# 优雅重启（零停机）
+sudo systemctl reload pingora
+```
+
+---
+
+## 监控与可观测性
+
+### Kafka 监控
+
+**JMX 监控指标**:
+
+```bash
+# 启用 JMX
+export KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote \
+  -Dcom.sun.management.jmxremote.authenticate=false \
+  -Dcom.sun.management.jmxremote.ssl=false \
+  -Djava.rmi.server.hostname=kafka1.example.com \
+  -Dcom.sun.management.jmxremote.port=9999"
+```
+
+**关键指标**:
+
+1. **生产者指标**:
+   - `record-send-rate`: 发送速率
+   - `record-error-rate`: 错误率
+   - `request-latency-avg`: 平均延迟
+   - `buffer-available-bytes`: 可用缓冲区
+
+2. **消费者指标**:
+   - `records-consumed-rate`: 消费速率
+   - `records-lag`: 消息积压
+   - `commit-latency-avg`: 提交延迟
+   - `fetch-latency-avg`: 拉取延迟
+
+**使用 Prometheus 监控**:
+
+```rust
+use prometheus::{register_counter, register_histogram, Counter, Histogram};
+
+lazy_static::lazy_static! {
+    static ref KAFKA_MESSAGES_SENT: Counter = register_counter!(
+        "kafka_messages_sent_total",
+        "Total number of messages sent to Kafka"
+    ).unwrap();
+    
+    static ref KAFKA_SEND_DURATION: Histogram = register_histogram!(
+        "kafka_send_duration_seconds",
+        "Time spent sending messages to Kafka"
+    ).unwrap();
+}
+
+async fn send_with_metrics(
+    producer: &FutureProducer,
+    topic: &str,
+    message: &str,
+) -> anyhow::Result<()> {
+    let timer = KAFKA_SEND_DURATION.start_timer();
+    
+    producer.send(
+        FutureRecord::to(topic).payload(message),
+        Duration::from_secs(5),
+    ).await.map_err(|(e, _)| e)?;
+    
+    KAFKA_MESSAGES_SENT.inc();
+    timer.observe_duration();
+    
+    Ok(())
+}
+```
+
+---
+
+### Pingora 监控
+
+**内置指标端点**:
+
+```rust
+use pingora::services::listening::Service;
+
+// 添加监控端点
+let mut monitoring_service = Service::prometheus_http_service();
+monitoring_service.add_tcp("0.0.0.0:9090");
+server.add_service(monitoring_service);
+```
+
+**自定义指标**:
+
+```rust
+use prometheus::{Counter, Histogram, register_counter, register_histogram};
+
+lazy_static::lazy_static! {
+    static ref PROXY_REQUESTS: Counter = register_counter!(
+        "pingora_requests_total",
+        "Total number of proxy requests"
+    ).unwrap();
+    
+    static ref PROXY_DURATION: Histogram = register_histogram!(
+        "pingora_request_duration_seconds",
+        "Request duration in seconds"
+    ).unwrap();
+}
+
+#[async_trait]
+impl ProxyHttp for MonitoredProxy {
+    async fn request_filter(
+        &self,
+        session: &mut Session,
+        _ctx: &mut Self::CTX,
+    ) -> Result<bool> {
+        PROXY_REQUESTS.inc();
+        Ok(false)
+    }
+}
+```
+
+---
+
+## 故障排查
+
+### Kafka 常见问题
+
+**问题 1: 消息发送失败**:
+
+```rust
+// 错误: "Request timeout"
+// 原因: 网络问题或 broker 不可达
+
+// 解决方案:
+let producer: FutureProducer = ClientConfig::new()
+    .set("bootstrap.servers", "localhost:9092")
+    .set("request.timeout.ms", "60000")  // 增加超时
+    .set("retries", "10")  // 增加重试次数
+    .create()?;
+```
+
+**问题 2: 消费者 Rebalance 频繁**:
+
+```rust
+// 原因: 消费处理时间过长，超过 max.poll.interval.ms
+
+// 解决方案:
+let consumer: StreamConsumer = ClientConfig::new()
+    .set("bootstrap.servers", "localhost:9092")
+    .set("group.id", "my-group")
+    .set("max.poll.interval.ms", "600000")  // 增加到 10 分钟
+    .set("session.timeout.ms", "30000")     // 会话超时 30s
+    .create()?;
+
+// 或者使用并发消费减少处理时间
+```
+
+**问题 3: 消息积压 (Lag)**:
+
+```bash
+# 查看消费者 Lag
+kafka-consumer-groups --bootstrap-server localhost:9092 \
+  --describe --group my-group
+
+# 解决方案:
+# 1. 增加消费者数量（不超过分区数）
+# 2. 提升单个消费者的处理速度
+# 3. 增加分区数（需要重新分配）
+```
+
+**问题 4: librdkafka 编译/链接问题 (Windows)**:
+
+```powershell
+# 解决方案 1: 使用 vcpkg
+vcpkg install librdkafka:x64-windows
+vcpkg integrate install
+
+# 解决方案 2: 设置环境变量
+$env:RDKAFKA_LIB_DIR = "C:\path\to\librdkafka\lib"
+$env:RDKAFKA_INCLUDE_DIR = "C:\path\to\librdkafka\include"
+$env:PATH += ";C:\path\to\librdkafka\bin"
+
+# 解决方案 3: 使用 WSL
+wsl
+sudo apt-get install librdkafka-dev
+cargo build
+```
+
+---
+
+### Pingora 常见问题
+
+**问题 1: 502 Bad Gateway**:
+
+```rust
+// 原因: 上游服务不可达或响应超时
+
+// 解决方案: 添加超时和重试
+pub struct ResilientProxy;
+
+#[async_trait]
+impl ProxyHttp for ResilientProxy {
+    async fn upstream_peer(
+        &self,
+        _session: &mut Session,
+        _ctx: &mut Self::CTX,
+    ) -> Result<Box<HttpPeer>> {
+        let mut peer = HttpPeer::new(
+            "127.0.0.1:8080".parse()?,
+            false,
+            "".to_string(),
+        );
+        
+        // 设置超时
+        peer.options.connection_timeout = Some(Duration::from_secs(5));
+        peer.options.read_timeout = Some(Duration::from_secs(30));
+        
+        Ok(Box::new(peer))
+    }
+}
+```
+
+**问题 2: 连接数过多**:
+
+```bash
+# 检查连接数
+netstat -an | grep ESTABLISHED | wc -l
+
+# 解决方案:
+# 1. 启用连接复用
+# 2. 调整系统限制
+sudo sysctl -w net.core.somaxconn=65535
+sudo sysctl -w net.ipv4.tcp_max_syn_backlog=8192
+
+# 3. 调整文件描述符限制
+ulimit -n 1048576
+```
+
+**问题 3: 性能不达预期**:
+
+```rust
+// 检查点:
+// 1. 工作线程数是否合理 (通常 = CPU 核心数)
+// 2. 是否启用连接复用
+// 3. 上游响应是否慢
+
+// 性能分析:
+use tokio::time::Instant;
+
+#[async_trait]
+impl ProxyHttp for ProfilingProxy {
+    async fn request_filter(
+        &self,
+        session: &mut Session,
+        ctx: &mut Self::CTX,
+    ) -> Result<bool> {
+        ctx.start_time = Some(Instant::now());
+        Ok(false)
+    }
+    
+    async fn response_filter(
+        &self,
+        _session: &mut Session,
+        ctx: &mut Self::CTX,
+    ) -> Result<()> {
+        if let Some(start) = ctx.start_time {
+            let duration = start.elapsed();
+            println!("请求耗时: {:?}", duration);
+        }
+        Ok(())
+    }
+}
+```
+
+---
+
+## 总结
+
+本指南涵盖了 Kafka 和 Pingora 的完整实战内容：
+
+### Kafka 核心要点
+
+- ✅ 理解分区、副本、消费者组等核心概念
+- ✅ 掌握生产者和消费者的配置与优化
+- ✅ 实现事务和幂等性保证消息可靠性
+- ✅ 配置 TLS/SASL 确保安全性
+- ✅ 监控关键指标，及时发现问题
+
+### Pingora 核心要点
+
+- ✅ 理解 Pingora 的异步架构和模块化设计
+- ✅ 实现反向代理和负载均衡
+- ✅ 开发自定义中间件（限流、熔断等）
+- ✅ 优化配置以达到高性能
+- ✅ 部署到生产环境并做好监控
+
+### 最佳实践建议
+
+1. **开发环境**: 使用 Docker 快速搭建测试环境
+2. **配置管理**: 使用配置文件而非硬编码
+3. **错误处理**: 完善的错误处理和重试机制
+4. **监控告警**: 建立完整的监控和告警体系
+5. **容量规划**: 提前做好容量规划和扩容准备
+6. **文档记录**: 记录配置变更和故障处理过程
+
+---
+
+**相关资源**:
+
+- [Kafka 官方文档](https://kafka.apache.org/documentation/)
+- [rdkafka-rust GitHub](https://github.com/fede1024/rust-rdkafka)
+- [Pingora GitHub](https://github.com/cloudflare/pingora)
+- [Rust 异步编程](https://rust-lang.github.io/async-book/)
+
+---
+
+**更新日期**: 2025-10-24  
+**文档版本**: 1.0  
+**反馈**: 如有问题或建议，欢迎提 Issue

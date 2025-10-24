@@ -6,7 +6,6 @@
 
 ---
 
-
 ## 📊 目录
 
 - [设计模式多维矩阵对比 (Multidimensional Matrix Comparison)](#设计模式多维矩阵对比-multidimensional-matrix-comparison)
@@ -47,7 +46,6 @@
   - [🔍 使用指南](#-使用指南)
     - [如何使用本对比矩阵](#如何使用本对比矩阵)
   - [📚 参考资源](#-参考资源)
-
 
 ## 📊 文档概览
 

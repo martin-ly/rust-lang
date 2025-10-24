@@ -2,7 +2,6 @@
 
 > 适用范围：Rust 1.90+，Tokio 1.35+。文档风格遵循 [`DOCUMENTATION_STANDARDS.md`](../../docs/DOCUMENTATION_STANDARDS.md)。
 
-
 ## 📊 目录
 
 - [C11 开发库 - 综合文档索引](#c11-开发库---综合文档索引)
@@ -62,14 +61,13 @@
     - [3. 更新状态](#3-更新状态)
   - [📞 获取帮助](#-获取帮助)
 
-
 [![Rust](https://img.shields.io/badge/rust-1.90+-orange.svg)](https://www.rust-lang.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](../../LICENSE)
 
 ## 📋 目录
 
 - [C11 开发库 - 综合文档索引](#c11-开发库---综合文档索引)
-  - [� 目录](#-目录)
+  - [📊 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [🎯 概述](#-概述)
     - [1. 文档体系](#1-文档体系)
