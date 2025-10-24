@@ -1,5 +1,13 @@
 ﻿# 递归迭代补充：借用检查器外部链接的形式化论证与证明
 
+
+## 📊 目录
+
+- [1. 权威论文与学术资源](#1-权威论文与学术资源)
+- [2. 官方文档与工具源码](#2-官方文档与工具源码)
+- [3. 社区实践与前沿动态](#3-社区实践与前沿动态)
+
+
 ## 1. 权威论文与学术资源
 
 - [RustBelt: Securing the Foundations of the Rust Programming Language](https://plv.mpi-sws.org/rustbelt/)

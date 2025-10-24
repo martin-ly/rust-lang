@@ -1,4 +1,14 @@
-# Category Design Pattern
+﻿# Category Design Pattern
+
+
+## 📊 目录
+
+- [1. 创建型设计模式（Creational Patterns）](#1-创建型设计模式creational-patterns)
+  - [1.1 范畴论视角下的创建型模式](#11-范畴论视角下的创建型模式)
+  - [2. 结构型设计模式（Structural Patterns）](#2-结构型设计模式structural-patterns)
+    - [2.1范畴论视角下的结构型模式](#21范畴论视角下的结构型模式)
+  - [3. 行为型设计模式（Behavioral Patterns）](#3-行为型设计模式behavioral-patterns)
+
 
 以范畴论的视角来看待软件设计模式是一种创新的方式，它不仅帮助我们深入理解设计模式的本质，还能为软件架构设计提供更高层次的抽象。
 范畴论的核心思想围绕对象（或称为实体）与态射（或称为映射、关系）之间的相互作用，而软件设计模式本质上也处理了对象及其之间的关系。

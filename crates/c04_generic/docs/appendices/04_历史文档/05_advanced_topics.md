@@ -1,8 +1,26 @@
-# 05. 高级泛型主题 (Advanced Generic Topics)
+﻿# 05. 高级泛型主题 (Advanced Generic Topics)
 
 > **文档定位**: 深入探讨泛型系统的高级主题，包括多态、类型构造器和高阶类型  
 > **先修知识**: [关联类型](./04_associated_types.md), 所有前置主题  
 > **相关文档**: [实践指南](./PRACTICAL_GENERICS_GUIDE.md) | [版本历史](./06_rust_features/RUST_VERSION_HISTORY_ACCURATE.md)
+
+
+## 📊 目录
+
+- [📋 本文内容](#本文内容)
+- [5.1. Rust 中的多态 (Polymorphism)](#51-rust-中的多态-polymorphism)
+  - [5.1.1. 静态多态 (Static Polymorphism)](#511-静态多态-static-polymorphism)
+  - [5.1.2. 动态多态 (Dynamic Polymorphism)](#512-动态多态-dynamic-polymorphism)
+- [5.2. 类型构造器 (Type Constructors)](#52-类型构造器-type-constructors)
+- [5.3. A Note on Higher-Kinded Types (HKT)](#53-a-note-on-higher-kinded-types-hkt)
+- [5.4. 现代泛型特性进展 (2025年更新) 🆕](#54-现代泛型特性进展-2025年更新)
+  - [5.4.1. GATs - Generic Associated Types (已稳定)](#541-gats-generic-associated-types-已稳定)
+  - [5.4.2. RPITIT - Return Position Impl Trait In Traits (已稳定)](#542-rpitit-return-position-impl-trait-in-traits-已稳定)
+  - [5.4.3. 常量泛型改进](#543-常量泛型改进)
+  - [5.4.4. 未来展望](#544-未来展望)
+- [📚 相关资源](#相关资源)
+- [🔗 外部参考](#外部参考)
+
 
 **最后更新**: 2025-10-19  
 **适用版本**: Rust 1.75+ (包含GATs和RPITIT)  

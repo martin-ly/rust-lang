@@ -1,4 +1,47 @@
-# API 参考文档
+﻿# API 参考文档
+
+
+## 📊 目录
+
+- [核心模块](#核心模块)
+  - [error_handling](#error_handling)
+    - [UnifiedError](#unifiederror)
+    - [ErrorSeverity](#errorseverity)
+    - [ErrorContext](#errorcontext)
+  - [fault_tolerance](#fault_tolerance)
+    - [CircuitBreaker](#circuitbreaker)
+    - [RetryPolicy](#retrypolicy)
+    - [Retrier](#retrier)
+  - [runtime_monitoring](#runtime_monitoring)
+    - [HealthChecker](#healthchecker)
+    - [HealthCheck](#healthcheck)
+    - [HealthStatus](#healthstatus)
+    - [ResourceMonitor](#resourcemonitor)
+    - [PerformanceMonitor](#performancemonitor)
+  - [chaos_engineering](#chaos_engineering)
+    - [FaultInjector](#faultinjector)
+    - [ChaosScenario](#chaosscenario)
+  - [config](#config)
+    - [ConfigManager](#configmanager)
+    - [ReliabilityConfig](#reliabilityconfig)
+  - [metrics](#metrics)
+    - [MetricsCollector](#metricscollector)
+    - [MetricValue](#metricvalue)
+  - [utils](#utils)
+    - [DurationExt](#durationext)
+    - [PerformanceUtils](#performanceutils)
+    - [ConfigUtils](#configutils)
+- [宏](#宏)
+  - [log_error](#log_error)
+- [全局函数](#全局函数)
+  - [init()](#init)
+  - [shutdown()](#shutdown)
+  - [version()](#version)
+  - [name()](#name)
+- [错误处理](#错误处理)
+- [异步支持](#异步支持)
+- [线程安全](#线程安全)
+
 
 ## 核心模块
 

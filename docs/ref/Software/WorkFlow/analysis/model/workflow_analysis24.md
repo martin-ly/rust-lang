@@ -1,4 +1,15 @@
-# 架构批判和建议
+﻿# 架构批判和建议
+
+
+## 📊 目录
+
+- [1. **核心批判点：从 AI 集成视角看，当前设计可能存在的理论或实践缺陷**](#1-核心批判点从-ai-集成视角看当前设计可能存在的理论或实践缺陷)
+  - [1.1 **批判点 1: "自适应结构 Fabric" 的潜在形式不透明性 (Potential Formal Opacity of the Fabric)**](#11-批判点-1-自适应结构-fabric-的潜在形式不透明性-potential-formal-opacity-of-the-fabric)
+  - [1.2  **批判点 2: `Effect` 和 `Cell` 契约的语义不足 (Semantic Insufficiency of Contracts)**](#12-批判点-2-effect-和-cell-契约的语义不足-semantic-insufficiency-of-contracts)
+  - [1.3 **批判点 3: 对 `Cell` 内部逻辑和 `Handler` 实现的过度抽象 (Over-Abstraction of Internal Logic)**](#13-批判点-3-对-cell-内部逻辑和-handler-实现的过度抽象-over-abstraction-of-internal-logic)
+  - [1.4  **批判点 4: AI 与架构的共生演化问题 (Co-evolution Problem)**](#14-批判点-4-ai-与架构的共生演化问题-co-evolution-problem)
+- [2. **结论性判断与方向建议 (基于批判性原则):**](#2-结论性判断与方向建议-基于批判性原则)
+
 
 ```text
 The user is expressing doubt about the novelty and feasibility of their proposed architecture after I mentioned the lack of existing direct implementations.

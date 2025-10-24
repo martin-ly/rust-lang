@@ -1,4 +1,4 @@
-# 高级生命周期 - Advanced Lifetimes
+﻿# 高级生命周期 - Advanced Lifetimes
 
 **版本**: 1.0  
 **最后更新**: 2025-01-27  

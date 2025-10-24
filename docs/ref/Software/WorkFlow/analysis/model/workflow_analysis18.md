@@ -1,4 +1,16 @@
-# 模型分析
+﻿# 模型分析
+
+
+## 📊 目录
+
+- [**I. TLA+ (Temporal Logic of Actions)**](#i-tla-temporal-logic-of-actions)
+- [**具体细节 (以 Effect 生命周期为例 - 简化模型):**](#具体细节-以-effect-生命周期为例-简化模型)
+- [**完备性与边界:**](#完备性与边界)
+- [**II. 模型检查 (Model Checking)**](#ii-模型检查-model-checking)
+- [**III. 类型系统 (Rust Focus)**](#iii-类型系统-rust-focus)
+- [**IV. 行为分类、组合性与演进**](#iv-行为分类组合性与演进)
+- [**总结:**](#总结)
+
 
 好的，我理解您需要更深入、更具体的阐述，
 使用形式化方法的语言和示例来论证该架构的关键方面，

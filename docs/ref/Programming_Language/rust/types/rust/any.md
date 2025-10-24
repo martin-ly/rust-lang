@@ -1,4 +1,19 @@
-# Any 类型与显式类型转换
+﻿# Any 类型与显式类型转换
+
+
+## 📊 目录
+
+- [1. `Any` 类型](#1-any-类型)
+  - [定义与用途](#定义与用途)
+  - [示例](#示例)
+- [2. 显式类型转换](#2-显式类型转换)
+  - [主要转换方式](#主要转换方式)
+  - [(1) 使用 `as` 操作符](#1-使用-as-操作符)
+  - [(2) 利用 `From`/`Into` 与 `TryFrom`/`TryInto` Trait](#2-利用-frominto-与-tryfromtryinto-trait)
+  - [(3) 自动解引用转换（Deref Coercion）](#3-自动解引用转换deref-coercion)
+- [总结](#总结)
+  - [解释](#解释)
+
 
 下面介绍下 Rust 中的 `Any` 类型（其实就是 [`std::any::Any`](https://doc.rust-lang.org/std/any/trait.Any.html) trait）
 与显式类型转换（explicit type conversion）的基本概念、用途以及示例代码，帮助大家理解这两者在 Rust 类型系统中的应用场景。

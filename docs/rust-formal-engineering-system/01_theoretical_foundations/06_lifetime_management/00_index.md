@@ -1,4 +1,17 @@
-# 生命周期管理（Lifetime Management）索引
+﻿# 生命周期管理（Lifetime Management）索引
+
+
+## 📊 目录
+
+- [目的](#目的)
+- [核心概念](#核心概念)
+- [与 Rust 的关联](#与-rust-的关联)
+- [术语（Terminology）](#术语terminology)
+- [形式化与证明（Formalization）](#形式化与证明formalization)
+- [实践与样例（Practice）](#实践与样例practice)
+- [相关索引](#相关索引)
+- [导航](#导航)
+
 
 ## 目的
 

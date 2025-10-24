@@ -1,4 +1,34 @@
-# 🏗️ Rust模块设计模式最佳实践
+﻿# 🏗️ Rust模块设计模式最佳实践
+
+
+## 📊 目录
+
+- [概述](#概述)
+- [1. 模块组织基础模式](#1-模块组织基础模式)
+  - [1.1 分层架构模式 (Layered Architecture Pattern)](#11-分层架构模式-layered-architecture-pattern)
+  - [1.2 功能模块模式 (Feature Module Pattern)](#12-功能模块模式-feature-module-pattern)
+  - [1.3 领域驱动设计模式 (Domain-Driven Design Pattern)](#13-领域驱动设计模式-domain-driven-design-pattern)
+- [2. 高级模块组织模式](#2-高级模块组织模式)
+  - [2.1 插件架构模式 (Plugin Architecture Pattern)](#21-插件架构模式-plugin-architecture-pattern)
+  - [2.2 微服务模块模式 (Microservice Module Pattern)](#22-微服务模块模式-microservice-module-pattern)
+  - [2.3 事件驱动架构模式 (Event-Driven Architecture Pattern)](#23-事件驱动架构模式-event-driven-architecture-pattern)
+- [3. 模块依赖管理](#3-模块依赖管理)
+  - [3.1 依赖注入模式 (Dependency Injection Pattern)](#31-依赖注入模式-dependency-injection-pattern)
+  - [3.2 模块配置模式 (Module Configuration Pattern)](#32-模块配置模式-module-configuration-pattern)
+- [4. 模块生命周期管理](#4-模块生命周期管理)
+  - [4.1 模块初始化模式 (Module Initialization Pattern)](#41-模块初始化模式-module-initialization-pattern)
+  - [4.2 模块热重载模式 (Module Hot Reload Pattern)](#42-模块热重载模式-module-hot-reload-pattern)
+- [5. 模块测试组织](#5-模块测试组织)
+  - [5.1 模块测试结构 (Module Test Structure)](#51-模块测试结构-module-test-structure)
+  - [5.2 模块性能测试 (Module Performance Testing)](#52-模块性能测试-module-performance-testing)
+- [6. 模块文档组织](#6-模块文档组织)
+  - [6.1 模块文档结构 (Module Documentation Structure)](#61-模块文档结构-module-documentation-structure)
+  - [6.2 代码文档标准 (Code Documentation Standards)](#62-代码文档标准-code-documentation-standards)
+- [7. 模块最佳实践总结](#7-模块最佳实践总结)
+  - [7.1 模块设计原则](#71-模块设计原则)
+  - [7.2 模块组织原则](#72-模块组织原则)
+  - [7.3 性能考虑](#73-性能考虑)
+
 
 ## 概述
 

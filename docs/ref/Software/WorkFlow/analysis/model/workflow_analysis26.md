@@ -1,4 +1,16 @@
-# 结构层架构反思
+﻿# 结构层架构反思
+
+
+## 📊 目录
+
+- [**1. 在结构层 (`Architecture_Structural`) 中三者的体现：**](#1-在结构层-architecture_structural-中三者的体现)
+- [**2. 结构层面的相互关系与“转换”分析：**](#2-结构层面的相互关系与转换分析)
+- [**3. 更全面的分析工具/视角 (超越直接转换):**](#3-更全面的分析工具视角-超越直接转换)
+  - [3.1 **Petri Nets:**](#31-petri-nets)
+  - [3.2 **Process Calculi (如 CSP, π-calculus):**](#32-process-calculi-如-csp-π-calculus)
+  - [3.3 **Graph Theory:**](#33-graph-theory)
+- [**结论与建议:**](#结论与建议)
+
 
 ```text
 

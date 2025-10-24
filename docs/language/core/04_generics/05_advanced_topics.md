@@ -1,4 +1,14 @@
-# 05. 高级泛型主题 (Advanced Generic Topics)
+﻿# 05. 高级泛型主题 (Advanced Generic Topics)
+
+
+## 📊 目录
+
+- [5.1. Rust 中的多态 (Polymorphism)](#51-rust-中的多态-polymorphism)
+  - [5.1.1. 静态多态 (Static Polymorphism)](#511-静态多态-static-polymorphism)
+  - [5.1.2. 动态多态 (Dynamic Polymorphism)](#512-动态多态-dynamic-polymorphism)
+- [5.2. 类型构造器 (Type Constructors)](#52-类型构造器-type-constructors)
+- [5.3. A Note on Higher-Kinded Types (HKT)](#53-a-note-on-higher-kinded-types-hkt)
+
 
 本章探讨由 Rust 泛型系统引申出的一些更深入、更具理论性的主题，包括多态的两种主要形式，以及在类型级别进行抽象的更高层次的概念。
 

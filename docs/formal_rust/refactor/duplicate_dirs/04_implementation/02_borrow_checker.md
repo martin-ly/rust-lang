@@ -1,4 +1,21 @@
-# Rust借用检查器实现理论 V32
+﻿# Rust借用检查器实现理论 V32
+
+
+## 📊 目录
+
+- [借用检查器概览](#借用检查器概览)
+  - [Rust借用检查器的特点](#rust借用检查器的特点)
+- [借用检查器实现](#借用检查器实现)
+  - [1. 借用状态跟踪 (Borrow State Tracking)](#1-借用状态跟踪-borrow-state-tracking)
+    - [1.1 借用状态定义](#11-借用状态定义)
+  - [2. 生命周期分析 (Lifetime Analysis)](#2-生命周期分析-lifetime-analysis)
+    - [2.1 生命周期推导](#21-生命周期推导)
+  - [3. 借用规则检查 (Borrow Rule Checking)](#3-借用规则检查-borrow-rule-checking)
+    - [3.1 借用规则验证](#31-借用规则验证)
+  - [4. 错误诊断 (Error Diagnostics)](#4-错误诊断-error-diagnostics)
+    - [4.1 借用错误诊断](#41-借用错误诊断)
+- [总结](#总结)
+
 
 **创建日期**: 2025-01-27  
 **版本**: V32  

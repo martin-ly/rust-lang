@@ -1,9 +1,25 @@
-# 03. 循环结构 (Iterative Constructs)
+﻿# 03. 循环结构 (Iterative Constructs)
 
 > **文档类型**：基础  
 > **难度等级**：⭐⭐  
 > **预计阅读时间**：1.5小时  
 > **前置知识**：Rust 基本语法、迭代器概念、所有权基础
+
+
+## 📊 目录
+
+- [03. 循环结构 (Iterative Constructs)](#03-循环结构-iterative-constructs)
+  - [📊 目录](#-目录)
+  - [📖 内容概述](#-内容概述)
+  - [🎯 学习目标](#-学习目标)
+  - [📚 目录](#-目录-1)
+  - [3.1. 无限循环: `loop`](#31-无限循环-loop)
+  - [3.2. 条件循环: `while` 与 `while let`](#32-条件循环-while-与-while-let)
+    - [3.2.1. `while` 循环](#321-while-循环)
+    - [3.2.2. `while let` 循环](#322-while-let-循环)
+  - [3.3. 迭代循环: `for`](#33-迭代循环-for)
+  - [3.4. 控制循环: `break` 与 `continue`](#34-控制循环-break-与-continue)
+
 
 ## 📖 内容概述
 
@@ -23,9 +39,10 @@
 ## 📚 目录
 
 - [03. 循环结构 (Iterative Constructs)](#03-循环结构-iterative-constructs)
+  - [� 目录](#-目录)
   - [📖 内容概述](#-内容概述)
   - [🎯 学习目标](#-学习目标)
-  - [📚 目录](#-目录)
+  - [📚 目录](#-目录-1)
   - [3.1. 无限循环: `loop`](#31-无限循环-loop)
   - [3.2. 条件循环: `while` 与 `while let`](#32-条件循环-while-与-while-let)
     - [3.2.1. `while` 循环](#321-while-循环)

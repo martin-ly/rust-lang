@@ -1,4 +1,54 @@
-# 编程范式
+﻿# 编程范式
+
+
+## 📊 目录
+
+- [**命令式编程（Imperative Programming）**](#命令式编程imperative-programming)
+- [**结构化编程（Structured Programming）**](#结构化编程structured-programming)
+- [**声明式编程（Declarative Programming）**](#声明式编程declarative-programming)
+- [**面向对象编程（Object-Oriented Programming, OOP）**](#面向对象编程object-oriented-programming-oop)
+- [**函数式编程（Functional Programming, FP）**](#函数式编程functional-programming-fp)
+- [**逻辑编程（Logic Programming）**](#逻辑编程logic-programming)
+- [**并发编程（Concurrent Programming）**](#并发编程concurrent-programming)
+- [**事件驱动编程（Event-Driven Programming）**](#事件驱动编程event-driven-programming)
+- [**泛型编程（Generic Programming）**](#泛型编程generic-programming)
+- [**元编程（Metaprogramming）**](#元编程metaprogramming)
+- [**响应式编程（Reactive Programming）**](#响应式编程reactive-programming)
+- [**Rust 编程范式**](#rust-编程范式)
+  - [1. **结构化编程**](#1-结构化编程)
+  - [2. **面向对象编程**（OOP）](#2-面向对象编程oop)
+  - [3. **泛型编程**](#3-泛型编程)
+  - [4. **函数式编程**](#4-函数式编程)
+  - [5. **内存安全**](#5-内存安全)
+  - [6. **模式匹配**](#6-模式匹配)
+  - [7. **错误处理**](#7-错误处理)
+  - [8. **迭代器,生成器和闭包**](#8-迭代器生成器和闭包)
+  - [9. **智能指针**](#9-智能指针)
+  - [10. **模块化**](#10-模块化)
+  - [11. **宏系统**](#11-宏系统)
+  - [12. **并发编程**](#12-并发编程)
+    - [1. **多线程并发编程**](#1-多线程并发编程)
+    - [2. **异步编程模型**](#2-异步编程模型)
+    - [3. **async/await语法**](#3-asyncawait语法)
+    - [4. **性能与安全性**](#4-性能与安全性)
+    - [5. **并发与并行的区别**](#5-并发与并行的区别)
+    - [6. **消息传递并发**](#6-消息传递并发)
+    - [7. **共享状态并发**](#7-共享状态并发)
+    - [8. **`Sync`和`Send` trait**](#8-sync和send-trait)
+  - [13. **并行编程**](#13-并行编程)
+    - [1. **多线程**](#1-多线程)
+    - [2. **线程池**](#2-线程池)
+    - [3. **数据并行**](#3-数据并行)
+    - [4. **并行算法库**](#4-并行算法库)
+    - [5. **crossbeam**](#5-crossbeam)
+    - [6. **消息传递**](#6-消息传递)
+    - [7. **异步编程**](#7-异步编程)
+    - [8. **并行计算框架**](#8-并行计算框架)
+    - [9. **SIMD指令**](#9-simd指令)
+    - [10. **并行编译**](#10-并行编译)
+    - [11. **Rust的所有权和借用规则**](#11-rust的所有权和借用规则)
+    - [12. **`Send`和`Sync`特性**](#12-send和sync特性)
+
 
 编程范式（Programming Paradigm）是一套编程方法论，定义了程序员如何根据特定概念和规则编写软件的方法。
 不同的编程范式提供了不同的抽象方法和编程模型，影响着程序员如何思考和解决问题。

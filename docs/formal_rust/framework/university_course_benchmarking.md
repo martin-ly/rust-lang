@@ -1,4 +1,38 @@
-# 著名大学课程对标分析
+﻿# 著名大学课程对标分析
+
+
+## 📊 目录
+
+- [1. MIT (麻省理工学院)](#1-mit-麻省理工学院)
+  - [1.1 6.035 编译器设计 (Compiler Design)](#11-6035-编译器设计-compiler-design)
+  - [1.2 6.837 计算机图形学 (Computer Graphics)](#12-6837-计算机图形学-computer-graphics)
+  - [1.3 6.858 计算机系统安全 (Computer Systems Security)](#13-6858-计算机系统安全-computer-systems-security)
+- [2. Stanford (斯坦福大学)](#2-stanford-斯坦福大学)
+  - [2.1 CS242 编程语言 (Programming Languages)](#21-cs242-编程语言-programming-languages)
+  - [2.2 CS243 程序分析和优化 (Program Analysis and Optimization)](#22-cs243-程序分析和优化-program-analysis-and-optimization)
+  - [2.3 CS254 计算复杂性 (Computational Complexity)](#23-cs254-计算复杂性-computational-complexity)
+- [3. CMU (卡内基梅隆大学)](#3-cmu-卡内基梅隆大学)
+  - [3.1 15-312 类型论 (Type Theory)](#31-15-312-类型论-type-theory)
+  - [3.2 15-414 软件验证 (Software Verification)](#32-15-414-软件验证-software-verification)
+  - [3.3 15-424 逻辑和自动推理 (Logic and Automated Reasoning)](#33-15-424-逻辑和自动推理-logic-and-automated-reasoning)
+- [4. Berkeley (加州大学伯克利分校)](#4-berkeley-加州大学伯克利分校)
+  - [4.1 CS263 并发编程 (Concurrent Programming)](#41-cs263-并发编程-concurrent-programming)
+  - [4.2 CS164 编程语言和编译器 (Programming Languages and Compilers)](#42-cs164-编程语言和编译器-programming-languages-and-compilers)
+  - [4.3 CS294 高级主题 (Advanced Topics)](#43-cs294-高级主题-advanced-topics)
+- [5. 其他著名大学](#5-其他著名大学)
+  - [5.1 Harvard CS152 编程语言 (Programming Languages)](#51-harvard-cs152-编程语言-programming-languages)
+  - [5.2 Yale CPSC 323 编程语言理论 (Programming Language Theory)](#52-yale-cpsc-323-编程语言理论-programming-language-theory)
+  - [5.3 Princeton COS 326 函数式编程 (Functional Programming)](#53-princeton-cos-326-函数式编程-functional-programming)
+- [6. 课程体系对比](#6-课程体系对比)
+  - [6.1 理论深度对比](#61-理论深度对比)
+  - [6.2 实践应用对比](#62-实践应用对比)
+  - [6.3 现代性对比](#63-现代性对比)
+- [7. 教学建议](#7-教学建议)
+  - [7.1 课程结构建议](#71-课程结构建议)
+  - [7.2 教学方法建议](#72-教学方法建议)
+  - [7.3 工具使用建议](#73-工具使用建议)
+- [8. 结论](#8-结论)
+
 
 **文档版本**: 1.0  
 **创建日期**: 2025-01-27  

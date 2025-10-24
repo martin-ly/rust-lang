@@ -1,4 +1,23 @@
-# Rc 和 Arc 的 Weak 指针
+﻿# Rc 和 Arc 的 Weak 指针
+
+
+## 📊 目录
+
+- [1. `Weak` 的实现原理](#1-weak-的实现原理)
+  - [2. `upgrade` 和 `downgrade` 的区别](#2-upgrade-和-downgrade-的区别)
+    - [`upgrade`](#upgrade)
+    - [`downgrade`](#downgrade)
+  - [总结](#总结)
+- [3. 结合使用 `Arc`、`Rc` 和 `Weak`](#3-结合使用-arcrc-和-weak)
+  - [1. 使用场景](#1-使用场景)
+  - [2. 示例代码](#2-示例代码)
+  - [代码解释](#代码解释)
+- [4. `Rc` 和 `Weak` 的对比](#4-rc-和-weak-的对比)
+  - [1. `Rc` 和 `Weak` 的对比](#1-rc-和-weak-的对比)
+  - [2. 使用实例](#2-使用实例)
+- [5. 代码解释](#5-代码解释)
+- [6. 总结](#6-总结)
+
 
 在 Rust 中，`Weak` 智能指针是与 `Rc` 和 `Arc` 结合使用的，用于避免循环引用的问题。
 以下是 `Weak` 的实现原理以及 `upgrade` 和 `downgrade` 方法的区别。

@@ -1,5 +1,26 @@
 ﻿# Tokio 条件编译修复总结
 
+
+## 📊 目录
+
+- [修复概述](#修复概述)
+- [修复的文件](#修复的文件)
+  - [1. `src/error.rs`](#1-srcerrorrs)
+  - [2. `src/rust190_optimizations.rs`](#2-srcrust190_optimizationsrs)
+  - [3. `src/benchmarks.rs`](#3-srcbenchmarksrs)
+  - [4. `src/util.rs`](#4-srcutilrs)
+- [技术细节](#技术细节)
+  - [条件编译策略](#条件编译策略)
+  - [并发基准测试策略](#并发基准测试策略)
+  - [测试策略](#测试策略)
+- [编译验证](#编译验证)
+  - [基础编译 (无特性)](#基础编译-无特性)
+  - [带 tokio 特性编译](#带-tokio-特性编译)
+- [修复效果](#修复效果)
+- [后续建议](#后续建议)
+- [总结](#总结)
+
+
 ## 修复概述
 
 成功修复了 `@benchmarks.rs @error.rs @rust190_optimizations.rs` 文件中的 tokio 导入和条件编译问题。

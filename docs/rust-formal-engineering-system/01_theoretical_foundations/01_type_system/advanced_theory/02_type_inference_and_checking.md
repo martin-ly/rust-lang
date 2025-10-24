@@ -1,4 +1,38 @@
-# 4.2 类型推导与类型检查的数学基础 - Mathematical Foundations of Type Inference and Checking
+﻿# 4.2 类型推导与类型检查的数学基础 - Mathematical Foundations of Type Inference and Checking
+
+
+## 📊 目录
+
+- [概述 - Overview](#概述-overview)
+- [形式化理论基础 - Formal Theoretical Foundation](#形式化理论基础-formal-theoretical-foundation)
+  - [类型推导系统 - Type Inference System](#类型推导系统-type-inference-system)
+  - [统一算法 - Unification Algorithm](#统一算法-unification-algorithm)
+- [类型推导改进（版本对齐说明） - Type Inference Improvements (Version-aligned)](#类型推导改进版本对齐说明-type-inference-improvements-version-aligned)
+  - [1. 改进的闭包类型推导 - Enhanced Closure Type Inference](#1-改进的闭包类型推导-enhanced-closure-type-inference)
+  - [2. 改进的泛型类型推导 - Enhanced Generic Type Inference](#2-改进的泛型类型推导-enhanced-generic-type-inference)
+- [类型推导算法详解 - Detailed Type Inference Algorithm](#类型推导算法详解-detailed-type-inference-algorithm)
+  - [1. Hindley-Milner 类型系统 - Hindley-Milner Type System](#1-hindley-milner-类型系统-hindley-milner-type-system)
+  - [2. 约束生成与求解 - Constraint Generation and Solving](#2-约束生成与求解-constraint-generation-and-solving)
+- [复杂度分析 - Complexity Analysis](#复杂度分析-complexity-analysis)
+  - [1. 时间复杂度分析 - Time Complexity Analysis](#1-时间复杂度分析-time-complexity-analysis)
+  - [2. 空间复杂度分析 - Space Complexity Analysis](#2-空间复杂度分析-space-complexity-analysis)
+- [工程实践案例 - Engineering Practice Cases](#工程实践案例-engineering-practice-cases)
+  - [1. 大型项目的类型推导优化 - Type Inference Optimization for Large Projects](#1-大型项目的类型推导优化-type-inference-optimization-for-large-projects)
+  - [2. 类型推导工具集成 - Type Inference Tool Integration](#2-类型推导工具集成-type-inference-tool-integration)
+- [理论证明 - Theoretical Proofs](#理论证明-theoretical-proofs)
+  - [1. 类型推导算法的正确性 - Correctness of Type Inference Algorithm](#1-类型推导算法的正确性-correctness-of-type-inference-algorithm)
+  - [2. 类型推导算法的完备性 - Completeness of Type Inference Algorithm](#2-类型推导算法的完备性-completeness-of-type-inference-algorithm)
+- [总结 - Summary](#总结-summary)
+  - [类型推导算法特点 - Type Inference Algorithm Characteristics](#类型推导算法特点-type-inference-algorithm-characteristics)
+  - [改进亮点（版本对齐说明） - Improvement Highlights (Version-aligned)](#改进亮点版本对齐说明-improvement-highlights-version-aligned)
+  - [未来发展方向 - Future Development Directions](#未来发展方向-future-development-directions)
+- [附：索引锚点与导航 - Index Anchors and Navigation](#附索引锚点与导航-index-anchors-and-navigation)
+  - [理论基础锚点 - Theoretical Foundation Anchors](#理论基础锚点-theoretical-foundation-anchors)
+  - [特性锚点（版本对齐说明） - Feature Anchors (Version-aligned)](#特性锚点版本对齐说明-feature-anchors-version-aligned)
+  - [复杂度分析锚点 - Complexity Analysis Anchors](#复杂度分析锚点-complexity-analysis-anchors)
+  - [工程实践锚点 - Engineering Practice Anchors](#工程实践锚点-engineering-practice-anchors)
+  - [理论证明锚点 - Theoretical Proof Anchors](#理论证明锚点-theoretical-proof-anchors)
+
 
 ## 概述 - Overview
 

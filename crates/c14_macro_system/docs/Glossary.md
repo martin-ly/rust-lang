@@ -1,9 +1,64 @@
-# 📖 C14宏系统 - 术语表
+﻿# 📖 C14宏系统 - 术语表
 
 > **文档定位**: Rust宏系统核心概念和术语定义  
 > **最后更新**: 2025-10-20
 
 ---
+
+
+## 📊 目录
+
+- [A](#a)
+  - [AST (Abstract Syntax Tree)](#ast-abstract-syntax-tree)
+- [C](#c)
+  - [Crate](#crate)
+- [D](#d)
+  - [Declarative Macro](#declarative-macro)
+  - [Derive Macro](#derive-macro)
+  - [DSL (Domain Specific Language)](#dsl-domain-specific-language)
+- [E](#e)
+  - [Expansion](#expansion)
+  - [`expr`](#expr)
+- [F](#f)
+  - [Fragment Specifier](#fragment-specifier)
+  - [Function-like Macro](#function-like-macro)
+- [H](#h)
+  - [Hygiene](#hygiene)
+- [I](#i)
+  - [`ident`](#ident)
+- [M](#m)
+  - [`macro_rules!`](#macro_rules)
+  - [`#[macro_export]`](#macro_export)
+  - [Metaprogramming](#metaprogramming)
+- [P](#p)
+  - [Pattern Matching](#pattern-matching)
+  - [Procedural Macro](#procedural-macro)
+  - [`proc-macro`](#proc-macro)
+- [Q](#q)
+  - [`quote`](#quote)
+- [R](#r)
+  - [Recursion](#recursion)
+  - [Repetition](#repetition)
+- [S](#s)
+  - [`syn`](#syn)
+- [T](#t)
+  - [Token](#token)
+  - [TokenStream](#tokenstream)
+  - [`tt` (Token Tree)](#tt-token-tree)
+  - [`ty`](#ty)
+- [符号](#符号)
+  - [`$`](#)
+  - [`$(...)*`](#)
+  - [`$(...)+`](#)
+  - [`$(...)?`](#)
+  - [`$(,)?`](#)
+- [相关工具](#相关工具)
+  - [cargo-expand](#cargo-expand)
+  - [rust-analyzer](#rust-analyzer)
+  - [trybuild](#trybuild)
+- [片段指定符完整列表](#片段指定符完整列表)
+- [相关文档](#相关文档)
+
 
 ## A
 

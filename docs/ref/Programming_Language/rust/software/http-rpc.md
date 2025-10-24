@@ -1,4 +1,19 @@
-# HTTP/RPC API 自动生成
+﻿# HTTP/RPC API 自动生成
+
+
+## 📊 目录
+
+- [1. 基于 OpenAPI/Swagger 的 REST API 自动生成](#1-基于-openapiswagger-的-rest-api-自动生成)
+  - [1.1 Paperclip](#11-paperclip)
+  - [1.2 utoipa](#12-utoipa)
+- [2. gRPC API 自动生成](#2-grpc-api-自动生成)
+  - [2.1 Tonic](#21-tonic)
+  - [2.2 grpcio](#22-grpcio)
+- [3. GraphQL API 自动生成](#3-graphql-api-自动生成)
+  - [3.1 async-graphql](#31-async-graphql)
+- [4. 思维导图](#4-思维导图)
+- [小结](#小结)
+
 
 下面介绍在 Rust 开源生态系统中，能够根据 API 规范自动生成代码的几种著名实现，
 它们主要分布在 REST API、gRPC 和 GraphQL 等领域，下面逐一说明。

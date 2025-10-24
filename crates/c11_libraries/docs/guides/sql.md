@@ -1,6 +1,24 @@
-# SQL 数据库
+﻿# SQL 数据库
 
 > 适用范围：Rust 1.89+；示例需按需启用特性（`sql-postgres|sql-mysql|sql-sqlite`），风格遵循 `../../c10_networks/docs/STYLE.md`。
+
+
+## 📊 目录
+
+- [支持矩阵与特性](#支持矩阵与特性)
+- [快速开始（Postgres）](#快速开始postgres)
+- [MySQL 与 SQLite 示例](#mysql-与-sqlite-示例)
+- [事务（Transaction）](#事务transaction)
+- [批量执行与参数化](#批量执行与参数化)
+  - [参数化查询示例](#参数化查询示例)
+- [连接、超时与重试](#连接超时与重试)
+  - [连接池调优](#连接池调优)
+  - [隔离级别与一致性](#隔离级别与一致性)
+- [错误与类型映射](#错误与类型映射)
+- [迁移与模式管理](#迁移与模式管理)
+- [性能建议](#性能建议)
+- [FAQ](#faq)
+
 
 - Postgres（`sql-postgres`）
 - MySQL（`sql-mysql`）

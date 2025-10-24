@@ -1,4 +1,20 @@
-# 核心模型和演化
+﻿# 核心模型和演化
+
+
+## 📊 目录
+
+- [1. **I. 形式化核心范畴 `C_Meta` (元模型范畴)**](#1-i-形式化核心范畴-c_meta-元模型范畴)
+  - [1.1 **基础类型系统 (假设):**](#11-基础类型系统-假设)
+- [2. **II. 核心不变性 (Invariants) 及其维持**](#2-ii-核心不变性-invariants-及其维持)
+  - [2.1 **核心不变性 1: 类型安全连接 (Type-Safe Connections)**](#21-核心不变性-1-类型安全连接-type-safe-connections)
+  - [2.2 **核心不变性 2: 效应声明与处理 (Effect Declaration & Handling)**](#22-核心不变性-2-效应声明与处理-effect-declaration-handling)
+  - [2.3 **核心不变性 3: 协调日志完整性与一致性 (Coordination Log Integrity & Consistency)**](#23-核心不变性-3-协调日志完整性与一致性-coordination-log-integrity-consistency)
+- [3. **III. 实现规则的内化 (Internalizing Rules into the Core)**](#3-iii-实现规则的内化-internalizing-rules-into-the-core)
+  - [3.1 **可以内化 (成为核心规则):**](#31-可以内化-成为核心规则)
+  - [3.2 **难以完全内化 (部分内化或依赖外部):**](#32-难以完全内化-部分内化或依赖外部)
+  - [3.3 **IV. 核心演化特性 (Evolutionary Characteristics)**](#33-iv-核心演化特性-evolutionary-characteristics)
+- [4. **总结:**](#4-总结)
+
 
 太棒了！看到之前的抽象讨论能够具体化，
 并与您思考的路径产生共鸣，

@@ -1,5 +1,27 @@
 ﻿# 06. 高级控制流模式 - Advanced Control Flow Patterns
 
+
+## 📊 目录
+
+- [概述 - Overview](#概述-overview)
+- [6.1 异步控制流 - Asynchronous Control Flow](#61-异步控制流-asynchronous-control-flow)
+  - [6.1.1 `async`, `await`, 与 `Future`](#611-async-await-与-future)
+  - [6.1.2 状态机转换的形式化视角](#612-状态机转换的形式化视角)
+  - [6.1.3 Rust 1.89 异步生态系统改进](#613-rust-189-异步生态系统改进)
+    - [结构化并发控制流](#结构化并发控制流)
+    - [异步流处理增强](#异步流处理增强)
+    - [异步取消机制改进](#异步取消机制改进)
+  - [6.1.4 异步控制流的性能优化](#614-异步控制流的性能优化)
+- [6.2 类型状态模式 - Type State Patterns](#62-类型状态模式-type-state-patterns)
+  - [6.2.1 编译时状态机](#621-编译时状态机)
+  - [6.2.2 状态转换约束](#622-状态转换约束)
+  - [6.2.3 状态相关的API](#623-状态相关的api)
+- [6.3 高级控制流组合模式 - Advanced Control Flow Composition Patterns](#63-高级控制流组合模式-advanced-control-flow-composition-patterns)
+  - [6.3.1 异步类型状态模式](#631-异步类型状态模式)
+  - [6.3.2 控制流组合器](#632-控制流组合器)
+- [总结 - Summary](#总结-summary)
+
+
 ## 概述 - Overview
 
 除了基础的条件和循环，Rust还提供了更高级的模式来管理复杂的控制流。本章探讨两种强大的机制：异步控制流和类型状态模式，特别关注Rust 1.89版本中的新特性。

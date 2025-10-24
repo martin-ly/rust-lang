@@ -1,4 +1,4 @@
-# AI集成进阶（Advanced AI Integration）
+﻿# AI集成进阶（Advanced AI Integration）
 
 ---
 
@@ -9,6 +9,19 @@
 > - 索引与映射: `../../../refactor/01_knowledge_graph/00_index.md`, `../../../refactor/01_knowledge_graph/node_link_map.md`
 
 ---
+
+
+## 📊 目录
+
+- [1. 哲学基础与国际定义对标（Philosophical Foundation & International Definition）](#1-哲学基础与国际定义对标philosophical-foundation-international-definition)
+  - [1.1 历史与发展（History & Development）](#11-历史与发展history-development)
+  - [1.2 主流分歧与批判（Mainstream Debates & Critique）](#12-主流分歧与批判mainstream-debates-critique)
+- [2. Rust 1.88 高级特性与AI集成（Advanced Features in Rust 1.88 for AI Integration）](#2-rust-188-高级特性与ai集成advanced-features-in-rust-188-for-ai-integration)
+- [3. 工程难题与Rust解法（Engineering Challenges & Rust Solutions）](#3-工程难题与rust解法engineering-challenges-rust-solutions)
+- [4. 最佳实践、争议与未来趋势（Best Practices, Controversies & Future Trends）](#4-最佳实践争议与未来趋势best-practices-controversies-future-trends)
+- [5. 术语表（Glossary）](#5-术语表glossary)
+- [6. 参考文献与扩展阅读（References & Further Reading）](#6-参考文献与扩展阅读references-further-reading)
+
 
 ## 1. 哲学基础与国际定义对标（Philosophical Foundation & International Definition）
 

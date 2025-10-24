@@ -1,14 +1,32 @@
-# 06. Rust 1.90 控制流特性总览 (Control Flow Overview - Rust 1.90)
+﻿# 06. Rust 1.90 控制流特性总览 (Control Flow Overview - Rust 1.90)
 
 > **文档类型**：基础/参考  
 > **难度等级**：⭐⭐  
 > **预计阅读时间**：1小时  
 > **前置知识**：Rust 基础语法
 
+
+## 📊 目录
+
+- [06. Rust 1.90 控制流特性总览 (Control Flow Overview - Rust 1.90)](#06-rust-190-控制流特性总览-control-flow-overview---rust-190)
+  - [📊 目录](#-目录)
+  - [📚 目录](#-目录-1)
+  - [📖 内容概述](#-内容概述)
+  - [🎯 学习目标](#-学习目标)
+  - [if / if let / if let 链](#if--if-let--if-let-链)
+  - [let-else 提前返回](#let-else-提前返回)
+  - [match 概览（进阶详解见专章）](#match-概览进阶详解见专章)
+  - [while / loop / for 与标签跳转](#while--loop--for-与标签跳转)
+  - [break/continue 与值](#breakcontinue-与值)
+  - [函数返回与发散类型 `!`](#函数返回与发散类型-)
+  - [工程建议](#工程建议)
+
+
 ## 📚 目录
 
 - [06. Rust 1.90 控制流特性总览 (Control Flow Overview - Rust 1.90)](#06-rust-190-控制流特性总览-control-flow-overview---rust-190)
-  - [📚 目录](#-目录)
+  - [� 目录](#-目录)
+  - [📚 目录](#-目录-1)
   - [📖 内容概述](#-内容概述)
   - [🎯 学习目标](#-学习目标)
   - [if / if let / if let 链](#if--if-let--if-let-链)

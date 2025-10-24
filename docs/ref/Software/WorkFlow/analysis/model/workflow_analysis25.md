@@ -1,4 +1,25 @@
-# 工作流架构分析和分层设计
+﻿# 工作流架构分析和分层设计
+
+
+## 📊 目录
+
+- [1. **第一层：结构形式化基础 (`Architecture_Structural`)**](#1-第一层结构形式化基础-architecture_structural)
+  - [1.1 **目标:**](#11-目标)
+  - [1.2 **1. 核心对象 (Structural Objects):**](#12-1-核心对象-structural-objects)
+- [1.2 **2. 核心态射/规则 (Structural Rules):**](#12-2-核心态射规则-structural-rules)
+- [1.3 **3. 核心不变性 (Structural Invariants):**](#13-3-核心不变性-structural-invariants)
+- [2. **第二层：语义形式化增强 (`Architecture_Semantic`)**](#2-第二层语义形式化增强-architecture_semantic)
+  - [2.1 **1. 基础设定 (Semantic Layer):**](#21-1-基础设定-semantic-layer)
+  - [2.2 **2. 核心对象 (Semantic Objects):**](#22-2-核心对象-semantic-objects)
+  - [2.3 **3. 核心态射/规则 (Semantic Rules):**](#23-3-核心态射规则-semantic-rules)
+  - [2.4 **4. 核心不变性 (Semantic Invariants):**](#24-4-核心不变性-semantic-invariants)
+- [3. **两层架构的协同与 AI 集成:**](#3-两层架构的协同与-ai-集成)
+  - [3.1  **基础与增强:**](#31-基础与增强)
+    - [3.1.1  **Fabric 的角色:**](#311-fabric-的角色)
+    - [3.1.2  **AI 的交互:**](#312-ai-的交互)
+    - [3.1.3  **演化:**](#313-演化)
+- [4. **结论性论证:**](#4-结论性论证)
+
 
 ```text
 Here's a thinking process that leads to the detailed, layered architecture proposal:

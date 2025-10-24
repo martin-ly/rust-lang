@@ -1,4 +1,49 @@
-# IoT 相关
+﻿# IoT 相关
+
+
+## 📊 目录
+
+- [Embedded-HAL 当前生态支持情况](#embedded-hal-当前生态支持情况)
+- [1. 广泛的实现与驱动支持](#1-广泛的实现与驱动支持)
+- [2. 版本现状与生态演进](#2-版本现状与生态演进)
+- [3. 社区活跃度与文档资源](#3-社区活跃度与文档资源)
+- [4. 典型使用场景](#4-典型使用场景)
+- [5. 总结](#5-总结)
+- [Rust 的 embedded-hal 在 Raspberry Pi Pico 上的应用](#rust-的-embedded-hal-在-raspberry-pi-pico-上的应用)
+- [1. 开发环境与依赖配置](#1-开发环境与依赖配置)
+- [2. 典型示例：LED 闪烁](#2-典型示例led-闪烁)
+- [3. 扩展应用场景](#3-扩展应用场景)
+  - [3.1 I2C/SPI 通讯](#31-i2cspi-通讯)
+  - [3.2 UART/串行通信](#32-uart串行通信)
+- [4. 总结](#4-总结)
+- [IoT 行业标准归纳及重要协议规范](#iot-行业标准归纳及重要协议规范)
+- [1. 设备与传感器的标准与分类](#1-设备与传感器的标准与分类)
+  - [1.1 智能传感器接口标准](#11-智能传感器接口标准)
+  - [1.2 传感器数据描述与交换](#12-传感器数据描述与交换)
+- [2. 通信协议层面的标准](#2-通信协议层面的标准)
+  - [2.1 物理层与链路层标准](#21-物理层与链路层标准)
+  - [2.2 网络层与传输层标准](#22-网络层与传输层标准)
+- [3. 应用层协议与交互模式](#3-应用层协议与交互模式)
+  - [3.1 消息发布/订阅与请求/响应模式](#31-消息发布订阅与请求响应模式)
+  - [3.2 数据模型与语义互联](#32-数据模型与语义互联)
+  - [3.3 数据格式与定义](#33-数据格式与定义)
+- [4. 标准化组织与行业规范](#4-标准化组织与行业规范)
+- [5. IoT 发展中的重要协议规范](#5-iot-发展中的重要协议规范)
+- [总结](#总结)
+  - [IoT 控制信息与交互信息数据格式标准规范](#iot-控制信息与交互信息数据格式标准规范)
+- [1. 设备与应用层标准](#1-设备与应用层标准)
+  - [1.1 oneM2M](#11-onem2m)
+  - [1.2 OCF (Open Connectivity Foundation)](#12-ocf-open-connectivity-foundation)
+  - [1.3 LwM2M (Lightweight M2M)](#13-lwm2m-lightweight-m2m)
+- [2. 通信协议及数据编码格式](#2-通信协议及数据编码格式)
+  - [2.1 CoAP (Constrained Application Protocol)](#21-coap-constrained-application-protocol)
+  - [2.2 MQTT (Message Queuing Telemetry Transport)](#22-mqtt-message-queuing-telemetry-transport)
+  - [2.3 OPC UA (OPC Unified Architecture)](#23-opc-ua-opc-unified-architecture)
+- [3. 数据表示格式](#3-数据表示格式)
+  - [3.1 SenML (Sensor Markup Language)](#31-senml-sensor-markup-language)
+  - [3.2 通用数据格式](#32-通用数据格式)
+- [*4. 总结*](#4-总结)
+
 
 ## Embedded-HAL 当前生态支持情况
 

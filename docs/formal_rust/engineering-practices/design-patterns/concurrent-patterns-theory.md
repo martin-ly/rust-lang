@@ -1,4 +1,46 @@
-# 🎭 Rust并发设计模式理论体系
+﻿# 🎭 Rust并发设计模式理论体系
+
+
+## 📊 目录
+
+- [📋 理论概述](#理论概述)
+- [🎯 理论目标](#理论目标)
+  - [核心价值](#核心价值)
+- [🧮 Actor模型的理论基础](#actor模型的理论基础)
+  - [2.1 Actor抽象的数学建模](#21-actor抽象的数学建模)
+    - [Actor的形式化定义](#actor的形式化定义)
+    - [Actor模式的安全性保证](#actor模式的安全性保证)
+  - [2.2 Rust中的Actor实现](#22-rust中的actor实现)
+    - [基于Channel的Actor](#基于channel的actor)
+    - [监督策略的形式化](#监督策略的形式化)
+- [🔄 CSP (Communicating Sequential Processes) 模式](#csp-communicating-sequential-processes-模式)
+  - [3.1 CSP的数学基础](#31-csp的数学基础)
+    - [进程代数的形式化](#进程代数的形式化)
+    - [Rust中的CSP实现](#rust中的csp实现)
+  - [3.2 Channel模式的理论](#32-channel模式的理论)
+    - [Channel的形式化语义](#channel的形式化语义)
+- [🎪 事件驱动架构模式](#事件驱动架构模式)
+  - [4.1 事件驱动的理论基础](#41-事件驱动的理论基础)
+    - [事件系统的形式化](#事件系统的形式化)
+    - [Rust中的事件驱动实现](#rust中的事件驱动实现)
+  - [4.2 CQRS (Command Query Responsibility Segregation)](#42-cqrs-command-query-responsibility-segregation)
+    - [CQRS的理论建模](#cqrs的理论建模)
+    - [Rust中的CQRS实现](#rust中的cqrs实现)
+- [🔄 Pipeline和Filter模式](#pipeline和filter模式)
+  - [5.1 Pipeline的理论基础](#51-pipeline的理论基础)
+    - [管道的函数式建模](#管道的函数式建模)
+    - [Rust中的Pipeline实现](#rust中的pipeline实现)
+- [📊 模式组合与最佳实践](#模式组合与最佳实践)
+  - [6.1 模式组合的理论](#61-模式组合的理论)
+    - [模式组合的语义](#模式组合的语义)
+  - [6.2 性能优化指导](#62-性能优化指导)
+    - [并发模式的性能分析](#并发模式的性能分析)
+- [📚 总结与最佳实践](#总结与最佳实践)
+  - [理论贡献](#理论贡献)
+  - [实用价值](#实用价值)
+  - [设计原则](#设计原则)
+  - [模式选择指南](#模式选择指南)
+
 
 ## 📋 理论概述
 

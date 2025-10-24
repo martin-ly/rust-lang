@@ -1,5 +1,47 @@
 ﻿# 依赖库版本更新报告 | Dependency Update Report
 
+
+## 📊 目录
+
+- [依赖库版本更新报告 | Dependency Update Report](#依赖库版本更新报告--dependency-update-report)
+  - [📊 目录](#-目录)
+  - [📋 执行摘要 | Executive Summary](#-执行摘要--executive-summary)
+  - [🔄 工作空间依赖更新 | Workspace Dependencies Update](#-工作空间依赖更新--workspace-dependencies-update)
+    - [已更新的依赖 (9个)](#已更新的依赖-9个)
+    - [不兼容的依赖 (保持当前版本)](#不兼容的依赖-保持当前版本)
+  - [📦 各 Crate 依赖更新 | Per-Crate Dependencies Update](#-各-crate-依赖更新--per-crate-dependencies-update)
+    - [c02\_type\_system](#c02_type_system)
+    - [c03\_control\_fn](#c03_control_fn)
+    - [c05\_threads](#c05_threads)
+    - [c06\_async](#c06_async)
+    - [c07\_process](#c07_process)
+    - [c10\_networks](#c10_networks)
+    - [c11\_libraries](#c11_libraries)
+    - [c12\_model](#c12_model)
+    - [c13\_reliability](#c13_reliability)
+  - [✅ 编译验证 | Compilation Verification](#-编译验证--compilation-verification)
+    - [编译检查结果](#编译检查结果)
+    - [验证的 Crate 列表](#验证的-crate-列表)
+  - [📊 更新统计 | Update Statistics](#-更新统计--update-statistics)
+    - [总体统计](#总体统计)
+    - [按类型分类](#按类型分类)
+  - [🔒 安全性评估 | Security Assessment](#-安全性评估--security-assessment)
+    - [安全漏洞检查](#安全漏洞检查)
+    - [安全更新](#安全更新)
+  - [💡 更新建议 | Update Recommendations](#-更新建议--update-recommendations)
+    - [短期建议 (1-2周)](#短期建议-1-2周)
+    - [中期建议 (1-2月)](#中期建议-1-2月)
+    - [长期建议 (3-6月)](#长期建议-3-6月)
+  - [🎯 下一步行动 | Next Steps](#-下一步行动--next-steps)
+    - [立即执行](#立即执行)
+    - [待执行](#待执行)
+  - [📝 更新命令记录 | Update Commands](#-更新命令记录--update-commands)
+    - [执行的命令](#执行的命令)
+    - [命令输出摘要](#命令输出摘要)
+  - [🙏 致谢 | Acknowledgments](#-致谢--acknowledgments)
+  - [📞 联系方式 | Contact](#-联系方式--contact)
+
+
 **日期**: 2025年10月6日  
 **更新范围**: 工作空间所有 crate  
 **更新状态**: ✅ 成功完成

@@ -1,4 +1,12 @@
-# Cell 和 RefCell
+﻿# Cell 和 RefCell
+
+
+## 📊 目录
+
+- [Cell](#cell)
+  - [RefCell](#refcell)
+  - [区别和联系](#区别和联系)
+
 
 在 Rust 中，`Cell` 和 `RefCell` 是两种不同的类型，它们都用于封装数据并提供运行时借用检查。
 它们是 Rust 标准库中 `std::cell` 模块的一部分，用于在借用规则之外进行数据借用。

@@ -1,4 +1,19 @@
-# Borrow_ToOwned
+﻿# Borrow_ToOwned
+
+
+## 📊 目录
+
+- [1. Deref Trait](#1-deref-trait)
+  - [1.1 Borrow Trait](#11-borrow-trait)
+  - [1.2 ToOwned Trait](#12-toowned-trait)
+  - [1.3 解释和联系](#13-解释和联系)
+- [Deref Trait](#deref-trait)
+  - [DerefMut Trait](#derefmut-trait)
+  - [Drop Trait](#drop-trait)
+  - [CovariantType Trait](#covarianttype-trait)
+  - [智能指针特定的 trait](#智能指针特定的-trait)
+  - [解释和联系](#解释和联系)
+
 
 在 Rust 中，借用（Borrowing）是所有权系统的一个重要部分，它允许在不转移所有权的情况下使用值。
 与借用直接相关的 trait 主要有 `Deref` 和 `Borrow`。

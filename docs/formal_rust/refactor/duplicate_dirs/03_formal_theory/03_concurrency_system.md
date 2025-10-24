@@ -1,4 +1,34 @@
-# Rust并发系统形式化理论 V32
+﻿# Rust并发系统形式化理论 V32
+
+
+## 📊 目录
+
+- [并发系统概览](#并发系统概览)
+  - [Rust并发系统的特点](#rust并发系统的特点)
+- [基础并发概念](#基础并发概念)
+  - [1. 并发执行模型 (Concurrent Execution Model)](#1-并发执行模型-concurrent-execution-model)
+    - [1.1 并发执行定义](#11-并发执行定义)
+  - [2. 线程安全 (Thread Safety)](#2-线程安全-thread-safety)
+    - [2.1 线程安全定义](#21-线程安全定义)
+  - [3. 同步原语 (Synchronization Primitives)](#3-同步原语-synchronization-primitives)
+    - [3.1 互斥锁 (Mutex)](#31-互斥锁-mutex)
+    - [3.2 读写锁 (RwLock)](#32-读写锁-rwlock)
+    - [3.3 条件变量 (Condition Variable)](#33-条件变量-condition-variable)
+  - [4. 通道系统 (Channel System)](#4-通道系统-channel-system)
+    - [4.1 通道定义](#41-通道定义)
+  - [5. 原子操作 (Atomic Operations)](#5-原子操作-atomic-operations)
+    - [5.1 原子类型](#51-原子类型)
+  - [6. 并发安全定理 (Concurrency Safety Theorems)](#6-并发安全定理-concurrency-safety-theorems)
+    - [6.1 无数据竞争定理 (No Data Race Theorem)](#61-无数据竞争定理-no-data-race-theorem)
+    - [6.2 无死锁定理 (No Deadlock Theorem)](#62-无死锁定理-no-deadlock-theorem)
+  - [7. 并发算法](#7-并发算法)
+    - [7.1 并发控制算法](#71-并发控制算法)
+    - [7.2 并发调度算法](#72-并发调度算法)
+  - [8. 高级并发特性](#8-高级并发特性)
+    - [8.1 异步编程模型](#81-异步编程模型)
+    - [8.2 并发数据结构](#82-并发数据结构)
+- [总结](#总结)
+
 
 **创建日期**: 2025-01-27  
 **版本**: V32  

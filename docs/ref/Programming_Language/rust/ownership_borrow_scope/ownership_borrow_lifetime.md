@@ -1,4 +1,17 @@
-# Rust 语言的所有权（Ownership）、移动（Move）和生命周期（Lifetime）模型是其核心概念，共同确保了内存安全和并发安全，而无需垃圾收集器
+﻿# Rust 语言的所有权（Ownership）、移动（Move）和生命周期（Lifetime）模型是其核心概念，共同确保了内存安全和并发安全，而无需垃圾收集器
+
+
+## 📊 目录
+
+- [所有权（Ownership）](#所有权ownership)
+- [移动（Move）](#移动move)
+- [生命周期（Lifetime）](#生命周期lifetime)
+- [Deref Trait](#deref-trait)
+- [Drop Trait](#drop-trait)
+- [Clone Trait](#clone-trait)
+- [Copy Trait](#copy-trait)
+- [解释和联系](#解释和联系)
+
 
 ## 所有权（Ownership）
 

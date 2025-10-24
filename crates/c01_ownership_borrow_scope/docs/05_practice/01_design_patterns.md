@@ -1,4 +1,4 @@
-# 设计模式 - Design Patterns
+﻿# 设计模式 - Design Patterns
 
 **版本**: 1.0  
 **最后更新**: 2025-01-27  

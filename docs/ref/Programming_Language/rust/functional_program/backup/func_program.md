@@ -1,4 +1,37 @@
-# Rust 的函数式编程模式
+﻿# Rust 的函数式编程模式
+
+
+## 📊 目录
+
+- [热门的 Rust 函数式编程库](#热门的-rust-函数式编程库)
+  - [2025 年更新的软件库](#2025-年更新的软件库)
+  - [思维总结](#思维总结)
+  - [1. 闭包 (Closures)](#1-闭包-closures)
+  - [2. 迭代器 (Iterators)](#2-迭代器-iterators)
+  - [3. 高阶函数 (Higher-order Functions)](#3-高阶函数-higher-order-functions)
+  - [4. 不可变性 (Immutability)](#4-不可变性-immutability)
+  - [5. 纯函数 (Pure Functions)](#5-纯函数-pure-functions)
+  - [6. 模式匹配 (Pattern Matching)](#6-模式匹配-pattern-matching)
+  - [7. 枚举 (Enums)](#7-枚举-enums)
+  - [总结](#总结)
+  - [Definition and Characteristics](#definition-and-characteristics)
+  - [Benefits of Pure Functions](#benefits-of-pure-functions)
+  - [Examples of Pure Functions](#examples-of-pure-functions)
+  - [Writing Pure Functions in Rust](#writing-pure-functions-in-rust)
+  - [Pitfalls and Considerations](#pitfalls-and-considerations)
+  - [Optimization and Performance](#optimization-and-performance)
+  - [Conclusion](#conclusion)
+  - [1. **Avoid Mutating External State**](#1-avoid-mutating-external-state)
+  - [2. **Restrict Input/Output Operations**](#2-restrict-inputoutput-operations)
+  - [3. **Eliminate Mutable State Mutations**](#3-eliminate-mutable-state-mutations)
+  - [4. **Avoid Concurrency Primitives**](#4-avoid-concurrency-primitives)
+  - [5. **Use Immutability and Ownership**](#5-use-immutability-and-ownership)
+  - [6. **Leverage Type System and Compiler**](#6-leverage-type-system-and-compiler)
+  - [7. **Use Tools and Lints**](#7-use-tools-and-lints)
+  - [8. **Testing**](#8-testing)
+  - [Example: Pure Rust Function](#example-pure-rust-function)
+  - [Summary](#summary)
+
 
 Rust 作为一种多范式编程语言，支持函数式编程，并提供了多种函数式编程模式。
 以下是一些常见的函数式编程模式及其在 Rust 中的应用：

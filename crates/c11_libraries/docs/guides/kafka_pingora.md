@@ -1,6 +1,17 @@
-# Kafka 与 Pingora 现状
+﻿# Kafka 与 Pingora 现状
 
 > 适用范围：Rust 1.89+；本文档说明 Kafka 与 Pingora 的当前实现状态，风格遵循 `../../c10_networks/docs/STYLE.md`。
+
+
+## 📊 目录
+
+- [Kafka MVP 路线图（建议）](#kafka-mvp-路线图建议)
+  - [MVP 配置矩阵（建议）](#mvp-配置矩阵建议)
+- [Kafka 环境与配置要点](#kafka-环境与配置要点)
+  - [Windows 安装步骤（librdkafka）](#windows-安装步骤librdkafka)
+- [Pingora MVP 路线图（建议）](#pingora-mvp-路线图建议)
+- [常见问题与排查](#常见问题与排查)
+
 
 - Kafka（`mq-kafka`）目前保留最小骨架，未接入生产者/消费者真实实现，原因：
   - `rdkafka` 的配置项与运行环境较为复杂（librdkafka 依赖、SASL/TLS、多分区与消费组、偏移管理等），后续将提供精简默认配置与可选高级参数。

@@ -1,4 +1,17 @@
-# Workflow Analysis
+﻿# Workflow Analysis
+
+
+## 📊 目录
+
+- [**基本定义与公理（Axioms/Postulates）：**](#基本定义与公理axiomspostulates)
+- [**论证 1: 架构设计支持可演化性 (Evolvability)**](#论证-1-架构设计支持可演化性-evolvability)
+- [**论证 2: 架构设计支持可靠性与恢复 (Reliability & Recovery)**](#论证-2-架构设计支持可靠性与恢复-reliability-recovery)
+- [**论证 3: 架构设计支持可伸缩性 (Scalability)**](#论证-3-架构设计支持可伸缩性-scalability)
+- [**论证 4: 架构设计支持副作用的显式管理 (Side Effect Management)**](#论证-4-架构设计支持副作用的显式管理-side-effect-management)
+- [**论证 5: 演化方案的逻辑合理性 (Evolutionary Path Logic)**](#论证-5-演化方案的逻辑合理性-evolutionary-path-logic)
+- [**论证 6: 形式化策略的合理性 (Formalism Strategy Logic)**](#论证-6-形式化策略的合理性-formalism-strategy-logic)
+- [**总结:**](#总结)
+
 
 好的，我理解您希望用更接近形式逻辑和演绎推理的方式来论证此架构方案及其演化，
 而不是依赖辩证法或纯粹的描述性语言。

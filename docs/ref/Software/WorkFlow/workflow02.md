@@ -1,4 +1,16 @@
-# workflow方面的探讨
+﻿# workflow方面的探讨
+
+
+## 📊 目录
+
+- [hydro分析问题](#hydro分析问题)
+- [hydro分析](#hydro分析)
+  - [Hydro 架构设计分析 (基于您提供的特性)](#hydro-架构设计分析-基于您提供的特性)
+    - [**核心模型：数据流 (Dataflow)**](#核心模型数据流-dataflow)
+    - [**分阶段编译 (Staged Compilation)**](#分阶段编译-staged-compilation)
+    - [**Hydroflow+ 语言**](#hydroflow-语言)
+    - [**Hydro Deploy 集成**](#hydro-deploy-集成)
+
 
 ## hydro分析问题
 

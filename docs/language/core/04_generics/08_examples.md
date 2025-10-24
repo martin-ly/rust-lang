@@ -1,4 +1,41 @@
-# Generic Programming Examples
+﻿# Generic Programming Examples
+
+
+## 📊 目录
+
+- [1. Basic Generic Examples](#1-basic-generic-examples)
+  - [1.1 Identity Function](#11-identity-function)
+    - [Example 1.1: Generic Identity Function](#example-11-generic-identity-function)
+  - [1.2 Generic Swap Function](#12-generic-swap-function)
+    - [Example 1.2: Type-Safe Swap](#example-12-type-safe-swap)
+  - [1.3 Generic Container](#13-generic-container)
+    - [Example 1.3: Simple Generic Container](#example-13-simple-generic-container)
+- [2. Constrained Generic Examples](#2-constrained-generic-examples)
+  - [2.1 Display Function](#21-display-function)
+    - [Example 2.1: Generic Display Function](#example-21-generic-display-function)
+  - [2.2 Generic Comparison Functions](#22-generic-comparison-functions)
+    - [Example 2.2: Ord-Constrained Functions](#example-22-ord-constrained-functions)
+  - [2.3 Clone and Display Function](#23-clone-and-display-function)
+    - [Example 2.3: Multiple Trait Bounds](#example-23-multiple-trait-bounds)
+- [3. Advanced Generic Examples](#3-advanced-generic-examples)
+  - [3.1 Generic Iterator Adapter](#31-generic-iterator-adapter)
+    - [Example 3.1: Custom Iterator Adapter](#example-31-custom-iterator-adapter)
+  - [3.2 Generic Builder Pattern](#32-generic-builder-pattern)
+    - [Example 3.2: Type-Safe Builder](#example-32-type-safe-builder)
+  - [3.3 Generic State Machine](#33-generic-state-machine)
+    - [Example 3.3: Type-Level State Machine](#example-33-type-level-state-machine)
+- [4. Real-World Examples](#4-real-world-examples)
+  - [4.1 Generic Database Connection](#41-generic-database-connection)
+    - [Example 4.1: Type-Safe Database Connection](#example-41-type-safe-database-connection)
+  - [4.2 Generic Configuration System](#42-generic-configuration-system)
+    - [Example 4.2: Type-Safe Configuration](#example-42-type-safe-configuration)
+- [5. Performance Examples](#5-performance-examples)
+  - [5.1 Zero-Cost Abstractions](#51-zero-cost-abstractions)
+    - [Example 5.1: Zero-Cost Generic Functions](#example-51-zero-cost-generic-functions)
+  - [5.2 Generic vs Trait Objects](#52-generic-vs-trait-objects)
+    - [Example 5.2: Performance Comparison](#example-52-performance-comparison)
+- [6. Summary](#6-summary)
+
 
 ## 1. Basic Generic Examples
 

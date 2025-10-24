@@ -1,5 +1,31 @@
 ﻿# Rust语义分析的跨语言互操作与FFI安全语义专题
 
+
+## 📊 目录
+
+- [1. FFI类型映射与安全定理](#1-ffi类型映射与安全定理)
+  - [定理1：FFI类型映射一致性（FFI Type Mapping Consistency）](#定理1ffi类型映射一致性ffi-type-mapping-consistency)
+    - [形式化表述（伪Coq）](#形式化表述伪coq)
+    - [工程代码](#工程代码)
+- [2. 生命周期与所有权在FFI下的健全性](#2-生命周期与所有权在ffi下的健全性)
+  - [定理2：FFI生命周期一致性（FFI Lifetime Consistency）](#定理2ffi生命周期一致性ffi-lifetime-consistency)
+    - [反例1](#反例1)
+    - [工程实践](#工程实践)
+- [3. 异步FFI与复杂数据结构体体体的挑战](#3-异步ffi与复杂数据结构体体体的挑战)
+  - [反例2：异步FFI生命周期问题](#反例2异步ffi生命周期问题)
+  - [复杂数据结构体体体](#复杂数据结构体体体)
+- [4. GAT/const trait/async fn trait在FFI下的挑战](#4-gatconst-traitasync-fn-trait在ffi下的挑战)
+  - [形式化挑战](#形式化挑战)
+- [5. 自动化验证与工具链支持](#5-自动化验证与工具链支持)
+- [6. 拓展性与递归推进建议](#6-拓展性与递归推进建议)
+- [3.1 异步FFI安全定理递归细化](#31-异步ffi安全定理递归细化)
+  - [定理4：异步FFI生命周期安全（Async FFI Lifetime Safety Theorem）](#定理4异步ffi生命周期安全async-ffi-lifetime-safety-theorem)
+    - [形式化表述1（伪Coq）](#形式化表述1伪coq)
+    - [证明思路](#证明思路)
+    - [工程代码1](#工程代码1)
+  - [反例：生命周期未覆盖导致悬垂指针](#反例生命周期未覆盖导致悬垂指针)
+
+
 ## 1. FFI类型映射与安全定理
 
 ### 定理1：FFI类型映射一致性（FFI Type Mapping Consistency）

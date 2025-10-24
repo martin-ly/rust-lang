@@ -1,4 +1,25 @@
-# 4.3 高级类型模式的形式化理论 - Formal Theory of Advanced Type Patterns
+﻿# 4.3 高级类型模式的形式化理论 - Formal Theory of Advanced Type Patterns
+
+
+## 📊 目录
+
+- [概述 - Overview](#概述-overview)
+- [类型状态模式 - Type State Patterns](#类型状态模式-type-state-patterns)
+  - [形式化定义 - Formal Definition](#形式化定义-formal-definition)
+  - [Rust 1.89 类型状态模式增强 - Enhanced Type State Patterns](#rust-189-类型状态模式增强-enhanced-type-state-patterns)
+- [类型级编程 - Type-Level Programming](#类型级编程-type-level-programming)
+  - [形式化理论基础 - Formal Theoretical Foundation](#形式化理论基础-formal-theoretical-foundation)
+  - [Rust 1.89 类型级编程特性 - Type-Level Programming Features](#rust-189-类型级编程特性-type-level-programming-features)
+- [类型安全抽象 - Type-Safe Abstractions](#类型安全抽象-type-safe-abstractions)
+  - [1形式化定义 - Formal Definition](#1形式化定义-formal-definition)
+  - [Rust 1.89 类型安全抽象示例 - Type-Safe Abstraction Examples](#rust-189-类型安全抽象示例-type-safe-abstraction-examples)
+- [高级类型模式的应用 - Applications of Advanced Type Patterns](#高级类型模式的应用-applications-of-advanced-type-patterns)
+  - [1. 类型安全的状态管理 - Type-Safe State Management](#1-类型安全的状态管理-type-safe-state-management)
+  - [2. 类型安全的资源管理 - Type-Safe Resource Management](#2-类型安全的资源管理-type-safe-resource-management)
+- [形式化验证 - Formal Verification](#形式化验证-formal-verification)
+  - [类型安全证明 - Type Safety Proofs](#类型安全证明-type-safety-proofs)
+- [总结 - Summary](#总结-summary)
+
 
 ## 概述 - Overview
 

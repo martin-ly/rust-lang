@@ -1,4 +1,24 @@
-# Rust错误处理专题形式化理论 V32
+﻿# Rust错误处理专题形式化理论 V32
+
+
+## 📊 目录
+
+- [错误处理概览](#错误处理概览)
+  - [Rust错误处理的特点](#rust错误处理的特点)
+- [错误处理理论](#错误处理理论)
+  - [1. Result类型系统 (Result Type System)](#1-result类型系统-result-type-system)
+    - [1.1 Result代数数据类型](#11-result代数数据类型)
+    - [1.2 Result操作语义](#12-result操作语义)
+  - [2. Option类型系统 (Option Type System)](#2-option类型系统-option-type-system)
+    - [2.1 Option代数数据类型](#21-option代数数据类型)
+    - [2.2 Option操作语义](#22-option操作语义)
+  - [3. 错误传播机制 (Error Propagation)](#3-错误传播机制-error-propagation)
+    - [3.1 ?操作符语义](#31-操作符语义)
+    - [3.2 错误转换和包装](#32-错误转换和包装)
+  - [4. 自定义错误类型 (Custom Error Types)](#4-自定义错误类型-custom-error-types)
+    - [4.1 错误类型定义](#41-错误类型定义)
+- [总结](#总结)
+
 
 **创建日期**: 2025-01-27  
 **版本**: V32  

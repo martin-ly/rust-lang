@@ -1,4 +1,4 @@
-# TokenStream深度解析
+﻿# TokenStream深度解析
 
 > **文档定位**: 深入理解TokenStream和token处理  
 > **难度级别**: ⭐⭐⭐⭐ 专家  
@@ -6,6 +6,54 @@
 > **最后更新**: 2025-10-20
 
 ---
+
+
+## 📊 目录
+
+- [📋 学习目标](#学习目标)
+- [1. TokenStream概述](#1-tokenstream概述)
+  - [1.1 什么是Token Stream](#11-什么是token-stream)
+  - [1.2 Token类型](#12-token类型)
+- [2. proc_macro vs proc_macro2](#2-proc_macro-vs-proc_macro2)
+  - [2.1 两个crate](#21-两个crate)
+  - [2.2 转换](#22-转换)
+  - [2.3 为什么需要proc_macro2](#23-为什么需要proc_macro2)
+- [3. 手动操作Token](#3-手动操作token)
+  - [3.1 创建Token](#31-创建token)
+  - [3.2 创建Group](#32-创建group)
+  - [3.3 组合Token](#33-组合token)
+- [4. 解析TokenStream](#4-解析tokenstream)
+  - [4.1 迭代Token](#41-迭代token)
+  - [4.2 Peekable迭代](#42-peekable迭代)
+  - [4.3 使用syn::parse](#43-使用synparse)
+- [5. Span和位置信息](#5-span和位置信息)
+  - [5.1 什么是Span](#51-什么是span)
+  - [5.2 错误报告](#52-错误报告)
+  - [5.3 Span操作](#53-span操作)
+- [6. 高级Token操作](#6-高级token操作)
+  - [6.1 TokenTree转换](#61-tokentree转换)
+  - [6.2 修改TokenStream](#62-修改tokenstream)
+  - [6.3 过滤Token](#63-过滤token)
+- [7. 性能优化](#7-性能优化)
+  - [7.1 避免不必要的克隆](#71-避免不必要的克隆)
+  - [7.2 使用引用](#72-使用引用)
+  - [7.3 延迟求值](#73-延迟求值)
+- [8. 调试技巧](#8-调试技巧)
+  - [8.1 打印TokenStream](#81-打印tokenstream)
+  - [8.2 使用cargo-expand](#82-使用cargo-expand)
+  - [8.3 断点调试](#83-断点调试)
+- [9. 实战案例](#9-实战案例)
+  - [9.1 自定义序列化](#91-自定义序列化)
+  - [9.2 条件编译生成](#92-条件编译生成)
+- [10. 最佳实践](#10-最佳实践)
+  - [10.1 Token处理原则](#101-token处理原则)
+  - [10.2 代码组织](#102-代码组织)
+  - [10.3 测试策略](#103-测试策略)
+- [📚 总结](#总结)
+  - [关键概念](#关键概念)
+  - [核心技能](#核心技能)
+  - [下一步](#下一步)
+
 
 ## 📋 学习目标
 

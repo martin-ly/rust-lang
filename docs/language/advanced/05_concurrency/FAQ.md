@@ -1,6 +1,17 @@
-# 常见问题解答 (FAQ) - C05 并发
+﻿# 常见问题解答 (FAQ) - C05 并发
 
 ---
+
+
+## 📊 目录
+
+- [问答](#问答)
+  - [Q1: `Send` 和 `Sync` 到底有什么区别？我总是搞混](#q1-send-和-sync-到底有什么区别我总是搞混)
+  - [Q2: 既然 `Mutex` 这么好用，为什么 Rust 还推崇消息传递？](#q2-既然-mutex-这么好用为什么-rust-还推崇消息传递)
+  - [Q3: `Arc<Mutex<T>>` 看起来很笨重，它到底是怎么工作的？](#q3-arcmutext-看起来很笨重它到底是怎么工作的)
+  - [Q4: 我应该什么时候用 `Rayon`，什么时候用 `async/await` (Tokio/async-std)？](#q4-我应该什么时候用-rayon什么时候用-asyncawait-tokioasync-std)
+  - [Q5: 直接使用原子类型 (Atomics) 会比 `Mutex` 更快吗？](#q5-直接使用原子类型-atomics-会比-mutex-更快吗)
+
 
 ## 问答
 

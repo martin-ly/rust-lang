@@ -1,4 +1,17 @@
-# Borrow 和 BorrowMut
+﻿# Borrow 和 BorrowMut
+
+
+## 📊 目录
+
+- [1. 定义与作用](#1-定义与作用)
+  - [**Borrow Trait**](#borrow-trait)
+  - [**BorrowMut Trait**](#borrowmut-trait)
+- [2. 应用场景](#2-应用场景)
+  - [**在集合中的查找**](#在集合中的查找)
+  - [**可变借用场景**](#可变借用场景)
+- [3. 与 AsRef/AsMut 的区别](#3-与-asrefasmut-的区别)
+- [4. 总结](#4-总结)
+
 
 在 Rust 中，`Borrow` 和 `BorrowMut` 两个 trait 分别用于提供不可变借用和可变借用，它们在 Rust 的标准库中都定义在 `std::borrow` 模块中。
 下面是关于 Rust 中的 **Borrow** 和 **BorrowMut** 两个 trait 的详细介绍，以及它们在将拥有类型转换为借用形式时的作用和应用场景。

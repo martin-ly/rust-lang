@@ -1,4 +1,38 @@
-# 国际学术会议对标分析
+﻿# 国际学术会议对标分析
+
+
+## 📊 目录
+
+- [1. POPL (Principles of Programming Languages)](#1-popl-principles-of-programming-languages)
+  - [1.1 会议概况](#11-会议概况)
+  - [1.2 我们的对应内容](#12-我们的对应内容)
+  - [1.3 发表策略](#13-发表策略)
+- [2. PLDI (Programming Language Design and Implementation)](#2-pldi-programming-language-design-and-implementation)
+  - [2.1 会议概况](#21-会议概况)
+  - [2.2 我们的对应内容](#22-我们的对应内容)
+  - [2.3 发表策略](#23-发表策略)
+- [3. ICFP (International Conference on Functional Programming)](#3-icfp-international-conference-on-functional-programming)
+  - [3.1 会议概况](#31-会议概况)
+  - [3.2 我们的对应内容](#32-我们的对应内容)
+  - [3.3 发表策略](#33-发表策略)
+- [4. OOPSLA (Object-Oriented Programming, Systems, Languages, and Applications)](#4-oopsla-object-oriented-programming-systems-languages-and-applications)
+  - [4.1 会议概况](#41-会议概况)
+  - [4.2 我们的对应内容](#42-我们的对应内容)
+  - [4.3 发表策略](#43-发表策略)
+- [5. ESOP (European Symposium on Programming)](#5-esop-european-symposium-on-programming)
+  - [5.1 会议概况](#51-会议概况)
+  - [5.2 我们的对应内容](#52-我们的对应内容)
+  - [5.3 发表策略](#53-发表策略)
+- [6. TACAS (Tools and Algorithms for the Construction and Analysis of Systems)](#6-tacas-tools-and-algorithms-for-the-construction-and-analysis-of-systems)
+  - [6.1 会议概况](#61-会议概况)
+  - [6.2 我们的对应内容](#62-我们的对应内容)
+  - [6.3 发表策略](#63-发表策略)
+- [7. 发表策略总结](#7-发表策略总结)
+  - [7.1 论文准备](#71-论文准备)
+  - [7.2 发表计划](#72-发表计划)
+  - [7.3 成功指标](#73-成功指标)
+- [8. 结论](#8-结论)
+
 
 **文档版本**: 1.0  
 **创建日期**: 2025-01-27  

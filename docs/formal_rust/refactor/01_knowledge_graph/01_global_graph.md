@@ -1,7 +1,17 @@
-# 01.1 全局知识图谱（中/英）
+﻿# 01.1 全局知识图谱（中/英）
 
 > 完成状态：已完成（100%）。本页锚点与图谱校验通过。
 > 来源：`docs/KNOWLEDGE_GRAPH.md`, `docs/KNOWLEDGE_GRAPH_EN.md`
+
+
+## 📊 目录
+
+- [中文版本](#中文版本)
+- [English Version](#english-version)
+- [Cross-links](#cross-links)
+- [节点链接索引（双向导航）](#节点链接索引双向导航)
+- [系统编程专题深链索引](#系统编程专题深链索引)
+
 
 ## 中文版本
 

@@ -1,4 +1,16 @@
-# 范畴论基础 (Category Theory Foundations)
+﻿# 范畴论基础 (Category Theory Foundations)
+
+
+## 📊 目录
+
+- [1. 核心概念](#1-核心概念)
+- [2. 核心构造](#2-核心构造)
+  - [2.1. 积 (Product) 与和 (Coproduct)](#21-积-product-与和-coproduct)
+  - [2.2. 函子 (Functor)](#22-函子-functor)
+  - [2.3. 单子 (Monad)](#23-单子-monad)
+- [3. 型变 (Variance) 与函子性](#3-型变-variance-与函子性)
+- [4. 与线性类型的关系](#4-与线性类型的关系)
+
 
 ## 1. 核心概念
 

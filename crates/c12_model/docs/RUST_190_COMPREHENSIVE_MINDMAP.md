@@ -1,9 +1,30 @@
-# 🗺️ Rust 1.90 模型 - 综合思维导图
+﻿# 🗺️ Rust 1.90 模型 - 综合思维导图
 
 > **版本**: Rust 1.90 Edition 2024  
 > **创建日期**: 2025-10-20
 
 ---
+
+
+## 📊 目录
+
+- [📋 目录](#目录)
+- [🌳 整体架构](#整体架构)
+- [📊 形式语义](#形式语义)
+  - [操作语义 (Operational Semantics)](#操作语义-operational-semantics)
+  - [指称语义 (Denotational Semantics)](#指称语义-denotational-semantics)
+  - [公理语义 (Axiomatic Semantics)](#公理语义-axiomatic-semantics)
+- [🌐 分布式模型](#分布式模型)
+  - [一致性算法](#一致性算法)
+  - [分布式快照](#分布式快照)
+- [🔄 并发模型](#并发模型)
+  - [CSP vs Actor](#csp-vs-actor)
+  - [共享内存 vs 消息传递](#共享内存-vs-消息传递)
+- [📚 学习路径](#学习路径)
+  - [Week 1-2: 形式语义](#week-1-2-形式语义)
+  - [Week 3-4: 分布式](#week-3-4-分布式)
+  - [Week 5-6: 并发](#week-5-6-并发)
+
 
 ## 📋 目录
 

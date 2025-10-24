@@ -1,5 +1,14 @@
 ﻿# C06-04. 异步流 (Streams) 与接收器 (Sinks)
 
+
+## 📊 目录
+
+- [1. `Stream` Trait](#1-stream-trait)
+- [2. 使用 `Stream`](#2-使用-stream)
+- [3. `Sink` Trait](#3-sink-trait)
+- [总结](#总结)
+
+
 `Future` 代表一个随时间推移最终会产生的单个值。但很多时候，我们需要处理的是一系列随时间推移而产生的值，例如网络套接字的数据块、GUI 事件流或定时器滴答。
 
 为了处理这种异步序列，Rust 生态系统引入了 `Stream` Trait，可以将其视为异步版本的 `Iterator`。本章将探讨 `Stream` 的核心概念、用法以及如何通过 `Sink` 向异步数据源发送数据。

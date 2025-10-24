@@ -1,8 +1,57 @@
-# C13 Reliability - 架构与实施路线图
+﻿# C13 Reliability - 架构与实施路线图
 
 > **版本**: 2.0.0  
 > **Rust版本**: 1.90+  
 > **最后更新**: 2025-10-03
+
+
+## 📊 目录
+
+- [项目概述](#项目概述)
+- [架构层次图](#架构层次图)
+- [核心模块详解](#核心模块详解)
+  - [1. 错误处理模块 (error_handling)](#1-错误处理模块-error_handling)
+  - [2. 容错机制模块 (fault_tolerance)](#2-容错机制模块-fault_tolerance)
+  - [3. 运行时监控模块 (runtime_monitoring)](#3-运行时监控模块-runtime_monitoring)
+  - [4. 运行时环境模块 (runtime_environments)](#4-运行时环境模块-runtime_environments)
+  - [5. 分布式系统模块 (distributed_systems) 🆕](#5-分布式系统模块-distributed_systems)
+    - [5.1 共识算法 (consensus)](#51-共识算法-consensus)
+    - [5.2 分布式事务 (transaction)](#52-分布式事务-transaction)
+    - [5.3 分布式协调 (coordination)](#53-分布式协调-coordination)
+    - [5.4 数据复制 (replication)](#54-数据复制-replication)
+    - [5.5 一致性哈希 (consistent_hashing)](#55-一致性哈希-consistent_hashing)
+    - [5.6 分布式锁 (distributed_lock)](#56-分布式锁-distributed_lock)
+  - [6. 并发模型模块 (concurrency_models) 🆕](#6-并发模型模块-concurrency_models)
+  - [7. 微服务模式模块 (microservices_patterns) 🆕](#7-微服务模式模块-microservices_patterns)
+  - [8. 执行流感知模块 (execution_flow_awareness) 🆕](#8-执行流感知模块-execution_flow_awareness)
+  - [9. 系统自我感知模块 (system_self_awareness) 🆕](#9-系统自我感知模块-system_self_awareness)
+  - [10. 高级可观测性模块 (advanced_observability) 🆕](#10-高级可观测性模块-advanced_observability)
+- [实施时间线](#实施时间线)
+  - [第一阶段：核心增强 (2周) - 当前阶段](#第一阶段核心增强-2周-当前阶段)
+  - [第二阶段：分布式系统扩展 (3周)](#第二阶段分布式系统扩展-3周)
+  - [第三阶段：并发模型 (2周)](#第三阶段并发模型-2周)
+  - [第四阶段：微服务架构 (3周)](#第四阶段微服务架构-3周)
+  - [第五阶段：执行流感知 (2周)](#第五阶段执行流感知-2周)
+  - [第六阶段：系统自我感知 (3周)](#第六阶段系统自我感知-3周)
+  - [第七阶段：高级可观测性 (2周)](#第七阶段高级可观测性-2周)
+  - [第八阶段：文档与示例 (1周)](#第八阶段文档与示例-1周)
+- [性能目标](#性能目标)
+  - [延迟目标](#延迟目标)
+  - [资源开销](#资源开销)
+- [技术栈](#技术栈)
+  - [Rust 1.90+ 特性](#rust-190-特性)
+  - [核心依赖](#核心依赖)
+- [测试策略](#测试策略)
+  - [单元测试](#单元测试)
+  - [集成测试](#集成测试)
+  - [性能测试](#性能测试)
+  - [混沌工程测试](#混沌工程测试)
+- [文档计划](#文档计划)
+  - [技术文档](#技术文档)
+  - [用户文档](#用户文档)
+  - [开发者文档](#开发者文档)
+- [总结](#总结)
+
 
 ## 项目概述
 

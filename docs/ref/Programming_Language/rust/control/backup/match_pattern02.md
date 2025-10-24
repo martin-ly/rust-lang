@@ -1,4 +1,24 @@
-# Rust Pattern Matching Syntax
+﻿# Rust Pattern Matching Syntax
+
+
+## 📊 目录
+
+- [1. Match Expressions](#1-match-expressions)
+- [2. Pattern Types](#2-pattern-types)
+- [3. Pattern Matching Examples](#3-pattern-matching-examples)
+- [4. Mind Map](#4-mind-map)
+  - [1. 错误处理](#1-错误处理)
+  - [2. 可选值处理](#2-可选值处理)
+  - [3. 循环和流处理](#3-循环和流处理)
+  - [4. 特定业务逻辑](#4-特定业务逻辑)
+  - [5. 数据解析](#5-数据解析)
+  - [总结](#总结)
+  - [解释](#解释)
+    - [Trait Object 的定义和使用](#trait-object-的定义和使用)
+    - [解构语法的限制](#解构语法的限制)
+  - [解决方案](#解决方案)
+  - [*总结*](#总结)
+
 
 Here is a comprehensive summary of Rust's pattern matching syntax,
 including detailed examples for each concept and a mind map:

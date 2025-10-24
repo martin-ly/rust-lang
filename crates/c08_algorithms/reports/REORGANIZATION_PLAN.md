@@ -1,4 +1,24 @@
-# C08 Algorithms 文档重组计划
+﻿# C08 Algorithms 文档重组计划
+
+## 📊 目录
+
+- [C08 Algorithms 文档重组计划](#c08-algorithms-文档重组计划)
+  - [📊 目录](#-目录)
+  - [🎯 重组目标](#-重组目标)
+  - [📊 当前问题分析](#-当前问题分析)
+    - [根目录问题](#根目录问题)
+    - [docs/ 目录问题](#docs-目录问题)
+  - [🗂️ 新的目录结构](#️-新的目录结构)
+  - [📋 执行步骤](#-执行步骤)
+    - [Phase 1: 清理和归档 (步骤 1-3)](#phase-1-清理和归档-步骤-1-3)
+    - [Phase 2: 重组 docs 目录 (步骤 4-8)](#phase-2-重组-docs-目录-步骤-4-8)
+    - [Phase 3: 创建新的导航系统 (步骤 9-12)](#phase-3-创建新的导航系统-步骤-9-12)
+    - [Phase 4: 更新交叉引用 (步骤 13-14)](#phase-4-更新交叉引用-步骤-13-14)
+  - [📝 文档映射表](#-文档映射表)
+    - [algorithm\_exp 系列重命名](#algorithm_exp-系列重命名)
+    - [根目录报告文件归档](#根目录报告文件归档)
+  - [✅ 成功标准](#-成功标准)
+  - [🎯 后续改进](#-后续改进)
 
 **创建时间**: 2025-10-19  
 **状态**: 📋 规划中
@@ -14,11 +34,13 @@
 ## 📊 当前问题分析
 
 ### 根目录问题
+
 - ❌ 15+ 个报告文件混乱无序
 - ❌ `08_algorithms.md` 位置不当（应该在 docs/）
 - ❌ 缺乏清晰的目录结构
 
 ### docs/ 目录问题
+
 - ❌ 3 个重复的索引文件（00_MASTER_INDEX.md, DOCUMENTATION_INDEX.md, README.md）
 - ❌ 14 个 algorithm_exp*.md 文件缺乏分类
 - ❌ 多个 Rust 特性文档分散
@@ -116,11 +138,13 @@ c08_algorithms/
 ## 📋 执行步骤
 
 ### Phase 1: 清理和归档 (步骤 1-3)
+
 - [ ] 1. 创建 `reports/` 目录并移动所有报告文件
 - [ ] 2. 移动 `08_algorithms.md` 到 `docs/references/08_algorithms_basics.md`
 - [ ] 3. 归档旧的索引文件到 `docs/archives/`
 
 ### Phase 2: 重组 docs 目录 (步骤 4-8)
+
 - [ ] 4. 创建新的子目录结构 (guides/, theory/, advanced/, rust-features/, references/, archives/)
 - [ ] 5. 重命名并移动 algorithm_exp*.md 文件到 advanced/ 目录
 - [ ] 6. 移动理论文档到 theory/ 目录
@@ -128,12 +152,14 @@ c08_algorithms/
 - [ ] 8. 移动 Rust 特性文档到 rust-features/ 目录
 
 ### Phase 3: 创建新的导航系统 (步骤 9-12)
+
 - [ ] 9. 创建新的主索引 `docs/00_MASTER_INDEX.md`
 - [ ] 10. 为每个子目录创建 README.md
 - [ ] 11. 更新 FAQ.md 和 Glossary.md
 - [ ] 12. 更新主 README.md
 
 ### Phase 4: 更新交叉引用 (步骤 13-14)
+
 - [ ] 13. 更新所有文档中的链接
 - [ ] 14. 验证所有链接的正确性
 
@@ -161,6 +187,7 @@ c08_algorithms/
 ### 根目录报告文件归档
 
 将以下文件移动到 `reports/` 目录：
+
 - ASYNC_RECURSION_AND_CONCURRENCY_PATTERNS_SUMMARY.md
 - COMPREHENSIVE_ENHANCEMENT_COMPLETE_REPORT.md
 - COMPREHENSIVE_ENHANCEMENT_REPORT.md
@@ -193,4 +220,3 @@ c08_algorithms/
 2. 创建自动化的文档链接检查工具
 3. 建立文档更新规范
 4. 添加更多示例和教程
-

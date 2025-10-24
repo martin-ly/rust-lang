@@ -1,5 +1,36 @@
 ﻿# Rust语义分析的WebAssembly与嵌入式语义专题
 
+
+## 📊 目录
+
+- [1. Rust到Wasm的类型系统映射](#1-rust到wasm的类型系统映射)
+  - [定理1：类型映射保持性（Type Mapping Preservation）](#定理1类型映射保持性type-mapping-preservation)
+    - [形式化表述（伪Coq）](#形式化表述伪coq)
+    - [工程案例](#工程案例)
+- [1.1 Wasm边界检查定理递归细化](#11-wasm边界检查定理递归细化)
+  - [定理4：Wasm边界检查安全（Wasm Boundary Check Safety）](#定理4wasm边界检查安全wasm-boundary-check-safety)
+    - [形式化表述1（伪Coq）](#形式化表述1伪coq)
+    - [证明思路](#证明思路)
+    - [工程实现](#工程实现)
+    - [反例](#反例)
+    - [自动化验证脚本（伪Python）](#自动化验证脚本伪python)
+- [1.1.1 Rust到Wasm的边界检查代码示例](#111-rust到wasm的边界检查代码示例)
+  - [Rust到Wasm的边界检查代码示例](#rust到wasm的边界检查代码示例)
+  - [反例：绕过边界检查导致内存越界](#反例绕过边界检查导致内存越界)
+- [2. 生命周期与内存安全](#2-生命周期与内存安全)
+  - [定理2：生命周期安全（Lifetime Safety in Wasm）](#定理2生命周期安全lifetime-safety-in-wasm)
+    - [反例1](#反例1)
+    - [工程实践](#工程实践)
+- [3. 嵌入式系统的所有权与资源管理](#3-嵌入式系统的所有权与资源管理)
+  - [定理3：嵌入式资源安全（Embedded Resource Safety）](#定理3嵌入式资源安全embedded-resource-safety)
+    - [工程代码](#工程代码)
+    - [反例2](#反例2)
+- [4. GAT/const trait/async fn trait在Wasm/嵌入式下的挑战](#4-gatconst-traitasync-fn-trait在wasm嵌入式下的挑战)
+  - [形式化挑战](#形式化挑战)
+- [5. 自动化验证与工具链支持](#5-自动化验证与工具链支持)
+- [6. 拓展性与递归推进建议](#6-拓展性与递归推进建议)
+
+
 ## 1. Rust到Wasm的类型系统映射
 
 ### 定理1：类型映射保持性（Type Mapping Preservation）

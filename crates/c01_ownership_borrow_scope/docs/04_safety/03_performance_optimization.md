@@ -1,8 +1,4 @@
-# 性能优化 - Performance Optimization
-
-**版本**: 2.0  
-**最后更新**: 2025-01-27  
-**状态**: 完整版（已扩展）  
+﻿# 性能优化 - Performance Optimization
 
 ## 📋 目录
 

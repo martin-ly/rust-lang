@@ -1,5 +1,32 @@
 ﻿# Rust 机器学习理论分析
 
+
+## 📊 目录
+
+- [📅 文档信息](#文档信息)
+- [Rust Machine Learning Theory Analysis](#rust-machine-learning-theory-analysis)
+  - [1. 理论基础 / Theoretical Foundation](#1-理论基础-theoretical-foundation)
+    - [1.1 机器学习基础理论 / Machine Learning Foundation Theory](#11-机器学习基础理论-machine-learning-foundation-theory)
+    - [1.2 神经网络理论 / Neural Network Theory](#12-神经网络理论-neural-network-theory)
+    - [1.3 优化理论 / Optimization Theory](#13-优化理论-optimization-theory)
+  - [2. 工程实践 / Engineering Practice](#2-工程实践-engineering-practice)
+    - [2.1 张量运算实现 / Tensor Operations Implementation](#21-张量运算实现-tensor-operations-implementation)
+    - [2.2 激活函数实现 / Activation Function Implementation](#22-激活函数实现-activation-function-implementation)
+    - [2.3 损失函数实现 / Loss Function Implementation](#23-损失函数实现-loss-function-implementation)
+    - [2.4 优化器实现 / Optimizer Implementation](#24-优化器实现-optimizer-implementation)
+  - [3. 批判性分析 / Critical Analysis](#3-批判性分析-critical-analysis)
+    - [3.1 优势分析 / Advantage Analysis](#31-优势分析-advantage-analysis)
+    - [3.2 局限性讨论 / Limitation Discussion](#32-局限性讨论-limitation-discussion)
+    - [3.3 改进建议 / Improvement Suggestions](#33-改进建议-improvement-suggestions)
+  - [4. 应用案例 / Application Cases](#4-应用案例-application-cases)
+    - [4.1 Burn 案例分析 / Burn Case Analysis](#41-burn-案例分析-burn-case-analysis)
+    - [4.2 Tch-rs 案例分析 / Tch-rs Case Analysis](#42-tch-rs-案例分析-tch-rs-case-analysis)
+  - [5. 发展趋势 / Development Trends](#5-发展趋势-development-trends)
+    - [5.1 技术发展趋势 / Technical Development Trends](#51-技术发展趋势-technical-development-trends)
+    - [5.2 生态系统发展 / Ecosystem Development](#52-生态系统发展-ecosystem-development)
+  - [6. 总结 / Summary](#6-总结-summary)
+
+
 ## 📅 文档信息
 
 **文档版本**: v1.0  

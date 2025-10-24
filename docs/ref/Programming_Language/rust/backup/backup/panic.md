@@ -1,4 +1,14 @@
-# panic
+﻿# panic
+
+
+## 📊 目录
+
+- [1. 引发 panic](#1-引发-panic)
+- [2. 栈展开（Stack Unwinding）](#2-栈展开stack-unwinding)
+- [3. panic=abort 策略](#3-panicabort-策略)
+- [4. 捕获 panic](#4-捕获-panic)
+- [小结](#小结)
+
 
 在 Rust 中，`panic` 是用于表示程序遇到了不可恢复错误的机制，其运行时行为主要涉及以下几个方面：
 

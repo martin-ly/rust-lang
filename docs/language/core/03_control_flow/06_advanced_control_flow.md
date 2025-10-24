@@ -1,4 +1,14 @@
-# 06. 高级控制流模式 (Advanced Control Flow Patterns)
+﻿# 06. 高级控制流模式 (Advanced Control Flow Patterns)
+
+
+## 📊 目录
+
+- [6.1. 异步控制流 (Asynchronous Control Flow)](#61-异步控制流-asynchronous-control-flow)
+  - [6.1.1. `async`, `await`, 与 `Future`](#611-async-await-与-future)
+  - [6.1.2. 状态机转换的形式化视角](#612-状态机转换的形式化视角)
+- [6.2. 类型驱动的控制流 (Type-Driven Control Flow)](#62-类型驱动的控制流-type-driven-control-flow)
+  - [6.2.1. 类型状态模式](#621-类型状态模式)
+
 
 除了基础的条件和循环，Rust 还提供了更高级的模式来管理复杂的控制流。本章探讨两种强大的机制：异步控制流和类型状态模式。
 

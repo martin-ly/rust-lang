@@ -1,4 +1,4 @@
-# 内存安全保证 - Memory Safety Guarantees
+﻿# 内存安全保证 - Memory Safety Guarantees
 
 **版本**: 1.0  
 **最后更新**: 2025-01-27  

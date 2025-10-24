@@ -1,4 +1,22 @@
-# 类型等价与类型相等
+﻿# 类型等价与类型相等
+
+
+## 📊 目录
+
+- [1. 类型等价与类型相等](#1-类型等价与类型相等)
+  - [**类型等价（Type Equivalence）**](#类型等价type-equivalence)
+  - [**类型相等**](#类型相等)
+- [2. 新类型（Newtype Pattern）](#2-新类型newtype-pattern)
+- [3. 类型转换](#3-类型转换)
+  - [**(1) 显式转换（Explicit Conversion）**](#1-显式转换explicit-conversion)
+  - [**(2) 利用 `From`/`Into` Trait**](#2-利用-frominto-trait)
+  - [**(3) 自动解引用转换（Deref Coercion）**](#3-自动解引用转换deref-coercion)
+- [4. 类型上下转换（Coercion 与 Subtyping 转换）](#4-类型上下转换coercion-与-subtyping-转换)
+  - [**(1) 尺寸转换（Unsized Coercion）**](#1-尺寸转换unsized-coercion)
+  - [**(2) Trait 对象转换**](#2-trait-对象转换)
+  - [**(3) 生命周期转换**](#3-生命周期转换)
+- [总结](#总结)
+
 
 下面给出关于 Rust 中“类型等价”、“新类型”、“类型相等”、“类型转换”以及“类型上下转换”这些概念的详细解释和它们之间的关系、使用场景。
 

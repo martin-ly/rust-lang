@@ -1,4 +1,15 @@
-# 内部可变性和灵活的数据结构设计
+﻿# 内部可变性和灵活的数据结构设计
+
+
+## 📊 目录
+
+- [1. 使用`Cell`和`RefCell`](#1-使用cell和refcell)
+- [2. 使用`Arc<RefCell<T>>`](#2-使用arcrefcellt)
+- [3. 使用`RwLock`与`struct`和`enum`](#3-使用rwlock与struct和enum)
+- [4. 使用`Box`与`RefCell`](#4-使用box与refcell)
+- [5. 使用`enum`与`Box`和`RefCell`](#5-使用enum与box和refcell)
+- [总结](#总结)
+
 
 除了使用`RefCell`、`Mutex`和`RwLock`等类型结合
 `struct`、`enum`、`tuple`、`impl`和`match`表达式外，

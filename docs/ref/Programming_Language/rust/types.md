@@ -1,4 +1,14 @@
-# Compound and Composite Data Types
+﻿# Compound and Composite Data Types
+
+
+## 📊 目录
+
+- [Compound Data Types](#compound-data-types)
+- [Composite Data Types](#composite-data-types)
+- [Key Differences](#key-differences)
+- [Compound Data Types in Rust](#compound-data-types-in-rust)
+- [Composite Data Types in Rust](#composite-data-types-in-rust)
+
 
 ## Compound Data Types
 

@@ -1,8 +1,43 @@
-# C09 设计模式: 术语表 (Glossary)
+﻿# C09 设计模式: 术语表 (Glossary)
 
 > **文档定位**: 设计模式核心术语快速参考，涵盖模式、并发、形式化等关键概念  
 > **使用方式**: 通过术语索引快速查找定义，理解设计模式核心概念  
 > **相关文档**: [主索引](./00_MASTER_INDEX.md) | [README](./README.md) | [FAQ](./FAQ.md)
+
+
+## 📊 目录
+
+- [C09 设计模式: 术语表 (Glossary)](#c09-设计模式-术语表-glossary)
+  - [📊 目录](#-目录)
+  - [📋 术语索引](#-术语索引)
+  - [设计模式基础](#设计模式基础)
+    - [设计模式 (Design Pattern)](#设计模式-design-pattern)
+    - [GoF (Gang of Four)](#gof-gang-of-four)
+    - [单例模式 (Singleton)](#单例模式-singleton)
+    - [观察者模式 (Observer)](#观察者模式-observer)
+    - [策略模式 (Strategy)](#策略模式-strategy)
+    - [建造者模式 (Builder)](#建造者模式-builder)
+    - [类型状态模式 (Typestate Pattern)](#类型状态模式-typestate-pattern)
+  - [并发与异步](#并发与异步)
+    - [Actor 模式](#actor-模式)
+    - [Reactor 模式](#reactor-模式)
+    - [CSP (Communicating Sequential Processes)](#csp-communicating-sequential-processes)
+    - [Future](#future)
+    - [async/await](#asyncawait)
+  - [Rust 特性](#rust-特性)
+    - [Trait 对象](#trait-对象)
+    - [零成本抽象 (Zero-Cost Abstraction)](#零成本抽象-zero-cost-abstraction)
+    - [GATs (Generic Associated Types)](#gats-generic-associated-types)
+    - [RPITIT (Return Position Impl Trait in Trait)](#rpitit-return-position-impl-trait-in-trait)
+    - [OnceLock](#oncelock)
+  - [形式化理论](#形式化理论)
+    - [CPS 变换](#cps-变换)
+    - [Monad](#monad)
+    - [状态机 (State Machine)](#状态机-state-machine)
+    - [语义等价 (Semantic Equivalence)](#语义等价-semantic-equivalence)
+    - [Pin](#pin)
+  - [📚 延伸阅读](#-延伸阅读)
+
 
 **最后更新**: 2025-10-19  
 **适用版本**: Rust 1.90+ (Edition 2024)  

@@ -1,4 +1,4 @@
-# 🔧 Rust Compiler Internals Complete Guide (2025 Edition)
+﻿# 🔧 Rust Compiler Internals Complete Guide (2025 Edition)
 
 > **Version**: v2.0  
 > **Created**: 2025-10-20  
@@ -7,9 +7,50 @@
 
 ---
 
+
+## 📊 目录
+
+- [� Rust Compiler Internals Complete Guide (2025 Edition)](#-rust-compiler-internals-complete-guide-2025-edition)
+  - [📊 目录](#-目录)
+  - [📋 Table of Contents](#-table-of-contents)
+  - [Introduction](#introduction)
+  - [1. Compiler Overall Architecture](#1-compiler-overall-architecture)
+    - [1.1 Macro Architecture Diagram](#11-macro-architecture-diagram)
+    - [1.2 Core Data Structures](#12-core-data-structures)
+    - [1.3 Compilation Timeline](#13-compilation-timeline)
+  - [2. Frontend: From Source to HIR](#2-frontend-from-source-to-hir)
+    - [2.1 Lexical Analysis (Lexing)](#21-lexical-analysis-lexing)
+      - [Implementation Location](#implementation-location)
+      - [Token Types](#token-types)
+    - [2.2 Syntax Analysis (Parsing)](#22-syntax-analysis-parsing)
+      - [2.2.1 Implementation Location](#221-implementation-location)
+  - [5. MIR: Mid-level IR Explained](#5-mir-mid-level-ir-explained)
+    - [5.1 MIR Overview](#51-mir-overview)
+    - [5.2 MIR Structure](#52-mir-structure)
+      - [MIR Components](#mir-components)
+    - [5.3 MIR Examples](#53-mir-examples)
+      - [Simple Function](#simple-function)
+    - [5.4 Viewing MIR](#54-viewing-mir)
+      - [Command-line Flags](#command-line-flags)
+  - [10. Practice: Exploring Compiler Internals](#10-practice-exploring-compiler-internals)
+    - [10.1 Viewing Compiler Output](#101-viewing-compiler-output)
+    - [10.2 Viewing MIR](#102-viewing-mir)
+    - [10.3 Viewing LLVM IR](#103-viewing-llvm-ir)
+    - [10.4 Viewing Assembly](#104-viewing-assembly)
+  - [Appendix](#appendix)
+    - [A. Common rustc Flags](#a-common-rustc-flags)
+    - [B. Compiler Components Index](#b-compiler-components-index)
+    - [C. Learning Resources](#c-learning-resources)
+    - [D. Exercises](#d-exercises)
+      - [Beginner Exercises](#beginner-exercises)
+      - [Intermediate Exercises](#intermediate-exercises)
+      - [Advanced Exercises](#advanced-exercises)
+
+
 ## 📋 Table of Contents
 
 - [🔧 Rust Compiler Internals Complete Guide (2025 Edition)](#-rust-compiler-internals-complete-guide-2025-edition)
+  - [� 目录](#-目录)
   - [📋 Table of Contents](#-table-of-contents)
   - [Introduction](#introduction)
   - [1. Compiler Overall Architecture](#1-compiler-overall-architecture)

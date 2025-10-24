@@ -1,6 +1,14 @@
-# Module C04: The Generic System
+﻿# Module C04: The Generic System
 
 > **文档定位**: 本文档深入探讨 Rust 泛型系统的核心哲学和理论基础，从类型理论和范畴论的角度理解泛型。建议在掌握基础知识后阅读。中文版基础教程请查看 [generic_fundamentals.md](./generic_fundamentals.md)。
+
+
+## 📊 目录
+
+- [概述 (Overview)](#概述-overview)
+- [核心哲学 (Core Philosophy)](#核心哲学-core-philosophy)
+- [模块结构 (Module Structure)](#模块结构-module-structure)
+
 
 ## 概述 (Overview)
 

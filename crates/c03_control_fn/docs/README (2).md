@@ -1,4 +1,14 @@
-# Module C03: Control Flow & Functions
+﻿# Module C03: Control Flow & Functions
+
+
+## 📊 目录
+
+- [Module C03: Control Flow \& Functions](#module-c03-control-flow--functions)
+  - [📊 目录](#-目录)
+  - [概述 (Overview)](#概述-overview)
+  - [核心哲学 (Core Philosophy)](#核心哲学-core-philosophy)
+  - [模块结构 (Module Structure)](#模块结构-module-structure)
+
 
 ## 概述 (Overview)
 

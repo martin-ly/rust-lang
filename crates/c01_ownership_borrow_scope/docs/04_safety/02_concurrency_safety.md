@@ -1,4 +1,4 @@
-# 并发安全 - Concurrency Safety
+﻿# 并发安全 - Concurrency Safety
 
 **版本**: 2.0  
 **最后更新**: 2025-01-27  

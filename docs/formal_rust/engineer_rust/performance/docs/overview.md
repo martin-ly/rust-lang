@@ -1,4 +1,20 @@
-# 性能工程（Performance Engineering）
+﻿# 性能工程（Performance Engineering）
+
+
+## 📊 目录
+
+- [1. 概念定义与哲学基础（Principle & Definition）](#1-概念定义与哲学基础principle-definition)
+  - [1.1 历史沿革与国际视角（History & International Perspective）](#11-历史沿革与国际视角history-international-perspective)
+  - [1.2 主流观点与分歧（Mainstream Views & Debates）](#12-主流观点与分歧mainstream-views-debates)
+  - [1.3 术语表（Glossary）](#13-术语表glossary)
+- [2. Rust 1.88 工程论证与原理分析（Engineering Analysis in Rust 1.88）](#2-rust-188-工程论证与原理分析engineering-analysis-in-rust-188)
+- [3. 零成本抽象与性能可预测性的形式证明（Formal Reasoning & Proof Sketches）](#3-零成本抽象与性能可预测性的形式证明formal-reasoning-proof-sketches)
+  - [3.1 零成本抽象的工程保证（Zero-cost Abstraction Guarantee）](#31-零成本抽象的工程保证zero-cost-abstraction-guarantee)
+  - [3.2 性能可预测性的类型系统保障（Type System for Predictable Performance）](#32-性能可预测性的类型系统保障type-system-for-predictable-performance)
+- [4. 工程知识点系统化（Systematic Knowledge Points）](#4-工程知识点系统化systematic-knowledge-points)
+- [5. 批判性分析与未来展望（Critical Analysis & Future Trends）](#5-批判性分析与未来展望critical-analysis-future-trends)
+- [6. 参考与扩展阅读（References & Further Reading）](#6-参考与扩展阅读references-further-reading)
+
 
 ## 1. 概念定义与哲学基础（Principle & Definition）
 

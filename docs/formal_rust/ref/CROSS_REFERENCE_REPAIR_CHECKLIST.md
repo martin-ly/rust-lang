@@ -1,4 +1,42 @@
-# Cross-Reference Repair Checklist - 交叉引用修复检查清单
+﻿# Cross-Reference Repair Checklist - 交叉引用修复检查清单
+
+
+## 📊 目录
+
+- [Rust Formal Theory Project - Rust形式化理论项目](#rust-formal-theory-project-rust形式化理论项目)
+  - [1. Overview - 概述](#1-overview-概述)
+  - [2. Current Status - 当前状态](#2-current-status-当前状态)
+  - [3. Repair Categories - 修复类别](#3-repair-categories-修复类别)
+    - [3.1 Internal Document References - 内部文档引用](#31-internal-document-references-内部文档引用)
+    - [3.2 External References - 外部引用](#32-external-references-外部引用)
+  - [4. Repair Process - 修复过程](#4-repair-process-修复过程)
+    - [4.1 Automated Detection - 自动检测](#41-automated-detection-自动检测)
+    - [4.2 Manual Verification - 手动验证](#42-manual-verification-手动验证)
+  - [5. File-Specific Repair Tasks - 文件特定修复任务](#5-file-specific-repair-tasks-文件特定修复任务)
+    - [5.1 Core Theory Modules (c01-c04) - 核心理论模块](#51-core-theory-modules-c01-c04-核心理论模块)
+    - [5.2 Application Domain Modules (c05-c18) - 应用领域模块](#52-application-domain-modules-c05-c18-应用领域模块)
+    - [5.3 Documentation Files - 文档文件](#53-documentation-files-文档文件)
+    - [5.4 Gap Analysis Files - 差距分析文件](#54-gap-analysis-files-差距分析文件)
+  - [6. Repair Standards - 修复标准](#6-repair-standards-修复标准)
+    - [6.1 Internal Link Format - 内部链接格式](#61-internal-link-format-内部链接格式)
+    - [6.2 Anchor ID Standards - 锚点ID标准](#62-anchor-id-standards-锚点id标准)
+- [Section Name - 章节名称](#section-name-章节名称)
+  - [Subsection Name - 子章节名称](#subsection-name-子章节名称)
+    - [6.3 File Path Standards - 文件路径标准](#63-file-path-standards-文件路径标准)
+  - [7. Quality Assurance - 质量保证](#7-quality-assurance-质量保证)
+    - [7.1 Automated Validation - 自动验证](#71-automated-validation-自动验证)
+    - [7.2 Manual Review Process - 手动审查过程](#72-manual-review-process-手动审查过程)
+  - [8. Progress Tracking - 进度跟踪](#8-progress-tracking-进度跟踪)
+    - [8.1 Weekly Progress - 每周进度](#81-weekly-progress-每周进度)
+    - [8.2 Success Metrics - 成功指标](#82-success-metrics-成功指标)
+  - [9. Implementation Timeline - 实施时间表](#9-implementation-timeline-实施时间表)
+    - [9.1 Phase 1: Core Modules (Week 1) - 阶段1：核心模块（第1周）](#91-phase-1-core-modules-week-1-阶段1核心模块第1周)
+    - [9.2 Phase 2: Concurrency Modules (Week 2) - 阶段2：并发模块（第2周）](#92-phase-2-concurrency-modules-week-2-阶段2并发模块第2周)
+    - [9.3 Phase 3: Application Modules (Week 3-4) - 阶段3：应用模块（第3-4周）](#93-phase-3-application-modules-week-3-4-阶段3应用模块第3-4周)
+    - [9.4 Phase 4: Documentation (Week 5) - 阶段4：文档（第5周）](#94-phase-4-documentation-week-5-阶段4文档第5周)
+    - [9.5 Phase 5: Gap Analysis (Week 6) - 阶段5：差距分析（第6周）](#95-phase-5-gap-analysis-week-6-阶段5差距分析第6周)
+  - [10. Conclusion - 结论](#10-conclusion-结论)
+
 
 ## Rust Formal Theory Project - Rust形式化理论项目
 

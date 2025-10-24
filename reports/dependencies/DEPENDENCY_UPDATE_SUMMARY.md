@@ -1,5 +1,21 @@
 ﻿# 依赖库更新摘要 | Dependency Update Summary
 
+
+## 📊 目录
+
+- [依赖库更新摘要 | Dependency Update Summary](#依赖库更新摘要--dependency-update-summary)
+  - [📊 目录](#-目录)
+  - [📋 快速概览 | Quick Overview](#-快速概览--quick-overview)
+  - [🔄 主要更新 | Major Updates](#-主要更新--major-updates)
+    - [工作空间依赖 (6个)](#工作空间依赖-6个)
+    - [各 Crate 依赖 (9个)](#各-crate-依赖-9个)
+  - [✅ 验证结果 | Verification Results](#-验证结果--verification-results)
+  - [📊 统计数据 | Statistics](#-统计数据--statistics)
+  - [🔒 安全性 | Security](#-安全性--security)
+  - [📝 执行命令 | Commands Executed](#-执行命令--commands-executed)
+  - [📖 详细报告 | Detailed Report](#-详细报告--detailed-report)
+
+
 **日期**: 2025年10月6日  
 **状态**: ✅ 成功完成
 

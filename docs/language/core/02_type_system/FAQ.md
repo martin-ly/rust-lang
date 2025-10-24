@@ -1,4 +1,12 @@
-# 常见问题解答 (FAQ)
+﻿# 常见问题解答 (FAQ)
+
+
+## 📊 目录
+
+- [Q1: ``` `&mut T` 为何必须是不变的 (Invariant)？```](#q1-mut-t-为何必须是不变的-invariant)
+  - [Q2: 什么时候应该使用 `dyn Trait`，什么时候应该使用 `impl Trait`？](#q2-什么时候应该使用-dyn-trait什么时候应该使用-impl-trait)
+  - [Q3: `as` 和 `From`/`Into` 之间有什么本质区别？](#q3-as-和-frominto-之间有什么本质区别)
+
 
 本页旨在回答一些关于 Rust 类型系统的常见或深刻的问题。
 

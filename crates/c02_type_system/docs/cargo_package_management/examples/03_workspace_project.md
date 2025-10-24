@@ -1,4 +1,33 @@
-# 实战示例：完整工作空间项目
+﻿# 实战示例：完整工作空间项目
+
+
+## 📊 目录
+
+- [📋 项目概述](#项目概述)
+- [📁 项目结构](#项目结构)
+- [📝 完整代码](#完整代码)
+  - [Cargo.toml (工作空间根)](#cargotoml-工作空间根)
+  - [crates/core/Cargo.toml](#cratescorecargotoml)
+  - [crates/core/src/lib.rs](#cratescoresrclibrs)
+  - [crates/utils/Cargo.toml](#cratesutilscargotoml)
+  - [crates/utils/src/lib.rs](#cratesutilssrclibrs)
+  - [crates/api/Cargo.toml](#cratesapicargotoml)
+  - [crates/api/src/lib.rs](#cratesapisrclibrs)
+  - [crates/cli/Cargo.toml](#cratesclicargotoml)
+  - [crates/cli/src/main.rs](#cratesclisrcmainrs)
+- [🚀 构建和运行](#构建和运行)
+  - [工作空间级操作](#工作空间级操作)
+  - [单独构建成员](#单独构建成员)
+  - [发布构建](#发布构建)
+- [🧪 测试](#测试)
+  - [tests/integration.rs](#testsintegrationrs)
+- [📊 依赖分析](#依赖分析)
+- [🎯 学习要点](#学习要点)
+  - [1. 工作空间配置](#1-工作空间配置)
+  - [2. 成员包配置](#2-成员包配置)
+  - [3. 发布顺序](#3-发布顺序)
+- [📚 相关资源](#相关资源)
+
 
 **难度**: ⭐⭐⭐⭐  
 **类型**: 工作空间  

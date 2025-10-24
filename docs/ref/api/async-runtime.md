@@ -1,4 +1,46 @@
-# 异步运行时对比 API 文档
+﻿# 异步运行时对比 API 文档
+
+
+## 📊 目录
+
+- [📋 概述](#概述)
+- [🏗️ 核心结构](#️-核心结构)
+  - [AsyncRuntime](#asyncruntime)
+  - [BenchmarkResult](#benchmarkresult)
+- [🔧 核心模块](#核心模块)
+  - [comparison - 运行时对比](#comparison-运行时对比)
+    - [RuntimeAnalyzer](#runtimeanalyzer)
+  - [benchmarks - 性能基准测试](#benchmarks-性能基准测试)
+    - [BenchmarkSuite](#benchmarksuite)
+  - [metrics - 性能指标](#metrics-性能指标)
+    - [PerformanceMetrics](#performancemetrics)
+  - [monitoring_dashboard - 监控仪表板](#monitoring_dashboard-监控仪表板)
+    - [MonitoringDashboard](#monitoringdashboard)
+  - [error_handling - 错误处理](#error_handling-错误处理)
+    - [ErrorHandler](#errorhandler)
+  - [performance_optimization - 性能优化](#performance_optimization-性能优化)
+    - [PerformanceOptimizer](#performanceoptimizer)
+  - [observability_platform - 可观测性平台](#observability_platform-可观测性平台)
+    - [ObservabilityPlatform](#observabilityplatform)
+- [📊 基准测试](#基准测试)
+  - [运行基准测试](#运行基准测试)
+  - [基准测试配置](#基准测试配置)
+- [🎯 最佳实践](#最佳实践)
+  - [1. 运行时选择](#1-运行时选择)
+  - [2. 性能优化](#2-性能优化)
+  - [3. 错误处理](#3-错误处理)
+  - [4. 监控和可观测性](#4-监控和可观测性)
+- [🔧 配置选项](#配置选项)
+  - [环境变量](#环境变量)
+  - [配置文件](#配置文件)
+- [📈 性能指标](#性能指标)
+  - [关键指标](#关键指标)
+  - [性能目标](#性能目标)
+- [🚨 故障排除](#故障排除)
+  - [常见问题](#常见问题)
+  - [调试工具](#调试工具)
+- [📚 参考资料](#参考资料)
+
 
 ## 📋 概述
 

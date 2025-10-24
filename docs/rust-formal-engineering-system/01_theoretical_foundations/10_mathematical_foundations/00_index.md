@@ -1,4 +1,14 @@
-# 数学基础（Mathematical Foundations）索引
+﻿# 数学基础（Mathematical Foundations）索引
+
+
+## 📊 目录
+
+- [主题](#主题)
+- [与 Rust 的关联](#与-rust-的关联)
+- [实践与样例（Practice）](#实践与样例practice)
+- [相关索引](#相关索引)
+- [导航](#导航)
+
 
 ## 主题
 

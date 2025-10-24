@@ -1,4 +1,22 @@
-# Rust安全与认证架构验证 (Security Authentication Architecture Verification)
+﻿# Rust安全与认证架构验证 (Security Authentication Architecture Verification)
+
+
+## 📊 目录
+
+- [1. 概述](#1-概述)
+- [2. OAuth2认证框架](#2-oauth2认证框架)
+  - [2.1 OAuth2服务器实现](#21-oauth2服务器实现)
+  - [2.2 JWT令牌处理](#22-jwt令牌处理)
+- [3. 安全通信与加密](#3-安全通信与加密)
+  - [3.1 TLS/SSL安全通信](#31-tlsssl安全通信)
+  - [3.2 加密算法实现](#32-加密算法实现)
+- [4. 访问控制与权限管理](#4-访问控制与权限管理)
+  - [4.1 RBAC权限模型](#41-rbac权限模型)
+- [5. 最小可验证示例(MVE)](#5-最小可验证示例mve)
+- [6. 证明义务(Proof Obligations)](#6-证明义务proof-obligations)
+- [7. 总结](#7-总结)
+- [8. 交叉引用](#8-交叉引用)
+
 
 - 文档版本: 1.0  
 - 创建日期: 2025-01-27  

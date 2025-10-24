@@ -1,4 +1,14 @@
-# Proof Convergence Plan (Minimal Rulesets → 100%)
+﻿# Proof Convergence Plan (Minimal Rulesets → 100%)
+
+
+## 📊 目录
+
+- [Milestones](#milestones)
+- [Workstreams & Tasks](#workstreams-tasks)
+- [KPIs](#kpis)
+- [Ownership](#ownership)
+- [References](#references)
+
 
 Status: Active  
 Scope: Rust ≤ 1.89 (syntax/semantics, type system, borrowing/lifetimes, generics/traits/associated types)

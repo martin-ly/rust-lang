@@ -1,4 +1,18 @@
-# API网关（API Gateway）
+﻿# API网关（API Gateway）
+
+
+## 📊 目录
+
+- [1. 概念定义与哲学基础（Principle & Definition）](#1-概念定义与哲学基础principle-definition)
+  - [1.1 历史沿革与国际视角（History & International Perspective）](#11-历史沿革与国际视角history-international-perspective)
+  - [1.2 主流观点与分歧（Mainstream Views & Debates）](#12-主流观点与分歧mainstream-views-debates)
+  - [1.3 术语表（Glossary）](#13-术语表glossary)
+- [2. Rust生态下的API网关工程（Engineering in Rust Ecosystem）](#2-rust生态下的api网关工程engineering-in-rust-ecosystem)
+- [3. 典型场景与最佳实践（Typical Scenarios & Best Practices）](#3-典型场景与最佳实践typical-scenarios-best-practices)
+- [4. 常见问题与批判性分析（FAQ & Critical Analysis）](#4-常见问题与批判性分析faq-critical-analysis)
+- [5. 争议、局限与未来展望（Controversies, Limitations & Future Trends）](#5-争议局限与未来展望controversies-limitations-future-trends)
+- [6. 参考与扩展阅读（References & Further Reading）](#6-参考与扩展阅读references-further-reading)
+
 
 ## 1. 概念定义与哲学基础（Principle & Definition）
 

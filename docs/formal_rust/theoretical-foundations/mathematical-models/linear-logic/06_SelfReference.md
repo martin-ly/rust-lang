@@ -1,4 +1,13 @@
-# Rust 中的自借用（Self-referential structure）
+﻿# Rust 中的自借用（Self-referential structure）
+
+
+## 📊 目录
+
+- [使用 `Box`](#使用-box)
+- [使用 `Rc`](#使用-rc)
+- [使用 `RefCell`](#使用-refcell)
+- [注意事项](#注意事项)
+
 
 在 Rust 中实现自借用（Self-referential structure）
 需要使用 `Box` 或 `Rc`（Reference Counted）智能指针，

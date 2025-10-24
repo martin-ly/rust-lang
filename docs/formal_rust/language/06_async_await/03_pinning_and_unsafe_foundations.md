@@ -1,5 +1,15 @@
 ﻿# C06-03. Pinning 与 Unsafe 基础
 
+
+## 📊 目录
+
+- [1. 自引用问题 (The Self-Referential Problem)](#1-自引用问题-the-self-referential-problem)
+- [2. `Pin<T>`：内存固定](#2-pint内存固定)
+- [3. `Unpin` Trait](#3-unpin-trait)
+- [4. `unsafe` 与底层实现](#4-unsafe-与底层实现)
+- [总结](#总结)
+
+
 `async/await` 的一个核心挑战在于 `Future` 在 `.await` 点暂停和恢复时，其状态必须在内存中保持稳定。如果一个 `Future` 内部包含了对自身数据的引用（即自引用结构体体体），那么移动这个 `Future` 可能会使这些内部指针失效，导致内存不安全。
 
 Rust 的 `Pin<T>` 类型系统是解决这个问题的关键。本章深入探讨 `Pin` 的工作原理，以及它如何为异步代码提供必要的内存安全保证，即便是在涉及 `unsafe` 的底层实现中。

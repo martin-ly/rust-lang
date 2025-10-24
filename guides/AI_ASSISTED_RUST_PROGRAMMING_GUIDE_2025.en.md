@@ -1,4 +1,4 @@
-# 🤖 AI-Assisted Rust Programming Complete Guide (2025 Edition)
+﻿# 🤖 AI-Assisted Rust Programming Complete Guide (2025 Edition)
 
 > **Version**: v1.0  
 > **Created**: 2025-10-20  
@@ -6,6 +6,61 @@
 > **Goal**: 10x Rust Development Efficiency
 
 ---
+
+
+## 📊 目录
+
+- [🤖 AI-Assisted Rust Programming Complete Guide (2025 Edition)](#-ai-assisted-rust-programming-complete-guide-2025-edition)
+  - [📊 目录](#-目录)
+  - [📋 Table of Contents](#-table-of-contents)
+  - [Introduction](#introduction)
+  - [1. AI Programming Assistants Overview](#1-ai-programming-assistants-overview)
+    - [1.1 Mainstream AI Tools Comparison](#11-mainstream-ai-tools-comparison)
+    - [1.2 AI Tool Capability Matrix](#12-ai-tool-capability-matrix)
+  - [2. GitHub Copilot for Rust](#2-github-copilot-for-rust)
+    - [2.1 Configuration \& Optimization](#21-configuration--optimization)
+      - [VSCode Settings](#vscode-settings)
+      - [Rust-Specific Optimization](#rust-specific-optimization)
+    - [2.2 Effective Prompt Templates](#22-effective-prompt-templates)
+      - [Basic Template](#basic-template)
+    - [2.3 Smart Completion Tricks](#23-smart-completion-tricks)
+      - [Trick 1: Leverage Context](#trick-1-leverage-context)
+  - [3. Prompt Engineering Best Practices](#3-prompt-engineering-best-practices)
+    - [3.1 STAR Prompt Framework](#31-star-prompt-framework)
+    - [3.2 Rust-Specific Prompts](#32-rust-specific-prompts)
+      - [Ownership-Related](#ownership-related)
+      - [Concurrency-Related](#concurrency-related)
+  - [4. AI Code Review](#4-ai-code-review)
+    - [4.1 Automated Review Workflow](#41-automated-review-workflow)
+      - [GitHub Actions Integration](#github-actions-integration)
+    - [4.2 Review Checklist](#42-review-checklist)
+      - [Security Check](#security-check)
+  - [5. AI-Assisted Learning](#5-ai-assisted-learning)
+    - [5.1 Learning Path Planning](#51-learning-path-planning)
+    - [5.2 Concept Explanation](#52-concept-explanation)
+      - [Learning Ownership with AI](#learning-ownership-with-ai)
+  - [6. Common Issues \& Pitfalls](#6-common-issues--pitfalls)
+    - [6.1 Common Issues in AI-Generated Code](#61-common-issues-in-ai-generated-code)
+      - [Issue 1: Overuse of unwrap()](#issue-1-overuse-of-unwrap)
+      - [Issue 2: Ignoring Lifetimes](#issue-2-ignoring-lifetimes)
+    - [6.2 How to Validate AI Code](#62-how-to-validate-ai-code)
+      - [Validation Checklist](#validation-checklist)
+  - [7. Real-World Case Studies](#7-real-world-case-studies)
+    - [7.1 Case 1: Async Web Service](#71-case-1-async-web-service)
+      - [Requirements](#requirements)
+      - [Prompt](#prompt)
+    - [7.2 Case 2: CLI Tool](#72-case-2-cli-tool)
+      - [7.2.1 Requirements](#721-requirements)
+      - [7.2.2 Prompt](#722-prompt)
+  - [Appendix](#appendix)
+    - [A. AI Tool Resources](#a-ai-tool-resources)
+      - [Official Resources](#official-resources)
+      - [Rust-Specific Resources](#rust-specific-resources)
+    - [B. Prompt Library](#b-prompt-library)
+      - [Common Rust Prompt Templates](#common-rust-prompt-templates)
+    - [C. Efficiency Improvement Metrics](#c-efficiency-improvement-metrics)
+    - [D. Best Practices Summary](#d-best-practices-summary)
+
 
 ## 📋 Table of Contents
 
