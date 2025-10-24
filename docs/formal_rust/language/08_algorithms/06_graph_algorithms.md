@@ -1,21 +1,21 @@
 ﻿# 图论算法
 
-
 ## 📊 目录
 
-- [1. 图的表示与遍历](#1-图的表示与遍历)
-  - [1.1 邻接矩阵/表](#11-邻接矩阵表)
-  - [1.2 遍历算法](#12-遍历算法)
-- [2. 最短路径算法](#2-最短路径算法)
-  - [2.1 Dijkstra](#21-dijkstra)
-  - [2.2 Bellman-Ford](#22-bellman-ford)
-  - [2.3 Floyd-Warshall](#23-floyd-warshall)
-- [3. 最小生成树与网络流](#3-最小生成树与网络流)
-  - [3.1 Prim](#31-prim)
-  - [3.2 Kruskal](#32-kruskal)
-  - [3.3 Ford-Fulkerson/Edmonds-Karp](#33-ford-fulkersonedmonds-karp)
-- [4. 批判性分析与未来值值值展望](#4-批判性分析与未来值值值展望)
-
+- [图论算法](#图论算法)
+  - [📊 目录](#-目录)
+  - [1. 图的表示与遍历](#1-图的表示与遍历)
+    - [1.1 邻接矩阵/表](#11-邻接矩阵表)
+    - [1.2 遍历算法](#12-遍历算法)
+  - [2. 最短路径算法](#2-最短路径算法)
+    - [2.1 Dijkstra](#21-dijkstra)
+    - [2.2 Bellman-Ford](#22-bellman-ford)
+    - [2.3 Floyd-Warshall](#23-floyd-warshall)
+  - [3. 最小生成树与网络流](#3-最小生成树与网络流)
+    - [3.1 Prim](#31-prim)
+    - [3.2 Kruskal](#32-kruskal)
+    - [3.3 Ford-Fulkerson/Edmonds-Karp](#33-ford-fulkersonedmonds-karp)
+  - [4. 批判性分析与未来值展望](#4-批判性分析与未来值展望)
 
 ## 1. 图的表示与遍历
 
@@ -79,10 +79,10 @@ fn kruskal(n: usize, edges: &[(usize, usize, usize)]) -> Vec<(usize, usize, usiz
 fn ford_fulkerson(graph: &[Vec<(usize, i32)>], source: usize, sink: usize) -> i32 { /* ... */ }
 ```
 
-## 4. 批判性分析与未来值值值展望
+## 4. 批判性分析与未来值展望
 
 - 图算法需关注稀疏/稠密特征、并行化与工程可扩展性
-- 未来值值值可探索分布式图计算与AI驱动图算法
+- 未来值可探索分布式图计算与AI驱动图算法
 
 "
 

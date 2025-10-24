@@ -35,6 +35,18 @@
     - [9.1 编译时开销](#91-编译时开销)
     - [9.2 运行时性能](#92-运行时性能)
   - [10. 总结](#10-总结)
+  - [Rust 1.89 对齐（GAT 稳定化与 where-clauses 细化）](#rust-189-对齐gat-稳定化与-where-clauses-细化)
+    - [泛型关联类型（GAT）稳定化](#泛型关联类型gat稳定化)
+    - [where-clauses 细化](#where-clauses-细化)
+    - [对象安全与泛型](#对象安全与泛型)
+  - [附：索引锚点与导航](#附索引锚点与导航)
+    - [泛型系统定义 {#泛型系统定义}](#泛型系统定义-泛型系统定义)
+    - [参数化多态 {#参数化多态}](#参数化多态-参数化多态)
+    - [类型约束 {#类型约束}](#类型约束-类型约束)
+    - [单态化 {#单态化}](#单态化-单态化)
+    - [泛型关联类型 {#generic-associated-types}](#泛型关联类型-generic-associated-types)
+    - [对象安全 {#object-safety}](#对象安全-object-safety)
+    - [where-clauses {#where-clauses}](#where-clauses-where-clauses)
 
 ## 1. 概述
 

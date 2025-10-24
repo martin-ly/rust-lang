@@ -46,10 +46,10 @@
     - [错误恢复 {#错误恢复}](#错误恢复-错误恢复)
     - [GAT/where 边界 {#gat-where}](#gatwhere-边界-gat-where)
     - [impl Trait 推断 {#impl-trait}](#impl-trait-推断-impl-trait)
-    - [约束求解算法 {#constraint-solving}](#constraint-solving)
-    - [类型泛化 {#type-generalization}](#type-generalization)
-    - [闭包捕获推断 {#closure-capture}](#closure-capture)
-    - [生命周期推断 {#lifetime-inference}](#lifetime-inference)
+    - [约束求解算法 {#constraint-solving}](#约束求解算法-constraint-solving)
+    - [类型泛化 {#type-generalization}](#类型泛化-type-generalization)
+    - [闭包捕获推断 {#closure-capture}](#闭包捕获推断-closure-capture)
+    - [生命周期推断 {#lifetime-inference}](#生命周期推断-lifetime-inference)
   - [Rust 1.89 对齐（推断边界与实践）](#rust-189-对齐推断边界与实践)
 
 ## 1. 概述 {#1-概述}

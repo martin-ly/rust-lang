@@ -13,7 +13,7 @@
     - [2.3 引用类型](#23-引用类型)
   - [3. 生命周期标注](#3-生命周期标注)
     - [3.1 函数生命周期](#31-函数生命周期)
-    - [3.2 结构体体体体生命周期](#32-结构体体体体生命周期)
+    - [3.2 结构体生命周期](#32-结构体生命周期)
     - [3.3 方法生命周期](#33-方法生命周期)
   - [4. 生命周期推导](#4-生命周期推导)
     - [4.1 生命周期省略规则](#41-生命周期省略规则)
@@ -34,7 +34,7 @@
   - [8. 应用实例](#8-应用实例)
     - [8.1 基本生命周期](#81-基本生命周期)
     - [8.2 函数生命周期](#82-函数生命周期)
-    - [8.3 结构体体体体生命周期](#83-结构体体体体生命周期)
+    - [8.3 结构体生命周期](#83-结构体生命周期)
     - [8.4 静态生命周期](#84-静态生命周期)
   - [9. 参考文献](#9-参考文献)
 
@@ -104,10 +104,10 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 **形式化表示**：
 $$\text{longest} : \forall 'a. \&'a \text{str} \times \&'a \text{str} \rightarrow \&'a \text{str}$$
 
-### 3.2 结构体体体体生命周期
+### 3.2 结构体生命周期
 
-**定义 3.2**（结构体体体体生命周期）
-结构体体体体可以包含生命周期参数：
+**定义 3.2**（结构体生命周期）
+结构体可以包含生命周期参数：
 
 ```rust
 struct Reference<'a, T> {
@@ -308,7 +308,7 @@ fn main() {
 - 生命周期约束：$\rho_{\text{string1}} \cap \rho_{\text{string2}} \subseteq 'a$
 - 借用检查失败：$\rho_{\text{result}} \not\subseteq \rho_{\text{string2}}$
 
-### 8.3 结构体体体体生命周期
+### 8.3 结构体生命周期
 
 ```rust
 struct ImportantExcerpt<'a> {
@@ -326,7 +326,7 @@ fn main() {
 
 **形式化分析**：
 
-- 结构体体体体类型：$\forall 'a. \text{struct} \{ \text{part} : \&'a \text{str} \}$
+- 结构体类型：$\forall 'a. \text{struct} \{ \text{part} : \&'a \text{str} \}$
 - 实例类型：$\text{ImportantExcerpt}^{\rho_{\text{first\_sentence}}}$
 - 生命周期约束：$\rho_{\text{part}} \subseteq \rho_{\text{first\_sentence}}$
 

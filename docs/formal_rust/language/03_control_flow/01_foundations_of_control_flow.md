@@ -1,27 +1,27 @@
 ﻿# 01. 控制流基础 - Foundations of Control Flow
 
-
 ## 📊 目录
 
-- [概述 - Overview](#概述-overview)
-- [控制流的定义与设计哲学 - Definition and Design Philosophy](#控制流的定义与设计哲学-definition-and-design-philosophy)
-  - [形式化定义 - Formal Definition](#形式化定义-formal-definition)
-  - [设计哲学 - Design Philosophy](#设计哲学-design-philosophy)
-- [核心概念 - Core Concepts](#核心概念-core-concepts)
-  - [1. 表达式与语句 - Expressions and Statements](#1-表达式与语句-expressions-and-statements)
-    - [表达式 (Expressions)](#表达式-expressions)
-    - [语句 (Statements)](#语句-statements)
-  - [2. 控制流图 (CFG) - Control Flow Graph](#2-控制流图-cfg-control-flow-graph)
-  - [3. 所有权与借用系统集成 - Ownership and Borrowing Integration](#3-所有权与借用系统集成-ownership-and-borrowing-integration)
-- [Rust 1.89 新特性 - Rust 1.89 New Features](#rust-189-新特性-rust-189-new-features)
-  - [1. 改进的模式匹配 - Enhanced Pattern Matching](#1-改进的模式匹配-enhanced-pattern-matching)
-  - [2. 结构化并发控制流 - Structured Concurrency Control Flow](#2-结构化并发控制流-structured-concurrency-control-flow)
-  - [3. 异步控制流增强 - Async Control Flow Enhancements](#3-异步控制流增强-async-control-flow-enhancements)
-- [形式化验证与安全保证 - Formal Verification and Safety Guarantees](#形式化验证与安全保证-formal-verification-and-safety-guarantees)
-  - [1. 控制流安全定理 - Control Flow Safety Theorems](#1-控制流安全定理-control-flow-safety-theorems)
-  - [2. 终止性分析 - Termination Analysis](#2-终止性分析-termination-analysis)
-- [总结 - Summary](#总结-summary)
-
+- [01. 控制流基础 - Foundations of Control Flow](#01-控制流基础---foundations-of-control-flow)
+  - [📊 目录](#-目录)
+  - [概述 - Overview](#概述---overview)
+  - [控制流的定义与设计哲学 - Definition and Design Philosophy](#控制流的定义与设计哲学---definition-and-design-philosophy)
+    - [形式化定义 - Formal Definition](#形式化定义---formal-definition)
+    - [设计哲学 - Design Philosophy](#设计哲学---design-philosophy)
+  - [核心概念 - Core Concepts](#核心概念---core-concepts)
+    - [1. 表达式与语句 - Expressions and Statements](#1-表达式与语句---expressions-and-statements)
+      - [表达式 (Expressions)](#表达式-expressions)
+      - [语句 (Statements)](#语句-statements)
+    - [2. 控制流图 (CFG) - Control Flow Graph](#2-控制流图-cfg---control-flow-graph)
+    - [3. 所有权与借用系统集成 - Ownership and Borrowing Integration](#3-所有权与借用系统集成---ownership-and-borrowing-integration)
+  - [Rust 1.89 新特性 - Rust 1.89 New Features](#rust-189-新特性---rust-189-new-features)
+    - [1. 改进的模式匹配 - Enhanced Pattern Matching](#1-改进的模式匹配---enhanced-pattern-matching)
+    - [2. 结构化并发控制流 - Structured Concurrency Control Flow](#2-结构化并发控制流---structured-concurrency-control-flow)
+    - [3. 异步控制流增强 - Async Control Flow Enhancements](#3-异步控制流增强---async-control-flow-enhancements)
+  - [形式化验证与安全保证 - Formal Verification and Safety Guarantees](#形式化验证与安全保证---formal-verification-and-safety-guarantees)
+    - [1. 控制流安全定理 - Control Flow Safety Theorems](#1-控制流安全定理---control-flow-safety-theorems)
+    - [2. 终止性分析 - Termination Analysis](#2-终止性分析---termination-analysis)
+  - [总结 - Summary](#总结---summary)
 
 ## 概述 - Overview
 

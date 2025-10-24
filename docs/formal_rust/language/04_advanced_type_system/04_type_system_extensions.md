@@ -1,25 +1,25 @@
 ﻿# 4.4 类型系统扩展机制 - Type System Extension Mechanisms
 
-
 ## 📊 目录
 
-- [概述 - Overview](#概述-overview)
-- [宏系统 - Macro System](#宏系统-macro-system)
-  - [形式化定义 - Formal Definition](#形式化定义-formal-definition)
-  - [Rust 1.89 宏系统增强 - Enhanced Macro System](#rust-189-宏系统增强-enhanced-macro-system)
-- [插件系统 - Plugin System](#插件系统-plugin-system)
-  - [2形式化定义 - Formal Definition](#2形式化定义-formal-definition)
-  - [Rust 1.89 插件系统特性 - Plugin System Features](#rust-189-插件系统特性-plugin-system-features)
-- [类型系统扩展 - Type System Extensions](#类型系统扩展-type-system-extensions)
-  - [3形式化定义 - Formal Definition](#3形式化定义-formal-definition)
-  - [Rust 1.89 类型系统扩展特性 - Type System Extension Features](#rust-189-类型系统扩展特性-type-system-extension-features)
-- [扩展系统集成 - Extension System Integration](#扩展系统集成-extension-system-integration)
-  - [1. 编译时扩展 - Compile-Time Extensions](#1-编译时扩展-compile-time-extensions)
-  - [2. 运行时扩展 - Runtime Extensions](#2-运行时扩展-runtime-extensions)
-- [扩展系统验证 - Extension System Validation](#扩展系统验证-extension-system-validation)
-  - [形式化验证 - Formal Verification](#形式化验证-formal-verification)
-- [总结 - Summary](#总结-summary)
-
+- [4.4 类型系统扩展机制 - Type System Extension Mechanisms](#44-类型系统扩展机制---type-system-extension-mechanisms)
+  - [📊 目录](#-目录)
+  - [概述 - Overview](#概述---overview)
+  - [宏系统 - Macro System](#宏系统---macro-system)
+    - [形式化定义 - Formal Definition](#形式化定义---formal-definition)
+    - [Rust 1.89 宏系统增强 - Enhanced Macro System](#rust-189-宏系统增强---enhanced-macro-system)
+  - [插件系统 - Plugin System](#插件系统---plugin-system)
+    - [2形式化定义 - Formal Definition](#2形式化定义---formal-definition)
+    - [Rust 1.89 插件系统特性 - Plugin System Features](#rust-189-插件系统特性---plugin-system-features)
+  - [类型系统扩展 - Type System Extensions](#类型系统扩展---type-system-extensions)
+    - [3形式化定义 - Formal Definition](#3形式化定义---formal-definition)
+    - [Rust 1.89 类型系统扩展特性 - Type System Extension Features](#rust-189-类型系统扩展特性---type-system-extension-features)
+  - [扩展系统集成 - Extension System Integration](#扩展系统集成---extension-system-integration)
+    - [1. 编译时扩展 - Compile-Time Extensions](#1-编译时扩展---compile-time-extensions)
+    - [2. 运行时扩展 - Runtime Extensions](#2-运行时扩展---runtime-extensions)
+  - [扩展系统验证 - Extension System Validation](#扩展系统验证---extension-system-validation)
+    - [形式化验证 - Formal Verification](#形式化验证---formal-verification)
+  - [总结 - Summary](#总结---summary)
 
 ## 概述 - Overview
 

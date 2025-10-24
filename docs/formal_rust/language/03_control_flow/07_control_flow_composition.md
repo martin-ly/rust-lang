@@ -1,22 +1,22 @@
 ﻿# 07. 控制流组合模式 - Control Flow Composition Patterns
 
-
 ## 📊 目录
 
-- [概述 - Overview](#概述-overview)
-- [7.1 控制流组合器 - Control Flow Combinators](#71-控制流组合器-control-flow-combinators)
-  - [7.1.1 基础组合器](#711-基础组合器)
-  - [7.1.2 高级组合器](#712-高级组合器)
-- [7.2 管道模式 - Pipeline Patterns](#72-管道模式-pipeline-patterns)
-  - [7.2.1 基础管道](#721-基础管道)
-  - [7.2.2 高级管道模式](#722-高级管道模式)
-- [7.3 错误传播组合 - Error Propagation Composition](#73-错误传播组合-error-propagation-composition)
-  - [7.3.1 错误传播链](#731-错误传播链)
-  - [7.3.2 错误组合器](#732-错误组合器)
-- [7.4 并发控制流组合 - Concurrent Control Flow Composition](#74-并发控制流组合-concurrent-control-flow-composition)
-  - [7.4.1 并发组合模式](#741-并发组合模式)
-- [总结 - Summary](#总结-summary)
-
+- [07. 控制流组合模式 - Control Flow Composition Patterns](#07-控制流组合模式---control-flow-composition-patterns)
+  - [📊 目录](#-目录)
+  - [概述 - Overview](#概述---overview)
+  - [7.1 控制流组合器 - Control Flow Combinators](#71-控制流组合器---control-flow-combinators)
+    - [7.1.1 基础组合器](#711-基础组合器)
+    - [7.1.2 高级组合器](#712-高级组合器)
+  - [7.2 管道模式 - Pipeline Patterns](#72-管道模式---pipeline-patterns)
+    - [7.2.1 基础管道](#721-基础管道)
+    - [7.2.2 高级管道模式](#722-高级管道模式)
+  - [7.3 错误传播组合 - Error Propagation Composition](#73-错误传播组合---error-propagation-composition)
+    - [7.3.1 错误传播链](#731-错误传播链)
+    - [7.3.2 错误组合器](#732-错误组合器)
+  - [7.4 并发控制流组合 - Concurrent Control Flow Composition](#74-并发控制流组合---concurrent-control-flow-composition)
+    - [7.4.1 并发组合模式](#741-并发组合模式)
+  - [总结 - Summary](#总结---summary)
 
 ## 概述 - Overview
 
