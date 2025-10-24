@@ -2,7 +2,6 @@
 
 > 适用范围：Rust 1.90+，Tokio 1.35+。文档风格遵循 [`DOCUMENTATION_STANDARDS.md`](DOCUMENTATION_STANDARDS.md)。
 
-
 ## 📊 目录
 
 - [C10 Networks 综合文档索引](#c10-networks-综合文档索引)
@@ -60,7 +59,6 @@
     - [4. 质量指标](#4-质量指标)
   - [🔗 相关文档](#-相关文档)
 
-
 [![Rust](https://img.shields.io/badge/rust-1.90+-orange.svg)](https://www.rust-lang.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](../../LICENSE)
 [![Crates.io](https://img.shields.io/crates/v/c10_networks.svg)](https://crates.io/crates/c10_networks)
@@ -68,7 +66,7 @@
 ## 📋 目录
 
 - [C10 Networks 综合文档索引](#c10-networks-综合文档索引)
-  - [� 目录](#-目录)
+  - [📊 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [🎯 概述](#-概述)
     - [1. 文档体系](#1-文档体系)
