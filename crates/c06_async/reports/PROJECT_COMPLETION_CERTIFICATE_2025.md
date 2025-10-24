@@ -1,6 +1,5 @@
 ﻿# 🎓 Rust 异步编程项目完成证书
 
-
 ## 📊 目录
 
 - [🎓 Rust 异步编程项目完成证书](#-rust-异步编程项目完成证书)
@@ -40,7 +39,6 @@
   - [📞 项目信息](#-项目信息-1)
   - [🙏 致谢](#-致谢)
   - [📝 签署](#-签署)
-
 
 -**Rust Async Programming Project Completion Certificate**
 

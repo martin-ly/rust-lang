@@ -3,17 +3,19 @@
 
 ## 📊 目录
 
-- [1. 概念定义与哲学基础（Principle & Definition）](#1-概念定义与哲学基础principle-definition)
-  - [1.1 历史沿革与国际视角（History & International Perspective）](#11-历史沿革与国际视角history-international-perspective)
-  - [1.2 主流观点与分歧（Mainstream Views & Debates）](#12-主流观点与分歧mainstream-views-debates)
-  - [1.3 术语表（Glossary）](#13-术语表glossary)
-- [2. Rust 1.88 工程论证与原理分析（Engineering Analysis in Rust 1.88）](#2-rust-188-工程论证与原理分析engineering-analysis-in-rust-188)
-- [3. 类型安全与可观测性一致性的形式证明（Formal Reasoning & Proof Sketches）](#3-类型安全与可观测性一致性的形式证明formal-reasoning-proof-sketches)
-  - [3.1 日志与指标类型安全（Type Safety of Logs & Metrics）](#31-日志与指标类型安全type-safety-of-logs-metrics)
-  - [3.2 分布式追踪上下文一致性（Distributed Trace Context Consistency）](#32-分布式追踪上下文一致性distributed-trace-context-consistency)
-- [4. 工程知识点系统化（Systematic Knowledge Points）](#4-工程知识点系统化systematic-knowledge-points)
-- [5. 批判性分析与未来展望（Critical Analysis & Future Trends）](#5-批判性分析与未来展望critical-analysis-future-trends)
-- [6. 参考与扩展阅读（References & Further Reading）](#6-参考与扩展阅读references-further-reading)
+- [日志与可观测性（Logging \& Observability）](#日志与可观测性logging--observability)
+  - [📊 目录](#-目录)
+  - [1. 概念定义与哲学基础（Principle \& Definition）](#1-概念定义与哲学基础principle--definition)
+    - [1.1 历史沿革与国际视角（History \& International Perspective）](#11-历史沿革与国际视角history--international-perspective)
+    - [1.2 主流观点与分歧（Mainstream Views \& Debates）](#12-主流观点与分歧mainstream-views--debates)
+    - [1.3 术语表（Glossary）](#13-术语表glossary)
+  - [2. Rust 1.88 工程论证与原理分析（Engineering Analysis in Rust 1.88）](#2-rust-188-工程论证与原理分析engineering-analysis-in-rust-188)
+  - [3. 类型安全与可观测性一致性的形式证明（Formal Reasoning \& Proof Sketches）](#3-类型安全与可观测性一致性的形式证明formal-reasoning--proof-sketches)
+    - [3.1 日志与指标类型安全（Type Safety of Logs \& Metrics）](#31-日志与指标类型安全type-safety-of-logs--metrics)
+    - [3.2 分布式追踪上下文一致性（Distributed Trace Context Consistency）](#32-分布式追踪上下文一致性distributed-trace-context-consistency)
+  - [4. 工程知识点系统化（Systematic Knowledge Points）](#4-工程知识点系统化systematic-knowledge-points)
+  - [5. 批判性分析与未来展望（Critical Analysis \& Future Trends）](#5-批判性分析与未来展望critical-analysis--future-trends)
+  - [6. 参考与扩展阅读（References \& Further Reading）](#6-参考与扩展阅读references--further-reading)
 
 
 ## 1. 概念定义与哲学基础（Principle & Definition）
