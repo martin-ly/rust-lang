@@ -1,6 +1,5 @@
 ﻿# 云原生进阶（Advanced Cloud Native）
 
-
 ## 📊 目录
 
 - [云原生进阶（Advanced Cloud Native）](#云原生进阶advanced-cloud-native)
@@ -13,7 +12,6 @@
   - [4. 最佳实践、争议与未来趋势（Best Practices, Controversies \& Future Trends）](#4-最佳实践争议与未来趋势best-practices-controversies--future-trends)
   - [5. 术语表（Glossary）](#5-术语表glossary)
   - [6. 参考文献与扩展阅读（References \& Further Reading）](#6-参考文献与扩展阅读references--further-reading)
-
 
 ## 1. 哲学基础与国际定义对标（Philosophical Foundation & International Definition）
 
