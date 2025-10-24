@@ -1116,7 +1116,6 @@ async fn set_with_random_ttl(con: &mut redis::aio::Connection, key: &str, value:
     
     Ok(())
 }
-```
 
 // 辅助函数
 async fn query_database(_key: &str) -> anyhow::Result<Option<String>> {
@@ -1133,3 +1132,4 @@ impl Database {
         })
     }
 }
+```
