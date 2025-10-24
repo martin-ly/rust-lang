@@ -1,50 +1,50 @@
 ﻿# Rust声明宏形式化理论
 
-
 ## 📊 目录
 
-- [1. 声明宏概述](#1-声明宏概述)
-  - [1.1 声明宏定义](#11-声明宏定义)
-  - [1.2 声明宏语法结构](#12-声明宏语法结构)
-- [2. 宏模式匹配理论](#2-宏模式匹配理论)
-  - [2.1 模式定义](#21-模式定义)
-  - [2.2 元变量类型系统](#22-元变量类型系统)
-  - [2.3 重复模式理论](#23-重复模式理论)
-  - [2.4 模式匹配算法](#24-模式匹配算法)
-- [3. 宏模板展开理论](#3-宏模板展开理论)
-  - [3.1 模板定义](#31-模板定义)
-  - [3.2 变量替换理论](#32-变量替换理论)
-  - [3.3 重复展开理论](#33-重复展开理论)
-- [4. 声明宏类型规则](#4-声明宏类型规则)
-  - [4.1 宏构造类型规则](#41-宏构造类型规则)
-  - [4.2 宏调用类型规则](#42-宏调用类型规则)
-  - [4.3 元变量类型规则](#43-元变量类型规则)
-- [5. 声明宏卫生性](#5-声明宏卫生性)
-  - [5.1 卫生性定义](#51-卫生性定义)
-  - [5.2 卫生性保证](#52-卫生性保证)
-  - [5.3 变量捕获规则](#53-变量捕获规则)
-- [6. 声明宏实现](#6-声明宏实现)
-  - [6.1 宏展开引擎](#61-宏展开引擎)
-  - [6.2 模式匹配实现](#62-模式匹配实现)
-  - [6.3 模板展开实现](#63-模板展开实现)
-- [7. 实际应用示例](#7-实际应用示例)
-  - [7.1 基础宏示例](#71-基础宏示例)
-  - [7.2 高级宏示例](#72-高级宏示例)
-  - [7.3 复杂模式匹配示例](#73-复杂模式匹配示例)
-- [8. 声明宏优化](#8-声明宏优化)
-  - [8.1 编译时优化](#81-编译时优化)
-  - [8.2 模式匹配优化](#82-模式匹配优化)
-  - [8.3 展开优化](#83-展开优化)
-- [9. 声明宏定理和证明](#9-声明宏定理和证明)
-  - [9.1 模式匹配正确性](#91-模式匹配正确性)
-  - [9.2 模板展开正确性](#92-模板展开正确性)
-  - [9.3 声明宏终止性](#93-声明宏终止性)
-- [10. 声明宏最佳实践](#10-声明宏最佳实践)
-  - [10.1 设计原则](#101-设计原则)
-  - [10.2 常见陷阱](#102-常见陷阱)
-  - [10.3 调试技巧](#103-调试技巧)
-- [11. 总结](#11-总结)
-
+- [Rust声明宏形式化理论](#rust声明宏形式化理论)
+  - [📊 目录](#-目录)
+  - [1. 声明宏概述](#1-声明宏概述)
+    - [1.1 声明宏定义](#11-声明宏定义)
+    - [1.2 声明宏语法结构](#12-声明宏语法结构)
+  - [2. 宏模式匹配理论](#2-宏模式匹配理论)
+    - [2.1 模式定义](#21-模式定义)
+    - [2.2 元变量类型系统](#22-元变量类型系统)
+    - [2.3 重复模式理论](#23-重复模式理论)
+    - [2.4 模式匹配算法](#24-模式匹配算法)
+  - [3. 宏模板展开理论](#3-宏模板展开理论)
+    - [3.1 模板定义](#31-模板定义)
+    - [3.2 变量替换理论](#32-变量替换理论)
+    - [3.3 重复展开理论](#33-重复展开理论)
+  - [4. 声明宏类型规则](#4-声明宏类型规则)
+    - [4.1 宏构造类型规则](#41-宏构造类型规则)
+    - [4.2 宏调用类型规则](#42-宏调用类型规则)
+    - [4.3 元变量类型规则](#43-元变量类型规则)
+  - [5. 声明宏卫生性](#5-声明宏卫生性)
+    - [5.1 卫生性定义](#51-卫生性定义)
+    - [5.2 卫生性保证](#52-卫生性保证)
+    - [5.3 变量捕获规则](#53-变量捕获规则)
+  - [6. 声明宏实现](#6-声明宏实现)
+    - [6.1 宏展开引擎](#61-宏展开引擎)
+    - [6.2 模式匹配实现](#62-模式匹配实现)
+    - [6.3 模板展开实现](#63-模板展开实现)
+  - [7. 实际应用示例](#7-实际应用示例)
+    - [7.1 基础宏示例](#71-基础宏示例)
+    - [7.2 高级宏示例](#72-高级宏示例)
+    - [7.3 复杂模式匹配示例](#73-复杂模式匹配示例)
+  - [8. 声明宏优化](#8-声明宏优化)
+    - [8.1 编译时优化](#81-编译时优化)
+    - [8.2 模式匹配优化](#82-模式匹配优化)
+    - [8.3 展开优化](#83-展开优化)
+  - [9. 声明宏定理和证明](#9-声明宏定理和证明)
+    - [9.1 模式匹配正确性](#91-模式匹配正确性)
+    - [9.2 模板展开正确性](#92-模板展开正确性)
+    - [9.3 声明宏终止性](#93-声明宏终止性)
+  - [10. 声明宏最佳实践](#10-声明宏最佳实践)
+    - [10.1 设计原则](#101-设计原则)
+    - [10.2 常见陷阱](#102-常见陷阱)
+    - [10.3 调试技巧](#103-调试技巧)
+  - [11. 总结](#11-总结)
 
 ## 1. 声明宏概述
 
@@ -83,19 +83,24 @@ DeclarativeMacro
 $$\text{MacroPattern} = \text{TokenTree} \times \text{Repetition} \times \text{Metavariable}$$
 
 **TokenTree定义**:
-$$\text{TokenTree} = \text{enum}\{
+$$
+\text{TokenTree} = \text{enum}\{
     \text{Token}(\text{Token}),
     \text{Delimited}(\text{DelimSpan}, \text{Delimiter}, \text{TokenStream})
-\}$$
+\}
+$$
 
 ### 2.2 元变量类型系统
 
 **元变量类型**:
-$$\text{Metavariable} = \text{enum}\{
+$$
+\text{Metavariable} = \text{enum}\{
     \text{expr}, \text{ident}, \text{ty}, \text{pat}, \text{stmt}, \text{block}, \text{item}, \text{meta}, \text{tt}
-\}$$
+\}
+$$
 
 **元变量语义**:
+
 - $\text{expr}$: 表达式
 - $\text{ident}$: 标识符
 - $\text{ty}$: 类型
@@ -112,6 +117,7 @@ $$\text{Metavariable} = \text{enum}\{
 $$\text{Repetition} = \text{enum}\{*, +, ?\}$$
 
 **重复语义**:
+
 - $*$: 零次或多次重复
 - $+$: 一次或多次重复
 - $?$: 零次或一次重复
@@ -122,16 +128,22 @@ $$\text{RepetitionPattern} = \$(\text{TokenTree}) \text{Repetition} \text{Separa
 ### 2.4 模式匹配算法
 
 **匹配函数**:
-$$\text{match} : \text{MacroPattern} \times \text{TokenStream} \to \text{Option}[\text{MatchResult}]$$
+$$
+\text{match} : \text{MacroPattern} \times \text{TokenStream} \to \text{Option}[\text{MatchResult}]
+$$
 
 **匹配结果**:
-$$\text{MatchResult} = \text{struct}\{
+$$
+\text{MatchResult} = \text{struct}\{
     \text{bindings}: \text{Map}[\text{Metavariable}, \text{TokenStream}],
     \text{rest}: \text{TokenStream}
-\}$$
+\}
+$$
 
 **匹配规则**:
-$$\frac{\Gamma \vdash \text{pattern}(p) \quad \Gamma \vdash \text{input}(i) \quad \text{match}(p, i) = \text{Some}(\sigma)}{\Gamma \vdash \text{pattern\_match}(p, i) : \text{MatchResult}}$$
+$$
+\frac{\Gamma \vdash \text{pattern}(p) \quad \Gamma \vdash \text{input}(i) \quad \text{match}(p, i) = \text{Some}(\sigma)}{\Gamma \vdash \text{pattern\_match}(p, i) : \text{MatchResult}}
+$$
 
 ## 3. 宏模板展开理论
 
@@ -141,7 +153,8 @@ $$\frac{\Gamma \vdash \text{pattern}(p) \quad \Gamma \vdash \text{input}(i) \qua
 $$\text{MacroTemplate} = \text{TokenTree} \times \text{Substitution} \times \text{Repetition}$$
 
 **模板结构**:
-```
+
+```text
 MacroTemplate
 ├── LiteralTokens
 ├── MetavariableSubstitutions
@@ -201,11 +214,13 @@ $$\frac{\Gamma \vdash \tau : \text{Type}}{\Gamma \vdash \$\tau : \text{ty}}$$
 $$\text{Hygiene} = \forall v \in \text{MacroVariables} \cdot \text{scope}(v) \cap \text{external\_scope}(v) = \emptyset$$
 
 **变量作用域**:
-$$\text{VariableScope} = \text{struct}\{
+$$
+\text{VariableScope} = \text{struct}\{
     \text{macro\_scope}: \text{ScopeId},
     \text{external\_scope}: \text{ScopeId},
     \text{capture\_rules}: \text{CaptureRules}
-\}$$
+\}
+$$
 
 ### 5.2 卫生性保证
 
@@ -213,6 +228,7 @@ $$\text{VariableScope} = \text{struct}\{
 对于任何声明宏 $m$，如果 $m$ 使用标准的宏语法，则 $m$ 满足卫生性条件。
 
 **证明**:
+
 1. 声明宏使用 `macro_rules!` 语法
 2. 编译器自动处理变量作用域
 3. 宏内部变量与外部变量隔离
@@ -221,9 +237,11 @@ $$\text{VariableScope} = \text{struct}\{
 ### 5.3 变量捕获规则
 
 **捕获类型**:
-$$\text{CaptureType} = \text{enum}\{
+$$
+\text{CaptureType} = \text{enum}\{
     \text{ByValue}, \text{ByReference}, \text{ByMove}
-\}$$
+\}
+$$
 
 **默认捕获**:
 $$\text{default\_capture} = \text{ByValue}$$
@@ -233,6 +251,7 @@ $$\text{default\_capture} = \text{ByValue}$$
 ### 6.1 宏展开引擎
 
 **展开引擎接口**:
+
 ```rust
 pub trait DeclarativeMacroExpander {
     fn expand_macro(
@@ -244,6 +263,7 @@ pub trait DeclarativeMacroExpander {
 ```
 
 **展开步骤**:
+
 1. **词法分析**: 将输入转换为TokenStream
 2. **模式匹配**: 尝试匹配宏规则
 3. **变量绑定**: 提取匹配的元变量
@@ -253,6 +273,7 @@ pub trait DeclarativeMacroExpander {
 ### 6.2 模式匹配实现
 
 **匹配器接口**:
+
 ```rust
 pub trait PatternMatcher {
     fn match_pattern(
@@ -264,6 +285,7 @@ pub trait PatternMatcher {
 ```
 
 **匹配算法**:
+
 ```rust
 fn match_pattern(pattern: &MacroPattern, input: &TokenStream) -> Option<MatchResult> {
     match pattern {
@@ -291,6 +313,7 @@ fn match_pattern(pattern: &MacroPattern, input: &TokenStream) -> Option<MatchRes
 ### 6.3 模板展开实现
 
 **展开器接口**:
+
 ```rust
 pub trait TemplateExpander {
     fn expand_template(
@@ -302,6 +325,7 @@ pub trait TemplateExpander {
 ```
 
 **展开算法**:
+
 ```rust
 fn expand_template(template: &MacroTemplate, bindings: &MatchResult) -> TokenStream {
     let mut result = TokenStream::new();
@@ -332,6 +356,7 @@ fn expand_template(template: &MacroTemplate, bindings: &MatchResult) -> TokenStr
 ### 7.1 基础宏示例
 
 **简单打印宏**:
+
 ```rust
 macro_rules! print_hello {
     () => {
@@ -348,6 +373,7 @@ print_hello!("Alice");    // 输出: Hello, Alice!
 ```
 
 **类型安全向量宏**:
+
 ```rust
 macro_rules! vec {
     () => {
@@ -374,6 +400,7 @@ let v3 = vec![1, 2, 3,];
 ### 7.2 高级宏示例
 
 **条件编译宏**:
+
 ```rust
 macro_rules! cfg_if {
     ($(if #[cfg($($meta:meta),*)] { $($it:item)* } else if #[cfg($($else_meta:meta),*)] { $($else_it:item)* })* else { $($else_it:item)* }) => {
@@ -387,6 +414,7 @@ macro_rules! cfg_if {
 ```
 
 **递归宏**:
+
 ```rust
 macro_rules! factorial {
     (0) => { 1 };
@@ -400,6 +428,7 @@ let result = factorial!(5); // 120
 ### 7.3 复杂模式匹配示例
 
 **多模式宏**:
+
 ```rust
 macro_rules! match_expr {
     ($e:expr, $($p:pat => $b:expr),*) => {
@@ -420,6 +449,7 @@ let result = match_expr!(x,
 ```
 
 **嵌套重复宏**:
+
 ```rust
 macro_rules! matrix {
     ($([$($x:expr),*]),*) => {
@@ -447,6 +477,7 @@ let m = matrix!(
 $$\text{MacroCache} = \text{Map}[\text{MacroSignature}, \text{ExpandedResult}]$$
 
 **缓存策略**:
+
 ```rust
 struct MacroCache {
     cache: HashMap<MacroSignature, TokenStream>,
@@ -472,6 +503,7 @@ impl MacroCache {
 ### 8.2 模式匹配优化
 
 **模式树优化**:
+
 ```rust
 struct OptimizedPatternTree {
     root: PatternNode,
@@ -489,13 +521,16 @@ enum PatternNode {
 ### 8.3 展开优化
 
 **延迟展开**:
-$$\text{LazyExpansion} = \text{struct}\{
+$$
+\text{LazyExpansion} = \text{struct}\{
     \text{macro\_call}: \text{MacroCall},
     \text{expansion\_context}: \text{ExpansionContext},
     \text{is\_expanded}: \text{bool}
-\}$$
+\}
+$$
 
 **条件展开**:
+
 ```rust
 fn should_expand(macro_call: &MacroCall, context: &ExpansionContext) -> bool {
     // 检查是否已经展开
@@ -525,6 +560,7 @@ fn should_expand(macro_call: &MacroCall, context: &ExpansionContext) -> bool {
 对于任何声明宏模式 $p$ 和输入 $i$，如果 $\text{match}(p, i) = \text{Some}(\sigma)$，则 $\sigma$ 是 $p$ 和 $i$ 的有效匹配结果。
 
 **证明**:
+
 1. 根据模式匹配算法定义
 2. 每个匹配步骤都遵循语法规则
 3. 元变量绑定符合类型要求
@@ -536,6 +572,7 @@ fn should_expand(macro_call: &MacroCall, context: &ExpansionContext) -> bool {
 对于任何宏模板 $t$ 和匹配结果 $\sigma$，如果 $\text{substitute}(t, \sigma) = \text{result}$，则 $\text{result}$ 是 $t$ 在 $\sigma$ 下的正确展开结果。
 
 **证明**:
+
 1. 根据模板展开算法定义
 2. 每个替换步骤都保持语法正确性
 3. 重复展开遵循重复规则
@@ -545,6 +582,7 @@ fn should_expand(macro_call: &MacroCall, context: &ExpansionContext) -> bool {
 
 **定理 9.3 (声明宏终止性)**:
 对于任何声明宏系统，如果满足以下条件：
+
 1. 宏规则数量有限
 2. 模式匹配算法终止
 3. 模板展开算法终止
@@ -553,6 +591,7 @@ fn should_expand(macro_call: &MacroCall, context: &ExpansionContext) -> bool {
 则声明宏展开过程必然终止。
 
 **证明**:
+
 1. 假设展开过程不终止
 2. 根据条件1，宏规则数量有限
 3. 根据条件2和3，每次匹配和展开都终止
@@ -578,6 +617,7 @@ fn should_expand(macro_call: &MacroCall, context: &ExpansionContext) -> bool {
 ### 10.3 调试技巧
 
 **宏展开调试**:
+
 ```rust
 // 使用 rustc 的宏展开功能
 // cargo rustc -- -Z unstable-options --pretty=expanded

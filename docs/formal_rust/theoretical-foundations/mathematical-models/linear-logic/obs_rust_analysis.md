@@ -62,7 +62,7 @@ Rust语言通过其独特的所有权系统实现了内存安全与线程安全�
       - [Lifetime Type Rules - 生命周期类型规则](#lifetime-type-rules---生命周期类型规则)
     - [5.2 Algorithmic Foundation of Borrow Checker - 借用检查器的算法基础](#52-algorithmic-foundation-of-borrow-checker---借用检查器的算法基础)
       - [Borrow Checker Algorithm - 借用检查器算法](#borrow-checker-algorithm---借用检查器算法)
-      - [Implementation in Rust - Rust 中的实现](#implementation-in-rust---rust 中的实现)
+      - [Implementation in Rust - Rust 中的实现](#implementation-in-rust---rust-中的实现)
     - [5.3 Formal Lifetime Inference - 生命周期推导的形式化](#53-formal-lifetime-inference---生命周期推导的形式化)
       - [Lifetime Inference Rules - 生命周期推导规则](#lifetime-inference-rules---生命周期推导规则)
       - [Rust Lifetime Elision - Rust生命周期省略](#rust-lifetime-elision---rust生命周期省略)

@@ -10,7 +10,7 @@
   - [目录](#目录)
   - [1.1 **类型（Type）**](#11-类型type)
   - [1.2 **项（Term）**](#12-项term)
-  - [1.3 **上下文（Context）**](#13-上下文 context)
+  - [1.3 **上下文（Context）**](#13-上下文context)
   - [1.4 **判断（Judgment）**](#14-判断judgment)
   - [1.5 **函数类型（Function Type）**](#15-函数类型function-type)
   - [1.6 **乘积类型（Product Type）**](#16-乘积类型product-type)

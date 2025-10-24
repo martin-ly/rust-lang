@@ -1,49 +1,49 @@
 ﻿# Rust宏系统形式化理论
 
-
 ## 📊 目录
 
-- [1. 宏系统概述](#1-宏系统概述)
-  - [1.1 宏系统定义](#11-宏系统定义)
-  - [1.2 宏系统层次结构](#12-宏系统层次结构)
-- [2. 声明宏形式化理论](#2-声明宏形式化理论)
-  - [2.1 声明宏语法](#21-声明宏语法)
-  - [2.2 宏模式匹配](#22-宏模式匹配)
-  - [2.3 宏模板展开](#23-宏模板展开)
-  - [2.4 声明宏类型规则](#24-声明宏类型规则)
-- [3. 过程宏形式化理论](#3-过程宏形式化理论)
-  - [3.1 过程宏类型系统](#31-过程宏类型系统)
-  - [3.2 函数式过程宏](#32-函数式过程宏)
-  - [3.3 属性过程宏](#33-属性过程宏)
-  - [3.4 派生过程宏](#34-派生过程宏)
-- [4. 宏卫生性理论](#4-宏卫生性理论)
-  - [4.1 卫生性定义](#41-卫生性定义)
-  - [4.2 变量捕获规则](#42-变量捕获规则)
-  - [4.3 卫生性保证定理](#43-卫生性保证定理)
-- [5. 宏类型安全理论](#5-宏类型安全理论)
-  - [5.1 宏类型检查](#51-宏类型检查)
-  - [5.2 宏安全性保证](#52-宏安全性保证)
-- [6. 宏展开语义](#6-宏展开语义)
-  - [6.1 展开过程](#61-展开过程)
-  - [6.2 展开语义](#62-展开语义)
-  - [6.3 递归展开](#63-递归展开)
-- [7. 宏系统实现](#7-宏系统实现)
-  - [7.1 TokenStream抽象](#71-tokenstream抽象)
-  - [7.2 宏上下文](#72-宏上下文)
-  - [7.3 宏展开引擎](#73-宏展开引擎)
-- [8. 实际应用示例](#8-实际应用示例)
-  - [8.1 声明宏示例](#81-声明宏示例)
-  - [8.2 过程宏示例](#82-过程宏示例)
-  - [8.3 属性过程宏示例](#83-属性过程宏示例)
-- [9. 宏系统优化](#9-宏系统优化)
-  - [9.1 编译时优化](#91-编译时优化)
-  - [9.2 展开优化](#92-展开优化)
-- [10. 宏系统定理和证明](#10-宏系统定理和证明)
-  - [10.1 宏展开终止性](#101-宏展开终止性)
-  - [10.2 宏类型保持性](#102-宏类型保持性)
-  - [10.3 宏卫生性保持性](#103-宏卫生性保持性)
-- [11. 总结](#11-总结)
-
+- [Rust宏系统形式化理论](#rust宏系统形式化理论)
+  - [📊 目录](#-目录)
+  - [1. 宏系统概述](#1-宏系统概述)
+    - [1.1 宏系统定义](#11-宏系统定义)
+    - [1.2 宏系统层次结构](#12-宏系统层次结构)
+  - [2. 声明宏形式化理论](#2-声明宏形式化理论)
+    - [2.1 声明宏语法](#21-声明宏语法)
+    - [2.2 宏模式匹配](#22-宏模式匹配)
+    - [2.3 宏模板展开](#23-宏模板展开)
+    - [2.4 声明宏类型规则](#24-声明宏类型规则)
+  - [3. 过程宏形式化理论](#3-过程宏形式化理论)
+    - [3.1 过程宏类型系统](#31-过程宏类型系统)
+    - [3.2 函数式过程宏](#32-函数式过程宏)
+    - [3.3 属性过程宏](#33-属性过程宏)
+    - [3.4 派生过程宏](#34-派生过程宏)
+  - [4. 宏卫生性理论](#4-宏卫生性理论)
+    - [4.1 卫生性定义](#41-卫生性定义)
+    - [4.2 变量捕获规则](#42-变量捕获规则)
+    - [4.3 卫生性保证定理](#43-卫生性保证定理)
+  - [5. 宏类型安全理论](#5-宏类型安全理论)
+    - [5.1 宏类型检查](#51-宏类型检查)
+    - [5.2 宏安全性保证](#52-宏安全性保证)
+  - [6. 宏展开语义](#6-宏展开语义)
+    - [6.1 展开过程](#61-展开过程)
+    - [6.2 展开语义](#62-展开语义)
+    - [6.3 递归展开](#63-递归展开)
+  - [7. 宏系统实现](#7-宏系统实现)
+    - [7.1 TokenStream抽象](#71-tokenstream抽象)
+    - [7.2 宏上下文](#72-宏上下文)
+    - [7.3 宏展开引擎](#73-宏展开引擎)
+  - [8. 实际应用示例](#8-实际应用示例)
+    - [8.1 声明宏示例](#81-声明宏示例)
+    - [8.2 过程宏示例](#82-过程宏示例)
+    - [8.3 属性过程宏示例](#83-属性过程宏示例)
+  - [9. 宏系统优化](#9-宏系统优化)
+    - [9.1 编译时优化](#91-编译时优化)
+    - [9.2 展开优化](#92-展开优化)
+  - [10. 宏系统定理和证明](#10-宏系统定理和证明)
+    - [10.1 宏展开终止性](#101-宏展开终止性)
+    - [10.2 宏类型保持性](#102-宏类型保持性)
+    - [10.3 宏卫生性保持性](#103-宏卫生性保持性)
+  - [11. 总结](#11-总结)
 
 ## 1. 宏系统概述
 
@@ -96,9 +96,11 @@ $$\text{MacroRule} = \text{MacroPattern} \Rightarrow \text{MacroTemplate}$$
 $$\text{MacroPattern} = \text{TokenTree} \times \text{Repetition} \times \text{Metavariable}$$
 
 **元变量类型**:
-$$\text{Metavariable} = \text{enum}\{
+$$
+\text{Metavariable} = \text{enum}\{
     \text{expr}, \text{ident}, \text{ty}, \text{pat}, \text{stmt}, \text{block}, \text{item}, \text{meta}, \text{tt}
-\}$$
+\}
+$$
 
 **重复模式**:
 $$\text{Repetition} = \text{enum}\{*, +, ?\}$$
@@ -114,75 +116,103 @@ $$\text{Substitution} = \text{Metavariable} \mapsto \text{TokenStream}$$
 ### 2.4 声明宏类型规则
 
 **宏构造规则**:
-$$\frac{\Gamma \vdash \text{macro\_rules!} \quad \text{Pattern}(p) \quad \text{Template}(t)}{\Gamma \vdash \text{DeclarativeMacro}(p, t) : \text{Macro}}$$
+$$
+\frac{\Gamma \vdash \text{macro\_rules!} \quad \text{Pattern}(p) \quad \text{Template}(t)}{\Gamma \vdash \text{DeclarativeMacro}(p, t) : \text{Macro}}
+$$
 
 **宏调用规则**:
-$$\frac{\Gamma \vdash m : \text{Macro} \quad \Gamma \vdash e : \text{Expression}}{\Gamma \vdash m(e) : \text{ExpandedExpression}}$$
+$$
+\frac{\Gamma \vdash m : \text{Macro} \quad \Gamma \vdash e : \text{Expression}}{\Gamma \vdash m(e) : \text{ExpandedExpression}}
+$$
 
 **模式匹配规则**:
-$$\frac{\Gamma \vdash \text{pattern}(p) \quad \Gamma \vdash \text{input}(i) \quad \text{match}(p, i) = \sigma}{\Gamma \vdash \text{expand}(p, i) : \text{ExpandedTokenStream}}$$
+$$
+\frac{\Gamma \vdash \text{pattern}(p) \quad \Gamma \vdash \text{input}(i) \quad \text{match}(p, i) = \sigma}{\Gamma \vdash \text{expand}(p, i) : \text{ExpandedTokenStream}}
+$$
 
 ## 3. 过程宏形式化理论
 
 ### 3.1 过程宏类型系统
 
 **过程宏定义**:
-$$\text{ProceduralMacro} = \text{enum}\{
+$$
+\text{ProceduralMacro} = \text{enum}\{
     \text{FunctionLike}(\text{fn}(\text{TokenStream}) \to \text{TokenStream}),
     \text{Attribute}(\text{fn}(\text{TokenStream}, \text{TokenStream}) \to \text{TokenStream}),
     \text{Derive}(\text{fn}(\text{TokenStream}) \to \text{TokenStream})
-\}$$
+\}
+$$
 
 ### 3.2 函数式过程宏
 
 **函数宏类型**:
-$$\text{FunctionMacro} = \text{fn}(\text{TokenStream}) \to \text{Result}[\text{TokenStream}, \text{MacroError}]$$
+$$
+\text{FunctionMacro} = \text{fn}(\text{TokenStream}) \to \text{Result}[\text{TokenStream}, \text{MacroError}]
+$$
 
 **函数宏调用规则**:
-$$\frac{\Gamma \vdash f : \text{FunctionMacro} \quad \Gamma \vdash \text{input} : \text{TokenStream}}{\Gamma \vdash f(\text{input}) : \text{Result}[\text{TokenStream}, \text{MacroError}]}$$
+$$
+\frac{\Gamma \vdash f : \text{FunctionMacro} \quad \Gamma \vdash \text{input} : \text{TokenStream}}{\Gamma \vdash f(\text{input}) : \text{Result}[\text{TokenStream}, \text{MacroError}]}
+$$
 
 ### 3.3 属性过程宏
 
 **属性宏类型**:
-$$\text{AttributeMacro} = \text{fn}(\text{TokenStream}, \text{TokenStream}) \to \text{Result}[\text{TokenStream}, \text{MacroError}]$$
+$$
+\text{AttributeMacro} = \text{fn}(\text{TokenStream}, \text{TokenStream}) \to \text{Result}[\text{TokenStream}, \text{MacroError}]
+$$
 
 **属性宏应用规则**:
-$$\frac{\Gamma \vdash a : \text{AttributeMacro} \quad \Gamma \vdash \text{attr} : \text{TokenStream} \quad \Gamma \vdash \text{item} : \text{TokenStream}}{\Gamma \vdash a(\text{attr}, \text{item}) : \text{Result}[\text{TokenStream}, \text{MacroError}]}$$
+$$
+\frac{\Gamma \vdash a : \text{AttributeMacro} \quad \Gamma \vdash \text{attr} : \text{TokenStream} \quad \Gamma \vdash \text{item} : \text{TokenStream}}{\Gamma \vdash a(\text{attr}, \text{item}) : \text{Result}[\text{TokenStream}, \text{MacroError}]}
+$$
 
 ### 3.4 派生过程宏
 
 **派生宏类型**:
-$$\text{DeriveMacro} = \text{fn}(\text{TokenStream}) \to \text{Result}[\text{TokenStream}, \text{MacroError}]$$
+$$
+\text{DeriveMacro} = \text{fn}(\text{TokenStream}) \to \text{Result}[\text{TokenStream}, \text{MacroError}]
+$$
 
 **派生宏应用规则**:
-$$\frac{\Gamma \vdash d : \text{DeriveMacro} \quad \Gamma \vdash \text{struct} : \text{TokenStream}}{\Gamma \vdash d(\text{struct}) : \text{Result}[\text{TokenStream}, \text{MacroError}]}$$
+$$
+\frac{\Gamma \vdash d : \text{DeriveMacro} \quad \Gamma \vdash \text{struct} : \text{TokenStream}}{\Gamma \vdash d(\text{struct}) : \text{Result}[\text{TokenStream}, \text{MacroError}]}
+$$
 
 ## 4. 宏卫生性理论
 
 ### 4.1 卫生性定义
 
 **卫生性条件**:
-$$\text{Hygiene} = \forall v \in \text{MacroVariables} \cdot \text{scope}(v) \cap \text{external\_scope}(v) = \emptyset$$
+$$
+\text{Hygiene} = \forall v \in \text{MacroVariables} \cdot \text{scope}(v) \cap \text{external\_scope}(v) = \emptyset
+$$
 
 **变量作用域**:
-$$\text{VariableScope} = \text{struct}\{
+$$
+\text{VariableScope} = \text{struct}\{
     \text{macro\_scope}: \text{ScopeId},
     \text{external\_scope}: \text{ScopeId},
     \text{capture\_rules}: \text{CaptureRules}
-\}$$
+\}
+$$
 
 ### 4.2 变量捕获规则
 
 **捕获类型**:
-$$\text{CaptureType} = \text{enum}\{
+$$
+\text{CaptureType} = \text{enum}\{
     \text{ByValue}, \text{ByReference}, \text{ByMove}
-\}$$
+\}
+$$
 
 **捕获规则**:
-$$\text{CaptureRules} = \text{struct}\{
+$$
+\text{CaptureRules} = \text{struct}\{
     \text{default\_capture}: \text{CaptureType},
     \text{explicit\_captures}: \text{Map}[\text{Variable}, \text{CaptureType}]
-\}$$
+\}
+$$
 
 ### 4.3 卫生性保证定理
 
@@ -191,6 +221,7 @@ $$\text{CaptureRules} = \text{struct}\{
 $$\text{expand}(m, i) \text{ 不会产生变量名冲突}$$
 
 **证明**:
+
 1. 假设存在变量名冲突
 2. 根据卫生性定义，宏内部变量与外部变量作用域不相交
 3. 展开过程中变量名被重命名
@@ -204,16 +235,20 @@ $$\text{expand}(m, i) \text{ 不会产生变量名冲突}$$
 $$\text{typeCheckMacro} : \text{Macro} \times \text{Context} \to \text{Result}[\text{Type}, \text{TypeError}]$$
 
 **类型检查规则**:
-$$\frac{\Gamma \vdash m : \text{Macro} \quad \Gamma \vdash \text{context} : \text{Context}}{\Gamma \vdash \text{typeCheckMacro}(m, \text{context}) : \text{Result}[\text{Type}, \text{TypeError}]}$$
+$$
+\frac{\Gamma \vdash m : \text{Macro} \quad \Gamma \vdash \text{context} : \text{Context}}{\Gamma \vdash \text{typeCheckMacro}(m, \text{context}) : \text{Result}[\text{Type}, \text{TypeError}]}
+$$
 
 ### 5.2 宏安全性保证
 
 **安全性条件**:
-$$\text{MacroSafety} = \text{struct}\{
+$$
+\text{MacroSafety} = \text{struct}\{
     \text{type\_safety}: \text{bool},
     \text{memory\_safety}: \text{bool},
     \text{thread\_safety}: \text{bool}
-\}$$
+\}
+$$
 
 **安全性定理**:
 $$\text{Theorem 5.1}: \text{如果宏 } m \text{ 通过类型检查，则 } m \text{ 是类型安全的}$$
@@ -223,6 +258,7 @@ $$\text{Theorem 5.1}: \text{如果宏 } m \text{ 通过类型检查，则 } m \t
 ### 6.1 展开过程
 
 **展开步骤**:
+
 1. **词法分析**: $\text{TokenStream} \to \text{TokenTree}$
 2. **模式匹配**: $\text{TokenTree} \times \text{MacroPattern} \to \text{MatchResult}$
 3. **变量绑定**: $\text{MatchResult} \to \text{VariableBindings}$
@@ -240,20 +276,25 @@ $$\frac{\Gamma \vdash m : \text{Macro} \quad \Gamma \vdash \text{input} : \text{
 ### 6.3 递归展开
 
 **递归展开条件**:
-$$\text{RecursiveExpansion} = \text{struct}\{
+$$
+\text{RecursiveExpansion} = \text{struct}\{
     \text{max\_depth}: \text{usize},
     \text{current\_depth}: \text{usize},
     \text{expansion\_history}: \text{Set}[\text{MacroCall}]
-\}$$
+\}
+$$
 
 **递归展开规则**:
-$$\frac{\text{current\_depth} < \text{max\_depth} \quad \text{macro\_call} \notin \text{expansion\_history}}{\text{允许递归展开}}$$
+$$
+\frac{\text{current\_depth} < \text{max\_depth} \quad \text{macro\_call} \notin \text{expansion\_history}}{\text{允许递归展开}}
+$$
 
 ## 7. 宏系统实现
 
 ### 7.1 TokenStream抽象
 
 **TokenStream定义**:
+
 ```rust
 pub struct TokenStream {
     tokens: Vec<TokenTree>,
@@ -269,6 +310,7 @@ pub enum TokenTree {
 ### 7.2 宏上下文
 
 **宏上下文定义**:
+
 ```rust
 pub struct MacroContext {
     hygiene: Hygiene,
@@ -281,6 +323,7 @@ pub struct MacroContext {
 ### 7.3 宏展开引擎
 
 **展开引擎接口**:
+
 ```rust
 pub trait MacroExpander {
     fn expand_macro(
@@ -296,6 +339,7 @@ pub trait MacroExpander {
 ### 8.1 声明宏示例
 
 **简单打印宏**:
+
 ```rust
 macro_rules! print_hello {
     () => {
@@ -308,6 +352,7 @@ macro_rules! print_hello {
 ```
 
 **类型安全向量宏**:
+
 ```rust
 macro_rules! vec {
     () => {
@@ -326,6 +371,7 @@ macro_rules! vec {
 ### 8.2 过程宏示例
 
 **函数式过程宏**:
+
 ```rust
 # [proc_macro]
 pub fn my_function_macro(input: TokenStream) -> TokenStream {
@@ -335,6 +381,7 @@ pub fn my_function_macro(input: TokenStream) -> TokenStream {
 ```
 
 **派生过程宏**:
+
 ```rust
 # [proc_macro_derive(MyTrait)]
 pub fn my_derive_macro(input: TokenStream) -> TokenStream {
@@ -346,6 +393,7 @@ pub fn my_derive_macro(input: TokenStream) -> TokenStream {
 ### 8.3 属性过程宏示例
 
 **属性宏**:
+
 ```rust
 # [proc_macro_attribute]
 pub fn my_attribute_macro(
@@ -370,14 +418,18 @@ $$\frac{\text{macro\_signature} \in \text{macro\_cache}}{\text{使用缓存结�
 ### 9.2 展开优化
 
 **延迟展开**:
-$$\text{LazyExpansion} = \text{struct}\{
+$$
+\text{LazyExpansion} = \text{struct}\{
     \text{macro\_call}: \text{MacroCall},
     \text{expansion\_context}: \text{ExpansionContext},
     \text{is\_expanded}: \text{bool}
-\}$$
+\}
+$$
 
 **条件展开**:
-$$\frac{\text{条件满足}}{\text{执行展开}} \quad \frac{\text{条件不满足}}{\text{跳过展开}}$$
+$$
+\frac{\text{条件满足}}{\text{执行展开}} \quad \frac{\text{条件不满足}}{\text{跳过展开}}
+$$
 
 ## 10. 宏系统定理和证明
 
@@ -385,6 +437,7 @@ $$\frac{\text{条件满足}}{\text{执行展开}} \quad \frac{\text{条件不满
 
 **定理 10.1 (展开终止性)**:
 对于任何宏系统，如果满足以下条件：
+
 1. 递归展开深度有限
 2. 宏调用不形成循环依赖
 3. 展开规则是确定性的
@@ -392,6 +445,7 @@ $$\frac{\text{条件满足}}{\text{执行展开}} \quad \frac{\text{条件不满
 则宏展开过程必然终止。
 
 **证明**:
+
 1. 假设展开过程不终止
 2. 根据条件1，展开深度有限
 3. 根据条件2，不存在循环依赖
@@ -404,6 +458,7 @@ $$\frac{\text{条件满足}}{\text{执行展开}} \quad \frac{\text{条件不满
 如果宏 $m$ 是类型安全的，且输入 $i$ 具有类型 $\tau$，则展开结果 $\text{expand}(m, i)$ 也具有类型 $\tau$。
 
 **证明**:
+
 1. 根据宏类型安全定义
 2. 展开过程保持类型信息
 3. 输出类型与输入类型一致
@@ -414,6 +469,7 @@ $$\frac{\text{条件满足}}{\text{执行展开}} \quad \frac{\text{条件不满
 如果宏 $m$ 满足卫生性条件，则对于任何输入 $i$，展开结果 $\text{expand}(m, i)$ 也满足卫生性条件。
 
 **证明**:
+
 1. 根据卫生性定义
 2. 展开过程中变量名被重命名
 3. 保持作用域隔离

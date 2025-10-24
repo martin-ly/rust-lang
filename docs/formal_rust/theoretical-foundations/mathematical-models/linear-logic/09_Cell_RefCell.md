@@ -3,9 +3,11 @@
 
 ## 📊 目录
 
-- [Cell](#cell)
-  - [RefCell](#refcell)
-  - [区别和联系](#区别和联系)
+- [Cell 和 RefCell](#cell-和-refcell)
+  - [📊 目录](#-目录)
+  - [Cell](#cell)
+    - [RefCell](#refcell)
+    - [区别和联系](#区别和联系)
 
 
 在 Rust 中，`Cell` 和 `RefCell` 是两种不同的类型，它们都用于封装数据并提供运行时借用检查。

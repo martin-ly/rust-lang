@@ -3,14 +3,16 @@
 
 ## 📊 目录
 
-- [什么是内部可变性？](#什么是内部可变性)
-- [`RefCell` 的作用](#refcell-的作用)
-- [使用 `RefCell` 的关键点](#使用-refcell-的关键点)
-- [示例代码](#示例代码)
-- [`Borrow`](#borrow)
-- [`BorrowMut`](#borrowmut)
-- [其他相关 trait](#其他相关-trait)
-- [运行时借用检查](#运行时借用检查)
+- [RefCell](#refcell)
+  - [📊 目录](#-目录)
+  - [什么是内部可变性？](#什么是内部可变性)
+  - [`RefCell` 的作用](#refcell-的作用)
+  - [使用 `RefCell` 的关键点](#使用-refcell-的关键点)
+  - [示例代码](#示例代码)
+  - [`Borrow`](#borrow)
+  - [`BorrowMut`](#borrowmut)
+  - [其他相关 trait](#其他相关-trait)
+  - [运行时借用检查](#运行时借用检查)
 
 
 Rust 是一种注重安全性和并发性的编程语言，它通过所有权（ownership）、借用（borrowing）和生命周期（lifetime）的概念来保证内存安全。

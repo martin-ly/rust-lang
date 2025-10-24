@@ -17,7 +17,7 @@ path = "src/lib.rs"
 # 工作空间依赖
 syn = { workspace = true }
 quote = { workspace = true }
-proc-macro2 = "1.0"
+proc-macro2 = "1.0.103"
 
 # 宏开发辅助
 paste = "1.0"

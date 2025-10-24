@@ -3,11 +3,13 @@
 
 ## 📊 目录
 
-- [Deref Trait](#deref-trait)
-- [Drop Trait](#drop-trait)
-- [Clone Trait](#clone-trait)
-- [Copy Trait](#copy-trait)
-- [解释和联系](#解释和联系)
+- [Rust 中与所有权相关的主要 trait](#rust-中与所有权相关的主要-trait)
+  - [📊 目录](#-目录)
+  - [Deref Trait](#deref-trait)
+  - [Drop Trait](#drop-trait)
+  - [Clone Trait](#clone-trait)
+  - [Copy Trait](#copy-trait)
+  - [解释和联系](#解释和联系)
 
 
 Rust 中与所有权相关的主要 trait 包括 `Deref` 和 `Drop`。

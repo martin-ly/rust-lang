@@ -113,7 +113,7 @@ proptest = { workspace = true }
 tempfile = { workspace = true }
 
 # 文档测试
-doc-comment = "0.3.3"
+doc-comment = "0.3.4"
 
 # 并发模型验证
 loom = "0.7.2"

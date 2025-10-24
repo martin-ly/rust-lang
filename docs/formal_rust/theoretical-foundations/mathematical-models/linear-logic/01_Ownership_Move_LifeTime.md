@@ -3,11 +3,13 @@
 
 ## 📊 目录
 
-- [所有权（Ownership）](#所有权ownership)
-- [移动（Move）](#移动move)
-  - [生命周期（Lifetime）](#生命周期lifetime)
-- [区别和解释](#区别和解释)
-- [应用](#应用)
+- [Rust 语言的所有权、移动和生命周期模型](#rust-语言的所有权移动和生命周期模型)
+  - [📊 目录](#-目录)
+  - [所有权（Ownership）](#所有权ownership)
+  - [移动（Move）](#移动move)
+    - [生命周期（Lifetime）](#生命周期lifetime)
+  - [区别和解释](#区别和解释)
+  - [应用](#应用)
 
 
 Rust 语言的所有权（Ownership）、移动（Move）和生命周期（Lifetime）模型是其核心概念，

@@ -1,13 +1,13 @@
 ﻿# Trait 和 Trait Object
 
-
 ## 📊 目录
 
-- [1. Trait 的定义与作用](#1-trait-的定义与作用)
-- [2. Trait Object 的定义与作用](#2-trait-object-的定义与作用)
-- [3. Trait 与 Trait Object 的区别](#3-trait-与-trait-object-的区别)
-- [1. Trait 与 Trait Object 的联系](#1-trait-与-trait-object-的联系)
-
+- [Trait 和 Trait Object](#trait-和-trait-object)
+  - [📊 目录](#-目录)
+  - [1. Trait 的定义与作用](#1-trait-的定义与作用)
+  - [2. Trait Object 的定义与作用](#2-trait-object-的定义与作用)
+  - [3. Trait 与 Trait Object 的区别](#3-trait-与-trait-object-的区别)
+  - [1. Trait 与 Trait Object 的联系](#1-trait-与-trait-object-的联系)
 
 在 Rust 中，Trait 和 Trait Object 是两个密切相关但用途不同的概念。
 以下是它们的定义、区别和联系：
