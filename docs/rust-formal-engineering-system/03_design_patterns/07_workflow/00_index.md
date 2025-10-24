@@ -1,17 +1,17 @@
 ﻿# 工作流模式（Workflow Patterns）索引
 
-
 ## 📊 目录
 
-- [目的](#目的)
-- [核心模式](#核心模式)
-- [Rust 化要点](#rust-化要点)
-- [术语（Terminology）](#术语terminology)
-- [实践与样例（Practice）](#实践与样例practice)
-  - [文件级清单（精选）](#文件级清单精选)
-- [相关索引](#相关索引)
-- [导航](#导航)
-
+- [工作流模式（Workflow Patterns）索引](#工作流模式workflow-patterns索引)
+  - [📊 目录](#-目录)
+  - [目的](#目的)
+  - [核心模式](#核心模式)
+  - [Rust 化要点](#rust-化要点)
+  - [术语（Terminology）](#术语terminology)
+  - [实践与样例（Practice）](#实践与样例practice)
+    - [文件级清单（精选）](#文件级清单精选)
+  - [相关索引](#相关索引)
+  - [导航](#导航)
 
 ## 目的
 

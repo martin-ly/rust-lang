@@ -1,16 +1,16 @@
 ﻿# 教育科技（Education Technology）索引
 
-
 ## 📊 目录
 
-- [目的](#目的)
-- [核心概念](#核心概念)
-- [与 Rust 的关联](#与-rust-的关联)
-- [术语（Terminology）](#术语terminology)
-- [实践与样例](#实践与样例)
-- [相关索引](#相关索引)
-- [导航](#导航)
-
+- [教育科技（Education Technology）索引](#教育科技education-technology索引)
+  - [📊 目录](#-目录)
+  - [目的](#目的)
+  - [核心概念](#核心概念)
+  - [与 Rust 的关联](#与-rust-的关联)
+  - [术语（Terminology）](#术语terminology)
+  - [实践与样例](#实践与样例)
+  - [相关索引](#相关索引)
+  - [导航](#导航)
 
 ## 目的
 

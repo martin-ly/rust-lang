@@ -1,6 +1,5 @@
 ﻿# 同步范式（Synchronous Paradigm）索引
 
-
 ## 📊 目录
 
 - [同步范式（Synchronous Paradigm）索引](#同步范式synchronous-paradigm索引)
@@ -17,7 +16,6 @@
   - [参考资料](#参考资料)
   - [最小模板提示](#最小模板提示)
   - [导航](#导航)
-
 
 ## 目的
 
