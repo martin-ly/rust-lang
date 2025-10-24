@@ -4,26 +4,26 @@
 > **使用方式**: 通过术语索引快速查找定义，理解核心概念  
 > **相关文档**: [主索引](./00_MASTER_INDEX.md) | [README](./README.md) | [FAQ](./FAQ.md)
 
-
 ## 📊 目录
 
-- [📋 术语索引](#术语索引)
-- [泛型 (Generics)](#泛型-generics)
-- [Trait](#trait)
-- [Trait对象 (Trait Object)](#trait对象-trait-object)
-- [关联类型 (Associated Type)](#关联类型-associated-type)
-- [Newtype 模式](#newtype-模式)
-- [零大小类型 (ZST)](#零大小类型-zst)
-- [PhantomData](#phantomdata)
-- [Never类型 (!)](#never类型)
-- [Pin](#pin)
-- [类型推导 (Type Inference)](#类型推导-type-inference)
-- [Deref强制转换](#deref强制转换)
-- [孤儿规则 (Orphan Rule)](#孤儿规则-orphan-rule)
-- [协变与逆变](#协变与逆变)
-- [单态化 (Monomorphization)](#单态化-monomorphization)
-- [📚 延伸阅读](#延伸阅读)
-
+- [C02 类型系统: 术语表 (Glossary)](#c02-类型系统-术语表-glossary)
+  - [📊 目录](#-目录)
+  - [📋 术语索引](#-术语索引)
+  - [泛型 (Generics)](#泛型-generics)
+  - [Trait](#trait)
+  - [Trait对象 (Trait Object)](#trait对象-trait-object)
+  - [关联类型 (Associated Type)](#关联类型-associated-type)
+  - [Newtype 模式](#newtype-模式)
+  - [零大小类型 (ZST)](#零大小类型-zst)
+  - [PhantomData](#phantomdata)
+  - [Never类型 (!)](#never类型-)
+  - [Pin](#pin)
+  - [类型推导 (Type Inference)](#类型推导-type-inference)
+  - [Deref强制转换](#deref强制转换)
+  - [孤儿规则 (Orphan Rule)](#孤儿规则-orphan-rule)
+  - [协变与逆变](#协变与逆变)
+  - [单态化 (Monomorphization)](#单态化-monomorphization)
+  - [📚 延伸阅读](#-延伸阅读)
 
 **最后更新**: 2025-10-19  
 **适用版本**: Rust 1.90+  
