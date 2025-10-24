@@ -1,6 +1,5 @@
 ﻿# 微服务架构（Microservices Architecture）索引
 
-
 ## 📊 目录
 
 - [微服务架构（Microservices Architecture）索引](#微服务架构microservices-architecture索引)
@@ -29,7 +28,6 @@
     - [运维自动化](#运维自动化)
   - [相关索引](#相关索引)
   - [导航](#导航)
-
 
 ## 目的
 

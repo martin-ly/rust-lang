@@ -1,6 +1,5 @@
 ﻿# 容器化（Containerization）索引
 
-
 ## 📊 目录
 
 - [容器化（Containerization）索引](#容器化containerization索引)
@@ -13,7 +12,6 @@
     - [文件级清单（精选）](#文件级清单精选)
   - [相关索引](#相关索引)
   - [导航](#导航)
-
 
 ## 目的
 

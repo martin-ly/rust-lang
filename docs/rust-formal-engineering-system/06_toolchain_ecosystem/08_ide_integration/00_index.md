@@ -1,6 +1,5 @@
 ﻿# IDE 集成（IDE Integration）索引
 
-
 ## 📊 目录
 
 - [IDE 集成（IDE Integration）索引](#ide-集成ide-integration索引)
@@ -13,7 +12,6 @@
     - [文件级清单（精选）](#文件级清单精选)
   - [相关索引](#相关索引)
   - [导航](#导航)
-
 
 ## 目的
 
