@@ -33,6 +33,10 @@
     - [5.3 同步机制](#53-同步机制)
   - [6. 信号机制](#6-信号机制)
   - [7. 消息队列](#7-消息队列)
+    - [7.1 POSIX消息队列 (跨进程)](#71-posix消息队列-跨进程)
+    - [7.2 跨进程Channel (crossbeam-channel)](#72-跨进程channel-crossbeam-channel)
+    - [7.3 多生产者多消费者模式](#73-多生产者多消费者模式)
+    - [7.4 Select多路复用](#74-select多路复用)
   - [8. 性能基准测试](#8-性能基准测试)
   - [9. 安全性考虑](#9-安全性考虑)
   - [10. 跨平台实现](#10-跨平台实现)
@@ -698,38 +702,226 @@ fn optimize_tcp_listener(listener: &TcpListener) -> std::io::Result<()> {
 
 ### 5.1 POSIX共享内存
 
+**原理**: 多个进程直接访问同一块物理内存，零拷贝，性能最优。
+
+**内存模型**:
+
+```text
+进程A地址空间          物理内存          进程B地址空间
+┌─────────────┐       ┌─────────┐       ┌─────────────┐
+│   0x1000    │──────>│ 共享内存 │<──────│   0x5000    │
+│   (映射)    │       │ (物理)  │       │   (映射)    │
+└─────────────┘       └─────────┘       └─────────────┘
+```
+
 **创建与使用**:
 
 ```rust
 use shared_memory::*;
+use std::sync::atomic::{AtomicU64, Ordering};
 
-// 创建共享内存
-fn create_shm() -> Result<Shmem, Box<dyn std::error::Error>> {
+// 创建命名共享内存
+fn create_named_shm(name: &str, size: usize) -> Result<Shmem, Box<dyn std::error::Error>> {
     let shmem = ShmemConf::new()
-        .size(4096)
+        .size(size)
+        .flink(name)  // 命名，其他进程可通过名称打开
         .create()?;
     
+    println!("✅ 创建共享内存: {} ({}字节)", name, size);
     Ok(shmem)
 }
 
-// 写入数据
-fn write_shm(shmem: &mut Shmem, data: &[u8]) {
+// 打开已存在的共享内存
+fn open_shm(name: &str) -> Result<Shmem, Box<dyn std::error::Error>> {
+    let shmem = ShmemConf::new()
+        .flink(name)
+        .open()?;
+    
+    println!("✅ 打开共享内存: {}", name);
+    Ok(shmem)
+}
+
+// 写入数据（需要同步）
+fn write_shm_safe(shmem: &Shmem, data: &[u8]) -> Result<(), Box<dyn std::error::Error>> {
+    if data.len() > shmem.len() {
+        return Err("数据超出共享内存大小".into());
+    }
+    
     unsafe {
         let ptr = shmem.as_ptr() as *mut u8;
         std::ptr::copy_nonoverlapping(data.as_ptr(), ptr, data.len());
+        
+        // 内存屏障，确保写入完成
+        std::sync::atomic::fence(Ordering::SeqCst);
     }
+    
+    Ok(())
 }
 
 // 读取数据
-fn read_shm(shmem: &Shmem, len: usize) -> Vec<u8> {
+fn read_shm(shmem: &Shmem, offset: usize, len: usize) -> Result<Vec<u8>, Box<dyn std::error::Error>> {
+    if offset + len > shmem.len() {
+        return Err("读取超出共享内存范围".into());
+    }
+    
     unsafe {
-        let ptr = shmem.as_ptr();
-        std::slice::from_raw_parts(ptr, len).to_vec()
+        let ptr = shmem.as_ptr().add(offset);
+        Ok(std::slice::from_raw_parts(ptr, len).to_vec())
     }
 }
 ```
 
-**性能**: 最高吞吐量（~20 GB/s），但需要同步机制。
+**结构化数据共享**:
+
+```rust
+use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
+use std::mem;
+
+#[repr(C)]
+struct SharedData {
+    // 标志位
+    ready: AtomicBool,
+    // 计数器
+    counter: AtomicU64,
+    // 数据区（固定大小）
+    buffer: [u8; 4000],
+}
+
+fn create_structured_shm() -> Result<Shmem, Box<dyn std::error::Error>> {
+    let size = mem::size_of::<SharedData>();
+    let mut shmem = ShmemConf::new()
+        .size(size)
+        .flink("my_structured_data")
+        .create()?;
+    
+    // 初始化结构
+    unsafe {
+        let ptr = shmem.as_ptr() as *mut SharedData;
+        (*ptr).ready.store(false, Ordering::Release);
+        (*ptr).counter.store(0, Ordering::Release);
+    }
+    
+    Ok(shmem)
+}
+
+// 使用结构化数据
+fn use_structured_shm(shmem: &Shmem) {
+    unsafe {
+        let ptr = shmem.as_ptr() as *const SharedData;
+        let data = &*ptr;
+        
+        // 原子读取
+        let count = data.counter.load(Ordering::Acquire);
+        println!("当前计数: {}", count);
+        
+        // 原子增加
+        data.counter.fetch_add(1, Ordering::SeqCst);
+        
+        // 检查就绪标志
+        if data.ready.load(Ordering::Acquire) {
+            println!("数据已就绪");
+        }
+    }
+}
+```
+
+**生产者-消费者模式**:
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+#[repr(C)]
+struct RingBuffer {
+    // 读写位置
+    read_pos: AtomicUsize,
+    write_pos: AtomicUsize,
+    // 缓冲区大小
+    capacity: usize,
+    // 数据区
+    data: [u8; 4096],
+}
+
+impl RingBuffer {
+    fn new() -> Self {
+        Self {
+            read_pos: AtomicUsize::new(0),
+            write_pos: AtomicUsize::new(0),
+            capacity: 4096,
+            data: [0; 4096],
+        }
+    }
+    
+    // 生产者写入
+    fn write(&self, bytes: &[u8]) -> Result<usize, &'static str> {
+        let mut write_pos = self.write_pos.load(Ordering::Acquire);
+        let read_pos = self.read_pos.load(Ordering::Acquire);
+        
+        let available = if write_pos >= read_pos {
+            self.capacity - (write_pos - read_pos) - 1
+        } else {
+            read_pos - write_pos - 1
+        };
+        
+        if available < bytes.len() {
+            return Err("缓冲区满");
+        }
+        
+        let mut written = 0;
+        for &byte in bytes {
+            unsafe {
+                let ptr = self.data.as_ptr() as *mut u8;
+                *ptr.add(write_pos) = byte;
+            }
+            write_pos = (write_pos + 1) % self.capacity;
+            written += 1;
+        }
+        
+        self.write_pos.store(write_pos, Ordering::Release);
+        Ok(written)
+    }
+    
+    // 消费者读取
+    fn read(&self, buffer: &mut [u8]) -> usize {
+        let mut read_pos = self.read_pos.load(Ordering::Acquire);
+        let write_pos = self.write_pos.load(Ordering::Acquire);
+        
+        let available = if write_pos >= read_pos {
+            write_pos - read_pos
+        } else {
+            self.capacity - read_pos + write_pos
+        };
+        
+        let to_read = available.min(buffer.len());
+        
+        for i in 0..to_read {
+            unsafe {
+                let ptr = self.data.as_ptr();
+                buffer[i] = *ptr.add(read_pos);
+            }
+            read_pos = (read_pos + 1) % self.capacity;
+        }
+        
+        self.read_pos.store(read_pos, Ordering::Release);
+        to_read
+    }
+}
+```
+
+**性能特性**:
+
+| 特性 | 数值 |
+|------|------|
+| 吞吐量 | ~20 GB/s (零拷贝) |
+| 延迟 | ~0.1 μs |
+| 适用场景 | 大数据量、高频通信 |
+| 缺点 | 需要手动同步、复杂 |
+
+**最佳实践**:
+
+1. ✅ 使用原子操作同步
+2. ✅ 避免竞态条件
+3. ✅ 设置合理的内存大小
+4. ✅ 清理资源（unlink）
 
 ---
 
@@ -804,22 +996,172 @@ fn signal_example() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 7. 消息队列
 
-**Rust消息传递**:
+### 7.1 POSIX消息队列 (跨进程)
+
+**原理**: 内核维护的消息队列，支持优先级、持久化。
 
 ```rust
-use crossbeam_channel::{bounded, Sender, Receiver};
+#[cfg(unix)]
+mod posix_mq {
+    use nix::mqueue::{mq_open, mq_send, mq_receive, mq_close, mq_unlink};
+    use nix::mqueue::MqAttr;
+    use nix::fcntl::OFlag;
+    use nix::sys::stat::Mode;
+    use std::ffi::CString;
+    
+    pub fn create_mq(name: &str) -> Result<i32, nix::Error> {
+        let name = CString::new(name).unwrap();
+        
+        let attr = MqAttr::new(
+            0,      // flags
+            10,     // 最大消息数
+            8192,   // 最大消息大小
+            0       // 当前消息数
+        );
+        
+        let mq = mq_open(
+            &name,
+            OFlag::O_CREAT | OFlag::O_RDWR,
+            Mode::S_IRUSR | Mode::S_IWUSR,
+            Some(&attr)
+        )?;
+        
+        Ok(mq)
+    }
+    
+    pub fn send_message(mq: i32, msg: &[u8], priority: u32) -> Result<(), nix::Error> {
+        mq_send(mq, msg, priority)?;
+        Ok(())
+    }
+    
+    pub fn receive_message(mq: i32) -> Result<(Vec<u8>, u32), nix::Error> {
+        let mut buf = vec![0u8; 8192];
+        let (n, prio) = mq_receive(mq, &mut buf)?;
+        buf.truncate(n);
+        Ok((buf, prio))
+    }
+}
 
-// 创建bounded channel
-let (tx, rx): (Sender<String>, Receiver<String>) = bounded(100);
-
-// 发送
-tx.send("Message".to_string())?;
-
-// 接收
-let msg = rx.recv()?;
+// 使用示例
+fn mq_example() -> Result<(), Box<dyn std::error::Error>> {
+    let mq = posix_mq::create_mq("/my_queue")?;
+    
+    // 发送高优先级消息
+    posix_mq::send_message(mq, b"重要消息", 10)?;
+    
+    // 发送普通消息
+    posix_mq::send_message(mq, b"普通消息", 0)?;
+    
+    // 接收（自动按优先级）
+    let (msg, prio) = posix_mq::receive_message(mq)?;
+    println!("收到消息(优先级{}): {:?}", prio, String::from_utf8_lossy(&msg));
+    
+    Ok(())
+}
 ```
 
-**特点**: 异步、解耦、缓冲。
+### 7.2 跨进程Channel (crossbeam-channel)
+
+**内存中消息队列** (单机多进程):
+
+```rust
+use crossbeam_channel::{bounded, unbounded, Sender, Receiver};
+use std::time::Duration;
+
+// bounded channel（有界，会阻塞）
+let (tx, rx): (Sender<String>, Receiver<String>) = bounded(100);
+
+// 发送（阻塞直到有空间）
+tx.send("Message".to_string())?;
+
+// 带超时发送
+match tx.send_timeout("Message".to_string(), Duration::from_secs(1)) {
+    Ok(_) => println!("发送成功"),
+    Err(e) => println!("发送超时: {}", e),
+}
+
+// 非阻塞接收
+match rx.try_recv() {
+    Ok(msg) => println!("收到: {}", msg),
+    Err(_) => println!("队列为空"),
+}
+
+// 带超时接收
+match rx.recv_timeout(Duration::from_secs(1)) {
+    Ok(msg) => println!("收到: {}", msg),
+    Err(_) => println!("接收超时"),
+}
+
+// unbounded channel（无界，不会阻塞发送）
+let (tx_unbounded, rx_unbounded) = unbounded::<String>();
+tx_unbounded.send("Always succeeds".to_string())?;
+```
+
+### 7.3 多生产者多消费者模式
+
+```rust
+use crossbeam_channel::{bounded, select};
+use std::thread;
+
+fn mpmc_example() {
+    let (tx, rx) = bounded(100);
+    
+    // 多个生产者
+    for i in 0..3 {
+        let tx = tx.clone();
+        thread::spawn(move || {
+            for j in 0..10 {
+                tx.send(format!("P{}-M{}", i, j)).unwrap();
+            }
+        });
+    }
+    
+    // 多个消费者
+    for i in 0..2 {
+        let rx = rx.clone();
+        thread::spawn(move || {
+            while let Ok(msg) = rx.recv() {
+                println!("C{} 收到: {}", i, msg);
+            }
+        });
+    }
+}
+```
+
+### 7.4 Select多路复用
+
+```rust
+use crossbeam_channel::{bounded, select};
+
+fn select_example() {
+    let (tx1, rx1) = bounded(10);
+    let (tx2, rx2) = bounded(10);
+    
+    thread::spawn(move || {
+        tx1.send("来自 channel 1").unwrap();
+    });
+    
+    thread::spawn(move || {
+        tx2.send("来自 channel 2").unwrap();
+    });
+    
+    // 等待任意channel有消息
+    select! {
+        recv(rx1) -> msg => println!("Channel 1: {:?}", msg),
+        recv(rx2) -> msg => println!("Channel 2: {:?}", msg),
+    }
+}
+```
+
+**特点对比**:
+
+| 特性 | POSIX MQ | crossbeam-channel |
+|------|----------|-------------------|
+| 跨进程 | ✅ 是 | ❌ 否（需共享内存） |
+| 优先级 | ✅ 支持 | ❌ 不支持 |
+| 持久化 | ✅ 内核管理 | ❌ 内存中 |
+| 性能 | 中等（系统调用） | 高（内存操作） |
+| 使用复杂度 | 高 | 低 |
 
 ---
 
