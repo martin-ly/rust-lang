@@ -7,10 +7,9 @@
 
 ---
 
-
 ## 📊 目录
 
-- [� Rust Compiler Internals Complete Guide (2025 Edition)](#-rust-compiler-internals-complete-guide-2025-edition)
+- [🔧 Rust Compiler Internals Complete Guide (2025 Edition)](#-rust-compiler-internals-complete-guide-2025-edition)
   - [📊 目录](#-目录)
   - [📋 Table of Contents](#-table-of-contents)
   - [Introduction](#introduction)
@@ -46,11 +45,10 @@
       - [Intermediate Exercises](#intermediate-exercises)
       - [Advanced Exercises](#advanced-exercises)
 
-
 ## 📋 Table of Contents
 
 - [🔧 Rust Compiler Internals Complete Guide (2025 Edition)](#-rust-compiler-internals-complete-guide-2025-edition)
-  - [� 目录](#-目录)
+  - [📊 目录](#-目录)
   - [📋 Table of Contents](#-table-of-contents)
   - [Introduction](#introduction)
   - [1. Compiler Overall Architecture](#1-compiler-overall-architecture)

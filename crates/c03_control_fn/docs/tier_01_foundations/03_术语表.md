@@ -4,7 +4,6 @@
 > **使用方式**: 通过术语索引快速查找定义，理解核心概念  
 > **相关文档**: [主索引](./00_MASTER_INDEX.md) | [README](../README.md) | [FAQ](./FAQ.md)
 
-
 ## 📊 目录
 
 - [C03 控制流与函数: 术语表 (Glossary)](#c03-控制流与函数-术语表-glossary)
@@ -25,7 +24,6 @@
   - [Let-Else 模式](#let-else-模式)
   - [标签块 (Labeled Block)](#标签块-labeled-block)
   - [📚 延伸阅读](#-延伸阅读)
-
 
 **最后更新**: 2025-10-19  
 **适用版本**: Rust 1.90+  

@@ -1,6 +1,5 @@
 ﻿# C04 Generic Programming 文档重组计划
 
-
 ## 📊 目录
 
 - [C04 Generic Programming 文档重组计划](#c04-generic-programming-文档重组计划)
@@ -37,7 +36,6 @@
     - [7.1 完成标志](#71-完成标志)
     - [7.2 质量检查](#72-质量检查)
 
-
 **创建日期**: 2025-10-22  
 **目标模块**: `c04_generic` (泛型编程)  
 **参考标准**: `c11_libraries`, `c02_type_system`, `c03_control_fn`  
@@ -48,7 +46,7 @@
 ## 📋 目录
 
 - [C04 Generic Programming 文档重组计划](#c04-generic-programming-文档重组计划)
-  - [� 目录](#-目录)
+  - [📊 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [📋 一、现状分析](#-一现状分析)
     - [1.1 现有文档结构](#11-现有文档结构)
