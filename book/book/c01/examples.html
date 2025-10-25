@@ -1,0 +1,489 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="rust sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>代码示例 - Rust 学习系统 - 完整教程</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="系统化、完整、实战导向的 Rust 学习资源">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "rust";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust 学习系统 - 完整教程</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/your-username/rust-lang" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/your-username/rust-lang/edit/main/book/src/c01/examples.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="代码示例"><a class="header" href="#代码示例">代码示例</a></h1>
+<p>本章提供 C01 模块的交互式代码示例。所有示例都可以在浏览器中运行。</p>
+<hr />
+<h2 id="-示例概览"><a class="header" href="#-示例概览">🎯 示例概览</a></h2>
+<p>本页包含以下主题的代码示例：</p>
+<ol>
+<li><a href="#%E6%89%80%E6%9C%89%E6%9D%83%E5%9F%BA%E7%A1%80">所有权基础</a></li>
+<li><a href="#%E5%80%9F%E7%94%A8%E5%92%8C%E5%BC%95%E7%94%A8">借用和引用</a></li>
+<li><a href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">生命周期</a></li>
+<li><a href="#%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B">实战案例</a></li>
+</ol>
+<hr />
+<h2 id="所有权基础"><a class="header" href="#所有权基础">所有权基础</a></h2>
+<h3 id="示例-1-移动语义"><a class="header" href="#示例-1-移动语义">示例 1: 移动语义</a></h3>
+<p>理解 Rust 的移动语义：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let s1 = String::from("hello");
+    let s2 = s1;  // s1 的所有权转移给 s2
+    
+    // println!("{}", s1);  // 编译错误！取消注释试试
+    println!("{}", s2);  // 正确
+}</code></pre></pre>
+<p><strong>练习</strong>: 尝试取消注释第 5 行，观察编译器的错误信息。</p>
+<h3 id="示例-2-克隆-vs-移动"><a class="header" href="#示例-2-克隆-vs-移动">示例 2: 克隆 vs 移动</a></h3>
+<p>对比克隆和移动的区别：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    // 移动
+    let s1 = String::from("hello");
+    let s2 = s1;
+    // s1 不再可用
+    
+    // 克隆
+    let s3 = String::from("world");
+    let s4 = s3.clone();
+    println!("s3 = {}, s4 = {}", s3, s4);  // 都可用
+    
+    // Copy 类型
+    let x = 5;
+    let y = x;
+    println!("x = {}, y = {}", x, y);  // 都可用
+}</code></pre></pre>
+<h3 id="示例-3-函数所有权"><a class="header" href="#示例-3-函数所有权">示例 3: 函数所有权</a></h3>
+<p>函数如何影响所有权：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let s = String::from("hello");
+    
+    takes_ownership(s);
+    // s 不再有效
+    
+    let x = 5;
+    makes_copy(x);
+    println!("x = {}", x);  // x 仍然有效（Copy 类型）
+}
+
+fn takes_ownership(some_string: String) {
+    println!("{}", some_string);
+}  // some_string 在这里被 drop
+
+fn makes_copy(some_integer: i32) {
+    println!("{}", some_integer);
+}</code></pre></pre>
+<hr />
+<h2 id="借用和引用"><a class="header" href="#借用和引用">借用和引用</a></h2>
+<h3 id="示例-4-不可变借用"><a class="header" href="#示例-4-不可变借用">示例 4: 不可变借用</a></h3>
+<p>多个不可变引用：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let s = String::from("hello");
+    
+    let r1 = &amp;s;  // 第一个不可变引用
+    let r2 = &amp;s;  // 第二个不可变引用
+    
+    println!("r1: {}, r2: {}", r1, r2);
+    // r1 和 r2 都可以使用
+}</code></pre></pre>
+<h3 id="示例-5-可变借用"><a class="header" href="#示例-5-可变借用">示例 5: 可变借用</a></h3>
+<p>只能有一个可变引用：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut s = String::from("hello");
+    
+    let r1 = &amp;mut s;  // 可变引用
+    r1.push_str(", world");
+    
+    println!("{}", r1);
+    
+    // let r2 = &amp;mut s;  // 编译错误！不能同时有两个可变引用
+}</code></pre></pre>
+<h3 id="示例-6-借用规则"><a class="header" href="#示例-6-借用规则">示例 6: 借用规则</a></h3>
+<p>理解借用规则：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut s = String::from("hello");
+    
+    {
+        let r1 = &amp;mut s;
+        r1.push_str(", world");
+    }  // r1 在这里离开作用域
+    
+    let r2 = &amp;mut s;  // 现在可以创建新的可变引用
+    r2.push_str("!");
+    
+    println!("{}", r2);
+}</code></pre></pre>
+<hr />
+<h2 id="生命周期"><a class="header" href="#生命周期">生命周期</a></h2>
+<h3 id="示例-7-基本生命周期"><a class="header" href="#示例-7-基本生命周期">示例 7: 基本生命周期</a></h3>
+<p>函数中的生命周期标注：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let string1 = String::from("abcd");
+    let string2 = "xyz";
+    
+    let result = longest(string1.as_str(), string2);
+    println!("最长的字符串是: {}", result);
+}
+
+fn longest&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {
+    if x.len() &gt; y.len() {
+        x
+    } else {
+        y
+    }
+}</code></pre></pre>
+<h3 id="示例-8-结构体生命周期"><a class="header" href="#示例-8-结构体生命周期">示例 8: 结构体生命周期</a></h3>
+<p>结构体中的生命周期：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let novel = String::from("Call me Ishmael. Some years ago...");
+    let first_sentence = novel.split('.').next().unwrap();
+    
+    let excerpt = ImportantExcerpt {
+        part: first_sentence,
+    };
+    
+    println!("摘录: {}", excerpt.part);
+}
+
+struct ImportantExcerpt&lt;'a&gt; {
+    part: &amp;'a str,
+}</code></pre></pre>
+<hr />
+<h2 id="实战案例"><a class="header" href="#实战案例">实战案例</a></h2>
+<h3 id="示例-9-字符串所有权管理"><a class="header" href="#示例-9-字符串所有权管理">示例 9: 字符串所有权管理</a></h3>
+<p>实际场景中的所有权：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut text = String::from("Hello");
+    
+    // 场景1: 修改字符串
+    append_world(&amp;mut text);
+    println!("修改后: {}", text);
+    
+    // 场景2: 计算长度（不需要所有权）
+    let len = calculate_length(&amp;text);
+    println!("长度: {}", len);
+    
+    // 场景3: 获取第一个单词
+    let first = first_word(&amp;text);
+    println!("第一个单词: {}", first);
+}
+
+fn append_world(s: &amp;mut String) {
+    s.push_str(", World!");
+}
+
+fn calculate_length(s: &amp;String) -&gt; usize {
+    s.len()
+}
+
+fn first_word(s: &amp;str) -&gt; &amp;str {
+    let bytes = s.as_bytes();
+    
+    for (i, &amp;item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &amp;s[0..i];
+        }
+    }
+    
+    &amp;s[..]
+}</code></pre></pre>
+<h3 id="示例-10-综合练习"><a class="header" href="#示例-10-综合练习">示例 10: 综合练习</a></h3>
+<p>综合运用所有权概念：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    // 创建数据
+    let mut data = vec![1, 2, 3, 4, 5];
+    
+    // 只读访问
+    let sum = calculate_sum(&amp;data);
+    println!("总和: {}", sum);
+    
+    // 修改数据
+    double_values(&amp;mut data);
+    println!("翻倍后: {:?}", data);
+    
+    // 移动数据
+    let new_data = data;
+    println!("新数据: {:?}", new_data);
+    
+    // data 不再可用
+    // println!("{:?}", data);  // 编译错误
+}
+
+fn calculate_sum(v: &amp;Vec&lt;i32&gt;) -&gt; i32 {
+    v.iter().sum()
+}
+
+fn double_values(v: &amp;mut Vec&lt;i32&gt;) {
+    for item in v.iter_mut() {
+        *item *= 2;
+    }
+}</code></pre></pre>
+<hr />
+<h2 id="-学习建议"><a class="header" href="#-学习建议">💡 学习建议</a></h2>
+<h3 id="如何使用这些示例"><a class="header" href="#如何使用这些示例">如何使用这些示例</a></h3>
+<ol>
+<li><strong>阅读代码</strong>: 先理解代码的目的</li>
+<li><strong>运行示例</strong>: 点击 “Run” 按钮运行代码</li>
+<li><strong>修改实验</strong>: 尝试修改代码，观察结果</li>
+<li><strong>理解错误</strong>: 故意引入错误，学习编译器提示</li>
+</ol>
+<h3 id="练习建议"><a class="header" href="#练习建议">练习建议</a></h3>
+<ul>
+<li><strong>示例 1-3</strong>: 理解所有权转移</li>
+<li><strong>示例 4-6</strong>: 掌握借用规则</li>
+<li><strong>示例 7-8</strong>: 学习生命周期标注</li>
+<li><strong>示例 9-10</strong>: 应用到实际场景</li>
+</ul>
+<h3 id="常见陷阱"><a class="header" href="#常见陷阱">常见陷阱</a></h3>
+<p>⚠️ <strong>同时存在可变和不可变引用</strong></p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut s = String::from("hello");
+let r1 = &amp;s;  // 不可变引用
+let r2 = &amp;mut s;  // 编译错误！
+<span class="boring">}</span></code></pre></pre>
+<p>⚠️ <strong>悬垂引用</strong></p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn dangle() -&gt; &amp;String {  // 编译错误！
+    let s = String::from("hello");
+    &amp;s
+}  // s 在这里被释放
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<h2 id="-更多资源"><a class="header" href="#-更多资源">🔗 更多资源</a></h2>
+<ul>
+<li><a href="../../crates/c01_ownership_borrow_scope/docs/tier_02_guides/06_%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B%E9%9B%86%E5%90%88.html">完整代码示例集合</a></li>
+<li><a href="./guides.html">返回指南页面</a></li>
+<li><a href="./README.html">返回模块首页</a></li>
+<li><a href="../tools/interactive-examples.html">交互式示例使用指南</a></li>
+</ul>
+<hr />
+<p><strong>记住</strong>: 所有权是 Rust 最重要的特性，多练习才能真正掌握！🚀</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../c01/guides.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../c01/knowledge-graph.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../c01/guides.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../c01/knowledge-graph.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../ace.js"></script>
+        <script src="../mode-rust.js"></script>
+        <script src="../editor.js"></script>
+        <script src="../theme-dawn.js"></script>
+        <script src="../theme-tomorrow_night.js"></script>
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

@@ -94,10 +94,16 @@ pub fn run() -> Result<(), Box<dyn std::error::Error>> {
     println!("{}", "🔍 Rust 学习项目 - 智能文档搜索工具 v1.1".bright_cyan().bold());
     println!();
 
-    // 获取项目根目录（向上两级）
+    // 获取项目根目录
     let mut root_path = std::env::current_dir()?;
-    root_path.pop(); // 从 tools/doc_search 到 tools
-    root_path.pop(); // 从 tools 到项目根
+    
+    // 检查是否已经在项目根目录（通过检查 Cargo.toml 和 crates 目录）
+    if !root_path.join("Cargo.toml").exists() || !root_path.join("crates").exists() {
+        // 如果不在根目录，尝试向上查找
+        // 假设从 tools/doc_search 运行
+        root_path.pop(); // 从 tools/doc_search 到 tools
+        root_path.pop(); // 从 tools 到项目根
+    }
     
     // 处理不需要索引的命令
     match &cli.command {
@@ -200,7 +206,12 @@ pub fn run() -> Result<(), Box<dyn std::error::Error>> {
                 // 显示匹配内容（高亮关键词）
                 let preview = result.context.lines().take(2).collect::<Vec<_>>().join(" ");
                 let preview = if preview.len() > 100 {
-                    format!("{}...", &preview[..100])
+                    // 安全地截断字符串，避免在多字节字符中间切割
+                    let mut end = 100;
+                    while end > 0 && !preview.is_char_boundary(end) {
+                        end -= 1;
+                    }
+                    format!("{}...", &preview[..end])
                 } else {
                     preview
                 };

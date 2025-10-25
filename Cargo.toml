@@ -17,6 +17,7 @@ members = [
     "crates/c12_model",
     "crates/c13_reliability",
     "crates/c14_macro_system",
+    "tools/doc_search",
 ]
 
 [workspace.package]

@@ -1,0 +1,450 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="rust sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>知识图谱 - Rust 学习系统 - 完整教程</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="系统化、完整、实战导向的 Rust 学习资源">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "rust";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust 学习系统 - 完整教程</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/your-username/rust-lang" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/your-username/rust-lang/edit/main/book/src/c01/knowledge-graph.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="知识图谱"><a class="header" href="#知识图谱">知识图谱</a></h1>
+<p>本页展示所有权、借用与作用域的概念关系。</p>
+<hr />
+<h2 id="-核心概念关系图"><a class="header" href="#-核心概念关系图">📊 核心概念关系图</a></h2>
+<pre><code class="language-text">                    [所有权系统]
+                         |
+         +---------------+---------------+
+         |               |               |
+    [所有权]         [借用]         [生命周期]
+         |               |               |
+    +----+----+     +----+----+     +----+----+
+    |    |    |     |    |    |     |    |    |
+  移动  复制 Drop  不可变  可变  引用  标注  省略  静态
+                  借用    借用  规则
+</code></pre>
+<hr />
+<h2 id="-概念层次"><a class="header" href="#-概念层次">🎯 概念层次</a></h2>
+<h3 id="1-所有权-ownership"><a class="header" href="#1-所有权-ownership">1. 所有权 (Ownership)</a></h3>
+<p><strong>核心规则</strong>:</p>
+<ul>
+<li>每个值都有一个所有者</li>
+<li>值在任一时刻只能有一个所有者</li>
+<li>当所有者离开作用域时，值被释放</li>
+</ul>
+<p><strong>相关概念</strong>:</p>
+<ul>
+<li><strong>移动 (Move)</strong>: 所有权转移</li>
+<li><strong>Copy</strong>: 自动复制而非移动</li>
+<li><strong>Clone</strong>: 显式深拷贝</li>
+<li><strong>Drop</strong>: 值离开作用域时的清理</li>
+</ul>
+<hr />
+<h3 id="2-借用-borrowing"><a class="header" href="#2-借用-borrowing">2. 借用 (Borrowing)</a></h3>
+<p><strong>核心规则</strong>:</p>
+<ul>
+<li>可以有多个不可变引用</li>
+<li>或者只有一个可变引用</li>
+<li>引用必须总是有效的</li>
+</ul>
+<p><strong>相关概念</strong>:</p>
+<ul>
+<li><strong>不可变借用</strong> (<code>&amp;T</code>): 只读访问</li>
+<li><strong>可变借用</strong> (<code>&amp;mut T</code>): 读写访问</li>
+<li><strong>借用检查器</strong>: 编译时验证借用规则</li>
+<li><strong>NLL</strong> (Non-Lexical Lifetimes): 更智能的生命周期分析</li>
+</ul>
+<hr />
+<h3 id="3-生命周期-lifetimes"><a class="header" href="#3-生命周期-lifetimes">3. 生命周期 (Lifetimes)</a></h3>
+<p><strong>核心概念</strong>:</p>
+<ul>
+<li>引用有效的作用域</li>
+<li>防止悬垂引用</li>
+<li>在编译时验证</li>
+</ul>
+<p><strong>相关概念</strong>:</p>
+<ul>
+<li><strong>生命周期标注</strong> (<code>'a</code>): 显式标注生命周期关系</li>
+<li><strong>生命周期省略</strong>: 编译器自动推断</li>
+<li><strong>静态生命周期</strong> (<code>'static</code>): 整个程序期间有效</li>
+<li><strong>子类型</strong>: 生命周期的协变和逆变</li>
+</ul>
+<hr />
+<h2 id="-概念关联"><a class="header" href="#-概念关联">🔗 概念关联</a></h2>
+<h3 id="所有权--借用"><a class="header" href="#所有权--借用">所有权 ←→ 借用</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 所有权: 完全拥有
+let s = String::from("hello");
+
+// 借用: 临时访问
+let r = &amp;s;
+
+// 关系: 借用不转移所有权
+println!("{}", s);  // s 仍然有效
+println!("{}", r);  // r 是 s 的借用
+<span class="boring">}</span></code></pre></pre>
+<h3 id="借用--生命周期"><a class="header" href="#借用--生命周期">借用 ←→ 生命周期</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 借用必须有有效的生命周期
+fn longest&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {
+    if x.len() &gt; y.len() { x } else { y }
+}
+
+// 返回值的生命周期不能超过输入
+<span class="boring">}</span></code></pre></pre>
+<h3 id="所有权--作用域"><a class="header" href="#所有权--作用域">所有权 ←→ 作用域</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>{
+    let s = String::from("hello");  // s 开始有效
+    // 使用 s
+}  // s 离开作用域，所有权结束，内存被释放
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<h2 id="-学习路径图"><a class="header" href="#-学习路径图">📚 学习路径图</a></h2>
+<pre><code class="language-text">第一步: 理解所有权
+    ↓
+第二步: 掌握移动和复制
+    ↓
+第三步: 学习借用规则
+    ↓
+第四步: 理解生命周期
+    ↓
+第五步: 实战应用
+</code></pre>
+<hr />
+<h2 id="-从其他语言的角度"><a class="header" href="#-从其他语言的角度">🎓 从其他语言的角度</a></h2>
+<h3 id="对比-c"><a class="header" href="#对比-c">对比 C++</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>概念</th><th>C++</th><th>Rust</th></tr></thead><tbody>
+<tr><td><strong>所有权</strong></td><td>手动管理</td><td>自动管理</td></tr>
+<tr><td><strong>引用</strong></td><td>可能悬垂</td><td>编译时检查</td></tr>
+<tr><td><strong>内存泄漏</strong></td><td>常见问题</td><td>极少发生</td></tr>
+<tr><td><strong>多线程</strong></td><td>数据竞争</td><td>编译时防止</td></tr>
+</tbody></table>
+</div>
+<h3 id="对比-javapython"><a class="header" href="#对比-javapython">对比 Java/Python</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>概念</th><th>Java/Python</th><th>Rust</th></tr></thead><tbody>
+<tr><td><strong>内存管理</strong></td><td>垃圾回收</td><td>所有权系统</td></tr>
+<tr><td><strong>性能</strong></td><td>GC 暂停</td><td>无运行时开销</td></tr>
+<tr><td><strong>并发</strong></td><td>运行时检查</td><td>编译时检查</td></tr>
+<tr><td><strong>可预测性</strong></td><td>GC 不确定</td><td>确定性清理</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="-核心原则"><a class="header" href="#-核心原则">💡 核心原则</a></h2>
+<h3 id="1-所有权保证内存安全"><a class="header" href="#1-所有权保证内存安全">1. 所有权保证内存安全</a></h3>
+<pre><code class="language-text">所有权 → 唯一所有者 → 确定性清理 → 无内存泄漏
+</code></pre>
+<h3 id="2-借用防止数据竞争"><a class="header" href="#2-借用防止数据竞争">2. 借用防止数据竞争</a></h3>
+<pre><code class="language-text">借用规则 → 编译时检查 → 无数据竞争 → 线程安全
+</code></pre>
+<h3 id="3-生命周期保证引用有效"><a class="header" href="#3-生命周期保证引用有效">3. 生命周期保证引用有效</a></h3>
+<pre><code class="language-text">生命周期 → 引用必须有效 → 无悬垂指针 → 内存安全
+</code></pre>
+<hr />
+<h2 id="-深入主题"><a class="header" href="#-深入主题">🔍 深入主题</a></h2>
+<h3 id="主题-1-智能指针与所有权"><a class="header" href="#主题-1-智能指针与所有权">主题 1: 智能指针与所有权</a></h3>
+<ul>
+<li><strong>Box<T></strong>: 堆分配</li>
+<li><strong>Rc<T></strong>: 引用计数</li>
+<li><strong>Arc<T></strong>: 原子引用计数</li>
+<li><strong>RefCell<T></strong>: 内部可变性</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust">use std::rc::Rc;
+
+fn main() {
+    let a = Rc::new(5);
+    let b = Rc::clone(&amp;a);
+    
+    println!("引用计数: {}", Rc::strong_count(&amp;a));
+}</code></pre></pre>
+<h3 id="主题-2-并发中的所有权"><a class="header" href="#主题-2-并发中的所有权">主题 2: 并发中的所有权</a></h3>
+<ul>
+<li><strong>Send</strong>: 可在线程间转移</li>
+<li><strong>Sync</strong>: 可在线程间共享引用</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust">use std::thread;
+use std::sync::Arc;
+
+fn main() {
+    let data = Arc::new(vec![1, 2, 3]);
+    
+    let data_clone = Arc::clone(&amp;data);
+    thread::spawn(move || {
+        println!("{:?}", data_clone);
+    });
+}</code></pre></pre>
+<h3 id="主题-3-高级生命周期"><a class="header" href="#主题-3-高级生命周期">主题 3: 高级生命周期</a></h3>
+<ul>
+<li><strong>高阶 trait 边界</strong> (HRTB)</li>
+<li><strong>生命周期子类型</strong></li>
+<li><strong>型变</strong> (Variance)</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// HRTB 示例
+fn apply&lt;F&gt;(f: F)
+where
+    F: for&lt;'a&gt; Fn(&amp;'a str) -&gt; &amp;'a str,
+{
+    let s = String::from("hello");
+    println!("{}", f(&amp;s));
+}
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<h2 id="-相关章节"><a class="header" href="#-相关章节">📖 相关章节</a></h2>
+<ul>
+<li><strong><a href="./foundations.html">基础概念</a></strong> - 理论详解</li>
+<li><strong><a href="./guides.html">实践指南</a></strong> - 实用技巧</li>
+<li><strong><a href="./examples.html">代码示例</a></strong> - 交互式示例 ⭐</li>
+<li><strong><a href="./README.html">返回模块首页</a></strong></li>
+</ul>
+<hr />
+<h2 id="-扩展学习"><a class="header" href="#-扩展学习">🔗 扩展学习</a></h2>
+<h3 id="深入阅读"><a class="header" href="#深入阅读">深入阅读</a></h3>
+<ul>
+<li><a href="../../crates/c01_ownership_borrow_scope/docs/theory/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.html">完整知识图谱</a></li>
+<li><a href="https://doc.rust-lang.org/nomicon/">Rust Nomicon - 高级主题</a></li>
+<li><a href="https://rust-lang.github.io/rfcs/2094-nll.html">RFC 2094 - NLL</a></li>
+</ul>
+<h3 id="相关模块"><a class="header" href="#相关模块">相关模块</a></h3>
+<ul>
+<li><strong><a href="../c05/README.html">C05: 多线程</a></strong> - Send 和 Sync</li>
+<li><strong><a href="../c04/README.html">C04: 泛型</a></strong> - 生命周期泛型</li>
+<li><strong><a href="../c13/README.html">C13: 可靠性</a></strong> - 智能指针</li>
+</ul>
+<hr />
+<p><strong>理解这些概念的关系将帮助你更好地掌握 Rust！</strong> 🚀</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../c01/examples.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../c02/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../c01/examples.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../c02/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../ace.js"></script>
+        <script src="../mode-rust.js"></script>
+        <script src="../editor.js"></script>
+        <script src="../theme-dawn.js"></script>
+        <script src="../theme-tomorrow_night.js"></script>
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

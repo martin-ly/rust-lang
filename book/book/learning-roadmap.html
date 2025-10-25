@@ -1,0 +1,516 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="rust sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>学习路线 - Rust 学习系统 - 完整教程</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="系统化、完整、实战导向的 Rust 学习资源">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "rust";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust 学习系统 - 完整教程</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/your-username/rust-lang" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/your-username/rust-lang/edit/main/book/src/learning-roadmap.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="学习路线图"><a class="header" href="#学习路线图">学习路线图</a></h1>
+<p>本页面为你提供详细的 Rust 学习路线建议。</p>
+<hr />
+<h2 id="-完整学习路线"><a class="header" href="#-完整学习路线">🗺️ 完整学习路线</a></h2>
+<pre><code class="language-text">┌─────────────────────────────────────────────────────────────────┐
+│                      🎯 Rust 学习路线图                         │
+└─────────────────────────────────────────────────────────────────┘
+
+Phase 1: 基础入门 (2-3 周)
+├─ C01: 所有权、借用与作用域 ⭐⭐⭐⭐⭐
+├─ C02: 类型系统 ⭐⭐⭐⭐⭐
+└─ C03: 控制流与函数 ⭐⭐⭐⭐
+
+Phase 2: 高级特性 (2-3 周)
+├─ C04: 泛型编程 ⭐⭐⭐⭐
+├─ C05: 多线程编程 ⭐⭐⭐⭐⭐
+└─ C06: 异步编程 ⭐⭐⭐⭐⭐
+
+Phase 3: 系统与应用 (2-4 周)
+├─ C07: 进程与系统编程 ⭐⭐⭐
+├─ C10: 网络编程 ⭐⭐⭐⭐
+└─ C13: 可靠性工程 ⭐⭐⭐⭐
+
+Phase 4: 进阶与专精 (4-6 周)
+├─ C08: 算法与数据结构 ⭐⭐⭐
+├─ C09: 设计模式 ⭐⭐⭐
+├─ C11: 常用库 ⭐⭐⭐
+├─ C12: 领域建模 ⭐⭐⭐
+└─ C14: 宏系统 ⭐⭐⭐
+
+Phase 5: 实战项目 (持续)
+└─ 5 个综合实战项目 ⭐⭐⭐⭐⭐
+</code></pre>
+<hr />
+<h2 id="-按职业方向选择"><a class="header" href="#-按职业方向选择">📚 按职业方向选择</a></h2>
+<h3 id="-web-开发"><a class="header" href="#-web-开发">🌐 Web 开发</a></h3>
+<p><strong>学习顺序</strong>:</p>
+<ol>
+<li>C01 → C02 → C03 (基础)</li>
+<li>C06 (异步编程)</li>
+<li>C10 (网络编程)</li>
+<li>C11 (常用库: axum, tokio)</li>
+<li>C13 (可靠性工程)</li>
+</ol>
+<p><strong>实战项目</strong>:</p>
+<ul>
+<li>项目二：异步 Web 服务器</li>
+<li>项目四：实时聊天服务</li>
+</ul>
+<p><strong>推荐生态</strong>:</p>
+<ul>
+<li><code>axum</code> - Web 框架</li>
+<li><code>tokio</code> - 异步运行时</li>
+<li><code>sqlx</code> - 数据库</li>
+<li><code>serde</code> - 序列化</li>
+</ul>
+<hr />
+<h3 id="-系统编程"><a class="header" href="#-系统编程">🖥️ 系统编程</a></h3>
+<p><strong>学习顺序</strong>:</p>
+<ol>
+<li>C01 → C02 → C03 (基础)</li>
+<li>C05 (多线程)</li>
+<li>C07 (进程与系统)</li>
+<li>C13 (可靠性)</li>
+</ol>
+<p><strong>实战项目</strong>:</p>
+<ul>
+<li>项目三：分布式缓存系统</li>
+<li>项目五：CLI 工具集</li>
+</ul>
+<p><strong>推荐生态</strong>:</p>
+<ul>
+<li><code>libc</code> - 系统调用</li>
+<li><code>nix</code> - Unix API</li>
+<li><code>crossbeam</code> - 并发工具</li>
+</ul>
+<hr />
+<h3 id="-高性能计算"><a class="header" href="#-高性能计算">⚡ 高性能计算</a></h3>
+<p><strong>学习顺序</strong>:</p>
+<ol>
+<li>C01 → C02 → C03 (基础)</li>
+<li>C04 (泛型优化)</li>
+<li>C05 (多线程)</li>
+<li>C08 (算法优化)</li>
+</ol>
+<p><strong>实战项目</strong>:</p>
+<ul>
+<li>自定义高性能数据结构</li>
+<li>并行计算框架</li>
+</ul>
+<p><strong>推荐生态</strong>:</p>
+<ul>
+<li><code>rayon</code> - 数据并行</li>
+<li><code>ndarray</code> - 数值计算</li>
+<li><code>simd</code> - SIMD 指令</li>
+</ul>
+<hr />
+<h3 id="-游戏开发"><a class="header" href="#-游戏开发">🎮 游戏开发</a></h3>
+<p><strong>学习顺序</strong>:</p>
+<ol>
+<li>C01 → C02 → C03 (基础)</li>
+<li>C05 (多线程)</li>
+<li>C08 (算法与数据结构)</li>
+<li>C09 (设计模式)</li>
+</ol>
+<p><strong>推荐生态</strong>:</p>
+<ul>
+<li><code>bevy</code> - 游戏引擎</li>
+<li><code>wgpu</code> - 图形API</li>
+<li><code>gilrs</code> - 手柄输入</li>
+</ul>
+<hr />
+<h2 id="-按学习风格选择"><a class="header" href="#-按学习风格选择">📖 按学习风格选择</a></h2>
+<h3 id="理论优先"><a class="header" href="#理论优先">理论优先</a></h3>
+<p>适合喜欢先理解原理的学习者。</p>
+<p><strong>学习方式</strong>:</p>
+<ol>
+<li>阅读每个模块的“基础概念“</li>
+<li>理解知识图谱中的概念关系</li>
+<li>运行代码示例验证理解</li>
+<li>完成实践指南</li>
+</ol>
+<p><strong>优点</strong>: 理解深刻，基础扎实<br />
+<strong>缺点</strong>: 初期进度较慢</p>
+<hr />
+<h3 id="实践优先"><a class="header" href="#实践优先">实践优先</a></h3>
+<p>适合喜欢边做边学的学习者。</p>
+<p><strong>学习方式</strong>:</p>
+<ol>
+<li>直接运行代码示例</li>
+<li>修改代码观察结果</li>
+<li>遇到问题查阅基础概念</li>
+<li>参与实战项目</li>
+</ol>
+<p><strong>优点</strong>: 快速上手，成就感强<br />
+<strong>缺点</strong>: 可能遗漏理论细节</p>
+<hr />
+<h3 id="项目驱动"><a class="header" href="#项目驱动">项目驱动</a></h3>
+<p>适合有明确目标的学习者。</p>
+<p><strong>学习方式</strong>:</p>
+<ol>
+<li>选择一个实战项目</li>
+<li>根据项目需求学习相关模块</li>
+<li>边开发边学习</li>
+<li>遇到困难查阅文档</li>
+</ol>
+<p><strong>优点</strong>: 目标明确，实战性强<br />
+<strong>缺点</strong>: 知识体系可能不完整</p>
+<hr />
+<h2 id="-学习里程碑"><a class="header" href="#-学习里程碑">🎯 学习里程碑</a></h2>
+<h3 id="-入门级-1-2-个月"><a class="header" href="#-入门级-1-2-个月">🏆 入门级 (1-2 个月)</a></h3>
+<p><strong>能力标准</strong>:</p>
+<ul>
+<li>✅ 理解所有权系统</li>
+<li>✅ 熟练使用基本类型和控制流</li>
+<li>✅ 能读懂简单的 Rust 代码</li>
+<li>✅ 完成基础练习题</li>
+</ul>
+<p><strong>推荐完成</strong>:</p>
+<ul>
+<li>C01、C02、C03 模块</li>
+<li>10+ 代码示例</li>
+<li>基础练习题</li>
+</ul>
+<hr />
+<h3 id="-中级-2-4-个月"><a class="header" href="#-中级-2-4-个月">🥈 中级 (2-4 个月)</a></h3>
+<p><strong>能力标准</strong>:</p>
+<ul>
+<li>✅ 掌握泛型和 Trait 系统</li>
+<li>✅ 理解并发和异步编程</li>
+<li>✅ 能编写中等复杂度的程序</li>
+<li>✅ 能调试常见错误</li>
+</ul>
+<p><strong>推荐完成</strong>:</p>
+<ul>
+<li>C04、C05、C06 模块</li>
+<li>30+ 代码示例</li>
+<li>1-2 个实战项目</li>
+</ul>
+<hr />
+<h3 id="-高级-4-6-个月"><a class="header" href="#-高级-4-6-个月">🥇 高级 (4-6 个月)</a></h3>
+<p><strong>能力标准</strong>:</p>
+<ul>
+<li>✅ 熟练使用高级特性</li>
+<li>✅ 能设计复杂系统架构</li>
+<li>✅ 理解性能优化技巧</li>
+<li>✅ 能贡献开源项目</li>
+</ul>
+<p><strong>推荐完成</strong>:</p>
+<ul>
+<li>所有 14 个模块</li>
+<li>所有代码示例</li>
+<li>3+ 个实战项目</li>
+</ul>
+<hr />
+<h3 id="-专家级-6-个月"><a class="header" href="#-专家级-6-个月">🏅 专家级 (6+ 个月)</a></h3>
+<p><strong>能力标准</strong>:</p>
+<ul>
+<li>✅ 深入理解 Rust 内部机制</li>
+<li>✅ 能优化性能关键代码</li>
+<li>✅ 能设计领域特定库</li>
+<li>✅ 能指导他人学习</li>
+</ul>
+<p><strong>推荐完成</strong>:</p>
+<ul>
+<li>深入研究高级主题</li>
+<li>参与开源项目</li>
+<li>编写技术文章</li>
+<li>构建实际产品</li>
+</ul>
+<hr />
+<h2 id="-学习时间规划"><a class="header" href="#-学习时间规划">⏱️ 学习时间规划</a></h2>
+<h3 id="兼职学习-每天-1-2-小时"><a class="header" href="#兼职学习-每天-1-2-小时">兼职学习 (每天 1-2 小时)</a></h3>
+<pre><code class="language-text">Week 1-2:  C01 所有权系统
+Week 3-4:  C02 类型系统
+Week 5-6:  C03 控制流
+Week 7-8:  C04 泛型
+Week 9-10: C05 多线程
+Week 11-12: C06 异步
+Week 13+:  其他模块 + 实战项目
+</code></pre>
+<p><strong>预计时间</strong>: 3-6 个月达到中级水平</p>
+<hr />
+<h3 id="全职学习-每天-6-8-小时"><a class="header" href="#全职学习-每天-6-8-小时">全职学习 (每天 6-8 小时)</a></h3>
+<pre><code class="language-text">Week 1:  C01 + C02
+Week 2:  C03 + C04
+Week 3:  C05 + C06
+Week 4:  C07 + C10
+Week 5-6: C08-C14 + 实战项目
+</code></pre>
+<p><strong>预计时间</strong>: 1-2 个月达到中级水平</p>
+<hr />
+<h2 id="-学习建议"><a class="header" href="#-学习建议">💡 学习建议</a></h2>
+<h3 id="1-制定计划"><a class="header" href="#1-制定计划">1. 制定计划</a></h3>
+<ul>
+<li>设定清晰的学习目标</li>
+<li>制定每周学习计划</li>
+<li>使用<a href="./appendix/progress-tracker.html">学习进度追踪</a></li>
+</ul>
+<h3 id="2-保持节奏"><a class="header" href="#2-保持节奏">2. 保持节奏</a></h3>
+<ul>
+<li>每天坚持学习</li>
+<li>不要长时间中断</li>
+<li>保持学习动力</li>
+</ul>
+<h3 id="3-多实践"><a class="header" href="#3-多实践">3. 多实践</a></h3>
+<ul>
+<li>每个示例都要运行</li>
+<li>尝试修改代码</li>
+<li>完成所有练习</li>
+</ul>
+<h3 id="4-及时总结"><a class="header" href="#4-及时总结">4. 及时总结</a></h3>
+<ul>
+<li>记录学习笔记</li>
+<li>整理知识点</li>
+<li>定期复习</li>
+</ul>
+<h3 id="5-寻求帮助"><a class="header" href="#5-寻求帮助">5. 寻求帮助</a></h3>
+<ul>
+<li>加入 Rust 社区</li>
+<li>提问交流</li>
+<li>参与讨论</li>
+</ul>
+<hr />
+<h2 id="-后续学习"><a class="header" href="#-后续学习">📚 后续学习</a></h2>
+<p>完成本系统后，可以：</p>
+<ul>
+<li>📖 深入阅读 <a href="https://doc.rust-lang.org/book/">The Rust Programming Language</a></li>
+<li>🔍 研究 <a href="https://github.com/rust-lang/rust">Rust 标准库源码</a></li>
+<li>🚀 参与开源项目</li>
+<li>📝 编写技术博客</li>
+<li>👥 加入 Rust 中文社区</li>
+</ul>
+<hr />
+<p><strong>选择适合你的路线，开始学习吧！</strong> 🎓</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="getting-started.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="c01/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="getting-started.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="c01/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="ace.js"></script>
+        <script src="mode-rust.js"></script>
+        <script src="editor.js"></script>
+        <script src="theme-dawn.js"></script>
+        <script src="theme-tomorrow_night.js"></script>
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

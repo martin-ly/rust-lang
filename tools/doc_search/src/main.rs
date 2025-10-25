@@ -5,7 +5,7 @@
 
 use std::collections::HashMap;
 use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::Path;
 use serde::{Deserialize, Serialize};
 
 /// 搜索结果项
@@ -26,7 +26,7 @@ pub struct SearchResult {
 }
 
 /// 文档类型
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum DocumentType {
     /// 📊 知识图谱
     KnowledgeGraph,
@@ -82,20 +82,21 @@ impl DocSearcher {
     pub fn new_with_config(root_path: &Path, config: Config) -> Result<Self, Box<dyn std::error::Error>> {
         // 尝试从缓存加载索引
         let index = if config.incremental_index {
-            if let Some(cache_path) = &config.cache_path.or_else(|| IndexCache::default_cache_path()) {
+            let cache_path_option = config.cache_path.clone().or_else(|| IndexCache::default_cache_path());
+            if let Some(cache_path) = cache_path_option {
                 if cache_path.exists() {
-                    if let Ok(cache) = IndexCache::load(cache_path) {
+                    if let Ok(cache) = IndexCache::load(&cache_path) {
                         if cache.is_valid() && cache.metadata.source_path == root_path {
                             println!("✅ 从缓存加载索引");
                             cache.index
                         } else {
-                            Self::build_and_cache_index(root_path, cache_path)?
+                            Self::build_and_cache_index(root_path, &cache_path)?
                         }
                     } else {
-                        Self::build_and_cache_index(root_path, cache_path)?
+                        Self::build_and_cache_index(root_path, &cache_path)?
                     }
                 } else {
-                    Self::build_and_cache_index(root_path, cache_path)?
+                    Self::build_and_cache_index(root_path, &cache_path)?
                 }
             } else {
                 Self::build_index(root_path)?
@@ -174,12 +175,17 @@ impl DocSearcher {
             }
         }
 
-        // 索引模块根目录的 README 和报告
-        for file_name in &["README.md", format!("{}_COMPREHENSIVE_ENHANCEMENT_REPORT_2025_10_20.md", module_name.to_uppercase())] {
-            let file_path = module_path.join(file_name);
-            if file_path.exists() {
-                Self::index_file(&file_path, module_name, documents, keyword_index, module_index)?;
-            }
+        // 索引模块根目录的 README
+        let readme_path = module_path.join("README.md");
+        if readme_path.exists() {
+            Self::index_file(&readme_path, module_name, documents, keyword_index, module_index)?;
+        }
+        
+        // 索引模块报告
+        let report_name = format!("{}_COMPREHENSIVE_ENHANCEMENT_REPORT_2025_10_20.md", module_name.to_uppercase());
+        let report_path = module_path.join(&report_name);
+        if report_path.exists() {
+            Self::index_file(&report_path, module_name, documents, keyword_index, module_index)?;
         }
 
         Ok(())

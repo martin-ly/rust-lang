@@ -57,12 +57,12 @@ impl RegexSearcher {
     }
     
     /// 在文本中查找匹配
-    pub fn find_matches(&self, text: &str) -> Vec<regex::Match> {
+    pub fn find_matches<'a>(&self, text: &'a str) -> Vec<regex::Match<'a>> {
         self.regex.find_iter(text).collect()
     }
     
     /// 在多行文本中查找匹配
-    pub fn find_in_lines(&self, lines: &[String]) -> Vec<(usize, Vec<regex::Match>)> {
+    pub fn find_in_lines<'a>(&self, lines: &'a [String]) -> Vec<(usize, Vec<regex::Match<'a>>)> {
         lines
             .iter()
             .enumerate()

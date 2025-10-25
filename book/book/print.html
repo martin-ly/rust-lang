@@ -1,0 +1,1922 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="rust sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Rust 学习系统 - 完整教程</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="系统化、完整、实战导向的 Rust 学习资源">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "rust";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust 学习系统 - 完整教程</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/your-username/rust-lang" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="欢迎来到-rust-学习系统"><a class="header" href="#欢迎来到-rust-学习系统">欢迎来到 Rust 学习系统！</a></h1>
+<blockquote>
+<p><strong>系统化、完整、实战导向的 Rust 学习资源</strong></p>
+</blockquote>
+<hr />
+<h2 id="-项目简介"><a class="header" href="#-项目简介">🎯 项目简介</a></h2>
+<p>这是一个完整的 <strong>Rust 学习系统</strong>，涵盖从基础到高级的所有核心知识点。通过 <strong>14 个核心模块</strong>、<strong>102+ 代码示例</strong>、<strong>5 个综合实战项目</strong>，帮助你系统掌握 Rust 编程。</p>
+<h3 id="核心特色"><a class="header" href="#核心特色">核心特色</a></h3>
+<ul>
+<li>✅ <strong>系统化组织</strong>: 14 个核心模块，循序渐进</li>
+<li>✅ <strong>4-Tier 架构</strong>: 基础→实践→参考→高级，清晰分层</li>
+<li>✅ <strong>代码优先</strong>: 102+ 精心设计的代码示例</li>
+<li>✅ <strong>实战导向</strong>: 5 个跨模块综合实战项目</li>
+<li>✅ <strong>知识图谱</strong>: 可视化知识结构和概念关系</li>
+<li>✅ <strong>全文搜索</strong>: 快速定位所需内容</li>
+</ul>
+<hr />
+<h2 id="-14-个核心模块"><a class="header" href="#-14-个核心模块">📚 14 个核心模块</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>模块</th><th>名称</th><th>核心内容</th></tr></thead><tbody>
+<tr><td><strong>C01</strong></td><td>所有权、借用与作用域</td><td>Rust 的核心特性，内存安全的基础</td></tr>
+<tr><td><strong>C02</strong></td><td>类型系统</td><td>结构体、枚举、Trait、泛型</td></tr>
+<tr><td><strong>C03</strong></td><td>控制流与函数</td><td>流程控制、错误处理、闭包、迭代器</td></tr>
+<tr><td><strong>C04</strong></td><td>泛型编程</td><td>深入理解泛型、Trait 边界、关联类型</td></tr>
+<tr><td><strong>C05</strong></td><td>多线程编程</td><td>并发模型、线程安全、锁、消息传递</td></tr>
+<tr><td><strong>C06</strong></td><td>异步编程</td><td>async/await、Future、tokio 生态</td></tr>
+<tr><td><strong>C07</strong></td><td>进程与系统编程</td><td>进程管理、系统调用、跨平台编程</td></tr>
+<tr><td><strong>C08</strong></td><td>算法与数据结构</td><td>常用算法、数据结构的 Rust 实现</td></tr>
+<tr><td><strong>C09</strong></td><td>设计模式</td><td>常见设计模式在 Rust 中的应用</td></tr>
+<tr><td><strong>C10</strong></td><td>网络编程</td><td>TCP/UDP、HTTP、WebSocket、gRPC</td></tr>
+<tr><td><strong>C11</strong></td><td>常用库</td><td>生态系统中的重要库和工具</td></tr>
+<tr><td><strong>C12</strong></td><td>领域建模</td><td>DDD、类型驱动开发</td></tr>
+<tr><td><strong>C13</strong></td><td>可靠性工程</td><td>错误处理、测试、监控、日志</td></tr>
+<tr><td><strong>C14</strong></td><td>宏系统</td><td>声明式宏、过程宏、元编程</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="-快速开始"><a class="header" href="#-快速开始">🚀 快速开始</a></h2>
+<h3 id="方式一按顺序学习"><a class="header" href="#方式一按顺序学习">方式一：按顺序学习</a></h3>
+<p>推荐从 <strong>C01</strong> 开始，按照模块顺序学习，建立扎实的基础：</p>
+<pre><code>C01 → C02 → C03 → C04 → C05 → C06 → C07 → ...
+</code></pre>
+<h3 id="方式二按主题学习"><a class="header" href="#方式二按主题学习">方式二：按主题学习</a></h3>
+<p>根据自己的兴趣或项目需求，选择特定主题：</p>
+<ul>
+<li><strong>系统编程</strong>: C01 → C05 → C07 → C13</li>
+<li><strong>Web 开发</strong>: C06 → C10 → C11 → C13</li>
+<li><strong>高级抽象</strong>: C02 → C04 → C09 → C14</li>
+</ul>
+<h3 id="方式三实战驱动"><a class="header" href="#方式三实战驱动">方式三：实战驱动</a></h3>
+<p>直接从 <strong><a href="./projects/README.html">实战项目</a></strong> 开始，遇到问题再回到相关模块学习。</p>
+<hr />
+<h2 id="-如何使用本书"><a class="header" href="#-如何使用本书">📖 如何使用本书</a></h2>
+<h3 id="1-浏览学习路线"><a class="header" href="#1-浏览学习路线">1. 浏览学习路线</a></h3>
+<p>查看 <strong><a href="./learning-roadmap.html">学习路线</a></strong>，了解推荐的学习路径。</p>
+<h3 id="2-选择合适的模块"><a class="header" href="#2-选择合适的模块">2. 选择合适的模块</a></h3>
+<p>每个模块都有清晰的结构：</p>
+<ul>
+<li><strong>基础概念</strong>: 核心知识点和理论</li>
+<li><strong>实践指南</strong>: 实用技巧和最佳实践</li>
+<li><strong>代码示例</strong>: 可运行的示例代码</li>
+<li><strong>知识图谱</strong>: 可视化的概念关系</li>
+</ul>
+<h3 id="3-动手实践"><a class="header" href="#3-动手实践">3. 动手实践</a></h3>
+<ul>
+<li>运行代码示例</li>
+<li>完成练习题</li>
+<li>参与实战项目</li>
+</ul>
+<h3 id="4-使用搜索功能"><a class="header" href="#4-使用搜索功能">4. 使用搜索功能</a></h3>
+<p>使用本书的搜索功能（右上角 🔍）快速定位内容。</p>
+<hr />
+<h2 id="-学习建议"><a class="header" href="#-学习建议">🎓 学习建议</a></h2>
+<h3 id="初学者"><a class="header" href="#初学者">初学者</a></h3>
+<ol>
+<li><strong>顺序学习</strong>: C01 → C02 → C03</li>
+<li><strong>多敲代码</strong>: 每个示例都亲手运行</li>
+<li><strong>理解概念</strong>: 不要死记硬背，理解背后的原理</li>
+<li><strong>循序渐进</strong>: 不要急于求成</li>
+</ol>
+<h3 id="有经验的开发者"><a class="header" href="#有经验的开发者">有经验的开发者</a></h3>
+<ol>
+<li><strong>快速浏览</strong>: 先浏览知识图谱，了解全貌</li>
+<li><strong>重点学习</strong>: 聚焦 Rust 特有的概念（C01、C04、C05、C06）</li>
+<li><strong>实战演练</strong>: 直接上手实战项目</li>
+<li><strong>深入研究</strong>: 阅读高级内容和源码分析</li>
+</ol>
+<hr />
+<h2 id="-额外资源"><a class="header" href="#-额外资源">💡 额外资源</a></h2>
+<ul>
+<li><strong><a href="./reference/glossary.html">术语表</a></strong>: 查询 Rust 专业术语</li>
+<li><strong><a href="./reference/faq.html">FAQ</a></strong>: 常见问题解答</li>
+<li><strong><a href="./reference/best-practices.html">最佳实践</a></strong>: 生产级代码规范</li>
+<li><strong><a href="./appendix/contributing.html">贡献指南</a></strong>: 参与项目贡献</li>
+</ul>
+<hr />
+<h2 id="-项目统计"><a class="header" href="#-项目统计">📊 项目统计</a></h2>
+<ul>
+<li><strong>总模块数</strong>: 14 个</li>
+<li><strong>代码示例</strong>: 102+ 个</li>
+<li><strong>实战项目</strong>: 5 个</li>
+<li><strong>文档数量</strong>: 291 个</li>
+<li><strong>总代码行数</strong>: 数万行</li>
+</ul>
+<hr />
+<h2 id="-反馈与贡献"><a class="header" href="#-反馈与贡献">🤝 反馈与贡献</a></h2>
+<p>欢迎通过以下方式参与：</p>
+<ul>
+<li>提交 Issue 报告问题</li>
+<li>提交 PR 改进内容</li>
+<li>分享你的学习心得</li>
+<li>推荐给更多人</li>
+</ul>
+<hr />
+<p><strong>让我们开始 Rust 学习之旅吧！</strong> 🚀</p>
+<p><a href="./getting-started.html">立即开始学习 →</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="快速开始"><a class="header" href="#快速开始">快速开始</a></h1>
+<p>本页面将帮助你快速上手 Rust 学习系统。</p>
+<hr />
+<h2 id="-前置要求"><a class="header" href="#-前置要求">📋 前置要求</a></h2>
+<p>开始学习前，请确保你已经：</p>
+<ol>
+<li>
+<p><strong>安装 Rust</strong></p>
+<pre><code class="language-bash">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+</code></pre>
+</li>
+<li>
+<p><strong>配置开发环境</strong></p>
+<ul>
+<li>推荐使用 VS Code + rust-analyzer 扩展</li>
+<li>或者 IntelliJ IDEA + Rust 插件</li>
+</ul>
+</li>
+<li>
+<p><strong>验证安装</strong></p>
+<pre><code class="language-bash">rustc --version
+cargo --version
+</code></pre>
+</li>
+</ol>
+<hr />
+<h2 id="-学习路径选择"><a class="header" href="#-学习路径选择">🎯 学习路径选择</a></h2>
+<p>根据你的背景和目标，选择合适的学习路径：</p>
+<h3 id="路径一完全新手"><a class="header" href="#路径一完全新手">路径一：完全新手</a></h3>
+<p><strong>推荐顺序</strong>:</p>
+<ol>
+<li><a href="./c01/README.html">C01: 所有权、借用与作用域</a></li>
+<li><a href="./c02/README.html">C02: 类型系统</a></li>
+<li><a href="./c03/README.html">C03: 控制流与函数</a></li>
+</ol>
+<p><strong>学习方式</strong>:</p>
+<ul>
+<li>每天 1-2 小时</li>
+<li>完成每个模块的所有示例</li>
+<li>理解每个概念再前进</li>
+</ul>
+<p><strong>预计时间</strong>: 2-3 周</p>
+<h3 id="路径二有编程经验"><a class="header" href="#路径二有编程经验">路径二：有编程经验</a></h3>
+<p><strong>推荐顺序</strong>:</p>
+<ol>
+<li>快速浏览 C01-C03（理解 Rust 特有概念）</li>
+<li>深入学习 C04-C06（泛型、并发、异步）</li>
+<li>根据需求选择 C07-C14</li>
+</ol>
+<p><strong>学习方式</strong>:</p>
+<ul>
+<li>重点关注 Rust 与其他语言的差异</li>
+<li>运行代码示例，理解所有权系统</li>
+<li>参与实战项目</li>
+</ul>
+<p><strong>预计时间</strong>: 1-2 周</p>
+<h3 id="路径三项目驱动"><a class="header" href="#路径三项目驱动">路径三：项目驱动</a></h3>
+<p><strong>推荐顺序</strong>:</p>
+<ol>
+<li>选择一个<a href="./projects/README.html">实战项目</a></li>
+<li>遇到问题查阅相关模块</li>
+<li>补充基础知识</li>
+</ol>
+<p><strong>学习方式</strong>:</p>
+<ul>
+<li>边做边学</li>
+<li>使用搜索功能快速定位</li>
+<li>参考代码示例</li>
+</ul>
+<p><strong>预计时间</strong>: 根据项目而定</p>
+<hr />
+<h2 id="-第一个-rust-程序"><a class="header" href="#-第一个-rust-程序">📚 第一个 Rust 程序</a></h2>
+<p>让我们从一个简单的例子开始：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    println!("Hello, Rust 学习系统！");
+    
+    // 变量绑定
+    let message = "欢迎开始学习";
+    println!("{}", message);
+    
+    // 所有权转移
+    let s1 = String::from("Rust");
+    let s2 = s1; // s1 所有权转移给 s2
+    // println!("{}", s1); // 错误！s1 已失效
+    println!("{}", s2); // 正确
+}</code></pre></pre>
+<p><strong>编译运行</strong>:</p>
+<pre><code class="language-bash">rustc main.rs
+./main
+</code></pre>
+<hr />
+<h2 id="-学习建议-1"><a class="header" href="#-学习建议-1">🎓 学习建议</a></h2>
+<h3 id="1-理解核心概念"><a class="header" href="#1-理解核心概念">1. 理解核心概念</a></h3>
+<p>Rust 有一些独特的概念，务必深入理解：</p>
+<ul>
+<li><strong>所有权系统</strong>: Rust 的核心特性</li>
+<li><strong>借用和引用</strong>: 如何安全地共享数据</li>
+<li><strong>生命周期</strong>: 引用的有效性</li>
+<li><strong>模式匹配</strong>: 强大的控制流工具</li>
+</ul>
+<h3 id="2-多写代码"><a class="header" href="#2-多写代码">2. 多写代码</a></h3>
+<p>每个示例都要亲自运行：</p>
+<pre><code class="language-bash"># 创建新项目
+cargo new my_project
+cd my_project
+
+# 编辑 src/main.rs
+# 运行项目
+cargo run
+
+# 运行测试
+cargo test
+</code></pre>
+<h3 id="3-阅读编译器错误"><a class="header" href="#3-阅读编译器错误">3. 阅读编译器错误</a></h3>
+<p>Rust 编译器会给出详细的错误信息：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>error[E0382]: borrow of moved value: `s1`
+  --&gt; src/main.rs:4:20
+   |
+2  |     let s1 = String::from("hello");
+   |         -- move occurs because `s1` has type `String`
+3  |     let s2 = s1;
+   |              -- value moved here
+4  |     println!("{}", s1);
+   |                    ^^ value borrowed here after move
+<span class="boring">}</span></code></pre></pre>
+<p><strong>学会阅读和理解这些错误，它们是最好的老师！</strong></p>
+<h3 id="4-使用-clippy"><a class="header" href="#4-使用-clippy">4. 使用 Clippy</a></h3>
+<p>Clippy 是 Rust 的 linter，能给出代码改进建议：</p>
+<pre><code class="language-bash">rustup component add clippy
+cargo clippy
+</code></pre>
+<h3 id="5-查阅文档"><a class="header" href="#5-查阅文档">5. 查阅文档</a></h3>
+<ul>
+<li><strong>标准库文档</strong>: <a href="https://doc.rust-lang.org/std/">https://doc.rust-lang.org/std/</a></li>
+<li><strong>Rust Book</strong>: <a href="https://doc.rust-lang.org/book/">https://doc.rust-lang.org/book/</a></li>
+<li><strong>本系统搜索</strong>: 使用右上角搜索功能</li>
+</ul>
+<hr />
+<h2 id="-开发工具"><a class="header" href="#-开发工具">🛠️ 开发工具</a></h2>
+<h3 id="vs-code-配置"><a class="header" href="#vs-code-配置">VS Code 配置</a></h3>
+<p>推荐扩展：</p>
+<ul>
+<li><code>rust-analyzer</code>: Rust 语言服务器</li>
+<li><code>crates</code>: Crate 依赖管理</li>
+<li><code>Better TOML</code>: TOML 文件支持</li>
+<li><code>Error Lens</code>: 内联显示错误</li>
+</ul>
+<h3 id="cargo-常用命令"><a class="header" href="#cargo-常用命令">Cargo 常用命令</a></h3>
+<pre><code class="language-bash"># 创建项目
+cargo new project_name
+cargo new --lib library_name
+
+# 构建和运行
+cargo build
+cargo run
+cargo build --release
+
+# 测试
+cargo test
+cargo test test_name
+
+# 检查和 lint
+cargo check
+cargo clippy
+
+# 格式化
+cargo fmt
+
+# 文档
+cargo doc --open
+
+# 依赖管理
+cargo add package_name
+cargo update
+</code></pre>
+<hr />
+<h2 id="-下一步"><a class="header" href="#-下一步">📖 下一步</a></h2>
+<p>现在你已经准备好了！选择一个起点：</p>
+<ul>
+<li><strong>系统学习</strong>: <a href="./c01/README.html">C01: 所有权、借用与作用域</a></li>
+<li><strong>查看路线</strong>: <a href="./learning-roadmap.html">学习路线图</a></li>
+<li><strong>直接实战</strong>: <a href="./projects/README.html">实战项目</a></li>
+<li><strong>搜索主题</strong>: 使用右上角搜索功能</li>
+</ul>
+<hr />
+<p><strong>准备好了吗？让我们开始吧！</strong> 🚀</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="学习路线图"><a class="header" href="#学习路线图">学习路线图</a></h1>
+<p>本页面为你提供详细的 Rust 学习路线建议。</p>
+<hr />
+<h2 id="-完整学习路线"><a class="header" href="#-完整学习路线">🗺️ 完整学习路线</a></h2>
+<pre><code class="language-text">┌─────────────────────────────────────────────────────────────────┐
+│                      🎯 Rust 学习路线图                         │
+└─────────────────────────────────────────────────────────────────┘
+
+Phase 1: 基础入门 (2-3 周)
+├─ C01: 所有权、借用与作用域 ⭐⭐⭐⭐⭐
+├─ C02: 类型系统 ⭐⭐⭐⭐⭐
+└─ C03: 控制流与函数 ⭐⭐⭐⭐
+
+Phase 2: 高级特性 (2-3 周)
+├─ C04: 泛型编程 ⭐⭐⭐⭐
+├─ C05: 多线程编程 ⭐⭐⭐⭐⭐
+└─ C06: 异步编程 ⭐⭐⭐⭐⭐
+
+Phase 3: 系统与应用 (2-4 周)
+├─ C07: 进程与系统编程 ⭐⭐⭐
+├─ C10: 网络编程 ⭐⭐⭐⭐
+└─ C13: 可靠性工程 ⭐⭐⭐⭐
+
+Phase 4: 进阶与专精 (4-6 周)
+├─ C08: 算法与数据结构 ⭐⭐⭐
+├─ C09: 设计模式 ⭐⭐⭐
+├─ C11: 常用库 ⭐⭐⭐
+├─ C12: 领域建模 ⭐⭐⭐
+└─ C14: 宏系统 ⭐⭐⭐
+
+Phase 5: 实战项目 (持续)
+└─ 5 个综合实战项目 ⭐⭐⭐⭐⭐
+</code></pre>
+<hr />
+<h2 id="-按职业方向选择"><a class="header" href="#-按职业方向选择">📚 按职业方向选择</a></h2>
+<h3 id="-web-开发"><a class="header" href="#-web-开发">🌐 Web 开发</a></h3>
+<p><strong>学习顺序</strong>:</p>
+<ol>
+<li>C01 → C02 → C03 (基础)</li>
+<li>C06 (异步编程)</li>
+<li>C10 (网络编程)</li>
+<li>C11 (常用库: axum, tokio)</li>
+<li>C13 (可靠性工程)</li>
+</ol>
+<p><strong>实战项目</strong>:</p>
+<ul>
+<li>项目二：异步 Web 服务器</li>
+<li>项目四：实时聊天服务</li>
+</ul>
+<p><strong>推荐生态</strong>:</p>
+<ul>
+<li><code>axum</code> - Web 框架</li>
+<li><code>tokio</code> - 异步运行时</li>
+<li><code>sqlx</code> - 数据库</li>
+<li><code>serde</code> - 序列化</li>
+</ul>
+<hr />
+<h3 id="-系统编程"><a class="header" href="#-系统编程">🖥️ 系统编程</a></h3>
+<p><strong>学习顺序</strong>:</p>
+<ol>
+<li>C01 → C02 → C03 (基础)</li>
+<li>C05 (多线程)</li>
+<li>C07 (进程与系统)</li>
+<li>C13 (可靠性)</li>
+</ol>
+<p><strong>实战项目</strong>:</p>
+<ul>
+<li>项目三：分布式缓存系统</li>
+<li>项目五：CLI 工具集</li>
+</ul>
+<p><strong>推荐生态</strong>:</p>
+<ul>
+<li><code>libc</code> - 系统调用</li>
+<li><code>nix</code> - Unix API</li>
+<li><code>crossbeam</code> - 并发工具</li>
+</ul>
+<hr />
+<h3 id="-高性能计算"><a class="header" href="#-高性能计算">⚡ 高性能计算</a></h3>
+<p><strong>学习顺序</strong>:</p>
+<ol>
+<li>C01 → C02 → C03 (基础)</li>
+<li>C04 (泛型优化)</li>
+<li>C05 (多线程)</li>
+<li>C08 (算法优化)</li>
+</ol>
+<p><strong>实战项目</strong>:</p>
+<ul>
+<li>自定义高性能数据结构</li>
+<li>并行计算框架</li>
+</ul>
+<p><strong>推荐生态</strong>:</p>
+<ul>
+<li><code>rayon</code> - 数据并行</li>
+<li><code>ndarray</code> - 数值计算</li>
+<li><code>simd</code> - SIMD 指令</li>
+</ul>
+<hr />
+<h3 id="-游戏开发"><a class="header" href="#-游戏开发">🎮 游戏开发</a></h3>
+<p><strong>学习顺序</strong>:</p>
+<ol>
+<li>C01 → C02 → C03 (基础)</li>
+<li>C05 (多线程)</li>
+<li>C08 (算法与数据结构)</li>
+<li>C09 (设计模式)</li>
+</ol>
+<p><strong>推荐生态</strong>:</p>
+<ul>
+<li><code>bevy</code> - 游戏引擎</li>
+<li><code>wgpu</code> - 图形API</li>
+<li><code>gilrs</code> - 手柄输入</li>
+</ul>
+<hr />
+<h2 id="-按学习风格选择"><a class="header" href="#-按学习风格选择">📖 按学习风格选择</a></h2>
+<h3 id="理论优先"><a class="header" href="#理论优先">理论优先</a></h3>
+<p>适合喜欢先理解原理的学习者。</p>
+<p><strong>学习方式</strong>:</p>
+<ol>
+<li>阅读每个模块的“基础概念“</li>
+<li>理解知识图谱中的概念关系</li>
+<li>运行代码示例验证理解</li>
+<li>完成实践指南</li>
+</ol>
+<p><strong>优点</strong>: 理解深刻，基础扎实<br />
+<strong>缺点</strong>: 初期进度较慢</p>
+<hr />
+<h3 id="实践优先"><a class="header" href="#实践优先">实践优先</a></h3>
+<p>适合喜欢边做边学的学习者。</p>
+<p><strong>学习方式</strong>:</p>
+<ol>
+<li>直接运行代码示例</li>
+<li>修改代码观察结果</li>
+<li>遇到问题查阅基础概念</li>
+<li>参与实战项目</li>
+</ol>
+<p><strong>优点</strong>: 快速上手，成就感强<br />
+<strong>缺点</strong>: 可能遗漏理论细节</p>
+<hr />
+<h3 id="项目驱动"><a class="header" href="#项目驱动">项目驱动</a></h3>
+<p>适合有明确目标的学习者。</p>
+<p><strong>学习方式</strong>:</p>
+<ol>
+<li>选择一个实战项目</li>
+<li>根据项目需求学习相关模块</li>
+<li>边开发边学习</li>
+<li>遇到困难查阅文档</li>
+</ol>
+<p><strong>优点</strong>: 目标明确，实战性强<br />
+<strong>缺点</strong>: 知识体系可能不完整</p>
+<hr />
+<h2 id="-学习里程碑"><a class="header" href="#-学习里程碑">🎯 学习里程碑</a></h2>
+<h3 id="-入门级-1-2-个月"><a class="header" href="#-入门级-1-2-个月">🏆 入门级 (1-2 个月)</a></h3>
+<p><strong>能力标准</strong>:</p>
+<ul>
+<li>✅ 理解所有权系统</li>
+<li>✅ 熟练使用基本类型和控制流</li>
+<li>✅ 能读懂简单的 Rust 代码</li>
+<li>✅ 完成基础练习题</li>
+</ul>
+<p><strong>推荐完成</strong>:</p>
+<ul>
+<li>C01、C02、C03 模块</li>
+<li>10+ 代码示例</li>
+<li>基础练习题</li>
+</ul>
+<hr />
+<h3 id="-中级-2-4-个月"><a class="header" href="#-中级-2-4-个月">🥈 中级 (2-4 个月)</a></h3>
+<p><strong>能力标准</strong>:</p>
+<ul>
+<li>✅ 掌握泛型和 Trait 系统</li>
+<li>✅ 理解并发和异步编程</li>
+<li>✅ 能编写中等复杂度的程序</li>
+<li>✅ 能调试常见错误</li>
+</ul>
+<p><strong>推荐完成</strong>:</p>
+<ul>
+<li>C04、C05、C06 模块</li>
+<li>30+ 代码示例</li>
+<li>1-2 个实战项目</li>
+</ul>
+<hr />
+<h3 id="-高级-4-6-个月"><a class="header" href="#-高级-4-6-个月">🥇 高级 (4-6 个月)</a></h3>
+<p><strong>能力标准</strong>:</p>
+<ul>
+<li>✅ 熟练使用高级特性</li>
+<li>✅ 能设计复杂系统架构</li>
+<li>✅ 理解性能优化技巧</li>
+<li>✅ 能贡献开源项目</li>
+</ul>
+<p><strong>推荐完成</strong>:</p>
+<ul>
+<li>所有 14 个模块</li>
+<li>所有代码示例</li>
+<li>3+ 个实战项目</li>
+</ul>
+<hr />
+<h3 id="-专家级-6-个月"><a class="header" href="#-专家级-6-个月">🏅 专家级 (6+ 个月)</a></h3>
+<p><strong>能力标准</strong>:</p>
+<ul>
+<li>✅ 深入理解 Rust 内部机制</li>
+<li>✅ 能优化性能关键代码</li>
+<li>✅ 能设计领域特定库</li>
+<li>✅ 能指导他人学习</li>
+</ul>
+<p><strong>推荐完成</strong>:</p>
+<ul>
+<li>深入研究高级主题</li>
+<li>参与开源项目</li>
+<li>编写技术文章</li>
+<li>构建实际产品</li>
+</ul>
+<hr />
+<h2 id="-学习时间规划"><a class="header" href="#-学习时间规划">⏱️ 学习时间规划</a></h2>
+<h3 id="兼职学习-每天-1-2-小时"><a class="header" href="#兼职学习-每天-1-2-小时">兼职学习 (每天 1-2 小时)</a></h3>
+<pre><code class="language-text">Week 1-2:  C01 所有权系统
+Week 3-4:  C02 类型系统
+Week 5-6:  C03 控制流
+Week 7-8:  C04 泛型
+Week 9-10: C05 多线程
+Week 11-12: C06 异步
+Week 13+:  其他模块 + 实战项目
+</code></pre>
+<p><strong>预计时间</strong>: 3-6 个月达到中级水平</p>
+<hr />
+<h3 id="全职学习-每天-6-8-小时"><a class="header" href="#全职学习-每天-6-8-小时">全职学习 (每天 6-8 小时)</a></h3>
+<pre><code class="language-text">Week 1:  C01 + C02
+Week 2:  C03 + C04
+Week 3:  C05 + C06
+Week 4:  C07 + C10
+Week 5-6: C08-C14 + 实战项目
+</code></pre>
+<p><strong>预计时间</strong>: 1-2 个月达到中级水平</p>
+<hr />
+<h2 id="-学习建议-2"><a class="header" href="#-学习建议-2">💡 学习建议</a></h2>
+<h3 id="1-制定计划"><a class="header" href="#1-制定计划">1. 制定计划</a></h3>
+<ul>
+<li>设定清晰的学习目标</li>
+<li>制定每周学习计划</li>
+<li>使用<a href="./appendix/progress-tracker.html">学习进度追踪</a></li>
+</ul>
+<h3 id="2-保持节奏"><a class="header" href="#2-保持节奏">2. 保持节奏</a></h3>
+<ul>
+<li>每天坚持学习</li>
+<li>不要长时间中断</li>
+<li>保持学习动力</li>
+</ul>
+<h3 id="3-多实践"><a class="header" href="#3-多实践">3. 多实践</a></h3>
+<ul>
+<li>每个示例都要运行</li>
+<li>尝试修改代码</li>
+<li>完成所有练习</li>
+</ul>
+<h3 id="4-及时总结"><a class="header" href="#4-及时总结">4. 及时总结</a></h3>
+<ul>
+<li>记录学习笔记</li>
+<li>整理知识点</li>
+<li>定期复习</li>
+</ul>
+<h3 id="5-寻求帮助"><a class="header" href="#5-寻求帮助">5. 寻求帮助</a></h3>
+<ul>
+<li>加入 Rust 社区</li>
+<li>提问交流</li>
+<li>参与讨论</li>
+</ul>
+<hr />
+<h2 id="-后续学习"><a class="header" href="#-后续学习">📚 后续学习</a></h2>
+<p>完成本系统后，可以：</p>
+<ul>
+<li>📖 深入阅读 <a href="https://doc.rust-lang.org/book/">The Rust Programming Language</a></li>
+<li>🔍 研究 <a href="https://github.com/rust-lang/rust">Rust 标准库源码</a></li>
+<li>🚀 参与开源项目</li>
+<li>📝 编写技术博客</li>
+<li>👥 加入 Rust 中文社区</li>
+</ul>
+<hr />
+<p><strong>选择适合你的路线，开始学习吧！</strong> 🎓</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="c01-所有权借用与作用域"><a class="header" href="#c01-所有权借用与作用域">C01: 所有权、借用与作用域</a></h1>
+<blockquote>
+<p>Rust 最核心、最独特的特性</p>
+</blockquote>
+<hr />
+<h2 id="-本模块内容"><a class="header" href="#-本模块内容">📚 本模块内容</a></h2>
+<p>本模块深入讲解 Rust 的所有权系统，这是 Rust 实现内存安全和并发安全的基础。</p>
+<h3 id="主要主题"><a class="header" href="#主要主题">主要主题</a></h3>
+<ul>
+<li><strong>所有权 (Ownership)</strong>: 每个值都有一个所有者</li>
+<li><strong>借用 (Borrowing)</strong>: 临时使用而不获取所有权</li>
+<li><strong>作用域 (Scope)</strong>: 变量的有效范围</li>
+<li><strong>生命周期 (Lifetimes)</strong>: 引用的有效期</li>
+</ul>
+<hr />
+<h2 id="-学习目标"><a class="header" href="#-学习目标">🎯 学习目标</a></h2>
+<p>学完本模块后，你将能够：</p>
+<ul>
+<li>✅ 理解 Rust 的所有权系统</li>
+<li>✅ 正确使用借用和引用</li>
+<li>✅ 掌握可变和不可变借用规则</li>
+<li>✅ 理解和标注生命周期</li>
+<li>✅ 避免常见的所有权错误</li>
+</ul>
+<hr />
+<h2 id="-学习路径"><a class="header" href="#-学习路径">📖 学习路径</a></h2>
+<p>推荐按以下顺序学习：</p>
+<ol>
+<li><strong><a href="c01/./foundations.html">基础概念</a></strong> - 理论基础</li>
+<li><strong><a href="c01/./guides.html">实践指南</a></strong> - 实用技巧</li>
+<li><strong><a href="c01/./examples.html">代码示例</a></strong> - 交互式示例 ⭐</li>
+<li><strong><a href="c01/./knowledge-graph.html">知识图谱</a></strong> - 概念关系</li>
+</ol>
+<hr />
+<h2 id="-快速开始-1"><a class="header" href="#-快速开始-1">🚀 快速开始</a></h2>
+<h3 id="第一个示例"><a class="header" href="#第一个示例">第一个示例</a></h3>
+<p>理解所有权的基本规则：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let s1 = String::from("hello");
+    let s2 = s1;  // s1 的所有权转移给 s2
+    
+    println!("{}", s2);  // 正确
+    // println!("{}", s1);  // 编译错误！
+}</code></pre></pre>
+<p><strong>点击右上角的 “Run” 按钮运行这个示例！</strong></p>
+<h3 id="核心概念预览"><a class="header" href="#核心概念预览">核心概念预览</a></h3>
+<p><strong>所有权三规则</strong>:</p>
+<ol>
+<li>Rust 中每个值都有一个所有者</li>
+<li>值在任一时刻只能有一个所有者</li>
+<li>当所有者离开作用域时，值被释放</li>
+</ol>
+<p><strong>借用规则</strong>:</p>
+<ul>
+<li>同一时间可以有多个不可变引用</li>
+<li>或者只有一个可变引用</li>
+<li>引用必须总是有效的</li>
+</ul>
+<hr />
+<h2 id="-为什么重要"><a class="header" href="#-为什么重要">💡 为什么重要？</a></h2>
+<h3 id="内存安全"><a class="header" href="#内存安全">内存安全</a></h3>
+<p>所有权系统在编译时保证内存安全，无需垃圾回收器：</p>
+<ul>
+<li>✅ 无空指针解引用</li>
+<li>✅ 无悬垂指针</li>
+<li>✅ 无数据竞争</li>
+<li>✅ 无双重释放</li>
+</ul>
+<h3 id="零成本抽象"><a class="header" href="#零成本抽象">零成本抽象</a></h3>
+<p>所有权检查在编译时完成，运行时零开销：</p>
+<ul>
+<li>✅ 无运行时开销</li>
+<li>✅ 无垃圾回收暂停</li>
+<li>✅ 可预测的性能</li>
+</ul>
+<hr />
+<h2 id="-学习资源"><a class="header" href="#-学习资源">🎓 学习资源</a></h2>
+<h3 id="本模块资源"><a class="header" href="#本模块资源">本模块资源</a></h3>
+<ul>
+<li><strong><a href="c01/../../crates/c01_ownership_borrow_scope/README.html">完整文档</a></strong> - 详细文档</li>
+<li><strong><a href="c01/../../crates/c01_ownership_borrow_scope/docs/tier_02_guides/06_%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B%E9%9B%86%E5%90%88.html">代码示例集</a></strong> - 102+ 示例</li>
+<li><strong><a href="c01/../../crates/c01_ownership_borrow_scope/docs/theory/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.html">知识图谱</a></strong> - 概念关系</li>
+</ul>
+<h3 id="外部资源"><a class="header" href="#外部资源">外部资源</a></h3>
+<ul>
+<li><a href="https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html">Rust Book - 所有权</a></li>
+<li><a href="https://doc.rust-lang.org/rust-by-example/scope.html">Rust By Example - 作用域</a></li>
+<li><a href="https://github.com/rust-lang/rustlings">Rustlings - 所有权练习</a></li>
+</ul>
+<hr />
+<h2 id="-模块统计"><a class="header" href="#-模块统计">📊 模块统计</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>指标</th><th>数值</th></tr></thead><tbody>
+<tr><td><strong>文档数量</strong></td><td>160+</td></tr>
+<tr><td><strong>代码示例</strong></td><td>14 个主题</td></tr>
+<tr><td><strong>练习题</strong></td><td>20+</td></tr>
+<tr><td><strong>知识点</strong></td><td>50+</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="-后续学习-1"><a class="header" href="#-后续学习-1">🗺️ 后续学习</a></h2>
+<p>掌握本模块后，建议学习：</p>
+<ul>
+<li><strong><a href="c01/../c02/README.html">C02: 类型系统</a></strong> - 构建类型安全的程序</li>
+<li><strong><a href="c01/../c03/README.html">C03: 控制流与函数</a></strong> - 函数中的所有权</li>
+<li><strong><a href="c01/../c05/README.html">C05: 多线程编程</a></strong> - 并发中的所有权</li>
+</ul>
+<hr />
+<p><strong>开始学习吧！</strong> 推荐从 <a href="c01/./foundations.html">基础概念</a> 开始 🚀</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念"><a class="header" href="#基础概念">基础概念</a></h1>
+<p>本页介绍所有权、借用与作用域的核心理论。</p>
+<hr />
+<h2 id="-目录"><a class="header" href="#-目录">📚 目录</a></h2>
+<ol>
+<li><a href="c01/foundations.html#%E6%89%80%E6%9C%89%E6%9D%83%E5%9F%BA%E7%A1%80">所有权基础</a></li>
+<li><a href="c01/foundations.html#%E5%80%9F%E7%94%A8%E8%A7%84%E5%88%99">借用规则</a></li>
+<li><a href="c01/foundations.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">生命周期</a></li>
+<li><a href="c01/foundations.html#%E5%AE%9E%E8%B7%B5%E5%BA%94%E7%94%A8">实践应用</a></li>
+</ol>
+<hr />
+<h2 id="所有权基础"><a class="header" href="#所有权基础">所有权基础</a></h2>
+<h3 id="什么是所有权"><a class="header" href="#什么是所有权">什么是所有权？</a></h3>
+<p><strong>所有权 (Ownership)</strong> 是 Rust 最独特的特性，使得 Rust 无需垃圾回收器就能保证内存安全。</p>
+<h3 id="所有权规则"><a class="header" href="#所有权规则">所有权规则</a></h3>
+<p>Rust 的所有权有三条基本规则：</p>
+<ol>
+<li><strong>每个值都有一个所有者 (owner)</strong></li>
+<li><strong>值在任一时刻只能有一个所有者</strong></li>
+<li><strong>当所有者离开作用域时，值被释放</strong></li>
+</ol>
+<h3 id="示例"><a class="header" href="#示例">示例</a></h3>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    {
+        let s = String::from("hello");  // s 开始有效
+        // 使用 s
+    }  // s 离开作用域，被释放
+}</code></pre></pre>
+<hr />
+<h2 id="移动语义"><a class="header" href="#移动语义">移动语义</a></h2>
+<p>当一个值被赋值给另一个变量时，所有权会转移（移动）：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let s1 = String::from("hello");
+    let s2 = s1;  // s1 的值移动到 s2
+    
+    // println!("{}", s1);  // 编译错误！s1 不再有效
+    println!("{}", s2);  // 正确
+}</code></pre></pre>
+<h3 id="为什么需要移动"><a class="header" href="#为什么需要移动">为什么需要移动？</a></h3>
+<p>移动语义防止了<strong>双重释放 (double free)</strong> 错误：</p>
+<ul>
+<li>如果 <code>s1</code> 和 <code>s2</code> 都拥有相同的数据</li>
+<li>当它们离开作用域时，都会尝试释放内存</li>
+<li>这会导致二次释放，引发崩溃</li>
+</ul>
+<p>通过移动，Rust 确保只有一个变量负责释放内存。</p>
+<hr />
+<h2 id="克隆"><a class="header" href="#克隆">克隆</a></h2>
+<p>如果你真的需要深拷贝数据，可以使用 <code>clone()</code>：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let s1 = String::from("hello");
+    let s2 = s1.clone();  // 深拷贝
+    
+    println!("s1 = {}, s2 = {}", s1, s2);  // 都有效
+}</code></pre></pre>
+<p>⚠️ <strong>性能提示</strong>: <code>clone()</code> 可能开销很大，使用时要谨慎。</p>
+<hr />
+<h2 id="copy-类型"><a class="header" href="#copy-类型">Copy 类型</a></h2>
+<p>某些类型（如整数）实现了 <code>Copy</code> trait，赋值时会自动复制：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let x = 5;
+    let y = x;  // x 被复制，不是移动
+    
+    println!("x = {}, y = {}", x, y);  // 都有效
+}</code></pre></pre>
+<h3 id="哪些类型是-copy"><a class="header" href="#哪些类型是-copy">哪些类型是 Copy？</a></h3>
+<ul>
+<li>✅ 所有整数类型</li>
+<li>✅ 布尔类型</li>
+<li>✅ 浮点类型</li>
+<li>✅ 字符类型</li>
+<li>✅ 元组（如果所有元素都是 Copy）</li>
+</ul>
+<p>❌ 不是 Copy:</p>
+<ul>
+<li>❌ <code>String</code></li>
+<li>❌ <code>Vec&lt;T&gt;</code></li>
+<li>❌ 任何实现了 <code>Drop</code> 的类型</li>
+</ul>
+<hr />
+<h2 id="借用规则"><a class="header" href="#借用规则">借用规则</a></h2>
+<h3 id="不可变借用"><a class="header" href="#不可变借用">不可变借用</a></h3>
+<p>可以同时存在多个不可变引用：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let s = String::from("hello");
+    
+    let r1 = &amp;s;  // 不可变引用
+    let r2 = &amp;s;  // 另一个不可变引用
+    
+    println!("{} and {}", r1, r2);  // 正确
+}</code></pre></pre>
+<h3 id="可变借用"><a class="header" href="#可变借用">可变借用</a></h3>
+<p>只能有一个可变引用：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut s = String::from("hello");
+    
+    let r1 = &amp;mut s;  // 可变引用
+    // let r2 = &amp;mut s;  // 编译错误！
+    
+    r1.push_str(", world");
+    println!("{}", r1);
+}</code></pre></pre>
+<h3 id="借用规则总结"><a class="header" href="#借用规则总结">借用规则总结</a></h3>
+<p>在任意给定时间，要么只能有一个可变引用，要么只能有多个不可变引用：</p>
+<ul>
+<li><strong>规则 1</strong>: 可以有任意数量的不可变引用</li>
+<li><strong>规则 2</strong>: 只能有一个可变引用</li>
+<li><strong>规则 3</strong>: 不能同时存在可变和不可变引用</li>
+</ul>
+<hr />
+<h2 id="生命周期"><a class="header" href="#生命周期">生命周期</a></h2>
+<h3 id="什么是生命周期"><a class="header" href="#什么是生命周期">什么是生命周期？</a></h3>
+<p><strong>生命周期 (Lifetime)</strong> 是引用有效的作用域。</p>
+<h3 id="为什么需要生命周期"><a class="header" href="#为什么需要生命周期">为什么需要生命周期？</a></h3>
+<p>防止<strong>悬垂引用 (dangling reference)</strong>：</p>
+<pre><pre class="playground"><code class="language-rust">// 这段代码不能编译！
+fn main() {
+    let r;
+    {
+        let x = 5;
+        r = &amp;x;  // x 的生命周期太短
+    }  // x 在这里被释放
+    
+    // println!("{}", r);  // r 引用的数据已被释放
+}</code></pre></pre>
+<h3 id="生命周期标注"><a class="header" href="#生命周期标注">生命周期标注</a></h3>
+<p>函数签名中的生命周期标注：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn longest&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {
+    if x.len() &gt; y.len() {
+        x
+    } else {
+        y
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<p><code>'a</code> 表示返回值的生命周期与参数的生命周期相关联。</p>
+<hr />
+<h2 id="实践应用"><a class="header" href="#实践应用">实践应用</a></h2>
+<h3 id="函数参数"><a class="header" href="#函数参数">函数参数</a></h3>
+<p>传递所有权 vs 借用：</p>
+<pre><pre class="playground"><code class="language-rust">// 获取所有权
+fn take_ownership(s: String) {
+    println!("{}", s);
+}  // s 在这里被释放
+
+// 借用
+fn borrow(s: &amp;String) {
+    println!("{}", s);
+}  // s 不被释放
+
+fn main() {
+    let s = String::from("hello");
+    borrow(&amp;s);  // 借用
+    println!("{}", s);  // s 仍然有效
+    
+    take_ownership(s);  // 移动
+    // println!("{}", s);  // 编译错误！s 已被移动
+}</code></pre></pre>
+<h3 id="返回值"><a class="header" href="#返回值">返回值</a></h3>
+<p>返回所有权：</p>
+<pre><pre class="playground"><code class="language-rust">fn create_string() -&gt; String {
+    let s = String::from("hello");
+    s  // 所有权转移给调用者
+}
+
+fn main() {
+    let my_string = create_string();
+    println!("{}", my_string);
+}</code></pre></pre>
+<hr />
+<h2 id="-关键要点"><a class="header" href="#-关键要点">💡 关键要点</a></h2>
+<h3 id="记住这些原则"><a class="header" href="#记住这些原则">记住这些原则</a></h3>
+<ol>
+<li><strong>所有权</strong>: 每个值都有唯一的所有者</li>
+<li><strong>移动</strong>: 赋值转移所有权（除非是 Copy 类型）</li>
+<li><strong>借用</strong>: 使用 <code>&amp;</code> 创建引用，不获取所有权</li>
+<li><strong>规则</strong>: 多个不可变引用或一个可变引用</li>
+<li><strong>生命周期</strong>: 所有引用都必须有效</li>
+</ol>
+<h3 id="常见模式"><a class="header" href="#常见模式">常见模式</a></h3>
+<p><strong>返回多个值</strong>:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn calculate(s: String) -&gt; (String, usize) {
+    let length = s.len();
+    (s, length)  // 返回所有权和计算结果
+}
+<span class="boring">}</span></code></pre></pre>
+<p><strong>使用引用避免移动</strong>:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn calculate(s: &amp;String) -&gt; usize {
+    s.len()  // 只返回长度，不需要所有权
+}
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<h2 id="-下一步-1"><a class="header" href="#-下一步-1">🔗 下一步</a></h2>
+<ul>
+<li><strong><a href="c01/./guides.html">实践指南</a></strong> - 实用技巧和最佳实践</li>
+<li><strong><a href="c01/./examples.html">代码示例</a></strong> - 交互式代码示例 ⭐</li>
+<li><strong><a href="c01/./README.html">返回模块首页</a></strong></li>
+</ul>
+<hr />
+<p><strong>记住</strong>: 所有权系统一开始可能难以理解，但它是 Rust 最强大的特性！多练习就能掌握 🚀</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南"><a class="header" href="#实践指南">实践指南</a></h1>
+<p>本页提供所有权、借用与作用域的实用技巧和最佳实践。</p>
+<hr />
+<h2 id="-常见模式"><a class="header" href="#-常见模式">💡 常见模式</a></h2>
+<h3 id="1-何时使用借用-vs-移动"><a class="header" href="#1-何时使用借用-vs-移动">1. 何时使用借用 vs 移动？</a></h3>
+<p><strong>使用借用</strong> (<code>&amp;T</code> 或 <code>&amp;mut T</code>) 当：</p>
+<ul>
+<li>✅ 只需要读取数据</li>
+<li>✅ 需要临时修改数据</li>
+<li>✅ 调用者还需要使用该值</li>
+</ul>
+<p><strong>使用移动</strong> (获取所有权) 当：</p>
+<ul>
+<li>✅ 需要完全拥有数据</li>
+<li>✅ 数据不再需要被调用者使用</li>
+<li>✅ 需要返回修改后的数据</li>
+</ul>
+<h3 id="示例对比"><a class="header" href="#示例对比">示例对比</a></h3>
+<pre><pre class="playground"><code class="language-rust">// 方案1: 使用借用（推荐）
+fn calculate_length(s: &amp;String) -&gt; usize {
+    s.len()
+}
+
+// 方案2: 获取所有权（不推荐，除非必要）
+fn calculate_length_owned(s: String) -&gt; (String, usize) {
+    let length = s.len();
+    (s, length)  // 必须返回所有权
+}
+
+fn main() {
+    let s = String::from("hello");
+    
+    // 使用借用
+    let len = calculate_length(&amp;s);
+    println!("长度: {}, 字符串: {}", len, s);  // s 仍然有效
+}</code></pre></pre>
+<hr />
+<h2 id="-最佳实践"><a class="header" href="#-最佳实践">🎯 最佳实践</a></h2>
+<h3 id="1-优先使用不可变引用"><a class="header" href="#1-优先使用不可变引用">1. 优先使用不可变引用</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 好的做法
+fn process(data: &amp;Vec&lt;i32&gt;) -&gt; i32 {
+    data.iter().sum()
+}
+
+// 只在必要时使用可变引用
+fn modify(data: &amp;mut Vec&lt;i32&gt;) {
+    data.push(42);
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="2-使用切片代替完整引用"><a class="header" href="#2-使用切片代替完整引用">2. 使用切片代替完整引用</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 更灵活：接受 Vec、数组、切片
+fn first_word(s: &amp;str) -&gt; &amp;str {
+    // ...
+    s
+}
+
+// 不够灵活：只接受 String
+fn first_word_bad(s: &amp;String) -&gt; &amp;str {
+    // ...
+    s
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="3-避免不必要的克隆"><a class="header" href="#3-避免不必要的克隆">3. 避免不必要的克隆</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 不好：不必要的克隆
+fn bad_example() {
+    let s1 = String::from("hello");
+    let s2 = s1.clone();  // 开销大
+    println!("{}", s1);
+    println!("{}", s2);
+}
+
+// 好：使用引用
+fn good_example() {
+    let s = String::from("hello");
+    let r1 = &amp;s;
+    let r2 = &amp;s;
+    println!("{}", r1);
+    println!("{}", r2);
+}
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<h2 id="-常见错误及修复"><a class="header" href="#-常见错误及修复">🐛 常见错误及修复</a></h2>
+<h3 id="错误-1-使用已移动的值"><a class="header" href="#错误-1-使用已移动的值">错误 1: 使用已移动的值</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ❌ 错误
+fn error_example() {
+    let s1 = String::from("hello");
+    let s2 = s1;  // s1 移动到 s2
+    println!("{}", s1);  // 编译错误！
+}
+
+// ✅ 修复方案1: 使用克隆
+fn fix1() {
+    let s1 = String::from("hello");
+    let s2 = s1.clone();
+    println!("{} {}", s1, s2);
+}
+
+// ✅ 修复方案2: 使用引用
+fn fix2() {
+    let s1 = String::from("hello");
+    let s2 = &amp;s1;
+    println!("{} {}", s1, s2);
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="错误-2-可变和不可变引用同时存在"><a class="header" href="#错误-2-可变和不可变引用同时存在">错误 2: 可变和不可变引用同时存在</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ❌ 错误
+fn error_example() {
+    let mut s = String::from("hello");
+    let r1 = &amp;s;  // 不可变引用
+    let r2 = &amp;mut s;  // 编译错误！
+    println!("{} {}", r1, r2);
+}
+
+// ✅ 修复: 分离作用域
+fn fix() {
+    let mut s = String::from("hello");
+    
+    {
+        let r1 = &amp;s;
+        println!("{}", r1);
+    }  // r1 离开作用域
+    
+    let r2 = &amp;mut s;
+    println!("{}", r2);
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="错误-3-返回局部变量的引用"><a class="header" href="#错误-3-返回局部变量的引用">错误 3: 返回局部变量的引用</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ❌ 错误
+fn error_example() -&gt; &amp;String {
+    let s = String::from("hello");
+    &amp;s  // 编译错误！s 将被释放
+}
+
+// ✅ 修复: 返回所有权
+fn fix() -&gt; String {
+    let s = String::from("hello");
+    s  // 转移所有权
+}
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<h2 id="-高级技巧"><a class="header" href="#-高级技巧">📚 高级技巧</a></h2>
+<h3 id="1-智能使用生命周期省略"><a class="header" href="#1-智能使用生命周期省略">1. 智能使用生命周期省略</a></h3>
+<p>Rust 可以自动推断简单情况下的生命周期：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 编译器自动推断生命周期
+fn first_word(s: &amp;str) -&gt; &amp;str {
+    // 返回值的生命周期与参数相同
+    &amp;s[..1]
+}
+
+// 等价于（显式标注）
+fn first_word_explicit&lt;'a&gt;(s: &amp;'a str) -&gt; &amp;'a str {
+    &amp;s[..1]
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="2-结构体中的引用"><a class="header" href="#2-结构体中的引用">2. 结构体中的引用</a></h3>
+<pre><pre class="playground"><code class="language-rust">struct User&lt;'a&gt; {
+    name: &amp;'a str,
+    email: &amp;'a str,
+}
+
+impl&lt;'a&gt; User&lt;'a&gt; {
+    fn get_domain(&amp;self) -&gt; &amp;str {
+        let at = self.email.find('@').unwrap();
+        &amp;self.email[at + 1..]
+    }
+}
+
+fn main() {
+    let name = String::from("Alice");
+    let email = String::from("alice@example.com");
+    
+    let user = User {
+        name: &amp;name,
+        email: &amp;email,
+    };
+    
+    println!("域名: {}", user.get_domain());
+}</code></pre></pre>
+<h3 id="3-静态生命周期"><a class="header" href="#3-静态生命周期">3. 静态生命周期</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 'static 表示整个程序运行期间有效
+const MESSAGE: &amp;'static str = "Hello, World!";
+
+fn get_message() -&gt; &amp;'static str {
+    MESSAGE
+}
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<h2 id="-实用工具函数"><a class="header" href="#-实用工具函数">🔧 实用工具函数</a></h2>
+<h3 id="安全的字符串拼接"><a class="header" href="#安全的字符串拼接">安全的字符串拼接</a></h3>
+<pre><pre class="playground"><code class="language-rust">fn concat_strings(s1: &amp;str, s2: &amp;str) -&gt; String {
+    format!("{}{}", s1, s2)
+}
+
+// 使用
+fn main() {
+    let a = "Hello, ";
+    let b = "World!";
+    let result = concat_strings(a, b);
+    println!("{}", result);
+}</code></pre></pre>
+<h3 id="安全的向量处理"><a class="header" href="#安全的向量处理">安全的向量处理</a></h3>
+<pre><pre class="playground"><code class="language-rust">fn process_vec(v: &amp;[i32]) -&gt; Vec&lt;i32&gt; {
+    v.iter()
+        .filter(|&amp;&amp;x| x &gt; 0)
+        .map(|&amp;x| x * 2)
+        .collect()
+}
+
+// 使用
+fn main() {
+    let numbers = vec![-1, 2, -3, 4];
+    let positive_doubled = process_vec(&amp;numbers);
+    println!("{:?}", positive_doubled);  // [4, 8]
+}</code></pre></pre>
+<hr />
+<h2 id="-学习检查清单"><a class="header" href="#-学习检查清单">🎓 学习检查清单</a></h2>
+<p>在继续学习之前，确保你理解了：</p>
+<ul>
+<li><input disabled="" type="checkbox"/>
+所有权三规则</li>
+<li><input disabled="" type="checkbox"/>
+移动语义和 Copy trait</li>
+<li><input disabled="" type="checkbox"/>
+借用的两种规则</li>
+<li><input disabled="" type="checkbox"/>
+生命周期的基本概念</li>
+<li><input disabled="" type="checkbox"/>
+如何修复常见的所有权错误</li>
+<li><input disabled="" type="checkbox"/>
+何时使用借用 vs 移动</li>
+<li><input disabled="" type="checkbox"/>
+如何在函数中使用引用</li>
+<li><input disabled="" type="checkbox"/>
+结构体中如何使用引用</li>
+</ul>
+<hr />
+<h2 id="-相关资源"><a class="header" href="#-相关资源">🔗 相关资源</a></h2>
+<ul>
+<li><strong><a href="c01/./foundations.html">基础概念</a></strong> - 理论基础</li>
+<li><strong><a href="c01/./examples.html">代码示例</a></strong> - 交互式示例 ⭐</li>
+<li><strong><a href="c01/./README.html">返回模块首页</a></strong></li>
+</ul>
+<h3 id="外部学习资源"><a class="header" href="#外部学习资源">外部学习资源</a></h3>
+<ul>
+<li><a href="https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html">Rust Book - 所有权</a></li>
+<li><a href="https://doc.rust-lang.org/nomicon/">Rustonomicon - 高级主题</a></li>
+<li><a href="https://doc.rust-lang.org/rust-by-example/">Rust By Example</a></li>
+</ul>
+<hr />
+<p><strong>记住</strong>: 实践是掌握所有权最好的方式！多写代码，多运行示例 🚀</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例"><a class="header" href="#代码示例">代码示例</a></h1>
+<p>本章提供 C01 模块的交互式代码示例。所有示例都可以在浏览器中运行。</p>
+<hr />
+<h2 id="-示例概览"><a class="header" href="#-示例概览">🎯 示例概览</a></h2>
+<p>本页包含以下主题的代码示例：</p>
+<ol>
+<li><a href="c01/examples.html#%E6%89%80%E6%9C%89%E6%9D%83%E5%9F%BA%E7%A1%80">所有权基础</a></li>
+<li><a href="c01/examples.html#%E5%80%9F%E7%94%A8%E5%92%8C%E5%BC%95%E7%94%A8">借用和引用</a></li>
+<li><a href="c01/examples.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">生命周期</a></li>
+<li><a href="c01/examples.html#%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B">实战案例</a></li>
+</ol>
+<hr />
+<h2 id="所有权基础-1"><a class="header" href="#所有权基础-1">所有权基础</a></h2>
+<h3 id="示例-1-移动语义"><a class="header" href="#示例-1-移动语义">示例 1: 移动语义</a></h3>
+<p>理解 Rust 的移动语义：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let s1 = String::from("hello");
+    let s2 = s1;  // s1 的所有权转移给 s2
+    
+    // println!("{}", s1);  // 编译错误！取消注释试试
+    println!("{}", s2);  // 正确
+}</code></pre></pre>
+<p><strong>练习</strong>: 尝试取消注释第 5 行，观察编译器的错误信息。</p>
+<h3 id="示例-2-克隆-vs-移动"><a class="header" href="#示例-2-克隆-vs-移动">示例 2: 克隆 vs 移动</a></h3>
+<p>对比克隆和移动的区别：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    // 移动
+    let s1 = String::from("hello");
+    let s2 = s1;
+    // s1 不再可用
+    
+    // 克隆
+    let s3 = String::from("world");
+    let s4 = s3.clone();
+    println!("s3 = {}, s4 = {}", s3, s4);  // 都可用
+    
+    // Copy 类型
+    let x = 5;
+    let y = x;
+    println!("x = {}, y = {}", x, y);  // 都可用
+}</code></pre></pre>
+<h3 id="示例-3-函数所有权"><a class="header" href="#示例-3-函数所有权">示例 3: 函数所有权</a></h3>
+<p>函数如何影响所有权：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let s = String::from("hello");
+    
+    takes_ownership(s);
+    // s 不再有效
+    
+    let x = 5;
+    makes_copy(x);
+    println!("x = {}", x);  // x 仍然有效（Copy 类型）
+}
+
+fn takes_ownership(some_string: String) {
+    println!("{}", some_string);
+}  // some_string 在这里被 drop
+
+fn makes_copy(some_integer: i32) {
+    println!("{}", some_integer);
+}</code></pre></pre>
+<hr />
+<h2 id="借用和引用"><a class="header" href="#借用和引用">借用和引用</a></h2>
+<h3 id="示例-4-不可变借用"><a class="header" href="#示例-4-不可变借用">示例 4: 不可变借用</a></h3>
+<p>多个不可变引用：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let s = String::from("hello");
+    
+    let r1 = &amp;s;  // 第一个不可变引用
+    let r2 = &amp;s;  // 第二个不可变引用
+    
+    println!("r1: {}, r2: {}", r1, r2);
+    // r1 和 r2 都可以使用
+}</code></pre></pre>
+<h3 id="示例-5-可变借用"><a class="header" href="#示例-5-可变借用">示例 5: 可变借用</a></h3>
+<p>只能有一个可变引用：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut s = String::from("hello");
+    
+    let r1 = &amp;mut s;  // 可变引用
+    r1.push_str(", world");
+    
+    println!("{}", r1);
+    
+    // let r2 = &amp;mut s;  // 编译错误！不能同时有两个可变引用
+}</code></pre></pre>
+<h3 id="示例-6-借用规则"><a class="header" href="#示例-6-借用规则">示例 6: 借用规则</a></h3>
+<p>理解借用规则：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut s = String::from("hello");
+    
+    {
+        let r1 = &amp;mut s;
+        r1.push_str(", world");
+    }  // r1 在这里离开作用域
+    
+    let r2 = &amp;mut s;  // 现在可以创建新的可变引用
+    r2.push_str("!");
+    
+    println!("{}", r2);
+}</code></pre></pre>
+<hr />
+<h2 id="生命周期-1"><a class="header" href="#生命周期-1">生命周期</a></h2>
+<h3 id="示例-7-基本生命周期"><a class="header" href="#示例-7-基本生命周期">示例 7: 基本生命周期</a></h3>
+<p>函数中的生命周期标注：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let string1 = String::from("abcd");
+    let string2 = "xyz";
+    
+    let result = longest(string1.as_str(), string2);
+    println!("最长的字符串是: {}", result);
+}
+
+fn longest&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {
+    if x.len() &gt; y.len() {
+        x
+    } else {
+        y
+    }
+}</code></pre></pre>
+<h3 id="示例-8-结构体生命周期"><a class="header" href="#示例-8-结构体生命周期">示例 8: 结构体生命周期</a></h3>
+<p>结构体中的生命周期：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let novel = String::from("Call me Ishmael. Some years ago...");
+    let first_sentence = novel.split('.').next().unwrap();
+    
+    let excerpt = ImportantExcerpt {
+        part: first_sentence,
+    };
+    
+    println!("摘录: {}", excerpt.part);
+}
+
+struct ImportantExcerpt&lt;'a&gt; {
+    part: &amp;'a str,
+}</code></pre></pre>
+<hr />
+<h2 id="实战案例"><a class="header" href="#实战案例">实战案例</a></h2>
+<h3 id="示例-9-字符串所有权管理"><a class="header" href="#示例-9-字符串所有权管理">示例 9: 字符串所有权管理</a></h3>
+<p>实际场景中的所有权：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut text = String::from("Hello");
+    
+    // 场景1: 修改字符串
+    append_world(&amp;mut text);
+    println!("修改后: {}", text);
+    
+    // 场景2: 计算长度（不需要所有权）
+    let len = calculate_length(&amp;text);
+    println!("长度: {}", len);
+    
+    // 场景3: 获取第一个单词
+    let first = first_word(&amp;text);
+    println!("第一个单词: {}", first);
+}
+
+fn append_world(s: &amp;mut String) {
+    s.push_str(", World!");
+}
+
+fn calculate_length(s: &amp;String) -&gt; usize {
+    s.len()
+}
+
+fn first_word(s: &amp;str) -&gt; &amp;str {
+    let bytes = s.as_bytes();
+    
+    for (i, &amp;item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &amp;s[0..i];
+        }
+    }
+    
+    &amp;s[..]
+}</code></pre></pre>
+<h3 id="示例-10-综合练习"><a class="header" href="#示例-10-综合练习">示例 10: 综合练习</a></h3>
+<p>综合运用所有权概念：</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    // 创建数据
+    let mut data = vec![1, 2, 3, 4, 5];
+    
+    // 只读访问
+    let sum = calculate_sum(&amp;data);
+    println!("总和: {}", sum);
+    
+    // 修改数据
+    double_values(&amp;mut data);
+    println!("翻倍后: {:?}", data);
+    
+    // 移动数据
+    let new_data = data;
+    println!("新数据: {:?}", new_data);
+    
+    // data 不再可用
+    // println!("{:?}", data);  // 编译错误
+}
+
+fn calculate_sum(v: &amp;Vec&lt;i32&gt;) -&gt; i32 {
+    v.iter().sum()
+}
+
+fn double_values(v: &amp;mut Vec&lt;i32&gt;) {
+    for item in v.iter_mut() {
+        *item *= 2;
+    }
+}</code></pre></pre>
+<hr />
+<h2 id="-学习建议-3"><a class="header" href="#-学习建议-3">💡 学习建议</a></h2>
+<h3 id="如何使用这些示例"><a class="header" href="#如何使用这些示例">如何使用这些示例</a></h3>
+<ol>
+<li><strong>阅读代码</strong>: 先理解代码的目的</li>
+<li><strong>运行示例</strong>: 点击 “Run” 按钮运行代码</li>
+<li><strong>修改实验</strong>: 尝试修改代码，观察结果</li>
+<li><strong>理解错误</strong>: 故意引入错误，学习编译器提示</li>
+</ol>
+<h3 id="练习建议"><a class="header" href="#练习建议">练习建议</a></h3>
+<ul>
+<li><strong>示例 1-3</strong>: 理解所有权转移</li>
+<li><strong>示例 4-6</strong>: 掌握借用规则</li>
+<li><strong>示例 7-8</strong>: 学习生命周期标注</li>
+<li><strong>示例 9-10</strong>: 应用到实际场景</li>
+</ul>
+<h3 id="常见陷阱"><a class="header" href="#常见陷阱">常见陷阱</a></h3>
+<p>⚠️ <strong>同时存在可变和不可变引用</strong></p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut s = String::from("hello");
+let r1 = &amp;s;  // 不可变引用
+let r2 = &amp;mut s;  // 编译错误！
+<span class="boring">}</span></code></pre></pre>
+<p>⚠️ <strong>悬垂引用</strong></p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn dangle() -&gt; &amp;String {  // 编译错误！
+    let s = String::from("hello");
+    &amp;s
+}  // s 在这里被释放
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<h2 id="-更多资源"><a class="header" href="#-更多资源">🔗 更多资源</a></h2>
+<ul>
+<li><a href="c01/../../crates/c01_ownership_borrow_scope/docs/tier_02_guides/06_%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B%E9%9B%86%E5%90%88.html">完整代码示例集合</a></li>
+<li><a href="c01/./guides.html">返回指南页面</a></li>
+<li><a href="c01/./README.html">返回模块首页</a></li>
+<li><a href="c01/../tools/interactive-examples.html">交互式示例使用指南</a></li>
+</ul>
+<hr />
+<p><strong>记住</strong>: 所有权是 Rust 最重要的特性，多练习才能真正掌握！🚀</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="知识图谱"><a class="header" href="#知识图谱">知识图谱</a></h1>
+<p>本页展示所有权、借用与作用域的概念关系。</p>
+<hr />
+<h2 id="-核心概念关系图"><a class="header" href="#-核心概念关系图">📊 核心概念关系图</a></h2>
+<pre><code class="language-text">                    [所有权系统]
+                         |
+         +---------------+---------------+
+         |               |               |
+    [所有权]         [借用]         [生命周期]
+         |               |               |
+    +----+----+     +----+----+     +----+----+
+    |    |    |     |    |    |     |    |    |
+  移动  复制 Drop  不可变  可变  引用  标注  省略  静态
+                  借用    借用  规则
+</code></pre>
+<hr />
+<h2 id="-概念层次"><a class="header" href="#-概念层次">🎯 概念层次</a></h2>
+<h3 id="1-所有权-ownership"><a class="header" href="#1-所有权-ownership">1. 所有权 (Ownership)</a></h3>
+<p><strong>核心规则</strong>:</p>
+<ul>
+<li>每个值都有一个所有者</li>
+<li>值在任一时刻只能有一个所有者</li>
+<li>当所有者离开作用域时，值被释放</li>
+</ul>
+<p><strong>相关概念</strong>:</p>
+<ul>
+<li><strong>移动 (Move)</strong>: 所有权转移</li>
+<li><strong>Copy</strong>: 自动复制而非移动</li>
+<li><strong>Clone</strong>: 显式深拷贝</li>
+<li><strong>Drop</strong>: 值离开作用域时的清理</li>
+</ul>
+<hr />
+<h3 id="2-借用-borrowing"><a class="header" href="#2-借用-borrowing">2. 借用 (Borrowing)</a></h3>
+<p><strong>核心规则</strong>:</p>
+<ul>
+<li>可以有多个不可变引用</li>
+<li>或者只有一个可变引用</li>
+<li>引用必须总是有效的</li>
+</ul>
+<p><strong>相关概念</strong>:</p>
+<ul>
+<li><strong>不可变借用</strong> (<code>&amp;T</code>): 只读访问</li>
+<li><strong>可变借用</strong> (<code>&amp;mut T</code>): 读写访问</li>
+<li><strong>借用检查器</strong>: 编译时验证借用规则</li>
+<li><strong>NLL</strong> (Non-Lexical Lifetimes): 更智能的生命周期分析</li>
+</ul>
+<hr />
+<h3 id="3-生命周期-lifetimes"><a class="header" href="#3-生命周期-lifetimes">3. 生命周期 (Lifetimes)</a></h3>
+<p><strong>核心概念</strong>:</p>
+<ul>
+<li>引用有效的作用域</li>
+<li>防止悬垂引用</li>
+<li>在编译时验证</li>
+</ul>
+<p><strong>相关概念</strong>:</p>
+<ul>
+<li><strong>生命周期标注</strong> (<code>'a</code>): 显式标注生命周期关系</li>
+<li><strong>生命周期省略</strong>: 编译器自动推断</li>
+<li><strong>静态生命周期</strong> (<code>'static</code>): 整个程序期间有效</li>
+<li><strong>子类型</strong>: 生命周期的协变和逆变</li>
+</ul>
+<hr />
+<h2 id="-概念关联"><a class="header" href="#-概念关联">🔗 概念关联</a></h2>
+<h3 id="所有权--借用"><a class="header" href="#所有权--借用">所有权 ←→ 借用</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 所有权: 完全拥有
+let s = String::from("hello");
+
+// 借用: 临时访问
+let r = &amp;s;
+
+// 关系: 借用不转移所有权
+println!("{}", s);  // s 仍然有效
+println!("{}", r);  // r 是 s 的借用
+<span class="boring">}</span></code></pre></pre>
+<h3 id="借用--生命周期"><a class="header" href="#借用--生命周期">借用 ←→ 生命周期</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 借用必须有有效的生命周期
+fn longest&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {
+    if x.len() &gt; y.len() { x } else { y }
+}
+
+// 返回值的生命周期不能超过输入
+<span class="boring">}</span></code></pre></pre>
+<h3 id="所有权--作用域"><a class="header" href="#所有权--作用域">所有权 ←→ 作用域</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>{
+    let s = String::from("hello");  // s 开始有效
+    // 使用 s
+}  // s 离开作用域，所有权结束，内存被释放
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<h2 id="-学习路径图"><a class="header" href="#-学习路径图">📚 学习路径图</a></h2>
+<pre><code class="language-text">第一步: 理解所有权
+    ↓
+第二步: 掌握移动和复制
+    ↓
+第三步: 学习借用规则
+    ↓
+第四步: 理解生命周期
+    ↓
+第五步: 实战应用
+</code></pre>
+<hr />
+<h2 id="-从其他语言的角度"><a class="header" href="#-从其他语言的角度">🎓 从其他语言的角度</a></h2>
+<h3 id="对比-c"><a class="header" href="#对比-c">对比 C++</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>概念</th><th>C++</th><th>Rust</th></tr></thead><tbody>
+<tr><td><strong>所有权</strong></td><td>手动管理</td><td>自动管理</td></tr>
+<tr><td><strong>引用</strong></td><td>可能悬垂</td><td>编译时检查</td></tr>
+<tr><td><strong>内存泄漏</strong></td><td>常见问题</td><td>极少发生</td></tr>
+<tr><td><strong>多线程</strong></td><td>数据竞争</td><td>编译时防止</td></tr>
+</tbody></table>
+</div>
+<h3 id="对比-javapython"><a class="header" href="#对比-javapython">对比 Java/Python</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>概念</th><th>Java/Python</th><th>Rust</th></tr></thead><tbody>
+<tr><td><strong>内存管理</strong></td><td>垃圾回收</td><td>所有权系统</td></tr>
+<tr><td><strong>性能</strong></td><td>GC 暂停</td><td>无运行时开销</td></tr>
+<tr><td><strong>并发</strong></td><td>运行时检查</td><td>编译时检查</td></tr>
+<tr><td><strong>可预测性</strong></td><td>GC 不确定</td><td>确定性清理</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="-核心原则"><a class="header" href="#-核心原则">💡 核心原则</a></h2>
+<h3 id="1-所有权保证内存安全"><a class="header" href="#1-所有权保证内存安全">1. 所有权保证内存安全</a></h3>
+<pre><code class="language-text">所有权 → 唯一所有者 → 确定性清理 → 无内存泄漏
+</code></pre>
+<h3 id="2-借用防止数据竞争"><a class="header" href="#2-借用防止数据竞争">2. 借用防止数据竞争</a></h3>
+<pre><code class="language-text">借用规则 → 编译时检查 → 无数据竞争 → 线程安全
+</code></pre>
+<h3 id="3-生命周期保证引用有效"><a class="header" href="#3-生命周期保证引用有效">3. 生命周期保证引用有效</a></h3>
+<pre><code class="language-text">生命周期 → 引用必须有效 → 无悬垂指针 → 内存安全
+</code></pre>
+<hr />
+<h2 id="-深入主题"><a class="header" href="#-深入主题">🔍 深入主题</a></h2>
+<h3 id="主题-1-智能指针与所有权"><a class="header" href="#主题-1-智能指针与所有权">主题 1: 智能指针与所有权</a></h3>
+<ul>
+<li><strong>Box<T></strong>: 堆分配</li>
+<li><strong>Rc<T></strong>: 引用计数</li>
+<li><strong>Arc<T></strong>: 原子引用计数</li>
+<li><strong>RefCell<T></strong>: 内部可变性</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust">use std::rc::Rc;
+
+fn main() {
+    let a = Rc::new(5);
+    let b = Rc::clone(&amp;a);
+    
+    println!("引用计数: {}", Rc::strong_count(&amp;a));
+}</code></pre></pre>
+<h3 id="主题-2-并发中的所有权"><a class="header" href="#主题-2-并发中的所有权">主题 2: 并发中的所有权</a></h3>
+<ul>
+<li><strong>Send</strong>: 可在线程间转移</li>
+<li><strong>Sync</strong>: 可在线程间共享引用</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust">use std::thread;
+use std::sync::Arc;
+
+fn main() {
+    let data = Arc::new(vec![1, 2, 3]);
+    
+    let data_clone = Arc::clone(&amp;data);
+    thread::spawn(move || {
+        println!("{:?}", data_clone);
+    });
+}</code></pre></pre>
+<h3 id="主题-3-高级生命周期"><a class="header" href="#主题-3-高级生命周期">主题 3: 高级生命周期</a></h3>
+<ul>
+<li><strong>高阶 trait 边界</strong> (HRTB)</li>
+<li><strong>生命周期子类型</strong></li>
+<li><strong>型变</strong> (Variance)</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// HRTB 示例
+fn apply&lt;F&gt;(f: F)
+where
+    F: for&lt;'a&gt; Fn(&amp;'a str) -&gt; &amp;'a str,
+{
+    let s = String::from("hello");
+    println!("{}", f(&amp;s));
+}
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<h2 id="-相关章节"><a class="header" href="#-相关章节">📖 相关章节</a></h2>
+<ul>
+<li><strong><a href="c01/./foundations.html">基础概念</a></strong> - 理论详解</li>
+<li><strong><a href="c01/./guides.html">实践指南</a></strong> - 实用技巧</li>
+<li><strong><a href="c01/./examples.html">代码示例</a></strong> - 交互式示例 ⭐</li>
+<li><strong><a href="c01/./README.html">返回模块首页</a></strong></li>
+</ul>
+<hr />
+<h2 id="-扩展学习"><a class="header" href="#-扩展学习">🔗 扩展学习</a></h2>
+<h3 id="深入阅读"><a class="header" href="#深入阅读">深入阅读</a></h3>
+<ul>
+<li><a href="c01/../../crates/c01_ownership_borrow_scope/docs/theory/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.html">完整知识图谱</a></li>
+<li><a href="https://doc.rust-lang.org/nomicon/">Rust Nomicon - 高级主题</a></li>
+<li><a href="https://rust-lang.github.io/rfcs/2094-nll.html">RFC 2094 - NLL</a></li>
+</ul>
+<h3 id="相关模块"><a class="header" href="#相关模块">相关模块</a></h3>
+<ul>
+<li><strong><a href="c01/../c05/README.html">C05: 多线程</a></strong> - Send 和 Sync</li>
+<li><strong><a href="c01/../c04/README.html">C04: 泛型</a></strong> - 生命周期泛型</li>
+<li><strong><a href="c01/../c13/README.html">C13: 可靠性</a></strong> - 智能指针</li>
+</ul>
+<hr />
+<p><strong>理解这些概念的关系将帮助你更好地掌握 Rust！</strong> 🚀</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="c02-类型系统"><a class="header" href="#c02-类型系统">C02: 类型系统</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念-1"><a class="header" href="#基础概念-1">基础概念</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南-1"><a class="header" href="#实践指南-1">实践指南</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例-1"><a class="header" href="#代码示例-1">代码示例</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="知识图谱-1"><a class="header" href="#知识图谱-1">知识图谱</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="c03-控制流与函数"><a class="header" href="#c03-控制流与函数">C03: 控制流与函数</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念-2"><a class="header" href="#基础概念-2">基础概念</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南-2"><a class="header" href="#实践指南-2">实践指南</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例-2"><a class="header" href="#代码示例-2">代码示例</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="知识图谱-2"><a class="header" href="#知识图谱-2">知识图谱</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="c04-泛型编程"><a class="header" href="#c04-泛型编程">C04: 泛型编程</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念-3"><a class="header" href="#基础概念-3">基础概念</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南-3"><a class="header" href="#实践指南-3">实践指南</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例-3"><a class="header" href="#代码示例-3">代码示例</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="知识图谱-3"><a class="header" href="#知识图谱-3">知识图谱</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="c05-多线程编程"><a class="header" href="#c05-多线程编程">C05: 多线程编程</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念-4"><a class="header" href="#基础概念-4">基础概念</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南-4"><a class="header" href="#实践指南-4">实践指南</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例-4"><a class="header" href="#代码示例-4">代码示例</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="知识图谱-4"><a class="header" href="#知识图谱-4">知识图谱</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="c06-异步编程"><a class="header" href="#c06-异步编程">C06: 异步编程</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念-5"><a class="header" href="#基础概念-5">基础概念</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南-5"><a class="header" href="#实践指南-5">实践指南</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例-5"><a class="header" href="#代码示例-5">代码示例</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="知识图谱-5"><a class="header" href="#知识图谱-5">知识图谱</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="c07-进程与系统编程"><a class="header" href="#c07-进程与系统编程">C07: 进程与系统编程</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念-6"><a class="header" href="#基础概念-6">基础概念</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南-6"><a class="header" href="#实践指南-6">实践指南</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例-6"><a class="header" href="#代码示例-6">代码示例</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="知识图谱-6"><a class="header" href="#知识图谱-6">知识图谱</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="c08-算法与数据结构"><a class="header" href="#c08-算法与数据结构">C08: 算法与数据结构</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念-7"><a class="header" href="#基础概念-7">基础概念</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南-7"><a class="header" href="#实践指南-7">实践指南</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例-7"><a class="header" href="#代码示例-7">代码示例</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="c09-设计模式"><a class="header" href="#c09-设计模式">C09: 设计模式</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念-8"><a class="header" href="#基础概念-8">基础概念</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南-8"><a class="header" href="#实践指南-8">实践指南</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例-8"><a class="header" href="#代码示例-8">代码示例</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="c10-网络编程"><a class="header" href="#c10-网络编程">C10: 网络编程</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念-9"><a class="header" href="#基础概念-9">基础概念</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南-9"><a class="header" href="#实践指南-9">实践指南</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例-9"><a class="header" href="#代码示例-9">代码示例</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="c11-常用库"><a class="header" href="#c11-常用库">C11: 常用库</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念-10"><a class="header" href="#基础概念-10">基础概念</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南-10"><a class="header" href="#实践指南-10">实践指南</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例-10"><a class="header" href="#代码示例-10">代码示例</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="c12-领域建模"><a class="header" href="#c12-领域建模">C12: 领域建模</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念-11"><a class="header" href="#基础概念-11">基础概念</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南-11"><a class="header" href="#实践指南-11">实践指南</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例-11"><a class="header" href="#代码示例-11">代码示例</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="c13-可靠性工程"><a class="header" href="#c13-可靠性工程">C13: 可靠性工程</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念-12"><a class="header" href="#基础概念-12">基础概念</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南-12"><a class="header" href="#实践指南-12">实践指南</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例-12"><a class="header" href="#代码示例-12">代码示例</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="c14-宏系统"><a class="header" href="#c14-宏系统">C14: 宏系统</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念-13"><a class="header" href="#基础概念-13">基础概念</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南-13"><a class="header" href="#实践指南-13">实践指南</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例-13"><a class="header" href="#代码示例-13">代码示例</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="跨模块综合项目"><a class="header" href="#跨模块综合项目">跨模块综合项目</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="项目一任务管理系统"><a class="header" href="#项目一任务管理系统">项目一：任务管理系统</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="项目二异步web服务器"><a class="header" href="#项目二异步web服务器">项目二：异步Web服务器</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="项目三分布式缓存系统"><a class="header" href="#项目三分布式缓存系统">项目三：分布式缓存系统</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="项目四实时聊天服务"><a class="header" href="#项目四实时聊天服务">项目四：实时聊天服务</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="项目五cli工具集"><a class="header" href="#项目五cli工具集">项目五：CLI工具集</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="术语表"><a class="header" href="#术语表">术语表</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="faq"><a class="header" href="#faq">FAQ</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="最佳实践"><a class="header" href="#最佳实践">最佳实践</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="性能优化指南"><a class="header" href="#性能优化指南">性能优化指南</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="安全编程指南"><a class="header" href="#安全编程指南">安全编程指南</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="文档搜索工具"><a class="header" href="#文档搜索工具">文档搜索工具</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="开发环境配置"><a class="header" href="#开发环境配置">开发环境配置</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cicd配置"><a class="header" href="#cicd配置">CI/CD配置</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="学习进度追踪"><a class="header" href="#学习进度追踪">学习进度追踪</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="贡献指南"><a class="header" href="#贡献指南">贡献指南</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="更新日志"><a class="header" href="#更新日志">更新日志</a></h1>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="ace.js"></script>
+        <script src="mode-rust.js"></script>
+        <script src="editor.js"></script>
+        <script src="theme-dawn.js"></script>
+        <script src="theme-tomorrow_night.js"></script>
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+
+    </div>
+    </body>
+</html>
