@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD025 -->
 # Rust 学习系统 - 完整教程
 
 [简介](./README.md)

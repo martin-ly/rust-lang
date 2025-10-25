@@ -85,6 +85,7 @@ impl IndexCache {
 }
 
 /// 计算文件哈希（简单实现）
+#[allow(dead_code)]
 pub fn compute_file_hash<P: AsRef<Path>>(path: P) -> Result<String, Box<dyn std::error::Error>> {
     let metadata = fs::metadata(path)?;
     let modified = metadata.modified()?;
