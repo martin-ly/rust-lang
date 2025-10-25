@@ -179,7 +179,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="欢迎来到-rust-学习系统"><a class="header" href="#欢迎来到-rust-学习系统">欢迎来到 Rust 学习系统！</a></h1>
+                        <h1 id="欢迎来到-rust-学习系统"><a class="header" href="#欢迎来到-rust-学习系统">欢迎来到 Rust 学习系统</a></h1>
 <blockquote>
 <p><strong>系统化、完整、实战导向的 Rust 学习资源</strong></p>
 </blockquote>
@@ -218,7 +218,7 @@
 <h2 id="-快速开始"><a class="header" href="#-快速开始">🚀 快速开始</a></h2>
 <h3 id="方式一按顺序学习"><a class="header" href="#方式一按顺序学习">方式一：按顺序学习</a></h3>
 <p>推荐从 <strong>C01</strong> 开始，按照模块顺序学习，建立扎实的基础：</p>
-<pre><code>C01 → C02 → C03 → C04 → C05 → C06 → C07 → ...
+<pre><code class="language-text">C01 → C02 → C03 → C04 → C05 → C06 → C07 → ...
 </code></pre>
 <h3 id="方式二按主题学习"><a class="header" href="#方式二按主题学习">方式二：按主题学习</a></h3>
 <p>根据自己的兴趣或项目需求，选择特定主题：</p>
@@ -1724,10 +1724,10 @@ fn longest&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {
 <h2 id="-深入主题"><a class="header" href="#-深入主题">🔍 深入主题</a></h2>
 <h3 id="主题-1-智能指针与所有权"><a class="header" href="#主题-1-智能指针与所有权">主题 1: 智能指针与所有权</a></h3>
 <ul>
-<li><strong>Box<T></strong>: 堆分配</li>
-<li><strong>Rc<T></strong>: 引用计数</li>
-<li><strong>Arc<T></strong>: 原子引用计数</li>
-<li><strong>RefCell<T></strong>: 内部可变性</li>
+<li><strong><code>Box&lt;T&gt;</code></strong>: 堆分配</li>
+<li><strong><code>Rc&lt;T&gt;</code></strong>: 引用计数</li>
+<li><strong><code>Arc&lt;T&gt;</code></strong>: 原子引用计数</li>
+<li><strong><code>RefCell&lt;T&gt;</code></strong>: 内部可变性</li>
 </ul>
 <pre><pre class="playground"><code class="language-rust">use std::rc::Rc;
 
@@ -1828,30 +1828,2968 @@ where
 <div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念-7"><a class="header" href="#基础概念-7">基础概念</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南-7"><a class="header" href="#实践指南-7">实践指南</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例-7"><a class="header" href="#代码示例-7">代码示例</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="知识图谱-7"><a class="header" href="#知识图谱-7">知识图谱</a></h1>
+<p>本页展示算法与数据结构的概念关系。</p>
+<hr />
+<h2 id="-核心概念关系图-1"><a class="header" href="#-核心概念关系图-1">📊 核心概念关系图</a></h2>
+<pre><code class="language-text">                   [算法与数据结构]
+                         |
+         +---------------+---------------+
+         |               |               |
+    [数据结构]       [算法设计]       [复杂度分析]
+         |               |               |
+    +----+----+     +----+----+     +----+----+
+    |    |    |     |    |    |     |    |    |
+  线性  树形  图    分治  动态  贪心  时间  空间  渐进
+  结构  结构  结构        规划              分析
+</code></pre>
+<hr />
+<h2 id="-概念层次-1"><a class="header" href="#-概念层次-1">🎯 概念层次</a></h2>
+<h3 id="1-数据结构-data-structures"><a class="header" href="#1-数据结构-data-structures">1. 数据结构 (Data Structures)</a></h3>
+<p><strong>核心类别</strong>:</p>
+<ul>
+<li><strong>线性结构</strong>: 数组、链表、栈、队列、双端队列</li>
+<li><strong>树形结构</strong>: 二叉树、BST、AVL树、红黑树、B树、堆</li>
+<li><strong>图结构</strong>: 有向图、无向图、加权图、DAG</li>
+<li><strong>散列结构</strong>: 哈希表、布隆过滤器</li>
+</ul>
+<p><strong>Rust 特性</strong>:</p>
+<ul>
+<li><strong>Vec</strong>: 动态数组</li>
+<li><strong>VecDeque</strong>: 双端队列</li>
+<li><strong>BinaryHeap</strong>: 二叉堆</li>
+<li><strong>HashMap/BTreeMap</strong>: 关联容器</li>
+</ul>
+<hr />
+<h3 id="2-算法设计范式-algorithm-paradigms"><a class="header" href="#2-算法设计范式-algorithm-paradigms">2. 算法设计范式 (Algorithm Paradigms)</a></h3>
+<p><strong>核心范式</strong>:</p>
+<ul>
+<li><strong>分治法</strong> (Divide and Conquer): 快速排序、归并排序</li>
+<li><strong>动态规划</strong> (Dynamic Programming): 背包问题、最长子序列</li>
+<li><strong>贪心算法</strong> (Greedy): 最小生成树、哈夫曼编码</li>
+<li><strong>回溯算法</strong> (Backtracking): N皇后、迷宫问题</li>
+<li><strong>分支限界</strong> (Branch and Bound): 旅行商问题</li>
+</ul>
+<p><strong>Rust 实现特点</strong>:</p>
+<ul>
+<li>零成本抽象</li>
+<li>迭代器组合</li>
+<li>所有权优化</li>
+<li>并发安全</li>
+</ul>
+<hr />
+<h3 id="3-复杂度分析-complexity-analysis"><a class="header" href="#3-复杂度分析-complexity-analysis">3. 复杂度分析 (Complexity Analysis)</a></h3>
+<p><strong>时间复杂度</strong>:</p>
+<ul>
+<li>O(1) - 常数时间</li>
+<li>O(log n) - 对数时间</li>
+<li>O(n) - 线性时间</li>
+<li>O(n log n) - 线性对数时间</li>
+<li>O(n²) - 平方时间</li>
+</ul>
+<p><strong>空间复杂度</strong>:</p>
+<ul>
+<li>原地算法 O(1)</li>
+<li>递归深度</li>
+<li>缓存空间</li>
+</ul>
+<hr />
+<h2 id="-概念关联-1"><a class="header" href="#-概念关联-1">🔗 概念关联</a></h2>
+<h3 id="数据结构--算法设计"><a class="header" href="#数据结构--算法设计">数据结构 ←→ 算法设计</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 数据结构选择影响算法效率
+use std::collections::BinaryHeap;
+
+// 优先队列 + 贪心算法 = Dijkstra最短路径
+fn dijkstra(graph: &amp;[(Vec&lt;(usize, i32)&gt;)], start: usize) -&gt; Vec&lt;i32&gt; {
+    let mut distances = vec![i32::MAX; graph.len()];
+    let mut heap = BinaryHeap::new();
+    
+    distances[start] = 0;
+    heap.push((0, start));
+    
+    while let Some((dist, node)) = heap.pop() {
+        // 贪心选择当前最短路径
+        if -dist &gt; distances[node] { continue; }
+        
+        for &amp;(neighbor, weight) in &amp;graph[node] {
+            let new_dist = distances[node] + weight;
+            if new_dist &lt; distances[neighbor] {
+                distances[neighbor] = new_dist;
+                heap.push((-new_dist, neighbor));
+            }
+        }
+    }
+    
+    distances
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="算法范式--复杂度"><a class="header" href="#算法范式--复杂度">算法范式 ←→ 复杂度</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 动态规划: 空间换时间
+fn fibonacci_dp(n: usize) -&gt; u64 {
+    let mut dp = vec![0; n + 1];
+    dp[1] = 1;
+    
+    for i in 2..=n {
+        dp[i] = dp[i-1] + dp[i-2];
+    }
+    
+    dp[n]  // O(n) 时间, O(n) 空间
+}
+
+// 优化: 降低空间复杂度
+fn fibonacci_optimized(n: usize) -&gt; u64 {
+    let (mut prev, mut curr) = (0, 1);
+    
+    for _ in 2..=n {
+        let next = prev + curr;
+        prev = curr;
+        curr = next;
+    }
+    
+    curr  // O(n) 时间, O(1) 空间
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="并发--算法"><a class="header" href="#并发--算法">并发 ←→ 算法</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rayon::prelude::*;
+
+// 并行快速排序
+fn parallel_quicksort&lt;T: Ord + Send&gt;(arr: &amp;mut [T]) {
+    if arr.len() &lt;= 1 { return; }
+    
+    let mid = partition(arr);
+    let (left, right) = arr.split_at_mut(mid);
+    
+    rayon::join(
+        || parallel_quicksort(left),
+        || parallel_quicksort(right),
+    );
+}
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<h2 id="-学习路径图-1"><a class="header" href="#-学习路径图-1">📚 学习路径图</a></h2>
+<pre><code class="language-text">第一步: 掌握基本数据结构
+    ↓
+第二步: 学习排序和搜索算法
+    ↓
+第三步: 理解算法设计范式
+    ↓
+第四步: 掌握图算法
+    ↓
+第五步: 并发与异步算法
+</code></pre>
+<hr />
+<h2 id="-算法分类体系"><a class="header" href="#-算法分类体系">🎓 算法分类体系</a></h2>
+<h3 id="排序算法"><a class="header" href="#排序算法">排序算法</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>算法</th><th>时间复杂度</th><th>空间复杂度</th><th>稳定性</th></tr></thead><tbody>
+<tr><td>快速排序</td><td>O(n log n)</td><td>O(log n)</td><td>不稳定</td></tr>
+<tr><td>归并排序</td><td>O(n log n)</td><td>O(n)</td><td>稳定</td></tr>
+<tr><td>堆排序</td><td>O(n log n)</td><td>O(1)</td><td>不稳定</td></tr>
+<tr><td>插入排序</td><td>O(n²)</td><td>O(1)</td><td>稳定</td></tr>
+</tbody></table>
+</div>
+<h3 id="搜索算法"><a class="header" href="#搜索算法">搜索算法</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>算法</th><th>时间复杂度</th><th>适用场景</th></tr></thead><tbody>
+<tr><td>二分搜索</td><td>O(log n)</td><td>有序数组</td></tr>
+<tr><td>哈希查找</td><td>O(1)</td><td>键值对</td></tr>
+<tr><td>DFS</td><td>O(V+E)</td><td>图遍历</td></tr>
+<tr><td>BFS</td><td>O(V+E)</td><td>最短路径</td></tr>
+</tbody></table>
+</div>
+<h3 id="图算法"><a class="header" href="#图算法">图算法</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>算法</th><th>时间复杂度</th><th>用途</th></tr></thead><tbody>
+<tr><td>Dijkstra</td><td>O((V+E) log V)</td><td>单源最短路径</td></tr>
+<tr><td>Floyd-Warshall</td><td>O(V³)</td><td>全源最短路径</td></tr>
+<tr><td>Kruskal</td><td>O(E log E)</td><td>最小生成树</td></tr>
+<tr><td>Prim</td><td>O((V+E) log V)</td><td>最小生成树</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="-核心原则-1"><a class="header" href="#-核心原则-1">💡 核心原则</a></h2>
+<h3 id="1-选择合适的数据结构"><a class="header" href="#1-选择合适的数据结构">1. 选择合适的数据结构</a></h3>
+<pre><code class="language-text">数据结构 → 算法效率 → 系统性能
+</code></pre>
+<h3 id="2-权衡时间与空间"><a class="header" href="#2-权衡时间与空间">2. 权衡时间与空间</a></h3>
+<pre><code class="language-text">时间换空间 ← 动态规划 → 空间换时间
+</code></pre>
+<h3 id="3-利用-rust-特性"><a class="header" href="#3-利用-rust-特性">3. 利用 Rust 特性</a></h3>
+<pre><code class="language-text">所有权 → 零成本抽象 → 高效实现
+</code></pre>
+<hr />
+<h2 id="-rust-190-增强特性"><a class="header" href="#-rust-190-增强特性">🔍 Rust 1.90 增强特性</a></h2>
+<h3 id="1-高级类型推断"><a class="header" href="#1-高级类型推断">1. 高级类型推断</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 复杂类型自动推断
+let graph: Vec&lt;Vec&lt;_&gt;&gt; = (0..n)
+    .map(|_| Vec::new())
+    .collect();
+<span class="boring">}</span></code></pre></pre>
+<h3 id="2-并发算法"><a class="header" href="#2-并发算法">2. 并发算法</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use tokio::task;
+
+// 异步并行计算
+async fn parallel_map&lt;F, T, R&gt;(data: Vec&lt;T&gt;, f: F) -&gt; Vec&lt;R&gt;
+where
+    F: Fn(T) -&gt; R + Send + Sync + 'static,
+    T: Send + 'static,
+    R: Send + 'static,
+{
+    let handles: Vec&lt;_&gt; = data
+        .into_iter()
+        .map(|item| task::spawn_blocking(move || f(item)))
+        .collect();
+    
+    let mut results = Vec::new();
+    for handle in handles {
+        results.push(handle.await.unwrap());
+    }
+    results
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="3-泛型优化"><a class="header" href="#3-泛型优化">3. 泛型优化</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 使用 const 泛型优化数组算法
+fn array_sum&lt;T, const N: usize&gt;(arr: [T; N]) -&gt; T
+where
+    T: std::ops::Add&lt;Output = T&gt; + Default + Copy,
+{
+    arr.into_iter().fold(T::default(), |acc, x| acc + x)
+}
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<h2 id="-相关章节-1"><a class="header" href="#-相关章节-1">📖 相关章节</a></h2>
+<ul>
+<li><strong><a href="c08/./foundations.html">基础概念</a></strong> - 理论详解</li>
+<li><strong><a href="c08/./guides.html">实践指南</a></strong> - 实现技巧</li>
+<li><strong><a href="c08/./examples.html">代码示例</a></strong> - 算法实现 ⭐</li>
+<li><strong><a href="c08/./README.html">返回模块首页</a></strong></li>
+</ul>
+<hr />
+<h2 id="-扩展学习-1"><a class="header" href="#-扩展学习-1">🔗 扩展学习</a></h2>
+<h3 id="深入阅读-1"><a class="header" href="#深入阅读-1">深入阅读</a></h3>
+<ul>
+<li><a href="c08/../../crates/c08_algorithms/docs/KNOWLEDGE_GRAPH.html">完整知识图谱</a></li>
+<li><a href="c08/../../crates/c08_algorithms/docs/theory/README.html">算法理论</a></li>
+<li><a href="c08/../../crates/c08_algorithms/docs/theory_enhanced/README.html">形式化分析</a></li>
+</ul>
+<h3 id="相关模块-1"><a class="header" href="#相关模块-1">相关模块</a></h3>
+<ul>
+<li><strong><a href="c08/../c05/README.html">C05: 多线程</a></strong> - 并行算法</li>
+<li><strong><a href="c08/../c06/README.html">C06: 异步编程</a></strong> - 异步算法</li>
+<li><strong><a href="c08/../c09/README.html">C09: 设计模式</a></strong> - 算法模式</li>
+</ul>
+<hr />
+<h2 id="-实践项目建议"><a class="header" href="#-实践项目建议">🎯 实践项目建议</a></h2>
+<h3 id="入门级"><a class="header" href="#入门级">入门级</a></h3>
+<ul>
+<li>实现基本排序算法</li>
+<li>二叉树遍历</li>
+<li>简单图算法</li>
+</ul>
+<h3 id="进阶级"><a class="header" href="#进阶级">进阶级</a></h3>
+<ul>
+<li>LRU 缓存</li>
+<li>并发数据结构</li>
+<li>高性能哈希表</li>
+</ul>
+<h3 id="高级"><a class="header" href="#高级">高级</a></h3>
+<ul>
+<li>分布式算法</li>
+<li>无锁数据结构</li>
+<li>实时系统算法</li>
+</ul>
+<hr />
+<p><strong>理解算法与数据结构的关系是高效编程的基础！</strong> 🚀</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="c09-设计模式"><a class="header" href="#c09-设计模式">C09: 设计模式</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念-8"><a class="header" href="#基础概念-8">基础概念</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南-8"><a class="header" href="#实践指南-8">实践指南</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例-8"><a class="header" href="#代码示例-8">代码示例</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="知识图谱-8"><a class="header" href="#知识图谱-8">知识图谱</a></h1>
+<p>本页展示设计模式的概念关系。</p>
+<hr />
+<h2 id="-核心概念关系图-2"><a class="header" href="#-核心概念关系图-2">📊 核心概念关系图</a></h2>
+<pre><code class="language-text">                    [设计模式]
+                         |
+         +---------------+---------------+
+         |               |               |
+     [经典模式]    [并发模式]     [Rust特有]
+         |               |               |
+    +----+----+     +----+----+     +----+----+
+    |    |    |     |    |    |     |    |    |
+  创建型 结构型 行为型  Actor  CSP  所有权 类型  零成本
+  模式   模式   模式   模型  模型  模式   状态  抽象
+</code></pre>
+<hr />
+<h2 id="-概念层次-2"><a class="header" href="#-概念层次-2">🎯 概念层次</a></h2>
+<h3 id="1-经典设计模式-gof-patterns"><a class="header" href="#1-经典设计模式-gof-patterns">1. 经典设计模式 (GoF Patterns)</a></h3>
+<p><strong>创建型模式</strong> (Creational Patterns):</p>
+<ul>
+<li><strong>单例模式</strong> (Singleton): 全局唯一实例</li>
+<li><strong>工厂模式</strong> (Factory): 对象创建抽象</li>
+<li><strong>建造者模式</strong> (Builder): 复杂对象构建</li>
+<li><strong>原型模式</strong> (Prototype): 对象克隆</li>
+<li><strong>抽象工厂</strong> (Abstract Factory): 产品族创建</li>
+</ul>
+<p><strong>结构型模式</strong> (Structural Patterns):</p>
+<ul>
+<li><strong>适配器模式</strong> (Adapter): 接口转换</li>
+<li><strong>装饰器模式</strong> (Decorator): 动态添加功能</li>
+<li><strong>代理模式</strong> (Proxy): 访问控制</li>
+<li><strong>桥接模式</strong> (Bridge): 抽象与实现分离</li>
+<li><strong>组合模式</strong> (Composite): 树形结构</li>
+<li><strong>外观模式</strong> (Facade): 简化接口</li>
+<li><strong>享元模式</strong> (Flyweight): 共享对象</li>
+</ul>
+<p><strong>行为型模式</strong> (Behavioral Patterns):</p>
+<ul>
+<li><strong>观察者模式</strong> (Observer): 事件通知</li>
+<li><strong>策略模式</strong> (Strategy): 算法族</li>
+<li><strong>命令模式</strong> (Command): 请求对象化</li>
+<li><strong>状态模式</strong> (State): 状态转换</li>
+<li><strong>访问者模式</strong> (Visitor): 操作与结构分离</li>
+<li><strong>迭代器模式</strong> (Iterator): 遍历抽象</li>
+<li><strong>模板方法</strong> (Template Method): 算法骨架</li>
+<li><strong>责任链模式</strong> (Chain of Responsibility): 请求传递</li>
+<li><strong>中介者模式</strong> (Mediator): 交互中心化</li>
+<li><strong>备忘录模式</strong> (Memento): 状态保存</li>
+<li><strong>解释器模式</strong> (Interpreter): 语言解释</li>
+</ul>
+<hr />
+<h3 id="2-并发模式-concurrency-patterns"><a class="header" href="#2-并发模式-concurrency-patterns">2. 并发模式 (Concurrency Patterns)</a></h3>
+<p><strong>核心模式</strong>:</p>
+<ul>
+<li><strong>Actor模型</strong>: 消息传递并发</li>
+<li><strong>CSP模型</strong>: 通道通信</li>
+<li><strong>STM</strong>: 软件事务内存</li>
+<li><strong>Work-Stealing</strong>: 任务窃取调度</li>
+<li><strong>Fork-Join</strong>: 分治并行</li>
+</ul>
+<p><strong>Rust实现特点</strong>:</p>
+<ul>
+<li>所有权保证线程安全</li>
+<li>类型系统防止数据竞争</li>
+<li><code>Send</code> 和 <code>Sync</code> trait</li>
+<li>零成本抽象</li>
+</ul>
+<hr />
+<h3 id="3-rust特有模式-rust-specific-patterns"><a class="header" href="#3-rust特有模式-rust-specific-patterns">3. Rust特有模式 (Rust-Specific Patterns)</a></h3>
+<p><strong>所有权模式</strong>:</p>
+<ul>
+<li><strong>RAII</strong>: 资源自动管理</li>
+<li><strong>移动语义</strong>: 所有权转移</li>
+<li><strong>借用检查</strong>: 编译时验证</li>
+</ul>
+<p><strong>类型模式</strong>:</p>
+<ul>
+<li><strong>新类型模式</strong> (Newtype): 类型安全</li>
+<li><strong>类型状态模式</strong>: 编译时状态机</li>
+<li><strong>幻影类型</strong>: 编译时标记</li>
+</ul>
+<p><strong>函数式模式</strong>:</p>
+<ul>
+<li><strong>组合子模式</strong>: 函数组合</li>
+<li><strong>迭代器模式</strong>: 零成本抽象</li>
+<li><strong>闭包模式</strong>: 环境捕获</li>
+</ul>
+<hr />
+<h2 id="-概念关联-2"><a class="header" href="#-概念关联-2">🔗 概念关联</a></h2>
+<h3 id="建造者模式--rust所有权"><a class="header" href="#建造者模式--rust所有权">建造者模式 ←→ Rust所有权</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Rust建造者模式利用所有权实现类型安全
+pub struct ConfigBuilder {
+    host: Option&lt;String&gt;,
+    port: Option&lt;u16&gt;,
+}
+
+impl ConfigBuilder {
+    pub fn new() -&gt; Self {
+        Self {
+            host: None,
+            port: None,
+        }
+    }
+    
+    // 消费self，返回新的builder
+    pub fn host(mut self, host: String) -&gt; Self {
+        self.host = Some(host);
+        self
+    }
+    
+    pub fn port(mut self, port: u16) -&gt; Self {
+        self.port = Some(port);
+        self
+    }
+    
+    // 消费builder，构建最终对象
+    pub fn build(self) -&gt; Result&lt;Config, String&gt; {
+        Ok(Config {
+            host: self.host.ok_or("Host is required")?,
+            port: self.port.unwrap_or(8080),
+        })
+    }
+}
+
+pub struct Config {
+    host: String,
+    port: u16,
+}
+
+// 使用示例
+let config = ConfigBuilder::new()
+    .host("localhost".to_string())
+    .port(3000)
+    .build()
+    .unwrap();
+<span class="boring">}</span></code></pre></pre>
+<h3 id="类型状态模式--编译时验证"><a class="header" href="#类型状态模式--编译时验证">类型状态模式 ←→ 编译时验证</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 使用类型系统表示状态
+struct Locked;
+struct Unlocked;
+
+struct Door&lt;State&gt; {
+    _state: std::marker::PhantomData&lt;State&gt;,
+}
+
+impl Door&lt;Locked&gt; {
+    fn new() -&gt; Self {
+        Door { _state: std::marker::PhantomData }
+    }
+    
+    // 只有锁定的门可以解锁
+    fn unlock(self) -&gt; Door&lt;Unlocked&gt; {
+        Door { _state: std::marker::PhantomData }
+    }
+}
+
+impl Door&lt;Unlocked&gt; {
+    // 只有解锁的门可以打开
+    fn open(&amp;self) {
+        println!("Door opened!");
+    }
+    
+    fn lock(self) -&gt; Door&lt;Locked&gt; {
+        Door { _state: std::marker::PhantomData }
+    }
+}
+
+// 编译时保证状态转换正确
+let door = Door::&lt;Locked&gt;::new();
+// door.open(); // 编译错误！锁定的门不能打开
+let door = door.unlock();
+door.open(); // ✓ 正确
+<span class="boring">}</span></code></pre></pre>
+<h3 id="actor模式--所有权与消息传递"><a class="header" href="#actor模式--所有权与消息传递">Actor模式 ←→ 所有权与消息传递</a></h3>
+<pre><pre class="playground"><code class="language-rust">use tokio::sync::mpsc;
+
+// Actor消息定义
+enum ActorMessage {
+    Process(String),
+    Stop,
+}
+
+// Actor结构
+struct Actor {
+    receiver: mpsc::Receiver&lt;ActorMessage&gt;,
+}
+
+impl Actor {
+    fn new() -&gt; (Self, mpsc::Sender&lt;ActorMessage&gt;) {
+        let (tx, rx) = mpsc::channel(32);
+        (Actor { receiver: rx }, tx)
+    }
+    
+    async fn run(mut self) {
+        while let Some(msg) = self.receiver.recv().await {
+            match msg {
+                ActorMessage::Process(data) =&gt; {
+                    println!("Processing: {}", data);
+                }
+                ActorMessage::Stop =&gt; break,
+            }
+        }
+    }
+}
+
+// 使用示例
+#[tokio::main]
+async fn main() {
+    let (actor, sender) = Actor::new();
+    
+    // 启动actor
+    tokio::spawn(actor.run());
+    
+    // 发送消息
+    sender.send(ActorMessage::Process("Hello".to_string())).await.unwrap();
+    sender.send(ActorMessage::Stop).await.unwrap();
+}</code></pre></pre>
+<hr />
+<h2 id="-学习路径图-2"><a class="header" href="#-学习路径图-2">📚 学习路径图</a></h2>
+<pre><code class="language-text">第一步: 理解经典设计模式
+    ↓
+第二步: 学习Rust所有权与模式
+    ↓
+第三步: 掌握并发模式
+    ↓
+第四步: 应用类型状态模式
+    ↓
+第五步: 实战与模式组合
+</code></pre>
+<hr />
+<h2 id="-模式分类与应用"><a class="header" href="#-模式分类与应用">🎓 模式分类与应用</a></h2>
+<h3 id="按用途分类"><a class="header" href="#按用途分类">按用途分类</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>分类</th><th>目的</th><th>核心模式</th></tr></thead><tbody>
+<tr><td><strong>对象创建</strong></td><td>灵活创建对象</td><td>Builder, Factory, Singleton</td></tr>
+<tr><td><strong>结构组织</strong></td><td>优化对象关系</td><td>Adapter, Decorator, Proxy</td></tr>
+<tr><td><strong>行为协调</strong></td><td>对象交互</td><td>Observer, Strategy, State</td></tr>
+<tr><td><strong>并发控制</strong></td><td>安全并发</td><td>Actor, CSP, STM</td></tr>
+</tbody></table>
+</div>
+<h3 id="按复杂度分类"><a class="header" href="#按复杂度分类">按复杂度分类</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>级别</th><th>模式</th><th>学习时间</th></tr></thead><tbody>
+<tr><td><strong>入门</strong></td><td>Builder, Factory, Strategy</td><td>1-2周</td></tr>
+<tr><td><strong>进阶</strong></td><td>Adapter, Decorator, Observer</td><td>2-3周</td></tr>
+<tr><td><strong>高级</strong></td><td>Actor, Type-State, Phantom</td><td>3-4周</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="-核心原则-2"><a class="header" href="#-核心原则-2">💡 核心原则</a></h2>
+<h3 id="1-编译时保证"><a class="header" href="#1-编译时保证">1. 编译时保证</a></h3>
+<pre><code class="language-text">类型系统 → 编译时检查 → 运行时零开销
+</code></pre>
+<h3 id="2-所有权驱动设计"><a class="header" href="#2-所有权驱动设计">2. 所有权驱动设计</a></h3>
+<pre><code class="language-text">所有权规则 → 安全并发 → 内存安全
+</code></pre>
+<h3 id="3-零成本抽象"><a class="header" href="#3-零成本抽象">3. 零成本抽象</a></h3>
+<pre><code class="language-text">高级抽象 → 编译优化 → 原生性能
+</code></pre>
+<hr />
+<h2 id="-rust-190-增强特性-1"><a class="header" href="#-rust-190-增强特性-1">🔍 Rust 1.90 增强特性</a></h2>
+<h3 id="1-异步生态模式"><a class="header" href="#1-异步生态模式">1. 异步生态模式</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::future::Future;
+
+// 异步建造者模式
+pub struct AsyncBuilder {
+    config: Config,
+}
+
+impl AsyncBuilder {
+    pub async fn load_config(mut self) -&gt; Self {
+        // 异步加载配置
+        self.config = fetch_config().await;
+        self
+    }
+    
+    pub async fn build(self) -&gt; Result&lt;Service, Error&gt; {
+        Ok(Service::new(self.config).await?)
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="2-高级类型模式"><a class="header" href="#2-高级类型模式">2. 高级类型模式</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 使用关联类型和GAT
+trait Repository {
+    type Entity;
+    type Error;
+    
+    async fn find(&amp;self, id: i64) -&gt; Result&lt;Self::Entity, Self::Error&gt;;
+    async fn save(&amp;self, entity: Self::Entity) -&gt; Result&lt;(), Self::Error&gt;;
+}
+
+// 具体实现
+struct UserRepository;
+
+impl Repository for UserRepository {
+    type Entity = User;
+    type Error = DbError;
+    
+    async fn find(&amp;self, id: i64) -&gt; Result&lt;User, DbError&gt; {
+        // 实现细节
+        Ok(User::default())
+    }
+    
+    async fn save(&amp;self, user: User) -&gt; Result&lt;(), DbError&gt; {
+        // 实现细节
+        Ok(())
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="3-形式化验证模式"><a class="header" href="#3-形式化验证模式">3. 形式化验证模式</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 使用不变量验证
+pub struct SortedVec&lt;T: Ord&gt; {
+    inner: Vec&lt;T&gt;,
+}
+
+impl&lt;T: Ord&gt; SortedVec&lt;T&gt; {
+    pub fn new() -&gt; Self {
+        SortedVec { inner: Vec::new() }
+    }
+    
+    // 保证插入后仍然有序
+    pub fn insert(&amp;mut self, value: T) {
+        let pos = self.inner.binary_search(&amp;value).unwrap_or_else(|e| e);
+        self.inner.insert(pos, value);
+        // 不变量: inner始终有序
+    }
+    
+    // 安全地返回不可变引用
+    pub fn as_slice(&amp;self) -&gt; &amp;[T] {
+        &amp;self.inner
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<h2 id="-相关章节-2"><a class="header" href="#-相关章节-2">📖 相关章节</a></h2>
+<ul>
+<li><strong><a href="c09/./foundations.html">基础概念</a></strong> - 模式理论</li>
+<li><strong><a href="c09/./guides.html">实践指南</a></strong> - 实现技巧</li>
+<li><strong><a href="c09/./examples.html">代码示例</a></strong> - 完整实现 ⭐</li>
+<li><strong><a href="c09/./README.html">返回模块首页</a></strong></li>
+</ul>
+<hr />
+<h2 id="-扩展学习-2"><a class="header" href="#-扩展学习-2">🔗 扩展学习</a></h2>
+<h3 id="深入阅读-2"><a class="header" href="#深入阅读-2">深入阅读</a></h3>
+<ul>
+<li><a href="c09/../../crates/c09_design_pattern/README.html">完整模式目录</a></li>
+<li><a href="https://rust-unofficial.github.io/patterns/">Rust设计模式</a></li>
+<li><a href="c09/../../crates/c09_design_pattern/docs/theory/README.html">形式化验证</a></li>
+</ul>
+<h3 id="相关模块-2"><a class="header" href="#相关模块-2">相关模块</a></h3>
+<ul>
+<li><strong><a href="c09/../c05/README.html">C05: 多线程</a></strong> - 并发模式基础</li>
+<li><strong><a href="c09/../c06/README.html">C06: 异步编程</a></strong> - 异步模式</li>
+<li><strong><a href="c09/../c04/README.html">C04: 泛型编程</a></strong> - 类型模式</li>
+</ul>
+<hr />
+<h2 id="-实践建议"><a class="header" href="#-实践建议">🎯 实践建议</a></h2>
+<h3 id="模式选择决策树"><a class="header" href="#模式选择决策树">模式选择决策树</a></h3>
+<pre><code class="language-text">需要创建对象？
+├─ 简单创建 → 工厂模式
+├─ 复杂配置 → 建造者模式
+└─ 全局唯一 → 单例模式
+
+需要并发？
+├─ 消息传递 → Actor模式
+├─ 通道通信 → CSP模式
+└─ 共享状态 → STM模式
+
+需要状态管理？
+├─ 编译时验证 → 类型状态模式
+├─ 运行时切换 → 状态模式
+└─ 策略选择 → 策略模式
+</code></pre>
+<hr />
+<p><strong>掌握设计模式是写出优雅Rust代码的关键！</strong> 🚀</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="c10-网络编程"><a class="header" href="#c10-网络编程">C10: 网络编程</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念-9"><a class="header" href="#基础概念-9">基础概念</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南-9"><a class="header" href="#实践指南-9">实践指南</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例-9"><a class="header" href="#代码示例-9">代码示例</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="知识图谱-9"><a class="header" href="#知识图谱-9">知识图谱</a></h1>
+<p>本页展示网络编程的概念关系。</p>
+<hr />
+<h2 id="-核心概念关系图-3"><a class="header" href="#-核心概念关系图-3">📊 核心概念关系图</a></h2>
+<pre><code class="language-text">                    [网络编程]
+                         |
+         +---------------+---------------+
+         |               |               |
+    [网络协议]       [I/O模型]       [网络库]
+         |               |               |
+    +----+----+     +----+----+     +----+----+
+    |    |    |     |    |    |     |    |    |
+  TCP  UDP HTTP   异步  同步  tokio  hyper  tonic
+       WebSocket        阻塞        axum   reqwest
+</code></pre>
+<hr />
+<h2 id="-概念层次-3"><a class="header" href="#-概念层次-3">🎯 概念层次</a></h2>
+<h3 id="1-网络协议-network-protocols"><a class="header" href="#1-网络协议-network-protocols">1. 网络协议 (Network Protocols)</a></h3>
+<p><strong>传输层协议</strong>:</p>
+<ul>
+<li><strong>TCP</strong>: 可靠传输、面向连接、流式协议</li>
+<li><strong>UDP</strong>: 不可靠传输、无连接、数据报协议</li>
+<li><strong>QUIC</strong>: 基于UDP的可靠传输</li>
+</ul>
+<p><strong>应用层协议</strong>:</p>
+<ul>
+<li><strong>HTTP/1.1</strong>: 传统HTTP协议</li>
+<li><strong>HTTP/2</strong>: 多路复用、服务器推送</li>
+<li><strong>HTTP/3</strong>: 基于QUIC</li>
+<li><strong>WebSocket</strong>: 全双工通信</li>
+<li><strong>gRPC</strong>: 基于HTTP/2的RPC框架</li>
+<li><strong>DNS</strong>: 域名解析</li>
+</ul>
+<p><strong>Rust实现</strong>:</p>
+<ul>
+<li><code>std::net</code>: 标准库网络模块</li>
+<li><code>tokio</code>: 异步运行时</li>
+<li><code>hyper</code>: HTTP库</li>
+<li><code>tonic</code>: gRPC框架</li>
+<li><code>quinn</code>: QUIC实现</li>
+</ul>
+<hr />
+<h3 id="2-io模型-io-models"><a class="header" href="#2-io模型-io-models">2. I/O模型 (I/O Models)</a></h3>
+<p><strong>同步I/O</strong>:</p>
+<ul>
+<li><strong>阻塞I/O</strong>: 简单但低效</li>
+<li><strong>非阻塞I/O</strong>: 需要轮询</li>
+<li><strong>多路复用</strong> (select/poll/epoll): 监控多个连接</li>
+</ul>
+<p><strong>异步I/O</strong>:</p>
+<ul>
+<li><strong>Future模型</strong>: 惰性计算</li>
+<li><strong>async/await</strong>: 语法糖</li>
+<li><strong>Runtime</strong>: tokio, async-std</li>
+</ul>
+<p><strong>性能特点</strong>:</p>
+<ul>
+<li>同步I/O: 每连接一线程</li>
+<li>异步I/O: 少量线程处理大量连接</li>
+<li>零拷贝: 减少数据复制</li>
+</ul>
+<hr />
+<h3 id="3-网络编程库-network-libraries"><a class="header" href="#3-网络编程库-network-libraries">3. 网络编程库 (Network Libraries)</a></h3>
+<p><strong>HTTP客户端</strong>:</p>
+<ul>
+<li><strong>reqwest</strong>: 高级HTTP客户端</li>
+<li><strong>ureq</strong>: 同步HTTP客户端</li>
+<li><strong>surf</strong>: 异步HTTP客户端</li>
+</ul>
+<p><strong>HTTP服务器</strong>:</p>
+<ul>
+<li><strong>axum</strong>: 现代web框架</li>
+<li><strong>actix-web</strong>: 高性能web框架</li>
+<li><strong>warp</strong>: 过滤器式web框架</li>
+<li><strong>rocket</strong>: 易用web框架</li>
+</ul>
+<p><strong>底层网络</strong>:</p>
+<ul>
+<li><strong>mio</strong>: 底层异步I/O</li>
+<li><strong>tokio</strong>: 异步运行时</li>
+<li><strong>async-std</strong>: 异步标准库</li>
+</ul>
+<p><strong>特殊协议</strong>:</p>
+<ul>
+<li><strong>tonic</strong>: gRPC框架</li>
+<li><strong>tokio-tungstenite</strong>: WebSocket</li>
+<li><strong>quinn</strong>: QUIC实现</li>
+<li><strong>libp2p</strong>: P2P网络栈</li>
+</ul>
+<hr />
+<h2 id="-概念关联-3"><a class="header" href="#-概念关联-3">🔗 概念关联</a></h2>
+<h3 id="tcp--异步io"><a class="header" href="#tcp--异步io">TCP ←→ 异步I/O</a></h3>
+<pre><pre class="playground"><code class="language-rust">use tokio::net::{TcpListener, TcpStream};
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
+
+// 异步TCP服务器
+#[tokio::main]
+async fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+    // 绑定监听地址
+    let listener = TcpListener::bind("127.0.0.1:8080").await?;
+    println!("Server listening on 127.0.0.1:8080");
+    
+    loop {
+        // 接受连接（异步）
+        let (mut socket, addr) = listener.accept().await?;
+        println!("New connection from: {}", addr);
+        
+        // 为每个连接创建任务
+        tokio::spawn(async move {
+            let mut buf = vec![0; 1024];
+            
+            loop {
+                // 异步读取
+                let n = match socket.read(&amp;mut buf).await {
+                    Ok(n) if n == 0 =&gt; return, // 连接关闭
+                    Ok(n) =&gt; n,
+                    Err(e) =&gt; {
+                        eprintln!("Failed to read: {}", e);
+                        return;
+                    }
+                };
+                
+                // 异步写入（回显）
+                if let Err(e) = socket.write_all(&amp;buf[0..n]).await {
+                    eprintln!("Failed to write: {}", e);
+                    return;
+                }
+            }
+        });
+    }
+}</code></pre></pre>
+<h3 id="http--web框架"><a class="header" href="#http--web框架">HTTP ←→ Web框架</a></h3>
+<pre><pre class="playground"><code class="language-rust">use axum::{
+    routing::{get, post},
+    Router,
+    Json,
+    extract::Path,
+};
+use serde::{Deserialize, Serialize};
+
+// 请求/响应类型
+#[derive(Deserialize)]
+struct CreateUser {
+    name: String,
+    email: String,
+}
+
+#[derive(Serialize)]
+struct User {
+    id: u64,
+    name: String,
+    email: String,
+}
+
+// 路由处理器
+async fn get_user(Path(id): Path&lt;u64&gt;) -&gt; Json&lt;User&gt; {
+    Json(User {
+        id,
+        name: "Alice".to_string(),
+        email: "alice@example.com".to_string(),
+    })
+}
+
+async fn create_user(Json(payload): Json&lt;CreateUser&gt;) -&gt; Json&lt;User&gt; {
+    Json(User {
+        id: 1,
+        name: payload.name,
+        email: payload.email,
+    })
+}
+
+#[tokio::main]
+async fn main() {
+    // 构建路由
+    let app = Router::new()
+        .route("/users/:id", get(get_user))
+        .route("/users", post(create_user));
+    
+    // 启动服务器
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000")
+        .await
+        .unwrap();
+    
+    axum::serve(listener, app)
+        .await
+        .unwrap();
+}</code></pre></pre>
+<h3 id="websocket--实时通信"><a class="header" href="#websocket--实时通信">WebSocket ←→ 实时通信</a></h3>
+<pre><pre class="playground"><code class="language-rust">use tokio_tungstenite::{connect_async, tungstenite::Message};
+use futures_util::{SinkExt, StreamExt};
+
+#[tokio::main]
+async fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+    // 连接WebSocket服务器
+    let (mut ws_stream, _) = connect_async("ws://localhost:8080").await?;
+    println!("WebSocket connected");
+    
+    // 发送消息
+    ws_stream.send(Message::Text("Hello!".to_string())).await?;
+    
+    // 接收消息
+    while let Some(msg) = ws_stream.next().await {
+        match msg? {
+            Message::Text(text) =&gt; println!("Received: {}", text),
+            Message::Close(_) =&gt; break,
+            _ =&gt; {}
+        }
+    }
+    
+    Ok(())
+}</code></pre></pre>
+<hr />
+<h2 id="-学习路径图-3"><a class="header" href="#-学习路径图-3">📚 学习路径图</a></h2>
+<pre><code class="language-text">第一步: 理解网络协议基础
+    ↓
+第二步: 掌握TCP/UDP编程
+    ↓
+第三步: 学习异步I/O模型
+    ↓
+第四步: 使用HTTP客户端/服务器
+    ↓
+第五步: 高级协议(gRPC, WebSocket)
+</code></pre>
+<hr />
+<h2 id="-协议与库对应关系"><a class="header" href="#-协议与库对应关系">🎓 协议与库对应关系</a></h2>
+<h3 id="http生态"><a class="header" href="#http生态">HTTP生态</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>层次</th><th>客户端</th><th>服务器</th></tr></thead><tbody>
+<tr><td><strong>高层</strong></td><td>reqwest</td><td>axum, actix-web</td></tr>
+<tr><td><strong>中层</strong></td><td>hyper</td><td>hyper</td></tr>
+<tr><td><strong>底层</strong></td><td>tokio, mio</td><td>tokio, mio</td></tr>
+</tbody></table>
+</div>
+<h3 id="实时通信"><a class="header" href="#实时通信">实时通信</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>协议</th><th>库</th><th>特点</th></tr></thead><tbody>
+<tr><td><strong>WebSocket</strong></td><td>tokio-tungstenite</td><td>双向通信</td></tr>
+<tr><td><strong>gRPC</strong></td><td>tonic</td><td>HTTP/2 RPC</td></tr>
+<tr><td><strong>QUIC</strong></td><td>quinn</td><td>UDP可靠传输</td></tr>
+</tbody></table>
+</div>
+<h3 id="p2p网络"><a class="header" href="#p2p网络">P2P网络</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>层次</th><th>库</th><th>用途</th></tr></thead><tbody>
+<tr><td><strong>应用层</strong></td><td>libp2p</td><td>P2P框架</td></tr>
+<tr><td><strong>传输层</strong></td><td>quinn, tokio</td><td>传输协议</td></tr>
+<tr><td><strong>发现</strong></td><td>mdns, kad</td><td>节点发现</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="-核心原则-3"><a class="header" href="#-核心原则-3">💡 核心原则</a></h2>
+<h3 id="1-异步优先"><a class="header" href="#1-异步优先">1. 异步优先</a></h3>
+<pre><code class="language-text">异步I/O → 高并发 → 资源高效利用
+</code></pre>
+<h3 id="2-零拷贝优化"><a class="header" href="#2-零拷贝优化">2. 零拷贝优化</a></h3>
+<pre><code class="language-text">减少拷贝 → 降低延迟 → 提高吞吐量
+</code></pre>
+<h3 id="3-类型安全"><a class="header" href="#3-类型安全">3. 类型安全</a></h3>
+<pre><code class="language-text">类型系统 → 编译时检查 → 运行时安全
+</code></pre>
+<hr />
+<h2 id="-rust-190-增强特性-2"><a class="header" href="#-rust-190-增强特性-2">🔍 Rust 1.90 增强特性</a></h2>
+<h3 id="1-异步trait"><a class="header" href="#1-异步trait">1. 异步trait</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 异步trait现已稳定
+trait AsyncRepository {
+    async fn find(&amp;self, id: i64) -&gt; Result&lt;User, Error&gt;;
+    async fn save(&amp;self, user: User) -&gt; Result&lt;(), Error&gt;;
+}
+
+struct DbRepository;
+
+impl AsyncRepository for DbRepository {
+    async fn find(&amp;self, id: i64) -&gt; Result&lt;User, Error&gt; {
+        // 实现细节
+        Ok(User::default())
+    }
+    
+    async fn save(&amp;self, user: User) -&gt; Result&lt;(), Error&gt; {
+        // 实现细节
+        Ok(())
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="2-改进的错误处理"><a class="header" href="#2-改进的错误处理">2. 改进的错误处理</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::error::Error;
+use std::fmt;
+
+// 自定义网络错误
+#[derive(Debug)]
+enum NetworkError {
+    Timeout,
+    ConnectionRefused,
+    InvalidResponse,
+}
+
+impl fmt::Display for NetworkError {
+    fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {
+        match self {
+            NetworkError::Timeout =&gt; write!(f, "Request timeout"),
+            NetworkError::ConnectionRefused =&gt; write!(f, "Connection refused"),
+            NetworkError::InvalidResponse =&gt; write!(f, "Invalid response"),
+        }
+    }
+}
+
+impl Error for NetworkError {}
+
+// 使用Result链式处理
+async fn fetch_data(url: &amp;str) -&gt; Result&lt;String, Box&lt;dyn Error&gt;&gt; {
+    let response = reqwest::get(url)
+        .await?
+        .error_for_status()?;
+    
+    let body = response.text().await?;
+    Ok(body)
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="3-高性能http3"><a class="header" href="#3-高性能http3">3. 高性能HTTP/3</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use quinn::{Endpoint, ServerConfig};
+
+// HTTP/3服务器（基于QUIC）
+async fn run_h3_server() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+    let server_config = ServerConfig::with_single_cert(certs, key)?;
+    let endpoint = Endpoint::server(server_config, "0.0.0.0:4433".parse()?)?;
+    
+    println!("HTTP/3 server listening");
+    
+    while let Some(conn) = endpoint.accept().await {
+        tokio::spawn(async move {
+            let connection = conn.await?;
+            // 处理HTTP/3连接
+            Ok::&lt;(), Box&lt;dyn std::error::Error&gt;&gt;(())
+        });
+    }
+    
+    Ok(())
+}
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<h2 id="-相关章节-3"><a class="header" href="#-相关章节-3">📖 相关章节</a></h2>
+<ul>
+<li><strong><a href="c10/./foundations.html">基础概念</a></strong> - 网络理论</li>
+<li><strong><a href="c10/./guides.html">实践指南</a></strong> - 实战技巧</li>
+<li><strong><a href="c10/./examples.html">代码示例</a></strong> - 完整实现 ⭐</li>
+<li><strong><a href="c10/./README.html">返回模块首页</a></strong></li>
+</ul>
+<hr />
+<h2 id="-扩展学习-3"><a class="header" href="#-扩展学习-3">🔗 扩展学习</a></h2>
+<h3 id="深入阅读-3"><a class="header" href="#深入阅读-3">深入阅读</a></h3>
+<ul>
+<li><a href="c10/../../crates/c10_networks/README.html">完整网络编程指南</a></li>
+<li><a href="https://rust-lang.github.io/async-book/">异步编程书</a></li>
+<li><a href="https://www.rfc-editor.org/">网络协议RFC</a></li>
+</ul>
+<h3 id="相关模块-3"><a class="header" href="#相关模块-3">相关模块</a></h3>
+<ul>
+<li><strong><a href="c10/../c06/README.html">C06: 异步编程</a></strong> - 异步基础</li>
+<li><strong><a href="c10/../c05/README.html">C05: 多线程</a></strong> - 并发编程</li>
+<li><strong><a href="c10/../c13/README.html">C13: 可靠性</a></strong> - 容错机制</li>
+</ul>
+<hr />
+<h2 id="-实践项目建议-1"><a class="header" href="#-实践项目建议-1">🎯 实践项目建议</a></h2>
+<h3 id="入门级-1"><a class="header" href="#入门级-1">入门级</a></h3>
+<ul>
+<li>TCP回显服务器</li>
+<li>HTTP客户端工具</li>
+<li>简单聊天服务器</li>
+</ul>
+<h3 id="进阶级-1"><a class="header" href="#进阶级-1">进阶级</a></h3>
+<ul>
+<li>REST API服务</li>
+<li>WebSocket实时应用</li>
+<li>负载均衡器</li>
+</ul>
+<h3 id="高级-1"><a class="header" href="#高级-1">高级</a></h3>
+<ul>
+<li>分布式消息队列</li>
+<li>API网关</li>
+<li>P2P文件共享</li>
+</ul>
+<hr />
+<h2 id="-网络栈层次"><a class="header" href="#-网络栈层次">🌐 网络栈层次</a></h2>
+<pre><code class="language-text">应用层:  HTTP, gRPC, WebSocket
+    ↓
+传输层:  TCP, UDP, QUIC
+    ↓
+网络层:  IP
+    ↓
+链路层:  Ethernet, WiFi
+</code></pre>
+<p><strong>Rust提供各层抽象</strong>:</p>
+<ul>
+<li>应用层: axum, tonic, reqwest</li>
+<li>传输层: tokio::net, quinn</li>
+<li>网络层: pnet (数据包捕获)</li>
+</ul>
+<hr />
+<p><strong>掌握网络编程是构建现代分布式系统的基础！</strong> 🚀</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="c11-常用库"><a class="header" href="#c11-常用库">C11: 常用库</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念-10"><a class="header" href="#基础概念-10">基础概念</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南-10"><a class="header" href="#实践指南-10">实践指南</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例-10"><a class="header" href="#代码示例-10">代码示例</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="知识图谱-10"><a class="header" href="#知识图谱-10">知识图谱</a></h1>
+<p>本页展示常用库的概念关系。</p>
+<hr />
+<h2 id="-核心概念关系图-4"><a class="header" href="#-核心概念关系图-4">📊 核心概念关系图</a></h2>
+<pre><code class="language-text">                    [Rust常用库]
+                         |
+         +---------------+---------------+---------------+
+         |               |               |               |
+     [核心库]       [Web开发]      [数据处理]     [系统工具]
+         |               |               |               |
+    +----+----+     +----+----+     +----+----+     +----+----+
+    |    |    |     |    |    |     |    |    |     |    |    |
+  serde tokio  axum   sqlx  diesel  clap  log  tracing
+  anyhow  reqwest actix  redis  csv  regex  env  config
+</code></pre>
+<hr />
+<h2 id="-概念层次-4"><a class="header" href="#-概念层次-4">🎯 概念层次</a></h2>
+<h3 id="1-核心库-core-libraries"><a class="header" href="#1-核心库-core-libraries">1. 核心库 (Core Libraries)</a></h3>
+<p><strong>序列化/反序列化</strong>:</p>
+<ul>
+<li><strong>serde</strong>: 序列化框架</li>
+<li><strong>serde_json</strong>: JSON支持</li>
+<li><strong>bincode</strong>: 二进制序列化</li>
+<li><strong>toml</strong>: TOML配置文件</li>
+<li><strong>yaml-rust</strong>: YAML支持</li>
+</ul>
+<p><strong>错误处理</strong>:</p>
+<ul>
+<li><strong>anyhow</strong>: 简化错误处理</li>
+<li><strong>thiserror</strong>: 自定义错误类型</li>
+<li><strong>eyre</strong>: 增强型错误报告</li>
+</ul>
+<p><strong>异步运行时</strong>:</p>
+<ul>
+<li><strong>tokio</strong>: 异步运行时</li>
+<li><strong>async-std</strong>: 异步标准库</li>
+<li><strong>smol</strong>: 轻量异步运行时</li>
+<li><strong>futures</strong>: Future组合子</li>
+</ul>
+<hr />
+<h3 id="2-web开发-web-development"><a class="header" href="#2-web开发-web-development">2. Web开发 (Web Development)</a></h3>
+<p><strong>Web框架</strong>:</p>
+<ul>
+<li><strong>axum</strong>: 现代web框架</li>
+<li><strong>actix-web</strong>: 高性能框架</li>
+<li><strong>rocket</strong>: 易用框架</li>
+<li><strong>warp</strong>: 过滤器框架</li>
+</ul>
+<p><strong>HTTP客户端</strong>:</p>
+<ul>
+<li><strong>reqwest</strong>: HTTP客户端</li>
+<li><strong>ureq</strong>: 同步HTTP</li>
+<li><strong>surf</strong>: 异步HTTP</li>
+</ul>
+<p><strong>模板引擎</strong>:</p>
+<ul>
+<li><strong>askama</strong>: 编译时模板</li>
+<li><strong>tera</strong>: 动态模板</li>
+<li><strong>handlebars</strong>: Handlebars模板</li>
+</ul>
+<p><strong>数据库</strong>:</p>
+<ul>
+<li><strong>sqlx</strong>: 异步SQL</li>
+<li><strong>diesel</strong>: ORM框架</li>
+<li><strong>sea-orm</strong>: 现代ORM</li>
+<li><strong>redis</strong>: Redis客户端</li>
+</ul>
+<hr />
+<h3 id="3-数据处理-data-processing"><a class="header" href="#3-数据处理-data-processing">3. 数据处理 (Data Processing)</a></h3>
+<p><strong>解析</strong>:</p>
+<ul>
+<li><strong>nom</strong>: 解析器组合子</li>
+<li><strong>pest</strong>: PEG解析器</li>
+<li><strong>regex</strong>: 正则表达式</li>
+<li><strong>csv</strong>: CSV处理</li>
+</ul>
+<p><strong>数据结构</strong>:</p>
+<ul>
+<li><strong>indexmap</strong>: 保序HashMap</li>
+<li><strong>smallvec</strong>: 栈优化Vec</li>
+<li><strong>dashmap</strong>: 并发HashMap</li>
+<li><strong>petgraph</strong>: 图数据结构</li>
+</ul>
+<p><strong>时间处理</strong>:</p>
+<ul>
+<li><strong>chrono</strong>: 时间日期</li>
+<li><strong>time</strong>: 现代时间库</li>
+<li><strong>humantime</strong>: 人性化时间</li>
+</ul>
+<hr />
+<h3 id="4-系统工具-system-utilities"><a class="header" href="#4-系统工具-system-utilities">4. 系统工具 (System Utilities)</a></h3>
+<p><strong>CLI工具</strong>:</p>
+<ul>
+<li><strong>clap</strong>: 命令行解析</li>
+<li><strong>structopt</strong>: 结构化CLI</li>
+<li><strong>dialoguer</strong>: 交互式CLI</li>
+<li><strong>indicatif</strong>: 进度条</li>
+</ul>
+<p><strong>日志</strong>:</p>
+<ul>
+<li><strong>log</strong>: 日志门面</li>
+<li><strong>env_logger</strong>: 环境日志</li>
+<li><strong>tracing</strong>: 结构化追踪</li>
+<li><strong>slog</strong>: 结构化日志</li>
+</ul>
+<p><strong>配置管理</strong>:</p>
+<ul>
+<li><strong>config</strong>: 配置框架</li>
+<li><strong>dotenv</strong>: 环境变量</li>
+<li><strong>figment</strong>: 配置聚合</li>
+</ul>
+<p><strong>文件操作</strong>:</p>
+<ul>
+<li><strong>walkdir</strong>: 目录遍历</li>
+<li><strong>notify</strong>: 文件监控</li>
+<li><strong>tempfile</strong>: 临时文件</li>
+<li><strong>fs_extra</strong>: 扩展文件操作</li>
+</ul>
+<hr />
+<h2 id="-概念关联-4"><a class="header" href="#-概念关联-4">🔗 概念关联</a></h2>
+<h3 id="serde--数据序列化"><a class="header" href="#serde--数据序列化">serde ←→ 数据序列化</a></h3>
+<pre><pre class="playground"><code class="language-rust">use serde::{Serialize, Deserialize};
+
+// 定义可序列化结构
+#[derive(Serialize, Deserialize, Debug)]
+struct User {
+    id: u64,
+    name: String,
+    email: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    age: Option&lt;u32&gt;,
+}
+
+fn main() {
+    let user = User {
+        id: 1,
+        name: "Alice".to_string(),
+        email: "alice@example.com".to_string(),
+        age: Some(30),
+    };
+    
+    // 序列化为JSON
+    let json = serde_json::to_string(&amp;user).unwrap();
+    println!("JSON: {}", json);
+    
+    // 反序列化
+    let user2: User = serde_json::from_str(&amp;json).unwrap();
+    println!("User: {:?}", user2);
+}</code></pre></pre>
+<h3 id="tokio--异步生态"><a class="header" href="#tokio--异步生态">tokio ←→ 异步生态</a></h3>
+<pre><pre class="playground"><code class="language-rust">use tokio::time::{sleep, Duration};
+use tokio::task;
+
+#[tokio::main]
+async fn main() {
+    // 并发执行多个任务
+    let task1 = task::spawn(async {
+        sleep(Duration::from_millis(100)).await;
+        "Task 1 done"
+    });
+    
+    let task2 = task::spawn(async {
+        sleep(Duration::from_millis(200)).await;
+        "Task 2 done"
+    });
+    
+    // 等待所有任务完成
+    let result1 = task1.await.unwrap();
+    let result2 = task2.await.unwrap();
+    
+    println!("{}, {}", result1, result2);
+}</code></pre></pre>
+<h3 id="axum--web服务"><a class="header" href="#axum--web服务">axum ←→ Web服务</a></h3>
+<pre><pre class="playground"><code class="language-rust">use axum::{
+    routing::get,
+    Router,
+    Json,
+};
+use serde::{Deserialize, Serialize};
+use tower_http::cors::CorsLayer;
+
+#[derive(Serialize)]
+struct Response {
+    message: String,
+}
+
+async fn hello() -&gt; Json&lt;Response&gt; {
+    Json(Response {
+        message: "Hello, World!".to_string(),
+    })
+}
+
+#[tokio::main]
+async fn main() {
+    // 构建应用
+    let app = Router::new()
+        .route("/", get(hello))
+        .layer(CorsLayer::permissive());
+    
+    // 启动服务器
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000")
+        .await
+        .unwrap();
+    
+    axum::serve(listener, app).await.unwrap();
+}</code></pre></pre>
+<hr />
+<h2 id="-学习路径图-4"><a class="header" href="#-学习路径图-4">📚 学习路径图</a></h2>
+<pre><code class="language-text">第一步: 掌握核心库(serde, anyhow)
+    ↓
+第二步: 学习异步运行时(tokio)
+    ↓
+第三步: 使用Web框架(axum)
+    ↓
+第四步: 集成数据库(sqlx, diesel)
+    ↓
+第五步: 构建完整应用
+</code></pre>
+<hr />
+<h2 id="-库分类与选择"><a class="header" href="#-库分类与选择">🎓 库分类与选择</a></h2>
+<h3 id="按用途选择"><a class="header" href="#按用途选择">按用途选择</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>用途</th><th>推荐库</th><th>特点</th></tr></thead><tbody>
+<tr><td><strong>序列化</strong></td><td>serde</td><td>零成本抽象</td></tr>
+<tr><td><strong>异步</strong></td><td>tokio</td><td>生态最完整</td></tr>
+<tr><td><strong>Web</strong></td><td>axum</td><td>现代化设计</td></tr>
+<tr><td><strong>数据库</strong></td><td>sqlx</td><td>编译时检查</td></tr>
+<tr><td><strong>CLI</strong></td><td>clap</td><td>功能强大</td></tr>
+<tr><td><strong>日志</strong></td><td>tracing</td><td>结构化追踪</td></tr>
+</tbody></table>
+</div>
+<h3 id="按性能选择"><a class="header" href="#按性能选择">按性能选择</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>性能需求</th><th>库选择</th><th>说明</th></tr></thead><tbody>
+<tr><td><strong>最高</strong></td><td>actix-web, smallvec</td><td>极致性能</td></tr>
+<tr><td><strong>平衡</strong></td><td>axum, reqwest</td><td>性能与易用性</td></tr>
+<tr><td><strong>易用</strong></td><td>rocket, ureq</td><td>开发效率优先</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="-核心原则-4"><a class="header" href="#-核心原则-4">💡 核心原则</a></h2>
+<h3 id="1-零成本抽象"><a class="header" href="#1-零成本抽象">1. 零成本抽象</a></h3>
+<pre><code class="language-text">serde → 编译时生成 → 无运行时开销
+</code></pre>
+<h3 id="2-类型安全"><a class="header" href="#2-类型安全">2. 类型安全</a></h3>
+<pre><code class="language-text">强类型 → 编译时检查 → 运行时安全
+</code></pre>
+<h3 id="3-组合优于继承"><a class="header" href="#3-组合优于继承">3. 组合优于继承</a></h3>
+<pre><code class="language-text">trait → 行为组合 → 灵活扩展
+</code></pre>
+<hr />
+<h2 id="-rust-190-特性应用"><a class="header" href="#-rust-190-特性应用">🔍 Rust 1.90 特性应用</a></h2>
+<h3 id="1-异步trait-1"><a class="header" href="#1-异步trait-1">1. 异步trait</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use async_trait::async_trait;
+
+#[async_trait]
+trait DataRepository {
+    async fn find(&amp;self, id: i64) -&gt; Result&lt;Data, Error&gt;;
+    async fn save(&amp;self, data: Data) -&gt; Result&lt;(), Error&gt;;
+}
+
+struct PostgresRepo;
+
+#[async_trait]
+impl DataRepository for PostgresRepo {
+    async fn find(&amp;self, id: i64) -&gt; Result&lt;Data, Error&gt; {
+        // 使用sqlx查询数据库
+        sqlx::query_as("SELECT * FROM data WHERE id = $1")
+            .bind(id)
+            .fetch_one(&amp;pool)
+            .await
+    }
+    
+    async fn save(&amp;self, data: Data) -&gt; Result&lt;(), Error&gt; {
+        sqlx::query("INSERT INTO data VALUES ($1, $2)")
+            .bind(data.id)
+            .bind(data.value)
+            .execute(&amp;pool)
+            .await?;
+        Ok(())
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="2-错误处理改进"><a class="header" href="#2-错误处理改进">2. 错误处理改进</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use anyhow::{Context, Result};
+
+async fn process_file(path: &amp;str) -&gt; Result&lt;String&gt; {
+    let content = tokio::fs::read_to_string(path)
+        .await
+        .context("Failed to read file")?;
+    
+    let parsed = serde_json::from_str(&amp;content)
+        .context("Failed to parse JSON")?;
+    
+    Ok(parsed)
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="3-高级配置管理"><a class="header" href="#3-高级配置管理">3. 高级配置管理</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use config::{Config, ConfigError, Environment, File};
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+struct Settings {
+    database_url: String,
+    server_port: u16,
+    log_level: String,
+}
+
+fn load_config() -&gt; Result&lt;Settings, ConfigError&gt; {
+    Config::builder()
+        // 加载默认配置
+        .add_source(File::with_name("config/default"))
+        // 加载环境特定配置
+        .add_source(File::with_name("config/production").required(false))
+        // 环境变量覆盖
+        .add_source(Environment::with_prefix("APP"))
+        .build()?
+        .try_deserialize()
+}
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<h2 id="-相关章节-4"><a class="header" href="#-相关章节-4">📖 相关章节</a></h2>
+<ul>
+<li><strong><a href="c11/./foundations.html">基础概念</a></strong> - 库生态概览</li>
+<li><strong><a href="c11/./guides.html">实践指南</a></strong> - 使用指南</li>
+<li><strong><a href="c11/./examples.html">代码示例</a></strong> - 实战案例 ⭐</li>
+<li><strong><a href="c11/./README.html">返回模块首页</a></strong></li>
+</ul>
+<hr />
+<h2 id="-扩展学习-4"><a class="header" href="#-扩展学习-4">🔗 扩展学习</a></h2>
+<h3 id="深入阅读-4"><a class="header" href="#深入阅读-4">深入阅读</a></h3>
+<ul>
+<li><a href="c11/../../crates/c11_libraries/README.html">Rust库生态全景</a></li>
+<li><a href="https://github.com/rust-unofficial/awesome-rust">Awesome Rust</a></li>
+<li><a href="https://crates.io/">crates.io</a></li>
+</ul>
+<h3 id="相关模块-4"><a class="header" href="#相关模块-4">相关模块</a></h3>
+<ul>
+<li><strong><a href="c11/../c10/README.html">C10: 网络编程</a></strong> - 网络库应用</li>
+<li><strong><a href="c11/../c06/README.html">C06: 异步编程</a></strong> - tokio详解</li>
+<li><strong><a href="c11/../c02/README.html">C02: 类型系统</a></strong> - serde原理</li>
+</ul>
+<hr />
+<h2 id="-实践建议-1"><a class="header" href="#-实践建议-1">🎯 实践建议</a></h2>
+<h3 id="库选择决策树"><a class="header" href="#库选择决策树">库选择决策树</a></h3>
+<pre><code class="language-text">需要序列化？
+└─ serde + serde_json/bincode/toml
+
+需要异步？
+└─ tokio（完整生态）或 async-std（简洁）
+
+需要Web服务？
+├─ 性能优先 → actix-web
+├─ 现代化 → axum
+└─ 易用性 → rocket
+
+需要数据库？
+├─ 编译时安全 → sqlx
+└─ ORM → diesel, sea-orm
+
+需要CLI？
+└─ clap（功能丰富）或 structopt（简洁）
+</code></pre>
+<h3 id="库组合最佳实践"><a class="header" href="#库组合最佳实践">库组合最佳实践</a></h3>
+<pre><pre class="playground"><code class="language-rust">// 典型Web应用技术栈
+use axum::{Router, routing::get};     // Web框架
+use sqlx::PgPool;                      // 数据库
+use serde::{Deserialize, Serialize};  // 序列化
+use tracing::{info, instrument};       // 日志追踪
+use anyhow::Result;                    // 错误处理
+use tokio::runtime::Runtime;           // 异步运行时
+
+#[tokio::main]
+async fn main() -&gt; Result&lt;()&gt; {
+    // 初始化追踪
+    tracing_subscriber::fmt::init();
+    
+    // 连接数据库
+    let pool = PgPool::connect(&amp;env::var("DATABASE_URL")?).await?;
+    
+    // 构建应用
+    let app = Router::new()
+        .route("/", get(handler))
+        .with_state(pool);
+    
+    // 启动服务器
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await?;
+    info!("Server started on port 3000");
+    
+    axum::serve(listener, app).await?;
+    Ok(())
+}</code></pre></pre>
+<hr />
+<p><strong>掌握常用库是高效Rust开发的关键！</strong> 🚀</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="c12-领域建模"><a class="header" href="#c12-领域建模">C12: 领域建模</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念-11"><a class="header" href="#基础概念-11">基础概念</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南-11"><a class="header" href="#实践指南-11">实践指南</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例-11"><a class="header" href="#代码示例-11">代码示例</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="知识图谱-11"><a class="header" href="#知识图谱-11">知识图谱</a></h1>
+<p>本页展示领域建模与形式方法的概念关系。</p>
+<hr />
+<h2 id="-核心概念关系图-5"><a class="header" href="#-核心概念关系图-5">📊 核心概念关系图</a></h2>
+<pre><code class="language-text">                   [领域建模]
+                         |
+         +---------------+---------------+
+         |               |               |
+    [形式语义]     [分布式系统]    [并发模型]
+         |               |               |
+    +----+----+     +----+----+     +----+----+
+    |    |    |     |    |    |     |    |    |
+  操作  指称 公理   Raft  Paxos  Actor  CSP  STM
+  语义  语义 语义   共识  共识   模型  模型  模型
+</code></pre>
+<hr />
+<h2 id="-概念层次-5"><a class="header" href="#-概念层次-5">🎯 概念层次</a></h2>
+<h3 id="1-形式语义-formal-semantics"><a class="header" href="#1-形式语义-formal-semantics">1. 形式语义 (Formal Semantics)</a></h3>
+<p><strong>语义模型</strong>:</p>
+<ul>
+<li>
+<p><strong>操作语义</strong> (Operational Semantics):</p>
+<ul>
+<li>小步语义 (Small-step)</li>
+<li>大步语义 (Big-step)</li>
+<li>状态转换系统</li>
+</ul>
+</li>
+<li>
+<p><strong>指称语义</strong> (Denotational Semantics):</p>
+<ul>
+<li>数学函数映射</li>
+<li>域理论</li>
+<li>组合性原则</li>
+</ul>
+</li>
+<li>
+<p><strong>公理语义</strong> (Axiomatic Semantics):</p>
+<ul>
+<li>Hoare逻辑</li>
+<li>最弱前置条件</li>
+<li>程序验证</li>
+</ul>
+</li>
+</ul>
+<p><strong>等价性分析</strong>:</p>
+<ul>
+<li>语义等价</li>
+<li>观察等价</li>
+<li>行为等价</li>
+</ul>
+<hr />
+<h3 id="2-分布式系统-distributed-systems"><a class="header" href="#2-分布式系统-distributed-systems">2. 分布式系统 (Distributed Systems)</a></h3>
+<p><strong>共识算法</strong>:</p>
+<ul>
+<li>
+<p><strong>Raft</strong>: 易理解的共识算法</p>
+<ul>
+<li>Leader选举</li>
+<li>日志复制</li>
+<li>安全性保证</li>
+</ul>
+</li>
+<li>
+<p><strong>Paxos</strong>: 经典共识算法</p>
+<ul>
+<li>Basic Paxos</li>
+<li>Multi-Paxos</li>
+<li>Fast Paxos</li>
+</ul>
+</li>
+<li>
+<p><strong>2PC/3PC</strong>: 两阶段/三阶段提交</p>
+<ul>
+<li>事务协调</li>
+<li>故障恢复</li>
+</ul>
+</li>
+</ul>
+<p><strong>分布式模型</strong>:</p>
+<ul>
+<li><strong>分布式快照</strong>: Chandy-Lamport算法</li>
+<li><strong>向量时钟</strong>: 因果关系追踪</li>
+<li><strong>CAP定理</strong>: 一致性权衡</li>
+<li><strong>最终一致性</strong>: 弱一致性模型</li>
+</ul>
+<hr />
+<h3 id="3-并发模型-concurrency-models"><a class="header" href="#3-并发模型-concurrency-models">3. 并发模型 (Concurrency Models)</a></h3>
+<p><strong>消息传递</strong>:</p>
+<ul>
+<li>
+<p><strong>Actor模型</strong>:</p>
+<ul>
+<li>独立计算实体</li>
+<li>消息异步传递</li>
+<li>位置透明性</li>
+</ul>
+</li>
+<li>
+<p><strong>CSP模型</strong> (Communicating Sequential Processes):</p>
+<ul>
+<li>通道通信</li>
+<li>进程同步</li>
+<li>组合性</li>
+</ul>
+</li>
+</ul>
+<p><strong>共享内存</strong>:</p>
+<ul>
+<li>
+<p><strong>内存模型</strong>:</p>
+<ul>
+<li>Sequential Consistency</li>
+<li>Release/Acquire</li>
+<li>Relaxed Ordering</li>
+</ul>
+</li>
+<li>
+<p><strong>STM</strong> (Software Transactional Memory):</p>
+<ul>
+<li>原子事务</li>
+<li>乐观并发</li>
+<li>冲突检测</li>
+</ul>
+</li>
+</ul>
+<p><strong>并发模式</strong>:</p>
+<ul>
+<li>Work-Stealing调度</li>
+<li>Fork-Join并行</li>
+<li>数据并行</li>
+<li>任务并行</li>
+</ul>
+<hr />
+<h2 id="-概念关联-5"><a class="header" href="#-概念关联-5">🔗 概念关联</a></h2>
+<h3 id="形式语义--rust类型系统"><a class="header" href="#形式语义--rust类型系统">形式语义 ←→ Rust类型系统</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Hoare逻辑在Rust中的体现
+// {前置条件} 代码 {后置条件}
+
+// 使用类型系统表达不变量
+pub struct SortedVec&lt;T: Ord&gt; {
+    inner: Vec&lt;T&gt;,
+}
+
+impl&lt;T: Ord&gt; SortedVec&lt;T&gt; {
+    // 前置条件: 无
+    // 后置条件: 返回空的有序向量
+    pub fn new() -&gt; Self {
+        SortedVec { inner: Vec::new() }
+    }
+    
+    // 前置条件: self是有序的
+    // 后置条件: self仍然有序，且包含value
+    pub fn insert(&amp;mut self, value: T) {
+        let pos = self.inner.binary_search(&amp;value).unwrap_or_else(|e| e);
+        self.inner.insert(pos, value);
+        // 不变量: inner始终保持有序
+    }
+    
+    // 公理: 对于任何i &lt; j，inner[i] &lt;= inner[j]
+    pub fn is_sorted(&amp;self) -&gt; bool {
+        self.inner.windows(2).all(|w| w[0] &lt;= w[1])
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="raft--分布式一致性"><a class="header" href="#raft--分布式一致性">Raft ←→ 分布式一致性</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::collections::HashMap;
+
+// Raft节点状态
+enum NodeState {
+    Follower,
+    Candidate,
+    Leader,
+}
+
+// 日志条目
+struct LogEntry {
+    term: u64,
+    command: String,
+}
+
+// Raft节点
+struct RaftNode {
+    state: NodeState,
+    current_term: u64,
+    voted_for: Option&lt;u64&gt;,
+    log: Vec&lt;LogEntry&gt;,
+    commit_index: usize,
+    last_applied: usize,
+}
+
+impl RaftNode {
+    pub fn new() -&gt; Self {
+        RaftNode {
+            state: NodeState::Follower,
+            current_term: 0,
+            voted_for: None,
+            log: Vec::new(),
+            commit_index: 0,
+            last_applied: 0,
+        }
+    }
+    
+    // Leader选举
+    pub fn start_election(&amp;mut self) {
+        self.state = NodeState::Candidate;
+        self.current_term += 1;
+        self.voted_for = Some(self.get_id());
+    }
+    
+    // 日志复制
+    pub fn append_entry(&amp;mut self, entry: LogEntry) {
+        if matches!(self.state, NodeState::Leader) {
+            self.log.push(entry);
+        }
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="actor模型--消息传递"><a class="header" href="#actor模型--消息传递">Actor模型 ←→ 消息传递</a></h3>
+<pre><pre class="playground"><code class="language-rust">use tokio::sync::mpsc;
+
+// Actor消息
+enum Message {
+    Get(String, tokio::sync::oneshot::Sender&lt;Option&lt;String&gt;&gt;),
+    Set(String, String),
+}
+
+// 键值存储Actor
+struct KVActor {
+    store: std::collections::HashMap&lt;String, String&gt;,
+    receiver: mpsc::Receiver&lt;Message&gt;,
+}
+
+impl KVActor {
+    fn new() -&gt; (Self, mpsc::Sender&lt;Message&gt;) {
+        let (tx, rx) = mpsc::channel(32);
+        let actor = KVActor {
+            store: std::collections::HashMap::new(),
+            receiver: rx,
+        };
+        (actor, tx)
+    }
+    
+    async fn run(mut self) {
+        while let Some(msg) = self.receiver.recv().await {
+            match msg {
+                Message::Get(key, reply) =&gt; {
+                    let value = self.store.get(&amp;key).cloned();
+                    let _ = reply.send(value);
+                }
+                Message::Set(key, value) =&gt; {
+                    self.store.insert(key, value);
+                }
+            }
+        }
+    }
+}
+
+// 使用示例
+#[tokio::main]
+async fn main() {
+    let (actor, sender) = KVActor::new();
+    tokio::spawn(actor.run());
+    
+    // 发送Set消息
+    sender.send(Message::Set("key".to_string(), "value".to_string())).await.unwrap();
+    
+    // 发送Get消息
+    let (tx, rx) = tokio::sync::oneshot::channel();
+    sender.send(Message::Get("key".to_string(), tx)).await.unwrap();
+    let value = rx.await.unwrap();
+    println!("Value: {:?}", value);
+}</code></pre></pre>
+<hr />
+<h2 id="-学习路径图-5"><a class="header" href="#-学习路径图-5">📚 学习路径图</a></h2>
+<pre><code class="language-text">第一步: 理解形式语义基础
+    ↓
+第二步: 学习分布式系统模型
+    ↓
+第三步: 掌握并发编程模型
+    ↓
+第四步: 形式化验证方法
+    ↓
+第五步: 实战应用与建模
+</code></pre>
+<hr />
+<h2 id="-模型分类体系"><a class="header" href="#-模型分类体系">🎓 模型分类体系</a></h2>
+<h3 id="语义模型对比"><a class="header" href="#语义模型对比">语义模型对比</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>模型</th><th>特点</th><th>适用场景</th></tr></thead><tbody>
+<tr><td><strong>操作语义</strong></td><td>直观、机械化</td><td>实现验证</td></tr>
+<tr><td><strong>指称语义</strong></td><td>数学化、组合性</td><td>理论分析</td></tr>
+<tr><td><strong>公理语义</strong></td><td>逻辑化、证明</td><td>程序验证</td></tr>
+</tbody></table>
+</div>
+<h3 id="共识算法对比"><a class="header" href="#共识算法对比">共识算法对比</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>算法</th><th>复杂度</th><th>性能</th><th>容错性</th></tr></thead><tbody>
+<tr><td><strong>Raft</strong></td><td>中等</td><td>良好</td><td>f &lt; n/2</td></tr>
+<tr><td><strong>Paxos</strong></td><td>高</td><td>优秀</td><td>f &lt; n/2</td></tr>
+<tr><td><strong>2PC</strong></td><td>低</td><td>一般</td><td>不容错</td></tr>
+<tr><td><strong>3PC</strong></td><td>中等</td><td>一般</td><td>部分容错</td></tr>
+</tbody></table>
+</div>
+<h3 id="并发模型对比"><a class="header" href="#并发模型对比">并发模型对比</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>模型</th><th>通信方式</th><th>状态共享</th><th>适用场景</th></tr></thead><tbody>
+<tr><td><strong>Actor</strong></td><td>消息传递</td><td>无</td><td>分布式系统</td></tr>
+<tr><td><strong>CSP</strong></td><td>通道同步</td><td>无</td><td>并发流程</td></tr>
+<tr><td><strong>STM</strong></td><td>事务</td><td>有</td><td>复杂共享状态</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="-核心原则-5"><a class="header" href="#-核心原则-5">💡 核心原则</a></h2>
+<h3 id="1-形式化思维"><a class="header" href="#1-形式化思维">1. 形式化思维</a></h3>
+<pre><code class="language-text">形式语义 → 精确定义 → 可验证性
+</code></pre>
+<h3 id="2-分布式设计"><a class="header" href="#2-分布式设计">2. 分布式设计</a></h3>
+<pre><code class="language-text">CAP定理 → 权衡选择 → 最终一致性
+</code></pre>
+<h3 id="3-并发安全"><a class="header" href="#3-并发安全">3. 并发安全</a></h3>
+<pre><code class="language-text">类型系统 → 编译时检查 → 线程安全
+</code></pre>
+<hr />
+<h2 id="-rust-190-特性应用-1"><a class="header" href="#-rust-190-特性应用-1">🔍 Rust 1.90 特性应用</a></h2>
+<h3 id="1-类型级建模"><a class="header" href="#1-类型级建模">1. 类型级建模</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 使用类型系统表达领域模型
+use std::marker::PhantomData;
+
+// 状态标记
+struct Draft;
+struct Published;
+struct Archived;
+
+// 文章状态机
+struct Article&lt;State&gt; {
+    content: String,
+    _state: PhantomData&lt;State&gt;,
+}
+
+impl Article&lt;Draft&gt; {
+    fn new(content: String) -&gt; Self {
+        Article {
+            content,
+            _state: PhantomData,
+        }
+    }
+    
+    fn publish(self) -&gt; Article&lt;Published&gt; {
+        Article {
+            content: self.content,
+            _state: PhantomData,
+        }
+    }
+}
+
+impl Article&lt;Published&gt; {
+    fn archive(self) -&gt; Article&lt;Archived&gt; {
+        Article {
+            content: self.content,
+            _state: PhantomData,
+        }
+    }
+}
+
+// 编译时保证状态转换正确
+let article = Article::&lt;Draft&gt;::new("Hello".to_string());
+let published = article.publish();
+let archived = published.archive();
+<span class="boring">}</span></code></pre></pre>
+<h3 id="2-异步分布式模型"><a class="header" href="#2-异步分布式模型">2. 异步分布式模型</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use tokio::sync::{mpsc, RwLock};
+use std::sync::Arc;
+
+// 分布式缓存节点
+struct CacheNode {
+    id: u64,
+    data: Arc&lt;RwLock&lt;HashMap&lt;String, String&gt;&gt;&gt;,
+    peers: Vec&lt;mpsc::Sender&lt;CacheMessage&gt;&gt;,
+}
+
+enum CacheMessage {
+    Put(String, String),
+    Get(String, tokio::sync::oneshot::Sender&lt;Option&lt;String&gt;&gt;),
+    Sync(HashMap&lt;String, String&gt;),
+}
+
+impl CacheNode {
+    async fn handle_message(&amp;self, msg: CacheMessage) {
+        match msg {
+            CacheMessage::Put(key, value) =&gt; {
+                // 写入本地
+                self.data.write().await.insert(key.clone(), value.clone());
+                
+                // 同步到其他节点
+                for peer in &amp;self.peers {
+                    let mut sync_data = HashMap::new();
+                    sync_data.insert(key.clone(), value.clone());
+                    let _ = peer.send(CacheMessage::Sync(sync_data)).await;
+                }
+            }
+            CacheMessage::Get(key, reply) =&gt; {
+                let value = self.data.read().await.get(&amp;key).cloned();
+                let _ = reply.send(value);
+            }
+            CacheMessage::Sync(data) =&gt; {
+                // 合并远程数据
+                let mut local = self.data.write().await;
+                local.extend(data);
+            }
+        }
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="3-形式化验证"><a class="header" href="#3-形式化验证">3. 形式化验证</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 使用proptest进行属性测试
+use proptest::prelude::*;
+
+proptest! {
+    #[test]
+    fn sorted_vec_maintains_order(values in prop::collection::vec(0..1000, 0..100)) {
+        let mut sorted = SortedVec::new();
+        for v in values {
+            sorted.insert(v);
+        }
+        
+        // 验证不变量：向量始终有序
+        prop_assert!(sorted.is_sorted());
+    }
+    
+    #[test]
+    fn raft_log_append_preserves_order(
+        entries in prop::collection::vec(any::&lt;u64&gt;(), 0..100)
+    ) {
+        let mut node = RaftNode::new();
+        for term in entries {
+            node.append_entry(LogEntry {
+                term,
+                command: format!("cmd{}", term),
+            });
+        }
+        
+        // 验证：日志term单调递增
+        prop_assert!(node.log.windows(2).all(|w| w[0].term &lt;= w[1].term));
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<h2 id="-相关章节-5"><a class="header" href="#-相关章节-5">📖 相关章节</a></h2>
+<ul>
+<li><strong><a href="c12/./foundations.html">基础概念</a></strong> - 建模理论</li>
+<li><strong><a href="c12/./guides.html">实践指南</a></strong> - 实现技巧</li>
+<li><strong><a href="c12/./examples.html">代码示例</a></strong> - 完整实现 ⭐</li>
+<li><strong><a href="c12/./README.html">返回模块首页</a></strong></li>
+</ul>
+<hr />
+<h2 id="-扩展学习-5"><a class="header" href="#-扩展学习-5">🔗 扩展学习</a></h2>
+<h3 id="深入阅读-5"><a class="header" href="#深入阅读-5">深入阅读</a></h3>
+<ul>
+<li><a href="c12/../../crates/c12_model/README.html">形式化方法详解</a></li>
+<li><a href="https://lamport.azurewebsites.net/tla/tla.html">TLA+规范语言</a></li>
+<li><a href="https://raft.github.io/">Raft论文</a></li>
+</ul>
+<h3 id="相关模块-5"><a class="header" href="#相关模块-5">相关模块</a></h3>
+<ul>
+<li><strong><a href="c12/../c05/README.html">C05: 多线程</a></strong> - 并发基础</li>
+<li><strong><a href="c12/../c06/README.html">C06: 异步编程</a></strong> - 异步模型</li>
+<li><strong><a href="c12/../c13/README.html">C13: 可靠性</a></strong> - 分布式容错</li>
+</ul>
+<hr />
+<h2 id="-实践项目建议-2"><a class="header" href="#-实践项目建议-2">🎯 实践项目建议</a></h2>
+<h3 id="入门级-2"><a class="header" href="#入门级-2">入门级</a></h3>
+<ul>
+<li>简单状态机</li>
+<li>类型级建模</li>
+<li>Actor示例</li>
+</ul>
+<h3 id="进阶级-2"><a class="header" href="#进阶级-2">进阶级</a></h3>
+<ul>
+<li>Raft共识实现</li>
+<li>分布式缓存</li>
+<li>CSP通道模式</li>
+</ul>
+<h3 id="高级-2"><a class="header" href="#高级-2">高级</a></h3>
+<ul>
+<li>形式化验证</li>
+<li>分布式事务</li>
+<li>自定义DSL</li>
+</ul>
+<hr />
+<p><strong>掌握形式化建模是构建可靠系统的关键！</strong> 🚀</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="c13-可靠性工程"><a class="header" href="#c13-可靠性工程">C13: 可靠性工程</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念-12"><a class="header" href="#基础概念-12">基础概念</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南-12"><a class="header" href="#实践指南-12">实践指南</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例-12"><a class="header" href="#代码示例-12">代码示例</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="知识图谱-12"><a class="header" href="#知识图谱-12">知识图谱</a></h1>
+<p>本页展示可靠性工程的概念关系。</p>
+<hr />
+<h2 id="-核心概念关系图-6"><a class="header" href="#-核心概念关系图-6">📊 核心概念关系图</a></h2>
+<pre><code class="language-text">                   [可靠性工程]
+                         |
+         +---------------+---------------+
+         |               |               |
+     [容错机制]      [分布式特性]   [可观测性]
+         |               |               |
+    +----+----+     +----+----+     +----+----+
+    |    |    |     |    |    |     |    |    |
+  熔断  限流  重试   共识  事务  指标  日志  追踪
+  器    器          一致性 一致性            链路
+</code></pre>
+<hr />
+<h2 id="-概念层次-6"><a class="header" href="#-概念层次-6">🎯 概念层次</a></h2>
+<h3 id="1-容错机制-fault-tolerance"><a class="header" href="#1-容错机制-fault-tolerance">1. 容错机制 (Fault Tolerance)</a></h3>
+<p><strong>熔断器</strong> (Circuit Breaker):</p>
+<ul>
+<li><strong>状态</strong>: Closed, Open, Half-Open</li>
+<li><strong>阈值</strong>: 失败率、错误数量、响应时间</li>
+<li><strong>恢复</strong>: 渐进式恢复、健康检查</li>
+</ul>
+<p><strong>限流器</strong> (Rate Limiter):</p>
+<ul>
+<li><strong>令牌桶</strong> (Token Bucket): 平滑限流</li>
+<li><strong>漏桶</strong> (Leaky Bucket): 流量整形</li>
+<li><strong>固定窗口</strong> (Fixed Window): 简单计数</li>
+<li><strong>滑动窗口</strong> (Sliding Window): 精确控制</li>
+<li><strong>滑动日志</strong> (Sliding Log): 精确但昂贵</li>
+</ul>
+<p><strong>重试机制</strong> (Retry):</p>
+<ul>
+<li><strong>固定延迟</strong>: 简单重试</li>
+<li><strong>指数退避</strong> (Exponential Backoff): 智能重试</li>
+<li><strong>抖动</strong> (Jitter): 避免雪崩</li>
+<li><strong>超时控制</strong>: 快速失败</li>
+</ul>
+<p><strong>降级策略</strong> (Degradation):</p>
+<ul>
+<li><strong>功能降级</strong>: 关闭非核心功能</li>
+<li><strong>读写分离</strong>: 保护写入</li>
+<li><strong>缓存降级</strong>: 返回缓存数据</li>
+</ul>
+<hr />
+<h3 id="2-分布式特性-distributed-features"><a class="header" href="#2-分布式特性-distributed-features">2. 分布式特性 (Distributed Features)</a></h3>
+<p><strong>共识算法</strong>:</p>
+<ul>
+<li><strong>Raft</strong>: Leader-based共识</li>
+<li><strong>Paxos</strong>: 经典共识算法</li>
+<li><strong>Gossip</strong>: 最终一致性协议</li>
+</ul>
+<p><strong>事务一致性</strong>:</p>
+<ul>
+<li><strong>2PC</strong>: 两阶段提交</li>
+<li><strong>3PC</strong>: 三阶段提交</li>
+<li><strong>Saga</strong>: 长事务模式</li>
+<li><strong>TCC</strong>: Try-Confirm-Cancel</li>
+</ul>
+<p><strong>一致性哈希</strong>:</p>
+<ul>
+<li><strong>虚拟节点</strong>: 负载均衡</li>
+<li><strong>数据分片</strong>: 横向扩展</li>
+<li><strong>故障转移</strong>: 高可用性</li>
+</ul>
+<p><strong>服务发现</strong>:</p>
+<ul>
+<li><strong>客户端发现</strong>: 直接连接</li>
+<li><strong>服务端发现</strong>: 负载均衡</li>
+<li><strong>健康检查</strong>: 自动剔除</li>
+</ul>
+<hr />
+<h3 id="3-可观测性-observability"><a class="header" href="#3-可观测性-observability">3. 可观测性 (Observability)</a></h3>
+<p><strong>指标</strong> (Metrics):</p>
+<ul>
+<li><strong>Counter</strong>: 累计计数</li>
+<li><strong>Gauge</strong>: 瞬时值</li>
+<li><strong>Histogram</strong>: 分布统计</li>
+<li><strong>Summary</strong>: 摘要统计</li>
+</ul>
+<p><strong>日志</strong> (Logging):</p>
+<ul>
+<li><strong>结构化日志</strong>: 易于查询</li>
+<li><strong>日志级别</strong>: 分级管理</li>
+<li><strong>日志聚合</strong>: 集中存储</li>
+<li><strong>关联ID</strong>: 追踪请求</li>
+</ul>
+<p><strong>追踪</strong> (Tracing):</p>
+<ul>
+<li><strong>Span</strong>: 操作片段</li>
+<li><strong>Trace</strong>: 完整链路</li>
+<li><strong>采样</strong>: 性能优化</li>
+<li><strong>上下文传播</strong>: 跨服务追踪</li>
+</ul>
+<p><strong>告警</strong> (Alerting):</p>
+<ul>
+<li><strong>阈值告警</strong>: 超限通知</li>
+<li><strong>异常检测</strong>: 智能告警</li>
+<li><strong>告警聚合</strong>: 减少噪音</li>
+<li><strong>告警路由</strong>: 定向通知</li>
+</ul>
+<hr />
+<h2 id="-概念关联-6"><a class="header" href="#-概念关联-6">🔗 概念关联</a></h2>
+<h3 id="熔断器--系统保护"><a class="header" href="#熔断器--系统保护">熔断器 ←→ 系统保护</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::sync::{Arc, Mutex};
+use std::time::{Duration, Instant};
+
+// 熔断器状态
+#[derive(Clone, Copy, PartialEq)]
+enum CircuitState {
+    Closed,       // 正常状态
+    Open,         // 熔断状态
+    HalfOpen,     // 半开状态
+}
+
+// 熔断器
+struct CircuitBreaker {
+    state: Arc&lt;Mutex&lt;CircuitState&gt;&gt;,
+    failure_count: Arc&lt;Mutex&lt;usize&gt;&gt;,
+    threshold: usize,
+    timeout: Duration,
+    last_failure_time: Arc&lt;Mutex&lt;Option&lt;Instant&gt;&gt;&gt;,
+}
+
+impl CircuitBreaker {
+    fn new(threshold: usize, timeout: Duration) -&gt; Self {
+        CircuitBreaker {
+            state: Arc::new(Mutex::new(CircuitState::Closed)),
+            failure_count: Arc::new(Mutex::new(0)),
+            threshold,
+            timeout,
+            last_failure_time: Arc::new(Mutex::new(None)),
+        }
+    }
+    
+    async fn call&lt;F, T, E&gt;(&amp;self, f: F) -&gt; Result&lt;T, E&gt;
+    where
+        F: std::future::Future&lt;Output = Result&lt;T, E&gt;&gt;,
+    {
+        let state = *self.state.lock().unwrap();
+        
+        match state {
+            CircuitState::Open =&gt; {
+                // 检查是否应该进入半开状态
+                let last_failure = *self.last_failure_time.lock().unwrap();
+                if let Some(time) = last_failure {
+                    if time.elapsed() &gt; self.timeout {
+                        *self.state.lock().unwrap() = CircuitState::HalfOpen;
+                    } else {
+                        return Err(/* CircuitOpenError */);
+                    }
+                }
+            }
+            _ =&gt; {}
+        }
+        
+        // 执行调用
+        match f.await {
+            Ok(result) =&gt; {
+                self.on_success();
+                Ok(result)
+            }
+            Err(e) =&gt; {
+                self.on_failure();
+                Err(e)
+            }
+        }
+    }
+    
+    fn on_success(&amp;self) {
+        *self.failure_count.lock().unwrap() = 0;
+        *self.state.lock().unwrap() = CircuitState::Closed;
+    }
+    
+    fn on_failure(&amp;self) {
+        let mut count = self.failure_count.lock().unwrap();
+        *count += 1;
+        
+        if *count &gt;= self.threshold {
+            *self.state.lock().unwrap() = CircuitState::Open;
+            *self.last_failure_time.lock().unwrap() = Some(Instant::now());
+        }
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="限流器--流量控制"><a class="header" href="#限流器--流量控制">限流器 ←→ 流量控制</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::sync::Mutex;
+use std::time::{Duration, Instant};
+
+// 令牌桶限流器
+struct TokenBucket {
+    capacity: usize,          // 桶容量
+    tokens: Mutex&lt;f64&gt;,       // 当前令牌数
+    rate: f64,                // 令牌生成速率
+    last_refill: Mutex&lt;Instant&gt;,
+}
+
+impl TokenBucket {
+    fn new(capacity: usize, rate: f64) -&gt; Self {
+        TokenBucket {
+            capacity,
+            tokens: Mutex::new(capacity as f64),
+            rate,
+            last_refill: Mutex::new(Instant::now()),
+        }
+    }
+    
+    fn try_acquire(&amp;self, count: usize) -&gt; bool {
+        let mut tokens = self.tokens.lock().unwrap();
+        let mut last_refill = self.last_refill.lock().unwrap();
+        
+        // 补充令牌
+        let now = Instant::now();
+        let elapsed = now.duration_since(*last_refill).as_secs_f64();
+        let new_tokens = elapsed * self.rate;
+        *tokens = (*tokens + new_tokens).min(self.capacity as f64);
+        *last_refill = now;
+        
+        // 尝试获取令牌
+        if *tokens &gt;= count as f64 {
+            *tokens -= count as f64;
+            true
+        } else {
+            false
+        }
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="分布式追踪--链路监控"><a class="header" href="#分布式追踪--链路监控">分布式追踪 ←→ 链路监控</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::collections::HashMap;
+use std::time::{SystemTime, UNIX_EPOCH};
+
+// Span表示一个操作
+#[derive(Debug, Clone)]
+struct Span {
+    trace_id: String,         // 追踪ID
+    span_id: String,          // 当前Span ID
+    parent_span_id: Option&lt;String&gt;,  // 父Span ID
+    name: String,             // 操作名称
+    start_time: u64,          // 开始时间(微秒)
+    duration: Option&lt;u64&gt;,    // 持续时间(微秒)
+    tags: HashMap&lt;String, String&gt;,  // 标签
+}
+
+impl Span {
+    fn new(trace_id: String, name: String) -&gt; Self {
+        let now = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_micros() as u64;
+        
+        Span {
+            trace_id,
+            span_id: uuid::Uuid::new_v4().to_string(),
+            parent_span_id: None,
+            name,
+            start_time: now,
+            duration: None,
+            tags: HashMap::new(),
+        }
+    }
+    
+    fn with_parent(trace_id: String, parent_id: String, name: String) -&gt; Self {
+        let mut span = Self::new(trace_id, name);
+        span.parent_span_id = Some(parent_id);
+        span
+    }
+    
+    fn finish(&amp;mut self) {
+        let now = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_micros() as u64;
+        
+        self.duration = Some(now - self.start_time);
+    }
+    
+    fn add_tag(&amp;mut self, key: String, value: String) {
+        self.tags.insert(key, value);
+    }
+}
+
+// 使用示例
+async fn process_request() {
+    let trace_id = uuid::Uuid::new_v4().to_string();
+    
+    // 创建根Span
+    let mut root_span = Span::new(trace_id.clone(), "process_request".to_string());
+    
+    // 创建子Span
+    let mut db_span = Span::with_parent(
+        trace_id.clone(),
+        root_span.span_id.clone(),
+        "database_query".to_string()
+    );
+    
+    // 执行数据库查询
+    // ...
+    
+    db_span.finish();
+    root_span.finish();
+    
+    // 上报到追踪系统
+}
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<h2 id="-学习路径图-6"><a class="header" href="#-学习路径图-6">📚 学习路径图</a></h2>
+<pre><code class="language-text">第一步: 理解容错基础（熔断、限流）
+    ↓
+第二步: 掌握分布式一致性
+    ↓
+第三步: 实现可观测性（指标、日志、追踪）
+    ↓
+第四步: 构建高可用系统
+    ↓
+第五步: 性能优化与调优
+</code></pre>
+<hr />
+<h2 id="-可靠性模式对比"><a class="header" href="#-可靠性模式对比">🎓 可靠性模式对比</a></h2>
+<h3 id="容错机制"><a class="header" href="#容错机制">容错机制</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>模式</th><th>目的</th><th>适用场景</th></tr></thead><tbody>
+<tr><td><strong>熔断器</strong></td><td>防止级联失败</td><td>服务调用</td></tr>
+<tr><td><strong>限流器</strong></td><td>保护系统资源</td><td>API网关</td></tr>
+<tr><td><strong>重试</strong></td><td>处理临时故障</td><td>网络请求</td></tr>
+<tr><td><strong>降级</strong></td><td>保护核心功能</td><td>过载情况</td></tr>
+</tbody></table>
+</div>
+<h3 id="一致性模型"><a class="header" href="#一致性模型">一致性模型</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>模型</th><th>一致性</th><th>可用性</th><th>性能</th></tr></thead><tbody>
+<tr><td><strong>强一致</strong></td><td>高</td><td>低</td><td>低</td></tr>
+<tr><td><strong>最终一致</strong></td><td>低</td><td>高</td><td>高</td></tr>
+<tr><td><strong>因果一致</strong></td><td>中</td><td>中</td><td>中</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="-核心原则-6"><a class="header" href="#-核心原则-6">💡 核心原则</a></h2>
+<h3 id="1-故障即常态"><a class="header" href="#1-故障即常态">1. 故障即常态</a></h3>
+<pre><code class="language-text">故障预期 → 容错设计 → 快速恢复
+</code></pre>
+<h3 id="2-可观测性优先"><a class="header" href="#2-可观测性优先">2. 可观测性优先</a></h3>
+<pre><code class="language-text">指标+日志+追踪 → 全面监控 → 快速定位
+</code></pre>
+<h3 id="3-渐进式降级"><a class="header" href="#3-渐进式降级">3. 渐进式降级</a></h3>
+<pre><code class="language-text">优雅降级 → 保护核心 → 用户体验
+</code></pre>
+<hr />
+<h2 id="-rust-190-特性应用-2"><a class="header" href="#-rust-190-特性应用-2">🔍 Rust 1.90 特性应用</a></h2>
+<h3 id="1-类型安全的容错"><a class="header" href="#1-类型安全的容错">1. 类型安全的容错</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 使用类型系统表达容错策略
+trait FallibleService {
+    type Output;
+    type Error;
+    
+    async fn call(&amp;self) -&gt; Result&lt;Self::Output, Self::Error&gt;;
+}
+
+// 容错装饰器
+struct ResilientService&lt;S&gt; {
+    inner: S,
+    circuit_breaker: CircuitBreaker,
+    rate_limiter: TokenBucket,
+}
+
+impl&lt;S&gt; ResilientService&lt;S&gt;
+where
+    S: FallibleService,
+{
+    async fn call_with_protection(&amp;self) -&gt; Result&lt;S::Output, S::Error&gt; {
+        // 限流检查
+        if !self.rate_limiter.try_acquire(1) {
+            return Err(/* RateLimitError */);
+        }
+        
+        // 熔断器保护
+        self.circuit_breaker.call(self.inner.call()).await
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="2-异步可观测性"><a class="header" href="#2-异步可观测性">2. 异步可观测性</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use tracing::{instrument, info, error};
+
+// 自动追踪
+#[instrument(skip(db))]
+async fn create_user(db: &amp;Database, name: String) -&gt; Result&lt;User, Error&gt; {
+    info!("Creating user: {}", name);
+    
+    let user = db.insert_user(name).await
+        .map_err(|e| {
+            error!("Failed to create user: {}", e);
+            e
+        })?;
+    
+    info!(user_id = %user.id, "User created successfully");
+    Ok(user)
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="3-高性能指标收集"><a class="header" href="#3-高性能指标收集">3. 高性能指标收集</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use prometheus::{Counter, Histogram, Registry};
+use std::time::Instant;
+
+// 指标定义
+struct Metrics {
+    request_count: Counter,
+    request_duration: Histogram,
+}
+
+impl Metrics {
+    fn new(registry: &amp;Registry) -&gt; Result&lt;Self, Box&lt;dyn std::error::Error&gt;&gt; {
+        let request_count = Counter::new("requests_total", "Total requests")?;
+        let request_duration = Histogram::new("request_duration_seconds", "Request duration")?;
+        
+        registry.register(Box::new(request_count.clone()))?;
+        registry.register(Box::new(request_duration.clone()))?;
+        
+        Ok(Metrics {
+            request_count,
+            request_duration,
+        })
+    }
+    
+    async fn track&lt;F, T&gt;(&amp;self, f: F) -&gt; T
+    where
+        F: std::future::Future&lt;Output = T&gt;,
+    {
+        let start = Instant::now();
+        self.request_count.inc();
+        
+        let result = f.await;
+        
+        let duration = start.elapsed().as_secs_f64();
+        self.request_duration.observe(duration);
+        
+        result
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<h2 id="-相关章节-6"><a class="header" href="#-相关章节-6">📖 相关章节</a></h2>
+<ul>
+<li><strong><a href="c13/./foundations.html">基础概念</a></strong> - 可靠性理论</li>
+<li><strong><a href="c13/./guides.html">实践指南</a></strong> - 实战技巧</li>
+<li><strong><a href="c13/./examples.html">代码示例</a></strong> - 完整实现 ⭐</li>
+<li><strong><a href="c13/./README.html">返回模块首页</a></strong></li>
+</ul>
+<hr />
+<h2 id="-扩展学习-6"><a class="header" href="#-扩展学习-6">🔗 扩展学习</a></h2>
+<h3 id="深入阅读-6"><a class="header" href="#深入阅读-6">深入阅读</a></h3>
+<ul>
+<li><a href="c13/../../crates/c13_reliability/README.html">可靠性工程完整指南</a></li>
+<li><a href="https://sre.google/books/">Google SRE Book</a></li>
+<li><a href="https://pragprog.com/titles/mnee2/">Release It!</a></li>
+</ul>
+<h3 id="相关模块-6"><a class="header" href="#相关模块-6">相关模块</a></h3>
+<ul>
+<li><strong><a href="c13/../c10/README.html">C10: 网络编程</a></strong> - 网络容错</li>
+<li><strong><a href="c13/../c12/README.html">C12: 领域建模</a></strong> - 分布式模型</li>
+<li><strong><a href="c13/../c06/README.html">C06: 异步编程</a></strong> - 异步基础</li>
+</ul>
+<hr />
+<h2 id="-实践项目建议-3"><a class="header" href="#-实践项目建议-3">🎯 实践项目建议</a></h2>
+<h3 id="入门级-3"><a class="header" href="#入门级-3">入门级</a></h3>
+<ul>
+<li>熔断器实现</li>
+<li>令牌桶限流</li>
+<li>简单重试机制</li>
+</ul>
+<h3 id="进阶级-3"><a class="header" href="#进阶级-3">进阶级</a></h3>
+<ul>
+<li>分布式追踪系统</li>
+<li>服务网格</li>
+<li>指标监控平台</li>
+</ul>
+<h3 id="高级-3"><a class="header" href="#高级-3">高级</a></h3>
+<ul>
+<li>混沌工程平台</li>
+<li>自动降级系统</li>
+<li>分布式事务框架</li>
+</ul>
+<hr />
+<h2 id="-可靠性指标"><a class="header" href="#-可靠性指标">📊 可靠性指标</a></h2>
+<h3 id="sla目标"><a class="header" href="#sla目标">SLA目标</a></h3>
+<pre><code class="language-text">可用性 = (总时间 - 故障时间) / 总时间
+
+99%    → 3.65天/年停机
+99.9%  → 8.76小时/年停机
+99.99% → 52.56分钟/年停机
+99.999% → 5.26分钟/年停机
+</code></pre>
+<h3 id="监控指标"><a class="header" href="#监控指标">监控指标</a></h3>
+<ul>
+<li><strong>延迟</strong>: P50, P95, P99</li>
+<li><strong>吞吐量</strong>: QPS, TPS</li>
+<li><strong>错误率</strong>: 4xx, 5xx</li>
+<li><strong>饱和度</strong>: CPU, 内存, 磁盘</li>
+</ul>
+<hr />
+<p><strong>可靠性工程是构建生产级系统的必备技能！</strong> 🚀</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="c14-宏系统"><a class="header" href="#c14-宏系统">C14: 宏系统</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="基础概念-13"><a class="header" href="#基础概念-13">基础概念</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="实践指南-13"><a class="header" href="#实践指南-13">实践指南</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="代码示例-13"><a class="header" href="#代码示例-13">代码示例</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="知识图谱-13"><a class="header" href="#知识图谱-13">知识图谱</a></h1>
+<p>本页展示宏系统的概念关系。</p>
+<hr />
+<h2 id="-核心概念关系图-7"><a class="header" href="#-核心概念关系图-7">📊 核心概念关系图</a></h2>
+<pre><code class="language-text">                    [Rust宏系统]
+                         |
+         +---------------+---------------+
+         |               |               |
+     [声明宏]       [过程宏]         [元编程]
+         |               |               |
+    +----+----+     +----+----+     +----+----+
+    |    |    |     |    |    |     |    |    |
+  模式  递归  卫生   派生  属性  DSL  代码  编译时
+  匹配  展开  性    宏    宏    生成  生成  计算
+                  函数式宏
+</code></pre>
+<hr />
+<h2 id="-概念层次-7"><a class="header" href="#-概念层次-7">🎯 概念层次</a></h2>
+<h3 id="1-声明宏-declarative-macros"><a class="header" href="#1-声明宏-declarative-macros">1. 声明宏 (Declarative Macros)</a></h3>
+<p><strong>macro_rules!</strong>:</p>
+<ul>
+<li><strong>模式匹配</strong>: 类似match表达式</li>
+<li><strong>重复</strong>: <code>$(...)</code> 语法</li>
+<li><strong>分隔符</strong>: <code>,</code>, <code>;</code> 等</li>
+<li><strong>片段指定符</strong>: <code>expr</code>, <code>ident</code>, <code>ty</code>, <code>pat</code> 等</li>
+</ul>
+<p><strong>特性</strong>:</p>
+<ul>
+<li><strong>卫生性</strong> (Hygiene): 避免名称冲突</li>
+<li><strong>递归展开</strong>: 宏调用宏</li>
+<li><strong>编译时执行</strong>: 零运行时开销</li>
+</ul>
+<p><strong>常见模式</strong>:</p>
+<ul>
+<li>DSL构建</li>
+<li>重复代码消除</li>
+<li>语法糖实现</li>
+</ul>
+<hr />
+<h3 id="2-过程宏-procedural-macros"><a class="header" href="#2-过程宏-procedural-macros">2. 过程宏 (Procedural Macros)</a></h3>
+<p><strong>派生宏</strong> (Derive Macros):</p>
+<ul>
+<li><strong>自动实现trait</strong>: <code>#[derive(Debug, Clone)]</code></li>
+<li><strong>代码生成</strong>: 基于结构体生成代码</li>
+<li><strong>自定义派生</strong>: 扩展derive功能</li>
+</ul>
+<p><strong>属性宏</strong> (Attribute Macros):</p>
+<ul>
+<li><strong>函数装饰</strong>: <code>#[attribute]</code></li>
+<li><strong>代码转换</strong>: 修改输入代码</li>
+<li><strong>AOP实现</strong>: 面向切面编程</li>
+</ul>
+<p><strong>函数式宏</strong> (Function-like Macros):</p>
+<ul>
+<li><strong>类似函数调用</strong>: <code>macro!()</code></li>
+<li><strong>任意输入</strong>: 不限于item</li>
+<li><strong>自由代码生成</strong>: 完全控制输出</li>
+</ul>
+<p><strong>实现基础</strong>:</p>
+<ul>
+<li><strong>TokenStream</strong>: 词法单元流</li>
+<li><strong>syn</strong>: 语法解析</li>
+<li><strong>quote</strong>: 代码生成</li>
+</ul>
+<hr />
+<h3 id="3-元编程-metaprogramming"><a class="header" href="#3-元编程-metaprogramming">3. 元编程 (Metaprogramming)</a></h3>
+<p><strong>编译时计算</strong>:</p>
+<ul>
+<li><strong>const fn</strong>: 编译时函数</li>
+<li><strong>const generics</strong>: 编译时泛型</li>
+<li><strong>type-level计算</strong>: 类型级编程</li>
+</ul>
+<p><strong>代码生成</strong>:</p>
+<ul>
+<li><strong>build脚本</strong>: build.rs</li>
+<li><strong>宏展开</strong>: 编译时代码生成</li>
+<li><strong>代码模板</strong>: 重复代码生成</li>
+</ul>
+<p><strong>DSL构建</strong>:</p>
+<ul>
+<li><strong>内部DSL</strong>: 使用宏扩展语法</li>
+<li><strong>外部DSL</strong>: 独立语言</li>
+<li><strong>类型安全</strong>: 编译时检查</li>
+</ul>
+<hr />
+<h2 id="-概念关联-7"><a class="header" href="#-概念关联-7">🔗 概念关联</a></h2>
+<h3 id="声明宏--模式匹配"><a class="header" href="#声明宏--模式匹配">声明宏 ←→ 模式匹配</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 向量创建宏
+macro_rules! vec_of {
+    // 单一值重复N次
+    ($elem:expr; $n:expr) =&gt; {
+        {
+            let mut v = Vec::new();
+            for _ in 0..$n {
+                v.push($elem);
+            }
+            v
+        }
+    };
+    
+    // 可变数量的值
+    ($($x:expr),+ $(,)?) =&gt; {
+        {
+            let mut v = Vec::new();
+            $(
+                v.push($x);
+            )+
+            v
+        }
+    };
+}
+
+// 使用示例
+let v1 = vec_of![0; 5];           // [0, 0, 0, 0, 0]
+let v2 = vec_of![1, 2, 3, 4, 5];  // [1, 2, 3, 4, 5]
+<span class="boring">}</span></code></pre></pre>
+<h3 id="派生宏--自动实现"><a class="header" href="#派生宏--自动实现">派生宏 ←→ 自动实现</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use proc_macro::TokenStream;
+use quote::quote;
+use syn::{parse_macro_input, DeriveInput};
+
+// 派生宏定义
+#[proc_macro_derive(Builder)]
+pub fn derive_builder(input: TokenStream) -&gt; TokenStream {
+    let input = parse_macro_input!(input as DeriveInput);
+    let name = &amp;input.ident;
+    let builder_name = format!("{}Builder", name);
+    let builder_ident = syn::Ident::new(&amp;builder_name, name.span());
+    
+    // 提取字段
+    let fields = if let syn::Data::Struct(data) = &amp;input.data {
+        &amp;data.fields
+    } else {
+        panic!("Builder只能用于结构体");
+    };
+    
+    // 生成builder字段
+    let builder_fields = fields.iter().map(|f| {
+        let name = &amp;f.ident;
+        let ty = &amp;f.ty;
+        quote! { #name: Option&lt;#ty&gt; }
+    });
+    
+    // 生成setter方法
+    let setters = fields.iter().map(|f| {
+        let name = &amp;f.ident;
+        let ty = &amp;f.ty;
+        quote! {
+            pub fn #name(mut self, #name: #ty) -&gt; Self {
+                self.#name = Some(#name);
+                self
+            }
+        }
+    });
+    
+    // 生成build方法
+    let build_fields = fields.iter().map(|f| {
+        let name = &amp;f.ident;
+        quote! {
+            #name: self.#name.ok_or(concat!(stringify!(#name), " is required"))?
+        }
+    });
+    
+    // 生成最终代码
+    let expanded = quote! {
+        pub struct #builder_ident {
+            #(#builder_fields,)*
+        }
+        
+        impl #builder_ident {
+            pub fn new() -&gt; Self {
+                Self {
+                    #(#name: None,)*
+                }
+            }
+            
+            #(#setters)*
+            
+            pub fn build(self) -&gt; Result&lt;#name, String&gt; {
+                Ok(#name {
+                    #(#build_fields,)*
+                })
+            }
+        }
+        
+        impl #name {
+            pub fn builder() -&gt; #builder_ident {
+                #builder_ident::new()
+            }
+        }
+    };
+    
+    TokenStream::from(expanded)
+}
+
+// 使用示例
+#[derive(Builder)]
+struct Config {
+    host: String,
+    port: u16,
+}
+
+// 自动生成
+let config = Config::builder()
+    .host("localhost".to_string())
+    .port(8080)
+    .build()
+    .unwrap();
+<span class="boring">}</span></code></pre></pre>
+<h3 id="属性宏--aop"><a class="header" href="#属性宏--aop">属性宏 ←→ AOP</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use proc_macro::TokenStream;
+use quote::quote;
+use syn::{parse_macro_input, ItemFn};
+
+// 计时属性宏
+#[proc_macro_attribute]
+pub fn timed(_attr: TokenStream, item: TokenStream) -&gt; TokenStream {
+    let input = parse_macro_input!(item as ItemFn);
+    let fn_name = &amp;input.sig.ident;
+    let fn_block = &amp;input.block;
+    let fn_sig = &amp;input.sig;
+    
+    let expanded = quote! {
+        #fn_sig {
+            let start = std::time::Instant::now();
+            let result = (|| #fn_block)();
+            let duration = start.elapsed();
+            println!("{} took {:?}", stringify!(#fn_name), duration);
+            result
+        }
+    };
+    
+    TokenStream::from(expanded)
+}
+
+// 使用示例
+#[timed]
+fn expensive_operation() {
+    std::thread::sleep(std::time::Duration::from_millis(100));
+}
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<h2 id="-学习路径图-7"><a class="header" href="#-学习路径图-7">📚 学习路径图</a></h2>
+<pre><code class="language-text">第一步: 理解宏的基本概念
+    ↓
+第二步: 掌握声明宏(macro_rules!)
+    ↓
+第三步: 学习过程宏(derive, attribute, function-like)
+    ↓
+第四步: 实现DSL和代码生成
+    ↓
+第五步: 宏调试与优化
+</code></pre>
+<hr />
+<h2 id="-宏类型对比"><a class="header" href="#-宏类型对比">🎓 宏类型对比</a></h2>
+<h3 id="宏分类"><a class="header" href="#宏分类">宏分类</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>类型</th><th>语法</th><th>复杂度</th><th>功能</th></tr></thead><tbody>
+<tr><td><strong>声明宏</strong></td><td><code>macro_rules!</code></td><td>低-中</td><td>模式匹配</td></tr>
+<tr><td><strong>派生宏</strong></td><td><code>#[derive(...)]</code></td><td>中</td><td>trait实现</td></tr>
+<tr><td><strong>属性宏</strong></td><td><code>#[attr]</code></td><td>中-高</td><td>代码装饰</td></tr>
+<tr><td><strong>函数式宏</strong></td><td><code>macro!()</code></td><td>高</td><td>自由生成</td></tr>
+</tbody></table>
+</div>
+<h3 id="使用场景"><a class="header" href="#使用场景">使用场景</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>场景</th><th>推荐宏类型</th><th>示例</th></tr></thead><tbody>
+<tr><td><strong>简单重复</strong></td><td>声明宏</td><td>vec!, println!</td></tr>
+<tr><td><strong>trait实现</strong></td><td>派生宏</td><td>#[derive(Debug)]</td></tr>
+<tr><td><strong>代码装饰</strong></td><td>属性宏</td><td>#[async_trait], #[timed]</td></tr>
+<tr><td><strong>DSL</strong></td><td>函数式宏</td><td>html!, sql!</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="-核心原则-7"><a class="header" href="#-核心原则-7">💡 核心原则</a></h2>
+<h3 id="1-卫生性优先"><a class="header" href="#1-卫生性优先">1. 卫生性优先</a></h3>
+<pre><code class="language-text">卫生宏 → 避免名称冲突 → 安全展开
+</code></pre>
+<h3 id="2-编译时计算"><a class="header" href="#2-编译时计算">2. 编译时计算</a></h3>
+<pre><code class="language-text">宏展开 → 编译时生成 → 零运行时开销
+</code></pre>
+<h3 id="3-类型安全-1"><a class="header" href="#3-类型安全-1">3. 类型安全</a></h3>
+<pre><code class="language-text">语法检查 → 类型检查 → 编译时错误
+</code></pre>
+<hr />
+<h2 id="-rust-190-增强特性-3"><a class="header" href="#-rust-190-增强特性-3">🔍 Rust 1.90 增强特性</a></h2>
+<h3 id="1-声明宏改进"><a class="header" href="#1-声明宏改进">1. 声明宏改进</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 使用$crate避免路径问题
+#[macro_export]
+macro_rules! my_vec {
+    ($($x:expr),*) =&gt; {
+        {
+            let mut v = $crate::Vec::new();
+            $(
+                v.push($x);
+            )*
+            v
+        }
+    };
+}
+
+// 使用片段指定符
+macro_rules! create_function {
+    ($func_name:ident, $return_type:ty) =&gt; {
+        fn $func_name() -&gt; $return_type {
+            Default::default()
+        }
+    };
+}
+
+create_function!(get_num, i32);
+create_function!(get_string, String);
+<span class="boring">}</span></code></pre></pre>
+<h3 id="2-过程宏工具链"><a class="header" href="#2-过程宏工具链">2. 过程宏工具链</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use proc_macro::TokenStream;
+use quote::{quote, format_ident};
+use syn::{parse_macro_input, DeriveInput, Data, Fields};
+
+#[proc_macro_derive(Getters)]
+pub fn derive_getters(input: TokenStream) -&gt; TokenStream {
+    let input = parse_macro_input!(input as DeriveInput);
+    let name = &amp;input.ident;
+    
+    let getters = if let Data::Struct(data) = &amp;input.data {
+        if let Fields::Named(fields) = &amp;data.fields {
+            fields.named.iter().map(|f| {
+                let field_name = f.ident.as_ref().unwrap();
+                let field_type = &amp;f.ty;
+                let getter_name = format_ident!("get_{}", field_name);
+                
+                quote! {
+                    pub fn #getter_name(&amp;self) -&gt; &amp;#field_type {
+                        &amp;self.#field_name
+                    }
+                }
+            }).collect::&lt;Vec&lt;_&gt;&gt;()
+        } else {
+            vec![]
+        }
+    } else {
+        vec![]
+    };
+    
+    let expanded = quote! {
+        impl #name {
+            #(#getters)*
+        }
+    };
+    
+    TokenStream::from(expanded)
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="3-dsl构建"><a class="header" href="#3-dsl构建">3. DSL构建</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 构建SQL查询DSL
+macro_rules! select {
+    ($($col:ident),+ from $table:ident where $condition:expr) =&gt; {
+        {
+            let cols = vec![$(stringify!($col)),+];
+            let table = stringify!($table);
+            let condition = $condition;
+            
+            format!(
+                "SELECT {} FROM {} WHERE {}",
+                cols.join(", "),
+                table,
+                condition
+            )
+        }
+    };
+}
+
+// 使用
+let query = select!(id, name, email from users where "age &gt; 18");
+// "SELECT id, name, email FROM users WHERE age &gt; 18"
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<h2 id="-相关章节-7"><a class="header" href="#-相关章节-7">📖 相关章节</a></h2>
+<ul>
+<li><strong><a href="c14/./foundations.html">基础概念</a></strong> - 宏理论基础</li>
+<li><strong><a href="c14/./guides.html">实践指南</a></strong> - 宏编写技巧</li>
+<li><strong><a href="c14/./examples.html">代码示例</a></strong> - 完整实现 ⭐</li>
+<li><strong><a href="c14/./README.html">返回模块首页</a></strong></li>
+</ul>
+<hr />
+<h2 id="-扩展学习-7"><a class="header" href="#-扩展学习-7">🔗 扩展学习</a></h2>
+<h3 id="深入阅读-7"><a class="header" href="#深入阅读-7">深入阅读</a></h3>
+<ul>
+<li><a href="c14/../../crates/c14_macro_system/README.html">Rust宏完整指南</a></li>
+<li><a href="https://danielkeep.github.io/tlborm/book/">The Little Book of Rust Macros</a></li>
+<li><a href="https://github.com/dtolnay/proc-macro-workshop">Procedural Macros Workshop</a></li>
+</ul>
+<h3 id="相关模块-7"><a class="header" href="#相关模块-7">相关模块</a></h3>
+<ul>
+<li><strong><a href="c14/../c02/README.html">C02: 类型系统</a></strong> - 类型级编程</li>
+<li><strong><a href="c14/../c04/README.html">C04: 泛型编程</a></strong> - 泛型与宏</li>
+<li><strong><a href="c14/../c09/README.html">C09: 设计模式</a></strong> - 宏模式</li>
+</ul>
+<hr />
+<h2 id="-实践项目建议-4"><a class="header" href="#-实践项目建议-4">🎯 实践项目建议</a></h2>
+<h3 id="入门级-4"><a class="header" href="#入门级-4">入门级</a></h3>
+<ul>
+<li>简单声明宏</li>
+<li>derive宏实现</li>
+<li>属性宏示例</li>
+</ul>
+<h3 id="进阶级-4"><a class="header" href="#进阶级-4">进阶级</a></h3>
+<ul>
+<li>自定义DSL</li>
+<li>代码生成工具</li>
+<li>宏库开发</li>
+</ul>
+<h3 id="高级-4"><a class="header" href="#高级-4">高级</a></h3>
+<ul>
+<li>编译器插件</li>
+<li>语言扩展</li>
+<li>形式化验证</li>
+</ul>
+<hr />
+<h2 id="-宏调试技巧"><a class="header" href="#-宏调试技巧">🛠️ 宏调试技巧</a></h2>
+<h3 id="展开宏"><a class="header" href="#展开宏">展开宏</a></h3>
+<pre><code class="language-bash"># 查看宏展开结果
+cargo expand
+
+# 展开特定模块
+cargo expand --lib module_name
+
+# 展开特定函数
+cargo expand function_name
+</code></pre>
+<h3 id="调试技巧"><a class="header" href="#调试技巧">调试技巧</a></h3>
+<pre><pre class="playground"><code class="language-rust">// 打印宏输入
+#[proc_macro]
+pub fn debug_macro(input: TokenStream) -&gt; TokenStream {
+    eprintln!("Input: {}", input);
+    input
+}
+
+// 使用trace_macros
+#![feature(trace_macros)]
+
+fn main() {
+    trace_macros!(true);
+    println!("Hello");
+    trace_macros!(false);
+}</code></pre></pre>
+<hr />
+<h2 id="-宏系统层次"><a class="header" href="#-宏系统层次">📊 宏系统层次</a></h2>
+<pre><code class="language-text">高层抽象:  DSL, 代码生成
+    ↓
+宏层:      声明宏, 过程宏
+    ↓
+语法层:    TokenStream, syn, quote
+    ↓
+编译器:    rustc宏展开
+</code></pre>
+<hr />
+<p><strong>掌握宏系统是Rust元编程的关键！</strong> 🚀</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="跨模块综合项目"><a class="header" href="#跨模块综合项目">跨模块综合项目</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="项目一任务管理系统"><a class="header" href="#项目一任务管理系统">项目一：任务管理系统</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="项目二异步web服务器"><a class="header" href="#项目二异步web服务器">项目二：异步Web服务器</a></h1>
