@@ -1,0 +1,81 @@
+{
+  // ============================================
+  // Cursor/VS Code 内存优化配置
+  // 创建时间: 2025-10-25
+  // ============================================
+  
+  // 增加 TypeScript 服务器内存限制 (默认 1.5GB -> 8GB)
+  "typescript.tsserver.maxTsServerMemory": 8192,
+  
+  // ============================================
+  // 文件监控排除 (减少内存使用)
+  // ============================================
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,
+    "**/target/**": true,
+    "**/docs/archives/**": true,
+    "**/docs/appendices/**": true,
+    "**/docs/legacy_*/**": true,
+    "**/reports/**": true
+  },
+  
+  // ============================================
+  // 搜索排除 (加快搜索速度)
+  // ============================================
+  "search.exclude": {
+    "**/target": true,
+    "**/node_modules": true,
+    "**/docs/archives/**": true,
+    "**/docs/appendices/**": true,
+    "**/docs/legacy_*/**": true,
+    "**/reports/**": true,
+    "**/*COMPREHENSIVE*.md": true
+  },
+  
+  // ============================================
+  // 文件浏览器排除 (简化视图)
+  // ============================================
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/target": false  // Rust 构建产物，需要时显示
+  },
+  
+  // ============================================
+  // Markdown 优化 (减少预览内存)
+  // ============================================
+  "markdown.preview.scrollPreviewWithEditor": false,
+  "markdown.preview.scrollEditorWithPreview": false,
+  "markdown.validate.enabled": false,
+  
+  // ============================================
+  // 编辑器性能优化
+  // ============================================
+  "editor.largeFileOptimizations": true,
+  "editor.maxTokenizationLineLength": 20000,
+  
+  // ============================================
+  // Git 优化
+  // ============================================
+  "git.enabled": true,
+  "git.autorefresh": false,
+  "git.ignoreLimitWarning": true,
+  
+  // ============================================
+  // Rust 特定配置
+  // ============================================
+  "rust-analyzer.checkOnSave.command": "clippy",
+  "rust-analyzer.cargo.allFeatures": false,
+  "rust-analyzer.cargo.buildScripts.enable": false,
+  
+  // ============================================
+  // 其他性能优化
+  // ============================================
+  "extensions.autoUpdate": false,
+  "telemetry.telemetryLevel": "off",
+  "update.mode": "manual"
+}
+
