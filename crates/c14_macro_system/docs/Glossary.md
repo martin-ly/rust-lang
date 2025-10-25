@@ -48,11 +48,11 @@
     - [`tt` (Token Tree)](#tt-token-tree)
     - [`ty`](#ty)
   - [符号](#符号)
-    - [`$`](#)
-    - [`$(...)*`](#-1)
-    - [`$(...)+`](#-2)
-    - [`$(...)?`](#-3)
-    - [`$(,)?`](#-4)
+    - [`$` {#dollar}](#-dollar)
+    - [`$(...)*` {#dollarzero-or-more}](#-dollarzero-or-more)
+    - [`$(...)+` {#dollarone-or-more}](#-dollarone-or-more)
+    - [`$(...)?` {#dollarzero-or-one}](#-dollarzero-or-one)
+    - [`$(,)?` {#dollaroptional-trailing-comma}](#-dollaroptional-trailing-comma)
   - [相关工具](#相关工具)
     - [cargo-expand](#cargo-expand)
     - [rust-analyzer](#rust-analyzer)
@@ -326,23 +326,23 @@ macro_rules! make_struct {
 
 ## 符号
 
-### `$`
+### `$` {#dollar}
 
 **变量前缀** - 在宏中标记变量和重复模式。
 
-### `$(...)*`
+### `$(...)*` {#dollarzero-or-more}
 
 **零个或多个重复** - 匹配零个或多个重复的模式。
 
-### `$(...)+`
+### `$(...)+` {#dollarone-or-more}
 
 **一个或多个重复** - 匹配至少一个重复的模式。
 
-### `$(...)?`
+### `$(...)?` {#dollarzero-or-one}
 
 **零个或一个** - 匹配可选的模式。
 
-### `$(,)?`
+### `$(,)?` {#dollaroptional-trailing-comma}
 
 **可选的尾随逗号** - 允许但不要求尾随逗号。
 

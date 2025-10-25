@@ -4,23 +4,23 @@
 > **先修知识**: [关联类型](./04_associated_types.md), 所有前置主题  
 > **相关文档**: [实践指南](./PRACTICAL_GENERICS_GUIDE.md) | [版本历史](./06_rust_features/RUST_VERSION_HISTORY_ACCURATE.md)
 
-
 ## 📊 目录
 
-- [📋 本文内容](#本文内容)
-- [5.1. Rust 中的多态 (Polymorphism)](#51-rust-中的多态-polymorphism)
-  - [5.1.1. 静态多态 (Static Polymorphism)](#511-静态多态-static-polymorphism)
-  - [5.1.2. 动态多态 (Dynamic Polymorphism)](#512-动态多态-dynamic-polymorphism)
-- [5.2. 类型构造器 (Type Constructors)](#52-类型构造器-type-constructors)
-- [5.3. A Note on Higher-Kinded Types (HKT)](#53-a-note-on-higher-kinded-types-hkt)
-- [5.4. 现代泛型特性进展 (2025年更新) 🆕](#54-现代泛型特性进展-2025年更新)
-  - [5.4.1. GATs - Generic Associated Types (已稳定)](#541-gats-generic-associated-types-已稳定)
-  - [5.4.2. RPITIT - Return Position Impl Trait In Traits (已稳定)](#542-rpitit-return-position-impl-trait-in-traits-已稳定)
-  - [5.4.3. 常量泛型改进](#543-常量泛型改进)
-  - [5.4.4. 未来展望](#544-未来展望)
-- [📚 相关资源](#相关资源)
-- [🔗 外部参考](#外部参考)
-
+- [05. 高级泛型主题 (Advanced Generic Topics)](#05-高级泛型主题-advanced-generic-topics)
+  - [📊 目录](#-目录)
+  - [📋 本文内容](#-本文内容)
+  - [5.1. Rust 中的多态 (Polymorphism)](#51-rust-中的多态-polymorphism)
+    - [5.1.1. 静态多态 (Static Polymorphism)](#511-静态多态-static-polymorphism)
+    - [5.1.2. 动态多态 (Dynamic Polymorphism)](#512-动态多态-dynamic-polymorphism)
+  - [5.2. 类型构造器 (Type Constructors)](#52-类型构造器-type-constructors)
+  - [5.3. A Note on Higher-Kinded Types (HKT)](#53-a-note-on-higher-kinded-types-hkt)
+  - [5.4. 现代泛型特性进展 (2025年更新) 🆕](#54-现代泛型特性进展-2025年更新-)
+    - [5.4.1. GATs - Generic Associated Types (已稳定)](#541-gats---generic-associated-types-已稳定)
+    - [5.4.2. RPITIT - Return Position Impl Trait In Traits (已稳定)](#542-rpitit---return-position-impl-trait-in-traits-已稳定)
+    - [5.4.3. 常量泛型改进](#543-常量泛型改进)
+    - [5.4.4. 未来展望](#544-未来展望)
+  - [📚 相关资源](#-相关资源)
+  - [🔗 外部参考](#-外部参考)
 
 **最后更新**: 2025-10-19  
 **适用版本**: Rust 1.75+ (包含GATs和RPITIT)  
@@ -42,9 +42,9 @@
 
 静态多态在**编译时**解析。这是 Rust 中最主要、最常用的多态形式，其核心实现就是**泛型**。
 
-* **机制**: 通过泛型和 Trait 约束，我们编写的代码可以适用于任何满足约束的类型。编译器通过**单态化**过程，为每个用到的具体类型生成一份专门的代码。
-* **性能**: 由于在编译时就已经确定了所有调用的具体函数，因此没有任何运行时开销。其性能与手写针对具体类型的代码完全相同。这是一种**零成本抽象**。
-* **示例**:
+- **机制**: 通过泛型和 Trait 约束，我们编写的代码可以适用于任何满足约束的类型。编译器通过**单态化**过程，为每个用到的具体类型生成一份专门的代码。
+- **性能**: 由于在编译时就已经确定了所有调用的具体函数，因此没有任何运行时开销。其性能与手写针对具体类型的代码完全相同。这是一种**零成本抽象**。
+- **示例**:
 
     ```rust
     // 这是一个静态多态的例子
@@ -58,12 +58,12 @@
 
 动态多态在**运行时**解析。它允许我们在无法预知所有可能类型的情况下编写代码，例如处理一个由用户加载的插件系统。其核心实现是 **Trait 对象 (Trait Objects)**。
 
-* **机制**: 通过 `&dyn MyTrait` 或 `Box<dyn MyTrait>` 的形式创建一个 Trait 对象。Trait 对象是一个"胖指针"，它包含两部分：
+- **机制**: 通过 `&dyn MyTrait` 或 `Box<dyn MyTrait>` 的形式创建一个 Trait 对象。Trait 对象是一个"胖指针"，它包含两部分：
     1. 一个指向具体类型实例数据的指针。
     2. 一个指向**虚方法表 (vtable)** 的指针。vtable 是一个函数指针数组，记录了该具体类型对 Trait 中每个方法的实现地址。
-* **性能**: 当通过 Trait 对象调用方法时，程序需要在运行时查询 vtable 以找到正确的函数地址。这个额外的间接查询会带来微小的运行时开销，与静态分派相比略慢。
-* **灵活性**: 它的优势在于可以在一个集合（如 `Vec<&dyn Shape>`）中存放多种不同的、但都实现了同一 Trait 的具体类型实例。这是静态多态无法做到的。
-* **示例**:
+- **性能**: 当通过 Trait 对象调用方法时，程序需要在运行时查询 vtable 以找到正确的函数地址。这个额外的间接查询会带来微小的运行时开销，与静态分派相比略慢。
+- **灵活性**: 它的优势在于可以在一个集合（如 `Vec<&dyn Shape>`）中存放多种不同的、但都实现了同一 Trait 的具体类型实例。这是静态多态无法做到的。
+- **示例**:
 
     ```rust
     trait Shape {
@@ -97,8 +97,8 @@
 
 **定义**: 类型构造器是一个"函数"，它在**类型级别**上运作。它接受一个或多个类型作为参数，并"返回"一个新的、具体的类型。
 
-* `Vec` 是一个类型构造器，它接受 `i32` 作为参数，构造出新类型 `Vec<i32>`。
-* `Result` 是一个接受两个参数的类型构造器，它接受 `String` 和 `io::Error`，构造出新类型 `Result<String, io::Error>`。
+- `Vec` 是一个类型构造器，它接受 `i32` 作为参数，构造出新类型 `Vec<i32>`。
+- `Result` 是一个接受两个参数的类型构造器，它接受 `String` 和 `io::Error`，构造出新类型 `Result<String, io::Error>`。
 
 这个概念帮助我们将泛型从"一个可以装任何东西的容器"提升到"一种定义类型之间稳定转换关系"的更高层次的抽象。
 
@@ -207,29 +207,29 @@ struct Buffer<T, const N: usize> {
 
 **正在探索的特性**:
 
-* **specialization**: 特化（部分实现）
-* **HKT**: 高阶类型（长期目标）
-* **更好的const泛型**: 支持更复杂的常量表达式
+- **specialization**: 特化（部分实现）
+- **HKT**: 高阶类型（长期目标）
+- **更好的const泛型**: 支持更复杂的常量表达式
 
 **建议**:
 
-* 使用 Rust 1.75+ 以获得所有现代泛型特性
-* 关注 [Rust Blog](https://blog.rust-lang.org/) 了解最新进展
-* 参考 [版本历史文档](./06_rust_features/RUST_VERSION_HISTORY_ACCURATE.md) 获取准确信息
+- 使用 Rust 1.75+ 以获得所有现代泛型特性
+- 关注 [Rust Blog](https://blog.rust-lang.org/) 了解最新进展
+- 参考 [版本历史文档](./06_rust_features/RUST_VERSION_HISTORY_ACCURATE.md) 获取准确信息
 
 ---
 
 ## 📚 相关资源
 
-* [实践指南](./PRACTICAL_GENERICS_GUIDE.md) - 实际代码示例
-* [版本历史](./06_rust_features/RUST_VERSION_HISTORY_ACCURATE.md) - 准确的特性时间线
-* [主索引](./00_MASTER_INDEX.md) - 文档导航
+- [实践指南](./PRACTICAL_GENERICS_GUIDE.md) - 实际代码示例
+- [版本历史](./06_rust_features/RUST_VERSION_HISTORY_ACCURATE.md) - 准确的特性时间线
+- [主索引](./00_MASTER_INDEX.md) - 文档导航
 
 ## 🔗 外部参考
 
-* [Rust Book - Advanced Topics](https://doc.rust-lang.org/book/ch19-00-advanced-features.html)
-* [RFC 1598: GATs](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)
-* [RFC 3425: RPITIT](https://rust-lang.github.io/rfcs/3425-return-position-impl-trait-in-traits.html)
+- [Rust Book - Advanced Topics](https://doc.rust-lang.org/book/ch19-00-advanced-features.html)
+- [RFC 1598: GATs](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)
+- [RFC 3425: RPITIT](https://rust-lang.github.io/rfcs/3425-return-position-impl-trait-in-traits.html)
 
 ---
 

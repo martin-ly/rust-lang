@@ -4,26 +4,26 @@
 > **使用方式**: 查找不理解的术语，了解准确定义  
 > **相关文档**: [泛型基础](./generic_fundamentals.md) | [主索引](./00_MASTER_INDEX.md)
 
-
 ## 📊 目录
 
-- [📋 术语索引](#术语索引)
-- [术语列表](#术语列表)
-  - [泛型 (Generics)](#泛型-generics)
-  - [参数化多态 (Parametric Polymorphism)](#参数化多态-parametric-polymorphism)
-  - [单态化 (Monomorphization)](#单态化-monomorphization)
-  - [Trait 约束 (Trait Bound)](#trait-约束-trait-bound)
-  - [where 子句](#where-子句)
-  - [关联类型 (Associated Type)](#关联类型-associated-type)
-  - [动态多态 (Dynamic Polymorphism)](#动态多态-dynamic-polymorphism)
-  - [Trait 对象 (Trait Object)](#trait-对象-trait-object)
-  - [vtable (虚方法表)](#vtable-虚方法表)
-  - [类型构造器 (Type Constructor)](#类型构造器-type-constructor)
-  - [高阶类型 (Higher-Kinded Types, HKT)](#高阶类型-higher-kinded-types-hkt)
-  - [GATs (Generic Associated Types)](#gats-generic-associated-types)
-  - [RPITIT (Return Position Impl Trait In Traits)](#rpitit-return-position-impl-trait-in-traits)
-- [📚 参考资源](#参考资源)
-
+- [C04: 术语表 (Glossary)](#c04-术语表-glossary)
+  - [📊 目录](#-目录)
+  - [📋 术语索引](#-术语索引)
+  - [术语列表](#术语列表)
+    - [泛型 (Generics)](#泛型-generics)
+    - [参数化多态 (Parametric Polymorphism)](#参数化多态-parametric-polymorphism)
+    - [单态化 (Monomorphization)](#单态化-monomorphization)
+    - [Trait 约束 (Trait Bound)](#trait-约束-trait-bound)
+    - [where 子句](#where-子句)
+    - [关联类型 (Associated Type)](#关联类型-associated-type)
+    - [动态多态 (Dynamic Polymorphism)](#动态多态-dynamic-polymorphism)
+    - [Trait 对象 (Trait Object)](#trait-对象-trait-object)
+    - [vtable (虚方法表)](#vtable-虚方法表)
+    - [类型构造器 (Type Constructor)](#类型构造器-type-constructor)
+    - [高阶类型 (Higher-Kinded Types, HKT)](#高阶类型-higher-kinded-types-hkt)
+    - [GATs (Generic Associated Types)](#gats-generic-associated-types)
+    - [RPITIT (Return Position Impl Trait In Traits)](#rpitit-return-position-impl-trait-in-traits)
+  - [📚 参考资源](#-参考资源)
 
 **最后更新**: 2025-10-19  
 **适用版本**: Rust 1.0+  
@@ -151,9 +151,9 @@
 
 ## 📚 参考资源
 
-* [泛型基础](./generic_fundamentals.md) - 系统学习泛型
-* [主索引](./00_MASTER_INDEX.md) - 文档导航
-* [实践指南](./PRACTICAL_GENERICS_GUIDE.md) - 实际应用
+- [泛型基础](./generic_fundamentals.md) - 系统学习泛型
+- [主索引](./00_MASTER_INDEX.md) - 文档导航
+- [实践指南](./PRACTICAL_GENERICS_GUIDE.md) - 实际应用
 
 ---
 
