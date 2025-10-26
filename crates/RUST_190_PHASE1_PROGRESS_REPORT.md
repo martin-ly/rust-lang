@@ -26,7 +26,7 @@
 
 每个模块都包含：
 
-```
+```text
 docs/archives/
 ├── README.md                    ✅ 已创建
 ├── legacy_guides/               ✅ 已创建
@@ -173,7 +173,7 @@ c04_generic 需要特殊处理，因为它的历史文档在 `appendices/04_历�
 
 ### 创建的文件
 
-```
+```text
 c01_ownership_borrow_scope/docs/archives/README.md  (新建 - 2.1KB)
 c02_type_system/docs/archives/README.md             (新建 - 1.8KB)
 c05_threads/docs/archives/README.md                 (新建 - 1.6KB)
@@ -181,9 +181,9 @@ c07_process/docs/archives/README.md                 (新建 - 1.6KB)
 c09_design_pattern/docs/archives/README.md          (新建 - 1.6KB)
 ```
 
-### 创建的目录
+### 创建的目录1
 
-```
+```text
 c01_ownership_borrow_scope/docs/archives/{5个子目录}
 c02_type_system/docs/archives/{5个子目录}
 c05_threads/docs/archives/{5个子目录}

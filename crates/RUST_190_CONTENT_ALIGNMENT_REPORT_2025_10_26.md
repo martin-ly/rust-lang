@@ -143,7 +143,7 @@ cargo 1.90.0 (840b83a10 2025-07-30)
 
 **需要标记为历史参考的文件**:
 
-```
+```text
 c02_type_system/
   ├── examples/rust_189_features_demo.rs
   ├── examples/rust_189_comprehensive_demo.rs
@@ -189,7 +189,7 @@ c01_ownership_borrow_scope/
 
 **已归档的文档** (✅ 良好实践):
 
-```
+```text
 c03_control_fn/docs/archives/
   ├── legacy_01_theory/        # 旧版理论文档
   ├── legacy_02_basics/         # 旧版基础文档
@@ -226,7 +226,7 @@ c11_macro_system/docs/archives/
 
 **需要归档的文档**:
 
-```
+```text
 c04_generic/docs/appendices/04_历史文档/
   ├── 完成清单.md
   ├── README_OLD.md
@@ -263,7 +263,7 @@ c01_ownership_borrow_scope/docs/06_rust_features/
 
 **项目完成报告** (大量):
 
-```
+```text
 c06_async/reports/
   ├── SEMANTIC_ALIGNMENT_ANALYSIS_REPORT_2025.md
   ├── RUST_190_REAL_FEATURES_FINAL_REPORT.md
@@ -314,7 +314,7 @@ c03_control_fn/reports/
 
 基于 c06_async 和 c11_macro_system 的最佳实践，推荐以下标准结构：
 
-```
+```text
 docs/
 ├── archives/
 │   ├── README.md                    # 归档说明和索引
@@ -359,7 +359,7 @@ docs/
 
 **结构**:
 
-```
+```text
 docs/
 ├── 00_MASTER_INDEX.md         # 主索引
 ├── FAQ.md                     # 常见问题
@@ -407,7 +407,7 @@ docs/
 
 所有模块的主 README 命名统一：
 
-```
+```text
 c01_ownership_borrow_scope/README.md
 c02_type_system/README.md
 c03_control_fn/README.md
@@ -495,7 +495,7 @@ c03_control_fn/README.md
 
 1. **创建 Rust 1.90 专题文档** (对于每个模块):
 
-   ```
+   ```text
    docs/tier_03_references/rust_190_features.md
    ```
 
@@ -527,19 +527,19 @@ c03_control_fn/README.md
 
 2. **检查结果**:
 
-| 模块 | MASTER_INDEX | FAQ | Glossary | README |
-|------|--------------|-----|----------|--------|
-| c01 | ✅ | ❌ | ❌ | ✅ |
-| c02 | ✅ | ❌ | ❌ | ✅ |
-| c03 | ✅ | ✅ | ✅ | ✅ |
-| c04 | ✅ | ✅ | ✅ | ✅ |
-| c05 | ✅ | ✅ | ✅ | ✅ |
-| c06 | ✅ | ✅ | ✅ | ✅ |
-| c07 | ✅ | ✅ | ✅ | ✅ |
-| c08 | ✅ | ✅ | ✅ | ✅ |
-| c09 | ✅ | ❌ | ❌ | ✅ |
-| c10 | ✅ | ❌ | ❌ | ✅ |
-| c11 | ✅ | ✅ | ✅ | ✅ |
+   | 模块 | MASTER_INDEX | FAQ | Glossary | README |
+   |------|--------------|-----|----------|--------|
+   | c01 | ✅ | ❌ | ❌ | ✅ |
+   | c02 | ✅ | ❌ | ❌ | ✅ |
+   | c03 | ✅ | ✅ | ✅ | ✅ |
+   | c04 | ✅ | ✅ | ✅ | ✅ |
+   | c05 | ✅ | ✅ | ✅ | ✅ |
+   | c06 | ✅ | ✅ | ✅ | ✅ |
+   | c07 | ✅ | ✅ | ✅ | ✅ |
+   | c08 | ✅ | ✅ | ✅ | ✅ |
+   | c09 | ✅ | ❌ | ❌ | ✅ |
+   | c10 | ✅ | ❌ | ❌ | ✅ |
+   | c11 | ✅ | ✅ | ✅ | ✅ |
 
 3. **需要补充**:
    - c01, c02, c09, c10 需要创建 FAQ.md 和 Glossary.md
@@ -564,7 +564,7 @@ c03_control_fn/README.md
 
 3. **创建报告索引**:
 
-   ```
+   ```text
    reports/INDEX.md
    ```
 
@@ -738,7 +738,7 @@ c03_control_fn/README.md
 
 ✅ **完善的目录结构**:
 
-```
+```text
 docs/archives/
 ├── README.md                    # 必需：说明归档策略
 ├── legacy_theory/               # 按主题分类
@@ -767,7 +767,7 @@ docs/archives/
 
 ✅ **4-Tier 分层架构**:
 
-```
+```text
 tier_01_foundations/    # 基础理论，面向初学者
 tier_02_guides/         # 实践指南，面向实践者
 tier_03_references/     # 技术参考，面向开发者
@@ -983,7 +983,7 @@ find . -name "*.md" -type f -exec markdown-link-check {} \;
 
 #### 目录结构模板
 
-```
+```text
 module_name/
 ├── Cargo.toml
 ├── README.md
