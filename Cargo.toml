@@ -13,11 +13,7 @@ members = [
     "crates/c08_algorithms",
     "crates/c09_design_pattern",
     "crates/c10_networks",
-    "crates/c11_libraries",
-    "crates/c12_model",
-    "crates/c13_reliability",
-    "crates/c14_macro_system",
-    "tools/doc_search",
+    "crates/c11_macro_system",
 ]
 
 [workspace.package]
