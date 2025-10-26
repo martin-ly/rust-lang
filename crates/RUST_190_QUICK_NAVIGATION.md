@@ -96,6 +96,7 @@ fn items<'a>(scores: &'a [u8]) -> std::slice::Iter<'a, u8> {
 **[RUST_190_FAQ.md](RUST_190_FAQ.md)** ⭐⭐⭐
 
 **包含内容**:
+
 - ✅ 为什么升级？何时升级？
 - ✅ 详细的升级步骤
 - ✅ 常见错误解决方案
@@ -110,6 +111,7 @@ fn items<'a>(scores: &'a [u8]) -> std::slice::Iter<'a, u8> {
 **[RUST_190_GLOSSARY.md](RUST_190_GLOSSARY.md)** ⭐⭐⭐
 
 **包含内容**:
+
 - 📖 LLD 链接器
 - 📖 checked_sub_signed()
 - 📖 const Context
@@ -126,6 +128,7 @@ fn items<'a>(scores: &'a [u8]) -> std::slice::Iter<'a, u8> {
 **[RUST_190_完整会话总结_2025_10_26.md](RUST_190_完整会话总结_2025_10_26.md)** ⭐⭐⭐
 
 **包含内容**:
+
 - 📊 Phase 0-2 完整回顾
 - 📊 工作成果统计
 - 📊 质量评估
@@ -275,6 +278,7 @@ Day 6-7: 深入理解
 👉 **[RUST_190_DOCUMENTATION_INDEX.md](RUST_190_DOCUMENTATION_INDEX.md)**
 
 包含：
+
 - 📚 31份文档完整索引
 - 📊 按类型分类
 - 🎯 使用指南
@@ -303,6 +307,7 @@ Day 6-7: 深入理解
 ### 技巧 1: 使用 Ctrl+F / Cmd+F
 
 在任何文档中使用搜索功能快速定位内容：
+
 - 搜索错误信息
 - 搜索关键词
 - 搜索 API 名称
@@ -310,6 +315,7 @@ Day 6-7: 深入理解
 ### 技巧 2: 关注星级 ⭐
 
 文档标注的星级表示重要程度：
+
 - ⭐⭐⭐: 强烈推荐，必读
 - ⭐⭐: 推荐阅读
 - ⭐: 按需参考
@@ -348,4 +354,3 @@ Day 6-7: 深入理解
 **项目进度**: 80%
 
 🎉 **祝您使用愉快！**
-
