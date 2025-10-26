@@ -177,7 +177,7 @@ mkdir -p docs/archives/{legacy_guides,legacy_references,legacy_rust_189_features
 
 **归档结构**:
 
-```
+```text
 docs/archives/
 ├── README.md                    # 归档说明 ⭐
 ├── legacy_theory/               # 旧版理论
@@ -191,7 +191,7 @@ docs/archives/
 
 **导航文档** (必备):
 
-```
+```text
 docs/
 ├── 00_MASTER_INDEX.md           # 主索引 ⭐
 ├── FAQ.md                       # 常见问题 ⭐

@@ -25,7 +25,7 @@
 
 ### API (Application Programming Interface)
 
-**应用程序编程接口**
+**应用程序编程接口**:
 
 定义：提供给开发者使用的函数、类型、trait 等接口。
 
@@ -43,7 +43,7 @@
 
 ### Cargo Workspace
 
-**Cargo 工作空间**
+**Cargo 工作空间**:
 
 定义：将多个相关的 Rust 包组织在一起的项目结构。
 
@@ -59,7 +59,7 @@
 
 ### checked_sub_signed()
 
-**带符号减法检查方法**
+**带符号减法检查方法**:
 
 定义：无符号整数类型的新方法，用于与有符号数进行安全减法。
 
@@ -85,7 +85,7 @@ let result = x.checked_sub_signed(y); // Some(15)
 
 ### const Context
 
-**const 上下文**
+**const 上下文**:
 
 定义：在编译时求值的代码环境。
 
@@ -112,7 +112,7 @@ const RESULT: f64 = example();  // 3.0
 
 ### Const Generic
 
-**常量泛型**
+**常量泛型**:
 
 定义：使用常量值作为泛型参数的特性。
 
@@ -134,7 +134,7 @@ let arr: [i32; 5] = create_array();
 
 ### Edition
 
-**版次**
+**版次**:
 
 定义：Rust 语言的版本划分方式，每个版次可能包含向后不兼容的变更。
 
@@ -160,7 +160,7 @@ edition = "2024"
 
 ### GAT (Generic Associated Types)
 
-**泛型关联类型**
+**泛型关联类型**:
 
 定义：在关联类型中使用泛型参数的特性。
 
@@ -186,7 +186,7 @@ trait Container {
 
 ### Incremental Compilation
 
-**增量编译**
+**增量编译**:
 
 定义：只重新编译修改过的代码部分，加快编译速度。
 
@@ -207,7 +207,7 @@ CARGO_INCREMENTAL=1 cargo build
 
 ### IntErrorKind
 
-**整数错误类型**
+**整数错误类型**:
 
 定义：表示整数解析错误的枚举类型。
 
@@ -232,7 +232,7 @@ let err_kind: IntErrorKind = // ...
 
 ### LLD Linker
 
-**LLD 链接器**
+**LLD 链接器**:
 
 定义：LLVM 项目的高性能链接器。
 
@@ -263,7 +263,7 @@ rustflags = ["-C", "link-arg=-fuse-ld=lld"]
 
 ### Lint
 
-**代码检查规则**
+**代码检查规则**:
 
 定义：编译器或 Clippy 提供的代码质量检查规则。
 
@@ -282,7 +282,7 @@ rustflags = ["-C", "link-arg=-fuse-ld=lld"]
 
 ### Lifetime
 
-**生命周期**
+**生命周期**:
 
 定义：Rust 用于追踪引用有效性的机制。
 
@@ -306,7 +306,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### mismatched_lifetime_syntaxes
 
-**不匹配的生命周期语法 Lint**
+**不匹配的生命周期语法 Lint**:
 
 定义：检查生命周期语法一致性的新 lint 规则。
 
@@ -336,7 +336,7 @@ fn items<'a>(scores: &'a [u8]) -> std::slice::Iter<'a, u8> {
 
 ### RPITIT (Return Position Impl Trait In Traits)
 
-**Trait 中返回位置的 impl Trait**
+**Trait 中返回位置的 impl Trait**:
 
 定义：允许在 trait 方法的返回位置使用 `impl Trait` 语法。
 
@@ -358,7 +358,7 @@ trait Container {
 
 ### rust-version
 
-**Rust 版本声明**
+**Rust 版本声明**:
 
 定义：在 `Cargo.toml` 中声明项目所需的最低 Rust 版本。
 
@@ -384,7 +384,7 @@ rust-version = "1.90"  # 声明最低版本
 
 ### Stabilization
 
-**稳定化**
+**稳定化**:
 
 定义：将 nightly 特性转为稳定特性的过程。
 
@@ -407,7 +407,7 @@ Rust 1.90 稳定化的特性：
 
 ### TAIT (Type Alias Impl Trait)
 
-**类型别名实现 Trait**
+**类型别名实现 Trait**:
 
 定义：使用类型别名定义 `impl Trait` 类型。
 
@@ -431,7 +431,7 @@ fn create_iter() -> MyIterator {
 
 ### Trait
 
-**特征**
+**特征**:
 
 定义：定义类型共享行为的机制。
 
