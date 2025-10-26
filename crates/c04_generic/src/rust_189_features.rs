@@ -1,17 +1,43 @@
-/*
-Rust 1.89 相关语言能力在泛型方向的重要对齐点（精选）：
-
-1) TAIT（Type Alias Impl Trait，稳定的 impl Trait 类型别名用法）
-   - 用途：为复杂的 `impl Trait` 返回或迭代器等零成本抽象提供可命名的别名。
-
-2) RPITIT（return-position impl Trait in traits，在 trait 方法返回位置使用 impl Trait）
-   - 用途：在 trait 方法签名中直接返回 `impl Trait`，配合对象安全限制或使用 GAT 进行更强抽象。
-
-3) Const generics（常量泛型，含更完整的表达能力）
-   - 用途：在类型层面对大小/阈值等不变参数建模，生成零成本特化代码。
-
-下方示例均保持最小可编译与直观演示。更多边界与高级用法建议参考标准库与成熟库实现（如 itertools、rayon、serde）。
-*/
+//! # Rust 1.89 特性示例 (历史版本)
+//!
+//! ⚠️ **注意**: 本示例针对 Rust 1.89 版本编写，部分特性在 Rust 1.90 中已有更新。
+//!
+//! ## Rust 1.90 主要更新
+//!
+//! ### 编译器改进
+//! - **LLD 链接器**: Linux x86_64 默认启用，链接速度提升约 2x
+//! - **编译性能**: 增量编译优化，构建速度提升
+//!
+//! ### 标准库更新
+//! - `u{n}::checked_sub_signed()` - 新增带符号减法检查方法
+//! - `<[T]>::reverse()` - 现在可在 const 上下文中使用
+//! - `f32/f64` 数学函数 - floor/ceil/trunc 等在 const 中可用
+//!
+//! ### Lint 改进
+//! - `mismatched_lifetime_syntaxes` - 默认启用，检查生命周期语法一致性
+//!
+//! ## 迁移建议
+//!
+//! 1. 更新 Cargo.toml: `rust-version = "1.90"`, `edition = "2024"`
+//! 2. 应用新的稳定 API 和 const 函数增强
+//! 3. 检查并修复新 lint 警告
+//!
+//! 参考: [Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
+//!
+//! ---
+//!
+//! # Rust 1.89 相关语言能力在泛型方向的重要对齐点（精选）
+//!
+//! 1) TAIT（Type Alias Impl Trait，稳定的 impl Trait 类型别名用法）
+//!    - 用途：为复杂的 `impl Trait` 返回或迭代器等零成本抽象提供可命名的别名。
+//!
+//! 2) RPITIT（return-position impl Trait in traits，在 trait 方法返回位置使用 impl Trait）
+//!    - 用途：在 trait 方法签名中直接返回 `impl Trait`，配合对象安全限制或使用 GAT 进行更强抽象。
+//!
+//! 3) Const generics（常量泛型，含更完整的表达能力）
+//!    - 用途：在类型层面对大小/阈值等不变参数建模，生成零成本特化代码。
+//!
+//! 下方示例均保持最小可编译与直观演示。更多边界与高级用法建议参考标准库与成熟库实现（如 itertools、rayon、serde）。
 
 // 1) TAIT（退而求其次演示）：
 // 由于某些编译器通道/版本下“类型别名中的 impl Trait”可能受限，这里以
