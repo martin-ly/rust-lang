@@ -1,3 +1,8 @@
+//! Rust 1.89 功能 (历史版本)
+//! 
+//! ⚠️ 本文件针对 Rust 1.89。Rust 1.90 主要更新: LLD 链接器、新 API、const 增强。
+//! 参考: [Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
+
 use c03_control_fn::async_control_flow_189::AsyncControlFlowExecutor189;
 use c03_control_fn::performance_optimization_189::{
     COptimizedLayout, ControlFlowOptimizer, DefaultLayout, FACTORIAL_10, PRIME_17, fast_add,
