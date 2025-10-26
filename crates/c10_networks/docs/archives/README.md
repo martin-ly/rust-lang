@@ -8,7 +8,7 @@
 
 ## 📁 归档目录结构
 
-```
+```text
 archives/
 ├── legacy_rust_189_features/    # Rust 1.89 特性文档
 ├── legacy_guides/                # 历史指南文档
@@ -63,6 +63,7 @@ archives/
 ### 迁移建议
 
 1. **更新 Cargo.toml**
+
    ```toml
    [package]
    rust-version = "1.90"
