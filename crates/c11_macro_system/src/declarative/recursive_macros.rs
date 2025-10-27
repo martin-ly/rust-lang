@@ -5,7 +5,7 @@
 /// # 示例
 ///
 /// ```
-/// # use C11_macro_system::count;
+/// # use c11_macro_system::count;
 /// assert_eq!(count!(), 0);
 /// assert_eq!(count!(1), 1);
 /// assert_eq!(count!(1, 2, 3), 3);
@@ -24,7 +24,7 @@ macro_rules! count {
 /// # 示例
 ///
 /// ```
-/// # use C11_macro_system::max;
+/// # use c11_macro_system::max;
 /// assert_eq!(max!(1, 2, 3), 3);
 /// ```
 #[macro_export]

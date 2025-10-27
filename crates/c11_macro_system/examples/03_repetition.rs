@@ -71,7 +71,7 @@ fn main() {
     println!();
 
     // 4. 使用hashmap宏
-    use C11_macro_system::hashmap;
+    use c11_macro_system::hashmap;
     println!("4. 创建HashMap:");
     let config: HashMap<&str, i32> = hashmap! {
         "timeout" => 30,

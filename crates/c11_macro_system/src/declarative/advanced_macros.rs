@@ -5,7 +5,7 @@
 /// # 示例
 ///
 /// ```
-/// # use C11_macro_system::vec_of_strings;
+/// # use c11_macro_system::vec_of_strings;
 /// let strings = vec_of_strings!["hello", "world"];
 /// assert_eq!(strings, vec!["hello".to_string(), "world".to_string()]);
 /// ```
@@ -21,7 +21,7 @@ macro_rules! vec_of_strings {
 /// # 示例
 ///
 /// ```
-/// # use C11_macro_system::hashmap;
+/// # use c11_macro_system::hashmap;
 /// # use std::collections::HashMap;
 /// let map = hashmap! {
 ///     "key1" => "value1",

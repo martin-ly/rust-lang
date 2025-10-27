@@ -167,8 +167,8 @@ async-stream = "0.3.6"
 tokio-console = "0.1.13"
 # tokio-test: tokio的测试工具
 tokio-test = "0.4.4"
-# mio: 跨平台异步I/O库 - 2025年10月20日 (保持1.0.4，等待crossterm更新)
-mio = "1.0.4"
+# mio: 跨平台异步I/O库 - 2025年10月27日
+mio = "1.1.0"
 # tungstenite: WebSocket协议的Rust实现 - 2025年10月最新版本
 tungstenite = "0.28.0"
 # rcgen: X.509证书生成库
@@ -363,7 +363,7 @@ syn = "2.0.107"
 # mockall: 强大的模拟对象库，用于单元测试 - 版本 0.13+ (字母索引)
 mockall = "0.13.1"
 # proptest: 基于属性的测试库，类似Hypothesis - 版本 1.5+ (字母索引)
-proptest = "1.8.0"
+proptest = "1.9.0"
 # rstest: 基于fixture的测试框架，支持参数化测试
 rstest = "0.26.1"  # 更新至最新稳定版本
 # cargo-tarpaulin: 代码覆盖率测试工具

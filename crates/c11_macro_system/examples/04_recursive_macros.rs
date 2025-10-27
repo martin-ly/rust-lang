@@ -2,7 +2,7 @@
 //!
 //! 演示递归宏的使用
 
-use C11_macro_system::{count, max};
+use c11_macro_system::{count, max};
 
 /// 递归反转
 #[allow(unused_macros)]
