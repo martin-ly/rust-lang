@@ -9,7 +9,7 @@
 
 ## 📊 目录
 
-- [C11 Macro System - Tier 2: Derive 宏开发指南](#C11-macro-system---tier-2-derive-宏开发指南)
+- [C11 Macro System - Tier 2: Derive 宏开发指南](#c11-macro-system---tier-2-derive-宏开发指南)
   - [📊 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [1. Derive 宏概述](#1-derive-宏概述)
@@ -37,7 +37,7 @@
 
 ## 📋 目录
 
-- [C11 Macro System - Tier 2: Derive 宏开发指南](#C11-macro-system---tier-2-derive-宏开发指南)
+- [C11 Macro System - Tier 2: Derive 宏开发指南](#c11-macro-system---tier-2-derive-宏开发指南)
   - [📊 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [1. Derive 宏概述](#1-derive-宏概述)
