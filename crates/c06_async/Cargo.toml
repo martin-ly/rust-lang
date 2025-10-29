@@ -43,7 +43,7 @@ async-trait = { workspace = true }
 rayon = { workspace = true }
 
 # 高级异步特性支持 - 2025年10月15日最新版本
-lru = "0.16.1"
+lru = "0.16.2"
 
 # 异步生态系统分析支持
 chrono = { workspace = true }
