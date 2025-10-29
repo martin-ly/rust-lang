@@ -4,7 +4,6 @@
 > **使用方式**: 通过术语索引快速查找定义，理解算法核心概念  
 > **相关文档**: [主索引](./00_MASTER_INDEX.md) | [README](./README.md) | [FAQ](./FAQ.md)
 
-
 ## 📊 目录
 
 - [C08 算法: 术语表 (Glossary)](#c08-算法-术语表-glossary)
@@ -28,7 +27,6 @@
     - [前缀和 (Prefix Sum)](#前缀和-prefix-sum)
   - [📚 延伸阅读](#-延伸阅读)
 
-
 **最后更新**: 2025-10-19  
 **适用版本**: Rust 1.75+  
 **文档类型**: 📚 参考资料
@@ -38,29 +36,6 @@
 ## 📋 术语索引
 
 [A](#算法-algorithm) | [B](#大o记号-big-o-notation) | [D](#动态规划-dynamic-programming) | [G](#贪心算法-greedy-algorithm) | [H](#哈希表-hash-table) | [T](#时间复杂度-time-complexity)
-
-**快速跳转**:
-
-- [C08 算法: 术语表 (Glossary)](#c08-算法-术语表-glossary)
-  - [� 目录](#-目录)
-  - [📋 术语索引](#-术语索引)
-  - [术语详解](#术语详解)
-    - [算法 (Algorithm)](#算法-algorithm)
-    - [时间复杂度 (Time Complexity)](#时间复杂度-time-complexity)
-    - [空间复杂度 (Space Complexity)](#空间复杂度-space-complexity)
-    - [大O记号 (Big-O Notation)](#大o记号-big-o-notation)
-    - [递归 (Recursion)](#递归-recursion)
-    - [动态规划 (Dynamic Programming)](#动态规划-dynamic-programming)
-    - [贪心算法 (Greedy Algorithm)](#贪心算法-greedy-algorithm)
-    - [分治法 (Divide and Conquer)](#分治法-divide-and-conquer)
-    - [回溯法 (Backtracking)](#回溯法-backtracking)
-    - [哈希表 (Hash Table)](#哈希表-hash-table)
-    - [二叉搜索树 (Binary Search Tree)](#二叉搜索树-binary-search-tree)
-    - [图 (Graph)](#图-graph)
-    - [堆 (Heap)](#堆-heap)
-    - [单调栈 (Monotonic Stack)](#单调栈-monotonic-stack)
-    - [前缀和 (Prefix Sum)](#前缀和-prefix-sum)
-  - [📚 延伸阅读](#-延伸阅读)
 
 ---
 

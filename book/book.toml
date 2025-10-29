@@ -1,0 +1,50 @@
+[book]
+authors = ["Rust Learning Community"]
+language = "zh-CN"
+multilingual = false
+src = "src"
+title = "Rust 系统化学习"
+description = "完整的 Rust 语言学习体系，从基础到高级的全方位覆盖"
+
+[build]
+build-dir = "book"
+create-missing = false
+
+[preprocessor.links]
+
+[output.html]
+default-theme = "ayu"
+preferred-dark-theme = "ayu"
+git-repository-url = "https://github.com/your-repo/rust-lang"
+git-repository-icon = "fa-github"
+additional-css = ["theme/custom.css"]
+additional-js = ["theme/custom.js"]
+site-url = "/"
+cname = ""
+no-section-label = true
+
+[output.html.fold]
+enable = true
+level = 0
+
+[output.html.search]
+enable = true
+limit-results = 30
+teaser-word-count = 30
+use-boolean-and = true
+boost-title = 2
+boost-hierarchy = 1
+boost-paragraph = 1
+expand = true
+heading-split-level = 3
+
+[output.html.print]
+enable = true
+
+[output.html.playground]
+editable = true
+copy-js = true
+runnable = true
+
+[output.html.code]
+hidelines = true

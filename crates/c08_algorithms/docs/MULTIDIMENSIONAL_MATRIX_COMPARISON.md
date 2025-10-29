@@ -111,14 +111,14 @@ mod tests {
 
 | 问题类型 | 推荐算法 | 时间复杂度 | 数据结构 | Rust 实现要点 | 示例代码 |
 |---------|---------|----------|---------|-------------|---------|
-| **单源最短路径 (非负权)** | Dijkstra | O(E + V log V) | `BinaryHeap` `HashMap` | 优先队列 + 懒删除 | [ref](#dijkstra-rust-190) |
-| **单源最短路径 (有负权)** | Bellman-Ford | O(VE) | `Vec` | 边列表 + 松弛 | [ref](#bellman-ford-rust-190) |
-| **全源最短路径** | Floyd-Warshall | O(V³) | `Vec<Vec>` | 动态规划 | [ref](#floyd-rust-190) |
-| **最小生成树** | Kruskal / Prim | O(E log E) | 并查集 / 堆 | 按权排序 | [ref](#mst-rust-190) |
-| **拓扑排序** | Kahn / DFS | O(V + E) | `VecDeque` | 入度 / 后序 | [ref](#topo-rust-190) |
-| **强连通分量** | Tarjan / Kosaraju | O(V + E) | `Stack` / 两次DFS | 时间戳 | [ref](#scc-rust-190) |
-| **二分图判定** | BFS染色 | O(V + E) | `VecDeque` | 交替染色 | [ref](#bipartite-rust-190) |
-| **最大流** | Dinic | O(V²E) | 层次图 | BFS + DFS | [ref](#maxflow-rust-190) |
+| **单源最短路径 (非负权)** | Dijkstra | O(E + V log V) | `BinaryHeap` `HashMap` | 优先队列 + 懒删除 | See examples |
+| **单源最短路径 (有负权)** | Bellman-Ford | O(VE) | `Vec` | 边列表 + 松弛 | See examples |
+| **全源最短路径** | Floyd-Warshall | O(V³) | `Vec<Vec>` | 动态规划 | See examples |
+| **最小生成树** | Kruskal / Prim | O(E log E) | 并查集 / 堆 | 按权排序 | See examples |
+| **拓扑排序** | Kahn / DFS | O(V + E) | `VecDeque` | 入度 / 后序 | See examples |
+| **强连通分量** | Tarjan / Kosaraju | O(V + E) | `Stack` / 两次DFS | 时间戳 | See examples |
+| **二分图判定** | BFS染色 | O(V + E) | `VecDeque` | 交替染色 | See examples |
+| **最大流** | Dinic | O(V²E) | 层次图 | BFS + DFS | See examples |
 
 ---
 
@@ -174,11 +174,11 @@ mod tests {
 | 场景 | 推荐算法 | 理由 | Rust 示例 |
 |------|---------|------|----------|
 | **单模式、短文本** | 朴素匹配 | 实现简单、开销小 | `str::find()` |
-| **单模式、长文本** | KMP | 线性时间保证 | [KMP实现](#kmp-rust-190) |
-| **单模式、大字符集** | Boyer-Moore | 跳跃式搜索快 | [BM实现](#bm-rust-190) |
+| **单模式、长文本** | KMP | 线性时间保证 | See examples |
+| **单模式、大字符集** | Boyer-Moore | 跳跃式搜索快 | See examples |
 | **多模式匹配** | Aho-Corasick | 专为多模式设计 | `aho-corasick` crate |
-| **需要哈希** | Rabin-Karp | 哈希比较 | [RK实现](#rk-rust-190) |
-| **后缀相关查询** | 后缀数组/树 | 支持多种查询 | [SA实现](#sa-rust-190) |
+| **需要哈希** | Rabin-Karp | 哈希比较 | See examples |
+| **后缀相关查询** | 后缀数组/树 | 支持多种查询 | See examples |
 
 ---
 
@@ -212,12 +212,12 @@ mod tests {
 
 | 算法类别 | Rust 1.90 特性 | 应用方式 | 性能提升 | 代码示例 |
 |---------|---------------|---------|---------|---------|
-| **排序** | `rayon::join` | 并行归并/快排 | 2-4x | [ref](#parallel-sort) |
-| | `async fn in trait` | 异步排序接口 | IO 场景 | [ref](#async-sort-trait) |
-| **图算法** | `async fn in trait` | 异步最短路径 | 网络图 | [ref](#async-graph) |
+| **排序** | `rayon::join` | 并行归并/快排 | 2-4x | See examples |
+| | `async fn in trait` | 异步排序接口 | IO 场景 | See examples |
+| **图算法** | `async fn in trait` | 异步最短路径 | 网络图 | See examples |
 | | `Option::is_some_and` | 条件判断简化 | 可读性 | `opt.is_some_and(\|x\| x > 0)` |
 | **动态规划** | 滚动数组 + `swap` | 空间优化 | 内存减半 | `swap(&mut prev, &mut curr)` |
-| | `spawn_blocking` | CPU 密集异步化 | 非阻塞 | [ref](#dp-async) |
+| | `spawn_blocking` | CPU 密集异步化 | 非阻塞 | See examples |
 | **字符串** | `const generics` | 编译期优化 | 零成本抽象 | `fn search<const N: usize>()` |
 | | `SIMD` | 批量比较 | 2-8x | `std::simd` |
 | **并行** | `rayon::par_iter` | 数据并行 | 线性加速 | `.par_iter().map()` |
