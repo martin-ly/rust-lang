@@ -1,0 +1,83 @@
+﻿# 12.11 内存优化（Memory Optimization）
+
+---
+
+
+## 📊 目录
+
+- [12.11 内存优化（Memory Optimization）](#1211-内存优化memory-optimization)
+  - [📊 目录](#-目录)
+  - [理论简述](#理论简述)
+  - [核心代码示例](#核心代码示例)
+  - [详细注释](#详细注释)
+  - [理论映射](#理论映射)
+  - [边界情况与常见错误](#边界情况与常见错误)
+  - [FAQ](#faq)
+
+
+## 理论简述
+
+内存优化旨在提升程序的空间利用率和运行效率。Rust通过零成本抽象、按需分配、避免不必要的拷贝、选择合适的数据结构等手段实现高效内存管理。相关理论详见[内存管理机制](../../11_memory_management/01_memory_management_theory.md)与[性能优化理论](../../22_performance_optimization/01_static_analysis.md)。
+
+---
+
+## 核心代码示例
+
+```rust
+fn main() {
+    // 预分配容量，减少扩容开销
+    let mut v = Vec::with_capacity(100);
+    for i in 0..100 {
+        v.push(i);
+    }
+    println!("容量: {}，长度: {}", v.capacity(), v.len());
+
+    // 避免不必要的拷贝
+    let s = String::from("hello");
+    let s_ref = &s; // 借用而非克隆
+    println!("{} {}", s, s_ref);
+}
+```
+
+---
+
+## 详细注释
+
+- Vec::with_capacity预分配内存，减少动态扩容次数。
+- 借用借用避免不必要的内存拷贝。
+- 选择合适的数据结构提升内存利用率。
+
+---
+
+## 理论映射
+
+- 对应[内存管理机制](../../11_memory_management/01_memory_management_theory.md)
+- 性能优化理论见[22_performance_optimization/01_static_analysis.md](../../22_performance_optimization/01_static_analysis.md)
+- 所有权系统理论见[01_ownership_borrowing/01_formal_ownership_system.md](../../01_ownership_borrowing/01_formal_ownership_system.md)
+
+---
+
+## 边界情况与常见错误
+
+- **边界情况**：
+  - 过度预分配导致内存浪费。
+  - 频繁分配/释放带来性能损耗。
+- **常见错误**：
+  - 不合理的数据结构选择。
+  - 不必要的clone或拷贝。
+  - 忽略内存对齐和缓存友好性。
+
+---
+
+## FAQ
+
+- **Q: Rust如何实现零成本抽象？**
+  - A: 编译器优化消除多余开销，抽象不影响运行时性能。
+- **Q: 如何选择合适的数据结构？**
+  - A: 根据访问模式、容量需求和性能瓶颈分析。
+- **Q: 内存优化常见应用场景？**
+  - A: 大数据处理、嵌入式、性能敏感系统等。
+
+---
+
+（本示例可直接用`rustc`编译验证，理论与代码一一对应，便于教学与自动化校验。）

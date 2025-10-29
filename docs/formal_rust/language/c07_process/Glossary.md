@@ -1,0 +1,397 @@
+﻿# 术语表 (Glossary)
+
+
+## 📊 目录
+
+- [进程管理术语](#进程管理术语)
+  - [进程 (Process)](#进程-process)
+  - [子进程 (Child Process)](#子进程-child-process)
+  - [僵尸进程 (Zombie Process)](#僵尸进程-zombie-process)
+  - [孤儿进程 (Orphan Process)](#孤儿进程-orphan-process)
+  - [进程组 (Process Group)](#进程组-process-group)
+  - [守护进程 (Daemon Process)](#守护进程-daemon-process)
+- [进程间通信术语](#进程间通信术语)
+  - [管道 (Pipe)](#管道-pipe)
+  - [匿名管道 (Anonymous Pipe)](#匿名管道-anonymous-pipe)
+  - [命名管道 (Named Pipe / FIFO)](#命名管道-named-pipe-fifo)
+  - [共享内存 (Shared Memory)](#共享内存-shared-memory)
+  - [消息队列 (Message Queue)](#消息队列-message-queue)
+  - [套接字 (Socket)](#套接字-socket)
+  - [Unix域套接字 (Unix Domain Socket)](#unix域套接字-unix-domain-socket)
+- [同步机制术语](#同步机制术语)
+  - [互斥锁 (Mutex)](#互斥锁-mutex)
+  - [读写锁 (RwLock)](#读写锁-rwlock)
+  - [条件变量 (Condition Variable)](#条件变量-condition-variable)
+  - [信号量 (Semaphore)](#信号量-semaphore)
+  - [原子操作 (Atomic Operation)](#原子操作-atomic-operation)
+  - [内存序 (Memory Ordering)](#内存序-memory-ordering)
+  - [屏障 (Barrier)](#屏障-barrier)
+- [并发控制术语](#并发控制术语)
+  - [死锁 (Deadlock)](#死锁-deadlock)
+  - [活锁 (Livelock)](#活锁-livelock)
+  - [饥饿 (Starvation)](#饥饿-starvation)
+  - [竞态条件 (Race Condition)](#竞态条件-race-condition)
+  - [数据竞争 (Data Race)](#数据竞争-data-race)
+- [性能优化术语](#性能优化术语)
+  - [零拷贝 (Zero-Copy)](#零拷贝-zero-copy)
+  - [批量处理 (Batch Processing)](#批量处理-batch-processing)
+  - [连接池 (Connection Pool)](#连接池-connection-pool)
+  - [缓存 (Cache)](#缓存-cache)
+  - [预热 (Warm-up)](#预热-warm-up)
+- [错误处理术语](#错误处理术语)
+  - [优雅关闭 (Graceful Shutdown)](#优雅关闭-graceful-shutdown)
+  - [熔断器 (Circuit Breaker)](#熔断器-circuit-breaker)
+  - [重试机制 (Retry Mechanism)](#重试机制-retry-mechanism)
+  - [超时 (Timeout)](#超时-timeout)
+- [监控和诊断术语](#监控和诊断术语)
+  - [性能指标 (Performance Metrics)](#性能指标-performance-metrics)
+  - [可观测性 (Observability)](#可观测性-observability)
+  - [分布式追踪 (Distributed Tracing)](#分布式追踪-distributed-tracing)
+  - [健康检查 (Health Check)](#健康检查-health-check)
+- [安全术语](#安全术语)
+  - [权限控制 (Access Control)](#权限控制-access-control)
+  - [沙箱 (Sandbox)](#沙箱-sandbox)
+  - [命令注入 (Command Injection)](#命令注入-command-injection)
+  - [资源限制 (Resource Limits)](#资源限制-resource-limits)
+- [跨平台术语](#跨平台术语)
+  - [平台抽象层 (Platform Abstraction Layer)](#平台抽象层-platform-abstraction-layer)
+  - [条件编译 (Conditional Compilation)](#条件编译-conditional-compilation)
+  - [特性检测 (Feature Detection)](#特性检测-feature-detection)
+  - [交叉编译 (Cross Compilation)](#交叉编译-cross-compilation)
+- [形式化验证术语](#形式化验证术语)
+  - [状态机 (State Machine)](#状态机-state-machine)
+  - [不变量 (Invariant)](#不变量-invariant)
+  - [安全属性 (Safety Property)](#安全属性-safety-property)
+  - [活跃性属性 (Liveness Property)](#活跃性属性-liveness-property)
+  - [资源分配图 (Resource Allocation Graph)](#资源分配图-resource-allocation-graph)
+
+
+## 进程管理术语
+
+### 进程 (Process)
+
+- **定义**: 正在执行的程序的实例，包含代码、数据和系统资源
+- **Rust 实现**: `std::process::Child`
+- **相关概念**: 进程ID、进程状态、进程控制块
+
+### 子进程 (Child Process)
+
+- **定义**: 由父进程创建的进程
+- **Rust 实现**: `std::process::Command::spawn()`
+- **特点**: 继承父进程的环境变量和文件描述符
+
+### 僵尸进程 (Zombie Process)
+
+- **定义**: 已终止但尚未被父进程回收的进程
+- **原因**: 父进程未调用 `wait()` 或 `waitpid()`
+- **解决**: 确保父进程正确等待子进程
+
+### 孤儿进程 (Orphan Process)
+
+- **定义**: 父进程已终止但仍在运行的子进程
+- **处理**: 被 init 进程收养
+- **Rust 处理**: 使用 `process_group()` 设置进程组
+
+### 进程组 (Process Group)
+
+- **定义**: 相关进程的集合，共享同一个进程组ID
+- **用途**: 信号分发和作业控制
+- **Rust 实现**: `std::os::unix::process::CommandExt::process_group()`
+
+### 守护进程 (Daemon Process)
+
+- **定义**: 在后台运行的系统服务进程
+- **特点**: 脱离终端，独立运行
+- **实现**: 双重 fork、设置工作目录、关闭文件描述符
+
+## 进程间通信术语
+
+### 管道 (Pipe)
+
+- **定义**: 单向通信通道，连接两个进程
+- **类型**: 匿名管道、命名管道
+- **Rust 实现**: `std::process::Stdio::piped()`
+
+### 匿名管道 (Anonymous Pipe)
+
+- **定义**: 临时管道，仅存在于内存中
+- **特点**: 单向通信，父子进程间使用
+- **Rust 实现**: `Command::new().stdin(Stdio::piped())`
+
+### 命名管道 (Named Pipe / FIFO)
+
+- **定义**: 持久化管道，存在于文件系统中
+- **特点**: 无关进程间通信
+- **Unix 实现**: `mkfifo()`
+
+### 共享内存 (Shared Memory)
+
+- **定义**: 多个进程共享的内存区域
+- **特点**: 最高性能的IPC机制
+- **Rust 实现**: `memmap2::MmapMut`
+
+### 消息队列 (Message Queue)
+
+- **定义**: 进程间传递消息的队列
+- **特点**: 异步通信，支持优先级
+- **Rust 实现**: `std::sync::mpsc::channel()`
+
+### 套接字 (Socket)
+
+- **定义**: 网络通信端点
+- **类型**: Unix域套接字、TCP套接字、UDP套接字
+- **Rust 实现**: `std::net::TcpStream`
+
+### Unix域套接字 (Unix Domain Socket)
+
+- **定义**: 同一台机器上进程间通信的套接字
+- **特点**: 高性能，支持文件描述符传递
+- **Rust 实现**: `std::os::unix::net::UnixStream`
+
+## 同步机制术语
+
+### 互斥锁 (Mutex)
+
+- **定义**: 确保同一时间只有一个线程访问共享资源
+- **Rust 实现**: `std::sync::Mutex<T>`
+- **特点**: 独占访问，防止数据竞争
+
+### 读写锁 (RwLock)
+
+- **定义**: 允许多个读取者或单个写入者访问共享资源
+- **Rust 实现**: `std::sync::RwLock<T>`
+- **特点**: 读多写少场景的性能优化
+
+### 条件变量 (Condition Variable)
+
+- **定义**: 用于线程间协调的同步原语
+- **Rust 实现**: `std::sync::Condvar`
+- **用途**: 等待特定条件满足
+
+### 信号量 (Semaphore)
+
+- **定义**: 控制对有限数量资源的访问
+- **特点**: 计数器，支持多个线程同时访问
+- **实现**: 基于 `Mutex` 和 `Condvar`
+
+### 原子操作 (Atomic Operation)
+
+- **定义**: 不可分割的操作，保证线程安全
+- **Rust 实现**: `std::sync::atomic::AtomicUsize`
+- **特点**: 无锁，高性能
+
+### 内存序 (Memory Ordering)
+
+- **定义**: 多线程环境下的内存访问顺序
+- **类型**: Relaxed、Acquire、Release、AcqRel、SeqCst
+- **用途**: 控制原子操作的内存可见性
+
+### 屏障 (Barrier)
+
+- **定义**: 确保多个线程在某个点同步
+- **用途**: 并行算法的同步点
+- **实现**: 基于 `Mutex` 和 `Condvar`
+
+## 并发控制术语
+
+### 死锁 (Deadlock)
+
+- **定义**: 两个或多个进程互相等待对方释放资源
+- **条件**: 互斥、占有和等待、不可剥夺、循环等待
+- **预防**: 资源分配图、银行家算法
+
+### 活锁 (Livelock)
+
+- **定义**: 进程不断改变状态但无法取得进展
+- **特点**: 类似死锁，但进程状态在变化
+- **解决**: 随机化、超时机制
+
+### 饥饿 (Starvation)
+
+- **定义**: 某些进程长时间无法获得所需资源
+- **原因**: 资源分配不公平
+- **解决**: 公平调度算法
+
+### 竞态条件 (Race Condition)
+
+- **定义**: 程序行为依赖于事件发生的相对时序
+- **结果**: 不确定的程序行为
+- **解决**: 同步机制、原子操作
+
+### 数据竞争 (Data Race)
+
+- **定义**: 多个线程同时访问共享数据，至少有一个是写操作
+- **Rust 防止**: 所有权系统、借用检查器
+- **解决**: 使用 `Mutex`、`RwLock` 等同步原语
+
+## 性能优化术语
+
+### 零拷贝 (Zero-Copy)
+
+- **定义**: 避免数据在内存中的复制操作
+- **实现**: 引用计数、内存映射
+- **Rust 实现**: `Arc<T>`、`memmap2`
+
+### 批量处理 (Batch Processing)
+
+- **定义**: 将多个小操作合并为一个大操作
+- **优点**: 减少系统调用开销
+- **应用**: 消息队列、文件I/O
+
+### 连接池 (Connection Pool)
+
+- **定义**: 预先创建并复用的连接集合
+- **优点**: 避免频繁创建销毁连接
+- **实现**: 基于 `Arc` 和 `Mutex`
+
+### 缓存 (Cache)
+
+- **定义**: 存储频繁访问数据的快速存储区域
+- **类型**: 进程内缓存、分布式缓存
+- **Rust 实现**: `HashMap`、`LRU Cache`
+
+### 预热 (Warm-up)
+
+- **定义**: 在正式使用前预先加载数据或初始化资源
+- **目的**: 提高系统启动后的性能
+- **实现**: 预加载、预计算
+
+## 错误处理术语
+
+### 优雅关闭 (Graceful Shutdown)
+
+- **定义**: 系统在关闭前完成当前工作并清理资源
+- **实现**: 信号处理、超时机制
+- **Rust 实现**: `ctrlc` crate
+
+### 熔断器 (Circuit Breaker)
+
+- **定义**: 防止级联故障的设计模式
+- **状态**: 关闭、开启、半开
+- **用途**: 分布式系统的容错
+
+### 重试机制 (Retry Mechanism)
+
+- **定义**: 失败后自动重新尝试的操作
+- **策略**: 指数退避、固定间隔
+- **实现**: 循环、递归
+
+### 超时 (Timeout)
+
+- **定义**: 操作的最大等待时间
+- **用途**: 防止无限等待
+- **Rust 实现**: `recv_timeout()`、`wait_timeout()`
+
+## 监控和诊断术语
+
+### 性能指标 (Performance Metrics)
+
+- **定义**: 衡量系统性能的量化指标
+- **类型**: 吞吐量、延迟、错误率
+- **实现**: 计数器、计时器
+
+### 可观测性 (Observability)
+
+- **定义**: 通过外部输出了解系统内部状态的能力
+- **支柱**: 日志、指标、追踪
+- **工具**: 日志框架、监控系统
+
+### 分布式追踪 (Distributed Tracing)
+
+- **定义**: 跟踪请求在分布式系统中的传播
+- **用途**: 性能分析、故障诊断
+- **实现**: 追踪ID、跨度
+
+### 健康检查 (Health Check)
+
+- **定义**: 定期检查系统组件是否正常工作
+- **类型**: 存活检查、就绪检查
+- **实现**: 心跳机制、状态端点
+
+## 安全术语
+
+### 权限控制 (Access Control)
+
+- **定义**: 控制进程对资源的访问权限
+- **模型**: 自主访问控制、强制访问控制
+- **实现**: 用户权限、文件权限
+
+### 沙箱 (Sandbox)
+
+- **定义**: 隔离的执行环境
+- **用途**: 限制进程权限，提高安全性
+- **实现**: 容器、虚拟机
+
+### 命令注入 (Command Injection)
+
+- **定义**: 通过恶意输入执行未授权命令
+- **防护**: 输入验证、参数化命令
+- **Rust 防护**: 类型安全、输入验证
+
+### 资源限制 (Resource Limits)
+
+- **定义**: 限制进程可使用的系统资源
+- **类型**: CPU、内存、文件描述符
+- **实现**: `setrlimit()`、容器限制
+
+## 跨平台术语
+
+### 平台抽象层 (Platform Abstraction Layer)
+
+- **定义**: 隐藏平台差异的软件层
+- **目的**: 提供统一的API
+- **实现**: trait、条件编译
+
+### 条件编译 (Conditional Compilation)
+
+- **定义**: 根据编译目标选择不同的代码路径
+- **Rust 实现**: `#[cfg(target_os = "windows")]`
+- **用途**: 平台特定代码
+
+### 特性检测 (Feature Detection)
+
+- **定义**: 运行时检测系统功能
+- **用途**: 动态适配不同平台
+- **实现**: 系统调用、环境变量
+
+### 交叉编译 (Cross Compilation)
+
+- **定义**: 在一个平台上编译另一个平台的代码
+- **工具**: `cross` crate、Docker
+- **用途**: 多平台部署
+
+## 形式化验证术语
+
+### 状态机 (State Machine)
+
+- **定义**: 描述系统状态和转换的数学模型
+- **用途**: 系统建模、验证
+- **Rust 实现**: enum、trait
+
+### 不变量 (Invariant)
+
+- **定义**: 在程序执行过程中始终为真的条件
+- **类型**: 数据不变量、状态不变量
+- **验证**: 编译时检查、运行时断言
+
+### 安全属性 (Safety Property)
+
+- **定义**: 描述系统不应该做什么的属性
+- **例子**: 无死锁、无数据竞争
+- **验证**: 模型检查、定理证明
+
+### 活跃性属性 (Liveness Property)
+
+- **定义**: 描述系统最终应该做什么的属性
+- **例子**: 最终完成、无饥饿
+- **验证**: 形式化证明、测试
+
+### 资源分配图 (Resource Allocation Graph)
+
+- **定义**: 描述进程和资源关系的图结构
+- **用途**: 死锁检测、资源管理
+- **实现**: 邻接矩阵、邻接表
+
+---
+
+*本术语表涵盖了进程、通信与同步机制模块中的核心概念和专业术语，为深入理解相关技术提供参考。*
