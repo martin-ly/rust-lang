@@ -223,12 +223,25 @@
 
 ### 形式化理论文档 🔬
 
+#### 本模块形式化文档
+
 | 文档 | 主题 | 核心内容 |
 |------|------|---------|
 | [`docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md`](docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md) | **异步vs同步等价性** | CPS变换、Monad语义、控制流分析、性能对比 |
 | [`docs/ACTOR_REACTOR_PATTERNS.md`](docs/ACTOR_REACTOR_PATTERNS.md) | **Actor与Reactor模式** | 消息传递、事件驱动、调度机制、形式化证明 |
 | [`docs/CSP_VS_ASYNC_ANALYSIS.md`](docs/CSP_VS_ASYNC_ANALYSIS.md) | **CSP vs Rust Async** | Golang对比、Channel语义、调度模型、性能分析 |
 | [`docs/ASYNC_RECURSION_ANALYSIS.md`](docs/ASYNC_RECURSION_ANALYSIS.md) | **异步递归** | Box::pin原理、尾递归优化、性能分析、形式化证明 |
+
+#### 🔬 形式化工程系统理论
+
+深入学习设计模式的形式化理论基础：
+
+- 📐 **[设计模式形式化理论](../../docs/rust-formal-engineering-system/03_design_patterns/)** - 完整的模式定义和类型规则
+- 🔬 **[形式化验证理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/09_formal_verification/)** - 形式化验证方法
+- 🎯 **[类型系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)** - 设计模式中的类型系统应用
+- 🧮 **[数学基础](../../docs/rust-formal-engineering-system/01_theoretical_foundations/10_mathematical_foundations/)** - 模式背后的数学理论
+
+**学习路径**: 实践代码 → 形式化理论 → 深入理解
 
 ### 代码示例与实现
 

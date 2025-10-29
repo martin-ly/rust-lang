@@ -576,6 +576,17 @@ cargo test --example rust_190_rich_practical_examples
 - 📊 **[可视化资源导航](./docs/VISUALIZATION_INDEX.md)** - 4大可视化工具入口
 - 🔄 **[更新日志](./CHANGELOG.md)** - 完整的版本历史 NEW! 🏆
 
+### 🔬 形式化理论
+
+深入学习所有权系统的形式化理论基础：
+
+- 📐 **[所有权形式化理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/03_ownership_borrowing/)** - 完整的数学定义和类型规则
+- 🎯 **[类型系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)** - Rust 类型系统的形式化描述
+- 🔒 **[内存安全语义](../../docs/rust-formal-engineering-system/01_theoretical_foundations/02_memory_safety/)** - 内存安全的形式化保证
+- ⚡ **[并发模型理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/04_concurrency_models/)** - 并发安全的形式化模型
+
+**学习路径**: 实践代码 → 形式化理论 → 深入理解
+
 ### 项目报告
 
 - 🏆 **[Phase 5 完成报告](./docs/reports/C01_FINAL_STANDARDIZATION_2025_10_22.md)** - 最终标准化报告 NEW!

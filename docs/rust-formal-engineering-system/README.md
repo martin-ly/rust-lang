@@ -23,6 +23,13 @@
 
 ## 快速导航
 
+### 🗺️ 统一导航入口
+
+- **[形式化理论与实践统一导航](../FORMAL_AND_PRACTICAL_NAVIGATION.md)** ⭐⭐⭐ - 推荐入口
+  - 提供形式化系统与主项目代码之间的快速导航
+  - 支持双向链接，无缝切换
+  - 包含学习路径建议
+
 ### 核心模块
 
 - 理论基础：[`01_theoretical_foundations/`](./01_theoretical_foundations/) - 类型系统、所有权、并发模型
@@ -42,7 +49,23 @@
 - 跨语言比较：[`07_cross_language_comparison/`](./07_cross_language_comparison/) - C/C++、Go、Haskell、Zig
 - 研究议程：[`09_research_agenda/`](./09_research_agenda/) - 前沿方向与问题列表
 
-## 构建与使用
+## 🔗 相关链接
+
+- [统一导航页面](../FORMAL_AND_PRACTICAL_NAVIGATION.md) - 理论与实践导航
+- [快速开始](./QUICK_START.md) - 5分钟快速上手指南 ⭐
+- [维护指南](./MAINTENANCE_GUIDE.md) - 系统维护和更新指南 ⭐
+- [版本更新日志](./RUST_1_90_CHANGELOG.md) - Rust 1.90 更新日志
+- [完成度报告](./COMPLETION_STATUS_REAL_2025_10_30.md) - 真实完成度评估
+
+## 🛠️ 工具脚本
+
+- `update_rust_version.sh` - 批量更新版本号
+- `mark_placeholders.sh` - 自动标注占位符文件
+- `check_links.sh` - 检查链接有效性
+- `verify_cross_references.sh` - 验证和更新交叉引用
+- `maintenance_check.sh` - 自动化维护检查（季度/月度/周度）
+
+详细使用说明请参考 [维护指南](./MAINTENANCE_GUIDE.md) 和 [快速开始](./QUICK_START.md)。
 
 - 文档：直接浏览各目录下的 `*.md`。
 - 代码：配套示例位于仓库 `crates/` 与 `formal_rust/`、`rust-formal-engineering-system` 相关子目录。

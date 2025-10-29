@@ -502,6 +502,20 @@ cargo test synchronization::adaptive_locks
 - 公平策略：`fairness_ratio=2~4`；高优先级阈值根据业务优先级层数取 `1~3`。
 - NUMA：将线程与内存绑定至同一 NUMA 节点；跨节点通信优先使用无锁/批量化接口减少跳变。
 
+### 🔬 形式化理论
+
+深入学习并发编程的形式化理论基础：
+
+- ⚡ **[并发模型理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/04_concurrency_models/)** - 并发系统的形式化定义和证明
+- 🔄 **[所有权与借用理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/03_ownership_borrowing/)** - 并发环境下的所有权语义
+- 🎯 **[类型系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)** - Send/Sync 特质的形式化描述
+- 🔒 **[内存安全语义](../../docs/rust-formal-engineering-system/01_theoretical_foundations/02_memory_safety/)** - 并发环境下的内存安全保证
+- 🎭 **[同步编程范式](../../docs/rust-formal-engineering-system/02_programming_paradigms/01_synchronous/)** - 同步并发编程的形式化理论
+
+**学习路径**: 实践代码 → 形式化理论 → 深入理解
+
+---
+
 ## 常见问题（FAQ）
 
 - 如何在不引入数据竞争的情况下复用可变引用？

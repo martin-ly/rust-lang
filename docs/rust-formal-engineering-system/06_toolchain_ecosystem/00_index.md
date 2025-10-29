@@ -23,6 +23,20 @@
   - [📊 内容统计](#-内容统计)
   - [🔗 相关链接](#-相关链接)
 
+## 💻 实际文档示例
+
+将工具链形式化理论知识应用到实际文档中：
+
+- **[工具链实用文档](../../../docs/toolchain/)** - 完整的工具链使用指南
+  - [编译器特性与优化](../../../docs/toolchain/01_compiler_features.md) - 编译器优化深入指南（935行）
+  - [Cargo 工作空间指南](../../../docs/toolchain/02_cargo_workspace_guide.md) - Workspace 和依赖管理（1013行）
+  - [Rustdoc 高级功能](../../../docs/toolchain/03_rustdoc_advanced.md) - 文档生成高级技巧（1004行）
+  - [工具链 README](../../../docs/toolchain/README.md) - 工具链文档总览
+
+**学习路径**: 形式化理论 → 实际文档 → 应用实践
+
+---
+
 ## 🎯 概述
 
 本目录涵盖Rust完整的工具链生态系统，从编译器到包管理器，从测试框架到性能分析工具，提供全面的工具使用指南。

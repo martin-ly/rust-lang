@@ -28,7 +28,19 @@
 - **[07_dsl_construction.md](07_dsl_construction.md)** - DSL构建技术 (待创建)
 - **[08_code_generation.md](08_code_generation.md)** - 代码生成理论 (待创建)
 
-## 主题概述
+## 💻 实际代码示例
+
+将宏系统形式化理论知识应用到实际代码中：
+
+- **[C11 宏系统模块](../../../../crates/c11_macro_system/)** - 完整的宏系统学习模块
+- **[代码示例](../../../../crates/c11_macro_system/examples/)** - 宏系统实际代码示例
+- **[声明宏示例](../../../../crates/c11_macro_system/examples/)** - `macro_rules!` 示例
+- **[过程宏示例](../../../../crates/c11_macro_system/src/)** - 过程宏实现
+- **[测试用例](../../../../crates/c11_macro_system/tests/)** - 完整的测试套件
+
+**学习路径**: 形式化理论 → 实际代码 → 验证理解
+
+---
 
 Rust宏系统是一个强大的元编程框架，基于语法抽象和编译期代码生成原则。本模块深入探讨宏系统的理论基础、实现机制和应用模式，涵盖从基础声明宏到高级过程宏的完整知识体系。
 

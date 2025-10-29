@@ -1,6 +1,5 @@
 ﻿# 第 4 章：并行计算与生态系统
 
-
 ## 📊 目录
 
 - [1. 并发 (Concurrency) vs. 并行 (Parallelism)](#1-并发-concurrency-vs-并行-parallelism)
@@ -17,7 +16,6 @@
   - [4.1. 抽象层次的提升](#41-抽象层次的提升)
   - [4.2. "无畏"的边界](#42-无畏的边界)
 - [5. 总结](#5-总结)
-
 
 - [第 4 章：并行计算与生态系统](#第-4-章并行计算与生态系统)
   - [1. 并发 (Concurrency) vs. 并行 (Parallelism)](#1-并发-concurrency-vs-并行-parallelism)

@@ -2,7 +2,6 @@
 
 ---
 
-
 ## 📊 目录
 
 - [问答](#问答)
@@ -11,7 +10,6 @@
   - [Q3: `Arc<Mutex<T>>` 看起来很笨重，它到底是怎么工作的？](#q3-arcmutext-看起来很笨重它到底是怎么工作的)
   - [Q4: 我应该什么时候用 `Rayon`，什么时候用 `async/await` (Tokio/async-std)？](#q4-我应该什么时候用-rayon什么时候用-asyncawait-tokioasync-std)
   - [Q5: 直接使用原子类型 (Atomics) 会比 `Mutex` 更快吗？](#q5-直接使用原子类型-atomics-会比-mutex-更快吗)
-
 
 ## 问答
 

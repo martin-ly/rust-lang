@@ -1,0 +1,46 @@
+[package]
+name = "c12_wasm"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.90"
+authors = ["Rust Learning Community"]
+description = "Comprehensive WebAssembly learning module with Rust 1.90+"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/rust-lang/rust-lang-learning"
+
+[[bin]]
+name = "wasi-app"
+path = "src/bin/wasi_app.rs"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+name = "c12_wasm"
+
+[features]
+default = []
+ecosystem = []  # 启用生态库示例模块
+
+[dependencies]
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+web-sys = { version = "0.3", features = [
+    "console",
+    "Window",
+    "Document",
+    "HtmlElement",
+    "HtmlCanvasElement",
+    "CanvasRenderingContext2d",
+    "Request",
+    "Response",
+    "Headers",
+] }
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"
+
+[profile.release]
+opt-level = "z"      # 优化二进制大小
+lto = true           # 链接时优化
+codegen-units = 1    # 单一代码生成单元
+strip = true         # 去除调试符号
+panic = "abort"      # 减小二进制大小

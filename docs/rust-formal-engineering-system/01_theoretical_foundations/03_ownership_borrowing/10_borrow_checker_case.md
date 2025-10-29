@@ -1,6 +1,5 @@
 ﻿# 递归迭代补充：借用检查器案例分析的形式化论证与证明
 
-
 ## 📊 目录
 
 - [1. 典型案例与边界场景](#1-典型案例与边界场景)
@@ -17,7 +16,6 @@
   - [RefCell 运行时借用 {#refcell-runtime-borrow}](#refcell-运行时借用-refcell-runtime-borrow)
   - [Send/Sync 案例 {#send-sync-cases}](#sendsync-案例-send-sync-cases)
   - [FFI 别名规则 {#ffi-aliasing}](#ffi-别名规则-ffi-aliasing)
-
 
 ## 1. 典型案例与边界场景
 

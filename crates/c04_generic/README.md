@@ -251,6 +251,20 @@ c04_generic/docs/
 
 ---
 
+### 🔬 形式化理论
+
+深入学习泛型系统的形式化理论基础：
+
+- 📐 **[泛型系统形式化理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/generics/)** - 泛型系统的形式化定义和 System F 理论
+- 🎯 **[类型系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)** - 类型系统在泛型中的应用
+- 🔄 **[Trait 系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/05_trait_system/)** - Trait 约束的形式化描述
+- 🔒 **[参数多态理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/generics/01_formal_generics.md)** - System F 和有界量化理论
+- ⚙️ **[单态化理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/generics/05_generic_impls.md)** - 编译时泛型特化的形式化模型
+
+**学习路径**: 实践代码 → 形式化理论 → 深入理解
+
+---
+
 ## 📖 学习路径
 
 ### 路径 A: 快速入门 (2-3周)

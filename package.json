@@ -1,0 +1,17 @@
+{
+  "name": "rust-lang-learning",
+  "version": "1.0.0",
+  "description": "Rust language learning project with comprehensive documentation",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write \"**/*.{md,json,yaml,yml}\"",
+    "format:check": "prettier --check \"**/*.{md,json,yaml,yml}\"",
+    "format:md": "prettier --write \"**/*.md\""
+  },
+  "devDependencies": {
+    "prettier": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

@@ -212,6 +212,19 @@
 
 ---
 
+### 🔬 形式化理论
+
+深入学习控制流与函数的形式化理论基础：
+
+- 🎯 **[同步编程范式理论](../../docs/rust-formal-engineering-system/02_programming_paradigms/01_synchronous/)** - 同步执行模型的形式化描述
+- 🔄 **[控制流形式化理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/)** - 控制流结构的数学定义
+- 🎭 **[类型系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)** - 类型系统在控制流中的应用
+- 🔒 **[内存安全语义](../../docs/rust-formal-engineering-system/01_theoretical_foundations/02_memory_safety/)** - 控制流中的内存安全保证
+
+**学习路径**: 实践代码 → 形式化理论 → 深入理解
+
+---
+
 ## 📚 学习资源
 
 ### 基础示例

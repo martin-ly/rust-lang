@@ -80,6 +80,7 @@
 ### 📦 归档文档
 
 历史文档已归档到 `archive/` 目录：
+
 - [查看归档索引](./archive/ARCHIVE_INDEX.md)
 - 阶段报告: `archive/phase_reports/`
 - 模块报告: `archive/module_reports/`
@@ -89,6 +90,7 @@
 ### 🧹 文档清理
 
 如需整理文档结构：
+
 - [📊 文档分析报告](./DOCS_ANALYSIS_AND_CLASSIFICATION_2025_10_30.md)
 - [🚀 归档快速指南](../ARCHIVE_QUICK_GUIDE.md)
 - [📝 清理总结](./DOCS_CLEANUP_SUMMARY_2025_10_30.md)
@@ -97,7 +99,7 @@
 
 ## 📁 项目结构
 
-```
+```text
 rust-lang/
 ├── crates/              # 核心模块代码
 │   ├── c01_ownership/  # 所有权与借用
@@ -248,4 +250,3 @@ cargo run -p rust-doc-search -- search "关键词"
 ---
 
 🦀 **Happy Rust Learning!** 🦀
-

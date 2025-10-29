@@ -417,4 +417,17 @@ Week 2:
 
 ---
 
+### 🔬 形式化理论
+
+深入学习类型系统的形式化理论基础：
+
+- 🎯 **[类型系统形式化理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)** - 完整的类型系统数学定义和类型规则
+- 🏗️ **[Trait 系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/05_trait_system/)** - Trait 系统的形式化描述
+- 🔄 **[生命周期管理理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/06_lifetime_management/)** - 生命周期的形式化模型
+- 🔒 **[内存安全语义](../../docs/rust-formal-engineering-system/01_theoretical_foundations/02_memory_safety/)** - 内存安全的形式化保证
+
+**学习路径**: 实践代码 → 形式化理论 → 深入理解
+
+---
+
 *本模块专注于Rust类型系统的学习，提供系统性的学习路径和实践示例。如有任何问题或建议，欢迎反馈。*

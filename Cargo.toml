@@ -14,6 +14,7 @@ members = [
     "crates/c09_design_pattern",
     "crates/c10_networks",
     "crates/c11_macro_system",
+    "crates/c12_wasm",
 ]
 
 [workspace.package]
