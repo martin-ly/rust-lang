@@ -59,7 +59,7 @@
 
 **三层结构**:
 
-```
+```text
 Level 1: docs/README.md (总入口)
     ↓
 Level 2: docs/docs/README.md (核心导航)
