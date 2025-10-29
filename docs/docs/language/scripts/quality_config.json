@@ -1,0 +1,160 @@
+{
+  "quality_standards": {
+    "content_quality": {
+      "accuracy_threshold": 99,
+      "completeness_threshold": 95,
+      "consistency_threshold": 98,
+      "timeliness_threshold": 90
+    },
+    "format_quality": {
+      "syntax_correctness_threshold": 99,
+      "format_compliance_threshold": 95,
+      "code_correctness_threshold": 98,
+      "formula_correctness_threshold": 99
+    },
+    "link_quality": {
+      "link_validity_threshold": 99,
+      "link_relevance_threshold": 95,
+      "link_freshness_threshold": 90,
+      "link_accessibility_threshold": 99
+    },
+    "structure_quality": {
+      "directory_completeness_threshold": 95,
+      "naming_compliance_threshold": 98,
+      "reference_completeness_threshold": 99,
+      "navigation_functionality_threshold": 95
+    }
+  },
+  "check_categories": {
+    "critical": {
+      "description": "Critical issues that affect system operation",
+      "response_time": "24 hours",
+      "examples": [
+        "Broken critical links",
+        "Missing essential files",
+        "Corrupted content",
+        "Security vulnerabilities"
+      ]
+    },
+    "important": {
+      "description": "Important issues that affect user experience",
+      "response_time": "72 hours",
+      "examples": [
+        "Broken navigation links",
+        "Outdated information",
+        "Format inconsistencies",
+        "Missing documentation"
+      ]
+    },
+    "normal": {
+      "description": "Normal issues that don't affect core functionality",
+      "response_time": "1 week",
+      "examples": [
+        "Minor format issues",
+        "Outdated examples",
+        "Missing cross-references",
+        "Style inconsistencies"
+      ]
+    },
+    "suggestion": {
+      "description": "Improvement suggestions and optimizations",
+      "response_time": "1 month",
+      "examples": [
+        "Content improvements",
+        "Structure optimizations",
+        "Feature additions",
+        "User experience enhancements"
+      ]
+    }
+  },
+  "file_patterns": {
+    "markdown_files": "**/*.md",
+    "index_files": "**/00_index.md",
+    "navigation_files": "navigation/**/*.md",
+    "script_files": "scripts/**/*.py",
+    "config_files": "**/*.json"
+  },
+  "link_patterns": {
+    "internal_links": [
+      "\\[([^\\]]+)\\]\\(([^)]+)\\)",
+      "\\[([^\\]]+)\\]\\(([^)]+)\\)"
+    ],
+    "external_links": [
+      "https?://[^\\s\\)]+",
+      "ftp://[^\\s\\)]+"
+    ],
+    "anchor_links": [
+      "#[a-zA-Z0-9_-]+"
+    ]
+  },
+  "content_patterns": {
+    "code_blocks": [
+      "```([a-zA-Z0-9]+)?\\n(.*?)\\n```"
+    ],
+    "math_formulas": [
+      "\\$\\$(.*?)\\$\\$",
+      "\\$(.*?)\\$"
+    ],
+    "headers": [
+      "^#+\\s+(.+)$"
+    ],
+    "links": [
+      "\\[([^\\]]+)\\]\\(([^)]+)\\)"
+    ]
+  },
+  "validation_rules": {
+    "markdown": {
+      "required_headers": ["#", "##"],
+      "max_header_depth": 6,
+      "required_metadata": ["title", "date", "version"],
+      "forbidden_patterns": [
+        "TODO:",
+        "FIXME:",
+        "XXX:"
+      ]
+    },
+    "links": {
+      "max_link_length": 200,
+      "required_alt_text": true,
+      "forbidden_domains": [
+        "example.com",
+        "test.com"
+      ]
+    },
+    "code": {
+      "max_code_block_length": 1000,
+      "required_language_specification": true,
+      "forbidden_patterns": [
+        "console\\.log",
+        "print\\(",
+        "System\\.out\\.println"
+      ]
+    }
+  },
+  "reporting": {
+    "output_formats": ["json", "html", "markdown"],
+    "include_details": true,
+    "include_suggestions": true,
+    "include_statistics": true,
+    "include_trends": true
+  },
+  "automation": {
+    "auto_fix": {
+      "enabled": true,
+      "fixable_issues": [
+        "trailing_whitespace",
+        "missing_newline",
+        "incorrect_indentation"
+      ]
+    },
+    "notifications": {
+      "enabled": true,
+      "channels": ["email", "slack", "webhook"],
+      "thresholds": {
+        "quality_score": 80,
+        "broken_links": 5,
+        "duplicate_files": 3
+      }
+    }
+  }
+}
