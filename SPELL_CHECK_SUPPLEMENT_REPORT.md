@@ -13,7 +13,7 @@
 
 ### 1. 网络协议扩展 (+14 个)
 
-```
+```text
 gRPC          - Google RPC 框架
 protobuf      - Protocol Buffers
 GraphQL       - 查询语言
@@ -36,7 +36,7 @@ HTTP3         - HTTP 版本 3
 
 ### 2. 宏系统扩展 (+19 个)
 
-```
+```text
 DeriveInput   - 派生宏输入类型
 parse         - 解析函数
 spanned       - 带位置信息
@@ -65,7 +65,7 @@ unhygienic    - 非卫生的
 
 ### 3. Rust 生态库扩展 (+11 个)
 
-```
+```text
 tonic         - gRPC 框架
 prost         - Protobuf 实现
 tarpc         - RPC 框架
@@ -86,7 +86,7 @@ color-eyre    - 彩色错误报告
 
 ### 4. WASM 工具链扩展 (+9 个)
 
-```
+```text
 wasm-bindgen  - JS 绑定生成器
 wasm-pack     - WASM 打包工具
 wasm-opt      - WASM 优化器
@@ -104,7 +104,7 @@ wasmprinter   - WASM 打印器
 
 ### 5. 算法术语扩展 (+15 个)
 
-```
+```text
 Bellman       - Bellman-Ford 算法
 Ford          - Bellman-Ford 算法
 Floyd         - Floyd-Warshall 算法
@@ -129,7 +129,7 @@ countingsort  - 计数排序
 
 ### 6. 数据库和中间件 (+13 个)
 
-```
+```text
 SQL           - 结构化查询语言
 NoSQL         - 非关系型数据库
 Redis         - 内存数据库
@@ -153,7 +153,7 @@ Sentry        - 错误追踪平台
 
 ### 7. CI/CD 和云平台 (+12 个)
 
-```
+```text
 AWS           - Amazon Web Services
 Azure         - Microsoft Azure
 GCP           - Google Cloud Platform
@@ -188,7 +188,7 @@ AppVeyor      - Windows CI 平台
 
 ### 总体统计
 
-```
+```text
 补充前总术语数: 300+
 新增术语数:     80+
 补充后总术语数: 380+
@@ -202,23 +202,29 @@ AppVeyor      - Windows CI 平台
 ### 新增覆盖的技术栈
 
 ✅ **微服务架构**
+
 - gRPC, protobuf, REST, GraphQL
 - tonic, prost, tarpc
 
 ✅ **消息队列**
+
 - MQTT, AMQP, ZeroMQ, Kafka, RabbitMQ
 
 ✅ **宏系统深度**
+
 - DeriveInput, Span, Ident, TokenTree
 - 元变量: tt, vis, ty, pat
 
 ✅ **数据存储**
+
 - SQL, NoSQL, Redis, PostgreSQL, MongoDB, SQLite
 
 ✅ **可观测性**
+
 - tracing, Prometheus, Grafana, Jaeger, OpenTelemetry
 
 ✅ **云原生**
+
 - AWS, Azure, GCP, Kubernetes, Docker, Terraform
 
 ---
@@ -259,7 +265,7 @@ grep "Observer|Singleton|Factory" crates/c09_design_pattern/docs
 
 按照之前的步骤重新加载 VS Code 窗口：
 
-```
+```text
 Ctrl+Shift+P → "Reload Window" → 回车
 ```
 
@@ -296,7 +302,7 @@ Prometheus, Grafana, Jaeger, OpenTelemetry
 
 ### 配置行数变化
 
-```
+```text
 补充前: 333 行
 补充后: 402 行
 增长:   +69 行 (+20.7%)
@@ -309,15 +315,19 @@ Prometheus, Grafana, Jaeger, OpenTelemetry
 ### 分类完整性
 
 ✅ **基础设施** - 完整覆盖
+
 - 网络、存储、消息队列、监控
 
 ✅ **开发工具** - 完整覆盖
+
 - CI/CD、云平台、调试工具
 
 ✅ **Rust 生态** - 深度覆盖
+
 - 核心库、异步运行时、错误处理
 
 ✅ **领域专业** - 全面覆盖
+
 - WASM、网络、宏系统、算法
 
 ### 术语准确性
@@ -367,14 +377,16 @@ git commit -m "chore: add new spell check terms for [feature]"
 #### 场景 1: 微服务开发
 
 **补充前** ❌:
-```
+
+```text
 gRPC - Unknown word
 protobuf - Unknown word
 tonic - Unknown word
 ```
 
 **补充后** ✅:
-```
+
+```text
 gRPC - ✅ 正常
 protobuf - ✅ 正常
 tonic - ✅ 正常
@@ -383,14 +395,16 @@ tonic - ✅ 正常
 #### 场景 2: 宏系统开发
 
 **补充前** ❌:
-```
+
+```text
 DeriveInput - Unknown word
 TokenStream - Unknown word (已有)
 Span - Unknown word
 ```
 
 **补充后** ✅:
-```
+
+```text
 DeriveInput - ✅ 正常
 TokenStream - ✅ 正常
 Span - ✅ 正常
@@ -399,14 +413,16 @@ Span - ✅ 正常
 #### 场景 3: 数据库操作
 
 **补充前** ❌:
-```
+
+```text
 PostgreSQL - Unknown word
 MongoDB - Unknown word
 Redis - Unknown word
 ```
 
 **补充后** ✅:
-```
+
+```text
 PostgreSQL - ✅ 正常
 MongoDB - ✅ 正常
 Redis - ✅ 正常
@@ -447,11 +463,10 @@ Redis - ✅ 正常
 
 ---
 
-# 🚀 下一步
+🚀 下一步
 
 1. **重新加载 VS Code** - 使新配置生效
 2. **验证新术语** - 测试上述示例
 3. **正常使用** - 享受无干扰的编码体验
 
-**配置已完成，祝编码愉快！🦀**
-
+**配置已完成，祝编码愉快！🦀**-

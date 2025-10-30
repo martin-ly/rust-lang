@@ -100,7 +100,7 @@
 
 ✅ **目录忽略**:
 
-```
+```text
 node_modules/**
 target/**
 pkg/**
@@ -140,7 +140,7 @@ pkg/**
 
 ### 术语统计
 
-```
+```text
 总计: 300+ 专业术语
 ├─ WASM 相关:      19 个
 ├─ Rust 关键字:    30 个
@@ -186,7 +186,7 @@ VS Code 扩展面板 (Ctrl+Shift+X) 中搜索并安装：
 
 #### 步骤 2: 重新加载 VS Code
 
-```
+```text
 快捷键: Ctrl+Shift+P (Windows/Linux) 或 Cmd+Shift+P (Mac)
 命令: "Reload Window"
 ```
@@ -281,7 +281,7 @@ proc-macro, BFS, WebSocket, GATs, Criterion, TypedArray
 
 ### 配置架构
 
-```
+```text
 rust-lang/
 ├── .vscode/
 │   ├── settings.json          ← 300+ 术语，分类整理
@@ -304,7 +304,7 @@ rust-lang/
 
 ### 配置优先级
 
-```
+```text
 1. 项目 .vscode/settings.json     (最高优先级)
 2. 工作区 .vscode/settings.json   (当前配置)
 3. 项目 cspell.json
@@ -441,7 +441,7 @@ git commit -m "chore: add new spell check terms"
 
 ---
 
-# 🎉 配置完成
+🎉 配置完成
 
 现在您可以：
 

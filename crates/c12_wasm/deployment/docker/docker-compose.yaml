@@ -1,0 +1,274 @@
+# Docker Compose 配置 - Wasm 微服务栈
+#
+# 本配置文件演示如何使用 Docker Compose 编排 Wasm 容器
+# 包括：Wasm 服务、数据库、缓存、监控等
+#
+# 使用方法：
+#   docker-compose up -d
+#   docker-compose ps
+#   docker-compose logs -f wasm-app
+#   docker-compose down
+
+version: '3.8'
+
+# ============================================================================
+# Services
+# ============================================================================
+services:
+  # --------------------------------------------------------------------------
+  # Wasm 微服务
+  # --------------------------------------------------------------------------
+  wasm-app:
+    image: your-registry/wasm-microservice:latest
+    container_name: wasm-app
+
+    # 使用 WasmEdge 运行时
+    runtime: io.containerd.wasmedge.v1
+    platform: wasi/wasm
+
+    # 端口映射
+    ports:
+      - "8080:8080"     # HTTP 服务
+      - "9090:9090"     # Prometheus 指标
+
+    # 环境变量
+    environment:
+      - LOG_LEVEL=info
+      - PORT=8080
+      - MAX_CONNECTIONS=1000
+      - DATABASE_URL=postgres://wasmuser:wasmpass@postgres:5432/wasmdb
+      - REDIS_URL=redis://redis:6379
+
+    # 卷挂载
+    volumes:
+      - ./config:/etc/app:ro           # 配置文件（只读）
+      - wasm-data:/data                # 数据目录
+
+    # 资源限制
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 64M
+        reservations:
+          cpus: '0.1'
+          memory: 16M
+
+    # 健康检查
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+    # 依赖服务
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
+    # 网络
+    networks:
+      - wasm-net
+
+    # 重启策略
+    restart: unless-stopped
+
+    # 日志配置
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # --------------------------------------------------------------------------
+  # PostgreSQL 数据库
+  # --------------------------------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    container_name: wasm-postgres
+
+    environment:
+      - POSTGRES_DB=wasmdb
+      - POSTGRES_USER=wasmuser
+      - POSTGRES_PASSWORD=wasmpass
+      - PGDATA=/var/lib/postgresql/data/pgdata
+
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+    ports:
+      - "5432:5432"
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wasmuser -d wasmdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+    networks:
+      - wasm-net
+
+    restart: unless-stopped
+
+  # --------------------------------------------------------------------------
+  # Redis 缓存
+  # --------------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: wasm-redis
+
+    command: redis-server --appendonly yes --requirepass redispass
+
+    volumes:
+      - redis-data:/data
+
+    ports:
+      - "6379:6379"
+
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+    networks:
+      - wasm-net
+
+    restart: unless-stopped
+
+  # --------------------------------------------------------------------------
+  # Prometheus 监控
+  # --------------------------------------------------------------------------
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: wasm-prometheus
+
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+
+    ports:
+      - "9091:9090"
+
+    networks:
+      - wasm-net
+
+    restart: unless-stopped
+
+  # --------------------------------------------------------------------------
+  # Grafana 可视化
+  # --------------------------------------------------------------------------
+  grafana:
+    image: grafana/grafana:latest
+    container_name: wasm-grafana
+
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel
+
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasource.yml:ro
+
+    ports:
+      - "3000:3000"
+
+    depends_on:
+      - prometheus
+
+    networks:
+      - wasm-net
+
+    restart: unless-stopped
+
+  # --------------------------------------------------------------------------
+  # NGINX 反向代理（可选）
+  # --------------------------------------------------------------------------
+  nginx:
+    image: nginx:alpine
+    container_name: wasm-nginx
+
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+
+    ports:
+      - "80:80"
+      - "443:443"
+
+    depends_on:
+      - wasm-app
+
+    networks:
+      - wasm-net
+
+    restart: unless-stopped
+
+# ============================================================================
+# Networks
+# ============================================================================
+networks:
+  wasm-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+
+# ============================================================================
+# Volumes
+# ============================================================================
+volumes:
+  wasm-data:
+    driver: local
+  postgres-data:
+    driver: local
+  redis-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+
+# ============================================================================
+# 使用说明：
+#
+# 1. 启动所有服务：
+#    docker-compose up -d
+#
+# 2. 查看日志：
+#    docker-compose logs -f wasm-app
+#
+# 3. 查看服务状态：
+#    docker-compose ps
+#
+# 4. 停止所有服务：
+#    docker-compose down
+#
+# 5. 停止并删除卷：
+#    docker-compose down -v
+#
+# 6. 重新构建并启动：
+#    docker-compose up -d --build
+#
+# 7. 扩展服务实例：
+#    docker-compose up -d --scale wasm-app=3
+#
+# 8. 访问服务：
+#    - Wasm 应用：http://localhost:8080
+#    - Prometheus：http://localhost:9091
+#    - Grafana：http://localhost:3000 (admin/admin)
+#    - NGINX：http://localhost
+#
+# ============================================================================
+

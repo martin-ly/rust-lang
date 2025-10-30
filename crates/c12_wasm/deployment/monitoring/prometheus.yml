@@ -1,0 +1,260 @@
+# Prometheus 配置文件 for Wasm 微服务监控
+#
+# 功能：
+#   - 监控 Wasm 容器指标
+#   - 监控 Kubernetes 集群
+#   - 监控应用性能
+#   - 告警规则
+#
+# 使用：
+#   prometheus --config.file=prometheus.yml
+
+global:
+  # 全局采集间隔
+  scrape_interval: 15s
+  # 评估规则间隔
+  evaluation_interval: 15s
+
+  # 外部标签（用于联邦和远程存储）
+  external_labels:
+    cluster: 'wasm-production'
+    environment: 'production'
+
+# 告警管理器配置
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager:9093
+
+# 告警规则文件
+rule_files:
+  - 'alerts/*.yml'
+
+# 采集任务配置
+scrape_configs:
+  # ============================================================================
+  # Prometheus 自身监控
+  # ============================================================================
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # ============================================================================
+  # Wasm 微服务监控
+  # ============================================================================
+  - job_name: 'wasm-microservice'
+    # Kubernetes 服务发现
+    kubernetes_sd_configs:
+      - role: pod
+        namespaces:
+          names:
+            - wasm-prod
+            - wasm-staging
+
+    # 重新标记规则
+    relabel_configs:
+      # 只抓取带有特定注解的 Pod
+      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+        action: keep
+        regex: true
+
+      # 从注解获取端口
+      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_port]
+        action: replace
+        target_label: __address__
+        regex: (.+)
+        replacement: $1:__meta_kubernetes_pod_annotation_prometheus_io_port
+
+      # 从注解获取路径
+      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+        action: replace
+        target_label: __metrics_path__
+        regex: (.+)
+
+      # 添加标签
+      - source_labels: [__meta_kubernetes_namespace]
+        target_label: kubernetes_namespace
+      - source_labels: [__meta_kubernetes_pod_name]
+        target_label: kubernetes_pod_name
+      - source_labels: [__meta_kubernetes_pod_label_app]
+        target_label: app
+      - source_labels: [__meta_kubernetes_pod_label_version]
+        target_label: version
+      - source_labels: [__meta_kubernetes_pod_label_runtime]
+        target_label: runtime
+
+  # ============================================================================
+  # Kubernetes 节点监控 (Node Exporter)
+  # ============================================================================
+  - job_name: 'kubernetes-nodes'
+    kubernetes_sd_configs:
+      - role: node
+
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '(.*):10250'
+        replacement: '${1}:9100'
+        target_label: __address__
+      - source_labels: [__meta_kubernetes_node_name]
+        target_label: node
+
+  # ============================================================================
+  # Kubernetes API Server
+  # ============================================================================
+  - job_name: 'kubernetes-apiservers'
+    kubernetes_sd_configs:
+      - role: endpoints
+
+    scheme: https
+    tls_config:
+      ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+    bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+
+    relabel_configs:
+      - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+        action: keep
+        regex: default;kubernetes;https
+
+  # ============================================================================
+  # Kubernetes Kubelet
+  # ============================================================================
+  - job_name: 'kubernetes-kubelet'
+    kubernetes_sd_configs:
+      - role: node
+
+    scheme: https
+    tls_config:
+      ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+    bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+
+    relabel_configs:
+      - action: labelmap
+        regex: __meta_kubernetes_node_label_(.+)
+
+  # ============================================================================
+  # Kubernetes cAdvisor (容器指标)
+  # ============================================================================
+  - job_name: 'kubernetes-cadvisor'
+    kubernetes_sd_configs:
+      - role: node
+
+    scheme: https
+    tls_config:
+      ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+    bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+
+    relabel_configs:
+      - action: labelmap
+        regex: __meta_kubernetes_node_label_(.+)
+      - target_label: __address__
+        replacement: kubernetes.default.svc:443
+      - source_labels: [__meta_kubernetes_node_name]
+        regex: (.+)
+        target_label: __metrics_path__
+        replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor
+
+    # 只抓取 Wasm 容器的指标
+    metric_relabel_configs:
+      - source_labels: [runtime]
+        regex: wasmedge
+        action: keep
+
+  # ============================================================================
+  # Kubernetes Services 监控
+  # ============================================================================
+  - job_name: 'kubernetes-services'
+    kubernetes_sd_configs:
+      - role: service
+
+    relabel_configs:
+      - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
+        action: keep
+        regex: true
+      - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_port]
+        action: replace
+        target_label: __address__
+        regex: (.+)
+        replacement: $1:__meta_kubernetes_service_annotation_prometheus_io_port
+      - source_labels: [__meta_kubernetes_namespace]
+        target_label: kubernetes_namespace
+      - source_labels: [__meta_kubernetes_service_name]
+        target_label: kubernetes_name
+
+  # ============================================================================
+  # WasmEdge 运行时监控（如果支持）
+  # ============================================================================
+  - job_name: 'wasmedge-runtime'
+    static_configs:
+      - targets:
+          - 'node-1:9091'
+          - 'node-2:9091'
+          - 'node-3:9091'
+
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        regex: '(.+):.*'
+        replacement: '${1}'
+
+  # ============================================================================
+  # NGINX Ingress Controller
+  # ============================================================================
+  - job_name: 'nginx-ingress'
+    kubernetes_sd_configs:
+      - role: pod
+        namespaces:
+          names:
+            - ingress-nginx
+
+    relabel_configs:
+      - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_name]
+        action: keep
+        regex: ingress-nginx
+      - source_labels: [__meta_kubernetes_pod_container_port_number]
+        action: keep
+        regex: '10254'
+
+  # ============================================================================
+  # 黑盒监控 (Blackbox Exporter)
+  # ============================================================================
+  - job_name: 'blackbox-http'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+
+    static_configs:
+      - targets:
+          - https://wasm-api.example.com/health
+          - https://wasm-api.example.com/metrics
+
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115
+
+# ============================================================================
+# 远程写入配置（可选）
+# ============================================================================
+# remote_write:
+#   - url: 'https://prometheus-remote-storage.example.com/api/v1/write'
+#     basic_auth:
+#       username: 'your-username'
+#       password: 'your-password'
+#     write_relabel_configs:
+#       - source_labels: [__name__]
+#         regex: 'node_.*'
+#         action: drop
+
+# ============================================================================
+# 远程读取配置（可选）
+# ============================================================================
+# remote_read:
+#   - url: 'https://prometheus-remote-storage.example.com/api/v1/read'
+#     basic_auth:
+#       username: 'your-username'
+#       password: 'your-password'
+

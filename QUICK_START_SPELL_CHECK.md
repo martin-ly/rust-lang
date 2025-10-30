@@ -6,13 +6,13 @@
 
 在 VS Code 中：
 
-```
+```text
 Ctrl+Shift+X → 搜索 "Code Spell Checker" → 安装
 ```
 
 ### 第 2 步: 重新加载 VS Code
 
-```
+```text
 Ctrl+Shift+P → 输入 "Reload Window" → 回车
 ```
 
@@ -39,7 +39,7 @@ Ctrl+Shift+P → 输入 "Reload Window" → 回车
 
 ## 🔧 配置文件位置
 
-```
+```text
 rust-lang/
 ├── .vscode/
 │   ├── settings.json       ← 主配置文件（300+ 术语）

@@ -23,7 +23,7 @@
 
 **分类覆盖**:
 
-```
+```text
 1. WASM 相关术语 (20+)
 2. Rust 核心关键字 (30+)
 3. 编译器和工具链 (10+)
@@ -69,7 +69,7 @@
 
 ### 方法 1: 重新加载 VS Code（推荐）⭐
 
-```
+```text
 1. 按 Ctrl+Shift+P (Windows/Linux) 或 Cmd+Shift+P (Mac)
 2. 输入 "Reload Window"
 3. 回车
@@ -83,7 +83,7 @@
 
 如果还没安装拼写检查器：
 
-```
+```text
 1. 按 Ctrl+Shift+X (或 Cmd+Shift+X) 打开扩展面板
 2. 搜索 "Code Spell Checker"
 3. 点击安装
@@ -227,7 +227,7 @@ jq '.["cSpell.words"] | length' .vscode/settings.json
 
 ### 文件大小
 
-```
+```text
 .vscode/settings.json:  ~11 KB
 cspell.json:            ~2 KB
 总计:                   ~13 KB
@@ -254,7 +254,7 @@ cspell.json:            ~2 KB
 
 ### 配置前 ❌
 
-```
+```text
 WASI - ❌ Unknown word
 wasm-bindgen - ❌ Unknown word
 rustc - ❌ Unknown word
@@ -266,7 +266,7 @@ proc-macro - ❌ Unknown word
 
 ### 配置后 ✅
 
-```
+```text
 WASI - ✅ 正常
 wasm-bindgen - ✅ 正常
 rustc - ✅ 正常
@@ -332,7 +332,7 @@ proc-macro - ✅ 正常
 
 创建 `.cspell/custom-dictionary.txt`：
 
-```
+```text
 术语1
 术语2
 术语3
@@ -381,4 +381,4 @@ proc-macro - ✅ 正常
 
 ---
 
-**祝编码愉快！Happy Coding! 🦀**
+**祝编码愉快！Happy Coding! 🦀**-

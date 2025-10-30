@@ -477,5 +477,38 @@
     "/\\$\\$[\\s\\S]*?\\$\\$/g",
     "/\\$[^$]+\\$/g",
     "/https?:\\/\\/[^\\s]+/g"
-  ]
+  ],
+
+  // ===== 拼写检查警告配置 =====
+  "cSpell.diagnosticLevel": "Warning",
+  "cSpell.showStatus": true,
+  "cSpell.showStatusAlignment": "Right",
+  "cSpell.showSuggestionsLinkInEditorContextMenu": true,
+  "cSpell.showCommandsInEditorContextMenu": true,
+  "cSpell.suggestionMenuType": "quickFix",
+  "cSpell.autoFormatConfigFile": true,
+  "cSpell.spellCheckOnlyWorkspaceFiles": true,
+  "cSpell.checkLimit": 500,
+  "cSpell.displayIssuesThroughProblemsPane": true,
+
+  // ===== 编辑器中拼写错误的视觉提示 =====
+  "cSpell.decorateIssues": true,
+  "cSpell.overviewRulerColor": "rgba(255, 140, 0, 0.7)",
+  "cSpell.textDecoration": "underline wavy #FF8C00",
+
+  // ===== 针对不同文件类型的拼写检查 =====
+  "cSpell.languageSettings": [
+    {
+      "languageId": "rust",
+      "includeRegExpList": []
+    },
+    {
+      "languageId": "markdown",
+      "includeRegExpList": []
+    }
+  ],
+
+  // ===== 问题面板配置（显示拼写错误） =====
+  "problems.decorations.enabled": false,
+  "problems.showCurrentInStatus": false
 }

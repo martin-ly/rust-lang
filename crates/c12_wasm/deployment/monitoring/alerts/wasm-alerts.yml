@@ -1,0 +1,291 @@
+# Prometheus 告警规则 for Wasm 微服务
+#
+# 告警类型：
+#   - 应用性能
+#   - 错误率
+#   - 资源使用
+#   - 可用性
+
+groups:
+  # ==========================================================================
+  # Wasm 应用性能告警
+  # ==========================================================================
+  - name: wasm_application_performance
+    interval: 30s
+    rules:
+      # 高错误率告警
+      - alert: HighErrorRate
+        expr: |
+          (
+            sum(rate(http_requests_failed_total{app="wasm-microservice"}[5m]))
+            /
+            sum(rate(http_requests_total{app="wasm-microservice"}[5m]))
+          ) * 100 > 5
+        for: 5m
+        labels:
+          severity: critical
+          component: application
+        annotations:
+          summary: "High error rate detected"
+          description: "Error rate is {{ $value | humanizePercentage }} (threshold: 5%)"
+
+      # 高延迟告警
+      - alert: HighLatency
+        expr: |
+          histogram_quantile(0.99,
+            rate(http_request_duration_seconds_bucket{app="wasm-microservice"}[5m])
+          ) > 1
+        for: 5m
+        labels:
+          severity: warning
+          component: application
+        annotations:
+          summary: "High request latency"
+          description: "P99 latency is {{ $value }}s (threshold: 1s)"
+
+      # 请求量突增
+      - alert: RequestSurge
+        expr: |
+          rate(http_requests_total{app="wasm-microservice"}[5m])
+          >
+          avg_over_time(rate(http_requests_total{app="wasm-microservice"}[5m])[1h:5m]) * 2
+        for: 10m
+        labels:
+          severity: info
+          component: application
+        annotations:
+          summary: "Request surge detected"
+          description: "Request rate is {{ $value }}/s, 2x the average"
+
+      # 请求量异常低
+      - alert: LowRequestRate
+        expr: |
+          rate(http_requests_total{app="wasm-microservice"}[5m]) < 1
+        for: 15m
+        labels:
+          severity: warning
+          component: application
+        annotations:
+          summary: "Unusually low request rate"
+          description: "Request rate is {{ $value }}/s (expected > 1/s)"
+
+  # ==========================================================================
+  # Wasm 容器资源告警
+  # ==========================================================================
+  - name: wasm_container_resources
+    interval: 30s
+    rules:
+      # 内存使用率高
+      - alert: HighMemoryUsage
+        expr: |
+          (
+            container_memory_usage_bytes{pod=~"wasm-.*", runtime="wasmedge"}
+            /
+            container_spec_memory_limit_bytes{pod=~"wasm-.*", runtime="wasmedge"}
+          ) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+          component: container
+        annotations:
+          summary: "High memory usage in Wasm container"
+          description: "Memory usage is {{ $value | humanizePercentage }} on {{ $labels.pod }}"
+
+      # CPU 使用率高
+      - alert: HighCPUUsage
+        expr: |
+          (
+            rate(container_cpu_usage_seconds_total{pod=~"wasm-.*", runtime="wasmedge"}[5m])
+            /
+            container_spec_cpu_quota{pod=~"wasm-.*", runtime="wasmedge"}
+          ) * 100 > 80
+        for: 10m
+        labels:
+          severity: warning
+          component: container
+        annotations:
+          summary: "High CPU usage in Wasm container"
+          description: "CPU usage is {{ $value | humanizePercentage }} on {{ $labels.pod }}"
+
+      # 容器重启频繁
+      - alert: FrequentRestarts
+        expr: |
+          increase(kube_pod_container_status_restarts_total{pod=~"wasm-.*"}[1h]) > 5
+        labels:
+          severity: critical
+          component: container
+        annotations:
+          summary: "Container restarting frequently"
+          description: "{{ $labels.pod }} has restarted {{ $value }} times in the last hour"
+
+      # OOMKilled
+      - alert: ContainerOOMKilled
+        expr: |
+          kube_pod_container_status_last_terminated_reason{reason="OOMKilled", pod=~"wasm-.*"} == 1
+        labels:
+          severity: critical
+          component: container
+        annotations:
+          summary: "Container was OOM killed"
+          description: "{{ $labels.pod }} was killed due to out of memory"
+
+  # ==========================================================================
+  # Wasm 服务可用性告警
+  # ==========================================================================
+  - name: wasm_service_availability
+    interval: 30s
+    rules:
+      # 服务下线
+      - alert: ServiceDown
+        expr: |
+          up{job="wasm-microservice"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          component: service
+        annotations:
+          summary: "Wasm service is down"
+          description: "{{ $labels.instance }} has been down for more than 1 minute"
+
+      # Pod 数量不足
+      - alert: InsufficientPods
+        expr: |
+          kube_deployment_status_replicas_available{deployment="wasm-microservice"}
+          <
+          kube_deployment_spec_replicas{deployment="wasm-microservice"} * 0.5
+        for: 5m
+        labels:
+          severity: critical
+          component: deployment
+        annotations:
+          summary: "Insufficient available pods"
+          description: "Only {{ $value }} pods available (expected {{ $labels.replicas }})"
+
+      # 健康检查失败
+      - alert: HealthCheckFailing
+        expr: |
+          probe_success{job="blackbox-http", instance=~".*wasm-api.*"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          component: healthcheck
+        annotations:
+          summary: "Health check failing"
+          description: "{{ $labels.instance }} health check has been failing for 2 minutes"
+
+      # HPA 达到最大副本数
+      - alert: HPAMaxedOut
+        expr: |
+          kube_horizontalpodautoscaler_status_current_replicas{horizontalpodautoscaler="wasm-microservice-hpa"}
+          >=
+          kube_horizontalpodautoscaler_spec_max_replicas{horizontalpodautoscaler="wasm-microservice-hpa"}
+        for: 10m
+        labels:
+          severity: warning
+          component: autoscaling
+        annotations:
+          summary: "HPA reached maximum replicas"
+          description: "Autoscaler has been at max replicas ({{ $value }}) for 10 minutes"
+
+  # ==========================================================================
+  # Kubernetes 集群告警
+  # ==========================================================================
+  - name: kubernetes_cluster
+    interval: 1m
+    rules:
+      # 节点不可用
+      - alert: NodeNotReady
+        expr: |
+          kube_node_status_condition{condition="Ready", status="true"} == 0
+        for: 5m
+        labels:
+          severity: critical
+          component: node
+        annotations:
+          summary: "Kubernetes node is not ready"
+          description: "Node {{ $labels.node }} has been not ready for 5 minutes"
+
+      # 节点内存压力
+      - alert: NodeMemoryPressure
+        expr: |
+          kube_node_status_condition{condition="MemoryPressure", status="true"} == 1
+        for: 5m
+        labels:
+          severity: warning
+          component: node
+        annotations:
+          summary: "Node under memory pressure"
+          description: "Node {{ $labels.node }} is under memory pressure"
+
+      # 节点磁盘压力
+      - alert: NodeDiskPressure
+        expr: |
+          kube_node_status_condition{condition="DiskPressure", status="true"} == 1
+        for: 5m
+        labels:
+          severity: warning
+          component: node
+        annotations:
+          summary: "Node under disk pressure"
+          description: "Node {{ $labels.node }} is under disk pressure"
+
+  # ==========================================================================
+  # WasmEdge 运行时告警
+  # ==========================================================================
+  - name: wasmedge_runtime
+    interval: 30s
+    rules:
+      # Wasm 模块加载失败
+      - alert: WasmModuleLoadFailure
+        expr: |
+          increase(wasmedge_module_load_failures_total[5m]) > 0
+        labels:
+          severity: critical
+          component: runtime
+        annotations:
+          summary: "Wasm module load failure"
+          description: "{{ $value }} modules failed to load in the last 5 minutes"
+
+      # Wasm 执行时间异常
+      - alert: WasmExecutionSlow
+        expr: |
+          histogram_quantile(0.99,
+            rate(wasmedge_execution_duration_seconds_bucket[5m])
+          ) > 0.5
+        for: 5m
+        labels:
+          severity: warning
+          component: runtime
+        annotations:
+          summary: "Slow Wasm execution"
+          description: "P99 execution time is {{ $value }}s"
+
+  # ==========================================================================
+  # 安全告警
+  # ==========================================================================
+  - name: security
+    interval: 5m
+    rules:
+      # 异常登录尝试
+      - alert: UnusualLoginAttempts
+        expr: |
+          rate(authentication_attempts_total{result="failed"}[5m]) > 10
+        for: 5m
+        labels:
+          severity: warning
+          component: security
+        annotations:
+          summary: "Unusual failed login attempts"
+          description: "{{ $value }} failed login attempts/s from {{ $labels.source_ip }}"
+
+      # 证书即将过期
+      - alert: CertificateExpiringSoon
+        expr: |
+          (probe_ssl_earliest_cert_expiry - time()) / 86400 < 30
+        labels:
+          severity: warning
+          component: security
+        annotations:
+          summary: "SSL certificate expiring soon"
+          description: "Certificate for {{ $labels.instance }} expires in {{ $value }} days"
+

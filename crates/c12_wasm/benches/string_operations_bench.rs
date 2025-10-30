@@ -9,7 +9,8 @@
 //! ```
 
 use c12_wasm::string_examples::*;
-use criterion::{BenchmarkId, Criterion, black_box, criterion_group, criterion_main};
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
+use std::hint::black_box;
 
 /// 测试字符串反转性能
 fn bench_reverse_string(c: &mut Criterion) {

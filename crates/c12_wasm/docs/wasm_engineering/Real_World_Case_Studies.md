@@ -1,4 +1,45 @@
-# 9.5 实际项目案例 (Real-World Case Studies)
+# 实际项目案例 (Real-World Case Studies)
+
+## 📋 目录
+
+- [实际项目案例 (Real-World Case Studies)](#实际项目案例-real-world-case-studies)
+  - [📋 目录](#-目录)
+  - [核心命题](#核心命题)
+  - [案例 1: Figma - 在线设计工具](#案例-1-figma---在线设计工具)
+    - [背景](#背景)
+    - [实现细节](#实现细节)
+    - [性能结果](#性能结果)
+    - [遇到的坑](#遇到的坑)
+    - [关键经验](#关键经验)
+  - [案例 2: AutoCAD Web - CAD 设计工具](#案例-2-autocad-web---cad-设计工具)
+    - [背景2](#背景2)
+    - [迁移策略](#迁移策略)
+    - [性能优化](#性能优化)
+    - [代码组织](#代码组织)
+    - [关键指标](#关键指标)
+  - [案例 3: Zoom - 视频会议背景虚化](#案例-3-zoom---视频会议背景虚化)
+    - [技术挑战](#技术挑战)
+    - [技术方案](#技术方案)
+    - [性能优化2](#性能优化2)
+    - [部署挑战](#部署挑战)
+    - [经验总结](#经验总结)
+  - [案例 4: Shopify - 图片压缩服务](#案例-4-shopify---图片压缩服务)
+    - [业务背景](#业务背景)
+    - [技术实现](#技术实现)
+    - [成本节省](#成本节省)
+    - [遇到的挑战](#遇到的挑战)
+  - [通用经验总结](#通用经验总结)
+    - [成功模式](#成功模式)
+    - [失败案例](#失败案例)
+  - [决策树](#决策树)
+    - [何时使用 Wasm？](#何时使用-wasm)
+  - [最佳实践清单](#最佳实践清单)
+    - [架构设计](#架构设计)
+    - [性能优化1](#性能优化1)
+    - [开发流程](#开发流程)
+    - [部署策略](#部署策略)
+  - [参考文献](#参考文献)
+  - [相关文档](#相关文档)
 
 ## 核心命题
 
@@ -108,7 +149,7 @@ document.addEventListener('mousemove', (e) => {
 
 ### 遇到的坑
 
-**问题 1: 跨线程通信开销**
+**问题 1: 跨线程通信开销**:
 
 **症状**：
 
@@ -136,7 +177,7 @@ Atomics.wait(view, 0, 0);
 const task = Atomics.load(view, 0);
 ```
 
-**问题 2: Wasm 内存增长导致卡顿**
+**问题 2: Wasm 内存增长导致卡顿**:
 
 **症状**：
 
@@ -180,7 +221,7 @@ void init_memory() {
 
 ## 案例 2: AutoCAD Web - CAD 设计工具
 
-### 背景
+### 背景2
 
 **挑战**：
 
@@ -196,7 +237,7 @@ void init_memory() {
 
 ### 迁移策略
 
-**Phase 1: 核心引擎迁移**
+**Phase 1: 核心引擎迁移**:
 
 ```bash
 # Emscripten 编译
@@ -207,13 +248,13 @@ emcc src/geometry/*.cpp src/renderer/*.cpp \
     -O3 -o autocad-core.js
 ```
 
-**Phase 2: UI 层重写**
+**Phase 2: UI 层重写**:
 
 - React + Three.js (新 UI)
 - Wasm 核心引擎（复用）
 - WebGL 渲染（替代 DirectX）
 
-**Phase 3: 增量加载**
+**Phase 3: 增量加载**:
 
 ```javascript
 // 按需加载模块
@@ -235,14 +276,14 @@ document.getElementById('open-file').addEventListener('click', async () => {
 
 ### 性能优化
 
-**问题: 大文件加载慢**
+**问题: 大文件加载慢**:
 
 **初版性能**：
 
 - 打开 100MB DWG 文件：45 秒
 - 用户等待不可接受
 
-**优化 1: 流式解析**
+**优化 1: 流式解析**:
 
 ```cpp
 class StreamingParser {
@@ -263,7 +304,7 @@ public:
 };
 ```
 
-**优化 2: Web Worker 并行**
+**优化 2: Web Worker 并行**:
 
 ```javascript
 // 主线程
@@ -412,9 +453,9 @@ const featherShader = `
 `;
 ```
 
-### 性能优化
+### 性能优化2
 
-**问题: CPU 占用过高**
+**问题: CPU 占用过高**:
 
 **Profile 结果**：
 
@@ -475,7 +516,7 @@ Total: 45ms/frame (无法达到 30fps)
 
 ### 部署挑战
 
-**问题: 模型文件过大**
+**问题: 模型文件过大**:
 
 **初版**：
 
@@ -612,7 +653,7 @@ document.getElementById('upload').addEventListener('change', async (e) => {
 
 ### 遇到的挑战
 
-**问题: 移动设备性能不足**
+**问题: 移动设备性能不足**:
 
 **症状**：
 
@@ -647,20 +688,20 @@ worker.postMessage({ image, quality: getCompressionQuality() });
 
 ### 成功模式
 
-**1. 计算密集型场景**
+**1. 计算密集型场景**:
 
 - 图像/视频处理
 - 数据压缩/解压
 - 科学计算
 - 游戏物理引擎
 
-**2. 代码复用场景**
+**2. 代码复用场景**:
 
 - 桌面应用迁移
 - 跨平台一致性
 - 算法库移植
 
-**3. 性能关键场景**
+**3. 性能关键场景**:
 
 - 实时渲染
 - 大数据处理
@@ -668,7 +709,7 @@ worker.postMessage({ image, quality: getCompressionQuality() });
 
 ### 失败案例
 
-**反模式 1: 过度工程化**
+**反模式 1: 过度工程化**:
 
 **案例**：某公司将整个 Node.js 应用编译为 Wasm
 
@@ -681,7 +722,7 @@ worker.postMessage({ image, quality: getCompressionQuality() });
 **教训**：
 > Wasm 不是万能药。简单的业务逻辑用 JavaScript 更合适。
 
-**反模式 2: 忽略 JS ↔ Wasm 边界开销**
+**反模式 2: 忽略 JS ↔ Wasm 边界开销**:
 
 **案例**：频繁调用 Wasm 函数处理小数据
 
@@ -696,7 +737,7 @@ for (let i = 0; i < 1000000; i++) {
 const result = wasmModule.processBatch(data);  // 单次调用
 ```
 
-**反模式 3: 盲目使用 Wasm**
+**反模式 3: 盲目使用 Wasm**:
 
 **案例**：一个简单的表单验证逻辑也用 Wasm
 
@@ -738,7 +779,7 @@ const result = wasmModule.processBatch(data);  // 单次调用
 - [ ] Web Worker 隔离计算密集型任务
 - [ ] 渐进式加载（先小模块再大模块）
 
-### 性能优化
+### 性能优化1
 
 - [ ] Profile 驱动优化（不要猜测）
 - [ ] SIMD 加速关键循环

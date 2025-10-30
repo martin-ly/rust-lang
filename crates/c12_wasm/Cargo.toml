@@ -40,11 +40,8 @@ web-sys = { version = "0.3", features = [
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3"
-criterion = { version = "0.5", features = ["html_reports"] }
+criterion = { version = "0.7.0", features = ["html_reports"] }
 
-[profile.release]
-opt-level = "z"      # 优化二进制大小
-lto = true           # 链接时优化
-codegen-units = 1    # 单一代码生成单元
-strip = true         # 去除调试符号
-panic = "abort"      # 减小二进制大小
+# 注意: [profile.*] 配置已移至工作区根目录的 Cargo.toml
+# WASM 特定的优化配置（如 opt-level = "z"）在根目录的 [profile.release] 中定义
+# 如需针对 WASM 的特殊构建，请使用: cargo build --release --target wasm32-unknown-unknown

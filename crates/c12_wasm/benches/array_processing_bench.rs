@@ -9,7 +9,8 @@
 //! ```
 
 use c12_wasm::array_examples::*;
-use criterion::{BenchmarkId, Criterion, black_box, criterion_group, criterion_main};
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
+use std::hint::black_box;
 
 /// 测试不同大小数组的求和性能
 fn bench_sum_array(c: &mut Criterion) {
