@@ -1048,4 +1048,3 @@ wasm-tools compose component-a.wasm component-b.wasm -o composed.wasm
 ---
 
 *WASI 0.2 组件模型代表了 WebAssembly 生态系统的重大飞跃，掌握它将使你能够构建更加模块化、可维护和高性能的应用程序。* 🚀
-
