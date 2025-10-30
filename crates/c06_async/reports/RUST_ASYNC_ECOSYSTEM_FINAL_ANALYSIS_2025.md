@@ -184,10 +184,10 @@ async fn hybrid_operation() -> Result<()> {
         std::thread::sleep(Duration::from_millis(100));
         "sync_result"
     }).await?;
-    
+
     // 在同步上下文中调用异步操作
     let async_result = async_operation().await?;
-    
+
     Ok(())
 }
 ```

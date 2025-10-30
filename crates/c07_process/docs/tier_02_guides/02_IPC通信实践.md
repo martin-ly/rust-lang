@@ -1,8 +1,8 @@
 # Tier 2: IPC通信实践
 
-> **文档类型**: 实践指南  
-> **难度**: ⭐⭐⭐ 中级  
-> **预计时间**: 3小时  
+> **文档类型**: 实践指南
+> **难度**: ⭐⭐⭐ 中级
+> **预计时间**: 3小时
 > **适用版本**: Rust 1.90+
 
 ---
@@ -113,7 +113,7 @@ fn basic_pipe_example() -> Result<(), Box<dyn std::error::Error>> {
     let output = child.wait_with_output()?;
     println!("Output: {}", String::from_utf8_lossy(&output.stdout));
     println!("Exit status: {}", output.status);
-    
+
     Ok(())
 }
 ```
@@ -143,12 +143,12 @@ fn bidirectional_pipe() -> Result<(), Box<dyn std::error::Error>> {
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()?;
-    
+
     // 获取所有流
     let mut stdin = child.stdin.take().unwrap();
     let stdout = child.stdout.take().unwrap();
     let stderr = child.stderr.take().unwrap();
-    
+
     // 在单独线程中读取stdout
     let stdout_thread = thread::spawn(move || {
         let reader = BufReader::new(stdout);
@@ -156,7 +156,7 @@ fn bidirectional_pipe() -> Result<(), Box<dyn std::error::Error>> {
             println!("[stdout] {}", line.unwrap());
         }
     });
-    
+
     // 在单独线程中读取stderr
     let stderr_thread = thread::spawn(move || {
         let reader = BufReader::new(stderr);
@@ -164,16 +164,16 @@ fn bidirectional_pipe() -> Result<(), Box<dyn std::error::Error>> {
             eprintln!("[stderr] {}", line.unwrap());
         }
     });
-    
+
     // 主线程写入数据
     stdin.write_all(b"input data\n")?;
     drop(stdin);  // 关闭stdin
-    
+
     // 等待所有线程完成
     stdout_thread.join().unwrap();
     stderr_thread.join().unwrap();
     child.wait()?;
-    
+
     Ok(())
 }
 ```
@@ -233,7 +233,7 @@ impl Pipeline {
             commands: Vec::new(),
         }
     }
-    
+
     fn add(&mut self, program: &str, args: Vec<&str>) -> &mut Self {
         self.commands.push((
             program.to_string(),
@@ -241,47 +241,47 @@ impl Pipeline {
         ));
         self
     }
-    
+
     fn execute(&self) -> Result<String, Box<dyn std::error::Error>> {
         if self.commands.is_empty() {
             return Err("Pipeline is empty".into());
         }
-        
+
         let mut children: Vec<Child> = Vec::new();
         let mut prev_stdout: Option<Stdio> = None;
-        
+
         for (i, (program, args)) in self.commands.iter().enumerate() {
             let stdin = if i == 0 {
                 Stdio::null()
             } else {
                 prev_stdout.take().unwrap()
             };
-            
+
             let stdout = if i == self.commands.len() - 1 {
                 Stdio::piped()
             } else {
                 Stdio::piped()
             };
-            
+
             let mut cmd = Command::new(program);
             cmd.args(args)
                 .stdin(stdin)
                 .stdout(stdout);
-            
+
             let child = cmd.spawn()?;
-            
+
             if i < self.commands.len() - 1 {
                 prev_stdout = child.stdout.map(Stdio::from);
             }
-            
+
             children.push(child);
         }
-        
+
         // 等待所有进程
         for child in &mut children[..children.len() - 1] {
             child.wait()?;
         }
-        
+
         // 获取最后一个进程的输出
         let output = children.last_mut().unwrap().wait_with_output()?;
         Ok(String::from_utf8_lossy(&output.stdout).to_string())
@@ -295,7 +295,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .add("sort", vec![])
         .add("uniq", vec!["-c"])
         .execute()?;
-    
+
     println!("Result:\n{}", result);
     Ok(())
 }
@@ -317,37 +317,37 @@ use std::io::{Write, Read};
 fn create_named_pipe() -> Result<(), Box<dyn std::error::Error>> {
     use nix::sys::stat;
     use nix::unistd;
-    
+
     let fifo_path = "/tmp/my_fifo";
-    
+
     // 创建命名管道
     unistd::mkfifo(
         fifo_path,
         stat::Mode::S_IRWXU
     )?;
-    
+
     // 在另一个线程中写入
     let writer_thread = std::thread::spawn(|| {
         let mut file = OpenOptions::new()
             .write(true)
             .open("/tmp/my_fifo")
             .unwrap();
-        
+
         file.write_all(b"Hello from writer!\n").unwrap();
     });
-    
+
     // 主线程读取
     let mut file = OpenOptions::new()
         .read(true)
         .open(fifo_path)?;
-    
+
     let mut buffer = String::new();
     file.read_to_string(&mut buffer)?;
     println!("Received: {}", buffer);
-    
+
     writer_thread.join().unwrap();
     std::fs::remove_file(fifo_path)?;
-    
+
     Ok(())
 }
 ```
@@ -367,17 +367,17 @@ fn pipe_capacity_test() -> Result<(), Box<dyn std::error::Error>> {
         .stdin(Stdio::piped())
         .stdout(Stdio::null())  // 丢弃输出
         .spawn()?;
-    
+
     if let Some(mut stdin) = child.stdin.take() {
         // 尝试写入大量数据
         let large_data = vec![b'x'; 1024 * 1024];  // 1MB
-        
+
         match stdin.write_all(&large_data) {
             Ok(_) => println!("Successfully wrote all data"),
             Err(e) => println!("Write error: {}", e),
         }
     }
-    
+
     child.wait()?;
     Ok(())
 }
@@ -430,19 +430,19 @@ fn optimized_pipe_write() -> Result<(), Box<dyn std::error::Error>> {
         .stdin(Stdio::piped())
         .stdout(Stdio::null())
         .spawn()?;
-    
+
     if let Some(stdin) = child.stdin.take() {
         // 使用BufferedWriter提升性能
         let mut writer = BufWriter::new(stdin);
-        
+
         for i in 0..100000 {
             writeln!(writer, "Line {}", i)?;
         }
-        
+
         // 确保flush
         writer.flush()?;
     }
-    
+
     child.wait()?;
     Ok(())
 }
@@ -475,13 +475,13 @@ use std::thread;
 #[cfg(unix)]
 fn unix_socket_server() -> Result<(), Box<dyn std::error::Error>> {
     let socket_path = "/tmp/my.sock";
-    
+
     // 清理旧socket文件
     let _ = std::fs::remove_file(socket_path);
-    
+
     let listener = UnixListener::bind(socket_path)?;
     println!("🚀 Server listening on {}", socket_path);
-    
+
     for stream in listener.incoming() {
         match stream {
             Ok(stream) => {
@@ -492,7 +492,7 @@ fn unix_socket_server() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     }
-    
+
     Ok(())
 }
 
@@ -501,9 +501,9 @@ fn handle_client(mut stream: UnixStream) {
     let peer_addr = stream.peer_addr()
         .map(|addr| format!("{:?}", addr))
         .unwrap_or_else(|_| "unknown".to_string());
-    
+
     println!("✅ New client: {}", peer_addr);
-    
+
     let mut buf = [0; 1024];
     loop {
         match stream.read(&mut buf) {
@@ -513,7 +513,7 @@ fn handle_client(mut stream: UnixStream) {
             }
             Ok(n) => {
                 println!("📥 Received {} bytes from {}", n, peer_addr);
-                
+
                 // Echo back
                 if let Err(e) = stream.write_all(&buf[..n]) {
                     eprintln!("❌ Write error: {}", e);
@@ -542,17 +542,17 @@ use std::io::{Read, Write};
 fn unix_socket_client() -> Result<(), Box<dyn std::error::Error>> {
     let mut stream = UnixStream::connect("/tmp/my.sock")?;
     println!("✅ Connected to server");
-    
+
     // 发送数据
     let message = b"Hello from client!";
     stream.write_all(message)?;
     println!("📤 Sent: {}", String::from_utf8_lossy(message));
-    
+
     // 接收响应
     let mut buffer = vec![0; 1024];
     let n = stream.read(&mut buffer)?;
     println!("📥 Received: {}", String::from_utf8_lossy(&buffer[..n]));
-    
+
     Ok(())
 }
 ```
@@ -589,7 +589,7 @@ impl ProtocolServer {
             listener: UnixListener::bind(path)?,
         })
     }
-    
+
     fn run(&self) -> Result<(), Box<dyn std::error::Error>> {
         for stream in self.listener.incoming() {
             let stream = stream?;
@@ -601,25 +601,25 @@ impl ProtocolServer {
         }
         Ok(())
     }
-    
+
     fn handle_connection(mut stream: UnixStream) -> Result<(), Box<dyn std::error::Error>> {
         let mut length_buf = [0u8; 4];
-        
+
         loop {
             // 读取消息长度
             if stream.read_exact(&mut length_buf).is_err() {
                 break;
             }
             let length = u32::from_be_bytes(length_buf) as usize;
-            
+
             // 读取消息内容
             let mut msg_buf = vec![0u8; length];
             stream.read_exact(&mut msg_buf)?;
-            
+
             // 解析消息
             let message: Message = bincode::deserialize(&msg_buf)?;
             println!("Received: {:?}", message);
-            
+
             // 处理并响应
             let response = match message {
                 Message::Request { id, data } => {
@@ -633,15 +633,15 @@ impl ProtocolServer {
                     message: "Invalid message type".to_string(),
                 },
             };
-            
+
             // 发送响应
             let response_data = bincode::serialize(&response)?;
             let response_length = (response_data.len() as u32).to_be_bytes();
-            
+
             stream.write_all(&response_length)?;
             stream.write_all(&response_data)?;
         }
-        
+
         Ok(())
     }
 }
@@ -658,25 +658,25 @@ impl ProtocolClient {
             stream: UnixStream::connect(path)?,
         })
     }
-    
+
     fn send_request(&mut self, id: u32, data: String) -> Result<Message, Box<dyn std::error::Error>> {
         // 构造请求
         let request = Message::Request { id, data };
         let request_data = bincode::serialize(&request)?;
         let request_length = (request_data.len() as u32).to_be_bytes();
-        
+
         // 发送请求
         self.stream.write_all(&request_length)?;
         self.stream.write_all(&request_data)?;
-        
+
         // 接收响应
         let mut length_buf = [0u8; 4];
         self.stream.read_exact(&mut length_buf)?;
         let length = u32::from_be_bytes(length_buf) as usize;
-        
+
         let mut response_buf = vec![0u8; length];
         self.stream.read_exact(&mut response_buf)?;
-        
+
         Ok(bincode::deserialize(&response_buf)?)
     }
 }
@@ -696,10 +696,10 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 async fn async_unix_server() -> Result<(), Box<dyn std::error::Error>> {
     let socket_path = "/tmp/async.sock";
     let _ = std::fs::remove_file(socket_path);
-    
+
     let listener = UnixListener::bind(socket_path)?;
     println!("🚀 Async server listening");
-    
+
     loop {
         let (stream, _) = listener.accept().await?;
         tokio::spawn(async move {
@@ -713,29 +713,29 @@ async fn async_unix_server() -> Result<(), Box<dyn std::error::Error>> {
 #[cfg(unix)]
 async fn handle_async_client(mut stream: UnixStream) -> Result<(), Box<dyn std::error::Error>> {
     let mut buf = vec![0; 1024];
-    
+
     loop {
         let n = stream.read(&mut buf).await?;
         if n == 0 {
             break;
         }
-        
+
         stream.write_all(&buf[..n]).await?;
     }
-    
+
     Ok(())
 }
 
 #[cfg(unix)]
 async fn async_unix_client() -> Result<(), Box<dyn std::error::Error>> {
     let mut stream = UnixStream::connect("/tmp/async.sock").await?;
-    
+
     stream.write_all(b"Hello async!").await?;
-    
+
     let mut buf = vec![0; 1024];
     let n = stream.read(&mut buf).await?;
     println!("Received: {}", String::from_utf8_lossy(&buf[..n]));
-    
+
     Ok(())
 }
 ```
@@ -755,17 +755,17 @@ use std::fs;
 fn create_secure_socket() -> Result<(), Box<dyn std::error::Error>> {
     let socket_path = "/tmp/secure.sock";
     let _ = fs::remove_file(socket_path);
-    
+
     let listener = UnixListener::bind(socket_path)?;
-    
+
     // 设置权限为 0600 (仅所有者可读写)
     let metadata = fs::metadata(socket_path)?;
     let mut permissions = metadata.permissions();
     permissions.set_mode(0o600);
     fs::set_permissions(socket_path, permissions)?;
-    
+
     println!("✅ Secure socket created with 0600 permissions");
-    
+
     Ok(())
 }
 ```
@@ -780,9 +780,9 @@ use std::os::unix::net::UnixStream;
 fn get_peer_credentials(stream: &UnixStream) -> Result<(u32, u32, u32), Box<dyn std::error::Error>> {
     use nix::sys::socket::{getsockopt, sockopt::PeerCredentials};
     use std::os::unix::io::AsRawFd;
-    
+
     let creds = getsockopt(stream.as_raw_fd(), PeerCredentials)?;
-    
+
     Ok((creds.pid() as u32, creds.uid(), creds.gid()))
 }
 ```
@@ -799,17 +799,17 @@ use std::io::{BufReader, BufWriter, Write};
 #[cfg(unix)]
 fn optimized_unix_socket() -> Result<(), Box<dyn std::error::Error>> {
     let stream = UnixStream::connect("/tmp/my.sock")?;
-    
+
     // 使用缓冲提升性能
     let mut reader = BufReader::new(stream.try_clone()?);
     let mut writer = BufWriter::new(stream);
-    
+
     // 批量写入
     for i in 0..1000 {
         writeln!(writer, "Message {}", i)?;
     }
     writer.flush()?;
-    
+
     Ok(())
 }
 ```
@@ -857,14 +857,14 @@ fn tcp_server() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     }
-    
+
     Ok(())
 }
 
 fn handle_tcp_client(mut stream: TcpStream) -> Result<(), Box<dyn std::error::Error>> {
     let peer_addr = stream.peer_addr()?;
     println!("📥 Handling client: {}", peer_addr);
-    
+
     let mut buf = [0; 1024];
     loop {
         match stream.read(&mut buf) {
@@ -882,7 +882,7 @@ fn handle_tcp_client(mut stream: TcpStream) -> Result<(), Box<dyn std::error::Er
             }
         }
     }
-    
+
     Ok(())
 }
 ```
@@ -899,21 +899,21 @@ use std::time::Duration;
 fn tcp_client() -> Result<(), Box<dyn std::error::Error>> {
     let mut stream = TcpStream::connect("127.0.0.1:8080")?;
     println!("✅ Connected to server");
-    
+
     // 设置超时
     stream.set_read_timeout(Some(Duration::from_secs(5)))?;
     stream.set_write_timeout(Some(Duration::from_secs(5)))?;
-    
+
     // 发送数据
     let message = b"Hello TCP Server!";
     stream.write_all(message)?;
     println!("📤 Sent: {}", String::from_utf8_lossy(message));
-    
+
     // 接收响应
     let mut buffer = vec![0; 1024];
     let n = stream.read(&mut buffer)?;
     println!("📥 Received: {}", String::from_utf8_lossy(&buffer[..n]));
-    
+
     Ok(())
 }
 ```
@@ -930,11 +930,11 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 async fn async_tcp_server() -> Result<(), Box<dyn std::error::Error>> {
     let listener = TcpListener::bind("127.0.0.1:8080").await?;
     println!("🚀 Async TCP Server listening");
-    
+
     loop {
         let (socket, addr) = listener.accept().await?;
         println!("✅ New connection from {}", addr);
-        
+
         tokio::spawn(async move {
             if let Err(e) = handle_async_tcp_client(socket).await {
                 eprintln!("Error: {}", e);
@@ -945,13 +945,13 @@ async fn async_tcp_server() -> Result<(), Box<dyn std::error::Error>> {
 
 async fn handle_async_tcp_client(mut socket: TcpStream) -> Result<(), Box<dyn std::error::Error>> {
     let mut buf = vec![0; 1024];
-    
+
     loop {
         let n = socket.read(&mut buf).await?;
         if n == 0 {
             return Ok(());
         }
-        
+
         socket.write_all(&buf[..n]).await?;
     }
 }
@@ -981,10 +981,10 @@ impl TcpConnectionPool {
             max_size,
         }
     }
-    
+
     fn get_connection(&self) -> Result<TcpStream, Box<dyn std::error::Error>> {
         let mut pool = self.connections.lock().unwrap();
-        
+
         // 尝试从池中获取
         if let Some(stream) = pool.pop_front() {
             // 验证连接是否仍然有效
@@ -992,16 +992,16 @@ impl TcpConnectionPool {
                 return Ok(stream);
             }
         }
-        
+
         // 创建新连接
         let stream = TcpStream::connect(&self.address)?;
         stream.set_nodelay(true)?;
         Ok(stream)
     }
-    
+
     fn return_connection(&self, stream: TcpStream) {
         let mut pool = self.connections.lock().unwrap();
-        
+
         if pool.len() < self.max_size {
             pool.push_back(stream);
         }
@@ -1011,12 +1011,12 @@ impl TcpConnectionPool {
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let pool = TcpConnectionPool::new("127.0.0.1:8080".to_string(), 10);
-    
+
     // 使用连接
     let stream = pool.get_connection()?;
     // ... 使用stream ...
     pool.return_connection(stream);
-    
+
     Ok(())
 }
 ```
@@ -1033,18 +1033,18 @@ use std::net::TcpStream;
 fn optimize_tcp_stream(stream: &TcpStream) -> std::io::Result<()> {
     // 禁用Nagle算法，降低延迟
     stream.set_nodelay(true)?;
-    
+
     // 设置发送/接收缓冲区大小
     #[cfg(unix)]
     {
         use std::os::unix::io::AsRawFd;
         use nix::sys::socket::{setsockopt, sockopt};
-        
+
         let fd = stream.as_rawfd();
         setsockopt(fd, sockopt::SndBuf, &(256 * 1024))?;  // 256KB send buffer
         setsockopt(fd, sockopt::RcvBuf, &(256 * 1024))?;  // 256KB receive buffer
     }
-    
+
     Ok(())
 }
 ```
@@ -1057,13 +1057,13 @@ use std::io::{BufReader, BufWriter, Write};
 fn buffered_tcp_communication(stream: TcpStream) -> Result<(), Box<dyn std::error::Error>> {
     let mut reader = BufReader::new(stream.try_clone()?);
     let mut writer = BufWriter::new(stream);
-    
+
     // 批量写入
     for i in 0..1000 {
         writeln!(writer, "Message {}", i)?;
     }
     writer.flush()?;
-    
+
     Ok(())
 }
 ```
@@ -1086,28 +1086,28 @@ impl FramedMessage {
     fn new(stream: TcpStream) -> Self {
         Self { stream }
     }
-    
+
     fn send(&mut self, data: &[u8]) -> std::io::Result<()> {
         // 发送长度 (4字节大端)
         let length = (data.len() as u32).to_be_bytes();
         self.stream.write_all(&length)?;
-        
+
         // 发送数据
         self.stream.write_all(data)?;
-        
+
         Ok(())
     }
-    
+
     fn receive(&mut self) -> std::io::Result<Vec<u8>> {
         // 读取长度
         let mut length_buf = [0u8; 4];
         self.stream.read_exact(&mut length_buf)?;
         let length = u32::from_be_bytes(length_buf) as usize;
-        
+
         // 读取数据
         let mut data = vec![0u8; length];
         self.stream.read_exact(&mut data)?;
-        
+
         Ok(data)
     }
 }
@@ -1115,15 +1115,15 @@ impl FramedMessage {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let stream = TcpStream::connect("127.0.0.1:8080")?;
     let mut framed = FramedMessage::new(stream);
-    
+
     // 发送
     framed.send(b"Message 1")?;
     framed.send(b"Message 2")?;
-    
+
     // 接收
     let msg1 = framed.receive()?;
     let msg2 = framed.receive()?;
-    
+
     Ok(())
 }
 ```
@@ -1219,7 +1219,7 @@ fn create_structured_shmem() -> Result<(), Box<dyn std::error::Error>> {
 
     unsafe {
         let ptr = shmem.as_ptr() as *mut SharedData;
-        
+
         // 初始化
         ptr.write(SharedData {
             counter: 100,
@@ -1240,7 +1240,7 @@ fn read_structured_shmem() -> Result<(), Box<dyn std::error::Error>> {
     unsafe {
         let ptr = shmem.as_ptr() as *const SharedData;
         let data = ptr.read();
-        
+
         println!("📥 Read data: {:?}", data);
     }
 
@@ -1275,7 +1275,7 @@ impl SynchronizedSharedMemory {
             std::hint::spin_loop();
         }
     }
-    
+
     fn unlock(&self) {
         self.lock.store(0, Ordering::Release);
     }
@@ -1289,15 +1289,15 @@ fn synchronized_write() -> Result<(), Box<dyn std::error::Error>> {
 
     unsafe {
         let ptr = shmem.as_ptr() as *mut SynchronizedSharedMemory;
-        
+
         // 获取锁
         (*ptr).lock();
-        
+
         // 写入数据
         for i in 0..10 {
             (*ptr).data[i] = i as u8;
         }
-        
+
         // 释放锁
         (*ptr).unlock();
     }
@@ -1332,29 +1332,29 @@ impl RingBuffer {
             data: [0; 4096],
         }
     }
-    
+
     fn write(&mut self, byte: u8) -> bool {
         let write = self.write_pos.load(Ordering::Acquire);
         let read = self.read_pos.load(Ordering::Acquire);
-        
+
         let next_write = (write + 1) % self.capacity;
         if next_write == read {
             return false;  // Buffer full
         }
-        
+
         self.data[write] = byte;
         self.write_pos.store(next_write, Ordering::Release);
         true
     }
-    
+
     fn read(&mut self) -> Option<u8> {
         let write = self.write_pos.load(Ordering::Acquire);
         let read = self.read_pos.load(Ordering::Acquire);
-        
+
         if read == write {
             return None;  // Buffer empty
         }
-        
+
         let byte = self.data[read];
         let next_read = (read + 1) % self.capacity;
         self.read_pos.store(next_read, Ordering::Release);
@@ -1390,9 +1390,9 @@ fn benchmark_shared_memory() -> Result<(), Box<dyn std::error::Error>> {
 
     let duration = start.elapsed();
     let throughput = (iterations as f64 / duration.as_secs_f64()) / 1_000_000.0;
-    
+
     println!("📊 Throughput: {:.2} million ops/sec", throughput);
-    println!("📊 Latency: {:.2} ns/op", 
+    println!("📊 Latency: {:.2} ns/op",
         duration.as_nanos() as f64 / iterations as f64);
 
     Ok(())
@@ -1416,7 +1416,7 @@ fn benchmark_shared_memory() -> Result<(), Box<dyn std::error::Error>> {
 ```text
 需要跨网络？
 ├─ 是 → TCP/UDP Socket
-└─ 否 
+└─ 否
    ├─ 高性能大数据？
    │  └─ 是 → 共享内存
    └─ 否
@@ -1455,22 +1455,22 @@ impl<T: IpcTransport> IpcChannel<T> {
     pub fn new(transport: T) -> Self {
         Self { transport }
     }
-    
+
     pub fn send(&mut self, msg: &IpcMessage) -> Result<(), Box<dyn std::error::Error>> {
         let data = bincode::serialize(msg)?;
         let length = (data.len() as u32).to_be_bytes();
-        
+
         self.transport.send(&length)?;
         self.transport.send(&data)?;
         Ok(())
     }
-    
+
     pub fn recv(&mut self) -> Result<IpcMessage, Box<dyn std::error::Error>> {
         let mut length_buf = [0u8; 4];
         let length_data = self.transport.recv()?;
         length_buf.copy_from_slice(&length_data[..4]);
         let length = u32::from_be_bytes(length_buf) as usize;
-        
+
         let data = self.transport.recv()?;
         Ok(bincode::deserialize(&data[..length])?)
     }
@@ -1542,11 +1542,11 @@ impl FlowControl {
     fn can_send(&self) -> bool {
         self.current_size.load(Ordering::Relaxed) < self.max_queue_size
     }
-    
+
     fn on_send(&self) {
         self.current_size.fetch_add(1, Ordering::Release);
     }
-    
+
     fn on_receive(&self) {
         self.current_size.fetch_sub(1, Ordering::Release);
     }
@@ -1578,7 +1578,7 @@ impl ReliableChannel {
         self.pending.insert(id, data.clone());
         id
     }
-    
+
     fn on_ack(&mut self, id: u64) {
         self.pending.remove(&id);
     }
@@ -1646,11 +1646,11 @@ fn batch_send(stream: &mut TcpStream, messages: &[Vec<u8>]) -> std::io::Result<(
     // 合并多个消息
     let total_size: usize = messages.iter().map(|m| m.len()).sum();
     let mut buffer = Vec::with_capacity(total_size);
-    
+
     for msg in messages {
         buffer.extend_from_slice(msg);
     }
-    
+
     stream.write_all(&buffer)?;
     Ok(())
 }
@@ -1697,7 +1697,7 @@ impl ConnectionPool {
         self.available.pop_front()
             .map(|idx| &mut self.connections[idx])
     }
-    
+
     fn release(&mut self, idx: usize) {
         self.available.push_back(idx);
     }
@@ -1716,12 +1716,12 @@ fn validate_message(data: &[u8]) -> Result<(), String> {
     if data.len() > 1024 * 1024 {
         return Err("Message too large".to_string());
     }
-    
+
     // 检查格式
     if data.len() < 4 {
         return Err("Message too short".to_string());
     }
-    
+
     Ok(())
 }
 ```
@@ -1737,11 +1737,11 @@ fn check_peer_uid(stream: &UnixStream) -> Result<u32, Box<dyn std::error::Error>
     {
         use nix::sys::socket::{getsockopt, sockopt::PeerCredentials};
         use std::os::unix::io::AsRawFd;
-        
+
         let creds = getsockopt(stream.as_raw_fd(), PeerCredentials)?;
         Ok(creds.uid())
     }
-    
+
     #[cfg(not(target_os = "linux"))]
     {
         Err("Unsupported platform".into())
@@ -1759,6 +1759,6 @@ fn check_peer_uid(stream: &UnixStream) -> Result<u32, Box<dyn std::error::Error>
 
 ---
 
-**文档维护**: Documentation Team  
-**创建日期**: 2025-10-22  
+**文档维护**: Documentation Team
+**创建日期**: 2025-10-22
 **适用版本**: Rust 1.90+

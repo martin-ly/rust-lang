@@ -51,6 +51,7 @@
   - [📚 文档](#-文档)
     - [🌟 2025年新增核心文档](#-2025年新增核心文档)
     - [📖 原有文档](#-原有文档)
+    - [🔬 形式化理论](#-形式化理论)
   - [🤝 贡献](#-贡献)
     - [贡献方式](#贡献方式)
   - [📈 路线图](#-路线图)
@@ -508,7 +509,7 @@ cargo run --example ultimate_async_theory_practice_2025
   ```bash
   cargo run --example ultimate_async_theory_practice_2025
   ```
-  
+
   包含:
   - Actor/Reactor/CSP 三种模式的数学模型和完整实现
   - 异步设计模式(Builder, Factory, Adapter, Strategy, Observer)
@@ -520,7 +521,7 @@ cargo run --example ultimate_async_theory_practice_2025
   ```bash
   cargo run --example tokio_smol_latest_features_2025
   ```
-  
+
   包含:
   - Tokio JoinSet, TaskLocal, Runtime Metrics
   - Smol lightweight Executor, async-io 集成
@@ -531,7 +532,7 @@ cargo run --example ultimate_async_theory_practice_2025
   ```bash
   cargo run --example async_performance_optimization_2025 --release
   ```
-  
+
   包含:
   - 对象池 - 减少 50-80% 分配开销
   - 零拷贝技术 - Bytes 库的高效使用
@@ -543,7 +544,7 @@ cargo run --example ultimate_async_theory_practice_2025
   ```bash
   cargo run --example async_debugging_monitoring_2025
   ```
-  
+
   包含:
   - Tracing 结构化日志完整使用
   - 性能指标收集 (Metrics)
@@ -616,7 +617,7 @@ cargo run --example ultimate_async_theory_practice_2025
   ```bash
   cargo run --example comprehensive_async_patterns_2025
   ```
-  
+
   **包含内容**:
   - ✅ Actor 模式完整实现 (银行账户示例)
   - ✅ Reactor 模式事件循环 (日志处理)
@@ -630,7 +631,7 @@ cargo run --example ultimate_async_theory_practice_2025
   ```bash
   cargo run --example ultimate_async_theory_practice_2025
   ```
-  
+
   **包含内容**:
   - ✅ Actor 模型完整形式化 (数学定义、完整实现、银行转账演示)
   - ✅ Reactor 模式理论实践 (事件驱动、优先级队列、网络服务器)
@@ -645,20 +646,20 @@ cargo run --example ultimate_async_theory_practice_2025
   ```bash
   cargo run --example tokio_smol_latest_features_2025
   ```
-  
+
   **Tokio 特性**:
   - ✅ JoinSet 动态任务集管理
   - ✅ TaskLocal 任务本地存储
   - ✅ Runtime Metrics 运行时指标
   - ✅ 协作式调度优化
   - ✅ Cancellation Token 取消令牌
-  
+
   **Smol 特性**:
   - ✅ 轻量级 Executor (性能测试)
   - ✅ Async-io 集成 (TCP 服务器)
   - ✅ 与 Tokio 互操作
   - ✅ LocalExecutor 单线程优化
-  
+
   **性能对比**:
   - ✅ 任务创建/切换开销对比
   - ✅ 内存使用分析
@@ -758,15 +759,15 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 异步资源管理
     let resource = AsyncResourceManager::new();
     let data = resource.acquire_resource().await?;
-    
+
     // 并发控制
     let semaphore = Arc::new(tokio::sync::Semaphore::new(5));
     let permit = semaphore.acquire().await?;
-    
+
     // 结构化并发
     let mut join_set = tokio::task::JoinSet::new();
     join_set.spawn(async { /* 任务 */ });
-    
+
     Ok(())
 }
 ```
@@ -939,8 +940,8 @@ kubectl get pods -n rust-async-190
 
 ---
 
-**项目状态**: ✅ 已完成  
-**最后更新**: 2025年9月28日  
+**项目状态**: ✅ 已完成
+**最后更新**: 2025年9月28日
 **下一步**: 跟踪 Rust 新版本特性，持续优化和更新
 
 如有问题或建议，请提交 Issue 或 Pull Request！

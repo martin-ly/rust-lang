@@ -1,7 +1,7 @@
 ﻿# Tier 2: Future 与 Executor 机制
 
-> **文档版本**: Rust 1.90+ | **更新日期**: 2025-10-22  
-> **文档层级**: Tier 2 - 实践指南 | **预计阅读**: 25-30 分钟  
+> **文档版本**: Rust 1.90+ | **更新日期**: 2025-10-22
+> **文档层级**: Tier 2 - 实践指南 | **预计阅读**: 25-30 分钟
 > **难度**: ⭐⭐⭐ (中级)
 
 ---
@@ -30,7 +30,7 @@ use std::task::{Context, Poll};
 
 pub trait Future {
     type Output;
-    
+
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
 }
 ```
@@ -149,7 +149,7 @@ struct MyFuture {
 
 impl Future for MyFuture {
     type Output = i32;
-    
+
     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<i32> {
         if self.is_ready {
             // 任务完成
@@ -157,14 +157,14 @@ impl Future for MyFuture {
         } else {
             // 任务未完成，保存 Waker
             self.waker = Some(cx.waker().clone());
-            
+
             // 模拟：在另一个线程中唤醒
             let waker = self.waker.clone().unwrap();
             std::thread::spawn(move || {
                 std::thread::sleep(std::time::Duration::from_secs(1));
                 waker.wake(); // 唤醒任务
             });
-            
+
             Poll::Pending
         }
     }
@@ -214,12 +214,12 @@ impl SimpleExecutor {
             task_queue: Arc::new(Mutex::new(VecDeque::new())),
         }
     }
-    
+
     fn spawn(&self, future: impl Future<Output = ()> + 'static) {
         let task = Box::pin(future);
         self.task_queue.lock().unwrap().push_back(task);
     }
-    
+
     fn run(&self) {
         loop {
             // 取出一个任务
@@ -227,11 +227,11 @@ impl SimpleExecutor {
                 Some(task) => task,
                 None => break, // 没有任务了
             };
-            
+
             // 创建 Waker
             let waker = create_waker(self.task_queue.clone());
             let mut context = Context::from_waker(&waker);
-            
+
             // Poll 任务
             match task.as_mut().poll(&mut context) {
                 Poll::Ready(()) => {
@@ -270,15 +270,15 @@ static VTABLE: RawWakerVTable = RawWakerVTable::new(
 ```rust
 fn main() {
     let executor = SimpleExecutor::new();
-    
+
     executor.spawn(async {
         println!("Task 1");
     });
-    
+
     executor.spawn(async {
         println!("Task 2");
     });
-    
+
     executor.run();
 }
 ```
@@ -338,7 +338,7 @@ struct ReadyFuture {
 
 impl Future for ReadyFuture {
     type Output = i32;
-    
+
     fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<i32> {
         // 立即返回结果
         Poll::Ready(self.value)
@@ -378,7 +378,7 @@ impl DelayFuture {
 
 impl Future for DelayFuture {
     type Output = ();
-    
+
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<()> {
         if Instant::now() >= self.when {
             Poll::Ready(())
@@ -439,7 +439,7 @@ where
     F2: Future<Output = i32> + Unpin,
 {
     type Output = i32;
-    
+
     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<i32> {
         // Poll future1
         if let Some(mut f1) = self.future1.take() {
@@ -451,7 +451,7 @@ where
                 }
             }
         }
-        
+
         // Poll future2
         if let Some(mut f2) = self.future2.take() {
             match Pin::new(&mut f2).poll(cx) {
@@ -462,7 +462,7 @@ where
                 }
             }
         }
-        
+
         Poll::Ready(self.sum)
     }
 }
@@ -502,7 +502,7 @@ struct ExampleFuture {
 
 impl Future for ExampleFuture {
     type Output = i32;
-    
+
     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<i32> {
         loop {
             match &mut self.state {
@@ -641,16 +641,16 @@ impl TimerFuture {
 
 impl Future for TimerFuture {
     type Output = ();
-    
+
     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<()> {
         if Instant::now() >= self.when {
             return Poll::Ready(());
         }
-        
+
         if !self.waker_sent {
             let waker = cx.waker().clone();
             let when = self.when;
-            
+
             thread::spawn(move || {
                 let now = Instant::now();
                 if now < when {
@@ -658,10 +658,10 @@ impl Future for TimerFuture {
                 }
                 waker.wake();
             });
-            
+
             self.waker_sent = true;
         }
-        
+
         Poll::Pending
     }
 }
@@ -702,14 +702,14 @@ where
     F: Future + Unpin,
 {
     type Output = Option<F::Output>;
-    
+
     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
         // 检查是否取消
         match Pin::new(&mut self.cancel_rx).poll(cx) {
             Poll::Ready(_) => return Poll::Ready(None), // 已取消
             Poll::Pending => {}
         }
-        
+
         // Poll 原始 Future
         match Pin::new(&mut self.future).poll(cx) {
             Poll::Ready(val) => Poll::Ready(Some(val)),
@@ -725,13 +725,13 @@ async fn main() {
         tokio::time::sleep(tokio::time::Duration::from_secs(5)).await;
         "Done"
     });
-    
+
     tokio::spawn(async move {
         tokio::time::sleep(tokio::time::Duration::from_secs(2)).await;
         cancel.send(()).unwrap();
         println!("Cancelled!");
     });
-    
+
     match future.await {
         Some(result) => println!("Result: {}", result),
         None => println!("Task was cancelled"),
@@ -774,7 +774,7 @@ struct MyFuture<F> {
 
 impl<F: Future> Future for MyFuture<F> {
     type Output = F::Output;
-    
+
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
         let this = self.project();  // 安全地访问字段
         *this.counter += 1;
@@ -808,7 +808,7 @@ fn good() -> impl Future<Output = i32> {
 ```rust
 impl Future for MyFuture {
     type Output = i32;
-    
+
     #[inline]
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<i32> {
         // 热路径代码
@@ -851,5 +851,5 @@ impl Future for MyFuture {
 
 ---
 
-**文档维护**: C06 Async Team | **质量评分**: 95/100  
+**文档维护**: C06 Async Team | **质量评分**: 95/100
 **最后更新**: 2025-10-22 | **Rust 版本**: 1.90+

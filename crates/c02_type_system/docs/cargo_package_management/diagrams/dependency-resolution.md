@@ -23,7 +23,7 @@
     - [问题 2: 特性冲突](#问题-2-特性冲突)
   - [📚 相关资源](#-相关资源)
 
-**版本**: Rust 1.90 / Cargo 1.90  
+**版本**: Rust 1.90 / Cargo 1.90
 **创建日期**: 2025-10-19
 
 ---
@@ -42,7 +42,7 @@ graph TD
     E --> F
     F --> G[生成 Cargo.lock]
     G --> H[解析完成]
-    
+
     style A fill:#e1f5ff
     style H fill:#c8e6c9
     style E fill:#fff9c4
@@ -123,12 +123,12 @@ graph LR
     C -->|需要 mio| D[启用 mio]
     C -->|需要 tokio-macros| E[启用 tokio-macros]
     C -->|需要 signal| F[启用 signal]
-    
+
     D --> G[特性统一]
     E --> G
     F --> G
     G --> H[生成最终特性集]
-    
+
     style A fill:#e1f5ff
     style H fill:#c8e6c9
 ```
@@ -265,5 +265,5 @@ tokio = { version = "1.48", features = ["full"], default-features = false }
 
 ---
 
-**维护状态**: 🟢 活跃维护中  
+**维护状态**: 🟢 活跃维护中
 **最后更新**: 2025-10-19

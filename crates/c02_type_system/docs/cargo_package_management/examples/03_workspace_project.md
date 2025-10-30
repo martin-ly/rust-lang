@@ -1,36 +1,36 @@
 ﻿# 实战示例：完整工作空间项目
 
-
 ## 📊 目录
 
-- [📋 项目概述](#项目概述)
-- [📁 项目结构](#项目结构)
-- [📝 完整代码](#完整代码)
-  - [Cargo.toml (工作空间根)](#cargotoml-工作空间根)
-  - [crates/core/Cargo.toml](#cratescorecargotoml)
-  - [crates/core/src/lib.rs](#cratescoresrclibrs)
-  - [crates/utils/Cargo.toml](#cratesutilscargotoml)
-  - [crates/utils/src/lib.rs](#cratesutilssrclibrs)
-  - [crates/api/Cargo.toml](#cratesapicargotoml)
-  - [crates/api/src/lib.rs](#cratesapisrclibrs)
-  - [crates/cli/Cargo.toml](#cratesclicargotoml)
-  - [crates/cli/src/main.rs](#cratesclisrcmainrs)
-- [🚀 构建和运行](#构建和运行)
-  - [工作空间级操作](#工作空间级操作)
-  - [单独构建成员](#单独构建成员)
-  - [发布构建](#发布构建)
-- [🧪 测试](#测试)
-  - [tests/integration.rs](#testsintegrationrs)
-- [📊 依赖分析](#依赖分析)
-- [🎯 学习要点](#学习要点)
-  - [1. 工作空间配置](#1-工作空间配置)
-  - [2. 成员包配置](#2-成员包配置)
-  - [3. 发布顺序](#3-发布顺序)
-- [📚 相关资源](#相关资源)
+- [实战示例：完整工作空间项目](#实战示例完整工作空间项目)
+  - [📊 目录](#-目录)
+  - [📋 项目概述](#-项目概述)
+  - [📁 项目结构](#-项目结构)
+  - [📝 完整代码](#-完整代码)
+    - [Cargo.toml (工作空间根)](#cargotoml-工作空间根)
+    - [crates/core/Cargo.toml](#cratescorecargotoml)
+    - [crates/core/src/lib.rs](#cratescoresrclibrs)
+    - [crates/utils/Cargo.toml](#cratesutilscargotoml)
+    - [crates/utils/src/lib.rs](#cratesutilssrclibrs)
+    - [crates/api/Cargo.toml](#cratesapicargotoml)
+    - [crates/api/src/lib.rs](#cratesapisrclibrs)
+    - [crates/cli/Cargo.toml](#cratesclicargotoml)
+    - [crates/cli/src/main.rs](#cratesclisrcmainrs)
+  - [🚀 构建和运行](#-构建和运行)
+    - [工作空间级操作](#工作空间级操作)
+    - [单独构建成员](#单独构建成员)
+    - [发布构建](#发布构建)
+  - [🧪 测试](#-测试)
+    - [tests/integration.rs](#testsintegrationrs)
+  - [📊 依赖分析](#-依赖分析)
+  - [🎯 学习要点](#-学习要点)
+    - [1. 工作空间配置](#1-工作空间配置)
+    - [2. 成员包配置](#2-成员包配置)
+    - [3. 发布顺序](#3-发布顺序)
+  - [📚 相关资源](#-相关资源)
 
-
-**难度**: ⭐⭐⭐⭐  
-**类型**: 工作空间  
+**难度**: ⭐⭐⭐⭐
+**类型**: 工作空间
 **创建日期**: 2025-10-19
 
 ---
@@ -217,10 +217,10 @@ use thiserror::Error;
 pub enum CoreError {
     #[error("Invalid data: {0}")]
     InvalidData(String),
-    
+
     #[error("Not found: {0}")]
     NotFound(String),
-    
+
     #[error("Internal error: {0}")]
     Internal(String),
 }
@@ -295,7 +295,7 @@ impl UserRepository for InMemoryUserRepository {
 
     fn save(&mut self, user: User) -> Result<()> {
         user.validate()?;
-        
+
         if let Some(existing) = self.users.iter_mut().find(|u| u.id == user.id) {
             *existing = user;
         } else {
@@ -307,7 +307,7 @@ impl UserRepository for InMemoryUserRepository {
     fn delete(&mut self, id: u64) -> Result<()> {
         let len_before = self.users.len();
         self.users.retain(|u| u.id != id);
-        
+
         if self.users.len() == len_before {
             return Err(CoreError::NotFound(format!("User {} not found", id)));
         }
@@ -344,14 +344,14 @@ mod tests {
     fn test_repository() {
         let mut repo = InMemoryUserRepository::new();
         let user = User::new(1, "Alice", "alice@example.com");
-        
+
         // 保存
         assert!(repo.save(user.clone()).is_ok());
-        
+
         // 查找
         let found = repo.find_by_id(1).unwrap();
         assert_eq!(found.name, "Alice");
-        
+
         // 删除
         assert!(repo.delete(1).is_ok());
         assert!(repo.find_by_id(1).is_err());
@@ -467,7 +467,7 @@ mod tests {
             User::new(1, "Alice", "alice@example.com"),
             User::new(2, "Bob", "bob@example.com"),
         ];
-        
+
         let stats = calculate_stats(&users);
         assert_eq!(stats.total, 2);
         assert_eq!(stats.active, 2);
@@ -580,13 +580,13 @@ async fn create_user(
     Json(payload): Json<CreateUserRequest>,
 ) -> Result<(StatusCode, Json<User>), AppError> {
     let mut repo = state.repo.lock().unwrap();
-    
+
     // 生成新 ID
     let id = repo.list_all().len() as u64 + 1;
     let user = User::new(id, payload.name, payload.email);
-    
+
     repo.save(user.clone())?;
-    
+
     Ok((StatusCode::CREATED, Json(user)))
 }
 
@@ -708,14 +708,14 @@ enum Commands {
     Add {
         #[arg(short, long)]
         name: String,
-        
+
         #[arg(short, long)]
         email: String,
     },
-    
+
     /// 列出所有用户
     List,
-    
+
     /// 显示统计信息
     Stats,
 }
@@ -733,11 +733,11 @@ fn main() -> Result<()> {
             let id = repo.list_all().len() as u64 + 1;
             let user = User::new(id, name, email);
             repo.save(user.clone())?;
-            
+
             println!("{} {}", "✓".green().bold(), "User added:");
             println!("  {}", format_user(&user));
         }
-        
+
         Commands::List => {
             let users = repo.list_all();
             println!("{}", "Users:".green().bold());
@@ -745,11 +745,11 @@ fn main() -> Result<()> {
                 println!("  {}", format_user(&user));
             }
         }
-        
+
         Commands::Stats => {
             let users = repo.list_all();
             let stats = calculate_stats(&users);
-            
+
             println!("{}", "Statistics:".green().bold());
             println!("  Total: {}", stats.total);
             println!("  Active: {}", stats.active.to_string().green());
@@ -817,19 +817,19 @@ use workspace_utils::format_user;
 #[test]
 fn test_full_workflow() {
     let mut repo = InMemoryUserRepository::new();
-    
+
     // 创建用户
     let user = User::new(1, "Test User", "test@example.com");
     assert!(repo.save(user.clone()).is_ok());
-    
+
     // 查找用户
     let found = repo.find_by_id(1).unwrap();
     assert_eq!(found.name, "Test User");
-    
+
     // 格式化
     let formatted = format_user(&found);
     assert!(formatted.contains("Test User"));
-    
+
     // 删除
     assert!(repo.delete(1).is_ok());
     assert!(repo.find_by_id(1).is_err());
@@ -910,8 +910,8 @@ workspace-utils.workspace = true  # 内部依赖
 
 ---
 
-**项目类型**: 工作空间  
-**适用场景**: 多包项目、微服务、库生态  
+**项目类型**: 工作空间
+**适用场景**: 多包项目、微服务、库生态
 **难度等级**: ⭐⭐⭐⭐ 高级
 
 *完整的工作空间示例，展示了真实项目的组织方式！* 🦀🏗️

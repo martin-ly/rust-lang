@@ -1,7 +1,7 @@
 ﻿# Rust 1.90 设计模式示例集 (Rust 1.90 Design Pattern Examples)
 
-> **文档定位**: 全面展示 Rust 1.90 最新特性在设计模式中的应用  
-> **适用版本**: Rust 1.90+ (Edition 2024)  
+> **文档定位**: 全面展示 Rust 1.90 最新特性在设计模式中的应用
+> **适用版本**: Rust 1.90+ (Edition 2024)
 > **最后更新**: 2025-10-19
 
 ---
@@ -123,7 +123,7 @@ impl AppConfig {
             }
         })
     }
-    
+
     /// 用于测试的初始化方法
     #[cfg(test)]
     pub fn init_for_test(config: AppConfig) {
@@ -142,7 +142,7 @@ pub fn make_api_call() -> Result<String, String> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_global_config() {
         let config = AppConfig::global();
@@ -191,7 +191,7 @@ impl GlobalLogger {
             }
         })
     }
-    
+
     /// 记录日志
     pub fn log(&self, level: LogLevel, message: impl Into<String>) {
         let entry = LogEntry {
@@ -199,14 +199,14 @@ impl GlobalLogger {
             level,
             message: message.into(),
         };
-        
+
         let mut entries = self.entries.lock().unwrap();
         if entries.len() >= self.max_entries {
             entries.pop_front();
         }
         entries.push_back(entry);
     }
-    
+
     /// 获取最近的日志
     pub fn recent_logs(&self, count: usize) -> Vec<LogEntry> {
         let entries = self.entries.lock().unwrap();
@@ -237,7 +237,7 @@ macro_rules! log_error {
 pub fn example_usage() {
     log_info!("Application started");
     log_error!("Failed to connect: {}", "timeout");
-    
+
     let logs = GlobalLogger::global().recent_logs(10);
     for entry in logs {
         println!("[{:?}] {}", entry.level, entry.message);
@@ -258,7 +258,7 @@ mod old_way {
     lazy_static! {
         static ref CONFIG: String = "config".to_string();
     }
-    
+
     pub fn access() -> &'static str {
         &CONFIG
     }
@@ -268,7 +268,7 @@ mod old_way {
 mod new_way {
     use std::sync::OnceLock;
     static CONFIG: OnceLock<String> = OnceLock::new();
-    
+
     pub fn access() -> &'static str {
         CONFIG.get_or_init(|| "config".to_string())
     }
@@ -277,15 +277,15 @@ mod new_way {
 /// 性能测试
 pub fn benchmark_oncelock() {
     const ITERATIONS: usize = 1_000_000;
-    
+
     // OnceLock性能
     let start = Instant::now();
     for _ in 0..ITERATIONS {
         let _ = new_way::access();
     }
     let duration = start.elapsed();
-    println!("OnceLock: {:?} ({} ns/iter)", 
-             duration, 
+    println!("OnceLock: {:?} ({} ns/iter)",
+             duration,
              duration.as_nanos() / ITERATIONS as u128);
 }
 ```
@@ -317,7 +317,7 @@ pub fn benchmark_oncelock() {
 pub trait Observer {
     /// 关联类型：借用视图
     type ViewType<'a> where Self: 'a;
-    
+
     /// 接收借用的数据
     fn update<'a>(&'a mut self, view: Self::ViewType<'a>);
 }
@@ -326,7 +326,7 @@ pub trait Observer {
 pub trait Subject {
     type Item;
     type ObserverType: for<'a> Observer<ViewType<'a> = &'a Self::Item>;
-    
+
     fn attach(&mut self, observer: Self::ObserverType);
     fn notify(&mut self);
 }
@@ -338,7 +338,7 @@ pub struct StringObserver {
 
 impl Observer for StringObserver {
     type ViewType<'a> = &'a str;
-    
+
     fn update<'a>(&'a mut self, view: &'a str) {
         self.last_length = view.len();
         println!("观察到字符串变化: '{}' (长度: {})", view, view.len());
@@ -358,12 +358,12 @@ impl StringSubject {
             observers: Vec::new(),
         }
     }
-    
+
     pub fn set_data(&mut self, new_data: String) {
         self.data = new_data;
         self.notify_all();
     }
-    
+
     fn notify_all(&mut self) {
         // 零拷贝：仅借用字符串
         let data_ref = self.data.as_str();
@@ -371,7 +371,7 @@ impl StringSubject {
             observer.update(data_ref);
         }
     }
-    
+
     pub fn attach(&mut self, observer: StringObserver) {
         self.observers.push(observer);
     }
@@ -380,10 +380,10 @@ impl StringSubject {
 /// 使用示例
 pub fn example_gats_observer() {
     let mut subject = StringSubject::new("初始数据".to_string());
-    
+
     subject.attach(StringObserver { last_length: 0 });
     subject.attach(StringObserver { last_length: 0 });
-    
+
     subject.set_data("新数据".to_string());
     subject.set_data("更新的数据".to_string());
 }
@@ -395,12 +395,12 @@ pub fn example_gats_observer() {
 /// 带借用视图的集合
 pub trait BorrowCollection {
     type Item;
-    
+
     /// GATs: 返回借用的迭代器
-    type Iter<'a>: Iterator<Item = &'a Self::Item> 
-    where 
+    type Iter<'a>: Iterator<Item = &'a Self::Item>
+    where
         Self: 'a;
-    
+
     fn iter(&self) -> Self::Iter<'_>;
 }
 
@@ -412,16 +412,16 @@ pub struct MyCollection<T> {
 impl<T> BorrowCollection for MyCollection<T> {
     type Item = T;
     type Iter<'a> = std::slice::Iter<'a, T> where T: 'a;
-    
+
     fn iter(&self) -> Self::Iter<'_> {
         self.items.iter()
     }
 }
 
 /// 泛型函数，接受任何实现BorrowCollection的类型
-pub fn print_collection<C: BorrowCollection>(collection: &C) 
-where 
-    C::Item: std::fmt::Display 
+pub fn print_collection<C: BorrowCollection>(collection: &C)
+where
+    C::Item: std::fmt::Display
 {
     for item in collection.iter() {
         println!("{}", item);
@@ -433,7 +433,7 @@ pub fn example_gats_iterator() {
     let collection = MyCollection {
         items: vec![1, 2, 3, 4, 5],
     };
-    
+
     print_collection(&collection);
     // 零拷贝：没有克隆任何数据
 }
@@ -449,11 +449,11 @@ mod clone_way {
     pub trait Observer {
         fn update(&mut self, data: String); // 克隆
     }
-    
+
     pub struct CloneObserver {
         pub data: String,
     }
-    
+
     impl Observer for CloneObserver {
         fn update(&mut self, data: String) {
             self.data = data; // 移动/克隆
@@ -467,11 +467,11 @@ mod gats_way {
         type ViewType<'a> where Self: 'a;
         fn update<'a>(&'a mut self, view: Self::ViewType<'a>);
     }
-    
+
     pub struct BorrowObserver {
         pub last_len: usize,
     }
-    
+
     impl Observer for BorrowObserver {
         type ViewType<'a> = &'a str;
         fn update<'a>(&'a mut self, view: &'a str) {
@@ -484,7 +484,7 @@ mod gats_way {
 pub fn benchmark_gats() {
     const ITERATIONS: usize = 100_000;
     let data = "一些需要观察的数据".to_string();
-    
+
     // 克隆方式
     let start = Instant::now();
     let mut observer = clone_way::CloneObserver { data: String::new() };
@@ -492,7 +492,7 @@ pub fn benchmark_gats() {
         observer.update(data.clone());
     }
     println!("克隆方式: {:?}", start.elapsed());
-    
+
     // GATs方式
     let start = Instant::now();
     let mut observer = gats_way::BorrowObserver { last_len: 0 };
@@ -533,10 +533,10 @@ use std::future::Future;
 pub trait AsyncDataSource {
     /// 异步读取数据
     async fn read(&self) -> Result<String, std::io::Error>;
-    
+
     /// 异步写入数据
     async fn write(&mut self, data: &str) -> Result<(), std::io::Error>;
-    
+
     /// 异步检查连接
     async fn ping(&self) -> bool;
 }
@@ -551,11 +551,11 @@ impl AsyncDataSource for FileDataSource {
         // 使用tokio或async-std
         tokio::fs::read_to_string(&self.path).await
     }
-    
+
     async fn write(&mut self, data: &str) -> Result<(), std::io::Error> {
         tokio::fs::write(&self.path, data).await
     }
-    
+
     async fn ping(&self) -> bool {
         tokio::fs::metadata(&self.path).await.is_ok()
     }
@@ -577,7 +577,7 @@ impl AsyncDataSource for HttpDataSource {
             .await
             .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))
     }
-    
+
     async fn write(&mut self, data: &str) -> Result<(), std::io::Error> {
         self.client.post(&self.url)
             .body(data.to_string())
@@ -586,7 +586,7 @@ impl AsyncDataSource for HttpDataSource {
             .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
         Ok(())
     }
-    
+
     async fn ping(&self) -> bool {
         self.client.get(&self.url).send().await.is_ok()
     }
@@ -598,7 +598,7 @@ pub async fn fetch_data<D: AsyncDataSource>(source: &D) -> Result<String, std::i
         source.read().await
     } else {
         Err(std::io::Error::new(
-            std::io::ErrorKind::NotConnected, 
+            std::io::ErrorKind::NotConnected,
             "数据源不可用"
         ))
     }
@@ -610,10 +610,10 @@ async fn main() -> Result<(), std::io::Error> {
     let file_source = FileDataSource {
         path: "data.txt".into(),
     };
-    
+
     let data = fetch_data(&file_source).await?;
     println!("数据: {}", data);
-    
+
     Ok(())
 }
 ```
@@ -624,10 +624,10 @@ async fn main() -> Result<(), std::io::Error> {
 /// 异步事件处理器trait
 pub trait AsyncEventHandler {
     type Event;
-    
+
     /// 异步处理事件
     async fn handle(&mut self, event: Self::Event) -> Result<(), String>;
-    
+
     /// 批量处理事件
     async fn handle_batch(&mut self, events: Vec<Self::Event>) -> Vec<Result<(), String>> {
         let mut results = Vec::new();
@@ -652,10 +652,10 @@ pub struct LogEventHandler {
 
 impl AsyncEventHandler for LogEventHandler {
     type Event = LogEvent;
-    
+
     async fn handle(&mut self, event: LogEvent) -> Result<(), String> {
         println!("[{}] {}", event.level, event.message);
-        
+
         // 异步写入日志文件
         let log_line = format!("[{}] {}\n", event.level, event.message);
         tokio::fs::OpenOptions::new()
@@ -676,12 +676,12 @@ pub async fn example_async_handler() {
     let mut handler = LogEventHandler {
         log_file: "app.log".to_string(),
     };
-    
+
     let events = vec![
         LogEvent { level: "INFO".to_string(), message: "应用启动".to_string() },
         LogEvent { level: "ERROR".to_string(), message: "连接失败".to_string() },
     ];
-    
+
     let results = handler.handle_batch(events).await;
     println!("处理结果: {:?}", results);
 }
@@ -694,14 +694,14 @@ pub async fn example_async_handler() {
 #[cfg(feature = "benchmark")]
 mod old_async {
     use async_trait::async_trait;
-    
+
     #[async_trait]
     pub trait OldAsyncTrait {
         async fn process(&self) -> String;
     }
-    
+
     pub struct OldImpl;
-    
+
     #[async_trait]
     impl OldAsyncTrait for OldImpl {
         async fn process(&self) -> String {
@@ -715,9 +715,9 @@ mod new_async {
     pub trait NewAsyncTrait {
         async fn process(&self) -> String;
     }
-    
+
     pub struct NewImpl;
-    
+
     impl NewAsyncTrait for NewImpl {
         async fn process(&self) -> String {
             "result".to_string()
@@ -752,19 +752,19 @@ mod new_async {
 /// 集合trait
 pub trait Collection {
     type Item;
-    
+
     /// RPITIT: 返回impl Iterator
     fn iter(&self) -> impl Iterator<Item = &Self::Item>;
-    
+
     /// 过滤元素
-    fn filter_items(&self, predicate: impl Fn(&Self::Item) -> bool) 
-        -> impl Iterator<Item = &Self::Item> 
+    fn filter_items(&self, predicate: impl Fn(&Self::Item) -> bool)
+        -> impl Iterator<Item = &Self::Item>
     {
         self.iter().filter(move |item| predicate(item))
     }
-    
+
     /// 映射元素
-    fn map_items<U>(&self, f: impl Fn(&Self::Item) -> U) 
+    fn map_items<U>(&self, f: impl Fn(&Self::Item) -> U)
         -> impl Iterator<Item = U>
     {
         self.iter().map(move |item| f(item))
@@ -778,7 +778,7 @@ pub struct MyVec<T> {
 
 impl<T> Collection for MyVec<T> {
     type Item = T;
-    
+
     fn iter(&self) -> impl Iterator<Item = &T> {
         self.items.iter()
     }
@@ -789,11 +789,11 @@ pub fn example_rpitit() {
     let collection = MyVec {
         items: vec![1, 2, 3, 4, 5],
     };
-    
+
     // 过滤偶数
     let evens: Vec<_> = collection.filter_items(|&x| x % 2 == 0).collect();
     println!("偶数: {:?}", evens);
-    
+
     // 映射为字符串
     let strings: Vec<_> = collection.map_items(|x| format!("值: {}", x)).collect();
     println!("字符串: {:?}", strings);
@@ -807,11 +807,11 @@ pub fn example_rpitit() {
 pub trait ParallelProcessor {
     type Input;
     type Output;
-    
+
     /// 返回并行迭代器
-    fn process_parallel(&self, items: &[Self::Input]) 
+    fn process_parallel(&self, items: &[Self::Input])
         -> impl Iterator<Item = Self::Output> + Send
-    where 
+    where
         Self::Input: Sync,
         Self::Output: Send;
 }
@@ -822,13 +822,13 @@ pub struct MathProcessor;
 impl ParallelProcessor for MathProcessor {
     type Input = i32;
     type Output = i32;
-    
-    fn process_parallel(&self, items: &[i32]) 
-        -> impl Iterator<Item = i32> + Send 
+
+    fn process_parallel(&self, items: &[i32])
+        -> impl Iterator<Item = i32> + Send
     {
         // 使用rayon并行处理
         use rayon::prelude::*;
-        
+
         items.par_iter()
             .map(|&x| x * 2)
             .filter(|&x| x > 10)
@@ -841,7 +841,7 @@ impl ParallelProcessor for MathProcessor {
 pub fn example_parallel_rpitit() {
     let processor = MathProcessor;
     let data = vec![1, 5, 10, 15, 20, 25];
-    
+
     let results: Vec<_> = processor.process_parallel(&data).collect();
     println!("并行处理结果: {:?}", results);
 }
@@ -854,14 +854,14 @@ pub fn example_parallel_rpitit() {
 pub trait OldCollection {
     type Item;
     type Iter<'a>: Iterator<Item = &'a Self::Item> where Self: 'a;
-    
+
     fn iter(&self) -> Self::Iter<'_>;
 }
 
 // ✅ 新方式: RPITIT（简洁）
 pub trait NewCollection {
     type Item;
-    
+
     fn iter(&self) -> impl Iterator<Item = &Self::Item>;
 }
 
@@ -910,7 +910,7 @@ impl Handler for BasicHandler {
         let Some(data) = self.process_request(request) else {
             return None;
         };
-        
+
         Some(format!("BasicHandler: {}", data))
     }
 }
@@ -934,11 +934,11 @@ impl HandlerChain {
     pub fn new() -> Self {
         HandlerChain { handlers: Vec::new() }
     }
-    
+
     pub fn add_handler(&mut self, handler: Box<dyn Handler>) {
         self.handlers.push(handler);
     }
-    
+
     pub fn handle(&self, request: &Request) -> Option<String> {
         for handler in &self.handlers {
             // ✅ let-else 早退
@@ -956,12 +956,12 @@ pub fn example_let_else_chain() {
     let mut chain = HandlerChain::new();
     chain.add_handler(Box::new(BasicHandler { max_level: 5 }));
     chain.add_handler(Box::new(BasicHandler { max_level: 10 }));
-    
+
     let request = Request {
         level: 7,
         data: "重要请求".to_string(),
     };
-    
+
     let result = chain.handle(&request);
     println!("处理结果: {:?}", result);
 }
@@ -982,7 +982,7 @@ pub enum DatabaseType {
 
 impl FromStr for DatabaseType {
     type Err = String;
-    
+
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s.to_lowercase().as_str() {
             "postgres" => Ok(DatabaseType::Postgres),
@@ -1029,22 +1029,22 @@ impl DatabaseFactory {
         let Ok(db_type) = DatabaseType::from_str(type_str) else {
             return Err(format!("无效的数据库类型: {}", type_str));
         };
-        
+
         let db: Box<dyn Database> = match db_type {
             DatabaseType::Postgres => Box::new(PostgresDB),
             DatabaseType::MySQL => Box::new(MySQLDB),
             DatabaseType::SQLite => Box::new(SQLiteDB),
         };
-        
+
         Ok(db)
     }
-    
+
     pub fn connect(type_str: &str, url: &str) -> Result<String, String> {
         // ✅ let-else 链式早退
         let Ok(db) = Self::create(type_str) else {
             return Err("创建数据库失败".to_string());
         };
-        
+
         db.connect(url)
     }
 }
@@ -1055,7 +1055,7 @@ pub fn example_let_else_factory() {
         Ok(msg) => println!("{}", msg),
         Err(e) => eprintln!("错误: {}", e),
     }
-    
+
     match DatabaseFactory::connect("invalid", "localhost") {
         Ok(msg) => println!("{}", msg),
         Err(e) => eprintln!("错误: {}", e),
@@ -1088,15 +1088,15 @@ pub fn new_way(input: Option<String>) -> Result<String, String> {
     let Some(data) = input else {
         return Err("无输入".to_string());
     };
-    
+
     let Ok(parsed) = data.parse::<i32>() else {
         return Err("解析失败".to_string());
     };
-    
+
     let true = parsed > 0 else {
         return Err("非正数".to_string());
     };
-    
+
     Ok(format!("Valid: {}", parsed))
 }
 
@@ -1153,10 +1153,10 @@ pub fn process_sub(sub: &dyn Sub) {
 pub fn example_dyn_upcasting() {
     let obj = MyType { value: 42 };
     let sub_ref: &dyn Sub = &obj;
-    
+
     // 调用 sub 方法
     println!("{}", sub_ref.sub_method());
-    
+
     // 上转型到 base
     process_sub(sub_ref);
 }
@@ -1181,10 +1181,10 @@ pub trait Event: Send + Sync + 'static {
 /// 事件处理器 (使用async trait + RPITIT)
 pub trait EventHandler: Send + Sync {
     type Event: Event;
-    
+
     /// 异步处理事件
     async fn handle(&mut self, event: &Self::Event) -> Result<(), String>;
-    
+
     /// 返回处理统计
     fn stats(&self) -> impl Iterator<Item = (&str, usize)>;
 }
@@ -1200,20 +1200,20 @@ impl<E: Event> EventBus<E> {
             handlers: Mutex::new(Vec::new()),
         }
     }
-    
+
     pub async fn register(&self, handler: Box<dyn EventHandler<Event = E>>) {
         let mut handlers = self.handlers.lock().await;
         handlers.push(handler);
     }
-    
+
     pub async fn publish(&self, event: &E) -> Vec<Result<(), String>> {
         let mut handlers = self.handlers.lock().await;
         let mut results = Vec::new();
-        
+
         for handler in handlers.iter_mut() {
             results.push(handler.handle(event).await);
         }
-        
+
         results
     }
 }
@@ -1228,7 +1228,7 @@ pub fn global_event_bus() -> &'static Arc<EventBus<String>> {
 /// 字符串事件
 impl Event for String {
     type ViewType<'a> = &'a str;
-    
+
     fn view(&self) -> &str {
         self.as_str()
     }
@@ -1241,13 +1241,13 @@ pub struct LogHandler {
 
 impl EventHandler for LogHandler {
     type Event = String;
-    
+
     async fn handle(&mut self, event: &String) -> Result<(), String> {
         self.count += 1;
         println!("[LOG] 事件 #{}: {}", self.count, event.view());
         Ok(())
     }
-    
+
     fn stats(&self) -> impl Iterator<Item = (&str, usize)> {
         std::iter::once(("processed", self.count))
     }
@@ -1257,10 +1257,10 @@ impl EventHandler for LogHandler {
 #[tokio::main]
 async fn main() {
     let bus = global_event_bus();
-    
+
     // 注册处理器
     bus.register(Box::new(LogHandler { count: 0 })).await;
-    
+
     // 发布事件
     let results = bus.publish(&"测试事件".to_string()).await;
     println!("处理结果: {:?}", results);
@@ -1403,9 +1403,9 @@ cargo run --example dyn_upcasting_adapter
 
 ---
 
-**贡献者**: Rust 设计模式社区  
-**基准测试环境**: Intel i7-12700K, 32GB RAM, Rust 1.90  
-**更新频率**: 随Rust版本更新  
+**贡献者**: Rust 设计模式社区
+**基准测试环境**: Intel i7-12700K, 32GB RAM, Rust 1.90
+**更新频率**: 随Rust版本更新
 **最后更新**: 2025-10-19
 
 ---

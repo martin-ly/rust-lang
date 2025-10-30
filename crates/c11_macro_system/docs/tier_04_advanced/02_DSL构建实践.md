@@ -283,7 +283,7 @@ fn macro_parser_example() {
         port: 8080,
         debug: true,
     };
-    
+
     println!("{:?}", config);
 }
 ```
@@ -356,7 +356,7 @@ fn parse_key_value(input: &str) -> IResult<&str, (String, i32)> {
     let (input, key) = parse_identifier(input)?;
     let (input, _) = delimited(multispace0, char('='), multispace0)(input)?;
     let (input, value) = parse_integer(input)?;
-    
+
     Ok((input, (key, value)))
 }
 
@@ -408,7 +408,7 @@ fn parse_term(input: &str) -> IResult<&str, Expr> {
         delimited(multispace0, char('*'), multispace0),
         parse_factor
     ))(input)?;
-    
+
     Ok((input, rest.into_iter().fold(first, |acc, expr| {
         Expr::Mul(Box::new(acc), Box::new(expr))
     })))
@@ -420,7 +420,7 @@ fn parse_expr(input: &str) -> IResult<&str, Expr> {
         delimited(multispace0, char('+'), multispace0),
         parse_term
     ))(input)?;
-    
+
     Ok((input, rest.into_iter().fold(first, |acc, expr| {
         Expr::Add(Box::new(acc), Box::new(expr))
     })))
@@ -479,7 +479,7 @@ struct ConfigParser;
 fn parse_config(input: &str) -> Result<Vec<(String, i32)>, pest::error::Error<Rule>> {
     let pairs = ConfigParser::parse(Rule::config, input)?;
     let mut result = Vec::new();
-    
+
     for pair in pairs {
         for inner in pair.into_inner() {
             if inner.as_rule() == Rule::key_value {
@@ -490,7 +490,7 @@ fn parse_config(input: &str) -> Result<Vec<(String, i32)>, pest::error::Error<Ru
             }
         }
     }
-    
+
     Ok(result)
 }
 
@@ -541,15 +541,15 @@ impl Lexer {
             pos: 0,
         }
     }
-    
+
     fn current(&self) -> Option<char> {
         self.input.get(self.pos).copied()
     }
-    
+
     fn advance(&mut self) {
         self.pos += 1;
     }
-    
+
     fn skip_whitespace(&mut self) {
         while let Some(c) = self.current() {
             if c.is_whitespace() {
@@ -559,7 +559,7 @@ impl Lexer {
             }
         }
     }
-    
+
     fn read_number(&mut self) -> i32 {
         let start = self.pos;
         while let Some(c) = self.current() {
@@ -569,14 +569,14 @@ impl Lexer {
                 break;
             }
         }
-        
+
         self.input[start..self.pos]
             .iter()
             .collect::<String>()
             .parse()
             .unwrap()
     }
-    
+
     fn read_identifier(&mut self) -> String {
         let start = self.pos;
         while let Some(c) = self.current() {
@@ -586,13 +586,13 @@ impl Lexer {
                 break;
             }
         }
-        
+
         self.input[start..self.pos].iter().collect()
     }
-    
+
     fn next_token(&mut self) -> Token {
         self.skip_whitespace();
-        
+
         match self.current() {
             None => Token::EOF,
             Some('+') => { self.advance(); Token::Plus }
@@ -622,7 +622,7 @@ impl Parser {
     fn new(input: &str) -> Self {
         let mut lexer = Lexer::new(input);
         let mut tokens = Vec::new();
-        
+
         loop {
             let token = lexer.next_token();
             if token == Token::EOF {
@@ -631,20 +631,20 @@ impl Parser {
             }
             tokens.push(token);
         }
-        
+
         Self { tokens, pos: 0 }
     }
-    
+
     fn current(&self) -> &Token {
         &self.tokens[self.pos]
     }
-    
+
     fn advance(&mut self) {
         if self.pos < self.tokens.len() - 1 {
             self.pos += 1;
         }
     }
-    
+
     fn expect(&mut self, expected: Token) -> Result<(), String> {
         if self.current() == &expected {
             self.advance();
@@ -653,45 +653,45 @@ impl Parser {
             Err(format!("Expected {:?}, got {:?}", expected, self.current()))
         }
     }
-    
+
     // expr = term (('+' | '-') term)*
     fn parse_expr(&mut self) -> Result<Expr, String> {
         let mut left = self.parse_term()?;
-        
+
         while let Token::Plus | Token::Minus = self.current() {
             let op = self.current().clone();
             self.advance();
             let right = self.parse_term()?;
-            
+
             left = match op {
                 Token::Plus => Expr::Add(Box::new(left), Box::new(right)),
                 Token::Minus => Expr::Sub(Box::new(left), Box::new(right)),
                 _ => unreachable!(),
             };
         }
-        
+
         Ok(left)
     }
-    
+
     // term = factor (('*' | '/') factor)*
     fn parse_term(&mut self) -> Result<Expr, String> {
         let mut left = self.parse_factor()?;
-        
+
         while let Token::Star | Token::Slash = self.current() {
             let op = self.current().clone();
             self.advance();
             let right = self.parse_factor()?;
-            
+
             left = match op {
                 Token::Star => Expr::Mul(Box::new(left), Box::new(right)),
                 Token::Slash => Expr::Div(Box::new(left), Box::new(right)),
                 _ => unreachable!(),
             };
         }
-        
+
         Ok(left)
     }
-    
+
     // factor = number | '(' expr ')'
     fn parse_factor(&mut self) -> Result<Expr, String> {
         match self.current() {
@@ -725,7 +725,7 @@ enum Expr {
 fn test_recursive_descent() {
     let mut parser = Parser::new("2 + 3 * 4");
     let result = parser.parse_expr().unwrap();
-    
+
     assert_eq!(
         result,
         Expr::Add(
@@ -771,10 +771,10 @@ enum TokenKind {
 fn report_error(input: &str, span: Span, message: &str) {
     let line_start = input[..span.start].rfind('\n').map(|i| i + 1).unwrap_or(0);
     let line_end = input[span.start..].find('\n').map(|i| span.start + i).unwrap_or(input.len());
-    
+
     let line = &input[line_start..line_end];
     let column = span.start - line_start;
-    
+
     eprintln!("Error: {}", message);
     eprintln!("  |");
     eprintln!("  | {}", line);
@@ -799,10 +799,10 @@ impl Parser {
             }
         }
     }
-    
+
     fn parse_statement(&mut self) -> Result<Stmt, Vec<String>> {
         let mut errors = Vec::new();
-        
+
         match self.try_parse_statement() {
             Ok(stmt) => Ok(stmt),
             Err(e) => {
@@ -823,13 +823,13 @@ impl Parser {
 
 ```rust
 fn format_error(span: Span, message: &str, hint: Option<&str>) -> String {
-    let mut output = format!("Error at line {}, column {}: {}", 
+    let mut output = format!("Error at line {}, column {}: {}",
         span.start, span.end, message);
-    
+
     if let Some(h) = hint {
         output.push_str(&format!("\n  Help: {}", h));
     }
-    
+
     output
 }
 
@@ -854,11 +854,11 @@ impl ErrorCollector {
     fn new() -> Self {
         Self { errors: Vec::new() }
     }
-    
+
     fn add_error(&mut self, span: Span, message: String) {
         self.errors.push((span, message));
     }
-    
+
     fn report_all(&self, input: &str) {
         for (span, message) in &self.errors {
             report_error(input, *span, message);
@@ -909,7 +909,7 @@ fn html_dsl_example() {
             <br/>
         </div>
     };
-    
+
     println!("{}", output);
 }
 ```
@@ -941,7 +941,7 @@ macro_rules! sql {
 fn sql_dsl_example() {
     let query1 = sql!(SELECT id, name FROM users);
     let query2 = sql!(SELECT id, name FROM users WHERE id > 100);
-    
+
     println!("{}", query1);
     println!("{}", query2);
 }
@@ -971,7 +971,7 @@ fn config_dsl_example() {
         port: 8080,
         debug: true,
     };
-    
+
     println!("{:?}", cfg);
 }
 ```
@@ -993,23 +993,23 @@ macro_rules! state_machine {
         enum State {
             $($state),+
         }
-        
+
         #[derive(Debug, PartialEq, Clone, Copy)]
         enum Event {
             $($event),+
         }
-        
+
         struct StateMachine {
             current: State,
         }
-        
+
         impl StateMachine {
             fn new() -> Self {
                 Self {
                     current: State::$initial,
                 }
             }
-            
+
             fn transition(&mut self, event: Event) -> Result<State, &'static str> {
                 match (self.current, event) {
                     $(
@@ -1039,10 +1039,10 @@ state_machine! {
 fn state_machine_example() {
     let mut sm = StateMachine::new();
     assert_eq!(sm.current, State::Idle);
-    
+
     sm.transition(Event::Start).unwrap();
     assert_eq!(sm.current, State::Running);
-    
+
     sm.transition(Event::Stop).unwrap();
     assert_eq!(sm.current, State::Stopped);
 }

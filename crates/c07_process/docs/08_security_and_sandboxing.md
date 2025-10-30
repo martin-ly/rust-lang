@@ -102,7 +102,7 @@ impl AsyncSecureProcessExecutor {
         let result = timeout(timeout_duration, async {
             let output = child.wait_with_output().await
                 .map_err(|e| SecurityError::ProcessExecutionFailed(e.to_string()))?;
-            
+
             Ok(ProcessResult {
                 exit_code: output.status.code().unwrap_or(-1),
                 stdout: String::from_utf8_lossy(&output.stdout).to_string(),
@@ -194,7 +194,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             if context.denied_commands.contains(command) {
                 return Err(SecurityError::CommandForbidden);
             }
-            
+
             if !context.allowed_commands.is_empty() && !context.allowed_commands.contains(command) {
                 return Err(SecurityError::InsufficientPermissions);
             }
@@ -232,26 +232,26 @@ pub enum ProcessSecurityError {
         command: String,
         required_permission: String,
     },
-    
+
     #[error("资源限制违规: {resource} 超出限制 {limit}")]
     ResourceLimitExceeded {
         resource: String,
         current: u64,
         limit: u64,
     },
-    
+
     #[error("安全策略违规: {policy}")]
     SecurityPolicyViolation {
         policy: String,
         details: String,
     },
-    
+
     #[error("沙箱执行失败: {reason}")]
     SandboxExecutionFailed {
         reason: String,
         sandbox_id: String,
     },
-    
+
     #[error("审计日志记录失败: {0}")]
     AuditLoggingFailed(String),
 }
@@ -497,10 +497,10 @@ impl MemoryLeakDetector {
 
     pub async fn detect_leaks(&mut self) -> Vec<MemoryLeak> {
         let mut leaks = Vec::new();
-        
+
         for (process_id, allocated) in &self.allocated_regions {
             let freed = self.freed_regions.get(process_id).unwrap_or(&Vec::new());
-            
+
             for region in allocated {
                 if !freed.contains(region) {
                     leaks.push(MemoryLeak {
@@ -512,7 +512,7 @@ impl MemoryLeakDetector {
                 }
             }
         }
-        
+
         leaks
     }
 }
@@ -659,13 +659,13 @@ impl ConcurrentSecureProcessManager {
     // 并发安全进程监控
     pub async fn monitor_processes(&self) -> Result<(), ProcessSecurityError> {
         let mut interval = tokio::time::interval(Duration::from_millis(100));
-        
+
         loop {
             interval.tick().await;
-            
+
             let mut active_processes = self.active_processes.write().await;
             let mut processes_to_remove = Vec::new();
-            
+
             for (process_id, process) in active_processes.iter_mut() {
                 // 检查进程状态
                 match process.status {
@@ -678,7 +678,7 @@ impl ConcurrentSecureProcessManager {
                                 e.to_string(),
                             ).await;
                         }
-                        
+
                         // 检查安全策略
                         if let Err(e) = self.check_security_policies(process).await {
                             self.handle_security_violation(
@@ -694,7 +694,7 @@ impl ConcurrentSecureProcessManager {
                     _ => {}
                 }
             }
-            
+
             // 清理已终止的进程
             for process_id in processes_to_remove {
                 if let Some(process) = active_processes.remove(&process_id) {
@@ -717,7 +717,7 @@ impl ConcurrentSecureProcessManager {
         if !context.allowed_commands.is_empty() {
             return context.allowed_commands.contains(&command.to_string());
         }
-        
+
         // 检查命令是否在拒绝列表中
         !context.denied_commands.contains(&command.to_string())
     }
@@ -756,7 +756,7 @@ impl ConcurrentSecureProcessManager {
         let mut active_processes = self.active_processes.write().await;
         if let Some(process) = active_processes.get_mut(process_id) {
             process.security_violations.push(violation);
-            
+
             // 根据严重程度采取行动
             if process.security_violations.len() > 5 {
                 process.status = ProcessStatus::Quarantined;
@@ -820,7 +820,7 @@ impl AuditLogger {
             timestamp: Instant::now(),
             result: AuditResult::Success,
         };
-        
+
         self.logs.push(entry);
     }
 
@@ -839,7 +839,7 @@ impl AuditLogger {
             timestamp: Instant::now(),
             result: AuditResult::Success,
         };
-        
+
         self.logs.push(entry);
     }
 
@@ -858,7 +858,7 @@ impl AuditLogger {
             timestamp: Instant::now(),
             result: AuditResult::Success,
         };
-        
+
         self.logs.push(entry);
     }
 
@@ -877,7 +877,7 @@ impl AuditLogger {
             timestamp: Instant::now(),
             result: AuditResult::Success,
         };
-        
+
         self.logs.push(entry);
     }
 
@@ -896,7 +896,7 @@ impl AuditLogger {
             timestamp: Instant::now(),
             result: AuditResult::Failure,
         };
-        
+
         self.logs.push(entry);
     }
 }
@@ -1030,7 +1030,7 @@ impl PermissionManager {
             audit_log: Arc::new(Mutex::new(Vec::new())),
         }
     }
-    
+
     pub async fn create_user(
         &self,
         user_id: String,
@@ -1038,13 +1038,13 @@ impl PermissionManager {
         permissions: UserPermissions,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut users = self.users.lock().await;
-        
+
         if users.contains_key(&user_id) {
             return Err("用户已存在".into());
         }
-        
+
         users.insert(user_id.clone(), permissions);
-        
+
         // 记录审计日志
         self.log_audit_event(AuditEntry {
             id: uuid::Uuid::new_v4().to_string(),
@@ -1056,10 +1056,10 @@ impl PermissionManager {
             ip_address: None,
             user_agent: None,
         }).await;
-        
+
         Ok(())
     }
-    
+
     pub async fn check_command_permission(
         &self,
         user_id: &str,
@@ -1067,7 +1067,7 @@ impl PermissionManager {
     ) -> Result<bool, Box<dyn std::error::Error>> {
         let users = self.users.lock().await;
         let user = users.get(user_id).ok_or("用户未找到")?;
-        
+
         // 检查是否在拒绝列表中
         if user.denied_commands.contains(&command.to_string()) {
             self.log_audit_event(AuditEntry {
@@ -1080,13 +1080,13 @@ impl PermissionManager {
                 ip_address: None,
                 user_agent: None,
             }).await;
-            
+
             return Ok(false);
         }
-        
+
         // 检查是否在允许列表中
         let allowed = user.allowed_commands.is_empty() || user.allowed_commands.contains(&command.to_string());
-        
+
         self.log_audit_event(AuditEntry {
             id: uuid::Uuid::new_v4().to_string(),
             user_id: user_id.to_string(),
@@ -1097,10 +1097,10 @@ impl PermissionManager {
             ip_address: None,
             user_agent: None,
         }).await;
-        
+
         Ok(allowed)
     }
-    
+
     pub async fn check_directory_permission(
         &self,
         user_id: &str,
@@ -1108,35 +1108,35 @@ impl PermissionManager {
     ) -> Result<bool, Box<dyn std::error::Error>> {
         let users = self.users.lock().await;
         let user = users.get(user_id).ok_or("用户未找到")?;
-        
+
         // 检查是否在拒绝列表中
         if user.denied_directories.iter().any(|d| directory.starts_with(d)) {
             return Ok(false);
         }
-        
+
         // 检查是否在允许列表中
-        let allowed = user.allowed_directories.is_empty() || 
+        let allowed = user.allowed_directories.is_empty() ||
             user.allowed_directories.iter().any(|d| directory.starts_with(d));
-        
+
         Ok(allowed)
     }
-    
+
     pub async fn get_user_permissions(&self, user_id: &str) -> Option<UserPermissions> {
         let users = self.users.lock().await;
         users.get(user_id).cloned()
     }
-    
+
     pub async fn update_user_permissions(
         &self,
         user_id: &str,
         new_permissions: UserPermissions,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut users = self.users.lock().await;
-        
+
         if let Some(user) = users.get_mut(user_id) {
             *user = new_permissions;
             user.last_accessed = Instant::now();
-            
+
             // 记录审计日志
             self.log_audit_event(AuditEntry {
                 id: uuid::Uuid::new_v4().to_string(),
@@ -1148,16 +1148,16 @@ impl PermissionManager {
                 ip_address: None,
                 user_agent: None,
             }).await;
-            
+
             Ok(())
         } else {
             Err("用户未找到".into())
         }
     }
-    
+
     pub async fn delete_user(&self, user_id: &str) -> Result<(), Box<dyn std::error::Error>> {
         let mut users = self.users.lock().await;
-        
+
         if users.remove(user_id).is_some() {
             // 记录审计日志
             self.log_audit_event(AuditEntry {
@@ -1170,33 +1170,33 @@ impl PermissionManager {
                 ip_address: None,
                 user_agent: None,
             }).await;
-            
+
             Ok(())
         } else {
             Err("用户未找到".into())
         }
     }
-    
+
     async fn log_audit_event(&self, entry: AuditEntry) {
         let mut audit_log = self.audit_log.lock().await;
         audit_log.push(entry);
-        
+
         // 保持审计日志大小限制
         if audit_log.len() > 10000 {
             audit_log.remove(0);
         }
     }
-    
+
     pub async fn get_audit_log(&self, limit: Option<usize>) -> Vec<AuditEntry> {
         let audit_log = self.audit_log.lock().await;
-        
+
         if let Some(limit) = limit {
             audit_log.iter().rev().take(limit).cloned().collect()
         } else {
             audit_log.clone()
         }
     }
-    
+
     pub async fn search_audit_log(
         &self,
         user_id: Option<&str>,
@@ -1204,7 +1204,7 @@ impl PermissionManager {
         result: Option<&AuditResult>,
     ) -> Vec<AuditEntry> {
         let audit_log = self.audit_log.lock().await;
-        
+
         audit_log.iter()
             .filter(|entry| {
                 if let Some(uid) = user_id {
@@ -1212,19 +1212,19 @@ impl PermissionManager {
                         return false;
                     }
                 }
-                
+
                 if let Some(act) = action {
                     if !std::mem::discriminant(&entry.action).eq(&std::mem::discriminant(act)) {
                         return false;
                     }
                 }
-                
+
                 if let Some(res) = result {
                     if !std::mem::discriminant(&entry.result).eq(&std::mem::discriminant(res)) {
                         return false;
                     }
                 }
-                
+
                 true
             })
             .cloned()
@@ -1303,7 +1303,7 @@ impl ResourceLimiter {
             enforcement_policies: Arc::new(Mutex::new(Vec::new())),
         }
     }
-    
+
     pub async fn set_resource_limits(
         &self,
         process_id: &str,
@@ -1311,10 +1311,10 @@ impl ResourceLimiter {
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut limits_map = self.limits.lock().await;
         limits_map.insert(process_id.to_string(), limits);
-        
+
         Ok(())
     }
-    
+
     pub async fn update_resource_usage(
         &self,
         process_id: &str,
@@ -1322,51 +1322,51 @@ impl ResourceLimiter {
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut usage_map = self.current_usage.lock().await;
         usage_map.insert(process_id.to_string(), usage);
-        
+
         // 检查是否违反限制
         self.check_violations(process_id).await?;
-        
+
         Ok(())
     }
-    
+
     async fn check_violations(&self, process_id: &str) -> Result<(), Box<dyn std::error::Error>> {
         let limits_map = self.limits.lock().await;
         let usage_map = self.current_usage.lock().await;
         let policies = self.enforcement_policies.lock().await;
-        
+
         let limits = limits_map.get(process_id);
         let usage = usage_map.get(process_id);
-        
+
         if let (Some(limits), Some(usage)) = (limits, usage) {
             // 检查内存使用
             if usage.memory_mb > limits.max_memory_mb {
                 self.enforce_policy(process_id, &EnforcementCondition::MemoryUsageExceeds(usage.memory_mb), &policies).await?;
             }
-            
+
             // 检查 CPU 使用
             if usage.cpu_percent > limits.max_cpu_percent {
                 self.enforce_policy(process_id, &EnforcementCondition::CpuUsageExceeds(usage.cpu_percent), &policies).await?;
             }
-            
+
             // 检查文件描述符
             if usage.file_descriptors > limits.max_file_descriptors {
                 self.enforce_policy(process_id, &EnforcementCondition::FileDescriptorExceeds(usage.file_descriptors), &policies).await?;
             }
-            
+
             // 检查磁盘使用
             if usage.disk_usage_mb > limits.max_disk_usage_mb {
                 self.enforce_policy(process_id, &EnforcementCondition::DiskUsageExceeds(usage.disk_usage_mb), &policies).await?;
             }
-            
+
             // 检查网络带宽
             if usage.network_bandwidth_mbps > limits.max_network_bandwidth_mbps {
                 self.enforce_policy(process_id, &EnforcementCondition::NetworkBandwidthExceeds(usage.network_bandwidth_mbps), &policies).await?;
             }
         }
-        
+
         Ok(())
     }
-    
+
     async fn enforce_policy(
         &self,
         process_id: &str,
@@ -1378,10 +1378,10 @@ impl ResourceLimiter {
                 self.execute_action(process_id, &policy.action).await?;
             }
         }
-        
+
         Ok(())
     }
-    
+
     fn condition_matches(&self, condition: &EnforcementCondition, policy_condition: &EnforcementCondition) -> bool {
         match (condition, policy_condition) {
             (EnforcementCondition::MemoryUsageExceeds(usage), EnforcementCondition::MemoryUsageExceeds(limit)) => {
@@ -1402,7 +1402,7 @@ impl ResourceLimiter {
             _ => false,
         }
     }
-    
+
     async fn execute_action(
         &self,
         process_id: &str,
@@ -1432,10 +1432,10 @@ impl ResourceLimiter {
                 // 实际实现中应该缩减资源分配
             }
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn add_enforcement_policy(
         &self,
         policy: EnforcementPolicy,
@@ -1444,12 +1444,12 @@ impl ResourceLimiter {
         policies.push(policy);
         Ok(())
     }
-    
+
     pub async fn get_resource_usage(&self, process_id: &str) -> Option<ResourceUsage> {
         let usage_map = self.current_usage.lock().await;
         usage_map.get(process_id).cloned()
     }
-    
+
     pub async fn get_resource_limits(&self, process_id: &str) -> Option<ResourceLimits> {
         let limits_map = self.limits.lock().await;
         limits_map.get(process_id).cloned()
@@ -1585,22 +1585,22 @@ impl ProcessSandbox {
             security_policies: Arc::new(Mutex::new(Vec::new())),
         }
     }
-    
+
     pub async fn create_sandbox(
         &self,
         config: SandboxConfig,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut sandboxes = self.sandboxes.lock().await;
-        
+
         if sandboxes.contains_key(&config.id) {
             return Err("沙箱已存在".into());
         }
-        
+
         sandboxes.insert(config.id.clone(), config);
-        
+
         Ok(())
     }
-    
+
     pub async fn execute_in_sandbox(
         &self,
         sandbox_id: &str,
@@ -1609,12 +1609,12 @@ impl ProcessSandbox {
     ) -> Result<String, Box<dyn std::error::Error>> {
         let sandboxes = self.sandboxes.lock().await;
         let sandbox = sandboxes.get(sandbox_id).ok_or("沙箱未找到")?;
-        
+
         // 验证命令是否被允许
         if !self.is_command_allowed(sandbox, &command).await? {
             return Err("命令不被允许".into());
         }
-        
+
         // 创建沙箱化进程
         let process_id = uuid::Uuid::new_v4().to_string();
         let sandboxed_process = SandboxedProcess {
@@ -1635,56 +1635,56 @@ impl ProcessSandbox {
             },
             security_violations: Vec::new(),
         };
-        
+
         let mut active_processes = self.active_processes.lock().await;
         active_processes.insert(process_id.clone(), sandboxed_process);
-        
+
         // 启动进程监控
         self.start_process_monitoring(&process_id).await?;
-        
+
         Ok(process_id)
     }
-    
+
     async fn is_command_allowed(
         &self,
         sandbox: &SandboxConfig,
         command: &str,
     ) -> Result<bool, Box<dyn std::error::Error>> {
         // 检查命令是否在允许列表中
-        let allowed = sandbox.allowed_system_calls.is_empty() || 
+        let allowed = sandbox.allowed_system_calls.is_empty() ||
             sandbox.allowed_system_calls.contains(&command.to_string());
-        
+
         // 检查命令是否在拒绝列表中
         let denied = sandbox.denied_system_calls.contains(&command.to_string());
-        
+
         Ok(allowed && !denied)
     }
-    
+
     async fn start_process_monitoring(
         &self,
         process_id: &str,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let process_id_clone = process_id.to_string();
         let sandbox_clone = self.clone();
-        
+
         tokio::spawn(async move {
             if let Err(e) = sandbox_clone.monitor_process(&process_id_clone).await {
                 eprintln!("进程监控失败: {}", e);
             }
         });
-        
+
         Ok(())
     }
-    
+
     async fn monitor_process(&self, process_id: &str) -> Result<(), Box<dyn std::error::Error>> {
         let mut interval = tokio::time::interval(Duration::from_millis(100));
-        
+
         loop {
             interval.tick().await;
-            
+
             let mut active_processes = self.active_processes.lock().await;
             let process = active_processes.get_mut(process_id);
-            
+
             if let Some(process) = process {
                 // 检查执行超时
                 if process.start_time.elapsed() > self.get_sandbox_config(&process.sandbox_id).await?.execution_timeout {
@@ -1694,11 +1694,11 @@ impl ProcessSandbox {
                         "进程执行超时".to_string(),
                         ViolationSeverity::High,
                     ).await?;
-                    
+
                     process.status = ProcessStatus::Terminated;
                     break;
                 }
-                
+
                 // 检查资源使用
                 if let Err(e) = self.check_resource_limits(process).await {
                     self.handle_security_violation(
@@ -1708,7 +1708,7 @@ impl ProcessSandbox {
                         ViolationSeverity::Medium,
                     ).await?;
                 }
-                
+
                 // 检查安全策略
                 if let Err(e) = self.check_security_policies(process).await {
                     self.handle_security_violation(
@@ -1718,7 +1718,7 @@ impl ProcessSandbox {
                         ViolationSeverity::Critical,
                     ).await?;
                 }
-                
+
                 // 如果进程已终止，停止监控
                 if matches!(process.status, ProcessStatus::Terminated | ProcessStatus::Failed) {
                     break;
@@ -1727,51 +1727,51 @@ impl ProcessSandbox {
                 break;
             }
         }
-        
+
         Ok(())
     }
-    
+
     async fn get_sandbox_config(&self, sandbox_id: &str) -> Result<SandboxConfig, Box<dyn std::error::Error>> {
         let sandboxes = self.sandboxes.lock().await;
         sandboxes.get(sandbox_id).cloned().ok_or("沙箱未找到".into())
     }
-    
+
     async fn check_resource_limits(
         &self,
         process: &mut SandboxedProcess,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let sandbox = self.get_sandbox_config(&process.sandbox_id).await?;
-        
+
         if process.resource_usage.memory_mb > sandbox.resource_limits.max_memory_mb {
             return Err("内存使用超限".into());
         }
-        
+
         if process.resource_usage.cpu_percent > sandbox.resource_limits.max_cpu_percent {
             return Err("CPU 使用超限".into());
         }
-        
+
         if process.resource_usage.file_descriptors > sandbox.resource_limits.max_file_descriptors {
             return Err("文件描述符超限".into());
         }
-        
+
         Ok(())
     }
-    
+
     async fn check_security_policies(
         &self,
         process: &mut SandboxedProcess,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let policies = self.security_policies.lock().await;
-        
+
         for policy in policies.iter() {
             if self.policy_condition_matches(process, &policy.condition) {
                 self.execute_security_action(process, &policy.action).await?;
             }
         }
-        
+
         Ok(())
     }
-    
+
     fn policy_condition_matches(
         &self,
         process: &SandboxedProcess,
@@ -1795,7 +1795,7 @@ impl ProcessSandbox {
             }
         }
     }
-    
+
     async fn execute_security_action(
         &self,
         process: &mut SandboxedProcess,
@@ -1823,10 +1823,10 @@ impl ProcessSandbox {
                 println!("阻止进程 {} 的访问", process.id);
             }
         }
-        
+
         Ok(())
     }
-    
+
     async fn handle_security_violation(
         &self,
         process_id: &str,
@@ -1842,15 +1842,15 @@ impl ProcessSandbox {
             timestamp: Instant::now(),
             action_taken: None,
         };
-        
+
         let mut active_processes = self.active_processes.lock().await;
         if let Some(process) = active_processes.get_mut(process_id) {
             process.security_violations.push(violation);
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn add_security_policy(
         &self,
         policy: SecurityPolicy,
@@ -1859,12 +1859,12 @@ impl ProcessSandbox {
         policies.push(policy);
         Ok(())
     }
-    
+
     pub async fn get_sandboxed_process(&self, process_id: &str) -> Option<SandboxedProcess> {
         let active_processes = self.active_processes.lock().await;
         active_processes.get(process_id).cloned()
     }
-    
+
     pub async fn get_security_violations(&self, process_id: &str) -> Vec<SecurityViolation> {
         let active_processes = self.active_processes.lock().await;
         active_processes.get(process_id)
@@ -1995,14 +1995,14 @@ impl ContainerManager {
             networks: Arc::new(Mutex::new(HashMap::new())),
         }
     }
-    
+
     pub async fn create_container(
         &self,
         name: String,
         config: ContainerConfig,
     ) -> Result<String, Box<dyn std::error::Error>> {
         let container_id = uuid::Uuid::new_v4().to_string();
-        
+
         let container = Container {
             id: container_id.clone(),
             name: name.clone(),
@@ -2021,135 +2021,135 @@ impl ContainerManager {
             started_at: None,
             stopped_at: None,
         };
-        
+
         let mut containers = self.containers.lock().await;
         containers.insert(container_id.clone(), container);
-        
+
         Ok(container_id)
     }
-    
+
     pub async fn start_container(
         &self,
         container_id: &str,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut containers = self.containers.lock().await;
         let container = containers.get_mut(container_id).ok_or("容器未找到")?;
-        
+
         if !matches!(container.status, ContainerStatus::Created | ContainerStatus::Stopped) {
             return Err("容器状态不允许启动".into());
         }
-        
+
         container.status = ContainerStatus::Running;
         container.started_at = Some(Instant::now());
-        
+
         // 启动容器监控
         self.start_container_monitoring(container_id).await?;
-        
+
         Ok(())
     }
-    
+
     pub async fn stop_container(
         &self,
         container_id: &str,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut containers = self.containers.lock().await;
         let container = containers.get_mut(container_id).ok_or("容器未找到")?;
-        
+
         if !matches!(container.status, ContainerStatus::Running | ContainerStatus::Paused) {
             return Err("容器状态不允许停止".into());
         }
-        
+
         container.status = ContainerStatus::Stopped;
         container.stopped_at = Some(Instant::now());
-        
+
         Ok(())
     }
-    
+
     pub async fn pause_container(
         &self,
         container_id: &str,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut containers = self.containers.lock().await;
         let container = containers.get_mut(container_id).ok_or("容器未找到")?;
-        
+
         if !matches!(container.status, ContainerStatus::Running) {
             return Err("容器状态不允许暂停".into());
         }
-        
+
         container.status = ContainerStatus::Paused;
-        
+
         Ok(())
     }
-    
+
     pub async fn unpause_container(
         &self,
         container_id: &str,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut containers = self.containers.lock().await;
         let container = containers.get_mut(container_id).ok_or("容器未找到")?;
-        
+
         if !matches!(container.status, ContainerStatus::Paused) {
             return Err("容器状态不允许恢复".into());
         }
-        
+
         container.status = ContainerStatus::Running;
-        
+
         Ok(())
     }
-    
+
     pub async fn remove_container(
         &self,
         container_id: &str,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut containers = self.containers.lock().await;
         let container = containers.get_mut(container_id).ok_or("容器未找到")?;
-        
+
         if matches!(container.status, ContainerStatus::Running) {
             return Err("运行中的容器不能删除".into());
         }
-        
+
         container.status = ContainerStatus::Removing;
         containers.remove(container_id);
-        
+
         Ok(())
     }
-    
+
     async fn start_container_monitoring(
         &self,
         container_id: &str,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let container_id_clone = container_id.to_string();
         let manager_clone = self.clone();
-        
+
         tokio::spawn(async move {
             if let Err(e) = manager_clone.monitor_container(&container_id_clone).await {
                 eprintln!("容器监控失败: {}", e);
             }
         });
-        
+
         Ok(())
     }
-    
+
     async fn monitor_container(&self, container_id: &str) -> Result<(), Box<dyn std::error::Error>> {
         let mut interval = tokio::time::interval(Duration::from_secs(1));
-        
+
         loop {
             interval.tick().await;
-            
+
             let mut containers = self.containers.lock().await;
             let container = containers.get_mut(container_id);
-            
+
             if let Some(container) = container {
                 // 更新资源使用情况
                 self.update_container_resource_usage(container).await?;
-                
+
                 // 检查资源限制
                 if let Err(e) = self.check_container_resource_limits(container).await {
                     println!("容器 {} 资源限制违规: {}", container_id, e);
                     container.status = ContainerStatus::Failed;
                     break;
                 }
-                
+
                 // 如果容器已停止，停止监控
                 if matches!(container.status, ContainerStatus::Stopped | ContainerStatus::Failed | ContainerStatus::Removing) {
                     break;
@@ -2158,10 +2158,10 @@ impl ContainerManager {
                 break;
             }
         }
-        
+
         Ok(())
     }
-    
+
     async fn update_container_resource_usage(
         &self,
         container: &mut Container,
@@ -2171,10 +2171,10 @@ impl ContainerManager {
         container.resource_usage.memory_mb = rand::random::<u64>() % 1000;
         container.resource_usage.cpu_percent = rand::random::<f64>() * 100.0;
         container.resource_usage.last_updated = Instant::now();
-        
+
         Ok(())
     }
-    
+
     async fn check_container_resource_limits(
         &self,
         container: &Container,
@@ -2182,28 +2182,28 @@ impl ContainerManager {
         if container.resource_usage.memory_mb > container.config.resource_limits.max_memory_mb {
             return Err("内存使用超限".into());
         }
-        
+
         if container.resource_usage.cpu_percent > container.config.resource_limits.max_cpu_percent {
             return Err("CPU 使用超限".into());
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn get_container(&self, container_id: &str) -> Option<Container> {
         let containers = self.containers.lock().await;
         containers.get(container_id).cloned()
     }
-    
+
     pub async fn list_containers(&self) -> Vec<Container> {
         let containers = self.containers.lock().await;
         containers.values().cloned().collect()
     }
-    
+
     pub async fn get_container_stats(&self, container_id: &str) -> Option<ContainerStats> {
         let containers = self.containers.lock().await;
         let container = containers.get(container_id)?;
-        
+
         Some(ContainerStats {
             id: container.id.clone(),
             name: container.name.clone(),
@@ -2361,7 +2361,7 @@ impl SecurityEventMonitor {
             })),
         }
     }
-    
+
     pub async fn log_event(
         &self,
         event_type: SecurityEventType,
@@ -2382,36 +2382,36 @@ impl SecurityEventMonitor {
             timestamp: Instant::now(),
             processed: false,
         };
-        
+
         let mut events = self.events.lock().await;
         events.push(event.clone());
-        
+
         // 保持事件列表大小限制
         if events.len() > 100000 {
             events.remove(0);
         }
-        
+
         // 处理事件
         self.process_event(&event).await?;
-        
+
         Ok(())
     }
-    
+
     async fn process_event(
         &self,
         event: &SecurityEvent,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let rules = self.rules.lock().await;
-        
+
         for rule in rules.iter() {
             if rule.enabled && self.rule_matches(event, rule) {
                 self.execute_rule_action(event, rule).await?;
             }
         }
-        
+
         Ok(())
     }
-    
+
     fn rule_matches(&self, event: &SecurityEvent, rule: &SecurityRule) -> bool {
         match &rule.condition {
             RuleCondition::EventType(event_type) => {
@@ -2434,7 +2434,7 @@ impl SecurityEventMonitor {
             }
         }
     }
-    
+
     fn check_frequency_condition(
         &self,
         event: &SecurityEvent,
@@ -2445,7 +2445,7 @@ impl SecurityEventMonitor {
         // 这里使用简化实现
         false
     }
-    
+
     async fn execute_rule_action(
         &self,
         event: &SecurityEvent,
@@ -2471,10 +2471,10 @@ impl SecurityEventMonitor {
                 println!("升级事件: {}", event.id);
             }
         }
-        
+
         Ok(())
     }
-    
+
     async fn create_alert(
         &self,
         event: &SecurityEvent,
@@ -2496,13 +2496,13 @@ impl SecurityEventMonitor {
             acknowledged: false,
             resolved: false,
         };
-        
+
         let mut alerts = self.alerts.lock().await;
         alerts.push(alert);
-        
+
         Ok(())
     }
-    
+
     pub async fn add_security_rule(
         &self,
         rule: SecurityRule,
@@ -2511,14 +2511,14 @@ impl SecurityEventMonitor {
         rules.push(rule);
         Ok(())
     }
-    
+
     pub async fn get_security_events(
         &self,
         limit: Option<usize>,
         filter: Option<EventFilter>,
     ) -> Vec<SecurityEvent> {
         let events = self.events.lock().await;
-        
+
         let mut filtered_events: Vec<SecurityEvent> = events.iter()
             .filter(|event| {
                 if let Some(filter) = &filter {
@@ -2529,78 +2529,78 @@ impl SecurityEventMonitor {
             })
             .cloned()
             .collect();
-        
+
         filtered_events.sort_by(|a, b| b.timestamp.cmp(&a.timestamp));
-        
+
         if let Some(limit) = limit {
             filtered_events.truncate(limit);
         }
-        
+
         filtered_events
     }
-    
+
     fn event_matches_filter(&self, event: &SecurityEvent, filter: &EventFilter) -> bool {
         if let Some(event_type) = &filter.event_type {
             if std::mem::discriminant(&event.event_type) != std::mem::discriminant(event_type) {
                 return false;
             }
         }
-        
+
         if let Some(severity) = &filter.severity {
             if event.severity < *severity {
                 return false;
             }
         }
-        
+
         if let Some(source) = &filter.source {
             if !event.source.contains(source) {
                 return false;
             }
         }
-        
+
         if let Some(target) = &filter.target {
             if !event.target.contains(target) {
                 return false;
             }
         }
-        
+
         if let Some(start_time) = &filter.start_time {
             if event.timestamp < *start_time {
                 return false;
             }
         }
-        
+
         if let Some(end_time) = &filter.end_time {
             if event.timestamp > *end_time {
                 return false;
             }
         }
-        
+
         true
     }
-    
+
     pub async fn get_security_alerts(
         &self,
         limit: Option<usize>,
     ) -> Vec<SecurityAlert> {
         let alerts = self.alerts.lock().await;
-        
+
         let mut sorted_alerts = alerts.clone();
         sorted_alerts.sort_by(|a, b| b.timestamp.cmp(&a.timestamp));
-        
+
         if let Some(limit) = limit {
             sorted_alerts.truncate(limit);
         }
-        
+
         sorted_alerts
     }
-    
+
     pub async fn acknowledge_alert(
         &self,
         alert_id: &str,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut alerts = self.alerts.lock().await;
-        
+
         if let Some(alert) = alerts.iter_mut().find(|a| a.id == alert_id) {
             alert.acknowledged = true;
             Ok(())
@@ -2608,13 +2608,13 @@ impl SecurityEventMonitor {
             Err("警报未找到".into())
         }
     }
-    
+
     pub async fn resolve_alert(
         &self,
         alert_id: &str,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut alerts = self.alerts.lock().await;
-        
+
         if let Some(alert) = alerts.iter_mut().find(|a| a.id == alert_id) {
             alert.resolved = true;
             Ok(())
@@ -2747,7 +2747,7 @@ impl IntrusionDetectionSystem {
             blacklist: Arc::new(Mutex::new(Vec::new())),
         }
     }
-    
+
     pub async fn add_detector(
         &self,
         detector: Box<dyn ThreatDetector + Send + Sync>,
@@ -2756,7 +2756,7 @@ impl IntrusionDetectionSystem {
         detectors.push(detector);
         Ok(())
     }
-    
+
     pub async fn analyze_event(
         &self,
         event: &SecurityEvent,
@@ -2765,13 +2765,13 @@ impl IntrusionDetectionSystem {
         if self.is_whitelisted(&event.source).await {
             return Ok(());
         }
-        
+
         // 检查黑名单
         if self.is_blacklisted(&event.source).await {
             self.create_threat(event, ThreatType::Malware, ThreatSeverity::High).await?;
             return Ok(());
         }
-        
+
         // 运行威胁检测器
         let detectors = self.detectors.lock().await;
         for detector in detectors.iter() {
@@ -2779,20 +2779,20 @@ impl IntrusionDetectionSystem {
                 self.handle_threat(threat).await?;
             }
         }
-        
+
         Ok(())
     }
-    
+
     async fn is_whitelisted(&self, source: &str) -> bool {
         let whitelist = self.whitelist.lock().await;
         whitelist.contains(&source.to_string())
     }
-    
+
     async fn is_blacklisted(&self, source: &str) -> bool {
         let blacklist = self.blacklist.lock().await;
         blacklist.contains(&source.to_string())
     }
-    
+
     async fn create_threat(
         &self,
         event: &SecurityEvent,
@@ -2812,23 +2812,23 @@ impl IntrusionDetectionSystem {
             detected_by: "IDS".to_string(),
             mitigated: false,
         };
-        
+
         self.handle_threat(threat).await?;
         Ok(())
     }
-    
+
     async fn handle_threat(
         &self,
         threat: Threat,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut threats = self.threats.lock().await;
         threats.push(threat.clone());
-        
+
         // 保持威胁列表大小限制
         if threats.len() > 10000 {
             threats.remove(0);
         }
-        
+
         // 查找缓解策略
         let strategies = self.mitigation_strategies.lock().await;
         for strategy in strategies.iter() {
@@ -2840,10 +2840,10 @@ impl IntrusionDetectionSystem {
                 }
             }
         }
-        
+
         Ok(())
     }
-    
+
     async fn execute_mitigation_action(
         &self,
         threat: &Threat,
@@ -2875,10 +2875,10 @@ impl IntrusionDetectionSystem {
                 println!("收集证据: 威胁 {}", threat.id);
             }
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn add_mitigation_strategy(
         &self,
         strategy: MitigationStrategy,
@@ -2887,38 +2887,38 @@ impl IntrusionDetectionSystem {
         strategies.push(strategy);
         Ok(())
     }
-    
+
     pub async fn add_to_whitelist(&self, item: String) -> Result<(), Box<dyn std::error::Error>> {
         let mut whitelist = self.whitelist.lock().await;
         whitelist.push(item);
         Ok(())
     }
-    
+
     pub async fn add_to_blacklist(&self, item: String) -> Result<(), Box<dyn std::error::Error>> {
         let mut blacklist = self.blacklist.lock().await;
         blacklist.push(item);
         Ok(())
     }
-    
+
     pub async fn get_threats(
         &self,
         limit: Option<usize>,
     ) -> Vec<Threat> {
         let threats = self.threats.lock().await;
-        
+
         let mut sorted_threats = threats.clone();
         sorted_threats.sort_by(|a, b| b.timestamp.cmp(&a.timestamp));
-        
+
         if let Some(limit) = limit {
             sorted_threats.truncate(limit);
         }
-        
+
         sorted_threats
     }
-    
+
     pub async fn get_threat_summary(&self) -> ThreatSummary {
         let threats = self.threats.lock().await;
-        
+
         let mut summary = ThreatSummary {
             total_threats: threats.len(),
             threats_by_type: HashMap::new(),
@@ -2926,16 +2926,16 @@ impl IntrusionDetectionSystem {
             mitigated_threats: 0,
             active_threats: 0,
         };
-        
+
         for threat in threats.iter() {
             // 按类型统计
             let type_key = format!("{:?}", threat.threat_type);
             *summary.threats_by_type.entry(type_key).or_insert(0) += 1;
-            
+
             // 按严重程度统计
             let severity_key = format!("{:?}", threat.severity);
             *summary.threats_by_severity.entry(severity_key).or_insert(0) += 1;
-            
+
             // 统计缓解状态
             if threat.mitigated {
                 summary.mitigated_threats += 1;
@@ -2943,7 +2943,7 @@ impl IntrusionDetectionSystem {
                 summary.active_threats += 1;
             }
         }
-        
+
         summary
     }
 }
@@ -2980,11 +2980,11 @@ impl ThreatDetector for MalwareDetector {
             None
         }
     }
-    
+
     fn get_name(&self) -> &str {
         "MalwareDetector"
     }
-    
+
     fn get_confidence(&self) -> f64 {
         0.9
     }
@@ -3013,11 +3013,11 @@ impl ThreatDetector for ExploitDetector {
             None
         }
     }
-    
+
     fn get_name(&self) -> &str {
         "ExploitDetector"
     }
-    
+
     fn get_confidence(&self) -> f64 {
         0.8
     }
@@ -3407,7 +3407,7 @@ impl AsyncStdSecureProcessManager {
         if !context.allowed_commands.is_empty() {
             return context.allowed_commands.contains(&command.to_string());
         }
-        
+
         // 检查命令是否在拒绝列表中
         !context.denied_commands.contains(&command.to_string())
     }
@@ -3580,7 +3580,7 @@ impl SubprocessSecureExecutor {
         if !self.security_context.allowed_commands.is_empty() {
             return self.security_context.allowed_commands.contains(&command.to_string());
         }
-        
+
         // 检查命令是否在拒绝列表中
         !self.security_context.denied_commands.contains(&command.to_string())
     }
@@ -3776,7 +3776,7 @@ impl EnterpriseSecurityPolicyManager {
         policy: SecurityPolicy,
     ) -> Result<(), PolicyError> {
         let mut policies = self.policies.write().await;
-        
+
         if policies.contains_key(&policy.id) {
             return Err(PolicyError::PolicyExists);
         }
@@ -3801,7 +3801,7 @@ impl EnterpriseSecurityPolicyManager {
         updated_by: &str,
     ) -> Result<(), PolicyError> {
         let mut policies = self.policies.write().await;
-        
+
         if let Some(existing_policy) = policies.get_mut(policy_id) {
             *existing_policy = updated_policy;
             existing_policy.updated_at = Instant::now();
@@ -3940,8 +3940,8 @@ impl EnterpriseSecurityPolicyManager {
                 let now = chrono::Local::now();
                 let current_hour = now.hour() as u8;
                 let current_day = now.weekday().num_days_from_monday() as u8;
-                
-                Ok(time_window.start <= current_hour 
+
+                Ok(time_window.start <= current_hour
                     && current_hour <= time_window.end
                     && time_window.days.contains(&current_day))
             }
@@ -4289,7 +4289,7 @@ impl EnterpriseSecurityMonitor {
     // 启动安全监控
     pub async fn start_monitoring(&self) -> Result<(), MonitorError> {
         let monitors = self.monitors.read().await;
-        
+
         for (monitor_id, monitor) in monitors.iter() {
             if monitor.enabled {
                 self.start_monitor(monitor_id, monitor).await?;
@@ -4311,10 +4311,10 @@ impl EnterpriseSecurityMonitor {
 
         tokio::spawn(async move {
             let mut interval = tokio::time::interval(monitor_clone.configuration.check_interval);
-            
+
             loop {
                 interval.tick().await;
-                
+
                 if let Err(e) = self_clone.run_monitor_check(&monitor_id, &monitor_clone).await {
                     eprintln!("监控器 {} 检查失败: {}", monitor_id, e);
                 }
@@ -4331,7 +4331,7 @@ impl EnterpriseSecurityMonitor {
         monitor: &SecurityMonitor,
     ) -> Result<(), MonitorError> {
         let start_time = Instant::now();
-        
+
         // 执行监控检查
         let check_result = match monitor.monitor_type {
             MonitorType::ProcessMonitor => {
@@ -4468,7 +4468,7 @@ impl EnterpriseSecurityMonitor {
         check_result: &MonitorCheckResult,
     ) -> Result<(), MonitorError> {
         let alert_rules = self.alert_rules.lock().await;
-        
+
         for rule in alert_rules.iter() {
             if !rule.enabled {
                 continue;
@@ -4555,7 +4555,7 @@ impl EnterpriseSecurityMonitor {
         channel_ids: &[String],
     ) -> Result<(), MonitorError> {
         let notification_channels = self.notification_channels.lock().await;
-        
+
         for channel_id in channel_ids {
             if let Some(channel) = notification_channels.iter().find(|c| c.id == *channel_id) {
                 if channel.enabled {
@@ -4604,7 +4604,7 @@ impl EnterpriseSecurityMonitor {
 
     async fn create_incident(&self, alert: &SecurityAlert) -> Result<(), MonitorError> {
         let mut incident_manager = self.incident_manager.lock().await;
-        
+
         let incident = SecurityIncident {
             id: uuid::Uuid::new_v4().to_string(),
             title: alert.title.clone(),
@@ -5023,7 +5023,7 @@ impl EnterpriseIncidentResponseSystem {
         incident: &SecurityIncident,
     ) -> Result<ResponsePlaybook, ResponseError> {
         let playbooks = self.response_playbooks.read().await;
-        
+
         // 根据事件类型和严重程度选择合适的响应手册
         for (_, playbook) in playbooks.iter() {
             if playbook.enabled {

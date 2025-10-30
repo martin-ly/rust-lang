@@ -101,7 +101,7 @@ use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 
 fn benchmark_with_sizes(c: &mut Criterion) {
     let mut group = c.benchmark_group("vec_operations");
-    
+
     for size in [10, 100, 1000, 10000].iter() {
         group.bench_with_input(BenchmarkId::from_parameter(size), size, |b, &size| {
             b.iter(|| {
@@ -113,7 +113,7 @@ fn benchmark_with_sizes(c: &mut Criterion) {
             });
         });
     }
-    
+
     group.finish();
 }
 
@@ -150,27 +150,27 @@ struct Config {
 
 fn bench_singleton_patterns(c: &mut Criterion) {
     let mut group = c.benchmark_group("singleton_implementations");
-    
+
     group.bench_function("OnceLock", |b| {
         b.iter(|| {
             let config = INSTANCE_ONCE.get_or_init(|| Config { value: 42 });
             black_box(config.value);
         });
     });
-    
+
     group.bench_function("Lazy", |b| {
         b.iter(|| {
             black_box(INSTANCE_LAZY.value);
         });
     });
-    
+
     group.bench_function("Arc<Mutex>", |b| {
         b.iter(|| {
             let guard = INSTANCE_MUTEX.lock().unwrap();
             black_box(guard.value);
         });
     });
-    
+
     group.finish();
 }
 
@@ -212,17 +212,17 @@ fn execute_dynamic(strategy: &dyn Strategy, n: i32) -> i32 {
 
 fn bench_strategy_dispatch(c: &mut Criterion) {
     let mut group = c.benchmark_group("strategy_dispatch");
-    
+
     let add = AddStrategy;
-    
+
     group.bench_function("static_dispatch", |b| {
         b.iter(|| execute_static(&add, black_box(42)));
     });
-    
+
     group.bench_function("dynamic_dispatch", |b| {
         b.iter(|| execute_dynamic(&add as &dyn Strategy, black_box(42)));
     });
-    
+
     group.finish();
 }
 
@@ -251,7 +251,7 @@ async fn async_work(n: usize) -> usize {
 
 fn bench_async_patterns(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
-    
+
     c.bench_function("async_work_1000", |b| {
         b.to_async(&rt).iter(|| async {
             async_work(1000).await
@@ -272,7 +272,7 @@ use criterion::{black_box, Criterion, BenchmarkId};
 
 fn bench_allocation_patterns(c: &mut Criterion) {
     let mut group = c.benchmark_group("allocation");
-    
+
     // Vec预分配 vs 动态增长
     for size in [100, 1000, 10000].iter() {
         group.bench_with_input(
@@ -287,7 +287,7 @@ fn bench_allocation_patterns(c: &mut Criterion) {
                 });
             },
         );
-        
+
         group.bench_with_input(
             BenchmarkId::new("without_capacity", size),
             size,
@@ -301,7 +301,7 @@ fn bench_allocation_patterns(c: &mut Criterion) {
             },
         );
     }
-    
+
     group.finish();
 }
 
@@ -359,17 +359,17 @@ use std::time::Duration;
 
 fn custom_measurement(c: &mut Criterion<WallTime>) {
     let mut group: BenchmarkGroup<WallTime> = c.benchmark_group("custom");
-    
+
     group.measurement_time(Duration::from_secs(10));
     group.sample_size(1000);
     group.warm_up_time(Duration::from_secs(3));
-    
+
     group.bench_function("my_function", |b| {
         b.iter(|| {
             // 被测代码
         });
     });
-    
+
     group.finish();
 }
 ```
@@ -381,10 +381,10 @@ use criterion::{Criterion, Throughput, BenchmarkId};
 
 fn throughput_benchmark(c: &mut Criterion) {
     let mut group = c.benchmark_group("throughput");
-    
+
     for size in [1024, 10240, 102400].iter() {
         group.throughput(Throughput::Bytes(*size as u64));
-        
+
         group.bench_with_input(
             BenchmarkId::from_parameter(size),
             size,
@@ -394,7 +394,7 @@ fn throughput_benchmark(c: &mut Criterion) {
             },
         );
     }
-    
+
     group.finish();
 }
 
@@ -438,5 +438,5 @@ cargo flamegraph --bench pattern_benchmarks
 
 ---
 
-**文档状态**: ✅ 已完成  
+**文档状态**: ✅ 已完成
 **最后更新**: 2025-10-24

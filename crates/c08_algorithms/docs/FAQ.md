@@ -1,7 +1,7 @@
 ﻿# C08 算法: 常见问题解答 (FAQ)
 
-> **文档定位**: 算法常见问题快速解答，涵盖算法选择、复杂度分析、异步算法等核心疑问  
-> **使用方式**: 通过问题索引快速定位问题，获取详细答案和示例  
+> **文档定位**: 算法常见问题快速解答，涵盖算法选择、复杂度分析、异步算法等核心疑问
+> **使用方式**: 通过问题索引快速定位问题，获取详细答案和示例
 > **相关文档**: [主索引](./00_MASTER_INDEX.md) | [README](./README.md) | [Glossary](./Glossary.md)
 
 ## 📊 目录
@@ -16,8 +16,8 @@
     - [Q5: 数据结构该如何选择？](#q5-数据结构该如何选择)
   - [📚 延伸阅读](#-延伸阅读)
 
-**最后更新**: 2025-10-19  
-**适用版本**: Rust 1.75+  
+**最后更新**: 2025-10-19
+**适用版本**: Rust 1.75+
 **文档类型**: ❓ 问答手册
 
 ---
@@ -87,20 +87,20 @@ fn example(n: usize) {
     for i in 0..n {
         println!("{}", i);  // O(1)
     }
-    
+
     // 2. 嵌套循环: O(n²)
     for i in 0..n {
         for j in 0..n {
             println!("{}, {}", i, j);  // O(1)
         }
     }
-    
+
     // 3. 对数时间: O(log n)
     let mut x = n;
     while x > 1 {
         x /= 2;  // 每次减半
     }
-    
+
     // 4. 线性对数: O(n log n)
     for i in 0..n {
         let mut x = n;
@@ -181,7 +181,7 @@ async fn async_search<T: PartialEq>(
 // 并发处理
 async fn parallel_process(data: Vec<i32>) -> Vec<i32> {
     use futures::future::join_all;
-    
+
     let tasks: Vec<_> = data
         .into_iter()
         .map(|x| tokio::spawn(async move {
@@ -189,7 +189,7 @@ async fn parallel_process(data: Vec<i32>) -> Vec<i32> {
             expensive_computation(x).await
         }))
         .collect();
-    
+
     join_all(tasks)
         .await
         .into_iter()
@@ -254,7 +254,7 @@ use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 fn benchmark_sort(c: &mut Criterion) {
     let mut data: Vec<i32> = (0..10000).rev().collect();
-    
+
     c.bench_function("quick_sort", |b| {
         b.iter(|| {
             let mut arr = data.clone();

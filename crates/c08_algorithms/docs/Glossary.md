@@ -1,7 +1,7 @@
 ﻿# C08 算法: 术语表 (Glossary)
 
-> **文档定位**: 算法核心术语快速参考，涵盖复杂度、数据结构、算法设计等关键概念  
-> **使用方式**: 通过术语索引快速查找定义，理解算法核心概念  
+> **文档定位**: 算法核心术语快速参考，涵盖复杂度、数据结构、算法设计等关键概念
+> **使用方式**: 通过术语索引快速查找定义，理解算法核心概念
 > **相关文档**: [主索引](./00_MASTER_INDEX.md) | [README](./README.md) | [FAQ](./FAQ.md)
 
 ## 📊 目录
@@ -27,8 +27,8 @@
     - [前缀和 (Prefix Sum)](#前缀和-prefix-sum)
   - [📚 延伸阅读](#-延伸阅读)
 
-**最后更新**: 2025-10-19  
-**适用版本**: Rust 1.75+  
+**最后更新**: 2025-10-19
+**适用版本**: Rust 1.75+
 **文档类型**: 📚 参考资料
 
 ---
@@ -178,14 +178,14 @@ fn fibonacci_dp(n: usize) -> u64 {
     if n <= 1 {
         return n as u64;
     }
-    
+
     let mut dp = vec![0; n + 1];
     dp[1] = 1;
-    
+
     for i in 2..=n {
         dp[i] = dp[i-1] + dp[i-2];
     }
-    
+
     dp[n]
 }
 ```
@@ -217,7 +217,7 @@ fn fibonacci_dp(n: usize) -> u64 {
 fn coin_change_greedy(amount: u32, coins: &[u32]) -> Vec<u32> {
     let mut result = Vec::new();
     let mut remaining = amount;
-    
+
     // coins应降序排列
     for &coin in coins {
         while remaining >= coin {
@@ -225,7 +225,7 @@ fn coin_change_greedy(amount: u32, coins: &[u32]) -> Vec<u32> {
             remaining -= coin;
         }
     }
-    
+
     result
 }
 ```
@@ -259,13 +259,13 @@ fn merge_sort<T: Ord + Clone>(arr: &mut [T]) {
     if len <= 1 {
         return;
     }
-    
+
     let mid = len / 2;
-    
+
     // 分解
     merge_sort(&mut arr[..mid]);
     merge_sort(&mut arr[mid..]);
-    
+
     // 合并
     let mut temp = arr.to_vec();
     merge(&arr[..mid], &arr[mid..], &mut temp);
@@ -314,7 +314,7 @@ fn backtrack(row: usize, board: &mut Vec<Vec<char>>, result: &mut Vec<Vec<String
         result.push(board.iter().map(|r| r.iter().collect()).collect());
         return;
     }
-    
+
     for col in 0..board.len() {
         if is_valid(board, row, col) {
             board[row][col] = 'Q';           // 选择
@@ -485,7 +485,7 @@ fn next_greater_elements(nums: Vec<i32>) -> Vec<i32> {
     let n = nums.len();
     let mut result = vec![-1; n];
     let mut stack = Vec::new();
-    
+
     for i in 0..n {
         while !stack.is_empty() && nums[*stack.last().unwrap()] < nums[i] {
             let j = stack.pop().unwrap();
@@ -493,7 +493,7 @@ fn next_greater_elements(nums: Vec<i32>) -> Vec<i32> {
         }
         stack.push(i);
     }
-    
+
     result
 }
 ```
@@ -521,7 +521,7 @@ impl PrefixSum {
         }
         Self { prefix }
     }
-    
+
     // 查询区间[l, r]的和: O(1)
     fn range_sum(&self, l: usize, r: usize) -> i32 {
         self.prefix[r + 1] - self.prefix[l]

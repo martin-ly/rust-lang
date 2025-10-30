@@ -212,7 +212,7 @@ impl ParallelCompilationDemo {
     pub fn process_serial(&self) -> i32 {
         self.data.iter().sum()
     }
-    
+
     pub fn process_parallel(&self) -> i32 {
         // 模拟并行处理
         self.data.par_iter().sum()

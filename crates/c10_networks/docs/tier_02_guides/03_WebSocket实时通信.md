@@ -1,8 +1,8 @@
 ﻿# C10 Networks - Tier 2: WebSocket 实时通信
 
-> **文档版本**: v1.0.0  
-> **最后更新**: 2025-10-23  
-> **Rust 版本**: 1.90+  
+> **文档版本**: v1.0.0
+> **最后更新**: 2025-10-23
+> **Rust 版本**: 1.90+
 > **预计阅读**: 35 分钟
 
 ---
@@ -82,18 +82,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 连接 WebSocket 服务器
     let (ws_stream, _) = connect_async("ws://echo.websocket.org").await?;
     println!("WebSocket 已连接");
-    
+
     let (mut write, mut read) = ws_stream.split();
-    
+
     // 发送消息
     write.send(Message::Text("Hello WebSocket".to_string())).await?;
-    
+
     // 接收消息
     if let Some(msg) = read.next().await {
         let msg = msg?;
         println!("收到: {}", msg);
     }
-    
+
     Ok(())
 }
 ```
@@ -109,17 +109,17 @@ use futures_util::{StreamExt, SinkExt};
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let listener = TcpListener::bind("127.0.0.1:9001").await?;
     println!("WebSocket 服务器运行在 ws://127.0.0.1:9001");
-    
+
     while let Ok((stream, addr)) = listener.accept().await {
         tokio::spawn(async move {
             println!("新连接: {}", addr);
-            
+
             let ws_stream = accept_async(stream).await.expect("握手失败");
             let (mut write, mut read) = ws_stream.split();
-            
+
             while let Some(msg) = read.next().await {
                 let msg = msg.expect("读取消息失败");
-                
+
                 if msg.is_text() || msg.is_binary() {
                     // 回显消息
                     write.send(msg).await.expect("发送消息失败");
@@ -127,7 +127,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
         });
     }
-    
+
     Ok(())
 }
 ```
@@ -155,22 +155,22 @@ impl WebSocketClient {
     async fn new(url: &str) -> Result<Self, Box<dyn std::error::Error>> {
         let (ws_stream, _) = connect_async(url).await?;
         let (write, mut read) = ws_stream.split();
-        
+
         let (tx, mut rx) = mpsc::unbounded_channel::<Message>();
-        
+
         // 发送任务
         tokio::spawn(async move {
             Self::send_task(write, &mut rx).await;
         });
-        
+
         // 接收任务
         tokio::spawn(async move {
             Self::receive_task(&mut read).await;
         });
-        
+
         Ok(Self { sender: tx })
     }
-    
+
     async fn send_task(mut write: WsWrite, rx: &mut mpsc::UnboundedReceiver<Message>) {
         while let Some(msg) = rx.recv().await {
             if write.send(msg).await.is_err() {
@@ -178,7 +178,7 @@ impl WebSocketClient {
             }
         }
     }
-    
+
     async fn receive_task<S>(read: &mut futures_util::stream::SplitStream<S>)
     where
         S: StreamExt<Item = Result<Message, tokio_tungstenite::tungstenite::Error>> + Unpin,
@@ -203,7 +203,7 @@ impl WebSocketClient {
             }
         }
     }
-    
+
     fn send(&self, msg: Message) -> Result<(), Box<dyn std::error::Error>> {
         self.sender.send(msg)?;
         Ok(())
@@ -213,13 +213,13 @@ impl WebSocketClient {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let client = WebSocketClient::new("ws://echo.websocket.org").await?;
-    
+
     // 发送测试消息
     client.send(Message::Text("Test 1".to_string()))?;
     client.send(Message::Text("Test 2".to_string()))?;
-    
+
     tokio::time::sleep(tokio::time::Duration::from_secs(3)).await;
-    
+
     Ok(())
 }
 ```
@@ -232,7 +232,7 @@ use std::time::Duration;
 
 async fn connect_with_retry(url: &str, max_retries: u32) -> Result<(), Box<dyn std::error::Error>> {
     let mut attempts = 0;
-    
+
     loop {
         match connect_async(url).await {
             Ok((ws_stream, _)) => {
@@ -248,7 +248,7 @@ async fn connect_with_retry(url: &str, max_retries: u32) -> Result<(), Box<dyn s
             Err(e) => return Err(e.into()),
         }
     }
-    
+
     Ok(())
 }
 
@@ -274,20 +274,20 @@ use futures_util::{StreamExt, SinkExt};
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let listener = TcpListener::bind("127.0.0.1:9001").await?;
     let (tx, _rx) = broadcast::channel::<String>(100);
-    
+
     println!("广播服务器运行在 ws://127.0.0.1:9001");
-    
+
     loop {
         let (stream, addr) = listener.accept().await?;
         let tx = tx.clone();
         let mut rx = tx.subscribe();
-        
+
         tokio::spawn(async move {
             let ws_stream = accept_async(stream).await.expect("握手失败");
             let (mut write, mut read) = ws_stream.split();
-            
+
             println!("客户端 {} 已连接", addr);
-            
+
             // 接收并广播消息
             let tx_clone = tx.clone();
             tokio::spawn(async move {
@@ -299,7 +299,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 }
                 println!("客户端 {} 断开连接", addr);
             });
-            
+
             // 转发广播消息
             while let Ok(text) = rx.recv().await {
                 if write.send(Message::Text(text)).await.is_err() {
@@ -338,7 +338,7 @@ impl RoomManager {
             next_client_id: Arc::new(RwLock::new(0)),
         }
     }
-    
+
     async fn create_room(&self, room_id: RoomId) {
         let mut rooms = self.rooms.write().await;
         rooms.insert(room_id.clone(), Room {
@@ -346,7 +346,7 @@ impl RoomManager {
             clients: Vec::new(),
         });
     }
-    
+
     async fn join_room(&self, room_id: &str, client_id: ClientId) -> bool {
         let mut rooms = self.rooms.write().await;
         if let Some(room) = rooms.get_mut(room_id) {
@@ -356,14 +356,14 @@ impl RoomManager {
             false
         }
     }
-    
+
     async fn leave_room(&self, room_id: &str, client_id: ClientId) {
         let mut rooms = self.rooms.write().await;
         if let Some(room) = rooms.get_mut(room_id) {
             room.clients.retain(|&id| id != client_id);
         }
     }
-    
+
     async fn get_next_client_id(&self) -> ClientId {
         let mut id = self.next_client_id.write().await;
         let current = *id;
@@ -403,7 +403,7 @@ impl WsMessage {
         let json = serde_json::to_string(self)?;
         Ok(Message::Text(json))
     }
-    
+
     fn from_message(msg: Message) -> Result<Self, Box<dyn std::error::Error>> {
         match msg {
             Message::Text(text) => {
@@ -420,13 +420,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         room: "general".to_string(),
         username: "Alice".to_string(),
     };
-    
+
     let ws_msg = msg.to_message()?;
     println!("序列化: {:?}", ws_msg);
-    
+
     let parsed = WsMessage::from_message(ws_msg)?;
     println!("反序列化: {:?}", parsed);
-    
+
     Ok(())
 }
 ```
@@ -456,7 +456,7 @@ fn decode_binary_message(msg: Message) -> Result<(u8, Vec<u8>), String> {
 fn main() {
     let msg = encode_binary_message(1, b"Hello");
     println!("编码: {:?}", msg);
-    
+
     let (msg_type, data) = decode_binary_message(msg).unwrap();
     println!("解码: type={}, data={:?}", msg_type, String::from_utf8_lossy(&data));
 }
@@ -486,20 +486,20 @@ struct ChatMessage {
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let listener = TcpListener::bind("127.0.0.1:9001").await?;
     let (broadcast_tx, _) = broadcast::channel::<ChatMessage>(100);
-    
+
     println!("聊天室服务器运行在 ws://127.0.0.1:9001");
-    
+
     loop {
         let (stream, addr) = listener.accept().await?;
         let broadcast_tx = broadcast_tx.clone();
         let mut broadcast_rx = broadcast_tx.subscribe();
-        
+
         tokio::spawn(async move {
             let ws_stream = accept_async(stream).await.expect("握手失败");
             let (mut write, mut read) = ws_stream.split();
-            
+
             println!("新用户加入: {}", addr);
-            
+
             // 接收并广播消息
             let tx = broadcast_tx.clone();
             tokio::spawn(async move {
@@ -512,7 +512,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                     }
                 }
             });
-            
+
             // 转发消息
             while let Ok(chat_msg) = broadcast_rx.recv().await {
                 let json = serde_json::to_string(&chat_msg).unwrap();
@@ -520,7 +520,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                     break;
                 }
             }
-            
+
             println!("用户离开: {}", addr);
         });
     }
@@ -536,18 +536,18 @@ use serde_json::json;
 
 async fn data_pusher() -> Result<(), Box<dyn std::error::Error>> {
     let mut ticker = interval(Duration::from_secs(1));
-    
+
     loop {
         ticker.tick().await;
-        
+
         // 模拟实时数据
         let data = json!({
             "timestamp": chrono::Utc::now().timestamp(),
             "value": rand::random::<f64>() * 100.0,
         });
-        
+
         println!("推送数据: {}", data);
-        
+
         // 在实际应用中，这里会发送到 WebSocket 客户端
         // write.send(Message::Text(data.to_string())).await?;
     }

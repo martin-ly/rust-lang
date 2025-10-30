@@ -1,8 +1,8 @@
 ﻿# Rust 1.90 网络编程实战示例大全 (Part 2)
 
-> **文档版本**: v1.0  
-> **适用版本**: Rust 1.90+, Tokio 1.35+  
-> **最后更新**: 2025-10-19  
+> **文档版本**: v1.0
+> **适用版本**: Rust 1.90+, Tokio 1.35+
+> **最后更新**: 2025-10-19
 > **文档类型**: 💻 代码示例集 (续)
 
 ---
@@ -71,7 +71,7 @@ impl HttpCache {
             ttl,
         }
     }
-    
+
     async fn get(&self, key: &str) -> Option<Vec<u8>> {
         let cache = self.cache.lock().await;
         if let Some((data, timestamp)) = cache.get(key) {
@@ -81,7 +81,7 @@ impl HttpCache {
         }
         None
     }
-    
+
     async fn set(&self, key: String, value: Vec<u8>) {
         let mut cache = self.cache.lock().await;
         cache.insert(key, (value, std::time::Instant::now()));
@@ -106,14 +106,14 @@ impl HttpClient {
             .redirect(reqwest::redirect::Policy::limited(config.max_redirects))
             .pool_max_idle_per_host(10)
             .build()?;
-        
+
         Ok(Self {
             client,
             config,
             cache: None,
         })
     }
-    
+
     /// 使用自定义配置创建
     pub fn with_config(config: HttpClientConfig) -> Result<Self, Box<dyn std::error::Error>> {
         let client = Client::builder()
@@ -123,20 +123,20 @@ impl HttpClient {
             .redirect(reqwest::redirect::Policy::limited(config.max_redirects))
             .pool_max_idle_per_host(10)
             .build()?;
-        
+
         Ok(Self {
             client,
             config,
             cache: None,
         })
     }
-    
+
     /// 启用缓存
     pub fn with_cache(mut self, ttl: Duration) -> Self {
         self.cache = Some(HttpCache::new(ttl));
         self
     }
-    
+
     /// GET请求
     pub async fn get(&self, url: &str) -> Result<Response, Box<dyn std::error::Error>> {
         // 检查缓存
@@ -147,17 +147,17 @@ impl HttpClient {
                 // return Ok(Response::from(cached_data));
             }
         }
-        
+
         self.request_with_retry(self.client.get(url)).await
     }
-    
+
     /// POST请求
     pub async fn post(&self, url: &str, body: Vec<u8>) -> Result<Response, Box<dyn std::error::Error>> {
         self.request_with_retry(
             self.client.post(url).body(body)
         ).await
     }
-    
+
     /// POST JSON请求
     pub async fn post_json<T: serde::Serialize>(
         &self,
@@ -168,7 +168,7 @@ impl HttpClient {
             self.client.post(url).json(json)
         ).await
     }
-    
+
     /// 带重试的请求
     async fn request_with_retry(
         &self,
@@ -176,10 +176,10 @@ impl HttpClient {
     ) -> Result<Response, Box<dyn std::error::Error>> {
         let mut attempts = 0;
         let mut last_error = None;
-        
+
         while attempts < self.config.max_retries {
             attempts += 1;
-            
+
             match request_builder.try_clone().unwrap().send().await {
                 Ok(response) => {
                     if response.status().is_success() {
@@ -187,7 +187,7 @@ impl HttpClient {
                         return Ok(response);
                     } else if response.status().is_server_error() && attempts < self.config.max_retries {
                         // 服务器错误,重试
-                        println!("⚠️  服务器错误,重试 {}/{}: {}", 
+                        println!("⚠️  服务器错误,重试 {}/{}: {}",
                                  attempts, self.config.max_retries, response.status());
                         tokio::time::sleep(self.config.retry_delay).await;
                         continue;
@@ -197,29 +197,29 @@ impl HttpClient {
                     }
                 }
                 Err(e) => {
-                    println!("⚠️  请求失败,尝试 {}/{}: {}", 
+                    println!("⚠️  请求失败,尝试 {}/{}: {}",
                              attempts, self.config.max_retries, e);
                     last_error = Some(e);
-                    
+
                     if attempts < self.config.max_retries {
                         tokio::time::sleep(self.config.retry_delay).await;
                     }
                 }
             }
         }
-        
+
         Err(format!("请求失败 ({}次尝试): {:?}", attempts, last_error).into())
     }
-    
+
     /// 并发GET请求
     pub async fn get_many(&self, urls: Vec<String>) -> Vec<Result<Response, Box<dyn std::error::Error>>> {
         let futures: Vec<_> = urls.into_iter()
             .map(|url| self.get(&url))
             .collect();
-        
+
         futures::future::join_all(futures).await
     }
-    
+
     /// 流式下载
     pub async fn download_stream(
         &self,
@@ -228,27 +228,27 @@ impl HttpClient {
     ) -> Result<u64, Box<dyn std::error::Error>> {
         use tokio::io::AsyncWriteExt;
         use futures_util::StreamExt;
-        
+
         let response = self.get(url).await?;
         let total_size = response.content_length().unwrap_or(0);
-        
+
         println!("📥 开始下载: {} ({} bytes)", url, total_size);
-        
+
         let mut stream = response.bytes_stream();
         let mut downloaded = 0u64;
-        
+
         while let Some(chunk) = stream.next().await {
             let chunk = chunk?;
             writer.write_all(&chunk).await?;
             downloaded += chunk.len() as u64;
-            
+
             if total_size > 0 {
                 let progress = (downloaded as f64 / total_size as f64) * 100.0;
                 print!("\r  进度: {:.1}% ({}/{})", progress, downloaded, total_size);
                 std::io::Write::flush(&mut std::io::stdout())?;
             }
         }
-        
+
         println!("\n✅ 下载完成: {} bytes", downloaded);
         Ok(downloaded)
     }
@@ -257,18 +257,18 @@ impl HttpClient {
 /// 示例: 使用HTTP客户端
 pub async fn demo_http_client() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== HTTP客户端示例 ===\n");
-    
+
     // 创建客户端
     let client = HttpClient::new()?
         .with_cache(Duration::from_secs(300)); // 5分钟缓存
-    
+
     // GET请求
     println!("1. GET请求示例:");
     let response = client.get("https://httpbin.org/get").await?;
     println!("  状态码: {}", response.status());
     let body = response.text().await?;
     println!("  响应体: {}", &body[..200.min(body.len())]);
-    
+
     // POST JSON请求
     println!("\n2. POST JSON请求示例:");
     use serde_json::json;
@@ -278,7 +278,7 @@ pub async fn demo_http_client() -> Result<(), Box<dyn std::error::Error>> {
     });
     let response = client.post_json("https://httpbin.org/post", &data).await?;
     println!("  状态码: {}", response.status());
-    
+
     // 并发请求
     println!("\n3. 并发请求示例:");
     let urls = vec![
@@ -286,11 +286,11 @@ pub async fn demo_http_client() -> Result<(), Box<dyn std::error::Error>> {
         "https://httpbin.org/delay/2".to_string(),
         "https://httpbin.org/delay/1".to_string(),
     ];
-    
+
     let start = std::time::Instant::now();
     let responses = client.get_many(urls).await;
     let elapsed = start.elapsed();
-    
+
     println!("  并发请求完成: {} 个请求耗时 {:?}", responses.len(), elapsed);
     for (i, result) in responses.iter().enumerate() {
         match result {
@@ -298,7 +298,7 @@ pub async fn demo_http_client() -> Result<(), Box<dyn std::error::Error>> {
             Err(e) => println!("    请求{}: 错误 - {}", i + 1, e),
         }
     }
-    
+
     Ok(())
 }
 ```
@@ -364,7 +364,7 @@ impl WsClient {
     /// 创建WebSocket客户端
     pub fn new(url: impl Into<String>) -> (Self, mpsc::UnboundedReceiver<WsEvent>) {
         let (event_tx, event_rx) = mpsc::unbounded_channel();
-        
+
         (Self {
             url: url.into(),
             config: WsClientConfig::default(),
@@ -372,14 +372,14 @@ impl WsClient {
             send_tx: None,
         }, event_rx)
     }
-    
+
     /// 使用自定义配置创建
     pub fn with_config(
         url: impl Into<String>,
         config: WsClientConfig,
     ) -> (Self, mpsc::UnboundedReceiver<WsEvent>) {
         let (event_tx, event_rx) = mpsc::unbounded_channel();
-        
+
         (Self {
             url: url.into(),
             config,
@@ -387,14 +387,14 @@ impl WsClient {
             send_tx: None,
         }, event_rx)
     }
-    
+
     /// 连接并运行
     pub async fn run(&mut self) -> Result<(), Box<dyn std::error::Error>> {
         let mut reconnect_attempts = 0;
-        
+
         loop {
             println!("🔄 正在连接WebSocket: {}", self.url);
-            
+
             match self.connect_and_handle().await {
                 Ok(_) => {
                     println!("✅ WebSocket连接正常关闭");
@@ -403,41 +403,41 @@ impl WsClient {
                 Err(e) => {
                     println!("❌ WebSocket连接错误: {}", e);
                     let _ = self.event_tx.send(WsEvent::Error(e.to_string()));
-                    
+
                     if let Some(max_attempts) = self.config.max_reconnect_attempts {
                         reconnect_attempts += 1;
                         if reconnect_attempts >= max_attempts {
                             return Err(format!("达到最大重连次数: {}", max_attempts).into());
                         }
                     }
-                    
+
                     println!("⏳ {} 秒后重连...", self.config.reconnect_delay.as_secs());
                     tokio::time::sleep(self.config.reconnect_delay).await;
                 }
             }
         }
-        
+
         Ok(())
     }
-    
+
     /// 连接并处理消息
     async fn connect_and_handle(&mut self) -> Result<(), Box<dyn std::error::Error>> {
         // 连接WebSocket
         let (ws_stream, _) = connect_async(&self.url).await?;
         println!("✅ WebSocket已连接");
         let _ = self.event_tx.send(WsEvent::Connected);
-        
+
         // 分离读写
         let (mut write, mut read) = ws_stream.split();
-        
+
         // 创建发送通道
         let (send_tx, mut send_rx) = mpsc::unbounded_channel();
         self.send_tx = Some(send_tx);
-        
+
         // 心跳定时器
         let mut ping_interval = interval(self.config.ping_interval);
         ping_interval.tick().await; // 跳过第一次tick
-        
+
         // 处理消息
         loop {
             tokio::select! {
@@ -466,12 +466,12 @@ impl WsClient {
                         _ => {}
                     }
                 }
-                
+
                 // 发送消息
                 Some(msg) = send_rx.recv() => {
                     write.send(msg).await?;
                 }
-                
+
                 // 心跳
                 _ = ping_interval.tick() => {
                     println!("💓 发送心跳");
@@ -479,10 +479,10 @@ impl WsClient {
                 }
             }
         }
-        
+
         Ok(())
     }
-    
+
     /// 发送文本消息
     pub fn send_text(&self, text: impl Into<String>) -> Result<(), Box<dyn std::error::Error>> {
         if let Some(tx) = &self.send_tx {
@@ -492,7 +492,7 @@ impl WsClient {
             Err("未连接".into())
         }
     }
-    
+
     /// 发送二进制消息
     pub fn send_binary(&self, data: Vec<u8>) -> Result<(), Box<dyn std::error::Error>> {
         if let Some(tx) = &self.send_tx {
@@ -507,17 +507,17 @@ impl WsClient {
 /// 示例: WebSocket客户端
 pub async fn demo_websocket_client() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== WebSocket客户端示例 ===\n");
-    
+
     // 创建客户端
     let (mut client, mut event_rx) = WsClient::new("wss://echo.websocket.org");
-    
+
     // 启动连接任务
     let client_handle = tokio::spawn(async move {
         if let Err(e) = client.run().await {
             eprintln!("客户端错误: {}", e);
         }
     });
-    
+
     // 处理事件
     let event_handle = tokio::spawn(async move {
         while let Some(event) = event_rx.recv().await {
@@ -540,13 +540,13 @@ pub async fn demo_websocket_client() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     });
-    
+
     // 等待一段时间
     tokio::time::sleep(Duration::from_secs(30)).await;
-    
+
     client_handle.abort();
     event_handle.abort();
-    
+
     Ok(())
 }
 ```
@@ -586,7 +586,7 @@ impl DnsCache {
             ttl,
         }
     }
-    
+
     async fn get(&self, domain: &str) -> Option<Vec<IpAddr>> {
         let cache = self.cache.lock().await;
         if let Some((ips, timestamp)) = cache.get(domain) {
@@ -596,7 +596,7 @@ impl DnsCache {
         }
         None
     }
-    
+
     async fn set(&self, domain: String, ips: Vec<IpAddr>) {
         let mut cache = self.cache.lock().await;
         cache.insert(domain, (ips, std::time::Instant::now()));
@@ -614,13 +614,13 @@ impl DnsResolver {
     pub async fn from_system() -> Result<Self, Box<dyn std::error::Error>> {
         let resolver = TokioAsyncResolver::tokio_from_system_conf()?;
         println!("✅ 使用系统DNS配置");
-        
+
         Ok(Self {
             resolver,
             cache: None,
         })
     }
-    
+
     /// 创建Google DNS解析器
     pub async fn google() -> Result<Self, Box<dyn std::error::Error>> {
         let mut config = ResolverConfig::new();
@@ -638,16 +638,16 @@ impl DnsResolver {
             trust_negative_responses: false,
             bind_addr: None,
         });
-        
+
         let resolver = TokioAsyncResolver::tokio(config, ResolverOpts::default());
         println!("✅ 使用Google DNS (8.8.8.8)");
-        
+
         Ok(Self {
             resolver,
             cache: None,
         })
     }
-    
+
     /// 创建Cloudflare DNS解析器
     pub async fn cloudflare() -> Result<Self, Box<dyn std::error::Error>> {
         let mut config = ResolverConfig::new();
@@ -665,22 +665,22 @@ impl DnsResolver {
             trust_negative_responses: false,
             bind_addr: None,
         });
-        
+
         let resolver = TokioAsyncResolver::tokio(config, ResolverOpts::default());
         println!("✅ 使用Cloudflare DNS (1.1.1.1)");
-        
+
         Ok(Self {
             resolver,
             cache: None,
         })
     }
-    
+
     /// 启用缓存
     pub fn with_cache(mut self, ttl: Duration) -> Self {
         self.cache = Some(DnsCache::new(ttl));
         self
     }
-    
+
     /// 查询A记录 (IPv4)
     pub async fn lookup_ipv4(&self, domain: &str) -> Result<Vec<IpAddr>, Box<dyn std::error::Error>> {
         // 检查缓存
@@ -690,23 +690,23 @@ impl DnsResolver {
                 return Ok(ips);
             }
         }
-        
+
         let response = self.resolver.ipv4_lookup(domain).await?;
         let ips: Vec<IpAddr> = response
             .iter()
             .map(|ip| IpAddr::V4(*ip))
             .collect();
-        
+
         println!("✅ DNS解析: {} -> {:?}", domain, ips);
-        
+
         // 更新缓存
         if let Some(cache) = &self.cache {
             cache.set(domain.to_string(), ips.clone()).await;
         }
-        
+
         Ok(ips)
     }
-    
+
     /// 查询AAAA记录 (IPv6)
     pub async fn lookup_ipv6(&self, domain: &str) -> Result<Vec<IpAddr>, Box<dyn std::error::Error>> {
         let response = self.resolver.ipv6_lookup(domain).await?;
@@ -714,20 +714,20 @@ impl DnsResolver {
             .iter()
             .map(|ip| IpAddr::V6(*ip))
             .collect();
-        
+
         println!("✅ DNS解析(IPv6): {} -> {:?}", domain, ips);
         Ok(ips)
     }
-    
+
     /// 查询所有IP (IPv4 + IPv6)
     pub async fn lookup_all_ips(&self, domain: &str) -> Result<Vec<IpAddr>, Box<dyn std::error::Error>> {
         let response = self.resolver.lookup_ip(domain).await?;
         let ips: Vec<IpAddr> = response.iter().collect();
-        
+
         println!("✅ DNS解析(全部): {} -> {:?}", domain, ips);
         Ok(ips)
     }
-    
+
     /// 查询MX记录
     pub async fn lookup_mx(&self, domain: &str) -> Result<Vec<String>, Box<dyn std::error::Error>> {
         let response = self.resolver.mx_lookup(domain).await?;
@@ -735,11 +735,11 @@ impl DnsResolver {
             .iter()
             .map(|mx| format!("{} (优先级: {})", mx.exchange(), mx.preference()))
             .collect();
-        
+
         println!("✅ MX记录: {} -> {:?}", domain, mxs);
         Ok(mxs)
     }
-    
+
     /// 查询TXT记录
     pub async fn lookup_txt(&self, domain: &str) -> Result<Vec<String>, Box<dyn std::error::Error>> {
         let response = self.resolver.txt_lookup(domain).await?;
@@ -748,11 +748,11 @@ impl DnsResolver {
             .flat_map(|txt| txt.iter())
             .map(|data| String::from_utf8_lossy(data).to_string())
             .collect();
-        
+
         println!("✅ TXT记录: {} -> {:?}", domain, txts);
         Ok(txts)
     }
-    
+
     /// 反向DNS查询
     pub async fn reverse_lookup(&self, ip: IpAddr) -> Result<Vec<String>, Box<dyn std::error::Error>> {
         let response = self.resolver.reverse_lookup(ip).await?;
@@ -760,7 +760,7 @@ impl DnsResolver {
             .iter()
             .map(|name| name.to_string())
             .collect();
-        
+
         println!("✅ 反向DNS: {} -> {:?}", ip, names);
         Ok(names)
     }
@@ -769,45 +769,45 @@ impl DnsResolver {
 /// 示例: DNS解析器
 pub async fn demo_dns_resolver() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== DNS解析器示例 ===\n");
-    
+
     // 创建解析器with缓存
     let resolver = DnsResolver::cloudflare().await?
         .with_cache(Duration::from_secs(300));
-    
+
     // IPv4查询
     println!("1. IPv4地址查询:");
     let ips = resolver.lookup_ipv4("www.rust-lang.org").await?;
     for ip in ips {
         println!("   {}", ip);
     }
-    
+
     // 所有IP查询
     println!("\n2. 所有IP地址查询:");
     let ips = resolver.lookup_all_ips("www.google.com").await?;
     for ip in ips {
         println!("   {}", ip);
     }
-    
+
     // MX记录查询
     println!("\n3. MX记录查询:");
     let mxs = resolver.lookup_mx("gmail.com").await?;
     for mx in mxs {
         println!("   {}", mx);
     }
-    
+
     // TXT记录查询
     println!("\n4. TXT记录查询:");
     let txts = resolver.lookup_txt("google.com").await?;
     for txt in txts {
         println!("   {}", txt);
     }
-    
+
     // 缓存测试
     println!("\n5. 缓存测试 (第二次查询应该更快):");
     let start = std::time::Instant::now();
     let _ = resolver.lookup_ipv4("www.rust-lang.org").await?;
     println!("   第二次查询耗时: {:?}", start.elapsed());
-    
+
     Ok(())
 }
 ```
@@ -830,6 +830,6 @@ pub async fn demo_dns_resolver() -> Result<(), Box<dyn std::error::Error>> {
 
 ---
 
-**文档维护**: C10 Networks 团队  
-**最后更新**: 2025-10-19  
+**文档维护**: C10 Networks 团队
+**最后更新**: 2025-10-19
 **文档版本**: v1.0 (Part 2)

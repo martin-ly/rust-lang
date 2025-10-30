@@ -1,7 +1,7 @@
 ﻿# 设计模式知识图谱 (Design Patterns Knowledge Graph)
 
-> **文档定位**: 全景展示设计模式之间的关系、依赖、组合和演化路径  
-> **适用版本**: Rust 1.90+ (Edition 2024)  
+> **文档定位**: 全景展示设计模式之间的关系、依赖、组合和演化路径
+> **适用版本**: Rust 1.90+ (Edition 2024)
 > **最后更新**: 2025-10-19
 
 ---
@@ -70,21 +70,21 @@ graph TD
     A --> D[行为型模式]
     A --> E[并发模式]
     A --> F[Rust特有模式]
-    
+
     B --> B1[对象创建]
     B --> B2[实例管理]
-    
+
     C --> C1[对象组合]
     C --> C2[接口适配]
-    
+
     D --> D1[对象协作]
     D --> D2[算法封装]
     D --> D3[状态管理]
-    
+
     E --> E1[异步模式]
     E --> E2[并行模式]
     E --> E3[消息传递]
-    
+
     F --> F1[所有权模式]
     F --> F2[生命周期模式]
     F --> F3[零成本抽象]
@@ -95,7 +95,7 @@ graph TD
 ```mermaid
 graph LR
     subgraph "创建型模式族"
-        S[单例 Singleton] 
+        S[单例 Singleton]
         F[工厂 Factory]
         AF[抽象工厂 Abstract Factory]
         B[建造者 Builder]
@@ -103,7 +103,7 @@ graph LR
         OP[对象池 Object Pool]
         SCM[静态创建方法]
     end
-    
+
     %% 关系连接
     F -.升级.-> AF
     F --> SCM
@@ -111,7 +111,7 @@ graph LR
     P -.避免重复创建.-> F
     S -.全局访问.-> OP
     OP -.性能优化.-> P
-    
+
     %% 应用场景
     S ==> |全局状态| UseCase1[配置管理]
     F ==> |多态创建| UseCase2[数据库连接]
@@ -143,7 +143,7 @@ graph TD
         FL[享元 Flyweight]
         PR[代理 Proxy]
     end
-    
+
     %% 模式关系
     AD -.接口转换.-> BR
     DE -.功能扩展.-> AD
@@ -151,7 +151,7 @@ graph TD
     CO -.递归结构.-> DE
     FA -.简化接口.-> CO
     FL -.内存优化.-> PR
-    
+
     %% Rust特性映射
     AD --> |trait impl| RUST1[Trait适配]
     BR --> |泛型| RUST2[类型参数]
@@ -196,7 +196,7 @@ graph TB
         VI[访问者 Visitor]
         IN[解释器 Interpreter]
     end
-    
+
     %% 模式关系
     CH --> |请求传递| ME
     CM --> |封装请求| MM
@@ -205,7 +205,7 @@ graph TB
     IT --> |遍历| VI
     TM --> |算法框架| STR
     VI --> |操作分离| IN
-    
+
     %% 应用层
     CH ==> APP1[中间件链]
     CM ==> APP2[事务系统]
@@ -238,19 +238,19 @@ graph LR
         L1_2[策略]
         L1_3[模板方法]
     end
-    
+
     subgraph "Level 2: 中级模式"
         L2_1[工厂方法]
         L2_2[状态]
         L2_3[命令]
     end
-    
+
     subgraph "Level 3: 高级模式"
         L3_1[抽象工厂]
         L3_2[中介者]
         L3_3[访问者]
     end
-    
+
     L1_1 --> L2_1 --> L3_1
     L1_2 --> L2_2
     L1_3 --> L2_3 --> L3_2
@@ -264,11 +264,11 @@ graph TD
     B --> C[Rust 所有权优化]
     C --> D[Rust 零成本抽象]
     D --> E[Rust 1.90 特性增强]
-    
+
     A1[单例 - 全局变量] --> B1[单例 - lazy_static]
     B1 --> C1[单例 - OnceLock]
     C1 --> D1[单例 - 编译时初始化]
-    
+
     A2[观察者 - 回调] --> B2[观察者 - Channel]
     B2 --> C2[观察者 - GATs借用]
     C2 --> D2[观察者 - async trait]
@@ -287,7 +287,7 @@ graph LR
     M[模型 Model] --> |观察者| V[视图 View]
     C[控制器 Controller] --> |命令| M
     V --> |策略| C
-    
+
     M -.单例.-> DB[(数据库)]
     C -.工厂.-> V
 ```
@@ -306,11 +306,11 @@ graph TD
     API --> |抽象工厂| P1[插件1]
     API --> |抽象工厂| P2[插件2]
     API --> |抽象工厂| P3[插件3]
-    
+
     P1 --> |代理| Service1[服务1]
     P2 --> |适配器| Service2[服务2]
     P3 --> |装饰器| Service3[服务3]
-    
+
     Core --> |观察者| EventBus[事件总线]
     EventBus -.通知.-> P1
     EventBus -.通知.-> P2
@@ -347,11 +347,11 @@ graph TD
     Queue --> |命令模式| Task1[任务1]
     Queue --> |命令模式| Task2[任务2]
     Queue --> |命令模式| Task3[任务3]
-    
+
     Task1 --> |状态模式| Executing[执行中]
     Executing --> |备忘录| Checkpoints[(检查点)]
     Executing --> |观察者| Monitor[监控器]
-    
+
     Monitor --> |装饰器| Logging[日志]
     Monitor --> |装饰器| Metrics[指标]
 ```
@@ -395,19 +395,19 @@ graph TD
     Start --> Create{创建对象?}
     Start --> Structure{组织结构?}
     Start --> Behavior{定义行为?}
-    
+
     Create --> Simple{简单创建?}
     Simple -->|是| UseFactory[工厂模式]
     Simple -->|否| Complex{复杂配置?}
     Complex -->|是| UseBuilder[建造者<br/>+ 工厂]
     Complex -->|否| UsePrototype[原型<br/>+ 对象池]
-    
+
     Structure --> Interface{接口适配?}
     Interface -->|是| UseAdapter[适配器<br/>+ 外观]
     Interface -->|否| Enhance{功能扩展?}
     Enhance -->|是| UseDecorator[装饰器<br/>+ 代理]
     Enhance -->|否| UseComposite[组合<br/>+ 享元]
-    
+
     Behavior --> Event{事件驱动?}
     Event -->|是| UseObserver[观察者<br/>+ 中介者]
     Event -->|否| Algorithm{算法变化?}
@@ -482,7 +482,7 @@ graph TD
         P7[事件系统]
         P8[算法切换]
     end
-    
+
     subgraph "设计模式"
         S1[单例]
         S2[对象池 + 工厂]
@@ -493,7 +493,7 @@ graph TD
         S7[观察者 + 中介者]
         S8[策略 + 模板方法]
     end
-    
+
     P1 --> S1
     P2 --> S2
     P3 --> S3
@@ -514,21 +514,21 @@ graph LR
         N3[高并发]
         N4[低延迟]
     end
-    
+
     subgraph "模式选择"
         M1[泛型策略]
         M2[享元 + 对象池]
         M3[异步 + Actor]
         M4[无锁数据结构]
     end
-    
+
     subgraph "Rust实现"
         R1[单态化]
         R2[Arc + Intern]
         R3[Tokio + Channel]
         R4[Atomic + CAS]
     end
-    
+
     N1 --> M1 --> R1
     N2 --> M2 --> R2
     N3 --> M3 --> R3
@@ -630,7 +630,7 @@ graph LR
         High[复杂 ⭐⭐⭐⭐]
         VHigh[很复杂 ⭐⭐⭐⭐⭐]
     end
-    
+
     Low --> |6个模式| L1[策略、适配器等]
     Med --> |10个模式| M1[工厂、装饰器等]
     High --> |8个模式| H1[观察者、状态等]
@@ -649,23 +649,23 @@ graph TD
     Week2 --> Week3[第3周: 行为]
     Week3 --> Week4[第4周: 并发]
     Week4 --> Week5[第5-8周: 高级]
-    
+
     Week1 --> W1_1[单例]
     Week1 --> W1_2[工厂]
     Week1 --> W1_3[策略]
-    
+
     Week2 --> W2_1[适配器]
     Week2 --> W2_2[装饰器]
     Week2 --> W2_3[代理]
-    
+
     Week3 --> W3_1[观察者]
     Week3 --> W3_2[命令]
     Week3 --> W3_3[状态]
-    
+
     Week4 --> W4_1[异步模式]
     Week4 --> W4_2[消息传递]
     Week4 --> W4_3[Actor模式]
-    
+
     Week5 --> W5_1[模式组合]
     Week5 --> W5_2[架构设计]
     Week5 --> W5_3[性能优化]
@@ -762,9 +762,9 @@ cargo run --example dyn_upcasting_adapter
 
 ---
 
-**文档维护者**: Rust 设计模式社区  
-**贡献方式**: 欢迎提交 PR 补充新的模式关系和组合策略  
-**许可证**: MIT/Apache-2.0  
+**文档维护者**: Rust 设计模式社区
+**贡献方式**: 欢迎提交 PR 补充新的模式关系和组合策略
+**许可证**: MIT/Apache-2.0
 **最后更新**: 2025-10-19
 
 ---

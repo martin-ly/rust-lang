@@ -3,7 +3,7 @@
 ## 📚 目录
 
 - [Rust 1.90 算法丰富示例集 (Rich Algorithm Examples)](#rust-190-算法丰富示例集-rich-algorithm-examples)
-  - [� 目录](#-目录)
+  - [📚 目录](#-目录)
   - [1. 排序算法完整示例](#1-排序算法完整示例)
     - [1.1 归并排序 - 多种实现](#11-归并排序---多种实现)
     - [1.2 快速排序 - 多种优化](#12-快速排序---多种优化)
@@ -28,20 +28,20 @@ pub fn merge_sort<T: Ord + Clone>(arr: &mut [T]) {
     if len <= 1 {
         return;
     }
-    
+
     let mid = len / 2;
     let mut left = arr[..mid].to_vec();
     let mut right = arr[mid..].to_vec();
-    
+
     merge_sort(&mut left);
     merge_sort(&mut right);
-    
+
     merge(arr, &left, &right);
 }
 
 fn merge<T: Ord + Clone>(arr: &mut [T], left: &[T], right: &[T]) {
     let (mut i, mut j, mut k) = (0, 0, 0);
-    
+
     while i < left.len() && j < right.len() {
         if left[i] <= right[j] {
             arr[k] = left[i].clone();
@@ -52,13 +52,13 @@ fn merge<T: Ord + Clone>(arr: &mut [T], left: &[T], right: &[T]) {
         }
         k += 1;
     }
-    
+
     while i < left.len() {
         arr[k] = left[i].clone();
         i += 1;
         k += 1;
     }
-    
+
     while j < right.len() {
         arr[k] = right[j].clone();
         j += 1;
@@ -72,7 +72,7 @@ pub fn merge_sort_iterative<T: Ord + Clone>(arr: &mut [T]) {
     if len <= 1 {
         return;
     }
-    
+
     let mut width = 1;
     while width < len {
         let mut i = 0;
@@ -80,13 +80,13 @@ pub fn merge_sort_iterative<T: Ord + Clone>(arr: &mut [T]) {
             let left = i;
             let mid = (i + width).min(len);
             let right = (i + 2 * width).min(len);
-            
+
             if mid < right {
                 let left_part = arr[left..mid].to_vec();
                 let right_part = arr[mid..right].to_vec();
                 merge(&mut arr[left..right], &left_part, &right_part);
             }
-            
+
             i += 2 * width;
         }
         width *= 2;
@@ -96,21 +96,21 @@ pub fn merge_sort_iterative<T: Ord + Clone>(arr: &mut [T]) {
 /// 归并排序 - 并行版本
 pub fn merge_sort_parallel<T: Ord + Clone + Send>(arr: &mut [T]) {
     let len = arr.len();
-    
+
     // 小数组直接排序
     if len <= 10_000 {
         arr.sort();
         return;
     }
-    
+
     let mid = len / 2;
     let (left, right) = arr.split_at_mut(mid);
-    
+
     rayon::join(
         || merge_sort_parallel(left),
         || merge_sort_parallel(right),
     );
-    
+
     // 合并需要临时空间
     let left_copy = left.to_vec();
     let right_copy = right.to_vec();
@@ -122,11 +122,11 @@ pub async fn merge_sort_async<T: Ord + Clone + Send + 'static>(
     mut arr: Vec<T>,
 ) -> Result<Vec<T>, Box<dyn std::error::Error + Send + Sync>> {
     let len = arr.len();
-    
+
     if len <= 1 {
         return Ok(arr);
     }
-    
+
     if len <= 10_000 {
         // 小数组用 spawn_blocking
         return Ok(tokio::task::spawn_blocking(move || {
@@ -134,23 +134,23 @@ pub async fn merge_sort_async<T: Ord + Clone + Send + 'static>(
             arr
         }).await?);
     }
-    
+
     let mid = len / 2;
     let mut right_part = arr.split_off(mid);
-    
+
     // 并发排序两部分
     let (left_sorted, right_sorted) = tokio::join!(
         merge_sort_async(arr),
         merge_sort_async(right_part)
     );
-    
+
     let mut left = left_sorted?;
     let mut right = right_sorted?;
-    
+
     // 合并
     let mut result = Vec::with_capacity(left.len() + right.len());
     let (mut i, mut j) = (0, 0);
-    
+
     while i < left.len() && j < right.len() {
         if left[i] <= right[j] {
             result.push(left[i].clone());
@@ -160,59 +160,59 @@ pub async fn merge_sort_async<T: Ord + Clone + Send + 'static>(
             j += 1;
         }
     }
-    
+
     result.extend_from_slice(&left[i..]);
     result.extend_from_slice(&right[j..]);
-    
+
     Ok(result)
 }
 
 #[cfg(test)]
 mod merge_sort_tests {
     use super::*;
-    
+
     #[test]
     fn test_merge_sort_basic() {
         let mut arr = vec![64, 34, 25, 12, 22, 11, 90];
         merge_sort(&mut arr);
         assert_eq!(arr, vec![11, 12, 22, 25, 34, 64, 90]);
     }
-    
+
     #[test]
     fn test_merge_sort_iterative() {
         let mut arr = vec![64, 34, 25, 12, 22, 11, 90];
         merge_sort_iterative(&mut arr);
         assert_eq!(arr, vec![11, 12, 22, 25, 34, 64, 90]);
     }
-    
+
     #[test]
     fn test_merge_sort_parallel() {
         let mut arr: Vec<i32> = (0..100_000).rev().collect();
         merge_sort_parallel(&mut arr);
         assert!(arr.windows(2).all(|w| w[0] <= w[1]));
     }
-    
+
     #[tokio::test]
     async fn test_merge_sort_async() {
         let arr: Vec<i32> = vec![64, 34, 25, 12, 22, 11, 90];
         let sorted = merge_sort_async(arr).await.unwrap();
         assert_eq!(sorted, vec![11, 12, 22, 25, 34, 64, 90]);
     }
-    
+
     #[test]
     fn test_merge_sort_empty() {
         let mut arr: Vec<i32> = vec![];
         merge_sort(&mut arr);
         assert_eq!(arr, vec![]);
     }
-    
+
     #[test]
     fn test_merge_sort_single() {
         let mut arr = vec![42];
         merge_sort(&mut arr);
         assert_eq!(arr, vec![42]);
     }
-    
+
     #[test]
     fn test_merge_sort_duplicates() {
         let mut arr = vec![3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
@@ -230,7 +230,7 @@ pub fn quick_sort<T: Ord>(arr: &mut [T]) {
     if arr.len() <= 1 {
         return;
     }
-    
+
     let pivot_idx = partition(arr);
     quick_sort(&mut arr[..pivot_idx]);
     quick_sort(&mut arr[pivot_idx + 1..]);
@@ -240,7 +240,7 @@ fn partition<T: Ord>(arr: &mut [T]) -> usize {
     let len = arr.len();
     let pivot_idx = len / 2;
     arr.swap(pivot_idx, len - 1);
-    
+
     let mut i = 0;
     for j in 0..len - 1 {
         if arr[j] <= arr[len - 1] {
@@ -248,7 +248,7 @@ fn partition<T: Ord>(arr: &mut [T]) -> usize {
             i += 1;
         }
     }
-    
+
     arr.swap(i, len - 1);
     i
 }
@@ -258,7 +258,7 @@ pub fn quick_sort_3way<T: Ord>(arr: &mut [T]) {
     if arr.len() <= 1 {
         return;
     }
-    
+
     let (lt, gt) = partition_3way(arr);
     quick_sort_3way(&mut arr[..lt]);
     quick_sort_3way(&mut arr[gt + 1..]);
@@ -268,9 +268,9 @@ fn partition_3way<T: Ord>(arr: &mut [T]) -> (usize, usize) {
     let len = arr.len();
     let pivot_idx = len / 2;
     arr.swap(0, pivot_idx);
-    
+
     let (mut lt, mut i, mut gt) = (0, 1, len - 1);
-    
+
     while i <= gt {
         use std::cmp::Ordering;
         match arr[i].cmp(&arr[lt]) {
@@ -288,19 +288,19 @@ fn partition_3way<T: Ord>(arr: &mut [T]) -> (usize, usize) {
             }
         }
     }
-    
+
     (lt, gt)
 }
 
 /// 快速排序 - 混合排序优化 (小数组用插入排序)
 pub fn quick_sort_hybrid<T: Ord>(arr: &mut [T]) {
     const INSERTION_THRESHOLD: usize = 10;
-    
+
     if arr.len() <= INSERTION_THRESHOLD {
         insertion_sort(arr);
         return;
     }
-    
+
     let pivot_idx = partition(arr);
     quick_sort_hybrid(&mut arr[..pivot_idx]);
     quick_sort_hybrid(&mut arr[pivot_idx + 1..]);
@@ -319,15 +319,15 @@ fn insertion_sort<T: Ord>(arr: &mut [T]) {
 /// 快速排序 - 并行版本
 pub fn quick_sort_parallel<T: Ord + Send>(arr: &mut [T]) {
     const PARALLEL_THRESHOLD: usize = 10_000;
-    
+
     if arr.len() <= PARALLEL_THRESHOLD {
         arr.sort_unstable();
         return;
     }
-    
+
     let pivot_idx = partition(arr);
     let (left, right) = arr.split_at_mut(pivot_idx);
-    
+
     rayon::join(
         || quick_sort_parallel(left),
         || quick_sort_parallel(&mut right[1..]),
@@ -337,16 +337,16 @@ pub fn quick_sort_parallel<T: Ord + Send>(arr: &mut [T]) {
 /// 快速排序 - 随机pivot优化
 pub fn quick_sort_randomized<T: Ord>(arr: &mut [T]) {
     use rand::Rng;
-    
+
     if arr.len() <= 1 {
         return;
     }
-    
+
     // 随机选择 pivot
     let mut rng = rand::thread_rng();
     let pivot_idx = rng.gen_range(0..arr.len());
     arr.swap(pivot_idx, arr.len() - 1);
-    
+
     let pivot_idx = partition(arr);
     quick_sort_randomized(&mut arr[..pivot_idx]);
     quick_sort_randomized(&mut arr[pivot_idx + 1..]);
@@ -355,35 +355,35 @@ pub fn quick_sort_randomized<T: Ord>(arr: &mut [T]) {
 #[cfg(test)]
 mod quick_sort_tests {
     use super::*;
-    
+
     #[test]
     fn test_quick_sort() {
         let mut arr = vec![64, 34, 25, 12, 22, 11, 90];
         quick_sort(&mut arr);
         assert_eq!(arr, vec![11, 12, 22, 25, 34, 64, 90]);
     }
-    
+
     #[test]
     fn test_quick_sort_3way() {
         let mut arr = vec![3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
         quick_sort_3way(&mut arr);
         assert_eq!(arr, vec![1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
     }
-    
+
     #[test]
     fn test_quick_sort_hybrid() {
         let mut arr = vec![64, 34, 25, 12, 22, 11, 90];
         quick_sort_hybrid(&mut arr);
         assert_eq!(arr, vec![11, 12, 22, 25, 34, 64, 90]);
     }
-    
+
     #[test]
     fn test_quick_sort_parallel() {
         let mut arr: Vec<i32> = (0..100_000).rev().collect();
         quick_sort_parallel(&mut arr);
         assert!(arr.windows(2).all(|w| w[0] <= w[1]));
     }
-    
+
     #[test]
     fn test_quick_sort_randomized() {
         let mut arr = vec![64, 34, 25, 12, 22, 11, 90];
@@ -402,12 +402,12 @@ use std::cmp::Reverse;
 /// 堆排序 - 手动实现
 pub fn heap_sort<T: Ord>(arr: &mut [T]) {
     let len = arr.len();
-    
+
     // 构建最大堆
     for i in (0..len / 2).rev() {
         heapify(arr, len, i);
     }
-    
+
     // 逐个提取元素
     for i in (1..len).rev() {
         arr.swap(0, i);
@@ -419,15 +419,15 @@ fn heapify<T: Ord>(arr: &mut [T], heap_size: usize, root: usize) {
     let mut largest = root;
     let left = 2 * root + 1;
     let right = 2 * root + 2;
-    
+
     if left < heap_size && arr[left] > arr[largest] {
         largest = left;
     }
-    
+
     if right < heap_size && arr[right] > arr[largest] {
         largest = right;
     }
-    
+
     if largest != root {
         arr.swap(root, largest);
         heapify(arr, heap_size, largest);
@@ -437,7 +437,7 @@ fn heapify<T: Ord>(arr: &mut [T], heap_size: usize, root: usize) {
 /// 使用 BinaryHeap 实现堆排序
 pub fn heap_sort_std<T: Ord + Clone>(arr: &mut [T]) {
     let mut heap = BinaryHeap::from(arr.to_vec());
-    
+
     for i in (0..arr.len()).rev() {
         if let Some(max) = heap.pop() {
             arr[i] = max;
@@ -448,11 +448,11 @@ pub fn heap_sort_std<T: Ord + Clone>(arr: &mut [T]) {
 /// Top K 问题 - 找最大的 K 个元素
 pub fn top_k_largest<T: Ord + Clone>(arr: &[T], k: usize) -> Vec<T> {
     let mut heap = BinaryHeap::new();
-    
+
     for item in arr {
         heap.push(item.clone());
     }
-    
+
     (0..k.min(arr.len()))
         .filter_map(|_| heap.pop())
         .collect()
@@ -461,11 +461,11 @@ pub fn top_k_largest<T: Ord + Clone>(arr: &[T], k: usize) -> Vec<T> {
 /// Top K 问题 - 找最小的 K 个元素
 pub fn top_k_smallest<T: Ord + Clone>(arr: &[T], k: usize) -> Vec<T> {
     let mut heap: BinaryHeap<Reverse<T>> = BinaryHeap::new();
-    
+
     for item in arr {
         heap.push(Reverse(item.clone()));
     }
-    
+
     (0..k.min(arr.len()))
         .filter_map(|_| heap.pop().map(|Reverse(x)| x))
         .collect()
@@ -501,15 +501,15 @@ impl TaskScheduler {
             heap: BinaryHeap::new(),
         }
     }
-    
+
     pub fn add_task(&mut self, task: Task) {
         self.heap.push(task);
     }
-    
+
     pub fn get_next_task(&mut self) -> Option<Task> {
         self.heap.pop()
     }
-    
+
     pub fn has_tasks(&self) -> bool {
         !self.heap.is_empty()
     }
@@ -518,39 +518,39 @@ impl TaskScheduler {
 #[cfg(test)]
 mod heap_tests {
     use super::*;
-    
+
     #[test]
     fn test_heap_sort() {
         let mut arr = vec![64, 34, 25, 12, 22, 11, 90];
         heap_sort(&mut arr);
         assert_eq!(arr, vec![11, 12, 22, 25, 34, 64, 90]);
     }
-    
+
     #[test]
     fn test_heap_sort_std() {
         let mut arr = vec![64, 34, 25, 12, 22, 11, 90];
         heap_sort_std(&mut arr);
         assert_eq!(arr, vec![11, 12, 22, 25, 34, 64, 90]);
     }
-    
+
     #[test]
     fn test_top_k_largest() {
         let arr = vec![3, 1, 4, 1, 5, 9, 2, 6, 5];
         let top3 = top_k_largest(&arr, 3);
         assert_eq!(top3, vec![9, 6, 5]);
     }
-    
+
     #[test]
     fn test_top_k_smallest() {
         let arr = vec![3, 1, 4, 1, 5, 9, 2, 6, 5];
         let top3 = top_k_smallest(&arr, 3);
         assert_eq!(top3, vec![1, 1, 2]);
     }
-    
+
     #[test]
     fn test_task_scheduler() {
         let mut scheduler = TaskScheduler::new();
-        
+
         scheduler.add_task(Task {
             id: 1,
             priority: 5,
@@ -566,16 +566,16 @@ mod heap_tests {
             priority: 3,
             name: "Task C".to_string(),
         });
-        
+
         let task1 = scheduler.get_next_task().unwrap();
         assert_eq!(task1.id, 2); // 最高优先级
-        
+
         let task2 = scheduler.get_next_task().unwrap();
         assert_eq!(task2.id, 1);
-        
+
         let task3 = scheduler.get_next_task().unwrap();
         assert_eq!(task3.id, 3);
-        
+
         assert!(!scheduler.has_tasks());
     }
 }
@@ -627,13 +627,13 @@ where
 {
     let mut distances: HashMap<V, W> = HashMap::new();
     let mut heap = BinaryHeap::new();
-    
+
     distances.insert(start.clone(), W::default());
     heap.push(DijkstraNode {
         vertex: start,
         distance: W::default(),
     });
-    
+
     while let Some(DijkstraNode { vertex, distance }) = heap.pop() {
         // 如果当前距离大于已知最短距离，跳过
         if let Some(current_dist) = distances.get(&vertex) {
@@ -641,15 +641,15 @@ where
                 continue;
             }
         }
-        
+
         if let Some(neighbors) = graph.get(&vertex) {
             for edge in neighbors {
                 let new_distance = distance.clone() + edge.weight.clone();
-                
+
                 let is_shorter = distances
                     .get(&edge.to)
                     .map_or(true, |d| new_distance < *d);
-                
+
                 if is_shorter {
                     distances.insert(edge.to.clone(), new_distance.clone());
                     heap.push(DijkstraNode {
@@ -660,7 +660,7 @@ where
             }
         }
     }
-    
+
     distances
 }
 
@@ -677,42 +677,42 @@ where
     let mut distances: HashMap<V, W> = HashMap::new();
     let mut predecessors: HashMap<V, V> = HashMap::new();
     let mut heap = BinaryHeap::new();
-    
+
     distances.insert(start.clone(), W::default());
     heap.push(DijkstraNode {
         vertex: start.clone(),
         distance: W::default(),
     });
-    
+
     while let Some(DijkstraNode { vertex, distance }) = heap.pop() {
         if vertex == end {
             // 重构路径
             let mut path = vec![end.clone()];
             let mut current = end.clone();
-            
+
             while let Some(pred) = predecessors.get(&current) {
                 path.push(pred.clone());
                 current = pred.clone();
             }
-            
+
             path.reverse();
             return Some((distance, path));
         }
-        
+
         if let Some(current_dist) = distances.get(&vertex) {
             if distance > *current_dist {
                 continue;
             }
         }
-        
+
         if let Some(neighbors) = graph.get(&vertex) {
             for edge in neighbors {
                 let new_distance = distance.clone() + edge.weight.clone();
-                
+
                 let is_shorter = distances
                     .get(&edge.to)
                     .map_or(true, |d| new_distance < *d);
-                
+
                 if is_shorter {
                     distances.insert(edge.to.clone(), new_distance.clone());
                     predecessors.insert(edge.to.clone(), vertex.clone());
@@ -724,7 +724,7 @@ where
             }
         }
     }
-    
+
     None
 }
 
@@ -745,10 +745,10 @@ where
 #[cfg(test)]
 mod dijkstra_tests {
     use super::*;
-    
+
     fn create_test_graph() -> HashMap<&'static str, Vec<Edge<&'static str, i32>>> {
         let mut graph = HashMap::new();
-        
+
         graph.insert("A", vec![
             Edge { to: "B", weight: 4 },
             Edge { to: "C", weight: 2 },
@@ -766,38 +766,38 @@ mod dijkstra_tests {
             Edge { to: "E", weight: 2 },
         ]);
         graph.insert("E", vec![]);
-        
+
         graph
     }
-    
+
     #[test]
     fn test_dijkstra() {
         let graph = create_test_graph();
         let distances = dijkstra(&graph, "A");
-        
+
         assert_eq!(distances.get("A"), Some(&0));
         assert_eq!(distances.get("B"), Some(&3));
         assert_eq!(distances.get("C"), Some(&2));
         assert_eq!(distances.get("D"), Some(&7));
         assert_eq!(distances.get("E"), Some(&9));
     }
-    
+
     #[test]
     fn test_dijkstra_with_path() {
         let graph = create_test_graph();
         let result = dijkstra_with_path(&graph, "A", "E");
-        
+
         assert!(result.is_some());
         let (distance, path) = result.unwrap();
         assert_eq!(distance, 9);
         assert_eq!(path, vec!["A", "C", "B", "D", "E"]);
     }
-    
+
     #[tokio::test]
     async fn test_dijkstra_async() {
         let graph = create_test_graph();
         let distances = dijkstra_async(graph, "A").await.unwrap();
-        
+
         assert_eq!(distances.get("E"), Some(&9));
     }
 }
@@ -822,7 +822,7 @@ impl UnionFind {
             count: size,
         }
     }
-    
+
     /// 查找根节点 - 路径压缩
     pub fn find(&mut self, x: usize) -> usize {
         if self.parent[x] != x {
@@ -830,16 +830,16 @@ impl UnionFind {
         }
         self.parent[x]
     }
-    
+
     /// 合并两个集合 - 按秩合并
     pub fn union(&mut self, x: usize, y: usize) -> bool {
         let root_x = self.find(x);
         let root_y = self.find(y);
-        
+
         if root_x == root_y {
             return false; // 已经在同一集合
         }
-        
+
         // 按秩合并
         match self.rank[root_x].cmp(&self.rank[root_y]) {
             Ordering::Less => {
@@ -853,16 +853,16 @@ impl UnionFind {
                 self.rank[root_x] += 1;
             }
         }
-        
+
         self.count -= 1;
         true
     }
-    
+
     /// 判断是否连通
     pub fn connected(&mut self, x: usize, y: usize) -> bool {
         self.find(x) == self.find(y)
     }
-    
+
     /// 获取连通分量数
     pub fn count(&self) -> usize {
         self.count
@@ -873,68 +873,68 @@ impl UnionFind {
 pub fn kruskal(n: usize, mut edges: Vec<(usize, usize, i32)>) -> (i32, Vec<(usize, usize)>) {
     // 按权重排序
     edges.sort_by_key(|e| e.2);
-    
+
     let mut uf = UnionFind::new(n);
     let mut mst = Vec::new();
     let mut total_weight = 0;
-    
+
     for (u, v, w) in edges {
         if uf.union(u, v) {
             mst.push((u, v));
             total_weight += w;
-            
+
             if mst.len() == n - 1 {
                 break; // MST 完成
             }
         }
     }
-    
+
     (total_weight, mst)
 }
 
 /// 判断是否存在环
 pub fn has_cycle(n: usize, edges: &[(usize, usize)]) -> bool {
     let mut uf = UnionFind::new(n);
-    
+
     for &(u, v) in edges {
         if !uf.union(u, v) {
             return true; // 已连通，形成环
         }
     }
-    
+
     false
 }
 
 /// 计算连通分量数
 pub fn count_components(n: usize, edges: &[(usize, usize)]) -> usize {
     let mut uf = UnionFind::new(n);
-    
+
     for &(u, v) in edges {
         uf.union(u, v);
     }
-    
+
     uf.count()
 }
 
 #[cfg(test)]
 mod union_find_tests {
     use super::*;
-    
+
     #[test]
     fn test_union_find_basic() {
         let mut uf = UnionFind::new(5);
-        
+
         assert!(uf.union(0, 1));
         assert!(uf.union(2, 3));
         assert!(uf.connected(0, 1));
         assert!(!uf.connected(0, 2));
-        
+
         assert!(uf.union(1, 2));
         assert!(uf.connected(0, 3));
-        
+
         assert_eq!(uf.count(), 2); // {0,1,2,3} 和 {4}
     }
-    
+
     #[test]
     fn test_kruskal() {
         let edges = vec![
@@ -944,18 +944,18 @@ mod union_find_tests {
             (1, 3, 15),
             (2, 3, 4),
         ];
-        
+
         let (total_weight, mst) = kruskal(4, edges);
         assert_eq!(total_weight, 19);
         assert_eq!(mst.len(), 3);
     }
-    
+
     #[test]
     fn test_has_cycle() {
         assert!(has_cycle(3, &[(0, 1), (1, 2), (2, 0)]));
         assert!(!has_cycle(3, &[(0, 1), (1, 2)]));
     }
-    
+
     #[test]
     fn test_count_components() {
         assert_eq!(count_components(5, &[(0, 1), (2, 3)]), 3);
@@ -976,7 +976,7 @@ pub fn knapsack_01(weights: &[i32], values: &[i32], capacity: i32) -> i32 {
     let n = weights.len();
     let cap = capacity as usize;
     let mut dp = vec![vec![0; cap + 1]; n + 1];
-    
+
     for i in 1..=n {
         for w in 0..=cap {
             if weights[i - 1] as usize <= w {
@@ -988,7 +988,7 @@ pub fn knapsack_01(weights: &[i32], values: &[i32], capacity: i32) -> i32 {
             }
         }
     }
-    
+
     dp[n][cap]
 }
 
@@ -996,14 +996,14 @@ pub fn knapsack_01(weights: &[i32], values: &[i32], capacity: i32) -> i32 {
 pub fn knapsack_01_optimized(weights: &[i32], values: &[i32], capacity: i32) -> i32 {
     let cap = capacity as usize;
     let mut dp = vec![0; cap + 1];
-    
+
     for i in 0..weights.len() {
         // 倒序遍历避免重复使用
         for w in (weights[i] as usize..=cap).rev() {
             dp[w] = dp[w].max(dp[w - weights[i] as usize] + values[i]);
         }
     }
-    
+
     dp[cap]
 }
 
@@ -1016,7 +1016,7 @@ pub fn knapsack_01_with_items(
     let n = weights.len();
     let cap = capacity as usize;
     let mut dp = vec![vec![0; cap + 1]; n + 1];
-    
+
     // 填表
     for i in 1..=n {
         for w in 0..=cap {
@@ -1029,19 +1029,19 @@ pub fn knapsack_01_with_items(
             }
         }
     }
-    
+
     // 回溯找物品
     let mut items = Vec::new();
     let mut w = cap;
     for i in (1..=n).rev() {
-        if w >= weights[i - 1] as usize 
-            && dp[i][w] == dp[i - 1][w - weights[i - 1] as usize] + values[i - 1] 
+        if w >= weights[i - 1] as usize
+            && dp[i][w] == dp[i - 1][w - weights[i - 1] as usize] + values[i - 1]
         {
             items.push(i - 1);
             w -= weights[i - 1] as usize;
         }
     }
-    
+
     items.reverse();
     (dp[n][cap], items)
 }
@@ -1050,14 +1050,14 @@ pub fn knapsack_01_with_items(
 pub fn knapsack_complete(weights: &[i32], values: &[i32], capacity: i32) -> i32 {
     let cap = capacity as usize;
     let mut dp = vec![0; cap + 1];
-    
+
     for i in 0..weights.len() {
         // 正序遍历允许重复使用
         for w in weights[i] as usize..=cap {
             dp[w] = dp[w].max(dp[w - weights[i] as usize] + values[i]);
         }
     }
-    
+
     dp[cap]
 }
 
@@ -1070,35 +1070,35 @@ pub fn knapsack_multiple(
 ) -> i32 {
     let cap = capacity as usize;
     let mut dp = vec![0; cap + 1];
-    
+
     for i in 0..weights.len() {
         let mut num = counts[i];
         let mut k = 1;
-        
+
         // 二进制拆分
         while k <= num {
             let w = weights[i] * k;
             let v = values[i] * k;
-            
+
             for c in (w as usize..=cap).rev() {
                 dp[c] = dp[c].max(dp[c - w as usize] + v);
             }
-            
+
             num -= k;
             k *= 2;
         }
-        
+
         // 处理剩余
         if num > 0 {
             let w = weights[i] * num;
             let v = values[i] * num;
-            
+
             for c in (w as usize..=cap).rev() {
                 dp[c] = dp[c].max(dp[c - w as usize] + v);
             }
         }
     }
-    
+
     dp[cap]
 }
 
@@ -1109,26 +1109,26 @@ pub fn knapsack_grouped(
 ) -> i32 {
     let cap = capacity as usize;
     let mut dp = vec![0; cap + 1];
-    
+
     for group in groups {
         let mut new_dp = dp.clone();
-        
+
         for &(weight, value) in group {
             for w in weight as usize..=cap {
                 new_dp[w] = new_dp[w].max(dp[w - weight as usize] + value);
             }
         }
-        
+
         dp = new_dp;
     }
-    
+
     dp[cap]
 }
 
 #[cfg(test)]
 mod knapsack_tests {
     use super::*;
-    
+
     #[test]
     fn test_knapsack_01() {
         let weights = vec![2, 2, 6, 5, 4];
@@ -1136,30 +1136,30 @@ mod knapsack_tests {
         assert_eq!(knapsack_01(&weights, &values, 10), 15);
         assert_eq!(knapsack_01_optimized(&weights, &values, 10), 15);
     }
-    
+
     #[test]
     fn test_knapsack_01_with_items() {
         let weights = vec![2, 2, 6, 5, 4];
         let values = vec![6, 3, 5, 4, 6];
         let (max_value, items) = knapsack_01_with_items(&weights, &values, 10);
-        
+
         assert_eq!(max_value, 15);
         assert!(items.len() > 0);
-        
+
         // 验证选择的物品
         let total_weight: i32 = items.iter().map(|&i| weights[i]).sum();
         let total_value: i32 = items.iter().map(|&i| values[i]).sum();
         assert!(total_weight <= 10);
         assert_eq!(total_value, 15);
     }
-    
+
     #[test]
     fn test_knapsack_complete() {
         let weights = vec![2, 3, 4];
         let values = vec![3, 4, 5];
         assert_eq!(knapsack_complete(&weights, &values, 10), 15);
     }
-    
+
     #[test]
     fn test_knapsack_multiple() {
         let weights = vec![2, 3, 4];
@@ -1167,7 +1167,7 @@ mod knapsack_tests {
         let counts = vec![2, 3, 1];
         assert_eq!(knapsack_multiple(&weights, &values, &counts, 10), 15);
     }
-    
+
     #[test]
     fn test_knapsack_grouped() {
         let groups = vec![
@@ -1201,6 +1201,6 @@ mod knapsack_tests {
 
 ---
 
-**最后更新**: 2025年10月19日  
-**文档版本**: 1.0.0  
+**最后更新**: 2025年10月19日
+**文档版本**: 1.0.0
 **维护者**: c08_algorithms 团队

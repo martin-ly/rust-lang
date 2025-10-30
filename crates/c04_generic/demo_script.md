@@ -323,7 +323,7 @@ cargo fmt -- --check
 // 在相应的模块文件中添加新功能
 pub fn demonstrate_custom_feature() {
     println!("=== 自定义功能演示 ===");
-    
+
     // 实现您的自定义逻辑
     let result = custom_generic_function::<i32>(42);
     println!("结果: {}", result);
@@ -333,7 +333,7 @@ pub fn demonstrate_custom_feature() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_custom_feature() {
         // 测试逻辑

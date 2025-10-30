@@ -1,11 +1,11 @@
 # Rust 2025 无锁编程 (c05_threads_04)
 
-> **元数据**  
-> 文档编号: c05_threads_04  
-> 创建日期: 2025-01-27  
-> 最后更新: 2025-10-19 (增强版)  
-> 适用版本: Rust 1.90+  
-> 增强内容: ✅ 知识图谱 | ✅ 多维对比 | ✅ Rust 1.90 示例 | ✅ 思维导图  
+> **元数据**
+> 文档编号: c05_threads_04
+> 创建日期: 2025-01-27
+> 最后更新: 2025-10-19 (增强版)
+> 适用版本: Rust 1.90+
+> 增强内容: ✅ 知识图谱 | ✅ 多维对比 | ✅ Rust 1.90 示例 | ✅ 思维导图
 > 状态: ✅ 已完成
 
 ---
@@ -79,35 +79,35 @@ graph TB
     A --> C[内存序]
     A --> D[无锁数据结构]
     A --> E[内存管理]
-    
+
     B --> B1[AtomicU64]
     B --> B2[AtomicPtr]
     B --> B3[AtomicBool]
     B --> B4[CAS操作]
-    
+
     C --> C1[Relaxed]
     C --> C2[Acquire]
     C --> C3[Release]
     C --> C4[AcqRel]
     C --> C5[SeqCst]
-    
+
     D --> D1[SPSC队列]
     D --> D2[MPSC队列]
     D --> D3[无锁栈]
     D --> D4[环形缓冲区]
     D --> D5[哈希表]
     D --> D6[树结构]
-    
+
     E --> E1[引用计数]
     E --> E2[EBR: Epoch-Based Reclamation]
     E --> E3[QSBR: Quiescent State Based Reclamation]
     E --> E4[HP: Hazard Pointers]
-    
+
     D1 -->|适用| F1[单向通信]
     D2 -->|适用| F2[多生产者场景]
     D3 -->|适用| F3[LIFO操作]
     D4 -->|适用| F4[固定大小缓冲]
-    
+
     style A fill:#e1f5ff
     style B fill:#fff4e1
     style C fill:#e8f5e9
@@ -120,22 +120,22 @@ graph TB
 ```mermaid
 graph TD
     Start[选择无锁结构] --> Q1{访问模式?}
-    
+
     Q1 -->|FIFO队列| Q2{生产者数量?}
     Q1 -->|LIFO栈| Stack[无锁栈]
     Q1 -->|随机访问| Q3{数据结构?}
-    
+
     Q2 -->|单生产者| SPSC[SPSC队列]
     Q2 -->|多生产者| MPSC[MPSC队列]
-    
+
     Q3 -->|键值对| HashMap[无锁哈希表]
     Q3 -->|有序数据| BST[无锁BST]
     Q3 -->|固定大小| RingBuffer[环形缓冲区]
-    
+
     SPSC --> Perf1[最高性能<br/>无竞争]
     MPSC --> Perf2[中等性能<br/>有竞争]
     Stack --> Perf3[高性能<br/>CAS开销]
-    
+
     style Start fill:#e1f5ff
     style SPSC fill:#81c784
     style MPSC fill:#fff59d
@@ -254,19 +254,19 @@ impl AtomicCounter {
             value: AtomicI32::new(0),
         }
     }
-    
+
     fn increment(&self) -> i32 {
         self.value.fetch_add(1, Ordering::Relaxed)
     }
-    
+
     fn decrement(&self) -> i32 {
         self.value.fetch_sub(1, Ordering::Relaxed)
     }
-    
+
     fn get(&self) -> i32 {
         self.value.load(Ordering::Relaxed)
     }
-    
+
     fn compare_exchange(&self, current: i32, new: i32) -> Result<i32, i32> {
         self.value.compare_exchange(
             current,
@@ -288,14 +288,14 @@ use std::time::Instant;
 
 fn main() {
     println!("=== Rust 1.90 原子操作性能测试 ===\n");
-    
+
     let num_threads = 8;
     let operations_per_thread = 1_000_000;
-    
+
     // 测试 1: fetch_add 性能
     let counter = Arc::new(AtomicU64::new(0));
     let start = Instant::now();
-    
+
     let mut handles = vec![];
     for _ in 0..num_threads {
         let counter = Arc::clone(&counter);
@@ -306,22 +306,22 @@ fn main() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     let duration = start.elapsed();
     println!("✅ fetch_add 测试:");
     println!("   最终值: {}", counter.load(Ordering::Relaxed));
     println!("   耗时: {:?}", duration);
-    println!("   吞吐量: {:.2}M ops/s\n", 
+    println!("   吞吐量: {:.2}M ops/s\n",
              (num_threads * operations_per_thread) as f64 / duration.as_secs_f64() / 1_000_000.0);
-    
+
     // 测试 2: compare_exchange 性能
     let counter = Arc::new(AtomicU64::new(0));
     let start = Instant::now();
-    
+
     let mut handles = vec![];
     for _ in 0..num_threads {
         let counter = Arc::clone(&counter);
@@ -342,16 +342,16 @@ fn main() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     let duration = start.elapsed();
     println!("✅ compare_exchange 测试:");
     println!("   最终值: {}", counter.load(Ordering::Relaxed));
     println!("   耗时: {:?}", duration);
-    println!("   吞吐量: {:.2}M ops/s", 
+    println!("   吞吐量: {:.2}M ops/s",
              (num_threads * operations_per_thread) as f64 / duration.as_secs_f64() / 1_000_000.0);
 }
 ```
@@ -392,14 +392,14 @@ impl MemoryOrderExample {
             data: AtomicUsize::new(0),
         }
     }
-    
+
     fn set_data(&self, value: usize) {
         // 先设置数据，使用Relaxed序
         self.data.store(value, Ordering::Relaxed);
         // 然后设置标志，使用Release序确保之前的写入不会被重排序
         self.flag.store(true, Ordering::Release);
     }
-    
+
     fn get_data(&self) -> Option<usize> {
         // 使用Acquire序确保在读取标志后，之前的写入不会被重排序
         if self.flag.load(Ordering::Acquire) {
@@ -434,7 +434,7 @@ impl<T> SPSCQueue<T> {
         for _ in 0..capacity {
             buffer.push(UnsafeCell::new(None));
         }
-        
+
         Self {
             buffer,
             head: AtomicUsize::new(0),
@@ -442,39 +442,39 @@ impl<T> SPSCQueue<T> {
             capacity,
         }
     }
-    
+
     fn push(&self, item: T) -> bool {
         let tail = self.tail.load(Ordering::Relaxed);
         let next_tail = (tail + 1) % self.capacity;
-        
+
         // 检查队列是否已满
         if next_tail == self.head.load(Ordering::Acquire) {
             return false;
         }
-        
+
         // 存储数据
         unsafe {
             *self.buffer[tail].get() = Some(item);
         }
-        
+
         // 更新尾指针
         self.tail.store(next_tail, Ordering::Release);
         true
     }
-    
+
     fn pop(&self) -> Option<T> {
         let head = self.head.load(Ordering::Relaxed);
-        
+
         // 检查队列是否为空
         if head == self.tail.load(Ordering::Acquire) {
             return None;
         }
-        
+
         // 读取数据
         let item = unsafe {
             (*self.buffer[head].get()).take()
         };
-        
+
         // 更新头指针
         self.head.store((head + 1) % self.capacity, Ordering::Release);
         item
@@ -516,16 +516,16 @@ impl<T> LockFreeStack<T> {
             head: AtomicPtr::new(ptr::null_mut()),
         }
     }
-    
+
     fn push(&self, item: T) {
         let new_node = Box::into_raw(Box::new(StackNode::new(item)));
-        
+
         loop {
             let current_head = self.head.load(Ordering::Acquire);
             unsafe {
                 (*new_node).next.store(current_head, Ordering::Release);
             }
-            
+
             if self.head.compare_exchange_weak(
                 current_head,
                 new_node,
@@ -536,16 +536,16 @@ impl<T> LockFreeStack<T> {
             }
         }
     }
-    
+
     fn pop(&self) -> Option<T> {
         loop {
             let current_head = self.head.load(Ordering::Acquire);
             if current_head.is_null() {
                 return None;
             }
-            
+
             let next = unsafe { (*current_head).next.load(Ordering::Acquire) };
-            
+
             if self.head.compare_exchange_weak(
                 current_head,
                 next,
@@ -583,7 +583,7 @@ impl<T> RingBuffer<T> {
         for _ in 0..capacity {
             buffer.push(UnsafeCell::new(None));
         }
-        
+
         Self {
             buffer,
             head: AtomicUsize::new(0),
@@ -591,39 +591,39 @@ impl<T> RingBuffer<T> {
             capacity,
         }
     }
-    
+
     fn push(&self, item: T) -> bool {
         let tail = self.tail.load(Ordering::Relaxed);
         let next_tail = (tail + 1) % self.capacity;
-        
+
         // 检查缓冲区是否已满
         if next_tail == self.head.load(Ordering::Acquire) {
             return false;
         }
-        
+
         // 存储数据
         unsafe {
             *self.buffer[tail].get() = Some(item);
         }
-        
+
         // 更新尾指针
         self.tail.store(next_tail, Ordering::Release);
         true
     }
-    
+
     fn pop(&self) -> Option<T> {
         let head = self.head.load(Ordering::Relaxed);
-        
+
         // 检查缓冲区是否为空
         if head == self.tail.load(Ordering::Acquire) {
             return None;
         }
-        
+
         // 读取数据
         let item = unsafe {
             (*self.buffer[head].get()).take()
         };
-        
+
         // 更新头指针
         self.head.store((head + 1) % self.capacity, Ordering::Release);
         item
@@ -674,23 +674,23 @@ where
         for _ in 0..size {
             buckets.push(AtomicPtr::new(ptr::null_mut()));
         }
-        
+
         Self { buckets, size }
     }
-    
+
     fn hash(&self, key: &K) -> usize {
         let mut hasher = DefaultHasher::new();
         key.hash(&mut hasher);
         hasher.finish() as usize % self.size
     }
-    
+
     fn insert(&self, key: K, value: V) -> Option<V> {
         let bucket_index = self.hash(&key);
         let new_node = Box::into_raw(Box::new(HashNode::new(key.clone(), value.clone())));
-        
+
         loop {
             let current_head = self.buckets[bucket_index].load(Ordering::Acquire);
-            
+
             // 检查是否已存在相同的键
             let mut current = current_head;
             while !current.is_null() {
@@ -704,12 +704,12 @@ where
                     current = (*current).next.load(Ordering::Acquire);
                 }
             }
-            
+
             // 插入新节点到链表头部
             unsafe {
                 (*new_node).next.store(current_head, Ordering::Release);
             }
-            
+
             if self.buckets[bucket_index].compare_exchange_weak(
                 current_head,
                 new_node,
@@ -765,10 +765,10 @@ where
             root: AtomicPtr::new(ptr::null_mut()),
         }
     }
-    
+
     fn insert(&self, key: K, value: V) -> Option<V> {
         let new_node = Box::into_raw(Box::new(TreeNode::new(key.clone(), value.clone())));
-        
+
         if self.root.load(Ordering::Acquire).is_null() {
             // 树为空，插入根节点
             if self.root.compare_exchange(
@@ -780,7 +780,7 @@ where
                 return None;
             }
         }
-        
+
         // 递归插入
         self.insert_recursive(self.root.load(Ordering::Acquire), key, value, new_node)
     }
@@ -811,19 +811,19 @@ impl<T> SafeMemoryManager<T> {
             deletion_threshold: threshold,
         }
     }
-    
+
     fn schedule_deletion(&mut self, ptr: *mut T) {
         self.pending_deletions.push(ptr);
-        
+
         if self.pending_deletions.len() >= self.deletion_threshold {
             self.process_deletions();
         }
     }
-    
+
     fn process_deletions(&mut self) {
         // 等待所有线程完成当前操作
         thread::sleep(Duration::from_millis(1));
-        
+
         for ptr in self.pending_deletions.drain(..) {
             if !ptr.is_null() {
                 unsafe {
@@ -853,19 +853,19 @@ impl CacheFriendlyCounter {
         for _ in 0..size {
             counters.push(AtomicUsize::new(0));
         }
-        
+
         // 添加填充以避免伪共享
         let padding = vec![0u8; 64 - std::mem::size_of::<AtomicUsize>()];
-        
+
         Self { counters, padding }
     }
-    
+
     fn increment(&self, index: usize) {
         if let Some(counter) = self.counters.get(index) {
             counter.fetch_add(1, Ordering::Relaxed);
         }
     }
-    
+
     fn get_total(&self) -> usize {
         self.counters.iter()
             .map(|c| c.load(Ordering::Relaxed))
@@ -1034,7 +1034,7 @@ Rust 1.90 的无锁编程技术提供了：
    ```rust
    // ❌ 错误：过度同步
    counter.fetch_add(1, Ordering::SeqCst);
-   
+
    // ✅ 正确：最小必要同步
    counter.fetch_add(1, Ordering::Relaxed);
    ```
@@ -1075,15 +1075,15 @@ Rust 1.90 的无锁编程技术提供了：
 ```mermaid
 graph LR
     A[无锁编程选择] --> B{性能要求?}
-    
+
     B -->|极致性能| C[SPSC/环形缓冲]
     B -->|平衡方案| D[MPSC/无锁栈]
     B -->|功能完整| E[无锁哈希表/BST]
-    
+
     C --> F[复杂度: 低<br/>性能: 极高]
     D --> G[复杂度: 中<br/>性能: 高]
     E --> H[复杂度: 高<br/>性能: 中]
-    
+
     style C fill:#81c784
     style D fill:#fff59d
     style E fill:#ffab91
@@ -1129,8 +1129,8 @@ graph LR
 
 ---
 
-**文档状态**: ✅ 已完成  
-**质量等级**: S级 (卓越)  
-**Rust 1.90 支持**: ✅ 完全支持  
-**实践指导**: ✅ 完整覆盖  
+**文档状态**: ✅ 已完成
+**质量等级**: S级 (卓越)
+**Rust 1.90 支持**: ✅ 完全支持
+**实践指导**: ✅ 完整覆盖
 **增强版本**: ✅ 知识图谱 + 多维对比 + 示例

@@ -1,6 +1,6 @@
 ﻿# Tier 3: Pin 与 Unsafe 参考
 
-> **文档版本**: Rust 1.90+ | **更新日期**: 2025-10-22  
+> **文档版本**: Rust 1.90+ | **更新日期**: 2025-10-22
 > **文档层级**: Tier 3 - 技术参考 | **文档类型**: 📘 深度技术
 
 ---
@@ -8,7 +8,7 @@
 ## 📋 目录
 
 - [Tier 3: Pin 与 Unsafe 参考](#tier-3-pin-与-unsafe-参考)
-  - [� 目录](#-目录)
+  - [📋 目录](#-目录)
   - [🎯 文档说明](#-文档说明)
   - [1. Pin 机制详解](#1-pin-机制详解)
     - [1.1 为什么需要 Pin？](#11-为什么需要-pin)
@@ -83,10 +83,10 @@ pub struct Pin<P> {
 impl<P: Deref> Pin<P> {
     // 安全创建 (仅对 Unpin 类型)
     pub fn new(pointer: P) -> Pin<P> where P::Target: Unpin;
-    
+
     // 不安全创建
     pub unsafe fn new_unchecked(pointer: P) -> Pin<P>;
-    
+
     // 获取引用
     pub fn as_ref(&self) -> Pin<&P::Target>;
 }
@@ -125,10 +125,10 @@ struct NotUnpin {
 impl<'a, T: ?Sized> Pin<&'a mut T> {
     // 安全获取可变引用 (仅 Unpin)
     pub fn get_mut(self) -> &'a mut T where T: Unpin;
-    
+
     // 不安全获取可变引用
     pub unsafe fn get_unchecked_mut(self) -> &'a mut T;
-    
+
     // Map
     pub fn map_unchecked_mut<U, F>(self, func: F) -> Pin<&'a mut U>
     where
@@ -144,7 +144,7 @@ impl<'a, T: ?Sized> Pin<&'a mut T> {
 impl<T> Pin<Box<T>> {
     // 安全创建
     pub fn new(value: T) -> Pin<Box<T>> where T: Unpin;
-    
+
     // 不安全创建
     pub unsafe fn new_unchecked(boxed: Box<T>) -> Pin<Box<T>>;
 }
@@ -159,9 +159,9 @@ impl<T> Pin<Box<T>> {
 ```rust
 pub trait Future {
     type Output;
-    
+
     // Pin<&mut Self> 确保 self 不会被移动
-    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) 
+    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>)
         -> Poll<Self::Output>;
 }
 ```
@@ -190,7 +190,7 @@ impl SelfRefFuture {
             _pin: PhantomPinned,
         }
     }
-    
+
     // 初始化自引用
     unsafe fn init(self: Pin<&mut Self>) {
         let this = self.get_unchecked_mut();
@@ -200,7 +200,7 @@ impl SelfRefFuture {
 
 impl Future for SelfRefFuture {
     type Output = ();
-    
+
     fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<()> {
         Poll::Ready(())
     }
@@ -226,7 +226,7 @@ struct MyFuture<F> {
 
 impl<F: Future> Future for MyFuture<F> {
     type Output = F::Output;
-    
+
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
         let this = self.project(); // 安全地投影
         *this.counter += 1;
@@ -318,11 +318,11 @@ impl SafeWrapper {
         let inner = Box::into_raw(Box::new(value));
         Self { inner }
     }
-    
+
     pub fn get(&self) -> i32 {
         unsafe { *self.inner }
     }
-    
+
     pub fn set(&mut self, value: i32) {
         unsafe { *self.inner = value; }
     }
@@ -347,7 +347,7 @@ unsafe impl Sync for SafeWrapper {}
 
 ```rust
 /// # Safety
-/// 
+///
 /// - `ptr` 必须指向有效内存
 /// - `len` 必须不超过实际长度
 /// - 调用期间 `ptr` 不能被其他线程修改
@@ -401,7 +401,7 @@ impl<F: Future> Future for MyFuture<F> {
 ```rust
 // ✅ 好的 unsafe 用法
 /// # Safety
-/// 
+///
 /// 调用者必须确保 `ptr` 指向有效的 `T`
 pub unsafe fn read_ptr<T>(ptr: *const T) -> T {
     ptr.read()
@@ -471,5 +471,5 @@ cargo +nightly run
 
 ---
 
-**文档维护**: C06 Async Team | **质量评分**: 95/100  
+**文档维护**: C06 Async Team | **质量评分**: 95/100
 **最后更新**: 2025-10-22 | **Rust 版本**: 1.90+

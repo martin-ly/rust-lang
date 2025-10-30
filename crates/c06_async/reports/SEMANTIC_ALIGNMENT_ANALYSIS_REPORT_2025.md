@@ -189,12 +189,12 @@ use tokio::time::{timeout, Duration};
 
 async fn tokio_latest_features() {
     let mut join_set = JoinSet::new();
-    
+
     // 结构化并发
     join_set.spawn(async {
         // 任务逻辑
     });
-    
+
     // 超时控制
     let result = timeout(Duration::from_secs(5), async {
         // 异步操作
@@ -222,7 +222,7 @@ async fn smol_features() {
     let task = Task::spawn(async {
         // 任务逻辑
     });
-    
+
     // 高效定时器
     Timer::after(Duration::from_secs(1)).await;
 }
@@ -358,13 +358,13 @@ prometheus = "0.13"
 
 ```rust
 //! Rust 异步特性实现模块
-//! 
+//!
 //! 本模块实现了当前稳定版本中的异步编程特性，包括：
 //! - 改进的异步性能优化
 //! - 增强的错误处理机制
 //! - 稳定的异步 Traits
 //! - 结构化并发支持
-//! 
+//!
 //! 注意：AsyncDrop、Async Generators 等特性仍在开发中，
 //! 本模块提供了模拟实现以供学习和测试使用。
 ```
@@ -411,7 +411,7 @@ impl ImprovedAsyncResourceManager {
         tasks: Vec<impl Future<Output = Result<()>> + Send + 'static>,
     ) -> Result<Vec<Result<()>>> {
         let mut join_set = JoinSet::new();
-        
+
         for task in tasks {
             join_set.spawn(task);
         }
@@ -440,7 +440,7 @@ mod tests {
     async fn test_performance_improvements() {
         let manager = ImprovedAsyncResourceManager::new(10);
         let start = Instant::now();
-        
+
         // 测试并发性能
         let tasks = (0..100).map(|i| async move {
             let resource = manager.acquire_with_timeout(Duration::from_millis(100)).await?;
@@ -512,6 +512,6 @@ mod tests {
 
 ---
 
-**报告生成时间**: 2025年9月28日  
-**分析范围**: c06_async 完整目录  
+**报告生成时间**: 2025年9月28日
+**分析范围**: c06_async 完整目录
 **建议优先级**: 高 - 需要立即修正语义不对齐问题

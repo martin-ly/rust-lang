@@ -90,10 +90,10 @@ use c06_async::formal_verification;
 async fn main() {
     // 不变式验证
     formal_verification::invariant_verification::demo_concurrent_transfers().await;
-    
+
     // 终止性证明
     formal_verification::termination_proofs::countdown_with_proof(10).await;
-    
+
     // 死锁检测
     formal_verification::deadlock_detection::demo_deadlock_scenario().await;
 }
@@ -134,7 +134,7 @@ use c06_async::async_semantics_theory;
 async fn main() {
     // 运行所有理论示例
     async_semantics_theory::run_all_examples().await;
-    
+
     // 或运行单独的示例
     async_semantics_theory::state_machine_example::demo().await;
     async_semantics_theory::sync_async_equivalence::verify_equivalence().await;
@@ -149,7 +149,7 @@ Future 状态机定义:
 M = (S, s₀, δ, F)
 其中:
 - S: 状态集合
-- s₀: 初始状态  
+- s₀: 初始状态
 - δ: 转换函数 δ: S × Context → Poll<T> × S
 - F: 终止状态集合
 
@@ -178,10 +178,10 @@ use c06_async::async_recursion_analysis;
 async fn main() {
     // 基本异步递归
     async_recursion_analysis::basic_async_recursion::verify_equivalence().await;
-    
+
     // 尾递归优化
     async_recursion_analysis::tail_recursion::verify_all_versions().await;
-    
+
     // 树遍历
     async_recursion_analysis::tree_traversal::verify_equivalence().await;
 }
@@ -193,8 +193,8 @@ async fn main() {
 // 问题: 递归导致无限大小
 // ❌ 错误示例
 async fn fibonacci(n: u64) -> u64 {
-    if n <= 1 { 
-        n 
+    if n <= 1 {
+        n
     } else {
         fibonacci(n-1).await + fibonacci(n-2).await  // 编译错误！
     }
@@ -232,10 +232,10 @@ use c06_async::actor_reactor_patterns;
 async fn main() {
     // Actor 系统示例
     actor_reactor_patterns::simple_actor_system::demo().await;
-    
+
     // Reactor 模式
     actor_reactor_patterns::reactor_pattern::demo().await;
-    
+
     // Tokio 分析
     actor_reactor_patterns::tokio_reactor_analysis::demo_event_loop().await;
 }
@@ -276,13 +276,13 @@ use c06_async::csp_model_comparison;
 async fn main() {
     // 生产者-消费者模式
     csp_model_comparison::producer_consumer::compare().await;
-    
+
     // Select 模式
     csp_model_comparison::select_pattern::compare().await;
-    
+
     // Worker Pool
     csp_model_comparison::worker_pool::compare().await;
-    
+
     // Pipeline
     csp_model_comparison::pipeline::compare().await;
 }

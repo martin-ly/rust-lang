@@ -23,6 +23,7 @@ ecosystem = []  # 启用生态库示例模块
 [dependencies]
 wasm-bindgen = "0.2"
 wasm-bindgen-futures = "0.4"
+js-sys = "0.3"
 web-sys = { version = "0.3", features = [
     "console",
     "Window",
@@ -31,12 +32,15 @@ web-sys = { version = "0.3", features = [
     "HtmlCanvasElement",
     "CanvasRenderingContext2d",
     "Request",
+    "RequestInit",
+    "RequestMode",
     "Response",
     "Headers",
 ] }
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3"
+criterion = { version = "0.5", features = ["html_reports"] }
 
 [profile.release]
 opt-level = "z"      # 优化二进制大小

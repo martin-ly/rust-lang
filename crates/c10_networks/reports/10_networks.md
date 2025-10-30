@@ -112,13 +112,13 @@ impl ProtocolStateMachine {
         table.insert((ProtocolState::Closed, ProtocolEvent::Open), ProtocolState::Listen);
         table.insert((ProtocolState::Listen, ProtocolEvent::Receive), ProtocolState::SynReceived);
         // ... 更多转换规则
-        
+
         Self {
             current_state: ProtocolState::Closed,
             transition_table: table
         }
     }
-    
+
     fn transition(&mut self, event: ProtocolEvent) -> bool {
         if let Some(&new_state) = self.transition_table.get(&(self.current_state, event)) {
             self.current_state = new_state;
@@ -178,7 +178,7 @@ impl Socket {
     fn new(address: SocketAddr) -> Self {
         Self { stream: None, address }
     }
-    
+
     fn bind(&mut self) -> std::io::Result<()> {
         let listener = TcpListener::bind(self.address)?;
         if let Ok((stream, _)) = listener.accept() {
@@ -186,13 +186,13 @@ impl Socket {
         }
         Ok(())
     }
-    
+
     fn connect(&mut self) -> std::io::Result<()> {
         let stream = TcpStream::connect(self.address)?;
         self.stream = Some(stream);
         Ok(())
     }
-    
+
     fn send(&self, data: &[u8]) -> std::io::Result<usize> {
         if let Some(ref stream) = self.stream {
             stream.write(data)
@@ -200,7 +200,7 @@ impl Socket {
             Err(std::io::Error::new(std::io::ErrorKind::NotConnected, "Not connected"))
         }
     }
-    
+
     fn recv(&self, buffer: &mut [u8]) -> std::io::Result<usize> {
         if let Some(ref stream) = self.stream {
             stream.read(buffer)
@@ -231,20 +231,20 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[tokio::main]
 async fn main() {
     let listener = TcpListener::bind("127.0.0.1:8080").await.unwrap();
-    
+
     loop {
         let (mut socket, _) = listener.accept().await.unwrap();
-        
+
         tokio::spawn(async move {
             let mut buf = vec![0; 1024];
-            
+
             loop {
                 let n = match socket.read(&mut buf).await {
                     Ok(n) if n == 0 => return,
                     Ok(n) => n,
                     Err(_) => return,
                 };
-                
+
                 if let Err(_) = socket.write_all(&buf[0..n]).await {
                     return;
                 }
@@ -286,34 +286,34 @@ impl NetworkBuffer {
             write_position: 0
         }
     }
-    
+
     fn write(&mut self, data: &[u8]) -> usize {
         let available_space = self.capacity - self.data.len();
         let write_size = std::cmp::min(available_space, data.len());
-        
+
         for i in 0..write_size {
             self.data.push_back(data[i]);
         }
-        
+
         write_size
     }
-    
+
     fn read(&mut self, buffer: &mut [u8]) -> usize {
         let read_size = std::cmp::min(self.data.len(), buffer.len());
-        
+
         for i in 0..read_size {
             if let Some(byte) = self.data.pop_front() {
                 buffer[i] = byte;
             }
         }
-        
+
         read_size
     }
-    
+
     fn available_read(&self) -> usize {
         self.data.len()
     }
-    
+
     fn available_write(&self) -> usize {
         self.capacity - self.data.len()
     }
@@ -367,28 +367,28 @@ impl HttpRequest {
             body: Vec::new()
         }
     }
-    
+
     fn add_header(&mut self, key: String, value: String) {
         self.headers.insert(key, value);
     }
-    
+
     fn set_body(&mut self, body: Vec<u8>) {
         self.body = body;
     }
-    
+
     fn to_string(&self) -> String {
         let mut request = format!("{:?} {} HTTP/1.1\r\n", self.method, self.uri);
-        
+
         for (key, value) in &self.headers {
             request.push_str(&format!("{}: {}\r\n", key, value));
         }
-        
+
         request.push_str("\r\n");
-        
+
         if !self.body.is_empty() {
             request.push_str(&String::from_utf8_lossy(&self.body));
         }
-        
+
         request
     }
 }
@@ -410,29 +410,29 @@ impl HttpResponse {
             body: Vec::new()
         }
     }
-    
+
     fn add_header(&mut self, key: String, value: String) {
         self.headers.insert(key, value);
     }
-    
+
     fn set_body(&mut self, body: Vec<u8>) {
         self.body = body.clone();
         self.add_header("Content-Length".to_string(), body.len().to_string());
     }
-    
+
     fn to_string(&self) -> String {
         let mut response = format!("HTTP/1.1 {} {}\r\n", self.status_code, self.status_text);
-        
+
         for (key, value) in &self.headers {
             response.push_str(&format!("{}: {}\r\n", key, value));
         }
-        
+
         response.push_str("\r\n");
-        
+
         if !self.body.is_empty() {
             response.push_str(&String::from_utf8_lossy(&self.body));
         }
-        
+
         response
     }
 }
@@ -485,20 +485,20 @@ impl WebSocketFrame {
             payload
         }
     }
-    
+
     fn encode(&self) -> Vec<u8> {
         let mut frame = Vec::new();
-        
+
         // First byte: FIN + RSV + Opcode
         let first_byte = if self.fin { 0x80 } else { 0x00 };
         let first_byte = first_byte | (self.opcode as u8);
         frame.push(first_byte);
-        
+
         // Second byte: MASK + Payload length
         let second_byte = if self.mask { 0x80 } else { 0x00 };
         let second_byte = second_byte | (self.payload_length as u8);
         frame.push(second_byte);
-        
+
         // Extended payload length
         if self.payload_length > 125 {
             if self.payload_length <= 65535 {
@@ -509,25 +509,25 @@ impl WebSocketFrame {
                 frame.extend_from_slice(&self.payload_length.to_be_bytes());
             }
         }
-        
+
         // Masking key
         if self.mask {
             if let Some(key) = self.masking_key {
                 frame.extend_from_slice(&key);
             }
         }
-        
+
         // Payload
         frame.extend_from_slice(&self.payload);
-        
+
         frame
     }
-    
+
     fn decode(data: &[u8]) -> Result<Self, String> {
         if data.len() < 2 {
             return Err("Frame too short".to_string());
         }
-        
+
         let fin = (data[0] & 0x80) != 0;
         let opcode = match data[0] & 0x0F {
             0x0 => WebSocketOpcode::Continuation,
@@ -538,13 +538,13 @@ impl WebSocketFrame {
             0xA => WebSocketOpcode::Pong,
             _ => return Err("Unknown opcode".to_string())
         };
-        
+
         let mask = (data[1] & 0x80) != 0;
         let payload_length = data[1] & 0x7F;
-        
+
         let mut offset = 2;
         let mut actual_length = payload_length as u64;
-        
+
         if payload_length == 126 {
             if data.len() < 4 {
                 return Err("Frame too short for extended length".to_string());
@@ -561,7 +561,7 @@ impl WebSocketFrame {
             ]);
             offset += 8;
         }
-        
+
         let mut masking_key = None;
         if mask {
             if data.len() < offset + 4 {
@@ -570,13 +570,13 @@ impl WebSocketFrame {
             masking_key = Some([data[offset], data[offset + 1], data[offset + 2], data[offset + 3]]);
             offset += 4;
         }
-        
+
         if data.len() < offset + actual_length as usize {
             return Err("Frame too short for payload".to_string());
         }
-        
+
         let mut payload = data[offset..offset + actual_length as usize].to_vec();
-        
+
         // Unmask payload if necessary
         if mask {
             if let Some(key) = masking_key {
@@ -585,7 +585,7 @@ impl WebSocketFrame {
                 }
             }
         }
-        
+
         Ok(WebSocketFrame {
             fin,
             opcode,
@@ -616,7 +616,7 @@ use std::io::{Cursor, Read, Write};
 
 trait ProtocolParser {
     type Packet;
-    
+
     fn parse(&self, data: &[u8]) -> Result<Self::Packet, String>;
     fn serialize(&self, packet: &Self::Packet) -> Result<Vec<u8>, String>;
 }
@@ -635,15 +635,15 @@ struct HttpPacket {
 
 impl ProtocolParser for HttpParser {
     type Packet = HttpPacket;
-    
+
     fn parse(&self, data: &[u8]) -> Result<Self::Packet, String> {
         let mut cursor = Cursor::new(data);
         let mut line = String::new();
-        
+
         // Read first line
         cursor.read_line(&mut line).map_err(|e| e.to_string())?;
         let first_line = line.trim();
-        
+
         let mut packet = HttpPacket {
             is_request: false,
             method: None,
@@ -652,7 +652,7 @@ impl ProtocolParser for HttpParser {
             headers: Vec::new(),
             body: Vec::new()
         };
-        
+
         // Parse first line
         let parts: Vec<&str> = first_line.split_whitespace().collect();
         if parts.len() >= 3 {
@@ -667,35 +667,35 @@ impl ProtocolParser for HttpParser {
                 packet.uri = Some(parts[1].to_string());
             }
         }
-        
+
         // Read headers
         loop {
             line.clear();
             cursor.read_line(&mut line).map_err(|e| e.to_string())?;
             let header_line = line.trim();
-            
+
             if header_line.is_empty() {
                 break;
             }
-            
+
             if let Some(colon_pos) = header_line.find(':') {
                 let key = header_line[..colon_pos].trim().to_string();
                 let value = header_line[colon_pos + 1..].trim().to_string();
                 packet.headers.push((key, value));
             }
         }
-        
+
         // Read body
         let mut body = Vec::new();
         cursor.read_to_end(&mut body).map_err(|e| e.to_string())?;
         packet.body = body;
-        
+
         Ok(packet)
     }
-    
+
     fn serialize(&self, packet: &Self::Packet) -> Result<Vec<u8>, String> {
         let mut data = Vec::new();
-        
+
         // Write first line
         if packet.is_request {
             if let (Some(ref method), Some(ref uri)) = (&packet.method, &packet.uri) {
@@ -706,18 +706,18 @@ impl ProtocolParser for HttpParser {
                 writeln!(data, "HTTP/1.1 {} OK", status_code).map_err(|e| e.to_string())?;
             }
         }
-        
+
         // Write headers
         for (key, value) in &packet.headers {
             writeln!(data, "{}: {}", key, value).map_err(|e| e.to_string())?;
         }
-        
+
         // Write empty line
         writeln!(data).map_err(|e| e.to_string())?;
-        
+
         // Write body
         data.extend_from_slice(&packet.body);
-        
+
         Ok(data)
     }
 }
@@ -763,15 +763,15 @@ impl Connection {
             is_active: true
         }
     }
-    
+
     fn is_expired(&self, max_age: Duration) -> bool {
         self.created_at.elapsed() > max_age
     }
-    
+
     fn is_idle(&self, max_idle: Duration) -> bool {
         self.last_used.elapsed() > max_idle
     }
-    
+
     fn mark_used(&mut self) {
         self.last_used = Instant::now();
     }
@@ -795,29 +795,29 @@ impl ConnectionPool {
             next_id: Arc::new(Mutex::new(0))
         }
     }
-    
+
     fn get_connection(&self) -> Option<Connection> {
         let mut connections = self.connections.lock().unwrap();
-        
+
         // Remove expired and idle connections
         connections.retain(|conn| {
             !conn.is_expired(self.max_age) && !conn.is_idle(self.max_idle)
         });
-        
+
         // Return an available connection
         connections.pop_front()
     }
-    
+
     fn return_connection(&self, mut connection: Connection) {
         connection.mark_used();
-        
+
         let mut connections = self.connections.lock().unwrap();
-        
+
         if connections.len() < self.max_size {
             connections.push_back(connection);
         }
     }
-    
+
     fn create_connection(&self) -> Connection {
         let mut next_id = self.next_id.lock().unwrap();
         let id = *next_id;
@@ -861,30 +861,30 @@ impl FlowController {
             bytes_sent: 0
         }
     }
-    
+
     fn can_send(&mut self, data_size: usize) -> bool {
         let now = Instant::now();
         let time_elapsed = now.duration_since(self.last_send_time).as_secs_f64();
-        
+
         // Check rate limit
         let max_bytes = (self.rate_limit * time_elapsed) as usize;
         if self.bytes_sent >= max_bytes {
             return false;
         }
-        
+
         // Check window size
         if data_size > self.congestion_window {
             return false;
         }
-        
+
         true
     }
-    
+
     fn on_send(&mut self, data_size: usize) {
         self.bytes_sent += data_size;
         self.last_send_time = Instant::now();
     }
-    
+
     fn on_ack(&mut self) {
         // Increase congestion window (slow start)
         self.congestion_window = std::cmp::min(
@@ -892,7 +892,7 @@ impl FlowController {
             self.window_size
         );
     }
-    
+
     fn on_timeout(&mut self) {
         // Decrease congestion window (congestion avoidance)
         self.congestion_window = std::cmp::max(
@@ -900,7 +900,7 @@ impl FlowController {
             1
         );
     }
-    
+
     fn reset_rate_limit(&mut self) {
         self.bytes_sent = 0;
         self.last_send_time = Instant::now();
@@ -949,7 +949,7 @@ impl Server {
             is_healthy: true
         }
     }
-    
+
     fn get_load(&self) -> f64 {
         self.current_connections as f64 / self.weight as f64
     }
@@ -977,27 +977,27 @@ impl LoadBalancer {
             current_index: Arc::new(Mutex::new(0))
         }
     }
-    
+
     fn add_server(&self, server: Server) {
         let mut servers = self.servers.lock().unwrap();
         servers.push(server);
     }
-    
+
     fn remove_server(&self, server_id: &str) {
         let mut servers = self.servers.lock().unwrap();
         servers.retain(|s| s.id != server_id);
     }
-    
+
     fn select_server(&self) -> Option<Server> {
         let servers = self.servers.lock().unwrap();
         let healthy_servers: Vec<&Server> = servers.iter()
             .filter(|s| s.is_healthy)
             .collect();
-        
+
         if healthy_servers.is_empty() {
             return None;
         }
-        
+
         match self.algorithm {
             LoadBalancingAlgorithm::RoundRobin => {
                 let mut index = self.current_index.lock().unwrap();
@@ -1020,14 +1020,14 @@ impl LoadBalancer {
             _ => None
         }
     }
-    
+
     fn mark_server_unhealthy(&self, server_id: &str) {
         let mut servers = self.servers.lock().unwrap();
         if let Some(server) = servers.iter_mut().find(|s| s.id == server_id) {
             server.is_healthy = false;
         }
     }
-    
+
     fn mark_server_healthy(&self, server_id: &str) {
         let mut servers = self.servers.lock().unwrap();
         if let Some(server) = servers.iter_mut().find(|s| s.id == server_id) {
@@ -1067,16 +1067,16 @@ impl EncryptionAlgorithm for XorCipher {
         if key.is_empty() {
             return Err("Key cannot be empty".to_string());
         }
-        
+
         let mut ciphertext = Vec::new();
         for (i, &byte) in plaintext.iter().enumerate() {
             let key_byte = key[i % key.len()];
             ciphertext.push(byte ^ key_byte);
         }
-        
+
         Ok(ciphertext)
     }
-    
+
     fn decrypt(&self, ciphertext: &[u8], key: &[u8]) -> Result<Vec<u8>, String> {
         // XOR cipher is symmetric
         self.encrypt(ciphertext, key)
@@ -1092,11 +1092,11 @@ impl SecureChannel {
     fn new(algorithm: Box<dyn EncryptionAlgorithm>, key: Vec<u8>) -> Self {
         Self { algorithm, key }
     }
-    
+
     fn send(&self, data: &[u8]) -> Result<Vec<u8>, String> {
         self.algorithm.encrypt(data, &self.key)
     }
-    
+
     fn receive(&self, data: &[u8]) -> Result<Vec<u8>, String> {
         self.algorithm.decrypt(data, &self.key)
     }
@@ -1141,27 +1141,27 @@ impl DigitalSignature {
     fn new() -> Self {
         Self { key_pair: KeyPair::generate() }
     }
-    
+
     fn sign(&self, message: &[u8]) -> Vec<u8> {
         // Simplified signature generation
         let mut signature = Vec::new();
         signature.extend_from_slice(&self.key_pair.private_key);
         signature.extend_from_slice(message);
-        
+
         // Simple hash-like operation
         for &byte in &signature {
             signature.push(byte.wrapping_add(1));
         }
-        
+
         signature
     }
-    
+
     fn verify(&self, message: &[u8], signature: &[u8]) -> bool {
         // Simplified signature verification
         let expected_signature = self.sign(message);
         signature == expected_signature
     }
-    
+
     fn get_public_key(&self) -> &[u8] {
         &self.key_pair.public_key
     }
@@ -1187,18 +1187,18 @@ impl Certificate {
             signature: Vec::new()
         }
     }
-    
+
     fn is_valid(&self, current_time: u64) -> bool {
         current_time >= self.valid_from && current_time <= self.valid_until
     }
-    
+
     fn sign(&mut self, signer: &DigitalSignature) {
-        let data = format!("{}:{}:{}:{}:{}", 
-            self.issuer, self.subject, self.valid_from, 
+        let data = format!("{}:{}:{}:{}:{}",
+            self.issuer, self.subject, self.valid_from,
             self.valid_until, String::from_utf8_lossy(&self.public_key));
         self.signature = signer.sign(data.as_bytes());
     }
-    
+
     fn verify(&self, signer_public_key: &[u8]) -> bool {
         // Simplified verification
         self.public_key == signer_public_key

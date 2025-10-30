@@ -1,7 +1,7 @@
 ﻿# 💻 Rust 1.90 算法与数据结构 - 实战示例集
 
-> **版本**: Rust 1.90 Edition 2024  
-> **创建日期**: 2025-10-20  
+> **版本**: Rust 1.90 Edition 2024
+> **创建日期**: 2025-10-20
 > **代码总量**: ~850行可运行代码
 
 ---
@@ -9,7 +9,7 @@
 ## 📋 目录
 
 - [💻 Rust 1.90 算法与数据结构 - 实战示例集](#-rust-190-算法与数据结构---实战示例集)
-  - [� 目录](#-目录)
+  - [📋 目录](#-目录)
   - [📊 数据结构实现](#-数据结构实现)
     - [示例1: 自定义栈与队列](#示例1-自定义栈与队列)
     - [示例2: LRU缓存 (Rust 1.90特性)](#示例2-lru缓存-rust-190特性)
@@ -42,23 +42,23 @@ impl<T> Stack<T> {
     fn new() -> Self {
         Self { items: Vec::new() }
     }
-    
+
     fn push(&mut self, item: T) {
         self.items.push(item);
     }
-    
+
     fn pop(&mut self) -> Option<T> {
         self.items.pop()
     }
-    
+
     fn peek(&self) -> Option<&T> {
         self.items.last()
     }
-    
+
     fn is_empty(&self) -> bool {
         self.items.is_empty()
     }
-    
+
     fn len(&self) -> usize {
         self.items.len()
     }
@@ -76,23 +76,23 @@ impl<T> Queue<T> {
     fn new() -> Self {
         Self { items: VecDeque::new() }
     }
-    
+
     fn enqueue(&mut self, item: T) {
         self.items.push_back(item);
     }
-    
+
     fn dequeue(&mut self) -> Option<T> {
         self.items.pop_front()
     }
-    
+
     fn peek(&self) -> Option<&T> {
         self.items.front()
     }
-    
+
     fn is_empty(&self) -> bool {
         self.items.is_empty()
     }
-    
+
     fn len(&self) -> usize {
         self.items.len()
     }
@@ -101,14 +101,14 @@ impl<T> Queue<T> {
 /// 应用: 括号匹配
 fn is_balanced_parentheses(s: &str) -> bool {
     let mut stack = Stack::new();
-    
+
     for ch in s.chars() {
         match ch {
             '(' | '[' | '{' => stack.push(ch),
             ')' | ']' | '}' => {
                 match (stack.pop(), ch) {
-                    (Some('('), ')') | 
-                    (Some('['), ']') | 
+                    (Some('('), ')') |
+                    (Some('['), ']') |
                     (Some('{'), '}') => continue,
                     _ => return false,
                 }
@@ -116,7 +116,7 @@ fn is_balanced_parentheses(s: &str) -> bool {
             _ => {}
         }
     }
-    
+
     stack.is_empty()
 }
 
@@ -128,7 +128,7 @@ fn main() {
     stack.push(3);
     println!("Stack: {:?}", stack);
     println!("Pop: {:?}", stack.pop());
-    
+
     // 队列测试
     let mut queue = Queue::new();
     queue.enqueue("first");
@@ -136,7 +136,7 @@ fn main() {
     queue.enqueue("third");
     println!("\nQueue: {:?}", queue);
     println!("Dequeue: {:?}", queue.dequeue());
-    
+
     // 括号匹配测试
     let test_cases = vec![
         "()",
@@ -145,7 +145,7 @@ fn main() {
         "([)]",
         "{[]}",
     ];
-    
+
     println!("\n=== Parentheses Matching ===");
     for case in test_cases {
         println!("{:?} -> {}", case, is_balanced_parentheses(case));
@@ -171,7 +171,7 @@ struct Node<K, V> {
 }
 
 /// LRU缓存实现
-struct LRUCache<K, V> 
+struct LRUCache<K, V>
 where
     K: Clone + Eq + std::hash::Hash,
     V: Clone,
@@ -195,7 +195,7 @@ where
             tail: None,
         }
     }
-    
+
     fn get(&mut self, key: &K) -> Option<V> {
         if let Some(node) = self.map.get(key) {
             let value = node.borrow().value.clone();
@@ -206,7 +206,7 @@ where
             None
         }
     }
-    
+
     fn put(&mut self, key: K, value: V) {
         if let Some(node) = self.map.get(&key) {
             // 更新值
@@ -220,10 +220,10 @@ where
                 prev: None,
                 next: None,
             }));
-            
+
             self.add_to_front(Rc::clone(&node));
             self.map.insert(key, node);
-            
+
             // 检查容量
             if self.map.len() > self.capacity {
                 if let Some(tail) = self.tail.take() {
@@ -234,12 +234,12 @@ where
             }
         }
     }
-    
+
     fn move_to_front(&mut self, node: Rc<RefCell<Node<K, V>>>) {
         self.remove_node(Rc::clone(&node));
         self.add_to_front(node);
     }
-    
+
     fn add_to_front(&mut self, node: Rc<RefCell<Node<K, V>>>) {
         if let Some(head) = self.head.take() {
             node.borrow_mut().next = Some(Rc::clone(&head));
@@ -251,11 +251,11 @@ where
             self.tail = Some(node);
         }
     }
-    
+
     fn remove_node(&mut self, node: Rc<RefCell<Node<K, V>>>) {
         let prev = node.borrow().prev.clone();
         let next = node.borrow().next.clone();
-        
+
         match (prev, next) {
             (Some(p), Some(n)) => {
                 p.borrow_mut().next = Some(Rc::clone(&n));
@@ -274,7 +274,7 @@ where
                 self.tail = None;
             }
         }
-        
+
         node.borrow_mut().prev = None;
         node.borrow_mut().next = None;
     }
@@ -282,11 +282,11 @@ where
 
 fn main() {
     let mut cache = LRUCache::new(2);
-    
+
     cache.put(1, "one");
     cache.put(2, "two");
     println!("Get 1: {:?}", cache.get(&1)); // Some("one")
-    
+
     cache.put(3, "three"); // 驱逐key 2
     println!("Get 2: {:?}", cache.get(&2)); // None
     println!("Get 3: {:?}", cache.get(&3)); // Some("three")
@@ -317,7 +317,7 @@ impl Trie {
     fn new() -> Self {
         Self::default()
     }
-    
+
     /// 插入单词
     fn insert(&mut self, word: &str) {
         let mut node = &mut self.root;
@@ -326,19 +326,19 @@ impl Trie {
         }
         node.is_end = true;
     }
-    
+
     /// 搜索单词
     fn search(&self, word: &str) -> bool {
         self.find_node(word)
             .map(|node| node.is_end)
             .unwrap_or(false)
     }
-    
+
     /// 前缀匹配
     fn starts_with(&self, prefix: &str) -> bool {
         self.find_node(prefix).is_some()
     }
-    
+
     /// 查找节点
     fn find_node(&self, prefix: &str) -> Option<&TrieNode> {
         let mut node = &self.root;
@@ -347,7 +347,7 @@ impl Trie {
         }
         Some(node)
     }
-    
+
     /// 自动补全
     fn autocomplete(&self, prefix: &str) -> Vec<String> {
         let mut results = Vec::new();
@@ -356,12 +356,12 @@ impl Trie {
         }
         results
     }
-    
+
     fn collect_words(&self, node: &TrieNode, current: String, results: &mut Vec<String>) {
         if node.is_end {
             results.push(current.clone());
         }
-        
+
         for (&ch, child) in &node.children {
             let mut new_word = current.clone();
             new_word.push(ch);
@@ -372,20 +372,20 @@ impl Trie {
 
 fn main() {
     let mut trie = Trie::new();
-    
+
     // 插入单词
     let words = vec!["apple", "app", "application", "apply", "banana"];
     for word in words {
         trie.insert(word);
     }
-    
+
     // 搜索
     println!("Search 'app': {}", trie.search("app"));
     println!("Search 'appl': {}", trie.search("appl"));
-    
+
     // 前缀匹配
     println!("Starts with 'app': {}", trie.starts_with("app"));
-    
+
     // 自动补全
     println!("Autocomplete 'app': {:?}", trie.autocomplete("app"));
 }
@@ -403,7 +403,7 @@ fn quick_sort<T: Ord>(arr: &mut [T]) {
     if arr.len() <= 1 {
         return;
     }
-    
+
     let pivot_index = partition(arr);
     quick_sort(&mut arr[..pivot_index]);
     quick_sort(&mut arr[pivot_index + 1..]);
@@ -413,7 +413,7 @@ fn partition<T: Ord>(arr: &mut [T]) -> usize {
     let len = arr.len();
     let pivot_index = len / 2;
     arr.swap(pivot_index, len - 1);
-    
+
     let mut i = 0;
     for j in 0..len - 1 {
         if arr[j] < arr[len - 1] {
@@ -421,7 +421,7 @@ fn partition<T: Ord>(arr: &mut [T]) -> usize {
             i += 1;
         }
     }
-    
+
     arr.swap(i, len - 1);
     i
 }
@@ -431,11 +431,11 @@ fn merge_sort<T: Ord + Clone>(arr: &mut [T]) {
     if arr.len() <= 1 {
         return;
     }
-    
+
     let mid = arr.len() / 2;
     merge_sort(&mut arr[..mid]);
     merge_sort(&mut arr[mid..]);
-    
+
     let mut temp = arr.to_vec();
     merge(&arr[..mid], &arr[mid..], &mut temp);
     arr.copy_from_slice(&temp);
@@ -443,7 +443,7 @@ fn merge_sort<T: Ord + Clone>(arr: &mut [T]) {
 
 fn merge<T: Ord + Clone>(left: &[T], right: &[T], result: &mut [T]) {
     let (mut i, mut j, mut k) = (0, 0, 0);
-    
+
     while i < left.len() && j < right.len() {
         if left[i] <= right[j] {
             result[k] = left[i].clone();
@@ -454,7 +454,7 @@ fn merge<T: Ord + Clone>(left: &[T], right: &[T], result: &mut [T]) {
         }
         k += 1;
     }
-    
+
     result[k..k + left.len() - i].clone_from_slice(&left[i..]);
     result[k + left.len() - i..].clone_from_slice(&right[j..]);
 }
@@ -462,12 +462,12 @@ fn merge<T: Ord + Clone>(left: &[T], right: &[T], result: &mut [T]) {
 /// 堆排序
 fn heap_sort<T: Ord>(arr: &mut [T]) {
     let len = arr.len();
-    
+
     // 构建最大堆
     for i in (0..len / 2).rev() {
         heapify(arr, len, i);
     }
-    
+
     // 排序
     for i in (1..len).rev() {
         arr.swap(0, i);
@@ -479,15 +479,15 @@ fn heapify<T: Ord>(arr: &mut [T], n: usize, i: usize) {
     let mut largest = i;
     let left = 2 * i + 1;
     let right = 2 * i + 2;
-    
+
     if left < n && arr[left] > arr[largest] {
         largest = left;
     }
-    
+
     if right < n && arr[right] > arr[largest] {
         largest = right;
     }
-    
+
     if largest != i {
         arr.swap(i, largest);
         heapify(arr, n, largest);
@@ -498,11 +498,11 @@ fn main() {
     let mut data1 = vec![64, 34, 25, 12, 22, 11, 90];
     quick_sort(&mut data1);
     println!("QuickSort: {:?}", data1);
-    
+
     let mut data2 = vec![64, 34, 25, 12, 22, 11, 90];
     merge_sort(&mut data2);
     println!("MergeSort: {:?}", data2);
-    
+
     let mut data3 = vec![64, 34, 25, 12, 22, 11, 90];
     heap_sort(&mut data3);
     println!("HeapSort: {:?}", data3);
@@ -518,17 +518,17 @@ fn main() {
 fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
     let mut left = 0;
     let mut right = arr.len();
-    
+
     while left < right {
         let mid = left + (right - left) / 2;
-        
+
         match arr[mid].cmp(target) {
             std::cmp::Ordering::Equal => return Some(mid),
             std::cmp::Ordering::Less => left = mid + 1,
             std::cmp::Ordering::Greater => right = mid,
         }
     }
-    
+
     None
 }
 
@@ -537,10 +537,10 @@ fn binary_search_first<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
     let mut left = 0;
     let mut right = arr.len();
     let mut result = None;
-    
+
     while left < right {
         let mid = left + (right - left) / 2;
-        
+
         match arr[mid].cmp(target) {
             std::cmp::Ordering::Equal => {
                 result = Some(mid);
@@ -550,7 +550,7 @@ fn binary_search_first<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
             std::cmp::Ordering::Greater => right = mid,
         }
     }
-    
+
     result
 }
 
@@ -559,10 +559,10 @@ fn binary_search_last<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
     let mut left = 0;
     let mut right = arr.len();
     let mut result = None;
-    
+
     while left < right {
         let mid = left + (right - left) / 2;
-        
+
         match arr[mid].cmp(target) {
             std::cmp::Ordering::Equal => {
                 result = Some(mid);
@@ -572,13 +572,13 @@ fn binary_search_last<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
             std::cmp::Ordering::Greater => right = mid,
         }
     }
-    
+
     result
 }
 
 fn main() {
     let arr = vec![1, 2, 2, 2, 3, 4, 5];
-    
+
     println!("Binary search for 2: {:?}", binary_search(&arr, &2));
     println!("First 2: {:?}", binary_search_first(&arr, &2));
     println!("Last 2: {:?}", binary_search_last(&arr, &2));
@@ -600,7 +600,7 @@ type WeightedGraph = HashMap<usize, Vec<(usize, usize)>>;
 fn dfs_recursive(graph: &Graph, start: usize, visited: &mut HashSet<usize>) {
     visited.insert(start);
     println!("Visit: {}", start);
-    
+
     if let Some(neighbors) = graph.get(&start) {
         for &neighbor in neighbors {
             if !visited.contains(&neighbor) {
@@ -614,13 +614,13 @@ fn dfs_recursive(graph: &Graph, start: usize, visited: &mut HashSet<usize>) {
 fn bfs(graph: &Graph, start: usize) {
     let mut visited = HashSet::new();
     let mut queue = VecDeque::new();
-    
+
     queue.push_back(start);
     visited.insert(start);
-    
+
     while let Some(node) = queue.pop_front() {
         println!("Visit: {}", node);
-        
+
         if let Some(neighbors) = graph.get(&node) {
             for &neighbor in neighbors {
                 if !visited.contains(&neighbor) {
@@ -654,23 +654,23 @@ impl PartialOrd for State {
 fn dijkstra(graph: &WeightedGraph, start: usize, end: usize) -> Option<usize> {
     let mut dist = HashMap::new();
     let mut heap = BinaryHeap::new();
-    
+
     dist.insert(start, 0);
     heap.push(State { cost: 0, node: start });
-    
+
     while let Some(State { cost, node }) = heap.pop() {
         if node == end {
             return Some(cost);
         }
-        
+
         if cost > *dist.get(&node).unwrap_or(&usize::MAX) {
             continue;
         }
-        
+
         if let Some(neighbors) = graph.get(&node) {
             for &(next_node, weight) in neighbors {
                 let next_cost = cost + weight;
-                
+
                 if next_cost < *dist.get(&next_node).unwrap_or(&usize::MAX) {
                     dist.insert(next_node, next_cost);
                     heap.push(State { cost: next_cost, node: next_node });
@@ -678,7 +678,7 @@ fn dijkstra(graph: &WeightedGraph, start: usize, end: usize) -> Option<usize> {
             }
         }
     }
-    
+
     None
 }
 
@@ -689,21 +689,21 @@ fn main() {
     graph.insert(1, vec![0, 3]);
     graph.insert(2, vec![0, 3]);
     graph.insert(3, vec![1, 2]);
-    
+
     println!("=== DFS ===");
     let mut visited = HashSet::new();
     dfs_recursive(&graph, 0, &mut visited);
-    
+
     println!("\n=== BFS ===");
     bfs(&graph, 0);
-    
+
     // 加权图
     let mut weighted_graph = WeightedGraph::new();
     weighted_graph.insert(0, vec![(1, 4), (2, 1)]);
     weighted_graph.insert(1, vec![(3, 1)]);
     weighted_graph.insert(2, vec![(1, 2), (3, 5)]);
     weighted_graph.insert(3, vec![]);
-    
+
     println!("\n=== Dijkstra ===");
     if let Some(dist) = dijkstra(&weighted_graph, 0, 3) {
         println!("Shortest path from 0 to 3: {}", dist);
@@ -725,10 +725,10 @@ fn parallel_quick_sort<T: Ord + Send>(arr: &mut [T]) {
     if arr.len() <= 1 {
         return;
     }
-    
+
     let pivot_index = partition(arr);
     let (left, right) = arr.split_at_mut(pivot_index);
-    
+
     rayon::join(
         || parallel_quick_sort(left),
         || parallel_quick_sort(&mut right[1..])
@@ -739,7 +739,7 @@ fn partition<T: Ord>(arr: &mut [T]) -> usize {
     let len = arr.len();
     let pivot_index = len / 2;
     arr.swap(pivot_index, len - 1);
-    
+
     let mut i = 0;
     for j in 0..len - 1 {
         if arr[j] < arr[len - 1] {
@@ -747,7 +747,7 @@ fn partition<T: Ord>(arr: &mut [T]) -> usize {
             i += 1;
         }
     }
-    
+
     arr.swap(i, len - 1);
     i
 }
@@ -760,11 +760,11 @@ fn parallel_search<T: PartialEq + Sync>(arr: &[T], target: &T) -> Option<usize> 
 
 fn main() {
     let mut data: Vec<i32> = (0..1000000).rev().collect();
-    
+
     // 并行排序
     parallel_quick_sort(&mut data);
     println!("Sorted first 10: {:?}", &data[..10]);
-    
+
     // 并行搜索
     if let Some(index) = parallel_search(&data, &500000) {
         println!("Found 500000 at index: {}", index);
@@ -804,7 +804,7 @@ fn word_count(text: &str) -> std::collections::HashMap<String, usize> {
 fn main() {
     let text = "the quick brown fox jumps over the lazy dog the fox";
     let counts = word_count(text);
-    
+
     println!("Word counts:");
     for (word, count) in counts {
         println!("{}: {}", word, count);
@@ -833,7 +833,7 @@ enum Token {
 fn tokenize(expr: &str) -> Vec<Token> {
     let mut tokens = Vec::new();
     let mut num_buffer = String::new();
-    
+
     for ch in expr.chars() {
         match ch {
             '0'..='9' | '.' => num_buffer.push(ch),
@@ -863,11 +863,11 @@ fn tokenize(expr: &str) -> Vec<Token> {
             _ => {}
         }
     }
-    
+
     if !num_buffer.is_empty() {
         tokens.push(Token::Number(num_buffer.parse().unwrap()));
     }
-    
+
     tokens
 }
 
@@ -876,7 +876,7 @@ fn evaluate(expr: &str) -> Result<f64, String> {
     let tokens = tokenize(expr);
     let mut operands = Vec::new();
     let mut operators = Vec::new();
-    
+
     let precedence = |op: char| -> i32 {
         match op {
             '+' | '-' => 1,
@@ -884,7 +884,7 @@ fn evaluate(expr: &str) -> Result<f64, String> {
             _ => 0,
         }
     };
-    
+
     let apply_op = |op: char, b: f64, a: f64| -> f64 {
         match op {
             '+' => a + b,
@@ -894,7 +894,7 @@ fn evaluate(expr: &str) -> Result<f64, String> {
             _ => 0.0,
         }
     };
-    
+
     for token in tokens {
         match token {
             Token::Number(n) => operands.push(n),
@@ -923,13 +923,13 @@ fn evaluate(expr: &str) -> Result<f64, String> {
             }
         }
     }
-    
+
     while let Some(op) = operators.pop() {
         let b = operands.pop().unwrap();
         let a = operands.pop().unwrap();
         operands.push(apply_op(op, b, a));
     }
-    
+
     operands.pop().ok_or("Invalid expression".to_string())
 }
 
@@ -940,7 +940,7 @@ fn main() {
         "10 / 2 + 3",
         "1 + 2 * 3 - 4 / 2",
     ];
-    
+
     for expr in expressions {
         match evaluate(expr) {
             Ok(result) => println!("{} = {}", expr, result),
@@ -988,19 +988,19 @@ impl TaskScheduler {
             queue: BinaryHeap::new(),
         }
     }
-    
+
     fn add_task(&mut self, task: Task) {
         self.queue.push(task);
     }
-    
+
     fn get_next_task(&mut self) -> Option<Task> {
         self.queue.pop()
     }
-    
+
     fn peek_next(&self) -> Option<&Task> {
         self.queue.peek()
     }
-    
+
     fn is_empty(&self) -> bool {
         self.queue.is_empty()
     }
@@ -1008,13 +1008,13 @@ impl TaskScheduler {
 
 fn main() {
     let mut scheduler = TaskScheduler::new();
-    
+
     // 添加任务
     scheduler.add_task(Task { id: 1, priority: 2, name: "Task A".to_string() });
     scheduler.add_task(Task { id: 2, priority: 5, name: "Task B".to_string() });
     scheduler.add_task(Task { id: 3, priority: 1, name: "Task C".to_string() });
     scheduler.add_task(Task { id: 4, priority: 3, name: "Task D".to_string() });
-    
+
     // 执行任务
     println!("Executing tasks by priority:");
     while let Some(task) = scheduler.get_next_task() {
@@ -1025,9 +1025,9 @@ fn main() {
 
 ---
 
-**文档版本**: v1.0  
-**最后更新**: 2025-10-20  
-**代码总量**: ~850行  
+**文档版本**: v1.0
+**最后更新**: 2025-10-20
+**代码总量**: ~850行
 **维护者**: Rust Learning Community
 
 ---

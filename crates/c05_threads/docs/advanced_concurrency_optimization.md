@@ -154,10 +154,10 @@ impl HighPerformanceThreadPool {
         T: Send + 'static,
     {
         let (tx, rx) = crossbeam_channel::bounded(tasks.len());
-        
+
         // 智能任务分片
         let chunk_size = (tasks.len() + self.workers.len() - 1) / self.workers.len();
-        
+
         for chunk in tasks.chunks(chunk_size) {
             let chunk_tasks: Vec<Box<dyn FnOnce() + Send + 'static>> = chunk
                 .into_iter()
@@ -169,13 +169,13 @@ impl HighPerformanceThreadPool {
                     })
                 })
                 .collect();
-            
+
             // 提交任务块
             for task in chunk_tasks {
                 self.execute(task);
             }
         }
-        
+
         rx.iter().take(tasks.len()).collect()
     }
 }
@@ -187,26 +187,26 @@ impl HighPerformanceThreadPool {
 impl Worker {
     fn work_loop(&self, receiver: &crossbeam_channel::Receiver<Box<dyn FnOnce() + Send + 'static>>) {
         let mut local_queue = LocalTaskQueue::new();
-        
+
         loop {
             // 优先级1: 本地队列
             if let Some(task) = local_queue.pop() {
                 task();
                 continue;
             }
-            
+
             // 优先级2: 全局队列
             if let Ok(task) = receiver.try_recv() {
                 task();
                 continue;
             }
-            
+
             // 优先级3: 工作窃取
             if let Some(task) = self.global_queue.steal_task() {
                 local_queue.push(task);
                 continue;
             }
-            
+
             // 避免忙等待
             std::thread::sleep(Duration::from_micros(1));
         }
@@ -242,7 +242,7 @@ $$\min \sum_{i=1}^{n} |Q_i(t) - \frac{1}{n}\sum_{j=1}^{n} Q_j(t)|$$
 impl GlobalTaskQueue {
     fn steal_task(&self) -> Option<Box<dyn FnOnce() + Send + 'static>> {
         let mut tasks = self.tasks.lock().unwrap();
-        
+
         // 从队列尾部窃取，减少与正常任务的竞争
         if let Some(task) = tasks.pop_back() {
             let mut stats = self.stats.lock().unwrap();
@@ -302,17 +302,17 @@ impl<T: Default + Clone> LockFreeRingBuffer<T> {
     pub fn try_push(&self, item: T) -> Result<(), T> {
         let tail = self.tail.load(Ordering::Relaxed);
         let next_tail = (tail + 1) % self.size;
-        
+
         // 检查缓冲区是否已满
         if next_tail == self.head.load(Ordering::Acquire) {
             return Err(item);
         }
-        
+
         // 原子地存储数据
         unsafe {
             *self.buffer.get_unchecked_mut(tail) = item;
         }
-        
+
         // 原子地更新尾指针
         self.tail.store(next_tail, Ordering::Release);
         Ok(())
@@ -343,19 +343,19 @@ struct StackNode<T> {
 impl<T> LockFreeStack<T> {
     pub fn push(&self, item: T) -> Result<(), T> {
         let node_idx = self.allocate_node()?;
-        
+
         // 设置节点数据
         unsafe {
             self.nodes.get_unchecked_mut(node_idx).data = Some(item);
         }
-        
+
         // 原子地更新栈顶
         loop {
             let current_head = self.head.load(Ordering::Acquire);
             unsafe {
                 self.nodes.get_unchecked_mut(node_idx).next.store(current_head, Ordering::Release);
             }
-            
+
             if self.head.compare_exchange_weak(
                 current_head,
                 node_idx,
@@ -365,7 +365,7 @@ impl<T> LockFreeStack<T> {
                 break;
             }
         }
-        
+
         Ok(())
     }
 }
@@ -405,35 +405,35 @@ where
     if data.is_empty() {
         return identity;
     }
-    
+
     let chunk_size = (data.len() + num_threads - 1) / num_threads;
     let data = Arc::new(data.to_vec());
     let results = Arc::new(Mutex::new(Vec::new()));
-    
+
     let handles: Vec<_> = (0..num_threads)
         .map(|i| {
             let data = Arc::clone(&data);
             let results = Arc::clone(&results);
-            
+
             thread::spawn(move || {
                 let start = i * chunk_size;
                 let end = std::cmp::min(start + chunk_size, data.len());
-                
+
                 if start < end {
                     let chunk = &data[start..end];
                     let local_result = chunk.iter().fold(identity.clone(), |acc, x| op(acc, x));
-                    
+
                     let mut results = results.lock().unwrap();
                     results.push(local_result);
                 }
             })
         })
         .collect();
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     let results = results.lock().unwrap();
     results.iter().fold(identity, |acc, x| op(acc, x))
 }
@@ -463,24 +463,24 @@ where
     if data.is_empty() {
         return Vec::new();
     }
-    
+
     let chunk_size = (data.len() + num_threads - 1) / num_threads;
     let data = Arc::new(data.to_vec());
     let results = Arc::new(Mutex::new(vec![U::default(); data.len()]));
-    
+
     let handles: Vec<_> = (0..num_threads)
         .map(|i| {
             let data = Arc::clone(&data);
             let results = Arc::clone(&results);
-            
+
             thread::spawn(move || {
                 let start = i * chunk_size;
                 let end = std::cmp::min(start + chunk_size, data.len());
-                
+
                 if start < end {
                     let chunk = &data[start..end];
                     let mut results = results.lock().unwrap();
-                    
+
                     for (j, item) in chunk.iter().enumerate() {
                         let result = f(item);
                         results[start + j] = result;
@@ -489,11 +489,11 @@ where
             })
         })
         .collect();
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     Arc::try_unwrap(results).unwrap().into_inner().unwrap()
 }
 ```
@@ -563,8 +563,8 @@ BenchmarkResult {
     min_time_ms: min_time,
     max_time_ms: max_time,
     throughput: config.data_size as f64 / avg_time * 1000.0,
-    speedup: if thread_count == 1 { 1.0 } else { 
-        times[0] / avg_time 
+    speedup: if thread_count == 1 { 1.0 } else {
+        times[0] / avg_time
     },
 }
 ```
@@ -577,20 +577,20 @@ BenchmarkResult {
 pub fn generate_performance_report(results: &[BenchmarkResult]) -> String {
     let mut report = String::new();
     report.push_str("# 多线程性能测试报告\n\n");
-    
+
     // 按名称分组结果
-    let mut grouped_results: std::collections::HashMap<String, Vec<&BenchmarkResult>> = 
+    let mut grouped_results: std::collections::HashMap<String, Vec<&BenchmarkResult>> =
         std::collections::HashMap::new();
-    
+
     for result in results {
         grouped_results.entry(result.name.clone()).or_default().push(result);
     }
-    
+
     for (name, group_results) in grouped_results {
         report.push_str(&format!("## {}\n\n", name));
         report.push_str("| 线程数 | 平均时间(ms) | 最小时间(ms) | 最大时间(ms) | 吞吐量 | 加速比 |\n");
         report.push_str("|--------|--------------|--------------|--------------|--------|--------|\n");
-        
+
         for result in group_results {
             report.push_str(&format!(
                 "| {} | {:.2} | {:.2} | {:.2} | {:.0} | {:.2} |\n",
@@ -604,7 +604,7 @@ pub fn generate_performance_report(results: &[BenchmarkResult]) -> String {
         }
         report.push_str("\n");
     }
-    
+
     report
 }
 ```
@@ -706,7 +706,7 @@ where
     T: Send + 'static,
 {
     let start = Instant::now();
-    
+
     // 实现超时逻辑
     // ...
 }
@@ -732,7 +732,7 @@ Rust 2025的高级并发优化技术为构建高性能多线程应用程序提�
 
 ---
 
-**文档状态**: ✅ 已完成  
-**质量等级**: A级 (优秀)  
-**Rust 2025 支持**: ✅ 完全支持  
+**文档状态**: ✅ 已完成
+**质量等级**: A级 (优秀)
+**Rust 2025 支持**: ✅ 完全支持
 **实践指导**: ✅ 完整覆盖

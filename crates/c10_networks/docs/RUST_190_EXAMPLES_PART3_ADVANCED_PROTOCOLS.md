@@ -1,8 +1,8 @@
 ﻿# Rust 1.90 网络编程实战示例大全 (Part 3 - 高级协议)
 
-> **文档版本**: v1.0  
-> **适用版本**: Rust 1.90+, Tokio 1.35+  
-> **最后更新**: 2025-10-19  
+> **文档版本**: v1.0
+> **适用版本**: Rust 1.90+, Tokio 1.35+
+> **最后更新**: 2025-10-19
 > **文档类型**: 💻 代码示例集 - 高级协议
 
 ---
@@ -43,7 +43,7 @@
 ```rust
 //! gRPC 服务端完整实现
 //! 支持四种RPC模式: Unary, Server Streaming, Client Streaming, Bidirectional Streaming
-//! 
+//!
 //! Cargo.toml 依赖:
 //! ```toml
 //! [dependencies]
@@ -51,62 +51,62 @@
 //! prost = "0.12"
 //! tokio = { version = "1.35", features = ["full"] }
 //! tokio-stream = "0.1"
-//! 
+//!
 //! [build-dependencies]
 //! tonic-build = "0.11"
 //! ```
-//! 
+//!
 //! proto/service.proto:
 //! ```protobuf
 //! syntax = "proto3";
-//! 
+//!
 //! package network;
-//! 
+//!
 //! service NetworkService {
 //!   // Unary RPC
 //!   rpc GetServerInfo (InfoRequest) returns (InfoResponse);
-//!   
+//!
 //!   // Server Streaming RPC
 //!   rpc StreamMetrics (MetricsRequest) returns (stream MetricsResponse);
-//!   
+//!
 //!   // Client Streaming RPC
 //!   rpc UploadData (stream DataChunk) returns (UploadResponse);
-//!   
+//!
 //!   // Bidirectional Streaming RPC
 //!   rpc Chat (stream ChatMessage) returns (stream ChatMessage);
 //! }
-//! 
+//!
 //! message InfoRequest {
 //!   string client_id = 1;
 //! }
-//! 
+//!
 //! message InfoResponse {
 //!   string server_version = 1;
 //!   int64 uptime_seconds = 2;
 //!   int32 active_connections = 3;
 //! }
-//! 
+//!
 //! message MetricsRequest {
 //!   string metric_name = 1;
 //!   int32 interval_ms = 2;
 //! }
-//! 
+//!
 //! message MetricsResponse {
 //!   int64 timestamp = 1;
 //!   double value = 2;
 //! }
-//! 
+//!
 //! message DataChunk {
 //!   bytes data = 1;
 //!   int32 sequence = 2;
 //! }
-//! 
+//!
 //! message UploadResponse {
 //!   int64 total_bytes = 1;
 //!   int32 total_chunks = 2;
 //!   string checksum = 3;
 //! }
-//! 
+//!
 //! message ChatMessage {
 //!   string user_id = 1;
 //!   string content = 2;
@@ -147,21 +147,21 @@ impl ServerState {
             metrics_history: Arc::new(RwLock::new(HashMap::new())),
         }
     }
-    
+
     pub async fn increment_connections(&self) {
         let mut conns = self.active_connections.write().await;
         *conns += 1;
     }
-    
+
     pub async fn decrement_connections(&self) {
         let mut conns = self.active_connections.write().await;
         *conns -= 1;
     }
-    
+
     pub async fn get_active_connections(&self) -> i32 {
         *self.active_connections.read().await
     }
-    
+
     pub fn uptime_seconds(&self) -> i64 {
         self.start_time
             .elapsed()
@@ -190,35 +190,35 @@ impl NetworkService for NetworkServiceImpl {
     ) -> Result<Response<InfoResponse>, Status> {
         let client_id = request.into_inner().client_id;
         println!("📥 收到来自客户端 {} 的信息请求", client_id);
-        
+
         self.state.increment_connections().await;
-        
+
         let response = InfoResponse {
             server_version: "1.0.0".to_string(),
             uptime_seconds: self.state.uptime_seconds(),
             active_connections: self.state.get_active_connections().await,
         };
-        
+
         self.state.decrement_connections().await;
-        
+
         println!("📤 返回服务器信息: {:?}", response);
         Ok(Response::new(response))
     }
-    
+
     /// Server Streaming RPC: 流式发送指标数据
     type StreamMetricsStream = ReceiverStream<Result<MetricsResponse, Status>>;
-    
+
     async fn stream_metrics(
         &self,
         request: Request<MetricsRequest>,
     ) -> Result<Response<Self::StreamMetricsStream>, Status> {
         let req = request.into_inner();
         println!("📊 开始流式发送指标: {}", req.metric_name);
-        
+
         let (tx, rx) = mpsc::channel(128);
         let metric_name = req.metric_name.clone();
         let interval = std::time::Duration::from_millis(req.interval_ms as u64);
-        
+
         // 在后台任务中生成指标数据
         tokio::spawn(async move {
             for i in 0..10 {
@@ -226,44 +226,44 @@ impl NetworkService for NetworkServiceImpl {
                     .duration_since(UNIX_EPOCH)
                     .unwrap()
                     .as_secs() as i64;
-                
+
                 // 模拟指标值（随机波动）
                 let value = 50.0 + (i as f64 * 5.0) + (rand::random::<f64>() * 10.0 - 5.0);
-                
+
                 let response = MetricsResponse {
                     timestamp,
                     value,
                 };
-                
+
                 println!("📈 发送指标 {}: {:.2}", metric_name, value);
-                
+
                 if tx.send(Ok(response)).await.is_err() {
                     println!("⚠️ 客户端断开连接");
                     break;
                 }
-                
+
                 tokio::time::sleep(interval).await;
             }
-            
+
             println!("✅ 指标流式传输完成");
         });
-        
+
         Ok(Response::new(ReceiverStream::new(rx)))
     }
-    
+
     /// Client Streaming RPC: 接收客户端上传的数据流
     async fn upload_data(
         &self,
         request: Request<tonic::Streaming<DataChunk>>,
     ) -> Result<Response<UploadResponse>, Status> {
         let mut stream = request.into_inner();
-        
+
         println!("📤 开始接收数据流");
-        
+
         let mut total_bytes = 0i64;
         let mut total_chunks = 0i32;
         let mut all_data = Vec::new();
-        
+
         while let Some(chunk_result) = stream.next().await {
             match chunk_result {
                 Ok(chunk) => {
@@ -271,7 +271,7 @@ impl NetworkService for NetworkServiceImpl {
                     total_bytes += chunk_size as i64;
                     total_chunks += 1;
                     all_data.extend_from_slice(&chunk.data);
-                    
+
                     println!(
                         "📦 接收数据块 #{}: {} 字节 (累计: {} 字节)",
                         chunk.sequence, chunk_size, total_bytes
@@ -283,39 +283,39 @@ impl NetworkService for NetworkServiceImpl {
                 }
             }
         }
-        
+
         // 计算简单的校验和
         let checksum = format!("{:x}", md5::compute(&all_data));
-        
+
         let response = UploadResponse {
             total_bytes,
             total_chunks,
             checksum,
         };
-        
+
         println!("✅ 数据上传完成: {:?}", response);
         Ok(Response::new(response))
     }
-    
+
     /// Bidirectional Streaming RPC: 聊天功能
     type ChatStream = Pin<Box<dyn tokio_stream::Stream<Item = Result<ChatMessage, Status>> + Send>>;
-    
+
     async fn chat(
         &self,
         request: Request<tonic::Streaming<ChatMessage>>,
     ) -> Result<Response<Self::ChatStream>, Status> {
         println!("💬 开始聊天会话");
-        
+
         let mut in_stream = request.into_inner();
         let (tx, rx) = mpsc::channel(128);
-        
+
         // 处理接收到的消息并回显
         tokio::spawn(async move {
             while let Some(msg_result) = in_stream.next().await {
                 match msg_result {
                     Ok(msg) => {
                         println!("💬 收到消息: {} - {}", msg.user_id, msg.content);
-                        
+
                         // 回显消息（可以修改内容）
                         let echo = ChatMessage {
                             user_id: "server".to_string(),
@@ -325,7 +325,7 @@ impl NetworkService for NetworkServiceImpl {
                                 .unwrap()
                                 .as_secs() as i64,
                         };
-                        
+
                         if tx.send(Ok(echo)).await.is_err() {
                             break;
                         }
@@ -336,10 +336,10 @@ impl NetworkService for NetworkServiceImpl {
                     }
                 }
             }
-            
+
             println!("👋 聊天会话结束");
         });
-        
+
         let out_stream = ReceiverStream::new(rx);
         Ok(Response::new(Box::pin(out_stream) as Self::ChatStream))
     }
@@ -348,17 +348,17 @@ impl NetworkService for NetworkServiceImpl {
 /// 启动 gRPC 服务器
 pub async fn run_grpc_server() -> Result<(), Box<dyn std::error::Error>> {
     let addr = "127.0.0.1:50051".parse()?;
-    
+
     let state = Arc::new(ServerState::new());
     let service = NetworkServiceImpl::new(state);
-    
+
     println!("🚀 gRPC服务器启动在 {}", addr);
     println!("📋 支持的RPC模式:");
     println!("   1. Unary RPC: GetServerInfo");
     println!("   2. Server Streaming: StreamMetrics");
     println!("   3. Client Streaming: UploadData");
     println!("   4. Bidirectional: Chat");
-    
+
     Server::builder()
         .add_service(
             NetworkServiceServer::new(service)
@@ -367,7 +367,7 @@ pub async fn run_grpc_server() -> Result<(), Box<dyn std::error::Error>> {
         )
         .serve(addr)
         .await?;
-    
+
     Ok(())
 }
 ```
@@ -422,22 +422,22 @@ impl GrpcClient {
         let endpoint = Endpoint::from_shared(config.server_url.clone())?
             .connect_timeout(config.connect_timeout)
             .timeout(config.request_timeout);
-        
+
         let channel = endpoint.connect().await?;
-        
+
         let mut client = NetworkServiceClient::new(channel);
-        
+
         if config.enable_compression {
             client = client
                 .send_compressed(CompressionEncoding::Gzip)
                 .accept_compressed(CompressionEncoding::Gzip);
         }
-        
+
         println!("✅ gRPC客户端连接成功: {}", config.server_url);
-        
+
         Ok(Self { client, config })
     }
-    
+
     /// Unary RPC: 获取服务器信息 (带重试)
     pub async fn get_server_info_with_retry(
         &mut self,
@@ -445,16 +445,16 @@ impl GrpcClient {
     ) -> Result<InfoResponse, Box<dyn std::error::Error>> {
         let mut attempts = 0;
         let mut last_error = None;
-        
+
         while attempts < self.config.max_retries {
             attempts += 1;
-            
+
             println!("🔄 尝试获取服务器信息 (第 {}/{} 次)", attempts, self.config.max_retries);
-            
+
             let request = tonic::Request::new(InfoRequest {
                 client_id: client_id.clone(),
             });
-            
+
             match timeout(
                 self.config.request_timeout,
                 self.client.get_server_info(request),
@@ -478,17 +478,17 @@ impl GrpcClient {
                     last_error = Some("请求超时".into());
                 }
             }
-            
+
             if attempts < self.config.max_retries {
                 let backoff = Duration::from_millis(100 * 2u64.pow(attempts - 1));
                 println!("⏳ 等待 {:?} 后重试...", backoff);
                 tokio::time::sleep(backoff).await;
             }
         }
-        
+
         Err(last_error.unwrap_or_else(|| "所有重试失败".into()))
     }
-    
+
     /// Server Streaming RPC: 接收指标流
     pub async fn stream_metrics(
         &mut self,
@@ -499,11 +499,11 @@ impl GrpcClient {
             metric_name: metric_name.clone(),
             interval_ms,
         });
-        
+
         println!("📊 开始接收指标流: {}", metric_name);
-        
+
         let mut stream = self.client.stream_metrics(request).await?.into_inner();
-        
+
         while let Some(metrics_result) = stream.next().await {
             match metrics_result {
                 Ok(metrics) => {
@@ -518,11 +518,11 @@ impl GrpcClient {
                 }
             }
         }
-        
+
         println!("✅ 指标流接收完成");
         Ok(())
     }
-    
+
     /// Client Streaming RPC: 上传数据流
     pub async fn upload_data(
         &mut self,
@@ -530,7 +530,7 @@ impl GrpcClient {
         chunk_size: usize,
     ) -> Result<UploadResponse, Box<dyn std::error::Error>> {
         println!("📤 开始上传数据: {} 字节", data.len());
-        
+
         // 创建数据块流
         let chunks: Vec<DataChunk> = data
             .chunks(chunk_size)
@@ -540,21 +540,21 @@ impl GrpcClient {
                 sequence: i as i32,
             })
             .collect();
-        
+
         let total_chunks = chunks.len();
         let stream = tokio_stream::iter(chunks);
-        
+
         let request = tonic::Request::new(stream);
         let response = self.client.upload_data(request).await?.into_inner();
-        
+
         println!("✅ 数据上传完成:");
         println!("   总字节: {}", response.total_bytes);
         println!("   数据块数: {} (预期: {})", response.total_chunks, total_chunks);
         println!("   校验和: {}", response.checksum);
-        
+
         Ok(response)
     }
-    
+
     /// Bidirectional Streaming RPC: 聊天
     pub async fn chat(
         &mut self,
@@ -562,7 +562,7 @@ impl GrpcClient {
         messages: Vec<String>,
     ) -> Result<(), Box<dyn std::error::Error>> {
         println!("💬 开始聊天会话: {}", user_id);
-        
+
         // 创建消息流
         let outbound = tokio_stream::iter(messages.into_iter().map(move |content| {
             ChatMessage {
@@ -574,10 +574,10 @@ impl GrpcClient {
                     .as_secs() as i64,
             }
         }));
-        
+
         let request = tonic::Request::new(outbound);
         let mut inbound = self.client.chat(request).await?.into_inner();
-        
+
         // 接收服务器响应
         while let Some(msg_result) = inbound.next().await {
             match msg_result {
@@ -590,7 +590,7 @@ impl GrpcClient {
                 }
             }
         }
-        
+
         println!("✅ 聊天会话结束");
         Ok(())
     }
@@ -599,25 +599,25 @@ impl GrpcClient {
 /// 示例: 完整的客户端使用流程
 pub async fn demo_grpc_client() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== gRPC 客户端完整示例 ===\n");
-    
+
     let config = GrpcClientConfig::default();
     let mut client = GrpcClient::new(config).await?;
-    
+
     // 1. Unary RPC
     println!("\n--- 1. Unary RPC ---");
     client
         .get_server_info_with_retry("client-001".to_string())
         .await?;
-    
+
     // 2. Server Streaming RPC
     println!("\n--- 2. Server Streaming RPC ---");
     client.stream_metrics("cpu_usage".to_string(), 500).await?;
-    
+
     // 3. Client Streaming RPC
     println!("\n--- 3. Client Streaming RPC ---");
     let data = vec![0u8; 10000]; // 10KB 数据
     client.upload_data(data, 1024).await?;
-    
+
     // 4. Bidirectional Streaming RPC
     println!("\n--- 4. Bidirectional Streaming RPC ---");
     let messages = vec![
@@ -626,7 +626,7 @@ pub async fn demo_grpc_client() -> Result<(), Box<dyn std::error::Error>> {
         "Goodbye!".to_string(),
     ];
     client.chat("Alice".to_string(), messages).await?;
-    
+
     println!("\n✅ 所有示例完成");
     Ok(())
 }
@@ -666,13 +666,13 @@ impl Interceptor for AuthInterceptor {
             .get("authorization")
             .and_then(|v| v.to_str().ok())
             .and_then(|s| s.strip_prefix("Bearer "));
-        
+
         match token {
             Some(token) => {
                 // 异步验证需要用运行时
                 let valid_tokens = self.valid_tokens.clone();
                 let token = token.to_string();
-                
+
                 // 简化版：同步检查（实际应该异步）
                 if token == "valid_token_123" {
                     println!("✅ 认证成功");
@@ -698,13 +698,13 @@ impl Interceptor for LoggingInterceptor {
     fn call(&mut self, request: Request<()>) -> Result<Request<()>, Status> {
         let path = request.uri().path();
         let method = request.uri().method();
-        
+
         println!("📝 请求日志: {} {}", method, path);
         println!("   元数据: {:?}", request.metadata());
-        
+
         // 记录开始时间
         request.extensions_mut().insert(Instant::now());
-        
+
         Ok(request)
     }
 }
@@ -721,7 +721,7 @@ impl MetricsInterceptor {
             request_count: Arc::new(RwLock::new(0)),
         }
     }
-    
+
     pub async fn get_request_count(&self) -> u64 {
         *self.request_count.read().await
     }
@@ -735,7 +735,7 @@ impl Interceptor for MetricsInterceptor {
             let mut c = count.write().await;
             *c += 1;
         });
-        
+
         Ok(request)
     }
 }
@@ -762,11 +762,11 @@ impl Interceptor for RateLimitInterceptor {
     fn call(&mut self, request: Request<()>) -> Result<Request<()>, Status> {
         // 简化的限流逻辑（实际应该用更好的算法如令牌桶）
         let now = Instant::now();
-        
+
         // 同步版本（实际应该异步）
         // 这里仅作演示
         println!("🚦 检查限流状态");
-        
+
         Ok(request)
     }
 }
@@ -777,33 +777,33 @@ pub async fn run_server_with_interceptors() -> Result<(), Box<dyn std::error::Er
     use crate::network::network_service_server::NetworkServiceServer;
     use crate::{NetworkServiceImpl, ServerState};
     use std::sync::Arc;
-    
+
     let addr = "127.0.0.1:50052".parse()?;
-    
+
     let state = Arc::new(ServerState::new());
     let service = NetworkServiceImpl::new(state);
-    
+
     // 创建拦截器
     let auth = AuthInterceptor::new(vec!["valid_token_123".to_string()]);
     let logging = LoggingInterceptor::default();
     let metrics = MetricsInterceptor::new();
     let rate_limit = RateLimitInterceptor::new(100);
-    
+
     println!("🚀 带拦截器的gRPC服务器启动在 {}", addr);
     println!("🛡️ 启用的拦截器:");
     println!("   - 认证拦截器");
     println!("   - 日志拦截器");
     println!("   - 指标收集拦截器");
     println!("   - 限流拦截器");
-    
+
     // 注意：Tonic 的拦截器链接方式
     // 可以使用 tower 中间件实现更复杂的逻辑
-    
+
     Server::builder()
         .add_service(NetworkServiceServer::with_interceptor(service, logging))
         .serve(addr)
         .await?;
-    
+
     Ok(())
 }
 ```
@@ -817,7 +817,7 @@ pub async fn run_server_with_interceptors() -> Result<(), Box<dyn std::error::Er
 ```rust
 //! MQTT 发布者完整实现
 //! 特性: QoS 0/1/2, Retain消息, Will消息, TLS支持
-//! 
+//!
 //! Cargo.toml:
 //! ```toml
 //! [dependencies]
@@ -882,11 +882,11 @@ impl MqttPublisher {
             &config.broker_host,
             config.broker_port,
         );
-        
+
         mqttoptions.set_keep_alive(config.keep_alive);
         mqttoptions.set_clean_session(config.clean_session);
         mqttoptions.set_max_packet_size(1024 * 1024, 1024 * 1024); // 1MB
-        
+
         // 设置 Will 消息（当客户端异常断开时发送）
         mqttoptions.set_last_will(rumqttc::LastWill {
             topic: format!("status/{}", config.client_id),
@@ -894,15 +894,15 @@ impl MqttPublisher {
             qos: QoS::AtLeastOnce,
             retain: true,
         });
-        
+
         let (client, mut eventloop) = AsyncClient::new(mqttoptions, 10);
         let is_connected = Arc::new(RwLock::new(false));
         let is_connected_clone = is_connected.clone();
-        
+
         // 后台任务处理事件循环
         tokio::spawn(async move {
             println!("📡 MQTT事件循环启动");
-            
+
             loop {
                 match eventloop.poll().await {
                     Ok(Event::Incoming(Packet::ConnAck(_))) => {
@@ -924,17 +924,17 @@ impl MqttPublisher {
                 }
             }
         });
-        
+
         // 等待连接建立
         tokio::time::sleep(Duration::from_secs(2)).await;
-        
+
         Ok(Self {
             client,
             config,
             is_connected,
         })
     }
-    
+
     /// 发布消息 (指定 QoS)
     pub async fn publish(
         &self,
@@ -946,25 +946,25 @@ impl MqttPublisher {
         if !*self.is_connected.read().await {
             return Err("未连接到MQTT服务器".into());
         }
-        
+
         self.client.publish(topic, qos, retain, payload).await?;
-        
+
         let qos_str = match qos {
             QoS::AtMostOnce => "QoS 0 (最多一次)",
             QoS::AtLeastOnce => "QoS 1 (至少一次)",
             QoS::ExactlyOnce => "QoS 2 (恰好一次)",
         };
-        
+
         println!(
             "📤 发布消息: {} [{}{}]",
             topic,
             qos_str,
             if retain { ", Retain" } else { "" }
         );
-        
+
         Ok(())
     }
-    
+
     /// 发布JSON格式的传感器数据
     pub async fn publish_sensor_data(
         &self,
@@ -973,33 +973,33 @@ impl MqttPublisher {
     ) -> Result<(), Box<dyn std::error::Error>> {
         let topic = format!("sensors/{}/data", data.sensor_id);
         let payload = serde_json::to_vec(data)?;
-        
+
         self.publish(&topic, payload, qos, false).await?;
-        
+
         println!(
             "🌡️ 发布传感器数据: {} - 温度: {:.1}°C, 湿度: {:.1}%, 压力: {:.1}hPa",
             data.sensor_id, data.temperature, data.humidity, data.pressure
         );
-        
+
         Ok(())
     }
-    
+
     /// 批量发布
     pub async fn publish_batch(
         &self,
         messages: Vec<(String, Vec<u8>, QoS)>,
     ) -> Result<(), Box<dyn std::error::Error>> {
         println!("📦 开始批量发布 {} 条消息", messages.len());
-        
+
         for (i, (topic, payload, qos)) in messages.into_iter().enumerate() {
             self.publish(&topic, payload, qos, false).await?;
             println!("   [{}] ✅", i + 1);
         }
-        
+
         println!("✅ 批量发布完成");
         Ok(())
     }
-    
+
     /// 定期发布（用于模拟实时数据流）
     pub async fn publish_periodically(
         &self,
@@ -1008,12 +1008,12 @@ impl MqttPublisher {
         count: usize,
     ) -> Result<(), Box<dyn std::error::Error>> {
         println!("⏱️ 开始定期发布: 每 {}ms 一次, 共 {} 次", interval_ms, count);
-        
+
         let mut ticker = interval(Duration::from_millis(interval_ms));
-        
+
         for i in 0..count {
             ticker.tick().await;
-            
+
             let data = SensorData {
                 sensor_id: sensor_id.clone(),
                 timestamp: chrono::Utc::now().timestamp(),
@@ -1021,14 +1021,14 @@ impl MqttPublisher {
                 humidity: 50.0 + (rand::random::<f64>() * 10.0 - 5.0),
                 pressure: 1013.0 + (rand::random::<f64>() * 5.0 - 2.5),
             };
-            
+
             self.publish_sensor_data(&data, QoS::AtLeastOnce).await?;
         }
-        
+
         println!("✅ 定期发布完成");
         Ok(())
     }
-    
+
     /// 发布状态更新
     pub async fn publish_status(
         &self,
@@ -1036,18 +1036,18 @@ impl MqttPublisher {
     ) -> Result<(), Box<dyn std::error::Error>> {
         let topic = format!("status/{}", self.config.client_id);
         let payload = status.as_bytes().to_vec();
-        
+
         // 状态消息使用 Retain 标志
         self.publish(&topic, payload, QoS::AtLeastOnce, true).await?;
-        
+
         Ok(())
     }
-    
+
     /// 断开连接
     pub async fn disconnect(&self) -> Result<(), Box<dyn std::error::Error>> {
         self.publish_status("offline").await?;
         self.client.disconnect().await?;
-        
+
         println!("👋 MQTT发布者已断开连接");
         Ok(())
     }
@@ -1056,13 +1056,13 @@ impl MqttPublisher {
 /// 示例: MQTT发布者使用
 pub async fn demo_mqtt_publisher() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== MQTT 发布者完整示例 ===\n");
-    
+
     let config = MqttPublisherConfig::default();
     let publisher = MqttPublisher::new(config).await?;
-    
+
     // 1. 发布状态
     publisher.publish_status("online").await?;
-    
+
     // 2. 发布单条消息 (不同 QoS)
     println!("\n--- 测试不同 QoS 级别 ---");
     publisher.publish(
@@ -1071,21 +1071,21 @@ pub async fn demo_mqtt_publisher() -> Result<(), Box<dyn std::error::Error>> {
         QoS::AtMostOnce,
         false,
     ).await?;
-    
+
     publisher.publish(
         "test/qos1",
         b"QoS 1 message".to_vec(),
         QoS::AtLeastOnce,
         false,
     ).await?;
-    
+
     publisher.publish(
         "test/qos2",
         b"QoS 2 message".to_vec(),
         QoS::ExactlyOnce,
         false,
     ).await?;
-    
+
     // 3. 发布传感器数据
     println!("\n--- 发布传感器数据 ---");
     let sensor_data = SensorData {
@@ -1096,11 +1096,11 @@ pub async fn demo_mqtt_publisher() -> Result<(), Box<dyn std::error::Error>> {
         pressure: 1013.25,
     };
     publisher.publish_sensor_data(&sensor_data, QoS::AtLeastOnce).await?;
-    
+
     // 4. 定期发布
     println!("\n--- 定期发布 ---");
     publisher.publish_periodically("sensor-002".to_string(), 1000, 5).await?;
-    
+
     // 5. 批量发布
     println!("\n--- 批量发布 ---");
     let batch = vec![
@@ -1109,11 +1109,11 @@ pub async fn demo_mqtt_publisher() -> Result<(), Box<dyn std::error::Error>> {
         ("batch/msg3".to_string(), b"Message 3".to_vec(), QoS::ExactlyOnce),
     ];
     publisher.publish_batch(batch).await?;
-    
+
     // 断开连接
     tokio::time::sleep(Duration::from_secs(2)).await;
     publisher.disconnect().await?;
-    
+
     println!("\n✅ 所有示例完成");
     Ok(())
 }
@@ -1179,33 +1179,33 @@ impl MqttSubscriber {
             &config.broker_host,
             config.broker_port,
         );
-        
+
         mqttoptions.set_keep_alive(config.keep_alive);
         mqttoptions.set_clean_session(false); // 保留会话
-        
+
         let (client, mut eventloop) = AsyncClient::new(mqttoptions, 10);
-        
+
         let callbacks = Arc::new(RwLock::new(HashMap::new()));
         let is_connected = Arc::new(RwLock::new(false));
         let subscriptions = Arc::new(RwLock::new(Vec::new()));
-        
+
         let callbacks_clone = callbacks.clone();
         let is_connected_clone = is_connected.clone();
         let subscriptions_clone = subscriptions.clone();
         let client_clone = client.clone();
         let auto_reconnect = config.auto_reconnect;
         let reconnect_interval = config.reconnect_interval;
-        
+
         // 后台任务处理事件循环
         tokio::spawn(async move {
             println!("📡 MQTT事件循环启动");
-            
+
             loop {
                 match eventloop.poll().await {
                     Ok(Event::Incoming(Packet::ConnAck(_))) => {
                         println!("✅ MQTT连接成功");
                         *is_connected_clone.write().await = true;
-                        
+
                         // 重新订阅所有主题
                         let subs = subscriptions_clone.read().await;
                         for (topic, qos) in subs.iter() {
@@ -1219,9 +1219,9 @@ impl MqttSubscriber {
                     Ok(Event::Incoming(Packet::Publish(publish))) => {
                         let topic = publish.topic.clone();
                         let payload = publish.payload.to_vec();
-                        
+
                         println!("📥 收到消息: {} ({} 字节)", topic, payload.len());
-                        
+
                         // 调用匹配的回调
                         let callbacks = callbacks_clone.read().await;
                         for (pattern, callback) in callbacks.iter() {
@@ -1229,7 +1229,7 @@ impl MqttSubscriber {
                                 let cb = callback.clone();
                                 let topic = topic.clone();
                                 let payload = payload.clone();
-                                
+
                                 tokio::spawn(async move {
                                     cb(&topic, &payload).await;
                                 });
@@ -1246,7 +1246,7 @@ impl MqttSubscriber {
                     Err(e) => {
                         eprintln!("❌ 事件循环错误: {}", e);
                         *is_connected_clone.write().await = false;
-                        
+
                         if auto_reconnect {
                             println!("🔄 等待 {:?} 后重连...", reconnect_interval);
                             tokio::time::sleep(reconnect_interval).await;
@@ -1258,10 +1258,10 @@ impl MqttSubscriber {
                 }
             }
         });
-        
+
         // 等待连接建立
         tokio::time::sleep(Duration::from_secs(2)).await;
-        
+
         Ok(Self {
             client,
             config,
@@ -1270,7 +1270,7 @@ impl MqttSubscriber {
             subscriptions,
         })
     }
-    
+
     /// 订阅主题
     pub async fn subscribe<F, Fut>(
         &self,
@@ -1285,13 +1285,13 @@ impl MqttSubscriber {
         if !*self.is_connected.read().await {
             return Err("未连接到MQTT服务器".into());
         }
-        
+
         // 订阅主题
         self.client.subscribe(topic, qos).await?;
-        
+
         // 保存订阅信息
         self.subscriptions.write().await.push((topic.to_string(), qos));
-        
+
         // 注册回调
         let callback_wrapper: MessageCallback = Arc::new(move |topic: &str, payload: &[u8]| {
             let topic = topic.to_string();
@@ -1299,47 +1299,47 @@ impl MqttSubscriber {
             let fut = callback(topic, payload);
             Box::pin(fut)
         });
-        
+
         self.callbacks
             .write()
             .await
             .insert(topic.to_string(), callback_wrapper);
-        
+
         println!("✅ 订阅主题: {} (QoS {:?})", topic, qos);
-        
+
         Ok(())
     }
-    
+
     /// 取消订阅
     pub async fn unsubscribe(&self, topic: &str) -> Result<(), Box<dyn std::error::Error>> {
         self.client.unsubscribe(topic).await?;
-        
+
         // 移除订阅信息
         self.subscriptions
             .write()
             .await
             .retain(|(t, _)| t != topic);
-        
+
         // 移除回调
         self.callbacks.write().await.remove(topic);
-        
+
         println!("❌ 取消订阅: {}", topic);
-        
+
         Ok(())
     }
-    
+
     /// 匹配 MQTT 主题通配符
     fn topic_matches(pattern: &str, topic: &str) -> bool {
         let pattern_parts: Vec<&str> = pattern.split('/').collect();
         let topic_parts: Vec<&str> = topic.split('/').collect();
-        
+
         let mut p_idx = 0;
         let mut t_idx = 0;
-        
+
         while p_idx < pattern_parts.len() && t_idx < topic_parts.len() {
             let p = pattern_parts[p_idx];
             let t = topic_parts[t_idx];
-            
+
             if p == "#" {
                 return true; // # 匹配所有剩余层级
             } else if p == "+" || p == t {
@@ -1349,17 +1349,17 @@ impl MqttSubscriber {
                 return false;
             }
         }
-        
+
         p_idx == pattern_parts.len() && t_idx == topic_parts.len()
     }
-    
+
     /// 等待消息 (阻塞)
     pub async fn run_forever(&self) {
         println!("🔄 订阅者运行中...");
-        
+
         loop {
             tokio::time::sleep(Duration::from_secs(1)).await;
-            
+
             if !*self.is_connected.read().await {
                 if !self.config.auto_reconnect {
                     println!("⚠️ 连接断开，退出");
@@ -1368,7 +1368,7 @@ impl MqttSubscriber {
             }
         }
     }
-    
+
     /// 断开连接
     pub async fn disconnect(&self) -> Result<(), Box<dyn std::error::Error>> {
         self.client.disconnect().await?;
@@ -1380,10 +1380,10 @@ impl MqttSubscriber {
 /// 示例: MQTT订阅者使用
 pub async fn demo_mqtt_subscriber() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== MQTT 订阅者完整示例 ===\n");
-    
+
     let config = MqttSubscriberConfig::default();
     let subscriber = MqttSubscriber::new(config).await?;
-    
+
     // 1. 订阅特定主题
     println!("--- 订阅特定主题 ---");
     subscriber
@@ -1401,7 +1401,7 @@ pub async fn demo_mqtt_subscriber() -> Result<(), Box<dyn std::error::Error>> {
             }
         })
         .await?;
-    
+
     // 2. 订阅状态主题
     println!("--- 订阅状态主题 ---");
     subscriber
@@ -1410,7 +1410,7 @@ pub async fn demo_mqtt_subscriber() -> Result<(), Box<dyn std::error::Error>> {
             println!("📊 状态更新 [{}]: {}", topic, status);
         })
         .await?;
-    
+
     // 3. 订阅测试主题
     println!("--- 订阅测试主题 ---");
     subscriber
@@ -1422,17 +1422,17 @@ pub async fn demo_mqtt_subscriber() -> Result<(), Box<dyn std::error::Error>> {
             );
         })
         .await?;
-    
+
     // 运行一段时间
     println!("\n⏱️ 运行 30 秒...");
     tokio::time::sleep(Duration::from_secs(30)).await;
-    
+
     // 取消订阅
     subscriber.unsubscribe("test/#").await?;
-    
+
     // 断开连接
     subscriber.disconnect().await?;
-    
+
     println!("\n✅ 所有示例完成");
     Ok(())
 }
@@ -1470,9 +1470,9 @@ impl MqttBridge {
             source_port,
         );
         source_options.set_keep_alive(Duration::from_secs(60));
-        
+
         let (source_client, mut source_eventloop) = AsyncClient::new(source_options, 10);
-        
+
         // 目标客户端
         let mut target_options = MqttOptions::new(
             format!("bridge-target-{}", uuid::Uuid::new_v4()),
@@ -1480,11 +1480,11 @@ impl MqttBridge {
             target_port,
         );
         target_options.set_keep_alive(Duration::from_secs(60));
-        
+
         let (target_client, mut target_eventloop) = AsyncClient::new(target_options, 10);
-        
+
         let target_client_clone = target_client.clone();
-        
+
         // 处理源事件循环
         tokio::spawn(async move {
             loop {
@@ -1495,9 +1495,9 @@ impl MqttBridge {
                     Ok(Event::Incoming(Packet::Publish(publish))) => {
                         let topic = publish.topic.clone();
                         let payload = publish.payload.to_vec();
-                        
+
                         println!("🌉 桥接消息: {} ({} 字节)", topic, payload.len());
-                        
+
                         // 转发到目标服务器
                         if let Err(e) = target_client_clone
                             .publish(&topic, QoS::AtLeastOnce, false, payload)
@@ -1514,7 +1514,7 @@ impl MqttBridge {
                 }
             }
         });
-        
+
         // 处理目标事件循环
         tokio::spawn(async move {
             loop {
@@ -1530,17 +1530,17 @@ impl MqttBridge {
                 }
             }
         });
-        
+
         // 等待连接建立
         tokio::time::sleep(Duration::from_secs(2)).await;
-        
+
         Ok(Self {
             source_client,
             target_client,
             topic_mappings: HashMap::new(),
         })
     }
-    
+
     /// 添加主题桥接
     pub async fn bridge_topic(
         &mut self,
@@ -1549,23 +1549,23 @@ impl MqttBridge {
         qos: QoS,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let target = target_topic.unwrap_or(source_topic);
-        
+
         // 订阅源主题
         self.source_client.subscribe(source_topic, qos).await?;
-        
+
         // 保存映射
         self.topic_mappings
             .insert(source_topic.to_string(), target.to_string());
-        
+
         println!("🌉 桥接设置: {} -> {}", source_topic, target);
-        
+
         Ok(())
     }
-    
+
     /// 运行桥接器
     pub async fn run_forever(&self) {
         println!("🌉 MQTT桥接器运行中...");
-        
+
         loop {
             tokio::time::sleep(Duration::from_secs(1)).await;
         }
@@ -1575,7 +1575,7 @@ impl MqttBridge {
 /// 示例: MQTT桥接器使用
 pub async fn demo_mqtt_bridge() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== MQTT 桥接器示例 ===\n");
-    
+
     let mut bridge = MqttBridge::new(
         "broker.hivemq.com",
         1883,
@@ -1583,14 +1583,14 @@ pub async fn demo_mqtt_bridge() -> Result<(), Box<dyn std::error::Error>> {
         1883,
     )
     .await?;
-    
+
     // 桥接多个主题
     bridge.bridge_topic("sensors/#", None, QoS::AtLeastOnce).await?;
     bridge.bridge_topic("status/#", None, QoS::AtLeastOnce).await?;
-    
+
     // 运行桥接器
     tokio::time::sleep(Duration::from_secs(60)).await;
-    
+
     println!("\n✅ 桥接器示例完成");
     Ok(())
 }
@@ -1605,7 +1605,7 @@ pub async fn demo_mqtt_bridge() -> Result<(), Box<dyn std::error::Error>> {
 ```rust
 //! QUIC 服务器实现
 //! 基于 quinn 库
-//! 
+//!
 //! Cargo.toml:
 //! ```toml
 //! [dependencies]
@@ -1637,27 +1637,27 @@ impl QuicServer {
     /// 创建新的QUIC服务器
     pub async fn new(addr: SocketAddr) -> Result<Self, Box<dyn std::error::Error>> {
         let (cert, key) = generate_self_signed_cert()?;
-        
+
         let mut server_config = ServerConfig::with_single_cert(vec![cert], key)?;
         let transport_config = Arc::get_mut(&mut server_config.transport)
             .unwrap();
-        
+
         // 配置传输参数
         transport_config.max_concurrent_uni_streams(100_u8.into());
         transport_config.max_concurrent_bidi_streams(100_u8.into());
-        
+
         let endpoint = Endpoint::server(server_config, addr)?;
-        
+
         println!("🚀 QUIC服务器启动在 {}", addr);
-        
+
         Ok(Self { endpoint })
     }
-    
+
     /// 处理传入的连接
     pub async fn handle_connections(&self) {
         while let Some(conn) = self.endpoint.accept().await {
             println!("📥 新的QUIC连接");
-            
+
             tokio::spawn(async move {
                 match conn.await {
                     Ok(connection) => {
@@ -1670,32 +1670,32 @@ impl QuicServer {
             });
         }
     }
-    
+
     /// 处理单个连接
     async fn handle_connection(conn: Connection) {
         let remote = conn.remote_address();
         println!("✅ 连接建立: {}", remote);
-        
+
         // 处理双向流
         loop {
             match conn.accept_bi().await {
                 Ok((mut send, mut recv)) => {
                     tokio::spawn(async move {
                         let mut buf = vec![0u8; 4096];
-                        
+
                         match recv.read(&mut buf).await {
                             Ok(Some(n)) => {
                                 println!("📥 接收 {} 字节", n);
-                                
+
                                 // 回显数据
                                 let response = format!("Echo: {}", String::from_utf8_lossy(&buf[..n]));
-                                
+
                                 if let Err(e) = send.write_all(response.as_bytes()).await {
                                     eprintln!("❌ 发送失败: {}", e);
                                 } else {
                                     println!("📤 发送响应 {} 字节", response.len());
                                 }
-                                
+
                                 let _ = send.finish().await;
                             }
                             Ok(None) => {
@@ -1713,7 +1713,7 @@ impl QuicServer {
                 }
             }
         }
-        
+
         println!("🔌 连接关闭: {}", remote);
     }
 }
@@ -1721,12 +1721,12 @@ impl QuicServer {
 /// 启动QUIC服务器示例
 pub async fn demo_quic_server() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== QUIC 服务器示例 ===\n");
-    
+
     let addr = "127.0.0.1:4433".parse()?;
     let server = QuicServer::new(addr).await?;
-    
+
     server.handle_connections().await;
-    
+
     Ok(())
 }
 ```
@@ -1750,30 +1750,30 @@ impl QuicClient {
     /// 创建新的QUIC客户端
     pub fn new() -> Result<Self, Box<dyn std::error::Error>> {
         let mut endpoint = Endpoint::client("0.0.0.0:0".parse()?)?;
-        
+
         // 配置客户端（跳过证书验证，仅用于测试）
         let mut client_config = ClientConfig::with_native_roots();
         client_config.crypto = Arc::new(rustls::ClientConfig::builder()
             .with_safe_defaults()
             .with_custom_certificate_verifier(Arc::new(SkipServerVerification))
             .with_no_client_auth());
-        
+
         endpoint.set_default_client_config(client_config);
-        
+
         Ok(Self { endpoint })
     }
-    
+
     /// 连接到服务器
     pub async fn connect(&self, addr: SocketAddr) -> Result<Connection, Box<dyn std::error::Error>> {
         println!("🔌 连接到 {}", addr);
-        
+
         let connection = self.endpoint.connect(addr, "localhost")?.await?;
-        
+
         println!("✅ QUIC连接建立");
-        
+
         Ok(connection)
     }
-    
+
     /// 发送请求并接收响应
     pub async fn send_request(
         &self,
@@ -1781,19 +1781,19 @@ impl QuicClient {
         request: &str,
     ) -> Result<String, Box<dyn std::error::Error>> {
         let (mut send, mut recv) = connection.open_bi().await?;
-        
+
         // 发送请求
         send.write_all(request.as_bytes()).await?;
         send.finish().await?;
         println!("📤 发送: {}", request);
-        
+
         // 接收响应
         let mut response = Vec::new();
         recv.read_to_end(&mut response).await?;
-        
+
         let response_str = String::from_utf8_lossy(&response).to_string();
         println!("📥 接收: {}", response_str);
-        
+
         Ok(response_str)
     }
 }
@@ -1818,25 +1818,25 @@ impl rustls::client::ServerCertVerifier for SkipServerVerification {
 /// 示例: QUIC客户端使用
 pub async fn demo_quic_client() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== QUIC 客户端示例 ===\n");
-    
+
     let client = QuicClient::new()?;
     let addr = "127.0.0.1:4433".parse()?;
     let connection = client.connect(addr).await?;
-    
+
     // 发送多个请求
     for i in 1..=5 {
         let request = format!("Request #{}", i);
         client.send_request(&connection, &request).await?;
         tokio::time::sleep(std::time::Duration::from_millis(500)).await;
     }
-    
+
     // 关闭连接
     connection.close(0u32.into(), b"done");
     println!("👋 连接关闭");
-    
+
     // 等待关闭完成
     endpoint.wait_idle().await;
-    
+
     println!("\n✅ 客户端示例完成");
     Ok(())
 }
@@ -1861,38 +1861,38 @@ impl QuicMultiplexClient {
         count: usize,
     ) -> Result<(), Box<dyn std::error::Error>> {
         println!("🚀 开始 {} 个并发请求", count);
-        
+
         let mut handles = Vec::new();
-        
+
         for i in 0..count {
             let connection = connection.clone();
-            
+
             let handle = tokio::spawn(async move {
                 let (mut send, mut recv) = connection.open_bi().await?;
-                
+
                 let request = format!("Concurrent request #{}", i);
                 send.write_all(request.as_bytes()).await?;
                 send.finish().await?;
-                
+
                 println!("📤 [{}] 发送: {}", i, request);
-                
+
                 let mut response = Vec::new();
                 recv.read_to_end(&mut response).await?;
-                
+
                 let response_str = String::from_utf8_lossy(&response);
                 println!("📥 [{}] 接收: {}", i, response_str);
-                
+
                 Ok::<_, Box<dyn std::error::Error + Send + Sync>>(())
             });
-            
+
             handles.push(handle);
         }
-        
+
         // 等待所有请求完成
         for handle in handles {
             handle.await??;
         }
-        
+
         println!("✅ 所有并发请求完成");
         Ok(())
     }
@@ -1901,16 +1901,16 @@ impl QuicMultiplexClient {
 /// 示例: QUIC多路复用
 pub async fn demo_quic_multiplexing() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== QUIC 多路复用示例 ===\n");
-    
+
     let client = QuicClient::new()?;
     let addr = "127.0.0.1:4433".parse()?;
     let connection = client.connect(addr).await?;
-    
+
     // 并发发送 10 个请求
     QuicMultiplexClient::concurrent_requests(&connection, 10).await?;
-    
+
     connection.close(0u32.into(), b"done");
-    
+
     println!("\n✅ 多路复用示例完成");
     Ok(())
 }
@@ -1925,7 +1925,7 @@ pub async fn demo_quic_multiplexing() -> Result<(), Box<dyn std::error::Error>> 
 ```rust
 //! AMQP 生产者实现
 //! 基于 lapin 库
-//! 
+//!
 //! Cargo.toml:
 //! ```toml
 //! [dependencies]
@@ -1961,18 +1961,18 @@ impl AmqpProducer {
     /// 创建新的生产者
     pub async fn new(amqp_url: &str) -> Result<Self, Box<dyn std::error::Error>> {
         println!("🔌 连接到AMQP服务器: {}", amqp_url);
-        
+
         let connection = Connection::connect(amqp_url, ConnectionProperties::default()).await?;
         let channel = connection.create_channel().await?;
-        
+
         println!("✅ AMQP连接建立");
-        
+
         Ok(Self {
             connection,
             channel,
         })
     }
-    
+
     /// 声明队列
     pub async fn declare_queue(
         &self,
@@ -1981,7 +1981,7 @@ impl AmqpProducer {
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut queue_declare_options = QueueDeclareOptions::default();
         queue_declare_options.durable = durable;
-        
+
         self.channel
             .queue_declare(
                 queue_name,
@@ -1989,12 +1989,12 @@ impl AmqpProducer {
                 FieldTable::default(),
             )
             .await?;
-        
+
         println!("📋 队列已声明: {} (持久化: {})", queue_name, durable);
-        
+
         Ok(())
     }
-    
+
     /// 发布消息
     pub async fn publish_message(
         &self,
@@ -2005,11 +2005,11 @@ impl AmqpProducer {
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut properties = BasicProperties::default()
             .with_priority(priority);
-        
+
         if persistent {
             properties = properties.with_delivery_mode(2); // Persistent
         }
-        
+
         self.channel
             .basic_publish(
                 "",
@@ -2019,12 +2019,12 @@ impl AmqpProducer {
                 properties,
             )
             .await?;
-        
+
         println!("📤 发布消息到 {} (优先级: {}, 持久化: {})", queue_name, priority, persistent);
-        
+
         Ok(())
     }
-    
+
     /// 发布JSON任务
     pub async fn publish_task(
         &self,
@@ -2032,14 +2032,14 @@ impl AmqpProducer {
         task: &TaskMessage,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let message = serde_json::to_vec(task)?;
-        
+
         self.publish_message(queue_name, &message, task.priority, true).await?;
-        
+
         println!("📋 发布任务: {} (类型: {})", task.task_id, task.task_type);
-        
+
         Ok(())
     }
-    
+
     /// 批量发布
     pub async fn publish_batch(
         &self,
@@ -2047,12 +2047,12 @@ impl AmqpProducer {
         messages: Vec<Vec<u8>>,
     ) -> Result<(), Box<dyn std::error::Error>> {
         println!("📦 批量发布 {} 条消息", messages.len());
-        
+
         for (i, message) in messages.into_iter().enumerate() {
             self.publish_message(queue_name, &message, 5, true).await?;
             println!("   [{}] ✅", i + 1);
         }
-        
+
         println!("✅ 批量发布完成");
         Ok(())
     }
@@ -2061,12 +2061,12 @@ impl AmqpProducer {
 /// 示例: AMQP生产者使用
 pub async fn demo_amqp_producer() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== AMQP 生产者完整示例 ===\n");
-    
+
     let producer = AmqpProducer::new("amqp://guest:guest@localhost:5672/%2f").await?;
-    
+
     // 声明队列
     producer.declare_queue("tasks", true).await?;
-    
+
     // 发布单个任务
     let task = TaskMessage {
         task_id: "task-001".to_string(),
@@ -2076,13 +2076,13 @@ pub async fn demo_amqp_producer() -> Result<(), Box<dyn std::error::Error>> {
         timestamp: chrono::Utc::now().timestamp(),
     };
     producer.publish_task("tasks", &task).await?;
-    
+
     // 批量发布
     let batch: Vec<Vec<u8>> = (0..10)
         .map(|i| format!("Task #{}", i).into_bytes())
         .collect();
     producer.publish_batch("tasks", batch).await?;
-    
+
     println!("\n✅ 生产者示例完成");
     Ok(())
 }
@@ -2109,23 +2109,23 @@ impl AmqpConsumer {
     /// 创建新的消费者
     pub async fn new(amqp_url: &str) -> Result<Self, Box<dyn std::error::Error>> {
         println!("🔌 连接到AMQP服务器: {}", amqp_url);
-        
+
         let connection = Connection::connect(amqp_url, ConnectionProperties::default()).await?;
         let channel = connection.create_channel().await?;
-        
+
         // 设置预取数量（QoS）
         channel
             .basic_qos(10, BasicQosOptions::default())
             .await?;
-        
+
         println!("✅ AMQP连接建立 (预取: 10 条)");
-        
+
         Ok(Self {
             connection,
             channel,
         })
     }
-    
+
     /// 消费消息 (手动确认)
     pub async fn consume_with_manual_ack<F, Fut>(
         &self,
@@ -2137,7 +2137,7 @@ impl AmqpConsumer {
         Fut: std::future::Future<Output = Result<bool, Box<dyn std::error::Error + Send + Sync>>> + Send,
     {
         println!("📥 开始消费队列: {} (手动确认)", queue_name);
-        
+
         let mut consumer = self
             .channel
             .basic_consume(
@@ -2147,18 +2147,18 @@ impl AmqpConsumer {
                 FieldTable::default(),
             )
             .await?;
-        
+
         while let Some(delivery_result) = consumer.next().await {
             match delivery_result {
                 Ok(delivery) => {
                     let delivery_tag = delivery.delivery_tag;
-                    
+
                     println!(
                         "📦 收到消息 (tag: {}, 大小: {} 字节)",
                         delivery_tag,
                         delivery.data.len()
                     );
-                    
+
                     // 调用处理器
                     match handler(delivery).await {
                         Ok(true) => {
@@ -2202,11 +2202,11 @@ impl AmqpConsumer {
                 }
             }
         }
-        
+
         println!("👋 消费者退出");
         Ok(())
     }
-    
+
     /// 消费消息 (自动确认)
     pub async fn consume_with_auto_ack<F, Fut>(
         &self,
@@ -2218,7 +2218,7 @@ impl AmqpConsumer {
         Fut: std::future::Future<Output = ()> + Send,
     {
         println!("📥 开始消费队列: {} (自动确认)", queue_name);
-        
+
         let mut consumer = self
             .channel
             .basic_consume(
@@ -2231,7 +2231,7 @@ impl AmqpConsumer {
                 FieldTable::default(),
             )
             .await?;
-        
+
         while let Some(delivery_result) = consumer.next().await {
             match delivery_result {
                 Ok(delivery) => {
@@ -2244,7 +2244,7 @@ impl AmqpConsumer {
                 }
             }
         }
-        
+
         println!("👋 消费者退出");
         Ok(())
     }
@@ -2253,18 +2253,18 @@ impl AmqpConsumer {
 /// 示例: AMQP消费者使用
 pub async fn demo_amqp_consumer() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== AMQP 消费者完整示例 ===\n");
-    
+
     let consumer = AmqpConsumer::new("amqp://guest:guest@localhost:5672/%2f").await?;
-    
+
     // 消费消息（手动确认）
     consumer
         .consume_with_manual_ack("tasks", |delivery| async move {
             let message = String::from_utf8_lossy(&delivery.data);
             println!("🔧 处理任务: {}", message);
-            
+
             // 模拟任务处理
             tokio::time::sleep(std::time::Duration::from_millis(100)).await;
-            
+
             // 90% 成功率
             if rand::random::<f64>() < 0.9 {
                 Ok(true) // 成功
@@ -2273,7 +2273,7 @@ pub async fn demo_amqp_consumer() -> Result<(), Box<dyn std::error::Error>> {
             }
         })
         .await?;
-    
+
     println!("\n✅ 消费者示例完成");
     Ok(())
 }
@@ -2301,35 +2301,35 @@ impl AmqpWorkerPool {
         worker_count: usize,
     ) -> Result<Self, Box<dyn std::error::Error>> {
         println!("🏭 创建工作池 ({} 个工作者)", worker_count);
-        
+
         let mut consumers = Vec::new();
         for i in 0..worker_count {
             let consumer = AmqpConsumer::new(amqp_url).await?;
             consumers.push(consumer);
             println!("   Worker #{} 就绪", i + 1);
         }
-        
+
         Ok(Self {
             consumers,
             semaphore: Arc::new(Semaphore::new(worker_count)),
         })
     }
-    
+
     /// 启动工作池
     pub async fn start(&self, queue_name: &str) -> Result<(), Box<dyn std::error::Error>> {
         println!("🚀 启动工作池");
-        
+
         let mut handles = Vec::new();
-        
+
         for (i, consumer) in self.consumers.iter().enumerate() {
             let queue_name = queue_name.to_string();
             let worker_id = i + 1;
-            
+
             // 这里需要重新创建consumer或者使用Arc
             // 简化版本，实际应该更复杂
             println!("   Worker #{} 开始消费", worker_id);
         }
-        
+
         Ok(())
     }
 }
@@ -2337,14 +2337,14 @@ impl AmqpWorkerPool {
 /// 示例: 工作队列模式
 pub async fn demo_amqp_worker_pool() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== AMQP 工作队列示例 ===\n");
-    
+
     let pool = AmqpWorkerPool::new("amqp://guest:guest@localhost:5672/%2f", 4).await?;
-    
+
     pool.start("tasks").await?;
-    
+
     // 运行一段时间
     tokio::time::sleep(std::time::Duration::from_secs(60)).await;
-    
+
     println!("\n✅ 工作队列示例完成");
     Ok(())
 }
@@ -2356,7 +2356,7 @@ pub async fn demo_amqp_worker_pool() -> Result<(), Box<dyn std::error::Error>> {
 
 ```rust
 //! GraphQL over HTTP 实现
-//! 
+//!
 //! Cargo.toml:
 //! ```toml
 //! [dependencies]
@@ -2413,7 +2413,7 @@ impl GraphQLClient {
             endpoint: endpoint.to_string(),
         }
     }
-    
+
     /// 执行查询
     pub async fn query<T: for<'de> Deserialize<'de>>(
         &self,
@@ -2424,30 +2424,30 @@ impl GraphQLClient {
             query: query.to_string(),
             variables,
         };
-        
+
         println!("📤 发送 GraphQL 查询");
-        
+
         let response = self
             .client
             .post(&self.endpoint)
             .json(&request)
             .send()
             .await?;
-        
+
         let graphql_response: GraphQLResponse<T> = response.json().await?;
-        
+
         if let Some(errors) = graphql_response.errors {
             for error in &errors {
                 eprintln!("❌ GraphQL 错误: {}", error.message);
             }
             return Err("GraphQL查询失败".into());
         }
-        
+
         graphql_response
             .data
             .ok_or_else(|| "没有返回数据".into())
     }
-    
+
     /// 执行变更
     pub async fn mutate<T: for<'de> Deserialize<'de>>(
         &self,
@@ -2474,9 +2474,9 @@ struct User {
 /// 示例: GraphQL 客户端使用
 pub async fn demo_graphql_client() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== GraphQL 客户端示例 ===\n");
-    
+
     let client = GraphQLClient::new("https://api.example.com/graphql");
-    
+
     // 查询用户
     let query = r#"
         query GetUser($id: ID!) {
@@ -2487,14 +2487,14 @@ pub async fn demo_graphql_client() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     "#;
-    
+
     let variables = json!({
         "id": "123"
     });
-    
+
     let user_data: UserData = client.query(query, Some(variables)).await?;
     println!("✅ 查询成功: {:?}", user_data.user);
-    
+
     // 变更示例
     let mutation = r#"
         mutation UpdateUser($id: ID!, $name: String!) {
@@ -2504,15 +2504,15 @@ pub async fn demo_graphql_client() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     "#;
-    
+
     let mutation_variables = json!({
         "id": "123",
         "name": "New Name"
     });
-    
+
     let updated: UserData = client.mutate(mutation, Some(mutation_variables)).await?;
     println!("✅ 变更成功: {:?}", updated.user);
-    
+
     println!("\n✅ GraphQL示例完成");
     Ok(())
 }
@@ -2524,7 +2524,7 @@ pub async fn demo_graphql_client() -> Result<(), Box<dyn std::error::Error>> {
 
 ```rust
 //! Server-Sent Events (SSE) 实现
-//! 
+//!
 //! Cargo.toml:
 //! ```toml
 //! [dependencies]
@@ -2559,30 +2559,30 @@ impl SseClient {
             client: Client::new(),
         }
     }
-    
+
     /// 连接到 SSE 端点
     pub async fn connect(
         &self,
         url: &str,
     ) -> Result<impl Stream<Item = Result<SseEvent, Box<dyn std::error::Error + Send + Sync>>>, Box<dyn std::error::Error>> {
         println!("🔌 连接到 SSE: {}", url);
-        
+
         let response = self
             .client
             .get(url)
             .header("Accept", "text/event-stream")
             .send()
             .await?;
-        
+
         if !response.status().is_success() {
             return Err(format!("HTTP错误: {}", response.status()).into());
         }
-        
+
         println!("✅ SSE 连接建立");
-        
+
         // 创建字节流
         let stream = response.bytes_stream();
-        
+
         // 转换为事件流
         let event_stream = stream.map(|chunk_result| {
             match chunk_result {
@@ -2593,22 +2593,22 @@ impl SseClient {
                 Err(e) => Err(Box::new(e) as Box<dyn std::error::Error + Send + Sync>),
             }
         });
-        
+
         Ok(event_stream)
     }
-    
+
     /// 解析 SSE 事件
     fn parse_sse_event(text: &str) -> Result<SseEvent, Box<dyn std::error::Error + Send + Sync>> {
         let mut event_type = None;
         let mut data = String::new();
         let mut id = None;
         let mut retry = None;
-        
+
         for line in text.lines() {
             if line.is_empty() {
                 continue;
             }
-            
+
             if let Some(field_value) = line.strip_prefix("event:") {
                 event_type = Some(field_value.trim().to_string());
             } else if let Some(field_value) = line.strip_prefix("data:") {
@@ -2622,7 +2622,7 @@ impl SseClient {
                 retry = field_value.trim().parse().ok();
             }
         }
-        
+
         Ok(SseEvent {
             event_type,
             data,
@@ -2635,12 +2635,12 @@ impl SseClient {
 /// 示例: SSE 客户端使用
 pub async fn demo_sse_client() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== SSE 客户端示例 ===\n");
-    
+
     let client = SseClient::new();
-    
+
     // 连接到 SSE 端点
     let mut stream = client.connect("https://api.example.com/events").await?;
-    
+
     // 接收事件（限制为10个事件）
     let mut count = 0;
     while let Some(event_result) = stream.next().await {
@@ -2651,7 +2651,7 @@ pub async fn demo_sse_client() -> Result<(), Box<dyn std::error::Error>> {
                     event.event_type.unwrap_or_else(|| "message".to_string()),
                     event.data
                 );
-                
+
                 count += 1;
                 if count >= 10 {
                     break;
@@ -2663,7 +2663,7 @@ pub async fn demo_sse_client() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     }
-    
+
     println!("\n✅ SSE示例完成");
     Ok(())
 }
@@ -2716,20 +2716,20 @@ impl ServiceRegistry {
             services: Arc::new(RwLock::new(HashMap::new())),
         }
     }
-    
+
     /// 注册服务
     pub async fn register(&self, service: ServiceInfo) {
         let mut services = self.services.write().await;
         services.insert(service.name.clone(), service.clone());
         println!("✅ 服务已注册: {} @ {} ({:?})", service.name, service.address, service.protocol);
     }
-    
+
     /// 发现服务
     pub async fn discover(&self, name: &str) -> Option<ServiceInfo> {
         let services = self.services.read().await;
         services.get(name).cloned()
     }
-    
+
     /// 健康检查
     pub async fn health_check(&self, name: &str) -> HealthStatus {
         let services = self.services.read().await;
@@ -2753,7 +2753,7 @@ impl ServiceGateway {
             http_client: reqwest::Client::new(),
         }
     }
-    
+
     /// 路由请求到后端服务
     pub async fn route_request(
         &self,
@@ -2766,15 +2766,15 @@ impl ServiceGateway {
             .discover(service_name)
             .await
             .ok_or("服务未找到")?;
-        
+
         // 健康检查
         let health = self.registry.health_check(service_name).await;
         if health != HealthStatus::Healthy {
             return Err("服务不健康".into());
         }
-        
+
         println!("🔀 路由请求: {} -> {} ({})", service_name, service.address, path);
-        
+
         // 根据协议类型路由
         match service.protocol {
             Protocol::Http => {
@@ -2803,7 +2803,7 @@ impl EventBus {
             mqtt_client: Arc::new(RwLock::new(None)),
         }
     }
-    
+
     /// 发布事件
     pub async fn publish_event(
         &self,
@@ -2811,7 +2811,7 @@ impl EventBus {
         payload: serde_json::Value,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let client = self.mqtt_client.read().await;
-        
+
         if let Some(client) = client.as_ref() {
             let message = serde_json::to_vec(&payload)?;
             client
@@ -2822,10 +2822,10 @@ impl EventBus {
                     message,
                 )
                 .await?;
-            
+
             println!("📡 事件已发布: {}", event_type);
         }
-        
+
         Ok(())
     }
 }
@@ -2833,10 +2833,10 @@ impl EventBus {
 /// 示例: 微服务通信
 pub async fn demo_microservices() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== 微服务通信综合示例 ===\n");
-    
+
     // 创建服务注册中心
     let registry = Arc::new(ServiceRegistry::new());
-    
+
     // 注册服务
     registry
         .register(ServiceInfo {
@@ -2846,7 +2846,7 @@ pub async fn demo_microservices() -> Result<(), Box<dyn std::error::Error>> {
             health_status: HealthStatus::Healthy,
         })
         .await;
-    
+
     registry
         .register(ServiceInfo {
             name: "order-service".to_string(),
@@ -2855,19 +2855,19 @@ pub async fn demo_microservices() -> Result<(), Box<dyn std::error::Error>> {
             health_status: HealthStatus::Healthy,
         })
         .await;
-    
+
     // 创建网关
     let gateway = ServiceGateway::new(registry.clone());
-    
+
     // 路由请求
     match gateway.route_request("user-service", "/users/123").await {
         Ok(response) => println!("✅ 响应: {}", response),
         Err(e) => eprintln!("❌ 请求失败: {}", e),
     }
-    
+
     // 创建事件总线
     let event_bus = EventBus::new();
-    
+
     // 发布事件
     event_bus
         .publish_event(
@@ -2878,7 +2878,7 @@ pub async fn demo_microservices() -> Result<(), Box<dyn std::error::Error>> {
             }),
         )
         .await?;
-    
+
     println!("\n✅ 微服务通信示例完成");
     Ok(())
 }
@@ -2975,7 +2975,7 @@ tonic-build = "0.11"
 
 ---
 
-**文档完成日期**: 2025-10-19  
-**Rust版本要求**: 1.90+  
-**代码状态**: ✅ 生产就绪  
+**文档完成日期**: 2025-10-19
+**Rust版本要求**: 1.90+
+**代码状态**: ✅ 生产就绪
 **总代码行数**: ~2000+ 行

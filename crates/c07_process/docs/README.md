@@ -1,12 +1,12 @@
 # C07 进程管理 (c07_process)
 
-> **文档定位**: C07进程管理模块主入口，提供快速开始指南、IPC通信机制介绍和完整的学习资源导航  
-> **先修知识**: [C01 所有权](../../c01_ownership_borrow_scope/docs/README.md) | [C05 线程](../../c05_threads/docs/README.md)  
+> **文档定位**: C07进程管理模块主入口，提供快速开始指南、IPC通信机制介绍和完整的学习资源导航
+> **先修知识**: [C01 所有权](../../c01_ownership_borrow_scope/docs/README.md) | [C05 线程](../../c05_threads/docs/README.md)
 > **相关文档**: [主索引](./00_MASTER_INDEX.md) | [FAQ](./FAQ.md) | [Glossary](./Glossary.md)
 
-**最后更新**: 2025-10-19  
-**适用版本**: Rust 1.75+ (推荐 1.90+)  
-**难度等级**: ⭐⭐⭐⭐ 中高级  
+**最后更新**: 2025-10-19
+**适用版本**: Rust 1.75+ (推荐 1.90+)
+**难度等级**: ⭐⭐⭐⭐ 中高级
 **文档类型**: 📖 入门指南
 
 ---
@@ -29,28 +29,28 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let output = Command::new("echo")
         .arg("Hello from child process!")
         .output()?;
-    
+
     println!("Status: {}", output.status);
     println!("Output: {}", String::from_utf8_lossy(&output.stdout));
-    
+
     // 2. 使用管道进行IPC通信
     use std::process::Stdio;
     use std::io::Write;
-    
+
     let mut child = Command::new("cat")
         .stdin(Stdio::piped())
         .stdout(Stdio::piped())
         .spawn()?;
-    
+
     // 写入数据
     if let Some(mut stdin) = child.stdin.take() {
         stdin.write_all(b"Hello via pipe!")?;
     }
-    
+
     // 读取输出
     let output = child.wait_with_output()?;
     println!("Pipe output: {}", String::from_utf8_lossy(&output.stdout));
-    
+
     Ok(())
 }
 ```
@@ -205,7 +205,7 @@ let status = child.wait()?;
 #[cfg(unix)]
 use std::os::unix::process::CommandExt;
 
-#[cfg(windows)]  
+#[cfg(windows)]
 use std::os::windows::process::CommandExt;
 
 let mut cmd = Command::new("app");
@@ -281,9 +281,9 @@ let output = Command::new("app")
 
 ### 最佳实践
 
-✅ 使用`output()`自动等待和获取输出  
-✅ 配置`Stdio::null()`关闭不需要的流  
-✅ 使用RAII封装确保资源清理  
+✅ 使用`output()`自动等待和获取输出
+✅ 配置`Stdio::null()`关闭不需要的流
+✅ 使用RAII封装确保资源清理
 ✅ 异步场景使用tokio::process
 
 ---
@@ -292,9 +292,9 @@ let output = Command::new("app")
 
 ### 当前状态
 
-**文档完成度**: 90%+ ✅  
-**代码完成度**: 100% ✅  
-**测试覆盖率**: 85%+ ✅  
+**文档完成度**: 90%+ ✅
+**代码完成度**: 100% ✅
+**测试覆盖率**: 85%+ ✅
 **最后更新**: 2025-10-19
 
 ### 文档统计
@@ -368,8 +368,8 @@ winapi = "0.3"  # Windows API
 
 ---
 
-**文档版本**: v1.0  
-**创建日期**: 2025-10-19  
+**文档版本**: v1.0
+**创建日期**: 2025-10-19
 **维护状态**: ✅ 活跃维护
 
 🚀 **开始你的Rust进程管理之旅！**

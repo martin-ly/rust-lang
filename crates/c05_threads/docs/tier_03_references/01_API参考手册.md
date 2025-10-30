@@ -657,7 +657,7 @@ fn main() {
     let db1 = get_database();
     // 后续调用返回相同实例
     let db2 = get_database();
-    
+
     assert!(std::ptr::eq(db1, db2));
 }
 ```
@@ -685,12 +685,12 @@ impl SharedState {
             data: Arc::new(Mutex::new(Vec::new())),
         }
     }
-    
+
     fn increment(&self) {
         let mut counter = self.counter.lock().unwrap();
         *counter += 1;
     }
-    
+
     fn add_data(&self, value: String) {
         let mut data = self.data.lock().unwrap();
         data.push(value);
@@ -700,7 +700,7 @@ impl SharedState {
 fn main() {
     let state = SharedState::new();
     let mut handles = vec![];
-    
+
     for i in 0..10 {
         let state = state.clone();
         let handle = thread::spawn(move || {
@@ -709,11 +709,11 @@ fn main() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     println!("Counter: {}", state.counter.lock().unwrap());
     println!("Data: {:?}", state.data.lock().unwrap());
 }
@@ -732,22 +732,22 @@ use std::thread;
 fn work_stealing_example() {
     let injector = Injector::new();
     let num_workers = 4;
-    
+
     // 创建工作线程的本地队列
     let workers: Vec<_> = (0..num_workers)
         .map(|_| Worker::new_fifo())
         .collect();
-    
+
     let stealers: Vec<Stealer<_>> = workers
         .iter()
         .map(|w| w.stealer())
         .collect();
-    
+
     // 注入任务
     for i in 0..10000 {
         injector.push(i);
     }
-    
+
     // 工作线程
     let handles: Vec<_> = workers
         .into_iter()
@@ -756,7 +756,7 @@ fn work_stealing_example() {
             let stealers = stealers.clone();
             thread::spawn(move || {
                 let mut processed = 0;
-                
+
                 loop {
                     // 从本地队列获取任务
                     let task = worker.pop()
@@ -778,7 +778,7 @@ fn work_stealing_example() {
                                         .and_then(|s| s.success())
                                 })
                         });
-                    
+
                     match task {
                         Some(task) => {
                             // 处理任务
@@ -788,16 +788,16 @@ fn work_stealing_example() {
                         None => break,
                     }
                 }
-                
+
                 processed
             })
         })
         .collect();
-    
+
     let total: usize = handles.into_iter()
         .map(|h| h.join().unwrap())
         .sum();
-    
+
     println!("Total processed: {}", total);
 }
 ```
@@ -815,7 +815,7 @@ use std::time::Duration;
 
 fn producer_consumer_bounded() {
     let (tx, rx) = bounded(100); // 有界通道，背压控制
-    
+
     // 生产者线程
     let producer = thread::spawn(move || {
         for i in 0..1000 {
@@ -825,7 +825,7 @@ fn producer_consumer_bounded() {
             }
         }
     });
-    
+
     // 消费者线程
     let mut consumers = vec![];
     for id in 0..4 {
@@ -841,10 +841,10 @@ fn producer_consumer_bounded() {
         });
         consumers.push(consumer);
     }
-    
+
     producer.join().unwrap();
     drop(rx); // 关闭接收端，让消费者退出
-    
+
     for consumer in consumers {
         consumer.join().unwrap();
     }
@@ -852,7 +852,7 @@ fn producer_consumer_bounded() {
 
 fn producer_consumer_unbounded() {
     let (tx, rx) = unbounded(); // 无界通道
-    
+
     // 多个生产者
     let producers: Vec<_> = (0..3)
         .map(|id| {
@@ -864,7 +864,7 @@ fn producer_consumer_unbounded() {
             })
         })
         .collect();
-    
+
     // 单个消费者
     let consumer = thread::spawn(move || {
         let mut count = 0;
@@ -876,12 +876,12 @@ fn producer_consumer_unbounded() {
         }
         count
     });
-    
+
     for producer in producers {
         producer.join().unwrap();
     }
     drop(tx); // 关闭所有发送端
-    
+
     let total = consumer.join().unwrap();
     println!("Total items: {}", total);
 }
@@ -904,21 +904,21 @@ fn custom_thread_pool() {
         .thread_name(|i| format!("worker-{}", i))
         .build()
         .unwrap();
-    
+
     // 在线程池中执行任务
     pool.install(|| {
         let results: Vec<_> = (0..1000)
             .into_par_iter()
             .map(|i| i * i)
             .collect();
-        
+
         println!("Processed {} items", results.len());
     });
 }
 
 fn scoped_threads() {
     let data = vec![1, 2, 3, 4, 5];
-    
+
     rayon::scope(|s| {
         for (i, item) in data.iter().enumerate() {
             s.spawn(move |_| {
@@ -926,7 +926,7 @@ fn scoped_threads() {
             });
         }
     });
-    
+
     // 所有spawn的线程在这里保证已完成
     println!("All threads completed");
 }
@@ -953,15 +953,15 @@ impl LockFreeCounter {
             count: AtomicUsize::new(0),
         }
     }
-    
+
     fn increment(&self) -> usize {
         self.count.fetch_add(1, Ordering::Relaxed)
     }
-    
+
     fn get(&self) -> usize {
         self.count.load(Ordering::Relaxed)
     }
-    
+
     fn compare_and_swap(&self, current: usize, new: usize) -> Result<(), usize> {
         self.count
             .compare_exchange(
@@ -978,7 +978,7 @@ impl LockFreeCounter {
 fn lockfree_counter_example() {
     let counter = Arc::new(LockFreeCounter::new());
     let mut handles = vec![];
-    
+
     for _ in 0..10 {
         let counter = Arc::clone(&counter);
         let handle = thread::spawn(move || {
@@ -988,11 +988,11 @@ fn lockfree_counter_example() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     println!("Final count: {}", counter.get());
 }
 ```
@@ -1011,29 +1011,29 @@ fn barrier_example() {
     let num_threads = 4;
     let barrier = Arc::new(Barrier::new(num_threads));
     let mut handles = vec![];
-    
+
     for id in 0..num_threads {
         let barrier = Arc::clone(&barrier);
         let handle = thread::spawn(move || {
             println!("Thread {} - Phase 1", id);
             // 第一阶段工作
             thread::sleep(std::time::Duration::from_millis(id as u64 * 100));
-            
+
             // 等待所有线程完成第一阶段
             barrier.wait();
-            
+
             println!("Thread {} - Phase 2", id);
             // 第二阶段工作
             thread::sleep(std::time::Duration::from_millis(id as u64 * 50));
-            
+
             // 等待所有线程完成第二阶段
             barrier.wait();
-            
+
             println!("Thread {} - Phase 3", id);
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
@@ -1061,19 +1061,19 @@ impl Cache {
             data: Arc::new(RwLock::new(HashMap::new())),
         }
     }
-    
+
     fn get(&self, key: &str) -> Option<String> {
         // 读锁：允许多个读者
         let data = self.data.read().unwrap();
         data.get(key).cloned()
     }
-    
+
     fn set(&self, key: String, value: String) {
         // 写锁：独占访问
         let mut data = self.data.write().unwrap();
         data.insert(key, value);
     }
-    
+
     fn get_or_insert(&self, key: String, default: String) -> String {
         // 先尝试读
         {
@@ -1082,7 +1082,7 @@ impl Cache {
                 return value.clone();
             }
         }
-        
+
         // 读失败后升级到写锁
         let mut data = self.data.write().unwrap();
         // 双重检查：可能有其他线程已经插入
@@ -1093,7 +1093,7 @@ impl Cache {
 fn rwlock_cache_example() {
     let cache = Arc::new(Cache::new());
     let mut handles = vec![];
-    
+
     // 90% 读操作
     for i in 0..9 {
         let cache = Arc::clone(&cache);
@@ -1105,7 +1105,7 @@ fn rwlock_cache_example() {
         });
         handles.push(handle);
     }
-    
+
     // 10% 写操作
     for i in 0..1 {
         let cache = Arc::clone(&cache);
@@ -1118,7 +1118,7 @@ fn rwlock_cache_example() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }

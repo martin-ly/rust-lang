@@ -218,12 +218,12 @@ fn main() -> Result<(), DesignPatternError> {
         "Hello, Rust Design Patterns!".to_string()
     });
     println!("{}", instance);
-    
+
     // 使用享元模式
     let mut factory = OptimizedFlyweightFactory::new();
     let flyweight = factory.get_flyweight("demo", "Demo State".to_string());
     flyweight.operation("Demo Operation");
-    
+
     Ok(())
 }
 ```

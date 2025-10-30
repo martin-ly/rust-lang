@@ -284,7 +284,7 @@ use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 fn bench_factorial_async(c: &mut Criterion) {
     let rt = tokio::runtime::Runtime::new().unwrap();
-    
+
     c.bench_function("factorial_async_20", |b| {
         b.iter(|| {
             rt.block_on(factorial_async(black_box(20)))
@@ -563,16 +563,16 @@ fn fib_iter(n: u64) -> u64 {
 fn bench_fibonacci(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
     let mut group = c.benchmark_group("fibonacci");
-    
+
     for n in [10, 15, 20].iter() {
         group.bench_with_input(BenchmarkId::new("sync", n), n, |b, &n| {
             b.iter(|| fib_sync(black_box(n)));
         });
-        
+
         group.bench_with_input(BenchmarkId::new("async", n), n, |b, &n| {
             b.iter(|| rt.block_on(fib_async(black_box(n))));
         });
-        
+
         group.bench_with_input(BenchmarkId::new("iter", n), n, |b, &n| {
             b.iter(|| fib_iter(black_box(n)));
         });
@@ -653,26 +653,26 @@ impl Node {
     fn dfs_async(&self) -> Pin<Box<dyn Future<Output = Vec<i32>> + Send + '_>> {
         Box::pin(async move {
             let mut result = vec![self.value];
-            
+
             if let Some(left) = &self.left {
                 let mut left_values = left.dfs_async().await;
                 result.append(&mut left_values);
             }
-            
+
             if let Some(right) = &self.right {
                 let mut right_values = right.dfs_async().await;
                 result.append(&mut right_values);
             }
-            
+
             result
         })
     }
-    
+
     // 并行遍历（左右子树并发）
     fn dfs_parallel(&self) -> Pin<Box<dyn Future<Output = Vec<i32>> + Send + '_>> {
         Box::pin(async move {
             let mut result = vec![self.value];
-            
+
             let left_fut = async {
                 if let Some(left) = &self.left {
                     left.dfs_parallel().await
@@ -680,7 +680,7 @@ impl Node {
                     vec![]
                 }
             };
-            
+
             let right_fut = async {
                 if let Some(right) = &self.right {
                     right.dfs_parallel().await
@@ -688,11 +688,11 @@ impl Node {
                     vec![]
                 }
             };
-            
+
             let (mut left_vals, mut right_vals) = tokio::join!(left_fut, right_fut);
             result.append(&mut left_vals);
             result.append(&mut right_vals);
-            
+
             result
         })
     }
@@ -826,12 +826,12 @@ async fn parallel_sum(arr: &[i32]) -> i32 {
     } else {
         let mid = arr.len() / 2;
         let (left, right) = arr.split_at(mid);
-        
+
         let (l, r) = tokio::join!(
             parallel_sum(left),
             parallel_sum(right)
         );
-        
+
         l + r
     }
 }
@@ -864,9 +864,9 @@ async fn parallel_sum(arr: &[i32]) -> i32 {
 
 ---
 
-**文档版本**: 1.0  
-**最后更新**: 2025-10-02  
-**Rust版本**: 1.90+ (Edition 2024)  
+**文档版本**: 1.0
+**最后更新**: 2025-10-02
+**Rust版本**: 1.90+ (Edition 2024)
 **参考**:
 
 - "Recursion Schemes" by Patrick Thomson

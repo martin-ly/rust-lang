@@ -1,6 +1,6 @@
 # syn & quote 完整参考
 
-**最后更新**: 2025-10-24  
+**最后更新**: 2025-10-24
 **适用版本**: syn 2.0, quote 1.0
 
 本文档提供 `syn` 和 `quote` 库的完整使用参考，这是过程宏开发的核心工具。
@@ -92,11 +92,11 @@ use proc_macro::TokenStream;
 pub fn my_trait(input: TokenStream) -> TokenStream {
     // 解析输入
     let input = parse_macro_input!(input as DeriveInput);
-    
+
     // 提取信息
     let name = &input.ident;
     let generics = &input.generics;
-    
+
     // 生成代码
     quote::quote! {
         impl #generics MyTrait for #name #generics {
@@ -166,9 +166,9 @@ use syn::{parse_macro_input, DeriveInput, Data, Fields};
 #[proc_macro_derive(MyTrait)]
 pub fn my_trait(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
-    
+
     let name = &input.ident;
-    
+
     match &input.data {
         Data::Struct(data_struct) => {
             match &data_struct.fields {
@@ -176,7 +176,7 @@ pub fn my_trait(input: TokenStream) -> TokenStream {
                     for field in &fields.named {
                         let field_name = &field.ident;
                         let field_type = &field.ty;
-                        println!("{}: {}", 
+                        println!("{}: {}",
                                  quote::quote!(#field_name),
                                  quote::quote!(#field_type));
                     }
@@ -199,7 +199,7 @@ pub fn my_trait(input: TokenStream) -> TokenStream {
             panic!("Unions not supported");
         }
     }
-    
+
     TokenStream::new()
 }
 ```
@@ -232,10 +232,10 @@ use syn::{parse_macro_input, ItemFn};
 #[proc_macro_attribute]
 pub fn log_calls(_attr: TokenStream, item: TokenStream) -> TokenStream {
     let mut func = parse_macro_input!(item as ItemFn);
-    
+
     let func_name = &func.sig.ident;
     let block = &func.block;
-    
+
     // 添加日志
     func.block = syn::parse_quote! {
         {
@@ -245,7 +245,7 @@ pub fn log_calls(_attr: TokenStream, item: TokenStream) -> TokenStream {
             result
         }
     };
-    
+
     quote::quote!(#func).into()
 }
 ```
@@ -269,7 +269,7 @@ impl Parse for MyInput {
         let name: Ident = input.parse()?;
         input.parse::<Token![=]>()?;
         let value: syn::LitInt = input.parse()?;
-        
+
         Ok(MyInput {
             name,
             value: value.base10_parse()?,
@@ -282,7 +282,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as MyInput);
     let name = &input.name;
     let value = input.value;
-    
+
     quote::quote! {
         const #name: i32 = #value;
     }.into()
@@ -317,8 +317,8 @@ fn get_inner_type(ty: &Type) -> Option<&Type> {
     if let Type::Path(TypePath { path, .. }) = ty {
         if path.segments.last()?.ident == "Vec" {
             // 提取 Vec<T> 中的 T
-            if let syn::PathArguments::AngleBracketed(args) = 
-                &path.segments.last()?.arguments 
+            if let syn::PathArguments::AngleBracketed(args) =
+                &path.segments.last()?.arguments
             {
                 if let Some(syn::GenericArgument::Type(inner)) = args.args.first() {
                     return Some(inner);
@@ -403,13 +403,13 @@ fn parse_attributes(attrs: &[Attribute]) {
             }
             Meta::List(MetaList { path, tokens, .. }) => {
                 // #[my_attr(arg1, arg2)]
-                println!("List: {} with {}", 
+                println!("List: {} with {}",
                          quote::quote!(#path),
                          quote::quote!(#tokens));
             }
             Meta::NameValue(MetaNameValue { path, value, .. }) => {
                 // #[my_attr = "value"]
-                println!("NameValue: {} = {}", 
+                println!("NameValue: {} = {}",
                          quote::quote!(#path),
                          quote::quote!(#value));
             }
@@ -427,18 +427,18 @@ use syn::{Attribute, Meta, MetaList};
 
 fn parse_derive_helper(attr: &Attribute) -> syn::Result<()> {
     let meta = &attr.meta;
-    
+
     if let Meta::List(MetaList { tokens, .. }) = meta {
-        let nested: syn::punctuated::Punctuated<syn::Meta, syn::Token![,]> = 
+        let nested: syn::punctuated::Punctuated<syn::Meta, syn::Token![,]> =
             syn::parse2(tokens.clone())?;
-        
+
         for meta in nested {
             match meta {
                 Meta::Path(path) => {
                     println!("Flag: {}", quote::quote!(#path));
                 }
                 Meta::NameValue(nv) => {
-                    println!("{} = {}", 
+                    println!("{} = {}",
                              quote::quote!(#nv.path),
                              quote::quote!(#nv.value));
                 }
@@ -446,7 +446,7 @@ fn parse_derive_helper(attr: &Attribute) -> syn::Result<()> {
             }
         }
     }
-    
+
     Ok(())
 }
 ```
@@ -468,7 +468,7 @@ impl Parse for MyAttrArgs {
         let name: Ident = input.parse()?;
         input.parse::<Token![=]>()?;
         let value: LitStr = input.parse()?;
-        
+
         Ok(MyAttrArgs { name, value })
     }
 }
@@ -635,7 +635,7 @@ use syn::spanned::Spanned;
 fn generate_impl(input: &syn::DeriveInput) -> proc_macro2::TokenStream {
     for field in get_fields(input) {
         let field_span = field.span();
-        
+
         // 检查字段类型
         if !is_valid_type(&field.ty) {
             return quote_spanned! {field_span=>
@@ -643,7 +643,7 @@ fn generate_impl(input: &syn::DeriveInput) -> proc_macro2::TokenStream {
             };
         }
     }
-    
+
     quote! {
         // 正常生成代码
     }
@@ -668,7 +668,7 @@ impl ToTokens for MyType {
     fn to_tokens(&self, tokens: &mut proc_macro2::TokenStream) {
         let name = &self.name;
         let value = self.value;
-        
+
         tokens.append_all(quote! {
             const #name: i32 = #value;
         });
@@ -699,7 +699,7 @@ impl ToTokens for Config {
     fn to_tokens(&self, tokens: &mut proc_macro2::TokenStream) {
         let debug = self.debug;
         let optimize = self.optimize;
-        
+
         tokens.extend(quote! {
             ConfigStruct {
                 debug: #debug,
@@ -724,10 +724,10 @@ use syn::{parse_macro_input, DeriveInput};
 #[proc_macro_derive(MyTrait)]
 pub fn derive_my_trait(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
-    
+
     let name = &input.ident;
     let (impl_generics, ty_generics, where_clause) = input.generics.split_for_impl();
-    
+
     let expanded = quote! {
         impl #impl_generics MyTrait for #name #ty_generics #where_clause {
             fn my_method(&self) {
@@ -735,7 +735,7 @@ pub fn derive_my_trait(input: TokenStream) -> TokenStream {
             }
         }
     };
-    
+
     TokenStream::from(expanded)
 }
 ```
@@ -752,11 +752,11 @@ use syn::{parse_macro_input, ItemFn};
 #[proc_macro_attribute]
 pub fn my_attribute(_attr: TokenStream, item: TokenStream) -> TokenStream {
     let input = parse_macro_input!(item as ItemFn);
-    
+
     let name = &input.sig.ident;
     let block = &input.block;
     let sig = &input.sig;
-    
+
     let expanded = quote! {
         #sig {
             println!("Before {}", stringify!(#name));
@@ -765,7 +765,7 @@ pub fn my_attribute(_attr: TokenStream, item: TokenStream) -> TokenStream {
             result
         }
     };
-    
+
     TokenStream::from(expanded)
 }
 ```
@@ -782,20 +782,20 @@ use syn::{parse_macro_input, Ident};
 #[proc_macro]
 pub fn create_struct(input: TokenStream) -> TokenStream {
     let name = parse_macro_input!(input as Ident);
-    
+
     let expanded = quote! {
         #[derive(Debug, Clone)]
         pub struct #name {
             pub value: i32,
         }
-        
+
         impl #name {
             pub fn new(value: i32) -> Self {
                 Self { value }
             }
         }
     };
-    
+
     TokenStream::from(expanded)
 }
 ```
@@ -823,11 +823,11 @@ fn validate_input(input: &syn::DeriveInput) -> Result<()> {
 #[proc_macro_derive(MyTrait)]
 pub fn my_trait(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
-    
+
     if let Err(e) = validate_input(&input) {
         return e.to_compile_error().into();
     }
-    
+
     // 正常处理
     TokenStream::new()
 }
@@ -879,7 +879,7 @@ pub fn my_trait(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_my_trait() {
         let input: syn::DeriveInput = syn::parse_quote! {
@@ -887,7 +887,7 @@ mod tests {
                 field: i32,
             }
         };
-        
+
         let output = my_trait_impl(&input);
         assert!(output.to_string().contains("impl MyTrait"));
     }

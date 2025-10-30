@@ -57,8 +57,8 @@
 
 -**Comprehensive Index for Rust Async Programming 2025**
 
-**日期**: 2025年10月6日  
-**版本**: Rust 1.90+ | Tokio 1.41+ | Smol 2.0+  
+**日期**: 2025年10月6日
+**版本**: Rust 1.90+ | Tokio 1.41+ | Smol 2.0+
 **状态**: ✅ 完整版
 
 ---
@@ -327,26 +327,26 @@ cargo run --example csp_pattern_comprehensive_2025
 
 #### Reactor 模式
 
-**理论**: 事件驱动架构  
-**实现**: `examples/reactor_pattern_comprehensive_2025.rs`  
+**理论**: 事件驱动架构
+**实现**: `examples/reactor_pattern_comprehensive_2025.rs`
 **对比**: [模式对比 - Reactor](docs/ASYNC_PATTERNS_COMPARISON_2025.md#reactor-模式适用场景)
 
 #### Actor 模式
 
-**理论**: 消息传递并发  
-**实现**: `examples/actor_pattern_comprehensive_2025.rs`  
+**理论**: 消息传递并发
+**实现**: `examples/actor_pattern_comprehensive_2025.rs`
 **对比**: [模式对比 - Actor](docs/ASYNC_PATTERNS_COMPARISON_2025.md#actor-模式适用场景)
 
 #### CSP 模式
 
-**理论**: 通道通信  
-**实现**: `examples/csp_pattern_comprehensive_2025.rs`  
+**理论**: 通道通信
+**实现**: `examples/csp_pattern_comprehensive_2025.rs`
 **对比**: [模式对比 - CSP](docs/ASYNC_PATTERNS_COMPARISON_2025.md#csp-模式适用场景)
 
 #### 混合模式
 
-**理论**: 多模式组合  
-**文档**: [模式对比 - 混合模式](docs/ASYNC_PATTERNS_COMPARISON_2025.md#混合模式--hybrid-patterns)  
+**理论**: 多模式组合
+**文档**: [模式对比 - 混合模式](docs/ASYNC_PATTERNS_COMPARISON_2025.md#混合模式--hybrid-patterns)
 **示例**: `examples/actor_csp_hybrid_advanced.rs`
 
 ---
@@ -545,8 +545,8 @@ cargo run --example csp_pattern_comprehensive_2025
 
 ---
 
-**最后更新**: 2025-10-06  
-**索引版本**: 1.0.0  
+**最后更新**: 2025-10-06
+**索引版本**: 1.0.0
 **项目状态**: ✅ 完整版
 
 **欢迎提交 Issue 和 Pull Request！**

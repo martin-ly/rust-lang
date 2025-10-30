@@ -1,8 +1,8 @@
 ﻿# C11 Macro System - Tier 2: Derive 宏开发指南
 
-> **文档版本**: v1.0.0  
-> **最后更新**: 2025-10-23  
-> **Rust 版本**: 1.90+  
+> **文档版本**: v1.0.0
+> **最后更新**: 2025-10-23
+> **Rust 版本**: 1.90+
 > **预计阅读**: 35 分钟
 
 ---
@@ -10,8 +10,7 @@
 ## 📋 目录
 
 - [C11 Macro System - Tier 2: Derive 宏开发指南](#c11-macro-system---tier-2-derive-宏开发指南)
-  - [📊 目录](#-目录)
-  - [📋 目录](#-目录-1)
+  - [� 目录](#-目录)
   - [1. Derive 宏概述](#1-derive-宏概述)
   - [2. 基础设置](#2-基础设置)
     - [2.1 项目结构](#21-项目结构)
@@ -90,10 +89,10 @@ use syn::{parse_macro_input, DeriveInput};
 pub fn derive_my_trait(input: TokenStream) -> TokenStream {
     // 1. 解析输入
     let input = parse_macro_input!(input as DeriveInput);
-    
+
     // 2. 提取结构体名称
     let name = &input.ident;
-    
+
     // 3. 生成代码
     let expanded = quote! {
         impl MyTrait for #name {
@@ -102,7 +101,7 @@ pub fn derive_my_trait(input: TokenStream) -> TokenStream {
             }
         }
     };
-    
+
     // 4. 返回生成的代码
     TokenStream::from(expanded)
 }
@@ -121,7 +120,7 @@ use syn::{Data, Fields};
 pub fn derive_builder(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let name = &input.ident;
-    
+
     // 提取字段
     let fields = match &input.data {
         Data::Struct(data_struct) => {
@@ -132,14 +131,14 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
         }
         _ => panic!("Only structs are supported"),
     };
-    
+
     // 处理每个字段
     for field in fields {
         let field_name = &field.ident;
         let field_type = &field.ty;
         println!("Field: {:?} : {:?}", field_name, field_type);
     }
-    
+
     TokenStream::new()
 }
 ```
@@ -152,14 +151,14 @@ use syn::{Attribute, Meta};
 #[proc_macro_derive(MyTrait, attributes(my_attr))]
 pub fn derive_with_attrs(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
-    
+
     // 解析类型级别属性
     for attr in &input.attrs {
         if attr.path().is_ident("my_attr") {
             println!("Found my_attr attribute");
         }
     }
-    
+
     TokenStream::new()
 }
 
@@ -182,7 +181,7 @@ use quote::quote;
 pub fn derive_default(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let name = &input.ident;
-    
+
     let expanded = quote! {
         impl Default for #name {
             fn default() -> Self {
@@ -192,7 +191,7 @@ pub fn derive_default(input: TokenStream) -> TokenStream {
             }
         }
     };
-    
+
     TokenStream::from(expanded)
 }
 ```
@@ -208,10 +207,10 @@ pub fn derive_clone(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let name = &input.ident;
     let generics = &input.generics;
-    
+
     // 分离泛型参数
     let (impl_generics, ty_generics, where_clause) = generics.split_for_impl();
-    
+
     let expanded = quote! {
         impl #impl_generics Clone for #name #ty_generics #where_clause {
             fn clone(&self) -> Self {
@@ -221,7 +220,7 @@ pub fn derive_clone(input: TokenStream) -> TokenStream {
             }
         }
     };
-    
+
     TokenStream::from(expanded)
 }
 ```
@@ -238,7 +237,7 @@ use syn::Error;
 #[proc_macro_derive(Validate)]
 pub fn derive_validate(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
-    
+
     // 检查是否为结构体
     match input.data {
         Data::Struct(_) => {},
@@ -249,7 +248,7 @@ pub fn derive_validate(input: TokenStream) -> TokenStream {
             ).to_compile_error().into();
         }
     }
-    
+
     TokenStream::new()
 }
 ```
@@ -260,7 +259,7 @@ pub fn derive_validate(input: TokenStream) -> TokenStream {
 #[proc_macro_derive(Builder)]
 pub fn derive_builder(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
-    
+
     let fields = match &input.data {
         Data::Struct(data) => {
             match &data.fields {
@@ -281,7 +280,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
         }
         _ => panic!("Not a struct"),
     };
-    
+
     TokenStream::new()
 }
 ```
@@ -304,7 +303,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
     let name = &input.ident;
     let builder_name = format!("{}Builder", name);
     let builder_ident = syn::Ident::new(&builder_name, name.span());
-    
+
     let fields = match &input.data {
         Data::Struct(data) => {
             match &data.fields {
@@ -314,7 +313,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
         }
         _ => panic!("Only structs supported"),
     };
-    
+
     // 生成 builder 字段
     let builder_fields = fields.iter().map(|f| {
         let name = &f.ident;
@@ -323,7 +322,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
             #name: Option<#ty>
         }
     });
-    
+
     // 生成 setter 方法
     let setters = fields.iter().map(|f| {
         let name = &f.ident;
@@ -335,7 +334,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
             }
         }
     });
-    
+
     // 生成 build 方法
     let build_fields = fields.iter().map(|f| {
         let name = &f.ident;
@@ -343,22 +342,22 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
             #name: self.#name.ok_or(concat!("Field '", stringify!(#name), "' not set"))?
         }
     });
-    
+
     let expanded = quote! {
         pub struct #builder_ident {
             #(#builder_fields,)*
         }
-        
+
         impl #builder_ident {
             #(#setters)*
-            
+
             pub fn build(self) -> Result<#name, String> {
                 Ok(#name {
                     #(#build_fields,)*
                 })
             }
         }
-        
+
         impl #name {
             pub fn builder() -> #builder_ident {
                 #builder_ident {
@@ -367,7 +366,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
             }
         }
     };
-    
+
     TokenStream::from(expanded)
 }
 
@@ -396,7 +395,7 @@ fn main() {
 pub fn derive_debug(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let name = &input.ident;
-    
+
     let fields = match &input.data {
         Data::Struct(data) => {
             match &data.fields {
@@ -406,14 +405,14 @@ pub fn derive_debug(input: TokenStream) -> TokenStream {
         }
         _ => panic!("Only structs supported"),
     };
-    
+
     let debug_fields = fields.iter().map(|f| {
         let name = &f.ident;
         quote! {
             .field(stringify!(#name), &self.#name)
         }
     });
-    
+
     let expanded = quote! {
         impl std::fmt::Debug for #name {
             fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -423,7 +422,7 @@ pub fn derive_debug(input: TokenStream) -> TokenStream {
             }
         }
     };
-    
+
     TokenStream::from(expanded)
 }
 ```
@@ -435,7 +434,7 @@ pub fn derive_debug(input: TokenStream) -> TokenStream {
 pub fn derive_serialize(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let name = &input.ident;
-    
+
     let fields = match &input.data {
         Data::Struct(data) => {
             match &data.fields {
@@ -445,7 +444,7 @@ pub fn derive_serialize(input: TokenStream) -> TokenStream {
         }
         _ => panic!("Only structs supported"),
     };
-    
+
     let serialize_fields = fields.iter().map(|f| {
         let name = &f.ident;
         let name_str = name.as_ref().unwrap().to_string();
@@ -453,7 +452,7 @@ pub fn derive_serialize(input: TokenStream) -> TokenStream {
             map.insert(#name_str, format!("{:?}", self.#name));
         }
     });
-    
+
     let expanded = quote! {
         impl #name {
             pub fn serialize(&self) -> std::collections::HashMap<String, String> {
@@ -463,7 +462,7 @@ pub fn derive_serialize(input: TokenStream) -> TokenStream {
             }
         }
     };
-    
+
     TokenStream::from(expanded)
 }
 ```
@@ -523,6 +522,6 @@ pub fn derive_serialize(input: TokenStream) -> TokenStream {
 
 ---
 
-**文档维护**: C11 Macro System Team  
-**最后审核**: 2025-10-23  
+**文档维护**: C11 Macro System Team
+**最后审核**: 2025-10-23
 **下次更新**: 2026-01-23

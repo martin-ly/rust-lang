@@ -1,8 +1,8 @@
 ﻿# Rust 1.90 网络编程实战示例大全
 
-> **文档版本**: v1.0  
-> **适用版本**: Rust 1.90+, Tokio 1.35+  
-> **最后更新**: 2025-10-19  
+> **文档版本**: v1.0
+> **适用版本**: Rust 1.90+, Tokio 1.35+
+> **最后更新**: 2025-10-19
 > **文档类型**: 💻 代码示例集
 
 ---
@@ -38,13 +38,13 @@ use tokio::net::TcpStream;
 pub trait NetworkProtocol: Send + Sync {
     /// 连接到服务器
     async fn connect(&mut self, addr: &str) -> Result<(), Box<dyn std::error::Error>>;
-    
+
     /// 发送数据
     async fn send(&mut self, data: &[u8]) -> Result<usize, Box<dyn std::error::Error>>;
-    
+
     /// 接收数据
     async fn receive(&mut self, buf: &mut [u8]) -> Result<usize, Box<dyn std::error::Error>>;
-    
+
     /// 关闭连接
     async fn close(&mut self) -> Result<(), Box<dyn std::error::Error>>;
 }
@@ -67,10 +67,10 @@ impl NetworkProtocol for TcpProtocol {
         self.stream = Some(stream);
         Ok(())
     }
-    
+
     async fn send(&mut self, data: &[u8]) -> Result<usize, Box<dyn std::error::Error>> {
         use tokio::io::AsyncWriteExt;
-        
+
         if let Some(stream) = &mut self.stream {
             let n = stream.write(data).await?;
             stream.flush().await?;
@@ -80,10 +80,10 @@ impl NetworkProtocol for TcpProtocol {
             Err("未连接".into())
         }
     }
-    
+
     async fn receive(&mut self, buf: &mut [u8]) -> Result<usize, Box<dyn std::error::Error>> {
         use tokio::io::AsyncReadExt;
-        
+
         if let Some(stream) = &mut self.stream {
             let n = stream.read(buf).await?;
             println!("📥 TCP接收 {} 字节", n);
@@ -92,7 +92,7 @@ impl NetworkProtocol for TcpProtocol {
             Err("未连接".into())
         }
     }
-    
+
     async fn close(&mut self) -> Result<(), Box<dyn std::error::Error>> {
         if let Some(mut stream) = self.stream.take() {
             use tokio::io::AsyncWriteExt;
@@ -106,26 +106,26 @@ impl NetworkProtocol for TcpProtocol {
 /// 使用 async trait 的示例函数
 pub async fn demo_async_trait() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== Rust 1.90: async trait 示例 ===\n");
-    
+
     // 创建协议实例
     let mut protocol: Box<dyn NetworkProtocol> = Box::new(TcpProtocol::new());
-    
+
     // 连接
     protocol.connect("httpbin.org:80").await?;
-    
+
     // 发送HTTP请求
     let request = b"GET / HTTP/1.1\r\nHost: httpbin.org\r\nConnection: close\r\n\r\n";
     protocol.send(request).await?;
-    
+
     // 接收响应
     let mut buffer = vec![0u8; 1024];
     let n = protocol.receive(&mut buffer).await?;
     let response = String::from_utf8_lossy(&buffer[..n]);
     println!("📄 响应头:\n{}", response.lines().take(10).collect::<Vec<_>>().join("\n"));
-    
+
     // 关闭连接
     protocol.close().await?;
-    
+
     Ok(())
 }
 ```
@@ -143,16 +143,16 @@ use tokio::time::sleep;
 /// async closure 示例: 处理数据流
 pub async fn demo_async_closure() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== Rust 1.90: async closure 示例 ===\n");
-    
+
     // 示例1: 简单的异步闭包
     let async_add = |a: i32, b: i32| async move {
         sleep(Duration::from_millis(100)).await;
         a + b
     };
-    
+
     let result = async_add(10, 20).await;
     println!("✅ 异步加法: 10 + 20 = {}", result);
-    
+
     // 示例2: 在 map 中使用异步闭包
     let numbers = vec![1, 2, 3, 4, 5];
     let results: Vec<_> = futures::future::join_all(
@@ -161,9 +161,9 @@ pub async fn demo_async_closure() -> Result<(), Box<dyn std::error::Error>> {
             n * 2
         })
     ).await;
-    
+
     println!("✅ 异步map结果: {:?}", results);
-    
+
     // 示例3: 流处理with异步闭包
     let stream = futures::stream::iter(1..=5);
     let mut processed = stream.then(|n| async move {
@@ -171,12 +171,12 @@ pub async fn demo_async_closure() -> Result<(), Box<dyn std::error::Error>> {
         println!("  处理数字: {}", n);
         n * n
     });
-    
+
     println!("✅ 异步流处理:");
     while let Some(result) = processed.next().await {
         println!("  结果: {}", result);
     }
-    
+
     Ok(())
 }
 
@@ -196,17 +196,17 @@ where
 /// 示例: 使用高阶异步函数
 pub async fn demo_higher_order_async() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== 高阶异步函数示例 ===\n");
-    
+
     let items = vec![1, 2, 3, 4, 5];
-    
+
     // 使用异步闭包处理
     let results = process_with_async_fn(items, |n| async move {
         sleep(Duration::from_millis(50)).await;
         n * n
     }).await;
-    
+
     println!("✅ 处理结果: {:?}", results);
-    
+
     Ok(())
 }
 ```
@@ -234,24 +234,24 @@ impl<const N: usize> Packet<N> {
             len: 0,
         }
     }
-    
+
     /// 从字节切片创建 (Rust 1.90: 编译器推断N)
     pub fn from_slice(slice: &[u8]) -> Option<Self> {
         if slice.len() > N {
             return None;
         }
-        
+
         let mut packet = Self::new();
         packet.data[..slice.len()].copy_from_slice(slice);
         packet.len = slice.len();
         Some(packet)
     }
-    
+
     /// 获取数据
     pub fn as_slice(&self) -> &[u8] {
         &self.data[..self.len]
     }
-    
+
     /// 计算校验和
     pub fn checksum(&self) -> u32 {
         self.data[..self.len]
@@ -269,21 +269,21 @@ pub fn process_packet<const N: usize>(data: [u8; N]) -> u32 {
 /// const 泛型示例
 pub async fn demo_const_generics() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== Rust 1.90: const 泛型推断示例 ===\n");
-    
+
     // 创建不同大小的数据包
     let small_packet: Packet<64> = Packet::from_slice(b"Hello").unwrap();
     let large_packet: Packet<1024> = Packet::from_slice(b"Large packet data").unwrap();
-    
+
     println!("✅ 小数据包 (64字节): {:?}", small_packet.as_slice());
     println!("   校验和: {}", small_packet.checksum());
-    
+
     println!("✅ 大数据包 (1024字节): {:?}", large_packet.as_slice());
     println!("   校验和: {}", large_packet.checksum());
-    
+
     // Rust 1.90: 使用 _ 让编译器推断数组大小
     let checksum = process_packet([1, 2, 3, 4, 5]);
     println!("✅ 数组校验和: {}", checksum);
-    
+
     Ok(())
 }
 ```
@@ -323,7 +323,7 @@ impl ServerStats {
             bytes_sent: Arc::new(AtomicU64::new(0)),
         }
     }
-    
+
     pub fn print(&self) {
         println!("\n📊 服务器统计:");
         println!("  总连接数: {}", self.total_connections.load(Ordering::Relaxed));
@@ -345,21 +345,21 @@ impl TcpEchoServer {
     pub async fn new(addr: &str) -> Result<Self, Box<dyn std::error::Error>> {
         let listener = TcpListener::bind(addr).await?;
         let (shutdown_tx, _) = broadcast::channel(1);
-        
+
         println!("🚀 TCP回显服务器启动于: {}", addr);
-        
+
         Ok(Self {
             listener,
             stats: ServerStats::new(),
             shutdown_tx,
         })
     }
-    
+
     /// 运行服务器
     pub async fn run(self) -> Result<(), Box<dyn std::error::Error>> {
         let stats = self.stats.clone();
         let shutdown_tx = self.shutdown_tx.clone();
-        
+
         // 统计任务
         let stats_clone = stats.clone();
         tokio::spawn(async move {
@@ -369,7 +369,7 @@ impl TcpEchoServer {
                 stats_clone.print();
             }
         });
-        
+
         // 接受连接
         loop {
             tokio::select! {
@@ -377,13 +377,13 @@ impl TcpEchoServer {
                     match result {
                         Ok((socket, addr)) => {
                             println!("✅ 新连接: {}", addr);
-                            
+
                             stats.total_connections.fetch_add(1, Ordering::Relaxed);
                             stats.active_connections.fetch_add(1, Ordering::Relaxed);
-                            
+
                             let stats_clone = stats.clone();
                             let mut shutdown_rx = shutdown_tx.subscribe();
-                            
+
                             tokio::spawn(async move {
                                 tokio::select! {
                                     result = Self::handle_connection(socket, stats_clone.clone()) => {
@@ -395,7 +395,7 @@ impl TcpEchoServer {
                                         println!("🔌 关闭连接: {}", addr);
                                     }
                                 }
-                                
+
                                 stats_clone.active_connections.fetch_sub(1, Ordering::Relaxed);
                             });
                         }
@@ -411,37 +411,37 @@ impl TcpEchoServer {
                 }
             }
         }
-        
+
         // 等待所有连接关闭
         tokio::time::sleep(Duration::from_secs(1)).await;
         stats.print();
-        
+
         Ok(())
     }
-    
+
     /// 处理单个连接
     async fn handle_connection(
         mut socket: TcpStream,
         stats: ServerStats,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut buffer = vec![0u8; 8192];
-        
+
         loop {
             // 读取数据
             let n = socket.read(&mut buffer).await?;
-            
+
             if n == 0 {
                 // 连接关闭
                 break;
             }
-            
+
             stats.bytes_received.fetch_add(n as u64, Ordering::Relaxed);
-            
+
             // 回显数据
             socket.write_all(&buffer[..n]).await?;
             stats.bytes_sent.fetch_add(n as u64, Ordering::Relaxed);
         }
-        
+
         Ok(())
     }
 }
@@ -502,7 +502,7 @@ impl TcpClient {
             stream: None,
         }
     }
-    
+
     /// 使用自定义配置创建
     pub fn with_config(addr: impl Into<String>, config: TcpClientConfig) -> Self {
         Self {
@@ -511,11 +511,11 @@ impl TcpClient {
             stream: None,
         }
     }
-    
+
     /// 连接到服务器 (带重试)
     pub async fn connect(&mut self) -> Result<(), Box<dyn std::error::Error>> {
         let mut attempts = 0;
-        
+
         loop {
             match timeout(
                 self.config.connect_timeout,
@@ -545,7 +545,7 @@ impl TcpClient {
             }
         }
     }
-    
+
     /// 发送数据
     pub async fn send(&mut self, data: &[u8]) -> Result<usize, Box<dyn std::error::Error>> {
         if let Some(stream) = &mut self.stream {
@@ -557,14 +557,14 @@ impl TcpClient {
                     Ok::<_, std::io::Error>(data.len())
                 }
             ).await??;
-            
+
             println!("📤 发送 {} 字节", n);
             Ok(n)
         } else {
             Err("未连接".into())
         }
     }
-    
+
     /// 接收数据
     pub async fn receive(&mut self, buffer: &mut [u8]) -> Result<usize, Box<dyn std::error::Error>> {
         if let Some(stream) = &mut self.stream {
@@ -572,14 +572,14 @@ impl TcpClient {
                 self.config.read_timeout,
                 stream.read(buffer)
             ).await??;
-            
+
             println!("📥 接收 {} 字节", n);
             Ok(n)
         } else {
             Err("未连接".into())
         }
     }
-    
+
     /// 发送并接收
     pub async fn send_and_receive(
         &mut self,
@@ -589,7 +589,7 @@ impl TcpClient {
         self.send(data).await?;
         self.receive(buffer).await
     }
-    
+
     /// 关闭连接
     pub async fn close(&mut self) -> Result<(), Box<dyn std::error::Error>> {
         if let Some(mut stream) = self.stream.take() {
@@ -603,23 +603,23 @@ impl TcpClient {
 /// 示例: 使用TCP客户端
 pub async fn demo_tcp_client() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== TCP客户端示例 ===\n");
-    
+
     // 创建客户端
     let mut client = TcpClient::new("127.0.0.1:8080");
-    
+
     // 连接
     client.connect().await?;
-    
+
     // 发送并接收数据
     let message = b"Hello, TCP Server!";
     let mut buffer = vec![0u8; 1024];
     let n = client.send_and_receive(message, &mut buffer).await?;
-    
+
     println!("📄 回显: {}", String::from_utf8_lossy(&buffer[..n]));
-    
+
     // 关闭连接
     client.close().await?;
-    
+
     Ok(())
 }
 ```
@@ -649,27 +649,27 @@ impl UdpServer {
     pub async fn new(addr: &str) -> Result<Self, Box<dyn std::error::Error>> {
         let socket = UdpSocket::bind(addr).await?;
         println!("🚀 UDP服务器启动于: {}", addr);
-        
+
         Ok(Self {
             socket: Arc::new(socket),
         })
     }
-    
+
     /// 运行服务器 (回显模式)
     pub async fn run_echo(&self) -> Result<(), Box<dyn std::error::Error>> {
         let mut buffer = vec![0u8; 65507]; // UDP最大包大小
-        
+
         loop {
             // 接收数据
             let (n, peer_addr) = self.socket.recv_from(&mut buffer).await?;
             println!("📥 收到来自 {} 的 {} 字节", peer_addr, n);
-            
+
             // 回显数据
             let sent = self.socket.send_to(&buffer[..n], peer_addr).await?;
             println!("📤 回显 {} 字节到 {}", sent, peer_addr);
         }
     }
-    
+
     /// 运行服务器 (自定义处理)
     pub async fn run_with_handler<F>(&self, handler: F) -> Result<(), Box<dyn std::error::Error>>
     where
@@ -677,14 +677,14 @@ impl UdpServer {
     {
         let mut buffer = vec![0u8; 65507];
         let handler = Arc::new(handler);
-        
+
         loop {
             let (n, peer_addr) = self.socket.recv_from(&mut buffer).await?;
             println!("📥 收到来自 {} 的 {} 字节", peer_addr, n);
-            
+
             // 处理数据
             let response = handler(&buffer[..n], peer_addr);
-            
+
             // 发送响应
             let sent = self.socket.send_to(&response, peer_addr).await?;
             println!("📤 发送 {} 字节到 {}", sent, peer_addr);
@@ -705,40 +705,40 @@ impl UdpClient {
         // 绑定到任意端口
         let socket = UdpSocket::bind("0.0.0.0:0").await?;
         let server_addr: SocketAddr = server_addr.parse()?;
-        
+
         println!("✅ UDP客户端创建,目标服务器: {}", server_addr);
-        
+
         Ok(Self {
             socket,
             server_addr,
             timeout_duration: Duration::from_secs(5),
         })
     }
-    
+
     /// 设置超时时间
     pub fn set_timeout(&mut self, duration: Duration) {
         self.timeout_duration = duration;
     }
-    
+
     /// 发送数据
     pub async fn send(&self, data: &[u8]) -> Result<usize, Box<dyn std::error::Error>> {
         let n = self.socket.send_to(data, self.server_addr).await?;
         println!("📤 发送 {} 字节", n);
         Ok(n)
     }
-    
+
     /// 接收数据
     pub async fn receive(&self, buffer: &mut [u8]) -> Result<(usize, SocketAddr), Box<dyn std::error::Error>> {
         let result = timeout(
             self.timeout_duration,
             self.socket.recv_from(buffer)
         ).await?;
-        
+
         let (n, addr) = result?;
         println!("📥 接收 {} 字节来自 {}", n, addr);
         Ok((n, addr))
     }
-    
+
     /// 发送并接收
     pub async fn send_and_receive(
         &self,
@@ -761,15 +761,15 @@ impl UdpMulticast {
     pub async fn new_sender(multicast_addr: &str) -> Result<Self, Box<dyn std::error::Error>> {
         let socket = UdpSocket::bind("0.0.0.0:0").await?;
         let multicast_addr: SocketAddr = multicast_addr.parse()?;
-        
+
         println!("✅ UDP多播发送者创建: {}", multicast_addr);
-        
+
         Ok(Self {
             socket,
             multicast_addr,
         })
     }
-    
+
     /// 创建多播接收者
     pub async fn new_receiver(
         multicast_addr: &str,
@@ -777,26 +777,26 @@ impl UdpMulticast {
     ) -> Result<Self, Box<dyn std::error::Error>> {
         let multicast_addr: SocketAddr = multicast_addr.parse()?;
         let socket = UdpSocket::bind(multicast_addr).await?;
-        
+
         // 加入多播组
         if let SocketAddr::V4(addr) = multicast_addr {
             socket.join_multicast_v4(*addr.ip(), interface)?;
             println!("✅ UDP多播接收者加入组: {}", multicast_addr);
         }
-        
+
         Ok(Self {
             socket,
             multicast_addr,
         })
     }
-    
+
     /// 发送多播消息
     pub async fn send(&self, data: &[u8]) -> Result<usize, Box<dyn std::error::Error>> {
         let n = self.socket.send_to(data, self.multicast_addr).await?;
         println!("📤 多播发送 {} 字节", n);
         Ok(n)
     }
-    
+
     /// 接收多播消息
     pub async fn receive(&self, buffer: &mut [u8]) -> Result<(usize, SocketAddr), Box<dyn std::error::Error>> {
         let (n, addr) = self.socket.recv_from(buffer).await?;
@@ -808,15 +808,15 @@ impl UdpMulticast {
 /// 示例: UDP回显客户端
 pub async fn demo_udp_client() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== UDP客户端示例 ===\n");
-    
+
     let client = UdpClient::new("127.0.0.1:9000").await?;
-    
+
     let message = b"Hello, UDP Server!";
     let mut buffer = vec![0u8; 1024];
-    
+
     let (n, addr) = client.send_and_receive(message, &mut buffer).await?;
     println!("📄 回显: {} (来自 {})", String::from_utf8_lossy(&buffer[..n]), addr);
-    
+
     Ok(())
 }
 ```
@@ -831,6 +831,6 @@ pub async fn demo_udp_client() -> Result<(), Box<dyn std::error::Error>> {
 
 ---
 
-**文档维护**: C10 Networks 团队  
-**最后更新**: 2025-10-19  
+**文档维护**: C10 Networks 团队
+**最后更新**: 2025-10-19
 **文档版本**: v1.0 (Part 1)

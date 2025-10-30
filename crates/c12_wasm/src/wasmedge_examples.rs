@@ -27,10 +27,10 @@ pub mod wasmedge_advanced {
             match stream {
                 Ok(mut stream) => {
                     let mut buffer = [0; 1024];
-                    stream.read(&mut buffer)?;
+                    let _bytes_read = stream.read(&mut buffer)?;
 
                     let response = b"HTTP/1.1 200 OK\r\n\r\nHello from WasmEdge!";
-                    stream.write(response)?;
+                    let _bytes_written = stream.write(response)?;
                     stream.flush()?;
                 }
                 Err(e) => {
@@ -48,10 +48,7 @@ pub mod wasmedge_advanced {
     /// WasmEdge 会自动优化文件访问，减少内存复制
     pub fn process_large_file(path: &str) -> Result<usize, Box<dyn std::error::Error>> {
         let content = fs::read_to_string(path)?;
-        let processed = content
-            .lines()
-            .filter(|line| !line.is_empty())
-            .count();
+        let processed = content.lines().filter(|line| !line.is_empty()).count();
         Ok(processed)
     }
 
@@ -217,10 +214,7 @@ pub mod threading_examples {
                         (i + 1) * chunk_size
                     };
 
-                    let chunk: Vec<i32> = data[start..end]
-                        .iter()
-                        .map(|&x| x * 2)
-                        .collect();
+                    let chunk: Vec<i32> = data[start..end].iter().map(|&x| x * 2).collect();
 
                     results.lock().unwrap().extend(chunk);
                 })
@@ -231,10 +225,7 @@ pub mod threading_examples {
             handle.join().unwrap();
         }
 
-        Arc::try_unwrap(results)
-            .unwrap()
-            .into_inner()
-            .unwrap()
+        Arc::try_unwrap(results).unwrap().into_inner().unwrap()
     }
 
     /// 线程池示例
@@ -254,9 +245,11 @@ pub mod threading_examples {
             let workers = (0..size)
                 .map(|_| {
                     let receiver = Arc::clone(&receiver);
-                    thread::spawn(move || loop {
-                        let job: Job = receiver.lock().unwrap().recv().unwrap();
-                        job();
+                    thread::spawn(move || {
+                        loop {
+                            let job: Job = receiver.lock().unwrap().recv().unwrap();
+                            job();
+                        }
                     })
                 })
                 .collect();
@@ -283,7 +276,7 @@ pub mod performance_examples {
 
     thread_local! {
         // 线程局部存储（优化内存分配）
-        static BUFFER: RefCell<Vec<u8>> = RefCell::new(Vec::new());
+        static BUFFER: RefCell<Vec<u8>> = const { RefCell::new(Vec::new()) };
     }
 
     /// 重用缓冲区的数据处理

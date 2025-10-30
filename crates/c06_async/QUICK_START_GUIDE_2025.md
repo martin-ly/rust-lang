@@ -48,7 +48,7 @@
 
 -Quick Start Guide for Rust Async Programming 2025
 
-**更新日期**: 2025-10-04  
+**更新日期**: 2025-10-04
 **适用版本**: Rust 1.90+ | Tokio 1.41+ | Smol 2.0+
 
 ---
@@ -93,22 +93,22 @@ use tokio::time::{sleep, Duration};
 #[tokio::main]
 async fn main() {
     println!("开始");
-    
+
     // 并发执行两个任务
     let task1 = tokio::spawn(async {
         sleep(Duration::from_secs(1)).await;
         println!("任务1完成");
     });
-    
+
     let task2 = tokio::spawn(async {
         sleep(Duration::from_secs(2)).await;
         println!("任务2完成");
     });
-    
+
     // 等待两个任务
     task1.await.unwrap();
     task2.await.unwrap();
-    
+
     println!("结束");
 }
 ```
@@ -327,11 +327,11 @@ tokio::task::spawn_blocking(|| {
 需要分布式/位置透明?
   └─ 是 → Actor 模式
   └─ 否 → 下一步
-  
+
 I/O 密集型?
   └─ 是 → Reactor 模式
   └─ 否 → 下一步
-  
+
 数据流处理/Pipeline?
   └─ 是 → CSP 模式
   └─ 否 → 简单的 async/await
@@ -507,5 +507,5 @@ cargo run --example ultimate_async_theory_practice_2025
 
 ---
 
-**最后更新**: 2025-10-04  
+**最后更新**: 2025-10-04
 **维护者**: Rust 异步编程研究组

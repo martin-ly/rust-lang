@@ -13,15 +13,26 @@
 ## 📋 目录
 
 - [C12 WASM - JavaScript 互操作](#c12-wasm---javascript-互操作)
-  - [📊 目录](#-目录)
+  - [📋 目录](#-目录)
   - [🎯 概述](#-概述)
   - [🔗 基础集成](#-基础集成)
+    - [加载 WASM 模块](#加载-wasm-模块)
   - [⚛️ React 集成](#️-react-集成)
+    - [基本用法](#基本用法)
+    - [自定义 Hook](#自定义-hook)
   - [🎨 Vue 集成](#-vue-集成)
+    - [Vue 基本用法](#vue-基本用法)
   - [🟢 Node.js 集成](#-nodejs-集成)
+    - [Node.js 基本用法](#nodejs-基本用法)
+    - [ES 模块](#es-模块)
   - [📦 TypeScript 类型](#-typescript-类型)
+    - [使用类型](#使用类型)
   - [🌐 Web API 集成](#-web-api-集成)
+    - [Fetch API](#fetch-api)
+    - [Canvas API](#canvas-api)
   - [🚀 实践示例](#-实践示例)
+    - [示例 1: 简单计算](#示例-1-简单计算)
+    - [示例 2: 数组处理](#示例-2-数组处理)
   - [📚 相关资源](#-相关资源)
 
 ---

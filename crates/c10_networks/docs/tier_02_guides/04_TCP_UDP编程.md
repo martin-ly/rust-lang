@@ -1,8 +1,8 @@
 ﻿# C10 Networks - Tier 2: TCP/UDP 编程
 
-> **文档版本**: v1.0.0  
-> **最后更新**: 2025-10-23  
-> **Rust 版本**: 1.90+  
+> **文档版本**: v1.0.0
+> **最后更新**: 2025-10-23
+> **Rust 版本**: 1.90+
 > **预计阅读**: 35 分钟
 
 ---
@@ -47,12 +47,12 @@ use std::time::Duration;
 async fn configure_tcp_socket(stream: &TcpStream) -> std::io::Result<()> {
     // TCP_NODELAY: 禁用 Nagle 算法，减少延迟
     stream.set_nodelay(true)?;
-    
+
     // 设置超时
     stream.set_linger(Some(Duration::from_secs(5)))?;
-    
+
     println!("TCP 套接字配置完成");
-    
+
     Ok(())
 }
 
@@ -73,19 +73,19 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
     let mut stream = TcpStream::connect("127.0.0.1:8080").await?;
-    
+
     // 发送数据
     stream.write_all(b"Request data\n").await?;
-    
+
     // 关闭写端（半关闭）
     stream.shutdown().await?;
     println!("写端已关闭，但仍可读取");
-    
+
     // 继续读取响应
     let mut buffer = Vec::new();
     stream.read_to_end(&mut buffer).await?;
     println!("收到响应: {} 字节", buffer.len());
-    
+
     Ok(())
 }
 ```
@@ -99,24 +99,24 @@ use std::time::Duration;
 
 async fn tcp_keepalive_server() -> std::io::Result<()> {
     let socket = Socket::new(Domain::IPV4, Type::STREAM, Some(Protocol::TCP))?;
-    
+
     // 启用 Keep-Alive
     socket.set_keepalive(Some(Duration::from_secs(60)))?;
-    
+
     socket.set_reuse_address(true)?;
     socket.bind(&"127.0.0.1:8080".parse::<std::net::SocketAddr>().unwrap().into())?;
     socket.listen(128)?;
-    
+
     let listener: std::net::TcpListener = socket.into();
     listener.set_nonblocking(true)?;
     let listener = TcpListener::from_std(listener)?;
-    
+
     println!("TCP Keep-Alive 服务器启动");
-    
+
     loop {
         let (stream, addr) = listener.accept().await?;
         println!("连接来自: {}", addr);
-        
+
         // 处理连接...
     }
 }
@@ -152,18 +152,18 @@ async fn recv_frame(stream: &mut TcpStream) -> std::io::Result<Vec<u8>> {
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
     let mut stream = TcpStream::connect("127.0.0.1:8080").await?;
-    
+
     // 发送多个消息
     send_frame(&mut stream, b"Message 1").await?;
     send_frame(&mut stream, b"Message 2").await?;
-    
+
     // 接收消息
     let msg1 = recv_frame(&mut stream).await?;
     let msg2 = recv_frame(&mut stream).await?;
-    
+
     println!("收到: {:?}", String::from_utf8_lossy(&msg1));
     println!("收到: {:?}", String::from_utf8_lossy(&msg2));
-    
+
     Ok(())
 }
 ```
@@ -179,13 +179,13 @@ use tokio::net::UdpSocket;
 
 async fn configure_udp_socket() -> std::io::Result<()> {
     let socket = UdpSocket::bind("0.0.0.0:0").await?;
-    
+
     // 启用广播
     socket.set_broadcast(true)?;
-    
+
     // 设置 TTL
     socket.set_ttl(64)?;
-    
+
     println!("UDP 套接字配置完成");
     Ok(())
 }
@@ -205,13 +205,13 @@ use tokio::net::UdpSocket;
 async fn udp_broadcast_sender() -> std::io::Result<()> {
     let socket = UdpSocket::bind("0.0.0.0:0").await?;
     socket.set_broadcast(true)?;
-    
+
     let broadcast_addr = "255.255.255.255:9999";
     let message = b"Broadcast message";
-    
+
     socket.send_to(message, broadcast_addr).await?;
     println!("广播发送完成");
-    
+
     Ok(())
 }
 
@@ -219,9 +219,9 @@ async fn udp_broadcast_sender() -> std::io::Result<()> {
 async fn udp_broadcast_receiver() -> std::io::Result<()> {
     let socket = UdpSocket::bind("0.0.0.0:9999").await?;
     socket.set_broadcast(true)?;
-    
+
     println!("等待广播消息...");
-    
+
     let mut buf = [0u8; 1024];
     loop {
         let (len, addr) = socket.recv_from(&mut buf).await?;
@@ -257,15 +257,15 @@ impl ReliableUdp {
             ack_map: HashMap::new(),
         })
     }
-    
+
     async fn send_reliable(&mut self, data: &[u8], dest: &str, max_retries: u32) -> std::io::Result<()> {
         let mut payload = Vec::with_capacity(data.len() + 4);
         payload.extend_from_slice(&self.seq_num.to_be_bytes());
         payload.extend_from_slice(data);
-        
+
         for attempt in 0..=max_retries {
             self.socket.send_to(&payload, dest).await?;
-            
+
             // 等待 ACK
             let mut ack_buf = [0u8; 4];
             match timeout(Duration::from_millis(500), self.socket.recv(&mut ack_buf)).await {
@@ -283,7 +283,7 @@ impl ReliableUdp {
                 }
             }
         }
-        
+
         Err(std::io::Error::new(std::io::ErrorKind::TimedOut, "发送失败"))
     }
 }
@@ -323,38 +323,38 @@ struct ProtocolMessage {
 impl ProtocolMessage {
     fn encode(&self) -> Vec<u8> {
         let mut buffer = BytesMut::new();
-        
+
         // 魔数 (2 字节)
         buffer.put_u16(0xABCD);
-        
+
         // 消息类型 (1 字节)
         buffer.put_u8(self.msg_type.clone() as u8);
-        
+
         // 请求 ID (4 字节)
         buffer.put_u32(self.request_id);
-        
+
         // 负载长度 (4 字节)
         buffer.put_u32(self.payload.len() as u32);
-        
+
         // 负载数据
         buffer.put_slice(&self.payload);
-        
+
         buffer.to_vec()
     }
-    
+
     fn decode(data: &[u8]) -> Result<Self, String> {
         if data.len() < 11 {
             return Err("数据太短".to_string());
         }
-        
+
         let mut cursor = std::io::Cursor::new(data);
-        
+
         // 检查魔数
         let magic = cursor.get_u16();
         if magic != 0xABCD {
             return Err("魔数错误".to_string());
         }
-        
+
         // 消息类型
         let msg_type = match cursor.get_u8() {
             0x01 => MessageType::Request,
@@ -362,20 +362,20 @@ impl ProtocolMessage {
             0x03 => MessageType::Notification,
             _ => return Err("未知消息类型".to_string()),
         };
-        
+
         // 请求 ID
         let request_id = cursor.get_u32();
-        
+
         // 负载长度
         let payload_len = cursor.get_u32() as usize;
-        
+
         // 负载数据
         let position = cursor.position() as usize;
         if data.len() < position + payload_len {
             return Err("负载数据不完整".to_string());
         }
         let payload = data[position..position + payload_len].to_vec();
-        
+
         Ok(Self {
             msg_type,
             request_id,
@@ -390,10 +390,10 @@ fn main() {
         request_id: 123,
         payload: b"Hello Protocol".to_vec(),
     };
-    
+
     let encoded = msg.encode();
     println!("编码: {} 字节", encoded.len());
-    
+
     let decoded = ProtocolMessage::decode(&encoded).unwrap();
     println!("解码: {:?}", decoded);
 }
@@ -409,7 +409,7 @@ const MAX_PACKET_SIZE: usize = 1024;
 fn fragment_data(data: &[u8]) -> Vec<Vec<u8>> {
     let mut fragments = Vec::new();
     let total_fragments = (data.len() + MAX_PACKET_SIZE - 1) / MAX_PACKET_SIZE;
-    
+
     for (i, chunk) in data.chunks(MAX_PACKET_SIZE).enumerate() {
         let mut fragment = BytesMut::new();
         fragment.put_u16(i as u16); // 分片索引
@@ -417,7 +417,7 @@ fn fragment_data(data: &[u8]) -> Vec<Vec<u8>> {
         fragment.put_slice(chunk);
         fragments.push(fragment.to_vec());
     }
-    
+
     fragments
 }
 
@@ -425,28 +425,28 @@ fn reassemble_data(fragments: Vec<Vec<u8>>) -> Result<Vec<u8>, String> {
     if fragments.is_empty() {
         return Err("无分片数据".to_string());
     }
-    
+
     // 解析总分片数
     let total_fragments = u16::from_be_bytes([fragments[0][2], fragments[0][3]]) as usize;
-    
+
     if fragments.len() != total_fragments {
         return Err("分片不完整".to_string());
     }
-    
+
     let mut data = Vec::new();
     for fragment in fragments {
         data.extend_from_slice(&fragment[4..]); // 跳过头部
     }
-    
+
     Ok(data)
 }
 
 fn main() {
     let original = vec![0u8; 3000];
-    
+
     let fragments = fragment_data(&original);
     println!("分片数: {}", fragments.len());
-    
+
     let reassembled = reassemble_data(fragments).unwrap();
     println!("重组数据: {} 字节", reassembled.len());
 }
@@ -477,7 +477,7 @@ impl TokenBucket {
             refill_rate,
         }
     }
-    
+
     fn try_consume(&mut self, count: usize) -> bool {
         if self.tokens >= count {
             self.tokens -= count;
@@ -486,7 +486,7 @@ impl TokenBucket {
             false
         }
     }
-    
+
     fn refill(&mut self) {
         self.tokens = (self.tokens + self.refill_rate).min(self.capacity);
     }
@@ -495,7 +495,7 @@ impl TokenBucket {
 #[tokio::main]
 async fn main() {
     let bucket = Arc::new(Mutex::new(TokenBucket::new(100, 10)));
-    
+
     // 定期补充令牌
     let bucket_clone = Arc::clone(&bucket);
     tokio::spawn(async move {
@@ -505,7 +505,7 @@ async fn main() {
             bucket_clone.lock().await.refill();
         }
     });
-    
+
     // 消费令牌
     for i in 0..20 {
         let mut b = bucket.lock().await;
@@ -540,10 +540,10 @@ impl SlidingWindow {
             requests: VecDeque::new(),
         }
     }
-    
+
     fn try_acquire(&mut self) -> bool {
         let now = Instant::now();
-        
+
         // 清理过期请求
         while let Some(front) = self.requests.front() {
             if now.duration_since(*front) > self.window_size {
@@ -552,7 +552,7 @@ impl SlidingWindow {
                 break;
             }
         }
-        
+
         // 检查是否超过限制
         if self.requests.len() < self.max_requests {
             self.requests.push_back(now);
@@ -566,7 +566,7 @@ impl SlidingWindow {
 #[tokio::main]
 async fn main() {
     let mut window = SlidingWindow::new(Duration::from_secs(10), 5);
-    
+
     for i in 0..10 {
         if window.try_acquire() {
             println!("请求 {} 通过", i);
@@ -591,16 +591,16 @@ use tokio::io::AsyncWriteExt;
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
     let mut stream = TcpStream::connect("127.0.0.1:8080").await?;
-    
+
     // 使用 write_vectored 减少系统调用
     let bufs = [
         std::io::IoSlice::new(b"Header: "),
         std::io::IoSlice::new(b"Value\r\n"),
         std::io::IoSlice::new(b"Body content"),
     ];
-    
+
     stream.write_vectored(&bufs).await?;
-    
+
     Ok(())
 }
 ```
@@ -627,10 +627,10 @@ impl ConnectionPool {
             address,
         }
     }
-    
+
     async fn acquire(&self) -> std::io::Result<TcpStream> {
         let _permit = self.semaphore.acquire().await.unwrap();
-        
+
         let mut pool = self.connections.lock().await;
         if let Some(conn) = pool.pop_front() {
             Ok(conn)
@@ -638,7 +638,7 @@ impl ConnectionPool {
             TcpStream::connect(&self.address).await
         }
     }
-    
+
     async fn release(&self, conn: TcpStream) {
         let mut pool = self.connections.lock().await;
         pool.push_back(conn);
@@ -648,11 +648,11 @@ impl ConnectionPool {
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
     let pool = ConnectionPool::new("127.0.0.1:8080".to_string(), 10);
-    
+
     let conn = pool.acquire().await?;
     // 使用连接...
     pool.release(conn).await;
-    
+
     Ok(())
 }
 ```
@@ -681,16 +681,16 @@ struct RpcResponse {
 
 async fn handle_rpc_client(mut stream: TcpStream) -> std::io::Result<()> {
     let mut buffer = vec![0u8; 1024];
-    
+
     loop {
         // 读取请求
         let n = stream.read(&mut buffer).await?;
         if n == 0 { break; }
-        
+
         // 解析请求
         if let Ok(request) = serde_json::from_slice::<RpcRequest>(&buffer[..n]) {
             println!("RPC 调用: {}", request.method);
-            
+
             // 处理请求
             let result = match request.method.as_str() {
                 "add" => {
@@ -705,14 +705,14 @@ async fn handle_rpc_client(mut stream: TcpStream) -> std::io::Result<()> {
                 }
                 _ => serde_json::json!({"error": "未知方法"}),
             };
-            
+
             // 发送响应
             let response = RpcResponse { result };
             let json = serde_json::to_vec(&response)?;
             stream.write_all(&json).await?;
         }
     }
-    
+
     Ok(())
 }
 
@@ -720,7 +720,7 @@ async fn handle_rpc_client(mut stream: TcpStream) -> std::io::Result<()> {
 async fn main() -> std::io::Result<()> {
     let listener = TcpListener::bind("127.0.0.1:9001").await?;
     println!("RPC 服务器运行在 127.0.0.1:9001");
-    
+
     loop {
         let (stream, _) = listener.accept().await?;
         tokio::spawn(handle_rpc_client(stream));

@@ -1,8 +1,8 @@
 # 并发编程模式
 
-> **元数据**  
-> 最后更新: 2025-10-19 (增强版)  
-> 适用版本: Rust 1.90+  
+> **元数据**
+> 最后更新: 2025-10-19 (增强版)
+> 适用版本: Rust 1.90+
 > 增强内容: ✅ 知识图谱 | ✅ 多维对比 | ✅ Rust 1.90 示例 | ✅ 思维导图
 
 ---
@@ -59,27 +59,27 @@ graph TB
     A[并发编程模式] --> B[异步编程模式]
     A --> C[同步并发模式]
     A --> D[混合模式]
-    
+
     B --> B1[异步迭代器]
     B --> B2[异步闭包]
     B --> B3[Future组合]
     B --> B4[Stream处理]
-    
+
     C --> C1[工作窃取]
     C --> C2[分治算法]
     C --> C3[流水线]
     C --> C4[Actor模式]
-    
+
     D --> D1[事件驱动]
     D --> D2[响应式编程]
     D --> D3[数据流]
-    
+
     B1 -->|适用| E1[流式数据处理]
     C1 -->|适用| E2[CPU密集任务]
     C2 -->|适用| E3[递归分解问题]
     C3 -->|适用| E4[顺序处理流程]
     D1 -->|适用| E5[事件响应系统]
-    
+
     style A fill:#e1f5ff
     style B fill:#fff4e1
     style C fill:#e8f5e9
@@ -91,24 +91,24 @@ graph TB
 ```mermaid
 graph TD
     Start[选择并发模式] --> Q1{任务类型?}
-    
+
     Q1 -->|IO密集| Q2{是否需要流式处理?}
     Q1 -->|CPU密集| Q3{任务可分解?}
     Q1 -->|事件驱动| Q4{事件复杂度?}
-    
+
     Q2 -->|是| AsyncIter[异步迭代器模式]
     Q2 -->|否| AsyncTask[异步任务模式]
-    
+
     Q3 -->|递归分解| DivideConquer[分治算法]
     Q3 -->|并行任务| WorkSteal[工作窃取模式]
-    
+
     Q4 -->|简单| SimpleEvent[基础事件循环]
     Q4 -->|复杂| ReactivePattern[响应式编程模式]
-    
+
     AsyncIter --> Perf1[高吞吐量<br/>低延迟]
     WorkSteal --> Perf2[负载均衡<br/>高CPU利用率]
     DivideConquer --> Perf3[最优并行度<br/>内存局部性]
-    
+
     style Start fill:#e1f5ff
     style AsyncIter fill:#c8e6c9
     style WorkSteal fill:#c8e6c9
@@ -206,7 +206,7 @@ async fn process_stream() {
         data: vec![1, 2, 3, 4, 5],
         index: 0,
     };
-    
+
     while let Some(item) = stream.next().await {
         println!("Processing: {}", item);
     }
@@ -228,22 +228,22 @@ impl AsyncTaskProcessor {
     pub fn new() -> Self {
         Self { tasks: Vec::new() }
     }
-    
+
     pub fn add_task<F>(&mut self, task: F)
     where
         F: Fn(u64) -> std::pin::Pin<Box<dyn std::future::Future<Output = u64> + Send>> + Send + 'static,
     {
         self.tasks.push(Box::new(task));
     }
-    
+
     pub async fn execute_all(&self, input: u64) -> Vec<u64> {
         let mut futures = Vec::new();
-        
+
         for task in &self.tasks {
             let future = task(input);
             futures.push(future);
         }
-        
+
         let results = futures::future::join_all(futures).await;
         results
     }
@@ -252,7 +252,7 @@ impl AsyncTaskProcessor {
 // 使用示例
 async fn example_usage() {
     let mut processor = AsyncTaskProcessor::new();
-    
+
     // 添加异步任务
     processor.add_task(|x| {
         Box::pin(async move {
@@ -260,14 +260,14 @@ async fn example_usage() {
             x * 2
         })
     });
-    
+
     processor.add_task(|x| {
         Box::pin(async move {
             sleep(Duration::from_millis(50)).await;
             x + 10
         })
     });
-    
+
     let results = processor.execute_all(5).await;
     println!("Results: {:?}", results);
 }
@@ -284,7 +284,7 @@ graph LR
     B -->|窃取延迟 75ns| C[性能优化]
     A -->|缓存命中率 75%| B
     B -->|缓存命中率 90%| C
-    
+
     style A fill:#ffcdd2
     style B fill:#c8e6c9
     style C fill:#81c784
@@ -307,21 +307,21 @@ impl WorkStealingScheduler {
     pub fn new(num_workers: usize) -> Self {
         let mut workers = Vec::with_capacity(num_workers);
         let mut stealers = Vec::with_capacity(num_workers);
-        
+
         for _ in 0..num_workers {
             let worker = Worker::new_fifo();
             let stealer = worker.stealer();
             workers.push(worker);
             stealers.push(stealer);
         }
-        
+
         Self {
             workers,
             stealers,
             global_queue: Arc::new(Mutex::new(Vec::new())),
         }
     }
-    
+
     pub fn submit(&self, task: Task) {
         // 优先放入本地队列，如果满了则放入全局队列
         if let Some(worker) = self.workers.first() {
@@ -332,7 +332,7 @@ impl WorkStealingScheduler {
             }
         }
     }
-    
+
     pub fn steal_work(&self, worker_id: usize) -> Option<Task> {
         // 尝试从其他worker窃取工作
         for (i, stealer) in self.stealers.iter().enumerate() {
@@ -342,7 +342,7 @@ impl WorkStealingScheduler {
                 }
             }
         }
-        
+
         // 从全局队列获取工作
         self.global_queue.lock().pop()
     }
@@ -375,20 +375,20 @@ impl AdaptiveWorkDistributor {
             steal_threshold: Duration::from_millis(10),
         }
     }
-    
+
     pub fn should_steal(&self, worker_id: usize) -> bool {
         let current_load = self.worker_loads[worker_id].load(Ordering::Relaxed);
         let last_steal = self.last_steal_times[worker_id].load(Ordering::Relaxed);
         let now = Instant::now().duration_since(Instant::UNIX_EPOCH).unwrap().as_millis() as u64;
-        
+
         // 如果负载低且距离上次窃取时间足够长，则允许窃取
         current_load < 5 && (now - last_steal) > self.steal_threshold.as_millis() as u64
     }
-    
+
     pub fn update_load(&self, worker_id: usize, load: u64) {
         self.worker_loads[worker_id].store(load, Ordering::Relaxed);
     }
-    
+
     pub fn record_steal(&self, worker_id: usize) {
         let now = Instant::now().duration_since(Instant::UNIX_EPOCH).unwrap().as_millis() as u64;
         self.last_steal_times[worker_id].store(now, Ordering::Relaxed);
@@ -407,51 +407,51 @@ use std::sync::atomic::{AtomicU64, Ordering};
 
 fn main() {
     println!("=== Rust 1.90 工作窃取模式示例 ===\n");
-    
+
     let num_workers = 4;
     let num_tasks = 1000;
-    
+
     // 创建全局任务队列
     let injector = Arc::new(Injector::new());
-    
+
     // 创建工作线程
     let mut workers = Vec::new();
     let mut stealers = Vec::new();
-    
+
     for _ in 0..num_workers {
         let worker = Worker::new_fifo();
         stealers.push(worker.stealer());
         workers.push(worker);
     }
-    
+
     // 统计指标
     let completed = Arc::new(AtomicU64::new(0));
     let stolen = Arc::new(AtomicU64::new(0));
-    
+
     // 提交任务到全局队列
     for i in 0..num_tasks {
         injector.push(i);
     }
-    
+
     let start = Instant::now();
-    
+
     // 启动工作线程
     let mut handles = vec![];
-    
+
     for (id, worker) in workers.into_iter().enumerate() {
         let injector = Arc::clone(&injector);
         let stealers = stealers.clone();
         let completed = Arc::clone(&completed);
         let stolen = Arc::clone(&stolen);
-        
+
         let handle = thread::spawn(move || {
             loop {
                 // 1. 尝试从本地队列获取任务
                 let task = worker.pop();
-                
+
                 // 2. 如果本地队列空，尝试从全局队列获取
                 let task = task.or_else(|| injector.steal().success());
-                
+
                 // 3. 如果全局队列也空，尝试窃取其他worker的任务
                 let task = task.or_else(|| {
                     stealers.iter().enumerate()
@@ -463,7 +463,7 @@ fn main() {
                             })
                         })
                 });
-                
+
                 match task {
                     Some(task) => {
                         // 模拟任务处理
@@ -480,19 +480,19 @@ fn main() {
                 }
             }
         });
-        
+
         handles.push(handle);
     }
-    
+
     // 等待所有线程完成
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     let duration = start.elapsed();
     let completed_count = completed.load(Ordering::Relaxed);
     let stolen_count = stolen.load(Ordering::Relaxed);
-    
+
     println!("✅ 完成任务数: {}", completed_count);
     println!("🔄 窃取次数: {}", stolen_count);
     println!("⏱️  总耗时: {:?}", duration);
@@ -533,25 +533,25 @@ impl ParallelDivideAndConquer {
         if data.len() <= 1 {
             return;
         }
-        
+
         let mid = data.len() / 2;
         let (left, right) = data.split_at_mut(mid);
-        
+
         // 并行排序左右两部分
         rayon::join(
             || Self::parallel_merge_sort(left),
             || Self::parallel_merge_sort(right),
         );
-        
+
         // 合并结果
         Self::merge(data, mid);
     }
-    
+
     fn merge<T: Ord>(data: &mut [T], mid: usize) {
         let mut temp = Vec::with_capacity(data.len());
         let mut left_idx = 0;
         let mut right_idx = mid;
-        
+
         while left_idx < mid && right_idx < data.len() {
             if data[left_idx] <= data[right_idx] {
                 temp.push(std::mem::replace(&mut data[left_idx], unsafe { std::mem::zeroed() }));
@@ -561,24 +561,24 @@ impl ParallelDivideAndConquer {
                 right_idx += 1;
             }
         }
-        
+
         // 复制剩余元素
         while left_idx < mid {
             temp.push(std::mem::replace(&mut data[left_idx], unsafe { std::mem::zeroed() }));
             left_idx += 1;
         }
-        
+
         while right_idx < data.len() {
             temp.push(std::mem::replace(&mut data[right_idx], unsafe { std::mem::zeroed() }));
             right_idx += 1;
         }
-        
+
         // 将排序后的数据复制回原数组
         for (i, item) in temp.into_iter().enumerate() {
             data[i] = item;
         }
     }
-    
+
     pub fn parallel_reduce<T, F>(data: &[T], identity: T, op: F) -> T
     where
         T: Send + Sync + Clone,
@@ -587,15 +587,15 @@ impl ParallelDivideAndConquer {
         if data.len() <= 1 {
             return data.first().cloned().unwrap_or(identity);
         }
-        
+
         let mid = data.len() / 2;
         let (left, right) = data.split_at(mid);
-        
+
         let (left_result, right_result) = rayon::join(
             || Self::parallel_reduce(left, identity.clone(), &op),
             || Self::parallel_reduce(right, identity, &op),
         );
-        
+
         op(left_result, right_result)
     }
 }
@@ -625,7 +625,7 @@ impl<T: Send + 'static> PipelineStage<T> {
             processor: Box::new(processor),
         }
     }
-    
+
     pub fn run(mut self) {
         thread::spawn(move || {
             while let Ok(item) = self.input.recv() {
@@ -648,28 +648,28 @@ impl<T: Send + 'static> Pipeline<T> {
     pub fn new(num_stages: usize, processor: impl Fn(T) -> T + Send + Clone + 'static) -> Self {
         let (input, mut prev_receiver) = mpsc::channel();
         let mut stages = Vec::new();
-        
+
         for _ in 0..num_stages {
             let (sender, receiver) = mpsc::channel();
             let stage = PipelineStage::new(prev_receiver, sender, processor.clone());
             stages.push(stage);
             prev_receiver = receiver;
         }
-        
+
         let output = prev_receiver;
-        
+
         Self {
             stages,
             input,
             output,
         }
     }
-    
+
     pub fn start(mut self) -> (mpsc::Sender<T>, mpsc::Receiver<T>) {
         for stage in self.stages.drain(..) {
             stage.run();
         }
-        
+
         (self.input, self.output)
     }
 }
@@ -678,13 +678,13 @@ impl<T: Send + 'static> Pipeline<T> {
 pub fn example_pipeline() {
     let pipeline = Pipeline::new(3, |x: u64| x * 2 + 1);
     let (input, output) = pipeline.start();
-    
+
     // 发送数据
     for i in 0..10 {
         input.send(i).unwrap();
     }
     drop(input); // 关闭输入通道
-    
+
     // 接收处理结果
     for result in output {
         println!("Pipeline result: {}", result);
@@ -701,17 +701,17 @@ use std::time::{Duration, Instant};
 
 fn main() {
     println!("=== Rust 1.90 流水线并发模式示例 ===\n");
-    
+
     let num_items = 10000;
-    
+
     // 创建流水线阶段
     let (input_tx, stage1_rx) = mpsc::channel();
     let (stage1_tx, stage2_rx) = mpsc::channel();
     let (stage2_tx, stage3_rx) = mpsc::channel();
     let (stage3_tx, output_rx) = mpsc::channel();
-    
+
     let start = Instant::now();
-    
+
     // 阶段1: 数据验证
     let stage1 = thread::spawn(move || {
         let mut count = 0;
@@ -724,7 +724,7 @@ fn main() {
         }
         println!("阶段1: 验证了 {} 个项目", count);
     });
-    
+
     // 阶段2: 数据转换
     let stage2 = thread::spawn(move || {
         let mut count = 0;
@@ -736,7 +736,7 @@ fn main() {
         }
         println!("阶段2: 转换了 {} 个项目", count);
     });
-    
+
     // 阶段3: 数据聚合
     let stage3 = thread::spawn(move || {
         let mut count = 0;
@@ -749,7 +749,7 @@ fn main() {
         }
         println!("阶段3: 聚合了 {} 个项目", count);
     });
-    
+
     // 生产者线程
     let producer = thread::spawn(move || {
         for i in 1..=num_items {
@@ -757,7 +757,7 @@ fn main() {
         }
         println!("生产者: 发送了 {} 个项目", num_items);
     });
-    
+
     // 消费者线程
     let consumer = thread::spawn(move || {
         let mut count = 0;
@@ -769,16 +769,16 @@ fn main() {
         println!("消费者: 接收了 {} 个项目，最终值: {}", count, last_value);
         last_value
     });
-    
+
     // 等待完成
     producer.join().unwrap();
     stage1.join().unwrap();
     stage2.join().unwrap();
     stage3.join().unwrap();
     let final_value = consumer.join().unwrap();
-    
+
     let duration = start.elapsed();
-    
+
     println!("\n✅ 流水线处理完成");
     println!("⏱️  总耗时: {:?}", duration);
     println!("📊 吞吐量: {:.2} items/s", num_items as f64 / duration.as_secs_f64());
@@ -821,21 +821,21 @@ impl EventHandler {
             handlers: HashMap::new(),
         }
     }
-    
+
     pub fn register_handler<F>(&mut self, event_type: &str, handler: F)
     where
         F: Fn(Event) + Send + Sync + 'static,
     {
         self.handlers.insert(event_type.to_string(), Box::new(handler));
     }
-    
+
     pub fn handle_event(&self, event: Event) {
         let event_type = match &event {
             Event::DataReceived { .. } => "data_received",
             Event::TimerExpired { .. } => "timer_expired",
             Event::UserAction { .. } => "user_action",
         };
-        
+
         if let Some(handler) = self.handlers.get(event_type) {
             handler(event);
         }
@@ -1027,21 +1027,21 @@ graph LR
     A[基础并发] --> B[异步编程]
     B --> C[高级模式]
     C --> D[性能优化]
-    
+
     A --> A1[线程基础]
     A --> A2[同步原语]
-    
+
     B --> B1[AsyncIterator]
     B --> B2[Future组合]
-    
+
     C --> C1[工作窃取]
     C --> C2[分治算法]
     C --> C3[响应式]
-    
+
     D --> D1[性能测量]
     D --> D2[SIMD优化]
     D --> D3[缓存优化]
-    
+
     style A fill:#e1f5ff
     style B fill:#fff4e1
     style C fill:#e8f5e9

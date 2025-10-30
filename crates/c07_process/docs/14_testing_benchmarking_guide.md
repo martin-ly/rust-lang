@@ -45,9 +45,9 @@
 ```text
     /\
    /  \     E2E 测试 (少量)
-  /____\    
+  /____\
  /      \   集成测试 (适量)
-/________\  
+/________\
           单元测试 (大量)
 ```
 
@@ -75,7 +75,7 @@ mod tests {
     fn test_basic_process_spawn() {
         let mut cmd = Command::new("echo");
         cmd.arg("Hello, World!");
-        
+
         let output = cmd.output().expect("Failed to execute command");
         assert!(output.status.success());
         assert_eq!(String::from_utf8_lossy(&output.stdout).trim(), "Hello, World!");
@@ -85,12 +85,12 @@ mod tests {
     fn test_process_with_timeout() {
         let mut cmd = Command::new("sleep");
         cmd.arg("2");
-        
+
         let start = std::time::Instant::now();
         let result = timeout(Duration::from_secs(1), async {
             cmd.output()
         }).await;
-        
+
         assert!(result.is_err()); // 应该超时
         assert!(start.elapsed() >= Duration::from_secs(1));
     }
@@ -99,7 +99,7 @@ mod tests {
     fn test_process_error_handling() {
         let mut cmd = Command::new("nonexistent_command");
         let result = cmd.output();
-        
+
         assert!(result.is_err());
         match result.unwrap_err().kind() {
             std::io::ErrorKind::NotFound => {
@@ -124,7 +124,7 @@ mod async_tests {
     async fn test_async_process_spawn() {
         let mut cmd = TokioCommand::new("echo");
         cmd.arg("Async Hello");
-        
+
         let output = cmd.output().await.expect("Failed to execute command");
         assert!(output.status.success());
         assert_eq!(String::from_utf8_lossy(&output.stdout).trim(), "Async Hello");
@@ -143,7 +143,7 @@ mod async_tests {
             .collect();
 
         let results = futures::future::join_all(handles).await;
-        
+
         for (i, result) in results.iter().enumerate() {
             let output = result.as_ref().unwrap().as_ref().unwrap();
             assert!(output.status.success());
@@ -157,7 +157,7 @@ mod async_tests {
     #[tokio::test]
     async fn test_process_pool() {
         let pool = ProcessPool::new(5);
-        
+
         let tasks: Vec<_> = (0..20)
             .map(|i| {
                 let pool = pool.clone();
@@ -168,7 +168,7 @@ mod async_tests {
             .collect();
 
         let results = futures::future::join_all(tasks).await;
-        
+
         for result in results {
             assert!(result.unwrap().is_ok());
         }
@@ -272,7 +272,7 @@ use std::process::Command;
 
 fn benchmark_process_spawn(c: &mut Criterion) {
     let mut group = c.benchmark_group("process_spawn");
-    
+
     group.bench_function("echo_command", |b| {
         b.iter(|| {
             let output = Command::new("echo")
@@ -282,7 +282,7 @@ fn benchmark_process_spawn(c: &mut Criterion) {
             black_box(output)
         })
     });
-    
+
     group.bench_function("true_command", |b| {
         b.iter(|| {
             let status = Command::new("true")
@@ -291,13 +291,13 @@ fn benchmark_process_spawn(c: &mut Criterion) {
             black_box(status)
         })
     });
-    
+
     group.finish();
 }
 
 fn benchmark_concurrent_processes(c: &mut Criterion) {
     let mut group = c.benchmark_group("concurrent_processes");
-    
+
     for &concurrency in &[1, 2, 4, 8, 16] {
         group.bench_with_input(
             BenchmarkId::new("spawn", concurrency),
@@ -314,7 +314,7 @@ fn benchmark_concurrent_processes(c: &mut Criterion) {
                             })
                         })
                         .collect();
-                    
+
                     for handle in handles {
                         black_box(handle.join().unwrap());
                     }
@@ -322,13 +322,13 @@ fn benchmark_concurrent_processes(c: &mut Criterion) {
             },
         );
     }
-    
+
     group.finish();
 }
 
 fn benchmark_process_communication(c: &mut Criterion) {
     let mut group = c.benchmark_group("process_communication");
-    
+
     group.bench_function("pipe_small_data", |b| {
         b.iter(|| {
             let mut child = Command::new("cat")
@@ -336,35 +336,35 @@ fn benchmark_process_communication(c: &mut Criterion) {
                 .stdout(std::process::Stdio::piped())
                 .spawn()
                 .unwrap();
-            
+
             let mut stdin = child.stdin.take().unwrap();
             stdin.write_all(black_box(b"small data")).unwrap();
             drop(stdin);
-            
+
             let output = child.wait_with_output().unwrap();
             black_box(output)
         })
     });
-    
+
     group.bench_function("pipe_large_data", |b| {
         let large_data = vec![b'A'; 1024 * 1024]; // 1MB
-        
+
         b.iter(|| {
             let mut child = Command::new("cat")
                 .stdin(std::process::Stdio::piped())
                 .stdout(std::process::Stdio::piped())
                 .spawn()
                 .unwrap();
-            
+
             let mut stdin = child.stdin.take().unwrap();
             stdin.write_all(black_box(&large_data)).unwrap();
             drop(stdin);
-            
+
             let output = child.wait_with_output().unwrap();
             black_box(output)
         })
     });
-    
+
     group.finish();
 }
 
@@ -386,9 +386,9 @@ use tokio::runtime::Runtime;
 
 fn benchmark_async_process_spawn(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
-    
+
     let mut group = c.benchmark_group("async_process_spawn");
-    
+
     group.bench_function("tokio_echo", |b| {
         b.iter(|| {
             rt.block_on(async {
@@ -401,7 +401,7 @@ fn benchmark_async_process_spawn(c: &mut Criterion) {
             })
         })
     });
-    
+
     group.bench_function("tokio_concurrent", |b| {
         b.iter(|| {
             rt.block_on(async {
@@ -416,14 +416,14 @@ fn benchmark_async_process_spawn(c: &mut Criterion) {
                         })
                     })
                     .collect();
-                
+
                 for handle in handles {
                     black_box(handle.await.unwrap());
                 }
             })
         })
     });
-    
+
     group.finish();
 }
 
@@ -447,24 +447,24 @@ mod stress_tests {
     async fn test_high_concurrency_processes() {
         const CONCURRENT_LIMIT: usize = 1000;
         const TOTAL_PROCESSES: usize = 10000;
-        
+
         let semaphore = Arc::new(Semaphore::new(CONCURRENT_LIMIT));
         let counter = Arc::new(AtomicUsize::new(0));
-        
+
         let handles: Vec<_> = (0..TOTAL_PROCESSES)
             .map(|i| {
                 let semaphore = semaphore.clone();
                 let counter = counter.clone();
-                
+
                 tokio::spawn(async move {
                     let _permit = semaphore.acquire().await.unwrap();
-                    
+
                     let mut cmd = TokioCommand::new("echo");
                     cmd.arg(format!("Process {}", i));
-                    
+
                     let result = cmd.output().await;
                     counter.fetch_add(1, Ordering::Relaxed);
-                    
+
                     assert!(result.is_ok());
                     result
                 })
@@ -475,24 +475,24 @@ mod stress_tests {
         for handle in handles {
             handle.await.unwrap().unwrap();
         }
-        
+
         assert_eq!(counter.load(Ordering::Relaxed), TOTAL_PROCESSES);
     }
 
     #[tokio::test]
     async fn test_memory_pressure() {
         const MEMORY_INTENSIVE_PROCESSES: usize = 100;
-        
+
         let handles: Vec<_> = (0..MEMORY_INTENSIVE_PROCESSES)
             .map(|i| {
                 tokio::spawn(async move {
                     // 创建大量数据的进程
                     let mut cmd = TokioCommand::new("dd");
                     cmd.args(&["if=/dev/zero", "bs=1M", "count=10"]);
-                    
+
                     let result = cmd.output().await;
                     assert!(result.is_ok());
-                    
+
                     println!("Memory intensive process {} completed", i);
                 })
             })
@@ -506,19 +506,19 @@ mod stress_tests {
     #[tokio::test]
     async fn test_cpu_intensive_processes() {
         const CPU_INTENSIVE_PROCESSES: usize = 50;
-        
+
         let handles: Vec<_> = (0..CPU_INTENSIVE_PROCESSES)
             .map(|i| {
                 tokio::spawn(async move {
                     // CPU 密集型进程
                     let mut cmd = TokioCommand::new("yes");
                     cmd.arg("CPU intensive test");
-                    
+
                     // 运行 1 秒后终止
                     let mut child = cmd.spawn().unwrap();
                     tokio::time::sleep(Duration::from_secs(1)).await;
                     child.kill().unwrap();
-                    
+
                     println!("CPU intensive process {} completed", i);
                 })
             })
@@ -547,16 +547,16 @@ mod security_tests {
     fn test_file_permission_restriction() {
         let temp_dir = TempDir::new().unwrap();
         let protected_file = temp_dir.path().join("protected.txt");
-        
+
         // 创建受保护的文件
         let mut file = File::create(&protected_file).unwrap();
         file.write_all(b"sensitive data").unwrap();
-        
+
         // 尝试通过进程访问
         let output = Command::new("cat")
             .arg(&protected_file)
             .output();
-        
+
         // 根据系统权限，可能成功或失败
         match output {
             Ok(output) => {
@@ -576,15 +576,15 @@ mod security_tests {
     fn test_command_injection_prevention() {
         // 测试命令注入防护
         let malicious_input = "test; rm -rf /";
-        
+
         let output = Command::new("echo")
             .arg(malicious_input) // 应该被安全处理
             .output()
             .unwrap();
-        
+
         assert!(output.status.success());
         let result = String::from_utf8_lossy(&output.stdout);
-        
+
         // 验证输入被正确转义
         assert!(result.contains("test; rm -rf /"));
         assert!(!result.contains("rm -rf /")); // 不应该执行恶意命令
@@ -595,16 +595,16 @@ mod security_tests {
         // 测试进程隔离
         let temp_dir = TempDir::new().unwrap();
         let test_file = temp_dir.path().join("test.txt");
-        
+
         // 在子进程中创建文件
         let output = Command::new("touch")
             .arg(&test_file)
             .output()
             .unwrap();
-        
+
         assert!(output.status.success());
         assert!(test_file.exists());
-        
+
         // 验证文件权限
         let metadata = std::fs::metadata(&test_file).unwrap();
         println!("File permissions: {:?}", metadata.permissions());
@@ -616,9 +616,9 @@ mod security_tests {
         let mut cmd = Command::new("env");
         cmd.env("TEST_VAR", "test_value");
         cmd.env_remove("PATH"); // 移除 PATH 环境变量
-        
+
         let output = cmd.output().unwrap();
-        
+
         if output.status.success() {
             let env_output = String::from_utf8_lossy(&output.stdout);
             assert!(env_output.contains("TEST_VAR=test_value"));
@@ -646,12 +646,12 @@ mod platform_tests {
                 .args(&["/C", "echo Windows test"])
                 .output()
                 .unwrap();
-            
+
             assert!(output.status.success());
             let result = String::from_utf8_lossy(&output.stdout);
             assert!(result.contains("Windows test"));
         }
-        
+
         #[cfg(not(target_os = "windows"))]
         {
             // 在非 Windows 系统上跳过
@@ -668,12 +668,12 @@ mod platform_tests {
                 .arg("echo 'Unix test'")
                 .output()
                 .unwrap();
-            
+
             assert!(output.status.success());
             let result = String::from_utf8_lossy(&output.stdout);
             assert!(result.contains("Unix test"));
         }
-        
+
         #[cfg(not(unix))]
         {
             println!("Skipping Unix-specific test");
@@ -683,14 +683,14 @@ mod platform_tests {
     #[test]
     fn test_path_separator_handling() {
         let path_separator = if cfg!(windows) { "\\" } else { "/" };
-        
+
         let test_path = format!("test{}file.txt", path_separator);
-        
+
         let output = Command::new("echo")
             .arg(&test_path)
             .output()
             .unwrap();
-        
+
         assert!(output.status.success());
         let result = String::from_utf8_lossy(&output.stdout);
         assert!(result.contains(&test_path));
@@ -718,31 +718,31 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         rust: [stable, beta, nightly]
-    
+
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Install Rust
       uses: actions-rs/toolchain@v1
       with:
         toolchain: ${{ matrix.rust }}
         override: true
-    
+
     - name: Run tests
       run: cargo test --verbose
-    
+
     - name: Run integration tests
       run: cargo test --test integration --verbose
-    
+
     - name: Run security tests
       run: cargo test --test security --verbose
-    
+
     - name: Run benchmarks
       run: cargo bench --verbose
-    
+
     - name: Check formatting
       run: cargo fmt -- --check
-    
+
     - name: Run clippy
       run: cargo clippy -- -D warnings
 ```
@@ -791,32 +791,32 @@ pub mod test_utils {
         timeout: Duration,
     ) -> Result<std::process::Output, Box<dyn std::error::Error>> {
         let start = std::time::Instant::now();
-        
+
         loop {
             if let Some(status) = child.try_wait()? {
                 return Ok(child.wait_with_output()?);
             }
-            
+
             if start.elapsed() > timeout {
                 child.kill()?;
                 return Err("Process timeout".into());
             }
-            
+
             std::thread::sleep(Duration::from_millis(10));
         }
     }
 
     pub fn assert_process_success(output: &std::process::Output) {
-        assert!(output.status.success(), 
+        assert!(output.status.success(),
             "Process failed with status: {:?}", output.status);
     }
 
     pub fn assert_process_output_contains(
-        output: &std::process::Output, 
+        output: &std::process::Output,
         expected: &str
     ) {
         let stdout = String::from_utf8_lossy(&output.stdout);
-        assert!(stdout.contains(expected), 
+        assert!(stdout.contains(expected),
             "Expected '{}' in output: {}", expected, stdout);
     }
 }

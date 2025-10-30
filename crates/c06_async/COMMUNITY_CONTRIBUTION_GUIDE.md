@@ -136,21 +136,21 @@ cargo test
 
 ```rust
 /// 异步资源管理器
-/// 
+///
 /// 提供异步资源的生命周期管理，支持自动清理和资源池化。
-/// 
+///
 /// # 示例
-/// 
+///
 /// ```rust
 /// use c06_async::AsyncResourceManager;
-/// 
+///
 /// #[tokio::main]
 /// async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ///     let manager = AsyncResourceManager::new();
 ///     let resource = manager.acquire_resource().await?;
-///     
+///
 ///     // 使用资源...
-///     
+///
 ///     // 资源会自动清理
 ///     Ok(())
 /// }

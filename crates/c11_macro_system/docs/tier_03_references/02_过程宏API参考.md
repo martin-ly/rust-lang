@@ -1,6 +1,6 @@
 # 过程宏 API 参考
 
-**最后更新**: 2025-10-24  
+**最后更新**: 2025-10-24
 **适用版本**: Rust 1.90+
 
 本文档提供过程宏核心 API 的完整参考，包括 `TokenStream`、`Span`、`Ident` 等关键类型。
@@ -144,14 +144,14 @@ pub fn token_stream_demo(input: TokenStream) -> TokenStream {
     if input.is_empty() {
         return TokenStream::new();
     }
-    
+
     // 转换为字符串
     let input_str = input.to_string();
     println!("Input: {}", input_str);
-    
+
     // 从字符串解析（不推荐）
     let parsed: TokenStream = "let x = 42;".parse().unwrap();
-    
+
     parsed
 }
 ```
@@ -204,7 +204,7 @@ pub fn iterate_tokens(input: TokenStream) -> TokenStream {
             }
         }
     }
-    
+
     TokenStream::new()
 }
 ```
@@ -234,7 +234,7 @@ use proc_macro::{TokenStream, TokenTree, Delimiter};
 #[proc_macro]
 pub fn pattern_match(input: TokenStream) -> TokenStream {
     let mut iter = input.into_iter();
-    
+
     match iter.next() {
         Some(TokenTree::Ident(ident)) => {
             println!("Found identifier: {}", ident);
@@ -249,7 +249,7 @@ pub fn pattern_match(input: TokenStream) -> TokenStream {
         }
         _ => {}
     }
-    
+
     TokenStream::new()
 }
 ```
@@ -347,12 +347,12 @@ use proc_macro::{Span, TokenStream};
 #[proc_macro]
 pub fn error_example(input: TokenStream) -> TokenStream {
     let span = Span::call_site();
-    
+
     // 编译错误
     let error = quote::quote_spanned! {span=>
         compile_error!("Custom error message");
     };
-    
+
     error.into()
 }
 ```
@@ -474,11 +474,11 @@ pub fn create_literals(_input: TokenStream) -> TokenStream {
         Literal::character('🦀'),
         Literal::f32_suffixed(2.5),
     ];
-    
+
     let stream = TokenStream::from_iter(
         literals.into_iter().map(TokenTree::Literal)
     );
-    
+
     quote::quote! {
         (#stream)
     }.into()
@@ -604,19 +604,19 @@ use proc_macro::{Span, Diagnostic, Level};
 #[proc_macro]
 pub fn diagnostic_demo(input: TokenStream) -> TokenStream {
     let span = Span::call_site();
-    
+
     // 错误
     span.error("This is an error").emit();
-    
+
     // 警告
     span.warning("This is a warning").emit();
-    
+
     // 注释
     span.note("This is a note").emit();
-    
+
     // 帮助
     span.help("Try this instead").emit();
-    
+
     TokenStream::new()
 }
 ```
@@ -675,10 +675,10 @@ use syn::parse_macro_input;
 #[proc_macro_derive(MyTrait)]
 pub fn my_trait(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as syn::DeriveInput);
-    
+
     // 内部使用 TokenStream2
     let expanded = my_trait_impl(&input);
-    
+
     TokenStream::from(expanded)
 }
 

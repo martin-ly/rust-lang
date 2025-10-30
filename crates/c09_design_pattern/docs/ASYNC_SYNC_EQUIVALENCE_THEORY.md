@@ -159,7 +159,7 @@ struct SyncM<T>(T);
 impl SyncM<T> {
     // return: a → M a
     fn pure(x: T) -> Self { SyncM(x) }
-    
+
     // bind: M a → (a → M b) → M b
     fn bind<U, F>(self, f: F) -> SyncM<U>
     where F: FnOnce(T) -> SyncM<U>
@@ -187,7 +187,7 @@ impl AsyncM<T> {
     fn pure(x: T) -> Self {
         AsyncM { state: State::Ready(x) }
     }
-    
+
     // bind: M a → (a → M b) → M b
     fn bind<U, F>(self, f: F) -> AsyncM<U>
     where F: FnOnce(T) -> AsyncM<U> + 'static
@@ -351,7 +351,7 @@ enum ExampleStateMachine {
 
 impl Future for ExampleStateMachine {
     type Output = i32;
-    
+
     fn poll(self: Pin<&mut Self>, cx: &mut Context) -> Poll<i32> {
         match self {
             Start => {
@@ -397,15 +397,15 @@ pub fn block_on<F: Future>(mut fut: F) -> F::Output {
     fn dummy_raw_waker() -> RawWaker {
         fn no_op(_: *const ()) {}
         fn clone(_: *const ()) -> RawWaker { dummy_raw_waker() }
-        static VTABLE: RawWakerVTable = 
+        static VTABLE: RawWakerVTable =
             RawWakerVTable::new(clone, no_op, no_op, no_op);
         RawWaker::new(std::ptr::null(), &VTABLE)
     }
-    
+
     let waker = unsafe { Waker::from_raw(dummy_raw_waker()) };
     let mut cx = Context::from_waker(&waker);
     let mut fut = unsafe { Pin::new_unchecked(&mut fut) };
-    
+
     loop {
         match fut.as_mut().poll(&mut cx) {
             Poll::Ready(output) => return output,
@@ -616,7 +616,7 @@ async fn read_file_async(path: &str) -> std::io::Result<String> {
 async fn process_files_async(paths: &[&str]) -> Vec<String> {
     let futures = paths.iter()
         .map(|p| read_file_async(p));
-    
+
     futures::future::try_join_all(futures)
         .await
         .unwrap()
@@ -777,6 +777,6 @@ tokio::spawn(async move { *x2.lock().await += 1; });
 
 ---
 
-**文档版本**: 1.0  
-**最后更新**: 2025-10-02  
+**文档版本**: 1.0
+**最后更新**: 2025-10-02
 **Rust版本**: 1.90+ (Edition 2024)

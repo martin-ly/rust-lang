@@ -88,7 +88,7 @@ pub trait AsyncAlgorithm<T, R> {
 pub trait AlgorithmIterator {
     type Item<'a> where Self: 'a;
     type Output<'a> where Self: 'a;
-    
+
     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
     fn collect<'a>(&'a mut self) -> Self::Output<'a>;
 }
@@ -403,7 +403,7 @@ let knowledge_base = AlgorithmKnowledgeBase::new();
 if let Some(knowledge) = knowledge_base.get_algorithm_knowledge("QuickSort") {
     println!("算法: {}", knowledge.name);
     println!("描述: {}", knowledge.description);
-    println!("复杂度: {} ~ {}", 
+    println!("复杂度: {} ~ {}",
         knowledge.complexity.time_complexity.lower_bound,
         knowledge.complexity.time_complexity.upper_bound);
 }
@@ -449,7 +449,7 @@ println!("{}", knowledge_base.generate_knowledge_report());
 
 ---
 
-**版本**: 0.3.0  
-**Rust版本**: 1.90.0  
-**更新日期**: 2025年1月27日  
+**版本**: 0.3.0
+**Rust版本**: 1.90.0
+**更新日期**: 2025年1月27日
 **状态**: ✅ 完成

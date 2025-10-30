@@ -196,7 +196,7 @@ use smol::Executor;
 async fn multi_runtime_example() {
     let tokio_rt = Runtime::new().unwrap();
     let smol_exec = smol::Executor::new();
-    
+
     // 在tokio运行时中执行smol任务
     let result = tokio_rt.spawn(async {
         smol_exec.run(async {
@@ -232,7 +232,7 @@ async fn async_function() -> i32 {
         std::thread::sleep(std::time::Duration::from_secs(1));
         42
     }).await.unwrap();
-    
+
     result
 }
 ```
@@ -371,20 +371,20 @@ impl AsyncTaskTracker {
         parent_task_id: Option<String>,
     ) -> String {
         let task_id = format!("task_{}", uuid::Uuid::new_v4());
-        
+
         // 继承父任务上下文
         let mut context = if let Some(parent_id) = parent_task_id {
             self.get_task_context(&parent_id).await.unwrap_or_default()
         } else {
             HashMap::new()
         };
-        
+
         context.insert("task_name".to_string(), name.clone());
         context.insert("start_time".to_string(), chrono::Utc::now().to_rfc3339());
-        
+
         // 设置当前任务上下文
         self.set_current_task_context(&task_id, &context).await;
-        
+
         task_id
     }
 }
@@ -406,7 +406,7 @@ impl AsyncExecutionFlowManager {
         context: HashMap<String, String>,
     ) -> String {
         let flow_id = Uuid::new_v4().to_string();
-        
+
         let flow = ExecutionFlow {
             flow_id: flow_id.clone(),
             name: name.clone(),
@@ -416,12 +416,12 @@ impl AsyncExecutionFlowManager {
             context,
             metrics: FlowMetrics::default(),
         };
-        
+
         {
             let mut flows = self.flows.write().await;
             flows.insert(flow_id.clone(), flow);
         }
-        
+
         flow_id
     }
 }
@@ -441,12 +441,12 @@ impl AsyncPerformanceMonitor {
         timings.entry(task_id.to_string())
             .or_insert_with(Vec::new)
             .push(duration);
-        
+
         // 更新性能指标
         let mut metrics = self.metrics.lock().await;
         metrics.total_tasks += 1;
         metrics.total_execution_time += duration;
-        metrics.average_execution_time = 
+        metrics.average_execution_time =
             metrics.total_execution_time / metrics.total_tasks;
     }
 }
@@ -466,7 +466,7 @@ impl AsyncTaskVisualizer {
     pub async fn generate_execution_graph(&self) -> ExecutionGraph {
         let tasks = self.task_tracker.get_all_tasks().await;
         let mut graph = ExecutionGraph::new();
-        
+
         for task in tasks {
             let node = ExecutionNode {
                 id: task.task_id.clone(),
@@ -476,10 +476,10 @@ impl AsyncTaskVisualizer {
                 end_time: task.context.get("end_time").cloned(),
                 parent_id: task.parent_task_id.clone(),
             };
-            
+
             graph.add_node(node);
         }
-        
+
         graph
     }
 }
@@ -499,7 +499,7 @@ impl AsyncTaskMonitor {
         let active_tasks = self.task_tracker.get_active_tasks().await;
         let performance_metrics = self.performance_monitor.get_metrics().await;
         let system_metrics = self.metrics_collector.collect().await;
-        
+
         RealTimeMetrics {
             active_tasks_count: active_tasks.len(),
             completed_tasks_count: performance_metrics.completed_tasks,
@@ -537,16 +537,16 @@ impl MicroserviceLogger {
             format!("{} {}", method, endpoint),
             None,
         ).await;
-        
+
         let mut context = HashMap::new();
         context.insert("request_id".to_string(), request_id.to_string());
         context.insert("service_name".to_string(), self.service_name.clone());
         context.insert("service_version".to_string(), self.service_version.clone());
         context.insert("endpoint".to_string(), endpoint.to_string());
         context.insert("method".to_string(), method.to_string());
-        
+
         self.task_tracker.set_task_context(&task_id, context).await;
-        
+
         task_id
     }
 }
@@ -575,16 +575,16 @@ impl HighConcurrencyManager {
         if !self.rate_limiter.try_acquire().await {
             return Err("Rate limit exceeded".into());
         }
-        
+
         // 检查熔断器
         if !self.circuit_breaker.is_available() {
             return Err("Circuit breaker is open".into());
         }
-        
+
         let task_id = self.logger.start_task(task_name.to_string()).await;
-        
+
         let result = self.task_pool.execute(future).await;
-        
+
         match &result {
             Ok(_) => {
                 self.logger.complete_task(&task_id).await;
@@ -595,7 +595,7 @@ impl HighConcurrencyManager {
                 self.circuit_breaker.record_failure().await;
             }
         }
-        
+
         result
     }
 }
@@ -655,7 +655,7 @@ impl RuntimeMigrationAdapter {
     {
         // 在源运行时中执行
         let result = self.source_runtime.spawn(future).await;
-        
+
         // 在目标运行时中重新执行（如果需要）
         self.target_runtime.spawn(async { result }).await
     }

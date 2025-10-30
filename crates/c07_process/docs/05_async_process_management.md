@@ -66,37 +66,37 @@ impl AsyncProcessManager {
             max_concurrent,
         }
     }
-    
+
     pub async fn spawn_process(
         &self,
         config: ProcessConfig,
     ) -> Result<String, Box<dyn std::error::Error>> {
         let mut processes = self.processes.lock().await;
-        
+
         if processes.len() >= self.max_concurrent {
             return Err("已达到最大并发进程数限制".into());
         }
-        
+
         let process_id = uuid::Uuid::new_v4().to_string();
-        
+
         let mut async_cmd = AsyncCommand::new(&config.command);
         async_cmd.args(&config.args);
-        
+
         if let Some(working_dir) = &config.working_dir {
             async_cmd.current_dir(working_dir);
         }
-        
+
         for (key, value) in &config.env_vars {
             async_cmd.env(key, value);
         }
-        
+
         async_cmd
             .stdin(Stdio::piped())
             .stdout(Stdio::piped())
             .stderr(Stdio::piped());
-        
+
         let child = async_cmd.spawn()?;
-        
+
         let async_process = AsyncProcess {
             id: process_id.clone(),
             child,
@@ -109,21 +109,21 @@ impl AsyncProcessManager {
                 env_vars: config.env_vars,
             },
         };
-        
+
         processes.push(async_process);
-        
+
         Ok(process_id)
     }
-    
+
     pub async fn wait_for_process(
         &self,
         process_id: &str,
     ) -> Result<ProcessResult, Box<dyn std::error::Error>> {
         let mut processes = self.processes.lock().await;
-        
+
         if let Some(process) = processes.iter_mut().find(|p| p.id == process_id) {
             let output = process.child.wait_with_output().await?;
-            
+
             let result = ProcessResult {
                 process_id: process_id.to_string(),
                 exit_code: output.status.code(),
@@ -131,25 +131,25 @@ impl AsyncProcessManager {
                 stderr: output.stderr,
                 execution_time: std::time::Instant::now().duration_since(process.created_at),
             };
-            
+
             process.status = if output.status.success() {
                 ProcessStatus::Completed
             } else {
                 ProcessStatus::Failed
             };
-            
+
             Ok(result)
         } else {
             Err("进程未找到".into())
         }
     }
-    
+
     pub async fn terminate_process(
         &self,
         process_id: &str,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut processes = self.processes.lock().await;
-        
+
         if let Some(process) = processes.iter_mut().find(|p| p.id == process_id) {
             process.child.kill().await?;
             process.status = ProcessStatus::Terminated;
@@ -158,14 +158,14 @@ impl AsyncProcessManager {
             Err("进程未找到".into())
         }
     }
-    
+
     pub async fn get_process_status(&self, process_id: &str) -> Option<ProcessStatus> {
         let processes = self.processes.lock().await;
         processes.iter()
             .find(|p| p.id == process_id)
             .map(|p| p.status.clone())
     }
-    
+
     pub async fn list_processes(&self) -> Vec<ProcessInfo> {
         let processes = self.processes.lock().await;
         processes.iter().map(|p| ProcessInfo {
@@ -221,13 +221,13 @@ impl AsyncProcessCommunicator {
         let (stdin_tx, mut stdin_rx) = mpsc::unbounded_channel();
         let (stdout_tx, stdout_rx) = mpsc::unbounded_channel();
         let (stderr_tx, stderr_rx) = mpsc::unbounded_channel();
-        
+
         // 处理标准输入
         if let Some(stdin) = child.stdin.take() {
             let stdin_tx_clone = stdin_tx.clone();
             tokio::spawn(async move {
                 let mut async_stdin = tokio::io::BufWriter::new(stdin);
-                
+
                 while let Some(data) = stdin_rx.recv().await {
                     if let Err(e) = async_stdin.write_all(&data).await {
                         eprintln!("写入标准输入失败: {}", e);
@@ -240,68 +240,68 @@ impl AsyncProcessCommunicator {
                 }
             });
         }
-        
+
         // 处理标准输出
         if let Some(stdout) = child.stdout.take() {
             let stdout_tx_clone = stdout_tx.clone();
             tokio::spawn(async move {
                 let mut async_stdout = tokio::io::BufReader::new(stdout);
                 let mut buffer = String::new();
-                
+
                 while let Ok(n) = async_stdout.read_line(&mut buffer).await {
                     if n == 0 {
                         break;
                     }
-                    
+
                     if let Err(_) = stdout_tx_clone.send(buffer.as_bytes().to_vec()) {
                         break;
                     }
-                    
+
                     buffer.clear();
                 }
             });
         }
-        
+
         // 处理标准错误
         if let Some(stderr) = child.stderr.take() {
             let stderr_tx_clone = stderr_tx.clone();
             tokio::spawn(async move {
                 let mut async_stderr = tokio::io::BufReader::new(stderr);
                 let mut buffer = String::new();
-                
+
                 while let Ok(n) = async_stderr.read_line(&mut buffer).await {
                     if n == 0 {
                         break;
                     }
-                    
+
                     if let Err(_) = stderr_tx_clone.send(buffer.as_bytes().to_vec()) {
                         break;
                     }
-                    
+
                     buffer.clear();
                 }
             });
         }
-        
+
         Self {
             stdin_tx,
             stdout_rx,
             stderr_rx,
         }
     }
-    
+
     pub async fn send_input(&self, data: Vec<u8>) -> Result<(), mpsc::error::SendError<Vec<u8>>> {
         self.stdin_tx.send(data)
     }
-    
+
     pub async fn receive_output(&mut self) -> Option<Vec<u8>> {
         self.stdout_rx.recv().await
     }
-    
+
     pub async fn receive_error(&mut self) -> Option<Vec<u8>> {
         self.stderr_rx.recv().await
     }
-    
+
     pub async fn send_line(&self, line: &str) -> Result<(), mpsc::error::SendError<Vec<u8>>> {
         let data = format!("{}\n", line).into_bytes();
         self.stdin_tx.send(data)
@@ -383,7 +383,7 @@ pub struct PoolMetrics {
 impl AsyncProcessPool {
     pub fn new(config: ProcessPoolConfig) -> Self {
         let semaphore = Arc::new(Semaphore::new(config.max_processes));
-        
+
         Self {
             config,
             processes: Arc::new(RwLock::new(VecDeque::new())),
@@ -392,25 +392,25 @@ impl AsyncProcessPool {
             metrics: Arc::new(RwLock::new(PoolMetrics::default())),
         }
     }
-    
+
     pub async fn initialize(&self) -> Result<(), Box<dyn std::error::Error>> {
         let mut processes = self.processes.write().await;
-        
+
         for i in 0..self.config.initial_processes {
             let process = self.create_process().await?;
             processes.push_back(process);
         }
-        
+
         let mut metrics = self.metrics.write().await;
         metrics.total_processes_created = self.config.initial_processes as u64;
         metrics.current_active_processes = self.config.initial_processes;
-        
+
         Ok(())
     }
-    
+
     async fn create_process(&self) -> Result<PooledAsyncProcess, Box<dyn std::error::Error>> {
         let process_id = uuid::Uuid::new_v4().to_string();
-        
+
         let mut child = tokio::process::Command::new("sh")
             .arg("-c")
             .arg("cat") // 默认命令，实际使用中应该可配置
@@ -418,7 +418,7 @@ impl AsyncProcessPool {
             .stdout(std::process::Stdio::piped())
             .stderr(std::process::Stdio::piped())
             .spawn()?;
-        
+
         Ok(PooledAsyncProcess {
             id: process_id,
             child,
@@ -429,28 +429,28 @@ impl AsyncProcessPool {
             current_task: None,
         })
     }
-    
+
     pub async fn submit_task(&self, task: Task) -> Result<String, Box<dyn std::error::Error>> {
         let task_id = task.id.clone();
-        
+
         // 将任务加入队列
         {
             let mut queue = self.task_queue.lock().await;
             queue.push_back(task);
         }
-        
+
         // 尝试立即执行任务
         self.try_execute_next_task().await;
-        
+
         Ok(task_id)
     }
-    
+
     async fn try_execute_next_task(&self) {
         let _permit = self.semaphore.acquire().await.unwrap();
-        
+
         let mut processes = self.processes.write().await;
         let mut queue = self.task_queue.lock().await;
-        
+
         // 查找可用的健康进程
         let mut process_index = None;
         for (i, process) in processes.iter_mut().enumerate() {
@@ -459,19 +459,19 @@ impl AsyncProcessPool {
                 break;
             }
         }
-        
+
         if let Some(index) = process_index {
             if let Some(task) = queue.pop_front() {
                 let process = processes.get_mut(index).unwrap();
                 process.current_task = Some(task.id.clone());
                 process.last_used = Instant::now();
-                
+
                 // 异步执行任务
                 let process_id = process.id.clone();
                 let task_clone = task.clone();
                 let processes_clone = self.processes.clone();
                 let metrics_clone = self.metrics.clone();
-                
+
                 tokio::spawn(async move {
                     let result = Self::execute_task_with_process(
                         process_id,
@@ -479,7 +479,7 @@ impl AsyncProcessPool {
                         processes_clone,
                         metrics_clone,
                     ).await;
-                    
+
                     match result {
                         Ok(_) => println!("任务 {} 执行成功", task.id),
                         Err(e) => println!("任务 {} 执行失败: {}", task.id, e),
@@ -488,7 +488,7 @@ impl AsyncProcessPool {
             }
         }
     }
-    
+
     async fn execute_task_with_process(
         process_id: String,
         task: Task,
@@ -496,30 +496,30 @@ impl AsyncProcessPool {
         metrics: Arc<RwLock<PoolMetrics>>,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let start_time = Instant::now();
-        
+
         // 获取进程
         let mut processes_guard = processes.write().await;
         let process = processes_guard.iter_mut()
             .find(|p| p.id == process_id)
             .ok_or("进程未找到")?;
-        
+
         // 执行任务
         let result = Self::run_task_on_process(process, &task).await;
-        
+
         // 更新进程状态
         process.current_task = None;
         process.usage_count += 1;
-        
+
         // 更新指标
         let execution_time = start_time.elapsed();
         let mut metrics_guard = metrics.write().await;
-        
+
         if result.is_ok() {
             metrics_guard.total_tasks_completed += 1;
         } else {
             metrics_guard.total_tasks_failed += 1;
         }
-        
+
         // 更新平均执行时间
         let total_completed = metrics_guard.total_tasks_completed;
         if total_completed > 0 {
@@ -528,16 +528,16 @@ impl AsyncProcessPool {
                  + execution_time.as_millis()) / total_completed as u128
             );
         }
-        
+
         result
     }
-    
+
     async fn run_task_on_process(
         process: &mut PooledAsyncProcess,
         task: &Task,
     ) -> Result<(), Box<dyn std::error::Error>> {
         use tokio::time::timeout;
-        
+
         // 设置超时
         let execution_future = async {
             // 向进程发送输入数据
@@ -548,10 +548,10 @@ impl AsyncProcessPool {
                 stdin.write_all(b"\n").await?;
                 stdin.flush().await?;
             }
-            
+
             // 等待进程完成
             let output = process.child.wait_with_output().await?;
-            
+
             if output.status.success() {
                 println!("任务 {} 输出: {}", task.id, String::from_utf8_lossy(&output.stdout));
                 Ok(())
@@ -559,16 +559,16 @@ impl AsyncProcessPool {
                 Err(format!("进程执行失败: {}", String::from_utf8_lossy(&output.stderr)).into())
             }
         };
-        
+
         timeout(task.timeout, execution_future).await
             .map_err(|_| "任务执行超时".into())?
     }
-    
+
     pub async fn get_metrics(&self) -> PoolMetrics {
         let metrics = self.metrics.read().await;
         let processes = self.processes.read().await;
         let queue = self.task_queue.lock().await;
-        
+
         PoolMetrics {
             total_tasks_completed: metrics.total_tasks_completed,
             total_tasks_failed: metrics.total_tasks_failed,
@@ -579,35 +579,35 @@ impl AsyncProcessPool {
             current_queued_tasks: queue.len(),
         }
     }
-    
+
     pub async fn health_check(&self) -> Result<(), Box<dyn std::error::Error>> {
         let mut processes = self.processes.write().await;
         let now = Instant::now();
-        
+
         // 移除不健康的进程
         let mut removed_count = 0;
         processes.retain(|process| {
-            let is_healthy = process.is_healthy && 
+            let is_healthy = process.is_healthy &&
                 now.duration_since(process.last_used) < self.config.idle_timeout;
-            
+
             if !is_healthy {
                 removed_count += 1;
             }
-            
+
             is_healthy
         });
-        
+
         // 确保最小进程数
         while processes.len() < self.config.min_processes {
             let process = self.create_process().await?;
             processes.push_back(process);
         }
-        
+
         // 更新指标
         let mut metrics = self.metrics.write().await;
         metrics.total_processes_destroyed += removed_count;
         metrics.current_active_processes = processes.len();
-        
+
         Ok(())
     }
 }
@@ -693,30 +693,30 @@ impl AsyncTaskScheduler {
             scheduler_config: config,
         }
     }
-    
+
     pub async fn schedule_task(&self, task: ScheduledTask) -> Result<(), SchedulerError> {
         let mut queue = self.task_queue.lock().await;
         queue.push(task);
-        
+
         // 尝试立即调度任务
         self.try_schedule_next_task().await;
-        
+
         Ok(())
     }
-    
+
     async fn try_schedule_next_task(&self) {
         let mut queue = self.task_queue.lock().await;
         let mut running_tasks = self.running_tasks.write().await;
-        
+
         // 检查是否可以调度新任务
         if running_tasks.len() >= self.max_concurrent {
             return;
         }
-        
+
         // 查找可以立即执行的任务
         if let Some(task) = queue.pop() {
             let now = Instant::now();
-            
+
             if task.scheduled_time <= now {
                 let running_task = RunningTask {
                     id: task.id.clone(),
@@ -724,15 +724,15 @@ impl AsyncTaskScheduler {
                     process_id: None,
                     priority: task.priority,
                 };
-                
+
                 running_tasks.push(running_task);
-                
+
                 // 异步执行任务
                 let task_clone = task.clone();
                 let queue_clone = self.task_queue.clone();
                 let running_tasks_clone = self.running_tasks.clone();
                 let config = self.scheduler_config.clone();
-                
+
                 tokio::spawn(async move {
                     Self::execute_scheduled_task(
                         task_clone,
@@ -747,7 +747,7 @@ impl AsyncTaskScheduler {
             }
         }
     }
-    
+
     async fn execute_scheduled_task(
         task: ScheduledTask,
         queue: Arc<Mutex<BinaryHeap<ScheduledTask>>>,
@@ -755,36 +755,36 @@ impl AsyncTaskScheduler {
         config: SchedulerConfig,
     ) {
         let start_time = Instant::now();
-        
+
         // 执行任务
         let result = Self::run_task(&task).await;
-        
+
         // 移除运行中的任务
         {
             let mut running_tasks_guard = running_tasks.write().await;
             running_tasks_guard.retain(|t| t.id != task.id);
         }
-        
+
         match result {
             Ok(_) => {
                 println!("任务 {} 执行成功", task.id);
             }
             Err(e) => {
                 println!("任务 {} 执行失败: {}", task.id, e);
-                
+
                 // 检查是否需要重试
                 if task.retry_count < task.max_retries {
                     let mut new_task = task.clone();
                     new_task.retry_count += 1;
-                    
+
                     // 计算退避延迟
                     let delay = Duration::from_millis(
-                        (config.retry_delay.as_millis() as f64 * 
+                        (config.retry_delay.as_millis() as f64 *
                          config.backoff_multiplier.powi(new_task.retry_count as i32)) as u64
                     );
-                    
+
                     new_task.scheduled_time = Instant::now() + delay;
-                    
+
                     // 重新调度任务
                     let queue_clone = queue.clone();
                     tokio::spawn(async move {
@@ -795,17 +795,17 @@ impl AsyncTaskScheduler {
             }
         }
     }
-    
+
     async fn run_task(task: &ScheduledTask) -> Result<(), Box<dyn std::error::Error>> {
         use tokio::process::Command;
         use tokio::time::timeout;
-        
+
         let mut cmd = Command::new(&task.command);
         cmd.args(&task.args);
-        
+
         let execution_future = async {
             let output = cmd.output().await?;
-            
+
             if output.status.success() {
                 println!("任务 {} 输出: {}", task.id, String::from_utf8_lossy(&output.stdout));
                 Ok(())
@@ -813,15 +813,15 @@ impl AsyncTaskScheduler {
                 Err(format!("任务执行失败: {}", String::from_utf8_lossy(&output.stderr)).into())
             }
         };
-        
+
         timeout(task.estimated_duration, execution_future).await
             .map_err(|_| "任务执行超时".into())?
     }
-    
+
     pub async fn get_scheduler_status(&self) -> SchedulerStatus {
         let queue = self.task_queue.lock().await;
         let running_tasks = self.running_tasks.read().await;
-        
+
         SchedulerStatus {
             queued_tasks: queue.len(),
             running_tasks: running_tasks.len(),
@@ -935,34 +935,34 @@ impl AsyncProcessMonitor {
             alert_callbacks: Arc::new(Mutex::new(Vec::new())),
         }
     }
-    
+
     pub async fn start_monitoring(&self) -> Result<(), Box<dyn std::error::Error>> {
         let mut interval = interval(self.check_interval);
-        
+
         loop {
             interval.tick().await;
             self.perform_health_check().await?;
         }
     }
-    
+
     async fn perform_health_check(&self) -> Result<(), Box<dyn std::error::Error>> {
         let mut processes = self.monitored_processes.write().await;
-        
+
         for (process_id, process) in processes.iter_mut() {
             let metrics = self.collect_process_metrics(process.pid).await?;
             process.metrics = metrics.clone();
             process.last_check = std::time::Instant::now();
-            
+
             // 检查警报条件
             self.check_alerts(process, &metrics).await;
         }
-        
+
         Ok(())
     }
-    
+
     async fn collect_process_metrics(&self, pid: u32) -> Result<ProcessMetrics, Box<dyn std::error::Error>> {
         use tokio::process::Command;
-        
+
         // 收集内存使用情况
         let memory_output = Command::new("ps")
             .arg("-p")
@@ -971,7 +971,7 @@ impl AsyncProcessMonitor {
             .arg("rss")
             .output()
             .await?;
-        
+
         let memory_mb = if memory_output.status.success() {
             let output_str = String::from_utf8_lossy(&memory_output.stdout);
             output_str.lines()
@@ -982,7 +982,7 @@ impl AsyncProcessMonitor {
         } else {
             0
         };
-        
+
         // 收集CPU使用情况
         let cpu_output = Command::new("ps")
             .arg("-p")
@@ -991,7 +991,7 @@ impl AsyncProcessMonitor {
             .arg("pcpu")
             .output()
             .await?;
-        
+
         let cpu_percent = if cpu_output.status.success() {
             let output_str = String::from_utf8_lossy(&cpu_output.stdout);
             output_str.lines()
@@ -1001,10 +1001,10 @@ impl AsyncProcessMonitor {
         } else {
             0.0
         };
-        
+
         // 测试响应时间
         let response_time = self.measure_response_time(pid).await;
-        
+
         Ok(ProcessMetrics {
             memory_usage_mb: memory_mb,
             cpu_percent,
@@ -1015,25 +1015,25 @@ impl AsyncProcessMonitor {
             throughput: 0.0, // 实际实现中需要计算
         })
     }
-    
+
     async fn measure_response_time(&self, pid: u32) -> Duration {
         let start = std::time::Instant::now();
-        
+
         let health_check_result = tokio::process::Command::new("kill")
             .arg("-0")
             .arg(pid.to_string())
             .output()
             .await;
-        
+
         match health_check_result {
             Ok(output) if output.status.success() => start.elapsed(),
             _ => Duration::MAX,
         }
     }
-    
+
     async fn check_alerts(&self, process: &mut MonitoredProcess, metrics: &ProcessMetrics) {
         let mut new_alerts = Vec::new();
-        
+
         // 检查内存使用
         if metrics.memory_usage_mb > self.alert_thresholds.max_memory_mb {
             let alert = Alert {
@@ -1050,7 +1050,7 @@ impl AsyncProcessMonitor {
             };
             new_alerts.push(alert);
         }
-        
+
         // 检查CPU使用
         if metrics.cpu_percent > self.alert_thresholds.max_cpu_percent {
             let alert = Alert {
@@ -1067,7 +1067,7 @@ impl AsyncProcessMonitor {
             };
             new_alerts.push(alert);
         }
-        
+
         // 检查响应时间
         if metrics.response_time > self.alert_thresholds.max_response_time {
             let alert = Alert {
@@ -1084,29 +1084,29 @@ impl AsyncProcessMonitor {
             };
             new_alerts.push(alert);
         }
-        
+
         // 触发警报回调
         for alert in new_alerts {
             process.alert_history.push(alert.clone());
             self.trigger_alert_callbacks(alert).await;
         }
     }
-    
+
     async fn trigger_alert_callbacks(&self, alert: Alert) {
         let callbacks = self.alert_callbacks.lock().await;
         for callback in callbacks.iter() {
             callback(alert.clone());
         }
     }
-    
+
     pub async fn add_alert_callback(&self, callback: AlertCallback) {
         let mut callbacks = self.alert_callbacks.lock().await;
         callbacks.push(callback);
     }
-    
+
     pub async fn add_process(&self, process_id: String, pid: u32, name: String) {
         let mut processes = self.monitored_processes.write().await;
-        
+
         let monitored_process = MonitoredProcess {
             id: process_id,
             pid,
@@ -1125,15 +1125,15 @@ impl AsyncProcessMonitor {
             },
             alert_history: Vec::new(),
         };
-        
+
         processes.insert(monitored_process.id.clone(), monitored_process);
     }
-    
+
     pub async fn get_process_status(&self, process_id: &str) -> Option<MonitoredProcess> {
         let processes = self.monitored_processes.read().await;
         processes.get(process_id).cloned()
     }
-    
+
     pub async fn get_all_processes(&self) -> Vec<MonitoredProcess> {
         let processes = self.monitored_processes.read().await;
         processes.values().cloned().collect()
@@ -1182,19 +1182,19 @@ pub type ErrorCallback = Box<dyn Fn(ProcessError) + Send + Sync>;
 pub enum ProcessError {
     #[error("进程启动失败: {0}")]
     StartupFailed(String),
-    
+
     #[error("进程执行超时: {0}")]
     ExecutionTimeout(Duration),
-    
+
     #[error("进程崩溃: {0}")]
     ProcessCrashed(String),
-    
+
     #[error("资源不足: {0}")]
     ResourceExhausted(String),
-    
+
     #[error("通信错误: {0}")]
     CommunicationError(String),
-    
+
     #[error("权限错误: {0}")]
     PermissionError(String),
 }
@@ -1207,22 +1207,22 @@ impl AsyncErrorHandler {
             recovery_strategies: Arc::new(Mutex::new(HashMap::new())),
         }
     }
-    
+
     pub async fn set_retry_policy(&self, process_id: String, policy: RetryPolicy) {
         let mut policies = self.retry_policies.lock().await;
         policies.insert(process_id, policy);
     }
-    
+
     pub async fn set_recovery_strategy(&self, process_id: String, strategy: RecoveryStrategy) {
         let mut strategies = self.recovery_strategies.lock().await;
         strategies.insert(process_id, strategy);
     }
-    
+
     pub async fn add_error_callback(&self, callback: ErrorCallback) {
         let mut callbacks = self.error_callbacks.lock().await;
         callbacks.push(callback);
     }
-    
+
     pub async fn handle_error(
         &self,
         process_id: &str,
@@ -1230,30 +1230,30 @@ impl AsyncErrorHandler {
     ) -> Result<(), Box<dyn std::error::Error>> {
         // 触发错误回调
         self.trigger_error_callbacks(error.clone()).await;
-        
+
         // 获取重试策略
         let retry_policy = {
             let policies = self.retry_policies.lock().await;
             policies.get(process_id).cloned()
         };
-        
+
         if let Some(policy) = retry_policy {
             return self.retry_with_policy(process_id, error, policy).await;
         }
-        
+
         // 获取恢复策略
         let recovery_strategy = {
             let strategies = self.recovery_strategies.lock().await;
             strategies.get(process_id).cloned()
         };
-        
+
         if let Some(strategy) = recovery_strategy {
             return self.execute_recovery_strategy(process_id, error, strategy).await;
         }
-        
+
         Err("没有配置错误处理策略".into())
     }
-    
+
     async fn retry_with_policy(
         &self,
         process_id: &str,
@@ -1262,15 +1262,15 @@ impl AsyncErrorHandler {
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut current_delay = policy.initial_delay;
         let mut attempt = 0;
-        
+
         while attempt < policy.max_retries {
             attempt += 1;
-            
+
             println!(
                 "重试进程 {} (尝试 {}/{}): {}",
                 process_id, attempt, policy.max_retries, error
             );
-            
+
             // 等待重试延迟
             if policy.jitter {
                 let jitter = Duration::from_millis(
@@ -1280,7 +1280,7 @@ impl AsyncErrorHandler {
             } else {
                 sleep(current_delay).await;
             }
-            
+
             // 尝试恢复进程
             match self.attempt_process_recovery(process_id).await {
                 Ok(_) => {
@@ -1289,32 +1289,32 @@ impl AsyncErrorHandler {
                 }
                 Err(e) => {
                     println!("进程 {} 恢复失败: {}", process_id, e);
-                    
+
                     // 计算下次延迟
                     current_delay = Duration::from_millis(
                         (current_delay.as_millis() as f64 * policy.backoff_multiplier) as u64
                     );
-                    
+
                     if current_delay > policy.max_delay {
                         current_delay = policy.max_delay;
                     }
                 }
             }
         }
-        
+
         Err(format!("进程 {} 重试 {} 次后仍然失败", process_id, policy.max_retries).into())
     }
-    
+
     async fn attempt_process_recovery(
         &self,
         process_id: &str,
     ) -> Result<(), Box<dyn std::error::Error>> {
         // 实际实现中，这里应该包含具体的恢复逻辑
         // 例如：重启进程、替换进程、清理资源等
-        
+
         // 模拟恢复过程
         sleep(Duration::from_millis(100)).await;
-        
+
         // 模拟恢复成功/失败
         if rand::random::<f64>() > 0.3 {
             Ok(())
@@ -1322,7 +1322,7 @@ impl AsyncErrorHandler {
             Err("恢复失败".into())
         }
     }
-    
+
     async fn execute_recovery_strategy(
         &self,
         process_id: &str,
@@ -1356,31 +1356,31 @@ impl AsyncErrorHandler {
             }
         }
     }
-    
+
     async fn restart_process(&self, process_id: &str) -> Result<(), Box<dyn std::error::Error>> {
         // 实际实现中应该包含重启逻辑
         sleep(Duration::from_millis(500)).await;
         Ok(())
     }
-    
+
     async fn replace_process(&self, process_id: &str) -> Result<(), Box<dyn std::error::Error>> {
         // 实际实现中应该包含替换逻辑
         sleep(Duration::from_millis(1000)).await;
         Ok(())
     }
-    
+
     async fn scale_up_processes(&self, process_id: &str) -> Result<(), Box<dyn std::error::Error>> {
         // 实际实现中应该包含扩展逻辑
         sleep(Duration::from_millis(2000)).await;
         Ok(())
     }
-    
+
     async fn scale_down_processes(&self, process_id: &str) -> Result<(), Box<dyn std::error::Error>> {
         // 实际实现中应该包含缩减逻辑
         sleep(Duration::from_millis(1000)).await;
         Ok(())
     }
-    
+
     async fn trigger_error_callbacks(&self, error: ProcessError) {
         let callbacks = self.error_callbacks.lock().await;
         for callback in callbacks.iter() {

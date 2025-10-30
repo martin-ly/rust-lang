@@ -1,7 +1,7 @@
 ﻿# C09 设计模式: 术语表 (Glossary)
 
-> **文档定位**: 设计模式核心术语快速参考，涵盖模式、并发、形式化等关键概念  
-> **使用方式**: 通过术语索引快速查找定义，理解设计模式核心概念  
+> **文档定位**: 设计模式核心术语快速参考，涵盖模式、并发、形式化等关键概念
+> **使用方式**: 通过术语索引快速查找定义，理解设计模式核心概念
 > **相关文档**: [主索引](./00_MASTER_INDEX.md) | [README](./README.md) | [FAQ](./FAQ.md)
 
 ## 📊 目录
@@ -37,8 +37,8 @@
     - [Pin](#pin)
   - [📚 延伸阅读](#-延伸阅读)
 
-**最后更新**: 2025-10-19  
-**适用版本**: Rust 1.90+ (Edition 2024)  
+**最后更新**: 2025-10-19
+**适用版本**: Rust 1.90+ (Edition 2024)
 **文档类型**: 📚 参考资料
 
 ---
@@ -184,17 +184,17 @@ impl PersonBuilder {
     fn new() -> Self {
         Self { name: None, age: None }
     }
-    
+
     fn name(mut self, name: String) -> Self {
         self.name = Some(name);
         self
     }
-    
+
     fn age(mut self, age: u32) -> Self {
         self.age = Some(age);
         self
     }
-    
+
     fn build(self) -> Result<Person, &'static str> {
         Ok(Person {
             name: self.name.ok_or("name is required")?,
@@ -236,7 +236,7 @@ impl Document<Draft> {
             _state: std::marker::PhantomData,
         }
     }
-    
+
     fn publish(self) -> Document<Published> {
         Document {
             content: self.content,
@@ -284,7 +284,7 @@ impl Actor {
             self.handle(msg).await;
         }
     }
-    
+
     async fn handle(&mut self, msg: Message) {
         // 处理消息
     }
@@ -452,7 +452,7 @@ struct StringObserver;
 
 impl Observer for StringObserver {
     type View<'a> = &'a str;
-    
+
     fn update(&self, data: &str) {
         println!("Received: {}", data);
     }

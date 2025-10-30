@@ -202,7 +202,7 @@ async fn handle_connection(
     peer_addr: SocketAddr,
 ) -> NetworkResult<()> {
     let mut buffer = [0; 1024];
-    
+
     loop {
         match socket.read(&mut buffer).await {
             Ok(0) => break,  // 连接关闭
@@ -277,11 +277,11 @@ socket.send_to(&buffer[..n], peer_addr).await?;
 async fn udp_echo_server() -> NetworkResult<()> {
     let socket = UdpSocket::bind("127.0.0.1:8080").await?;
     let mut buffer = [0; 1024];
-    
+
     loop {
         let (n, peer_addr) = socket.recv_from(&mut buffer).await?;
         println!("收到来自 {} 的 {} 字节数据", peer_addr, n);
-        
+
         // Echo 回数据
         socket.send_to(&buffer[..n], peer_addr).await?;
         println!("向 {} 发送 {} 字节数据", peer_addr, n);
@@ -554,18 +554,18 @@ pub struct NetworkMetrics {
 // 监控网络接口
 async fn monitor_interface(interface: NetworkInterface) -> NetworkResult<()> {
     let mut metrics = NetworkMetrics::new();
-    
+
     loop {
         // 获取接口统计信息
         let stats = interface.get_stats().await?;
-        
+
         // 更新指标
         metrics.update(&stats);
-        
+
         // 输出监控信息
-        println!("接口 {}: 发送 {} 字节, 接收 {} 字节", 
+        println!("接口 {}: 发送 {} 字节, 接收 {} 字节",
                  interface.name, metrics.bytes_sent, metrics.bytes_received);
-        
+
         tokio::time::sleep(Duration::from_secs(1)).await;
     }
 }
@@ -623,25 +623,25 @@ pub struct ProtocolStatistics {
 async fn analyze_packet(packet: &Packet) -> NetworkResult<()> {
     // 解析以太网帧
     let ethernet = EthernetFrame::parse(packet.data)?;
-    
+
     // 解析 IP 数据包
     let ip = IpPacket::parse(ethernet.payload)?;
-    
+
     // 解析传输层协议
     match ip.protocol {
         IpProtocol::Tcp => {
             let tcp = TcpSegment::parse(ip.payload)?;
-            println!("TCP: {} -> {}, 端口: {} -> {}", 
+            println!("TCP: {} -> {}, 端口: {} -> {}",
                      ip.source, ip.destination, tcp.source_port, tcp.destination_port);
         }
         IpProtocol::Udp => {
             let udp = UdpDatagram::parse(ip.payload)?;
-            println!("UDP: {} -> {}, 端口: {} -> {}", 
+            println!("UDP: {} -> {}, 端口: {} -> {}",
                      ip.source, ip.destination, udp.source_port, udp.destination_port);
         }
         _ => {}
     }
-    
+
     Ok(())
 }
 ```
@@ -707,16 +707,16 @@ pub struct TestResults {
 async fn run_performance_test(config: TestConfig) -> NetworkResult<TestResults> {
     let mut results = TestResults::new();
     let start_time = Instant::now();
-    
+
     // 创建并发任务
     let mut tasks = Vec::new();
     for _ in 0..config.concurrency {
         let task = tokio::spawn(async move {
             let mut task_results = TaskResults::new();
-            
+
             while start_time.elapsed() < config.duration {
                 let request_start = Instant::now();
-                
+
                 // 执行网络请求
                 match perform_request().await {
                     Ok(_) => {
@@ -728,19 +728,19 @@ async fn run_performance_test(config: TestConfig) -> NetworkResult<TestResults> 
                     }
                 }
             }
-            
+
             task_results
         });
-        
+
         tasks.push(task);
     }
-    
+
     // 收集结果
     for task in tasks {
         let task_results = task.await?;
         results.merge(task_results);
     }
-    
+
     // 计算最终结果
     results.calculate_metrics();
     Ok(results)
@@ -829,7 +829,7 @@ impl ConnectionPool {
             Ok(socket)
         }
     }
-    
+
     pub fn return_connection(&mut self, socket: TcpSocket) {
         if self.connections.len() < self.max_size {
             self.connections.push_back(socket);
@@ -851,15 +851,15 @@ impl SecureTransport {
     pub fn encrypt_and_sign(&self, data: &[u8]) -> NetworkResult<Vec<u8>> {
         // 加密数据
         let encrypted = self.encrypt(data)?;
-        
+
         // 计算 HMAC
         let hmac = self.compute_hmac(&encrypted)?;
-        
+
         // 组合数据
         let mut result = Vec::new();
         result.extend_from_slice(&encrypted);
         result.extend_from_slice(&hmac);
-        
+
         Ok(result)
     }
 }

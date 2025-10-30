@@ -55,12 +55,12 @@
 
 ## 📋 项目概述
 
-**项目名称**: c07_process  
-**当前版本**: 0.1.0  
-**Rust 版本**: 1.90  
-**Edition**: 2024  
-**Resolver**: 3  
-**制定日期**: 2025年1月  
+**项目名称**: c07_process
+**当前版本**: 0.1.0
+**Rust 版本**: 1.90
+**Edition**: 2024
+**Resolver**: 3
+**制定日期**: 2025年1月
 
 ## 🎯 项目目标
 
@@ -166,8 +166,8 @@ pub async fn spawn(&self, config: ProcessConfig) -> ProcessResult<u32> {
 ```rust
 // 改进实现 - 完整异步支持
 pub async fn spawn_with_callback<F>(
-    &self, 
-    config: ProcessConfig, 
+    &self,
+    config: ProcessConfig,
     callback: F
 ) -> ProcessResult<u32>
 where
@@ -332,10 +332,10 @@ match result {
 
 ## 📞 联系信息
 
-**项目维护者**: Rust Process Management Team  
-**GitHub**: <https://github.com/rust-lang/c07_process>  
-**文档**: <https://docs.rs/c07_process>  
-**问题反馈**: <https://github.com/rust-lang/c07_process/issues>  
+**项目维护者**: Rust Process Management Team
+**GitHub**: <https://github.com/rust-lang/c07_process>
+**文档**: <https://docs.rs/c07_process>
+**问题反馈**: <https://github.com/rust-lang/c07_process/issues>
 
 ---
 

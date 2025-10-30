@@ -136,7 +136,7 @@ pub enum NetworkError {
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     let listener = TcpListenerWrapper::new(config).await?;
-    
+
     loop {
         let (socket, peer_addr) = listener.accept().await?;
         tokio::spawn(async move {

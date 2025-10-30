@@ -36,7 +36,7 @@
     - [问题 3: 成员未被识别](#问题-3-成员未被识别)
   - [📚 相关资源](#-相关资源)
 
-**版本**: Rust 1.90 / Cargo 1.90  
+**版本**: Rust 1.90 / Cargo 1.90
 **创建日期**: 2025-10-19
 
 ---
@@ -101,16 +101,16 @@ graph TD
     A[my-workspace] --> B[core]
     A --> C[cli]
     A --> D[utils]
-    
+
     C --> B
     C --> D
     D --> B
-    
+
     B --> E[tokio]
     B --> F[serde]
     C --> G[clap]
     D --> F
-    
+
     style A fill:#e1f5ff
     style B fill:#c8e6c9
     style C fill:#fff9c4
@@ -230,7 +230,7 @@ graph LR
     C --> D{.workspace = true}
     D --> E[使用统一版本]
     E --> F[避免重复声明]
-    
+
     style A fill:#e1f5ff
     style F fill:#c8e6c9
 ```
@@ -293,7 +293,7 @@ graph TD
     D --> E[3. 发布 cli]
     E --> F[更新 Cargo.lock]
     F --> G[完成]
-    
+
     style A fill:#e1f5ff
     style G fill:#c8e6c9
 ```
@@ -528,5 +528,5 @@ members = ["crates/*"]  # 使用通配符
 
 ---
 
-**维护状态**: 🟢 活跃维护中  
+**维护状态**: 🟢 活跃维护中
 **最后更新**: 2025-10-19

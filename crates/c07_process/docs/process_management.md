@@ -48,11 +48,11 @@ use std::process;
 
 fn main() {
     println!("Current process ID: {}", process::id());
-    
+
     // 获取当前进程的命令行参数
     let args: Vec<String> = std::env::args().collect();
     println!("Arguments: {:?}", args);
-    
+
     // 获取环境变量
     for (key, value) in std::env::vars() {
         println!("{}: {}", key, value);
@@ -69,11 +69,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let output = Command::new("echo")
         .arg("Hello, World!")
         .output()?;
-    
+
     println!("Status: {:?}", output.status);
     println!("Stdout: {}", String::from_utf8_lossy(&output.stdout));
     println!("Stderr: {}", String::from_utf8_lossy(&output.stderr));
-    
+
     Ok(())
 }
 ```
@@ -90,13 +90,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let output = Command::new("ls")
         .arg("-la")
         .output()?;
-    
+
     if output.status.success() {
         println!("Output: {}", String::from_utf8_lossy(&output.stdout));
     } else {
         println!("Error: {}", String::from_utf8_lossy(&output.stderr));
     }
-    
+
     Ok(())
 }
 ```
@@ -115,7 +115,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()?;
-    
+
     // 读取输出
     if let Some(stdout) = child.stdout.take() {
         let reader = BufReader::new(stdout);
@@ -123,11 +123,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             println!("{}", line?);
         }
     }
-    
+
     // 等待进程完成
     let status = child.wait()?;
     println!("Process exited with status: {:?}", status);
-    
+
     Ok(())
 }
 ```
@@ -143,9 +143,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .arg("-c")
         .arg("echo 'Hello World' | wc -w")
         .output()?;
-    
+
     println!("Word count: {}", String::from_utf8_lossy(&output.stdout));
-    
+
     Ok(())
 }
 ```
@@ -165,20 +165,20 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()?;
-    
+
     println!("Child process started with PID: {}", child.id());
-    
+
     // 在另一个线程中等待
     let child_id = child.id();
     thread::spawn(move || {
         thread::sleep(Duration::from_secs(2));
         println!("Checking if process {} is still running...", child_id);
     });
-    
+
     // 等待子进程完成
     let status = child.wait()?;
     println!("Child process exited with status: {:?}", status);
-    
+
     Ok(())
 }
 ```
@@ -196,23 +196,23 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()?;
-    
+
     println!("Child process started with PID: {}", child.id());
-    
+
     // 等待一段时间后终止子进程
     thread::sleep(Duration::from_secs(2));
-    
+
     // 尝试优雅终止
     if let Err(e) = child.kill() {
         println!("Failed to kill child process: {}", e);
     } else {
         println!("Child process terminated");
     }
-    
+
     // 等待进程实际退出
     let status = child.wait()?;
     println!("Final status: {:?}", status);
-    
+
     Ok(())
 }
 ```
@@ -230,13 +230,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()?;
-    
+
     println!("Process group started with PID: {}", child.id());
-    
+
     // 等待进程组完成
     let status = child.wait()?;
     println!("Process group exited with status: {:?}", status);
-    
+
     Ok(())
 }
 ```
@@ -257,12 +257,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()?;
-    
+
     // 向子进程写入数据
     if let Some(stdin) = child.stdin.as_mut() {
         stdin.write_all(b"hello world\nhi there\nhello rust\n")?;
     }
-    
+
     // 读取子进程输出
     if let Some(stdout) = child.stdout.take() {
         let reader = BufReader::new(stdout);
@@ -270,10 +270,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             println!("Filtered: {}", line?);
         }
     }
-    
+
     let status = child.wait()?;
     println!("Grep process exited with status: {:?}", status);
-    
+
     Ok(())
 }
 ```
@@ -289,21 +289,21 @@ use std::os::unix::net::UnixStream;
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 创建命名管道
     let pipe_path = "/tmp/rust_pipe";
-    
+
     // 创建写入端
     let mut writer = Command::new("sh")
         .arg("-c")
         .arg(&format!("mkfifo {} && echo 'Hello from pipe' > {}", pipe_path, pipe_path))
         .spawn()?;
-    
+
     writer.wait()?;
-    
+
     // 创建读取端
     let mut reader = Command::new("cat")
         .arg(pipe_path)
         .stdout(Stdio::piped())
         .spawn()?;
-    
+
     // 读取数据
     if let Some(stdout) = reader.stdout.take() {
         let reader = BufReader::new(stdout);
@@ -311,12 +311,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             println!("Received: {}", line?);
         }
     }
-    
+
     reader.wait()?;
-    
+
     // 清理
     std::fs::remove_file(pipe_path)?;
-    
+
     Ok(())
 }
 ```
@@ -331,33 +331,33 @@ use std::time::Duration;
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 创建共享内存段
     let shm_name = "/rust_shm";
-    
+
     // 写入进程
     let mut writer = Command::new("sh")
         .arg("-c")
         .arg(&format!("echo 'Shared data' > {}", shm_name))
         .spawn()?;
-    
+
     writer.wait()?;
-    
+
     // 读取进程
     let mut reader = Command::new("cat")
         .arg(shm_name)
         .stdout(Stdio::piped())
         .spawn()?;
-    
+
     if let Some(stdout) = reader.stdout.take() {
         let reader = std::io::BufReader::new(stdout);
         for line in reader.lines() {
             println!("Shared data: {}", line?);
         }
     }
-    
+
     reader.wait()?;
-    
+
     // 清理
     std::fs::remove_file(shm_name)?;
-    
+
     Ok(())
 }
 ```
@@ -374,20 +374,20 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 获取环境变量
     let path = env::var("PATH")?;
     println!("PATH: {}", path);
-    
+
     // 设置环境变量
     env::set_var("RUST_LOG", "debug");
-    
+
     // 在子进程中设置环境变量
     let output = Command::new("env")
         .env("CUSTOM_VAR", "custom_value")
         .output()?;
-    
+
     let env_output = String::from_utf8_lossy(&output.stdout);
     if env_output.contains("CUSTOM_VAR=custom_value") {
         println!("Environment variable set successfully");
     }
-    
+
     Ok(())
 }
 ```
@@ -401,19 +401,19 @@ use std::env;
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 设置环境变量
     env::set_var("PARENT_VAR", "parent_value");
-    
+
     // 子进程继承环境变量
     let output = Command::new("env")
         .output()?;
-    
+
     let env_output = String::from_utf8_lossy(&output.stdout);
     if env_output.contains("PARENT_VAR=parent_value") {
         println!("Environment variable inherited successfully");
     }
-    
+
     // 清除环境变量
     env::remove_var("PARENT_VAR");
-    
+
     Ok(())
 }
 ```
@@ -433,23 +433,23 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()?;
-    
+
     println!("Child process started with PID: {}", child.id());
-    
+
     // 等待一段时间
     thread::sleep(Duration::from_secs(2));
-    
+
     // 发送 SIGTERM 信号
     if let Err(e) = child.kill() {
         println!("Failed to send signal: {}", e);
     } else {
         println!("Signal sent successfully");
     }
-    
+
     // 等待进程退出
     let status = child.wait()?;
     println!("Process exited with status: {:?}", status);
-    
+
     Ok(())
 }
 ```
@@ -469,17 +469,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()?;
-    
+
     println!("Child process started with PID: {}", child.id());
-    
+
     // 等待一段时间
     thread::sleep(Duration::from_secs(2));
-    
+
     // 发送信号
     if let Err(e) = child.kill() {
         println!("Failed to send signal: {}", e);
     }
-    
+
     // 读取输出
     if let Some(stdout) = child.stdout.take() {
         let reader = std::io::BufReader::new(stdout);
@@ -487,10 +487,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             println!("Child output: {}", line?);
         }
     }
-    
+
     let status = child.wait()?;
     println!("Process exited with status: {:?}", status);
-    
+
     Ok(())
 }
 ```
@@ -510,10 +510,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()?;
-    
+
     let child_id = child.id();
     println!("Monitoring process {}", child_id);
-    
+
     // 监控进程状态
     let monitor_thread = thread::spawn(move || {
         for i in 1..=5 {
@@ -521,13 +521,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             println!("Process {} still running... ({}s)", child_id, i);
         }
     });
-    
+
     // 等待进程完成
     let status = child.wait()?;
     monitor_thread.join().unwrap();
-    
+
     println!("Process {} exited with status: {:?}", child_id, status);
-    
+
     Ok(())
 }
 ```
@@ -546,15 +546,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()?;
-    
+
     let child_id = child.id();
     println!("Monitoring resource usage for process {}", child_id);
-    
+
     // 监控资源使用
     let monitor_thread = thread::spawn(move || {
         for i in 1..=3 {
             thread::sleep(Duration::from_secs(2));
-            
+
             // 使用 ps 命令监控资源使用
             let output = Command::new("ps")
                 .arg("-p")
@@ -562,23 +562,23 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 .arg("-o")
                 .arg("pid,ppid,pcpu,pmem,comm")
                 .output();
-            
+
             if let Ok(output) = output {
                 let ps_output = String::from_utf8_lossy(&output.stdout);
                 println!("Resource usage ({}s):\n{}", i * 2, ps_output);
             }
         }
     });
-    
+
     // 等待一段时间后终止进程
     thread::sleep(Duration::from_secs(6));
     child.kill()?;
-    
+
     monitor_thread.join().unwrap();
     child.wait()?;
-    
+
     println!("Monitoring completed");
-    
+
     Ok(())
 }
 ```
@@ -597,7 +597,7 @@ fn run_command_safely() -> Result<String, Box<dyn std::error::Error>> {
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .output()?;
-    
+
     if output.status.success() {
         Ok(String::from_utf8_lossy(&output.stdout).to_string())
     } else {
@@ -610,7 +610,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         Ok(output) => println!("Command output:\n{}", output),
         Err(e) => println!("Error: {}", e),
     }
-    
+
     Ok(())
 }
 ```
@@ -628,21 +628,21 @@ fn run_with_timeout(timeout: Duration) -> Result<(), Box<dyn std::error::Error>>
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()?;
-    
+
     let child_id = child.id();
-    
+
     // 超时处理
     let timeout_thread = thread::spawn(move || {
         thread::sleep(timeout);
         println!("Timeout reached, terminating process {}", child_id);
     });
-    
+
     // 等待进程完成或超时
     let status = child.wait()?;
     timeout_thread.join().unwrap();
-    
+
     println!("Process exited with status: {:?}", status);
-    
+
     Ok(())
 }
 
@@ -672,10 +672,10 @@ impl ProcessPool {
             max_processes,
         }
     }
-    
+
     fn execute(&self, command: &str) -> Result<(), Box<dyn std::error::Error>> {
         let mut processes = self.processes.lock().unwrap();
-        
+
         // 清理已完成的进程
         processes.retain(|child| {
             match child.try_wait() {
@@ -684,12 +684,12 @@ impl ProcessPool {
                 Err(_) => false,      // 错误，移除进程
             }
         });
-        
+
         // 检查进程数量限制
         if processes.len() >= self.max_processes {
             return Err("Process pool is full".into());
         }
-        
+
         // 启动新进程
         let child = Command::new("sh")
             .arg("-c")
@@ -697,29 +697,29 @@ impl ProcessPool {
             .stdout(Stdio::piped())
             .stderr(Stdio::piped())
             .spawn()?;
-        
+
         processes.push_back(child);
-        
+
         Ok(())
     }
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let pool = ProcessPool::new(3);
-    
+
     // 执行多个任务
     for i in 1..=5 {
         match pool.execute(&format!("echo 'Task {}' && sleep 2", i)) {
             Ok(_) => println!("Task {} started", i),
             Err(e) => println!("Failed to start task {}: {}", i, e),
         }
-        
+
         thread::sleep(Duration::from_millis(500));
     }
-    
+
     // 等待所有任务完成
     thread::sleep(Duration::from_secs(10));
-    
+
     Ok(())
 }
 ```
@@ -733,25 +733,25 @@ fn secure_command_execution() -> Result<(), Box<dyn std::error::Error>> {
     // 验证输入
     let user_input = "ls -la";
     let allowed_commands = ["ls", "pwd", "whoami"];
-    
+
     let parts: Vec<&str> = user_input.split_whitespace().collect();
     if parts.is_empty() || !allowed_commands.contains(&parts[0]) {
         return Err("Command not allowed".into());
     }
-    
+
     // 安全执行命令
     let output = Command::new(parts[0])
         .args(&parts[1..])
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .output()?;
-    
+
     if output.status.success() {
         println!("Output: {}", String::from_utf8_lossy(&output.stdout));
     } else {
         println!("Error: {}", String::from_utf8_lossy(&output.stderr));
     }
-    
+
     Ok(())
 }
 

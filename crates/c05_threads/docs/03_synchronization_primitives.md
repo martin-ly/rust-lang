@@ -1,8 +1,8 @@
 # 第 3 章：共享状态并发与同步原语
 
-> **元数据**  
-> 最后更新: 2025-10-19 (增强版)  
-> 适用版本: Rust 1.90+  
+> **元数据**
+> 最后更新: 2025-10-19 (增强版)
+> 适用版本: Rust 1.90+
 > 增强内容: ✅ 知识图谱 | ✅ 多维对比 | ✅ Rust 1.90 示例 | ✅ 思维导图
 
 ---
@@ -63,28 +63,28 @@ graph TB
     A[共享状态并发] --> B[所有权管理]
     A --> C[同步原语]
     A --> D[并发安全保证]
-    
+
     B --> B1[Arc<T>: 原子引用计数]
     B --> B2[Rc<T>: 单线程引用计数]
-    
+
     C --> C1[Mutex<T>: 互斥锁]
     C --> C2[RwLock<T>: 读写锁]
     C --> C3[Atomic系列]
     C --> C4[Condvar: 条件变量]
     C --> C5[Semaphore: 信号量]
     C --> C6[Barrier: 屏障]
-    
+
     D --> D1[Send Trait]
     D --> D2[Sync Trait]
-    
+
     C1 -->|组合| E1[Arc<Mutex<T>>]
     C2 -->|组合| E2[Arc<RwLock<T>>]
-    
+
     E1 -->|适用| F1[独占访问]
     E2 -->|适用| F2[读多写少]
     C3 -->|适用| F3[简单计数器]
     C4 -->|适用| F4[条件等待]
-    
+
     style A fill:#e1f5ff
     style C fill:#fff4e1
     style D fill:#e8f5e9
@@ -97,20 +97,20 @@ graph TB
 ```mermaid
 graph TD
     Start[选择同步原语] --> Q1{访问模式?}
-    
+
     Q1 -->|独占写入| Q2{竞争程度?}
     Q1 -->|读多写少| RwLock[RwLock<T>]
     Q1 -->|简单计数| Atomic[Atomic操作]
-    
+
     Q2 -->|低竞争| Mutex[Mutex<T>]
     Q2 -->|高竞争| Q3{可否无锁?}
-    
+
     Q3 -->|是| LockFree[无锁数据结构]
     Q3 -->|否| OptimMutex[优化的Mutex]
-    
+
     RwLock --> Arc1[Arc<RwLock<T>>]
     Mutex --> Arc2[Arc<Mutex<T>>]
-    
+
     style Start fill:#e1f5ff
     style Mutex fill:#c8e6c9
     style RwLock fill:#c8e6c9
@@ -231,19 +231,19 @@ use std::time::Instant;
 
 fn main() {
     println!("=== Rust 1.90 Mutex 性能示例 ===\n");
-    
+
     let num_threads = 8;
     let operations_per_thread = 100_000;
-    
+
     // 创建共享计数器
     let counter = Arc::new(Mutex::new(0u64));
     let start = Instant::now();
-    
+
     let mut handles = vec![];
-    
+
     for tid in 0..num_threads {
         let counter = Arc::clone(&counter);
-        
+
         let handle = thread::spawn(move || {
             for _ in 0..operations_per_thread {
                 // Rust 1.90 优化的锁获取
@@ -251,31 +251,31 @@ fn main() {
                 *num += 1;
                 // MutexGuard 自动释放锁（RAII）
             }
-            
+
             if tid == 0 {
                 println!("线程 {} 完成", tid);
             }
         });
-        
+
         handles.push(handle);
     }
-    
+
     // 等待所有线程完成
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     let duration = start.elapsed();
     let final_value = *counter.lock().unwrap();
     let total_ops = num_threads * operations_per_thread;
-    
+
     println!("\n✅ 所有线程完成");
     println!("🎯 最终计数: {}", final_value);
     println!("✔️  预期计数: {}", total_ops);
     println!("⏱️  总耗时: {:?}", duration);
     println!("📊 吞吐量: {:.2} ops/s", total_ops as f64 / duration.as_secs_f64());
     println!("⚡ 平均延迟: {:?}/op", duration / total_ops as u32);
-    
+
     assert_eq!(final_value, total_ops);
 }
 ```
@@ -385,22 +385,22 @@ use std::time::Instant;
 
 fn main() {
     println!("=== Rust 1.90 RwLock 性能示例 ===\n");
-    
+
     let num_readers = 8;
     let num_writers = 2;
     let reads_per_thread = 100_000;
     let writes_per_thread = 10_000;
-    
+
     // 创建共享数据：配置缓存
     let config = Arc::new(RwLock::new(vec![1, 2, 3, 4, 5]));
     let start = Instant::now();
-    
+
     let mut handles = vec![];
-    
+
     // 启动读者线程
     for rid in 0..num_readers {
         let config = Arc::clone(&config);
-        
+
         let handle = thread::spawn(move || {
             let mut sum = 0u64;
             for _ in 0..reads_per_thread {
@@ -408,42 +408,42 @@ fn main() {
                 let data = config.read().unwrap();
                 sum += data.iter().sum::<i32>() as u64;
             }
-            
+
             if rid == 0 {
                 println!("读者线程 {} 完成，累计: {}", rid, sum);
             }
         });
-        
+
         handles.push(handle);
     }
-    
+
     // 启动写者线程
     for wid in 0..num_writers {
         let config = Arc::clone(&config);
-        
+
         let handle = thread::spawn(move || {
             for i in 0..writes_per_thread {
                 // 写锁是独占的
                 let mut data = config.write().unwrap();
                 data[i % data.len()] += 1;
             }
-            
+
             println!("写者线程 {} 完成", wid);
         });
-        
+
         handles.push(handle);
     }
-    
+
     // 等待所有线程完成
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     let duration = start.elapsed();
     let final_data = config.read().unwrap();
     let total_reads = num_readers * reads_per_thread;
     let total_writes = num_writers * writes_per_thread;
-    
+
     println!("\n✅ 所有线程完成");
     println!("🎯 最终数据: {:?}", *final_data);
     println!("📖 总读操作: {}", total_reads);
@@ -658,7 +658,7 @@ Rust 的共享状态并发提供了：
    ```rust
    // ❌ 错误：读多写少场景使用 Mutex
    let data = Arc::new(Mutex::new(config));
-   
+
    // ✅ 正确：使用 RwLock
    let data = Arc::new(RwLock::new(config));
    ```
@@ -669,7 +669,7 @@ Rust 的共享状态并发提供了：
    // ❌ 错误：可能死锁
    let a = mutex_a.lock();
    let b = mutex_b.lock();
-   
+
    // ✅ 正确：统一锁顺序
    let locks = vec![&mutex_a, &mutex_b];
    locks.sort_by_key(|m| m as *const _ as usize);
@@ -682,7 +682,7 @@ Rust 的共享状态并发提供了：
    let mut data = mutex.lock().unwrap();
    expensive_computation();
    *data += 1;
-   
+
    // ✅ 正确：先计算再加锁
    let result = expensive_computation();
    {
@@ -706,15 +706,15 @@ Rust 的共享状态并发提供了：
 ```mermaid
 graph LR
     A[选择同步策略] --> B{性能需求?}
-    
+
     B -->|最高性能| C[Atomic无锁]
     B -->|读多写少| D[RwLock]
     B -->|简单互斥| E[Mutex]
-    
+
     C --> F[复杂度高]
     D --> G[适中开销]
     E --> H[简单易用]
-    
+
     style C fill:#81c784
     style D fill:#fff59d
     style E fill:#90caf9

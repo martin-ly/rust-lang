@@ -122,11 +122,11 @@ impl ProcessPool {
     // 释放进程
     pub async fn release_process(&self, process_id: &str) -> Result<(), PoolError> {
         let mut pool = self.pool.write().await;
-        
+
         if let Some(process) = pool.get_mut(process_id) {
             process.status = ProcessStatus::Idle;
             process.last_used = Instant::now();
-            
+
             // 更新统计信息
             {
                 let mut stats = self.statistics.lock().unwrap();
@@ -141,25 +141,25 @@ impl ProcessPool {
     // 查找空闲进程
     async fn find_idle_process(&self) -> Option<String> {
         let pool = self.pool.read().await;
-        
+
         for (id, process) in pool.iter() {
             if matches!(process.status, ProcessStatus::Idle) {
                 return Some(id.clone());
             }
         }
-        
+
         None
     }
 
     // 标记进程为忙碌
     async fn mark_process_busy(&self, process_id: &str) {
         let mut pool = self.pool.write().await;
-        
+
         if let Some(process) = pool.get_mut(process_id) {
             process.status = ProcessStatus::Busy;
             process.last_used = Instant::now();
             process.usage_count += 1;
-            
+
             // 更新统计信息
             {
                 let mut stats = self.statistics.lock().unwrap();
@@ -172,7 +172,7 @@ impl ProcessPool {
     // 创建新进程
     async fn create_new_process(&self, command: &str, args: &[String]) -> Result<String, PoolError> {
         let process_id = uuid::Uuid::new_v4().to_string();
-        
+
         let mut cmd = Command::new(command);
         cmd.args(args);
         cmd.stdout(Stdio::piped());
@@ -218,10 +218,10 @@ impl ProcessPool {
 
         tokio::spawn(async move {
             let mut interval = tokio::time::interval(config.health_check_interval);
-            
+
             loop {
                 interval.tick().await;
-                
+
                 let mut pool_guard = pool.write().await;
                 if let Some(process) = pool_guard.get_mut(&process_id) {
                     // 检查进程是否还在运行
@@ -245,7 +245,7 @@ impl ProcessPool {
 
             // 清理进程
             pool_guard.remove(&process_id);
-            
+
             // 更新统计信息
             {
                 let mut stats = statistics.lock().unwrap();
@@ -259,7 +259,7 @@ impl ProcessPool {
     pub async fn auto_scale(&self) -> Result<(), PoolError> {
         let pool = self.pool.read().await;
         let current_size = pool.len();
-        
+
         if current_size < self.config.min_processes {
             // 扩容
             let needed = self.config.min_processes - current_size;
@@ -270,13 +270,13 @@ impl ProcessPool {
             // 缩容
             let excess = current_size - self.config.max_processes;
             let mut processes_to_remove = Vec::new();
-            
+
             for (id, process) in pool.iter() {
                 if matches!(process.status, ProcessStatus::Idle) && processes_to_remove.len() < excess {
                     processes_to_remove.push(id.clone());
                 }
             }
-            
+
             for id in processes_to_remove {
                 if let Some(process) = pool.get(&id) {
                     let _ = process.process.kill();
@@ -295,13 +295,13 @@ impl ProcessPool {
     // 清理池
     pub async fn cleanup(&self) -> Result<(), PoolError> {
         let mut pool = self.pool.write().await;
-        
+
         for (_, process) in pool.iter_mut() {
             let _ = process.process.kill();
         }
-        
+
         pool.clear();
-        
+
         // 重置统计信息
         {
             let mut stats = self.statistics.lock().unwrap();
@@ -327,13 +327,13 @@ impl ProcessPool {
 pub enum PoolError {
     #[error("资源不足")]
     ResourceExhausted,
-    
+
     #[error("进程创建失败: {0}")]
     ProcessCreationFailed(String),
-    
+
     #[error("进程未找到: {0}")]
     ProcessNotFound(String),
-    
+
     #[error("池操作失败: {0}")]
     PoolOperationFailed(String),
 }
@@ -516,7 +516,7 @@ impl ProcessLifecycleManager {
     // 启动进程
     pub async fn start_process(&self, id: &str) -> Result<(), LifecycleError> {
         let mut processes = self.processes.write().await;
-        
+
         if let Some(process) = processes.get_mut(id) {
             process.status = ProcessStatus::Starting;
             process.lifecycle_stage = LifecycleStage::Starting;
@@ -551,7 +551,7 @@ impl ProcessLifecycleManager {
     // 停止进程
     pub async fn stop_process(&self, id: &str) -> Result<(), LifecycleError> {
         let mut processes = self.processes.write().await;
-        
+
         if let Some(process) = processes.get_mut(id) {
             process.status = ProcessStatus::Stopping;
             process.lifecycle_stage = LifecycleStage::PreStop;
@@ -597,7 +597,7 @@ impl ProcessLifecycleManager {
     // 生成进程
     async fn spawn_process(&self, id: &str) -> Result<bool, LifecycleError> {
         let processes = self.processes.read().await;
-        
+
         if let Some(process) = processes.get(id) {
             // 模拟进程启动
             tokio::time::sleep(Duration::from_millis(100)).await;
@@ -610,7 +610,7 @@ impl ProcessLifecycleManager {
     // 终止进程
     async fn terminate_process(&self, id: &str) -> Result<bool, LifecycleError> {
         let processes = self.processes.read().await;
-        
+
         if let Some(process) = processes.get(id) {
             // 模拟进程终止
             tokio::time::sleep(Duration::from_millis(50)).await;
@@ -624,7 +624,7 @@ impl ProcessLifecycleManager {
     async fn execute_hooks(&self, stage: LifecycleStage, process_id: &str) -> Result<(), LifecycleError> {
         let hooks = self.lifecycle_hooks.lock().unwrap();
         let processes = self.processes.read().await;
-        
+
         if let Some(process) = processes.get(process_id) {
             for hook in hooks.iter() {
                 if hook.stage == stage {
@@ -645,15 +645,15 @@ impl ProcessLifecycleManager {
 
         tokio::spawn(async move {
             let mut interval = tokio::time::interval(config.health_check_interval);
-            
+
             loop {
                 interval.tick().await;
-                
+
                 let mut processes_guard = processes.write().await;
                 if let Some(process) = processes_guard.get_mut(&process_id) {
                     // 执行健康检查
                     let is_healthy = Self::perform_health_check(process).await;
-                    
+
                     process.last_health_check = Some(Instant::now());
                     process.health_status = if is_healthy {
                         HealthStatus::Healthy
@@ -703,16 +703,16 @@ impl ProcessLifecycleManager {
 pub enum LifecycleError {
     #[error("进程未找到: {0}")]
     ProcessNotFound(String),
-    
+
     #[error("钩子执行失败: {0}")]
     HookExecutionFailed(String),
-    
+
     #[error("进程启动失败: {0}")]
     ProcessStartFailed(String),
-    
+
     #[error("进程停止失败: {0}")]
     ProcessStopFailed(String),
-    
+
     #[error("生命周期操作超时")]
     OperationTimeout,
 }
@@ -898,10 +898,10 @@ impl ProcessResourceMonitor {
 
         tokio::spawn(async move {
             let mut interval = tokio::time::interval(config.check_interval);
-            
+
             loop {
                 interval.tick().await;
-                
+
                 // 检查进程是否还存在
                 let process_exists = {
                     let processes_guard = processes.read().await;
@@ -927,7 +927,7 @@ impl ProcessResourceMonitor {
                     {
                         let limits_guard = limits.read().await;
                         let processes_guard = processes.read().await;
-                        
+
                         if let (Some(process), Some(limits)) = (
                             processes_guard.get(&process_id),
                             limits_guard.get(&process_id)
@@ -950,7 +950,7 @@ impl ProcessResourceMonitor {
     async fn collect_metrics(process_id: &str) -> Result<ProcessMetrics, MonitorError> {
         // 模拟指标收集
         tokio::time::sleep(Duration::from_millis(10)).await;
-        
+
         Ok(ProcessMetrics {
             cpu_usage: 25.0,
             memory_usage: 1024 * 1024 * 100, // 100MB
@@ -980,7 +980,7 @@ impl ProcessResourceMonitor {
                 process_id: process_id.to_string(),
                 alert_type: AlertType::CpuHigh,
                 severity: AlertSeverity::High,
-                message: format!("CPU usage {}% exceeds limit {}%", 
+                message: format!("CPU usage {}% exceeds limit {}%",
                     metrics.cpu_usage, limits.max_cpu_percent),
                 timestamp: Instant::now(),
                 resolved: false,
@@ -994,7 +994,7 @@ impl ProcessResourceMonitor {
                 process_id: process_id.to_string(),
                 alert_type: AlertType::MemoryHigh,
                 severity: AlertSeverity::High,
-                message: format!("Memory usage {}MB exceeds limit {}MB", 
+                message: format!("Memory usage {}MB exceeds limit {}MB",
                     metrics.memory_usage / 1024 / 1024, limits.max_memory_mb),
                 timestamp: Instant::now(),
                 resolved: false,
@@ -1008,7 +1008,7 @@ impl ProcessResourceMonitor {
                 process_id: process_id.to_string(),
                 alert_type: AlertType::FileDescriptorsHigh,
                 severity: AlertSeverity::Medium,
-                message: format!("File descriptors {} exceeds limit {}", 
+                message: format!("File descriptors {} exceeds limit {}",
                     metrics.file_descriptors, limits.max_file_descriptors),
                 timestamp: Instant::now(),
                 resolved: false,
@@ -1036,7 +1036,7 @@ impl ProcessResourceMonitor {
     // 解决警报
     pub fn resolve_alert(&self, alert_id: &str) -> Result<(), MonitorError> {
         let mut alerts = self.alerts.lock().unwrap();
-        
+
         if let Some(alert) = alerts.iter_mut().find(|a| a.id == alert_id) {
             alert.resolved = true;
             Ok(())
@@ -1049,11 +1049,11 @@ impl ProcessResourceMonitor {
     pub async fn get_monitoring_stats(&self) -> MonitoringStats {
         let processes = self.monitored_processes.read().await;
         let alerts = self.alerts.lock().unwrap();
-        
+
         let total_processes = processes.len();
         let total_alerts = alerts.len();
         let unresolved_alerts = alerts.iter().filter(|a| !a.resolved).count();
-        
+
         MonitoringStats {
             total_processes,
             total_alerts,
@@ -1081,13 +1081,13 @@ pub struct MonitoringStats {
 pub enum MonitorError {
     #[error("进程未找到: {0}")]
     ProcessNotFound(String),
-    
+
     #[error("警报未找到: {0}")]
     AlertNotFound(String),
-    
+
     #[error("监控失败: {0}")]
     MonitoringFailed(String),
-    
+
     #[error("指标收集失败: {0}")]
     MetricsCollectionFailed(String),
 }
@@ -1311,7 +1311,7 @@ impl ProcessFailureRecoveryManager {
     // 尝试恢复
     async fn attempt_recovery(&self, process_id: &str) -> Result<(), RecoveryError> {
         let mut processes = self.processes.write().await;
-        
+
         if let Some(process) = processes.get_mut(process_id) {
             if process.recovery_attempts >= process.max_recovery_attempts {
                 process.status = ProcessStatus::Failed;
@@ -1357,7 +1357,7 @@ impl ProcessFailureRecoveryManager {
     async fn restart_process(&self, process_id: &str) -> Result<(), RecoveryError> {
         // 模拟进程重启
         tokio::time::sleep(Duration::from_millis(100)).await;
-        
+
         // 更新状态
         {
             let mut processes = self.processes.write().await;
@@ -1374,7 +1374,7 @@ impl ProcessFailureRecoveryManager {
     async fn replace_process(&self, process_id: &str) -> Result<(), RecoveryError> {
         // 模拟进程替换
         tokio::time::sleep(Duration::from_millis(200)).await;
-        
+
         // 更新状态
         {
             let mut processes = self.processes.write().await;
@@ -1391,7 +1391,7 @@ impl ProcessFailureRecoveryManager {
     async fn scale_process(&self, process_id: &str) -> Result<(), RecoveryError> {
         // 模拟进程扩缩容
         tokio::time::sleep(Duration::from_millis(150)).await;
-        
+
         // 更新状态
         {
             let mut processes = self.processes.write().await;
@@ -1408,7 +1408,7 @@ impl ProcessFailureRecoveryManager {
     async fn fallback_process(&self, process_id: &str) -> Result<(), RecoveryError> {
         // 模拟进程回退
         tokio::time::sleep(Duration::from_millis(50)).await;
-        
+
         // 更新状态
         {
             let mut processes = self.processes.write().await;
@@ -1456,7 +1456,7 @@ impl ProcessFailureRecoveryManager {
     pub async fn get_recovery_stats(&self) -> RecoveryStats {
         let processes = self.processes.read().await;
         let history = self.failure_history.lock().unwrap();
-        
+
         let total_processes = processes.len();
         let healthy_processes = processes.values()
             .filter(|p| matches!(p.status, ProcessStatus::Healthy))
@@ -1498,16 +1498,16 @@ pub struct RecoveryStats {
 pub enum RecoveryError {
     #[error("进程未找到: {0}")]
     ProcessNotFound(String),
-    
+
     #[error("超过最大恢复尝试次数")]
     MaxRecoveryAttemptsExceeded,
-    
+
     #[error("恢复策略未找到: {0}")]
     RecoveryStrategyNotFound(String),
-    
+
     #[error("恢复失败: {0}")]
     RecoveryFailed(String),
-    
+
     #[error("熔断器已打开")]
     CircuitBreakerOpen,
 }
@@ -1602,7 +1602,7 @@ pub struct ResourceManager {
 impl ProcessPriorityScheduler {
     pub fn new(config: SchedulerConfig, total_resources: ResourceRequirements) -> Self {
         let resource_manager = ResourceManager::new(total_resources.clone());
-        
+
         Self {
             task_queue: Arc::new(Mutex::new(BinaryHeap::new())),
             running_tasks: Arc::new(RwLock::new(HashMap::new())),
@@ -1680,7 +1680,7 @@ impl ProcessPriorityScheduler {
     // 执行任务
     async fn execute_task(&self, task_id: String) {
         let scheduler = self.clone();
-        
+
         tokio::spawn(async move {
             // 模拟任务执行
             tokio::time::sleep(Duration::from_secs(2)).await;
@@ -1693,11 +1693,11 @@ impl ProcessPriorityScheduler {
     // 完成任务
     async fn complete_task(&self, task_id: &str) {
         let mut running_tasks = self.running_tasks.write().await;
-        
+
         if let Some(running_task) = running_tasks.remove(task_id) {
             // 释放资源
             self.resource_manager.deallocate(&running_task.allocated_resources);
-            
+
             // 尝试调度新任务
             let _ = self.schedule_tasks().await;
         }
@@ -1725,16 +1725,16 @@ impl ProcessPriorityScheduler {
     ) -> Result<(), SchedulerError> {
         if let Some(running_task) = running_tasks.get_mut(&task_id) {
             running_task.status = TaskStatus::Suspended;
-            
+
             // 释放资源
             self.resource_manager.deallocate(&running_task.allocated_resources);
-            
+
             // 重新加入队列
             {
                 let mut queue = self.task_queue.lock().unwrap();
                 queue.push(running_task.task.clone());
             }
-            
+
             running_tasks.remove(&task_id);
         }
 
@@ -1745,10 +1745,10 @@ impl ProcessPriorityScheduler {
     pub async fn get_scheduling_stats(&self) -> SchedulingStats {
         let queue = self.task_queue.lock().unwrap();
         let running_tasks = self.running_tasks.read().await;
-        
+
         let queued_tasks = queue.len();
         let running_task_count = running_tasks.len();
-        
+
         let priority_distribution = {
             let mut distribution = HashMap::new();
             for task in queue.iter() {
@@ -1791,7 +1791,7 @@ impl ResourceManager {
 
     pub fn can_allocate(&self, requirements: &ResourceRequirements) -> bool {
         let available = self.available_resources.lock().unwrap();
-        
+
         requirements.cpu_cores <= available.cpu_cores &&
         requirements.memory_mb <= available.memory_mb &&
         requirements.disk_mb <= available.disk_mb &&
@@ -1841,7 +1841,7 @@ impl ResourceManager {
 
     pub fn get_utilization(&self) -> ResourceUtilization {
         let allocated = self.allocated_resources.lock().unwrap();
-        
+
         ResourceUtilization {
             cpu_utilization: allocated.cpu_cores / self.total_resources.cpu_cores,
             memory_utilization: allocated.memory_mb as f64 / self.total_resources.memory_mb as f64,
@@ -1871,13 +1871,13 @@ pub struct ResourceUtilization {
 pub enum SchedulerError {
     #[error("资源不足")]
     InsufficientResources,
-    
+
     #[error("调度失败: {0}")]
     SchedulingFailed(String),
-    
+
     #[error("任务未找到: {0}")]
     TaskNotFound(String),
-    
+
     #[error("抢占失败: {0}")]
     PreemptionFailed(String),
 }

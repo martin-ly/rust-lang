@@ -58,24 +58,24 @@ fn choose_process_library(requirements: &ProcessRequirements) -> ProcessLibrary 
             high_performance: true,
             ..
         } => ProcessLibrary::Tokio,
-        
+
         ProcessRequirements {
             async: true,
             simple_api: true,
             ..
         } => ProcessLibrary::AsyncStd,
-        
+
         ProcessRequirements {
             pipe_composition: true,
             ..
         } => ProcessLibrary::Duct,
-        
+
         ProcessRequirements {
             advanced_control: true,
             cross_platform: true,
             ..
         } => ProcessLibrary::Subprocess,
-        
+
         _ => ProcessLibrary::Std,
     }
 }
@@ -117,14 +117,14 @@ async fn basic_tokio_process() -> Result<(), Box<dyn std::error::Error>> {
         .stdout(std::process::Stdio::piped())
         .stderr(std::process::Stdio::piped())
         .spawn()?;
-    
+
     // 异步写入
     if let Some(stdin) = child.stdin.take() {
         let mut async_stdin = tokio::io::BufWriter::new(stdin);
         async_stdin.write_all(b"Tokio input\n").await?;
         async_stdin.flush().await?;
     }
-    
+
     // 异步读取
     if let Some(stdout) = child.stdout.take() {
         let mut async_stdout = tokio::io::BufReader::new(stdout);
@@ -132,10 +132,10 @@ async fn basic_tokio_process() -> Result<(), Box<dyn std::error::Error>> {
         async_stdout.read_line(&mut line).await?;
         println!("Tokio 输出: {}", line);
     }
-    
+
     let status = child.wait().await?;
     println!("Tokio 进程完成: {:?}", status);
-    
+
     Ok(())
 }
 
@@ -144,9 +144,9 @@ async fn tokio_process_with_timeout() -> Result<(), Box<dyn std::error::Error>> 
     let mut child = TokioCommand::new("long_running_program")
         .stdout(std::process::Stdio::piped())
         .spawn()?;
-    
+
     let timeout_duration = Duration::from_secs(30);
-    
+
     match tokio::time::timeout(timeout_duration, child.wait()).await {
         Ok(status) => {
             println!("进程正常完成: {:?}", status);
@@ -156,7 +156,7 @@ async fn tokio_process_with_timeout() -> Result<(), Box<dyn std::error::Error>> 
             child.kill().await?;
         }
     }
-    
+
     Ok(())
 }
 ```
@@ -210,7 +210,7 @@ impl AdvancedTokioProcessManager {
             max_concurrent,
         }
     }
-    
+
     pub async fn execute_with_metrics<F>(
         &self,
         config: ProcessConfig,
@@ -221,25 +221,25 @@ impl AdvancedTokioProcessManager {
     {
         let _permit = self.semaphore.acquire().await?;
         let start_time = Instant::now();
-        
+
         let mut async_cmd = TokioCommand::new(&config.command);
         async_cmd.args(&config.args);
-        
+
         if let Some(working_dir) = &config.working_dir {
             async_cmd.current_dir(working_dir);
         }
-        
+
         for (key, value) in &config.env_vars {
             async_cmd.env(key, value);
         }
-        
+
         async_cmd
             .stdin(std::process::Stdio::piped())
             .stdout(std::process::Stdio::piped())
             .stderr(std::process::Stdio::piped());
-        
+
         let child = async_cmd.spawn()?;
-        
+
         let process_id = uuid::Uuid::new_v4().to_string();
         let managed_process = ManagedTokioProcess {
             id: process_id.clone(),
@@ -253,23 +253,23 @@ impl AdvancedTokioProcessManager {
                 timeout: config.timeout,
             },
         };
-        
+
         let mut processes = self.processes.lock().await;
         processes.push(managed_process);
-        
+
         // 执行进程并收集指标
         let output = processes.last_mut().unwrap().child.wait_with_output().await?;
         let duration = start_time.elapsed();
         let output_size = output.stdout.len();
-        
+
         metrics_callback(duration, output_size);
-        
+
         Ok(String::from_utf8_lossy(&output.stdout).to_string())
     }
-    
+
     pub async fn monitor_all_processes(&self) -> Result<(), Box<dyn std::error::Error>> {
         let mut processes = self.processes.lock().await;
-        
+
         for process in processes.iter_mut() {
             if let Ok(Some(status)) = process.child.try_wait() {
                 if status.success() {
@@ -278,7 +278,7 @@ impl AdvancedTokioProcessManager {
                     process.status = ProcessStatus::Failed;
                 }
             }
-            
+
             // 检查超时
             if let Some(timeout) = process.metadata.timeout {
                 if process.created_at.elapsed() > timeout {
@@ -287,7 +287,7 @@ impl AdvancedTokioProcessManager {
                 }
             }
         }
-        
+
         Ok(())
     }
 }
@@ -348,53 +348,53 @@ impl HighPerformanceTokioPool {
             config,
         }
     }
-    
+
     pub async fn execute_optimized(
         &self,
         command: &str,
         args: &[String],
     ) -> Result<String, Box<dyn std::error::Error>> {
         let start_time = Instant::now();
-        
+
         // 使用预配置的命令
         let mut cmd = TokioCommand::new(command);
         cmd.args(args);
-        
+
         // 优化配置
         cmd.stdin(std::process::Stdio::null())
            .stdout(std::process::Stdio::piped())
            .stderr(std::process::Stdio::piped());
-        
+
         let child = cmd.spawn()?;
         let output = child.wait_with_output().await?;
         let duration = start_time.elapsed();
-        
+
         // 更新指标
         self.update_metrics(duration, output.status.success()).await;
-        
+
         if output.status.success() {
             Ok(String::from_utf8_lossy(&output.stdout).to_string())
         } else {
             Err(format!("进程执行失败: {}", String::from_utf8_lossy(&output.stderr)).into())
         }
     }
-    
+
     async fn update_metrics(&self, duration: Duration, success: bool) {
         let mut metrics = self.metrics.write().await;
         metrics.total_executions += 1;
-        
+
         if success {
             metrics.successful_executions += 1;
         } else {
             metrics.failed_executions += 1;
         }
-        
+
         // 更新平均执行时间
         let total_time = metrics.average_execution_time.as_millis() as u128 * (metrics.total_executions - 1) as u128;
         let new_avg = (total_time + duration.as_millis() as u128) / metrics.total_executions as u128;
         metrics.average_execution_time = Duration::from_millis(new_avg as u64);
     }
-    
+
     pub async fn get_metrics(&self) -> PoolMetrics {
         self.metrics.read().await.clone()
     }
@@ -417,14 +417,14 @@ async fn basic_async_std_process() -> Result<(), Box<dyn std::error::Error>> {
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()?;
-    
+
     // Async-Std 异步操作
     if let Some(stdin) = child.stdin.take() {
         let mut writer = BufWriter::new(stdin);
         writer.write_all(b"Async-Std input\n").await?;
         writer.flush().await?;
     }
-    
+
     if let Some(stdout) = child.stdout.take() {
         let reader = BufReader::new(stdout);
         let mut lines = reader.lines();
@@ -433,10 +433,10 @@ async fn basic_async_std_process() -> Result<(), Box<dyn std::error::Error>> {
             println!("Async-Std 输出: {}", line);
         }
     }
-    
+
     let status = child.status().await?;
     println!("Async-Std 进程完成: {:?}", status);
-    
+
     Ok(())
 }
 
@@ -461,46 +461,46 @@ impl AsyncStdProcessManager {
             max_concurrent,
         }
     }
-    
+
     pub async fn spawn_process(
         &self,
         command: &str,
         args: &[String],
     ) -> Result<String, Box<dyn std::error::Error>> {
         let mut processes = self.processes.lock().await;
-        
+
         if processes.len() >= self.max_concurrent {
             return Err("已达到最大并发进程数限制".into());
         }
-        
+
         let process_id = uuid::Uuid::new_v4().to_string();
-        
+
         let mut cmd = AsyncStdCommand::new(command);
         cmd.args(args);
         cmd.stdin(Stdio::piped())
            .stdout(Stdio::piped())
            .stderr(Stdio::piped());
-        
+
         let child = cmd.spawn()?;
-        
+
         let async_std_process = AsyncStdProcess {
             id: process_id.clone(),
             child,
             created_at: std::time::Instant::now(),
             status: ProcessStatus::Starting,
         };
-        
+
         processes.push(async_std_process);
-        
+
         Ok(process_id)
     }
-    
+
     pub async fn wait_for_process(
         &self,
         process_id: &str,
     ) -> Result<async_std::process::Output, Box<dyn std::error::Error>> {
         let mut processes = self.processes.lock().await;
-        
+
         if let Some(process) = processes.iter_mut().find(|p| p.id == process_id) {
             let output = process.child.output().await?;
             process.status = if output.status.success() {
@@ -535,11 +535,11 @@ impl ProcessLibraryComparison {
             async_std_manager: AsyncStdProcessManager::new(10),
         }
     }
-    
+
     pub async fn benchmark_execution(&self, iterations: usize) -> ComparisonResults {
         let mut tokio_times = Vec::new();
         let mut async_std_times = Vec::new();
-        
+
         for _ in 0..iterations {
             // Tokio 测试
             let start = Instant::now();
@@ -550,16 +550,16 @@ impl ProcessLibraryComparison {
                 env_vars: std::collections::HashMap::new(),
                 timeout: Some(Duration::from_secs(5)),
             };
-            
+
             let _ = self.tokio_manager.execute_with_metrics(config, |_, _| {}).await;
             tokio_times.push(start.elapsed());
-            
+
             // Async-Std 测试
             let start = Instant::now();
             let _ = self.async_std_manager.spawn_process("echo", &["async_std_test".to_string()]).await;
             async_std_times.push(start.elapsed());
         }
-        
+
         ComparisonResults {
             tokio_avg_time: tokio_times.iter().sum::<Duration>() / tokio_times.len() as u32,
             async_std_avg_time: async_std_times.iter().sum::<Duration>() / async_std_times.len() as u32,
@@ -627,28 +627,28 @@ impl MigrationStrategy {
         let mut features_used = Vec::new();
         let mut equivalents = Vec::new();
         let mut breaking_changes = Vec::new();
-        
+
         // 分析代码中使用的 Tokio 特性
         if code.contains("tokio::process::Command") {
             features_used.push("tokio::process::Command".to_string());
             equivalents.push("async_std::process::Command".to_string());
         }
-        
+
         if code.contains("tokio::io::AsyncBufReadExt") {
             features_used.push("tokio::io::AsyncBufReadExt".to_string());
             equivalents.push("async_std::io::BufReadExt".to_string());
         }
-        
+
         if code.contains("tokio::time::timeout") {
             features_used.push("tokio::time::timeout".to_string());
             equivalents.push("async_std::future::timeout".to_string());
         }
-        
+
         // 检查潜在的破坏性变更
         if code.contains("tokio::sync::Mutex") {
             breaking_changes.push("tokio::sync::Mutex 需要替换为 async_std::sync::Mutex".to_string());
         }
-        
+
         CompatibilityCheck {
             tokio_features_used: features_used,
             async_std_equivalents: equivalents,
@@ -672,25 +672,25 @@ fn basic_duct_pipes() -> Result<(), Box<dyn std::error::Error>> {
     let output = cmd!("echo", "Hello, World!")
         .pipe(cmd!("wc", "-c"))
         .read()?;
-    
+
     println!("字符数: {}", output);
-    
+
     // 多级管道
     let complex_output = cmd!("find", ".", "-name", "*.rs")
         .pipe(cmd!("head", "-10"))
         .pipe(cmd!("wc", "-l"))
         .read()?;
-    
+
     println!("文件数: {}", complex_output);
-    
+
     // 条件管道
     let conditional_output = cmd!("ls", "-la")
         .pipe(cmd!("grep", "rust"))
         .pipe(cmd!("wc", "-l"))
         .read()?;
-    
+
     println!("Rust 相关文件数: {}", conditional_output);
-    
+
     Ok(())
 }
 
@@ -701,25 +701,25 @@ fn advanced_duct_pipes() -> Result<(), Box<dyn std::error::Error>> {
         .pipe(cmd!("echo", "parallel2"))
         .pipe(cmd!("echo", "parallel3"))
         .read()?;
-    
+
     println!("并行输出: {}", parallel_output);
-    
+
     // 错误处理管道
     let error_handling_output = cmd!("ls", "/nonexistent")
         .pipe(cmd!("wc", "-l"))
         .stderr_to_stdout()
         .read()?;
-    
+
     println!("错误处理输出: {}", error_handling_output);
-    
+
     // 环境变量管道
     let env_output = cmd!("env")
         .env("MY_VAR", "duct_value")
         .pipe(cmd!("grep", "MY_VAR"))
         .read()?;
-    
+
     println!("环境变量输出: {}", env_output);
-    
+
     Ok(())
 }
 ```
@@ -753,70 +753,70 @@ impl DuctCommandBuilder {
             stderr: None,
         }
     }
-    
+
     pub fn arg(mut self, arg: &str) -> Self {
         self.args.push(arg.to_string());
         self
     }
-    
+
     pub fn args(mut self, args: &[String]) -> Self {
         self.args.extend(args.iter().cloned());
         self
     }
-    
+
     pub fn env(mut self, key: &str, value: &str) -> Self {
         self.env_vars.insert(key.to_string(), value.to_string());
         self
     }
-    
+
     pub fn working_dir(mut self, dir: &str) -> Self {
         self.working_dir = Some(dir.to_string());
         self
     }
-    
+
     pub fn stdin(mut self, input: &str) -> Self {
         self.stdin = Some(input.to_string());
         self
     }
-    
+
     pub fn stdout(mut self, output: &str) -> Self {
         self.stdout = Some(output.to_string());
         self
     }
-    
+
     pub fn stderr(mut self, error: &str) -> Self {
         self.stderr = Some(error.to_string());
         self
     }
-    
+
     pub fn build(self) -> Result<duct::Expression, Box<dyn std::error::Error>> {
         let mut expression = cmd!(&self.base_command, &self.args);
-        
+
         // 设置环境变量
         for (key, value) in self.env_vars {
             expression = expression.env(key, value);
         }
-        
+
         // 设置工作目录
         if let Some(dir) = self.working_dir {
             expression = expression.dir(dir);
         }
-        
+
         // 设置输入
         if let Some(input) = self.stdin {
             expression = expression.stdin_bytes(input);
         }
-        
+
         // 设置输出
         if let Some(output) = self.stdout {
             expression = expression.stdout_path(output);
         }
-        
+
         // 设置错误输出
         if let Some(error) = self.stderr {
             expression = expression.stderr_path(error);
         }
-        
+
         Ok(expression)
     }
 }
@@ -830,10 +830,10 @@ fn use_duct_command_builder() -> Result<(), Box<dyn std::error::Error>> {
         .working_dir("/tmp")
         .stdout("grep_output.txt")
         .build()?;
-    
+
     let output = expression.read()?;
     println!("搜索输出: {}", output);
-    
+
     Ok(())
 }
 ```
@@ -848,13 +848,13 @@ use thiserror::Error;
 pub enum DuctError {
     #[error("命令执行失败: {0}")]
     CommandFailed(String),
-    
+
     #[error("管道连接失败: {0}")]
     PipeFailed(String),
-    
+
     #[error("环境变量设置失败: {0}")]
     EnvFailed(String),
-    
+
     #[error("文件操作失败: {0}")]
     FileFailed(String),
 }
@@ -872,31 +872,31 @@ impl DuctErrorHandler {
             retry_delay,
         }
     }
-    
+
     pub async fn execute_with_retry(
         &self,
         expression: duct::Expression,
     ) -> Result<String, DuctError> {
         let mut last_error = None;
-        
+
         for attempt in 0..=self.max_retries {
             match expression.read() {
                 Ok(output) => return Ok(output),
                 Err(e) => {
                     last_error = Some(e);
-                    
+
                     if attempt < self.max_retries {
                         tokio::time::sleep(self.retry_delay).await;
                     }
                 }
             }
         }
-        
+
         Err(DuctError::CommandFailed(
             last_error.unwrap().to_string()
         ))
     }
-    
+
     pub fn handle_pipe_error(&self, error: &str) -> DuctError {
         if error.contains("pipe") {
             DuctError::PipeFailed(error.to_string())
@@ -916,10 +916,10 @@ async fn use_duct_error_handler() -> Result<(), Box<dyn std::error::Error>> {
         3,
         std::time::Duration::from_millis(100),
     );
-    
+
     let expression = cmd!("risky_command")
         .pipe(cmd!("wc", "-l"));
-    
+
     match error_handler.execute_with_retry(expression).await {
         Ok(output) => {
             println!("命令执行成功: {}", output);
@@ -928,7 +928,7 @@ async fn use_duct_error_handler() -> Result<(), Box<dyn std::error::Error>> {
             println!("命令执行失败: {}", e);
         }
     }
-    
+
     Ok(())
 }
 ```
@@ -952,16 +952,16 @@ fn advanced_subprocess_control() -> Result<(), Box<dyn std::error::Error>> {
             ..Default::default()
         },
     )?;
-    
+
     // 等待进程完成
     let exit_status = process.wait()?;
     println!("进程退出状态: {:?}", exit_status);
-    
+
     // 获取输出
     let (stdout, stderr) = process.communicate(None)?;
     println!("标准输出: {}", stdout.unwrap_or_default());
     println!("标准错误: {}", stderr.unwrap_or_default());
-    
+
     Ok(())
 }
 
@@ -997,35 +997,35 @@ impl SubprocessManager {
             max_concurrent,
         }
     }
-    
+
     pub fn spawn_process(
         &self,
         config: SubprocessConfig,
     ) -> Result<String, Box<dyn std::error::Error>> {
         let mut processes = self.processes.lock().unwrap();
-        
+
         if processes.len() >= self.max_concurrent {
             return Err("已达到最大并发进程数限制".into());
         }
-        
+
         let process_id = uuid::Uuid::new_v4().to_string();
-        
+
         let mut popen_config = PopenConfig {
             stdout: config.stdout_redirection,
             stderr: config.stderr_redirection,
             ..Default::default()
         };
-        
+
         if let Some(working_dir) = &config.working_dir {
             popen_config.cwd = Some(working_dir.into());
         }
-        
+
         for (key, value) in &config.env_vars {
             popen_config.env.insert(key.clone(), value.clone());
         }
-        
+
         let process = Popen::create(&config.command, popen_config)?;
-        
+
         let managed_process = ManagedSubprocess {
             id: process_id.clone(),
             process,
@@ -1033,37 +1033,37 @@ impl SubprocessManager {
             status: ProcessStatus::Starting,
             config,
         };
-        
+
         processes.push(managed_process);
-        
+
         Ok(process_id)
     }
-    
+
     pub fn terminate_process(&self, process_id: &str) -> Result<(), Box<dyn std::error::Error>> {
         let mut processes = self.processes.lock().unwrap();
-        
+
         if let Some(process) = processes.iter_mut().find(|p| p.id == process_id) {
             process.process.terminate()?;
             process.status = ProcessStatus::Terminated;
         }
-        
+
         Ok(())
     }
-    
+
     pub fn kill_process(&self, process_id: &str) -> Result<(), Box<dyn std::error::Error>> {
         let mut processes = self.processes.lock().unwrap();
-        
+
         if let Some(process) = processes.iter_mut().find(|p| p.id == process_id) {
             process.process.kill()?;
             process.status = ProcessStatus::Terminated;
         }
-        
+
         Ok(())
     }
-    
+
     pub fn get_process_output(&self, process_id: &str) -> Result<String, Box<dyn std::error::Error>> {
         let mut processes = self.processes.lock().unwrap();
-        
+
         if let Some(process) = processes.iter_mut().find(|p| p.id == process_id) {
             let (stdout, _) = process.process.communicate(None)?;
             Ok(stdout.unwrap_or_default())
@@ -1092,10 +1092,10 @@ pub struct CrossPlatformSubprocessConfig {
 pub struct PlatformSpecificConfig {
     #[cfg(unix)]
     pub unix_config: UnixConfig,
-    
+
     #[cfg(windows)]
     pub windows_config: WindowsConfig,
-    
+
     #[cfg(target_os = "macos")]
     pub macos_config: MacOSConfig,
 }
@@ -1134,13 +1134,13 @@ impl CrossPlatformSubprocessConfig {
                     group_id: None,
                     umask: None,
                 },
-                
+
                 #[cfg(windows)]
                 windows_config: WindowsConfig {
                     show_window: false,
                     creation_flags: 0,
                 },
-                
+
                 #[cfg(target_os = "macos")]
                 macos_config: MacOSConfig {
                     launchd_compatible: false,
@@ -1148,22 +1148,22 @@ impl CrossPlatformSubprocessConfig {
             },
         }
     }
-    
+
     pub fn build_popen_config(&self) -> PopenConfig {
         let mut config = PopenConfig {
             stdout: Redirection::Pipe,
             stderr: Redirection::Pipe,
             ..Default::default()
         };
-        
+
         if let Some(working_dir) = &self.working_dir {
             config.cwd = Some(working_dir.into());
         }
-        
+
         for (key, value) in &self.env_vars {
             config.env.insert(key.clone(), value.clone());
         }
-        
+
         // 平台特定配置
         #[cfg(unix)]
         {
@@ -1177,13 +1177,13 @@ impl CrossPlatformSubprocessConfig {
                 config.umask = Some(umask);
             }
         }
-        
+
         #[cfg(windows)]
         {
             config.show_window = self.platform_specific.windows_config.show_window;
             config.creation_flags = self.platform_specific.windows_config.creation_flags;
         }
-        
+
         config
     }
 }
@@ -1193,27 +1193,27 @@ fn use_cross_platform_subprocess() -> Result<(), Box<dyn std::error::Error>> {
     let mut config = CrossPlatformSubprocessConfig::new(
         vec!["python".to_string(), "-c".to_string(), "print('Cross-platform!')".to_string()]
     );
-    
+
     config.working_dir = Some("/tmp".to_string());
     config.env_vars.insert("PYTHONPATH".to_string(), "/usr/local/lib/python3.9".to_string());
-    
+
     #[cfg(unix)]
     {
         config.platform_specific.unix_config.user_id = Some(1000);
         config.platform_specific.unix_config.group_id = Some(1000);
     }
-    
+
     #[cfg(windows)]
     {
         config.platform_specific.windows_config.show_window = false;
     }
-    
+
     let popen_config = config.build_popen_config();
     let mut process = Popen::create(&config.command, popen_config)?;
-    
+
     let exit_status = process.wait()?;
     println!("跨平台进程完成: {:?}", exit_status);
-    
+
     Ok(())
 }
 ```
@@ -1267,47 +1267,47 @@ impl SecureSubprocessConfig {
             },
         }
     }
-    
+
     pub fn allow_command(mut self, command: &str) -> Self {
         self.allowed_commands.insert(command.to_string());
         self
     }
-    
+
     pub fn block_command(mut self, command: &str) -> Self {
         self.blocked_commands.insert(command.to_string());
         self
     }
-    
+
     pub fn validate_command(&self, command: &str) -> Result<(), SecurityError> {
         if self.blocked_commands.contains(command) {
             return Err(SecurityError::CommandBlocked(command.to_string()));
         }
-        
+
         if !self.allowed_commands.is_empty() && !self.allowed_commands.contains(command) {
             return Err(SecurityError::CommandNotAllowed(command.to_string()));
         }
-        
+
         Ok(())
     }
-    
+
     pub fn build_secure_config(&self, command: &[String]) -> Result<PopenConfig, SecurityError> {
         if command.is_empty() {
             return Err(SecurityError::EmptyCommand);
         }
-        
+
         self.validate_command(&command[0])?;
-        
+
         let mut config = PopenConfig {
             stdout: Redirection::Pipe,
             stderr: Redirection::Pipe,
             ..Default::default()
         };
-        
+
         // 设置资源限制
         #[cfg(unix)]
         {
             use nix::sys::resource::{setrlimit, Resource, ResourceLimits as NixResourceLimits};
-            
+
             setrlimit(
                 Resource::RLIMIT_AS,
                 NixResourceLimits::new(
@@ -1315,7 +1315,7 @@ impl SecureSubprocessConfig {
                     self.resource_limits.max_memory_mb * 1024 * 1024 * 2
                 )
             ).map_err(|_| SecurityError::ResourceLimitFailed)?;
-            
+
             setrlimit(
                 Resource::RLIMIT_CPU,
                 NixResourceLimits::new(
@@ -1324,7 +1324,7 @@ impl SecureSubprocessConfig {
                 )
             ).map_err(|_| SecurityError::ResourceLimitFailed)?;
         }
-        
+
         // 沙箱配置
         if self.sandbox_config.drop_capabilities {
             #[cfg(unix)]
@@ -1334,7 +1334,7 @@ impl SecureSubprocessConfig {
                 setgid(Gid::from_raw(65534)).map_err(|_| SecurityError::SandboxFailed)?; // nogroup
             }
         }
-        
+
         Ok(config)
     }
 }
@@ -1343,16 +1343,16 @@ impl SecureSubprocessConfig {
 pub enum SecurityError {
     #[error("命令被阻止: {0}")]
     CommandBlocked(String),
-    
+
     #[error("命令不被允许: {0}")]
     CommandNotAllowed(String),
-    
+
     #[error("空命令")]
     EmptyCommand,
-    
+
     #[error("资源限制设置失败")]
     ResourceLimitFailed,
-    
+
     #[error("沙箱设置失败")]
     SandboxFailed,
 }
@@ -1364,15 +1364,15 @@ fn use_secure_subprocess() -> Result<(), Box<dyn std::error::Error>> {
         .allow_command("cat")
         .block_command("rm")
         .block_command("dd");
-    
+
     let command = vec!["echo".to_string(), "Hello, Secure Subprocess!".to_string()];
     let popen_config = secure_config.build_secure_config(&command)?;
-    
+
     let mut process = Popen::create(&command, popen_config)?;
     let exit_status = process.wait()?;
-    
+
     println!("安全进程完成: {:?}", exit_status);
-    
+
     Ok(())
 }
 ```
@@ -1405,7 +1405,7 @@ impl ProcessLibraryBenchmark {
             results: Arc::new(Mutex::new(Vec::new())),
         }
     }
-    
+
     pub async fn benchmark_library(
         &self,
         library: &str,
@@ -1415,13 +1415,13 @@ impl ProcessLibraryBenchmark {
         let start_time = Instant::now();
         let start_memory = self.get_memory_usage();
         let start_cpu = self.get_cpu_usage();
-        
+
         let success = test_function().is_ok();
-        
+
         let duration = start_time.elapsed();
         let end_memory = self.get_memory_usage();
         let end_cpu = self.get_cpu_usage();
-        
+
         let result = BenchmarkResult {
             library: library.to_string(),
             operation: operation.to_string(),
@@ -1430,16 +1430,16 @@ impl ProcessLibraryBenchmark {
             cpu_usage: end_cpu - start_cpu,
             success,
         };
-        
+
         let mut results = self.results.lock().await;
         results.push(result.clone());
-        
+
         result
     }
-    
+
     pub async fn run_comprehensive_benchmark(&self) -> Vec<BenchmarkResult> {
         let mut results = Vec::new();
-        
+
         // 测试标准库
         results.push(self.benchmark_library(
             "std::process",
@@ -1452,7 +1452,7 @@ impl ProcessLibraryBenchmark {
                 Ok(())
             },
         ).await);
-        
+
         // 测试 Tokio
         results.push(self.benchmark_library(
             "tokio::process",
@@ -1467,7 +1467,7 @@ impl ProcessLibraryBenchmark {
                 })
             },
         ).await);
-        
+
         // 测试 Async-Std
         results.push(self.benchmark_library(
             "async-std::process",
@@ -1482,7 +1482,7 @@ impl ProcessLibraryBenchmark {
                 })
             },
         ).await);
-        
+
         // 测试 Duct
         results.push(self.benchmark_library(
             "duct",
@@ -1492,7 +1492,7 @@ impl ProcessLibraryBenchmark {
                 Ok(())
             },
         ).await);
-        
+
         // 测试 Subprocess
         results.push(self.benchmark_library(
             "subprocess",
@@ -1509,26 +1509,26 @@ impl ProcessLibraryBenchmark {
                 Ok(())
             },
         ).await);
-        
+
         results
     }
-    
+
     fn get_memory_usage(&self) -> u64 {
         // 简化的内存使用获取
         0
     }
-    
+
     fn get_cpu_usage(&self) -> f64 {
         // 简化的 CPU 使用获取
         0.0
     }
-    
+
     pub async fn generate_report(&self) -> String {
         let results = self.results.lock().await;
         let mut report = String::new();
-        
+
         report.push_str("# 进程管理库性能基准测试报告\n\n");
-        
+
         for result in results.iter() {
             report.push_str(&format!(
                 "## {}\n- 操作: {}\n- 耗时: {:?}\n- 内存使用: {} bytes\n- CPU 使用: {:.2}%\n- 成功: {}\n\n",
@@ -1540,7 +1540,7 @@ impl ProcessLibraryBenchmark {
                 result.success
             ));
         }
-        
+
         report
     }
 }
@@ -1658,19 +1658,19 @@ pub enum OptimizationStrategy {
         pool_size: usize,
         idle_timeout: Duration,
     },
-    
+
     // 异步并发
     AsyncConcurrency {
         max_concurrent: usize,
         backpressure: bool,
     },
-    
+
     // 内存优化
     MemoryOptimization {
         zero_copy: bool,
         memory_pool: bool,
     },
-    
+
     // CPU 优化
     CpuOptimization {
         cpu_affinity: bool,
@@ -1692,12 +1692,12 @@ impl PerformanceOptimization {
             strategies: Vec::new(),
         }
     }
-    
+
     pub fn add_strategy(mut self, strategy: OptimizationStrategy) -> Self {
         self.strategies.push(strategy);
         self
     }
-    
+
     pub fn apply_optimizations(&self, config: &mut ProcessConfig) {
         for strategy in &self.strategies {
             match strategy {

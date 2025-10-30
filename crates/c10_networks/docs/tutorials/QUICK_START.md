@@ -143,18 +143,18 @@ use c10_networks::error::NetworkResult;
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     println!("🚀 启动C10 Networks HTTP客户端...");
-    
+
     // 创建HTTP客户端
     let client = HttpClient::new();
-    
+
     // 发送GET请求
     let response = client.get("https://httpbin.org/get").await?;
-    
+
     println!("✅ 请求成功!");
     println!("状态码: {}", response.status);
     println!("响应头: {:?}", response.headers);
     println!("响应体长度: {} 字节", response.body.len());
-    
+
     Ok(())
 }
 ```
@@ -176,16 +176,16 @@ use c10_networks::error::NetworkResult;
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     let client = HttpClient::new();
-    
+
     // GET请求
     let get_response = client.get("https://httpbin.org/get").await?;
     println!("GET响应: {}", String::from_utf8_lossy(&get_response.body));
-    
+
     // POST请求
     let post_data = b"{\"name\": \"C10 Networks\"}";
     let post_response = client.post("https://httpbin.org/post", post_data).await?;
     println!("POST响应: {}", String::from_utf8_lossy(&post_response.body));
-    
+
     Ok(())
 }
 ```
@@ -199,15 +199,15 @@ use std::collections::HashMap;
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     let client = HttpClient::new();
-    
+
     // 创建自定义请求
     let mut request = HttpRequest::new(HttpMethod::GET, "https://httpbin.org/headers");
     request.add_header("User-Agent", "C10-Networks/1.0");
     request.add_header("Accept", "application/json");
-    
+
     let response = client.send_request(request).await?;
     println!("自定义请求响应: {}", String::from_utf8_lossy(&response.body));
-    
+
     Ok(())
 }
 ```
@@ -224,14 +224,14 @@ use c10_networks::error::NetworkResult;
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     println!("🔌 启动WebSocket服务器...");
-    
+
     let server = WebSocketServer::new("127.0.0.1:8080").await?;
     println!("✅ 服务器启动在 ws://127.0.0.1:8080");
-    
+
     loop {
         let (mut connection, addr) = server.accept().await?;
         println!("📡 新连接来自: {}", addr);
-        
+
         tokio::spawn(async move {
             while let Some(message) = connection.receive().await? {
                 match message {
@@ -268,17 +268,17 @@ use c10_networks::error::NetworkResult;
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     println!("🔌 连接WebSocket服务器...");
-    
+
     let mut client = WebSocketClient::connect("ws://127.0.0.1:8080").await?;
     println!("✅ 连接成功!");
-    
+
     // 发送文本消息
     client.send_text("Hello, C10 Networks!").await?;
-    
+
     // 发送二进制消息
     let binary_data = b"Binary message from C10 Networks";
     client.send_binary(binary_data.to_vec()).await?;
-    
+
     // 接收响应
     for _ in 0..2 {
         if let Some(message) = client.receive().await? {
@@ -293,11 +293,11 @@ async fn main() -> NetworkResult<()> {
             }
         }
     }
-    
+
     // 关闭连接
     client.close().await?;
     println!("🔚 连接已关闭");
-    
+
     Ok(())
 }
 ```
@@ -324,17 +324,17 @@ use c10_networks::error::NetworkResult;
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     println!("📡 启动TCP回显服务器...");
-    
+
     let server = TcpServer::bind("127.0.0.1:8080").await?;
     println!("✅ 服务器启动在 tcp://127.0.0.1:8080");
-    
+
     loop {
         let (mut stream, addr) = server.accept().await?;
         println!("📡 新连接来自: {}", addr);
-        
+
         tokio::spawn(async move {
             let mut buffer = [0; 1024];
-            
+
             loop {
                 match stream.read(&mut buffer).await {
                     Ok(0) => {
@@ -344,7 +344,7 @@ async fn main() -> NetworkResult<()> {
                     Ok(n) => {
                         let data = &buffer[..n];
                         println!("📨 收到数据: {} 字节", n);
-                        
+
                         // 回显数据
                         if let Err(e) = stream.write_all(data).await {
                             eprintln!("❌ 写入错误: {}", e);
@@ -372,22 +372,22 @@ use c10_networks::error::NetworkResult;
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     println!("📡 连接TCP服务器...");
-    
+
     let mut client = TcpClient::connect("127.0.0.1:8080").await?;
     println!("✅ 连接成功!");
-    
+
     // 发送测试数据
     let test_data = b"Hello, C10 Networks TCP!";
     client.write_all(test_data).await?;
     println!("📤 发送数据: {} 字节", test_data.len());
-    
+
     // 接收回显数据
     let mut buffer = [0; 1024];
     let n = client.read(&mut buffer).await?;
     let response = &buffer[..n];
-    
+
     println!("📨 收到回显: {}", String::from_utf8_lossy(response));
-    
+
     Ok(())
 }
 ```
@@ -414,25 +414,25 @@ use c10_networks::error::NetworkResult;
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     println!("🔍 开始DNS解析...");
-    
+
     // 使用系统DNS配置
     let resolver = DnsResolver::from_system().await?;
-    
+
     // 查询A记录
     let ips = resolver.lookup_ips("example.com").await?;
     println!("✅ example.com 的IP地址: {:?}", ips);
-    
+
     // 查询TXT记录
     let txt_records = resolver.lookup_txt("example.com").await?;
     println!("📝 TXT记录: {:?}", txt_records);
-    
+
     // 使用Cloudflare DoH
     let (cfg, opts) = presets::cloudflare_doh();
     let doh_resolver = DnsResolver::from_config(cfg, opts).await?;
-    
+
     let doh_ips = doh_resolver.lookup_ips("google.com").await?;
     println!("🌐 Google.com (DoH): {:?}", doh_ips);
-    
+
     Ok(())
 }
 ```
@@ -447,19 +447,19 @@ use c10_networks::error::NetworkResult;
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     let resolver = DnsResolver::from_system().await?;
-    
+
     // 查询MX记录
     let mx_records = resolver.lookup_mx("example.com").await?;
     println!("📧 MX记录: {:?}", mx_records);
-    
+
     // 查询SRV记录
     let srv_records = resolver.lookup_srv("_http._tcp.example.com").await?;
     println!("🔗 SRV记录: {:?}", srv_records);
-    
+
     // 反向DNS查询
     let ptr_records = resolver.reverse_lookup("8.8.8.8".parse()?).await?;
     println!("🔄 反向DNS: {:?}", ptr_records);
-    
+
     Ok(())
 }
 ```
@@ -485,36 +485,36 @@ use std::time::Duration;
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     println!("📊 启动网络性能监控...");
-    
+
     let mut metrics = NetworkMetrics::new();
     let diagnostics = NetDiagnostics::new();
-    
+
     // 监控HTTP请求性能
     let start = std::time::Instant::now();
     let client = c10_networks::protocol::http::HttpClient::new();
     let response = client.get("https://httpbin.org/get").await?;
     let duration = start.elapsed();
-    
+
     // 记录指标
     metrics.record_http_request(duration, response.status);
     metrics.record_bandwidth(response.body.len() as u64, duration);
-    
+
     // 显示性能指标
     println!("✅ 请求完成:");
     println!("   响应时间: {:?}", duration);
     println!("   状态码: {}", response.status);
     println!("   数据大小: {} 字节", response.body.len());
-    println!("   吞吐量: {:.2} KB/s", 
+    println!("   吞吐量: {:.2} KB/s",
         (response.body.len() as f64 / 1024.0) / duration.as_secs_f64());
-    
+
     // 网络诊断
     println!("\n🔍 网络诊断:");
     let dns_ok = diagnostics.check_dns("example.com");
     println!("   DNS解析: {}", if dns_ok { "✅ 正常" } else { "❌ 异常" });
-    
+
     let tcp_ok = diagnostics.check_tcp_connect("127.0.0.1:80", 1000);
     println!("   TCP连接: {:?}", tcp_ok);
-    
+
     Ok(())
 }
 ```
@@ -538,26 +538,26 @@ use c10_networks::error::NetworkResult;
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     println!("🔒 启动HTTPS客户端...");
-    
+
     // 配置TLS
     let tls_config = TlsConfig::default()
         .with_verify_certificates(true)
         .with_verify_hostname(true);
-    
+
     // 创建安全的HTTP客户端
     let http_config = HttpConfig::new()
         .with_tls_config(tls_config)
         .with_timeout(Duration::from_secs(30));
-    
+
     let client = HttpClient::with_config(http_config);
-    
+
     // 发送HTTPS请求
     let response = client.get("https://httpbin.org/get").await?;
-    
+
     println!("✅ HTTPS请求成功!");
     println!("   状态码: {}", response.status);
     println!("   安全连接: {}", response.is_secure());
-    
+
     Ok(())
 }
 ```
@@ -573,23 +573,23 @@ use c10_networks::error::NetworkResult;
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     println!("🔐 配置客户端证书认证...");
-    
+
     // 加载客户端证书
     let tls_config = TlsConfig::default()
         .with_client_certificate("client.crt", "client.key")
         .with_ca_certificate("ca.crt");
-    
+
     let http_config = HttpConfig::new()
         .with_tls_config(tls_config);
-    
+
     let client = HttpClient::with_config(http_config);
-    
+
     // 使用客户端证书进行认证
     let response = client.get("https://secure.example.com/api").await?;
-    
+
     println!("✅ 客户端证书认证成功!");
     println!("   状态码: {}", response.status);
-    
+
     Ok(())
 }
 ```
@@ -689,6 +689,6 @@ A: 运行 `cargo bench` 或查看 [基准测试指南](benchmark_minimal_guide.m
 
 现在您已经掌握了C10 Networks的基本用法，可以开始构建您的网络应用程序了。
 
-*最后更新: 2025年1月*  
-*文档版本: v1.0*  
+*最后更新: 2025年1月*
+*文档版本: v1.0*
 *维护者: C10 Networks 开发团队*

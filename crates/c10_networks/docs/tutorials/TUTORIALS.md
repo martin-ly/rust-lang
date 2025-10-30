@@ -82,16 +82,16 @@ use std::io::{self, Write};
 async fn main() -> io::Result<()> {
     // 连接到服务器
     let mut client = TcpClient::new("127.0.0.1:8080").await?;
-    
+
     // 发送数据
     client.write_all(b"Hello, Server!").await?;
-    
+
     // 读取响应
     let mut buffer = [0; 1024];
     let n = client.read(&mut buffer).await?;
-    
+
     println!("收到响应: {}", String::from_utf8_lossy(&buffer[..n]));
-    
+
     Ok(())
 }
 ```
@@ -109,15 +109,15 @@ use std::io;
 #[tokio::main]
 async fn main() -> io::Result<()> {
     let server = TcpServer::new("127.0.0.1:8080").await?;
-    
+
     println!("服务器启动在 127.0.0.1:8080");
-    
+
     loop {
         let mut client = server.accept().await?;
-        
+
         tokio::spawn(async move {
             let mut buffer = [0; 1024];
-            
+
             loop {
                 match client.read(&mut buffer).await {
                     Ok(0) => break, // 连接关闭
@@ -148,20 +148,20 @@ use std::io::{self, Write};
 #[tokio::main]
 async fn main() -> io::Result<()> {
     let mut client = TcpClient::new("127.0.0.1:8080").await?;
-    
+
     // 发送多条消息
     for i in 0..5 {
         let message = format!("消息 {}: Hello, Server!", i);
         client.write_all(message.as_bytes()).await?;
-        
+
         // 读取响应
         let mut buffer = [0; 1024];
         let n = client.read(&mut buffer).await?;
         println!("响应: {}", String::from_utf8_lossy(&buffer[..n]));
-        
+
         tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
     }
-    
+
     Ok(())
 }
 ```
@@ -178,14 +178,14 @@ use std::net::SocketAddr;
 async fn main() -> std::io::Result<()> {
     let socket = UdpSocket::bind("127.0.0.1:8080").await?;
     println!("UDP 服务器启动在 127.0.0.1:8080");
-    
+
     let mut buffer = [0; 1024];
-    
+
     loop {
         let (n, addr) = socket.recv_from(&mut buffer).await?;
         let message = String::from_utf8_lossy(&buffer[..n]);
         println!("收到来自 {} 的消息: {}", addr, message);
-        
+
         // 发送响应
         let response = format!("收到: {}", message);
         socket.send_to(response.as_bytes(), addr).await?;
@@ -203,16 +203,16 @@ use std::net::SocketAddr;
 async fn main() -> std::io::Result<()> {
     let socket = UdpSocket::bind("127.0.0.1:0").await?; // 任意端口
     let server_addr: SocketAddr = "127.0.0.1:8080".parse().unwrap();
-    
+
     // 发送消息
     let message = "Hello, UDP Server!";
     socket.send_to(message.as_bytes(), server_addr).await?;
-    
+
     // 接收响应
     let mut buffer = [0; 1024];
     let (n, _) = socket.recv_from(&mut buffer).await?;
     println!("响应: {}", String::from_utf8_lossy(&buffer[..n]));
-    
+
     Ok(())
 }
 ```
@@ -228,22 +228,22 @@ use std::collections::HashMap;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let client = HttpClient::new();
-    
+
     // GET 请求
     let response = client
         .request(HttpMethod::GET, "https://httpbin.org/get")
         .version(HttpVersion::Http1_1)
         .send()
         .await?;
-    
+
     println!("状态码: {}", response.status_code());
     println!("响应头: {:?}", response.headers());
     println!("响应体: {}", response.body());
-    
+
     // POST 请求
     let mut headers = HashMap::new();
     headers.insert("Content-Type".to_string(), "application/json".to_string());
-    
+
     let response = client
         .request(HttpMethod::POST, "https://httpbin.org/post")
         .version(HttpVersion::Http1_1)
@@ -251,9 +251,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .body(r#"{"message": "Hello, World!"}"#)
         .send()
         .await?;
-    
+
     println!("POST 响应: {}", response.body());
-    
+
     Ok(())
 }
 ```
@@ -267,20 +267,20 @@ use std::collections::HashMap;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let client = HttpClient::new();
-    
+
     let mut headers = HashMap::new();
     headers.insert("Authorization".to_string(), "Bearer your-token-here".to_string());
     headers.insert("Content-Type".to_string(), "application/json".to_string());
-    
+
     let response = client
         .request(HttpMethod::GET, "https://api.example.com/protected")
         .version(HttpVersion::Http1_1)
         .headers(headers)
         .send()
         .await?;
-    
+
     println!("受保护资源响应: {}", response.body());
-    
+
     Ok(())
 }
 ```
@@ -296,9 +296,9 @@ use bytes::Bytes;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut client = WebSocketClient::connect("ws://127.0.0.1:8080").await?;
-    
+
     println!("WebSocket 连接已建立");
-    
+
     // 发送文本消息
     let text_frame = WebSocketFrame {
         fin: true,
@@ -308,9 +308,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         masking_key: Some([0x12, 0x34, 0x56, 0x78]),
         payload: Bytes::from("Hello, WebSocket!"),
     };
-    
+
     client.send_frame(text_frame).await?;
-    
+
     // 发送二进制消息
     let binary_frame = WebSocketFrame {
         fin: true,
@@ -320,9 +320,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         masking_key: Some([0x12, 0x34, 0x56, 0x78]),
         payload: Bytes::from(vec![0x01, 0x02, 0x03, 0x04]),
     };
-    
+
     client.send_frame(binary_frame).await?;
-    
+
     // 接收消息
     loop {
         match client.receive_frame().await? {
@@ -356,7 +356,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             None => break,
         }
     }
-    
+
     Ok(())
 }
 ```
@@ -375,16 +375,16 @@ use std::sync::Arc;
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
     let server = Arc::new(TcpServer::new("127.0.0.1:8080").await?);
-    
+
     println!("服务器启动在 127.0.0.1:8080");
-    
+
     loop {
         let server_clone = Arc::clone(&server);
         let mut client = server_clone.accept().await?;
-        
+
         tokio::spawn(async move {
             let mut buffer = [0; 1024];
-            
+
             loop {
                 match client.read(&mut buffer).await {
                     Ok(0) => break,
@@ -392,7 +392,7 @@ async fn main() -> std::io::Result<()> {
                         // 处理请求
                         let request = String::from_utf8_lossy(&buffer[..n]);
                         let response = process_request(&request);
-                        
+
                         if let Err(e) = client.write_all(response.as_bytes()).await {
                             eprintln!("写入错误: {}", e);
                             break;
@@ -433,18 +433,18 @@ struct ConnectionPool {
 impl ConnectionPool {
     async fn new(addr: &str, max_connections: usize) -> std::io::Result<Self> {
         let mut clients = Vec::new();
-        
+
         for _ in 0..max_connections {
             let client = Arc::new(TcpClient::new(addr).await?);
             clients.push(client);
         }
-        
+
         Ok(Self {
             clients,
             semaphore: Arc::new(Semaphore::new(max_connections)),
         })
     }
-    
+
     async fn get_connection(&self) -> Arc<TcpClient> {
         let _permit = self.semaphore.acquire().await.unwrap();
         // 简单的轮询选择连接
@@ -455,11 +455,11 @@ impl ConnectionPool {
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
     let pool = ConnectionPool::new("127.0.0.1:8080", 10).await?;
-    
+
     // 使用连接池
     let client = pool.get_connection().await;
     client.write_all(b"Hello from pool!").await?;
-    
+
     Ok(())
 }
 ```
@@ -500,7 +500,7 @@ impl std::error::Error for CustomError {}
 async fn handle_network_operation() -> Result<(), CustomError> {
     // 模拟网络操作
     let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
-    
+
     match result {
         Ok(_) => Ok(()),
         Err(e) => {
@@ -528,7 +528,7 @@ where
     F: FnMut() -> Result<T, NetworkError>,
 {
     let mut retries = 0;
-    
+
     loop {
         match operation() {
             Ok(result) => return Ok(result),
@@ -536,7 +536,7 @@ where
                 if !e.is_retryable() || retries >= max_retries {
                     return Err(e);
                 }
-                
+
                 retries += 1;
                 let delay = e.retry_delay();
                 println!("重试 {} 次，延迟: {:?}", retries, delay);
@@ -556,12 +556,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             Ok("成功!".to_string())
         }
     }, 3).await;
-    
+
     match result {
         Ok(msg) => println!("操作成功: {}", msg),
         Err(e) => println!("操作失败: {}", e),
     }
-    
+
     Ok(())
 }
 ```
@@ -577,13 +577,13 @@ use bytes::Bytes;
 fn create_packet_zero_copy() -> Packet {
     // 使用 Bytes 避免数据拷贝
     let data = Bytes::from_static(b"Hello, World!");
-    
+
     Packet::new(PacketType::Raw, data)
 }
 
 fn build_packet_efficiently() -> Packet {
     let mut builder = PacketBuilder::new(PacketType::Custom("test".to_string()));
-    
+
     // 链式调用减少中间分配
     builder
         .add_data(b"header")
@@ -610,14 +610,14 @@ impl OptimizedServer {
             memory_pool: Arc::new(MemoryPool::new(1024 * 1024, 1000)),
         }
     }
-    
+
     async fn handle_request(&self, data: &[u8]) -> Vec<u8> {
         // 从内存池分配缓冲区
         let buffer = self.memory_pool.allocate(data.len());
-        
+
         // 处理数据
         let processed_data = process_data(data);
-        
+
         // 返回处理结果
         processed_data
     }
@@ -643,24 +643,24 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .certificate_file(Path::new("cert.pem"))
         .private_key_file(Path::new("key.pem"))
         .build()?;
-    
+
     let server = TlsServer::new("127.0.0.1:8443", config).await?;
-    
+
     println!("TLS 服务器启动在 127.0.0.1:8443");
-    
+
     loop {
         let mut client = server.accept().await?;
-        
+
         tokio::spawn(async move {
             let mut buffer = [0; 1024];
-            
+
             loop {
                 match client.read(&mut buffer).await {
                     Ok(0) => break,
                     Ok(n) => {
                         let message = String::from_utf8_lossy(&buffer[..n]);
                         println!("收到加密消息: {}", message);
-                        
+
                         let response = format!("收到: {}", message);
                         if let Err(e) = client.write_all(response.as_bytes()).await {
                             eprintln!("写入错误: {}", e);
@@ -694,16 +694,16 @@ impl SecureServer {
             auth_manager: AuthManager::new(),
         }
     }
-    
+
     async fn handle_authenticated_request(&self, token: &str, request: &str) -> Result<String, String> {
         // 验证 JWT token
         let claims = self.auth_manager.verify_token(token)?;
-        
+
         // 检查权限
         if !self.auth_manager.has_permission(&claims, "read") {
             return Err("权限不足".to_string());
         }
-        
+
         // 处理请求
         Ok(format!("处理请求: {}", request))
     }
@@ -712,16 +712,16 @@ impl SecureServer {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let server = SecureServer::new();
-    
+
     // 模拟认证请求
     let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...";
     let request = "GET /api/data";
-    
+
     match server.handle_authenticated_request(token, request).await {
         Ok(response) => println!("响应: {}", response),
         Err(e) => println!("错误: {}", e),
     }
-    
+
     Ok(())
 }
 ```
@@ -783,7 +783,7 @@ impl ServerConfig {
         let config: ServerConfig = toml::from_str(&content)?;
         Ok(config)
     }
-    
+
     pub fn default() -> Self {
         Self {
             host: "127.0.0.1".to_string(),
@@ -817,21 +817,21 @@ impl ConnectionManager {
             max_connections,
         }
     }
-    
+
     async fn add_connection(&self, connection: Arc<TcpConnection>) -> Result<(), String> {
         let mut connections = self.connections.write().await;
-        
+
         if connections.len() >= self.max_connections {
             return Err("连接数已达上限".to_string());
         }
-        
+
         connections.push(connection);
         Ok(())
     }
-    
+
     async fn remove_connection(&self, connection_id: u64) -> bool {
         let mut connections = self.connections.write().await;
-        
+
         if let Some(pos) = connections.iter().position(|c| c.id == connection_id) {
             connections.remove(pos);
             true
@@ -839,7 +839,7 @@ impl ConnectionManager {
             false
         }
     }
-    
+
     async fn get_connection_count(&self) -> usize {
         let connections = self.connections.read().await;
         connections.len()
@@ -865,7 +865,7 @@ impl ResourceManager {
             buffer_pool: Arc::new(Vec::new()),
         }
     }
-    
+
     fn get_buffer(&self, size: usize) -> Vec<u8> {
         // 尝试从池中获取合适大小的缓冲区
         if let Some(mut buffer) = self.buffer_pool.pop() {
@@ -879,7 +879,7 @@ impl ResourceManager {
             vec![0; size]
         }
     }
-    
+
     fn return_buffer(&self, buffer: Vec<u8>) {
         // 将缓冲区返回到池中
         if buffer.capacity() <= 1024 * 1024 { // 限制池大小
@@ -899,30 +899,30 @@ mod tests {
     use super::*;
     use c10_networks::protocol::tcp::TcpClient;
     use tokio::io::{AsyncReadExt, AsyncWriteExt};
-    
+
     #[tokio::test]
     async fn test_tcp_client_connection() {
         let mut client = TcpClient::new("127.0.0.1:8080").await.unwrap();
-        
+
         // 测试连接
         assert!(client.is_connected());
-        
+
         // 测试数据传输
         let test_data = b"test message";
         client.write_all(test_data).await.unwrap();
-        
+
         let mut buffer = [0; 1024];
         let n = client.read(&mut buffer).await.unwrap();
         assert_eq!(&buffer[..n], test_data);
     }
-    
+
     #[test]
     fn test_packet_creation() {
         let packet = Packet::new(
             PacketType::Raw,
             Bytes::from(b"test data"),
         );
-        
+
         assert_eq!(packet.packet_type, PacketType::Raw);
         assert_eq!(packet.data, Bytes::from(b"test data"));
     }
@@ -937,30 +937,30 @@ mod integration_tests {
     use super::*;
     use c10_networks::protocol::tcp::{TcpServer, TcpClient};
     use tokio::io::{AsyncReadExt, AsyncWriteExt};
-    
+
     #[tokio::test]
     async fn test_tcp_server_client_integration() {
         // 启动服务器
         let server = TcpServer::new("127.0.0.1:0").await.unwrap();
         let server_addr = server.local_addr().unwrap();
-        
+
         // 启动客户端
         let mut client = TcpClient::new(&server_addr.to_string()).await.unwrap();
-        
+
         // 测试通信
         let test_message = b"Hello, Server!";
         client.write_all(test_message).await.unwrap();
-        
+
         let mut server_client = server.accept().await.unwrap();
         let mut buffer = [0; 1024];
         let n = server_client.read(&mut buffer).await.unwrap();
-        
+
         assert_eq!(&buffer[..n], test_message);
-        
+
         // 发送响应
         let response = b"Hello, Client!";
         server_client.write_all(response).await.unwrap();
-        
+
         let mut client_buffer = [0; 1024];
         let n = client.read(&mut client_buffer).await.unwrap();
         assert_eq!(&client_buffer[..n], response);
@@ -1046,7 +1046,7 @@ use std::time::Duration;
 
 async fn handle_timeout() -> Result<(), NetworkError> {
     let result = some_network_operation().await;
-    
+
     match result {
         Ok(data) => Ok(data),
         Err(e) => {
@@ -1080,10 +1080,10 @@ impl HighPerformanceServer {
             semaphore: Arc::new(Semaphore::new(max_connections)),
         }
     }
-    
+
     async fn handle_connection(&self, mut client: TcpClient) {
         let _permit = self.semaphore.acquire().await.unwrap();
-        
+
         // 处理连接
         let mut buffer = [0; 1024];
         loop {
@@ -1127,7 +1127,7 @@ impl Packet for CustomPacket {
     fn packet_type(&self) -> PacketType {
         PacketType::Custom("custom".to_string())
     }
-    
+
     fn serialize(&self) -> Bytes {
         let mut data = Vec::new();
         data.push(self.header.version);
@@ -1136,22 +1136,22 @@ impl Packet for CustomPacket {
         data.extend_from_slice(&self.payload);
         Bytes::from(data)
     }
-    
+
     fn deserialize(data: Bytes) -> Result<Self, String> {
         if data.len() < 4 {
             return Err("数据太短".to_string());
         }
-        
+
         let version = data[0];
         let message_type = data[1];
         let length = u16::from_be_bytes([data[2], data[3]]);
-        
+
         if data.len() < 4 + length as usize {
             return Err("数据长度不匹配".to_string());
         }
-        
+
         let payload = data.slice(4..4 + length as usize);
-        
+
         Ok(CustomPacket {
             header: CustomHeader {
                 version,
@@ -1189,11 +1189,11 @@ impl Protocol for CustomProtocol {
     fn name(&self) -> &str {
         &self.name
     }
-    
+
     fn version(&self) -> &str {
         &self.version
     }
-    
+
     fn encode(&self, data: &[u8]) -> Result<Bytes, String> {
         // 实现编码逻辑
         let mut encoded = Vec::new();
@@ -1202,14 +1202,14 @@ impl Protocol for CustomProtocol {
         encoded.extend_from_slice(data);
         Ok(Bytes::from(encoded))
     }
-    
+
     fn decode(&self, data: Bytes) -> Result<Bytes, String> {
         // 实现解码逻辑
         let header_size = self.name.len() + self.version.len();
         if data.len() < header_size {
             return Err("数据太短".to_string());
         }
-        
+
         Ok(data.slice(header_size..))
     }
 }
@@ -1237,27 +1237,27 @@ impl NetworkMonitor {
             start_time: Instant::now(),
         }
     }
-    
+
     pub async fn record_connection(&self) {
         let mut metrics = self.metrics.write().await;
         metrics.increment_connections();
     }
-    
+
     pub async fn record_bytes_sent(&self, bytes: usize) {
         let mut metrics = self.metrics.write().await;
         metrics.add_bytes_sent(bytes);
     }
-    
+
     pub async fn record_bytes_received(&self, bytes: usize) {
         let mut metrics = self.metrics.write().await;
         metrics.add_bytes_received(bytes);
     }
-    
+
     pub async fn get_metrics(&self) -> NetworkMetrics {
         let metrics = self.metrics.read().await;
         metrics.clone()
     }
-    
+
     pub fn uptime(&self) -> Duration {
         self.start_time.elapsed()
     }
@@ -1285,25 +1285,25 @@ impl LoadBalancer {
             current_index: Arc::new(RwLock::new(0)),
         }
     }
-    
+
     pub async fn get_next_server(&self) -> Option<String> {
         let servers = self.servers.read().await;
         let mut index = self.current_index.write().await;
-        
+
         if servers.is_empty() {
             return None;
         }
-        
+
         let server = servers[*index].clone();
         *index = (*index + 1) % servers.len();
         Some(server)
     }
-    
+
     pub async fn add_server(&self, server: String) {
         let mut servers = self.servers.write().await;
         servers.push(server);
     }
-    
+
     pub async fn remove_server(&self, server: &str) {
         let mut servers = self.servers.write().await;
         servers.retain(|s| s != server);
@@ -1320,7 +1320,7 @@ impl BalancedClient {
             load_balancer: Arc::new(LoadBalancer::new(servers)),
         }
     }
-    
+
     pub async fn connect(&self) -> Result<TcpClient, String> {
         if let Some(server) = self.load_balancer.get_next_server().await {
             TcpClient::new(&server).await.map_err(|e| e.to_string())
@@ -1354,14 +1354,14 @@ impl FaultTolerantClient {
             max_retries: 3,
         }
     }
-    
+
     pub async fn execute_with_failover<F, T>(&self, operation: F) -> Result<T, String>
     where
         F: Fn(&str) -> Result<T, NetworkError>,
     {
         let mut servers = vec![self.primary_server.clone()];
         servers.extend(self.backup_servers.clone());
-        
+
         for (attempt, server) in servers.iter().enumerate() {
             match operation(server) {
                 Ok(result) => return Ok(result),
@@ -1377,7 +1377,7 @@ impl FaultTolerantClient {
                 }
             }
         }
-        
+
         Err("没有可用的服务器".to_string())
     }
 }

@@ -1,0 +1,84 @@
+# Rust
+/target/
+**/*.rs.bk
+*.pdb
+
+# Cargo
+Cargo.lock
+
+# WASM
+/pkg/
+/wasm-pack.log
+
+# Node
+/node_modules/
+/npm-debug.log*
+/yarn-error.log*
+/yarn.lock
+/package-lock.json
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+/.vscode/
+/.idea/
+*.iml
+/.fleet/
+/.project
+/.settings/
+/.classpath
+
+# Build artifacts
+/dist/
+/build/
+*.wasm
+!pkg/**/*.wasm
+
+# Coverage
+/coverage/
+/tarpaulin-report.html
+*.profraw
+*.profdata
+
+# Benchmarks
+/criterion/
+/target/criterion/
+
+# Temporary files
+/tmp/
+*.tmp
+*.log
+*.cache
+
+# Documentation build
+/book/
+/mdbook/
+
+# Test files
+/test-results/
+*.test
+
+# Build reports
+BUILD_REPORT.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.pytest_cache/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Backup files
+*.backup
+*.bak
+*~

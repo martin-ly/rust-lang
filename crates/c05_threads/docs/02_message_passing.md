@@ -1,13 +1,13 @@
 # 第 2 章：使用消息传递在线程间通信
 
-> **文档定位**: 深入理解Rust消息传递并发模型的理论与实践  
-> **先修知识**: [01_basic_threading](./01_basic_threading.md)  
+> **文档定位**: 深入理解Rust消息传递并发模型的理论与实践
+> **先修知识**: [01_basic_threading](./01_basic_threading.md)
 > **相关文档**: [03_synchronization_primitives](./03_synchronization_primitives.md) | [知识图谱](./KNOWLEDGE_GRAPH.md)
 
-**最后更新**: 2025-10-19  
-**适用版本**: Rust 1.90+  
-**难度等级**: ⭐⭐⭐  
-**文档类型**: 📚 理论+实践  
+**最后更新**: 2025-10-19
+**适用版本**: Rust 1.90+
+**难度等级**: ⭐⭐⭐
+**文档类型**: 📚 理论+实践
 **增强内容**: ✅ 知识图谱 | ✅ 多维对比 | ✅ Rust 1.90 示例
 
 ---
@@ -64,30 +64,30 @@ graph TB
         MP --> CSP[CSP理论]
         MP --> Channel[通道抽象]
         MP --> Ownership[所有权转移]
-        
+
         CSP --> Philosophy["不共享内存"]
         CSP --> Comm["通过通信共享"]
-        
+
         Channel --> MPSC[MPSC通道]
         Channel --> Crossbeam[crossbeam通道]
         Channel --> Async[异步通道]
-        
+
         Ownership --> Send[Send Trait]
         Ownership --> Safety[编译时安全]
     end
-    
+
     subgraph "通道类型"
         MPSC --> Unbounded[无界通道]
         MPSC --> Bounded[有界通道]
-        
+
         Crossbeam --> CBUnbounded[无界]
         Crossbeam --> CBBounded[有界]
         Crossbeam --> Select[select!宏]
-        
+
         Async --> Tokio[tokio::sync]
         Async --> AsyncStd[async_std]
     end
-    
+
     subgraph "使用模式"
         Pattern[并发模式]
         Pattern --> ProducerConsumer[生产者-消费者]
@@ -95,11 +95,11 @@ graph TB
         Pattern --> Pipeline[流水线]
         Pattern --> PubSub[发布-订阅]
     end
-    
+
     MPSC -.适用于.-> ProducerConsumer
     Crossbeam -.适用于.-> WorkQueue
     Async -.适用于.-> Pipeline
-    
+
     style MP fill:#ff6b6b,color:#fff
     style Channel fill:#4ecdc4,color:#fff
     style Pattern fill:#95e1d3,color:#333
@@ -113,18 +113,18 @@ sequenceDiagram
     participant P2 as 生产者2
     participant Ch as 通道
     participant C as 消费者
-    
+
     Note over Ch: MPSC: 多生产者单消费者
-    
+
     P1->>Ch: send(msg1)
     Note over Ch: 所有权转移
     P2->>Ch: send(msg2)
-    
+
     Ch->>C: recv() -> msg1
     Note over C: 获得所有权
-    
+
     Ch->>C: recv() -> msg2
-    
+
     Note over P1,C: Rust 1.90: 优化的通道性能
 ```
 
@@ -214,9 +214,9 @@ fn main() {
         println!("线程：准备发送 '{}'", val);
         // 使用 tx.send() 发送数据。
         // `send` 方法会获取其参数的所有权。
-        tx.send(val).unwrap(); 
+        tx.send(val).unwrap();
         // 此时 `val` 的所有权已经转移，下一行代码将无法编译
-        // println!("线程：发送后 val = {}", val); 
+        // println!("线程：发送后 val = {}", val);
     });
 
     // 主线程在这里等待，直到从通道接收到值
@@ -348,15 +348,15 @@ graph LR
         A1[send] --> A2[队列操作<br/>~50ns]
         A3[recv] --> A4[队列操作<br/>~60ns]
     end
-    
+
     subgraph "Rust 1.90"
         B1[send] --> B2[优化队列<br/>~40ns]
         B3[recv] --> B4[优化队列<br/>~48ns]
     end
-    
+
     A2 -.性能提升 20%.-> B2
     A4 -.性能提升 20%.-> B4
-    
+
     style B2 fill:#51cf66,color:#fff
     style B4 fill:#51cf66,color:#fff
 ```
@@ -370,29 +370,29 @@ use std::time::{Duration, Instant};
 
 fn main() {
     println!("=== Rust 1.90 MPSC 性能示例 ===\n");
-    
+
     let (tx, rx) = mpsc::channel();
     let num_messages = 100_000;
-    
+
     // 生产者线程
     let producer = thread::spawn(move || {
         let start = Instant::now();
-        
+
         for i in 0..num_messages {
             // Rust 1.90: 优化的 send 性能
             tx.send(i).unwrap();
         }
-        
+
         let duration = start.elapsed();
         println!("发送 {} 条消息耗时: {:?}", num_messages, duration);
         println!("平均延迟: {:?}/msg", duration / num_messages);
     });
-    
+
     // 消费者线程
     let consumer = thread::spawn(move || {
         let start = Instant::now();
         let mut count = 0;
-        
+
         // Rust 1.90: 改进的迭代器性能
         for msg in rx.iter() {
             count += 1;
@@ -400,12 +400,12 @@ fn main() {
                 break;
             }
         }
-        
+
         let duration = start.elapsed();
         println!("\n接收 {} 条消息耗时: {:?}", count, duration);
         println!("吞吐量: {:.2} msg/s", count as f64 / duration.as_secs_f64());
     });
-    
+
     producer.join().unwrap();
     consumer.join().unwrap();
 }
@@ -420,35 +420,35 @@ use std::time::Duration;
 
 fn main() {
     println!("=== Rust 1.90 有界通道示例 ===\n");
-    
+
     // 创建容量为5的有界通道
     let (tx, rx) = sync_channel(5);
-    
+
     // 快速生产者
     let producer = thread::spawn(move || {
         for i in 0..10 {
             println!("尝试发送: {}", i);
-            
+
             // Rust 1.90: 改进的阻塞机制
             match tx.send(i) {
                 Ok(_) => println!("✅ 发送成功: {}", i),
                 Err(e) => println!("❌ 发送失败: {}", e),
             }
-            
+
             thread::sleep(Duration::from_millis(100));
         }
     });
-    
+
     // 慢速消费者
     let consumer = thread::spawn(move || {
         thread::sleep(Duration::from_millis(300)); // 延迟开始
-        
+
         for msg in rx.iter().take(10) {
             println!("  🔽 接收: {}", msg);
             thread::sleep(Duration::from_millis(200)); // 慢速处理
         }
     });
-    
+
     producer.join().unwrap();
     consumer.join().unwrap();
 }
@@ -469,16 +469,16 @@ struct Message {
 
 fn main() {
     println!("=== Rust 1.90 多生产者示例 ===\n");
-    
+
     let (tx, rx) = mpsc::channel();
     let num_producers = 4;
-    
+
     // 创建多个生产者
     let mut handles = vec![];
-    
+
     for id in 0..num_producers {
         let tx_clone = tx.clone();
-        
+
         let handle = thread::spawn(move || {
             for i in 0..3 {
                 let msg = Message {
@@ -486,29 +486,29 @@ fn main() {
                     content: format!("Message-{}", i),
                     timestamp: std::time::Instant::now(),
                 };
-                
+
                 // Rust 1.90: 克隆的发送端性能优化
                 tx_clone.send(msg).unwrap();
                 thread::sleep(std::time::Duration::from_millis(50));
             }
         });
-        
+
         handles.push(handle);
     }
-    
+
     // 必须丢弃原始发送端
     drop(tx);
-    
+
     // 消费者在主线程
     for msg in rx {
         println!("{:?}", msg);
     }
-    
+
     // 等待所有生产者完成
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     println!("\n所有消息已处理!");
 }
 ```
@@ -539,7 +539,7 @@ mindmap
       内存受限
         有界通道
         固定容量
-    
+
     功能需求
       MPSC
         std::mpsc
@@ -553,7 +553,7 @@ mindmap
       优先级
         自定义实现
         priority_queue
-    
+
     生态要求
       纯Rust
         std::mpsc
@@ -635,9 +635,9 @@ mindmap
 
 ---
 
-**文档状态**: ✅ 已完成 (2025-10-19 增强版)  
-**质量等级**: S级 (卓越)  
-**Rust 1.90 支持**: ✅ 完全支持并优化  
+**文档状态**: ✅ 已完成 (2025-10-19 增强版)
+**质量等级**: S级 (卓越)
+**Rust 1.90 支持**: ✅ 完全支持并优化
 **增强内容**: ✅ 知识图谱 + 性能对比 + 丰富示例
 
 **章节导航**:

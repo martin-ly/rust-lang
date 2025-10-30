@@ -85,14 +85,14 @@ use tracing::{info, warn, error, debug, trace};
 pub fn structured_logging_example() {
     // 基础日志
     info!("Server starting");
-    
+
     // 带字段的结构化日志
     info!(
         user_id = 12345,
         action = "login",
         "User logged in successfully"
     );
-    
+
     // 错误日志
     error!(
         error = ?std::io::Error::from(std::io::ErrorKind::NotFound),
@@ -135,10 +135,10 @@ static HTTP_DURATION: Lazy<Histogram> = Lazy::new(|| {
 pub async fn handle_request() {
     HTTP_REQUESTS.inc();
     let timer = HTTP_DURATION.start_timer();
-    
+
     // 处理请求
     process_request().await;
-    
+
     timer.observe_duration();
 }
 
@@ -174,15 +174,15 @@ pub fn init_observability() -> anyhow::Result<()> {
                 .with_endpoint("http://localhost:4317")
         )
         .install_batch(opentelemetry::runtime::Tokio)?;
-    
+
     // 创建 tracing 订阅器
     let telemetry = OpenTelemetryLayer::new(tracer);
     let subscriber = Registry::default()
         .with(tracing_subscriber::fmt::layer())
         .with(telemetry);
-    
+
     tracing::subscriber::set_global_default(subscriber)?;
-    
+
     Ok(())
 }
 
@@ -197,13 +197,13 @@ pub fn init_observability() -> anyhow::Result<()> {
 )]
 pub async fn process_order(order: Order) -> Result<(), String> {
     info!("Processing order");
-    
+
     // 创建子span
     let payment_span = tracing::info_span!("process_payment");
     let _guard = payment_span.enter();
-    
+
     process_payment(&order).await?;
-    
+
     Ok(())
 }
 
@@ -292,12 +292,12 @@ impl<C: Component> Component for TimingDecorator<C> {
         let start = Instant::now();
         let result = self.component.execute();
         let duration = start.elapsed();
-        
+
         tracing::info!(
             duration_ms = %duration.as_millis(),
             "Component execution completed"
         );
-        
+
         result
     }
 }
@@ -315,18 +315,18 @@ use tracing_subscriber::{fmt, EnvFilter, layer::SubscriberExt};
 pub fn init_production_observability() {
     let filter = EnvFilter::try_from_default_env()
         .unwrap_or_else(|_| EnvFilter::new("info"));
-    
+
     let fmt_layer = fmt::layer()
         .json()                    // JSON格式输出
         .with_current_span(true)   // 包含当前span
         .with_span_list(true)      // 包含span列表
         .with_thread_ids(true)     // 包含线程ID
         .with_target(false);       // 不包含目标模块
-    
+
     let subscriber = tracing_subscriber::registry()
         .with(filter)
         .with(fmt_layer);
-    
+
     tracing::subscriber::set_global_default(subscriber)
         .expect("Failed to set subscriber");
 }
@@ -341,7 +341,7 @@ use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 fn with_tracing(c: &mut Criterion) {
     init_observability().unwrap();
-    
+
     c.bench_function("with_tracing", |b| {
         b.iter(|| {
             tracing::info!("Processing request");
@@ -415,5 +415,5 @@ criterion_main!(benches);
 
 ---
 
-**文档状态**: ✅ 已完成  
+**文档状态**: ✅ 已完成
 **最后更新**: 2025-10-24

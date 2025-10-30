@@ -1,8 +1,8 @@
 ﻿# C04 泛型编程 - Trait 系统指南
 
-**文档类型**: Tier 2 实践指南  
-**难度级别**: ⭐⭐⭐ 中级  
-**预计学习时间**: 4-5 小时  
+**文档类型**: Tier 2 实践指南
+**难度级别**: ⭐⭐⭐ 中级
+**预计学习时间**: 4-5 小时
 **最后更新**: 2025-10-22
 
 ---
@@ -179,11 +179,11 @@ impl Shape for Circle {
     fn area(&self) -> f64 {
         std::f64::consts::PI * self.radius * self.radius
     }
-    
+
     fn perimeter(&self) -> f64 {
         2.0 * std::f64::consts::PI * self.radius
     }
-    
+
     fn name(&self) -> &str {
         "Circle"
     }
@@ -198,11 +198,11 @@ impl Shape for Rectangle {
     fn area(&self) -> f64 {
         self.width * self.height
     }
-    
+
     fn perimeter(&self) -> f64 {
         2.0 * (self.width + self.height)
     }
-    
+
     fn name(&self) -> &str {
         "Rectangle"
     }
@@ -246,7 +246,7 @@ trait Logger {
     fn log(&self, message: &str) {
         println!("[LOG] {}", message);
     }
-    
+
     fn error(&self, message: &str) {
         println!("[ERROR] {}", message);
     }
@@ -270,7 +270,7 @@ impl Logger for CustomLogger {
 fn main() {
     let console = ConsoleLogger;
     let custom = CustomLogger;
-    
+
     console.log("Using default");  // [LOG] Using default
     custom.log("Using custom");    // >>> Using custom
 }
@@ -281,7 +281,7 @@ fn main() {
 ```rust
 trait Summary {
     fn author(&self) -> String;
-    
+
     fn summarize(&self) -> String {
         format!("(Read more from {}...)", self.author())
     }
@@ -481,7 +481,7 @@ fn main() {
         Box::new(Circle),
         Box::new(Square),
     ];
-    
+
     for shape in shapes {
         shape.draw();
     }
@@ -810,7 +810,7 @@ impl Wrapper {
     fn inner(&self) -> &Vec<String> {
         &self.0
     }
-    
+
     fn into_inner(self) -> Vec<String> {
         self.0
     }
@@ -821,7 +821,7 @@ use std::ops::Deref;
 
 impl Deref for Wrapper {
     type Target = Vec<String>;
-    
+
     fn deref(&self) -> &Self::Target {
         &self.0
     }
@@ -938,12 +938,12 @@ impl PluginManager {
             plugins: Vec::new(),
         }
     }
-    
+
     fn register(&mut self, plugin: Box<dyn Plugin>) {
         println!("Registered: {} v{}", plugin.name(), plugin.version());
         self.plugins.push(plugin);
     }
-    
+
     fn execute_all(&self) {
         for plugin in &self.plugins {
             plugin.execute();
@@ -971,7 +971,7 @@ struct StringData(String);
 
 impl Converter<i32> for StringData {
     type Error = std::num::ParseIntError;
-    
+
     fn convert(&self) -> Result<i32, Self::Error> {
         self.0.parse()
     }
@@ -979,7 +979,7 @@ impl Converter<i32> for StringData {
 
 impl Converter<f64> for StringData {
     type Error = std::num::ParseFloatError;
-    
+
     fn convert(&self) -> Result<f64, Self::Error> {
         self.0.parse()
     }
@@ -987,10 +987,10 @@ impl Converter<f64> for StringData {
 
 fn main() {
     let data = StringData(String::from("42"));
-    
+
     let int_result: Result<i32, _> = data.convert();
     println!("As i32: {:?}", int_result); // Ok(42)
-    
+
     let float_result: Result<f64, _> = data.convert();
     println!("As f64: {:?}", float_result); // Ok(42.0)
 }
@@ -1054,7 +1054,7 @@ trait Config {
     fn timeout(&self) -> u64 {
         30 // 合理的默认值
     }
-    
+
     fn retries(&self) -> u32 {
         3
     }

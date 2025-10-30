@@ -102,11 +102,11 @@ impl BasicTcpServer {
     /// 启动服务器
     pub async fn run(&self) -> NetworkResult<()> {
         println!("TCP服务器启动在: {}", self.listener.local_addr()?);
-        
+
         loop {
             let (stream, addr) = self.listener.accept().await?;
             println!("新连接来自: {}", addr);
-            
+
             let handler = self.handler.clone();
             tokio::spawn(async move {
                 if let Err(e) = handler(stream) {
@@ -120,17 +120,17 @@ impl BasicTcpServer {
 /// 回显处理器
 pub async fn echo_handler(mut stream: TcpStream) -> NetworkResult<()> {
     let mut buffer = [0; 1024];
-    
+
     loop {
         let n = stream.read(&mut buffer).await?;
         if n == 0 {
             break; // 连接关闭
         }
-        
+
         // 回显数据
         stream.write_all(&buffer[..n]).await?;
     }
-    
+
     Ok(())
 }
 
@@ -140,7 +140,7 @@ async fn main() -> NetworkResult<()> {
     let server = BasicTcpServer::new("127.0.0.1:8080", |stream| {
         Box::pin(echo_handler(stream))
     }).await?;
-    
+
     server.run().await
 }
 ```
@@ -173,13 +173,13 @@ impl AsyncTcpServer {
     pub async fn handle_connection(&self, mut stream: TcpStream) -> NetworkResult<()> {
         let addr = stream.peer_addr()?.to_string();
         let (tx, mut rx) = mpsc::unbounded_channel();
-        
+
         // 注册连接
         {
             let mut connections = self.connections.write().await;
             connections.insert(addr.clone(), tx);
         }
-        
+
         // 启动读取任务
         let connections = self.connections.clone();
         let addr_clone = addr.clone();
@@ -203,12 +203,12 @@ impl AsyncTcpServer {
                     }
                 }
             }
-            
+
             // 移除连接
             let mut connections = connections.write().await;
             connections.remove(&addr_clone);
         });
-        
+
         // 启动写入任务
         let write_task = tokio::spawn(async move {
             while let Some(data) = rx.recv().await {
@@ -217,13 +217,13 @@ impl AsyncTcpServer {
                 }
             }
         });
-        
+
         // 等待任务完成
         tokio::select! {
             _ = read_task => {},
             _ = write_task => {},
         }
-        
+
         Ok(())
     }
 }
@@ -232,16 +232,16 @@ impl AsyncTcpServer {
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     use tokio::net::TcpListener;
-    
+
     let server = AsyncTcpServer::new();
     let listener = TcpListener::bind("127.0.0.1:8080").await?;
-    
+
     println!("异步TCP服务器启动在: {}", listener.local_addr()?);
-    
+
     loop {
         let (stream, addr) = listener.accept().await?;
         println!("新连接: {}", addr);
-        
+
         let server = server.clone();
         tokio::spawn(async move {
             if let Err(e) = server.handle_connection(stream).await {
@@ -324,21 +324,21 @@ impl TcpClient {
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     let mut client = TcpClient::new("127.0.0.1:8080");
-    
+
     // 连接服务器
     client.connect().await?;
-    
+
     // 发送数据
     let message = b"Hello, Server!";
     client.send(message).await?;
-    
+
     // 接收响应
     let response = client.receive().await?;
     println!("服务器响应: {}", String::from_utf8_lossy(&response));
-    
+
     // 断开连接
     client.disconnect().await?;
-    
+
     Ok(())
 }
 ```
@@ -394,7 +394,7 @@ impl TcpConnectionPool {
     /// 创建新的连接池
     pub fn new(addr: &str, config: PoolConfig) -> Self {
         let semaphore = Arc::new(Semaphore::new(config.max_connections));
-        
+
         Self {
             config,
             addr: addr.to_string(),
@@ -412,10 +412,10 @@ impl TcpConnectionPool {
         // 尝试从池中获取连接
         {
             let mut connections = self.connections.lock().await;
-            
+
             // 清理过期连接
             self.cleanup_expired_connections(&mut connections).await;
-            
+
             // 查找可用连接
             while let Some(mut conn_info) = connections.pop_front() {
                 if self.is_connection_healthy(&conn_info).await {
@@ -449,7 +449,7 @@ impl TcpConnectionPool {
 
         // 这里可以添加更多的健康检查逻辑
         // 例如：发送ping消息、检查连接状态等
-        
+
         true
     }
 
@@ -464,7 +464,7 @@ impl TcpConnectionPool {
     /// 归还连接到池中
     async fn return_connection(&self, mut conn_info: ConnectionInfo) {
         conn_info.last_used = Instant::now();
-        
+
         let mut connections = self.connections.lock().await;
         connections.push_back(conn_info);
     }
@@ -502,7 +502,7 @@ impl Drop for PooledConnection {
                 created_at: Instant::now(),
                 last_used: Instant::now(),
             };
-            
+
             let pool = self.pool.clone();
             tokio::spawn(async move {
                 pool.return_connection(conn_info).await;
@@ -520,9 +520,9 @@ async fn main() -> NetworkResult<()> {
         idle_timeout: Duration::from_secs(60),
         connection_timeout: Duration::from_secs(10),
     };
-    
+
     let pool = TcpConnectionPool::new("127.0.0.1:8080", config);
-    
+
     // 并发使用连接池
     let mut handles = vec![];
     for i in 0..10 {
@@ -538,12 +538,12 @@ async fn main() -> NetworkResult<()> {
         });
         handles.push(handle);
     }
-    
+
     // 等待所有任务完成
     for handle in handles {
         handle.await??;
     }
-    
+
     Ok(())
 }
 ```
@@ -590,7 +590,7 @@ impl HttpServer {
         loop {
             let (stream, _) = listener.accept().await?;
             let routes = self.routes.clone();
-            
+
             tokio::spawn(async move {
                 if let Err(e) = Self::handle_connection(stream, routes).await {
                     eprintln!("处理HTTP连接错误: {}", e);
@@ -606,11 +606,11 @@ impl HttpServer {
     ) -> NetworkResult<()> {
         let mut buffer = [0; 8192];
         let n = stream.read(&mut buffer).await?;
-        
+
         // 解析HTTP请求
         let request_str = String::from_utf8_lossy(&buffer[..n]);
         let request = HttpRequest::parse(&request_str)?;
-        
+
         // 查找路由处理器
         let response = if let Some(handler) = routes.get(&request.path) {
             handler(request)
@@ -623,7 +623,7 @@ impl HttpServer {
         // 发送HTTP响应
         let response_str = response.to_string();
         stream.write_all(response_str.as_bytes()).await?;
-        
+
         Ok(())
     }
 }
@@ -632,13 +632,13 @@ impl HttpServer {
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     let mut server = HttpServer::new();
-    
+
     // 添加路由
     server.add_route("/", |_| {
         HttpResponse::new(HttpStatusCode::OK)
             .with_body("Hello, World!".as_bytes().to_vec())
     });
-    
+
     server.add_route("/api/users", |request| {
         match request.method {
             HttpMethod::GET => {
@@ -655,7 +655,7 @@ async fn main() -> NetworkResult<()> {
             }
         }
     });
-    
+
     // 启动服务器
     server.run("127.0.0.1:8080").await
 }
@@ -835,7 +835,7 @@ impl WebSocketServer {
         loop {
             let (stream, addr) = listener.accept().await?;
             let clients = self.clients.clone();
-            
+
             tokio::spawn(async move {
                 if let Err(e) = Self::handle_connection(stream, addr.to_string(), clients).await {
                     eprintln!("处理WebSocket连接错误: {}", e);
@@ -854,7 +854,7 @@ impl WebSocketServer {
         let mut buffer = [0; 1024];
         let n = stream.read(&mut buffer).await?;
         let request = String::from_utf8_lossy(&buffer[..n]);
-        
+
         if let Some(response) = Self::handle_handshake(&request) {
             stream.write_all(response.as_bytes()).await?;
         } else {
@@ -915,7 +915,7 @@ impl WebSocketServer {
                     }
                 }
             }
-            
+
             // 移除客户端
             let mut clients = clients_clone.lock().await;
             clients.remove(&client_id_clone);
@@ -947,10 +947,10 @@ impl WebSocketServer {
             let key_line = &request[key_start..];
             if let Some(key_end) = key_line.find("\r\n") {
                 let key = &key_line[19..key_end];
-                
+
                 // 生成响应密钥
                 let response_key = Self::generate_response_key(key);
-                
+
                 // 构建握手响应
                 let response = format!(
                     "HTTP/1.1 101 Switching Protocols\r\n\
@@ -959,7 +959,7 @@ impl WebSocketServer {
                      Sec-WebSocket-Accept: {}\r\n\r\n",
                     response_key
                 );
-                
+
                 return Some(response);
             }
         }
@@ -970,14 +970,14 @@ impl WebSocketServer {
     fn generate_response_key(key: &str) -> String {
         use sha1::{Digest, Sha1};
         use base64;
-        
+
         const WEBSOCKET_MAGIC: &str = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
         let combined = format!("{}{}", key, WEBSOCKET_MAGIC);
-        
+
         let mut hasher = Sha1::new();
         hasher.update(combined.as_bytes());
         let hash = hasher.finalize();
-        
+
         base64::encode(&hash)
     }
 }
@@ -1015,13 +1015,13 @@ impl UdpServer {
     /// 启动服务器
     pub async fn run(&self) -> NetworkResult<()> {
         println!("UDP服务器启动在: {}", self.socket.local_addr()?);
-        
+
         let mut buffer = [0; 1024];
-        
+
         loop {
             let (n, addr) = self.socket.recv_from(&mut buffer).await?;
             println!("收到来自 {} 的数据: {} 字节", addr, n);
-            
+
             // 回显数据
             self.socket.send_to(&buffer[..n], addr).await?;
         }
@@ -1124,7 +1124,7 @@ impl AsyncTaskScheduler {
     /// 创建新的任务调度器
     pub fn new() -> Self {
         let (sender, receiver) = mpsc::unbounded_channel();
-        
+
         Self {
             task_queue: BinaryHeap::new(),
             task_id_counter: 0,
@@ -1160,7 +1160,7 @@ impl AsyncTaskScheduler {
     /// 启动调度器
     pub async fn run(&mut self) -> NetworkResult<()> {
         let mut interval = tokio::time::interval(Duration::from_millis(100));
-        
+
         loop {
             tokio::select! {
                 // 接收新任务
@@ -1169,7 +1169,7 @@ impl AsyncTaskScheduler {
                         self.task_queue.push(task);
                     }
                 }
-                
+
                 // 处理到期的任务
                 _ = interval.tick() => {
                     self.process_due_tasks().await?;
@@ -1257,6 +1257,6 @@ async fn main() -> NetworkResult<()> {
 
 **C10 Networks 示例代码与应用场景增强版** - 为网络编程提供完整的实践指南！
 
-*最后更新: 2025年1月*  
-*文档版本: v2.0*  
+*最后更新: 2025年1月*
+*文档版本: v2.0*
 *维护者: C10 Networks 开发团队*

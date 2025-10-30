@@ -1,13 +1,13 @@
 # Rust 2025 线程同步机制
 
-> **文档定位**: 深入掌握Rust线程同步原语的实践指南  
-> **先修知识**: [01_basic_threading](./01_basic_threading.md) | [02_message_passing](./02_message_passing.md)  
+> **文档定位**: 深入掌握Rust线程同步原语的实践指南
+> **先修知识**: [01_basic_threading](./01_basic_threading.md) | [02_message_passing](./02_message_passing.md)
 > **相关文档**: [03_synchronization_primitives](./03_synchronization_primitives.md) | [知识图谱](./KNOWLEDGE_GRAPH.md)
 
-**最后更新**: 2025-10-19 (增强版)  
-**适用版本**: Rust 1.90+  
-**难度等级**: ⭐⭐⭐  
-**文档类型**: ⚙️ 实践+理论  
+**最后更新**: 2025-10-19 (增强版)
+**适用版本**: Rust 1.90+
+**难度等级**: ⭐⭐⭐
+**文档类型**: ⚙️ 实践+理论
 **增强内容**: ✅ 知识图谱 | ✅ 多维对比 | ✅ Rust 1.90 示例
 
 ---
@@ -66,24 +66,24 @@
 graph TB
     subgraph "同步原语体系"
         SP[Synchronization Primitives]
-        
+
         SP --> Locks[锁机制]
         SP --> Signaling[信号机制]
         SP --> Atomic[原子操作]
-        
+
         Locks --> Mutex[Mutex]
         Locks --> RwLock[RwLock]
         Locks --> Recursive[递归锁]
-        
+
         Signaling --> Condvar[条件变量]
         Signaling --> Semaphore[信号量]
         Signaling --> Barrier[屏障]
-        
+
         Atomic --> AtomicInt[原子整数]
         Atomic --> AtomicBool[原子布尔]
         Atomic --> AtomicPtr[原子指针]
     end
-    
+
     subgraph "使用场景"
         Mutex --> S1[互斥访问]
         RwLock --> S2[读写分离]
@@ -92,18 +92,18 @@ graph TB
         Barrier --> S5[阶段同步]
         Atomic --> S6[无锁操作]
     end
-    
+
     subgraph "Rust 1.90 增强"
         R90[Rust 1.90]
         R90 --> E1[Mutex性能提升]
         R90 --> E2[RwLock公平性]
         R90 --> E3[Barrier可重用]
-        
+
         Mutex -.优化.-> E1
         RwLock -.改进.-> E2
         Barrier -.增强.-> E3
     end
-    
+
     style SP fill:#ff6b6b,color:#fff
     style Locks fill:#4ecdc4,color:#fff
     style Signaling fill:#95e1d3,color:#333
@@ -115,26 +115,26 @@ graph TB
 ```mermaid
 graph TD
     Start[需要同步?] --> Q1{需要修改<br/>共享数据?}
-    
+
     Q1 -->|是| Q2{读写模式?}
     Q1 -->|否| Q5{需要等待<br/>条件?}
-    
+
     Q2 -->|读多写少| UseRwLock[使用 RwLock]
     Q2 -->|平衡| UseMutex[使用 Mutex]
     Q2 -->|写多| Q3{需要递归?}
-    
+
     Q3 -->|是| UseRecursive[递归锁]
     Q3 -->|否| UseMutex
-    
+
     Q5 -->|是| Q6{多个条件?}
     Q5 -->|否| Q7{需要计数?}
-    
+
     Q6 -->|是| UseCondvar[使用 Condvar]
     Q6 -->|否| UseBarrier[使用 Barrier]
-    
+
     Q7 -->|是| UseSemaphore[使用 Semaphore]
     Q7 -->|否| UseAtomic[使用 Atomic]
-    
+
     style Start fill:#ff6b6b,color:#fff
     style UseMutex fill:#51cf66,color:#fff
     style UseRwLock fill:#339af0,color:#fff
@@ -217,7 +217,7 @@ use std::thread;
 fn main() {
     let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];
-    
+
     for _ in 0..10 {
         let counter = Arc::clone(&counter);
         let handle = thread::spawn(move || {
@@ -226,11 +226,11 @@ fn main() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     println!("Result: {}", *counter.lock().unwrap());
 }
 ```
@@ -254,39 +254,39 @@ impl BankAccount {
             transactions: Mutex::new(Vec::new()),
         }
     }
-    
+
     fn deposit(&self, amount: f64) -> Result<(), String> {
         if amount <= 0.0 {
             return Err("Deposit amount must be positive".to_string());
         }
-        
+
         let mut balance = self.balance.lock().unwrap();
         *balance += amount;
-        
+
         let mut transactions = self.transactions.lock().unwrap();
         transactions.push(format!("Deposit: +{:.2}", amount));
-        
+
         Ok(())
     }
-    
+
     fn withdraw(&self, amount: f64) -> Result<(), String> {
         if amount <= 0.0 {
             return Err("Withdrawal amount must be positive".to_string());
         }
-        
+
         let mut balance = self.balance.lock().unwrap();
         if *balance < amount {
             return Err("Insufficient funds".to_string());
         }
-        
+
         *balance -= amount;
-        
+
         let mut transactions = self.transactions.lock().unwrap();
         transactions.push(format!("Withdrawal: -{:.2}", amount));
-        
+
         Ok(())
     }
-    
+
     fn get_balance(&self) -> f64 {
         *self.balance.lock().unwrap()
     }
@@ -313,23 +313,23 @@ impl RecursiveCounter {
             depth: Mutex::new(0),
         }
     }
-    
+
     fn increment(&self) {
         let mut depth = self.depth.lock().unwrap();
         *depth += 1;
         println!("Entering increment at depth {}", *depth);
-        
+
         if *depth < 3 {
             self.increment(); // 递归调用
         }
-        
+
         let mut value = self.value.lock().unwrap();
         *value += 1;
         println!("Incremented to {} at depth {}", *value, *depth);
-        
+
         *depth -= 1;
     }
-    
+
     fn get_value(&self) -> i32 {
         *self.value.lock().unwrap()
     }
@@ -361,22 +361,22 @@ impl SharedData {
             write_count: RwLock::new(0),
         }
     }
-    
+
     fn read(&self) -> Vec<i32> {
         let data = self.data.read().unwrap();
         let mut read_count = self.read_count.write().unwrap();
         *read_count += 1;
         data.clone()
     }
-    
+
     fn write(&self, value: i32) {
         let mut data = self.data.write().unwrap();
         data.push(value);
-        
+
         let mut write_count = self.write_count.write().unwrap();
         *write_count += 1;
     }
-    
+
     fn get_stats(&self) -> (u32, u32) {
         let read_count = *self.read_count.read().unwrap();
         let write_count = *self.write_count.read().unwrap();
@@ -408,22 +408,22 @@ impl SharedState {
             ready: Condvar::new(),
         }
     }
-    
+
     fn wait_for_data(&self) -> Vec<i32> {
         let mut data = self.data.lock().unwrap();
-        
+
         // 等待数据可用
         while data.is_empty() {
             data = self.ready.wait(data).unwrap();
         }
-        
+
         data.clone()
     }
-    
+
     fn add_data(&self, value: i32) {
         let mut data = self.data.lock().unwrap();
         data.push(value);
-        
+
         // 通知等待的线程
         self.ready.notify_one();
     }
@@ -453,25 +453,25 @@ impl Semaphore {
             condvar: Condvar::new(),
         }
     }
-    
+
     fn acquire(&self) {
         let mut permits = self.permits.lock().unwrap();
-        
+
         while *permits == 0 {
             permits = self.condvar.wait(permits).unwrap();
         }
-        
+
         *permits -= 1;
     }
-    
+
     fn release(&self) {
         let mut permits = self.permits.lock().unwrap();
         *permits += 1;
-        
+
         // 通知等待的线程
         self.condvar.notify_one();
     }
-    
+
     fn available_permits(&self) -> usize {
         *self.permits.lock().unwrap()
     }
@@ -492,31 +492,31 @@ use std::time::Duration;
 fn main() {
     let barrier = Arc::new(Barrier::new(4));
     let mut handles = vec![];
-    
+
     for i in 0..4 {
         let barrier = Arc::clone(&barrier);
         let handle = thread::spawn(move || {
             println!("Thread {} starting phase 1", i);
             thread::sleep(Duration::from_millis(100 * (i + 1) as u64));
-            
+
             // 等待所有线程到达屏障
             barrier.wait();
             println!("Thread {} completed phase 1", i);
-            
+
             println!("Thread {} starting phase 2", i);
             thread::sleep(Duration::from_millis(50 * (4 - i) as u64));
-            
+
             // 再次同步
             barrier.wait();
             println!("Thread {} completed phase 2", i);
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     println!("All threads completed");
 }
 ```
@@ -542,19 +542,19 @@ impl AtomicCounter {
             value: AtomicU64::new(0),
         }
     }
-    
+
     fn increment(&self) -> u64 {
         self.value.fetch_add(1, Ordering::Relaxed)
     }
-    
+
     fn decrement(&self) -> u64 {
         self.value.fetch_sub(1, Ordering::Relaxed)
     }
-    
+
     fn get(&self) -> u64 {
         self.value.load(Ordering::Relaxed)
     }
-    
+
     fn compare_and_swap(&self, current: u64, new: u64) -> u64 {
         self.value.compare_exchange(
             current,
@@ -588,7 +588,7 @@ impl FineGrainedCounter {
         }
         Self { counters }
     }
-    
+
     fn increment(&self, index: usize) {
         if let Some(counter) = self.counters.get(index) {
             if let Ok(mut value) = counter.lock() {
@@ -596,7 +596,7 @@ impl FineGrainedCounter {
             }
         }
     }
-    
+
     fn get_total(&self) -> u32 {
         self.counters.iter()
             .filter_map(|c| c.lock().ok())
@@ -626,29 +626,29 @@ impl BankAccount {
             balance: Mutex::new(balance),
         }
     }
-    
+
     fn transfer_to(&self, other: &BankAccount, amount: f64) -> Result<(), String> {
         if amount <= 0.0 {
             return Err("Transfer amount must be positive".to_string());
         }
-        
+
         // 按ID顺序获取锁，避免死锁
         let (first, second) = if self.id < other.id {
             (self, other)
         } else {
             (other, self)
         };
-        
+
         let mut first_balance = first.balance.lock().unwrap();
         let mut second_balance = second.balance.lock().unwrap();
-        
+
         if *first_balance < amount {
             return Err("Insufficient funds".to_string());
         }
-        
+
         *first_balance -= amount;
         *second_balance += amount;
-        
+
         Ok(())
     }
 }
@@ -674,7 +674,7 @@ Rust 2025的线程同步机制提供了强大而安全的并发控制能力。�
 
 ---
 
-**文档状态**: ✅ 已完成  
-**质量等级**: A级 (优秀)  
-**Rust 2025 支持**: ✅ 完全支持  
+**文档状态**: ✅ 已完成
+**质量等级**: A级 (优秀)
+**Rust 2025 支持**: ✅ 完全支持
 **实践指导**: ✅ 完整覆盖

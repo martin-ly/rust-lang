@@ -1,6 +1,5 @@
 ﻿# 网络运行时库对比分析报告
 
-
 ## 📊 目录
 
 - [网络运行时库对比分析报告](#网络运行时库对比分析报告)
@@ -44,11 +43,10 @@
     - [8.2 实施建议](#82-实施建议)
     - [8.3 风险控制](#83-风险控制)
 
-
 ## 执行摘要
 
-**日期**: 2025年9月28日  
-**目标**: 对比分析主流Rust网络运行时库，为c10_networks选择最佳技术栈  
+**日期**: 2025年9月28日
+**目标**: 对比分析主流Rust网络运行时库，为c10_networks选择最佳技术栈
 **状态**: ✅ 分析完成，推荐方案确定
 
 ## 1. 主要网络运行时库对比
@@ -95,10 +93,10 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let listener = TcpListener::bind("127.0.0.1:8080").await?;
-    
+
     loop {
         let (mut socket, _) = listener.accept().await?;
-        
+
         tokio::spawn(async move {
             let mut buf = [0; 1024];
             loop {
@@ -127,7 +125,7 @@ use async_std::io::prelude::*;
 #[async_std::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let listener = TcpListener::bind("127.0.0.1:8080").await?;
-    
+
     let mut incoming = listener.incoming();
     while let Some(stream) = incoming.next().await {
         let mut stream = stream?;
@@ -214,12 +212,12 @@ use futures_util::{SinkExt, StreamExt};
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let url = "ws://localhost:8080/ws";
     let (ws_stream, _) = connect_async(url).await?;
-    
+
     let (mut write, mut read) = ws_stream.split();
-    
+
     // 发送消息
     write.send(Message::Text("Hello, WebSocket!".to_string())).await?;
-    
+
     // 接收消息
     while let Some(msg) = read.next().await {
         match msg? {
@@ -228,7 +226,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             _ => {}
         }
     }
-    
+
     Ok(())
 }
 ```
@@ -253,13 +251,13 @@ use std::net::IpAddr;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let resolver = TokioAsyncResolver::tokio_from_system_conf()?;
-    
+
     let response = resolver.lookup_ip("example.com").await?;
-    
+
     for ip in response.iter() {
         println!("Found IP: {}", ip);
     }
-    
+
     Ok(())
 }
 ```
@@ -287,21 +285,21 @@ use libp2p::{
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let key = identity::Keypair::generate_ed25519();
     let peer_id = PeerId::from(key.public());
-    
+
     let transport = tcp::tokio::Transport::new(tcp::Config::default())
         .upgrade(upgrade::Version::V1)
         .authenticate(noise::Config::new(&key)?)
         .multiplex(yamux::Config::default())
         .boxed();
-    
+
     let behaviour = gossipsub::Behaviour::new(
         gossipsub::MessageAuthenticity::Signed(key),
         gossipsub::Config::default(),
     )?;
-    
+
     let mut swarm = libp2p::Swarm::new(transport, behaviour, peer_id);
     Swarm::listen_on(&mut swarm, "/ip4/0.0.0.0/tcp/0".parse()?)?;
-    
+
     loop {
         match swarm.select_next_some().await {
             libp2p::swarm::SwarmEvent::NewListenAddr { address, .. } => {
@@ -542,6 +540,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ---
 
-**报告生成时间**: 2025年9月28日  
-**版本**: v1.0  
+**报告生成时间**: 2025年9月28日
+**版本**: v1.0
 **状态**: 完成

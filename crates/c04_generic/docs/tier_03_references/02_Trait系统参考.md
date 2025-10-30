@@ -38,9 +38,9 @@
     - [7.2 Trait 关系图](#72-trait-关系图)
   - [📚 相关参考](#-相关参考)
 
-**文档类型**: Tier 3 完整参考  
-**最后更新**: 2025-10-22  
-**Rust 版本**: 1.90+  
+**文档类型**: Tier 3 完整参考
+**最后更新**: 2025-10-22
+**Rust 版本**: 1.90+
 **参考类型**: 🔍 API 速查
 
 ---
@@ -98,9 +98,9 @@ where
 {
     type Error: std::error::Error;
     const VERSION: u32 = 1;
-    
+
     fn process(&self, input: Input) -> Result<Output, Self::Error>;
-    
+
     fn batch_process(&self, inputs: Vec<Input>) -> Vec<Result<Output, Self::Error>> {
         inputs.into_iter()
             .map(|input| self.process(input))
@@ -161,7 +161,7 @@ struct Counter {
 
 impl Iterator for Counter {
     type Item = u32;
-    
+
     fn next(&mut self) -> Option<u32> {
         self.count += 1;
         Some(self.count)
@@ -193,7 +193,7 @@ impl Iterator for Counter {
 ```rust
 pub trait Clone: Sized {
     fn clone(&self) -> Self;
-    
+
     fn clone_from(&mut self, source: &Self) {
         *self = source.clone()
     }
@@ -286,7 +286,7 @@ where
     Rhs: ?Sized,
 {
     fn eq(&self, other: &Rhs) -> bool;
-    
+
     fn ne(&self, other: &Rhs) -> bool {
         !self.eq(other)
     }
@@ -317,7 +317,7 @@ where
     Rhs: ?Sized,
 {
     fn partial_cmp(&self, other: &Rhs) -> Option<Ordering>;
-    
+
     fn lt(&self, other: &Rhs) -> bool { /* ... */ }
     fn le(&self, other: &Rhs) -> bool { /* ... */ }
     fn gt(&self, other: &Rhs) -> bool { /* ... */ }
@@ -326,7 +326,7 @@ where
 
 pub trait Ord: Eq + PartialOrd<Self> {
     fn cmp(&self, other: &Self) -> Ordering;
-    
+
     fn max(self, other: Self) -> Self where Self: Sized { /* ... */ }
     fn min(self, other: Self) -> Self where Self: Sized { /* ... */ }
     fn clamp(self, min: Self, max: Self) -> Self where Self: Sized { /* ... */ }
@@ -384,9 +384,9 @@ let s = String::from(42);  // 使用 From
 ```rust
 pub trait Iterator {
     type Item;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
-    
+
     // 提供的方法
     fn size_hint(&self) -> (usize, Option<usize>) { (0, None) }
     fn count(self) -> usize where Self: Sized { /* ... */ }
@@ -406,7 +406,7 @@ struct Counter {
 
 impl Iterator for Counter {
     type Item = u32;
-    
+
     fn next(&mut self) -> Option<u32> {
         if self.current < self.max {
             self.current += 1;
@@ -592,7 +592,7 @@ impl Display for MyVec {
 // 实现 Deref 以便使用 Vec 的方法
 impl Deref for MyVec {
     type Target = Vec<i32>;
-    
+
     fn deref(&self) -> &Vec<i32> {
         &self.0
     }

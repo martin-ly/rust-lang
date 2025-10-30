@@ -38,11 +38,11 @@
 
 ## 📋 项目概述
 
-**项目名称**: c07_process  
-**Rust 版本**: 1.90  
-**Edition**: 2024  
-**Resolver**: 3  
-**分析日期**: 2025年1月  
+**项目名称**: c07_process
+**Rust 版本**: 1.90
+**Edition**: 2024
+**Resolver**: 3
+**分析日期**: 2025年1月
 
 ## 🔍 当前特性使用情况分析
 
@@ -167,7 +167,7 @@ pub mod process {
     pub mod control;
     pub mod monitor;
     pub mod pool;
-    
+
     // 重新导出
     pub use lifecycle::*;
     pub use control::*;

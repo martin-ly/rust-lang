@@ -25,9 +25,9 @@
     - [视频课程](#视频课程)
   - [🏆 学习成就系统](#-学习成就系统)
 
-**版本**: 1.0.0  
-**Rust版本**: 1.90.0  
-**创建日期**: 2025年10月19日  
+**版本**: 1.0.0
+**Rust版本**: 1.90.0
+**创建日期**: 2025年10月19日
 **特性**: 渐进式学习 + 实践练习 + 自我评估
 
 ---
@@ -41,19 +41,19 @@ graph LR
     A[新手 Beginner] -->|2-3周| B[进阶 Intermediate]
     B -->|3-4周| C[高级 Advanced]
     C -->|持续| D[专家 Expert]
-    
+
     A -.包含.-> A1[基础数据结构]
     A -.包含.-> A2[简单算法]
     A -.包含.-> A3[Rust 基础]
-    
+
     B -.包含.-> B1[高级数据结构]
     B -.包含.-> B2[经典算法]
     B -.包含.-> B3[Rust 进阶]
-    
+
     C -.包含.-> C1[算法优化]
     C -.包含.-> C2[并行异步]
     C -.包含.-> C3[系统设计]
-    
+
     D -.包含.-> D1[理论研究]
     D -.包含.-> D2[性能调优]
     D -.包含.-> D3[创新算法]
@@ -89,14 +89,14 @@ pub fn find_max<T: Ord + Copy>(arr: &[T]) -> Option<T> {
     if arr.is_empty() {
         return None;
     }
-    
+
     let mut max = arr[0];
     for &item in arr.iter().skip(1) {
         if item > max {
             max = item;
         }
     }
-    
+
     Some(max)
 }
 
@@ -105,7 +105,7 @@ pub fn remove_duplicates(nums: &mut Vec<i32>) -> usize {
     if nums.is_empty() {
         return 0;
     }
-    
+
     let mut slow = 0;
     for fast in 1..nums.len() {
         if nums[fast] != nums[slow] {
@@ -113,27 +113,27 @@ pub fn remove_duplicates(nums: &mut Vec<i32>) -> usize {
             nums[slow] = nums[fast];
         }
     }
-    
+
     slow + 1
 }
 
 #[cfg(test)]
 mod week1_tests {
     use super::*;
-    
+
     #[test]
     fn test_reverse_array() {
         let mut arr = vec![1, 2, 3, 4, 5];
         reverse_array(&mut arr);
         assert_eq!(arr, vec![5, 4, 3, 2, 1]);
     }
-    
+
     #[test]
     fn test_find_max() {
         assert_eq!(find_max(&[1, 5, 3, 9, 2]), Some(9));
         assert_eq!(find_max::<i32>(&[]), None);
     }
-    
+
     #[test]
     fn test_remove_duplicates() {
         let mut nums = vec![1, 1, 2, 2, 3, 3, 3, 4];
@@ -165,17 +165,17 @@ mod week1_tests {
 /// 练习 1.4: 冒泡排序
 pub fn bubble_sort<T: Ord>(arr: &mut [T]) {
     let len = arr.len();
-    
+
     for i in 0..len {
         let mut swapped = false;
-        
+
         for j in 0..len - 1 - i {
             if arr[j] > arr[j + 1] {
                 arr.swap(j, j + 1);
                 swapped = true;
             }
         }
-        
+
         if !swapped {
             break; // 优化：已排序
         }
@@ -198,7 +198,7 @@ pub fn bubble_sort_with_stats<T: Ord>(arr: &mut [T]) -> (usize, usize) {
     let mut comparisons = 0;
     let mut swaps = 0;
     let len = arr.len();
-    
+
     for i in 0..len {
         for j in 0..len - 1 - i {
             comparisons += 1;
@@ -208,28 +208,28 @@ pub fn bubble_sort_with_stats<T: Ord>(arr: &mut [T]) -> (usize, usize) {
             }
         }
     }
-    
+
     (comparisons, swaps)
 }
 
 #[cfg(test)]
 mod sorting_tests {
     use super::*;
-    
+
     #[test]
     fn test_bubble_sort() {
         let mut arr = vec![64, 34, 25, 12, 22, 11, 90];
         bubble_sort(&mut arr);
         assert_eq!(arr, vec![11, 12, 22, 25, 34, 64, 90]);
     }
-    
+
     #[test]
     fn test_insertion_sort() {
         let mut arr = vec![64, 34, 25, 12, 22, 11, 90];
         insertion_sort(&mut arr);
         assert_eq!(arr, vec![11, 12, 22, 25, 34, 64, 90]);
     }
-    
+
     #[test]
     fn test_bubble_sort_stats() {
         let mut arr = vec![3, 1, 2];
@@ -262,17 +262,17 @@ mod sorting_tests {
 pub fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
     let mut left = 0;
     let mut right = arr.len();
-    
+
     while left < right {
         let mid = left + (right - left) / 2;
-        
+
         match arr[mid].cmp(target) {
             std::cmp::Ordering::Equal => return Some(mid),
             std::cmp::Ordering::Less => left = mid + 1,
             std::cmp::Ordering::Greater => right = mid,
         }
     }
-    
+
     None
 }
 
@@ -280,17 +280,17 @@ pub fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
 pub fn lower_bound<T: Ord>(arr: &[T], target: &T) -> usize {
     let mut left = 0;
     let mut right = arr.len();
-    
+
     while left < right {
         let mid = left + (right - left) / 2;
-        
+
         if arr[mid] < *target {
             left = mid + 1;
         } else {
             right = mid;
         }
     }
-    
+
     left
 }
 
@@ -299,34 +299,34 @@ pub fn find_peak_element(nums: &[i32]) -> Option<usize> {
     if nums.is_empty() {
         return None;
     }
-    
+
     let mut left = 0;
     let mut right = nums.len() - 1;
-    
+
     while left < right {
         let mid = left + (right - left) / 2;
-        
+
         if nums[mid] < nums[mid + 1] {
             left = mid + 1;
         } else {
             right = mid;
         }
     }
-    
+
     Some(left)
 }
 
 #[cfg(test)]
 mod search_tests {
     use super::*;
-    
+
     #[test]
     fn test_binary_search() {
         let arr = vec![1, 2, 3, 4, 5, 6, 7, 8, 9];
         assert_eq!(binary_search(&arr, &5), Some(4));
         assert_eq!(binary_search(&arr, &10), None);
     }
-    
+
     #[test]
     fn test_lower_bound() {
         let arr = vec![1, 2, 2, 2, 3, 4, 5];
@@ -334,7 +334,7 @@ mod search_tests {
         assert_eq!(lower_bound(&arr, &0), 0);
         assert_eq!(lower_bound(&arr, &6), 7);
     }
-    
+
     #[test]
     fn test_find_peak() {
         assert_eq!(find_peak_element(&[1, 2, 3, 1]), Some(2));
@@ -385,14 +385,14 @@ impl<T> ListNode<T> {
 pub fn reverse_list<T>(head: Option<Box<ListNode<T>>>) -> Option<Box<ListNode<T>>> {
     let mut prev = None;
     let mut curr = head;
-    
+
     while let Some(mut node) = curr {
         let next = node.next.take();
         node.next = prev;
         prev = Some(node);
         curr = next;
     }
-    
+
     prev
 }
 
@@ -400,16 +400,16 @@ pub fn reverse_list<T>(head: Option<Box<ListNode<T>>>) -> Option<Box<ListNode<T>
 pub fn has_cycle<T>(head: &Option<Box<ListNode<T>>>) -> bool {
     let mut slow = head;
     let mut fast = head;
-    
+
     while let (Some(s), Some(f)) = (slow, fast) {
         slow = &s.next;
-        
+
         if let Some(ff) = &f.next {
             fast = &ff.next;
         } else {
             return false;
         }
-        
+
         // 比较指针地址
         if std::ptr::eq(
             slow.as_ref().map(|b| &**b).unwrap_or(&std::ptr::null()),
@@ -418,7 +418,7 @@ pub fn has_cycle<T>(head: &Option<Box<ListNode<T>>>) -> bool {
             return true;
         }
     }
-    
+
     false
 }
 
@@ -445,7 +445,7 @@ pub fn merge_two_lists<T: Ord>(
 #[cfg(test)]
 mod list_tests {
     use super::*;
-    
+
     fn create_list(values: &[i32]) -> Option<Box<ListNode<i32>>> {
         let mut head = None;
         for &val in values.iter().rev() {
@@ -455,26 +455,26 @@ mod list_tests {
         }
         head
     }
-    
+
     fn list_to_vec<T: Clone>(head: &Option<Box<ListNode<T>>>) -> Vec<T> {
         let mut result = Vec::new();
         let mut curr = head;
-        
+
         while let Some(node) = curr {
             result.push(node.val.clone());
             curr = &node.next;
         }
-        
+
         result
     }
-    
+
     #[test]
     fn test_reverse_list() {
         let list = create_list(&[1, 2, 3, 4, 5]);
         let reversed = reverse_list(list);
         assert_eq!(list_to_vec(&reversed), vec![5, 4, 3, 2, 1]);
     }
-    
+
     #[test]
     fn test_merge_two_lists() {
         let list1 = create_list(&[1, 2, 4]);
@@ -525,7 +525,7 @@ impl LearningProgress {
         }
         (self.exercises_completed as f64 / self.exercises_total as f64) * 100.0
     }
-    
+
     pub fn is_completed(&self) -> bool {
         self.exercises_completed >= self.exercises_total
     }
@@ -556,7 +556,7 @@ impl LearningTracker {
             ],
         }
     }
-    
+
     pub fn mark_exercise_complete(&mut self, week: usize, time_spent: std::time::Duration) {
         if let Some(progress) = self.progress.get_mut(week) {
             if progress.exercises_completed < progress.exercises_total {
@@ -565,7 +565,7 @@ impl LearningTracker {
             }
         }
     }
-    
+
     pub fn get_overall_progress(&self) -> f64 {
         let total_completed: usize = self.progress.iter()
             .map(|p| p.exercises_completed)
@@ -573,14 +573,14 @@ impl LearningTracker {
         let total_exercises: usize = self.progress.iter()
             .map(|p| p.exercises_total)
             .sum();
-        
+
         if total_exercises == 0 {
             return 0.0;
         }
-        
+
         (total_completed as f64 / total_exercises as f64) * 100.0
     }
-    
+
     pub fn print_report(&self) {
         println!("\n=== Learning Progress Report ===");
         for progress in &self.progress {
@@ -603,15 +603,15 @@ impl LearningTracker {
 #[cfg(test)]
 mod tracker_tests {
     use super::*;
-    
+
     #[test]
     fn test_learning_tracker() {
         let mut tracker = LearningTracker::new();
-        
+
         // 完成一些练习
         tracker.mark_exercise_complete(0, std::time::Duration::from_secs(300));
         tracker.mark_exercise_complete(0, std::time::Duration::from_secs(450));
-        
+
         assert!(tracker.get_overall_progress() > 0.0);
         assert!(tracker.progress[0].exercises_completed == 2);
     }
@@ -640,14 +640,14 @@ pub fn your_sort_algorithm<T: Ord + Clone>(arr: &mut [T]) {
 #[cfg(test)]
 mod challenge_tests {
     use super::*;
-    
+
     #[test]
     fn challenge_1_basic() {
         let mut arr = vec![3, 1, 4, 1, 5, 9, 2, 6, 5];
         your_sort_algorithm(&mut arr);
         assert_eq!(arr, vec![1, 1, 2, 3, 4, 5, 5, 6, 9]);
     }
-    
+
     #[test]
     fn challenge_1_large() {
         let mut arr: Vec<i32> = (0..10000).rev().collect();
@@ -673,7 +673,7 @@ pub fn solve_maze(maze: &[Vec<char>], start: (usize, usize), end: (usize, usize)
 #[cfg(test)]
 mod maze_tests {
     use super::*;
-    
+
     #[test]
     fn test_simple_maze() {
         let maze = vec![
@@ -683,10 +683,10 @@ mod maze_tests {
             vec!['.', '#', '.', '.', '.'],
             vec!['.', '.', '.', '.', '.'],
         ];
-        
+
         let path = solve_maze(&maze, (0, 0), (4, 4));
         assert!(path.is_some());
-        
+
         let path = path.unwrap();
         assert_eq!(path.first(), Some(&(0, 0)));
         assert_eq!(path.last(), Some(&(4, 4)));
@@ -741,7 +741,7 @@ impl Achievement {
             Achievement::AsyncMaster => "精通异步编程",
         }
     }
-    
+
     pub fn points(&self) -> u32 {
         match self {
             Achievement::FirstSort => 10,
@@ -764,15 +764,15 @@ impl AchievementSystem {
             unlocked: std::collections::HashSet::new(),
         }
     }
-    
+
     pub fn unlock(&mut self, achievement: Achievement) -> bool {
         self.unlocked.insert(achievement)
     }
-    
+
     pub fn total_points(&self) -> u32 {
         self.unlocked.iter().map(|a| a.points()).sum()
     }
-    
+
     pub fn print_achievements(&self) {
         println!("\n🏆 Unlocked Achievements:");
         for achievement in &self.unlocked {
@@ -789,6 +789,6 @@ impl AchievementSystem {
 
 ---
 
-**最后更新**: 2025年10月19日  
-**文档版本**: 1.0.0  
+**最后更新**: 2025年10月19日
+**文档版本**: 1.0.0
 **维护者**: c08_algorithms 团队

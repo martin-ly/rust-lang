@@ -1,7 +1,7 @@
 ﻿# 💻 Rust 1.90 设计模式 - 实战示例集
 
-> **版本**: Rust 1.90 Edition 2024  
-> **创建日期**: 2025-10-20  
+> **版本**: Rust 1.90 Edition 2024
+> **创建日期**: 2025-10-20
 > **代码总量**: ~800行可运行代码
 
 ---
@@ -9,7 +9,7 @@
 ## 📋 目录
 
 - [💻 Rust 1.90 设计模式 - 实战示例集](#-rust-190-设计模式---实战示例集)
-  - [📊 目录](#-目录)
+  - [� 目录](#-目录)
   - [🎨 GoF创建型模式](#-gof创建型模式)
     - [示例1: Builder模式 (类型安全)](#示例1-builder模式-类型安全)
     - [示例2: Factory模式](#示例2-factory模式)
@@ -51,7 +51,7 @@ impl RequestBuilder<NoUrl> {
             _state: std::marker::PhantomData,
         }
     }
-    
+
     fn url(self, url: impl Into<String>) -> RequestBuilder<HasUrl> {
         RequestBuilder {
             url: Some(url.into()),
@@ -66,7 +66,7 @@ impl RequestBuilder<HasUrl> {
         self.method = Some(method.into());
         self
     }
-    
+
     fn build(self) -> Request {
         Request {
             url: self.url.unwrap(),
@@ -86,7 +86,7 @@ fn main() {
         .url("https://api.example.com")
         .method("POST")
         .build();
-    
+
     println!("{:?}", request);
 }
 ```
@@ -120,9 +120,9 @@ impl ShapeFactory {
     fn create_shape(shape_type: &str, params: Vec<f64>) -> Box<dyn Shape> {
         match shape_type {
             "circle" => Box::new(Circle { radius: params[0] }),
-            "rectangle" => Box::new(Rectangle { 
-                width: params[0], 
-                height: params[1] 
+            "rectangle" => Box::new(Rectangle {
+                width: params[0],
+                height: params[1]
             }),
             _ => panic!("Unknown shape type"),
         }
@@ -132,7 +132,7 @@ impl ShapeFactory {
 fn main() {
     let circle = ShapeFactory::create_shape("circle", vec![5.0]);
     let rectangle = ShapeFactory::create_shape("rectangle", vec![4.0, 6.0]);
-    
+
     println!("Circle area: {}", circle.area());
     println!("Rectangle area: {}", rectangle.area());
 }
@@ -173,7 +173,7 @@ impl<T: LegacyPrinter> ModernPrinter for PrinterAdapter<T> {
     fn print(&self, text: &str) {
         self.legacy.print_old(text);
     }
-    
+
     fn print_with_color(&self, text: &str, color: &str) {
         self.legacy.print_old(&format!("[{}] {}", color, text));
     }
@@ -182,7 +182,7 @@ impl<T: LegacyPrinter> ModernPrinter for PrinterAdapter<T> {
 fn main() {
     let old_printer = OldPrinter;
     let adapter = PrinterAdapter { legacy: old_printer };
-    
+
     adapter.print("Hello");
     adapter.print_with_color("World", "Red");
 }
@@ -229,9 +229,9 @@ fn main() {
     let coffee = SimpleCoffee;
     let coffee_with_milk = MilkDecorator { coffee };
     let coffee_with_milk_and_sugar = SugarDecorator { coffee: coffee_with_milk };
-    
-    println!("{}: ${}", 
-             coffee_with_milk_and_sugar.description(), 
+
+    println!("{}: ${}",
+             coffee_with_milk_and_sugar.description(),
              coffee_with_milk_and_sugar.cost());
 }
 ```
@@ -272,7 +272,7 @@ impl Compressor {
     fn new(strategy: Box<dyn CompressionStrategy>) -> Self {
         Self { strategy }
     }
-    
+
     fn compress(&self, data: &[u8]) -> Vec<u8> {
         self.strategy.compress(data)
     }
@@ -280,10 +280,10 @@ impl Compressor {
 
 fn main() {
     let data = b"Hello, World!";
-    
+
     let compressor = Compressor::new(Box::new(ZipCompression));
     compressor.compress(data);
-    
+
     let compressor = Compressor::new(Box::new(GzipCompression));
     compressor.compress(data);
 }
@@ -318,11 +318,11 @@ impl Subject {
             observers: Arc::new(Mutex::new(Vec::new())),
         }
     }
-    
+
     fn attach(&self, observer: Arc<dyn Observer + Send + Sync>) {
         self.observers.lock().unwrap().push(observer);
     }
-    
+
     fn notify(&self, message: &str) {
         for observer in self.observers.lock().unwrap().iter() {
             observer.update(message);
@@ -332,13 +332,13 @@ impl Subject {
 
 fn main() {
     let subject = Subject::new();
-    
+
     let obs1 = Arc::new(ConcreteObserver { name: "Observer1".to_string() });
     let obs2 = Arc::new(ConcreteObserver { name: "Observer2".to_string() });
-    
+
     subject.attach(obs1);
     subject.attach(obs2);
-    
+
     subject.notify("Event occurred!");
 }
 ```
@@ -367,7 +367,7 @@ impl Actor {
     fn new(receiver: mpsc::Receiver<Message>) -> Self {
         Self { receiver, state: 0 }
     }
-    
+
     async fn run(&mut self) {
         while let Some(msg) = self.receiver.recv().await {
             match msg {
@@ -391,15 +391,15 @@ impl Actor {
 async fn main() {
     let (tx, rx) = mpsc::channel(100);
     let mut actor = Actor::new(rx);
-    
+
     tokio::spawn(async move {
         actor.run().await;
     });
-    
+
     tx.send(Message::Set(42)).await.unwrap();
     tx.send(Message::Get).await.unwrap();
     tx.send(Message::Stop).await.unwrap();
-    
+
     tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
 }
 ```
@@ -429,12 +429,12 @@ fn consumer(rx: mpsc::Receiver<i32>) {
 
 fn main() {
     let (tx, rx) = mpsc::channel();
-    
+
     // 启动2个生产者
     let tx1 = tx.clone();
     thread::spawn(move || producer(tx, 1));
     thread::spawn(move || producer(tx1, 2));
-    
+
     // 启动消费者
     thread::spawn(move || consumer(rx))
         .join()
@@ -468,7 +468,7 @@ impl Feet {
 fn main() {
     let distance_m = Meters(100.0);
     let distance_ft = distance_m.to_feet();
-    
+
     println!("{}m = {}ft", distance_m.0, distance_ft.0);
 }
 ```
@@ -493,7 +493,7 @@ impl Connection<Disconnected> {
             _state: std::marker::PhantomData,
         }
     }
-    
+
     fn connect(self) -> Connection<Connected> {
         println!("Connecting to {}", self.address);
         Connection {
@@ -507,7 +507,7 @@ impl Connection<Connected> {
     fn send(&self, data: &str) {
         println!("Sending: {}", data);
     }
-    
+
     fn disconnect(self) -> Connection<Disconnected> {
         println!("Disconnecting from {}", self.address);
         Connection {
@@ -522,15 +522,15 @@ fn main() {
     let conn = conn.connect();
     conn.send("Hello");
     let _conn = conn.disconnect();
-    
+
     // conn.send("World"); // 编译错误！
 }
 ```
 
 ---
 
-**文档版本**: v1.0  
-**最后更新**: 2025-10-20  
+**文档版本**: v1.0
+**最后更新**: 2025-10-20
 **代码总量**: ~800行
 
 ---

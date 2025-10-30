@@ -1,7 +1,7 @@
 ﻿# 💻 Rust 1.90 控制流与函数 - 实战示例集
 
-> **版本**: Rust 1.90 Edition 2024  
-> **创建日期**: 2025-10-20  
+> **版本**: Rust 1.90 Edition 2024
+> **创建日期**: 2025-10-20
 > **代码行数**: 900+ 行可运行代码
 
 ---
@@ -9,7 +9,7 @@
 ## 📋 目录
 
 - [💻 Rust 1.90 控制流与函数 - 实战示例集](#-rust-190-控制流与函数---实战示例集)
-  - [� 目录](#-目录)
+  - [📋 目录](#-目录)
   - [🎯 Rust 1.90 核心特性](#-rust-190-核心特性)
     - [1. let else 语句](#1-let-else-语句)
     - [2. 链式 if let](#2-链式-if-let)
@@ -48,7 +48,7 @@ fn process_config(config: Option<String>) -> Result<(), String> {
     let Some(config_str) = config else {
         return Err("Configuration not provided".to_string());
     };
-    
+
     println!("Processing config: {}", config_str);
     Ok(())
 }
@@ -59,14 +59,14 @@ fn parse_user_input(input: &str) -> Result<i32, String> {
     let Ok(number) = input.parse::<i32>() else {
         return Err(format!("'{}' is not a valid number", input));
     };
-    
+
     // 验证范围
     let number = if number >= 0 && number <= 100 {
         number
     } else {
         return Err("Number must be between 0 and 100".to_string());
     };
-    
+
     Ok(number)
 }
 
@@ -75,11 +75,11 @@ fn extract_first_word(text: Option<&str>) -> Result<String, &'static str> {
     let Some(text) = text else {
         return Err("Text is None");
     };
-    
+
     let Some(first_word) = text.split_whitespace().next() else {
         return Err("Text is empty");
     };
-    
+
     Ok(first_word.to_string())
 }
 
@@ -89,12 +89,12 @@ fn main() {
         Ok(_) => println!("Config processed successfully"),
         Err(e) => println!("Error: {}", e),
     }
-    
+
     match parse_user_input("42") {
         Ok(n) => println!("Parsed number: {}", n),
         Err(e) => println!("Parse error: {}", e),
     }
-    
+
     match extract_first_word(Some("Hello World")) {
         Ok(word) => println!("First word: {}", word),
         Err(e) => println!("Error: {}", e),
@@ -207,14 +207,14 @@ fn main() {
 // loop: 无限循环with返回值
 fn find_first_even() -> i32 {
     let mut counter = 0;
-    
+
     loop {
         counter += 1;
-        
+
         if counter % 2 == 0 {
             break counter; // 返回值
         }
-        
+
         if counter > 100 {
             break -1; // 未找到
         }
@@ -233,11 +233,11 @@ fn countdown(mut n: i32) {
 // while let：模式匹配循环
 fn sum_until_none(values: &mut Vec<Option<i32>>) -> i32 {
     let mut sum = 0;
-    
+
     while let Some(Some(value)) = values.pop() {
         sum += value;
     }
-    
+
     sum
 }
 
@@ -248,14 +248,14 @@ fn iterate_examples() {
         print!("{} ", i);
     }
     println!();
-    
+
     // 遍历数组
     let arr = [10, 20, 30, 40, 50];
     for element in arr.iter() {
         print!("{} ", element);
     }
     println!();
-    
+
     // 带索引遍历
     for (index, value) in arr.iter().enumerate() {
         println!("Index {}: {}", index, value);
@@ -279,10 +279,10 @@ fn nested_loops() {
 fn main() {
     println!("First even: {}", find_first_even());
     countdown(3);
-    
+
     let mut values = vec![Some(1), Some(2), Some(3), None, Some(4)];
     println!("Sum: {}", sum_until_none(&mut values));
-    
+
     iterate_examples();
     nested_loops();
 }
@@ -361,14 +361,14 @@ fn http_status_category(status: u16) -> &'static str {
 fn main() {
     let color = Color::RGB(255, 0, 0);
     println!("{}", color_to_string(color));
-    
+
     println!("{}", describe_number(-5));
     println!("{}", describe_number(0));
     println!("{}", describe_number(4));
-    
+
     let point = Point { x: 3, y: 3 };
     println!("{}", describe_point(point));
-    
+
     println!("Is weekend: {}", is_weekend(7));
     println!("HTTP 404: {}", http_status_category(404));
 }
@@ -441,7 +441,7 @@ fn main() {
     print_value_in_range(3);
     process_tuple((0, 5, 10));
     analyze_array([1, 2, 3, 4, 5]);
-    
+
     let env = Envelope {
         sender: "Alice".to_string(),
         message: Message::Write("Hello".to_string()),
@@ -488,16 +488,16 @@ fn consume_and_return(s: String) -> String {
 
 fn main() {
     println!("Add: {}", add(5, 3));
-    
+
     let (q, r) = div_mod(17, 5);
     println!("17 ÷ 5 = {} remainder {}", q, r);
-    
+
     println!("Sum: {}", sum(&[1, 2, 3, 4, 5]));
-    
+
     let mut text = String::from("Hello");
     append_suffix(&mut text, " World");
     println!("{}", text);
-    
+
     let s = String::from("data");
     let result = consume_and_return(s);
     println!("{}", result);
@@ -536,10 +536,10 @@ fn make_adder(x: i32) -> impl Fn(i32) -> i32 {
 fn main() {
     let (a, b) = swap(1, 2);
     println!("Swapped: {}, {}", a, b);
-    
+
     print_pair("Hello", 42);
     compare_and_print(&10, &20);
-    
+
     let add_5 = make_adder(5);
     println!("5 + 3 = {}", add_5(3));
 }
@@ -582,15 +582,15 @@ fn process_numbers(numbers: Vec<i32>) -> Vec<i32> {
 fn main() {
     let square = |x| x * x;
     println!("Apply square to 5: {}", apply(square, 5));
-    
+
     let mul3 = make_multiplier(3);
     println!("3 * 7 = {}", mul3(7));
-    
+
     let add_one = |x: i32| x + 1;
     let square = |x: i32| x * x;
     let add_one_then_square = compose(square, add_one);
     println!("(5 + 1)^2 = {}", add_one_then_square(5));
-    
+
     let numbers = vec![-2, -1, 0, 1, 2, 3];
     let result = process_numbers(numbers);
     println!("Processed: {:?}", result);
@@ -608,7 +608,7 @@ fn main() {
 fn demonstrate_fn() {
     let x = 10;
     let add_x = |y| x + y;  // 捕获 x 的不可变引用
-    
+
     println!("10 + 5 = {}", add_x(5));
     println!("10 + 3 = {}", add_x(3));
     println!("x is still accessible: {}", x);
@@ -621,7 +621,7 @@ fn demonstrate_fn_mut() {
         count += 1;
         count
     };
-    
+
     println!("Count: {}", increment());
     println!("Count: {}", increment());
     println!("Count: {}", increment());
@@ -634,7 +634,7 @@ fn demonstrate_fn_once() {
         println!("Consumed: {}", s);
         // s 被移动到闭包内
     };
-    
+
     consume();
     // consume(); // 错误：只能调用一次
     // println!("{}", s); // 错误：s已被移动
@@ -661,16 +661,16 @@ fn main() {
     demonstrate_fn();
     demonstrate_fn_mut();
     demonstrate_fn_once();
-    
+
     let closure = create_closure();
     closure();
-    
+
     let mut counter = 0;
     let mut count_and_add = |x| {
         counter += 1;
         x + counter
     };
-    
+
     let result = apply_twice(count_and_add, 10);
     println!("Result: {}", result);
 }
@@ -688,7 +688,7 @@ async fn demonstrate_async_closure() {
         // 模拟异步操作
         x + 1
     };
-    
+
     let result = async_add(5).await;
     println!("Async result: {}", result);
 }
@@ -705,7 +705,7 @@ where
 #[tokio::main]
 async fn main() {
     demonstrate_async_closure().await;
-    
+
     let async_double = async |x: i32| x * 2;
     let result = process_async(async_double, 21).await;
     println!("Async double: {}", result);
@@ -753,11 +753,11 @@ fn main() {
         Ok(result) => println!("Result: {}", result),
         Err(e) => println!("Error: {}", e),
     }
-    
+
     if let Some(even) = find_first_even(&[1, 3, 5, 6, 7]) {
         println!("First even: {}", even);
     }
-    
+
     match parse_and_process("42") {
         Ok(n) => println!("Processed: {}", n),
         Err(e) => println!("Error: {}", e),
@@ -794,7 +794,7 @@ impl From<io::Error> for MyError {
 
 fn process_file(path: &str) -> Result<i32, MyError> {
     let content = std::fs::read_to_string(path)?;
-    
+
     content
         .trim()
         .parse::<i32>()
@@ -813,7 +813,7 @@ fn main() {
         Ok(content) => println!("Content: {}", content),
         Err(e) => println!("Error: {}", e),
     }
-    
+
     match calculate("10", "20") {
         Ok(sum) => println!("Sum: {}", sum),
         Err(e) => println!("Error: {}", e),
@@ -842,7 +842,7 @@ fn parse_command(args: &[String]) -> Result<Command, String> {
     let Some(cmd) = args.get(0) else {
         return Err("No command provided".to_string());
     };
-    
+
     match cmd.as_str() {
         "add" | "sub" | "mul" | "div" => {
             let Some(x_str) = args.get(1) else {
@@ -851,14 +851,14 @@ fn parse_command(args: &[String]) -> Result<Command, String> {
             let Some(y_str) = args.get(2) else {
                 return Err("Missing second number".to_string());
             };
-            
+
             let x: i32 = x_str
                 .parse()
                 .map_err(|_| "Invalid first number".to_string())?;
             let y: i32 = y_str
                 .parse()
                 .map_err(|_| "Invalid second number".to_string())?;
-            
+
             match cmd.as_str() {
                 "add" => Ok(Command::Add { x, y }),
                 "sub" => Ok(Command::Sub { x, y }),
@@ -898,7 +898,7 @@ fn execute_command(cmd: Command) -> Result<i32, String> {
 
 fn main() {
     let args = vec!["add".to_string(), "10".to_string(), "20".to_string()];
-    
+
     match parse_command(&args) {
         Ok(cmd) => match execute_command(cmd) {
             Ok(result) => println!("Result: {}", result),
@@ -944,7 +944,7 @@ impl Expr {
             Expr::Div(left, right) => {
                 let l = left.eval()?;
                 let r = right.eval()?;
-                
+
                 if r == 0.0 {
                     Err("Division by zero".to_string())
                 } else {
@@ -953,7 +953,7 @@ impl Expr {
             }
         }
     }
-    
+
     fn to_string(&self) -> String {
         match self {
             Expr::Number(n) => n.to_string(),
@@ -974,20 +974,20 @@ fn main() {
         )),
         Box::new(Expr::Number(3.0)),
     );
-    
+
     println!("Expression: {}", expr.to_string());
-    
+
     match expr.eval() {
         Ok(result) => println!("Result: {}", result),
         Err(e) => eprintln!("Error: {}", e),
     }
-    
+
     // 测试除零
     let div_zero = Expr::Div(
         Box::new(Expr::Number(10.0)),
         Box::new(Expr::Number(0.0)),
     );
-    
+
     match div_zero.eval() {
         Ok(result) => println!("Result: {}", result),
         Err(e) => eprintln!("Error: {}", e),
@@ -997,9 +997,9 @@ fn main() {
 
 ---
 
-**文档版本**: v1.0  
-**最后更新**: 2025-10-20  
-**代码行数**: 900+ 行  
+**文档版本**: v1.0
+**最后更新**: 2025-10-20
+**代码行数**: 900+ 行
 **维护者**: Rust Learning Community
 
 ---

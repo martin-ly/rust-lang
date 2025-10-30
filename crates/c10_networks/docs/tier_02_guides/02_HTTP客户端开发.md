@@ -1,8 +1,8 @@
 ﻿# C10 Networks - Tier 2: HTTP 客户端开发
 
-> **文档版本**: v1.0.0  
-> **最后更新**: 2025-10-23  
-> **Rust 版本**: 1.90+  
+> **文档版本**: v1.0.0
+> **最后更新**: 2025-10-23
+> **Rust 版本**: 1.90+
 > **预计阅读**: 40 分钟
 
 ---
@@ -90,14 +90,14 @@ use reqwest;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 简单 GET 请求
     let response = reqwest::get("https://httpbin.org/get").await?;
-    
+
     println!("状态码: {}", response.status());
     println!("头部: {:#?}", response.headers());
-    
+
     // 获取文本内容
     let body = response.text().await?;
     println!("响应体:\n{}", body);
-    
+
     Ok(())
 }
 ```
@@ -111,7 +111,7 @@ use serde_json::json;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let client = reqwest::Client::new();
-    
+
     // JSON POST 请求
     let response = client
         .post("https://httpbin.org/post")
@@ -121,13 +121,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }))
         .send()
         .await?;
-    
+
     println!("状态码: {}", response.status());
-    
+
     // 解析 JSON 响应
     let json: serde_json::Value = response.json().await?;
     println!("响应 JSON:\n{:#?}", json);
-    
+
     Ok(())
 }
 ```
@@ -150,14 +150,14 @@ fn create_http_client() -> Client {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let client = create_http_client();
-    
+
     // 复用客户端发送多个请求
     let response1 = client.get("https://httpbin.org/get").send().await?;
     println!("请求 1: {}", response1.status());
-    
+
     let response2 = client.get("https://httpbin.org/uuid").send().await?;
     println!("请求 2: {}", response2.status());
-    
+
     Ok(())
 }
 ```
@@ -176,18 +176,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut headers = HeaderMap::new();
     headers.insert(AUTHORIZATION, HeaderValue::from_static("Bearer TOKEN123"));
     headers.insert(CONTENT_TYPE, HeaderValue::from_static("application/json"));
-    
+
     let client = reqwest::Client::builder()
         .default_headers(headers)
         .build()?;
-    
+
     let response = client
         .get("https://httpbin.org/headers")
         .send()
         .await?;
-    
+
     println!("{}", response.text().await?);
-    
+
     Ok(())
 }
 ```
@@ -208,20 +208,20 @@ struct SearchParams {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let client = Client::new();
-    
+
     // 方法 1: 手动拼接
     let response = client
         .get("https://httpbin.org/get?foo=bar&baz=qux")
         .send()
         .await?;
-    
+
     // 方法 2: 使用元组数组
     let response = client
         .get("https://httpbin.org/get")
         .query(&[("foo", "bar"), ("baz", "qux")])
         .send()
         .await?;
-    
+
     // 方法 3: 使用结构体
     let params = SearchParams {
         q: "rust".to_string(),
@@ -233,9 +233,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .query(&params)
         .send()
         .await?;
-    
+
     println!("{}", response.text().await?);
-    
+
     Ok(())
 }
 ```
@@ -256,22 +256,22 @@ struct User {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let client = Client::new();
-    
+
     // JSON 请求体
     let user = User {
         username: "rustacean".to_string(),
         email: "user@rust-lang.org".to_string(),
         age: 30,
     };
-    
+
     let response = client
         .post("https://httpbin.org/post")
         .json(&user)
         .send()
         .await?;
-    
+
     println!("JSON POST: {}", response.status());
-    
+
     // 表单请求体
     let form_data = [("name", "Alice"), ("city", "Beijing")];
     let response = client
@@ -279,18 +279,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .form(&form_data)
         .send()
         .await?;
-    
+
     println!("Form POST: {}", response.status());
-    
+
     // 原始文本请求体
     let response = client
         .post("https://httpbin.org/post")
         .body("Raw text data")
         .send()
         .await?;
-    
+
     println!("Raw POST: {}", response.status());
-    
+
     Ok(())
 }
 ```
@@ -307,7 +307,7 @@ use reqwest;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let response = reqwest::get("https://httpbin.org/status/404").await?;
-    
+
     // 方法 1: 检查状态码
     if response.status().is_success() {
         println!("请求成功");
@@ -316,12 +316,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     } else if response.status().is_server_error() {
         println!("服务器错误: {}", response.status());
     }
-    
+
     // 方法 2: 自动错误处理
     let response = reqwest::get("https://httpbin.org/status/404")
         .await?
         .error_for_status()?; // 非 2xx 状态码返回错误
-    
+
     Ok(())
 }
 ```
@@ -334,17 +334,17 @@ use reqwest;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let response = reqwest::get("https://httpbin.org/get").await?;
-    
+
     // 获取单个头部
     if let Some(content_type) = response.headers().get("content-type") {
         println!("Content-Type: {}", content_type.to_str()?);
     }
-    
+
     // 遍历所有头部
     for (name, value) in response.headers() {
         println!("{}: {}", name, value.to_str().unwrap_or("<非 UTF-8>"));
     }
-    
+
     Ok(())
 }
 ```
@@ -369,21 +369,21 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .text()
         .await?;
     println!("文本响应: {}", text);
-    
+
     // 解析为 JSON
     let json: ApiResponse = reqwest::get("https://httpbin.org/get")
         .await?
         .json()
         .await?;
     println!("JSON 响应: {:#?}", json);
-    
+
     // 解析为字节
     let bytes = reqwest::get("https://httpbin.org/get")
         .await?
         .bytes()
         .await?;
     println!("字节数: {}", bytes.len());
-    
+
     Ok(())
 }
 ```
@@ -432,7 +432,7 @@ async fn fetch_with_retry(
 ) -> Result<reqwest::Response, reqwest::Error> {
     let mut attempts = 0;
     let mut delay = Duration::from_millis(100);
-    
+
     loop {
         match client.get(url).send().await {
             Ok(response) if response.status().is_success() => {
@@ -450,7 +450,7 @@ async fn fetch_with_retry(
             }
             Err(e) => return Err(e),
         }
-        
+
         if attempts >= max_retries {
             return Err(reqwest::Error::new(
                 reqwest::ErrorKind::Request,
@@ -484,16 +484,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let client = Client::builder()
         .cookie_store(true)
         .build()?;
-    
+
     // 第一个请求：设置 Cookie
     let response = client.get("https://httpbin.org/cookies/set?foo=bar").send().await?;
     println!("设置 Cookie: {}", response.status());
-    
+
     // 第二个请求：自动发送 Cookie
     let response = client.get("https://httpbin.org/cookies").send().await?;
     let body = response.text().await?;
     println!("Cookie 内容:\n{}", body);
-    
+
     Ok(())
 }
 ```
@@ -507,14 +507,14 @@ use reqwest::{Client, Proxy};
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // HTTP 代理
     let proxy = Proxy::http("http://proxy.example.com:8080")?;
-    
+
     let client = Client::builder()
         .proxy(proxy)
         .build()?;
-    
+
     let response = client.get("https://httpbin.org/ip").send().await?;
     println!("{}", response.text().await?);
-    
+
     Ok(())
 }
 ```
@@ -530,30 +530,30 @@ use tokio::io::AsyncReadExt;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let client = Client::new();
-    
+
     // 读取文件
     let mut file = File::open("example.txt").await?;
     let mut contents = vec![];
     file.read_to_end(&mut contents).await?;
-    
+
     // 创建 multipart 表单
     let part = Part::bytes(contents)
         .file_name("example.txt")
         .mime_str("text/plain")?;
-    
+
     let form = Form::new()
         .text("field1", "value1")
         .part("file", part);
-    
+
     // 上传
     let response = client
         .post("https://httpbin.org/post")
         .multipart(form)
         .send()
         .await?;
-    
+
     println!("上传成功: {}", response.status());
-    
+
     Ok(())
 }
 ```
@@ -570,11 +570,11 @@ use futures_util::StreamExt;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let client = Client::new();
     let url = "https://httpbin.org/bytes/10240"; // 下载 10KB
-    
+
     let response = client.get(url).send().await?;
     let mut stream = response.bytes_stream();
     let mut file = File::create("downloaded.bin").await?;
-    
+
     let mut downloaded = 0;
     while let Some(chunk) = stream.next().await {
         let chunk = chunk?;
@@ -582,10 +582,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         downloaded += chunk.len();
         println!("已下载: {} 字节", downloaded);
     }
-    
+
     file.flush().await?;
     println!("下载完成");
-    
+
     Ok(())
 }
 ```
@@ -616,7 +616,7 @@ struct GitHubClient {
 impl GitHubClient {
     fn new(token: Option<&str>) -> Self {
         let mut client_builder = Client::builder();
-        
+
         if let Some(token) = token {
             let mut headers = reqwest::header::HeaderMap::new();
             headers.insert(
@@ -625,13 +625,13 @@ impl GitHubClient {
             );
             client_builder = client_builder.default_headers(headers);
         }
-        
+
         Self {
             client: client_builder.build().unwrap(),
             base_url: "https://api.github.com".to_string(),
         }
     }
-    
+
     async fn get_user(&self, username: &str) -> Result<GitHubUser, reqwest::Error> {
         let url = format!("{}/users/{}", self.base_url, username);
         self.client
@@ -647,10 +647,10 @@ impl GitHubClient {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let client = GitHubClient::new(None);
-    
+
     let user = client.get_user("torvalds").await?;
     println!("用户: {:#?}", user);
-    
+
     Ok(())
 }
 ```
@@ -669,13 +669,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         "https://httpbin.org/delay/2",
         "https://httpbin.org/delay/1",
     ];
-    
+
     let mut tasks = JoinSet::new();
-    
+
     for url in urls {
         let client = client.clone();
         let url = url.to_string();
-        
+
         tasks.spawn(async move {
             let start = std::time::Instant::now();
             let response = client.get(&url).send().await;
@@ -683,7 +683,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             (url, response, elapsed)
         });
     }
-    
+
     while let Some(result) = tasks.join_next().await {
         let (url, response, elapsed) = result?;
         match response {
@@ -691,7 +691,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             Err(e) => println!("❌ {} - Error: {}", url, e),
         }
     }
-    
+
     Ok(())
 }
 ```
@@ -714,7 +714,7 @@ impl ApiClient {
             base_url: base_url.into(),
         }
     }
-    
+
     async fn request<T: Serialize>(
         &self,
         method: Method,
@@ -723,18 +723,18 @@ impl ApiClient {
     ) -> Result<Response, reqwest::Error> {
         let url = format!("{}{}", self.base_url, path);
         let mut request = self.client.request(method, url);
-        
+
         if let Some(body) = body {
             request = request.json(body);
         }
-        
+
         request.send().await
     }
-    
+
     async fn get(&self, path: &str) -> Result<Response, reqwest::Error> {
         self.request::<()>(Method::GET, path, None).await
     }
-    
+
     async fn post<T: Serialize>(&self, path: &str, body: &T) -> Result<Response, reqwest::Error> {
         self.request(Method::POST, path, Some(body)).await
     }
@@ -749,11 +749,11 @@ struct CreateUserRequest {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let api = ApiClient::new("https://httpbin.org");
-    
+
     // GET 请求
     let response = api.get("/get").await?;
     println!("GET: {}", response.status());
-    
+
     // POST 请求
     let user = CreateUserRequest {
         name: "Alice".to_string(),
@@ -761,7 +761,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     };
     let response = api.post("/post", &user).await?;
     println!("POST: {}", response.status());
-    
+
     Ok(())
 }
 ```

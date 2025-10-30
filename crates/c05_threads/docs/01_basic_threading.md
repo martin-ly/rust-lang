@@ -1,13 +1,13 @@
 # Rust 2025 基础线程操作
 
-> **文档定位**: 掌握Rust基础线程操作的实践指南，包含大量代码示例和可视化图表  
-> **先修知识**: [01_threads_and_ownership](./01_threads_and_ownership.md)  
+> **文档定位**: 掌握Rust基础线程操作的实践指南，包含大量代码示例和可视化图表
+> **先修知识**: [01_threads_and_ownership](./01_threads_and_ownership.md)
 > **相关文档**: [02_thread_synchronization](./02_thread_synchronization.md) | [FAQ](./FAQ.md) | [主索引](./00_MASTER_INDEX.md) | [知识图谱](./KNOWLEDGE_GRAPH.md)
 
-**最后更新**: 2025-10-19  
-**适用版本**: Rust 1.90+ (充分利用最新特性)  
-**难度等级**: ⭐⭐  
-**文档类型**: ⚙️ 实践指南  
+**最后更新**: 2025-10-19
+**适用版本**: Rust 1.90+ (充分利用最新特性)
+**难度等级**: ⭐⭐
+**文档类型**: ⚙️ 实践指南
 **增强内容**: ✅ 知识图谱 | ✅ 多维矩阵对比 | ✅ Rust 1.90 示例
 
 ---
@@ -90,46 +90,46 @@ graph TB
         A --> C[管理 Management]
         A --> D[通信 Communication]
         A --> E[同步 Synchronization]
-        
+
         B --> B1[spawn]
         B --> B2[scoped threads]
         B --> B3[Builder API]
-        
+
         C --> C1[join]
         C --> C2[JoinHandle]
         C --> C3[thread_local!]
         C --> C4[park/unpark]
-        
+
         D --> D1[channel]
         D --> D2[shared state]
         D --> D3[message passing]
-        
+
         E --> E1[Mutex]
         E --> E2[RwLock]
         E --> E3[Atomic]
     end
-    
+
     subgraph "安全保证"
         F[Safety Guarantees]
         F --> F1[Send Trait]
         F --> F2[Sync Trait]
         F --> F3[生命周期]
-        
+
         B1 -.需要.-> F1
         B2 -.安全借用.-> F3
         E1 -.实现.-> F2
     end
-    
+
     subgraph "Rust 1.90 新特性"
         G[Rust 1.90 Features]
         G --> G1[改进的 scoped threads]
         G --> G2[优化的 park/unpark]
         G --> G3[更好的性能]
-        
+
         B2 --> G1
         C4 --> G2
     end
-    
+
     style A fill:#ff6b6b,color:#fff
     style F fill:#4ecdc4,color:#fff
     style G fill:#95e1d3,color:#333
@@ -147,7 +147,7 @@ stateDiagram-v2
     Blocked --> Ready: unpark() / 锁可用
     Running --> Terminated: 执行完成
     Terminated --> [*]: join()
-    
+
     note right of Running
         Rust 1.90 优化:
         - 更快的上下文切换
@@ -216,21 +216,21 @@ Rust采用1:1线程模型，每个Rust线程对应一个操作系统线程，提
 graph TD
     Start[需要创建线程?]
     Start --> Q1{需要借用<br/>局部数据?}
-    
+
     Q1 -->|是| UseScoped[使用 thread::scope]
     Q1 -->|否| Q2{需要定制<br/>线程配置?}
-    
+
     Q2 -->|是| UseBuilder[使用 Builder API]
     Q2 -->|否| Q3{有大量<br/>短任务?}
-    
+
     Q3 -->|是| UsePool[使用线程池]
     Q3 -->|否| UseSpawn[使用 thread::spawn]
-    
+
     UseScoped --> R1[✅ 最安全<br/>生命周期保证]
     UseBuilder --> R2[✅ 最灵活<br/>自定义配置]
     UsePool --> R3[✅ 最高效<br/>复用线程]
     UseSpawn --> R4[✅ 最简单<br/>独立任务]
-    
+
     style Start fill:#ff6b6b,color:#fff
     style UseScoped fill:#51cf66,color:#fff
     style UseBuilder fill:#339af0,color:#fff
@@ -248,24 +248,24 @@ use std::time::Duration;
 
 fn main() {
     println!("=== 基础 thread::spawn 示例 ===\n");
-    
+
     // 创建新线程
     let handle = thread::spawn(|| {
         for i in 1..=5 {
             println!("子线程: 计数 {}", i);
             thread::sleep(Duration::from_millis(100));
         }
-        
+
         // 返回值会被 join() 接收
         "线程完成!"
     });
-    
+
     // 主线程继续执行
     for i in 1..=3 {
         println!("主线程: 计数 {}", i);
         thread::sleep(Duration::from_millis(150));
     }
-    
+
     // 等待子线程完成并获取返回值
     let result = handle.join().unwrap();
     println!("\n线程返回: {}", result);
@@ -296,25 +296,25 @@ use std::thread;
 
 fn main() {
     println!("=== move 闭包示例 ===\n");
-    
+
     let numbers = vec![1, 2, 3, 4, 5];
     let multiplier = 10;
-    
+
     // 使用move关键字转移所有权
     let handle = thread::spawn(move || {
         let sum: i32 = numbers.iter().sum();
         let result = sum * multiplier;
-        
+
         println!("数组: {:?}", numbers);
         println!("总和: {}", sum);
         println!("结果: {} × {} = {}", sum, multiplier, result);
-        
+
         result
     });
-    
+
     // ⚠️ 这里无法再访问 numbers 和 multiplier
     // println!("{:?}", numbers); // 编译错误!
-    
+
     let result = handle.join().unwrap();
     println!("\n最终结果: {}", result);
 }
@@ -329,10 +329,10 @@ use std::thread;
 
 fn main() {
     println!("=== Rust 1.90 作用域线程示例 ===\n");
-    
+
     let mut data = vec![1, 2, 3, 4, 5];
     let multiplier = 2;
-    
+
     // Rust 1.90: 改进的 scoped threads API
     thread::scope(|s| {
         // 可以安全地借用外部数据
@@ -340,7 +340,7 @@ fn main() {
             println!("线程1: 读取数据 {:?}", data);
             println!("线程1: multiplier = {}", multiplier);
         });
-        
+
         // 可以可变借用（但不能同时有不可变借用）
         s.spawn(|| {
             for item in &mut data {
@@ -348,10 +348,10 @@ fn main() {
             }
             println!("线程2: 修改后 {:?}", data);
         });
-        
+
         // 作用域结束时，所有线程自动 join
     }); // 在这里等待所有线程完成
-    
+
     // 现在可以安全地访问 data
     println!("\n主线程: 最终数据 {:?}", data);
 }
@@ -371,27 +371,27 @@ use std::thread;
 
 fn main() {
     println!("=== Thread Builder 示例 ===\n");
-    
+
     // Rust 1.90: 增强的 Builder API
     let builder = thread::Builder::new()
         .name("worker-thread".into())
         .stack_size(4 * 1024 * 1024); // 4MB 栈
-    
+
     let handle = builder.spawn(|| {
         let current = thread::current();
         println!("线程名称: {:?}", current.name());
         println!("线程ID: {:?}", current.id());
-        
+
         // 模拟工作
         let mut sum = 0u64;
         for i in 0..1_000_000 {
             sum += i;
         }
-        
+
         println!("计算完成: sum = {}", sum);
         sum
     }).unwrap();
-    
+
     let result = handle.join().unwrap();
     println!("\n主线程收到结果: {}", result);
 }
@@ -424,10 +424,10 @@ use std::time::Duration;
 fn spawn_worker(id: u32) -> JoinHandle<u32> {
     thread::spawn(move || {
         println!("Worker {} starting", id);
-        
+
         // 模拟工作
         thread::sleep(Duration::from_millis(100));
-        
+
         println!("Worker {} finished", id);
         id * 2  // 返回值
     })
@@ -435,20 +435,20 @@ fn spawn_worker(id: u32) -> JoinHandle<u32> {
 
 fn main() {
     println!("=== 线程句柄管理示例 ===\n");
-    
+
     // 创建多个线程
     let handles: Vec<JoinHandle<u32>> = (0..4)
         .map(|i| spawn_worker(i))
         .collect();
-    
+
     println!("已创建 {} 个线程\n", handles.len());
-    
+
     // 等待所有线程完成并收集结果
     let results: Vec<u32> = handles
         .into_iter()
         .map(|h| h.join().unwrap())
         .collect();
-    
+
     println!("\nResults: {:?}", results);
 }
 ```
@@ -461,10 +461,10 @@ use std::time::Duration;
 
 fn main() {
     println!("=== Rust 1.90 错误处理示例 ===\n");
-    
+
     let handle = thread::spawn(|| {
         thread::sleep(Duration::from_millis(100));
-        
+
         // 模拟可能的错误
         if rand::random::<bool>() {
             Ok(42)
@@ -472,7 +472,7 @@ fn main() {
             Err("计算失败")
         }
     });
-    
+
     // Rust 1.90: 更清晰的错误链
     match handle.join() {
         Ok(Ok(value)) => {
@@ -504,50 +504,50 @@ struct TaskResult {
 
 fn main() {
     println!("=== 并行任务协调示例 ===\n");
-    
+
     let num_workers = 4;
     let results = Arc::new(Mutex::new(Vec::new()));
-    
+
     let handles: Vec<_> = (0..num_workers)
         .map(|id| {
             let results = Arc::clone(&results);
-            
+
             thread::spawn(move || {
                 let start = std::time::Instant::now();
-                
+
                 // 模拟不同工作负载
                 let work_amount = (id + 1) * 100_000;
                 let mut sum = 0u64;
                 for i in 0..work_amount {
                     sum = sum.wrapping_add(i as u64);
                 }
-                
+
                 let duration = start.elapsed();
-                
+
                 // 记录结果
                 results.lock().unwrap().push(TaskResult {
                     id,
                     duration,
                     result: sum,
                 });
-                
+
                 println!("Worker {} 完成 (耗时: {:?})", id, duration);
             })
         })
         .collect();
-    
+
     // 等待所有任务完成
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     // 分析结果
     let results = results.lock().unwrap();
     println!("\n=== 结果分析 ===");
     for r in results.iter() {
         println!("任务 {}: {:?} -> {}", r.id, r.duration, r.result);
     }
-    
+
     let total_time: Duration = results.iter().map(|r| r.duration).sum();
     let avg_time = total_time / results.len() as u32;
     println!("\n平均耗时: {:?}", avg_time);
@@ -574,7 +574,7 @@ fn main() {
         *counter.borrow_mut() += 1;
         println!("Counter: {}", counter.borrow());
     });
-    
+
     // 在新线程中使用
     let handle = std::thread::spawn(|| {
         COUNTER.with(|counter| {
@@ -582,9 +582,9 @@ fn main() {
             println!("Thread counter: {}", counter.borrow());
         });
     });
-    
+
     handle.join().unwrap();
-    
+
     // 主线程的计数器保持不变
     COUNTER.with(|counter| {
         println!("Main thread counter: {}", counter.borrow());
@@ -617,22 +617,22 @@ struct Worker {
 impl SimpleThreadPool {
     fn new(size: usize) -> SimpleThreadPool {
         assert!(size > 0);
-        
+
         let (sender, receiver) = crossbeam_channel::unbounded();
         let receiver = Arc::new(Mutex::new(receiver));
-        
+
         let mut workers = Vec::with_capacity(size);
-        
+
         for id in 0..size {
             workers.push(Worker::new(id, Arc::clone(&receiver)));
         }
-        
+
         SimpleThreadPool {
             workers,
             sender: Some(sender),
         }
     }
-    
+
     fn execute<F>(&self, f: F)
     where
         F: FnOnce() + Send + 'static,
@@ -662,12 +662,12 @@ unsafe impl Send for SafeData {}
 
 fn main() {
     let data = SafeData { value: 42 };
-    
+
     // 可以安全地转移到新线程
     let handle = thread::spawn(move || {
         println!("Data value: {}", data.value);
     });
-    
+
     handle.join().unwrap();
 }
 ```
@@ -685,9 +685,9 @@ fn main() {
     // 对于CPU密集型任务，线程数通常等于CPU核心数
     let num_cpus = num_cpus::get();
     println!("CPU cores: {}", num_cpus);
-    
+
     let mut handles = vec![];
-    
+
     for i in 0..num_cpus {
         let handle = thread::spawn(move || {
             // CPU密集型计算
@@ -699,7 +699,7 @@ fn main() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
@@ -721,14 +721,14 @@ fn benchmark_thread_creation() {
         thread::spawn(|| {}).join().unwrap();
     }
     let v189 = start.elapsed();
-    
+
     // Rust 1.90 - 优化后
     let start = std::time::Instant::now();
     for _ in 0..1000 {
         thread::spawn(|| {}).join().unwrap();
     }
     let v190 = start.elapsed();
-    
+
     println!("Rust 1.89: {:?}", v189);
     println!("Rust 1.90: {:?}", v190);
     println!("改进: {:.2}%", ((v189.as_nanos() - v190.as_nanos()) as f64 / v189.as_nanos() as f64) * 100.0);
@@ -764,7 +764,7 @@ mindmap
         自定义名称
         栈大小配置
         错误处理
-    
+
     管理线程
       JoinHandle
         等待完成
@@ -778,7 +778,7 @@ mindmap
         park/unpark
         sleep
         yield_now
-    
+
     线程通信
       消息传递
         MPSC channel
@@ -787,7 +787,7 @@ mindmap
         Arc+Mutex
         Arc+RwLock
         Atomic类型
-    
+
     性能优化
       线程池
         rayon
@@ -864,7 +864,7 @@ Rust 1.90 的基础线程操作提供了强大而安全的线程编程能力，�
 ```rust
 fn optimal_thread_count(task_type: TaskType) -> usize {
     let num_cpus = num_cpus::get();
-    
+
     match task_type {
         TaskType::CpuBound => num_cpus,              // CPU密集型
         TaskType::IoBound => num_cpus * 2,           // I/O密集型
@@ -920,11 +920,11 @@ println!("线程耗时: {:?}", duration);
 
 ---
 
-**文档状态**: ✅ 已完成 (2025-10-19 增强版)  
-**质量等级**: S级 (卓越)  
-**Rust 1.90 支持**: ✅ 完全支持并优化  
-**实践指导**: ✅ 完整覆盖  
-**增强内容**: ✅ 知识图谱 + 矩阵对比 + 丰富示例  
+**文档状态**: ✅ 已完成 (2025-10-19 增强版)
+**质量等级**: S级 (卓越)
+**Rust 1.90 支持**: ✅ 完全支持并优化
+**实践指导**: ✅ 完整覆盖
+**增强内容**: ✅ 知识图谱 + 矩阵对比 + 丰富示例
 **下次更新**: 跟随 Rust 版本更新
 
 🎉 **恭喜！您已掌握 Rust 1.90 基础线程操作的核心知识！**

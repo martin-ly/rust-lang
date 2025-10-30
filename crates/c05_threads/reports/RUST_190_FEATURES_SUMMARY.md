@@ -148,7 +148,7 @@ impl AdvancedConcurrency {
     pub fn memory_barriers() {
         let flag = Arc::new(AtomicBool::new(false));
         let data = Arc::new(Mutex::new(0));
-        
+
         // 使用 Release/Acquire 内存屏障
         flag.store(true, Ordering::Release);
         while !flag.load(Ordering::Acquire) {

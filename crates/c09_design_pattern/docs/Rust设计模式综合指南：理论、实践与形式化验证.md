@@ -9,8 +9,8 @@
 3. **形式化理论**：语义模型、等价关系、形式化证明
 4. **实践指南**：最佳实践、性能分析、选型决策
 
-**适用版本**：Rust 1.90+ (Edition 2024)  
-**文档版本**：2.0  
+**适用版本**：Rust 1.90+ (Edition 2024)
+**文档版本**：2.0
 **最后更新**：2025-10-02
 
 ---
@@ -140,7 +140,7 @@ impl Database for PostgresDb {
         println!("Connecting to Postgres: {}", url);
         Ok(Connection::Postgres)
     }
-    
+
     fn name(&self) -> &str { "PostgreSQL" }
 }
 
@@ -149,7 +149,7 @@ impl Database for MySqlDb {
         println!("Connecting to MySQL: {}", url);
         Ok(Connection::MySql)
     }
-    
+
     fn name(&self) -> &str { "MySQL" }
 }
 
@@ -178,7 +178,7 @@ pub struct PostgresFactory;
 
 impl DatabaseFactory for PostgresFactory {
     type Db = PostgresDb;
-    
+
     fn create() -> Self::Db {
         PostgresDb
     }
@@ -278,7 +278,7 @@ fn main() {
         .url("https://api.example.com".to_string())
         .method("GET".to_string())
         .build();
-    
+
     // 编译错误：缺少url
     // let invalid = HttpRequestBuilder::new().method("GET".to_string()).build();
 }
@@ -358,7 +358,7 @@ impl DataSource for FileDataSource {
     fn read(&self) -> String {
         format!("Reading from {}", self.filename)
     }
-    
+
     fn write(&mut self, data: &str) {
         println!("Writing to {}: {}", self.filename, data);
     }
@@ -380,7 +380,7 @@ impl<D: DataSource> DataSource for EncryptionDecorator<D> {
         let data = self.wrapped.read();
         format!("Decrypted({})", data)
     }
-    
+
     fn write(&mut self, data: &str) {
         let encrypted = format!("Encrypted({})", data);
         self.wrapped.write(&encrypted);
@@ -397,7 +397,7 @@ impl<D: DataSource> DataSource for CompressionDecorator<D> {
         let data = self.wrapped.read();
         format!("Decompressed({})", data)
     }
-    
+
     fn write(&mut self, data: &str) {
         let compressed = format!("Compressed({})", data);
         self.wrapped.write(&compressed);
@@ -409,7 +409,7 @@ fn main() {
     let file = FileDataSource { filename: "data.txt".to_string() };
     let encrypted = EncryptionDecorator::new(file);
     let compressed = CompressionDecorator::new(encrypted);
-    
+
     println!("{}", compressed.read());
     // 输出：Decompressed(Decrypted(Reading from data.txt))
 }
@@ -470,7 +470,7 @@ impl Sorter {
     pub fn new(strategy: Box<dyn SortStrategy>) -> Self {
         Sorter { strategy }
     }
-    
+
     pub fn sort(&self, data: &mut [i32]) {
         self.strategy.sort(data);
     }
@@ -488,7 +488,7 @@ impl<S: SortStrategy> GenericSorter<S> {
     pub fn new(strategy: S) -> Self {
         GenericSorter { strategy }
     }
-    
+
     pub fn sort(&self, data: &mut [i32]) {
         self.strategy.sort(data);
     }
@@ -608,7 +608,7 @@ consume(x);
 线性类型规则：Γ, x: T ⊢ e: U
                ──────────────────
                Γ ⊢ λx.e: T → U
-               
+
 其中x在e中出现恰好一次
 ```
 
@@ -636,7 +636,7 @@ impl BoundedCounter {
         assert!(capacity > 0);
         BoundedCounter { count: 0, capacity }
     }
-    
+
     /// 前置条件：self.count < self.capacity
     /// 后置条件：self.count == old(self.count) + 1
     pub fn increment(&mut self) -> Result<(), &'static str> {
@@ -751,7 +751,7 @@ impl Session<Init> {
     pub fn new() -> Self {
         Session { _state: PhantomData }
     }
-    
+
     pub fn connect(self) -> Session<Connected> {
         println!("Connecting...");
         Session { _state: PhantomData }
@@ -776,9 +776,9 @@ fn main() {
     let session = Session::<Init>::new()
         .connect()
         .authenticate("password");
-    
+
     session.send_data("Hello, World!");
-    
+
     // 编译错误：未认证不能发送数据
     // Session::<Init>::new().connect().send_data("fail");
 }
@@ -881,8 +881,8 @@ cargo test --test formal_verification_examples
 
 ---
 
-**贡献者**：Rust设计模式社区  
-**许可证**：MIT/Apache-2.0  
+**贡献者**：Rust设计模式社区
+**许可证**：MIT/Apache-2.0
 **仓库**：<https://github.com/your-org/rust-design-patterns>
 
 ---

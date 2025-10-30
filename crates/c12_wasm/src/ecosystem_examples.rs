@@ -22,13 +22,12 @@ pub mod rust_190_features {
     pub fn get_filtered_numbers(numbers: &[i32]) -> impl Iterator<Item = &i32> {
         numbers.iter().filter(|&&x| x > 0)
     }
-
 }
 
 /// 设计模式示例
 pub mod design_patterns {
-    use wasm_bindgen::prelude::*;
     use std::sync::OnceLock;
+    use wasm_bindgen::prelude::*;
 
     /// 工厂模式示例
     pub mod factory {
@@ -70,6 +69,7 @@ pub mod design_patterns {
         #[wasm_bindgen]
         impl WasmRendererFactory {
             #[wasm_bindgen(constructor)]
+            #[allow(clippy::new_without_default)]
             pub fn new() -> Self {
                 Self
             }
@@ -103,6 +103,7 @@ pub mod design_patterns {
         #[wasm_bindgen]
         impl ConfigBuilder {
             #[wasm_bindgen(constructor)]
+            #[allow(clippy::new_without_default)]
             pub fn new() -> Self {
                 Self {
                     timeout: None,
@@ -135,7 +136,9 @@ pub mod design_patterns {
                     inner: Config {
                         timeout: self.timeout.unwrap_or(5000),
                         retries: self.retries.unwrap_or(3),
-                        url: self.url.ok_or_else(|| JsValue::from_str("URL is required"))?,
+                        url: self
+                            .url
+                            .ok_or_else(|| JsValue::from_str("URL is required"))?,
                     },
                 })
             }
@@ -186,7 +189,8 @@ pub mod design_patterns {
             }
 
             pub fn initialize(api_key: String, timeout: u32) -> Result<(), String> {
-                GLOBAL_CONFIG.set(AppConfig { api_key, timeout })
+                GLOBAL_CONFIG
+                    .set(AppConfig { api_key, timeout })
                     .map_err(|_| "Config already initialized".to_string())
             }
         }
@@ -198,8 +202,7 @@ pub mod design_patterns {
         impl WasmAppConfig {
             #[wasm_bindgen]
             pub fn initialize(api_key: String, timeout: u32) -> Result<(), JsValue> {
-                AppConfig::initialize(api_key, timeout)
-                    .map_err(|e| JsValue::from_str(&e))
+                AppConfig::initialize(api_key, timeout).map_err(|e| JsValue::from_str(&e))
             }
 
             #[wasm_bindgen]
@@ -224,6 +227,7 @@ pub mod design_patterns {
         }
 
         impl EventSubject {
+            #[allow(clippy::new_without_default)]
             pub fn new() -> Self {
                 Self {
                     observers: Rc::new(RefCell::new(Vec::new())),
@@ -257,6 +261,7 @@ pub mod design_patterns {
         #[wasm_bindgen]
         impl WasmEventSubject {
             #[wasm_bindgen(constructor)]
+            #[allow(clippy::new_without_default)]
             pub fn new() -> Self {
                 Self {
                     inner: EventSubject::new(),
@@ -411,7 +416,11 @@ mod tests {
 
     #[test]
     fn test_singleton_pattern() {
-        design_patterns::singleton::WasmAppConfig::initialize("test-key".to_string(), 10000).unwrap();
-        assert_eq!(design_patterns::singleton::WasmAppConfig::get_timeout(), 10000);
+        design_patterns::singleton::WasmAppConfig::initialize("test-key".to_string(), 10000)
+            .unwrap();
+        assert_eq!(
+            design_patterns::singleton::WasmAppConfig::get_timeout(),
+            10000
+        );
     }
 }

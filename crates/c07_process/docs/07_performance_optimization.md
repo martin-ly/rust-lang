@@ -64,46 +64,46 @@ impl ZeroCopyProcessManager {
             memory_mappings: Arc::new(Mutex::new(Vec::new())),
         }
     }
-    
+
     pub async fn create_memory_mapping(
         &self,
         data: Vec<u8>,
     ) -> Result<MemoryMapping, Box<dyn std::error::Error>> {
         let mapping_id = uuid::Uuid::new_v4().to_string();
         let data_arc = Arc::new(data);
-        
+
         let mapping = MemoryMapping {
             id: mapping_id,
             data: data_arc,
             offset: 0,
             length: data.len(),
         };
-        
+
         let mut mappings = self.memory_mappings.lock().await;
         mappings.push(mapping.clone());
-        
+
         Ok(mapping)
     }
-    
+
     pub async fn get_buffer(&self) -> Result<Vec<u8>, Box<dyn std::error::Error>> {
         let mut pool = self.buffer_pool.lock().await;
-        
+
         if let Some(buffer) = pool.buffers.pop() {
             Ok(buffer)
         } else {
             Ok(vec![0u8; pool.buffer_size])
         }
     }
-    
+
     pub async fn return_buffer(&self, mut buffer: Vec<u8>) {
         let mut pool = self.buffer_pool.lock().await;
-        
+
         if pool.buffers.len() < pool.max_buffers {
             buffer.clear();
             pool.buffers.push(buffer);
         }
     }
-    
+
     pub async fn transfer_data_zero_copy(
         &self,
         source_mapping: &MemoryMapping,
@@ -111,15 +111,15 @@ impl ZeroCopyProcessManager {
     ) -> Result<(), Box<dyn std::error::Error>> {
         if let Some(stdin) = target_process.stdin.as_mut() {
             let mut writer = BufWriter::new(stdin);
-            
+
             // 直接写入内存映射的数据，避免额外拷贝
             writer.write_all(&source_mapping.data[source_mapping.offset..source_mapping.offset + source_mapping.length]).await?;
             writer.flush().await?;
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn read_data_zero_copy(
         &self,
         source_process: &mut tokio::process::Child,
@@ -128,9 +128,9 @@ impl ZeroCopyProcessManager {
         if let Some(stdout) = source_process.stdout.as_mut() {
             let mut reader = BufReader::new(stdout);
             let mut buffer = self.get_buffer().await?;
-            
+
             let bytes_read = reader.read(&mut buffer).await?;
-            
+
             if bytes_read > 0 {
                 // 直接写入目标内存映射
                 let target_data = Arc::get_mut(&mut target_mapping.data).unwrap();
@@ -138,10 +138,10 @@ impl ZeroCopyProcessManager {
                 target_data[target_mapping.offset..target_mapping.offset + bytes_read].copy_from_slice(&buffer[..bytes_read]);
                 target_mapping.length = bytes_read;
             }
-            
+
             self.return_buffer(buffer).await;
         }
-        
+
         Ok(())
     }
 }
@@ -188,14 +188,14 @@ impl MemoryPoolManager {
             allocation_stats: Arc::new(Mutex::new(AllocationStats::default())),
         }
     }
-    
+
     pub async fn create_pool(
         &self,
         buffer_size: usize,
         max_buffers: usize,
     ) -> Result<String, Box<dyn std::error::Error>> {
         let pool_id = uuid::Uuid::new_v4().to_string();
-        
+
         let pool = MemoryPool {
             id: pool_id.clone(),
             buffer_size,
@@ -205,31 +205,31 @@ impl MemoryPoolManager {
             created_at: Instant::now(),
             last_used: Instant::now(),
         };
-        
+
         let mut pools = self.pools.write().await;
         pools.push(pool);
-        
+
         Ok(pool_id)
     }
-    
+
     pub async fn allocate_buffer(
         &self,
         pool_id: &str,
         size: usize,
     ) -> Result<Vec<u8>, Box<dyn std::error::Error>> {
         let start_time = Instant::now();
-        
+
         let mut pools = self.pools.write().await;
         let pool = pools.iter_mut()
             .find(|p| p.id == pool_id)
             .ok_or("内存池未找到")?;
-        
+
         // 检查是否有可用的缓冲区
         if let Some(mut buffer) = pool.available_buffers.pop_front() {
             buffer.resize(size, 0);
             pool.allocated_buffers += 1;
             pool.last_used = Instant::now();
-            
+
             // 更新统计信息
             let mut stats = self.allocation_stats.lock().await;
             stats.total_allocations += 1;
@@ -239,7 +239,7 @@ impl MemoryPoolManager {
                 (stats.average_allocation_time.as_millis() * (stats.total_allocations - 1) as u128
                  + start_time.elapsed().as_millis()) / stats.total_allocations as u128
             );
-            
+
             Ok(buffer)
         } else {
             // 创建新缓冲区
@@ -247,24 +247,24 @@ impl MemoryPoolManager {
                 let buffer = vec![0u8; size];
                 pool.allocated_buffers += 1;
                 pool.last_used = Instant::now();
-                
+
                 // 更新统计信息
                 let mut stats = self.allocation_stats.lock().await;
                 stats.total_allocations += 1;
                 stats.current_usage += 1;
                 stats.peak_usage = stats.peak_usage.max(stats.current_usage);
-                
+
                 Ok(buffer)
             } else {
                 // 更新失败统计
                 let mut stats = self.allocation_stats.lock().await;
                 stats.allocation_failures += 1;
-                
+
                 Err("内存池已满".into())
             }
         }
     }
-    
+
     pub async fn deallocate_buffer(
         &self,
         pool_id: &str,
@@ -274,28 +274,28 @@ impl MemoryPoolManager {
         let pool = pools.iter_mut()
             .find(|p| p.id == pool_id)
             .ok_or("内存池未找到")?;
-        
+
         if pool.available_buffers.len() < pool.max_buffers {
             buffer.clear();
             pool.available_buffers.push_back(buffer);
             pool.allocated_buffers -= 1;
             pool.last_used = Instant::now();
-            
+
             // 更新统计信息
             let mut stats = self.allocation_stats.lock().await;
             stats.total_deallocations += 1;
             stats.current_usage -= 1;
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn get_pool_stats(&self, pool_id: &str) -> Result<PoolStats, Box<dyn std::error::Error>> {
         let pools = self.pools.read().await;
         let pool = pools.iter()
             .find(|p| p.id == pool_id)
             .ok_or("内存池未找到")?;
-        
+
         Ok(PoolStats {
             id: pool.id.clone(),
             buffer_size: pool.buffer_size,
@@ -307,15 +307,15 @@ impl MemoryPoolManager {
             last_used: pool.last_used,
         })
     }
-    
+
     pub async fn cleanup_unused_pools(&self, max_idle_time: Duration) -> Result<(), Box<dyn std::error::Error>> {
         let mut pools = self.pools.write().await;
         let now = Instant::now();
-        
+
         pools.retain(|pool| {
             now.duration_since(pool.last_used) < max_idle_time
         });
-        
+
         Ok(())
     }
 }
@@ -374,7 +374,7 @@ pub struct LoadBalancer {
 impl CpuAffinityManager {
     pub fn new() -> Self {
         let cpu_cores = num_cpus::get();
-        
+
         Self {
             cpu_cores,
             process_affinities: Arc::new(Mutex::new(HashMap::new())),
@@ -385,7 +385,7 @@ impl CpuAffinityManager {
             })),
         }
     }
-    
+
     pub async fn set_process_affinity(
         &self,
         process_id: &str,
@@ -396,40 +396,40 @@ impl CpuAffinityManager {
         {
             use nix::sched::{sched_setaffinity, CpuSet};
             use nix::unistd::Pid;
-            
+
             let mut cpu_set = CpuSet::new();
             for i in 0..self.cpu_cores {
                 if (cpu_mask >> i) & 1 == 1 {
                     cpu_set.set(i);
                 }
             }
-            
+
             // 这里需要实际的进程 PID，示例中使用 0
             sched_setaffinity(Pid::from_raw(0), &cpu_set)?;
         }
-        
+
         let affinity = CpuAffinity {
             process_id: process_id.to_string(),
             cpu_mask,
             priority,
             last_assigned: std::time::Instant::now(),
         };
-        
+
         let mut affinities = self.process_affinities.lock().await;
         affinities.insert(process_id.to_string(), affinity);
-        
+
         Ok(())
     }
-    
+
     pub async fn get_optimal_cpu_mask(
         &self,
         priority: ProcessPriority,
     ) -> Result<u64, Box<dyn std::error::Error>> {
         let mut load_balancer = self.load_balancer.lock().await;
-        
+
         // 更新 CPU 使用情况
         self.update_cpu_usage(&mut load_balancer).await?;
-        
+
         // 根据优先级选择 CPU
         let cpu_mask = match priority {
             ProcessPriority::Critical => {
@@ -450,54 +450,54 @@ impl CpuAffinityManager {
                 ((1u64 << (self.cpu_cores - start)) - 1) << start
             }
         };
-        
+
         Ok(cpu_mask)
     }
-    
+
     async fn update_cpu_usage(&self, load_balancer: &mut LoadBalancer) -> Result<(), Box<dyn std::error::Error>> {
         // 实际实现中应该读取系统 CPU 使用情况
         // 这里使用模拟数据
         for i in 0..self.cpu_cores {
             load_balancer.cpu_usage[i] = rand::random::<f64>() * 100.0;
         }
-        
+
         load_balancer.last_update = std::time::Instant::now();
         Ok(())
     }
-    
+
     fn find_least_loaded_cpu(&self, load_balancer: &LoadBalancer) -> u64 {
         let mut min_usage = f64::MAX;
         let mut best_cpu = 0;
-        
+
         for i in 0..self.cpu_cores {
             if load_balancer.cpu_usage[i] < min_usage {
                 min_usage = load_balancer.cpu_usage[i];
                 best_cpu = i;
             }
         }
-        
+
         1u64 << best_cpu
     }
-    
+
     pub async fn optimize_process_distribution(&self) -> Result<(), Box<dyn std::error::Error>> {
         let affinities = self.process_affinities.lock().await;
         let mut load_balancer = self.load_balancer.lock().await;
-        
+
         // 重新平衡进程分布
         for (process_id, affinity) in affinities.iter() {
             let optimal_mask = self.get_optimal_cpu_mask(affinity.priority.clone()).await?;
-            
+
             if optimal_mask != affinity.cpu_mask {
                 println!("建议重新分配进程 {} 的 CPU 亲和性", process_id);
             }
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn get_cpu_stats(&self) -> CpuStats {
         let load_balancer = self.load_balancer.lock().await;
-        
+
         CpuStats {
             total_cores: self.cpu_cores,
             cpu_usage: load_balancer.cpu_usage.clone(),
@@ -560,7 +560,7 @@ impl ProcessPriorityManager {
             })),
         }
     }
-    
+
     pub async fn set_process_priority(
         &self,
         process_id: &str,
@@ -572,17 +572,17 @@ impl ProcessPriorityManager {
         {
             use nix::unistd::{nice, setpriority, Priority};
             use nix::sched::{sched_setscheduler, Scheduler, SchedParam};
-            
+
             if let Some(nice_val) = nice_value {
                 nice(nice_val)?;
             }
-            
+
             if let Some(rt_priority) = real_time_priority {
                 let param = SchedParam { sched_priority: rt_priority };
                 sched_setscheduler(nix::unistd::Pid::from_raw(0), Scheduler::FIFO, &param)?;
             }
         }
-        
+
         let priority_info = ProcessPriorityInfo {
             process_id: process_id.to_string(),
             priority: priority.clone(),
@@ -591,24 +591,24 @@ impl ProcessPriorityManager {
             cpu_limit: 1.0,
             memory_limit: 0,
         };
-        
+
         let mut priorities = self.process_priorities.lock().await;
         priorities.insert(process_id.to_string(), priority_info);
-        
+
         // 更新调度器队列
         self.update_scheduler_queue(process_id, priority).await;
-        
+
         Ok(())
     }
-    
+
     async fn update_scheduler_queue(&self, process_id: &str, priority: ProcessPriority) {
         let mut scheduler = self.scheduler.lock().await;
-        
+
         // 从所有队列中移除进程
         scheduler.high_priority_queue.retain(|id| id != process_id);
         scheduler.normal_priority_queue.retain(|id| id != process_id);
         scheduler.low_priority_queue.retain(|id| id != process_id);
-        
+
         // 根据优先级添加到相应队列
         match priority {
             ProcessPriority::Critical | ProcessPriority::High => {
@@ -622,37 +622,37 @@ impl ProcessPriorityManager {
             }
         }
     }
-    
+
     pub async fn schedule_next_process(&self) -> Option<String> {
         let mut scheduler = self.scheduler.lock().await;
-        
+
         // 按优先级顺序调度进程
         if let Some(process_id) = scheduler.high_priority_queue.pop() {
             scheduler.current_process = Some(process_id.clone());
             return Some(process_id);
         }
-        
+
         if let Some(process_id) = scheduler.normal_priority_queue.pop() {
             scheduler.current_process = Some(process_id.clone());
             return Some(process_id);
         }
-        
+
         if let Some(process_id) = scheduler.low_priority_queue.pop() {
             scheduler.current_process = Some(process_id.clone());
             return Some(process_id);
         }
-        
+
         None
     }
-    
+
     pub async fn get_process_priority(&self, process_id: &str) -> Option<ProcessPriorityInfo> {
         let priorities = self.process_priorities.lock().await;
         priorities.get(process_id).cloned()
     }
-    
+
     pub async fn get_scheduler_stats(&self) -> SchedulerStats {
         let scheduler = self.scheduler.lock().await;
-        
+
         SchedulerStats {
             high_priority_queue_size: scheduler.high_priority_queue.len(),
             normal_priority_queue_size: scheduler.normal_priority_queue.len(),
@@ -717,7 +717,7 @@ impl AsyncIOOptimizer {
             })),
         }
     }
-    
+
     pub async fn create_io_pool(
         &self,
         pool_id: &str,
@@ -731,24 +731,24 @@ impl AsyncIOOptimizer {
             buffer_size,
             max_buffers,
         };
-        
+
         let mut pools = self.io_pools.lock().await;
         pools.insert(pool_id.to_string(), pool);
-        
+
         Ok(())
     }
-    
+
     pub async fn get_read_buffer(&self, pool_id: &str) -> Result<Vec<u8>, Box<dyn std::error::Error>> {
         let mut pools = self.io_pools.lock().await;
         let pool = pools.get_mut(pool_id).ok_or("IO 池未找到")?;
-        
+
         if let Some(buffer) = pool.read_buffers.pop_front() {
             Ok(buffer)
         } else {
             Ok(vec![0u8; pool.buffer_size])
         }
     }
-    
+
     pub async fn return_read_buffer(&self, pool_id: &str, mut buffer: Vec<u8>) {
         let mut pools = self.io_pools.lock().await;
         if let Some(pool) = pools.get_mut(pool_id) {
@@ -758,18 +758,18 @@ impl AsyncIOOptimizer {
             }
         }
     }
-    
+
     pub async fn get_write_buffer(&self, pool_id: &str) -> Result<Vec<u8>, Box<dyn std::error::Error>> {
         let mut pools = self.io_pools.lock().await;
         let pool = pools.get_mut(pool_id).ok_or("IO 池未找到")?;
-        
+
         if let Some(buffer) = pool.write_buffers.pop_front() {
             Ok(buffer)
         } else {
             Ok(vec![0u8; pool.buffer_size])
         }
     }
-    
+
     pub async fn return_write_buffer(&self, pool_id: &str, mut buffer: Vec<u8>) {
         let mut pools = self.io_pools.lock().await;
         if let Some(pool) = pools.get_mut(pool_id) {
@@ -779,35 +779,35 @@ impl AsyncIOOptimizer {
             }
         }
     }
-    
+
     pub async fn optimize_process_io(
         &self,
         child: &mut tokio::process::Child,
         pool_id: &str,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let buffer_sizes = self.buffer_sizes.lock().await;
-        
+
         // 优化标准输入
         if let Some(stdin) = child.stdin.take() {
             let writer = BufWriter::with_capacity(buffer_sizes.stdin_buffer_size, stdin);
             child.stdin = Some(Box::pin(writer));
         }
-        
+
         // 优化标准输出
         if let Some(stdout) = child.stdout.take() {
             let reader = BufReader::with_capacity(buffer_sizes.stdout_buffer_size, stdout);
             child.stdout = Some(Box::pin(reader));
         }
-        
+
         // 优化标准错误
         if let Some(stderr) = child.stderr.take() {
             let reader = BufReader::with_capacity(buffer_sizes.stderr_buffer_size, stderr);
             child.stderr = Some(Box::pin(reader));
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn batch_read(
         &self,
         reader: &mut tokio::io::BufReader<tokio::process::ChildStdout>,
@@ -815,11 +815,11 @@ impl AsyncIOOptimizer {
         batch_size: usize,
     ) -> Result<Vec<Vec<u8>>, Box<dyn std::error::Error>> {
         let mut results = Vec::new();
-        
+
         for _ in 0..batch_size {
             let mut buffer = self.get_read_buffer(pool_id).await?;
             let bytes_read = reader.read(&mut buffer).await?;
-            
+
             if bytes_read > 0 {
                 buffer.truncate(bytes_read);
                 results.push(buffer);
@@ -828,10 +828,10 @@ impl AsyncIOOptimizer {
                 break;
             }
         }
-        
+
         Ok(results)
     }
-    
+
     pub async fn batch_write(
         &self,
         writer: &mut tokio::io::BufWriter<tokio::process::ChildStdin>,
@@ -842,7 +842,7 @@ impl AsyncIOOptimizer {
             writer.write_all(&data).await?;
             self.return_write_buffer(pool_id, data).await;
         }
-        
+
         writer.flush().await?;
         Ok(())
     }
@@ -890,7 +890,7 @@ impl FileDescriptorManager {
             max_fds_per_process,
         }
     }
-    
+
     pub async fn create_fd_pool(
         &self,
         pool_id: &str,
@@ -903,50 +903,50 @@ impl FileDescriptorManager {
             max_fds,
             created_at: Instant::now(),
         };
-        
+
         let mut pools = self.fd_pools.lock().await;
         pools.insert(pool_id.to_string(), pool);
-        
+
         Ok(())
     }
-    
+
     pub async fn allocate_fd(
         &self,
         pool_id: &str,
     ) -> Result<i32, Box<dyn std::error::Error>> {
         let mut pools = self.fd_pools.lock().await;
         let pool = pools.get_mut(pool_id).ok_or("FD 池未找到")?;
-        
+
         if let Some(fd) = pool.available_fds.pop() {
             pool.used_fds.push(fd);
-            
+
             let mut stats = self.fd_stats.lock().await;
             stats.used_fds += 1;
             stats.total_fds += 1;
             stats.peak_usage = stats.peak_usage.max(stats.used_fds);
-            
+
             Ok(fd)
         } else {
             // 创建新的文件描述符
             if pool.used_fds.len() < pool.max_fds {
                 let fd = self.create_new_fd().await?;
                 pool.used_fds.push(fd);
-                
+
                 let mut stats = self.fd_stats.lock().await;
                 stats.used_fds += 1;
                 stats.total_fds += 1;
                 stats.peak_usage = stats.peak_usage.max(stats.used_fds);
-                
+
                 Ok(fd)
             } else {
                 let mut stats = self.fd_stats.lock().await;
                 stats.allocation_failures += 1;
-                
+
                 Err("FD 池已满".into())
             }
         }
     }
-    
+
     pub async fn deallocate_fd(
         &self,
         pool_id: &str,
@@ -954,63 +954,63 @@ impl FileDescriptorManager {
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut pools = self.fd_pools.lock().await;
         let pool = pools.get_mut(pool_id).ok_or("FD 池未找到")?;
-        
+
         if let Some(pos) = pool.used_fds.iter().position(|&x| x == fd) {
             pool.used_fds.remove(pos);
             pool.available_fds.push(fd);
-            
+
             let mut stats = self.fd_stats.lock().await;
             stats.used_fds -= 1;
         }
-        
+
         Ok(())
     }
-    
+
     async fn create_new_fd(&self) -> Result<i32, Box<dyn std::error::Error>> {
         // 实际实现中应该创建真实的文件描述符
         // 这里使用模拟数据
         Ok(rand::random::<i32>())
     }
-    
+
     pub async fn cleanup_unused_fds(&self, max_idle_time: Duration) -> Result<(), Box<dyn std::error::Error>> {
         let mut pools = self.fd_pools.lock().await;
         let now = Instant::now();
-        
+
         for pool in pools.values_mut() {
             if now.duration_since(pool.created_at) > max_idle_time {
                 // 清理未使用的文件描述符
                 pool.available_fds.clear();
             }
         }
-        
+
         let mut stats = self.fd_stats.lock().await;
         stats.last_cleanup = now;
-        
+
         Ok(())
     }
-    
+
     pub async fn get_fd_stats(&self) -> FDStats {
         let stats = self.fd_stats.lock().await;
         stats.clone()
     }
-    
+
     pub async fn optimize_fd_usage(&self) -> Result<(), Box<dyn std::error::Error>> {
         let pools = self.fd_pools.lock().await;
         let mut stats = self.fd_stats.lock().await;
-        
+
         // 计算优化建议
         let total_available = pools.values().map(|p| p.available_fds.len()).sum::<usize>();
         let total_used = pools.values().map(|p| p.used_fds.len()).sum::<usize>();
-        
+
         if total_used as f64 / (total_available + total_used) as f64 > 0.8 {
-            println!("警告: 文件描述符使用率过高 ({:.2}%)", 
+            println!("警告: 文件描述符使用率过高 ({:.2}%)",
                 total_used as f64 / (total_available + total_used) as f64 * 100.0);
         }
-        
+
         stats.total_fds = total_available + total_used;
         stats.available_fds = total_available;
         stats.used_fds = total_used;
-        
+
         Ok(())
     }
 }
@@ -1059,20 +1059,20 @@ impl LockFreeProcessQueue {
             stats: Arc::new(LockFreeStats::default()),
         }
     }
-    
+
     pub fn enqueue(&self, task: ProcessTask) -> Result<(), QueueError> {
         if self.size.load(Ordering::Relaxed) >= self.max_size {
             self.stats.total_failed.fetch_add(1, Ordering::Relaxed);
             return Err(QueueError::QueueFull);
         }
-        
+
         self.queue.push(task);
         self.size.fetch_add(1, Ordering::Relaxed);
         self.stats.total_enqueued.fetch_add(1, Ordering::Relaxed);
-        
+
         Ok(())
     }
-    
+
     pub fn dequeue(&self) -> Option<ProcessTask> {
         if let Some(task) = self.queue.pop() {
             self.size.fetch_sub(1, Ordering::Relaxed);
@@ -1082,15 +1082,15 @@ impl LockFreeProcessQueue {
             None
         }
     }
-    
+
     pub fn size(&self) -> usize {
         self.size.load(Ordering::Relaxed)
     }
-    
+
     pub fn is_empty(&self) -> bool {
         self.size.load(Ordering::Relaxed) == 0
     }
-    
+
     pub fn get_stats(&self) -> QueueStats {
         QueueStats {
             total_enqueued: self.stats.total_enqueued.load(Ordering::Relaxed),
@@ -1129,22 +1129,22 @@ impl LockFreeProcessPool {
         for _ in 0..pool_size {
             queues.push(Arc::new(LockFreeProcessQueue::new(queue_size)));
         }
-        
+
         Self {
             queues,
             current_queue: AtomicUsize::new(0),
             pool_size,
         }
     }
-    
+
     pub fn enqueue_task(&self, task: ProcessTask) -> Result<(), QueueError> {
         // 使用轮询策略选择队列
         let queue_index = self.current_queue.fetch_add(1, Ordering::Relaxed) % self.pool_size;
         let queue = &self.queues[queue_index];
-        
+
         queue.enqueue(task)
     }
-    
+
     pub fn dequeue_task(&self) -> Option<ProcessTask> {
         // 从所有队列中查找任务
         for queue in &self.queues {
@@ -1152,16 +1152,16 @@ impl LockFreeProcessPool {
                 return Some(task);
             }
         }
-        
+
         None
     }
-    
+
     pub fn get_pool_stats(&self) -> PoolStats {
         let mut total_enqueued = 0;
         let mut total_dequeued = 0;
         let mut total_failed = 0;
         let mut current_size = 0;
-        
+
         for queue in &self.queues {
             let stats = queue.get_stats();
             total_enqueued += stats.total_enqueued;
@@ -1169,7 +1169,7 @@ impl LockFreeProcessPool {
             total_failed += stats.total_failed;
             current_size += stats.current_size;
         }
-        
+
         PoolStats {
             pool_size: self.pool_size,
             total_enqueued,
@@ -1229,76 +1229,76 @@ impl WorkStealingScheduler {
                 processed_tasks: std::sync::atomic::AtomicUsize::new(0),
             }));
         }
-        
+
         Self {
             workers,
             global_queue: Arc::new(LockFreeProcessQueue::new(queue_size * num_workers)),
             stats: Arc::new(SchedulerStats::default()),
         }
     }
-    
+
     pub fn submit_task(&self, task: ProcessTask) -> Result<(), QueueError> {
         // 首先尝试提交到全局队列
         self.global_queue.enqueue(task)
     }
-    
+
     pub async fn process_tasks(&self, worker_id: usize) -> Result<(), Box<dyn std::error::Error>> {
         let worker = &self.workers[worker_id];
         worker.is_busy.store(true, Ordering::Relaxed);
-        
+
         loop {
             // 首先从本地队列获取任务
             if let Some(task) = worker.local_queue.dequeue() {
                 self.process_task(worker, task).await?;
                 continue;
             }
-            
+
             // 本地队列为空，尝试从全局队列获取
             if let Some(task) = self.global_queue.dequeue() {
                 self.process_task(worker, task).await?;
                 continue;
             }
-            
+
             // 全局队列也为空，尝试工作窃取
             if let Some(task) = self.steal_task(worker_id) {
                 self.process_task(worker, task).await?;
                 continue;
             }
-            
+
             // 没有任务可处理，短暂休眠
             tokio::time::sleep(Duration::from_millis(1)).await;
         }
     }
-    
+
     async fn process_task(
         &self,
         worker: &Worker,
         task: ProcessTask,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let start_time = Instant::now();
-        
+
         // 模拟任务处理
         tokio::time::sleep(Duration::from_millis(10)).await;
-        
+
         let processing_time = start_time.elapsed();
-        
+
         // 更新统计信息
         worker.processed_tasks.fetch_add(1, Ordering::Relaxed);
         self.stats.total_tasks_processed.fetch_add(1, Ordering::Relaxed);
-        
+
         // 更新平均处理时间
         let current_avg = self.stats.average_processing_time.load(Ordering::Relaxed);
         let new_avg = (current_avg + processing_time.as_millis() as usize) / 2;
         self.stats.average_processing_time.store(new_avg, Ordering::Relaxed);
-        
+
         Ok(())
     }
-    
+
     fn steal_task(&self, worker_id: usize) -> Option<ProcessTask> {
         // 随机选择其他工作线程进行窃取
         let mut rng = rand::thread_rng();
         let num_workers = self.workers.len();
-        
+
         for _ in 0..num_workers {
             let target_worker_id = rng.gen_range(0..num_workers);
             if target_worker_id != worker_id {
@@ -1308,25 +1308,25 @@ impl WorkStealingScheduler {
                 }
             }
         }
-        
+
         None
     }
-    
+
     pub fn get_scheduler_stats(&self) -> SchedulerStatsInfo {
         let mut worker_stats = Vec::new();
         let mut total_processed = 0;
-        
+
         for worker in &self.workers {
             let processed = worker.processed_tasks.load(Ordering::Relaxed);
             total_processed += processed;
-            
+
             worker_stats.push(WorkerStats {
                 id: worker.id,
                 processed_tasks: processed,
                 is_busy: worker.is_busy.load(Ordering::Relaxed),
             });
         }
-        
+
         SchedulerStatsInfo {
             num_workers: self.workers.len(),
             total_tasks_processed: self.stats.total_tasks_processed.load(Ordering::Relaxed),
@@ -1431,25 +1431,25 @@ impl PerformanceMonitor {
             sampling_interval,
         }
     }
-    
+
     pub async fn add_collector(&self, collector: Box<dyn MetricCollector + Send + Sync>) {
         let mut collectors = self.collectors.lock().await;
         collectors.push(collector);
     }
-    
+
     pub async fn start_monitoring(&self) -> Result<(), Box<dyn std::error::Error>> {
         let mut interval = tokio::time::interval(self.sampling_interval);
-        
+
         loop {
             interval.tick().await;
             self.collect_metrics().await?;
         }
     }
-    
+
     async fn collect_metrics(&self) -> Result<(), Box<dyn std::error::Error>> {
         let collectors = self.collectors.lock().await;
         let mut metrics = self.metrics.lock().await;
-        
+
         for collector in collectors.iter() {
             match collector.collect() {
                 Ok(data) => {
@@ -1460,11 +1460,11 @@ impl PerformanceMonitor {
                 }
             }
         }
-        
+
         metrics.timestamp = Instant::now();
         Ok(())
     }
-    
+
     async fn update_metrics(&self, metrics: &mut PerformanceMetrics, data: &MetricData) {
         match data.name.as_str() {
             "cpu_usage" => metrics.cpu_usage = data.value,
@@ -1477,15 +1477,15 @@ impl PerformanceMonitor {
             _ => {}
         }
     }
-    
+
     pub async fn get_metrics(&self) -> PerformanceMetrics {
         let metrics = self.metrics.lock().await;
         metrics.clone()
     }
-    
+
     pub async fn get_metrics_summary(&self) -> PerformanceSummary {
         let metrics = self.metrics.lock().await;
-        
+
         PerformanceSummary {
             cpu_usage: metrics.cpu_usage,
             memory_usage: metrics.memory_usage,
@@ -1513,7 +1513,7 @@ impl MetricCollector for CpuUsageCollector {
     fn collect(&self) -> Result<MetricData, Box<dyn std::error::Error>> {
         // 实际实现中应该读取系统 CPU 使用情况
         let cpu_usage = rand::random::<f64>() * 100.0;
-        
+
         Ok(MetricData {
             name: "cpu_usage".to_string(),
             value: cpu_usage,
@@ -1521,7 +1521,7 @@ impl MetricCollector for CpuUsageCollector {
             timestamp: Instant::now(),
         })
     }
-    
+
     fn get_name(&self) -> &str {
         "cpu_usage"
     }
@@ -1533,7 +1533,7 @@ impl MetricCollector for MemoryUsageCollector {
     fn collect(&self) -> Result<MetricData, Box<dyn std::error::Error>> {
         // 实际实现中应该读取系统内存使用情况
         let memory_usage = rand::random::<u64>() % 1000000000; // 模拟内存使用
-        
+
         Ok(MetricData {
             name: "memory_usage".to_string(),
             value: memory_usage as f64,
@@ -1541,7 +1541,7 @@ impl MetricCollector for MemoryUsageCollector {
             timestamp: Instant::now(),
         })
     }
-    
+
     fn get_name(&self) -> &str {
         "memory_usage"
     }
@@ -1617,50 +1617,50 @@ impl PerformanceAnalyzer {
             optimization_suggestions: Arc::new(Mutex::new(Vec::new())),
         }
     }
-    
+
     pub async fn add_metrics(&self, metrics: PerformanceMetrics) {
         let mut historical_data = self.historical_data.lock().await;
-        
+
         historical_data.push(metrics);
-        
+
         // 保持历史数据大小限制
         if historical_data.len() > self.analysis_config.max_history_size {
             historical_data.remove(0);
         }
     }
-    
+
     pub async fn analyze_performance(&self) -> Result<(), Box<dyn std::error::Error>> {
         let historical_data = self.historical_data.lock().await;
-        
+
         if historical_data.len() < 2 {
             return Ok(());
         }
-        
+
         let mut suggestions = Vec::new();
-        
+
         // 分析 CPU 使用情况
         self.analyze_cpu_usage(&historical_data, &mut suggestions).await;
-        
+
         // 分析内存使用情况
         self.analyze_memory_usage(&historical_data, &mut suggestions).await;
-        
+
         // 分析磁盘 I/O
         self.analyze_disk_io(&historical_data, &mut suggestions).await;
-        
+
         // 分析网络 I/O
         self.analyze_network_io(&historical_data, &mut suggestions).await;
-        
+
         // 分析进程管理
         self.analyze_process_management(&historical_data, &mut suggestions).await;
-        
+
         // 更新优化建议
         let mut optimization_suggestions = self.optimization_suggestions.lock().await;
         optimization_suggestions.clear();
         optimization_suggestions.extend(suggestions);
-        
+
         Ok(())
     }
-    
+
     async fn analyze_cpu_usage(
         &self,
         historical_data: &[PerformanceMetrics],
@@ -1668,7 +1668,7 @@ impl PerformanceAnalyzer {
     ) {
         let recent_data = &historical_data[historical_data.len().saturating_sub(10)..];
         let avg_cpu_usage = recent_data.iter().map(|m| m.cpu_usage).sum::<f64>() / recent_data.len() as f64;
-        
+
         if avg_cpu_usage > self.analysis_config.cpu_threshold {
             suggestions.push(OptimizationSuggestion {
                 id: uuid::Uuid::new_v4().to_string(),
@@ -1681,7 +1681,7 @@ impl PerformanceAnalyzer {
             });
         }
     }
-    
+
     async fn analyze_memory_usage(
         &self,
         historical_data: &[PerformanceMetrics],
@@ -1689,7 +1689,7 @@ impl PerformanceAnalyzer {
     ) {
         let recent_data = &historical_data[historical_data.len().saturating_sub(10)..];
         let avg_memory_usage = recent_data.iter().map(|m| m.memory_usage).sum::<u64>() / recent_data.len() as u64;
-        
+
         if avg_memory_usage > self.analysis_config.memory_threshold {
             suggestions.push(OptimizationSuggestion {
                 id: uuid::Uuid::new_v4().to_string(),
@@ -1702,7 +1702,7 @@ impl PerformanceAnalyzer {
             });
         }
     }
-    
+
     async fn analyze_disk_io(
         &self,
         historical_data: &[PerformanceMetrics],
@@ -1712,7 +1712,7 @@ impl PerformanceAnalyzer {
         let avg_disk_io = recent_data.iter()
             .map(|m| m.disk_io.read_bytes + m.disk_io.write_bytes)
             .sum::<u64>() / recent_data.len() as u64;
-        
+
         if avg_disk_io > self.analysis_config.disk_io_threshold {
             suggestions.push(OptimizationSuggestion {
                 id: uuid::Uuid::new_v4().to_string(),
@@ -1725,7 +1725,7 @@ impl PerformanceAnalyzer {
             });
         }
     }
-    
+
     async fn analyze_network_io(
         &self,
         historical_data: &[PerformanceMetrics],
@@ -1735,7 +1735,7 @@ impl PerformanceAnalyzer {
         let avg_network_io = recent_data.iter()
             .map(|m| m.network_io.bytes_sent + m.network_io.bytes_received)
             .sum::<u64>() / recent_data.len() as u64;
-        
+
         if avg_network_io > self.analysis_config.network_io_threshold {
             suggestions.push(OptimizationSuggestion {
                 id: uuid::Uuid::new_v4().to_string(),
@@ -1748,7 +1748,7 @@ impl PerformanceAnalyzer {
             });
         }
     }
-    
+
     async fn analyze_process_management(
         &self,
         historical_data: &[PerformanceMetrics],
@@ -1756,7 +1756,7 @@ impl PerformanceAnalyzer {
     ) {
         let recent_data = &historical_data[historical_data.len().saturating_sub(10)..];
         let avg_process_count = recent_data.iter().map(|m| m.process_metrics.total_processes).sum::<usize>() / recent_data.len();
-        
+
         if avg_process_count > 1000 {
             suggestions.push(OptimizationSuggestion {
                 id: uuid::Uuid::new_v4().to_string(),
@@ -1769,28 +1769,28 @@ impl PerformanceAnalyzer {
             });
         }
     }
-    
+
     pub async fn get_optimization_suggestions(&self) -> Vec<OptimizationSuggestion> {
         let suggestions = self.optimization_suggestions.lock().await;
         suggestions.clone()
     }
-    
+
     pub async fn get_performance_trends(&self) -> PerformanceTrends {
         let historical_data = self.historical_data.lock().await;
-        
+
         if historical_data.len() < 2 {
             return PerformanceTrends::default();
         }
-        
+
         let recent_data = &historical_data[historical_data.len().saturating_sub(20)..];
         let older_data = &historical_data[historical_data.len().saturating_sub(40)..historical_data.len().saturating_sub(20)];
-        
+
         let recent_avg_cpu = recent_data.iter().map(|m| m.cpu_usage).sum::<f64>() / recent_data.len() as f64;
         let older_avg_cpu = older_data.iter().map(|m| m.cpu_usage).sum::<f64>() / older_data.len() as f64;
-        
+
         let recent_avg_memory = recent_data.iter().map(|m| m.memory_usage).sum::<u64>() / recent_data.len() as u64;
         let older_avg_memory = older_data.iter().map(|m| m.memory_usage).sum::<u64>() / older_data.len() as u64;
-        
+
         PerformanceTrends {
             cpu_trend: if recent_avg_cpu > older_avg_cpu { TrendDirection::Increasing } else { TrendDirection::Decreasing },
             memory_trend: if recent_avg_memory > older_avg_memory { TrendDirection::Increasing } else { TrendDirection::Decreasing },

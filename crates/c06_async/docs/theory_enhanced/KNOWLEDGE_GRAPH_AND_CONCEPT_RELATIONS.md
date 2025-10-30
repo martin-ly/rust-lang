@@ -1,8 +1,8 @@
 # C06 异步编程 知识图谱与概念关系（增强版）
 
-> **文档定位**: Rust 1.90 异步编程的完整知识体系  
-> **创建日期**: 2025-10-20  
-> **适用版本**: Rust 1.90+ | Edition 2024  
+> **文档定位**: Rust 1.90 异步编程的完整知识体系
+> **创建日期**: 2025-10-20
+> **适用版本**: Rust 1.90+ | Edition 2024
 > **文档类型**: 理论知识图谱 + 概念关系 + 可视化
 
 ---
@@ -34,31 +34,31 @@
 ```mermaid
 graph TB
     AsyncSystem[异步编程系统]
-    
+
     AsyncSystem --> Core[核心概念]
     AsyncSystem --> Runtime[运行时]
     AsyncSystem --> Patterns[并发模式]
     AsyncSystem --> Advanced[高级特性]
-    
+
     Core --> Future[Future Trait]
     Core --> AsyncAwait[async/await]
     Core --> Pin[Pin/Unpin]
     Core --> Poll[Poll机制]
-    
+
     Runtime --> Tokio[Tokio]
     Runtime --> AsyncStd[async-std]
     Runtime --> Smol[Smol]
     Runtime --> Glommio[Glommio/Monoio]
-    
+
     Patterns --> TaskSpawn[任务生成]
     Patterns --> Select[Select多路选择]
     Patterns --> JoinSet[结构化并发]
     Patterns --> Channel[异步通道]
-    
+
     Advanced --> AsyncTrait[async fn in trait]
     Advanced --> Stream[Stream/Sink]
     Advanced --> Waker[Waker机制]
-    
+
     style AsyncSystem fill:#f9f,stroke:#333,stroke-width:4px
     style Runtime fill:#bbf,stroke:#333,stroke-width:2px
     style Patterns fill:#bfb,stroke:#333,stroke-width:2px
@@ -72,12 +72,12 @@ stateDiagram-v2
     Pending --> Ready: 准备完成
     Pending --> Pending: 未完成,注册Waker
     Ready --> [*]: 返回值
-    
+
     note right of Pending
         等待I/O或资源
         不阻塞线程
     end note
-    
+
     note right of Ready
         操作完成
         返回Result
@@ -91,15 +91,15 @@ graph LR
     App[应用代码] --> Runtime[异步Runtime]
     Runtime --> Executor[执行器]
     Runtime --> Reactor[反应器]
-    
+
     Executor --> TaskQueue[任务队列]
     Executor --> WorkerThreads[工作线程]
-    
+
     Reactor --> Poller[I/O轮询器]
     Reactor --> Waker[唤醒机制]
-    
+
     Poller --> OS[操作系统API]
-    
+
     style Runtime fill:#f96,stroke:#333,stroke-width:2px
     style Executor fill:#6c6,stroke:#333,stroke-width:2px
     style Reactor fill:#c6f,stroke:#333,stroke-width:2px
@@ -149,19 +149,19 @@ graph LR
 gantt
     title Rust 异步编程演化
     dateFormat YYYY-MM
-    
+
     section 基础异步
     Future 0.1        :done, 2016-01, 2018-12
     async/await 稳定  :done, 2019-11, 2019-11
-    
+
     section Runtime成熟
     Tokio 1.0         :done, 2020-12, 2020-12
     async-std稳定     :done, 2019-08, 2020-06
-    
+
     section 现代特性
     async fn in trait :done, 2023-03, 2023-12
     RPITIT           :done, 2023-12, 2024-02
-    
+
     section Rust 1.90
     JoinSet优化       :active, 2024-08, 2024-11
     性能改进          :active, 2024-08, 2024-11
@@ -219,8 +219,8 @@ gantt
 
 ---
 
-**文档版本**: v1.0  
-**最后更新**: 2025-10-20  
+**文档版本**: v1.0
+**最后更新**: 2025-10-20
 **维护者**: Rust Learning Community
 
 ---

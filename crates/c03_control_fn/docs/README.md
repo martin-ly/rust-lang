@@ -1,8 +1,8 @@
 # 🦀 C03 控制流与函数 - 文档中心
 
-**版本**：v2.0  
-**Rust 版本**：1.90+  
-**文档数量**：35+  
+**版本**：v2.0
+**Rust 版本**：1.90+
+**文档数量**：35+
 **最后更新**：2025年1月
 
 ## 📚 文档总览
@@ -21,7 +21,7 @@
 
 ### 📖 完整文档索引
 
-**👉 [查看完整文档索引](./DOCUMENTATION_INDEX.md)**  
+**👉 [查看完整文档索引](./DOCUMENTATION_INDEX.md)**
 包含所有文档的详细分类、难度标记、学习建议
 
 ### 🎯 选择你的学习路径
@@ -164,16 +164,16 @@ docs/
 
 无论你的水平如何，这些文档都值得一读：
 
-1. **📌 [常见陷阱与解决方案](04_practice/05_common_pitfalls.md)**  
+1. **📌 [常见陷阱与解决方案](04_practice/05_common_pitfalls.md)**
    避免 13+ 个常见错误，节省大量调试时间
 
-2. **📌 [控制流设计模式](04_practice/04_control_flow_design_patterns.md)**  
+2. **📌 [控制流设计模式](04_practice/04_control_flow_design_patterns.md)**
    状态机、策略、责任链等 5 种模式的 Rust 实现
 
-3. **📌 [控制流性能实践](04_practice/03_control_flow_performance_practices_1_90.md)**  
+3. **📌 [控制流性能实践](04_practice/03_control_flow_performance_practices_1_90.md)**
    性能优化技巧，让你的代码更快
 
-4. **📌 [完整文档索引](./DOCUMENTATION_INDEX.md)**  
+4. **📌 [完整文档索引](./DOCUMENTATION_INDEX.md)**
    所有文档的完整导航和学习建议
 
 ### 🆕 Rust 1.90 新特性
@@ -411,7 +411,7 @@ cargo doc --open --package c03_control_fn
 
 ---
 
-*最后更新：2025年1月*  
-*文档版本：v2.0*  
-*Rust 版本：1.90+*  
+*最后更新：2025年1月*
+*文档版本：v2.0*
+*Rust 版本：1.90+*
 *维护团队：Rust 学习社区*

@@ -1,7 +1,7 @@
 ﻿# 设计模式多维矩阵对比 (Multidimensional Matrix Comparison)
 
-> **文档定位**: 从多个维度系统化对比所有设计模式，辅助决策和选型  
-> **适用版本**: Rust 1.90+ (Edition 2024)  
+> **文档定位**: 从多个维度系统化对比所有设计模式，辅助决策和选型
+> **适用版本**: Rust 1.90+ (Edition 2024)
 > **最后更新**: 2025-10-19
 
 ---
@@ -118,25 +118,25 @@ use std::mem::size_of;
 pub mod memory_footprint {
     // 单例: 仅全局静态内存
     // Size: 0 (引用时无额外开销)
-    
+
     // 策略 (泛型): 零开销抽象
     pub struct GenericStrategy<S> {
         strategy: S, // 内联，无指针
     }
     // Size: size_of::<S>()
-    
+
     // 策略 (trait对象): 胖指针
     pub struct DynStrategy {
         strategy: Box<dyn Strategy>, // 指针 + vtable
     }
     // Size: 16 bytes (x86_64)
-    
+
     // 装饰器嵌套
     pub struct Decorator<T> {
         inner: T,
         // 每层嵌套增加 size_of::<T>()
     }
-    
+
     // 观察者 (GATs零拷贝)
     pub struct BorrowingObserver<'a> {
         data: &'a str, // 仅引用
@@ -186,20 +186,20 @@ graph TD
         A2[适配器]
         A3[策略泛型版]
     end
-    
+
     subgraph "中等维护成本 ⭐⭐"
         B1[工厂]
         B2[装饰器]
         B3[命令]
         B4[迭代器]
     end
-    
+
     subgraph "高维护成本 ⭐⭐⭐"
         C1[建造者]
         C2[状态]
         C3[责任链]
     end
-    
+
     subgraph "很高维护成本 ⭐⭐⭐⭐"
         D1[观察者]
         D2[中介者]
@@ -288,23 +288,23 @@ pub mod safety_guarantees {
         // observer的生命周期由编译器管理
         // 不可能出现use-after-free
     }
-    
+
     // ✅ 2. 无数据竞争
     use std::sync::Arc;
     use std::sync::Mutex;
-    
+
     pub fn no_data_race() {
         let state = Arc::new(Mutex::new(0));
         // Mutex确保互斥访问
         // 编译器强制正确使用
     }
-    
+
     // ✅ 3. 无缓冲区溢出
     pub fn no_buffer_overflow() {
         let vec = vec![1, 2, 3];
         // vec[10] 会panic，但不会内存损坏
     }
-    
+
     // ✅ 4. 类型状态保证
     pub struct TypeState<S> {
         _state: std::marker::PhantomData<S>,
@@ -341,19 +341,19 @@ graph TD
         O2[状态]
         O3[迭代器]
     end
-    
+
     subgraph "共享所有权 Arc"
         S1[观察者]
         S2[代理]
         S3[享元]
     end
-    
+
     subgraph "借用模式"
         B1[适配器]
         B2[装饰器]
         B3[策略]
     end
-    
+
     subgraph "内部可变性"
         M1[单例]
         M2[对象池]
@@ -447,13 +447,13 @@ graph LR
         P2[数据竞争] --> S2[消息传递]
         P3[任务调度] --> S3[工作窃取]
     end
-    
+
     subgraph "架构问题"
         P4[模块解耦] --> S4[外观+中介者]
         P5[插件系统] --> S5[抽象工厂]
         P6[API稳定性] --> S6[适配器]
     end
-    
+
     subgraph "性能问题"
         P7[内存优化] --> S7[享元+对象池]
         P8[计算密集] --> S8[并行模式]
@@ -501,18 +501,18 @@ graph LR
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     // Mock策略
     struct MockStrategy {
         call_count: std::cell::RefCell<usize>,
     }
-    
+
     impl Strategy for MockStrategy {
         fn execute(&self) {
             *self.call_count.borrow_mut() += 1;
         }
     }
-    
+
     #[test]
     fn test_strategy() {
         let mock = MockStrategy { call_count: RefCell::new(0) };
@@ -570,13 +570,13 @@ graph TD
         V3[功能扩展] --> P3[装饰器模式]
         V4[行为组合] --> P4[命令模式]
     end
-    
+
     subgraph "稳定点"
         S1[接口定义] --> T1[Trait]
         S2[核心逻辑] --> T2[泛型]
         S3[类型系统] --> T3[编译时检查]
     end
-    
+
     P1 --> S1
     P2 --> S1
     P3 --> S1
@@ -612,26 +612,26 @@ graph TD
 ```mermaid
 graph TD
     Start{需求分析}
-    
+
     Start --> Q1{主要目标?}
-    
+
     Q1 -->|性能| Perf[高性能方案]
     Q1 -->|简单| Simple[简单方案]
     Q1 -->|扩展性| Ext[可扩展方案]
     Q1 -->|安全性| Safe[高安全方案]
-    
+
     Perf --> Perf1[迭代器 66分]
     Perf --> Perf2[适配器 67分]
     Perf --> Perf3[策略 66分]
-    
+
     Simple --> Sim1[单例 易用]
     Simple --> Sim2[适配器 简单]
     Simple --> Sim3[命令 直观]
-    
+
     Ext --> Ext1[策略 10分]
     Ext --> Ext2[工厂 10分]
     Ext --> Ext3[装饰器 10分]
-    
+
     Safe --> Safe1[适配器 10分]
     Safe --> Safe2[策略 10分]
     Safe --> Safe3[建造者 10分]
@@ -753,8 +753,8 @@ graph TD
 
 ---
 
-**贡献者**: Rust 设计模式社区  
-**数据来源**: Criterion基准测试 + 实际项目经验  
+**贡献者**: Rust 设计模式社区
+**数据来源**: Criterion基准测试 + 实际项目经验
 **更新频率**: 每季度更新一次
 
 ---

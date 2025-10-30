@@ -24,9 +24,9 @@
     - [综合决策矩阵](#综合决策矩阵)
   - [📚 参考资源](#-参考资源)
 
-**版本**: 1.0.0  
-**Rust版本**: 1.90.0  
-**创建日期**: 2025年10月19日  
+**版本**: 1.0.0
+**Rust版本**: 1.90.0
+**创建日期**: 2025年10月19日
 **特性**: 多维对比 + 性能分析 + 场景选择
 
 ---
@@ -77,7 +77,7 @@ pub fn recommend_sorting_algorithm(scenario: SortingScenario) -> &'static str {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_algorithm_recommendation() {
         assert_eq!(
@@ -309,7 +309,7 @@ pub fn recommend_algorithm(
 
 fn recommend_sorting(constraints: AlgorithmConstraints) -> AlgorithmRecommendation {
     let n = constraints.data_size;
-    
+
     // 小数据集
     if n < 50 {
         return AlgorithmRecommendation {
@@ -319,7 +319,7 @@ fn recommend_sorting(constraints: AlgorithmConstraints) -> AlgorithmRecommendati
             expected_space: "O(1)",
         };
     }
-    
+
     // 需要稳定性
     if constraints.stability_required {
         if constraints.parallel_available && n > 10_000 {
@@ -337,7 +337,7 @@ fn recommend_sorting(constraints: AlgorithmConstraints) -> AlgorithmRecommendati
             expected_space: "O(n)",
         };
     }
-    
+
     // 接近有序
     if matches!(constraints.data_characteristics, DataCharacteristics::NearlySorted) {
         return AlgorithmRecommendation {
@@ -347,7 +347,7 @@ fn recommend_sorting(constraints: AlgorithmConstraints) -> AlgorithmRecommendati
             expected_space: "O(n)",
         };
     }
-    
+
     // 大数据集 + 可并行
     if constraints.parallel_available && n > 100_000 {
         return AlgorithmRecommendation {
@@ -357,7 +357,7 @@ fn recommend_sorting(constraints: AlgorithmConstraints) -> AlgorithmRecommendati
             expected_space: "O(log n)",
         };
     }
-    
+
     // 默认推荐
     AlgorithmRecommendation {
         algorithm: "Quick Sort or std::sort",
@@ -369,7 +369,7 @@ fn recommend_sorting(constraints: AlgorithmConstraints) -> AlgorithmRecommendati
 
 fn recommend_shortest_path(constraints: AlgorithmConstraints) -> AlgorithmRecommendation {
     let v = constraints.data_size; // 节点数
-    
+
     // 稀疏图
     if v < 1000 {
         return AlgorithmRecommendation {
@@ -379,7 +379,7 @@ fn recommend_shortest_path(constraints: AlgorithmConstraints) -> AlgorithmRecomm
             expected_space: "O(V)",
         };
     }
-    
+
     // 异步环境
     if constraints.parallel_available {
         return AlgorithmRecommendation {
@@ -389,7 +389,7 @@ fn recommend_shortest_path(constraints: AlgorithmConstraints) -> AlgorithmRecomm
             expected_space: "O(V)",
         };
     }
-    
+
     AlgorithmRecommendation {
         algorithm: "Dijkstra",
         reason: "Standard choice for shortest path",
@@ -400,7 +400,7 @@ fn recommend_shortest_path(constraints: AlgorithmConstraints) -> AlgorithmRecomm
 
 fn recommend_pattern_matching(constraints: AlgorithmConstraints) -> AlgorithmRecommendation {
     let n = constraints.data_size; // 文本长度
-    
+
     if n < 1000 {
         return AlgorithmRecommendation {
             algorithm: "Naive String Matching",
@@ -409,7 +409,7 @@ fn recommend_pattern_matching(constraints: AlgorithmConstraints) -> AlgorithmRec
             expected_space: "O(1)",
         };
     }
-    
+
     AlgorithmRecommendation {
         algorithm: "KMP or Boyer-Moore",
         reason: "Long text, optimal single pattern matching",
@@ -421,7 +421,7 @@ fn recommend_pattern_matching(constraints: AlgorithmConstraints) -> AlgorithmRec
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_sorting_recommendation() {
         let constraints = AlgorithmConstraints {
@@ -432,7 +432,7 @@ mod tests {
             parallel_available: false,
             data_characteristics: DataCharacteristics::Random,
         };
-        
+
         let rec = recommend_algorithm("sorting", constraints);
         assert!(rec.algorithm.contains("Merge") || rec.algorithm.contains("Tim"));
     }
@@ -450,6 +450,6 @@ mod tests {
 
 ---
 
-**最后更新**: 2025年10月19日  
-**文档版本**: 1.0.0  
+**最后更新**: 2025年10月19日
+**文档版本**: 1.0.0
 **维护者**: c08_algorithms 团队

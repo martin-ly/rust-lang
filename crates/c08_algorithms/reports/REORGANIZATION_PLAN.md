@@ -2,7 +2,7 @@
 
 ## 🗂️ 新的目录结构
 
-```
+```text
 c08_algorithms/
 ├── README.md                          # 主入口文档（简洁版）
 ├── Cargo.toml

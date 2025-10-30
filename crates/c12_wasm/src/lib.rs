@@ -94,6 +94,7 @@ pub mod complex_types {
         /// # 返回值
         /// 返回初始值为 0 的计数器
         #[wasm_bindgen(constructor)]
+        #[allow(clippy::new_without_default)]
         pub fn new() -> Counter {
             Counter { value: 0 }
         }
@@ -177,9 +178,9 @@ pub mod complex_types {
             self.age = age;
         }
 
-        /// 转换为字符串
-        #[wasm_bindgen]
-        pub fn to_string(&self) -> String {
+        /// 转换为字符串描述
+        #[wasm_bindgen(js_name = "toString")]
+        pub fn to_str(&self) -> String {
             format!("{} ({} years old)", self.name, self.age)
         }
     }
@@ -279,7 +280,11 @@ pub mod string_examples {
     /// 如果是回文返回 true，否则返回 false
     #[wasm_bindgen]
     pub fn is_palindrome(s: &str) -> bool {
-        let s_lower: String = s.chars().filter(|c| c.is_alphanumeric()).collect::<String>().to_lowercase();
+        let s_lower: String = s
+            .chars()
+            .filter(|c| c.is_alphanumeric())
+            .collect::<String>()
+            .to_lowercase();
         let reversed: String = s_lower.chars().rev().collect();
         s_lower == reversed
     }
@@ -311,12 +316,12 @@ pub mod string_examples {
 
 /// 性能优化示例
 pub mod performance_examples {
-    use wasm_bindgen::prelude::*;
     use std::cell::RefCell;
+    use wasm_bindgen::prelude::*;
 
     // 线程局部存储的缓冲区，用于重用内存
     thread_local! {
-        static BUFFER: RefCell<Vec<u8>> = RefCell::new(Vec::new());
+        static BUFFER: RefCell<Vec<u8>> = const { RefCell::new(Vec::new()) };
     }
 
     /// 优化的数组处理函数（重用缓冲区）
@@ -406,12 +411,22 @@ pub mod error_examples {
     /// # 返回值
     /// 如果验证通过返回字符串，否则返回错误
     #[wasm_bindgen]
-    pub fn validate_string(input: &str, min_length: usize, max_length: usize) -> Result<String, JsValue> {
+    pub fn validate_string(
+        input: &str,
+        min_length: usize,
+        max_length: usize,
+    ) -> Result<String, JsValue> {
         let len = input.len();
         if len < min_length {
-            Err(JsValue::from_str(&format!("String too short (minimum {} characters)", min_length)))
+            Err(JsValue::from_str(&format!(
+                "String too short (minimum {} characters)",
+                min_length
+            )))
         } else if len > max_length {
-            Err(JsValue::from_str(&format!("String too long (maximum {} characters)", max_length)))
+            Err(JsValue::from_str(&format!(
+                "String too long (maximum {} characters)",
+                max_length
+            )))
         } else {
             Ok(input.to_string())
         }

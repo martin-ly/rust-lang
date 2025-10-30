@@ -280,7 +280,7 @@ cargo bench
 pub trait ProtocolLayer {
     type Input;
     type Output;
-    
+
     async fn process(&self, input: Self::Input) -> Result<Self::Output, NetworkError>;
 }
 
@@ -292,7 +292,7 @@ pub struct ApplicationLayer {
 impl ProtocolLayer for ApplicationLayer {
     type Input = Request;
     type Output = Response;
-    
+
     async fn process(&self, input: Self::Input) -> Result<Self::Output, NetworkError> {
         // 处理应用层请求
         if let Some(handler) = self.handlers.get(&input.path) {
@@ -311,7 +311,7 @@ pub struct TransportLayer {
 impl ProtocolLayer for TransportLayer {
     type Input = Segment;
     type Output = Segment;
-    
+
     async fn process(&self, input: Self::Input) -> Result<Self::Output, NetworkError> {
         match self.protocol {
             TransportProtocol::Tcp => {
@@ -357,7 +357,7 @@ enum FutureState {
 
 impl Future for MyFuture {
     type Output = String;
-    
+
     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
         match self.state {
             FutureState::Pending => {
@@ -381,7 +381,7 @@ pub struct MyStream {
 
 impl Stream for MyStream {
     type Item = String;
-    
+
     fn poll_next(mut self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Option<Self::Item>> {
         if self.index < self.items.len() {
             let item = self.items[self.index].clone();
@@ -399,22 +399,22 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 调用异步函数
     let result = async_function().await?;
     println!("{}", result);
-    
+
     // 使用Future
     let future = MyFuture { state: FutureState::Pending };
     let result = future.await;
     println!("{}", result);
-    
+
     // 使用Stream
     let mut stream = MyStream {
         items: vec!["item1".to_string(), "item2".to_string(), "item3".to_string()],
         index: 0,
     };
-    
+
     while let Some(item) = stream.next().await {
         println!("Stream item: {}", item);
     }
-    
+
     Ok(())
 }
 ```
@@ -430,25 +430,25 @@ use thiserror::Error;
 pub enum NetworkError {
     #[error("IO error: {0}")]
     Io(#[from] std::io::Error),
-    
+
     #[error("Connection error: {0}")]
     Connection(String),
-    
+
     #[error("Protocol error: {0}")]
     Protocol(String),
-    
+
     #[error("Timeout error")]
     Timeout,
-    
+
     #[error("Authentication failed")]
     Authentication,
-    
+
     #[error("Authorization denied")]
     Authorization,
-    
+
     #[error("Resource not found")]
     NotFound,
-    
+
     #[error("Internal server error: {0}")]
     Internal(String),
 }
@@ -467,7 +467,7 @@ pub type NetworkResult<T> = Result<T, NetworkError>;
 pub async fn handle_network_operation() -> NetworkResult<()> {
     // 模拟网络操作
     let result = simulate_network_call().await;
-    
+
     match result {
         Ok(data) => {
             println!("操作成功: {:?}", data);
@@ -509,12 +509,12 @@ async fn retry_operation() -> NetworkResult<()> {
     for attempt in 1..=3 {
         println!("重试第 {} 次", attempt);
         tokio::time::sleep(Duration::from_millis(1000)).await;
-        
+
         if let Ok(_) = simulate_network_call().await {
             return Ok(());
         }
     }
-    
+
     Err(NetworkError::Timeout)
 }
 ```
@@ -542,15 +542,15 @@ impl EchoServer {
         let listener = TcpListener::bind(addr).await?;
         Ok(Self { listener })
     }
-    
+
     /// 启动服务器
     pub async fn run(&self) -> NetworkResult<()> {
         println!("TCP回显服务器启动在: {}", self.listener.local_addr()?);
-        
+
         loop {
             let (stream, addr) = self.listener.accept().await?;
             println!("新连接来自: {}", addr);
-            
+
             // 为每个连接创建异步任务
             tokio::spawn(async move {
                 if let Err(e) = Self::handle_connection(stream).await {
@@ -559,11 +559,11 @@ impl EchoServer {
             });
         }
     }
-    
+
     /// 处理单个连接
     async fn handle_connection(mut stream: TcpStream) -> NetworkResult<()> {
         let mut buffer = [0; 1024];
-        
+
         loop {
             // 读取数据
             let n = stream.read(&mut buffer).await?;
@@ -571,12 +571,12 @@ impl EchoServer {
                 println!("连接关闭");
                 break;
             }
-            
+
             // 回显数据
             stream.write_all(&buffer[..n]).await?;
             println!("回显 {} 字节数据", n);
         }
-        
+
         Ok(())
     }
 }
@@ -613,7 +613,7 @@ impl EchoClient {
             addr: addr.to_string(),
         }
     }
-    
+
     /// 连接到服务器
     pub async fn connect(&mut self) -> NetworkResult<()> {
         let stream = TcpStream::connect(&self.addr).await?;
@@ -621,26 +621,26 @@ impl EchoClient {
         println!("连接到服务器: {}", self.addr);
         Ok(())
     }
-    
+
     /// 发送消息并接收回显
     pub async fn send_message(&mut self, message: &str) -> NetworkResult<String> {
         if let Some(stream) = &mut self.stream {
             // 发送消息
             stream.write_all(message.as_bytes()).await?;
             println!("发送消息: {}", message);
-            
+
             // 接收回显
             let mut buffer = [0; 1024];
             let n = stream.read(&mut buffer).await?;
             let response = String::from_utf8_lossy(&buffer[..n]).to_string();
             println!("接收回显: {}", response);
-            
+
             Ok(response)
         } else {
             Err(NetworkError::Connection("未连接到服务器".to_string()))
         }
     }
-    
+
     /// 断开连接
     pub async fn disconnect(&mut self) -> NetworkResult<()> {
         if let Some(_) = self.stream.take() {
@@ -654,28 +654,28 @@ impl EchoClient {
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     let mut client = EchoClient::new("127.0.0.1:8080");
-    
+
     // 连接服务器
     client.connect().await?;
-    
+
     // 发送多条消息
     let messages = vec![
         "Hello, Server!",
         "How are you?",
         "This is a test message.",
     ];
-    
+
     for message in messages {
         let response = client.send_message(message).await?;
         println!("服务器响应: {}", response);
-        
+
         // 等待一段时间
         tokio::time::sleep(Duration::from_millis(1000)).await;
     }
-    
+
     // 断开连接
     client.disconnect().await?;
-    
+
     Ok(())
 }
 ```
@@ -701,43 +701,43 @@ impl ConnectionTester {
             addr: addr.to_string(),
         }
     }
-    
+
     /// 测试连接
     pub async fn test_connection(&self) -> NetworkResult<()> {
         println!("测试连接到: {}", self.addr);
-        
+
         let start = std::time::Instant::now();
         let stream = TcpStream::connect(&self.addr).await?;
         let duration = start.elapsed();
-        
+
         println!("连接成功，耗时: {:?}", duration);
-        
+
         // 测试数据传输
         self.test_data_transfer(stream).await?;
-        
+
         Ok(())
     }
-    
+
     /// 测试数据传输
     async fn test_data_transfer(&self, mut stream: TcpStream) -> NetworkResult<()> {
         let test_data = "Test message for data transfer";
-        
+
         // 发送数据
         let start = std::time::Instant::now();
         stream.write_all(test_data.as_bytes()).await?;
         let send_duration = start.elapsed();
-        
+
         // 接收数据
         let mut buffer = [0; 1024];
         let n = stream.read(&mut buffer).await?;
         let receive_duration = start.elapsed();
-        
+
         let response = String::from_utf8_lossy(&buffer[..n]);
         println!("发送数据: {}", test_data);
         println!("接收数据: {}", response);
         println!("发送耗时: {:?}", send_duration);
         println!("接收耗时: {:?}", receive_duration);
-        
+
         // 验证数据
         if response == test_data {
             println!("✅ 数据传输测试通过");
@@ -745,33 +745,33 @@ impl ConnectionTester {
             println!("❌ 数据传输测试失败");
             return Err(NetworkError::Protocol("数据不匹配".to_string()));
         }
-        
+
         Ok(())
     }
-    
+
     /// 压力测试
     pub async fn stress_test(&self, num_connections: usize) -> NetworkResult<()> {
         println!("开始压力测试，连接数: {}", num_connections);
-        
+
         let mut handles = vec![];
-        
+
         for i in 0..num_connections {
             let addr = self.addr.clone();
             let handle = tokio::spawn(async move {
                 let mut stream = TcpStream::connect(&addr).await?;
                 let message = format!("Stress test message {}", i);
                 stream.write_all(message.as_bytes()).await?;
-                
+
                 let mut buffer = [0; 1024];
                 let n = stream.read(&mut buffer).await?;
                 let response = String::from_utf8_lossy(&buffer[..n]);
-                
+
                 Ok::<String, NetworkError>(response)
             });
-            
+
             handles.push(handle);
         }
-        
+
         // 等待所有连接完成
         let mut success_count = 0;
         for handle in handles {
@@ -788,9 +788,9 @@ impl ConnectionTester {
                 }
             }
         }
-        
+
         println!("压力测试完成，成功连接数: {}/{}", success_count, num_connections);
-        
+
         if success_count == num_connections {
             Ok(())
         } else {
@@ -803,13 +803,13 @@ impl ConnectionTester {
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     let tester = ConnectionTester::new("127.0.0.1:8080");
-    
+
     // 基本连接测试
     tester.test_connection().await?;
-    
+
     // 压力测试
     tester.stress_test(10).await?;
-    
+
     Ok(())
 }
 ```
@@ -841,7 +841,7 @@ impl RobustClient {
             retry_delay: Duration::from_millis(1000),
         }
     }
-    
+
     /// 带重试的连接
     pub async fn connect_with_retry(&mut self) -> NetworkResult<()> {
         for attempt in 1..=self.max_retries {
@@ -860,10 +860,10 @@ impl RobustClient {
                 }
             }
         }
-        
+
         Err(NetworkError::Connection("连接失败，已达到最大重试次数".to_string()))
     }
-    
+
     /// 带超时的操作
     pub async fn send_with_timeout(&mut self, message: &str, timeout: Duration) -> NetworkResult<String> {
         if let Some(stream) = &mut self.stream {
@@ -871,15 +871,15 @@ impl RobustClient {
             let result = tokio::time::timeout(timeout, async {
                 // 发送消息
                 stream.write_all(message.as_bytes()).await?;
-                
+
                 // 接收响应
                 let mut buffer = [0; 1024];
                 let n = stream.read(&mut buffer).await?;
                 let response = String::from_utf8_lossy(&buffer[..n]).to_string();
-                
+
                 Ok::<String, NetworkError>(response)
             }).await;
-            
+
             match result {
                 Ok(Ok(response)) => Ok(response),
                 Ok(Err(e)) => Err(e),
@@ -889,7 +889,7 @@ impl RobustClient {
             Err(NetworkError::Connection("未连接到服务器".to_string()))
         }
     }
-    
+
     /// 健康检查
     pub async fn health_check(&mut self) -> NetworkResult<bool> {
         match self.send_with_timeout("ping", Duration::from_secs(5)).await {
@@ -914,21 +914,21 @@ impl RobustClient {
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     let mut client = RobustClient::new("127.0.0.1:8080");
-    
+
     // 带重试的连接
     client.connect_with_retry().await?;
-    
+
     // 健康检查
     if client.health_check().await? {
         println!("服务器健康");
     } else {
         println!("服务器不健康");
     }
-    
+
     // 带超时的消息发送
     let response = client.send_with_timeout("Hello, Server!", Duration::from_secs(10)).await?;
     println!("服务器响应: {}", response);
-    
+
     Ok(())
 }
 ```
@@ -1000,14 +1000,14 @@ impl HttpRequest {
         if lines.is_empty() {
             return Err(NetworkError::Protocol("空请求".to_string()));
         }
-        
+
         // 解析请求行
         let request_line = lines[0];
         let parts: Vec<&str> = request_line.split_whitespace().collect();
         if parts.len() != 3 {
             return Err(NetworkError::Protocol("无效的请求行".to_string()));
         }
-        
+
         let method = match parts[0] {
             "GET" => HttpMethod::GET,
             "POST" => HttpMethod::POST,
@@ -1018,40 +1018,40 @@ impl HttpRequest {
             "OPTIONS" => HttpMethod::OPTIONS,
             _ => return Err(NetworkError::Protocol("不支持的方法".to_string())),
         };
-        
+
         let path = parts[1].to_string();
-        
+
         let version = match parts[2] {
             "HTTP/1.0" => HttpVersion::Http1_0,
             "HTTP/1.1" => HttpVersion::Http1_1,
             "HTTP/2" => HttpVersion::Http2,
             _ => return Err(NetworkError::Protocol("不支持的版本".to_string())),
         };
-        
+
         // 解析头部
         let mut headers = HashMap::new();
         let mut body_start = 0;
-        
+
         for (i, line) in lines.iter().enumerate().skip(1) {
             if line.is_empty() {
                 body_start = i + 1;
                 break;
             }
-            
+
             if let Some(colon_pos) = line.find(':') {
                 let key = line[..colon_pos].trim().to_string();
                 let value = line[colon_pos + 1..].trim().to_string();
                 headers.insert(key, value);
             }
         }
-        
+
         // 解析主体
         let body = if body_start < lines.len() {
             lines[body_start..].join("\n").into_bytes()
         } else {
             Vec::new()
         };
-        
+
         Ok(HttpRequest {
             method,
             path,
@@ -1060,7 +1060,7 @@ impl HttpRequest {
             body,
         })
     }
-    
+
     /// 转换为字符串
     pub fn to_string(&self) -> String {
         let method_str = match self.method {
@@ -1072,25 +1072,25 @@ impl HttpRequest {
             HttpMethod::HEAD => "HEAD",
             HttpMethod::OPTIONS => "OPTIONS",
         };
-        
+
         let version_str = match self.version {
             HttpVersion::Http1_0 => "HTTP/1.0",
             HttpVersion::Http1_1 => "HTTP/1.1",
             HttpVersion::Http2 => "HTTP/2",
         };
-        
+
         let mut request = format!("{} {} {}\r\n", method_str, self.path, version_str);
-        
+
         for (key, value) in &self.headers {
             request.push_str(&format!("{}: {}\r\n", key, value));
         }
-        
+
         request.push_str("\r\n");
-        
+
         if !self.body.is_empty() {
             request.push_str(&String::from_utf8_lossy(&self.body));
         }
-        
+
         request
     }
 }
@@ -1105,14 +1105,14 @@ impl HttpResponse {
             body: Vec::new(),
         }
     }
-    
+
     /// 设置响应体
     pub fn with_body(mut self, body: Vec<u8>) -> Self {
         self.body = body;
         self.headers.insert("Content-Length".to_string(), self.body.len().to_string());
         self
     }
-    
+
     /// 转换为字符串
     pub fn to_string(&self) -> String {
         let version_str = match self.version {
@@ -1120,7 +1120,7 @@ impl HttpResponse {
             HttpVersion::Http1_1 => "HTTP/1.1",
             HttpVersion::Http2 => "HTTP/2",
         };
-        
+
         let status_code = self.status.clone() as u16;
         let status_text = match self.status {
             HttpStatusCode::Ok => "OK",
@@ -1129,19 +1129,19 @@ impl HttpResponse {
             HttpStatusCode::NotFound => "Not Found",
             HttpStatusCode::InternalServerError => "Internal Server Error",
         };
-        
+
         let mut response = format!("{} {} {}\r\n", version_str, status_code, status_text);
-        
+
         for (key, value) in &self.headers {
             response.push_str(&format!("{}: {}\r\n", key, value));
         }
-        
+
         response.push_str("\r\n");
-        
+
         if !self.body.is_empty() {
             response.push_str(&String::from_utf8_lossy(&self.body));
         }
-        
+
         response
     }
 }
@@ -1160,6 +1160,6 @@ impl HttpResponse {
 
 **C10 Networks 综合教程指南** - 为网络编程提供完整的学习路径！
 
-*最后更新: 2025年1月*  
-*文档版本: v2.0*  
+*最后更新: 2025年1月*
+*文档版本: v2.0*
 *维护者: C10 Networks 开发团队*

@@ -175,7 +175,7 @@ ch := make(chan int, N)
     buffer(ch) = [v₁, ..., vₖ]  (k < N)
     ───────────────────────────────────
     ⟨send(ch, v), σ⟩ → ⟨(), σ[buffer(ch) := append(v)]⟩
-    
+
     buffer(ch) = [v, v₁, ..., vₖ]
     ───────────────────────────────────
     ⟨recv(ch, x), σ⟩ → ⟨(), σ[x := v, buffer(ch) := [v₁, ..., vₖ]]⟩
@@ -242,7 +242,7 @@ func main() {
 ```rust
 pub trait Future {
     type Output;
-    
+
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
 }
 
@@ -348,7 +348,7 @@ let mut timeout = Box::pin(tokio::time::sleep(Duration::from_secs(5)));
 loop {
     let waker = create_waker();
     let mut cx = Context::from_waker(&waker);
-    
+
     if let Poll::Ready(val) = fut1.as_mut().poll(&mut cx) {
         // 执行分支1
         break;
@@ -361,7 +361,7 @@ loop {
         // 执行分支3
         break;
     }
-    
+
     // 等待waker唤醒
     park();
 }
@@ -394,7 +394,7 @@ loop {
        ├──→ [Goroutine 1] ──→ [系统调用/channel阻塞]
        ├──→ [Goroutine 2] ──→ [运行]
        └──→ [Goroutine 3] ──→ [就绪队列]
-       
+
 抢占点：
 - 函数调用
 - 系统调用
@@ -412,7 +412,7 @@ loop {
        ├──→ [Future 1] ──→ [Poll::Pending at await point]
        ├──→ [Future 2] ──→ [Poll::Ready]
        └──→ [Future 3] ──→ [未poll]
-       
+
 yield点：
 - .await 表达式
 - 显式yield
@@ -590,13 +590,13 @@ func consumer(ch <-chan int, wg *sync.WaitGroup) {
 func main() {
     ch := make(chan int, 5)
     var wg sync.WaitGroup
-    
+
     go producer(ch, 10)
-    
+
     wg.Add(2)
     go consumer(ch, &wg)
     go consumer(ch, &wg)
-    
+
     wg.Wait()
 }
 ```
@@ -624,17 +624,17 @@ async fn consumer(mut rx: mpsc::Receiver<i32>, id: usize) {
 #[tokio::main]
 async fn main() {
     let (tx, rx) = mpsc::channel(5);
-    
+
     // 启动生产者
     tokio::spawn(producer(tx, 10));
-    
+
     // 启动消费者
     let mut tasks = vec![];
     for i in 0..2 {
         let rx_clone = rx.clone();  // 错误：Receiver不是Clone
         tasks.push(tokio::spawn(consumer(rx_clone, i)));
     }
-    
+
     for task in tasks {
         task.await.unwrap();
     }
@@ -657,7 +657,7 @@ async fn consumer(mut rx: broadcast::Receiver<i32>, id: usize) {
 #[tokio::main]
 async fn main() {
     let (tx, _) = broadcast::channel(16);
-    
+
     // 启动生产者
     let tx_clone = tx.clone();
     tokio::spawn(async move {
@@ -666,14 +666,14 @@ async fn main() {
             sleep(Duration::from_millis(10)).await;
         }
     });
-    
+
     // 启动消费者
     let mut tasks = vec![];
     for i in 0..2 {
         let rx = tx.subscribe();
         tasks.push(tokio::spawn(consumer(rx, i)));
     }
-    
+
     for task in tasks {
         task.await.unwrap();
     }
@@ -710,7 +710,7 @@ func square(in <-chan int) <-chan int {
 func main() {
     nums := generator(1, 2, 3, 4, 5)
     squared := square(nums)
-    
+
     for result := range squared {
         fmt.Println(result)
     }
@@ -724,25 +724,25 @@ use tokio::sync::mpsc;
 
 fn generator(nums: Vec<i32>) -> mpsc::Receiver<i32> {
     let (tx, rx) = mpsc::channel(10);
-    
+
     tokio::spawn(async move {
         for n in nums {
             tx.send(n).await.unwrap();
         }
     });
-    
+
     rx
 }
 
 fn square(mut input: mpsc::Receiver<i32>) -> mpsc::Receiver<i32> {
     let (tx, rx) = mpsc::channel(10);
-    
+
     tokio::spawn(async move {
         while let Some(n) = input.recv().await {
             tx.send(n * n).await.unwrap();
         }
     });
-    
+
     rx
 }
 
@@ -750,7 +750,7 @@ fn square(mut input: mpsc::Receiver<i32>) -> mpsc::Receiver<i32> {
 async fn main() {
     let nums = generator(vec![1, 2, 3, 4, 5]);
     let mut squared = square(nums);
-    
+
     while let Some(result) = squared.recv().await {
         println!("{}", result);
     }
@@ -790,13 +790,13 @@ func BenchmarkChannel(b *testing.B) {
 #[tokio::test]
 async fn bench_channel() {
     let (tx, mut rx) = mpsc::channel(1024);
-    
+
     tokio::spawn(async move {
         for i in 0..1_000_000 {
             tx.send(i).await.unwrap();
         }
     });
-    
+
     while rx.recv().await.is_some() {}
 }
 // 结果：~30ns/op，33M ops/sec
@@ -866,9 +866,9 @@ async fn bench_channel() {
 
 ---
 
-**文档版本**: 1.0  
-**最后更新**: 2025-10-02  
-**Rust版本**: 1.90+ (Edition 2024)  
+**文档版本**: 1.0
+**最后更新**: 2025-10-02
+**Rust版本**: 1.90+ (Edition 2024)
 **参考**:
 
 - Hoare, C.A.R. "Communicating Sequential Processes" (1978)

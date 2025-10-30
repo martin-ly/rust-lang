@@ -1,7 +1,7 @@
 ﻿# C09 设计模式: 常见问题解答 (FAQ)
 
-> **文档定位**: 设计模式学习和实践中的常见问题快速解答  
-> **使用方式**: 遇到问题时快速查找解决方案和最佳实践  
+> **文档定位**: 设计模式学习和实践中的常见问题快速解答
+> **使用方式**: 遇到问题时快速查找解决方案和最佳实践
 > **相关文档**: [主索引](./00_MASTER_INDEX.md) | [README](./README.md) | [Glossary](./Glossary.md)
 
 ## 📊 目录
@@ -36,8 +36,8 @@
     - [Q17: 团队如何统一设计模式的使用？](#q17-团队如何统一设计模式的使用)
   - [📚 延伸阅读](#-延伸阅读)
 
-**最后更新**: 2025-10-19  
-**适用版本**: Rust 1.90+ (Edition 2024)  
+**最后更新**: 2025-10-19
+**适用版本**: Rust 1.90+ (Edition 2024)
 **文档类型**: 📚 问题解答
 
 ---
@@ -575,12 +575,12 @@ fn sort_data<S: SortStrategy>(strategy: &S, data: &mut [i32]) {
 async fn handle_request() {
     // IO 操作
     let data = fetch_data().await;
-    
+
     // CPU 密集型操作放到线程池
     let result = tokio::task::spawn_blocking(|| {
         expensive_computation(data)
     }).await.unwrap();
-    
+
     // 继续异步操作
     save_result(result).await;
 }
@@ -763,7 +763,7 @@ use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 fn benchmark_strategy(c: &mut Criterion) {
     let mut group = c.benchmark_group("strategy_pattern");
-    
+
     // 编译时多态
     group.bench_function("generic", |b| {
         b.iter(|| {
@@ -771,7 +771,7 @@ fn benchmark_strategy(c: &mut Criterion) {
             process_generic(black_box(&strategy));
         });
     });
-    
+
     // 运行时多态
     group.bench_function("trait_object", |b| {
         b.iter(|| {
@@ -779,7 +779,7 @@ fn benchmark_strategy(c: &mut Criterion) {
             process_dynamic(black_box(strategy));
         });
     });
-    
+
     group.finish();
 }
 

@@ -1,7 +1,7 @@
 # Tier 3: IPC机制参考
 
-> **文档类型**: 技术参考  
-> **适用版本**: Rust 1.90+  
+> **文档类型**: 技术参考
+> **适用版本**: Rust 1.90+
 > **前置知识**: [IPC通信实践](../tier_02_guides/02_IPC通信实践.md)
 
 ---
@@ -96,7 +96,7 @@ IPC机制
 ```text
 需要跨主机通信？
 ├─ 是 → 使用 TCP/UDP Socket
-└─ 否 → 
+└─ 否 →
     ├─ 数据量大且频繁？
     │  ├─ 是 → 共享内存 (Shared Memory)
     │  └─ 否 →
@@ -152,14 +152,14 @@ fn pipe_communication() -> std::io::Result<()> {
         .stdin(Stdio::piped())
         .stdout(Stdio::piped())
         .spawn()?;
-    
+
     // 写入数据
     if let Some(mut stdin) = child.stdin.take() {
         writeln!(stdin, "info: starting")?;
         writeln!(stdin, "error: failed")?;
         writeln!(stdin, "info: done")?;
     }
-    
+
     // 读取输出
     if let Some(stdout) = child.stdout.take() {
         let reader = BufReader::new(stdout);
@@ -167,7 +167,7 @@ fn pipe_communication() -> std::io::Result<()> {
             println!("Filtered: {}", line?);
         }
     }
-    
+
     child.wait()?;
     Ok(())
 }
@@ -195,7 +195,7 @@ use std::os::unix::fs::FileTypeExt;
 fn create_fifo(path: &str) -> std::io::Result<()> {
     use nix::unistd::mkfifo;
     use nix::sys::stat::Mode;
-    
+
     mkfifo(path, Mode::S_IRUSR | Mode::S_IWUSR)?;
     Ok(())
 }
@@ -205,7 +205,7 @@ fn fifo_writer(path: &str) -> std::io::Result<()> {
     let mut file = fs::OpenOptions::new()
         .write(true)
         .open(path)?;
-    
+
     writeln!(file, "Hello from writer")?;
     Ok(())
 }
@@ -214,11 +214,11 @@ fn fifo_writer(path: &str) -> std::io::Result<()> {
 fn fifo_reader(path: &str) -> std::io::Result<()> {
     let file = fs::File::open(path)?;
     let reader = BufReader::new(file);
-    
+
     for line in reader.lines() {
         println!("Received: {}", line?);
     }
-    
+
     Ok(())
 }
 ```
@@ -233,7 +233,7 @@ fn fifo_reader(path: &str) -> std::io::Result<()> {
 #[cfg(target_os = "linux")]
 fn get_pipe_size(fd: i32) -> Result<usize, std::io::Error> {
     use nix::fcntl::{fcntl, FcntlArg};
-    
+
     match fcntl(fd, FcntlArg::F_GETPIPE_SZ) {
         Ok(size) => Ok(size as usize),
         Err(e) => Err(std::io::Error::from(e)),
@@ -243,7 +243,7 @@ fn get_pipe_size(fd: i32) -> Result<usize, std::io::Error> {
 #[cfg(target_os = "linux")]
 fn set_pipe_size(fd: i32, size: usize) -> Result<(), std::io::Error> {
     use nix::fcntl::{fcntl, FcntlArg};
-    
+
     fcntl(fd, FcntlArg::F_SETPIPE_SZ(size as i32))?;
     Ok(())
 }
@@ -265,13 +265,13 @@ use std::os::unix::io::AsRawFd;
 
 fn set_nonblocking(file: &std::fs::File) -> std::io::Result<()> {
     use nix::fcntl::{fcntl, FcntlArg, OFlag};
-    
+
     let fd = file.as_raw_fd();
     let flags = fcntl(fd, FcntlArg::F_GETFL)?;
     let mut flags = OFlag::from_bits_truncate(flags);
     flags.insert(OFlag::O_NONBLOCK);
     fcntl(fd, FcntlArg::F_SETFL(flags))?;
-    
+
     Ok(())
 }
 ```
@@ -357,7 +357,7 @@ use std::net::{TcpStream, TcpListener};
 // Unix Socket服务端
 fn unix_socket_server() -> std::io::Result<()> {
     let listener = UnixListener::bind("/tmp/my.sock")?;
-    
+
     for stream in listener.incoming() {
         match stream {
             Ok(stream) => {
@@ -366,14 +366,14 @@ fn unix_socket_server() -> std::io::Result<()> {
             Err(e) => eprintln!("Error: {}", e),
         }
     }
-    
+
     Ok(())
 }
 
 // TCP Socket服务端
 fn tcp_socket_server() -> std::io::Result<()> {
     let listener = TcpListener::bind("127.0.0.1:8080")?;
-    
+
     for stream in listener.incoming() {
         match stream {
             Ok(stream) => {
@@ -382,7 +382,7 @@ fn tcp_socket_server() -> std::io::Result<()> {
             Err(e) => eprintln!("Error: {}", e),
         }
     }
-    
+
     Ok(())
 }
 ```
@@ -397,13 +397,13 @@ fn tcp_socket_server() -> std::io::Result<()> {
 #[cfg(target_os = "linux")]
 fn abstract_unix_socket() -> std::io::Result<()> {
     use std::os::unix::net::UnixListener;
-    
+
     // 以\0开头表示抽象命名空间
     let socket_path = "\0my_abstract_socket";
     let listener = UnixListener::bind(socket_path)?;
-    
+
     println!("监听抽象套接字: {}", socket_path);
-    
+
     Ok(())
 }
 ```
@@ -427,11 +427,11 @@ mod fd_passing {
     use std::os::unix::net::UnixStream;
     use nix::sys::socket::{sendmsg, recvmsg, ControlMessage, MsgFlags};
     use nix::sys::uio::IoVec;
-    
+
     pub fn send_fd(socket: &UnixStream, fd: i32) -> Result<(), nix::Error> {
         let cmsg = ControlMessage::ScmRights(&[fd]);
         let iov = [IoVec::from_slice(b"FD")];
-        
+
         sendmsg(
             socket.as_raw_fd(),
             &iov,
@@ -439,28 +439,28 @@ mod fd_passing {
             MsgFlags::empty(),
             None,
         )?;
-        
+
         Ok(())
     }
-    
+
     pub fn recv_fd(socket: &UnixStream) -> Result<i32, nix::Error> {
         let mut cmsg_space = nix::cmsg_space!([i32; 1]);
         let mut buf = [0u8; 2];
         let iov = [IoVec::from_mut_slice(&mut buf)];
-        
+
         let msg = recvmsg(
             socket.as_raw_fd(),
             &iov,
             Some(&mut cmsg_space),
             MsgFlags::empty(),
         )?;
-        
+
         for cmsg in msg.cmsgs() {
             if let ControlMessage::ScmRights(fds) = cmsg {
                 return Ok(fds[0]);
             }
         }
-        
+
         Err(nix::Error::from_errno(nix::errno::Errno::EINVAL))
     }
 }
@@ -468,15 +468,15 @@ mod fd_passing {
 // 使用示例
 fn fd_passing_example() -> std::io::Result<()> {
     use std::fs::File;
-    
+
     // 父进程打开文件
     let file = File::open("/etc/hosts")?;
     let fd = file.as_raw_fd();
-    
+
     // 通过Unix Socket传递给子进程
     let socket = UnixStream::connect("/tmp/fd_passing.sock")?;
     fd_passing::send_fd(&socket, fd)?;
-    
+
     Ok(())
 }
 ```
@@ -497,22 +497,22 @@ fn fd_passing_example() -> std::io::Result<()> {
 #[cfg(unix)]
 fn get_peer_credentials(stream: &UnixStream) -> std::io::Result<(u32, u32, i32)> {
     use std::os::unix::net::UCred;
-    
+
     let cred = stream.peer_cred()?;
-    
+
     Ok((cred.uid, cred.gid, cred.pid))
 }
 
 // 使用示例
 fn credential_based_auth() -> std::io::Result<()> {
     let listener = UnixListener::bind("/tmp/auth.sock")?;
-    
+
     for stream in listener.incoming() {
         let stream = stream?;
         let (uid, gid, pid) = get_peer_credentials(&stream)?;
-        
+
         println!("连接来自: UID={}, GID={}, PID={}", uid, gid, pid);
-        
+
         // 基于UID进行授权
         if uid == 0 {
             println!("✅ Root用户，允许访问");
@@ -520,7 +520,7 @@ fn credential_based_auth() -> std::io::Result<()> {
             println!("❌ 非特权用户，拒绝访问");
         }
     }
-    
+
     Ok(())
 }
 ```
@@ -561,7 +561,7 @@ use std::thread;
 pub fn tcp_echo_server(addr: &str) -> std::io::Result<()> {
     let listener = TcpListener::bind(addr)?;
     println!("✅ TCP服务器监听: {}", addr);
-    
+
     for stream in listener.incoming() {
         match stream {
             Ok(stream) => {
@@ -572,22 +572,22 @@ pub fn tcp_echo_server(addr: &str) -> std::io::Result<()> {
             Err(e) => eprintln!("连接错误: {}", e),
         }
     }
-    
+
     Ok(())
 }
 
 fn handle_client(mut stream: TcpStream) -> std::io::Result<()> {
     let mut buffer = [0; 1024];
-    
+
     loop {
         let n = stream.read(&mut buffer)?;
         if n == 0 {
             break;  // 连接关闭
         }
-        
+
         stream.write_all(&buffer[..n])?;
     }
-    
+
     Ok(())
 }
 ```
@@ -612,13 +612,13 @@ use std::net::UdpSocket;
 fn udp_server(addr: &str) -> std::io::Result<()> {
     let socket = UdpSocket::bind(addr)?;
     println!("✅ UDP服务器监听: {}", addr);
-    
+
     let mut buf = [0; 1024];
-    
+
     loop {
         let (amt, src) = socket.recv_from(&mut buf)?;
         println!("收到 {} 字节，来自 {}", amt, src);
-        
+
         // Echo back
         socket.send_to(&buf[..amt], src)?;
     }
@@ -627,14 +627,14 @@ fn udp_server(addr: &str) -> std::io::Result<()> {
 // UDP客户端
 fn udp_client(server: &str) -> std::io::Result<()> {
     let socket = UdpSocket::bind("0.0.0.0:0")?;
-    
+
     socket.send_to(b"Hello", server)?;
-    
+
     let mut buf = [0; 1024];
     let (amt, _) = socket.recv_from(&mut buf)?;
-    
+
     println!("收到: {}", String::from_utf8_lossy(&buf[..amt]));
-    
+
     Ok(())
 }
 ```
@@ -652,23 +652,23 @@ use std::time::Duration;
 fn optimize_tcp_socket(stream: &TcpStream) -> std::io::Result<()> {
     // 1. TCP_NODELAY: 禁用Nagle算法，降低延迟
     stream.set_nodelay(true)?;
-    
+
     // 2. 读超时
     stream.set_read_timeout(Some(Duration::from_secs(30)))?;
-    
+
     // 3. 写超时
     stream.set_write_timeout(Some(Duration::from_secs(30)))?;
-    
+
     // 4. 保持连接活跃
     #[cfg(unix)]
     {
         use std::os::unix::io::AsRawFd;
         use nix::sys::socket::{setsockopt, sockopt};
-        
+
         let fd = stream.as_raw_fd();
         setsockopt(fd, sockopt::KeepAlive, &true)?;
     }
-    
+
     Ok(())
 }
 
@@ -678,11 +678,11 @@ fn optimize_tcp_listener(listener: &TcpListener) -> std::io::Result<()> {
     {
         use std::os::unix::io::AsRawFd;
         use nix::sys::socket::{setsockopt, sockopt};
-        
+
         let fd = listener.as_raw_fd();
         setsockopt(fd, sockopt::ReuseAddr, &true)?;
     }
-    
+
     Ok(())
 }
 ```
@@ -726,7 +726,7 @@ fn create_named_shm(name: &str, size: usize) -> Result<Shmem, Box<dyn std::error
         .size(size)
         .flink(name)  // 命名，其他进程可通过名称打开
         .create()?;
-    
+
     println!("✅ 创建共享内存: {} ({}字节)", name, size);
     Ok(shmem)
 }
@@ -736,7 +736,7 @@ fn open_shm(name: &str) -> Result<Shmem, Box<dyn std::error::Error>> {
     let shmem = ShmemConf::new()
         .flink(name)
         .open()?;
-    
+
     println!("✅ 打开共享内存: {}", name);
     Ok(shmem)
 }
@@ -746,15 +746,15 @@ fn write_shm_safe(shmem: &Shmem, data: &[u8]) -> Result<(), Box<dyn std::error::
     if data.len() > shmem.len() {
         return Err("数据超出共享内存大小".into());
     }
-    
+
     unsafe {
         let ptr = shmem.as_ptr() as *mut u8;
         std::ptr::copy_nonoverlapping(data.as_ptr(), ptr, data.len());
-        
+
         // 内存屏障，确保写入完成
         std::sync::atomic::fence(Ordering::SeqCst);
     }
-    
+
     Ok(())
 }
 
@@ -763,7 +763,7 @@ fn read_shm(shmem: &Shmem, offset: usize, len: usize) -> Result<Vec<u8>, Box<dyn
     if offset + len > shmem.len() {
         return Err("读取超出共享内存范围".into());
     }
-    
+
     unsafe {
         let ptr = shmem.as_ptr().add(offset);
         Ok(std::slice::from_raw_parts(ptr, len).to_vec())
@@ -793,14 +793,14 @@ fn create_structured_shm() -> Result<Shmem, Box<dyn std::error::Error>> {
         .size(size)
         .flink("my_structured_data")
         .create()?;
-    
+
     // 初始化结构
     unsafe {
         let ptr = shmem.as_ptr() as *mut SharedData;
         (*ptr).ready.store(false, Ordering::Release);
         (*ptr).counter.store(0, Ordering::Release);
     }
-    
+
     Ok(shmem)
 }
 
@@ -809,14 +809,14 @@ fn use_structured_shm(shmem: &Shmem) {
     unsafe {
         let ptr = shmem.as_ptr() as *const SharedData;
         let data = &*ptr;
-        
+
         // 原子读取
         let count = data.counter.load(Ordering::Acquire);
         println!("当前计数: {}", count);
-        
+
         // 原子增加
         data.counter.fetch_add(1, Ordering::SeqCst);
-        
+
         // 检查就绪标志
         if data.ready.load(Ordering::Acquire) {
             println!("数据已就绪");
@@ -850,22 +850,22 @@ impl RingBuffer {
             data: [0; 4096],
         }
     }
-    
+
     // 生产者写入
     fn write(&self, bytes: &[u8]) -> Result<usize, &'static str> {
         let mut write_pos = self.write_pos.load(Ordering::Acquire);
         let read_pos = self.read_pos.load(Ordering::Acquire);
-        
+
         let available = if write_pos >= read_pos {
             self.capacity - (write_pos - read_pos) - 1
         } else {
             read_pos - write_pos - 1
         };
-        
+
         if available < bytes.len() {
             return Err("缓冲区满");
         }
-        
+
         let mut written = 0;
         for &byte in bytes {
             unsafe {
@@ -875,24 +875,24 @@ impl RingBuffer {
             write_pos = (write_pos + 1) % self.capacity;
             written += 1;
         }
-        
+
         self.write_pos.store(write_pos, Ordering::Release);
         Ok(written)
     }
-    
+
     // 消费者读取
     fn read(&self, buffer: &mut [u8]) -> usize {
         let mut read_pos = self.read_pos.load(Ordering::Acquire);
         let write_pos = self.write_pos.load(Ordering::Acquire);
-        
+
         let available = if write_pos >= read_pos {
             write_pos - read_pos
         } else {
             self.capacity - read_pos + write_pos
         };
-        
+
         let to_read = available.min(buffer.len());
-        
+
         for i in 0..to_read {
             unsafe {
                 let ptr = self.data.as_ptr();
@@ -900,7 +900,7 @@ impl RingBuffer {
             }
             read_pos = (read_pos + 1) % self.capacity;
         }
-        
+
         self.read_pos.store(read_pos, Ordering::Release);
         to_read
     }
@@ -939,9 +939,9 @@ fn mmap_file(path: &str) -> Result<MmapMut, Box<dyn std::error::Error>> {
         .write(true)
         .create(true)
         .open(path)?;
-    
+
     file.set_len(4096)?;
-    
+
     let mmap = unsafe { MmapMut::map_mut(&file)? };
     Ok(mmap)
 }
@@ -977,15 +977,15 @@ impl SharedCounter {
 #[cfg(unix)]
 fn signal_example() -> Result<(), Box<dyn std::error::Error>> {
     use signal_hook::{consts::SIGUSR1, iterator::Signals};
-    
+
     let mut signals = Signals::new(&[SIGUSR1])?;
-    
+
     std::thread::spawn(move || {
         for sig in signals.forever() {
             println!("收到信号: {}", sig);
         }
     });
-    
+
     Ok(())
 }
 ```
@@ -1008,32 +1008,32 @@ mod posix_mq {
     use nix::fcntl::OFlag;
     use nix::sys::stat::Mode;
     use std::ffi::CString;
-    
+
     pub fn create_mq(name: &str) -> Result<i32, nix::Error> {
         let name = CString::new(name).unwrap();
-        
+
         let attr = MqAttr::new(
             0,      // flags
             10,     // 最大消息数
             8192,   // 最大消息大小
             0       // 当前消息数
         );
-        
+
         let mq = mq_open(
             &name,
             OFlag::O_CREAT | OFlag::O_RDWR,
             Mode::S_IRUSR | Mode::S_IWUSR,
             Some(&attr)
         )?;
-        
+
         Ok(mq)
     }
-    
+
     pub fn send_message(mq: i32, msg: &[u8], priority: u32) -> Result<(), nix::Error> {
         mq_send(mq, msg, priority)?;
         Ok(())
     }
-    
+
     pub fn receive_message(mq: i32) -> Result<(Vec<u8>, u32), nix::Error> {
         let mut buf = vec![0u8; 8192];
         let (n, prio) = mq_receive(mq, &mut buf)?;
@@ -1045,17 +1045,17 @@ mod posix_mq {
 // 使用示例
 fn mq_example() -> Result<(), Box<dyn std::error::Error>> {
     let mq = posix_mq::create_mq("/my_queue")?;
-    
+
     // 发送高优先级消息
     posix_mq::send_message(mq, b"重要消息", 10)?;
-    
+
     // 发送普通消息
     posix_mq::send_message(mq, b"普通消息", 0)?;
-    
+
     // 接收（自动按优先级）
     let (msg, prio) = posix_mq::receive_message(mq)?;
     println!("收到消息(优先级{}): {:?}", prio, String::from_utf8_lossy(&msg));
-    
+
     Ok(())
 }
 ```
@@ -1105,7 +1105,7 @@ use std::thread;
 
 fn mpmc_example() {
     let (tx, rx) = bounded(100);
-    
+
     // 多个生产者
     for i in 0..3 {
         let tx = tx.clone();
@@ -1115,7 +1115,7 @@ fn mpmc_example() {
             }
         });
     }
-    
+
     // 多个消费者
     for i in 0..2 {
         let rx = rx.clone();
@@ -1136,15 +1136,15 @@ use crossbeam_channel::{bounded, select};
 fn select_example() {
     let (tx1, rx1) = bounded(10);
     let (tx2, rx2) = bounded(10);
-    
+
     thread::spawn(move || {
         tx1.send("来自 channel 1").unwrap();
     });
-    
+
     thread::spawn(move || {
         tx2.send("来自 channel 2").unwrap();
     });
-    
+
     // 等待任意channel有消息
     select! {
         recv(rx1) -> msg => println!("Channel 1: {:?}", msg),
@@ -1196,10 +1196,10 @@ fn select_example() {
 fn set_socket_permissions(path: &str) -> std::io::Result<()> {
     use std::os::unix::fs::PermissionsExt;
     use std::fs;
-    
+
     let permissions = fs::Permissions::from_mode(0o600);  // 仅所有者可读写
     fs::set_permissions(path, permissions)?;
-    
+
     Ok(())
 }
 ```
@@ -1211,12 +1211,12 @@ fn validate_message(msg: &[u8]) -> Result<(), &'static str> {
     if msg.len() > 1024 * 1024 {  // 1MB限制
         return Err("消息过大");
     }
-    
+
     // 验证格式
     if msg.is_empty() {
         return Err("消息为空");
     }
-    
+
     Ok(())
 }
 ```
@@ -1242,7 +1242,7 @@ impl IpcChannel for UnixStream {
         self.write_all(data)?;
         Ok(())
     }
-    
+
     fn recv(&mut self) -> Result<Vec<u8>, Box<dyn std::error::Error>> {
         use std::io::Read;
         let mut buf = vec![0; 1024];
@@ -1258,7 +1258,7 @@ impl IpcChannel for TcpStream {
         self.write_all(data)?;
         Ok(())
     }
-    
+
     fn recv(&mut self) -> Result<Vec<u8>, Box<dyn std::error::Error>> {
         use std::io::Read;
         let mut buf = vec![0; 1024];
@@ -1277,7 +1277,7 @@ pub fn create_ipc_channel(local_only: bool) -> Box<dyn IpcChannel> {
     if local_only {
         return Box::new(UnixStream::connect("/tmp/ipc.sock").unwrap());
     }
-    
+
     Box::new(TcpStream::connect("127.0.0.1:8080").unwrap())
 }
 ```
@@ -1319,7 +1319,7 @@ pub fn create_ipc_channel(local_only: bool) -> Box<dyn IpcChannel> {
 
 ---
 
-**文档维护**: Documentation Team  
-**创建日期**: 2025-10-22  
-**最后更新**: 2025-10-23  
+**文档维护**: Documentation Team
+**创建日期**: 2025-10-22
+**最后更新**: 2025-10-23
 **适用版本**: Rust 1.90+

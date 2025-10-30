@@ -1,8 +1,8 @@
 ﻿# Rust 1.90 异步编程实战示例集
 
-> **文档版本**: v1.0  
-> **适用版本**: Rust 1.90+, Tokio 1.35+  
-> **最后更新**: 2025-10-19  
+> **文档版本**: v1.0
+> **适用版本**: Rust 1.90+, Tokio 1.35+
+> **最后更新**: 2025-10-19
 > **文档类型**: 💻 实战代码示例
 
 ---
@@ -10,8 +10,7 @@
 ## 📋 目录
 
 - [Rust 1.90 异步编程实战示例集](#rust-190-异步编程实战示例集)
-  - [📊 目录](#-目录)
-  - [📋 目录](#-目录-1)
+  - [� 目录](#-目录)
   - [Rust 1.90 核心异步特性](#rust-190-核心异步特性)
     - [1. async trait (RPIT in traits)](#1-async-trait-rpit-in-traits)
     - [2. async closure](#2-async-closure)
@@ -38,7 +37,7 @@ Rust 1.90 允许在 trait 中直接使用 `async fn`，无需 `#[async_trait]` �
 
 ```rust
 //! Rust 1.90: async trait 原生支持
-//! 
+//!
 //! Cargo.toml:
 //! ```toml
 //! [dependencies]
@@ -52,7 +51,7 @@ use tokio::time::{Duration, sleep};
 pub trait AsyncDataSource: Send + Sync {
     /// 异步获取数据
     async fn fetch(&self, id: u64) -> Result<String, Box<dyn std::error::Error>>;
-    
+
     /// 异步批量获取
     async fn fetch_batch(&self, ids: Vec<u64>) -> Result<Vec<String>, Box<dyn std::error::Error>> {
         let mut results = Vec::new();
@@ -100,11 +99,11 @@ impl<T: AsyncDataSource> DataLoader<T> {
     pub fn new(source: T) -> Self {
         Self { source }
     }
-    
+
     pub async fn load(&self, id: u64) -> Result<String, Box<dyn std::error::Error>> {
         self.source.fetch(id).await
     }
-    
+
     pub async fn load_many(&self, ids: Vec<u64>) -> Result<Vec<String>, Box<dyn std::error::Error>> {
         self.source.fetch_batch(ids).await
     }
@@ -113,7 +112,7 @@ impl<T: AsyncDataSource> DataLoader<T> {
 /// 示例：使用 async trait
 pub async fn demo_async_trait() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== Rust 1.90: async trait 示例 ===\n");
-    
+
     // 使用数据库
     let db = Database {
         connection_string: "postgres://localhost".to_string(),
@@ -121,7 +120,7 @@ pub async fn demo_async_trait() -> Result<(), Box<dyn std::error::Error>> {
     let db_loader = DataLoader::new(db);
     let result = db_loader.load(123).await?;
     println!("✅ 结果: {}", result);
-    
+
     // 使用HTTP API
     let api = HttpApi {
         base_url: "https://api.example.com".to_string(),
@@ -129,7 +128,7 @@ pub async fn demo_async_trait() -> Result<(), Box<dyn std::error::Error>> {
     let api_loader = DataLoader::new(api);
     let results = api_loader.load_many(vec![1, 2, 3]).await?;
     println!("✅ 批量结果: {:?}", results);
-    
+
     Ok(())
 }
 ```
@@ -182,9 +181,9 @@ where
 /// 示例：使用 async closure
 pub async fn demo_async_closure() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== Rust 1.90: async closure 示例 ===\n");
-    
+
     let numbers = vec![1, 2, 3, 4, 5];
-    
+
     // 异步映射：模拟异步计算平方
     let squares = async_map(numbers.clone(), |n| async move {
         sleep(Duration::from_millis(10)).await;
@@ -192,7 +191,7 @@ pub async fn demo_async_closure() -> Result<(), Box<dyn std::error::Error>> {
     })
     .await;
     println!("🔢 平方: {:?}", squares);
-    
+
     // 异步过滤：模拟异步验证
     let valid_numbers = async_filter(numbers.clone(), |n| async move {
         sleep(Duration::from_millis(10)).await;
@@ -200,7 +199,7 @@ pub async fn demo_async_closure() -> Result<(), Box<dyn std::error::Error>> {
     })
     .await;
     println!("✅ 偶数: {:?}", valid_numbers);
-    
+
     Ok(())
 }
 ```
@@ -217,7 +216,7 @@ use tokio::time::{Duration, sleep};
 pub trait AsyncProcessor {
     type Output;
     type ProcessFuture: Future<Output = Result<Self::Output, Box<dyn std::error::Error>>>;
-    
+
     fn process(&self, input: &str) -> Self::ProcessFuture;
 }
 
@@ -227,7 +226,7 @@ pub struct TextProcessor;
 impl AsyncProcessor for TextProcessor {
     type Output = String;
     type ProcessFuture = impl Future<Output = Result<Self::Output, Box<dyn std::error::Error>>>;
-    
+
     fn process(&self, input: &str) -> Self::ProcessFuture {
         async move {
             sleep(Duration::from_millis(50)).await;
@@ -242,7 +241,7 @@ pub struct NumberProcessor;
 impl AsyncProcessor for NumberProcessor {
     type Output = i32;
     type ProcessFuture = impl Future<Output = Result<Self::Output, Box<dyn std::error::Error>>>;
-    
+
     fn process(&self, input: &str) -> Self::ProcessFuture {
         async move {
             sleep(Duration::from_millis(30)).await;
@@ -254,15 +253,15 @@ impl AsyncProcessor for NumberProcessor {
 /// 示例：使用 impl Trait in associated types
 pub async fn demo_impl_trait_assoc_type() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== Rust 1.90: impl Trait in associated types 示例 ===\n");
-    
+
     let text_proc = TextProcessor;
     let result = text_proc.process("hello").await?;
     println!("📝 文本处理结果: {}", result);
-    
+
     let num_proc = NumberProcessor;
     let num = num_proc.process("42").await?;
     println!("🔢 数字处理结果: {}", num);
-    
+
     Ok(())
 }
 ```
@@ -309,26 +308,26 @@ impl AsyncTcpServer {
             shutdown_rx,
         )
     }
-    
+
     /// 启动服务器
     pub async fn run(&self, addr: &str) -> Result<(), Box<dyn std::error::Error>> {
         let listener = TcpListener::bind(addr).await?;
         println!("🚀 服务器启动在 {}", addr);
-        
+
         loop {
             let (socket, remote_addr) = listener.accept().await?;
             println!("📥 新连接: {}", remote_addr);
-            
+
             // 更新统计
             {
                 let mut stats = self.stats.write().await;
                 stats.total_connections += 1;
                 stats.active_connections += 1;
             }
-            
+
             let stats = self.stats.clone();
             let mut shutdown_rx = self.shutdown_tx.subscribe();
-            
+
             // 为每个连接生成任务
             tokio::spawn(async move {
                 tokio::select! {
@@ -344,51 +343,51 @@ impl AsyncTcpServer {
             });
         }
     }
-    
+
     /// 处理单个连接
     async fn handle_connection(
         mut socket: TcpStream,
         stats: Arc<RwLock<ServerStats>>,
     ) -> Result<(), Box<dyn std::error::Error>> {
         let mut buffer = vec![0u8; 1024];
-        
+
         loop {
             let n = socket.read(&mut buffer).await?;
-            
+
             if n == 0 {
                 break; // 连接关闭
             }
-            
+
             // 更新统计
             {
                 let mut s = stats.write().await;
                 s.total_bytes_read += n as u64;
             }
-            
+
             // 回显数据
             socket.write_all(&buffer[..n]).await?;
-            
+
             // 更新统计
             {
                 let mut s = stats.write().await;
                 s.total_bytes_written += n as u64;
             }
         }
-        
+
         // 更新活跃连接数
         {
             let mut s = stats.write().await;
             s.active_connections -= 1;
         }
-        
+
         Ok(())
     }
-    
+
     /// 获取当前统计
     pub async fn get_stats(&self) -> ServerStats {
         self.stats.read().await.clone()
     }
-    
+
     /// 触发优雅关闭
     pub fn shutdown(&self) {
         let _ = self.shutdown_tx.send(());
@@ -398,9 +397,9 @@ impl AsyncTcpServer {
 /// 示例：运行高性能服务器
 pub async fn demo_tokio_server() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== Tokio 高性能服务器示例 ===\n");
-    
+
     let (server, _shutdown_rx) = AsyncTcpServer::new();
-    
+
     // 在后台运行服务器
     let server_clone = server.clone();
     tokio::spawn(async move {
@@ -408,17 +407,17 @@ pub async fn demo_tokio_server() -> Result<(), Box<dyn std::error::Error>> {
             eprintln!("服务器错误: {}", e);
         }
     });
-    
+
     // 等待一段时间
     tokio::time::sleep(Duration::from_secs(2)).await;
-    
+
     // 获取统计
     let stats = server.get_stats().await;
     println!("📊 服务器统计: {:?}", stats);
-    
+
     // 触发关闭
     server.shutdown();
-    
+
     Ok(())
 }
 ```
@@ -447,7 +446,7 @@ impl AsyncFileProcessor {
             processed_count: Arc::new(Mutex::new(0)),
         }
     }
-    
+
     /// 批量处理文件
     pub async fn process_directory(
         &self,
@@ -455,11 +454,11 @@ impl AsyncFileProcessor {
     ) -> Result<Vec<(String, usize)>, Box<dyn std::error::Error + Send + Sync>> {
         let mut results = Vec::new();
         let mut entries = read_dir(dir_path).await?;
-        
+
         while let Some(entry) = entries.next().await {
             let entry = entry?;
             let path = entry.path();
-            
+
             if path.is_file().await {
                 if let Ok(content) = self.process_file(&path).await {
                     results.push((
@@ -469,10 +468,10 @@ impl AsyncFileProcessor {
                 }
             }
         }
-        
+
         Ok(results)
     }
-    
+
     /// 处理单个文件
     async fn process_file(
         &self,
@@ -481,16 +480,16 @@ impl AsyncFileProcessor {
         let mut file = File::open(path).await?;
         let mut content = String::new();
         file.read_to_string(&mut content).await?;
-        
+
         // 增加处理计数
         let mut count = self.processed_count.lock().await;
         *count += 1;
-        
+
         println!("📄 处理文件: {} ({} 字节)", path.display(), content.len());
-        
+
         Ok(content)
     }
-    
+
     /// 获取处理计数
     pub async fn get_count(&self) -> usize {
         *self.processed_count.lock().await
@@ -500,32 +499,32 @@ impl AsyncFileProcessor {
 /// 示例：文件处理
 pub async fn demo_async_std_files() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     println!("\n=== async-std 文件处理示例 ===\n");
-    
+
     let processor = AsyncFileProcessor::new();
-    
+
     // 创建测试文件
     let test_dir = "test_async_files";
     async_std::fs::create_dir_all(test_dir).await?;
-    
+
     for i in 1..=5 {
         let path = format!("{}/file{}.txt", test_dir, i);
         let mut file = File::create(&path).await?;
         file.write_all(format!("Test content {}", i).as_bytes()).await?;
     }
-    
+
     // 处理所有文件
     let results = processor.process_directory(test_dir).await?;
-    
+
     println!("\n📊 处理结果:");
     for (path, size) in results {
         println!("   ✅ {}: {} 字节", path, size);
     }
-    
+
     println!("\n📈 总处理文件数: {}", processor.get_count().await);
-    
+
     // 清理
     async_std::fs::remove_dir_all(test_dir).await?;
-    
+
     Ok(())
 }
 ```
@@ -559,7 +558,7 @@ impl SmolScheduler {
             stats: Arc::new(RwLock::new(TaskStats::default())),
         }
     }
-    
+
     /// 调度任务
     pub async fn schedule_task<F, Fut>(
         &self,
@@ -572,10 +571,10 @@ impl SmolScheduler {
     {
         let stats = self.stats.clone();
         let name = name.to_string();
-        
+
         Task::spawn(async move {
             println!("▶️ 开始任务: {}", name);
-            
+
             match task().await {
                 Ok(_) => {
                     let mut s = stats.write().await;
@@ -590,10 +589,10 @@ impl SmolScheduler {
             }
         })
         .detach();
-        
+
         Ok(())
     }
-    
+
     /// 获取统计
     pub async fn get_stats(&self) -> TaskStats {
         self.stats.read().await.clone()
@@ -603,9 +602,9 @@ impl SmolScheduler {
 /// 示例：Smol 任务调度
 pub async fn demo_smol_scheduler() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== Smol 任务调度示例 ===\n");
-    
+
     let scheduler = SmolScheduler::new();
-    
+
     // 调度多个任务
     for i in 1..=5 {
         scheduler
@@ -616,14 +615,14 @@ pub async fn demo_smol_scheduler() -> Result<(), Box<dyn std::error::Error>> {
             })
             .await?;
     }
-    
+
     // 等待任务完成
     Timer::after(Duration::from_secs(1)).await;
-    
+
     // 获取统计
     let stats = scheduler.get_stats().await;
     println!("\n📊 任务统计: {:?}", stats);
-    
+
     Ok(())
 }
 ```
@@ -658,18 +657,18 @@ impl ConcurrentExecutor {
         count: usize,
     ) -> Result<Vec<TaskResult>, Box<dyn std::error::Error>> {
         let mut set = JoinSet::new();
-        
+
         // 生成任务
         for id in 0..count {
             set.spawn(async move {
                 let start = std::time::Instant::now();
-                
+
                 // 模拟异步工作
                 let delay = Duration::from_millis(100 * (id as u64 + 1));
                 sleep(delay).await;
-                
+
                 let value = (id as i32 + 1) * 10;
-                
+
                 TaskResult {
                     id,
                     value,
@@ -677,16 +676,16 @@ impl ConcurrentExecutor {
                 }
             });
         }
-        
+
         // 收集结果
         let mut results = Vec::new();
         while let Some(res) = set.join_next().await {
             results.push(res?);
         }
-        
+
         Ok(results)
     }
-    
+
     /// 带超时的并发执行
     pub async fn execute_with_timeout(
         count: usize,
@@ -701,10 +700,10 @@ impl ConcurrentExecutor {
 /// 示例：结构化并发
 pub async fn demo_structured_concurrency() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== 结构化并发 (JoinSet) 示例 ===\n");
-    
+
     // 并发执行5个任务
     let results = ConcurrentExecutor::execute_tasks(5).await?;
-    
+
     println!("📊 任务结果:");
     for result in &results {
         println!(
@@ -712,14 +711,14 @@ pub async fn demo_structured_concurrency() -> Result<(), Box<dyn std::error::Err
             result.id, result.value, result.duration
         );
     }
-    
+
     // 带超时的执行
     println!("\n⏱️ 带超时的执行 (1秒超时):");
     match ConcurrentExecutor::execute_with_timeout(5, Duration::from_secs(1)).await {
         Ok(results) => println!("✅ 完成 {} 个任务", results.len()),
         Err(e) => println!("❌ 失败: {}", e),
     }
-    
+
     Ok(())
 }
 ```
@@ -751,7 +750,7 @@ impl EventHandler {
     pub fn new() -> (Self, mpsc::Sender<String>, mpsc::Sender<()>) {
         let (data_tx, data_rx) = mpsc::channel(10);
         let (shutdown_tx, shutdown_rx) = mpsc::channel(1);
-        
+
         (
             Self {
                 data_rx,
@@ -761,11 +760,11 @@ impl EventHandler {
             shutdown_tx,
         )
     }
-    
+
     /// 运行事件循环
     pub async fn run(&mut self) {
         println!("🔄 事件循环启动");
-        
+
         loop {
             tokio::select! {
                 // 接收数据
@@ -773,13 +772,13 @@ impl EventHandler {
                     println!("📨 收到数据: {}", data);
                     self.handle_data(data).await;
                 }
-                
+
                 // 超时
                 _ = sleep(Duration::from_secs(2)) => {
                     println!("⏱️ 超时触发");
                     self.handle_timeout().await;
                 }
-                
+
                 // 关闭信号
                 Some(_) = self.shutdown_rx.recv() => {
                     println!("🛑 收到关闭信号");
@@ -787,15 +786,15 @@ impl EventHandler {
                 }
             }
         }
-        
+
         println!("👋 事件循环退出");
     }
-    
+
     async fn handle_data(&self, data: String) {
         sleep(Duration::from_millis(10)).await;
         println!("   ✅ 处理数据: {}", data);
     }
-    
+
     async fn handle_timeout(&self) {
         println!("   ⏰ 执行定时任务");
     }
@@ -804,29 +803,29 @@ impl EventHandler {
 /// 示例：Select 多路选择
 pub async fn demo_select() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== Select 多路选择示例 ===\n");
-    
+
     let (mut handler, data_tx, shutdown_tx) = EventHandler::new();
-    
+
     // 在后台运行事件循环
     let handle = tokio::spawn(async move {
         handler.run().await;
     });
-    
+
     // 发送一些数据
     for i in 1..=3 {
         data_tx.send(format!("Message #{}", i)).await?;
         sleep(Duration::from_millis(500)).await;
     }
-    
+
     // 等待超时触发
     sleep(Duration::from_secs(3)).await;
-    
+
     // 发送关闭信号
     shutdown_tx.send(()).await?;
-    
+
     // 等待事件循环结束
     handle.await?;
-    
+
     Ok(())
 }
 ```
@@ -852,11 +851,11 @@ impl CancellableTask {
             token: CancellationToken::new(),
         }
     }
-    
+
     /// 运行任务
     pub async fn run(&self, name: &str) -> Result<(), Box<dyn std::error::Error>> {
         println!("▶️ 任务开始: {}", name);
-        
+
         for i in 1..=10 {
             tokio::select! {
                 _ = sleep(Duration::from_secs(1)) => {
@@ -868,16 +867,16 @@ impl CancellableTask {
                 }
             }
         }
-        
+
         println!("✅ 任务完成: {}", name);
         Ok(())
     }
-    
+
     /// 取消任务
     pub fn cancel(&self) {
         self.token.cancel();
     }
-    
+
     /// 获取取消令牌的克隆
     pub fn token(&self) -> CancellationToken {
         self.token.clone()
@@ -887,38 +886,38 @@ impl CancellableTask {
 /// 示例：超时和取消
 pub async fn demo_timeout_cancellation() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== 超时和取消示例 ===\n");
-    
+
     // 1. 超时示例
     println!("--- 超时示例 ---");
     let long_task = async {
         sleep(Duration::from_secs(5)).await;
         "完成"
     };
-    
+
     match timeout(Duration::from_secs(2), long_task).await {
         Ok(result) => println!("✅ 任务完成: {}", result),
         Err(_) => println!("⏱️ 任务超时"),
     }
-    
+
     // 2. 取消示例
     println!("\n--- 取消示例 ---");
     let task = CancellableTask::new();
     let task_clone = task.token();
-    
+
     let handle = tokio::spawn(async move {
         let t = CancellableTask { token: task_clone };
         t.run("Task-1").await
     });
-    
+
     // 等待3秒后取消
     sleep(Duration::from_secs(3)).await;
     task.cancel();
-    
+
     match handle.await? {
         Ok(_) => println!("任务正常完成"),
         Err(e) => println!("任务被中断: {}", e),
     }
-    
+
     Ok(())
 }
 ```
@@ -953,8 +952,8 @@ pub async fn demo_timeout_cancellation() -> Result<(), Box<dyn std::error::Error
 
 ---
 
-**文档完成日期**: 2025-10-19  
-**Rust版本要求**: 1.90+  
-**主要运行时**: Tokio 1.35+, async-std 1.12+, Smol 2.0+  
-**代码状态**: ✅ 可直接运行（需要添加相应依赖）  
+**文档完成日期**: 2025-10-19
+**Rust版本要求**: 1.90+
+**主要运行时**: Tokio 1.35+, async-std 1.12+, Smol 2.0+
+**代码状态**: ✅ 可直接运行（需要添加相应依赖）
 **总代码行数**: ~800+ 行（此为精简版，完整版约3000+行）

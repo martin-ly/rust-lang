@@ -1,6 +1,6 @@
 ﻿# ❓ C11宏系统 - 常见问题
 
-> **文档定位**: 宏学习中的常见问题和解答  
+> **文档定位**: 宏学习中的常见问题和解答
 > **最后更新**: 2025-10-20
 
 ---
@@ -242,13 +242,13 @@ use quote::quote;
 pub fn derive_builder(input: TokenStream) -> TokenStream {
     let ast = parse_macro_input!(input as DeriveInput);
     let name = &ast.ident;
-    
+
     let expanded = quote! {
         impl #name {
             fn builder() -> Builder { ... }
         }
     };
-    
+
     TokenStream::from(expanded)
 }
 ```
@@ -320,7 +320,7 @@ macro_rules! platform_specific {
     () => {
         #[cfg(target_os = "windows")]
         fn impl_windows() { }
-        
+
         #[cfg(target_os = "linux")]
         fn impl_linux() { }
     };
@@ -414,7 +414,7 @@ greet!();  // 输出: Hello
 ```rust
 macro_rules! html {
     ($tag:ident { $($content:tt)* }) => {
-        format!("<{}>{}</{}>", 
+        format!("<{}>{}</{}>",
             stringify!($tag),
             html!($($content)*),
             stringify!($tag))
@@ -445,7 +445,7 @@ let page = html! {
 
 ---
 
-**最后更新**: 2025-10-20  
+**最后更新**: 2025-10-20
 **维护者**: Rust学习社区
 
 有新问题？欢迎提交！

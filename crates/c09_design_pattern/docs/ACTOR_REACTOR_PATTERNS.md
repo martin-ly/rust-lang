@@ -180,7 +180,7 @@ use std::fmt::Debug;
 /// Actor trait定义
 pub trait Actor: Send + 'static {
     type Message: Send + Debug;
-    
+
     /// 处理消息，返回新状态（可选）
     fn handle(&mut self, msg: Self::Message);
 }
@@ -204,13 +204,13 @@ impl ActorSystem {
     /// 启动Actor，返回其句柄
     pub fn spawn<A: Actor>(mut actor: A) -> ActorHandle<A::Message> {
         let (tx, mut rx) = mpsc::unbounded_channel();
-        
+
         tokio::spawn(async move {
             while let Some(msg) = rx.recv().await {
                 actor.handle(msg);
             }
         });
-        
+
         ActorHandle { sender: tx }
     }
 }
@@ -228,7 +228,7 @@ pub enum CounterMessage {
 
 impl Actor for CounterActor {
     type Message = CounterMessage;
-    
+
     fn handle(&mut self, msg: Self::Message) {
         match msg {
             CounterMessage::Increment => {
@@ -254,11 +254,11 @@ impl Actor for CounterActor {
 async fn main() {
     let counter = CounterActor { count: 0 };
     let handle = ActorSystem::spawn(counter);
-    
+
     // 发送消息（非阻塞）
     handle.send(CounterMessage::Increment).unwrap();
     handle.send(CounterMessage::Increment).unwrap();
-    
+
     // 查询状态
     let (tx, rx) = tokio::sync::oneshot::channel();
     handle.send(CounterMessage::GetCount(tx)).unwrap();
@@ -337,10 +337,10 @@ pub enum Interest {
 pub trait Demultiplexer {
     /// 注册文件描述符
     fn register(&mut self, fd: RawFd, interest: Interest);
-    
+
     /// 等待事件（阻塞）
     fn wait(&mut self, timeout: Option<Duration>) -> Vec<Event>;
-    
+
     /// 注销文件描述符
     fn unregister(&mut self, fd: RawFd);
 }
@@ -370,10 +370,10 @@ pub struct Reactor {
 impl Reactor {
     pub fn run(&mut self) {
         self.running = true;
-        
+
         while self.running {
             let events = self.demux.wait(None);
-            
+
             for event in events {
                 if let Some(handler) = self.handlers.get_mut(&event.fd) {
                     match event.kind {
@@ -385,12 +385,12 @@ impl Reactor {
             }
         }
     }
-    
+
     pub fn register(&mut self, fd: RawFd, handler: Box<dyn EventHandler>) {
         self.demux.register(fd, Interest::Readable);
         self.handlers.insert(fd, handler);
     }
-    
+
     pub fn stop(&mut self) {
         self.running = false;
     }
@@ -406,10 +406,10 @@ Tokio使用**mio**库实现跨平台的Reactor：
 pub struct TokioReactor {
     // epoll (Linux) / kqueue (macOS) / IOCP (Windows)
     io_driver: mio::Poll,
-    
+
     // 就绪队列
     ready_queue: VecDeque<Task>,
-    
+
     // 定时器堆
     timer_wheel: TimerWheel,
 }
@@ -419,29 +419,29 @@ impl TokioReactor {
         let mut fut = std::pin::pin!(fut);
         let waker = self.create_waker();
         let mut cx = Context::from_waker(&waker);
-        
+
         loop {
             // 1. Poll Future
             match fut.as_mut().poll(&mut cx) {
                 Poll::Ready(output) => return output,
                 Poll::Pending => {}
             }
-            
+
             // 2. 处理就绪的IO事件
             self.drive_io();
-            
+
             // 3. 处理到期的定时器
             self.drive_timers();
-            
+
             // 4. 执行就绪任务
             self.run_ready_tasks();
         }
     }
-    
+
     fn drive_io(&mut self) {
         let mut events = mio::Events::with_capacity(1024);
         self.io_driver.poll(&mut events, Some(Duration::ZERO)).unwrap();
-        
+
         for event in events.iter() {
             // 唤醒等待该IO事件的Future
             self.wake_task(event.token());
@@ -561,7 +561,7 @@ pub trait Message: Send + 'static {}
 /// Actor trait
 pub trait Actor: Send + 'static {
     type Message: Message;
-    
+
     fn handle(&mut self, msg: Self::Message, ctx: &mut ActorContext<Self>);
 }
 
@@ -577,7 +577,7 @@ impl<A: Actor> ActorContext<A> {
     pub fn send<T: Message>(&self, addr: ActorAddr, msg: T) {
         self.system.send(addr, Box::new(msg));
     }
-    
+
     /// 停止当前Actor
     pub fn stop(&self) {
         self.system.stop_actor(self.addr);
@@ -597,7 +597,7 @@ impl ActorSystemInner {
             let _ = sender.send(msg);
         }
     }
-    
+
     fn stop_actor(&self, addr: ActorAddr) {
         let mut actors = self.actors.lock().unwrap();
         actors.remove(&addr);
@@ -619,11 +619,11 @@ impl ActorSystem {
             }),
         }
     }
-    
+
     pub fn spawn<A: Actor>(&self, mut actor: A) -> ActorAddr {
         let addr = self.inner.next_id.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
         let (tx, mut rx) = mpsc::unbounded_channel::<Box<dyn Message>>();
-        
+
         let inner = self.inner.clone();
         tokio::spawn(async move {
             let mut ctx = ActorContext {
@@ -631,7 +631,7 @@ impl ActorSystem {
                 system: inner,
                 _phantom: std::marker::PhantomData,
             };
-            
+
             while let Some(msg) = rx.recv().await {
                 // 类型擦除恢复
                 if let Some(typed_msg) = (msg as Box<dyn std::any::Any>).downcast::<A::Message>().ok() {
@@ -639,7 +639,7 @@ impl ActorSystem {
                 }
             }
         });
-        
+
         self.inner.actors.lock().unwrap().insert(addr, tx);
         addr
     }
@@ -670,7 +670,7 @@ impl SimpleReactor {
             next_id: Arc::new(std::sync::atomic::AtomicU64::new(0)),
         }
     }
-    
+
     pub fn spawn<F>(&self, fut: F) -> u64
     where F: Future<Output = ()> + Send + 'static
     {
@@ -679,37 +679,37 @@ impl SimpleReactor {
         self.wake(id);
         id
     }
-    
+
     pub fn wake(&self, id: u64) {
         if let Some(waker) = self.wakers.lock().unwrap().get(&id) {
             waker.wake_by_ref();
         }
     }
-    
+
     pub fn run(&self) {
         loop {
             let mut tasks = self.tasks.lock().unwrap();
             if tasks.is_empty() {
                 break;
             }
-            
+
             let ids: Vec<u64> = tasks.keys().copied().collect();
             drop(tasks);
-            
+
             for id in ids {
                 self.poll_task(id);
             }
         }
     }
-    
+
     fn poll_task(&self, id: u64) {
         let waker = self.create_waker(id);
         let mut cx = Context::from_waker(&waker);
-        
+
         let mut tasks = self.tasks.lock().unwrap();
         if let Some(mut task) = tasks.remove(&id) {
             drop(tasks);
-            
+
             match task.as_mut().poll(&mut cx) {
                 Poll::Ready(()) => {
                     // 任务完成
@@ -721,7 +721,7 @@ impl SimpleReactor {
             }
         }
     }
-    
+
     fn create_waker(&self, id: u64) -> Waker {
         // 实际实现需要使用RawWaker
         unimplemented!("需要实现RawWaker")
@@ -805,7 +805,7 @@ pub struct ChatRoomActor {
 
 impl Actor for ChatRoomActor {
     type Message = ChatMessage;
-    
+
     fn handle(&mut self, msg: Self::Message, _ctx: &mut ActorContext<Self>) {
         match msg {
             ChatMessage::Connect { user, sender } => {
@@ -845,18 +845,18 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 pub async fn run_http_server(addr: &str) -> std::io::Result<()> {
     let listener = TcpListener::bind(addr).await?;
     println!("Server listening on {}", addr);
-    
+
     loop {
         let (mut socket, _) = listener.accept().await?;
-        
+
         tokio::spawn(async move {
             let mut buffer = [0u8; 1024];
-            
+
             match socket.read(&mut buffer).await {
                 Ok(n) if n > 0 => {
                     let request = String::from_utf8_lossy(&buffer[..n]);
                     println!("Received: {}", request);
-                    
+
                     let response = "HTTP/1.1 200 OK\r\nContent-Length: 13\r\n\r\nHello, World!";
                     socket.write_all(response.as_bytes()).await.unwrap();
                 }
@@ -878,7 +878,7 @@ pub struct HttpHandlerActor;
 
 impl Actor for HttpHandlerActor {
     type Message = HttpMessage;
-    
+
     fn handle(&mut self, msg: Self::Message, _ctx: &mut ActorContext<Self>) {
         match msg {
             HttpMessage::Request { path, reply } => {
@@ -895,18 +895,18 @@ impl Actor for HttpHandlerActor {
 
 pub async fn run_actor_http_server(addr: &str, actor: ActorAddr) -> std::io::Result<()> {
     let listener = TcpListener::bind(addr).await?;
-    
+
     loop {
         let (mut socket, _) = listener.accept().await?;
-        
+
         tokio::spawn(async move {
             // Parse request (simplified)
             let path = "/".to_string();
-            
+
             let (tx, rx) = tokio::sync::oneshot::channel();
             // Send to actor
             // actor.send(HttpMessage::Request { path, reply: tx });
-            
+
             if let Ok(response) = rx.await {
                 let http_response = format!(
                     "HTTP/1.1 200 OK\r\nContent-Length: {}\r\n\r\n{}",
@@ -942,6 +942,6 @@ pub async fn run_actor_http_server(addr: &str, actor: ActorAddr) -> std::io::Res
 
 ---
 
-**文档版本**: 1.0  
-**最后更新**: 2025-10-02  
+**文档版本**: 1.0
+**最后更新**: 2025-10-02
 **Rust版本**: 1.90+ (Edition 2024)
