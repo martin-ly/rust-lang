@@ -43,7 +43,6 @@
 //! ```
 
 use std::fs;
-use std::io::{self, Write};
 
 /// 应用配置
 #[derive(Debug)]
@@ -73,10 +72,10 @@ impl AppConfig {
 
         let log_level = match std::env::var("LOG_LEVEL").as_deref() {
             Ok("debug") => LogLevel::Debug,
-            Ok("info") | Ok(_) => LogLevel::Info,
+            Ok("info") => LogLevel::Info,
             Ok("warning") => LogLevel::Warning,
             Ok("error") => LogLevel::Error,
-            Err(_) => LogLevel::Info,
+            Ok(_) | Err(_) => LogLevel::Info,
         };
 
         Ok(Self {
@@ -135,6 +134,7 @@ impl Logger {
         self.log(LogLevel::Warning, message);
     }
 
+    #[allow(dead_code)]
     fn error(&self, message: &str) {
         self.log(LogLevel::Error, message);
     }
@@ -453,9 +453,11 @@ mod tests {
 
     #[test]
     fn test_config_from_env() {
-        std::env::set_var("WORK_DIR", "/tmp");
-        std::env::set_var("OUTPUT_FILE", "test.txt");
-        std::env::set_var("LOG_LEVEL", "debug");
+        unsafe {
+            std::env::set_var("WORK_DIR", "/tmp");
+            std::env::set_var("OUTPUT_FILE", "test.txt");
+            std::env::set_var("LOG_LEVEL", "debug");
+        }
 
         let config = AppConfig::from_env().unwrap();
         assert_eq!(config.work_dir, "/tmp");

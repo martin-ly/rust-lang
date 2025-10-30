@@ -104,14 +104,14 @@ RuntimeTypeInfo = {
 fn enhanced_type_inference() {
     // 改进的闭包类型推导
     let closure = |x| x + 1; // 自动推导为 |x: i32| -> i32
-    
+
     // 改进的迭代器类型推导
     let numbers: Vec<i32> = vec![1, 2, 3, 4, 5];
     let filtered: Vec<i32> = numbers
         .into_iter()
         .filter(|&x| x > 2)
         .collect();
-    
+
     // 改进的泛型类型推导
     fn process_items<T>(items: Vec<T>) -> Vec<T>
     where
@@ -151,7 +151,7 @@ impl StateMachine<Uninitialized> {
             _state: PhantomData,
         }
     }
-    
+
     fn initialize(self, data: String) -> StateMachine<Initialized> {
         StateMachine {
             data,
@@ -176,7 +176,7 @@ impl StateMachine<Running> {
             _state: PhantomData,
         }
     }
-    
+
     fn get_data(&self) -> &str {
         &self.data
     }
@@ -216,7 +216,7 @@ where
 trait AdvancedTrait {
     type Output;
     type Error;
-    
+
     fn process(&self) -> Result<Self::Output, Self::Error>;
 }
 
@@ -226,7 +226,7 @@ where
 {
     type Output = Vec<T>;
     type Error = String;
-    
+
     fn process(&self) -> Result<Self::Output, Self::Error> {
         if self.is_empty() {
             Err("Vector is empty".to_string())
@@ -256,11 +256,11 @@ impl DynamicContainer {
             data: Box::new(value),
         }
     }
-    
+
     fn get<T: Any>(&self) -> Option<&T> {
         self.data.downcast_ref::<T>()
     }
-    
+
     fn type_id(&self) -> TypeId {
         self.data.type_id()
     }
@@ -270,11 +270,11 @@ impl DynamicContainer {
 fn dynamic_typing_example() {
     let container = DynamicContainer::new(42i32);
     println!("Type ID: {:?}", container.type_id());
-    
+
     if let Some(value) = container.get::<i32>() {
         println!("Value: {}", value);
     }
-    
+
     let string_container = DynamicContainer::new("Hello".to_string());
     if let Some(value) = string_container.get::<String>() {
         println!("String: {}", value);
@@ -297,7 +297,7 @@ impl RuntimeCheckable for i32 {
     fn type_name(&self) -> &'static str {
         "i32"
     }
-    
+
     fn is_valid(&self) -> bool {
         *self >= 0
     }
@@ -307,7 +307,7 @@ impl RuntimeCheckable for String {
     fn type_name(&self) -> &'static str {
         "String"
     }
-    
+
     fn is_valid(&self) -> bool {
         !self.is_empty()
     }
@@ -324,11 +324,11 @@ impl DynamicValidator {
             validators: Vec::new(),
         }
     }
-    
+
     fn add_validator<T: RuntimeCheckable + 'static>(&mut self, validator: T) {
         self.validators.push(Box::new(validator));
     }
-    
+
     fn validate_all(&self) -> Vec<bool> {
         self.validators.iter().map(|v| v.is_valid()).collect()
     }
@@ -506,13 +506,13 @@ impl ServiceRegistry {
             services: Arc::new(RwLock::new(HashMap::new())),
         }
     }
-    
+
     fn register<S: Service + 'static>(&self, service: S) -> Result<(), String> {
         let mut services = self.services.write().map_err(|_| "Lock poisoned")?;
         services.insert(service.name().to_string(), Box::new(service));
         Ok(())
     }
-    
+
     fn get_service(&self, name: &str) -> Option<Box<dyn Service>> {
         let services = self.services.read().ok()?;
         services.get(name).cloned()
@@ -538,7 +538,7 @@ impl DynamicMessageHandler {
             handlers: HashMap::new(),
         }
     }
-    
+
     fn register_handler<T: Any>(
         &mut self,
         handler: impl Fn(&T) -> Result<Value, String> + 'static,
@@ -553,7 +553,7 @@ impl DynamicMessageHandler {
         });
         self.handlers.insert(type_id, boxed_handler);
     }
-    
+
     fn handle_message(&self, message: &dyn Any) -> Result<Value, String> {
         let type_id = message.type_id();
         if let Some(handler) = self.handlers.get(&type_id) {
@@ -579,7 +579,7 @@ struct SystemMessage {
 
 fn dynamic_message_example() {
     let mut handler = DynamicMessageHandler::new();
-    
+
     // 注册处理器
     handler.register_handler(|msg: &UserMessage| {
         Ok(serde_json::json!({
@@ -588,7 +588,7 @@ fn dynamic_message_example() {
             "message": msg.message
         }))
     });
-    
+
     handler.register_handler(|msg: &SystemMessage| {
         Ok(serde_json::json!({
             "type": "system_message",
@@ -596,13 +596,13 @@ fn dynamic_message_example() {
             "message": msg.message
         }))
     });
-    
+
     // 处理消息
     let user_msg = UserMessage {
         user_id: 123,
         message: "Hello".to_string(),
     };
-    
+
     let result = handler.handle_message(&user_msg);
     println!("Result: {:?}", result);
 }
@@ -624,7 +624,7 @@ Theorem StaticTypeSoundness {
         // 类型保持性
         type_preservation: ∀e, e', Γ ⊢ e : τ ∧ e → e' ⇒ Γ ⊢ e' : τ
     },
-    
+
     // 结论
     Conclusion: {
         // 类型安全保证
@@ -647,7 +647,7 @@ Proof StaticTypeSoundness {
             // 常量规则
             Constant: Γ ⊢ c : τ_c
         },
-        
+
         // 归纳情况
         Inductive cases: {
             // 函数应用
@@ -673,7 +673,7 @@ Theorem DynamicTypeFlexibility {
         // 类型转换能力
         type_conversion: ∀v, τ₁, τ₂, convert(v, τ₁, τ₂) is possible
     },
-    
+
     // 结论
     Conclusion: {
         // 类型灵活性

@@ -1,5 +1,5 @@
 //! 实用工具集合（重试/超时/并发限制/熔断/令牌桶/度量与监督）
-//! 
+//!
 //! 快速用法示例：
 //! ```no_run
 //! use c06_async::utils::{ExecStrategyBuilder};
@@ -11,7 +11,7 @@
 //!     .start_delay(Duration::from_millis(100))
 //!     .timeout(Duration::from_secs(2))
 //!     .build();
-//! 
+//!
 //! let res = runner.run(
 //!     |attempt| async move {
 //!         // 你的异步任务，这里简单返回 Ok，生产中可返回 Err 重试
@@ -137,22 +137,36 @@ pub mod supervisor {
     }
 }
 
+/// Metrics 模块 - 使用 Prometheus 提供指标端点
+///
+/// 注意：使用简单的 TCP HTTP 服务器实现
 pub mod metrics {
-    use axum::{routing::get, Router};
     use prometheus::{Encoder, Registry, TextEncoder};
+    use tokio::io::AsyncWriteExt;
 
     pub async fn serve_metrics(registry: Registry, bind: &str) -> anyhow::Result<()> {
-        async fn handle_metrics(registry: Registry) -> axum::http::Response<String> {
-            let encoder = TextEncoder::new();
-            let metric_families = registry.gather();
-            let mut buffer = Vec::new();
-            let _ = encoder.encode(&metric_families, &mut buffer);
-            let body = String::from_utf8_lossy(&buffer).to_string();
-            axum::http::Response::builder().status(200).header(axum::http::header::CONTENT_TYPE, encoder.format_type()).body(body).unwrap()
+        let listener = tokio::net::TcpListener::bind(bind).await?;
+        println!("Metrics server listening on {}", bind);
+
+        loop {
+            let (mut socket, _) = listener.accept().await?;
+            let reg = registry.clone();
+            tokio::spawn(async move {
+                let encoder = TextEncoder::new();
+                let metric_families = reg.gather();
+                let mut buffer = Vec::new();
+                let _ = encoder.encode(&metric_families, &mut buffer);
+                let body = String::from_utf8_lossy(&buffer).to_string();
+
+                let http_response = format!(
+                    "HTTP/1.1 200 OK\r\nContent-Type: {}\r\nContent-Length: {}\r\n\r\n{}",
+                    encoder.format_type(),
+                    body.len(),
+                    body
+                );
+                let _ = socket.write_all(http_response.as_bytes()).await;
+            });
         }
-        let app = Router::new().route("/metrics", get({ let reg = registry.clone(); move || handle_metrics(reg.clone()) }));
-        let listener = tokio::net::TcpListener::bind(bind).await.map_err(|e| anyhow::anyhow!(e))?;
-        axum::serve(listener, app.into_make_service()).await.map_err(|e| anyhow::anyhow!(e))
     }
 }
 
@@ -325,9 +339,9 @@ impl ExecStrategyBuilder {
             .concurrency(cfg.concurrency as usize)
             .attempts(cfg.max_attempts)
             .start_delay(Duration::from_millis(cfg.start_delay_ms));
-        
-        if let Some(to_ms) = cfg.timeout_ms { 
-            b = b.timeout(Duration::from_millis(to_ms)); 
+
+        if let Some(to_ms) = cfg.timeout_ms {
+            b = b.timeout(Duration::from_millis(to_ms));
         }
         if let Some(dl_ms) = cfg.deadline_ms {
             b = b.deadline(std::time::Instant::now() + Duration::from_millis(dl_ms));
@@ -335,7 +349,7 @@ impl ExecStrategyBuilder {
         if let Some(tb) = cfg.token_bucket.as_ref() {
             b = b.token_bucket(SimpleTokenBucket::new(tb.capacity, tb.refill_per_sec));
         }
-        
+
         // 高级熔断器配置
         if cfg.enable_breaker.unwrap_or(false) {
             let threshold = cfg.breaker_threshold.unwrap_or(5) as u64;
@@ -343,7 +357,7 @@ impl ExecStrategyBuilder {
             let half_open_max = cfg.breaker_half_open_max_calls.unwrap_or(3);
             b = b.breaker(circuit_breaker::CircuitBreaker::new_with_half_open_max(threshold, window, half_open_max));
         }
-        
+
         b
     }
 }

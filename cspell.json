@@ -66,6 +66,7 @@
     "hyper",
     "rayon",
     "crossbeam",
+    "mmap",
     "petgraph",
     "Emscripten",
     "AssemblyScript",
@@ -108,7 +109,14 @@
     "Figma",
     "AutoCAD",
     "Shopify",
-    "Zoom"
+    "Zoom",
+    "keypair",
+    "ciphertext",
+    "HKDF",
+    "hkdf",
+    "HMAC",
+    "hmac",
+    "Ciphertext"
   ],
   "dictionaries": [
     "rust",

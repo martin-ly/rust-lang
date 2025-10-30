@@ -64,13 +64,13 @@
 //! async fn main() {
 //!     // 1. 学习异步语义理论
 //!     async_semantics_theory::run_all_examples().await;
-//!     
+//!
 //!     // 2. 理解异步递归
 //!     async_recursion_analysis::run_all_examples().await;
-//!     
+//!
 //!     // 3. 掌握并发模式
 //!     actor_reactor_patterns::run_all_examples().await;
-//!     
+//!
 //!     // 4. 对比 CSP 模型
 //!     csp_model_comparison::run_all_examples().await;
 //! }
@@ -253,6 +253,10 @@ pub mod tokio;
 
 /// Smol 轻量级运行时
 pub mod smol;
+
+/// Glommio 高性能运行时 (Linux only, 基于 io_uring)
+#[cfg(target_os = "linux")]
+pub mod glommio;
 
 // ============================================================================
 // 高级工具与模式 (Advanced Tools)

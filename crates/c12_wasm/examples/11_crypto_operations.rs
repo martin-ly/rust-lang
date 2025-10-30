@@ -248,8 +248,8 @@ impl DigitalSignature {
 
         // 实际实现中调用 WASI-Crypto API
         let keypair = KeyPair {
-            public_key: vec![0xPUu8; 32],  // 模拟公钥
-            private_key: vec![0xPRu8; 32], // 模拟私钥
+            public_key: vec![0x50u8; 32],  // 模拟公钥 (0x50 = 'P' in ASCII)
+            private_key: vec![0x52u8; 32], // 模拟私钥 (0x52 = 'R' in ASCII)
         };
 
         println!("Public key: {} bytes", keypair.public_key.len());
@@ -259,13 +259,13 @@ impl DigitalSignature {
     }
 
     /// 签名数据
-    pub fn sign(&self, private_key: &[u8], message: &[u8]) -> Result<Vec<u8>, CryptoError> {
+    pub fn sign(&self, _private_key: &[u8], message: &[u8]) -> Result<Vec<u8>, CryptoError> {
         println!("\n=== Digital Signature ===");
         println!("Algorithm: {}", self.algorithm.name());
         println!("Message size: {} bytes", message.len());
 
         // 实际实现中调用 WASI-Crypto API
-        let signature = vec![0xSIu8; 64]; // 模拟签名
+        let signature = vec![0x53u8; 64]; // 模拟签名 (0x53 = 'S' in ASCII)
 
         println!("Signature size: {} bytes", signature.len());
         Ok(signature)
@@ -274,7 +274,7 @@ impl DigitalSignature {
     /// 验证签名
     pub fn verify(
         &self,
-        public_key: &[u8],
+        _public_key: &[u8],
         message: &[u8],
         signature: &[u8],
     ) -> Result<bool, CryptoError> {
@@ -339,7 +339,7 @@ impl Hasher {
         println!("Input size: {} bytes", data.len());
 
         // 实际实现中调用 WASI-Crypto API
-        let hash = vec![0xHAu8; self.algorithm.output_size()];
+        let hash = vec![0xABu8; self.algorithm.output_size()]; // 模拟哈希值
 
         println!("Hash size: {} bytes", hash.len());
         println!("Hash (hex): {}", hex_encode(&hash[..8.min(hash.len())]));
@@ -355,7 +355,7 @@ impl Hasher {
         println!("Data size: {} bytes", data.len());
 
         // 实际实现中调用 WASI-Crypto API
-        let mac = vec![0xMCu8; self.algorithm.output_size()];
+        let mac = vec![0x4Du8; self.algorithm.output_size()]; // 模拟 MAC (0x4D = 'M' in ASCII)
 
         println!("MAC size: {} bytes", mac.len());
         Ok(mac)
@@ -382,7 +382,7 @@ impl KeyDerivation {
         println!("Output length: {} bytes", output_len);
 
         // 实际实现中调用 WASI-Crypto API
-        let derived = vec![0xKDu8; output_len];
+        let derived = vec![0x4Bu8; output_len]; // 模拟派生密钥 (0x4B = 'K' in ASCII)
 
         println!("Derived key generated");
         Ok(derived)
@@ -404,7 +404,7 @@ impl KeyDerivation {
         println!("Output length: {} bytes", output_len);
 
         // 实际实现中调用 WASI-Crypto API
-        let derived = vec![0xPBu8; output_len];
+        let derived = vec![0x50u8; output_len]; // 模拟 PBKDF2 派生密钥
 
         println!("Derived key generated");
         Ok(derived)
@@ -618,7 +618,7 @@ fn demo_secure_communication() {
     // 1. Bob 生成密钥对
     println!("\n1. Bob generates key pair...");
     let signer = DigitalSignature::new(AsymmetricAlgorithm::Ed25519);
-    let bob_keypair = signer.generate_keypair().unwrap();
+    let _bob_keypair = signer.generate_keypair().unwrap();
 
     // 2. Alice 准备消息
     println!("\n2. Alice prepares message...");

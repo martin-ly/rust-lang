@@ -75,6 +75,7 @@ pub enum InferenceBackend {
 }
 
 impl InferenceBackend {
+    #[allow(dead_code)]
     fn as_str(&self) -> &str {
         match self {
             Self::PyTorch => "pytorch",
@@ -255,6 +256,7 @@ impl LLMGenerator {
 }
 
 /// 批量推理处理器
+#[allow(dead_code)]
 pub struct BatchInference {
     model_path: String,
     backend: InferenceBackend,
@@ -287,7 +289,7 @@ impl BatchInference {
         let mut results = Vec::new();
         for chunk in inputs.chunks(self.batch_size) {
             println!("Processing batch of {} items", chunk.len());
-            for input in chunk {
+            for _input in chunk {
                 // 模拟推理
                 let output = vec![0.1f32; 10]; // 模拟输出
                 results.push(output);
