@@ -166,7 +166,7 @@ async-trait = "0.1.89"
 async-stream = "0.3.6"
 # async-std 已移除，使用 tokio 替代 (async-std 已弃用)
 # tokio-console: tokio的控制台调试工具
-tokio-console = "0.1.13"
+tokio-console = "0.1.14"
 # tokio-test: tokio的测试工具
 tokio-test = "0.4.4"
 # mio: 跨平台异步I/O库 - 2025年10月27日

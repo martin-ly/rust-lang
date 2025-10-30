@@ -1,5 +1,7 @@
 # Glommio 集成完成报告 - 2025年10月30日
 
+<!-- cspell:ignore Glommio NUMA -->
+
 ## 🎉 完成概览
 
 成功为 **c06_async** 项目添加了完整的 **Glommio** 高性能异步运行时支持，对齐 Rust 1.90 和 2025年10月30日的最新最成熟内容。
@@ -368,7 +370,7 @@ cargo bench --bench glommio_benchmarks
 
 ## 📚 文档结构
 
-```
+```text
 crates/c06_async/
 ├── Cargo.toml                    # ✅ 添加 Glommio 依赖
 ├── src/
@@ -425,7 +427,7 @@ cargo bench --bench glommio_benchmarks
 
 ### 选择 Glommio 的场景
 
-```
+```text
 选择 Glommio ✅
     │
     ├─ 需要极致性能 (<100μs 延迟)
@@ -437,7 +439,7 @@ cargo bench --bench glommio_benchmarks
 
 ### 选择其他运行时的场景
 
-```
+```text
 选择 Tokio ✅
     │
     ├─ 需要跨平台支持
