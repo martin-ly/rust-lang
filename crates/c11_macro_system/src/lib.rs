@@ -35,6 +35,9 @@
 pub mod declarative;
 pub mod utils;
 
+// Rust 1.91 新特性模块
+pub mod rust_191_features;
+
 // 重新导出常用项
 pub use declarative::*;
 

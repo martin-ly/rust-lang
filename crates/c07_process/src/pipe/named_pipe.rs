@@ -64,7 +64,7 @@ impl NamedPipe {
 
         // 写入管道文件
         let mut file = OpenOptions::new()
-            
+
             .append(true)
             .open(&pipe_path)
             .map_err(|e| IpcError::SendFailed(e.to_string()))?;
@@ -87,6 +87,7 @@ impl NamedPipe {
         let reader = BufReader::new(file);
         let mut lines = reader.lines();
 
+        // Rust 1.91: 可以使用改进的迭代器优化
         // 读取最后一行（最新的消息）
         let mut last_line = String::new();
         while let Some(Ok(line)) = lines.next() {

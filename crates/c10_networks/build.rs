@@ -11,13 +11,13 @@ fn main() {
                 std::env::set_var("PROTOC", protoc_path);
             }
         }
-        
+
         // 使用 tonic-prost-build 生成带有 gRPC 客户端/服务端的代码
         tonic_prost_build::configure()
             .build_server(true)
             .build_client(true)
             .compile_protos(&["proto/hello.proto"], &["proto"]) // (files, includes)
-            .expect("failed to compile protos with tonic-prost-build");
+            .expect("failed to compile protobuf files with tonic-prost-build");
 
         // println!("cargo:warning=Protobuf compilation completed");
     } else {

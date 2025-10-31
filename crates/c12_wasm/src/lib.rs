@@ -12,6 +12,9 @@ pub mod ecosystem_examples;
 // 引入 WasmEdge 示例模块
 pub mod wasmedge_examples;
 
+// Rust 1.91 新特性模块
+pub mod rust_191_features;
+
 /// wasm-bindgen 基础示例
 pub mod basic_examples {
     use wasm_bindgen::prelude::*;

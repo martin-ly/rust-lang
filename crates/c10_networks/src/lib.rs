@@ -27,6 +27,9 @@ pub mod performance;
 pub mod protocol;
 pub mod security;
 pub mod semantics;
+
+// Rust 1.91 新特性模块
+pub mod rust_191_features;
 #[cfg(any(feature = "sniff", feature = "offline", feature = "pcap_live"))]
 pub mod sniff;
 pub mod socket;

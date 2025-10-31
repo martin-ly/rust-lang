@@ -31,6 +31,9 @@ pub mod rust_190_latest_features {
 // 导出 Rust 1.90 高级特性模块
 pub mod rust_190_advanced_features;
 
+// 导出 Rust 1.91 特性模块
+pub mod rust_191_features;
+
 // 导出 WebAssembly 支持模块
 pub mod wasm_support;
 

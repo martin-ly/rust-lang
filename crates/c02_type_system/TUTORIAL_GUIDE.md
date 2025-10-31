@@ -79,8 +79,8 @@
 
 ```rust
 // 练习 1: 实现一个复杂的生命周期组合类型
-pub struct ComplexLifetime<'a, 'b, T> 
-where 
+pub struct ComplexLifetime<'a, 'b, T>
+where
     T: 'a + 'b,
 {
     data: &'a T,
@@ -88,8 +88,8 @@ where
 }
 
 // 练习 2: 创建高级类型约束
-pub trait AdvancedConstraint<T> 
-where 
+pub trait AdvancedConstraint<T>
+where
     T: Clone + Send + Sync + 'static,
 {
     fn process(&self, data: T) -> Result<T, Box<dyn std::error::Error>>;
@@ -424,6 +424,6 @@ cargo install cargo-criterion
 
 ---
 
-**教程版本**: 1.0  
-**最后更新**: 2025年1月27日  
+**教程版本**: 1.0
+**最后更新**: 2025年1月27日
 **维护者**: Rust 类型系统项目组

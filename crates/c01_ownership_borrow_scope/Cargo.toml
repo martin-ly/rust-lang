@@ -3,7 +3,7 @@ name = "c01_ownership_borrow_scope"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
-rust-version = "1.90"
+rust-version = "1.91"
 
 [dependencies]
 tokio = { workspace = true }

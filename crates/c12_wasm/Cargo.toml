@@ -2,7 +2,7 @@
 name = "c12_wasm"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.90"
+rust-version = "1.91"
 authors = ["Rust Learning Community"]
 description = "Comprehensive WebAssembly learning module with Rust 1.90+"
 license = "MIT OR Apache-2.0"

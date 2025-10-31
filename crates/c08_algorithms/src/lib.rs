@@ -1,11 +1,12 @@
-//! Rust 1.90 高级算法实现库
+//! Rust 1.91 高级算法实现库
 //!
-//! 本库提供了Rust中各种高级算法的完整实现，完全对齐 Rust 1.90 版本特性，
+//! 本库提供了Rust中各种高级算法的完整实现，完全对齐 Rust 1.91 版本特性，
 //! 包括排序、搜索、图算法、机器学习算法、密码学算法等。
 //!
 //! ## 特性
 //!
-//! - **Rust 1.90 特性对齐**: 完全支持最新语言特性
+//! - **Rust 1.91 特性对齐**: 完全支持最新语言特性
+//! - **LeetCode 分类组织**: 按照 LeetCode 官方分类组织算法
 //! - **主题化组织**: 按算法主题分类组织
 //! - **多实现方式**: 同步、并行、异步实现
 //! - **形式化验证**: 包含算法正确性证明（循环不变量、霍尔逻辑）
@@ -79,9 +80,15 @@ pub mod string_algorithms;
 // 示例程序
 // pub mod bin; // 暂时注释掉，避免编译错误
 
+// Rust 1.91 新特性模块
+pub mod rust_191_features;
+
+// LeetCode 分类算法模块（结合 Rust 1.91 特性）
+pub mod leetcode;
+
 /// 算法库版本信息
 pub const VERSION: &str = "0.2.0";
-pub const RUST_VERSION: &str = "1.90";
+pub const RUST_VERSION: &str = "1.91";
 
 /// 获取库版本信息
 pub fn get_version() -> &'static str {

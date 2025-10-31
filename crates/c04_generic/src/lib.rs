@@ -115,6 +115,8 @@ pub mod rust_189_comprehensive;
 pub mod rust_190_features;
 /// Rust 1.90 真正的泛型特性实现
 pub mod rust_190_real_generics;
+/// Rust 1.91 泛型特性实现
+pub mod rust_191_features;
 
 /// 高级泛型模式和设计模式示例模块 - 展示使用泛型实现的设计模式
 pub mod advanced_patterns;

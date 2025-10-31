@@ -99,6 +99,8 @@
     "wast",
     "wat2wasm",
     "wasm2wat",
+    "racecar",
+    "olleh",
     "wasm-opt",
     "wasm-pack",
     "wasm-bindgen",

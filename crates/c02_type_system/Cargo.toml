@@ -3,7 +3,7 @@ name = "c02_type_system"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
-rust-version = "1.90"
+rust-version = "1.91"
 
 
 [lib]
@@ -70,6 +70,10 @@ path = "examples/rust_190_memory_safety_advanced_demo.rs"
 name = "rust_190_advanced_macros_demo"
 path = "examples/rust_190_advanced_macros_demo.rs"
 
+[[example]]
+name = "rust_191_features_demo"
+path = "examples/rust_191_features_demo.rs"
+
 [[bin]]
 name = "ts"
 path = "src/bin/main.rs"
@@ -81,6 +85,9 @@ serde_json = { workspace = true }
 tokio = { workspace = true }
 futures = { workspace = true }
 criterion = { workspace = true, optional = true }
+
+[features]
+default = []
 
 [target.'cfg(not(target_env = "msvc"))'.dependencies]
 jemallocator = "0.5.4"

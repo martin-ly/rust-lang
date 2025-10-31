@@ -9,12 +9,13 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-lang/c07_process"
 keywords = ["process", "ipc", "synchronization", "system-programming"]
 categories = ["system-programming", "concurrency"]
-rust-version = "1.90"
+rust-version = "1.91"
 
 [dependencies]
 # 核心异步运行时（可选）
 tokio = { workspace = true, optional = true }
 tokio-util = { workspace = true, optional = true }
+futures = { workspace = true, optional = true }
 
 # 序列化支持
 serde = { workspace = true }
@@ -124,7 +125,8 @@ path = "src/bin/enhanced_error_demo.rs"
 [features]
 default = ["std", "async"]
 std = []
-async = ["tokio", "tokio-util"]
+async = ["tokio", "tokio-util", "futures"]
+futures = ["dep:futures"]
 unix = ["nix"]
 windows = []
 full = ["std", "async", "unix", "windows"]

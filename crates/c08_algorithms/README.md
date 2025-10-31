@@ -8,7 +8,8 @@
     - [📖 新版文档导航](#-新版文档导航)
   - [🌟 2025-10-20 核心增强更新](#-2025-10-20-核心增强更新)
   - [🚀 项目概述](#-项目概述)
-  - [✨ Rust 1.90 / Edition 2024 特性支持（稳定）](#-rust-190--edition-2024-特性支持稳定)
+  - [✨ Rust 1.91 / Edition 2024 特性支持（稳定）](#-rust-191--edition-2024-特性支持稳定)
+    - [🆕 2025-11-01 LeetCode 分类集成](#-2025-11-01-leetcode-分类集成)
     - [🔄 异步编程特性](#-异步编程特性)
     - [🧬 类型系统特性](#-类型系统特性)
   - [📚 核心模块](#-核心模块)
@@ -98,16 +99,44 @@
 
 ## 🚀 项目概述
 
-本项目是一个全面的 Rust 算法与数据结构库，对齐 Rust 1.90 与 Edition 2024 稳定语言特性，包括：
+本项目是一个全面的 Rust 算法与数据结构库，对齐 Rust 1.91 与 Edition 2024 稳定语言特性，包括：
 
 - **异步编程增强**: 完全支持 `async fn` in traits
 - **类型系统增强**: GATs、常量泛型改进
 - **性能优化**: 零成本抽象增强、内存布局优化
 - **现代 Rust 惯用法**: Edition 2024 最佳实践（let-else、Option::is_some_and、返回位置 impl Trait、从不返回类型 `!` 等）
+- **LeetCode 分类组织**: 按照 LeetCode 官方分类组织算法，结合 Rust 1.91 特性实现经典题目
 
 ---
 
-## ✨ Rust 1.90 / Edition 2024 特性支持（稳定）
+## ✨ Rust 1.91 / Edition 2024 特性支持（稳定）
+
+### 🆕 2025-11-01 LeetCode 分类集成
+
+- **LeetCode 分类模块**: 按照 LeetCode 官方分类组织算法实现
+- **Rust 1.91 特性应用**: 在实际算法中应用 Rust 1.91 新特性
+- **完整文档**: 包含问题描述、示例、约束条件、复杂度分析
+- **已实现题目**:
+  - **Array**: Two Sum, 3Sum, Maximum Subarray, Container With Most Water 等 12+ 题
+  - **Two Pointers**: 3Sum Closest, Trapping Rain Water, Sort Colors 等 8+ 题
+  - **Binary Search**: Binary Search, Search in Rotated Sorted Array, Find Peak Element 等 10+ 题
+  - **String**: Longest Common Prefix, Valid Parentheses, First Unique Character 等 10+ 题
+  - **Hash Table**: Group Anagrams, Single Number, Valid Anagram 等 12+ 题
+  - **Stack**: Evaluate RPN, Min Stack, Daily Temperatures 等 6+ 题
+  - **Sliding Window**: Longest Substring, Minimum Size Subarray, Sliding Window Maximum 等 8+ 题
+  - **Dynamic Programming**: Climbing Stairs, House Robber, Coin Change, LIS, LCS 等 11+ 题
+  - **Tree**: Maximum Depth, Same Tree, Symmetric Tree, Invert Tree, Traversals 等 13+ 题
+  - **Heap**: Kth Largest, Top K Frequent, K Closest Points, Last Stone Weight 等 8+ 题
+  - **Graph**: Number of Islands, Course Schedule, Flood Fill, Rotting Oranges 等 9+ 题
+  - **Backtracking**: Permutations, Subsets, Generate Parentheses, Word Search 等 10+ 题
+  - **Bit Manipulation**: Single Number, Hamming Weight, Power of Two, Counting Bits 等 10+ 题
+  - **Trie**: Implement Trie, Word Dictionary 等 2+ 题
+  - **总计**: 132+ 题目，124 个测试用例，**100% 测试通过率**
+  - 更多分类和题目实现中...
+
+详细文档请查看: [docs/leetcode_with_rust191.md](./docs/leetcode_with_rust191.md)
+
+---
 
 ### 🔄 异步编程特性
 

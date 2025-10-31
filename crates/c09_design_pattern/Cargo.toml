@@ -3,7 +3,7 @@ name = "c09_design_pattern"
 version = "1.0.1"
 edition = "2024"
 resolver = "3"
-rust-version = "1.90"
+rust-version = "1.91"
 
 [dependencies]
 async-trait = { workspace = true }
@@ -11,6 +11,7 @@ tokio = { workspace = true }
 rayon = { workspace = true }
 crossbeam = { workspace = true }
 lazy_static = "1.5.0"
+futures = { workspace = true, optional = true }
 tracing = { version = "0.1", optional = true }
 tracing-subscriber = { version = "0.3", optional = true, features = ["fmt", "env-filter"] }
 
@@ -25,6 +26,8 @@ rayon = []
 tokio-bench = []
 # 可观测示例所需的 tracing 组件
 obs-tracing = ["tracing", "tracing-subscriber"]
+# 启用 futures 支持
+futures = ["dep:futures"]
 
 [lib]
 name = "c09_design_pattern"

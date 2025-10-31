@@ -65,6 +65,9 @@ pub mod async_runtime;
 // Rust 1.90 新特性模块
 pub mod rust_190_features;
 
+// Rust 1.91 新特性模块
+pub mod rust_191_features;
+
 // 性能优化模块
 pub mod performance;
 
@@ -111,7 +114,7 @@ pub use inter_process_communication::{
 
 #[cfg(feature = "async")]
 pub use inter_process_communication::enhanced::{
-    EnhancedIpcManager, EnhancedIpcChannel, IpcMetrics, 
+    EnhancedIpcManager, EnhancedIpcChannel, IpcMetrics,
     IpcPerformanceMonitor, IpcErrorRecovery, IpcRetryPolicy, IpcRecoveryStrategy
 };
 
@@ -239,14 +242,14 @@ pub mod prelude {
     // 增强的异步功能
     #[cfg(feature = "async")]
     pub use super::async_runtime::enhanced::{
-        EnhancedAsyncProcessManager, ProcessOutput, ProcessMetrics, 
+        EnhancedAsyncProcessManager, ProcessOutput, ProcessMetrics,
         PerformanceMonitor, RetryPolicy
     };
 
     // 增强的IPC功能
     #[cfg(feature = "async")]
     pub use super::inter_process_communication::enhanced::{
-        EnhancedIpcManager, EnhancedIpcChannel, IpcMetrics, 
+        EnhancedIpcManager, EnhancedIpcChannel, IpcMetrics,
         IpcPerformanceMonitor, IpcErrorRecovery, IpcRetryPolicy, IpcRecoveryStrategy
     };
 

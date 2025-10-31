@@ -28,6 +28,9 @@ pub mod async_control_flow_190;
 pub mod performance_optimization_190;
 pub mod formal_verification_190;
 
+// 导出Rust 1.91新特性模块
+pub mod rust_191_features;
+
 // 导出基础语法模块
 pub mod basic_syntax;
 pub mod rust_189_basic_syntax;

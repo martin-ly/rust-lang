@@ -284,6 +284,13 @@ pub mod rust_190_real_stable_features;
 /// Rust 1.90 高级异步特性
 pub mod rust_190_advanced_features;
 
+// ============================================================================
+// Rust 1.91 特性模块 (Rust 1.91 Features)
+// ============================================================================
+
+/// Rust 1.91 异步特性实现
+pub mod rust_191_features;
+
 /// 改进的异步特性实现
 pub mod improved_async_features;
 

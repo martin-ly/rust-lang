@@ -25,6 +25,8 @@ pub mod error_handling;
 pub mod rust_189_features;
 // Rust 1.90 / Edition 2024 特性演示模块
 pub mod rust_190_features;
+// Rust 1.91 新特性演示模块
+pub mod rust_191_features;
 
 // 性能基准测试模块
 pub mod performance_benchmarks;

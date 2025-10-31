@@ -3,7 +3,7 @@ name = "c06_async"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
-rust-version = "1.90"
+rust-version = "1.91"
 
 [dependencies]
 # 异步运行时 - 使用工作区统一版本
