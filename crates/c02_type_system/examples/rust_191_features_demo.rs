@@ -47,6 +47,44 @@ mod const_context {
     }
 }
 
+/// Rust 1.91 类型系统优化示例
+mod type_system {
+    use c02_type_system::rust_191_features::type_checker_optimizations::{
+        OptimizedTypeInferencer,
+        demonstrate_type_inference,
+    };
+
+    /// 演示类型推断优化
+    pub fn demonstrate_type_inference_optimization() {
+        println!("\n=== Rust 1.91 类型系统优化 ===");
+
+        // 运行完整演示
+        demonstrate_type_inference();
+
+        // 或者手动使用
+        let mut inferencer = OptimizedTypeInferencer::new();
+
+        println!("\n手动类型推断示例:");
+        let expressions = vec!["42", "true", "'c'", "\"hello\""];
+        for expr in &expressions {
+            let inferred = inferencer.infer_type_cached(expr);
+            println!("  {} => {}", expr, inferred);
+        }
+
+        // 查看统计信息
+        let stats = inferencer.get_statistics();
+        println!("\n统计信息:");
+        println!("  总推断次数: {}", stats.total_inferences);
+        println!("  缓存命中: {}", stats.cache_hits);
+        println!("  缓存未命中: {}", stats.cache_misses);
+        if stats.total_inferences > 0 {
+            let hit_rate =
+                (stats.cache_hits as f64 / stats.total_inferences as f64) * 100.0;
+            println!("  缓存命中率: {:.2}%", hit_rate);
+        }
+    }
+}
+
 /// Rust 1.91 新的稳定 API 示例
 mod new_apis {
     use std::io::{BufRead, BufReader, Cursor};
@@ -296,6 +334,9 @@ fn main() {
     // 1. Const 上下文增强
     const_context::demonstrate_const_refs();
     const_context::demonstrate_const_config();
+
+    // 2. 类型系统优化（Rust 1.91 新增）
+    type_system::demonstrate_type_inference_optimization();
 
     // 2. 新的稳定 API
     new_apis::demonstrate_skip_while();

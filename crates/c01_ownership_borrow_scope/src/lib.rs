@@ -15,15 +15,15 @@
 //! pub trait LinearType {
 //!     /// 移动语义 / Move Semantics
 //!     fn move_ownership(self) -> Self;
-//!     
+//!
 //!     /// 复制语义 / Copy Semantics
 //!     fn copy_value(&self) -> Self
 //!     where
 //!         Self: Copy;
-//!     
+//!
 //!     /// 借用语义 / Borrow Semantics
 //!     fn borrow_value(&self) -> &Self;
-//!     
+//!
 //!     /// 可变借用 / Mutable Borrow
 //!     fn borrow_mut(&mut self) -> &mut Self;
 //! }
@@ -39,13 +39,13 @@
 //! pub trait Lifetime<'a> {
 //!     /// 生命周期参数 / Lifetime Parameter
 //!     type LifetimeParam;
-//!     
+//!
 //!     /// 生命周期约束 / Lifetime Constraint
 //!     fn lifetime_constraint(&self, other: &'a Self) -> bool;
-//!     
+//!
 //!     /// 生命周期推断 / Lifetime Inference
 //!     fn infer_lifetime(&self) -> &'a Self;
-//!     
+//!
 //!     /// 生命周期扩展 / Lifetime Extension
 //!     fn extend_lifetime<'b>(&'a self) -> &'b Self
 //!     where
@@ -227,10 +227,10 @@
 //! pub mod tools {
 //!     /// 所有权可视化器 / Ownership Visualizer
 //!     pub struct OwnershipVisualizer;
-//!     
+//!
 //!     /// 借用检查器 / Borrow Checker
 //!     pub struct BorrowChecker;
-//!     
+//!
 //!     /// 生命周期分析器 / Lifetime Analyzer
 //!     pub struct LifetimeAnalyzer;
 //! }
@@ -277,30 +277,30 @@
 //! fn main() -> Result<(), Box<dyn std::error::Error>> {
 //!     // 创建改进的借用检查器 / Create improved borrow checker
 //!     let mut borrow_checker = ImprovedBorrowChecker::new();
-//!     
+//!
 //!     // 创建作用域管理器 / Create scope manager
 //!     let mut scope_manager = ScopeManager::new();
-//!     
+//!
 //!     // 进入作用域 / Enter scope
 //!     scope_manager.enter_scope("main".to_string(), ScopeType::Block);
-//!     
+//!
 //!     // 创建不可变借用 / Create immutable borrow
 //!     let borrow_result = borrow_checker.create_borrow(
 //!         "owner".to_string(),
 //!         "borrower".to_string(),
 //!         BorrowType::Immutable
 //!     );
-//!     
+//!
 //!     match borrow_result {
 //!         Ok(borrow) => println!("借用创建成功 / Borrow created successfully: {:?}", borrow),
 //!         Err(e) => println!("借用创建失败 / Borrow creation failed: {:?}", e),
 //!     }
-//!     
+//!
 //!     // 退出作用域 / Exit scope
 //!     scope_manager.exit_scope()?;
-//!     
+//!
 //!     println!("所有权和借用系统运行正常 / Ownership and borrowing system running normally");
-//!     
+//!
 //!     Ok(())
 //! }
 //! ```
@@ -316,6 +316,7 @@ pub mod variable;
 pub mod ownership_utils;
 pub mod rust_190_features;
 pub mod rust_190_latest_features;
+pub mod rust_191_features;
 
 // 重新导出主要类型 / Re-export main types
 // 使用具体的导出而不是通配符导出以避免名称冲突 / Use specific exports instead of wildcard exports to avoid name conflicts
@@ -453,6 +454,30 @@ pub use rust_190_latest_features::{
     GeneratorMetrics,
     PerformanceAnalyzer as Rust190PerformanceAnalyzer,
     CachedGenerator,
+};
+
+// 从 rust_191_features 模块导出 / Export from rust_191_features module
+pub use rust_191_features::{
+    // 改进的类型检查器（借用检查器优化）/ Improved Type Checker (Borrow Checker Optimizations)
+    Rust191BorrowChecker,
+    BorrowRecord191,
+    BorrowType191,
+    BorrowCheckResult191,
+    BorrowCheckerStatistics191,
+    // 增强的 const 上下文（对生命周期的影响）/ Enhanced Const Context (Impact on Lifetimes)
+    LifetimeParam191,
+    ConstContextLifetimeInferencer191,
+    // 优化的内存分配器（所有权和内存管理改进）/ Optimized Memory Allocator (Ownership and Memory Management Improvements)
+    OptimizedMemoryManager191,
+    AllocationRecord191,
+    AllocationType191,
+    MemoryManagerStatistics191,
+    // 改进的生命周期推断（编译时优化）/ Improved Lifetime Inference (Compile-time Optimizations)
+    OptimizedLifetimeInferencer191,
+    LifetimeInferenceStatistics191,
+    // 主要功能函数 / Main function functions
+    run_all_rust_191_features_examples,
+    get_rust_191_features_info,
 };
 
 /// 所有权系统版本 / Ownership System Version

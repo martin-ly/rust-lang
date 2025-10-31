@@ -31,6 +31,21 @@ pub mod formal_verification_190;
 // 导出Rust 1.91新特性模块
 pub mod rust_191_features;
 
+// 重新导出Rust 1.91新特性
+pub use rust_191_features::{
+    const_control_flow,
+    improved_control_flow,
+    function_performance,
+    error_handling as rust_191_error_handling,
+    optimized_conditionals,
+    optimized_loops,
+    function_call_optimization,
+    closure_optimization,
+    comprehensive_examples,
+    demonstrate_rust_191_control_flow,
+    get_rust_191_control_flow_info,
+};
+
 // 导出基础语法模块
 pub mod basic_syntax;
 pub mod rust_189_basic_syntax;
@@ -77,7 +92,7 @@ pub use rust_189_basic_syntax::*;
 
 // 版本信息
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
-pub const RUST_VERSION: &str = "1.90.0";
+pub const RUST_VERSION: &str = "1.91.0";
 
 /// 项目信息
 pub struct ProjectInfo;
@@ -95,7 +110,7 @@ impl ProjectInfo {
 
     /// 获取项目描述
     pub fn description() -> &'static str {
-        "Rust 1.90 控制流与函数特性研究项目"
+        "Rust 1.91 控制流与函数特性研究项目"
     }
 }
 

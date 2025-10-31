@@ -96,7 +96,7 @@
 **模块类型**: 高级学习模块 + 跨平台开发
 **学习重点**: WebAssembly、Rust 与 WASM 集成、跨平台应用开发
 **适用对象**: Rust 中级到高级开发者、前端开发者、全栈工程师
-**Rust 版本**: 1.90+ (Edition 2024)
+**Rust 版本**: 1.91+ (Edition 2024)
 **WASM 版本**: WASM 2.0 + WASI 0.2
 
 ---
@@ -109,9 +109,10 @@
 2. **Rust 集成**: wasm-bindgen、wasm-pack、wasmtime 等工具链
 3. **性能优化**: 二进制大小优化、运行时性能调优
 4. **实战应用**: 前端集成、后端服务、边缘计算
-5. **Rust 1.90 特性**: let-else、RPITIT、dyn 上行转型、async fn in traits ⭐ NEW!
-6. **成熟生态库**: Yew、Leptos、Dioxus 等前端框架分析 ⭐ NEW!
-7. **设计模式**: 工厂、建造者、观察者、策略、适配器、单例模式 ⭐ NEW!
+5. **Rust 1.91 特性**: const 上下文增强、编译优化、内存优化、JIT 优化 ⭐ NEW!
+6. **Rust 1.90 特性**: let-else、RPITIT、dyn 上行转型、async fn in traits
+7. **成熟生态库**: Yew、Leptos、Dioxus 等前端框架分析
+8. **设计模式**: 工厂、建造者、观察者、策略、适配器、单例模式
 
 ### 🎯 学习目标
 
@@ -122,7 +123,8 @@
 - ✅ 理解 WASM 性能优化技术和最佳实践
 - ✅ 学会在实际项目中应用 WASM 技术
 - ✅ 掌握 WASI 和跨平台应用开发
-- ✅ 了解 Rust 1.90 最新特性在 WASM 中的应用 ⭐ NEW!
+- ✅ 了解 Rust 1.91 最新特性在 WASM 中的应用 ⭐ NEW!
+- ✅ 了解 Rust 1.90 特性在 WASM 中的应用
 - ✅ 学习成熟的 WASM 生态库（Yew、Leptos、Dioxus）⭐ NEW!
 - ✅ 掌握设计模式在 WASM 项目中的实践 ⭐ NEW!
 
@@ -208,7 +210,13 @@ wasmedge target/wasm32-wasi/release/wasi-app.wasm input.txt
 | [术语表](./docs/tier_01_foundations/03_术语表.md) | WASM 核心术语 | ⭐ |
 | [常见问题](./docs/tier_01_foundations/04_常见问题.md) | FAQ 解答 | ⭐⭐ |
 
-### Rust 1.90 特性与生态 ⭐ NEW
+### Rust 1.91 特性与优化 ⭐ NEW
+
+| 文档 | 内容 | 难度 |
+|------|------|------|
+| [Rust 1.91 WASM 改进文档](./docs/RUST_191_WASM_IMPROVEMENTS.md) | Rust 1.91 在 WASM 中的改进和优化 | ⭐⭐⭐⭐ |
+
+### Rust 1.90 特性与生态
 
 | 文档 | 内容 | 难度 |
 |------|------|------|
@@ -437,9 +445,9 @@ npm start
 
 ---
 
-**模块状态**: 🔄 持续开发中
-**最后更新**: 2025-10-30
-**适用版本**: Rust 1.90+ (Edition 2024), WASM 2.0 + WASI 0.2
+**模块状态**: ✅ Rust 1.91 特性更新完成
+**最后更新**: 2025-01-27
+**适用版本**: Rust 1.91+ (Edition 2024), WASM 2.0 + WASI 0.2
 
 ---
 

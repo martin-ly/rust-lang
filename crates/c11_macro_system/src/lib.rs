@@ -41,6 +41,19 @@ pub mod rust_191_features;
 // 重新导出常用项
 pub use declarative::*;
 
+// 重新导出 Rust 1.91 特性
+pub use rust_191_features::{
+    // 主要功能函数
+    demonstrate_rust_191_macro_features,
+    demonstrate_all_rust_191_macro_features,
+    // 宏展开缓存
+    macro_expansion_cache,
+    // 改进的错误消息
+    improved_macro_errors,
+    // 过程宏编译优化
+    proc_macro_compilation_optimization,
+};
+
 /// 模块版本信息
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
