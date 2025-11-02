@@ -151,7 +151,7 @@ dioxus-web = "0.7.0-rc.0"  # 更新至最新候选版本
 # dioxus-desktop = "0.7.0-rc.0"  # 暂时禁用，存在GTK3安全漏洞
 # leptos: 全栈同构Rust Web框架，利用细粒度响应性
 leptos = "0.8.10"  # 更新至最新稳定版本
-leptos_axum = "0.8.9"  # 更新至最新稳定版本
+leptos_axum = "0.8.6"  # 更新至最新稳定版本
 
 # 2025年最新桌面应用框架 (Tauri 2.0已解决GTK3安全漏洞)
 # tauri: 使用Web技术构建跨平台桌面应用的框架 - 版本 2.0+ (字母索引)
@@ -203,13 +203,13 @@ prost-types = "0.14.1"
 
 # 安全更新 - 修复protobuf安全漏洞 (RUSTSEC-2024-0437)
 # 通过工作区依赖强制使用安全版本
-protobuf = "3.7.2" # 修复递归崩溃漏洞
+protobuf = "4.33.0-release" # 修复递归崩溃漏洞
 
 # TLS 和加密 - 2025年10月21日最新稳定版本
 # rustls: 现代TLS库，用Rust编写，提供高性能和安全性 - 版本 0.23+ (字母索引)
 rustls = { version = "0.23.34", features = ["ring"] }
 # rustls-webpki: rustls的WebPKI支持
-rustls-webpki = "0.104.2"
+rustls-webpki = "0.103.8"
 # rustls-pemfile: rustls的PEM文件解析支持
 rustls-pemfile = "2.2.0"
 # tokio-rustls: tokio与rustls的集成
@@ -217,7 +217,7 @@ tokio-rustls = "0.26.4"  # 更新至最新稳定版本
 # ring: 加密原语库，提供高性能的加密算法实现 - 版本 0.17+ (字母索引)
 ring = "0.17.14"
 # webpki-roots: WebPKI根证书集合 - 2025年10月6日更新
-webpki-roots = "1.1.1"
+webpki-roots = "1.0.4"
 
 # 错误处理 - 2025年10月21日最新稳定版本
 # thiserror: 错误类型派生宏库，简化错误处理 - 版本 1.0+ (字母索引)
@@ -233,7 +233,7 @@ serde_json = "1.0.145"
 # serde_yaml: YAML序列化/反序列化支持
 serde_yaml = "0.9.34"
 # bincode: 二进制序列化格式，高效且紧凑
-bincode = "1.3.3"
+bincode = "2.0.1"
 
 # 异步运行时 - 2025年10月21日最新稳定版本
 # tokio: 事件驱动的非阻塞I/O平台，用于编写异步I/O应用程序 - 版本 1.40+ (字母索引)
@@ -381,7 +381,7 @@ candle-nn = "0.9.1"
 # candle-transformers: candle的Transformer模型支持
 candle-transformers = "0.9.1"
 # tch: PyTorch的Rust绑定，提供深度学习支持
-tch = "0.17.0"
+tch = "0.22.0"
 # petgraph: 图数据结构和算法库
 petgraph = "0.8.3"
 # image: 图像处理库 - 2025年10月20日更新
@@ -412,7 +412,7 @@ lru = "0.16.2"
 # Web 和 GUI 框架 - 2025年10月21日最新稳定版本
 # tauri 已移除，使用 egui/iced 替代 (解决 GTK3 安全漏洞)
 # egui: 易于使用的即时模式GUI，支持Web和原生平台 - 版本 0.28+ (字母索引)
-egui = "0.32.3"
+egui = "0.33.0"
 # iced: 受Elm启发的跨平台GUI库
 iced = "0.13.1"
 
@@ -434,7 +434,7 @@ quote = "1.0.41"
 # proc-macro-error2: 过程宏错误处理库，替代proc-macro-error (未维护)
 proc-macro-error2 = "2.0.1"
 # is-terminal: 终端检测库，替代atty (有安全漏洞)
-is-terminal = "0.2.0"
+is-terminal = "0.4.17"
 # wasm-bindgen: WebAssembly绑定生成器，支持WebAssembly 2.0 - 版本 0.2+ (字母索引)
 wasm-bindgen = "0.2.105"
 # nix: 系统调用安全封装库 - 2025年10月20日更新
