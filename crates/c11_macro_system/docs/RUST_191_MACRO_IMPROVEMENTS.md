@@ -58,6 +58,7 @@ Rust 1.91 改进了类型检查器，特别是在宏展开方面：
 #### 1. JIT 优化对宏展开的影响
 
 **Rust 1.90**:
+
 ```rust
 // 每次宏展开都需要完整计算
 fn process_macro(tokens: &[String]) -> Vec<String> {
@@ -70,6 +71,7 @@ fn process_macro(tokens: &[String]) -> Vec<String> {
 ```
 
 **Rust 1.91**:
+
 ```rust
 use c11_macro_system::rust_191_features::macro_jit_optimizations;
 
@@ -91,7 +93,7 @@ let processed = macro_jit_optimizations::process_macro_expansion(&tokens);
 
 ## 增强的 const 上下文（宏配置计算）
 
-### Rust 1.91 改进概述
+### Rust 1.91 改进概述1
 
 Rust 1.91 允许在 const 上下文中创建对非静态常量的引用，这对宏系统配置有重要影响：
 
@@ -99,11 +101,12 @@ Rust 1.91 允许在 const 上下文中创建对非静态常量的引用，这对
 - **宏配置计算**: 在编译时计算宏配置
 - **更好的常量表达式**: 支持更复杂的常量计算
 
-### 核心改进
+### 核心改进1
 
 #### 1. const 上下文中的宏配置
 
 **Rust 1.90**:
+
 ```rust
 // 只能引用静态变量
 static MAX_ARGS: usize = 64;
@@ -111,6 +114,7 @@ const MAX_ARGS_REF: &usize = &MAX_ARGS;  // ✅ 仅支持静态变量
 ```
 
 **Rust 1.91**:
+
 ```rust
 use c11_macro_system::rust_191_features::const_macro_config;
 
@@ -139,7 +143,7 @@ const_macro_config::MacroConfigSystem::demonstrate();
 
 ## 优化的内存分配器（宏数据结构优化）
 
-### Rust 1.91 改进概述
+### Rust 1.91 改进概述2
 
 Rust 1.91 改进了内存分配器，特别是在处理宏数据结构时：
 
@@ -147,7 +151,7 @@ Rust 1.91 改进了内存分配器，特别是在处理宏数据结构时：
 - **内存碎片减少**: 更好的内存管理策略
 - **更快的宏数据结构创建**: 优化的分配策略
 
-### 核心改进
+### 核心改进2
 
 #### 1. 小对象池优化
 
@@ -159,7 +163,7 @@ let objects = macro_memory_optimizations::create_small_macro_objects();
 // 创建大量小对象时，性能提升显著
 ```
 
-#### 2. 性能对比
+#### 2. 性能对比1
 
 | 对象大小 | Rust 1.90 | Rust 1.91 | 性能提升 |
 |----------|-----------|-----------|----------|
@@ -171,7 +175,7 @@ let objects = macro_memory_optimizations::create_small_macro_objects();
 
 ## 宏展开缓存机制（编译时优化）
 
-### Rust 1.91 改进概述
+### Rust 1.91 改进概述3
 
 Rust 1.91 改进了宏展开缓存机制，减少重复展开的编译时间：
 
@@ -179,7 +183,7 @@ Rust 1.91 改进了宏展开缓存机制，减少重复展开的编译时间：
 - **编译时间减少**: 通过缓存减少重复展开
 - **智能缓存管理**: 自动管理缓存生命周期
 
-### 核心改进
+### 核心改进3
 
 #### 1. 宏展开缓存
 
@@ -216,7 +220,7 @@ println!("缓存命中率: {:.2}%",
 
 ## 改进的宏错误消息（开发体验提升）
 
-### Rust 1.91 改进概述
+### Rust 1.91 改进概述4
 
 Rust 1.91 改进了宏相关的错误消息，提供更清晰的错误提示：
 
@@ -224,7 +228,7 @@ Rust 1.91 改进了宏相关的错误消息，提供更清晰的错误提示：
 - **修复建议**: 自动生成修复建议
 - **友好的错误格式**: 易于阅读和理解
 
-### 核心改进
+### 核心改进4
 
 #### 1. 改进的错误消息格式
 
@@ -261,7 +265,7 @@ for suggestion in suggestions {
 
 ## 过程宏编译优化（编译时间减少）
 
-### Rust 1.91 改进概述
+### Rust 1.91 改进概述5
 
 Rust 1.91 改进了过程宏的编译过程，减少编译时间：
 
@@ -269,7 +273,7 @@ Rust 1.91 改进了过程宏的编译过程，减少编译时间：
 - **增量编译**: 只编译变更的部分
 - **编译时间减少 10-20%**: 通过缓存和优化
 
-### 核心改进
+### 核心改进5
 
 #### 1. 过程宏编译器优化
 
@@ -291,7 +295,7 @@ println!("缓存命中率: {:.2}%",
 );
 ```
 
-#### 2. 性能影响
+#### 2. 性能影响5
 
 | 场景 | Rust 1.90 | Rust 1.91 | 性能提升 |
 |------|-----------|-----------|----------|
@@ -388,6 +392,7 @@ rustc --version  # 应该显示 rustc 1.91.0
 #### 2. 利用新特性
 
 **使用 const 上下文增强**:
+
 ```rust
 // 旧代码（Rust 1.90）
 static MAX_ARGS: usize = 64;
@@ -399,6 +404,7 @@ const MAX_ARGS_REF: &usize = &MAX_ARGS; // 可以引用 const
 ```
 
 **使用宏展开缓存**:
+
 ```rust
 // 新代码（Rust 1.91）
 use c11_macro_system::rust_191_features::macro_expansion_cache;
@@ -407,6 +413,7 @@ let mut cache = macro_expansion_cache::MacroExpansionCache::new();
 ```
 
 **使用改进的错误消息**:
+
 ```rust
 // 新代码（Rust 1.91）
 use c11_macro_system::rust_191_features::improved_macro_errors;
@@ -440,6 +447,7 @@ Rust 1.91 在宏系统方面带来了显著的改进：
 ---
 
 **参考资源**:
+
 - [Rust 1.91 Features Comprehensive](../../RUST_1.91_FEATURES_COMPREHENSIVE.md)
 - [Rust 1.91 Release Notes](https://blog.rust-lang.org/)
 - [Macro System Documentation](../README.md)
@@ -447,7 +455,7 @@ Rust 1.91 在宏系统方面带来了显著的改进：
 ---
 
 **文档维护**:
+
 - **最后更新**: 2025-01-27
 - **维护者**: 项目团队
 - **下次更新**: Rust 1.92 发布时
-
