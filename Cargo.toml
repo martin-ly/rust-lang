@@ -207,7 +207,7 @@ protobuf = "4.33.0-release" # 修复递归崩溃漏洞
 
 # TLS 和加密 - 2025年10月21日最新稳定版本
 # rustls: 现代TLS库，用Rust编写，提供高性能和安全性 - 版本 0.23+ (字母索引)
-rustls = { version = "0.23.34", features = ["ring"] }
+rustls = { version = "0.23.35", features = ["ring"] }
 # rustls-webpki: rustls的WebPKI支持
 rustls-webpki = "0.103.8"
 # rustls-pemfile: rustls的PEM文件解析支持
@@ -329,7 +329,7 @@ sqlx = { version = "0.8.6", features = [  # 更新至最新稳定版本
     "uuid",                # UUID类型支持
 ], default-features = false }
 # redis: Redis客户端库，支持异步操作 - 版本 0.26+ (字母索引)
-redis = "1.0.0-rc.2"
+redis = "1.0.0-rc.3"
 # rusqlite: SQLite的Rust绑定，提供类型安全的SQLite接口
 rusqlite = { version = "0.37.0", default-features = false }
 # mysql_async: MySQL异步客户端 - 2025年10月20日更新
@@ -359,7 +359,7 @@ dashmap = "7.0.0-rc2"  # 更新至最新候选版本
 # parking_lot: 更紧凑高效的同步原语实现 - 版本 0.12+ (字母索引)
 parking_lot = "0.12.5"
 # syn: 语法解析库 - 2025年10月19日更新
-syn = "2.0.107"
+syn = "2.0.109"
 
 # 测试相关 - 2025年10月21日最新稳定版本
 # mockall: 强大的模拟对象库，用于单元测试 - 版本 0.13+ (字母索引)
@@ -430,7 +430,7 @@ glommio = "0.9.0"
 # ahash: 高性能哈希算法实现，替代fxhash (未维护)
 ahash = "0.8.12"
 # quote: 代码生成宏库，替代paste (未维护)
-quote = "1.0.41"
+quote = "1.0.42"
 # proc-macro-error2: 过程宏错误处理库，替代proc-macro-error (未维护)
 proc-macro-error2 = "2.0.1"
 # is-terminal: 终端检测库，替代atty (有安全漏洞)

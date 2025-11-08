@@ -630,6 +630,7 @@ pub mod improved_macro_errors {
         /// 展开失败
         ExpansionFailed {
             macro_name: String,
+            /// 展开失败的原因
             reason: String,
         },
     }
