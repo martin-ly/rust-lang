@@ -1,7 +1,7 @@
 # 🚀 Rust 学习系统 - 跨模块综合实战项目指南
 
-> **创建日期**: 2025-10-25  
-> **文档版本**: v1.0  
+> **创建日期**: 2025-10-25
+> **文档版本**: v1.0
 > **项目数量**: 10 个渐进式项目
 
 ---
@@ -56,8 +56,8 @@
 
 **目标**: 开发一个命令行工具,用于处理文本文件(搜索、替换、统计等)
 
-**难度**: 入门 (⭐)  
-**时间**: 3-5 天  
+**难度**: 入门 (⭐)
+**时间**: 3-5 天
 **适合**: 刚学完 C01-C03 的初学者
 
 #### 涉及模块与知识点
@@ -161,8 +161,8 @@ cli-file-tool/
 
 **目标**: 开发一个支持多线程并发下载的工具,可以同时下载多个文件并显示进度
 
-**难度**: 初级 (⭐⭐)  
-**时间**: 5-7 天  
+**难度**: 初级 (⭐⭐)
+**时间**: 5-7 天
 **适合**: 学完 C01-C05 和 C10 基础的学习者
 
 #### 涉及模块与知识点
@@ -220,12 +220,12 @@ impl ConcurrentDownloader {
     fn download_batch(&self, urls: Vec<String>) -> Result<(), Box<dyn Error>> {
         let (tx, rx) = mpsc::channel();
         let progress = Arc::clone(&self.progress);
-        
+
         // 启动工作线程
         for _ in 0..self.num_threads {
             let rx = rx.clone();
             let progress = Arc::clone(&progress);
-            
+
             thread::spawn(move || {
                 while let Ok(url) = rx.recv() {
                     let result = download_file(&url, &progress);
@@ -233,12 +233,12 @@ impl ConcurrentDownloader {
                 }
             });
         }
-        
+
         // 分发任务
         for url in urls {
             tx.send(url)?;
         }
-        
+
         Ok(())
     }
 }
@@ -247,10 +247,10 @@ impl ConcurrentDownloader {
 fn download_file(url: &str, progress: &Arc<Mutex<u64>>) -> Result<(), Box<dyn Error>> {
     let response = reqwest::blocking::get(url)?;
     let total_size = response.content_length().unwrap_or(0);
-    
+
     // 读取并更新进度
     // ...
-    
+
     Ok(())
 }
 ```
@@ -299,8 +299,8 @@ concurrent-downloader/
 
 **目标**: 使用异步 I/O 开发一个支持多客户端的实时聊天服务器
 
-**难度**: 中级 (⭐⭐⭐)  
-**时间**: 7-14 天  
+**难度**: 中级 (⭐⭐⭐)
+**时间**: 7-14 天
 **适合**: 学完 C06 异步编程的学习者
 
 #### 涉及模块与知识点
@@ -356,11 +356,11 @@ async fn run_server(addr: &str) -> Result<(), Box<dyn Error>> {
     let listener = TcpListener::bind(addr).await?;
     let (broadcast_tx, _) = broadcast::channel(100);
     let server = Arc::new(ChatServer::new(broadcast_tx));
-    
+
     loop {
         let (socket, addr) = listener.accept().await?;
         let server = Arc::clone(&server);
-        
+
         // 为每个连接启动一个任务
         tokio::spawn(async move {
             handle_client(socket, addr, server).await
@@ -377,10 +377,10 @@ async fn handle_client(
     let (reader, writer) = socket.into_split();
     let mut reader = BufReader::new(reader);
     let mut writer = BufWriter::new(writer);
-    
+
     // 订阅广播频道
     let mut broadcast_rx = server.broadcast_tx.subscribe();
-    
+
     // 同时处理读取和广播消息
     tokio::select! {
         // 读取客户端消息
@@ -392,7 +392,7 @@ async fn handle_client(
             // 处理...
         }
     }
-    
+
     Ok(())
 }
 
@@ -447,8 +447,8 @@ async-chat-server/
 
 **目标**: 开发一个完整的 RESTful API 服务,包含数据库、认证、中间件等
 
-**难度**: 中级 (⭐⭐⭐)  
-**时间**: 7-14 天  
+**难度**: 中级 (⭐⭐⭐)
+**时间**: 7-14 天
 **适合**: 想做 Web 后端开发的学习者
 
 #### 涉及模块与知识点
@@ -520,10 +520,10 @@ impl Repository<User> for UserRepository {
         )
         .fetch_one(&self.pool)
         .await?;
-        
+
         Ok(user)
     }
-    
+
     // 其他方法...
 }
 
@@ -543,11 +543,11 @@ async fn create_user(
 ) -> Result<Json<User>, ApiError> {
     // 验证输入
     input.validate()?;
-    
+
     // 创建用户
     let repo = UserRepository::new(state.db);
     let user = repo.create(&input.into()).await?;
-    
+
     Ok(Json(user))
 }
 
@@ -560,10 +560,10 @@ async fn auth_middleware(
     // JWT 验证
     let token = extract_token(&headers)?;
     let claims = verify_token(&token)?;
-    
+
     // 注入用户信息
     request.extensions_mut().insert(claims);
-    
+
     Ok(next.run(request).await)
 }
 
@@ -642,8 +642,8 @@ web-api-service/
 
 **目标**: 开发一个分布式后台任务队列系统,支持任务调度、失败重试、监控
 
-**难度**: 高级 (⭐⭐⭐⭐)  
-**时间**: 14-21 天  
+**难度**: 高级 (⭐⭐⭐⭐)
+**时间**: 14-21 天
 **适合**: 有一定项目经验的学习者
 
 #### 涉及模块与知识点
@@ -736,22 +736,22 @@ impl TaskQueue {
     async fn enqueue(&self, task: Task, priority: Priority) -> Result<TaskId> {
         // 持久化到数据库
         let task_id = self.db.insert_task(&task).await?;
-        
+
         // 加入 Redis 队列
         self.redis.lpush("queue:pending", task_id).await?;
-        
+
         // 加入内存优先队列
         let mut queue = self.priority_queue.lock().await;
         queue.push(PrioritizedTask { task_id, priority });
-        
+
         Ok(task_id)
     }
-    
+
     async fn dequeue(&self) -> Option<Task> {
         // 从优先队列取出
         let mut queue = self.priority_queue.lock().await;
         let prioritized = queue.pop()?;
-        
+
         // 从数据库加载完整任务
         self.db.load_task(prioritized.task_id).await.ok()
     }
@@ -769,7 +769,7 @@ impl WorkerPool {
         for id in 0..self.num_workers {
             let queue = Arc::clone(&self.queue);
             let shutdown = Arc::clone(&self.shutdown);
-            
+
             thread::spawn(move || {
                 let rt = tokio::runtime::Runtime::new().unwrap();
                 rt.block_on(async {
@@ -791,7 +791,7 @@ async fn execute_task(task: Box<dyn Task>, worker_id: usize) {
     let ctx = TaskContext::new(worker_id);
     let max_retries = task.max_retries();
     let timeout = task.timeout();
-    
+
     for attempt in 1..=max_retries {
         match tokio::time::timeout(timeout, task.execute(&ctx)).await {
             Ok(Ok(result)) => {
@@ -819,7 +819,7 @@ async fn execute_task(task: Box<dyn Task>, worker_id: usize) {
             }
         }
     }
-    
+
     // 超过最大重试次数
     move_to_dead_letter(&task).await;
 }
@@ -835,7 +835,7 @@ impl DistributedScheduler {
         let ring = self.hash_ring.read().unwrap();
         ring.get_node(task_id.hash())
     }
-    
+
     async fn rebalance(&self) {
         // 节点变化时重新平衡任务
         let mut ring = self.hash_ring.write().unwrap();
@@ -909,8 +909,8 @@ distributed-task-queue/
 
 **目标**: 开发一个高性能的反向代理/负载均衡器,支持 HTTP/HTTPS/WebSocket
 
-**难度**: 高级 (⭐⭐⭐⭐)  
-**时间**: 14-21 天  
+**难度**: 高级 (⭐⭐⭐⭐)
+**时间**: 14-21 天
 **适合**: 关注性能优化的学习者
 
 #### 涉及模块与知识点
@@ -996,7 +996,7 @@ async fn proxy_handler(
     // 选择上游服务器
     let upstream = config.load_balancer.select(&config.upstreams)
         .ok_or_else(|| "No available upstream")?;
-    
+
     // 限流检查
     if !config.rate_limiter.allow().await {
         return Response::builder()
@@ -1004,13 +1004,13 @@ async fn proxy_handler(
             .body(Body::from("Too Many Requests"))
             .unwrap();
     }
-    
+
     // 健康检查
     if !config.health_checker.is_healthy(upstream).await {
         // 尝试下一个
         return Err(...);
     }
-    
+
     // 转发请求
     let client = Client::new();
     let uri = transform_uri(req.uri(), upstream);
@@ -1019,13 +1019,13 @@ async fn proxy_handler(
         .uri(uri)
         .body(req.into_body())
         .unwrap();
-    
+
     // 添加代理头
     proxy_req.headers_mut().insert("X-Forwarded-For", ...);
-    
+
     // 发送请求
     let response = client.request(proxy_req).await?;
-    
+
     Ok(response)
 }
 
@@ -1038,14 +1038,14 @@ impl HealthChecker {
     async fn check_loop(&self, upstream: Upstream) {
         loop {
             let健康 = self.check(&upstream).await;
-            
+
             let mut状态 = self.upstreams.write().unwrap();
             状态.insert(upstream.addr.clone(), 健康);
-            
+
             tokio::time::sleep(Duration::from_secs(10)).await;
         }
     }
-    
+
     async fn check(&self, upstream: &Upstream) -> HealthStatus {
         // HTTP 健康检查
         match reqwest::get(&upstream.health_url).await {
@@ -1065,7 +1065,7 @@ impl RateLimiter {
     async fn allow(&self) -> bool {
         self.permits.try_acquire().is_ok()
     }
-    
+
     async fn refill_loop(&self) {
         loop {
             tokio::time::sleep(Duration::from_secs(1)).await;
@@ -1085,7 +1085,7 @@ impl ConnectionPool {
         let mut conns = self.connections.lock().await;
         conns.get_mut(addr)?.pop()
     }
-    
+
     async fn put(&self, addr: String, conn: TcpStream) {
         let mut conns = self.connections.lock().await;
         let pool = conns.entry(addr).or_insert_with(Vec::new);
@@ -1119,8 +1119,8 @@ impl ConnectionPool {
 
 **目标**: 开发一个实时流数据处理引擎,类似 Apache Flink/Spark Streaming
 
-**难度**: 高级 (⭐⭐⭐⭐)  
-**时间**: 14-21 天  
+**难度**: 高级 (⭐⭐⭐⭐)
+**时间**: 14-21 天
 **适合**: 关注大数据和算法的学习者
 
 #### 涉及模块与知识点
@@ -1160,11 +1160,11 @@ trait DataStream<T>: Send {
     where
         F: Fn(T) -> U + Send + 'static,
         U: Send + 'static;
-    
+
     fn filter<F>(self, f: F) -> Box<dyn DataStream<T>>
     where
         F: Fn(&T) -> bool + Send + 'static;
-    
+
     fn window(self, window: WindowSpec) -> Box<dyn WindowedStream<T>>;
 }
 
@@ -1183,12 +1183,12 @@ struct TumblingWindow<T> {
 impl<T: Send + 'static> TumblingWindow<T> {
     async fn process(&self, event: Event<T>) {
         let window_key = self.assign_window(&event);
-        
+
         let mut buffer = self.buffer.lock().await;
         buffer.entry(window_key)
             .or_insert_with(Vec::new)
             .push(event.data);
-        
+
         // 检查窗口是否关闭
         if self.should_trigger(window_key) {
             let data = buffer.remove(&window_key).unwrap();
@@ -1218,13 +1218,13 @@ struct CheckpointCoordinator {
 impl CheckpointCoordinator {
     async fn trigger_checkpoint(&self) -> CheckpointId {
         let epoch = self.epoch.fetch_add(1, Ordering::SeqCst);
-        
+
         // 向所有 operator 发送 barrier
         self.broadcast_barrier(epoch).await;
-        
+
         // 等待所有 operator 响应
         self.wait_for_barriers(epoch).await;
-        
+
         // 通知完成
         CheckpointId::new(epoch)
     }
@@ -1253,7 +1253,7 @@ struct WatermarkGenerator {
 impl WatermarkGenerator {
     fn generate(&self, event_time: Instant) -> Option<Watermark> {
         let mut last = self.last_event_time.lock().unwrap();
-        
+
         if let Some(prev_time) = *last {
             if event_time > prev_time {
                 *last = Some(event_time);
@@ -1264,7 +1264,7 @@ impl WatermarkGenerator {
         } else {
             *last = Some(event_time);
         }
-        
+
         None
     }
 }
@@ -1279,7 +1279,7 @@ struct JoinOperator<L, R> {
 impl<L, R> JoinOperator<L, R> {
     async fn join_left(&self, key: Key, left: L) -> Vec<(L, R)> {
         let mut results = Vec::new();
-        
+
         // 与右侧缓存的元素进行 join
         let right_buf = self.right_buffer.lock().await;
         if let Some(rights) = right_buf.get(&key) {
@@ -1287,11 +1287,11 @@ impl<L, R> JoinOperator<L, R> {
                 results.push((left.clone(), right.clone()));
             }
         }
-        
+
         // 缓存左侧元素
         let mut left_buf = self.left_buffer.lock().await;
         left_buf.entry(key).or_insert_with(Vec::new).push(left);
-        
+
         results
     }
 }
@@ -1348,8 +1348,8 @@ realtime-stream-engine/
 
 **目标**: 开发一个完整的微服务框架,提供服务发现、配置管理、链路追踪等
 
-**难度**: 专家 (⭐⭐⭐⭐⭐)  
-**时间**: 21-30 天  
+**难度**: 专家 (⭐⭐⭐⭐⭐)
+**时间**: 21-30 天
 **适合**: 有丰富经验,想深入微服务架构的学习者
 
 #### 涉及模块
@@ -1389,8 +1389,8 @@ C06 (异步), C09 (设计模式), C10 (网络), C11 (库生态), C12 (架构), C
 
 **目标**: 实现一个简化的区块链节点,支持 P2P 网络、共识算法、智能合约
 
-**难度**: 专家 (⭐⭐⭐⭐⭐)  
-**时间**: 21-30 天  
+**难度**: 专家 (⭐⭐⭐⭐⭐)
+**时间**: 21-30 天
 **适合**: 对区块链和密码学感兴趣的学习者
 
 #### 涉及模块
@@ -1424,8 +1424,8 @@ C05 (并发), C06 (异步), C07 (进程), C08 (算法), C10 (网络), C13 (可�
 
 **目标**: 使用 Rust 编写操作系统内核模块或嵌入式系统
 
-**难度**: 专家 (⭐⭐⭐⭐⭐)  
-**时间**: 21-30 天  
+**难度**: 专家 (⭐⭐⭐⭐⭐)
+**时间**: 21-30 天
 **适合**: 对系统编程和硬件有深入兴趣的学习者
 
 #### 涉及模块
@@ -1523,9 +1523,9 @@ C01 (所有权), C02 (类型), C05 (并发), C07 (进程), C08 (算法), C13 (�
 
 ---
 
-**文档版本**: v1.0  
-**创建日期**: 2025-10-25  
-**维护状态**: 活跃维护  
+**文档版本**: v1.0
+**创建日期**: 2025-10-25
+**维护状态**: 活跃维护
 **反馈渠道**: GitHub Issues
 
 **祝项目开发顺利! 🚀**

@@ -1,8 +1,8 @@
 # Rust 1.91 宏系统改进文档
 
-> **文档版本**: 1.0  
-> **创建日期**: 2025-01-27  
-> **适用版本**: Rust 1.91.0+  
+> **文档版本**: 1.0
+> **创建日期**: 2025-01-27
+> **适用版本**: Rust 1.91.0+
 > **相关模块**: `c11_macro_system`
 
 ---
@@ -319,7 +319,7 @@ fn high_performance_macro_expansion() {
     for i in 0..1000 {
         let macro_name = format!("macro_{}", i % 100);
         let args = format!("arg_{}", i);
-        
+
         // 查找缓存
         if cache.lookup(&macro_name, &args).is_none() {
             // 如果未命中，执行展开并存储
