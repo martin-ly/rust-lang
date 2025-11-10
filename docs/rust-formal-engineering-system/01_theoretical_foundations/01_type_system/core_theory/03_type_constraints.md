@@ -368,7 +368,7 @@ fn handle_io<T: BasicIO>(io: T) { /* ... */ }
 fn example() {
     let mut vec = Vec::new();  // 类型不确定
     vec.push(1);  // 约束 Vec<T> 中的 T = i32，推导 vec: Vec<i32>
-    
+
     let result = vec.iter().map(|x| x + 1).collect();
     // collect 需要类型标注，因为有多种可能的结果类型
     let result: Vec<i32> = vec.iter().map(|x| x + 1).collect();

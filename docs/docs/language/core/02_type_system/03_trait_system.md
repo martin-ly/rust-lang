@@ -153,7 +153,7 @@ $$\text{Iterator}[\text{Item}] = \text{interface}\{\text{next}: \text{fn}(\&\tex
 ```rust
 trait Default {
     fn default() -> Self;
-    
+
     fn is_default(&self) -> bool {
         *self == Self::default()
     }
@@ -174,7 +174,7 @@ impl Printable for i32 {
     fn print(&self) {
         println!("{}", self);
     }
-    
+
     fn to_string(&self) -> String {
         self.to_string()
     }
@@ -193,11 +193,11 @@ impl<T> Container<T> for Vec<T> {
     fn len(&self) -> usize {
         self.len()
     }
-    
+
     fn is_empty(&self) -> bool {
         self.is_empty()
     }
-    
+
     fn contains(&self, item: &T) -> bool {
         self.contains(item)
     }
@@ -219,7 +219,7 @@ impl<T: Display> Printable for Vec<T> {
         }
         println!();
     }
-    
+
     fn to_string(&self) -> String {
         self.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(", ")
     }
@@ -241,7 +241,7 @@ fn check_impl(trait_def: &TraitDef, impl_block: &ImplBlock) -> Result<(), TraitE
             return Err(TraitError::MissingMethod(method.name.clone()));
         }
     }
-    
+
     // 检查方法签名匹配
     for method in &trait_def.methods {
         let impl_method = impl_block.get_method(&method.name).unwrap();
@@ -249,14 +249,14 @@ fn check_impl(trait_def: &TraitDef, impl_block: &ImplBlock) -> Result<(), TraitE
             return Err(TraitError::SignatureMismatch(method.name.clone()));
         }
     }
-    
+
     // 检查trait约束
     for constraint in &impl_block.constraints {
         if !check_trait_constraint(constraint) {
             return Err(TraitError::ConstraintViolation(constraint.clone()));
         }
     }
-    
+
     Ok(())
 }
 
@@ -265,13 +265,13 @@ fn signatures_match(trait_sig: &MethodSignature, impl_sig: &MethodSignature) -> 
     if trait_sig.parameters.len() != impl_sig.parameters.len() {
         return false;
     }
-    
+
     for (trait_param, impl_param) in trait_sig.parameters.iter().zip(impl_sig.parameters.iter()) {
         if !types_compatible(&trait_param.ty, &impl_param.ty) {
             return false;
         }
     }
-    
+
     // 检查返回类型
     types_compatible(&trait_sig.return_type, &impl_sig.return_type)
 }
@@ -306,10 +306,10 @@ $$\frac{\Gamma_T, \Gamma_I \vdash \tau: \text{Trait} \quad \text{Trait} \subsete
 fn propagate_constraints(constraints: Vec<TraitConstraint>) -> Vec<TraitConstraint> {
     let mut propagated = Vec::new();
     let mut worklist = constraints;
-    
+
     while let Some(constraint) = worklist.pop() {
         propagated.push(constraint.clone());
-        
+
         // 查找trait的父trait
         if let Some(supertraits) = get_supertraits(&constraint.trait_name) {
             for supertrait in supertraits {
@@ -317,14 +317,14 @@ fn propagate_constraints(constraints: Vec<TraitConstraint>) -> Vec<TraitConstrai
                     type_name: constraint.type_name.clone(),
                     trait_name: supertrait,
                 };
-                
+
                 if !propagated.contains(&new_constraint) {
                     worklist.push(new_constraint);
                 }
             }
         }
     }
-    
+
     propagated
 }
 ```
@@ -337,7 +337,7 @@ fn propagate_constraints(constraints: Vec<TraitConstraint>) -> Vec<TraitConstrai
 fn solve_trait_constraints(constraints: Vec<TraitConstraint>) -> Result<Substitution, TraitError> {
     let mut substitution = Substitution::empty();
     let mut worklist = constraints;
-    
+
     while let Some(constraint) = worklist.pop() {
         match solve_single_constraint(constraint) {
             Ok(new_subst) => {
@@ -349,7 +349,7 @@ fn solve_trait_constraints(constraints: Vec<TraitConstraint>) -> Result<Substitu
             }
         }
     }
-    
+
     Ok(substitution)
 }
 
@@ -391,7 +391,7 @@ $$\text{VTable}[\text{Trait}] = \text{struct}\{\text{method}_1: \text{fn}(\text{
 fn create_trait_object<T: Trait + ?Sized>(value: Box<T>) -> TraitObject {
     let vtable = get_vtable::<T>();
     let data = Box::into_raw(value) as *const ();
-    
+
     TraitObject {
         vtable,
         data,
@@ -400,10 +400,10 @@ fn create_trait_object<T: Trait + ?Sized>(value: Box<T>) -> TraitObject {
 
 fn get_vtable<T: Trait + ?Sized>() -> *const VTable {
     static mut VTABLES: HashMap<TypeId, *const VTable> = HashMap::new();
-    
+
     unsafe {
         let type_id = TypeId::of::<T>();
-        
+
         if let Some(&vtable) = VTABLES.get(&type_id) {
             vtable
         } else {
@@ -422,7 +422,7 @@ fn create_vtable<T: Trait + ?Sized>() -> *const VTable {
         },
         // ... 其他方法
     };
-    
+
     Box::into_raw(Box::new(vtable))
 }
 ```
@@ -438,7 +438,7 @@ fn use_trait_objects() {
         Box::new(String::from("hello")),
         Box::new(true),
     ];
-    
+
     for obj in printable_objects {
         obj.print();
     }
@@ -455,12 +455,12 @@ fn check_trait_object(ty: &Type) -> Result<(), TraitError> {
             if !trait_exists(trait_name) {
                 return Err(TraitError::TraitNotFound(trait_name.clone()));
             }
-            
+
             // 检查trait是否对象安全
             if !is_object_safe(trait_name) {
                 return Err(TraitError::NotObjectSafe(trait_name.clone()));
             }
-            
+
             Ok(())
         }
         _ => {
@@ -471,7 +471,7 @@ fn check_trait_object(ty: &Type) -> Result<(), TraitError> {
 
 fn is_object_safe(trait_name: &str) -> bool {
     let trait_def = get_trait_definition(trait_name);
-    
+
     // 检查所有方法是否对象安全
     trait_def.methods.iter().all(|method| {
         is_method_object_safe(method)
@@ -483,19 +483,19 @@ fn is_method_object_safe(method: &MethodDef) -> bool {
     if !method.generic_parameters.is_empty() {
         return false;
     }
-    
+
     // 方法不能返回Self
     if method.return_type == Type::Self {
         return false;
     }
-    
+
     // 方法不能有Self参数（除了&self, &mut self）
     for param in &method.parameters {
         if param.ty == Type::Self && !param.is_self_reference() {
             return false;
         }
     }
-    
+
     true
 }
 ```
@@ -530,20 +530,20 @@ fn check_trait_inheritance(trait_def: &TraitDef) -> Result<(), TraitError> {
         if !trait_exists(supertrait) {
             return Err(TraitError::SupertraitNotFound(supertrait.clone()));
         }
-        
+
         // 检查继承关系是否形成循环
         if has_inheritance_cycle(trait_def.name, supertrait) {
             return Err(TraitError::InheritanceCycle(trait_def.name.clone(), supertrait.clone()));
         }
     }
-    
+
     Ok(())
 }
 
 fn has_inheritance_cycle(trait_name: &str, supertrait: &str) -> bool {
     let mut visited = HashSet::new();
     let mut recursion_stack = HashSet::new();
-    
+
     has_cycle_dfs(trait_name, &mut visited, &mut recursion_stack)
 }
 
@@ -551,21 +551,21 @@ fn has_cycle_dfs(trait_name: &str, visited: &mut HashSet<String>, recursion_stac
     if recursion_stack.contains(trait_name) {
         return true;  // 发现循环
     }
-    
+
     if visited.contains(trait_name) {
         return false;  // 已经访问过，无循环
     }
-    
+
     visited.insert(trait_name.to_string());
     recursion_stack.insert(trait_name.to_string());
-    
+
     let trait_def = get_trait_definition(trait_name);
     for supertrait in &trait_def.supertraits {
         if has_cycle_dfs(supertrait, visited, recursion_stack) {
             return true;
         }
     }
-    
+
     recursion_stack.remove(trait_name);
     false
 }
@@ -598,7 +598,7 @@ impl Pet for Dog {
 ```rust
 fn check_inheritance_impl(trait_name: &str, type_name: &str) -> Result<(), TraitError> {
     let trait_def = get_trait_definition(trait_name);
-    
+
     // 检查所有父trait的实现
     for supertrait in &trait_def.supertraits {
         if !has_impl(supertrait, type_name) {
@@ -609,7 +609,7 @@ fn check_inheritance_impl(trait_name: &str, type_name: &str) -> Result<(), Trait
             ));
         }
     }
-    
+
     // 检查当前trait的实现
     if !has_impl(trait_name, type_name) {
         return Err(TraitError::MissingTraitImpl(
@@ -617,7 +617,7 @@ fn check_inheritance_impl(trait_name: &str, type_name: &str) -> Result<(), Trait
             trait_name.to_string()
         ));
     }
-    
+
     Ok(())
 }
 ```
@@ -751,7 +751,7 @@ fn main() {
         Box::new(Circle { radius: 5.0 }),
         Box::new(Rectangle { width: 10.0, height: 5.0 }),
     ];
-    
+
     draw_all(&shapes);
 }
 ```
@@ -820,7 +820,7 @@ Trait继承关系是正确的，不存在循环继承。
 
 ---
 
-**文档版本**: 1.0.0  
-**最后更新**: 2025-01-27  
-**维护者**: Rust语言形式化理论项目组  
+**文档版本**: 1.0.0
+**最后更新**: 2025-01-27
+**维护者**: Rust语言形式化理论项目组
 **状态**: 完成

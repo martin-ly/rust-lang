@@ -461,13 +461,17 @@ $$\text{ErrorReport}(e) = \text{detailed explanation of type error}$$
 
 ## 5. 所有权与类型系统
 
+从引用一致性视角看，类型系统本质上是一个**构造性证明系统**，其中所有权、借用和生命周期都是编译期证明的组成部分。
+
 ### 5.1 所有权类型
 
 #### 5.1.1 所有权类型定义
 
-所有权类型表示对值的独占所有权：
+所有权类型表示对资源的独占控制权。从引用一致性视角看，所有权类型是**资源构造性存在的证明**：
 
-$$\text{Owned}(T) = \text{exclusive ownership of } T$$
+$$\text{Owned}(T) = \text{exclusive control of resource } T$$
+
+**引用一致性视角**：`Owned(T)` 证明在类型系统中存在一个 `T` 类型的资源，且该资源有唯一的所有者。这是**逻辑证明**，而非内存状态。
 
 #### 5.1.2 所有权转移
 
@@ -486,7 +490,7 @@ impl OwnedString {
     fn new(s: String) -> Self {
         OwnedString { data: s }
     }
-    
+
     fn consume(self) -> String {
         self.data  // 所有权转移
     }
@@ -497,15 +501,19 @@ impl OwnedString {
 
 #### 5.2.1 不可变借用类型
 
-不可变借用类型：
+不可变借用类型表示只读访问许可证：
 
 $$\text{Borrowed}(T) = \&'a T$$
 
+**引用一致性视角**：`&'a T` 是**存在性证明**，证明在作用域 `'a` 内存在一个 `T` 类型的可读资源。这是**编译期证明**，而非内存地址。
+
 #### 5.2.2 可变借用类型
 
-可变借用类型：
+可变借用类型表示独占写入能力的证明：
 
 $$\text{MutBorrowed}(T) = \&'a \text{mut } T$$
+
+**引用一致性视角**：`&'a mut T` 是**唯一性证明**，证明在 `'a` 内对 `T` 有独占访问权。这是**编译期证明**，而非内存保护。
 
 #### 5.2.3 借用类型规则
 
@@ -522,9 +530,11 @@ $$
 
 #### 5.3.1 生命周期参数
 
-生命周期参数表示引用的有效期间：
+生命周期参数是编译期构造的证明变量，用于证明引用的有效性：
 
 $$\text{Lifetime} ::= 'a \mid 'b \mid 'c \mid \ldots$$
+
+**引用一致性视角**：生命周期参数是**证明变量**，它们编码了引用之间的逻辑依赖关系。编译器通过约束求解来验证这些依赖关系的一致性，而非检查内存状态。
 
 #### 5.3.2 生命周期约束
 
@@ -785,7 +795,7 @@ impl<T> Container<T> {
     fn new(value: T) -> Self {
         Container { value }
     }
-    
+
     fn get(&self) -> &T {
         &self.value
     }
@@ -845,7 +855,7 @@ $$\text{AssociatedType}(Trait, Type) = \text{type defined within trait}$$
 ```rust
 trait Iterator {
     type Item;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
 }
 
@@ -855,7 +865,7 @@ struct Counter {
 
 impl Iterator for Counter {
     type Item = u32;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         self.count += 1;
         Some(self.count)
@@ -870,7 +880,7 @@ impl Iterator for Counter {
 ```rust
 trait Container {
     type Item;
-    
+
     fn get(&self) -> Option<&Self::Item>;
 }
 
@@ -1098,6 +1108,6 @@ Rust 的类型系统通过形式化的理论基础和静态分析，在编译时
 
 ---
 
-**最后更新时间**: 2025-01-27  
-**版本**: V1.0  
+**最后更新时间**: 2025-01-27
+**版本**: V1.0
 **状态**: 已完成

@@ -373,12 +373,12 @@ pub struct SelectionContext<'tcx> {
 }
 
 impl<'tcx> SelectionContext<'tcx> {
-    fn select_trait(&mut self, obligation: &TraitObligation<'tcx>) 
+    fn select_trait(&mut self, obligation: &TraitObligation<'tcx>)
         -> SelectionResult<'tcx, Selection<'tcx>> {
-        
+
         // 1. 收集候选实现
         let candidates = self.assemble_candidates(obligation);
-        
+
         // 2. 确认候选
         self.confirm_candidate(obligation, candidates)
     }
@@ -390,7 +390,7 @@ fn coherence_check<'tcx>(tcx: TyCtxt<'tcx>) {
     for impl_def_id in tcx.all_local_trait_impls() {
         check_orphan_rules(tcx, impl_def_id);
     }
-    
+
     // 重叠检查
     for trait_def_id in tcx.all_traits() {
         check_impl_overlap(tcx, trait_def_id);
@@ -409,7 +409,7 @@ fn coherence_check<'tcx>(tcx: TyCtxt<'tcx>) {
 trait Functor {
     type Inner;
     type Output<T>;
-    
+
     fn fmap<F, B>(self, f: F) -> Self::Output<B>
     where
         F: FnOnce(Self::Inner) -> B;
@@ -441,7 +441,7 @@ impl<N> Add<Z> for N {
     type Output = N;
 }
 
-impl<N, M> Add<S<M>> for N 
+impl<N, M> Add<S<M>> for N
 where
     N: Add<M>,
 {
@@ -454,7 +454,7 @@ pub struct Vec<T, N> {
     length: PhantomData<N>,
 }
 
-impl<T, N> Vec<T, N> 
+impl<T, N> Vec<T, N>
 where
     N: Add<One>,
 {
@@ -480,7 +480,7 @@ impl<T> LinearResource<T> {
     pub fn new(value: T) -> Self {
         Self { inner: value, consumed: false }
     }
-    
+
     pub fn consume(mut self) -> T {
         assert!(!self.consumed, "Resource already consumed");
         self.consumed = true;
@@ -539,7 +539,7 @@ impl TcpConnection<Connected> {
         // 只有连接状态才能发送
         unimplemented!()
     }
-    
+
     pub fn disconnect(self) -> TcpConnection<Disconnected> {
         // 类型级状态转换
         unimplemented!()
@@ -572,7 +572,7 @@ type Mass<T> = Quantity<T, Kilogram>;
 // 速度 = 长度 / 时间
 type Velocity<T> = Quantity<T, (Meter, Second)>; // 简化表示
 
-impl<T> Length<T> 
+impl<T> Length<T>
 where
     T: std::ops::Div,
 {
@@ -592,7 +592,7 @@ fn physics_calculation() {
     let distance = Length { value: 100.0, unit: PhantomData };
     let time = Time { value: 10.0, unit: PhantomData };
     let velocity = distance.div_by_time(time); // 类型安全
-    
+
     // let invalid = distance + time; // 编译错误：不能相加不同单位
 }
 ```
@@ -723,7 +723,7 @@ pub enum Message<T> {
     Close,
 }
 
-impl<T> TypedSender<T> 
+impl<T> TypedSender<T>
 where
     T: Send + 'static,
 {
@@ -732,7 +732,7 @@ where
             .send(Message::Data(data))
             .map_err(|_| SendError(data))
     }
-    
+
     pub fn close(&self) {
         let _ = self.sender.send(Message::Close);
     }
@@ -757,7 +757,7 @@ impl<T> TypedReceiver<T> {
 pub trait Actor {
     type Message: Send;
     type Error;
-    
+
     fn handle(&mut self, msg: Self::Message) -> Result<(), Self::Error>;
 }
 
@@ -789,7 +789,7 @@ pub enum CalcMessage {
 impl Actor for Calculator {
     type Message = CalcMessage;
     type Error = ();
-    
+
     fn handle(&mut self, msg: CalcMessage) -> Result<(), ()> {
         match msg {
             CalcMessage::Add(n) => {
@@ -839,7 +839,7 @@ struct LinearChannel<S: SessionType> {
     _phantom: PhantomData<S>,
 }
 
-impl<T, S: SessionType> LinearChannel<Send<T, S>> 
+impl<T, S: SessionType> LinearChannel<Send<T, S>>
 where
     T: Send + 'static,
 {
@@ -916,10 +916,10 @@ impl QuantumGate<Qubit<One>, Qubit<Superposition>> for Hadamard {
 struct CNot;
 
 impl QuantumGate<
-    (Qubit<Superposition>, Qubit<Zero>), 
+    (Qubit<Superposition>, Qubit<Zero>),
     (Qubit<Entangled<Superposition>>, Qubit<Entangled<Superposition>>)
 > for CNot {
-    fn apply(_: (Qubit<Superposition>, Qubit<Zero>)) 
+    fn apply(_: (Qubit<Superposition>, Qubit<Zero>))
         -> (Qubit<Entangled<Superposition>>, Qubit<Entangled<Superposition>>) {
         unimplemented!()
     }
@@ -933,9 +933,9 @@ impl QuantumGate<
 fn bell_state_circuit() -> (Qubit<Entangled<Superposition>>, Qubit<Entangled<Superposition>>) {
     let q1 = Qubit::<Zero> { _phantom: PhantomData };
     let q2 = Qubit::<Zero> { _phantom: PhantomData };
-    
+
     let q1 = Hadamard::apply(q1);  // |0⟩ → (|0⟩ + |1⟩)/√2
-    
+
     CNot::apply((q1, q2))  // 创建贝尔态
 }
 ```
@@ -959,8 +959,8 @@ impl ContractState for BalanceState {}
 pub trait StateTransition<S: ContractState> {
     type Input;
     type Error;
-    
-    fn transition(state: &S, input: Self::Input) 
+
+    fn transition(state: &S, input: Self::Input)
         -> Result<S, Self::Error>;
 }
 
@@ -974,20 +974,20 @@ pub struct Transfer {
 impl StateTransition<BalanceState> for Transfer {
     type Input = Transfer;
     type Error = TransferError;
-    
-    fn transition(state: &BalanceState, transfer: Transfer) 
+
+    fn transition(state: &BalanceState, transfer: Transfer)
         -> Result<BalanceState, TransferError> {
         let from_balance = state.balances.get(&transfer.from)
             .ok_or(TransferError::AccountNotFound)?;
-            
+
         if *from_balance < transfer.amount {
             return Err(TransferError::InsufficientBalance);
         }
-        
+
         let mut new_state = state.clone();
         *new_state.balances.get_mut(&transfer.from).unwrap() -= transfer.amount;
         *new_state.balances.entry(transfer.to).or_insert(0) += transfer.amount;
-        
+
         Ok(new_state)
     }
 }
@@ -1018,7 +1018,7 @@ impl Invariant<BalanceState> for TotalSupplyInvariant {
 }
 
 // 验证合约
-pub struct VerifiedContract<S, I> 
+pub struct VerifiedContract<S, I>
 where
     S: ContractState,
     I: Invariant<S>,
@@ -1042,13 +1042,13 @@ where
             None
         }
     }
-    
+
     pub fn execute<T>(&mut self, transition: T::Input) -> Result<(), T::Error>
     where
         T: StateTransition<S>,
     {
         let new_state = T::transition(&self.state, transition)?;
-        
+
         // 验证不变量
         if I::check(&new_state) {
             self.state = new_state;
@@ -1082,7 +1082,7 @@ fn benchmark_type_checking() {
         let _: i32 = 42;
     }
     println!("Simple types: {:?}", start.elapsed());
-    
+
     // 复杂泛型
     let start = Instant::now();
     for _ in 0..100000 {
@@ -1121,17 +1121,17 @@ impl TypeCache {
             self.compile_monomorphization::<T>(generic_args)
         })
     }
-    
+
     fn compile_monomorphization<T: 'static>(&self, _args: &[TypeId]) -> CompiledCode {
         CompiledCode {
             machine_code: vec![], // 实际编译的机器码
             metadata: TypeMetadata {
                 size: std::mem::size_of::<T>(),
                 alignment: std::mem::align_of::<T>(),
-                drop_fn: if std::mem::needs_drop::<T>() { 
+                drop_fn: if std::mem::needs_drop::<T>() {
                     Some(|ptr| unsafe { std::ptr::drop_in_place(ptr as *mut T) })
-                } else { 
-                    None 
+                } else {
+                    None
                 },
             },
         }
@@ -1170,30 +1170,30 @@ fn functional_sum(v: &[i32]) -> i32 {
 mod benchmarks {
     use super::*;
     use std::time::Instant;
-    
+
     #[test]
     fn benchmark_abstractions() {
         let data: Vec<i32> = (0..1000000).collect();
-        
+
         let start = Instant::now();
         let result1 = black_box(direct_sum(&data));
         let time1 = start.elapsed();
-        
+
         let start = Instant::now();
         let result2 = black_box(iterator_sum(&data));
         let time2 = start.elapsed();
-        
+
         let start = Instant::now();
         let result3 = black_box(functional_sum(&data));
         let time3 = start.elapsed();
-        
+
         assert_eq!(result1, result2);
         assert_eq!(result2, result3);
-        
+
         println!("Direct: {:?}", time1);
         println!("Iterator: {:?}", time2);
         println!("Functional: {:?}", time3);
-        
+
         // 验证零成本：时间差异应该在误差作用域内
         let max_time = time1.max(time2).max(time3);
         let min_time = time1.min(time2).min(time3);
@@ -1225,6 +1225,6 @@ mod benchmarks {
 **文档完成度**: ████████████████████████ 100%
 
 **理论深度**: ⭐⭐⭐⭐⭐ (专家级)
-**实践指导**: ⭐⭐⭐⭐⭐ (完整工程案例)  
+**实践指导**: ⭐⭐⭐⭐⭐ (完整工程案例)
 **数学严谨**: ⭐⭐⭐⭐⭐ (完整形式化)
 **创新价值**: ⭐⭐⭐⭐⭐ (前沿理论集成)

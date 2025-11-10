@@ -61,10 +61,10 @@
 trait Display {
     // 方法签名
     fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), Error>;
-    
+
     // 关联常量（可选）
     const MAX_LEN: usize = 1024;
-    
+
     // 关联类型（可选）
     type Output;
 }
@@ -85,9 +85,9 @@ impl Display for String {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), Error> {
         write!(f, "{}", self)
     }
-    
+
     const MAX_LEN: usize = 2048;  // 覆盖默认值
-    
+
     type Output = String;  // 定义关联类型
 }
 ```
@@ -107,8 +107,8 @@ fn print<T: Display>(value: T) {
     println!("{}", value);
 }
 
-fn process<T>(value: T) 
-where 
+fn process<T>(value: T)
+where
     T: Clone + Debug,
 {
     let copy = value.clone();
@@ -168,11 +168,11 @@ $$\frac{T : \text{Tr}}{\Gamma \vdash T::\text{Assoc} \text{ is a valid type}}$$
 ```rust
 trait Iterator {
     type Item;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
-    
+
     // 默认实现
-    fn count(mut self) -> usize 
+    fn count(mut self) -> usize
     where
         Self: Sized,
     {
@@ -513,11 +513,11 @@ impl Post<Draft> {
             status: std::marker::PhantomData,
         }
     }
-    
+
     fn add_content(&mut self, text: &str) {
         self.content.push_str(text);
     }
-    
+
     fn publish(self) -> Post<Published> {
         Post {
             content: self.content,

@@ -53,7 +53,7 @@
 
 ### 1.1 主题概述
 
-Rust所有权系统是Rust语言的核心创新，它通过静态分析在编译时保证内存安全和线程安全，同时避免了垃圾回收的运行时开销。该系统基于线性类型理论和分离逻辑，实现了零成本抽象的安全保证。
+Rust所有权系统是Rust语言的核心创新，它通过**编译期逻辑证明**在编译时保证资源安全和线程安全，同时避免了垃圾回收的运行时开销。从引用一致性视角看，该系统基于线性类型理论和能力安全模型，实现了**零成本抽象的安全保证**。所有权系统不依赖物理内存，而是建立在**资源使用权的逻辑证明**之上。
 
 **相关概念**：
 
@@ -193,10 +193,12 @@ $$\Gamma ::= \emptyset \mid \Gamma, x: \tau$$
 
 ### 4.3 生命周期 {#生命周期定义}
 
-**定义 1.6**: 生命周期 $\alpha$ 表示引用的有效期，即引用在程序中可以安全使用的时间范围。
+**定义 1.6**: 生命周期 $\alpha$ 是编译期构造的证明变量，用于证明引用在其使用期间始终指向有效的资源。从引用一致性视角看，生命周期是**有效性的编译期证明**，而非内存地址的有效时间段。
 
 **形式化表示**:
 $$\text{Ref}_{\alpha}(\tau)$$
+
+**引用一致性视角**：$\alpha$ 是证明变量，证明引用在作用域 $\alpha$ 内永远不会被无效使用。这是**逻辑关系**，而非物理时间。
 
 **Rust语法**:
 
@@ -220,16 +222,18 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 5.1 所有权规则 {#所有权定义}
 
-**定义 1.1**: 所有权是指对一个值的唯一控制权，包括读取、修改和销毁该值的能力。
+**定义 1.1**: 所有权是指对资源的唯一控制权，包括读取、修改和销毁该资源的能力。从引用一致性视角看，所有权是**资源构造性存在的证明**，而非内存管理机制。
 
-**规则1**: 每个值都有一个所有者
-$$\text{Value}(v) \Rightarrow \exists x. \text{Owner}(x, v)$$
+**规则1**: 每个资源都有一个所有者（逻辑证明）
+$$\text{Resource}(r) \Rightarrow \exists x. \text{Owner}(x, r)$$
 
-**规则2**: 同时只能有一个所有者
-$$\text{Owner}(x, v) \land \text{Owner}(y, v) \Rightarrow x = y$$
+**规则2**: 同时只能有一个所有者（排他控制权）
+$$\text{Owner}(x, r) \land \text{Owner}(y, r) \Rightarrow x = y$$
 
-**规则3**: 所有者离开作用域时值被丢弃
-$$\text{ScopeEnd}(x) \Rightarrow \text{Drop}(\text{ValueOf}(x))$$
+**规则3**: 所有者离开作用域时资源被释放（编译期证明的资源生命周期）
+$$\text{ScopeEnd}(x) \Rightarrow \text{Release}(\text{ResourceOf}(x))$$
+
+**引用一致性视角**：所有权不依赖物理内存，而是资源的逻辑控制权证明。编译器在编译期证明资源的唯一性和生命周期，无需运行时检查。
 
 **相关定理**：
 
@@ -244,7 +248,7 @@ $$\text{ScopeEnd}(x) \Rightarrow \text{Drop}(\text{ValueOf}(x))$$
 
 ### 5.2 借用规则 {#借用定义}
 
-**定义 1.4**: 借用是指在不转移所有权的情况下，临时获取对值的访问权限。借用分为不可变借用（只读访问）和可变借用（读写访问）。
+**定义 1.4**: 借用是指在不转移资源控制权的情况下，临时获取对资源访问能力的机制。从引用一致性视角看，借用是**能力转移与受限授权**，而非内存地址传递。`&T` 是只读访问许可证，`&mut T` 是独占写入能力的证明。
 
 **不可变借用规则**:
 $$\text{BorrowImm}(r, v) \Rightarrow \text{Read}(r, v) \land \neg \text{Write}(r, v)$$
@@ -374,7 +378,7 @@ $$\frac{\text{valid}(r, v) \land \text{no-conflict}(r, v)}{\text{borrow}(r, v) \
 fn main() {
     let s1 = String::from("hello");
     let s2 = s1;  // 所有权从s1移动到s2
-    
+
     // println!("{}", s1);  // 编译错误：s1已被移动
     println!("{}", s2);     // 正确：s2拥有字符串
 }
@@ -385,11 +389,11 @@ fn main() {
 ```rust
 fn main() {
     let mut v = vec![1, 2, 3];
-    
+
     let r1 = &v;        // 不可变借用
     let r2 = &v;        // 另一个不可变借用
     println!("{:?} {:?}", r1, r2);
-    
+
     let r3 = &mut v;    // 可变借用
     r3.push(4);
     println!("{:?}", r3);
@@ -425,7 +429,7 @@ fn main() {
     let data = Rc::new(vec![1, 2, 3]);
     let data_clone1 = Rc::clone(&data);
     let data_clone2 = Rc::clone(&data);
-    
+
     println!("Reference count: {}", Rc::strong_count(&data));
     // 输出: Reference count: 3
 }

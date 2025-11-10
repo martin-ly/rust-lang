@@ -160,10 +160,10 @@ struct Invariant<T> {
 fn example() {
     let mut dog = Dog;
     let dog_ref: &mut Dog = &mut dog;
-    
+
     // 以下转换在 Rust 中是不允许的
     // let animal_ref: &mut dyn Animal = dog_ref;
-    
+
     // 因为如果允许，可能导致类型安全问题：
     // *animal_ref = Cat;  // 这会将 Cat 放入 Dog 类型的内存中！
 }

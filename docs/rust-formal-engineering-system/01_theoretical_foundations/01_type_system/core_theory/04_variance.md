@@ -74,12 +74,12 @@ fn covariant_example() {
 fn contravariant_example() {
     // 函数类型 fn(T) 对参数 T 是逆变的
     fn process_animal(_: &dyn Animal) {}
-    
+
     fn use_dog_processor(f: fn(&Dog)) {
         let dog = Dog;
         f(&dog);
     }
-    
+
     // 如果 Dog <: Animal，则 fn(&dyn Animal) <: fn(&Dog)
     use_dog_processor(process_animal);
 }
@@ -88,7 +88,7 @@ fn contravariant_example() {
 fn invariant_example() {
     let mut dog = Dog;
     let dog_ref = &mut dog;
-    
+
     // 以下代码无法编译，因为 &mut T 对 T 是不变的
     // let animal_ref: &mut dyn Animal = dog_ref;
 }
@@ -230,13 +230,13 @@ fn overwrite(_: &mut dyn Animal) {
 fn unsafe_code() {
     let mut dog = Dog { /* dog-specific fields */ };
     let dog_ref = &mut dog;
-    
+
     // 如果允许这种转换（实际上Rust不允许）
     let animal_ref: &mut dyn Animal = dog_ref;
-    
+
     // 调用可能覆盖 Dog 特有字段的函数
     overwrite(animal_ref);
-    
+
     // dog 现在可能处于无效状态
     dog_ref.dog_specific_method(); // 潜在的未定义行为
 }
@@ -262,7 +262,7 @@ fn unsafe_code() {
 fn lifetime_variance<'a, 'b: 'a>(longer: &'b str, shorter: &'a str) {
     // 协变：可以将长生命周期引用赋值给短生命周期引用
     let s: &'a str = longer;
-    
+
     // 以下代码无法编译，因为函数参数位置是逆变的
     // fn takes_short(_: &'a str) {}
     // fn takes_long(_: &'b str) {}
@@ -288,11 +288,11 @@ impl<T> ReadOnlyVec<T> {
     fn new(data: Vec<T>) -> Self {
         ReadOnlyVec { data }
     }
-    
+
     fn get(&self, index: usize) -> Option<&T> {
         self.data.get(index)
     }
-    
+
     // 注意：没有提供修改元素的方法
 }
 
@@ -306,7 +306,7 @@ fn use_container<T: Display>(container: ReadOnlyVec<T>) {
 fn example() {
     let dogs = vec![Dog, Dog];
     let dog_container = ReadOnlyVec::new(dogs);
-    
+
     // 利用协变性将 ReadOnlyVec<Dog> 转换为 ReadOnlyVec<dyn Animal>
     use_container(dog_container);
 }
@@ -353,7 +353,7 @@ fn example() {
 // Functor 模式，利用协变性
 trait Functor<A> {
     type Target<B>;
-    
+
     fn map<B, F>(self, f: F) -> Self::Target<B>
     where
         F: FnOnce(A) -> B;
@@ -362,7 +362,7 @@ trait Functor<A> {
 // 为 Option 实现 Functor
 impl<A> Functor<A> for Option<A> {
     type Target<B> = Option<B>;
-    
+
     fn map<B, F>(self, f: F) -> Option<B>
     where
         F: FnOnce(A) -> B,
@@ -448,7 +448,7 @@ struct Consumer<T> {
 trait Repository<T> {
     // 返回值位置：协变
     fn get(&self, id: usize) -> Option<&T>;
-    
+
     // 参数位置：逆变（实际上Rust中参数不支持子类型多态，这里仅作概念说明）
     fn save(&mut self, item: T);
 }

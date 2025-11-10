@@ -101,7 +101,7 @@ fn enhanced_closure_inference() {
         counter += 1;
         counter
     };
-    
+
     // 改进的闭包类型推导
     let numbers = vec![1, 2, 3, 4, 5];
     let doubled: Vec<i32> = numbers
@@ -124,13 +124,13 @@ impl ClosureTypeInference {
     fn infer_closure_type(&self, closure: &Closure) -> Result<ClosureType, InferenceError> {
         // 分析捕获变量
         let captures = self.capture_analysis.analyze(closure)?;
-        
+
         // 推导参数类型
         let param_types = self.infer_parameter_types(closure)?;
-        
+
         // 推导返回类型
         let return_type = self.infer_return_type(closure)?;
-        
+
         Ok(ClosureType {
             captures,
             param_types,
@@ -170,13 +170,13 @@ impl GenericTypeInference {
     fn infer_generic_type(&self, generic_fn: &GenericFunction) -> Result<GenericType, InferenceError> {
         // 创建类型变量
         let type_vars = self.type_variable_manager.create_variables(generic_fn)?;
-        
+
         // 收集约束
         let constraints = self.collect_constraints(generic_fn, &type_vars)?;
-        
+
         // 求解约束
         let substitution = self.constraint_solver.solve(constraints)?;
-        
+
         Ok(GenericType {
             type_vars,
             substitution,
@@ -225,33 +225,33 @@ impl HindleyMilnerInference {
                 self.type_environment.get_type(name)
                     .ok_or(InferenceError::UnboundVariable(name.clone()))
             },
-            
+
             Expression::Application(fun, arg) => {
                 // 应用规则
                 let fun_type = self.infer_type(fun)?;
                 let arg_type = self.infer_type(arg)?;
-                
+
                 // 创建返回类型变量
                 let return_type = self.type_variable_generator.fresh();
                 let expected_fun_type = Type::Function(Box::new(arg_type), Box::new(return_type.clone()));
-                
+
                 // 统一函数类型
                 let substitution = self.unification_algorithm.unify(&fun_type, &expected_fun_type)?;
-                
+
                 // 应用替换
                 Ok(substitution.apply(&return_type))
             },
-            
+
             Expression::Abstraction(param, body) => {
                 // 抽象规则
                 let param_type = self.type_variable_generator.fresh();
                 let mut new_env = self.type_environment.clone();
                 new_env.bind(param.clone(), param_type.clone());
-                
+
                 let body_type = self.with_environment(new_env, |this| {
                     this.infer_type(body)
                 })?;
-                
+
                 Ok(Type::Function(Box::new(param_type), Box::new(body_type)))
             }
         }
@@ -274,12 +274,12 @@ impl ConstraintGenerator {
     fn generate_constraints(&mut self, expression: &Expression) -> Result<Set<TypeConstraint>, GenerationError> {
         let mut constraints = Set::new();
         let mut type_map = HashMap::new();
-        
+
         self.generate_constraints_recursive(expression, &mut constraints, &mut type_map)?;
-        
+
         Ok(constraints)
     }
-    
+
     fn generate_constraints_recursive(
         &mut self,
         expression: &Expression,
@@ -293,17 +293,17 @@ impl ConstraintGenerator {
                 type_map.insert(expression.id(), type_var.clone());
                 Ok(type_var)
             },
-            
+
             Expression::Application(fun, arg) => {
                 // 为函数应用生成约束
                 let fun_type = self.generate_constraints_recursive(fun, constraints, type_map)?;
                 let arg_type = self.generate_constraints_recursive(arg, constraints, type_map)?;
                 let return_type = self.type_variable_generator.fresh();
-                
+
                 // 添加函数类型约束
                 let function_type = Type::Function(Box::new(arg_type), Box::new(return_type.clone()));
                 constraints.insert(TypeConstraint::Equality(fun_type, function_type));
-                
+
                 type_map.insert(expression.id(), return_type.clone());
                 Ok(return_type)
             }
@@ -323,17 +323,17 @@ impl ConstraintSolver {
     fn solve_constraints(&self, constraints: Set<TypeConstraint>) -> Result<Substitution, SolvingError> {
         let mut substitution = Substitution::empty();
         let mut remaining_constraints = constraints;
-        
+
         while !remaining_constraints.is_empty() {
             let constraint = remaining_constraints.iter().next().unwrap().clone();
             remaining_constraints.remove(&constraint);
-            
+
             match constraint {
                 TypeConstraint::Equality(t1, t2) => {
                     // 处理等式约束
                     let new_substitution = self.unification_algorithm.unify(&t1, &t2)?;
                     substitution = substitution.compose(&new_substitution);
-                    
+
                     // 应用新替换到剩余约束
                     remaining_constraints = remaining_constraints
                         .into_iter()
@@ -342,7 +342,7 @@ impl ConstraintSolver {
                 }
             }
         }
-        
+
         Ok(substitution)
     }
 }
@@ -366,7 +366,7 @@ struct ComplexityAnalysis {
         // 替换应用
         substitution_application: O(n)
     },
-    
+
     // 整体算法复杂度
     overall_complexity: {
         // 最坏情况
@@ -393,7 +393,7 @@ impl ComplexityOptimization {
         // 应用优化策略
         let optimized_env = self.type_variable_reuse.optimize_environment(&expression)?;
         let cached_constraints = self.constraint_caching.get_cached_constraints(&expression)?;
-        
+
         Ok(OptimizedInference {
             environment: optimized_env,
             constraints: cached_constraints,
@@ -418,7 +418,7 @@ struct SpaceComplexityAnalysis {
         // 临时变量存储
         temporary_variable_storage: O(n)
     },
-    
+
     // 内存优化策略
     memory_optimization_strategies: {
         // 类型环境压缩
@@ -454,10 +454,10 @@ impl DistributedTypeInference {
     fn infer_large_project(&self, project: &LargeProject) -> Result<ProjectTypeMap, InferenceError> {
         // 项目模块化分析
         let modules = self.analyze_project_modules(project)?;
-        
+
         // 任务分配
         let tasks = self.task_scheduler.distribute_tasks(modules)?;
-        
+
         // 并行类型推导
         let mut results = Vec::new();
         for task in tasks {
@@ -465,10 +465,10 @@ impl DistributedTypeInference {
             let result = worker.infer_module_types(task)?;
             results.push(result);
         }
-        
+
         // 结果聚合
         let project_type_map = self.result_aggregator.aggregate_results(results)?;
-        
+
         Ok(project_type_map)
     }
 }
@@ -487,13 +487,13 @@ impl IncrementalTypeInference {
     fn incremental_inference(&self, changes: &[ProjectChange]) -> Result<IncrementalResult, InferenceError> {
         // 检测变更影响范围
         let affected_modules = self.change_detector.detect_affected_modules(changes)?;
-        
+
         // 构建依赖图
         let dependency_graph = self.dependency_graph.build(affected_modules)?;
-        
+
         // 增量更新类型信息
         let updated_types = self.incremental_updater.update_types(dependency_graph)?;
-        
+
         Ok(IncrementalResult {
             updated_types,
             performance_improvement: self.calculate_performance_improvement(),
@@ -522,26 +522,26 @@ impl IDETypeInference {
     async fn provide_type_info(&self, document: &Document, position: Position) -> Result<TypeInfo, InferenceError> {
         // 获取文档上下文
         let context = self.get_document_context(document, position)?;
-        
+
         // 实时类型推导
         let type_info = self.real_time_inference.infer_at_position(context)?;
-        
+
         // 格式化类型信息
         let formatted_info = self.format_type_info(type_info)?;
-        
+
         Ok(formatted_info)
     }
-    
+
     async fn provide_error_diagnostics(&self, document: &Document) -> Result<Vec<Diagnostic>, InferenceError> {
         // 分析文档错误
         let errors = self.error_diagnostic.analyze_document(document)?;
-        
+
         // 生成诊断信息
         let diagnostics = errors
             .into_iter()
             .map(|error| self.create_diagnostic(error))
             .collect();
-        
+
         Ok(diagnostics)
     }
 }
@@ -560,13 +560,13 @@ impl BuildToolIntegration {
     async fn compile_with_type_inference(&self, project: &Project) -> Result<CompilationResult, CompilationError> {
         // 设置并行编译
         let parallel_compiler = self.parallel_compilation.setup(project)?;
-        
+
         // 启用类型推导缓存
         let cache = self.cache_management.enable_cache(project)?;
-        
+
         // 执行编译
         let compilation_result = parallel_compiler.compile_with_cache(cache).await?;
-        
+
         Ok(compilation_result)
     }
 }
@@ -588,7 +588,7 @@ Theorem TypeInferenceCorrectness {
         // 表达式
         expression: Expression
     },
-    
+
     // 结论
     Conclusion: {
         // 推导结果正确性
@@ -611,7 +611,7 @@ Proof TypeInferenceCorrectness {
             // 常量
             Constant: Γ ⊢ c : τ_c is correct
         },
-        
+
         // 归纳情况
         Inductive cases: {
             // 函数应用
@@ -622,7 +622,7 @@ Proof TypeInferenceCorrectness {
                 // 证明应用结果正确
                 ⇒ Γ ⊢ e₁ e₂ : τ₂ is correct
             },
-            
+
             // 函数抽象
             Abstraction: {
                 // 假设函数体类型推导正确
@@ -649,7 +649,7 @@ Theorem TypeInferenceCompleteness {
         // 表达式
         expression: Expression
     },
-    
+
     // 结论
     Conclusion: {
         // 推导完备性
@@ -674,7 +674,7 @@ Proof TypeInferenceCompleteness {
             // 因此统一算法终止
             ⇒ Unification algorithm terminates
         },
-        
+
         // 约束求解终止性
         Constraint solving termination: {
             // 约束数量有限
