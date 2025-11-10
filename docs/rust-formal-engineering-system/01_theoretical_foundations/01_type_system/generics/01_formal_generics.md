@@ -178,7 +178,7 @@ impl<T> Vec<T> {
             capacity: 0,
         }
     }
-    
+
     fn push(&mut self, item: T) {
         // 实现确保类型安全
     }
@@ -438,7 +438,7 @@ $$\forall T : C, \forall \tau \text{ such that } \tau \models C, \text{Code}(T) 
 
 ---
 
-**文档版本**: 1.0.0  
-**最后更新**: 2025年7月11日  
-**维护者**: Rust语言形式化理论项目组  
+**文档版本**: 1.0.0
+**最后更新**: 2025年7月11日
+**维护者**: Rust语言形式化理论项目组
 **状态**: 已更新交叉引用

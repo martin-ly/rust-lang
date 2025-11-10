@@ -98,11 +98,11 @@ impl<T> Container<T> {
     fn new() -> Self {
         Container { data: Vec::new() }
     }
-    
+
     fn push(&mut self, item: T) {
         self.data.push(item);
     }
-    
+
     fn len(&self) -> usize {
         self.data.len()
     }
@@ -492,7 +492,7 @@ impl<T> BasicContainer for Container<T> {
     fn len(&self) -> usize {
         self.data.len()
     }
-    
+
     fn is_empty(&self) -> bool {
         self.data.is_empty()
     }
@@ -502,7 +502,7 @@ impl<T> AdvancedContainer for Container<T> {
     fn capacity(&self) -> usize {
         self.data.capacity()
     }
-    
+
     fn reserve(&mut self, additional: usize) {
         self.data.reserve(additional);
     }
@@ -543,7 +543,7 @@ where
     fn new(data: Vec<T>, mapper: F) -> Self {
         Mapper { data, mapper }
     }
-    
+
     fn map(self) -> Vec<U> {
         self.data.into_iter().map(self.mapper).collect()
     }
@@ -554,7 +554,7 @@ where
     F: Fn(T) -> U
 {
     type Item = U;
-    
+
     fn next(&mut self) -> Option<U> {
         self.data.pop().map(&self.mapper)
     }
@@ -598,7 +598,7 @@ impl Distance<Meter> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn to_meters(&self) -> f64 {
         self.value
     }
@@ -611,7 +611,7 @@ impl Distance<Second> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn to_seconds(&self) -> f64 {
         self.value
     }
@@ -695,7 +695,7 @@ struct CoherenceChecker {
 impl CoherenceChecker {
     fn check_coherence(&self) -> Result<(), Vec<CoherenceError>> {
         let mut errors = Vec::new();
-        
+
         for ((trait_id, type_id), impls) in &self.implementations {
             // Check orphan rule
             if !self.satisfies_orphan_rule(*trait_id, *type_id) {
@@ -704,7 +704,7 @@ impl CoherenceChecker {
                     type_name: self.get_type_name(*type_id),
                 });
             }
-            
+
             // Check for overlaps
             if impls.len() > 1 {
                 for i in 0..impls.len() {
@@ -721,7 +721,7 @@ impl CoherenceChecker {
                 }
             }
         }
-        
+
         if errors.is_empty() {
             Ok(())
         } else {

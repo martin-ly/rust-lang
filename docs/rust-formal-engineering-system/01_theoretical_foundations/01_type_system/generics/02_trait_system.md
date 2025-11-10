@@ -181,19 +181,19 @@ fn is_object_safe(trait_def: &TraitDef) -> bool {
     if has_associated_types(trait_def) {
         return false;
     }
-    
+
     // 检查是否有泛型参数
     if has_generic_parameters(trait_def) {
         return false;
     }
-    
+
     // 检查所有方法是否对象安全
     for method in &trait_def.methods {
         if !is_method_object_safe(method) {
             return false;
         }
     }
-    
+
     true
 }
 ```
@@ -240,7 +240,7 @@ $$\text{solve}(\text{constraints}) = \text{find}(\text{impls} \mid \text{constra
 ```rust
 fn solve_constraints(constraints: &[TraitBound]) -> Option<Vec<Impl>> {
     let mut solutions = Vec::new();
-    
+
     for constraint in constraints {
         if let Some(impls) = find_implementations(constraint) {
             solutions.extend(impls);
@@ -248,7 +248,7 @@ fn solve_constraints(constraints: &[TraitBound]) -> Option<Vec<Impl>> {
             return None; // 无法求解
         }
     }
-    
+
     Some(solutions)
 }
 ```
@@ -286,19 +286,19 @@ fn check_inheritance_consistency(trait_def: &TraitDef) -> bool {
     if has_circular_inheritance(trait_def) {
         return false;
     }
-    
+
     // 检查超Trait对象安全
     for super_trait in &trait_def.super_traits {
         if !is_object_safe(super_trait) {
             return false;
         }
     }
-    
+
     // 检查方法签名冲突
     if has_method_signature_conflicts(trait_def) {
         return false;
     }
-    
+
     true
 }
 ```
@@ -376,12 +376,12 @@ fn resolve_method_implementation(
     if let Some(custom_impl) = impl_def.get_method(method_name) {
         return Some(custom_impl);
     }
-    
+
     // 然后查找默认实现
     if let Some(default_impl) = trait_def.get_default_impl(method_name) {
         return Some(default_impl);
     }
-    
+
     None
 }
 ```
@@ -402,15 +402,15 @@ fn monomorphize(
     type_args: &[Type]
 ) -> SpecializedCode {
     let mut specialized = generic_code.clone();
-    
+
     // 替换类型参数
     for (param, arg) in generic_code.params.iter().zip(type_args.iter()) {
         specialized = substitute_type(specialized, param, arg);
     }
-    
+
     // 优化生成的代码
     optimize_specialized_code(&mut specialized);
-    
+
     specialized
 }
 ```
@@ -427,7 +427,7 @@ fn optimize_vtable(vtable: &mut VTable) {
             inline_method(method);
         }
     }
-    
+
     // 缓存方法指针
     cache_method_pointers(vtable);
 }
@@ -470,9 +470,9 @@ impl Debug for Point {
 ```rust
 trait Iterator {
     type Item;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
-    
+
     fn size_hint(&self) -> (usize, Option<usize>) {
         (0, None)
     }
@@ -486,7 +486,7 @@ struct Range {
 
 impl Iterator for Range {
     type Item = i32;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         if self.current < self.end {
             let result = self.current;
@@ -605,19 +605,19 @@ fn verify_trait_implementation(
         if !impl_def.has_method(required_method.name()) {
             return false;
         }
-        
+
         if !signatures_match(required_method, impl_def.get_method(required_method.name())) {
             return false;
         }
     }
-    
+
     // 检查关联类型
     for associated_type in &trait_def.associated_types {
         if !impl_def.has_associated_type(associated_type.name()) {
             return false;
         }
     }
-    
+
     true
 }
 ```
@@ -634,17 +634,17 @@ fn verify_object_safety(trait_def: &TraitDef) -> bool {
             return false;
         }
     }
-    
+
     // 检查关联类型
     if !trait_def.associated_types.is_empty() {
         return false;
     }
-    
+
     // 检查泛型参数
     if !trait_def.generic_params.is_empty() {
         return false;
     }
-    
+
     true
 }
 ```

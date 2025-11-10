@@ -105,20 +105,20 @@ fn instantiate_generic_function(
     type_args: &[Type]
 ) -> Function {
     let mut specialized = generic_fn.clone();
-    
+
     // 替换类型参数
     for (param, arg) in generic_fn.type_params.iter().zip(type_args.iter()) {
         specialized = substitute_type(specialized, param, arg);
     }
-    
+
     // 检查约束
     if !check_constraints(&specialized, type_args) {
         panic!("Type arguments do not satisfy constraints");
     }
-    
+
     // 优化生成的代码
     optimize_specialized_function(&mut specialized);
-    
+
     specialized
 }
 ```
@@ -154,19 +154,19 @@ fn instantiate_generic_struct(
     type_args: &[Type]
 ) -> Struct {
     let mut specialized = generic_struct.clone();
-    
+
     // 替换字段类型中的类型参数
     for field in &mut specialized.fields {
         field.field_type = substitute_type_in_type(field.field_type.clone(), type_args);
     }
-    
+
     // 检查字段类型约束
     for field in &specialized.fields {
         if !check_field_type_constraints(field, type_args) {
             panic!("Field type constraints not satisfied");
         }
     }
-    
+
     specialized
 }
 ```
@@ -202,7 +202,7 @@ fn instantiate_generic_enum(
     type_args: &[Type]
 ) -> Enum {
     let mut specialized = generic_enum.clone();
-    
+
     // 替换变体中的类型参数
     for variant in &mut specialized.variants {
         match variant {
@@ -218,7 +218,7 @@ fn instantiate_generic_enum(
             }
         }
     }
-    
+
     specialized
 }
 ```
@@ -255,7 +255,7 @@ fn implement_generic_trait(
     impl_items: &[ImplItem]
 ) -> Impl {
     let mut impl_ = Impl::new(trait_def, type_);
-    
+
     // 检查实现项是否匹配Trait定义
     for item in impl_items {
         if !matches_trait_item(item, trait_def) {
@@ -263,14 +263,14 @@ fn implement_generic_trait(
         }
         impl_.add_item(item.clone());
     }
-    
+
     // 检查是否实现了所有必需项
     for required_item in &trait_def.required_items {
         if !impl_.has_item(required_item.name()) {
             panic!("Missing required trait item: {}", required_item.name());
         }
     }
-    
+
     impl_
 }
 ```
@@ -315,10 +315,10 @@ fn propagate_generic_constraints(
     constraints: &mut Vec<GenericConstraint>
 ) {
     let mut changed = true;
-    
+
     while changed {
         changed = false;
-        
+
         for i in 0..constraints.len() {
             for j in (i + 1)..constraints.len() {
                 if let Some(new_constraints) = propagate_between_generic_constraints(
@@ -349,16 +349,16 @@ fn monomorphize_generic_code(
     type_args: &[Type]
 ) -> SpecializedCode {
     let mut specialized = generic_code.clone();
-    
+
     // 替换所有类型参数
     specialized = substitute_all_type_params(specialized, type_args);
-    
+
     // 内联泛型函数调用
     inline_generic_function_calls(&mut specialized);
-    
+
     // 优化生成的代码
     optimize_specialized_code(&mut specialized);
-    
+
     specialized
 }
 ```
@@ -373,20 +373,20 @@ fn generate_generic_code(
     type_args: &[Type]
 ) -> GeneratedCode {
     let mut generated = GeneratedCode::new();
-    
+
     // 生成类型定义
     generated.add_type_definition(generate_type_definition(generic_def, type_args));
-    
+
     // 生成函数实现
     generated.add_function_implementations(
         generate_function_implementations(generic_def, type_args)
     );
-    
+
     // 生成Trait实现
     generated.add_trait_implementations(
         generate_trait_implementations(generic_def, type_args)
     );
-    
+
     generated
 }
 ```
@@ -407,14 +407,14 @@ impl GenericCache {
         type_args: &[Type]
     ) -> GeneratedCode {
         let signature = TypeSignature::new(generic_def, type_args);
-        
+
         if let Some(cached) = self.cache.get(&signature) {
             return cached.clone();
         }
-        
+
         let generated = generate_generic_code(generic_def, type_args);
         self.cache.insert(signature, generated.clone());
-        
+
         generated
     }
 }
@@ -458,15 +458,15 @@ impl<T> Stack<T> {
     fn new() -> Self {
         Stack { items: Vec::new() }
     }
-    
+
     fn push(&mut self, item: T) {
         self.items.push(item);
     }
-    
+
     fn pop(&mut self) -> Option<T> {
         self.items.pop()
     }
-    
+
     fn peek(&self) -> Option<&T> {
         self.items.last()
     }
@@ -504,7 +504,7 @@ trait Container<T> {
 
 trait Iterator {
     type Item;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
 }
 
@@ -561,11 +561,11 @@ impl<T: Ord> BinaryTree<T> {
     fn new() -> Self {
         BinaryTree { root: None }
     }
-    
+
     fn insert(&mut self, value: T) {
         self.root = Some(Box::new(self.insert_recursive(self.root.take(), value)));
     }
-    
+
     fn insert_recursive(&self, node: Option<Box<Node<T>>>, value: T) -> Node<T> {
         match node {
             None => Node {
@@ -607,12 +607,12 @@ fn verify_generic_code(generic_code: &GenericCode) -> bool {
             return false;
         }
     }
-    
+
     // 检查类型安全
     if !is_type_safe(generic_code) {
         return false;
     }
-    
+
     // 检查实例化正确性
     let test_types = generate_test_types(&generic_code.type_params);
     for type_args in test_types {
@@ -624,7 +624,7 @@ fn verify_generic_code(generic_code: &GenericCode) -> bool {
             return false;
         }
     }
-    
+
     true
 }
 ```
@@ -642,7 +642,7 @@ fn verify_generic_constraints(
     if type_params.len() != type_args.len() {
         return false;
     }
-    
+
     // 检查每个类型参数满足其约束
     for (param, arg) in type_params.iter().zip(type_args.iter()) {
         for bound in &param.bounds {
@@ -651,7 +651,7 @@ fn verify_generic_constraints(
             }
         }
     }
-    
+
     true
 }
 ```

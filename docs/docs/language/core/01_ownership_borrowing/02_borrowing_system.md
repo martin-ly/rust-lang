@@ -41,14 +41,14 @@
 
 ## 1. 概述
 
-借用系统是Rust所有权系统的核心组成部分，通过编译时静态分析确保内存安全和线程安全。借用系统基于分离逻辑和线性类型理论，提供了严格的借用规则和检查机制。
+借用系统是Rust所有权系统的核心组成部分，通过**编译期逻辑证明**确保资源安全和线程安全。从引用一致性视角看，借用系统基于能力安全模型和线性类型理论，提供了严格的借用规则和编译期证明机制。
 
 ### 1.1 借用系统特点
 
-- **编译时检查**：所有借用检查在编译时完成，无运行时开销
-- **类型安全**：通过类型系统确保借用安全
-- **内存安全**：防止悬垂引用和数据竞争
-- **线程安全**：通过借用规则确保并发安全
+- **编译期证明**：所有借用检查在编译期通过逻辑证明完成，无运行时开销
+- **类型安全**：通过类型系统（证明系统）确保借用安全
+- **资源安全**：通过编译期逻辑证防止悬垂引用和数据竞争（逻辑证明，非内存检查）
+- **线程安全**：通过编译期排他性契约确保并发安全（逻辑证明，非运行时检查）
 
 **相关概念**：
 
@@ -112,11 +112,17 @@ $$\text{BorrowConstraint} = \text{struct}\{\text{borrower}: \text{Reference}, \t
 **不可变借用类型**：
 $$\& \tau$$
 
+从引用一致性视角看，不可变借用是**只读访问许可证**，而非内存地址。
+
 **不可变借用语义**：
-$$\text{ImmBorrow}(\tau) = \text{struct}\{\text{value}: \tau, \text{lifetime}: \text{Lifetime}\}$$
+$$\text{ImmBorrow}(\tau) = \text{struct}\{\text{permit}: \text{ReadPermit}, \text{lifetime}: \text{Lifetime}\}$$
+
+**引用一致性视角**：`&T` 是编译器颁发的只读访问许可证，证明在生命周期内可以读取资源。
 
 **不可变借用规则**：
 $$\frac{\Gamma \vdash e : \tau \quad \text{not\_borrowed}(e, B)}{\Gamma \vdash \&e : \&\tau}$$
+
+**引用一致性视角**：借用规则是编译期逻辑证明，通过约束求解验证引用的有效性，而非检查内存状态。
 
 **相关定义**：
 
@@ -132,11 +138,17 @@ $$\frac{\Gamma \vdash e : \tau \quad \text{not\_borrowed}(e, B)}{\Gamma \vdash \
 **可变借用类型**：
 $$\& \text{mut } \tau$$
 
+从引用一致性视角看，可变借用是**独占写入能力的证明**，而非内存地址。
+
 **可变借用语义**：
-$$\text{MutBorrow}(\tau) = \text{struct}\{\text{value}: \tau, \text{lifetime}: \text{Lifetime}, \text{exclusive}: \text{bool}\}$$
+$$\text{MutBorrow}(\tau) = \text{struct}\{\text{permit}: \text{WritePermit}, \text{lifetime}: \text{Lifetime}, \text{exclusive}: \text{bool}\}$$
+
+**引用一致性视角**：`&mut T` 是编译器颁发的独占写入能力证明，证明在生命周期内对资源有独占访问权。
 
 **可变借用规则**：
 $$\frac{\Gamma \vdash e : \tau \quad \text{not\_borrowed}(e, B)}{\Gamma \vdash \&\text{mut } e : \&\text{mut } \tau}$$
+
+**引用一致性视角**：可变借用规则是编译期排他性契约，通过逻辑证明确保独占访问权，而非内存保护。
 
 **相关定义**：
 
@@ -267,13 +279,13 @@ $$\text{CheckerState} = \text{struct}\{\text{borrows}: \text{Map}[\text{Variable
 fn check_borrows(ast: &AST) -> Result<(), Vec<BorrowError>> {
     let mut checker = BorrowChecker::new();
     let mut errors = Vec::new();
-    
+
     for stmt in ast.statements() {
         if let Err(error) = checker.check_statement(stmt) {
             errors.push(error);
         }
     }
-    
+
     if errors.is_empty() {
         Ok(())
     } else {
@@ -409,7 +421,7 @@ fn process_data<'a>(data: &'a mut Vec<i32>) -> &'a i32 {
 ```rust
 fn parallel_process(data: &Vec<i32>) {
     let (first_half, second_half) = data.split_at(data.len() / 2);
-    
+
     std::thread::scope(|s| {
         s.spawn(|| process_slice(first_half));
         s.spawn(|| process_slice(second_half));

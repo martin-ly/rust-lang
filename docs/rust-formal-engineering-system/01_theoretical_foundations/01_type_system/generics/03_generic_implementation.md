@@ -46,7 +46,7 @@ impl TypeInferrer {
         self.fresh_counter += 1;
         Type::Var(name)
     }
-    
+
     fn infer_expr(&mut self, expr: &Expr, env: &TypeEnv) -> Result<Type, TypeError> {
         match expr {
             Expr::Var(name) => {
@@ -65,13 +65,13 @@ impl TypeInferrer {
                 let func_type = self.infer_expr(func, env)?;
                 let arg_type = self.infer_expr(arg, env)?;
                 let result_type = self.fresh_type_var();
-                
+
                 self.constraints.push(Constraint::FunctionCall(
                     func_type,
                     arg_type,
                     result_type.clone(),
                 ));
-                
+
                 Ok(result_type)
             }
             Expr::GenericInstantiation(generic, type_args) => {
@@ -81,17 +81,17 @@ impl TypeInferrer {
             }
         }
     }
-    
+
     fn solve_constraints(&self) -> Result<Substitution, ConstraintError> {
         let mut substitution = Substitution::empty();
         let mut worklist = self.constraints.clone();
-        
+
         while let Some(constraint) = worklist.pop() {
             match constraint {
                 Constraint::Equality(type1, type2) => {
                     let sub = unify(&type1, &type2)?;
                     substitution = substitution.compose(&sub);
-                    
+
                     // 应用替换到剩余约束
                     for constraint in &mut worklist {
                         *constraint = constraint.apply(&sub);
@@ -104,7 +104,7 @@ impl TypeInferrer {
                 }
             }
         }
-        
+
         Ok(substitution)
     }
 }
@@ -127,28 +127,28 @@ impl Monomorphizer {
         type_args: &[Type],
     ) -> ConcreteFunction {
         let key = self.generate_key(generic_fn, type_args);
-        
+
         if let Some(cached) = self.concrete_functions.get(&key) {
             return cached.clone();
         }
-        
+
         let mut substitutions = HashMap::new();
         for (param, arg) in generic_fn.type_params.iter().zip(type_args.iter()) {
             substitutions.insert(param.clone(), arg.clone());
         }
-        
+
         let concrete_body = self.substitute_types(&generic_fn.body, &substitutions);
-        
+
         let concrete_fn = ConcreteFunction {
             name: key.clone(),
             body: concrete_body,
             type_args: type_args.to_vec(),
         };
-        
+
         self.concrete_functions.insert(key, concrete_fn.clone());
         concrete_fn
     }
-    
+
     fn substitute_types(&self, expr: &Expr, substitutions: &HashMap<String, Type>) -> Expr {
         match expr {
             Expr::TypeVar(name) => {
@@ -182,7 +182,7 @@ impl Monomorphizer {
             _ => expr.clone(),
         }
     }
-    
+
     fn generate_key(&self, generic_fn: &GenericFunction, type_args: &[Type]) -> String {
         let type_names: Vec<String> = type_args.iter().map(|t| t.to_string()).collect();
         format!("{}_{}", generic_fn.name, type_names.join("_"))
@@ -205,7 +205,7 @@ impl TraitChecker {
             false
         }
     }
-    
+
     fn verify_trait_impl(&self, impl_: &TraitImpl) -> bool {
         // 检查所有必需的方法实现
         for method in &impl_.trait_methods {
@@ -215,7 +215,7 @@ impl TraitChecker {
         }
         true
     }
-    
+
     fn check_method_implementation(&self, impl_: &TraitImpl, method: &TraitMethod) -> bool {
         // 检查方法签名匹配
         if let Some(impl_method) = impl_.methods.get(&method.name) {
@@ -224,7 +224,7 @@ impl TraitChecker {
             false
         }
     }
-    
+
     fn signatures_compatible(&self, trait_sig: &MethodSignature, impl_sig: &MethodSignature) -> bool {
         // 检查参数类型和返回类型兼容性
         trait_sig.parameters.len() == impl_sig.parameters.len() &&
@@ -280,18 +280,18 @@ impl<T> Vec<T> {
             _phantom: std::marker::PhantomData,
         }
     }
-    
+
     fn push(&mut self, item: T) {
         if self.len == self.capacity {
             self.grow();
         }
-        
+
         unsafe {
             std::ptr::write(self.ptr.add(self.len), item);
         }
         self.len += 1;
     }
-    
+
     fn pop(&mut self) -> Option<T> {
         if self.len == 0 {
             None
@@ -302,7 +302,7 @@ impl<T> Vec<T> {
             }
         }
     }
-    
+
     fn grow(&mut self) {
         let new_capacity = if self.capacity == 0 { 1 } else { self.capacity * 2 };
         let new_ptr = unsafe {
@@ -310,7 +310,7 @@ impl<T> Vec<T> {
                 std::alloc::Layout::array::<T>(new_capacity).unwrap()
             ) as *mut T
         };
-        
+
         if !self.ptr.is_null() {
             unsafe {
                 std::ptr::copy_nonoverlapping(self.ptr, new_ptr, self.len);
@@ -320,7 +320,7 @@ impl<T> Vec<T> {
                 );
             }
         }
-        
+
         self.ptr = new_ptr;
         self.capacity = new_capacity;
     }
@@ -349,7 +349,7 @@ impl<T> Drop for Vec<T> {
 ```rust
 trait Iterator {
     type Item;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
 }
 
@@ -360,7 +360,7 @@ struct VecIterator<T> {
 
 impl<T> Iterator for VecIterator<T> {
     type Item = T;
-    
+
     fn next(&mut self) -> Option<T> {
         if self.index < self.vec.len() {
             let item = unsafe {
@@ -447,23 +447,23 @@ fn quick_sort_optimized<T: Ord + Copy>(slice: &mut [T]) {
     if slice.len() <= 1 {
         return;
     }
-    
+
     let pivot = slice[0];
     let mut left = 0;
     let mut right = slice.len() - 1;
-    
+
     while left < right {
         while left < right && slice[right] >= pivot {
             right -= 1;
         }
         slice[left] = slice[right];
-        
+
         while left < right && slice[left] <= pivot {
             left += 1;
         }
         slice[right] = slice[left];
     }
-    
+
     slice[left] = pivot;
     quick_sort_optimized(&mut slice[..left]);
     quick_sort_optimized(&mut slice[left + 1..]);
@@ -499,17 +499,17 @@ impl GenericErrorChecker {
                 }
             }
         }
-        
+
         // 检查函数体类型一致性
         self.check_function_body(&func.body, &func.signature)?;
-        
+
         if self.errors.is_empty() {
             Ok(())
         } else {
             Err(self.errors.clone())
         }
     }
-    
+
     fn check_constraint(&self, param: &TypeParam, constraint: &TraitConstraint) -> bool {
         // 检查类型参数是否满足Trait约束
         self.trait_implementations.contains_key(&(param.type_var.clone(), constraint.trait_name.clone()))
@@ -586,27 +586,27 @@ struct InstantiationInfo {
 impl GenericDebugInfo {
     fn generate_debug_info(&self) -> String {
         let mut info = String::new();
-        
+
         info.push_str("Generic Function Debug Info:\n");
         info.push_str("Type Parameters:\n");
         for param in &self.type_params {
             info.push_str(&format!("  {}: {}\n", param.name, param.bounds.join(" + ")));
         }
-        
+
         info.push_str("Constraints:\n");
         for constraint in &self.constraints {
             info.push_str(&format!("  {}: {}\n", constraint.type_var, constraint.trait_name));
         }
-        
+
         info.push_str("Instantiations:\n");
         for instantiation in &self.instantiations {
-            info.push_str(&format!("  {}<{}> -> {}\n", 
+            info.push_str(&format!("  {}<{}> -> {}\n",
                 instantiation.generic_name,
                 instantiation.type_args.iter().map(|t| t.to_string()).collect::<Vec<_>>().join(", "),
                 instantiation.concrete_name
             ));
         }
-        
+
         info
     }
 }
@@ -636,7 +636,7 @@ impl<T> TypeInfo {
             },
         }
     }
-    
+
     fn drop_impl<T>(ptr: *mut u8) {
         unsafe {
             std::ptr::drop_in_place(ptr as *mut T);
@@ -678,7 +678,7 @@ impl<T: Ord> Sortable for Vec<T> {
 pub fn binary_search<T: Ord>(slice: &[T], target: &T) -> Result<usize, usize> {
     let mut left = 0;
     let mut right = slice.len();
-    
+
     while left < right {
         let mid = left + (right - left) / 2;
         match slice[mid].cmp(target) {
@@ -687,7 +687,7 @@ pub fn binary_search<T: Ord>(slice: &[T], target: &T) -> Result<usize, usize> {
             std::cmp::Ordering::Greater => right = mid,
         }
     }
-    
+
     Err(left)
 }
 
@@ -700,19 +700,19 @@ impl<T> Container<T> {
     pub fn new() -> Self {
         Container { data: Vec::new() }
     }
-    
+
     pub fn push(&mut self, item: T) {
         self.data.push(item);
     }
-    
+
     pub fn pop(&mut self) -> Option<T> {
         self.data.pop()
     }
-    
+
     pub fn len(&self) -> usize {
         self.data.len()
     }
-    
+
     pub fn is_empty(&self) -> bool {
         self.data.is_empty()
     }
@@ -730,7 +730,7 @@ impl<T: Ord> Container<T> {
     pub fn sort(&mut self) {
         self.data.sort();
     }
-    
+
     pub fn find(&self, target: &T) -> Option<usize> {
         self.data.binary_search(target).ok()
     }
@@ -755,7 +755,7 @@ impl<T> LinkedList<T> {
     pub fn new() -> Self {
         LinkedList { head: None, len: 0 }
     }
-    
+
     pub fn push_front(&mut self, data: T) {
         let new_node = Box::new(Node {
             data,
@@ -764,7 +764,7 @@ impl<T> LinkedList<T> {
         self.head = Some(new_node);
         self.len += 1;
     }
-    
+
     pub fn pop_front(&mut self) -> Option<T> {
         self.head.take().map(|node| {
             self.head = node.next;
@@ -772,11 +772,11 @@ impl<T> LinkedList<T> {
             node.data
         })
     }
-    
+
     pub fn len(&self) -> usize {
         self.len
     }
-    
+
     pub fn is_empty(&self) -> bool {
         self.head.is_none()
     }
@@ -797,11 +797,11 @@ impl<T: Ord> BinaryTree<T> {
     pub fn new() -> Self {
         BinaryTree { root: None }
     }
-    
+
     pub fn insert(&mut self, data: T) {
         self.root = Some(Box::new(self.insert_recursive(self.root.take(), data)));
     }
-    
+
     fn insert_recursive(&self, node: Option<Box<TreeNode<T>>>, data: T) -> TreeNode<T> {
         match node {
             None => TreeNode {
@@ -819,11 +819,11 @@ impl<T: Ord> BinaryTree<T> {
             }
         }
     }
-    
+
     pub fn contains(&self, data: &T) -> bool {
         self.contains_recursive(&self.root, data)
     }
-    
+
     fn contains_recursive(&self, node: &Option<Box<TreeNode<T>>>, data: &T) -> bool {
         match node {
             None => false,
@@ -855,6 +855,6 @@ Rust泛型实现通过编译时类型推导、单态化和运行时优化提供�
 
 ---
 
-**文档版本**: 1.0.0  
-**最后更新**: 2025-01-27  
+**文档版本**: 1.0.0
+**最后更新**: 2025-01-27
 **维护者**: Rust语言形式化理论项目组

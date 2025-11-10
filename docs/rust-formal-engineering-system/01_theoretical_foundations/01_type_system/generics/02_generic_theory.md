@@ -156,7 +156,7 @@ impl<T> Container<T> {
             metadata: Metadata::default(),
         }
     }
-    
+
     fn get_value(&self) -> &T {
         &self.value
     }
@@ -178,7 +178,7 @@ impl<T, E> Result<T, E> {
     fn is_ok(&self) -> bool {
         matches!(self, Result::Ok(_))
     }
-    
+
     fn unwrap(self) -> T {
         match self {
             Result::Ok(value) => value,
@@ -215,7 +215,7 @@ $$\frac{\Gamma \vdash T : \text{Display}}{\Gamma \vdash \text{print}\langle T \r
 ```rust
 trait Iterator {
     type Item;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
 }
 
@@ -226,7 +226,7 @@ struct VecIterator<T> {
 
 impl<T> Iterator for VecIterator<T> {
     type Item = T;
-    
+
     fn next(&mut self) -> Option<T> {
         if self.index < self.vec.len() {
             let item = self.vec[self.index].clone();
@@ -247,13 +247,13 @@ $$\frac{\Gamma \vdash T : \text{Iterator}}{\Gamma \vdash T::\text{Item} : \text{
 ```rust
 trait Add<Rhs = Self> {
     type Output;
-    
+
     fn add(self, rhs: Rhs) -> Self::Output;
 }
 
 impl Add for i32 {
     type Output = i32;
-    
+
     fn add(self, rhs: i32) -> i32 {
         self + rhs
     }
@@ -304,7 +304,7 @@ trait Container {
     type Iterator<'a>: Iterator<Item = &'a Self::Item>
     where
         Self: 'a;
-    
+
     fn iter<'a>(&'a self) -> Self::Iterator<'a>;
 }
 ```
@@ -336,21 +336,21 @@ impl TypeInferrer {
                 let func_type = self.infer(func)?;
                 let arg_type = self.infer(arg)?;
                 let result_type = Type::Var(format!("result_{}", self.fresh_var()));
-                
+
                 self.constraints.push(Constraint::FunctionCall(
                     func_type,
                     arg_type,
                     result_type.clone(),
                 ));
-                
+
                 Ok(result_type)
             }
         }
     }
-    
+
     fn solve_constraints(&self) -> Result<Substitution, TypeError> {
         let mut substitution = Substitution::empty();
-        
+
         for constraint in &self.constraints {
             match constraint {
                 Constraint::FunctionCall(func_type, arg_type, result_type) => {
@@ -364,7 +364,7 @@ impl TypeInferrer {
                 // ... 其他约束类型
             }
         }
-        
+
         Ok(substitution)
     }
 }
@@ -382,13 +382,13 @@ enum Constraint {
 fn solve_constraints(constraints: &[Constraint]) -> Result<Substitution, ConstraintError> {
     let mut substitution = Substitution::empty();
     let mut worklist = constraints.to_vec();
-    
+
     while let Some(constraint) = worklist.pop() {
         match constraint {
             Constraint::Equality(type1, type2) => {
                 let sub = unify(&type1, &type2)?;
                 substitution = substitution.compose(&sub);
-                
+
                 // 应用替换到剩余约束
                 for constraint in &mut worklist {
                     *constraint = constraint.apply(&sub);
@@ -408,7 +408,7 @@ fn solve_constraints(constraints: &[Constraint]) -> Result<Substitution, Constra
             }
         }
     }
-    
+
     Ok(substitution)
 }
 ```
@@ -427,28 +427,28 @@ struct Monomorphizer {
 impl Monomorphizer {
     fn monomorphize(&mut self, generic_fn: &GenericFunction, type_args: &[Type]) -> ConcreteFunction {
         let key = format!("{}_{}", generic_fn.name, self.type_args_key(type_args));
-        
+
         if let Some(cached) = self.concrete_functions.get(&key) {
             return cached.clone();
         }
-        
+
         let mut substitutions = HashMap::new();
         for (param, arg) in generic_fn.type_params.iter().zip(type_args.iter()) {
             substitutions.insert(param.clone(), arg.clone());
         }
-        
+
         let concrete_body = self.substitute_types(&generic_fn.body, &substitutions);
-        
+
         let concrete_fn = ConcreteFunction {
             name: key.clone(),
             body: concrete_body,
             type_args: type_args.to_vec(),
         };
-        
+
         self.concrete_functions.insert(key, concrete_fn.clone());
         concrete_fn
     }
-    
+
     fn substitute_types(&self, expr: &Expr, substitutions: &HashMap<String, Type>) -> Expr {
         match expr {
             Expr::TypeVar(name) => {
@@ -515,18 +515,18 @@ impl<T> Vec<T> {
             capacity: 0,
         }
     }
-    
+
     fn push(&mut self, item: T) {
         if self.len == self.capacity {
             self.grow();
         }
-        
+
         unsafe {
             std::ptr::write(self.ptr.add(self.len), item);
         }
         self.len += 1;
     }
-    
+
     fn pop(&mut self) -> Option<T> {
         if self.len == 0 {
             None
@@ -548,7 +548,7 @@ fn quicksort<T: Ord>(slice: &mut [T]) {
     if slice.len() <= 1 {
         return;
     }
-    
+
     let pivot = partition(slice);
     quicksort(&mut slice[..pivot]);
     quicksort(&mut slice[pivot + 1..]);
@@ -558,14 +558,14 @@ fn partition<T: Ord>(slice: &mut [T]) -> usize {
     let len = slice.len();
     let pivot = len - 1;
     let mut store_index = 0;
-    
+
     for i in 0..len - 1 {
         if slice[i] <= slice[pivot] {
             slice.swap(i, store_index);
             store_index += 1;
         }
     }
-    
+
     slice.swap(pivot, store_index);
     store_index
 }
@@ -609,6 +609,6 @@ Rust泛型系统提供了强大的参数化编程能力，同时保持了零成�
 
 ---
 
-**文档版本**: 1.0.0  
-**最后更新**: 2025-01-27  
+**文档版本**: 1.0.0
+**最后更新**: 2025-01-27
 **维护者**: Rust语言形式化理论项目组

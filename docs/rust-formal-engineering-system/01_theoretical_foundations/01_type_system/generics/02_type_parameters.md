@@ -198,7 +198,7 @@ fn process<T: Clone + Display + Debug>(item: T) -> T {
     item.clone()
 }
 
-struct DataProcessor<T> 
+struct DataProcessor<T>
 where
     T: Clone + Send + Sync + 'static
 {
@@ -528,7 +528,7 @@ impl Distance<Meter> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn to_meters(&self) -> f64 {
         self.value
     }
@@ -597,16 +597,16 @@ impl TypeParameterResolver {
     fn resolve<T>(&mut self, context: &TypeContext) -> Result<Type, Error> {
         // Collect all constraints for T
         let constraints = self.collect_constraints::<T>(context);
-        
+
         // Try to unify types
         for constraint in constraints {
             self.unify_constraint(constraint)?;
         }
-        
+
         // Apply substitutions
         self.apply_substitutions()
     }
-    
+
     fn unify_constraint(&mut self, constraint: TypeConstraint) -> Result<(), Error> {
         match constraint {
             TypeConstraint::TraitBound(bound) => {
@@ -632,11 +632,11 @@ trait ConstraintChecker {
     where
         T: ?Sized,
         B: TraitBound;
-        
+
     fn check_lifetime_bound<T>(&self, lifetime: Lifetime) -> Result<(), Error>
     where
         T: ?Sized;
-        
+
     fn check_sized_bound<T>(&self) -> Result<(), Error>
     where
         T: ?Sized;
@@ -650,7 +650,7 @@ impl ConstraintChecker for TypeChecker {
     {
         // Check if T implements all methods in B
         let required_methods = bound.required_methods();
-        
+
         for method in required_methods {
             if !T::implements_method(method) {
                 return Err(Error::TraitBoundNotSatisfied {
@@ -660,7 +660,7 @@ impl ConstraintChecker for TypeChecker {
                 });
             }
         }
-        
+
         Ok(())
     }
 }
