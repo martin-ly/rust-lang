@@ -154,15 +154,25 @@
 - [x] 创建梳理计划文档
 - [x] Rust 1.91 版本更新
 - [x] 核心文档创建
+- [x] 完善 README.md - 移除待完善标记，更新到 Rust 1.91
+- [x] 完善 08_practical_examples/01_basic_examples/00_index.md
+- [x] 完善 08_practical_examples/02_advanced_examples/00_index.md
+- [x] 完善 08_practical_examples/03_real_world_cases/00_index.md
+- [x] 完善 08_practical_examples/04_performance_examples/00_index.md
+- [x] 完善 08_practical_examples/05_security_examples/00_index.md
+- [x] 完善 08_practical_examples/13_observability_examples/00_index.md
 
 ### 进行中
 
-- [ ] 核心文档格式统一
-- [ ] 占位符文件完善
+- [ ] 完善 08_practical_examples 其他子模块索引（06-12）
+- [ ] 完善 QUICK_START.md - 移除待完善标记
+- [ ] 完善 MAINTENANCE_GUIDE.md - 移除待完善标记
 - [ ] 内容对标网络资源
 
 ### 待开始
 
+- [ ] 完善 06_toolchain_ecosystem 各子模块索引文件
+- [ ] 完善 04_application_domains 各子模块索引文件
 - [ ] 扩展模块内容完善
 - [ ] 自动化工具开发
 - [ ] 社区资源整合

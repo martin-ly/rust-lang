@@ -99,32 +99,99 @@
 - [serde 文档](https://serde.rs/)
 - [Rust Book - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
 
-## 实践与样例
+## 💻 实践与样例
 
-- 安全示例：参见 [crates/c10_networks](../../../crates/c10_networks/)
-- 网络安全：[crates/c26_cybersecurity](../../../crates/c26_cybersecurity/)
-- 应用领域（网络安全）：[`../../04_application_domains/08_cybersecurity/00_index.md`](../../04_application_domains/08_cybersecurity/00_index.md)
+### 代码示例位置
+
+- **安全示例**: [crates/c10_networks](../../../crates/c10_networks/)
+- **网络安全**: [crates/c26_cybersecurity](../../../crates/c26_cybersecurity/)
+- **应用领域（网络安全）**: [`../../04_application_domains/08_cybersecurity/00_index.md`](../../04_application_domains/08_cybersecurity/00_index.md)
 
 ### 文件级清单（精选）
 
-- `crates/c10_networks/src/security/`：
-  - `secure_communication.rs`：安全通信示例
-  - `input_validation.rs`：输入验证示例
-  - `secure_data_structures.rs`：安全数据结构
-- `crates/c26_cybersecurity/src/`：
-  - `encryption_examples.rs`：加密示例
-  - `security_tools.rs`：安全工具示例
-  - `vulnerability_prevention.rs`：漏洞预防示例
+#### `crates/c10_networks/src/security/`
 
-## 相关索引
+- `secure_communication.rs` - 安全通信示例
+- `input_validation.rs` - 输入验证示例
+- `secure_data_structures.rs` - 安全数据结构
 
-- 理论基础（内存安全）：[`../../01_theoretical_foundations/02_memory_safety/00_index.md`](../../01_theoretical_foundations/02_memory_safety/00_index.md)
-- 设计模式（安全模式）：[`../../03_design_patterns/08_security/00_index.md`](../../03_design_patterns/08_security/00_index.md)
-- 质量保障：[`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)
+#### `crates/c26_cybersecurity/src/`
 
-## 导航
+- `encryption_examples.rs` - 加密示例
+- `security_tools.rs` - 安全工具示例
+- `vulnerability_prevention.rs` - 漏洞预防示例
 
-- 返回实用示例：[`../00_index.md`](../00_index.md)
-- 性能示例：[`../04_performance_examples/00_index.md`](../04_performance_examples/00_index.md)
-- 并发示例：[`../06_concurrent_examples/00_index.md`](../06_concurrent_examples/00_index.md)
-- 返回项目根：[`../../README.md`](../../README.md)
+### 安全最佳实践
+
+#### Rust 1.91 新特性应用
+
+```rust
+// Rust 1.91 会警告潜在的悬空指针
+fn example() {
+    let ptr: *const i32;
+    {
+        let value = 42;
+        ptr = &value;  // ⚠️ 警告：ptr 可能在 value 离开作用域后悬空
+    }
+    // 使用 ptr 可能导致未定义行为
+}
+```
+
+#### 安全的内存管理
+
+```rust
+// 使用引用而非原始指针
+fn safe_example() {
+    let value = 42;
+    let reference = &value;  // 安全：引用有生命周期保证
+    println!("{}", reference);
+}
+```
+
+#### 安全的并发编程
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn safe_concurrency() {
+    let data = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+
+    for _ in 0..10 {
+        let data = Arc::clone(&data);
+        let handle = thread::spawn(move || {
+            let mut num = data.lock().unwrap();
+            *num += 1;
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+}
+```
+
+---
+
+## 🔗 相关索引
+
+- **理论基础（内存安全）**: [`../../01_theoretical_foundations/02_memory_safety/00_index.md`](../../01_theoretical_foundations/02_memory_safety/00_index.md)
+- **设计模式（安全模式）**: [`../../03_design_patterns/08_security/00_index.md`](../../03_design_patterns/08_security/00_index.md)
+- **质量保障**: [`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)
+
+---
+
+## 🧭 导航
+
+- **返回实用示例**: [`../00_index.md`](../00_index.md)
+- **性能示例**: [`../04_performance_examples/00_index.md`](../04_performance_examples/00_index.md)
+- **并发示例**: [`../06_concurrent_examples/00_index.md`](../06_concurrent_examples/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-10  
+**维护者**: 项目维护者  
+**状态**: 已完善 ✅
