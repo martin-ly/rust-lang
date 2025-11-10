@@ -142,7 +142,7 @@ fn example() {
         let dog = Dog;
         f(&dog);
     }
-    
+
     // 函数参数位置是逆变的
     use_dog_function(process_animal);
 }
@@ -156,7 +156,7 @@ fn example() {
 fn example() {
     let mut dog = Dog;
     let dog_ref = &mut dog;
-    
+
     // 不允许类型转换
     // let animal_ref: &mut dyn Animal = dog_ref;
 }
@@ -196,7 +196,7 @@ Rust 的 Clone 特征允许显式复制资源，
 fn clone_example() {
     let s1 = String::from("hello");
     let s2 = s1.clone();  // 显式复制资源
-    
+
     println!("s1 = {}, s2 = {}", s1, s2);  // 两者都可使用
 }
 ```
@@ -270,12 +270,12 @@ Rust 的所有权系统（基于仿射类型）自然地扩展到并发安全。
 ```rust
 fn concurrency_example() {
     let data = vec![1, 2, 3];
-    
+
     // 将所有权移动到新线程
     std::thread::spawn(move || {
         println!("Data in thread: {:?}", data);
     });
-    
+
     // 不能再使用 data，防止了数据竞争
     // println!("{:?}", data);  // 错误：data 已被移动
 }

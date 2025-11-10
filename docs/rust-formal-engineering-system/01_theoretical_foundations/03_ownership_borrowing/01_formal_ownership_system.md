@@ -394,7 +394,7 @@ $$\frac{\text{valid}(r, v) \land \text{no-conflict}(r, v)}{\text{borrow}(r, v) \
 fn main() {
     let s1 = String::from("hello");
     let s2 = s1;  // 所有权从s1移动到s2
-    
+
     // println!("{}", s1);  // 编译错误：s1已被移动
     println!("{}", s2);     // 正确：s2拥有字符串
 }
@@ -405,11 +405,11 @@ fn main() {
 ```rust
 fn main() {
     let mut v = vec![1, 2, 3];
-    
+
     let r1 = &v;        // 不可变借用
     let r2 = &v;        // 另一个不可变借用
     println!("{:?} {:?}", r1, r2);
-    
+
     let r3 = &mut v;    // 可变借用
     r3.push(4);
     println!("{:?}", r3);
@@ -445,7 +445,7 @@ fn main() {
     let data = Rc::new(vec![1, 2, 3]);
     let data_clone1 = Rc::clone(&data);
     let data_clone2 = Rc::clone(&data);
-    
+
     println!("Reference count: {}", Rc::strong_count(&data));
     // 输出: Reference count: 3
 }
@@ -528,17 +528,17 @@ fn main() {
   $$
   \forall v \in \mathbb{V}, \exists! x \in \mathbb{X}, Own(x, v)
   $$
-  
+
 - **定理 2（借用安全）**：
   $$
   \forall r, x, \alpha.\ Borrow(r, x, \alpha) \implies \text{NoDanglingRef}(r, \alpha)
   $$
-  
+
 - **定理 3（生命周期有界性）**：
   $$
   \forall r, x, \alpha.\ Borrow(r, x, \alpha) \implies \text{Lifetime}(r) \subseteq \text{Lifetime}(x)
   $$
-  
+
 - **证明思路**：
   采用结构体体体归纳法，分别对所有权移动、借用规则、生命周期推导进行归纳证明，详见[所有权系统形式化证明](06_theorems.md)。
 

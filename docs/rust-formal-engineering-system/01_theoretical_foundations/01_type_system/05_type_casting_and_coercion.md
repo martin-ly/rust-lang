@@ -55,7 +55,7 @@ use std::ops::Deref;
 // String 实现了 Deref<Target=str>
 let s = String::from("hello");
 // &String 被自动强制转换为 &str
-let slice: &str = &s; 
+let slice: &str = &s;
 
 // Box<T> 实现了 Deref<Target=T>
 fn print_integer(x: &i32) {
@@ -131,7 +131,7 @@ use std::convert::TryFrom;
 
 let big_number: i32 = 1000;
 // i32 到 u8 的转换可能会失败
-let result = u8::try_from(big_number); 
+let result = u8::try_from(big_number);
 assert!(result.is_err());
 ```
 

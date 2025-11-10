@@ -26,7 +26,7 @@
     - [6.1 常见类型的型变特征](#61-常见类型的型变特征)
     - [6.2 型变组合](#62-型变组合)
   - [7. 型变的实际意义](#7-型变的实际意义)
-  - [版本对齐说明与补正](#version-alignment-variance)
+  - [版本对齐说明与补正 {#version-alignment-variance}](#版本对齐说明与补正-version-alignment-variance)
   - [附：索引锚点与导航](#附索引锚点与导航)
     - [型变定义 {#型变定义}](#型变定义-型变定义)
     - [生命周期型变 {#生命周期型变}](#生命周期型变-生命周期型变)
@@ -167,10 +167,10 @@ struct Invariant<T> {
 fn example() {
     let mut dog = Dog;
     let dog_ref: &mut Dog = &mut dog;
-    
+
     // 以下转换在 Rust 中是不允许的
     // let animal_ref: &mut dyn Animal = dog_ref;
-    
+
     // 因为如果允许，可能导致类型安全问题：
     // *animal_ref = Cat;  // 这会将 Cat 放入 Dog 类型的内存中！
 }

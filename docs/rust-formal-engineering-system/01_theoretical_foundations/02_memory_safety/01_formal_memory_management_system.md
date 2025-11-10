@@ -40,7 +40,7 @@
     - [11.9.1 内存管理系统的核心特征](#1191-内存管理系统的核心特征)
     - [11.9.2 形式化保证](#1192-形式化保证)
     - [11.9.3 未来值值值发展方向](#1193-未来值值值发展方向)
-  - [版本对齐说明（内存管理与优化）](#version-alignment-memory-optimization)
+  - [版本对齐说明（内存管理与优化） {#version-alignment-memory-optimization}](#版本对齐说明内存管理与优化-version-alignment-memory-optimization)
     - [自定义分配器](#自定义分配器)
     - [内存池优化](#内存池优化)
     - [零拷贝优化](#零拷贝优化)
@@ -386,7 +386,7 @@ unsafe impl GlobalAlloc for CustomAllocator {
         }
         ptr
     }
-    
+
     unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
         System.dealloc(ptr, layout);
         self.allocated.fetch_sub(layout.size(), Ordering::Relaxed);
@@ -422,23 +422,23 @@ impl MemoryPool {
             pools: Arc::new(Mutex::new(HashMap::new())),
         }
     }
-    
+
     fn allocate(&self, size: usize) -> *mut u8 {
         let mut pools = self.pools.lock().unwrap();
-        
+
         if let Some(blocks) = pools.get_mut(&size) {
             if let Some(ptr) = blocks.pop() {
                 return ptr;
             }
         }
-        
+
         // 从系统分配器分配
         unsafe {
             let layout = Layout::from_size_align(size, 8).unwrap();
             System.alloc(layout)
         }
     }
-    
+
     fn deallocate(&self, ptr: *mut u8, size: usize) {
         let mut pools = self.pools.lock().unwrap();
         pools.entry(size).or_insert_with(Vec::new).push(ptr);
@@ -466,12 +466,12 @@ fn zero_copy_read(path: &str) -> Result<Vec<u8>, std::io::Error> {
     let mut file = File::open(path)?;
     let metadata = file.metadata()?;
     let mut buffer = Vec::with_capacity(metadata.len() as usize);
-    
+
     // 预分配内存，避免多次重新分配
     unsafe {
         buffer.set_len(metadata.len() as usize);
     }
-    
+
     file.read_exact(&mut buffer)?;
     Ok(buffer)
 }

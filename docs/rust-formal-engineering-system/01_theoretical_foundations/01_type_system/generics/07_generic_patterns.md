@@ -95,11 +95,11 @@ impl<T> Container<T> {
     fn new() -> Self {
         Container { data: Vec::new() }
     }
-    
+
     fn push(&mut self, item: T) {
         self.data.push(item);
     }
-    
+
     fn len(&self) -> usize {
         self.data.len()
     }
@@ -160,30 +160,30 @@ impl<T> GenericContainer<T> {
             capacity: 0,
         }
     }
-    
+
     fn with_capacity(capacity: usize) -> Self {
         GenericContainer {
             data: Vec::with_capacity(capacity),
             capacity,
         }
     }
-    
+
     fn push(&mut self, item: T) {
         self.data.push(item);
     }
-    
+
     fn pop(&mut self) -> Option<T> {
         self.data.pop()
     }
-    
+
     fn len(&self) -> usize {
         self.data.len()
     }
-    
+
     fn is_empty(&self) -> bool {
         self.data.is_empty()
     }
-    
+
     fn clear(&mut self) {
         self.data.clear();
     }
@@ -226,16 +226,16 @@ impl<T: Ord> SortedContainer<T> {
     fn new() -> Self {
         SortedContainer { data: Vec::new() }
     }
-    
+
     fn insert(&mut self, item: T) {
         let pos = self.data.binary_search(&item).unwrap_or_else(|e| e);
         self.data.insert(pos, item);
     }
-    
+
     fn contains(&self, item: &T) -> bool {
         self.data.binary_search(item).is_ok()
     }
-    
+
     fn remove(&mut self, item: &T) -> bool {
         if let Ok(pos) = self.data.binary_search(item) {
             self.data.remove(pos);
@@ -281,19 +281,19 @@ impl<T, U> PairContainer<T, U> {
     fn new(first: T, second: U) -> Self {
         PairContainer { first, second }
     }
-    
+
     fn get_first(&self) -> &T {
         &self.first
     }
-    
+
     fn get_second(&self) -> &U {
         &self.second
     }
-    
+
     fn set_first(&mut self, first: T) {
         self.first = first;
     }
-    
+
     fn set_second(&mut self, second: U) {
         self.second = second;
     }
@@ -498,7 +498,7 @@ where:
 ```rust
 trait Processor<T> {
     type Output;
-    
+
     fn process(&self, input: T) -> Self::Output;
     fn can_process(&self, input: &T) -> bool;
 }
@@ -507,11 +507,11 @@ struct StringProcessor;
 
 impl Processor<String> for StringProcessor {
     type Output = usize;
-    
+
     fn process(&self, input: String) -> usize {
         input.len()
     }
-    
+
     fn can_process(&self, input: &String) -> bool {
         !input.is_empty()
     }
@@ -521,11 +521,11 @@ struct NumberProcessor;
 
 impl Processor<i32> for NumberProcessor {
     type Output = f64;
-    
+
     fn process(&self, input: i32) -> f64 {
         input as f64 * 2.0
     }
-    
+
     fn can_process(&self, input: &i32) -> bool {
         *input > 0
     }
@@ -625,12 +625,12 @@ impl<T> GenericBuilder<T> {
     fn new() -> Self {
         GenericBuilder { data: None }
     }
-    
+
     fn with_data(mut self, data: T) -> Self {
         self.data = Some(data);
         self
     }
-    
+
     fn build(self) -> Result<T, String> {
         self.data.ok_or_else(|| "No data provided".to_string())
     }
@@ -673,12 +673,12 @@ impl<T: Clone + Display> ValidatedBuilder<T> {
             validation_rules: Vec::new(),
         }
     }
-    
+
     fn with_data(mut self, data: T) -> Self {
         self.data = Some(data);
         self
     }
-    
+
     fn with_validation<F>(mut self, rule: F) -> Self
     where
         F: Fn(&T) -> bool + 'static
@@ -686,16 +686,16 @@ impl<T: Clone + Display> ValidatedBuilder<T> {
         self.validation_rules.push(Box::new(rule));
         self
     }
-    
+
     fn build(self) -> Result<T, String> {
         let data = self.data.ok_or_else(|| "No data provided".to_string())?;
-        
+
         for (i, rule) in self.validation_rules.iter().enumerate() {
             if !rule(&data) {
                 return Err(format!("Validation rule {} failed for {}", i, data));
             }
         }
-        
+
         Ok(data)
     }
 }
@@ -742,7 +742,7 @@ impl<T> GenericIterator<T> {
 
 impl<T> Iterator for GenericIterator<T> {
     type Item = T;
-    
+
     fn next(&mut self) -> Option<T> {
         if self.index < self.data.len() {
             let item = self.data.remove(self.index);
@@ -809,7 +809,7 @@ where
     F: Fn(T) -> U
 {
     type Item = U;
-    
+
     fn next(&mut self) -> Option<U> {
         self.iter.next().map(&self.f)
     }
@@ -840,7 +840,7 @@ where
     F: Fn(&T) -> bool
 {
     type Item = T;
-    
+
     fn next(&mut self) -> Option<T> {
         while let Some(item) = self.iter.next() {
             if (self.predicate)(&item) {
@@ -901,7 +901,7 @@ impl StateMachine<Uninitialized> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn initialize(self, data: String) -> StateMachine<Initialized> {
         StateMachine {
             data,
@@ -926,7 +926,7 @@ impl StateMachine<Running> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn get_data(&self) -> &str {
         &self.data
     }
@@ -975,7 +975,7 @@ impl Measurement<Meter> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn to_meters(&self) -> f64 {
         self.value
     }
@@ -988,7 +988,7 @@ impl Measurement<Second> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn to_seconds(&self) -> f64 {
         self.value
     }

@@ -557,8 +557,8 @@ Rust支持五种内存排序级别：
 
 ```math
 Thread A:                 Thread B:
-x = 1;                   
-atomic.store(1, Release); 
+x = 1;
+atomic.store(1, Release);
                          if atomic.load(Acquire) == 1 {
                            assert_eq!(x, 1); // 必须成立
                          }
@@ -702,7 +702,7 @@ impl Protocol<Authenticated> {
     fn request(&self, data: Request) -> Response {
         // 发送请求，获取响应
     }
-    
+
     fn terminate(self) -> Protocol<Terminated> {
         // 发送终止请求，转换状态
     }
@@ -861,14 +861,14 @@ let pair = Arc::new((Mutex::new(false), Condvar::new()));
 ```rust
 async fn run_commands() {
     let mut handles = vec![];
-    
+
     for cmd in commands {
         let handle = tokio::process::Command::new(&cmd)
             .spawn()
             .expect("failed to spawn");
         handles.push(handle);
     }
-    
+
     for mut handle in handles {
         let status = handle.wait().await.expect("wait failed");
         println!("Process exited with: {}", status);
@@ -906,16 +906,16 @@ async fn process_output() {
         .stdout(Stdio::piped())
         .spawn()
         .expect("failed to spawn");
-        
+
     let stdout = child.stdout.take().unwrap();
     let mut reader = BufReader::new(stdout).lines();
-    
+
     while let Some(line) = reader.next_line().await.expect("read error") {
         if line.contains("error") {
             println!("Found error: {}", line);
         }
     }
-    
+
     let status = child.wait().await.expect("wait failed");
     println!("Process exited with: {}", status);
 }
@@ -1006,15 +1006,15 @@ async fn write_with_backpressure(mut writer: impl AsyncWrite, data: &[u8]) -> io
 async fn handle_signals() {
     let mut sigint = signal(SignalKind::interrupt())
         .expect("failed to create signal handler");
-        
+
     let mut sigterm = signal(SignalKind::terminate())
         .expect("failed to create signal handler");
-        
+
     tokio::select! {
         _ = sigint.recv() => println!("Received SIGINT"),
         _ = sigterm.recv() => println!("Received SIGTERM"),
     }
-    
+
     // 开始关闭程序
     shutdown().await;
 }
@@ -1048,7 +1048,7 @@ fn setup_signal_handlers() -> Result<(), Box<dyn Error>> {
     {
         use signal_hook::{iterator::Signals, consts::SIGUSR1};
         let signals = Signals::new(&[SIGUSR1])?;
-        
+
         thread::spawn(move || {
             for sig in signals.forever() {
                 match sig {
@@ -1058,12 +1058,12 @@ fn setup_signal_handlers() -> Result<(), Box<dyn Error>> {
             }
         });
     }
-    
+
     #[cfg(not(unix))]
     {
         // 备用机制或平台特定实现
     }
-    
+
     Ok(())
 }
 ```
@@ -1084,7 +1084,7 @@ fn setup_signal_handlers() -> Result<(), Box<dyn Error>> {
 fn setup_safe_signals() -> Result<(), Box<dyn Error>> {
     use signal_hook::pipe::Receiver;
     let (receiver, notifier) = signal_hook_tokio::Signals::new(&[SIGINT, SIGTERM])?;
-    
+
     // 信号现在变成了常规数据流，可以在安全的上下文中处理
     thread::spawn(move || {
         for signal in receiver.forever() {
@@ -1095,10 +1095,10 @@ fn setup_safe_signals() -> Result<(), Box<dyn Error>> {
             }
         }
     });
-    
+
     // 保持notifier活跃
     Box::leak(Box::new(notifier));
-    
+
     Ok(())
 }
 ```
@@ -1131,7 +1131,7 @@ Rust的`std::process::Command`抽象了这些差异，但某些高级功能（�
 #[cfg(unix)]
 fn daemonize() -> Result<(), Box<dyn Error>> {
     use nix::unistd::{fork, ForkResult};
-    
+
     match fork()? {
         ForkResult::Parent { child } => {
             println!("Forked child {}", child);
@@ -1165,7 +1165,7 @@ fn daemonize() -> Result<(), Box<dyn Error>> {
 ```rust
 fn create_child_with_pipe() -> Result<Child, io::Error> {
     let mut cmd = Command::new("child_process");
-    
+
     #[cfg(unix)]
     {
         use std::os::unix::io::AsRawFd;
@@ -1173,7 +1173,7 @@ fn create_child_with_pipe() -> Result<Child, io::Error> {
         // 在Unix上，需要确保fd在exec时不被继承
         unsafe { libc::fcntl(fd, libc::F_SETFD, libc::FD_CLOEXEC) };
     }
-    
+
     #[cfg(windows)]
     {
         use std::os::windows::io::AsRawHandle;
@@ -1181,7 +1181,7 @@ fn create_child_with_pipe() -> Result<Child, io::Error> {
         // 在Windows上，默认不继承，需要特别设置才会继承
         cmd.creation_flags(winapi::um::winbase::HANDLE_FLAG_INHERIT);
     }
-    
+
     cmd.spawn()
 }
 ```
@@ -1225,11 +1225,11 @@ fn prefork_server(listener: TcpListener, worker_count: usize) -> Result<(), Box<
                 _ => continue, // 父进程继续fork
             }
         }
-        
+
         // 父进程可以监控子进程
         // ...
     }
-    
+
     Ok(())
 }
 ```
@@ -1263,11 +1263,11 @@ impl<T: Serialize + DeserializeOwned> SharedSynchronized<T> {
     fn with_lock<R>(&self, f: impl FnOnce(&mut T) -> R) -> Result<R, Error> {
         let file_lock = FileLock::new(&self.lock_path)?;
         let guard = file_lock.lock()?;
-        
+
         let mut data = self.read()?;
         let result = f(&mut data);
         self.write(&data)?;
-        
+
         drop(guard);
         Ok(result)
     }
@@ -1297,13 +1297,13 @@ Rust中的实现需要使用平台特定API：
 #[cfg(unix)]
 fn limit_resources() -> Result<(), Box<dyn Error>> {
     use nix::sys::resource::{setrlimit, Resource, Rlim};
-    
+
     // 限制内存使用（示例：100MB）
     setrlimit(Resource::RLIMIT_AS, Rlim::from_raw(100 * 1024 * 1024), Rlim::INFINITY)?;
-    
+
     // 限制打开文件数
     setrlimit(Resource::RLIMIT_NOFILE, Rlim::from_raw(1024), Rlim::from_raw(1024))?;
-    
+
     Ok(())
 }
 

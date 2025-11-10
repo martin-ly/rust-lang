@@ -100,7 +100,7 @@ impl<T> PhantomContainer<T> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn len(&self) -> usize {
         self.data.len()
     }
@@ -309,7 +309,7 @@ impl Measurement<Meter> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn to_meters(&self) -> f64 {
         self.value
     }
@@ -322,7 +322,7 @@ impl Measurement<Second> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn to_seconds(&self) -> f64 {
         self.value
     }
@@ -427,7 +427,7 @@ impl StateMachine<Uninitialized> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn initialize(self, data: String) -> StateMachine<Initialized> {
         StateMachine {
             data,
@@ -452,7 +452,7 @@ impl StateMachine<Running> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn get_data(&self) -> &str {
         &self.data
     }
@@ -820,7 +820,7 @@ impl<T> CustomPhantom<T> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn get_type_name(&self) -> &'static str {
         std::any::type_name::<T>()
     }

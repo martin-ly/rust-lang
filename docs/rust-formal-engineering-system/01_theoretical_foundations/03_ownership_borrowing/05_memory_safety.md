@@ -203,10 +203,10 @@ $$\forall a \in \text{ArrayAccess}(P), \forall t \in \text{Time}(e): \text{Index
 fn main() {
     let arr = [1, 2, 3];
     let index = 5;
-    
+
     // 编译时检查
     // let value = arr[index];  // 如果index是常量，编译错误
-    
+
     // 运行时检查
     match arr.get(index) {
         Some(value) => println!("Value: {}", value),
@@ -229,7 +229,7 @@ $$\forall v \in \text{Vars}(P), \forall t \in \text{Time}(e): \text{IsUsed}(v, t
 fn main() {
     let x: i32;
     // println!("{}", x);  // 编译错误：x未初始化
-    
+
     x = 5;
     println!("{}", x);  // 正确：x已初始化
 }
@@ -250,24 +250,24 @@ use std::thread;
 
 fn main() {
     let mut data = vec![1, 2, 3];
-    
+
     // 以下代码不会编译
     // let handle = thread::spawn(|| {
     //     data.push(4);  // 尝试可变借用
     // });
-    // 
+    //
     // println!("{:?}", data);  // 尝试不可变借用
-    // 
+    //
     // handle.join().unwrap();
-    
+
     // 正确的方式
     let handle = thread::spawn(move || {
         data.push(4);  // 移动所有权
     });
-    
+
     // 不能再使用data
     // println!("{:?}", data);  // 编译错误
-    
+
     handle.join().unwrap();
 }
 ```
@@ -288,22 +288,22 @@ fn main() {
     {
         let v = vec![1, 2, 3];
     }  // v在这里被释放
-    
+
     // 显式泄漏
     let v = vec![1, 2, 3];
     std::mem::forget(v);  // v被泄漏
-    
+
     // 循环引用泄漏
     use std::rc::Rc;
     use std::cell::RefCell;
-    
+
     struct Node {
         next: Option<Rc<RefCell<Node>>>,
     }
-    
+
     let node1 = Rc::new(RefCell::new(Node { next: None }));
     let node2 = Rc::new(RefCell::new(Node { next: Some(Rc::clone(&node1)) }));
-    
+
     // 创建循环引用
     node1.borrow_mut().next = Some(Rc::clone(&node2));
     // node1和node2现在互相引用，将会泄漏

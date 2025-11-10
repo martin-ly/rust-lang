@@ -97,7 +97,7 @@ Operation ::= Alloc | Dealloc | Read | Write | Move
 
 ```text
 ∀ addr ∈ Address, ∀ size ∈ Size:
-  valid_access(addr, size) ⇒ 
+  valid_access(addr, size) ⇒
   addr + size ≤ allocated_region_end(addr)
 ```
 
@@ -105,7 +105,7 @@ Operation ::= Alloc | Dealloc | Read | Write | Move
 
 ```text
 ∀ T: Type, ∀ addr ∈ Address:
-  store_type(T, addr) ⇒ 
+  store_type(T, addr) ⇒
   aligned(addr, alignment_of(T))
 ```
 
@@ -134,7 +134,7 @@ OwnershipInvariant:
 **证明**：
 
 1. 初始分配时，值绑定到唯一变量
-2. Move操作移动所有权，源变量失去所有权  
+2. Move操作移动所有权，源变量失去所有权
 3. 类型系统确保同一值不能同时绑定到多个所有者
 4. ∴ 所有权唯一性保持 □
 
@@ -142,7 +142,7 @@ OwnershipInvariant:
 
 ```text
 ∀ x: Variable, ∀ e: Expression:
-  move(x) in e ⇒ 
+  move(x) in e ⇒
   ∀ subsequent_access: ¬can_access(x, subsequent_access)
 ```
 
@@ -159,7 +159,7 @@ OwnershipInvariant:
 
 ```text
 ∀ v ∈ Value:
-  Ownership(v) = Some(owner) ∧ 
+  Ownership(v) = Some(owner) ∧
   scope_end(owner) ⇒
   exactly_one_drop(v)
 ```
@@ -181,7 +181,7 @@ Mutability ::= Shared | Unique
 BorrowConstraints:
   ∀ loc ∈ Location, ∀ lt ∈ Lifetime:
     |{r | Borrow(r) = (loc, lt, Unique)}| ≤ 1 ∧
-    (∃ unique_borrow(loc, lt) ⇒ 
+    (∃ unique_borrow(loc, lt) ⇒
      ¬∃ other_borrow(loc, lt))
 ```
 
@@ -212,7 +212,7 @@ BorrowConstraints:
 
 1. 借用检查器执行别名分析
 2. 可变引用要求独占访问：isolation(&mut T)
-3. 共享引用允许多读：aliasing(&T)  
+3. 共享引用允许多读：aliasing(&T)
 4. 类型系统禁止可变与不可变引用共存
 5. ∴ 无数据竞争 □
 
@@ -229,7 +229,7 @@ SubLifetime: Lifetime × Lifetime → Boolean
 
 ```text
 ∀ 'a, 'b: Lifetime:
-  'a: 'b ∧ valid_reference(&'a T) ⇒ 
+  'a: 'b ∧ valid_reference(&'a T) ⇒
   valid_reference(&'b T)
 ```
 
@@ -297,7 +297,7 @@ trait Allocator {
 
 ```text
 ∀ layout: Layout, ∀ ptr: NonNull<u8>:
-  allocate(layout) = Ok(ptr) ⇒ 
+  allocate(layout) = Ok(ptr) ⇒
   aligned(ptr, layout.align())
 ```
 
@@ -305,7 +305,7 @@ trait Allocator {
 
 ```text
 ∀ layout: Layout, ∀ ptr: NonNull<u8>:
-  allocate(layout) = Ok(ptr) ⇒ 
+  allocate(layout) = Ok(ptr) ⇒
   usable_size(ptr) ≥ layout.size()
 ```
 
@@ -313,7 +313,7 @@ trait Allocator {
 
 ```text
 ∀ ptr: NonNull<u8>, ∀ layout: Layout:
-  deallocate(ptr, layout) ⇒ 
+  deallocate(ptr, layout) ⇒
   ∀ future_dealloc: future_dealloc(ptr) = Error
 ```
 
@@ -334,7 +334,7 @@ unsafe {
 
 ```text
 ∀ safe_function f, ∀ unsafe_impl impl:
-  implements(f, impl) ∧ 
+  implements(f, impl) ∧
   maintains_invariants(impl) ⇒
   safe_to_call(f)
 ```
@@ -342,7 +342,7 @@ unsafe {
 **验证方法**：
 
 1. 前置条件验证
-2. 不变量维护检查  
+2. 不变量维护检查
 3. 后置条件保证
 4. 异常安全分析
 
@@ -353,7 +353,7 @@ unsafe {
 ```text
 ValidPointer: *const T → Boolean
 ValidPointer(ptr) ⟺
-  allocated(ptr) ∧ 
+  allocated(ptr) ∧
   aligned(ptr, align_of::<T>()) ∧
   type_compatible(ptr, T)
 ```
@@ -397,7 +397,7 @@ happens_before: Operation × Operation → Boolean
 ### 异常安全级别
 
 ```text
-ExceptionSafety ::= 
+ExceptionSafety ::=
   | NoThrow      // 保证不抛出异常
   | BasicSafety  // 基本安全保证
   | StrongSafety // 强安全保证
@@ -438,7 +438,7 @@ Invariant: ∀ r: Resource:
 ### 证明大纲
 
 1. **所有权系统** → 内存安全
-2. **借用检查** → 别名安全  
+2. **借用检查** → 别名安全
 3. **生命周期分析** → 引用有效性
 4. **类型系统** → 操作合法性
 5. **Send/Sync traits** → 并发安全
@@ -474,7 +474,7 @@ Invariant: ∀ r: Resource:
 ## 维护信息
 
 - **依赖关系**: 所有权系统、类型检查器、借用分析
-- **更新频率**: 随内存模型演进更新  
+- **更新频率**: 随内存模型演进更新
 - **测试覆盖**: 内存安全的完整测试套件
 - **工具支持**: rustc, miri, prusti, valgrind
 

@@ -6,7 +6,7 @@
 
 ﻿# 类型系统模块总览
 
-## 模块结构体体体
+## 模块结构体
 
 - 理论基础：01_formal_type_system.md
 - 生命周期系统：02_lifetime_system.md

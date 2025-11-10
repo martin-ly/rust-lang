@@ -1,5 +1,4 @@
-﻿
-# Rust进程与同步机制：形式化分析与系统实现
+﻿# Rust进程与同步机制：形式化分析与系统实现
 
 ## 目录
 
@@ -375,10 +374,10 @@ for i in 0..3 {
     thread::spawn(move || {
         // 每个线程执行各自的任务
         println!("Thread {} before barrier", i);
-        
+
         // 等待所有线程到达屏障
         b.wait();
-        
+
         // 所有线程一起继续执行
         println!("Thread {} after barrier", i);
     });
@@ -623,11 +622,11 @@ impl LockFreeCounter {
     fn new() -> Self {
         Self { value: AtomicUsize::new(0) }
     }
-    
+
     fn increment(&self) -> usize {
         self.value.fetch_add(1, Ordering::SeqCst)
     }
-    
+
     fn get(&self) -> usize {
         self.value.load(Ordering::SeqCst)
     }
@@ -719,18 +718,18 @@ fn concurrent_increment_test() {
         let counter = AtomicUsize::new(0);
         let c1 = &counter;
         let c2 = &counter;
-        
+
         let t1 = thread::spawn(move || {
             c1.fetch_add(1, Ordering::SeqCst);
         });
-        
+
         let t2 = thread::spawn(move || {
             c2.fetch_add(1, Ordering::SeqCst);
         });
-        
+
         t1.join().unwrap();
         t2.join().unwrap();
-        
+
         assert_eq!(counter.load(Ordering::SeqCst), 2);
     });
 }

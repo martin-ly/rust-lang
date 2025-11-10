@@ -55,11 +55,11 @@ fn main() {
     let int_result = identity(42);
     let string_result = identity("hello".to_string());
     let float_result = identity(3.14);
-    
+
     println!("Integer: {}", int_result);
     println!("String: {}", string_result);
     println!("Float: {}", float_result);
-    
+
     // Type inference works automatically
     assert_eq!(int_result, 42);
     assert_eq!(string_result, "hello");
@@ -90,23 +90,23 @@ fn main() {
     // Integer swap
     let (x, y) = swap(1, 2);
     assert_eq!((x, y), (2, 1));
-    
+
     // String swap
     let (s1, s2) = swap("hello".to_string(), "world".to_string());
     assert_eq!(s1, "world");
     assert_eq!(s2, "hello");
-    
+
     // Custom type swap
     #[derive(Debug, PartialEq)]
     struct Point {
         x: i32,
         y: i32,
     }
-    
+
     let p1 = Point { x: 1, y: 2 };
     let p2 = Point { x: 3, y: 4 };
     let (p3, p4) = swap(p1, p2);
-    
+
     assert_eq!(p3.x, 3);
     assert_eq!(p3.y, 4);
     assert_eq!(p4.x, 1);
@@ -129,23 +129,23 @@ impl<T> Container<T> {
     fn new() -> Self {
         Container { data: Vec::new() }
     }
-    
+
     fn push(&mut self, item: T) {
         self.data.push(item);
     }
-    
+
     fn pop(&mut self) -> Option<T> {
         self.data.pop()
     }
-    
+
     fn len(&self) -> usize {
         self.data.len()
     }
-    
+
     fn is_empty(&self) -> bool {
         self.data.is_empty()
     }
-    
+
     fn clear(&mut self) {
         self.data.clear();
     }
@@ -157,15 +157,15 @@ fn main() {
     int_container.push(1);
     int_container.push(2);
     int_container.push(3);
-    
+
     assert_eq!(int_container.len(), 3);
     assert_eq!(int_container.pop(), Some(3));
     assert_eq!(int_container.len(), 2);
-    
+
     let mut string_container = Container::<String>::new();
     string_container.push("hello".to_string());
     string_container.push("world".to_string());
-    
+
     assert_eq!(string_container.len(), 2);
     assert_eq!(string_container.pop(), Some("world".to_string()));
 }
@@ -198,30 +198,30 @@ fn main() {
     print(42);
     print("hello");
     print(3.14);
-    
+
     // Works with custom types that implement Display
     #[derive(Debug)]
     struct Person {
         name: String,
         age: u32,
     }
-    
+
     impl Display for Person {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             write!(f, "{} (age {})", self.name, self.age)
         }
     }
-    
+
     let person = Person {
         name: "Alice".to_string(),
         age: 30,
     };
     print(person);
-    
+
     // Works with collections
     let numbers = vec![1, 2, 3, 4, 5];
     print_multiple(&numbers);
-    
+
     let people = vec![
         Person { name: "Alice".to_string(), age: 30 },
         Person { name: "Bob".to_string(), age: 25 },
@@ -264,26 +264,26 @@ fn main() {
     // Integer comparisons
     assert_eq!(max(10, 20), 20);
     assert_eq!(min(10, 20), 10);
-    
+
     // String comparisons
     assert_eq!(max("apple", "banana"), "banana");
     assert_eq!(min("apple", "banana"), "apple");
-    
+
     // Custom type comparisons
     #[derive(Debug, PartialEq, Eq, PartialOrd, Ord)]
     struct Student {
         name: String,
         grade: u32,
     }
-    
+
     let mut students = vec![
         Student { name: "Alice".to_string(), grade: 85 },
         Student { name: "Bob".to_string(), grade: 92 },
         Student { name: "Charlie".to_string(), grade: 78 },
     ];
-    
+
     sort(&mut students);
-    
+
     assert_eq!(find_max(&students).unwrap().name, "Bob");
     assert_eq!(find_min(&students).unwrap().name, "Charlie");
 }
@@ -315,32 +315,32 @@ fn process_items<T: Clone + Display + Debug>(items: &[T]) -> Vec<T> {
 // Usage
 fn main() {
     use std::fmt::Debug;
-    
+
     // Works with types that implement both Clone and Display
     let result = print_and_clone("hello".to_string());
     assert_eq!(result, "hello");
-    
+
     let result = print_and_clone(42);
     assert_eq!(result, 42);
-    
+
     // Custom type with multiple trait implementations
     #[derive(Debug, Clone)]
     struct Product {
         name: String,
         price: f64,
     }
-    
+
     impl Display for Product {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             write!(f, "{} - ${:.2}", self.name, self.price)
         }
     }
-    
+
     let products = vec![
         Product { name: "Laptop".to_string(), price: 999.99 },
         Product { name: "Mouse".to_string(), price: 29.99 },
     ];
-    
+
     let processed = process_items(&products);
     assert_eq!(processed.len(), 2);
 }
@@ -385,7 +385,7 @@ where
     F: Fn(T) -> U
 {
     type Item = U;
-    
+
     fn next(&mut self) -> Option<U> {
         self.iter.next().map(&self.f)
     }
@@ -395,14 +395,14 @@ where
 fn main() {
     let numbers = vec![1, 2, 3, 4, 5];
     let doubled = MapIterator::new(numbers.into_iter(), |x| x * 2);
-    
+
     let result: Vec<i32> = doubled.collect();
     assert_eq!(result, vec![2, 4, 6, 8, 10]);
-    
+
     // String transformation
     let words = vec!["hello", "world", "rust"];
     let uppercased = MapIterator::new(words.into_iter(), |s| s.to_uppercase());
-    
+
     let result: Vec<String> = uppercased.collect();
     assert_eq!(result, vec!["HELLO", "WORLD", "RUST"]);
 }
@@ -427,12 +427,12 @@ impl<T> Builder<T> {
             validations: Vec::new(),
         }
     }
-    
+
     fn with_data(mut self, data: T) -> Self {
         self.data = Some(data);
         self
     }
-    
+
     fn with_validation<F>(mut self, validation: F) -> Self
     where
         F: Fn(&T) -> bool + 'static
@@ -440,16 +440,16 @@ impl<T> Builder<T> {
         self.validations.push(Box::new(validation));
         self
     }
-    
+
     fn build(self) -> Result<T, String> {
         let data = self.data.ok_or_else(|| "No data provided".to_string())?;
-        
+
         for (i, validation) in self.validations.iter().enumerate() {
             if !validation(&data) {
                 return Err(format!("Validation {} failed", i));
             }
         }
-        
+
         Ok(data)
     }
 }
@@ -462,26 +462,26 @@ fn main() {
         .with_validation(|x| *x > 0)
         .with_validation(|x| *x < 100)
         .build();
-    
+
     assert!(result.is_ok());
     assert_eq!(result.unwrap(), 42);
-    
+
     // String builder with validation
     let result = Builder::<String>::new()
         .with_data("hello".to_string())
         .with_validation(|s| !s.is_empty())
         .with_validation(|s| s.len() < 10)
         .build();
-    
+
     assert!(result.is_ok());
     assert_eq!(result.unwrap(), "hello");
-    
+
     // Failed validation
     let result = Builder::<i32>::new()
         .with_data(-5)
         .with_validation(|x| *x > 0)
         .build();
-    
+
     assert!(result.is_err());
 }
 ```
@@ -515,7 +515,7 @@ impl StateMachine<Uninitialized> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn initialize(self, data: String) -> StateMachine<Initialized> {
         StateMachine {
             data,
@@ -532,7 +532,7 @@ impl StateMachine<Initialized> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn get_data(&self) -> &str {
         &self.data
     }
@@ -546,11 +546,11 @@ impl StateMachine<Running> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn get_data(&self) -> &str {
         &self.data
     }
-    
+
     fn update_data(&mut self, new_data: String) {
         self.data = new_data;
     }
@@ -564,7 +564,7 @@ impl StateMachine<Stopped> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn get_data(&self) -> &str {
         &self.data
     }
@@ -574,27 +574,27 @@ impl StateMachine<Stopped> {
 fn main() {
     // Create new state machine
     let machine = StateMachine::<Uninitialized>::new();
-    
+
     // Initialize
     let machine = machine.initialize("Hello, World!".to_string());
     assert_eq!(machine.get_data(), "Hello, World!");
-    
+
     // Start
     let mut machine = machine.start();
     assert_eq!(machine.get_data(), "Hello, World!");
-    
+
     // Update data while running
     machine.update_data("Updated data".to_string());
     assert_eq!(machine.get_data(), "Updated data");
-    
+
     // Stop
     let machine = machine.stop();
     assert_eq!(machine.get_data(), "Updated data");
-    
+
     // Restart
     let machine = machine.restart();
     assert_eq!(machine.get_data(), "Updated data");
-    
+
     // Invalid transitions are prevented at compile time
     // let machine = StateMachine::<Uninitialized>::new();
     // machine.start(); // Compile error: method not found
@@ -630,7 +630,7 @@ impl DatabaseConnection<ReadOnly> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn query(&self, sql: &str) -> Result<String, String> {
         Ok(format!("Read-only query: {}", sql))
     }
@@ -643,11 +643,11 @@ impl DatabaseConnection<ReadWrite> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn query(&self, sql: &str) -> Result<String, String> {
         Ok(format!("Read-write query: {}", sql))
     }
-    
+
     fn execute(&self, sql: &str) -> Result<usize, String> {
         Ok(format!("Executed: {}", sql).len())
     }
@@ -660,19 +660,19 @@ impl DatabaseConnection<Admin> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn query(&self, sql: &str) -> Result<String, String> {
         Ok(format!("Admin query: {}", sql))
     }
-    
+
     fn execute(&self, sql: &str) -> Result<usize, String> {
         Ok(format!("Admin executed: {}", sql).len())
     }
-    
+
     fn create_user(&self, username: &str) -> Result<(), String> {
         Ok(println!("Created user: {}", username))
     }
-    
+
     fn drop_database(&self, name: &str) -> Result<(), String> {
         Ok(println!("Dropped database: {}", name))
     }
@@ -686,7 +686,7 @@ fn main() {
     );
     let result = readonly.query("SELECT * FROM users");
     assert!(result.is_ok());
-    
+
     // Read-write connection
     let readwrite = DatabaseConnection::<ReadWrite>::new_readwrite(
         "postgresql://localhost/db".to_string()
@@ -695,7 +695,7 @@ fn main() {
     assert!(result.is_ok());
     let result = readwrite.execute("INSERT INTO users VALUES (1, 'Alice')");
     assert!(result.is_ok());
-    
+
     // Admin connection
     let admin = DatabaseConnection::<Admin>::new_admin(
         "postgresql://localhost/db".to_string()
@@ -704,7 +704,7 @@ fn main() {
     assert!(result.is_ok());
     let result = admin.drop_database("olddb");
     assert!(result.is_ok());
-    
+
     // Type safety prevents invalid operations
     // readonly.execute("INSERT ..."); // Compile error: method not found
     // readwrite.create_user("user"); // Compile error: method not found
@@ -761,25 +761,25 @@ impl<T: ConfigValue> Configuration<T> {
             values: HashMap::new(),
         }
     }
-    
+
     fn set(&mut self, key: String, value: T) -> Result<(), String> {
         value.validate()?;
         self.values.insert(key, value);
         Ok(())
     }
-    
+
     fn get(&self, key: &str) -> Option<&T> {
         self.values.get(key)
     }
-    
+
     fn remove(&mut self, key: &str) -> Option<T> {
         self.values.remove(key)
     }
-    
+
     fn keys(&self) -> Vec<&String> {
         self.values.keys().collect()
     }
-    
+
     fn len(&self) -> usize {
         self.values.len()
     }
@@ -791,28 +791,28 @@ fn main() {
     let mut string_config = Configuration::<String>::new();
     string_config.set("app_name".to_string(), "MyApp".to_string()).unwrap();
     string_config.set("version".to_string(), "1.0.0".to_string()).unwrap();
-    
+
     assert_eq!(string_config.get("app_name"), Some(&"MyApp".to_string()));
     assert_eq!(string_config.len(), 2);
-    
+
     // Integer configuration
     let mut int_config = Configuration::<i32>::new();
     int_config.set("port".to_string(), 8080).unwrap();
     int_config.set("timeout".to_string(), 30).unwrap();
-    
+
     assert_eq!(int_config.get("port"), Some(&8080));
-    
+
     // Boolean configuration
     let mut bool_config = Configuration::<bool>::new();
     bool_config.set("debug".to_string(), true).unwrap();
     bool_config.set("production".to_string(), false).unwrap();
-    
+
     assert_eq!(bool_config.get("debug"), Some(&true));
-    
+
     // Validation errors
     let result = string_config.set("empty".to_string(), "".to_string());
     assert!(result.is_err());
-    
+
     let result = int_config.set("negative".to_string(), -5);
     assert!(result.is_err());
 }
@@ -846,25 +846,25 @@ fn add_f64(a: f64, b: f64) -> f64 {
 // Performance test
 fn main() {
     let iterations = 1_000_000;
-    
+
     // Test generic function
     let start = Instant::now();
     for i in 0..iterations {
         let _ = generic_add(i as i32, 1);
     }
     let generic_time = start.elapsed();
-    
+
     // Test monomorphic function
     let start = Instant::now();
     for i in 0..iterations {
         let _ = add_i32(i as i32, 1);
     }
     let mono_time = start.elapsed();
-    
+
     println!("Generic time: {:?}", generic_time);
     println!("Monomorphic time: {:?}", mono_time);
     println!("Difference: {:?}", generic_time - mono_time);
-    
+
     // The difference should be negligible (zero-cost abstraction)
     assert!(generic_time - mono_time < std::time::Duration::from_millis(1));
 }
@@ -913,7 +913,7 @@ fn main() {
     let iterations = 1_000_000;
     let adder = Adder;
     let multiplier = Multiplier;
-    
+
     // Test generic function
     let start = Instant::now();
     for i in 0..iterations {
@@ -921,7 +921,7 @@ fn main() {
         let _ = generic_process(&multiplier, i);
     }
     let generic_time = start.elapsed();
-    
+
     // Test trait object function
     let start = Instant::now();
     for i in 0..iterations {
@@ -929,12 +929,12 @@ fn main() {
         let _ = trait_object_process(&multiplier, i);
     }
     let trait_object_time = start.elapsed();
-    
+
     println!("Generic time: {:?}", generic_time);
     println!("Trait object time: {:?}", trait_object_time);
-    println!("Generic is {}x faster", 
+    println!("Generic is {}x faster",
              trait_object_time.as_nanos() as f64 / generic_time.as_nanos() as f64);
-    
+
     // Generic should be faster due to static dispatch
     assert!(generic_time < trait_object_time);
 }

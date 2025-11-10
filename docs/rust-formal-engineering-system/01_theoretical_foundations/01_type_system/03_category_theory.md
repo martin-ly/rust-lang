@@ -136,7 +136,7 @@ fn invariant_example() {
     // 可变引用是不变函子
     let mut dog = Dog;
     let dog_ref = &mut dog;
-    
+
     // 不能进行类型转换
     // let animal_ref: &mut dyn Animal = dog_ref;
 }
@@ -155,10 +155,10 @@ fn invariant_example() {
 fn option_monad() {
     // 单位（unit/return）操作
     let x: Option<i32> = Some(5);
-    
+
     // 绑定（bind）操作
     let y = x.and_then(|v| Some(v * 2));
-    
+
     // 单子定律保证了操作的一致性
     assert_eq!(Some(5).and_then(|x| Some(x * 2)), Some(10));
 }
@@ -173,10 +173,10 @@ fn option_monad() {
 fn result_monad() -> Result<i32, String> {
     // 单位操作
     let x: Result<i32, String> = Ok(5);
-    
+
     // 绑定操作
     let y = x.and_then(|v| Ok(v * 2))?;
-    
+
     Ok(y)
 }
 ```
@@ -194,7 +194,7 @@ fn result_monad() -> Result<i32, String> {
 fn ownership_transfer() {
     let s = String::from("hello");
     let s2 = s;  // 所有权移动，s 不再有效
-    
+
     // 在范畴论中，这可以理解为线性态射
     // 每个资源只能被使用一次
 }
@@ -237,7 +237,7 @@ trait Functor<A> {
 // 为 Option 实现 Functor
 impl<A> Functor<A> for Option<A> {
     type Target<B> = Option<B>;
-    
+
     fn map<B, F>(self, f: F) -> Option<B>
     where
         F: FnOnce(A) -> B,

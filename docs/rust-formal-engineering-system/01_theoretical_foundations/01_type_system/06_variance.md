@@ -123,7 +123,7 @@ fn evil_covariance() {
     // let mut cat = Cat;
     // animal_ref = &mut cat; // 步骤 2: 将一个 &mut Cat 赋给 &mut Animal
                              // 这是协变的核心：子类型可以替代父类型。
-    
+
     // 如果步骤 2 成功，`animal_ref` 现在指向一个 `Cat`。
     // 但是，`dog` 变量的类型仍然是 `Dog`！
     // 我们通过一个类型为 `&mut Animal` 的引用，将一个 `Cat` 写入了一个 `Dog` 类型的位置。

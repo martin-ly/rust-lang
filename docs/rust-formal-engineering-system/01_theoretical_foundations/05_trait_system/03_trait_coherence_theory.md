@@ -2,65 +2,67 @@
 
 ## 📊 目录
 
-- [文档状态](#文档状态)
-- [概述](#概述)
-- [一致性问题的形式化](#一致性问题的形式化)
-  - [核心一致性原则](#核心一致性原则)
-  - [重叠性定义](#重叠性定义)
-- [孤儿规则 (Orphan Rule)](#孤儿规则-orphan-rule)
-  - [基础孤儿规则](#基础孤儿规则)
-  - [覆盖条件 (Covered Condition)](#覆盖条件-covered-condition)
-  - [孤儿规则的正确性证明](#孤儿规则的正确性证明)
-    - [定理1：孤儿规则防止远程冲突](#定理1孤儿规则防止远程冲突)
-- [一致性检查算法](#一致性检查算法)
-  - [重叠检测算法](#重叠检测算法)
-  - [一致性验证的复杂性](#一致性验证的复杂性)
-- [泛型特质的一致性](#泛型特质的一致性)
-  - [泛型参数的一致性约束](#泛型参数的一致性约束)
-  - [全覆盖impl的限制](#全覆盖impl的限制)
-- [关联类型的一致性](#关联类型的一致性)
-  - [关联类型投影](#关联类型投影)
-  - [投影类型的一致性](#投影类型的一致性)
-- [高阶特质的一致性](#高阶特质的一致性)
-  - [高阶类型变量 (HRTB)](#高阶类型变量-hrtb)
-  - [HRTB的一致性挑战](#hrtb的一致性挑战)
-- [特质对象的一致性](#特质对象的一致性)
-  - [对象安全与一致性](#对象安全与一致性)
-  - [虚函数表的一致性](#虚函数表的一致性)
-- [条件编译的一致性影响](#条件编译的一致性影响)
-  - [cfg属性的一致性问题](#cfg属性的一致性问题)
-  - [条件一致性规则](#条件一致性规则)
-- [宏展开的一致性](#宏展开的一致性)
-  - [宏生成impl的一致性检查](#宏生成impl的一致性检查)
-  - [宏一致性验证](#宏一致性验证)
-- [负向推理 (Negative Reasoning)](#负向推理-negative-reasoning)
-  - [负向impl (RFC建议)](#负向impl-rfc建议)
-  - [负向推理的一致性](#负向推理的一致性)
-- [一致性错误的诊断](#一致性错误的诊断)
-  - [错误类型分类](#错误类型分类)
-  - [错误报告的精确性](#错误报告的精确性)
-- [未来值值值扩展的一致性考虑](#未来值值值扩展的一致性考虑)
-  - [特化 (Specialization)](#特化-specialization)
-  - [特化的一致性规则](#特化的一致性规则)
-  - [高阶关联类型 (GATs)](#高阶关联类型-gats)
-  - [GATs的一致性挑战](#gats的一致性挑战)
-- [实现细节](#实现细节)
-  - [rustc中的一致性检查](#rustc中的一致性检查)
-  - [一致性检查的优化](#一致性检查的优化)
-- [案例研究](#案例研究)
-  - [案例1：标准库的一致性](#案例1标准库的一致性)
-  - [案例2：第三方库的一致性冲突](#案例2第三方库的一致性冲突)
-- [工具支持](#工具支持)
-  - [一致性检查工具](#一致性检查工具)
-  - [自定义一致性检查](#自定义一致性检查)
-- [相关模块](#相关模块)
-- [参考文献](#参考文献)
-- [维护信息](#维护信息)
+- [特质一致性理论：类型类系统的全局一致性保证](#特质一致性理论类型类系统的全局一致性保证)
+  - [📊 目录](#-目录)
+  - [文档状态](#文档状态)
+  - [概述](#概述)
+  - [一致性问题的形式化](#一致性问题的形式化)
+    - [核心一致性原则](#核心一致性原则)
+    - [重叠性定义](#重叠性定义)
+  - [孤儿规则 (Orphan Rule)](#孤儿规则-orphan-rule)
+    - [基础孤儿规则](#基础孤儿规则)
+    - [覆盖条件 (Covered Condition)](#覆盖条件-covered-condition)
+    - [孤儿规则的正确性证明](#孤儿规则的正确性证明)
+      - [定理1：孤儿规则防止远程冲突](#定理1孤儿规则防止远程冲突)
+  - [一致性检查算法](#一致性检查算法)
+    - [重叠检测算法](#重叠检测算法)
+    - [一致性验证的复杂性](#一致性验证的复杂性)
+  - [泛型特质的一致性](#泛型特质的一致性)
+    - [泛型参数的一致性约束](#泛型参数的一致性约束)
+    - [全覆盖impl的限制](#全覆盖impl的限制)
+  - [关联类型的一致性](#关联类型的一致性)
+    - [关联类型投影](#关联类型投影)
+    - [投影类型的一致性](#投影类型的一致性)
+  - [高阶特质的一致性](#高阶特质的一致性)
+    - [高阶类型变量 (HRTB)](#高阶类型变量-hrtb)
+    - [HRTB的一致性挑战](#hrtb的一致性挑战)
+  - [特质对象的一致性](#特质对象的一致性)
+    - [对象安全与一致性](#对象安全与一致性)
+    - [虚函数表的一致性](#虚函数表的一致性)
+  - [条件编译的一致性影响](#条件编译的一致性影响)
+    - [cfg属性的一致性问题](#cfg属性的一致性问题)
+    - [条件一致性规则](#条件一致性规则)
+  - [宏展开的一致性](#宏展开的一致性)
+    - [宏生成impl的一致性检查](#宏生成impl的一致性检查)
+    - [宏一致性验证](#宏一致性验证)
+  - [负向推理 (Negative Reasoning)](#负向推理-negative-reasoning)
+    - [负向impl (RFC建议)](#负向impl-rfc建议)
+    - [负向推理的一致性](#负向推理的一致性)
+  - [一致性错误的诊断](#一致性错误的诊断)
+    - [错误类型分类](#错误类型分类)
+    - [错误报告的精确性](#错误报告的精确性)
+  - [未来值值值扩展的一致性考虑](#未来值值值扩展的一致性考虑)
+    - [特化 (Specialization)](#特化-specialization)
+    - [特化的一致性规则](#特化的一致性规则)
+    - [高阶关联类型 (GATs)](#高阶关联类型-gats)
+    - [GATs的一致性挑战](#gats的一致性挑战)
+  - [实现细节](#实现细节)
+    - [rustc中的一致性检查](#rustc中的一致性检查)
+    - [一致性检查的优化](#一致性检查的优化)
+  - [案例研究](#案例研究)
+    - [案例1：标准库的一致性](#案例1标准库的一致性)
+    - [案例2：第三方库的一致性冲突](#案例2第三方库的一致性冲突)
+  - [工具支持](#工具支持)
+    - [一致性检查工具](#一致性检查工具)
+    - [自定义一致性检查](#自定义一致性检查)
+  - [相关模块](#相关模块)
+  - [参考文献](#参考文献)
+  - [维护信息](#维护信息)
 
 ## 文档状态
 
 - **版本**: 1.0
-- **最后更新**: 2025-01-01  
+- **最后更新**: 2025-01-01
 - **维护者**: Rust特质系统工作组
 - **审核状态**: 待审核
 
@@ -85,8 +87,8 @@ Coherence_Principle:
 
 ```text
 Overlap: (Impl₁, Impl₂) → Boolean
-Overlap(impl₁, impl₂) ⟺ 
-  ∃ substitution σ: 
+Overlap(impl₁, impl₂) ⟺
+  ∃ substitution σ:
     unify(σ(head(impl₁)), σ(head(impl₂))) ≠ ⊥
 ```
 
@@ -116,7 +118,7 @@ Covered(T, [P₁..Pₙ]) ⟺
 
 ```text
 ∀ impl₁ ∈ crate₁, ∀ impl₂ ∈ crate₂:
-  satisfies_orphan_rule(impl₁) ∧ 
+  satisfies_orphan_rule(impl₁) ∧
   satisfies_orphan_rule(impl₂) ∧
   crate₁ ≠ crate₂
   ⟹ ¬overlap(impl₁, impl₂)
@@ -137,10 +139,10 @@ Covered(T, [P₁..Pₙ]) ⟺
 Algorithm: OverlapCheck(impl₁, impl₂)
 Input: impl₁: impl Trait<P₁> for T₁ where C₁
        impl₂: impl Trait<P₂> for T₂ where C₂
-       
+
 1. σ ← most_general_unifier(T₁, T₂)
 2. if σ = ⊥: return NoOverlap
-3. φ₁ ← apply_substitution(σ, P₁)  
+3. φ₁ ← apply_substitution(σ, P₁)
 4. φ₂ ← apply_substitution(σ, P₂)
 5. τ ← most_general_unifier(φ₁, φ₂)
 6. if τ = ⊥: return NoOverlap
@@ -181,8 +183,8 @@ impl<T> Display for T { ... }  // 全覆盖impl
 
 ```text
 UniversalImpl: impl<T> Trait for T
-Restriction: 
-  ∀ universal_impl: 
+Restriction:
+  ∀ universal_impl:
     must_be_in_trait_defining_crate(universal_impl) ∨
     must_be_fundamental_trait(Trait)
 ```
@@ -223,8 +225,8 @@ ProjectionCoherence:
 ### 高阶类型变量 (HRTB)
 
 ```rust
-fn higher_ranked<F>() 
-where 
+fn higher_ranked<F>()
+where
     F: for<'a> Fn(&'a str) -> &'a str
 {
     // F必须对所有生命周期'a都满足约束
@@ -237,7 +239,7 @@ where
 HRTBCoherence:
   ∀ impl₁: impl<F: for<'a> Trait<'a>> SomeTrait for F
   ∀ impl₂: impl<F: Trait<'static>> SomeTrait for F
-  
+
   Question: overlap(impl₁, impl₂)?
 ```
 
@@ -269,7 +271,7 @@ VTableCoherence:
 #[cfg(feature = "std")]
 impl Display for MyType { ... }
 
-#[cfg(not(feature = "std"))] 
+#[cfg(not(feature = "std"))]
 impl Display for MyType { ... }
 ```
 
@@ -278,7 +280,7 @@ impl Display for MyType { ... }
 ```text
 ConditionalCoherence:
   ∀ impl₁, impl₂ with cfg conditions C₁, C₂:
-    overlap(impl₁, impl₂) ⟹ 
+    overlap(impl₁, impl₂) ⟹
     mutually_exclusive(C₁, C₂)
 ```
 
@@ -325,9 +327,9 @@ NegativeCoherence:
 ### 错误类型分类
 
 ```text
-CoherenceError ::= 
+CoherenceError ::=
   | OverlapError(Impl, Impl)
-  | OrphanError(Impl)  
+  | OrphanError(Impl)
   | ConflictingNegativeImpl(Impl, Impl)
 ```
 
@@ -417,7 +419,7 @@ impl<T, U> Into<U> for T where U: From<T> { ... }  // 通用转换
 // crate A
 impl Display for Vec<u8> { ... }
 
-// crate B  
+// crate B
 impl Display for Vec<u8> { ... }
 
 // 用户crate同时依赖A和B

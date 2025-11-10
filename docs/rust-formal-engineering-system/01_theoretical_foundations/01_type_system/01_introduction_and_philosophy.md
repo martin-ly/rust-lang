@@ -105,7 +105,7 @@ graph TD
         G3[仿射/线性类型论]
         G4[范畴论对应]
     end
-    
+
     subgraph H [实用模式]
         H1[空安全 (Option<T>)]
         H2[错误处理 (Result<T, E>)]

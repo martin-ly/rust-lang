@@ -8,6 +8,7 @@
 
 ## 📊 目录
 
+- [📊 目录](#-目录)
 - [术语](#术语)
   - [`Arc<T>` (Atomically Reference Counted)](#arct-atomically-reference-counted)
   - [Atomics (原子类型)](#atomics-原子类型)

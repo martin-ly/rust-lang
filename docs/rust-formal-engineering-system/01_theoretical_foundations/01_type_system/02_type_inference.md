@@ -46,11 +46,11 @@
     - [错误恢复 {#错误恢复}](#错误恢复-错误恢复)
     - [GAT/where 边界 {#gat-where}](#gatwhere-边界-gat-where)
     - [impl Trait 推断 {#impl-trait}](#impl-trait-推断-impl-trait)
-    - [约束求解算法 {#constraint-solving}](#constraint-solving)
-    - [类型泛化 {#type-generalization}](#type-generalization)
-    - [闭包捕获推断 {#closure-capture}](#closure-capture)
-    - [生命周期推断 {#lifetime-inference}](#lifetime-inference)
-  - [版本对齐说明（推断边界与实践）](#version-alignment-inference-practice)
+    - [约束求解算法 {#constraint-solving}](#约束求解算法-constraint-solving)
+    - [类型泛化 {#type-generalization}](#类型泛化-type-generalization)
+    - [闭包捕获推断 {#closure-capture}](#闭包捕获推断-closure-capture)
+    - [生命周期推断 {#lifetime-inference}](#生命周期推断-lifetime-inference)
+  - [版本对齐说明（推断边界与实践） {#version-alignment-inference-practice}](#版本对齐说明推断边界与实践-version-alignment-inference-practice)
 
 ## 1. 概述 {#1-概述}
 
@@ -172,7 +172,7 @@ fn generalize(env: &TypeEnv, ty: &Type) -> TypeScheme {
         .difference(&env_vars)
         .cloned()
         .collect();
-    
+
     TypeScheme::new(quantified_vars, ty.clone())
 }
 ```
@@ -236,7 +236,7 @@ enum TypeConstraint {
 fn unify(constraints: Vec<TypeConstraint>) -> Result<Substitution, TypeError> {
     let mut substitution = Substitution::empty();
     let mut worklist = constraints;
-    
+
     while let Some(constraint) = worklist.pop() {
         match constraint {
             TypeConstraint::Equal(t1, t2) => {
@@ -258,7 +258,7 @@ fn unify(constraints: Vec<TypeConstraint>) -> Result<Substitution, TypeError> {
             }
         }
     }
-    
+
     Ok(substitution)
 }
 
@@ -285,16 +285,16 @@ fn unify_types(t1: Type, t2: Type) -> Result<(Substitution, Vec<TypeConstraint>)
             if ts1.len() != ts2.len() {
                 return Err(TypeError::TypeMismatch(t1, t2));
             }
-            
+
             let mut combined_subst = Substitution::empty();
             let mut all_constraints = Vec::new();
-            
+
             for (t1, t2) in ts1.into_iter().zip(ts2.into_iter()) {
                 let (subst, constraints) = unify_types(t1, t2)?;
                 combined_subst = combined_subst.compose(&subst);
                 all_constraints.extend(constraints);
             }
-            
+
             Ok((combined_subst, all_constraints))
         }
         _ => {
@@ -336,11 +336,11 @@ impl Substitution {
             }
         }
     }
-    
+
     fn apply_to_constraints(&self, constraints: &[TypeConstraint]) -> Vec<TypeConstraint> {
         constraints.iter().map(|c| self.apply_to_constraint(c)).collect()
     }
-    
+
     fn apply_to_constraint(&self, constraint: &TypeConstraint) -> TypeConstraint {
         match constraint {
             TypeConstraint::Equal(t1, t2) => {
@@ -394,7 +394,7 @@ fn infer_type(expr: &Expr, env: &TypeEnv) -> Result<Type, TypeError> {
 
 fn infer_program(program: &Program) -> Result<TypeEnv, TypeError> {
     let mut env = TypeEnv::new();
-    
+
     for stmt in program.statements() {
         match stmt {
             Statement::VariableDecl { name, type_annotation, initializer } => {
@@ -403,7 +403,7 @@ fn infer_program(program: &Program) -> Result<TypeEnv, TypeError> {
                 } else {
                     Type::Unit
                 };
-                
+
                 if let Some(annotated_type) = type_annotation {
                     let (_, constraints) = generate_constraints(
                         &Expr::Variable(name.clone()),
@@ -415,7 +415,7 @@ fn infer_program(program: &Program) -> Result<TypeEnv, TypeError> {
                     additional_constraints.extend(constraints);
                     unify(additional_constraints)?;
                 }
-                
+
                 let scheme = generalize(&env, &inferred_type);
                 env.insert(name.clone(), scheme);
             }
@@ -424,7 +424,7 @@ fn infer_program(program: &Program) -> Result<TypeEnv, TypeError> {
             }
         }
     }
-    
+
     Ok(env)
 }
 ```
@@ -437,23 +437,23 @@ fn infer_program(program: &Program) -> Result<TypeEnv, TypeError> {
 fn optimize_inference(expr: &Expr, env: &TypeEnv) -> Result<Type, TypeError> {
     // 预分析阶段：收集类型信息
     let type_info = collect_type_information(expr, env);
-    
+
     // 约束生成阶段：生成最小约束集
     let (ty, constraints) = generate_optimized_constraints(expr, env, &type_info);
-    
+
     // 约束求解阶段：使用优化的统一算法
     let substitution = unify_optimized(constraints)?;
-    
+
     // 后处理阶段：应用替换并优化结果
     let result_type = substitution.apply(&ty);
     let optimized_type = optimize_type(&result_type);
-    
+
     Ok(optimized_type)
 }
 
 fn collect_type_information(expr: &Expr, env: &TypeEnv) -> TypeInformation {
     let mut info = TypeInformation::new();
-    
+
     match expr {
         Expr::Variable(name) => {
             if let Some(scheme) = env.get(name) {
@@ -478,7 +478,7 @@ fn collect_type_information(expr: &Expr, env: &TypeEnv) -> TypeInformation {
         }
         // ... 其他表达式类型
     }
-    
+
     info
 }
 ```
@@ -490,12 +490,12 @@ fn collect_type_information(expr: &Expr, env: &TypeEnv) -> TypeInformation {
 ```rust
 fn infer_with_recovery(expr: &Expr, env: &TypeEnv) -> Result<Type, Vec<TypeError>> {
     let mut errors = Vec::new();
-    
+
     match infer_type(expr, env) {
         Ok(ty) => Ok(ty),
         Err(error) => {
             errors.push(error);
-            
+
             // 尝试错误恢复
             match recover_from_error(expr, env) {
                 Ok(recovered_type) => {
@@ -562,14 +562,14 @@ fn basic_inference() {
     // 整数推断
     let x = 42;  // 推断为 i32
     let y = 100u64;  // 显式类型，推断为 u64
-    
+
     // 浮点数推断
     let z = 3.14;  // 推断为 f64
     let w = 2.0f32;  // 显式类型，推断为 f32
-    
+
     // 布尔推断
     let flag = true;  // 推断为 bool
-    
+
     // 字符串推断
     let s = String::from("hello");  // 推断为 String
     let slice = "world";  // 推断为 &str
@@ -585,14 +585,14 @@ fn function_inference() {
     // 闭包类型推断
     let add = |x, y| x + y;  // 推断为 fn(i32, i32) -> i32
     let multiply = |x: i32, y: i32| x * y;  // 显式参数类型
-    
+
     // 高阶函数类型推断
-    fn apply<F>(f: F, x: i32, y: i32) -> i32 
-    where F: Fn(i32, i32) -> i32 
+    fn apply<F>(f: F, x: i32, y: i32) -> i32
+    where F: Fn(i32, i32) -> i32
     {
         f(x, y)
     }
-    
+
     let result = apply(add, 5, 3);  // 推断为 i32
 }
 ```
@@ -607,15 +607,15 @@ fn generic_inference() {
     fn identity<T>(x: T) -> T {
         x
     }
-    
+
     let int_result = identity(42);  // 推断为 i32
     let string_result = identity(String::from("hello"));  // 推断为 String
-    
+
     // 泛型结构体体体体类型推断
     struct Container<T> {
         data: T,
     }
-    
+
     let int_container = Container { data: 42 };  // 推断为 Container<i32>
     let string_container = Container { data: String::from("hello") };  // 推断为 Container<String>
 }
@@ -629,16 +629,16 @@ fn generic_inference() {
 fn complex_inference() {
     // 元组类型推断
     let tuple = (1, 2.0, "three");  // 推断为 (i32, f64, &str)
-    
+
     // 数组类型推断
     let array = [1, 2, 3, 4, 5];  // 推断为 [i32; 5]
-    
+
     // 向量类型推断
     let vector = vec![1, 2, 3];  // 推断为 Vec<i32>
-    
+
     // 迭代器类型推断
     let iter = vector.iter().map(|x| x * 2);  // 推断为 Map<Iter<i32>, fn(i32) -> i32>
-    
+
     // 结果类型推断
     let result: Result<i32, String> = Ok(42);  // 显式类型标注
 }
@@ -720,9 +720,9 @@ fn complex_inference() {
 
 > 说明：上述证明骨架与 `language/02_type_system/22_formal_type_system_proofs.md` 的 4.A 小节（合一与约束性质）相互参照，后续迭代将逐项去除占位完成正式证明。
 
-**文档版本**: 1.0.0  
-**最后更新**: 2025-01-27  
-**维护者**: Rust语言形式化理论项目组  
+**文档版本**: 1.0.0
+**最后更新**: 2025-01-27
+**维护者**: Rust语言形式化理论项目组
 **状态**: 完成
 
 ---

@@ -35,7 +35,7 @@
     - [9.1 编译时开销](#91-编译时开销)
     - [9.2 运行时性能](#92-运行时性能)
   - [10. 总结](#10-总结)
-  - [版本对齐说明（GAT 1.65；where 子句）](#version-alignment-gat-165-where)
+  - [版本对齐说明（GAT 已于 Rust 1.65 稳定；where 子句细化） {#version-alignment-gat-165-where}](#版本对齐说明gat-已于-rust-165-稳定where-子句细化-version-alignment-gat-165-where)
     - [泛型关联类型（GAT）稳定化](#泛型关联类型gat稳定化)
     - [where-clauses 细化](#where-clauses-细化)
     - [对象安全与泛型](#对象安全与泛型)
@@ -122,15 +122,15 @@ $$\text{Monomorphize}(\text{GenericCode}, \text{TypeArgs}) = \text{ConcreteCode}
 ```rust
 fn monomorphize(generic_fn: &GenericFunction, type_args: &[Type]) -> ConcreteFunction {
     let mut substitutions = HashMap::new();
-    
+
     // 建立类型参数到具体类型的映射
     for (param, arg) in generic_fn.type_params.iter().zip(type_args.iter()) {
         substitutions.insert(param.clone(), arg.clone());
     }
-    
+
     // 替换函数体中的类型参数
     let concrete_body = substitute_types(&generic_fn.body, &substitutions);
-    
+
     ConcreteFunction {
         name: generic_fn.name.clone(),
         body: concrete_body,
@@ -232,7 +232,7 @@ fn collect_constraints(expr: &Expr, env: &TypeEnv) -> Result<Constraints, TypeEr
             let arg_types: Vec<Type> = args.iter()
                 .map(|arg| infer_type(arg, env))
                 .collect::<Result<Vec<_>, _>>()?;
-            
+
             let constraints = Constraints::new();
             constraints.add(Constraint::FunctionCall(func_type, arg_types));
             Ok(constraints)
@@ -292,11 +292,11 @@ impl<T> Vec<T> {
             capacity: 0,
         }
     }
-    
+
     fn push(&mut self, item: T) {
         // 实现细节
     }
-    
+
     fn pop(&mut self) -> Option<T> {
         // 实现细节
     }
@@ -312,7 +312,7 @@ fn sort<T: Ord>(slice: &mut [T]) {
     if slice.len() <= 1 {
         return;
     }
-    
+
     let pivot = partition(slice);
     sort(&mut slice[..pivot]);
     sort(&mut slice[pivot + 1..]);
@@ -365,8 +365,8 @@ Rust泛型系统提供了强大的参数化编程能力，同时保持了零成�
 
 ---
 
-**文档版本**: 1.0.0  
-**最后更新**: 2025-01-27  
+**文档版本**: 1.0.0
+**最后更新**: 2025-01-27
 **维护者**: Rust语言形式化理论项目组
 
 ---
@@ -390,7 +390,7 @@ struct SliceIter<'a, T> {
 
 impl<'a, T> Iterator for SliceIter<'a, T> {
     type Item<'b> = &'b T where 'a: 'b;
-    
+
     fn next<'b>(&'b mut self) -> Option<Self::Item<'b>> {
         if self.index < self.slice.len() {
             let item = &self.slice[self.index];
@@ -425,7 +425,7 @@ trait Container {
     where
         Self: 'a,
         Self::Item: 'a;
-    
+
     fn iter<'a>(&'a self) -> Self::Iterator<'a>;
 }
 ```
@@ -449,7 +449,7 @@ trait NotObjectSafeGeneric {
 trait ObjectSafeFixed {
     fn method(&self) -> i32;
     fn async_method(&self) -> Pin<Box<dyn Future<Output = i32> + Send>>;
-    
+
     // 使用关联类型替代泛型参数
     type Output;
     fn typed_method(&self) -> Self::Output;

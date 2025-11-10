@@ -120,7 +120,7 @@ fn contravariant_example() {
         let dog = Dog;
         f(&dog);
     }
-    
+
     // 如果 Dog 是 Animal 的子类型，
     // 则 fn(&Animal) 是 fn(&Dog) 的子类型
     process_dog(process_animal); // 同伦相容
@@ -140,7 +140,7 @@ struct Invariant<T> {
 fn invariant_example() {
     let mut dog = Dog;
     let dog_ref = Invariant { reference: &mut dog };
-    
+
     // 以下转换在 Rust 中不允许，因为缺乏同伦相容性
     // let animal_ref: Invariant<dyn Animal> = dog_ref;
 }
@@ -211,10 +211,10 @@ Rust 的类型安全可视为在变换过程中保持同伦结构体体体的能
 // 编译时类型检查作为同伦一致性验证
 fn safety_check() {
     let x: i32 = 5;
-    
+
     // 以下代码不能编译，因为缺乏有效的同伦映射
     // let y: String = x;
-    
+
     // 需要显式的转换（同伦映射）
     let z: String = x.to_string(); // 有效的同伦映射
 }

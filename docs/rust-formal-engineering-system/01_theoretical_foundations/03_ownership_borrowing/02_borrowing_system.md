@@ -295,13 +295,13 @@ $$\text{CheckerState} = \text{struct}\{\text{borrows}: \text{Map}[\text{Variable
 fn check_borrows(ast: &AST) -> Result<(), Vec<BorrowError>> {
     let mut checker = BorrowChecker::new();
     let mut errors = Vec::new();
-    
+
     for stmt in ast.statements() {
         if let Err(error) = checker.check_statement(stmt) {
             errors.push(error);
         }
     }
-    
+
     if errors.is_empty() {
         Ok(())
     } else {
@@ -441,7 +441,7 @@ fn process_data<'a>(data: &'a mut Vec<i32>) -> &'a i32 {
 ```rust
 fn parallel_process(data: &Vec<i32>) {
     let (first_half, second_half) = data.split_at(data.len() / 2);
-    
+
     std::thread::scope(|s| {
         s.spawn(|| process_slice(first_half));
         s.spawn(|| process_slice(second_half));

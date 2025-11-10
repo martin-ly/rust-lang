@@ -53,6 +53,18 @@
   - [4. 工程案例](#4-工程案例)
   - [5. 反例与边界](#5-反例与边界)
   - [6. 未来值值值趋势](#6-未来值值值趋势)
+  - [版本对齐说明（结构化并发与取消传播） {#version-alignment-structured-concurrency}](#版本对齐说明结构化并发与取消传播-version-alignment-structured-concurrency)
+    - [结构化并发模型](#结构化并发模型)
+    - [取消传播机制](#取消传播机制)
+    - [调度公平性与性能](#调度公平性与性能)
+  - [附：索引锚点与导航](#附索引锚点与导航)
+    - [并发系统定义 {#并发系统定义}](#并发系统定义-并发系统定义)
+    - [进程间通信 {#进程间通信}](#进程间通信-进程间通信)
+    - [同步原语 {#同步原语}](#同步原语-同步原语)
+    - [数据竞争避免 {#数据竞争避免}](#数据竞争避免-数据竞争避免)
+    - [死锁检测 {#死锁检测}](#死锁检测-死锁检测)
+    - [结构化并发 {#structured-concurrency}](#结构化并发-structured-concurrency)
+    - [调度公平性 {#fair-scheduling}](#调度公平性-fair-scheduling)
 
 ## 1. 引言：Rust系统编程模型
 
@@ -431,7 +443,7 @@ let data = Arc::new(RwLock::new(vec![1, 2, 3]));
 形式化表述：
 
 ```math
-∀t1,t2 ∈ Threads, t1 ≠ t2: 
+∀t1,t2 ∈ Threads, t1 ≠ t2:
   Holds(t1, M) ⟹ ¬Holds(t2, M)
 ```
 
@@ -657,7 +669,7 @@ assert_eq!(value, 1);
 **锁无关属性形式化定义**：
 
 ```math
-LockFree(A) ⟺ ∀S ⊂ Threads, ∃t ∈ Threads\S: 
+LockFree(A) ⟺ ∀S ⊂ Threads, ∃t ∈ Threads\S:
   Suspended(S) ⟹ Progresses(t, A)
 ```
 
@@ -934,11 +946,11 @@ impl ProcessPool {
         }
         ProcessPool { idle, max_size }
     }
-    
+
     fn get(&mut self) -> Option<Child> {
         self.idle.pop_front()
     }
-    
+
     fn return_process(&mut self, child: Child) {
         if self.idle.len() < self.max_size {
             self.idle.push_back(child);
@@ -1017,18 +1029,18 @@ impl<T> Queue<T> {
         let tail = head.clone();
         Queue { head, tail }
     }
-    
+
     fn push(&self, data: T) {
         let guard = &epoch::pin();
         let new_node = Owned::new(Node {
             data,
             next: Atomic::null(),
         }).into_shared(guard);
-        
+
         loop {
             let tail = self.tail.load(Ordering::Acquire, guard);
             let next = unsafe { tail.deref() }.next.load(Ordering::Acquire, guard);
-            
+
             if next.is_null() {
                 if unsafe { tail.deref() }.next.compare_and_set(
                     next, new_node, Ordering::Release, guard
@@ -1069,7 +1081,7 @@ where
     T: Sync,
 {
     let chunk_size = (data.len() + num_cpus::get() - 1) / num_cpus::get();
-    
+
     data.chunks(chunk_size)
         .collect::<Vec<_>>()
         .par_iter()  // 使用rayon进行并行处理
@@ -1138,7 +1150,7 @@ cfg_if::cfg_if! {
 #[cfg(target_family = "unix")]
 fn fork_process() -> Result<(), Error> {
     use nix::unistd::{fork, ForkResult};
-    
+
     match unsafe { fork() } {
         Ok(ForkResult::Parent { child }) => {
             println!("Parent process, child pid: {}", child);
@@ -1148,7 +1160,7 @@ fn fork_process() -> Result<(), Error> {
         }
         Err(err) => return Err(err.into()),
     }
-    
+
     Ok(())
 }
 ```
@@ -1419,7 +1431,7 @@ use tokio::task::JoinSet;
 // 结构化并发示例
 async fn structured_concurrency() {
     let mut tasks = JoinSet::new();
-    
+
     // 启动多个并发任务
     for i in 0..5 {
         tasks.spawn(async move {
@@ -1428,7 +1440,7 @@ async fn structured_concurrency() {
             i * 2
         });
     }
-    
+
     // 等待所有任务完成
     while let Some(result) = tasks.join_next().await {
         println!("Task completed: {}", result.unwrap());
@@ -1448,7 +1460,7 @@ async fn cancellable_operation() -> Result<i32, tokio::time::error::Elapsed> {
         tokio::time::sleep(Duration::from_secs(10)).await;
         42
     };
-    
+
     // 设置超时，自动取消
     timeout(Duration::from_secs(5), operation).await
 }
@@ -1471,14 +1483,14 @@ fn create_fair_runtime() -> Runtime {
 // 工作窃取调度
 async fn work_stealing_example() {
     let (tx, mut rx) = tokio::sync::mpsc::channel(100);
-    
+
     // 生产者
     tokio::spawn(async move {
         for i in 0..100 {
             tx.send(i).await.unwrap();
         }
     });
-    
+
     // 消费者池
     let mut handles = Vec::new();
     for _ in 0..4 {
@@ -1490,7 +1502,7 @@ async fn work_stealing_example() {
             }
         }));
     }
-    
+
     // 等待所有消费者完成
     for handle in handles {
         handle.await.unwrap();

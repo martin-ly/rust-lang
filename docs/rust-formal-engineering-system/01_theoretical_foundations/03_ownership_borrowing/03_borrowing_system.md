@@ -81,7 +81,7 @@ fn example() -> i32 {
 fn main() {
     // 函数指针具有'static生命周期
     let f: fn() -> i32 = example;
-    
+
     // 可以在任何地方使用，无需考虑生命周期问题
     let result = f();
 }
@@ -99,7 +99,7 @@ fn example() -> i32 {
 fn main() {
     let f1 = example;
     let f2 = f1;  // f1仍然可用，因为函数指针实现了Copy特征
-    
+
     println!("f1: {}, f2: {}", f1(), f2());
 }
 ```
@@ -119,10 +119,10 @@ fn main() {
 ```rust
 fn main() {
     let x = 10;
-    
+
     // 下面的闭包会被编译为一个包含x的匿名结构体体体体
     let closure = |y| x + y;
-    
+
     // 结构体体体体大小取决于捕获变量的大小和数量
     println!("闭包大小: {}", std::mem::size_of_val(&closure));
 }
@@ -144,10 +144,10 @@ fn process_dyn_callback(callback: &dyn Fn(i32) -> i32, input: i32) -> i32 {
 fn main() {
     let factor = 2;
     let multiply = |x| x * factor;
-    
+
     // 静态分发：函数单态化
     let result1 = process_callback(multiply, 5);
-    
+
     // 动态分发：通过特征对象
     let result2 = process_dyn_callback(&multiply, 5);
 }
@@ -179,7 +179,7 @@ fn modify(value: &mut String) {
 
 fn main() {
     let mut s = String::from("hello");
-    
+
     inspect(&s);      // 借用，s仍可用
     modify(&mut s);   // 可变借用，s仍可用
     consume(s);       // 所有权移动，s不再可用
@@ -203,10 +203,10 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 fn main() {
     let s1 = create();  // 获得返回值的所有权
-    
+
     let string1 = String::from("长字符串");
     let string2 = String::from("短");
-    
+
     let result = longest(&string1, &string2);  // 借用的结果
     println!("更长的字符串是: {}", result);
 } // string1, string2, result都在这里结束生命周期
@@ -227,7 +227,7 @@ fn main() {
     // 函数指针是Copy类型
     let f = add_one;
     let g = f;  // 复制而非移动
-    
+
     println!("f(1) = {}, g(1) = {}", f(1), g(1));
 }
 ```
@@ -239,20 +239,20 @@ fn main() {
 ```rust
 fn main() {
     let text = String::from("Hello");
-    
+
     // 通过引用捕获 - 实现Fn特征
     let print = || println!("引用: {}", text);
-    
+
     // 通过可变引用捕获 - 实现FnMut特征
     let mut owned = String::from("World");
     let mut change = || owned.push_str("!");
-    
+
     // 通过所有权捕获 - 实现FnOnce特征
     let consume = move || {
         // text的所有权被移动到闭包中
         println!("消费: {}", text);
     };
-    
+
     print();       // 可多次调用
     change();      // 可多次调用
     consume();     // 只能调用一次，如果实现了Drop特征
@@ -299,17 +299,17 @@ impl Counter {
     fn new() -> Self {
         Counter { count: 0 }
     }
-    
+
     // 不可变借用方法
     fn get_count(&self) -> u32 {
         self.count
     }
-    
+
     // 可变借用方法
     fn increment(&mut self) {
         self.count += 1;
     }
-    
+
     // 消费self的方法
     fn reset(self) -> Self {
         Counter { count: 0 }
@@ -318,11 +318,11 @@ impl Counter {
 
 fn main() {
     let mut counter = Counter::new();
-    
+
     println!("计数: {}", counter.get_count());
     counter.increment();
     println!("计数: {}", counter.get_count());
-    
+
     // 重置会消费掉counter
     let counter = counter.reset();
     println!("计数: {}", counter.get_count());
@@ -342,7 +342,7 @@ impl<'a> RefHolder<'a> {
     fn new(reference: &'a str) -> Self {
         RefHolder { reference }
     }
-    
+
     fn get_ref(&self) -> &'a str {
         self.reference
     }
@@ -350,7 +350,7 @@ impl<'a> RefHolder<'a> {
 
 fn main() {
     let text = String::from("hello");
-    
+
     let holder = RefHolder::new(&text);
     println!("引用: {}", holder.get_ref());
 } // text和holder在这里结束生命周期
@@ -368,10 +368,10 @@ Rust中的匿名函数（函数字面量）具有特定的内存和所有权特�
 fn main() {
     // 匿名函数，类型为fn(i32) -> i32
     let add_one = |x: i32| -> i32 { x + 1 };
-    
+
     // 可以显式指定类型
     let subtract_one: fn(i32) -> i32 = |x| x - 1;
-    
+
     println!("2+1={}, 2-1={}", add_one(2), subtract_one(2));
 }
 ```
@@ -406,29 +406,29 @@ fn main() {
 ```rust
 fn main() {
     let name = String::from("Rust");
-    
+
     // 通过引用捕获（默认行为）
     let greet = || println!("你好, {}", name);
-    
+
     let mut mutable = String::from("可变");
     // 通过可变引用捕获
     let mut change = || {
         mutable.push_str(" 值");
         println!("{}", mutable);
     };
-    
+
     // 通过所有权捕获
     let take_ownership = move || {
         println!("拥有 {}", name);
     };
-    
+
     greet();
     change();
     take_ownership();
-    
+
     // 此处name已不可用，因为所有权已移动
     // println!("{}", name); // 编译错误
-    
+
     // mutable仍可用，因为只是借用
     println!("最终值: {}", mutable);
 }
@@ -453,11 +453,11 @@ fn execute_fn_once<F: FnOnce()>(f: F) {
 
 fn main() {
     let text = String::from("Hello");
-    
+
     // Fn: 通过引用捕获
     let print_ref = || println!("{}", text);
     execute_fn(print_ref);
-    
+
     // FnMut: 通过可变引用捕获
     let mut count = 0;
     let mut increment = || {
@@ -465,7 +465,7 @@ fn main() {
         println!("计数: {}", count);
     };
     execute_fn_mut(increment);
-    
+
     // FnOnce: 通过所有权捕获或消费捕获的值
     let consume = move || {
         println!("消费: {}", text);
@@ -485,11 +485,11 @@ fn create_greeter<'a>(name: &'a str) -> impl Fn() + 'a {
 
 fn main() {
     let name = String::from("Rust");
-    
+
     // greeter的生命周期不能超过name
     let greeter = create_greeter(&name);
     greeter();
-    
+
     // 此处greeter和name都仍然有效
     println!("name仍然是: {}", name);
 }
@@ -514,7 +514,7 @@ struct CounterGenerator {
 
 impl Iterator for CounterGenerator {
     type Item = u32;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         if self.count < self.max {
             let current = self.count;
@@ -532,7 +532,7 @@ fn counter(max: u32) -> CounterGenerator {
 
 fn main() {
     let mut gen = counter(5);
-    
+
     while let Some(val) = gen.next() {
         println!("值: {}", val);
     }
@@ -556,7 +556,7 @@ async fn demo_stream() {
             x * x
         })
         .buffer_unordered(3);
-    
+
     while let Some(result) = stream.next().await {
         println!("结果: {}", result);
     }
@@ -589,15 +589,15 @@ async fn fetch_data(id: u32) -> String {
 // 组合多个异步操作
 async fn process_all() -> Vec<String> {
     let mut results = Vec::new();
-    
+
     // 并发执行多个异步任务
     let future1 = fetch_data(1);
     let future2 = fetch_data(2);
-    
+
     // .await会暂停当前函数直到Future完成
     results.push(future1.await);
     results.push(future2.await);
-    
+
     results
 }
 
@@ -627,7 +627,7 @@ where
 
 fn main() {
     let context = String::from("上下文");
-    
+
     let result = task::block_on(async {
         // 捕获context变量的异步闭包
         let future = process_with_context(move || async move {
@@ -635,10 +635,10 @@ fn main() {
             task::sleep(std::time::Duration::from_millis(100)).await;
             format!("处理: {}", context)
         });
-        
+
         future.await
     });
-    
+
     println!("结果: {}", result);
 }
 ```
@@ -659,11 +659,11 @@ async fn process_data<'a>(data: &'a str) -> &'a str {
 
 async fn run_example() {
     let data = String::from("Hello, async world");
-    
+
     // data必须在整个异步操作期间有效
     let result = process_data(&data).await;
     println!("处理结果: {}", result);
-    
+
     // data在这里仍然有效
     println!("原始数据: {}", data);
 }
@@ -690,7 +690,7 @@ fn process<T: Fn(i32) -> i32>(f: T, value: i32) -> i32 {
 fn main() {
     let double = |x| x * 2;
     let add_one = |x| x + 1;
-    
+
     // 编译器为每种闭包类型生成专用代码
     println!("双倍: {}", process(double, 5));    // 10
     println!("加一: {}", process(add_one, 5));   // 6
@@ -710,11 +710,11 @@ fn process_dyn(f: &dyn Fn(i32) -> i32, value: i32) -> i32 {
 fn main() {
     let double = |x| x * 2;
     let add_one = |x| x + 1;
-    
+
     // 通过特征对象进行动态分发
     println!("双倍: {}", process_dyn(&double, 5));    // 10
     println!("加一: {}", process_dyn(&add_one, 5));   // 6
-    
+
     // 可以存储在同一个集合中
     let functions: Vec<&dyn Fn(i32) -> i32> = vec![&double, &add_one];
     for f in functions.iter() {
@@ -744,14 +744,14 @@ fn main() {
     // 静态分发
     let format_i32 = create_formatter::<i32>();
     let format_str = create_formatter::<&str>();
-    
+
     println!("{}", format_i32(42));
     println!("{}", format_str("hello"));
-    
+
     // 动态分发
     let format_i32_dyn = create_dyn_formatter::<i32>();
     let format_str_dyn = create_dyn_formatter::<&str>();
-    
+
     println!("{}", format_i32_dyn(42));
     println!("{}", format_str_dyn("hello"));
 }
@@ -778,11 +778,11 @@ where
 
 fn main() {
     let numbers = vec![1, 2, 3, 4, 5];
-    
+
     // 传递不同的函数参数
     let doubled = transform(numbers.clone(), |x| x * 2);
     let squared = transform(numbers, |x| x * x);
-    
+
     println!("加倍: {:?}", doubled);
     println!("平方: {:?}", squared);
 }
@@ -807,7 +807,7 @@ fn main() {
     // 示例1：持有所有权的闭包
     let multiply_by_10 = create_multiplier(10);
     println!("5 × 10 = {}", multiply_by_10(5));
-    
+
     // 示例2：持有引用的闭包
     let threshold = 100;
     let is_large = create_checker(&threshold);
@@ -835,13 +835,13 @@ where
 fn main() {
     let add_one = |x: i32| x + 1;
     let double = |x: i32| x * 2;
-    
+
     // 组合函数：先加1再乘2
     let add_then_double = compose(add_one, double);
-    
+
     // 组合函数：先乘2再加1
     let double_then_add = compose(double, add_one);
-    
+
     println!("(5+1)×2 = {}", add_then_double(5));  // 12
     println!("(5×2)+1 = {}", double_then_add(5));  // 11
 }
@@ -880,7 +880,7 @@ fn main() {
         Ok(value) => println!("成功: {}", value),
         Err(e) => println!("错误: {}", e),
     }
-    
+
     // Option组合子
     for key in &["a", "b", "c", "d"] {
         match process(key) {
@@ -908,11 +908,11 @@ where
     fn new(parse_fn: F) -> Self {
         Parser { parse_fn }
     }
-    
+
     fn parse(&self, input: &str) -> Result<(T, &str), String> {
         (self.parse_fn)(input)
     }
-    
+
     // 顺序组合器
     fn and_then<G, U>(self, other: Parser<G>) -> Parser<impl Fn(&str) -> Result<((T, U), &str), String>>
     where
@@ -924,7 +924,7 @@ where
             Ok(((first_result, second_result), remaining))
         })
     }
-    
+
     // 映射组合器
     fn map<G, U>(self, map_fn: G) -> Parser<impl Fn(&str) -> Result<(U, &str), String>>
     where
@@ -942,7 +942,7 @@ fn digit(input: &str) -> Result<(u32, &str), String> {
     if input.is_empty() {
         return Err("预期有数字，但输入为空".to_string());
     }
-    
+
     let first_char = input.chars().next().unwrap();
     if first_char.is_digit(10) {
         Ok((first_char.to_digit(10).unwrap(), &input[1..]))
@@ -954,13 +954,13 @@ fn digit(input: &str) -> Result<(u32, &str), String> {
 fn main() {
     // 创建基本解析器
     let digit_parser = Parser::new(digit);
-    
+
     // 组合解析器
     let two_digits = digit_parser.clone().and_then(digit_parser);
-    
+
     // 使用映射
     let combined_digits = two_digits.map(|(a, b)| a * 10 + b);
-    
+
     // 测试解析
     match combined_digits.parse("42abc") {
         Ok((number, rest)) => println!("解析数字: {}, 剩余: '{}'", number, rest),
@@ -980,14 +980,14 @@ Rust的迭代器是函数式编程的核心，与所有权系统结合紧密：
 ```rust
 fn main() {
     let numbers = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    
+
     let sum_of_squares = numbers.iter()
         .filter(|&&x| x % 2 == 0)    // 只保留偶数
         .map(|&x| x * x)             // 计算平方
         .sum::<i32>();               // 求和
-    
+
     println!("偶数平方和: {}", sum_of_squares);
-    
+
     // 迭代器的惰性求值
     let transformed = numbers.iter()
         .enumerate()                            // 添加索引
@@ -995,7 +995,7 @@ fn main() {
         .map(|(_, &val)| val * 10)             // 对值进行转换
         .take(3)                               // 只取前3个
         .collect::<Vec<_>>();                  // 收集到vector
-    
+
     println!("变换结果: {:?}", transformed);
 }
 ```
@@ -1007,23 +1007,23 @@ fn main() {
 ```rust
 fn main() {
     let mut values = vec![String::from("hello"), String::from("world")];
-    
+
     // 迭代引用 - 不消费集合
     for item in &values {
         println!("项目: {}", item);
     }
-    
+
     // 迭代可变引用 - 允许修改
     for item in &mut values {
         item.push('!');
     }
     println!("修改后: {:?}", values);
-    
+
     // 按值迭代 - 消费集合
     for item in values {
         println!("获取所有权: {}", item);
     }
-    
+
     // values不再可用，因为所有权已移动
     // println!("{:?}", values); // 编译错误
 }
@@ -1052,25 +1052,25 @@ where
     I::Item: Clone,
 {
     type Item = (I::Item, Option<I::Item>);
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         // 获取当前元素
         let current = self.iter.next()?;
-        
+
         // 获取下一个元素（如果有的话）
         let next = self.iter.peek().cloned();
-        
+
         Some((current, next))
     }
 }
 
 fn main() {
     let numbers = vec![1, 2, 3, 4, 5];
-    
+
     // 使用自定义迭代器适配器
     let pairs: Vec<_> = PairwiseIterator::new(numbers.into_iter())
         .collect();
-    
+
     for (current, next) in pairs {
         match next {
             Some(n) => println!("当前: {}, 下一个: {}", current, n),
@@ -1127,15 +1127,15 @@ fn main() {
         .pipe(parse_number)
         .and_then(validate)
         .map(process);
-    
+
     match result {
         Ok(value) => println!("处理结果: {}", value),
         Err(e) => println!("错误: {}", e),
     }
-    
+
     // 更复杂的管道示例
     let values = vec!["10", "20", "-5", "abc", "30"];
-    
+
     let results: Vec<_> = values
         .iter()
         .map(|&s| {
@@ -1144,7 +1144,7 @@ fn main() {
              .map(process)
         })
         .collect();
-    
+
     println!("处理结果: {:?}", results);
 }
 ```
@@ -1178,26 +1178,26 @@ impl RequestBuilder {
             body: None,
         }
     }
-    
+
     // 使用带有self所有权的方法实现链式调用
     fn url(mut self, url: &str) -> Self {
         self.url = Some(url.to_string());
         self
     }
-    
+
     fn header(mut self, name: &str, value: &str) -> Self {
         self.headers.push((name.to_string(), value.to_string()));
         self
     }
-    
+
     fn body(mut self, body: Vec<u8>) -> Self {
         self.body = Some(body);
         self
     }
-    
+
     fn build(self) -> Result<Request, String> {
         let url = self.url.ok_or("URL未指定")?;
-        
+
         Ok(Request {
             method: self.method,
             url,
@@ -1214,12 +1214,12 @@ fn main() {
         .header("Content-Type", "application/json")
         .header("Authorization", "Bearer token123")
         .build();
-    
+
     match request {
         Ok(req) => println!("创建请求: {:?}", req),
         Err(e) => println!("错误: {}", e),
     }
-    
+
     // 注意所有权移动：每次方法调用都消费并返回构建器
     let builder = RequestBuilder::new("POST");
     let builder = builder.url("https://example.com/api");
@@ -1271,12 +1271,12 @@ fn main() {
         .pipe(initialize)
         .and_then(process)
         .and_then(finalize);
-    
+
     match result {
         Ok(final_state) => println!("{}", final_state.formatted),
         Err(e) => println!("错误: {}", e),
     }
-    
+
     // 状态转换是强制性的，无法跳过步骤
     // 例如，无法直接从Uninitialized到Processed
     // process(Uninitialized{}); // 类型错误

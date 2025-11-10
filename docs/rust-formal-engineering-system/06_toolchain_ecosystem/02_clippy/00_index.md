@@ -1,66 +1,103 @@
 ﻿# Clippy 静态分析工具索引
 
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
 ## 📊 目录
 
 - [Clippy 静态分析工具索引](#clippy-静态分析工具索引)
   - [📊 目录](#-目录)
-  - [目的](#目的)
-  - [核心功能](#核心功能)
-    - [代码质量检查](#代码质量检查)
-    - [性能分析](#性能分析)
-    - [安全检查](#安全检查)
-  - [使用方法](#使用方法)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 核心功能](#-核心功能)
+    - [1. 代码质量检查（Code Quality）](#1-代码质量检查code-quality)
+    - [2. 性能分析（Performance Analysis）](#2-性能分析performance-analysis)
+    - [3. 安全检查（Security Checks）](#3-安全检查security-checks)
+  - [💻 使用方法](#-使用方法)
     - [基本使用](#基本使用)
     - [配置选项](#配置选项)
     - [配置文件](#配置文件)
-  - [主要 Lint 类别](#主要-lint-类别)
+  - [📋 主要 Lint 类别](#-主要-lint-类别)
     - [性能相关](#性能相关)
     - [风格相关](#风格相关)
     - [正确性相关](#正确性相关)
     - [复杂度相关](#复杂度相关)
-  - [自定义配置](#自定义配置)
+  - [⚙️ 自定义配置](#️-自定义配置)
     - [项目级配置](#项目级配置)
     - [代码级配置](#代码级配置)
-  - [集成到 CI/CD](#集成到-cicd)
+  - [🔄 集成到 CI/CD](#-集成到-cicd)
     - [GitHub Actions](#github-actions)
     - [GitLab CI](#gitlab-ci)
-  - [最佳实践](#最佳实践)
+  - [✨ 最佳实践](#-最佳实践)
     - [开发流程](#开发流程)
     - [配置策略](#配置策略)
     - [性能优化](#性能优化)
-  - [相关索引](#相关索引)
-  - [导航](#导航)
+  - [🔗 相关索引](#-相关索引)
+  - [🧭 导航](#-导航)
 
-## 目的
+## 🎯 目的
 
-- 深入理解 Rust Clippy 静态分析工具的功能与使用方法。
-- 掌握代码质量检查与性能优化的最佳实践。
-- 建立代码规范与质量保证的自动化流程。
+本模块深入理解 Rust Clippy 静态分析工具的功能与使用方法，掌握代码质量检查与性能优化的最佳实践，建立代码规范与质量保证的自动化流程。所有内容均基于 Rust 1.91.0 和当前最佳实践。
 
-## 核心功能
+### 核心价值
 
-### 代码质量检查
+- **代码质量**: 专注于 Rust 代码质量检查最佳实践
+- **最佳实践**: 基于 Rust 社区最新 Clippy 实践
+- **完整覆盖**: 涵盖代码质量、性能分析、安全检查等核心主题
+- **易于理解**: 提供详细的 Clippy 使用说明和代码示例
 
-- **风格检查**：代码风格、命名规范、格式要求
-- **复杂度分析**：圈复杂度、认知复杂度、嵌套深度
-- **代码异味**：代码重复、过长函数、过大类
-- **最佳实践**：Rust 惯用法、性能优化建议
+## 📚 核心功能
 
-### 性能分析
+### 1. 代码质量检查（Code Quality）
 
-- **内存使用**：不必要的分配、内存泄漏风险、引用优化
-- **算法效率**：时间复杂度、空间复杂度、算法选择
-- **并发安全**：数据竞争、死锁风险、同步原语使用
-- **I/O 优化**：文件操作、网络通信、数据库访问
+**推荐工具**: `clippy`, `rustfmt`, `rust-analyzer`
 
-### 安全检查
+- **风格检查**: 代码风格、命名规范、格式要求
+- **复杂度分析**: 圈复杂度、认知复杂度、嵌套深度
+- **代码异味**: 代码重复、过长函数、过大类
+- **最佳实践**: Rust 惯用法、性能优化建议
 
-- **内存安全**：悬垂指针、缓冲区溢出、内存泄漏
-- **并发安全**：数据竞争、竞态条件、原子操作
-- **加密安全**：弱加密、密钥管理、随机数生成
-- **输入验证**：SQL 注入、XSS 攻击、路径遍历
+**相关资源**:
 
-## 使用方法
+- [Clippy 文档](https://rust-lang.github.io/rust-clippy/)
+- [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html)
+- [rustfmt 文档](https://github.com/rust-lang/rustfmt)
+
+### 2. 性能分析（Performance Analysis）
+
+**推荐工具**: `clippy`, `cargo-flamegraph`, `perf`
+
+- **内存使用**: 不必要的分配、内存泄漏风险、引用优化
+- **算法效率**: 时间复杂度、空间复杂度、算法选择
+- **并发安全**: 数据竞争、死锁风险、同步原语使用
+- **I/O 优化**: 文件操作、网络通信、数据库访问
+
+**相关资源**:
+
+- [Clippy Performance Lints](https://rust-lang.github.io/rust-clippy/master/index.html#perf)
+- [cargo-flamegraph 文档](https://github.com/flamegraph-rs/flamegraph)
+- [Rust Performance Book](https://nnethercote.github.io/perf-book/)
+
+### 3. 安全检查（Security Checks）
+
+**推荐工具**: `clippy`, `cargo-audit`, `cargo-deny`
+
+- **内存安全**: 悬垂指针、缓冲区溢出、内存泄漏（Rust 1.91 新增悬空指针警告）
+- **并发安全**: 数据竞争、竞态条件、原子操作
+- **加密安全**: 弱加密、密钥管理、随机数生成
+- **输入验证**: SQL 注入、XSS 攻击、路径遍历
+
+**相关资源**:
+
+- [Clippy Security Lints](https://rust-lang.github.io/rust-clippy/master/index.html#security)
+- [cargo-audit 文档](https://docs.rs/cargo-audit/)
+- [cargo-deny 文档](https://docs.rs/cargo-deny/)
+
+## 💻 使用方法
 
 ### 基本使用
 
@@ -107,7 +144,7 @@ single-char-binding-names-threshold = 4
 # 在代码中使用 #[allow(clippy::lint_name)]
 ```
 
-## 主要 Lint 类别
+## 📋 主要 Lint 类别
 
 ### 性能相关
 
@@ -141,7 +178,7 @@ single-char-binding-names-threshold = 4
   - `too_many_arguments`：参数数量检查
   - `too_many_lines`：函数长度检查
 
-## 自定义配置
+## ⚙️ 自定义配置
 
 ### 项目级配置
 
@@ -173,7 +210,7 @@ mod generated_code {
 }
 ```
 
-## 集成到 CI/CD
+## 🔄 集成到 CI/CD
 
 ### GitHub Actions
 
@@ -207,7 +244,7 @@ clippy:
   allow_failure: false
 ```
 
-## 最佳实践
+## ✨ 最佳实践
 
 ### 开发流程
 
@@ -230,16 +267,24 @@ clippy:
 - **算法优化**：关注复杂度和效率问题
 - **并发优化**：关注并发安全问题
 
-## 相关索引
+## 🔗 相关索引
 
-- **质量保障**：[`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md) - 代码质量标准
-- **代码分析**：[`../05_code_analysis/00_index.md`](../05_code_analysis/00_index.md) - 静态分析工具
-- **测试框架**：[`../04_testing_frameworks/00_index.md`](../04_testing_frameworks/00_index.md) - 测试工具
-- **CI/CD**：[`../../05_software_engineering/06_cicd/00_index.md`](../../05_software_engineering/06_cicd/00_index.md) - 持续集成
+- **质量保障**: [`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md) - 代码质量标准
+- **代码分析**: [`../05_code_analysis/00_index.md`](../05_code_analysis/00_index.md) - 静态分析工具
+- **测试框架**: [`../04_testing_frameworks/00_index.md`](../04_testing_frameworks/00_index.md) - 测试工具
+- **CI/CD**: [`../../05_software_engineering/06_cicd/00_index.md`](../../05_software_engineering/06_cicd/00_index.md) - 持续集成
 
-## 导航
+---
 
-- **返回工具链生态**：[`../00_index.md`](../00_index.md)
-- **编译器**：[`../01_compiler/00_index.md`](../01_compiler/00_index.md)
-- **代码分析**：[`../05_code_analysis/00_index.md`](../05_code_analysis/00_index.md)
-- **返回项目根**：[`../../README.md`](../../README.md)
+## 🧭 导航
+
+- **返回工具链生态**: [`../00_index.md`](../00_index.md)
+- **编译器**: [`../01_compiler/00_index.md`](../01_compiler/00_index.md)
+- **代码分析**: [`../05_code_analysis/00_index.md`](../05_code_analysis/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-10
+**维护者**: 项目维护者
+**状态**: 已完善 ✅

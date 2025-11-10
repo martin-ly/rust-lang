@@ -2,20 +2,21 @@
 
 ## 📊 目录
 
-- [1. 典型案例与边界场景](#1-典型案例与边界场景)
-  - [1.1 异步跨 await 借用（非法） {#async-await-borrow}](#11-异步跨-await-借用非法-async-await-borrow)
-  - [1.2 RefCell 内部可变性与运行时借用规则 {#refcell-runtime-borrow}](#12-refcell-内部可变性与运行时借用规则-refcell-runtime-borrow)
-  - [1.3 并发下的 Send/Sync 边界 {#send-sync-cases}](#13-并发下的-sendsync-边界-send-sync-cases)
-  - [1.4 FFI 边界与别名规则 {#ffi-aliasing}](#14-ffi-边界与别名规则-ffi-aliasing)
-- [2. 反例分析与安全边界](#2-反例分析与安全边界)
-- [3. 工程经验与生态联系](#3-工程经验与生态联系)
-- [4. 未来值值值挑战与研究展望](#4-未来值值值挑战与研究展望)
-- [形式化证明映射（案例）](#形式化证明映射案例)
-- [附：索引锚点与导航](#附索引锚点与导航)
-  - [异步跨 await 借用 {#async-await-borrow}](#异步跨-await-借用-async-await-borrow)
-  - [RefCell 运行时借用 {#refcell-runtime-borrow}](#refcell-运行时借用-refcell-runtime-borrow)
-  - [Send/Sync 案例 {#send-sync-cases}](#sendsync-案例-send-sync-cases)
-  - [FFI 别名规则 {#ffi-aliasing}](#ffi-别名规则-ffi-aliasing)
+- [递归迭代补充：借用检查器案例分析的形式化论证与证明](#递归迭代补充借用检查器案例分析的形式化论证与证明)
+  - [📊 目录](#-目录)
+  - [1. 典型案例与边界场景](#1-典型案例与边界场景)
+    - [1.1 异步跨 await 借用（非法） {#async-await-borrow}](#11-异步跨-await-借用非法-async-await-borrow)
+    - [1.2 RefCell 内部可变性与运行时借用规则 {#refcell-runtime-borrow}](#12-refcell-内部可变性与运行时借用规则-refcell-runtime-borrow)
+    - [1.4 FFI 边界与别名规则 {#ffi-aliasing}](#14-ffi-边界与别名规则-ffi-aliasing)
+  - [2. 反例分析与安全边界](#2-反例分析与安全边界)
+  - [3. 工程经验与生态联系](#3-工程经验与生态联系)
+  - [4. 未来值值值挑战与研究展望](#4-未来值值值挑战与研究展望)
+  - [形式化证明映射（案例）](#形式化证明映射案例)
+  - [附：索引锚点与导航](#附索引锚点与导航)
+    - [异步跨 await 借用 {#async-await-borrow}](#异步跨-await-借用-async-await-borrow)
+    - [RefCell 运行时借用 {#refcell-runtime-borrow}](#refcell-运行时借用-refcell-runtime-borrow)
+    - [Send/Sync 案例 {#send-sync-cases}](#sendsync-案例-send-sync-cases)
+    - [FFI 别名规则 {#ffi-aliasing}](#ffi-别名规则-ffi-aliasing)
 
 ## 1. 典型案例与边界场景
 

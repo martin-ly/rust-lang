@@ -42,7 +42,7 @@
 mod users {
     pub struct User { /* ... */ }
     pub struct UserPreferences { /* ... */ }
-    
+
     mod authentication {
         pub struct Credential { /* ... */ }
     }
@@ -65,10 +65,10 @@ pub mod api {
     // 公开给外部用户的类型
     pub struct Request { /* ... */ }
     pub struct Response { /* ... */ }
-    
+
     // 内部使用的辅助类型
     struct RequestValidator { /* ... */ }
-    
+
     pub(crate) mod internals {
         // 仅在 crate 内可见的实现细节
         pub(crate) struct ConnectionPool { /* ... */ }
@@ -130,14 +130,14 @@ pub use my_core::CoreType;
 ```rust
 // 推荐：使用稳定性注解
 /// Core functionality for handling data processing
-/// 
+///
 /// # Stability
 /// This API is considered stable and will not change in incompatible ways
 /// within the same major version.
 pub struct Processor { /* ... */ }
 
 /// Experimental feature for advanced processing
-/// 
+///
 /// # Stability
 /// This API is experimental and may change or be removed without notice.
 #[doc(hidden)]
@@ -157,7 +157,7 @@ impl OldInterface {
         // 内部可能调用新实现
         self.new_method().into()
     }
-    
+
     // 添加新方法，而不破坏现有代码
     pub fn new_method(&self) -> NewResult {
         /* 新实现 */
@@ -354,11 +354,11 @@ impl User {
     pub fn name(&self) -> &str {
         &self.name
     }
-    
+
     pub fn email(&self) -> &str {
         &self.email
     }
-    
+
     // 不直接暴露私有字段
     pub fn verify_password(&self, password: &str) -> bool {
         /* ... */
@@ -384,7 +384,7 @@ mod implementations {
     pub struct PostgresUserRepository {
         pool: Pool,
     }
-    
+
     impl super::UserRepository for PostgresUserRepository {
         /* 实现接口方法 */
     }
