@@ -117,7 +117,7 @@
 ```assembly
 section .data
   count:  dd 10      ; 定义数据变量count，初始值为10
-  
+
 section .text
   global _start
 _start:
@@ -174,15 +174,15 @@ _start:
 ; 实现if-else结构
   cmp eax, 10    ; 比较eax与10
   jl less_than   ; 如果eax < 10则跳转
-  
+
   ; "else"部分
   mov ebx, 20
   jmp end_if
-  
+
 less_than:
   ; "if"部分
   mov ebx, 5
-  
+
 end_if:
   ; 继续执行
 ```
@@ -685,7 +685,7 @@ mov ecx, [shared_data]   ; 安全读取共享数据
 #### 10.2.1 自旋锁形式化
 
 ```math
-SpinLock(lock) = 
+SpinLock(lock) =
   loop:
     attempt = TestAndSet(lock)
     if attempt = 0 then return

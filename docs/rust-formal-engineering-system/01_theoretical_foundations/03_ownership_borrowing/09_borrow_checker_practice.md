@@ -8,20 +8,19 @@
 
 ## 目录
 
-- [递归迭代补充：借用检查器工程实践的形式化论证与证明](#递归迭代补充借用检查器工程实践的形式化论证与证明)
-  - [目录](#目录)
-  - [1. 工程实现与工具链协同](#1-工程实现与工具链协同)
-    - [1.1 MIR 层面的实务指南 {#mir-practice}](#11-mir-层面的实务指南-mir-practice)
-    - [1.2 异步/并发工程实践 {#async-concurrency-practice}](#12-异步并发工程实践-async-concurrency-practice)
-    - [1.3 FFI/Unsafe 边界规约 {#ffi-practice}](#13-ffiunsafe-边界规约-ffi-practice)
-  - [2. 验证流程与自动化测试](#2-验证流程与自动化测试)
-  - [3. 工程应用与生态联系](#3-工程应用与生态联系)
-  - [4. 未来值值值挑战与研究展望](#4-未来值值值挑战与研究展望)
-  - [形式化证明映射（工程实践）](#形式化证明映射工程实践)
-  - [附：索引锚点与导航](#附索引锚点与导航)
-    - [MIR 实务 {#mir-practice}](#mir-实务-mir-practice)
-    - [异步并发实践 {#async-concurrency-practice}](#异步并发实践-async-concurrency-practice)
-    - [FFI/Unsafe 规约 {#ffi-practice}](#ffiunsafe-规约-ffi-practice)
+- [目录](#目录)
+- [1. 工程实现与工具链协同](#1-工程实现与工具链协同)
+  - [1.1 MIR 层面的实务指南 {#mir-practice}](#11-mir-层面的实务指南-mir-practice)
+  - [1.2 异步/并发工程实践 {#async-concurrency-practice}](#12-异步并发工程实践-async-concurrency-practice)
+  - [1.3 FFI/Unsafe 边界规约 {#ffi-practice}](#13-ffiunsafe-边界规约-ffi-practice)
+- [2. 验证流程与自动化测试](#2-验证流程与自动化测试)
+- [3. 工程应用与生态联系](#3-工程应用与生态联系)
+- [4. 未来值值值挑战与研究展望](#4-未来值值值挑战与研究展望)
+- [形式化证明映射（工程实践）](#形式化证明映射工程实践)
+- [附：索引锚点与导航](#附索引锚点与导航)
+  - [MIR 实务 {#mir-practice}](#mir-实务-mir-practice)
+  - [异步并发实践 {#async-concurrency-practice}](#异步并发实践-async-concurrency-practice)
+  - [FFI/Unsafe 规约 {#ffi-practice}](#ffiunsafe-规约-ffi-practice)
 
 ## 1. 工程实现与工具链协同
 

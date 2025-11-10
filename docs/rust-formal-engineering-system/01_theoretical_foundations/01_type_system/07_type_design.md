@@ -60,7 +60,7 @@ struct BorrowingData<'a> {
 }
 
 // 避免：缺少必要的生命周期标注
-struct MissingLifetime { 
+struct MissingLifetime {
     // 编译错误：缺少生命周期标注
     reference: &[u8],
 }
@@ -101,7 +101,7 @@ impl Point {
     pub fn new(x: f64, y: f64) -> Self {
         Point { x, y }
     }
-    
+
     // 特殊值构造函数
     pub fn origin() -> Self {
         Point { x: 0.0, y: 0.0 }
@@ -233,7 +233,7 @@ impl PositiveNumber {
             None
         }
     }
-    
+
     pub fn value(&self) -> u32 {
         self.0
     }
@@ -294,7 +294,7 @@ impl DatabaseConnection {
     pub fn connect_to_server(&self) {
         // ...
     }
-    
+
     // is_ 前缀用于返回布尔值的方法
     pub fn is_connected(&self) -> bool {
         // ...
@@ -318,17 +318,17 @@ impl QueryBuilder {
     pub fn new() -> Self {
         QueryBuilder { query: String::new() }
     }
-    
+
     pub fn select(mut self, fields: &str) -> Self {
         self.query = format!("SELECT {} ", fields);
         self
     }
-    
+
     pub fn from(mut self, table: &str) -> Self {
         self.query.push_str(&format!("FROM {} ", table));
         self
     }
-    
+
     pub fn build(self) -> String {
         self.query
     }

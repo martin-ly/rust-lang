@@ -184,27 +184,27 @@ impl EventDrivenECommerce {
     pub async fn process_event(&self, event: ECommerceEvent) -> Result<(), EventError> {
         // 1. 发布事件到事件总线
         self.event_bus.publish(event.clone()).await?;
-        
+
         // 2. 处理事件
         if let Some(handlers) = self.event_handlers.get(&event.event_type) {
             for handler in handlers {
                 handler.handle(&event).await?;
             }
         }
-        
+
         // 3. 处理分布式事务
         if self.requires_saga(&event.event_type) {
             self.saga_orchestrator.process_saga(&event).await?;
         }
-        
+
         // 4. 发送通知
         if self.requires_notification(&event.event_type) {
             self.notification_service.send_notification(&event).await?;
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn subscribe_to_events(
         &mut self,
         event_type: ECommerceEventType,
@@ -447,20 +447,20 @@ pub struct DistributedCache {
 impl DistributedCache {
     pub async fn new(redis_url: &str, config: CacheConfig) -> Result<Self, CacheError> {
         let client = redis::Client::open(redis_url)?;
-        
+
         Ok(Self {
             redis_client: client,
             cache_config: config,
             cache_stats: CacheStats::new(),
         })
     }
-    
+
     pub async fn get_product(&self, product_id: &str) -> Result<Option<Product>, CacheError> {
         let mut conn = self.redis_client.get_async_connection().await?;
         let key = format!("product:{}", product_id);
-        
+
         let result: Option<String> = conn.get(&key).await?;
-        
+
         if let Some(data) = result {
             let product: Product = serde_json::from_str(&data)?;
             self.cache_stats.record_hit();
@@ -470,27 +470,27 @@ impl DistributedCache {
             Ok(None)
         }
     }
-    
+
     pub async fn set_product(&self, product: &Product, ttl: Option<Duration>) -> Result<(), CacheError> {
         let mut conn = self.redis_client.get_async_connection().await?;
         let key = format!("product:{}", product.id);
         let data = serde_json::to_string(product)?;
-        
+
         if let Some(ttl) = ttl {
             conn.set_ex(&key, data, ttl.as_secs() as usize).await?;
         } else {
             conn.set(&key, data).await?;
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn get_user_cart(&self, user_id: &str) -> Result<Option<ShoppingCart>, CacheError> {
         let mut conn = self.redis_client.get_async_connection().await?;
         let key = format!("cart:{}", user_id);
-        
+
         let result: Option<String> = conn.get(&key).await?;
-        
+
         if let Some(data) = result {
             let cart: ShoppingCart = serde_json::from_str(&data)?;
             Ok(Some(cart))
@@ -498,24 +498,24 @@ impl DistributedCache {
             Ok(None)
         }
     }
-    
+
     pub async fn update_cart(&self, user_id: &str, cart: &ShoppingCart) -> Result<(), CacheError> {
         let mut conn = self.redis_client.get_async_connection().await?;
         let key = format!("cart:{}", user_id);
         let data = serde_json::to_string(cart)?;
-        
+
         // 购物车数据设置较长的TTL
         conn.set_ex(&key, data, 24 * 60 * 60).await?; // 24小时
-        
+
         Ok(())
     }
-    
+
     pub async fn invalidate_product(&self, product_id: &str) -> Result<(), CacheError> {
         let mut conn = self.redis_client.get_async_connection().await?;
         let key = format!("product:{}", product_id);
-        
+
         conn.del(&key).await?;
-        
+
         Ok(())
     }
 }
@@ -551,13 +551,13 @@ pub struct ProductSearchEngine {
 impl ProductSearchEngine {
     pub async fn new(elastic_url: &str, config: SearchConfig) -> Result<Self, SearchError> {
         let client = Elasticsearch::new(elastic_url)?;
-        
+
         Ok(Self {
             elastic_client: client,
             search_config: config,
         })
     }
-    
+
     pub async fn index_product(&self, product: &Product) -> Result<(), SearchError> {
         let response = self.elastic_client
             .index(elasticsearch::IndexParts::Index("products"))
@@ -576,37 +576,37 @@ impl ProductSearchEngine {
             }))
             .send()
             .await?;
-        
+
         if !response.status_code().is_success() {
             return Err(SearchError::IndexingFailed);
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn search_products(&self, query: &SearchQuery) -> Result<SearchResult, SearchError> {
         let search_body = self.build_search_query(query).await?;
-        
+
         let response = self.elastic_client
             .search(SearchParts::Index(&["products"]))
             .body(search_body)
             .send()
             .await?;
-        
+
         let body: serde_json::Value = response.json().await?;
-        
+
         // 解析搜索结果
         let hits = body["hits"]["hits"].as_array().unwrap();
         let mut products = Vec::new();
-        
+
         for hit in hits {
             let source = &hit["_source"];
             let product: Product = serde_json::from_value(source.clone())?;
             products.push(product);
         }
-        
+
         let total = body["hits"]["total"]["value"].as_u64().unwrap_or(0);
-        
+
         Ok(SearchResult {
             products,
             total,
@@ -614,7 +614,7 @@ impl ProductSearchEngine {
             aggregations: self.parse_aggregations(&body).await?,
         })
     }
-    
+
     async fn build_search_query(&self, query: &SearchQuery) -> Result<serde_json::Value, SearchError> {
         let mut search_body = json!({
             "query": {
@@ -629,7 +629,7 @@ impl ProductSearchEngine {
             "size": query.limit.unwrap_or(20),
             "from": query.offset.unwrap_or(0)
         });
-        
+
         // 添加文本搜索
         if !query.text.is_empty() {
             let text_query = json!({
@@ -642,7 +642,7 @@ impl ProductSearchEngine {
             });
             search_body["query"]["bool"]["must"].as_array_mut().unwrap().push(text_query);
         }
-        
+
         // 添加价格过滤
         if let Some(price_range) = &query.price_range {
             let price_filter = json!({
@@ -655,7 +655,7 @@ impl ProductSearchEngine {
             });
             search_body["query"]["bool"]["filter"].as_array_mut().unwrap().push(price_filter);
         }
-        
+
         // 添加分类过滤
         if !query.categories.is_empty() {
             let category_filter = json!({
@@ -665,7 +665,7 @@ impl ProductSearchEngine {
             });
             search_body["query"]["bool"]["filter"].as_array_mut().unwrap().push(category_filter);
         }
-        
+
         // 添加排序
         if let Some(sort_field) = &query.sort_by {
             let sort = json!({
@@ -675,7 +675,7 @@ impl ProductSearchEngine {
             });
             search_body["sort"].as_array_mut().unwrap().push(sort);
         }
-        
+
         Ok(search_body)
     }
 }
@@ -699,26 +699,26 @@ pub struct OrderProcessingWorkflow {
 impl OrderProcessingWorkflow {
     pub async fn process_order(&self, order_request: OrderRequest) -> Result<OrderResult, WorkflowError> {
         let mut workflow_state = WorkflowState::new();
-        
+
         // 1. 验证订单
         let validated_order = self.order_service.validate_order(&order_request).await?;
         workflow_state.add_step("order_validation", StepStatus::Completed);
-        
+
         // 2. 检查库存
         let inventory_check = self.inventory_service.check_availability(&validated_order).await?;
         if !inventory_check.available {
             return Err(WorkflowError::InsufficientInventory(inventory_check.unavailable_items));
         }
         workflow_state.add_step("inventory_check", StepStatus::Completed);
-        
+
         // 3. 预留库存
         let inventory_reservation = self.inventory_service.reserve_inventory(&validated_order).await?;
         workflow_state.add_step("inventory_reservation", StepStatus::Completed);
-        
+
         // 4. 创建订单
         let order = self.order_service.create_order(&validated_order).await?;
         workflow_state.add_step("order_creation", StepStatus::Completed);
-        
+
         // 5. 处理支付
         let payment_result = self.payment_service.process_payment(&order).await?;
         if !payment_result.success {
@@ -727,19 +727,19 @@ impl OrderProcessingWorkflow {
             return Err(WorkflowError::PaymentFailed(payment_result.error_message));
         }
         workflow_state.add_step("payment_processing", StepStatus::Completed);
-        
+
         // 6. 确认订单
         let confirmed_order = self.order_service.confirm_order(&order).await?;
         workflow_state.add_step("order_confirmation", StepStatus::Completed);
-        
+
         // 7. 安排发货
         let shipping_arrangement = self.shipping_service.arrange_shipping(&confirmed_order).await?;
         workflow_state.add_step("shipping_arrangement", StepStatus::Completed);
-        
+
         // 8. 发送通知
         self.notification_service.send_order_confirmation(&confirmed_order).await?;
         workflow_state.add_step("notification_sent", StepStatus::Completed);
-        
+
         Ok(OrderResult {
             order: confirmed_order,
             payment_result,
@@ -763,18 +763,18 @@ pub struct PaymentProcessingWorkflow {
 impl PaymentProcessingWorkflow {
     pub async fn process_payment(&self, payment_request: PaymentRequest) -> Result<PaymentResult, PaymentError> {
         let mut workflow_state = WorkflowState::new();
-        
+
         // 1. 验证支付信息
         let validated_payment = self.validate_payment_info(&payment_request).await?;
         workflow_state.add_step("payment_validation", StepStatus::Completed);
-        
+
         // 2. 欺诈检测
         let fraud_check = self.fraud_detection.check_transaction(&validated_payment).await?;
         if fraud_check.risk_score > 0.8 {
             return Err(PaymentError::HighFraudRisk(fraud_check.reason));
         }
         workflow_state.add_step("fraud_detection", StepStatus::Completed);
-        
+
         // 3. 风险评估
         let risk_assessment = self.risk_assessment.assess_risk(&validated_payment).await?;
         if risk_assessment.risk_level == RiskLevel::High {
@@ -785,22 +785,22 @@ impl PaymentProcessingWorkflow {
             }
         }
         workflow_state.add_step("risk_assessment", StepStatus::Completed);
-        
+
         // 4. 合规检查
         let compliance_check = self.compliance_checker.check_compliance(&validated_payment).await?;
         if !compliance_check.compliant {
             return Err(PaymentError::ComplianceViolation(compliance_check.violations));
         }
         workflow_state.add_step("compliance_check", StepStatus::Completed);
-        
+
         // 5. 处理支付
         let payment_result = self.payment_gateway.process_payment(&validated_payment).await?;
         workflow_state.add_step("payment_processing", StepStatus::Completed);
-        
+
         // 6. 记录交易
         let transaction_record = self.record_transaction(&payment_result).await?;
         workflow_state.add_step("transaction_recording", StepStatus::Completed);
-        
+
         Ok(PaymentResult {
             transaction_id: payment_result.transaction_id,
             status: payment_result.status,
@@ -811,20 +811,20 @@ impl PaymentProcessingWorkflow {
             workflow_state,
         })
     }
-    
+
     async fn validate_payment_info(&self, request: &PaymentRequest) -> Result<ValidatedPayment, ValidationError> {
         let mut validation_result = ValidatedPayment::new();
-        
+
         // 验证金额
         if request.amount <= 0.0 {
             return Err(ValidationError::InvalidAmount);
         }
-        
+
         // 验证货币
         if !self.is_valid_currency(&request.currency) {
             return Err(ValidationError::InvalidCurrency);
         }
-        
+
         // 验证支付方式
         match &request.payment_method {
             PaymentMethod::CreditCard(card) => {
@@ -843,7 +843,7 @@ impl PaymentProcessingWorkflow {
                 }
             }
         }
-        
+
         validation_result.payment_request = request.clone();
         Ok(validation_result)
     }
@@ -870,7 +870,7 @@ pub struct ShoppingCartSystem {
 impl ShoppingCartSystem {
     pub async fn add_to_cart(&self, user_id: &str, item: CartItem) -> Result<ShoppingCart, CartError> {
         let mut carts = self.cart_store.write().await;
-        
+
         // 获取或创建购物车
         let cart = carts.entry(user_id.to_string()).or_insert_with(|| ShoppingCart {
             user_id: user_id.to_string(),
@@ -878,22 +878,22 @@ impl ShoppingCartSystem {
             created_at: Utc::now(),
             updated_at: Utc::now(),
         });
-        
+
         // 验证产品
         let product = self.product_service.get_product(&item.product_id).await?;
         if product.status != ProductStatus::Active {
             return Err(CartError::ProductNotAvailable);
         }
-        
+
         // 检查库存
         let inventory_check = self.inventory_checker.check_availability(&item.product_id, item.quantity).await?;
         if !inventory_check.available {
             return Err(CartError::InsufficientInventory);
         }
-        
+
         // 计算价格
         let pricing = self.pricing_engine.calculate_price(&product, &item).await?;
-        
+
         // 更新购物车
         let cart_item = CartItem {
             product_id: item.product_id,
@@ -904,35 +904,35 @@ impl ShoppingCartSystem {
             discount: pricing.discount,
             added_at: Utc::now(),
         };
-        
+
         cart.items.insert(item.product_id.clone(), cart_item);
         cart.updated_at = Utc::now();
-        
+
         // 重新计算购物车总计
         self.recalculate_cart_totals(cart).await?;
-        
+
         Ok(cart.clone())
     }
-    
+
     pub async fn remove_from_cart(&self, user_id: &str, product_id: &str) -> Result<ShoppingCart, CartError> {
         let mut carts = self.cart_store.write().await;
-        
+
         if let Some(cart) = carts.get_mut(user_id) {
             cart.items.remove(product_id);
             cart.updated_at = Utc::now();
-            
+
             // 重新计算购物车总计
             self.recalculate_cart_totals(cart).await?;
-            
+
             Ok(cart.clone())
         } else {
             Err(CartError::CartNotFound)
         }
     }
-    
+
     pub async fn update_quantity(&self, user_id: &str, product_id: &str, quantity: u32) -> Result<ShoppingCart, CartError> {
         let mut carts = self.cart_store.write().await;
-        
+
         if let Some(cart) = carts.get_mut(user_id) {
             if let Some(item) = cart.items.get_mut(product_id) {
                 if quantity == 0 {
@@ -943,17 +943,17 @@ impl ShoppingCartSystem {
                     if !inventory_check.available {
                         return Err(CartError::InsufficientInventory);
                     }
-                    
+
                     // 更新数量
                     item.quantity = quantity;
                     item.total_price = item.unit_price * quantity as f64;
                 }
-                
+
                 cart.updated_at = Utc::now();
-                
+
                 // 重新计算购物车总计
                 self.recalculate_cart_totals(cart).await?;
-                
+
                 Ok(cart.clone())
             } else {
                 Err(CartError::ItemNotFound)
@@ -962,24 +962,24 @@ impl ShoppingCartSystem {
             Err(CartError::CartNotFound)
         }
     }
-    
+
     async fn recalculate_cart_totals(&self, cart: &mut ShoppingCart) -> Result<(), CartError> {
         let mut subtotal = 0.0;
         let mut total_discount = 0.0;
-        
+
         for item in cart.items.values() {
             subtotal += item.total_price;
             total_discount += item.discount;
         }
-        
+
         // 应用购物车级别的折扣
         let cart_discount = self.pricing_engine.calculate_cart_discount(subtotal).await?;
         total_discount += cart_discount;
-        
+
         cart.subtotal = subtotal;
         cart.total_discount = total_discount;
         cart.total = subtotal - total_discount;
-        
+
         Ok(())
     }
 }
@@ -1001,39 +1001,39 @@ impl RecommendationEngine {
     pub async fn generate_recommendations(&self, user_id: &str, context: &RecommendationContext) -> Result<Vec<Recommendation>, RecommendationError> {
         // 1. 分析用户行为
         let user_behavior = self.user_behavior_analyzer.analyze_behavior(user_id).await?;
-        
+
         // 2. 协同过滤推荐
         let collaborative_recs = self.collaborative_filter.recommend(user_id, &user_behavior).await?;
-        
+
         // 3. 基于内容的推荐
         let content_recs = self.content_based_filter.recommend(user_id, &user_behavior).await?;
-        
+
         // 4. 混合推荐
         let hybrid_recs = self.hybrid_recommender.combine_recommendations(
             &collaborative_recs,
             &content_recs,
             context,
         ).await?;
-        
+
         // 5. 排序和过滤
         let final_recommendations = self.rank_and_filter_recommendations(&hybrid_recs, context).await?;
-        
+
         Ok(final_recommendations)
     }
-    
+
     pub async fn update_user_preferences(&self, user_id: &str, interaction: &UserInteraction) -> Result<(), RecommendationError> {
         // 1. 更新用户行为模型
         self.user_behavior_analyzer.update_model(user_id, interaction).await?;
-        
+
         // 2. 更新协同过滤模型
         self.collaborative_filter.update_model(user_id, interaction).await?;
-        
+
         // 3. 更新内容过滤模型
         self.content_based_filter.update_model(user_id, interaction).await?;
-        
+
         // 4. 重新训练混合模型
         self.hybrid_recommender.retrain_model().await?;
-        
+
         Ok(())
     }
 }
@@ -1047,36 +1047,36 @@ impl CollaborativeFilter {
     pub async fn recommend(&self, user_id: &str, behavior: &UserBehavior) -> Result<Vec<Recommendation>, RecommendationError> {
         // 1. 找到相似用户
         let similar_users = self.find_similar_users(user_id, behavior).await?;
-        
+
         // 2. 获取相似用户的偏好
         let user_preferences = self.get_user_preferences(&similar_users).await?;
-        
+
         // 3. 计算推荐分数
         let recommendations = self.calculate_recommendation_scores(user_id, &user_preferences).await?;
-        
+
         Ok(recommendations)
     }
-    
+
     async fn find_similar_users(&self, user_id: &str, behavior: &UserBehavior) -> Result<Vec<SimilarUser>, RecommendationError> {
         let user_vector = self.user_item_matrix.get_user_vector(user_id).await?;
         let mut similarities = Vec::new();
-        
+
         for other_user_id in self.user_item_matrix.get_all_users().await? {
             if other_user_id != user_id {
                 let other_vector = self.user_item_matrix.get_user_vector(&other_user_id).await?;
                 let similarity = self.similarity_calculator.calculate_cosine_similarity(&user_vector, &other_vector);
-                
+
                 similarities.push(SimilarUser {
                     user_id: other_user_id,
                     similarity,
                 });
             }
         }
-        
+
         // 排序并返回最相似的用户
         similarities.sort_by(|a, b| b.similarity.partial_cmp(&a.similarity).unwrap());
         similarities.truncate(10); // 返回前10个最相似的用户
-        
+
         Ok(similarities)
     }
 }
@@ -1112,52 +1112,52 @@ impl ECommerceMetrics {
             "active_users",
             "Number of currently active users"
         ).unwrap();
-        
+
         let orders_created = Counter::new(
             "orders_created_total",
             "Total number of orders created"
         ).unwrap();
-        
+
         let orders_completed = Counter::new(
             "orders_completed_total",
             "Total number of orders completed"
         ).unwrap();
-        
+
         let revenue_total = Counter::new(
             "revenue_total",
             "Total revenue generated"
         ).unwrap();
-        
+
         let cart_abandonment_rate = Gauge::new(
             "cart_abandonment_rate",
             "Cart abandonment rate percentage"
         ).unwrap();
-        
+
         let conversion_rate = Gauge::new(
             "conversion_rate",
             "Conversion rate percentage"
         ).unwrap();
-        
+
         let average_order_value = Gauge::new(
             "average_order_value",
             "Average order value"
         ).unwrap();
-        
+
         let payment_success_rate = Gauge::new(
             "payment_success_rate",
             "Payment success rate percentage"
         ).unwrap();
-        
+
         let inventory_alerts = Counter::new(
             "inventory_alerts_total",
             "Total number of inventory alerts"
         ).unwrap();
-        
+
         let search_queries = Counter::new(
             "search_queries_total",
             "Total number of search queries"
         ).unwrap();
-        
+
         Self {
             active_users,
             orders_created,
@@ -1171,47 +1171,47 @@ impl ECommerceMetrics {
             search_queries,
         }
     }
-    
+
     pub fn record_active_user(&self) {
         self.active_users.inc();
     }
-    
+
     pub fn record_user_logout(&self) {
         self.active_users.dec();
     }
-    
+
     pub fn record_order_created(&self) {
         self.orders_created.inc();
     }
-    
+
     pub fn record_order_completed(&self) {
         self.orders_completed.inc();
     }
-    
+
     pub fn record_revenue(&self, amount: f64) {
         self.revenue_total.inc_by(amount);
     }
-    
+
     pub fn set_cart_abandonment_rate(&self, rate: f64) {
         self.cart_abandonment_rate.set(rate);
     }
-    
+
     pub fn set_conversion_rate(&self, rate: f64) {
         self.conversion_rate.set(rate);
     }
-    
+
     pub fn set_average_order_value(&self, value: f64) {
         self.average_order_value.set(value);
     }
-    
+
     pub fn set_payment_success_rate(&self, rate: f64) {
         self.payment_success_rate.set(rate);
     }
-    
+
     pub fn record_inventory_alert(&self) {
         self.inventory_alerts.inc();
     }
-    
+
     pub fn record_search_query(&self) {
         self.search_queries.inc();
     }
@@ -1232,46 +1232,46 @@ impl PerformanceMonitor {
     pub async fn monitor_api_performance(&self, endpoint: &str, duration: Duration) -> Result<(), MonitorError> {
         // 记录响应时间
         self.response_time_tracker.record_response_time(endpoint, duration).await?;
-        
+
         // 检查性能阈值
         if duration > Duration::from_millis(1000) {
             tracing::warn!("Slow API response: {} took {:?}", endpoint, duration);
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn monitor_database_performance(&self, query: &str, duration: Duration) -> Result<(), MonitorError> {
         // 记录数据库查询时间
         self.response_time_tracker.record_db_query_time(query, duration).await?;
-        
+
         // 检查慢查询
         if duration > Duration::from_millis(100) {
             tracing::warn!("Slow database query: {} took {:?}", query, duration);
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn monitor_cache_performance(&self, operation: &str, hit: bool, duration: Duration) -> Result<(), MonitorError> {
         // 记录缓存性能
         self.response_time_tracker.record_cache_operation(operation, hit, duration).await?;
-        
+
         // 检查缓存命中率
         let hit_rate = self.response_time_tracker.get_cache_hit_rate().await?;
         if hit_rate < 0.8 {
             tracing::warn!("Low cache hit rate: {:.2}%", hit_rate * 100.0);
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn generate_performance_report(&self) -> Result<PerformanceReport, ReportError> {
         let response_times = self.response_time_tracker.get_statistics().await?;
         let throughput = self.throughput_monitor.get_statistics().await?;
         let error_rates = self.error_rate_tracker.get_statistics().await?;
         let resource_usage = self.resource_monitor.get_statistics().await?;
-        
+
         Ok(PerformanceReport {
             response_times,
             throughput,

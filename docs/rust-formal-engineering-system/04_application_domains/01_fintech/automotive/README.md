@@ -54,36 +54,36 @@ impl AutonomousDrivingSystem {
         loop {
             // 1. 感知环境
             let perception_data = self.perception_system.perceive_environment().await?;
-            
+
             // 2. 定位车辆
             let vehicle_state = self.localization_system.localize_vehicle().await?;
-            
+
             // 3. 路径规划
             let planned_path = self.planning_system.plan_path(
                 &perception_data,
                 &vehicle_state,
             ).await?;
-            
+
             // 4. 安全检查
             let safety_check = self.safety_system.validate_plan(&planned_path).await?;
-            
+
             if !safety_check.safe {
                 self.safety_system.trigger_emergency_stop().await?;
                 continue;
             }
-            
+
             // 5. 车辆控制
             let control_commands = self.control_system.generate_commands(
                 &planned_path,
                 &vehicle_state,
             ).await?;
-            
+
             // 6. 执行控制
             self.control_system.execute_commands(&control_commands).await?;
-            
+
             // 7. 通信更新
             self.communication_system.broadcast_status(&vehicle_state).await?;
-            
+
             // 控制循环频率
             tokio::time::sleep(Duration::from_millis(20)).await; // 50Hz
         }
@@ -134,25 +134,25 @@ pub struct SensorFusionSystem {
 impl SensorFusionSystem {
     pub async fn fuse_sensor_data(&self) -> Result<FusedData, FusionError> {
         let mut sensor_readings = HashMap::new();
-        
+
         // 1. 收集所有传感器数据
         for (sensor_type, sensor) in &self.sensors {
             let reading = sensor.read_data().await?;
             sensor_readings.insert(*sensor_type, reading);
         }
-        
+
         // 2. 时间同步
         let synchronized_data = self.synchronize_data(&sensor_readings).await?;
-        
+
         // 3. 数据融合
         let fused_data = self.fusion_algorithm.fuse(&synchronized_data).await?;
-        
+
         // 4. 卡尔曼滤波
         let filtered_data = self.kalman_filter.update(&fused_data).await?;
-        
+
         // 5. 目标跟踪
         let tracked_objects = self.object_tracker.track_objects(&filtered_data).await?;
-        
+
         Ok(FusedData {
             objects: tracked_objects,
             environment_map: filtered_data.environment_map,
@@ -160,22 +160,22 @@ impl SensorFusionSystem {
             timestamp: Utc::now(),
         })
     }
-    
+
     async fn synchronize_data(&self, readings: &HashMap<SensorType, SensorReading>) -> Result<SynchronizedData, FusionError> {
         let mut synchronized = SynchronizedData::new();
-        
+
         // 找到最早的时间戳
         let earliest_timestamp = readings.values()
             .map(|r| r.timestamp)
             .min()
             .ok_or(FusionError::NoData)?;
-        
+
         // 将所有数据同步到最早时间戳
         for (sensor_type, reading) in readings {
             let synchronized_reading = self.interpolate_to_timestamp(reading, earliest_timestamp).await?;
             synchronized.add_reading(*sensor_type, synchronized_reading);
         }
-        
+
         Ok(synchronized)
     }
 }
@@ -192,31 +192,31 @@ impl ExtendedKalmanFilter {
         // 1. 预测步骤
         let predicted_state = self.predict_state().await?;
         let predicted_covariance = self.predict_covariance().await?;
-        
+
         // 2. 更新步骤
         let kalman_gain = self.calculate_kalman_gain(&predicted_covariance).await?;
         let updated_state = self.update_state(&predicted_state, measurement, &kalman_gain).await?;
         let updated_covariance = self.update_covariance(&predicted_covariance, &kalman_gain).await?;
-        
+
         // 3. 更新内部状态
         self.state = updated_state;
         self.covariance = updated_covariance;
-        
+
         Ok(FilteredData {
             state: updated_state,
             covariance: updated_covariance,
             timestamp: Utc::now(),
         })
     }
-    
+
     async fn predict_state(&self) -> Result<VehicleState, FilterError> {
         // 使用运动模型预测下一个状态
         let dt = 0.02; // 50Hz
-        
+
         let new_position = self.state.position + self.state.velocity * dt;
         let new_velocity = self.state.velocity + self.state.acceleration * dt;
         let new_orientation = self.state.orientation + self.state.angular_velocity * dt;
-        
+
         Ok(VehicleState {
             position: new_position,
             velocity: new_velocity,
@@ -465,62 +465,62 @@ pub struct VehicleDataStreamProcessor {
 impl VehicleDataStreamProcessor {
     pub async fn start_processing(&self) -> Result<(), ProcessingError> {
         let mut data_streams = Vec::new();
-        
+
         // 启动所有数据源
         for (source_type, source) in &self.data_sources {
             let stream = source.start_streaming().await?;
             data_streams.push((*source_type, stream));
         }
-        
+
         // 处理数据流
         loop {
             for (source_type, stream) in &mut data_streams {
                 if let Some(data) = stream.next().await {
                     // 1. 数据验证
                     let validated_data = self.validate_data(&data).await?;
-                    
+
                     // 2. 数据转换
                     let transformed_data = self.transform_data(&validated_data).await?;
-                    
+
                     // 3. 实时分析
                     let analysis_result = self.stream_processor.analyze(&transformed_data).await?;
-                    
+
                     // 4. 存储数据
                     self.data_storage.store(&transformed_data).await?;
-                    
+
                     // 5. 检查告警
                     if let Some(alert) = self.check_alerts(&analysis_result).await? {
                         self.alert_system.send_alert(&alert).await?;
                     }
                 }
             }
-            
+
             tokio::time::sleep(Duration::from_millis(10)).await; // 100Hz
         }
     }
-    
+
     async fn validate_data(&self, data: &VehicleData) -> Result<ValidatedData, ValidationError> {
         let mut validation_result = ValidatedData::new();
-        
+
         // 检查数据完整性
         if data.timestamp.is_none() {
             return Err(ValidationError::MissingTimestamp);
         }
-        
+
         // 检查数据范围
         if let Some(speed) = data.speed {
             if speed < 0.0 || speed > 300.0 {
                 return Err(ValidationError::InvalidSpeed);
             }
         }
-        
+
         // 检查传感器状态
         for sensor_reading in &data.sensor_readings {
             if sensor_reading.confidence < 0.5 {
                 validation_result.add_warning(ValidationWarning::LowConfidence(sensor_reading.sensor_type));
             }
         }
-        
+
         validation_result.data = data.clone();
         Ok(validation_result)
     }
@@ -575,15 +575,15 @@ impl DiagnosticDatabase {
     pub async fn new(database_url: &str, redis_url: &str) -> Result<Self, Box<dyn std::error::Error>> {
         let pool = PgPool::connect(database_url).await?;
         let cache = RedisCache::new(redis_url).await?;
-        
+
         Ok(Self { pool, cache })
     }
-    
+
     pub async fn store_diagnostic_data(&self, data: &DiagnosticData) -> Result<(), DatabaseError> {
         // 1. 存储到PostgreSQL
         sqlx::query!(
             r#"
-            INSERT INTO diagnostic_data 
+            INSERT INTO diagnostic_data
             (id, vehicle_id, timestamp, diagnostic_codes, sensor_readings, system_status, maintenance_alerts)
             VALUES ($1, $2, $3, $4, $5, $6, $7)
             "#,
@@ -597,20 +597,20 @@ impl DiagnosticDatabase {
         )
         .execute(&self.pool)
         .await?;
-        
+
         // 2. 更新缓存
         self.cache.set_vehicle_status(&data.vehicle_id, &data.system_status).await?;
-        
+
         // 3. 检查是否需要维护提醒
         self.check_maintenance_alerts(data).await?;
-        
+
         Ok(())
     }
-    
+
     pub async fn get_vehicle_diagnostics(&self, vehicle_id: &str, time_range: TimeRange) -> Result<Vec<DiagnosticData>, DatabaseError> {
         let rows = sqlx::query!(
             r#"
-            SELECT * FROM diagnostic_data 
+            SELECT * FROM diagnostic_data
             WHERE vehicle_id = $1 AND timestamp BETWEEN $2 AND $3
             ORDER BY timestamp DESC
             "#,
@@ -620,7 +620,7 @@ impl DiagnosticDatabase {
         )
         .fetch_all(&self.pool)
         .await?;
-        
+
         Ok(rows
             .into_iter()
             .map(|row| DiagnosticData {
@@ -654,63 +654,63 @@ pub struct PerceptionPlanningControlLoop {
 impl PerceptionPlanningControlLoop {
     pub async fn execute_loop(&self) -> Result<(), LoopError> {
         let mut loop_count = 0;
-        
+
         loop {
             let start_time = Instant::now();
-            
+
             // 1. 感知阶段
             let perception_result = self.perception_system.perceive().await?;
-            
+
             // 2. 安全检查
             let safety_check = self.safety_monitor.check_perception(&perception_result).await?;
             if !safety_check.safe {
                 self.safety_monitor.trigger_safety_response(&safety_check).await?;
                 continue;
             }
-            
+
             // 3. 规划阶段
             let planning_result = self.planning_system.plan(&perception_result).await?;
-            
+
             // 4. 安全检查
             let safety_check = self.safety_monitor.check_plan(&planning_result).await?;
             if !safety_check.safe {
                 self.safety_monitor.trigger_safety_response(&safety_check).await?;
                 continue;
             }
-            
+
             // 5. 控制阶段
             let control_result = self.control_system.execute(&planning_result).await?;
-            
+
             // 6. 安全检查
             let safety_check = self.safety_monitor.check_control(&control_result).await?;
             if !safety_check.safe {
                 self.safety_monitor.trigger_safety_response(&safety_check).await?;
             }
-            
+
             // 7. 性能监控
             let loop_duration = start_time.elapsed();
             self.monitor_performance(loop_count, loop_duration).await?;
-            
+
             loop_count += 1;
-            
+
             // 控制循环频率
             if loop_duration < Duration::from_millis(20) {
                 tokio::time::sleep(Duration::from_millis(20) - loop_duration).await;
             }
         }
     }
-    
+
     async fn monitor_performance(&self, loop_count: u64, duration: Duration) -> Result<(), MonitorError> {
         // 记录性能指标
         if duration > Duration::from_millis(25) {
             tracing::warn!("PPC loop took too long: {:?}", duration);
         }
-        
+
         // 每1000次循环记录一次统计
         if loop_count % 1000 == 0 {
             tracing::info!("PPC loop statistics - count: {}, avg_duration: {:?}", loop_count, duration);
         }
-        
+
         Ok(())
     }
 }
@@ -729,33 +729,33 @@ pub struct EmergencyHandlingSystem {
 impl EmergencyHandlingSystem {
     pub async fn handle_emergency(&self, emergency: Emergency) -> Result<EmergencyResponse, EmergencyError> {
         let mut response = EmergencyResponse::new();
-        
+
         // 1. 紧急情况分类
         let emergency_type = self.classify_emergency(&emergency).await?;
         response.emergency_type = emergency_type;
-        
+
         // 2. 确定响应级别
         let response_level = self.determine_response_level(&emergency).await?;
         response.response_level = response_level;
-        
+
         // 3. 激活安全系统
         let safety_response = self.safety_systems.activate(&emergency_type).await?;
         response.safety_actions = safety_response.actions;
-        
+
         // 4. 通知相关方
         let notifications = self.communication_system.send_emergency_notifications(&emergency).await?;
         response.notifications = notifications;
-        
+
         // 5. 执行紧急操作
         let emergency_actions = self.execute_emergency_actions(&emergency_type).await?;
         response.emergency_actions = emergency_actions;
-        
+
         // 6. 记录事件
         self.log_emergency_event(&emergency, &response).await?;
-        
+
         Ok(response)
     }
-    
+
     async fn classify_emergency(&self, emergency: &Emergency) -> Result<EmergencyType, EmergencyError> {
         match emergency.trigger {
             EmergencyTrigger::CollisionImminent => Ok(EmergencyType::CollisionAvoidance),
@@ -766,10 +766,10 @@ impl EmergencyHandlingSystem {
             EmergencyTrigger::Unknown => Ok(EmergencyType::Unknown),
         }
     }
-    
+
     async fn execute_emergency_actions(&self, emergency_type: &EmergencyType) -> Result<Vec<EmergencyAction>, EmergencyError> {
         let mut actions = Vec::new();
-        
+
         match emergency_type {
             EmergencyType::CollisionAvoidance => {
                 actions.push(EmergencyAction::EmergencyBrake);
@@ -800,7 +800,7 @@ impl EmergencyHandlingSystem {
                 actions.push(EmergencyAction::RequestAssistance);
             }
         }
-        
+
         Ok(actions)
     }
 }
@@ -826,7 +826,7 @@ pub struct SensorManagementSystem {
 impl SensorManagementSystem {
     pub async fn initialize_sensors(&self) -> Result<(), SensorError> {
         let mut sensors = self.sensors.write().await;
-        
+
         // 初始化摄像头
         let camera = Arc::new(Camera::new(CameraConfig {
             resolution: Resolution::HD,
@@ -834,7 +834,7 @@ impl SensorManagementSystem {
             exposure_mode: ExposureMode::Auto,
         })?);
         sensors.insert(SensorType::Camera, camera);
-        
+
         // 初始化激光雷达
         let lidar = Arc::new(Lidar::new(LidarConfig {
             range: 200.0,
@@ -842,7 +842,7 @@ impl SensorManagementSystem {
             scan_frequency: 10.0,
         })?);
         sensors.insert(SensorType::Lidar, lidar);
-        
+
         // 初始化毫米波雷达
         let radar = Arc::new(Radar::new(RadarConfig {
             range: 150.0,
@@ -850,21 +850,21 @@ impl SensorManagementSystem {
             update_rate: 20.0,
         })?);
         sensors.insert(SensorType::Radar, radar);
-        
+
         // 初始化超声波传感器
         let ultrasonic = Arc::new(Ultrasonic::new(UltrasonicConfig {
             range: 5.0,
             frequency: 40.0,
         })?);
         sensors.insert(SensorType::Ultrasonic, ultrasonic);
-        
+
         // 初始化GPS
         let gps = Arc::new(GPS::new(GPSConfig {
             update_rate: 10.0,
             accuracy_threshold: 2.0,
         })?);
         sensors.insert(SensorType::GPS, gps);
-        
+
         // 初始化IMU
         let imu = Arc::new(IMU::new(IMUConfig {
             sample_rate: 100.0,
@@ -872,35 +872,35 @@ impl SensorManagementSystem {
             gyroscope_range: GyroscopeRange::DPS2000,
         })?);
         sensors.insert(SensorType::IMU, imu);
-        
+
         Ok(())
     }
-    
+
     pub async fn calibrate_sensors(&self) -> Result<CalibrationResult, CalibrationError> {
         let sensors = self.sensors.read().await;
         let mut calibration_results = Vec::new();
-        
+
         for (sensor_type, sensor) in sensors.iter() {
             let calibration = self.calibration_manager.calibrate_sensor(sensor).await?;
             calibration_results.push((*sensor_type, calibration));
         }
-        
+
         Ok(CalibrationResult {
             sensor_calibrations: calibration_results,
             overall_success: calibration_results.iter().all(|(_, c)| c.success),
             timestamp: Utc::now(),
         })
     }
-    
+
     pub async fn monitor_sensor_health(&self) -> Result<SensorHealthReport, HealthError> {
         let sensors = self.sensors.read().await;
         let mut health_report = SensorHealthReport::new();
-        
+
         for (sensor_type, sensor) in sensors.iter() {
             let health = self.health_monitor.check_sensor_health(sensor).await?;
             health_report.add_sensor_health(*sensor_type, health);
         }
-        
+
         Ok(health_report)
     }
 }
@@ -921,7 +921,7 @@ pub struct Camera {
 impl Camera {
     pub fn new(config: CameraConfig) -> Result<Self, SensorError> {
         let device = CameraDevice::open(&config)?;
-        
+
         Ok(Self {
             config,
             device,
@@ -933,7 +933,7 @@ impl Camera {
 impl Sensor for Camera {
     async fn read_data(&self) -> Result<SensorReading, SensorError> {
         let frame = self.device.capture_frame().await?;
-        
+
         Ok(SensorReading {
             sensor_type: SensorType::Camera,
             data: SensorData::Image(frame),
@@ -941,22 +941,22 @@ impl Sensor for Camera {
             confidence: 0.95,
         })
     }
-    
+
     async fn calibrate(&self) -> Result<CalibrationResult, CalibrationError> {
         // 执行相机标定
         let calibration = self.perform_camera_calibration().await?;
-        
+
         Ok(CalibrationResult {
             success: true,
             parameters: calibration.parameters,
             error_metrics: calibration.error_metrics,
         })
     }
-    
+
     async fn get_health(&self) -> Result<SensorHealth, HealthError> {
         // 检查相机健康状态
         let status = self.device.get_status().await?;
-        
+
         Ok(SensorHealth {
             status: if status.is_healthy { HealthStatus::Healthy } else { HealthStatus::Unhealthy },
             confidence: status.confidence,
@@ -964,7 +964,7 @@ impl Sensor for Camera {
             next_maintenance: status.next_maintenance,
         })
     }
-    
+
     fn get_config(&self) -> SensorConfig {
         SensorConfig::Camera(self.config.clone())
     }
@@ -985,27 +985,27 @@ impl VehicleControlInterface {
     pub async fn send_control_commands(&self, commands: &ControlCommands) -> Result<ControlResponse, ControlError> {
         // 1. 验证命令
         let validated_commands = self.validate_commands(commands).await?;
-        
+
         // 2. 安全检查
         let safety_check = self.safety_controller.check_commands(&validated_commands).await?;
         if !safety_check.safe {
             return Err(ControlError::SafetyViolation(safety_check.reason));
         }
-        
+
         // 3. 转换为CAN消息
         let can_messages = self.convert_to_can_messages(&validated_commands).await?;
-        
+
         // 4. 发送到CAN总线
         for message in can_messages {
             self.can_bus.send_message(&message).await?;
         }
-        
+
         // 5. 等待执行反馈
         let feedback = self.feedback_system.wait_for_feedback(&validated_commands).await?;
-        
+
         // 6. 验证执行结果
         let execution_result = self.verify_execution(&validated_commands, &feedback).await?;
-        
+
         Ok(ControlResponse {
             commands_executed: validated_commands,
             feedback,
@@ -1013,10 +1013,10 @@ impl VehicleControlInterface {
             timestamp: Utc::now(),
         })
     }
-    
+
     async fn validate_commands(&self, commands: &ControlCommands) -> Result<ValidatedCommands, ValidationError> {
         let mut validated = ValidatedCommands::new();
-        
+
         // 验证油门命令
         if let Some(throttle) = commands.throttle {
             if throttle < 0.0 || throttle > 1.0 {
@@ -1024,7 +1024,7 @@ impl VehicleControlInterface {
             }
             validated.throttle = Some(throttle);
         }
-        
+
         // 验证刹车命令
         if let Some(brake) = commands.brake {
             if brake < 0.0 || brake > 1.0 {
@@ -1032,7 +1032,7 @@ impl VehicleControlInterface {
             }
             validated.brake = Some(brake);
         }
-        
+
         // 验证转向命令
         if let Some(steering) = commands.steering {
             if steering < -1.0 || steering > 1.0 {
@@ -1040,7 +1040,7 @@ impl VehicleControlInterface {
             }
             validated.steering = Some(steering);
         }
-        
+
         // 验证档位命令
         if let Some(gear) = commands.gear {
             if !self.is_valid_gear(gear) {
@@ -1048,13 +1048,13 @@ impl VehicleControlInterface {
             }
             validated.gear = Some(gear);
         }
-        
+
         Ok(validated)
     }
-    
+
     async fn convert_to_can_messages(&self, commands: &ValidatedCommands) -> Result<Vec<CANMessage>, CANError> {
         let mut messages = Vec::new();
-        
+
         // 油门控制消息
         if let Some(throttle) = commands.throttle {
             let throttle_message = CANMessage {
@@ -1064,7 +1064,7 @@ impl VehicleControlInterface {
             };
             messages.push(throttle_message);
         }
-        
+
         // 刹车控制消息
         if let Some(brake) = commands.brake {
             let brake_message = CANMessage {
@@ -1074,7 +1074,7 @@ impl VehicleControlInterface {
             };
             messages.push(brake_message);
         }
-        
+
         // 转向控制消息
         if let Some(steering) = commands.steering {
             let steering_message = CANMessage {
@@ -1084,7 +1084,7 @@ impl VehicleControlInterface {
             };
             messages.push(steering_message);
         }
-        
+
         // 档位控制消息
         if let Some(gear) = commands.gear {
             let gear_message = CANMessage {
@@ -1094,7 +1094,7 @@ impl VehicleControlInterface {
             };
             messages.push(gear_message);
         }
-        
+
         Ok(messages)
     }
 }
@@ -1128,42 +1128,42 @@ impl VehicleHealthMetrics {
             "vehicle_system_uptime_seconds",
             "Vehicle system uptime in seconds"
         ).unwrap();
-        
+
         let sensor_health = Gauge::new(
             "sensor_health_score",
             "Overall sensor health score (0-100)"
         ).unwrap();
-        
+
         let control_accuracy = Histogram::new(
             "control_accuracy_percentage",
             "Control command accuracy percentage"
         ).unwrap();
-        
+
         let emergency_events = Counter::new(
             "emergency_events_total",
             "Total number of emergency events"
         ).unwrap();
-        
+
         let communication_latency = Histogram::new(
             "communication_latency_milliseconds",
             "Communication latency in milliseconds"
         ).unwrap();
-        
+
         let battery_level = Gauge::new(
             "battery_level_percentage",
             "Battery level percentage"
         ).unwrap();
-        
+
         let engine_temperature = Gauge::new(
             "engine_temperature_celsius",
             "Engine temperature in Celsius"
         ).unwrap();
-        
+
         let tire_pressure = Gauge::new(
             "tire_pressure_psi",
             "Tire pressure in PSI"
         ).unwrap();
-        
+
         Self {
             system_uptime,
             sensor_health,
@@ -1175,35 +1175,35 @@ impl VehicleHealthMetrics {
             tire_pressure,
         }
     }
-    
+
     pub fn set_system_uptime(&self, uptime: f64) {
         self.system_uptime.set(uptime);
     }
-    
+
     pub fn set_sensor_health(&self, health_score: f64) {
         self.sensor_health.set(health_score);
     }
-    
+
     pub fn record_control_accuracy(&self, accuracy: f64) {
         self.control_accuracy.observe(accuracy);
     }
-    
+
     pub fn record_emergency_event(&self) {
         self.emergency_events.inc();
     }
-    
+
     pub fn record_communication_latency(&self, latency: f64) {
         self.communication_latency.observe(latency);
     }
-    
+
     pub fn set_battery_level(&self, level: f64) {
         self.battery_level.set(level);
     }
-    
+
     pub fn set_engine_temperature(&self, temperature: f64) {
         self.engine_temperature.set(temperature);
     }
-    
+
     pub fn set_tire_pressure(&self, pressure: f64) {
         self.tire_pressure.set(pressure);
     }
@@ -1224,24 +1224,24 @@ impl PredictiveMaintenanceSystem {
     pub async fn analyze_vehicle_health(&self, vehicle_id: &str) -> Result<MaintenanceAnalysis, MaintenanceError> {
         // 1. 收集车辆数据
         let vehicle_data = self.data_collector.collect_vehicle_data(vehicle_id).await?;
-        
+
         // 2. 特征工程
         let features = self.extract_maintenance_features(&vehicle_data).await?;
-        
+
         // 3. 机器学习预测
         let predictions = self.ml_model.predict_maintenance_needs(&features).await?;
-        
+
         // 4. 生成维护建议
         let recommendations = self.generate_maintenance_recommendations(&predictions).await?;
-        
+
         // 5. 检查是否需要立即维护
         if let Some(urgent_maintenance) = self.check_urgent_maintenance(&predictions).await? {
             self.alert_system.send_urgent_alert(&urgent_maintenance).await?;
         }
-        
+
         // 6. 更新维护计划
         self.scheduling_system.update_maintenance_schedule(vehicle_id, &recommendations).await?;
-        
+
         Ok(MaintenanceAnalysis {
             vehicle_id: vehicle_id.to_string(),
             predictions,
@@ -1251,41 +1251,41 @@ impl PredictiveMaintenanceSystem {
             analysis_timestamp: Utc::now(),
         })
     }
-    
+
     async fn extract_maintenance_features(&self, data: &VehicleData) -> Result<MaintenanceFeatures, FeatureError> {
         let mut features = MaintenanceFeatures::new();
-        
+
         // 发动机特征
         features.engine_hours = data.engine_hours;
         features.engine_temperature = data.engine_temperature;
         features.oil_pressure = data.oil_pressure;
         features.fuel_consumption = data.fuel_consumption;
-        
+
         // 传动系统特征
         features.transmission_temperature = data.transmission_temperature;
         features.gear_shift_count = data.gear_shift_count;
-        
+
         // 制动系统特征
         features.brake_pad_wear = data.brake_pad_wear;
         features.brake_fluid_level = data.brake_fluid_level;
-        
+
         // 轮胎特征
         features.tire_pressure = data.tire_pressure;
         features.tire_wear = data.tire_wear;
-        
+
         // 电气系统特征
         features.battery_voltage = data.battery_voltage;
         features.alternator_output = data.alternator_output;
-        
+
         // 传感器健康特征
         features.sensor_health_scores = data.sensor_health_scores.clone();
-        
+
         Ok(features)
     }
-    
+
     async fn generate_maintenance_recommendations(&self, predictions: &MaintenancePredictions) -> Result<Vec<MaintenanceRecommendation>, RecommendationError> {
         let mut recommendations = Vec::new();
-        
+
         // 发动机维护建议
         if predictions.engine_maintenance_probability > 0.7 {
             recommendations.push(MaintenanceRecommendation {
@@ -1296,7 +1296,7 @@ impl PredictiveMaintenanceSystem {
                 description: "Engine maintenance recommended based on usage patterns".to_string(),
             });
         }
-        
+
         // 制动系统维护建议
         if predictions.brake_maintenance_probability > 0.8 {
             recommendations.push(MaintenanceRecommendation {
@@ -1307,7 +1307,7 @@ impl PredictiveMaintenanceSystem {
                 description: "Brake system maintenance required for safety".to_string(),
             });
         }
-        
+
         // 轮胎维护建议
         if predictions.tire_maintenance_probability > 0.6 {
             recommendations.push(MaintenanceRecommendation {
@@ -1318,7 +1318,7 @@ impl PredictiveMaintenanceSystem {
                 description: "Tire rotation and inspection recommended".to_string(),
             });
         }
-        
+
         Ok(recommendations)
     }
 }

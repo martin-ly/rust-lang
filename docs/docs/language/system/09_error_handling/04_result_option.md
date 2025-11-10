@@ -3,36 +3,38 @@
 
 ## 📊 目录
 
-- [1. 引言](#1-引言)
-- [2. Result类型](#2-result类型)
-  - [2.1 基础定义](#21-基础定义)
-  - [2.2 构造方法](#22-构造方法)
-  - [2.3 模式匹配](#23-模式匹配)
-  - [2.4 错误传播](#24-错误传播)
-- [3. Option类型](#3-option类型)
-  - [3.1 基础定义](#31-基础定义)
-  - [3.2 构造方法](#32-构造方法)
-  - [3.3 模式匹配](#33-模式匹配)
-  - [3.4 链式操作](#34-链式操作)
-- [4. 组合方法](#4-组合方法)
-  - [4.1 Result组合](#41-result组合)
-  - [4.2 Option组合](#42-option组合)
-- [5. 转换方法](#5-转换方法)
-  - [5.1 Result转换](#51-result转换)
-  - [5.2 映射方法](#52-映射方法)
-- [6. 实用方法](#6-实用方法)
-  - [6.1 解包方法](#61-解包方法)
-  - [6.2 检查方法](#62-检查方法)
-- [7. 高级模式](#7-高级模式)
-  - [7.1 错误链](#71-错误链)
-  - [7.2 自定义错误](#72-自定义错误)
-- [8. 性能考虑](#8-性能考虑)
-  - [8.1 零成本抽象](#81-零成本抽象)
-  - [8.2 内存布局](#82-内存布局)
-- [9. 最佳实践](#9-最佳实践)
-  - [9.1 错误处理原则](#91-错误处理原则)
-  - [9.2 避免反模式](#92-避免反模式)
-- [10. 总结](#10-总结)
+- [04. Result和Option类型](#04-result和option类型)
+  - [📊 目录](#-目录)
+  - [1. 引言](#1-引言)
+  - [2. Result类型](#2-result类型)
+    - [2.1 基础定义](#21-基础定义)
+    - [2.2 构造方法](#22-构造方法)
+    - [2.3 模式匹配](#23-模式匹配)
+    - [2.4 错误传播](#24-错误传播)
+  - [3. Option类型](#3-option类型)
+    - [3.1 基础定义](#31-基础定义)
+    - [3.2 构造方法](#32-构造方法)
+    - [3.3 模式匹配](#33-模式匹配)
+    - [3.4 链式操作](#34-链式操作)
+  - [4. 组合方法](#4-组合方法)
+    - [4.1 Result组合](#41-result组合)
+    - [4.2 Option组合](#42-option组合)
+  - [5. 转换方法](#5-转换方法)
+    - [5.1 Result转换](#51-result转换)
+    - [5.2 映射方法](#52-映射方法)
+  - [6. 实用方法](#6-实用方法)
+    - [6.1 解包方法](#61-解包方法)
+    - [6.2 检查方法](#62-检查方法)
+  - [7. 高级模式](#7-高级模式)
+    - [7.1 错误链](#71-错误链)
+    - [7.2 自定义错误](#72-自定义错误)
+  - [8. 性能考虑](#8-性能考虑)
+    - [8.1 零成本抽象](#81-零成本抽象)
+    - [8.2 内存布局](#82-内存布局)
+  - [9. 最佳实践](#9-最佳实践)
+    - [9.1 错误处理原则](#91-错误处理原则)
+    - [9.2 避免反模式](#92-避免反模式)
+  - [10. 总结](#10-总结)
 
 
 ## 1. 引言
@@ -97,11 +99,11 @@ fn handle_success(result: Result<i32, String>) {
 fn process_data(data: &str) -> Result<i32, String> {
     let parsed = data.parse::<i32>()
         .map_err(|e| format!("Parse error: {}", e))?;
-    
+
     if parsed < 0 {
         return Err("Value must be positive".to_string());
     }
-    
+
     Ok(parsed * 2)
 }
 ```
@@ -174,7 +176,7 @@ fn process_option(option: Option<i32>) -> Option<i32> {
 fn combine_results() -> Result<i32, String> {
     let a = Ok(10);
     let b = Ok(20);
-    
+
     // 使用and_then
     a.and_then(|x| b.map(|y| x + y))
 }
@@ -182,7 +184,7 @@ fn combine_results() -> Result<i32, String> {
 // 收集多个Result
 fn collect_results() -> Result<Vec<i32>, String> {
     let results = vec![Ok(1), Ok(2), Ok(3)];
-    
+
     results.into_iter().collect()
 }
 ```
@@ -194,7 +196,7 @@ fn collect_results() -> Result<Vec<i32>, String> {
 fn combine_options() -> Option<i32> {
     let a = Some(10);
     let b = Some(20);
-    
+
     // 使用and_then
     a.and_then(|x| b.map(|y| x + y))
 }
@@ -202,7 +204,7 @@ fn combine_options() -> Option<i32> {
 // 收集多个Option
 fn collect_options() -> Option<Vec<i32>> {
     let options = vec![Some(1), Some(2), Some(3)];
-    
+
     options.into_iter().collect()
 }
 ```
@@ -323,10 +325,10 @@ use thiserror::Error;
 enum CustomError {
     #[error("IO error: {0}")]
     Io(#[from] std::io::Error),
-    
+
     #[error("Parse error: {0}")]
     Parse(String),
-    
+
     #[error("Validation error: {0}")]
     Validation(String),
 }
@@ -335,11 +337,11 @@ fn process_with_custom_error() -> Result<i32, CustomError> {
     let data = std::fs::read_to_string("data.txt")?;
     let value = data.parse::<i32>()
         .map_err(|e| CustomError::Parse(e.to_string()))?;
-    
+
     if value < 0 {
         return Err(CustomError::Validation("Value must be positive".to_string()));
     }
-    
+
     Ok(value)
 }
 ```

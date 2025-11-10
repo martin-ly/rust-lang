@@ -317,7 +317,7 @@ impl<T> ProducerConsumer<T> {
     fn produce(&self, item: T) {
         self.sender.send(item).unwrap();
     }
-    
+
     fn consume(&self) -> Option<T> {
         let receiver = self.receiver.lock().unwrap();
         receiver.recv().ok()
@@ -571,6 +571,6 @@ Therefore, $\mathcal{P} \equiv \mathcal{P}$.
 
 ---
 
-**Document Status**: Complete  
-**Next Review**: 2025-02-27  
+**Document Status**: Complete
+**Next Review**: 2025-02-27
 **Maintainer**: Rust Formal Theory Team

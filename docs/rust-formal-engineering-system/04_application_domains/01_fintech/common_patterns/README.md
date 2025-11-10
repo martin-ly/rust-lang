@@ -35,14 +35,14 @@ impl ServiceRegistry for ConsulServiceRegistry {
             port: service.port,
             tags: service.tags,
         };
-        
+
         self.client.register_service(&registration).await?;
         Ok(())
     }
-    
+
     async fn discover(&self, service_name: &str) -> Result<Vec<ServiceInfo>, RegistryError> {
         let services = self.client.get_service(service_name).await?;
-        
+
         let service_infos: Vec<ServiceInfo> = services
             .into_iter()
             .map(|s| ServiceInfo {
@@ -53,7 +53,7 @@ impl ServiceRegistry for ConsulServiceRegistry {
                 tags: s.tags,
             })
             .collect();
-        
+
         Ok(service_infos)
     }
 }
@@ -76,7 +76,7 @@ impl LoadBalancer for RoundRobinLoadBalancer {
         if services.is_empty() {
             return Err(LoadBalancerError::NoServicesAvailable);
         }
-        
+
         let index = self.current_index.fetch_add(1, Ordering::Relaxed) % services.len();
         Ok(services[index].clone())
     }
@@ -95,11 +95,11 @@ impl LoadBalancer for HealthCheckLoadBalancer {
             .into_iter()
             .filter_map(|result| result.ok())
             .collect();
-        
+
         if healthy_services.is_empty() {
             return Err(LoadBalancerError::NoHealthyServices);
         }
-        
+
         // 随机选择健康服务
         let index = rand::random::<usize>() % healthy_services.len();
         Ok(healthy_services[index].clone())
@@ -124,44 +124,44 @@ impl EventBus {
             event_queue: Arc::new(Mutex::new(VecDeque::new())),
         }
     }
-    
+
     pub fn subscribe<T: Event + 'static>(&mut self, handler: Box<dyn EventHandler>) {
         let type_id = TypeId::of::<T>();
         self.handlers.entry(type_id).or_insert_with(Vec::new).push(handler);
     }
-    
+
     pub async fn publish<T: Event + 'static>(&self, event: T) -> Result<(), EventError> {
         let type_id = TypeId::of::<T>();
-        
+
         if let Some(handlers) = self.handlers.get(&type_id) {
             for handler in handlers {
                 handler.handle(&event).await?;
             }
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn publish_async<T: Event + 'static>(&self, event: T) -> Result<(), EventError> {
         let event_box = Box::new(event);
         {
             let mut queue = self.event_queue.lock().await;
             queue.push_back(event_box);
         }
-        
+
         // 异步处理事件
         tokio::spawn(self.process_event_queue());
-        
+
         Ok(())
     }
-    
+
     async fn process_event_queue(&self) {
         loop {
             let event = {
                 let mut queue = self.event_queue.lock().await;
                 queue.pop_front()
             };
-            
+
             if let Some(event) = event {
                 // 处理事件
                 self.process_event(event).await;
@@ -197,28 +197,28 @@ impl<T: Aggregate> EventSourcedAggregate<T> {
             uncommitted_events: Vec::new(),
         }
     }
-    
+
     pub fn apply_event(&mut self, event: Event) {
         self.state.apply(event.clone());
         self.version += 1;
         self.uncommitted_events.push(event);
     }
-    
+
     pub async fn save(&self, event_store: &dyn EventStore) -> Result<(), EventStoreError> {
         if !self.uncommitted_events.is_empty() {
             event_store.append_events(&self.id, self.uncommitted_events.clone()).await?;
         }
         Ok(())
     }
-    
+
     pub async fn load(id: &str, event_store: &dyn EventStore) -> Result<Self, EventStoreError> {
         let events = event_store.get_events(id).await?;
-        
+
         let mut aggregate = Self::new(id.to_string());
         for event in events {
             aggregate.apply_event(event);
         }
-        
+
         Ok(aggregate)
     }
 }
@@ -243,15 +243,15 @@ impl CommandBus {
             handlers: HashMap::new(),
         }
     }
-    
+
     pub fn register<C: Command + 'static>(&mut self, handler: Box<dyn CommandHandler<C>>) {
         let type_id = TypeId::of::<C>();
         self.handlers.insert(type_id, Box::new(handler));
     }
-    
+
     pub async fn dispatch<C: Command + 'static>(&self, command: C) -> Result<(), CommandError> {
         let type_id = TypeId::of::<C>();
-        
+
         if let Some(handler) = self.handlers.get(&type_id) {
             handler.handle(command).await
         } else {
@@ -278,15 +278,15 @@ impl QueryBus {
             handlers: HashMap::new(),
         }
     }
-    
+
     pub fn register<Q: Query + 'static, R: 'static>(&mut self, handler: Box<dyn QueryHandler<Q, R>>) {
         let type_id = TypeId::of::<Q>();
         self.handlers.insert(type_id, Box::new(handler));
     }
-    
+
     pub async fn dispatch<Q: Query + 'static, R: 'static>(&self, query: Q) -> Result<R, QueryError> {
         let type_id = TypeId::of::<Q>();
-        
+
         if let Some(handler) = self.handlers.get(&type_id) {
             // 类型转换和调用
             // 实际实现需要更复杂的类型处理
@@ -311,7 +311,7 @@ pub trait Repository<T: Aggregate> {
 
 pub trait Aggregate {
     type Id: Clone + Eq + Hash;
-    
+
     fn id(&self) -> &Self::Id;
     fn version(&self) -> u64;
 }
@@ -330,19 +330,19 @@ impl<T: Aggregate> Repository<T> for CachedRepository<T> {
     async fn save(&self, aggregate: &T) -> Result<(), RepositoryError> {
         // 先保存到主存储
         self.repository.save(aggregate).await?;
-        
+
         // 更新缓存
         self.cache.insert(aggregate.id().clone(), aggregate.clone()).await;
-        
+
         Ok(())
     }
-    
+
     async fn find_by_id(&self, id: &T::Id) -> Result<Option<T>, RepositoryError> {
         // 先查缓存
         if let Some(aggregate) = self.cache.get(id).await {
             return Ok(Some(aggregate));
         }
-        
+
         // 缓存未命中，查主存储
         if let Some(aggregate) = self.repository.find_by_id(id).await? {
             // 更新缓存
@@ -363,7 +363,7 @@ impl<T: Aggregate> Repository<T> for CachedRepository<T> {
 pub trait AbstractFactory {
     type ProductA: ProductA;
     type ProductB: ProductB;
-    
+
     fn create_product_a(&self) -> Self::ProductA;
     fn create_product_b(&self) -> Self::ProductB;
 }
@@ -373,11 +373,11 @@ pub struct ConcreteFactory1;
 impl AbstractFactory for ConcreteFactory1 {
     type ProductA = ConcreteProductA1;
     type ProductB = ConcreteProductB1;
-    
+
     fn create_product_a(&self) -> Self::ProductA {
         ConcreteProductA1::new()
     }
-    
+
     fn create_product_b(&self) -> Self::ProductB {
         ConcreteProductB1::new()
     }
@@ -398,12 +398,12 @@ impl<T> ObjectPool<T> {
     pub fn new(max_size: usize, factory: impl Fn() -> T + 'static) -> Self {
         let mut objects = Vec::with_capacity(max_size);
         let mut available = Vec::with_capacity(max_size);
-        
+
         for i in 0..max_size {
             objects.push(factory());
             available.push(i);
         }
-        
+
         Self {
             objects,
             available,
@@ -411,11 +411,11 @@ impl<T> ObjectPool<T> {
             max_size,
         }
     }
-    
+
     pub fn acquire(&mut self) -> Option<&mut T> {
         self.available.pop().map(|index| &mut self.objects[index])
     }
-    
+
     pub fn release(&mut self, index: usize) {
         if index < self.max_size {
             self.available.push(index);
@@ -443,15 +443,15 @@ impl Subject {
             observers: Vec::new(),
         }
     }
-    
+
     pub fn attach(&mut self, observer: Box<dyn Observer>) {
         self.observers.push(observer);
     }
-    
+
     pub fn detach(&mut self, observer_id: &str) {
         self.observers.retain(|obs| obs.id() != observer_id);
     }
-    
+
     pub async fn notify(&self, event: &Event) -> Result<(), ObserverError> {
         for observer in &self.observers {
             observer.update(event).await?;
@@ -482,11 +482,11 @@ impl Context {
             strategy,
         }
     }
-    
+
     pub fn set_strategy(&mut self, strategy: Box<dyn Strategy>) {
         self.strategy = strategy;
     }
-    
+
     pub async fn execute_strategy(&self) -> Result<StrategyResult, StrategyError> {
         self.strategy.execute(self).await
     }
@@ -575,10 +575,10 @@ pub trait AlgorithmTemplate {
         let step1 = self.step1().await?;
         let step2 = self.step2().await?;
         let step3 = self.step3().await?;
-        
+
         Ok(format!("{} -> {} -> {}", step1, step2, step3))
     }
-    
+
     async fn step1(&self) -> Result<String, AlgorithmError>;
     async fn step2(&self) -> Result<String, AlgorithmError>;
     async fn step3(&self) -> Result<String, AlgorithmError>;
@@ -591,11 +591,11 @@ impl AlgorithmTemplate for ConcreteAlgorithm {
     async fn step1(&self) -> Result<String, AlgorithmError> {
         Ok("Concrete step 1".to_string())
     }
-    
+
     async fn step2(&self) -> Result<String, AlgorithmError> {
         Ok("Concrete step 2".to_string())
     }
-    
+
     async fn step3(&self) -> Result<String, AlgorithmError> {
         Ok("Concrete step 3".to_string())
     }

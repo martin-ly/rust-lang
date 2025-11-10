@@ -486,7 +486,7 @@ impl OwnedString {
     fn new(s: String) -> Self {
         OwnedString { data: s }
     }
-    
+
     fn consume(self) -> String {
         self.data  // 所有权移动
     }
@@ -785,7 +785,7 @@ impl<T> Container<T> {
     fn new(value: T) -> Self {
         Container { value }
     }
-    
+
     fn get(&self) -> &T {
         &self.value
     }
@@ -845,7 +845,7 @@ $$\text{AssociatedType}(Trait, Type) = \text{type defined within trait}$$
 ```rust
 trait Iterator {
     type Item;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
 }
 
@@ -855,7 +855,7 @@ struct Counter {
 
 impl Iterator for Counter {
     type Item = u32;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         self.count += 1;
         Some(self.count)
@@ -870,7 +870,7 @@ impl Iterator for Counter {
 ```rust
 trait Container {
     type Item;
-    
+
     fn get(&self) -> Option<&Self::Item>;
 }
 
@@ -1098,6 +1098,6 @@ Rust 的类型系统通过形式化的理论基础和静态分析，在编译时
 
 ---
 
-**最后更新时间**: 2025-01-27  
-**版本**: V1.0  
+**最后更新时间**: 2025-01-27
+**版本**: V1.0
 **状态**: 已完成

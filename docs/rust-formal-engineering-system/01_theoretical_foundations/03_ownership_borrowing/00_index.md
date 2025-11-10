@@ -9,7 +9,7 @@
 - **版本**: v2.0
 - **维护者**: Rust语言形式化理论项目组
 
-## 目录结构体体体
+## 目录结构体
 
 ### 1. 核心理论文档
 
@@ -187,7 +187,7 @@
 ### 基本符号
 
 - $\text{Own}(x, v)$ - 变量x拥有值v
-- $\text{Borrow}(r, v)$ - 引用r借用值v  
+- $\text{Borrow}(r, v)$ - 引用r借用值v
 - $\text{Lifetime}(\alpha)$ - 生命周期α
 - $\Gamma \vdash e : \tau$ - 在环境Γ下表达式e具有类型τ
 
@@ -290,14 +290,14 @@ lifetime(r) ⊆ lifetime(t)
 
 **MIR 表示**:
 
-- 基本块结构体体体: BB₁ → BB₂ → ... → BBₙ
+- 基本块结构体: BB₁ → BB₂ → ... → BBₙ
 - 语句序列: stmt₁; stmt₂; ...; stmtₙ
 - 控制流图: CFG(entry, {BB}, {edge})
 
 **借用检查器流程**:
 
 1. **路径构建**: extract_paths(mir) → PathSet
-2. **借用分析**: analyze_borrows(paths) → BorrowSet  
+2. **借用分析**: analyze_borrows(paths) → BorrowSet
 3. **冲突检测**: check_conflicts(borrows) → ConflictSet
 4. **错误报告**: report_errors(conflicts) → ErrorSet
 
@@ -333,16 +333,16 @@ lifetime(r) ⊆ lifetime(t)
 
 ### 教学适用性
 
-- **学习路径清晰度**: 分层递进结构体体体
+- **学习路径清晰度**: 分层递进结构体
 - **概念映射完整性**: 完整的关联图谱
 - **练习题覆盖**: 理论与实践结合
 - **评估体系**: 多维度能力评估
 
 ---
 
-**索引生成时间**: 2025-06-30  
-**文档版本**: v2.0  
-**质量等级**: 优秀 (>150行，完整交叉引用)  
+**索引生成时间**: 2025-06-30
+**文档版本**: v2.0
+**质量等级**: 优秀 (>150行，完整交叉引用)
 **维护状态**: 持续更新
 
 ## 形式化理论体系1
@@ -397,7 +397,7 @@ ConstraintSet Φ ::= {C, C, ..., C}
  reference r, time t : valid(r, t)   allocation a : points_to(r, a)  alive(a, t)
 
 **定理 1.3 (无数据竞争)**:
- location l, time t : ( thread : writes(thread, l, t))  
+ location l, time t : ( thread : writes(thread, l, t))
   ( thread  thread : accesses(thread, l, t))
 
 ### 借用系统不变式1
@@ -415,14 +415,14 @@ ConstraintSet Φ ::= {C, C, ..., C}
 
 **MIR 表示**:
 
-- 基本块结构体体体: BB  BB  ...  BB
+- 基本块结构体: BB  BB  ...  BB
 - 语句序列: stmt; stmt; ...; stmt
 - 控制流图: CFG(entry, {BB}, {edge})
 
 **借用检查器流程**:
 
 1. **路径构建**: extract_paths(mir)  PathSet
-2. **借用分析**: analyze_borrows(paths)  BorrowSet  
+2. **借用分析**: analyze_borrows(paths)  BorrowSet
 3. **冲突检测**: check_conflicts(borrows)  ConflictSet
 4. **错误报告**: report_errors(conflicts)  ErrorSet
 
@@ -457,7 +457,7 @@ ConstraintSet Φ ::= {C, C, ..., C}
 
 ### 教学适用性1
 
-- **学习路径清晰度**: 分层递进结构体体体
+- **学习路径清晰度**: 分层递进结构体
 - **概念映射完整性**: 完整的关联图谱
 - **练习题覆盖**: 理论与实践结合
 - **评估体系**: 多维度能力评估
@@ -466,7 +466,7 @@ ConstraintSet Φ ::= {C, C, ..., C}
 
 - Rust 所有权与借用机制极大提升了内存安全，避免了悬垂指针和数据竞争，但也带来了较高的学习门槛。
 - 与 C/C++ 手动内存管理相比，Rust 自动化且安全，但灵活性略有下降。
-- 在复杂数据结构体体体和并发场景下，所有权模型可能导致代码冗长和设计复杂。
+- 在复杂数据结构体和并发场景下，所有权模型可能导致代码冗长和设计复杂。
 
 ## 典型案例
 
@@ -497,7 +497,7 @@ ConstraintSet Φ ::= {C, C, ..., C}
 ## 2. 证明方法递归细化
 
 - **分离逻辑与资源不变式证明**：递归利用分离逻辑等方法，形式化论证所有权、借用、资源管理的安全。
-- **生命周期与借用的归纳证明**：递归采用结构体体体归纳、生命周期归纳等方法，证明借用不变性、生命周期健全性等性质。
+- **生命周期与借用的归纳证明**：递归采用结构体归纳、生命周期归纳等方法，证明借用不变性、生命周期健全性等性质。
 - **自动化与交互式证明工具**：递归利用Coq、Lean等工具，自动化验证所有权与借用相关性质。
 
 ## 3. 工程应用与生态联系

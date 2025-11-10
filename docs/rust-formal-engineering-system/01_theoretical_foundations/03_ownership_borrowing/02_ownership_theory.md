@@ -99,7 +99,7 @@ impl Node {
 fn main() {
     let node1 = Node::new(1);
     let node2 = Node::new(2);
-    
+
     // 建立双向链接
     node1.borrow_mut().next = Some(Rc::clone(&node2));
     node2.borrow_mut().prev = Some(Rc::downgrade(&node1));
@@ -123,13 +123,13 @@ impl Arena {
     fn new() -> Self {
         Arena { nodes: Vec::new() }
     }
-    
+
     fn add_node(&mut self, value: i32) -> usize {
         let idx = self.nodes.len();
         self.nodes.push(Node { value, next: None, prev: None });
         idx
     }
-    
+
     fn link(&mut self, from: usize, to: usize) {
         self.nodes[from].next = Some(to);
         self.nodes[to].prev = Some(from);
@@ -165,14 +165,14 @@ impl SelfReferential {
             slice: std::ptr::null(),
             _pin: PhantomPinned,
         });
-        
+
         let self_ptr: *const String = &boxed.data;
         // 安全：对象已经被Pin，不会移动
         unsafe {
             let mut_ref = Pin::as_mut(&mut boxed);
             Pin::get_unchecked_mut(mut_ref).slice = self_ptr as *const str;
         }
-        
+
         boxed
     }
 }
@@ -195,7 +195,7 @@ impl SafeSelfReferential {
             index: 0,
         }
     }
-    
+
     fn get_data(&self) -> &str {
         &self.data[self.index]
     }
@@ -225,13 +225,13 @@ impl Graph {
     fn new() -> Self {
         Graph { nodes: Vec::new() }
     }
-    
+
     fn add_node(&mut self, value: i32) -> usize {
         let idx = self.nodes.len();
         self.nodes.push(Node { value, edges: Vec::new() });
         idx
     }
-    
+
     fn add_edge(&mut self, from: usize, to: usize) {
         self.nodes[from].edges.push(to);
     }
@@ -255,7 +255,7 @@ impl Node {
     fn new(value: i32) -> NodeRef {
         Rc::new(RefCell::new(Node { value, edges: Vec::new() }))
     }
-    
+
     fn add_edge(&mut self, node: NodeRef) {
         self.edges.push(node);
     }
@@ -294,16 +294,16 @@ impl Subject {
             state: String::new(),
         }
     }
-    
+
     fn attach(&mut self, observer: Rc<RefCell<dyn Observer>>) {
         self.observers.push(Rc::downgrade(&observer));
     }
-    
+
     fn set_state(&mut self, state: String) {
         self.state = state;
         self.notify();
     }
-    
+
     fn notify(&self) {
         self.observers.iter().for_each(|o| {
             if let Some(observer) = o.upgrade() {
@@ -331,19 +331,19 @@ impl Subject {
             state: String::new(),
         }
     }
-    
+
     fn attach<F>(&mut self, callback: F)
     where
         F: Fn(&str) + 'static,
     {
         self.observers.push(Box::new(callback));
     }
-    
+
     fn set_state(&mut self, state: String) {
         self.state = state;
         self.notify();
     }
-    
+
     fn notify(&self) {
         for observer in &self.observers {
             observer(&self.state);
@@ -384,7 +384,7 @@ impl Client {
     fn new(service: Rc<RefCell<dyn Service>>) -> Self {
         Client { service }
     }
-    
+
     fn do_something(&self) -> String {
         let service = self.service.borrow();
         service.execute()
@@ -408,11 +408,11 @@ impl ServiceLocator {
             services: HashMap::new(),
         }
     }
-    
+
     fn register<T: 'static>(&mut self, service: T) {
         self.services.insert(TypeId::of::<T>(), Box::new(service));
     }
-    
+
     fn resolve<T: 'static>(&self) -> Option<&T> {
         self.services.get(&TypeId::of::<T>())
             .and_then(|boxed| boxed.downcast_ref::<T>())
@@ -440,14 +440,14 @@ impl CommandManager {
     fn new() -> Self {
         CommandManager { commands: Vec::new() }
     }
-    
-    fn add_command<F>(&mut self, command: F) 
-    where 
-        F: Fn() -> () + 'static 
+
+    fn add_command<F>(&mut self, command: F)
+    where
+        F: Fn() -> () + 'static
     {
         self.commands.push(Box::new(command));
     }
-    
+
     fn execute_all(&self) {
         for cmd in &self.commands {
             cmd();
@@ -473,7 +473,7 @@ impl Receiver {
     fn new() -> Self {
         Receiver { state: String::new() }
     }
-    
+
     fn action(&mut self, text: &str) {
         self.state = text.to_string();
         println!("State changed to: {}", self.state);
@@ -534,7 +534,7 @@ impl EventBus {
             next_id: 0,
         }
     }
-    
+
     fn subscribe<F>(&mut self, event_type: &str, callback: F) -> SubscriberId
     where
         F: Fn(&EventData) + 'static,
@@ -542,14 +542,14 @@ impl EventBus {
         let subscribers = self.subscribers
             .entry(event_type.to_string())
             .or_insert_with(HashMap::new);
-            
+
         let id = self.next_id;
         self.next_id += 1;
-        
+
         subscribers.insert(id, Box::new(callback));
         id
     }
-    
+
     fn publish(&self, event: EventData) {
         if let Some(subscribers) = self.subscribers.get(&event.event_type) {
             for (_, callback) in subscribers {
@@ -581,12 +581,12 @@ impl EventQueue {
             queue: Arc::new(Mutex::new(VecDeque::new())),
         }
     }
-    
+
     fn publish(&self, event: EventData) {
         let mut queue = self.queue.lock().unwrap();
         queue.push_back(event);
     }
-    
+
     fn poll(&self) -> Option<EventData> {
         let mut queue = self.queue.lock().unwrap();
         queue.pop_front()
@@ -612,14 +612,14 @@ impl<'a> CallbackManager<'a> {
     fn new() -> Self {
         CallbackManager { callbacks: Vec::new() }
     }
-    
+
     fn register<F>(&mut self, callback: F)
     where
         F: Fn() + 'a,
     {
         self.callbacks.push(Box::new(callback));
     }
-    
+
     fn execute_all(&self) {
         for callback in &self.callbacks {
             callback();
@@ -639,14 +639,14 @@ impl StaticCallbackManager {
     fn new() -> Self {
         StaticCallbackManager { callbacks: Vec::new() }
     }
-    
+
     fn register<F>(&mut self, callback: F)
     where
         F: Fn() + 'static,
     {
         self.callbacks.push(Box::new(callback));
     }
-    
+
     fn execute_all(&self) {
         for callback in &self.callbacks {
             callback();
@@ -678,7 +678,7 @@ impl PluginManager {
             libraries: HashMap::new(),
         }
     }
-    
+
     fn load_plugin(&mut self, name: &str, path: &str) -> Result<(), Box<dyn std::error::Error>> {
         unsafe {
             let lib = Library::new(path)?;
@@ -686,8 +686,8 @@ impl PluginManager {
             Ok(())
         }
     }
-    
-    fn call_function<T, F>(&self, plugin_name: &str, function_name: &str) -> Result<T, Box<dyn std::error::Error>> 
+
+    fn call_function<T, F>(&self, plugin_name: &str, function_name: &str) -> Result<T, Box<dyn std::error::Error>>
     where
         F: Fn() -> T,
     {
@@ -720,12 +720,12 @@ impl PluginSystem {
     fn new() -> Self {
         PluginSystem { plugins: Vec::new() }
     }
-    
+
     fn register_plugin(&mut self, plugin: Box<dyn PluginInterface>) {
         plugin.initialize();
         self.plugins.push(plugin);
     }
-    
+
     fn execute_all(&self) -> Result<(), Box<dyn std::error::Error>> {
         for plugin in &self.plugins {
             plugin.execute()?;
@@ -751,16 +751,16 @@ use std::sync::{Arc, Mutex};
 use std::collections::HashMap;
 use std::hash::Hash;
 
-struct Cache<K, V> 
-where 
+struct Cache<K, V>
+where
     K: Eq + Hash + Clone,
     V: Clone,
 {
     store: Arc<Mutex<HashMap<K, V>>>,
 }
 
-impl<K, V> Cache<K, V> 
-where 
+impl<K, V> Cache<K, V>
+where
     K: Eq + Hash + Clone,
     V: Clone,
 {
@@ -769,17 +769,17 @@ where
             store: Arc::new(Mutex::new(HashMap::new())),
         }
     }
-    
+
     fn get(&self, key: &K) -> Option<V> {
         let store = self.store.lock().unwrap();
         store.get(key).cloned()
     }
-    
+
     fn set(&self, key: K, value: V) {
         let mut store = self.store.lock().unwrap();
         store.insert(key, value);
     }
-    
+
     fn clone_cache(&self) -> Self {
         Cache {
             store: Arc::clone(&self.store),
@@ -817,10 +817,10 @@ where
             ttl: Duration::from_secs(ttl_seconds),
         }
     }
-    
+
     fn get(&mut self, key: &K) -> Option<V> {
         let now = Instant::now();
-        
+
         if let Some((value, timestamp)) = self.cache.get(key) {
             if now.duration_since(*timestamp) < self.ttl {
                 // 更新访问时间
@@ -832,27 +832,27 @@ where
                 self.cache.remove(key);
             }
         }
-        
+
         None
     }
-    
+
     fn set(&mut self, key: K, value: V) {
         // 清理过期项
         self.cleanup();
-        
+
         // 检查容量
         if self.cache.len() >= self.capacity {
             self.evict_oldest();
         }
-        
+
         self.cache.insert(key, (value, Instant::now()));
     }
-    
+
     fn cleanup(&mut self) {
         let now = Instant::now();
         self.cache.retain(|_, (_, timestamp)| now.duration_since(*timestamp) < self.ttl);
     }
-    
+
     fn evict_oldest(&mut self) {
         if let Some(oldest_key) = self.cache
             .iter()
@@ -900,11 +900,11 @@ impl Database {
             posts: HashMap::new(),
         }
     }
-    
+
     fn get_user(&self, id: i32) -> Option<&User> {
         self.users.get(&id)
     }
-    
+
     fn get_user_posts(&self, user_id: i32) -> Vec<&Post> {
         if let Some(user) = self.get_user(user_id) {
             user.posts.iter()
@@ -988,22 +988,22 @@ impl StateContainer {
             })),
         }
     }
-    
+
     fn get_user_count(&self) -> usize {
         let state = self.state.read().unwrap();
         state.user_count
     }
-    
+
     fn increment_user_count(&self) {
         let mut state = self.state.write().unwrap();
         state.user_count += 1;
     }
-    
+
     fn add_session(&self, session_id: String) {
         let mut state = self.state.write().unwrap();
         state.active_sessions.insert(session_id, Instant::now());
     }
-    
+
     fn clone_container(&self) -> Self {
         StateContainer {
             state: Arc::clone(&self.state),
@@ -1036,15 +1036,15 @@ impl StateActor {
     fn new() -> Self {
         let (tx, rx) = channel();
         let sender = tx.clone();
-        
+
         thread::spawn(move || {
             let mut state = ActorState { user_count: 0 };
             Self::run_loop(rx, &mut state);
         });
-        
+
         StateActor { sender }
     }
-    
+
     fn run_loop(receiver: Receiver<Message>, state: &mut ActorState) {
         for msg in receiver {
             match msg {
@@ -1058,21 +1058,21 @@ impl StateActor {
             }
         }
     }
-    
+
     fn increment_user_count(&self) {
         let _ = self.sender.send(Message::IncrementUserCount);
     }
-    
+
     fn get_user_count(&self) -> usize {
         let (tx, rx) = channel();
         let _ = self.sender.send(Message::GetUserCount(tx));
         rx.recv().unwrap_or(0)
     }
-    
+
     fn shutdown(self) {
         let _ = self.sender.send(Message::Shutdown);
     }
-    
+
     fn clone(&self) -> Self {
         StateActor {
             sender: self.sender.clone(),
