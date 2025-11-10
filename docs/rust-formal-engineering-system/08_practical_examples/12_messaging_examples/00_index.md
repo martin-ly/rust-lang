@@ -19,6 +19,11 @@
     - [3. 消息处理（Message Processing）](#3-消息处理message-processing)
     - [4. 可靠性保证（Reliability Guarantees）](#4-可靠性保证reliability-guarantees)
   - [💻 实践与样例](#-实践与样例)
+    - [代码示例位置](#代码示例位置)
+    - [文件级清单（精选）](#文件级清单精选)
+      - [`crates/c80_messaging/src/`](#cratesc80_messagingsrc)
+      - [`crates/c81_message_passing/src/`](#cratesc81_message_passingsrc)
+    - [快速开始示例](#快速开始示例)
   - [🔗 相关索引](#-相关索引)
   - [🧭 导航](#-导航)
 

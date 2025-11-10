@@ -1,4 +1,4 @@
-﻿# 性能分析（Performance Analysis）索引
+# 性能分析（Performance Analysis）索引
 
 > **创建日期**: 2025-10-31
 > **最后更新**: 2025-11-10
@@ -9,21 +9,22 @@
 
 ## 📊 目录
 
-- [📊 目录](#-目录)
-- [🎯 目的](#-目的)
-  - [核心价值](#核心价值)
-- [📚 核心概念](#-核心概念)
-  - [1. 性能剖析（Performance Profiling）](#1-性能剖析performance-profiling)
-  - [2. 性能监控（Performance Monitoring）](#2-性能监控performance-monitoring)
-  - [3. 性能基准（Performance Benchmarking）](#3-性能基准performance-benchmarking)
-  - [4. 性能优化（Performance Optimization）](#4-性能优化performance-optimization)
-- [💻 实践与样例](#-实践与样例)
-  - [代码示例位置](#代码示例位置)
-  - [文件级清单（精选）](#文件级清单精选)
-    - [`crates/c58_performance_analysis/src/`](#cratesc58_performance_analysissrc)
-  - [快速开始示例](#快速开始示例)
-- [🔗 相关索引](#-相关索引)
-- [🧭 导航](#-导航)
+- [性能分析（Performance Analysis）索引](#性能分析performance-analysis索引)
+  - [📊 目录](#-目录)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 核心概念](#-核心概念)
+    - [1. 性能剖析（Performance Profiling）](#1-性能剖析performance-profiling)
+    - [2. 性能监控（Performance Monitoring）](#2-性能监控performance-monitoring)
+    - [3. 性能基准（Performance Benchmarking）](#3-性能基准performance-benchmarking)
+    - [4. 性能优化（Performance Optimization）](#4-性能优化performance-optimization)
+  - [💻 实践与样例](#-实践与样例)
+    - [代码示例位置](#代码示例位置)
+    - [文件级清单（精选）](#文件级清单精选)
+      - [`crates/c58_performance_analysis/src/`](#cratesc58_performance_analysissrc)
+    - [快速开始示例](#快速开始示例)
+  - [🔗 相关索引](#-相关索引)
+  - [🧭 导航](#-导航)
 
 ## 🎯 目的
 

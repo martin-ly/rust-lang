@@ -1,4 +1,4 @@
-﻿# 代码分析（Code Analysis）索引
+# 代码分析（Code Analysis）索引
 
 > **创建日期**: 2025-10-31
 > **最后更新**: 2025-11-10
@@ -9,21 +9,22 @@
 
 ## 📊 目录
 
-- [📊 目录](#-目录)
-- [🎯 目的](#-目的)
-  - [核心价值](#核心价值)
-- [📚 核心工具](#-核心工具)
-  - [1. 静态分析（Static Analysis）](#1-静态分析static-analysis)
-  - [2. 动态分析（Dynamic Analysis）](#2-动态分析dynamic-analysis)
-  - [3. 安全分析（Security Analysis）](#3-安全分析security-analysis)
-  - [4. 依赖分析（Dependency Analysis）](#4-依赖分析dependency-analysis)
-- [💻 常用命令](#-常用命令)
-  - [静态分析](#静态分析)
-  - [动态分析](#动态分析)
-  - [安全分析](#安全分析)
-  - [依赖分析](#依赖分析)
-- [🔗 相关条目](#-相关条目)
-- [🧭 导航](#-导航)
+- [代码分析（Code Analysis）索引](#代码分析code-analysis索引)
+  - [📊 目录](#-目录)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 核心工具](#-核心工具)
+    - [1. 静态分析（Static Analysis）](#1-静态分析static-analysis)
+    - [2. 动态分析（Dynamic Analysis）](#2-动态分析dynamic-analysis)
+    - [3. 安全分析（Security Analysis）](#3-安全分析security-analysis)
+    - [4. 依赖分析（Dependency Analysis）](#4-依赖分析dependency-analysis)
+  - [💻 常用命令](#-常用命令)
+    - [静态分析](#静态分析)
+    - [动态分析](#动态分析)
+    - [安全分析](#安全分析)
+    - [依赖分析](#依赖分析)
+  - [🔗 相关条目](#-相关条目)
+  - [🧭 导航](#-导航)
 
 ## 🎯 目的
 
