@@ -1131,11 +1131,9 @@ fn create_large() -> Vec<u8> {
 
 - ✅ `docs/docs/language/core/04_generics/03_generic_implementation.md` - 泛型实现
 
-#### 修改内容
-
 - **内存安全**：从"内存安全"改为"资源安全（编译期逻辑证明）"，从"自动内存管理"改为"自动资源管理（编译期证明的资源生命周期）"
 
-62. **安全验证形式化理论文档**（新增）
+1. **安全验证形式化理论文档**（新增）
 
 - ✅ `docs/docs/language/ref/23_security_verification/01_formal_theory.md` - 安全验证形式化理论
 
@@ -1152,6 +1150,8 @@ fn create_large() -> Vec<u8> {
 - ✅ `docs/docs/language/ref/23_security_verification/00_index.md` - 安全验证索引
 - ✅ `docs/docs/language/system/11_memory_management/00_index.md` - 资源管理索引（引用一致性视角）
 - ✅ `docs/docs/language/system/11_memory_management/01_formal_theory.md` - 资源管理形式化理论（引用一致性视角）
+- ✅ `docs/docs/language/system/11_memory_management/02_memory_safety_proofs.md` - 资源安全性证明（引用一致性视角）
+- ✅ `docs/docs/language/system/11_memory_management/01_formal_memory_management_system.md` - 资源管理系统形式化（引用一致性视角）
 
 #### 修改内容
 
@@ -1233,4 +1233,4 @@ fn create_large() -> Vec<u8> {
 **文档版本**：1.0
 **创建日期**：2025-01-XX
 **最后更新**：2025-01-XX
-**已完成文档数**：77
+**已完成文档数**：79
