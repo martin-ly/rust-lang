@@ -1,8 +1,8 @@
 # Rust 1.91 所有权、借用、生命周期改进文档
 
-> **文档版本**: 1.0  
-> **创建日期**: 2025-01-27  
-> **适用版本**: Rust 1.91.0+  
+> **文档版本**: 1.0
+> **创建日期**: 2025-01-27
+> **适用版本**: Rust 1.91.0+
 > **相关模块**: `c01_ownership_borrow_scope`
 
 ---
@@ -56,6 +56,7 @@ Rust 1.91 对类型检查器进行了深度优化，特别是在借用检查方�
 #### 1. 借用检查器缓存机制
 
 **Rust 1.90**:
+
 ```rust
 // 每次借用检查都需要完整计算
 fn check_borrow() {
@@ -64,6 +65,7 @@ fn check_borrow() {
 ```
 
 **Rust 1.91**:
+
 ```rust
 use c01_ownership_borrow_scope::rust_191_features::Rust191BorrowChecker;
 
@@ -130,13 +132,13 @@ fn main() {
     for i in 0..100 {
         let owner = format!("owner_{}", i);
         let borrower = format!("borrower_{}", i);
-        
+
         let result = checker.create_borrow(
             owner,
             borrower,
             BorrowType191::Immutable,
         );
-        
+
         match result {
             Ok(_) => println!("Borrow created successfully"),
             Err(e) => println!("Borrow failed: {:?}", e),
@@ -170,6 +172,7 @@ Rust 1.91 允许在 const 上下文中创建对非静态常量的引用，这对
 #### 1. const 上下文中的引用
 
 **Rust 1.90**:
+
 ```rust
 // 只能引用静态变量
 static S: i32 = 25;
@@ -177,6 +180,7 @@ const C: &i32 = &S;  // ✅ 仅支持静态变量
 ```
 
 **Rust 1.91**:
+
 ```rust
 // 可以引用非静态常量
 const S: i32 = 25;
@@ -225,8 +229,8 @@ fn create_buffer() -> Vec<u8> {
 
 ```rust
 // Rust 1.91: const 函数中可以更好地处理生命周期
-const fn process_lifetimes<'a, 'b>(x: &'a i32, y: &'b i32) -> &'a i32 
-where 
+const fn process_lifetimes<'a, 'b>(x: &'a i32, y: &'b i32) -> &'a i32
+where
     'b: 'a,
 {
     if *x > *y { x } else { y }
@@ -250,6 +254,7 @@ Rust 1.91 对内存分配器进行了优化，特别是在处理小对象时：
 #### 1. 小对象池优化
 
 **Rust 1.90**:
+
 ```rust
 // 每次分配都需要系统调用，性能较低
 for i in 0..1000 {
@@ -259,6 +264,7 @@ for i in 0..1000 {
 ```
 
 **Rust 1.91**:
+
 ```rust
 use c01_ownership_borrow_scope::{
     OptimizedMemoryManager191,
@@ -368,8 +374,8 @@ impl OptimizedLifetimeInferencer191 {
 
 ```rust
 // 复杂函数的生命周期推断
-fn complex_function<'a, 'b>(x: &'a str, y: &'b str) -> &'a str 
-where 
+fn complex_function<'a, 'b>(x: &'a str, y: &'b str) -> &'a str
+where
     'b: 'a,
 {
     // Rust 1.91: 这个函数的生命周期推断更快
@@ -396,7 +402,7 @@ fn high_performance_borrow_check() {
     for i in 0..10000 {
         let owner = format!("owner_{}", i % 100);
         let borrower = format!("borrower_{}", i);
-        
+
         checker.create_borrow(
             owner,
             borrower,
@@ -447,7 +453,7 @@ fn high_frequency_allocation() {
     for i in 0..100000 {
         let id = format!("obj_{}", i);
         manager.record_allocation(id, 16, AllocationType191::SmallPool);
-        
+
         // 每 10 个对象释放一次
         if i % 10 == 0 {
             let dealloc_id = format!("obj_{}", i - 5);
@@ -480,6 +486,7 @@ rustc --version  # 应该显示 rustc 1.91.0
 #### 2. 利用新特性
 
 **使用改进的借用检查器**:
+
 ```rust
 // 旧代码（Rust 1.90）
 let mut checker = ImprovedBorrowChecker::new(); // Rust 1.90
@@ -490,6 +497,7 @@ let mut checker = Rust191BorrowChecker::new(); // Rust 1.91，带缓存优化
 ```
 
 **使用 const 上下文增强**:
+
 ```rust
 // 旧代码（Rust 1.90）
 static VALUE: i32 = 42;
@@ -502,6 +510,7 @@ const LITERAL_REF: &i32 = &100; // 可以直接引用字面量
 ```
 
 **使用优化的内存分配器**:
+
 ```rust
 // 新代码（Rust 1.91）
 use c01_ownership_borrow_scope::OptimizedMemoryManager191;
@@ -536,6 +545,7 @@ Rust 1.91 在所有权、借用和生命周期系统方面带来了显著的改�
 ---
 
 **参考资源**:
+
 - [Rust 1.91 Features Comprehensive](./RUST_1.91_FEATURES_COMPREHENSIVE.md)
 - [Rust 1.91 Release Notes](https://blog.rust-lang.org/)
 - [Ownership Module Documentation](../README.md)
@@ -543,7 +553,7 @@ Rust 1.91 在所有权、借用和生命周期系统方面带来了显著的改�
 ---
 
 **文档维护**:
+
 - **最后更新**: 2025-01-27
 - **维护者**: 项目团队
 - **下次更新**: Rust 1.92 发布时
-

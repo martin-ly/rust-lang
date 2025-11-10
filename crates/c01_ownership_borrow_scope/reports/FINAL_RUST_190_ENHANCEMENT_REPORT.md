@@ -254,7 +254,7 @@ use c01_ownership_borrow_scope::{
 fn main() {
     // 运行所有 Rust 1.90 特性示例
     run_all_rust_190_features_examples();
-    
+
     // 使用改进的借用检查器
     let mut checker = ImprovedBorrowChecker::new();
     let result = checker.create_borrow(
@@ -262,7 +262,7 @@ fn main() {
         "borrower".to_string(),
         BorrowType::Immutable
     );
-    
+
     // 使用智能指针管理器
     let mut manager = SmartPointerManager::new();
     manager.create_smart_pointer("ptr".to_string(), SmartPointerType::Rc);
@@ -285,12 +285,12 @@ fn advanced_usage() {
     // 使用优化的作用域管理器
     let mut scope_manager = OptimizedScopeManager::new();
     scope_manager.enter_scope("main".to_string(), Rust190ScopeType::Function);
-    
+
     // 使用并发安全检查器
     let mut concurrency_checker = ConcurrencySafetyChecker::new();
     concurrency_checker.register_thread("thread1".to_string(), "Worker".to_string());
     concurrency_checker.register_lock("mutex1".to_string(), LockType::Mutex);
-    
+
     // 使用智能内存管理器
     let mut memory_manager = SmartMemoryManager::new();
     memory_manager.record_allocation("alloc1".to_string(), 1024, AllocationType::Heap);

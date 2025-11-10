@@ -75,7 +75,7 @@ trait AsyncStateMachine {
     type State;
     type Event;
     type Output;
-    
+
     fn initial_state() -> Self::State;
     fn transition(state: &Self::State, event: Self::Event) -> (Self::State, Self::Output);
     fn is_final(state: &Self::State) -> bool;
@@ -88,7 +88,7 @@ trait AsyncStateMachine {
 // Future trait的形式化定义
 trait Future {
     type Output;
-    
+
     // 形式化语义：Future是一个延迟计算
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
 }
@@ -136,7 +136,7 @@ struct AsyncControlFlowAnalysis {
 trait AsyncType {
     type SyncType;  // 对应的同步类型
     type FutureType; // 对应的Future类型
-    
+
     // 类型转换的形式化规则
     fn to_sync(self) -> Self::SyncType;
     fn to_async(self) -> Self::FutureType;
@@ -149,19 +149,19 @@ trait AsyncType {
 // 异步类型推导的形式化规则
 enum AsyncTypeRule {
     // 异步函数类型推导
-    AsyncFn { 
-        params: Vec<Type>, 
+    AsyncFn {
+        params: Vec<Type>,
         return_type: Type,
-        async_context: bool 
+        async_context: bool
     },
-    
+
     // 异步闭包类型推导
     AsyncClosure {
         captured_vars: HashMap<String, Type>,
         body_type: Type,
         async_context: bool
     },
-    
+
     // 异步块类型推导
     AsyncBlock {
         stmts: Vec<Stmt>,
@@ -180,7 +180,7 @@ enum AsyncTypeRule {
 trait AsyncOwnership {
     type Resource;
     type Lifetime;
-    
+
     // 异步资源的所有权规则
     fn acquire_async(self, resource: Self::Resource) -> AsyncGuard<Self::Resource>;
     fn release_async(self, guard: AsyncGuard<Self::Resource>);
@@ -194,10 +194,10 @@ trait AsyncOwnership {
 struct AsyncBorrowChecker {
     // 异步借用状态
     async_borrows: HashMap<ResourceId, AsyncBorrowState>,
-    
+
     // 异步生命周期分析
     async_lifetimes: HashMap<ResourceId, AsyncLifetime>,
-    
+
     // 异步数据竞争检测
     async_data_races: Vec<AsyncDataRace>,
 }
@@ -212,13 +212,13 @@ struct AsyncBorrowChecker {
 struct AsyncExecutionContext {
     // 异步任务队列
     task_queue: VecDeque<AsyncTask>,
-    
+
     // 异步事件循环
     event_loop: EventLoop,
-    
+
     // 异步调度器
     scheduler: AsyncScheduler,
-    
+
     // 异步资源管理器
     resource_manager: AsyncResourceManager,
 }
@@ -231,7 +231,7 @@ struct AsyncExecutionContext {
 trait AsyncScheduler {
     type Task;
     type Priority;
-    
+
     // 异步任务调度算法
     fn schedule(&mut self, task: Self::Task, priority: Self::Priority);
     fn next_task(&mut self) -> Option<Self::Task>;
@@ -250,10 +250,10 @@ trait AsyncScheduler {
 struct AsyncSemantics {
     // async块转换为Future
     async_block: Box<dyn Future<Output = T>>,
-    
+
     // await表达式转换为poll调用
     await_expr: Pin<&mut dyn Future<Output = T>>,
-    
+
     // 异步上下文传播
     async_context: AsyncContext,
 }
@@ -269,13 +269,13 @@ enum AsyncControlFlowSemantics {
         stmts: Vec<AsyncStmt>,
         execution_order: Vec<usize>,
     },
-    
+
     // 并发执行语义
     Concurrent {
         tasks: Vec<AsyncTask>,
         synchronization: SyncPrimitive,
     },
-    
+
     // 选择执行语义
     Selective {
         branches: Vec<AsyncBranch>,
@@ -293,10 +293,10 @@ enum AsyncControlFlowSemantics {
 trait AsyncTypeConversion {
     // 同步到异步的类型转换
     fn sync_to_async<T>(sync_value: T) -> impl Future<Output = T>;
-    
+
     // 异步到同步的类型转换
     fn async_to_sync<T>(async_value: impl Future<Output = T>) -> T;
-    
+
     // 异步类型提升
     fn async_promote<T>(value: T) -> impl Future<Output = T>;
 }
@@ -309,10 +309,10 @@ trait AsyncTypeConversion {
 struct AsyncTypeInference {
     // 类型环境
     type_env: HashMap<String, Type>,
-    
+
     // 异步类型约束
     async_constraints: Vec<AsyncTypeConstraint>,
-    
+
     // 类型推导算法
     inference_algorithm: AsyncTypeInferenceAlgorithm,
 }
@@ -329,13 +329,13 @@ struct AsyncTypeInference {
 struct AsyncProgramSpec {
     // 前置条件
     preconditions: Vec<AsyncPredicate>,
-    
+
     // 后置条件
     postconditions: Vec<AsyncPredicate>,
-    
+
     // 不变量
     invariants: Vec<AsyncInvariant>,
-    
+
     // 异步安全属性
     safety_properties: Vec<AsyncSafetyProperty>,
 }
@@ -348,10 +348,10 @@ struct AsyncProgramSpec {
 trait AsyncProgramProof {
     // 异步程序的正确性证明
     fn prove_correctness(&self, spec: AsyncProgramSpec) -> ProofResult;
-    
+
     // 异步程序的安全证明
     fn prove_safety(&self, safety_props: Vec<AsyncSafetyProperty>) -> ProofResult;
-    
+
     // 异步程序的活性证明
     fn prove_liveness(&self, liveness_props: Vec<AsyncLivenessProperty>) -> ProofResult;
 }
@@ -366,13 +366,13 @@ trait AsyncProgramProof {
 struct AsyncStaticAnalysis {
     // 异步控制流分析
     control_flow_analysis: AsyncControlFlowAnalysis,
-    
+
     // 异步数据流分析
     data_flow_analysis: AsyncDataFlowAnalysis,
-    
+
     // 异步类型分析
     type_analysis: AsyncTypeAnalysis,
-    
+
     // 异步安全分析
     safety_analysis: AsyncSafetyAnalysis,
 }
@@ -385,13 +385,13 @@ struct AsyncStaticAnalysis {
 struct AsyncDynamicAnalysis {
     // 异步执行跟踪
     execution_trace: AsyncExecutionTrace,
-    
+
     // 异步性能分析
     performance_analysis: AsyncPerformanceAnalysis,
-    
+
     // 异步资源使用分析
     resource_analysis: AsyncResourceAnalysis,
-    
+
     // 异步并发分析
     concurrency_analysis: AsyncConcurrencyAnalysis,
 }
@@ -452,13 +452,13 @@ struct AsyncDynamicAnalysis {
 struct WebServerModel {
     // 连接池模型
     connection_pool: AsyncConnectionPool,
-    
+
     // 请求处理模型
     request_handler: AsyncRequestHandler,
-    
+
     // 响应生成模型
     response_generator: AsyncResponseGenerator,
-    
+
     // 负载均衡模型
     load_balancer: AsyncLoadBalancer,
 }
@@ -483,13 +483,13 @@ struct WebServerModel {
 struct DistributedCoordinationModel {
     // 节点管理模型
     node_manager: AsyncNodeManager,
-    
+
     // 状态同步模型
     state_synchronizer: AsyncStateSynchronizer,
-    
+
     // 故障检测模型
     failure_detector: AsyncFailureDetector,
-    
+
     // 一致性协议模型
     consensus_protocol: AsyncConsensusProtocol,
 }
@@ -514,13 +514,13 @@ struct DistributedCoordinationModel {
 struct DataProcessingPipelineModel {
     // 数据源模型
     data_source: AsyncDataSource,
-    
+
     // 数据转换模型
     data_transformer: AsyncDataTransformer,
-    
+
     // 数据聚合模型
     data_aggregator: AsyncDataAggregator,
-    
+
     // 数据输出模型
     data_sink: AsyncDataSink,
 }

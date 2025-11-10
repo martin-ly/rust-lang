@@ -51,8 +51,8 @@
     - [工具推荐](#工具推荐)
     - [相关文档](#相关文档)
 
-**版本**: Rust 1.90 / Cargo 1.90  
-**创建日期**: 2025-10-19  
+**版本**: Rust 1.90 / Cargo 1.90
+**创建日期**: 2025-10-19
 **文档状态**: ✅ 完整
 
 ---
@@ -974,21 +974,21 @@ fn main() {
     // 1. 环境变量
     let target = std::env::var("TARGET").unwrap();
     println!("cargo:warning=Building for {}", target);
-    
+
     // 2. 条件编译
     if cfg!(feature = "async") {
         println!("cargo:rustc-cfg=has_async");
     }
-    
+
     // 3. 链接库
     println!("cargo:rustc-link-lib=static=mylib");
-    
+
     // 4. 重新运行条件
     println!("cargo:rerun-if-changed=build.rs");
     println!("cargo:rerun-if-env-changed=MY_VAR");
-    
+
     // 5. 设置环境变量
-    println!("cargo:rustc-env=BUILD_TIME={}", 
+    println!("cargo:rustc-env=BUILD_TIME={}",
              std::time::SystemTime::now()
                  .duration_since(std::time::UNIX_EPOCH)
                  .unwrap()
@@ -1151,7 +1151,7 @@ jobs:
 
 ---
 
-**维护状态**: 🟢 活跃维护中  
+**维护状态**: 🟢 活跃维护中
 **最后更新**: 2025-10-19
 
 *有新问题？欢迎提交 Issue 或 Pull Request！* 🦀📦

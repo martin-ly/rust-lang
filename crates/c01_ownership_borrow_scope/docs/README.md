@@ -17,7 +17,7 @@
 - [📚 所有权理论](./01_theory/01_ownership_theory.md) - 所有权系统理论基础
 - [🔄 借用理论](./01_theory/02_borrowing_theory.md) - 借用系统理论分析
 - [⏱️ 生命周期理论](./01_theory/03_lifetime_theory.md) - 生命周期理论基础
-- [🛡️ 内存安全理论](./01_theory/04_memory_safety_theory.md) - 内存安全保证理论
+- [🛡️ 资源安全理论](./01_theory/04_memory_safety_theory.md) - 资源安全保证理论（编译期逻辑证明）
 
 ### 🔧 核心概念
 
@@ -35,7 +35,7 @@
 
 ### 🛡️ 安全与优化
 
-- [🛡️ 内存安全保证](./04_safety/01_memory_safety.md) - 内存安全保证 ⭐⭐⭐
+- [🛡️ 资源安全保证](./04_safety/01_memory_safety.md) - 资源安全保证（编译期逻辑证明） ⭐⭐⭐
 - [🔒 并发安全](./04_safety/02_concurrency_safety.md) - 并发安全检查 ⭐⭐
 - [⚡ 性能优化](./04_safety/03_performance_optimization.md) - 所有权级优化 ⭐⭐
 - [🚨 错误处理](./04_safety/04_error_handling.md) - 所有权错误处理
@@ -78,11 +78,11 @@
 - [📖 Rust 1.90 所有权和借用系统全面指南](./06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md) - 最全面的 Rust 1.90 入门指南 ⭐⭐⭐
   - 难度: 初级到中级 | 阅读时长: 80 分钟
   - 所有权规则、借用系统、生命周期、智能指针完整讲解
-  
+
 - [🔬 Rust 1.90 版本特性全面分析](./06_rust_features/RUST_190_COMPREHENSIVE_FEATURES.md) - 深度技术分析 ⭐⭐⭐
   - 难度: 高级 | 阅读时长: 70 分钟
   - Rust 2024 Edition、所有权增强、借用优化、作用域管理
-  
+
 - [📝 Rust 1.90 特性增强总结](./06_rust_features/RUST_190_ENHANCEMENT_SUMMARY.md) - 项目增强说明 ⭐⭐
   - 难度: 中级 | 阅读时长: 40 分钟
   - 版本升级、新增模块、文档示例、性能改进
@@ -92,7 +92,7 @@
 - [📊 Rust 1.89 全面特性分析](./06_rust_features/RUST_189_COMPREHENSIVE_FEATURES.md) - 版本核心改进 ⭐⭐
   - 难度: 中级到高级 | 阅读时长: 50 分钟
   - 编译器优化、生命周期增强、工具链改进
-  
+
 - [📋 Rust 1.89 详细特性分析](./06_rust_features/RUST_189_DETAILED_FEATURES.md) - 深入技术细节 ⭐⭐⭐
   - 难度: 高级 | 阅读时长: 60 分钟
   - 借用检查器详解、性能基准测试、迁移指南

@@ -1,6 +1,6 @@
 ﻿# Tier 3: Drop 与 RAII 参考
 
-> **文档类型**: 技术参考  
+> **文档类型**: 技术参考
 > **适用版本**: Rust 1.90+
 
 ---
@@ -53,6 +53,8 @@ fn main() {
 ## RAII 模式
 
 **Resource Acquisition Is Initialization** - 资源获取即初始化
+
+从引用一致性视角看，RAII 模式是**资源管理的编译期证明机制**。资源的获取和释放由编译期证明的资源生命周期决定，而非运行时检查。Drop trait 的自动调用是**编译期证明的确定性析构**。
 
 ### 文件 RAII
 
@@ -115,5 +117,5 @@ fn main() {
 
 ---
 
-**文档维护**: Documentation Team  
+**文档维护**: Documentation Team
 **创建日期**: 2025-10-22

@@ -91,7 +91,7 @@ trait HttpClient {
     type GetFuture<'a>: Future<Output = Result<String, anyhow::Error>> + Send + 'a
     where
         Self: 'a;
-    
+
     // 方法返回这个关联类型
     fn get<'a>(&'a self, url: &'a str) -> Self::GetFuture<'a>;
 }

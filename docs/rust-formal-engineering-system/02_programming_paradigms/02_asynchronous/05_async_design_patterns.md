@@ -58,19 +58,19 @@ pub enum AsyncDesignPattern {
     AsyncFactory(AsyncFactoryPattern),
     AsyncBuilder(AsyncBuilderPattern),
     AsyncSingleton(AsyncSingletonPattern),
-    
+
     // 结构体体体型模式
     AsyncAdapter(AsyncAdapterPattern),
     AsyncDecorator(AsyncDecoratorPattern),
     AsyncProxy(AsyncProxyPattern),
     AsyncFacade(AsyncFacadePattern),
-    
+
     // 行为型模式
     AsyncObserver(AsyncObserverPattern),
     AsyncStrategy(AsyncStrategyPattern),
     AsyncCommand(AsyncCommandPattern),
     AsyncChainOfResponsibility(AsyncChainOfResponsibilityPattern),
-    
+
     // 并发模式
     AsyncProducerConsumer(AsyncProducerConsumerPattern),
     AsyncWorkerPool(AsyncWorkerPoolPattern),
@@ -87,13 +87,13 @@ pub trait AsyncDesignPattern {
     type Input;
     type Output;
     type Error;
-    
+
     // 模式的核心方法
     async fn execute(&self, input: Self::Input) -> Result<Self::Output, Self::Error>;
-    
+
     // 模式的配置方法
     fn configure(&mut self, config: PatternConfig) -> Result<(), Error>;
-    
+
     // 模式的验证方法
     fn validate(&self) -> ValidationResult;
 }
@@ -123,14 +123,14 @@ impl AsyncPatternComposer {
             composition_strategy: CompositionStrategy::Sequential,
         }
     }
-    
+
     pub fn add_pattern<P>(&mut self, pattern: P)
     where
         P: AsyncDesignPattern + 'static,
     {
         self.patterns.push(Box::new(pattern));
     }
-    
+
     pub async fn execute<T>(&self, input: T) -> Result<T, Error> {
         match self.composition_strategy {
             CompositionStrategy::Sequential => self.execute_sequential(input).await,
@@ -163,14 +163,14 @@ impl AsyncFactoryPattern {
             cache: None,
         }
     }
-    
+
     pub fn register_creator<C>(&mut self, name: String, creator: C)
     where
         C: AsyncCreator + 'static,
     {
         self.creators.insert(name, Box::new(creator));
     }
-    
+
     pub async fn create_object(&self, name: &str, config: CreationConfig) -> Result<Box<dyn AsyncObject>, Error> {
         // 检查缓存
         if let Some(cache) = &self.cache {
@@ -178,18 +178,18 @@ impl AsyncFactoryPattern {
                 return Ok(cached);
             }
         }
-        
+
         // 创建新对象
         let creator = self.creators.get(name)
             .ok_or(Error::CreatorNotFound)?;
-        
+
         let object = creator.create(config).await?;
-        
+
         // 缓存对象
         if let Some(cache) = &self.cache {
             cache.put(name, object.clone()).await;
         }
-        
+
         Ok(object)
     }
 }
@@ -220,7 +220,7 @@ impl AsyncObserverPattern {
             observers: HashMap::new(),
         }
     }
-    
+
     pub async fn register_observer(&mut self, subject_name: String, observer: Box<dyn AsyncObserver>) {
         let subject = self.subjects.entry(subject_name.clone()).or_insert_with(|| {
             AsyncSubject {
@@ -228,14 +228,14 @@ impl AsyncObserverPattern {
                 observers: Arc::new(RwLock::new(Vec::new())),
             }
         });
-        
+
         subject.observers.write().await.push(observer);
     }
-    
+
     pub async fn notify_observers(&self, subject_name: &str, event: Event) -> Result<(), Error> {
         if let Some(subject) = self.subjects.get(subject_name) {
             let observers = subject.observers.read().await;
-            
+
             let mut tasks = Vec::new();
             for observer in observers.iter() {
                 let event_clone = event.clone();
@@ -244,14 +244,14 @@ impl AsyncObserverPattern {
                 });
                 tasks.push(task);
             }
-            
+
             // 并发通知所有观察者
             let results = futures::future::join_all(tasks).await;
             for result in results {
                 result??;
             }
         }
-        
+
         Ok(())
     }
 }
@@ -279,7 +279,7 @@ trait AsyncConsumer: Send + Sync {
 impl AsyncProducerConsumerPattern {
     pub fn new(buffer_size: usize) -> Self {
         let (tx, rx) = tokio::sync::mpsc::channel(buffer_size);
-        
+
         Self {
             channel: Channel { tx, rx },
             producers: Vec::new(),
@@ -287,27 +287,27 @@ impl AsyncProducerConsumerPattern {
             buffer_size,
         }
     }
-    
+
     pub fn add_producer<P>(&mut self, producer: P)
     where
         P: AsyncProducer + 'static,
     {
         self.producers.push(AsyncProducerWrapper(Box::new(producer)));
     }
-    
+
     pub fn add_consumer<C>(&mut self, consumer: C)
     where
         C: AsyncConsumer + 'static,
     {
         self.consumers.push(AsyncConsumerWrapper(Box::new(consumer)));
     }
-    
+
     pub async fn run(&mut self) -> Result<(), Error> {
         // 启动生产者任务
         let producer_handles: Vec<_> = self.producers.iter().map(|producer| {
             let tx = self.channel.tx.clone();
             let producer = producer.clone();
-            
+
             tokio::spawn(async move {
                 loop {
                     match producer.0.produce().await {
@@ -321,12 +321,12 @@ impl AsyncProducerConsumerPattern {
                 }
             })
         }).collect();
-        
+
         // 启动消费者任务
         let consumer_handles: Vec<_> = self.consumers.iter().map(|consumer| {
             let mut rx = self.channel.rx.clone();
             let consumer = consumer.clone();
-            
+
             tokio::spawn(async move {
                 while let Some(message) = rx.recv().await {
                     if let Err(_) = consumer.0.consume(message).await {
@@ -335,12 +335,12 @@ impl AsyncProducerConsumerPattern {
                 }
             })
         }).collect();
-        
+
         // 等待所有任务完成
         let all_handles: Vec<_> = producer_handles.into_iter()
             .chain(consumer_handles.into_iter())
             .collect();
-        
+
         futures::future::join_all(all_handles).await;
         Ok(())
     }
@@ -369,28 +369,28 @@ impl AsyncStrategyPattern {
             context: StrategyContext::new(),
         }
     }
-    
+
     pub fn register_strategy<S>(&mut self, name: String, strategy: S)
     where
         S: AsyncStrategy + 'static,
     {
         self.strategies.insert(name, Box::new(strategy));
     }
-    
+
     pub fn set_default_strategy(&mut self, name: String) {
         if self.strategies.contains_key(&name) {
             self.default_strategy = Some(name);
         }
     }
-    
+
     pub async fn execute_strategy(&self, strategy_name: Option<&str>) -> Result<StrategyResult, Error> {
         let strategy_name = strategy_name
             .or(self.default_strategy.as_deref())
             .ok_or(Error::NoStrategyAvailable)?;
-        
+
         let strategy = self.strategies.get(strategy_name)
             .ok_or(Error::StrategyNotFound)?;
-        
+
         strategy.execute(&self.context).await
     }
 }
@@ -420,24 +420,24 @@ impl AsyncDecoratorPattern {
             decorators: Vec::new(),
         }
     }
-    
+
     pub fn add_decorator<D>(&mut self, decorator: D)
     where
         D: AsyncDecorator + 'static,
     {
         self.decorators.push(Box::new(decorator));
     }
-    
+
     pub async fn execute(&self, input: ComponentInput) -> Result<ComponentOutput, Error> {
         let mut current_input = input;
-        
+
         // 应用装饰器链
         for decorator in &self.decorators {
             current_input = ComponentInput::from_output(
                 decorator.decorate(self.base_component.as_ref(), current_input).await?
             );
         }
-        
+
         // 执行基础组件
         self.base_component.execute(current_input).await
     }
@@ -511,21 +511,21 @@ impl AsyncWebServicePattern {
         let mut factory = AsyncFactoryPattern::new();
         factory.register_creator("handler".to_string(), HandlerCreator);
         factory.register_creator("middleware".to_string(), MiddlewareCreator);
-        
+
         let observer = AsyncObserverPattern::new();
-        
+
         let producer_consumer = AsyncProducerConsumerPattern::new(1000);
         producer_consumer.add_producer(RequestProducer);
         producer_consumer.add_consumer(RequestConsumer);
-        
+
         let mut strategy = AsyncStrategyPattern::new();
         strategy.register_strategy("caching".to_string(), CachingStrategy);
         strategy.register_strategy("load_balancing".to_string(), LoadBalancingStrategy);
-        
+
         let decorator = AsyncDecoratorPattern::new(Box::new(BaseHandler));
         decorator.add_decorator(LoggingDecorator);
         decorator.add_decorator(ErrorHandlingDecorator);
-        
+
         Self {
             factory,
             observer,
@@ -534,20 +534,20 @@ impl AsyncWebServicePattern {
             decorator,
         }
     }
-    
+
     pub async fn handle_request(&self, request: HttpRequest) -> HttpResponse {
         // 使用工厂模式创建处理器
         let handler = self.factory.create_object("handler", CreationConfig::default()).await?;
-        
+
         // 使用装饰器模式添加功能
         let decorated_handler = self.decorator.execute(handler).await?;
-        
+
         // 使用策略模式选择处理策略
         let result = self.strategy.execute_strategy(Some("caching")).await?;
-        
+
         // 使用观察者模式通知事件
         self.observer.notify_observers("request_handled", Event::RequestHandled).await?;
-        
+
         Ok(HttpResponse::new())
     }
 }
@@ -569,17 +569,17 @@ impl AsyncMicroserviceCommunicationPattern {
         let mut factory = AsyncFactoryPattern::new();
         factory.register_creator("service_client".to_string(), ServiceClientCreator);
         factory.register_creator("message_queue".to_string(), MessageQueueCreator);
-        
+
         let observer = AsyncObserverPattern::new();
-        
+
         let producer_consumer = AsyncProducerConsumerPattern::new(100);
         producer_consumer.add_producer(MessageProducer);
         producer_consumer.add_consumer(MessageConsumer);
-        
+
         let mut strategy = AsyncStrategyPattern::new();
         strategy.register_strategy("retry".to_string(), RetryStrategy);
         strategy.register_strategy("circuit_breaker".to_string(), CircuitBreakerStrategy);
-        
+
         Self {
             factory,
             observer,
@@ -587,20 +587,20 @@ impl AsyncMicroserviceCommunicationPattern {
             strategy,
         }
     }
-    
+
     pub async fn send_message(&self, message: ServiceMessage) -> Result<ServiceResponse, Error> {
         // 使用工厂模式创建服务客户端
         let client = self.factory.create_object("service_client", CreationConfig::default()).await?;
-        
+
         // 使用生产者-消费者模式处理消息
         self.producer_consumer.send_message(message).await?;
-        
+
         // 使用策略模式处理重试和熔断
         let response = self.strategy.execute_strategy(Some("retry")).await?;
-        
+
         // 使用观察者模式通知消息发送事件
         self.observer.notify_observers("message_sent", Event::MessageSent).await?;
-        
+
         Ok(response)
     }
 }
@@ -622,19 +622,19 @@ impl AsyncDataPipelinePattern {
         let mut factory = AsyncFactoryPattern::new();
         factory.register_creator("data_processor".to_string(), DataProcessorCreator);
         factory.register_creator("data_transformer".to_string(), DataTransformerCreator);
-        
+
         let producer_consumer = AsyncProducerConsumerPattern::new(1000);
         producer_consumer.add_producer(DataProducer);
         producer_consumer.add_consumer(DataConsumer);
-        
+
         let mut strategy = AsyncStrategyPattern::new();
         strategy.register_strategy("batch_processing".to_string(), BatchProcessingStrategy);
         strategy.register_strategy("stream_processing".to_string(), StreamProcessingStrategy);
-        
+
         let decorator = AsyncDecoratorPattern::new(Box::new(BaseDataProcessor));
         decorator.add_decorator(ValidationDecorator);
         decorator.add_decorator(TransformationDecorator);
-        
+
         Self {
             factory,
             producer_consumer,
@@ -642,20 +642,20 @@ impl AsyncDataPipelinePattern {
             decorator,
         }
     }
-    
+
     pub async fn process_data(&self, data: DataStream) -> ProcessedData {
         // 使用工厂模式创建数据处理器
         let processor = self.factory.create_object("data_processor", CreationConfig::default()).await?;
-        
+
         // 使用装饰器模式添加处理功能
         let decorated_processor = self.decorator.execute(processor).await?;
-        
+
         // 使用生产者-消费者模式处理数据流
         self.producer_consumer.process_stream(data).await?;
-        
+
         // 使用策略模式选择处理策略
         let result = self.strategy.execute_strategy(Some("batch_processing")).await?;
-        
+
         Ok(result)
     }
 }
@@ -677,17 +677,17 @@ impl AsyncDistributedCoordinationPattern {
         let mut factory = AsyncFactoryPattern::new();
         factory.register_creator("coordinator".to_string(), CoordinatorCreator);
         factory.register_creator("participant".to_string(), ParticipantCreator);
-        
+
         let observer = AsyncObserverPattern::new();
-        
+
         let mut strategy = AsyncStrategyPattern::new();
         strategy.register_strategy("consensus".to_string(), ConsensusStrategy);
         strategy.register_strategy("synchronization".to_string(), SynchronizationStrategy);
-        
+
         let decorator = AsyncDecoratorPattern::new(Box::new(BaseCoordinator));
         decorator.add_decorator(FaultToleranceDecorator);
         decorator.add_decorator(LoadBalancingDecorator);
-        
+
         Self {
             factory,
             observer,
@@ -695,20 +695,20 @@ impl AsyncDistributedCoordinationPattern {
             decorator,
         }
     }
-    
+
     pub async fn coordinate_operation(&self, operation: DistributedOperation) -> Result<(), Error> {
         // 使用工厂模式创建协调器
         let coordinator = self.factory.create_object("coordinator", CreationConfig::default()).await?;
-        
+
         // 使用装饰器模式添加协调功能
         let decorated_coordinator = self.decorator.execute(coordinator).await?;
-        
+
         // 使用策略模式选择协调策略
         let result = self.strategy.execute_strategy(Some("consensus")).await?;
-        
+
         // 使用观察者模式通知协调事件
         self.observer.notify_observers("operation_coordinated", Event::OperationCoordinated).await?;
-        
+
         Ok(result)
     }
 }
@@ -730,19 +730,19 @@ impl AsyncStreamProcessingPattern {
         let mut factory = AsyncFactoryPattern::new();
         factory.register_creator("stream_processor".to_string(), StreamProcessorCreator);
         factory.register_creator("window_processor".to_string(), WindowProcessorCreator);
-        
+
         let producer_consumer = AsyncProducerConsumerPattern::new(10000);
         producer_consumer.add_producer(StreamProducer);
         producer_consumer.add_consumer(StreamConsumer);
-        
+
         let mut strategy = AsyncStrategyPattern::new();
         strategy.register_strategy("windowing".to_string(), WindowingStrategy);
         strategy.register_strategy("aggregation".to_string(), AggregationStrategy);
-        
+
         let decorator = AsyncDecoratorPattern::new(Box::new(BaseStreamProcessor));
         decorator.add_decorator(FilteringDecorator);
         decorator.add_decorator(TransformationDecorator);
-        
+
         Self {
             factory,
             producer_consumer,
@@ -750,20 +750,20 @@ impl AsyncStreamProcessingPattern {
             decorator,
         }
     }
-    
+
     pub async fn process_stream(&self, stream: DataStream) -> ProcessedStream {
         // 使用工厂模式创建流处理器
         let processor = self.factory.create_object("stream_processor", CreationConfig::default()).await?;
-        
+
         // 使用装饰器模式添加处理功能
         let decorated_processor = self.decorator.execute(processor).await?;
-        
+
         // 使用生产者-消费者模式处理流数据
         self.producer_consumer.process_stream(stream).await?;
-        
+
         // 使用策略模式选择处理策略
         let result = self.strategy.execute_strategy(Some("windowing")).await?;
-        
+
         Ok(result)
     }
 }

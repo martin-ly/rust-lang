@@ -25,20 +25,20 @@ impl JsonValue {
     pub fn is_null(&self) -> bool {
         matches!(self, JsonValue::Null)
     }
-    
+
     pub fn is_object(&self) -> bool {
         matches!(self, JsonValue::Object(_))
     }
-    
+
     pub fn is_array(&self) -> bool {
         matches!(self, JsonValue::Array(_))
     }
-    
+
     /// 路径访问
     pub fn get(&self, path: &str) -> Option<&JsonValue> {
         let parts: Vec<&str> = path.split('.').collect();
         let mut current = self;
-        
+
         for part in parts {
             match current {
                 JsonValue::Object(map) => {
@@ -51,10 +51,10 @@ impl JsonValue {
                 _ => return None,
             }
         }
-        
+
         Some(current)
     }
-    
+
     /// 递归转换为字符串
     pub fn stringify(&self) -> String {
         match self {
@@ -89,18 +89,18 @@ fn json_example() {
     user.insert("name".to_string(), JsonValue::String("Alice".to_string()));
     user.insert("age".to_string(), JsonValue::Number(30.0));
     user.insert("active".to_string(), JsonValue::Boolean(true));
-    
+
     let mut address = HashMap::new();
     address.insert("city".to_string(), JsonValue::String("Beijing".to_string()));
     address.insert("zip".to_string(), JsonValue::String("100000".to_string()));
-    
+
     user.insert("address".to_string(), JsonValue::Object(address));
-    
+
     let json = JsonValue::Object(user);
-    
+
     // 打印
     println!("{}", json);
-    
+
     // 路径访问
     if let Some(city) = json.get("address.city") {
         println!("City: {}", city);
@@ -133,11 +133,11 @@ impl<State> Character<State> {
     fn name(&self) -> &str {
         &self.name
     }
-    
+
     fn health(&self) -> u32 {
         self.health
     }
-    
+
     fn take_damage(&mut self, damage: u32) {
         self.health = self.health.saturating_sub(damage);
     }
@@ -153,7 +153,7 @@ impl Character<Idle> {
             _state: std::marker::PhantomData,
         }
     }
-    
+
     fn start_walking(self) -> Character<Walking> {
         println!("{} starts walking", self.name);
         Character {
@@ -163,7 +163,7 @@ impl Character<Idle> {
             _state: std::marker::PhantomData,
         }
     }
-    
+
     fn jump(self) -> Character<Jumping> {
         println!("{} jumps from idle", self.name);
         Character {
@@ -182,7 +182,7 @@ impl Character<Walking> {
         self.position.1 += dy;
         println!("{} walks to {:?}", self.name, self.position);
     }
-    
+
     fn stop(self) -> Character<Idle> {
         println!("{} stops walking", self.name);
         Character {
@@ -192,7 +192,7 @@ impl Character<Walking> {
             _state: std::marker::PhantomData,
         }
     }
-    
+
     fn start_running(self) -> Character<Running> {
         println!("{} starts running", self.name);
         Character {
@@ -211,7 +211,7 @@ impl Character<Running> {
         self.position.1 += dy * 2.0;
         println!("{} runs to {:?}", self.name, self.position);
     }
-    
+
     fn slow_down(self) -> Character<Walking> {
         println!("{} slows down", self.name);
         Character {
@@ -239,21 +239,21 @@ impl Character<Jumping> {
 // 使用示例：编译时保证状态转换正确
 fn character_example() {
     let hero = Character::<Idle>::new("Hero".to_string());
-    
+
     // 编译通过：idle -> walking
     let mut hero = hero.start_walking();
     hero.walk(1.0, 0.0);
-    
+
     // 编译通过：walking -> running
     let mut hero = hero.start_running();
     hero.run(2.0, 0.0);
-    
+
     // 编译通过：running -> walking -> idle
     let hero = hero.slow_down().stop();
-    
+
     // 编译错误：idle 状态不能调用 run()
     // hero.run(1.0, 0.0);
-    
+
     println!("Final position: {:?}", hero.position);
 }
 ```
@@ -287,7 +287,7 @@ impl<Unit> Quantity<Unit> {
             _unit: PhantomData,
         }
     }
-    
+
     fn value(&self) -> f64 {
         self.value
     }
@@ -296,7 +296,7 @@ impl<Unit> Quantity<Unit> {
 // 相同单位可以相加
 impl<Unit> Add for Quantity<Unit> {
     type Output = Quantity<Unit>;
-    
+
     fn add(self, rhs: Self) -> Self::Output {
         Quantity::new(self.value + rhs.value)
     }
@@ -305,7 +305,7 @@ impl<Unit> Add for Quantity<Unit> {
 // 相同单位可以相减
 impl<Unit> Sub for Quantity<Unit> {
     type Output = Quantity<Unit>;
-    
+
     fn sub(self, rhs: Self) -> Self::Output {
         Quantity::new(self.value - rhs.value)
     }
@@ -314,7 +314,7 @@ impl<Unit> Sub for Quantity<Unit> {
 // 距离 / 时间 = 速度
 impl Div<Quantity<Seconds>> for Quantity<Meters> {
     type Output = Quantity<MetersPerSecond>;
-    
+
     fn div(self, rhs: Quantity<Seconds>) -> Self::Output {
         Quantity::new(self.value / rhs.value)
     }
@@ -323,7 +323,7 @@ impl Div<Quantity<Seconds>> for Quantity<Meters> {
 // 速度 * 时间 = 距离
 impl Mul<Quantity<Seconds>> for Quantity<MetersPerSecond> {
     type Output = Quantity<Meters>;
-    
+
     fn mul(self, rhs: Quantity<Seconds>) -> Self::Output {
         Quantity::new(self.value * rhs.value)
     }
@@ -342,19 +342,19 @@ fn seconds(value: f64) -> Quantity<Seconds> {
 fn physics_example() {
     let distance = meters(100.0);
     let time = seconds(10.0);
-    
+
     // 类型安全：计算速度
     let speed = distance / time;
     println!("Speed: {} m/s", speed.value());
-    
+
     // 类型安全：计算新距离
     let new_time = seconds(5.0);
     let new_distance = speed * new_time;
     println!("New distance: {} m", new_distance.value());
-    
+
     // 编译错误：不能将距离和时间相加
     // let wrong = distance + time;
-    
+
     // 编译错误：不能将速度和距离相乘
     // let wrong = speed * distance;
 }
@@ -423,78 +423,78 @@ impl DatabaseConfigBuilder {
             ssl_enabled: None,
         }
     }
-    
+
     pub fn host(mut self, host: impl Into<String>) -> Self {
         self.host = Some(host.into());
         self
     }
-    
+
     pub fn port(mut self, port: u16) -> Self {
         self.port = Some(port);
         self
     }
-    
+
     pub fn database(mut self, database: impl Into<String>) -> Self {
         self.database = Some(database.into());
         self
     }
-    
+
     pub fn username(mut self, username: impl Into<String>) -> Self {
         self.username = Some(username.into());
         self
     }
-    
+
     pub fn password(mut self, password: impl Into<String>) -> Self {
         self.password = Some(password.into());
         self
     }
-    
+
     pub fn pool_size(mut self, size: usize) -> Self {
         self.pool_size = Some(size);
         self
     }
-    
+
     pub fn timeout_seconds(mut self, seconds: u64) -> Self {
         self.timeout_seconds = Some(seconds);
         self
     }
-    
+
     pub fn ssl_enabled(mut self, enabled: bool) -> Self {
         self.ssl_enabled = Some(enabled);
         self
     }
-    
+
     pub fn build(self) -> Result<DatabaseConfig, BuilderError> {
         // 验证必填字段
         let host = self.host
             .ok_or(BuilderError::MissingField("host"))?;
-        
+
         let database = self.database
             .ok_or(BuilderError::MissingField("database"))?;
-        
+
         let username = self.username
             .ok_or(BuilderError::MissingField("username"))?;
-        
+
         let password = self.password
             .ok_or(BuilderError::MissingField("password"))?;
-        
+
         // 提供默认值
         let port = self.port.unwrap_or(5432);
         let pool_size = self.pool_size.unwrap_or(10);
         let timeout_seconds = self.timeout_seconds.unwrap_or(30);
         let ssl_enabled = self.ssl_enabled.unwrap_or(false);
-        
+
         // 验证值的有效性
         if port == 0 {
             return Err(BuilderError::InvalidValue("Port cannot be 0".to_string()));
         }
-        
+
         if pool_size == 0 || pool_size > 1000 {
             return Err(BuilderError::InvalidValue(
                 "Pool size must be between 1 and 1000".to_string()
             ));
         }
-        
+
         Ok(DatabaseConfig {
             host,
             port,
@@ -518,19 +518,19 @@ fn builder_example() -> Result<(), BuilderError> {
         .pool_size(20)
         .ssl_enabled(true)
         .build()?;
-    
+
     println!("Config: {:?}", config);
-    
+
     // 缺少必填字段会编译通过但运行时报错
     let result = DatabaseConfigBuilder::new()
         .host("localhost")
         .build();
-    
+
     match result {
         Ok(_) => println!("Unexpected success"),
         Err(e) => println!("Expected error: {}", e),
     }
-    
+
     Ok(())
 }
 ```
@@ -584,7 +584,7 @@ fn layout_example() {
     println!("GoodLayout size: {} bytes", mem::size_of::<GoodLayout>());
     println!("CLayout size: {} bytes", mem::size_of::<CLayout>());
     println!("PackedLayout size: {} bytes", mem::size_of::<PackedLayout>());
-    
+
     // 典型输出：
     // BadLayout size: 24 bytes  (浪费!)
     // GoodLayout size: 16 bytes
@@ -619,7 +619,7 @@ impl ErrorCode {
     fn as_u16(&self) -> u16 {
         *self as u16
     }
-    
+
     fn from_u16(value: u16) -> Option<Self> {
         match value {
             1000 => Some(ErrorCode::NetworkError),
@@ -632,10 +632,10 @@ impl ErrorCode {
 
 fn discriminant_example() {
     use std::mem;
-    
+
     let status = Status::Completed;
     println!("Status size: {} bytes", mem::size_of_val(&status));
-    
+
     let code = ErrorCode::DatabaseError;
     println!("Error code: {}", code.as_u16());
 }
@@ -747,7 +747,7 @@ impl ArgParser {
     fn parse(input: &[String]) -> Self {
         let mut args = Vec::new();
         let mut iter = input.iter();
-        
+
         while let Some(arg) = iter.next() {
             if arg.starts_with("--") {
                 let name = arg[2..].to_string();
@@ -762,17 +762,17 @@ impl ArgParser {
                 args.push(Arg::Positional(arg.clone()));
             }
         }
-        
+
         ArgParser { args }
     }
-    
+
     fn get_flag(&self, name: &str) -> bool {
         self.args.iter().any(|arg| match arg {
             Arg::Flag(flag_name) => flag_name == name,
             _ => false,
         })
     }
-    
+
     fn get_option(&self, name: &str) -> Option<&str> {
         self.args.iter().find_map(|arg| match arg {
             Arg::Option(opt_name, value) if opt_name == name => Some(value.as_str()),
@@ -790,9 +790,9 @@ fn parser_example() {
         "-h".to_string(),
         "input.txt".to_string(),
     ];
-    
+
     let parser = ArgParser::parse(&args);
-    
+
     println!("Has verbose: {}", parser.get_flag("verbose"));
     println!("Has help: {}", parser.get_flag("h"));
     println!("Output: {:?}", parser.get_option("output"));
@@ -801,6 +801,6 @@ fn parser_example() {
 
 ---
 
-**更新日期**: 2025-10-24  
-**文档版本**: 2.0  
+**更新日期**: 2025-10-24
+**文档版本**: 2.0
 **作者**: C02 Type System Code Examples Team

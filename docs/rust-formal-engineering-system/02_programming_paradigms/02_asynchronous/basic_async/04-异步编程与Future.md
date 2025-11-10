@@ -144,7 +144,7 @@ promise.then(result => {
            this.value = null;
            this.state = 'pending';
        }
-       
+
        then(callback) {
            this.callbacks.push(callback); // 注册回调
            return this;
@@ -183,7 +183,7 @@ struct MyFuture {
 
 impl Future for MyFuture {
     type Output = String;
-    
+
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
         match self.state {
             FutureState::Pending => {
@@ -236,9 +236,9 @@ impl Future for MyFuture {
 
    ```javascript
    // 栈帧：main -> promise1 -> promise2 -> ... -> promiseN
-   promise1.then(() => 
-       promise2.then(() => 
-           promise3.then(() => 
+   promise1.then(() =>
+       promise2.then(() =>
+           promise3.then(() =>
                // ... 嵌套深度 = n
            )
        )
@@ -409,11 +409,11 @@ fetch('/api/data')
 async fn error_handling() -> Result<(), Error> {
     let response = fetch("/api/data").await?; // 自动传播错误
     let data = response.json().await?;
-    
+
     if !data.valid {
         return Err(Error::InvalidData);
     }
-    
+
     let result = process_data(data).await?;
     Ok(())
 }
@@ -430,13 +430,13 @@ class CancellablePromise {
         this.isCancelled = false;
         this.callbacks = [];
     }
-    
+
     then(callback) {
         if (this.isCancelled) return this;
         this.callbacks.push(callback);
         return this;
     }
-    
+
     cancel() {
         this.isCancelled = true;
         this.callbacks = []; // 清理所有回调
@@ -620,7 +620,7 @@ class LeakyPromise {
     constructor() {
         this.callbacks = [];
     }
-    
+
     then(callback) {
         this.callbacks.push(callback);
         return this; // 可能导致循环引用
@@ -644,7 +644,7 @@ async fn recursive_operation(n: u32) -> u32 {
     if n == 0 {
         return 0;
     }
-    
+
     let result = recursive_operation(n - 1).await;
     expensive_computation(result).await
 }
@@ -703,8 +703,8 @@ pub enum Poll<T> {
 struct MyFuture {
     state: i32,
     // future_b 依赖 future_a 的结果，可能持有对 future_a 内部数据的引用
-    future_a: SomeFuture, 
-    future_b: AnotherFuture, 
+    future_a: SomeFuture,
+    future_b: AnotherFuture,
 }
 ```
 
@@ -1063,7 +1063,7 @@ impl EventLoop {
             while let Some(task) = self.ready_queue.pop_front() {
                 self.run_task(task);
             }
-            
+
             // 2. 等待新事件
             self.reactor.poll();
         }
@@ -1091,7 +1091,7 @@ impl WorkStealingScheduler {
             self.global_queue.push_back(task);
         }
     }
-    
+
     fn steal(&self, thief_id: usize) -> Option<Task> {
         // 从其他工作线程窃取任务
         for (victim_id, queue) in self.local_queues.iter().enumerate() {
@@ -1204,12 +1204,12 @@ fn create_async_fn() -> impl Future<Output = i32> {
 ```rust
 async fn closure_example() {
     let data = vec![1, 2, 3];
-    
+
     // 移动捕获
     let closure = async move {
         println!("Data: {:?}", data); // data被移动
     };
-    
+
     // 引用捕获（需要生命周期）
     let data_ref = &data;
     let closure_ref = async {
@@ -1243,13 +1243,13 @@ use criterion::{criterion_group, criterion_main, Criterion};
 async fn benchmark_future() {
     // 异步操作基准
     let start = std::time::Instant::now();
-    
+
     let futures: Vec<_> = (0..1000)
         .map(|i| async move { i * 2 })
         .collect();
-    
+
     let results = futures::future::join_all(futures).await;
-    
+
     let duration = start.elapsed();
     println!("Completed in {:?}", duration);
 }
@@ -1278,7 +1278,7 @@ impl<T> ObjectPool<T> {
     fn get(&mut self) -> Option<T> {
         self.objects.pop()
     }
-    
+
     fn return_object(&mut self, obj: T) {
         self.objects.push(obj);
     }

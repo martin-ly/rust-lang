@@ -72,15 +72,15 @@ resolver = "3"    # 使用最新的依赖解析器
 pub trait LinearType {
     /// 移动语义 / Move Semantics
     fn move_ownership(self) -> Self;
-    
+
     /// 复制语义 / Copy Semantics
     fn copy_value(&self) -> Self
     where
         Self: Copy;
-    
+
     /// 借用语义 / Borrow Semantics
     fn borrow_value(&self) -> &Self;
-    
+
     /// 可变借用 / Mutable Borrow
     fn borrow_mut(&mut self) -> &mut Self;
 }
@@ -108,13 +108,13 @@ pub trait LinearType {
 pub trait BorrowChecker {
     /// 借用规则检查 / Borrowing Rules
     fn check_borrow_rules(&self, borrows: &[Borrow]) -> BorrowCheckResult;
-    
+
     /// 生命周期检查 / Lifetime Check
     fn check_lifetimes(&self, lifetimes: &[Lifetime]) -> LifetimeCheckResult;
-    
+
     /// 数据竞争检测 / Data Race Detection
     fn detect_data_races(&self, accesses: &[MemoryAccess]) -> DataRaceResult;
-    
+
     /// 悬垂引用检测 / Dangling Reference Detection
     fn detect_dangling_refs(&self, references: &[Reference]) -> DanglingRefResult;
 }
@@ -132,11 +132,11 @@ pub trait BorrowChecker {
 // Rust 1.89 中的改进借用模式
 fn advanced_borrowing() {
     let mut data = vec![1, 2, 3, 4, 5];
-    
+
     // 改进的借用检查器允许更灵活的借用模式
     let (first, rest) = data.split_at_mut(1);
     let (second, third) = rest.split_at_mut(1);
-    
+
     // 同时修改不同部分，避免借用冲突
     first[0] = 10;
     second[0] = 20;
@@ -153,13 +153,13 @@ fn advanced_borrowing() {
 pub trait Lifetime<'a> {
     /// 生命周期参数 / Lifetime Parameter
     type LifetimeParam;
-    
+
     /// 生命周期约束 / Lifetime Constraint
     fn lifetime_constraint(&self, other: &'a Self) -> bool;
-    
+
     /// 生命周期推断 / Lifetime Inference
     fn infer_lifetime(&self) -> &'a Self;
-    
+
     /// 生命周期扩展 / Lifetime Extension
     fn extend_lifetime<'b>(&'a self) -> &'b Self
     where
@@ -178,14 +178,14 @@ pub trait Lifetime<'a> {
 ```rust
 fn nll_optimization() {
     let mut data = vec![1, 2, 3];
-    
+
     // Rust 1.89 中 NLL 的改进
     let first = &data[0];
     let second = &data[1];
-    
+
     // 编译器能够更精确地推断借用结束点
     println!("First: {}, Second: {}", first, second);
-    
+
     // 借用结束后可以修改数据
     data.push(4); // 在 Rust 1.89 中更灵活
 }
@@ -212,7 +212,7 @@ impl ScopeManager {
         let scope = Scope::new(scope_name);
         self.scope_stack.push(scope);
     }
-    
+
     /// 退出作用域 / Exit Scope
     pub fn exit_scope(&mut self) -> Result<(), ScopeError> {
         if let Some(scope) = self.scope_stack.pop() {
@@ -261,19 +261,19 @@ impl MemorySafetyChecker {
     /// 检查内存安全 / Check Memory Safety
     pub fn check_memory_safety(&self, program: &Program) -> MemorySafetyReport {
         let mut report = MemorySafetyReport::new();
-        
+
         // 检查内存分配
         let allocation_report = self.allocation_tracker.check_allocations(program);
         report.add_allocation_report(allocation_report);
-        
+
         // 检查引用有效性
         let reference_report = self.reference_checker.check_references(program);
         report.add_reference_report(reference_report);
-        
+
         // 检查数据竞争
         let data_race_report = self.data_race_detector.detect_races(program);
         report.add_data_race_report(data_race_report);
-        
+
         report
     }
 }
@@ -292,21 +292,21 @@ impl MemorySafetyChecker {
 /// 验证所有权规则 / Validate Ownership Rules
 pub fn validate_ownership_rules(&self, ownership_graph: &OwnershipGraph) -> OwnershipValidationResult {
     let mut result = OwnershipValidationResult::new();
-    
+
     // 检查单一所有权
     for node in ownership_graph.nodes() {
         if ownership_graph.get_owners(node).len() > 1 {
             result.add_violation(OwnershipViolation::MultipleOwners);
         }
     }
-    
+
     // 检查借用规则
     for edge in ownership_graph.edges() {
         if !self.validate_borrow_rules(edge) {
             result.add_violation(OwnershipViolation::InvalidBorrow);
         }
     }
-    
+
     result
 }
 ```
@@ -323,7 +323,7 @@ use std::thread;
 fn concurrent_safety() {
     let shared_data = Arc::new(Mutex::new(vec![1, 2, 3]));
     let mut handles = vec![];
-    
+
     for i in 0..3 {
         let data_clone = Arc::clone(&shared_data);
         let handle = thread::spawn(move || {
@@ -332,7 +332,7 @@ fn concurrent_safety() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
@@ -355,14 +355,14 @@ use std::future::Future;
 async fn async_ownership_example() {
     let data = vec![1, 2, 3];
     let pinned_data = Box::pin(data);
-    
+
     // 异步环境中的所有权管理
     let future = async {
         let mut data = pinned_data.await;
         data.push(4);
         data
     };
-    
+
     let result = future.await;
     println!("Result: {:?}", result);
 }
@@ -380,15 +380,15 @@ use std::cell::RefCell;
 fn smart_pointer_features() {
     // 引用计数智能指针
     let data = Rc::new(RefCell::new(vec![1, 2, 3]));
-    
+
     // 克隆引用，共享所有权
     let data_clone1 = Rc::clone(&data);
     let data_clone2 = Rc::clone(&data);
-    
+
     // 通过 RefCell 实现内部可变性
     data_clone1.borrow_mut().push(4);
     data_clone2.borrow_mut().push(5);
-    
+
     println!("Data: {:?}", data.borrow());
 }
 ```
@@ -421,13 +421,13 @@ fn optimized_function(x: i32) -> i32 {
 // 编译器能够更好地优化所有权相关的代码
 fn ownership_optimization() {
     let data = vec![1, 2, 3, 4, 5];
-    
+
     // 编译器优化：避免不必要的复制
     let sum: i32 = data.iter().sum();
-    
+
     // 编译器优化：内联函数调用
     let result = optimized_function(sum);
-    
+
     println!("Result: {}", result);
 }
 ```
@@ -447,14 +447,14 @@ fn ownership_optimization() {
 #[allow(clippy::redundant_clone)]
 fn static_analysis_example() {
     let data = vec![1, 2, 3];
-    
+
     // Clippy 能够检测不必要的克隆
     let cloned_data = data.clone();
-    
+
     // 改进的借用检查器能够提供更好的建议
     let borrowed_data = &data;
-    
-    println!("Original: {:?}, Cloned: {:?}, Borrowed: {:?}", 
+
+    println!("Original: {:?}, Cloned: {:?}, Borrowed: {:?}",
              data, cloned_data, borrowed_data);
 }
 ```
@@ -476,18 +476,18 @@ fn performance_patterns() {
     // 1. 避免不必要的克隆
     let data = vec![1, 2, 3];
     let borrowed = &data;
-    
+
     // 2. 使用引用而非所有权
     fn process_data(data: &[i32]) -> i32 {
         data.iter().sum()
     }
-    
+
     let result = process_data(borrowed);
-    
+
     // 3. 利用 Copy trait
     let numbers = [1, 2, 3, 4, 5];
     let copied = numbers; // 按位复制，无所有权转移
-    
+
     println!("Result: {}, Copied: {:?}", result, copied);
 }
 ```

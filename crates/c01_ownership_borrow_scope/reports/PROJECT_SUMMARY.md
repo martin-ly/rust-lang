@@ -186,10 +186,10 @@ use c01_ownership_borrow_scope::{ScopeManager, ScopeType};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut manager = ScopeManager::new();
-    
+
     // 进入作用域
     manager.enter_scope("main".to_string(), ScopeType::Function)?;
-    
+
     // 声明变量
     manager.declare_variable(
         "x".to_string(),
@@ -198,10 +198,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         false,
         None,
     )?;
-    
+
     // 退出作用域
     manager.exit_scope()?;
-    
+
     Ok(())
 }
 ```

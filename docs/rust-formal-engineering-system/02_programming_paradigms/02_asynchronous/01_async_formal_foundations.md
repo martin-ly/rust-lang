@@ -69,7 +69,7 @@ fn async_function() -> impl Future<Output = Result<T, E>> {
 ```rust
 pub trait Future {
     type Output;
-    
+
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
 }
 
@@ -116,7 +116,7 @@ impl<S, E, A> AsyncStateMachine<S, E, A> {
         let (next_state, action) = self.transitions
             .get(&(self.current_state.clone(), event))
             .ok_or(Error::InvalidTransition)?;
-        
+
         self.current_state = next_state.clone();
         Ok(action.clone())
     }
@@ -143,7 +143,7 @@ impl AsyncRuntime {
             reactor: Box::new(IoReactor::new()),
         }
     }
-    
+
     pub async fn spawn<F, T>(&self, future: F) -> JoinHandle<T>
     where
         F: Future<Output = T> + Send + 'static,
@@ -175,9 +175,9 @@ pub struct AsyncTask<T> {
 }
 
 impl<T> AsyncTask<T> {
-    pub fn new<F>(future: F) -> Self 
-    where 
-        F: Future<Output = T> + Send + 'static 
+    pub fn new<F>(future: F) -> Self
+    where
+        F: Future<Output = T> + Send + 'static
     {
         Self {
             id: TaskId::new(),
@@ -186,10 +186,10 @@ impl<T> AsyncTask<T> {
             waker: None,
         }
     }
-    
+
     pub fn poll(&mut self, cx: &mut Context<'_>) -> Poll<T> {
         self.state = TaskState::Running;
-        
+
         match self.future.as_mut().poll(cx) {
             Poll::Ready(value) => {
                 self.state = TaskState::Completed;
@@ -221,7 +221,7 @@ impl<'a> Context<'a> {
             _marker: PhantomData,
         }
     }
-    
+
     pub fn waker(&self) -> &Waker {
         self.waker
     }
@@ -241,7 +241,7 @@ impl Waker {
     pub fn wake(self) {
         (self.inner.wake_fn)(self.inner.data);
     }
-    
+
     pub fn wake_by_ref(&self) {
         (self.inner.wake_fn)(self.inner.data);
     }
@@ -312,17 +312,17 @@ impl AsyncWebServer {
     pub async fn run(&mut self) -> Result<(), Error> {
         loop {
             let (stream, addr) = self.listener.accept().await?;
-            
+
             // 为每个连接创建异步任务
             tokio::spawn(async move {
                 Self::handle_connection(stream, addr).await;
             });
         }
     }
-    
+
     async fn handle_connection(mut stream: TcpStream, addr: SocketAddr) {
         let mut buffer = [0; 1024];
-        
+
         loop {
             match stream.read(&mut buffer).await {
                 Ok(0) => break, // 连接关闭
@@ -335,7 +335,7 @@ impl AsyncWebServer {
             }
         }
     }
-    
+
     async fn process_request(data: &[u8]) -> Vec<u8> {
         // 异步请求处理逻辑
         // 包括路由、中间件、业务逻辑等
@@ -358,18 +358,18 @@ impl AsyncMicroservice {
     pub async fn start(&mut self) -> Result<(), Error> {
         // 启动异步服务发现
         let discovery_task = tokio::spawn(self.service_discovery_loop());
-        
+
         // 启动异步消息处理
         let message_task = tokio::spawn(self.message_processing_loop());
-        
+
         // 启动异步事件处理
         let event_task = tokio::spawn(self.event_processing_loop());
-        
+
         // 等待所有任务完成
         tokio::try_join!(discovery_task, message_task, event_task)?;
         Ok(())
     }
-    
+
     async fn service_discovery_loop(&self) -> Result<(), Error> {
         loop {
             // 异步服务发现逻辑
@@ -378,7 +378,7 @@ impl AsyncMicroservice {
             tokio::time::sleep(Duration::from_secs(30)).await;
         }
     }
-    
+
     async fn message_processing_loop(&self) -> Result<(), Error> {
         while let Some(message) = self.message_queue.receive().await? {
             // 异步消息处理
@@ -387,7 +387,7 @@ impl AsyncMicroservice {
         }
         Ok(())
     }
-    
+
     async fn event_processing_loop(&self) -> Result<(), Error> {
         while let Some(event) = self.event_bus.receive().await? {
             // 异步事件处理
@@ -410,11 +410,11 @@ pub struct AsyncDataPipeline {
 impl AsyncDataPipeline {
     pub async fn process(&mut self, input: DataStream) -> DataStream {
         let mut current_stream = input;
-        
+
         for stage in &self.stages {
             current_stream = stage.process(current_stream).await;
         }
-        
+
         current_stream
     }
 }
@@ -433,10 +433,10 @@ impl DataStream {
     pub async fn next(&mut self) -> Option<DataChunk> {
         self.chunks.recv().await.ok()
     }
-    
-    pub async fn for_each<F>(&mut self, mut f: F) 
-    where 
-        F: FnMut(DataChunk) -> Future<Output = ()> + Send 
+
+    pub async fn for_each<F>(&mut self, mut f: F)
+    where
+        F: FnMut(DataChunk) -> Future<Output = ()> + Send
     {
         while let Some(chunk) = self.next().await {
             f(chunk).await;
@@ -459,26 +459,26 @@ impl AsyncDistributedCoordinator {
     pub async fn coordinate(&mut self, operation: Operation) -> Result<(), Error> {
         // 异步共识协议
         let consensus_result = self.consensus.propose(operation).await?;
-        
+
         // 异步状态机复制
         self.state_machine.apply(consensus_result).await?;
-        
+
         // 异步通知其他节点
         self.notify_nodes(consensus_result).await?;
-        
+
         Ok(())
     }
-    
+
     async fn notify_nodes(&self, result: ConsensusResult) {
         let mut tasks = Vec::new();
-        
+
         for node in self.nodes.values() {
             let task = tokio::spawn(async move {
                 node.notify(result.clone()).await;
             });
             tasks.push(task);
         }
-        
+
         // 并发通知所有节点
         futures::future::join_all(tasks).await;
     }
@@ -499,29 +499,29 @@ impl CloudNativeApp {
     pub async fn deploy(&mut self, deployment: Deployment) -> Result<(), Error> {
         // 异步部署流程
         let deployment_task = self.kubernetes_client.deploy(deployment).await?;
-        
+
         // 异步服务网格配置
         let mesh_task = self.service_mesh.configure(deployment_task).await?;
-        
+
         // 异步可观测性设置
         let observability_task = self.observability.setup(deployment_task).await?;
-        
+
         // 等待所有异步任务完成
         tokio::try_join!(deployment_task, mesh_task, observability_task)?;
-        
+
         Ok(())
     }
-    
+
     pub async fn scale(&mut self, scaling: ScalingConfig) -> Result<(), Error> {
         // 异步扩缩容
         let scale_task = self.kubernetes_client.scale(scaling).await?;
-        
+
         // 异步负载均衡更新
         let lb_task = self.service_mesh.update_load_balancer().await?;
-        
+
         // 异步监控更新
         let monitor_task = self.observability.update_monitoring().await?;
-        
+
         tokio::try_join!(scale_task, lb_task, monitor_task)?;
         Ok(())
     }

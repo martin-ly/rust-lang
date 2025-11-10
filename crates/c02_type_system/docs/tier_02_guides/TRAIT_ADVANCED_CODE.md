@@ -23,13 +23,13 @@ impl AsyncDatabase for PostgresDB {
         tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
         Ok(())
     }
-    
+
     async fn query(&self, sql: &str) -> Result<Vec<String>, Box<dyn Error>> {
         println!("Executing query: {}", sql);
         tokio::time::sleep(tokio::time::Duration::from_millis(50)).await;
         Ok(vec!["result1".to_string(), "result2".to_string()])
     }
-    
+
     async fn execute(&self, sql: &str) -> Result<u64, Box<dyn Error>> {
         println!("Executing: {}", sql);
         tokio::time::sleep(tokio::time::Duration::from_millis(30)).await;
@@ -64,7 +64,7 @@ trait Plugin: Send + Sync {
     fn initialize(&mut self) -> Result<(), String>;
     fn execute(&self, input: &str) -> Result<String, String>;
     fn shutdown(&mut self);
-    
+
     // 向下转型支持
     fn as_any(&self) -> &dyn Any;
 }
@@ -82,7 +82,7 @@ impl LoggerPlugin {
             log_buffer: Vec::new(),
         }
     }
-    
+
     // 插件特定方法
     fn get_logs(&self) -> &[String] {
         &self.log_buffer
@@ -93,17 +93,17 @@ impl Plugin for LoggerPlugin {
     fn name(&self) -> &str {
         "Logger"
     }
-    
+
     fn version(&self) -> &str {
         "1.0.0"
     }
-    
+
     fn initialize(&mut self) -> Result<(), String> {
         self.initialized = true;
         println!("[Logger] Initialized");
         Ok(())
     }
-    
+
     fn execute(&self, input: &str) -> Result<String, String> {
         if !self.initialized {
             return Err("Plugin not initialized".to_string());
@@ -111,12 +111,12 @@ impl Plugin for LoggerPlugin {
         println!("[Logger] Logging: {}", input);
         Ok(format!("Logged: {}", input))
     }
-    
+
     fn shutdown(&mut self) {
         self.initialized = false;
         println!("[Logger] Shutdown");
     }
-    
+
     fn as_any(&self) -> &dyn Any {
         self
     }
@@ -133,7 +133,7 @@ impl PluginManager {
             plugins: HashMap::new(),
         }
     }
-    
+
     fn register(&mut self, plugin: Box<dyn Plugin>) -> Result<(), String> {
         let name = plugin.name().to_string();
         if self.plugins.contains_key(&name) {
@@ -142,7 +142,7 @@ impl PluginManager {
         self.plugins.insert(name, plugin);
         Ok(())
     }
-    
+
     fn initialize_all(&mut self) -> Result<(), String> {
         for (name, plugin) in &mut self.plugins {
             println!("Initializing plugin: {}", name);
@@ -150,14 +150,14 @@ impl PluginManager {
         }
         Ok(())
     }
-    
+
     fn execute(&self, plugin_name: &str, input: &str) -> Result<String, String> {
         self.plugins
             .get(plugin_name)
             .ok_or_else(|| format!("Plugin '{}' not found", plugin_name))?
             .execute(input)
     }
-    
+
     // 向下转型示例
     fn get_logger_logs(&self) -> Option<&[String]> {
         self.plugins
@@ -169,18 +169,18 @@ impl PluginManager {
 
 fn plugin_system_example() -> Result<(), String> {
     let mut manager = PluginManager::new();
-    
+
     manager.register(Box::new(LoggerPlugin::new()))?;
     manager.initialize_all()?;
-    
+
     let result = manager.execute("Logger", "Test message")?;
     println!("Result: {}", result);
-    
+
     // 访问插件特定方法
     if let Some(logs) = manager.get_logger_logs() {
         println!("Logs: {:?}", logs);
     }
-    
+
     Ok(())
 }
 ```
@@ -227,14 +227,14 @@ fn process_dynamic(processor: &dyn Processor, data: &[i32]) -> i64 {
 fn benchmark_dispatch() {
     let data: Vec<i32> = (1..=1000).collect();
     let processor = SumProcessor;
-    
+
     // 基准测试1：静态分发
     let start = Instant::now();
     for _ in 0..100_000 {
         let _ = process_static(&processor, &data);
     }
     let static_duration = start.elapsed();
-    
+
     // 基准测试2：动态分发
     let processor_dyn: &dyn Processor = &processor;
     let start = Instant::now();
@@ -242,10 +242,10 @@ fn benchmark_dispatch() {
         let _ = process_dynamic(processor_dyn, &data);
     }
     let dynamic_duration = start.elapsed();
-    
+
     println!("静态分发: {:?}", static_duration);
     println!("动态分发: {:?}", dynamic_duration);
-    println!("性能差异: {:.2}x", 
+    println!("性能差异: {:.2}x",
              dynamic_duration.as_nanos() as f64 / static_duration.as_nanos() as f64);
 }
 ```
@@ -295,14 +295,14 @@ fn process_value<T: Into<String>>(value: T) -> String {
 fn from_into_example() -> Result<(), AppError> {
     // From自动提供Into
     let s: String = 42.into();  // i32 -> String (需要实现)
-    
+
     // 使用Into约束
     println!("{}", process_value("hello"));
     println!("{}", process_value(String::from("world")));
-    
+
     // ? 操作符自动转换
     let _value: i32 = "42".parse()?;  // ParseIntError -> AppError
-    
+
     Ok(())
 }
 ```
@@ -329,17 +329,17 @@ impl Fibonacci {
 
 impl Iterator for Fibonacci {
     type Item = u64;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         let current = self.current;
-        
+
         // 防止溢出
         self.current = self.next;
         self.next = match current.checked_add(self.next) {
             Some(sum) => sum,
             None => return None,
         };
-        
+
         Some(current)
     }
 }
@@ -357,7 +357,7 @@ impl<T> ChainedIterator<T> {
             current_index: 0,
         }
     }
-    
+
     fn add<I: Iterator<Item = T> + 'static>(mut self, iter: I) -> Self {
         self.iterators.push(Box::new(iter));
         self
@@ -366,7 +366,7 @@ impl<T> ChainedIterator<T> {
 
 impl<T> Iterator for ChainedIterator<T> {
     type Item = T;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         while self.current_index < self.iterators.len() {
             if let Some(item) = self.iterators[self.current_index].next() {
@@ -383,13 +383,13 @@ fn iterator_example() {
     let fib = Fibonacci::new();
     let first_10: Vec<u64> = fib.take(10).collect();
     println!("Fibonacci: {:?}", first_10);
-    
+
     // 组合迭代器
     let chained = ChainedIterator::new()
         .add(1..=5)
         .add(10..=15)
         .add(20..=25);
-    
+
     let combined: Vec<i32> = chained.collect();
     println!("Chained: {:?}", combined);
 }
@@ -417,7 +417,7 @@ trait Persistable: Serializable + Deserializable {
         std::fs::write(path, data)
             .map_err(|e| e.to_string())
     }
-    
+
     fn load(path: &str) -> Result<Self, String> {
         let data = std::fs::read_to_string(path)
             .map_err(|e| e.to_string())?;
@@ -444,11 +444,11 @@ impl Deserializable for User {
         if parts.len() != 2 {
             return Err("Invalid format".to_string());
         }
-        
+
         let id = parts[0].parse()
             .map_err(|_| "Invalid ID".to_string())?;
         let name = parts[1].to_string();
-        
+
         Ok(User { id, name })
     }
 }
@@ -461,11 +461,11 @@ fn mixin_example() -> Result<(), String> {
         id: 1,
         name: "Alice".to_string(),
     };
-    
+
     user.save("user.txt")?;
     let loaded = User::load("user.txt")?;
     println!("Loaded: {:?}", loaded);
-    
+
     Ok(())
 }
 ```
@@ -517,11 +517,11 @@ fn decorator_example() {
     // 基础日志
     let console = ConsoleLogger;
     console.log("Basic message");
-    
+
     // 添加时间戳
     let timestamped = TimestampLogger { inner: ConsoleLogger };
     timestamped.log("With timestamp");
-    
+
     // 多层装饰
     let decorated = PrefixLogger {
         inner: TimestampLogger { inner: ConsoleLogger },
@@ -615,9 +615,9 @@ fn typestate_example() {
         .port(8080)
         .timeout(30)
         .build();
-    
+
     println!("Config: {} on port {}", config.name, config.port);
-    
+
     // 编译错误：缺少name
     // let config = ConfigBuilder::new()
     //     .port(8080)
@@ -667,15 +667,15 @@ impl HttpRequest for Request {
     fn method(&self) -> &str {
         &self.method
     }
-    
+
     fn url(&self) -> &str {
         &self.url
     }
-    
+
     fn headers(&self) -> &HashMap<String, String> {
         &self.headers
     }
-    
+
     fn body(&self) -> Option<&[u8]> {
         self.body.as_deref()
     }
@@ -691,11 +691,11 @@ impl HttpResponse for Response {
     fn status(&self) -> u16 {
         self.status
     }
-    
+
     fn headers(&self) -> &HashMap<String, String> {
         &self.headers
     }
-    
+
     fn body(&self) -> &[u8] {
         &self.body
     }
@@ -706,11 +706,11 @@ struct SimpleClient;
 impl HttpClient for SimpleClient {
     fn send(&self, request: &dyn HttpRequest) -> Result<Box<dyn HttpResponse>, Box<dyn Error>> {
         println!("Sending {} to {}", request.method(), request.url());
-        
+
         // 模拟响应
         let mut headers = HashMap::new();
         headers.insert("Content-Type".to_string(), "text/plain".to_string());
-        
+
         Ok(Box::new(Response {
             status: 200,
             headers,
@@ -722,26 +722,26 @@ impl HttpClient for SimpleClient {
 fn http_client_example() -> Result<(), Box<dyn Error>> {
     let mut headers = HashMap::new();
     headers.insert("User-Agent".to_string(), "RustClient/1.0".to_string());
-    
+
     let request = Request {
         method: "GET".to_string(),
         url: "https://example.com".to_string(),
         headers,
         body: None,
     };
-    
+
     let client = SimpleClient;
     let response = client.send(&request)?;
-    
+
     println!("Status: {}", response.status());
     println!("Body: {}", String::from_utf8_lossy(response.body()));
-    
+
     Ok(())
 }
 ```
 
 ---
 
-**更新日期**: 2025-10-24  
-**文档版本**: 2.0  
+**更新日期**: 2025-10-24
+**文档版本**: 2.0
 **作者**: C02 Trait System Advanced Team

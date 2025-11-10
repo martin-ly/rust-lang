@@ -22,7 +22,7 @@ impl Animal for Dog {
     fn speak(&self) {
         println!("{}: Woof!", self.name);
     }
-    
+
     fn move_to(&self, x: i32, y: i32) {
         println!("{} moves to ({}, {})", self.name, x, y);
     }
@@ -33,16 +33,16 @@ fn vtable_analysis() {
     let dog = Dog {
         name: "Buddy".to_string(),
     };
-    
+
     // trait object 由两个指针组成
     let trait_obj: &dyn Animal = &dog;
-    
+
     // 1. 数据指针 (指向实际对象)
     // 2. vtable指针 (指向虚函数表)
-    
+
     println!("Size of &dyn Animal: {} bytes", mem::size_of_val(&trait_obj));
     // 输出: 16 bytes (64位系统上两个指针)
-    
+
     println!("Size of &Dog: {} bytes", mem::size_of_val(&&dog));
     // 输出: 8 bytes (一个指针)
 }
@@ -88,7 +88,7 @@ impl Animal for Cat {
     fn speak(&self) {
         println!("{}: Meow!", self.name);
     }
-    
+
     fn move_to(&self, x: i32, y: i32) {
         println!("{} jumps to ({}, {})", self.name, x, y);
     }
@@ -130,13 +130,13 @@ fn performance_comparison() {
     let dog = Dog {
         name: "Buddy".to_string(),
     };
-    
+
     // 动态分派：每次调用都需要查vtable
     let trait_obj: &dyn Animal = &dog;
     for _ in 0..1000000 {
         trait_obj.speak(); // 无法内联
     }
-    
+
     // 静态分派：编译器可以内联整个调用
     for _ in 0..1000000 {
         dog.speak(); // 可能被完全内联
@@ -155,7 +155,7 @@ fn devirtualization_example() {
     let dog = Dog {
         name: "Buddy".to_string(),
     };
-    
+
     // 编译器知道确切类型，可能优化为静态调用
     let animal: &dyn Animal = &dog;
     animal.speak(); // 可能被优化为 Dog::speak(&dog)
@@ -246,12 +246,12 @@ impl Computation for MultiplyComputation {
 fn benchmark_static_dispatch() -> u128 {
     let add = AddComputation { value: 10 };
     let start = Instant::now();
-    
+
     let mut result = 0;
     for i in 0..10_000_000 {
         result += add.compute(i);
     }
-    
+
     let duration = start.elapsed();
     println!("Static dispatch: {:?}, result: {}", duration, result);
     duration.as_nanos()
@@ -261,12 +261,12 @@ fn benchmark_static_dispatch() -> u128 {
 fn benchmark_dynamic_dispatch() -> u128 {
     let add: Box<dyn Computation> = Box::new(AddComputation { value: 10 });
     let start = Instant::now();
-    
+
     let mut result = 0;
     for i in 0..10_000_000 {
         result += add.compute(i);
     }
-    
+
     let duration = start.elapsed();
     println!("Dynamic dispatch: {:?}, result: {}", duration, result);
     duration.as_nanos()
@@ -275,12 +275,12 @@ fn benchmark_dynamic_dispatch() -> u128 {
 // 基准测试3：泛型分派
 fn benchmark_generic_dispatch<T: Computation>(comp: &T) -> u128 {
     let start = Instant::now();
-    
+
     let mut result = 0;
     for i in 0..10_000_000 {
         result += comp.compute(i);
     }
-    
+
     let duration = start.elapsed();
     println!("Generic dispatch: {:?}, result: {}", duration, result);
     duration.as_nanos()
@@ -304,12 +304,12 @@ impl ComputationEnum {
 fn benchmark_enum_dispatch() -> u128 {
     let comp = ComputationEnum::Add(AddComputation { value: 10 });
     let start = Instant::now();
-    
+
     let mut result = 0;
     for i in 0..10_000_000 {
         result += comp.compute(i);
     }
-    
+
     let duration = start.elapsed();
     println!("Enum dispatch: {:?}, result: {}", duration, result);
     duration.as_nanos()
@@ -318,13 +318,13 @@ fn benchmark_enum_dispatch() -> u128 {
 // 运行所有基准测试
 fn run_all_benchmarks() {
     println!("\n=== Dispatch Mechanism Benchmarks ===\n");
-    
+
     let static_ns = benchmark_static_dispatch();
     let dynamic_ns = benchmark_dynamic_dispatch();
     let add = AddComputation { value: 10 };
     let generic_ns = benchmark_generic_dispatch(&add);
     let enum_ns = benchmark_enum_dispatch();
-    
+
     println!("\n=== Performance Summary ===");
     println!("Static:  {} ns (baseline)", static_ns);
     println!("Generic: {} ns ({:.2}x)", generic_ns, generic_ns as f64 / static_ns as f64);
@@ -401,7 +401,7 @@ fn process_batched(fast: &[FastProcessor], slow: &[SlowProcessor]) {
     for item in fast {
         item.process();
     }
-    
+
     for item in slow {
         item.process();
     }
@@ -524,12 +524,12 @@ impl PluginRegistry {
             cache: Default::default(),
         }
     }
-    
+
     fn register(&mut self, plugin: Box<dyn Plugin>) {
         let name = plugin.name().to_string();
         self.plugins.insert(name, plugin);
     }
-    
+
     fn execute(&self, plugin_name: &str, input: &str) -> Result<String, String> {
         // 先检查缓存
         for cached in &self.cache {
@@ -539,7 +539,7 @@ impl PluginRegistry {
                 }
             }
         }
-        
+
         // 缓存未命中，查找HashMap
         self.plugins
             .get(plugin_name)
@@ -555,11 +555,11 @@ impl Plugin for JsonFormatter {
     fn name(&self) -> &str {
         "json_formatter"
     }
-    
+
     fn version(&self) -> &str {
         "1.0.0"
     }
-    
+
     fn execute(&self, input: &str) -> Result<String, String> {
         Ok(format!("{{ \"formatted\": \"{}\" }}", input))
     }
@@ -571,11 +571,11 @@ impl Plugin for XmlFormatter {
     fn name(&self) -> &str {
         "xml_formatter"
     }
-    
+
     fn version(&self) -> &str {
         "1.0.0"
     }
-    
+
     fn execute(&self, input: &str) -> Result<String, String> {
         Ok(format!("<formatted>{}</formatted>", input))
     }
@@ -584,10 +584,10 @@ impl Plugin for XmlFormatter {
 // 使用示例
 fn plugin_system_example() {
     let mut registry = PluginRegistry::new();
-    
+
     registry.register(Box::new(JsonFormatter));
     registry.register(Box::new(XmlFormatter));
-    
+
     let result = registry.execute("json_formatter", "Hello").unwrap();
     println!("Result: {}", result);
 }
@@ -616,6 +616,6 @@ fn plugin_system_example() {
 
 ---
 
-**更新日期**: 2025-10-24  
-**文档版本**: 2.0  
+**更新日期**: 2025-10-24
+**文档版本**: 2.0
 **作者**: C02 Type System Performance Team

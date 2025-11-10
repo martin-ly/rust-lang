@@ -320,10 +320,10 @@ enum ExampleFuture {
 
 impl Future for ExampleFuture {
     type Output = u32;
-    
+
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<u32> {
         let this = unsafe { self.get_unchecked_mut() };
-        
+
         match &mut this.state {
             ExampleState::Start(x) => {
                 let fut = another_async_fn(*x);
@@ -455,7 +455,7 @@ pub trait Runtime {
     fn block_on<F>(&self, future: F) -> F::Output
     where
         F: Future;
-    
+
     fn spawn<F>(&self, future: F) -> JoinHandle<F::Output>
     where
         F: Future + Send + 'static,
@@ -489,7 +489,7 @@ impl Waker {
             (self.waker.vtable.wake)(self.waker.data);
         }
     }
-    
+
     pub fn wake_by_ref(&self) {
         unsafe {
             (self.waker.vtable.wake_by_ref)(self.waker.data);
@@ -521,7 +521,7 @@ impl<'a> Context<'a> {
             _marker: PhantomData,
         }
     }
-    
+
     pub fn waker(&self) -> &'a Waker {
         self.waker
     }
@@ -539,7 +539,7 @@ impl Future for AsyncRead {
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Result<usize, Error>> {
         // 注册 Waker 到 I/O 事件循环
         self.register_waker(cx.waker());
-        
+
         match self.try_read() {
             Ok(n) => Poll::Ready(Ok(n)),
             Err(Error::WouldBlock) => Poll::Pending,
@@ -702,7 +702,7 @@ impl CancellationToken {
     pub fn cancel(&self) {
         self.inner.cancel();
     }
-    
+
     pub async fn cancelled(&self) {
         self.inner.cancelled().await;
     }
@@ -810,7 +810,7 @@ async fn handle_request(req: Request) -> Response {
 async fn main() {
     let app = Router::new()
         .route("/", get(handle_request));
-    
+
     axum::Server::bind(&"0.0.0.0:3000".parse().unwrap())
         .serve(app.into_make_service())
         .await
@@ -833,7 +833,7 @@ pub struct ConnectionPool {
 impl ConnectionPool {
     pub async fn get_connection(&self) -> Result<PooledConnection, Error> {
         let mut connections = self.connections.lock().await;
-        
+
         if let Some(conn) = connections.pop_front() {
             Ok(PooledConnection::new(conn, self.clone()))
         } else if connections.len() < self.max_size {
@@ -866,7 +866,7 @@ impl MicroserviceClient {
             .body(data.to_string())
             .send()
             .await?;
-        
+
         response.text().await
     }
 }
@@ -943,8 +943,8 @@ Rust 异步编程的设计理念：
 
 ---
 
-**最后更新时间**: 2025-01-27  
-**版本**: V1.0  
+**最后更新时间**: 2025-01-27
+**版本**: V1.0
 **状态**: 已完成
 
 "

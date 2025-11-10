@@ -1,6 +1,6 @@
 ﻿# Tier 3: 智能指针 API 完整参考
 
-> **文档类型**: API参考  
+> **文档类型**: API参考
 > **适用版本**: Rust 1.90+
 
 ---
@@ -119,5 +119,5 @@ let weak_count = weak.weak_count();
 
 ---
 
-**文档维护**: Documentation Team  
+**文档维护**: Documentation Team
 **创建日期**: 2025-10-22

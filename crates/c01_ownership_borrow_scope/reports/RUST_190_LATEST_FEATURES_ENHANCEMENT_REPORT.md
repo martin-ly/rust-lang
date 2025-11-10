@@ -337,15 +337,15 @@ fn main() {
         "borrower".to_string(),
         BorrowType::SharedExclusive  // 使用新的借用类型
     );
-    
+
     // 使用新的智能指针类型
     let mut manager = SmartPointerManager::new();
     manager.create_smart_pointer("ptr".to_string(), SmartPointerType::Adaptive);
-    
+
     // 使用新的作用域类型
     let mut scope_manager = OptimizedScopeManager::new();
     scope_manager.enter_scope("generic_scope".to_string(), Rust190ScopeType::Generic);
-    
+
     // 使用新的访问类型
     let mut concurrency_checker = ConcurrencySafetyChecker::new();
     concurrency_checker.record_access(
@@ -353,7 +353,7 @@ fn main() {
         "resource1".to_string(),
         AccessType::Atomic  // 使用新的访问类型
     );
-    
+
     // 使用新的分配类型
     let mut memory_manager = SmartMemoryManager::new();
     memory_manager.record_allocation(
@@ -370,22 +370,22 @@ fn main() {
 fn advanced_usage_example() {
     // 1. 条件借用示例
     let mut checker = ImprovedBorrowChecker::new();
-    
+
     // 创建条件借用
     let conditional_borrow = checker.create_borrow(
         "owner".to_string(),
         "conditional_borrower".to_string(),
         BorrowType::Conditional
     );
-    
+
     // 2. 延迟初始化指针示例
     let mut manager = SmartPointerManager::new();
     manager.create_smart_pointer("lazy_ptr".to_string(), SmartPointerType::Lazy);
-    
+
     // 3. 协程作用域示例
     let mut scope_manager = OptimizedScopeManager::new();
     scope_manager.enter_scope("coroutine_scope".to_string(), Rust190ScopeType::Coroutine);
-    
+
     // 4. 批量访问示例
     let mut concurrency_checker = ConcurrencySafetyChecker::new();
     concurrency_checker.record_access(
@@ -393,7 +393,7 @@ fn advanced_usage_example() {
         "batch_data".to_string(),
         AccessType::Batch
     );
-    
+
     // 5. 内存映射分配示例
     let mut memory_manager = SmartMemoryManager::new();
     memory_manager.record_allocation(

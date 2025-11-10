@@ -115,7 +115,7 @@ pub trait AsyncControlFlowType {
     type Input;
     type Output;
     type Error;
-    
+
     async fn execute(&self, input: Self::Input) -> Result<Self::Output, Self::Error>;
 }
 
@@ -128,7 +128,7 @@ impl<T> AsyncControlFlowType for SequentialFlow<T> {
     type Input = T;
     type Output = T;
     type Error = Error;
-    
+
     async fn execute(&self, mut input: Self::Input) -> Result<Self::Output, Self::Error> {
         for step in &self.steps {
             input = step.execute(input).await?;
@@ -142,17 +142,17 @@ pub struct ParallelFlow<T> {
     branches: Vec<Box<dyn AsyncControlFlowType<Input = T, Output = T>>>,
 }
 
-impl<T> AsyncControlFlowType for ParallelFlow<T> 
-where 
-    T: Clone + Send + Sync 
+impl<T> AsyncControlFlowType for ParallelFlow<T>
+where
+    T: Clone + Send + Sync
 {
     type Input = T;
     type Output = Vec<T>;
     type Error = Error;
-    
+
     async fn execute(&self, input: Self::Input) -> Result<Self::Output, Self::Error> {
         let mut tasks = Vec::new();
-        
+
         for branch in &self.branches {
             let input_clone = input.clone();
             let task = tokio::spawn(async move {
@@ -160,7 +160,7 @@ where
             });
             tasks.push(task);
         }
-        
+
         let results = futures::future::join_all(tasks).await;
         results.into_iter().collect::<Result<Vec<_>, _>>()
     }
@@ -187,22 +187,22 @@ impl AsyncControlFlow {
             context: ExecutionContext::new(),
         }
     }
-    
+
     pub async fn execute_flow<F, T>(&self, flow: F) -> Result<T, Error>
     where
         F: Future<Output = T> + Send,
     {
         self.executor.execute(flow).await
     }
-    
+
     pub async fn execute_parallel<T>(&self, tasks: Vec<AsyncTask<T>>) -> Vec<T> {
         let mut handles = Vec::new();
-        
+
         for task in tasks {
             let handle = self.executor.spawn(task);
             handles.push(handle);
         }
-        
+
         let results = futures::future::join_all(handles).await;
         results.into_iter().filter_map(|r| r.ok()).collect()
     }
@@ -227,14 +227,14 @@ impl<T> AsyncControlFlowType for AsyncConditionalFlow<T> {
     type Input = T;
     type Output = T;
     type Error = Error;
-    
+
     async fn execute(&self, input: Self::Input) -> Result<Self::Output, Self::Error> {
         for condition in &self.conditions {
             if (condition.predicate)(&input).await {
                 return condition.branch.execute(input).await;
             }
         }
-        
+
         if let Some(default) = &self.default_branch {
             default.execute(input).await
         } else {
@@ -258,21 +258,21 @@ impl<T> AsyncControlFlowType for AsyncLoopFlow<T> {
     type Input = T;
     type Output = T;
     type Error = Error;
-    
+
     async fn execute(&self, mut input: Self::Input) -> Result<Self::Output, Self::Error> {
         let mut iteration_count = 0;
-        
+
         while (self.condition)(&input).await {
             if let Some(max) = self.max_iterations {
                 if iteration_count >= max {
                     break;
                 }
             }
-            
+
             input = self.body.execute(input).await?;
             iteration_count += 1;
         }
-        
+
         Ok(input)
     }
 }
@@ -300,7 +300,7 @@ impl<T> AsyncEventDrivenFlow<T> {
         }
         Ok(state)
     }
-    
+
     pub fn register_handler<E>(&mut self, event_type: EventType, handler: E)
     where
         E: AsyncEventHandler<T> + 'static,
@@ -329,11 +329,11 @@ impl<T> AsyncControlFlowType for AsyncErrorHandlingFlow<T> {
     type Input = T;
     type Output = T;
     type Error = Error;
-    
+
     async fn execute(&self, input: Self::Input) -> Result<Self::Output, Self::Error> {
         let mut current_input = input;
         let mut retry_count = 0;
-        
+
         loop {
             match self.main_flow.execute(current_input).await {
                 Ok(result) => return Ok(result),
@@ -348,14 +348,14 @@ impl<T> AsyncControlFlowType for AsyncErrorHandlingFlow<T> {
                             Err(e) => return Err(e),
                         }
                     }
-                    
+
                     // 应用重试策略
                     if self.retry_policy.should_retry(retry_count, &error) {
                         retry_count += 1;
                         tokio::time::sleep(self.retry_policy.delay(retry_count)).await;
                         continue;
                     }
-                    
+
                     return Err(error);
                 }
             }
@@ -427,7 +427,7 @@ pub struct AsyncWebAPIFlow {
 impl AsyncWebAPIFlow {
     pub async fn handle_request(&self, request: HttpRequest) -> HttpResponse {
         let mut context = RequestContext::new(request);
-        
+
         // 执行中间件链
         for middleware in &self.middleware {
             match middleware.process(&mut context).await {
@@ -435,7 +435,7 @@ impl AsyncWebAPIFlow {
                 Err(error) => return self.handle_error(error).await,
             }
         }
-        
+
         // 路由分发
         if let Some(handler) = self.routes.get(&context.path) {
             match handler.handle(&context).await {
@@ -446,7 +446,7 @@ impl AsyncWebAPIFlow {
             HttpResponse::NotFound()
         }
     }
-    
+
     async fn handle_error(&self, error: Error) -> HttpResponse {
         for handler in &self.error_handlers {
             if let Ok(response) = handler.handle(error).await {
@@ -471,36 +471,36 @@ pub struct AsyncOrchestrationFlow {
 impl AsyncOrchestrationFlow {
     pub async fn execute_workflow(&self, workflow_id: String) -> Result<(), Error> {
         let mut state = self.state_store.load_state(&workflow_id).await?;
-        
+
         for step in &self.workflow.steps {
             // 检查前置条件
             if !self.check_prerequisites(step, &state).await? {
                 continue;
             }
-            
+
             // 执行服务调用
             let result = self.execute_service_call(step, &state).await?;
-            
+
             // 更新状态
             self.update_state(step, result, &mut state).await?;
-            
+
             // 检查后置条件
             if !self.check_postconditions(step, &state).await? {
                 return Err(Error::PostconditionFailed);
             }
         }
-        
+
         self.state_store.save_state(&workflow_id, &state).await?;
         Ok(())
     }
-    
+
     async fn execute_service_call(&self, step: &WorkflowStep, state: &State) -> Result<ServiceResult, Error> {
         let service = self.services.get(&step.service_name)
             .ok_or(Error::ServiceNotFound)?;
-        
+
         // 异步服务调用
         let call_result = service.call(step.operation, state).await?;
-        
+
         // 处理响应
         match call_result {
             ServiceResult::Success(data) => Ok(ServiceResult::Success(data)),
@@ -527,18 +527,18 @@ pub struct AsyncDataPipelineFlow {
 impl AsyncDataPipelineFlow {
     pub async fn process_data(&self, input: DataStream) -> DataStream {
         let mut current_stream = input;
-        
+
         for stage in &self.stages {
             // 创建并行处理通道
             let (tx, rx) = tokio::sync::mpsc::channel(self.buffer_size);
-            
+
             // 启动并行处理任务
             let mut handles = Vec::new();
             for _ in 0..self.parallelism {
                 let stage_clone = stage.clone();
                 let tx_clone = tx.clone();
                 let stream_clone = current_stream.clone();
-                
+
                 let handle = tokio::spawn(async move {
                     while let Some(data) = stream_clone.next().await {
                         let processed = stage_clone.process(data).await;
@@ -549,16 +549,16 @@ impl AsyncDataPipelineFlow {
                 });
                 handles.push(handle);
             }
-            
+
             // 等待所有任务完成
             for handle in handles {
                 handle.await.unwrap_or_else(|_| {});
             }
-            
+
             // 创建新的数据流
             current_stream = DataStream::from_receiver(rx);
         }
-        
+
         current_stream
     }
 }
@@ -578,53 +578,53 @@ impl AsyncDistributedTransactionFlow {
     pub async fn execute_transaction(&self, operations: Vec<TransactionOperation>) -> Result<(), Error> {
         // 第一阶段：准备阶段
         let prepare_results = self.prepare_phase(&operations).await?;
-        
+
         // 检查所有参与者是否准备就绪
         if !self.all_prepared(&prepare_results) {
             return self.abort_transaction(&operations).await;
         }
-        
+
         // 第二阶段：提交阶段
         let commit_results = self.commit_phase(&operations).await?;
-        
+
         // 检查提交结果
         if !self.all_committed(&commit_results) {
             return self.rollback_transaction(&operations).await;
         }
-        
+
         Ok(())
     }
-    
+
     async fn prepare_phase(&self, operations: &[TransactionOperation]) -> Result<Vec<PrepareResult>, Error> {
         let mut tasks = Vec::new();
-        
+
         for (i, operation) in operations.iter().enumerate() {
             let participant = &self.participants[i];
             let operation_clone = operation.clone();
-            
+
             let task = tokio::spawn(async move {
                 participant.prepare(operation_clone).await
             });
             tasks.push(task);
         }
-        
+
         let results = futures::future::join_all(tasks).await;
         results.into_iter().collect::<Result<Vec<_>, _>>()
     }
-    
+
     async fn commit_phase(&self, operations: &[TransactionOperation]) -> Result<Vec<CommitResult>, Error> {
         let mut tasks = Vec::new();
-        
+
         for (i, operation) in operations.iter().enumerate() {
             let participant = &self.participants[i];
             let operation_clone = operation.clone();
-            
+
             let task = tokio::spawn(async move {
                 participant.commit(operation_clone).await
             });
             tasks.push(task);
         }
-        
+
         let results = futures::future::join_all(tasks).await;
         results.into_iter().collect::<Result<Vec<_>, _>>()
     }
@@ -644,21 +644,21 @@ pub struct AsyncStreamProcessingFlow {
 impl AsyncStreamProcessingFlow {
     pub async fn process_stream(&self, input_stream: DataStream) -> DataStream {
         let mut current_stream = input_stream;
-        
+
         for processor in &self.processors {
             // 应用窗口策略
             let windowed_stream = self.apply_window(current_stream, processor.window_type()).await;
-            
+
             // 应用水印策略
             let watermarked_stream = self.apply_watermark(windowed_stream, &self.watermark).await;
-            
+
             // 处理数据流
             current_stream = processor.process(watermarked_stream).await;
         }
-        
+
         current_stream
     }
-    
+
     async fn apply_window(&self, stream: DataStream, window_type: WindowType) -> DataStream {
         match window_type {
             WindowType::Tumbling(duration) => {
@@ -672,7 +672,7 @@ impl AsyncStreamProcessingFlow {
             }
         }
     }
-    
+
     async fn apply_watermark(&self, stream: DataStream, strategy: &WatermarkStrategy) -> DataStream {
         match strategy {
             WatermarkStrategy::BoundedOutOfOrderness(delay) => {

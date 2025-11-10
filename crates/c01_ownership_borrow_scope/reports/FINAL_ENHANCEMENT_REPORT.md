@@ -520,7 +520,7 @@ Through this comprehensive enhancement, the `c01_ownership_borrow_scope` project
 
 ---
 
-**项目状态**: ✅ 完成 / **Project Status**: ✅ Completed  
-**完成时间**: 2025年1月 / **Completion Time**: January 2025  
-**版本**: 1.0.0 / **Version**: 1.0.0  
+**项目状态**: ✅ 完成 / **Project Status**: ✅ Completed
+**完成时间**: 2025年1月 / **Completion Time**: January 2025
+**版本**: 1.0.0 / **Version**: 1.0.0
 **贡献者**: AI Assistant / **Contributor**: AI Assistant
