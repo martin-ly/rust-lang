@@ -29,19 +29,19 @@ find . -type f -name "*.md" | while read -r file; do
     while IFS= read -r match; do
         # 提取链接部分
         link=$(echo "$match" | sed -E 's/\[([^\]]+)\]\(([^)]+)\)/\2/')
-        
+
         # 跳过空链接、锚点链接、外部链接
         if [[ -z "$link" ]] || [[ "$link" =~ ^# ]] || [[ "$link" =~ ^https?:// ]] || [[ "$link" =~ ^mailto: ]]; then
             continue
         fi
-        
+
         # 只处理相对路径链接
         if [[ "$link" =~ ^\.\.?/ ]] || [[ ! "$link" =~ ^/ ]]; then
             total_links=$((total_links + 1))
-            
+
             # 计算目标文件路径
             file_dir=$(dirname "$file")
-            
+
             # 如果是相对路径，转换为绝对路径
             if [[ "$link" =~ ^\.\./ ]]; then
                 # 向上路径
@@ -53,13 +53,13 @@ find . -type f -name "*.md" | while read -r file; do
                 # 相对路径
                 target_path="$FORMAL_SYSTEM_DIR/$file_dir/$link"
             fi
-            
+
             # 规范化路径
             target_path=$(cd "$(dirname "$target_path")" 2>/dev/null && pwd)/$(basename "$target_path") 2>/dev/null || echo "$target_path"
-            
+
             # 移除末尾的锚点
             target_path="${target_path%%#*}"
-            
+
             # 检查链接是否有效
             if [ -f "$target_path" ] || [ -d "$target_path" ]; then
                 valid_links=$((valid_links + 1))

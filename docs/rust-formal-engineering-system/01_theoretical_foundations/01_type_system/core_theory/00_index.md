@@ -30,6 +30,7 @@
 4. [型变规则](./04_variance.md) —— 协变、逆变、不变、型变推导与安全
 5. [子类型关系](./05_subtyping.md) —— 子类型定义、替换原则、类型等价、存在类型
 6. [类型系统形式化证明](./06_type_system_formal_proofs.md) —— 类型安全、进展性、保持性、健全性、完备性
+7. [Rust 1.91 模式匹配绑定顺序改进](./08_pattern_matching_improvements_rust_1_91.md) —— 模式匹配绑定顺序重构 ✅
 
 ## 学习目标
 
