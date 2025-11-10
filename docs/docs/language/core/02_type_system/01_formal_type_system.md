@@ -40,7 +40,7 @@
     - [7.2 类型推导规则](#72-类型推导规则)
   - [8. 安全保证](#8-安全保证)
     - [8.1 类型安全保证](#81-类型安全保证)
-    - [8.2 内存安全保证](#82-内存安全保证)
+    - [8.2 资源安全保证（引用一致性视角）](#82-资源安全保证引用一致性视角)
   - [9. 应用实例](#9-应用实例)
     - [9.1 基础示例](#91-基础示例)
     - [9.2 代数数据类型示例](#92-代数数据类型示例)
@@ -322,7 +322,7 @@ fn main() {
 **相关概念**:
 
 - [类型安全理论](04_type_safety.md#类型安全性) (本模块)
-- [内存安全](../23_security_verification/01_formal_security_model.md#内存安全) (模块 23)
+- [资源安全（编译期逻辑证明）](../23_security_verification/01_formal_security_model.md#资源安全编译期逻辑证明) (模块 23)
 - [类型安全证明](../23_security_verification/02_formal_proofs.md#类型安全证明) (模块 23)
 
 ### 5.2 类型
@@ -530,20 +530,20 @@ $$\Gamma \vdash e: \tau \Rightarrow \text{NoTypeError}(e)$$
 
 - [进度保证](04_type_safety.md#进度保证定理) (本模块)
 - [保存定理](04_type_safety.md#保存定理) (本模块)
-- [内存安全定理](../23_security_verification/02_formal_proofs.md#内存安全定理) (模块 23)
+- [资源安全定理（引用一致性视角）](../23_security_verification/02_formal_proofs.md#资源安全定理引用一致性视角) (模块 23)
 
-### 8.2 内存安全保证
+### 8.2 资源安全保证（引用一致性视角）
 
-**定理**: 类型系统与所有权系统结合，确保内存安全。
+从引用一致性视角看，**定理**: 类型系统（构造性证明系统）与所有权系统（资源控制权的逻辑证明）结合，确保资源安全（编译期逻辑证明）。
 
 **形式化表示**:
-$$\Gamma \vdash e: \tau \land \text{OwnershipSafe}(e) \Rightarrow \text{MemorySafe}(e)$$
+从引用一致性视角看，$$\Gamma \vdash e: \tau \land \text{OwnershipSafe}(e) \Rightarrow \text{ResourceSafe}(e)$$
 
 **相关概念**:
 
 - [所有权安全](../01_ownership_borrowing/06_theorems.md#所有权安全性) (模块 01)
-- [内存安全验证](../23_security_verification/03_verification_methods.md#内存安全验证) (模块 23)
-- [类型安全与内存安全关系](../23_security_verification/01_formal_security_model.md#类型内存安全关系) (模块 23)
+- [资源安全验证（编译期逻辑证明）](../23_security_verification/03_verification_methods.md#资源安全验证编译期逻辑证明) (模块 23)
+- [类型安全与资源安全关系（引用一致性视角）](../23_security_verification/01_formal_security_model.md#类型资源安全关系引用一致性视角) (模块 23)
 
 ## 9. 应用实例
 

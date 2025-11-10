@@ -3,9 +3,11 @@
 
 ## 📊 目录
 
-- [Q1: ``` `&mut T` 为何必须是不变的 (Invariant)？```](#q1-mut-t-为何必须是不变的-invariant)
-  - [Q2: 什么时候应该使用 `dyn Trait`，什么时候应该使用 `impl Trait`？](#q2-什么时候应该使用-dyn-trait什么时候应该使用-impl-trait)
-  - [Q3: `as` 和 `From`/`Into` 之间有什么本质区别？](#q3-as-和-frominto-之间有什么本质区别)
+- [常见问题解答 (FAQ)](#常见问题解答-faq)
+  - [📊 目录](#-目录)
+  - [Q1: ``` `&mut T` 为何必须是不变的 (Invariant)？```](#q1--mut-t-为何必须是不变的-invariant)
+    - [Q2: 什么时候应该使用 `dyn Trait`，什么时候应该使用 `impl Trait`？](#q2-什么时候应该使用-dyn-trait什么时候应该使用-impl-trait)
+    - [Q3: `as` 和 `From`/`Into` 之间有什么本质区别？](#q3-as-和-frominto-之间有什么本质区别)
 
 
 本页旨在回答一些关于 Rust 类型系统的常见或深刻的问题。
@@ -14,7 +16,7 @@
 
 ## Q1: ``` `&mut T` 为何必须是不变的 (Invariant)？```
 
-**A1:** 这是为了同时保证类型安全和内存安全。
+从引用一致性视角看，**A1:** 这是为了同时保证类型安全和资源安全（编译期逻辑证明）。
 
 1. **如果 `&mut T` 是协变的 (Covariant)**:
     - 协变意味着如果 `Cat` 是 `Animal` 的子类型，那么 `&mut Cat` 也是 `&mut Animal` 的子类型。
