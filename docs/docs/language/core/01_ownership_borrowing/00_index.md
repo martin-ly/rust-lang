@@ -34,12 +34,12 @@
 
 - **[04_lifetime_system.md](04_lifetime_system.md)** - 生命周期系统详解 (108行)
 - **[04_lifetime_theory.md](04_lifetime_theory.md)** - 生命周期理论 (426行)
-- **[04_memory_management.md](04_memory_management.md)** - 内存管理 (149行)
+- **[04_memory_management.md](04_memory_management.md)** - 资源管理 (149行)
 - **[04_mutability_theory.md](04_mutability_theory.md)** - 可变性理论 (204行)
 
 ### 5. 实现与安全性
 
-- **[05_memory_safety.md](05_memory_safety.md)** - 内存安全保证 (324行)
+- **[05_memory_safety.md](05_memory_safety.md)** - 资源安全保证 (324行)
 - **[05_move_semantics.md](05_move_semantics.md)** - 移动语义 (78行)
 - **[05_variable_analysis.md](05_variable_analysis.md)** - 变量分析 (201行)
 - **[05_ownership_implementation.md](05_ownership_implementation.md)** - 所有权实现 (373行)
@@ -74,7 +74,7 @@
 
 ## 主题概述
 
-所有权与借用系统是Rust语言的核心创新，通过静态分析在编译时保证内存安全和线程安全，同时避免垃圾回收的运行时开销。该系统基于线性类型理论、分离逻辑和区域类型系统的数学基础。
+所有权与借用系统是Rust语言的核心创新，通过编译期逻辑证明在编译时保证资源安全和线程安全，同时避免垃圾回收的运行时开销。从引用一致性视角看，该系统基于线性类型理论、分离逻辑和区域类型系统的数学基础，是**构造性证明系统**的体现。
 
 ### 核心概念
 
@@ -82,7 +82,7 @@
 
 - **唯一性**：每个值有且仅有一个所有者
 - **转移性**：所有权可以通过移动语义转移
-- **作用域性**：所有者离开作用域时值被自动释放
+- **作用域性**：所有者离开作用域时资源被自动释放（编译期证明的资源生命周期）
 
 #### 2. 借用机制
 
@@ -96,11 +96,13 @@
 - **生命周期推导**：编译器自动推断生命周期的算法
 - **生命周期约束**：确保引用安全性的类型系统规则
 
-#### 4. 内存安全保证
+#### 4. 资源安全保证（引用一致性视角）
 
-- **无悬空指针**：引用总是指向有效内存
-- **无数据竞争**：并发访问冲突在编译时被阻止
-- **无内存泄漏**：RAII机制确保资源自动释放
+从引用一致性视角看，资源安全是**编译期逻辑证明**的结果，而非运行时内存检查。
+
+- **无悬垂引用**：引用总是指向有效资源（逻辑证明，非内存地址）
+- **无数据竞争**：并发访问冲突在编译时被阻止（编译期排他性契约）
+- **无资源泄漏**：RAII机制确保资源自动释放（编译期证明的资源生命周期）
 
 ## 核心概念映射
 
@@ -113,7 +115,7 @@
 
 ### 实现机制
 
-- **静态分析** → 编译时安全保证
+- **编译期逻辑证明** → 编译时安全保证
 - **RAII模式** → 自动资源管理
 - **零成本抽象** → 无运行时开销
 
@@ -128,7 +130,7 @@
 
 - **[模块 05: 并发](../05_concurrency/00_index.md)** - 线程安全基础
 - **[模块 06: 异步编程](../06_async_await/00_index.md)** - 异步生命周期
-- **[模块 11: 内存管理](../11_memory_management/00_index.md)** - 内存安全实现
+- **[模块 11: 内存管理](../11_memory_management/00_index.md)** - 资源安全实现
 - **[模块 12: 特质系统](../12_traits/00_index.md)** - 所有权相关特质
 
 ### 横向关联
@@ -142,13 +144,13 @@
 
 - **定义 1.1**: [所有权](01_formal_ownership_system.md#所有权定义) - 对值的唯一控制权
 - **定义 1.4**: [借用](01_formal_ownership_system.md#借用定义) - 临时访问权限
-- **定义 1.6**: [生命周期](01_formal_ownership_system.md#生命周期定义) - 引用有效期范围
+- **定义 1.6**: [生命周期](01_formal_ownership_system.md#生命周期定义) - 编译期构造的证明变量
 
 ### 关键定理
 
 - **定理 1.1**: [所有权唯一性](06_theorems.md#所有权唯一性) - 每个值最多有一个所有者
-- **定理 1.6**: [借用安全性](06_theorems.md#借用安全性) - 借用不违反内存安全
-- **定理 8.1**: [内存安全](01_formal_ownership_system.md#内存安全定理) - 系统级内存安全保证
+- **定理 1.6**: [借用安全性](06_theorems.md#借用安全性) - 借用不违反资源安全（编译期逻辑证明）
+- **定理 8.1**: [资源安全](01_formal_ownership_system.md#资源安全定理) - 系统级资源安全保证（编译期逻辑证明）
 
 ## 交叉引用网络
 
@@ -157,14 +159,14 @@
 ```text
 所有权规则 ←→ 借用机制 ←→ 生命周期系统
      ↓            ↓            ↓
-移动语义 ←→ 借用检查器 ←→ 内存安全保证
+移动语义 ←→ 借用检查器 ←→ 资源安全保证
      ↓            ↓            ↓
 类型安全 ←→ 线程安全 ←→ 零成本抽象
 ```
 
 ### 文档内部引用
 
-- 所有权规则 → 借用机制 → 生命周期 → 内存安全
+- 所有权规则 → 借用机制 → 生命周期 → 资源安全
 - 理论基础 → 形式化模型 → 实现机制 → 安全保证
 - 基础概念 → 高级特性 → 工程应用 → 未来发展
 
@@ -173,7 +175,7 @@
 ### 基本符号
 
 - $\text{Own}(x, v)$ - 变量x拥有值v
-- $\text{Borrow}(r, v)$ - 引用r借用值v  
+- $\text{Borrow}(r, v)$ - 引用r借用值v
 - $\text{Lifetime}(\alpha)$ - 生命周期α
 - $\Gamma \vdash e : \tau$ - 在环境Γ下表达式e具有类型τ
 
@@ -283,7 +285,7 @@ lifetime(r) ⊆ lifetime(t)
 **借用检查器流程**:
 
 1. **路径构建**: extract_paths(mir) → PathSet
-2. **借用分析**: analyze_borrows(paths) → BorrowSet  
+2. **借用分析**: analyze_borrows(paths) → BorrowSet
 3. **冲突检测**: check_conflicts(borrows) → ConflictSet
 4. **错误报告**: report_errors(conflicts) → ErrorSet
 
@@ -326,9 +328,9 @@ lifetime(r) ⊆ lifetime(t)
 
 ---
 
-**索引生成时间**: 2025-06-30  
-**文档版本**: v2.0  
-**质量等级**: 优秀 (>150行，完整交叉引用)  
+**索引生成时间**: 2025-06-30
+**文档版本**: v2.0
+**质量等级**: 优秀 (>150行，完整交叉引用)
 **维护状态**: 持续更新
 
 ## 1形式化理论体系
@@ -383,7 +385,7 @@ ConstraintSet Φ ::= {C, C, ..., C}
  reference r, time t : valid(r, t)   allocation a : points_to(r, a)  alive(a, t)
 
 **定理 1.3 (无数据竞争)**:
- location l, time t : ( thread : writes(thread, l, t))  
+ location l, time t : ( thread : writes(thread, l, t))
   ( thread  thread : accesses(thread, l, t))
 
 ### 1借用系统不变式
@@ -408,7 +410,7 @@ ConstraintSet Φ ::= {C, C, ..., C}
 **借用检查器流程**:
 
 1. **路径构建**: extract_paths(mir)  PathSet
-2. **借用分析**: analyze_borrows(paths)  BorrowSet  
+2. **借用分析**: analyze_borrows(paths)  BorrowSet
 3. **冲突检测**: check_conflicts(borrows)  ConflictSet
 4. **错误报告**: report_errors(conflicts)  ErrorSet
 

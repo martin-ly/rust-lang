@@ -396,7 +396,7 @@ fn traverse<T>(list: &List<T>) {
 **相关概念**：
 
 - [数据结构生命周期](03_lifetime_system.md#数据结构生命周期) (本模块)
-- [内存管理模型](../11_memory_management/01_formal_memory_model.md#内存管理模型) (模块 11)
+- [资源管理模型](../11_memory_management/01_formal_memory_model.md#资源管理模型) (模块 11)
 
 ### 7.2 函数借用 {#函数借用}
 

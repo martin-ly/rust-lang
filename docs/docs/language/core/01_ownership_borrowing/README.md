@@ -10,8 +10,8 @@
   - 外部/内部可变性、RefCell/Mutex等机制
 - 04 移动语义与部分移动（04_move_and_partial_move.md）
   - 移动、复制、部分移动、工程影响
-- 05 内存管理与平衡机制（05_memory_management_and_balance.md）
-  - 内存释放、平衡、资源管理
+- 05 资源管理与平衡机制（05_memory_management_and_balance.md）
+  - 资源释放（编译期证明的资源生命周期）、平衡、资源管理
 - 06 案例与对比分析（07_case_and_comparison.md）
   - 典型数据结构、设计模式、对比分析
 - 07 设计哲学与对称性（08_design_philosophy_and_symmetry.md）
@@ -34,7 +34,7 @@
 - [生命周期与作用域分析](./02_lifetime_and_scope.md)
 - [可变性与内部可变性](./03_mutability_and_interior.md)
 - [移动语义与部分移动](./04_move_and_partial_move.md)
-- [内存管理与平衡机制](./05_memory_management_and_balance.md)
+- [资源管理与平衡机制](./05_memory_management_and_balance.md)
 - [案例与对比分析](./07_case_and_comparison.md)
 - [设计哲学与对称性](./08_design_philosophy_and_symmetry.md)
 - [形式化理论与证明](./09_formal_theory_and_proof.md)

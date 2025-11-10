@@ -95,7 +95,7 @@
 
 ### 1. 分类目录结构 ✅
 
-```
+```text
 docs/language/
 ├── core/                    # 核心理论模块
 │   ├── 01_ownership_borrowing/

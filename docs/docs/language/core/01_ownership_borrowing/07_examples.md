@@ -71,11 +71,11 @@ fn main() {
     // 创建一个String
     let s1 = String::from("hello");
     println!("s1: {}", s1);
-    
+
     // 所有权转移
     let s2 = s1;  // s1的所有权转移到s2
     println!("s2: {}", s2);
-    
+
     // 这里不能使用s1，因为所有权已经转移
     // println!("s1: {}", s1);  // 编译错误！
 }
@@ -95,7 +95,7 @@ fn main() {
     let x = 5;
     let y = x;  // x被复制给y，而不是转移
     println!("x: {}, y: {}", x, y);  // 都可以使用
-    
+
     // 元组也可以Copy（如果所有元素都实现了Copy）
     let tuple1 = (1, 2, 3);
     let tuple2 = tuple1;  // 复制
@@ -116,11 +116,11 @@ fn main() {
 ```rust
 fn main() {
     let s1 = String::from("hello");
-    
+
     // 不可变借用
     let len = calculate_length(&s1);
     println!("The length of '{}' is {}.", s1, len);
-    
+
     // s1仍然可以使用
     println!("s1: {}", s1);
 }
@@ -141,7 +141,7 @@ fn calculate_length(s: &String) -> usize {
 ```rust
 fn main() {
     let mut s = String::from("hello");
-    
+
     // 可变借用
     change(&mut s);
     println!("s: {}", s);
@@ -163,17 +163,17 @@ fn change(some_string: &mut String) {
 ```rust
 fn main() {
     let mut s = String::from("hello");
-    
+
     // 多个不可变借用
     let r1 = &s;
     let r2 = &s;
     println!("r1: {}, r2: {}", r1, r2);
-    
+
     // 可变借用（在不可变借用之后）
     let r3 = &mut s;
     r3.push_str(", world");
     println!("r3: {}", r3);
-    
+
     // 注意：r1和r2在这里已经不能使用了
     // println!("r1: {}, r2: {}", r1, r2);  // 编译错误！
 }
@@ -204,7 +204,7 @@ impl Node {
             next: None,
         }
     }
-    
+
     fn append(&mut self, data: i32) {
         match &mut self.next {
             None => {
@@ -215,7 +215,7 @@ impl Node {
             }
         }
     }
-    
+
     fn print(&self) {
         print!("{} -> ", self.data);
         if let Some(next) = &self.next {
@@ -237,7 +237,7 @@ fn main() {
 **解释**：
 
 - 使用 `Box<Node>` 表示链表节点
-- `Box` 提供了堆分配和自动内存管理
+从引用一致性视角看，`Box` 提供了堆分配和自动资源管理（编译期证明的资源生命周期）
 - 链表的所有权关系清晰，每个节点拥有下一个节点
 
 **示例 3.1.2**：带引用的链表
@@ -255,11 +255,11 @@ impl<'a> Node<'a> {
             next: None,
         }
     }
-    
+
     fn set_next(&mut self, next: &'a Node<'a>) {
         self.next = Some(next);
     }
-    
+
     fn print(&self) {
         print!("{} -> ", self.data);
         if let Some(next) = self.next {
@@ -274,10 +274,10 @@ fn main() {
     let mut node1 = Node::new(1);
     let mut node2 = Node::new(2);
     let node3 = Node::new(3);
-    
+
     node2.set_next(&node3);
     node1.set_next(&node2);
-    
+
     node1.print();
 }
 ```
@@ -285,7 +285,7 @@ fn main() {
 **解释**：
 
 - 使用生命周期参数 `'a` 管理引用的生命周期
-- 引用链表避免了堆分配，但需要管理生命周期
+从引用一致性视角看，引用链表避免了堆分配，但需要管理生命周期（编译期构造的证明变量）
 - 生命周期确保引用不会超出被引用对象的生命周期
 
 ### 3.2 树结构示例
@@ -307,7 +307,7 @@ impl TreeNode {
             right: None,
         }
     }
-    
+
     fn insert(&mut self, data: i32) {
         if data < self.data {
             match &mut self.left {
@@ -329,7 +329,7 @@ impl TreeNode {
             }
         }
     }
-    
+
     fn inorder_traversal(&self) {
         if let Some(left) = &self.left {
             left.inorder_traversal();
@@ -347,7 +347,7 @@ fn main() {
     tree.insert(7);
     tree.insert(1);
     tree.insert(9);
-    
+
     print!("Inorder traversal: ");
     tree.inorder_traversal();
     println!();
@@ -358,7 +358,7 @@ fn main() {
 
 - 二叉树使用 `Option<Box<TreeNode>>` 表示子节点
 - 每个节点拥有其子节点的所有权
-- 树的结构清晰，内存管理自动
+从引用一致性视角看，树的结构清晰，资源管理自动（编译期证明的资源生命周期）
 
 ### 3.3 图结构示例
 
@@ -377,21 +377,21 @@ impl Graph {
             nodes: HashMap::new(),
         }
     }
-    
+
     fn add_node(&mut self, node: i32) {
         self.nodes.entry(node).or_insert_with(Vec::new);
     }
-    
+
     fn add_edge(&mut self, from: i32, to: i32) {
         if let Some(neighbors) = self.nodes.get_mut(&from) {
             neighbors.push(to);
         }
     }
-    
+
     fn get_neighbors(&self, node: i32) -> Option<&Vec<i32>> {
         self.nodes.get(&node)
     }
-    
+
     fn print(&self) {
         for (node, neighbors) in &self.nodes {
             println!("Node {}: {:?}", node, neighbors);
@@ -401,19 +401,19 @@ impl Graph {
 
 fn main() {
     let mut graph = Graph::new();
-    
+
     // 添加节点
     for i in 0..5 {
         graph.add_node(i);
     }
-    
+
     // 添加边
     graph.add_edge(0, 1);
     graph.add_edge(0, 2);
     graph.add_edge(1, 3);
     graph.add_edge(2, 3);
     graph.add_edge(3, 4);
-    
+
     graph.print();
 }
 ```
@@ -440,14 +440,14 @@ fn main() {
 
 fn takes_ownership(some_string: String) {
     println!("{}", some_string);
-} // some_string离开作用域并被释放
+} // some_string离开作用域并被释放（编译期证明的资源生命周期）
 ```
 
 **解释**：
 
 - 函数 `takes_ownership` 获取参数的所有权
 - 调用后，原变量不再有效
-- 函数结束时，参数被自动释放
+从引用一致性视角看，函数结束时，参数被自动释放（编译期证明的资源生命周期）
 
 **示例 4.1.2**：借用参数
 
@@ -460,14 +460,14 @@ fn main() {
 
 fn makes_copy(some_string: &String) {
     println!("{}", some_string);
-} // some_string离开作用域，但不会释放，因为它没有所有权
+} // some_string离开作用域，但不会释放，因为它没有所有权（资源控制权的逻辑证明）
 ```
 
 **解释**：
 
 - 函数 `makes_copy` 借用参数，不获取所有权
 - 调用后，原变量仍然有效
-- 借用避免了不必要的内存分配和释放
+从引用一致性视角看，借用避免了不必要的资源分配和释放（编译期证明的资源生命周期）
 
 **示例 4.1.3**：可变借用参数
 
@@ -498,7 +498,7 @@ fn main() {
     let s1 = gives_ownership();
     let s2 = String::from("hello");
     let s3 = takes_and_gives_back(s2);
-    
+
     println!("s1: {}", s1);
     println!("s3: {}", s3);
 }
@@ -531,13 +531,13 @@ fn main() {
 
 fn first_word(s: &String) -> &str {
     let bytes = s.as_bytes();
-    
+
     for (i, &item) in bytes.iter().enumerate() {
         if item == b' ' {
             return &s[0..i];
         }
     }
-    
+
     &s[..]
 }
 ```
@@ -546,7 +546,7 @@ fn first_word(s: &String) -> &str {
 
 - 函数返回对输入字符串的引用
 - 返回的引用与输入参数有相同的生命周期
-- 避免了不必要的内存分配
+从引用一致性视角看，避免了不必要的资源分配（编译期证明的资源生命周期）
 
 ### 4.3 闭包示例
 
@@ -555,9 +555,9 @@ fn first_word(s: &String) -> &str {
 ```rust
 fn main() {
     let x = 5;
-    
+
     let add_x = |y| x + y;  // 闭包捕获x
-    
+
     println!("add_x(3): {}", add_x(3));
     println!("add_x(7): {}", add_x(7));
 }
@@ -574,11 +574,11 @@ fn main() {
 ```rust
 fn main() {
     let s = String::from("hello");
-    
+
     let print_s = move || {
         println!("s: {}", s);
     };
-    
+
     print_s();
     // s在这里已经无效，因为所有权被移动到闭包中
     // println!("s: {}", s);  // 编译错误！
@@ -608,12 +608,12 @@ fn main() {
             thread::sleep(Duration::from_millis(1));
         }
     });
-    
+
     for i in 1..5 {
         println!("hi number {} from the main thread!", i);
         thread::sleep(Duration::from_millis(1));
     }
-    
+
     handle.join().unwrap();
 }
 ```
@@ -631,11 +631,11 @@ use std::thread;
 
 fn main() {
     let v = vec![1, 2, 3, 4, 5];
-    
+
     let handle = thread::spawn(move || {
         println!("Here's a vector: {:?}", v);
     });
-    
+
     handle.join().unwrap();
 }
 ```
@@ -657,7 +657,7 @@ use std::thread;
 fn main() {
     let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];
-    
+
     for _ in 0..10 {
         let counter = Arc::clone(&counter);
         let handle = thread::spawn(move || {
@@ -666,11 +666,11 @@ fn main() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     println!("Result: {}", *counter.lock().unwrap());
 }
 ```
@@ -689,13 +689,13 @@ use std::thread;
 
 fn main() {
     let (tx, rx) = mpsc::channel();
-    
+
     thread::spawn(move || {
         let val = String::from("hi");
         tx.send(val).unwrap();
         // val在这里已经无效，因为所有权被发送
     });
-    
+
     let received = rx.recv().unwrap();
     println!("Got: {}", received);
 }
@@ -717,15 +717,15 @@ fn main() {
 fn main() {
     let b = Box::new(5);
     println!("b = {}", b);
-    
-    // Box在作用域结束时自动释放
+
+    // Box在作用域结束时自动释放（编译期证明的资源生命周期）
 }
 ```
 
 **解释**：
 
 - `Box` 将数据存储在堆上
-- 自动管理内存分配和释放
+从引用一致性视角看，自动管理资源分配和释放（编译期证明的资源生命周期）
 - 适用于递归数据结构
 
 **示例 6.1.2**：递归数据结构
@@ -743,7 +743,7 @@ fn main() {
         Box::new(Cons(2,
             Box::new(Cons(3,
                 Box::new(Nil))))));
-    
+
     print_list(&list);
 }
 
@@ -764,7 +764,7 @@ fn print_list(list: &List) {
 
 - `Box` 允许递归数据结构
 - 每个 `Cons` 节点拥有下一个节点的所有权
-- 自动内存管理确保正确释放
+从引用一致性视角看，自动资源管理确保正确释放（编译期证明的资源生命周期）
 
 ### 6.2 Rc示例
 
@@ -777,7 +777,7 @@ fn main() {
     let a = Rc::new(5);
     let b = Rc::clone(&a);
     let c = Rc::clone(&a);
-    
+
     println!("a = {}", a);
     println!("b = {}", b);
     println!("c = {}", c);
@@ -788,8 +788,8 @@ fn main() {
 **解释**：
 
 - `Rc` 允许多个所有者共享数据
-- 使用引用计数管理内存
-- 当引用计数归零时自动释放
+从引用一致性视角看，使用引用计数管理资源（编译期证明的资源生命周期）
+从引用一致性视角看，当引用计数归零时自动释放（编译期证明的资源生命周期）
 
 **示例 6.2.2**：共享数据结构
 
@@ -808,11 +808,11 @@ impl Node {
             next: None,
         }
     }
-    
+
     fn set_next(&mut self, next: Rc<Node>) {
         self.next = Some(next);
     }
-    
+
     fn print(&self) {
         print!("{} -> ", self.data);
         if let Some(next) = &self.next {
@@ -827,11 +827,11 @@ fn main() {
     let mut node1 = Node::new(1);
     let mut node2 = Node::new(2);
     let node3 = Rc::new(Node::new(3));
-    
+
     // 多个节点可以共享同一个后续节点
     node1.set_next(Rc::clone(&node3));
     node2.set_next(Rc::clone(&node3));
-    
+
     node1.print();
     node2.print();
 }
@@ -840,8 +840,8 @@ fn main() {
 **解释**：
 
 - `Rc` 允许多个节点共享同一个子节点
-- 避免了重复的内存分配
-- 引用计数确保正确的内存管理
+从引用一致性视角看，避免了重复的资源分配（编译期证明的资源生命周期）
+从引用一致性视角看，引用计数确保正确的资源管理（编译期证明的资源生命周期）
 
 ### 6.3 Arc示例
 
@@ -854,7 +854,7 @@ use std::thread;
 fn main() {
     let data = Arc::new(vec![1, 2, 3, 4, 5]);
     let mut handles = vec![];
-    
+
     for i in 0..3 {
         let data = Arc::clone(&data);
         let handle = thread::spawn(move || {
@@ -862,7 +862,7 @@ fn main() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
@@ -893,7 +893,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 fn main() {
     let string1 = String::from("abcd");
     let string2 = "xyz";
-    
+
     let result = longest(&string1, string2);
     println!("The longest string is {}", result);
 }
@@ -918,7 +918,7 @@ fn main() {
     let i = ImportantExcerpt {
         part: first_sentence,
     };
-    
+
     println!("Excerpt: {}", i.part);
 }
 ```
@@ -937,26 +937,26 @@ fn main() {
 // 省略前
 fn first_word<'a>(s: &'a str) -> &'a str {
     let bytes = s.as_bytes();
-    
+
     for (i, &item) in bytes.iter().enumerate() {
         if item == b' ' {
             return &s[0..i];
         }
     }
-    
+
     &s[..]
 }
 
 // 省略后（编译器自动推断）
 fn first_word(s: &str) -> &str {
     let bytes = s.as_bytes();
-    
+
     for (i, &item) in bytes.iter().enumerate() {
         if item == b' ' {
             return &s[0..i];
         }
     }
-    
+
     &s[..]
 }
 
@@ -995,7 +995,7 @@ fn main() {
     let string1 = String::from("abcd");
     let string2 = "xyz";
     let announcement = "I'm about to find the longest string!";
-    
+
     let result = longest_with_an_announcement(&string1, string2, announcement);
     println!("The longest string is {}", result);
 }
@@ -1030,7 +1030,7 @@ impl Counter {
 
 impl Iterator for Counter {
     type Item = u32;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         if self.count < self.max {
             self.count += 1;
@@ -1043,7 +1043,7 @@ impl Iterator for Counter {
 
 fn main() {
     let mut counter = Counter::new(5);
-    
+
     for num in counter {
         println!("{}", num);
     }
@@ -1092,13 +1092,13 @@ fn main() {
 ```rust
 fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
     let mut largest = list[0];
-    
+
     for &item in list.iter() {
         if item > largest {
             largest = item;
         }
     }
-    
+
     largest
 }
 
@@ -1106,7 +1106,7 @@ fn main() {
     let number_list = vec![34, 50, 25, 100, 65];
     let result = largest(&number_list);
     println!("The largest number is {}", result);
-    
+
     let char_list = vec!['y', 'm', 'a', 'q'];
     let result = largest(&char_list);
     println!("The largest char is {}", result);
@@ -1141,7 +1141,7 @@ fn main() {
 
 ---
 
-**文档版本**: 1.0.0  
-**最后更新**: 2025-01-27  
-**维护者**: Rust语言形式化理论项目组  
+**文档版本**: 1.0.0
+**最后更新**: 2025-01-27
+**维护者**: Rust语言形式化理论项目组
 **状态**: 完成

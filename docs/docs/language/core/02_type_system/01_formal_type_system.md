@@ -557,7 +557,7 @@ fn main() {
     let y: f64 = 3.14;
     let z: bool = true;
     let s: String = String::from("hello");
-    
+
     println!("x: {}, y: {}, z: {}, s: {}", x, y, z, s);
 }
 ```
@@ -569,9 +569,9 @@ fn add(x: i32, y: i32) -> i32 {
     x + y
 }
 
-fn apply<F>(f: F, x: i32, y: i32) -> i32 
-where 
-    F: Fn(i32, i32) -> i32 
+fn apply<F>(f: F, x: i32, y: i32) -> i32
+where
+    F: Fn(i32, i32) -> i32
 {
     f(x, y)
 }
@@ -655,7 +655,7 @@ fn main() {
     let x = identity(5);
     let y = identity("hello");
     let swapped = swap((1, "world"));
-    
+
     println!("x: {}, y: {}, swapped: {:?}", x, y, swapped);
 }
 ```
@@ -671,7 +671,7 @@ impl<T> Container<T> {
     fn new(value: T) -> Self {
         Container { value }
     }
-    
+
     fn get(&self) -> &T {
         &self.value
     }
@@ -680,7 +680,7 @@ impl<T> Container<T> {
 fn main() {
     let int_container = Container::new(5);
     let string_container = Container::new(String::from("hello"));
-    
+
     println!("int: {}, string: {}", int_container.get(), string_container.get());
 }
 ```
@@ -698,7 +698,7 @@ fn main() {
 ```rust
 trait Iterator {
     type Item;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
 }
 
@@ -710,7 +710,7 @@ struct Range {
 
 impl Iterator for Range {
     type Item = i32;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         if self.current < self.end {
             let result = self.current;
@@ -827,7 +827,7 @@ fn main() {
 
 ---
 
-**文档版本**: 1.1.0  
-**最后更新**: 2025-07-12  
-**维护者**: Rust语言形式化理论项目组  
+**文档版本**: 1.1.0
+**最后更新**: 2025-07-12
+**维护者**: Rust语言形式化理论项目组
 **状态**: 已更新交叉引用
