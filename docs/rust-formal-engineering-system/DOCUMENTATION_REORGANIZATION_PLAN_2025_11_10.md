@@ -182,23 +182,34 @@
 - [x] 完善 06_toolchain_ecosystem/08_ide_integration/00_index.md ✅
 - [x] 完善 06_toolchain_ecosystem/09_debugging/00_index.md ✅
 - [x] 完善 06_toolchain_ecosystem/10_monitoring/00_index.md ✅
-
-### 已完成（新增）
-
 - [x] 完善 06_toolchain_ecosystem/02_clippy/00_index.md ✅
 - [x] 完善 06_toolchain_ecosystem/03_miri/00_index.md ✅
 - [x] 完善 06_toolchain_ecosystem/04_fuzz/00_index.md ✅
 - [x] 完善 06_toolchain_ecosystem/05_formal/00_index.md ✅
+- [x] 完善 04_application_domains/01_fintech/00_index.md ✅
+- [x] 完善 04_application_domains/02_game_development/00_index.md ✅
+- [x] 完善 04_application_domains/03_iot/00_index.md ✅
+- [x] 完善 04_application_domains/04_ai_ml/00_index.md ✅
+- [x] 完善 04_application_domains/05_blockchain_web3/00_index.md ✅
+- [x] 完善 04_application_domains/06_cloud_infrastructure/00_index.md ✅
+- [x] 完善 04_application_domains/07_big_data_analytics/00_index.md ✅
+- [x] 完善 04_application_domains/08_cybersecurity/00_index.md ✅
+- [x] 完善 04_application_domains/09_healthcare/00_index.md ✅
+- [x] 完善 04_application_domains/10_education_tech/00_index.md ✅
+- [x] 完善 04_application_domains/11_automotive/00_index.md ✅
+- [x] 完善 04_application_domains/12_ecommerce/00_index.md ✅
+- [x] 完善 04_application_domains/13_social_media/00_index.md ✅
+- [x] 完善 04_application_domains/14_enterprise/00_index.md ✅
+- [x] 完善 04_application_domains/15_mobile/00_index.md ✅
 
 ### 进行中
 
-- [ ] 完善 04_application_domains 各子模块索引文件
 - [ ] 内容对标网络资源
 
 ### 待开始
 
-- [ ] 完善 06_toolchain_ecosystem 各子模块索引文件
-- [ ] 完善 04_application_domains 各子模块索引文件
+- [ ] 完善其他模块的索引文件
+- [ ] 内容对标网络资源（持续进行）
 - [ ] 扩展模块内容完善
 - [ ] 自动化工具开发
 - [ ] 社区资源整合
