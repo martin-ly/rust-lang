@@ -64,15 +64,15 @@ impl BlockchainNode {
         loop {
             // 1. 接收网络消息
             let messages = self.network_layer.receive_messages().await?;
-            
+
             // 2. 处理共识
             let consensus_result = self.consensus_engine.process_messages(messages).await?;
-            
+
             // 3. 执行交易
             if let Some(block) = consensus_result.block {
                 self.execute_block(block).await?;
             }
-            
+
             // 4. 同步状态
             self.state_manager.sync().await?;
         }
@@ -102,11 +102,11 @@ pub fn process_instruction(
 ) -> ProgramResult {
     let accounts_iter = &mut accounts.iter();
     let payer = next_account_info(accounts_iter)?;
-    
+
     if !payer.is_signer {
         return Err(ProgramError::MissingRequiredSignature);
     }
-    
+
     msg!("Hello, Solana!");
     Ok(())
 }
@@ -172,7 +172,7 @@ impl BlockchainStorage for RocksDBStorage {
         self.db.put(key.as_bytes(), value)?;
         Ok(())
     }
-    
+
     async fn get_block(&self, hash: &BlockHash) -> Result<Option<Block>, StorageError> {
         let key = format!("block:{}", hash);
         if let Some(value) = self.db.get(key.as_bytes())? {
@@ -206,7 +206,7 @@ impl ConsensusEngine for ProofOfStake {
     async fn propose_block(&self, transactions: Vec<Transaction>) -> Result<Block, ConsensusError> {
         // 选择验证者
         let validator = self.select_validator().await?;
-        
+
         // 创建区块
         let block = Block {
             header: BlockHeader {
@@ -218,7 +218,7 @@ impl ConsensusEngine for ProofOfStake {
             transactions,
             state_root: Hash::default(), // 将在执行后更新
         };
-        
+
         Ok(block)
     }
 }
@@ -237,20 +237,20 @@ impl Wallet {
     pub fn new() -> Self {
         let keypair = Keypair::generate();
         let address = Address::from_public_key(&keypair.public_key);
-        
+
         Self {
             keypair,
             address,
             balance: Amount::zero(),
         }
     }
-    
+
     pub fn sign_transaction(&self, mut transaction: Transaction) -> Result<Transaction, WalletError> {
         transaction.from = self.address;
         transaction.signature = self.keypair.sign(&transaction.hash());
         Ok(transaction)
     }
-    
+
     pub async fn send_transaction(&self, to: Address, amount: Amount) -> Result<TransactionHash, WalletError> {
         let transaction = Transaction {
             from: self.address,
@@ -258,7 +258,7 @@ impl Wallet {
             value: amount,
             // ... 其他字段
         };
-        
+
         let signed_tx = self.sign_transaction(transaction)?;
         // 发送到网络
         Ok(signed_tx.hash)
@@ -280,7 +280,7 @@ impl ParallelTransactionProcessor {
     pub fn new(worker_count: usize) -> Self {
         let transaction_queue = Arc::new(Mutex::new(VecDeque::new()));
         let mut workers = Vec::new();
-        
+
         for _ in 0..worker_count {
             let queue = transaction_queue.clone();
             let worker = tokio::spawn(async move {
@@ -288,17 +288,17 @@ impl ParallelTransactionProcessor {
             });
             workers.push(worker);
         }
-        
+
         Self { workers, transaction_queue }
     }
-    
+
     async fn process_transactions(queue: Arc<Mutex<VecDeque<Transaction>>>) {
         loop {
             let transaction = {
                 let mut q = queue.lock().await;
                 q.pop_front()
             };
-            
+
             if let Some(tx) = transaction {
                 // 处理交易
                 Self::execute_transaction(tx).await;
@@ -322,16 +322,16 @@ impl CryptoService {
         let mut rng = rand::thread_rng();
         Keypair::generate(&mut rng)
     }
-    
+
     pub fn sign_message(private_key: &PrivateKey, message: &[u8]) -> Signature {
         let keypair = Keypair::from_private_key(private_key);
         keypair.sign(message)
     }
-    
+
     pub fn verify_signature(public_key: &PublicKey, message: &[u8], signature: &Signature) -> bool {
         signature.verify(message, public_key)
     }
-    
+
     pub fn hash_data(data: &[u8]) -> Hash {
         use sha2::{Sha256, Digest};
         let mut hasher = Sha256::new();
@@ -349,7 +349,7 @@ impl CryptoService {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[tokio::test]
     async fn test_transaction_validation() {
         let wallet = Wallet::new();
@@ -359,7 +359,7 @@ mod tests {
             value: Amount::from_satoshis(1000),
             // ... 其他字段
         };
-        
+
         let signed_tx = wallet.sign_transaction(transaction).unwrap();
         assert!(CryptoService::verify_signature(
             &wallet.keypair.public_key,
@@ -367,15 +367,15 @@ mod tests {
             &signed_tx.signature
         ));
     }
-    
+
     #[tokio::test]
     async fn test_block_consensus() {
         let consensus = ProofOfStake::new();
         let transactions = vec![/* 测试交易 */];
-        
+
         let block = consensus.propose_block(transactions).await.unwrap();
         let is_valid = consensus.validate_block(&block).await.unwrap();
-        
+
         assert!(is_valid);
     }
 }

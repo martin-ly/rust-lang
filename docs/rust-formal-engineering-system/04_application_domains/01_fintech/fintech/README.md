@@ -351,7 +351,7 @@ impl AccountRepository for PostgresAccountRepository {
     async fn save(&self, account: &Account) -> Result<(), RepositoryError> {
         // 数据库操作实现
     }
-    
+
     async fn find_by_id(&self, id: &AccountId) -> Result<Option<Account>, RepositoryError> {
         // 数据库查询实现
     }
@@ -431,7 +431,7 @@ lazy_static! {
         "fintech_payments_total",
         "Total number of payments processed"
     ).unwrap();
-    
+
     static ref PAYMENT_DURATION: Histogram = register_histogram!(
         "fintech_payment_duration_seconds",
         "Payment processing duration in seconds"
@@ -448,23 +448,23 @@ impl PaymentApplicationService {
         command: ProcessPaymentCommand,
     ) -> Result<PaymentId, ApplicationError> {
         let timer = PAYMENT_DURATION.start_timer();
-        
+
         info!(
             payment_id = %command.payment_id,
             amount = %command.amount,
             "Processing payment"
         );
-        
+
         // 处理逻辑...
-        
+
         PAYMENT_COUNTER.inc();
         timer.observe_duration();
-        
+
         info!(
             payment_id = %command.payment_id,
             "Payment processed successfully"
         );
-        
+
         Ok(command.payment_id)
     }
 }
@@ -481,7 +481,7 @@ use actix_web::middleware::Logger;
 async fn main() -> std::io::Result<()> {
     // 初始化日志
     tracing_subscriber::fmt::init();
-    
+
     HttpServer::new(|| {
         App::new()
             .wrap(Logger::default())
@@ -519,25 +519,25 @@ impl PaymentProcessor {
         payments: Vec<ProcessPaymentCommand>,
     ) -> Vec<Result<PaymentId, ApplicationError>> {
         let mut tasks = Vec::new();
-        
+
         for payment in payments {
             let permit = self.semaphore.clone().acquire_owned().await.unwrap();
             let service = self.payment_service.clone();
-            
+
             let task = tokio::spawn(async move {
                 let result = service.process_payment(payment).await;
                 drop(permit); // 释放信号量
                 result
             });
-            
+
             tasks.push(task);
         }
-        
+
         let mut results = Vec::new();
         for task in tasks {
             results.push(task.await.unwrap());
         }
-        
+
         results
     }
 }
@@ -560,7 +560,7 @@ impl AccountRepository for CachedAccountRepository {
         if let Some(account) = self.cache.get(id).await {
             return Ok(Some(account));
         }
-        
+
         // 缓存未命中，查数据库
         if let Some(account) = self.repository.find_by_id(id).await? {
             self.cache.insert(id.clone(), account.clone()).await;
@@ -581,19 +581,19 @@ impl AccountRepository for CachedAccountRepository {
 mod tests {
     use super::*;
     use mockall::predicate::*;
-    
+
     #[tokio::test]
     async fn test_process_payment_success() {
         let mut mock_repo = MockPaymentRepository::new();
         mock_repo.expect_save()
             .times(1)
             .returning(|_| Ok(()));
-            
+
         let service = PaymentApplicationService {
             payment_repository: Box::new(mock_repo),
             // ... 其他依赖
         };
-        
+
         let command = ProcessPaymentCommand {
             payment_id: PaymentId::new(),
             amount: Decimal::new(100, 0),
@@ -601,7 +601,7 @@ mod tests {
             from_account: AccountId::new(),
             to_account: AccountId::new(),
         };
-        
+
         let result = service.process_payment(command).await;
         assert!(result.is_ok());
     }
@@ -614,21 +614,21 @@ mod tests {
 #[cfg(test)]
 mod integration_tests {
     use super::*;
-    
+
     #[tokio::test]
     async fn test_payment_workflow() {
         // 设置测试数据库
         let pool = setup_test_database().await;
-        
+
         // 创建服务实例
         let service = create_test_service(pool).await;
-        
+
         // 执行端到端测试
         let command = create_test_payment_command();
         let result = service.process_payment(command).await;
-        
+
         assert!(result.is_ok());
-        
+
         // 验证数据库状态
         let payment = get_payment_from_db(&pool, &result.unwrap()).await;
         assert_eq!(payment.status, PaymentStatus::Completed);
@@ -673,7 +673,7 @@ impl EncryptionService {
     pub fn encrypt(&self, data: &[u8]) -> Result<Vec<u8>, EncryptionError> {
         let nonce = aead::Nonce::assume_unique_for_key([0u8; 12]);
         let aad = aead::Aad::empty();
-        
+
         let mut ciphertext = data.to_vec();
         let tag = aead::seal_in_place_separate_tag(
             &self.key,
@@ -681,15 +681,15 @@ impl EncryptionService {
             aad,
             &mut ciphertext,
         )?;
-        
+
         ciphertext.extend_from_slice(tag.as_ref());
         Ok(ciphertext)
     }
-    
+
     pub fn decrypt(&self, ciphertext: &[u8]) -> Result<Vec<u8>, EncryptionError> {
         let nonce = aead::Nonce::assume_unique_for_key([0u8; 12]);
         let aad = aead::Aad::empty();
-        
+
         let mut plaintext = ciphertext.to_vec();
         let plaintext_len = aead::open_in_place(
             &self.key,
@@ -697,7 +697,7 @@ impl EncryptionService {
             aad,
             &mut plaintext,
         )?.len();
-        
+
         plaintext.truncate(plaintext_len);
         Ok(plaintext)
     }

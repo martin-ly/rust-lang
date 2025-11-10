@@ -127,22 +127,22 @@ impl EdgeNode {
         loop {
             // 1. 收集设备数据
             let device_data = self.device_manager.collect_data().await?;
-            
+
             // 2. 本地数据处理
             let processed_data = self.data_processor.process(device_data).await?;
-            
+
             // 3. 规则引擎执行
             let actions = self.rule_engine.evaluate(&processed_data).await?;
-            
+
             // 4. 执行本地动作
             self.execute_actions(actions).await?;
-            
+
             // 5. 上传重要数据到云端
             self.upload_to_cloud(processed_data).await?;
-            
+
             // 6. 接收云端指令
             self.receive_cloud_commands().await?;
-            
+
             tokio::time::sleep(Duration::from_secs(1)).await;
         }
     }
@@ -160,16 +160,16 @@ impl CloudService {
     pub async fn run(&mut self) -> Result<(), CloudError> {
         // 1. 接收边缘节点数据
         self.data_ingestion.receive_data().await?;
-        
+
         // 2. 设备状态管理
         self.device_registry.update_status().await?;
-        
+
         // 3. 数据分析
         self.analytics_engine.analyze().await?;
-        
+
         // 4. 发送控制指令
         self.command_dispatcher.dispatch().await?;
-        
+
         Ok(())
     }
 }
@@ -204,12 +204,12 @@ impl EventBus {
             handlers: HashMap::new(),
         }
     }
-    
+
     pub fn subscribe<T: 'static>(&mut self, handler: Box<dyn EventHandler>) {
         let type_id = TypeId::of::<T>();
         self.handlers.entry(type_id).or_insert_with(Vec::new).push(handler);
     }
-    
+
     pub async fn publish(&self, event: &IoTEvent) -> Result<(), EventError> {
         let type_id = TypeId::of::<IoTEvent>();
         if let Some(handlers) = self.handlers.get(&type_id) {
@@ -409,16 +409,16 @@ impl TimeSeriesDB for InfluxDB {
             .field("unit", data.unit.clone())
             .field("quality", data.quality.to_string())
             .timestamp(data.timestamp.timestamp_nanos());
-        
+
         self.client.query(&influxdb::Query::write_query(
             influxdb::Type::Write,
             &self.database,
             point,
         )).await?;
-        
+
         Ok(())
     }
-    
+
     async fn query_data(
         &self,
         device_id: &DeviceId,
@@ -430,7 +430,7 @@ impl TimeSeriesDB for InfluxDB {
             "SELECT * FROM sensor_data WHERE device_id = '{}' AND sensor_type = '{}' AND time >= {} AND time <= {}",
             device_id, sensor_type, start_time.timestamp_nanos(), end_time.timestamp_nanos()
         );
-        
+
         let result = self.client.query(&influxdb::Query::raw_read_query(query)).await?;
         // 解析结果...
         Ok(vec![])
@@ -496,20 +496,20 @@ impl DeviceManager {
             configuration: device_info.configuration,
             last_seen: Utc::now(),
         };
-        
+
         self.device_repository.save(&device).await?;
         self.devices.insert(device_id.clone(), device.clone());
-        
+
         // 发布设备连接事件
         let event = IoTEvent::DeviceConnected(DeviceConnectedEvent {
             device_id: device_id.clone(),
             timestamp: Utc::now(),
         });
         self.event_bus.publish(&event).await?;
-        
+
         Ok(device_id)
     }
-    
+
     pub async fn update_device_status(&mut self, device_id: &DeviceId, status: DeviceStatus) -> Result<(), DeviceError> {
         if let Some(device) = self.devices.get_mut(device_id) {
             device.status = status;
@@ -518,17 +518,17 @@ impl DeviceManager {
         }
         Ok(())
     }
-    
+
     pub async fn collect_data(&self) -> Result<Vec<SensorData>, DeviceError> {
         let mut all_data = Vec::new();
-        
+
         for device in self.devices.values() {
             if device.status == DeviceStatus::Online {
                 let device_data = self.communication_manager.read_sensors(device).await?;
                 all_data.extend(device_data);
             }
         }
-        
+
         Ok(all_data)
     }
 }
@@ -547,27 +547,27 @@ pub struct DataProcessor {
 impl DataProcessor {
     pub async fn process(&self, raw_data: Vec<SensorData>) -> Result<Vec<SensorData>, ProcessingError> {
         let mut processed_data = raw_data;
-        
+
         // 1. 数据过滤
         for filter in &self.filters {
             processed_data = filter.filter(processed_data).await?;
         }
-        
+
         // 2. 数据转换
         for transformer in &self.transformers {
             processed_data = transformer.transform(processed_data).await?;
         }
-        
+
         // 3. 数据验证
         for validator in &self.validators {
             processed_data = validator.validate(processed_data).await?;
         }
-        
+
         // 4. 数据存储
         for data in &processed_data {
             self.storage.insert_data(data).await?;
         }
-        
+
         Ok(processed_data)
     }
 }
@@ -606,23 +606,23 @@ pub struct RuleEngine {
 impl RuleEngine {
     pub async fn evaluate(&self, data: &[SensorData]) -> Result<Vec<Action>, RuleError> {
         let mut actions = Vec::new();
-        
+
         for rule in &self.rules {
             if !rule.enabled {
                 continue;
             }
-            
+
             if self.evaluate_conditions(rule, data).await? {
                 actions.extend(rule.actions.clone());
             }
         }
-        
+
         // 按优先级排序
         actions.sort_by(|a, b| b.priority.cmp(&a.priority));
-        
+
         Ok(actions)
     }
-    
+
     async fn evaluate_conditions(&self, rule: &Rule, data: &[SensorData]) -> Result<bool, RuleError> {
         for condition in &rule.conditions {
             if !self.evaluate_condition(condition, data).await? {
@@ -631,7 +631,7 @@ impl RuleEngine {
         }
         Ok(true)
     }
-    
+
     async fn evaluate_condition(&self, condition: &Condition, data: &[SensorData]) -> Result<bool, RuleError> {
         match condition {
             Condition::Threshold { sensor_type, operator, value } => {
@@ -651,7 +651,7 @@ impl RuleEngine {
             }
         }
     }
-    
+
     pub async fn execute_actions(&self, actions: Vec<Action>) -> Result<(), RuleError> {
         for action in actions {
             self.action_executor.execute(action).await?;
@@ -682,33 +682,33 @@ impl MQTTClient {
                 .credentials(&config.username, &config.password),
             100,
         );
-        
+
         Ok(Self {
             client,
             event_loop,
             config,
         })
     }
-    
+
     pub async fn connect(&mut self) -> Result<(), MQTTError> {
         self.client.connect().await?;
-        
+
         // 订阅主题
         for topic in &self.config.subscribe_topics {
             self.client.subscribe(topic, rumqttc::QoS::AtLeastOnce).await?;
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn publish(&mut self, topic: &str, payload: &[u8]) -> Result<(), MQTTError> {
         self.client.publish(topic, rumqttc::QoS::AtLeastOnce, false, payload).await?;
         Ok(())
     }
-    
+
     pub async fn receive_messages(&mut self) -> Result<Vec<Message>, MQTTError> {
         let mut messages = Vec::new();
-        
+
         loop {
             match self.event_loop.poll().await {
                 Ok(rumqttc::Event::Incoming(rumqttc::Packet::Publish(publish))) => {
@@ -720,12 +720,12 @@ impl MQTTClient {
                 Ok(_) => continue,
                 Err(e) => return Err(MQTTError::ConnectionError(e)),
             }
-            
+
             if messages.len() >= 10 {
                 break;
             }
         }
-        
+
         Ok(messages)
     }
 }
@@ -742,28 +742,28 @@ pub struct CoAPClient {
 impl CoAPClient {
     pub fn new(config: CoAPConfig) -> Self {
         let client = coap::CoAPClient::new().unwrap();
-        
+
         Self {
             client,
             config,
         }
     }
-    
+
     pub async fn get(&self, path: &str) -> Result<Vec<u8>, CoAPError> {
         let request = coap::CoAPRequest::new();
         request.set_method(coap::Method::Get);
         request.set_path(path);
-        
+
         let response = self.client.send(&request).await?;
         Ok(response.message.payload)
     }
-    
+
     pub async fn post(&self, path: &str, payload: &[u8]) -> Result<Vec<u8>, CoAPError> {
         let mut request = coap::CoAPRequest::new();
         request.set_method(coap::Method::Post);
         request.set_path(path);
         request.message.payload = payload.to_vec();
-        
+
         let response = self.client.send(&request).await?;
         Ok(response.message.payload)
     }
@@ -785,22 +785,22 @@ impl DeviceAuthenticator {
         // 1. 验证设备证书
         let certificate = self.certificate_store.get_certificate(&credentials.device_id).await?;
         self.verify_certificate(&certificate, &credentials.signature)?;
-        
+
         // 2. 生成访问令牌
         let token = self.generate_token(&credentials.device_id).await?;
-        
+
         Ok(token)
     }
-    
+
     pub async fn validate_token(&self, token: &DeviceToken) -> Result<bool, AuthError> {
         self.token_validator.validate(token).await
     }
-    
+
     fn verify_certificate(&self, certificate: &Certificate, signature: &[u8]) -> Result<(), AuthError> {
         // 证书验证逻辑
         Ok(())
     }
-    
+
     async fn generate_token(&self, device_id: &DeviceId) -> Result<DeviceToken, AuthError> {
         // 令牌生成逻辑
         Ok(DeviceToken::new(device_id))
@@ -821,31 +821,31 @@ impl DataEncryptor {
             encryption_key: key,
         }
     }
-    
+
     pub fn encrypt(&self, data: &[u8]) -> Result<Vec<u8>, EncryptionError> {
         use ring::aead;
-        
+
         let key = aead::UnboundKey::new(&aead::AES_256_GCM, &self.encryption_key)?;
         let nonce = aead::Nonce::assume_unique_for_key([0u8; 12]);
         let aad = aead::Aad::empty();
-        
+
         let mut ciphertext = data.to_vec();
         let tag = aead::seal_in_place_separate_tag(&key, nonce, aad, &mut ciphertext)?;
-        
+
         ciphertext.extend_from_slice(tag.as_ref());
         Ok(ciphertext)
     }
-    
+
     pub fn decrypt(&self, ciphertext: &[u8]) -> Result<Vec<u8>, EncryptionError> {
         use ring::aead;
-        
+
         let key = aead::UnboundKey::new(&aead::AES_256_GCM, &self.encryption_key)?;
         let nonce = aead::Nonce::assume_unique_for_key([0u8; 12]);
         let aad = aead::Aad::empty();
-        
+
         let mut plaintext = ciphertext.to_vec();
         let plaintext_len = aead::open_in_place(&key, nonce, aad, &mut plaintext)?;
-        
+
         plaintext.truncate(plaintext_len);
         Ok(plaintext)
     }
@@ -868,11 +868,11 @@ impl DataCompressor {
         encoder.write_all(data)?;
         Ok(encoder.finish()?)
     }
-    
+
     pub fn decompress(&self, compressed_data: &[u8]) -> Result<Vec<u8>, CompressionError> {
         use flate2::read::GzDecoder;
         use std::io::Read;
-        
+
         let mut decoder = GzDecoder::new(compressed_data);
         let mut decompressed = Vec::new();
         decoder.read_to_end(&mut decompressed)?;
@@ -900,12 +900,12 @@ impl BatchProcessor {
             last_flush: Instant::now(),
         }
     }
-    
+
     pub async fn add_data(&mut self, data: SensorData) -> Result<Option<Vec<SensorData>>, ProcessingError> {
         self.current_batch.push(data);
-        
+
         // 检查是否需要刷新批次
-        if self.current_batch.len() >= self.batch_size || 
+        if self.current_batch.len() >= self.batch_size ||
            self.last_flush.elapsed() >= self.batch_timeout {
             let batch = std::mem::take(&mut self.current_batch);
             self.last_flush = Instant::now();
@@ -925,11 +925,11 @@ impl BatchProcessor {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[tokio::test]
     async fn test_device_registration() {
         let mut device_manager = create_test_device_manager().await;
-        
+
         let device_info = DeviceInfo {
             name: "Test Device".to_string(),
             device_type: DeviceType::Sensor,
@@ -937,20 +937,20 @@ mod tests {
             capabilities: vec![Capability::Temperature],
             configuration: DeviceConfiguration::default(),
         };
-        
+
         let device_id = device_manager.register_device(device_info).await.unwrap();
         assert!(device_manager.devices.contains_key(&device_id));
     }
-    
+
     #[tokio::test]
     async fn test_data_processing() {
         let processor = create_test_data_processor().await;
-        
+
         let raw_data = vec![
             SensorData::new(DeviceId::new(), SensorType::Temperature, 25.5, "°C"),
             SensorData::new(DeviceId::new(), SensorType::Humidity, 60.0, "%"),
         ];
-        
+
         let processed = processor.process(raw_data).await.unwrap();
         assert_eq!(processed.len(), 2);
     }
@@ -963,19 +963,19 @@ mod tests {
 #[cfg(test)]
 mod integration_tests {
     use super::*;
-    
+
     #[tokio::test]
     async fn test_end_to_end_data_flow() {
         // 设置测试环境
         let mut edge_node = create_test_edge_node().await;
         let cloud_service = create_test_cloud_service().await;
-        
+
         // 模拟设备数据
         let test_data = create_test_sensor_data();
-        
+
         // 执行端到端测试
         edge_node.process_data(test_data).await.unwrap();
-        
+
         // 验证数据到达云端
         let cloud_data = cloud_service.get_latest_data().await.unwrap();
         assert!(!cloud_data.is_empty());
@@ -998,7 +998,7 @@ FROM debian:bullseye-slim
 RUN apt-get update && apt-get install -y \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
-    
+
 WORKDIR /app
 COPY --from=builder /app/target/release/iot-edge-node .
 COPY config/ config/

@@ -131,13 +131,13 @@ impl DataService {
     pub async fn ingest_data(&self, data: RawData) -> Result<DataId, DataError> {
         // 数据摄入
         let data_id = self.data_ingestion.ingest(data).await?;
-        
+
         // 数据预处理
         self.data_processing.process(data_id).await?;
-        
+
         // 数据存储
         self.data_storage.store(data_id).await?;
-        
+
         Ok(data_id)
     }
 }
@@ -153,13 +153,13 @@ impl FeatureService {
     pub async fn create_features(&self, data_id: DataId) -> Result<FeatureSet, FeatureError> {
         // 特征工程
         let features = self.feature_engineering.engineer(data_id).await?;
-        
+
         // 特征存储
         let feature_set = self.feature_store.store(features).await?;
-        
+
         Ok(feature_set)
     }
-    
+
     pub async fn serve_features(&self, request: FeatureRequest) -> Result<FeatureVector, FeatureError> {
         self.feature_serving.serve(request).await
     }
@@ -176,13 +176,13 @@ impl ModelService {
     pub async fn train_model(&self, config: TrainingConfig) -> Result<ModelId, ModelError> {
         // 模型训练
         let model = self.model_training.train(config).await?;
-        
+
         // 模型注册
         let model_id = self.model_registry.register(model).await?;
-        
+
         Ok(model_id)
     }
-    
+
     pub async fn deploy_model(&self, model_id: ModelId) -> Result<DeploymentId, ModelError> {
         self.model_deployment.deploy(model_id).await
     }
@@ -201,16 +201,16 @@ impl InferenceService {
         if let Some(cached_result) = self.result_cache.get(&request).await {
             return Ok(cached_result);
         }
-        
+
         // 加载模型
         let model = self.model_loader.load_model(&request.model_id).await?;
-        
+
         // 执行预测
         let prediction = self.prediction_engine.predict(model, &request.features).await?;
-        
+
         // 缓存结果
         self.result_cache.set(&request, &prediction).await;
-        
+
         Ok(prediction)
     }
 }
@@ -468,28 +468,28 @@ impl FeatureStore for RedisFeatureStore {
     async fn store_features(&self, features: FeatureSet) -> Result<FeatureSetId, FeatureSetId> {
         let feature_set_id = FeatureSetId::generate();
         let key = format!("features:{}", feature_set_id);
-        
+
         let serialized = serde_json::to_string(&features)?;
         redis::cmd("SET").arg(&key).arg(serialized).execute(&mut self.connection);
-        
+
         Ok(feature_set_id)
     }
-    
+
     async fn get_features(&self, feature_set_id: &FeatureSetId) -> Result<FeatureSet, FeatureError> {
         let key = format!("features:{}", feature_set_id);
         let serialized: String = redis::cmd("GET").arg(&key).query(&mut self.connection)?;
-        
+
         let features: FeatureSet = serde_json::from_str(&serialized)?;
         Ok(features)
     }
-    
+
     async fn serve_features(&self, request: FeatureRequest) -> Result<FeatureVector, FeatureError> {
         // 从特征存储中获取特征向量
         let mut feature_vector = FeatureVector {
             values: Vec::new(),
             feature_names: Vec::new(),
         };
-        
+
         for feature_name in &request.feature_names {
             let key = format!("feature:{}:{}", request.entity_id, feature_name);
             if let Ok(value) = redis::cmd("GET").arg(&key).query::<f64>(&mut self.connection) {
@@ -497,7 +497,7 @@ impl FeatureStore for RedisFeatureStore {
                 feature_vector.feature_names.push(feature_name.clone());
             }
         }
-        
+
         Ok(feature_vector)
     }
 }
@@ -551,18 +551,18 @@ pub struct DataPipeline {
 impl DataPipeline {
     pub async fn process(&self, raw_data: RawData) -> Result<ProcessedData, PipelineError> {
         let mut data = raw_data;
-        
+
         // 执行管道阶段
         for stage in &self.stages {
             data = stage.process(data).await?;
         }
-        
+
         // 数据验证
         self.data_validation.validate(&data).await?;
-        
+
         // 数据转换
         let processed_data = self.data_transformation.transform(data).await?;
-        
+
         Ok(processed_data)
     }
 }
@@ -595,16 +595,16 @@ pub struct FeatureEngineeringStage {
 impl PipelineStage for FeatureEngineeringStage {
     async fn process(&self, data: RawData) -> Result<RawData, PipelineError> {
         let mut features = Vec::new();
-        
+
         for extractor in &self.feature_extractors {
             let extracted_features = extractor.extract(&data).await?;
             features.extend(extracted_features);
         }
-        
+
         // 将特征添加到数据中
         let mut enriched_data = data;
         enriched_data.features = features;
-        
+
         Ok(enriched_data)
     }
 }
@@ -624,17 +624,17 @@ impl ModelTrainingEngine {
     pub async fn train(&self, config: TrainingConfig) -> Result<TrainedModel, TrainingError> {
         // 1. 超参数优化
         let best_hyperparameters = self.hyperparameter_optimizer.optimize(&config).await?;
-        
+
         // 2. 交叉验证
         let cv_scores = self.cross_validator.validate(&config, &best_hyperparameters).await?;
-        
+
         // 3. 最终训练
         let model = self.model_factory.create_model(&config.algorithm, &best_hyperparameters)?;
         let trained_model = self.train_model(model, &config.training_data).await?;
-        
+
         // 4. 模型评估
         let metrics = self.model_evaluator.evaluate(&trained_model, &config.test_data).await?;
-        
+
         Ok(TrainedModel {
             model: trained_model,
             hyperparameters: best_hyperparameters,
@@ -642,17 +642,17 @@ impl ModelTrainingEngine {
             cv_scores,
         })
     }
-    
+
     async fn train_model(&self, mut model: Box<dyn Model>, data: &TrainingData) -> Result<Box<dyn Model>, TrainingError> {
         // 模型训练逻辑
         for epoch in 0..data.epochs {
             let loss = model.train_epoch(&data.features, &data.labels).await?;
-            
+
             if epoch % 10 == 0 {
                 println!("Epoch {}, Loss: {}", epoch, loss);
             }
         }
-        
+
         Ok(model)
     }
 }
@@ -676,45 +676,45 @@ pub struct LinearRegression {
 impl Model for LinearRegression {
     async fn train_epoch(&mut self, features: &FeatureMatrix, labels: &LabelVector) -> Result<f64, TrainingError> {
         let mut total_loss = 0.0;
-        
+
         for (feature_row, label) in features.iter().zip(labels.iter()) {
             let prediction = self.predict_single(feature_row);
             let error = label - prediction;
-            
+
             // 梯度下降
             for (weight, feature) in self.weights.iter_mut().zip(feature_row.iter()) {
                 *weight += self.learning_rate * error * feature;
             }
             self.bias += self.learning_rate * error;
-            
+
             total_loss += error * error;
         }
-        
+
         Ok(total_loss / labels.len() as f64)
     }
-    
+
     async fn predict(&self, features: &FeatureVector) -> Result<PredictionValue, PredictionError> {
         let prediction = self.predict_single(&features.values);
         Ok(PredictionValue::Regression(prediction))
     }
-    
+
     async fn save(&self, path: &str) -> Result<(), ModelError> {
         let model_data = ModelData {
             weights: self.weights.clone(),
             bias: self.bias,
             learning_rate: self.learning_rate,
         };
-        
+
         let serialized = serde_json::to_string(&model_data)?;
         std::fs::write(path, serialized)?;
-        
+
         Ok(())
     }
-    
+
     async fn load(path: &str) -> Result<Self, ModelError> {
         let serialized = std::fs::read_to_string(path)?;
         let model_data: ModelData = serde_json::from_str(&serialized)?;
-        
+
         Ok(Self {
             weights: model_data.weights,
             bias: model_data.bias,
@@ -747,34 +747,34 @@ pub struct InferenceEngine {
 impl InferenceEngine {
     pub async fn predict(&self, request: PredictionRequest) -> Result<Prediction, InferenceError> {
         let start_time = Instant::now();
-        
+
         // 1. 检查缓存
         if let Some(cached_prediction) = self.prediction_cache.get(&request).await {
             return Ok(cached_prediction);
         }
-        
+
         // 2. 加载模型
         let model = self.model_loader.load_model(&request.model_id).await?;
-        
+
         // 3. 特征预处理
         let processed_features = self.feature_processor.process(&request.features).await?;
-        
+
         // 4. 执行预测
         let prediction_value = model.predict(&processed_features).await?;
-        
+
         // 5. 后处理
         let prediction = self.post_process(prediction_value, &request).await?;
-        
+
         // 6. 缓存结果
         self.prediction_cache.set(&request, &prediction).await;
-        
+
         // 7. 记录性能指标
         let processing_time = start_time.elapsed();
         self.performance_monitor.record_metrics(&request, &prediction, processing_time).await;
-        
+
         Ok(prediction)
     }
-    
+
     async fn post_process(&self, prediction_value: PredictionValue, request: &PredictionRequest) -> Result<Prediction, InferenceError> {
         let prediction = Prediction {
             id: PredictionId::generate(),
@@ -785,10 +785,10 @@ impl InferenceEngine {
             timestamp: Utc::now(),
             processing_time: Duration::from_millis(0), // 将在外部设置
         };
-        
+
         Ok(prediction)
     }
-    
+
     fn calculate_confidence(&self, prediction: &PredictionValue) -> f64 {
         match prediction {
             PredictionValue::Classification(_) => 0.95, // 示例值
@@ -810,17 +810,17 @@ impl ModelLoader {
         if let Some(cached_model) = self.model_cache.get(model_id).await {
             return Ok(cached_model);
         }
-        
+
         // 2. 从注册表加载
         let model_path = self.model_registry.get_model_path(model_id).await?;
         let model = self.load_model_from_path(&model_path).await?;
-        
+
         // 3. 缓存模型
         self.model_cache.set(model_id, model.clone()).await;
-        
+
         Ok(model)
     }
-    
+
     async fn load_model_from_path(&self, path: &str) -> Result<Box<dyn Model>, ModelError> {
         // 根据文件扩展名决定加载方式
         if path.ends_with(".pt") {
@@ -857,26 +857,26 @@ impl BatchInferenceEngine {
             inference_engine,
         }
     }
-    
+
     pub async fn add_request(&mut self, request: PredictionRequest) -> Result<Option<Vec<Prediction>>, InferenceError> {
         self.current_batch.push(request);
-        
+
         // 检查是否需要处理批次
-        if self.current_batch.len() >= self.batch_size || 
+        if self.current_batch.len() >= self.batch_size ||
            self.last_flush.elapsed() >= self.batch_timeout {
             let batch = std::mem::take(&mut self.current_batch);
             self.last_flush = Instant::now();
-            
+
             let predictions = self.process_batch(batch).await?;
             Ok(Some(predictions))
         } else {
             Ok(None)
         }
     }
-    
+
     async fn process_batch(&self, requests: Vec<PredictionRequest>) -> Result<Vec<Prediction>, InferenceError> {
         let mut predictions = Vec::new();
-        
+
         // 并行处理请求
         let tasks: Vec<_> = requests
             .into_iter()
@@ -885,12 +885,12 @@ impl BatchInferenceEngine {
                 tokio::spawn(async move { engine.predict(request).await })
             })
             .collect();
-        
+
         for task in tasks {
             let prediction = task.await??;
             predictions.push(prediction);
         }
-        
+
         Ok(predictions)
     }
 }
@@ -909,18 +909,18 @@ impl ModelCache {
         let cache = moka::future::Cache::builder()
             .max_capacity(max_size as u64)
             .build();
-        
+
         Self { cache, max_size }
     }
-    
+
     pub async fn get(&self, model_id: &ModelId) -> Option<Box<dyn Model>> {
         self.cache.get(model_id).await
     }
-    
+
     pub async fn set(&self, model_id: &ModelId, model: Box<dyn Model>) {
         self.cache.insert(model_id.clone(), model).await;
     }
-    
+
     pub async fn evict(&self, model_id: &ModelId) {
         self.cache.invalidate(model_id).await;
     }
@@ -944,13 +944,13 @@ impl PerformanceMonitor {
             processing_time.as_secs_f64(),
             &[("model_id", &request.model_id.to_string())],
         );
-        
+
         // 记录吞吐量指标
         self.metrics.increment_counter(
             "predictions_total",
             &[("model_id", &request.model_id.to_string())],
         );
-        
+
         // 记录错误率
         if prediction.confidence < 0.5 {
             self.metrics.increment_counter(
@@ -970,20 +970,20 @@ pub struct DataDriftDetector {
 impl DataDriftDetector {
     pub async fn detect_drift(&self, current_features: &FeatureVector) -> Result<DriftReport, DriftError> {
         let mut drift_report = DriftReport::new();
-        
+
         for (feature_name, value) in current_features.feature_names.iter().zip(current_features.values.iter()) {
             if let Some(reference_dist) = self.reference_distribution.get(feature_name) {
                 let drift_score = self.calculate_drift_score(value, reference_dist);
-                
+
                 if drift_score > self.drift_threshold {
                     drift_report.add_drift(feature_name, drift_score);
                 }
             }
         }
-        
+
         Ok(drift_report)
     }
-    
+
     fn calculate_drift_score(&self, value: &f64, distribution: &Distribution) -> f64 {
         // 计算KL散度或其他统计距离
         // 实现细节...
@@ -1000,11 +1000,11 @@ impl DataDriftDetector {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[tokio::test]
     async fn test_model_training() {
         let training_engine = create_test_training_engine().await;
-        
+
         let config = TrainingConfig {
             algorithm: Algorithm::LinearRegression,
             hyperparameters: Hyperparameters::default(),
@@ -1012,17 +1012,17 @@ mod tests {
             test_data: create_test_test_data(),
             epochs: 100,
         };
-        
+
         let trained_model = training_engine.train(config).await.unwrap();
-        
+
         assert!(trained_model.metrics.accuracy > 0.8);
         assert!(trained_model.metrics.loss < 0.1);
     }
-    
+
     #[tokio::test]
     async fn test_inference() {
         let inference_engine = create_test_inference_engine().await;
-        
+
         let request = PredictionRequest {
             id: RequestId::generate(),
             model_id: ModelId::new("test-model"),
@@ -1033,9 +1033,9 @@ mod tests {
             timestamp: Utc::now(),
             metadata: HashMap::new(),
         };
-        
+
         let prediction = inference_engine.predict(request).await.unwrap();
-        
+
         assert!(prediction.confidence > 0.0);
         assert!(prediction.processing_time.as_millis() < 100);
     }
@@ -1048,7 +1048,7 @@ mod tests {
 #[cfg(test)]
 mod integration_tests {
     use super::*;
-    
+
     #[tokio::test]
     async fn test_end_to_end_ml_pipeline() {
         // 设置测试环境
@@ -1056,13 +1056,13 @@ mod integration_tests {
         let feature_service = create_test_feature_service().await;
         let model_service = create_test_model_service().await;
         let inference_service = create_test_inference_service().await;
-        
+
         // 1. 数据摄入
         let data_id = data_service.ingest_data(create_test_raw_data()).await.unwrap();
-        
+
         // 2. 特征工程
         let feature_set = feature_service.create_features(data_id).await.unwrap();
-        
+
         // 3. 模型训练
         let training_config = TrainingConfig {
             algorithm: Algorithm::LinearRegression,
@@ -1070,14 +1070,14 @@ mod integration_tests {
             // ... 其他配置
         };
         let model_id = model_service.train_model(training_config).await.unwrap();
-        
+
         // 4. 模型部署
         let deployment_id = model_service.deploy_model(model_id).await.unwrap();
-        
+
         // 5. 推理测试
         let request = create_test_prediction_request();
         let prediction = inference_service.predict(request).await.unwrap();
-        
+
         assert!(prediction.confidence > 0.0);
     }
 }
@@ -1099,7 +1099,7 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     libssl-dev \
     && rm -rf /var/lib/apt/lists/*
-    
+
 WORKDIR /app
 COPY --from=builder /app/target/release/ml-inference-service .
 COPY models/ models/

@@ -143,19 +143,19 @@ impl GameClient {
         loop {
             // 处理输入
             let input = self.input_handler.poll_input();
-            
+
             // 发送输入到服务器
             self.connection.send_input(input).await?;
-            
+
             // 接收服务器更新
             let update = self.connection.receive_update().await?;
-            
+
             // 更新本地状态
             self.game_state.apply_update(update);
-            
+
             // 渲染
             self.renderer.render(&self.game_state);
-            
+
             // 控制帧率
             tokio::time::sleep(Duration::from_millis(16)).await; // ~60 FPS
         }
@@ -174,16 +174,16 @@ impl GameServer {
         loop {
             // 处理客户端输入
             self.process_client_inputs().await?;
-            
+
             // 更新游戏逻辑
             self.update_game_logic();
-            
+
             // 物理模拟
             self.physics_engine.step();
-            
+
             // 发送状态更新给所有客户端
             self.broadcast_state_updates().await?;
-            
+
             // 控制更新频率
             tokio::time::sleep(Duration::from_millis(16)).await;
         }
@@ -416,22 +416,22 @@ impl Renderer {
             backends: wgpu::Backends::all(),
             ..Default::default()
         });
-        
+
         let surface = unsafe { instance.create_surface(window) }?;
         let adapter = instance.request_adapter(&wgpu::RequestAdapterOptions {
             power_preference: wgpu::PowerPreference::default(),
             compatible_surface: Some(&surface),
             force_fallback_adapter: false,
         }).await.ok_or(RenderError::NoAdapter)?;
-        
+
         let (device, queue) = adapter.request_device(
             &wgpu::DeviceDescriptor::default(),
             None,
         ).await?;
-        
+
         // 创建渲染管线
         let render_pipeline = self.create_render_pipeline(&device);
-        
+
         Ok(Self {
             device,
             queue,
@@ -441,16 +441,16 @@ impl Renderer {
             index_buffer,
         })
     }
-    
+
     pub fn render(&self, game_state: &GameState) -> Result<(), RenderError> {
         // 渲染逻辑
         let frame = self.surface.get_current_texture()?;
         let view = frame.texture.create_view(&wgpu::TextureViewDescriptor::default());
-        
+
         let mut encoder = self.device.create_command_encoder(&wgpu::CommandEncoderDescriptor {
             label: Some("Render Encoder"),
         });
-        
+
         {
             let mut render_pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
                 label: Some("Render Pass"),
@@ -464,16 +464,16 @@ impl Renderer {
                 })],
                 depth_stencil_attachment: None,
             });
-            
+
             render_pass.set_pipeline(&self.render_pipeline);
             render_pass.set_vertex_buffer(0, self.vertex_buffer.slice(..));
             render_pass.set_index_buffer(self.index_buffer.slice(..), wgpu::IndexFormat::Uint16);
             render_pass.draw_indexed(0..6, 0, 0..1);
         }
-        
+
         self.queue.submit(std::iter::once(encoder.finish()));
         frame.present();
-        
+
         Ok(())
     }
 }
@@ -495,7 +495,7 @@ impl AudioManager {
         let device = rodio::default_output_device()
             .ok_or(AudioError::NoDevice)?;
         let sink = rodio::Sink::new(&device);
-        
+
         Ok(Self {
             device,
             sink,
@@ -503,7 +503,7 @@ impl AudioManager {
             music: None,
         })
     }
-    
+
     pub fn play_sound(&mut self, sound_id: &SoundId) -> Result<(), AudioError> {
         if let Some(sound) = self.sounds.get(sound_id) {
             let source = rodio::Decoder::new(std::io::Cursor::new(&sound.data))?;
@@ -511,7 +511,7 @@ impl AudioManager {
         }
         Ok(())
     }
-    
+
     pub fn play_music(&mut self, music: Music) -> Result<(), AudioError> {
         self.stop_music();
         let source = rodio::Decoder::new(std::io::Cursor::new(&music.data))?;
@@ -519,7 +519,7 @@ impl AudioManager {
         self.music = Some(music);
         Ok(())
     }
-    
+
     pub fn stop_music(&mut self) {
         self.sink.stop();
         self.music = None;
@@ -541,14 +541,14 @@ impl PhysicsEngine {
     pub fn new() -> Self {
         let gravity = rapier3d::Vector::new(0.0, -9.81, 0.0);
         let world = rapier3d::DynamicsWorld::new(gravity);
-        
+
         Self {
             world,
             rigid_bodies: HashMap::new(),
             colliders: HashMap::new(),
         }
     }
-    
+
     pub fn add_rigid_body(
         &mut self,
         entity_id: EntityId,
@@ -558,11 +558,11 @@ impl PhysicsEngine {
         let rigid_body = rapier3d::RigidBodyBuilder::dynamic()
             .translation(rapier3d::Vector::new(position.x, position.y, position.z))
             .build();
-        
+
         let handle = self.world.insert_rigid_body(rigid_body);
         self.rigid_bodies.insert(entity_id, handle);
     }
-    
+
     pub fn add_collider(
         &mut self,
         entity_id: EntityId,
@@ -574,11 +574,11 @@ impl PhysicsEngine {
             self.colliders.insert(entity_id, handle);
         }
     }
-    
+
     pub fn step(&mut self, delta_time: f32) {
         self.world.step();
     }
-    
+
     pub fn get_position(&self, entity_id: &EntityId) -> Option<Vector3<f32>> {
         self.rigid_bodies.get(entity_id).and_then(|handle| {
             self.world.rigid_body(*handle).map(|body| {
@@ -606,23 +606,23 @@ impl<T> ObjectPool<T> {
     pub fn new(capacity: usize, factory: impl Fn() -> T + 'static) -> Self {
         let mut objects = Vec::with_capacity(capacity);
         let mut available = Vec::with_capacity(capacity);
-        
+
         for i in 0..capacity {
             objects.push(factory());
             available.push(i);
         }
-        
+
         Self {
             objects,
             available,
             factory: Box::new(factory),
         }
     }
-    
+
     pub fn acquire(&mut self) -> Option<&mut T> {
         self.available.pop().map(|index| &mut self.objects[index])
     }
-    
+
     pub fn release(&mut self, index: usize) {
         self.available.push(index);
     }
@@ -641,17 +641,17 @@ impl SpatialHashGrid {
             grid: HashMap::new(),
         }
     }
-    
+
     pub fn insert(&mut self, entity_id: EntityId, position: Vector2<f32>) {
         let cell = self.get_cell(position);
         self.grid.entry(cell).or_insert_with(Vec::new).push(entity_id);
     }
-    
+
     pub fn query_nearby(&self, position: Vector2<f32>, radius: f32) -> Vec<EntityId> {
         let mut result = Vec::new();
         let cell_radius = (radius / self.cell_size).ceil() as i32;
         let center_cell = self.get_cell(position);
-        
+
         for dx in -cell_radius..=cell_radius {
             for dy in -cell_radius..=cell_radius {
                 let cell = (center_cell.0 + dx, center_cell.1 + dy);
@@ -660,10 +660,10 @@ impl SpatialHashGrid {
                 }
             }
         }
-        
+
         result
     }
-    
+
     fn get_cell(&self, position: Vector2<f32>) -> (i32, i32) {
         (
             (position.x / self.cell_size).floor() as i32,
@@ -689,21 +689,21 @@ impl BatchRenderer {
             max_vertices_per_batch,
         }
     }
-    
+
     pub fn add_sprite(&mut self, sprite: &Sprite, material: MaterialId) {
         let batch = self.batches.entry(material).or_insert_with(|| {
             RenderBatch::new(self.max_vertices_per_batch)
         });
-        
+
         if batch.is_full() {
             self.flush_batch(material);
             let new_batch = RenderBatch::new(self.max_vertices_per_batch);
             self.batches.insert(material, new_batch);
         }
-        
+
         self.batches.get_mut(&material).unwrap().add_sprite(sprite);
     }
-    
+
     pub fn render_all(&mut self, renderer: &mut Renderer) {
         for (material, batch) in self.batches.iter() {
             if !batch.is_empty() {
@@ -723,7 +723,7 @@ impl FrustumCuller {
         let planes = Self::extract_planes(view_projection);
         Self { planes }
     }
-    
+
     pub fn is_visible(&self, aabb: &AABB) -> bool {
         for plane in &self.planes {
             if plane.distance_to_point(aabb.center()) < -aabb.radius() {
@@ -732,7 +732,7 @@ impl FrustumCuller {
         }
         true
     }
-    
+
     fn extract_planes(view_projection: Matrix4<f32>) -> [Plane; 6] {
         // 从视图投影矩阵提取视锥平面
         // 实现细节...
@@ -761,24 +761,24 @@ impl ClientPrediction {
             max_buffer_size,
         }
     }
-    
+
     pub fn add_input(&mut self, input: PlayerInput) {
         self.input_buffer.push_back(input);
         if self.input_buffer.len() > self.max_buffer_size {
             self.input_buffer.pop_front();
         }
     }
-    
+
     pub fn predict_state(&self, current_state: &GameState) -> GameState {
         let mut predicted_state = current_state.clone();
-        
+
         for input in &self.input_buffer {
             predicted_state = self.apply_input(&predicted_state, input);
         }
-        
+
         predicted_state
     }
-    
+
     pub fn reconcile(&mut self, server_state: &GameState) {
         // 如果预测状态与服务器状态差异过大，进行回滚
         if let Some(last_predicted) = self.state_buffer.back() {
@@ -809,13 +809,13 @@ impl Interpolation {
             interpolation_factor: 0.0,
         }
     }
-    
+
     pub fn update(&mut self, new_state: GameState) {
         self.previous_state = self.current_state.take();
         self.current_state = Some(new_state);
         self.interpolation_factor = 0.0;
     }
-    
+
     pub fn interpolate(&mut self, alpha: f32) -> Option<GameState> {
         if let (Some(prev), Some(curr)) = (&self.previous_state, &self.current_state) {
             Some(self.interpolate_states(prev, curr, alpha))
@@ -823,7 +823,7 @@ impl Interpolation {
             self.current_state.clone()
         }
     }
-    
+
     fn interpolate_states(&self, prev: &GameState, curr: &GameState, alpha: f32) -> GameState {
         // 在状态之间进行插值
         // 实现细节...
@@ -840,40 +840,40 @@ impl Interpolation {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_physics_collision() {
         let mut physics = PhysicsEngine::new();
-        
+
         // 创建两个碰撞体
         physics.add_rigid_body(EntityId(1), Vector3::new(0.0, 0.0, 0.0), 1.0);
         physics.add_rigid_body(EntityId(2), Vector3::new(1.0, 0.0, 0.0), 1.0);
-        
+
         physics.add_collider(EntityId(1), rapier3d::ColliderShape::ball(0.5));
         physics.add_collider(EntityId(2), rapier3d::ColliderShape::ball(0.5));
-        
+
         // 模拟物理
         physics.step(0.016);
-        
+
         // 验证碰撞
         let pos1 = physics.get_position(&EntityId(1)).unwrap();
         let pos2 = physics.get_position(&EntityId(2)).unwrap();
-        
+
         assert!(pos1.distance(pos2) > 0.0);
     }
-    
+
     #[test]
     fn test_input_handling() {
         let mut input_handler = InputHandler::new();
-        
+
         let input = PlayerInput {
             movement: Vector2::new(1.0, 0.0),
             actions: vec![Action::Jump],
             timestamp: 1000,
         };
-        
+
         input_handler.process_input(input);
-        
+
         assert_eq!(input_handler.get_movement(), Vector2::new(1.0, 0.0));
         assert!(input_handler.is_action_pressed(Action::Jump));
     }
@@ -887,26 +887,26 @@ mod tests {
 mod performance_tests {
     use super::*;
     use std::time::Instant;
-    
+
     #[test]
     fn test_render_performance() {
         let mut renderer = Renderer::new(&create_test_window()).unwrap();
         let game_state = create_test_game_state(1000); // 1000个实体
-        
+
         let start = Instant::now();
         for _ in 0..100 {
             renderer.render(&game_state).unwrap();
         }
         let duration = start.elapsed();
-        
+
         // 确保渲染100帧不超过1秒
         assert!(duration.as_secs_f32() < 1.0);
     }
-    
+
     #[test]
     fn test_physics_performance() {
         let mut physics = PhysicsEngine::new();
-        
+
         // 创建1000个物理对象
         for i in 0..1000 {
             physics.add_rigid_body(
@@ -915,13 +915,13 @@ mod performance_tests {
                 1.0,
             );
         }
-        
+
         let start = Instant::now();
         for _ in 0..1000 {
             physics.step(0.016);
         }
         let duration = start.elapsed();
-        
+
         // 确保1000步物理模拟不超过100ms
         assert!(duration.as_millis() < 100);
     }
@@ -963,7 +963,7 @@ criterion = "0.5"
 #[cfg(target_os = "windows")]
 mod platform {
     use windows::Win32::Foundation::*;
-    
+
     pub fn get_system_info() -> SystemInfo {
         // Windows特定实现
     }

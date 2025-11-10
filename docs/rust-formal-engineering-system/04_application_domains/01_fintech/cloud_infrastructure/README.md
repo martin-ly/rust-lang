@@ -78,7 +78,7 @@ impl EventBus {
         let (sender, receiver) = mpsc::channel(1000);
         Self { sender, receiver }
     }
-    
+
     pub async fn publish(&self, event: CloudEvent) -> Result<(), Box<dyn std::error::Error>> {
         self.sender.send(event).await?;
         Ok(())
@@ -180,12 +180,12 @@ impl DistributedKVStore {
     pub async fn put(&self, key: String, value: Vec<u8>) -> Result<(), StorageError> {
         let mut data = self.data.write().await;
         data.insert(key, value);
-        
+
         // 异步复制到其他节点
         self.replicate_to_nodes(key, value).await?;
         Ok(())
     }
-    
+
     pub async fn get(&self, key: &str) -> Result<Option<Vec<u8>>, StorageError> {
         let data = self.data.read().await;
         Ok(data.get(key).cloned())
@@ -218,7 +218,7 @@ impl ConfigDatabase {
         let pool = PgPool::connect(database_url).await?;
         Ok(Self { pool })
     }
-    
+
     pub async fn get_config(&self, key: &str, env: &str) -> Result<Option<ConfigEntry>, sqlx::Error> {
         let row = sqlx::query!(
             "SELECT * FROM configurations WHERE key = $1 AND environment = $2 ORDER BY version DESC LIMIT 1",
@@ -227,7 +227,7 @@ impl ConfigDatabase {
         )
         .fetch_optional(&self.pool)
         .await?;
-        
+
         Ok(row.map(|r| ConfigEntry {
             id: r.id,
             key: r.key,
@@ -265,22 +265,22 @@ impl DeploymentManager {
     pub async fn deploy_service(&self, service: &ServiceDefinition) -> Result<DeploymentResult, DeploymentError> {
         // 1. 验证服务配置
         self.validate_service_config(service).await?;
-        
+
         // 2. 构建容器镜像
         let image = self.build_container_image(service).await?;
-        
+
         // 3. 推送镜像到仓库
         self.push_image(&image).await?;
-        
+
         // 4. 创建Kubernetes资源
         let deployment = self.create_kubernetes_deployment(service, &image).await?;
-        
+
         // 5. 等待部署完成
         self.wait_for_deployment(&deployment).await?;
-        
+
         // 6. 注册服务
         self.register_service(service).await?;
-        
+
         Ok(DeploymentResult {
             deployment_id: deployment.metadata.name.clone(),
             status: DeploymentStatus::Success,
@@ -302,10 +302,10 @@ impl AutoScaler {
     pub async fn check_and_scale(&self) -> Result<(), ScalingError> {
         // 1. 收集指标
         let metrics = self.collect_metrics().await?;
-        
+
         // 2. 评估是否需要扩缩容
         let scaling_decision = self.evaluate_scaling_decision(&metrics).await?;
-        
+
         // 3. 执行扩缩容
         match scaling_decision {
             ScalingDecision::ScaleUp(replicas) => {
@@ -318,7 +318,7 @@ impl AutoScaler {
                 // 无需操作
             }
         }
-        
+
         Ok(())
     }
 }
@@ -352,7 +352,7 @@ impl ApiGateway {
         let router = Router::new()
             .route("/api/*path", get(Self::handle_request))
             .route("/api/*path", post(Self::handle_request));
-            
+
         Self {
             router,
             service_registry: Arc::new(ServiceRegistry::new()),
@@ -360,23 +360,23 @@ impl ApiGateway {
             auth_service: Arc::new(AuthService::new()),
         }
     }
-    
+
     async fn handle_request(
         State(state): State<Arc<Self>>,
         request: Request<axum::body::Body>,
     ) -> Result<Response, StatusCode> {
         // 1. 认证和授权
         let user = state.auth_service.authenticate(&request).await?;
-        
+
         // 2. 速率限制检查
         state.rate_limiter.check_limit(&user).await?;
-        
+
         // 3. 服务发现
         let target_service = state.service_registry.discover_service(&request).await?;
-        
+
         // 4. 请求转发
         let response = state.forward_request(request, target_service).await?;
-        
+
         Ok(response)
     }
 }
@@ -397,35 +397,35 @@ pub struct ServiceMeshProxy {
 impl ServiceMeshProxy {
     pub async fn new(addr: &str) -> Result<Self, std::io::Error> {
         let listener = TcpListener::bind(addr).await?;
-        
+
         Ok(Self {
             listener,
             routing_table: Arc::new(RwLock::new(HashMap::new())),
             circuit_breaker: Arc::new(CircuitBreaker::new()),
         })
     }
-    
+
     pub async fn run(&self) -> Result<(), std::io::Error> {
         loop {
             let (mut socket, addr) = self.listener.accept().await?;
-            
+
             let routing_table = self.routing_table.clone();
             let circuit_breaker = self.circuit_breaker.clone();
-            
+
             tokio::spawn(async move {
                 let mut buffer = [0; 1024];
-                
+
                 loop {
                     let n = match socket.read(&mut buffer).await {
                         Ok(n) if n == 0 => return,
                         Ok(n) => n,
                         Err(_) => return,
                     };
-                    
+
                     // 解析请求并路由
                     let request = String::from_utf8_lossy(&buffer[0..n]);
                     let target = Self::route_request(&request, &routing_table).await;
-                    
+
                     // 检查熔断器状态
                     if !circuit_breaker.is_open(&target).await {
                         // 转发请求
@@ -466,11 +466,11 @@ impl MetricsCollector {
         let request_counter = Counter::new("http_requests_total", "Total HTTP requests").unwrap();
         let response_time = Histogram::new("http_request_duration_seconds", "HTTP request duration").unwrap();
         let error_counter = Counter::new("http_errors_total", "Total HTTP errors").unwrap();
-        
+
         registry.register(Box::new(request_counter.clone())).unwrap();
         registry.register(Box::new(response_time.clone())).unwrap();
         registry.register(Box::new(error_counter.clone())).unwrap();
-        
+
         Self {
             registry: Arc::new(registry),
             request_counter,
@@ -478,15 +478,15 @@ impl MetricsCollector {
             error_counter,
         }
     }
-    
+
     pub fn record_request(&self) {
         self.request_counter.inc();
     }
-    
+
     pub fn record_response_time(&self, duration: f64) {
         self.response_time.observe(duration);
     }
-    
+
     pub fn record_error(&self) {
         self.error_counter.inc();
     }
@@ -508,7 +508,7 @@ impl LogAggregator {
         let client = ElasticsearchClient::new(elastic_url)?;
         Ok(Self { elastic_client: client })
     }
-    
+
     pub async fn send_log(&self, log_entry: LogEntry) -> Result<(), Box<dyn std::error::Error>> {
         self.elastic_client.index_log(&log_entry).await?;
         Ok(())
@@ -613,19 +613,19 @@ impl SecretManager {
             .plaintext(secret.as_bytes())
             .send()
             .await?;
-            
+
         Ok(base64::encode(encrypted.ciphertext_blob().unwrap()))
     }
-    
+
     pub async fn decrypt_secret(&self, encrypted_secret: &str) -> Result<String, Box<dyn std::error::Error>> {
         let decoded = base64::decode(encrypted_secret)?;
-        
+
         let decrypted = self.kms_client
             .decrypt()
             .ciphertext_blob(decoded)
             .send()
             .await?;
-            
+
         Ok(String::from_utf8(decrypted.plaintext().unwrap().to_vec())?)
     }
 }
@@ -651,18 +651,18 @@ impl MemoryPool {
         for _ in 0..initial_capacity {
             pool.push(Vec::with_capacity(buffer_size));
         }
-        
+
         Self {
             pool: Arc::new(Mutex::new(pool)),
             buffer_size,
         }
     }
-    
+
     pub async fn acquire(&self) -> Option<Vec<u8>> {
         let mut pool = self.pool.lock().await;
         pool.pop()
     }
-    
+
     pub async fn release(&self, mut buffer: Vec<u8>) {
         buffer.clear();
         if buffer.capacity() == self.buffer_size {
@@ -691,10 +691,10 @@ impl ConnectionPool {
             connections: Arc::new(Mutex::new(Vec::new())),
         }
     }
-    
+
     pub async fn get_connection(&self) -> Result<PooledConnection, PoolError> {
         let _permit = self.semaphore.acquire().await?;
-        
+
         let mut connections = self.connections.lock().await;
         if let Some(conn) = connections.pop() {
             Ok(PooledConnection {

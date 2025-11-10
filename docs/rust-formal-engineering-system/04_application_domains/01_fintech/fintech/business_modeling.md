@@ -69,26 +69,26 @@ impl Account {
         if self.status != AccountStatus::Active {
             return false;
         }
-        
+
         if amount.amount > self.limits.single_transaction_limit.amount {
             return false;
         }
-        
+
         if self.balance.amount + self.limits.overdraft_limit.amount < amount.amount {
             return false;
         }
-        
+
         true
     }
-    
+
     pub fn transfer(&mut self, amount: &Money) -> Result<(), AccountError> {
         if !self.can_transfer(amount) {
             return Err(AccountError::TransferNotAllowed);
         }
-        
+
         self.balance.amount -= amount.amount;
         self.updated_at = Utc::now();
-        
+
         Ok(())
     }
 }
@@ -141,21 +141,21 @@ impl Payment {
             metadata: PaymentMetadata::default(),
         }
     }
-    
+
     pub fn process(&mut self) -> Result<(), PaymentError> {
         if self.status != PaymentStatus::Pending {
             return Err(PaymentError::InvalidStatus);
         }
-        
+
         self.status = PaymentStatus::Processing;
         Ok(())
     }
-    
+
     pub fn complete(&mut self) {
         self.status = PaymentStatus::Completed;
         self.processed_at = Some(Utc::now());
     }
-    
+
     pub fn fail(&mut self, reason: String) {
         self.status = PaymentStatus::Failed;
         self.failed_at = Some(Utc::now());
@@ -206,13 +206,13 @@ impl Trade {
         let total_fees: Decimal = self.fees.iter()
             .map(|fee| fee.amount.amount)
             .sum();
-        
+
         Money {
             amount: trade_value + total_fees,
             currency: self.price.currency,
         }
     }
-    
+
     pub fn can_execute(&self, current_price: &Money) -> bool {
         match self.order_type {
             OrderType::Market => true,
@@ -240,23 +240,23 @@ impl Money {
     pub fn new(amount: Decimal, currency: Currency) -> Self {
         Self { amount, currency }
     }
-    
+
     pub fn add(&self, other: &Money) -> Result<Money, MoneyError> {
         if self.currency != other.currency {
             return Err(MoneyError::CurrencyMismatch);
         }
-        
+
         Ok(Money {
             amount: self.amount + other.amount,
             currency: self.currency.clone(),
         })
     }
-    
+
     pub fn subtract(&self, other: &Money) -> Result<Money, MoneyError> {
         if self.currency != other.currency {
             return Err(MoneyError::CurrencyMismatch);
         }
-        
+
         Ok(Money {
             amount: self.amount - other.amount,
             currency: self.currency.clone(),
@@ -271,7 +271,7 @@ impl AccountId {
     pub fn new(id: String) -> Self {
         Self(id)
     }
-    
+
     pub fn generate() -> Self {
         Self(uuid::Uuid::new_v4().to_string())
     }
@@ -312,15 +312,15 @@ impl RiskAssessmentService {
     ) -> Result<RiskAssessment, RiskError> {
         let mut risk_score = 0.0;
         let mut risk_factors = Vec::new();
-        
+
         for rule in &self.risk_rules {
             let (score, factors) = rule.evaluate(payment, customer).await?;
             risk_score += score;
             risk_factors.extend(factors);
         }
-        
+
         let risk_level = self.calculate_risk_level(risk_score);
-        
+
         Ok(RiskAssessment {
             risk_score,
             risk_level,
@@ -328,7 +328,7 @@ impl RiskAssessmentService {
             timestamp: Utc::now(),
         })
     }
-    
+
     fn calculate_risk_level(&self, score: f64) -> RiskLevel {
         match score {
             s if s < 0.3 => RiskLevel::Low,
@@ -350,18 +350,18 @@ impl ComplianceService {
         customer: &Customer,
     ) -> Result<ComplianceResult, ComplianceError> {
         let mut violations = Vec::new();
-        
+
         for rule in &self.compliance_rules {
             if let Some(violation) = rule.check(transaction, customer).await? {
                 violations.push(violation);
             }
         }
-        
+
         let is_compliant = violations.is_empty();
-        
+
         // 记录审计日志
         self.audit_logger.log_compliance_check(transaction, &violations).await?;
-        
+
         Ok(ComplianceResult {
             is_compliant,
             violations,
@@ -534,7 +534,7 @@ impl AccountRepository for PostgresAccountRepository {
         let query = sqlx::query!(
             r#"
             INSERT INTO accounts (
-                id, account_number, customer_id, account_type, balance_amount, 
+                id, account_number, customer_id, account_type, balance_amount,
                 balance_currency, status, daily_transfer_limit, monthly_transfer_limit,
                 single_transaction_limit, overdraft_limit, created_at, updated_at, version
             ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
@@ -560,11 +560,11 @@ impl AccountRepository for PostgresAccountRepository {
             account.updated_at,
             account.version
         );
-        
+
         query.execute(&self.pool).await?;
         Ok(())
     }
-    
+
     async fn find_by_id(&self, id: &AccountId) -> Result<Option<Account>, RepositoryError> {
         let row = sqlx::query!(
             r#"
@@ -574,7 +574,7 @@ impl AccountRepository for PostgresAccountRepository {
         )
         .fetch_optional(&self.pool)
         .await?;
-        
+
         if let Some(row) = row {
             let account = Account {
                 id: AccountId::new(row.id),
@@ -599,7 +599,7 @@ impl AccountRepository for PostgresAccountRepository {
             Ok(None)
         }
     }
-    
+
     async fn find_by_customer_id(&self, customer_id: &CustomerId) -> Result<Vec<Account>, RepositoryError> {
         let rows = sqlx::query!(
             r#"
@@ -609,7 +609,7 @@ impl AccountRepository for PostgresAccountRepository {
         )
         .fetch_all(&self.pool)
         .await?;
-        
+
         let accounts = rows.into_iter()
             .map(|row| {
                 Account {
@@ -632,7 +632,7 @@ impl AccountRepository for PostgresAccountRepository {
                 }
             })
             .collect::<Result<Vec<Account>, RepositoryError>>()?;
-        
+
         Ok(accounts)
     }
 }
@@ -723,24 +723,24 @@ impl PaymentProcessingWorkflow {
         request: PaymentRequest,
     ) -> Result<PaymentResult, WorkflowError> {
         let start_time = Instant::now();
-        
+
         // 1. 验证请求
         let validated_request = self.validate_request(&request).await?;
-        
+
         // 2. 检查账户状态
         let from_account = self.account_service.get_account(&validated_request.from_account).await?;
         let to_account = self.account_service.get_account(&validated_request.to_account).await?;
-        
+
         if !from_account.can_transfer(&validated_request.amount) {
             return Err(WorkflowError::InsufficientFunds);
         }
-        
+
         // 3. 风险评估
         let risk_assessment = self.risk_service.assess_payment_risk(
             &validated_request,
             &from_account,
         ).await?;
-        
+
         // 4. 根据风险等级决定处理方式
         let payment_result = match risk_assessment.risk_level {
             RiskLevel::Low => {
@@ -753,20 +753,20 @@ impl PaymentProcessingWorkflow {
                 return Err(WorkflowError::HighRiskTransaction);
             }
         };
-        
+
         // 5. 记录审计日志
         self.audit_logger.log_payment_processing(
             &request,
             &payment_result,
             start_time.elapsed(),
         ).await?;
-        
+
         // 6. 发送通知
         self.notification_service.send_payment_notification(&payment_result).await?;
-        
+
         Ok(payment_result)
     }
-    
+
     async fn process_low_risk_payment(
         &self,
         request: PaymentRequest,
@@ -776,11 +776,11 @@ impl PaymentProcessingWorkflow {
         // 自动处理低风险支付
         from_account.transfer(&request.amount)?;
         to_account.receive(&request.amount)?;
-        
+
         // 保存账户状态
         self.account_service.save_account(&from_account).await?;
         self.account_service.save_account(&to_account).await?;
-        
+
         // 创建支付记录
         let payment = Payment::new(
             from_account.id.clone(),
@@ -788,16 +788,16 @@ impl PaymentProcessingWorkflow {
             request.amount,
             request.payment_method,
         );
-        
+
         let payment_id = self.payment_service.save_payment(&payment).await?;
-        
+
         Ok(PaymentResult {
             payment_id,
             status: PaymentStatus::Completed,
             processing_time: Duration::from_millis(100),
         })
     }
-    
+
     async fn process_medium_risk_payment(
         &self,
         request: PaymentRequest,
@@ -811,12 +811,12 @@ impl PaymentProcessingWorkflow {
             request.amount,
             request.payment_method,
         );
-        
+
         let payment_id = self.payment_service.save_payment(&payment).await?;
-        
+
         // 发送人工审核通知
         self.notification_service.send_manual_review_notification(&payment_id).await?;
-        
+
         Ok(PaymentResult {
             payment_id,
             status: PaymentStatus::PendingReview,
@@ -847,13 +847,13 @@ impl BusinessRule for TransferLimitRule {
     async fn evaluate(&self, context: &RuleContext) -> Result<RuleResult, RuleError> {
         let account = &context.account;
         let transfer_amount = &context.transfer_amount;
-        
+
         // 检查日限额
         let daily_transfers = self.get_daily_transfers(account.id).await?;
         let daily_total: Money = daily_transfers.iter()
             .map(|t| &t.amount)
             .fold(Money::new(Decimal::ZERO, transfer_amount.currency.clone()), |acc, x| acc.add(x).unwrap());
-        
+
         if daily_total.add(transfer_amount)?.amount > self.max_daily_transfer.amount {
             return Ok(RuleResult::Violation {
                 rule_name: self.name().to_string(),
@@ -861,13 +861,13 @@ impl BusinessRule for TransferLimitRule {
                 severity: ViolationSeverity::High,
             });
         }
-        
+
         // 检查月限额
         let monthly_transfers = self.get_monthly_transfers(account.id).await?;
         let monthly_total: Money = monthly_transfers.iter()
             .map(|t| &t.amount)
             .fold(Money::new(Decimal::ZERO, transfer_amount.currency.clone()), |acc, x| acc.add(x).unwrap());
-        
+
         if monthly_total.add(transfer_amount)?.amount > self.max_monthly_transfer.amount {
             return Ok(RuleResult::Violation {
                 rule_name: self.name().to_string(),
@@ -875,14 +875,14 @@ impl BusinessRule for TransferLimitRule {
                 severity: ViolationSeverity::High,
             });
         }
-        
+
         Ok(RuleResult::Compliant)
     }
-    
+
     fn priority(&self) -> u32 {
         100
     }
-    
+
     fn name(&self) -> &str {
         "TransferLimitRule"
     }
@@ -898,12 +898,12 @@ impl BusinessRule for SuspiciousActivityRule {
     async fn evaluate(&self, context: &RuleContext) -> Result<RuleResult, RuleError> {
         let account = &context.account;
         let transfer_amount = &context.transfer_amount;
-        
+
         // 检查大额转账
         if transfer_amount.amount > self.threshold_amount.amount {
             // 检查最近的活动
             let recent_activity = self.get_recent_activity(account.id, self.time_window).await?;
-            
+
             if recent_activity.len() > 5 {
                 return Ok(RuleResult::Violation {
                     rule_name: self.name().to_string(),
@@ -912,14 +912,14 @@ impl BusinessRule for SuspiciousActivityRule {
                 });
             }
         }
-        
+
         Ok(RuleResult::Compliant)
     }
-    
+
     fn priority(&self) -> u32 {
         200
     }
-    
+
     fn name(&self) -> &str {
         "SuspiciousActivityRule"
     }
@@ -937,19 +937,19 @@ impl BusinessRuleEngine {
     pub fn new() -> Self {
         Self { rules: Vec::new() }
     }
-    
+
     pub fn add_rule(&mut self, rule: Box<dyn BusinessRule>) {
         self.rules.push(rule);
         // 按优先级排序
         self.rules.sort_by(|a, b| a.priority().cmp(&b.priority()));
     }
-    
+
     pub async fn evaluate_rules(&self, context: &RuleContext) -> Result<RuleEvaluationResult, RuleError> {
         let mut violations = Vec::new();
-        
+
         for rule in &self.rules {
             let result = rule.evaluate(context).await?;
-            
+
             match result {
                 RuleResult::Compliant => continue,
                 RuleResult::Violation { rule_name, message, severity } => {
@@ -958,7 +958,7 @@ impl BusinessRuleEngine {
                         message,
                         severity,
                     });
-                    
+
                     // 如果是高严重性违规，立即停止
                     if severity == ViolationSeverity::High {
                         break;
@@ -966,7 +966,7 @@ impl BusinessRuleEngine {
                 }
             }
         }
-        
+
         Ok(RuleEvaluationResult {
             is_compliant: violations.is_empty(),
             violations,
@@ -1042,21 +1042,21 @@ impl EventStore {
         if current_version != expected_version {
             return Err(EventStoreError::ConcurrencyConflict);
         }
-        
+
         // 存储事件
         for (index, event) in events.iter().enumerate() {
             let event_number = expected_version + index as u64 + 1;
             self.event_repository.store_event(aggregate_id, event_number, event).await?;
         }
-        
+
         // 发布事件
         for event in events {
             self.event_publisher.publish(&event).await?;
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn get_events(
         &self,
         aggregate_id: &str,

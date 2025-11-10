@@ -149,22 +149,22 @@ impl EventDrivenHealthcare {
     pub async fn process_event(&self, event: MedicalEvent) -> Result<(), EventError> {
         // 1. 发布事件到事件总线
         self.event_bus.publish(event.clone()).await?;
-        
+
         // 2. 处理事件
         if let Some(handlers) = self.event_handlers.get(&event.event_type) {
             for handler in handlers {
                 handler.handle(&event).await?;
             }
         }
-        
+
         // 3. 检查是否需要告警
         if event.priority == EventPriority::Critical {
             self.alert_system.send_alert(&event).await?;
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn subscribe_to_events(
         &mut self,
         event_type: MedicalEventType,
@@ -400,7 +400,7 @@ impl EncryptedPatientStorage {
             database,
         }
     }
-    
+
     pub async fn store_patient_data(
         &self,
         patient_id: &str,
@@ -408,51 +408,51 @@ impl EncryptedPatientStorage {
     ) -> Result<(), StorageError> {
         // 1. 序列化数据
         let serialized = serde_json::to_vec(data)?;
-        
+
         // 2. 加密数据
         let encrypted_data = self.encrypt_data(&serialized, patient_id)?;
-        
+
         // 3. 存储到数据库
         self.database.store_encrypted_data(patient_id, &encrypted_data).await?;
-        
+
         Ok(())
     }
-    
+
     pub async fn retrieve_patient_data(&self, patient_id: &str) -> Result<PatientData, StorageError> {
         // 1. 从数据库获取加密数据
         let encrypted_data = self.database.get_encrypted_data(patient_id).await?;
-        
+
         // 2. 解密数据
         let decrypted_data = self.decrypt_data(&encrypted_data, patient_id)?;
-        
+
         // 3. 反序列化数据
         let patient_data: PatientData = serde_json::from_slice(&decrypted_data)?;
-        
+
         Ok(patient_data)
     }
-    
+
     fn encrypt_data(&self, data: &[u8], context: &str) -> Result<EncryptedData, CryptoError> {
         // 生成随机密钥
         let mut key_bytes = [0u8; 32];
         self.rng.fill(&mut key_bytes)?;
-        
+
         // 生成随机nonce
         let mut nonce_bytes = [0u8; 12];
         self.rng.fill(&mut nonce_bytes)?;
-        
+
         // 加密数据
         let unbound_key = UnboundKey::new(&aead::CHACHA20_POLY1305, &key_bytes)?;
         let nonce = Nonce::assume_unique_for_key(nonce_bytes);
         let mut sealing_key = SealingKey::new(unbound_key, nonce);
-        
+
         let mut encrypted_data = vec![0; data.len() + aead::CHACHA20_POLY1305.tag_len()];
         encrypted_data[..data.len()].copy_from_slice(data);
-        
+
         sealing_key.seal_in_place_append_tag(aead::Aad::from(context.as_bytes()), &mut encrypted_data)?;
-        
+
         // 加密密钥
         let encrypted_key = self.encrypt_key(&key_bytes)?;
-        
+
         Ok(EncryptedData {
             encrypted_data,
             encrypted_key,
@@ -478,26 +478,26 @@ impl HL7MessageProcessor {
     pub async fn process_message(&self, raw_message: &str) -> Result<ProcessedMessage, HL7Error> {
         // 1. 解析HL7消息
         let message = self.message_parser.parse(raw_message)?;
-        
+
         // 2. 验证消息
         self.message_validator.validate(&message)?;
-        
+
         // 3. 转换消息
         let transformed = self.message_transformer.transform(&message).await?;
-        
+
         Ok(ProcessedMessage {
             original: message,
             transformed,
             processed_at: Utc::now(),
         })
     }
-    
+
     pub async fn create_admission_message(&self, patient: &Patient, encounter: &Encounter) -> Result<String, HL7Error> {
         let mut message = Message::new();
-        
+
         // MSH - Message Header
         message.add_segment("MSH|^~\\&|HIS|HOSPITAL|LIS|LAB|20240101120000||ADT^A01|MSG001|P|2.5");
-        
+
         // PID - Patient Identification
         let pid = format!(
             "PID||{}||^{}^{}||{}|{}|{}",
@@ -509,7 +509,7 @@ impl HL7MessageProcessor {
             patient.demographics.address.street
         );
         message.add_segment(&pid);
-        
+
         // PV1 - Patient Visit
         let pv1 = format!(
             "PV1||{}|{}|||||{}",
@@ -518,7 +518,7 @@ impl HL7MessageProcessor {
             encounter.admitting_provider.id
         );
         message.add_segment(&pv1);
-        
+
         Ok(message.to_string())
     }
 }
@@ -541,16 +541,16 @@ impl DICOMProcessor {
         // 1. 读取DICOM文件
         let dicom_file = File::open(file_path)?;
         let object = dicom_file.read()?;
-        
+
         // 2. 提取元数据
         let metadata = self.metadata_extractor.extract(&object)?;
-        
+
         // 3. 处理图像
         let image = self.image_processor.process(&object)?;
-        
+
         // 4. 存储处理后的图像
         let storage_path = self.storage_manager.store_image(&image, &metadata).await?;
-        
+
         Ok(ProcessedImage {
             image,
             metadata,
@@ -558,13 +558,13 @@ impl DICOMProcessor {
             processed_at: Utc::now(),
         })
     }
-    
+
     pub async fn apply_medical_imaging_ai(&self, image: &ProcessedImage) -> Result<AIAnalysis, AIError> {
         // 使用AI模型分析医学影像
         let model = self.load_ai_model("medical_imaging").await?;
-        
+
         let analysis = model.analyze(&image.image).await?;
-        
+
         Ok(AIAnalysis {
             image_id: image.metadata.image_id.clone(),
             findings: analysis.findings,
@@ -593,31 +593,31 @@ pub struct PatientAdmissionWorkflow {
 impl PatientAdmissionWorkflow {
     pub async fn admit_patient(&self, admission_request: AdmissionRequest) -> Result<AdmissionResult, WorkflowError> {
         let mut workflow_state = WorkflowState::new();
-        
+
         // 1. 验证患者信息
         let patient = self.patient_service.validate_patient(&admission_request.patient_id).await?;
         workflow_state.add_step("patient_validation", StepStatus::Completed);
-        
+
         // 2. 创建入院记录
         let encounter = self.clinical_service.create_encounter(&admission_request).await?;
         workflow_state.add_step("encounter_creation", StepStatus::Completed);
-        
+
         // 3. 分配病房
         let room_assignment = self.clinical_service.assign_room(&encounter, &admission_request.room_preference).await?;
         workflow_state.add_step("room_assignment", StepStatus::Completed);
-        
+
         // 4. 创建护理计划
         let care_plan = self.clinical_service.create_care_plan(&encounter, &admission_request.diagnosis).await?;
         workflow_state.add_step("care_plan_creation", StepStatus::Completed);
-        
+
         // 5. 处理保险授权
         let insurance_auth = self.billing_service.process_insurance_authorization(&encounter).await?;
         workflow_state.add_step("insurance_authorization", StepStatus::Completed);
-        
+
         // 6. 发送通知
         self.notification_service.send_admission_notifications(&encounter, &room_assignment).await?;
         workflow_state.add_step("notifications_sent", StepStatus::Completed);
-        
+
         Ok(AdmissionResult {
             encounter_id: encounter.id,
             room_assignment,
@@ -642,40 +642,40 @@ pub struct MedicationManagementWorkflow {
 impl MedicationManagementWorkflow {
     pub async fn process_medication_order(&self, order: MedicationOrder) -> Result<MedicationResult, WorkflowError> {
         let mut workflow_state = WorkflowState::new();
-        
+
         // 1. 药物相互作用检查
         let interaction_check = self.safety_service.check_drug_interactions(&order).await?;
         if !interaction_check.safe {
             return Err(WorkflowError::DrugInteraction(interaction_check.warnings));
         }
         workflow_state.add_step("interaction_check", StepStatus::Completed);
-        
+
         // 2. 过敏检查
         let allergy_check = self.safety_service.check_allergies(&order).await?;
         if !allergy_check.safe {
             return Err(WorkflowError::AllergyConflict(allergy_check.allergies));
         }
         workflow_state.add_step("allergy_check", StepStatus::Completed);
-        
+
         // 3. 剂量验证
         let dose_verification = self.safety_service.verify_dosage(&order).await?;
         if !dose_verification.appropriate {
             return Err(WorkflowError::InappropriateDosage(dose_verification.reason));
         }
         workflow_state.add_step("dose_verification", StepStatus::Completed);
-        
+
         // 4. 药物准备
         let medication_prep = self.pharmacy_service.prepare_medication(&order).await?;
         workflow_state.add_step("medication_prep", StepStatus::Completed);
-        
+
         // 5. 药物分发
         let dispensing = self.dispensing_service.dispense_medication(&medication_prep).await?;
         workflow_state.add_step("medication_dispensing", StepStatus::Completed);
-        
+
         // 6. 记录给药
         let administration = self.clinical_service.record_administration(&order, &dispensing).await?;
         workflow_state.add_step("administration_recording", StepStatus::Completed);
-        
+
         Ok(MedicationResult {
             order_id: order.id,
             dispensing,
@@ -706,21 +706,21 @@ pub struct PatientMonitoringSystem {
 impl PatientMonitoringSystem {
     pub async fn start_monitoring(&self, patient_id: &str) -> Result<(), MonitoringError> {
         let mut vital_signs_stream = self.vital_signs_monitor.start_monitoring(patient_id).await?;
-        
+
         while let Some(vital_signs) = vital_signs_stream.next().await {
             // 1. 存储生命体征数据
             self.data_storage.store_vital_signs(&vital_signs).await?;
-            
+
             // 2. 检查异常值
             if let Some(alert) = self.alert_engine.check_vital_signs(&vital_signs).await? {
                 // 3. 发送告警
                 self.notification_service.send_alert(&alert).await?;
-                
+
                 // 4. 记录告警
                 self.data_storage.store_alert(&alert).await?;
             }
         }
-        
+
         Ok(())
     }
 }
@@ -733,11 +733,11 @@ pub struct VitalSignsMonitor {
 impl VitalSignsMonitor {
     pub async fn start_monitoring(&self, patient_id: &str) -> Result<impl Stream<Item = VitalSigns>, MonitoringError> {
         let (tx, rx) = broadcast::channel(1000);
-        
+
         if let Some(connection) = self.device_connections.get(patient_id) {
             let tx_clone = tx.clone();
             let processor = self.data_processor.clone();
-            
+
             tokio::spawn(async move {
                 while let Some(raw_data) = connection.receive_data().await {
                     if let Ok(vital_signs) = processor.process_vital_signs(&raw_data).await {
@@ -746,7 +746,7 @@ impl VitalSignsMonitor {
                 }
             });
         }
-        
+
         Ok(rx)
     }
 }
@@ -763,7 +763,7 @@ impl AlertEngine {
                 return Ok(Some(alert));
             }
         }
-        
+
         Ok(None)
     }
 }
@@ -786,23 +786,23 @@ impl MedicalImagingSystem {
     pub async fn analyze_image(&self, image_path: &str, analysis_type: AnalysisType) -> Result<AnalysisResult, ImagingError> {
         // 1. 加载和预处理图像
         let image = self.image_processor.load_and_preprocess(image_path).await?;
-        
+
         // 2. 选择AI模型
         let model = self.ai_models.get(&analysis_type.model_name())
             .ok_or(ImagingError::ModelNotFound)?;
-        
+
         // 3. 执行AI分析
         let ai_result = model.analyze(&image).await?;
-        
+
         // 4. 后处理结果
         let processed_result = self.image_processor.post_process(&ai_result).await?;
-        
+
         // 5. 生成报告
         let report = self.report_generator.generate_report(&processed_result).await?;
-        
+
         // 6. 存储结果
         let storage_path = self.storage_manager.store_analysis_result(&processed_result, &report).await?;
-        
+
         Ok(AnalysisResult {
             image_path: image_path.to_string(),
             analysis_type,
@@ -825,36 +825,36 @@ impl AIModel {
     pub async fn analyze(&self, image: &ImageBuffer<Rgb<u8>, Vec<u8>>) -> Result<AIResult, AIError> {
         // 1. 预处理图像
         let preprocessed = self.preprocessor.preprocess(image).await?;
-        
+
         // 2. 转换为张量
         let tensor = self.image_to_tensor(&preprocessed)?;
         let tensor = tensor.to_device(self.device);
-        
+
         // 3. 模型推理
         let output = self.model.forward(&tensor);
-        
+
         // 4. 后处理输出
         let result = self.postprocessor.postprocess(&output).await?;
-        
+
         Ok(result)
     }
-    
+
     fn image_to_tensor(&self, image: &ProcessedImage) -> Result<Tensor, AIError> {
         // 将图像转换为PyTorch张量
         let height = image.height() as i64;
         let width = image.width() as i64;
         let channels = 3i64;
-        
+
         let mut tensor_data = Vec::new();
         for pixel in image.pixels() {
             tensor_data.push(pixel[0] as f32 / 255.0);
             tensor_data.push(pixel[1] as f32 / 255.0);
             tensor_data.push(pixel[2] as f32 / 255.0);
         }
-        
+
         let tensor = Tensor::of_slice(&tensor_data)
             .reshape(&[1, channels, height, width]);
-        
+
         Ok(tensor)
     }
 }
@@ -889,47 +889,47 @@ impl HealthcareMetrics {
             "patient_admissions_total",
             "Total number of patient admissions"
         ).unwrap();
-        
+
         let patient_discharges = Counter::new(
             "patient_discharges_total",
             "Total number of patient discharges"
         ).unwrap();
-        
+
         let medication_orders = Counter::new(
             "medication_orders_total",
             "Total number of medication orders"
         ).unwrap();
-        
+
         let lab_orders = Counter::new(
             "lab_orders_total",
             "Total number of laboratory orders"
         ).unwrap();
-        
+
         let imaging_orders = Counter::new(
             "imaging_orders_total",
             "Total number of imaging orders"
         ).unwrap();
-        
+
         let response_time = Histogram::new(
             "healthcare_response_duration_seconds",
             "Time to respond to healthcare requests"
         ).unwrap();
-        
+
         let system_uptime = Gauge::new(
             "system_uptime_seconds",
             "System uptime in seconds"
         ).unwrap();
-        
+
         let active_patients = Gauge::new(
             "active_patients",
             "Number of currently active patients"
         ).unwrap();
-        
+
         let critical_alerts = Counter::new(
             "critical_alerts_total",
             "Total number of critical alerts"
         ).unwrap();
-        
+
         Self {
             patient_admissions,
             patient_discharges,
@@ -942,33 +942,33 @@ impl HealthcareMetrics {
             critical_alerts,
         }
     }
-    
+
     pub fn record_admission(&self) {
         self.patient_admissions.inc();
         self.active_patients.inc();
     }
-    
+
     pub fn record_discharge(&self) {
         self.patient_discharges.inc();
         self.active_patients.dec();
     }
-    
+
     pub fn record_medication_order(&self) {
         self.medication_orders.inc();
     }
-    
+
     pub fn record_lab_order(&self) {
         self.lab_orders.inc();
     }
-    
+
     pub fn record_imaging_order(&self) {
         self.imaging_orders.inc();
     }
-    
+
     pub fn record_response_time(&self, duration: f64) {
         self.response_time.observe(duration);
     }
-    
+
     pub fn record_critical_alert(&self) {
         self.critical_alerts.inc();
     }
@@ -991,20 +991,20 @@ impl HealthcareDataBackup {
     pub async fn create_backup(&self, data_type: DataType) -> Result<BackupResult, BackupError> {
         let backup_id = Uuid::new_v4().to_string();
         let timestamp = Utc::now();
-        
+
         // 1. 导出数据
         let data_export = self.export_data(data_type).await?;
-        
+
         // 2. 加密数据
         let encrypted_data = self.encrypt_data(&data_export, &backup_id)?;
-        
+
         // 3. 压缩数据
         let compressed_data = self.compress_data(&encrypted_data)?;
-        
+
         // 4. 上传到S3
         let s3_key = format!("backups/{}/{}.tar.gz", data_type, backup_id);
         self.upload_to_s3(&s3_key, &compressed_data).await?;
-        
+
         // 5. 记录备份元数据
         let backup_metadata = BackupMetadata {
             backup_id: backup_id.clone(),
@@ -1014,37 +1014,37 @@ impl HealthcareDataBackup {
             s3_key,
             checksum: self.calculate_checksum(&compressed_data),
         };
-        
+
         self.store_backup_metadata(&backup_metadata).await?;
-        
+
         Ok(BackupResult {
             backup_id,
             metadata: backup_metadata,
         })
     }
-    
+
     pub async fn restore_backup(&self, backup_id: &str) -> Result<RestoreResult, RestoreError> {
         // 1. 获取备份元数据
         let metadata = self.get_backup_metadata(backup_id).await?;
-        
+
         // 2. 从S3下载数据
         let compressed_data = self.download_from_s3(&metadata.s3_key).await?;
-        
+
         // 3. 验证校验和
         let calculated_checksum = self.calculate_checksum(&compressed_data);
         if calculated_checksum != metadata.checksum {
             return Err(RestoreError::ChecksumMismatch);
         }
-        
+
         // 4. 解压数据
         let encrypted_data = self.decompress_data(&compressed_data)?;
-        
+
         // 5. 解密数据
         let data_export = self.decrypt_data(&encrypted_data, backup_id)?;
-        
+
         // 6. 恢复数据
         self.import_data(&data_export).await?;
-        
+
         Ok(RestoreResult {
             backup_id: backup_id.to_string(),
             restored_at: Utc::now(),
@@ -1072,7 +1072,7 @@ impl HIPAAComplianceChecker {
             security_violations: Vec::new(),
             overall_compliant: true,
         };
-        
+
         // 1. 检查隐私规则
         for rule in &self.privacy_rules {
             if let Some(violation) = rule.check(&system_state).await? {
@@ -1080,7 +1080,7 @@ impl HIPAAComplianceChecker {
                 report.overall_compliant = false;
             }
         }
-        
+
         // 2. 检查安全规则
         for rule in &self.security_rules {
             if let Some(violation) = rule.check(&system_state).await? {
@@ -1088,27 +1088,27 @@ impl HIPAAComplianceChecker {
                 report.overall_compliant = false;
             }
         }
-        
+
         // 3. 记录审计日志
         self.audit_logger.log_compliance_check(&report).await?;
-        
+
         Ok(report)
     }
-    
+
     pub async fn check_data_access(&self, access_request: &DataAccessRequest) -> Result<AccessDecision, AccessError> {
         // 1. 检查最小必要原则
         if !self.check_minimum_necessary(access_request).await? {
             return Ok(AccessDecision::Denied("Exceeds minimum necessary".to_string()));
         }
-        
+
         // 2. 检查授权
         if !self.check_authorization(access_request).await? {
             return Ok(AccessDecision::Denied("Unauthorized access".to_string()));
         }
-        
+
         // 3. 记录访问日志
         self.audit_logger.log_data_access(access_request).await?;
-        
+
         Ok(AccessDecision::Granted)
     }
 }

@@ -65,20 +65,20 @@ pub struct GameRules {
 
 impl GameWorld {
     pub fn can_join(&self, player: &Player) -> bool {
-        self.status == WorldStatus::Active && 
+        self.status == WorldStatus::Active &&
         self.current_players < self.max_players
     }
-    
+
     pub fn add_player(&mut self, player: Player) -> Result<(), WorldError> {
         if !self.can_join(&player) {
             return Err(WorldError::CannotJoin);
         }
-        
+
         self.current_players += 1;
         self.entities.insert(player.id.clone(), Entity::Player(player));
         Ok(())
     }
-    
+
     pub fn remove_player(&mut self, player_id: &PlayerId) {
         if self.entities.remove(player_id).is_some() {
             self.current_players = self.current_players.saturating_sub(1);
@@ -118,7 +118,7 @@ pub struct PlayerStats {
 impl Player {
     pub fn gain_experience(&mut self, amount: u32) {
         self.experience += amount;
-        
+
         // 检查升级
         let new_level = self.calculate_level();
         if new_level > self.level {
@@ -126,20 +126,20 @@ impl Player {
             self.on_level_up();
         }
     }
-    
+
     pub fn take_damage(&mut self, damage: f32) -> bool {
         self.health = (self.health - damage).max(0.0);
         self.health <= 0.0
     }
-    
+
     pub fn heal(&mut self, amount: f32) {
         self.health = (self.health + amount).min(100.0);
     }
-    
+
     fn calculate_level(&self) -> u32 {
         (self.experience / 1000) + 1
     }
-    
+
     fn on_level_up(&mut self) {
         // 升级奖励逻辑
         self.health = 100.0; // 满血复活
@@ -186,7 +186,7 @@ impl Inventory {
                         let space_left = item.max_stack - slot.quantity;
                         let to_add = quantity.min(space_left);
                         slot.quantity += to_add;
-                        
+
                         if to_add == quantity {
                             return Ok(());
                         }
@@ -194,22 +194,22 @@ impl Inventory {
                 }
             }
         }
-        
+
         // 需要新槽位
         if self.items.len() >= self.capacity as usize {
             return Err(InventoryError::Full);
         }
-        
+
         let slot_id = self.find_empty_slot();
         self.items.insert(slot_id, InventorySlot {
             item: Some(item),
             quantity,
             locked: false,
         });
-        
+
         Ok(())
     }
-    
+
     fn find_empty_slot(&self) -> SlotId {
         for i in 0..self.capacity {
             let slot_id = SlotId(i);
@@ -460,11 +460,11 @@ impl PlayerRepository for PostgresPlayerRepository {
             player.created_at,
             player.updated_at
         );
-        
+
         query.execute(&self.pool).await?;
         Ok(())
     }
-    
+
     async fn find_by_id(&self, id: &PlayerId) -> Result<Option<Player>, RepositoryError> {
         let row = sqlx::query!(
             r#"
@@ -474,7 +474,7 @@ impl PlayerRepository for PostgresPlayerRepository {
         )
         .fetch_optional(&self.pool)
         .await?;
-        
+
         if let Some(row) = row {
             let player = Player {
                 id: PlayerId::new(row.id),
@@ -586,27 +586,27 @@ impl GameSessionWorkflow {
         // 1. 获取攻击者和目标
         let attacker = self.player_service.get_player(attacker_id).await?;
         let target = self.world_service.get_entity(target_id).await?;
-        
+
         // 2. 验证攻击条件
         if !self.can_attack(&attacker, &target).await? {
             return Err(WorkflowError::InvalidAttack);
         }
-        
+
         // 3. 计算伤害
         let damage = if let Some(skill_id) = skill_id {
             self.combat_service.calculate_skill_damage(&attacker, skill_id).await?
         } else {
             self.combat_service.calculate_basic_damage(&attacker).await?
         };
-        
+
         // 4. 应用伤害
         let is_dead = self.combat_service.apply_damage(&target, damage).await?;
-        
+
         // 5. 处理结果
         if is_dead {
             self.handle_death(&attacker, &target).await?;
         }
-        
+
         // 6. 同步状态
         self.world_service.broadcast_combat_result(&CombatResult {
             attacker_id: attacker_id.clone(),
@@ -614,7 +614,7 @@ impl GameSessionWorkflow {
             damage,
             is_dead,
         }).await?;
-        
+
         Ok(CombatResult {
             attacker_id: attacker_id.clone(),
             target_id: target_id.clone(),
@@ -622,25 +622,25 @@ impl GameSessionWorkflow {
             is_dead,
         })
     }
-    
+
     async fn handle_death(&self, killer: &Player, victim: &Entity) -> Result<(), WorkflowError> {
         // 分配经验值
         if let Entity::Player(victim_player) = victim {
             let experience = self.calculate_experience_reward(killer, victim_player);
             self.player_service.add_experience(&killer.id, experience).await?;
         }
-        
+
         // 处理掉落物品
         let drops = self.calculate_drops(victim);
         for drop in drops {
             self.world_service.spawn_item(drop).await?;
         }
-        
+
         // 安排重生
         if let Entity::Player(victim_player) = victim {
             self.schedule_respawn(&victim_player.id).await?;
         }
-        
+
         Ok(())
     }
 }
@@ -665,7 +665,7 @@ pub struct LevelRequirementRule {
 impl GameRule for LevelRequirementRule {
     async fn evaluate(&self, context: &GameContext) -> Result<RuleResult, RuleError> {
         let player = &context.player;
-        
+
         if player.level < self.required_level {
             Ok(RuleResult::Violation {
                 rule_name: self.name().to_string(),
@@ -676,11 +676,11 @@ impl GameRule for LevelRequirementRule {
             Ok(RuleResult::Compliant)
         }
     }
-    
+
     fn priority(&self) -> u32 {
         100
     }
-    
+
     fn name(&self) -> &str {
         "LevelRequirementRule"
     }
@@ -695,7 +695,7 @@ impl GameRule for CooldownRule {
     async fn evaluate(&self, context: &GameContext) -> Result<RuleResult, RuleError> {
         let skill = &context.skill;
         let now = Utc::now();
-        
+
         if let Some(cooldown_until) = skill.cooldown_until {
             if now < cooldown_until {
                 let remaining = cooldown_until - now;
@@ -711,11 +711,11 @@ impl GameRule for CooldownRule {
             Ok(RuleResult::Compliant)
         }
     }
-    
+
     fn priority(&self) -> u32 {
         200
     }
-    
+
     fn name(&self) -> &str {
         "CooldownRule"
     }
@@ -789,27 +789,27 @@ impl CombatEventHandler {
     async fn handle_player_attack(&self, event: &PlayerAttackedEvent) -> Result<(), EventError> {
         // 更新战斗统计
         self.player_service.update_combat_stats(&event.attacker_id, &event.target_id).await?;
-        
+
         // 发送战斗通知
         self.notification_service.send_combat_notification(event).await?;
-        
+
         Ok(())
     }
-    
+
     async fn handle_player_death(&self, event: &PlayerDiedEvent) -> Result<(), EventError> {
         // 处理死亡奖励
         if let Some(killer_id) = &event.killer_id {
             self.player_service.add_experience(killer_id, event.experience_dropped).await?;
         }
-        
+
         // 生成掉落物品
         for item in &event.items_dropped {
             self.world_service.spawn_item_at_position(item, &event.position).await?;
         }
-        
+
         // 安排重生
         self.world_service.schedule_respawn(&event.player_id).await?;
-        
+
         Ok(())
     }
 }

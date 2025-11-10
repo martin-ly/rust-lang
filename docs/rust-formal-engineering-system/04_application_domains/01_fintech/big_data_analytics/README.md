@@ -62,17 +62,17 @@ impl LambdaArchitecture {
         // 同时发送到速度层和批处理层
         let speed_future = self.speed_layer.process(event.clone());
         let batch_future = self.batch_layer.process(event);
-        
+
         // 并行处理
         tokio::try_join!(speed_future, batch_future)?;
         Ok(())
     }
-    
+
     pub async fn query(&self, query: Query) -> Result<QueryResult, QueryError> {
         // 合并速度层和批处理层的结果
         let speed_result = self.speed_layer.query(&query).await?;
         let batch_result = self.serving_layer.query(&query).await?;
-        
+
         Ok(QueryResult::merge(speed_result, batch_result))
     }
 }
@@ -91,24 +91,24 @@ impl KappaArchitecture {
     pub async fn process_event(&self, event: DataEvent) -> Result<(), ProcessingError> {
         // 1. 写入事件日志
         self.event_log.append(event.clone()).await?;
-        
+
         // 2. 流处理
         self.stream_processor.process(event).await?;
-        
+
         // 3. 更新物化视图
         self.materialized_views.update(event).await?;
-        
+
         Ok(())
     }
-    
+
     pub async fn replay_events(&self, from_timestamp: DateTime<Utc>) -> Result<(), ProcessingError> {
         let events = self.event_log.read_from(from_timestamp).await?;
-        
+
         for event in events {
             self.stream_processor.process(event).await?;
             self.materialized_views.update(event).await?;
         }
-        
+
         Ok(())
     }
 }
@@ -254,14 +254,14 @@ impl ColumnarStorage {
         for field in schema.fields() {
             columns.insert(field.name().clone(), Vec::new());
         }
-        
+
         Self {
             schema,
             columns,
             row_count: 0,
         }
     }
-    
+
     pub fn insert_batch(&mut self, batch: RecordBatch) -> Result<(), StorageError> {
         for (field, column) in self.schema.fields().iter().zip(batch.columns()) {
             self.columns
@@ -269,18 +269,18 @@ impl ColumnarStorage {
                 .ok_or(StorageError::ColumnNotFound)?
                 .push(column.clone());
         }
-        
+
         self.row_count += batch.num_rows();
         Ok(())
     }
-    
+
     pub fn query_column(&self, column_name: &str) -> Result<Vec<ArrayRef>, StorageError> {
         self.columns
             .get(column_name)
             .cloned()
             .ok_or(StorageError::ColumnNotFound)
     }
-    
+
     pub fn filter(&self, predicate: &str) -> Result<Self, StorageError> {
         // 实现列式过滤逻辑
         todo!()
@@ -305,7 +305,7 @@ impl StreamProcessor {
     pub async fn process_stream(&mut self) -> Result<(), ProcessingError> {
         let mut window_buffer = Vec::new();
         let mut last_window_time = Utc::now();
-        
+
         while let Some(event) = self.input_stream.recv().await {
             // 检查是否需要创建新窗口
             if event.timestamp - last_window_time > self.window_size {
@@ -314,18 +314,18 @@ impl StreamProcessor {
                 window_buffer.clear();
                 last_window_time = event.timestamp;
             }
-            
+
             window_buffer.push(event);
         }
-        
+
         // 处理最后一个窗口
         if !window_buffer.is_empty() {
             self.process_window(&window_buffer).await?;
         }
-        
+
         Ok(())
     }
-    
+
     async fn process_window(&self, events: &[DataEvent]) -> Result<(), ProcessingError> {
         for (key, agg_func) in &self.aggregations {
             let result = agg_func.apply(events)?;
@@ -335,10 +335,10 @@ impl StreamProcessor {
                 window_start: events.first().unwrap().timestamp,
                 window_end: events.last().unwrap().timestamp,
             };
-            
+
             self.output_stream.send(processed_event).await?;
         }
-        
+
         Ok(())
     }
 }
@@ -364,20 +364,20 @@ impl DataLake {
     ) -> Result<(), StorageError> {
         // 1. 确定分区路径
         let partition_path = self.build_partition_path(dataset, partition_keys)?;
-        
+
         // 2. 写入Parquet文件
         let file_path = partition_path.child(format!("{}.parquet", Uuid::new_v4()));
         let mut writer = self.create_parquet_writer(&file_path).await?;
-        
+
         writer.write(&data)?;
         writer.close()?;
-        
+
         // 3. 更新元数据目录
         self.catalog.add_file(dataset, &file_path, &data.schema()).await?;
-        
+
         Ok(())
     }
-    
+
     pub async fn read_dataset(
         &self,
         dataset: &str,
@@ -386,7 +386,7 @@ impl DataLake {
     ) -> Result<Vec<RecordBatch>, StorageError> {
         // 1. 查询元数据目录
         let files = self.catalog.list_files(dataset, filters).await?;
-        
+
         // 2. 并行读取文件
         let mut tasks = Vec::new();
         for file in files {
@@ -396,14 +396,14 @@ impl DataLake {
             });
             tasks.push(task);
         }
-        
+
         // 3. 收集结果
         let mut batches = Vec::new();
         for task in tasks {
             let batch = task.await??;
             batches.push(batch);
         }
-        
+
         Ok(batches)
     }
 }
@@ -426,7 +426,7 @@ pub struct ETLPipeline {
 impl ETLPipeline {
     pub async fn execute(&self, job_id: &str) -> Result<JobResult, PipelineError> {
         let start_time = Utc::now();
-        
+
         // 1. 提取阶段
         let mut extracted_data = Vec::new();
         for extractor in &self.extractors {
@@ -438,18 +438,18 @@ impl ETLPipeline {
                 }
             }
         }
-        
+
         // 2. 转换阶段
         let mut transformed_data = extracted_data;
         for transformer in &self.transformers {
             transformed_data = transformer.transform(transformed_data).await?;
         }
-        
+
         // 3. 加载阶段
         for loader in &self.loaders {
             loader.load(&transformed_data).await?;
         }
-        
+
         let end_time = Utc::now();
         Ok(JobResult {
             job_id: job_id.to_string(),
@@ -486,7 +486,7 @@ impl RealTimeProcessor {
                 });
                 tasks.push(task);
             }
-            
+
             // 收集处理结果
             let mut results = Vec::new();
             for task in tasks {
@@ -502,11 +502,11 @@ impl RealTimeProcessor {
                     }
                 }
             }
-            
+
             // 输出结果
             self.output_sink.send(results).await?;
         }
-        
+
         Ok(())
     }
 }
@@ -532,30 +532,30 @@ impl QueryEngine {
     pub async fn execute_query(&self, sql: &str) -> Result<QueryResult, QueryError> {
         // 1. 解析SQL
         let ast = self.parse_sql(sql)?;
-        
+
         // 2. 语义分析
         let logical_plan = self.analyze_query(&ast)?;
-        
+
         // 3. 查询优化
         let optimized_plan = self.optimizer.optimize(logical_plan)?;
-        
+
         // 4. 执行查询
         let result = self.executor.execute(optimized_plan).await?;
-        
+
         Ok(result)
     }
-    
+
     fn parse_sql(&self, sql: &str) -> Result<Statement, QueryError> {
         use sqlparser::dialect::GenericDialect;
         use sqlparser::parser::Parser;
-        
+
         let dialect = GenericDialect {};
         let ast = Parser::parse_sql(&dialect, sql)?;
-        
+
         if ast.len() != 1 {
             return Err(QueryError::MultipleStatements);
         }
-        
+
         Ok(ast.into_iter().next().unwrap())
     }
 }
@@ -599,10 +599,10 @@ impl VisualizationService {
     ) -> Result<VisualizationResponse, VisualizationError> {
         // 1. 构建查询
         let query = self.build_query(&request)?;
-        
+
         // 2. 执行查询
         let data = self.query_engine.execute_query(&query).await?;
-        
+
         // 3. 渲染图表
         let chart_data = self.chart_renderer.render(
             &request.chart_type,
@@ -610,7 +610,7 @@ impl VisualizationService {
             &request.dimensions,
             &request.measures,
         )?;
-        
+
         Ok(VisualizationResponse {
             data: chart_data,
             metadata: ChartMetadata {
@@ -648,27 +648,27 @@ impl DataProcessingMetrics {
             "data_records_processed_total",
             "Total number of records processed"
         ).unwrap();
-        
+
         let processing_time = Histogram::new(
             "data_processing_duration_seconds",
             "Time spent processing data"
         ).unwrap();
-        
+
         let error_count = Counter::new(
             "data_processing_errors_total",
             "Total number of processing errors"
         ).unwrap();
-        
+
         let queue_size = Gauge::new(
             "data_queue_size",
             "Current size of data processing queue"
         ).unwrap();
-        
+
         let throughput = Gauge::new(
             "data_throughput_records_per_second",
             "Data processing throughput"
         ).unwrap();
-        
+
         Self {
             records_processed,
             processing_time,
@@ -677,20 +677,20 @@ impl DataProcessingMetrics {
             throughput,
         }
     }
-    
+
     pub fn record_processing(&self, record_count: u64, duration: f64) {
         self.records_processed.inc_by(record_count as f64);
         self.processing_time.observe(duration);
     }
-    
+
     pub fn record_error(&self) {
         self.error_count.inc();
     }
-    
+
     pub fn set_queue_size(&self, size: f64) {
         self.queue_size.set(size);
     }
-    
+
     pub fn set_throughput(&self, throughput: f64) {
         self.throughput.set(throughput);
     }
@@ -713,23 +713,23 @@ impl DataQualityMonitor {
             overall_score: 0.0,
             checked_at: Utc::now(),
         };
-        
+
         for rule in &self.rules {
             if rule.dataset == dataset {
                 let check_result = self.evaluate_rule(rule, data).await?;
                 report.checks.push(check_result.clone());
-                
+
                 // 更新指标
                 self.metrics.record_check_result(&check_result);
             }
         }
-        
+
         // 计算总体质量分数
         report.overall_score = self.calculate_overall_score(&report.checks);
-        
+
         Ok(report)
     }
-    
+
     async fn evaluate_rule(&self, rule: &DataQualityRule, data: &RecordBatch) -> Result<QualityCheckResult, QualityError> {
         match rule.rule_type {
             QualityRuleType::Completeness => self.check_completeness(rule, data).await,
@@ -765,7 +765,7 @@ impl MemoryManager {
             buffer_size,
         }
     }
-    
+
     pub async fn acquire_buffer(&self) -> Option<Vec<u8>> {
         let mut pool = self.pool.lock().await;
         pool.pop().or_else(|| {
@@ -776,7 +776,7 @@ impl MemoryManager {
             }
         })
     }
-    
+
     pub async fn release_buffer(&self, mut buffer: Vec<u8>) {
         buffer.clear();
         if buffer.capacity() == self.buffer_size {
@@ -805,13 +805,13 @@ impl ParallelProcessor {
         let thread_pool = rayon::ThreadPoolBuilder::new()
             .num_threads(num_threads)
             .build()?;
-            
+
         Ok(Self {
             thread_pool,
             chunk_size,
         })
     }
-    
+
     pub fn process_parallel<T, R, F>(&self, data: Vec<T>, processor: F) -> Vec<R>
     where
         T: Send + Sync,

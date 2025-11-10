@@ -20,7 +20,7 @@ impl<T> ObjectPool<T> {
     pub fn acquire(&mut self) -> Option<&mut T> {
         self.available.pop().map(|index| &mut self.objects[index])
     }
-    
+
     pub fn release(&mut self, index: usize) {
         self.available.push(index);
     }
@@ -39,21 +39,21 @@ impl MemoryPool {
     pub fn new(chunk_size: usize, initial_capacity: usize) -> Self {
         let layout = Layout::from_size_align(chunk_size, 8).unwrap();
         let mut chunks = Vec::with_capacity(initial_capacity);
-        
+
         for _ in 0..initial_capacity {
             unsafe {
                 let ptr = alloc(layout);
                 chunks.push(ptr);
             }
         }
-        
+
         Self { chunks, chunk_size, layout }
     }
-    
+
     pub fn allocate(&mut self) -> Option<*mut u8> {
         self.chunks.pop()
     }
-    
+
     pub fn deallocate(&mut self, ptr: *mut u8) {
         self.chunks.push(ptr);
     }
@@ -106,10 +106,10 @@ pub async fn async_file_operations() -> Result<(), std::io::Error> {
     let mut file = tokio::fs::File::open("input.txt").await?;
     let mut contents = Vec::new();
     file.read_to_end(&mut contents).await?;
-    
+
     let mut output = tokio::fs::File::create("output.txt").await?;
     output.write_all(&contents).await?;
-    
+
     Ok(())
 }
 
@@ -127,7 +127,7 @@ use tokio::sync::Semaphore;
 
 pub async fn controlled_concurrency(tasks: Vec<Task>) -> Vec<Result<TaskResult, TaskError>> {
     let semaphore = Arc::new(Semaphore::new(10)); // 最多10个并发任务
-    
+
     let tasks: Vec<_> = tasks
         .into_iter()
         .map(|task| {
@@ -138,7 +138,7 @@ pub async fn controlled_concurrency(tasks: Vec<Task>) -> Vec<Result<TaskResult, 
             })
         })
         .collect();
-    
+
     let results = futures::future::join_all(tasks).await;
     results.into_iter().map(|r| r.unwrap()).collect()
 }
@@ -160,11 +160,11 @@ impl LockFreeCounter {
             value: AtomicUsize::new(0),
         }
     }
-    
+
     pub fn increment(&self) {
         self.value.fetch_add(1, Ordering::Relaxed);
     }
-    
+
     pub fn get(&self) -> usize {
         self.value.load(Ordering::Relaxed)
     }
@@ -180,11 +180,11 @@ impl<T> LockFreeQueue<T> {
             queue: ArrayQueue::new(capacity),
         }
     }
-    
+
     pub fn push(&self, item: T) -> Result<(), T> {
         self.queue.push(item)
     }
-    
+
     pub fn pop(&self) -> Option<T> {
         self.queue.pop()
     }
@@ -205,11 +205,11 @@ impl<T> ArrayBasedList<T> {
     pub fn new() -> Self {
         Self { data: Vec::new() }
     }
-    
+
     pub fn push(&mut self, item: T) {
         self.data.push(item);
     }
-    
+
     pub fn get(&self, index: usize) -> Option<&T> {
         self.data.get(index)
     }
@@ -254,11 +254,11 @@ impl<T> FastLookup<T> {
             data: HashMap::new(),
         }
     }
-    
+
     pub fn insert(&mut self, key: String, value: T) {
         self.data.insert(key, value);
     }
-    
+
     pub fn get(&self, key: &str) -> Option<&T> {
         self.data.get(key) // O(1) 而不是 O(n)
     }
@@ -268,7 +268,7 @@ impl<T> FastLookup<T> {
 pub fn binary_search<T: Ord>(data: &[T], target: &T) -> Option<usize> {
     let mut left = 0;
     let mut right = data.len();
-    
+
     while left < right {
         let mid = left + (right - left) / 2;
         match data[mid].cmp(target) {
@@ -277,7 +277,7 @@ pub fn binary_search<T: Ord>(data: &[T], target: &T) -> Option<usize> {
             std::cmp::Ordering::Greater => right = mid,
         }
     }
-    
+
     None
 }
 ```
@@ -292,11 +292,11 @@ use tokio::io::AsyncWriteExt;
 
 pub async fn batch_write(data: &[u8]) -> Result<(), std::io::Error> {
     let mut file = tokio::fs::File::create("output.bin").await?;
-    
+
     // 一次性写入所有数据
     file.write_all(data).await?;
     file.flush().await?;
-    
+
     Ok(())
 }
 
@@ -306,12 +306,12 @@ use std::io::{BufRead, BufReader};
 pub fn buffered_read() -> Result<(), std::io::Error> {
     let file = std::fs::File::open("input.txt")?;
     let reader = BufReader::new(file);
-    
+
     for line in reader.lines() {
         let line = line?;
         // 处理每一行
     }
-    
+
     Ok(())
 }
 
@@ -322,11 +322,11 @@ pub async fn async_buffered_read() -> Result<(), std::io::Error> {
     let file = tokio::fs::File::open("input.txt").await?;
     let reader = BufReader::new(file);
     let mut lines = reader.lines();
-    
+
     while let Some(line) = lines.next_line().await? {
         // 处理每一行
     }
-    
+
     Ok(())
 }
 ```
@@ -347,12 +347,12 @@ use memmap2::Mmap;
 pub fn memory_mapped_file() -> Result<(), std::io::Error> {
     let file = std::fs::File::open("large_file.bin")?;
     let mmap = unsafe { Mmap::map(&file)? };
-    
+
     // 直接访问内存映射的数据，无需拷贝
     for chunk in mmap.chunks(1024) {
         // 处理数据块
     }
-    
+
     Ok(())
 }
 ```
@@ -377,18 +377,18 @@ impl ConnectionPool {
             max_connections,
         }
     }
-    
+
     pub async fn get_connection(&mut self, host: &str) -> Result<TcpStream, std::io::Error> {
         if let Some(connections) = self.connections.get_mut(host) {
             if let Some(connection) = connections.pop() {
                 return Ok(connection);
             }
         }
-        
+
         // 创建新连接
         TcpStream::connect(host).await
     }
-    
+
     pub fn return_connection(&mut self, host: String, connection: TcpStream) {
         let connections = self.connections.entry(host).or_insert_with(Vec::new);
         if connections.len() < self.max_connections {
@@ -454,23 +454,23 @@ impl MultiLevelCache {
                 .build(),
         }
     }
-    
+
     pub async fn get(&self, key: &str) -> Option<String> {
         // 先查L1缓存
         if let Some(value) = self.l1_cache.get(key).await {
             return Some(value);
         }
-        
+
         // L1未命中，查L2缓存
         if let Some(value) = self.l2_cache.get(key).await {
             // 回填L1缓存
             self.l1_cache.insert(key.to_string(), value.clone()).await;
             return Some(value);
         }
-        
+
         None
     }
-    
+
     pub async fn set(&self, key: String, value: String) {
         // 同时更新两级缓存
         self.l1_cache.insert(key.clone(), value.clone()).await;
@@ -505,14 +505,14 @@ impl SmartCache {
                 .build(),
             _ => Cache::builder().build(),
         };
-        
+
         Self { strategy, cache }
     }
-    
+
     pub async fn get(&self, key: &str) -> Option<String> {
         self.cache.get(key).await
     }
-    
+
     pub async fn set(&self, key: String, value: String) {
         self.cache.insert(key, value).await;
     }
@@ -552,7 +552,7 @@ pub fn calculate_sine(x: f64) -> f64 {
     {
         fast_math::sin(x)
     }
-    
+
     #[cfg(not(feature = "fast-math"))]
     {
         x.sin()
@@ -585,7 +585,7 @@ lazy_static! {
         "requests_total",
         "Total number of requests"
     ).unwrap();
-    
+
     static ref REQUEST_DURATION: Histogram = register_histogram!(
         "request_duration_seconds",
         "Request duration in seconds"
@@ -598,19 +598,19 @@ impl PerformanceMonitor {
     pub fn record_request() {
         REQUEST_COUNTER.inc();
     }
-    
+
     pub fn record_duration(duration: Duration) {
         REQUEST_DURATION.observe(duration.as_secs_f64());
     }
-    
-    pub fn measure<T, F>(f: F) -> T 
+
+    pub fn measure<T, F>(f: F) -> T
     where
         F: FnOnce() -> T,
     {
         let start = Instant::now();
         let result = f();
         let duration = start.elapsed();
-        
+
         Self::record_duration(duration);
         result
     }
@@ -626,18 +626,18 @@ use tracing::{info, warn, error, instrument};
 impl MyService {
     pub async fn process_request(&self, request: Request) -> Result<Response, Error> {
         let start = Instant::now();
-        
+
         info!(request_id = %request.id, "Processing request");
-        
+
         let result = self.do_work(request).await;
-        
+
         let duration = start.elapsed();
         info!(
             request_id = %request.id,
             duration_ms = duration.as_millis(),
             "Request completed"
         );
-        
+
         result
     }
 }

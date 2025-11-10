@@ -84,20 +84,20 @@ pub struct DatasetMetadata {
 
 impl Dataset {
     pub fn is_ready_for_training(&self) -> bool {
-        self.status == DatasetStatus::Validated && 
+        self.status == DatasetStatus::Validated &&
         self.record_count > 0 &&
         self.quality_score > 0.7
     }
-    
+
     pub fn validate_schema(&self, data: &DataFrame) -> Result<ValidationResult, ValidationError> {
         let mut errors = Vec::new();
-        
+
         for column in &self.schema.columns {
             if !data.has_column(&column.name) {
                 errors.push(format!("Missing column: {}", column.name));
                 continue;
             }
-            
+
             let data_type = data.get_column_type(&column.name)?;
             if data_type != column.data_type {
                 errors.push(format!(
@@ -106,7 +106,7 @@ impl Dataset {
                 ));
             }
         }
-        
+
         Ok(ValidationResult {
             is_valid: errors.is_empty(),
             errors,
@@ -166,31 +166,31 @@ impl FeatureSet {
     pub fn get_feature_names(&self) -> Vec<String> {
         self.features.iter().map(|f| f.name.clone()).collect()
     }
-    
+
     pub fn get_numeric_features(&self) -> Vec<&Feature> {
         self.features.iter()
             .filter(|f| matches!(f.data_type, DataType::Float | DataType::Integer))
             .collect()
     }
-    
+
     pub fn get_categorical_features(&self) -> Vec<&Feature> {
         self.features.iter()
             .filter(|f| matches!(f.data_type, DataType::String))
             .collect()
     }
-    
+
     pub fn apply_transformations(&self, data: &DataFrame) -> Result<DataFrame, FeatureError> {
         let mut transformed_data = data.clone();
-        
+
         for feature in &self.features {
             if let Some(transformation) = &feature.transformation {
                 transformed_data = self.apply_transformation(&transformed_data, feature, transformation)?;
             }
         }
-        
+
         Ok(transformed_data)
     }
-    
+
     fn apply_transformation(
         &self,
         data: &DataFrame,
@@ -267,28 +267,28 @@ impl Model {
         self.status == ModelStatus::Trained &&
         self.metrics.accuracy.unwrap_or(0.0) > 0.8
     }
-    
+
     pub fn compare_with(&self, other: &Model) -> ModelComparison {
         let mut comparison = ModelComparison::new();
-        
+
         // 比较准确率
         if let (Some(acc1), Some(acc2)) = (self.metrics.accuracy, other.metrics.accuracy) {
             comparison.add_metric("accuracy", acc1, acc2);
         }
-        
+
         // 比较F1分数
         if let (Some(f1_1), Some(f1_2)) = (self.metrics.f1_score, other.metrics.f1_score) {
             comparison.add_metric("f1_score", f1_1, f1_2);
         }
-        
+
         // 比较AUC-ROC
         if let (Some(auc1), Some(auc2)) = (self.metrics.auc_roc, other.metrics.auc_roc) {
             comparison.add_metric("auc_roc", auc1, auc2);
         }
-        
+
         comparison
     }
-    
+
     pub fn get_feature_importance(&self) -> Result<Vec<FeatureImportance>, ModelError> {
         // 实现特征重要性计算
         // 这里需要根据具体的模型类型来实现
@@ -325,13 +325,13 @@ impl FeatureVector {
         }
         Ok(Self { values, feature_names })
     }
-    
+
     pub fn get_feature(&self, name: &str) -> Option<f64> {
         self.feature_names.iter()
             .position(|n| n == name)
             .map(|i| self.values[i])
     }
-    
+
     pub fn to_array(&self) -> Vec<f64> {
         self.values.clone()
     }
@@ -352,7 +352,7 @@ impl PredictionValue {
             .max_by(|(_, a), (_, b)| a.partial_cmp(b).unwrap())
             .map(|(i, _)| i)
             .unwrap_or(0);
-        
+
         Self {
             value: max_prob_idx as f64,
             confidence: probabilities[max_prob_idx],
@@ -360,7 +360,7 @@ impl PredictionValue {
             classes: Some(classes),
         }
     }
-    
+
     pub fn regression(value: f64, confidence: f64) -> Self {
         Self {
             value,
@@ -554,19 +554,19 @@ impl FeatureStore for RedisFeatureStore {
     async fn store_features(&self, features: FeatureSet) -> Result<FeatureSetId, FeatureError> {
         let feature_set_id = FeatureSetId::generate();
         let key = format!("features:{}", feature_set_id);
-        
+
         let serialized = serde_json::to_string(&features)?;
         redis::cmd("SET").arg(&key).arg(serialized).execute(&mut self.connection);
-        
+
         Ok(feature_set_id)
     }
-    
+
     async fn serve_features(&self, request: FeatureRequest) -> Result<FeatureVector, FeatureError> {
         let mut feature_vector = FeatureVector {
             values: Vec::new(),
             feature_names: Vec::new(),
         };
-        
+
         for feature_name in &request.feature_names {
             let key = format!("feature:{}:{}", request.entity_id, feature_name);
             if let Ok(value) = redis::cmd("GET").arg(&key).query::<f64>(&mut self.connection) {
@@ -574,23 +574,23 @@ impl FeatureStore for RedisFeatureStore {
                 feature_vector.feature_names.push(feature_name.clone());
             }
         }
-        
+
         Ok(feature_vector)
     }
-    
+
     async fn batch_store_features(
         &self,
         entity_features: Vec<(String, FeatureVector)>,
     ) -> Result<(), FeatureError> {
         let mut pipeline = redis::pipe();
-        
+
         for (entity_id, features) in entity_features {
             for (feature_name, value) in features.feature_names.iter().zip(features.values.iter()) {
                 let key = format!("feature:{}:{}", entity_id, feature_name);
                 pipeline.set(&key, value);
             }
         }
-        
+
         pipeline.execute(&mut self.connection);
         Ok(())
     }
@@ -663,47 +663,47 @@ impl ModelTrainingWorkflow {
         // 1. 数据准备
         let dataset = self.data_service.load_dataset(&config.dataset_id).await?;
         let feature_set = self.feature_service.create_features(&dataset).await?;
-        
+
         // 2. 数据分割
         let (train_data, test_data) = self.split_data(&dataset, config.test_size).await?;
-        
+
         // 3. 特征工程
         let train_features = self.feature_service.engineer_features(&train_data, &feature_set).await?;
         let test_features = self.feature_service.engineer_features(&test_data, &feature_set).await?;
-        
+
         // 4. 超参数优化
         let best_hyperparameters = self.optimize_hyperparameters(
             &train_features,
             &config.algorithm,
             &config.optimization_config,
         ).await?;
-        
+
         // 5. 模型训练
         let model = self.model_service.create_model(
             &config.algorithm,
             &best_hyperparameters,
         )?;
-        
+
         let trained_model = self.model_service.train_model(
             model,
             &train_features,
             config.epochs,
         ).await?;
-        
+
         // 6. 模型评估
         let metrics = self.evaluation_service.evaluate_model(
             &trained_model,
             &test_features,
         ).await?;
-        
+
         // 7. 检查性能
         if !self.is_performance_acceptable(&metrics, &config.performance_thresholds) {
             return Err(WorkflowError::PerformanceNotMet);
         }
-        
+
         // 8. 保存模型
         let model_id = self.model_service.save_model(&trained_model, &metrics).await?;
-        
+
         Ok(TrainedModel {
             model_id,
             metrics,
@@ -711,7 +711,7 @@ impl ModelTrainingWorkflow {
             feature_set_id: feature_set.id,
         })
     }
-    
+
     async fn optimize_hyperparameters(
         &self,
         data: &DataFrame,
@@ -730,7 +730,7 @@ impl ModelTrainingWorkflow {
             }
         }
     }
-    
+
     async fn grid_search_optimization(
         &self,
         data: &DataFrame,
@@ -739,20 +739,20 @@ impl ModelTrainingWorkflow {
     ) -> Result<Hyperparameters, WorkflowError> {
         let mut best_score = f64::NEG_INFINITY;
         let mut best_params = Hyperparameters::default();
-        
+
         // 生成所有参数组合
         let combinations = self.generate_param_combinations(param_grid);
-        
+
         for params in combinations {
             let model = self.model_service.create_model(algorithm, &params)?;
             let score = self.evaluation_service.cross_validate(model, data, 5).await?;
-            
+
             if score > best_score {
                 best_score = score;
                 best_params = params;
             }
         }
-        
+
         Ok(best_params)
     }
 }
@@ -773,34 +773,34 @@ pub struct InferenceService {
 impl InferenceService {
     pub async fn predict(&self, request: PredictionRequest) -> Result<Prediction, InferenceError> {
         let start_time = Instant::now();
-        
+
         // 1. 检查缓存
         if let Some(cached_prediction) = self.prediction_cache.get(&request).await {
             return Ok(cached_prediction);
         }
-        
+
         // 2. 加载模型
         let model = self.model_loader.load_model(&request.model_id).await?;
-        
+
         // 3. 特征预处理
         let processed_features = self.feature_processor.process(&request.features).await?;
-        
+
         // 4. 执行预测
         let prediction_value = model.predict(&processed_features).await?;
-        
+
         // 5. 后处理
         let prediction = self.post_process(prediction_value, &request).await?;
-        
+
         // 6. 缓存结果
         self.prediction_cache.set(&request, &prediction).await;
-        
+
         // 7. 记录性能指标
         let processing_time = start_time.elapsed();
         self.performance_monitor.record_metrics(&request, &prediction, processing_time).await;
-        
+
         Ok(prediction)
     }
-    
+
     async fn post_process(&self, prediction_value: PredictionValue, request: &PredictionRequest) -> Result<Prediction, InferenceError> {
         let prediction = Prediction {
             id: PredictionId::generate(),
@@ -810,7 +810,7 @@ impl InferenceService {
             timestamp: Utc::now(),
             processing_time: Duration::from_millis(0), // 将在外部设置
         };
-        
+
         Ok(prediction)
     }
 }
@@ -828,25 +828,25 @@ impl ModelMonitoringService {
     pub async fn monitor_model_performance(&self, model_id: &ModelId) -> Result<MonitoringResult, MonitoringError> {
         // 1. 收集性能指标
         let recent_metrics = self.performance_repository.get_recent_metrics(model_id, Duration::from_secs(3600)).await?;
-        
+
         // 2. 计算统计信息
         let stats = self.calculate_statistics(&recent_metrics);
-        
+
         // 3. 检测异常
         let anomalies = self.detect_anomalies(&recent_metrics, &stats);
-        
+
         // 4. 检查数据漂移
         let drift_detected = self.detect_data_drift(model_id).await?;
-        
+
         // 5. 生成告警
         for anomaly in &anomalies {
             self.alert_service.send_anomaly_alert(model_id, anomaly).await?;
         }
-        
+
         if drift_detected {
             self.alert_service.send_drift_alert(model_id).await?;
         }
-        
+
         Ok(MonitoringResult {
             model_id: model_id.clone(),
             statistics: stats,
@@ -855,11 +855,11 @@ impl ModelMonitoringService {
             timestamp: Utc::now(),
         })
     }
-    
+
     fn calculate_statistics(&self, metrics: &[ModelMetric]) -> MetricStatistics {
         let latencies: Vec<f64> = metrics.iter().map(|m| m.latency_ms as f64).collect();
         let accuracies: Vec<f64> = metrics.iter().filter_map(|m| m.accuracy).collect();
-        
+
         MetricStatistics {
             avg_latency: latencies.iter().sum::<f64>() / latencies.len() as f64,
             p95_latency: self.percentile(&latencies, 0.95),
@@ -867,10 +867,10 @@ impl ModelMonitoringService {
             request_count: metrics.len() as u32,
         }
     }
-    
+
     fn detect_anomalies(&self, metrics: &[ModelMetric], stats: &MetricStatistics) -> Vec<Anomaly> {
         let mut anomalies = Vec::new();
-        
+
         for metric in metrics {
             // 检测延迟异常
             if metric.latency_ms as f64 > stats.p95_latency * 2.0 {
@@ -881,7 +881,7 @@ impl ModelMonitoringService {
                     severity: AnomalySeverity::High,
                 });
             }
-            
+
             // 检测准确率异常
             if let Some(accuracy) = metric.accuracy {
                 if accuracy < stats.avg_accuracy - 0.1 {
@@ -894,7 +894,7 @@ impl ModelMonitoringService {
                 }
             }
         }
-        
+
         anomalies
     }
 }
@@ -975,42 +975,42 @@ impl ModelLifecycleEventHandler {
     async fn handle_model_trained(&self, event: &ModelTrainedEvent) -> Result<(), EventError> {
         // 注册新模型版本
         self.model_registry.register_model_version(&event.model_id, &event.metrics).await?;
-        
+
         // 检查是否需要自动部署
         if self.should_auto_deploy(&event.metrics).await? {
             self.deployment_service.deploy_model(&event.model_id).await?;
         }
-        
+
         // 启动性能监控
         self.monitoring_service.start_monitoring(&event.model_id).await?;
-        
+
         Ok(())
     }
-    
+
     async fn handle_model_deployed(&self, event: &ModelDeployedEvent) -> Result<(), EventError> {
         // 更新部署状态
         self.deployment_service.update_deployment_status(&event.model_id, "active").await?;
-        
+
         // 发送部署通知
         self.notification_service.send_deployment_notification(event).await?;
-        
+
         Ok(())
     }
-    
+
     async fn handle_performance_degraded(&self, event: &PerformanceEvent) -> Result<(), EventError> {
         // 触发模型回滚
         if event.severity == PerformanceSeverity::Critical {
             self.deployment_service.rollback_model(&event.model_id).await?;
         }
-        
+
         // 发送性能告警
         self.alert_service.send_performance_alert(event).await?;
-        
+
         // 触发重新训练
         if event.should_retrain {
             self.training_service.schedule_retraining(&event.model_id).await?;
         }
-        
+
         Ok(())
     }
 }

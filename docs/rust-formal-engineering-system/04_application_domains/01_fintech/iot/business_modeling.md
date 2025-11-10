@@ -79,11 +79,11 @@ impl Device {
         self.status == DeviceStatus::Online &&
         self.last_seen > Utc::now() - Duration::from_secs(300) // 5分钟内有活动
     }
-    
+
     pub fn can_communicate(&self) -> bool {
         self.is_online() && self.capabilities.contains(&Capability::Communication)
     }
-    
+
     pub fn update_status(&mut self, status: DeviceStatus) {
         self.status = status;
         self.updated_at = Utc::now();
@@ -91,7 +91,7 @@ impl Device {
             self.last_seen = Utc::now();
         }
     }
-    
+
     pub fn check_threshold(&self, sensor_type: &str, value: f64) -> Option<ThresholdAlert> {
         if let Some(threshold) = self.configuration.threshold_values.get(sensor_type) {
             if value > *threshold {
@@ -137,26 +137,26 @@ pub struct SensorMetadata {
 
 impl SensorData {
     pub fn is_valid(&self) -> bool {
-        self.quality == DataQuality::Good && 
+        self.quality == DataQuality::Good &&
         self.value.is_finite() &&
         !self.value.is_nan()
     }
-    
+
     pub fn is_outlier(&self, historical_data: &[SensorData]) -> bool {
         if historical_data.len() < 10 {
             return false;
         }
-        
+
         let values: Vec<f64> = historical_data.iter()
             .map(|d| d.value)
             .collect();
-        
+
         let mean = values.iter().sum::<f64>() / values.len() as f64;
         let variance = values.iter()
             .map(|v| (v - mean).powi(2))
             .sum::<f64>() / values.len() as f64;
         let std_dev = variance.sqrt();
-        
+
         (self.value - mean).abs() > 3.0 * std_dev
     }
 }
@@ -231,7 +231,7 @@ impl Rule {
         }
         Ok(true)
     }
-    
+
     async fn evaluate_condition(&self, condition: &Condition, context: &RuleContext) -> Result<bool, RuleError> {
         match condition {
             Condition::Threshold { device_id, sensor_type, operator, value } => {
@@ -250,10 +250,10 @@ impl Rule {
                 let now = Utc::now();
                 let current_time = now.time();
                 let current_day = now.weekday();
-                
+
                 let day_matches = days_of_week.contains(&current_day);
                 let time_matches = current_time >= *start_time && current_time <= *end_time;
-                
+
                 Ok(day_matches && time_matches)
             }
             Condition::DeviceStatus { device_id, status } => {
@@ -269,7 +269,7 @@ impl Rule {
                 ).await
                     .into_iter()
                     .collect::<Result<Vec<bool>, RuleError>>()?;
-                
+
                 match operator {
                     LogicalOperator::And => Ok(results.iter().all(|&r| r)),
                     LogicalOperator::Or => Ok(results.iter().any(|&r| r)),
@@ -314,7 +314,7 @@ impl TimeOfDay {
         }
         Ok(Self { hour, minute, second })
     }
-    
+
     pub fn from_chrono(time: chrono::NaiveTime) -> Self {
         Self {
             hour: time.hour() as u8,
@@ -488,16 +488,16 @@ impl InfluxDBStorage {
             .field("accuracy", data.metadata.accuracy)
             .field("precision", data.metadata.precision)
             .timestamp(data.timestamp.timestamp_nanos());
-        
+
         self.client.query(&influxdb::Query::write_query(
             influxdb::Type::Write,
             &self.database,
             point,
         )).await?;
-        
+
         Ok(())
     }
-    
+
     pub async fn query_sensor_data(
         &self,
         device_id: &DeviceId,
@@ -517,13 +517,13 @@ impl InfluxDBStorage {
             start_time.timestamp_nanos(),
             end_time.timestamp_nanos()
         );
-        
+
         let result = self.client.query(&influxdb::Query::raw_read_query(query)).await?;
-        
+
         // 解析结果...
         Ok(vec![])
     }
-    
+
     pub async fn aggregate_sensor_data(
         &self,
         device_id: &DeviceId,
@@ -538,7 +538,7 @@ impl InfluxDBStorage {
             86400 => "1d",
             _ => "1m",
         };
-        
+
         let query = format!(
             r#"
             SELECT mean(value) as avg_value, min(value) as min_value, max(value) as max_value, count(value) as count
@@ -552,9 +552,9 @@ impl InfluxDBStorage {
             end_time.timestamp_nanos(),
             interval_str
         );
-        
+
         let result = self.client.query(&influxdb::Query::raw_read_query(query)).await?;
-        
+
         // 解析结果...
         Ok(vec![])
     }
@@ -635,54 +635,54 @@ impl DataProcessingWorkflow {
     ) -> Result<ProcessingResult, WorkflowError> {
         let mut processed_data = Vec::new();
         let mut alerts = Vec::new();
-        
+
         for data in raw_data {
             // 1. 数据预处理
             let processed = self.data_processor.preprocess(&data).await?;
-            
+
             if !processed.is_valid() {
                 continue; // 跳过无效数据
             }
-            
+
             // 2. 异常检测
             if processed.is_outlier(&self.get_historical_data(&data.device_id, &data.sensor_type).await?) {
                 self.handle_outlier(&processed).await?;
             }
-            
+
             // 3. 规则评估
             let rule_results = self.rule_engine.evaluate_rules(&processed).await?;
-            
+
             for result in rule_results {
                 if !result.is_compliant {
                     let alert = self.alert_service.create_alert(&result).await?;
                     alerts.push(alert);
                 }
             }
-            
+
             processed_data.push(processed);
         }
-        
+
         // 4. 批量存储
         self.storage_service.batch_store(&processed_data).await?;
-        
+
         // 5. 处理告警
         for alert in alerts {
             self.alert_service.process_alert(&alert).await?;
         }
-        
+
         Ok(ProcessingResult {
             processed_count: processed_data.len(),
             alert_count: alerts.len(),
         })
     }
-    
+
     async fn handle_outlier(&self, data: &SensorData) -> Result<(), WorkflowError> {
         // 记录异常数据
         self.storage_service.store_outlier(data).await?;
-        
+
         // 发送异常通知
         self.alert_service.send_outlier_notification(data).await?;
-        
+
         Ok(())
     }
 }
@@ -702,14 +702,14 @@ impl RuleEngine {
     pub async fn evaluate_rules(&self, data: &SensorData) -> Result<Vec<RuleResult>, RuleError> {
         let context = self.context_provider.create_context(data).await?;
         let mut results = Vec::new();
-        
+
         for rule in &self.rules {
             if !rule.enabled {
                 continue;
             }
-            
+
             let triggered = rule.evaluate(&context).await?;
-            
+
             if triggered {
                 let actions = self.execute_actions(&rule.actions, &context).await?;
                 results.push(RuleResult {
@@ -720,13 +720,13 @@ impl RuleEngine {
                 });
             }
         }
-        
+
         Ok(results)
     }
-    
+
     async fn execute_actions(&self, actions: &[Action], context: &RuleContext) -> Result<Vec<ActionResult>, RuleError> {
         let mut results = Vec::new();
-        
+
         for action in actions {
             let result = match action {
                 Action::SendAlert { alert_type, recipients, message_template } => {
@@ -742,10 +742,10 @@ impl RuleEngine {
                     self.trigger_workflow(workflow_id, parameters).await?
                 }
             };
-            
+
             results.push(result);
         }
-        
+
         Ok(results)
     }
 }
@@ -813,22 +813,22 @@ impl DataAnalyticsEventHandler {
     async fn handle_sensor_data(&self, event: &SensorDataEvent) -> Result<(), EventError> {
         // 更新实时统计
         self.analytics_service.update_realtime_stats(event).await?;
-        
+
         // 检查是否需要生成报告
         if self.should_generate_report(event).await? {
             self.report_service.generate_report(event.device_id.clone()).await?;
         }
-        
+
         Ok(())
     }
-    
+
     async fn handle_rule_triggered(&self, event: &RuleTriggeredEvent) -> Result<(), EventError> {
         // 记录规则执行统计
         self.analytics_service.record_rule_execution(event).await?;
-        
+
         // 更新设备行为模式
         self.analytics_service.update_device_pattern(event.device_id.clone()).await?;
-        
+
         Ok(())
     }
 }
