@@ -3,32 +3,34 @@
 
 ## 📊 目录
 
-- [1. 引言](#1-引言)
-- [2. 基础概念](#2-基础概念)
-  - [2.1 错误传播定义](#21-错误传播定义)
-- [3. ?操作符](#3-操作符)
-  - [3.1 基本用法](#31-基本用法)
-  - [3.2 编译时转换](#32-编译时转换)
-  - [3.3 错误类型转换](#33-错误类型转换)
-- [4. From特质](#4-from特质)
-  - [4.1 自动转换](#41-自动转换)
-  - [4.2 自定义转换](#42-自定义转换)
-- [5. 错误链](#5-错误链)
-  - [5.1 错误上下文](#51-错误上下文)
-  - [5.2 错误链遍历](#52-错误链遍历)
-- [6. 高级传播模式](#6-高级传播模式)
-  - [6.1 条件传播](#61-条件传播)
-  - [6.2 错误累积](#62-错误累积)
-- [7. 异步错误传播](#7-异步错误传播)
-  - [7.1 async/await中的传播](#71-asyncawait中的传播)
-  - [7.2 Stream错误传播](#72-stream错误传播)
-- [8. 错误传播最佳实践](#8-错误传播最佳实践)
-  - [8.1 错误类型设计](#81-错误类型设计)
-  - [8.2 避免反模式](#82-避免反模式)
-- [9. 性能考虑](#9-性能考虑)
-  - [9.1 零成本传播](#91-零成本传播)
-  - [9.2 错误类型大小](#92-错误类型大小)
-- [10. 总结](#10-总结)
+- [05. 错误传播机制](#05-错误传播机制)
+  - [📊 目录](#-目录)
+  - [1. 引言](#1-引言)
+  - [2. 基础概念](#2-基础概念)
+    - [2.1 错误传播定义](#21-错误传播定义)
+  - [3. ?操作符](#3-操作符)
+    - [3.1 基本用法](#31-基本用法)
+    - [3.2 编译时转换](#32-编译时转换)
+    - [3.3 错误类型转换](#33-错误类型转换)
+  - [4. From特质](#4-from特质)
+    - [4.1 自动转换](#41-自动转换)
+    - [4.2 自定义转换](#42-自定义转换)
+  - [5. 错误链](#5-错误链)
+    - [5.1 错误上下文](#51-错误上下文)
+    - [5.2 错误链遍历](#52-错误链遍历)
+  - [6. 高级传播模式](#6-高级传播模式)
+    - [6.1 条件传播](#61-条件传播)
+    - [6.2 错误累积](#62-错误累积)
+  - [7. 异步错误传播](#7-异步错误传播)
+    - [7.1 async/await中的传播](#71-asyncawait中的传播)
+    - [7.2 Stream错误传播](#72-stream错误传播)
+  - [8. 错误传播最佳实践](#8-错误传播最佳实践)
+    - [8.1 错误类型设计](#81-错误类型设计)
+    - [8.2 避免反模式](#82-避免反模式)
+  - [9. 性能考虑](#9-性能考虑)
+    - [9.1 零成本传播](#91-零成本传播)
+    - [9.2 错误类型大小](#92-错误类型大小)
+  - [10. 总结](#10-总结)
 
 
 ## 1. 引言
@@ -191,7 +193,7 @@ impl From<std::io::Error> for AppError {
 ```rust
 fn print_error_chain(error: &dyn Error) {
     eprintln!("Error: {}", error);
-    
+
     let mut source = error.source();
     while let Some(err) = source {
         eprintln!("Caused by: {}", err);
@@ -243,11 +245,11 @@ impl ValidationErrors {
     fn new() -> Self {
         Self { errors: Vec::new() }
     }
-    
+
     fn add_error(&mut self, error: String) {
         self.errors.push(error);
     }
-    
+
     fn is_empty(&self) -> bool {
         self.errors.is_empty()
     }
@@ -255,15 +257,15 @@ impl ValidationErrors {
 
 fn validate_data(data: &str) -> Result<(), ValidationErrors> {
     let mut errors = ValidationErrors::new();
-    
+
     if data.is_empty() {
         errors.add_error("Data cannot be empty".to_string());
     }
-    
+
     if !data.chars().all(char::is_numeric) {
         errors.add_error("Data must contain only numbers".to_string());
     }
-    
+
     if errors.is_empty() {
         Ok(())
     } else {
@@ -297,12 +299,12 @@ use tokio_stream::StreamExt;
 async fn process_stream() -> Result<Vec<i32>, AppError> {
     let mut stream = tokio_stream::iter(1..=10);
     let mut results = Vec::new();
-    
+
     while let Some(value) = stream.next().await {
         let processed = process_value(value)?;
         results.push(processed);
     }
-    
+
     Ok(results)
 }
 ```
@@ -317,13 +319,13 @@ async fn process_stream() -> Result<Vec<i32>, AppError> {
 enum AppError {
     #[error("IO error: {0}")]
     Io(#[from] std::io::Error),
-    
+
     #[error("Parse error: {0}")]
     Parse(#[from] std::num::ParseIntError),
-    
+
     #[error("Validation error: {message}")]
     Validation { message: String },
-    
+
     #[error("Network error: {0}")]
     Network(String),
 }
@@ -332,13 +334,13 @@ enum AppError {
 fn good_error_handling() -> Result<i32, AppError> {
     let data = std::fs::read_to_string("data.txt")?;
     let value = data.parse::<i32>()?;
-    
+
     if value < 0 {
         return Err(AppError::Validation {
             message: "Value must be positive".to_string(),
         });
     }
-    
+
     Ok(value)
 }
 ```

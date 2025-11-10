@@ -67,7 +67,7 @@ Rust提供完整的文件系统操作抽象:
    ```rust
    // 读取文件
    let contents = fs::read_to_string("file.txt")?;
-   
+
    // 写入文件
    fs::write("file.txt", "Hello, world!")?;
    ```
@@ -85,7 +85,7 @@ Rust提供完整的文件系统操作抽象:
    ```rust
    // 创建目录
    fs::create_dir_all("path/to/dir")?;
-   
+
    // 遍历目录
    for entry in fs::read_dir("path")? {
        let entry = entry?;
@@ -112,7 +112,7 @@ Rust提供跨平台的网络通信抽象:
        let stream = stream?;
        // 处理连接
    }
-   
+
    // TCP客户端
    let mut stream = TcpStream::connect("127.0.0.1:8080")?;
    stream.write_all(b"Hello, server!")?;
@@ -182,7 +182,7 @@ I/O多路复用允许单个线程监视多个I/O源:
    let mut poll = Poll::new()?;
    poll.registry().register(&mut stream, Token(0), Interest::READABLE)?;
    let mut events = Events::with_capacity(128);
-   
+
    poll.poll(&mut events, Some(Duration::from_millis(100)))?;
    for event in events.iter() {
        // 处理就绪事件
@@ -223,7 +223,7 @@ Rust I/O系统提供多种缓冲策略:
    for line in reader.lines() {
        println!("{}", line?);
    }
-   
+
    let file = File::create("file.txt")?;
    let mut writer = BufWriter::new(file);
    writer.write_all(b"Hello, world!")?;
@@ -236,7 +236,7 @@ Rust I/O系统提供多种缓冲策略:
        inner: R,
        buffer: Vec<u8>,
    }
-   
+
    impl<R: Read> Read for CustomBuf<R> {
        fn read(&mut self, buf: &mut [u8]) -> io::Result<usize> {
            // 自定义读取实现

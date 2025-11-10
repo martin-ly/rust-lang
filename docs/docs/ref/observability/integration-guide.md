@@ -3,27 +3,29 @@
 
 ## 📊 目录
 
-- [概述 / Overview](#概述-overview)
-- [快速开始 / Quick Start](#快速开始-quick-start)
-  - [1. 启动本地可观测性栈 / Start Local Observability Stack](#1-启动本地可观测性栈-start-local-observability-stack)
-  - [2. 验证服务状态 / Verify Service Status](#2-验证服务状态-verify-service-status)
-  - [3. 访问 Web UI / Access Web UI](#3-访问-web-ui-access-web-ui)
-- [集成步骤 / Integration Steps](#集成步骤-integration-steps)
-  - [步骤 1: 添加依赖 / Step 1: Add Dependencies](#步骤-1-添加依赖-step-1-add-dependencies)
-  - [步骤 2: 初始化可观测性 / Step 2: Initialize Observability](#步骤-2-初始化可观测性-step-2-initialize-observability)
-  - [步骤 3: 在应用中使用 / Step 3: Use in Application](#步骤-3-在应用中使用-step-3-use-in-application)
-  - [步骤 4: 添加指标 / Step 4: Add Metrics](#步骤-4-添加指标-step-4-add-metrics)
-- [环境变量配置 / Environment Variables](#环境变量配置-environment-variables)
-  - [开发环境 / Development Environment](#开发环境-development-environment)
-  - [生产环境 / Production Environment](#生产环境-production-environment)
-- [最佳实践 / Best Practices](#最佳实践-best-practices)
-  - [1. 追踪最佳实践 / Tracing Best Practices](#1-追踪最佳实践-tracing-best-practices)
-  - [2. 指标最佳实践 / Metrics Best Practices](#2-指标最佳实践-metrics-best-practices)
-  - [3. 日志最佳实践 / Logging Best Practices](#3-日志最佳实践-logging-best-practices)
-- [故障排除 / Troubleshooting](#故障排除-troubleshooting)
-  - [常见问题 / Common Issues](#常见问题-common-issues)
-  - [调试命令 / Debug Commands](#调试命令-debug-commands)
-- [扩展阅读 / Further Reading](#扩展阅读-further-reading)
+- [可观测性集成指南 / Observability Integration Guide](#可观测性集成指南--observability-integration-guide)
+  - [📊 目录](#-目录)
+  - [概述 / Overview](#概述--overview)
+  - [快速开始 / Quick Start](#快速开始--quick-start)
+    - [1. 启动本地可观测性栈 / Start Local Observability Stack](#1-启动本地可观测性栈--start-local-observability-stack)
+    - [2. 验证服务状态 / Verify Service Status](#2-验证服务状态--verify-service-status)
+    - [3. 访问 Web UI / Access Web UI](#3-访问-web-ui--access-web-ui)
+  - [集成步骤 / Integration Steps](#集成步骤--integration-steps)
+    - [步骤 1: 添加依赖 / Step 1: Add Dependencies](#步骤-1-添加依赖--step-1-add-dependencies)
+    - [步骤 2: 初始化可观测性 / Step 2: Initialize Observability](#步骤-2-初始化可观测性--step-2-initialize-observability)
+    - [步骤 3: 在应用中使用 / Step 3: Use in Application](#步骤-3-在应用中使用--step-3-use-in-application)
+    - [步骤 4: 添加指标 / Step 4: Add Metrics](#步骤-4-添加指标--step-4-add-metrics)
+  - [环境变量配置 / Environment Variables](#环境变量配置--environment-variables)
+    - [开发环境 / Development Environment](#开发环境--development-environment)
+    - [生产环境 / Production Environment](#生产环境--production-environment)
+  - [最佳实践 / Best Practices](#最佳实践--best-practices)
+    - [1. 追踪最佳实践 / Tracing Best Practices](#1-追踪最佳实践--tracing-best-practices)
+    - [2. 指标最佳实践 / Metrics Best Practices](#2-指标最佳实践--metrics-best-practices)
+    - [3. 日志最佳实践 / Logging Best Practices](#3-日志最佳实践--logging-best-practices)
+  - [故障排除 / Troubleshooting](#故障排除--troubleshooting)
+    - [常见问题 / Common Issues](#常见问题--common-issues)
+    - [调试命令 / Debug Commands](#调试命令--debug-commands)
+  - [扩展阅读 / Further Reading](#扩展阅读--further-reading)
 
 
 ## 概述 / Overview
@@ -139,12 +141,12 @@ use tracing::{info, error, instrument, span, Level};
 async fn process_request(user_id: u64, data: &str) -> Result<String, String> {
     let span = span!(Level::INFO, "process_request", user_id = user_id);
     let _enter = span.enter();
-    
+
     info!("开始处理请求 / Starting request processing");
-    
+
     // 业务逻辑
     let result = perform_business_logic(data).await?;
-    
+
     info!("请求处理完成 / Request processing completed");
     Ok(result)
 }

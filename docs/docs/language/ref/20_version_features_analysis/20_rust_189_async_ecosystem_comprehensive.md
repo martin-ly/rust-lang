@@ -3,27 +3,29 @@
 
 ## 📊 目录
 
-- [1. 特性概览与核心突破](#1-特性概览与核心突破)
-  - [1.1 异步生态系统的全面革新](#11-异步生态系统的全面革新)
-  - [1.2 技术架构分析](#12-技术架构分析)
-    - [1.2.1 异步性能优化模型](#121-异步性能优化模型)
-- [2. 核心改进深度分析](#2-核心改进深度分析)
-  - [2.1 运行时调度优化](#21-运行时调度优化)
-    - [2.1.1 工作窃取调度器改进](#211-工作窃取调度器改进)
-  - [2.2 Future系统优化](#22-future系统优化)
-    - [2.2.1 Future组合器性能提升](#221-future组合器性能提升)
-- [3. 技术价值与影响分析](#3-技术价值与影响分析)
-  - [3.1 异步编程性能革新](#31-异步编程性能革新)
-  - [3.2 生态系统影响](#32-生态系统影响)
-  - [3.3 综合技术价值](#33-综合技术价值)
-- [4. 总结与技术价值评估](#4-总结与技术价值评估)
-  - [4.1 技术创新总结](#41-技术创新总结)
-  - [4.2 实践价值](#42-实践价值)
+- [版本对齐说明：异步生态系统改进（规划草案）](#版本对齐说明异步生态系统改进规划草案)
+  - [📊 目录](#-目录)
+  - [1. 特性概览与核心突破](#1-特性概览与核心突破)
+    - [1.1 异步生态系统的全面革新](#11-异步生态系统的全面革新)
+    - [1.2 技术架构分析](#12-技术架构分析)
+      - [1.2.1 异步性能优化模型](#121-异步性能优化模型)
+  - [2. 核心改进深度分析](#2-核心改进深度分析)
+    - [2.1 运行时调度优化](#21-运行时调度优化)
+      - [2.1.1 工作窃取调度器改进](#211-工作窃取调度器改进)
+    - [2.2 Future系统优化](#22-future系统优化)
+      - [2.2.1 Future组合器性能提升](#221-future组合器性能提升)
+  - [3. 技术价值与影响分析](#3-技术价值与影响分析)
+    - [3.1 异步编程性能革新](#31-异步编程性能革新)
+    - [3.2 生态系统影响](#32-生态系统影响)
+    - [3.3 综合技术价值](#33-综合技术价值)
+  - [4. 总结与技术价值评估](#4-总结与技术价值评估)
+    - [4.1 技术创新总结](#41-技术创新总结)
+    - [4.2 实践价值](#42-实践价值)
 
 
-**说明**: 本文为版本对齐与规划草案，归档潜在改进方向与工程影响评估，不构成对特定小版本的稳定性承诺。  
-**重要性等级**: ⭐⭐⭐⭐⭐ (异步编程生态革新)  
-**影响范围**: 异步运行时、Future生态、并发性能  
+**说明**: 本文为版本对齐与规划草案，归档潜在改进方向与工程影响评估，不构成对特定小版本的稳定性承诺。
+**重要性等级**: ⭐⭐⭐⭐⭐ (异步编程生态革新)
+**影响范围**: 异步运行时、Future生态、并发性能
 **技术深度**: ⚡ 异步运行时 + 🔄 Future系统 + 🚀 并发优化
 
 ---
@@ -45,10 +47,10 @@ use tokio::runtime::Runtime;
 // 新的异步流式处理API
 async fn stream_processing_examples() {
     use tokio_stream::{Stream, StreamExt};
-    
+
     // 改进的异步流处理 - 30%性能提升
     let numbers = tokio_stream::iter(0..1000);
-    
+
     // 新的并行流处理
     let processed = numbers
         .map(|x| async move { x * x })
@@ -56,7 +58,7 @@ async fn stream_processing_examples() {
         .filter(|&x| async move { x % 2 == 0 })
         .collect::<Vec<_>>()
         .await;
-    
+
     println!("处理了 {} 个数字", processed.len());
 }
 
@@ -64,7 +66,7 @@ async fn stream_processing_examples() {
 async fn runtime_improvements() {
     // 新的工作窃取调度器 - 40%调度效率提升
     let rt = Runtime::new().unwrap();
-    
+
     let tasks: Vec<_> = (0..1000)
         .map(|i| {
             rt.spawn(async move {
@@ -74,13 +76,13 @@ async fn runtime_improvements() {
             })
         })
         .collect();
-    
+
     // 新的批量等待API
     let results = futures::future::join_all(tasks).await;
     let sum: i32 = results.into_iter()
         .map(|r| r.unwrap())
         .sum();
-    
+
     println!("异步任务总和: {}", sum);
 }
 
@@ -88,10 +90,10 @@ async fn runtime_improvements() {
 async fn cancellation_improvements() {
     use tokio::sync::CancellationToken;
     use std::time::Duration;
-    
+
     let token = CancellationToken::new();
     let child_token = token.child_token();
-    
+
     // 新的结构化并发模式
     let task = tokio::spawn(async move {
         loop {
@@ -106,18 +108,18 @@ async fn cancellation_improvements() {
             }
         }
     });
-    
+
     // 延迟取消
     tokio::time::sleep(Duration::from_millis(500)).await;
     token.cancel();
-    
+
     task.await.unwrap();
 }
 
 // 新的异步错误处理
 async fn error_handling_improvements() {
     use std::error::Error;
-    
+
     // 改进的错误传播机制
     async fn may_fail(should_fail: bool) -> Result<String, Box<dyn Error + Send + Sync>> {
         if should_fail {
@@ -126,14 +128,14 @@ async fn error_handling_improvements() {
             Ok("成功".to_string())
         }
     }
-    
+
     // 新的try_join!宏
     let results = tokio::try_join!(
         may_fail(false),
         may_fail(false),
         may_fail(false)
     );
-    
+
     match results {
         Ok((r1, r2, r3)) => println!("所有任务成功: {}, {}, {}", r1, r2, r3),
         Err(e) => println!("任务失败: {}", e),
@@ -143,19 +145,19 @@ async fn error_handling_improvements() {
 // 异步迭代器改进
 async fn async_iterator_improvements() {
     use futures::stream::{self, StreamExt};
-    
+
     // 新的异步迭代器组合器
     let stream = stream::iter(0..100)
-        .then(|x| async move { 
+        .then(|x| async move {
             tokio::time::sleep(std::time::Duration::from_millis(1)).await;
-            x * x 
+            x * x
         })
         .chunks(10) // 分块处理
         .map(|chunk| async move {
             chunk.iter().sum::<i32>()
         })
         .buffered(5); // 并行处理5个块
-    
+
     let sums: Vec<i32> = stream.collect().await;
     println!("块总和: {:?}", sums);
 }
@@ -197,21 +199,21 @@ impl AsyncRuntimeAnalyzer {
     // 分析异步运行时改进
     fn analyze_runtime_improvements() -> RuntimeImprovementReport {
         println!("=== 异步运行时改进分析 ===");
-        
+
         let improvements = vec![
             Self::analyze_work_stealing_scheduler(),
             Self::analyze_task_local_optimization(),
             Self::analyze_memory_management(),
             Self::analyze_io_integration(),
         ];
-        
+
         RuntimeImprovementReport {
             improvements,
             performance_gains: Self::measure_performance_gains(),
             scalability_analysis: Self::analyze_scalability(),
         }
     }
-    
+
     fn analyze_work_stealing_scheduler() -> RuntimeImprovement {
         RuntimeImprovement {
             improvement_type: "Work Stealing Scheduler".to_string(),
@@ -230,7 +232,7 @@ impl AsyncRuntimeAnalyzer {
             },
         }
     }
-    
+
     fn analyze_task_local_optimization() -> RuntimeImprovement {
         RuntimeImprovement {
             improvement_type: "Task Local Optimization".to_string(),
@@ -249,7 +251,7 @@ impl AsyncRuntimeAnalyzer {
             },
         }
     }
-    
+
     fn analyze_memory_management() -> RuntimeImprovement {
         RuntimeImprovement {
             improvement_type: "Memory Management".to_string(),
@@ -268,7 +270,7 @@ impl AsyncRuntimeAnalyzer {
             },
         }
     }
-    
+
     fn analyze_io_integration() -> RuntimeImprovement {
         RuntimeImprovement {
             improvement_type: "I/O Integration".to_string(),
@@ -287,7 +289,7 @@ impl AsyncRuntimeAnalyzer {
             },
         }
     }
-    
+
     fn measure_performance_gains() -> RuntimePerformanceGains {
         RuntimePerformanceGains {
             overall_throughput_improvement: 0.50, // 50% throughput increase
@@ -296,7 +298,7 @@ impl AsyncRuntimeAnalyzer {
             cpu_efficiency_gain: 0.28, // 28% CPU efficiency
         }
     }
-    
+
     fn analyze_scalability() -> ScalabilityAnalysis {
         ScalabilityAnalysis {
             single_core_improvement: 0.25, // 25% single-core improvement
@@ -359,21 +361,21 @@ impl FutureSystemAnalyzer {
     // 分析Future系统优化
     fn analyze_future_optimizations() -> FutureOptimizationReport {
         println!("=== Future系统优化分析 ===");
-        
+
         let optimizations = vec![
             Self::analyze_combinator_optimizations(),
             Self::analyze_poll_optimization(),
             Self::analyze_state_machine_improvements(),
             Self::analyze_async_fn_performance(),
         ];
-        
+
         FutureOptimizationReport {
             optimizations,
             compilation_improvements: Self::measure_compilation_gains(),
             runtime_improvements: Self::measure_runtime_gains(),
         }
     }
-    
+
     fn analyze_combinator_optimizations() -> FutureOptimization {
         FutureOptimization {
             optimization_type: "Combinator Optimizations".to_string(),
@@ -392,7 +394,7 @@ impl FutureSystemAnalyzer {
             },
         }
     }
-    
+
     fn analyze_poll_optimization() -> FutureOptimization {
         FutureOptimization {
             optimization_type: "Poll Optimization".to_string(),
@@ -411,7 +413,7 @@ impl FutureSystemAnalyzer {
             },
         }
     }
-    
+
     fn analyze_state_machine_improvements() -> FutureOptimization {
         FutureOptimization {
             optimization_type: "State Machine Improvements".to_string(),
@@ -430,7 +432,7 @@ impl FutureSystemAnalyzer {
             },
         }
     }
-    
+
     fn analyze_async_fn_performance() -> FutureOptimization {
         FutureOptimization {
             optimization_type: "Async Function Performance".to_string(),
@@ -449,7 +451,7 @@ impl FutureSystemAnalyzer {
             },
         }
     }
-    
+
     fn measure_compilation_gains() -> CompilationImprovements {
         CompilationImprovements {
             async_function_compilation_speed: 0.25, // 25% faster async compilation
@@ -458,7 +460,7 @@ impl FutureSystemAnalyzer {
             binary_size_reduction: 0.15, // 15% smaller async binaries
         }
     }
-    
+
     fn measure_runtime_gains() -> FutureRuntimeGains {
         FutureRuntimeGains {
             future_creation_speed: 0.45, // 45% faster Future creation

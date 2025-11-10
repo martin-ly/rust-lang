@@ -3,73 +3,75 @@
 
 ## 📊 目录
 
-- [1. 特性概览与历史背景](#1-特性概览与历史背景)
-  - [1.1 代码质量工具的历史演进](#11-代码质量工具的历史演进)
-  - [1.2 技术架构分析](#12-技术架构分析)
-    - [1.2.1 编译器集成机制](#121-编译器集成机制)
-    - [1.2.2 内部数据结构](#122-内部数据结构)
-- [2. 形式化语义模型分析](#2-形式化语义模型分析)
-  - [2.1 Expect属性语义代数](#21-expect属性语义代数)
-    - [2.1.1 基础代数结构](#211-基础代数结构)
-    - [2.1.2 验证一致性模型](#212-验证一致性模型)
-  - [2.2 Lint级联传播模型](#22-lint级联传播模型)
-    - [2.2.1 作用域继承规则](#221-作用域继承规则)
-- [3. 实现机制深度剖析](#3-实现机制深度剖析)
-  - [3.1 编译器Pass集成](#31-编译器pass集成)
-    - [3.1.1 AST转换阶段](#311-ast转换阶段)
-    - [3.1.2 Lint收集与匹配](#312-lint收集与匹配)
-  - [3.2 诊断系统集成](#32-诊断系统集成)
-    - [3.2.1 错误报告生成](#321-错误报告生成)
-- [4. 实际应用场景与最佳实践](#4-实际应用场景与最佳实践)
-  - [4.1 大型项目维护场景](#41-大型项目维护场景)
-    - [4.1.1 遗留代码管理](#411-遗留代码管理)
-    - [4.1.2 重构安全网](#412-重构安全网)
-  - [4.2 代码审查工作流](#42-代码审查工作流)
-    - [4.2.1 团队协作标准](#421-团队协作标准)
-  - [4.3 CI/CD流水线集成](#43-cicd流水线集成)
-    - [4.3.1 自动化质量门禁](#431-自动化质量门禁)
-  - [4.4 Lint生态系统集成](#44-lint生态系统集成)
-    - [4.4.1 自定义Lint开发](#441-自定义lint开发)
-- [5. 性能影响与编译时开销分析](#5-性能影响与编译时开销分析)
-  - [5.1 编译时间影响评估](#51-编译时间影响评估)
-    - [5.1.1 性能基准测试](#511-性能基准测试)
-  - [5.2 内存使用分析](#52-内存使用分析)
-    - [5.2.1 内存模型](#521-内存模型)
-- [7. 安全性与正确性验证](#7-安全性与正确性验证)
-  - [7.1 形式化验证模型](#71-形式化验证模型)
-    - [7.1.1 定理：Expect属性无副作用性](#711-定理expect属性无副作用性)
-    - [7.1.2 定理：验证完整性](#712-定理验证完整性)
-  - [7.2 错误处理与恢复机制](#72-错误处理与恢复机制)
-- [8. 未来发展方向与路线图](#8-未来发展方向与路线图)
-  - [8.1 短期改进计划 (6-12个月)](#81-短期改进计划-6-12个月)
-    - [8.1.1 IDE集成增强](#811-ide集成增强)
-    - [8.1.2 性能优化](#812-性能优化)
-  - [8.2 长期发展愿景 (1-3年)](#82-长期发展愿景-1-3年)
-    - [8.2.1 AI辅助期望管理](#821-ai辅助期望管理)
-    - [8.2.2 跨语言期望标准](#822-跨语言期望标准)
-- [9. 生态系统影响评估](#9-生态系统影响评估)
-  - [9.1 开发者生产力提升](#91-开发者生产力提升)
-    - [9.1.1 量化影响分析](#911-量化影响分析)
-  - [9.2 代码质量改进](#92-代码质量改进)
-    - [9.2.1 质量指标预测](#921-质量指标预测)
-- [10. 总结与技术价值评估](#10-总结与技术价值评估)
-  - [10.1 技术成就总结](#101-技术成就总结)
-  - [10.2 理论贡献](#102-理论贡献)
-    - [10.2.1 静态分析理论](#1021-静态分析理论)
-    - [10.2.2 软件工程实践](#1022-软件工程实践)
-  - [10.3 实践价值评估](#103-实践价值评估)
-    - [10.3.1 短期影响 (6-12个月)](#1031-短期影响-6-12个月)
-    - [10.3.2 长期影响 (1-3年)](#1032-长期影响-1-3年)
-  - [10.4 综合技术价值](#104-综合技术价值)
-- [6. 工具生态系统集成分析](#6-工具生态系统集成分析)
-  - [6.1 IDE支持与开发者体验](#61-ide支持与开发者体验)
-    - [6.1.1 语言服务器协议集成](#611-语言服务器协议集成)
-    - [6.1.2 可视化工具支持](#612-可视化工具支持)
+- [Rust 1.81.0 #\[expect\] 属性深度分析](#rust-1810-expect-属性深度分析)
+  - [📊 目录](#-目录)
+  - [1. 特性概览与历史背景](#1-特性概览与历史背景)
+    - [1.1 代码质量工具的历史演进](#11-代码质量工具的历史演进)
+    - [1.2 技术架构分析](#12-技术架构分析)
+      - [1.2.1 编译器集成机制](#121-编译器集成机制)
+      - [1.2.2 内部数据结构](#122-内部数据结构)
+  - [2. 形式化语义模型分析](#2-形式化语义模型分析)
+    - [2.1 Expect属性语义代数](#21-expect属性语义代数)
+      - [2.1.1 基础代数结构](#211-基础代数结构)
+      - [2.1.2 验证一致性模型](#212-验证一致性模型)
+    - [2.2 Lint级联传播模型](#22-lint级联传播模型)
+      - [2.2.1 作用域继承规则](#221-作用域继承规则)
+  - [3. 实现机制深度剖析](#3-实现机制深度剖析)
+    - [3.1 编译器Pass集成](#31-编译器pass集成)
+      - [3.1.1 AST转换阶段](#311-ast转换阶段)
+      - [3.1.2 Lint收集与匹配](#312-lint收集与匹配)
+    - [3.2 诊断系统集成](#32-诊断系统集成)
+      - [3.2.1 错误报告生成](#321-错误报告生成)
+  - [4. 实际应用场景与最佳实践](#4-实际应用场景与最佳实践)
+    - [4.1 大型项目维护场景](#41-大型项目维护场景)
+      - [4.1.1 遗留代码管理](#411-遗留代码管理)
+      - [4.1.2 重构安全网](#412-重构安全网)
+    - [4.2 代码审查工作流](#42-代码审查工作流)
+      - [4.2.1 团队协作标准](#421-团队协作标准)
+    - [4.3 CI/CD流水线集成](#43-cicd流水线集成)
+      - [4.3.1 自动化质量门禁](#431-自动化质量门禁)
+    - [4.4 Lint生态系统集成](#44-lint生态系统集成)
+      - [4.4.1 自定义Lint开发](#441-自定义lint开发)
+  - [5. 性能影响与编译时开销分析](#5-性能影响与编译时开销分析)
+    - [5.1 编译时间影响评估](#51-编译时间影响评估)
+      - [5.1.1 性能基准测试](#511-性能基准测试)
+    - [5.2 内存使用分析](#52-内存使用分析)
+      - [5.2.1 内存模型](#521-内存模型)
+  - [7. 安全性与正确性验证](#7-安全性与正确性验证)
+    - [7.1 形式化验证模型](#71-形式化验证模型)
+      - [7.1.1 定理：Expect属性无副作用性](#711-定理expect属性无副作用性)
+      - [7.1.2 定理：验证完整性](#712-定理验证完整性)
+    - [7.2 错误处理与恢复机制](#72-错误处理与恢复机制)
+  - [8. 未来发展方向与路线图](#8-未来发展方向与路线图)
+    - [8.1 短期改进计划 (6-12个月)](#81-短期改进计划-6-12个月)
+      - [8.1.1 IDE集成增强](#811-ide集成增强)
+      - [8.1.2 性能优化](#812-性能优化)
+    - [8.2 长期发展愿景 (1-3年)](#82-长期发展愿景-1-3年)
+      - [8.2.1 AI辅助期望管理](#821-ai辅助期望管理)
+      - [8.2.2 跨语言期望标准](#822-跨语言期望标准)
+  - [9. 生态系统影响评估](#9-生态系统影响评估)
+    - [9.1 开发者生产力提升](#91-开发者生产力提升)
+      - [9.1.1 量化影响分析](#911-量化影响分析)
+    - [9.2 代码质量改进](#92-代码质量改进)
+      - [9.2.1 质量指标预测](#921-质量指标预测)
+  - [10. 总结与技术价值评估](#10-总结与技术价值评估)
+    - [10.1 技术成就总结](#101-技术成就总结)
+    - [10.2 理论贡献](#102-理论贡献)
+      - [10.2.1 静态分析理论](#1021-静态分析理论)
+      - [10.2.2 软件工程实践](#1022-软件工程实践)
+    - [10.3 实践价值评估](#103-实践价值评估)
+      - [10.3.1 短期影响 (6-12个月)](#1031-短期影响-6-12个月)
+      - [10.3.2 长期影响 (1-3年)](#1032-长期影响-1-3年)
+    - [10.4 综合技术价值](#104-综合技术价值)
+  - [6. 工具生态系统集成分析](#6-工具生态系统集成分析)
+    - [6.1 IDE支持与开发者体验](#61-ide支持与开发者体验)
+      - [6.1.1 语言服务器协议集成](#611-语言服务器协议集成)
+      - [6.1.2 可视化工具支持](#612-可视化工具支持)
 
 
-**特性版本**: Rust 1.81.0 (2024-09-05稳定化)  
-**重要性等级**: ⭐⭐⭐⭐ (开发者体验革命)  
-**影响范围**: 代码质量工具、lint系统、大型项目维护  
+**特性版本**: Rust 1.81.0 (2024-09-05稳定化)
+**重要性等级**: ⭐⭐⭐⭐ (开发者体验革命)
+**影响范围**: 代码质量工具、lint系统、大型项目维护
 **技术深度**: 🔍 静态分析 + ⚙️ 编译器集成 + 📋 工作流优化
 
 ---
@@ -120,7 +122,7 @@ fn refactored_function(x: i32) {
 Expect属性的处理流程:
 
 1. 解析阶段: AST → ExpectNode
-2. 语义分析: ExpectNode → LintExpectation  
+2. 语义分析: ExpectNode → LintExpectation
 3. Lint检查: 收集ActualLints
 4. 验证阶段: ExpectedLints ∩ ActualLints → ValidationResult
 5. 报告生成: UnexpectedLints ∪ UnfulfilledExpectations → Diagnostics
@@ -170,7 +172,7 @@ ExpectAlgebra = (E, L, R, ⊕, ⊗, ⊙)
 
 其中:
 - E: 期望集合 {e₁, e₂, ..., eₙ}
-- L: Lint集合 {l₁, l₂, ..., lₘ}  
+- L: Lint集合 {l₁, l₂, ..., lₘ}
 - R: 理由集合 {r₁, r₂, ..., rₖ}
 - ⊕: 期望组合操作
 - ⊗: 期望与lint匹配操作
@@ -204,7 +206,7 @@ ExpectAlgebra = (E, L, R, ⊕, ⊗, ⊙)
 
 V(E, A) = {
     Fulfilled: e ∈ E ∧ ∃a ∈ A: matches(e, a)
-    Unfulfilled: e ∈ E ∧ ∀a ∈ A: ¬matches(e, a)  
+    Unfulfilled: e ∈ E ∧ ∀a ∈ A: ¬matches(e, a)
     Unexpected: a ∈ A ∧ ∀e ∈ E: ¬matches(e, a)
 }
 
@@ -227,7 +229,7 @@ pub trait ExpectScope {
 pub enum ScopePriority {
     Local = 0,      // 局部#[expect]最高优先级
     Function = 1,   // 函数级别
-    Module = 2,     // 模块级别  
+    Module = 2,     // 模块级别
     Crate = 3,      // crate级别最低优先级
 }
 ```
@@ -275,7 +277,7 @@ impl<'ast> Visitor<'ast> for ExpectCollector {
         }
         visit::walk_attribute(self, attr);
     }
-    
+
     fn collect_expectation(&mut self, attr: &Attribute) -> LintExpectation {
         let meta = attr.meta().expect("malformed expect attribute");
         match meta {
@@ -303,16 +305,16 @@ impl LintCollector {
             self.mark_fulfilled(expectation);
             return LintLevel::Allow;
         }
-        
+
         // 2. 检查是否为意外的lint
         if self.has_suppressing_expect(lint, span) {
             self.report_unexpected_lint(lint, span);
         }
-        
+
         // 3. 返回默认级别
         self.get_default_level(lint)
     }
-    
+
     fn find_matching_expectation(&self, lint: LintId, span: Span) -> Option<&LintExpectation> {
         // 作用域查找算法
         for scope in self.context_stack.iter().rev() {
@@ -414,7 +416,7 @@ impl LegacyUserManager {
             deprecated_cache: None,
         }
     }
-    
+
     #[expect(unused_variables, reason = "参数为未来扩展预留")]
     pub fn migrate_user(&self, user_id: u64, _migration_options: MigrationOptions) {
         // 当前版本暂未实现migration_options
@@ -444,9 +446,9 @@ fn manage_legacy_system() {
         preserve_metadata: true,
         custom_transform: None,
     };
-    
+
     manager.migrate_user(12345, options);
-    
+
     // 如果代码重构移除了dead_code，编译器会警告expectation未被满足
 }
 ```
@@ -458,25 +460,25 @@ fn manage_legacy_system() {
 pub mod refactoring_example {
     use std::sync::Arc;
     use std::thread;
-    
+
     #[expect(clippy::arc_with_non_send_sync, reason = "重构中 - 待实现Send+Sync")]
     pub struct DataProcessor {
         data: Arc<ProcessingData>,
         #[expect(dead_code, reason = "新架构中将使用")]
         worker_pool: Option<ThreadPool>,
     }
-    
+
     struct ProcessingData {
         values: Vec<i32>,
         #[expect(unused_fields, reason = "缓存优化预留")]
         cache_hint: Option<String>,
     }
-    
+
     struct ThreadPool {
         #[expect(dead_code, reason = "线程池重构中")]
         workers: Vec<thread::JoinHandle<()>>,
     }
-    
+
     impl DataProcessor {
         pub fn new(values: Vec<i32>) -> Self {
             Self {
@@ -487,36 +489,36 @@ pub mod refactoring_example {
                 worker_pool: None,
             }
         }
-        
+
         #[expect(clippy::needless_collect, reason = "性能优化前的临时实现")]
         pub fn process(&self) -> Vec<i32> {
             let collected: Vec<_> = self.data.values.iter()
                 .map(|x| x * 2)
                 .collect();
-            
+
             collected.into_iter()
                 .filter(|&x| x > 10)
                 .collect()
         }
-        
+
         #[expect(unused_variables, reason = "异步版本开发中")]
         pub async fn process_async(&self, _batch_size: usize) -> Vec<i32> {
             // 临时同步实现
             self.process()
         }
     }
-    
+
     // 测试重构安全性
     #[cfg(test)]
     mod tests {
         use super::*;
-        
+
         #[test]
         fn test_refactoring_safety() {
             let processor = DataProcessor::new(vec![1, 5, 10, 15, 20]);
             let result = processor.process();
             assert_eq!(result, vec![10, 30, 40]);
-            
+
             // 如果重构移除了预期的lint，会得到警告
         }
     }
@@ -531,7 +533,7 @@ pub mod refactoring_example {
 // 场景3: 团队代码审查的标准化
 pub mod code_review_workflow {
     use serde::{Deserialize, Serialize};
-    
+
     #[expect(missing_docs, reason = "内部API - PR #1234将添加文档")]
     pub struct ReviewRequest {
         pub id: u64,
@@ -539,7 +541,7 @@ pub mod code_review_workflow {
         #[expect(dead_code, reason = "PR review中 - @reviewer123请确认")]
         pub metadata: ReviewMetadata,
     }
-    
+
     #[derive(Serialize, Deserialize)]
     pub struct ReviewMetadata {
         pub created_at: String,
@@ -548,7 +550,7 @@ pub mod code_review_workflow {
         #[expect(dead_code, reason = "待产品确认是否需要此字段")]
         pub tags: Vec<String>,
     }
-    
+
     impl ReviewRequest {
         #[expect(clippy::too_many_arguments, reason = "临时API - 将重构为builder模式")]
         pub fn new(
@@ -570,14 +572,14 @@ pub mod code_review_workflow {
                 },
             }
         }
-        
+
         #[expect(unused_variables, reason = "异步通知功能开发中")]
         pub async fn notify_reviewers(&self, _channel: &str) -> Result<(), NotificationError> {
             // 暂时返回成功，实际通知逻辑待实现
             Ok(())
         }
     }
-    
+
     #[derive(Debug)]
     pub enum NotificationError {
         #[expect(dead_code, reason = "错误处理完善中")]
@@ -585,7 +587,7 @@ pub mod code_review_workflow {
         #[expect(dead_code, reason = "权限系统集成中")]
         AuthenticationError,
     }
-    
+
     // 工作流状态机
     #[expect(clippy::enum_variant_names, reason = "状态命名约定 - 待团队讨论")]
     #[derive(Debug, PartialEq)]
@@ -608,20 +610,20 @@ pub mod code_review_workflow {
 pub mod ci_integration {
     use std::process::Command;
     use std::collections::BTreeMap;
-    
+
     #[expect(missing_debug_implementations, reason = "调试功能下个版本添加")]
     pub struct QualityGate {
         pub rules: BTreeMap<String, LintRule>,
         #[expect(unused_fields, reason = "性能监控集成中")]
         pub metrics_collector: Option<MetricsCollector>,
     }
-    
+
     pub struct LintRule {
         pub severity: Severity,
         #[expect(dead_code, reason = "自定义规则引擎开发中")]
         pub custom_checker: Option<Box<dyn Fn(&str) -> bool>>,
     }
-    
+
     #[derive(Debug, Clone)]
     pub enum Severity {
         Warning,
@@ -629,19 +631,19 @@ pub mod ci_integration {
         #[expect(dead_code, reason = "阻塞级别待产品定义")]
         Blocking,
     }
-    
+
     struct MetricsCollector {
         #[expect(dead_code, reason = "监控数据结构设计中")]
         measurements: Vec<QualityMetric>,
     }
-    
+
     struct QualityMetric {
         name: String,
         value: f64,
         #[expect(unused_fields, reason = "时间序列分析功能开发中")]
         timestamp: chrono::DateTime<chrono::Utc>,
     }
-    
+
     impl QualityGate {
         pub fn new() -> Self {
             Self {
@@ -649,7 +651,7 @@ pub mod ci_integration {
                 metrics_collector: None,
             }
         }
-        
+
         #[expect(clippy::result_unit_err, reason = "错误类型细化中")]
         pub fn validate_code(&self, _path: &str) -> Result<QualityReport, ()> {
             // 执行代码质量检查
@@ -657,7 +659,7 @@ pub mod ci_integration {
                 .args(&["clippy", "--", "-D", "warnings"])
                 .output()
                 .map_err(|_| ())?;
-            
+
             let success = output.status.success();
             Ok(QualityReport {
                 passed: success,
@@ -665,13 +667,13 @@ pub mod ci_integration {
                 suggestions: vec!["Run cargo fix".to_string()],
             })
         }
-        
+
         #[expect(unused_variables, reason = "报告格式待定义")]
         pub fn generate_report(&self, _results: &QualityReport) -> String {
             "Quality report placeholder".to_string()
         }
     }
-    
+
     #[derive(Debug)]
     pub struct QualityReport {
         pub passed: bool,
@@ -679,14 +681,14 @@ pub mod ci_integration {
         #[expect(dead_code, reason = "自动修复建议功能开发中")]
         pub suggestions: Vec<String>,
     }
-    
+
     // CI脚本集成示例
     pub fn ci_pipeline_example() -> Result<(), Box<dyn std::error::Error>> {
         let gate = QualityGate::new();
-        
+
         println!("运行质量检查...");
         let report = gate.validate_code("src/")?;
-        
+
         if !report.passed {
             eprintln!("质量检查失败:");
             for violation in &report.violations {
@@ -694,7 +696,7 @@ pub mod ci_integration {
             }
             std::process::exit(1);
         }
-        
+
         println!("所有质量检查通过 ✅");
         Ok(())
     }
@@ -712,21 +714,21 @@ pub mod custom_lint_integration {
     use rustc_session::{declare_lint, declare_lint_pass};
     use rustc_ast::ast;
     use rustc_span::Span;
-    
+
     declare_lint! {
         pub CUSTOM_NAMING_CONVENTION,
         Warn,
         "检查自定义命名约定"
     }
-    
+
     declare_lint_pass!(CustomNamingLint => [CUSTOM_NAMING_CONVENTION]);
-    
+
     impl EarlyLintPass for CustomNamingLint {
         fn check_fn(&mut self, cx: &rustc_lint::EarlyContext, fn_kind: ast::FnKind, span: Span, _: ast::NodeId) {
             if let ast::FnKind::Fn(_, ident, ..) = fn_kind {
                 // 检查expect属性
                 let has_expectation = cx.current_level(CUSTOM_NAMING_CONVENTION) == rustc_lint::Level::Allow;
-                
+
                 if !self.check_naming_convention(&ident.name.as_str()) && !has_expectation {
                     cx.lint(CUSTOM_NAMING_CONVENTION, |lint| {
                         lint.build("函数名应使用snake_case约定")
@@ -738,24 +740,24 @@ pub mod custom_lint_integration {
             }
         }
     }
-    
+
     impl CustomNamingLint {
         fn check_naming_convention(&self, name: &str) -> bool {
             // 简化的命名检查
             name.chars().all(|c| c.is_lowercase() || c == '_')
         }
     }
-    
+
     // 使用示例
     #[expect(custom_naming_convention, reason = "外部API兼容性要求")]
     pub fn XMLParser() -> String {
         "解析XML".to_string()
     }
-    
+
     pub fn normal_function() -> String {
         "符合命名约定".to_string()
     }
-    
+
     // 如果移除expect属性，会触发custom lint警告
 }
 ```
@@ -799,14 +801,14 @@ pub struct TestCase {
 impl CompilationBenchmark {
     pub fn run_performance_test(&mut self) -> PerformanceReport {
         let mut results = HashMap::new();
-        
+
         for test_case in &self.test_cases {
             let baseline_time = self.measure_compilation_without_expect(test_case);
             let expect_time = self.measure_compilation_with_expect(test_case);
-            
+
             let overhead = expect_time.saturating_sub(baseline_time);
             let overhead_percentage = (overhead.as_nanos() as f64 / baseline_time.as_nanos() as f64) * 100.0;
-            
+
             results.insert(test_case.name.clone(), TestResult {
                 baseline_time,
                 expect_time,
@@ -814,17 +816,17 @@ impl CompilationBenchmark {
                 overhead_percentage,
             });
         }
-        
+
         PerformanceReport { results }
     }
-    
+
     fn measure_compilation_without_expect(&self, _test_case: &TestCase) -> std::time::Duration {
         let start = Instant::now();
         // 模拟编译过程
         std::thread::sleep(std::time::Duration::from_millis(100));
         start.elapsed()
     }
-    
+
     fn measure_compilation_with_expect(&self, test_case: &TestCase) -> std::time::Duration {
         let start = Instant::now();
         // 模拟带expect的编译过程 (额外开销)
@@ -851,7 +853,7 @@ impl PerformanceReport {
         let avg_overhead: f64 = self.results.values()
             .map(|r| r.overhead_percentage)
             .sum::<f64>() / total_tests as f64;
-        
+
         format!(
             "性能测试总结:\n- 测试用例: {} 个\n- 平均编译时间开销: {:.2}%\n- 最大开销: {:.2}%",
             total_tests,
@@ -902,7 +904,7 @@ pub fn run_expect_performance_benchmark() {
             },
         ],
     };
-    
+
     let report = benchmark.run_performance_test();
     println!("{}", report.summary());
 }
@@ -918,13 +920,13 @@ pub fn run_expect_performance_benchmark() {
 M_total = M_baseline + M_expect_overhead
 
 其中:
-M_expect_overhead = sizeof(LintExpectation) × N_expectations + 
+M_expect_overhead = sizeof(LintExpectation) × N_expectations +
                    sizeof(ExpectationContext) × N_scopes +
                    hash_map_overhead(N_expectations)
 
 实际测量:
 - LintExpectation: ~64 bytes
-- ExpectationContext: ~128 bytes  
+- ExpectationContext: ~128 bytes
 - HashMap overhead: ~24 bytes per entry
 
 对于典型项目 (1000个expectations):
@@ -995,7 +997,7 @@ pub mod error_handling {
             resolution: String,
         },
     }
-    
+
     impl ExpectError {
         pub fn recover_gracefully(&self) -> RecoveryAction {
             match self {
@@ -1015,7 +1017,7 @@ pub mod error_handling {
             }
         }
     }
-    
+
     #[derive(Debug)]
     pub enum RecoveryAction {
         ApplyFix(String),
@@ -1048,7 +1050,7 @@ pub mod future_ide_features {
             }
         ]
     }
-    
+
     // 批量期望管理
     pub fn batch_update_expectations(
         expectations: &[ExpectationId],
@@ -1087,7 +1089,7 @@ pub mod ai_integration {
         model: Box<dyn LanguageModel>,
         context: ProjectContext,
     }
-    
+
     impl AiExpectationAssistant {
         pub async fn analyze_expectations(&self) -> AiAnalysis {
             // AI分析期望的合理性和必要性
@@ -1097,13 +1099,13 @@ pub mod ai_integration {
                 optimization_opportunities: self.find_optimizations().await,
             }
         }
-        
+
         pub async fn generate_reason(&self, lint: &LintInfo) -> String {
             // AI生成期望的原因说明
             self.model.generate_explanation(lint).await
         }
     }
-    
+
     pub struct AiAnalysis {
         pub unnecessary_expectations: Vec<ExpectationId>,
         pub missing_expectations: Vec<SuggestedExpectation>,
@@ -1144,7 +1146,7 @@ T_saved = T_manual_lint_management - T_expect_workflow
 
 预期提升:
 - 代码审查效率: +40%
-- 重构安全性: +60%  
+- 重构安全性: +60%
 - 新开发者上手速度: +25%
 
 经济价值:
@@ -1167,7 +1169,7 @@ pub mod quality_tracking {
         pub code_review_efficiency: f64,       // 审查效率提升
         pub onboarding_acceleration: f64,      // 新人上手加速
     }
-    
+
     pub fn project_quality_improvement(
         before: &ProjectState,
         after: &ProjectState,
@@ -1179,7 +1181,7 @@ pub mod quality_tracking {
             onboarding_acceleration: measure_onboarding_speed(before, after),
         }
     }
-    
+
     #[derive(Debug)]
     pub struct ProjectState {
         pub total_suppressions: usize,
@@ -1187,23 +1189,23 @@ pub mod quality_tracking {
         pub review_time_avg: std::time::Duration,
         pub onboarding_time_avg: std::time::Duration,
     }
-    
+
     fn calculate_accuracy_improvement(before: &ProjectState, after: &ProjectState) -> f64 {
         let before_accuracy = before.accurate_suppressions as f64 / before.total_suppressions as f64;
         let after_accuracy = after.accurate_suppressions as f64 / after.total_suppressions as f64;
         (after_accuracy - before_accuracy) * 100.0
     }
-    
+
     fn measure_debt_reduction(_before: &ProjectState, _after: &ProjectState) -> f64 {
         // 通过期望验证减少的技术债务
         15.0 // 预期15%的技术债减少
     }
-    
+
     fn measure_review_efficiency(before: &ProjectState, after: &ProjectState) -> f64 {
         let improvement = before.review_time_avg.as_secs() as f64 / after.review_time_avg.as_secs() as f64;
         (improvement - 1.0) * 100.0
     }
-    
+
     fn measure_onboarding_speed(before: &ProjectState, after: &ProjectState) -> f64 {
         let improvement = before.onboarding_time_avg.as_secs() as f64 / after.onboarding_time_avg.as_secs() as f64;
         (improvement - 1.0) * 100.0
@@ -1229,7 +1231,7 @@ Rust 1.81.0的#[expect]属性代表了**静态分析工具链的重大进步**�
 #### 10.2.1 静态分析理论
 
 - **验证性抑制模型**: 建立了可验证lint抑制的理论基础
-- **作用域继承算法**: 设计了层次化lint级别管理机制  
+- **作用域继承算法**: 设计了层次化lint级别管理机制
 - **期望状态机**: 创新性地引入了期望验证的状态转换模型
 
 #### 10.2.2 软件工程实践
@@ -1291,7 +1293,7 @@ V_total = V_innovation + V_practicality + V_ecosystem + V_future
 // LSP集成示例
 pub mod lsp_integration {
     use serde::{Deserialize, Serialize};
-    
+
     #[derive(Serialize, Deserialize)]
     pub struct ExpectationHover {
         pub lint_name: String,
@@ -1299,7 +1301,7 @@ pub mod lsp_integration {
         pub status: ExpectationStatus,
         pub suggestion: Option<String>,
     }
-    
+
     #[derive(Serialize, Deserialize)]
     pub enum ExpectationStatus {
         Active,
@@ -1307,13 +1309,13 @@ pub mod lsp_integration {
         Unfulfilled,
         Unnecessary,
     }
-    
+
     pub struct ExpectationCodeAction {
         pub title: String,
         pub kind: CodeActionKind,
         pub edit: WorkspaceEdit,
     }
-    
+
     #[derive(Serialize, Deserialize)]
     pub enum CodeActionKind {
         AddExpectation,
@@ -1321,36 +1323,36 @@ pub mod lsp_integration {
         UpdateReason,
         ConvertToAllow,
     }
-    
+
     #[derive(Serialize, Deserialize)]
     pub struct WorkspaceEdit {
         pub changes: std::collections::HashMap<String, Vec<TextEdit>>,
     }
-    
+
     #[derive(Serialize, Deserialize)]
     pub struct TextEdit {
         pub range: Range,
         pub new_text: String,
     }
-    
+
     #[derive(Serialize, Deserialize)]
     pub struct Range {
         pub start: Position,
         pub end: Position,
     }
-    
+
     #[derive(Serialize, Deserialize)]
     pub struct Position {
         pub line: u32,
         pub character: u32,
     }
-    
+
     // 智能代码补全
     pub fn provide_expectation_completions(
         context: &CompletionContext,
     ) -> Vec<CompletionItem> {
         let mut completions = Vec::new();
-        
+
         // 添加常用lint名称补全
         for lint_name in &["dead_code", "unused_variables", "clippy::all"] {
             completions.push(CompletionItem {
@@ -1360,10 +1362,10 @@ pub mod lsp_integration {
                 documentation: Some(get_lint_documentation(lint_name)),
             });
         }
-        
+
         completions
     }
-    
+
     #[derive(Serialize, Deserialize)]
     pub struct CompletionItem {
         pub label: String,
@@ -1371,19 +1373,19 @@ pub mod lsp_integration {
         pub detail: Option<String>,
         pub documentation: Option<String>,
     }
-    
+
     #[derive(Serialize, Deserialize)]
     pub enum CompletionItemKind {
         Value,
         Keyword,
         Snippet,
     }
-    
+
     pub struct CompletionContext {
         pub position: Position,
         pub trigger_character: Option<char>,
     }
-    
+
     fn get_lint_documentation(lint_name: &str) -> String {
         match lint_name {
             "dead_code" => "检测未使用的代码".to_string(),
@@ -1402,7 +1404,7 @@ pub mod lsp_integration {
 pub mod visualization_tools {
     use std::collections::HashMap;
     use serde::{Deserialize, Serialize};
-    
+
     #[derive(Serialize, Deserialize)]
     pub struct ExpectationDashboard {
         pub project_stats: ProjectStats,
@@ -1410,7 +1412,7 @@ pub mod visualization_tools {
         pub trend_data: Vec<TrendPoint>,
         pub hotspots: Vec<CodeHotspot>,
     }
-    
+
     #[derive(Serialize, Deserialize)]
     pub struct ProjectStats {
         pub total_expectations: usize,
@@ -1418,7 +1420,7 @@ pub mod visualization_tools {
         pub unfulfilled_count: usize,
         pub coverage_percentage: f64,
     }
-    
+
     #[derive(Serialize, Deserialize)]
     pub struct ExpectationCategory {
         pub lint_type: String,
@@ -1426,21 +1428,21 @@ pub mod visualization_tools {
         pub percentage: f64,
         pub trend: TrendDirection,
     }
-    
+
     #[derive(Serialize, Deserialize)]
     pub enum TrendDirection {
         Increasing,
         Decreasing,
         Stable,
     }
-    
+
     #[derive(Serialize, Deserialize)]
     pub struct TrendPoint {
         pub date: String,
         pub expectation_count: usize,
         pub fulfillment_rate: f64,
     }
-    
+
     #[derive(Serialize, Deserialize)]
     pub struct CodeHotspot {
         pub file_path: String,
@@ -1448,11 +1450,11 @@ pub mod visualization_tools {
         pub risk_score: f64,
         pub suggested_actions: Vec<String>,
     }
-    
+
     pub fn generate_dashboard(project_path: &str) -> ExpectationDashboard {
         // 分析项目中的所有expect使用情况
         let stats = analyze_project_expectations(project_path);
-        
+
         ExpectationDashboard {
             project_stats: ProjectStats {
                 total_expectations: stats.total,
@@ -1465,14 +1467,14 @@ pub mod visualization_tools {
             hotspots: identify_hotspots(project_path),
         }
     }
-    
+
     struct ExpectationStats {
         total: usize,
         fulfilled: usize,
         unfulfilled: usize,
         by_type: HashMap<String, usize>,
     }
-    
+
     fn analyze_project_expectations(_project_path: &str) -> ExpectationStats {
         // 模拟项目分析
         ExpectationStats {
@@ -1486,7 +1488,7 @@ pub mod visualization_tools {
             ].iter().cloned().collect(),
         }
     }
-    
+
     fn categorize_expectations(stats: &ExpectationStats) -> Vec<ExpectationCategory> {
         stats.by_type.iter()
             .map(|(lint_type, count)| ExpectationCategory {
@@ -1497,7 +1499,7 @@ pub mod visualization_tools {
             })
             .collect()
     }
-    
+
     fn generate_trend_data(_project_path: &str) -> Vec<TrendPoint> {
         // 模拟趋势数据
         vec![
@@ -1518,7 +1520,7 @@ pub mod visualization_tools {
             },
         ]
     }
-    
+
     fn identify_hotspots(_project_path: &str) -> Vec<CodeHotspot> {
         vec![
             CodeHotspot {

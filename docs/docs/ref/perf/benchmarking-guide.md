@@ -3,36 +3,38 @@
 
 ## 📊 目录
 
-- [概述 / Overview](#概述-overview)
-- [工具选择 / Tool Selection](#工具选择-tool-selection)
-  - [1. Criterion - 性能基准测试 / Performance Benchmarking](#1-criterion-性能基准测试-performance-benchmarking)
-  - [2. Miri - 未定义行为检测 / Undefined Behavior Detection](#2-miri-未定义行为检测-undefined-behavior-detection)
-  - [3. Loom - 并发测试 / Concurrency Testing](#3-loom-并发测试-concurrency-testing)
-- [基准测试设置 / Benchmark Setup](#基准测试设置-benchmark-setup)
-  - [1. 基础基准测试 / Basic Benchmark](#1-基础基准测试-basic-benchmark)
-  - [2. 比较基准测试 / Comparison Benchmark](#2-比较基准测试-comparison-benchmark)
-  - [3. 异步基准测试 / Async Benchmark](#3-异步基准测试-async-benchmark)
-- [并发测试 / Concurrency Testing](#并发测试-concurrency-testing)
-  - [1. Loom 基础测试 / Basic Loom Test](#1-loom-基础测试-basic-loom-test)
-  - [2. 复杂并发场景 / Complex Concurrency Scenario](#2-复杂并发场景-complex-concurrency-scenario)
-- [内存安全测试 / Memory Safety Testing](#内存安全测试-memory-safety-testing)
-  - [1. Miri 基础测试 / Basic Miri Test](#1-miri-基础测试-basic-miri-test)
-  - [2. 数据竞争检测 / Data Race Detection](#2-数据竞争检测-data-race-detection)
-- [性能分析 / Performance Analysis](#性能分析-performance-analysis)
-  - [1. 火焰图生成 / Flame Graph Generation](#1-火焰图生成-flame-graph-generation)
-  - [2. 内存分析 / Memory Analysis](#2-内存分析-memory-analysis)
-  - [3. CPU 分析 / CPU Analysis](#3-cpu-分析-cpu-analysis)
-- [持续集成 / Continuous Integration](#持续集成-continuous-integration)
-  - [1. GitHub Actions 配置 / GitHub Actions Configuration](#1-github-actions-配置-github-actions-configuration)
-  - [2. 性能回归检测 / Performance Regression Detection](#2-性能回归检测-performance-regression-detection)
-- [最佳实践 / Best Practices](#最佳实践-best-practices)
-  - [1. 基准测试最佳实践 / Benchmarking Best Practices](#1-基准测试最佳实践-benchmarking-best-practices)
-  - [2. 并发测试最佳实践 / Concurrency Testing Best Practices](#2-并发测试最佳实践-concurrency-testing-best-practices)
-  - [3. 性能优化最佳实践 / Performance Optimization Best Practices](#3-性能优化最佳实践-performance-optimization-best-practices)
-- [工具链集成 / Toolchain Integration](#工具链集成-toolchain-integration)
-  - [1. 开发环境配置 / Development Environment](#1-开发环境配置-development-environment)
-  - [2. 预提交钩子 / Pre-commit Hooks](#2-预提交钩子-pre-commit-hooks)
-- [扩展阅读 / Further Reading](#扩展阅读-further-reading)
+- [性能基准测试指南 / Performance Benchmarking Guide](#性能基准测试指南--performance-benchmarking-guide)
+  - [📊 目录](#-目录)
+  - [概述 / Overview](#概述--overview)
+  - [工具选择 / Tool Selection](#工具选择--tool-selection)
+    - [1. Criterion - 性能基准测试 / Performance Benchmarking](#1-criterion---性能基准测试--performance-benchmarking)
+    - [2. Miri - 未定义行为检测 / Undefined Behavior Detection](#2-miri---未定义行为检测--undefined-behavior-detection)
+    - [3. Loom - 并发测试 / Concurrency Testing](#3-loom---并发测试--concurrency-testing)
+  - [基准测试设置 / Benchmark Setup](#基准测试设置--benchmark-setup)
+    - [1. 基础基准测试 / Basic Benchmark](#1-基础基准测试--basic-benchmark)
+    - [2. 比较基准测试 / Comparison Benchmark](#2-比较基准测试--comparison-benchmark)
+    - [3. 异步基准测试 / Async Benchmark](#3-异步基准测试--async-benchmark)
+  - [并发测试 / Concurrency Testing](#并发测试--concurrency-testing)
+    - [1. Loom 基础测试 / Basic Loom Test](#1-loom-基础测试--basic-loom-test)
+    - [2. 复杂并发场景 / Complex Concurrency Scenario](#2-复杂并发场景--complex-concurrency-scenario)
+  - [内存安全测试 / Memory Safety Testing](#内存安全测试--memory-safety-testing)
+    - [1. Miri 基础测试 / Basic Miri Test](#1-miri-基础测试--basic-miri-test)
+    - [2. 数据竞争检测 / Data Race Detection](#2-数据竞争检测--data-race-detection)
+  - [性能分析 / Performance Analysis](#性能分析--performance-analysis)
+    - [1. 火焰图生成 / Flame Graph Generation](#1-火焰图生成--flame-graph-generation)
+    - [2. 内存分析 / Memory Analysis](#2-内存分析--memory-analysis)
+    - [3. CPU 分析 / CPU Analysis](#3-cpu-分析--cpu-analysis)
+  - [持续集成 / Continuous Integration](#持续集成--continuous-integration)
+    - [1. GitHub Actions 配置 / GitHub Actions Configuration](#1-github-actions-配置--github-actions-configuration)
+    - [2. 性能回归检测 / Performance Regression Detection](#2-性能回归检测--performance-regression-detection)
+  - [最佳实践 / Best Practices](#最佳实践--best-practices)
+    - [1. 基准测试最佳实践 / Benchmarking Best Practices](#1-基准测试最佳实践--benchmarking-best-practices)
+    - [2. 并发测试最佳实践 / Concurrency Testing Best Practices](#2-并发测试最佳实践--concurrency-testing-best-practices)
+    - [3. 性能优化最佳实践 / Performance Optimization Best Practices](#3-性能优化最佳实践--performance-optimization-best-practices)
+  - [工具链集成 / Toolchain Integration](#工具链集成--toolchain-integration)
+    - [1. 开发环境配置 / Development Environment](#1-开发环境配置--development-environment)
+    - [2. 预提交钩子 / Pre-commit Hooks](#2-预提交钩子--pre-commit-hooks)
+  - [扩展阅读 / Further Reading](#扩展阅读--further-reading)
 
 
 ## 概述 / Overview
@@ -109,17 +111,17 @@ use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criteri
 
 fn bench_fibonacci_comparison(c: &mut Criterion) {
     let mut group = c.benchmark_group("fibonacci_comparison");
-    
+
     for i in [10, 15, 20].iter() {
         group.bench_with_input(BenchmarkId::new("recursive", i), i, |b, i| {
             b.iter(|| fibonacci_recursive(black_box(*i)))
         });
-        
+
         group.bench_with_input(BenchmarkId::new("iterative", i), i, |b, i| {
             b.iter(|| fibonacci_iterative(black_box(*i)))
         });
     }
-    
+
     group.finish();
 }
 
@@ -134,13 +136,13 @@ fn fibonacci_recursive(n: u64) -> u64 {
 fn fibonacci_iterative(n: u64) -> u64 {
     let mut a = 1;
     let mut b = 1;
-    
+
     for _ in 2..=n {
         let temp = a + b;
         a = b;
         b = temp;
     }
-    
+
     b
 }
 
@@ -161,7 +163,7 @@ async fn async_operation(input: u64) -> u64 {
 
 fn bench_async_operation(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
-    
+
     c.bench_function("async_operation", |b| {
         b.to_async(&rt).iter(|| async_operation(black_box(42)))
     });
@@ -185,18 +187,18 @@ fn test_atomic_operations() {
     loom::model(|| {
         let atomic = Arc::new(AtomicUsize::new(0));
         let atomic_clone = atomic.clone();
-        
+
         let t1 = thread::spawn(move || {
             atomic_clone.fetch_add(1, Ordering::SeqCst);
         });
-        
+
         let t2 = thread::spawn(move || {
             atomic.fetch_add(1, Ordering::SeqCst);
         });
-        
+
         t1.join().unwrap();
         t2.join().unwrap();
-        
+
         assert_eq!(atomic.load(Ordering::SeqCst), 2);
     });
 }
@@ -216,12 +218,12 @@ fn test_producer_consumer() {
         let buffer = Arc::new(Mutex::new(Vec::new()));
         let count = Arc::new(AtomicUsize::new(0));
         let done = Arc::new(AtomicBool::new(false));
-        
+
         // 生产者线程
         let buffer_clone = buffer.clone();
         let count_clone = count.clone();
         let done_clone = done.clone();
-        
+
         let producer = thread::spawn(move || {
             for i in 0..10 {
                 let mut buf = buffer_clone.lock().unwrap();
@@ -230,7 +232,7 @@ fn test_producer_consumer() {
             }
             done_clone.store(true, Ordering::SeqCst);
         });
-        
+
         // 消费者线程
         let consumer = thread::spawn(move || {
             let mut consumed = 0;
@@ -238,7 +240,7 @@ fn test_producer_consumer() {
                 if done.load(Ordering::SeqCst) && count.load(Ordering::SeqCst) == consumed {
                     break;
                 }
-                
+
                 if let Ok(mut buf) = buffer.try_lock() {
                     if let Some(item) = buf.pop() {
                         consumed += 1;
@@ -248,10 +250,10 @@ fn test_producer_consumer() {
             }
             consumed
         });
-        
+
         producer.join().unwrap();
         let consumed = consumer.join().unwrap();
-        
+
         assert_eq!(consumed, 10);
     });
 }
@@ -265,34 +267,34 @@ fn test_producer_consumer() {
 #[cfg(test)]
 mod miri_tests {
     use super::*;
-    
+
     #[test]
     fn test_memory_safety() {
         // 测试未定义行为
         let mut vec = Vec::new();
         vec.push(1);
         vec.push(2);
-        
+
         // 安全的访问
         assert_eq!(vec[0], 1);
         assert_eq!(vec[1], 2);
-        
+
         // 测试边界情况
         if let Some(last) = vec.last() {
             assert_eq!(*last, 2);
         }
     }
-    
+
     #[test]
     fn test_unsafe_code() {
         unsafe {
             let mut data = [1, 2, 3, 4, 5];
             let ptr = data.as_mut_ptr();
-            
+
             // 安全的指针操作
             *ptr.add(0) = 10;
             *ptr.add(1) = 20;
-            
+
             assert_eq!(data[0], 10);
             assert_eq!(data[1], 20);
         }
@@ -307,12 +309,12 @@ mod miri_tests {
 mod race_condition_tests {
     use std::sync::{Arc, Mutex};
     use std::thread;
-    
+
     #[test]
     fn test_no_data_race() {
         let data = Arc::new(Mutex::new(0));
         let mut handles = vec![];
-        
+
         for _ in 0..10 {
             let data_clone = data.clone();
             let handle = thread::spawn(move || {
@@ -321,11 +323,11 @@ mod race_condition_tests {
             });
             handles.push(handle);
         }
-        
+
         for handle in handles {
             handle.join().unwrap();
         }
-        
+
         assert_eq!(*data.lock().unwrap(), 10);
     }
 }
@@ -375,33 +377,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           components: rustfmt, clippy
-      
+
       - name: Run benchmarks
         run: cargo bench
-      
+
       - name: Upload benchmark results
         uses: actions/upload-artifact@v3
         with:
           name: benchmark-results
           path: target/criterion/
-  
+
   miri:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
           components: miri
-      
+
       - name: Run Miri tests
         run: cargo miri test
 ```
@@ -413,18 +415,18 @@ use criterion::{criterion_group, criterion_main, Criterion};
 
 fn bench_regression_test(c: &mut Criterion) {
     let mut group = c.benchmark_group("regression");
-    
+
     // 设置性能阈值
     group.measurement_time(std::time::Duration::from_secs(10));
     group.sample_size(1000);
-    
+
     group.bench_function("critical_path", |b| {
         b.iter(|| {
             // 关键路径代码
             critical_operation()
         })
     });
-    
+
     group.finish();
 }
 

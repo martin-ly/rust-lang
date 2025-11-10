@@ -51,7 +51,7 @@ Rust通过以下抽象表示任务:
    async fn task() {
        // 异步任务代码
    }
-   
+
    // 在运行时上执行任务
    runtime.spawn(task());
    ```
@@ -114,7 +114,7 @@ Created → Ready → Running → Terminated
 资源管理安全性定理:
 
 ```math
-\forall t \in \text{Task}, \forall r \in \text{Resources}(t): 
+\forall t \in \text{Task}, \forall r \in \text{Resources}(t):
 \text{terminated}(t) \Rightarrow \text{released}(r) \lor \text{transferred}(r)
 ```
 
@@ -174,10 +174,10 @@ Created → Ready → Running → Terminated
    ```rust
    use std::sync::mpsc;
    let (sender, receiver) = mpsc::channel();
-   
+
    // 发送消息
    sender.send(message).unwrap();
-   
+
    // 接收消息
    let received = receiver.recv().unwrap();
    ```
@@ -238,14 +238,14 @@ Created → Ready → Running → Terminated
 1. **资源安全性**
 
    ```math
-   \forall t \in \text{Task}, \forall r \in \text{Resources}(t): 
+   \forall t \in \text{Task}, \forall r \in \text{Resources}(t):
    \text{access}(t, r) \Rightarrow \text{owns}(t, r) \lor \text{permitted}(t, r)
    ```
 
 2. **终止性**
 
    ```math
-   \forall t \in \text{Task}: \text{priority}(t) > 0 \land \text{no\_deadlock} 
+   \forall t \in \text{Task}: \text{priority}(t) > 0 \land \text{no\_deadlock}
    \Rightarrow \diamond \text{terminated}(t)
    ```
 
@@ -253,7 +253,7 @@ Created → Ready → Running → Terminated
 
    ```math
    \forall m \in \text{Message}, \forall c \in \text{Channel}:
-   \text{send}(c, m) = \text{Ok} \land \text{channel\_live}(c) 
+   \text{send}(c, m) = \text{Ok} \land \text{channel\_live}(c)
    \Rightarrow \diamond \text{receive}(c) = \text{Ok}(m)
    ```
 

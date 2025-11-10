@@ -3,42 +3,44 @@
 
 ## 📊 目录
 
-- [概述](#概述)
-- [理论基础](#理论基础)
-  - [1. 模块系统形式化定义](#1-模块系统形式化定义)
-  - [2. 路径类型分类](#2-路径类型分类)
-    - [2.1 绝对路径 (Absolute Paths)](#21-绝对路径-absolute-paths)
-    - [2.2 相对路径 (Relative Paths)](#22-相对路径-relative-paths)
-    - [2.3 外部包路径 (External Crate Paths)](#23-外部包路径-external-crate-paths)
-  - [3. 解析算法](#3-解析算法)
-    - [3.1 路径解析规则](#31-路径解析规则)
-    - [3.2 作用域查找](#32-作用域查找)
-  - [4. 可见性控制](#4-可见性控制)
-    - [4.1 可见性级别](#41-可见性级别)
-    - [4.2 可见性传播](#42-可见性传播)
-  - [5. 模块树构建](#5-模块树构建)
-    - [5.1 模块声明处理](#51-模块声明处理)
-    - [5.2 依赖图构建](#52-依赖图构建)
-  - [6. 预编译模块 (Prelude)](#6-预编译模块-prelude)
-    - [6.1 标准预编译](#61-标准预编译)
-    - [6.2 自定义预编译](#62-自定义预编译)
-  - [7. 模块宏和属性](#7-模块宏和属性)
-    - [7.1 路径属性](#71-路径属性)
-    - [7.2 模块生成宏](#72-模块生成宏)
-  - [8. 高级解析特性](#8-高级解析特性)
-    - [8.1 动态模块加载](#81-动态模块加载)
-    - [8.2 模块热重载](#82-模块热重载)
-  - [9. 性能优化](#9-性能优化)
-    - [9.1 解析缓存](#91-解析缓存)
-    - [9.2 并行解析](#92-并行解析)
-  - [10. 错误处理和诊断](#10-错误处理和诊断)
-    - [10.1 解析错误类型](#101-解析错误类型)
-    - [10.2 诊断信息生成](#102-诊断信息生成)
-- [实际应用示例](#实际应用示例)
-  - [1. 大型项目的模块组织](#1-大型项目的模块组织)
-  - [2. 微服务架构的模块设计](#2-微服务架构的模块设计)
-- [相关模块](#相关模块)
-- [参考资料](#参考资料)
+- [模块解析理论](#模块解析理论)
+  - [📊 目录](#-目录)
+  - [概述](#概述)
+  - [理论基础](#理论基础)
+    - [1. 模块系统形式化定义](#1-模块系统形式化定义)
+    - [2. 路径类型分类](#2-路径类型分类)
+      - [2.1 绝对路径 (Absolute Paths)](#21-绝对路径-absolute-paths)
+      - [2.2 相对路径 (Relative Paths)](#22-相对路径-relative-paths)
+      - [2.3 外部包路径 (External Crate Paths)](#23-外部包路径-external-crate-paths)
+    - [3. 解析算法](#3-解析算法)
+      - [3.1 路径解析规则](#31-路径解析规则)
+      - [3.2 作用域查找](#32-作用域查找)
+    - [4. 可见性控制](#4-可见性控制)
+      - [4.1 可见性级别](#41-可见性级别)
+      - [4.2 可见性传播](#42-可见性传播)
+    - [5. 模块树构建](#5-模块树构建)
+      - [5.1 模块声明处理](#51-模块声明处理)
+      - [5.2 依赖图构建](#52-依赖图构建)
+    - [6. 预编译模块 (Prelude)](#6-预编译模块-prelude)
+      - [6.1 标准预编译](#61-标准预编译)
+      - [6.2 自定义预编译](#62-自定义预编译)
+    - [7. 模块宏和属性](#7-模块宏和属性)
+      - [7.1 路径属性](#71-路径属性)
+      - [7.2 模块生成宏](#72-模块生成宏)
+    - [8. 高级解析特性](#8-高级解析特性)
+      - [8.1 动态模块加载](#81-动态模块加载)
+      - [8.2 模块热重载](#82-模块热重载)
+    - [9. 性能优化](#9-性能优化)
+      - [9.1 解析缓存](#91-解析缓存)
+      - [9.2 并行解析](#92-并行解析)
+    - [10. 错误处理和诊断](#10-错误处理和诊断)
+      - [10.1 解析错误类型](#101-解析错误类型)
+      - [10.2 诊断信息生成](#102-诊断信息生成)
+  - [实际应用示例](#实际应用示例)
+    - [1. 大型项目的模块组织](#1-大型项目的模块组织)
+    - [2. 微服务架构的模块设计](#2-微服务架构的模块设计)
+  - [相关模块](#相关模块)
+  - [参考资料](#参考资料)
 
 
 ## 概述
@@ -56,7 +58,7 @@
 ModuleSpace = (Modules, Dependencies, Resolution)
 其中:
 - Modules: 模块集合
-- Dependencies: 依赖关系 ⊆ Modules × Modules  
+- Dependencies: 依赖关系 ⊆ Modules × Modules
 - Resolution: Path → Module 的解析函数
 ```
 
@@ -95,7 +97,7 @@ use sibling_module::Item;
 
 // 形式化表示
 RelativePath ::= 'super' ('::' 'super')* '::' PathSegments
-              | 'self' '::' PathSegments  
+              | 'self' '::' PathSegments
               | PathSegments
 ```
 
@@ -148,19 +150,19 @@ impl ScopeHierarchy {
         if let Some(item) = self.current.lookup_local(name) {
             return Some(item);
         }
-        
+
         // 2. 导入项查找
         for import in &self.imports {
             if import.matches(name) {
                 return Some(import.resolve());
             }
         }
-        
+
         // 3. 父作用域递归查找
         if let Some(parent) = &self.parent {
             return parent.lookup(name);
         }
-        
+
         None
     }
 }
@@ -285,28 +287,28 @@ impl DependencyGraph {
     pub fn add_dependency(&mut self, from: ModuleId, to: ModuleId) {
         self.edges.entry(from).or_default().insert(to);
     }
-    
+
     // 循环依赖检测
     pub fn detect_cycles(&self) -> Vec<Vec<ModuleId>> {
         let mut visited = HashSet::new();
         let mut rec_stack = HashSet::new();
         let mut cycles = Vec::new();
-        
+
         for &node in self.nodes.keys() {
             if !visited.contains(&node) {
                 self.dfs_cycle_detection(
-                    node, 
-                    &mut visited, 
-                    &mut rec_stack, 
+                    node,
+                    &mut visited,
+                    &mut rec_stack,
                     &mut cycles,
                     &mut Vec::new()
                 );
             }
         }
-        
+
         cycles
     }
-    
+
     fn dfs_cycle_detection(
         &self,
         node: ModuleId,
@@ -318,7 +320,7 @@ impl DependencyGraph {
         visited.insert(node);
         rec_stack.insert(node);
         current_path.push(node);
-        
+
         if let Some(neighbors) = self.edges.get(&node) {
             for &neighbor in neighbors {
                 if !visited.contains(&neighbor) {
@@ -335,7 +337,7 @@ impl DependencyGraph {
                 }
             }
         }
-        
+
         current_path.pop();
         rec_stack.remove(&node);
     }
@@ -363,22 +365,22 @@ pub enum PreludeItem {
 impl Prelude {
     pub fn std_prelude() -> Self {
         let mut prelude = Prelude::new();
-        
+
         // 自动导入的类型
         prelude.add_type("Option", std_option_definition());
         prelude.add_type("Result", std_result_definition());
         prelude.add_type("String", std_string_definition());
         prelude.add_type("Vec", std_vec_definition());
-        
+
         // 自动导入的特征
         prelude.add_trait("Clone", clone_trait_definition());
         prelude.add_trait("Copy", copy_trait_definition());
         prelude.add_trait("Debug", debug_trait_definition());
-        
+
         // 自动导入的宏
         prelude.add_macro("println!", println_macro_definition());
         prelude.add_macro("vec!", vec_macro_definition());
-        
+
         prelude
     }
 }
@@ -408,7 +410,7 @@ use my_crate::prelude::*;
 #[path = "custom_location.rs"]
 mod custom_module;
 
-#[path = "../shared/common.rs"]  
+#[path = "../shared/common.rs"]
 mod shared_module;
 
 // 条件编译的模块解析
@@ -430,7 +432,7 @@ use proc_macro::TokenStream;
 #[proc_macro]
 pub fn generate_modules(input: TokenStream) -> TokenStream {
     let config: ModuleConfig = syn::parse(input).unwrap();
-    
+
     let mut modules = Vec::new();
     for module_name in config.modules {
         modules.push(quote! {
@@ -440,7 +442,7 @@ pub fn generate_modules(input: TokenStream) -> TokenStream {
             }
         });
     }
-    
+
     quote! {
         #(#modules)*
     }.into()
@@ -464,10 +466,10 @@ impl DynamicModule {
     pub fn load(path: &Path) -> Result<Self, LoadError> {
         let library = unsafe { Library::new(path)? };
         let exports = Self::discover_exports(&library)?;
-        
+
         Ok(DynamicModule { library, exports })
     }
-    
+
     pub fn get_symbol<T>(&self, name: &str) -> Option<Symbol<T>> {
         self.exports.get(name).and_then(|&ptr| {
             unsafe { self.library.get(name.as_bytes()).ok() }
@@ -490,7 +492,7 @@ pub struct HotReloadableModule {
 impl HotReloadableModule {
     pub fn check_and_reload(&mut self) -> Result<bool, ReloadError> {
         let current_modified = self.path.metadata()?.modified()?;
-        
+
         if current_modified > self.last_modified {
             self.module = Some(DynamicModule::load(&self.path)?);
             self.last_modified = current_modified;
@@ -527,22 +529,22 @@ impl ResolutionCache {
             path: path.to_string(),
             context,
         };
-        
+
         if let Some(cached) = self.cache.read().unwrap().get(&key) {
             self.hits.fetch_add(1, Ordering::Relaxed);
             return Some(cached.item.clone());
         }
-        
+
         self.misses.fetch_add(1, Ordering::Relaxed);
         None
     }
-    
+
     pub fn cache_resolution(&self, path: &str, context: ModuleId, item: ResolvedItem) {
         let key = PathKey {
             path: path.to_string(),
             context,
         };
-        
+
         self.cache.write().unwrap().insert(key, CachedResolution {
             item,
             timestamp: Instant::now(),
@@ -578,16 +580,16 @@ pub fn parallel_module_resolution(
 pub enum ResolutionError {
     #[error("Module '{0}' not found")]
     ModuleNotFound(String),
-    
+
     #[error("Ambiguous import: '{0}' could refer to multiple items")]
     AmbiguousImport(String),
-    
+
     #[error("Circular dependency detected: {0:?}")]
     CircularDependency(Vec<String>),
-    
+
     #[error("Private item '{0}' is not accessible from module '{1}'")]
     PrivateItemAccess(String, String),
-    
+
     #[error("Invalid path syntax: '{0}'")]
     InvalidPathSyntax(String),
 }
@@ -618,7 +620,7 @@ impl DiagnosticEngine {
             }
             // ... 其他错误类型
         };
-        
+
         self.errors.push(diagnostic);
     }
 }
@@ -689,11 +691,11 @@ pub mod shared {
         // 自动生成的protobuf定义
         include!(concat!(env!("OUT_DIR"), "/proto.rs"));
     }
-    
+
     pub mod metrics {
         pub use prometheus::*;
     }
-    
+
     pub mod tracing {
         pub use tracing::*;
         pub use opentelemetry::*;
@@ -724,6 +726,6 @@ pub mod shared {
 
 ---
 
-**文档版本**: 1.0  
-**最后更新**: 2025-06-30  
+**文档版本**: 1.0
+**最后更新**: 2025-06-30
 **维护者**: Rust模块系统研究组

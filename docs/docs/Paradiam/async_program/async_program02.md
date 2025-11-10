@@ -83,7 +83,7 @@ def synchronous_process():
 async function asynchronousProcess(): Promise<Result> {
     const result1Promise = timeConsumingOperation1();  // 启动但不阻塞
     const result2Promise = timeConsumingOperation2();  // 同时启动
-    
+
     // 等待两个操作完成
     const [result1, result2] = await Promise.all([result1Promise, result2Promise]);
     return combine(result1, result2);
@@ -116,7 +116,7 @@ async fn async_workflow() -> Result<Data, Error> {
 fn sync_workflow() -> Result<Data, Error> {
     let handle1 = std::thread::spawn(|| fetch_data_1());
     let handle2 = std::thread::spawn(|| fetch_data_2());
-    
+
     let part1 = handle1.join().unwrap()?;
     let part2 = handle2.join().unwrap()?;
     process_data(part1, part2)
@@ -141,7 +141,7 @@ function syncOperation() {
 function asyncOperation() {
     return new Promise((resolve, reject) => {
         let x, y;
-        
+
         step1Async()
             .then(result => {
                 x = result;
@@ -201,7 +201,7 @@ function returnPromise<T>(value: T): Promise<T> {
 
 // bind: Promise<A> × (A → Promise<B>) → Promise<B>
 function bindPromise<T, U>(
-    promise: Promise<T>, 
+    promise: Promise<T>,
     fn: (value: T) => Promise<U>
 ): Promise<U> {
     return promise.then(fn);
@@ -226,11 +226,11 @@ async def causal_example():
     # 这两个操作没有因果依赖，可以并发执行
     task1 = asyncio.create_task(independent_operation1())
     task2 = asyncio.create_task(independent_operation2())
-    
+
     # 等待两个操作完成（顺序不确定）
     result1 = await task1
     result2 = await task2
-    
+
     # 这里有因果依赖，必须按顺序执行
     return process_results(result1, result2)
 ```
@@ -347,7 +347,7 @@ async def process_data():
     urls = ["url1", "url2", "url3"]
     tasks = [fetch_data(url) for url in urls]
     results = await asyncio.gather(*tasks)
-    
+
     # 处理结果
     for result in results:
         print(result)
@@ -373,17 +373,17 @@ where
 {
     let mut buffer = [0u8; 1024];
     let mut total_bytes = 0u64;
-    
+
     loop {
         let bytes_read = reader.read(&mut buffer).await?;
         if bytes_read == 0 {
             break;
         }
-        
+
         writer.write_all(&buffer[..bytes_read]).await?;
         total_bytes += bytes_read as u64;
     }
-    
+
     Ok(total_bytes)
 }
 ```
@@ -434,25 +434,25 @@ async def race_condition_demo():
 // TypeScript中的异步资源管理
 class DatabaseConnection {
     private connection: any = null;
-    
+
     async connect() {
         this.connection = await openDatabaseConnection();
     }
-    
+
     async query(sql: string): Promise<any> {
         if (!this.connection) {
             throw new Error("Connection not established");
         }
         return await this.connection.query(sql);
     }
-    
+
     async close() {
         if (this.connection) {
             await this.connection.close();
             this.connection = null;
         }
     }
-    
+
     // 资源的自动管理
     static async withConnection<T>(
         action: (conn: DatabaseConnection) => Promise<T>
@@ -476,7 +476,7 @@ class DatabaseConnection {
 // JavaScript中的异步错误处理
 async function fetchWithRetry(url, maxRetries = 3) {
     let lastError;
-    
+
     for (let attempt = 0; attempt < maxRetries; attempt++) {
         try {
             return await fetch(url);
@@ -486,7 +486,7 @@ async function fetchWithRetry(url, maxRetries = 3) {
             await new Promise(r => setTimeout(r, 1000 * Math.pow(2, attempt)));
         }
     }
-    
+
     throw new Error(`All ${maxRetries} attempts failed. Last error: ${lastError.message}`);
 }
 
@@ -510,9 +510,9 @@ describe('UserService', () => {
         // 设置模拟对象
         const mockApi = mock(ApiClient);
         when(mockApi.fetchUserData()).thenResolve({id: 1, name: 'Test'});
-        
+
         const userService = new UserService(instance(mockApi));
-        
+
         // 测试异步操作
         const result = await userService.processUserData();
         expect(result.processed).toBe(true);
@@ -609,7 +609,7 @@ async function processDataAsync(id) {
 class AsyncQueue<T> {
     private queue: T[] = [];
     private waiters: ((value: T) => void)[] = [];
-    
+
     // 生产者接口
     async push(item: T): Promise<void> {
         const waiter = this.waiters.shift();
@@ -621,7 +621,7 @@ class AsyncQueue<T> {
             this.queue.push(item);
         }
     }
-    
+
     // 消费者接口
     async pop(): Promise<T> {
         const item = this.queue.shift();
@@ -629,7 +629,7 @@ class AsyncQueue<T> {
             // 队列中有项目，直接返回
             return item;
         }
-        
+
         // 队列为空，创建等待Promise
         return new Promise<T>(resolve => {
             this.waiters.push(resolve);

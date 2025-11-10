@@ -3,39 +3,41 @@
 
 ## 📊 目录
 
-- [3.5.1 概述](#351-概述)
-- [3.5.2 子类型的基本概念](#352-子类型的基本概念)
-  - [3.5.2.1 子类型关系的定义](#3521-子类型关系的定义)
-  - [3.5.2.2 Rust中的子类型关系](#3522-rust中的子类型关系)
-- [3.5.3 子类型关系的形式化表示](#353-子类型关系的形式化表示)
-  - [3.5.3.1 子类型判断](#3531-子类型判断)
-  - [3.5.3.2 子类型规则](#3532-子类型规则)
-  - [3.5.3.3 子类型与类型安全](#3533-子类型与类型安全)
-- [3.5.4 Rust中的子类型机制](#354-rust中的子类型机制)
-  - [3.5.4.1 特征对象子类型](#3541-特征对象子类型)
-  - [3.5.4.2 生命周期子类型](#3542-生命周期子类型)
-  - [3.5.4.3 复合类型的子类型关系](#3543-复合类型的子类型关系)
-- [3.5.5 子类型与类型转换](#355-子类型与类型转换)
-  - [3.5.5.1 隐式类型转换](#3551-隐式类型转换)
-  - [3.5.5.2 强制转换（Coercion）](#3552-强制转换coercion)
-  - [3.5.5.3 子类型多态与动态分派](#3553-子类型多态与动态分派)
-- [3.5.6 子类型系统的高级特性](#356-子类型系统的高级特性)
-  - [3.5.6.1 边界特征对象](#3561-边界特征对象)
-  - [3.5.6.2 自动特征和标记特征](#3562-自动特征和标记特征)
-  - [3.5.6.3 高级生命周期约束](#3563-高级生命周期约束)
-- [3.5.7 子类型与类型推导](#357-子类型与类型推导)
-  - [3.5.7.1 子类型与类型推导的交互](#3571-子类型与类型推导的交互)
-  - [3.5.7.2 子类型约束求解](#3572-子类型约束求解)
-- [3.5.8 子类型与其他语言的比较](#358-子类型与其他语言的比较)
-  - [3.5.8.1 与Java/C#的比较](#3581-与javac的比较)
-  - [3.5.8.2 与C++的比较](#3582-与c的比较)
-  - [3.5.8.3 与Haskell的比较](#3583-与haskell的比较)
-- [3.5.9 子类型的应用模式](#359-子类型的应用模式)
-  - [3.5.9.1 特征对象模式](#3591-特征对象模式)
-  - [3.5.9.2 边界特征对象模式](#3592-边界特征对象模式)
-  - [3.5.9.3 子类型与生命周期模式](#3593-子类型与生命周期模式)
-- [3.5.10 总结](#3510-总结)
-- [3.5.11 参考文献](#3511-参考文献)
+- [3.5 子类型系统](#35-子类型系统)
+  - [📊 目录](#-目录)
+  - [3.5.1 概述](#351-概述)
+  - [3.5.2 子类型的基本概念](#352-子类型的基本概念)
+    - [3.5.2.1 子类型关系的定义](#3521-子类型关系的定义)
+    - [3.5.2.2 Rust中的子类型关系](#3522-rust中的子类型关系)
+  - [3.5.3 子类型关系的形式化表示](#353-子类型关系的形式化表示)
+    - [3.5.3.1 子类型判断](#3531-子类型判断)
+    - [3.5.3.2 子类型规则](#3532-子类型规则)
+    - [3.5.3.3 子类型与类型安全](#3533-子类型与类型安全)
+  - [3.5.4 Rust中的子类型机制](#354-rust中的子类型机制)
+    - [3.5.4.1 特征对象子类型](#3541-特征对象子类型)
+    - [3.5.4.2 生命周期子类型](#3542-生命周期子类型)
+    - [3.5.4.3 复合类型的子类型关系](#3543-复合类型的子类型关系)
+  - [3.5.5 子类型与类型转换](#355-子类型与类型转换)
+    - [3.5.5.1 隐式类型转换](#3551-隐式类型转换)
+    - [3.5.5.2 强制转换（Coercion）](#3552-强制转换coercion)
+    - [3.5.5.3 子类型多态与动态分派](#3553-子类型多态与动态分派)
+  - [3.5.6 子类型系统的高级特性](#356-子类型系统的高级特性)
+    - [3.5.6.1 边界特征对象](#3561-边界特征对象)
+    - [3.5.6.2 自动特征和标记特征](#3562-自动特征和标记特征)
+    - [3.5.6.3 高级生命周期约束](#3563-高级生命周期约束)
+  - [3.5.7 子类型与类型推导](#357-子类型与类型推导)
+    - [3.5.7.1 子类型与类型推导的交互](#3571-子类型与类型推导的交互)
+    - [3.5.7.2 子类型约束求解](#3572-子类型约束求解)
+  - [3.5.8 子类型与其他语言的比较](#358-子类型与其他语言的比较)
+    - [3.5.8.1 与Java/C#的比较](#3581-与javac的比较)
+    - [3.5.8.2 与C++的比较](#3582-与c的比较)
+    - [3.5.8.3 与Haskell的比较](#3583-与haskell的比较)
+  - [3.5.9 子类型的应用模式](#359-子类型的应用模式)
+    - [3.5.9.1 特征对象模式](#3591-特征对象模式)
+    - [3.5.9.2 边界特征对象模式](#3592-边界特征对象模式)
+    - [3.5.9.3 子类型与生命周期模式](#3593-子类型与生命周期模式)
+  - [3.5.10 总结](#3510-总结)
+  - [3.5.11 参考文献](#3511-参考文献)
 
 
 ## 3.5.1 概述
@@ -84,11 +86,11 @@ impl Animal for Dog {
 
 fn main() {
     let dog = Dog;
-    
+
     // Dog 是 Animal 的子类型（通过特征对象）
     let animal: &dyn Animal = &dog;
     animal.make_sound();
-    
+
     // 生命周期子类型关系
     let x = 5;          // 'static 生命周期
     {
@@ -182,7 +184,7 @@ fn main() {
         Box::new(Circle { radius: 1.0 }),
         Box::new(Rectangle { width: 2.0, height: 3.0 }),
     ];
-    
+
     for shape in shapes {
         shape.draw();
     }
@@ -210,7 +212,7 @@ fn lifetime_subtyping<'a, 'b: 'a>(x: &'b i32) -> &'a i32 {
 fn main() {
     let x = 10;
     let r: &'static i32 = &x;
-    
+
     // 'static <: 'a（任意生命周期），所以这是合法的
     let r2 = lifetime_subtyping(r);
 }
@@ -233,11 +235,11 @@ fn subtyping_with_variance() {
     // 协变：如果 Dog <: Animal，则 Box<Dog> <: Box<Animal>
     let dog_box: Box<Dog> = Box::new(Dog);
     let animal_box: Box<dyn Animal> = dog_box;
-    
+
     // 逆变：如果 Dog <: Animal，则 fn(Animal) <: fn(Dog)
     fn process_animal(_: &dyn Animal) {}
     let f: fn(&Dog) = process_animal;
-    
+
     // 不变：&mut Dog 和 &mut dyn Animal 之间没有子类型关系
     let mut dog = Dog;
     let dog_ref = &mut dog;
@@ -261,14 +263,14 @@ Rust中的子类型关系通常允许隐式类型转换，即无需显式转换�
 ```rust
 fn implicit_conversion() {
     let dog = Dog;
-    
+
     // 隐式转换：Dog -> &dyn Animal
     let animal: &dyn Animal = &dog;
-    
+
     // 隐式生命周期转换
     let x = 5;  // 'static
     let r: &'static i32 = &x;
-    
+
     fn takes_any_lifetime<'a>(_: &'a i32) {}
     takes_any_lifetime(r);  // 'static -> 'a
 }
@@ -299,7 +301,7 @@ impl<T> MyBox<T> {
 
 impl<T> Deref for MyBox<T> {
     type Target = T;
-    
+
     fn deref(&self) -> &Self::Target {
         &self.0
     }
@@ -309,11 +311,11 @@ fn coercion_examples() {
     // 解引用强制转换
     let x = MyBox::new(String::from("hello"));
     let y: &str = &x;  // MyBox<String> -> &String -> &str
-    
+
     // 子类型强制转换
     let dog = Dog;
     let animal: &dyn Animal = &dog;  // &Dog -> &dyn Animal
-    
+
     // 不安全强制转换
     let a = 5i32;
     let b = a as i64;  // i32 -> i64
@@ -338,7 +340,7 @@ fn draw(drawable: &dyn Drawable) {
 fn polymorphism_example() {
     let circle = Circle { radius: 1.0 };
     let rectangle = Rectangle { width: 2.0, height: 3.0 };
-    
+
     // 子类型多态
     draw(&circle);     // &Circle -> &dyn Drawable
     draw(&rectangle);  // &Rectangle -> &dyn Drawable
@@ -420,7 +422,7 @@ impl Marker for i32 {}
 fn marker_example() {
     let x = 5;
     send_to_thread(x);  // i32 <: dyn Send
-    
+
     let m: &dyn Marker = &x;  // i32 <: dyn Marker
 }
 ```
@@ -466,7 +468,7 @@ where
 fn type_inference_with_subtyping() {
     let mut v = Vec::new();  // Vec<T> 类型不确定
     v.push(&5);  // 需要 T <: &i32，推导 T = &i32
-    
+
     let x: &dyn Animal = &Dog;  // 显式指定类型
     let y = x;  // 推导 y: &dyn Animal
 }
@@ -572,11 +574,11 @@ impl CommandProcessor {
     fn new() -> Self {
         CommandProcessor { commands: Vec::new() }
     }
-    
+
     fn add_command(&mut self, command: Box<dyn Command>) {
         self.commands.push(command);
     }
-    
+
     fn process_all(&self) {
         for command in &self.commands {
             command.execute();
@@ -667,7 +669,7 @@ impl<'a> DataProcessor<'a> {
     fn new(data: &'a [i32]) -> Self {
         DataProcessor { data }
     }
-    
+
     // 利用生命周期子类型关系
     fn process<'b>(&'b self) -> ProcessedData<'b>
     where

@@ -64,16 +64,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 初始化分布式系统
     let config = DistributedSystemConfig::default();
     let mut system = DistributedSystemManager::new(config);
-    
+
     // 初始化可观测性平台
     let mut platform = ObservabilityPlatform::new();
-    
+
     // 初始化智能运维引擎
     let mut ai_engine = IntelligentOperationsEngine::new();
-    
+
     // 启动系统
     system.start().await?;
-    
+
     Ok(())
 }
 ```
@@ -126,6 +126,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ---
 
-**最后更新**: 2025年9月28日  
-**文档版本**: v1.0.0  
+**最后更新**: 2025年9月28日
+**文档版本**: v1.0.0
 **API版本**: v1.0.0

@@ -61,10 +61,10 @@ use prusti_contracts::*;
 #[ensures(result.is_some() => is_valid_memory_region(result.unwrap()))]
 fn allocate_process_memory(process_id: ProcessId, size: usize) -> Option<MemoryRegion> {
     let region = ALLOCATOR.allocate(size)?;
-    
+
     // 验证内存隔离性质
     assert!(is_isolated_from_other_processes(&region, process_id));
-    
+
     Some(region)
 }
 
@@ -72,7 +72,7 @@ fn allocate_process_memory(process_id: ProcessId, size: usize) -> Option<MemoryR
 #[requires(capability.allows_operation(operation))]
 #[ensures(old(system_state.integrity) => system_state.integrity)]
 fn execute_privileged_operation(
-    operation: Operation, 
+    operation: Operation,
     capability: Capability
 ) -> Result<(), SecurityError> {
     match capability.check_permission(&operation) {
@@ -157,11 +157,11 @@ impl<T> LockFreeQueue<T> {
             data: Some(data),
             next: Atomic::null(),
         });
-        
+
         loop {
             let tail = self.tail.load(Ordering::Acquire, guard);
             let next = unsafe { tail.deref() }.next.load(Ordering::Acquire, guard);
-            
+
             if next.is_null() {
                 match unsafe { tail.deref() }.next.compare_exchange(
                     next, new_node, Ordering::Release, Ordering::Relaxed, guard
@@ -214,9 +214,9 @@ impl RaftNode {
     fn start_election(&mut self) -> Result<(), ElectionError> {
         self.term += 1;
         self.vote_for_self();
-        
+
         let votes = self.request_votes_from_peers()?;
-        
+
         if votes.len() > self.cluster_size() / 2 {
             self.become_leader();
             Ok(())
@@ -224,15 +224,15 @@ impl RaftNode {
             Err(ElectionError::InsufficientVotes)
         }
     }
-    
+
     // 日志复制的一致性验证
     #[requires(self.state == NodeState::Leader)]
     #[ensures(self.log_is_consistent())]
     fn replicate_log(&mut self, entry: LogEntry) -> Result<(), ReplicationError> {
         self.log.push(entry.clone());
-        
+
         let success_count = self.send_append_entries_to_followers(&entry)?;
-        
+
         if success_count > self.cluster_size() / 2 {
             self.commit_index += 1;
             self.notify_state_machine(&entry);
@@ -265,10 +265,10 @@ impl Connection {
         if data.len() > self.window_size {
             return Err(Http2Error::FlowControlViolation);
         }
-        
+
         self.write_data_frame(stream_id, data)?;
         self.window_size -= data.len();
-        
+
         Ok(())
     }
 }
@@ -296,15 +296,15 @@ impl TlsConnection {
         // 客户端Hello
         self.send_client_hello()?;
         self.state = HandshakeState::ClientHelloSent;
-        
+
         // 服务器响应验证
         let server_hello = self.receive_server_hello()?;
         self.verify_server_certificate(&server_hello.certificate)?;
-        
+
         // 密钥交换验证
         let shared_secret = self.compute_shared_secret(&server_hello.key_exchange)?;
         self.derive_session_keys(&shared_secret)?;
-        
+
         self.state = HandshakeState::Complete;
         Ok(())
     }
@@ -325,7 +325,7 @@ impl Transaction {
     fn commit(&mut self) -> Result<(), TransactionError> {
         // 两阶段提交协议
         let prepare_results = self.prepare_phase()?;
-        
+
         if prepare_results.iter().all(|r| r.is_ok()) {
             self.commit_phase()?;
             Ok(())
@@ -347,12 +347,12 @@ fn concurrent_read_write(
     // 验证并发读写的隔离性
     let lock1 = tx1.acquire_lock(key, LockType::Write)?;
     let lock2 = tx2.acquire_lock(key, LockType::Read)?;
-    
+
     // 确保锁的兼容性
     if !locks_are_compatible(&lock1, &lock2) {
         return Err(ConcurrencyError::LockConflict);
     }
-    
+
     Ok(())
 }
 ```
@@ -413,16 +413,16 @@ fn transfer_tokens(
     if from_account.balance < amount {
         return Err(TransferError::InsufficientBalance);
     }
-    
+
     from_account.balance -= amount;
     to_account.balance += amount;
-    
+
     // 验证总量守恒
     assert_eq!(
         old(from_account.balance) + old(to_account.balance),
         from_account.balance + to_account.balance
     );
-    
+
     Ok(())
 }
 ```
@@ -441,7 +441,7 @@ fn select_validator(
 ) -> Result<Validator, ConsensusError> {
     let total_stake: u64 = validators.iter().map(|v| v.stake).sum();
     let target = random_seed % total_stake;
-    
+
     let mut cumulative_stake = 0;
     for validator in validators {
         cumulative_stake += validator.stake;
@@ -449,7 +449,7 @@ fn select_validator(
             return Ok(validator.clone());
         }
     }
-    
+
     Err(ConsensusError::NoValidatorSelected)
 }
 ```
@@ -488,7 +488,7 @@ fn sanitize_input(input: String) -> String {
 fn process_user_input(raw_input: String) -> Result<String, ProcessingError> {
     // MIRAI会检查是否使用了未消毒的输入
     verify!(raw_input.len() < MAX_INPUT_LENGTH);
-    
+
     let clean_input = sanitize_input(raw_input);
     Ok(clean_input)
 }
@@ -507,7 +507,7 @@ fn sorted(v: Seq<i32>) -> bool {
 
 #[logic]
 fn permutation(v1: Seq<i32>, v2: Seq<i32>) -> bool {
-    v1.len() == v2.len() && 
+    v1.len() == v2.len() &&
     forall(|x: i32| v1.count(x) == v2.count(x))
 }
 
@@ -596,13 +596,13 @@ struct VerifiedContainer {
 mod verification_tests {
     use super::*;
     use quickcheck::*;
-    
+
     // 属性测试验证形式化规范
     quickcheck! {
         fn prop_sort_correctness(mut v: Vec<i32>) -> bool {
             let original = v.clone();
             let sorted = verified_sort(v);
-            
+
             sorted.windows(2).all(|w| w[0] <= w[1]) &&
             original.len() == sorted.len()
         }
@@ -636,6 +636,6 @@ mod verification_tests {
 
 ---
 
-**文档版本**: 1.0  
-**最后更新**: 2025-06-30  
+**文档版本**: 1.0
+**最后更新**: 2025-06-30
 **维护者**: Rust实践验证研究组

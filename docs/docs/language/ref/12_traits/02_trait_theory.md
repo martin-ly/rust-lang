@@ -3,39 +3,41 @@
 
 ## 📊 目录
 
-- [1. 理论基础](#1-理论基础)
-  - [1.1 类型类理论](#11-类型类理论)
-  - [1.2 Trait对象理论](#12-trait对象理论)
-  - [1.3 关联类型理论](#13-关联类型理论)
-- [2. 类型规则](#2-类型规则)
-  - [2.1 Trait定义规则](#21-trait定义规则)
-  - [2.2 Trait实现规则](#22-trait实现规则)
-  - [2.3 Trait约束规则](#23-trait约束规则)
-- [3. Trait系统模式](#3-trait系统模式)
-  - [3.1 标记Trait模式](#31-标记trait模式)
-  - [3.2 转换Trait模式](#32-转换trait模式)
-  - [3.3 操作符Trait模式](#33-操作符trait模式)
-- [4. Trait对象理论](#4-trait对象理论)
-  - [4.1 对象安全理论](#41-对象安全理论)
-  - [4.2 虚表理论](#42-虚表理论)
-  - [4.3 对象生命周期](#43-对象生命周期)
-- [5. 关联类型理论](#5-关联类型理论)
-  - [5.1 关联类型定义](#51-关联类型定义)
-  - [5.2 关联类型约束](#52-关联类型约束)
-  - [5.3 关联类型默认值](#53-关联类型默认值)
-- [6. Trait约束理论](#6-trait约束理论)
-  - [6.1 约束组合](#61-约束组合)
-  - [6.2 约束传播](#62-约束传播)
-  - [6.3 约束推理](#63-约束推理)
-- [7. 实际应用](#7-实际应用)
-  - [7.1 集合Trait设计](#71-集合trait设计)
-  - [7.2 序列化Trait设计](#72-序列化trait设计)
-  - [7.3 算法Trait设计](#73-算法trait设计)
-- [8. 性能分析](#8-性能分析)
-  - [8.1 静态分发性能](#81-静态分发性能)
-  - [8.2 动态分发性能](#82-动态分发性能)
-  - [8.3 优化策略](#83-优化策略)
-- [9. 总结](#9-总结)
+- [Rust Trait系统理论](#rust-trait系统理论)
+  - [📊 目录](#-目录)
+  - [1. 理论基础](#1-理论基础)
+    - [1.1 类型类理论](#11-类型类理论)
+    - [1.2 Trait对象理论](#12-trait对象理论)
+    - [1.3 关联类型理论](#13-关联类型理论)
+  - [2. 类型规则](#2-类型规则)
+    - [2.1 Trait定义规则](#21-trait定义规则)
+    - [2.2 Trait实现规则](#22-trait实现规则)
+    - [2.3 Trait约束规则](#23-trait约束规则)
+  - [3. Trait系统模式](#3-trait系统模式)
+    - [3.1 标记Trait模式](#31-标记trait模式)
+    - [3.2 转换Trait模式](#32-转换trait模式)
+    - [3.3 操作符Trait模式](#33-操作符trait模式)
+  - [4. Trait对象理论](#4-trait对象理论)
+    - [4.1 对象安全理论](#41-对象安全理论)
+    - [4.2 虚表理论](#42-虚表理论)
+    - [4.3 对象生命周期](#43-对象生命周期)
+  - [5. 关联类型理论](#5-关联类型理论)
+    - [5.1 关联类型定义](#51-关联类型定义)
+    - [5.2 关联类型约束](#52-关联类型约束)
+    - [5.3 关联类型默认值](#53-关联类型默认值)
+  - [6. Trait约束理论](#6-trait约束理论)
+    - [6.1 约束组合](#61-约束组合)
+    - [6.2 约束传播](#62-约束传播)
+    - [6.3 约束推理](#63-约束推理)
+  - [7. 实际应用](#7-实际应用)
+    - [7.1 集合Trait设计](#71-集合trait设计)
+    - [7.2 序列化Trait设计](#72-序列化trait设计)
+    - [7.3 算法Trait设计](#73-算法trait设计)
+  - [8. 性能分析](#8-性能分析)
+    - [8.1 静态分发性能](#81-静态分发性能)
+    - [8.2 动态分发性能](#82-动态分发性能)
+    - [8.3 优化策略](#83-优化策略)
+  - [9. 总结](#9-总结)
 
 
 ## 1. 理论基础
@@ -222,7 +224,7 @@ pub trait Div<Rhs = Self> {
 // 实现示例
 impl Add for Point {
     type Output = Point;
-    
+
     fn add(self, rhs: Point) -> Point {
         Point {
             x: self.x + rhs.x,
@@ -233,7 +235,7 @@ impl Add for Point {
 
 impl Add<i32> for Point {
     type Output = Point;
-    
+
     fn add(self, rhs: i32) -> Point {
         Point {
             x: self.x + rhs,
@@ -352,7 +354,7 @@ trait Iterator {
 trait Collection {
     type Item;
     type Iterator: Iterator<Item = Self::Item>;
-    
+
     fn iter(&self) -> Self::Iterator;
     fn len(&self) -> usize;
     fn is_empty(&self) -> bool {
@@ -368,7 +370,7 @@ struct VecIterator<T> {
 
 impl<T> Iterator for VecIterator<T> {
     type Item = T;
-    
+
     fn next(&mut self) -> Option<T> {
         if self.index < self.vec.len() {
             let item = self.vec[self.index].clone();
@@ -383,14 +385,14 @@ impl<T> Iterator for VecIterator<T> {
 impl<T> Collection for Vec<T> {
     type Item = T;
     type Iterator = VecIterator<T>;
-    
+
     fn iter(&self) -> VecIterator<T> {
         VecIterator {
             vec: self.clone(),
             index: 0,
         }
     }
-    
+
     fn len(&self) -> usize {
         self.len()
     }
@@ -409,14 +411,14 @@ $$\text{AssociatedType}\langle T \rangle = \text{TypeName} \times \text{TypeBoun
 trait Graph {
     type Node;
     type Edge;
-    
+
     fn nodes(&self) -> Vec<Self::Node>;
     fn edges(&self) -> Vec<Self::Edge>;
 }
 
 trait WeightedGraph: Graph {
     type Weight;
-    
+
     fn weight(&self, edge: &Self::Edge) -> Self::Weight;
 }
 
@@ -429,11 +431,11 @@ struct SimpleGraph {
 impl Graph for SimpleGraph {
     type Node = i32;
     type Edge = (i32, i32);
-    
+
     fn nodes(&self) -> Vec<i32> {
         self.nodes.clone()
     }
-    
+
     fn edges(&self) -> Vec<(i32, i32)> {
         self.edges.clone()
     }
@@ -447,11 +449,11 @@ struct WeightedGraph {
 impl Graph for WeightedGraph {
     type Node = i32;
     type Edge = (i32, i32, f64);
-    
+
     fn nodes(&self) -> Vec<i32> {
         self.nodes.clone()
     }
-    
+
     fn edges(&self) -> Vec<(i32, i32, f64)> {
         self.edges.clone()
     }
@@ -459,7 +461,7 @@ impl Graph for WeightedGraph {
 
 impl WeightedGraph for WeightedGraph {
     type Weight = f64;
-    
+
     fn weight(&self, edge: &(i32, i32, f64)) -> f64 {
         edge.2
     }
@@ -478,7 +480,7 @@ $$\text{AssocTypeConstraint}\langle T, U \rangle = \text{AssociatedType}\langle 
 trait Container {
     type Item;
     type Iterator: Iterator<Item = Self::Item> = VecIterator<Self::Item>;
-    
+
     fn iter(&self) -> Self::Iterator;
     fn len(&self) -> usize;
 }
@@ -491,7 +493,7 @@ struct VecIterator<T> {
 
 impl<T> Iterator for VecIterator<T> {
     type Item = T;
-    
+
     fn next(&mut self) -> Option<T> {
         if self.index < self.vec.len() {
             let item = self.vec[self.index].clone();
@@ -507,14 +509,14 @@ impl<T> Iterator for VecIterator<T> {
 impl<T> Container for Vec<T> {
     type Item = T;
     // Iterator使用默认值VecIterator<T>
-    
+
     fn iter(&self) -> VecIterator<T> {
         VecIterator {
             vec: self.clone(),
             index: 0,
         }
     }
-    
+
     fn len(&self) -> usize {
         self.len()
     }
@@ -574,7 +576,7 @@ $$\text{ConstraintCombination} = \text{TraitBounds} \times \text{TypeBounds} \ti
 trait Processor {
     type Input;
     type Output;
-    
+
     fn process(&self, input: Self::Input) -> Self::Output;
 }
 
@@ -649,7 +651,7 @@ $$\text{ConstraintInference}(E) = \text{Usage}(E) \rightarrow \text{RequiredCons
 trait Collection {
     type Item;
     type Iterator: Iterator<Item = Self::Item>;
-    
+
     fn iter(&self) -> Self::Iterator;
     fn len(&self) -> usize;
     fn is_empty(&self) -> bool {
@@ -672,11 +674,11 @@ trait IndexedCollection: Collection {
 impl<T> Collection for Vec<T> {
     type Item = T;
     type Iterator = std::vec::IntoIter<T>;
-    
+
     fn iter(&self) -> std::vec::IntoIter<T> {
         self.clone().into_iter()
     }
-    
+
     fn len(&self) -> usize {
         self.len()
     }
@@ -686,11 +688,11 @@ impl<T> MutableCollection for Vec<T> {
     fn push(&mut self, item: T) {
         self.push(item);
     }
-    
+
     fn pop(&mut self) -> Option<T> {
         self.pop()
     }
-    
+
     fn clear(&mut self) {
         self.clear();
     }
@@ -700,7 +702,7 @@ impl<T> IndexedCollection for Vec<T> {
     fn get(&self, index: usize) -> Option<&T> {
         self.get(index)
     }
-    
+
     fn set(&mut self, index: usize, item: T) -> Result<(), &'static str> {
         if index < self.len() {
             self[index] = item;
@@ -738,7 +740,7 @@ impl Serialize for i32 {
 
 impl Deserialize for i32 {
     type Error = std::num::ParseIntError;
-    
+
     fn deserialize(data: &str) -> Result<Self, Self::Error> {
         data.parse()
     }
@@ -761,22 +763,22 @@ impl Serialize for Person {
 
 impl Deserialize for Person {
     type Error = String;
-    
+
     fn deserialize(data: &str) -> Result<Self, Self::Error> {
         // 简化的JSON解析
         if data.starts_with("{") && data.ends_with("}") {
             let content = &data[1..data.len()-1];
             let parts: Vec<&str> = content.split(',').collect();
-            
+
             let mut name = String::new();
             let mut age = 0;
-            
+
             for part in parts {
                 let kv: Vec<&str> = part.split(':').collect();
                 if kv.len() == 2 {
                     let key = kv[0].trim_matches('"');
                     let value = kv[1].trim_matches('"');
-                    
+
                     match key {
                         "name" => name = value.to_string(),
                         "age" => age = value.parse().map_err(|_| "Invalid age")?,
@@ -784,7 +786,7 @@ impl Deserialize for Person {
                     }
                 }
             }
-            
+
             Ok(Person { name, age })
         } else {
             Err("Invalid JSON format".to_string())
@@ -803,7 +805,7 @@ trait Algorithm {
     type Input;
     type Output;
     type Error;
-    
+
     fn execute(&self, input: Self::Input) -> Result<Self::Output, Self::Error>;
 }
 
@@ -819,16 +821,16 @@ impl Algorithm for QuickSort {
     type Input = Vec<i32>;
     type Output = Vec<i32>;
     type Error = String;
-    
+
     fn execute(&self, mut input: Vec<i32>) -> Result<Vec<i32>, String> {
         if input.is_empty() {
             return Ok(input);
         }
-        
+
         let pivot = input.remove(0);
         let mut left = Vec::new();
         let mut right = Vec::new();
-        
+
         for item in input {
             if item <= pivot {
                 left.push(item);
@@ -836,11 +838,11 @@ impl Algorithm for QuickSort {
                 right.push(item);
             }
         }
-        
+
         let mut result = self.execute(left)?;
         result.push(pivot);
         result.extend(self.execute(right)?);
-        
+
         Ok(result)
     }
 }
@@ -852,13 +854,13 @@ impl Algorithm for BinarySearch {
     type Input = (Vec<i32>, i32);
     type Output = Option<usize>;
     type Error = String;
-    
+
     fn execute(&self, (mut data, target): (Vec<i32>, i32)) -> Result<Option<usize>, String> {
         data.sort();
-        
+
         let mut left = 0;
         let mut right = data.len();
-        
+
         while left < right {
             let mid = left + (right - left) / 2;
             match data[mid].cmp(&target) {
@@ -867,7 +869,7 @@ impl Algorithm for BinarySearch {
                 std::cmp::Ordering::Greater => right = mid,
             }
         }
-        
+
         Ok(None)
     }
 }
@@ -882,7 +884,7 @@ impl AlgorithmExecutor {
     {
         algorithm.execute(input)
     }
-    
+
     fn run_with_optimization<A>(mut algorithm: A, input: A::Input) -> Result<A::Output, A::Error>
     where
         A: Algorithm + Optimizable,
@@ -966,6 +968,6 @@ Trait系统理论的核心优势是提供了类型安全、高性能的多态机
 
 ---
 
-**文档版本**: 1.0.0  
-**最后更新**: 2025-01-27  
+**文档版本**: 1.0.0
+**最后更新**: 2025-01-27
 **维护者**: Rust语言形式化理论项目组

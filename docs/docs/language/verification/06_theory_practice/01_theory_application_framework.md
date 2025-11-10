@@ -89,7 +89,7 @@ pub trait LinearResource {
 pub trait SeparableResource {
     type BorrowedImmut<'a> where Self: 'a;
     type BorrowedMut<'a> where Self: 'a;
-    
+
     fn borrow(&self) -> Self::BorrowedImmut<'_>;
     fn borrow_mut(&mut self) -> Self::BorrowedMut<'_>;
 }
@@ -130,35 +130,35 @@ fn safe_parallel_access<T>(a: &mut T, b: &mut T) {
 mod theory_driven_tests {
     use super::*;
     use quickcheck::*;
-    
+
     // 线性性质的快速检查
     quickcheck! {
         fn prop_linearity<T: LinearResource + Clone>(resource: T) -> bool {
             let clone1 = resource.clone();
             let clone2 = resource.clone();
-            
+
             // 消费第一个资源
             let _consumed1 = clone1.consume();
-            
+
             // 原始资源应该仍然可用
             let _consumed2 = clone2.consume();
-            
+
             true // 如果编译通过，说明线性性质得到保证
         }
     }
-    
+
     // 分离性质的验证
     #[test]
     fn test_separation_property() {
         let mut data = vec![1, 2, 3, 4];
         let (left, right) = data.split_at_mut(2);
-        
+
         // 验证分离：可以同时修改不同部分
         std::thread::scope(|s| {
             s.spawn(|| left[0] = 10);
             s.spawn(|| right[0] = 20);
         });
-        
+
         assert_eq!(data, vec![10, 2, 20, 4]);
     }
 }
@@ -178,12 +178,12 @@ impl<T> LinearBuilder<T> {
     pub fn new(initial: T) -> Self {
         Self { state: initial }
     }
-    
+
     // 线性转换：消费当前状态，产生新状态
     pub fn transform<U>(self, f: impl FnOnce(T) -> U) -> LinearBuilder<U> {
         LinearBuilder { state: f(self.state) }
     }
-    
+
     // 最终消费
     pub fn build(self) -> T {
         self.state
@@ -214,12 +214,12 @@ impl DatabaseConfigBuilder {
         self.host = Some(host);
         self
     }
-    
+
     pub fn port(mut self, port: u16) -> Self {
         self.port = Some(port);
         self
     }
-    
+
     pub fn build(self) -> Result<DatabaseConfig, BuildError> {
         Ok(DatabaseConfig {
             host: self.host.ok_or(BuildError::MissingHost)?,
@@ -249,7 +249,7 @@ impl<T> KernelResource<T> {
     pub fn allocate(resource: T) -> Self {
         Self { inner: resource, allocated: true }
     }
-    
+
     // 线性转移：确保资源不被重复释放
     pub fn transfer(mut self) -> T {
         self.allocated = false;
@@ -282,11 +282,11 @@ impl<'a> DeviceHandle<'a> {
         device.acquire_lock();
         Self { device, locked: true }
     }
-    
+
     pub fn read(&self, buffer: &mut [u8]) -> Result<usize, IoError> {
         self.device.read(buffer)
     }
-    
+
     pub fn write(&mut self, data: &[u8]) -> Result<usize, IoError> {
         self.device.write(data)
     }
@@ -320,12 +320,12 @@ impl ConcurrentCounter {
     pub fn new() -> Self {
         Self { value: AtomicUsize::new(0) }
     }
-    
+
     // 原子递增，保证线程安全
     pub fn increment(&self) -> usize {
         self.value.fetch_add(1, Ordering::SeqCst)
     }
-    
+
     // 原子读取
     pub fn get(&self) -> usize {
         self.value.load(Ordering::SeqCst)
@@ -359,17 +359,17 @@ impl<T> LockFreeStack<T> {
     pub fn new() -> Self {
         Self { head: AtomicPtr::new(ptr::null_mut()) }
     }
-    
+
     pub fn push(&self, data: T) {
         let new_node = Box::into_raw(Box::new(Node {
             data,
             next: ptr::null_mut(),
         }));
-        
+
         loop {
             let head = self.head.load(Ordering::Acquire);
             unsafe { (*new_node).next = head; }
-            
+
             // 原子比较交换
             match self.head.compare_exchange_weak(
                 head, new_node, Ordering::Release, Ordering::Relaxed
@@ -379,16 +379,16 @@ impl<T> LockFreeStack<T> {
             }
         }
     }
-    
+
     pub fn pop(&self) -> Option<T> {
         loop {
             let head = self.head.load(Ordering::Acquire);
             if head.is_null() {
                 return None;
             }
-            
+
             let next = unsafe { (*head).next };
-            
+
             match self.head.compare_exchange_weak(
                 head, next, Ordering::Release, Ordering::Relaxed
             ) {
@@ -423,11 +423,11 @@ impl AsyncServer {
         let listener = TcpListener::bind(addr).await?;
         Ok(Self { listener })
     }
-    
+
     pub async fn run(&self) -> Result<(), std::io::Error> {
         loop {
             let (stream, _) = self.listener.accept().await?;
-            
+
             // 每个连接在独立的任务中处理
             tokio::spawn(async move {
                 if let Err(e) = Self::handle_connection(stream).await {
@@ -436,20 +436,20 @@ impl AsyncServer {
             });
         }
     }
-    
+
     async fn handle_connection(mut stream: TcpStream) -> Result<(), std::io::Error> {
         let mut buffer = [0; 1024];
-        
+
         loop {
             let n = stream.read(&mut buffer).await?;
             if n == 0 {
                 break; // 连接关闭
             }
-            
+
             // 回显数据
             stream.write_all(&buffer[..n]).await?;
         }
-        
+
         Ok(())
     }
 }
@@ -475,11 +475,11 @@ impl HttpConnection<Initial> {
     pub fn new(stream: TcpStream) -> Self {
         Self { stream, state: Initial }
     }
-    
+
     pub async fn parse_headers(self) -> Result<HttpConnection<HeadersParsed>, ParseError> {
         // 解析HTTP头部
         let headers = parse_headers_from_stream(&self.stream).await?;
-        
+
         Ok(HttpConnection {
             stream: self.stream,
             state: HeadersParsed { headers },
@@ -491,7 +491,7 @@ impl HttpConnection<HeadersParsed> {
     pub async fn read_body(self) -> Result<HttpConnection<BodyRead>, ReadError> {
         let content_length = self.state.headers.get_content_length();
         let body = read_body_from_stream(&self.stream, content_length).await?;
-        
+
         Ok(HttpConnection {
             stream: self.stream,
             state: BodyRead {
@@ -527,16 +527,16 @@ use syn::{parse_macro_input, DeriveInput};
 pub fn linear_derive(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let name = &input.ident;
-    
+
     let expanded = quote! {
         impl LinearResource for #name {
             type Consumed = Self;
-            
+
             fn consume(self) -> Self::Consumed {
                 self
             }
         }
-        
+
         impl Drop for #name {
             fn drop(&mut self) {
                 // 线性类型不应该通过Drop释放
@@ -544,7 +544,7 @@ pub fn linear_derive(input: TokenStream) -> TokenStream {
             }
         }
     };
-    
+
     TokenStream::from(expanded)
 }
 ```
@@ -594,13 +594,13 @@ impl RuntimeChecker {
                 panic!("Borrow rule violation detected at runtime");
             }
         }
-        
+
         self.active_borrows.insert(ptr, BorrowInfo {
             borrow_type,
             stack_trace: capture_stack_trace(),
         });
     }
-    
+
     pub fn check_linear_consume(&mut self, ptr: *const ()) {
         if !self.linear_resources.remove(&ptr) {
             panic!("Attempting to consume already consumed linear resource");
@@ -630,14 +630,14 @@ impl MemoryProfiler {
             borrow_count: 0,
         });
     }
-    
+
     pub fn record_move(&mut self, ptr: *const ()) {
         if let Some(info) = self.allocations.get_mut(&ptr) {
             info.move_count += 1;
             self.total_moves += 1;
         }
     }
-    
+
     pub fn generate_report(&self) -> PerformanceReport {
         PerformanceReport {
             total_allocations: self.allocations.len(),
@@ -673,11 +673,11 @@ impl Transaction<Started> {
             state: Started { start_time: Instant::now() },
         }
     }
-    
+
     pub fn execute_query(&mut self, query: &str) -> Result<QueryResult, DatabaseError> {
         self.connection.execute(query)
     }
-    
+
     // 线性消费：事务只能提交或回滚一次
     pub fn commit(self) -> Result<Transaction<Committed>, DatabaseError> {
         self.connection.commit()?;
@@ -686,7 +686,7 @@ impl Transaction<Started> {
             state: Committed,
         })
     }
-    
+
     pub fn rollback(self) -> Transaction<RolledBack> {
         self.connection.rollback();
         Transaction {
@@ -714,16 +714,16 @@ impl Block {
     pub fn verify(&self) -> Result<(), VerificationError> {
         // 1. 验证工作量证明
         self.verify_proof_of_work()?;
-        
+
         // 2. 验证交易完整性
         self.verify_transactions()?;
-        
+
         // 3. 验证默克尔根
         self.verify_merkle_root()?;
-        
+
         Ok(())
     }
-    
+
     fn verify_proof_of_work(&self) -> Result<(), VerificationError> {
         let hash = self.header.compute_hash();
         if !hash.meets_difficulty(self.header.difficulty) {
@@ -731,7 +731,7 @@ impl Block {
         }
         Ok(())
     }
-    
+
     fn verify_transactions(&self) -> Result<(), VerificationError> {
         for tx in &self.transactions {
             tx.verify_signature()?;
@@ -837,13 +837,13 @@ impl<T> ZeroCostWrapper<T> {
 #[cfg(test)]
 mod zero_cost_tests {
     use super::*;
-    
+
     #[test]
     fn verify_zero_cost() {
         let value = 42i32;
         let wrapped = zero_cost_wrapper(value);
         let unwrapped = wrapped.unwrap();
-        
+
         // 在优化编译中，这应该编译为无操作
         assert_eq!(value, unwrapped);
     }
@@ -859,30 +859,30 @@ mod zero_cost_tests {
 mod property_tests {
     use super::*;
     use proptest::prelude::*;
-    
+
     proptest! {
         // 线性性质测试
         #[test]
         fn prop_linearity(data in prop::collection::vec(any::<i32>(), 0..100)) {
             let container = LinearContainer::new(data.clone());
             let consumed = container.consume();
-            
+
             // 验证消费后的状态
             assert_eq!(consumed.data(), &data);
         }
-        
+
         // 借用安全性测试
         #[test]
         fn prop_borrow_safety(data in prop::collection::vec(any::<i32>(), 1..100)) {
             let mut container = Container::new(data);
-            
+
             {
                 let borrowed = container.borrow();
                 // 在借用期间，原容器不能被修改
                 // 这由编译器静态保证
                 drop(borrowed);
             }
-            
+
             // 借用结束后，可以再次访问
             container.modify();
         }
@@ -916,6 +916,6 @@ mod property_tests {
 
 ---
 
-**文档版本**: 1.0  
-**最后更新**: 2025-06-30  
+**文档版本**: 1.0
+**最后更新**: 2025-06-30
 **维护者**: Rust理论应用研究组

@@ -1,9 +1,9 @@
 # Module 23: Rust 安全验证 {#module-23-security-verification}
 
-**Document Version**: V2.0  
-**Module Status**: Active Development  
-**Last Updated**: 2025-01-01  
-**Maintainer**: Rust Security Team  
+**Document Version**: V2.0
+**Module Status**: Active Development
+**Last Updated**: 2025-01-01
+**Maintainer**: Rust Security Team
 
 ## 元数据 {#metadata}
 
@@ -39,7 +39,7 @@
     - [4.2 安全威胁模型](#42-安全威胁模型)
   - [5. 理论框架 {#5-theoretical-framework}](#5-理论框架-5-theoretical-framework)
     - [5.1 类型安全理论](#51-类型安全理论)
-    - [5.2 内存安全理论](#52-内存安全理论)
+    - [5.2 资源安全理论（引用一致性视角）](#52-资源安全理论引用一致性视角)
     - [5.3 并发安全理论](#53-并发安全理论)
     - [5.4 信息流安全理论](#54-信息流安全理论)
   - [6. 数学符号系统 {#6-mathematical-notation}](#6-数学符号系统-6-mathematical-notation)
@@ -48,7 +48,7 @@
     - [6.3 验证逻辑符号](#63-验证逻辑符号)
   - [7. 实践指导 {#7-practical-guidance}](#7-实践指导-7-practical-guidance)
     - [7.1 静态安全分析实践](#71-静态安全分析实践)
-    - [7.2 内存安全验证](#72-内存安全验证)
+    - [7.2 资源安全（编译期逻辑证明）验证](#72-资源安全编译期逻辑证明验证)
     - [7.3 并发安全验证](#73-并发安全验证)
     - [7.4 形式化验证实践](#74-形式化验证实践)
   - [8. 学习路径 {#8-learning-paths}](#8-学习路径-8-learning-paths)
@@ -69,7 +69,7 @@
 ### 1.1 模块定位
 
 Rust安全验证模块是研究和实践软件安全保证的核心模块，专注于利用形式化方法验证Rust程序的安全性。
-本模块建立在Rust语言的内存安全、类型安全和并发安全基础之上，通过数学严格的验证方法，为关键系统和安全敏感应用提供可证明的安全保证。
+从引用一致性视角看，本模块建立在Rust语言的资源安全（编译期逻辑证明）、类型安全和并发安全（编译期排他性契约的验证）基础之上，通过数学严格的验证方法，为关键系统和安全敏感应用提供可证明的安全保证。
 模块涵盖静态分析、动态验证、形式化建模、定理证明等多种验证技术，为构建高可信度的Rust系统提供完整的理论基础和实践指导。
 
 ### 1.2 核心价值
@@ -85,7 +85,7 @@ Rust安全验证模块是研究和实践软件安全保证的核心模块，专�
 Rust安全验证体系架构
 ├── 语言级安全
 │   ├── 类型安全验证
-│   ├── 内存安全验证
+从引用一致性视角看，│   ├── 资源安全（编译期逻辑证明）验证
 │   ├── 并发安全验证
 │   └── 生命周期安全验证
 ├── 程序级安全
@@ -120,7 +120,7 @@ Rust安全验证体系架构
 │   ├── security_models.md      # 安全模型理论
 │   ├── formal_verification.md  # 形式化验证理论
 │   ├── type_safety_theory.md   # 类型安全理论
-│   ├── memory_safety_theory.md # 内存安全理论
+从引用一致性视角看，│   ├── resource_safety_theory.md # 资源安全理论（引用一致性视角）
 │   ├── concurrency_safety.md   # 并发安全理论
 │   └── information_flow.md     # 信息流安全理论
 ├── implementation_mechanisms/   # 实现机制层
@@ -149,7 +149,7 @@ Rust安全验证体系架构
 
 ```text
 输入依赖关系网络
-01_ownership_borrowing → 23_security_verification (内存安全基础)
+从引用一致性视角看，01_ownership_borrowing → 23_security_verification (资源安全（编译期逻辑证明）基础)
 02_type_system → 23_security_verification (类型安全基础)
 05_concurrency → 23_security_verification (并发安全基础)
 19_advanced_language_features → 23_security_verification (unsafe安全验证)
@@ -271,13 +271,13 @@ Rust安全验证体系架构
 
 ```text
 安全威胁分类框架
-├── 内存安全威胁
-│   ├── 缓冲区溢出
-│   ├── 空指针解引用
-│   ├── 释放后使用
-│   ├── 双重释放
-│   ├── 内存泄漏
-│   └── 野指针访问
+从引用一致性视角看，├── 资源安全威胁（编译期逻辑证明）
+│   ├── 缓冲区溢出（编译期逻辑证明的失败）
+│   ├── 空指针解引用（编译期逻辑证明的失败）
+│   ├── 使用已失效的资源（逻辑证明的失败，非内存地址失效）
+│   ├── 二次释放（编译期证明的资源生命周期）
+│   ├── 资源泄漏（编译期证明的资源生命周期）
+│   └── 野指针访问（逻辑证明的失败，非内存地址失效）
 ├── 类型安全威胁
 │   ├── 类型混淆
 │   ├── 类型转换错误
@@ -311,52 +311,54 @@ Rust安全验证体系架构
 
 ### 5.1 类型安全理论
 
-**定义 23.1 (类型安全)**  
+**定义 23.1 (类型安全)**
 程序P是类型安全的，当且仅当：
 
 $$\forall \sigma, e. \ \Gamma \vdash e : \tau \land \langle e, \sigma \rangle \rightarrow^* \langle v, \sigma' \rangle \implies \Gamma \vdash v : \tau$$
 
 其中$\Gamma$是类型环境，$e$是表达式，$\tau$是类型，$\sigma$是存储状态。
 
-**定理 23.1 (类型保持性)**  
+**定理 23.1 (类型保持性)**
 如果表达式具有类型$\tau$且能够归约，则归约后的表达式仍具有类型$\tau$：
 
 $$\frac{\Gamma \vdash e : \tau \quad \langle e, \sigma \rangle \rightarrow \langle e', \sigma' \rangle}{\Gamma \vdash e' : \tau}$$
 
-### 5.2 内存安全理论
+### 5.2 资源安全理论（引用一致性视角）
 
-**定义 23.2 (内存安全)**  
-程序P是内存安全的，当且仅当所有内存访问都满足：
+从引用一致性视角看，**定义 23.2 (资源安全（编译期逻辑证明）)**
+程序P是资源安全（编译期逻辑证明）的，当且仅当所有资源访问都满足：
 
-$$\forall p \in \text{Pointers}(P). \ \text{Valid}(p) \land \text{InBounds}(p) \land \text{Initialized}(p)$$
+$$\forall p \in \text{References}(P). \ \text{Valid}(p) \land \text{InBounds}(p) \land \text{Initialized}(p)$$
 
-**定理 23.2 (所有权安全保证)**  
-在Rust的所有权系统下，程序自动满足内存安全：
+其中$\text{References}(P)$是程序P中的所有引用（访问许可证，而非内存地址）。
 
-$$\text{WellTyped}(P) \implies \text{MemorySafe}(P)$$
+从引用一致性视角看，**定理 23.2 (所有权安全保证（引用一致性视角）)**
+在Rust的所有权系统（资源控制权的逻辑证明）下，程序自动满足资源安全（编译期逻辑证明）：
+
+$$\text{WellTyped}(P) \implies \text{ResourceSafe}(P)$$
 
 ### 5.3 并发安全理论
 
-**定义 23.3 (数据竞争自由)**  
+**定义 23.3 (数据竞争自由)**
 程序P是数据竞争自由的，当且仅当：
 
 $$\forall t_1, t_2 \in \text{Threads}(P). \ \neg(\text{Conflicting}(t_1, t_2) \land \text{Concurrent}(t_1, t_2))$$
 
-**定理 23.3 (Send/Sync安全保证)**  
+**定理 23.3 (Send/Sync安全保证)**
 满足Send/Sync约束的程序自动保证并发安全：
 
 $$\text{SendSyncWellTyped}(P) \implies \text{DataRaceFree}(P)$$
 
 ### 5.4 信息流安全理论
 
-**定义 23.4 (非干扰性)**  
+**定义 23.4 (非干扰性)**
 程序P满足非干扰性，当且仅当：
 
 $$\forall s_1, s_2. \ s_1 \equiv_L s_2 \implies P(s_1) \equiv_L P(s_2)$$
 
 其中$\equiv_L$表示在安全级别L下的等价性。
 
-**定理 23.4 (类型系统保证非干扰性)**  
+**定理 23.4 (类型系统保证非干扰性)**
 带有安全类型的程序自动满足非干扰性：
 
 $$\text{SecurityTyped}(P) \implies \text{NonInterference}(P)$$
@@ -369,7 +371,7 @@ $$\text{SecurityTyped}(P) \implies \text{NonInterference}(P)$$
 |------|------|--------|
 | $P$ | 程序 | 程序空间 |
 | $\Gamma$ | 类型环境 | 类型上下文 |
-| $\sigma$ | 存储状态 | 内存状态 |
+| $\sigma$ | 存储状态 | 资源状态（编译期证明的资源生命周期） |
 | $\tau$ | 类型 | 类型空间 |
 | $e$ | 表达式 | 表达式空间 |
 
@@ -420,7 +422,7 @@ impl ConnectionBuilder<Uninitialized> {
             _state: PhantomData,
         }
     }
-    
+
     fn host(mut self, host: String) -> ConnectionBuilder<Configured> {
         self.host = Some(host);
         ConnectionBuilder {
@@ -436,15 +438,15 @@ impl ConnectionBuilder<Configured> {
         self.port = Some(port);
         self
     }
-    
+
     // 只有配置完成后才能连接
     fn connect(self) -> Result<ConnectionBuilder<Connected>, ConnectionError> {
         let host = self.host.ok_or(ConnectionError::MissingHost)?;
         let port = self.port.unwrap_or(80);
-        
+
         // 执行实际连接逻辑
         establish_connection(&host, port)?;
-        
+
         Ok(ConnectionBuilder {
             host: Some(host),
             port: Some(port),
@@ -468,10 +470,10 @@ fn usage_example() {
         .port(8080)
         .connect()
         .expect("Failed to connect");
-    
+
     connection.send_data(b"Hello, World!")
         .expect("Failed to send data");
-    
+
     // 下面的代码无法编译，因为类型状态不匹配
     // let unconnected = ConnectionBuilder::new();
     // unconnected.send_data(b"This won't compile");
@@ -495,9 +497,9 @@ fn establish_connection(host: &str, port: u16) -> Result<(), ConnectionError> {
 }
 ```
 
-### 7.2 内存安全验证
+### 7.2 资源安全（编译期逻辑证明）验证
 
-**RAII和所有权模式**：
+从引用一致性视角看，**RAII和所有权模式（资源控制权的逻辑证明）**：
 
 ```rust
 use std::ptr::NonNull;
@@ -514,36 +516,36 @@ impl<T> SafeBox<T> {
         let boxed = Box::new(value);
         let ptr = NonNull::new(Box::into_raw(boxed))
             .expect("Box allocation failed");
-        
+
         Self {
             ptr,
             _marker: PhantomData,
         }
     }
-    
+
     pub fn get(&self) -> &T {
         unsafe {
             // 安全性：ptr总是有效的，因为我们拥有所有权
             self.ptr.as_ref()
         }
     }
-    
+
     pub fn get_mut(&mut self) -> &mut T {
         unsafe {
             // 安全性：ptr总是有效的，且我们有独占访问权
             self.ptr.as_mut()
         }
     }
-    
+
     pub fn into_inner(self) -> T {
         let boxed = unsafe {
             // 安全性：ptr来自Box，且我们拥有所有权
             Box::from_raw(self.ptr.as_ptr())
         };
-        
+
         // 防止析构函数运行
         std::mem::forget(self);
-        
+
         *boxed
     }
 }
@@ -558,29 +560,30 @@ impl<T> Drop for SafeBox<T> {
     }
 }
 
-// 借用检查器验证的安全代码
-fn memory_safety_example() {
+// 借用检查器（编译期逻辑证明系统）验证的安全代码
+// 从引用一致性视角看，以下代码展示了资源安全（编译期逻辑证明）的验证
+fn resource_safety_example() {
     let mut safe_box = SafeBox::new(42i32);
-    
-    // 借用检查器确保以下访问是安全的
+
+    // 借用检查器（编译期逻辑证明系统）确保以下访问是资源安全（编译期逻辑证明）的
     {
         let value_ref = safe_box.get();
         println!("Value: {}", value_ref);
-        
+
         // 下面的代码无法编译，因为存在不可变借用
         // let value_mut = safe_box.get_mut();
     }
-    
+
     // 现在可以获取可变借用
     {
         let value_mut = safe_box.get_mut();
         *value_mut += 1;
     }
-    
+
     // 取出值并消费SafeBox
     let final_value = safe_box.into_inner();
     assert_eq!(final_value, 43);
-    
+
     // safe_box现在不能再使用，编译器会阻止
     // println!("{}", safe_box.get()); // 编译错误
 }
@@ -602,7 +605,7 @@ impl<'a, T> BorrowGuard<'a, T> {
 
 impl<'a, T> std::ops::Deref for BorrowGuard<'a, T> {
     type Target = T;
-    
+
     fn deref(&self) -> &Self::Target {
         self.data
     }
@@ -620,15 +623,15 @@ use std::sync::{Mutex, MutexGuard};
 fn lifetime_safety_example() {
     let mutex = Mutex::new(vec![1, 2, 3]);
     let mut data = vec![0; 3];
-    
+
     {
         let guard = mutex.lock().unwrap();
         let mut borrow_guard = BorrowGuard::new(&mut data, guard);
-        
+
         // 在这个作用域内，data的访问是同步安全的
         borrow_guard.copy_from_slice(&[4, 5, 6]);
     } // guard和borrow_guard都在这里被释放
-    
+
     // 现在data可以自由访问
     assert_eq!(data, vec![4, 5, 6]);
 }
@@ -655,11 +658,11 @@ impl ThreadSafeCounter {
             count: AtomicUsize::new(0),
         }
     }
-    
+
     pub fn increment(&self) -> usize {
         self.count.fetch_add(1, Ordering::SeqCst)
     }
-    
+
     pub fn get(&self) -> usize {
         self.count.load(Ordering::SeqCst)
     }
@@ -685,20 +688,20 @@ impl<T> WorkQueue<T> {
             not_empty: Condvar::new(),
         }
     }
-    
+
     pub fn push(&self, item: T) {
         let mut queue = self.queue.lock().unwrap();
         queue.push_back(item);
         self.not_empty.notify_one();
     }
-    
+
     pub fn pop(&self) -> T {
         let mut queue = self.queue.lock().unwrap();
-        
+
         while queue.is_empty() {
             queue = self.not_empty.wait(queue).unwrap();
         }
-        
+
         queue.pop_front().unwrap()
     }
 }
@@ -709,7 +712,7 @@ impl<T> WorkQueue<T> {
 fn concurrency_safety_example() {
     let counter = Arc::new(ThreadSafeCounter::new());
     let work_queue = Arc::new(WorkQueue::new());
-    
+
     // 生产者线程
     let producer_queue = Arc::clone(&work_queue);
     let producer = thread::spawn(move || {
@@ -717,29 +720,29 @@ fn concurrency_safety_example() {
             producer_queue.push(i);
         }
     });
-    
+
     // 消费者线程
     let mut consumers = vec![];
     for _ in 0..4 {
         let consumer_queue = Arc::clone(&work_queue);
         let consumer_counter = Arc::clone(&counter);
-        
+
         let consumer = thread::spawn(move || {
             for _ in 0..25 {  // 每个消费者处理25个任务
                 let _task = consumer_queue.pop();
                 consumer_counter.increment();
             }
         });
-        
+
         consumers.push(consumer);
     }
-    
+
     // 等待所有线程完成
     producer.join().unwrap();
     for consumer in consumers {
         consumer.join().unwrap();
     }
-    
+
     assert_eq!(counter.get(), 100);
 }
 
@@ -762,19 +765,19 @@ impl<T> LockFreeStack<T> {
             head: AtomicPtr::new(ptr::null_mut()),
         }
     }
-    
+
     pub fn push(&self, data: T) {
         let new_node = Box::into_raw(Box::new(Node {
             data,
             next: ptr::null_mut(),
         }));
-        
+
         loop {
             let head = self.head.load(Ordering::Acquire);
             unsafe {
                 (*new_node).next = head;
             }
-            
+
             if self.head.compare_exchange_weak(
                 head,
                 new_node,
@@ -785,16 +788,16 @@ impl<T> LockFreeStack<T> {
             }
         }
     }
-    
+
     pub fn pop(&self) -> Option<T> {
         loop {
             let head = self.head.load(Ordering::Acquire);
             if head.is_null() {
                 return None;
             }
-            
+
             let next = unsafe { (*head).next };
-            
+
             if self.head.compare_exchange_weak(
                 head,
                 next,
@@ -835,17 +838,17 @@ use kani::*;
 fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
     let mut left = 0;
     let mut right = arr.len();
-    
+
     while left < right {
         let mid = left + (right - left) / 2;
-        
+
         match arr[mid].cmp(&target) {
             std::cmp::Ordering::Equal => return Some(mid),
             std::cmp::Ordering::Less => left = mid + 1,
             std::cmp::Ordering::Greater => right = mid,
         }
     }
-    
+
     None
 }
 
@@ -855,22 +858,22 @@ fn verify_binary_search_correctness() {
     // 创建符号化的输入
     let size: usize = kani::any();
     kani::assume(size <= 10); // 限制大小以减少验证时间
-    
+
     let mut arr = vec![0; size];
     for i in 0..size {
         arr[i] = kani::any();
     }
-    
+
     // 假设数组是排序的
     for i in 0..size.saturating_sub(1) {
         kani::assume(arr[i] <= arr[i + 1]);
     }
-    
+
     let target: i32 = kani::any();
-    
+
     // 执行二分搜索
     let result = binary_search(&arr, target);
-    
+
     // 验证正确性属性
     match result {
         Some(index) => {
@@ -892,22 +895,22 @@ fn verify_binary_search_correctness() {
 fn verify_no_overflow() {
     let size: usize = kani::any();
     kani::assume(size <= 1000);
-    
+
     let mut arr = vec![0; size];
     for i in 0..size {
         arr[i] = kani::any();
     }
-    
+
     // 确保数组是排序的
     for i in 0..size.saturating_sub(1) {
         kani::assume(arr[i] <= arr[i + 1]);
     }
-    
+
     let target: i32 = kani::any();
-    
+
     // 执行搜索，验证不会发生整数溢出或数组越界
     let _result = binary_search(&arr, target);
-    
+
     // 如果执行到这里，说明没有发生panic或溢出
 }
 
@@ -926,9 +929,9 @@ fn safe_divide(a: i32, b: i32) -> Option<i32> {
 fn verify_safe_divide() {
     let a: i32 = kani::any();
     let b: i32 = kani::any();
-    
+
     let result = safe_divide(a, b);
-    
+
     // 验证安全性：当b为0时返回None，否则返回正确的除法结果
     if b == 0 {
         assert!(result.is_none());
@@ -951,11 +954,11 @@ impl AtomicCounter {
             value: AtomicI32::new(0),
         }
     }
-    
+
     fn increment(&self) -> i32 {
         self.value.fetch_add(1, Ordering::SeqCst)
     }
-    
+
     fn get(&self) -> i32 {
         self.value.load(Ordering::SeqCst)
     }
@@ -965,19 +968,19 @@ impl AtomicCounter {
 #[kani::proof]
 fn verify_atomic_counter() {
     let counter = AtomicCounter::new();
-    
+
     // 模拟并发操作
     let num_threads: usize = kani::any();
     kani::assume(num_threads <= 5);
-    
+
     let mut expected_count = 0;
-    
+
     // 模拟多个线程的increment操作
     for _ in 0..num_threads {
         counter.increment();
         expected_count += 1;
     }
-    
+
     // 验证最终计数正确
     assert_eq!(counter.get(), expected_count);
 }
@@ -995,7 +998,7 @@ fn verify_atomic_counter() {
 
 **学习序列**：
 
-1. 安全模型基础 → 2. 类型安全理解 → 3. 内存安全验证 → 4. 基础静态分析
+从引用一致性视角看，1. 安全模型基础 → 2. 类型安全理解 → 3. 资源安全（编译期逻辑证明）验证 → 4. 基础静态分析
 
 **实践项目**：
 
@@ -1074,7 +1077,8 @@ fn verify_atomic_counter() {
 
 ### 10.1 依赖模块
 
-- [Module 01: 所有权系统](../01_ownership_borrowing/00_index.md) - 内存安全基础
+从引用一致性视角看，- [Module 01: 所有权系统](../01_ownership_borrowing/00_index.md) - 资源安全（编译期逻辑证明）基础
+
 - [Module 02: 类型系统](../02_type_system/00_index.md) - 类型安全基础
 - [Module 05: 并发编程](../05_concurrency/00_index.md) - 并发安全基础
 - [Module 19: 高级语言特性](../19_advanced_language_features/00_index.md) - Unsafe安全验证
@@ -1092,14 +1096,16 @@ fn verify_atomic_counter() {
 
 - `Clippy` - Rust linter
 - `Miri` - Rust解释器和UB检测器
-- `Rudra` - Rust内存安全漏洞检测
+从引用一致性视角看，- `Rudra` - Rust资源安全（编译期逻辑证明）漏洞检测
 - `Cargo-audit` - 依赖漏洞检查
 
 **动态验证工具**：
 
-- `AddressSanitizer` - 内存错误检测
-- `ThreadSanitizer` - 数据竞争检测
-- `Valgrind` - 内存调试工具
+从引用一致性视角看：
+
+- `AddressSanitizer` - 资源错误（编译期逻辑证明的失败）检测
+- `ThreadSanitizer` - 数据竞争（编译期排他性契约的验证失败）检测
+- `Valgrind` - 资源调试工具
 - `AFL++` - 模糊测试工具
 
 ### 10.3 理论资源
@@ -1111,7 +1117,7 @@ fn verify_atomic_counter() {
 
 ---
 
-**文档历史**:  
+**文档历史**:
 
 - 创建: 2025-07-23 - 初始版本
 - 更新: 2025-01-01 - V2.0版本，建立完整的安全验证理论和实践框架

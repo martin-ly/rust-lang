@@ -3,43 +3,45 @@
 
 ## 📊 目录
 
-- [1. 概述 {#条件控制流概述}](#1-概述-条件控制流概述)
-- [2. 数学符号约定 {#数学符号约定}](#2-数学符号约定-数学符号约定)
-  - [2.1 基本符号 {#基本符号}](#21-基本符号-基本符号)
-  - [2.2 条件控制流符号 {#条件控制流符号}](#22-条件控制流符号-条件控制流符号)
-- [3. If表达式形式化理论 {#if表达式理论}](#3-if表达式形式化理论-if表达式理论)
-  - [3.1 语法定义 {#if语法定义}](#31-语法定义-if语法定义)
-  - [3.2 类型规则 {#if类型规则}](#32-类型规则-if类型规则)
-  - [3.3 安全性证明 {#if安全性证明}](#33-安全性证明-if安全性证明)
-- [4. Match表达式形式化理论 {#match表达式理论}](#4-match表达式形式化理论-match表达式理论)
-  - [4.1 语法定义 {#match语法定义}](#41-语法定义-match语法定义)
-  - [4.2 模式匹配理论 {#模式匹配理论}](#42-模式匹配理论-模式匹配理论)
-  - [4.3 类型规则 {#match类型规则}](#43-类型规则-match类型规则)
-  - [4.4 穷尽性检查 {#穷尽性检查}](#44-穷尽性检查-穷尽性检查)
-- [5. 守卫条件理论 {#守卫条件理论}](#5-守卫条件理论-守卫条件理论)
-  - [5.1 守卫语法 {#守卫语法}](#51-守卫语法-守卫语法)
-  - [5.2 守卫求值 {#守卫求值}](#52-守卫求值-守卫求值)
-  - [5.3 守卫类型规则 {#守卫类型规则}](#53-守卫类型规则-守卫类型规则)
-- [6. 控制流图理论 {#控制流图理论}](#6-控制流图理论-控制流图理论)
-  - [6.1 控制流图定义 {#控制流图定义}](#61-控制流图定义-控制流图定义)
-  - [6.2 条件控制流图构建 {#条件控制流图构建}](#62-条件控制流图构建-条件控制流图构建)
-- [7. 数据流分析 {#数据流分析}](#7-数据流分析-数据流分析)
-  - [7.1 可达性分析 {#可达性分析}](#71-可达性分析-可达性分析)
-  - [7.2 死代码消除 {#死代码消除}](#72-死代码消除-死代码消除)
-- [8. 类型安全证明 {#类型安全证明}](#8-类型安全证明-类型安全证明)
-  - [8.1 条件控制流类型安全 {#条件控制流类型安全}](#81-条件控制流类型安全-条件控制流类型安全)
-  - [8.2 内存安全证明 {#内存安全证明}](#82-内存安全证明-内存安全证明)
-- [9. 优化理论 {#优化理论}](#9-优化理论-优化理论)
-  - [9.1 常量折叠 {#常量折叠}](#91-常量折叠-常量折叠)
-  - [9.2 分支预测优化 {#分支预测优化}](#92-分支预测优化-分支预测优化)
-- [10. 实际应用示例 {#实际应用示例}](#10-实际应用示例-实际应用示例)
-  - [10.1 复杂条件逻辑 {#复杂条件逻辑}](#101-复杂条件逻辑-复杂条件逻辑)
-  - [10.2 状态机实现 {#状态机实现}](#102-状态机实现-状态机实现)
-- [11. 形式化验证 {#形式化验证}](#11-形式化验证-形式化验证)
-  - [11.1 模型检查 {#模型检查}](#111-模型检查-模型检查)
-  - [11.2 定理证明 {#定理证明}](#112-定理证明-定理证明)
-- [12. 总结 {#总结}](#12-总结-总结)
-- [13. 参考文献 {#参考文献}](#13-参考文献-参考文献)
+- [Rust条件控制流形式化理论 {#条件控制流理论}](#rust条件控制流形式化理论-条件控制流理论)
+  - [📊 目录](#-目录)
+  - [1. 概述 {#条件控制流概述}](#1-概述-条件控制流概述)
+  - [2. 数学符号约定 {#数学符号约定}](#2-数学符号约定-数学符号约定)
+    - [2.1 基本符号 {#基本符号}](#21-基本符号-基本符号)
+    - [2.2 条件控制流符号 {#条件控制流符号}](#22-条件控制流符号-条件控制流符号)
+  - [3. If表达式形式化理论 {#if表达式理论}](#3-if表达式形式化理论-if表达式理论)
+    - [3.1 语法定义 {#if语法定义}](#31-语法定义-if语法定义)
+    - [3.2 类型规则 {#if类型规则}](#32-类型规则-if类型规则)
+    - [3.3 安全性证明 {#if安全性证明}](#33-安全性证明-if安全性证明)
+  - [4. Match表达式形式化理论 {#match表达式理论}](#4-match表达式形式化理论-match表达式理论)
+    - [4.1 语法定义 {#match语法定义}](#41-语法定义-match语法定义)
+    - [4.2 模式匹配理论 {#模式匹配理论}](#42-模式匹配理论-模式匹配理论)
+    - [4.3 类型规则 {#match类型规则}](#43-类型规则-match类型规则)
+    - [4.4 穷尽性检查 {#穷尽性检查}](#44-穷尽性检查-穷尽性检查)
+  - [5. 守卫条件理论 {#守卫条件理论}](#5-守卫条件理论-守卫条件理论)
+    - [5.1 守卫语法 {#守卫语法}](#51-守卫语法-守卫语法)
+    - [5.2 守卫求值 {#守卫求值}](#52-守卫求值-守卫求值)
+    - [5.3 守卫类型规则 {#守卫类型规则}](#53-守卫类型规则-守卫类型规则)
+  - [6. 控制流图理论 {#控制流图理论}](#6-控制流图理论-控制流图理论)
+    - [6.1 控制流图定义 {#控制流图定义}](#61-控制流图定义-控制流图定义)
+    - [6.2 条件控制流图构建 {#条件控制流图构建}](#62-条件控制流图构建-条件控制流图构建)
+  - [7. 数据流分析 {#数据流分析}](#7-数据流分析-数据流分析)
+    - [7.1 可达性分析 {#可达性分析}](#71-可达性分析-可达性分析)
+    - [7.2 死代码消除 {#死代码消除}](#72-死代码消除-死代码消除)
+  - [8. 类型安全证明 {#类型安全证明}](#8-类型安全证明-类型安全证明)
+    - [8.1 条件控制流类型安全 {#条件控制流类型安全}](#81-条件控制流类型安全-条件控制流类型安全)
+    - [8.2 资源安全证明（引用一致性视角） {#资源安全证明引用一致性视角}](#82-资源安全证明引用一致性视角-资源安全证明引用一致性视角)
+  - [9. 优化理论 {#优化理论}](#9-优化理论-优化理论)
+    - [9.1 常量折叠 {#常量折叠}](#91-常量折叠-常量折叠)
+    - [9.2 分支预测优化 {#分支预测优化}](#92-分支预测优化-分支预测优化)
+  - [10. 实际应用示例 {#实际应用示例}](#10-实际应用示例-实际应用示例)
+    - [10.1 复杂条件逻辑 {#复杂条件逻辑}](#101-复杂条件逻辑-复杂条件逻辑)
+    - [10.2 状态机实现 {#状态机实现}](#102-状态机实现-状态机实现)
+  - [11. 形式化验证 {#形式化验证}](#11-形式化验证-形式化验证)
+    - [11.1 模型检查 {#模型检查}](#111-模型检查-模型检查)
+    - [11.2 定理证明 {#定理证明}](#112-定理证明-定理证明)
+  - [12. 总结 {#总结}](#12-总结-总结)
+  - [13. 参考文献 {#参考文献}](#13-参考文献-参考文献)
 
 
 ## 1. 概述 {#条件控制流概述}
@@ -336,25 +338,25 @@ $$\frac{\Gamma \vdash \sigma : \tau \quad \Gamma \vdash g : \text{bool} \quad \G
 ```rust
 fn build_if_cfg(condition: Expr, then_block: Expr, else_block: Expr) -> CFG {
     let mut cfg = CFG::new();
-    
+
     // 条件节点
     let condition_node = cfg.add_node(condition);
-    
+
     // then分支节点
     let then_node = cfg.add_node(then_block);
-    
+
     // else分支节点
     let else_node = cfg.add_node(else_block);
-    
+
     // 合并节点
     let merge_node = cfg.add_node(());
-    
+
     // 添加边
     cfg.add_edge(condition_node, then_node, "true");
     cfg.add_edge(condition_node, else_node, "false");
     cfg.add_edge(then_node, merge_node, "");
     cfg.add_edge(else_node, merge_node, "");
-    
+
     cfg
 }
 ```
@@ -371,25 +373,25 @@ fn build_if_cfg(condition: Expr, then_block: Expr, else_block: Expr) -> CFG {
 ```rust
 fn build_match_cfg(scrutinee: Expr, arms: &[MatchArm]) -> CFG {
     let mut cfg = CFG::new();
-    
+
     // scrutinee节点
     let scrutinee_node = cfg.add_node(scrutinee);
-    
+
     // 每个分支的节点
     let arm_nodes: Vec<_> = arms
         .iter()
         .map(|arm| cfg.add_node(arm.body.clone()))
         .collect();
-    
+
     // 合并节点
     let merge_node = cfg.add_node(());
-    
+
     // 添加边
     for (i, arm) in arms.iter().enumerate() {
         cfg.add_edge(scrutinee_node, arm_nodes[i], &format!("matches({})", i));
         cfg.add_edge(arm_nodes[i], merge_node, "");
     }
-    
+
     cfg
 }
 ```
@@ -421,7 +423,7 @@ fn build_match_cfg(scrutinee: Expr, arms: &[MatchArm]) -> CFG {
 fn reachability_analysis(cfg: &CFG) -> HashSet<NodeId> {
     let mut reachable = HashSet::new();
     let mut worklist = vec![cfg.entry_node()];
-    
+
     while let Some(node) = worklist.pop() {
         if reachable.insert(node) {
             for successor in cfg.successors(node) {
@@ -429,7 +431,7 @@ fn reachability_analysis(cfg: &CFG) -> HashSet<NodeId> {
             }
         }
     }
-    
+
     reachable
 }
 ```
@@ -456,12 +458,12 @@ fn reachability_analysis(cfg: &CFG) -> HashSet<NodeId> {
 ```rust
 fn dead_code_elimination(cfg: &mut CFG) {
     let reachable = reachability_analysis(cfg);
-    
+
     // 移除不可达的节点
     let unreachable: Vec<_> = cfg.nodes()
         .filter(|&node| !reachable.contains(&node))
         .collect();
-    
+
     for node in unreachable {
         cfg.remove_node(node);
     }
@@ -510,10 +512,10 @@ fn dead_code_elimination(cfg: &mut CFG) {
 - [if表达式安全性](if表达式类型安全) (本文件)
 - [match表达式安全性](../02_pattern_matching_system.md#模式匹配正确性) (本模块)
 
-### 8.2 内存安全证明 {#内存安全证明}
+### 8.2 资源安全证明（引用一致性视角） {#资源安全证明引用一致性视角}
 
-**定理 8.2** (条件控制流内存安全) {#条件控制流内存安全定理}
-条件控制流程序在Rust类型系统下是内存安全的。
+从引用一致性视角看，**定理 8.2** (条件控制流资源安全（编译期逻辑证明）) {#条件控制流资源安全编译期逻辑证明定理}
+条件控制流程序在Rust类型系统（构造性证明系统）下是资源安全（编译期逻辑证明）的。
 
 **证明**：
 
@@ -537,7 +539,7 @@ fn dead_code_elimination(cfg: &mut CFG) {
 - [所有权系统](../../01_ownership_borrowing/01_formal_ownership_system.md#所有权系统) (模块 01)
 - [借用系统](../../01_ownership_borrowing/02_formal_borrowing_system.md#借用系统) (模块 01)
 - [生命周期系统](../../01_ownership_borrowing/03_formal_lifetime_system.md#生命周期系统) (模块 01)
-- [内存安全](../../01_ownership_borrowing/01_formal_ownership_system.md#内存安全) (模块 01)
+从引用一致性视角看，- [资源安全（编译期逻辑证明）](../../01_ownership_borrowing/01_formal_ownership_system.md#资源安全编译期逻辑证明) (模块 01)
 - [模式绑定](../02_pattern_matching_system.md#模式绑定) (本模块)
 - [异常安全](../../09_error_handling/02_exception_safety.md#异常安全) (模块 09)
 
@@ -579,7 +581,7 @@ fn constant_fold_condition(expr: &mut Expr) {
 fn optimize_branch_prediction(cfg: &mut CFG) {
     // 分析分支历史
     let branch_history = analyze_branch_history(cfg);
-    
+
     // 重新排列分支顺序
     for node in cfg.nodes() {
         if let Some(branches) = cfg.get_branches(node) {
@@ -687,21 +689,21 @@ fn model_check(program: &Program, property: &Property) -> bool {
     let model = build_transition_system(program);
     let mut visited = HashSet::new();
     let mut stack = vec![model.initial_states()];
-    
+
     while let Some(state) = stack.pop() {
         if !visited.insert(state) {
             continue;
         }
-        
+
         if !property.holds_at(state) {
             return false;
         }
-        
+
         for successor in model.successors(state) {
             stack.push(successor);
         }
     }
-    
+
     true
 }
 ```
@@ -737,7 +739,7 @@ fn model_check(program: &Program, property: &Property) -> bool {
 本文档建立了Rust条件控制流的完整形式化理论体系，包括：
 
 1. **数学基础**：定义了条件控制流的语法、语义和类型规则
-2. **安全性证明**：证明了类型安全和内存安全性质
+2. **安全性证明**（引用一致性视角）：从引用一致性视角看，证明了类型安全和资源安全（编译期逻辑证明）性质
 3. **优化理论**：提供了常量折叠和分支预测优化算法
 4. **实际应用**：展示了复杂条件逻辑和状态机的实现
 5. **形式化验证**：建立了模型检查和定理证明方法

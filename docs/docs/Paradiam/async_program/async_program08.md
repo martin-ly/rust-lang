@@ -108,7 +108,7 @@ fn main() {
 async fn concurrent_example() {
     let task1 = async { /* 任务1 */ };
     let task2 = async { /* 任务2 */ };
-    
+
     // 并发执行两个任务
     tokio::join!(task1, task2);
 }
@@ -155,7 +155,7 @@ fn parallel_example() {
 async fn causal_example() {
     let a = 1;  // 事件e₁
     let b = a + 1;  // 事件e₂，依赖于e₁
-    
+
     // e₁ ≤ e₂，表示e₁必须在e₂之前完成
 }
 ```
@@ -186,7 +186,7 @@ use std::thread;
 fn sync_counter_example() {
     let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];
-    
+
     for _ in 0..10 {
         let counter_clone = Arc::clone(&counter);
         let handle = thread::spawn(move || {
@@ -195,11 +195,11 @@ fn sync_counter_example() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     println!("计数器: {}", *counter.lock().unwrap());
 }
 ```
@@ -215,7 +215,7 @@ use std::sync::Arc;
 async fn async_counter_example() {
     let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];
-    
+
     for _ in 0..10 {
         let counter_clone = Arc::clone(&counter);
         let handle = tokio::spawn(async move {
@@ -224,11 +224,11 @@ async fn async_counter_example() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.await.unwrap();
     }
-    
+
     println!("计数器: {}", *counter.lock().await);
 }
 ```
@@ -274,7 +274,7 @@ Tokio是Rust生态系统中最流行的异步运行时，其架构包括：
 fn tokio_runtime_example() {
     // 创建多线程运行时
     let rt = tokio::runtime::Runtime::new().unwrap();
-    
+
     // 在运行时中执行异步任务
     rt.block_on(async {
         // 异步任务在这里执行
@@ -312,15 +312,15 @@ fn event_loop() {
     loop {
         // 阻塞等待事件
         poll.poll(&mut events, Some(timeout));
-        
+
         for event in events.iter() {
             // 获取与事件关联的任务
             let task = event.data();
-            
+
             // 唤醒任务
             task.wake();
         }
-        
+
         // 运行已准备好的任务
         run_ready_tasks();
     }
@@ -351,7 +351,7 @@ async fn time_optimization_example() {
         fetch_resource("url1"),
         fetch_resource("url2")
     );
-    
+
     // 总时间约等于较慢请求的时间，而非两者之和
 }
 ```
@@ -366,7 +366,7 @@ async fn dependency_example() {
     // 步骤1必须在步骤2之前完成（因果关系）
     let data = fetch_data().await;  // 步骤1
     let result = process_data(data).await;  // 步骤2，依赖步骤1的结果
-    
+
     // 步骤3和步骤4之间没有因果关系，可以并发
     let (result1, result2) = tokio::join!(
         independent_task1(),  // 步骤3
@@ -389,7 +389,7 @@ async fn combination_pattern() {
     let result = future::ready(1)
         .then(|i| future::ready(i + 1))
         .await;
-        
+
     // 并行执行并收集结果
     let futures = vec![future::ready(1), future::ready(2), future::ready(3)];
     let results = future::join_all(futures).await;
@@ -401,21 +401,21 @@ async fn combination_pattern() {
 ```rust
 async fn channel_pattern() {
     let (tx, mut rx) = tokio::sync::mpsc::channel(100);
-    
+
     // 生产者任务
     let producer = tokio::spawn(async move {
         for i in 0..10 {
             tx.send(i).await.unwrap();
         }
     });
-    
+
     // 消费者任务
     let consumer = tokio::spawn(async move {
         while let Some(value) = rx.recv().await {
             println!("收到值: {}", value);
         }
     });
-    
+
     // 等待任务完成
     tokio::join!(producer, consumer);
 }
@@ -432,7 +432,7 @@ async fn channel_pattern() {
 async fn blocking_antipattern() {
     // 错误：这会阻塞整个异步运行时
     let result = compute_intensive_function();
-    
+
     // 正确：将CPU密集型工作移到专用线程池
     let result = tokio::task::spawn_blocking(|| {
         compute_intensive_function()
@@ -446,7 +446,7 @@ async fn blocking_antipattern() {
 // 限制并发请求数量
 async fn bounded_concurrency() {
     let semaphore = tokio::sync::Semaphore::new(10);  // 最多10个并发
-    
+
     let mut handles = vec![];
     for i in 0..100 {
         let permit = semaphore.acquire().await.unwrap();
@@ -458,7 +458,7 @@ async fn bounded_concurrency() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.await.unwrap();
     }
@@ -476,10 +476,10 @@ async fn mixed_sync_async() {
         // 同步代码块
         std::fs::read_to_string("file.txt").unwrap()
     }).await.unwrap();
-    
+
     // 处理结果
     println!("文件内容: {}", result);
-    
+
     // 在同步代码中运行异步代码
     fn sync_function() {
         let rt = tokio::runtime::Runtime::new().unwrap();
@@ -509,7 +509,7 @@ fn type_verification_example() {
     // 编译器验证资源被正确释放
     let file = std::fs::File::open("test.txt").unwrap();
     // 离开作用域时自动关闭文件（RAII）
-    
+
     // 编译器验证线程安全性
     let data = Arc::new(Mutex::new(0));
     // 通过类型系统确保多线程访问安全
@@ -576,14 +576,14 @@ async fn performance_comparison() {
         let _ = handle.await;
     }
     let async_duration = start.elapsed();
-    
+
     // 同步版本 - 顺序处理请求
     let start = std::time::Instant::now();
     for i in 0..100 {
         let _ = sync_fetch_url(i);
     }
     let sync_duration = start.elapsed();
-    
+
     println!("异步版本: {:?}, 同步版本: {:?}", async_duration, sync_duration);
 }
 ```
@@ -620,18 +620,18 @@ async fn async_thinking() {
 async fn non_determinism_example() {
     let (tx1, rx1) = tokio::sync::oneshot::channel();
     let (tx2, rx2) = tokio::sync::oneshot::channel();
-    
+
     // 两个任务竞争
     tokio::spawn(async move {
         tokio::time::sleep(tokio::time::Duration::from_millis(rand::random::<u64>() % 100)).await;
         let _ = tx1.send("任务1完成");
     });
-    
+
     tokio::spawn(async move {
         tokio::time::sleep(tokio::time::Duration::from_millis(rand::random::<u64>() % 100)).await;
         let _ = tx2.send("任务2完成");
     });
-    
+
     // 谁先完成是非确定的
     tokio::select! {
         val = rx1 => println!("先收到: {}", val.unwrap()),
@@ -650,7 +650,7 @@ async fn structured_concurrency() {
     // 创建作用域，确保所有任务在退出前完成
     tokio::task::LocalSet::new().run_until(async {
         let mut tasks = vec![];
-        
+
         // 启动多个任务
         for i in 0..10 {
             let task = tokio::task::spawn_local(async move {
@@ -660,12 +660,12 @@ async fn structured_concurrency() {
             });
             tasks.push(task);
         }
-        
+
         // 等待所有任务完成
         for task in tasks {
             let _ = task.await;
         }
-        
+
         // 此处所有任务已完成
         println!("所有任务已完成");
     }).await;

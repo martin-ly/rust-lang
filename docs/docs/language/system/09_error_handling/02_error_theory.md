@@ -3,39 +3,41 @@
 
 ## 📊 目录
 
-- [1. 理论基础](#1-理论基础)
-  - [1.1 代数数据类型理论](#11-代数数据类型理论)
-  - [1.2 错误类型层次](#12-错误类型层次)
-  - [1.3 错误传播理论](#13-错误传播理论)
-- [2. 类型规则](#2-类型规则)
-  - [2.1 Result类型规则](#21-result类型规则)
-  - [2.2 Option类型规则](#22-option类型规则)
-  - [2.3 错误转换规则](#23-错误转换规则)
-- [3. 错误处理模式](#3-错误处理模式)
-  - [3.1 早期返回模式](#31-早期返回模式)
-  - [3.2 错误转换模式](#32-错误转换模式)
-  - [3.3 错误组合模式](#33-错误组合模式)
-- [4. 错误恢复理论](#4-错误恢复理论)
-  - [4.1 错误恢复策略](#41-错误恢复策略)
-  - [4.2 重试机制](#42-重试机制)
-  - [4.3 错误边界](#43-错误边界)
-- [5. 错误安全保证](#5-错误安全保证)
-  - [5.1 异常安全](#51-异常安全)
-  - [5.2 RAII模式](#52-raii模式)
-  - [5.3 错误传播安全](#53-错误传播安全)
-- [6. 错误处理算法](#6-错误处理算法)
-  - [6.1 错误传播算法](#61-错误传播算法)
-  - [6.2 错误恢复算法](#62-错误恢复算法)
-  - [6.3 错误分类算法](#63-错误分类算法)
-- [7. 实际应用](#7-实际应用)
-  - [7.1 文件处理](#71-文件处理)
-  - [7.2 网络请求](#72-网络请求)
-  - [7.3 数据库操作](#73-数据库操作)
-- [8. 性能分析](#8-性能分析)
-  - [8.1 错误处理开销](#81-错误处理开销)
-  - [8.2 内存安全](#82-内存安全)
-  - [8.3 性能优化](#83-性能优化)
-- [9. 总结](#9-总结)
+- [Rust错误处理理论](#rust错误处理理论)
+  - [📊 目录](#-目录)
+  - [1. 理论基础](#1-理论基础)
+    - [1.1 代数数据类型理论](#11-代数数据类型理论)
+    - [1.2 错误类型层次](#12-错误类型层次)
+    - [1.3 错误传播理论](#13-错误传播理论)
+  - [2. 类型规则](#2-类型规则)
+    - [2.1 Result类型规则](#21-result类型规则)
+    - [2.2 Option类型规则](#22-option类型规则)
+    - [2.3 错误转换规则](#23-错误转换规则)
+  - [3. 错误处理模式](#3-错误处理模式)
+    - [3.1 早期返回模式](#31-早期返回模式)
+    - [3.2 错误转换模式](#32-错误转换模式)
+    - [3.3 错误组合模式](#33-错误组合模式)
+  - [4. 错误恢复理论](#4-错误恢复理论)
+    - [4.1 错误恢复策略](#41-错误恢复策略)
+    - [4.2 重试机制](#42-重试机制)
+    - [4.3 错误边界](#43-错误边界)
+  - [5. 错误安全保证](#5-错误安全保证)
+    - [5.1 异常安全](#51-异常安全)
+    - [5.2 RAII模式](#52-raii模式)
+    - [5.3 错误传播安全](#53-错误传播安全)
+  - [6. 错误处理算法](#6-错误处理算法)
+    - [6.1 错误传播算法](#61-错误传播算法)
+    - [6.2 错误恢复算法](#62-错误恢复算法)
+    - [6.3 错误分类算法](#63-错误分类算法)
+  - [7. 实际应用](#7-实际应用)
+    - [7.1 文件处理](#71-文件处理)
+    - [7.2 网络请求](#72-网络请求)
+    - [7.3 数据库操作](#73-数据库操作)
+  - [8. 性能分析](#8-性能分析)
+    - [8.1 错误处理开销](#81-错误处理开销)
+    - [8.2 内存安全](#82-内存安全)
+    - [8.3 性能优化](#83-性能优化)
+  - [9. 总结](#9-总结)
 
 
 ## 1. 理论基础
@@ -159,7 +161,7 @@ $$\frac{\Gamma \vdash e : \text{Result}\langle T, E \rangle \quad E: \text{From}
 fn parse_config(path: &str) -> Result<Config, ConfigError> {
     let contents = std::fs::read_to_string(path)
         .map_err(|e| ConfigError::IoError(e))?;
-    
+
     toml::from_str(&contents)
         .map_err(|e| ConfigError::ParseError(e))
 }
@@ -215,7 +217,7 @@ where
     E: std::fmt::Debug,
 {
     let mut delay = initial_delay;
-    
+
     for attempt in 0..=max_retries {
         match f() {
             Ok(result) => return Ok(result),
@@ -228,7 +230,7 @@ where
             }
         }
     }
-    
+
     unreachable!()
 }
 ```
@@ -256,7 +258,7 @@ impl<T> ErrorBoundary<T> {
             error_handler: Box::new(error_handler),
         }
     }
-    
+
     fn execute<F, R>(&self, f: F) -> R
     where
         F: FnOnce(&T) -> Result<R, Box<dyn Error>>,
@@ -345,7 +347,7 @@ fn propagate_errors(expr: &Expr) -> Result<Type, TypeError> {
     match expr {
         Expr::QuestionMark(inner) => {
             let inner_type = infer_type(inner)?;
-            
+
             match inner_type {
                 Type::Result(ok_type, err_type) => {
                     // 检查错误类型是否可转换
@@ -360,7 +362,7 @@ fn propagate_errors(expr: &Expr) -> Result<Type, TypeError> {
         }
         Expr::Match(scrutinee, arms) => {
             let scrutinee_type = infer_type(scrutinee)?;
-            
+
             match scrutinee_type {
                 Type::Result(ok_type, err_type) => {
                     // 检查匹配臂的类型一致性
@@ -395,7 +397,7 @@ impl ErrorRecovery {
     fn add_strategy(&mut self, strategy: impl RecoveryStrategy + 'static) {
         self.strategies.push(Box::new(strategy));
     }
-    
+
     fn handle_error(&self, error: &dyn Error) -> Result<(), Box<dyn Error>> {
         for strategy in &self.strategies {
             if strategy.can_handle(error) {
@@ -436,7 +438,7 @@ impl ErrorClassifier {
         }
         ErrorCategory::NonRecoverable
     }
-    
+
     fn get_recovery_action(&self, error: &dyn Error) -> Option<ErrorAction> {
         for rule in &self.rules {
             if rule.pattern.matches(error) {
@@ -456,15 +458,15 @@ impl ErrorClassifier {
 fn process_file_safely(path: &str) -> Result<String, ProcessingError> {
     let file = File::open(path)
         .map_err(|e| ProcessingError::IoError(e))?;
-    
+
     let mut contents = String::new();
     file.read_to_string(&mut contents)
         .map_err(|e| ProcessingError::IoError(e))?;
-    
+
     if contents.is_empty() {
         return Err(ProcessingError::EmptyFile);
     }
-    
+
     Ok(contents)
 }
 
@@ -501,7 +503,7 @@ impl std::error::Error for ProcessingError {
 async fn fetch_data_with_retry(url: &str) -> Result<String, FetchError> {
     let mut retries = 0;
     let max_retries = 3;
-    
+
     loop {
         match fetch_data(url).await {
             Ok(data) => return Ok(data),
@@ -510,7 +512,7 @@ async fn fetch_data_with_retry(url: &str) -> Result<String, FetchError> {
                 if retries >= max_retries {
                     return Err(FetchError::MaxRetriesExceeded(e));
                 }
-                
+
                 // 指数退避
                 let delay = Duration::from_secs(2_u64.pow(retries as u32));
                 tokio::time::sleep(delay).await;
@@ -535,7 +537,7 @@ where
     F: FnOnce(&mut Transaction) -> Result<T, Box<dyn Error>>,
 {
     let mut tx = db.begin_transaction()?;
-    
+
     match f(&mut tx) {
         Ok(result) => {
             tx.commit()?;
@@ -623,6 +625,6 @@ Rust错误处理理论基于代数数据类型和类型安全机制，提供了�
 
 ---
 
-**文档版本**: 1.0.0  
-**最后更新**: 2025-01-27  
+**文档版本**: 1.0.0
+**最后更新**: 2025-01-27
 **维护者**: Rust语言形式化理论项目组

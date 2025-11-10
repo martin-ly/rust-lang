@@ -1,11 +1,11 @@
 # Rust 模块系统与代码组织索引 {#模块系统索引}
 
-**模块编号**: 10  
-**模块名称**: 模块系统 (Module System)  
-**创建日期**: 2024-01-15  
-**最后更新**: 2024-12-30  
-**维护者**: Rust形式化团队  
-**文档版本**: 3.0  
+**模块编号**: 10
+**模块名称**: 模块系统 (Module System)
+**创建日期**: 2024-01-15
+**最后更新**: 2024-12-30
+**维护者**: Rust形式化团队
+**文档版本**: 3.0
 
 ## 目录结构 {#目录结构}
 
@@ -154,7 +154,7 @@ Rust模块系统提供了强大的代码组织和命名空间管理能力，通�
 
 ### 基础定义 {#基础定义}
 
-**定义 10.1 (模块系统)**  
+**定义 10.1 (模块系统)**
 模块系统是一个六元组 MS = (M, V, D, R, N, S)，其中：
 
 - M: 模块集合 {m₁, m₂, ..., mₙ}
@@ -164,16 +164,16 @@ Rust模块系统提供了强大的代码组织和命名空间管理能力，通�
 - N: 命名函数 N: Item → Path
 - S: 作用域函数 S: Position → `Set<Item>`
 
-**定义 10.2 (可见性谓词)**  
+**定义 10.2 (可见性谓词)**
 项目item在位置pos的可见性：
 
 ```text
-visible(item, pos) ≔ ∃ path. 
-    resolve(path, pos) = Some(item) ∧ 
+visible(item, pos) ≔ ∃ path.
+    resolve(path, pos) = Some(item) ∧
     accessible(item, module(pos))
 ```
 
-**定义 10.3 (模块良构性)**  
+**定义 10.3 (模块良构性)**
 模块系统良构当且仅当：
 
 - 依赖图是无环的：acyclic(D)
@@ -182,25 +182,25 @@ visible(item, pos) ≔ ∃ path.
 
 ### 核心定理 {#核心定理}
 
-**定理 10.1 (名称解析唯一性)**  
+**定理 10.1 (名称解析唯一性)**
 在给定作用域中，每个有效路径解析到唯一项目：
 
 ```text
 ∀ path, scope. valid(path, scope) → ∃! item. resolve(path, scope) = item
 ```
 
-**定理 10.2 (可见性传递性)**  
+**定理 10.2 (可见性传递性)**
 可见性关系在模块层次中的传递性：
 
 ```text
 ∀ a, b, c ∈ M. visible(a, b) ∧ contains(b, c) → visible(a, c)
 ```
 
-**定理 10.3 (依赖一致性)**  
+**定理 10.3 (依赖一致性)**
 模块系统保证依赖的一致性：
 
 ```text
-∀ m₁, m₂ ∈ M. depends(m₁, m₂) → ∃ compilation_order. 
+∀ m₁, m₂ ∈ M. depends(m₁, m₂) → ∃ compilation_order.
     ordered_before(m₂, m₁, compilation_order)
 ```
 

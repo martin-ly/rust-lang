@@ -3,38 +3,40 @@
 
 ## 📊 目录
 
-- [1. 概述](#1-概述)
-- [2. 数学基础](#2-数学基础)
-  - [2.1 代数数据类型](#21-代数数据类型)
-  - [2.2 错误类型层次](#22-错误类型层次)
-  - [2.3 错误传播理论](#23-错误传播理论)
-- [3. 类型规则](#3-类型规则)
-  - [3.1 Result类型规则](#31-result类型规则)
-  - [3.2 Option类型规则](#32-option类型规则)
-  - [3.3 错误传播规则](#33-错误传播规则)
-- [4. 错误处理模式](#4-错误处理模式)
-  - [4.1 早期返回模式](#41-早期返回模式)
-  - [4.2 错误转换模式](#42-错误转换模式)
-  - [4.3 错误组合模式](#43-错误组合模式)
-- [5. 错误恢复理论](#5-错误恢复理论)
-  - [5.1 错误恢复策略](#51-错误恢复策略)
-  - [5.2 重试机制](#52-重试机制)
-  - [5.3 错误边界](#53-错误边界)
-- [6. 错误安全保证](#6-错误安全保证)
-  - [6.1 异常安全](#61-异常安全)
-  - [6.2 RAII模式](#62-raii模式)
-  - [6.3 错误传播安全](#63-错误传播安全)
-- [7. 错误处理算法](#7-错误处理算法)
-  - [7.1 错误传播算法](#71-错误传播算法)
-  - [7.2 错误恢复算法](#72-错误恢复算法)
-- [8. 实际应用](#8-实际应用)
-  - [8.1 文件处理](#81-文件处理)
-  - [8.2 网络请求](#82-网络请求)
-  - [8.3 数据库操作](#83-数据库操作)
-- [9. 性能分析](#9-性能分析)
-  - [9.1 错误处理开销](#91-错误处理开销)
-  - [9.2 内存安全](#92-内存安全)
-- [10. 总结](#10-总结)
+- [Rust错误处理系统形式化理论](#rust错误处理系统形式化理论)
+  - [📊 目录](#-目录)
+  - [1. 概述](#1-概述)
+  - [2. 数学基础](#2-数学基础)
+    - [2.1 代数数据类型](#21-代数数据类型)
+    - [2.2 错误类型层次](#22-错误类型层次)
+    - [2.3 错误传播理论](#23-错误传播理论)
+  - [3. 类型规则](#3-类型规则)
+    - [3.1 Result类型规则](#31-result类型规则)
+    - [3.2 Option类型规则](#32-option类型规则)
+    - [3.3 错误传播规则](#33-错误传播规则)
+  - [4. 错误处理模式](#4-错误处理模式)
+    - [4.1 早期返回模式](#41-早期返回模式)
+    - [4.2 错误转换模式](#42-错误转换模式)
+    - [4.3 错误组合模式](#43-错误组合模式)
+  - [5. 错误恢复理论](#5-错误恢复理论)
+    - [5.1 错误恢复策略](#51-错误恢复策略)
+    - [5.2 重试机制](#52-重试机制)
+    - [5.3 错误边界](#53-错误边界)
+  - [6. 错误安全保证](#6-错误安全保证)
+    - [6.1 异常安全](#61-异常安全)
+    - [6.2 RAII模式](#62-raii模式)
+    - [6.3 错误传播安全](#63-错误传播安全)
+  - [7. 错误处理算法](#7-错误处理算法)
+    - [7.1 错误传播算法](#71-错误传播算法)
+    - [7.2 错误恢复算法](#72-错误恢复算法)
+  - [8. 实际应用](#8-实际应用)
+    - [8.1 文件处理](#81-文件处理)
+    - [8.2 网络请求](#82-网络请求)
+    - [8.3 数据库操作](#83-数据库操作)
+  - [9. 性能分析](#9-性能分析)
+    - [9.1 错误处理开销](#91-错误处理开销)
+    - [9.2 内存安全](#92-内存安全)
+  - [10. 总结](#10-总结)
 
 
 ## 1. 概述
@@ -135,7 +137,7 @@ $$\text{process\_file}: \text{String} \rightarrow \text{Result}\langle \text{Str
 fn parse_config(path: &str) -> Result<Config, ConfigError> {
     let contents = std::fs::read_to_string(path)
         .map_err(|e| ConfigError::IoError(e))?;
-    
+
     toml::from_str(&contents)
         .map_err(|e| ConfigError::ParseError(e))
 }
@@ -184,7 +186,7 @@ where
     E: std::fmt::Debug,
 {
     let mut delay = initial_delay;
-    
+
     for attempt in 0..=max_retries {
         match f() {
             Ok(result) => return Ok(result),
@@ -197,7 +199,7 @@ where
             }
         }
     }
-    
+
     unreachable!()
 }
 ```
@@ -220,7 +222,7 @@ impl<T> ErrorBoundary<T> {
             error_handler: Box::new(error_handler),
         }
     }
-    
+
     fn execute<F, R>(&self, f: F) -> R
     where
         F: FnOnce(&T) -> Result<R, Box<dyn Error>>,
@@ -295,7 +297,7 @@ fn propagate_errors(expr: &Expr) -> Result<Type, TypeError> {
     match expr {
         Expr::QuestionMark(inner) => {
             let inner_type = infer_type(inner)?;
-            
+
             match inner_type {
                 Type::Result(ok_type, err_type) => {
                     // 检查错误类型是否可转换
@@ -310,7 +312,7 @@ fn propagate_errors(expr: &Expr) -> Result<Type, TypeError> {
         }
         Expr::Match(scrutinee, arms) => {
             let scrutinee_type = infer_type(scrutinee)?;
-            
+
             match scrutinee_type {
                 Type::Result(ok_type, err_type) => {
                     // 检查匹配臂的类型一致性
@@ -345,7 +347,7 @@ impl ErrorRecovery {
     fn add_strategy(&mut self, strategy: impl RecoveryStrategy + 'static) {
         self.strategies.push(Box::new(strategy));
     }
-    
+
     fn handle_error(&self, error: &dyn Error) -> Result<(), Box<dyn Error>> {
         for strategy in &self.strategies {
             if strategy.can_handle(error) {
@@ -365,15 +367,15 @@ impl ErrorRecovery {
 fn process_file_safely(path: &str) -> Result<String, ProcessingError> {
     let file = File::open(path)
         .map_err(|e| ProcessingError::IoError(e))?;
-    
+
     let mut contents = String::new();
     file.read_to_string(&mut contents)
         .map_err(|e| ProcessingError::IoError(e))?;
-    
+
     if contents.is_empty() {
         return Err(ProcessingError::EmptyFile);
     }
-    
+
     Ok(contents)
 }
 
@@ -391,7 +393,7 @@ enum ProcessingError {
 async fn fetch_data_with_retry(url: &str) -> Result<String, FetchError> {
     let mut retries = 0;
     let max_retries = 3;
-    
+
     loop {
         match fetch_data(url).await {
             Ok(data) => return Ok(data),
@@ -400,7 +402,7 @@ async fn fetch_data_with_retry(url: &str) -> Result<String, FetchError> {
                 if retries >= max_retries {
                     return Err(FetchError::MaxRetriesExceeded(e));
                 }
-                
+
                 // 指数退避
                 let delay = Duration::from_secs(2_u64.pow(retries as u32));
                 tokio::time::sleep(delay).await;
@@ -418,7 +420,7 @@ where
     F: FnOnce(&mut Transaction) -> Result<T, Box<dyn Error>>,
 {
     let mut tx = db.begin_transaction()?;
-    
+
     match f(&mut tx) {
         Ok(result) => {
             tx.commit()?;
@@ -460,6 +462,6 @@ Rust错误处理系统通过代数数据类型和类型安全机制提供了强�
 
 ---
 
-**文档版本**: 1.0.0  
-**最后更新**: 2025-01-27  
+**文档版本**: 1.0.0
+**最后更新**: 2025-01-27
 **维护者**: Rust语言形式化理论项目组

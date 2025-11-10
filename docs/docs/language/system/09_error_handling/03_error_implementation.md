@@ -3,30 +3,32 @@
 
 ## 📊 目录
 
-- [1. 编译器实现](#1-编译器实现)
-  - [1.1 Result类型实现](#11-result类型实现)
-  - [1.2 错误传播实现](#12-错误传播实现)
-  - [1.3 错误转换实现](#13-错误转换实现)
-- [2. 运行时实现](#2-运行时实现)
-  - [2.1 错误类型系统](#21-错误类型系统)
-  - [2.2 错误上下文实现](#22-错误上下文实现)
-  - [2.3 错误恢复实现](#23-错误恢复实现)
-- [3. 错误处理宏](#3-错误处理宏)
-  - [3.1 错误处理宏实现](#31-错误处理宏实现)
-  - [3.2 错误传播宏](#32-错误传播宏)
-- [4. 错误处理工具](#4-错误处理工具)
-  - [4.1 错误分类工具](#41-错误分类工具)
-  - [4.2 错误监控工具](#42-错误监控工具)
-  - [4.3 错误报告工具](#43-错误报告工具)
-- [5. 性能优化](#5-性能优化)
-  - [5.1 零开销错误处理](#51-零开销错误处理)
-  - [5.2 错误缓存](#52-错误缓存)
-  - [5.3 错误池化](#53-错误池化)
-- [6. 实际应用示例](#6-实际应用示例)
-  - [6.1 Web应用错误处理](#61-web应用错误处理)
-  - [6.2 数据库错误处理](#62-数据库错误处理)
-  - [6.3 文件系统错误处理](#63-文件系统错误处理)
-- [7. 总结](#7-总结)
+- [Rust错误处理实现](#rust错误处理实现)
+  - [📊 目录](#-目录)
+  - [1. 编译器实现](#1-编译器实现)
+    - [1.1 Result类型实现](#11-result类型实现)
+    - [1.2 错误传播实现](#12-错误传播实现)
+    - [1.3 错误转换实现](#13-错误转换实现)
+  - [2. 运行时实现](#2-运行时实现)
+    - [2.1 错误类型系统](#21-错误类型系统)
+    - [2.2 错误上下文实现](#22-错误上下文实现)
+    - [2.3 错误恢复实现](#23-错误恢复实现)
+  - [3. 错误处理宏](#3-错误处理宏)
+    - [3.1 错误处理宏实现](#31-错误处理宏实现)
+    - [3.2 错误传播宏](#32-错误传播宏)
+  - [4. 错误处理工具](#4-错误处理工具)
+    - [4.1 错误分类工具](#41-错误分类工具)
+    - [4.2 错误监控工具](#42-错误监控工具)
+    - [4.3 错误报告工具](#43-错误报告工具)
+  - [5. 性能优化](#5-性能优化)
+    - [5.1 零开销错误处理](#51-零开销错误处理)
+    - [5.2 错误缓存](#52-错误缓存)
+    - [5.3 错误池化](#53-错误池化)
+  - [6. 实际应用示例](#6-实际应用示例)
+    - [6.1 Web应用错误处理](#61-web应用错误处理)
+    - [6.2 数据库错误处理](#62-数据库错误处理)
+    - [6.3 文件系统错误处理](#63-文件系统错误处理)
+  - [7. 总结](#7-总结)
 
 
 ## 1. 编译器实现
@@ -87,7 +89,7 @@ fn process_file(path: &str) -> Result<String, std::io::Error> {
         Ok(file) => file,
         Err(e) => return Err(e.into()),
     };
-    
+
     let mut contents = String::new();
     match file.read_to_string(&mut contents) {
         Ok(_) => Ok(contents),
@@ -142,17 +144,17 @@ pub trait Error: Debug + Display {
     fn source(&self) -> Option<&(dyn Error + 'static)> { None }
     fn description(&self) -> &str { "description() is deprecated; use Display" }
     fn cause(&self) -> Option<&dyn Error> { self.source() }
-    
+
     // 错误链
     fn chain(&self) -> ErrorChain<'_> {
         ErrorChain { current: Some(self) }
     }
-    
+
     // 错误类型检查
     fn is<T: Error + 'static>(&self) -> bool {
         std::any::TypeId::of::<T>() == std::any::TypeId::of::<T>()
     }
-    
+
     // 错误转换
     fn downcast<T: Error + 'static>(self: Box<Self>) -> Result<Box<T>, Box<dyn Error>> {
         if self.is::<T>() {
@@ -170,7 +172,7 @@ pub struct ErrorChain<'a> {
 
 impl<'a> Iterator for ErrorChain<'a> {
     type Item = &'a (dyn Error + 'static);
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         let current = self.current?;
         self.current = current.source();
@@ -197,7 +199,7 @@ impl<T> ErrorContext<T> {
             context: Vec::new(),
         }
     }
-    
+
     pub fn context<C>(mut self, context: C) -> Self
     where
         C: Into<String>,
@@ -205,7 +207,7 @@ impl<T> ErrorContext<T> {
         self.context.push(context.into());
         self
     }
-    
+
     pub fn with_context<C, F>(self, f: F) -> Self
     where
         F: FnOnce() -> C,
@@ -260,7 +262,7 @@ impl RecoveryStrategy for RetryStrategy {
         // 检查是否为可重试错误
         error.is::<std::io::Error>() || error.is::<reqwest::Error>()
     }
-    
+
     fn recover<T>(&self, error: &dyn Error) -> Result<T, Box<dyn Error>> {
         // 重试逻辑
         Err(Box::new(error.clone()))
@@ -276,7 +278,7 @@ impl<T> RecoveryStrategy for FallbackStrategy<T> {
     fn can_handle(&self, _error: &dyn Error) -> bool {
         true
     }
-    
+
     fn recover<U>(&self, _error: &dyn Error) -> Result<U, Box<dyn Error>> {
         // 返回降级值
         todo!()
@@ -309,7 +311,7 @@ macro_rules! thiserror {
                 $variant $(($($inner)*))?
             ),*
         }
-        
+
         impl std::fmt::Display for $name {
             fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
                 match self {
@@ -321,7 +323,7 @@ macro_rules! thiserror {
                 }
             }
         }
-        
+
         impl std::error::Error for $name {
             fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
                 match self {
@@ -429,11 +431,11 @@ impl ErrorClassifier {
     pub fn new() -> Self {
         ErrorClassifier { rules: Vec::new() }
     }
-    
+
     pub fn add_rule(&mut self, rule: ErrorRule) {
         self.rules.push(rule);
     }
-    
+
     pub fn classify(&self, error: &dyn Error) -> ErrorCategory {
         for rule in &self.rules {
             if rule.pattern.matches(error) {
@@ -442,7 +444,7 @@ impl ErrorClassifier {
         }
         ErrorCategory::NonRecoverable
     }
-    
+
     pub fn get_action(&self, error: &dyn Error) -> Option<&ErrorAction> {
         for rule in &self.rules {
             if rule.pattern.matches(error) {
@@ -493,7 +495,7 @@ impl ErrorMonitor {
             max_errors,
         }
     }
-    
+
     pub fn record_error(&mut self, error: Box<dyn Error + Send + Sync>, context: String) {
         let record = ErrorRecord {
             timestamp: std::time::Instant::now(),
@@ -501,26 +503,26 @@ impl ErrorMonitor {
             context,
             stack_trace: None, // 在实际实现中获取栈跟踪
         };
-        
+
         self.errors.push(record);
-        
+
         if self.errors.len() > self.max_errors {
             self.errors.remove(0);
         }
     }
-    
+
     pub fn get_error_summary(&self) -> ErrorSummary {
         let total_errors = self.errors.len();
         let error_types = self.get_error_type_counts();
         let recent_errors = self.errors.iter().rev().take(10).collect();
-        
+
         ErrorSummary {
             total_errors,
             error_types,
             recent_errors,
         }
     }
-    
+
     fn get_error_type_counts(&self) -> HashMap<String, usize> {
         let mut counts = HashMap::new();
         for record in &self.errors {
@@ -565,7 +567,7 @@ impl ErrorFormatter for DetailedFormatter {
     fn format(&self, error: &dyn Error) -> String {
         let mut output = String::new();
         output.push_str(&format!("Error: {}\n", error));
-        
+
         let mut source = error.source();
         let mut level = 1;
         while let Some(err) = source {
@@ -573,7 +575,7 @@ impl ErrorFormatter for DetailedFormatter {
             source = err.source();
             level += 1;
         }
-        
+
         output
     }
 }
@@ -582,12 +584,12 @@ impl ErrorFormatter for JsonFormatter {
     fn format(&self, error: &dyn Error) -> String {
         let mut error_chain = Vec::new();
         let mut current = Some(error);
-        
+
         while let Some(err) = current {
             error_chain.push(err.to_string());
             current = err.source();
         }
-        
+
         serde_json::to_string(&error_chain).unwrap_or_default()
     }
 }
@@ -599,11 +601,11 @@ impl ErrorReporter {
             output,
         }
     }
-    
+
     pub fn add_formatter(&mut self, formatter: impl ErrorFormatter + 'static) {
         self.formatters.push(Box::new(formatter));
     }
-    
+
     pub fn report_error(&mut self, error: &dyn Error) -> std::io::Result<()> {
         for formatter in &self.formatters {
             let formatted = formatter.format(error);
@@ -646,12 +648,12 @@ impl<T, E> OptimizedResult<T, E> {
     fn is_ok(&self) -> bool {
         matches!(self, OptimizedResult::Ok(_))
     }
-    
+
     #[inline(always)]
     fn is_err(&self) -> bool {
         matches!(self, OptimizedResult::Err(_))
     }
-    
+
     #[inline(always)]
     fn unwrap(self) -> T {
         match self {
@@ -678,7 +680,7 @@ impl ErrorCache {
             max_size,
         }
     }
-    
+
     pub fn get_or_create<F>(&mut self, key: &str, factory: F) -> &(dyn Error + Send + Sync)
     where
         F: FnOnce() -> Box<dyn Error + Send + Sync>,
@@ -691,7 +693,7 @@ impl ErrorCache {
             }
             self.cache.insert(key.to_string(), factory());
         }
-        
+
         self.cache.get(key).unwrap().as_ref()
     }
 }
@@ -713,11 +715,11 @@ impl ErrorPool {
             max_pool_size,
         }
     }
-    
+
     pub fn acquire(&mut self) -> Option<Box<dyn Error + Send + Sync>> {
         self.pool.pop()
     }
-    
+
     pub fn release(&mut self, error: Box<dyn Error + Send + Sync>) {
         if self.pool.len() < self.max_pool_size {
             self.pool.push(error);
@@ -756,7 +758,7 @@ async fn error_handler(err: actix_web::Error) -> actix_web::HttpResponse {
         message: "Internal Server Error".to_string(),
         details: Some(err.to_string()),
     };
-    
+
     actix_web::HttpResponse::InternalServerError()
         .json(error)
 }
@@ -769,7 +771,7 @@ async fn get_user(user_id: web::Path<u32>) -> Result<web::Json<User>, ApiError> 
             message: "User not found".to_string(),
             details: Some(e.to_string()),
         })?;
-    
+
     Ok(web::Json(user))
 }
 
@@ -805,16 +807,16 @@ use sqlx::{Error as SqlxError, PgPool};
 pub enum DatabaseError {
     #[error("Connection failed: {0}")]
     Connection(#[from] SqlxError),
-    
+
     #[error("Query failed: {0}")]
     Query(#[from] SqlxError),
-    
+
     #[error("Transaction failed: {0}")]
     Transaction(#[from] SqlxError),
-    
+
     #[error("Row not found")]
     NotFound,
-    
+
     #[error("Duplicate key: {0}")]
     DuplicateKey(String),
 }
@@ -828,10 +830,10 @@ impl Database {
         let pool = PgPool::connect(database_url)
             .await
             .map_err(DatabaseError::Connection)?;
-        
+
         Ok(Database { pool })
     }
-    
+
     pub async fn get_user(&self, id: u32) -> Result<User, DatabaseError> {
         let user = sqlx::query_as!(
             User,
@@ -841,10 +843,10 @@ impl Database {
         .fetch_optional(&self.pool)
         .await
         .map_err(DatabaseError::Query)?;
-        
+
         user.ok_or(DatabaseError::NotFound)
     }
-    
+
     pub async fn create_user(&self, user: &User) -> Result<u32, DatabaseError> {
         let id = sqlx::query!(
             "INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id",
@@ -861,16 +863,16 @@ impl Database {
             }
         })?
         .id;
-        
+
         Ok(id as u32)
     }
-    
+
     pub async fn transaction<F, T>(&self, f: F) -> Result<T, DatabaseError>
     where
         F: for<'a> FnOnce(&'a mut sqlx::Transaction<'_, sqlx::Postgres>) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<T, DatabaseError>> + Send + 'a>>,
     {
         let mut tx = self.pool.begin().await.map_err(DatabaseError::Transaction)?;
-        
+
         match f(&mut tx).await {
             Ok(result) => {
                 tx.commit().await.map_err(DatabaseError::Transaction)?;
@@ -896,16 +898,16 @@ use std::path::Path;
 pub enum FileSystemError {
     #[error("IO error: {0}")]
     Io(#[from] io::Error),
-    
+
     #[error("File not found: {0}")]
     NotFound(String),
-    
+
     #[error("Permission denied: {0}")]
     PermissionDenied(String),
-    
+
     #[error("File already exists: {0}")]
     AlreadyExists(String),
-    
+
     #[error("Invalid path: {0}")]
     InvalidPath(String),
 }
@@ -915,11 +917,11 @@ pub struct FileManager;
 impl FileManager {
     pub fn read_file<P: AsRef<Path>>(path: P) -> Result<String, FileSystemError> {
         let path = path.as_ref();
-        
+
         if !path.exists() {
             return Err(FileSystemError::NotFound(path.to_string_lossy().to_string()));
         }
-        
+
         let mut file = File::open(path)
             .map_err(|e| {
                 if e.kind() == io::ErrorKind::NotFound {
@@ -930,23 +932,23 @@ impl FileManager {
                     FileSystemError::Io(e)
                 }
             })?;
-        
+
         let mut contents = String::new();
         file.read_to_string(&mut contents)
             .map_err(FileSystemError::Io)?;
-        
+
         Ok(contents)
     }
-    
+
     pub fn write_file<P: AsRef<Path>>(path: P, contents: &str) -> Result<(), FileSystemError> {
         let path = path.as_ref();
-        
+
         // 创建目录
         if let Some(parent) = path.parent() {
             fs::create_dir_all(parent)
                 .map_err(|e| FileSystemError::Io(e))?;
         }
-        
+
         let mut file = File::create(path)
             .map_err(|e| {
                 if e.kind() == io::ErrorKind::PermissionDenied {
@@ -955,49 +957,49 @@ impl FileManager {
                     FileSystemError::Io(e)
                 }
             })?;
-        
+
         file.write_all(contents.as_bytes())
             .map_err(FileSystemError::Io)?;
-        
+
         Ok(())
     }
-    
+
     pub fn copy_file<P: AsRef<Path>, Q: AsRef<Path>>(
         from: P,
         to: Q,
     ) -> Result<(), FileSystemError> {
         let from = from.as_ref();
         let to = to.as_ref();
-        
+
         if !from.exists() {
             return Err(FileSystemError::NotFound(from.to_string_lossy().to_string()));
         }
-        
+
         if to.exists() {
             return Err(FileSystemError::AlreadyExists(to.to_string_lossy().to_string()));
         }
-        
+
         fs::copy(from, to).map_err(FileSystemError::Io)?;
-        
+
         Ok(())
     }
-    
+
     pub fn safe_delete<P: AsRef<Path>>(path: P) -> Result<(), FileSystemError> {
         let path = path.as_ref();
-        
+
         if !path.exists() {
             return Ok(()); // 文件不存在，视为成功
         }
-        
+
         let metadata = fs::metadata(path)
             .map_err(FileSystemError::Io)?;
-        
+
         if metadata.is_file() {
             fs::remove_file(path).map_err(FileSystemError::Io)?;
         } else if metadata.is_dir() {
             fs::remove_dir_all(path).map_err(FileSystemError::Io)?;
         }
-        
+
         Ok(())
     }
 }
@@ -1017,6 +1019,6 @@ Rust错误处理实现通过编译时优化、运行时工具和性能优化提�
 
 ---
 
-**文档版本**: 1.0.0  
-**最后更新**: 2025-01-27  
+**文档版本**: 1.0.0
+**最后更新**: 2025-01-27
 **维护者**: Rust语言形式化理论项目组
