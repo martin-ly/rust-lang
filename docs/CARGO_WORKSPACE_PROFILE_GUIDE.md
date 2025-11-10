@@ -4,7 +4,7 @@
 
 ### 遇到的警告
 
-```
+```text
 warning: profiles for the non root package will be ignored, specify profiles at the workspace root:
 package:   E:\_src\rust-lang\crates\c12_wasm\Cargo.toml
 workspace: E:\_src\rust-lang\Cargo.toml
@@ -58,6 +58,7 @@ rustflags = [
 ```
 
 编译时：
+
 ```bash
 cargo build --release --target wasm32-unknown-unknown
 ```
@@ -80,6 +81,7 @@ opt-level = "z"      # WASM 专用：最小化体积
 ```
 
 编译时：
+
 ```bash
 cargo build --profile release-wasm --target wasm32-unknown-unknown
 ```
@@ -169,6 +171,5 @@ cargo build --release --verbose
 
 ---
 
-**更新日期：** 2025-10-30  
+**更新日期：** 2025-10-30
 **维护者：** Rust Learning Community
-

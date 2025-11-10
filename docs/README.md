@@ -1,7 +1,7 @@
 # 📚 Rust 学习系统 - 文档中心
 
-> **项目主页**: [返回主 README](../README.md)  
-> **核心文档导航**: [docs/README.md](./docs/README.md)  
+> **项目主页**: [返回主 README](../README.md)
+> **核心文档导航**: [docs/README.md](./docs/README.md)
 > **在线文档**: [mdBook 平台](../book/README.md)
 
 ---
@@ -215,8 +215,8 @@ cargo run -p rust-doc-search -- search --fuzzy "borrowing"
 
 ---
 
-**维护团队**: Rust Learning Community  
-**最后更新**: 2025-10-30  
+**维护团队**: Rust Learning Community
+**最后更新**: 2025-10-30
 **状态**: ✅ **活跃维护中**
 
 ---

@@ -1,10 +1,10 @@
 # 🚀 Rust 快速参考 (Quick Reference)
 
-> **文档定位**: Rust 核心概念和语法的快速查询手册  
-> **使用方式**: 作为速查表，快速查找常用语法和概念  
+> **文档定位**: Rust 核心概念和语法的快速查询手册
+> **使用方式**: 作为速查表，快速查找常用语法和概念
 > **相关文档**: [README](./README.md) | [学习检查清单](./LEARNING_CHECKLIST.md)
 
-**最后更新**: 2025-10-19  
+**最后更新**: 2025-10-19
 **适用版本**: Rust 1.90+
 
 ---
@@ -201,7 +201,7 @@ enum Result<T, E> {
 // 定义 Trait
 trait Summary {
     fn summarize(&self) -> String;
-    
+
     // 默认实现
     fn summarize_author(&self) -> String {
         String::from("Unknown")
@@ -787,6 +787,6 @@ for item in collection {  // 自动调用 into_iter()
 
 需要详细学习？查看各模块的完整文档！
 
-**最后更新**: 2025-10-19  
-**维护团队**: Rust 学习社区  
+**最后更新**: 2025-10-19
+**维护团队**: Rust 学习社区
 **版本**: v1.0

@@ -1,7 +1,7 @@
 # 🚀 Rust 1.90 对齐 - 下一步行动指南
 
-> **生成时间**: 2025-10-26  
-> **当前状态**: ✅ 梳理分析100%完成  
+> **生成时间**: 2025-10-26
+> **当前状态**: ✅ 梳理分析100%完成
 > **下一阶段**: Phase 1 文档移动 (60%待完成)
 
 ---
@@ -93,7 +93,7 @@ mkdir -p docs/archives/{legacy_guides,legacy_references,legacy_rust_189_features
 ```bash
 # 这三个模块需要搜索并移动相关文件
 find c05_threads/docs -name "*189*" -type f
-find c07_process/docs -name "*189*" -type f  
+find c07_process/docs -name "*189*" -type f
 find c09_design_pattern/docs -name "*189*" -type f
 ```
 
@@ -140,11 +140,11 @@ modules=("c01_ownership_borrow_scope" "c02_type_system")
 
 for module in "${modules[@]}"; do
     echo "Updating $module..."
-    
+
     # 更新 README
     sed -i 's|docs/06_rust_features/RUST_189|docs/archives/legacy_rust_189_features/RUST_189|g' \
         "$module/README.md"
-    
+
     # 更新主索引
     sed -i 's|06_rust_features/RUST_189|archives/legacy_rust_189_features/RUST_189|g' \
         "$module/docs/00_MASTER_INDEX.md"
@@ -417,12 +417,12 @@ git commit -m "archive: 移动 Rust 1.89 文档到归档目录"
 
 **准备好了吗？让我们开始执行改进！** 🎯
 
-**预计总时间**: 5-7天  
-**预期成果**: 项目评分从 87 提升到 95  
+**预计总时间**: 5-7天
+**预期成果**: 项目评分从 87 提升到 95
 **下一步**: 执行 Task 1 - 移动文档
 
 ---
 
-**生成时间**: 2025-10-26  
-**更新频率**: 每完成一个 Phase 更新一次  
+**生成时间**: 2025-10-26
+**更新频率**: 每完成一个 Phase 更新一次
 **维护者**: Rust学习社区

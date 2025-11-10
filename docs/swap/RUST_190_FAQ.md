@@ -1,7 +1,7 @@
 # ❓ Rust 1.90 升级 FAQ
 
-> **文档版本**: 1.0  
-> **更新时间**: 2025-10-26  
+> **文档版本**: 1.0
+> **更新时间**: 2025-10-26
 > **适用范围**: Rust 1.89 → 1.90 升级
 
 ---
@@ -362,20 +362,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
           toolchain: 1.90.0
           override: true
           components: rustfmt, clippy
-      
+
       - name: Check
         run: cargo check --all-features
-      
+
       - name: Test
         run: cargo test --all-features
-      
+
       - name: Clippy
         run: cargo clippy -- -D warnings
 ```
@@ -455,7 +455,7 @@ fn example() {
    ```bash
    # 只显示错误
    cargo clippy -- -D warnings
-   
+
    # 逐个修复 lint
    cargo clippy --fix
    ```
@@ -510,6 +510,6 @@ fn example() {
 
 ---
 
-**文档维护**: 本 FAQ 会持续更新  
-**最后更新**: 2025-10-26  
+**文档维护**: 本 FAQ 会持续更新
+**最后更新**: 2025-10-26
 **版本**: 1.0
