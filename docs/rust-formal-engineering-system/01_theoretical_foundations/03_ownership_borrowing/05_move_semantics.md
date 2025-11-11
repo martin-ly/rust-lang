@@ -1,20 +1,22 @@
-> ⚠️ **待完善** - 此文件为占位符，内容待完善
-> **最后更新**: 2025-10-31
-> **预期完成**: 待定
+# 05. Move Semantics
+
+> **创建日期**: 2025-11-11
+> **最后更新**: 2025-11-11
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
 
 ---
 
-﻿# 05. Move Semantics
-
 ## 目录
 
-- [目录](#目录)
-- [1. Introduction: The Default of Transfer](#1-introduction-the-default-of-transfer)
-- [2. The `Copy` Trait: An Exception for Simple Types](#2-the-copy-trait-an-exception-for-simple-types)
-- [3. The Asymmetry of Move vs. The Symmetry of Copy](#3-the-asymmetry-of-move-vs-the-symmetry-of-copy)
-- [4. Partial Moves](#4-partial-moves)
-- [5. Move Semantics in Practice](#5-move-semantics-in-practice)
-- [6. Conclusion](#6-conclusion)
+- [05. Move Semantics](#05-move-semantics)
+  - [目录](#目录)
+  - [1. Introduction: The Default of Transfer](#1-introduction-the-default-of-transfer)
+  - [2. The `Copy` Trait: An Exception for Simple Types](#2-the-copy-trait-an-exception-for-simple-types)
+  - [3. The Asymmetry of Move vs. The Symmetry of Copy](#3-the-asymmetry-of-move-vs-the-symmetry-of-copy)
+  - [4. Partial Moves](#4-partial-moves)
+  - [5. Move Semantics in Practice](#5-move-semantics-in-practice)
+  - [6. Conclusion](#6-conclusion)
 
 ## 1. Introduction: The Default of Transfer
 

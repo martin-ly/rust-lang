@@ -1,7 +1,7 @@
 # 移动（Mobile）索引
 
 > **创建日期**: 2025-10-31
-> **最后更新**: 2025-11-10
+> **最后更新**: 2025-11-11
 > **Rust 版本**: 1.91.0 (Edition 2024) ✅
 > **状态**: 已完善 ✅
 
@@ -13,6 +13,8 @@
   - [📊 目录](#-目录)
   - [🎯 目的](#-目的)
     - [核心价值](#核心价值)
+  - [🆕 Rust 1.91.0 新特性](#-rust-1910-新特性)
+    - [ARM Windows Tier 1 支持](#arm-windows-tier-1-支持)
   - [📚 核心概念](#-核心概念)
     - [1. 移动开发（Mobile Development）](#1-移动开发mobile-development)
     - [2. 跨平台开发（Cross-platform Development）](#2-跨平台开发cross-platform-development)
@@ -34,6 +36,36 @@
 - **最佳实践**: 基于 Rust 社区最新移动应用实践
 - **完整覆盖**: 涵盖移动开发、跨平台开发、移动后端、移动安全等核心主题
 - **易于理解**: 提供详细的移动应用说明和代码示例
+
+## 🆕 Rust 1.91.0 新特性
+
+### ARM Windows Tier 1 支持
+
+**特性说明**：`aarch64-pc-windows-msvc` 目标平台正式晋升为 Tier 1 支持级别。
+
+**核心优势**：
+
+- **最高级别支持**：提供最高级别的平台支持承诺
+- **完整测试覆盖**：完整的测试覆盖和文档支持
+- **跨平台开发**：支持ARM架构的Windows应用开发
+
+**应用场景**：
+
+- ARM Windows 应用开发
+- 跨平台移动应用
+- 嵌入式Windows系统
+
+**形式化意义**：
+
+- 扩展了Rust在ARM架构上的形式化验证范围
+- 为移动应用形式化工程提供新平台支持
+- 支持跨平台语义等价性验证
+
+**相关资源**：
+
+- [ARM Windows Tier 1 支持文档](../../06_toolchain_ecosystem/01_compiler/03_arm_windows_tier1_support_rust_1_91.md)
+- [形式化论证集合](../../FORMAL_PROOFS_2025_11_11.md#定理3arm-windows平台语义等价性)
+- [知识图谱](../../KNOWLEDGE_GRAPH_2025_11_11.md#11-arm-windows-tier-1-支持)
 
 ## 📚 核心概念
 

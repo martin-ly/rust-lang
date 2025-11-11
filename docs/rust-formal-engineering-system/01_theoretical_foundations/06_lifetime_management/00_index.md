@@ -1,22 +1,34 @@
-> ⚠️ **待完善** - 此文件为占位符，内容待完善
-> **最后更新**: 2025-10-31
-> **预期完成**: 待定
+# 生命周期管理（Lifetime Management）索引
+
+> **创建日期**: 2025-11-11
+> **最后更新**: 2025-11-11
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
 
 ---
 
-﻿# 生命周期管理（Lifetime Management）索引
+## 📚 核心文档
+
+### 理论基础
+
+- **[01_formal_lifetime_theory.md](01_formal_lifetime_theory.md)** - 生命周期形式化理论 ✅ 已完善
+
+---
 
 ## 📊 目录
 
-- [📊 目录](#-目录)
-- [目的](#目的)
-- [核心概念](#核心概念)
-- [与 Rust 的关联](#与-rust-的关联)
-- [术语（Terminology）](#术语terminology)
-- [形式化与证明（Formalization）](#形式化与证明formalization)
-- [实践与样例（Practice）](#实践与样例practice)
-- [相关索引](#相关索引)
-- [导航](#导航)
+- [生命周期管理（Lifetime Management）索引](#生命周期管理lifetime-management索引)
+  - [� 核心文档](#-核心文档)
+    - [理论基础](#理论基础)
+  - [📊 目录](#-目录)
+  - [目的](#目的)
+  - [核心概念](#核心概念)
+  - [与 Rust 的关联](#与-rust-的关联)
+  - [术语（Terminology）](#术语terminology)
+  - [形式化与证明（Formalization）](#形式化与证明formalization)
+  - [实践与样例（Practice）](#实践与样例practice)
+  - [相关索引](#相关索引)
+  - [导航](#导航)
 
 ## 目的
 

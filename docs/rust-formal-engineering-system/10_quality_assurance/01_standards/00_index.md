@@ -1,54 +1,189 @@
 # 质量标准（Standards）索引
 
-> ⚠️ **待完善** - 此文件为占位符，内容待完善
-> **最后更新**: 2025-10-31
-> **预期完成**: 待定
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
 
 ---
-
 
 ## 📊 目录
 
 - [质量标准（Standards）索引](#质量标准standards索引)
   - [📊 目录](#-目录)
-  - [目标](#目标)
-  - [标准清单（示例）](#标准清单示例)
-  - [合规流程（建议）](#合规流程建议)
-  - [CI 建议与门槛](#ci-建议与门槛)
-  - [导航](#导航)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 标准清单](#-标准清单)
+    - [1. 代码风格标准](#1-代码风格标准)
+    - [2. 测试覆盖标准](#2-测试覆盖标准)
+    - [3. 性能基准标准](#3-性能基准标准)
+    - [4. 运行时检查标准](#4-运行时检查标准)
+    - [5. 文档与导航标准](#5-文档与导航标准)
+  - [💻 合规流程](#-合规流程)
+    - [本地开发流程](#本地开发流程)
+    - [提交规范](#提交规范)
+  - [🔧 CI 建议与门槛](#-ci-建议与门槛)
+    - [Lint 门槛](#lint-门槛)
+    - [Test 门槛](#test-门槛)
+    - [Bench 建议](#bench-建议)
+    - [Miri 建议](#miri-建议)
+    - [Fuzz 建议](#fuzz-建议)
+    - [Formal 建议](#formal-建议)
+  - [🔗 相关索引](#-相关索引)
+  - [🧭 导航](#-导航)
 
-## 目标
+## 🎯 目的
 
-- 明确质量基线与合规流程，统一测试、度量与验证的准入门槛。
+本模块明确质量基线与合规流程，统一测试、度量与验证的准入门槛。所有内容均基于 Rust 1.91.0 和当前最佳实践。
 
-## 标准清单（示例）
+### 核心价值
 
-- 代码风格：`rustfmt` 通过；`clippy -D warnings` 零警告
-- 测试覆盖：核心路径单元+集成测试齐备；新增模块需含最小属性测试
-- 基准门槛：关键接口提供基准；记录 p50/p95 与资源占用
-- 运行时检查：关键 unsafe/并发组件通过 `miri` 或 ASAN/TSAN 阶段性检查
-- 文档与导航：新增目录需含 `00_index.md` 与返回/交叉导航
-- 提交规范：Conventional Commits；CHANGELOG 更新
+- **质量标准**: 建立统一的质量标准和合规流程
+- **最佳实践**: 基于 Rust 社区最新质量实践
+- **完整覆盖**: 涵盖代码风格、测试覆盖、性能基准、运行时检查等核心标准
+- **易于理解**: 提供详细的质量标准说明和实施指南
 
-## 合规流程（建议）
+## 📚 标准清单
 
-1) 本地：`cargo fmt` → `cargo clippy -- -D warnings` → `cargo test`
-2) 性能：`cargo bench`（或 `--no-run`）并保留基线
-3) 运行时检查：`cargo +nightly miri test` 或 ASAN/TSAN 按需
-4) 形式化：对高风险模块采用 Kani/Prusti 做关键属性验证
-5) 文档：更新对应 `00_index.md` 与上级索引导航
+### 1. 代码风格标准
 
-## CI 建议与门槛
+**推荐工具**: `rustfmt`, `clippy`, `cargo-fmt`, `cargo-clippy`
 
-- Lint 门槛：`cargo clippy -- -D warnings` 作为必过项
-- Test 门槛：`cargo test --workspace` 必需通过（含失败快照）
-- Bench 建议：关键 crate 建议保留 `--no-run` 与采样基线（PR 比较）
-- Miri 建议：含 unsafe 的 crate 按周跑；失败阻断合并
-- Fuzz 建议：解析/编解码库夜间跑限定时长；崩溃样例归档
-- Formal 建议：关键并发结构按周跑最小验证集
+- **代码格式化**: `rustfmt` 通过，统一代码风格
+- **代码检查**: `clippy -D warnings` 零警告，禁止所有警告
+- **命名规范**: 遵循 Rust 命名约定，使用有意义的名称
 
-## 导航
+**相关资源**:
 
-- 返回质量保障：[`../00_index.md`](../00_index.md)
-- 根：[`../../README.md`](../../README.md)
-- 工具链：[`../../06_toolchain_ecosystem/00_index.md`](../../06_toolchain_ecosystem/00_index.md)
+- [Rustfmt 文档](https://github.com/rust-lang/rustfmt)
+- [Clippy 文档](https://github.com/rust-lang/rust-clippy)
+- [Rust 命名约定](https://doc.rust-lang.org/1.0.0/style-guide/naming.html)
+
+### 2. 测试覆盖标准
+
+**推荐工具**: `cargo-test`, `cargo-tarpaulin`, `cargo-kcov`, `proptest`
+
+- **核心路径**: 单元测试和集成测试齐备
+- **新增模块**: 需包含最小属性测试
+- **测试覆盖**: 核心功能测试覆盖率 ≥ 80%
+
+**相关资源**:
+
+- [Cargo Test 文档](https://doc.rust-lang.org/cargo/commands/cargo-test.html)
+- [Tarpaulin 文档](https://docs.rs/cargo-tarpaulin/)
+- [Proptest 文档](https://docs.rs/proptest/)
+
+### 3. 性能基准标准
+
+**推荐工具**: `criterion`, `iai`, `cargo-bench`, `flamegraph`
+
+- **关键接口**: 提供性能基准测试
+- **性能指标**: 记录 p50/p95 延迟和资源占用
+- **性能回归**: 防止性能退化
+
+**相关资源**:
+
+- [Criterion 文档](https://docs.rs/criterion/)
+- [IAI 文档](https://docs.rs/iai/)
+- [Flamegraph 文档](https://github.com/flamegraph-rs/flamegraph)
+
+### 4. 运行时检查标准
+
+**推荐工具**: `miri`, `asan`, `tsan`, `loom`
+
+- **Unsafe 代码**: 关键 unsafe 组件通过 `miri` 检查
+- **并发组件**: 通过 ASAN/TSAN 阶段性检查
+- **内存安全**: 确保内存安全和并发安全
+
+**相关资源**:
+
+- [Miri 文档](https://github.com/rust-lang/miri)
+- [Loom 文档](https://docs.rs/loom/)
+- [Sanitizers 文档](https://doc.rust-lang.org/beta/unstable-book/compiler-flags/sanitizer.html)
+
+### 5. 文档与导航标准
+
+**推荐工具**: `cargo-doc`, `mdbook`, `rustdoc`
+
+- **新增目录**: 需包含 `00_index.md` 和返回/交叉导航
+- **API 文档**: 所有公共 API 提供文档注释
+- **示例代码**: 提供可运行的示例代码
+
+**相关资源**:
+
+- [Rustdoc 文档](https://doc.rust-lang.org/rustdoc/)
+- [MdBook 文档](https://rust-lang.github.io/mdBook/)
+- [Cargo Doc 文档](https://doc.rust-lang.org/cargo/commands/cargo-doc.html)
+
+## 💻 合规流程
+
+### 本地开发流程
+
+1. **代码格式化**: `cargo fmt`
+2. **代码检查**: `cargo clippy -- -D warnings`
+3. **运行测试**: `cargo test`
+4. **性能基准**: `cargo bench`（或 `--no-run`）并保留基线
+5. **运行时检查**: `cargo +nightly miri test` 或 ASAN/TSAN 按需
+6. **形式化验证**: 对高风险模块采用 Kani/Prusti 做关键属性验证
+7. **文档更新**: 更新对应 `00_index.md` 与上级索引导航
+
+### 提交规范
+
+- **提交信息**: 遵循 Conventional Commits 规范
+- **CHANGELOG**: 更新 CHANGELOG
+- **代码审查**: 通过代码审查
+
+## 🔧 CI 建议与门槛
+
+### Lint 门槛
+
+- **必过项**: `cargo clippy -- -D warnings` 作为必过项
+- **格式化**: `cargo fmt --check` 检查代码格式
+
+### Test 门槛
+
+- **必过项**: `cargo test --workspace` 必需通过（含失败快照）
+- **测试覆盖**: 核心功能测试覆盖率 ≥ 80%
+
+### Bench 建议
+
+- **关键 crate**: 建议保留 `--no-run` 与采样基线（PR 比较）
+- **性能回归**: 防止性能退化
+
+### Miri 建议
+
+- **Unsafe 代码**: 含 unsafe 的 crate 按周跑；失败阻断合并
+- **内存安全**: 确保内存安全
+
+### Fuzz 建议
+
+- **解析库**: 解析/编解码库夜间跑限定时长；崩溃样例归档
+- **模糊测试**: 使用 `cargo-fuzz` 进行模糊测试
+
+### Formal 建议
+
+- **并发结构**: 关键并发结构按周跑最小验证集
+- **形式化验证**: 使用 Kani/Prusti 进行形式化验证
+
+---
+
+## 🔗 相关索引
+
+- **质量指南**: [`../02_guidelines/00_index.md`](../02_guidelines/00_index.md)
+- **检查清单**: [`../03_checklists/00_index.md`](../03_checklists/00_index.md)
+- **验证工具**: [`../04_validation/00_index.md`](../04_validation/00_index.md)
+- **工具链生态**: [`../../06_toolchain_ecosystem/00_index.md`](../../06_toolchain_ecosystem/00_index.md)
+
+---
+
+## 🧭 导航
+
+- **返回质量保障**: [`../00_index.md`](../00_index.md)
+- **质量指南**: [`../02_guidelines/00_index.md`](../02_guidelines/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-10
+**维护者**: 项目维护者
+**状态**: 已完善 ✅

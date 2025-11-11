@@ -32,19 +32,26 @@ pub mod const_macro_config {
         // 编译时常量配置
         /// 宏系统支持的最大参数数量
         pub const MAX_MACRO_ARGS: usize = 64;
-        //1
+        /// 宏系统支持的最大展开深度
         pub const MAX_MACRO_DEPTH: usize = 32;
+        /// 宏系统缓冲区大小（字节）
         pub const BUFFER_SIZE: usize = 4096;
 
         // Rust 1.91: 使用 const 引用进行计算
+        /// 最大参数数量的引用（用于 const 上下文计算）
         pub const MAX_ARGS_REF: &usize = &Self::MAX_MACRO_ARGS;
-        //2
+        /// 总缓冲区大小（基于最大参数数和缓冲区大小计算）
         pub const TOTAL_BUFFER_SIZE: usize = *Self::MAX_ARGS_REF * Self::BUFFER_SIZE;
 
         // Rust 1.91: 基于引用进行进一步计算
+        /// 双倍缓冲区大小（用于备用缓冲区）
         pub const DOUBLE_BUFFER_SIZE: usize = *Self::MAX_ARGS_REF * Self::BUFFER_SIZE * 2;
+        /// 最大展开大小（基于最大参数数和最大深度计算）
         pub const MAX_EXPANSION_SIZE: usize = Self::MAX_MACRO_ARGS * Self::MAX_MACRO_DEPTH;
 
+        /// 演示宏系统配置
+        ///
+        /// 打印宏系统的各种配置参数，包括最大参数数、深度和缓冲区大小
         pub fn demonstrate() {
             println!("\n=== Const 宏系统配置 ===");
             println!("最大宏参数数: {}", Self::MAX_MACRO_ARGS);
@@ -62,20 +69,24 @@ pub mod const_macro_config {
     pub struct MacroExpansionConfig;
 
     impl MacroExpansionConfig {
-        //1
+        /// 宏展开支持的最大令牌数量
         pub const MAX_TOKENS: usize = 10000;
-        //2
+        /// 宏展开支持的最大递归深度
         pub const MAX_RECURSION: usize = 100;
-        //3
+        /// 宏展开缓存大小（字节）
         pub const CACHE_SIZE: usize = 1024;
 
         // Rust 1.91: const 引用计算
+        /// 最大令牌数量的引用（用于 const 上下文计算）
         pub const MAX_TOKENS_REF: &usize = &Self::MAX_TOKENS;
-        //4
+        /// 最大递归深度的引用
         pub const MAX_RECURSION_REF: &usize = &Self::MAX_RECURSION;
-        //5
+        /// 总缓存大小（基于最大令牌数和缓存大小计算）
         pub const TOTAL_CACHE_SIZE: usize = *Self::MAX_TOKENS_REF * Self::CACHE_SIZE;
-        //6
+
+        /// 演示宏展开配置
+        ///
+        /// 打印宏展开的各种配置参数，包括最大令牌数、递归深度和缓存大小
         pub fn demonstrate() {
             println!("\n=== Const 宏展开配置 ===");
             println!("最大令牌数: {}", Self::MAX_TOKENS);
@@ -318,12 +329,17 @@ pub mod comprehensive_macro_examples {
 
     impl ComprehensiveMacroSystem {
         // 编译时配置计算
+        /// 最大宏参数数量
         pub const MAX_MACRO_ARGS: usize = 64;
+        /// 最大宏展开深度
         pub const MAX_DEPTH: usize = 32;
+        /// 宏系统缓冲区大小（字节）
         pub const BUFFER_SIZE: usize = 4096;
 
         // Rust 1.91: 使用 const 引用
+        /// 最大参数数量的引用（用于 const 上下文计算）
         pub const MAX_ARGS_REF: &usize = &Self::MAX_MACRO_ARGS;
+        /// 总缓冲区大小（基于最大参数数和缓冲区大小计算）
         pub const TOTAL_BUFFER_SIZE: usize = *Self::MAX_ARGS_REF * Self::BUFFER_SIZE;
 
         /// 演示综合宏系统的配置信息
@@ -606,29 +622,41 @@ pub mod improved_macro_errors {
     pub enum MacroError {
         /// 参数数量错误
         ArgumentCount {
+            /// 期望的参数数量
             expected: usize,
+            /// 实际的参数数量
             found: usize,
+            /// 宏名称
             macro_name: String,
         },
         /// 参数类型错误
         ArgumentType {
+            /// 期望的参数类型
             expected_type: String,
+            /// 实际的参数类型
             found_type: String,
+            /// 参数位置
             position: usize,
         },
         /// 递归深度超出限制
         RecursionDepth {
+            /// 当前递归深度
             current_depth: usize,
+            /// 最大允许深度
             max_depth: usize,
         },
         /// 模式匹配失败
         PatternMismatch {
+            /// 宏名称
             macro_name: String,
+            /// 期望的模式
             pattern: String,
+            /// 实际的输入
             input: String,
         },
         /// 展开失败
         ExpansionFailed {
+            /// 宏名称
             macro_name: String,
             /// 展开失败的原因
             reason: String,
@@ -924,4 +952,3 @@ pub fn demonstrate_all_rust_191_macro_features() {
     println!("所有演示完成");
     println!("========================================");
 }
-

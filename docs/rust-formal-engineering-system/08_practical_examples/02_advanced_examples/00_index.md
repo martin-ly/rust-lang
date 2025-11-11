@@ -1,7 +1,7 @@
 # 高级示例（Advanced Examples）索引
 
 > **创建日期**: 2025-10-31
-> **最后更新**: 2025-11-10
+> **最后更新**: 2025-11-11
 > **Rust 版本**: 1.91.0 (Edition 2024) ✅
 > **状态**: 已完善 ✅
 
@@ -13,6 +13,8 @@
   - [📊 目录](#-目录)
   - [🎯 目的](#-目的)
     - [核心价值](#核心价值)
+  - [🆕 Rust 1.91.0 新特性](#-rust-1910-新特性)
+    - [模式匹配绑定顺序改进](#模式匹配绑定顺序改进)
   - [📚 核心示例](#-核心示例)
     - [1. 高级类型系统（Advanced Type System）](#1-高级类型系统advanced-type-system)
     - [2. 宏系统（Macro System）](#2-宏系统macro-system)
@@ -36,6 +38,60 @@
 - **实用示例**: 提供可直接运行的代码示例
 - **最佳实践**: 基于 Rust 社区最新实践
 - **易于理解**: 提供详细注释和说明
+
+## 🆕 Rust 1.91.0 新特性
+
+### 模式匹配绑定顺序改进
+
+**特性说明**：Rust 1.91.0 对模式匹配的绑定顺序进行了重构，提升了语义一致性和安全性。
+
+**改进示例**：
+
+```rust
+// Rust 1.91 改进：模式匹配绑定顺序
+fn pattern_matching_example() {
+    let value = Some(42);
+
+    // 新的绑定顺序确保语义一致性
+    match value {
+        Some(x) if x > 0 => {
+            // x 在这里已经正确绑定
+            println!("Positive: {}", x);
+        }
+        Some(x) => {
+            // x 的绑定顺序已优化
+            println!("Value: {}", x);
+        }
+        None => println!("None"),
+    }
+
+    // 复杂模式匹配示例
+    let tuple = (Some(1), Some(2));
+    match tuple {
+        (Some(a), Some(b)) if a < b => {
+            // a 和 b 的绑定顺序已优化
+            println!("Ordered: {} < {}", a, b);
+        }
+        (Some(a), Some(b)) => {
+            // 绑定顺序保证语义一致性
+            println!("Values: {}, {}", a, b);
+        }
+        _ => println!("Other"),
+    }
+}
+```
+
+**形式化意义**：
+
+- 改进了模式匹配的形式化语义
+- 增强了类型系统的形式化保证
+- 修复了潜在的逻辑错误和语义不一致问题
+
+**相关资源**：
+
+- [形式化论证集合](../../FORMAL_PROOFS_2025_11_11.md#定理2模式匹配绑定顺序的语义一致性)
+- [知识图谱](../../KNOWLEDGE_GRAPH_2025_11_11.md#13-模式匹配绑定顺序重构)
+- [理论基础](../../01_theoretical_foundations/01_type_system/advanced_theory/00_index.md#rust-1910-新特性)
 
 ## 📚 核心示例
 

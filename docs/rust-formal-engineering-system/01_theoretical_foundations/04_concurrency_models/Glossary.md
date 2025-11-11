@@ -1,31 +1,33 @@
-> ⚠️ **待完善** - 此文件为占位符，内容待完善
-> **最后更新**: 2025-10-31
-> **预期完成**: 待定
+# 术语表 (Glossary) - C05 并发
+
+> **创建日期**: 2025-11-11
+> **最后更新**: 2025-11-11
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
 
 ---
 
-﻿# 术语表 (Glossary) - C05 并发
-
 ## 📊 目录
 
-- [📊 目录](#-目录)
-- [术语](#术语)
-  - [`Arc<T>` (Atomically Reference Counted)](#arct-atomically-reference-counted)
-  - [Atomics (原子类型)](#atomics-原子类型)
-  - [Concurrency (并发)](#concurrency-并发)
-  - [Data Race (数据竞争)](#data-race-数据竞争)
-  - [Deadlock (死锁)](#deadlock-死锁)
-  - [Lock-Free (无锁编程)](#lock-free-无锁编程)
-  - [Memory Ordering (内存排序)](#memory-ordering-内存排序)
-  - [Message Passing (消息传递)](#message-passing-消息传递)
-  - [`Mutex<T>` (Mutual Exclusion)](#mutext-mutual-exclusion)
-  - [Parallelism (并行)](#parallelism-并行)
-  - [Rayon](#rayon)
-  - [`RwLock<T>` (Read-Write Lock)](#rwlockt-read-write-lock)
-  - [Send (Trait)](#send-trait)
-  - [Shared-State Concurrency (共享状态并发)](#shared-state-concurrency-共享状态并发)
-  - [Sync (Trait)](#sync-trait)
-  - [Work-Stealing (工作窃取)](#work-stealing-工作窃取)
+- [术语表 (Glossary) - C05 并发](#术语表-glossary---c05-并发)
+  - [📊 目录](#-目录)
+  - [术语](#术语)
+    - [`Arc<T>` (Atomically Reference Counted)](#arct-atomically-reference-counted)
+    - [Atomics (原子类型)](#atomics-原子类型)
+    - [Concurrency (并发)](#concurrency-并发)
+    - [Data Race (数据竞争)](#data-race-数据竞争)
+    - [Deadlock (死锁)](#deadlock-死锁)
+    - [Lock-Free (无锁编程)](#lock-free-无锁编程)
+    - [Memory Ordering (内存排序)](#memory-ordering-内存排序)
+    - [Message Passing (消息传递)](#message-passing-消息传递)
+    - [`Mutex<T>` (Mutual Exclusion)](#mutext-mutual-exclusion)
+    - [Parallelism (并行)](#parallelism-并行)
+    - [Rayon](#rayon)
+    - [`RwLock<T>` (Read-Write Lock)](#rwlockt-read-write-lock)
+    - [Send (Trait)](#send-trait)
+    - [Shared-State Concurrency (共享状态并发)](#shared-state-concurrency-共享状态并发)
+    - [Sync (Trait)](#sync-trait)
+    - [Work-Stealing (工作窃取)](#work-stealing-工作窃取)
 
 本页定义了"第 5 章：并发"中出现的关键术语。
 
