@@ -9,6 +9,10 @@
 
 ## 📊 快速导航
 
+> 💡 **提示**: 需要更详细的查找功能？请查看 [快速查找工具](./QUICK_FIND.md)！
+
+---
+
 ### 按研究领域查找
 
 #### 🔬 形式化方法研究
@@ -45,8 +49,8 @@
 
 | 主题 | 文件 | 状态 |
 |------|------|------|
-| 实际应用案例 | [practical_applications.md](./practical_applications.md) | 📋 规划中 |
-| 研究方法论 | [research_methodology.md](./research_methodology.md) | 📋 规划中 |
+| 实际应用案例 | [practical_applications.md](./practical_applications.md) | 🔄 进行中 |
+| 研究方法论 | [research_methodology.md](./research_methodology.md) | 🔄 进行中 |
 
 ---
 

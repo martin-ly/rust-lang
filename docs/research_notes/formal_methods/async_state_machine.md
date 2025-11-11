@@ -17,6 +17,7 @@
   - [📚 理论基础](#-理论基础)
     - [Rust 异步模型](#rust-异步模型)
     - [相关概念](#相关概念)
+    - [理论背景](#理论背景)
   - [🔬 形式化定义](#-形式化定义)
     - [1. Future 状态](#1-future-状态)
     - [2. Poll 操作](#2-poll-操作)
@@ -68,9 +69,29 @@
 
 ### 相关概念
 
-- **状态机**: Future 是一个状态机
-- **协作式多任务**: 通过 yield 让出控制权
-- **并发安全**: 多个 Future 可以并发执行而不冲突
+**Future**: 表示一个异步计算，可能尚未完成。Future 是一个状态机，可以在 `Pending` 和 `Ready` 状态之间转换。
+
+**Poll**: 轮询 Future 的操作，检查 Future 是否已完成。如果完成，返回 `Ready(T)`；否则返回 `Pending`。
+
+**Executor**: 执行 Future 的运行时系统。Executor 负责调度和执行 Future，直到它们完成。
+
+**状态机 (State Machine)**: Future 是一个状态机，状态包括 `Pending` 和 `Ready(T)`。状态转换由 `poll` 操作触发。
+
+**协作式多任务 (Cooperative Multitasking)**: 通过 `yield` 让出控制权，允许其他任务执行。这与抢占式多任务不同，不会强制中断执行。
+
+**并发安全 (Concurrency Safety)**: 多个 Future 可以并发执行而不出现数据竞争。这通过借用检查器和所有权系统保证。
+
+**async/await**: 异步编程的语法糖。`async` 块创建一个 Future，`await` 等待 Future 完成。
+
+### 理论背景
+
+**状态机理论 (State Machine Theory)**: Future 可以形式化为状态机，状态转换由 `poll` 操作定义。状态机理论为理解 Future 的行为提供理论基础。
+
+**并发理论 (Concurrency Theory)**: 异步执行模型基于并发理论。协作式多任务避免了抢占式多任务中的竞争条件。
+
+**CPS (Continuation-Passing Style)**: async/await 可以转换为 CPS 形式。CPS 为理解异步执行的语义提供理论基础。
+
+**协程理论 (Coroutine Theory)**: Future 可以视为协程的一种实现。协程理论为理解异步执行提供理论基础。
 
 ---
 
@@ -112,6 +133,23 @@ $$\text{poll}: F \times \text{Context} \to \text{Poll}(T)$$
 - Future 是协作式的，不会抢占执行
 - 每个 Future 在自己的执行上下文中运行
 - 借用检查器保证数据访问的安全性
+
+**定理 2 (状态机正确性)**:
+Future 状态机正确表示异步计算，状态转换符合程序语义。
+
+**证明思路**:
+
+- 状态机定义正确反映 Future 的状态
+- 状态转换规则正确反映 `poll` 操作的语义
+- 状态机的终止性保证 Future 最终会完成
+
+**定理 3 (Poll 一致性)**:
+对于 Future $F$，如果 $\text{poll}(F, cx) = \text{Ready}(v)$，则后续的 poll 调用应该返回相同的值或保持 `Ready` 状态。
+
+**证明思路**:
+
+- Future 一旦完成，状态不会改变
+- `poll` 操作的语义保证一致性
 
 ---
 
@@ -257,8 +295,11 @@ async fn main_task() {
 ### 已完成 ✅
 
 - [x] 研究目标定义
-- [x] 理论基础整理
+- [x] 理论基础整理（包括理论背景和相关概念）
 - [x] 初步形式化定义
+- [x] 添加状态机正确性定理（定理 2）
+- [x] 添加 Poll 一致性定理（定理 3）
+- [x] 完善并发安全定理的证明思路
 
 ### 进行中 🔄
 

@@ -51,7 +51,13 @@ research_notes/
 ├── GLOSSARY.md                 # 术语表
 ├── RESOURCES.md                # 研究资源汇总
 ├── SYSTEM_INTEGRATION.md       # 系统集成指南
-└── EXAMPLE.md                  # 研究笔记示例
+├── EXAMPLE.md                  # 研究笔记示例
+├── PROGRESS_TRACKING.md        # 研究进展跟踪
+├── TASK_CHECKLIST.md           # 研究任务清单
+├── WRITING_GUIDE.md            # 研究笔记写作指南
+├── STATISTICS.md               # 研究笔记系统统计报告
+├── QUICK_FIND.md               # 研究笔记快速查找
+└── CONTENT_ENHANCEMENT.md      # 研究笔记内容完善指南
 ```
 
 ---
@@ -212,6 +218,10 @@ research_notes/
 - [贡献指南](./CONTRIBUTING.md) - 详细的贡献流程和规范
 - [质量检查清单](./QUALITY_CHECKLIST.md) - 确保质量的标准
 - [研究笔记模板](./TEMPLATE.md) - 快速创建新笔记
+- [研究进展跟踪](./PROGRESS_TRACKING.md) - 详细的研究进展跟踪
+- [研究任务清单](./TASK_CHECKLIST.md) - 具体的研究任务清单
+- [研究笔记写作指南](./WRITING_GUIDE.md) - 详细的写作指导
+- [研究笔记内容完善指南](./CONTENT_ENHANCEMENT.md) - 内容完善指导
 
 **贡献要求**:
 
@@ -292,6 +302,7 @@ research_notes/
 
 ## 🗺️ 快速导航
 
+- [快速查找](./QUICK_FIND.md) - 研究笔记快速查找工具（按关键词、领域、目标、优先级）
 - [快速参考](./QUICK_REFERENCE.md) - 按主题快速查找研究笔记
 - [研究路线图](./RESEARCH_ROADMAP.md) - 研究推进计划和优先级
 - [系统总结](./SYSTEM_SUMMARY.md) - 系统概览和统计信息

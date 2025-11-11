@@ -16,11 +16,14 @@
     - [预期成果](#预期成果)
   - [📚 理论基础](#-理论基础)
     - [Trait 核心概念](#trait-核心概念)
+    - [相关概念](#相关概念)
     - [相关理论](#相关理论)
+    - [理论背景](#理论背景)
   - [🔬 形式化定义](#-形式化定义)
     - [1. Trait 定义](#1-trait-定义)
     - [2. Trait 对象](#2-trait-对象)
     - [3. 泛型 Trait](#3-泛型-trait)
+    - [4. Trait 对象语义](#4-trait-对象语义)
   - [✅ 证明目标](#-证明目标)
     - [待证明的性质](#待证明的性质)
     - [证明方法](#证明方法)
@@ -67,12 +70,43 @@
 3. **Trait 对象**: 动态分发的 Trait 类型
 4. **泛型 Trait**: 带类型参数的 Trait
 
+### 相关概念
+
+**Trait 定义 (Trait Definition)**: 定义一组方法签名，描述类型必须实现的行为。Trait 类似于接口，但更强大。
+
+**Trait 实现 (Trait Implementation)**: 为类型实现 Trait，提供 Trait 中所有方法的具体实现。
+
+**Trait 对象 (Trait Object)**: 动态分发的 Trait 类型，使用 `dyn Trait` 表示。Trait 对象允许在运行时选择具体实现。
+
+**泛型 Trait (Generic Trait)**: 带类型参数的 Trait，可以约束类型参数的行为。
+
+**Trait 约束 (Trait Bound)**: 对类型参数的约束，要求类型参数实现特定的 Trait。
+
+**关联类型 (Associated Type)**: Trait 中可以定义关联类型，由实现者指定具体类型。
+
+**默认实现 (Default Implementation)**: Trait 可以为方法提供默认实现，实现者可以选择覆盖。
+
 ### 相关理论
 
-- **类型类 (Type Class)**: Haskell 的类型类系统
-- **接口 (Interface)**: 面向对象语言的接口
-- **存在类型 (Existential Type)**: 类型理论中的存在类型
-- **对象类型**: 面向对象类型系统
+**类型类 (Type Class)**: Haskell 的类型类系统。Rust 的 Trait 系统受到类型类的启发，但有所不同。
+
+**接口 (Interface)**: 面向对象语言的接口。Trait 类似于接口，但支持更多功能，如关联类型和默认实现。
+
+**存在类型 (Existential Type)**: 类型理论中的存在类型。Trait 对象可以视为存在类型，表示"存在某个类型实现了这个 Trait"。
+
+**对象类型 (Object Type)**: 面向对象类型系统。Trait 对象提供了类似对象类型的动态分发能力。
+
+**多态性 (Polymorphism)**: Trait 系统提供了参数多态（通过泛型）和特设多态（通过 Trait 实现）。
+
+### 理论背景
+
+**类型类理论 (Type Class Theory)**: Trait 系统基于类型类理论，但增加了更多特性，如关联类型和生命周期参数。
+
+**存在类型理论 (Existential Type Theory)**: Trait 对象的形式化基于存在类型理论，允许在运行时选择具体类型。
+
+**子类型理论 (Subtyping Theory)**: Trait 实现可以视为子类型关系，实现 Trait 的类型是 Trait 的子类型。
+
+**多态类型系统 (Polymorphic Type System)**: Trait 系统提供了强大的多态能力，支持参数多态和特设多态。
 
 ---
 
@@ -101,6 +135,24 @@ $$\text{dyn } T = \exists \tau. \tau : T \land \tau$$
 $$T[\alpha] = \{m_1 : \alpha \to \tau_1, m_2 : \alpha \to \tau_2, \ldots\}$$
 
 **定义 3.2 (Trait 约束)**: 类型约束 $\tau : T[\tau']$ 表示类型 $\tau$ 实现泛型 Trait $T[\tau']$。
+
+### 4. Trait 对象语义
+
+**定理 1 (Trait 对象类型安全)**:
+如果类型 $\tau$ 实现 Trait $T$，则 $\tau$ 可以安全地转换为 Trait 对象类型 $\text{dyn } T$。
+
+**证明思路**:
+
+- Trait 对象包含虚函数表，确保方法调用的类型安全
+- 存在类型语义保证类型转换的安全性
+
+**定理 2 (Trait 实现一致性)**:
+如果类型 $\tau$ 实现 Trait $T$，则 $\tau$ 必须实现 $T$ 中的所有方法，且方法签名必须匹配。
+
+**证明思路**:
+
+- Trait 定义约束了实现必须提供的方法
+- 类型检查器确保实现的方法签名与 Trait 定义一致
 
 ---
 
@@ -269,8 +321,10 @@ fn main() {
 ### 已完成 ✅
 
 - [x] 研究目标定义
-- [x] 理论基础整理
+- [x] 理论基础整理（包括理论背景和相关概念）
 - [x] 初步形式化定义
+- [x] 添加 Trait 对象类型安全定理（定理 1）
+- [x] 添加 Trait 实现一致性定理（定理 2）
 
 ### 进行中 🔄
 
@@ -288,4 +342,4 @@ fn main() {
 
 **维护者**: Rust Type Theory Research Group
 **最后更新**: 2025-01-27
-**状态**: 📋 **规划中**
+**状态**: 🔄 **进行中**

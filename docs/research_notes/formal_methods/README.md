@@ -84,7 +84,7 @@
 
 **相关笔记**: [lifetime_formalization.md](./lifetime_formalization.md)
 
-**状态**: 📋 规划中
+**状态**: 🔄 进行中
 
 ---
 
