@@ -65,7 +65,7 @@ let s2: String = String::from("world");  // 堆字符串
 ```rust
 trait Summary {
     fn summarize(&self) -> String;
-    
+
     // 默认实现
     fn default_summary(&self) -> String {
         String::from("(Read more...)")
@@ -156,7 +156,7 @@ use std::convert::TryFrom;
 
 impl TryFrom<i32> for PositiveInt {
     type Error = &'static str;
-    
+
     fn try_from(value: i32) -> Result<Self, Self::Error> {
         if value > 0 {
             Ok(PositiveInt(value))
@@ -228,13 +228,13 @@ impl Point<f32> {
 ```rust
 trait Iterator {
     type Item;  // 关联类型
-    
+
     fn next(&mut self) -> Option<Self::Item>;
 }
 
 impl Iterator for Counter {
     type Item = u32;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         // ...
     }
@@ -435,7 +435,7 @@ impl Door<Unlocked> {
     fn lock(self) -> Door<Locked> {
         Door { _state: PhantomData }
     }
-    
+
     fn open(&self) {
         println!("Door opened");
     }
@@ -506,7 +506,7 @@ generic(5);       // 生成 generic::<i32>
 generic("hello"); // 生成 generic::<&str>
 ```
 
-**优势**: 零运行时开销  
+**优势**: 零运行时开销
 **劣势**: 增加编译时间和二进制大小
 
 ---
@@ -550,7 +550,7 @@ fn dynamic_dispatch(item: &dyn Summary) {
 
 ---
 
-**最后更新**: 2025-10-30  
+**最后更新**: 2025-10-30
 **Rust 版本**: 1.90 (Edition 2024)
 
 🔷 **Rust 类型系统，安全与表达力的极致！**
