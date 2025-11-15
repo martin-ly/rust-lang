@@ -1,6 +1,7 @@
 # 🔷 Rust 类型系统速查卡
 
 > **快速参考** | [完整文档](../../crates/c02_type_system/docs/) | [代码示例](../../crates/c02_type_system/examples/)
+> **最后更新**: 2025-11-15 | **Rust 版本**: 1.91.1+ | **Edition**: 2024
 
 ---
 
@@ -550,7 +551,29 @@ fn dynamic_dispatch(item: &dyn Summary) {
 
 ---
 
-**最后更新**: 2025-10-30
-**Rust 版本**: 1.90 (Edition 2024)
+---
+
+## 🆕 Rust 1.91.1 新特性
+
+### const 上下文增强
+
+**改进**: 支持对非静态常量的引用
+
+```rust
+// Rust 1.91.1 新特性
+const fn get_value() -> i32 {
+    42
+}
+
+const VALUE: i32 = get_value();
+const REF: &i32 = &VALUE;  // ✅ 现在支持
+```
+
+**影响**: 更灵活的 const 泛型配置和编译时计算
+
+---
+
+**最后更新**: 2025-11-15
+**Rust 版本**: 1.91.1+ (Edition 2024)
 
 🔷 **Rust 类型系统，安全与表达力的极致！**
