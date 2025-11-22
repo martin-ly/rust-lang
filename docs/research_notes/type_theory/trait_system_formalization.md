@@ -27,10 +27,12 @@
   - [✅ 证明目标](#-证明目标)
     - [待证明的性质](#待证明的性质)
     - [证明方法](#证明方法)
-  - [💻 代码示例](#-代码示例)
+  - [💻 代码示例与实践](#-代码示例与实践)
     - [示例 1: 基本 Trait](#示例-1-基本-trait)
     - [示例 2: Trait 对象](#示例-2-trait-对象)
     - [示例 3: 泛型 Trait](#示例-3-泛型-trait)
+    - [示例 4: 关联类型](#示例-4-关联类型)
+    - [示例 5: Trait 对象与动态分发](#示例-5-trait-对象与动态分发)
   - [📖 参考文献](#-参考文献)
     - [学术论文](#学术论文)
     - [官方文档](#官方文档)
@@ -172,7 +174,7 @@ $$T[\alpha] = \{m_1 : \alpha \to \tau_1, m_2 : \alpha \to \tau_2, \ldots\}$$
 
 ---
 
-## 💻 代码示例
+## 💻 代码示例与实践
 
 ### 示例 1: 基本 Trait
 
@@ -252,6 +254,111 @@ fn main() {
 - Trait 对象类型: $\text{dyn Draw} = \exists \tau. \tau : \text{Draw} \land \tau$
 
 ### 示例 3: 泛型 Trait
+
+```rust
+trait Container<T> {
+    fn contains(&self, item: &T) -> bool;
+    fn add(&mut self, item: T);
+}
+
+struct VecContainer<T> {
+    items: Vec<T>,
+}
+
+impl<T: PartialEq> Container<T> for VecContainer<T> {
+    fn contains(&self, item: &T) -> bool {
+        self.items.contains(item)
+    }
+
+    fn add(&mut self, item: T) {
+        self.items.push(item);
+    }
+}
+```
+
+**泛型 Trait 分析**：
+
+- `Container<T>` 是泛型 Trait，类型参数为 `T`
+- 实现时需要指定具体的 `T`
+- 可以添加约束（如 `T: PartialEq`）
+
+### 示例 4: 关联类型
+
+```rust
+trait Iterator {
+    type Item;  // 关联类型
+
+    fn next(&mut self) -> Option<Self::Item>;
+}
+
+struct Counter {
+    count: u32,
+}
+
+impl Iterator for Counter {
+    type Item = u32;  // 指定关联类型
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.count += 1;
+        Some(self.count)
+    }
+}
+```
+
+**关联类型分析**：
+
+- 关联类型由实现者指定
+- 每个实现可以有不同的关联类型
+- 提供类型级别的抽象
+
+### 示例 5: Trait 对象与动态分发
+
+```rust
+trait Draw {
+    fn draw(&self);
+}
+
+struct Circle {
+    radius: f64,
+}
+
+impl Draw for Circle {
+    fn draw(&self) {
+        println!("绘制圆形，半径: {}", self.radius);
+    }
+}
+
+struct Rectangle {
+    width: f64,
+    height: f64,
+}
+
+impl Draw for Rectangle {
+    fn draw(&self) {
+        println!("绘制矩形，宽: {}，高: {}", self.width, self.height);
+    }
+}
+
+fn draw_shapes(shapes: &[Box<dyn Draw>]) {
+    for shape in shapes {
+        shape.draw();  // 动态分发
+    }
+}
+
+fn use_trait_objects() {
+    let shapes: Vec<Box<dyn Draw>> = vec![
+        Box::new(Circle { radius: 5.0 }),
+        Box::new(Rectangle { width: 10.0, height: 20.0 }),
+    ];
+    draw_shapes(&shapes);
+}
+```
+
+**Trait 对象分析**：
+
+- `dyn Draw` 是 Trait 对象类型
+- 允许在运行时选择具体实现
+- 使用虚函数表（vtable）实现动态分发
 
 ```rust
 trait Add<Rhs = Self> {

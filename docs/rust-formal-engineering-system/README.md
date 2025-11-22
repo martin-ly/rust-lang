@@ -37,7 +37,7 @@ Rust 形式化工程系统是一个全面的 Rust 学习和参考资源库，涵
 
 ### 🗺️ 统一导航入口
 
-- **[形式化理论与实践统一导航](../FORMAL_AND_PRACTICAL_NAVIGATION.md)** ⭐⭐⭐ - 推荐入口
+- **[主索引](./00_master_index.md)** ⭐⭐⭐ - 推荐入口
   - 提供形式化系统与主项目代码之间的快速导航
   - 支持双向链接，无缝切换
   - 包含学习路径建议
@@ -63,14 +63,14 @@ Rust 形式化工程系统是一个全面的 Rust 学习和参考资源库，涵
 
 ## 🔗 相关链接
 
-- [统一导航页面](../FORMAL_AND_PRACTICAL_NAVIGATION.md) - 理论与实践导航
+- [统一导航页面](./00_master_index.md) - 理论与实践导航
 - [快速开始](./QUICK_START.md) - 5分钟快速上手指南 ⭐
 - [维护指南](./MAINTENANCE_GUIDE.md) - 系统维护和更新指南 ⭐
-- [版本更新日志](./RUST_1_91_CHANGELOG.md) - Rust 1.91 更新日志 ⭐
-- [更新总结](./RUST_1_91_UPDATE_SUMMARY.md) - Rust 1.91 更新总结 ⭐
-- [快速参考指南](./RUST_1_91_QUICK_REFERENCE.md) - Rust 1.91 快速参考 ⭐
-- [最终状态报告](./RUST_1_91_FINAL_STATUS.md) - Rust 1.91 更新最终状态 ⭐
-- [完成度报告](./COMPLETION_STATUS_REAL_2025_10_30.md) - 真实完成度评估
+- [版本更新日志](../archive/reports/formal_system_reports/RUST_1_91_CHANGELOG.md) - Rust 1.91 更新日志 ⭐（已归档）
+- [更新总结](../archive/reports/formal_system_reports/RUST_1_91_UPDATE_SUMMARY.md) - Rust 1.91 更新总结 ⭐（已归档）
+- [快速参考指南](../archive/reports/formal_system_reports/RUST_1_91_QUICK_REFERENCE.md) - Rust 1.91 快速参考 ⭐（已归档）
+- [最终状态报告](../archive/reports/formal_system_reports/RUST_1_91_FINAL_STATUS.md) - Rust 1.91 更新最终状态 ⭐（已归档）
+- [完成度报告](../archive/reports/formal_system_reports/COMPLETION_STATUS_REAL_2025_10_30.md) - 真实完成度评估（已归档）
 
 ## 🛠️ 工具脚本
 

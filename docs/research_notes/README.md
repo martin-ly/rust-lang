@@ -115,7 +115,7 @@ research_notes/
 **相关文档**:
 
 - [类型系统基础](../../crates/c02_type_system/docs/tier_04_advanced/)
-- [类型型变参考](../../crates/c02_type_system/docs/tier_03_references/02_类型型变参考.md)
+- [类型型变参考](../../crates/c02_type_system/docs/tier_03_references/) - 类型系统参考文档
 - [形式化工程系统 - 类型系统](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)
 
 ---
@@ -147,8 +147,8 @@ research_notes/
 ### 核心文档
 
 - [形式化工程系统](../../rust-formal-engineering-system/README.md)
-- [研究方法索引](../../rust-formal-engineering-system/09_research_agenda/04_research_methods/00_index.md)
-- [个人索引](../../MY_PERSONAL_INDEX.md)
+- [研究议程](../../rust-formal-engineering-system/09_research_agenda/00_index.md) - 形式化工程系统研究议程
+- [个人索引](../archive/temp/MY_PERSONAL_INDEX.md) - 已归档（如需要请查看归档目录）
 
 ### 代码实现
 

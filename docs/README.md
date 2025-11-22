@@ -1,8 +1,7 @@
 # 📚 Rust 学习系统 - 文档中心
 
 > **项目主页**: [返回主 README](../README.md)
-> **核心文档导航**: [docs/README.md](./docs/README.md)
-> **在线文档**: [mdBook 平台](../book/README.md)
+> **核心文档导航**: [docs/README.md](./README.md)（本文件）
 
 ---
 
@@ -10,21 +9,42 @@
 
 ```text
 docs/
-├── docs/                          # 📋 核心文档和报告
-│   ├── README.md                 # 🌟 文档导航中心（从这里开始）
-│   ├── 最新动态报告 (6个)        # 项目最新进展
-│   ├── 学习指南 (8个)            # 学习路径和资源
-│   ├── 质量报告 (6个)            # 代码和文档质量
-│   ├── 完成报告 (6个)            # 各任务完成情况
-│   └── archive/                  # 历史文档归档
+├── README.md                      # 📋 文档中心主索引（本文件）
 │
-├── rust-formal-engineering-system/ # 🔬 形式化工程系统
+├── quick_reference/               # ⚡ 快速参考速查卡
+│   ├── README.md
+│   └── [8个速查卡文件]
+│
+├── research_notes/                # 🔬 研究笔记系统
+│   ├── README.md
+│   ├── formal_methods/            # 形式化方法研究
+│   ├── type_theory/               # 类型理论研究
+│   └── experiments/               # 实验研究
+│
+├── rust-formal-engineering-system/ # 🎓 形式化工程系统
+│   ├── 00_master_index.md         # 主索引
+│   ├── README.md
 │   ├── 01_theoretical_foundations/  # 理论基础
 │   ├── 02_programming_paradigms/    # 编程范式
 │   ├── 03_design_patterns/          # 设计模式
 │   └── ... (10个专业模块)
 │
-└── backup/                        # 💾 备份文件
+├── toolchain/                     # 🔧 工具链文档
+│   ├── README.md
+│   └── [4个工具链指南]
+│
+├── docs/                          # 📚 深度文档
+│   └── [语言特性、参考文档等]
+│
+├── archive/                       # 📦 归档文件
+│   ├── README.md                  # 归档说明
+│   ├── spell_check/               # 拼写检查相关
+│   ├── status/                    # 项目状态报告
+│   ├── updates/                   # 更新报告
+│   ├── reports/                   # 各种报告
+│   └── temp/                      # 临时文件
+│
+└── backup/                        # 💾 备份文件（.rar）
 ```
 
 ---
@@ -33,35 +53,50 @@ docs/
 
 ### 🌟 核心文档（必读）
 
-**从这里开始** → [📋 文档导航中心](./docs/README.md)
+**从这里开始** → [📋 文档中心主索引](./README.md)（本文件）
 
-这个页面包含：
+**主要文档系统**：
 
-- ✅ 最新项目动态（2025-10-30）
-- ✅ 完整学习指南
-- ✅ 质量保证报告
-- ✅ 系统文档索引
+1. **[快速参考](./quick_reference/)** - 8个速查卡，快速查找语法和模式
+2. **[研究笔记](./research_notes/)** - 形式化方法、类型理论、实验研究
+3. **[形式化工程系统](./rust-formal-engineering-system/)** - 完整的理论体系
+4. **[工具链文档](./toolchain/)** - 编译器、Cargo、rustdoc 等工具指南
 
-### 📚 三大文档系统
+### 📚 四大文档系统
 
-#### 1. 核心文档（docs/docs/）
+#### 1. 快速参考（quick_reference/）
 
-**用途**: 项目报告、学习指南、质量文档
+**用途**: 快速查找 Rust 语法、模式、最佳实践
 
-**入口**: [docs/docs/README.md](./docs/README.md)
+**入口**: [quick_reference/README.md](./quick_reference/README.md)
 
 **包含**:
 
-- 最新动态和里程碑
-- 学习路线和实战项目
-- 代码审查和质量报告
-- 完成报告和系统文档
+- 类型系统速查卡
+- 异步模式速查卡
+- 所有权和借用速查卡
+- 泛型速查卡
+- 错误处理速查卡
+- 线程和并发速查卡
+- 宏系统速查卡
 
-#### 2. 形式化工程系统（rust-formal-engineering-system/）
+#### 2. 研究笔记（research_notes/）
 
-**用途**: 深入的理论和实践文档
+**用途**: 深入的研究和形式化方法文档
 
-**入口**: [rust-formal-engineering-system/README.md](./rust-formal-engineering-system/README.md)
+**入口**: [research_notes/README.md](./research_notes/README.md)
+
+**包含**:
+
+- 形式化方法研究（所有权模型、借用检查器、异步状态机等）
+- 类型理论研究（类型系统基础、Trait系统、生命周期等）
+- 实验研究（性能基准、内存分析、编译器优化等）
+
+#### 3. 形式化工程系统（rust-formal-engineering-system/）
+
+**用途**: 完整的理论体系和实践文档
+
+**入口**: [rust-formal-engineering-system/00_master_index.md](./rust-formal-engineering-system/00_master_index.md)
 
 **包含**:
 
@@ -76,18 +111,18 @@ docs/
 - 09 - 研究议程
 - 10 - 质量保障
 
-#### 3. 在线文档平台（book/）
+#### 4. 工具链文档（toolchain/）
 
-**用途**: 在线阅读的 mdBook 文档
+**用途**: Rust 工具链使用指南
 
-**入口**: [book/README.md](../book/README.md)
+**入口**: [toolchain/README.md](./toolchain/README.md)
 
-**功能**:
+**包含**:
 
-- 🌐 在线访问
-- 🔍 全文搜索
-- 🌙 暗色主题
-- 📱 移动友好
+- 编译器特性详解
+- Cargo 工作空间和依赖管理
+- rustdoc 高级用法
+- Rust 1.91 vs 1.90 对比
 
 ---
 
@@ -97,39 +132,40 @@ docs/
 
 **推荐路径**:
 
-1. [学习路线图](./docs/CROSS_MODULE_LEARNING_ROADMAP_2025_10_25.md)
-2. [学习路径指南](./docs/LEARNING_PATH_GUIDE_2025_10_24.md)
-3. [实战项目集](./docs/CROSS_MODULE_PRACTICAL_PROJECTS_2025_10_25.md)
-4. [进度追踪模板](./docs/LEARNING_PROGRESS_TRACKER_TEMPLATE_2025_10_25.md)
+1. [快速参考](./quick_reference/README.md) - 快速查找语法和模式
+2. [研究笔记](./research_notes/README.md) - 深入理解 Rust 核心概念
+3. [形式化工程系统](./rust-formal-engineering-system/00_master_index.md) - 完整的理论体系
+4. [工具链文档](./toolchain/README.md) - 工具使用指南
 
 ### 👨‍💻 开发者
 
 **推荐路径**:
 
-1. [代码审查报告](./docs/D1_CODE_REVIEW_REPORT_2025_10_25.md)
-2. [代码示例验证](./docs/CODE_EXAMPLES_COMPREHENSIVE_VERIFICATION_2025_10_25.md)
-3. [文档标准](./docs/DOCUMENTATION_STANDARDS.md)
-4. [形式化工程系统](./rust-formal-engineering-system/README.md)
+1. [快速参考](./quick_reference/) - 语法和模式速查
+2. [研究笔记](./research_notes/) - 形式化方法和类型理论
+3. [形式化工程系统](./rust-formal-engineering-system/) - 设计模式和实践
+4. [工具链文档](./toolchain/) - Cargo、编译器、rustdoc
 
 ### 👨‍🔧 维护者
 
 **推荐路径**:
 
-1. [项目推进总结](./docs/PROJECT_ADVANCEMENT_SUMMARY_2025_10_30.md)
-2. [剩余工作方向](./docs/REMAINING_WORK_DIRECTIONS_2025_10_25.md)
-3. [部署清单](./docs/DEPLOYMENT_READY_CHECKLIST_2025_10_25.md)
-4. [文档归档指南](./ARCHIVE_QUICK_GUIDE.md)
+1. [文档归档说明](./archive/README.md) - 归档文件说明
+2. [归档总结报告](./archive/ARCHIVE_SUMMARY_2025_11_15.md) - 归档详情
+3. [项目结构说明](../PROJECT_STRUCTURE.md) - 项目结构
+4. [主 README](../README.md) - 项目概览
 
 ---
 
 ## 📊 文档统计
 
-### docs/docs/ - 核心文档
+### 文档系统统计
 
-- **总数**: 30 个核心文档
-- **类型**: 报告、指南、标准、总结
-- **状态**: ✅ 活跃维护
-- **归档**: 85 个历史文档在 `archive/`
+- **快速参考**: 8 个速查卡
+- **研究笔记**: 45+ 个研究文档
+- **形式化系统**: 500+ 个理论文档
+- **工具链文档**: 4 个工具指南
+- **归档文件**: 100 个文件已归档
 
 ### rust-formal-engineering-system/ - 形式化系统
 
@@ -144,11 +180,11 @@ docs/
 
 ### 📦 归档说明
 
-历史文档已归档，保持主目录简洁：
+与主题不相关的文件已归档，保持主目录简洁：
 
-- [查看归档索引](./docs/archive/ARCHIVE_INDEX.md)
-- [归档快速指南](./ARCHIVE_QUICK_GUIDE.md)
-- [文档分析报告](./docs/DOCS_ANALYSIS_AND_CLASSIFICATION_2025_10_30.md)
+- [归档说明](./archive/README.md) - 归档文件分类说明
+- [归档总结报告](./archive/ARCHIVE_SUMMARY_2025_11_15.md) - 归档详情统计
+- [归档完成报告](./archive/FINAL_ARCHIVE_COMPLETION_2025_11_15.md) - 归档工作总结
 
 ### 🧹 执行归档
 
@@ -194,11 +230,19 @@ cargo run -p rust-doc-search -- search --fuzzy "borrowing"
 
 ### 文档贡献
 
-参见: [文档标准](./docs/DOCUMENTATION_STANDARDS.md)
+参见: [归档文件说明](./archive/README.md) - 查看归档的文件列表
 
 ---
 
 ## 🎉 最新更新
+
+### 2025-11-15
+
+- ✅ 完成文件归档工作（101 个文件）
+- ✅ 修复核心文档中的断开链接
+- ✅ 更新文档结构说明
+- ✅ 完善快速参考索引
+- ✅ 优化文档导航
 
 ### 2025-10-30
 
@@ -207,16 +251,10 @@ cargo run -p rust-doc-search -- search --fuzzy "borrowing"
 - ✅ 提供归档自动化脚本
 - ✅ mdBook 在线平台上线
 
-### 2025-10-25
-
-- ✅ 完成 100% 核心任务
-- ✅ 全文搜索功能上线
-- ✅ 代码质量全面验证
-
 ---
 
 **维护团队**: Rust Learning Community
-**最后更新**: 2025-10-30
+**最后更新**: 2025-11-15
 **状态**: ✅ **活跃维护中**
 
 ---

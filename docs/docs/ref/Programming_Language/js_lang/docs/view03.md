@@ -803,31 +803,6 @@ JavaScript 深度分析
 
 ```markdown
 # JavaScript 深度分析：从基础到形式化验证 (续)
-
-## 目录 (更新)
-
-1.  [JavaScript 基础剖析](#javascript-基础剖析)
-    *   [1.1. 变量 (Variables)](#11-变量-variables)
-    *   [1.2. 类型 (Types)](#12-类型-types)
-    *   [1.3. 控制结构 (Control Structures)](#13-控制结构-control-structures)
-    *   [1.4. 语法与语义 (Syntax & Semantics)](#14-语法与语义-syntax--semantics)
-    *   [1.5. 作用域 (Scope)](#15-作用域-scope)
-    *   **[1.6. 原型与继承 (Prototypes & Inheritance)](#16-原型与继承-prototypes--inheritance)**
-    *   **[1.7. 内存管理 (Memory Management)](#17-内存管理-memory-management)**
-    *   **[1.8. 元编程 (Metaprogramming)](#18-元编程-metaprogramming)**
-2.  [JavaScript 形式化验证](#javascript-形式化验证)
-    *   [2.1. 形式化验证概述](#21-形式化验证概述)
-    *   [2.2. 控制流分析 (Control Flow Analysis - CFA)](#22-控制流分析-control-flow-analysis---cfa)
-    *   [2.3. 数据流分析 (Data Flow Analysis - DFA)](#23-数据流分析-data-flow-analysis---dfa)
-    *   [2.4. 执行流分析 (Execution Flow Analysis)](#24-执行流分析-execution-flow-analysis)
-    *   [2.5. 形式化语义 (Formal Semantics)](#25-形式化语义-formal-semantics)
-    *   [2.6. 形式化证明 (Formal Proof)](#26-形式化证明-formal-proof)
-    *   **[2.7. 安全性分析 (Security Analysis)](#27-安全性分析-security-analysis)**
-    *   **[2.8. 工具生态与实践 (Tooling Ecosystem & Practice)](#28-工具生态与实践-tooling-ecosystem--practice)**
-3.  [思维导图 (Text) (更新)](#思维导图-text-更新)
-
----
-
 ### 1.6. 原型与继承 (Prototypes & Inheritance)
 
 **核心概念:** JavaScript 不使用基于类的继承（虽然 ES6 引入了 `class` 语法糖），而是使用**原型继承 (Prototypal Inheritance)**。每个对象都有一个内部链接指向另一个对象，称为其**原型 (prototype)**。当试图访问一个对象的属性时，如果在该对象自身上找不到，JavaScript 引擎会沿着原型链向上查找，直到找到该属性或到达链的末端 (`null`)。

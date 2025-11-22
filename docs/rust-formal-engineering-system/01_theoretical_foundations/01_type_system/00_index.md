@@ -20,9 +20,10 @@
 
 ### 3. 参考资料 {#references}
 
-1. [代码示例](05_examples.md)
-2. [定理证明映射](22_formal_type_system_proofs.md)
-3. [参考文献](07_references.md)
+1. [代码示例](./examples/00_index.md) - 类型系统代码示例索引 ✅
+2. [泛型示例](./generics/examples/00_index.md) - 泛型代码示例索引 ✅
+3. [定理证明映射](22_formal_type_system_proofs.md)
+4. [参考文献](07_references.md)
 
 ## 💻 实际代码示例
 

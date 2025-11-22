@@ -28,11 +28,14 @@
   - [✅ 证明目标](#-证明目标)
     - [待证明的性质](#待证明的性质)
     - [证明方法](#证明方法)
-  - [💻 代码示例](#-代码示例)
+  - [💻 代码示例与实践](#-代码示例与实践)
     - [示例 1: 协变类型](#示例-1-协变类型)
     - [示例 2: 逆变类型](#示例-2-逆变类型)
     - [示例 3: 不变类型](#示例-3-不变类型)
     - [示例 4: PhantomData 与型变](#示例-4-phantomdata-与型变)
+    - [示例 5: 函数指针型变](#示例-5-函数指针型变)
+    - [示例 6: 型变与内存安全](#示例-6-型变与内存安全)
+    - [示例 7: 实际应用场景](#示例-7-实际应用场景)
   - [📖 参考文献](#-参考文献)
     - [学术论文](#学术论文)
     - [官方文档](#官方文档)
@@ -227,7 +230,7 @@ $$\text{Inv}[F] \Leftrightarrow \forall S, T. (S <: T \land S \neq T) \Rightarro
 
 ---
 
-## 💻 代码示例
+## 💻 代码示例与实践
 
 ### 示例 1: 协变类型
 
@@ -319,6 +322,85 @@ fn phantom_example() {
 
 - `PhantomData<T>` 在 $T$ 上是协变的
 - 使用 `PhantomData` 可以控制类型的型变行为
+
+### 示例 5: 函数指针型变
+
+```rust
+fn function_pointer_variance() {
+    // 函数参数是逆变的
+    fn takes_fn(f: fn(&'static str)) {
+        f("hello");
+    }
+
+    fn short_lifetime(s: &str) {
+        println!("{}", s);
+    }
+
+    // 可以将接受更长生命周期的函数传递给接受更短生命周期的函数
+    takes_fn(short_lifetime);
+}
+```
+
+**函数指针型变分析**：
+
+- 函数参数是逆变的：`fn(&'long T) <: fn(&'short T)`
+- 函数返回值是协变的：`fn() -> &'short T <: fn() -> &'long T`
+- 这保证了类型安全
+
+### 示例 6: 型变与内存安全
+
+```rust
+fn variance_memory_safety() {
+    // 协变示例：&'long T 可以安全地当作 &'short T 使用
+    let long_lived = String::from("long");
+    let short_lived: &str = &long_lived;  // 协变：安全
+
+    // 不变示例：&mut T 必须是不变的
+    let mut data = String::from("data");
+    let r1: &mut String = &mut data;
+    // let r2: &mut str = r1;  // 错误：&mut T 是不变的
+}
+```
+
+**型变与内存安全分析**：
+
+- 协变保证引用不会超过其生命周期
+- 逆变保证函数参数的安全性
+- 不变保证可变引用的唯一性
+
+### 示例 7: 实际应用场景
+
+```rust
+// 协变在迭代器中的应用
+fn use_covariant_iterator() {
+    let vec: Vec<&'static str> = vec!["hello", "world"];
+    // Vec 是协变的，可以传递给需要更短生命周期的函数
+    let iter: Vec<&str> = vec;
+}
+
+// 逆变在回调函数中的应用
+fn use_contravariant_callback() {
+    fn process<F>(callback: F)
+    where
+        F: Fn(&'static str),
+    {
+        callback("static string");
+    }
+
+    fn my_callback(s: &str) {
+        println!("{}", s);
+    }
+
+    // 逆变：可以传递接受更长生命周期的回调
+    process(my_callback);
+}
+```
+
+**实际应用分析**：
+
+- 协变允许更灵活的类型使用
+- 逆变保证回调函数的安全性
+- 不变保证可变引用的正确性
 
 ---
 

@@ -106,6 +106,10 @@
   - `verification_problems.rs`：验证问题示例
   - `performance_problems.rs`：性能问题示例
 
+## 📚 内容文档
+
+- **[类型系统开放问题](./01_type_system_challenges.md)** - Rust 类型系统的开放问题和研究方向 ✅
+
 ## 相关索引
 
 - 理论基础（类型系统）：[`../../01_theoretical_foundations/01_type_system/00_index.md`](../../01_theoretical_foundations/01_type_system/00_index.md)

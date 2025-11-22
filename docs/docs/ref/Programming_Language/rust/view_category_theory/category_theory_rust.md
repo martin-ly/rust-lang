@@ -759,45 +759,6 @@ I should cover more advanced category theory topics and their applications in Ru
 6. Profunctors and their applications
 
 I'll maintain the same structured approach with markdown formatting, providing definitions, theorems, and Rust examples.</think># 范畴论与Rust编程：高级概念与应用（续）
-
-## 目录（续）
-
-8. [伴随函子](#8-伴随函子)
-   1. [伴随函子的定义](#81-伴随函子的定义)
-   2. [单位与余单位](#82-单位与余单位)
-   3. [Rust中的伴随函子](#83-rust中的伴随函子)
-
-9. [Yoneda引理](#9-yoneda引理)
-   1. [Yoneda引理的陈述](#91-yoneda引理的陈述)
-   2. [Yoneda引理的含义](#92-yoneda引理的含义)
-   3. [Rust中的Yoneda引理应用](#93-rust中的yoneda引理应用)
-
-10. [自由单子](#10-自由单子)
-    1. [自由单子的定义](#101-自由单子的定义)
-    2. [解释器模式](#102-解释器模式)
-    3. [Rust中的自由单子实现](#103-rust中的自由单子实现)
-
-11. [Kleisli范畴](#11-kleisli范畴)
-    1. [Kleisli范畴的定义](#111-kleisli范畴的定义)
-    2. [Kleisli范畴与单子编程](#112-kleisli范畴与单子编程)
-    3. [Rust中的Kleisli箭头](#113-rust中的kleisli箭头)
-
-12. [F-代数与递归模式](#12-f-代数与递归模式)
-    1. [F-代数的定义](#121-f-代数的定义)
-    2. [递归模式](#122-递归模式)
-    3. [Rust中的F-代数应用](#123-rust中的f-代数应用)
-
-13. [多函子与Lens](#13-多函子与lens)
-    1. [多函子的定义](#131-多函子的定义)
-    2. [Lens的结构](#132-lens的结构)
-    3. [Rust中的Lens实现](#133-rust中的lens实现)
-
-14. [范畴论视角下的Rust类型系统](#14-范畴论视角下的rust类型系统)
-    1. [类型即对象](#141-类型即对象)
-    2. [函数即态射](#142-函数即态射)
-    3. [Rust类型系统的范畴论解释](#143-rust类型系统的范畴论解释)
-```
-
 ## 8. 伴随函子
 
 ### 8.1 伴随函子的定义

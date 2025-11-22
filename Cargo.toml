@@ -133,8 +133,8 @@ tower-http = { version = "0.6.6", features = [
     "timeout",        # 请求超时支持
     "compression-gzip", # Gzip压缩支持
 ] }
-# actix-web: 高性能的Web框架，基于Actor模型 - 2025年9月27日最新版本
-actix-web = "4.11.0"
+# actix-web: 高性能的Web框架，基于Actor模型 - 2025年11月15日最新版本
+actix-web = "4.12.0"
 # actix: Actor系统框架
 actix = "0.13.5"
 # actix-rt: actix的运行时支持
@@ -290,8 +290,8 @@ uuid = { version = "1.18.1", features = ["v4", "serde"] }
 url = "2.5.7"
 # bytes: 字节缓冲区处理库，提供高效的字节操作 - 版本 1.7+ (字母索引)
 bytes = "1.11.0"
-# indexmap: 保持插入顺序的HashMap实现 - 2025年10月19日更新
-indexmap = "2.12.0"
+# indexmap: 保持插入顺序的HashMap实现 - 2025年11月15日更新
+indexmap = "2.12.1"
 # once_cell: 单次初始化单元格，用于全局变量初始化
 once_cell = "1.21.3"
 # num_cpus: CPU核心数检测库
@@ -402,8 +402,8 @@ png = "0.18.0"
 tiff = "0.10.3"
 # bitflags: 位标志宏 - 2025年10月20日更新
 bitflags = "2.10.0"
-# hashbrown: 高性能HashMap实现 - 2025年10月11日更新
-hashbrown = "0.16.0"
+# hashbrown: 高性能HashMap实现 - 2025年11月15日更新
+hashbrown = "0.16.1"
 # itertools: 迭代器工具库 - 2025年10月30日更新
 itertools = "0.14.0"
 # lru: LRU缓存实现 - 2025年10月20日更新
@@ -637,4 +637,40 @@ nix = "0.30.1"
 # - sqlx 保持在 0.8.6 稳定版，0.9 为 alpha 版本
 # - hickory-resolver 保持在 0.24.4，0.25+ 有破坏性 API 变更
 # - 所有更新已通过 cargo update 验证兼容性
+# ============================================================
+#
+# 依赖更新日志 - 2025年11月15日 cargo update 更新（Rust 1.91.1 兼容版本）
+# ============================================================
+# cargo update 更新了19个包到最新 Rust 1.91 兼容版本
+# 更新时间: 2025-11-15
+#
+# 主要更新的包（已更新配置）：
+# - actix-web: 4.11.0 -> 4.12.0
+# - hashbrown: 0.16.0 -> 0.16.1
+# - indexmap: 2.12.0 -> 2.12.1
+#
+# 间接依赖更新（传递依赖，无需手动更新）：
+# - aws-lc-rs: 1.15.0 -> 1.15.1
+# - aws-lc-sys: 0.33.0 -> 0.34.0
+# - cc: 1.2.46 -> 1.2.47
+# - clap: 4.5.51 -> 4.5.53
+# - clap_builder: 4.5.51 -> 4.5.53
+# - clap_complete: 4.5.60 -> 4.5.61
+# - instant-acme: 0.8.3 -> 0.8.4
+# - pest: 2.8.3 -> 2.8.4
+# - pest_derive: 2.8.3 -> 2.8.4
+# - pest_generator: 2.8.3 -> 2.8.4
+# - pest_meta: 2.8.3 -> 2.8.4
+# - resolv-conf: 0.7.5 -> 0.7.6
+# - signal-hook-registry: 1.4.6 -> 1.4.7
+# - value-bag: 1.11.1 -> 1.12.0
+# - zerocopy: 0.8.27 -> 0.8.28
+# - zerocopy-derive: 0.8.27 -> 0.8.28
+#
+# 移除的包（依赖解析结果）：
+# - bindgen: 0.72.1 (不再需要)
+# - cexpr: 0.6.0 (不再需要)
+# - clang-sys: 1.8.1 (不再需要)
+#
+# 注意：有7个未变更的依赖仍使用最新版本
 # ============================================================

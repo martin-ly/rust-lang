@@ -268,7 +268,7 @@
   - ✅ C09 设计模式模块 ↔ 设计模式形式化理论
   - ✅ C11 宏系统模块 ↔ 宏系统形式化理论
   - ✅ 工具链文档 ↔ 工具链生态形式化理论
-- ✅ **创建统一导航页面** ([形式化理论与实践统一导航](../FORMAL_AND_PRACTICAL_NAVIGATION.md))
+- ✅ **创建统一导航页面** (已归档到 `../archive/temp/`)
 
 ### 2025-01-26
 
@@ -280,23 +280,15 @@
 
 ### 核心导航
 
-- **[形式化理论与实践统一导航](../FORMAL_AND_PRACTICAL_NAVIGATION.md)** ⭐⭐⭐ - 推荐入口，理论与实践双向导航
-- [详细执行计划](../DETAILED_EXECUTION_PLAN.md)
-- [主题梳理计划](../COMPREHENSIVE_TOPIC_REORGANIZATION_PLAN.md)
+- **[文档中心主索引](../README.md)** ⭐⭐⭐ - 推荐入口，完整文档导航
 
 ### 2025-11-11 更新文档 ⭐
 
-- **[全面更新计划](./COMPREHENSIVE_UPDATE_PLAN_2025_11_11.md)** - 2025年11月11日全面更新计划
-- **[知识图谱](./KNOWLEDGE_GRAPH_2025_11_11.md)** - Rust形式化工程体系知识图谱（思维导图+多维矩阵）
-- **[形式化论证集合](./FORMAL_PROOFS_2025_11_11.md)** - 6个完整的形式化证明
-- **[更新总结](./UPDATE_SUMMARY_2025_11_11.md)** - 更新内容详细总结
-- **[最终更新报告](./FINAL_UPDATE_REPORT_2025_11_11.md)** - 最终更新报告
+- **更新计划和报告** - 已归档到 `../archive/reports/formal_system_reports/`
 
 ### Rust 1.91.0 文档
 
-- [Rust 1.91.0 更新日志](./RUST_1_91_CHANGELOG.md)
-- [Rust 1.91 更新总结](./RUST_1_91_UPDATE_SUMMARY.md)
-- [Rust 1.91 快速参考](./RUST_1_91_QUICK_REFERENCE.md)
+- **Rust 1.91 相关文档** - 已归档到 `../archive/reports/formal_system_reports/`
 
 ### 其他资源
 

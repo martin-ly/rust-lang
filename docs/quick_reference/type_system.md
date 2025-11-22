@@ -5,6 +5,56 @@
 
 ---
 
+## 📋 目录
+
+- [🔷 Rust 类型系统速查卡](#-rust-类型系统速查卡)
+  - [📋 目录](#-目录)
+  - [🎯 核心概念](#-核心概念)
+    - [类型安全三支柱](#类型安全三支柱)
+  - [📐 基本类型速查](#-基本类型速查)
+    - [标量类型](#标量类型)
+    - [复合类型](#复合类型)
+  - [🏗️ Trait 系统](#️-trait-系统)
+    - [定义与实现](#定义与实现)
+    - [Trait 作为参数](#trait-作为参数)
+    - [Trait 作为返回值](#trait-作为返回值)
+  - [🔄 类型转换](#-类型转换)
+    - [From/Into](#frominto)
+    - [TryFrom/TryInto（可失败转换）](#tryfromtryinto可失败转换)
+    - [as 转换（基本类型）](#as-转换基本类型)
+  - [📦 泛型编程](#-泛型编程)
+    - [泛型函数](#泛型函数)
+    - [泛型结构体](#泛型结构体)
+    - [关联类型](#关联类型)
+  - [🎭 型变（Variance）](#-型变variance)
+    - [协变（Covariant）- \&T](#协变covariant--t)
+    - [逆变（Contravariant）- fn(T)](#逆变contravariant--fnt)
+    - [不变（Invariant）- \&mut T](#不变invariant--mut-t)
+  - [🔍 常用 Trait](#-常用-trait)
+    - [Debug \& Display](#debug--display)
+    - [Clone \& Copy](#clone--copy)
+    - [PartialEq \& Eq](#partialeq--eq)
+    - [PartialOrd \& Ord](#partialord--ord)
+  - [🧬 高级类型](#-高级类型)
+    - [类型别名](#类型别名)
+    - [Never 类型](#never-类型)
+    - [PhantomData（零大小类型标记）](#phantomdata零大小类型标记)
+  - [🎯 常见模式](#-常见模式)
+    - [新类型模式（Newtype）](#新类型模式newtype)
+    - [类型状态模式](#类型状态模式)
+    - [Builder 模式（类型安全）](#builder-模式类型安全)
+  - [⚡ 性能提示](#-性能提示)
+    - [单态化（Monomorphization）](#单态化monomorphization)
+    - [动态分派 vs 静态分派](#动态分派-vs-静态分派)
+  - [🔗 快速跳转](#-快速跳转)
+    - [深入学习](#深入学习)
+    - [代码示例](#代码示例)
+    - [形式化理论](#形式化理论)
+  - [🆕 Rust 1.91.1 新特性](#-rust-1911-新特性)
+    - [const 上下文增强](#const-上下文增强)
+
+---
+
 ## 🎯 核心概念
 
 ### 类型安全三支柱

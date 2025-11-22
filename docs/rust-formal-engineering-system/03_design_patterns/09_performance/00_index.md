@@ -1,10 +1,11 @@
-> ⚠️ **待完善** - 此文件为占位符，内容待完善
-> **最后更新**: 2025-10-31
-> **预期完成**: 待定
+﻿# 性能模式（Performance Patterns）索引
+
+> **创建日期**: 2025-11-15
+> **最后更新**: 2025-11-15
+> **Rust 版本**: 1.91.1+ (Edition 2024) ✅
+> **状态**: 🔄 进行中
 
 ---
-
-﻿# 性能模式（Performance Patterns）索引
 
 ## 📊 目录
 
@@ -19,69 +20,63 @@
   - [相关索引](#相关索引)
   - [导航](#导航)
 
+---
+
 ## 目的
 
-- 介绍性能优化相关的设计模式在 Rust 中的实现与应用。
-- 提供高性能编程与性能调优的最佳实践。
+- 介绍性能优化模式在 Rust 中的实现与应用。
+- 提供性能优化的最佳实践与 Rust 化改造方案。
+
+---
 
 ## 核心模式
 
-- 对象池模式（Object Pool）：对象重用
-- 缓存模式（Caching）：数据缓存
-- 延迟加载模式（Lazy Loading）：按需加载
-- 预取模式（Prefetching）：数据预取
-- 批处理模式（Batch Processing）：批量处理
-- 流式处理模式（Stream Processing）：流式数据处理
-- 内存池模式（Memory Pool）：内存管理
-- 零拷贝模式（Zero-Copy）：减少数据拷贝
-- 数据导向模式（Data-Oriented）：数据布局优化
-- SIMD 模式（SIMD）：向量化计算
+- **对象池模式（Object Pool）**: 重用对象减少分配开销
+- **缓存模式（Cache）**: 缓存计算结果
+- **延迟初始化模式（Lazy Initialization）**: 延迟创建昂贵对象
+- **批量处理模式（Batch Processing）**: 批量处理减少开销
+- **预分配模式（Pre-allocation）**: 预先分配资源
+- **零拷贝模式（Zero-Copy）**: 避免不必要的数据复制
+- **SIMD 优化模式**: 利用 SIMD 指令加速
+
+---
 
 ## Rust 化要点
 
-- 零成本抽象：编译时优化
-- 内存安全：无 GC 的内存管理
-- 所有权系统：避免不必要的拷贝
-- 内联优化：函数内联与优化
+- **零成本抽象**: 使用零成本抽象实现性能优化
+- **内联优化**: 使用 `#[inline]` 提示编译器内联
+- **数据布局优化**: 优化数据结构的内存布局
+- **SIMD 支持**: 使用 `std::arch` 进行 SIMD 优化
+
+---
 
 ## 术语（Terminology）
 
 - 性能模式（Performance Patterns）
-- 对象池（Object Pool）、缓存（Caching）
-- 延迟加载（Lazy Loading）、预取（Prefetching）
-- 批处理（Batch Processing）、流式处理（Stream Processing）
-- 内存池（Memory Pool）、零拷贝（Zero-Copy）
+- 对象池（Object Pool）、缓存（Cache）
+- 延迟初始化（Lazy Initialization）、批量处理（Batch Processing）
+- 零拷贝（Zero-Copy）、SIMD
+
+---
 
 ## 实践与样例（Practice）
 
-- 性能优化：参见 [crates/c08_algorithms](../../../crates/c08_algorithms/)
-- 并发编程：[crates/c05_threads](../../../crates/c05_threads/)
-- 异步编程：[crates/c06_async](../../../crates/c06_async/)
-
 ### 文件级清单（精选）
 
-- `crates/c08_algorithms/src/performance_examples/`：
-  - `memory_optimization.rs`：内存优化模式
-  - `concurrency_optimization.rs`：并发优化
-  - `compile_time_optimization.rs`：编译时优化
-  - `runtime_profiling.rs`：运行时剖析
-- `crates/c05_threads/src/performance/`：
-  - `object_pool.rs`：对象池模式
-  - `memory_pool.rs`：内存池模式
-  - `zero_copy.rs`：零拷贝模式
-- `crates/c06_async/src/performance/`：
-  - `stream_processing.rs`：流式处理
-  - `batch_processing.rs`：批处理模式
+- 参见 [`crates/c08_algorithms/`](../../../../crates/c08_algorithms/) 目录
+- 参见 [`08_practical_examples/04_performance_examples/`](../../08_practical_examples/04_performance_examples/00_index.md)
+
+---
 
 ## 相关索引
 
-- 理论基础（内存安全）：[`../../01_theoretical_foundations/02_memory_safety/00_index.md`](../../01_theoretical_foundations/02_memory_safety/00_index.md)
-- 编程范式（数据导向）：[`../../02_programming_paradigms/10_data_oriented/00_index.md`](../../02_programming_paradigms/10_data_oriented/00_index.md)
-- 工具链生态（性能分析）：[`../../06_toolchain_ecosystem/06_performance_analysis/00_index.md`](../../06_toolchain_ecosystem/06_performance_analysis/00_index.md)
+- [数据导向编程](../../02_programming_paradigms/10_data_oriented/00_index.md)
+- [设计模式总索引](../00_index.md)
+
+---
 
 ## 导航
 
-- 返回设计模式：[`../00_index.md`](../00_index.md)
-- 安全模式：[`../08_security/00_index.md`](../08_security/00_index.md)
-- Rust 特定模式：[`../10_rust_specific/00_index.md`](../10_rust_specific/00_index.md)
+- 返回总索引：[`../00_index.md`](../00_index.md)
 - 返回项目根：[`../../README.md`](../../README.md)
+- 数据导向：[`../../02_programming_paradigms/10_data_oriented/00_index.md`](../../02_programming_paradigms/10_data_oriented/00_index.md)

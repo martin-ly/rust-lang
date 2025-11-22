@@ -1,7 +1,8 @@
 # Rust 工具链文档
 
 > **文档集**: Rust 编译器、Cargo、Rustdoc
-> **更新日期**: 2025-10-22
+> **更新日期**: 2025-11-15
+> **Rust 版本**: 1.91.1+
 > **文档类型**: 📘 工具链参考
 
 ---
@@ -10,10 +11,10 @@
 
 深入学习工具链生态系统的形式化理论基础：
 
-- 🔧 **[工具链生态形式化理论](../../rust-formal-engineering-system/06_toolchain_ecosystem/)** - 工具链生态系统的形式化描述
-- ⚙️ **[编译器形式化理论](../../rust-formal-engineering-system/06_toolchain_ecosystem/01_compiler/)** - 编译器架构的形式化模型
-- 📦 **[包管理器理论](../../rust-formal-engineering-system/06_toolchain_ecosystem/02_package_manager/)** - 包管理的形式化定义
-- 🏗️ **[构建工具理论](../../rust-formal-engineering-system/06_toolchain_ecosystem/03_build_tools/)** - 构建系统的形式化模型
+- 🔧 **[工具链生态形式化理论](../rust-formal-engineering-system/06_toolchain_ecosystem/)** - 工具链生态系统的形式化描述
+- ⚙️ **[编译器形式化理论](../rust-formal-engineering-system/06_toolchain_ecosystem/01_compiler/)** - 编译器架构的形式化模型
+- 📦 **[包管理器理论](../rust-formal-engineering-system/06_toolchain_ecosystem/02_package_manager/)** - 包管理的形式化定义
+- 🏗️ **[构建工具理论](../rust-formal-engineering-system/06_toolchain_ecosystem/03_build_tools/)** - 构建系统的形式化模型
 
 **学习路径**: 实践文档 → 形式化理论 → 深入理解
 
@@ -292,8 +293,8 @@ pub fn function(a: i32, b: i32) -> i32 {
 
 ### 相关模块
 
-- [C13 Reliability - 性能优化](../../crates/c13_reliability/docs/tier_04_advanced/)
 - [C08 Algorithms - 算法优化](../../crates/c08_algorithms/docs/)
+- **注意**: 当前项目包含 c01-c12 共 12 个学习模块
 
 ---
 
@@ -440,5 +441,5 @@ tokio = { version = "1.0", features = ["full"] }
 ---
 
 **文档维护**: Documentation Team
-**最后更新**: 2025-10-22
-**下次审查**: 2026-01-22
+**最后更新**: 2025-11-15
+**下次审查**: 2026-01-15

@@ -1,8 +1,8 @@
 # 第4章：高级类型系统特征 - Chapter 4: Advanced Type System Features
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2025-11-11
-> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **最后更新**: 2025-11-15
+> **Rust 版本**: 1.91.1+ (Edition 2024) ✅
 > **状态**: 已完善 ✅
 
 ---
@@ -60,9 +60,8 @@ Chapter 4 focuses on the formal theory of Rust's advanced type system features, 
 
 ## 交叉引用 - Cross References
 
-- [第2章：类型系统基础](../02_type_system/00_index.md)
-- [第3章：控制流理论](../03_control_flow/00_index.md)
-- [第5章：形式化证明与验证](../05_formal_verification/00_index.md)
+- [类型系统基础](../core_theory/00_index.md) - 类型系统核心理论
+- [形式化验证](../../09_formal_verification/) - 形式化验证方法
 
 ## 质量评估 - Quality Assessment
 
@@ -85,7 +84,7 @@ Rust 1.91.0 对模式匹配的绑定顺序进行了重构，提升了语义一�
 
 **相关文档**：
 
-- [模式匹配绑定顺序改进](../../../../RUST_1_91_CHANGELOG.md#模式匹配绑定顺序重构)
+- [模式匹配绑定顺序改进](../../../../archive/reports/formal_system_reports/RUST_1_91_CHANGELOG.md#模式匹配绑定顺序重构) - 已归档
 
 ## 更新记录 - Update Log
 
@@ -95,3 +94,4 @@ Rust 1.91.0 对模式匹配的绑定顺序进行了重构，提升了语义一�
 | 2025-10-30 | 完成静态与动态类型 | 75% |
 | 2025-10-30 | 完成类型推导与检查 | 60% |
 | 2025-11-11 | 更新至Rust 1.91.0，添加新特性说明 | 85% |
+| 2025-11-15 | 更新至Rust 1.91.1+，修复链接 | 90% |

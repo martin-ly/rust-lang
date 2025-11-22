@@ -711,7 +711,7 @@ cargo add wit-bindgen
 
 #### 2. 代码迁移步骤
 
-**步骤 1: 编写 WIT 接口定义**
+**步骤 1: 编写 WIT 接口定义**:
 
 ```wit
 // 新建 wit/world.wit
@@ -731,7 +731,7 @@ interface run {
 }
 ```
 
-**步骤 2: 更新 Rust 代码**
+**步骤 2: 更新 Rust 代码**:
 
 ```rust
 // 旧代码 (WASI 0.1)
@@ -762,7 +762,7 @@ impl Guest for MyApp {
 export!(MyApp);
 ```
 
-**步骤 3: 更新构建配置**
+**步骤 3: 更新构建配置**:
 
 ```toml
 # Cargo.toml
@@ -783,7 +783,7 @@ codegen-units = 1
 crate-type = ["cdylib"]
 ```
 
-**步骤 4: 编译和测试**
+**步骤 4: 编译和测试**:
 
 ```bash
 # 编译为 WASI 0.2 组件

@@ -1,9 +1,9 @@
 # 测试框架（Testing Frameworks）索引
 
-> **创建日期**: 2025-10-31
-> **最后更新**: 2025-11-10
-> **Rust 版本**: 1.91.0 (Edition 2024) ✅
-> **状态**: 已完善 ✅
+> **创建日期**: 2025-11-15
+> **最后更新**: 2025-11-15
+> **Rust 版本**: 1.91.1+ (Edition 2024) ✅
+> **状态**: 🔄 进行中
 
 ---
 
@@ -11,155 +11,93 @@
 
 - [测试框架（Testing Frameworks）索引](#测试框架testing-frameworks索引)
   - [📊 目录](#-目录)
-  - [🎯 目的](#-目的)
-    - [核心价值](#核心价值)
-  - [📚 核心主题](#-核心主题)
-    - [1. Rust 内建测试（Built-in Testing）](#1-rust-内建测试built-in-testing)
-    - [2. 属性测试（Property Testing）](#2-属性测试property-testing)
-    - [3. 端到端测试（End-to-End Testing）](#3-端到端测试end-to-end-testing)
-    - [4. 基准测试（Benchmarking）](#4-基准测试benchmarking)
-  - [💻 常用命令](#-常用命令)
-    - [基础测试](#基础测试)
-    - [测试选项](#测试选项)
-    - [工作区测试](#工作区测试)
-  - [🔗 相关条目](#-相关条目)
-  - [🧭 导航](#-导航)
+  - [目的](#目的)
+  - [核心概念](#核心概念)
+  - [测试类型](#测试类型)
+  - [💻 实际代码示例](#-实际代码示例)
+  - [实践与示例（仓库内）](#实践与示例仓库内)
+  - [设计建议](#设计建议)
+  - [常见陷阱](#常见陷阱)
+  - [参考资料](#参考资料)
+  - [导航](#导航)
 
-## 🎯 目的
+---
 
-本模块整理单元/集成/属性/端到端测试框架与惯用法，提供全面的测试工具使用指南。所有内容均基于 Rust 1.91.0 和当前最佳实践。
+## 目的
 
-### 核心价值
+- 介绍 Rust 测试框架的使用和最佳实践。
+- 提供单元测试、集成测试、基准测试的指南。
 
-- **测试框架**: 专注于 Rust 测试框架最佳实践
-- **最佳实践**: 基于 Rust 社区最新测试实践
-- **完整覆盖**: 涵盖单元测试、集成测试、属性测试、端到端测试等核心主题
-- **易于理解**: 提供详细的测试框架说明和代码示例
+---
 
-## 📚 核心主题
+## 核心概念
 
-### 1. Rust 内建测试（Built-in Testing）
+- **单元测试**: 测试单个函数或模块
+- **集成测试**: 测试多个模块的交互
+- **文档测试**: 测试代码示例
+- **基准测试**: 性能测试
+- **属性测试**: 基于属性的测试
+- **模糊测试**: 随机输入测试
 
-**推荐工具**: `cargo`, `std::test`
+---
 
-- **单元测试**: `#[test]`、`#[cfg(test)]`、测试模块
-- **集成测试**: `tests/` 目录、集成测试组织
-- **文档测试**: `///` 文档注释、`cargo test --doc`
-- **工作区测试**: `cargo test -p`、工作区测试选择
+## 测试类型
 
-**相关资源**:
+- **单元测试**: `#[test]` 和 `#[cfg(test)]`
+- **集成测试**: `tests/` 目录
+- **文档测试**: `///` 注释中的代码块
+- **基准测试**: `#[bench]` 和 `criterion`
+- **属性测试**: `proptest` 和 `quickcheck`
+- **模糊测试**: `cargo-fuzz` 和 `libfuzzer`
+
+---
+
+## 💻 实际代码示例
+
+将测试框架理论知识应用到实际代码中：
+
+- **各 crate 的测试**: 参见各 crate 的 `tests/` 目录
+- **基准测试**: 参见各 crate 的 `benches/` 目录
+
+**学习路径**: 形式化理论 → 实际代码 → 验证理解
+
+---
+
+## 实践与示例（仓库内）
+
+- 单元测试：参见各 crate 的 `src/` 目录中的测试模块。
+- 集成测试：参见各 crate 的 `tests/` 目录。
+- 基准测试：参见各 crate 的 `benches/` 目录。
+
+---
+
+## 设计建议
+
+- 编写清晰的测试用例。
+- 使用测试夹具减少重复代码。
+- 合理使用模拟对象。
+- 保持测试独立和可重复。
+
+---
+
+## 常见陷阱
+
+- 测试依赖外部资源。
+- 测试之间相互依赖。
+- 测试覆盖不足。
+
+---
+
+## 参考资料
 
 - [Rust Book - Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)
-- [Cargo Book - Testing](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#tests)
-
-### 2. 属性测试（Property Testing）
-
-**推荐库**: `proptest`, `quickcheck`, `hypothesis`
-
-- **属性定义**: 属性定义、生成器配置
-- **测试生成**: 随机测试生成、测试用例生成
-- **测试收缩**: 测试收缩、最小化失败用例
-- **测试策略**: 测试策略、覆盖率分析
-
-**相关资源**:
-
-- [proptest 文档](https://docs.rs/proptest/)
-- [quickcheck 文档](https://docs.rs/quickcheck/)
-- [hypothesis 文档](https://docs.rs/hypothesis/)
-
-### 3. 端到端测试（End-to-End Testing）
-
-**推荐库**: `cucumber`, `godog`, `playwright`
-
-- **BDD 测试**: Cucumber、Gherkin 语法
-- **端到端测试**: 端到端测试框架、测试组织
-- **测试驱动**: 测试驱动开发、行为驱动开发
-- **测试报告**: 测试报告、测试可视化
-
-**相关资源**:
-
-- [cucumber-rust 文档](https://docs.rs/cucumber/)
-- [godog 文档](https://github.com/cucumber/godog)
-- [playwright-rust 文档](https://docs.rs/playwright/)
-
-### 4. 基准测试（Benchmarking）
-
-**推荐库**: `criterion`, `iai`, `divan`
-
-- **性能基准**: 性能基准测试、基准测试组织
-- **基准分析**: 基准分析、性能回归检测
-- **基准报告**: 基准报告、性能可视化
-- **基准优化**: 基准优化、性能调优
-
-**相关资源**:
-
-- [criterion 文档](https://docs.rs/criterion/)
-- [iai 文档](https://docs.rs/iai/)
-- [divan 文档](https://docs.rs/divan/)
-
-## 💻 常用命令
-
-### 基础测试
-
-```bash
-# 运行所有测试
-cargo test
-
-# 运行特定包的测试
-cargo test -p <crate>
-
-# 运行特定测试
-cargo test test_name
-
-# 运行被忽略的测试
-cargo test -- --ignored
-```
-
-### 测试选项
-
-```bash
-# 并行测试
-cargo test -- --test-threads=1
-
-# 显示输出
-cargo test -- --nocapture
-
-# 文档测试
-cargo test --doc
-
-# 基准测试（不运行）
-cargo bench --no-run
-```
-
-### 工作区测试
-
-```bash
-# 工作区所有测试
-cargo test --workspace
-
-# 特定成员测试
-cargo test -p <package>
-
-# 测试过滤
-cargo test -- --test-threads=1 --nocapture
-```
+- Criterion.rs 文档
+- Proptest 文档
 
 ---
 
-## 🔗 相关条目
+## 导航
 
-- **构建工具**: [`../03_build_tools/00_index.md`](../03_build_tools/00_index.md)
-- **模糊测试**: [`../04_fuzz/00_index.md`](../04_fuzz/00_index.md)
-- **质量保障**: [`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)
-
----
-
-## 🧭 导航
-
-- **返回工具链**: [`../00_index.md`](../00_index.md)
-
----
-
-**最后更新**: 2025-11-10
-**维护者**: 项目维护者
-**状态**: 已完善 ✅
+- 返回总索引：[`../00_index.md`](../00_index.md)
+- 返回项目根：[`../../README.md`](../../README.md)
+- 软件工程测试：[`../../05_software_engineering/07_testing/00_index.md`](../../05_software_engineering/07_testing/00_index.md)

@@ -27,10 +27,12 @@
   - [✅ 证明目标](#-证明目标)
     - [待证明的性质](#待证明的性质)
     - [证明方法](#证明方法)
-  - [💻 代码示例](#-代码示例)
+  - [💻 代码示例与实践](#-代码示例与实践)
     - [示例 1: Pin 基础](#示例-1-pin-基础)
     - [示例 2: 自引用结构](#示例-2-自引用结构)
     - [示例 3: Future 和 Pin](#示例-3-future-和-pin)
+    - [示例 4: 自引用结构体](#示例-4-自引用结构体)
+    - [示例 5: Pin 投影](#示例-5-pin-投影)
   - [📖 参考文献](#-参考文献)
     - [学术论文](#学术论文)
     - [官方文档](#官方文档)
@@ -169,7 +171,7 @@ $$T = \{\text{field}_1 : \tau_1, \ldots, \text{field}_n : \&'a \tau_i\}$$
 
 ---
 
-## 💻 代码示例
+## 💻 代码示例与实践
 
 ### 示例 1: Pin 基础
 
@@ -236,6 +238,119 @@ impl SelfReferential {
 - Pin 保证: $\text{Pin}[\Box[\text{SelfReferential}]]$ 保证内存位置稳定
 
 ### 示例 3: Future 和 Pin
+
+```rust
+use std::pin::Pin;
+use std::future::Future;
+use std::task::{Context, Poll};
+
+struct MyFuture {
+    value: Option<i32>,
+}
+
+impl Future for MyFuture {
+    type Output = i32;
+
+    fn poll(mut self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
+        match self.value {
+            Some(v) => Poll::Ready(v),
+            None => {
+                self.value = Some(42);
+                Poll::Pending
+            }
+        }
+    }
+}
+
+async fn use_future() {
+    let future = MyFuture { value: None };
+    let pinned = Box::pin(future);
+    let result = pinned.await;
+    println!("结果: {}", result);
+}
+```
+
+**Future 和 Pin 分析**：
+
+- Future 可能包含自引用
+- Pin 保证 Future 不会被移动
+- `Box::pin` 在堆上固定 Future
+
+### 示例 4: 自引用结构体
+
+```rust
+use std::pin::Pin;
+use std::marker::PhantomPinned;
+
+struct SelfReferential {
+    data: String,
+    self_ref: *const String,  // 指向 data 的指针
+    _pin: PhantomPinned,  // 标记为 !Unpin
+}
+
+impl SelfReferential {
+    fn new(data: String) -> Pin<Box<Self>> {
+        let mut boxed = Box::pin(SelfReferential {
+            data,
+            self_ref: std::ptr::null(),
+            _pin: PhantomPinned,
+        });
+
+        let self_ptr: *const String = &boxed.data;
+        unsafe {
+            let mut_ref = Pin::as_mut(&mut *boxed);
+            Pin::get_unchecked_mut(mut_ref).self_ref = self_ptr;
+        }
+
+        boxed
+    }
+
+    fn get_data(&self) -> &str {
+        unsafe {
+            &*self.self_ref
+        }
+    }
+}
+
+fn use_self_referential() {
+    let pinned = SelfReferential::new(String::from("hello"));
+    println!("{}", pinned.get_data());
+}
+```
+
+**自引用结构体分析**：
+
+- 使用原始指针实现自引用
+- `PhantomPinned` 标记为 `!Unpin`
+- Pin 保证结构体不会被移动，指针始终有效
+
+### 示例 5: Pin 投影
+
+```rust
+use std::pin::Pin;
+
+struct Wrapper {
+    inner: Inner,
+}
+
+struct Inner {
+    value: i32,
+}
+
+impl Wrapper {
+    fn get_inner(self: Pin<&mut Self>) -> Pin<&mut Inner> {
+        unsafe {
+            self.map_unchecked_mut(|s| &mut s.inner)
+        }
+    }
+}
+```
+
+**Pin 投影分析**：
+
+- 从被 Pin 的结构体中获取被 Pin 的字段
+- 使用 `map_unchecked_mut` 进行投影
+- 需要确保投影的安全性
 
 ```rust
 use std::pin::Pin;

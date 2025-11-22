@@ -28,10 +28,12 @@
   - [✅ 证明目标](#-证明目标)
     - [待证明的性质](#待证明的性质)
     - [证明方法](#证明方法)
-  - [💻 代码示例](#-代码示例)
+  - [💻 代码示例与实践](#-代码示例与实践)
     - [示例 1: GATs 基础](#示例-1-gats-基础)
     - [示例 2: const 泛型](#示例-2-const-泛型)
     - [示例 3: 类型族](#示例-3-类型族)
+    - [示例 4: const 泛型与数组](#示例-4-const-泛型与数组)
+    - [示例 5: GATs 与迭代器](#示例-5-gats-与迭代器)
   - [📖 参考文献](#-参考文献)
     - [学术论文](#学术论文)
     - [官方文档](#官方文档)
@@ -187,7 +189,7 @@ Rust 的受限依赖类型系统保证类型安全，不会出现运行时类型
 
 ---
 
-## 💻 代码示例
+## 💻 代码示例与实践
 
 ### 示例 1: GATs 基础
 
@@ -256,6 +258,85 @@ fn main() {
 - const 参数 $N$ 必须是编译时常量
 
 ### 示例 3: 类型族
+
+```rust
+trait Family {
+    type Member<T>;  // GAT
+}
+
+struct VecFamily;
+
+impl Family for VecFamily {
+    type Member<T> = Vec<T>;
+}
+
+fn use_family() {
+    let vec: <VecFamily as Family>::Member<i32> = vec![1, 2, 3];
+}
+```
+
+**类型族分析**：
+
+- GATs 实现类型族模式
+- 类型族是参数化的类型级函数
+- 提供高阶类型抽象
+
+### 示例 4: const 泛型与数组
+
+```rust
+fn process_array<const N: usize>(arr: [i32; N]) -> i32 {
+    arr.iter().sum()
+}
+
+fn use_const_generic() {
+    let arr1 = [1, 2, 3];
+    let arr2 = [1, 2, 3, 4, 5];
+
+    let sum1 = process_array(arr1);  // N = 3
+    let sum2 = process_array(arr2);  // N = 5
+}
+```
+
+**const 泛型分析**：
+
+- `const N: usize` 是 const 泛型参数
+- 允许类型依赖于常量值
+- 提供值级别的泛型能力
+
+### 示例 5: GATs 与迭代器
+
+```rust
+trait Iterator {
+    type Item<'a> where Self: 'a;  // GAT with lifetime
+
+    fn next(&mut self) -> Option<Self::Item<'_>>;
+}
+
+struct SliceIter<'a, T> {
+    slice: &'a [T],
+    index: usize,
+}
+
+impl<'a, T> Iterator for SliceIter<'a, T> {
+    type Item<'b> = &'b T where 'a: 'b;
+
+    fn next(&mut self) -> Option<Self::Item<'_>> {
+        if self.index < self.slice.len() {
+            let item = &self.slice[self.index];
+            self.index += 1;
+            Some(item)
+        } else {
+            None
+        }
+    }
+}
+```
+
+**GATs 与生命周期分析**：
+
+- GATs 可以包含生命周期参数
+- 允许关联类型依赖于生命周期
+- 提供更灵活的类型抽象
 
 ```rust
 trait Family {
