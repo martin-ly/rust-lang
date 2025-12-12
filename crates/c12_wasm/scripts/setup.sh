@@ -51,7 +51,7 @@ fi
 echo ""
 echo "🔍 检查 Rust 版本..."
 RUST_VERSION=$(rustc --version | cut -d' ' -f2)
-REQUIRED_VERSION="1.90.0"
+REQUIRED_VERSION="1.92.0"
 
 if [ "$(printf '%s\n' "$REQUIRED_VERSION" "$RUST_VERSION" | sort -V | head -n1)" = "$REQUIRED_VERSION" ]; then
     print_success "Rust 版本满足要求 (>= $REQUIRED_VERSION)"

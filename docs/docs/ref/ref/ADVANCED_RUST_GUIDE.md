@@ -3,48 +3,50 @@
 
 ## 📊 目录
 
-- [📋 指南概述](#指南概述)
-- [🎯 学习前提](#学习前提)
-  - [基础要求](#基础要求)
-  - [推荐经验](#推荐经验)
-- [🔧 高级类型系统](#高级类型系统)
-  - [高级泛型编程](#高级泛型编程)
-    - [泛型约束和where子句](#泛型约束和where子句)
-    - [泛型生命周期](#泛型生命周期)
-  - [高级Trait](#高级trait)
-    - [对象安全](#对象安全)
-    - [Trait对象和动态分发](#trait对象和动态分发)
-- [🔒 Unsafe Rust](#unsafe-rust)
-  - [Unsafe基础](#unsafe基础)
-    - [Unsafe函数和块](#unsafe函数和块)
-    - [原始指针操作](#原始指针操作)
-  - [FFI (Foreign Function Interface)](#ffi-foreign-function-interface)
-    - [C库绑定](#c库绑定)
-- [⚡ 性能优化](#性能优化)
-  - [内存优化](#内存优化)
-    - [零成本抽象](#零成本抽象)
-    - [内存布局优化](#内存布局优化)
-  - [算法优化](#算法优化)
-    - [SIMD优化](#simd优化)
-    - [缓存友好的数据结构](#缓存友好的数据结构)
-- [🔄 高级并发编程](#高级并发编程)
-  - [无锁数据结构](#无锁数据结构)
-    - [原子操作](#原子操作)
-  - [高级异步编程](#高级异步编程)
-    - [自定义Future](#自定义future)
-    - [异步流处理](#异步流处理)
-- [🎮 系统编程](#系统编程)
-  - [操作系统接口](#操作系统接口)
-    - [系统调用封装](#系统调用封装)
-    - [内存映射](#内存映射)
-- [📞 学习建议](#学习建议)
-  - [进阶学习路径](#进阶学习路径)
-  - [实践建议](#实践建议)
+- [🚀 Rust高级学习指南](#-rust高级学习指南)
+  - [📊 目录](#-目录)
+  - [📋 指南概述](#-指南概述)
+  - [🎯 学习前提](#-学习前提)
+    - [基础要求](#基础要求)
+    - [推荐经验](#推荐经验)
+  - [🔧 高级类型系统](#-高级类型系统)
+    - [高级泛型编程](#高级泛型编程)
+      - [泛型约束和where子句](#泛型约束和where子句)
+      - [泛型生命周期](#泛型生命周期)
+    - [高级Trait](#高级trait)
+      - [对象安全](#对象安全)
+      - [Trait对象和动态分发](#trait对象和动态分发)
+  - [🔒 Unsafe Rust](#-unsafe-rust)
+    - [Unsafe基础](#unsafe基础)
+      - [Unsafe函数和块](#unsafe函数和块)
+      - [原始指针操作](#原始指针操作)
+    - [FFI (Foreign Function Interface)](#ffi-foreign-function-interface)
+      - [C库绑定](#c库绑定)
+  - [⚡ 性能优化](#-性能优化)
+    - [内存优化](#内存优化)
+      - [零成本抽象](#零成本抽象)
+      - [内存布局优化](#内存布局优化)
+    - [算法优化](#算法优化)
+      - [SIMD优化](#simd优化)
+      - [缓存友好的数据结构](#缓存友好的数据结构)
+  - [🔄 高级并发编程](#-高级并发编程)
+    - [无锁数据结构](#无锁数据结构)
+      - [原子操作](#原子操作)
+    - [高级异步编程](#高级异步编程)
+      - [自定义Future](#自定义future)
+      - [异步流处理](#异步流处理)
+  - [🎮 系统编程](#-系统编程)
+    - [操作系统接口](#操作系统接口)
+      - [系统调用封装](#系统调用封装)
+      - [内存映射](#内存映射)
+  - [📞 学习建议](#-学习建议)
+    - [进阶学习路径](#进阶学习路径)
+    - [实践建议](#实践建议)
 
 
-**创建时间**: 2025年9月25日 13:50  
-**版本**: v1.0  
-**适用对象**: 有Rust基础的开发者  
+**创建时间**: 2025年9月25日 13:50
+**版本**: v1.0
+**适用对象**: 有Rust基础的开发者
 
 ---
 
@@ -99,7 +101,7 @@ where
 trait Processor {
     type Input;
     type Output;
-    
+
     fn process(&self, input: Self::Input) -> Self::Output;
 }
 
@@ -108,7 +110,7 @@ struct StringProcessor;
 impl Processor for StringProcessor {
     type Input = String;
     type Output = usize;
-    
+
     fn process(&self, input: String) -> usize {
         input.len()
     }
@@ -133,7 +135,7 @@ impl<'a, T: Display> Container<'a, T> {
             metadata: String::new(),
         }
     }
-    
+
     fn display(&self) -> String {
         format!("{}: {}", self.metadata, self.data)
     }
@@ -191,15 +193,15 @@ impl Component for Transform {
     fn update(&mut self) {
         // 更新逻辑
     }
-    
+
     fn render(&self) {
         println!("Transform at ({}, {})", self.x, self.y);
     }
-    
+
     fn as_any(&self) -> &dyn Any {
         self
     }
-    
+
     fn as_any_mut(&mut self) -> &mut dyn Any {
         self
     }
@@ -214,7 +216,7 @@ impl Entity {
     fn add_component<T: Component + 'static>(&mut self, component: T) {
         self.components.push(Box::new(component));
     }
-    
+
     fn get_component<T: Component + 'static>(&self) -> Option<&T> {
         for component in &self.components {
             if let Some(typed_component) = component.as_any().downcast_ref::<T>() {
@@ -261,14 +263,14 @@ use std::ptr;
 unsafe fn manipulate_memory() {
     let mut data = vec![1, 2, 3, 4, 5];
     let ptr = data.as_mut_ptr();
-    
+
     // 直接操作内存
     for i in 0..data.len() {
         let current = ptr.add(i);
         let value = ptr::read(current);
         ptr::write(current, value * 2);
     }
-    
+
     // 确保数据有效
     data.set_len(data.len());
 }
@@ -284,13 +286,13 @@ impl<T> MyBox<T> {
             let ptr = std::alloc::alloc(
                 std::alloc::Layout::new::<T>()
             ) as *mut T;
-            
+
             if ptr.is_null() {
                 std::alloc::handle_alloc_error(std::alloc::Layout::new::<T>());
             }
-            
+
             ptr::write(ptr, value);
-            
+
             MyBox { ptr }
         }
     }
@@ -422,7 +424,7 @@ impl<T: Default> MemoryPool<T> {
             chunk_size,
         }
     }
-    
+
     fn allocate(&mut self) -> usize {
         if let Some(index) = self.free_list.pop() {
             index
@@ -430,16 +432,16 @@ impl<T: Default> MemoryPool<T> {
             self.allocate_new_chunk()
         }
     }
-    
+
     fn allocate_new_chunk(&mut self) -> usize {
         let mut chunk = Vec::with_capacity(self.chunk_size);
         for _ in 0..self.chunk_size {
             chunk.push(T::default());
         }
-        
+
         let chunk_index = self.chunks.len();
         self.chunks.push(chunk);
-        
+
         chunk_index * self.chunk_size
     }
 }
@@ -457,7 +459,7 @@ unsafe fn simd_add(a: &[f32], b: &[f32], result: &mut [f32]) {
     let chunks = a.chunks_exact(4);
     let b_chunks = b.chunks_exact(4);
     let result_chunks = result.chunks_exact_mut(4);
-    
+
     for ((a_chunk, b_chunk), result_chunk) in chunks.zip(b_chunks).zip(result_chunks) {
         let a_vec = _mm_load_ps(a_chunk.as_ptr());
         let b_vec = _mm_load_ps(b_chunk.as_ptr());
@@ -501,13 +503,13 @@ impl CacheOptimizedMatrix {
             cols,
         }
     }
-    
+
     // 按行访问优化缓存局部性
     fn get_row(&self, row: usize) -> &[f64] {
         let start = row * self.cols;
         &self.data[start..start + self.cols]
     }
-    
+
     fn get_row_mut(&mut self, row: usize) -> &mut [f64] {
         let start = row * self.cols;
         &mut self.data[start..start + self.cols]
@@ -539,11 +541,11 @@ impl LockFreeCounter {
             count: AtomicUsize::new(0),
         }
     }
-    
+
     fn increment(&self) -> usize {
         self.count.fetch_add(1, Ordering::SeqCst)
     }
-    
+
     fn get(&self) -> usize {
         self.count.load(Ordering::SeqCst)
     }
@@ -565,19 +567,19 @@ impl<T> LockFreeStack<T> {
             head: AtomicPtr::new(std::ptr::null_mut()),
         }
     }
-    
+
     fn push(&self, data: T) {
         let node = Box::into_raw(Box::new(Node {
             data,
             next: AtomicPtr::new(std::ptr::null_mut()),
         }));
-        
+
         loop {
             let head = self.head.load(Ordering::SeqCst);
             unsafe {
                 (*node).next.store(head, Ordering::SeqCst);
             }
-            
+
             match self.head.compare_exchange_weak(
                 head,
                 node,
@@ -589,14 +591,14 @@ impl<T> LockFreeStack<T> {
             }
         }
     }
-    
+
     fn pop(&self) -> Option<T> {
         loop {
             let head = self.head.load(Ordering::SeqCst);
             if head.is_null() {
                 return None;
             }
-            
+
             unsafe {
                 let next = (*head).next.load(Ordering::SeqCst);
                 match self.head.compare_exchange_weak(
@@ -648,7 +650,7 @@ impl Timer {
 
 impl Future for Timer {
     type Output = ();
-    
+
     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
         match self.start {
             Some(start) => {
@@ -705,7 +707,7 @@ impl NumberStream {
 
 impl Stream for NumberStream {
     type Item = u32;
-    
+
     fn poll_next(
         mut self: Pin<&mut Self>,
         cx: &mut Context<'_>,
@@ -723,7 +725,7 @@ impl Stream for NumberStream {
 // 异步流处理
 async fn process_stream() {
     let mut stream = NumberStream::new(10);
-    
+
     while let Some(number) = stream.next().await {
         println!("Processing number: {}", number);
         tokio::time::sleep(Duration::from_millis(100)).await;
@@ -752,7 +754,7 @@ impl FileDescriptor {
     fn new(fd: RawFd) -> Self {
         FileDescriptor { fd }
     }
-    
+
     fn read(&self, buf: &mut [u8]) -> io::Result<usize> {
         unsafe {
             let result = libc::read(self.fd, buf.as_mut_ptr() as *mut libc::c_void, buf.len());
@@ -763,7 +765,7 @@ impl FileDescriptor {
             }
         }
     }
-    
+
     fn write(&self, buf: &[u8]) -> io::Result<usize> {
         unsafe {
             let result = libc::write(self.fd, buf.as_ptr() as *const libc::c_void, buf.len());
@@ -806,7 +808,7 @@ impl MemoryMappedFile {
     fn new(file: &File) -> io::Result<Self> {
         let metadata = file.metadata()?;
         let len = metadata.len() as usize;
-        
+
         let ptr = unsafe {
             libc::mmap(
                 std::ptr::null_mut(),
@@ -817,21 +819,21 @@ impl MemoryMappedFile {
                 0,
             )
         };
-        
+
         if ptr == libc::MAP_FAILED {
             return Err(io::Error::last_os_error());
         }
-        
+
         Ok(MemoryMappedFile {
             ptr: ptr as *mut u8,
             len,
         })
     }
-    
+
     fn as_slice(&self) -> &[u8] {
         unsafe { std::slice::from_raw_parts(self.ptr, self.len) }
     }
-    
+
     fn as_mut_slice(&mut self) -> &mut [u8] {
         unsafe { std::slice::from_raw_parts_mut(self.ptr, self.len) }
     }
@@ -867,9 +869,9 @@ impl Drop for MemoryMappedFile {
 
 ---
 
-**指南状态**: 🔄 持续更新中  
-**最后更新**: 2025年9月25日 13:50  
-**适用版本**: Rust 1.70+  
+**指南状态**: 🔄 持续更新中
+**最后更新**: 2025年9月25日 13:50
+**适用版本**: Rust 1.70+
 
 ---
 

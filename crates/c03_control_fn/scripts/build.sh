@@ -32,36 +32,36 @@ log_error() {
 # 检查Rust版本
 check_rust_version() {
     log_info "检查Rust版本..."
-    
+
     if ! command -v rustc &> /dev/null; then
         log_error "Rust未安装，请先安装Rust"
         exit 1
     fi
-    
+
     local rust_version=$(rustc --version | cut -d' ' -f2)
-    local required_version="1.89.0"
-    
+    local required_version="1.92.0"
+
     log_info "当前Rust版本: $rust_version"
     log_info "需要Rust版本: $required_version"
-    
+
     # 简单的版本比较（这里可以改进）
     if [[ "$rust_version" < "$required_version" ]]; then
-        log_warning "Rust版本可能过低，建议升级到1.89.0或更高版本"
+        log_warning "Rust版本可能过低，建议升级到1.92.0或更高版本"
     fi
 }
 
 # 安装依赖
 install_dependencies() {
     log_info "安装项目依赖..."
-    
+
     # 安装rustup组件
     rustup component add rustfmt clippy
-    
+
     # 安装cargo工具
     cargo install cargo-audit
     cargo install cargo-tarpaulin
     cargo install cargo-criterion
-    
+
     log_success "依赖安装完成"
 }
 
@@ -89,9 +89,9 @@ audit_code() {
 # 构建项目
 build_project() {
     local profile=${1:-debug}
-    
+
     log_info "构建项目 (profile: $profile)..."
-    
+
     case $profile in
         debug)
             cargo build --verbose
@@ -104,22 +104,22 @@ build_project() {
             exit 1
             ;;
     esac
-    
+
     log_success "项目构建完成"
 }
 
 # 运行测试
 run_tests() {
     local features=${1:-""}
-    
+
     log_info "运行测试..."
-    
+
     if [[ -n "$features" ]]; then
         cargo test --features "$features" --verbose
     else
         cargo test --verbose
     fi
-    
+
     log_success "测试完成"
 }
 
@@ -133,13 +133,13 @@ run_benchmarks() {
 # 生成文档
 generate_docs() {
     log_info "生成文档..."
-    
+
     # 生成公共API文档
     cargo doc --no-deps --all-features
-    
+
     # 生成私有API文档
     cargo doc --no-deps --document-private-items --all-features
-    
+
     log_success "文档生成完成"
     log_info "文档位置: target/doc"
 }
@@ -192,7 +192,7 @@ main() {
     local verbose=false
     local features=""
     local command=""
-    
+
     # 解析命令行参数
     while [[ $# -gt 0 ]]; do
         case $1 in
@@ -225,21 +225,21 @@ main() {
                 ;;
         esac
     done
-    
+
     # 如果没有指定命令，显示帮助
     if [[ -z "$command" ]]; then
         show_help
         exit 0
     fi
-    
+
     # 设置详细输出
     if [[ "$verbose" == true ]]; then
         set -x
     fi
-    
+
     # 检查Rust版本
     check_rust_version
-    
+
     # 执行命令
     case $command in
         check)

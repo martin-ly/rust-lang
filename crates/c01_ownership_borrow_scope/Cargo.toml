@@ -3,7 +3,7 @@ name = "c01_ownership_borrow_scope"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
-rust-version = "1.91"
+rust-version = "1.92"
 
 [dependencies]
 tokio = { workspace = true }
@@ -17,4 +17,3 @@ path = "src/lib.rs"
 [[bin]]
 name = "obs"
 path = "src/bin/main.rs"
-

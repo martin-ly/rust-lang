@@ -51,13 +51,13 @@ if errorlevel 1 (
 
 for /f "tokens=2" %%i in ('rustc --version') do set "RUST_VERSION=%%i"
 call :log_info "当前Rust版本: %RUST_VERSION%"
-call :log_info "需要Rust版本: 1.89.0"
+call :log_info "需要Rust版本: 1.92.0"
 
 REM 简单的版本检查
-if "%RUST_VERSION%"=="1.89.0" (
+if "%RUST_VERSION%"=="1.92.0" (
     call :log_success "Rust版本符合要求"
 ) else (
-    call :log_warning "Rust版本可能过低，建议升级到1.89.0或更高版本"
+    call :log_warning "Rust版本可能过低，建议升级到1.92.0或更高版本"
 )
 goto :eof
 

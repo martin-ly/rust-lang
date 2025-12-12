@@ -3,7 +3,7 @@ name = "c08_algorithms"
 version = "0.2.0"
 edition = "2024"
 resolver = "3"
-rust-version = "1.91"
+rust-version = "1.92"
 
 # 算法库CPU指令集优化配置在根Cargo.toml中统一管理
 

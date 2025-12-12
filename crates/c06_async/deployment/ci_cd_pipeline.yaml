@@ -1,7 +1,7 @@
 # Rust 1.90 异步特性 CI/CD 流水线配置
 # 支持多平台构建、测试和部署
 
-name: Rust 1.90 Async CI/CD Pipeline
+name: Rust 1.92 Async CI/CD Pipeline
 
 on:
   push:
@@ -21,7 +21,7 @@ on:
     - cron: '0 2 * * *'
 
 env:
-  RUST_VERSION: "1.90.0"
+  RUST_VERSION: "1.92.0"
   CARGO_TERM_COLOR: always
   RUST_BACKTRACE: full
 
@@ -34,7 +34,7 @@ jobs:
       - name: 检出代码
         uses: actions/checkout@v4
 
-      - name: 设置 Rust 1.90
+      - name: 设置 Rust 1.92
         uses: actions-rs/toolchain@v1
         with:
           toolchain: ${{ env.RUST_VERSION }}
@@ -72,16 +72,16 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        rust-version: ["1.90.0", "beta", "nightly"]
+        rust-version: ["1.92.0", "beta", "nightly"]
         include:
           - os: ubuntu-latest
-            rust-version: "1.90.0"
+            rust-version: "1.92.0"
             target: "x86_64-unknown-linux-gnu"
           - os: windows-latest
-            rust-version: "1.90.0"
+            rust-version: "1.92.0"
             target: "x86_64-pc-windows-msvc"
           - os: macos-latest
-            rust-version: "1.90.0"
+            rust-version: "1.92.0"
             target: "x86_64-apple-darwin"
 
     steps:
@@ -130,7 +130,7 @@ jobs:
     name: 性能基准测试
     runs-on: ubuntu-latest
     if: github.event_name == 'schedule' || contains(github.event.head_commit.message, '[benchmark]')
-    
+
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
@@ -170,7 +170,7 @@ jobs:
   security:
     name: 安全扫描
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: 检出代码
         uses: actions/checkout@v4

@@ -56,36 +56,36 @@ impl ServiceDiscovery {
             health_check_interval,
             discovery_stats: Arc::new(RwLock::new(DiscoveryStats::default())),
         };
-        
+
         // 启动心跳监控任务
         let discovery_clone = discovery.clone();
         tokio::spawn(async move {
             discovery_clone.heartbeat_monitor().await;
         });
-        
+
         // 启动健康检查任务
         let discovery_clone = discovery.clone();
         tokio::spawn(async move {
             discovery_clone.health_check_monitor().await;
         });
-        
+
         discovery
     }
 
     pub async fn register_service(&self, service_name: String, instance: ServiceInstance) -> Result<()> {
         let mut services = self.services.write().await;
         let service_instances = services.entry(service_name.clone()).or_insert_with(Vec::new);
-        
+
         // 检查是否已存在相同ID的实例
         if service_instances.iter().any(|i| i.id == instance.id) {
             return Err(anyhow::anyhow!("服务实例 {} 已存在", instance.id));
         }
-        
+
         service_instances.push(instance.clone());
-        
+
         let mut stats = self.discovery_stats.write().await;
         stats.total_registrations += 1;
-        
+
         info!("注册服务实例: {} ({})", service_name, instance.id);
         Ok(())
     }
@@ -94,14 +94,14 @@ impl ServiceDiscovery {
         let mut services = self.services.write().await;
         if let Some(instances) = services.get_mut(service_name) {
             instances.retain(|instance| instance.id != instance_id);
-            
+
             if instances.is_empty() {
                 services.remove(service_name);
             }
-            
+
             let mut stats = self.discovery_stats.write().await;
             stats.total_deregistrations += 1;
-            
+
             info!("注销服务实例: {} ({})", service_name, instance_id);
             Ok(())
         } else {
@@ -118,7 +118,7 @@ impl ServiceDiscovery {
                 .filter(|instance| instance.health_status == HealthStatus::Healthy)
                 .cloned()
                 .collect();
-            
+
             info!("发现服务 {} 的 {} 个健康实例", service_name, healthy_instances.len());
             Ok(healthy_instances)
         } else {
@@ -143,11 +143,11 @@ impl ServiceDiscovery {
         let mut interval = tokio::time::interval(self.heartbeat_interval);
         loop {
             interval.tick().await;
-            
+
             let mut services = self.services.write().await;
             let mut stats = self.discovery_stats.write().await;
             let now = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_secs();
-            
+
             for (service_name, instances) in services.iter_mut() {
                 for instance in instances.iter_mut() {
                     let time_since_heartbeat = now - instance.last_heartbeat;
@@ -157,7 +157,7 @@ impl ServiceDiscovery {
                     }
                 }
             }
-            
+
             stats.health_checks_performed += 1;
         }
     }
@@ -166,7 +166,7 @@ impl ServiceDiscovery {
         let mut interval = tokio::time::interval(self.health_check_interval);
         loop {
             interval.tick().await;
-            
+
             let services = self.services.read().await;
             for (service_name, instances) in services.iter() {
                 for instance in instances {
@@ -260,7 +260,7 @@ impl LoadBalancer {
 
     pub async fn select_instance(&self, service_name: &str) -> Result<ServiceInstance> {
         let instances = self.discovery.discover_services(service_name).await?;
-        
+
         if instances.is_empty() {
             return Err(anyhow::anyhow!("没有可用的服务实例: {}", service_name));
         }
@@ -310,16 +310,17 @@ impl LoadBalancer {
         instances[0].clone()
     }
 
+    #[allow(unused_assignments)]
     pub async fn record_request_result(&self, instance_id: &str, success: bool) {
         let mut circuit_breaker = self.get_circuit_breaker(instance_id).await;
-        
+
         if success {
             circuit_breaker.failure_count = 0;
             circuit_breaker.state = CircuitState::Closed;
         } else {
             circuit_breaker.failure_count += 1;
             circuit_breaker.last_failure_time = Some(Instant::now());
-            
+
             if circuit_breaker.failure_count >= circuit_breaker.failure_threshold {
                 circuit_breaker.state = CircuitState::Open;
                 let mut stats = self.lb_stats.write().await;
@@ -396,7 +397,7 @@ pub struct MessageQueueStats {
 impl DistributedMessageQueue {
     pub fn new() -> Self {
         let (broadcast_tx, _) = broadcast::channel(1000);
-        
+
         Self {
             queues: Arc::new(RwLock::new(HashMap::new())),
             subscribers: Arc::new(RwLock::new(HashMap::new())),
@@ -478,7 +479,7 @@ impl DistributedMessageQueue {
     pub async fn get_queue_stats(&self, topic: &str) -> Result<QueueStats> {
         let queues = self.queues.read().await;
         let queue_size = queues.get(topic).map(|q| q.len()).unwrap_or(0);
-        
+
         let subscribers = self.subscribers.read().await;
         let subscriber_count = subscribers.get(topic).map(|s| s.len()).unwrap_or(0);
 
@@ -544,7 +545,7 @@ impl DistributedConfigManager {
     pub async fn set_config(&self, key: String, value: String) -> Result<()> {
         let now = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_secs();
         let mut configs = self.configurations.write().await;
-        
+
         let config = Configuration {
             key: key.clone(),
             value: value.clone(),
@@ -552,18 +553,18 @@ impl DistributedConfigManager {
             created_at: configs.get(&key).map(|c| c.created_at).unwrap_or(now),
             updated_at: now,
         };
-        
+
         configs.insert(key.clone(), config);
-        
+
         let mut stats = self.config_stats.write().await;
         stats.config_updates += 1;
         if configs.len() > stats.total_configs {
             stats.total_configs = configs.len();
         }
-        
+
         // 通知观察者
         self.notify_watchers(&key, &value).await;
-        
+
         info!("设置配置: {} = {}", key, value);
         Ok(())
     }
@@ -579,11 +580,11 @@ impl DistributedConfigManager {
             key: key.clone(),
             callback: format!("callback_{}", watcher_id),
         };
-        
+
         let mut watchers = self.watchers.write().await;
         let key_watchers = watchers.entry(key.clone()).or_insert_with(Vec::new);
         key_watchers.push(watcher);
-        
+
         info!("配置观察者 {} 开始监听 {}", watcher_id, key);
         Ok(())
     }
@@ -593,7 +594,7 @@ impl DistributedConfigManager {
         if let Some(key_watchers) = watchers.get(key) {
             let mut stats = self.config_stats.write().await;
             stats.watcher_notifications += key_watchers.len();
-            
+
             for watcher in key_watchers {
                 debug!("通知观察者 {}: {} = {}", watcher.id, key, value);
             }
@@ -609,7 +610,7 @@ impl DistributedConfigManager {
 #[allow(unused_variables)]
 async fn main() -> Result<()> {
     tracing_subscriber::fmt::init();
-    
+
     info!("🚀 开始 2025 年分布式异步模式演示");
 
     // 1. 演示分布式服务发现
@@ -618,7 +619,7 @@ async fn main() -> Result<()> {
         Duration::from_secs(10),
         Duration::from_secs(30)
     );
-    
+
     // 注册一些服务实例
     for i in 0..5 {
         let instance = ServiceInstance {
@@ -631,21 +632,21 @@ async fn main() -> Result<()> {
             registered_at: std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_secs(),
             last_heartbeat: std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_secs(),
         };
-        
+
         discovery.register_service("user-service".to_string(), instance).await?;
     }
-    
+
     // 发现服务
     let instances = discovery.discover_services("user-service").await?;
     info!("发现 {} 个用户服务实例", instances.len());
-    
+
     let stats = discovery.get_stats().await;
     info!("服务发现统计: 注册 {}, 注销 {}", stats.total_registrations, stats.total_deregistrations);
 
     // 2. 演示分布式负载均衡器
     info!("⚖️ 演示分布式负载均衡器");
     let load_balancer = LoadBalancer::new(discovery.clone(), LoadBalancingStrategy::RoundRobin);
-    
+
     // 模拟负载均衡请求
     for i in 0..10 {
         match load_balancer.select_instance("user-service").await {
@@ -660,26 +661,26 @@ async fn main() -> Result<()> {
             }
         }
     }
-    
+
     let lb_stats = load_balancer.get_stats().await;
-    info!("负载均衡统计: 总请求 {}, 成功 {}, 失败 {}", 
+    info!("负载均衡统计: 总请求 {}, 成功 {}, 失败 {}",
           lb_stats.total_requests, lb_stats.successful_requests, lb_stats.failed_requests);
 
     // 3. 演示分布式消息队列
     info!("📨 演示分布式消息队列");
     let message_queue = DistributedMessageQueue::new();
-    
+
     // 订阅主题
     for i in 0..3 {
         message_queue.subscribe("user-events".to_string(), format!("subscriber_{}", i)).await?;
     }
-    
+
     // 发布消息
     for i in 0..10 {
         let payload = format!("用户事件 {}", i);
         message_queue.publish("user-events".to_string(), payload).await?;
     }
-    
+
     // 消费消息
     for i in 0..3 {
         for j in 0..3 {
@@ -688,36 +689,36 @@ async fn main() -> Result<()> {
             }
         }
     }
-    
+
     let queue_stats = message_queue.get_stats().await;
     info!("消息队列统计: 发布 {}, 消费 {}", queue_stats.total_published, queue_stats.total_consumed);
 
     // 4. 演示分布式配置管理
     info!("⚙️ 演示分布式配置管理");
     let config_manager = DistributedConfigManager::new();
-    
+
     // 设置配置
     config_manager.set_config("database.url".to_string(), "postgresql://localhost:5432/mydb".to_string()).await?;
     config_manager.set_config("redis.host".to_string(), "localhost".to_string()).await?;
     config_manager.set_config("api.timeout".to_string(), "30".to_string()).await?;
-    
+
     // 监听配置变化
     config_manager.watch_config("database.url".to_string(), "watcher_1".to_string()).await?;
     config_manager.watch_config("redis.host".to_string(), "watcher_2".to_string()).await?;
-    
+
     // 更新配置
     config_manager.set_config("database.url".to_string(), "postgresql://prod-db:5432/mydb".to_string()).await?;
-    
+
     // 获取配置
     if let Some(config) = config_manager.get_config("database.url").await? {
         info!("数据库配置: {} = {} (版本: {})", config.key, config.value, config.version);
     }
-    
+
     let config_stats = config_manager.get_stats().await;
-    info!("配置管理统计: 总配置 {}, 更新 {}, 通知 {}", 
+    info!("配置管理统计: 总配置 {}, 更新 {}, 通知 {}",
           config_stats.total_configs, config_stats.config_updates, config_stats.watcher_notifications);
 
     info!("✅ 2025 年分布式异步模式演示完成!");
-    
+
     Ok(())
 }

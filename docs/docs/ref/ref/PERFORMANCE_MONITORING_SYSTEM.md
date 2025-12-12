@@ -3,37 +3,39 @@
 
 ## 📊 目录
 
-- [📋 监控体系概述](#监控体系概述)
-- [🎯 监控目标](#监控目标)
-  - [主要目标](#主要目标)
-  - [具体目标](#具体目标)
-- [🛠️ 监控工具和框架](#️-监控工具和框架)
-  - [基准测试工具](#基准测试工具)
-    - [Criterion基准测试](#criterion基准测试)
-    - [内存使用监控](#内存使用监控)
-  - [性能分析工具](#性能分析工具)
-    - [性能分析器集成](#性能分析器集成)
-    - [异步性能监控](#异步性能监控)
-- [📊 监控指标和阈值](#监控指标和阈值)
-  - [性能指标定义](#性能指标定义)
-  - [性能基准数据](#性能基准数据)
-- [🚀 性能优化策略](#性能优化策略)
-  - [所有权优化](#所有权优化)
-  - [内存优化](#内存优化)
-  - [并发优化](#并发优化)
-- [📈 监控报告和可视化](#监控报告和可视化)
-  - [性能报告生成](#性能报告生成)
-- [🔍 监控最佳实践](#监控最佳实践)
-  - [监控策略](#监控策略)
-  - [优化策略](#优化策略)
-- [📞 监控维护](#监控维护)
-  - [自动化监控](#自动化监控)
-  - [监控维护](#监控维护)
+- [� Rust学习项目性能监控体系](#-rust学习项目性能监控体系)
+  - [📊 目录](#-目录)
+  - [📋 监控体系概述](#-监控体系概述)
+  - [🎯 监控目标](#-监控目标)
+    - [主要目标](#主要目标)
+    - [具体目标](#具体目标)
+  - [🛠️ 监控工具和框架](#️-监控工具和框架)
+    - [基准测试工具](#基准测试工具)
+      - [Criterion基准测试](#criterion基准测试)
+      - [内存使用监控](#内存使用监控)
+    - [性能分析工具](#性能分析工具)
+      - [性能分析器集成](#性能分析器集成)
+      - [异步性能监控](#异步性能监控)
+  - [📊 监控指标和阈值](#-监控指标和阈值)
+    - [性能指标定义](#性能指标定义)
+    - [性能基准数据](#性能基准数据)
+  - [🚀 性能优化策略](#-性能优化策略)
+    - [所有权优化](#所有权优化)
+    - [内存优化](#内存优化)
+    - [并发优化](#并发优化)
+  - [📈 监控报告和可视化](#-监控报告和可视化)
+    - [性能报告生成](#性能报告生成)
+  - [🔍 监控最佳实践](#-监控最佳实践)
+    - [监控策略](#监控策略)
+    - [优化策略](#优化策略)
+  - [📞 监控维护](#-监控维护)
+    - [自动化监控](#自动化监控)
+    - [监控维护](#监控维护)
 
 
-**创建时间**: 2025年9月25日 14:10  
-**版本**: v1.0  
-**适用对象**: Rust开发者  
+**创建时间**: 2025年9月25日 14:10
+**版本**: v1.0
+**适用对象**: Rust开发者
 
 ---
 
@@ -74,47 +76,47 @@ use c01_ownership_borrow_scope::*;
 
 fn bench_ownership_operations(c: &mut Criterion) {
     let mut group = c.benchmark_group("ownership");
-    
+
     group.bench_function("move_semantics", |b| {
         let data = create_test_data(1000);
         b.iter(|| {
             black_box(take_ownership(data.clone()))
         })
     });
-    
+
     group.bench_function("borrow_semantics", |b| {
         let data = create_test_data(1000);
         b.iter(|| {
             black_box(borrow_data(&data))
         })
     });
-    
+
     group.bench_function("clone_operation", |b| {
         let data = create_test_data(1000);
         b.iter(|| {
             black_box(data.clone())
         })
     });
-    
+
     group.finish();
 }
 
 fn bench_type_system_operations(c: &mut Criterion) {
     let mut group = c.benchmark_group("type_system");
-    
+
     group.bench_function("generic_instantiation", |b| {
         b.iter(|| {
             black_box(generic_function::<i32>(1000))
         })
     });
-    
+
     group.bench_function("trait_dispatch", |b| {
         let data = create_trait_objects(1000);
         b.iter(|| {
             black_box(process_trait_objects(&data))
         })
     });
-    
+
     group.finish();
 }
 
@@ -141,15 +143,15 @@ impl MemoryMonitor {
             deallocated: AtomicUsize::new(0),
         }
     }
-    
+
     pub fn get_current_usage(&self) -> usize {
         self.allocated.load(Ordering::SeqCst) - self.deallocated.load(Ordering::SeqCst)
     }
-    
+
     pub fn get_total_allocated(&self) -> usize {
         self.allocated.load(Ordering::SeqCst)
     }
-    
+
     pub fn get_total_deallocated(&self) -> usize {
         self.deallocated.load(Ordering::SeqCst)
     }
@@ -163,7 +165,7 @@ unsafe impl GlobalAlloc for MemoryMonitor {
         }
         ptr
     }
-    
+
     unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
         System.dealloc(ptr, layout);
         self.deallocated.fetch_add(layout.size(), Ordering::SeqCst);
@@ -191,7 +193,7 @@ impl PerformanceProfiler {
             measurements: Vec::new(),
         }
     }
-    
+
     pub fn measure<F, R>(&mut self, name: &str, f: F) -> R
     where
         F: FnOnce() -> R,
@@ -199,28 +201,28 @@ impl PerformanceProfiler {
         let start = Instant::now();
         let result = f();
         let duration = start.elapsed();
-        
+
         self.measurements.push((name.to_string(), duration));
         result
     }
-    
+
     pub fn get_measurements(&self) -> &[(String, Duration)] {
         &self.measurements
     }
-    
+
     pub fn get_total_time(&self) -> Duration {
         self.start_time.elapsed()
     }
-    
+
     pub fn print_report(&self) {
         println!("=== Performance Report ===");
         println!("Total execution time: {:?}", self.get_total_time());
         println!("\nIndividual measurements:");
-        
+
         for (name, duration) in &self.measurements {
             println!("  {}: {:?}", name, duration);
         }
-        
+
         println!("\nPercentage breakdown:");
         let total = self.get_total_time().as_nanos() as f64;
         for (name, duration) in &self.measurements {
@@ -249,7 +251,7 @@ impl AsyncPerformanceMonitor {
             task_times: Arc::new(tokio::sync::Mutex::new(HashMap::new())),
         }
     }
-    
+
     pub async fn measure_task<F, R>(&self, task_name: &str, task: F) -> R
     where
         F: std::future::Future<Output = R>,
@@ -257,33 +259,33 @@ impl AsyncPerformanceMonitor {
         let start = Instant::now();
         let result = task.await;
         let duration = start.elapsed();
-        
+
         let mut times = self.task_times.lock().await;
         times.entry(task_name.to_string())
             .or_insert_with(Vec::new)
             .push(duration);
-        
+
         result
     }
-    
+
     pub async fn get_statistics(&self, task_name: &str) -> Option<TaskStatistics> {
         let times = self.task_times.lock().await;
         let durations = times.get(task_name)?;
-        
+
         if durations.is_empty() {
             return None;
         }
-        
+
         let mut sorted = durations.clone();
         sorted.sort();
-        
+
         let count = durations.len();
         let total: Duration = durations.iter().sum();
         let average = total / count as u32;
         let median = sorted[count / 2];
         let min = sorted[0];
         let max = sorted[count - 1];
-        
+
         Some(TaskStatistics {
             count,
             total,
@@ -338,38 +340,38 @@ impl PerformanceThresholds {
             min_throughput: 1000.0, // 1000 ops/sec
         }
     }
-    
+
     pub fn check_violations(&self, metrics: &PerformanceMetrics) -> Vec<Violation> {
         let mut violations = Vec::new();
-        
+
         if metrics.execution_time > self.max_execution_time {
             violations.push(Violation::ExecutionTimeTooHigh {
                 actual: metrics.execution_time,
                 threshold: self.max_execution_time,
             });
         }
-        
+
         if metrics.memory_usage > self.max_memory_usage {
             violations.push(Violation::MemoryUsageTooHigh {
                 actual: metrics.memory_usage,
                 threshold: self.max_memory_usage,
             });
         }
-        
+
         if metrics.cpu_usage > self.max_cpu_usage {
             violations.push(Violation::CpuUsageTooHigh {
                 actual: metrics.cpu_usage,
                 threshold: self.max_cpu_usage,
             });
         }
-        
+
         if metrics.throughput < self.min_throughput {
             violations.push(Violation::ThroughputTooLow {
                 actual: metrics.throughput,
                 threshold: self.min_throughput,
             });
         }
-        
+
         violations
     }
 }
@@ -413,18 +415,18 @@ impl BenchmarkDatabase {
             benchmarks: HashMap::new(),
         }
     }
-    
+
     pub fn add_benchmark(&mut self, name: String, data: BenchmarkData) {
         self.benchmarks.insert(name, data);
     }
-    
+
     pub fn get_performance_change(&self, name: &str) -> Option<f64> {
         let data = self.benchmarks.get(name)?;
-        let change = (data.current.as_nanos() as f64 - data.baseline.as_nanos() as f64) 
+        let change = (data.current.as_nanos() as f64 - data.baseline.as_nanos() as f64)
             / data.baseline.as_nanos() as f64;
         Some(change * 100.0) // 返回百分比变化
     }
-    
+
     pub fn get_regressions(&self) -> Vec<String> {
         self.benchmarks
             .iter()
@@ -448,21 +450,21 @@ use std::time::Instant;
 pub fn optimize_ownership_patterns() {
     // 1. 使用引用而不是克隆
     let data = vec![1, 2, 3, 4, 5];
-    
+
     // 不好的做法
     let start = Instant::now();
     for _ in 0..1000 {
         let _ = process_data(data.clone()); // 不必要的克隆
     }
     let bad_time = start.elapsed();
-    
+
     // 好的做法
     let start = Instant::now();
     for _ in 0..1000 {
         let _ = process_data_ref(&data); // 使用引用
     }
     let good_time = start.elapsed();
-    
+
     println!("克隆方式耗时: {:?}", bad_time);
     println!("引用方式耗时: {:?}", good_time);
     println!("性能提升: {:.2}x", bad_time.as_nanos() as f64 / good_time.as_nanos() as f64);
@@ -489,19 +491,19 @@ pub fn optimize_memory_usage() {
     for i in 0..1000 {
         vec.push(i);
     }
-    
+
     // 2. 使用合适的数据结构
     let mut deque = VecDeque::with_capacity(1000);
     for i in 0..1000 {
         deque.push_back(i);
     }
-    
+
     // 3. 避免不必要的分配
     let result = (0..1000)
         .filter(|&x| x % 2 == 0)
         .map(|x| x * 2)
         .collect::<Vec<_>>();
-    
+
     println!("优化后的结果长度: {}", result.len());
 }
 ```
@@ -518,9 +520,9 @@ pub fn optimize_concurrency() {
     let data = Arc::new(Mutex::new(vec![0; 1000000]));
     let num_threads = 4;
     let chunk_size = 1000000 / num_threads;
-    
+
     let start = Instant::now();
-    
+
     let handles: Vec<_> = (0..num_threads)
         .map(|i| {
             let data = Arc::clone(&data);
@@ -532,18 +534,18 @@ pub fn optimize_concurrency() {
                 } else {
                     (i + 1) * chunk_size
                 };
-                
+
                 for j in start_idx..end_idx {
                     data[j] = j as i32 * 2;
                 }
             })
         })
         .collect();
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     let duration = start.elapsed();
     println!("并发处理耗时: {:?}", duration);
 }
@@ -597,7 +599,7 @@ impl PerformanceReport {
 <body>
     <h1>Performance Report</h1>
     <p>Generated at: {}</p>
-    
+
     <h2>Summary</h2>
     <ul>
         <li>Total Benchmarks: {}</li>
@@ -605,7 +607,7 @@ impl PerformanceReport {
         <li>Total Memory Usage: {} bytes</li>
         <li>Regressions: {}</li>
     </ul>
-    
+
     <h2>Benchmark Results</h2>
     <table border="1">
         <tr>
@@ -634,7 +636,7 @@ impl PerformanceReport {
                 .join("\n")
         )
     }
-    
+
     pub fn save_to_file(&self, filename: &str) -> std::io::Result<()> {
         let mut file = File::create(filename)?;
         let json = serde_json::to_string_pretty(self)?;
@@ -705,9 +707,9 @@ jobs:
 
 ---
 
-**监控体系状态**: 🔄 持续更新中  
-**最后更新**: 2025年9月25日 14:10  
-**适用版本**: Rust 1.70+  
+**监控体系状态**: 🔄 持续更新中
+**最后更新**: 2025年9月25日 14:10
+**适用版本**: Rust 1.70+
 
 ---
 

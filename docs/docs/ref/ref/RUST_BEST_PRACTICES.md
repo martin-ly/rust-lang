@@ -3,41 +3,43 @@
 
 ## 📊 目录
 
-- [📋 实践概述](#实践概述)
-- [🎨 代码风格](#代码风格)
-  - [命名规范](#命名规范)
-  - [代码组织](#代码组织)
-- [🔒 所有权和借用](#所有权和借用)
-  - [所有权最佳实践](#所有权最佳实践)
-  - [借用最佳实践](#借用最佳实践)
-- [🎯 错误处理](#错误处理)
-  - [Result和Option使用](#result和option使用)
-  - [自定义错误类型](#自定义错误类型)
-- [🚀 性能优化](#性能优化)
-  - [内存优化](#内存优化)
-  - [算法优化](#算法优化)
-- [🔄 并发编程](#并发编程)
-  - [线程安全](#线程安全)
-  - [异步编程](#异步编程)
-- [🧪 测试最佳实践](#测试最佳实践)
-  - [单元测试](#单元测试)
-  - [集成测试](#集成测试)
-- [📦 依赖管理](#依赖管理)
-  - [Cargo.toml最佳实践](#cargotoml最佳实践)
-- [🔍 代码审查](#代码审查)
-  - [审查要点](#审查要点)
-- [📚 文档最佳实践](#文档最佳实践)
-  - [API文档](#api文档)
-- [🚨 常见陷阱](#常见陷阱)
-  - [避免的常见错误](#避免的常见错误)
-- [📞 实践建议](#实践建议)
-  - [持续改进](#持续改进)
-  - [工具使用](#工具使用)
+- [🦀 Rust最佳实践指南](#-rust最佳实践指南)
+  - [📊 目录](#-目录)
+  - [📋 实践概述](#-实践概述)
+  - [🎨 代码风格](#-代码风格)
+    - [命名规范](#命名规范)
+    - [代码组织](#代码组织)
+  - [🔒 所有权和借用](#-所有权和借用)
+    - [所有权最佳实践](#所有权最佳实践)
+    - [借用最佳实践](#借用最佳实践)
+  - [🎯 错误处理](#-错误处理)
+    - [Result和Option使用](#result和option使用)
+    - [自定义错误类型](#自定义错误类型)
+  - [🚀 性能优化](#-性能优化)
+    - [内存优化](#内存优化)
+    - [算法优化](#算法优化)
+  - [🔄 并发编程](#-并发编程)
+    - [线程安全](#线程安全)
+    - [异步编程](#异步编程)
+  - [🧪 测试最佳实践](#-测试最佳实践)
+    - [单元测试](#单元测试)
+    - [集成测试](#集成测试)
+  - [📦 依赖管理](#-依赖管理)
+    - [Cargo.toml最佳实践](#cargotoml最佳实践)
+  - [🔍 代码审查](#-代码审查)
+    - [审查要点](#审查要点)
+  - [📚 文档最佳实践](#-文档最佳实践)
+    - [API文档](#api文档)
+  - [🚨 常见陷阱](#-常见陷阱)
+    - [避免的常见错误](#避免的常见错误)
+  - [📞 实践建议](#-实践建议)
+    - [持续改进](#持续改进)
+    - [工具使用](#工具使用)
 
 
-**创建时间**: 2025年9月25日 13:32  
-**版本**: v1.0  
-**适用范围**: Rust 1.70+  
+**创建时间**: 2025年9月25日 13:32
+**版本**: v1.0
+**适用范围**: Rust 1.70+
 
 ---
 
@@ -81,17 +83,17 @@ fn get_user_score_but_also_update_cache_and_log_the_result() -> Score {
 pub mod user {
     use crate::database::Connection;
     use crate::error::Result;
-    
+
     pub struct User {
         pub id: UserId,
         pub name: String,
     }
-    
+
     impl User {
         pub fn new(id: UserId, name: String) -> Self {
             Self { id, name }
         }
-        
+
         pub async fn save(&self, conn: &Connection) -> Result<()> {
             // 实现逻辑
             Ok(())
@@ -206,13 +208,13 @@ use thiserror::Error;
 pub enum AppError {
     #[error("Database error: {0}")]
     Database(#[from] sqlx::Error),
-    
+
     #[error("IO error: {0}")]
     Io(#[from] std::io::Error),
-    
+
     #[error("Invalid input: {field}")]
     InvalidInput { field: String },
-    
+
     #[error("User not found: {user_id}")]
     UserNotFound { user_id: String },
 }
@@ -220,14 +222,14 @@ pub enum AppError {
 // 使用自定义错误
 fn get_user_by_id(user_id: &str) -> Result<User, AppError> {
     if user_id.is_empty() {
-        return Err(AppError::InvalidInput { 
-            field: "user_id".to_string() 
+        return Err(AppError::InvalidInput {
+            field: "user_id".to_string()
         });
     }
-    
+
     database::find_user(user_id)
-        .map_err(|_| AppError::UserNotFound { 
-            user_id: user_id.to_string() 
+        .map_err(|_| AppError::UserNotFound {
+            user_id: user_id.to_string()
         })
 }
 ```
@@ -320,13 +322,13 @@ fn parallel_processing(data: Vec<i32>) -> Vec<i32> {
     for chunk in data.chunks(4) {
         let data = Arc::clone(&data);
         let results = Arc::clone(&results);
-        
+
         let handle = thread::spawn(move || {
             let processed: Vec<i32> = chunk.iter().map(|&x| x * 2).collect();
             let mut results = results.lock().unwrap();
             results.extend(processed);
         });
-        
+
         handles.push(handle);
     }
 
@@ -340,15 +342,15 @@ fn parallel_processing(data: Vec<i32>) -> Vec<i32> {
 // ❌ 避免的并发问题
 fn bad_parallel_processing(data: Vec<i32>) -> Vec<i32> {
     let mut results = Vec::new(); // 不是线程安全的
-    
+
     for chunk in data.chunks(4) {
         let handle = thread::spawn(move || {
             chunk.iter().map(|&x| x * 2).collect::<Vec<_>>()
         });
-        
+
         results.extend(handle.join().unwrap()); // 可能导致数据竞争
     }
-    
+
     results
 }
 ```
@@ -364,7 +366,7 @@ async fn read_and_process_file(path: &str) -> Result<String, Box<dyn std::error:
     let mut file = fs::File::open(path).await?;
     let mut contents = String::new();
     file.read_to_string(&mut contents).await?;
-    
+
     // 异步处理内容
     let processed = process_content_async(contents).await;
     Ok(processed)
@@ -432,14 +434,14 @@ mod integration_tests {
     async fn test_database_operations() {
         let temp_dir = tempdir().unwrap();
         let db_path = temp_dir.path().join("test.db");
-        
+
         // 设置测试数据库
         let conn = setup_test_database(&db_path).await.unwrap();
-        
+
         // 测试用户创建
         let user = User::new(UserId::new("test"), "Test User".to_string());
         user.save(&conn).await.unwrap();
-        
+
         // 验证用户已保存
         let retrieved = User::find_by_id(&conn, &user.id).await.unwrap();
         assert_eq!(retrieved.name, "Test User");
@@ -498,11 +500,11 @@ pub fn process_data(input: &str) -> Result<Vec<String>, ProcessError> {
     // 2. 错误处理是否完整？
     // 3. 性能是否合理？
     // 4. 是否遵循所有权最佳实践？
-    
+
     if input.is_empty() {
         return Err(ProcessError::EmptyInput);
     }
-    
+
     input
         .lines()
         .map(|line| line.trim().to_string())
@@ -516,7 +518,7 @@ pub fn bad_process_data(input: String) -> Vec<String> {
     // 1. 不必要地获取所有权
     // 2. 没有错误处理
     // 3. 性能可能有问题
-    
+
     input.lines()
          .map(|line| line.to_string()) // 不必要的克隆
          .collect()
@@ -531,20 +533,20 @@ pub fn bad_process_data(input: String) -> Vec<String> {
 
 ```rust
 /// 计算用户得分的统计信息
-/// 
+///
 /// # 参数
 /// * `scores` - 用户得分列表，不能为空
-/// 
+///
 /// # 返回值
 /// 返回包含平均值、最大值和最小值的统计信息
-/// 
+///
 /// # 错误
 /// 如果输入为空，返回`EmptyScoresError`
-/// 
+///
 /// # 示例
 /// ```
 /// use my_crate::calculate_user_stats;
-/// 
+///
 /// let scores = vec![85, 92, 78, 96];
 /// let stats = calculate_user_stats(&scores)?;
 /// println!("平均分: {}", stats.average);
@@ -612,9 +614,9 @@ fn good_lifetime(data: &[&str]) -> Option<&str> {
 
 ---
 
-**指南状态**: 🔄 持续更新中  
-**最后更新**: 2025年9月25日 13:32  
-**适用范围**: Rust 1.70+  
+**指南状态**: 🔄 持续更新中
+**最后更新**: 2025年9月25日 13:32
+**适用范围**: Rust 1.70+
 
 ---
 

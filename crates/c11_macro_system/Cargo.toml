@@ -2,7 +2,7 @@
 name = "c11_macro_system"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.91"
+rust-version = "1.92"
 authors = ["Rust Learning Community"]
 description = "C11: Comprehensive Rust Macro System Learning Module"
 license = "MIT"
@@ -54,4 +54,3 @@ path = "examples/04_recursive_macros.rs"
 [package.metadata.docs.rs]
 all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
-

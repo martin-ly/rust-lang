@@ -19,7 +19,7 @@ members = [
 
 [workspace.package]
 edition = "2024"
-rust-version = "1.91.1" # 使用最新稳定版本 (Rust 1.91.1)
+rust-version = "1.92.0" # 使用最新稳定版本 (Rust 1.92.0)
 
 
 [profile.release]

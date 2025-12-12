@@ -317,6 +317,7 @@ pub mod ownership_utils;
 pub mod rust_190_features;
 pub mod rust_190_latest_features;
 pub mod rust_191_features;
+pub mod rust_192_features;
 
 // 重新导出主要类型 / Re-export main types
 // 使用具体的导出而不是通配符导出以避免名称冲突 / Use specific exports instead of wildcard exports to avoid name conflicts
@@ -478,6 +479,35 @@ pub use rust_191_features::{
     // 主要功能函数 / Main function functions
     run_all_rust_191_features_examples,
     get_rust_191_features_info,
+};
+
+// 从 rust_192_features 模块导出 / Export from rust_192_features module
+pub use rust_192_features::{
+    // MaybeUninit 安全使用 / Safe MaybeUninit Usage
+    SafeMaybeUninit,
+    // 联合体原始引用 / Union Raw References
+    Rust192Union,
+    // 自动特征和 Sized 边界 / Auto-Trait and Sized Bounds
+    Rust192Trait,
+    // 零大小数组 / Zero-Sized Arrays
+    Rust192ZeroSizedArray,
+    // 多边界关联项 / Multiple Bounds for Associated Items
+    Rust192MultipleBounds,
+    // 主要功能函数 / Main function functions
+    run_all_rust_192_features_examples,
+    get_rust_192_features_info,
+    // 实用函数 / Utility functions
+    rust_192_tracked_function,
+    rust_192_never_type_example,
+    rust_192_higher_ranked_lifetime,
+    rust_192_must_use_result,
+    rust_192_nonzero_div_ceil_example,
+    rust_192_location_file_as_c_str_example,
+    rust_192_rotate_right_example,
+    rust_192_iterator_eq_example,
+    rust_192_tuple_extend_example,
+    rust_192_encode_wide_example,
+    rust_192_repeat_example,
 };
 
 /// 所有权系统版本 / Ownership System Version

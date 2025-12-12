@@ -3,52 +3,54 @@
 
 ## 📊 目录
 
-- [📋 框架概述](#框架概述)
-- [🎯 测试类型](#测试类型)
-  - [单元测试 (Unit Tests)](#单元测试-unit-tests)
-  - [集成测试 (Integration Tests)](#集成测试-integration-tests)
-  - [文档测试 (Doc Tests)](#文档测试-doc-tests)
-  - [基准测试 (Benchmark Tests)](#基准测试-benchmark-tests)
-- [🛠️ 测试工具](#️-测试工具)
-  - [内置测试框架](#内置测试框架)
-    - [基本测试宏](#基本测试宏)
-    - [断言宏](#断言宏)
-  - [第三方测试库](#第三方测试库)
-    - [使用proptest进行属性测试](#使用proptest进行属性测试)
-    - [使用mockall进行模拟测试](#使用mockall进行模拟测试)
-- [📝 测试最佳实践](#测试最佳实践)
-  - [测试组织结构](#测试组织结构)
-    - [模块化测试](#模块化测试)
-  - [测试数据管理](#测试数据管理)
-    - [测试夹具](#测试夹具)
-    - [临时文件测试](#临时文件测试)
-- [🔄 集成测试](#集成测试)
-  - [测试组织](#测试组织)
-    - [tests目录结构](#tests目录结构)
-    - [公共测试工具](#公共测试工具)
-    - [集成测试示例](#集成测试示例)
-- [📚 文档测试](#文档测试)
-  - [基本文档测试](#基本文档测试)
-  - [隐藏文档测试](#隐藏文档测试)
-- [⚡ 基准测试](#基准测试)
-  - [基本基准测试](#基本基准测试)
-  - [基准测试配置](#基准测试配置)
-- [🚀 测试运行](#测试运行)
-  - [Cargo测试命令](#cargo测试命令)
-  - [测试配置](#测试配置)
-- [📊 测试覆盖率](#测试覆盖率)
-  - [使用tarpaulin](#使用tarpaulin)
-  - [覆盖率配置](#覆盖率配置)
-- [🔍 测试调试](#测试调试)
-  - [调试技巧](#调试技巧)
-- [📞 测试最佳实践](#测试最佳实践)
-  - [测试原则](#测试原则)
-  - [测试命名](#测试命名)
+- [🧪 Rust测试框架指南](#-rust测试框架指南)
+  - [📊 目录](#-目录)
+  - [📋 框架概述](#-框架概述)
+  - [🎯 测试类型](#-测试类型)
+    - [单元测试 (Unit Tests)](#单元测试-unit-tests)
+    - [集成测试 (Integration Tests)](#集成测试-integration-tests)
+    - [文档测试 (Doc Tests)](#文档测试-doc-tests)
+    - [基准测试 (Benchmark Tests)](#基准测试-benchmark-tests)
+  - [🛠️ 测试工具](#️-测试工具)
+    - [内置测试框架](#内置测试框架)
+      - [基本测试宏](#基本测试宏)
+      - [断言宏](#断言宏)
+    - [第三方测试库](#第三方测试库)
+      - [使用proptest进行属性测试](#使用proptest进行属性测试)
+      - [使用mockall进行模拟测试](#使用mockall进行模拟测试)
+  - [📝 测试最佳实践](#-测试最佳实践)
+    - [测试组织结构](#测试组织结构)
+      - [模块化测试](#模块化测试)
+    - [测试数据管理](#测试数据管理)
+      - [测试夹具](#测试夹具)
+      - [临时文件测试](#临时文件测试)
+  - [🔄 集成测试](#-集成测试)
+    - [测试组织](#测试组织)
+      - [tests目录结构](#tests目录结构)
+      - [公共测试工具](#公共测试工具)
+      - [集成测试示例](#集成测试示例)
+  - [📚 文档测试](#-文档测试)
+    - [基本文档测试](#基本文档测试)
+    - [隐藏文档测试](#隐藏文档测试)
+  - [⚡ 基准测试](#-基准测试)
+    - [基本基准测试](#基本基准测试)
+    - [基准测试配置](#基准测试配置)
+  - [🚀 测试运行](#-测试运行)
+    - [Cargo测试命令](#cargo测试命令)
+    - [测试配置](#测试配置)
+  - [📊 测试覆盖率](#-测试覆盖率)
+    - [使用tarpaulin](#使用tarpaulin)
+    - [覆盖率配置](#覆盖率配置)
+  - [🔍 测试调试](#-测试调试)
+    - [调试技巧](#调试技巧)
+  - [📞 测试最佳实践](#-测试最佳实践-1)
+    - [测试原则](#测试原则)
+    - [测试命名](#测试命名)
 
 
-**创建时间**: 2025年9月25日 13:48  
-**版本**: v1.0  
-**适用对象**: Rust开发者  
+**创建时间**: 2025年9月25日 13:48
+**版本**: v1.0
+**适用对象**: Rust开发者
 
 ---
 
@@ -134,14 +136,14 @@ mod assertion_tests {
         // 基本断言
         assert!(true);
         assert!(false, "Custom panic message");
-        
+
         // 相等断言
         assert_eq!(2 + 2, 4);
         assert_ne!(3, 4);
-        
+
         // 浮点数断言（考虑精度）
         assert!((0.1 + 0.2 - 0.3).abs() < 1e-10);
-        
+
         // 字符串断言
         assert_eq!("hello", "hello");
         assert_ne!("hello", "world");
@@ -160,10 +162,10 @@ proptest! {
     #[test]
     fn test_addition_properties(a: i32, b: i32) {
         let result = a + b;
-        
+
         // 测试加法交换律
         prop_assert_eq!(result, b + a);
-        
+
         // 测试加法结合律
         prop_assert_eq!((a + b) + 1, a + (b + 1));
     }
@@ -178,7 +180,7 @@ use mockall::mock;
 
 mock! {
     Database {}
-    
+
     impl Database {
         fn get_user(&self, id: u32) -> Option<String>;
         fn save_user(&self, id: u32, name: String) -> bool;
@@ -192,13 +194,13 @@ mod mock_tests {
     #[test]
     fn test_database_mock() {
         let mut mock_db = MockDatabase::new();
-        
+
         mock_db
             .expect_get_user()
             .with(eq(1))
             .times(1)
             .returning(|_| Some("Alice".to_string()));
-        
+
         let result = mock_db.get_user(1);
         assert_eq!(result, Some("Alice".to_string()));
     }
@@ -219,7 +221,7 @@ pub mod calculator {
     pub fn add(a: i32, b: i32) -> i32 {
         a + b
     }
-    
+
     pub fn divide(a: i32, b: i32) -> Result<i32, String> {
         if b == 0 {
             Err("Division by zero".to_string())
@@ -327,14 +329,14 @@ mod file_tests {
     fn test_file_operations() {
         let temp_dir = tempdir().unwrap();
         let file_path = temp_dir.path().join("test.txt");
-        
+
         // 写入测试数据
         fs::write(&file_path, "Hello, World!").unwrap();
-        
+
         // 读取并验证
         let content = fs::read_to_string(&file_path).unwrap();
         assert_eq!(content, "Hello, World!");
-        
+
         // 临时目录会自动清理
     }
 }
@@ -399,22 +401,22 @@ use tests::common::utils;
 #[test]
 fn test_calculator_integration() {
     utils::setup_test_environment();
-    
+
     let calc = Calculator::new();
     let result = calc.evaluate("2 + 3 * 4");
-    
+
     assert_eq!(result, Ok(14));
-    
+
     utils::cleanup_test_environment();
 }
 
 #[test]
 fn test_database_integration() {
     let db = Database::new(":memory:").unwrap();
-    
+
     db.create_user("Alice", "alice@example.com").unwrap();
     let user = db.get_user_by_email("alice@example.com").unwrap();
-    
+
     assert_eq!(user.name, "Alice");
 }
 ```
@@ -427,18 +429,18 @@ fn test_database_integration() {
 
 ```rust
 /// 计算两个数的和
-/// 
+///
 /// # 参数
 /// * `a` - 第一个数字
 /// * `b` - 第二个数字
-/// 
+///
 /// # 返回值
 /// 返回两个数字的和
-/// 
+///
 /// # 示例
 /// ```
 /// use my_crate::add;
-/// 
+///
 /// let result = add(2, 3);
 /// assert_eq!(result, 5);
 /// ```
@@ -447,11 +449,11 @@ pub fn add(a: i32, b: i32) -> i32 {
 }
 
 /// 计算阶乘
-/// 
+///
 /// # 示例
 /// ```
 /// use my_crate::factorial;
-/// 
+///
 /// assert_eq!(factorial(5), 120);
 /// assert_eq!(factorial(0), 1);
 /// ```
@@ -467,7 +469,7 @@ pub fn factorial(n: u32) -> u32 {
 
 ```rust
 /// 内部辅助函数
-/// 
+///
 /// # 示例
 /// ```rust
 /// # use my_crate::internal_helper;
@@ -504,15 +506,15 @@ fn bench_slow_function(c: &mut Criterion) {
 
 fn bench_comparison(c: &mut Criterion) {
     let mut group = c.benchmark_group("comparison");
-    
+
     group.bench_function("fast", |b| {
         b.iter(|| fast_function(black_box(1000)))
     });
-    
+
     group.bench_function("slow", |b| {
         b.iter(|| slow_function(black_box(1000)))
     });
-    
+
     group.finish();
 }
 
@@ -619,20 +621,20 @@ mod debug_tests {
     #[test]
     fn test_with_debug_output() {
         let result = complex_calculation();
-        
+
         // 使用println!进行调试
         println!("Calculation result: {:?}", result);
-        
+
         // 使用dbg!宏
         let value = dbg!(result);
-        
+
         assert!(value > 0);
     }
 
     #[test]
     fn test_with_assertions() {
         let data = generate_test_data();
-        
+
         // 详细的断言信息
         assert!(
             data.len() > 0,
@@ -687,9 +689,9 @@ mod naming_tests {
 
 ---
 
-**框架状态**: 🔄 持续更新中  
-**最后更新**: 2025年9月25日 13:48  
-**适用版本**: Rust 1.70+  
+**框架状态**: 🔄 持续更新中
+**最后更新**: 2025年9月25日 13:48
+**适用版本**: Rust 1.70+
 
 ---
 
