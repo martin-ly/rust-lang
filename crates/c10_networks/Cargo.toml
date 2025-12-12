@@ -23,8 +23,8 @@ pnet_packet = { version = "0.35.0", optional = true }
 pnet_datalink = { version = "0.35.0", optional = true }
 pnet_transport = { version = "0.35.0", optional = true }
 
-# 可选：离线 PCAP 支持 - 2025年9月27日最新版本
-pcap = { version = "2.3.0", optional = true }
+# 可选：离线 PCAP 支持 - 2025年12月11日最新版本
+pcap = { version = "2.4.0", optional = true }
 
 # 协议解析 - 2025年9月27日最新版本
 nom = "8.0.0"

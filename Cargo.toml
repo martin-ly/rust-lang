@@ -95,19 +95,21 @@ codegen-units = 1
 [profile.bench.build-override]
 opt-level = 2
 
-# 工作区级别的依赖版本统一 - 2025年11月15日最新稳定版本
-# 更新时间: 2025-11-15 (全面更新至最新成熟稳定版本)
+# 工作区级别的依赖版本统一 - 2025年12月11日最新稳定版本
+# 更新时间: 2025-12-11 (全面更新至最新成熟稳定版本，兼容Rust 1.92.0)
 # 系统时间已同步，所有依赖库版本已更新至最新成熟版本
-# 全面升级至2025年11月15日最新稳定版本，兼容Rust 1.91.1
+# 全面升级至2025年12月11日最新稳定版本，兼容Rust 1.92.0
+# cargo update 更新了45个包到最新 Rust 1.92.0 兼容版本
 # 注意: 优先选择稳定成熟的版本，避免使用 alpha/RC 版本导致的破坏性变更
 [workspace.dependencies]
-# 网络和 HTTP 相关 - 2025年11月15日最新稳定版本
+# 网络和 HTTP 相关 - 2025年12月11日最新稳定版本
 # reqwest: 高级HTTP客户端库，支持异步请求和JSON序列化 - 版本 0.12+ (字母索引)
-reqwest = { version = "0.12.24", features = ["json", "rustls-tls"] }
+reqwest = { version = "0.12.25", features = ["json", "rustls-tls"] }
 # hyper: 底层HTTP库，提供高性能的HTTP/1.1和HTTP/2支持 - 版本 1.4+ (字母索引)
 hyper = { version = "1.8.1", features = ["full"] }
 # hyper-util: hyper的实用工具库，提供连接池和服务器功能
-hyper-util = "0.1.18"
+# 2025-12-11: 更新至 0.1.19
+hyper-util = "0.1.19"
 # hyper-rustls: hyper与rustls的集成，提供安全的TLS连接
 hyper-rustls = "0.28.1"
 # hyper-tls: hyper与native-tls的集成，提供TLS支持
@@ -117,9 +119,10 @@ hyper-timeout = "0.6.1"
 # h2: HTTP/2协议的Rust实现
 h2 = "0.5.1"
 # http: HTTP类型和特征的Rust实现
-http = "1.3.1"
+# 2025-12-11: 更新至 1.4.0 (重大版本更新)
+http = "1.4.0"
 
-# Web 框架 - 2025年11月15日最新稳定版本
+# Web 框架 - 2025年12月11日最新稳定版本
 # axum: 现代Web框架，专注于人体工程学和模块化设计 - 版本 0.7+ (字母索引)
 axum = { version = "0.8.7", features = ["macros", "multipart", "tracing"] }
 # axum-core: axum的核心功能库 (与axum 0.8.x配套)
@@ -127,14 +130,15 @@ axum-core = "0.6.1"
 # tower: 异步服务抽象层，提供中间件和超时支持
 tower = "0.5.2"
 # tower-http: tower的HTTP中间件集合
-tower-http = { version = "0.6.6", features = [
+tower-http = { version = "0.6.8", features = [
     "cors",           # 跨域资源共享支持
     "trace",          # 请求追踪支持
     "timeout",        # 请求超时支持
     "compression-gzip", # Gzip压缩支持
 ] }
-# actix-web: 高性能的Web框架，基于Actor模型 - 2025年11月15日最新版本
-actix-web = "4.12.0"
+# actix-web: 高性能的Web框架，基于Actor模型 - 2025年12月11日最新版本
+# 2025-12-11: 更新至 4.12.1
+actix-web = "4.12.1"
 # actix: Actor系统框架
 actix = "0.13.5"
 # actix-rt: actix的运行时支持
@@ -159,7 +163,7 @@ tauri = "2.9.3"
 # tauri-build: tauri的构建工具
 tauri-build = "2.5.2"
 
-# 其他异步生态常用依赖（统一版本）- 2025年11月15日最新稳定版本
+# 其他异步生态常用依赖（统一版本）- 2025年12月11日最新稳定版本
 # async-trait: 异步trait支持库 - 版本 0.1+ (字母索引)
 async-trait = "0.1.89"
 # async-stream: 异步流处理库
@@ -170,7 +174,7 @@ tokio-console = "0.1.14"
 # tokio-test: tokio的测试工具
 tokio-test = "0.4.4"
 # mio: 跨平台异步I/O库 - 2025年10月27日
-mio = "1.1.0"
+mio = "1.1.1"
 # tungstenite: WebSocket协议的Rust实现 - 2025年10月最新版本
 tungstenite = "0.28.0"
 # rcgen: X.509证书生成库
@@ -182,7 +186,7 @@ dotenvy = "0.15.7"
 # tempfile: 临时文件和目录管理库
 tempfile = "3.23.0"
 
-# gRPC 相关 - 2025年11月15日最新稳定版本
+# gRPC 相关 - 2025年12月11日最新稳定版本
 # tonic: 高性能的gRPC over HTTP/2实现，专注于互操作性和灵活性 - 版本 0.12+ (字母索引)
 tonic = { version = "0.14.2", features = [
     "transport",        # 传输层支持
@@ -205,7 +209,7 @@ prost-types = "0.14.1"
 # 通过工作区依赖强制使用安全版本
 protobuf = "4.33.0-release" # 修复递归崩溃漏洞
 
-# TLS 和加密 - 2025年11月15日最新稳定版本
+# TLS 和加密 - 2025年12月11日最新稳定版本
 # rustls: 现代TLS库，用Rust编写，提供高性能和安全性 - 版本 0.23+ (字母索引)
 rustls = { version = "0.23.35", features = ["ring"] }
 # rustls-webpki: rustls的WebPKI支持
@@ -219,13 +223,13 @@ ring = "0.17.14"
 # webpki-roots: WebPKI根证书集合 - 2025年10月6日更新
 webpki-roots = "1.0.4"
 
-# 错误处理 - 2025年11月15日最新稳定版本
+# 错误处理 - 2025年12月11日最新稳定版本
 # thiserror: 错误类型派生宏库，简化错误处理 - 版本 1.0+ (字母索引)
 thiserror = "2.0.17"
 # anyhow: 灵活的错误处理库，基于std::error::Error构建 - 版本 1.0.89+ (字母索引)
 anyhow = "1.0.100"
 
-# 序列化 - 2025年11月15日最新稳定版本
+# 序列化 - 2025年12月11日最新稳定版本
 # serde: 通用序列化/反序列化框架，支持多种数据格式 - 版本 1.0+ (字母索引)
 serde = { version = "1.0.228", features = ["derive"] }
 # serde_json: JSON序列化/反序列化支持 - 版本 1.0+ (字母索引)
@@ -235,7 +239,7 @@ serde_yaml = "0.9.34"
 # bincode: 二进制序列化格式，高效且紧凑
 bincode = "2.0.1"
 
-# 异步运行时 - 2025年11月15日最新稳定版本
+# 异步运行时 - 2025年12月11日最新稳定版本
 # tokio: 事件驱动的非阻塞I/O平台，用于编写异步I/O应用程序 - 版本 1.40+ (字母索引)
 tokio = { version = "1.48.0", features = ["full"] }
 # tokio-util: tokio的实用工具库
@@ -249,13 +253,13 @@ futures = "0.3.31"
 # futures-util: futures的实用工具库
 futures-util = "0.3.31"
 
-# 日志和追踪 - 2025年11月15日最新稳定版本
+# 日志和追踪 - 2025年12月11日最新稳定版本
 # tracing: 应用程序级别的追踪库，用于结构化日志记录 - 版本 0.1+ (字母索引)
-tracing = "0.1.41"
+tracing = "0.1.43"
 # tracing-subscriber: tracing的订阅者实现，支持多种输出格式
-tracing-subscriber = { version = "0.3.20", features = ["env-filter", "json"] }
+tracing-subscriber = { version = "0.3.22", features = ["env-filter", "json"] }
 # log: 标准日志库，提供简单的日志记录接口 - 版本 0.4+ (字母索引)
-log = "0.4.28"
+log = "0.4.29"
 # prometheus: Prometheus指标收集库
 prometheus = "0.14.0"
 # tracing-opentelemetry: tracing与OpenTelemetry的集成 - 2025年10月最新版本
@@ -277,27 +281,27 @@ metrics = "0.24.2"
 # metrics-exporter-prometheus: metrics的Prometheus导出器
 metrics-exporter-prometheus = "0.17.2"
 
-# 时间处理 - 2025年11月15日最新稳定版本
+# 时间处理 - 2025年12月11日最新稳定版本
 # chrono: 日期和时间处理库，支持多种日期格式和时区 - 版本 0.4+ (字母索引)
 chrono = { version = "0.4.42", features = ["serde"] }
 # time: 现代时间处理库，提供高性能的时间操作 - 版本 0.3+ (字母索引)
 time = { version = "0.3.44", features = ["serde", "macros"] }
 
-# 其他常用库 - 2025年11月15日最新稳定版本
+# 其他常用库 - 2025年12月11日最新稳定版本
 # uuid: UUID生成和解析库，支持多种UUID版本 - 版本 1.10+ (字母索引)
-uuid = { version = "1.18.1", features = ["v4", "serde"] }
+uuid = { version = "1.19.0", features = ["v4", "serde"] }
 # url: URL解析和操作库
 url = "2.5.7"
 # bytes: 字节缓冲区处理库，提供高效的字节操作 - 版本 1.7+ (字母索引)
 bytes = "1.11.0"
-# indexmap: 保持插入顺序的HashMap实现 - 2025年11月15日更新
+# indexmap: 保持插入顺序的HashMap实现 - 2025年12月11日更新
 indexmap = "2.12.1"
 # once_cell: 单次初始化单元格，用于全局变量初始化
 once_cell = "1.21.3"
 # num_cpus: CPU核心数检测库
 num_cpus = "1.17.0"
 # libc: 系统调用接口库，提供与C库的绑定
-libc = "0.2.177"
+libc = "0.2.178"
 # rand: 随机数生成库，提供高质量的随机数生成 - 版本 0.8+ (字母索引)
 rand = "0.9.2"
 # rand_chacha: ChaCha20随机数生成器 - 2025年10月11日更新
@@ -313,7 +317,7 @@ twox-hash = "2.1.2"
 # memoffset: 内存偏移计算库 - 2025年10月11日更新
 memoffset = "0.9.1"
 
-# 数据库和存储 - 2025年11月15日最新稳定版本
+# 数据库和存储 - 2025年12月11日最新稳定版本
 # sea-orm: 异步动态ORM，支持多种数据库后端 - 版本 2.0+ (字母索引)
 sea-orm = { version = "2.0.0-rc.18", features = [  # 更新至2025年11月最新候选版本
     "sqlx-postgres",      # PostgreSQL支持
@@ -328,8 +332,8 @@ sqlx = { version = "0.8.6", features = [  # 更新至最新稳定版本
     "chrono",              # 时间类型支持
     "uuid",                # UUID类型支持
 ], default-features = false }
-# redis: Redis客户端库，支持异步操作 - 版本 0.26+ (字母索引)
-redis = "1.0.0-rc.3"
+# redis: Redis客户端库，支持异步操作 - 版本 1.0+ (稳定版！)
+redis = "1.0.1"  # 2025年12月11日：从RC升级到稳定版
 # rusqlite: SQLite的Rust绑定，提供类型安全的SQLite接口
 rusqlite = { version = "0.37.0", default-features = false }
 # mysql_async: MySQL异步客户端 - 2025年10月20日更新
@@ -339,17 +343,17 @@ mysql_common = "0.35.5"
 # mysql-common-derive: MySQL通用类型派生宏 - 2025年10月11日更新
 mysql-common-derive = "0.32.1"
 
-# 性能测试和基准测试 - 2025年11月15日最新稳定版本
+# 性能测试和基准测试 - 2025年12月11日最新稳定版本
 # criterion: 统计驱动的微基准测试库，提供详细的性能分析 - 版本 0.5+ (字母索引)
 criterion = "0.7.0"
 
-# 配置管理 - 2025年11月15日最新稳定版本
+# 配置管理 - 2025年12月11日最新稳定版本
 # config: 分层配置系统，支持多种配置格式
 config = "0.15.19"  # 更新至最新稳定版本
 # toml: TOML格式的编码器和解码器 - 版本 0.8+ (字母索引)
 toml = "0.9.8"
 
-# 并发和同步 - 2025年11月15日最新稳定版本
+# 并发和同步 - 2025年12月11日最新稳定版本
 # crossbeam: 并发编程工具库，提供无锁数据结构和同步原语 - 版本 0.8+ (字母索引)
 crossbeam = "0.8.4"
 # rayon: 简单的工作窃取并行库，提供数据并行处理 - 版本 1.10+ (字母索引)
@@ -358,10 +362,10 @@ rayon = "1.11.0"
 dashmap = "7.0.0-rc2"  # 更新至最新候选版本
 # parking_lot: 更紧凑高效的同步原语实现 - 版本 0.12+ (字母索引)
 parking_lot = "0.12.5"
-# syn: 语法解析库 - 2025年10月19日更新
-syn = "2.0.110"
+# syn: 语法解析库 - 2025年12月11日更新
+syn = "2.0.111"
 
-# 测试相关 - 2025年11月15日最新稳定版本
+# 测试相关 - 2025年12月11日最新稳定版本
 # mockall: 强大的模拟对象库，用于单元测试 - 版本 0.13+ (字母索引)
 mockall = "0.13.1"
 # proptest: 基于属性的测试库，类似Hypothesis - 版本 1.5+ (字母索引)
@@ -402,14 +406,14 @@ png = "0.18.0"
 tiff = "0.10.3"
 # bitflags: 位标志宏 - 2025年10月20日更新
 bitflags = "2.10.0"
-# hashbrown: 高性能HashMap实现 - 2025年11月15日更新
+# hashbrown: 高性能HashMap实现 - 2025年12月11日更新
 hashbrown = "0.16.1"
 # itertools: 迭代器工具库 - 2025年10月30日更新
 itertools = "0.14.0"
 # lru: LRU缓存实现 - 2025年10月20日更新
 lru = "0.16.2"
 
-# Web 和 GUI 框架 - 2025年11月15日最新稳定版本
+# Web 和 GUI 框架 - 2025年12月11日最新稳定版本
 # tauri 已移除，使用 egui/iced 替代 (解决 GTK3 安全漏洞)
 # egui: 易于使用的即时模式GUI，支持Web和原生平台 - 版本 0.28+ (字母索引)
 egui = "0.33.2"
@@ -436,7 +440,7 @@ proc-macro-error2 = "2.0.1"
 # is-terminal: 终端检测库，替代atty (有安全漏洞)
 is-terminal = "0.4.17"
 # wasm-bindgen: WebAssembly绑定生成器，支持WebAssembly 2.0 - 版本 0.2+ (字母索引)
-wasm-bindgen = "0.2.105"
+wasm-bindgen = "0.2.106"
 # nix: 系统调用安全封装库 - 2025年10月20日更新
 nix = "0.30.1"
 # pingora 已移除，存在安全漏洞 (RUSTSEC-2025-0037, RUSTSEC-2025-0070)
@@ -632,17 +636,17 @@ nix = "0.30.1"
 # - wasm-bindgen: 0.2.105 ✓
 #
 # 重要说明：
-# - 所有依赖已更新至2025年11月15日的最新稳定版本
+# - 所有依赖已更新至2025年12月11日的最新稳定版本（Rust 1.92.0 兼容）
 # - 优先选择稳定版本，避免使用 alpha/beta/RC 版本（除非必要）
 # - sqlx 保持在 0.8.6 稳定版，0.9 为 alpha 版本
 # - hickory-resolver 保持在 0.24.4，0.25+ 有破坏性 API 变更
 # - 所有更新已通过 cargo update 验证兼容性
 # ============================================================
 #
-# 依赖更新日志 - 2025年11月15日 cargo update 更新（Rust 1.91.1 兼容版本）
+# 依赖更新日志 - 2025年12月11日 cargo update 更新（Rust 1.92.0 兼容版本）
 # ============================================================
-# cargo update 更新了19个包到最新 Rust 1.91 兼容版本
-# 更新时间: 2025-11-15
+# cargo update 更新了45个包到最新 Rust 1.92.0 兼容版本
+# 更新时间: 2025-12-11
 #
 # 主要更新的包（已更新配置）：
 # - actix-web: 4.11.0 -> 4.12.0
@@ -650,27 +654,39 @@ nix = "0.30.1"
 # - indexmap: 2.12.0 -> 2.12.1
 #
 # 间接依赖更新（传递依赖，无需手动更新）：
-# - aws-lc-rs: 1.15.0 -> 1.15.1
-# - aws-lc-sys: 0.33.0 -> 0.34.0
-# - cc: 1.2.46 -> 1.2.47
-# - clap: 4.5.51 -> 4.5.53
-# - clap_builder: 4.5.51 -> 4.5.53
-# - clap_complete: 4.5.60 -> 4.5.61
-# - instant-acme: 0.8.3 -> 0.8.4
-# - pest: 2.8.3 -> 2.8.4
-# - pest_derive: 2.8.3 -> 2.8.4
-# - pest_generator: 2.8.3 -> 2.8.4
-# - pest_meta: 2.8.3 -> 2.8.4
-# - resolv-conf: 0.7.5 -> 0.7.6
-# - signal-hook-registry: 1.4.6 -> 1.4.7
-# - value-bag: 1.11.1 -> 1.12.0
-# - zerocopy: 0.8.27 -> 0.8.28
-# - zerocopy-derive: 0.8.27 -> 0.8.28
+# - base64ct: 1.8.0 -> 1.8.1
+# - cc: 1.2.47 -> 1.2.49
+# - cmake: 0.1.54 -> 0.1.55
+# - convert_case: 0.7.1 -> 0.10.0 (重大版本更新)
+# - derive_more: 2.0.1 -> 2.1.0
+# - derive_more-impl: 2.0.1 -> 2.1.0
+# - fastant: 0.1.10 -> 0.1.11
+# - fastrace: 0.7.14 -> 0.7.15
+# - fastrace-macro: 0.7.14 -> 0.7.15
+# - icu_properties: 2.1.1 -> 2.1.2
+# - icu_properties_data: 2.1.1 -> 2.1.2
+# - instability: 0.3.9 -> 0.3.10
+# - js-sys: 0.3.82 -> 0.3.83
+# - libp2p-identity: 0.2.12 -> 0.2.13
+# - minicov: 0.3.7 -> 0.3.8
+# - rustls-pki-types: 1.13.0 -> 1.13.1
+# - simd-adler32: 0.3.7 -> 0.3.8
+# - wasm-bindgen-futures: 0.4.55 -> 0.4.56
+# - wasm-bindgen-macro: 0.2.105 -> 0.2.106
+# - wasm-bindgen-macro-support: 0.2.105 -> 0.2.106
+# - wasm-bindgen-shared: 0.2.105 -> 0.2.106
+# - wasm-bindgen-test: 0.3.55 -> 0.3.56
+# - wasm-bindgen-test-macro: 0.3.55 -> 0.3.56
+# - web-sys: 0.3.82 -> 0.3.83
+# - winnow: 0.7.13 -> 0.7.14
+# - xxhash-rust: 新增 v0.8.15
+# - zerocopy: 0.8.28 -> 0.8.31
+# - zerocopy-derive: 0.8.28 -> 0.8.31
 #
-# 移除的包（依赖解析结果）：
-# - bindgen: 0.72.1 (不再需要)
-# - cexpr: 0.6.0 (不再需要)
-# - clang-sys: 1.8.1 (不再需要)
+# 重要更新说明：
+# - redis: 从 1.0.0-rc.3 升级到 1.0.1 稳定版（重要里程碑）
+# - http: 从 1.3.1 升级到 1.4.0（重大版本更新）
+# - convert_case: 从 0.7.1 升级到 0.10.0（重大版本更新，可能有破坏性变更）
 #
-# 注意：有7个未变更的依赖仍使用最新版本
+# 注意：有9个未变更的依赖仍使用最新版本
 # ============================================================
