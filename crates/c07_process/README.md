@@ -34,7 +34,8 @@
 
 ## 目录
 
-- [C07 Process Management Library](#c07-process-management-library)
+- [🦀 C07 Process Management Library](#-c07-process-management-library)
+  - [🎯 最新更新 (2025-11-15) ✨](#-最新更新-2025-11-15-)
   - [🌟 2025-10-20 核心增强更新](#-2025-10-20-核心增强更新)
   - [目录](#目录)
   - [🚀 特性](#-特性)

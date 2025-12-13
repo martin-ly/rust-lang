@@ -36,6 +36,7 @@
     - [4.2 领导者-跟随者模式](#42-领导者-跟随者模式)
     - [4.3 生产者-消费者模式](#43-生产者-消费者模式)
   - [5. 总结](#5-总结)
+  - [附录A：生态框架落地（Rust 1.90，Edition 2024）](#附录a生态框架落地rust-190edition-2024)
 
 ## 0. 执行模型综述：同步 vs 异步
 
@@ -100,38 +101,38 @@ Factory<T> = { create() → T }
 **Rust 伪代码**：
 
 ```rust
-trait Product { 
-    fn name(&self) -> &str; 
+trait Product {
+    fn name(&self) -> &str;
     fn operation(&self) -> String;
 }
 
-trait Factory { 
-    fn create(&self) -> Box<dyn Product>; 
+trait Factory {
+    fn create(&self) -> Box<dyn Product>;
 }
 
 struct ConcreteProductA;
-impl Product for ConcreteProductA { 
+impl Product for ConcreteProductA {
     fn name(&self) -> &str { "ProductA" }
     fn operation(&self) -> String { "Operation A".to_string() }
 }
 
 struct ConcreteProductB;
-impl Product for ConcreteProductB { 
+impl Product for ConcreteProductB {
     fn name(&self) -> &str { "ProductB" }
     fn operation(&self) -> String { "Operation B".to_string() }
 }
 
 struct ConcreteFactoryA;
 impl Factory for ConcreteFactoryA {
-    fn create(&self) -> Box<dyn Product> { 
-        Box::new(ConcreteProductA) 
+    fn create(&self) -> Box<dyn Product> {
+        Box::new(ConcreteProductA)
     }
 }
 
 struct ConcreteFactoryB;
 impl Factory for ConcreteFactoryB {
-    fn create(&self) -> Box<dyn Product> { 
-        Box::new(ConcreteProductB) 
+    fn create(&self) -> Box<dyn Product> {
+        Box::new(ConcreteProductB)
     }
 }
 
@@ -381,11 +382,11 @@ impl Composite {
     fn new(name: String) -> Self {
         Self { name, children: Vec::new() }
     }
-    
+
     fn add(&mut self, component: Box<dyn Component>) {
         self.children.push(component);
     }
-    
+
     fn remove(&mut self, index: usize) {
         if index < self.children.len() {
             self.children.remove(index);
@@ -505,9 +506,9 @@ impl Facade {
             subsystem_c: SubsystemC
         }
     }
-    
+
     fn operation(&self) -> String {
-        format!("Facade: {} + {} + {}", 
+        format!("Facade: {} + {} + {}",
             self.subsystem_a.operation_a(),
             self.subsystem_b.operation_b(),
             self.subsystem_c.operation_c())
@@ -549,7 +550,7 @@ impl ConcreteFlyweight {
 
 impl Flyweight for ConcreteFlyweight {
     fn operation(&self, extrinsic_state: &str) -> String {
-        format!("Flyweight({}) with extrinsic: {}", 
+        format!("Flyweight({}) with extrinsic: {}",
             self.intrinsic_state, extrinsic_state)
     }
 }
@@ -563,11 +564,11 @@ impl FlyweightFactory {
     fn new() -> Self {
         Self { flyweights: HashMap::new() }
     }
-    
+
     fn get_flyweight(&mut self, key: &str) -> &dyn Flyweight {
         if !self.flyweights.contains_key(key) {
             self.flyweights.insert(
-                key.to_string(), 
+                key.to_string(),
                 Box::new(ConcreteFlyweight::new(key.to_string()))
             );
         }
@@ -610,7 +611,7 @@ impl Proxy {
     fn new() -> Self {
         Self { real_subject: None }
     }
-    
+
     fn lazy_init(&mut self) {
         if self.real_subject.is_none() {
             self.real_subject = Some(RealSubject);
@@ -661,7 +662,7 @@ impl Handler for ConcreteHandlerA {
     fn set_next(&mut self, next: Box<dyn Handler>) {
         self.next = Some(next);
     }
-    
+
     fn handle(&self, request: &str) -> Option<String> {
         if request.contains("A") {
             Some("HandlerA processed".to_string())
@@ -685,7 +686,7 @@ impl Handler for ConcreteHandlerB {
     fn set_next(&mut self, next: Box<dyn Handler>) {
         self.next = Some(next);
     }
-    
+
     fn handle(&self, request: &str) -> Option<String> {
         if request.contains("B") {
             Some("HandlerB processed".to_string())
@@ -747,11 +748,11 @@ impl Invoker {
     fn new() -> Self {
         Self { command: None }
     }
-    
+
     fn set_command(&mut self, command: Box<dyn Command>) {
         self.command = Some(command);
     }
-    
+
     fn execute_command(&self) {
         if let Some(ref command) = self.command {
             command.execute();
@@ -788,11 +789,11 @@ impl Context {
     fn new() -> Self {
         Self { variables: std::collections::HashMap::new() }
     }
-    
+
     fn set_variable(&mut self, name: &str, value: i32) {
         self.variables.insert(name.to_string(), value);
     }
-    
+
     fn get_variable(&self, name: &str) -> i32 {
         *self.variables.get(name).unwrap_or(&0)
     }
@@ -885,7 +886,7 @@ impl ConcreteIterator {
 
 impl Iterator for ConcreteIterator {
     type Item = i32;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         if self.index < self.aggregate.data.len() {
             let item = self.aggregate.data[self.index];
@@ -899,7 +900,7 @@ impl Iterator for ConcreteIterator {
 
 impl Aggregate for ConcreteAggregate {
     type Iterator = ConcreteIterator;
-    
+
     fn create_iterator(&self) -> Self::Iterator {
         ConcreteIterator::new(ConcreteAggregate {
             data: self.data.clone()
@@ -942,16 +943,16 @@ struct ConcreteMediator {
 
 impl ConcreteMediator {
     fn new() -> Self {
-        Self { 
-            colleague_a: None, 
-            colleague_b: None 
+        Self {
+            colleague_a: None,
+            colleague_b: None
         }
     }
-    
+
     fn set_colleague_a(&mut self, colleague: Box<dyn Colleague>) {
         self.colleague_a = Some(colleague);
     }
-    
+
     fn set_colleague_b(&mut self, colleague: Box<dyn Colleague>) {
         self.colleague_b = Some(colleague);
     }
@@ -991,13 +992,13 @@ impl Colleague for ConcreteColleagueA {
     fn set_mediator(&mut self, mediator: Box<dyn Mediator>) {
         self.mediator = Some(mediator);
     }
-    
+
     fn send(&self, event: &str) {
         if let Some(ref mediator) = self.mediator {
             mediator.notify("A", event);
         }
     }
-    
+
     fn receive(&self, event: &str) {
         println!("ColleagueA {} received: {}", self.name, event);
     }
@@ -1027,7 +1028,7 @@ impl Memento {
     fn new(state: String) -> Self {
         Self { state }
     }
-    
+
     fn get_state(&self) -> &str {
         &self.state
     }
@@ -1042,19 +1043,19 @@ impl Originator {
     fn new(state: String) -> Self {
         Self { state }
     }
-    
+
     fn set_state(&mut self, state: String) {
         self.state = state;
     }
-    
+
     fn get_state(&self) -> &str {
         &self.state
     }
-    
+
     fn save_to_memento(&self) -> Memento {
         Memento::new(self.state.clone())
     }
-    
+
     fn restore_from_memento(&mut self, memento: &Memento) {
         self.state = memento.get_state().to_string();
     }
@@ -1069,11 +1070,11 @@ impl Caretaker {
     fn new() -> Self {
         Self { mementos: Vec::new() }
     }
-    
+
     fn add_memento(&mut self, memento: Memento) {
         self.mementos.push(memento);
     }
-    
+
     fn get_memento(&self, index: usize) -> Option<&Memento> {
         self.mementos.get(index)
     }
@@ -1119,12 +1120,12 @@ struct ConcreteSubject {
 
 impl ConcreteSubject {
     fn new() -> Self {
-        Self { 
-            observers: HashMap::new(), 
-            state: String::new() 
+        Self {
+            observers: HashMap::new(),
+            state: String::new()
         }
     }
-    
+
     fn set_state(&mut self, state: String) {
         self.state = state.clone();
         self.notify(&state);
@@ -1136,11 +1137,11 @@ impl Subject for ConcreteSubject {
         // 简化实现，实际中需要唯一标识符
         self.observers.insert("observer".to_string(), observer);
     }
-    
+
     fn detach(&mut self, observer_id: &str) {
         self.observers.remove(observer_id);
     }
-    
+
     fn notify(&self, data: &str) {
         for observer in self.observers.values() {
             observer.update(data);
@@ -1208,15 +1209,15 @@ struct Context {
 
 impl Context {
     fn new() -> Self {
-        Self { 
-            state: Box::new(ConcreteStateA) 
+        Self {
+            state: Box::new(ConcreteStateA)
         }
     }
-    
+
     fn set_state(&mut self, state: Box<dyn State>) {
         self.state = state;
     }
-    
+
     fn request(&mut self) {
         self.state.handle(self);
     }
@@ -1270,11 +1271,11 @@ impl Context {
     fn new(strategy: Box<dyn Strategy>) -> Self {
         Self { strategy }
     }
-    
+
     fn set_strategy(&mut self, strategy: Box<dyn Strategy>) {
         self.strategy = strategy;
     }
-    
+
     fn execute_strategy(&self) -> String {
         self.strategy.algorithm()
     }
@@ -1329,7 +1330,7 @@ trait AbstractClass {
         result.push_str(&self.primitive_operation_3());
         result
     }
-    
+
     fn primitive_operation_1(&self) -> String;
     fn primitive_operation_2(&self) -> String;
     fn primitive_operation_3(&self) -> String;
@@ -1342,11 +1343,11 @@ impl AbstractClass for ConcreteClassA {
     fn primitive_operation_1(&self) -> String {
         "ConcreteClassA: Operation 1".to_string()
     }
-    
+
     fn primitive_operation_2(&self) -> String {
         "ConcreteClassA: Operation 2".to_string()
     }
-    
+
     fn primitive_operation_3(&self) -> String {
         "ConcreteClassA: Operation 3".to_string()
     }
@@ -1358,11 +1359,11 @@ impl AbstractClass for ConcreteClassB {
     fn primitive_operation_1(&self) -> String {
         "ConcreteClassB: Operation 1".to_string()
     }
-    
+
     fn primitive_operation_2(&self) -> String {
         "ConcreteClassB: Operation 2".to_string()
     }
-    
+
     fn primitive_operation_3(&self) -> String {
         "ConcreteClassB: Operation 3".to_string()
     }
@@ -1434,7 +1435,7 @@ impl Visitor for ConcreteVisitorA {
     fn visit_element_a(&self, element: &ConcreteElementA) {
         println!("VisitorA visiting ElementA: {}", element.name);
     }
-    
+
     fn visit_element_b(&self, element: &ConcreteElementB) {
         println!("VisitorA visiting ElementB: {}", element.name);
     }
@@ -1446,7 +1447,7 @@ impl Visitor for ConcreteVisitorB {
     fn visit_element_a(&self, element: &ConcreteElementA) {
         println!("VisitorB visiting ElementA: {}", element.name);
     }
-    
+
     fn visit_element_b(&self, element: &ConcreteElementB) {
         println!("VisitorB visiting ElementB: {}", element.name);
     }
@@ -1461,11 +1462,11 @@ impl ObjectStructure {
     fn new() -> Self {
         Self { elements: Vec::new() }
     }
-    
+
     fn add_element(&mut self, element: Box<dyn Element>) {
         self.elements.push(element);
     }
-    
+
     fn accept(&self, visitor: &dyn Visitor) {
         for element in &self.elements {
             element.accept(visitor);
@@ -1516,9 +1517,9 @@ struct MethodRequest {
 
 impl MethodRequest {
     fn new(data: String) -> Self {
-        Self { 
-            data, 
-            result: Arc::new(Mutex::new(None)) 
+        Self {
+            data,
+            result: Arc::new(Mutex::new(None))
         }
     }
 }
@@ -1531,20 +1532,20 @@ struct Scheduler {
 
 impl Scheduler {
     fn new() -> Self {
-        Self { 
-            queue: Arc::new(Mutex::new(VecDeque::new())), 
-            servant: ConcreteService 
+        Self {
+            queue: Arc::new(Mutex::new(VecDeque::new())),
+            servant: ConcreteService
         }
     }
-    
+
     fn enqueue(&self, request: MethodRequest) {
         self.queue.lock().unwrap().push_back(request);
     }
-    
+
     fn run(&self) {
         let queue = Arc::clone(&self.queue);
         let servant = self.servant;
-        
+
         thread::spawn(move || {
             loop {
                 if let Some(request) = queue.lock().unwrap().pop_front() {
@@ -1567,7 +1568,7 @@ impl Proxy {
         scheduler.run();
         Self { scheduler }
     }
-    
+
     fn operation(&self, data: String) -> Arc<Mutex<Option<String>>> {
         let request = MethodRequest::new(data);
         let result = Arc::clone(&request.result);
@@ -1629,22 +1630,22 @@ struct LeaderFollower {
 
 impl LeaderFollower {
     fn new(num_followers: usize) -> Self {
-        Self { 
-            event_queue: Arc::new(Mutex::new(VecDeque::new())), 
+        Self {
+            event_queue: Arc::new(Mutex::new(VecDeque::new())),
             handler: ConcreteEventHandler,
-            num_followers 
+            num_followers
         }
     }
-    
+
     fn start(&self) {
         let queue = Arc::clone(&self.event_queue);
         let handler = self.handler;
-        
+
         // 启动跟随者线程
         for i in 0..self.num_followers {
             let queue = Arc::clone(&queue);
             let handler = handler;
-            
+
             thread::spawn(move || {
                 loop {
                     if let Some(event) = queue.lock().unwrap().pop_front() {
@@ -1653,7 +1654,7 @@ impl LeaderFollower {
                 }
             });
         }
-        
+
         // 领导者线程
         let queue = Arc::clone(&queue);
         thread::spawn(move || {
@@ -1694,12 +1695,12 @@ struct Buffer<T> {
 
 impl<T> Buffer<T> {
     fn new(capacity: usize) -> Self {
-        Self { 
-            data: Arc::new(Mutex::new(VecDeque::new())), 
-            capacity 
+        Self {
+            data: Arc::new(Mutex::new(VecDeque::new())),
+            capacity
         }
     }
-    
+
     fn push(&self, item: T) -> bool {
         let mut data = self.data.lock().unwrap();
         if data.len() < self.capacity {
@@ -1709,7 +1710,7 @@ impl<T> Buffer<T> {
             false
         }
     }
-    
+
     fn pop(&self) -> Option<T> {
         self.data.lock().unwrap().pop_front()
     }
@@ -1725,7 +1726,7 @@ impl Producer {
     fn new(id: u32, buffer: Arc<Buffer<String>>) -> Self {
         Self { id, buffer }
     }
-    
+
     fn produce(&self) {
         let item = format!("Item from producer {}", self.id);
         if self.buffer.push(item) {
@@ -1746,7 +1747,7 @@ impl Consumer {
     fn new(id: u32, buffer: Arc<Buffer<String>>) -> Self {
         Self { id, buffer }
     }
-    
+
     fn consume(&self) {
         if let Some(item) = self.buffer.pop() {
             println!("Consumer {} consumed: {}", self.id, item);
@@ -1759,7 +1760,7 @@ impl Consumer {
 // 主程序
 fn main() {
     let buffer = Arc::new(Buffer::new(5));
-    
+
     // 启动生产者
     for i in 0..3 {
         let buffer = Arc::clone(&buffer);
@@ -1771,7 +1772,7 @@ fn main() {
             }
         });
     }
-    
+
     // 启动消费者
     for i in 0..2 {
         let buffer = Arc::clone(&buffer);
@@ -1783,7 +1784,7 @@ fn main() {
             }
         });
     }
-    
+
     // 主线程等待
     thread::sleep(std::time::Duration::from_secs(10));
 }

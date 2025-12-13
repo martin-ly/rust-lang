@@ -1,7 +1,7 @@
 # 🧠 个人知识体系优化建议
 
-> **项目定位**: 个人 Rust 形式化知识体系  
-> **目标用户**: 作者本人  
+> **项目定位**: 个人 Rust 形式化知识体系
+> **目标用户**: 作者本人
 > **优化方向**: 提升检索效率、降低维护成本、保持深度
 
 ---
@@ -10,7 +10,7 @@
 
 ### 原评价报告的调整
 
-**原报告假设**: 这是一个面向大众的教学项目  
+**原报告假设**: 这是一个面向大众的教学项目
 **实际情况**: 这是您的个人 Rust 形式化知识体系
 
 因此，**很多"批判"实际上是优点**：
@@ -173,32 +173,32 @@ from pathlib import Path
 
 def build_index():
     index = {}
-    
+
     # 扫描所有 .md 文件
     for md_file in Path('.').rglob('*.md'):
         if 'node_modules' in str(md_file) or '.git' in str(md_file):
             continue
-            
+
         with open(md_file, 'r', encoding='utf-8') as f:
             content = f.read()
-            
+
             # 提取标题
             titles = re.findall(r'^#+\s+(.+)$', content, re.MULTILINE)
-            
+
             # 提取代码块语言
             code_langs = re.findall(r'```(\w+)', content)
-            
+
             index[str(md_file)] = {
                 'titles': titles,
                 'code_langs': list(set(code_langs)),
                 'size': len(content)
             }
-    
+
     # 生成索引文件
     with open('GLOBAL_INDEX.md', 'w', encoding='utf-8') as f:
         f.write('# 全局索引\n\n')
         f.write('> 自动生成，请勿手动编辑\n\n')
-        
+
         # 按模块分组
         for module in ['c01', 'c02', 'c06', 'c09']:
             f.write(f'\n## {module.upper()}\n\n')
@@ -236,28 +236,28 @@ def build_graph():
 digraph KnowledgeGraph {
     rankdir=LR;
     node [shape=box, style=rounded];
-    
+
 """
-    
+
     # 扫描所有文档，提取链接关系
     for md_file in Path('.').rglob('*.md'):
         if 'archive' in str(md_file):
             continue
-            
+
         links = extract_links(md_file)
         source = md_file.stem
-        
+
         for text, target in links:
             if '.md' in target:
                 target_name = Path(target).stem
                 dot_content += f'    "{source}" -> "{target_name}" [label="{text[:20]}"];\n'
-    
+
     dot_content += "}\n"
-    
+
     # 保存为 .dot 文件
     with open('knowledge_graph.dot', 'w', encoding='utf-8') as f:
         f.write(dot_content)
-    
+
     print("✅ 知识图谱已生成: knowledge_graph.dot")
     print("📊 使用 Graphviz 可视化: dot -Tpng knowledge_graph.dot -o knowledge_graph.png")
 
@@ -462,9 +462,9 @@ C02 类型系统 → C04 泛型 → C11 宏
 
 ---
 
-**最后更新**: 2025-10-30  
-**总文档数**: 500+  
-**代码示例**: 1000+  
+**最后更新**: 2025-10-30
+**总文档数**: 500+
+**代码示例**: 1000+
 **研究笔记**: 50+
 ```
 
@@ -671,8 +671,8 @@ touch docs/MY_PERSONAL_INDEX.md
 
 ---
 
-**文档创建**: 2025-10-30  
-**定位**: 个人知识库优化  
+**文档创建**: 2025-10-30
+**定位**: 个人知识库优化
 **原则**: 深度优先，效率优化
 
 🦀 **知识在于积累，智慧在于连接！** 🦀

@@ -1,8 +1,8 @@
 # 🚀 可持续执行计划 - 行动手册
 
-> **计划日期**: 2025-10-30  
-> **规划周期**: 3 个月（2025-11 至 2026-01）  
-> **目标**: 将项目从"过度工程化"转向"可持续发展"  
+> **计划日期**: 2025-10-30
+> **规划周期**: 3 个月（2025-11 至 2026-01）
+> **目标**: 将项目从"过度工程化"转向"可持续发展"
 > **参考**: [批判性评价报告](CRATES_CRITICAL_EVALUATION_2025_10_30.md)
 
 ---
@@ -33,7 +33,7 @@
 
 **时间**: 4-6 小时
 
-#### 任务 1.1: 清理 docs/docs/ 
+#### 任务 1.1: 清理 docs/docs/
 
 ```bash
 # 执行自动归档
@@ -85,23 +85,23 @@ MODULES=(
 
 for module in "${MODULES[@]}"; do
     echo "清理 $module..."
-    
+
     # 创建归档目录
     mkdir -p "crates/$module/docs/archive"
     mkdir -p "crates/$module/backup"
-    
+
     # 移动 swap.rar
     mv "crates/$module/docs/swap.rar" "crates/$module/backup/" 2>/dev/null
-    
+
     # 移动历史报告
     mv "crates/$module/docs/"*PHASE*.md "crates/$module/docs/archive/" 2>/dev/null
     mv "crates/$module/docs/"*COMPLETION*.md "crates/$module/docs/archive/" 2>/dev/null
-    
+
     # 移动旧报告到 reports/
     mkdir -p "crates/$module/reports"
     mv "crates/$module/docs/"*REPORT*.md "crates/$module/reports/" 2>/dev/null
     mv "crates/$module/docs/"*STATUS*.md "crates/$module/reports/" 2>/dev/null
-    
+
     echo "✅ $module 清理完成"
 done
 
@@ -126,108 +126,109 @@ chmod +x scripts/clean_modules.sh
 创建文件: `docs/DOCUMENTATION_STANDARDS_V2.md`
 
 ```markdown
-# 文档标准 v2.0 - 简化版
+    # 文档标准 v2.0 - 简化版
 
-## 🎯 核心原则
+    ## 🎯 核心原则
 
-1. **少即是多**: 宁缺毋滥
-2. **用户优先**: 为学习者而写，非专家
-3. **可维护**: 一人能够维护
+    1. **少即是多**: 宁缺毋滥
+    2. **用户优先**: 为学习者而写，非专家
+    3. **可维护**: 一人能够维护
 
----
+    ---
 
-## 📏 强制规则
+    ## 📏 强制规则
 
-### 规则 1: 文件数量限制
+    ### 规则 1: 文件数量限制
 
-| 目录 | 最大文件数 | 说明 |
-|------|-----------|------|
-| docs/ | 20 个 | 核心文档 |
-| docs/advanced/ | 10 个 | 可选 |
-| examples/ | 20 个 | 精选示例 |
+    | 目录 | 最大文件数 | 说明 |
+    |------|-----------|------|
+    | docs/ | 20 个 | 核心文档 |
+    | docs/advanced/ | 10 个 | 可选 |
+    | examples/ | 20 个 | 精选示例 |
 
-**超过限制？说明需要拆分或删减！**
+    **超过限制？说明需要拆分或删减！**
 
----
+    ---
 
-### 规则 2: 文件长度限制
+    ### 规则 2: 文件长度限制
 
-| 文件类型 | 最大行数 | 原因 |
-|---------|---------|------|
-| README.md | 200 行 | 快速浏览 |
-| 指南文档 | 300 行 | 一次读完 |
-| 参考文档 | 500 行 | 可查阅 |
-| 理论文档 | 800 行 | 深度内容 |
+    | 文件类型 | 最大行数 | 原因 |
+    |---------|---------|------|
+    | README.md | 200 行 | 快速浏览 |
+    | 指南文档 | 300 行 | 一次读完 |
+    | 参考文档 | 500 行 | 可查阅 |
+    | 理论文档 | 800 行 | 深度内容 |
 
-**超过限制？拆分成多个文件！**
+    **超过限制？拆分成多个文件！**
 
----
+    ---
 
-### 规则 3: 必须有的 5 个文件
+    ### 规则 3: 必须有的 5 个文件
 
-每个模块必须有且仅有：
+    每个模块必须有且仅有：
 
-1. **README.md** (< 200 行)
-   ```markdown
-   # C0X - [模块名]
-   
-   ## 🎯 5 分钟了解
-   [3 段介绍]
-   
-   ## 🚀 快速开始
-   [1 个最简示例]
-   
-   ## 📚 学习路径
-   - 🟢 入门 (2-4h)
-   - 🟡 进阶 (1-2天)
-   - 🔴 高级 (持续)
-   
-   ## 📖 文档
-   - [完整指南](docs/guide.md)
-   - [API参考](docs/reference.md)
-   - [FAQ](docs/FAQ.md)
-   ```
+    1. **README.md** (< 200 行)
+      ```markdown
+      # C0X - [模块名]
 
-2. **docs/guide.md** (< 300 行)
-   - 实战教程
-   - 常见场景
-   - 代码示例
+      ## 🎯 5 分钟了解
+      [3 段介绍]
 
-3. **docs/reference.md** (< 200 行)
-   - API 速查
-   - 最佳实践
-   - 性能提示
+      ## 🚀 快速开始
+      [1 个最简示例]
 
-4. **docs/FAQ.md** (< 100 行)
-   - 常见问题
-   - 错误排查
+      ## 📚 学习路径
+      - 🟢 入门 (2-4h)
+      - 🟡 进阶 (1-2天)
+      - 🔴 高级 (持续)
 
-5. **CHANGELOG.md**
-   - 版本历史
+      ## 📖 文档
+      - [完整指南](docs/guide.md)
+      - [API参考](docs/reference.md)
+      - [FAQ](docs/FAQ.md)
+      ```
 
----
+    2. **docs/guide.md** (< 300 行)
+      - 实战教程
+      - 常见场景
+      - 代码示例
 
-### 规则 4: 禁止事项 ❌
+    3. **docs/reference.md** (< 200 行)
+      - API 速查
+      - 最佳实践
+      - 性能提示
 
-| 禁止 | 原因 |
-|------|------|
-| ❌ 多个主索引 | 造成混乱 |
-| ❌ swap.rar 在主目录 | 污染项目 |
-| ❌ PHASE*.md 在主目录 | 历史文件应归档 |
-| ❌ 5 层以上嵌套 | 难以导航 |
-| ❌ 未测试的代码示例 | 误导用户 |
+    4. **docs/FAQ.md** (< 100 行)
+      - 常见问题
+      - 错误排查
 
----
+    5. **CHANGELOG.md**
+      - 版本历史
 
-## ✅ 质量检查清单
+    ---
 
-创建 PR 前必须检查：
+    ### 规则 4: 禁止事项 ❌
 
-- [ ] README.md < 200 行
-- [ ] 所有代码示例可运行
-- [ ] 没有死链接
-- [ ] 没有重复内容
-- [ ] 符合上述规则
+    | 禁止 | 原因 |
+    |------|------|
+    | ❌ 多个主索引 | 造成混乱 |
+    | ❌ swap.rar 在主目录 | 污染项目 |
+    | ❌ PHASE*.md 在主目录 | 历史文件应归档 |
+    | ❌ 5 层以上嵌套 | 难以导航 |
+    | ❌ 未测试的代码示例 | 误导用户 |
+
+    ---
+
+    ## ✅ 质量检查清单
+
+    创建 PR 前必须检查：
+
+    - [ ] README.md < 200 行
+    - [ ] 所有代码示例可运行
+    - [ ] 没有死链接
+    - [ ] 没有重复内容
+    - [ ] 符合上述规则
+
 ```
 
 **检查点**: ✅ 标准文档创建完成
@@ -281,155 +282,159 @@ echo "✅ 检查完成"
 当前: 600+ 行 → 目标: < 200 行
 
 ```markdown
-# C01 - Rust 所有权系统
+    # C01 - Rust 所有权系统
 
-> **学习时间**: 入门 4h | 精通 2-3 天  
-> **前置知识**: 基本编程概念  
-> **Rust版本**: 1.90+
+    > **学习时间**: 入门 4h | 精通 2-3 天
+    > **前置知识**: 基本编程概念
+    > **Rust版本**: 1.92.0+
 
----
+    ---
 
-## 🎯 5 分钟了解
+    ## 🎯 5 分钟了解
 
-**所有权系统**是 Rust 最核心的特性，它在编译时保证内存安全，无需垃圾回收。
+    **所有权系统**是 Rust 最核心的特性，它在编译时保证内存安全，无需垃圾回收。
 
-**三大规则**:
-1. 每个值有一个所有者
-2. 同一时间只能有一个所有者
-3. 所有者离开作用域，值被丢弃
+    **三大规则**:
+    1. 每个值有一个所有者
+    2. 同一时间只能有一个所有者
+    3. 所有者离开作用域，值被丢弃
 
-**为什么重要？**
-- ✅ 零成本内存安全
-- ✅ 无数据竞争
-- ✅ 无悬垂指针
+    **为什么重要？**
+    - ✅ 零成本内存安全
+    - ✅ 无数据竞争
+    - ✅ 无悬垂指针
 
----
+    ---
 
-## 🚀 10 分钟上手
+    ## 🚀 10 分钟上手
 
-```rust
-// 1. 所有权转移
-let s1 = String::from("hello");
-let s2 = s1;  // s1 不再有效
-// println!("{}", s1);  // ❌ 编译错误
+    ```rust
+    // 1. 所有权转移
+    let s1 = String::from("hello");
+    let s2 = s1;  // s1 不再有效
+    // println!("{}", s1);  // ❌ 编译错误
 
-// 2. 借用
-let s1 = String::from("hello");
-let len = calculate_length(&s1);  // 借用
-println!("{} 的长度是 {}", s1, len);  // ✅ s1 仍然有效
+    // 2. 借用
+    let s1 = String::from("hello");
+    let len = calculate_length(&s1);  // 借用
+    println!("{} 的长度是 {}", s1, len);  // ✅ s1 仍然有效
 
-fn calculate_length(s: &String) -> usize {
-    s.len()
-}
-```
+    fn calculate_length(s: &String) -> usize {
+        s.len()
+    }
+    ```
 
-[▶️ 运行完整示例](examples/01_basics.rs)
+    [▶️ 运行完整示例](examples/01_basics.rs)
 
----
+    ---
 
-## 📚 学习路径
+    ## 📚 学习路径
 
-### 🟢 入门（4 小时）
+    ### 🟢 入门（4 小时）
 
-1. **基础概念** (1h)
-   - [所有权规则](docs/01_ownership_rules.md)
-   - [Move vs Copy](docs/02_move_copy.md)
-   
-2. **借用系统** (1.5h)
-   - [引用与借用](docs/03_borrowing.md)
-   - [可变借用](docs/04_mut_borrow.md)
-   
-3. **实战练习** (1.5h)
-   - [常见错误](docs/05_common_errors.md)
-   - [动手练习](examples/exercises/)
+    1. **基础概念** (1h)
+      - [所有权规则](docs/01_ownership_rules.md)
+      - [Move vs Copy](docs/02_move_copy.md)
 
-**完成后**: 你能写出基本的 Rust 程序
+    2. **借用系统** (1.5h)
+      - [引用与借用](docs/03_borrowing.md)
+      - [可变借用](docs/04_mut_borrow.md)
 
----
+    3. **实战练习** (1.5h)
+      - [常见错误](docs/05_common_errors.md)
+      - [动手练习](examples/exercises/)
 
-### 🟡 进阶（1-2 天）
+    **完成后**: 你能写出基本的 Rust 程序
 
-4. **生命周期** (4h)
-   - [生命周期基础](docs/06_lifetimes.md)
-   - [高级生命周期](docs/07_advanced_lifetimes.md)
-   
-5. **智能指针** (4h)
-   - [Box/Rc/Arc](docs/08_smart_pointers.md)
-   - [RefCell 内部可变性](docs/09_refcell.md)
-   
-6. **实战项目** (4h)
-   - [构建 LRU 缓存](examples/projects/lru_cache/)
-   - [实现链表](examples/projects/linked_list/)
+    ---
 
-**完成后**: 你能处理复杂的所有权场景
+    ### 🟡 进阶（1-2 天）
 
----
+    4. **生命周期** (4h)
+      - [生命周期基础](docs/06_lifetimes.md)
+      - [高级生命周期](docs/07_advanced_lifetimes.md)
 
-### 🔴 高级（持续学习）
+    5. **智能指针** (4h)
+      - [Box/Rc/Arc](docs/08_smart_pointers.md)
+      - [RefCell 内部可变性](docs/09_refcell.md)
 
-7. **性能优化** (8h+)
-   - [零成本抽象](docs/advanced/zero_cost.md)
-   - [内存布局](docs/advanced/memory_layout.md)
-   
-8. **高级模式** (8h+)
-   - [自引用结构](docs/advanced/self_referential.md)
-   - [跨线程所有权](docs/advanced/send_sync.md)
+    6. **实战项目** (4h)
+      - [构建 LRU 缓存](examples/projects/lru_cache/)
+      - [实现链表](examples/projects/linked_list/)
 
----
+    **完成后**: 你能处理复杂的所有权场景
 
-## 📖 完整文档
+    ---
 
-| 文档 | 用途 | 时长 |
-|------|------|------|
-| [完整指南](docs/guide.md) | 系统学习 | 8-12h |
-| [API 参考](docs/reference.md) | 速查手册 | 查阅 |
-| [FAQ](docs/FAQ.md) | 常见问题 | 30min |
-| [高级主题](docs/advanced/) | 深入研究 | 20h+ |
+    ### 🔴 高级（持续学习）
 
----
+    7. **性能优化** (8h+)
+      - [零成本抽象](docs/advanced/zero_cost.md)
+      - [内存布局](docs/advanced/memory_layout.md)
 
-## 💻 代码示例
+    8. **高级模式** (8h+)
+      - [自引用结构](docs/advanced/self_referential.md)
+      - [跨线程所有权](docs/advanced/send_sync.md)
 
-**基础** (examples/basic/):
-- `01_ownership.rs` - 所有权转移
-- `02_borrowing.rs` - 引用与借用
-- `03_lifetimes.rs` - 生命周期
+    ---
 
-**进阶** (examples/intermediate/):
-- `04_smart_pointers.rs` - 智能指针
-- `05_self_referential.rs` - 自引用
+    ## 📖 完整文档
 
-**实战** (examples/projects/):
-- `lru_cache/` - LRU 缓存实现
-- `linked_list/` - 链表实现
+    | 文档 | 用途 | 时长 |
+    |------|------|------|
+    | [完整指南](docs/guide.md) | 系统学习 | 8-12h |
+    | [API 参考](docs/reference.md) | 速查手册 | 查阅 |
+    | [FAQ](docs/FAQ.md) | 常见问题 | 30min |
+    | [高级主题](docs/advanced/) | 深入研究 | 20h+ |
 
-[查看所有示例](examples/)
+    ---
 
----
+    ## 💻 代码示例
 
-## 🤝 贡献与反馈
+    **基础** (examples/basic/):
 
-发现问题？有改进建议？
+    - `01_ownership.rs` - 所有权转移
+    - `02_borrowing.rs` - 引用与借用
+    - `03_lifetimes.rs` - 生命周期
 
-- 🐛 [报告 Bug](../../issues)
-- 💬 [讨论交流](../../discussions)
-- 📝 [贡献指南](CONTRIBUTING.md)
+    **进阶** (examples/intermediate/):
 
----
+    - `04_smart_pointers.rs` - 智能指针
+    - `05_self_referential.rs` - 自引用
 
-## 📊 模块统计
+    **实战** (examples/projects/):
 
-```text
-📚 核心文档: 15 个
-💻 代码示例: 50+ 个
-🧪 测试覆盖: 100%
-⭐ 用户评分: ⭐⭐⭐⭐⭐
-📅 最后更新: 2025-10-30
-```
+    - `lru_cache/` - LRU 缓存实现
+    - `linked_list/` - 链表实现
 
----
+    [查看所有示例](examples/)
 
-**下一步**: [开始学习](docs/01_ownership_rules.md) | [快速参考](docs/reference.md)
+    ---
+
+    ## 🤝 贡献与反馈
+
+    发现问题？有改进建议？
+
+    - 🐛 [报告 Bug](../../issues)
+    - 💬 [讨论交流](../../discussions)
+    - 📝 [贡献指南](CONTRIBUTING.md)
+
+    ---
+
+    ## 📊 模块统计
+
+    ```text
+    📚 核心文档: 15 个
+    💻 代码示例: 50+ 个
+    🧪 测试覆盖: 100%
+    ⭐ 用户评分: ⭐⭐⭐⭐⭐
+    📅 最后更新: 2025-10-30
+    ```
+
+    ---
+
+    **下一步**: [开始学习](docs/01_ownership_rules.md) | [快速参考](docs/reference.md)
+
 ```
 
 **检查点**: ✅ C01 README 精简完成
@@ -453,223 +458,238 @@ fn calculate_length(s: &String) -> usize {
 #### 任务 4: 创建 QUICK_PATHS.md
 
 ```markdown
-# 🚀 Rust 快速学习路径
+    # 🚀 Rust 快速学习路径
 
-> **目标**: 不同时间预算的最优学习路径  
-> **原则**: 实战优先，理论够用即可
+    > **目标**: 不同时间预算的最优学习路径
+    > **原则**: 实战优先，理论够用即可
 
----
+    ---
 
-## 🏃 路径 1: 30 分钟体验 Rust
+    ## 🏃 路径 1: 30 分钟体验 Rust
 
-**目标**: 感受 Rust 的特点
+    **目标**: 感受 Rust 的特点
 
-```text
-时间分配:
-━━━━━━━━━━━━━━━━━━━━━━━━━━
-1. 安装 Rust (5 分钟)
-2. Hello World (5 分钟)
-3. 所有权快速理解 (10 分钟)
-4. 运行一个示例 (10 分钟)
-━━━━━━━━━━━━━━━━━━━━━━━━━━
-```
+    ```text
+    时间分配:
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. 安装 Rust (5 分钟)
+    2. Hello World (5 分钟)
+    3. 所有权快速理解 (10 分钟)
+    4. 运行一个示例 (10 分钟)
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    ```
 
-**操作步骤**:
+    **操作步骤**:
 
-```bash
-# 1. 安装
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    ```bash
+    # 1. 安装
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-# 2. Hello World
-cargo new hello_rust
-cd hello_rust
-cargo run
+    # 2. Hello World
+    cargo new hello_rust
+    cd hello_rust
+    cargo run
 
-# 3. 所有权示例
-cd crates/c01_ownership_borrow_scope
-cargo run --example 01_ownership
+    # 3. 所有权示例
+    cd crates/c01_ownership_borrow_scope
+    cargo run --example 01_ownership
 
-# 4. 阅读
-cat examples/01_ownership.rs
-```
+    # 4. 阅读
+    cat examples/01_ownership.rs
+    ```
 
-**学完后你将**:
-- ✅ 知道 Rust 长什么样
-- ✅ 理解所有权的基本概念
-- ✅ 决定是否继续学习
+    **学完后你将**:
 
----
+    - ✅ 知道 Rust 长什么样
+    - ✅ 理解所有权的基本概念
+    - ✅ 决定是否继续学习
 
-## 🚶 路径 2: 2 小时快速入门
+    ---
 
-**目标**: 能写简单的 Rust 程序
+    ## 🚶 路径 2: 2 小时快速入门
 
-| 时间 | 模块 | 内容 | 输出 |
-|------|------|------|------|
-| 30 min | C01 | 所有权基础 | 理解 Move/Borrow |
-| 30 min | C02 | 类型系统 | 掌握基本类型 |
-| 30 min | C03 | 控制流 | if/loop/match |
-| 30 min | 实战 | 写一个小程序 | CLI 工具 |
+    **目标**: 能写简单的 Rust 程序
 
-**实战项目**: 构建一个简单的 TODO CLI
+    | 时间 | 模块 | 内容 | 输出 |
+    |------|------|------|------|
+    | 30 min | C01 | 所有权基础 | 理解 Move/Borrow |
+    | 30 min | C02 | 类型系统 | 掌握基本类型 |
+    | 30 min | C03 | 控制流 | if/loop/match |
+    | 30 min | 实战 | 写一个小程序 | CLI 工具 |
 
-```bash
-cd examples/quickstart_projects/todo_cli
-cargo run
-```
+    **实战项目**: 构建一个简单的 TODO CLI
 
----
+    ```bash
+    cd examples/quickstart_projects/todo_cli
+    cargo run
+    ```
 
-## 🚴 路径 3: 1 天掌握核心
+    ---
 
-**目标**: 能写中等复杂的程序
+    ## 🚴 路径 3: 1 天掌握核心
 
-### 上午（4 小时）
+    **目标**: 能写中等复杂的程序
 
-| 时间 | 内容 |
-|------|------|
-| 9:00-10:00 | C01 所有权系统 |
-| 10:00-11:00 | C02 类型系统 |
-| 11:00-12:00 | C03 控制流 |
-| 12:00-13:00 | C04 泛型 |
+    ### 上午（4 小时）
 
-### 下午（4 小时）
+    | 时间 | 内容 |
+    |------|------|
+    | 9:00-10:00 | C01 所有权系统 |
+    | 10:00-11:00 | C02 类型系统 |
+    | 11:00-12:00 | C03 控制流 |
+    | 12:00-13:00 | C04 泛型 |
 
-| 时间 | 内容 |
-|------|------|
-| 14:00-16:00 | C05 并发编程 |
-| 16:00-17:00 | 实战项目：多线程文件处理 |
-| 17:00-18:00 | 错误处理与测试 |
+    ### 下午（4 小时）
 
-**实战项目**: 
-- 多线程文件搜索工具
-- 简单的 Web 服务器
+    | 时间 | 内容 |
+    |------|------|
+    | 14:00-16:00 | C05 并发编程 |
+    | 16:00-17:00 | 实战项目：多线程文件处理 |
+    | 17:00-18:00 | 错误处理与测试 |
 
----
+    **实战项目**:
 
-## 🏃‍♂️ 路径 4: 1 周深入学习
+    - 多线程文件搜索工具
+    - 简单的 Web 服务器
 
-**目标**: 能独立开发项目
+    ---
 
-### Day 1-2: 基础巩固
-- C01-C04 深入学习
-- 完成 20+ 练习题
-- 实战: CLI 工具
+    ## 🏃‍♂️ 路径 4: 1 周深入学习
 
-### Day 3-4: 并发与异步
-- C05 线程与并发
-- C06 异步编程
-- 实战: 异步 Web 服务
+    **目标**: 能独立开发项目
 
-### Day 5: 高级特性
-- C09 设计模式
-- C11 宏系统
-- 实战: 构建 DSL
+    ### Day 1-2: 基础巩固
 
-### Day 6-7: 综合项目
-- 构建一个完整应用
-- 测试、文档、部署
-- 代码审查与优化
+    - C01-C04 深入学习
+    - 完成 20+ 练习题
+    - 实战: CLI 工具
 
-**项目建议**:
-- Web API 服务
-- 命令行工具
-- 系统工具
+    ### Day 3-4: 并发与异步
 
----
+    - C05 线程与并发
+    - C06 异步编程
+    - 实战: 异步 Web 服务
 
-## 🚗 路径 5: 1 个月精通
+    ### Day 5: 高级特性
 
-**Week 1: 语言基础**
-- 系统学习 C01-C04
-- 刷 50+ 练习题
-- 阅读他人代码
+    - C09 设计模式
+    - C11 宏系统
+    - 实战: 构建 DSL
 
-**Week 2: 系统编程**
-- C05 并发
-- C07 进程管理
-- C10 网络编程
+    ### Day 6-7: 综合项目
 
-**Week 3: 现代特性**
-- C06 异步
-- C09 设计模式
-- C11 宏
+    - 构建一个完整应用
+    - 测试、文档、部署
+    - 代码审查与优化
 
-**Week 4: 实战与生态**
-- 完整项目开发
-- 生态工具学习
-- 开源贡献
+    **项目建议**:
 
----
+    - Web API 服务
+    - 命令行工具
+    - 系统工具
 
-## 🎯 按需求选路径
+    ---
 
-### 我想做 Web 开发
+    ## 🚗 路径 5: 1 个月精通
 
-**必学**: C01, C02, C06 (async), C10 (network)  
-**推荐**: C09 (patterns)  
-**时间**: 2-3 周  
-**项目**: RESTful API + 数据库
+    **Week 1: 语言基础**
 
----
+    - 系统学习 C01-C04
+    - 刷 50+ 练习题
+    - 阅读他人代码
 
-### 我想做系统编程
+    **Week 2: 系统编程**
 
-**必学**: C01, C02, C05 (threads), C07 (process)  
-**推荐**: C10 (network)  
-**时间**: 3-4 周  
-**项目**: 文件系统工具 / 网络代理
+    - C05 并发
+    - C07 进程管理
+    - C10 网络编程
 
----
+    **Week 3: 现代特性**
 
-### 我想做命令行工具
+    - C06 异步
+    - C09 设计模式
+    - C11 宏
 
-**必学**: C01, C02, C03  
-**推荐**: C04 (generics)  
-**时间**: 1-2 周  
-**项目**: 实用 CLI 工具
+    **Week 4: 实战与生态**
 
----
+    - 完整项目开发
+    - 生态工具学习
+    - 开源贡献
 
-### 我想深入理解 Rust
+    ---
 
-**必学**: 所有模块  
-**推荐**: 阅读标准库源码  
-**时间**: 2-3 个月  
-**目标**: 贡献 Rust 生态
+    ## 🎯 按需求选路径
 
----
+    ### 我想做 Web 开发
 
-## 📚 配套资源
+    **必学**: C01, C02, C06 (async), C10 (network)
+    **推荐**: C09 (patterns)
+    **时间**: 2-3 周
+    **项目**: RESTful API + 数据库
 
-### 官方资源
-- [The Rust Book](https://doc.rust-lang.org/book/)
-- [Rust by Example](https://doc.rust-lang.org/rust-by-example/)
-- [Rustlings](https://github.com/rust-lang/rustlings)
+    ---
 
-### 本项目资源
-- [模块导航](../crates/)
-- [完整文档](../docs/)
-- [代码示例](../examples/)
+    ### 我想做系统编程
 
-### 社区资源
-- [Rust 中文社区](https://rust.cc/)
-- [r/rust](https://reddit.com/r/rust)
-- [Rust Users Forum](https://users.rust-lang.org/)
+    **必学**: C01, C02, C05 (threads), C07 (process)
+    **推荐**: C10 (network)
+    **时间**: 3-4 周
+    **项目**: 文件系统工具 / 网络代理
 
----
+    ---
 
-## 🎓 学习建议
+    ### 我想做命令行工具
 
-1. **边做边学**: 不要只看不练
-2. **写注释**: 用自己的话解释代码
-3. **读错误**: Rust 编译器很友好
-4. **多提问**: 社区很友善
-5. **写博客**: 教是最好的学
+    **必学**: C01, C02, C03
+    **推荐**: C04 (generics)
+    **时间**: 1-2 周
+    **项目**: 实用 CLI 工具
 
----
+    ---
 
-**开始学习**: [选择你的路径](#) | [查看模块](../crates/)
+    ### 我想深入理解 Rust
+
+    **必学**: 所有模块
+    **推荐**: 阅读标准库源码
+    **时间**: 2-3 个月
+    **目标**: 贡献 Rust 生态
+
+    ---
+
+    ## 📚 配套资源
+
+    ### 官方资源
+
+    - [The Rust Book](https://doc.rust-lang.org/book/)
+    - [Rust by Example](https://doc.rust-lang.org/rust-by-example/)
+    - [Rustlings](https://github.com/rust-lang/rustlings)
+
+    ### 本项目资源
+
+    - [模块导航](../crates/)
+    - [完整文档](../docs/)
+    - [代码示例](../examples/)
+
+    ### 社区资源
+
+    - [Rust 中文社区](https://rust.cc/)
+    - [r/rust](https://reddit.com/r/rust)
+    - [Rust Users Forum](https://users.rust-lang.org/)
+
+    ---
+
+    ## 🎓 学习建议
+
+    1. **边做边学**: 不要只看不练
+    2. **写注释**: 用自己的话解释代码
+    3. **读错误**: Rust 编译器很友好
+    4. **多提问**: 社区很友善
+    5. **写博客**: 教是最好的学
+
+    ---
+
+    **开始学习**: [选择你的路径](#) | [查看模块](../crates/)
+
 ```
 
 **检查点**: ✅ QUICK_PATHS.md 创建完成
@@ -684,20 +704,21 @@ cargo run
 
 #### 5.1 分析现有内容
 
-```bash
-cd crates/c01_ownership_borrow_scope/docs
+    ```bash
+    cd crates/c01_ownership_borrow_scope/docs
 
-# 统计现有文档
-find . -name "*.md" | wc -l
-find . -name "*.md" -exec wc -l {} + | tail -1
+    # 统计现有文档
+    find . -name "*.md" | wc -l
+    find . -name "*.md" -exec wc -l {} + | tail -1
 
-# 识别重要文档
-ls -lh tier_*/*.md
-```
+    # 识别重要文档
+    ls -lh tier_*/*.md
+    ```
 
 #### 5.2 保留清单（20 个文档）
 
 **Tier 1 基础 (5 个)**:
+
 1. `tier_01_foundations/01_项目概览.md`
 2. `tier_01_foundations/02_主索引导航.md`
 3. `tier_01_foundations/03_术语表.md`
@@ -705,6 +726,7 @@ ls -lh tier_*/*.md
 5. `tier_01_foundations/README.md`
 
 **Tier 2 实践 (8 个)**:
+
 1. `tier_02_guides/01_所有权快速入门.md`
 2. `tier_02_guides/02_借用实践指南.md`
 3. `tier_02_guides/03_生命周期实践.md`
@@ -715,6 +737,7 @@ ls -lh tier_*/*.md
 8. `tier_02_guides/README.md`
 
 **Tier 3 进阶 (5 个)**:
+
 1. `tier_03_references/01_所有权规则参考.md`
 2. `tier_03_references/02_借用检查器详解.md`
 3. `tier_03_references/05_智能指针API参考.md`
@@ -722,6 +745,7 @@ ls -lh tier_*/*.md
 5. `tier_03_references/README.md`
 
 **主目录 (2 个)**:
+
 1. `FAQ.md`
 2. `Glossary.md`
 
@@ -759,6 +783,7 @@ mv *_exp*.rs archive/
 当前: 89 个 examples → 目标: 20 个精选
 
 **保留**:
+
 ```text
 核心异步 (5 个):
 - 01_async_basics.rs
@@ -800,6 +825,7 @@ mv scripts/start_observe.* ../rust-async-deploy/
 ```
 
 **在 README 中链接**:
+
 ```markdown
 ## 🚀 生产部署
 
@@ -819,6 +845,7 @@ mv scripts/start_observe.* ../rust-async-deploy/
 #### 7.1 模式分级
 
 **核心 10 种** (所有人必学):
+
 1. Builder
 2. Factory Method
 3. Singleton
@@ -862,7 +889,7 @@ docs/
 
 **推荐模式**: Builder + Singleton
 
-**为什么**: 
+**为什么**:
 - Builder: 复杂配置对象
 - Singleton: 全局访问
 
@@ -896,8 +923,8 @@ docs/
 ```markdown
 # 真实案例：[案例名称]
 
-> **难度**: ⭐⭐⭐  
-> **时间**: 1-2 小时  
+> **难度**: ⭐⭐⭐
+> **时间**: 1-2 小时
 > **前置知识**: [列出]
 
 ---
@@ -970,6 +997,7 @@ docs/
 
 - [相关文档]
 - [外部资源]
+
 ```
 
 #### 案例优先级
@@ -1008,7 +1036,7 @@ on:
     branches: [ main ]
 
 env:
-  RUST_VERSION: "1.90"
+  RUST_VERSION: "1.92.0"
 
 jobs:
   # 作业 1: 文档检查
@@ -1016,12 +1044,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: 检查 README 长度
         run: |
           chmod +x scripts/check_standards.sh
           ./scripts/check_standards.sh
-      
+
       - name: 检查死链接
         uses: gaurav-nelson/github-action-markdown-link-check@v1
         with:
@@ -1039,14 +1067,14 @@ jobs:
           - c09_design_pattern
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: ${{ env.RUST_VERSION }}
-      
+
       - name: Build
         run: cd crates/${{ matrix.crate }} && cargo build --verbose
-      
+
       - name: Run tests
         run: cd crates/${{ matrix.crate }} && cargo test --verbose
 
@@ -1061,11 +1089,11 @@ jobs:
           - c09_design_pattern
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: ${{ env.RUST_VERSION }}
-      
+
       - name: Test examples
         run: |
           cd crates/${{ matrix.crate }}
@@ -1084,7 +1112,7 @@ jobs:
         with:
           toolchain: ${{ env.RUST_VERSION }}
           components: clippy
-      
+
       - name: Run Clippy
         run: cargo clippy --all-targets --all-features -- -D warnings
 
@@ -1097,7 +1125,7 @@ jobs:
         with:
           toolchain: ${{ env.RUST_VERSION }}
           components: rustfmt
-      
+
       - name: Check formatting
         run: cargo fmt --all -- --check
 ```
@@ -1180,7 +1208,7 @@ body:
         - 其他
     validations:
       required: true
-  
+
   - type: input
     id: file
     attributes:
@@ -1188,7 +1216,7 @@ body:
       placeholder: "例如: crates/c01_ownership/docs/guide.md"
     validations:
       required: true
-  
+
   - type: textarea
     id: problem
     attributes:
@@ -1196,7 +1224,7 @@ body:
       placeholder: "描述你遇到的困惑或错误"
     validations:
       required: true
-  
+
   - type: textarea
     id: suggestion
     attributes:
@@ -1310,8 +1338,8 @@ body:
 
 ---
 
-**审查人**: [姓名]  
-**审查日期**: [YYYY-MM-DD]  
+**审查人**: [姓名]
+**审查日期**: [YYYY-MM-DD]
 **下次审查**: [YYYY-MM-DD]
 ```
 
@@ -1332,13 +1360,13 @@ body:
 ```markdown
 # C01 - Ownership System
 
-> **📌 模块状态**: ✅ **稳定版 v1.0** (2025-11-30)  
-> 
-> **冻结说明**: 
+> **📌 模块状态**: ✅ **稳定版 v1.0** (2025-11-30)
+>
+> **冻结说明**:
 > - ✅ 核心内容已完成且稳定
 > - ✅ 只接受: Bug修复、错别字、Rust版本兼容
 > - ❌ 不再接受: 新章节、大重构、"完善"
-> 
+>
 > **贡献新内容？** → 考虑创建[扩展项目](#扩展项目)
 ```
 
@@ -1347,82 +1375,83 @@ body:
 文件: `docs/EXTENSION_PROJECTS_GUIDE.md`
 
 ```markdown
-# 扩展项目指南
+    # 扩展项目指南
 
-## 🎯 什么是扩展项目？
+    ## 🎯 什么是扩展项目？
 
-当核心模块已冻结，但你想添加更深入/小众的内容时，创建独立的扩展项目。
+    当核心模块已冻结，但你想添加更深入/小众的内容时，创建独立的扩展项目。
 
----
+    ---
 
-## 📋 扩展项目列表
+    ## 📋 扩展项目列表
 
-### 已有扩展
+    ### 已有扩展
 
-1. **[rust-formal-verification](link)**
-   - 基于: C01 Ownership
-   - 内容: 形式化验证、类型理论
-   - 维护者: [姓名]
+    1. **[rust-formal-verification](link)**
+      - 基于: C01 Ownership
+      - 内容: 形式化验证、类型理论
+      - 维护者: [姓名]
 
-2. **[rust-async-deploy](link)**
-   - 基于: C06 Async
-   - 内容: K8s、Docker、生产部署
-   - 维护者: [姓名]
+    2. **[rust-async-deploy](link)**
+      - 基于: C06 Async
+      - 内容: K8s、Docker、生产部署
+      - 维护者: [姓名]
 
----
+    ---
 
-## 🚀 创建新扩展
+    ## 🚀 创建新扩展
 
-### 1. 确定主题
+    ### 1. 确定主题
 
-**适合扩展的内容**:
-- ✅ 高级/小众主题
-- ✅ 特定领域深入
-- ✅ 实验性特性
-- ✅ 工具/部署相关
+    **适合扩展的内容**:
+    - ✅ 高级/小众主题
+    - ✅ 特定领域深入
+    - ✅ 实验性特性
+    - ✅ 工具/部署相关
 
-**不适合**:
-- ❌ 核心概念
-- ❌ 通用最佳实践
-- ❌ 入门内容
+    **不适合**:
+    - ❌ 核心概念
+    - ❌ 通用最佳实践
+    - ❌ 入门内容
 
-### 2. 项目结构
+    ### 2. 项目结构
 
-```text
-rust-[主题名]/
-├── README.md (<200 行)
-├── docs/
-│   ├── guide.md
-│   └── examples/
-├── src/ 或 examples/
-└── CONTRIBUTING.md
-```
+    ```text
+    rust-[主题名]/
+    ├── README.md (<200 行)
+    ├── docs/
+    │   ├── guide.md
+    │   └── examples/
+    ├── src/ 或 examples/
+    └── CONTRIBUTING.md
+    ```
 
-### 3. 链接回主项目
+    ### 3. 链接回主项目
 
-在扩展项目 README 中:
+    在扩展项目 README 中:
 
-```markdown
-> **扩展自**: [Rust Learning - C0X](link)  
-> **前置知识**: 需先完成 C0X 模块
-```
+    ```markdown
+    > **扩展自**: [Rust Learning - C0X](link)
+    > **前置知识**: 需先完成 C0X 模块
+    ```
 
-在主项目中添加链接:
+    在主项目中添加链接:
 
-```markdown
-## 🚀 扩展学习
+    ```markdown
+    ## 🚀 扩展学习
 
-完成本模块后，可以探索:
-- [高级主题名称](扩展项目链接)
-```
+    完成本模块后，可以探索:
+    - [高级主题名称](扩展项目链接)
+    ```
 
----
+    ---
 
-## 🤝 维护协议
+    ## 🤝 维护协议
 
-- 扩展项目独立维护
-- 主项目不负责扩展内容
-- 鼓励社区贡献
+    - 扩展项目独立维护
+    - 主项目不负责扩展内容
+    - 鼓励社区贡献
+
 ```
 
 **检查点**: ✅ 冻结机制和扩展指南完成
@@ -1453,7 +1482,7 @@ updates:
       prefix: "chore"
       prefix-development: "chore"
       include: "scope"
-  
+
   # GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -1528,16 +1557,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Install dependencies
         run: |
           npm install -g markdown-link-check
-      
+
       - name: Run health check
         run: |
           chmod +x scripts/weekly_doc_check.sh
           ./scripts/weekly_doc_check.sh > health_report.txt
-      
+
       - name: Create Issue if problems found
         if: failure()
         uses: actions/github-script@v7
@@ -1545,7 +1574,7 @@ jobs:
           script: |
             const fs = require('fs');
             const report = fs.readFileSync('health_report.txt', 'utf8');
-            
+
             github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -1644,6 +1673,7 @@ jobs:
 **触发条件**: 连续 2 周 > 10 小时/周
 
 **行动**:
+
 1. 暂停新功能
 2. 识别时间黑洞
 3. 进一步精简或冻结模块
@@ -1653,6 +1683,7 @@ jobs:
 **触发条件**: docs/docs/ > 50 个文件
 
 **行动**:
+
 1. 紧急归档
 2. 审查添加原因
 3. 收紧标准
@@ -1662,6 +1693,7 @@ jobs:
 **触发条件**: 通过率 < 85%
 
 **行动**:
+
 1. 优先修复 CI
 2. 审查测试质量
 3. 考虑简化测试
@@ -1670,9 +1702,9 @@ jobs:
 
 ## 📞 负责人与联系方式
 
-**项目维护者**: [姓名]  
-**紧急联系**: [邮箱]  
-**进度追踪**: [看板链接]  
+**项目维护者**: [姓名]
+**紧急联系**: [邮箱]
+**进度追踪**: [看板链接]
 
 ---
 
@@ -1680,15 +1712,14 @@ jobs:
 
 **准备好了吗？**
 
-→ [Week 1 任务清单](#week-1-2-紧急清理11月第1-2周)  
-→ [加入讨论](../../discussions)  
+→ [Week 1 任务清单](#week-1-2-紧急清理11月第1-2周)
+→ [加入讨论](../../discussions)
 → [查看批判性评价](CRATES_CRITICAL_EVALUATION_2025_10_30.md)
 
 ---
 
-**计划创建**: 2025-10-30  
-**预计完成**: 2026-01-31  
+**计划创建**: 2025-10-30
+**预计完成**: 2026-01-31
 **状态**: 📋 待执行
 
 🦀 **Less is More! 可持续才是最好的！** 🦀
-

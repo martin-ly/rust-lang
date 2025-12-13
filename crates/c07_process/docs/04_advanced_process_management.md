@@ -74,7 +74,7 @@ struct PooledProcess {
 impl ProcessPool {
     pub fn new(config: ProcessPoolConfig, base_command: String, base_args: Vec<String>) -> Self {
         let semaphore = Arc::new(Semaphore::new(config.max_processes));
-        
+
         Self {
             config,
             processes: Arc::new(Mutex::new(VecDeque::new())),
@@ -83,18 +83,18 @@ impl ProcessPool {
             base_args,
         }
     }
-    
+
     pub async fn initialize(&self) -> Result<(), Box<dyn std::error::Error>> {
         let mut processes = self.processes.lock().await;
-        
+
         for _ in 0..self.config.initial_processes {
             let process = self.create_process().await?;
             processes.push_back(process);
         }
-        
+
         Ok(())
     }
-    
+
     async fn create_process(&self) -> Result<PooledProcess, Box<dyn std::error::Error>> {
         let mut child = Command::new(&self.base_command)
             .args(&self.base_args)
@@ -102,7 +102,7 @@ impl ProcessPool {
             .stdout(Stdio::piped())
             .stderr(Stdio::piped())
             .spawn()?;
-        
+
         Ok(PooledProcess {
             child,
             created_at: Instant::now(),
@@ -111,12 +111,12 @@ impl ProcessPool {
             is_healthy: true,
         })
     }
-    
+
     pub async fn execute_task(&self, task_data: &str) -> Result<String, Box<dyn std::error::Error>> {
         let _permit = self.semaphore.acquire().await?;
-        
+
         let mut processes = self.processes.lock().await;
-        
+
         // 查找可用的健康进程
         let mut process_index = None;
         for (i, process) in processes.iter_mut().enumerate() {
@@ -125,27 +125,27 @@ impl ProcessPool {
                 break;
             }
         }
-        
+
         let process = if let Some(index) = process_index {
             processes.remove(index).unwrap()
         } else {
             // 创建新进程
             self.create_process().await?
         };
-        
+
         // 执行任务
         let result = self.execute_with_process(process, task_data).await;
-        
+
         // 将进程返回池中（如果健康）
         if let Ok(mut process) = result {
             process.last_used = Instant::now();
             process.usage_count += 1;
             processes.push_back(process);
         }
-        
+
         result.map(|p| String::new()) // 简化实现
     }
-    
+
     async fn execute_with_process(
         &self,
         mut process: PooledProcess,
@@ -158,10 +158,10 @@ impl ProcessPool {
             async_stdin.write_all(b"\n").await?;
             async_stdin.flush().await?;
         }
-        
+
         // 读取结果
         let output = process.child.wait_with_output().await?;
-        
+
         if output.status.success() {
             process.is_healthy = true;
             Ok(process)
@@ -170,29 +170,29 @@ impl ProcessPool {
             Err("进程执行失败".into())
         }
     }
-    
+
     pub async fn health_check(&self) -> Result<(), Box<dyn std::error::Error>> {
         let mut processes = self.processes.lock().await;
         let now = Instant::now();
-        
+
         // 移除不健康的进程
         processes.retain(|process| {
-            process.is_healthy && 
+            process.is_healthy &&
             now.duration_since(process.last_used) < self.config.max_idle_time
         });
-        
+
         // 确保最小进程数
         while processes.len() < self.config.min_processes {
             let process = self.create_process().await?;
             processes.push_back(process);
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn get_stats(&self) -> ProcessPoolStats {
         let processes = self.processes.lock().await;
-        
+
         ProcessPoolStats {
             total_processes: processes.len(),
             healthy_processes: processes.iter().filter(|p| p.is_healthy).count(),
@@ -241,7 +241,7 @@ pub struct LoadBalancedProcessPool {
 impl LoadBalancedProcessPool {
     pub fn new(pools: Vec<Arc<ProcessPool>>, strategy: LoadBalancingStrategy) -> Self {
         let pool_weights = vec![1.0; pools.len()];
-        
+
         Self {
             pools,
             strategy,
@@ -249,14 +249,14 @@ impl LoadBalancedProcessPool {
             pool_weights,
         }
     }
-    
+
     pub async fn execute_task(&self, task_data: &str) -> Result<String, Box<dyn std::error::Error>> {
         let pool_index = self.select_pool().await;
         let pool = &self.pools[pool_index];
-        
+
         pool.execute_task(task_data).await
     }
-    
+
     async fn select_pool(&self) -> usize {
         match self.strategy {
             LoadBalancingStrategy::RoundRobin => {
@@ -268,7 +268,7 @@ impl LoadBalancedProcessPool {
             LoadBalancingStrategy::LeastConnections => {
                 let mut min_connections = usize::MAX;
                 let mut selected_index = 0;
-                
+
                 for (i, pool) in self.pools.iter().enumerate() {
                     let stats = pool.get_stats().await;
                     if stats.total_processes < min_connections {
@@ -276,7 +276,7 @@ impl LoadBalancedProcessPool {
                         selected_index = i;
                     }
                 }
-                
+
                 selected_index
             }
             LoadBalancingStrategy::WeightedRoundRobin => {
@@ -294,12 +294,12 @@ impl LoadBalancedProcessPool {
             }
         }
     }
-    
+
     async fn weighted_round_robin(&self) -> usize {
         let mut index = self.current_index.lock().await;
         let mut max_weight = 0.0;
         let mut selected_index = 0;
-        
+
         for (i, weight) in self.pool_weights.iter().enumerate() {
             private static mut current_weight: f64 = 0.0;
             current_weight += weight;
@@ -308,30 +308,30 @@ impl LoadBalancedProcessPool {
                 selected_index = i;
             }
         }
-        
+
         self.pool_weights[selected_index] -= 1.0;
         if self.pool_weights[selected_index] <= 0.0 {
             self.pool_weights[selected_index] = 1.0;
         }
-        
+
         selected_index
     }
-    
+
     async fn least_response_time(&self) -> usize {
         let mut min_response_time = Duration::MAX;
         let mut selected_index = 0;
-        
+
         for (i, pool) in self.pools.iter().enumerate() {
             let start = Instant::now();
             let _ = pool.execute_task("ping").await; // 健康检查
             let response_time = start.elapsed();
-            
+
             if response_time < min_response_time {
                 min_response_time = response_time;
                 selected_index = i;
             }
         }
-        
+
         selected_index
     }
 }
@@ -397,37 +397,37 @@ impl ProcessHealthMonitor {
             max_response_time,
         }
     }
-    
+
     pub async fn start_monitoring(&self) -> Result<(), Box<dyn std::error::Error>> {
         let mut interval = interval(self.check_interval);
-        
+
         loop {
             interval.tick().await;
             self.perform_health_check().await?;
         }
     }
-    
+
     async fn perform_health_check(&self) -> Result<(), Box<dyn std::error::Error>> {
         let mut processes = self.processes.lock().await;
-        
+
         for process in processes.iter_mut() {
             let metrics = self.collect_process_metrics(process.pid).await?;
             process.metrics = metrics.clone();
             process.last_health_check = Instant::now();
-            
+
             // 更新健康状态
             process.health_status = self.determine_health_status(&metrics);
-            
+
             // 记录健康检查结果
             self.log_health_status(process).await;
         }
-        
+
         Ok(())
     }
-    
+
     async fn collect_process_metrics(&self, pid: u32) -> Result<ProcessMetrics, Box<dyn std::error::Error>> {
         use std::process::Command;
-        
+
         // 收集内存使用情况
         let memory_output = Command::new("ps")
             .arg("-p")
@@ -436,7 +436,7 @@ impl ProcessHealthMonitor {
             .arg("rss")
             .output()
             .await?;
-        
+
         let memory_mb = if memory_output.status.success() {
             let output_str = String::from_utf8_lossy(&memory_output.stdout);
             output_str.lines()
@@ -447,7 +447,7 @@ impl ProcessHealthMonitor {
         } else {
             0
         };
-        
+
         // 收集CPU使用情况
         let cpu_output = Command::new("ps")
             .arg("-p")
@@ -456,7 +456,7 @@ impl ProcessHealthMonitor {
             .arg("pcpu")
             .output()
             .await?;
-        
+
         let cpu_percent = if cpu_output.status.success() {
             let output_str = String::from_utf8_lossy(&cpu_output.stdout);
             output_str.lines()
@@ -466,10 +466,10 @@ impl ProcessHealthMonitor {
         } else {
             0.0
         };
-        
+
         // 测试响应时间
         let response_time = self.measure_response_time(pid).await;
-        
+
         Ok(ProcessMetrics {
             memory_usage_mb: memory_mb,
             cpu_percent,
@@ -478,23 +478,23 @@ impl ProcessHealthMonitor {
             success_count: 0, // 实际实现中需要维护成功计数
         })
     }
-    
+
     async fn measure_response_time(&self, pid: u32) -> Duration {
         let start = Instant::now();
-        
+
         // 发送健康检查请求
         let health_check_result = Command::new("kill")
             .arg("-0")
             .arg(pid.to_string())
             .output()
             .await;
-        
+
         match health_check_result {
             Ok(output) if output.status.success() => start.elapsed(),
             _ => Duration::MAX,
         }
     }
-    
+
     fn determine_health_status(&self, metrics: &ProcessMetrics) -> HealthStatus {
         if metrics.memory_usage_mb > self.max_memory_mb ||
            metrics.cpu_percent > self.max_cpu_percent ||
@@ -508,7 +508,7 @@ impl ProcessHealthMonitor {
             HealthStatus::Healthy
         }
     }
-    
+
     async fn log_health_status(&self, process: &MonitoredProcess) {
         match process.health_status {
             HealthStatus::Critical => {
@@ -534,10 +534,10 @@ impl ProcessHealthMonitor {
             }
         }
     }
-    
+
     pub async fn add_process(&self, pid: u32, name: String) {
         let mut processes = self.processes.lock().await;
-        
+
         let monitored_process = MonitoredProcess {
             pid,
             name,
@@ -552,18 +552,18 @@ impl ProcessHealthMonitor {
                 success_count: 0,
             },
         };
-        
+
         processes.push(monitored_process);
     }
-    
+
     pub async fn get_health_summary(&self) -> HealthSummary {
         let processes = self.processes.lock().await;
-        
+
         let mut healthy_count = 0;
         let mut warning_count = 0;
         let mut critical_count = 0;
         let mut dead_count = 0;
-        
+
         for process in processes.iter() {
             match process.health_status {
                 HealthStatus::Healthy => healthy_count += 1,
@@ -572,7 +572,7 @@ impl ProcessHealthMonitor {
                 HealthStatus::Dead => dead_count += 1,
             }
         }
-        
+
         HealthSummary {
             total_processes: processes.len(),
             healthy_processes: healthy_count,
@@ -620,39 +620,39 @@ impl AutoRecoveryManager {
             max_retry_delay,
         }
     }
-    
+
     pub async fn recover_process(
         &self,
         process_config: ProcessConfig,
     ) -> Result<tokio::process::Child, Box<dyn std::error::Error>> {
         let mut current_delay = self.retry_delay;
         let mut attempt = 0;
-        
+
         loop {
             match self.attempt_process_recovery(&process_config).await {
                 Ok(child) => return Ok(child),
                 Err(e) => {
                     attempt += 1;
-                    
+
                     if attempt >= self.max_retry_attempts {
                         return Err(format!(
                             "进程恢复失败，已尝试 {} 次: {}",
                             self.max_retry_attempts, e
                         ).into());
                     }
-                    
+
                     println!(
                         "进程恢复失败 (尝试 {}/{}), {} 秒后重试: {}",
                         attempt, self.max_retry_attempts, current_delay.as_secs(), e
                     );
-                    
+
                     sleep(current_delay).await;
-                    
+
                     // 指数退避
                     current_delay = Duration::from_millis(
                         (current_delay.as_millis() as f64 * self.backoff_multiplier) as u64
                     );
-                    
+
                     if current_delay > self.max_retry_delay {
                         current_delay = self.max_retry_delay;
                     }
@@ -660,23 +660,23 @@ impl AutoRecoveryManager {
             }
         }
     }
-    
+
     async fn attempt_process_recovery(
         &self,
         config: &ProcessConfig,
     ) -> Result<tokio::process::Child, Box<dyn std::error::Error>> {
         use std::process::{Command, Stdio};
-        
+
         let mut child = Command::new(&config.program)
             .args(&config.args)
             .stdin(Stdio::piped())
             .stdout(Stdio::piped())
             .stderr(Stdio::piped())
             .spawn()?;
-        
+
         // 等待一小段时间确保进程正常启动
         sleep(Duration::from_millis(100)).await;
-        
+
         // 检查进程是否仍在运行
         match child.try_wait() {
             Ok(Some(status)) => {
@@ -741,46 +741,46 @@ impl ResourceLimiter {
             current_usage: Arc::new(Mutex::new(ResourceUsage::default())),
         }
     }
-    
+
     pub async fn check_resource_limits(&self) -> Result<(), ResourceLimitError> {
         let usage = self.current_usage.lock().await;
-        
+
         if usage.memory_mb > self.max_memory_mb {
             return Err(ResourceLimitError::MemoryLimitExceeded {
                 current: usage.memory_mb,
                 limit: self.max_memory_mb,
             });
         }
-        
+
         if usage.cpu_percent > self.max_cpu_percent {
             return Err(ResourceLimitError::CpuLimitExceeded {
                 current: usage.cpu_percent,
                 limit: self.max_cpu_percent,
             });
         }
-        
+
         if usage.file_descriptors > self.max_file_descriptors {
             return Err(ResourceLimitError::FileDescriptorLimitExceeded {
                 current: usage.file_descriptors,
                 limit: self.max_file_descriptors,
             });
         }
-        
+
         if usage.execution_time > self.max_execution_time {
             return Err(ResourceLimitError::ExecutionTimeLimitExceeded {
                 current: usage.execution_time,
                 limit: self.max_execution_time,
             });
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn update_resource_usage(&self, usage: ResourceUsage) {
         let mut current = self.current_usage.lock().await;
         *current = usage;
     }
-    
+
     pub async fn get_current_usage(&self) -> ResourceUsage {
         self.current_usage.lock().await.clone()
     }
@@ -790,13 +790,13 @@ impl ResourceLimiter {
 pub enum ResourceLimitError {
     #[error("内存使用超限: 当前 {current}MB, 限制 {limit}MB")]
     MemoryLimitExceeded { current: u64, limit: u64 },
-    
+
     #[error("CPU使用超限: 当前 {current}%, 限制 {limit}%")]
     CpuLimitExceeded { current: f64, limit: f64 },
-    
+
     #[error("文件描述符超限: 当前 {current}, 限制 {limit}")]
     FileDescriptorLimitExceeded { current: u32, limit: u32 },
-    
+
     #[error("执行时间超限: 当前 {current:?}, 限制 {limit:?}")]
     ExecutionTimeLimitExceeded { current: Duration, limit: Duration },
 }
@@ -839,66 +839,66 @@ impl QuotaManager {
             usage_tracker: Arc::new(RwLock::new(HashMap::new())),
         }
     }
-    
+
     pub async fn set_quota(&self, process_id: String, quota: ProcessQuota) {
         let mut quotas = self.quotas.write().await;
         quotas.insert(process_id, quota);
     }
-    
+
     pub async fn check_quota(&self, process_id: &str) -> Result<(), QuotaError> {
         let quotas = self.quotas.read().await;
         let usage_tracker = self.usage_tracker.read().await;
-        
+
         let quota = quotas.get(process_id)
             .ok_or_else(|| QuotaError::QuotaNotFound(process_id.to_string()))?;
-        
+
         let usage = usage_tracker.get(process_id)
             .cloned()
             .unwrap_or_default();
-        
+
         if usage.memory_mb > quota.max_memory_mb {
             return Err(QuotaError::MemoryQuotaExceeded {
                 current: usage.memory_mb,
                 limit: quota.max_memory_mb,
             });
         }
-        
+
         if usage.cpu_percent > quota.max_cpu_percent {
             return Err(QuotaError::CpuQuotaExceeded {
                 current: usage.cpu_percent,
                 limit: quota.max_cpu_percent,
             });
         }
-        
+
         if usage.file_descriptors > quota.max_file_descriptors {
             return Err(QuotaError::FileDescriptorQuotaExceeded {
                 current: usage.file_descriptors,
                 limit: quota.max_file_descriptors,
             });
         }
-        
+
         if usage.execution_time > quota.max_execution_time {
             return Err(QuotaError::ExecutionTimeQuotaExceeded {
                 current: usage.execution_time,
                 limit: quota.max_execution_time,
             });
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn update_usage(&self, process_id: String, usage: ResourceUsage) {
         let mut usage_tracker = self.usage_tracker.write().await;
         usage_tracker.insert(process_id, usage);
     }
-    
+
     pub async fn get_quota_status(&self, process_id: &str) -> Option<QuotaStatus> {
         let quotas = self.quotas.read().await;
         let usage_tracker = self.usage_tracker.read().await;
-        
+
         let quota = quotas.get(process_id)?;
         let usage = usage_tracker.get(process_id).cloned().unwrap_or_default();
-        
+
         Some(QuotaStatus {
             quota: quota.clone(),
             usage,
@@ -924,16 +924,16 @@ pub struct QuotaStatus {
 pub enum QuotaError {
     #[error("配额未找到: {0}")]
     QuotaNotFound(String),
-    
+
     #[error("内存配额超限: 当前 {current}MB, 限制 {limit}MB")]
     MemoryQuotaExceeded { current: u64, limit: u64 },
-    
+
     #[error("CPU配额超限: 当前 {current}%, 限制 {limit}%")]
     CpuQuotaExceeded { current: f64, limit: f64 },
-    
+
     #[error("文件描述符配额超限: 当前 {current}, 限制 {limit}")]
     FileDescriptorQuotaExceeded { current: u32, limit: u32 },
-    
+
     #[error("执行时间配额超限: 当前 {current:?}, 限制 {limit:?}")]
     ExecutionTimeQuotaExceeded { current: Duration, limit: Duration },
 }
@@ -1016,11 +1016,11 @@ impl ProcessScheduler {
             time_slice,
         }
     }
-    
+
     pub async fn schedule_process(&self, process: ScheduledProcess) -> Result<(), SchedulerError> {
         let mut ready_queue = self.ready_queue.lock().await;
         let mut running_processes = self.running_processes.lock().await;
-        
+
         // 检查是否可以立即运行
         if running_processes.len() < self.max_concurrent {
             let running_process = RunningProcess {
@@ -1029,29 +1029,29 @@ impl ProcessScheduler {
                 remaining_time: process.estimated_duration,
                 priority: process.priority.clone(),
             };
-            
+
             running_processes.push(running_process);
             println!("进程 {} 立即开始执行", process.process_id);
         } else {
             ready_queue.push(process);
             println!("进程 {} 加入就绪队列", process.process_id);
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn preempt_process(&self, process_id: &str) -> Result<(), SchedulerError> {
         let mut running_processes = self.running_processes.lock().await;
         let mut ready_queue = self.ready_queue.lock().await;
-        
+
         // 查找要抢占的进程
         if let Some(index) = running_processes.iter().position(|p| p.process_id == process_id) {
             let running_process = running_processes.remove(index);
-            
+
             // 计算剩余时间
             let elapsed = Instant::now().duration_since(running_process.start_time);
             let remaining_time = running_process.remaining_time.saturating_sub(elapsed);
-            
+
             // 将进程重新加入就绪队列
             let scheduled_process = ScheduledProcess {
                 process_id: running_process.process_id,
@@ -1064,21 +1064,21 @@ impl ProcessScheduler {
                     file_descriptors: 0,
                 },
             };
-            
+
             ready_queue.push(scheduled_process);
             println!("进程 {} 被抢占，重新加入就绪队列", process_id);
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn complete_process(&self, process_id: &str) -> Result<(), SchedulerError> {
         let mut running_processes = self.running_processes.lock().await;
         let mut ready_queue = self.ready_queue.lock().await;
-        
+
         // 移除完成的进程
         running_processes.retain(|p| p.process_id != process_id);
-        
+
         // 从就绪队列中选择下一个进程
         if let Some(next_process) = ready_queue.pop() {
             let running_process = RunningProcess {
@@ -1087,18 +1087,18 @@ impl ProcessScheduler {
                 remaining_time: next_process.estimated_duration,
                 priority: next_process.priority,
             };
-            
+
             running_processes.push(running_process);
             println!("进程 {} 开始执行", next_process.process_id);
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn get_scheduler_status(&self) -> SchedulerStatus {
         let ready_queue = self.ready_queue.lock().await;
         let running_processes = self.running_processes.lock().await;
-        
+
         SchedulerStatus {
             ready_queue_size: ready_queue.len(),
             running_processes_count: running_processes.len(),

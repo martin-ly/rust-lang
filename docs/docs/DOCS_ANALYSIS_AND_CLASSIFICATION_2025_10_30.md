@@ -45,7 +45,7 @@
 
 **价值**: 代表项目当前最新状态，是最重要的参考文档
 
-```
+```text
 ✅ REMAINING_WORK_DIRECTIONS_2025_10_25.md          ⭐⭐⭐⭐⭐ (剩余工作方向)
 ✅ PROJECT_100_PERCENT_COMPLETION_2025_10_25.md     ⭐⭐⭐⭐⭐ (100%完成总结)
 ✅ FINAL_100_PERCENT_ACHIEVEMENT_SUMMARY_2025_10_25.md ⭐⭐⭐⭐⭐ (最终成就总结)
@@ -62,7 +62,7 @@
 
 **价值**: 为用户提供学习路径和参考资料
 
-```
+```text
 ✅ CROSS_MODULE_LEARNING_ROADMAP_2025_10_25.md      ⭐⭐⭐⭐⭐ (跨模块学习路线)
 ✅ CROSS_MODULE_PRACTICAL_PROJECTS_2025_10_25.md    ⭐⭐⭐⭐⭐ (跨模块实战项目)
 ✅ LEARNING_PATH_GUIDE_2025_10_24.md                ⭐⭐⭐⭐⭐ (学习路径指南)
@@ -77,7 +77,7 @@
 
 **价值**: 证明项目质量和完成度
 
-```
+```text
 ✅ CODE_EXAMPLES_COMPREHENSIVE_VERIFICATION_2025_10_25.md ⭐⭐⭐⭐ (代码示例验证)
 ✅ CODE_EXAMPLES_COMPLETION_REPORT_2025_10_25.md    ⭐⭐⭐⭐ (代码示例完成)
 ✅ D1_CODE_REVIEW_REPORT_2025_10_25.md              ⭐⭐⭐⭐ (代码审查)
@@ -90,7 +90,7 @@
 
 **价值**: 各阶段和任务的完成证明
 
-```
+```text
 ✅ A1_A2_COMPLETION_REPORT_2025_10_25.md            ⭐⭐⭐⭐ (A1+A2完成)
 ✅ A1_A2_D1_D2_FINAL_SUMMARY_2025_10_25.md          ⭐⭐⭐⭐ (多任务总结)
 ✅ B3_COMPLETION_SUMMARY_2025_10_25.md              ⭐⭐⭐⭐ (B3搜索完成)
@@ -119,7 +119,7 @@
 
 **建议**: 移动到 `archive/phase_reports/`
 
-```
+```text
 📦 PHASE0_COMPLETION_REPORT_2025_10_24.md
 📦 PHASE0_PROGRESS_REPORT_2025_10_24.md
 📦 PHASE1_COMPLETION_REPORT_2025_10_24.md
@@ -150,7 +150,7 @@
 
 **建议**: 移动到 `archive/module_reports/`
 
-```
+```text
 📦 C02_PHASE1_COMPLETION_2025_10_23.md
 📦 C02_PHASE1_PROGRESS_2025_10_23.md
 📦 C02_PHASE2_COMPLETION_2025_10_23.md
@@ -218,7 +218,7 @@
 
 **建议**: 移动到 `archive/planning/`
 
-```
+```text
 📦 COMPREHENSIVE_PROJECT_STATUS_2025_10_23.md
 📦 COMPLETION_DASHBOARD_HONEST_2025_10_24.md
 📦 HONEST_STATUS_AND_ACTION_PLAN_2025_10_24.md
@@ -237,7 +237,7 @@
 
 **建议**: 移动到 `archive/temp/`
 
-```
+```text
 📦 TASK6_PLACEHOLDER_CLEANUP_PLAN_2025_10_24.md
 📦 TOC_SUPPLEMENT_COMPLETION_REPORT_2025_10_24.md
 📦 TOC_SUPPLEMENT_PLAN_2025_10_24.md
@@ -257,7 +257,7 @@
 
 #### 3.1 重复的中间报告（已有最终版本）
 
-```
+```text
 🗑️ C01-C07_OVERALL_STATUS_2025_10_23.md  (已有最终总结)
 🗑️ RUST_DOCUMENTATION_COMPREHENSIVE_STATUS_2025_10_23.md (已过时)
 🗑️ PROJECT_COMPLETION_SUMMARY_2025_10_24.md (有更新版本)
@@ -269,7 +269,7 @@
 
 **建议**: 移动到 `docs/backup/` 或 `backups/`
 
-```
+```text
 📦 docs/swap/bak.rar
 📦 docs/swap/formal_rust.rar
 📦 docs/docs/gaps.rar
@@ -407,7 +407,7 @@ mv docs/docs/RUST_DOCUMENTATION_COMPREHENSIVE_STATUS_2025_10_23.md docs/review_f
 
 ### 清理前
 
-```
+```text
 docs/
 ├── docs/                    (130+ 个文件，混乱)
 │   ├── *.md                (大量报告)
@@ -422,7 +422,7 @@ docs/
 
 ### 清理后（方案 A）
 
-```
+```text
 docs/
 ├── docs/                          (30 个核心文档)
 │   ├── archive/                  (历史归档)
@@ -465,45 +465,45 @@ docs/
 
 ### 高优先级（学习指南）⭐⭐⭐⭐⭐
 
-7. `CROSS_MODULE_LEARNING_ROADMAP_2025_10_25.md` - 跨模块学习路线
-8. `CROSS_MODULE_PRACTICAL_PROJECTS_2025_10_25.md` - 跨模块实战
-9. `LEARNING_PATH_GUIDE_2025_10_24.md` - 学习路径指南
-10. `LEARNING_PROGRESS_TRACKER_TEMPLATE_2025_10_25.md` - 进度追踪
-11. `UNIFIED_KNOWLEDGE_GRAPH_2025_10_25.md` - 统一知识图谱
+1. `CROSS_MODULE_LEARNING_ROADMAP_2025_10_25.md` - 跨模块学习路线
+2. `CROSS_MODULE_PRACTICAL_PROJECTS_2025_10_25.md` - 跨模块实战
+3. `LEARNING_PATH_GUIDE_2025_10_24.md` - 学习路径指南
+4. `LEARNING_PROGRESS_TRACKER_TEMPLATE_2025_10_25.md` - 进度追踪
+5. `UNIFIED_KNOWLEDGE_GRAPH_2025_10_25.md` - 统一知识图谱
 
 ### 高优先级（质量保证）⭐⭐⭐⭐
 
-12. `CODE_EXAMPLES_COMPREHENSIVE_VERIFICATION_2025_10_25.md` - 代码验证
-13. `CODE_EXAMPLES_COMPLETION_REPORT_2025_10_25.md` - 代码完成
-14. `D1_CODE_REVIEW_REPORT_2025_10_25.md` - 代码审查
-15. `D2_LINK_VALIDATION_REPORT_2025_10_25.md` - 链接验证
-16. `D3_TERMINOLOGY_STANDARDIZATION_REPORT_2025_10_25.md` - 术语标准化
+1. `CODE_EXAMPLES_COMPREHENSIVE_VERIFICATION_2025_10_25.md` - 代码验证
+2. `CODE_EXAMPLES_COMPLETION_REPORT_2025_10_25.md` - 代码完成
+3. `D1_CODE_REVIEW_REPORT_2025_10_25.md` - 代码审查
+4. `D2_LINK_VALIDATION_REPORT_2025_10_25.md` - 链接验证
+5. `D3_TERMINOLOGY_STANDARDIZATION_REPORT_2025_10_25.md` - 术语标准化
 
 ### 中等优先级（完成报告）⭐⭐⭐⭐
 
-17. `A1_A2_COMPLETION_REPORT_2025_10_25.md` - A1+A2完成
-18. `A1_A2_D1_D2_FINAL_SUMMARY_2025_10_25.md` - 多任务总结
-19. `B3_COMPLETION_SUMMARY_2025_10_25.md` - B3搜索完成
-20. `C1_COMPLETION_SUMMARY_2025_10_25.md` - C1平台完成
-21. `C2_INTERACTIVE_EXAMPLES_COMPLETION_2025_10_25.md` - C2交互
+1. `A1_A2_COMPLETION_REPORT_2025_10_25.md` - A1+A2完成
+2. `A1_A2_D1_D2_FINAL_SUMMARY_2025_10_25.md` - 多任务总结
+3. `B3_COMPLETION_SUMMARY_2025_10_25.md` - B3搜索完成
+4. `C1_COMPLETION_SUMMARY_2025_10_25.md` - C1平台完成
+5. `C2_INTERACTIVE_EXAMPLES_COMPLETION_2025_10_25.md` - C2交互
 
 ### 中等优先级（系统文档）⭐⭐⭐⭐
 
-22. `RUST_LEARNING_SYSTEM_FINAL_REPORT_2025_10_24.md` - 系统报告
-23. `FINAL_COMPREHENSIVE_VERIFICATION_SUMMARY_2025_10_25.md` - 验证总结
-24. `CONTINUOUS_IMPROVEMENT_REPORT_2025_10_25.md` - 持续改进
-25. `DEPLOYMENT_READY_CHECKLIST_2025_10_25.md` - 部署清单
+1. `RUST_LEARNING_SYSTEM_FINAL_REPORT_2025_10_24.md` - 系统报告
+2. `FINAL_COMPREHENSIVE_VERIFICATION_SUMMARY_2025_10_25.md` - 验证总结
+3. `CONTINUOUS_IMPROVEMENT_REPORT_2025_10_25.md` - 持续改进
+4. `DEPLOYMENT_READY_CHECKLIST_2025_10_25.md` - 部署清单
 
 ### 中等优先级（标准和参考）⭐⭐⭐
 
-26. `DOCUMENTATION_STANDARDS.md` - 文档标准
-27. `ICON_CONSISTENCY_VERIFICATION_2025_10_25.md` - 图标一致性
-28. `PHASE3_OPTIMIZATION_PLAN_2025_10_25.md` - Phase3优化
-29. `PROJECT_PROGRESS_UPDATE_2025_10_25.md` - 项目进度
+1. `DOCUMENTATION_STANDARDS.md` - 文档标准
+2. `ICON_CONSISTENCY_VERIFICATION_2025_10_25.md` - 图标一致性
+3. `PHASE3_OPTIMIZATION_PLAN_2025_10_25.md` - Phase3优化
+4. `PROJECT_PROGRESS_UPDATE_2025_10_25.md` - 项目进度
 
 ### 工具脚本⭐⭐⭐
 
-30. `verify_links.ps1` - 链接验证脚本
+1. `verify_links.ps1` - 链接验证脚本
 
 ---
 
@@ -584,7 +584,7 @@ docs/
 
 1. **文档命名规范** ⭐⭐⭐⭐⭐
 
-   ```
+   ```text
    格式: <类型>_<主题>_<日期>.md
 
    示例:
@@ -605,7 +605,7 @@ docs/
 
 4. **文档分类体系** ⭐⭐⭐⭐
 
-   ```
+   ```text
    docs/
    ├── docs/                    (当前文档)
    │   ├── reports/            (最新报告)

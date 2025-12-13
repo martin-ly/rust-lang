@@ -80,13 +80,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 .arg("Hello from Rust 1.90!")
                 .stdout(Stdio::piped())
                 .spawn()?;
-            
+
             let output = child.wait_with_output().await?;
             println!("Output: {}", String::from_utf8_lossy(&output.stdout));
             Ok(())
         })
     }).await?;
-    
+
     Ok(())
 }
 ```
@@ -129,7 +129,7 @@ async fn robust_process_execution() -> Result<String, Box<dyn Error>> {
         .output()
         .await
         .map_err(|e| format!("命令执行失败: {}", e))?;
-    
+
     if output.status.success() {
         Ok(String::from_utf8_lossy(&output.stdout).to_string())
     } else {
@@ -153,11 +153,11 @@ fn safe_process_management() -> Result<(), Box<dyn std::error::Error>> {
         .arg("aux")
         .stdout(Stdio::piped())
         .spawn()?;
-    
+
     // 所有权转移，确保资源正确释放
     if let Some(stdout) = child.stdout.take() {
         let reader = BufReader::new(stdout);
-        
+
         for line in reader.lines() {
             let line = line?;
             if line.contains("rust") {
@@ -165,10 +165,10 @@ fn safe_process_management() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     } // reader 和 stdout 在这里自动释放
-    
+
     let status = child.wait()?;
     println!("进程完成，状态: {:?}", status);
-    
+
     Ok(())
 }
 ```
@@ -199,10 +199,10 @@ async fn async_lifecycle() -> Result<(), Box<dyn std::error::Error>> {
     let mut child = Command::new("long_running_program")
         .stdout(Stdio::piped())
         .spawn()?;
-    
+
     // 设置超时
     let timeout_duration = Duration::from_secs(30);
-    
+
     match timeout(timeout_duration, child.wait()).await {
         Ok(status) => {
             println!("进程正常完成: {:?}", status);
@@ -212,7 +212,7 @@ async fn async_lifecycle() -> Result<(), Box<dyn std::error::Error>> {
             child.kill().await?;
         }
     }
-    
+
     Ok(())
 }
 ```
@@ -266,37 +266,37 @@ impl ProcessLifecycleManager {
             max_concurrent,
         }
     }
-    
+
     pub async fn spawn_process(
         &self,
         config: ProcessConfig,
     ) -> Result<String, Box<dyn std::error::Error>> {
         let mut processes = self.processes.lock().await;
-        
+
         if processes.len() >= self.max_concurrent {
             return Err("已达到最大并发进程数限制".into());
         }
-        
+
         let process_id = uuid::Uuid::new_v4().to_string();
-        
+
         let mut async_cmd = AsyncCommand::new(&config.command);
         async_cmd.args(&config.args);
-        
+
         if let Some(working_dir) = &config.working_dir {
             async_cmd.current_dir(working_dir);
         }
-        
+
         for (key, value) in &config.env_vars {
             async_cmd.env(key, value);
         }
-        
+
         async_cmd
             .stdin(Stdio::piped())
             .stdout(Stdio::piped())
             .stderr(Stdio::piped());
-        
+
         let child = async_cmd.spawn()?;
-        
+
         let managed_process = ManagedProcess {
             id: process_id.clone(),
             child,
@@ -309,15 +309,15 @@ impl ProcessLifecycleManager {
                 timeout: config.timeout,
             },
         };
-        
+
         processes.push(managed_process);
-        
+
         Ok(process_id)
     }
-    
+
     pub async fn monitor_process(&self, process_id: &str) -> Result<(), Box<dyn std::error::Error>> {
         let mut processes = self.processes.lock().await;
-        
+
         if let Some(process) = processes.iter_mut().find(|p| p.id == process_id) {
             // 检查进程状态
             if let Ok(Some(status)) = process.child.try_wait() {
@@ -336,23 +336,23 @@ impl ProcessLifecycleManager {
                 }
             }
         }
-        
+
         Ok(())
     }
-    
+
     pub async fn cleanup_completed_processes(&self) -> Result<(), Box<dyn std::error::Error>> {
         let mut processes = self.processes.lock().await;
-        
+
         let initial_count = processes.len();
         processes.retain(|process| {
             matches!(process.status, ProcessStatus::Running | ProcessStatus::Starting)
         });
-        
+
         let cleaned_count = initial_count - processes.len();
         if cleaned_count > 0 {
             println!("清理了 {} 个已完成的进程", cleaned_count);
         }
-        
+
         Ok(())
     }
 }
@@ -383,7 +383,7 @@ fn automatic_resource_management() -> Result<(), Box<dyn std::error::Error>> {
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()?;
-    
+
     // 写入数据
     if let Some(stdin) = child.stdin.take() {
         let mut writer = std::io::BufWriter::new(stdin);
@@ -391,7 +391,7 @@ fn automatic_resource_management() -> Result<(), Box<dyn std::error::Error>> {
         writer.flush()?;
         // writer 和 stdin 在这里自动释放
     }
-    
+
     // 读取输出
     if let Some(stdout) = child.stdout.take() {
         let reader = BufReader::new(stdout);
@@ -401,10 +401,10 @@ fn automatic_resource_management() -> Result<(), Box<dyn std::error::Error>> {
         }
         // reader 和 stdout 在这里自动释放
     }
-    
+
     let status = child.wait()?;
     println!("进程完成，状态: {:?}", status);
-    
+
     Ok(())
 }
 ```
@@ -422,25 +422,25 @@ use std::path::Path;
 // 基础属性配置
 fn basic_process_configuration() -> Result<(), Box<dyn std::error::Error>> {
     let mut command = Command::new("program");
-    
+
     // I/O 重定向
     command
         .stdin(Stdio::piped())
         .stdout(Stdio::null())
         .stderr(Stdio::inherit());
-    
+
     // 环境变量管理
     command
         .env_clear()
         .env("PATH", "/usr/bin")
         .env("RUST_LOG", "debug");
-    
+
     // 工作目录设置
     command.current_dir(Path::new("/tmp"));
-    
+
     let child = command.spawn()?;
     let status = child.wait()?;
-    
+
     println!("进程完成，状态: {:?}", status);
     Ok(())
 }
@@ -448,20 +448,20 @@ fn basic_process_configuration() -> Result<(), Box<dyn std::error::Error>> {
 // Rust 1.90 增强的环境变量处理
 fn enhanced_env_handling() -> Result<(), Box<dyn std::error::Error>> {
     let mut command = Command::new("env");
-    
+
     // 使用 HashMap 批量设置环境变量
     let mut env_vars = std::collections::HashMap::new();
     env_vars.insert("RUST_LOG".to_string(), "info".to_string());
     env_vars.insert("RUST_BACKTRACE".to_string(), "1".to_string());
     env_vars.insert("MY_APP_CONFIG".to_string(), "/etc/myapp.conf".to_string());
-    
+
     for (key, value) in env_vars {
         command.env(key, value);
     }
-    
+
     let output = command.output()?;
     println!("环境变量输出: {}", String::from_utf8_lossy(&output.stdout));
-    
+
     Ok(())
 }
 ```
@@ -478,38 +478,38 @@ use std::os::unix::process::CommandExt;
 #[cfg(unix)]
 fn set_process_limits() -> Result<(), Box<dyn std::error::Error>> {
     use nix::sys::resource::{setrlimit, Resource, ResourceLimits};
-    
+
     // 设置内存限制 (100MB soft, 200MB hard)
     setrlimit(
         Resource::RLIMIT_AS,
         ResourceLimits::new(1024 * 1024 * 100, 1024 * 1024 * 200)
     )?;
-    
+
     // 设置文件描述符限制
     setrlimit(
         Resource::RLIMIT_NOFILE,
         ResourceLimits::new(1024, 2048)
     )?;
-    
+
     // 设置 CPU 时间限制
     setrlimit(
         Resource::RLIMIT_CPU,
         ResourceLimits::new(300, 600) // 5分钟 soft, 10分钟 hard
     )?;
-    
+
     Ok(())
 }
 
 // 跨平台资源管理
 fn cross_platform_resource_management() -> Result<(), Box<dyn std::error::Error>> {
     let mut command = Command::new("resource_intensive_program");
-    
+
     // 设置基础属性
     command
         .stdin(Stdio::null())
         .stdout(Stdio::piped())
         .stderr(Stdio::piped());
-    
+
     // 平台特定的资源限制
     #[cfg(unix)]
     {
@@ -518,16 +518,16 @@ fn cross_platform_resource_management() -> Result<(), Box<dyn std::error::Error>
             Ok(())
         });
     }
-    
+
     #[cfg(windows)]
     {
         // Windows 特定的资源限制
         // 使用 Windows API 设置进程限制
     }
-    
+
     let child = command.spawn()?;
     let output = child.wait_with_output()?;
-    
+
     println!("进程完成，状态: {:?}", output.status);
     Ok(())
 }
@@ -557,7 +557,7 @@ impl CrossPlatformResourceManager {
             max_file_descriptors,
         }
     }
-    
+
     pub async fn execute_with_limits(
         &self,
         command: &str,
@@ -565,12 +565,12 @@ impl CrossPlatformResourceManager {
     ) -> Result<std::process::Output, Box<dyn std::error::Error>> {
         let mut cmd = Command::new(command);
         cmd.args(args);
-        
+
         // 设置基础 I/O
         cmd.stdin(Stdio::null())
            .stdout(Stdio::piped())
            .stderr(Stdio::piped());
-        
+
         // 平台特定的资源限制
         #[cfg(unix)]
         {
@@ -579,17 +579,17 @@ impl CrossPlatformResourceManager {
                 Ok(())
             });
         }
-        
+
         #[cfg(windows)]
         {
             // Windows 资源限制设置
             self.set_windows_limits(&mut cmd)?;
         }
-        
+
         // 异步执行带超时
         let child = cmd.spawn()?;
         let result = timeout(self.max_cpu_time, child.wait_with_output()).await;
-        
+
         match result {
             Ok(output) => Ok(output?),
             Err(_) => {
@@ -598,11 +598,11 @@ impl CrossPlatformResourceManager {
             }
         }
     }
-    
+
     #[cfg(unix)]
     fn set_unix_limits(&self) -> Result<(), Box<dyn std::error::Error>> {
         use nix::sys::resource::{setrlimit, Resource, ResourceLimits};
-        
+
         // 设置内存限制
         setrlimit(
             Resource::RLIMIT_AS,
@@ -611,7 +611,7 @@ impl CrossPlatformResourceManager {
                 self.max_memory_mb * 1024 * 1024 * 2
             )
         )?;
-        
+
         // 设置文件描述符限制
         setrlimit(
             Resource::RLIMIT_NOFILE,
@@ -620,7 +620,7 @@ impl CrossPlatformResourceManager {
                 self.max_file_descriptors * 2
             )
         )?;
-        
+
         // 设置 CPU 时间限制
         setrlimit(
             Resource::RLIMIT_CPU,
@@ -629,10 +629,10 @@ impl CrossPlatformResourceManager {
                 self.max_cpu_time.as_secs() as u64 * 2
             )
         )?;
-        
+
         Ok(())
     }
-    
+
     #[cfg(windows)]
     fn set_windows_limits(&self, _cmd: &mut Command) -> Result<(), Box<dyn std::error::Error>> {
         // Windows 特定的资源限制实现
@@ -649,11 +649,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         Duration::from_secs(30), // 30秒 CPU 时间限制
         1024,                   // 1024 个文件描述符限制
     );
-    
+
     let output = resource_manager
         .execute_with_limits("echo", &["Hello, World!".to_string()])
         .await?;
-    
+
     println!("输出: {}", String::from_utf8_lossy(&output.stdout));
     Ok(())
 }
@@ -678,7 +678,7 @@ fn type_safe_process_management() -> Result<(), Box<dyn std::error::Error>> {
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()?;
-    
+
     // 类型安全的 I/O 操作
     if let Some(stdin) = child.stdin.take() {
         let mut writer = std::io::BufWriter::new(stdin);
@@ -686,7 +686,7 @@ fn type_safe_process_management() -> Result<(), Box<dyn std::error::Error>> {
         writer.flush()?;
         // 自动释放
     }
-    
+
     if let Some(stdout) = child.stdout.take() {
         let reader = BufReader::new(stdout);
         for line in reader.lines() {
@@ -695,10 +695,10 @@ fn type_safe_process_management() -> Result<(), Box<dyn std::error::Error>> {
         }
         // 自动释放
     }
-    
+
     let status = child.wait()?;
     println!("进程安全完成: {:?}", status);
-    
+
     Ok(())
 }
 ```
@@ -714,19 +714,19 @@ use thiserror::Error;
 pub enum ProcessError {
     #[error("进程启动失败: {0}")]
     SpawnFailed(std::io::Error),
-    
+
     #[error("进程等待失败: {0}")]
     WaitFailed(std::io::Error),
-    
+
     #[error("进程输出失败: {0}")]
     OutputFailed(std::io::Error),
-    
+
     #[error("进程终止失败: {0}")]
     KillFailed(std::io::Error),
-    
+
     #[error("进程执行超时")]
     Timeout,
-    
+
     #[error("进程异常退出，退出码: {0}")]
     AbnormalExit(i32),
 }
@@ -738,10 +738,10 @@ async fn enhanced_error_handling() -> Result<String, ProcessError> {
         .stderr(Stdio::piped())
         .spawn()
         .map_err(ProcessError::SpawnFailed)?;
-    
+
     let output = child.wait_with_output().await
         .map_err(ProcessError::OutputFailed)?;
-    
+
     if output.status.success() {
         Ok(String::from_utf8_lossy(&output.stdout).to_string())
     } else {
@@ -759,32 +759,32 @@ use std::process::{Command, Stdio};
 // 跨平台进程管理
 fn cross_platform_process_management() -> Result<(), Box<dyn std::error::Error>> {
     let mut command = Command::new("cross_platform_command");
-    
+
     // 基础配置
     command
         .stdin(Stdio::null())
         .stdout(Stdio::piped())
         .stderr(Stdio::piped());
-    
+
     // 平台特定的配置
     #[cfg(unix)]
     {
         command.env("SHELL", "/bin/bash");
     }
-    
+
     #[cfg(windows)]
     {
         command.env("COMSPEC", "cmd.exe");
     }
-    
+
     #[cfg(target_os = "macos")]
     {
         command.env("PATH", "/usr/local/bin:/usr/bin:/bin");
     }
-    
+
     let child = command.spawn()?;
     let output = child.wait_with_output()?;
-    
+
     println!("跨平台输出: {}", String::from_utf8_lossy(&output.stdout));
     Ok(())
 }
@@ -806,14 +806,14 @@ async fn tokio_async_process() -> Result<(), Box<dyn std::error::Error>> {
         .stdout(std::process::Stdio::piped())
         .stderr(std::process::Stdio::piped())
         .spawn()?;
-    
+
     // 异步写入
     if let Some(stdin) = child.stdin.take() {
         let mut async_stdin = tokio::io::BufWriter::new(stdin);
         async_stdin.write_all(b"Async input\n").await?;
         async_stdin.flush().await?;
     }
-    
+
     // 异步读取
     if let Some(stdout) = child.stdout.take() {
         let mut async_stdout = tokio::io::BufReader::new(stdout);
@@ -821,10 +821,10 @@ async fn tokio_async_process() -> Result<(), Box<dyn std::error::Error>> {
         async_stdout.read_line(&mut line).await?;
         println!("异步输出: {}", line);
     }
-    
+
     let status = child.wait().await?;
     println!("异步进程完成: {:?}", status);
-    
+
     Ok(())
 }
 ```
@@ -842,14 +842,14 @@ async fn async_std_process() -> Result<(), Box<dyn std::error::Error>> {
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()?;
-    
+
     // Async-Std 异步操作
     if let Some(stdin) = child.stdin.take() {
         let mut writer = BufWriter::new(stdin);
         writer.write_all(b"Async-Std input\n").await?;
         writer.flush().await?;
     }
-    
+
     if let Some(stdout) = child.stdout.take() {
         let reader = BufReader::new(stdout);
         let mut lines = reader.lines();
@@ -858,10 +858,10 @@ async fn async_std_process() -> Result<(), Box<dyn std::error::Error>> {
             println!("Async-Std 输出: {}", line);
         }
     }
-    
+
     let status = child.status().await?;
     println!("Async-Std 进程完成: {:?}", status);
-    
+
     Ok(())
 }
 ```
@@ -877,25 +877,25 @@ fn duct_process_composition() -> Result<(), Box<dyn std::error::Error>> {
     let output = cmd!("echo", "Hello, World!")
         .pipe(cmd!("wc", "-c"))
         .read()?;
-    
+
     println!("Duct 输出: {}", output);
-    
+
     // 复杂的进程管道
     let complex_output = cmd!("find", ".", "-name", "*.rs")
         .pipe(cmd!("head", "-10"))
         .pipe(cmd!("wc", "-l"))
         .read()?;
-    
+
     println!("复杂管道输出: {}", complex_output);
-    
+
     // 环境变量和重定向
     let env_output = cmd!("env")
         .env("MY_VAR", "duct_value")
         .stdout_path("/tmp/duct_output.txt")
         .run()?;
-    
+
     println!("环境变量进程状态: {:?}", env_output.status);
-    
+
     Ok(())
 }
 ```
@@ -913,17 +913,17 @@ use tokio::time::timeout;
 async fn resource_management_best_practices() -> Result<(), Box<dyn std::error::Error>> {
     // 1. 总是设置超时
     let timeout_duration = Duration::from_secs(30);
-    
+
     // 2. 使用 RAII 模式
     let child = Command::new("long_running_program")
         .stdin(Stdio::null())
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()?;
-    
+
     // 3. 异步等待带超时
     let result = timeout(timeout_duration, child.wait_with_output()).await;
-    
+
     match result {
         Ok(output) => {
             println!("进程正常完成: {:?}", output.status);
@@ -934,7 +934,7 @@ async fn resource_management_best_practices() -> Result<(), Box<dyn std::error::
             // 资源会自动清理
         }
     }
-    
+
     Ok(())
 }
 ```
@@ -949,10 +949,10 @@ use thiserror::Error;
 pub enum BestPracticeError {
     #[error("进程执行失败: {0}")]
     ProcessFailed(String),
-    
+
     #[error("资源不足: {0}")]
     ResourceExhausted(String),
-    
+
     #[error("权限不足: {0}")]
     PermissionDenied(String),
 }
@@ -964,10 +964,10 @@ fn error_handling_best_practices() -> Result<(), BestPracticeError> {
         .stderr(Stdio::piped())
         .output()
         .map_err(|e| BestPracticeError::ProcessFailed(e.to_string()))?;
-    
+
     if !output.status.success() {
         let error_msg = String::from_utf8_lossy(&output.stderr);
-        
+
         // 根据错误类型进行分类处理
         if error_msg.contains("permission") {
             return Err(BestPracticeError::PermissionDenied(error_msg.to_string()));
@@ -977,7 +977,7 @@ fn error_handling_best_practices() -> Result<(), BestPracticeError> {
             return Err(BestPracticeError::ProcessFailed(error_msg.to_string()));
         }
     }
-    
+
     println!("命令执行成功: {}", String::from_utf8_lossy(&output.stdout));
     Ok(())
 }

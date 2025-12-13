@@ -1,8 +1,8 @@
 # 贡献指南
 
-**项目名称**: Rust 算法与数据结构 (Rust 1.89 特性对齐版)  
-**版本**: 1.0  
-**创建日期**: 2025年1月27日  
+**项目名称**: Rust 算法与数据结构 (Rust 1.89 特性对齐版)
+**版本**: 1.0
+**创建日期**: 2025年1月27日
 
 ---
 
@@ -346,17 +346,17 @@ mod benchmarks {
 
     fn performance_benchmark(c: &mut Criterion) {
         let mut group = c.benchmark_group("performance");
-        
+
         group.bench_function("optimized_algorithm", |b| {
             b.iter(|| {
                 let data = generate_test_data();
                 optimized_algorithm(black_box(&data))
             });
         });
-        
+
         group.finish();
     }
-    
+
     criterion_group!(benches, performance_benchmark);
     criterion_main!(benches);
 }
@@ -503,6 +503,6 @@ mod benchmarks {
 
 ---
 
-**最后更新**: 2025年1月27日  
-**版本**: 1.0  
+**最后更新**: 2025年1月27日
+**版本**: 1.0
 **维护者**: [维护者信息]

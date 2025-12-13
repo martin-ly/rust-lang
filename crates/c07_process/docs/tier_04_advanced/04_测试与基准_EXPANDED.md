@@ -1,8 +1,8 @@
 # Tier 4: 测试与基准
 
-> **文档类型**: 高级主题  
-> **难度**: ⭐⭐⭐⭐  
-> **适用版本**: Rust 1.90+  
+> **文档类型**: 高级主题
+> **难度**: ⭐⭐⭐⭐
+> **适用版本**: Rust 1.90+
 > **前置知识**: [性能工程实践](./03_性能工程实践.md)
 
 ---
@@ -50,24 +50,24 @@
 mod tests {
     use super::*;
     use std::process::Command;
-    
+
     #[test]
     fn test_spawn_echo() {
         let output = Command::new("echo")
             .arg("test")
             .output()
             .expect("Failed to spawn");
-        
+
         assert!(output.status.success());
         assert_eq!(output.stdout, b"test\n");
     }
-    
+
     #[test]
     fn test_spawn_failure() {
         let result = Command::new("nonexistent_command_12345").spawn();
         assert!(result.is_err());
     }
-    
+
     #[test]
     fn test_exit_code() {
         let status = Command::new("sh")
@@ -75,7 +75,7 @@ mod tests {
             .arg("exit 42")
             .status()
             .unwrap();
-        
+
         assert_eq!(status.code(), Some(42));
     }
 }
@@ -95,10 +95,10 @@ impl MockProcess {
     pub fn builder() -> MockProcessBuilder {
         MockProcessBuilder::default()
     }
-    
+
     pub async fn run(&self) -> std::io::Result<MockOutput> {
         tokio::time::sleep(self.delay).await;
-        
+
         Ok(MockOutput {
             status: MockStatus { code: self.exit_code },
             stdout: self.stdout.clone(),
@@ -115,7 +115,7 @@ async fn test_with_mock() {
         .stdout(b"success")
         .delay(Duration::from_millis(10))
         .build();
-    
+
     let output = mock.run().await.unwrap();
     assert_eq!(output.stdout, b"success");
 }
@@ -133,11 +133,11 @@ async fn test_process_communication() {
         .stdout(Stdio::piped())
         .spawn()
         .unwrap();
-    
+
     let mut stdin = child.stdin.take().unwrap();
     stdin.write_all(b"hello world").await.unwrap();
     drop(stdin);  // 关闭stdin以触发EOF
-    
+
     let output = child.wait_with_output().await.unwrap();
     assert_eq!(output.stdout, b"hello world");
 }
@@ -150,14 +150,14 @@ async fn test_pipeline() {
         .stdout(Stdio::piped())
         .spawn()
         .unwrap();
-    
+
     let mut wc = tokio::process::Command::new("wc")
         .arg("-c")
         .stdin(echo.stdout.unwrap())
         .stdout(Stdio::piped())
         .spawn()
         .unwrap();
-    
+
     let output = wc.wait_with_output().await.unwrap();
     let count = String::from_utf8_lossy(&output.stdout).trim().parse::<i32>().unwrap();
     assert_eq!(count, 5);  // "test\n" = 5 bytes
@@ -172,16 +172,16 @@ async fn test_pipeline() {
 #[tokio::test]
 async fn test_process_pool_workflow() {
     let pool = ProcessPool::new(4);
-    
+
     // 1. 提交任务
     let tasks: Vec<_> = (0..100).map(|i| Task { id: i }).collect();
     for task in tasks {
         pool.submit(task).await.unwrap();
     }
-    
+
     // 2. 等待完成
     pool.wait_all().await;
-    
+
     // 3. 验证结果
     let results = pool.get_results();
     assert_eq!(results.len(), 100);
@@ -212,7 +212,7 @@ async fn test_with_timeout() {
             Ok::<_, std::io::Error>(output)
         }
     ).await;
-    
+
     assert!(result.is_err(), "应该超时");
 }
 
@@ -244,7 +244,7 @@ impl FaultInjector {
         use rand::Rng;
         rand::thread_rng().gen::<f64>() < self.fail_rate
     }
-    
+
     pub fn maybe_fail<T, E>(&self, result: Result<T, E>) -> Result<T, E> {
         if self.should_fail() {
             // 随机失败
@@ -258,7 +258,7 @@ impl FaultInjector {
 #[tokio::test]
 async fn test_with_fault_injection() {
     let injector = FaultInjector { fail_rate: 0.5 };
-    
+
     let mut failures = 0;
     for _ in 0..100 {
         let result = injector.maybe_fail::<(), &str>(Ok(()));
@@ -266,7 +266,7 @@ async fn test_with_fault_injection() {
             failures += 1;
         }
     }
-    
+
     // 应该有大约50次失败
     assert!(failures > 30 && failures < 70);
 }
@@ -285,7 +285,7 @@ impl ProcessGuard {
     pub fn new(child: Child) -> Self {
         Self { child: Some(child) }
     }
-    
+
     pub fn pid(&self) -> u32 {
         self.child.as_ref().unwrap().id()
     }
@@ -306,13 +306,13 @@ fn test_no_zombie() {
     let guard = ProcessGuard::new(
         Command::new("sleep").arg("100").spawn().unwrap()
     );
-    
+
     let pid = guard.pid();
     // guard会在作用域结束时自动清理进程
     drop(guard);
-    
+
     std::thread::sleep(Duration::from_millis(100));
-    
+
     // 验证进程已被清理
     #[cfg(unix)]
     {
@@ -334,20 +334,20 @@ fn test_no_zombie() {
 fn test_signal_handling() {
     use nix::sys::signal::{kill, Signal};
     use nix::unistd::Pid;
-    
+
     let mut child = Command::new("sleep")
         .arg("100")
         .spawn()
         .unwrap();
-    
+
     let pid = child.id();
-    
+
     // 发送SIGTERM
     kill(Pid::from_raw(pid as i32), Signal::SIGTERM).unwrap();
-    
+
     // 等待进程退出
     let status = child.wait().unwrap();
-    
+
     #[cfg(unix)]
     {
         use std::os::unix::process::ExitStatusExt;
@@ -381,7 +381,7 @@ fn bench_process_spawn(c: &mut Criterion) {
 
 fn bench_process_spawn_different_sizes(c: &mut Criterion) {
     let mut group = c.benchmark_group("spawn_with_args");
-    
+
     for size in [1, 10, 100, 1000].iter() {
         group.bench_with_input(BenchmarkId::from_parameter(size), size, |b, &size| {
             let args: Vec<_> = (0..size).map(|i| format!("arg{}", i)).collect();
@@ -409,29 +409,29 @@ use criterion::{criterion_group, criterion_main, Criterion, Throughput};
 
 fn bench_pipe_throughput(c: &mut Criterion) {
     let mut group = c.benchmark_group("pipe_throughput");
-    
+
     for size in [1024, 4096, 16384, 65536].iter() {
         group.throughput(Throughput::Bytes(*size as u64));
-        
+
         group.bench_with_input(BenchmarkId::from_parameter(size), size, |b, &size| {
             let data = vec![0u8; size];
-            
+
             b.iter(|| {
                 let mut child = Command::new("cat")
                     .stdin(Stdio::piped())
                     .stdout(Stdio::piped())
                     .spawn()
                     .unwrap();
-                
+
                 child.stdin.as_mut().unwrap().write_all(&data).unwrap();
                 drop(child.stdin.take());
-                
+
                 let output = child.wait_with_output().unwrap();
                 black_box(output);
             });
         });
     }
-    
+
     group.finish();
 }
 
@@ -446,7 +446,7 @@ criterion_main!(benches);
 ```rust
 fn bench_process_pool(c: &mut Criterion) {
     let mut group = c.benchmark_group("process_pool");
-    
+
     // 基准：无池
     group.bench_function("no_pool", |b| {
         b.iter(|| {
@@ -455,7 +455,7 @@ fn bench_process_pool(c: &mut Criterion) {
             }
         });
     });
-    
+
     // 基准：固定池
     group.bench_function("fixed_pool", |b| {
         let pool = ProcessPool::new(4);
@@ -465,7 +465,7 @@ fn bench_process_pool(c: &mut Criterion) {
             }
         });
     });
-    
+
     // 基准：动态池
     group.bench_function("dynamic_pool", |b| {
         let pool = DynamicProcessPool::new(2, 8);
@@ -475,7 +475,7 @@ fn bench_process_pool(c: &mut Criterion) {
             }
         });
     });
-    
+
     group.finish();
 }
 ```
@@ -499,12 +499,12 @@ async fn test_concurrent_spawns() {
                     .output()
                     .await
                     .unwrap();
-                
+
                 assert!(output.status.success());
             })
         })
         .collect();
-    
+
     for handle in handles {
         handle.await.unwrap();
     }
@@ -521,10 +521,10 @@ async fn test_concurrent_spawns() {
 async fn test_stability_24h() {
     let start = Instant::now();
     let target_duration = Duration::from_secs(24 * 3600);
-    
+
     let mut iterations = 0;
     let mut failures = 0;
-    
+
     while start.elapsed() < target_duration {
         match spawn_and_run_task().await {
             Ok(_) => iterations += 1,
@@ -533,13 +533,13 @@ async fn test_stability_24h() {
                 eprintln!("Failure: {:?}", e);
             }
         }
-        
+
         if iterations % 1000 == 0 {
             println!("Iterations: {}, Failures: {}, Uptime: {:?}",
                 iterations, failures, start.elapsed());
         }
     }
-    
+
     let failure_rate = failures as f64 / iterations as f64;
     assert!(failure_rate < 0.001, "故障率过高: {:.4}%", failure_rate * 100.0);
 }
@@ -553,13 +553,13 @@ async fn test_stability_24h() {
 #[test]
 fn test_no_memory_leak() {
     use sysinfo::{System, SystemExt, ProcessExt};
-    
+
     let mut system = System::new_all();
     let pid = sysinfo::Pid::from(std::process::id() as usize);
-    
+
     system.refresh_all();
     let initial_memory = system.process(pid).unwrap().memory();
-    
+
     // 运行1000次操作
     for _ in 0..1000 {
         let child = Command::new("echo")
@@ -568,12 +568,12 @@ fn test_no_memory_leak() {
             .unwrap();
         child.wait_with_output().unwrap();
     }
-    
+
     system.refresh_all();
     let final_memory = system.process(pid).unwrap().memory();
-    
+
     let growth = (final_memory as f64 - initial_memory as f64) / initial_memory as f64;
-    
+
     // 允许10%的内存增长
     assert!(growth < 0.10, "内存增长过大: {:.2}%", growth * 100.0);
 }
@@ -588,7 +588,7 @@ fn test_no_memory_leak() {
 fn test_fd_exhaustion() {
     let max_fds = 100;
     let mut children = Vec::new();
-    
+
     for i in 0..max_fds {
         match Command::new("sleep").arg("1").spawn() {
             Ok(child) => children.push(child),
@@ -598,7 +598,7 @@ fn test_fd_exhaustion() {
             }
         }
     }
-    
+
     // 清理
     for mut child in children {
         child.kill().ok();
@@ -628,37 +628,37 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         rust: [stable, beta, nightly]
-    
+
     steps:
     - uses: actions/checkout@v2
-    
+
     - name: Install Rust
       uses: actions-rs/toolchain@v1
       with:
         profile: minimal
         toolchain: ${{ matrix.rust }}
         override: true
-    
+
     - name: Run tests
       run: cargo test --all-features
-    
+
     - name: Run benchmarks
       run: cargo bench --no-run
-    
+
     - name: Run stress tests
       run: cargo test --release -- --ignored --test-threads=1
-      
+
   coverage:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    
+
     - name: Install tarpaulin
       run: cargo install cargo-tarpaulin
-    
+
     - name: Generate coverage
       run: cargo tarpaulin --out Xml
-    
+
     - name: Upload coverage
       uses: codecov/codecov-action@v2
 ```
@@ -679,22 +679,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    
+
     - name: Install Rust
       uses: actions-rs/toolchain@v1
       with:
         toolchain: stable
-    
+
     - name: Run benchmarks (baseline)
       run: |
         git checkout main
         cargo bench --bench process_bench -- --save-baseline main
-    
+
     - name: Run benchmarks (PR)
       run: |
         git checkout ${{ github.sha }}
         cargo bench --bench process_bench -- --baseline main
-    
+
     - name: Check for regression
       run: |
         if grep -q "regressed" target/criterion/*/report/index.html; then
@@ -744,13 +744,13 @@ impl TestContext {
             process_guard: Vec::new(),
         }
     }
-    
+
     pub fn spawn_guarded(&mut self, cmd: Command) -> std::io::Result<&mut Child> {
         let child = cmd.spawn()?;
         self.process_guard.push(ProcessGuard::new(child));
         Ok(self.process_guard.last_mut().unwrap().child())
     }
-    
+
     pub fn temp_file(&self, name: &str) -> PathBuf {
         self.temp_dir.path().join(name)
     }
@@ -767,14 +767,14 @@ impl Drop for TestContext {
 #[test]
 fn test_with_context() {
     let mut ctx = TestContext::new();
-    
+
     let child = ctx.spawn_guarded(
         Command::new("echo").arg("test")
     ).unwrap();
-    
+
     let output = child.wait_with_output().unwrap();
     assert!(output.status.success());
-    
+
     // ctx被drop时自动清理
 }
 ```
@@ -875,7 +875,7 @@ assert!(condition);
 
 ---
 
-**文档维护**: Documentation Team  
-**创建日期**: 2025-10-22  
-**最后更新**: 2025-10-23  
+**文档维护**: Documentation Team
+**创建日期**: 2025-10-22
+**最后更新**: 2025-10-23
 **适用版本**: Rust 1.90+

@@ -1,8 +1,8 @@
 # Tier 4: 现代进程库
 
-> **文档类型**: 高级主题  
-> **难度**: ⭐⭐⭐⭐  
-> **适用版本**: Rust 1.90+  
+> **文档类型**: 高级主题
+> **难度**: ⭐⭐⭐⭐
+> **适用版本**: Rust 1.90+
 > **前置知识**: [异步进程管理](../tier_02_guides/03_异步进程管理.md)
 
 ---
@@ -57,10 +57,10 @@ async fn main() -> std::io::Result<()> {
         .arg("Hello Tokio")
         .output()
         .await?;
-    
+
     println!("Status: {}", output.status);
     println!("Output: {}", String::from_utf8_lossy(&output.stdout));
-    
+
     Ok(())
 }
 ```
@@ -80,14 +80,14 @@ async fn stream_output() -> std::io::Result<()> {
         .arg("5")
         .stdout(Stdio::piped())
         .spawn()?;
-    
+
     let stdout = child.stdout.take().unwrap();
     let mut reader = BufReader::new(stdout).lines();
-    
+
     while let Some(line) = reader.next_line().await? {
         println!("Received: {}", line);
     }
-    
+
     child.wait().await?;
     Ok(())
 }
@@ -112,17 +112,17 @@ impl AsyncProcessPool {
             semaphore: Arc::new(Semaphore::new(max_concurrent)),
         }
     }
-    
+
     pub async fn execute(&self, cmd: &str, args: &[&str]) -> std::io::Result<String> {
         let permit = self.semaphore.acquire().await.unwrap();
-        
+
         let output = Command::new(cmd)
             .args(args)
             .output()
             .await?;
-        
+
         drop(permit);  // 释放permit
-        
+
         Ok(String::from_utf8_lossy(&output.stdout).to_string())
     }
 }
@@ -131,7 +131,7 @@ impl AsyncProcessPool {
 #[tokio::main]
 async fn main() {
     let pool = AsyncProcessPool::new(4);
-    
+
     let mut handles = vec![];
     for i in 0..100 {
         let pool = pool.clone();
@@ -140,7 +140,7 @@ async fn main() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         let result = handle.await.unwrap().unwrap();
         println!("{}", result);
@@ -162,7 +162,7 @@ async fn run_with_timeout() -> Result<String, Box<dyn std::error::Error>> {
             .arg("10")
             .output()
     ).await??;
-    
+
     Ok(String::from_utf8_lossy(&result.stdout).to_string())
 }
 ```
@@ -188,7 +188,7 @@ fn main() {
         .umask(0o777)
         .stderr(std::fs::File::create("/tmp/myapp.err").unwrap())
         .stdout(std::fs::File::create("/tmp/myapp.log").unwrap());
-    
+
     match daemonize.start() {
         Ok(_) => {
             // 现在运行在后台
@@ -241,7 +241,7 @@ use sysinfo::{System, SystemExt, ProcessExt};
 fn get_process_info() {
     let mut system = System::new_all();
     system.refresh_all();
-    
+
     for (pid, process) in system.processes() {
         println!("PID: {}", pid);
         println!("  Name: {}", process.name());
@@ -261,25 +261,25 @@ use procfs::process::Process;
 
 fn read_proc_info(pid: i32) -> std::io::Result<()> {
     let process = Process::new(pid)?;
-    
+
     // 读取状态
     let stat = process.stat()?;
     println!("State: {}", stat.state);
     println!("PPID: {}", stat.ppid);
     println!("Threads: {}", stat.num_threads);
-    
+
     // 读取内存映射
     let maps = process.maps()?;
     for map in maps {
         println!("{:?}", map);
     }
-    
+
     // 读取环境变量
     let environ = process.environ()?;
     for (key, value) in environ {
         println!("{}={}", key, value);
     }
-    
+
     Ok(())
 }
 ```
@@ -295,21 +295,21 @@ fn pipeline_example() -> std::io::Result<()> {
     // 简单命令
     let output = cmd!("echo", "hello").read()?;
     println!("{}", output);
-    
+
     // 管道
     let output = cmd!("ls", "-la")
         .pipe(cmd!("grep", "txt"))
         .pipe(cmd!("wc", "-l"))
         .read()?;
     println!("txt文件数量: {}", output.trim());
-    
+
     // 并行执行
     let (output1, output2) = cmd!("echo", "task1")
         .then(cmd!("echo", "task2"))
         .read2()?;
     println!("Output 1: {}", output1);
     println!("Output 2: {}", output2);
-    
+
     Ok(())
 }
 ```
@@ -326,11 +326,11 @@ fn user_info() {
     if let Some(username) = get_current_username() {
         println!("Current user: {:?}", username);
     }
-    
+
     // 有效UID
     let uid = get_effective_uid();
     println!("Effective UID: {}", uid);
-    
+
     // 查找用户
     if let Some(user) = get_user_by_name("nobody") {
         println!("User: {}", user.name().to_string_lossy());
@@ -352,17 +352,17 @@ fn manage_capabilities() -> Result<(), Box<dyn std::error::Error>> {
     if has_cap(None, CapSet::Effective, Capability::CAP_NET_BIND_SERVICE)? {
         println!("有绑定<1024端口的权限");
     }
-    
+
     // 设置capabilities
     set(None, CapSet::Effective, Capability::CAP_NET_BIND_SERVICE)?;
-    
+
     // 列出所有capabilities
     for cap in caps::all() {
         if has_cap(None, CapSet::Effective, cap)? {
             println!("Effective: {:?}", cap);
         }
     }
-    
+
     Ok(())
 }
 ```
@@ -526,40 +526,40 @@ impl ProcessManager {
             metrics: ProcessMetrics::new(),
         }
     }
-    
-    pub async fn execute(&mut self, cmd: &str, args: &[&str]) 
-        -> std::io::Result<String> 
+
+    pub async fn execute(&mut self, cmd: &str, args: &[&str])
+        -> std::io::Result<String>
     {
         // 记录启动
         let start = std::time::Instant::now();
         self.metrics.processes_spawned.inc();
-        
+
         // 执行命令
         let result = self.pool.execute(cmd, args).await;
-        
+
         // 记录完成
         let duration = start.elapsed();
         self.metrics.spawn_duration.observe(duration.as_secs_f64());
-        
+
         // 更新系统信息
         self.system.refresh_all();
         let active = self.system.processes().len();
         self.metrics.active_processes.set(active as i64);
-        
+
         result
     }
-    
+
     pub fn health_check(&self) -> HealthStatus {
         let cpu_usage: f32 = self.system.processes()
             .values()
             .map(|p| p.cpu_usage())
             .sum();
-        
+
         let memory_usage: u64 = self.system.processes()
             .values()
             .map(|p| p.memory())
             .sum();
-        
+
         HealthStatus {
             active_processes: self.system.processes().len(),
             total_cpu: cpu_usage,
@@ -578,28 +578,28 @@ struct ProcessMetrics {
 impl ProcessMetrics {
     fn new() -> Self {
         let registry = Registry::new();
-        
+
         let processes_spawned = IntCounter::new(
             "process_manager_spawned_total",
             "Total processes spawned"
         ).unwrap();
-        
+
         let active_processes = IntGauge::new(
             "process_manager_active",
             "Currently active processes"
         ).unwrap();
-        
+
         let spawn_duration = Histogram::with_opts(
             prometheus::HistogramOpts::new(
                 "process_manager_spawn_duration_seconds",
                 "Process spawn duration"
             )
         ).unwrap();
-        
+
         registry.register(Box::new(processes_spawned.clone())).unwrap();
         registry.register(Box::new(active_processes.clone())).unwrap();
         registry.register(Box::new(spawn_duration.clone())).unwrap();
-        
+
         Self {
             processes_spawned,
             active_processes,
@@ -628,9 +628,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .umask(0o027)
         .stdout(std::fs::File::create("/var/log/myapp.log")?)
         .stderr(std::fs::File::create("/var/log/myapp.err")?);
-    
+
     daemonize.start()?;
-    
+
     // 2. 设置信号处理
     let mut signals = Signals::new(TERM_SIGNALS)?;
     std::thread::spawn(move || {
@@ -639,22 +639,22 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             std::process::exit(0);
         }
     });
-    
+
     // 3. 主循环
     let mut manager = ProcessManager::new(4);
-    
+
     loop {
         // 处理任务
         tokio::runtime::Runtime::new()?.block_on(async {
             manager.execute("worker", &["task"]).await.ok();
         });
-        
+
         // 健康检查
         let health = manager.health_check();
         if !health.healthy {
             eprintln!("Unhealthy: {:?}", health);
         }
-        
+
         std::thread::sleep(Duration::from_secs(1));
     }
 }
@@ -787,7 +787,7 @@ users = "0.11"
 
 ---
 
-**文档维护**: Documentation Team  
-**创建日期**: 2025-10-22  
-**最后更新**: 2025-10-23  
+**文档维护**: Documentation Team
+**创建日期**: 2025-10-22
+**最后更新**: 2025-10-23
 **适用版本**: Rust 1.90+
