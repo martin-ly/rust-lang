@@ -97,7 +97,7 @@
 **模块类型**: 高级学习模块 + 跨平台开发
 **学习重点**: WebAssembly、Rust 与 WASM 集成、跨平台应用开发
 **适用对象**: Rust 中级到高级开发者、前端开发者、全栈工程师
-**Rust 版本**: 1.91.1+ (Edition 2024)
+**Rust 版本**: 1.92.0+ (Edition 2024)
 **WASM 版本**: WASM 2.0 + WASI 0.2
 
 ---
@@ -110,8 +110,8 @@
 2. **Rust 集成**: wasm-bindgen、wasm-pack、wasmtime 等工具链
 3. **性能优化**: 二进制大小优化、运行时性能调优
 4. **实战应用**: 前端集成、后端服务、边缘计算
-5. **Rust 1.91.1 特性**: const 上下文增强、编译优化、内存优化、JIT 优化 ⭐ NEW!
-6. **Rust 1.90 特性**: let-else、RPITIT、dyn 上行转型、async fn in traits
+5. **Rust 1.92.0 特性**: 改进的类型检查器、增强的 const 上下文、优化的编译器性能 ⭐ NEW!
+6. **Rust 1.91/1.90 特性**: const 上下文增强、编译优化、let-else、RPITIT、dyn 上行转型、async fn in traits
 7. **成熟生态库**: Yew、Leptos、Dioxus 等前端框架分析
 8. **设计模式**: 工厂、建造者、观察者、策略、适配器、单例模式
 
