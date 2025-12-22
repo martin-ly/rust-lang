@@ -558,6 +558,8 @@ fn tim_sort(arr: &mut [i32]) {
         
         // 如果运行是递减的，反转它
         if run_end - run_start > 1 && arr[run_start] > arr[run_end - 1] {
+            // Rust 1.92.0: 可以使用 rotate_right 进行更高效的操作
+            // 对于 reverse，保持使用 reverse 方法
             arr[run_start..run_end].reverse();
         }
         

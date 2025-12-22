@@ -27,7 +27,7 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  RUST_VERSION: 1.90
+  RUST_VERSION: 1.92.0
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}/wasm-app
 
@@ -388,4 +388,3 @@ jobs:
 #    - Releases 查看发布的版本
 #
 # ============================================================================
-

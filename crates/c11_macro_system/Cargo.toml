@@ -51,6 +51,10 @@ path = "examples/03_repetition.rs"
 name = "04_recursive_macros"
 path = "examples/04_recursive_macros.rs"
 
+[[example]]
+name = "rust_192_features_demo"
+path = "examples/rust_192_features_demo.rs"
+
 [package.metadata.docs.rs]
 all-features = true
 rustdoc-args = ["--cfg", "docsrs"]

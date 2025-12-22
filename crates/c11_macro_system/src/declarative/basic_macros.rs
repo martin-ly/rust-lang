@@ -38,7 +38,7 @@ macro_rules! create_function {
 /// # 示例
 ///
 /// ```
-/// # use C11_macro_system::calculate;
+/// # use c11_macro_system::calculate;
 /// calculate!(1 + 2);
 /// ```
 #[macro_export]
@@ -66,4 +66,3 @@ mod tests {
         test_func(); // 应该成功运行
     }
 }
-

@@ -107,6 +107,10 @@ name = "rust_190_features_demo"
 path = "src/bin/rust_190_features_demo.rs"
 
 [[bin]]
+name = "rust_192_features_demo"
+path = "src/bin/rust_192_features_demo.rs"
+
+[[bin]]
 name = "enhanced_async_demo"
 path = "src/bin/enhanced_async_demo.rs"
 

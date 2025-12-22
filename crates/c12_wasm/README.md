@@ -18,8 +18,8 @@
   - [🎯 快速链接](#-快速链接)
   - [📚 学习资源与文档](#-学习资源与文档)
     - [核心文档 📖](#核心文档-)
-    - [Rust 1.91 特性与优化 ⭐ NEW](#rust-191-特性与优化--new)
-    - [Rust 1.90 特性与生态](#rust-190-特性与生态)
+    - [Rust 1.92.0 特性与优化 ⭐ NEW](#rust-1920-特性与优化--new)
+    - [Rust 1.91/1.90 特性与生态](#rust-191190-特性与生态)
     - [实践指南 📝](#实践指南-)
     - [参考文档 📖](#参考文档-)
     - [高级主题 🚀](#高级主题-)
@@ -124,7 +124,7 @@
 - ✅ 理解 WASM 性能优化技术和最佳实践
 - ✅ 学会在实际项目中应用 WASM 技术
 - ✅ 掌握 WASI 和跨平台应用开发
-- ✅ 了解 Rust 1.91 最新特性在 WASM 中的应用 ⭐ NEW!
+- ✅ 了解 Rust 1.92.0 最新特性在 WASM 中的应用 ⭐ NEW!
 - ✅ 了解 Rust 1.90 特性在 WASM 中的应用
 - ✅ 学习成熟的 WASM 生态库（Yew、Leptos、Dioxus）⭐ NEW!
 - ✅ 掌握设计模式在 WASM 项目中的实践 ⭐ NEW!
@@ -211,11 +211,11 @@ wasmedge target/wasm32-wasi/release/wasi-app.wasm input.txt
 | [术语表](./docs/tier_01_foundations/03_术语表.md) | WASM 核心术语 | ⭐ |
 | [常见问题](./docs/tier_01_foundations/04_常见问题.md) | FAQ 解答 | ⭐⭐ |
 
-### Rust 1.91 特性与优化 ⭐ NEW
+### Rust 1.92.0 特性与优化 ⭐ NEW
 
 | 文档 | 内容 | 难度 |
 |------|------|------|
-| [Rust 1.91 WASM 改进文档](./docs/RUST_191_WASM_IMPROVEMENTS.md) | Rust 1.91 在 WASM 中的改进和优化 | ⭐⭐⭐⭐ |
+| [Rust 1.92.0 WASM 改进文档](./docs/RUST_192_WASM_IMPROVEMENTS.md) | Rust 1.92.0 在 WASM 中的改进和优化 | ⭐⭐⭐⭐ |
 
 ### Rust 1.90 特性与生态
 
@@ -446,9 +446,9 @@ npm start
 
 ---
 
-**模块状态**: ✅ Rust 1.91.1 特性更新完成
-**最后更新**: 2025-11-15
-**适用版本**: Rust 1.91.1+ (Edition 2024), WASM 2.0 + WASI 0.2
+**模块状态**: ✅ Rust 1.92.0 特性更新完成
+**最后更新**: 2025-12-11
+**适用版本**: Rust 1.92.0+ (Edition 2024), WASM 2.0 + WASI 0.2
 
 ---
 

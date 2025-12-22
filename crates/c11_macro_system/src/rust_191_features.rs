@@ -767,7 +767,7 @@ pub mod improved_macro_errors {
     pub fn demonstrate_improved_errors() {
         println!("\n=== 改进的宏错误消息演示 ===");
 
-        let errors = vec![
+        let errors = [
             MacroError::ArgumentCount {
                 expected: 2,
                 found: 3,

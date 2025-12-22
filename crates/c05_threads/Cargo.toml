@@ -14,7 +14,8 @@ crossbeam-deque = "0.8.6"
 rayon = { workspace = true }
 parking_lot = { workspace = true }
 dashmap = { workspace = true }
-flume = "0.11.1"
+# 2025-12-11: 更新至 0.12.0 (最新稳定版本)
+flume = "0.12.0"
 tokio = { workspace = true, optional = true }
 # async-std 已移除，使用 tokio 替代 (async-std 已弃用)
 num_cpus = { workspace = true }

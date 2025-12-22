@@ -50,7 +50,7 @@ fn demo_const_context_enhancement() {
     // 演示 const 引用
     const VALUE: i32 = 42;
     const REF: &i32 = &VALUE; // ✅ Rust 1.91 支持
-    
+
     println!("\n   const VALUE: i32 = {}", VALUE);
     println!("   const REF: &i32 = &VALUE  // ✅ Rust 1.91");
     println!("   REF 的值: {}\n", *REF);
@@ -207,4 +207,3 @@ fn demo_proc_macro_compilation_optimization() {
         println!("     缓存命中率: {:.2}%", cache_rate);
     }
 }
-

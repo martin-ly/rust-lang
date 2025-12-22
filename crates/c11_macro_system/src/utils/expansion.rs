@@ -1,21 +1,12 @@
 //! 宏展开辅助工具
 
 /// 宏展开上下文信息
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct ExpansionContext {
     /// 展开深度
     pub depth: usize,
     /// 是否启用调试
     pub debug: bool,
-}
-
-impl Default for ExpansionContext {
-    fn default() -> Self {
-        Self {
-            depth: 0,
-            debug: false,
-        }
-    }
 }
 
 impl ExpansionContext {
@@ -52,4 +43,3 @@ mod tests {
         assert!(ctx.debug);
     }
 }
-

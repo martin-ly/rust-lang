@@ -1,4 +1,4 @@
-# Rust 1.90 异步特性 CI/CD 流水线配置
+# Rust 1.92.0 异步特性 CI/CD 流水线配置
 # 支持多平台构建、测试和部署
 
 name: Rust 1.92 Async CI/CD Pipeline
@@ -228,7 +228,7 @@ jobs:
       - name: 检出代码
         uses: actions/checkout@v4
 
-      - name: 设置 Rust 1.90
+      - name: 设置 Rust 1.92.0
         uses: actions-rs/toolchain@v1
         with:
           toolchain: ${{ env.RUST_VERSION }}

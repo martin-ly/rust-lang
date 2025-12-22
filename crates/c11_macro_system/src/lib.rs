@@ -38,6 +38,9 @@ pub mod utils;
 // Rust 1.91 新特性模块
 pub mod rust_191_features;
 
+// Rust 1.92 新特性模块
+pub mod rust_192_features;
+
 // 重新导出常用项
 pub use declarative::*;
 
@@ -52,6 +55,20 @@ pub use rust_191_features::{
     improved_macro_errors,
     // 过程宏编译优化
     proc_macro_compilation_optimization,
+};
+
+// 重新导出 Rust 1.92 特性
+pub use rust_192_features::{
+    // 主要功能函数
+    demonstrate_rust_192_macro_features,
+    // 宏展开队列
+    MacroExpansionQueue, MacroExpansionItem,
+    // 宏缓存计算
+    calculate_macro_cache_size, MacroMemoryAllocator,
+    // 宏列表比较
+    compare_macro_lists, check_macro_expansion_states,
+    // 性能监控
+    MacroExpansionPerformanceMonitor,
 };
 
 /// 模块版本信息
@@ -74,4 +91,3 @@ mod tests {
         assert_eq!(MODULE_NAME, "C11: Macro System");
     }
 }
-
