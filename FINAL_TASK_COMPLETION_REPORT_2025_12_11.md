@@ -239,21 +239,21 @@
 
 ### C02 Tier 2 实践指南
 
-2. `crates/c02_type_system/docs/tier_02_guides/01_所有权实践指南.md`
-3. `crates/c02_type_system/docs/tier_02_guides/02_引用与借用实践.md`
-4. `crates/c02_type_system/docs/tier_02_guides/04_Trait实践指南.md`
+1. `crates/c02_type_system/docs/tier_02_guides/01_所有权实践指南.md`
+2. `crates/c02_type_system/docs/tier_02_guides/02_引用与借用实践.md`
+3. `crates/c02_type_system/docs/tier_02_guides/04_Trait实践指南.md`
 
 ### C02 Tier 3 技术参考
 
-5. `crates/c02_type_system/docs/tier_03_references/01_类型系统规范.md`
-6. `crates/c02_type_system/docs/tier_03_references/06_互操作参考.md`
+1. `crates/c02_type_system/docs/tier_03_references/01_类型系统规范.md`
+2. `crates/c02_type_system/docs/tier_03_references/06_互操作参考.md`
 
 ### 报告文档
 
-7. `PENDING_TASKS_COMPREHENSIVE_REVIEW_2025_12_11.md`
-8. `TASK_EXECUTION_PROGRESS_2025_12_11.md`
-9. `TASK_COMPLETION_SUMMARY_2025_12_11.md`
-10. `FINAL_TASK_COMPLETION_REPORT_2025_12_11.md` (本文档)
+1. `PENDING_TASKS_COMPREHENSIVE_REVIEW_2025_12_11.md`
+2. `TASK_EXECUTION_PROGRESS_2025_12_11.md`
+3. `TASK_COMPLETION_SUMMARY_2025_12_11.md`
+4. `FINAL_TASK_COMPLETION_REPORT_2025_12_11.md` (本文档)
 
 ---
 

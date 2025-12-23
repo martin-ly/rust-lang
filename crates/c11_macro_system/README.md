@@ -218,6 +218,7 @@ cargo run --example --list
 ```
 
 **Rust 1.92.0 演示程序**展示了以下特性：
+
 - `rotate_right`: 在宏展开队列管理中实现高效的轮转
 - `NonZero::div_ceil`: 在宏缓存大小计算中安全计算容量
 - 迭代器方法特化: 在宏列表比较中提升性能
