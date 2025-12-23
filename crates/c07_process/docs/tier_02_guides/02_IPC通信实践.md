@@ -3,7 +3,7 @@
 > **文档类型**: 实践指南
 > **难度**: ⭐⭐⭐ 中级
 > **预计时间**: 3小时
-> **适用版本**: Rust 1.90+
+> **适用版本**: Rust 1.92.0+
 
 ---
 
@@ -1761,4 +1761,4 @@ fn check_peer_uid(stream: &UnixStream) -> Result<u32, Box<dyn std::error::Error>
 
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-22
-**适用版本**: Rust 1.90+
+**适用版本**: Rust 1.92.0+

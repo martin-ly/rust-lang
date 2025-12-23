@@ -49,7 +49,7 @@
 -Quick Start Guide for Rust Async Programming 2025
 
 **更新日期**: 2025-10-04
-**适用版本**: Rust 1.90+ | Tokio 1.41+ | Smol 2.0+
+**适用版本**: Rust 1.92.0+ | Tokio 1.41+ | Smol 2.0+
 
 ---
 
@@ -507,5 +507,5 @@ cargo run --example ultimate_async_theory_practice_2025
 
 ---
 
-**最后更新**: 2025-10-04
+**最后更新**: 2025-12-11
 **维护者**: Rust 异步编程研究组

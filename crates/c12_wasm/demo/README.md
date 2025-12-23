@@ -287,5 +287,5 @@ wasm-opt -Oz -o pkg/c12_wasm_bg_optimized.wasm pkg/c12_wasm_bg.wasm
 ---
 
 **最后更新**: 2025-10-30
-**适用版本**: Rust 1.90+ / Edition 2024
+**适用版本**: Rust 1.92.0+ / Edition 2024
 **wasm-bindgen版本**: 0.2.x

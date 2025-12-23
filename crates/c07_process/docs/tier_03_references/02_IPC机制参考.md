@@ -1,7 +1,7 @@
 # Tier 3: IPC机制参考
 
 > **文档类型**: 技术参考
-> **适用版本**: Rust 1.90+
+> **适用版本**: Rust 1.92.0+
 > **前置知识**: [IPC通信实践](../tier_02_guides/02_IPC通信实践.md)
 
 ---
@@ -1322,4 +1322,4 @@ pub fn create_ipc_channel(local_only: bool) -> Box<dyn IpcChannel> {
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-22
 **最后更新**: 2025-10-23
-**适用版本**: Rust 1.90+
+**适用版本**: Rust 1.92.0+

@@ -6,7 +6,7 @@
 > **相关文档**: [Rust 编译 WASM](../tier_02_guides/02_rust_编译_wasm.md) | [JavaScript 互操作](../tier_02_guides/03_javascript_互操作.md)
 
 **最后更新**: 2025-10-30
-**适用版本**: Rust 1.90+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
 
 ---
 
@@ -130,4 +130,4 @@ pub async fn fetch_data(url: &str) -> Result<JsValue, JsValue> {
 
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-30
-**适用版本**: Rust 1.90+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2

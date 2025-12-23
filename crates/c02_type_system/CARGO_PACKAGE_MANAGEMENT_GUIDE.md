@@ -67,7 +67,7 @@ name = "c02_type_system"
 # 版本号（必需，遵循语义化版本）
 version = "0.1.0"
 
-# Rust 版本（Rust 1.90 新增）
+# Rust 版本（Rust 1.92.0 新增）
 edition = "2024"              # Edition 2024 稳定版
 resolver = "3"                # 使用 Resolver 3
 rust-version = "1.90"         # 最低 Rust 版本要求
@@ -668,7 +668,7 @@ cargo deps --all-deps | dot -Tpng > deps.png
 ---
 
 **文档版本**: 1.0
-**最后更新**: 2025-10-19
+**最后更新**: 2025-12-11
 **适用于**: Rust 1.90+, Cargo 1.90+
 
 *本指南持续更新中，欢迎反馈和建议！* 🦀

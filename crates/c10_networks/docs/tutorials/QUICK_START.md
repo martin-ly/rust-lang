@@ -1,6 +1,6 @@
 ﻿# C10 Networks 快速开始指南
 
-> 适用范围：Rust 1.90+，Tokio 1.35+。文档风格遵循 [`STYLE.md`](STYLE.md)。
+> 适用范围：Rust 1.92.0+，Tokio 1.35+。文档风格遵循 [`STYLE.md`](STYLE.md)。
 
 ## 📊 目录
 

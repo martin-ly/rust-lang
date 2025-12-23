@@ -325,4 +325,4 @@ cargo test --test control_flow_tests
 **文档维护**: Rust 学习社区
 **更新频率**: 跟随项目进度持续更新
 **文档版本**: v1.0
-**Rust 版本**: 1.90+
+**Rust 版本**: 1.92.0+
