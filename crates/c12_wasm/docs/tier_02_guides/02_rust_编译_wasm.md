@@ -6,7 +6,7 @@
 > **相关文档**: [项目概览](../tier_01_foundations/01_项目概览.md) | [WASM 基础指南](./01_wasm_基础指南.md)
 
 **最后更新**: 2025-10-30
-**适用版本**: Rust 1.90+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
 
 ---
 
@@ -675,4 +675,4 @@ wasm-pack build --target web
 
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-30
-**适用版本**: Rust 1.90+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2

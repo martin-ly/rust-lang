@@ -6,7 +6,7 @@
 > **相关文档**: [Rust 编译 WASM](./02_rust_编译_wasm.md) | [性能优化指南](./04_性能优化指南.md)
 
 **最后更新**: 2025-10-30
-**适用版本**: Rust 1.90+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
 
 ---
 
@@ -304,4 +304,4 @@ const result = sum_array(new Int32Array([1, 2, 3, 4, 5])); // 15
 
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-30
-**适用版本**: Rust 1.90+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
