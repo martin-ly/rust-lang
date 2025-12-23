@@ -1,9 +1,9 @@
 # 🦀 C03 控制流与函数 - 文档中心
 
 **版本**：v2.0
-**Rust 版本**：1.90+
+**Rust 版本**：1.92.0+
 **文档数量**：35+
-**最后更新**：2025年1月
+**最后更新**：2025-12-11
 
 ## 📚 文档总览
 
@@ -15,7 +15,7 @@
 - ✅ **分级学习**：初学者/进阶/专家三条路径
 - ✅ **完善导航**：多维度索引，快速定位
 - ✅ **实战导向**：设计模式、陷阱避免、性能优化
-- ✅ **与时俱进**：完整覆盖 Rust 1.90 新特性
+- ✅ **与时俱进**：完整覆盖 Rust 1.92.0 新特性
 
 ## 🚀 快速开始
 
@@ -94,7 +94,7 @@ docs/
 │   ├── 迭代结构
 │   ├── 函数与闭包
 │   ├── 错误处理控制流
-│   └── 控制流总览（Rust 1.90）
+│   └── 控制流总览（Rust 1.92.0）
 │
 ├── 📙 03_advanced/        高级主题（10份）
 │   ├── 高级控制流技术
@@ -116,8 +116,8 @@ docs/
 │   └── 常见陷阱与解决方案
 │
 ├── 📓 05_rust_features/   Rust 版本特性（9份）
-│   ├── Rust 1.90 特性总结 ⭐ NEW
-│   └── Rust 1.89 特性文档（7份）
+│   ├── Rust 1.92.0 特性总结 ⭐ NEW
+│   └── Rust 历史版本特性文档（7份）
 │
 └── 📔 06_references/      参考资料（4份）
     ├── FAQ
@@ -176,24 +176,24 @@ docs/
 4. **📌 [完整文档索引](./DOCUMENTATION_INDEX.md)**
    所有文档的完整导航和学习建议
 
-### 🆕 Rust 1.90 新特性
+### 🆕 Rust 1.92.0 新特性
 
 想了解最新版本的特性？查看这些文档：
 
 **⭐ 完整特性总结（推荐首选）**:
 
-- [Rust 1.90 特性总结](05_rust_features/RUST_190_FEATURES_SUMMARY.md) ⭐ NEW
+- [Rust 1.92.0 特性总结](../../RUST_192_COMPREHENSIVE_DOCUMENTATION_REVIEW.md) ⭐ NEW
   - 所有新特性一览、性能数据、迁移指南、最佳实践
 
 **快速参考**:
 
-- [控制流总览（Rust 1.90）](02_basics/06_control_flow_overview_1_90.md) - 新特性总览
-- [高级模式匹配（Rust 1.90）](03_advanced/02_pattern_matching_advanced_1_90.md) - 模式匹配增强
-- [Let-Else 模式手册（Rust 1.90）](03_advanced/04_let_else_patterns_handbook_1_90.md) - let-else 语法
+- [控制流总览（Rust 1.92.0）](02_basics/06_control_flow_overview_1_90.md) - 新特性总览
+- [高级模式匹配（Rust 1.92.0）](03_advanced/02_pattern_matching_advanced_1_90.md) - 模式匹配增强
+- [Let-Else 模式手册（Rust 1.92.0）](03_advanced/04_let_else_patterns_handbook_1_90.md) - let-else 语法
 
 **版本特性目录**:
 
-- [Rust 特性目录](05_rust_features/README.md) - 1.89/1.90 完整版本特性文档
+- [Rust 特性目录](05_rust_features/README.md) - 历史版本和 1.92.0 完整版本特性文档
 
 ## 📚 辅助资源
 
@@ -289,7 +289,7 @@ cargo doc --open --package c03_control_fn
 - [ ] 理解并使用 Fn/FnMut/FnOnce 特征
 - [ ] 使用 let-else 和标签块优化代码
 - [ ] 利用迭代器组合处理数据
-- [ ] 应用 Rust 1.90 的新特性
+- [ ] 应用 Rust 1.92.0 的新特性
 
 ### 🔬 专家检查点
 
@@ -413,5 +413,5 @@ cargo doc --open --package c03_control_fn
 
 *最后更新：2025年1月*
 *文档版本：v2.0*
-*Rust 版本：1.90+*
+*Rust 版本：1.92.0+*
 *维护团队：Rust 学习社区*

@@ -195,7 +195,7 @@ Week 4: 综合应用
 
 完成后你应该能够:
 
-- [ ] 理解 Rust 1.90 的 async trait 和 async closure
+- [ ] 理解 Rust 1.92.0 的 async trait 和 async closure
 - [ ] 编写基本的 TCP 服务器和客户端
 - [ ] 编写 UDP 程序
 - [ ] 使用 HTTP 客户端发送请求
@@ -260,8 +260,8 @@ Week 4: 综合应用
 **A**:
 
 - **最低要求**: Rust 1.75+ (async trait 稳定)
-- **推荐版本**: Rust 1.90+
-- **完全兼容**: Rust 1.90+
+- **推荐版本**: Rust 1.92.0+
+- **完全兼容**: Rust 1.92.0+
 
 ---
 

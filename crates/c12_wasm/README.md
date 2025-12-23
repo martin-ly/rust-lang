@@ -19,7 +19,7 @@
   - [📚 学习资源与文档](#-学习资源与文档)
     - [核心文档 📖](#核心文档-)
     - [Rust 1.92.0 特性与优化 ⭐ NEW](#rust-1920-特性与优化--new)
-    - [Rust 1.90 特性与生态](#rust-190-特性与生态)
+    - [Rust 1.92.0 特性与生态](#rust-1920-特性与生态)
     - [实践指南 📝](#实践指南-)
     - [参考文档 📖](#参考文档-)
     - [高级主题 🚀](#高级主题-)
@@ -111,7 +111,7 @@
 3. **性能优化**: 二进制大小优化、运行时性能调优
 4. **实战应用**: 前端集成、后端服务、边缘计算
 5. **Rust 1.92.0 特性**: 改进的类型检查器、增强的 const 上下文、优化的编译器性能 ⭐ NEW!
-6. **Rust 1.91/1.90 特性**: const 上下文增强、编译优化、let-else、RPITIT、dyn 上行转型、async fn in traits
+6. **Rust 1.92.0 特性**: MaybeUninit文档化、联合体原始引用、自动特征改进、关联项多边界、迭代器方法特化
 7. **成熟生态库**: Yew、Leptos、Dioxus 等前端框架分析
 8. **设计模式**: 工厂、建造者、观察者、策略、适配器、单例模式
 
@@ -125,7 +125,7 @@
 - ✅ 学会在实际项目中应用 WASM 技术
 - ✅ 掌握 WASI 和跨平台应用开发
 - ✅ 了解 Rust 1.92.0 最新特性在 WASM 中的应用 ⭐ NEW!
-- ✅ 了解 Rust 1.90 特性在 WASM 中的应用
+- ✅ 了解 Rust 1.92.0 特性在 WASM 中的应用
 - ✅ 学习成熟的 WASM 生态库（Yew、Leptos、Dioxus）⭐ NEW!
 - ✅ 掌握设计模式在 WASM 项目中的实践 ⭐ NEW!
 
@@ -174,7 +174,7 @@
 - 📦 **基础示例** (`src/lib.rs`) - wasm-bindgen 基础用法
 - 🖥️ **WASI 示例** (`src/wasi_examples.rs`) - 本地操作系统运行示例
 - 🚀 **WASI 应用** (`src/bin/wasi_app.rs`) - 完整的 WASI 应用程序
-- 🌟 **生态库示例** (`src/ecosystem_examples.rs`) - Rust 1.90 特性和设计模式 ⭐ NEW!
+- 🌟 **生态库示例** (`src/ecosystem_examples.rs`) - Rust 1.92.0 特性和设计模式 ⭐ NEW!
 
 **快速开始**:
 
@@ -217,11 +217,11 @@ wasmedge target/wasm32-wasi/release/wasi-app.wasm input.txt
 |------|------|------|
 | [Rust 1.92.0 WASM 改进文档](./docs/RUST_192_WASM_IMPROVEMENTS.md) | Rust 1.92.0 在 WASM 中的改进和优化 | ⭐⭐⭐⭐ |
 
-### Rust 1.90 特性与生态
+### Rust 1.92.0 特性与生态
 
 | 文档 | 内容 | 难度 |
 |------|------|------|
-| [Rust 1.90 生态库与设计模式](./docs/tier_04_advanced/04_rust_190_生态库与设计模式.md) | 最新特性、生态库、设计模式 | ⭐⭐⭐⭐⭐ |
+| [Rust 1.92.0 生态库与设计模式](./docs/tier_04_advanced/04_rust_190_生态库与设计模式.md) | 最新特性、生态库、设计模式 | ⭐⭐⭐⭐⭐ |
 
 ### 实践指南 📝
 

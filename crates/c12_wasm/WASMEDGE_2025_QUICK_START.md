@@ -346,7 +346,7 @@ kubectl describe pod/wasm-microservice-xxx -n wasm-prod
 
 ### 开发环境
 
-- [ ] Rust 1.90+ 安装
+- [ ] Rust 1.92.0+ 安装
 - [ ] wasm32-wasi 目标安装
 - [ ] WasmEdge 安装
 - [ ] Docker 安装（支持 Wasm）

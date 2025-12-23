@@ -25,8 +25,8 @@
   - [🎯 应用场景思维导图](#-应用场景思维导图)
     - [数据结构选择决策树](#数据结构选择决策树)
     - [并发模式选择决策树](#并发模式选择决策树)
-  - [🆕 Rust 1.90 特性思维导图](#-rust-190-特性思维导图)
-    - [Rust 1.90 改进总览](#rust-190-改进总览)
+  - [🆕 Rust 1.92.0 特性思维导图](#-rust-1920-特性思维导图)
+    - [Rust 1.92.0 改进总览](#rust-1920-改进总览)
   - [📚 文档导航思维导图](#-文档导航思维导图)
     - [文档结构总览](#文档结构总览)
   - [🔗 学习资源思维导图](#-学习资源思维导图)
@@ -34,9 +34,9 @@
   - [📝 总结](#-总结)
   - [🔗 相关文档](#-相关文档)
 
-**版本**: 1.0
-**Rust 版本**: 1.90+
-**最后更新**: 2025-01-27
+**版本**: 2.0
+**Rust 版本**: 1.92.0+
+**最后更新**: 2025-12-11
 
 ## 📊 文档概述
 
@@ -839,63 +839,64 @@ graph TB
     style Q4 fill:#fff5e1
 ```
 
-## 🆕 Rust 1.90 特性思维导图
+## 🆕 Rust 1.92.0 特性思维导图
 
-### Rust 1.90 改进总览
+### Rust 1.92.0 改进总览
 
 ```mermaid
 graph TB
-    Root[Rust 1.90特性] --> Ownership[所有权增强]
+    Root[Rust 1.92.0特性] --> Ownership[所有权增强]
     Root --> Borrow[借用优化]
     Root --> Lifetime[生命周期改进]
-    Root --> Compiler[编译器优化]
-    Root --> Tooling[工具链改进]
+    Root --> StdLib[标准库增强]
+    Root --> Performance[性能优化]
 
-    Ownership --> O1[更智能的移动推断]
-    Ownership --> O2[部分移动改进]
-    Ownership --> O3[Drop顺序优化]
+    Ownership --> O1[MaybeUninit文档化]
+    Ownership --> O2[联合体原始引用]
+    Ownership --> O3[零大小数组优化]
 
-    O1 --> O1Benefit[减少不必要的Clone]
-    O2 --> O2Benefit[更灵活的结构体操作]
-    O3 --> O3Benefit[更可预测的资源释放]
+    O1 --> O1Benefit[明确的表示和有效性约束]
+    O2 --> O2Benefit[安全的联合体字段访问]
+    O3 --> O3Benefit[优化的未定大小类型处理]
 
-    Borrow --> B1[NLL进一步优化]
-    Borrow --> B2[分割借用增强]
-    Borrow --> B3[方法链借用改进]
+    Borrow --> B1[高阶生命周期增强]
+    Borrow --> B2[自动特征改进]
+    Borrow --> B3[关联项多边界]
 
-    B1 --> B1Benefit[更精确的借用作用域]
-    B2 --> B2Benefit[更灵活的字段访问]
-    B3 --> B3Benefit[更流畅的API设计]
+    B1 --> B1Benefit[更强的一致性规则]
+    B2 --> B2Benefit[更智能的Sized边界处理]
+    B3 --> B3Benefit[更灵活的trait约束]
 
-    Lifetime --> L1[生命周期推断增强]
-    Lifetime --> L2[错误消息改进]
-    Lifetime --> L3[trait对象生命周期]
+    Lifetime --> L1[增强的高阶区域处理]
+    Lifetime --> L2[Never类型Lint严格化]
+    Lifetime --> L3[unused_must_use改进]
 
-    L1 --> L1Benefit[减少显式标注]
-    L2 --> L2Benefit[更清晰的错误提示]
-    L3 --> L3Benefit[更灵活的trait使用]
+    L1 --> L1Benefit[更精确的生命周期检查]
+    L2 --> L2Benefit[更严格的类型安全]
+    L3 --> L3Benefit[减少不必要的警告]
 
-    Compiler --> C1[编译速度提升]
-    Compiler --> C2[增量编译优化]
-    Compiler --> C3[更好的代码生成]
+    StdLib --> S1[NonZero::div_ceil]
+    StdLib --> S2[Location::file_as_c_str]
+    StdLib --> S3[rotate_right]
 
-    C1 --> C1Benefit[整体提升10%]
-    C2 --> C2Benefit[重编译更快]
-    C3 --> C3Benefit[运行时性能提升]
+    S1 --> S1Benefit[非零整数向上除法]
+    S2 --> S2Benefit[位置信息C字符串]
+    S3 --> S3Benefit[切片右旋转]
 
-    Tooling --> T1[cargo改进]
-    Tooling --> T2[rustfmt更新]
-    Tooling --> T3[clippy新lint]
+    Performance --> P1[迭代器方法特化]
+    Performance --> P2[元组扩展简化]
+    Performance --> P3[EncodeWide Debug增强]
 
-    T1 --> T1Benefit[更快的依赖解析]
-    T2 --> T2Benefit[更好的格式化]
-    T3 --> T3Benefit[更多代码建议]
+    P1 --> P1Benefit[TrustedLen迭代器优化]
+    P2 --> P2Benefit[更高效的元组操作]
+    P3 --> P3Benefit[更好的调试信息]
 
     style Root fill:#e1f5ff
     style Ownership fill:#ffe1e1
     style Borrow fill:#e1ffe1
     style Lifetime fill:#fff5e1
-    style Compiler fill:#f5e1ff
+    style StdLib fill:#f5e1ff
+    style Performance fill:#e1f5e1
 ```
 
 ## 📚 文档导航思维导图
@@ -937,8 +938,8 @@ graph LR
     Practice --> P3[常见陷阱]
     Practice --> P4[性能调优]
 
-    Features --> F1[Rust 1.90全面指南]
-    Features --> F2[Rust 1.90特性分析]
+    Features --> F1[Rust 1.92.0全面指南]
+    Features --> F2[Rust 1.92.0特性分析]
     Features --> F3[Rust 1.89特性]
 
     Visual --> V1[知识图谱]
@@ -1014,7 +1015,7 @@ graph TB
 - [知识图谱](./KNOWLEDGE_GRAPH.md) - 概念关系可视化
 - [多维矩阵](./MULTIDIMENSIONAL_MATRIX.md) - 多维度对比分析
 - [概念关系网络](./CONCEPT_RELATIONSHIP_NETWORK.md) - 深度关系分析
-- [Rust 1.90 全面指南](./06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md) - 最新特性
+- [Rust 1.92.0 全面指南](../../RUST_192_COMPREHENSIVE_DOCUMENTATION_REVIEW.md) - 最新特性
 
 ---
 
