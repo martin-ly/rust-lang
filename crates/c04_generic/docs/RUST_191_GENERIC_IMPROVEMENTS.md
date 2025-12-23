@@ -1,9 +1,10 @@
-# Rust 1.91 泛型系统改进文档
+# Rust 1.91 泛型系统改进文档（历史版本）
 
 > **文档版本**: 1.0
 > **创建日期**: 2025-01-27
-> **适用版本**: Rust 1.91.0+
+> **适用版本**: Rust 1.91.0+（历史版本）
 > **相关模块**: `c04_generic`
+> **注意**: 本文档为历史版本。请查看 [Rust 1.92.0 综合梳理](../../RUST_192_COMPREHENSIVE_DOCUMENTATION_REVIEW.md) 了解最新特性。
 
 ---
 
@@ -150,7 +151,7 @@ let result = generic_jit_optimizations::complex_generic_pipeline(
 
 ### 性能对比
 
-| 场景 | Rust 1.90 | Rust 1.91 | 性能提升 |
+| 场景 | Rust 1.91 (历史) | Rust 1.92.0 (当前) | 性能提升 |
 |------|-----------|-----------|----------|
 | 简单 map | 100% | 85-90% | 10-15% |
 | 链式操作 | 100% | 75-85% | 15-25% |
@@ -366,7 +367,7 @@ fn use_gat_iterator() {
 
 ## 迁移指南
 
-### 从 Rust 1.90 迁移到 Rust 1.91
+### 从 Rust 1.91 迁移到 Rust 1.92.0
 
 #### 1. 更新 Rust 版本
 
@@ -380,7 +381,7 @@ rustc --version  # 应该显示 rustc 1.91.0
 **使用 const 上下文增强**:
 
 ```rust
-// 旧代码（Rust 1.90）
+// 旧代码（Rust 1.91）
 static VALUE: i32 = 42;
 const REF: &i32 = &VALUE;
 
@@ -415,7 +416,7 @@ let vectors = create_generic_vectors(value, 1000);  // 性能提升 25-30%
 
 ### 兼容性说明
 
-- Rust 1.91 向后兼容 Rust 1.90 的代码
+- Rust 1.92.0 向后兼容 Rust 1.91 的代码
 - 新特性是可选的，不会破坏现有代码
 - 可以通过逐步迁移来利用新特性
 
