@@ -67,7 +67,7 @@ let result = match value {
 };
 ```
 
-**相关**: [02_basics/01_control_flow_fundamentals.md](./02_basics/01_control_flow_fundamentals.md)
+**相关**: [条件语句指南](./tier_02_guides/01_条件语句指南.md)
 
 ---
 
@@ -104,7 +104,7 @@ let y = {
 };
 ```
 
-**相关**: [02_basics/02_conditional_expressions.md](./02_basics/02_conditional_expressions.md)
+**相关**: [条件语句指南](./tier_02_guides/01_条件语句指南.md)
 
 ---
 
@@ -139,7 +139,7 @@ fn print_message(msg: &str) {
 }
 ```
 
-**相关**: [02_basics/04_functions_and_closures.md](./02_basics/04_functions_and_closures.md)
+**相关**: [函数系统指南](./tier_02_guides/03_函数系统指南.md)
 
 ---
 
@@ -175,7 +175,7 @@ let mut increment = || count += 1;
 increment();
 ```
 
-**相关**: [03_advanced/06_closures_and_fn_traits_1_90.md](./03_advanced/06_closures_and_fn_traits_1_90.md)
+**相关**: [闭包深入](./tier_04_advanced/02_闭包深入.md)
 
 ---
 
@@ -207,7 +207,7 @@ match point {
 }
 ```
 
-**相关**: [03_advanced/02_pattern_matching_advanced_1_90.md](./03_advanced/02_pattern_matching_advanced_1_90.md)
+**相关**: [高级模式匹配](./tier_04_advanced/01_高级模式匹配.md)
 
 ---
 
@@ -245,7 +245,7 @@ let Some(x) = option else {
 };
 ```
 
-**相关**: [03_advanced/02_pattern_matching_advanced_1_90.md](./03_advanced/02_pattern_matching_advanced_1_90.md)
+**相关**: [高级模式匹配](./tier_04_advanced/01_高级模式匹配.md)
 
 ---
 
@@ -278,7 +278,7 @@ match value {
 }
 ```
 
-**相关**: [03_advanced/02_pattern_matching_advanced_1_90.md](./03_advanced/02_pattern_matching_advanced_1_90.md)
+**相关**: [高级模式匹配](./tier_04_advanced/01_高级模式匹配.md)
 
 ---
 
@@ -316,7 +316,7 @@ let sum: i32 = numbers
 println!("{}", sum); // 12
 ```
 
-**相关**: [03_advanced/07_loops_and_iterators_control_1_90.md](./03_advanced/07_loops_and_iterators_control_1_90.md)
+**相关**: [迭代器参考](./tier_03_references/02_迭代器参考.md)
 
 ---
 
@@ -352,7 +352,7 @@ fn forever() -> ! {
 }
 ```
 
-**相关**: [03_advanced/08_never_type_practices_1_90.md](./03_advanced/08_never_type_practices_1_90.md)
+**相关**: [错误处理进阶](./tier_04_advanced/04_错误处理进阶.md)
 
 ---
 
@@ -387,7 +387,7 @@ fn read_file(path: &str) -> Result<String, std::io::Error> {
 }
 ```
 
-**相关**: [02_basics/05_error_handling_as_control_flow.md](./02_basics/05_error_handling_as_control_flow.md)
+**相关**: [错误处理指南](./tier_02_guides/05_错误处理指南.md)
 
 ---
 
@@ -424,7 +424,7 @@ fn call_fn_once<F>(f: F) where F: FnOnce() {
 }
 ```
 
-**相关**: [03_advanced/06_closures_and_fn_traits_1_90.md](./03_advanced/06_closures_and_fn_traits_1_90.md)
+**相关**: [闭包深入](./tier_04_advanced/02_闭包深入.md)
 
 ---
 
@@ -455,7 +455,7 @@ let add5 = make_adder(5);
 println!("{}", add5(3)); // 8
 ```
 
-**相关**: [02_basics/04_functions_and_closures.md](./02_basics/04_functions_and_closures.md)
+**相关**: [函数系统指南](./tier_02_guides/03_函数系统指南.md)
 
 ---
 
@@ -491,7 +491,7 @@ fn process(data: Option<String>) -> Result<usize, &'static str> {
 }
 ```
 
-**相关**: [03_advanced/04_let_else_patterns_handbook_1_90.md](./03_advanced/04_let_else_patterns_handbook_1_90.md)
+**相关**: [高级模式匹配](./tier_04_advanced/01_高级模式匹配.md)
 
 ---
 
@@ -528,7 +528,7 @@ let result = 'block: {
 };
 ```
 
-**相关**: [03_advanced/05_labeled_blocks_and_break_values_1_90.md](./03_advanced/05_labeled_blocks_and_break_values_1_90.md)
+**相关**: [循环结构指南](./tier_02_guides/02_循环结构指南.md)
 
 ---
 
@@ -537,10 +537,10 @@ let result = 'block: {
 - [主索引](./00_MASTER_INDEX.md) - 完整文档导航
 - [FAQ](./FAQ.md) - 常见问题解答
 - [README](../README.md) - 项目概述
-- [理论基础](./01_theory/) - 深入学习
-- [核心概念](./02_basics/) - 基础知识
-- [高级主题](./03_advanced/) - 进阶内容
-- [实践应用](./04_practice/) - 最佳实践
+- [基础层](./tier_01_foundations/) - 深入学习
+- [指南层](./tier_02_guides/) - 基础知识
+- [高级主题](./tier_04_advanced/) - 进阶内容
+- [参考资料](./tier_03_references/) - 技术参考
 
 ---
 

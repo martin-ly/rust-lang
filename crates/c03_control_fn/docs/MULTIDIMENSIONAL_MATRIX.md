@@ -418,7 +418,7 @@
 - [知识图谱](./KNOWLEDGE_GRAPH.md) - 可视化概念关系
 - [思维导图](./MIND_MAP.md) - 学习路径导航
 - [概念关系网络](./CONCEPT_RELATIONSHIP_NETWORK.md) - 深度关系分析
-- [Rust 1.90 特性](./05_rust_features/RUST_190_FEATURES_SUMMARY.md) - 最新特性
+- [Rust 1.92.0 控制流改进](./RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) - 最新特性 🆕
 
 ---
 

@@ -770,16 +770,16 @@ graph TB
 
 ### 核心文档链接
 
-- [控制流基础](./02_basics/01_control_flow_fundamentals.md) - 理论基础
-- [模式匹配高级](./03_advanced/02_pattern_matching_advanced_1_90.md) - 核心概念
-- [闭包与Fn Traits](./03_advanced/06_closures_and_fn_traits_1_90.md) - 高级应用
-- [Rust 1.90 特性总结](./05_rust_features/RUST_190_FEATURES_SUMMARY.md) - 最新特性
+- [条件语句指南](./tier_02_guides/01_条件语句指南.md) - 理论基础
+- [高级模式匹配](./tier_04_advanced/01_高级模式匹配.md) - 核心概念
+- [闭包深入](./tier_04_advanced/02_闭包深入.md) - 高级应用
+- [Rust 1.92.0 控制流改进](./RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) - 最新特性 🆕
 
 ### 实践指南
 
-- [函数与闭包实践](./04_practice/01_functions_closures_practice.md) - 模式应用
-- [错误处理实践](./04_practice/02_error_handling_practice.md) - 实践建议
-- [性能实践](./04_practice/03_control_flow_performance_practices_1_90.md) - 优化技巧
+- [代码示例集合](./tier_02_guides/06_代码示例集合.md) - 模式应用
+- [错误处理指南](./tier_02_guides/05_错误处理指南.md) - 实践建议
+- [性能优化](./tier_04_advanced/05_性能优化.md) - 优化技巧
 
 ---
 

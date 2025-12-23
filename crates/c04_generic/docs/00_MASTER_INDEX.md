@@ -343,7 +343,7 @@ docs/
    - 零成本抽象设计
 
 3. **持续更新**
-   - 参考 [文档模板标准](./DOCUMENTATION_TEMPLATE_STANDARD.md) 🆕
+   - 参考 [主索引导航](./tier_01_foundations/02_主索引导航.md) 🆕
    - 查看 [Rust 1.92.0 完成报告](../../RUST_192_DOCUMENTATION_ULTIMATE_COMPLETE.md) 🆕
    - 关注 Rust 版本更新
    - 参与社区讨论

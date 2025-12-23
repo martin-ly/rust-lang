@@ -79,7 +79,7 @@ let x = if condition { 1 } else { 0 };
 let x = if condition { 1 } else { "zero" };
 ```
 
-**相关**: [02_basics/02_conditional_expressions.md](./02_basics/02_conditional_expressions.md)
+**相关**: [条件语句指南](./tier_02_guides/01_条件语句指南.md)
 
 ---
 
@@ -111,7 +111,7 @@ while i < numbers.len() {
 }
 ```
 
-**相关**: [02_basics/03_iterative_constructs.md](./02_basics/03_iterative_constructs.md)
+**相关**: [循环结构指南](./tier_02_guides/02_循环结构指南.md)
 
 ---
 
@@ -147,7 +147,7 @@ while let Some(value) = iterator.next() {
 }
 ```
 
-**相关**: [03_advanced/02_pattern_matching_advanced_1_90.md](./03_advanced/02_pattern_matching_advanced_1_90.md)
+**相关**: [高级模式匹配](./tier_04_advanced/01_高级模式匹配.md)
 
 ---
 
@@ -183,7 +183,7 @@ fn process(data: Option<String>) -> Result<usize, String> {
 }
 ```
 
-**相关**: [03_advanced/04_let_else_patterns_handbook_1_90.md](./03_advanced/04_let_else_patterns_handbook_1_90.md)
+**相关**: [高级模式匹配](./tier_04_advanced/01_高级模式匹配.md)
 
 ---
 
@@ -219,7 +219,7 @@ let consume_fn = || drop(z);
 consume_fn(); // 只能调用一次
 ```
 
-**相关**: [03_advanced/06_closures_and_fn_traits_1_90.md](./03_advanced/06_closures_and_fn_traits_1_90.md)
+**相关**: [闭包深入](./tier_04_advanced/02_闭包深入.md)
 
 ---
 
@@ -254,7 +254,7 @@ println!("{}", add5(3)); // 8
 - `Box<dyn Fn>`: 运行时多态，堆分配
 - `impl Fn`: 编译时单态化，零成本
 
-**相关**: [02_basics/04_functions_and_closures.md](./02_basics/04_functions_and_closures.md)
+**相关**: [函数系统指南](./tier_02_guides/03_函数系统指南.md)
 
 ---
 
@@ -303,7 +303,7 @@ fn divide(a: i32, b: i32) -> i32 {
 assert!(b != 0, "Division by zero!");
 ```
 
-**相关**: [02_basics/05_error_handling_as_control_flow.md](./02_basics/05_error_handling_as_control_flow.md)
+**相关**: [错误处理指南](./tier_02_guides/05_错误处理指南.md)
 
 ---
 
@@ -341,7 +341,7 @@ fn process() -> Result<String, Error> {
 
 **注意**: `?` 会自动调用 `From::from` 进行类型转换
 
-**相关**: [02_basics/05_error_handling_as_control_flow.md](./02_basics/05_error_handling_as_control_flow.md)
+**相关**: [错误处理指南](./tier_02_guides/05_错误处理指南.md)
 
 ---
 
@@ -380,7 +380,7 @@ if condition {
 }
 ```
 
-**相关**: [04_practice/03_control_flow_performance_practices_1_90.md](./04_practice/03_control_flow_performance_practices_1_90.md)
+**相关**: [性能优化](./tier_04_advanced/05_性能优化.md)
 
 ---
 
@@ -423,7 +423,7 @@ fn apply<F: Fn(i32) -> i32>(f: F, x: i32) -> i32 {
 }
 ```
 
-**相关**: [04_practice/03_control_flow_performance_practices_1_90.md](./04_practice/03_control_flow_performance_practices_1_90.md)
+**相关**: [性能优化](./tier_04_advanced/05_性能优化.md)
 
 ---
 
@@ -432,9 +432,9 @@ fn apply<F: Fn(i32) -> i32>(f: F, x: i32) -> i32 {
 - [主索引](./00_MASTER_INDEX.md) - 完整文档导航
 - [README](../README.md) - 项目概述
 - [Glossary](./Glossary.md) - 核心术语表
-- [基础知识](./02_basics/) - 基础学习路径
-- [高级主题](./03_advanced/) - 进阶内容
-- [实践指南](./04_practice/) - 最佳实践
+- [指南层](./tier_02_guides/) - 基础学习路径
+- [高级主题](./tier_04_advanced/) - 进阶内容
+- [参考资料](./tier_03_references/) - 技术参考
 
 ---
 

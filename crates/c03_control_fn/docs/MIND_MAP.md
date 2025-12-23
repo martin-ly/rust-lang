@@ -1176,7 +1176,7 @@ graph TB
 - [知识图谱](./KNOWLEDGE_GRAPH.md) - 概念关系可视化
 - [多维矩阵](./MULTIDIMENSIONAL_MATRIX.md) - 多维度对比分析
 - [概念关系网络](./CONCEPT_RELATIONSHIP_NETWORK.md) - 深度关系分析
-- [Rust 1.90 特性](./05_rust_features/RUST_190_FEATURES_SUMMARY.md) - 最新特性详解
+- [Rust 1.92.0 控制流改进](./RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) - 最新特性详解 🆕
 
 ---
 

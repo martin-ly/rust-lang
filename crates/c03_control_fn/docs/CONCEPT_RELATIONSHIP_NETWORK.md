@@ -1042,15 +1042,15 @@ graph TB
 - [知识图谱](./KNOWLEDGE_GRAPH.md) - 概念关系可视化
 - [多维矩阵](./MULTIDIMENSIONAL_MATRIX.md) - 多维度对比分析
 - [思维导图](./MIND_MAP.md) - 学习路径导航
-- [控制流基础](./02_basics/01_control_flow_fundamentals.md) - 基础理论
-- [Rust 1.90 特性](./05_rust_features/RUST_190_FEATURES_SUMMARY.md) - 最新特性
+- [条件语句指南](./tier_02_guides/01_条件语句指南.md) - 基础理论
+- [Rust 1.92.0 控制流改进](./RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) - 最新特性 🆕
 
 ### 深度阅读
 
-- [模式匹配高级](./03_advanced/02_pattern_matching_advanced_1_90.md) - 高级模式
-- [闭包与Fn Traits](./03_advanced/06_closures_and_fn_traits_1_90.md) - 闭包深入
-- [迭代器控制](./03_advanced/07_loops_and_iterators_control_1_90.md) - 迭代器高级
-- [性能实践](./04_practice/03_control_flow_performance_practices_1_90.md) - 优化技巧
+- [高级模式匹配](./tier_04_advanced/01_高级模式匹配.md) - 高级模式
+- [闭包深入](./tier_04_advanced/02_闭包深入.md) - 闭包深入
+- [迭代器参考](./tier_03_references/02_迭代器参考.md) - 迭代器高级
+- [性能优化](./tier_04_advanced/05_性能优化.md) - 优化技巧
 
 ---
 
