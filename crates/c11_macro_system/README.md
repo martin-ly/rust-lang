@@ -294,7 +294,7 @@ cargo test declarative_tests
 ### 宏的类型
 
 | 类型 | 定义方式 | 用途 | 示例 |
-|------|---------|------|------|
+| --- | --- | --- | --- |
 | 声明宏 | `macro_rules!` | 模式匹配代码生成 | `vec![]` |
 | 派生宏 | `#[proc_macro_derive]` | 自动实现trait | `#[derive(Debug)]` |
 | 属性宏 | `#[proc_macro_attribute]` | 修改或注解项 | `#[route(GET)]` |
