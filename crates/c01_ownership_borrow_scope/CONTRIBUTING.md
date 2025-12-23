@@ -109,7 +109,7 @@
 
 ### 前置条件
 
-- **Rust 环境**: Rust 1.90+ (推荐使用 rustup)
+- **Rust 环境**: Rust 1.92.0+ (推荐使用 rustup)
 - **Git**: 版本控制工具
 - **Markdown 编辑器**: 推荐 VS Code + Markdown 插件
 

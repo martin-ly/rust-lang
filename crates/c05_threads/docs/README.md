@@ -85,7 +85,7 @@ cargo bench -p c05_threads
 
 - **[FAQ.md](./FAQ.md)** - 常见问题解答
 - **[Glossary.md](./Glossary.md)** - 并发术语表
-- **[rust_189_features_analysis.md](./rust_189_features_analysis.md)** - Rust 1.89特性分析
+- **[rust_189_features_analysis.md](./rust_189_features_analysis.md)** - Rust 1.89特性分析（历史版本，文件已归档）
 
 ---
 

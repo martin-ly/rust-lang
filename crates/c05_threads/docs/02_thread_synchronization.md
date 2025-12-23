@@ -5,7 +5,7 @@
 > **相关文档**: [03_synchronization_primitives](./03_synchronization_primitives.md) | [知识图谱](./KNOWLEDGE_GRAPH.md)
 
 **最后更新**: 2025-10-19 (增强版)
-**适用版本**: Rust 1.90+
+**适用版本**: Rust 1.92.0+
 **难度等级**: ⭐⭐⭐
 **文档类型**: ⚙️ 实践+理论
 **增强内容**: ✅ 知识图谱 | ✅ 多维对比 | ✅ Rust 1.90 示例
@@ -159,7 +159,7 @@ graph TD
 
 ### 同步原语适用场景对比
 
-| 场景 | 最佳选择 | 次优选择 | 不推荐 | Rust 1.90 推荐 |
+| 场景 | 最佳选择 | 次优选择 | 不推荐 | Rust 1.92.0 推荐 |
 |-----|---------|---------|--------|---------------|
 | **短临界区** | Spinlock | Mutex | RwLock | Mutex (优化后) |
 | **长临界区** | Mutex | RwLock | Spinlock | Mutex |

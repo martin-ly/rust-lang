@@ -6,7 +6,7 @@
 > **相关文档**: [开发工具链](./09.1_Development_Toolchain.md) | [调试技术](./09.3_Debugging_Techniques.md)
 
 **最后更新**: 2025-10-30
-**适用版本**: Rust 1.90+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
 
 ---
 

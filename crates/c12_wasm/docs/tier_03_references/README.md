@@ -31,4 +31,4 @@
 
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-30
-**适用版本**: Rust 1.90+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2

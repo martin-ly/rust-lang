@@ -119,7 +119,7 @@
 
 #### 版本特性
 
-- 🚀 **[rust_189_features_analysis.md](./rust_189_features_analysis.md)** - Rust 1.89特性分析
+- 🚀 **[rust_189_features_analysis.md](./rust_189_features_analysis.md)** - Rust 1.89特性分析（历史版本，文件已归档）
 
 ---
 

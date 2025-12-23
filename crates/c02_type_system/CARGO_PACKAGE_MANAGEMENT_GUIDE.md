@@ -111,7 +111,7 @@ include = [
 
 ```toml
 [dependencies]
-# 工作空间继承（Rust 1.90 推荐）
+# 工作空间继承（Rust 1.92.0 推荐）
 tokio = { workspace = true }
 serde = { workspace = true, optional = true }
 
