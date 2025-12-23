@@ -66,7 +66,7 @@
 ### 🎯 按角色导航
 
 | 角色 | 推荐路径 | 关键文档 |
-|------|---------|---------|
+| --- | --- | --- |
 | **初学者** | [README](./README.md) → [OVERVIEW](./OVERVIEW.md) → 创建型模式 | 基础概念、示例代码 |
 | **中级开发者** | 行为型模式 → 并发模式 → 最佳实践 | 实战案例、性能优化 |
 | **架构师** | [综合指南](./COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) → 形式化理论 | 架构设计、模式组合 |
@@ -75,7 +75,7 @@
 ### 📚 按类型导航
 
 | 类型 | 文档/目录 | 说明 |
-|------|----------|------|
+| --- | --- | --- |
 | **入门指南** | [README](./README.md) | 项目概述和快速开始 |
 | **概览** | [OVERVIEW](./OVERVIEW.md) | 文档结构和阅读路径 |
 | **综合指南** | [COMPREHENSIVE_DESIGN_PATTERNS_GUIDE](./COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) | 完整的模式理论与实践 |
@@ -95,7 +95,7 @@
 #### 1. 创建型模式 (Creational Patterns)
 
 | 模式 | 源码位置 | 说明 | 特点 |
-|------|---------|------|------|
+| --- | --- | --- | --- |
 | **单例模式** | [`src/creational/singleton/`](../src/creational/singleton/) | 全局唯一实例 | `OnceLock`, 线程安全 |
 | **工厂方法** | [`src/creational/factory_method/`](../src/creational/factory_method/) | 对象创建接口 | Trait + 泛型 |
 | **抽象工厂** | [`src/creational/abstract_factory/`](../src/creational/abstract_factory/) | 产品族创建 | 枚举 + Trait |
@@ -107,7 +107,7 @@
 #### 2. 结构型模式 (Structural Patterns)
 
 | 模式 | 源码位置 | 说明 | 特点 |
-|------|---------|------|------|
+| --- | --- | --- | --- |
 | **适配器模式** | [`src/structural/adapter/`](../src/structural/adapter/) | 接口转换 | Trait 适配 |
 | **桥接模式** | [`src/structural/bridge/`](../src/structural/bridge/) | 抽象与实现分离 | 泛型 + Trait |
 | **组合模式** | [`src/structural/composite/`](../src/structural/composite/) | 树形结构 | 递归组合 |
@@ -119,7 +119,7 @@
 #### 3. 行为型模式 (Behavioral Patterns)
 
 | 模式 | 源码位置 | 说明 | 特点 |
-|------|---------|------|------|
+| --- | --- | --- | --- |
 | **责任链模式** | [`src/behavioral/chain_of_responsibility/`](../src/behavioral/chain_of_responsibility/) | 请求链式处理 | let-else |
 | **命令模式** | [`src/behavioral/command/`](../src/behavioral/command/) | 请求封装 | 闭包实现 |
 | **解释器模式** | [`src/behavioral/interpreter/`](../src/behavioral/interpreter/) | 语言解释 | 递归下降 |
@@ -137,7 +137,7 @@
 #### 4. 并发模式 (Concurrency Patterns)
 
 | 模块 | 源码位置 | 说明 |
-|------|---------|------|
+| --- | --- | --- |
 | **异步模式** | [`src/concurrency/asynchronous/`](../src/concurrency/asynchronous/) | Future/async/await |
 | **原生 async trait** | [`src/concurrency/asynchronous/native_async_trait/`](../src/concurrency/asynchronous/native_async_trait/) | Rust 1.90+ 特性 |
 | **消息传递** | [`src/concurrency/message_passing/`](../src/concurrency/message_passing/) | Channel 通信 |
@@ -149,7 +149,7 @@
 #### 5. 并行模式 (Parallel Patterns)
 
 | 模块 | 源码位置 | 说明 |
-|------|---------|------|
+| --- | --- | --- |
 | **数据并行** | [`src/parallel/data_parrallelism/`](../src/parallel/data_parrallelism/) | Rayon 并行 |
 | **并行归约** | [`src/parallel/parallel_reduction/`](../src/parallel/parallel_reduction/) | 规约操作 |
 | **流水线** | [`src/parallel/pipeline/`](../src/parallel/pipeline/) | 流水线处理 |
@@ -161,7 +161,7 @@
 #### 6. 形式化文档
 
 | 文档 | 主题 | 核心内容 |
-|------|------|---------|
+| --- | --- | --- |
 | [异步vs同步等价性](./ASYNC_SYNC_EQUIVALENCE_THEORY.md) | 语义等价 | CPS变换, Monad, 控制流 |
 | [Actor与Reactor模式](./ACTOR_REACTOR_PATTERNS.md) | 并发模型 | 消息传递, 事件驱动 |
 | [CSP vs Async分析](./CSP_VS_ASYNC_ANALYSIS.md) | 模型对比 | Golang vs Rust |
@@ -170,7 +170,7 @@
 #### 7. 形式化验证代码
 
 | 模块 | 说明 |
-|------|------|
+| --- | --- |
 | [`src/formal_verification_examples.rs`](../src/formal_verification_examples.rs) | 类型级状态机、终止性证明 |
 
 ### 第四部分：领域专题
@@ -178,7 +178,7 @@
 #### 8. 领域特定模式
 
 | 模块 | 源码位置 | 说明 |
-|------|---------|------|
+| --- | --- | --- |
 | **Web框架模式** | [`src/web_framework_patterns.rs`](../src/web_framework_patterns.rs) | HTTP, 中间件 |
 | **数据库模式** | [`src/database_patterns.rs`](../src/database_patterns.rs) | 连接池, 事务 |
 | **操作系统模式** | [`src/os_patterns.rs`](../src/os_patterns.rs) | 进程, 线程 |
@@ -189,7 +189,7 @@
 #### 9. Rust 1.90+ 特性
 
 | 特性 | 源码位置 | 说明 |
-|------|---------|------|
+| --- | --- | --- |
 | **RPITIT** | [`src/rust_190_features.rs`](../src/rust_190_features.rs) | Trait 方法返回 impl Trait |
 | **dyn upcasting** | [`src/rust_190_features.rs`](../src/rust_190_features.rs) | trait 对象上转型 |
 | **let-else** | 多处使用 | 早退模式 |
@@ -202,7 +202,7 @@
 ### 可运行示例 (examples/)
 
 | 示例 | 文件 | 说明 | 运行命令 |
-|------|------|------|----------|
+| --- | --- |------|----------|
 | **事件总线** | [`event_bus_demo.rs`](../examples/event_bus_demo.rs) | 异步事件、背压控制 | `cargo run --example event_bus_demo` |
 | **async trait** | [`async_trait_demo.rs`](../examples/async_trait_demo.rs) | 原生 async trait | `cargo run --example async_trait_demo` |
 | **GATs观察者** | [`gats_observer_demo.rs`](../examples/gats_observer_demo.rs) | GATs 借用视图 | `cargo run --example gats_observer_demo` |
@@ -212,7 +212,7 @@
 ### 性能基准测试 (benches/)
 
 | 基准 | 文件 | 说明 | 运行命令 |
-|------|------|------|----------|
+| --- | --- |------|----------|
 | **异步GATs基准** | [`async_gats_benches.rs`](../benches/async_gats_benches.rs) | 异步事件总线性能 | `cargo bench` |
 | **模式基准** | [`pattern_benchmarks.rs`](../benches/pattern_benchmarks.rs) | 各种模式性能对比 | `cargo bench` |
 | **场景基准** | [`pattern_scenarios.rs`](../benches/pattern_scenarios.rs) | 实际场景性能 | `cargo bench` |
@@ -225,7 +225,7 @@
 ### 测试套件 (tests/)
 
 | 测试 | 文件 | 说明 |
-|------|------|------|
+| --- | --- |------|
 | **执行模型测试** | [`execution_model_tests.rs`](../tests/execution_model_tests.rs) | 同步/异步执行 |
 | **事件单例集成** | [`integration_events_singleton.rs`](../tests/integration_events_singleton.rs) | 跨模式集成 |
 | **集成测试** | [`integration_tests.rs`](../tests/integration_tests.rs) | 完整功能测试 |
@@ -301,7 +301,7 @@ cargo bench -p c09_design_pattern
 ### 性能优化场景
 
 | 需求 | 推荐模式 | 文档 |
-|------|---------|------|
+| --- | --- | --- |
 | 减少对象创建开销 | 对象池、享元 | 创建型/结构型 |
 | 高并发处理 | Actor、Reactor | 并发模式文档 |
 | 异步IO优化 | async/await、Future | 异步模式 |
@@ -310,7 +310,7 @@ cargo bench -p c09_design_pattern
 ### 架构设计场景
 
 | 需求 | 推荐模式 | 文档 |
-|------|---------|------|
+| --- | --- | --- |
 | 解耦组件 | 观察者、中介者 | 行为型模式 |
 | 可扩展系统 | 策略、命令 | 行为型模式 |
 | 插件系统 | 抽象工厂、代理 | 创建型/结构型 |
@@ -319,7 +319,7 @@ cargo bench -p c09_design_pattern
 ### 并发编程场景
 
 | 需求 | 推荐模式 | 文档 |
-|------|---------|------|
+| --- | --- | --- |
 | 线程通信 | 消息传递 | 并发模式 |
 | 共享数据 | 读写者、共享状态 | 并发模式 |
 | 任务调度 | 任务调度、工作窃取 | 并发/并行模式 |

@@ -1,7 +1,7 @@
 # Tier 3: 技术参考层
 
 > **完成状态**: ✅ **100%** (5篇核心文档 + 8篇现有参考)
-> **最后更新**: 2025-10-23 (核心技术参考完成)
+> **最后更新**: 2025-12-11 (核心技术参考完成)
 
 ---
 
@@ -70,7 +70,7 @@
 ## 🗺️ 思维导图与图谱
 
 | 资源 | 说明 |
-|------|------|
+| --- | --- |
 | [RUST_190_COMPREHENSIVE_MINDMAP.md](../RUST_190_COMPREHENSIVE_MINDMAP.md) | 综合思维导图 |
 | [COMPREHENSIVE_DOCUMENTATION_INDEX.md](../COMPREHENSIVE_DOCUMENTATION_INDEX.md) | 文档总索引 |
 

@@ -1321,5 +1321,5 @@ pub fn create_ipc_channel(local_only: bool) -> Box<dyn IpcChannel> {
 
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-22
-**最后更新**: 2025-10-23
+**最后更新**: 2025-12-11
 **适用版本**: Rust 1.92.0+

@@ -42,7 +42,7 @@
     - [问题解决顺序](#问题解决顺序)
     - [社区支持](#社区支持)
 
-**最后更新**: 2025-10-19
+**最后更新**: 2025-12-11
 **适用版本**: Rust 1.92.0+, Tokio 1.35+
 **文档类型**: 📚 导航索引
 
@@ -130,7 +130,7 @@
 ### 🎯 按角色导航
 
 | 角色 | 推荐路径 | 关键文档 |
-|------|---------|---------|
+| --- | --- | --- |
 | **初学者** | [快速开始](tutorials/QUICK_START.md) → [基础概念](theory/CONCEPT_DEFINITIONS_ENHANCED.md) → Socket编程 | TCP/UDP基础 |
 | **中级开发者** | HTTP客户端 → WebSocket → 异步IO | 协议实现、性能优化 |
 | **架构师** | [网络理论](theory/NETWORK_THEORY_FOUNDATION.md) → [性能分析](guides/PERFORMANCE_ANALYSIS_GUIDE.md) | 架构设计、扩展性 |
@@ -139,7 +139,7 @@
 ### 📚 按主题导航
 
 | 主题 | 文档入口 | 说明 |
-|------|---------|------|
+| --- | --- | --- |
 | **入门教程** | [QUICK_START.md](tutorials/QUICK_START.md) | 5分钟快速上手 |
 | **核心概念** | [CONCEPT_DEFINITIONS_ENHANCED.md](theory/CONCEPT_DEFINITIONS_ENHANCED.md) | 网络通信概念详解 |
 | **协议实现** | [PROTOCOL_IMPLEMENTATION_GUIDE.md](guides/PROTOCOL_IMPLEMENTATION_GUIDE.md) | TCP/UDP/HTTP/WebSocket |
@@ -302,7 +302,7 @@
 ### 构建HTTP服务
 
 | 需求 | 推荐方案 | 文档 |
-|------|---------|------|
+| --- | --- | --- |
 | HTTP客户端 | `reqwest` | [HTTP_CLIENT_GUIDE.md](guides/HTTP_CLIENT_GUIDE.md) |
 | HTTP/2、gRPC | `tonic` | 示例: `grpc_*.rs` |
 | WebSocket | `tokio-tungstenite` | [WEBSOCKET_GUIDE.md](guides/WEBSOCKET_GUIDE.md) |
@@ -310,7 +310,7 @@
 ### 实时通信
 
 | 需求 | 推荐方案 | 文档 |
-|------|---------|------|
+| --- | --- | --- |
 | 双向通信 | WebSocket | [WEBSOCKET_GUIDE.md](guides/WEBSOCKET_GUIDE.md) |
 | 低延迟 | UDP | [SOCKET_GUIDE.md](guides/SOCKET_GUIDE.md) |
 | P2P | libp2p | 示例: `p2p_minimal.rs` |
@@ -318,7 +318,7 @@
 ### 性能敏感应用
 
 | 需求 | 推荐方案 | 文档 |
-|------|---------|------|
+| --- | --- | --- |
 | 高吞吐量 | Tokio + 连接池 | [PERFORMANCE_OPTIMIZATION_GUIDE.md](guides/PERFORMANCE_OPTIMIZATION_GUIDE.md) |
 | 低延迟 | UDP + 零拷贝 | [PERFORMANCE_ANALYSIS_GUIDE.md](guides/PERFORMANCE_ANALYSIS_GUIDE.md) |
 | 大规模并发 | Tokio + 背压控制 | [BEST_PRACTICES.md](references/BEST_PRACTICES.md) |
@@ -326,7 +326,7 @@
 ### 安全通信
 
 | 需求 | 推荐方案 | 文档 |
-|------|---------|------|
+| --- | --- | --- |
 | HTTPS | `reqwest` + TLS | [SECURITY_GUIDE.md](guides/SECURITY_GUIDE.md) |
 | WSS | `tokio-tungstenite` + TLS | [WEBSOCKET_GUIDE.md](guides/WEBSOCKET_GUIDE.md) |
 | DoH/DoT | `hickory-dns` | [dns_hickory_integration.md](guides/dns_hickory_integration.md) |
@@ -340,7 +340,7 @@
 ### 基础示例
 
 | 示例 | 文件 | 运行命令 |
-|------|------|----------|
+| --- | --- | --- |
 | **TCP服务器** | `tcp_echo_server.rs` | `cargo run --example tcp_echo_server` |
 | **TCP客户端** | `tcp_client.rs` | `cargo run --example tcp_client` |
 | **UDP通信** | `udp_echo.rs` | `cargo run --example udp_echo` |
@@ -350,7 +350,7 @@
 ### 高级示例
 
 | 示例 | 文件 | 运行命令 |
-|------|------|----------|
+| --- | --- | --- |
 | **DNS解析** | `dns_lookup.rs` | `cargo run --example dns_lookup` |
 | **DoH/DoT** | `dns_doh_dot.rs` | `cargo run --example dns_doh_dot` |
 | **gRPC** | `grpc_server.rs` `grpc_client.rs` | `cargo run --example grpc_server` |

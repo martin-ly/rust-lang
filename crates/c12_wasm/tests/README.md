@@ -5,11 +5,11 @@
 ## 📚 测试文件列表
 
 | 测试文件 | 描述 | 测试数量 | 运行环境 |
-|---------|------|---------|---------|
+| --- | --- | --- | --- |
 | [basic_tests.rs](./basic_tests.rs) | 基础功能测试 | 30+ | Native |
 | [wasi_tests.rs](./wasi_tests.rs) | WASI 功能测试 | 15+ | WASI |
 | [design_patterns_tests.rs](./design_patterns_tests.rs) | 设计模式测试 | 12+ | Native |
-| [rust_190_features_tests.rs](./rust_190_features_tests.rs) | Rust 1.90 特性测试 | 10+ | Native |
+| [rust_192_features_tests.rs](./rust_192_features_tests.rs) | Rust 1.92.0 特性测试 | 10+ | Native |
 
 ## 🚀 运行测试
 
@@ -22,7 +22,7 @@ cargo test
 # 运行特定测试文件
 cargo test --test basic_tests
 cargo test --test design_patterns_tests
-cargo test --test rust_190_features_tests
+cargo test --test rust_192_features_tests
 
 # 运行特定测试函数
 cargo test test_add_function
@@ -174,9 +174,9 @@ cargo test --test design_patterns_tests
 - `test_strategy_pattern_bubble_sort` - 测试策略模式
 - `test_patterns_integration` - 模式集成测试
 
-### rust_190_features_tests.rs - Rust 1.90 特性测试
+### rust_192_features_tests.rs - Rust 1.92.0 特性测试
 
-测试 Rust 1.90 新特性：
+测试 Rust 1.92.0 新特性：
 
 - ✅ let-else 模式
 - ✅ return-position impl Trait
@@ -186,7 +186,7 @@ cargo test --test design_patterns_tests
 **运行命令**：
 
 ```bash
-cargo test --test rust_190_features_tests
+cargo test --test rust_192_features_tests
 ```
 
 **重点测试用例**：
@@ -350,6 +350,6 @@ jobs:
 
 ---
 
-**最后更新**: 2025-10-30
-**测试框架版本**: Rust 1.90+ / Edition 2024
+**最后更新**: 2025-12-11
+**测试框架版本**: Rust 1.92.0+ / Edition 2024
 **总测试数**: 70+

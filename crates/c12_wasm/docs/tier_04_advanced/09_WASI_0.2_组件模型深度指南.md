@@ -75,7 +75,7 @@ WASI 0.2 (也称为 Preview 2) 是 WebAssembly System Interface 的第二个预�
 ### 主要改进
 
 | 特性 | WASI 0.1 (Preview 1) | WASI 0.2 (Preview 2) |
-|------|---------------------|---------------------|
+| --- | --- | --- |
 | **接口定义** | 函数级导入/导出 | WIT 声明式接口 |
 | **类型系统** | 基础类型 | 丰富类型（variant、record、resource） |
 | **模块组合** | 链接时绑定 | 组件模型动态组合 |
@@ -796,7 +796,7 @@ wasmtime run target/wasm32-wasip2/release/my_app.wasm
 #### 3. API 映射表
 
 | WASI 0.1 | WASI 0.2 | 说明 |
-|----------|----------|------|
+| --- | --- | --- |
 | `wasi::fd_read` | `wasi:io/streams.read` | 文件读取 |
 | `wasi::fd_write` | `wasi:io/streams.write` | 文件写入 |
 | `wasi::path_open` | `wasi:filesystem/types.open-at` | 打开文件 |
@@ -984,7 +984,7 @@ mod tests {
 ### 核心工具
 
 | 工具 | 用途 | 链接 |
-|------|------|------|
+| --- | --- | --- |
 | **wit-bindgen** | 从 WIT 生成语言绑定 | [GitHub](https://github.com/bytecodealliance/wit-bindgen) |
 | **wasm-tools** | Wasm 组件工具集 | [GitHub](https://github.com/bytecodealliance/wasm-tools) |
 | **cargo-component** | Cargo 组件子命令 | [GitHub](https://github.com/bytecodealliance/cargo-component) |
@@ -1042,7 +1042,7 @@ wasm-tools compose component-a.wasm component-b.wasm -o composed.wasm
 ---
 
 **文档维护**: Documentation Team
-**最后更新**: 2025-10-30
+**最后更新**: 2025-12-11
 **下一次更新**: 根据 WASI 规范更新而定
 
 ---

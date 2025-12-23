@@ -165,7 +165,7 @@ Rust宏系统是一个强大的元编程框架，允许在编译期进行代码�
 ### 01_theory/ - 理论基础
 
 | 文档 | 难度 | 预计时间 |
-|------|------|---------|
+| --- | --- | --- |
 | [01_macro_fundamentals.md](./01_theory/01_macro_fundamentals.md) | ⭐ | 2小时 |
 | [02_hygiene_and_scope.md](./01_theory/02_hygiene_and_scope.md) | ⭐⭐ | 2小时 |
 | [03_expansion_mechanism.md](./01_theory/03_expansion_mechanism.md) | ⭐⭐ | 3小时 |
@@ -174,7 +174,7 @@ Rust宏系统是一个强大的元编程框架，允许在编译期进行代码�
 ### 02_declarative/ - 声明宏
 
 | 文档 | 难度 | 预计时间 |
-|------|------|---------|
+| --- | --- | --- |
 | [01_macro_rules_basics.md](./02_declarative/01_macro_rules_basics.md) | ⭐ | 2小时 |
 | [02_pattern_matching.md](./02_declarative/02_pattern_matching.md) | ⭐⭐ | 3小时 |
 | [03_repetition_syntax.md](./02_declarative/03_repetition_syntax.md) | ⭐⭐ | 3小时 |
@@ -184,7 +184,7 @@ Rust宏系统是一个强大的元编程框架，允许在编译期进行代码�
 ### 03_procedural/ - 过程宏
 
 | 文档 | 难度 | 预计时间 |
-|------|------|---------|
+| --- | --- | --- |
 | [01_proc_macro_basics.md](./03_procedural/01_proc_macro_basics.md) | ⭐⭐ | 3小时 |
 | [02_derive_macros.md](./03_procedural/02_derive_macros.md) | ⭐⭐⭐ | 5小时 |
 | [03_attribute_macros.md](./03_procedural/03_attribute_macros.md) | ⭐⭐⭐ | 5小时 |
@@ -194,7 +194,7 @@ Rust宏系统是一个强大的元编程框架，允许在编译期进行代码�
 ### 04_advanced/ - 高级主题
 
 | 文档 | 难度 | 预计时间 | 状态 |
-|------|------|---------|------|
+| --- | --- | --- |------|
 | [README.md](./04_advanced/README.md) ⭐ | ⭐⭐⭐⭐ | 30分钟 | ✅ 完成 |
 | [macro_metaprogramming.md](./04_advanced/macro_metaprogramming.md) ⭐ | ⭐⭐⭐⭐⭐ | 6小时 | ✅ 完成 |
 | [dsl_construction.md](./04_advanced/dsl_construction.md) ⭐ | ⭐⭐⭐⭐⭐ | 8小时 | ✅ 完成 |
@@ -207,7 +207,7 @@ Rust宏系统是一个强大的元编程框架，允许在编译期进行代码�
 ### 05_practice/ - 最佳实践
 
 | 文档 | 难度 | 预计时间 |
-|------|------|---------|
+| --- | --- | --- |
 | [01_common_patterns.md](./05_practice/01_common_patterns.md) | ⭐⭐ | 3小时 |
 | [02_best_practices.md](./05_practice/02_best_practices.md) | ⭐⭐ | 3小时 |
 | [03_anti_patterns.md](./05_practice/03_anti_patterns.md) | ⭐⭐ | 2小时 |
@@ -216,7 +216,7 @@ Rust宏系统是一个强大的元编程框架，允许在编译期进行代码�
 ### 📦 06. Rust 1.90特性
 
 | 文档 | 难度 | 预计时间 |
-|------|------|---------|
+| --- | --- | --- |
 | [00_INDEX.md](./06_rust_190_features/00_INDEX.md) | ⭐ | 30分钟 |
 | [README.md](./06_rust_190_features/README.md) | ⭐⭐⭐⭐ | 4小时 |
 | [COMPREHENSIVE_FEATURES.md](./06_rust_190_features/COMPREHENSIVE_FEATURES.md) | ⭐⭐⭐⭐ | 5小时 |
@@ -225,7 +225,7 @@ Rust宏系统是一个强大的元编程框架，允许在编译期进行代码�
 ### 🧠 理论增强 (theory_enhanced/)
 
 | 文档 | 难度 | 预计时间 |
-|------|------|---------|
+| --- | --- | --- |
 | [00_INDEX.md](./theory_enhanced/00_INDEX.md) | ⭐ | 20分钟 |
 | [KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md](./theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md) ⭐ | ⭐⭐⭐ | 2小时 |
 | [MULTI_DIMENSIONAL_COMPARISON_MATRIX.md](./theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md) | ⭐⭐⭐⭐ | 2小时 |
@@ -251,7 +251,7 @@ cargo run --example 04_recursive_macros
 ### 示例列表
 
 | 示例 | 主题 | 难度 |
-|------|------|------|
+| --- | --- | --- |
 | `01_macro_rules_basics.rs` | 声明宏基础 | ⭐ |
 | `02_pattern_matching.rs` | 模式匹配 | ⭐⭐ |
 | `03_repetition.rs` | 重复语法 | ⭐⭐ |
@@ -470,5 +470,5 @@ trace_macros!(true);
 cargo run --example 01_macro_rules_basics
 ```
 
-**最后更新**: 2025-10-20
+**最后更新**: 2025-12-11
 **维护者**: Rust学习社区

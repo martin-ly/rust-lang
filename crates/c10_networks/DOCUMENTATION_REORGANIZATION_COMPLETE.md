@@ -200,7 +200,7 @@ reports/
 ### 文档分类统计
 
 | 分类 | 文件数量 | 说明 |
-|------|---------|------|
+| --- | --- | --- |
 | **guides/** | 13 | 实践指南和操作手册 |
 | **theory/** | 10 | 理论基础和形式化文档 |
 | **references/** | 7 | API参考和规范文档 |
@@ -213,7 +213,7 @@ reports/
 ### 移动操作统计
 
 | 操作类型 | 数量 | 说明 |
-|---------|------|------|
+| --- | --- | --- |
 | 创建目录 | 6 | guides, theory, references, tutorials, archives, reports |
 | 移动文件 | 57+ | 所有文档按主题分类移动 |
 | 创建README | 6 | 每个子目录的说明文档 |
@@ -423,7 +423,7 @@ reports/
 ### A. 文档映射表
 
 | 旧路径 | 新路径 | 说明 |
-|-------|--------|------|
+| --- | --- | --- |
 | `docs/HTTP_CLIENT_GUIDE.md` | `docs/guides/HTTP_CLIENT_GUIDE.md` | 实践指南 |
 | `docs/NETWORK_THEORY_FOUNDATION.md` | `docs/theory/NETWORK_THEORY_FOUNDATION.md` | 理论文档 |
 | `docs/API_DOCUMENTATION.md` | `docs/references/API_DOCUMENTATION.md` | 参考文档 |
@@ -452,6 +452,6 @@ tree reports -L 1
 ---
 
 **报告作者**: C10 Networks 开发团队
-**最后更新**: 2025-10-19
+**最后更新**: 2025-12-11
 **文档版本**: v2.0
 **状态**: ✅ 重组完成
