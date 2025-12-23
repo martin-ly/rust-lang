@@ -7,7 +7,7 @@
 ### 基础示例
 
 | 示例 | 描述 | 难度 | 运行环境 |
-|------|------|------|----------|
+| --- | --- | --- | --- |
 | [01_basic_add.rs](./01_basic_add.rs) | 基础数学运算，展示最简单的 WASM 函数导出 | ⭐ | Browser |
 | [02_string_operations.rs](./02_string_operations.rs) | 字符串操作，展示 Rust 和 JS 之间的字符串传递 | ⭐ | Browser |
 | [03_array_processing.rs](./03_array_processing.rs) | 数组处理，展示数组数据的传递和操作 | ⭐⭐ | Browser |
@@ -16,7 +16,7 @@
 ### 高级示例
 
 | 示例 | 描述 | 难度 | 运行环境 |
-|------|------|------|----------|
+| --- | --- | --- | --- |
 | [05_wasi_file_processor.rs](./05_wasi_file_processor.rs) | WASI 文件处理器，命令行工具示例 | ⭐⭐⭐ | WASI Runtime |
 | [06_async_fetch.rs](./06_async_fetch.rs) | 异步 HTTP 请求，展示异步编程 | ⭐⭐⭐ | Browser |
 | [07_design_patterns.rs](./07_design_patterns.rs) | 设计模式实现（工厂、建造者、单例等） | ⭐⭐⭐⭐ | Browser |

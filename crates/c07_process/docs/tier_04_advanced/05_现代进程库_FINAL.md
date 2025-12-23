@@ -374,7 +374,7 @@ fn manage_capabilities() -> Result<(), Box<dyn std::error::Error>> {
 ### 3.1 功能对比矩阵
 
 | 特性 | std::process | tokio::process | duct | nix | sysinfo |
-|------|--------------|----------------|------|-----|---------|
+| --- | --- | --- | --- | --- | --- |
 | **基础进程控制** | ✅ | ✅ | ✅ | ✅ | ❌ |
 | **异步支持** | ❌ | ✅ | ❌ | ❌ | ❌ |
 | **管道组合** | 手动 | 手动 | ✅ | 手动 | ❌ |
@@ -390,7 +390,7 @@ fn manage_capabilities() -> Result<(), Box<dyn std::error::Error>> {
 **启动延迟**（微秒）:
 
 | 库 | 同步 | 异步 |
-|----|------|------|
+| --- | --- | --- |
 | std::process | 100 | N/A |
 | tokio::process | N/A | 120 |
 | duct | 110 | N/A |
@@ -399,7 +399,7 @@ fn manage_capabilities() -> Result<(), Box<dyn std::error::Error>> {
 **并发性能**（tasks/s @ 100并发）:
 
 | 库 | 吞吐量 |
-|----|--------|
+| --- | --- |
 | std::process (线程池) | ~1,000 |
 | tokio::process | ~5,000 |
 | duct | ~900 |
@@ -407,7 +407,7 @@ fn manage_capabilities() -> Result<(), Box<dyn std::error::Error>> {
 ### 3.3 平台兼容性
 
 | 库 | Linux | macOS | Windows | BSD |
-|----|-------|-------|---------|-----|
+| --- | --- | --- | --- | --- |
 | std::process | ✅ | ✅ | ✅ | ✅ |
 | tokio::process | ✅ | ✅ | ✅ | ✅ |
 | duct | ✅ | ✅ | ✅ | ✅ |
@@ -751,7 +751,7 @@ sysinfo = "0.30"
 **库选择矩阵**:
 
 | 需求 | 推荐库 | 原因 |
-|------|--------|------|
+| --- | --- | --- |
 | 高并发 | tokio::process | 异步优势 |
 | 简单脚本 | std::process | 零依赖 |
 | 管道组合 | duct | API简洁 |
