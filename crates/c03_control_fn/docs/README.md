@@ -193,6 +193,7 @@ docs/
 
 **版本特性目录**:
 
+- [Rust 1.92.0 控制流改进](RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) ⭐ NEW - 最新特性文档
 - [Rust 特性目录](05_rust_features/README.md) - 历史版本和 1.92.0 完整版本特性文档
 
 ## 📚 辅助资源

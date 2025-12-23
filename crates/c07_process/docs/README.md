@@ -108,7 +108,7 @@ c07_process/docs/
 ├── 🎓 核心概念系列 (01-10)
 │   ├── 01_process_model_and_lifecycle.md     - 进程模型和生命周期
 │   ├── 02_ipc_mechanisms.md                  - IPC通信机制
-│   ├── 03_rust_190_features.md               - Rust 1.90特性
+│   ├── 03_rust_192_features.md               - Rust 1.92.0特性
 │   ├── 04_advanced_process_management.md     - 高级进程管理
 │   ├── 05_async_process_management.md        - 异步进程管理
 │   ├── 06_cross_platform_process_management.md - 跨平台管理
