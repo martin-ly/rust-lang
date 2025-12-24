@@ -262,7 +262,7 @@ cargo run --example rust_190_rich_practical_examples
 ### 按问题查找
 
 | 问题 | 查看资源 | 预计时间 |
-|------|---------|---------|
+| --- | --- | --- |
 | 什么是所有权？ | [示例2-1](./RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-1-所有权三大规则实战) | 10分钟 |
 | 如何借用数据？ | [示例2-3](./RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-3-不可变借用深度解析) | 15分钟 |
 | 生命周期怎么用？ | [示例2-6](./RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-6-生命周期基础) | 20分钟 |
@@ -272,7 +272,7 @@ cargo run --example rust_190_rich_practical_examples
 ### 按场景查找
 
 | 场景 | 推荐方案 | 示例 |
-|------|---------|------|
+| --- | --- | --- |
 | 单线程共享数据 | `Rc<T>` | [示例15](../examples/rust_190_rich_practical_examples.rs) |
 | 多线程共享数据 | `Arc<T>` | [示例18](../examples/rust_190_rich_practical_examples.rs) |
 | 单线程可变共享 | `Rc<RefCell<T>>` | [示例17](../examples/rust_190_rich_practical_examples.rs) |

@@ -47,7 +47,7 @@
     - [文档规模](#文档规模)
     - [内容覆盖](#内容覆盖)
   - [🆕 最新更新](#-最新更新)
-    - [2025-10-19](#2025-10-19)
+    - [2025-12-11](#2025-12-11)
     - [Rust 1.92.0 特性](#rust-1920-特性)
   - [📞 获取帮助](#-获取帮助)
     - [问题解决](#问题解决)
@@ -67,7 +67,7 @@
 ### 📚 按主题导航
 
 | 主题 | 文档入口 | 说明 |
-|------|---------|------|
+| --- | --- | --- |
 | **概览** | [DOCUMENTATION_INDEX.md](./DOCUMENTATION_INDEX.md) | 完整文档索引 |
 | **FAQ** | [FAQ.md](./FAQ.md) | 常见问题解答 |
 | **术语表** | [Glossary.md](./Glossary.md) | 核心概念速查 |
@@ -75,7 +75,7 @@
 ### 🎨 可视化学习
 
 | 类型 | 文档入口 | 说明 |
-|------|---------|------|
+| --- | --- | --- |
 | **知识体系** | [KNOWLEDGE_GRAPH.md](./KNOWLEDGE_GRAPH.md) | 🔥 完整知识工程体系 |
 | **知识图谱** | [KNOWLEDGE_GRAPH.md](./KNOWLEDGE_GRAPH.md) | 概念关系可视化 |
 | **多维矩阵** | [MULTIDIMENSIONAL_MATRIX.md](./MULTIDIMENSIONAL_MATRIX.md) | 多维度对比分析 |
@@ -232,7 +232,7 @@ cargo test --test control_flow_tests
 ### 控制流选择
 
 | 需求 | 推荐方案 | 文档 |
-|------|---------|------|
+| --- | --- | --- |
 | 条件分支 | if/else、match | [条件语句指南](./tier_02_guides/01_条件语句指南.md) |
 | 循环迭代 | for、while、loop | [循环结构指南](./tier_02_guides/02_循环结构指南.md) |
 | 模式匹配 | match、if let | [模式匹配指南](./tier_02_guides/04_模式匹配指南.md) |
@@ -241,7 +241,7 @@ cargo test --test control_flow_tests
 ### 函数编程
 
 | 需求 | 推荐方案 | 文档 |
-|------|---------|------|
+| --- | --- | --- |
 | 高阶函数 | 闭包、Fn traits | [闭包深入](./tier_04_advanced/02_闭包深入.md) |
 | 函数组合 | 组合子、链式调用 | [代码示例集合](./tier_02_guides/06_代码示例集合.md) |
 | 惰性求值 | 迭代器 | [迭代器参考](./tier_03_references/02_迭代器参考.md) |

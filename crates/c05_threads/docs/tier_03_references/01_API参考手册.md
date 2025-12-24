@@ -561,7 +561,7 @@ assert_eq!(rx.recv().unwrap(), 10);
 ### 4.1 原子类型
 
 | 类型 | 说明 |
-|------|------|
+| --- | --- |
 | `AtomicBool` | 原子布尔值 |
 | `AtomicI8`, `AtomicI16`, `AtomicI32`, `AtomicI64`, `AtomicIsize` | 有符号原子整数 |
 | `AtomicU8`, `AtomicU16`, `AtomicU32`, `AtomicU64`, `AtomicUsize` | 无符号原子整数 |
