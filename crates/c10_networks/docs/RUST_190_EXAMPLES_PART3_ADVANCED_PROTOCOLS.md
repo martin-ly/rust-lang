@@ -1,4 +1,4 @@
-﻿# Rust 1.90 网络编程实战示例大全 (Part 3 - 高级协议)
+# Rust 1.90 网络编程实战示例大全 (Part 3 - 高级协议)
 
 > **文档版本**: v1.0
 > **适用版本**: Rust 1.90+, Tokio 1.35+
@@ -2912,7 +2912,7 @@ pub async fn demo_microservices() -> Result<(), Box<dyn std::error::Error>> {
 ### 技术选型指南
 
 | 场景 | 推荐协议 | 原因 |
-|-----|---------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
 | 微服务RPC | gRPC | 高性能、类型安全、双向流 |
 | IoT设备通信 | MQTT | 轻量级、QoS支持、低带宽 |
 | 实时游戏 | QUIC | 低延迟、多路复用、0-RTT |

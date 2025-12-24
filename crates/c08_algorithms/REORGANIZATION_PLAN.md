@@ -122,7 +122,7 @@ c08_algorithms/
 ### algorithm_exp 系列重命名
 
 | 原文件 | 新文件 | 主题 |
-|--------|--------|------|
+| --- | --- | --- |
 | algorithm_exp01.md | 01_type_design_for_algorithms.md | Rust类型设计准则 |
 | algorithm_exp02.md | 02_advanced_sorting.md | 高级排序算法 |
 | algorithm_exp03.md | 03_graph_algorithms.md | 图算法 |

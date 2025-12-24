@@ -445,7 +445,7 @@ wasmedge --enable-threads your_app.wasm
 **场景 1: 边缘计算（冷启动）**:
 
 | 运行时 | 冷启动时间 | 推荐度 |
-|--------|------------|--------|
+| --- | --- | --- |
 | WasmEdge | ~1ms | ⭐⭐⭐⭐⭐ |
 | wasmtime | ~5ms | ⭐⭐⭐⭐ |
 | wasmer | ~2ms | ⭐⭐⭐⭐ |
@@ -453,7 +453,7 @@ wasmedge --enable-threads your_app.wasm
 **场景 2: AI 推理**:
 
 | 运行时 | AI 支持 | 性能 |
-|--------|---------|------|
+| --- | --- | --- |
 | WasmEdge | ✅ 优秀 | ⭐⭐⭐⭐⭐ |
 | wasmtime | ⚠️ 有限 | ⭐⭐⭐ |
 | wasmer | ❌ 无 | - |
@@ -461,7 +461,7 @@ wasmedge --enable-threads your_app.wasm
 **场景 3: 高并发服务**:
 
 | 运行时 | 并发能力 | 内存效率 |
-|--------|----------|----------|
+| --- | --- | --- |
 | WasmEdge | 高 | ⭐⭐⭐⭐⭐ |
 | wasmtime | 高 | ⭐⭐⭐⭐ |
 | wasmer | 高 | ⭐⭐⭐⭐ |

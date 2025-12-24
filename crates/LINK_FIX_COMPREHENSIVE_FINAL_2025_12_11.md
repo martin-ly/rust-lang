@@ -10,6 +10,7 @@
 ## 📋 修复概述
 
 本次修复针对所有无效的本地链接，包括：
+
 - 指向不存在的目录（`02_basics/`, `03_advanced/`, `01_theory/`, `04_practice/`, `06_rust_features/`, `appendices/`, `references/`, `rust-features/`, `knowledge_system/`, `05_rust_features/` 等）
 - 指向不存在的文件（`BASIC_SYNTAX_GUIDE.md`, `trait_system.md`, `05_advanced_topics.md`, `01_introduction_to_generics.md`, `02_generic_type_parameters.md`, `03_trait_bounds.md`, `04_associated_types.md`, `PROJECT_COMPLETION_REPORT.md` 等）
 - 旧目录结构的链接

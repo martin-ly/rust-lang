@@ -1,4 +1,4 @@
-﻿# c08_algorithms 全面梳理完成总结
+# c08_algorithms 全面梳理完成总结
 
 ## 📊 目录
 
@@ -70,7 +70,7 @@
 ### 📚 核心文档（5篇专业文档）
 
 | 文档 | 字数 | 状态 | 亮点 |
-|------|------|------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | [算法形式化模型](docs/FORMAL_ALGORITHM_MODELS.md) | ~6,500 | ✅ | 30+定义、图灵机、λ演算、霍尔逻辑 |
 | [异步同步等价关系](docs/ASYNC_SYNC_EQUIVALENCE_ALGORITHMS.md) | ~6,000 | ✅ | CPS变换、状态机、形式化证明 |
 | [Actor/Reactor/CSP模式](docs/ACTOR_REACTOR_CSP_PATTERNS.md) | ~7,000 | ✅ | 三大模式完整实现、Golang对比 |
@@ -82,7 +82,7 @@
 ### 💻 代码增强
 
 | 类别 | 数量 | 状态 | 说明 |
-|------|------|------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | 完整代码示例 | 50+ | ✅ | 全部可运行，经过测试 |
 | 形式化验证代码 | 1个模块 | ✅ | 包含证明和不变量 |
 | 算法实现 | 4个核心算法 | ✅ | 带完整注释和证明 |
@@ -225,7 +225,7 @@ c08_algorithms/
 ### 文档统计
 
 | 指标 | 数值 |
-|------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | 文档总数 | 5篇核心 + 10篇实用 |
 | 总字数 | ~37,500字 |
 | 相当于页数 | ~150页A4纸 |
@@ -237,7 +237,7 @@ c08_algorithms/
 ### 知识覆盖
 
 | 领域 | 覆盖度 |
-|------|--------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------|
 | 计算理论 | ✅ 95% |
 | 程序语义 | ✅ 90% |
 | 并发理论 | ✅ 100% |

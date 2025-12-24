@@ -65,7 +65,7 @@ LocalExecutor::default().run(async {
         println!("Hello from Glommio!");
         42
     });
-    
+
     let result = task.await;
     println!("Result: {}", result);
 });
@@ -74,7 +74,7 @@ LocalExecutor::default().run(async {
 ### 1.2 核心优势
 
 | 特性 | 描述 | 性能提升 |
-|------|------|---------|
+| --- | --- | --- |
 | **Thread-per-core** | 每个核心一个线程，无线程切换 | 延迟 ↓50% |
 | **io_uring** | Linux 高性能异步 I/O | 吞吐量 ↑300% |
 | **NUMA 感知** | 针对多 socket 系统优化 | 延迟 ↓30% |
@@ -84,6 +84,7 @@ LocalExecutor::default().run(async {
 ### 1.3 适用场景
 
 ✅ **推荐场景**:
+
 - 高频交易系统 (HFT)
 - 数据库引擎 (Storage Engine)
 - 高性能网络服务 (>1M QPS)
@@ -91,6 +92,7 @@ LocalExecutor::default().run(async {
 - 游戏服务器 (Low-latency)
 
 ❌ **不推荐场景**:
+
 - 桌面应用 (GUI)
 - 简单 Web 应用
 - Windows/macOS 平台
@@ -134,14 +136,14 @@ use std::time::Duration;
 fn main() {
     LocalExecutor::default().run(async {
         println!("🚀 Glommio started!");
-        
+
         // 创建任务
         let task = Task::local(async {
             sleep(Duration::from_millis(100)).await;
             println!("✅ Task completed");
             42
         });
-        
+
         let result = task.await;
         println!("📊 Result: {}", result);
     });
@@ -156,7 +158,7 @@ fn main() {
 
 Glommio 的核心设计理念是 **Thread-per-core**:
 
-```
+```text
 ┌──────────────────────────────────────┐
 │          应用程序                     │
 └──────────────────────────────────────┘
@@ -175,6 +177,7 @@ Glommio 的核心设计理念是 **Thread-per-core**:
 ```
 
 **关键特性**:
+
 - 每个执行器绑定到一个 CPU 核心
 - 任务不会在核心之间迁移
 - 最小化锁竞争和同步开销
@@ -183,7 +186,7 @@ Glommio 的核心设计理念是 **Thread-per-core**:
 ### 3.2 与 Work-stealing 的对比
 
 | 特性 | Thread-per-core (Glommio) | Work-stealing (Tokio) |
-|------|--------------------------|----------------------|
+| --- | --- | --- |
 | 线程切换 | ❌ 无 | ✅ 有 |
 | 缓存友好 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ |
 | 负载均衡 | ⭐⭐ | ⭐⭐⭐⭐⭐ |
@@ -307,7 +310,7 @@ LocalExecutor::default().run(async {
         Latency::Matters(Duration::from_millis(1)),  // 低延迟要求
         "high-priority"
     );
-    
+
     // 创建低优先级队列
     let low_priority = executor().create_task_queue(
         Shares::Static(100),  // 较少 CPU 份额
@@ -328,13 +331,13 @@ LocalExecutor::default().run(async {
         Latency::Matters(Duration::from_millis(10)),
         "high"
     );
-    
+
     let low_tq = executor().create_task_queue(
         Shares::Static(100),
         Latency::NotImportant,
         "low"
     );
-    
+
     // 高优先级任务
     let high_task = Task::local_into(
         async {
@@ -343,7 +346,7 @@ LocalExecutor::default().run(async {
         },
         high_tq
     ).unwrap();
-    
+
     // 低优先级任务
     let low_task = Task::local_into(
         async {
@@ -352,7 +355,7 @@ LocalExecutor::default().run(async {
         },
         low_tq
     ).unwrap();
-    
+
     // 高优先级任务会优先执行
     let (high_result, low_result) = futures::join!(high_task, low_task);
 });
@@ -394,21 +397,22 @@ use glommio::io::DmaFile;
 LocalExecutor::default().run(async {
     // 创建文件
     let file = DmaFile::create("/tmp/test.dat").await.unwrap();
-    
+
     // 写入数据 (零拷贝)
     let data = vec![0u8; 4096];
     let written = file.write_at(data, 0).await.unwrap();
     println!("Written {} bytes", written);
-    
+
     // 读取数据 (零拷贝)
     let buf = file.read_at(0, 4096).await.unwrap();
     println!("Read {} bytes", buf.len());
-    
+
     file.close().await.unwrap();
 });
 ```
 
 **DMA I/O 优势**:
+
 - 零拷贝: 避免内核到用户空间的数据复制
 - 异步: 不阻塞执行器
 - 高吞吐: 充分利用 I/O 带宽
@@ -421,10 +425,10 @@ use glommio::net::{TcpListener, TcpStream};
 LocalExecutor::default().run(async {
     let listener = TcpListener::bind("127.0.0.1:8080").unwrap();
     println!("Server listening on 8080");
-    
+
     loop {
         let stream = listener.accept().await.unwrap();
-        
+
         // 为每个连接创建任务
         Task::local(async move {
             handle_connection(stream).await;
@@ -483,7 +487,7 @@ for i in 0..num_executors {
         .pin_to_cpu(i)
         .spawn(move || async move {
             let mesh = connection.await;
-            
+
             // 发送消息到其他执行器
             for peer in 0..num_executors {
                 if peer != i {
@@ -492,14 +496,14 @@ for i in 0..num_executors {
                     }
                 }
             }
-            
+
             // 接收消息
             while let Some(msg) = mesh.receiver().recv().await {
                 println!("Executor {} received: {}", i, msg);
             }
         })
         .unwrap();
-    
+
     handles.push(handle);
 }
 
@@ -515,14 +519,14 @@ use glommio::channels::shared_channel;
 
 LocalExecutor::default().run(async {
     let (sender, receiver) = shared_channel::new_bounded(1024);
-    
+
     // 生产者任务
     Task::local(async move {
         for i in 0..100 {
             sender.send(i).await.unwrap();
         }
     }).detach();
-    
+
     // 消费者任务
     Task::local(async move {
         while let Ok(msg) = receiver.recv().await {
@@ -561,7 +565,7 @@ impl BufferPool {
     fn acquire(&mut self) -> Vec<u8> {
         self.buffers.pop().unwrap_or_else(|| vec![0u8; 4096])
     }
-    
+
     fn release(&mut self, mut buf: Vec<u8>) {
         buf.clear();
         self.buffers.push(buf);
@@ -624,14 +628,14 @@ async fn robust_operation() -> Result<()> {
     let file = DmaFile::open("/tmp/data.txt")
         .await
         .context("Failed to open file")?;
-    
+
     let data = file.read_at(0, 1024)
         .await
         .context("Failed to read file")?;
-    
+
     process_data(&data)
         .context("Failed to process data")?;
-    
+
     Ok(())
 }
 
@@ -674,7 +678,7 @@ use glommio::executor;
 LocalExecutor::default().run(async {
     // 获取执行器统计信息
     let stats = executor().stats();
-    
+
     println!("Task queue depth: {}", stats.task_queue_depth());
     println!("Total tasks: {}", stats.total_tasks());
     println!("IO submissions: {}", stats.io_stats().submissions);
@@ -734,7 +738,7 @@ CMD ["taskset", "-c", "0-3", "/app"]
 ## 12. 常见陷阱与解决方案
 
 | 陷阱 | 影响 | 解决方案 |
-|------|------|---------|
+| --- | --- | --- |
 | 跨执行器频繁通信 | 性能下降 50% | 保持任务在同一核心内 |
 | 使用标准库 I/O | 阻塞执行器 | 使用 Glommio 的异步 I/O |
 | 忘记 CPU 绑定 | 缓存失效 | 显式使用 `pin_to_cpu()` |
@@ -746,7 +750,7 @@ CMD ["taskset", "-c", "0-3", "/app"]
 ## 13. 与其他运行时的对比
 
 | 特性 | Glommio | Tokio | Smol | async-std |
-|------|---------|-------|------|-----------|
+| --- | --- | --- | --- | --- |
 | 架构 | Thread-per-core | Work-stealing | 单/多线程 | Work-stealing |
 | 平台 | Linux only | 跨平台 | 跨平台 | 跨平台 |
 | 延迟 | <100μs | ~200μs | ~150μs | ~250μs |
@@ -755,6 +759,7 @@ CMD ["taskset", "-c", "0-3", "/app"]
 | 生态系统 | 小 | 大 | 中 | 中 |
 
 **选择建议**:
+
 - **Glommio**: 极致性能，Linux 环境
 - **Tokio**: 通用场景，生态丰富
 - **Smol**: 轻量级，嵌入式
@@ -764,18 +769,17 @@ CMD ["taskset", "-c", "0-3", "/app"]
 
 ## 14. 参考资源
 
-- **官方文档**: https://docs.rs/glommio
-- **GitHub**: https://github.com/DataDog/glommio
-- **io_uring 文档**: https://kernel.dk/io_uring.pdf
-- **性能基准**: https://github.com/DataDog/glommio/tree/master/benchmarks
+- **官方文档**: <https://docs.rs/glommio>
+- **GitHub**: <https://github.com/DataDog/glommio>
+- **io_uring 文档**: <https://kernel.dk/io_uring.pdf>
+- **性能基准**: <https://github.com/DataDog/glommio/tree/master/benchmarks>
 
 ---
 
-**最后更新**: 2025年10月30日  
-**Rust 版本**: 1.90+  
+**最后更新**: 2025年10月30日
+**Rust 版本**: 1.90+
 **Glommio 版本**: 0.9.0
 
 ---
 
 **总结**: Glommio 是一个强大的高性能异步运行时，适合对延迟和吞吐量有极高要求的 Linux 应用。通过遵循本指南的最佳实践，你可以充分发挥 Glommio 的性能优势。
-

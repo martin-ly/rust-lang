@@ -68,7 +68,7 @@
 ### 按 Crate 统计
 
 | Crate | 版本更新 | 链接修复 | 特性文档 | 日期更新 | 状态 |
-|-------|---------|---------|---------|---------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | c01_ownership_borrow_scope | ✅ | ✅ | ✅ | ✅ | ✅ |
 | c02_type_system | ✅ | ✅ | - | ✅ | ✅ |
 | c03_control_fn | ✅ | ✅ | ✅ | ✅ | ✅ |

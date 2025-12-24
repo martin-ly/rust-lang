@@ -110,7 +110,7 @@ let (tx, rx) = channel();
 **核心差异**:
 
 | 特性 | Unix/Linux | Windows |
-|------|------------|---------|
+| --- | --- | --- |
 | **进程创建** | fork/exec | CreateProcess |
 | **信号** | SIGTERM, SIGKILL | 不支持 |
 | **进程组** | 进程组ID | 作业对象 |

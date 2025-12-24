@@ -104,7 +104,7 @@ docs/
 ### 文件映射表
 
 | 旧文件名 | 新文件名 | 操作 |
-|---------|---------|------|
+| --- | --- | --- |
 | `quick_start.md` + `QUICK_START_2025.md` | `guides/01_quick_start.md` | 合并 |
 | `async_basics_guide.md` | `guides/02_basics.md` | 移动+重命名 |
 | `async_advanced_topics.md` | `guides/03_advanced_topics.md` | 移动+重命名 |

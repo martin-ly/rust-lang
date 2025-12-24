@@ -1,4 +1,4 @@
-﻿# c06_async 项目终极完成报告
+# c06_async 项目终极完成报告
 
 ## 📊 目录
 
@@ -360,7 +360,7 @@ ls examples/
 ## 📊 项目完成度评估
 
 | 维度 | 完成度 | 说明 |
-|------|--------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' 
 | 基础异步概念 | 100% | 完全覆盖 Future、async/await、Stream |
 | 运行时对比 | 100% | Tokio、Smol、async-std 完整对比 |
 | 同步原语 | 100% | Mutex、RwLock、Notify、Semaphore 等 |

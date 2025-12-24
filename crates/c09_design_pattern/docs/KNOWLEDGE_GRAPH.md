@@ -456,7 +456,7 @@ graph TB
 **特性适配矩阵**：
 
 | Rust 1.90 特性 | 最佳适配模式 | 适配度 | 性能提升 | 示例位置 | 完整示例 |
-|----------------|-------------|--------|---------|---------|---------|
+| --- | --- | --- | --- | --- | --- |
 | **OnceLock** | 单例 | ⭐⭐⭐⭐⭐ | 100% | `creational/singleton/` | [`oncelock_singleton_comprehensive.rs`](../examples/oncelock_singleton_comprehensive.rs) |
 | **GATs** | 观察者 | ⭐⭐⭐⭐⭐ | 零拷贝 | `behavioral/observer/` | [`gats_observer_advanced.rs`](../examples/gats_observer_advanced.rs) |
 | **async trait** | 异步模式 | ⭐⭐⭐⭐⭐ | 简化代码 | `concurrency/asynchronous/` | [`native_async_trait_app.rs`](../examples/native_async_trait_app.rs) |
@@ -553,7 +553,7 @@ graph TD
 **反模式对照表**：
 
 | 反模式 | 问题 | Rust陷阱 | 正确做法 |
-|--------|------|---------|---------|
+| --- | --- | --- | --- |
 | **单例滥用** | 全局状态耦合 | 难以测试 | 依赖注入 + 构造器传递 |
 | **过度抽象** | 性能损失 | trait对象开销 | 泛型单态化 |
 | **观察者泄漏** | 内存泄漏 | `Rc<RefCell>`循环 | `Weak` + 手动清理 |
@@ -611,7 +611,7 @@ pie title 模式类型分布
 ### 7.2 Rust特性使用统计
 
 | 特性 | 使用次数 | 主要模式 | 优势 |
-|------|---------|---------|------|
+| --- | --- | --- | --- |
 | **OnceLock** | 1 | 单例 | 线程安全初始化 |
 | **GATs** | 3 | 观察者、迭代器、Future | 零拷贝借用 |
 | **async trait** | 8 | 所有异步模式 | 简化异步代码 |
@@ -674,7 +674,7 @@ graph TD
 ### 8.2 前置依赖关系
 
 | 模式 | 前置知识 | 推荐学习顺序 |
-|------|---------|-------------|
+| --- | --- | --- |
 | **抽象工厂** | 工厂方法 | 3 |
 | **装饰器** | 适配器 | 4 |
 | **中介者** | 观察者 | 8 |

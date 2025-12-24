@@ -291,7 +291,7 @@ async fn main() {
 **对比表:**
 
 | 特性 | Golang | Rust |
-|------|--------|------|
+| --- | --- | --- |
 | 并发原语 | goroutine | async task |
 | 启动开销 | ~2KB 栈 | ~64 bytes Future |
 | 调度模型 | 抢占式 | 协作式 |

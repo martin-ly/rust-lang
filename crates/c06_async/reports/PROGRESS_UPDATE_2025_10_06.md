@@ -1,4 +1,4 @@
-﻿# Rust 异步编程项目进展更新 2025-10-06
+# Rust 异步编程项目进展更新 2025-10-06
 
 ## 📊 目录
 
@@ -145,7 +145,7 @@ cargo run --example csp_pattern_comprehensive_2025
 **CSP vs Actor vs Reactor 对比**:
 
 | 特性 | CSP | Actor | Reactor |
-|------|-----|-------|---------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ----- param($match) $match.Value -replace '[-:]+', ' --- ' ---------|
 | 通信方式 | Channel (通道) | Message (消息) | Event (事件) |
 | 耦合度 | 低 (解耦) | 低 (解耦) | 中 (事件驱动) |
 | 同步性 | 支持同步/异步 | 异步 | 异步 |
@@ -162,7 +162,7 @@ cargo run --example csp_pattern_comprehensive_2025
 ### 核心架构模式
 
 | 模式 | 文件 | 行数 | 编译状态 | 测试状态 | 完成度 |
-|------|------|------|---------|---------|--------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' --------|
 | Reactor | `reactor_pattern_comprehensive_2025.rs` | 1,800+ | ✅ | ✅ | 100% |
 | Actor | `actor_pattern_comprehensive_2025.rs` | 2,100+ | ⚠️ | ⚠️ | 95% |
 | CSP | `csp_pattern_comprehensive_2025.rs` | 1,100+ | ✅ | ✅ | 100% |
@@ -177,7 +177,7 @@ cargo run --example csp_pattern_comprehensive_2025
 ### 核心文档
 
 | 文档 | 字数 | 完成度 | 状态 |
-|------|------|--------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | 知识分类体系 | 15,000+ | 100% | ✅ |
 | 最终报告 (中文) | 3,000+ | 100% | ✅ |
 | 实现总结 (英文) | 3,000+ | 100% | ✅ |
@@ -186,7 +186,7 @@ cargo run --example csp_pattern_comprehensive_2025
 ### 示例文件
 
 | 示例 | 行数 | 编译状态 | 完成度 |
-|------|------|---------|--------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' --------|
 | ultimate_async_theory_practice_2025 | 1,500+ | ✅ | 100% |
 | tokio_smol_latest_features_2025 | 800+ | ✅ | 100% |
 | async_performance_optimization_2025 | 600+ | ✅ | 100% |

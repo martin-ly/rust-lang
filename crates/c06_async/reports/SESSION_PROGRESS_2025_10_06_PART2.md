@@ -1,4 +1,4 @@
-﻿# Rust 异步编程项目进展 - 第二阶段 2025-10-06
+# Rust 异步编程项目进展 - 第二阶段 2025-10-06
 
 ## 📊 目录
 
@@ -183,7 +183,7 @@ cargo check --example actor_pattern_comprehensive_2025
 #### 2.1 三大架构模式对比
 
 | 特性 | Reactor | Actor | CSP |
-|------|---------|-------|-----|
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' -----|
 | 核心概念 | Event-Driven | Message-Passing | Channel Communication |
 | 通信方式 | Event | Message | Channel |
 | 并发单元 | Event Handler | Actor | Process |
@@ -360,7 +360,7 @@ cargo check --example actor_pattern_comprehensive_2025
 ### 三大架构模式
 
 | 模式 | 文件 | 行数 | 编译 | 测试 | 完成度 |
-|------|------|------|------|------|--------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' --------|
 | **Reactor** | `reactor_pattern_comprehensive_2025.rs` | 1,800+ | ✅ | ✅ | 100% |
 | **Actor** | `actor_pattern_comprehensive_2025.rs` | 2,100+ | ✅ | ✅ | 100% |
 | **CSP** | `csp_pattern_comprehensive_2025.rs` | 1,100+ | ✅ | ✅ | 100% |
@@ -370,7 +370,7 @@ cargo check --example actor_pattern_comprehensive_2025
 ### 核心文档
 
 | 文档 | 字数 | 完成度 | 状态 |
-|------|------|--------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | 知识分类体系 | 15,000+ | 100% | ✅ |
 | 最终报告 (中文) | 3,000+ | 100% | ✅ |
 | 实现总结 (英文) | 3,000+ | 100% | ✅ |

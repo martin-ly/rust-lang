@@ -263,7 +263,7 @@ command --option value
 ### 已完成文档质量评分
 
 | 维度 | 09.1 工具链 | 09.2 测试策略 | README |
-|------|-----------|-------------|---------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ----------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------|
 | 格式规范 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 | 内容完整 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 | 代码示例 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
@@ -327,7 +327,7 @@ git diff HEAD~1 docs/wasm_engineering/09.1_Development_Toolchain.md
 ### 数据对比
 
 | 指标 | 改进前 | 改进后 | 提升 |
-|------|-------|-------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | 文档总数 | 5 | 6 (+索引) | +20% |
 | 已规范化 | 0 | 2 核心 | 40% |
 | 代码示例 | 50+ | 100+ | +100% |

@@ -1,4 +1,4 @@
-﻿# Rust 1.90 设计模式模块综合增强报告
+# Rust 1.90 设计模式模块综合增强报告
 
 > **报告日期**: 2025-10-19
 > **模块**: c09_design_pattern
@@ -76,7 +76,7 @@
 ### 1. 知识图谱与结构化内容整合 ✅
 
 | 文档 | 增强内容 | 完成度 |
-|------|---------|--------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
 | **KNOWLEDGE_GRAPH.md** | 添加新示例链接、运行命令、实际应用场景 | 100% |
 | **MULTIDIMENSIONAL_MATRIX_COMPARISON.md** | 已包含全面的多维对比矩阵 | 100% |
 | **MIND_MAP.md** | 完整的学习路径和决策树 | 100% |
@@ -87,7 +87,7 @@
 #### 创建的示例文件
 
 | 示例文件 | 行数 | 特性展示 | 实用场景 |
-|---------|-----|---------|---------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ----- param($match) $match.Value -replace '[-:]+', ' --- ' ---------|
 | `oncelock_singleton_comprehensive.rs` | ~600 | OnceLock 线程安全单例 | 全局配置、日志器、缓存、连接池 |
 | `gats_observer_advanced.rs` | ~700 | GATs 零拷贝观察者 | 事件系统、数据流处理、监控系统 |
 | `native_async_trait_app.rs` | ~650 | 原生 async trait | 异步数据源、中间件链、重试策略 |
@@ -115,7 +115,7 @@
 ### 增强前 vs 增强后
 
 | 维度 | 增强前 | 增强后 | 提升 |
-|------|-------|--------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | **可运行示例** | 5个基础示例 | 11个完整示例 | +120% |
 | **示例代码行数** | ~1500行 | ~5650行 | +277% |
 | **文档完整性** | 基础框架 | 深度整合 | +300% |
@@ -449,7 +449,7 @@ cargo run --example dyn_upcasting_adapter
 ### 代码质量
 
 | 指标 | 数值 | 说明 |
-|------|------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
 | **总代码行数** | ~4150 行 | 6个完整示例 |
 | **注释覆盖率** | ~25% | 详细的说明注释 |
 | **测试覆盖率** | 100% | 每个示例都有测试 |
@@ -459,7 +459,7 @@ cargo run --example dyn_upcasting_adapter
 ### 文档质量
 
 | 文档 | 字数 | 图表数 | 示例数 | 更新日期 |
-|------|------|--------|--------|---------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' 
 | **KNOWLEDGE_GRAPH** | ~7000 | 15 | 30+ | 2025-10-19 |
 | **MIND_MAP** | ~6000 | 20 | 25+ | 2025-10-19 |
 | **MATRIX_COMPARISON** | ~8000 | 10 | 40+ | 2025-10-19 |

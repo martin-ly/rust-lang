@@ -1,4 +1,4 @@
-﻿# C09设计模式模块：全面梳理完成总结
+# C09设计模式模块：全面梳理完成总结
 
 ## 📊 目录
 
@@ -73,7 +73,7 @@
 ### 一级文档：综合指南
 
 | 文档 | 行数 | 内容 | 状态 |
-|------|------|------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | **COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md** | 1000+ | 理论、实践、形式化验证全指南 | ✅ 完成 |
 | **README.md** | 400+ | 模块入口、快速开始、学习路径 | ✅ 更新 |
 | **09_design_patterns.md** | 2000+ | 所有模式的数学定义与伪代码 | ✅ 已存在 |
@@ -81,7 +81,7 @@
 ### 二级文档：专题深入分析
 
 | 文档 | 行数 | 核心主题 | 状态 |
-|------|------|---------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | **ASYNC_SYNC_EQUIVALENCE_THEORY.md** | 732 | 异步与同步的等价关系、CPS变换、Monad语义 | ✅ 完成 |
 | **ACTOR_REACTOR_PATTERNS.md** | 901 | Actor与Reactor模式、调度机制、形式化证明 | ✅ 完成 |
 | **CSP_VS_ASYNC_ANALYSIS.md** | 823 | CSP vs Rust Async、Golang对比、性能分析 | ✅ 完成 |
@@ -90,7 +90,7 @@
 ### 三级文档：实现与路线图
 
 | 文档 | 内容 | 状态 |
-|------|------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
 | **IMPLEMENTATION_ROADMAP.md** | Rust 1.90对齐路线图 | ✅ 已存在 |
 | **PROJECT_COMPLETION_REPORT.md** | 项目完成报告 | ✅ 已存在 |
 
@@ -189,7 +189,7 @@
 **语义差异**：
 
 | 维度 | CSP/Golang | Rust Async |
-|------|-----------|-----------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ----------- param($match) $match.Value -replace '[-:]+', ' --- ' 
 | 调度 | 抢占式 | 协作式 |
 | Channel | 同步原语 | 异步Future |
 | 死锁检测 | 运行时 | 编译时（部分） |
@@ -229,7 +229,7 @@ fn async_factorial(n: u64) -> Pin<Box<dyn Future<Output = u64>>> {
 ### 已集成特性
 
 | 特性 | 使用位置 | 示例 |
-|------|---------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
 | **`OnceLock`** | 单例模式 | `static CONFIG: OnceLock<Config>` |
 | **GATs** | 观察者模式 | `type Ref<'a>` 借用视图 |
 | **RPITIT** | 异步trait | `async fn handle(&self)` |
@@ -263,7 +263,7 @@ pub trait AsyncHandler {
 ### 已完成基准
 
 | 基准 | 场景 | 结果 |
-|------|------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
 | **fib_sync vs fib_async** | CPU密集 | 同步快2倍 |
 | **file_io_sync vs async** | IO密集 | 异步快100倍 |
 | **channel_throughput** | 消息传递 | Rust mpsc: 33M ops/sec |

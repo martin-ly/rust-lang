@@ -7,13 +7,14 @@
 
 ## 🎯 任务目标
 
-将所有 Markdown 表格分隔符从 `|-----|------|---------|` 格式修复为 `| --- | --- | --- |` 格式（前后有空格）。
+将所有 Markdown 表格分隔符从 ` param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ` 格式修复为 `| --- | --- | --- |` 格式（前后有空格）。
 
 ---
 
 ## ✅ 已修复的文件
 
 ### c10_networks 模块
+
 - ✅ `docs/tier_02_guides/05_性能与安全优化.md` - 已修复
 - ✅ `docs/tier_02_guides/04_TCP_UDP编程.md` - 已修复
 - ✅ `docs/tier_02_guides/01_网络基础实践.md` - 已修复（2处）
@@ -21,29 +22,35 @@
 - ✅ `docs/tier_02_guides/03_WebSocket实时通信.md` - 已修复（2处）
 
 ### c02_type_system 模块
+
 - ✅ `docs/tier_01_foundations/02_主索引导航.md` - 已修复（14处）
 - ✅ `docs/tier_02_guides/01_基础类型指南.md` - 已修复（2处）
 - ✅ `docs/cargo_package_management/02_基础概念与定义.md` - 已修复（3处）
 
 ### c09_design_pattern 模块
+
 - ✅ `docs/tier_04_advanced/05_前沿研究与创新模式.md` - 已修复
 - ✅ `docs/tier_04_advanced/02_架构模式演进.md` - 已修复（2处）
 - ✅ `docs/00_MASTER_INDEX.md` - 已修复（2处）
 - ✅ `docs/FAQ.md` - 已修复（2处）
 
 ### c12_wasm 模块
+
 - ✅ `tests/README.md` - 已修复
 - ✅ `benches/README.md` - 已修复（2处）
 
 ### c04_generic 模块
+
 - ✅ `docs/00_MASTER_INDEX.md` - 已修复
 - ✅ `docs/tier_01_foundations/04_常见问题.md` - 已修复（2处）
 
 ### c11_macro_system 模块
+
 - ✅ `docs/tier_04_advanced/README.md` - 已修复
 - ✅ `docs/tier_01_foundations/02_主索引导航.md` - 已修复
 
 ### c07_process 模块
+
 - ✅ `docs/00_MASTER_INDEX.md` - 已修复
 - ✅ `docs/tier_01_foundations/04_常见问题.md` - 已修复（2处）
 
@@ -60,12 +67,14 @@
 ## 🔄 修复格式说明
 
 ### 修复前
+
 ```markdown
 | 列1 | 列2 | 列3 |
-|-----|------|---------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
 ```
 
 ### 修复后
+
 ```markdown
 | 列1 | 列2 | 列3 |
 | --- | --- | --- |

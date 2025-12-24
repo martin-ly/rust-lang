@@ -7,7 +7,7 @@ Glommio 是基于 **io_uring** 的极致性能异步运行时，专为 Linux 平
 ## ⚡ 为什么选择 Glommio?
 
 | 优势 | 说明 |
-|------|------|
+| --- | --- |
 | 🏆 **极低延迟** | P99 < 100μs |
 | 🚀 **高吞吐** | > 2M req/s |
 | 💾 **低内存** | ~2KB/任务 |
@@ -52,13 +52,13 @@ fn main() {
     // 创建执行器并运行
     LocalExecutor::default().run(async {
         println!("🚀 Hello from Glommio!");
-        
+
         // 创建任务
         let task = Task::local(async {
             println!("✅ Task running");
             42
         });
-        
+
         // 等待结果
         let result = task.await;
         println!("📊 Result: {}", result);
@@ -90,7 +90,7 @@ fn main() {
                 i * 2
             }))
             .collect();
-        
+
         // 等待所有任务完成
         let results = join_all(tasks).await;
         println!("Results: {:?}", results);
@@ -115,7 +115,7 @@ fn main() {
             // 你的工作负载
         })
         .unwrap();
-    
+
     handle.join().unwrap();
 }
 ```
@@ -134,13 +134,13 @@ fn main() {
         let data = b"Hello Glommio!".to_vec();
         file.write_at(data, 0).await.unwrap();
         file.close().await.unwrap();
-        
+
         // 读取文件
         let file = DmaFile::open("/tmp/test.txt").await.unwrap();
         let content = file.read_at(0, 14).await.unwrap();
         println!("{}", String::from_utf8_lossy(&content));
         file.close().await.unwrap();
-        
+
         // 清理
         std::fs::remove_file("/tmp/test.txt").unwrap();
     });
@@ -156,7 +156,7 @@ fn main() {
     LocalExecutor::default().run(async {
         let listener = TcpListener::bind("127.0.0.1:8080").unwrap();
         println!("Server listening on 8080");
-        
+
         loop {
             match listener.accept().await {
                 Ok(stream) => {
@@ -183,7 +183,7 @@ use glommio::LocalExecutorBuilder;
 fn main() {
     let num_cores = num_cpus::get();
     let mut handles = vec![];
-    
+
     // 为每个核心创建执行器
     for core_id in 0..num_cores {
         let handle = LocalExecutorBuilder::default()
@@ -193,10 +193,10 @@ fn main() {
                 // 工作负载
             })
             .unwrap();
-        
+
         handles.push(handle);
     }
-    
+
     // 等待所有执行器完成
     for handle in handles {
         handle.join().unwrap();
@@ -250,4 +250,3 @@ A: 不能。Glommio 依赖 Linux 的 io_uring。
 **提示**: Glommio 适合高性能、延迟敏感的 Linux 应用。如需跨平台，考虑使用 Tokio。
 
 **最后更新**: 2025-10-30
-

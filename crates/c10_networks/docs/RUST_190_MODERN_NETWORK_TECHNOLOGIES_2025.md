@@ -1,4 +1,4 @@
-﻿# Rust 1.90 现代网络技术实战 (2025)
+# Rust 1.90 现代网络技术实战 (2025)
 
 > **文档版本**: v1.0
 > **适用版本**: Rust 1.90+, Linux 5.1+
@@ -1803,7 +1803,7 @@ xsk-rs = "0.2"               # AF_XDP Rust 绑定
 ## ⚠️ 平台兼容性说明
 
 | 技术 | Linux | Windows | macOS | 最低版本 |
-|------|-------|---------|-------|----------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' 
 | **io_uring** | ✅ | ❌ | ❌ | Kernel 5.1+ |
 | **tokio-uring** | ✅ | ❌ | ❌ | Kernel 5.1+ |
 | **Monoio** | ✅ | ❌ | ❌ | Kernel 5.10+ |

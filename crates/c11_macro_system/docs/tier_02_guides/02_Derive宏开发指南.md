@@ -482,7 +482,7 @@ pub fn derive_serialize(input: TokenStream) -> TokenStream {
 ### 最佳实践
 
 | 场景 | 推荐做法 |
-|------|---------|
+| --- | --- |
 | **字段访问** | 使用 `Fields::Named` |
 | **泛型** | 使用 `split_for_impl()` |
 | **属性** | 使用 `attributes(my_attr)` |

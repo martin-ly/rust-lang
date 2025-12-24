@@ -1,4 +1,4 @@
-﻿# c08_algorithms 项目全面梳理 - 最终状态报告
+# c08_algorithms 项目全面梳理 - 最终状态报告
 
 ## 📊 目录
 
@@ -294,7 +294,7 @@
 **覆盖的设计模式**:
 
 | 设计模式 | 文档位置 | 形式化定义 | 实现代码 |
-|---------|---------|-----------|---------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------|
 | Actor模式 | ACTOR_REACTOR_CSP_PATTERNS.md | ✅ | ✅ 700行 |
 | Reactor模式 | ACTOR_REACTOR_CSP_PATTERNS.md | ✅ | ✅ 400行 |
 | CSP模式 | ACTOR_REACTOR_CSP_PATTERNS.md | ✅ | ✅ 200行 |
@@ -305,7 +305,7 @@
 **语义模型覆盖**:
 
 | 语义模型 | 文档位置 | 形式化 | 代码对应 |
-|---------|---------|--------|---------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------|
 | 操作语义 | FORMAL_ALGORITHM_MODELS.md | ✅ | ✅ |
 | 指称语义 | FORMAL_ALGORITHM_MODELS.md | ✅ | - |
 | 霍尔逻辑 | FORMAL_ALGORITHM_MODELS.md | ✅ | ✅ Prusti |
@@ -370,7 +370,7 @@
 ### 文档统计
 
 | 指标 | 数值 |
-|------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | **核心理论文档** | 6篇 |
 | **实用指南文档** | 10+篇 |
 | **总文档字数** | ~40,000字 |
@@ -382,7 +382,7 @@
 ### 代码统计
 
 | 指标 | 数值 |
-|------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | **代码示例** | 60+ |
 | **新增代码行数** | ~3,500行 |
 | **形式化验证模块** | 1个（700行） |
@@ -392,7 +392,7 @@
 ### 覆盖范围
 
 | 领域 | 覆盖度 |
-|------|--------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------|
 | **计算理论** | 100% ✅ |
 | **程序语义** | 100% ✅ |
 | **并发理论** | 100% ✅ |

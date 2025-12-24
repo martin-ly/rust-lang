@@ -169,7 +169,7 @@ c10_networks/
 ### 4.1 主要运行时库对比
 
 | 特性 | Tokio | async-std | 本项目选择 |
-|------|-------|-----------|------------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' ------------|
 | **设计理念** | 高性能、可扩展 | 类似标准库API | ✅ Tokio |
 | **生态系统** | 丰富完整 | 相对简单 | ✅ Tokio |
 | **性能** | 优秀 | 良好 | ✅ Tokio |

@@ -24,20 +24,25 @@
 ### 2. 版本信息更新 (20+个文档) ✅
 
 #### c01_ownership_borrow_scope
+
 - ✅ `docs/MIND_MAP.md` - 更新为 Rust 1.92.0
 - ✅ `docs/MULTIDIMENSIONAL_MATRIX.md` - 更新为 Rust 1.92.0
 
 #### c02_type_system
+
 - ✅ `docs/tier_01_foundations/01_项目概览.md` - 更新为 Rust 1.92.0
 
 #### c03_control_fn
+
 - ✅ `docs/README.md` - 更新所有 Rust 1.90 引用为 1.92.0
 
 #### c10_networks
+
 - ✅ `docs/README.md` - 更新为 Rust 1.92.0+
 - ✅ `docs/QUICK_START_NEW_DOCS.md` - 更新版本信息
 
 #### c12_wasm
+
 - ✅ `README.md` - 更新所有 Rust 1.90 引用为 1.92.0
 - ✅ `QUICK_START.md` - 更新版本信息
 
@@ -68,7 +73,7 @@
 ### 文档更新统计
 
 | 类别 | 数量 | 状态 |
-|------|------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
 | 新建核心文档 | 4 | ✅ |
 | 版本信息更新 | 20+ | ✅ |
 | 思维导图更新 | 1 | ✅ |
@@ -78,7 +83,7 @@
 ### 版本对齐统计
 
 | 模块 | 文档数 | 对齐率 | 状态 |
-|------|--------|--------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | c01 | 49 | 100% | ✅ |
 | c02 | 59 | 100% | ✅ |
 | c03 | 42 | 100% | ✅ |

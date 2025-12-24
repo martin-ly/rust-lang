@@ -66,7 +66,7 @@ docs/
 适合日常开发和学习使用的实用文档。
 
 | 文档 | 主要内容 | 适合人群 |
-|------|---------|---------|
+| --- | --- | --- |
 | [algorithm_complexity.md](./guides/algorithm_complexity.md) | 时间/空间复杂度、Big-O、主定理、摊还分析 | 初学者、面试准备 |
 | [data_structures.md](./guides/data_structures.md) | 线性表、树、图、高级数据结构 | 所有开发者 |
 | [async_algorithms.md](./guides/async_algorithms.md) | 异步算法设计、Tokio、Futures | 异步编程学习者 |
@@ -80,7 +80,7 @@ docs/
 深入的形式化理论、数学模型和证明方法。
 
 | 文档 | 主要内容 | 难度 |
-|------|---------|------|
+| --- | --- | --- |
 | [ALGORITHM_CLASSIFICATION_AND_MODELS.md](./theory/ALGORITHM_CLASSIFICATION_AND_MODELS.md) | 算法分类、形式化定义、计算模型、语义模型 | ⭐⭐⭐ |
 | [FORMAL_ALGORITHM_MODELS.md](./theory/FORMAL_ALGORITHM_MODELS.md) | 算法形式化、图灵机、λ演算、霍尔逻辑 | ⭐⭐⭐ |
 | [DESIGN_PATTERNS_SEMANTICS_MAPPING.md](./theory/DESIGN_PATTERNS_SEMANTICS_MAPPING.md) | 设计模式、语义模型、等价关系 | ⭐⭐⭐ |
@@ -98,7 +98,7 @@ docs/
 深入的算法专题，涵盖各个领域。
 
 | 文档 | 主题 | 关键词 |
-|------|------|--------|
+| --- | --- | --- |
 | [algorithm_exp01.md](./advanced/algorithm_exp01.md) | Rust类型设计准则 | 类型系统、泛型、策略模式 |
 | [algorithm_exp02.md](./advanced/algorithm_exp02.md) | 高级排序算法 | 排序、自适应、并行 |
 | [algorithm_exp03.md](./advanced/algorithm_exp03.md) | 图算法 | 图遍历、最短路径、MST |
@@ -126,7 +126,7 @@ docs/
 Rust 语言特性在算法中的应用。
 
 | 文档 | 版本 | 主要内容 |
-|------|------|---------|
+| --- | --- | --- |
 | [rust_189_features.md](./rust-features/rust_189_features.md) | 1.89 | 特性概览 |
 | [RUST_189_FEATURES_GUIDE.md](./rust-features/RUST_189_FEATURES_GUIDE.md) | 1.89 | 详细指南 |
 | [RUST_190_FEATURES_APPLICATION.md](./rust-features/RUST_190_FEATURES_APPLICATION.md) | 1.90 | Async traits、GATs、应用 |
@@ -144,7 +144,7 @@ Rust 语言特性在算法中的应用。
 快速查阅和索引文档。
 
 | 文档 | 用途 | 适合场景 |
-|------|------|---------|
+| --- | --- | --- |
 | [algorithm_index.md](./references/algorithm_index.md) | 算法索引 | 快速查找算法 |
 | [ALGORITHM_INDEX_RUST_189.md](./references/ALGORITHM_INDEX_RUST_189.md) | Rust 1.89索引 | 版本特定查询 |
 | [08_algorithms_basics.md](./references/08_algorithms_basics.md) | 基础教程 | 入门学习 |
@@ -365,7 +365,7 @@ Week 4: 实战项目
 ## 📊 文档统计
 
 | 类别 | 文档数 | 状态 |
-|------|--------|------|
+| --- | --- | --- |
 | 实用指南 | 5 | ✅ |
 | 理论文档 | 7 | ✅ |
 | 高级专题 | 14 | ✅ |

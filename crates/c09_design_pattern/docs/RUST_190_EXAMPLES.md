@@ -1,4 +1,4 @@
-﻿# Rust 1.90 设计模式示例集 (Rust 1.90 Design Pattern Examples)
+# Rust 1.90 设计模式示例集 (Rust 1.90 Design Pattern Examples)
 
 > **文档定位**: 全面展示 Rust 1.90 最新特性在设计模式中的应用
 > **适用版本**: Rust 1.90+ (Edition 2024)
@@ -1274,7 +1274,7 @@ async fn main() {
 ### 8.1 特性性能对比表
 
 | 特性 | vs 旧方式 | 性能提升 | 内存节省 | 编译时间 |
-|------|----------|---------|---------|---------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
 | **OnceLock** | lazy_static | 30-40% | 无额外开销 | 更快 |
 | **GATs** | Clone | 10-20x | 零拷贝 | 相同 |
 | **async trait** | async-trait | 20-30% | 无Box | 更快 |
@@ -1312,7 +1312,7 @@ async fn main() {
 ## 📝 代码位置索引
 
 | 特性 | 示例位置 | 测试位置 | 完整示例 |
-|------|---------|---------|---------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------|
 | OnceLock | `src/creational/singleton/` | `tests/singleton_tests.rs` | `examples/oncelock_singleton_comprehensive.rs` |
 | GATs | `src/behavioral/observer/` | `tests/observer_tests.rs` | `examples/gats_observer_advanced.rs` |
 | async trait | `src/concurrency/asynchronous/native_async_trait/` | `tests/async_tests.rs` | `examples/native_async_trait_app.rs` |
@@ -1349,7 +1349,7 @@ cargo run --example dyn_upcasting_adapter
 ## 📊 示例特点总结
 
 | 示例 | 代码行数 | 复杂度 | 实用性 | 学习价值 |
-|------|---------|--------|--------|---------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' 
 | **OnceLock 综合** | ~600 | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 | **GATs 观察者** | ~700 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 | **async trait** | ~650 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |

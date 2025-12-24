@@ -1,4 +1,4 @@
-﻿# c08_algorithms 全面梳理最终总结
+# c08_algorithms 全面梳理最终总结
 
 ## 📊 目录
 
@@ -334,7 +334,7 @@ pub trait EventHandler {
 - ✅ Golang vs Rust对比表：
 
   | 特性 | Golang | Rust |
-  |------|--------|------|
+   param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' 
   | 并发原语 | Goroutine | async/await |
   | 通信机制 | Channel | mpsc::channel |
   | 调度器 | M:N运行时调度 | 状态机轮询 |
@@ -518,7 +518,7 @@ pub fn binary_search_verified<T: Ord>(arr: &[T], target: &T) -> Option<usize>
 ### 文档成果
 
 | 项目 | 数量 | 规模 | 状态 |
-|------|------|------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | 新增核心文档 | 2篇 | ~3500行 | ✅ |
 | 新增示例代码 | 1个 | ~800行 | ✅ |
 | 更新现有文档 | 3篇 | ~500行改动 | ✅ |

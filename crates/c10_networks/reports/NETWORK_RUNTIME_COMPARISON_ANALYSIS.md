@@ -1,4 +1,4 @@
-﻿# 网络运行时库对比分析报告
+# 网络运行时库对比分析报告
 
 ## 📊 目录
 
@@ -54,7 +54,7 @@
 ### 1.1 Tokio vs async-std 详细对比
 
 | 特性维度 | Tokio | async-std | 本项目选择 | 理由 |
-|----------|-------|-----------|------------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' ------------ param($match) $match.Value -replace '[-:]+', ' --- ' 
 | **性能** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ✅ Tokio | 生产环境验证，高性能 |
 | **生态系统** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ✅ Tokio | 丰富的第三方库支持 |
 | **学习曲线** | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ✅ Tokio | 虽然复杂但功能强大 |
@@ -196,7 +196,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 #### 2.1.1 tokio-tungstenite vs async-tungstenite
 
 | 特性 | tokio-tungstenite | async-tungstenite | 选择 |
-|------|-------------------|-------------------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------------------- param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | 性能 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ✅ tokio-tungstenite |
 | 功能完整性 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ✅ tokio-tungstenite |
 | API设计 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ✅ tokio-tungstenite |
@@ -236,7 +236,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 #### 2.2.1 hickory-dns vs trust-dns
 
 | 特性 | hickory-dns | trust-dns | 选择 |
-|------|-------------|-----------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------------- param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | 维护状态 | ⭐⭐⭐⭐⭐ | ⭐⭐ | ✅ hickory-dns |
 | 功能完整性 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ✅ hickory-dns |
 | 性能 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ✅ hickory-dns |
@@ -316,7 +316,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ### 3.1 网络I/O性能对比
 
 | 测试场景 | Tokio | async-std | 性能差异 |
-|----------|-------|-----------|----------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' ----------|
 | TCP Echo服务器 | 100,000 req/s | 85,000 req/s | Tokio +17.6% |
 | HTTP服务器 | 95,000 req/s | 80,000 req/s | Tokio +18.8% |
 | WebSocket连接 | 50,000 并发 | 40,000 并发 | Tokio +25% |

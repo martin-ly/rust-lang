@@ -109,7 +109,7 @@
 #### 4.1 主要发现
 
 | 特性 | Tokio | async-std | 推荐选择 |
-|------|-------|-----------|----------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' ----------|
 | 性能 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ✅ Tokio |
 | 生态系统 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ✅ Tokio |
 | 生产就绪 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ✅ Tokio |

@@ -1,4 +1,4 @@
-﻿# C11宏系统模块 Phase 2 完成报告
+# C11宏系统模块 Phase 2 完成报告
 
 > **报告类型**: 模块实施完成报告
 > **实施日期**: 2025-10-20
@@ -81,7 +81,7 @@
 ### 1.1 创建的教程文档
 
 | 文档 | 行数 | 难度 | 主题 |
-|------|------|------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | `01_macro_rules_basics.md` | 532 | ⭐ | macro_rules!基础语法 |
 | `02_pattern_matching.md` | 625 | ⭐⭐ | 模式匹配技巧 |
 | `03_repetition_syntax.md` | 583 | ⭐⭐ | 重复语法详解 |
@@ -351,7 +351,7 @@ macro_rules! tail_recursive_sum {
 ### 4.1 按主题分类
 
 | 主题 | 示例数量 | 复杂度 |
-|------|---------|--------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
 | 基础语法 | 20+ | 简单 |
 | 模式匹配 | 25+ | 中等 |
 | 重复语法 | 20+ | 中等 |
@@ -510,7 +510,7 @@ macro_rules! tail_recursive_sum {
 ### 10.1 文档统计
 
 | 指标 | 数量 |
-|------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | **教程文档** | 5篇 |
 | **总行数** | 3000+ |
 | **代码示例** | 100+ |

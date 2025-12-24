@@ -22,7 +22,7 @@
 ### 文档梳理
 
 | 项目 | 数量 | 状态 |
-|------|------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
 | 总文档数 | 498 | ✅ |
 | Rust 1.92 对齐 | 494 (99.2%) | ✅ |
 | 格式问题修复 | 7 | ✅ |
@@ -31,7 +31,7 @@
 ### 新建文档
 
 | 文档名称 | 位置 | 用途 |
-|---------|------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
 | RUST_192_COMPREHENSIVE_DOCUMENTATION_REVIEW.md | crates/ | 全面梳理报告 |
 | DECISION_GRAPH_NETWORK.md | crates/ | 决策图网 |
 | PROOF_GRAPH_NETWORK.md | crates/ | 证明图网 |
@@ -40,7 +40,7 @@
 ### 更新的文档
 
 | 模块 | 更新文档数 | 主要更新内容 |
-|------|-----------|------------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ----------- param($match) $match.Value -replace '[-:]+', ' --- ' 
 | c01 | 15 | 版本信息、思维导图 |
 | c02 | 12 | 版本信息、特性对齐 |
 | c03 | 8 | 版本信息 |
@@ -100,7 +100,7 @@
 ### 语言特性 (9/9) ✅
 
 | 特性 | 对齐模块 | 状态 |
-|------|---------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
 | MaybeUninit 文档化 | c01, c02, c07 | ✅ |
 | 联合体原始引用 | c01, c02 | ✅ |
 | 自动特征改进 | c02, c04 | ✅ |
@@ -114,7 +114,7 @@
 ### 标准库 API (3/3) ✅
 
 | API | 对齐模块 | 状态 |
-|-----|---------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
 | NonZero::div_ceil | c02, c08 | ✅ |
 | Location::file_as_c_str | c01, c03, c11 | ✅ |
 | rotate_right | c02, c08 | ✅ |
@@ -122,7 +122,7 @@
 ### 性能优化 (4/4) ✅
 
 | 优化 | 对齐模块 | 状态 |
-|------|---------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
 | 迭代器方法特化 | c03, c08 | ✅ |
 | 元组扩展简化 | c02, c04 | ✅ |
 | EncodeWide Debug | c07, c10 | ✅ |

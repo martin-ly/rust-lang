@@ -307,7 +307,7 @@ cargo bench --bench glommio_benchmarks
 ## 📊 统计信息
 
 | 指标 | 数量 |
-|------|------|
+| --- | --- |
 | 新增文件 | 6 个 |
 | 总代码行数 | ~3,000+ 行 |
 | 文档行数 | ~2,000+ 行 |
@@ -320,7 +320,7 @@ cargo bench --bench glommio_benchmarks
 ### Glommio 优势
 
 | 特性 | 指标 |
-|------|------|
+| --- | --- |
 | **延迟** | <100μs (P99) |
 | **吞吐量** | >2M req/s |
 | **内存占用** | ~2KB/任务 |
@@ -350,7 +350,7 @@ cargo bench --bench glommio_benchmarks
 ### Glommio vs Tokio
 
 | 特性 | Glommio | Tokio |
-|------|---------|-------|
+| --- | --- | --- |
 | 架构 | Thread-per-core | Work-stealing |
 | 平台 | Linux only | 跨平台 |
 | 延迟 | <100μs | ~200μs |
@@ -361,7 +361,7 @@ cargo bench --bench glommio_benchmarks
 ### Glommio vs Smol
 
 | 特性 | Glommio | Smol |
-|------|---------|------|
+| --- | --- | --- |
 | 定位 | 极致性能 | 轻量级 |
 | I/O 接口 | io_uring | epoll/kqueue |
 | 延迟 | <100μs | ~150μs |

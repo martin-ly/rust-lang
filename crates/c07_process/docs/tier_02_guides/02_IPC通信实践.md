@@ -75,7 +75,7 @@
 **IPC对比**:
 
 | IPC类型 | 性能 | 跨网络 | 复杂度 | 适用场景 |
-|---------|------|--------|--------|---------|
+| --- | --- | --- | --- | --- |
 | 管道 | 中 | 否 | 低 | 父子进程 |
 | 命名管道 | 中 | 否 | 低 | 本地无亲缘进程 |
 | Unix Socket | 高 | 否 | 中 | 本地复杂通信 |
@@ -451,7 +451,7 @@ fn optimized_pipe_write() -> Result<(), Box<dyn std::error::Error>> {
 **性能对比**:
 
 | 方法 | 100k行写入时间 |
-|------|---------------|
+| --- | --- |
 | 直接write | ~500ms |
 | BufWriter | ~50ms (10x faster) |
 | 批量write_all | ~100ms |
@@ -817,7 +817,7 @@ fn optimized_unix_socket() -> Result<(), Box<dyn std::error::Error>> {
 **性能对比** (同一台机器):
 
 | IPC机制 | 延迟 | 吞吐量 |
-|---------|------|--------|
+| --- | --- | --- |
 | Unix Socket | ~2-5 μs | 5-10 GB/s |
 | TCP Localhost | ~10-20 μs | 2-5 GB/s |
 | 管道 | ~5-10 μs | 3-6 GB/s |
@@ -1402,7 +1402,7 @@ fn benchmark_shared_memory() -> Result<(), Box<dyn std::error::Error>> {
 **性能对比**:
 
 | 操作 | 共享内存 | Unix Socket | TCP Localhost |
-|------|---------|-------------|---------------|
+| --- | --- | --- | --- |
 | 1-byte write | ~50 ns | ~2 μs | ~10 μs |
 | 1KB write | ~100 ns | ~5 μs | ~15 μs |
 | 1MB write | ~500 μs | ~5 ms | ~10 ms |

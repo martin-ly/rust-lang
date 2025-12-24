@@ -277,7 +277,7 @@ cargo test --test test_runner
 ### 环境变量
 
 | 环境变量 | 描述 | 默认值 |
-|---------|------|--------|
+| --- | --- | --- |
 | `C10_SKIP_NETWORK_TESTS` | 跳过网络相关测试 | `0` |
 | `C10_DNS_TESTS` | 启用DNS测试 | `0` |
 | `C10_TCP_ADDRESS` | TCP测试地址 | `127.0.0.1:8080` |
@@ -295,7 +295,7 @@ cargo test --test test_runner
 ### 测试特性
 
 | 特性 | 描述 | 测试文件 |
-|------|------|----------|
+| --- | --- | --- |
 | `sniff` | 抓包功能测试 | `integration_tests.rs` |
 | `offline` | 离线分析测试 | `integration_tests.rs` |
 | `pcap_live` | 实时抓包测试 | `integration_tests.rs` |
@@ -416,6 +416,6 @@ open tarpaulin-report.html
 
 现在您已经了解了 C10 Networks 的完整测试体系，可以开始编写和运行测试了。
 
-*最后更新: 2025年1月*  
-*文档版本: v1.0*  
+*最后更新: 2025年1月*
+*文档版本: v1.0*
 *维护者: C10 Networks 开发团队*

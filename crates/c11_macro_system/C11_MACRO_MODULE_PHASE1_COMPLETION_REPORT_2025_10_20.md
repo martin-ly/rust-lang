@@ -1,4 +1,4 @@
-﻿# C11宏系统模块 Phase 1 完成报告
+# C11宏系统模块 Phase 1 完成报告
 
 > **报告类型**: 模块实施完成报告
 > **实施日期**: 2025-10-20
@@ -170,7 +170,7 @@ crates/C11_macro_system/
 #### 示例程序
 
 | 示例 | 功能 | 状态 |
-|------|------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
 | `01_macro_rules_basics.rs` | 声明宏基础演示 | ✅ 可运行 |
 | `02_pattern_matching.rs` | 模式匹配示例 | ✅ 可运行 |
 | `03_repetition.rs` | 重复语法示例 | ✅ 可运行 |
@@ -246,7 +246,7 @@ max!(10, 5, 20, 15) = 20
 #### 理论基础文档 (4篇)
 
 | 文档 | 主题 | 字数 | 难度 |
-|------|------|------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | `01_macro_fundamentals.md` | 宏基础理论 | 3000+ | ⭐ |
 | `02_hygiene_and_scope.md` | 卫生性与作用域 | 2500+ | ⭐⭐ |
 | `03_expansion_mechanism.md` | 宏展开机制 | 2800+ | ⭐⭐ |
@@ -347,7 +347,7 @@ cargo test -p C11_macro_system
 ### 5.1 文件统计
 
 | 类别 | 数量 | 说明 |
-|------|------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
 | **源文件** | 8 | lib.rs + 7个模块文件 |
 | **示例** | 4 | 可运行的完整示例 |
 | **文档** | 7 | README + 主索引 + FAQ + 术语表 + 3篇理论 |
@@ -357,7 +357,7 @@ cargo test -p C11_macro_system
 ### 5.2 代码统计
 
 | 指标 | 数值 |
-|------|------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | **声明宏** | 10+ |
 | **辅助函数** | 5+ |
 | **测试用例** | 10+ |
@@ -367,7 +367,7 @@ cargo test -p C11_macro_system
 ### 5.3 文档统计
 
 | 文档类型 | 数量 | 总字数 |
-|---------|------|--------|
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
 | **理论文档** | 4篇 | 11000+ |
 | **教程文档** | 1篇 | 2500+ |
 | **导航文档** | 3篇 | 8000+ |
