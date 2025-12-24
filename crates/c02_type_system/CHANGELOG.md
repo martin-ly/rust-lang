@@ -400,12 +400,12 @@
 
 ---
 
-**维护模式**: 季度更新  
-**下次更新**: 2026-01-22  
-**文档版本**: v2.1.0  
+**维护模式**: 季度更新
+**下次更新**: 2026-01-22
+**文档版本**: v2.1.0
 **Rust 版本**: 1.90+
 
 ---
 
-*本变更日志遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/) 规范。*  
+*本变更日志遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/) 规范。*
 *版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/) 规范。*
