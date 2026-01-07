@@ -14,7 +14,7 @@
 ### 已完成修复的 Crate
 
 | Crate | 状态 | 修复文件数 | 修复链接数 | 主要问题 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ----------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ----------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **c01_ownership_borrow_scope** | ✅ 100% 完成 | 61+ | 405+ | 旧目录结构、文件名变更、外部链接修复 |
 | **c02_type_system** | ✅ 完成 | 3 | 5+ | 不存在的文件引用 |
 | **c08_algorithms** | ✅ 完成 | 20 | 120+ | 不存在的目录引用（guides/, theory/, advanced/, references/） |

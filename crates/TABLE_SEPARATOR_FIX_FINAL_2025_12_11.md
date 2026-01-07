@@ -104,7 +104,7 @@
 
 ```markdown
 | 列1 | 列2 | 列3 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 ```
 
 ### 修复后
