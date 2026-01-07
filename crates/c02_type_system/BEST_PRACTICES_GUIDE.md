@@ -143,8 +143,8 @@ impl std::error::Error for AppError {}
 
 ```rust
 // ✅ 好的做法：明确的类型约束
-pub struct DataProcessor<T, E> 
-where 
+pub struct DataProcessor<T, E>
+where
     T: Clone + Send + Sync + 'static,
     E: std::error::Error + Send + Sync + 'static,
 {
@@ -157,7 +157,7 @@ pub trait Processor {
     type Input: Clone + Send + Sync;
     type Output: Send + Sync;
     type Error: std::error::Error + Send + Sync;
-    
+
     fn process(&self, input: Self::Input) -> Result<Self::Output, Self::Error>;
 }
 ```
@@ -168,8 +168,8 @@ pub trait Processor {
 
 ```rust
 // ✅ 好的做法：明确的生命周期参数
-pub struct DataManager<'a, 'b, T> 
-where 
+pub struct DataManager<'a, 'b, T>
+where
     T: 'a + 'b,
 {
     short_lived: &'a T,
@@ -178,8 +178,8 @@ where
 }
 
 // ✅ 使用生命周期省略规则
-impl<'a, T> DataManager<'a, 'a, T> 
-where 
+impl<'a, T> DataManager<'a, 'a, T>
+where
     T: 'a,
 {
     pub fn new(data: &'a T) -> Self {
@@ -297,10 +297,10 @@ fn good_branching(data: &[u32]) -> u32 {
 #[cfg(target_arch = "x86_64")]
 pub unsafe fn simd_vector_add(a: &[f32], b: &[f32], result: &mut [f32]) {
     use std::arch::x86_64::*;
-    
+
     let len = a.len().min(b.len()).min(result.len());
     let mut i = 0;
-    
+
     // 处理 4 个元素为一组
     while i + 4 <= len {
         unsafe {
@@ -311,7 +311,7 @@ pub unsafe fn simd_vector_add(a: &[f32], b: &[f32], result: &mut [f32]) {
         }
         i += 4;
     }
-    
+
     // 处理剩余元素
     while i < len {
         result[i] = a[i] + b[i];
@@ -422,7 +422,7 @@ impl ErrorLogger {
             "user_id" => context.user_id.as_deref().unwrap_or("unknown"),
             "timestamp" => %context.timestamp,
         );
-        
+
         // 更新指标
         self.update_metrics(error, context);
     }
@@ -453,7 +453,7 @@ impl UserId {
 // ✅ 使用泛型约束确保类型安全
 pub trait Identifiable {
     type Id: Clone + PartialEq + std::fmt::Debug;
-    
+
     fn id(&self) -> &Self::Id;
 }
 
@@ -464,7 +464,7 @@ pub struct User {
 
 impl Identifiable for User {
     type Id = UserId;
-    
+
     fn id(&self) -> &Self::Id {
         &self.id
     }
@@ -477,8 +477,8 @@ impl Identifiable for User {
 
 ```rust
 // ✅ 明确的生命周期约束
-pub struct DataProcessor<'a, T> 
-where 
+pub struct DataProcessor<'a, T>
+where
     T: 'a,
 {
     data: &'a T,
@@ -486,8 +486,8 @@ where
 }
 
 // ✅ 使用生命周期省略
-impl<'a, T> DataProcessor<'a, T> 
-where 
+impl<'a, T> DataProcessor<'a, T>
+where
     T: 'a,
 {
     pub fn process(&self) -> Result<&'a T, ProcessingError> {
@@ -519,7 +519,7 @@ pub trait DataProcessor {
     type Input: Clone + Send + Sync;
     type Output: Send + Sync;
     type Error: std::error::Error + Send + Sync;
-    
+
     fn process(&self, input: Self::Input) -> Result<Self::Output, Self::Error>;
 }
 ```
@@ -544,11 +544,11 @@ impl ThreadSafeCounter {
             count: AtomicUsize::new(0),
         }
     }
-    
+
     pub fn increment(&self) -> usize {
         self.count.fetch_add(1, Ordering::Relaxed)
     }
-    
+
     pub fn get(&self) -> usize {
         self.count.load(Ordering::Relaxed)
     }
@@ -568,19 +568,19 @@ pub struct DataManager<T> {
     counter: Arc<Mutex<usize>>,
 }
 
-impl<T> DataManager<T> 
-where 
+impl<T> DataManager<T>
+where
     T: Clone + Send + Sync,
 {
     pub fn get(&self, key: &str) -> Option<T> {
         let cache = self.cache.read().unwrap();
         cache.get(key).cloned()
     }
-    
+
     pub fn set(&self, key: String, value: T) {
         let mut cache = self.cache.write().unwrap();
         cache.insert(key, value);
-        
+
         let mut counter = self.counter.lock().unwrap();
         *counter += 1;
     }
@@ -607,7 +607,7 @@ pub async fn fetch_multiple_data(urls: Vec<String>) -> Vec<Result<String, reqwes
     let tasks: Vec<_> = urls.into_iter()
         .map(|url| fetch_data(&url))
         .collect();
-    
+
     futures::future::join_all(tasks).await
 }
 ```
@@ -634,7 +634,7 @@ impl WasmMemoryPool {
             total_size: initial_size,
         }
     }
-    
+
     pub fn allocate(&mut self, size: usize) -> Option<*mut u8> {
         // 查找合适的空闲块
         for &index in &self.available {
@@ -642,7 +642,7 @@ impl WasmMemoryPool {
                 return Some(self.pool[index].as_mut_ptr());
             }
         }
-        
+
         // 分配新的内存块
         if size <= self.total_size {
             let new_block = vec![0; size];
@@ -676,16 +676,16 @@ impl WasmCalculator {
             memory: WasmMemoryPool::new(1024 * 1024), // 1MB
         }
     }
-    
+
     #[wasm_bindgen]
     pub fn calculate(&mut self, data: &[f32]) -> Result<Vec<f32>, JsValue> {
         let mut result = vec![0.0; data.len()];
-        
+
         // 执行计算
         for (i, &value) in data.iter().enumerate() {
             result[i] = value * 2.0;
         }
-        
+
         Ok(result)
     }
 }
@@ -709,11 +709,11 @@ impl PerformanceMonitor {
         let mut timers = self.timers.lock().unwrap();
         timers.insert(name, Instant::now());
     }
-    
+
     pub fn end_timer(&self, name: String) -> Duration {
         let mut timers = self.timers.lock().unwrap();
         let mut metrics = self.metrics.lock().unwrap();
-        
+
         if let Some(start_time) = timers.remove(&name) {
             let duration = start_time.elapsed();
             metrics.record_timing(&name, duration);
@@ -743,7 +743,7 @@ impl MemoryMonitor {
         self.allocations.fetch_add(1, Ordering::Relaxed);
         let current = self.current_usage.fetch_add(size, Ordering::Relaxed);
         let new_total = current + size;
-        
+
         // 更新峰值使用量
         let mut peak = self.peak_usage.load(Ordering::Relaxed);
         while new_total > peak {
@@ -768,7 +768,7 @@ impl MemoryMonitor {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     // ✅ 为每个功能模块编写测试
     #[test]
     fn test_data_processor() {
@@ -776,7 +776,7 @@ mod tests {
         let result = processor.process().unwrap();
         assert_eq!(result, "processed_test_data");
     }
-    
+
     // ✅ 测试错误情况
     #[test]
     fn test_data_processor_error() {
@@ -784,7 +784,7 @@ mod tests {
         let result = processor.process();
         assert!(result.is_err());
     }
-    
+
     // ✅ 使用属性宏简化测试
     #[test]
     #[should_panic(expected = "Invalid input")]
@@ -807,7 +807,7 @@ async fn test_complete_workflow() {
     // ✅ 测试完整的业务流程
     let processor = AdvancedProcessor::new("test_data");
     let result = processor.process().await.unwrap();
-    
+
     let validator = TypeValidator::new();
     let validation_result = validator.validate(&result);
     assert!(validation_result.is_ok());
@@ -827,7 +827,7 @@ fn bench_simd_operations(c: &mut Criterion) {
     let data_a = vec![1.0f32; 10000];
     let data_b = vec![2.0f32; 10000];
     let mut result = vec![0.0f32; 10000];
-    
+
     c.bench_function("simd_add", |b| {
         b.iter(|| {
             unsafe {
@@ -849,26 +849,26 @@ criterion_main!(benches);
 
 ```rust
 /// 高级数据处理器
-/// 
+///
 /// 这个结构体提供了一个高性能的数据处理接口，支持：
 /// - 类型安全的数据转换
 /// - 错误恢复机制
 /// - 性能监控
-/// 
+///
 /// # 示例
-/// 
+///
 /// ```rust
 /// use c02_type_system::AdvancedProcessor;
-/// 
+///
 /// let processor = AdvancedProcessor::new("test_data");
 /// let result = processor.process()?;
 /// println!("处理结果: {}", result);
 /// ```
-/// 
+///
 /// # 错误处理
-/// 
+///
 /// 如果处理过程中发生错误，会返回 `ProcessingError`：
-/// 
+///
 /// ```rust
 /// let result = processor.process();
 /// match result {
@@ -888,7 +888,7 @@ pub struct AdvancedProcessor<T> {
 ```rust
 // examples/complete_example.rs
 //! 完整的 Rust 1.90 高级特性使用示例
-//! 
+//!
 //! 本示例展示了如何使用 c02_type_system 库的各种高级特性。
 
 use c02_type_system::*;
@@ -896,16 +896,16 @@ use c02_type_system::*;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("🚀 Rust 1.90 高级特性完整示例");
-    
+
     // 1. 高级特性演示
     demonstrate_advanced_features().await?;
-    
+
     // 2. WebAssembly 支持
     demonstrate_wasm_support().await?;
-    
+
     // 3. 性能优化
     demonstrate_performance_optimization().await?;
-    
+
     Ok(())
 }
 
@@ -998,6 +998,6 @@ tokio-test = "0.4"
 
 ---
 
-**指南版本**: 1.0  
-**最后更新**: 2025年1月27日  
+**指南版本**: 1.0
+**最后更新**: 2025年1月27日
 **维护者**: Rust 类型系统项目组

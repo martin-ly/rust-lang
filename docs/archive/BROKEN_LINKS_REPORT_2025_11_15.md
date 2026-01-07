@@ -5005,17 +5005,17 @@
 - 行 2056: `[T](func(event Event[T])`
   - 目标文件不存在: `E:\_src\rust-lang\docs\docs\ref\Programming_Language\go_lang\docs\golang\generic\func(event Event[T]`
 
-- 行 2297: `[T1, T2, T3 any](ctx context.Context, 
- first Process[T1, T2], 
- second Process[T2, T3], 
- in <-chan T1, 
- out chan<- T3, 
+- 行 2297: `[T1, T2, T3 any](ctx context.Context,
+ first Process[T1, T2],
+ second Process[T2, T3],
+ in <-chan T1,
+ out chan<- T3,
  bufferSize int)`
-  - 目标文件不存在: `E:\_src\rust-lang\docs\docs\ref\Programming_Language\go_lang\docs\golang\generic\ctx context.Context, 
- first Process[T1, T2], 
- second Process[T2, T3], 
- in <-chan T1, 
- out chan<- T3, 
+  - 目标文件不存在: `E:\_src\rust-lang\docs\docs\ref\Programming_Language\go_lang\docs\golang\generic\ctx context.Context,
+ first Process[T1, T2],
+ second Process[T2, T3],
+ in <-chan T1,
+ out chan<- T3,
  bufferSize int`
 
 - 行 2328: `[T any](ctx context.Context, inputs []<-chan T)`
@@ -5678,12 +5678,12 @@
     isBaseCase func(State`
 
 - 行 2419: `[T Number](
-    weights []int, 
+    weights []int,
     values []T,
     capacity int,
 )`
   - 目标文件不存在: `E:\_src\rust-lang\docs\docs\ref\Programming_Language\go_lang\docs\golang\
-    weights []int, 
+    weights []int,
     values []T,
     capacity int,
 `
@@ -5984,7 +5984,7 @@
 - 行 113: `[blocks_per_grid, threads_per_block](d_input, d_output)`
   - 目标文件不存在: `E:\_src\rust-lang\docs\docs\ref\Programming_Language\py_lang\docs\python\d_input, d_output`
 
-- 行 257: `[blocks_per_grid, threads_per_block, 
+- 行 257: `[blocks_per_grid, threads_per_block,
                       threads_per_block * 4](d_data, d_result)`
   - 目标文件不存在: `E:\_src\rust-lang\docs\docs\ref\Programming_Language\py_lang\docs\python\d_data, d_result`
 
@@ -10084,4 +10084,3 @@
 
 - 行 295: `[C13 Reliability - 性能优化](../../crates/c13_reliability/docs/tier_04_advanced/)`
   - 目标文件不存在: `E:\_src\rust-lang\crates\c13_reliability\docs\tier_04_advanced`
-

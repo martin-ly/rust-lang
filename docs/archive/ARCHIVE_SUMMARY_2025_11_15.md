@@ -73,6 +73,7 @@
 ### 5. docs/docs/ 报告 (`reports/docs_reports/`)
 
 包含所有 `docs/docs/` 目录下的报告文件，如：
+
 - 各种完成报告 (`*COMPLETION*.md`)
 - 各种总结报告 (`*SUMMARY*.md`)
 - 各种更新报告 (`*UPDATE*.md`)
@@ -81,6 +82,7 @@
 ### 6. 形式化系统报告 (`reports/formal_system_reports/`)
 
 包含 `rust-formal-engineering-system/` 目录下的报告文件，如：
+
 - `PROJECT_COMPLETION_REPORT.md`
 - `PROJECT_FINAL_COMPLETION.md`
 - `FINAL_UPDATE_REPORT_2025_11_11.md`

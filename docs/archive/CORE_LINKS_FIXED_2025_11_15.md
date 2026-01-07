@@ -16,22 +16,26 @@
 ### 1. docs/README.md
 
 **修复内容**:
+
 - ✅ 修复了 `docs/README.md` 自引用链接
 - ✅ 更新了在线文档链接说明
 - ✅ 添加了归档文件链接说明
 
 **修复的链接**:
+
 - `./docs/README.md` → `./README.md`（本文件）
 - 添加了归档文件说明
 
 ### 2. docs/rust-formal-engineering-system/README.md
 
 **修复内容**:
+
 - ✅ 修复了 `FORMAL_AND_PRACTICAL_NAVIGATION.md` 链接 → 指向 `00_master_index.md`
 - ✅ 更新了已归档文件的链接（指向归档位置）
 - ✅ 添加了文件不存在时的说明
 
 **修复的链接**:
+
 - `../FORMAL_AND_PRACTICAL_NAVIGATION.md` → `./00_master_index.md`
 - `./RUST_1_91_CHANGELOG.md` → `../archive/reports/formal_system_reports/RUST_1_91_CHANGELOG.md`
 - `./RUST_1_91_UPDATE_SUMMARY.md` → `../archive/reports/formal_system_reports/RUST_1_91_UPDATE_SUMMARY.md`
@@ -42,10 +46,12 @@
 ### 3. docs/toolchain/README.md
 
 **修复内容**:
+
 - ✅ 修复了路径错误：`../../rust-formal-engineering-system` → `../rust-formal-engineering-system`
 - ✅ 移除了指向不存在 crate 的链接
 
 **修复的链接**:
+
 - `../../rust-formal-engineering-system/06_toolchain_ecosystem/` → `../rust-formal-engineering-system/06_toolchain_ecosystem/`
 - `../../rust-formal-engineering-system/06_toolchain_ecosystem/01_compiler/` → `../rust-formal-engineering-system/06_toolchain_ecosystem/01_compiler/`
 - `../../rust-formal-engineering-system/06_toolchain_ecosystem/02_package_manager/` → `../rust-formal-engineering-system/06_toolchain_ecosystem/02_package_manager/`
@@ -55,9 +61,11 @@
 ### 4. docs/research_notes/README.md
 
 **修复内容**:
+
 - ✅ 修复了 `MY_PERSONAL_INDEX.md` 链接 → 指向归档位置
 
 **修复的链接**:
+
 - `../../MY_PERSONAL_INDEX.md` → `../archive/temp/MY_PERSONAL_INDEX.md`
 
 ### 5. docs/quick_reference/README.md
@@ -94,6 +102,7 @@
 ### 归档文档中的链接
 
 归档目录（`docs/archive/`）中的文档可能包含损坏的链接，这是正常的，因为：
+
 - 这些文件已归档，主要用于历史参考
 - 链接可能指向其他已归档的文件
 - 不需要立即修复

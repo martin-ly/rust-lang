@@ -307,7 +307,7 @@
 ### 配置文件列表
 
 | 配置 | 文件 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **Kubernetes** | `deployment/k8s/wasm-deployment.yaml` | 完整 K8s 资源定义 |
 | **Docker** | `deployment/docker/Dockerfile.wasm` | 多阶段构建 |
 | **Docker Compose** | `deployment/docker/docker-compose.yaml` | 完整服务栈 |
@@ -395,7 +395,7 @@
 ### WasmEdge 2025 技术覆盖
 
 | 技术领域 | 覆盖度 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **容器运行时** | ✅ 100% | containerd-shim-wasmedge 完整集成 |
 | **Kubernetes** | ✅ 100% | RuntimeClass, CRI 插件, Workload |
 | **Docker** | ✅ 100% | Docker Desktop, Buildx, Compose |
@@ -407,7 +407,7 @@
 ### 容器技术覆盖
 
 | 容器技术 | 覆盖度 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **Docker** | ✅ 100% | Desktop, CLI, Buildx, Compose |
 | **Kubernetes** | ✅ 100% | 完整 K8s 资源和最佳实践 |
 | **containerd** | ✅ 100% | shim 机制和集成 |
@@ -417,7 +417,7 @@
 ### 云原生技术覆盖
 
 | 云原生技术 | 覆盖度 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **CI/CD** | ✅ 100% | GitHub Actions, GitLab CI |
 | **Prometheus** | ✅ 100% | 完整监控配置 |
 | **Grafana** | ✅ 100% | 仪表板和可视化 |
@@ -457,7 +457,7 @@
 ### 新增内容统计
 
 | 类型 | 数量 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **文档** | 3 篇 | ~2,800 行，Tier 4 级别 |
 | **代码示例** | 1 个 | ~400 行，生产级质量 |
 | **配置文件** | 7 个 | 覆盖完整部署流程 |
@@ -500,7 +500,7 @@
 ### 质量评分
 
 | 维度 | 分数 | 评级 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **技术深度** | 95/100 | A+ |
 | **实用性** | 98/100 | A+ |
 | **完整性** | 100/100 | A+ |

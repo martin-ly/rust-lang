@@ -68,9 +68,9 @@ fn main() {
         println!("线程：准备发送 '{}'", val);
         // 使用 tx.send() 发送数据。
         // `send` 方法会获取其参数的所有权。
-        tx.send(val).unwrap(); 
+        tx.send(val).unwrap();
         // 此时 `val` 的所有权已经转移，下一行代码将无法编译
-        // println!("线程：发送后 val = {}", val); 
+        // println!("线程：发送后 val = {}", val);
     });
 
     // 主线程在这里等待，直到从通道接收到值

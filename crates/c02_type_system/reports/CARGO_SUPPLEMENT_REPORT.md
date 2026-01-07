@@ -146,7 +146,7 @@
 ## 📊 内容统计
 
 | 项目 | 数量 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | 新增章节 | 1 | Cargo 和包管理增强 |
 | 子章节 | 9 | 详细的子主题 |
 | 代码示例 | 30+ | 完整的配置示例 |

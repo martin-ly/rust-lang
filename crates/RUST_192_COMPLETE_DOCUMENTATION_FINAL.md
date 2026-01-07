@@ -68,7 +68,7 @@
 ### 文档更新统计
 
 | 类别 | 数量 | 状态 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | 新建核心文档 | 10 | ✅ |
 | 新建改进文档 | 2 | ✅ |
 | 版本信息更新 | 40+ | ✅ |

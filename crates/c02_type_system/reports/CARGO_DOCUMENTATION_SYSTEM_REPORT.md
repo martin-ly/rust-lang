@@ -85,7 +85,7 @@ docs/07_cargo_package_management/
 ### 📊 统计数据
 
 | 指标 | 数量 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **文档数量** | 7 篇 | 完整的知识体系 |
 | **总文档行数** | 4600+ 行 | 详尽的内容 |
 | **代码示例** | 120+ 个 | 可运行的代码 |
@@ -325,7 +325,7 @@ c02_type_system/
 ### 文档定位
 
 | 文档 | 定位 | 适用场景 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | `README_RUST_190.md` | 快速概览 | 了解 Cargo 新特性 |
 | `CARGO_PACKAGE_MANAGEMENT_GUIDE.md` | 快速参考 | 快速查阅配置 |
 | `07_cargo_package_management/` | 完整体系 | 系统学习 Cargo |

@@ -113,7 +113,7 @@ cargo check --benches
 ## 📈 代码质量指标
 
 | 指标 | 值 | 状态 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ----- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ----- param($match) $match.Value -replace '[-:]+', ' --- '
 | 编译错误 | 0 | ✅ |
 | 编译警告 | 0 | ✅ |
 | Clippy 警告 | 0 | ✅ |
@@ -151,7 +151,7 @@ cargo check --benches
 ## 🚀 项目状态
 
 | 组件 | 状态 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | 核心库 | ✅ 可用 | 所有功能正常 |
 | 示例代码 | ✅ 可用 | 7 个示例全部可运行 |
 | 测试套件 | ✅ 可用 | 10 个测试全部通过 |

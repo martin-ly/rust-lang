@@ -150,7 +150,7 @@ c12_wasm/
 ### 功能统计
 
 | 功能 | 数量 | 状态 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | WASM 绑定函数 | 30+ | ✅ |
 | 设计模式实现 | 6 | ✅ |
 | 测试用例 | 58+ | ✅ |
@@ -223,7 +223,7 @@ c12_wasm/
 ## 🏆 最终评分
 
 | 维度 | 评分 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | 代码质量 | ⭐⭐⭐⭐⭐ 95/100 | 优秀 |
 | 测试覆盖 | ⭐⭐⭐⭐⭐ 90/100 | 良好 |
 | 文档完整 | ⭐⭐⭐⭐⭐ 100/100 | 完美 |

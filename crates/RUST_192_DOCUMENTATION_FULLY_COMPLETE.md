@@ -80,7 +80,7 @@
 ### 文档更新统计
 
 | 类别 | 数量 | 状态 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | 新建核心文档 | 8 | ✅ |
 | 版本信息更新 | 35+ | ✅ |
 | 思维导图更新 | 1 | ✅ |

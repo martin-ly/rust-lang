@@ -424,7 +424,7 @@ let data = Arc::new(RwLock::new(vec![1, 2, 3]));
 形式化表述：
 
 ```math
-∀t1,t2 ∈ Threads, t1 ≠ t2: 
+∀t1,t2 ∈ Threads, t1 ≠ t2:
   Holds(t1, M) ⟹ ¬Holds(t2, M)
 ```
 
@@ -650,7 +650,7 @@ assert_eq!(value, 1);
 **锁无关属性形式化定义**：
 
 ```math
-LockFree(A) ⟺ ∀S ⊂ Threads, ∃t ∈ Threads\S: 
+LockFree(A) ⟺ ∀S ⊂ Threads, ∃t ∈ Threads\S:
   Suspended(S) ⟹ Progresses(t, A)
 ```
 
@@ -927,11 +927,11 @@ impl ProcessPool {
         }
         ProcessPool { idle, max_size }
     }
-    
+
     fn get(&mut self) -> Option<Child> {
         self.idle.pop_front()
     }
-    
+
     fn return_process(&mut self, child: Child) {
         if self.idle.len() < self.max_size {
             self.idle.push_back(child);
@@ -1010,18 +1010,18 @@ impl<T> Queue<T> {
         let tail = head.clone();
         Queue { head, tail }
     }
-    
+
     fn push(&self, data: T) {
         let guard = &epoch::pin();
         let new_node = Owned::new(Node {
             data,
             next: Atomic::null(),
         }).into_shared(guard);
-        
+
         loop {
             let tail = self.tail.load(Ordering::Acquire, guard);
             let next = unsafe { tail.deref() }.next.load(Ordering::Acquire, guard);
-            
+
             if next.is_null() {
                 if unsafe { tail.deref() }.next.compare_and_set(
                     next, new_node, Ordering::Release, guard
@@ -1062,7 +1062,7 @@ where
     T: Sync,
 {
     let chunk_size = (data.len() + num_cpus::get() - 1) / num_cpus::get();
-    
+
     data.chunks(chunk_size)
         .collect::<Vec<_>>()
         .par_iter()  // 使用rayon进行并行处理
@@ -1131,7 +1131,7 @@ cfg_if::cfg_if! {
 #[cfg(target_family = "unix")]
 fn fork_process() -> Result<(), Error> {
     use nix::unistd::{fork, ForkResult};
-    
+
     match unsafe { fork() } {
         Ok(ForkResult::Parent { child }) => {
             println!("Parent process, child pid: {}", child);
@@ -1141,7 +1141,7 @@ fn fork_process() -> Result<(), Error> {
         }
         Err(err) => return Err(err.into()),
     }
-    
+
     Ok(())
 }
 ```

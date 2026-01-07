@@ -53,7 +53,7 @@
 ### ✅ 已完成任务 (8/10)
 
 | 任务ID | 任务名称 | 完成状态 | 完成日期 | 完成度 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- '
 | 1 | 创建 Rust 1.90 高级特性演示模块 | ✅ 完成 | 2025-01-27 | 100% |
 | 2 | 实现 WebAssembly 支持演示 | ✅ 完成 | 2025-01-27 | 100% |
 | 3 | 添加更多高级模式匹配示例 | ✅ 完成 | 2025-01-27 | 100% |
@@ -66,13 +66,13 @@
 ### 🔄 进行中任务 (0/10)
 
 | 任务ID | 任务名称 | 进行状态 | 开始日期 | 完成度 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- '
 | - | 暂无进行中任务 | - | - | - |
 
 ### ⏳ 待开始任务 (2/10)
 
 | 任务ID | 任务名称 | 状态 | 优先级 | 预计完成日期 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- '
 | 9 | 添加内存安全高级演示 | ⏳ 待开始 | 中 | 2025-01-28 |
 | 10 | 实现宏系统高级用法 | ⏳ 待开始 | 低 | 2025-01-29 |
 

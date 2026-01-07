@@ -97,7 +97,7 @@
 **主题分类**:
 
 | 主题 | 问题数 | 涵盖内容 |
- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- '
 | 基础问题 | 5 | Cargo.toml vs Lock, 提交策略, 版本选择等 |
 | 依赖管理 | 5 | 版本更新, 冲突解决, Resolver 3等 |
 | 特性系统 | 4 | Features使用, 可选依赖, 特性传播等 |
@@ -469,7 +469,7 @@ FAQ:          1 个   (+1)
 ### 文档分类统计
 
 | 类别 | 数量 | 总行数 | 平均行数 | 代码示例 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- '
 | 核心文档 | 11 | 5500+ | 500+ | 120+ |
 | 可视化图表 | 3 | 1000+ | 330+ | 15+ |
 | 可运行示例 | 3 | 3500+ | 1170+ | 25+ |
@@ -493,7 +493,7 @@ FAQ:          1 个   (+1)
 ### 图表统计
 
 | 类型 | 数量 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | Mermaid 流程图 | 10+ | 展示流程和决策 |
 | Mermaid 关系图 | 5+ | 展示依赖关系 |
 | 目录树结构 | 10+ | 展示项目结构 |
@@ -615,7 +615,7 @@ FAQ问答:   ████████████ 100% ✅
 ### 预期效果
 
 | 指标 | 提升幅度 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- '
 | 学习效率 | **+50%** ⬆️ | 清晰路径，丰富示例 |
 | 问题解决 | **+70%** ⬆️ | FAQ 覆盖常见问题 |
 | 代码质量 | **+40%** ⬆️ | 遵循最佳实践 |

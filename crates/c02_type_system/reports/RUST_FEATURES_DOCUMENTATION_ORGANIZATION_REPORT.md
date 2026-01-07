@@ -69,7 +69,7 @@ crates/c02_type_system/
 ## 📈 文档质量
 
 | 指标 | 评分 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **组织结构** | ⭐⭐⭐⭐⭐ | 清晰的层次结构 |
 | **可发现性** | ⭐⭐⭐⭐⭐ | 多种导航方式 |
 | **完整性** | ⭐⭐⭐⭐⭐ | 覆盖 Rust 1.89-1.90 |

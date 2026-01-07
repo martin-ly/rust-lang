@@ -119,19 +119,19 @@ where
 {
     // 1. 分配线程栈
     let stack = allocate_thread_stack();
-    
+
     // 2. 创建线程上下文
     let context = ThreadContext::new();
-    
+
     // 3. 设置线程入口点
     let entry_point = move || {
         let result = f();
         result
     };
-    
+
     // 4. 创建操作系统线程
     let os_thread = create_os_thread(entry_point, stack);
-    
+
     // 5. 返回JoinHandle
     JoinHandle::new(os_thread)
 }
@@ -159,7 +159,7 @@ fn round_robin_scheduler(scheduler: &mut Scheduler) -> Option<Thread> {
         // 将当前线程放回就绪队列
         scheduler.ready_queue.push(thread);
     }
-    
+
     // 从就绪队列取出下一个线程
     scheduler.ready_queue.pop()
 }
@@ -172,14 +172,14 @@ fn priority_scheduler(scheduler: &mut Scheduler) -> Option<Thread> {
     // 选择最高优先级的线程
     let mut highest_priority = None;
     let mut selected_thread = None;
-    
+
     for thread in &scheduler.ready_queue {
         if highest_priority.is_none() || thread.priority > highest_priority.unwrap() {
             highest_priority = Some(thread.priority);
             selected_thread = Some(thread.clone());
         }
     }
-    
+
     selected_thread
 }
 ```
@@ -274,11 +274,11 @@ $$\text{Worker} = \text{struct}\{\text{id}: \text{usize}, \text{thread}: \text{O
 fn create_thread_pool(size: usize) -> ThreadPool {
     let (sender, receiver) = mpsc::channel();
     let mut workers = Vec::with_capacity(size);
-    
+
     for id in 0..size {
         workers.push(Worker::new(id, receiver.clone()));
     }
-    
+
     ThreadPool {
         workers,
         sender,
@@ -312,7 +312,7 @@ fn work_stealing_scheduler(worker: &mut Worker) -> Option<Job> {
     if let Some(job) = worker.receiver.try_recv().ok() {
         return Some(job);
     }
-    
+
     // 尝试从其他工作线程窃取任务
     for other_worker in &mut self.workers {
         if other_worker.id != worker.id {
@@ -321,7 +321,7 @@ fn work_stealing_scheduler(worker: &mut Worker) -> Option<Job> {
             }
         }
     }
-    
+
     None
 }
 ```
@@ -383,7 +383,7 @@ fn optimize_thread_creation(pool: &mut ThreadPool) {
         let worker = Worker::new(pool.receiver.clone());
         pool.workers.push(worker);
     }
-    
+
     // 线程生命周期管理
     pool.manage_thread_lifecycle();
 }
@@ -401,10 +401,10 @@ $$\text{ContextSwitchOptimization} = \text{Minimize}(\text{switch\_overhead}) \l
 fn optimize_context_switching(scheduler: &mut Scheduler) {
     // 减少上下文切换频率
     scheduler.set_time_slice(Duration::from_millis(10));
-    
+
     // 优化调度策略
     scheduler.set_policy(SchedulingPolicy::Fair);
-    
+
     // 缓存线程上下文
     scheduler.enable_context_caching();
 }
@@ -424,12 +424,12 @@ fn optimize_memory_locality(threads: &mut [Thread]) {
     for thread in threads {
         thread.align_to_cache_line();
     }
-    
+
     // 避免伪共享
     for thread in threads {
         thread.pad_to_cache_line();
     }
-    
+
     // NUMA感知分配
     for thread in threads {
         thread.bind_to_numa_node();
@@ -449,7 +449,7 @@ fn basic_thread_example() {
         println!("Hello from thread!");
         42
     });
-    
+
     let result = handle.join().unwrap();
     println!("Thread returned: {}", result);
 }
@@ -463,20 +463,20 @@ use std::thread;
 
 fn thread_communication_example() {
     let (tx, rx) = mpsc::channel();
-    
+
     let sender = thread::spawn(move || {
         for i in 0..10 {
             tx.send(i).unwrap();
             println!("Sent: {}", i);
         }
     });
-    
+
     let receiver = thread::spawn(move || {
         for received in rx {
             println!("Received: {}", received);
         }
     });
-    
+
     sender.join().unwrap();
     receiver.join().unwrap();
 }
@@ -508,18 +508,18 @@ enum Message {
 impl ThreadPool {
     fn new(size: usize) -> ThreadPool {
         assert!(size > 0);
-        
+
         let (sender, receiver) = mpsc::channel();
         let receiver = Arc::new(Mutex::new(receiver));
         let mut workers = Vec::with_capacity(size);
-        
+
         for id in 0..size {
             workers.push(Worker::new(id, Arc::clone(&receiver)));
         }
-        
+
         ThreadPool { workers, sender }
     }
-    
+
     fn execute<F>(&self, f: F)
     where
         F: FnOnce() + Send + 'static,
@@ -533,7 +533,7 @@ impl Worker {
     fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Message>>>) -> Worker {
         let thread = thread::spawn(move || loop {
             let message = receiver.lock().unwrap().recv().unwrap();
-            
+
             match message {
                 Message::NewJob(job) => {
                     println!("Worker {} got a job; executing.", id);
@@ -545,7 +545,7 @@ impl Worker {
                 }
             }
         });
-        
+
         Worker {
             id,
             thread: Some(thread),
@@ -558,7 +558,7 @@ impl Drop for ThreadPool {
         for _ in &mut self.workers {
             self.sender.send(Message::Terminate).unwrap();
         }
-        
+
         for worker in &mut self.workers {
             if let Some(thread) = worker.thread.take() {
                 thread.join().unwrap();
@@ -585,33 +585,33 @@ impl WorkStealingScheduler {
         for _ in 0..num_workers {
             local_queues.push(Arc::new(Mutex::new(VecDeque::new())));
         }
-        
+
         WorkStealingScheduler {
             local_queues,
             global_queue: Arc::new(Mutex::new(VecDeque::new())),
         }
     }
-    
+
     fn push_job(&self, worker_id: usize, job: Job) {
         let local_queue = &self.local_queues[worker_id];
         local_queue.lock().unwrap().push_back(job);
     }
-    
+
     fn pop_job(&self, worker_id: usize) -> Option<Job> {
         // 首先尝试从本地队列获取
         if let Some(job) = self.local_queues[worker_id].lock().unwrap().pop_front() {
             return Some(job);
         }
-        
+
         // 尝试从全局队列获取
         if let Some(job) = self.global_queue.lock().unwrap().pop_front() {
             return Some(job);
         }
-        
+
         // 尝试从其他工作线程窃取
         self.steal_job(worker_id)
     }
-    
+
     fn steal_job(&self, worker_id: usize) -> Option<Job> {
         for i in 0..self.local_queues.len() {
             if i != worker_id {
@@ -645,22 +645,22 @@ fn verify_thread_model(model: &ThreadModel) -> bool {
     if !verify_thread_creation(model) {
         return false;
     }
-    
+
     // 检查线程调度
     if !verify_thread_scheduling(model) {
         return false;
     }
-    
+
     // 检查线程同步
     if !verify_thread_synchronization(model) {
         return false;
     }
-    
+
     // 检查死锁
     if has_deadlock(model) {
         return false;
     }
-    
+
     true
 }
 ```
@@ -677,19 +677,19 @@ fn verify_thread_safety(program: &Program) -> bool {
             return false;
         }
     }
-    
+
     // 检查Sync约束
     for shared_data in &program.shared_data {
         if !satisfies_sync_constraint(shared_data) {
             return false;
         }
     }
-    
+
     // 检查数据竞争
     if has_data_race(program) {
         return false;
     }
-    
+
     true
 }
 ```

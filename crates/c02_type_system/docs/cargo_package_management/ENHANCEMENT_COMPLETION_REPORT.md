@@ -384,7 +384,7 @@ FAQ: 28 个高质量问答 ✅
 ### 代码示例统计
 
 | 类型 | 数量 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | Cargo.toml 配置 | 40+ | 各种配置场景 |
 | Rust 代码示例 | 80+ | 完整可运行代码 |
 | Shell 命令 | 30+ | 构建和测试命令 |
@@ -394,7 +394,7 @@ FAQ: 28 个高质量问答 ✅
 ### 主题覆盖统计
 
 | 主题 | 文档数 | 覆盖度 |
- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- '
 | 基础概念 | 2 | 100% ✅ |
 | 依赖管理 | 2 | 100% ✅ |
 | 特性系统 | 2 | 100% ✅ |

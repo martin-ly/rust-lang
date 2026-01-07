@@ -91,7 +91,7 @@
 ### 各模块文档统计
 
 | 模块 | 文档总数 | Rust 1.92 对齐 | 格式问题 | 状态 |
- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- '
 | c01_ownership_borrow_scope | 49 | ✅ 100% | 0 | ✅ 完成 |
 | c02_type_system | 59 | ✅ 100% | 2 | ⚠️ 需修复 |
 | c03_control_fn | 42 | ✅ 100% | 1 | ⚠️ 需修复 |
@@ -240,7 +240,7 @@ Rust 1.92.0 特性
 ### 修复统计
 
 | 模块 | 修复项数 | 状态 |
- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- '
 | c02 | 2 | ✅ 已修复 |
 | c03 | 1 | ✅ 已修复 |
 | c06 | 1 | ✅ 已修复 |
