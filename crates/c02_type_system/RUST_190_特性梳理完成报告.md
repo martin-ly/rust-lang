@@ -64,7 +64,7 @@
 ## 📊 文档质量对比
 
 | 指标 | Rust 1.89 | Rust 1.90 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ----------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ----------- param($match) $match.Value -replace '[-:]+', ' --- '
 | 文档行数 | 478 行 | 900+ 行 |
 | 核心特性 | 6 个 | 8 个 |
 | 代码示例 | 15+ 个 | 30+ 个 |

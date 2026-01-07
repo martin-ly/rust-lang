@@ -22,5 +22,8 @@ pub mod performance_benchmarks;
 pub mod rust_189_threads;
 pub mod rust_190_features;
 pub mod rust_191_features;
+
+// Rust 1.92.0 线程特性实现
+pub mod rust_192_features;
 pub mod synchronization;
 pub mod threads;

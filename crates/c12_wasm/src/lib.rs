@@ -14,6 +14,8 @@ pub mod wasmedge_examples;
 
 // Rust 1.91 新特性模块
 pub mod rust_191_features;
+// Rust 1.92.0 新特性模块
+pub mod rust_192_features;
 
 /// wasm-bindgen 基础示例
 pub mod basic_examples {

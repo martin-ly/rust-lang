@@ -31,6 +31,9 @@ pub mod formal_verification_190;
 // 导出Rust 1.91新特性模块
 pub mod rust_191_features;
 
+// 导出Rust 1.92.0新特性模块
+pub mod rust_192_features;
+
 // 重新导出Rust 1.91新特性
 pub use rust_191_features::{
     const_control_flow,

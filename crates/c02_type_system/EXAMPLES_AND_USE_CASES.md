@@ -98,15 +98,15 @@ impl MathLibrary {
             memory_pool: performance_optimization::MemoryStats::new(),
         }
     }
-    
+
     /// 向量加法（SIMD 优化）
     pub fn vector_add(&self, a: &[f32], b: &[f32]) -> Result<Vec<f32>, MathError> {
         if a.len() != b.len() {
             return Err(MathError::DimensionMismatch);
         }
-        
+
         let mut result = vec![0.0f32; a.len()];
-        
+
         #[cfg(target_arch = "x86_64")]
         {
             unsafe {
@@ -115,25 +115,25 @@ impl MathLibrary {
                 );
             }
         }
-        
+
         #[cfg(not(target_arch = "x86_64"))]
         {
             for i in 0..a.len() {
                 result[i] = a[i] + b[i];
             }
         }
-        
+
         Ok(result)
     }
-    
+
     /// 矩阵乘法（缓存优化）
     pub fn matrix_multiply(&self, a: &Matrix, b: &Matrix) -> Result<Matrix, MathError> {
         if a.cols != b.rows {
             return Err(MathError::DimensionMismatch);
         }
-        
+
         let mut result = Matrix::new(a.rows, b.cols);
-        
+
         // 使用缓存友好的访问模式
         for i in 0..a.rows {
             for k in 0..a.cols {
@@ -145,7 +145,7 @@ impl MathLibrary {
                 }
             }
         }
-        
+
         Ok(result)
     }
 }
@@ -166,11 +166,11 @@ impl Matrix {
             cols,
         }
     }
-    
+
     pub fn get(&self, row: usize, col: usize) -> f32 {
         self.data[row * self.cols + col]
     }
-    
+
     pub fn set(&mut self, row: usize, col: usize, value: f32) {
         self.data[row * self.cols + col] = value;
     }
@@ -199,19 +199,19 @@ impl std::error::Error for MathError {}
 /// 使用示例
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let math_lib = MathLibrary::new();
-    
+
     // 向量加法示例
     let a = vec![1.0, 2.0, 3.0, 4.0];
     let b = vec![5.0, 6.0, 7.0, 8.0];
     let result = math_lib.vector_add(&a, &b)?;
     println!("向量加法结果: {:?}", result);
-    
+
     // 矩阵乘法示例
     let matrix_a = Matrix::new(2, 3);
     let matrix_b = Matrix::new(3, 2);
     let matrix_result = math_lib.matrix_multiply(&matrix_a, &matrix_b)?;
     println!("矩阵乘法结果: {:?}", matrix_result);
-    
+
     Ok(())
 }
 ```
@@ -245,12 +245,12 @@ impl WasmImageProcessor {
             filters: std::collections::HashMap::new(),
         }
     }
-    
+
     /// 应用灰度滤镜
     #[wasm_bindgen]
     pub fn apply_grayscale(&mut self, image_data: &[u8]) -> Result<Vec<u8>, JsValue> {
         let mut result = Vec::with_capacity(image_data.len());
-        
+
         // 处理 RGBA 数据
         for chunk in image_data.chunks(4) {
             if chunk.len() == 4 {
@@ -258,32 +258,32 @@ impl WasmImageProcessor {
                 let g = chunk[1] as f32;
                 let b = chunk[2] as f32;
                 let a = chunk[3];
-                
+
                 // 灰度转换公式
                 let gray = (0.299 * r + 0.587 * g + 0.114 * b) as u8;
-                
+
                 result.push(gray);
                 result.push(gray);
                 result.push(gray);
                 result.push(a);
             }
         }
-        
+
         Ok(result)
     }
-    
+
     /// 应用模糊滤镜
     #[wasm_bindgen]
     pub fn apply_blur(&mut self, image_data: &[u8], width: usize, height: usize) -> Result<Vec<u8>, JsValue> {
         let mut result = vec![0; image_data.len()];
         let kernel = [1, 2, 1, 2, 4, 2, 1, 2, 1]; // 3x3 高斯核
         let kernel_sum = 16;
-        
+
         for y in 1..height-1 {
             for x in 1..width-1 {
                 for c in 0..4 { // RGBA 通道
                     let mut sum = 0;
-                    
+
                     for ky in 0..3 {
                         for kx in 0..3 {
                             let pixel_y = y + ky - 1;
@@ -292,38 +292,38 @@ impl WasmImageProcessor {
                             sum += image_data[pixel_index] as i32 * kernel[ky * 3 + kx];
                         }
                     }
-                    
+
                     let result_index = (y * width + x) * 4 + c;
                     result[result_index] = (sum / kernel_sum) as u8;
                 }
             }
         }
-        
+
         Ok(result)
     }
-    
+
     /// 调整图像大小
     #[wasm_bindgen]
     pub fn resize_image(&mut self, image_data: &[u8], old_width: usize, old_height: usize, new_width: usize, new_height: usize) -> Result<Vec<u8>, JsValue> {
         let mut result = vec![0; new_width * new_height * 4];
-        
+
         let x_ratio = old_width as f32 / new_width as f32;
         let y_ratio = old_height as f32 / new_height as f32;
-        
+
         for y in 0..new_height {
             for x in 0..new_width {
                 let old_x = (x as f32 * x_ratio) as usize;
                 let old_y = (y as f32 * y_ratio) as usize;
-                
+
                 let old_index = (old_y * old_width + old_x) * 4;
                 let new_index = (y * new_width + x) * 4;
-                
+
                 for c in 0..4 {
                     result[new_index + c] = image_data[old_index + c];
                 }
             }
         }
-        
+
         Ok(result)
     }
 }
@@ -394,7 +394,7 @@ impl ConfigManager {
             watchers: Vec::new(),
         }
     }
-    
+
     /// 加载配置
     pub fn load_config<T>(&mut self, key: &str, config: T) -> Result<(), ConfigError>
     where
@@ -405,7 +405,7 @@ impl ConfigManager {
             &type_system_validator::Type::from_type::<T>(),
             &type_system_validator::Type::from_type::<T>(),
         );
-        
+
         if validation_result.is_valid {
             self.configs.insert(key.to_string(), Box::new(config));
             self.notify_watchers(key);
@@ -414,7 +414,7 @@ impl ConfigManager {
             Err(ConfigError::ValidationFailed(validation_result.message))
         }
     }
-    
+
     /// 获取配置
     pub fn get_config<T>(&self, key: &str) -> Result<&T, ConfigError>
     where
@@ -425,12 +425,12 @@ impl ConfigManager {
             .and_then(|config| config.as_any().downcast_ref::<T>())
             .ok_or_else(|| ConfigError::ConfigNotFound(key.to_string()))
     }
-    
+
     /// 添加配置监听器
     pub fn add_watcher(&mut self, watcher: ConfigWatcher) {
         self.watchers.push(watcher);
     }
-    
+
     /// 通知监听器
     fn notify_watchers(&self, key: &str) {
         for watcher in &self.watchers {
@@ -461,7 +461,7 @@ impl ConfigValue for DatabaseConfig {
     fn as_any(&self) -> &dyn std::any::Any {
         self
     }
-    
+
     fn validate(&self) -> Result<(), String> {
         if self.host.is_empty() {
             return Err("数据库主机不能为空".to_string());
@@ -477,7 +477,7 @@ impl ConfigValue for DatabaseConfig {
         }
         Ok(())
     }
-    
+
     fn serialize(&self) -> Result<String, String> {
         serde_json::to_string(self).map_err(|e| e.to_string())
     }
@@ -497,7 +497,7 @@ impl ConfigValue for AppConfig {
     fn as_any(&self) -> &dyn std::any::Any {
         self
     }
-    
+
     fn validate(&self) -> Result<(), String> {
         if self.name.is_empty() {
             return Err("应用名称不能为空".to_string());
@@ -510,7 +510,7 @@ impl ConfigValue for AppConfig {
         }
         Ok(())
     }
-    
+
     fn serialize(&self) -> Result<String, String> {
         serde_json::to_string(self).map_err(|e| e.to_string())
     }
@@ -532,7 +532,7 @@ impl ConfigWatcher {
             callback: Box::new(callback),
         }
     }
-    
+
     pub fn on_config_changed(&self, changed_key: &str) {
         if self.key == changed_key {
             (self.callback)(changed_key);
@@ -565,7 +565,7 @@ impl std::error::Error for ConfigError {}
 /// 使用示例
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut config_manager = ConfigManager::new();
-    
+
     // 加载数据库配置
     let db_config = DatabaseConfig {
         host: "localhost".to_string(),
@@ -575,9 +575,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         password: "password".to_string(),
         max_connections: 100,
     };
-    
+
     config_manager.load_config("database", db_config)?;
-    
+
     // 加载应用配置
     let app_config = AppConfig {
         name: "MyApp".to_string(),
@@ -586,22 +586,22 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         log_level: "info".to_string(),
         features: vec!["feature1".to_string(), "feature2".to_string()],
     };
-    
+
     config_manager.load_config("app", app_config)?;
-    
+
     // 添加配置监听器
     let watcher = ConfigWatcher::new("database".to_string(), |key| {
         println!("配置已更改: {}", key);
     });
     config_manager.add_watcher(watcher);
-    
+
     // 获取配置
     let db_config: &DatabaseConfig = config_manager.get_config("database")?;
     println!("数据库配置: {:?}", db_config);
-    
+
     let app_config: &AppConfig = config_manager.get_config("app")?;
     println!("应用配置: {:?}", app_config);
-    
+
     Ok(())
 }
 ```
@@ -637,7 +637,7 @@ impl AsyncTaskScheduler {
     pub fn new(max_concurrent_tasks: usize) -> Self {
         let (task_sender, mut task_receiver) = mpsc::unbounded_channel();
         let (result_sender, result_receiver) = mpsc::unbounded_channel();
-        
+
         let scheduler = Self {
             task_queue: Arc::new(Mutex::new(VecDeque::new())),
             running_tasks: Arc::new(Mutex::new(HashMap::new())),
@@ -647,20 +647,20 @@ impl AsyncTaskScheduler {
             semaphore: Arc::new(Semaphore::new(max_concurrent_tasks)),
             max_concurrent_tasks,
         };
-        
+
         // 启动任务处理循环
         let scheduler_clone = scheduler.clone();
         tokio::spawn(async move {
             scheduler_clone.task_processing_loop(task_receiver, result_sender).await;
         });
-        
+
         scheduler
     }
-    
+
     /// 提交任务
     pub async fn submit_task(&self, task: Task) -> Result<String, SchedulerError> {
         let task_id = task.id.clone();
-        
+
         // 检查任务依赖
         if let Some(dependencies) = &task.dependencies {
             for dep_id in dependencies {
@@ -669,36 +669,36 @@ impl AsyncTaskScheduler {
                 }
             }
         }
-        
+
         // 发送任务到队列
         self.task_sender.send(task)?;
-        
+
         Ok(task_id)
     }
-    
+
     /// 等待任务完成
     pub async fn wait_for_task(&self, task_id: &str) -> Result<TaskResult, SchedulerError> {
         loop {
             if let Some(result) = self.get_task_result(task_id).await {
                 return Ok(result);
             }
-            
+
             tokio::time::sleep(Duration::from_millis(10)).await;
         }
     }
-    
+
     /// 获取任务结果
     async fn get_task_result(&self, task_id: &str) -> Option<TaskResult> {
         let completed_tasks = self.completed_tasks.lock().unwrap();
         completed_tasks.get(task_id).cloned()
     }
-    
+
     /// 检查任务是否完成
     async fn is_task_completed(&self, task_id: &str) -> bool {
         let completed_tasks = self.completed_tasks.lock().unwrap();
         completed_tasks.contains_key(task_id)
     }
-    
+
     /// 任务处理循环
     async fn task_processing_loop(
         &self,
@@ -708,10 +708,10 @@ impl AsyncTaskScheduler {
         while let Some(task) = task_receiver.recv().await {
             let scheduler = self.clone();
             let result_sender = result_sender.clone();
-            
+
             // 获取信号量许可
             let _permit = self.semaphore.acquire().await.unwrap();
-            
+
             // 启动任务执行
             tokio::spawn(async move {
                 let result = scheduler.execute_task(task.clone()).await;
@@ -719,11 +719,11 @@ impl AsyncTaskScheduler {
             });
         }
     }
-    
+
     /// 执行任务
     async fn execute_task(&self, task: Task) -> TaskResult {
         let start_time = Instant::now();
-        
+
         // 记录任务开始
         {
             let mut running_tasks = self.running_tasks.lock().unwrap();
@@ -733,7 +733,7 @@ impl AsyncTaskScheduler {
                 status: TaskStatus::Running,
             });
         }
-        
+
         // 执行任务
         let result = match task.execute().await {
             Ok(output) => TaskResult {
@@ -751,16 +751,16 @@ impl AsyncTaskScheduler {
                 duration: start_time.elapsed(),
             },
         };
-        
+
         // 记录任务完成
         {
             let mut running_tasks = self.running_tasks.lock().unwrap();
             running_tasks.remove(&task.id);
-            
+
             let mut completed_tasks = self.completed_tasks.lock().unwrap();
             completed_tasks.insert(task.id.clone(), result.clone());
         }
-        
+
         result
     }
 }
@@ -885,7 +885,7 @@ impl TaskExecutor for ExampleTaskExecutor {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let scheduler = AsyncTaskScheduler::new(4); // 最大并发任务数
-    
+
     // 创建任务
     let task1 = Task {
         id: "task1".to_string(),
@@ -897,7 +897,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             duration: Duration::from_secs(1),
         }),
     };
-    
+
     let task2 = Task {
         id: "task2".to_string(),
         name: "任务2".to_string(),
@@ -908,18 +908,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             duration: Duration::from_secs(2),
         }),
     };
-    
+
     // 提交任务
     let task1_id = scheduler.submit_task(task1).await?;
     let task2_id = scheduler.submit_task(task2).await?;
-    
+
     // 等待任务完成
     let result1 = scheduler.wait_for_task(&task1_id).await?;
     let result2 = scheduler.wait_for_task(&task2_id).await?;
-    
+
     println!("任务1结果: {:?}", result1);
     println!("任务2结果: {:?}", result2);
-    
+
     Ok(())
 }
 ```
@@ -1098,6 +1098,6 @@ pub struct MyOptimizedStruct {
 
 ---
 
-**文档版本**: 1.0  
-**最后更新**: 2025年1月27日  
+**文档版本**: 1.0
+**最后更新**: 2025年1月27日
 **维护者**: Rust 类型系统项目组

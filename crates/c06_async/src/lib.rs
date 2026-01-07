@@ -291,6 +291,9 @@ pub mod rust_190_advanced_features;
 /// Rust 1.91 异步特性实现
 pub mod rust_191_features;
 
+/// Rust 1.92.0 异步特性实现
+pub mod rust_192_features;
+
 /// 改进的异步特性实现
 pub mod improved_async_features;
 

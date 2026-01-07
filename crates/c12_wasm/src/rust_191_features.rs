@@ -746,4 +746,3 @@ pub fn demonstrate_rust_191_wasm_features() {
 pub fn get_rust_191_wasm_features_info() -> &'static str {
     "Rust 1.91 WebAssembly Features Module - Comprehensive implementation of Rust 1.91 features in WASM context"
 }
-
