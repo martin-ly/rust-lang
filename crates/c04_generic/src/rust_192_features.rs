@@ -119,17 +119,17 @@ where
 }
 
 /// 泛型生命周期处理器 Trait
-pub trait GenericLifetimeProcessor<T> {
+pub trait GenericLifetimeProcessor<T: ?Sized> {
     /// 处理任意生命周期的引用
     fn process<'a>(&self, input: &'a T) -> &'a T;
 }
 
 /// 恒等生命周期处理器
-pub struct IdentityProcessor<T> {
+pub struct IdentityProcessor<T: ?Sized> {
     _phantom: PhantomData<T>,
 }
 
-impl<T> IdentityProcessor<T> {
+impl<T: ?Sized> IdentityProcessor<T> {
     pub fn new() -> Self {
         Self {
             _phantom: PhantomData,
@@ -137,13 +137,13 @@ impl<T> IdentityProcessor<T> {
     }
 }
 
-impl<T> Default for IdentityProcessor<T> {
+impl<T: ?Sized> Default for IdentityProcessor<T> {
     fn default() -> Self {
         Self::new()
     }
 }
 
-impl<T> GenericLifetimeProcessor<T> for IdentityProcessor<T> {
+impl<T: ?Sized> GenericLifetimeProcessor<T> for IdentityProcessor<T> {
     fn process<'a>(&self, input: &'a T) -> &'a T {
         input
     }
@@ -204,7 +204,7 @@ pub trait ImprovedSizedBound {
     fn process_sized<T: Sized>(&self, value: T) -> T;
 
     /// 处理可能未 Sized 的类型
-    fn process_maybe_unsized<T: ?Sized>(&self, value: &T) -> &T;
+    fn process_maybe_unsized<'a, T: ?Sized>(&self, value: &'a T) -> &'a T;
 }
 
 /// 泛型 Sized 边界处理器实现
@@ -215,7 +215,7 @@ impl ImprovedSizedBound for SizedBoundProcessor {
         value
     }
 
-    fn process_maybe_unsized<T: ?Sized>(&self, value: &T) -> &T {
+    fn process_maybe_unsized<'a, T: ?Sized>(&self, value: &'a T) -> &'a T {
         value
     }
 }

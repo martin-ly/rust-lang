@@ -58,7 +58,7 @@ impl WasmBuffer {
         let read_len = len.min(self.initialized_len);
         let mut result = Vec::with_capacity(read_len);
         for i in 0..read_len {
-            result.push(self.buffer[i].assume_init_read());
+            result.push(unsafe { self.buffer[i].assume_init_read() });
         }
         result
     }
@@ -96,7 +96,7 @@ impl<T> WasmObjectPool<T> {
             return None;
         }
         self.available -= 1;
-        Some(self.pool[self.available].assume_init_read())
+        Some(unsafe { self.pool[self.available].assume_init_read() })
     }
 
     /// 归还对象到池中

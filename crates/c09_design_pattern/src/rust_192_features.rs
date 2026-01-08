@@ -44,7 +44,7 @@ impl<T> ObjectPool<T> {
             return None;
         }
         self.size -= 1;
-        Some(self.pool[self.size].assume_init_read())
+        Some(unsafe { self.pool[self.size].assume_init_read() })
     }
 
     /// 将对象归还到池中
@@ -79,9 +79,7 @@ impl<T> Singleton<T> {
     /// 初始化单例实例
     pub fn init(&mut self, value: T) {
         if !self.initialized {
-            unsafe {
-                self.instance.write(value);
-            }
+            self.instance.write(value);
             self.initialized = true;
         }
     }
@@ -210,6 +208,7 @@ impl std::fmt::Display for PatternError {
 impl std::error::Error for PatternError {}
 
 /// 工厂模式错误处理示例
+#[derive(Debug)]
 pub struct FactoryError {
     inner: PatternError,
 }
@@ -261,16 +260,16 @@ pub fn demonstrate_rust_192_design_patterns() {
 
     // 1. MaybeUninit 在对象池中的应用
     println!("1. MaybeUninit 在对象池中的应用:");
-    let mut pool: ObjectPool<i32> = ObjectPool::new(3);
+    let pool = ObjectPool::<i32>::new(3);
     println!("   可用对象数: {}", pool.available());
 
-    unsafe {
-        // 注意：这只是一个演示，实际使用需要初始化对象
-        // pool.release(42);
-        // if let Some(obj) = pool.acquire() {
-        //     println!("   获取对象: {}", obj);
-        // }
-    }
+    // 注意：这只是一个演示，实际使用需要初始化对象
+    // unsafe {
+    //     pool.release(42);
+    //     if let Some(obj) = pool.acquire() {
+    //         println!("   获取对象: {}", obj);
+    //     }
+    // }
 
     // 2. 单例模式与 MaybeUninit
     println!("\n2. 单例模式与 MaybeUninit:");
