@@ -138,12 +138,15 @@ where
     K: std::hash::Hash + Eq + Clone,
     V: Clone,
 {
-    type Iterator = std::collections::hash_map::Values<'static, K, V>;
+    // 使用正确的生命周期参数，返回借用迭代器
+    // Use correct lifetime parameter to return borrowed iterator
+    type Iterator = std::collections::hash_map::Values<'_, K, V>;
     type Key = K;
 
     fn iter(&self) -> Self::Iterator {
-        // 这里需要处理生命周期问题
-        unimplemented!()
+        // 直接返回 HashMap 的 values 迭代器
+        // Directly return HashMap's values iterator
+        self.data.values()
     }
 
     fn get(&self, key: &Self::Key) -> Option<&V> {

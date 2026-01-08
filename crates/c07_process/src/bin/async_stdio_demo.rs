@@ -8,7 +8,7 @@ use std::collections::HashMap;
 #[cfg(feature = "async")]
 #[tokio::main]
 async fn main() -> Result<()> {
-    println!("🧪 异步标准IO演示（占位API，将返回未实现错误）");
+    println!("🧪 异步标准IO演示（已实现完整功能）");
 
     let mut env = HashMap::new();
     if cfg!(windows) {
@@ -45,13 +45,45 @@ async fn main() -> Result<()> {
     let pid = manager.spawn(config).await?;
     println!("✅ 启动异步进程，PID: {}", pid);
 
-    // 以下API当前为占位，将返回未实现错误
-    let _ = manager.write_stdin(pid, b"hello\n").await.err();
-    let _ = manager.close_stdin(pid).await.err();
-    let _ = manager.read_stdout(pid).await.err();
-    let _ = manager.read_stderr(pid).await.err();
+    // 使用新实现的异步 stdio API
+    println!("📝 写入标准输入...");
+    match manager.write_stdin(pid, b"hello from async\n").await {
+        Ok(()) => println!("✅ 成功写入标准输入"),
+        Err(e) => println!("⚠️ 写入标准输入失败: {}", e),
+    }
 
-    println!("ℹ️ 异步 stdio API 尚未实现，接口预留完毕");
+    println!("🔒 关闭标准输入...");
+    match manager.close_stdin(pid).await {
+        Ok(()) => println!("✅ 成功关闭标准输入"),
+        Err(e) => println!("⚠️ 关闭标准输入失败: {}", e),
+    }
+
+    // 等待进程完成
+    tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
+
+    println!("📖 读取标准输出...");
+    match manager.read_stdout(pid).await {
+        Ok(output) => {
+            let output_str = String::from_utf8_lossy(&output);
+            println!("✅ 标准输出: {}", output_str);
+        }
+        Err(e) => println!("⚠️ 读取标准输出失败: {}", e),
+    }
+
+    println!("📖 读取标准错误...");
+    match manager.read_stderr(pid).await {
+        Ok(output) => {
+            let output_str = String::from_utf8_lossy(&output);
+            if !output_str.is_empty() {
+                println!("✅ 标准错误: {}", output_str);
+            } else {
+                println!("ℹ️ 标准错误为空");
+            }
+        }
+        Err(e) => println!("⚠️ 读取标准错误失败: {}", e),
+    }
+
+    println!("✅ 异步 stdio API 演示完成");
     Ok(())
 }
 

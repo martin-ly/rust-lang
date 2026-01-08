@@ -109,19 +109,19 @@ pub enum EventType {
     /// 网络 I/O 事件
     /// Network I/O event
     NetworkIo,
-    
+
     /// 定时器事件
     /// Timer event
     Timer,
-    
+
     /// 用户输入事件
     /// User input event
     UserInput,
-    
+
     /// 系统信号事件
     /// System signal event
     SystemSignal,
-    
+
     /// 自定义事件
     /// Custom event
     Custom(String),
@@ -136,13 +136,13 @@ pub enum EventType {
 pub enum Priority {
     /// 低优先级 (Low priority)
     Low = 0,
-    
+
     /// 普通优先级 (Normal priority)
     Normal = 1,
-    
+
     /// 高优先级 (High priority)
     High = 2,
-    
+
     /// 紧急优先级 (Critical priority)
     Critical = 3,
 }
@@ -156,19 +156,19 @@ pub enum Priority {
 pub struct Event {
     /// 事件 ID (Event ID)
     pub id: u64,
-    
+
     /// 事件类型 (Event type)
     pub event_type: EventType,
-    
+
     /// 事件优先级 (Event priority)
     pub priority: Priority,
-    
+
     /// 事件数据 (Event data)
     pub data: Vec<u8>,
-    
+
     /// 创建时间 (Creation time)
     pub timestamp: Instant,
-    
+
     /// 元数据 (Metadata)
     pub metadata: HashMap<String, String>,
 }
@@ -191,7 +191,7 @@ impl Event {
             metadata: HashMap::new(),
         }
     }
-    
+
     /// 添加元数据
     /// Add metadata
     pub fn with_metadata(mut self, key: String, value: String) -> Self {
@@ -231,13 +231,13 @@ impl Eq for Event {}
 pub enum HandleResult {
     /// 成功处理 (Successfully handled)
     Success,
-    
+
     /// 处理失败 (Handling failed)
     Failed(String),
-    
+
     /// 需要重新调度 (Needs rescheduling)
     Reschedule(Duration),
-    
+
     /// 产生新事件 (Generated new events)
     GenerateEvents(Vec<Event>),
 }
@@ -258,11 +258,11 @@ pub trait EventHandler: Send + Sync {
     /// # 返回值 (Returns)
     /// 处理结果 (Handling result)
     async fn handle(&self, event: &Event) -> HandleResult;
-    
+
     /// 获取处理器名称
     /// Get handler name
     fn name(&self) -> &str;
-    
+
     /// 是否可以处理该事件类型
     /// Can handle this event type
     fn can_handle(&self, event_type: &EventType) -> bool;
@@ -279,16 +279,16 @@ pub trait EventHandler: Send + Sync {
 pub struct ReactorStats {
     /// 处理的事件总数 (Total events processed)
     pub events_processed: u64,
-    
+
     /// 失败的事件数 (Failed events)
     pub events_failed: u64,
-    
+
     /// 重新调度的事件数 (Rescheduled events)
     pub events_rescheduled: u64,
-    
+
     /// 平均处理时间 (微秒) (Average processing time in microseconds)
     pub avg_processing_time_us: u64,
-    
+
     /// 当前队列长度 (Current queue length)
     pub queue_length: usize,
 }
@@ -299,13 +299,13 @@ pub struct ReactorStats {
 pub struct ReactorConfig {
     /// 最大队列长度 (Maximum queue length)
     pub max_queue_length: usize,
-    
+
     /// 批处理大小 (Batch size)
     pub batch_size: usize,
-    
+
     /// 是否启用优先级调度 (Enable priority scheduling)
     pub enable_priority: bool,
-    
+
     /// 统计更新间隔 (Statistics update interval)
     pub stats_interval: Duration,
 }
@@ -329,26 +329,26 @@ impl Default for ReactorConfig {
 pub struct Reactor {
     /// 配置 (Configuration)
     config: ReactorConfig,
-    
+
     /// 事件队列 (Event queue)
     /// 使用优先级队列实现优先级调度
     /// Uses priority queue for priority scheduling
     event_queue: Arc<Mutex<BinaryHeap<Event>>>,
-    
+
     /// FIFO 队列 (用于非优先级模式)
     /// FIFO queue (for non-priority mode)
     fifo_queue: Arc<Mutex<VecDeque<Event>>>,
-    
+
     /// 事件处理器映射 (Event handler map)
     handlers: Arc<RwLock<HashMap<EventType, Arc<dyn EventHandler>>>>,
-    
+
     /// 统计信息 (Statistics)
     stats: Arc<RwLock<ReactorStats>>,
-    
+
     /// 关闭信号 (Shutdown signal)
     shutdown_tx: mpsc::Sender<()>,
     shutdown_rx: Arc<Mutex<mpsc::Receiver<()>>>,
-    
+
     /// 事件 ID 计数器 (Event ID counter)
     next_event_id: Arc<Mutex<u64>>,
 }
@@ -364,7 +364,7 @@ impl Reactor {
     /// Reactor 实例 (Reactor instance)
     pub fn new(config: ReactorConfig) -> Self {
         let (shutdown_tx, shutdown_rx) = mpsc::channel(1);
-        
+
         Self {
             config,
             event_queue: Arc::new(Mutex::new(BinaryHeap::new())),
@@ -376,7 +376,7 @@ impl Reactor {
             next_event_id: Arc::new(Mutex::new(0)),
         }
     }
-    
+
     /// 注册事件处理器
     /// Register event handler
     ///
@@ -397,7 +397,7 @@ impl Reactor {
         );
         handlers.insert(event_type, handler);
     }
-    
+
     /// 提交事件
     /// Submit event
     ///
@@ -410,7 +410,7 @@ impl Reactor {
     pub async fn submit_event(&self, event: Event) -> Result<(), String> {
         let span = span!(Level::DEBUG, "submit_event", event_id = event.id);
         let _enter = span.enter();
-        
+
         // 检查队列长度
         // Check queue length
         if self.config.enable_priority {
@@ -423,7 +423,7 @@ impl Reactor {
                 );
                 return Err("Event queue is full".to_string());
             }
-            
+
             debug!(
                 event_id = event.id,
                 event_type = ?event.event_type,
@@ -436,7 +436,7 @@ impl Reactor {
             if queue.len() >= self.config.max_queue_length {
                 return Err("Event queue is full".to_string());
             }
-            
+
             debug!(
                 event_id = event.id,
                 event_type = ?event.event_type,
@@ -444,10 +444,10 @@ impl Reactor {
             );
             queue.push_back(event);
         }
-        
+
         Ok(())
     }
-    
+
     /// 批量提交事件
     /// Submit events in batch
     pub async fn submit_events_batch(&self, events: Vec<Event>) -> Result<(), String> {
@@ -456,7 +456,7 @@ impl Reactor {
         }
         Ok(())
     }
-    
+
     /// 生成新的事件 ID
     /// Generate new event ID
     async fn next_id(&self) -> u64 {
@@ -465,7 +465,7 @@ impl Reactor {
         *id += 1;
         current
     }
-    
+
     /// 创建事件
     /// Create event
     pub async fn create_event(
@@ -477,7 +477,7 @@ impl Reactor {
         let id = self.next_id().await;
         Event::new(id, event_type, priority, data)
     }
-    
+
     /// 运行事件循环
     /// Run event loop
     ///
@@ -486,7 +486,7 @@ impl Reactor {
     #[instrument(skip(self))]
     pub async fn run(&self) {
         info!("Starting Reactor event loop");
-        
+
         // 启动统计更新任务
         // Start statistics update task
         let stats = self.stats.clone();
@@ -505,9 +505,9 @@ impl Reactor {
                 );
             }
         });
-        
+
         let mut shutdown_rx = self.shutdown_rx.lock().await;
-        
+
         loop {
             tokio::select! {
                 // 检查关闭信号
@@ -516,16 +516,16 @@ impl Reactor {
                     info!("Received shutdown signal, stopping event loop");
                     break;
                 }
-                
+
                 // 处理事件
                 // Process events
                 _ = self.process_events_batch() => {}
             }
         }
-        
+
         info!("Reactor event loop stopped");
     }
-    
+
     /// 批量处理事件
     /// Process events in batch
     ///
@@ -534,7 +534,7 @@ impl Reactor {
     async fn process_events_batch(&self) {
         let batch_size = self.config.batch_size;
         let mut events = Vec::with_capacity(batch_size);
-        
+
         // 从队列中取出事件
         // Dequeue events
         if self.config.enable_priority {
@@ -556,14 +556,14 @@ impl Reactor {
                 }
             }
         }
-        
+
         // 如果没有事件，短暂休眠
         // If no events, sleep briefly
         if events.is_empty() {
             sleep(Duration::from_millis(10)).await;
             return;
         }
-        
+
         // 并发处理事件
         // Process events concurrently
         let handles: Vec<_> = events
@@ -571,44 +571,60 @@ impl Reactor {
             .map(|event| {
                 let handlers = self.handlers.clone();
                 let stats = self.stats.clone();
+                let next_event_id = self.next_event_id.clone();
+                let event_queue = self.event_queue.clone();
+                let fifo_queue = self.fifo_queue.clone();
+                let config = self.config.clone();
                 tokio::spawn(async move {
-                    Self::process_single_event(event, handlers, stats).await
+                    Self::process_single_event(
+                        event,
+                        handlers,
+                        stats,
+                        next_event_id,
+                        event_queue,
+                        fifo_queue,
+                        config,
+                    ).await
                 })
             })
             .collect();
-        
+
         // 等待所有事件处理完成
         // Wait for all events to complete
         for handle in handles {
             handle.await.ok();
         }
     }
-    
+
     /// 处理单个事件
     /// Process single event
-    #[instrument(skip(event, handlers, stats))]
+    #[instrument(skip(event, handlers, stats, next_event_id, event_queue, fifo_queue, config))]
     async fn process_single_event(
         event: Event,
         handlers: Arc<RwLock<HashMap<EventType, Arc<dyn EventHandler>>>>,
         stats: Arc<RwLock<ReactorStats>>,
+        next_event_id: Arc<Mutex<u64>>,
+        event_queue: Arc<Mutex<BinaryHeap<Event>>>,
+        fifo_queue: Arc<Mutex<VecDeque<Event>>>,
+        config: ReactorConfig,
     ) {
         let start = Instant::now();
         let event_id = event.id;
         let event_type = event.event_type.clone();
-        
+
         debug!(
             event_id = event_id,
             event_type = ?event_type,
             "Processing event"
         );
-        
+
         // 查找处理器
         // Find handler
         let handler = {
             let handlers = handlers.read().await;
             handlers.get(&event_type).cloned()
         };
-        
+
         match handler {
             Some(handler) => {
                 // 调用处理器
@@ -620,13 +636,13 @@ impl Reactor {
                             handler_name = handler.name(),
                             "Event handled successfully"
                         );
-                        
+
                         // 更新统计
                         // Update statistics
                         let mut stats = stats.write().await;
                         stats.events_processed += 1;
                         let elapsed = start.elapsed().as_micros() as u64;
-                        stats.avg_processing_time_us = 
+                        stats.avg_processing_time_us =
                             (stats.avg_processing_time_us * (stats.events_processed - 1) + elapsed)
                             / stats.events_processed;
                     }
@@ -636,7 +652,7 @@ impl Reactor {
                             reason = reason,
                             "Event handling failed"
                         );
-                        
+
                         let mut stats = stats.write().await;
                         stats.events_failed += 1;
                     }
@@ -646,12 +662,55 @@ impl Reactor {
                             delay_ms = delay.as_millis(),
                             "Event rescheduled"
                         );
-                        
+
                         let mut stats = stats.write().await;
                         stats.events_rescheduled += 1;
-                        
-                        // TODO: 实现重新调度逻辑
-                        // TODO: Implement rescheduling logic
+
+                        // 实现重新调度逻辑
+                        // Implement rescheduling logic
+                        // 创建一个新的延迟事件，更新时间戳
+                        // Create a new delayed event with updated timestamp
+                        let mut rescheduled_event = event.clone();
+                        rescheduled_event.timestamp = Instant::now() + delay;
+                        rescheduled_event.id = {
+                            let mut next_id = next_event_id.lock().await;
+                            *next_id += 1;
+                            *next_id
+                        };
+
+                        // 将重新调度的事件提交回队列
+                        // Submit the rescheduled event back to the queue
+                        let submit_result = if config.enable_priority {
+                            let mut queue = event_queue.lock().await;
+                            if queue.len() >= config.max_queue_length {
+                                Err("Event queue is full".to_string())
+                            } else {
+                                queue.push(rescheduled_event);
+                                Ok(())
+                            }
+                        } else {
+                            let mut queue = fifo_queue.lock().await;
+                            if queue.len() >= config.max_queue_length {
+                                Err("Event queue is full".to_string())
+                            } else {
+                                queue.push_back(rescheduled_event);
+                                Ok(())
+                            }
+                        };
+
+                        if let Err(e) = submit_result {
+                            error!(
+                                event_id = event_id,
+                                error = e,
+                                "Failed to reschedule event"
+                            );
+                        } else {
+                            debug!(
+                                event_id = event_id,
+                                delay_ms = delay.as_millis(),
+                                "Event successfully rescheduled"
+                            );
+                        }
                     }
                     HandleResult::GenerateEvents(new_events) => {
                         info!(
@@ -659,9 +718,71 @@ impl Reactor {
                             new_events_count = new_events.len(),
                             "Event generated new events"
                         );
-                        
-                        // TODO: 提交新生成的事件
-                        // TODO: Submit newly generated events
+
+                        // 提交新生成的事件
+                        // Submit newly generated events
+                        let mut submitted_count = 0;
+                        let mut failed_count = 0;
+
+                        for mut new_event in new_events {
+                            // 为新事件分配 ID
+                            // Assign ID to new event
+                            new_event.id = {
+                                let mut next_id = next_event_id.lock().await;
+                                *next_id += 1;
+                                *next_id
+                            };
+
+                            // 提交到队列
+                            // Submit to queue
+                            let submit_result = if config.enable_priority {
+                                let mut queue = event_queue.lock().await;
+                                if queue.len() >= config.max_queue_length {
+                                    Err("Event queue is full".to_string())
+                                } else {
+                                    queue.push(new_event);
+                                    Ok(())
+                                }
+                            } else {
+                                let mut queue = fifo_queue.lock().await;
+                                if queue.len() >= config.max_queue_length {
+                                    Err("Event queue is full".to_string())
+                                } else {
+                                    queue.push_back(new_event);
+                                    Ok(())
+                                }
+                            };
+
+                            match submit_result {
+                                Ok(()) => {
+                                    submitted_count += 1;
+                                    debug!(
+                                        parent_event_id = event_id,
+                                        new_event_id = submitted_count,
+                                        "New event submitted successfully"
+                                    );
+                                }
+                                Err(e) => {
+                                    failed_count += 1;
+                                    error!(
+                                        parent_event_id = event_id,
+                                        error = e,
+                                        "Failed to submit new event"
+                                    );
+                                }
+                            }
+                        }
+
+                        // 更新统计信息
+                        // Update statistics
+                        if submitted_count > 0 {
+                            debug!(
+                                event_id = event_id,
+                                submitted = submitted_count,
+                                failed = failed_count,
+                                "Generated events submission completed"
+                            );
+                        }
                     }
                 }
             }
@@ -671,19 +792,19 @@ impl Reactor {
                     event_type = ?event_type,
                     "No handler found for event type"
                 );
-                
+
                 let mut stats = stats.write().await;
                 stats.events_failed += 1;
             }
         }
     }
-    
+
     /// 获取统计信息
     /// Get statistics
     pub async fn get_stats(&self) -> ReactorStats {
         self.stats.read().await.clone()
     }
-    
+
     /// 关闭 Reactor
     /// Shutdown Reactor
     pub async fn shutdown(&self) {
@@ -712,18 +833,18 @@ impl EventHandler for NetworkIoHandler {
             data_size = event.data.len(),
             "Handling network I/O event"
         );
-        
+
         // 模拟网络 I/O 处理
         // Simulate network I/O processing
         sleep(Duration::from_millis(10)).await;
-        
+
         HandleResult::Success
     }
-    
+
     fn name(&self) -> &str {
         &self.name
     }
-    
+
     fn can_handle(&self, event_type: &EventType) -> bool {
         matches!(event_type, EventType::NetworkIo)
     }
@@ -743,18 +864,18 @@ impl EventHandler for TimerHandler {
             event_id = event.id,
             "Handling timer event"
         );
-        
+
         // 模拟定时器处理
         // Simulate timer processing
         sleep(Duration::from_millis(5)).await;
-        
+
         HandleResult::Success
     }
-    
+
     fn name(&self) -> &str {
         &self.name
     }
-    
+
     fn can_handle(&self, event_type: &EventType) -> bool {
         matches!(event_type, EventType::Timer)
     }
@@ -774,18 +895,18 @@ impl EventHandler for UserInputHandler {
             event_id = event.id,
             "Handling user input event"
         );
-        
+
         // 模拟用户输入处理
         // Simulate user input processing
         sleep(Duration::from_millis(15)).await;
-        
+
         HandleResult::Success
     }
-    
+
     fn name(&self) -> &str {
         &self.name
     }
-    
+
     fn can_handle(&self, event_type: &EventType) -> bool {
         matches!(event_type, EventType::UserInput)
     }
@@ -801,12 +922,12 @@ impl EventHandler for UserInputHandler {
 async fn basic_example() {
     println!("\n=== 基础示例: 简单的事件处理 ===");
     println!("=== Basic Example: Simple Event Processing ===\n");
-    
+
     // 创建 Reactor
     // Create Reactor
     let config = ReactorConfig::default();
     let reactor = Arc::new(Reactor::new(config));
-    
+
     // 注册处理器
     // Register handlers
     reactor.register_handler(
@@ -815,14 +936,14 @@ async fn basic_example() {
             name: "NetworkHandler".to_string(),
         }),
     ).await;
-    
+
     reactor.register_handler(
         EventType::Timer,
         Arc::new(TimerHandler {
             name: "TimerHandler".to_string(),
         }),
     ).await;
-    
+
     // 提交事件
     // Submit events
     for i in 0..5 {
@@ -833,7 +954,7 @@ async fn basic_example() {
         ).await;
         reactor.submit_event(event).await.ok();
     }
-    
+
     for i in 0..3 {
         let event = reactor.create_event(
             EventType::Timer,
@@ -842,18 +963,18 @@ async fn basic_example() {
         ).await;
         reactor.submit_event(event).await.ok();
     }
-    
+
     // 运行 Reactor (在后台)
     // Run Reactor (in background)
     let reactor_clone = reactor.clone();
     let reactor_handle = tokio::spawn(async move {
         reactor_clone.run().await;
     });
-    
+
     // 等待一段时间让事件处理完成
     // Wait for events to be processed
     sleep(Duration::from_secs(2)).await;
-    
+
     // 获取统计信息
     // Get statistics
     let stats = reactor.get_stats().await;
@@ -861,7 +982,7 @@ async fn basic_example() {
     println!("  处理的事件数 (Events processed): {}", stats.events_processed);
     println!("  失败的事件数 (Events failed): {}", stats.events_failed);
     println!("  平均处理时间 (Avg processing time): {} μs", stats.avg_processing_time_us);
-    
+
     // 关闭 Reactor
     // Shutdown Reactor
     reactor.shutdown().await;
@@ -873,13 +994,13 @@ async fn basic_example() {
 async fn priority_scheduling_example() {
     println!("\n=== 高级示例: 优先级调度 ===");
     println!("=== Advanced Example: Priority Scheduling ===\n");
-    
+
     let config = ReactorConfig {
         enable_priority: true,
         ..Default::default()
     };
     let reactor = Arc::new(Reactor::new(config));
-    
+
     // 注册处理器
     reactor.register_handler(
         EventType::UserInput,
@@ -887,7 +1008,7 @@ async fn priority_scheduling_example() {
             name: "UserInputHandler".to_string(),
         }),
     ).await;
-    
+
     // 提交不同优先级的事件
     // Submit events with different priorities
     let priorities = vec![
@@ -897,7 +1018,7 @@ async fn priority_scheduling_example() {
         Priority::High,
         Priority::Low,
     ];
-    
+
     for (i, priority) in priorities.iter().enumerate() {
         let event = Event::new(
             i as u64,
@@ -908,15 +1029,15 @@ async fn priority_scheduling_example() {
         println!("提交事件 {} (优先级: {:?})", i, priority);
         reactor.submit_event(event).await.ok();
     }
-    
+
     // 运行并观察处理顺序
     let reactor_clone = reactor.clone();
     let reactor_handle = tokio::spawn(async move {
         reactor_clone.run().await;
     });
-    
+
     sleep(Duration::from_secs(2)).await;
-    
+
     reactor.shutdown().await;
     reactor_handle.await.ok();
 }
@@ -926,28 +1047,28 @@ async fn priority_scheduling_example() {
 async fn performance_test() {
     println!("\n=== 性能测试: 高吞吐量场景 ===");
     println!("=== Performance Test: High Throughput Scenario ===\n");
-    
+
     let config = ReactorConfig {
         max_queue_length: 100000,
         batch_size: 500,
         ..Default::default()
     };
     let reactor = Arc::new(Reactor::new(config));
-    
+
     reactor.register_handler(
         EventType::NetworkIo,
         Arc::new(NetworkIoHandler {
             name: "FastNetworkHandler".to_string(),
         }),
     ).await;
-    
+
     // 提交大量事件
     // Submit many events
     let num_events = 10000;
     println!("提交 {} 个事件...", num_events);
-    
+
     let start = Instant::now();
-    
+
     for i in 0..num_events {
         let event = Event::new(
             i,
@@ -957,31 +1078,31 @@ async fn performance_test() {
         );
         reactor.submit_event(event).await.ok();
     }
-    
+
     let submit_time = start.elapsed();
     println!("事件提交完成，耗时: {:?}", submit_time);
-    
+
     // 运行 Reactor
     let reactor_clone = reactor.clone();
     let reactor_handle = tokio::spawn(async move {
         reactor_clone.run().await;
     });
-    
+
     // 等待处理完成
     sleep(Duration::from_secs(5)).await;
-    
+
     let stats = reactor.get_stats().await;
     let total_time = start.elapsed();
-    
+
     println!("\n性能统计 (Performance Statistics):");
     println!("  总事件数 (Total events): {}", num_events);
     println!("  处理的事件数 (Events processed): {}", stats.events_processed);
     println!("  总耗时 (Total time): {:?}", total_time);
-    println!("  吞吐量 (Throughput): {:.2} events/sec", 
+    println!("  吞吐量 (Throughput): {:.2} events/sec",
         stats.events_processed as f64 / total_time.as_secs_f64());
-    println!("  平均处理时间 (Avg processing time): {} μs", 
+    println!("  平均处理时间 (Avg processing time): {} μs",
         stats.avg_processing_time_us);
-    
+
     reactor.shutdown().await;
     reactor_handle.await.ok();
 }
@@ -998,18 +1119,18 @@ async fn main() {
     tracing_subscriber::fmt()
         .with_max_level(Level::INFO)
         .init();
-    
+
     println!("╔════════════════════════════════════════════════════════════════╗");
     println!("║  Reactor 模式完整实现与形式化分析 2025                         ║");
     println!("║  Comprehensive Reactor Pattern Implementation 2025             ║");
     println!("╚════════════════════════════════════════════════════════════════╝");
-    
+
     // 运行示例
     // Run examples
     basic_example().await;
     priority_scheduling_example().await;
     performance_test().await;
-    
+
     println!("\n✅ 所有示例运行完成！");
     println!("✅ All examples completed!\n");
 }
@@ -1022,7 +1143,7 @@ async fn main() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[tokio::test]
     async fn test_event_creation() {
         let event = Event::new(
@@ -1031,46 +1152,46 @@ mod tests {
             Priority::Normal,
             vec![1, 2, 3],
         );
-        
+
         assert_eq!(event.id, 1);
         assert_eq!(event.priority, Priority::Normal);
         assert_eq!(event.data, vec![1, 2, 3]);
     }
-    
+
     #[tokio::test]
     async fn test_event_priority_ordering() {
         let mut heap = BinaryHeap::new();
-        
+
         heap.push(Event::new(1, EventType::NetworkIo, Priority::Low, vec![]));
         heap.push(Event::new(2, EventType::NetworkIo, Priority::Critical, vec![]));
         heap.push(Event::new(3, EventType::NetworkIo, Priority::Normal, vec![]));
-        
+
         // Critical 应该最先出队
         // Critical should be dequeued first
         let first = heap.pop().unwrap();
         assert_eq!(first.priority, Priority::Critical);
     }
-    
+
     #[tokio::test]
     async fn test_reactor_creation() {
         let config = ReactorConfig::default();
         let reactor = Reactor::new(config);
-        
+
         let stats = reactor.get_stats().await;
         assert_eq!(stats.events_processed, 0);
     }
-    
+
     #[tokio::test]
     async fn test_handler_registration() {
         let reactor = Reactor::new(ReactorConfig::default());
-        
+
         reactor.register_handler(
             EventType::NetworkIo,
             Arc::new(NetworkIoHandler {
                 name: "TestHandler".to_string(),
             }),
         ).await;
-        
+
         let handlers = reactor.handlers.read().await;
         assert!(handlers.contains_key(&EventType::NetworkIo));
     }

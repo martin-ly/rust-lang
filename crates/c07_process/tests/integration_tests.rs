@@ -61,3 +61,126 @@ fn test_config_defaults() {
     assert_eq!(sync_config.fair, true);
     assert_eq!(sync_config.max_waiters, None);
 }
+
+#[cfg(feature = "async")]
+mod async_tests {
+    use super::*;
+    use c07_process::AsyncProcessManager;
+    use std::collections::HashMap;
+
+    #[tokio::test]
+    async fn test_async_process_manager_creation() {
+        let manager = AsyncProcessManager::new().await;
+        let processes = manager.list_all().await;
+        assert_eq!(processes.len(), 0);
+    }
+
+    #[tokio::test]
+    async fn test_async_process_spawn_and_kill() {
+        let manager = AsyncProcessManager::new().await;
+        let mut env = HashMap::new();
+        if cfg!(windows) {
+            env.insert("PATH".to_string(), "C:\\Windows\\System32".to_string());
+        } else {
+            env.insert("PATH".to_string(), "/usr/bin:/bin".to_string());
+        }
+
+        let config = if cfg!(windows) {
+            ProcessConfig {
+                program: "cmd".to_string(),
+                args: vec!["/c".to_string(), "echo test".to_string()],
+                env,
+                working_dir: Some(".".to_string()),
+                user_id: None,
+                group_id: None,
+                priority: None,
+                resource_limits: ResourceLimits::default(),
+            }
+        } else {
+            ProcessConfig {
+                program: "echo".to_string(),
+                args: vec!["test".to_string()],
+                env,
+                working_dir: Some(".".to_string()),
+                user_id: None,
+                group_id: None,
+                priority: None,
+                resource_limits: ResourceLimits::default(),
+            }
+        };
+
+        let pid = manager.spawn(config).await.unwrap();
+        assert!(pid > 0);
+
+        // 获取进程信息
+        let info = manager.get_info(pid).await.unwrap();
+        assert_eq!(info.pid, pid);
+
+        // 列出所有进程
+        let processes = manager.list_all().await;
+        assert!(processes.iter().any(|p| p.pid == pid));
+
+        // 终止进程
+        let result = manager.kill(pid).await;
+        assert!(result.is_ok());
+    }
+
+    #[tokio::test]
+    async fn test_async_process_not_found() {
+        let manager = AsyncProcessManager::new().await;
+        let invalid_pid = 99999;
+
+        assert!(manager.get_info(invalid_pid).await.is_err());
+        assert!(manager.kill(invalid_pid).await.is_err());
+    }
+
+    #[tokio::test]
+    async fn test_async_process_list_all() {
+        let manager = AsyncProcessManager::new().await;
+        let processes = manager.list_all().await;
+        assert_eq!(processes.len(), 0);
+
+        let mut env = HashMap::new();
+        if cfg!(windows) {
+            env.insert("PATH".to_string(), "C:\\Windows\\System32".to_string());
+        } else {
+            env.insert("PATH".to_string(), "/usr/bin:/bin".to_string());
+        }
+
+        let config = if cfg!(windows) {
+            ProcessConfig {
+                program: "cmd".to_string(),
+                args: vec!["/c".to_string(), "echo test".to_string()],
+                env,
+                working_dir: Some(".".to_string()),
+                user_id: None,
+                group_id: None,
+                priority: None,
+                resource_limits: ResourceLimits::default(),
+            }
+        } else {
+            ProcessConfig {
+                program: "echo".to_string(),
+                args: vec!["test".to_string()],
+                env,
+                working_dir: Some(".".to_string()),
+                user_id: None,
+                group_id: None,
+                priority: None,
+                resource_limits: ResourceLimits::default(),
+            }
+        };
+
+        let pid1 = manager.spawn(config.clone()).await.unwrap();
+        let pid2 = manager.spawn(config).await.unwrap();
+
+        let processes = manager.list_all().await;
+        assert!(processes.len() >= 2);
+        assert!(processes.iter().any(|p| p.pid == pid1));
+        assert!(processes.iter().any(|p| p.pid == pid2));
+
+        // 清理
+        let _ = manager.kill(pid1).await;
+        let _ = manager.kill(pid2).await;
+    }
+}
