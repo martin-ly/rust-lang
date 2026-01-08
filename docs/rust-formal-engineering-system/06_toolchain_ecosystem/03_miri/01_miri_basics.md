@@ -277,6 +277,7 @@ cargo miri test
 ### 问题 1：Miri 运行缓慢
 
 **解决方案**：
+
 - 只对关键测试使用 Miri
 - 使用 `#[cfg(miri)]` 条件编译
 - 减少测试数据量
@@ -284,6 +285,7 @@ cargo miri test
 ### 问题 2：误报
 
 **解决方案**：
+
 - 检查代码逻辑
 - 使用 `#[allow(unsafe_op_in_unsafe_fn)]` 等属性
 - 查看 Miri 的详细输出
@@ -291,6 +293,7 @@ cargo miri test
 ### 问题 3：某些库不兼容
 
 **解决方案**：
+
 - 使用 `#[cfg(not(miri))]` 跳过不兼容的测试
 - 寻找替代库
 - 报告问题给库维护者
@@ -304,5 +307,6 @@ cargo miri test
 ---
 
 **导航**:
+
 - 返回索引: [`00_index.md`](./00_index.md)
 - 返回工具链生态: [`../00_index.md`](../00_index.md)

@@ -24,7 +24,7 @@
       - [`crates/c01_ownership_borrow_scope/src/`](#cratesc01_ownership_borrow_scopesrc)
       - [`crates/c03_control_fn/src/`](#cratesc03_control_fnsrc)
     - [快速开始示例](#快速开始示例)
-  - [� 内容文档](#-内容文档)
+  - [📚 内容文档](#-内容文档)
   - [🔗 相关索引](#-相关索引)
   - [🧭 导航](#-导航)
 

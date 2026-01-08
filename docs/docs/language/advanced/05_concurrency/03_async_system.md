@@ -143,7 +143,7 @@ $$\frac{\Gamma \vdash f_1 : \text{Future}[\tau_1] \quad \Gamma \vdash f_2 : \tex
 ```rust
 trait Future {
     type Output;
-    
+
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
 }
 
@@ -152,7 +152,7 @@ where
     T: Future,
 {
     type Output = T::Output;
-    
+
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
         T::poll(self, cx)
     }
@@ -224,7 +224,7 @@ $$\text{Executor} = \text{struct}\{\text{thread\_pool}: \text{ThreadPool}, \text
 fn schedule_task(runtime: &mut AsyncRuntime, task: AsyncTask) {
     // 将任务加入队列
     runtime.task_queue.push(task);
-    
+
     // 通知执行器
     runtime.executor.wake();
 }
@@ -258,15 +258,15 @@ fn event_loop(runtime: &mut AsyncRuntime) {
     loop {
         // 轮询事件
         let events = runtime.reactor.poll_events();
-        
+
         // 处理事件
         for event in events {
             runtime.handle_event(event);
         }
-        
+
         // 调度任务
         runtime.executor.run_until_idle();
-        
+
         // 检查是否应该退出
         if runtime.should_exit() {
             break;
@@ -303,16 +303,16 @@ $$\frac{\Gamma \vdash \text{file}: \text{AsyncFile} \quad \Gamma \vdash \text{da
 impl AsyncFile {
     async fn read_async(&mut self, buffer: &mut [u8]) -> Result<usize, std::io::Error> {
         let file_descriptor = self.file_descriptor;
-        
+
         // 注册I/O事件
         let registration = self.runtime.register_io_event(
             file_descriptor,
             IOEvent::Readable,
         );
-        
+
         // 等待I/O完成
         registration.await;
-        
+
         // 执行实际读取
         self.file.read(buffer)
     }
@@ -349,13 +349,13 @@ $$\frac{\Gamma \vdash s: \text{AsyncStream}[\tau] \quad \Gamma \vdash p: \text{f
 ```rust
 trait AsyncStream {
     type Item;
-    
+
     fn next(&mut self) -> impl Future<Output = Option<Self::Item>>;
 }
 
 impl<T> AsyncStream for Vec<T> {
     type Item = T;
-    
+
     async fn next(&mut self) -> Option<Self::Item> {
         if self.is_empty() {
             None
@@ -386,7 +386,7 @@ $$\text{TaskState} = \text{enum}\{\text{Ready}, \text{Running}, \text{Blocked}, 
 fn priority_scheduler(tasks: &mut Vec<AsyncTask>) -> Option<AsyncTask> {
     // 按优先级排序
     tasks.sort_by(|a, b| b.priority.cmp(&a.priority));
-    
+
     // 返回最高优先级的就绪任务
     tasks.iter_mut()
         .find(|task| task.state == TaskState::Ready)
@@ -405,19 +405,19 @@ fn work_stealing_scheduler(local_queue: &mut VecDeque<AsyncTask>) -> Option<Asyn
     if let Some(task) = local_queue.pop_front() {
         return Some(task);
     }
-    
+
     // 尝试从全局队列窃取任务
     if let Some(task) = global_queue.lock().unwrap().pop_front() {
         return Some(task);
     }
-    
+
     // 尝试从其他工作线程窃取任务
     for other_queue in &other_queues {
         if let Some(task) = other_queue.lock().unwrap().pop_back() {
             return Some(task);
         }
     }
-    
+
     None
 }
 ```
@@ -435,7 +435,7 @@ fn manage_task_lifecycle(runtime: &mut AsyncRuntime) {
                 runtime.running_tasks.push(task.clone());
             }
         }
-        
+
         // 执行运行中的任务
         for task in &mut runtime.running_tasks {
             match task.poll() {
@@ -449,7 +449,7 @@ fn manage_task_lifecycle(runtime: &mut AsyncRuntime) {
                 }
             }
         }
-        
+
         // 检查阻塞任务是否就绪
         for task in &mut runtime.blocked_tasks {
             if task.is_ready() {
@@ -473,19 +473,19 @@ $$\text{AsyncPerformanceOptimization} = \text{Maximize}(\text{throughput}) \land
 ```rust
 fn analyze_async_performance(runtime: &AsyncRuntime) -> PerformanceMetrics {
     let mut metrics = PerformanceMetrics::new();
-    
+
     // 测量吞吐量
     metrics.throughput = measure_async_throughput(runtime);
-    
+
     // 测量延迟
     metrics.latency = measure_async_latency(runtime);
-    
+
     // 测量资源使用
     metrics.resource_usage = measure_resource_usage(runtime);
-    
+
     // 识别瓶颈
     metrics.bottlenecks = identify_async_bottlenecks(runtime);
-    
+
     metrics
 }
 ```
@@ -502,13 +502,13 @@ $$\text{AsyncMemoryOptimization} = \text{Minimize}(\text{allocation\_overhead}) 
 fn optimize_async_memory(runtime: &mut AsyncRuntime) {
     // 对象池
     let object_pool = ObjectPool::new();
-    
+
     // 内存预分配
     runtime.preallocate_memory();
-    
+
     // 零拷贝优化
     runtime.enable_zero_copy();
-    
+
     // 内存对齐
     runtime.align_memory_layout();
 }
@@ -526,13 +526,13 @@ $$\text{AsyncSchedulingOptimization} = \text{Minimize}(\text{context\_switches})
 fn optimize_async_scheduling(runtime: &mut AsyncRuntime) {
     // 批量处理
     runtime.enable_batch_processing();
-    
+
     // 优先级调度
     runtime.set_priority_scheduling();
-    
+
     // 负载均衡
     runtime.enable_load_balancing();
-    
+
     // 缓存优化
     runtime.optimize_task_cache();
 }
@@ -558,7 +558,7 @@ struct BasicAsyncFunction;
 
 impl Future for BasicAsyncFunction {
     type Output = i32;
-    
+
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
         // 检查是否完成
         if is_completed() {
@@ -583,11 +583,11 @@ async fn async_io_example() -> Result<(), std::io::Error> {
     let mut file = File::open("input.txt").await?;
     let mut contents = String::new();
     file.read_to_string(&mut contents).await?;
-    
+
     // 异步写入文件
     let mut output_file = File::create("output.txt").await?;
     output_file.write_all(contents.as_bytes()).await?;
-    
+
     Ok(())
 }
 ```
@@ -600,14 +600,14 @@ use tokio_stream::{Stream, StreamExt};
 async fn async_stream_example() {
     // 创建异步流
     let stream = tokio_stream::iter(1..=10);
-    
+
     // 流处理
     let result: Vec<i32> = stream
         .map(|x| x * 2)
         .filter(|&x| x % 4 == 0)
         .collect()
         .await;
-    
+
     println!("Result: {:?}", result);
 }
 
@@ -619,10 +619,10 @@ struct CustomStream {
 
 impl Stream for CustomStream {
     type Item = i32;
-    
+
     fn poll_next(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>> {
         let this = self.get_mut();
-        
+
         if this.current >= this.max {
             Poll::Ready(None)
         } else {
@@ -642,7 +642,7 @@ use tokio::task;
 
 async fn async_task_scheduling_example() {
     let runtime = Runtime::new().unwrap();
-    
+
     // 创建异步任务
     let task1 = task::spawn(async {
         println!("Task 1 started");
@@ -650,18 +650,18 @@ async fn async_task_scheduling_example() {
         println!("Task 1 completed");
         1
     });
-    
+
     let task2 = task::spawn(async {
         println!("Task 2 started");
         tokio::time::sleep(tokio::time::Duration::from_secs(2)).await;
         println!("Task 2 completed");
         2
     });
-    
+
     // 等待任务完成
     let result1 = task1.await.unwrap();
     let result2 = task2.await.unwrap();
-    
+
     println!("Results: {}, {}", result1, result2);
 }
 
@@ -676,14 +676,14 @@ impl CustomScheduler {
             tasks: VecDeque::new(),
         }
     }
-    
+
     fn spawn<F>(&mut self, future: F)
     where
         F: Future<Output = ()> + Send + 'static,
     {
         self.tasks.push_back(Box::new(future));
     }
-    
+
     async fn run(&mut self) {
         while let Some(mut task) = self.tasks.pop_front() {
             // 执行任务
@@ -713,22 +713,22 @@ fn verify_async_system(system: &AsyncSystem) -> bool {
     if !verify_task_execution(system) {
         return false;
     }
-    
+
     // 检查调度公平性
     if !verify_scheduling_fairness(system) {
         return false;
     }
-    
+
     // 检查I/O操作
     if !verify_async_io(system) {
         return false;
     }
-    
+
     // 检查死锁
     if has_deadlock(system) {
         return false;
     }
-    
+
     true
 }
 ```
@@ -745,19 +745,19 @@ fn verify_async_safety(program: &AsyncProgram) -> bool {
             return false;
         }
     }
-    
+
     // 检查异步函数安全
     for async_fn in &program.async_functions {
         if !is_async_function_safe(async_fn) {
             return false;
         }
     }
-    
+
     // 检查并发安全
     if !is_concurrent_safe(program) {
         return false;
     }
-    
+
     true
 }
 ```
