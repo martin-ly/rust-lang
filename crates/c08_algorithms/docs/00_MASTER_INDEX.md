@@ -51,10 +51,12 @@ docs/
 │   ├── ALGORITHM_INDEX_RUST_189.md
 │   └── 08_algorithms_basics.md
 │
-└── archives/                                  # 📦 归档文档
+└── archive/                                   # 📦 归档文档
     ├── README.md
-    ├── OVERVIEW.md
-    └── DOCUMENTATION_INDEX.md
+    ├── C08_ENHANCEMENT_COMPLETION_REPORT_2025_10_19.md
+    ├── LEETCODE_FINAL_SUMMARY_2025_11_01.md
+    ├── LEETCODE_INTEGRATION_SUMMARY_2025_11_01.md
+    └── PROGRESS_UPDATE_2025_11_01.md
 ```
 
 ---
@@ -375,8 +377,9 @@ Week 4: 实战项目
 
 ---
 
-**版本**: 2.0.0
-**文档重组日期**: 2025-10-19
+**版本**: 2.1.0
+**文档重组日期**: 2025-12-11
 **维护状态**: ✅ 活跃维护
+**重组完成**: ✅ 归档目录已创建，历史报告已归档
 
 🚀 **欢迎使用 C08 Algorithms 文档体系！**

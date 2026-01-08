@@ -45,12 +45,12 @@ impl<T> ThreadSafeUninitBuffer<T> {
 
     /// 获取已初始化的引用
     pub unsafe fn get(&self, index: usize) -> &T {
-        self.buffer[index].assume_init_ref()
+        unsafe { self.buffer[index].assume_init_ref() }
     }
 
     /// 获取可变引用
     pub unsafe fn get_mut(&mut self, index: usize) -> &mut T {
-        self.buffer[index].assume_init_mut()
+        unsafe { self.buffer[index].assume_init_mut() }
     }
 }
 
@@ -90,7 +90,7 @@ impl ThreadPoolQueue {
     pub unsafe fn pop(&mut self) -> Option<ThreadTask> {
         if self.initialized_count > 0 {
             self.initialized_count -= 1;
-            Some(self.tasks[self.initialized_count].assume_init_read())
+            Some(unsafe { self.tasks[self.initialized_count].assume_init_read() })
         } else {
             None
         }

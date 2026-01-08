@@ -19,9 +19,11 @@ use std::panic::Location;
 /// 使用 #[track_caller] 和 #[no_mangle] 组合的错误处理函数
 ///
 /// Rust 1.92.0: 允许在同一个函数上同时使用这两个属性
+/// 注意：#[track_caller] 需要 Rust ABI，不能与 extern "C" 一起使用
+/// Rust 1.92.0: #[no_mangle] 现在需要使用 unsafe 包装
 #[track_caller]
-#[no_mangle]
-pub extern "C" fn tracked_panic_handler(message: *const u8, len: usize) {
+#[unsafe(no_mangle)]
+pub fn tracked_panic_handler(message: *const u8, len: usize) {
     let caller = Location::caller();
     let msg = unsafe {
         std::str::from_utf8(std::slice::from_raw_parts(message, len))
@@ -40,7 +42,7 @@ pub extern "C" fn tracked_panic_handler(message: *const u8, len: usize) {
 macro_rules! tracked_assert {
     ($condition:expr, $msg:expr) => {{
         #[track_caller]
-        #[no_mangle]
+        #[unsafe(no_mangle)]
         fn assert_failed(msg: &str) {
             let caller = Location::caller();
             panic!("Assertion failed at {}:{}: {}", caller.file(), caller.line(), msg);
@@ -53,9 +55,11 @@ macro_rules! tracked_assert {
 }
 
 /// 控制流检查函数，结合 #[track_caller] 和 #[no_mangle]
+/// 注意：#[track_caller] 需要 Rust ABI，不能与 extern "C" 一起使用
+/// Rust 1.92.0: #[no_mangle] 现在需要使用 unsafe 包装
 #[track_caller]
-#[no_mangle]
-pub extern "C" fn control_flow_check(condition: bool) -> i32 {
+#[unsafe(no_mangle)]
+pub fn control_flow_check(condition: bool) -> i32 {
     let caller = Location::caller();
     if condition {
         println!("Control flow check passed at {}:{}", caller.file(), caller.line());
@@ -122,6 +126,7 @@ pub fn create_error_report() -> String {
 }
 
 /// 错误上下文结构体
+#[derive(Debug, Clone)]
 pub struct ErrorContext {
     pub file: &'static str,
     pub line: u32,

@@ -12,7 +12,7 @@
 ### 📊 完成情况统计
 
 | 指标 | 数值 | 状态 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **已完成分类** | 7 个 | ✅ |
 | **已实现题目** | 70+ 题 | ✅ |
 | **代码量** | 3600+ 行 | ✅ |
@@ -24,7 +24,7 @@
 ### ✅ 已完成分类详情
 
 | 分类 | 题目数 | 测试数 | 代码行数 | 状态 |
- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **Array** | 12+ | 12 | ~610 | ✅ 完成 |
 | **Two Pointers** | 8+ | 8 | ~480 | ✅ 完成 |
 | **Binary Search** | 10+ | 10 | ~520 | ✅ 完成 |

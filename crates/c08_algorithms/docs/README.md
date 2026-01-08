@@ -112,11 +112,11 @@
 
 **[→ 查看完整参考目录](./references/README.md)**
 
-### 6. 📦 归档文档 (archives/)
+### 6. 📦 归档文档 (archive/)
 
 已被新版本替代的旧文档，保留用于历史参考。
 
-**[→ 查看归档目录](./archives/README.md)**
+**[→ 查看归档目录](./archive/README.md)**
 
 ---
 

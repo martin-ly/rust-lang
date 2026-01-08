@@ -230,7 +230,7 @@ impl ImprovedSizedBound for SizedBoundProcessor {
 /// 多约束泛型函数
 ///
 /// Rust 1.92.0: 改进的约束处理
-pub fn multi_constraint_generic<T, U, V>(t: T, u: U) -> V
+pub fn multi_constraint_generic<T, U, V>(_t: T, u: U) -> V
 where
     T: Clone + Send,
     U: Clone + Send + Into<V>,

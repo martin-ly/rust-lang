@@ -467,7 +467,7 @@ cargo test dijkstra_visual -- --nocapture
 ### 文档统计
 
 | 类别 | 数量 | 总大小 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | 新增核心文档 | 6 | ~238KB |
 | 知识图谱 | 1 | ~45KB |
 | 多维矩阵对比 | 1 | ~38KB |
@@ -498,7 +498,7 @@ cargo test dijkstra_visual -- --nocapture
 ### Rust 1.90 特性应用1
 
 | 特性 | 应用次数 | 示例数量 |
- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- '
 | `async fn in trait` | 15+ | 10+ |
 | `rayon` 并行 | 20+ | 15+ |
 | `const generics` | 5+ | 5+ |
