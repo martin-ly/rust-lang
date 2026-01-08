@@ -53,6 +53,8 @@
     - [🌟 2025年新增核心文档](#-2025年新增核心文档)
     - [📖 原有文档](#-原有文档)
     - [🔬 形式化理论](#-形式化理论)
+    - [使用指南](#使用指南)
+    - [项目文档](#项目文档)
   - [🤝 贡献](#-贡献)
     - [贡献方式](#贡献方式)
   - [📈 路线图](#-路线图)
@@ -980,6 +982,17 @@ kubectl get pods -n rust-async-190
 - 🔄 **[并发模型理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/04_concurrency_models/)** - 并发模型的形式化描述
 - 🎭 **[Actor 模型理论](../../docs/rust-formal-engineering-system/02_programming_paradigms/09_actor_model/)** - Actor 模式的形式化定义
 - 🔗 **[CSP 模型理论](../../docs/rust-formal-engineering-system/03_design_patterns/04_concurrent/)** - CSP 模式的形式化分析
+
+### 使用指南
+
+- **[异步编程使用指南](../../docs/ASYNC_PROGRAMMING_USAGE_GUIDE.md)** ⭐ NEW! - 完整的异步编程使用指南
+- **[快速参考卡片](../../docs/quick_reference/async_patterns.md)** - 异步编程速查卡
+- **[综合网络异步演示](../../examples/comprehensive_network_async_demo.rs)** ⭐ NEW! - 网络+异步整合示例
+
+### 项目文档
+
+- **[项目最佳实践指南](../../docs/BEST_PRACTICES_GUIDE.md)** - 代码质量、性能优化、测试指南
+- **[性能调优指南](../../docs/PERFORMANCE_TUNING_GUIDE.md)** - 完整的性能调优指南
 
 **学习路径**: 实践代码 → 形式化理论 → 深入理解
 

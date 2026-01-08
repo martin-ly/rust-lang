@@ -5,6 +5,31 @@
 //! Glommio 是由 DataDog 开发的基于 io_uring 的异步运行时，
 //! 专为 Linux 平台的极致性能设计。
 //!
+//! ## 📐 知识结构
+//!
+//! ### 核心概念
+//!
+//! - **Glommio**: 基于 io_uring 的高性能异步运行时
+//!   - **属性**: Thread-per-core、io_uring、NUMA感知、零拷贝
+//!   - **关系**: 与异步运行时、高性能I/O、Linux系统编程相关
+//!
+//! ### 思维导图
+//!
+//! ```text
+//! Glommio 演示
+//! │
+//! ├── Thread-per-core 架构
+//! │   └── 每个核心一个线程
+//! ├── io_uring I/O
+//! │   └── 高性能异步I/O
+//! ├── NUMA 感知
+//! │   └── 多socket优化
+//! ├── CPU 亲和性
+//! │   └── CPU绑定
+//! └── 跨执行器通信
+//!     └── Channel Mesh
+//! ```
+//!
 //! ## 核心特性
 //!
 //! 1. **Thread-per-core 架构** - 每个 CPU 核心一个线程
@@ -332,4 +357,3 @@ fn main() {
     println!("   需要 Linux 5.1+ 版本 (io_uring 支持)");
     println!("\n💡 提示: 请在 Linux 系统上运行此示例");
 }
-

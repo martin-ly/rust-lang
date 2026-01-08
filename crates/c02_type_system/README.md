@@ -50,6 +50,8 @@
     - [Rust 1.89](#rust-189)
   - [📦 Cargo 包管理文档](#-cargo-包管理文档)
     - [🔬 形式化理论](#-形式化理论)
+  - [📚 知识结构文档](#-知识结构文档)
+    - [知识结构体系](#知识结构体系)
 
 ## 🎉 2025-10-22 全面重构完成
 
@@ -429,6 +431,18 @@ Week 2:
 - 🔒 **[内存安全语义](../../docs/rust-formal-engineering-system/01_theoretical_foundations/02_memory_safety/)** - 内存安全的形式化保证
 
 **学习路径**: 实践代码 → 形式化理论 → 深入理解
+
+---
+
+## 📚 知识结构文档
+
+### 知识结构体系
+
+- **[知识结构框架](../../docs/KNOWLEDGE_STRUCTURE_FRAMEWORK.md)** ⭐ NEW! - 完整知识结构体系（概念定义、属性、关系、解释、证明）
+- **[多维概念矩阵](../../docs/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** ⭐ NEW! - 类型系统对比矩阵
+- **[思维导图集合](../../docs/MIND_MAP_COLLECTION.md)** ⭐ NEW! - 类型系统思维导图
+- **[决策图网](../../DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
+- **[证明图网](../../PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
 
 ---
 

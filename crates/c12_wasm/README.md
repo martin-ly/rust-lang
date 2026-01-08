@@ -92,6 +92,21 @@
 - 📖 [WasmEdge 2025 快速开始](./WASMEDGE_2025_QUICK_START.md) - 15分钟上手指南
 - 📊 [WasmEdge 2025 完成报告](./WASMEDGE_2025_ADVANCEMENT_REPORT.md) - 项目深化总结
 
+## 📚 知识结构文档
+
+### 知识结构体系
+
+- **[知识结构框架](../../docs/KNOWLEDGE_STRUCTURE_FRAMEWORK.md)** ⭐ NEW! - 完整知识结构体系（概念定义、属性、关系、解释、证明）
+- **[多维概念矩阵](../../docs/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** ⭐ NEW! - WASM 对比矩阵
+- **[思维导图集合](../../docs/MIND_MAP_COLLECTION.md)** ⭐ NEW! - WASM 思维导图
+- **[决策图网](../../DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
+- **[证明图网](../../PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
+
+### 使用指南
+
+- **[WASM 使用指南](../../docs/WASM_USAGE_GUIDE.md)** ⭐ NEW! - 完整使用指南
+- **[WASM 速查卡](../../docs/quick_reference/wasm_cheatsheet.md)** ⭐ NEW! - 快速参考
+
 ---
 
 **模块类型**: 高级学习模块 + 跨平台开发

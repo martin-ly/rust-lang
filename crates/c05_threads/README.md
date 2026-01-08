@@ -59,7 +59,13 @@
   - [路线图](#路线图)
   - [依赖](#依赖)
   - [注意事项](#注意事项)
+  - [📚 相关资源](#-相关资源)
+    - [使用指南](#使用指南)
+    - [项目文档](#项目文档)
   - [贡献](#贡献)
+  - [📚 知识结构文档](#-知识结构文档)
+    - [知识结构体系](#知识结构体系)
+    - [使用指南](#使用指南-1)
   - [许可证](#许可证)
 
 ## 🎯 最新更新 (2025-11-15) ✨
@@ -580,9 +586,36 @@ cargo test synchronization::adaptive_locks
 3. **内存管理**: 使用`crossbeam-epoch`进行安全的内存管理
 4. **错误处理**: 完善的错误处理和恢复机制
 
+## 📚 相关资源
+
+### 使用指南
+
+- **[线程并发使用指南](../../docs/THREADS_CONCURRENCY_USAGE_GUIDE.md)** ⭐ NEW! - 完整的线程与并发使用指南
+- **[快速参考卡片](../../docs/quick_reference/threads_concurrency_cheatsheet.md)** - 线程与并发速查卡
+
+### 项目文档
+
+- **[项目最佳实践指南](../../docs/BEST_PRACTICES_GUIDE.md)** - 代码质量、性能优化、测试指南
+- **[性能调优指南](../../docs/PERFORMANCE_TUNING_GUIDE.md)** - 完整的性能调优指南
+- **[故障排查指南](../../docs/TROUBLESHOOTING_GUIDE.md)** - 常见问题排查和解决方案
+
 ## 贡献
 
 欢迎贡献代码、报告问题或提出改进建议！
+
+## 📚 知识结构文档
+
+### 知识结构体系
+
+- **[知识结构框架](../../docs/KNOWLEDGE_STRUCTURE_FRAMEWORK.md)** ⭐ NEW! - 完整知识结构体系（概念定义、属性、关系、解释、证明）
+- **[多维概念矩阵](../../docs/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** ⭐ NEW! - 并发模型对比矩阵
+- **[思维导图集合](../../docs/MIND_MAP_COLLECTION.md)** ⭐ NEW! - 线程并发思维导图
+- **[决策图网](../../DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
+- **[证明图网](../../PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
+
+### 使用指南
+
+- **[线程并发使用指南](../../docs/THREADS_CONCURRENCY_USAGE_GUIDE.md)** ⭐ NEW! - 完整使用指南
 
 ## 许可证
 

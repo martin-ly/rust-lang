@@ -1,3 +1,28 @@
+//! gRPC 服务器示例
+//!
+//! ## 📐 知识结构
+//!
+//! ### 核心概念
+//!
+//! - **gRPC**: 高性能、跨语言的RPC框架
+//!   - **属性**: Protocol Buffers、HTTP/2、流式传输、跨语言
+//!   - **关系**: 与RPC、微服务、网络编程相关
+//!
+//! ### 思维导图
+//!
+//! ```text
+//! gRPC 服务器演示
+//! │
+//! ├── 服务定义
+//! │   └── Protocol Buffers
+//! ├── 服务实现
+//! │   └── Trait实现
+//! ├── 服务器启动
+//! │   └── Tonic服务器
+//! └── 请求处理
+//!     └── 异步处理
+//! ```
+
 use tonic::{Request, Response, Status};
 use c10_networks::hello::{HelloRequest, HelloReply};
 

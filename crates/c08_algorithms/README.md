@@ -44,8 +44,14 @@
     - [测试覆盖率](#测试覆盖率)
   - [🚀 贡献指南](#-贡献指南)
     - [贡献类型](#贡献类型)
+  - [� 知识结构文档](#-知识结构文档)
+    - [知识结构体系](#知识结构体系)
+    - [使用指南](#使用指南)
   - [📄 许可证](#-许可证)
   - [🙏 致谢](#-致谢)
+  - [📚 相关资源](#-相关资源)
+    - [使用指南](#使用指南-1)
+    - [项目文档](#项目文档)
   - [📞 联系方式](#-联系方式)
 
 ## 🎯 最新更新 (2025-11-15) ✨
@@ -480,6 +486,20 @@ cargo llvm-cov test --workspace --html
 
 ---
 
+## 📚 知识结构文档
+
+### 知识结构体系
+
+- **[知识结构框架](../../docs/KNOWLEDGE_STRUCTURE_FRAMEWORK.md)** ⭐ NEW! - 完整知识结构体系（概念定义、属性、关系、解释、证明）
+- **[多维概念矩阵](../../docs/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** ⭐ NEW! - 算法对比矩阵
+- **[思维导图集合](../../docs/MIND_MAP_COLLECTION.md)** ⭐ NEW! - 算法思维导图
+- **[决策图网](../../DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
+- **[证明图网](../../PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
+
+### 使用指南
+
+- **[算法速查卡](../../docs/quick_reference/algorithms_cheatsheet.md)** ⭐ NEW! - 快速参考
+
 ## 📄 许可证
 
 本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
@@ -492,6 +512,18 @@ cargo llvm-cov test --workspace --html
 
 ---
 
+## 📚 相关资源
+
+### 使用指南
+
+- **[算法综合演示程序](../../examples/algorithm_comprehensive_demo.rs)** ⭐ NEW! - 排序/搜索/图/动态规划/数据结构综合示例
+- **[快速参考卡片](../../docs/quick_reference/algorithms_cheatsheet.md)** ⭐ NEW! - 算法与数据结构速查卡
+
+### 项目文档
+
+- **[项目最佳实践指南](../../docs/BEST_PRACTICES_GUIDE.md)** - 代码质量、性能优化、测试指南
+- **[性能调优指南](../../docs/PERFORMANCE_TUNING_GUIDE.md)** - 完整的性能调优指南
+
 ## 📞 联系方式
 
 - **项目主页**: [GitHub Repository]
@@ -500,6 +532,6 @@ cargo llvm-cov test --workspace --html
 
 ---
 
-**最后更新**: 2025年1月27日
-**Rust版本**: 1.89.0
+**最后更新**: 2025-12-11
+**Rust版本**: 1.92.0
 **项目状态**: 🟢 活跃开发中

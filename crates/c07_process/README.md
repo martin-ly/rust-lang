@@ -62,13 +62,17 @@
     - [标准 IO 管道演示](#标准-io-管道演示)
     - [异步标准 IO 演示](#异步标准-io-演示)
     - [Rust 1.90 新特性演示](#rust-190-新特性演示)
-    - [Rust 1.92.0 新特性演示 ⭐ NEW!](#rust-1920-新特性演示--new)
+    - [Rust 1.92.0 新特性演示 ⭐ NEW](#rust-1920-新特性演示--new)
     - [增强的异步功能演示](#增强的异步功能演示)
     - [增强的IPC通信演示](#增强的ipc通信演示)
     - [增强的同步原语演示](#增强的同步原语演示)
     - [增强的错误处理演示](#增强的错误处理演示)
+    - [性能优化演示 ⭐ NEW](#性能优化演示--new)
   - [🤝 贡献](#-贡献)
   - [📄 许可证](#-许可证)
+  - [� 知识结构文档](#-知识结构文档)
+    - [知识结构体系](#知识结构体系)
+    - [使用指南](#使用指南)
   - [🔗 相关链接](#-相关链接)
 
 一个功能完整的 Rust 进程管理和 IPC 通信库，提供进程生命周期管理、进程间通信和同步原语等功能。
@@ -296,6 +300,7 @@ cargo run --bin group_control_demo
 - **[05_async_process_management.md](docs/05_async_process_management.md)** - 异步进程管理
 - **[06_cross_platform_process_management.md](docs/06_cross_platform_process_management.md)** - 跨平台进程管理
 - **[07_performance_optimization.md](docs/07_performance_optimization.md)** - 性能优化技术
+- **[performance_optimization_usage_guide.md](docs/performance_optimization_usage_guide.md)** ⭐ NEW! - 性能优化使用指南
 - **[08_security_and_sandboxing.md](docs/08_security_and_sandboxing.md)** - 安全与沙箱
 
 ### API 文档
@@ -508,6 +513,24 @@ cargo run --features async --bin enhanced_error_demo
 - 错误通知和告警
 - 错误统计和趋势分析
 
+### 性能优化演示 ⭐ NEW
+
+```bash
+cargo run --features async --example performance_optimization_demo
+```
+
+**说明**: 演示性能优化功能的使用，包括内存优化、CPU优化、I/O优化和性能监控。
+
+**功能包括**:
+
+- 内存使用优化（根据内存压力自动调整策略）
+- CPU性能提升（自定义优化函数）
+- I/O性能改进（读写优化）
+- 性能监控（实时统计和历史数据）
+- 缓存管理（智能缓存策略）
+
+**详细指南**: 查看 [性能优化使用指南](./docs/performance_optimization_usage_guide.md) 获取完整的 API 文档和使用示例。
+
 ## 🤝 贡献
 
 欢迎提交 Issue 和 Pull Request！
@@ -515,6 +538,20 @@ cargo run --features async --bin enhanced_error_demo
 ## 📄 许可证
 
 本项目采用 MIT 许可证。
+
+## 📚 知识结构文档
+
+### 知识结构体系
+
+- **[知识结构框架](../../docs/KNOWLEDGE_STRUCTURE_FRAMEWORK.md)** ⭐ NEW! - 完整知识结构体系（概念定义、属性、关系、解释、证明）
+- **[多维概念矩阵](../../docs/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** ⭐ NEW! - 进程管理对比矩阵
+- **[思维导图集合](../../docs/MIND_MAP_COLLECTION.md)** ⭐ NEW! - 进程管理思维导图
+- **[决策图网](../../DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
+- **[证明图网](../../PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
+
+### 使用指南
+
+- **[进程管理速查卡](../../docs/quick_reference/process_management_cheatsheet.md)** ⭐ NEW! - 快速参考
 
 ## 🔗 相关链接
 

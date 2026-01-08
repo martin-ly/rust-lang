@@ -9,6 +9,11 @@
 
 - [Tier 3: Tokio 完整 API 参考](#tier-3-tokio-完整-api-参考)
   - [📋 目录](#-目录)
+  - [📐 知识结构](#-知识结构)
+    - [概念定义](#概念定义)
+    - [属性特征](#属性特征)
+    - [关系连接](#关系连接)
+    - [思维导图](#思维导图)
   - [🎯 文档说明](#-文档说明)
   - [1. Runtime API](#1-runtime-api)
     - [1.1 创建运行时](#11-创建运行时)
@@ -42,6 +47,63 @@
     - [9.1 Cargo Features](#91-cargo-features)
   - [📚 延伸阅读](#-延伸阅读)
   - [📝 总结](#-总结)
+
+## 📐 知识结构
+
+### 概念定义
+
+**Tokio API 参考 (Tokio API Reference)**:
+
+- **定义**: Tokio 异步运行时完整 API 的技术参考文档
+- **类型**: API 参考文档
+- **范畴**: 异步编程、API 文档
+- **版本**: Tokio 1.x, Rust 1.39+
+- **相关概念**: 异步运行时、Future、Task、Channel
+
+### 属性特征
+
+**核心属性**:
+
+- **完整性**: 涵盖所有 Tokio API
+- **准确性**: 准确的 API 签名和说明
+- **可查找性**: 按模块组织
+- **实用性**: 提供使用示例
+
+### 关系连接
+
+**组合关系**:
+
+- Tokio API 参考 --[contains]--> 多个 API 模块
+- 异步应用 --[uses]--> Tokio API
+
+**依赖关系**:
+
+- Tokio API 参考 --[depends-on]--> Tokio 库
+- 异步开发 --[depends-on]--> Tokio API 参考
+
+### 思维导图
+
+```text
+Tokio API 参考
+│
+├── Runtime API
+│   └── 运行时创建和管理
+├── Task API
+│   ├── 任务管理
+│   └── JoinSet
+├── Sync API
+│   ├── 异步互斥锁
+│   └── Channel
+├── Time API
+│   └── 时间操作
+├── Net API
+│   ├── TCP
+│   └── UDP
+└── FS API
+    └── 文件操作
+```
+
+---
 
 ## 🎯 文档说明
 

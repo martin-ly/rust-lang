@@ -612,6 +612,21 @@ async fn main() -> c10_networks::NetworkResult<()> {
 
 本项目采用 MIT 许可证。详情请查看 [LICENSE](../../LICENSE) 文件。
 
+## 📚 知识结构文档
+
+### 知识结构体系
+
+- **[知识结构框架](../../docs/KNOWLEDGE_STRUCTURE_FRAMEWORK.md)** ⭐ NEW! - 完整知识结构体系（概念定义、属性、关系、解释、证明）
+- **[多维概念矩阵](../../docs/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** ⭐ NEW! - 网络协议对比矩阵
+- **[思维导图集合](../../docs/MIND_MAP_COLLECTION.md)** ⭐ NEW! - 网络编程思维导图
+- **[决策图网](../../DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
+- **[证明图网](../../PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
+
+### 使用指南
+
+- **[网络编程速查卡](../../docs/quick_reference/network_programming_cheatsheet.md)** ⭐ NEW! - 快速参考
+- **[综合网络异步演示](../../examples/comprehensive_network_async_demo.rs)** ⭐ NEW! - 网络+异步整合示例
+
 ## 🔗 相关链接
 
 - [Rust 官方文档](https://doc.rust-lang.org/)

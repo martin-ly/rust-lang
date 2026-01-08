@@ -46,6 +46,68 @@
 
 ---
 
+## 📐 知识结构
+
+### 概念定义
+
+**Rust 编译 WASM 指南 (Rust to WASM Compilation Guide)**:
+
+- **定义**: Rust 编译到 WebAssembly 的完整流程和实践指南
+- **类型**: 编译指南文档
+- **范畴**: WebAssembly、编译工具链
+- **版本**: Rust 1.92.0+, wasm-pack, wasm-bindgen
+- **相关概念**: 编译工具链、wasm-pack、wasm-bindgen、优化选项
+
+### 属性特征
+
+**核心属性**:
+
+- **编译流程**: rustc、wasm-pack 两种方法
+- **编译配置**: Cargo.toml 配置、优化选项
+- **工具链**: wasm-bindgen、wasm-pack
+- **类型映射**: Rust 类型到 JavaScript 类型
+
+**性能特征**:
+
+- **编译优化**: 使用优化选项减少二进制大小
+- **类型映射**: 高效的 Rust-JavaScript 互操作
+- **适用场景**: Web 应用、服务器应用、边缘计算
+
+### 关系连接
+
+**组合关系**:
+
+- Rust 编译 WASM 指南 --[uses]--> 编译工具链
+- WASM 应用开发 --[uses]--> Rust 编译 WASM
+
+**依赖关系**:
+
+- Rust 编译 WASM --[depends-on]--> wasm-pack/wasm-bindgen
+- WASM 开发 --[depends-on]--> Rust 编译 WASM
+
+### 思维导图
+
+```text
+Rust 编译 WASM 指南
+│
+├── 环境准备
+│   ├── 安装 Rust
+│   └── 添加 WASM 目标
+├── 编译流程
+│   ├── rustc
+│   └── wasm-pack
+├── 编译配置
+│   ├── Cargo.toml
+│   └── 优化选项
+├── wasm-bindgen
+│   ├── 基本用法
+│   └── 类型映射
+└── 实践示例
+    └── 函数和结构体
+```
+
+---
+
 ## 🎯 概述
 
 本指南介绍如何使用 Rust 编译到 WASM，包括：

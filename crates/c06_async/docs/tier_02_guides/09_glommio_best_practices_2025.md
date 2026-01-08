@@ -51,6 +51,81 @@
 
 ---
 
+## 📐 知识结构
+
+### 概念定义
+
+**Glommio 最佳实践 (Glommio Best Practices)**:
+
+- **定义**: Glommio 高性能异步运行时的最佳实践和使用指南
+- **类型**: 最佳实践指南
+- **范畴**: 异步编程、高性能计算
+- **版本**: Glommio 0.7+, Rust 1.60+, Linux 5.1+
+- **相关概念**: io_uring、Thread-per-core、NUMA、零拷贝
+
+**Glommio**:
+
+- **定义**: 基于 io_uring 的高性能异步运行时，采用 Thread-per-core 架构
+- **类型**: 异步运行时
+- **属性**: Thread-per-core、io_uring、NUMA感知、零拷贝
+- **关系**: 与异步运行时、高性能I/O、Linux系统编程相关
+
+### 属性特征
+
+**核心属性**:
+
+- **Thread-per-core**: 每个核心一个线程，无线程切换
+- **io_uring**: Linux 高性能异步 I/O
+- **NUMA 感知**: 针对多 socket 系统优化
+- **零拷贝**: 最小化数据复制
+
+**性能特征**:
+
+- **延迟**: 比 Tokio 降低 50%
+- **吞吐量**: 比 Tokio 提升 300%
+- **适用场景**: 高性能服务器、数据库、网络中间件
+
+### 关系连接
+
+**继承关系**:
+
+- Glommio --[is-a]--> 异步运行时
+- Thread-per-core --[is-a]--> 架构模式
+
+**组合关系**:
+
+- Glommio 应用 --[uses]--> Glommio 运行时
+- 高性能系统 --[uses]--> Glommio
+
+**依赖关系**:
+
+- Glommio --[depends-on]--> Linux 5.1+
+- Glommio --[depends-on]--> io_uring
+
+### 思维导图
+
+```text
+Glommio 最佳实践
+│
+├── Thread-per-core 架构
+│   └── 每个核心一个线程
+├── CPU 绑定与亲和性
+│   ├── CPU Pinning
+│   └── NUMA 优化
+├── 任务调度与优先级
+│   └── 优先级调度
+├── 高性能 I/O
+│   ├── DMA 文件 I/O
+│   └── 零拷贝技术
+├── 跨执行器通信
+│   └── Channel Mesh
+└── 性能优化技巧
+    ├── 内存管理
+    └── 批处理优化
+```
+
+---
+
 ## 1. 概述
 
 ### 1.1 什么是 Glommio

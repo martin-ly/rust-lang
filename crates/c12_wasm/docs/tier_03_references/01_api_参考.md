@@ -27,6 +27,62 @@
 
 ---
 
+## 📐 知识结构
+
+### 概念定义
+
+**WASM API 参考 (WASM API Reference)**:
+
+- **定义**: wasm-bindgen API 的完整参考手册
+- **类型**: API 参考文档
+- **范畴**: WebAssembly、API 参考
+- **版本**: Rust 1.92.0+, wasm-bindgen
+- **相关概念**: wasm-bindgen、WebAssembly、JavaScript 互操作
+
+### 属性特征
+
+**核心属性**:
+
+- **核心宏**: `#[wasm_bindgen]`、`#[wasm_bindgen(start)]`
+- **类型系统**: 基本类型映射、复杂类型
+- **Web API**: console、Fetch API
+- **JavaScript 互操作**: 函数导出、类型转换
+
+**性能特征**:
+
+- **高效互操作**: 优化的 Rust-JavaScript 互操作
+- **类型安全**: 类型映射保证类型安全
+- **适用场景**: Web 应用、服务器应用、边缘计算
+
+### 关系连接
+
+**组合关系**:
+
+- WASM API 参考 --[covers]--> wasm-bindgen API
+- WASM 应用开发 --[uses]--> WASM API 参考
+
+**依赖关系**:
+
+- WASM API 参考 --[depends-on]--> wasm-bindgen
+- WASM 开发 --[depends-on]--> WASM API 参考
+
+### 思维导图
+
+```text
+WASM API 参考
+│
+├── 核心宏
+│   └── #[wasm_bindgen]
+├── 类型系统
+│   └── 类型映射
+├── Web API
+│   └── console/Fetch
+└── JavaScript 互操作
+    └── 函数导出
+```
+
+---
+
 ## 🎯 概述
 
 本文档提供 wasm-bindgen API 的完整参考。
