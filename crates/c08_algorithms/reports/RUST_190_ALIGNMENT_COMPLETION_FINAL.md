@@ -219,7 +219,7 @@ let practices = BestPracticesAnalyzer::analyze_sorting_best_practices("QuickSort
 ### 算法性能对比
 
 | 算法 | 同步版本 | 异步版本 | 并行版本 | 分布式版本 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- '
 | 快速排序 | 基准 | +15% | +200% | +150% |
 | 归并排序 | 基准 | +10% | +180% | +120% |
 | 二分搜索 | 基准 | +5% | +50% | +30% |

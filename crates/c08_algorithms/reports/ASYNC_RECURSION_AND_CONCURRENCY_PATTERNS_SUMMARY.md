@@ -184,7 +184,7 @@ cargo test --example actor_reactor_csp_complete
 ### 并发模型对比
 
 | 模型 | 抽象层级 | 通信方式 | 状态管理 | 适用场景 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **Actor** | 高（业务逻辑） | 消息传递 | Actor内部 | 分布式系统 |
 | **Reactor** | 中（IO多路复用） | 事件回调 | Handler内部 | 网络服务器 |
 | **CSP** | 高（进程通信） | Channel | 进程局部 | 并发pipeline |

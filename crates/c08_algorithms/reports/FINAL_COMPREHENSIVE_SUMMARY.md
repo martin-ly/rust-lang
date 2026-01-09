@@ -334,7 +334,7 @@ pub trait EventHandler {
 - ✅ Golang vs Rust对比表：
 
   | 特性 | Golang | Rust |
-   param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+   param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- '
   | 并发原语 | Goroutine | async/await |
   | 通信机制 | Channel | mpsc::channel |
   | 调度器 | M:N运行时调度 | 状态机轮询 |

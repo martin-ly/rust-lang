@@ -1,5 +1,5 @@
 //! # 算法知识体系模块
-//! 
+//!
 //! 本模块整合了完整的算法知识体系，包括理论基础、应用场景、最佳实践等。
 //! 为算法学习和应用提供全面的知识支持。
 
@@ -129,7 +129,7 @@ impl AlgorithmKnowledgeBase {
             categories: HashMap::new(),
             applications: HashMap::new(),
         };
-        
+
         knowledge_base.initialize_knowledge();
         knowledge_base
     }
@@ -874,13 +874,13 @@ function lcs(X, Y):
     /// 生成知识库报告
     pub fn generate_knowledge_report(&self) -> String {
         let mut report = String::new();
-        
+
         report.push_str("=== 算法知识库报告 ===\n\n");
-        
+
         report.push_str(&format!("总算法数: {}\n", self.algorithms.len()));
         report.push_str(&format!("总分类数: {}\n", self.categories.len()));
         report.push_str(&format!("总应用数: {}\n\n", self.applications.len()));
-        
+
         // 按分类统计
         report.push_str("## 按分类统计\n");
         for category in self.categories.values() {
@@ -890,17 +890,17 @@ function lcs(X, Y):
                 .count();
             report.push_str(&format!("- {}: {} 个算法\n", category.name, count));
         }
-        
+
         report.push_str("\n## 算法列表\n");
         for algorithm in self.algorithms.values() {
             report.push_str(&format!("- {} ({})\n", algorithm.name, algorithm.category));
         }
-        
+
         report.push_str("\n## 应用领域\n");
         for application in self.applications.values() {
             report.push_str(&format!("- {}: {}\n", application.domain, application.description));
         }
-        
+
         report
     }
 }

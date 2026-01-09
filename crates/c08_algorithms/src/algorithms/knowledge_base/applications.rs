@@ -1,5 +1,5 @@
 //! # 算法应用模块
-//! 
+//!
 //! 本模块提供算法的应用场景和实际案例。
 
 use serde::{Serialize, Deserialize};

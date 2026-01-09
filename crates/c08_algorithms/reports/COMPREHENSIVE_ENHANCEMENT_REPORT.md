@@ -79,7 +79,7 @@
 ### 核心成果
 
 | 类别 | 数量 | 状态 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | 新增核心理论文档 | 4 篇 | ✅ 完成 |
 | 文档总字数 | ~25,000字 | ✅ 完成 |
 | 代码示例 | 50+ 个 | ✅ 完成 |

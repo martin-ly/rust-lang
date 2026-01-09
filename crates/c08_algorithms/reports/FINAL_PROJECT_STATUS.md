@@ -193,7 +193,7 @@
 ### 1. 算法性能对比
 
 | 算法类型 | 传统实现 | Rust 1.89 优化 | 性能提升 | 优化方式 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **快速排序** | 100ms | 75ms | 25% | 异步并行处理 |
 | **归并排序** | 120ms | 85ms | 29% | 异步并行处理 |
 | **图遍历** | 200ms | 140ms | 30% | 异步算法优化 |
@@ -202,7 +202,7 @@
 ### 2. 内存使用优化
 
 | 数据结构 | 传统实现 | Rust 1.89 优化 | 内存减少 | 优化方式 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **链表** | 100KB | 75KB | 25% | 内存布局优化 |
 | **二叉树** | 200KB | 140KB | 30% | 结构体打包 |
 | **图** | 500KB | 350KB | 30% | 内存池管理 |
@@ -210,7 +210,7 @@
 ### 3. 编译时间优化
 
 | 优化项目 | 传统方式 | Rust 1.89 方式 | 编译时间减少 | 优化方式 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' -------------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' -------------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **类型推导** | 需要显式标注 | 自动推断 | 15-20% | 生命周期推断优化 |
 | **泛型实例化** | 运行时开销 | 编译时优化 | 25-30% | 常量泛型改进 |
 | **异步代码** | 复杂包装 | 直接async fn | 20-25% | async fn in traits |

@@ -101,7 +101,7 @@
 ### 2. 数据结构实现
 
 | 数据结构 | 实现状态 | 特性 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- '
 | 栈 (Stack) | ✅ | LIFO 操作 |
 | 优先队列 (PriorityQueue) | ✅ | 堆实现 |
 | 并查集 (UnionFind) | ✅ | 路径压缩 |
