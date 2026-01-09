@@ -153,14 +153,14 @@
    - 完整的代码示例和迁移指南
    - **适合**: 了解最新特性、代码升级
 
-2. **[Rust 1.90 实战示例集 Part 1](RUST_190_EXAMPLES_COLLECTION.md)** ⭐⭐⭐⭐ (历史版本)
+2. **[Rust 1.92.0 实战示例集 Part 1](RUST_192_EXAMPLES_COLLECTION.md)** ⭐⭐⭐⭐ | [历史版本](RUST_190_EXAMPLES_COLLECTION.md)（Rust 1.90）
    - **~1,000行可运行代码** | 9大主题 × 40+示例
    - 所有权/借用/生命周期/智能指针 完整覆盖
    - 综合实战项目 | 链表实现 + 缓存系统
-   - Rust 1.90 新特性 | NLL改进、编译器优化
+   - Rust 1.92.0 新特性（自 Rust 1.90 引入） | NLL改进、编译器优化
    - **适合**: 动手实践、代码参考、测试验证
 
-3. **[Rust 1.90 丰富示例集成](RUST_190_RICH_EXAMPLES_INTEGRATION.md)** ⭐⭐⭐⭐ (历史版本)
+3. **[Rust 1.92.0 丰富示例集成](RUST_192_RICH_EXAMPLES_INTEGRATION.md)** ⭐⭐⭐⭐ | [历史版本](RUST_190_RICH_EXAMPLES_INTEGRATION.md)（Rust 1.90）
    - **115+ 可运行示例** | **6,000+ 行详细注释代码**
    - 从基础到高级的完整示例体系
    - 所有示例 100% 测试覆盖
@@ -175,7 +175,7 @@
 > - **生命周期示例** → [生命周期注解](02_core/03_lifetime_annotations.md) (包含 18+ 场景示例)
 > - **作用域示例** → [作用域管理](02_core/04_scope_management.md) (包含 12+ 实战示例)
 > - **最新特性** → [Rust 1.92.0 所有权改进](RUST_192_OWNERSHIP_BORROWING_LIFETIME_IMPROVEMENTS.md) 🆕
-> - **集成示例集** → [Rust 1.90 实战示例](RUST_190_EXAMPLES_COLLECTION.md) (历史版本，包含 138+ 综合示例)
+> - **集成示例集** → [Rust 1.92.0 实战示例](RUST_192_EXAMPLES_COLLECTION.md) (包含 138+ 综合示例，自 Rust 1.90 引入) | [历史版本](RUST_190_EXAMPLES_COLLECTION.md)
 
 ### 📚 学习指南
 
@@ -344,19 +344,19 @@
   - 迁移指南
 
 - **[Rust 1.92.0 所有权改进](RUST_192_OWNERSHIP_BORROWING_LIFETIME_IMPROVEMENTS.md)** ⭐⭐⭐⭐⭐ 🆕
-- **[Rust 1.90 全面指南](06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md)** ⭐⭐⭐⭐ (历史版本)
+- **[Rust 1.92.0 全面指南](06_rust_features/RUST_192_COMPREHENSIVE_GUIDE.md)** ⭐⭐⭐⭐ | [历史版本](06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md)（Rust 1.90）
   - 最全面的入门指南
   - **80 分钟阅读**
   - 所有权系统最新改进
 
 - **[Rust 1.92.0 特性分析](../../RUST_192_COMPREHENSIVE_DOCUMENTATION_REVIEW.md)** ⭐⭐⭐⭐⭐ 🆕
-- **[Rust 1.90 特性分析](06_rust_features/RUST_190_COMPREHENSIVE_FEATURES.md)** ⭐⭐⭐⭐ (历史版本)
+- **[Rust 1.92.0 特性分析](06_rust_features/RUST_192_COMPREHENSIVE_FEATURES.md)** ⭐⭐⭐⭐ | [历史版本](06_rust_features/RUST_190_COMPREHENSIVE_FEATURES.md)（Rust 1.90）
   - 深度技术分析
   - **70 分钟阅读**
   - NLL 和编译器优化
 
 - **[Rust 1.92.0 增强总结](../../RUST_192_COMPREHENSIVE_DOCUMENTATION_REVIEW.md)** ⭐⭐⭐⭐⭐ 🆕
-- **[Rust 1.90 增强总结](06_rust_features/RUST_190_ENHANCEMENT_SUMMARY.md)** ⭐⭐⭐⭐ (历史版本)
+- **[Rust 1.92.0 增强总结](06_rust_features/RUST_192_ENHANCEMENT_SUMMARY.md)** ⭐⭐⭐⭐ | [历史版本](06_rust_features/RUST_190_ENHANCEMENT_SUMMARY.md)（Rust 1.90）
   - 项目增强说明
   - 新特性应用示例
 
@@ -439,8 +439,8 @@
 **代码示例**:
 
 - [Rust 1.92.0 所有权改进](RUST_192_OWNERSHIP_BORROWING_LIFETIME_IMPROVEMENTS.md) ⭐⭐⭐⭐⭐ 🆕
-- [Rust 1.90 实战示例集](RUST_190_EXAMPLES_COLLECTION.md) ⭐⭐⭐⭐ (历史版本)
-- [Rust 1.90 丰富示例集成](RUST_190_RICH_EXAMPLES_INTEGRATION.md) ⭐⭐⭐⭐ (历史版本)
+- [Rust 1.92.0 实战示例集](RUST_192_EXAMPLES_COLLECTION.md) ⭐⭐⭐⭐ | [历史版本](RUST_190_EXAMPLES_COLLECTION.md)（Rust 1.90）
+- [Rust 1.92.0 丰富示例集成](RUST_192_RICH_EXAMPLES_INTEGRATION.md) ⭐⭐⭐⭐ | [历史版本](RUST_190_RICH_EXAMPLES_INTEGRATION.md)（Rust 1.90）
 
 **学习时间**: 3-5 天
 

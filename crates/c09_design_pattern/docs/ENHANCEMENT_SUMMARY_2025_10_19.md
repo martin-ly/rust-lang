@@ -37,7 +37,7 @@
 
 **完成时间**: 2025-10-19
 **模块**: `crates/c09_design_pattern`
-**增强主题**: Rust 1.90 特性示例 + 知识图谱整合
+**增强主题**: Rust 1.92.0 特性示例（自 Rust 1.90 引入）+ 知识图谱整合
 
 ---
 
@@ -113,7 +113,7 @@
 
 ### 1. 完整的应用场景覆盖
 
-| Rust 1.90 特性 | 示例 | 实际场景数 | 代码行数 |
+| Rust 1.92.0 特性（自 Rust 1.90 引入） | 示例 | 实际场景数 | 代码行数 |
  param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ---------|
 | OnceLock | 单例模式 | 4 | 600 |
 | GATs | 观察者模式 | 4 | 700 |
@@ -179,7 +179,7 @@ cat docs/MIND_MAP.md
 # 多维对比 - 性能和复杂度
 cat docs/MULTIDIMENSIONAL_MATRIX_COMPARISON.md
 
-# Rust 1.90 示例集
+# Rust 1.92.0 示例集（自 Rust 1.90 引入）
 cat docs/RUST_190_EXAMPLES.md
 
 # 增强报告
@@ -241,7 +241,7 @@ cat docs/RUST_190_COMPREHENSIVE_ENHANCEMENT_REPORT.md
 - [知识图谱](./KNOWLEDGE_GRAPH.md) - 模式关系网络
 - [思维导图](./MIND_MAP.md) - 学习路径
 - [多维对比](./MULTIDIMENSIONAL_MATRIX_COMPARISON.md) - 详细对比
-- [Rust 1.90 示例](./RUST_190_EXAMPLES.md) - 特性示例集
+- [Rust 1.92.0 示例](./RUST_192_EXAMPLES.md) - 特性示例集（自 Rust 1.90 引入）
 - [增强报告](./RUST_190_COMPREHENSIVE_ENHANCEMENT_REPORT.md) - 完整报告
 
 ### 示例文件
@@ -325,10 +325,10 @@ OnceLock 访问:     1 ns
 
 本次增强为 `c09_design_pattern` 模块带来了：
 
-1. **🎯 6 个完整的 Rust 1.90 特性示例** - 共 4150 行生产级代码
+1. **🎯 6 个完整的 Rust 1.92.0 特性示例**（自 Rust 1.90 引入）- 共 4150 行生产级代码
 2. **📚 5 个深度整合的文档** - 知识图谱、思维导图、多维对比等
 3. **💡 36 个实际应用场景映射** - 覆盖 Web、系统、数据、微服务
-4. **📊 详细的性能对比数据** - 验证 Rust 1.90 的性能优势
+4. **📊 详细的性能对比数据** - 验证 Rust 1.92.0 的性能优势（自 Rust 1.90 引入）
 5. **🎓 系统化的学习路径** - 从基础到高级的完整指南
 
 所有内容都：

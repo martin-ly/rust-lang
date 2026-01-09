@@ -1,4 +1,6 @@
-//! Rust 1.91 泛型特性实现模块
+//! Rust 1.91 泛型特性实现模块（历史版本）
+//!
+//! > **注意**: 当前版本为 Rust 1.92.0，请参考 `rust_192_features.rs` 了解最新特性。
 //!
 //! 本模块实现了 Rust 1.91 在泛型系统方面的改进，包括：
 //! - const 上下文增强在泛型中的应用
@@ -740,4 +742,3 @@ pub fn demonstrate_rust_191_generics() {
 pub fn get_rust_191_generics_info() -> &'static str {
     "Rust 1.91 Generic Features Module - Comprehensive implementation of generic system improvements"
 }
-

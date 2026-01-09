@@ -37,12 +37,16 @@ pub struct MacroExpansionItem {
     pub depth: usize,
 }
 
+/// 宏展开队列
+#[derive(Default)]
+pub struct MacroExpansionQueue {
+    items: VecDeque<MacroExpansionItem>,
+}
+
 impl MacroExpansionQueue {
     /// 创建一个新的宏展开队列
     pub fn new() -> Self {
-        MacroExpansionQueue {
-            items: VecDeque::new(),
-        }
+        Self::default()
     }
 
     /// 轮转宏展开队列
@@ -77,6 +81,11 @@ impl MacroExpansionQueue {
     /// 获取队列长度
     pub fn len(&self) -> usize {
         self.items.len()
+    }
+
+    /// 检查队列是否为空
+    pub fn is_empty(&self) -> bool {
+        self.items.is_empty()
     }
 }
 

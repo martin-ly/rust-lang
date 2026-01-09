@@ -5,10 +5,10 @@
 > **相关文档**: [03_synchronization_primitives](./03_synchronization_primitives.md) | [知识图谱](./KNOWLEDGE_GRAPH.md)
 
 **最后更新**: 2025-10-19
-**适用版本**: Rust 1.90+
+**适用版本**: Rust 1.92.0+
 **难度等级**: ⭐⭐⭐
 **文档类型**: 📚 理论+实践
-**增强内容**: ✅ 知识图谱 | ✅ 多维对比 | ✅ Rust 1.90 示例
+**增强内容**: ✅ 知识图谱 | ✅ 多维对比 | ✅ Rust 1.92.0 示例
 
 ---
 
@@ -35,9 +35,9 @@
   - [4. 哲学批判性分析](#4-哲学批判性分析)
     - [4.1. "不要通过共享内存来通信"](#41-不要通过共享内存来通信)
     - [4.2. 局限性与替代方案](#42-局限性与替代方案)
-  - [🚀 Rust 1.90 增强特性](#-rust-190-增强特性)
-    - [Rust 1.90 通道性能提升](#rust-190-通道性能提升)
-    - [🚀 示例 1: Rust 1.90 改进的 MPSC 通道](#-示例-1-rust-190-改进的-mpsc-通道)
+  - [🚀 Rust 1.92.0 增强特性（自 Rust 1.90 引入）](#-rust-1920-增强特性自-rust-190-引入)
+    - [Rust 1.92.0 通道性能提升（自 Rust 1.90 引入）](#rust-1920-通道性能提升自-rust-190-引入)
+    - [🚀 示例 1: Rust 1.92.0 改进的 MPSC 通道（自 Rust 1.90 引入）](#-示例-1-rust-1920-改进的-mpsc-通道自-rust-190-引入)
     - [🚀 示例 2: 有界通道与背压处理](#-示例-2-有界通道与背压处理)
     - [🚀 示例 3: 多生产者模式](#-示例-3-多生产者模式)
     - [📊 性能基准对比](#-性能基准对比)
@@ -125,7 +125,7 @@ sequenceDiagram
 
     Ch->>C: recv() -> msg2
 
-    Note over P1,C: Rust 1.90: 优化的通道性能
+    Note over P1,C: Rust 1.92.0: 优化的通道性能
 ```
 
 ---
@@ -143,7 +143,7 @@ sequenceDiagram
 | **无锁** | 部分 | ✅ | ✅ | ✅ |
 | **学习曲线** | ⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ |
 | **生态成熟度** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
-| **Rust 1.90** | ✅ 优化 | ✅ 兼容 | ✅ 最新 | ✅ 优化 |
+| **Rust 1.92.0** | ✅ 优化 | ✅ 兼容 | ✅ 最新 | ✅ 优化 |
 
 ### 通道性能特征对比
 
@@ -156,7 +156,7 @@ sequenceDiagram
 
 ### 接收方法对比
 
-| 方法 | 阻塞? | 超时? | 批量? | Rust 1.90改进 |
+| 方法 | 阻塞? | 超时? | 批量? | Rust 1.92.0改进 |
 | --- | --- | --- | --- | --- |
 | `recv()` | ✅ | ❌ | ❌ | 性能优化 |
 | `try_recv()` | ❌ | ❌ | ❌ | - |
@@ -338,9 +338,9 @@ CSP 和消息传递模型是一种强大的思维工具，它鼓励开发者将�
 
 Rust 并不强迫你只使用一种模型。它的美妙之处在于，当消息传递不适用时，你可以无缝切换到基于共享状态的并发模型，并且同样享有 `Send` 和 `Sync` Trait 提供的编译时安全保障。下一章我们将深入探讨这些同步原语。
 
-## 🚀 Rust 1.90 增强特性
+## 🚀 Rust 1.92.0 增强特性（自 Rust 1.90 引入）
 
-### Rust 1.90 通道性能提升
+### Rust 1.92.0 通道性能提升（自 Rust 1.90 引入）
 
 ```mermaid
 graph LR
@@ -349,7 +349,7 @@ graph LR
         A3[recv] --> A4[队列操作<br/>~60ns]
     end
 
-    subgraph "Rust 1.90"
+    subgraph "Rust 1.92.0"
         B1[send] --> B2[优化队列<br/>~40ns]
         B3[recv] --> B4[优化队列<br/>~48ns]
     end
@@ -361,7 +361,7 @@ graph LR
     style B4 fill:#51cf66,color:#fff
 ```
 
-### 🚀 示例 1: Rust 1.90 改进的 MPSC 通道
+### 🚀 示例 1: Rust 1.92.0 改进的 MPSC 通道（自 Rust 1.90 引入）
 
 ```rust
 use std::sync::mpsc;
@@ -369,7 +369,7 @@ use std::thread;
 use std::time::{Duration, Instant};
 
 fn main() {
-    println!("=== Rust 1.90 MPSC 性能示例 ===\n");
+    println!("=== Rust 1.92.0 MPSC 性能示例（自 Rust 1.90 引入）===\n");
 
     let (tx, rx) = mpsc::channel();
     let num_messages = 100_000;
@@ -379,7 +379,7 @@ fn main() {
         let start = Instant::now();
 
         for i in 0..num_messages {
-            // Rust 1.90: 优化的 send 性能
+            // Rust 1.92.0: 优化的 send 性能（自 Rust 1.90 引入）
             tx.send(i).unwrap();
         }
 
@@ -393,7 +393,7 @@ fn main() {
         let start = Instant::now();
         let mut count = 0;
 
-        // Rust 1.90: 改进的迭代器性能
+        // Rust 1.92.0: 改进的迭代器性能（自 Rust 1.90 引入）
         for msg in rx.iter() {
             count += 1;
             if count >= num_messages {
@@ -419,7 +419,7 @@ use std::thread;
 use std::time::Duration;
 
 fn main() {
-    println!("=== Rust 1.90 有界通道示例 ===\n");
+    println!("=== Rust 1.92.0 有界通道示例（自 Rust 1.90 引入）===\n");
 
     // 创建容量为5的有界通道
     let (tx, rx) = sync_channel(5);
@@ -429,7 +429,7 @@ fn main() {
         for i in 0..10 {
             println!("尝试发送: {}", i);
 
-            // Rust 1.90: 改进的阻塞机制
+            // Rust 1.92.0: 改进的阻塞机制（自 Rust 1.90 引入）
             match tx.send(i) {
                 Ok(_) => println!("✅ 发送成功: {}", i),
                 Err(e) => println!("❌ 发送失败: {}", e),

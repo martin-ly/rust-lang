@@ -263,7 +263,7 @@ graph TD
     A[C++/Java 经典模式] --> B[Rust 基础适配]
     B --> C[Rust 所有权优化]
     C --> D[Rust 零成本抽象]
-    D --> E[Rust 1.90 特性增强]
+    D --> E[Rust 1.92.0 特性增强（自 Rust 1.90 引入）]
 
     A1[单例 - 全局变量] --> B1[单例 - lazy_static]
     B1 --> C1[单例 - OnceLock]
@@ -356,7 +356,7 @@ graph TD
     Monitor --> |装饰器| Metrics[指标]
 ```
 
-**Rust 1.90 实现**：
+**Rust 1.92.0 实现**（自 Rust 1.90 引入）：
 
 ```rust
 use std::sync::Arc;
@@ -441,7 +441,7 @@ graph TD
 
 ```mermaid
 graph TB
-    subgraph "Rust 1.90 特性映射"
+    subgraph "Rust 1.92.0 特性映射"
         F1[OnceLock] --> P1[单例模式]
         F2[GATs] --> P2[观察者模式]
         F3[async trait] --> P3[异步模式]
@@ -455,7 +455,7 @@ graph TB
 
 **特性适配矩阵**：
 
-| Rust 1.90 特性 | 最佳适配模式 | 适配度 | 性能提升 | 示例位置 | 完整示例 |
+| Rust 1.92.0 特性 | 最佳适配模式 | 适配度 | 性能提升 | 示例位置 | 完整示例 |
 | --- | --- | --- | --- | --- | --- |
 | **OnceLock** | 单例 | ⭐⭐⭐⭐⭐ | 100% | `creational/singleton/` | [`oncelock_singleton_comprehensive.rs`](../examples/oncelock_singleton_comprehensive.rs) |
 | **GATs** | 观察者 | ⭐⭐⭐⭐⭐ | 零拷贝 | `behavioral/observer/` | [`gats_observer_advanced.rs`](../examples/gats_observer_advanced.rs) |
@@ -733,12 +733,12 @@ pub mod pattern_checklist {
 
 - [多维矩阵对比](./MULTIDIMENSIONAL_MATRIX_COMPARISON.md) - 详细的性能和特性对比
 - [思维导图](./MIND_MAP.md) - 可视化学习路径
-- [Rust 1.90 特性示例](./RUST_190_EXAMPLES.md) - 最新特性应用
+- [Rust 1.92.0 特性示例](./RUST_192_EXAMPLES.md) - 最新特性应用（自 Rust 1.90 引入）
 - [综合设计模式指南](./COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) - 完整理论和实践
 
 ## 🚀 快速开始
 
-运行完整示例以深入理解 Rust 1.90 特性在设计模式中的应用：
+运行完整示例以深入理解 Rust 1.92.0 特性在设计模式中的应用（自 Rust 1.90 引入）：
 
 ```bash
 # OnceLock 单例模式 - 全局状态管理

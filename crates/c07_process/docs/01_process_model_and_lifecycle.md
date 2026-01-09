@@ -6,7 +6,7 @@
   - [目录](#目录)
   - [1. 进程定义与模型](#1-进程定义与模型)
     - [1.1 进程理论基础](#11-进程理论基础)
-    - [1.2 Rust 1.90 进程增强](#12-rust-190-进程增强)
+    - [1.2 Rust 1.92.0 进程增强](#12-rust-1920-进程增强)
       - [异步闭包支持](#异步闭包支持)
       - [改进的模式匹配](#改进的模式匹配)
       - [增强的错误处理](#增强的错误处理)
@@ -34,7 +34,7 @@
     - [关键特性总结](#关键特性总结)
     - [现代库生态](#现代库生态)
 
-本章系统梳理 Rust 1.90 进程的理论基础、生命周期管理、资源属性控制及其安全抽象，结合现代开源库提供完整的实践指南。
+本章系统梳理 Rust 1.92.0 进程的理论基础、生命周期管理、资源属性控制及其安全抽象，结合现代开源库提供完整的实践指南。
 
 ## 1. 进程定义与模型
 
@@ -53,9 +53,9 @@ pub struct Process {
 - **内存隔离**：Rust 进程模型依赖操作系统的虚拟内存机制，确保进程间内存安全隔离。
 - **所有权模型**：Rust 类型系统和所有权机制防止跨进程悬垂指针和未定义行为。
 
-### 1.2 Rust 1.90 进程增强
+### 1.2 Rust 1.92.0 进程增强
 
-Rust 1.90 版本为进程管理带来了显著的改进：
+Rust 1.92.0 版本为进程管理带来了显著的改进：
 
 #### 异步闭包支持
 
@@ -63,7 +63,7 @@ Rust 1.90 版本为进程管理带来了显著的改进：
 use std::process::{Command, Stdio};
 use std::future::Future;
 
-// Rust 1.90 异步闭包示例
+// Rust 1.92.0 异步闭包示例
 async fn async_process_handler<F>(handler: F) -> Result<(), Box<dyn std::error::Error>>
 where
     F: FnOnce() -> Box<dyn Future<Output = Result<(), Box<dyn std::error::Error>>> + Send>,
@@ -77,7 +77,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     async_process_handler(|| {
         Box::new(async {
             let mut child = Command::new("echo")
-                .arg("Hello from Rust 1.90!")
+                .arg("Hello from Rust 1.92.0!")
                 .stdout(Stdio::piped())
                 .spawn()?;
 
@@ -98,7 +98,7 @@ use std::process::{Command, ExitStatus};
 
 fn handle_process_status(status: ExitStatus) {
     match status {
-        // Rust 1.90 增强的模式匹配
+        // Rust 1.92.0 增强的模式匹配
         status if status.success() => {
             println!("进程成功完成");
         }
@@ -121,7 +121,7 @@ fn handle_process_status(status: ExitStatus) {
 use std::process::{Command, Stdio};
 use std::error::Error;
 
-// Rust 1.90 改进的错误处理
+// Rust 1.92.0 改进的错误处理
 async fn robust_process_execution() -> Result<String, Box<dyn Error>> {
     let output = Command::new("unknown_command")
         .stdout(Stdio::piped())
@@ -219,7 +219,7 @@ async fn async_lifecycle() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 2.2 异步生命周期管理
 
-Rust 1.90 提供了更好的异步进程生命周期管理：
+Rust 1.92.0 提供了更好的异步进程生命周期管理：
 
 ```rust
 use std::process::{Command, Stdio};
@@ -445,7 +445,7 @@ fn basic_process_configuration() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-// Rust 1.90 增强的环境变量处理
+// Rust 1.92.0 增强的环境变量处理
 fn enhanced_env_handling() -> Result<(), Box<dyn std::error::Error>> {
     let mut command = Command::new("env");
 
@@ -985,7 +985,7 @@ fn error_handling_best_practices() -> Result<(), BestPracticeError> {
 
 ## 7. 小结
 
-Rust 1.90 进程模型以类型系统和所有权为基础，结合操作系统原语，提供了安全、可移植、易用的进程管理能力。生命周期管理、资源控制和错误处理机制共同确保了系统级编程的健壮性和安全性。
+Rust 1.92.0 进程模型以类型系统和所有权为基础，结合操作系统原语，提供了安全、可移植、易用的进程管理能力。生命周期管理、资源控制和错误处理机制共同确保了系统级编程的健壮性和安全性。
 
 ### 关键特性总结
 
@@ -1004,4 +1004,4 @@ Rust 1.90 进程模型以类型系统和所有权为基础，结合操作系统�
 - **Nix**：系统调用封装
 - **Thiserror**：错误处理宏
 
-通过这些特性现代库的集成，Rust 1.90 为进程管理提供了强大而安全的工具集。
+通过这些特性现代库的集成，Rust 1.92.0 为进程管理提供了强大而安全的工具集。

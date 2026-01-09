@@ -9,6 +9,7 @@
 
 - [Tier 3: 智能指针 API 完整参考](#tier-3-智能指针-api-完整参考)
   - [📊 目录](#-目录)
+  - [📐 知识结构](#-知识结构)
   - [`Box<T>` API](#boxt-api)
   - [`Rc<T>` API](#rct-api)
   - [`Arc<T>` API](#arct-api)

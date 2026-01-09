@@ -10,7 +10,7 @@
   - [📊 目录](#-目录)
   - [🆕 2025-10-19 重大更新](#-2025-10-19-重大更新)
     - [📊 可视化增强文档](#-可视化增强文档)
-    - [💻 Rust 1.90 实战示例](#-rust-190-实战示例)
+    - [💻 Rust 1.92.0 实战示例](#-rust-1920-实战示例)
   - [📋 快速导航](#-快速导航)
     - [🎯 按角色导航](#-按角色导航)
     - [📚 按主题导航](#-按主题导航)
@@ -74,7 +74,7 @@
    - 完整学习路径 (初级/中级/高级)
    - 每周学习计划
 
-### 💻 Rust 1.90 实战示例
+### 💻 Rust 1.92.0 实战示例
 
 1. **[实战示例大全 Part 1](RUST_190_EXAMPLES_COLLECTION.md)** ⭐⭐⭐⭐⭐
    - async trait 详解与示例
@@ -97,7 +97,7 @@
    - **SSE**: Server-Sent Events 实时推送
    - **微服务架构**: 服务注册发现 + API网关 + 事件总线
 
-4. **[Rust 1.90 现代网络技术 (2025)](RUST_190_MODERN_NETWORK_TECHNOLOGIES_2025.md)** ⭐⭐⭐⭐⭐ 🆕🔥
+4. **[Rust 1.92.0 现代网络技术 (2025)](RUST_192_MODERN_NETWORK_TECHNOLOGIES_2025.md)** ⭐⭐⭐⭐⭐ 🆕🔥
    - **io_uring 革命性异步I/O**:
      - tokio-uring: Tokio集成，零系统调用开销
      - Monoio: 字节跳动运行时，Rent API零拷贝
@@ -355,7 +355,7 @@
 | **DoH/DoT** | `dns_doh_dot.rs` | `cargo run --example dns_doh_dot` |
 | **gRPC** | `grpc_server.rs` `grpc_client.rs` | `cargo run --example grpc_server` |
 | **流量分析** | `pcap_offline.rs` | `cargo run --example pcap_offline` |
-| **Rust 1.90特性** | `rust_190_async_features_demo.rs` | `cargo run --example rust_190_async_features_demo` |
+| **Rust 1.92.0特性** | `rust_192_async_features_demo.rs` | `cargo run --example rust_192_async_features_demo` |
 
 ---
 
@@ -372,7 +372,7 @@
 
 - [项目报告目录](../reports/) - 包含所有项目报告、完成报告、技术分析等
 - [项目路线图](../reports/ROADMAP.md) - 项目发展规划
-- [Rust 1.90特性](../reports/RUST_190_ALIGNMENT_COMPLETION_SUMMARY.md) - Rust 1.90对齐总结
+- [Rust 1.92.0特性](../reports/RUST_192_ALIGNMENT_COMPLETION_SUMMARY.md) - Rust 1.92.0对齐总结
 
 ### 工具与配置
 

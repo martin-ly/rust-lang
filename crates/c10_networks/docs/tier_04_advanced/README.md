@@ -142,7 +142,7 @@
 # Linux Kernel 5.8+ (支持 io_uring)
 uname -r
 
-# Rust 1.90+
+# Rust 1.92.0+
 rustc --version
 
 # 网络工具

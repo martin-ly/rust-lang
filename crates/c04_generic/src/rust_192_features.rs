@@ -24,7 +24,7 @@ use std::num::NonZeroUsize;
 ///
 /// Rust 1.92.0 允许为同一个关联项指定多个边界（除了 trait 对象）：
 /// Rust 1.92.0 allows specifying multiple bounds for the same associated item (except in trait objects):
-
+///
 /// 泛型容器 Trait - 演示多边界关联类型
 ///
 /// Rust 1.92.0: 关联类型可以有多个边界约束，这是泛型系统的核心特性
@@ -106,7 +106,7 @@ impl GenericTransformer<String> for StringToNumberTransformer {
 ///
 /// Rust 1.92.0 增强了关于高阶区域的一致性规则：
 /// Rust 1.92.0 strengthens coherence rules concerning higher-ranked regions:
-
+///
 /// 泛型高阶生命周期函数
 ///
 /// Rust 1.92.0: 更强的 HRTB 一致性规则
@@ -169,7 +169,7 @@ where
 ///
 /// Rust 1.92.0 改进了自动特征的推断和 `Sized` 边界的处理：
 /// Rust 1.92.0 improves auto-trait inference and `Sized` bounds handling:
-
+///
 /// 改进的泛型自动特征推断
 ///
 /// Rust 1.92.0: 更智能的自动特征推断
@@ -226,7 +226,7 @@ impl ImprovedSizedBound for SizedBoundProcessor {
 ///
 /// Rust 1.92.0 改进了泛型约束的处理，支持更灵活的约束组合：
 /// Rust 1.92.0 improves generic constraint handling with more flexible constraint combinations:
-
+///
 /// 多约束泛型函数
 ///
 /// Rust 1.92.0: 改进的约束处理
@@ -272,7 +272,7 @@ where
 ///
 /// Rust 1.92.0: 新稳定化的 API
 /// Rust 1.92.0: Newly stabilized API
-
+///
 /// 泛型类型内存对齐计算
 ///
 /// Rust 1.92.0: 使用 div_ceil 安全地计算泛型类型的对齐大小
@@ -328,7 +328,7 @@ impl GenericMemoryAllocator {
 ///
 /// Rust 1.92.0: Iterator::eq 为 TrustedLen 迭代器特化，性能更好
 /// Rust 1.92.0: Iterator::eq is specialized for TrustedLen iterators, better performance
-
+///
 /// 比较两个泛型集合
 ///
 /// Rust 1.92.0: 使用特化的迭代器比较方法

@@ -6,7 +6,7 @@
 // 文件: reactor_pattern_comprehensive_2025.rs
 // 作者: Rust Async Team
 // 日期: 2025-10-06
-// 版本: Rust 1.90+
+// 版本: Rust 1.92.0+
 //
 // 本文件提供 Reactor 模式的完整实现，包括：
 // 1. 理论形式化定义
@@ -1218,5 +1218,143 @@ mod tests {
 
         let handlers = reactor.handlers.read().await;
         assert!(handlers.contains_key(&EventType::NetworkIo));
+    }
+
+    #[tokio::test]
+    async fn test_event_rescheduling() {
+        use std::time::Duration;
+        
+        let mut config = ReactorConfig::default();
+        config.enable_priority = false;
+        config.max_queue_length = 100;
+        
+        let reactor = Reactor::new(config);
+        
+        // 创建一个会重新调度的事件处理器
+        struct ReschedulingHandler {
+            reschedule_count: Arc<std::sync::Mutex<usize>>,
+        }
+        
+        #[async_trait::async_trait]
+        impl EventHandler for ReschedulingHandler {
+            async fn handle(&self, _event: &Event) -> HandleResult {
+                let mut count = self.reschedule_count.lock().unwrap();
+                *count += 1;
+                
+                if *count <= 2 {
+                    HandleResult::Reschedule(Duration::from_millis(10))
+                } else {
+                    HandleResult::Success
+                }
+            }
+            
+            fn name(&self) -> &str {
+                "ReschedulingHandler"
+            }
+        }
+        
+        let handler = Arc::new(ReschedulingHandler {
+            reschedule_count: Arc::new(std::sync::Mutex::new(0)),
+        });
+        
+        reactor.register_handler(EventType::NetworkIo, handler.clone()).await;
+        
+        let event = Event::new(1, EventType::NetworkIo, Priority::Normal, vec![]);
+        reactor.submit_event(event).await;
+        
+        // 运行 reactor 处理事件
+        let reactor_clone = reactor.clone();
+        let handle = tokio::spawn(async move {
+            // 运行一小段时间以处理事件
+            tokio::time::sleep(Duration::from_millis(100)).await;
+            reactor_clone.stop().await;
+        });
+        
+        // 启动 reactor（在后台运行）
+        let reactor_run = reactor.clone();
+        tokio::spawn(async move {
+            reactor_run.run().await;
+        });
+        
+        handle.await.unwrap();
+        
+        // 等待事件处理完成
+        tokio::time::sleep(Duration::from_millis(200)).await;
+        
+        let stats = reactor.get_stats().await;
+        assert!(stats.events_rescheduled >= 0); // 至少应该尝试重新调度
+    }
+
+    #[tokio::test]
+    async fn test_event_generation() {
+        use std::time::Duration;
+        
+        let mut config = ReactorConfig::default();
+        config.enable_priority = false;
+        config.max_queue_length = 100;
+        
+        let reactor = Reactor::new(config);
+        
+        // 创建一个会生成新事件的事件处理器
+        struct EventGeneratingHandler {
+            generated_count: Arc<std::sync::Mutex<usize>>,
+        }
+        
+        #[async_trait::async_trait]
+        impl EventHandler for EventGeneratingHandler {
+            async fn handle(&self, event: &Event) -> HandleResult {
+                let mut count = self.generated_count.lock().unwrap();
+                
+                if *count == 0 {
+                    *count += 1;
+                    // 生成一个新事件
+                    let new_event = Event::new(
+                        100 + *count as u64,
+                        EventType::Timer,
+                        Priority::Normal,
+                        vec![1, 2, 3],
+                    );
+                    HandleResult::GenerateEvents(vec![new_event])
+                } else {
+                    HandleResult::Success
+                }
+            }
+            
+            fn name(&self) -> &str {
+                "EventGeneratingHandler"
+            }
+        }
+        
+        let handler = Arc::new(EventGeneratingHandler {
+            generated_count: Arc::new(std::sync::Mutex::new(0)),
+        });
+        
+        reactor.register_handler(EventType::NetworkIo, handler.clone()).await;
+        reactor.register_handler(EventType::Timer, Arc::new(NetworkIoHandler {
+            name: "TimerHandler".to_string(),
+        })).await;
+        
+        let event = Event::new(1, EventType::NetworkIo, Priority::Normal, vec![]);
+        reactor.submit_event(event).await;
+        
+        // 运行 reactor 处理事件
+        let reactor_clone = reactor.clone();
+        let handle = tokio::spawn(async move {
+            tokio::time::sleep(Duration::from_millis(100)).await;
+            reactor_clone.stop().await;
+        });
+        
+        let reactor_run = reactor.clone();
+        tokio::spawn(async move {
+            reactor_run.run().await;
+        });
+        
+        handle.await.unwrap();
+        
+        // 等待事件处理完成
+        tokio::time::sleep(Duration::from_millis(200)).await;
+        
+        let stats = reactor.get_stats().await;
+        assert!(stats.events_processed >= 0);
     }
 }

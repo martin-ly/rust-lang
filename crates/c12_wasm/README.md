@@ -7,6 +7,10 @@
   - [🎯 2025-10-30 WasmEdge 容器技术深化完成 ✨](#-2025-10-30-wasmedge-容器技术深化完成-)
     - [🆕 最新增强 (2025-10-30)](#-最新增强-2025-10-30)
     - [📖 新版文档导航](#-新版文档导航)
+  - [� 知识结构文档](#-知识结构文档)
+    - [知识结构体系](#知识结构体系)
+    - [Rust 1.92.0 WASM 专用文档 ⭐ NEW](#rust-1920-wasm-专用文档--new)
+    - [使用指南](#使用指南)
   - [📋 模块概述](#-模块概述)
     - [🎯 学习目标](#-学习目标)
   - [🚀 核心学习内容](#-核心学习内容)
@@ -20,6 +24,7 @@
     - [核心文档 📖](#核心文档-)
     - [Rust 1.92.0 特性与优化 ⭐ NEW](#rust-1920-特性与优化--new)
     - [Rust 1.92.0 特性与生态](#rust-1920-特性与生态)
+    - [思维表征方式 ⭐ NEW](#思维表征方式--new)
     - [实践指南 📝](#实践指南-)
     - [参考文档 📖](#参考文档-)
     - [高级主题 🚀](#高级主题-)
@@ -101,6 +106,13 @@
 - **[思维导图集合](../../docs/MIND_MAP_COLLECTION.md)** ⭐ NEW! - WASM 思维导图
 - **[决策图网](../../DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
 - **[证明图网](../../PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
+
+### Rust 1.92.0 WASM 专用文档 ⭐ NEW
+
+- **[WASM 思维导图集合](./docs/WASM_MIND_MAPS.md)** - 8 个核心思维导图
+- **[WASM 多维概念对比矩阵](./docs/WASM_CONCEPT_MATRIX.md)** - 10+ 个对比矩阵
+- **[WASM 决策树图](./docs/WASM_DECISION_TREE.md)** - 5 个决策树
+- **[WASM 证明树图](./docs/WASM_PROOF_TREE.md)** - 5 个证明路径
 
 ### 使用指南
 
@@ -231,12 +243,32 @@ wasmedge target/wasm32-wasi/release/wasi-app.wasm input.txt
 | 文档 | 内容 | 难度 |
 | --- | --- | --- |
 | [Rust 1.92.0 WASM 改进文档](./docs/RUST_192_WASM_IMPROVEMENTS.md) | Rust 1.92.0 在 WASM 中的改进和优化 | ⭐⭐⭐⭐ |
+| [Rust 1.92.0 WASM 快速参考](./docs/RUST_192_QUICK_REFERENCE.md) | 快速查找和代码模板 | ⭐⭐ |
+| [Rust 1.92.0 WASM 迁移指南](./docs/RUST_192_MIGRATION_GUIDE.md) | 从 Rust 1.91 迁移指南 | ⭐⭐⭐ |
+| [Rust 1.92.0 特性对比](./docs/RUST_192_FEATURE_COMPARISON.md) | Rust 1.92.0 vs 1.91 对比 | ⭐⭐⭐ |
+| [Rust 1.92.0 最佳实践](./docs/RUST_192_BEST_PRACTICES.md) | 最佳实践指南 | ⭐⭐⭐⭐ |
+| [Rust 1.92.0 性能基准测试](./docs/RUST_192_PERFORMANCE_BENCHMARKS.md) | 性能测试结果 | ⭐⭐⭐ |
+| [Rust 1.92.0 代码示例集合](./docs/RUST_192_CODE_EXAMPLES_COLLECTION.md) | 完整代码示例 | ⭐⭐⭐ |
+| [Rust 1.92.0 故障排除指南](./docs/RUST_192_TROUBLESHOOTING.md) | 常见问题解决 | ⭐⭐⭐ |
+| [Rust 1.92.0 特性路线图](./docs/RUST_192_FEATURE_ROADMAP.md) | 学习路线图 | ⭐⭐⭐ |
+| [Rust 1.92.0 完整指南](./docs/RUST_192_COMPLETE_GUIDE.md) | 一站式学习指南 | ⭐⭐⭐ |
+| [Rust 1.92.0 文档索引](./docs/RUST_192_INDEX.md) | 完整文档索引 | ⭐⭐ |
 
 ### Rust 1.92.0 特性与生态
 
 | 文档 | 内容 | 难度 |
 | --- | --- | --- |
-| [Rust 1.92.0 生态库与设计模式](./docs/tier_04_advanced/04_rust_190_生态库与设计模式.md) | 最新特性、生态库、设计模式 | ⭐⭐⭐⭐⭐ |
+| [Rust 1.92.0 WASM 改进文档](./docs/RUST_192_WASM_IMPROVEMENTS.md) | Rust 1.92.0 在 WASM 中的改进和优化 | ⭐⭐⭐⭐ |
+| [Rust 1.90 生态库与设计模式](./docs/tier_04_advanced/04_rust_190_生态库与设计模式.md) | 生态库、设计模式（历史参考） | ⭐⭐⭐⭐⭐ |
+
+### 思维表征方式 ⭐ NEW
+
+| 文档 | 内容 | 难度 |
+| --- | --- | --- |
+| [WASM 思维导图集合](./docs/WASM_MIND_MAPS.md) | 可视化知识结构和概念关系 | ⭐⭐⭐ |
+| [WASM 多维概念对比矩阵](./docs/WASM_CONCEPT_MATRIX.md) | 技术方案对比和选型参考 | ⭐⭐⭐ |
+| [WASM 决策树图](./docs/WASM_DECISION_TREE.md) | 技术选型决策支持 | ⭐⭐⭐ |
+| [WASM 证明树图](./docs/WASM_PROOF_TREE.md) | 形式化证明结构 | ⭐⭐⭐⭐ |
 
 ### 实践指南 📝
 
@@ -461,9 +493,14 @@ npm start
 
 ---
 
-**模块状态**: ✅ Rust 1.92.0 特性更新完成
+**模块状态**: ✅ Rust 1.92.0 特性更新完成 + 思维表征方式完善
 **最后更新**: 2025-12-11
 **适用版本**: Rust 1.92.0+ (Edition 2024), WASM 2.0 + WASI 0.2
+**新增内容**:
+
+- ✅ Rust 1.92.0 WASM 特性实现和文档
+- ✅ 4 种思维表征方式（思维导图、概念矩阵、决策树、证明树）
+- ✅ 完整的示例代码和性能对比
 
 ---
 

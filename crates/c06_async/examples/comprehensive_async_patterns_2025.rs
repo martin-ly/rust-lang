@@ -1016,7 +1016,7 @@ async fn main() {
     println!("║   Rust 异步编程综合模式示例集 2025                  ║");
     println!("║   Comprehensive Async Patterns Collection           ║");
     println!("║                                                      ║");
-    println!("║   版本: Rust 1.90 | Tokio 1.41+                     ║");
+    println!("║   版本: Rust 1.92.0 | Tokio 1.41+                     ║");
     println!("║   日期: 2025-10-04                                   ║");
     println!("║                                                      ║");
     println!("╚══════════════════════════════════════════════════════╝");
@@ -1097,4 +1097,3 @@ mod tests {
         assert_eq!(result, Ok(42));
     }
 }
-

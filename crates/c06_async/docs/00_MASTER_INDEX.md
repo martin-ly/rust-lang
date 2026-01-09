@@ -80,7 +80,7 @@
 **特点**: 生态分析，版本特性
 
 - **01_ecosystem_analysis_2025.md** - 2025生态全景 ⭐⭐⭐⭐⭐
-- **02_language_features_190.md** - Rust 1.90+特性
+- **02_language_features_192.md** - Rust 1.92.0+特性
 - **03_formal_methods.md** - 形式化方法
 
 **查看详情**: [ecosystem/README.md](./ecosystem/README.md)

@@ -21,6 +21,13 @@
 | [06_async_fetch.rs](./06_async_fetch.rs) | 异步 HTTP 请求，展示异步编程 | ⭐⭐⭐ | Browser |
 | [07_design_patterns.rs](./07_design_patterns.rs) | 设计模式实现（工厂、建造者、单例等） | ⭐⭐⭐⭐ | Browser |
 
+### Rust 1.92.0 特性示例 ⭐ NEW
+
+| 示例 | 描述 | 难度 | 运行环境 |
+| --- | --- | --- | --- |
+| [rust_192_features_demo.rs](./rust_192_features_demo.rs) | Rust 1.92.0 特性演示 | ⭐⭐⭐ | Native/WASM |
+| [12_rust_192_comprehensive_demo.rs](./12_rust_192_comprehensive_demo.rs) | Rust 1.92.0 综合应用示例 | ⭐⭐⭐⭐ | Native/WASM |
+
 ## 🚀 快速开始
 
 ### 浏览器环境 (Browser)

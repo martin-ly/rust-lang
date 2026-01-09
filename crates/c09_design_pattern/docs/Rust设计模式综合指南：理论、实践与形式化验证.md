@@ -71,7 +71,7 @@
 Singleton = { instance() → &'static T | ∀ call₁, call₂: instance() = instance() }
 ```
 
-**Rust 1.90实现**：
+**Rust 1.92.0实现**（自 Rust 1.90 引入）：
 
 ```rust
 use std::sync::OnceLock;

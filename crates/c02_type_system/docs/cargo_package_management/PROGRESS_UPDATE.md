@@ -183,7 +183,7 @@
 **核心内容**：
 
 - ✅ 完整的版本规范说明（脱字符、波浪号、精确等）
-- ✅ Resolver 3 深入解析（Rust 1.90 新特性）
+- ✅ Resolver 3 深入解析（Rust 1.92.0 支持，自 Rust 1.90 引入）✅
 - ✅ 依赖冲突处理策略
 - ✅ Cargo.lock 最佳实践
 - ✅ 工作空间依赖继承
@@ -213,7 +213,7 @@ critical = "=1.0.0"    # 精确：关键依赖
 **特色**：
 
 ```toml
-# Rust 1.90 新语法
+# Rust 1.92.0 新语法（兼容 Rust 1.90+ 特性）
 [features]
 json = ["dep:serde_json"]  # dep: 前缀
 std = ["serde?/std"]       # 弱依赖
@@ -233,7 +233,7 @@ std = ["serde?/std"]       # 弱依赖
 **特色**：
 
 ```toml
-# Rust 1.90 工作空间继承
+# Rust 1.92.0 工作空间继承（兼容 Rust 1.90+ 特性）
 [workspace.dependencies]
 serde = "1.0"
 
@@ -249,7 +249,7 @@ serde.workspace = true  # 简洁继承
 
 - ✅ 所有概念清晰定义
 - ✅ 代码示例可运行
-- ✅ 遵循 Rust 1.90 标准
+- ✅ 遵循 Rust 1.92.0 标准（兼容 Rust 1.90+ 特性）✅
 - ✅ 包含最佳实践
 - ✅ 提供实战案例
 

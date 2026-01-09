@@ -73,17 +73,17 @@
 
 ### 🆕 Rust 版本特性
 
-#### Rust 1.90 特性文档 🌟
+#### Rust 1.92.0 特性文档 🌟（兼容 Rust 1.90+ 特性）
 
-- [📖 Rust 1.90 所有权和借用系统全面指南](./06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md) - 最全面的 Rust 1.90 入门指南 ⭐⭐⭐
+- [📖 Rust 1.92.0 所有权和借用系统全面指南](./06_rust_features/RUST_192_COMPREHENSIVE_GUIDE.md) - 最全面的 Rust 1.92.0 入门指南（自 Rust 1.90 引入） ⭐⭐⭐ | [历史版本](./06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md)
   - 难度: 初级到中级 | 阅读时长: 80 分钟
   - 所有权规则、借用系统、生命周期、智能指针完整讲解
 
-- [🔬 Rust 1.90 版本特性全面分析](./06_rust_features/RUST_190_COMPREHENSIVE_FEATURES.md) - 深度技术分析 ⭐⭐⭐
+- [🔬 Rust 1.92.0 版本特性全面分析](./06_rust_features/RUST_192_COMPREHENSIVE_FEATURES.md) - 深度技术分析（自 Rust 1.90 引入） ⭐⭐⭐ | [历史版本](./06_rust_features/RUST_190_COMPREHENSIVE_FEATURES.md)
   - 难度: 高级 | 阅读时长: 70 分钟
   - Rust 2024 Edition、所有权增强、借用优化、作用域管理
 
-- [📝 Rust 1.90 特性增强总结](./06_rust_features/RUST_190_ENHANCEMENT_SUMMARY.md) - 项目增强说明 ⭐⭐
+- [📝 Rust 1.92.0 特性增强总结](./06_rust_features/RUST_192_ENHANCEMENT_SUMMARY.md) - 项目增强说明（自 Rust 1.90 引入） ⭐⭐ | [历史版本](./06_rust_features/RUST_190_ENHANCEMENT_SUMMARY.md)
   - 难度: 中级 | 阅读时长: 40 分钟
   - 版本升级、新增模块、文档示例、性能改进
 
@@ -183,7 +183,7 @@
 5. **跨语言对比** → [多维矩阵 - 跨语言对比](./MULTIDIMENSIONAL_MATRIX.md#跨语言对比)
 6. **形式化验证** → [内存安全保证](./04_safety/01_memory_safety.md)
 7. **编译器实现** → [所有权理论](./01_theory/01_ownership_theory.md#51-编译器实现)
-8. **Rust 1.90 特性** → [Rust 1.90 全面指南](./06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md)
+8. **Rust 1.92.0 特性**（自 Rust 1.90 引入） → [Rust 1.92.0 全面指南](./06_rust_features/RUST_192_COMPREHENSIVE_GUIDE.md) | [历史版本](./06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md)
 
 ### 📚 历史文档路径
 

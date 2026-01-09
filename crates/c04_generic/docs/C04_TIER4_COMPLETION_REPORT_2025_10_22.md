@@ -153,7 +153,7 @@
 
 ### 3. 前沿技术 🚀
 
-**Rust 1.90+ 特性**:
+**Rust 1.92.0+ 特性**（兼容 Rust 1.90+ 特性）:
 
 - GATs (Rust 1.65+ 稳定)
 - SIMD (portable_simd)
@@ -299,7 +299,7 @@
 **14 个模块全部达到 100% 完成度！**
 
 | 模块 | 完成度 | 质量评分 |
- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- '
 | C01 Ownership | 100% | 98/100 |
 | C02 Type System | 100% | 96/100 |
 | C03 Control Flow | 100% | 95/100 |

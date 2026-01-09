@@ -465,7 +465,7 @@ impl Observer for StringObserver {
 
 ### RPITIT (Return Position Impl Trait in Trait)
 
-**定义**: Rust 1.90+ 特性，允许在 trait 方法中返回 `impl Trait`。
+**定义**: Rust 1.92.0+ 特性（自 Rust 1.90 引入），允许在 trait 方法中返回 `impl Trait`。
 
 **优点**:
 
@@ -497,7 +497,7 @@ impl TextSource for Document {
 
 ### OnceLock
 
-**定义**: Rust 1.90+ 标准库提供的线程安全的单次初始化类型。
+**定义**: Rust 1.92.0+ 标准库提供的线程安全的单次初始化类型（自 Rust 1.90 引入）。
 
 **用途**: 全局单例、延迟初始化
 

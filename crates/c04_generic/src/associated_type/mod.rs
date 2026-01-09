@@ -507,6 +507,51 @@ impl NumberStream {
     }
 }
 
+// Storage trait 和 VecStorage 实现（实际代码）
+pub trait Storage<'a> {
+    type Item: 'a;
+    type Iterator: std::iter::Iterator<Item = &'a Self::Item>;
+
+    fn iter(&'a self) -> Self::Iterator;
+    fn get(&'a self, index: usize) -> Option<&'a Self::Item>;
+}
+
+pub struct VecStorage<T> {
+    pub items: Vec<T>,
+}
+
+impl<'a, T> Storage<'a> for VecStorage<T>
+where
+    T: 'a,
+{
+    type Item = T;
+    type Iterator = std::slice::Iter<'a, T>;
+
+    fn iter(&'a self) -> Self::Iterator {
+        self.items.iter()
+    }
+
+    fn get(&'a self, index: usize) -> Option<&'a Self::Item> {
+        self.items.get(index)
+    }
+}
+
+impl<T> VecStorage<T> {
+    pub fn new() -> Self {
+        VecStorage { items: Vec::new() }
+    }
+
+    pub fn with_items(items: Vec<T>) -> Self {
+        VecStorage { items }
+    }
+}
+
+impl<T> Default for VecStorage<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 // 数据库抽象示例
 pub trait Database {
     type Connection;
@@ -773,5 +818,31 @@ mod tests {
         assert_eq!(iterator.next(), Some("value1".to_string()));
         assert_eq!(iterator.next(), Some("value2".to_string()));
         assert_eq!(iterator.next(), None);
+    }
+
+    #[test]
+    fn test_vec_storage() {
+        let storage = VecStorage {
+            items: vec![1, 2, 3, 4, 5],
+        };
+
+        // 测试 iter 方法
+        let values: Vec<&i32> = storage.iter().collect();
+        assert_eq!(values, vec![&1, &2, &3, &4, &5]);
+
+        // 测试 get 方法
+        assert_eq!(storage.get(0), Some(&1));
+        assert_eq!(storage.get(2), Some(&3));
+        assert_eq!(storage.get(10), None);
+    }
+
+    #[test]
+    fn test_vec_storage_empty() {
+        let storage = VecStorage::<i32> {
+            items: Vec::new(),
+        };
+        let values: Vec<&i32> = storage.iter().collect();
+        assert_eq!(values.len(), 0);
+        assert_eq!(storage.get(0), None);
     }
 }

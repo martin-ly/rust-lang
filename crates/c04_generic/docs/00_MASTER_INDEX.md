@@ -469,9 +469,9 @@ docs/
 
 **关于版本特性的常见误解**:
 
-❌ "GATs在Rust 1.90才稳定" → ✅ 实际在Rust 1.65 (2022.11) 已稳定
-❌ "RPITIT是Rust 1.90的新特性" → ✅ 实际在Rust 1.75 (2023.12) 已稳定
-❌ "Rust 1.90是泛型系统重大升级" → ✅ 实际主要是工具链改进
+❌ "GATs在Rust 1.92.0才稳定" → ✅ 实际在Rust 1.65 (2022.11) 已稳定
+❌ "RPITIT是Rust 1.92.0的新特性" → ✅ 实际在Rust 1.75 (2023.12) 已稳定
+❌ "Rust 1.92.0是泛型系统重大升级" → ✅ 实际主要是工具链改进（兼容 Rust 1.90+ 特性）
 
 **准确信息来源**: [RUST_192_COMPREHENSIVE_DOCUMENTATION_REVIEW.md](../../RUST_192_COMPREHENSIVE_DOCUMENTATION_REVIEW.md) 🆕⭐
 

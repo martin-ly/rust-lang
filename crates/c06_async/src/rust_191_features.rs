@@ -1,4 +1,6 @@
-//! Rust 1.91 异步编程特性实现模块
+//! Rust 1.91 异步编程特性实现模块（历史版本）
+//!
+//! > **注意**: 当前版本为 Rust 1.92.0，请参考 `rust_192_features.rs` 了解最新特性。
 //!
 //! 本模块实现了 Rust 1.91 在异步编程方面的改进，包括：
 //! - const 上下文增强在异步配置中的应用
@@ -818,4 +820,3 @@ pub fn demonstrate_rust_191_async_sync() {
     const_async_config::demonstrate();
     println!("\n注意：异步功能需要启用 tokio 和 futures 特性");
 }
-

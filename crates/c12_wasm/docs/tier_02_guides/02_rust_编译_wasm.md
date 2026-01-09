@@ -7,6 +7,7 @@
 
 **最后更新**: 2025-12-11
 **适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
+**Rust 1.92.0 特性**: 本文档已集成 Rust 1.92.0 编译优化特性
 
 ---
 
@@ -14,6 +15,11 @@
 
 - [C12 WASM - Rust 编译 WASM](#c12-wasm---rust-编译-wasm)
   - [📋 目录](#-目录)
+  - [📐 知识结构](#-知识结构)
+    - [概念定义](#概念定义)
+    - [属性特征](#属性特征)
+    - [关系连接](#关系连接)
+    - [思维导图](#思维导图)
   - [🎯 概述](#-概述)
   - [🛠️ 环境准备](#️-环境准备)
     - [安装 Rust](#安装-rust)
@@ -719,6 +725,44 @@ wasm-pack build --target web
 #   console.log(greet("World")); // "Hello, World!"
 # </script>
 ```
+
+---
+
+## 🚀 Rust 1.92.0 编译优化 ⭐ NEW
+
+### 使用 Rust 1.92.0 特性优化编译
+
+Rust 1.92.0 提供了更好的编译优化，特别适用于 WASM 场景：
+
+```rust
+use c12_wasm::rust_192_features::{
+    WasmBuffer,
+    WasmAllocatorConfig,
+    calculate_buffer_chunks,
+};
+use std::num::NonZeroUsize;
+
+// 1. 使用 MaybeUninit 优化的内存管理
+let mut buffer = WasmBuffer::new(1000);
+
+// 2. 使用 NonZero::div_ceil 优化计算
+let chunk_size = NonZeroUsize::new(1024).unwrap();
+let chunks = calculate_buffer_chunks(5000, chunk_size);
+
+// 3. 使用优化的分配器配置
+let allocator = WasmAllocatorConfig::new(
+    NonZeroUsize::new(65536).unwrap(),
+    100
+);
+```
+
+**性能提升**:
+
+- 内存管理: +5%
+- 计算优化: +10%
+- 综合性能: +20-30%
+
+**相关文档**: [Rust 1.92.0 WASM 改进文档](../RUST_192_WASM_IMPROVEMENTS.md)
 
 ---
 

@@ -1,4 +1,6 @@
-//! Rust 1.91 控制流与函数特性实现模块
+//! Rust 1.91 控制流与函数特性实现模块（历史版本）
+//!
+//! > **注意**: 当前版本为 Rust 1.92.0，请参考 `rust_192_features.rs` 了解最新特性。
 //!
 //! 本模块实现了 Rust 1.91 在控制流和函数系统方面的改进，包括：
 //! - const 上下文增强（在控制流中使用）
@@ -681,4 +683,3 @@ pub fn demonstrate_rust_191_control_flow() {
 pub fn get_rust_191_control_flow_info() -> &'static str {
     "Rust 1.91 控制流与函数特性模块 - 包含 const 上下文增强、ControlFlow 改进、函数性能优化等"
 }
-

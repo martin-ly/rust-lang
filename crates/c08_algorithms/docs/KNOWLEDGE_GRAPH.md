@@ -7,11 +7,11 @@
   - [📊 知识图谱概览](#-知识图谱概览)
   - [🎯 算法分类知识图谱](#-算法分类知识图谱)
     - [1. 排序算法知识图谱](#1-排序算法知识图谱)
-      - [Rust 1.90 排序算法实现示例](#rust-190-排序算法实现示例)
+      - [Rust 1.92.0 排序算法实现示例](#rust-1920-排序算法实现示例)
     - [2. 图算法知识图谱](#2-图算法知识图谱)
-      - [Rust 1.90 图算法实现示例](#rust-190-图算法实现示例)
+      - [Rust 1.92.0 图算法实现示例](#rust-1920-图算法实现示例)
     - [3. 动态规划知识图谱](#3-动态规划知识图谱)
-      - [Rust 1.90 动态规划实现示例](#rust-190-动态规划实现示例)
+      - [Rust 1.92.0 动态规划实现示例](#rust-1920-动态规划实现示例)
   - [🔄 算法演化与关系](#-算法演化与关系)
     - [排序算法演化图](#排序算法演化图)
     - [图算法依赖关系](#图算法依赖关系)
@@ -22,7 +22,7 @@
   - [📚 参考资源](#-参考资源)
 
 **版本**: 1.0.0
-**Rust版本**: 1.90.0
+**Rust版本**: 1.92.0
 **创建日期**: 2025年10月19日
 **特性**: 知识图谱 + 关系网络 + 概念映射
 
@@ -117,7 +117,7 @@ graph LR
     NonComparison --> RadixSort[基数排序 O-d×n+k]
     NonComparison --> BucketSort[桶排序 O-n+k]
 
-    %% Rust 1.90 特性应用
+    %% Rust 1.92.0 特性应用
     MergeSort -.async.-> AsyncMerge[异步归并]
     QuickSort -.parallel.-> ParallelQuick[并行快排]
     HeapSort -.const_generic.-> GenericHeap[泛型堆排序]
@@ -134,12 +134,12 @@ graph LR
     style ParallelQuick fill:#ffd93d
 ```
 
-#### Rust 1.90 排序算法实现示例
+#### Rust 1.92.0 排序算法实现示例（兼容 Rust 1.90+ 特性）
 
 ```rust
 use std::cmp::Ordering;
 
-/// 归并排序 - 展示 Rust 1.90 const generic 特性
+/// 归并排序 - 展示 Rust 1.92.0 const generic 特性（自 Rust 1.90 引入）
 pub fn merge_sort_generic<T: Ord + Clone, const N: usize>(arr: &mut [T; N]) {
     if arr.len() <= 1 {
         return;
@@ -197,7 +197,7 @@ fn merge<T: Ord + Clone>(arr: &mut [T], left: &[T], right: &[T]) {
     }
 }
 
-/// 异步归并排序 - Rust 1.90 async fn in trait
+/// 异步归并排序 - Rust 1.92.0 async fn in trait（自 Rust 1.90 引入）
 pub trait AsyncSort {
     async fn sort_async(&mut self) -> Result<(), Box<dyn std::error::Error + Send + Sync>>;
 }
@@ -338,7 +338,7 @@ graph TB
     BFS -.uses.-> QueueStructure[队列]
     DFS -.uses.-> StackStructure[栈]
 
-    %% Rust 1.90 特性
+    %% Rust 1.92.0 特性
     Dijkstra -.async.-> AsyncDijkstra[异步 Dijkstra]
     BFS -.parallel.-> ParallelBFS[并行 BFS]
 
@@ -348,7 +348,7 @@ graph TB
     style Flow fill:#96ceb4
 ```
 
-#### Rust 1.90 图算法实现示例
+#### Rust 1.92.0 图算法实现示例（兼容 Rust 1.90+ 特性）
 
 ```rust
 use std::collections::{HashMap, BinaryHeap, VecDeque};
@@ -380,7 +380,7 @@ impl<V: Eq, W: Ord> PartialOrd for DijkstraNode<V, W> {
     }
 }
 
-/// Dijkstra 最短路径 - Rust 1.90 泛型约束
+/// Dijkstra 最短路径 - Rust 1.92.0 泛型约束（自 Rust 1.90 引入）
 pub fn dijkstra<V, W>(
     graph: &HashMap<V, Vec<Edge<V, W>>>,
     start: V,
@@ -427,7 +427,7 @@ where
     distances
 }
 
-/// 异步 Dijkstra - 展示 async fn in trait (Rust 1.90)
+/// 异步 Dijkstra - 展示 async fn in trait (Rust 1.92.0，自 Rust 1.90 引入)
 pub trait AsyncGraph<V, W> {
     async fn shortest_path(&self, start: V, end: V) -> Option<(Vec<V>, W)>;
 }
@@ -704,7 +704,7 @@ graph TB
     Optimization --> MonotonicQueue[单调队列]
     Optimization --> SlopeOptimization[斜率优化]
 
-    %% Rust 1.90 特性
+    %% Rust 1.92.0 特性
     LCS -.parallel.-> ParallelLCS[并行LCS]
     Knapsack01 -.async.-> AsyncKnapsack[异步背包]
 
@@ -714,7 +714,7 @@ graph TB
     style State fill:#96ceb4
 ```
 
-#### Rust 1.90 动态规划实现示例
+#### Rust 1.92.0 动态规划实现示例（兼容 Rust 1.90+ 特性）
 
 ```rust
 /// 最长公共子序列 (LCS) - 标准实现
@@ -1012,7 +1012,7 @@ graph LR
 
 ## 📊 算法应用场景映射
 
-| 算法类别 | 核心算法 | 应用场景 | Rust 1.90 特性 | 时间复杂度 |
+| 算法类别 | 核心算法 | 应用场景 | Rust 1.92.0 特性 | 时间复杂度 |
 | --- | --- | --- | --- | --- |
 | **排序** | 快速排序 | 通用排序、Top-K | 并行化 `rayon::join` | O(n log n) |
 | | 归并排序 | 稳定排序、外部排序 | `async fn in trait` | O(n log n) |

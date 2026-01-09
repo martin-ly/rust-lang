@@ -12,7 +12,7 @@ docs/
 ├── 🆕 KNOWLEDGE_GRAPH.md                      # 📊 算法知识图谱
 ├── 🆕 MULTIDIMENSIONAL_MATRIX_COMPARISON.md   # 🎯 多维矩阵对比
 ├── 🆕 MIND_MAP.md                             # 🧠 思维导图
-├── 🆕 RUST_190_RICH_EXAMPLES.md               # 💻 Rust 1.90 丰富示例
+├── 🆕 RUST_192_RICH_EXAMPLES.md               # 💻 Rust 1.92.0 丰富示例
 ├── 🆕 INTERACTIVE_LEARNING_GUIDE.md           # 🎓 交互式学习指南
 ├── 🆕 VISUAL_CODE_EXAMPLES.md                 # 🎨 可视化示例库
 │
@@ -136,9 +136,9 @@ Rust 语言特性在算法中的应用。
 
 **特性亮点**:
 
-- ✅ Async traits（1.90+）
-- ✅ GATs 稳定（1.90+）
-- ✅ 常量泛型增强（1.90+）
+- ✅ Async traits（1.92.0+，自1.90引入）
+- ✅ GATs 稳定（1.92.0+，自1.90引入）
+- ✅ 常量泛型增强（1.92.0+，自1.90引入）
 - ✅ Edition 2024 语法
 
 ### 5. 参考资料 (references/)
@@ -267,7 +267,7 @@ Week 4: 实战项目
 ### 按 Rust 版本查找
 
 - **Rust 1.89**: rust-features/rust_189_features.md, RUST_189_FEATURES_GUIDE.md
-- **Rust 1.90**: rust-features/RUST_190_FEATURES_APPLICATION.md
+- **Rust 1.92.0**: rust-features/RUST_192_FEATURES_APPLICATION.md
 - **Edition 2024**: rust-features/Edition_2024_Features.md
 
 ---

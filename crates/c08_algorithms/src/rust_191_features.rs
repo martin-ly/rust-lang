@@ -1,4 +1,6 @@
-//! Rust 1.91 算法特性实现模块
+//! Rust 1.91 算法特性实现模块（历史版本）
+//!
+//! > **注意**: 当前版本为 Rust 1.92.0，请参考 `rust_192_features.rs` 了解最新特性。
 //!
 //! 本模块展示了 Rust 1.91 在算法实现场景中的应用，包括：
 //! - const 上下文增强（算法常量配置计算）
@@ -478,4 +480,3 @@ pub fn demonstrate_rust_191_algorithm_features() {
         println!("  - {}", line);
     }
 }
-

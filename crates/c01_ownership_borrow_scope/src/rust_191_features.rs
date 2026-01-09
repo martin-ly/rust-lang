@@ -1,4 +1,6 @@
-//! # Rust 1.91 特性实现模块 / Rust 1.91 Features Implementation Module
+//! # Rust 1.91 特性实现模块 / Rust 1.91 Features Implementation Module (历史版本)
+//!
+//! > **注意**: 当前版本为 Rust 1.92.0，请参考 `rust_192_features.rs` 了解最新特性。
 //!
 //! 本模块实现了 Rust 1.91 版本中与所有权、借用、生命周期相关的新特性和改进，包括：
 //! This module implements new features and improvements in Rust 1.91 related to ownership, borrowing, and lifetimes, including:
@@ -790,4 +792,3 @@ fn improved_lifetime_inference_example() {
 pub fn get_rust_191_features_info() -> &'static str {
     "Rust 1.91 Features Module - Comprehensive implementation of ownership, borrowing, and lifetime improvements"
 }
-

@@ -51,7 +51,7 @@
     - [工具推荐](#工具推荐)
     - [相关文档](#相关文档)
 
-**版本**: Rust 1.90 / Cargo 1.90
+**版本**: Rust 1.92.0 / Cargo 1.92.0
 **创建日期**: 2025-10-19
 **文档状态**: ✅ 完整
 
@@ -255,7 +255,7 @@ my-project/         ← Package
 **配置示例**:
 
 ```toml
-# Cargo.toml - Rust 1.90 项目
+# Cargo.toml - Rust 1.92.0 项目
 [package]
 name = "my-project"
 version = "1.0.0"

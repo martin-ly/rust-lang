@@ -43,7 +43,7 @@ docs/
 │
 ├── ecosystem/                        # 🌐 生态系统
 │   ├── 01_ecosystem_analysis_2025.md # 生态分析（合并）
-│   ├── 02_language_features_190.md   # Rust 1.90特性
+│   ├── 02_language_features_192.md   # Rust 1.92.0特性
 │   └── 03_formal_methods.md          # 形式化方法
 │
 ├── references/                       # 📖 API参考

@@ -141,6 +141,7 @@
 | 文档 | 版本 | 说明 |
 | --- | --- |------|
 | [Rust 1.92.0 控制流改进](../RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) | 1.92.0 | 最新特性 🆕 |
+| [Rust 1.92.0 控制流改进](../RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) | 1.92.0 | 最新版本 |
 | [Rust 1.91 控制流改进](../RUST_191_CONTROL_FLOW_IMPROVEMENTS.md) | 1.91 | 历史版本 |
 | [Rust 1.92.0 控制流改进](../RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) | 1.92.0 | 最新特性 🆕 |
 

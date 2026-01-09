@@ -1,3 +1,7 @@
+//! Rust 1.91 WASM 特性实现模块（历史版本）
+//!
+//! > **注意**: 当前版本为 Rust 1.92.0，请参考 `rust_192_features.rs` 了解最新特性。
+//!
 //! Rust 1.91 WebAssembly 特性实现模块
 //!
 //! 本模块展示了 Rust 1.91 在 WebAssembly 场景中的应用，包括：

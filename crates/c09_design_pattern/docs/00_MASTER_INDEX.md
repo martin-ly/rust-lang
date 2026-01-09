@@ -25,7 +25,7 @@
     - [第四部分：领域专题](#第四部分领域专题)
       - [8. 领域特定模式](#8-领域特定模式)
     - [第五部分：Rust 特性集成](#第五部分rust-特性集成)
-      - [9. Rust 1.90+ 特性](#9-rust-190-特性)
+      - [9. Rust 1.92.0+ 特性（自 Rust 1.90 引入）](#9-rust-1920-特性自-rust-190-引入)
   - [📖 实践示例](#-实践示例)
     - [可运行示例 (examples/)](#可运行示例-examples)
     - [性能基准测试 (benches/)](#性能基准测试-benches)
@@ -82,7 +82,7 @@
 | **知识图谱** 🆕 | [KNOWLEDGE_GRAPH](./KNOWLEDGE_GRAPH.md) | 模式关系网络与组合策略 |
 | **多维矩阵** 🆕 | [MULTIDIMENSIONAL_MATRIX_COMPARISON](./MULTIDIMENSIONAL_MATRIX_COMPARISON.md) | 7维度性能对比分析 |
 | **思维导图** 🆕 | [MIND_MAP](./MIND_MAP.md) | 可视化学习路径与决策树 |
-| **Rust 1.90示例** 🆕 | [RUST_190_EXAMPLES](./RUST_190_EXAMPLES.md) | 最新特性完整示例集 |
+| **Rust 1.92.0示例** 🆕 | [RUST_192_EXAMPLES](./RUST_192_EXAMPLES.md) | 最新特性完整示例集（自 Rust 1.90 引入） |
 | **FAQ** | [FAQ](./FAQ.md) | 常见问题解答 |
 | **术语表** | [Glossary](./Glossary.md) | 核心概念快速参考 |
 
@@ -139,7 +139,7 @@
 | 模块 | 源码位置 | 说明 |
 | --- | --- | --- |
 | **异步模式** | [`src/concurrency/asynchronous/`](../src/concurrency/asynchronous/) | Future/async/await |
-| **原生 async trait** | [`src/concurrency/asynchronous/native_async_trait/`](../src/concurrency/asynchronous/native_async_trait/) | Rust 1.90+ 特性 |
+| **原生 async trait** | [`src/concurrency/asynchronous/native_async_trait/`](../src/concurrency/asynchronous/native_async_trait/) | Rust 1.92.0+ 特性（自 Rust 1.90 引入） |
 | **消息传递** | [`src/concurrency/message_passing/`](../src/concurrency/message_passing/) | Channel 通信 |
 | **生产者-消费者** | [`src/concurrency/producer_consumer/`](../src/concurrency/producer_consumer/) | 队列模式 |
 | **读写者** | [`src/concurrency/reader_writer/`](../src/concurrency/reader_writer/) | RwLock 模式 |
@@ -186,7 +186,7 @@
 
 ### 第五部分：Rust 特性集成
 
-#### 9. Rust 1.90+ 特性
+#### 9. Rust 1.92.0+ 特性（自 Rust 1.90 引入）
 
 | 特性 | 源码位置 | 说明 |
 | --- | --- | --- |
@@ -387,7 +387,7 @@ cargo bench -p c09_design_pattern
 - ✅ **新增知识图谱文档** (KNOWLEDGE_GRAPH.md) - 展示模式关系网络
 - ✅ **新增多维矩阵对比文档** (MULTIDIMENSIONAL_MATRIX_COMPARISON.md) - 7维度全面对比
 - ✅ **新增思维导图文档** (MIND_MAP.md) - 可视化学习路径
-- ✅ **新增Rust 1.90示例集** (RUST_190_EXAMPLES.md) - 100+完整示例
+- ✅ **新增Rust 1.92.0示例集** (RUST_192_EXAMPLES.md) - 100+完整示例（自 Rust 1.90 引入）
 - ✅ **新增综合增强报告** (C09_COMPREHENSIVE_ENHANCEMENT_REPORT_2025_10_19.md)
 - ✅ **50+个Mermaid可视化图表**
 - ✅ 创建主索引文档
@@ -396,7 +396,7 @@ cargo bench -p c09_design_pattern
 
 ### 2025年9月
 
-- ✅ 集成 Rust 1.90 特性
+- ✅ 集成 Rust 1.92.0 特性（兼容 Rust 1.90+ 特性）
 - ✅ 实现原生 async trait
 - ✅ 添加 GATs 示例
 - ✅ 完善形式化理论文档

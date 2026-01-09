@@ -282,7 +282,7 @@ C04 泛型编程模块在继承 C02 和 C03 成功经验的同时，展现了独
    - 类型类 (Type Classes) 与 Rust trait 对应
    - Rust 类型系统完整分析
 
-4. **最详细的 Rust 1.90 支持**
+4. **最详细的 Rust 1.92.0 支持**（兼容 Rust 1.90+ 特性）
    - GAT (Generic Associated Types) 完整解析
    - RPITIT 详细说明
    - async trait 支持

@@ -7,6 +7,7 @@
 
 **最后更新**: 2025-12-11
 **适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
+**Rust 1.92.0 特性**: 本文档已集成 Rust 1.92.0 FFI 互操作特性
 
 ---
 
@@ -15,6 +16,11 @@
 - [C12 WASM - JavaScript 互操作](#c12-wasm---javascript-互操作)
   - [📋 目录](#-目录)
   - [🎯 概述](#-概述)
+  - [📐 知识结构](#-知识结构)
+    - [概念定义](#概念定义)
+    - [属性特征](#属性特征)
+    - [关系连接](#关系连接)
+    - [思维导图](#思维导图)
   - [🔗 基础集成](#-基础集成)
     - [加载 WASM 模块](#加载-wasm-模块)
   - [⚛️ React 集成](#️-react-集成)
@@ -33,6 +39,8 @@
   - [🚀 实践示例](#-实践示例)
     - [示例 1: 简单计算](#示例-1-简单计算)
     - [示例 2: 数组处理](#示例-2-数组处理)
+  - [� Rust 1.92.0 FFI 互操作 ⭐ NEW](#-rust-1920-ffi-互操作--new)
+    - [使用联合体原始引用进行安全的 FFI 互操作](#使用联合体原始引用进行安全的-ffi-互操作)
   - [📚 相关资源](#-相关资源)
 
 ---
@@ -358,11 +366,48 @@ const result = sum_array(new Int32Array([1, 2, 3, 4, 5])); // 15
 
 ---
 
+## 🔗 Rust 1.92.0 FFI 互操作 ⭐ NEW
+
+### 使用联合体原始引用进行安全的 FFI 互操作
+
+Rust 1.92.0 允许在安全代码中使用原始引用访问联合体字段，特别适用于 FFI 互操作：
+
+```rust
+use c12_wasm::rust_192_features::WasmFFIUnion;
+
+// 创建 FFI 联合体
+let mut union = WasmFFIUnion::new();
+union.set_integer(0x12345678);
+
+// Rust 1.92.0: 允许在安全代码中使用原始引用
+let raw_ref = union.get_integer_raw();
+let mut_raw_ref = union.get_integer_mut_raw();
+
+// 可以安全地传递给外部函数
+// extern "C" {
+//     fn process_union(ptr: *const u32);
+// }
+// unsafe {
+//     process_union(raw_ref);
+// }
+```
+
+**优势**:
+
+- ✅ 允许在安全代码中使用原始引用
+- ✅ 类型安全保证
+- ✅ 更好的 FFI 互操作支持
+
+**相关文档**: [Rust 1.92.0 WASM 改进文档](../RUST_192_WASM_IMPROVEMENTS.md)
+
+---
+
 ## 📚 相关资源
 
 - [Rust 编译 WASM](./02_rust_编译_wasm.md) - 学习编译流程
 - [性能优化指南](./04_性能优化指南.md) - 学习优化
 - [最佳实践](../tier_03_references/03_最佳实践.md) - 开发规范
+- [Rust 1.92.0 WASM 改进文档](../RUST_192_WASM_IMPROVEMENTS.md) - Rust 1.92.0 特性
 
 **外部资源**:
 
