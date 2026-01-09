@@ -377,7 +377,7 @@
 #### 设计模式覆盖
 
 | 模式类型 | 模式数量 | 覆盖度 | 示例数 | 图表数 |
- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **创建型** | 7个 | 100% | 15+ | 5 |
 | **结构型** | 7个 | 100% | 15+ | 6 |
 | **行为型** | 11个 | 100% | 25+ | 8 |
@@ -388,7 +388,7 @@
 #### Rust 1.90 特性覆盖
 
 | 特性 | 覆盖度 | 示例数 | 模式应用 | 性能数据 |
- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **OnceLock** | ✅ 完整 | 5 | 单例、缓存 | 有 |
 | **GATs** | ✅ 完整 | 6 | 观察者、迭代器 | 有 |
 | **async trait** | ✅ 完整 | 8 | 所有异步模式 | 有 |
@@ -793,7 +793,7 @@ pie title 可视化内容分布
 ### 8.1 新增文档清单
 
 | 文档名称 | 类型 | 大小 | 主要内容 | 推荐读者 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **KNOWLEDGE_GRAPH.md** | 关系图谱 | 35KB | 模式关系网络 | 所有人 |
 | **MULTIDIMENSIONAL_MATRIX_COMPARISON.md** | 对比分析 | 45KB | 多维度对比 | 中高级 |
 | **MIND_MAP.md** | 学习导图 | 40KB | 学习路径 | 初中级 |
@@ -827,7 +827,7 @@ graph LR
 ### 8.3 快速查找表
 
 | 需求 | 推荐文档 | 章节 |
- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **了解模式关系** | KNOWLEDGE_GRAPH.md | 第一部分 |
 | **性能对比** | MULTIDIMENSIONAL_MATRIX_COMPARISON.md | 第一部分 |
 | **学习路径规划** | MIND_MAP.md | 第一、二部分 |

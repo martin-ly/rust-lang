@@ -351,7 +351,7 @@ macro_rules! tail_recursive_sum {
 ### 4.1 按主题分类
 
 | 主题 | 示例数量 | 复杂度 |
- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- '
 | 基础语法 | 20+ | 简单 |
 | 模式匹配 | 25+ | 中等 |
 | 重复语法 | 20+ | 中等 |

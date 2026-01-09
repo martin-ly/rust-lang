@@ -20,12 +20,14 @@
 ### 2. c06_async 文档大规模批量更新 ✅
 
 #### theory_enhanced 文档（2个）
+
 - ✅ `docs/theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md` - **4处**版本引用更新
   - 文档定位、章节标题、表格、升级建议全部更新
 - ✅ `docs/theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md` - **8处**版本引用更新
   - 文档定位、章节标题、表格、特性映射全部更新
 
 #### tier_01_foundations 文档（1个）
+
 - ✅ `docs/tier_01_foundations/04_常见问题.md` - **3处**版本引用更新
 
 **总计**: 3个文件，15处版本引用更新
@@ -33,6 +35,7 @@
 ### 3. c03_control_fn 文档批量更新 ✅
 
 #### 核心文档（4个）
+
 - ✅ `docs/00_MASTER_INDEX.md` - 1处更新（添加1.92.0引用）
 - ✅ `docs/DOCUMENTATION_INDEX.md` - 1处更新（添加1.92.0引用）
 - ✅ `docs/DOCUMENTATION_STANDARD.md` - 1处更新

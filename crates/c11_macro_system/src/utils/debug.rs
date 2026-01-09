@@ -41,4 +41,3 @@ mod tests {
         assert_eq!(info.expansions, 1);
     }
 }
-

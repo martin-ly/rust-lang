@@ -17,5 +17,3 @@ fn main() {
     let s = Sum;
     println!("static={}, dynamic={}", static_dispatch(&s, &data), dynamic_dispatch(&s, &data));
 }
-
-

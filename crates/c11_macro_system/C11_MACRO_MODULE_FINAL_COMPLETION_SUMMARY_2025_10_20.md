@@ -70,7 +70,7 @@
 ### 核心指标
 
 | 指标 | 数量 | 状态 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **核心文档** | 22篇 | ✅ 100% |
 | **总行数** | 30,000+ | ✅ 100% |
 | **源代码文件** | 16个 | ✅ 100% |
@@ -82,7 +82,7 @@
 ### 阶段完成情况
 
 | 阶段 | 内容 | 文档数 | 行数 | 状态 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **Phase 1** | 基础架构 | 8篇 | 19,000+ | ✅ |
 | **Phase 2** | 声明宏教程 | 5篇 | 3,000+ | ✅ |
 | **Phase 3** | 最佳实践 | 4篇 | 2,750+ | ✅ |
@@ -222,7 +222,7 @@
 ### 3. 质量保证
 
 | 指标 | 评分 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | 技术准确性 | ⭐⭐⭐⭐⭐ | 基于官方文档和最佳实践 |
 | 代码可运行 | ⭐⭐⭐⭐⭐ | 全部示例可编译运行 |
 | 文档完整性 | ⭐⭐⭐⭐⭐ | 覆盖所有核心概念 |
@@ -272,7 +272,7 @@
 ### 与业界资源对比
 
 | 资源 | 内容量 | 深度 | 实践性 | 中文 | 完整度 | 系统性 |
- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **本项目** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ✅ | 100% | ⭐⭐⭐⭐⭐ |
 | Rust官方文档 | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ❌ | 60% | ⭐⭐⭐ |
 | Little Book of Rust Macros | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ❌ | 80% | ⭐⭐⭐⭐ |

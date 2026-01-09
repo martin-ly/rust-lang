@@ -28,7 +28,7 @@
   - [📚 模块结构](#-模块结构)
   - [🔎 DNS（基于 Hickory-DNS）](#-dns基于-hickory-dns)
     - [一体化示例与脚本](#一体化示例与脚本)
-  - [🔧 Rust 1.90 新特性应用](#-rust-190-新特性应用)
+  - [🔧 Rust 1.92.0 新特性应用](#-rust-1920-新特性应用)
     - [异步Trait优化](#异步trait优化)
     - [异步闭包改进](#异步闭包改进)
     - [常量泛型推断](#常量泛型推断)
@@ -47,6 +47,9 @@
   - [📈 监控和诊断](#-监控和诊断)
   - [🤝 贡献](#-贡献)
   - [📄 许可证](#-许可证)
+  - [� 知识结构文档](#-知识结构文档)
+    - [知识结构体系](#知识结构体系)
+    - [使用指南](#使用指南)
   - [🔗 相关链接](#-相关链接)
   - [📞 支持](#-支持)
 
@@ -360,14 +363,14 @@ async fn main() -> anyhow::Result<()> {
   - `just dns-all example.com`
   - `just test-skip-net`
 
-## 🔧 Rust 1.90 新特性应用
+## 🔧 Rust 1.92.0 新特性应用
 
 ### 异步Trait优化
 
 ```rust
 use c10_networks::protocol::async_traits::AsyncNetworkClient;
 
-// Rust 1.90的改进异步trait语法
+// Rust 1.92.0的改进异步trait语法
 #[async_trait::async_trait]
 impl AsyncNetworkClient for MyClient {
     async fn connect(&self, address: &str) -> NetworkResult<()> {
@@ -386,7 +389,7 @@ impl AsyncNetworkClient for MyClient {
 ### 异步闭包改进
 
 ```rust
-// Rust 1.90的异步闭包优化
+// Rust 1.92.0的异步闭包优化
 let client = NetClient::new();
 let results = futures::future::try_join_all(
     hosts.iter().map(|host| async move {
@@ -399,7 +402,7 @@ let results = futures::future::try_join_all(
 ### 常量泛型推断
 
 ```rust
-// Rust 1.90: 编译器自动推断数组长度
+// Rust 1.92.0: 编译器自动推断数组长度
 fn process_packet(data: [u8; _]) -> NetworkResult<u32> {
     let checksum = data.iter().fold(0u32, |acc, &byte| acc.wrapping_add(byte as u32));
     Ok(checksum)
@@ -409,7 +412,7 @@ fn process_packet(data: [u8; _]) -> NetworkResult<u32> {
 ### 性能基准测试
 
 ```bash
-# 运行Rust 1.90特性演示
+# 运行Rust 1.92.0特性演示
 cargo run --example rust_190_async_features_demo
 
 # 运行性能基准测试

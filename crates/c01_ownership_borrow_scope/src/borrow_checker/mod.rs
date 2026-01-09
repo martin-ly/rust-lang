@@ -15,7 +15,7 @@ use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 
 /// 借用检查器 / Borrow Checker
-/// 
+///
 /// Rust 1.89 版本的核心借用检查器实现
 /// Core borrow checker implementation for Rust 1.89
 pub struct BorrowChecker {
@@ -42,50 +42,50 @@ impl BorrowChecker {
             statistics: Arc::new(Mutex::new(BorrowCheckStatistics::new())),
         }
     }
-    
+
     /// 检查借用规则 / Check Borrow Rules
     pub fn check_borrow_rules(&self, borrows: &[Borrow]) -> BorrowCheckResult {
         let start_time = Instant::now();
         let mut result = BorrowCheckResult::new();
-        
+
         // 更新统计信息
         {
             let mut stats = self.statistics.lock().unwrap();
             stats.total_checks += 1;
             stats.check_start_time = start_time;
         }
-        
+
         // 检查基本借用规则
         for borrow in borrows {
             if let Err(error) = self.check_single_borrow(borrow) {
                 result.add_error(error);
             }
         }
-        
+
         // 检查借用冲突
         if let Err(conflicts) = self.check_borrow_conflicts(borrows) {
             for conflict in conflicts {
                 result.add_conflict(conflict);
             }
         }
-        
+
         // 检查生命周期约束
         if let Err(lifetime_errors) = self.check_lifetime_constraints(borrows) {
             for error in lifetime_errors {
                 result.add_lifetime_error(error);
             }
         }
-        
+
         // 更新统计信息
         {
             let mut stats = self.statistics.lock().unwrap();
             stats.last_check_duration = start_time.elapsed();
             stats.total_check_time += stats.last_check_duration;
         }
-        
+
         result
     }
-    
+
     /// 检查单个借用 / Check Single Borrow
     fn check_single_borrow(&self, borrow: &Borrow) -> Result<(), BorrowError> {
         // 检查借用类型有效性
@@ -109,26 +109,26 @@ impl BorrowChecker {
                 }
             }
         }
-        
+
         // 检查借用者权限
         if !self.check_borrower_permissions(borrow) {
             return Err(BorrowError::InsufficientPermissions);
         }
-        
+
         Ok(())
     }
-    
+
     /// 检查借用者权限 / Check Borrower Permissions
     fn check_borrower_permissions(&self, borrow: &Borrow) -> bool {
         // 检查借用者是否有权限访问所有者
         // 这里可以添加更复杂的权限检查逻辑
         !borrow.borrower_id.is_empty() && !borrow.owner_id.is_empty()
     }
-    
+
     /// 检查借用冲突 / Check Borrow Conflicts
     fn check_borrow_conflicts(&self, borrows: &[Borrow]) -> Result<Vec<BorrowConflict>, BorrowError> {
         let mut conflicts = Vec::new();
-        
+
         for i in 0..borrows.len() {
             for j in i + 1..borrows.len() {
                 if borrows[i].conflicts_with(&borrows[j]) {
@@ -144,19 +144,19 @@ impl BorrowChecker {
                 }
             }
         }
-        
+
         if conflicts.is_empty() {
             Ok(conflicts)
         } else {
             Err(BorrowError::BorrowConflict)
         }
     }
-    
+
     /// 检查生命周期约束 / Check Lifetime Constraints
     fn check_lifetime_constraints(&self, borrows: &[Borrow]) -> Result<Vec<LifetimeError>, BorrowError> {
         let mut errors = Vec::new();
         let analyzer = self.lifetime_analyzer.lock().unwrap();
-        
+
         for borrow in borrows {
             if let Some(lifetime) = &borrow.lifetime {
                 if let Err(error) = analyzer.validate_lifetime(lifetime) {
@@ -164,31 +164,31 @@ impl BorrowChecker {
                 }
             }
         }
-        
+
         if errors.is_empty() {
             Ok(errors)
         } else {
             Err(BorrowError::LifetimeConstraintViolation)
         }
     }
-    
+
     /// 优化借用模式 / Optimize Borrow Patterns
     pub fn optimize_borrow_patterns(&self, borrows: &mut Vec<Borrow>) -> Result<OptimizationResult, BorrowError> {
         let optimizer = self.pattern_optimizer.lock().unwrap();
         optimizer.optimize(borrows)
     }
-    
+
     /// 检测数据竞争 / Detect Data Races
     pub fn detect_data_races(&self, accesses: &[MemoryAccess]) -> Result<Vec<DataRaceReport>, BorrowError> {
         let detector = self.data_race_detector.lock().unwrap();
         detector.detect_races(accesses)
     }
-    
+
     /// 获取检查统计信息 / Get Check Statistics
     pub fn get_statistics(&self) -> BorrowCheckStatistics {
         self.statistics.lock().unwrap().clone()
     }
-    
+
     /// 重置统计信息 / Reset Statistics
     pub fn reset_statistics(&self) {
         let mut stats = self.statistics.lock().unwrap();
@@ -237,30 +237,30 @@ impl Borrow {
             permissions: BorrowPermissions::default(),
         }
     }
-    
+
     /// 检查是否与其他借用冲突 / Check if Conflicts with Other Borrow
     pub fn conflicts_with(&self, other: &Borrow) -> bool {
         if !self.is_active || !other.is_active {
             return false;
         }
-        
+
         if self.owner_id != other.owner_id {
             return false;
         }
-        
+
         match (&self.borrow_type, &other.borrow_type) {
             (BorrowType::Mutable, _) | (_, BorrowType::Mutable) => true,
             (BorrowType::Exclusive, _) | (_, BorrowType::Exclusive) => true,
             (BorrowType::Immutable, BorrowType::Immutable) => false,
         }
     }
-    
+
     /// 结束借用 / End Borrow
     pub fn end_borrow(&mut self) {
         self.is_active = false;
         self.duration = Some(self.start_time.elapsed());
     }
-    
+
     /// 检查借用是否过期 / Check if Borrow is Expired
     pub fn is_expired(&self) -> bool {
         if let Some(duration) = self.duration {
@@ -321,14 +321,14 @@ impl Lifetime {
             is_inferred: false,
         }
     }
-    
+
     /// 添加约束 / Add Constraint
     pub fn add_constraint(&mut self, constraint: LifetimeConstraint) {
         if !self.constraints.contains(&constraint) {
             self.constraints.push(constraint);
         }
     }
-    
+
     /// 检查生命周期是否兼容 / Check if Lifetime is Compatible
     pub fn is_compatible_with(&self, other: &Lifetime) -> bool {
         // 检查约束是否兼容
@@ -337,7 +337,7 @@ impl Lifetime {
                 return false;
             }
         }
-        
+
         // 检查参数是否匹配
         self.parameters == other.parameters
     }
@@ -384,40 +384,40 @@ impl BorrowGraph {
             paths: Vec::new(),
         }
     }
-    
+
     /// 添加节点 / Add Node
     pub fn add_node(&mut self, node: BorrowNode) {
         self.nodes.insert(node.id.clone(), node);
     }
-    
+
     /// 添加边 / Add Edge
     pub fn add_edge(&mut self, edge: BorrowEdge) {
         self.edges.push(edge);
     }
-    
+
     /// 查找借用路径 / Find Borrow Path
     pub fn find_borrow_path(&self, from: &str, to: &str) -> Option<BorrowPath> {
         // 使用深度优先搜索查找借用路径
         let mut visited = HashSet::new();
         let mut path = Vec::new();
-        
+
         if self.dfs_find_path(from, to, &mut visited, &mut path) {
             Some(BorrowPath { nodes: path })
         } else {
             None
         }
     }
-    
+
     /// 深度优先搜索查找路径 / DFS Find Path
     fn dfs_find_path(&self, current: &str, target: &str, visited: &mut HashSet<String>, path: &mut Vec<String>) -> bool {
         if current == target {
             path.push(current.to_string());
             return true;
         }
-        
+
         visited.insert(current.to_string());
         path.push(current.to_string());
-        
+
         for edge in &self.edges {
             if edge.from == current && !visited.contains(&edge.to) {
                 if self.dfs_find_path(&edge.to, target, visited, path) {
@@ -425,7 +425,7 @@ impl BorrowGraph {
                 }
             }
         }
-        
+
         path.pop();
         false
     }
@@ -519,30 +519,30 @@ impl LifetimeAnalyzer {
             ],
         }
     }
-    
+
     /// 验证生命周期 / Validate Lifetime
     pub fn validate_lifetime(&self, lifetime: &Lifetime) -> Result<(), LifetimeError> {
         // 检查生命周期是否在图中存在
         if !self.lifetime_graph.contains_key(&lifetime.name) {
             return Err(LifetimeError::LifetimeNotFound);
         }
-        
+
         // 检查生命周期约束
         for constraint in &lifetime.constraints {
             if !self.validate_constraint(constraint) {
                 return Err(LifetimeError::InvalidConstraint);
             }
         }
-        
+
         Ok(())
     }
-    
+
     /// 验证约束 / Validate Constraint
     fn validate_constraint(&self, constraint: &LifetimeConstraint) -> bool {
         // 这里可以添加更复杂的约束验证逻辑
         !constraint.value.is_empty()
     }
-    
+
     /// 推断生命周期 / Infer Lifetime
     pub fn infer_lifetime(&self, context: &LifetimeContext) -> Result<Lifetime, LifetimeError> {
         // 应用推断规则
@@ -551,7 +551,7 @@ impl LifetimeAnalyzer {
                 return Ok(lifetime);
             }
         }
-        
+
         Err(LifetimeError::InferenceFailed)
     }
 }
@@ -589,7 +589,7 @@ impl InferenceRule {
             InferenceRule::VarianceRule => self.apply_variance_rule(context),
         }
     }
-    
+
     /// 应用省略规则 / Apply Elision Rule
     fn apply_elision_rule(&self, context: &LifetimeContext) -> Option<Lifetime> {
         // 实现省略规则逻辑
@@ -602,13 +602,13 @@ impl InferenceRule {
             None
         }
     }
-    
+
     /// 应用子类型规则 / Apply Subtyping Rule
     fn apply_subtyping_rule(&self, context: &LifetimeContext) -> Option<Lifetime> {
         // 实现子类型规则逻辑
         None
     }
-    
+
     /// 应用变体规则 / Apply Variance Rule
     fn apply_variance_rule(&self, context: &LifetimeContext) -> Option<Lifetime> {
         // 实现变体规则逻辑
@@ -645,11 +645,11 @@ impl DataRaceDetector {
             thread_info: HashMap::new(),
         }
     }
-    
+
     /// 检测数据竞争 / Detect Data Races
     pub fn detect_races(&self, accesses: &[MemoryAccess]) -> Result<Vec<DataRaceReport>, BorrowError> {
         let mut reports = Vec::new();
-        
+
         for i in 0..accesses.len() {
             for j in i + 1..accesses.len() {
                 if self.is_data_race(&accesses[i], &accesses[j]) {
@@ -666,22 +666,22 @@ impl DataRaceDetector {
                 }
             }
         }
-        
+
         Ok(reports)
     }
-    
+
     /// 检查是否为数据竞争 / Check if Data Race
     fn is_data_race(&self, access1: &MemoryAccess, access2: &MemoryAccess) -> bool {
         // 检查是否为同一内存地址
         if access1.memory_address != access2.memory_address {
             return false;
         }
-        
+
         // 检查是否为不同线程
         if access1.thread_id == access2.thread_id {
             return false;
         }
-        
+
         // 检查是否至少有一个是写操作
         matches!(access1.access_type, AccessType::Write) || matches!(access2.access_type, AccessType::Write)
     }
@@ -783,18 +783,18 @@ impl BorrowPatternOptimizer {
             statistics: OptimizationStatistics::new(),
         }
     }
-    
+
     /// 优化借用模式 / Optimize Borrow Patterns
     pub fn optimize(&self, borrows: &mut Vec<Borrow>) -> Result<OptimizationResult, BorrowError> {
         let mut result = OptimizationResult::new();
         let mut optimized_borrows = borrows.clone();
-        
+
         for rule in &self.optimization_rules {
             if let Some(optimized) = rule.apply(&mut optimized_borrows) {
                 result.add_optimization(optimized);
             }
         }
-        
+
         *borrows = optimized_borrows;
         Ok(result)
     }
@@ -820,7 +820,7 @@ impl OptimizationRule {
             OptimizationRule::LifetimeOptimization => self.optimize_lifetimes(borrows),
         }
     }
-    
+
     /// 最小化借用作用域 / Minimize Borrow Scopes
     fn minimize_borrow_scopes(&self, borrows: &mut Vec<Borrow>) -> Option<Optimization> {
         // 实现借用作用域最小化逻辑
@@ -830,7 +830,7 @@ impl OptimizationRule {
             improvement: 0.1,
         })
     }
-    
+
     /// 优化借用排序 / Optimize Borrow Ordering
     fn optimize_borrow_ordering(&self, borrows: &mut Vec<Borrow>) -> Option<Optimization> {
         // 实现借用排序优化逻辑
@@ -840,7 +840,7 @@ impl OptimizationRule {
             improvement: 0.05,
         })
     }
-    
+
     /// 优化生命周期 / Optimize Lifetimes
     fn optimize_lifetimes(&self, borrows: &mut Vec<Borrow>) -> Option<Optimization> {
         // 实现生命周期优化逻辑
@@ -880,7 +880,7 @@ impl OptimizationResult {
             total_improvement: 0.0,
         }
     }
-    
+
     /// 添加优化 / Add Optimization
     pub fn add_optimization(&mut self, optimization: Optimization) {
         self.total_improvement += optimization.improvement;
@@ -936,19 +936,19 @@ impl BorrowCheckResult {
             is_success: true,
         }
     }
-    
+
     /// 添加错误 / Add Error
     pub fn add_error(&mut self, error: BorrowError) {
         self.errors.push(error);
         self.is_success = false;
     }
-    
+
     /// 添加冲突 / Add Conflict
     pub fn add_conflict(&mut self, conflict: BorrowConflict) {
         self.conflicts.push(conflict);
         self.is_success = false;
     }
-    
+
     /// 添加生命周期错误 / Add Lifetime Error
     pub fn add_lifetime_error(&mut self, error: LifetimeError) {
         self.lifetime_errors.push(error);
@@ -1099,7 +1099,7 @@ mod tests {
             "borrower2".to_string(),
             BorrowType::Mutable,
         );
-        
+
         assert!(borrow1.conflicts_with(&borrow2));
     }
 
@@ -1117,7 +1117,7 @@ mod tests {
         let borrows = vec![
             Borrow::new("owner1".to_string(), "borrower1".to_string(), BorrowType::Immutable),
         ];
-        
+
         let result = checker.check_borrow_rules(&borrows);
         assert!(result.is_success);
     }

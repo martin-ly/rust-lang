@@ -17,13 +17,6 @@ use std::collections::VecDeque;
 
 // ==================== 1. rotate_right 在宏展开队列管理中的应用 ====================
 
-/// 使用 rotate_right 实现宏展开队列
-///
-/// Rust 1.92.0: 新增的 `rotate_right` 方法可以高效实现宏展开队列的轮转
-pub struct MacroExpansionQueue {
-    items: VecDeque<MacroExpansionItem>,
-}
-
 /// 宏展开项
 ///
 /// 表示一个待展开的宏，包含名称、优先级和深度信息
@@ -37,7 +30,9 @@ pub struct MacroExpansionItem {
     pub depth: usize,
 }
 
-/// 宏展开队列
+/// 使用 rotate_right 实现宏展开队列
+///
+/// Rust 1.92.0: 新增的 `rotate_right` 方法可以高效实现宏展开队列的轮转
 #[derive(Default)]
 pub struct MacroExpansionQueue {
     items: VecDeque<MacroExpansionItem>,

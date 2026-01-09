@@ -29,7 +29,7 @@
   - [精选文件索引（快速定位关键实现）](#精选文件索引快速定位关键实现)
   - [主要特性](#主要特性)
     - [0. Rust 1.92.0 Edition 2024 最新特性](#0-rust-1920-edition-2024-最新特性)
-    - [1. 作用域线程 (Rust 1.89+ 特性)](#1-作用域线程-rust-189-特性)
+    - [1. 作用域线程 (Rust 1.92.0+ 特性)](#1-作用域线程-rust-1920-特性)
     - [2. 工作窃取调度器](#2-工作窃取调度器)
     - [3. 无锁环形缓冲区](#3-无锁环形缓冲区)
     - [4. 自适应锁](#4-自适应锁)
@@ -122,18 +122,18 @@
    - 问题诊断树 + 性能优化金字塔
    - 技术选型决策树 + 检查清单
 
-4. **[Rust 1.90 实战示例 Part 1](docs/appendices/RUST_190_EXAMPLES_COLLECTION.md)** ⭐⭐⭐⭐⭐
+4. **[Rust 1.92.0 实战示例 Part 1](docs/appendices/RUST_192_EXAMPLES_COLLECTION.md)** ⭐⭐⭐⭐⭐
    - 线程创建与管理 (8个示例) + thread::scope 实战
    - Channel 消息传递 (4个示例) + 同步原语 (7个示例)
    - 综合项目：并发 Web 爬虫 + 任务调度器
 
 **亮点**: ~800行可运行代码 | 20+对比矩阵 | 10+可视化图表 | 生产级质量
 
-> 适用范围：Rust 1.90+ · 标准库 + rayon/crossbeam/parking_lot
+> 适用范围：Rust 1.92.0+ · 标准库 + rayon/crossbeam/parking_lot
 
 ---
 
-本模块展示了Rust 1.90 Edition 2024中线程编程的各种高级特性，包括作用域线程、工作窃取、无锁数据结构、高级同步原语等，并充分利用了最新的语言特性。
+本模块展示了Rust 1.92.0 Edition 2024中线程编程的各种高级特性，包括作用域线程、工作窃取、无锁数据结构、高级同步原语等，并充分利用了最新的语言特性。
 
 ## 快速开始
 
@@ -161,7 +161,7 @@ cargo bench -p c05_threads
 
 ### 1. 并发控制 (concurrency)
 
-- **作用域线程** (`scoped_threads.rs`): 展示Rust 1.89的`thread::scope`功能
+- **作用域线程** (`scoped_threads.rs`): 展示Rust 1.92.0的`thread::scope`功能
 - **工作窃取** (`work_stealing.rs`): 多种工作窃取算法实现
 - **并发模式** (`concurrency_patterns.rs`): 各种并发编程模式
 
@@ -223,9 +223,9 @@ cargo bench -p c05_threads
 
 ## 主要特性
 
-### 0. Rust 1.90 Edition 2024 最新特性
+### 0. Rust 1.92.0 Edition 2024 最新特性
 
-本模块充分利用了 Rust 1.90 和 Edition 2024 的最新特性：
+本模块充分利用了 Rust 1.92.0 和 Edition 2024 的最新特性：
 
 - **显式推断的常量泛型参数**: 使用 `_` 进行常量泛型参数推断
 - **改进的异步编程**: 支持 `-> impl Trait` 和 `async fn` 语法
@@ -238,13 +238,13 @@ cargo bench -p c05_threads
 - **内存预取优化**: 减少内存访问延迟
 
 ```rust
-use c05_threads::rust_190_features;
+use c05_threads::rust_192_features;
 
-// 演示基础 Rust 1.90 特性
-rust_190_features::demonstrate_rust_190_features();
+// 演示基础 Rust 1.92.0 特性
+rust_192_features::demonstrate_rust_192_features();
 
-// 演示高级 Rust 1.90 特性
-rust_190_features::demonstrate_advanced_rust_190_features();
+// 演示高级 Rust 1.92.0 特性
+rust_192_features::demonstrate_advanced_rust_192_features();
 
 // 使用高性能原子计数器
 let counter = rust_190_features::HighPerformanceCounter::new();
@@ -259,7 +259,7 @@ let buffer = rust_190_features::LockFreeRingBuffer::<1024>::new();
 buffer.try_push(42).unwrap();
 ```
 
-### 1. 作用域线程 (Rust 1.89+ 特性)
+### 1. 作用域线程 (Rust 1.92.0+ 特性)
 
 ```rust
 use std::thread;
@@ -377,14 +377,14 @@ demo::run_performance_benchmarks();
 demo::run_memory_analysis();
 ```
 
-### 运行 Rust 1.90 特性演示
+### 运行 Rust 1.92.0 特性演示
 
 ```bash
-# 运行基础 Rust 1.90 特性演示
-cargo run -p c05_threads --example rust_190_features_demo
+# 运行基础 Rust 1.92.0 特性演示
+cargo run -p c05_threads --example rust_192_features_demo
 
-# 运行高级 Rust 1.90 特性演示
-cargo run -p c05_threads --example advanced_rust190_demo
+# 运行高级 Rust 1.92.0 特性演示
+cargo run -p c05_threads --example advanced_rust192_demo
 
 # 启用 tokio 特性运行异步演示
 cargo run -p c05_threads --example rust_190_features_demo --features tokio
@@ -549,8 +549,8 @@ cargo test synchronization::adaptive_locks
 
 - **修复测试问题**: 解决了 `test_performance_metrics` 和 `test_advanced_thread_pool` 的失败问题
 - **修复超时测试**: 解决了 `test_producer_consumer`、`test_batched_parallel_sum`、`test_hierarchical_barrier` 等超时问题
-- **增强 Rust 1.90 特性**: 添加了高性能原子计数器、高级线程池、无锁环形缓冲区等新特性
-- **新增高级示例**: 创建了 `advanced_rust190_demo.rs` 展示最新的 Rust 1.90 特性
+- **增强 Rust 1.92.0 特性**: 添加了高性能原子计数器、高级线程池、无锁环形缓冲区等新特性
+- **新增高级示例**: 创建了 `advanced_rust192_demo.rs` 展示最新的 Rust 1.92.0 特性
 - **性能优化**: 实现了 SIMD 向量化、内存预取优化等高性能特性
 - **无锁数据结构**: 使用常量泛型实现了高性能的无锁环形缓冲区
 

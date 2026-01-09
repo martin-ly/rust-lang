@@ -162,7 +162,7 @@ fn bench_packet_memory(c: &mut Criterion) {
     group.bench_function("packet_stats_memory", |b| {
         let mut stats = PacketStats::new();
         let packet = Packet::new(PacketType::Raw, Bytes::copy_from_slice(b"test data"));
-        
+
         b.iter(|| {
             stats.add_packet(black_box(&packet));
         })
@@ -222,25 +222,25 @@ fn bench_memory_fragmentation(c: &mut Criterion) {
     group.bench_function("fragmented_allocation", |b| {
         b.iter(|| {
             let mut allocations = Vec::new();
-            
+
             // 分配不同大小的内存块
             for i in 0..100 {
                 let size = (i % 10 + 1) * 64; // 64, 128, 192, ..., 640 bytes
                 let data = vec![0u8; size];
                 allocations.push(data);
             }
-            
+
             // 释放一半的内存块
             for i in (0..100).step_by(2) {
                 allocations[i] = Vec::new();
             }
-            
+
             // 重新分配
             for i in (0..100).step_by(2) {
                 let size = (i % 10 + 1) * 64;
                 allocations[i] = vec![0u8; size];
             }
-            
+
             black_box(allocations.len())
         })
     });
@@ -248,7 +248,7 @@ fn bench_memory_fragmentation(c: &mut Criterion) {
     group.bench_function("packet_fragmentation", |b| {
         b.iter(|| {
             let mut packets = Vec::new();
-            
+
             // 创建不同大小的数据包
             for i in 0..100 {
                 let size = (i % 10 + 1) * 64;
@@ -256,19 +256,19 @@ fn bench_memory_fragmentation(c: &mut Criterion) {
                 let packet = Packet::new(PacketType::Raw, Bytes::from(data));
                 packets.push(packet);
             }
-            
+
             // 移除一半的数据包
             for i in (0..100).step_by(2) {
                 packets[i] = Packet::new(PacketType::Raw, Bytes::new());
             }
-            
+
             // 重新创建
             for i in (0..100).step_by(2) {
                 let size = (i % 10 + 1) * 64;
                 let data = vec![0u8; size];
                 packets[i] = Packet::new(PacketType::Raw, Bytes::from(data));
             }
-            
+
             black_box(packets.len())
         })
     });
@@ -301,7 +301,7 @@ fn bench_concurrent_memory_allocation(c: &mut Criterion) {
             for handle in handles {
                 total += handle.join().unwrap();
             }
-            
+
             black_box(total)
         })
     });
@@ -328,14 +328,14 @@ fn bench_concurrent_memory_allocation(c: &mut Criterion) {
             for handle in handles {
                 total += handle.join().unwrap();
             }
-            
+
             black_box(total)
         })
     });
 
     group.bench_function("shared_memory_pool", |b| {
         let pool = Arc::new(MemoryPool::new(1024 * 1024));
-        
+
         b.iter(|| {
             let mut handles = Vec::new();
 
@@ -356,7 +356,7 @@ fn bench_concurrent_memory_allocation(c: &mut Criterion) {
             for handle in handles {
                 total += handle.join().unwrap();
             }
-            
+
             black_box(total)
         })
     });
@@ -395,7 +395,7 @@ fn bench_memory_usage_patterns(c: &mut Criterion) {
     group.bench_function("burst_allocation", |b| {
         b.iter(|| {
             let mut allocations = Vec::new();
-            
+
             // 突发分配
             for _burst in 0..10 {
                 for i in 0..100 {
@@ -404,7 +404,7 @@ fn bench_memory_usage_patterns(c: &mut Criterion) {
                     allocations.push(data);
                 }
             }
-            
+
             black_box(allocations.len())
         })
     });
@@ -412,19 +412,19 @@ fn bench_memory_usage_patterns(c: &mut Criterion) {
     group.bench_function("lifo_allocation", |b| {
         b.iter(|| {
             let mut allocations = Vec::new();
-            
+
             // 分配
             for i in 0..1000 {
                 let size = (i % 100) + 64;
                 let data = vec![0u8; size];
                 allocations.push(data);
             }
-            
+
             // LIFO 释放
             while !allocations.is_empty() {
                 allocations.pop();
             }
-            
+
             black_box(allocations.len())
         })
     });
@@ -442,12 +442,12 @@ fn bench_memory_leak_detection(c: &mut Criterion) {
             let data1 = data.clone();
             let data2 = data.clone();
             let data3 = data.clone();
-            
+
             // 模拟使用
             black_box(data1.len());
             black_box(data2.len());
             black_box(data3.len());
-            
+
             // 自动释放
             drop(data1);
             drop(data2);
@@ -458,17 +458,17 @@ fn bench_memory_leak_detection(c: &mut Criterion) {
 
     group.bench_function("weak_references", |b| {
         use std::rc::Rc;
-        
+
         b.iter(|| {
             let data = Rc::new(vec![0u8; 1024]);
             let weak_ref = Rc::downgrade(&data);
-            
+
             // 使用强引用
             black_box(data.len());
-            
+
             // 释放强引用
             drop(data);
-            
+
             // 检查弱引用
             let strong_ref = weak_ref.upgrade();
             black_box(strong_ref.is_none())
@@ -480,11 +480,11 @@ fn bench_memory_leak_detection(c: &mut Criterion) {
             let data = Arc::new(vec![0u8; 1024]);
             let data1 = Arc::clone(&data);
             let data2 = Arc::clone(&data);
-            
+
             // 模拟使用
             black_box(data1.len());
             black_box(data2.len());
-            
+
             // 自动释放
             drop(data1);
             drop(data2);

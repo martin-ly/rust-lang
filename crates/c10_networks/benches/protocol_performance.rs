@@ -57,7 +57,7 @@ fn bench_http_protocol(c: &mut Criterion) {
             HttpMethod::OPTIONS,
             HttpMethod::PATCH,
         ];
-        
+
         b.iter(|| {
             for method in &methods {
                 let request = HttpRequest::new(
@@ -81,7 +81,7 @@ fn bench_http_protocol(c: &mut Criterion) {
                 HttpStatusCode::not_found(),
                 HttpStatusCode::internal_server_error(),
             ];
-            
+
             for status in status_codes {
                 black_box(status);
             }
@@ -105,7 +105,7 @@ fn bench_websocket_protocol(c: &mut Criterion) {
             );
             let ping_frame = WebSocketFrame::ping(black_box(Some(&[1, 2, 3, 4])));
             let pong_frame = WebSocketFrame::pong(black_box(Some(&[5, 6, 7, 8])));
-            
+
             black_box((text_frame, binary_frame, close_frame, ping_frame, pong_frame))
         })
     });
@@ -132,7 +132,7 @@ fn bench_websocket_protocol(c: &mut Criterion) {
             WebSocketOpcode::Ping,
             WebSocketOpcode::Pong,
         ];
-        
+
         b.iter(|| {
             for opcode in &opcodes {
                 let is_control = black_box(opcode).is_control_frame();
@@ -144,7 +144,7 @@ fn bench_websocket_protocol(c: &mut Criterion) {
 
     group.bench_function("frame_validation", |b| {
         let frame = WebSocketFrame::text("Hello, World!");
-        
+
         b.iter(|| {
             let fin = black_box(&frame).fin;
             let opcode = black_box(&frame).opcode.clone();
@@ -183,7 +183,7 @@ fn bench_tcp_protocol(c: &mut Criterion) {
     group.bench_function("state_operations", |b| {
         let config = TcpConnectionConfig::default();
         let connection = TcpConnection::new(1, config);
-        
+
         b.iter(|| {
             let state = black_box(&connection).state();
             let can_send = state.can_send_data();
@@ -195,7 +195,7 @@ fn bench_tcp_protocol(c: &mut Criterion) {
     group.bench_function("congestion_control", |b| {
         let config = TcpConnectionConfig::default();
         let mut connection = TcpConnection::new(1, config);
-        
+
         b.iter(|| {
             connection.update_congestion_window();
             let window = connection.congestion_window;
@@ -205,7 +205,7 @@ fn bench_tcp_protocol(c: &mut Criterion) {
 
     group.bench_function("connection_pool", |b| {
         use c10_networks::protocol::tcp::TcpConnectionPool;
-        
+
         b.iter(|| {
             let pool = TcpConnectionPool::new(black_box(10), Duration::from_secs(30));
             let config = TcpConnectionConfig::default();
@@ -266,11 +266,11 @@ fn bench_protocol_parsing(c: &mut Criterion) {
 
     group.bench_function("http_header_parsing", |b| {
         let header_data = b"Content-Type: application/json\r\nUser-Agent: c10_networks\r\nAuthorization: Bearer token123\r\n";
-        
+
         b.iter(|| {
             let headers: Vec<&[u8]> = black_box(header_data).split(|&x| x == b'\n').collect();
             let mut parsed_headers = Vec::new();
-            
+
             for header in headers {
                 if let Some(colon_pos) = header.iter().position(|&x| x == b':') {
                     let name = &header[..colon_pos];
@@ -278,14 +278,14 @@ fn bench_protocol_parsing(c: &mut Criterion) {
                     parsed_headers.push((name, value));
                 }
             }
-            
+
             black_box(parsed_headers)
         })
     });
 
     group.bench_function("websocket_frame_parsing", |b| {
         let frame_data = b"\x81\x0DHello, World!";
-        
+
         b.iter(|| {
             let data = black_box(frame_data);
             let fin = (data[0] & 0x80) != 0;
@@ -293,14 +293,14 @@ fn bench_protocol_parsing(c: &mut Criterion) {
             let mask = (data[1] & 0x80) != 0;
             let payload_length = data[1] & 0x7F;
             let payload = &data[2..];
-            
+
             black_box((fin, opcode, mask, payload_length, payload))
         })
     });
 
     group.bench_function("tcp_header_parsing", |b| {
         let tcp_header = b"\x00\x50\x00\x00\x00\x00\x00\x00\x50\x02\x20\x00\x00\x00\x00\x00";
-        
+
         b.iter(|| {
             let data = black_box(tcp_header);
             let src_port = u16::from_be_bytes([data[0], data[1]]);
@@ -308,7 +308,7 @@ fn bench_protocol_parsing(c: &mut Criterion) {
             let seq_num = u32::from_be_bytes([data[4], data[5], data[6], data[7]]);
             let ack_num = u32::from_be_bytes([data[8], data[9], data[10], data[11]]);
             let flags = data[13];
-            
+
             black_box((src_port, dst_port, seq_num, ack_num, flags))
         })
     });
@@ -329,7 +329,7 @@ fn bench_protocol_serialization(c: &mut Criterion) {
         request.add_header("User-Agent", "c10_networks");
         request.add_header("Accept", "application/json");
         request.set_body(b"{\"query\": \"test\"}".as_slice());
-        
+
         b.iter(|| {
             let serialized = serde_json::to_string(black_box(&request)).unwrap();
             black_box(serialized)
@@ -338,7 +338,7 @@ fn bench_protocol_serialization(c: &mut Criterion) {
 
     group.bench_function("websocket_frame_serialization", |b| {
         let frame = WebSocketFrame::text("Hello, WebSocket!");
-        
+
         b.iter(|| {
             let serialized = serde_json::to_string(black_box(&frame)).unwrap();
             black_box(serialized)
@@ -348,7 +348,7 @@ fn bench_protocol_serialization(c: &mut Criterion) {
     group.bench_function("tcp_connection_debug", |b| {
         let config = TcpConnectionConfig::default();
         let connection = TcpConnection::new(1, config);
-        
+
         b.iter(|| {
             let debug_str = format!("{:?}", black_box(&connection));
             black_box(debug_str)
@@ -368,7 +368,7 @@ fn bench_protocol_compatibility(c: &mut Criterion) {
             HttpVersion::Http1_1,
             HttpVersion::Http2_0,
         ];
-        
+
         b.iter(|| {
             for version in &versions {
                 let request = HttpRequest::new(
@@ -404,7 +404,7 @@ fn bench_protocol_compatibility(c: &mut Criterion) {
             TcpState::LastAck,
             TcpState::TimeWait,
         ];
-        
+
         b.iter(|| {
             for state in &states {
                 let can_send = black_box(state).can_send_data();
@@ -460,7 +460,7 @@ fn bench_protocol_error_handling(c: &mut Criterion) {
             c10_networks::error::ProtocolError::Udp("Port unreachable".to_string()),
             c10_networks::error::ProtocolError::Dns("Name resolution failed".to_string()),
         ];
-        
+
         b.iter(|| {
             for error in &errors {
                 let message = format!("{}", black_box(error));

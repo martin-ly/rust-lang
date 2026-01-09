@@ -201,7 +201,7 @@
 ### Rust 1.90 特性
 
 | 特性 | 文档覆盖 | 代码示例 |
- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **thread::scope 改进** | ✅ | ✅ 3个示例 |
 | **Mutex 性能优化** | ✅ | ✅ 性能对比 |
 | **RwLock 公平性** | ✅ | ✅ 对比测试 |

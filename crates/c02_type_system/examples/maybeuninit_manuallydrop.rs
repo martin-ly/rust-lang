@@ -15,5 +15,3 @@ fn main() {
     let inner = ManuallyDrop::into_inner(m);
     drop(inner);
 }
-
-

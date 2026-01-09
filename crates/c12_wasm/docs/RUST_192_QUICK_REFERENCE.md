@@ -14,13 +14,16 @@
   - [🎯 快速查找](#-快速查找)
   - [💡 核心特性速查](#-核心特性速查)
     - [1. MaybeUninit 文档化](#1-maybeuninit-文档化)
-    - [2. NonZero::div_ceil](#2-nonzerodiv_ceil)
+    - [2. NonZero::div\_ceil](#2-nonzerodiv_ceil)
     - [3. 联合体原始引用](#3-联合体原始引用)
     - [4. 迭代器方法特化](#4-迭代器方法特化)
-    - [5. rotate_right](#5-rotate_right)
-    - [6. Location::file_as_c_str](#6-locationfile_as_c_str)
+    - [5. rotate\_right](#5-rotate_right)
+    - [6. Location::file\_as\_c\_str](#6-locationfile_as_c_str)
   - [📊 性能提升速查](#-性能提升速查)
   - [🔧 代码模板](#-代码模板)
+    - [高性能 WASM 内存管理器](#高性能-wasm-内存管理器)
+    - [高性能数组处理](#高性能数组处理)
+    - [高效数据旋转](#高效数据旋转)
   - [📚 相关文档](#-相关文档)
 
 ---
@@ -45,6 +48,7 @@
 **用途**: 安全的未初始化内存管理
 
 **代码模板**:
+
 ```rust
 use std::mem::MaybeUninit;
 use c12_wasm::rust_192_features::WasmBuffer;
@@ -70,6 +74,7 @@ let data = unsafe { buffer.read(4) };
 **用途**: 安全的向上取整除法
 
 **代码模板**:
+
 ```rust
 use std::num::NonZeroUsize;
 use c12_wasm::rust_192_features::calculate_buffer_chunks;
@@ -88,6 +93,7 @@ let chunks = calculate_buffer_chunks(5000, chunk_size);
 **用途**: 安全的 FFI 互操作
 
 **代码模板**:
+
 ```rust
 use c12_wasm::rust_192_features::WasmFFIUnion;
 
@@ -108,6 +114,7 @@ let mut_raw_ref = union.get_integer_mut_raw();
 **用途**: 高性能数组比较
 
 **代码模板**:
+
 ```rust
 use c12_wasm::rust_192_features::wasm_optimized_array_eq;
 
@@ -125,6 +132,7 @@ let are_equal = wasm_optimized_array_eq(&vec1, &vec2);
 **用途**: 高效数据旋转
 
 **代码模板**:
+
 ```rust
 use c12_wasm::rust_192_features::wasm_rotate_data;
 
@@ -141,6 +149,7 @@ wasm_rotate_data(&mut data, 3);
 **用途**: 调试信息收集
 
 **代码模板**:
+
 ```rust
 use c12_wasm::rust_192_features::WasmDebugInfo;
 

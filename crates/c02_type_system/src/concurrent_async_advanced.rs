@@ -430,11 +430,7 @@ pub mod concurrent_data_structures {
         }
     }
 
-    impl<T> Default for WorkStealingQueue<T> {
-        fn default() -> Self {
-            Self::new()
-        }
-
+    impl<T> WorkStealingQueue<T> {
         pub fn push(&self, task: T) {
             let mut tasks = self.tasks.lock().unwrap();
             tasks.push_back(task);
@@ -462,6 +458,12 @@ pub mod concurrent_data_structures {
             let mut stealers = self.stealers.lock().unwrap();
             stealers.push(stealer.clone());
             stealer
+        }
+    }
+
+    impl<T> Default for WorkStealingQueue<T> {
+        fn default() -> Self {
+            Self::new()
         }
     }
 }

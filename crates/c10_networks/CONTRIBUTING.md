@@ -114,7 +114,7 @@ cargo test --examples
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[tokio::test]
     async fn test_new_feature() -> NetworkResult<()> {
         // 测试实现
@@ -334,6 +334,6 @@ feat(protocol): 添加HTTP/2支持
 
 ---
 
-**贡献指南版本**: v1.0  
-**最后更新**: 2025年9月28日  
+**贡献指南版本**: v1.0
+**最后更新**: 2025年9月28日
 **维护者**: C10 Networks团队

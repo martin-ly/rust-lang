@@ -46,7 +46,7 @@
 //! ```bash
 //! # 运行客户端示例
 //! cargo run --example tcp_client
-//! 
+//!
 //! # 需要先启动对应的服务器
 //! cargo run --example tcp_echo_server
 //! ```

@@ -67,11 +67,11 @@ impl Greeter for MyGreeter {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let greeter = MyGreeter::default();
-    
+
     // 创建一个简单的HTTP服务器来演示protobuf消息的使用
     let addr: std::net::SocketAddr = "127.0.0.1:8080".parse()?;
     println!("HTTP Greeter server listening on {}", addr);
-    
+
     // 使用axum创建一个简单的HTTP服务器
     use axum::{
         extract::{Query, State},
@@ -81,12 +81,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     };
     use serde::Deserialize;
     use serde_json::json;
-    
+
     #[derive(Deserialize)]
     struct Params {
         name: Option<String>,
     }
-    
+
     #[derive(Clone)]
     struct AppState {
         greeter: MyGreeter,
@@ -110,9 +110,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let app = Router::new()
         .route("/hello", get(hello_handler))
         .with_state(AppState { greeter });
-    
+
     let listener = tokio::net::TcpListener::bind(addr).await?;
     axum::serve(listener, app).await?;
-    
+
     Ok(())
 }

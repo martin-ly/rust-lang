@@ -366,7 +366,7 @@ mkdir -p e:\_src\rust-lang\crates\c04_generic\docs\06_rust_features
 ### 结构一致性
 
 | 模块 | 06_rust_features/ | 文档数量 | 主索引 | 结构 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------------------ param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------------------ param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **c01** | ✅ | 7+ | ✅ | 规范 |
 | **c02** | ✅ | 7+ | ✅ | 规范 |
 | **c04** | ✅ | 8  | ✅ | 规范 |

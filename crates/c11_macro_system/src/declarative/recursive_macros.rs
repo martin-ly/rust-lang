@@ -55,4 +55,3 @@ mod tests {
         assert_eq!(max!(10, 5, 20, 15), 20);
     }
 }
-

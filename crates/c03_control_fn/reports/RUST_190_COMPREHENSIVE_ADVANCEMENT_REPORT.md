@@ -87,7 +87,7 @@
 ## 📊 特性使用统计
 
 | 特性类别 | 完全实现 | 部分实现 | 总计 | 完成率 |
- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | 异步编程 | 8 | 2 | 10 | 90% |
 | 类型系统 | 6 | 0 | 6 | 100% |
 | 编译优化 | 4 | 0 | 4 | 100% |

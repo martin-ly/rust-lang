@@ -252,6 +252,7 @@ Rust 1.92.0 特性正确性
 #### 1. c01_ownership_borrow_scope (2-3 小时)
 
 **任务清单**:
+
 - [ ] 更新 README.md: "Rust 1.91" → "Rust 1.92.0"
 - [ ] 更新 `docs/RUST_191_OWNERSHIP_BORROWING_LIFETIME_IMPROVEMENTS.md`
 - [ ] 创建 `docs/RUST_192_OWNERSHIP_BORROWING_LIFETIME_IMPROVEMENTS.md`
@@ -261,6 +262,7 @@ Rust 1.92.0 特性正确性
 - [ ] 验证: `cargo test --package c01_ownership_borrow_scope`
 
 **批量替换命令**:
+
 ```bash
 # 在 crates/c01_ownership_borrow_scope 目录下
 find . -type f \( -name "*.md" -o -name "*.rs" \) -exec sed -i 's/Rust 1\.91/Rust 1.92.0/g' {} +
@@ -270,6 +272,7 @@ find . -type f \( -name "*.md" -o -name "*.rs" \) -exec sed -i 's/1\.91\+/1.92.0
 #### 2. c02_type_system (3-4 小时)
 
 **任务清单**:
+
 - [ ] 更新 README.md: "Rust 1.90" → "Rust 1.92.0"
 - [ ] 更新 `docs/tier_03_references/03_分派机制参考.md`
 - [ ] 更新 `docs/tier_04_advanced/03_类型系统形式化.md`
@@ -278,6 +281,7 @@ find . -type f \( -name "*.md" -o -name "*.rs" \) -exec sed -i 's/1\.91\+/1.92.0
 - [ ] 验证编译和测试
 
 **批量替换命令**:
+
 ```bash
 # 在 crates/c02_type_system 目录下
 find . -type f \( -name "*.md" -o -name "*.rs" \) -exec sed -i 's/Rust 1\.90/Rust 1.92.0/g' {} +
@@ -287,6 +291,7 @@ find . -type f \( -name "*.md" -o -name "*.rs" \) -exec sed -i 's/1\.90\+/1.92.0
 #### 3. c05_threads (2-3 小时)
 
 **任务清单**:
+
 - [ ] 更新 README.md: "Rust 1.90" → "Rust 1.92.0"
 - [ ] 更新 `docs/tier_01_foundations/01_项目概览.md`
 - [ ] 批量更新所有文档 (~30 文件)
@@ -296,6 +301,7 @@ find . -type f \( -name "*.md" -o -name "*.rs" \) -exec sed -i 's/1\.90\+/1.92.0
 #### 4. c06_async (4-5 小时) - **最大工作量**
 
 **任务清单**:
+
 - [ ] 更新 README.md: "Rust 1.91.1" → "Rust 1.92.0"
 - [ ] 更新所有 `docs/tier_02_guides/*.md` (6 文件)
 - [ ] 更新所有 `docs/tier_03_references/*.md` (6 文件)
@@ -308,6 +314,7 @@ find . -type f \( -name "*.md" -o -name "*.rs" \) -exec sed -i 's/1\.90\+/1.92.0
 #### 5. c07_process (2-3 小时)
 
 **任务清单**:
+
 - [ ] 更新 README.md: "Rust 1.90" → "Rust 1.92.0"
 - [ ] 更新 `docs/01_process_model_and_lifecycle.md`
 - [ ] 批量更新所有文档 (~54 文件)
@@ -316,6 +323,7 @@ find . -type f \( -name "*.md" -o -name "*.rs" \) -exec sed -i 's/1\.90\+/1.92.0
 #### 6. c08_algorithms (3-4 小时)
 
 **任务清单**:
+
 - [ ] 更新 README.md: "Rust 1.90/1.91" → "Rust 1.92.0"
 - [ ] 更新 `docs/leetcode_with_rust191.md` → `docs/leetcode_with_rust192.md`
 - [ ] 更新 `docs/tier_03_references/01_算法分类参考.md`
@@ -326,6 +334,7 @@ find . -type f \( -name "*.md" -o -name "*.rs" \) -exec sed -i 's/1\.90\+/1.92.0
 #### 7. c10_networks (2-3 小时)
 
 **任务清单**:
+
 - [ ] 更新 README.md: "Rust 1.91.1" → "Rust 1.92.0"
 - [ ] 更新 `docs/tier_03_references/01_网络协议分类参考.md`
 - [ ] 更新 `docs/tier_04_advanced/01_形式化网络协议理论.md`
@@ -335,8 +344,11 @@ find . -type f \( -name "*.md" -o -name "*.rs" \) -exec sed -i 's/1\.90\+/1.92.0
 ### Phase 2: 中优先级 Crates (4 个) - 预计 4-8 小时
 
 #### 8. c03_control_fn (1-2 小时)
+
 #### 9. c04_generic (1-2 小时)
+
 #### 10. c09_design_pattern (1-2 小时)
+
 #### 11. c11_macro_system (1-2 小时)
 
 ---
@@ -368,6 +380,7 @@ cargo check --package $CRATE
 ### 2. 增量验证
 
 每个 crate 更新后立即验证：
+
 - ✅ 编译检查
 - ✅ 测试运行
 - ✅ 示例验证
@@ -375,6 +388,7 @@ cargo check --package $CRATE
 ### 3. 进度跟踪
 
 实时更新进度跟踪文档，记录：
+
 - 完成状态
 - 遇到的问题
 - 解决方案

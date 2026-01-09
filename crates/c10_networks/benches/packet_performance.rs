@@ -127,7 +127,7 @@ fn bench_packet_stats(c: &mut Criterion) {
     group.bench_function("add_packet", |b| {
         let mut stats = PacketStats::new();
         let packet = Packet::new(PacketType::Raw, Bytes::copy_from_slice(b"test data"));
-        
+
         b.iter(|| {
             stats.add_packet(black_box(&packet));
         })
@@ -139,7 +139,7 @@ fn bench_packet_stats(c: &mut Criterion) {
         let packet2 = Packet::new(PacketType::Http, Bytes::copy_from_slice(b"data2"));
         stats.add_packet(&packet1);
         stats.add_packet(&packet2);
-        
+
         b.iter(|| {
             let count = stats.packets_of_type(black_box(&PacketType::Raw));
             black_box(count)
@@ -152,7 +152,7 @@ fn bench_packet_stats(c: &mut Criterion) {
         let packet2 = Packet::new(PacketType::Http, Bytes::copy_from_slice(b"data2"));
         stats.add_packet(&packet1);
         stats.add_packet(&packet2);
-        
+
         b.iter(|| {
             let bytes = stats.bytes_of_type(black_box(&PacketType::Raw));
             black_box(bytes)
@@ -172,7 +172,7 @@ fn bench_packet_filter(c: &mut Criterion) {
             .min_size(10)
             .max_size(100);
         let packet = Packet::new(PacketType::Http, Bytes::copy_from_slice(b"GET / HTTP/1.1"));
-        
+
         b.iter(|| {
             let matches = filter.matches(black_box(&packet));
             black_box(matches)
@@ -184,7 +184,7 @@ fn bench_packet_filter(c: &mut Criterion) {
             .min_size(5)
             .max_size(20);
         let packet = Packet::new(PacketType::Raw, Bytes::copy_from_slice(b"test data"));
-        
+
         b.iter(|| {
             let matches = filter.matches(black_box(&packet));
             black_box(matches)
@@ -195,7 +195,7 @@ fn bench_packet_filter(c: &mut Criterion) {
         let filter = PacketFilter::new()
             .sequence_range(100, 200);
         let packet = Packet::with_sequence(PacketType::Tcp, Bytes::copy_from_slice(b"data"), 150);
-        
+
         b.iter(|| {
             let matches = filter.matches(black_box(&packet));
             black_box(matches)
@@ -219,7 +219,7 @@ fn bench_packet_buffer(c: &mut Criterion) {
         };
         let mut buffer = PacketBuffer::new(config);
         let packet = Packet::new(PacketType::Raw, Bytes::copy_from_slice(b"test data"));
-        
+
         b.iter(|| {
             let _ = buffer.push(black_box(packet.clone()));
         })
@@ -236,7 +236,7 @@ fn bench_packet_buffer(c: &mut Criterion) {
         let mut buffer = PacketBuffer::new(config);
         let packet = Packet::new(PacketType::Raw, Bytes::copy_from_slice(b"test data"));
         buffer.push(packet).unwrap();
-        
+
         b.iter(|| {
             let _packet = buffer.pop();
         })
@@ -253,7 +253,7 @@ fn bench_packet_buffer(c: &mut Criterion) {
         let mut buffer = PacketBuffer::new(config);
         let packet = Packet::new(PacketType::Raw, Bytes::copy_from_slice(b"test data"));
         buffer.push(packet).unwrap();
-        
+
         b.iter(|| {
             let stats = buffer.stats();
             black_box(stats)
@@ -269,7 +269,7 @@ fn bench_packet_serialization(c: &mut Criterion) {
 
     group.bench_function("serialize", |b| {
         let packet = Packet::new(PacketType::Raw, Bytes::copy_from_slice(b"test data"));
-        
+
         b.iter(|| {
             let serialized = serde_json::to_string(black_box(&packet)).unwrap();
             black_box(serialized)
@@ -279,7 +279,7 @@ fn bench_packet_serialization(c: &mut Criterion) {
     group.bench_function("deserialize", |b| {
         let packet = Packet::new(PacketType::Raw, Bytes::copy_from_slice(b"test data"));
         let serialized = serde_json::to_string(&packet).unwrap();
-        
+
         b.iter(|| {
             let deserialized: Packet = serde_json::from_str(black_box(&serialized)).unwrap();
             black_box(deserialized)
@@ -288,7 +288,7 @@ fn bench_packet_serialization(c: &mut Criterion) {
 
     group.bench_function("round_trip", |b| {
         let packet = Packet::new(PacketType::Raw, Bytes::copy_from_slice(b"test data"));
-        
+
         b.iter(|| {
             let serialized = serde_json::to_string(black_box(&packet)).unwrap();
             let deserialized: Packet = serde_json::from_str(&serialized).unwrap();
@@ -362,7 +362,7 @@ fn bench_concurrent_packet_processing(c: &mut Criterion) {
                         );
                         local_stats.add_packet(&packet);
                     }
-                    
+
                     let mut global_stats = stats_clone.lock().unwrap();
                     global_stats.total_packets += local_stats.total_packets;
                     global_stats.total_bytes += local_stats.total_bytes;
@@ -431,7 +431,7 @@ fn bench_packet_type_comparison(c: &mut Criterion) {
             PacketType::Udp,
             PacketType::Custom("test".to_string()),
         ];
-        
+
         b.iter(|| {
             for (i, type1) in types.iter().enumerate() {
                 for (j, type2) in types.iter().enumerate() {
@@ -444,7 +444,7 @@ fn bench_packet_type_comparison(c: &mut Criterion) {
 
     group.bench_function("hash", |b| {
         use std::collections::HashMap;
-        
+
         let mut map = HashMap::new();
         map.insert(PacketType::Raw, "raw");
         map.insert(PacketType::Http, "http");
@@ -452,7 +452,7 @@ fn bench_packet_type_comparison(c: &mut Criterion) {
         map.insert(PacketType::Tcp, "tcp");
         map.insert(PacketType::Udp, "udp");
         map.insert(PacketType::Custom("test".to_string()), "custom");
-        
+
         b.iter(|| {
             for packet_type in [
                 PacketType::Raw,

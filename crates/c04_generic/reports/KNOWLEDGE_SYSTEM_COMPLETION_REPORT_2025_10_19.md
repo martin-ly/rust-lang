@@ -348,7 +348,7 @@ Generic = {
 ### 适用人群
 
 | 人群 | 使用方式 | 收益 |
- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **🎓 初学者** | 思维导图 + 概念本体 | 建立整体认知框架，避免迷失 |
 | **💻 开发者** | 对比矩阵 + 推理规则 | 快速选型，做出最优决策 |
 | **🔬 研究者** | 理论基础 + 形式语义 | 深入理解，探索类型系统 |

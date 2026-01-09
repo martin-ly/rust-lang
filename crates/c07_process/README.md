@@ -18,14 +18,14 @@
 
 - **📊 [知识图谱与概念关系](./docs/theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)** - 进程管理完整体系
 - **📐 [多维矩阵对比分析](./docs/theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)** - IPC/同步原语全面对比
-- **🗺️ [Rust 1.90 综合思维导图](./docs/RUST_190_COMPREHENSIVE_MINDMAP.md)** ⭐ NEW!
+- **🗺️ [Rust 1.92.0 综合思维导图](./docs/RUST_192_COMPREHENSIVE_MINDMAP.md)** ⭐ NEW!
   - ASCII艺术图表 | 进程创建/IPC/信号完整体系
   - 跨平台设计模式 | Unix/Windows特定API对比
   - 技术选型决策树 | IPC机制/同步原语选择指南
   - 3级学习路径(1-7周) | 问题诊断树
-- **💻 [Rust 1.90 实战示例集](./docs/RUST_190_EXAMPLES_COLLECTION.md)** ⭐ NEW!
+- **💻 [Rust 1.92.0 实战示例集](./docs/RUST_192_EXAMPLES_COLLECTION.md)** ⭐ NEW!
   - 900+行可运行代码 | 异步进程/IPC/信号处理
-  - Rust 1.90特性 | async trait/超时控制/优雅关闭
+  - Rust 1.92.0特性 | async trait/超时控制/优雅关闭
   - 2个综合项目 | 多进程任务执行器+进程监控系统
 
 **完整度**: 📊 知识图谱 + 📐 多维矩阵 + 🗺️ 思维导图 + 💻 实战示例 = **100%** ✨
@@ -295,7 +295,7 @@ cargo run --bin group_control_demo
 
 - **[01_process_model_and_lifecycle.md](docs/01_process_model_and_lifecycle.md)** - 进程模型与生命周期
 - **[02_ipc_mechanisms.md](docs/02_ipc_mechanisms.md)** - 进程间通信机制
-- **[03_rust_190_features.md](docs/03_rust_190_features.md)** - Rust 1.90 新特性与进程管理
+- **[03_rust_192_features.md](docs/03_rust_192_features.md)** - Rust 1.92.0 新特性与进程管理
 - **[04_advanced_process_management.md](docs/04_advanced_process_management.md)** - 高级进程管理
 - **[05_async_process_management.md](docs/05_async_process_management.md)** - 异步进程管理
 - **[06_cross_platform_process_management.md](docs/06_cross_platform_process_management.md)** - 跨平台进程管理
@@ -424,13 +424,13 @@ cargo run --features async --bin async_stdio_demo
 
 预留异步标准 IO 与超时 API 的接口，当前调用会返回"未实现"错误，便于后续迭代替换为真实实现。
 
-### Rust 1.90 新特性演示
+### Rust 1.92.0 新特性演示
 
 ```bash
 cargo run --features async --bin rust_190_features_demo
 ```
 
-演示 Rust 1.90 Edition 2024 的最新语言特性，包括：
+演示 Rust 1.92.0 Edition 2024 的最新语言特性，包括：
 
 - 异步闭包 (Async Closures)
 - 改进的模式匹配

@@ -55,7 +55,7 @@ use c10_networks::protocol::dns::{DnsResolver, presets};
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     println!("🚀 启动 DNS 查询示例...");
-    
+
     // 1) 使用系统解析器进行 A/AAAA 记录查询
     println!("\n📡 使用系统解析器查询 A/AAAA 记录:");
     let sys = DnsResolver::from_system().await?;

@@ -61,4 +61,3 @@ mod tests {
         assert_eq!(map.get("two"), Some(&2));
     }
 }
-

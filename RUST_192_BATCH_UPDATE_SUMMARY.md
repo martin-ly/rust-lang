@@ -38,6 +38,7 @@
 ### 3. 编译验证 ✅
 
 - ✅ `c01_ownership_borrow_scope` - 编译通过
+
   ```bash
   cargo check --package c01_ownership_borrow_scope
   Finished `dev` profile [unoptimized + debuginfo] target(s) in 6.31s

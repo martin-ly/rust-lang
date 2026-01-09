@@ -326,7 +326,7 @@ async fn manage_resources() -> Result<(), Error> {
 ### 🚀 性能提升统计
 
 | 特性类别 | 性能提升 | 编译时间 | 内存优化 | 开发体验 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **异步Drop** | 20-30% | 轻微 | 显著 | 显著 |
 | **异步生成器** | 30-40% | 轻微 | 显著 | 显著 |
 | **Polonius借用检查器** | 轻微 | 10-15% | 轻微 | 显著 |

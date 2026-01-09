@@ -304,7 +304,7 @@ where
 ## 📊 特性使用统计
 
 | 特性类别 | 完全实现 | 部分实现 | 总计 | 完成率 |
- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | 异步编程 | 3 | 2 | 5 | 80% |
 | 类型系统 | 4 | 0 | 4 | 100% |
 | 编译优化 | 3 | 0 | 3 | 100% |

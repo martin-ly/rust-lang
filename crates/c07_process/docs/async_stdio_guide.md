@@ -87,13 +87,16 @@ let manager = AsyncProcessManager::new().await;
 异步启动进程。
 
 **参数:**
+
 - `config`: 进程配置（程序路径、参数、环境变量等）
 
 **返回:**
+
 - `Ok(pid)`: 成功启动，返回进程 ID
 - `Err(e)`: 启动失败，返回错误
 
 **示例:**
+
 ```rust
 let pid = manager.spawn(config).await?;
 ```
@@ -103,14 +106,17 @@ let pid = manager.spawn(config).await?;
 异步写入进程的标准输入。
 
 **参数:**
+
 - `pid`: 进程 ID
 - `data`: 要写入的数据
 
 **返回:**
+
 - `Ok(())`: 写入成功
 - `Err(e)`: 写入失败
 
 **示例:**
+
 ```rust
 manager.write_stdin(pid, b"hello world\n").await?;
 ```
@@ -120,13 +126,16 @@ manager.write_stdin(pid, b"hello world\n").await?;
 关闭进程的标准输入（EOF）。
 
 **参数:**
+
 - `pid`: 进程 ID
 
 **返回:**
+
 - `Ok(())`: 关闭成功
 - `Err(e)`: 关闭失败
 
 **示例:**
+
 ```rust
 manager.close_stdin(pid).await?;
 ```
@@ -136,13 +145,16 @@ manager.close_stdin(pid).await?;
 异步读取进程的标准输出。
 
 **参数:**
+
 - `pid`: 进程 ID
 
 **返回:**
+
 - `Ok(data)`: 成功读取，返回输出数据
 - `Err(e)`: 读取失败
 
 **示例:**
+
 ```rust
 let output = manager.read_stdout(pid).await?;
 let output_str = String::from_utf8_lossy(&output);
@@ -154,13 +166,16 @@ println!("输出: {}", output_str);
 异步读取进程的标准错误。
 
 **参数:**
+
 - `pid`: 进程 ID
 
 **返回:**
+
 - `Ok(data)`: 成功读取，返回错误输出数据
 - `Err(e)`: 读取失败
 
 **示例:**
+
 ```rust
 let error = manager.read_stderr(pid).await?;
 if !error.is_empty() {
@@ -174,15 +189,18 @@ if !error.is_empty() {
 带超时的等待进程完成。
 
 **参数:**
+
 - `pid`: 进程 ID
 - `timeout`: 超时时间
 
 **返回:**
+
 - `Ok(Some(status))`: 进程在超时前完成，返回退出状态
 - `Ok(None)`: 超时，进程仍在运行
 - `Err(e)`: 等待失败
 
 **示例:**
+
 ```rust
 use std::time::Duration;
 
@@ -197,13 +215,16 @@ match manager.wait_with_timeout(pid, Duration::from_secs(5)).await? {
 异步终止进程。
 
 **参数:**
+
 - `pid`: 进程 ID
 
 **返回:**
+
 - `Ok(())`: 终止成功
 - `Err(e)`: 终止失败
 
 **示例:**
+
 ```rust
 manager.kill(pid).await?;
 ```
@@ -213,13 +234,16 @@ manager.kill(pid).await?;
 获取进程信息。
 
 **参数:**
+
 - `pid`: 进程 ID
 
 **返回:**
+
 - `Ok(info)`: 成功获取进程信息
 - `Err(e)`: 获取失败（进程不存在）
 
 **示例:**
+
 ```rust
 let info = manager.get_info(pid).await?;
 println!("进程名称: {}", info.name);
@@ -231,9 +255,11 @@ println!("进程状态: {:?}", info.status);
 列出所有管理的进程。
 
 **返回:**
+
 - `Vec<ProcessInfo>`: 所有进程的信息列表
 
 **示例:**
+
 ```rust
 let processes = manager.list_all().await;
 for process in processes {

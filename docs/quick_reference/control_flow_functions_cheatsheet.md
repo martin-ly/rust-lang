@@ -124,7 +124,7 @@ if let Some(value) = option {
     println!("无值");
 }
 
-// 链式 if let (Rust 1.90+)
+// 链式 if let (Rust 1.92.0+)
 if let Some(a) = option1 && let Some(b) = option2 {
     println!("都有值: {} {}", a, b);
 }

@@ -1803,7 +1803,7 @@ xsk-rs = "0.2"               # AF_XDP Rust 绑定
 ## ⚠️ 平台兼容性说明
 
 | 技术 | Linux | Windows | macOS | 最低版本 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **io_uring** | ✅ | ❌ | ❌ | Kernel 5.1+ |
 | **tokio-uring** | ✅ | ❌ | ❌ | Kernel 5.1+ |
 | **Monoio** | ✅ | ❌ | ❌ | Kernel 5.10+ |

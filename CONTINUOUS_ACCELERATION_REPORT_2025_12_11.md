@@ -28,9 +28,11 @@
 ### C01 Ownership & Borrow Scope 模块 (32+ 个修复)
 
 #### 修复的警告类型
+
 - ✅ **empty line after doc comment**: 32 个警告全部修复
 
 #### 修复的文件
+
 1. `rust_190_latest_features.rs` - 17 个修复
    - 修复所有章节标题后的空行问题
    - 合并 doc comment 块，移除多余空行
@@ -46,6 +48,7 @@
 #### 修复示例
 
 **修复前**:
+
 ```rust
 /// # 1. 生成器特性（使用标准库实现）/ Generator Features
 
@@ -53,6 +56,7 @@
 ```
 
 **修复后**:
+
 ```rust
 /// # 1. 生成器特性（使用标准库实现）/ Generator Features
 /// 同步生成器示例 / Synchronous Generator Example
@@ -63,7 +67,9 @@
 ### C02 Type System 模块 (4 个修复)
 
 #### 修复内容
+
 1. ✅ **添加 Default 实现** - `WorkStealingQueue<T>`
+
    ```rust
    impl<T> Default for WorkStealingQueue<T> {
        fn default() -> Self {
@@ -73,6 +79,7 @@
    ```
 
 2. ✅ **添加 is_empty 方法** - `ConcurrentHashMap`
+
    ```rust
    pub fn is_empty(&self) -> bool {
        self.len() == 0
@@ -80,6 +87,7 @@
    ```
 
 3. ✅ **简化模式匹配** - `LockFreeRingBuffer::drop`
+
    ```rust
    // 修复前: while let Some(_) = self.pop() {}
    // 修复后: while self.pop().is_some() {}
@@ -90,7 +98,9 @@
 ### C05 Threads 模块 (2 个修复)
 
 #### 修复内容
+
 1. ✅ **添加 is_empty 方法** - `ThreadPoolTaskQueue`
+
    ```rust
    pub fn is_empty(&self) -> bool {
        self.tasks.is_empty()
@@ -98,6 +108,7 @@
    ```
 
 2. ✅ **添加 Safety 文档** - `ThreadPoolTaskQueue::pop()`
+
    ```rust
    /// # Safety
    ///
@@ -113,6 +124,7 @@
 ### C09 Design Pattern 模块 (1 个修复)
 
 #### 修复内容
+
 1. ✅ **修复 doc comment 空行** - `formal_verification_examples.rs`
    - 移除 doc comment 后的多余空行
 
@@ -121,19 +133,23 @@
 ### C12 WASM 模块 (6 个修复)
 
 #### 修复内容
+
 1. ✅ **修复方法命名警告** - `WasmBindgenConfig::default()`
+
    ```rust
    #[allow(clippy::should_implement_trait)]
    pub fn default() -> Self
    ```
 
 2. ✅ **修复循环变量索引警告** - `WasmBuffer::read()`
+
    ```rust
    // 修复前: for i in 0..read_len { ... }
    // 修复后: for item in self.buffer[..read_len].iter() { ... }
    ```
 
 3. ✅ **修复循环变量索引警告** - `WasmBuffer::write()`
+
    ```rust
    // 修复前: for i in 0..write_len { ... }
    // 修复后: for (i, &byte) in data.iter().enumerate().take(write_len) { ... }
@@ -142,6 +158,7 @@
 4. ✅ **添加 MSRV 说明注释** - 为所有使用 Rust 1.92.0 特性的函数添加说明
 
 5. ✅ **添加 allow 属性** - 抑制预期的 MSRV 警告
+
    ```rust
    #[allow(clippy::min_ident_chars)] // MSRV difference: using Rust 1.92.0 feature
    ```

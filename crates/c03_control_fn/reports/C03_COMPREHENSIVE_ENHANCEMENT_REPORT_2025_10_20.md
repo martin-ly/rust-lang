@@ -61,7 +61,7 @@
 #### 核心内容
 
 | 章节 | 内容 | 亮点 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **1. 核心概念知识图谱** | 控制流概览、函数架构、错误处理流 | 3个Mermaid图 |
 | **2. 概念属性矩阵** | 控制流结构、函数形式特性对比 | 全面对比 |
 | **3. 概念关系三元组** | 控制流继承、函数组合、模式匹配依赖 | 清晰关系 |
@@ -80,7 +80,7 @@
 #### 核心内容1
 
 | 章节 | 内容 | 对比项 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **1. 条件控制结构对比** | 特性矩阵、性能对比、选型指南 | if/if let/match/let else |
 | **2. 循环结构对比** | 特性矩阵、性能对比、选型决策 | loop/while/while let/for |
 | **3. 模式匹配对比** | 方式对比、模式类型、性能 | 11种模式类型 |
@@ -97,7 +97,7 @@
 ### 文档量化指标
 
 | 指标 | 数量 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **新增核心文档** | 2篇 | 知识图谱 + 多维矩阵 |
 | **总文档行数** | ~1100行 | 高质量技术文档 |
 | **Mermaid 图表** | 6+ | 控制流/函数体系图 |

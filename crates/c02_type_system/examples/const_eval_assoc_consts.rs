@@ -13,5 +13,3 @@ fn main() {
     let _b: [i32; 16] = [0; 16];
     println!("SIZE a={}, b={}", <[i32; 8] as SizedInfo>::SIZE, <[i32; 16] as SizedInfo>::SIZE);
 }
-
-

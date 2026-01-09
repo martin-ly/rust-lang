@@ -16,6 +16,7 @@
 ### 1. c06_async 文档大规模批量更新 ✅
 
 #### tier_02_guides 文档（7个）
+
 - ✅ `01_异步编程快速入门.md` - 1处更新
 - ✅ `02_Future与Executor机制.md` - 1处更新
 - ✅ `03_异步运行时选择指南.md` - 1处更新
@@ -25,12 +26,14 @@
 - ✅ `09_glommio_best_practices_2025.md` - 1处更新
 
 #### tier_03_references 文档（4个）
+
 - ✅ `README.md` - 1处更新
 - ✅ `01_异步语言特性参考.md` - 1处更新
 - ✅ `03_异步生态系统参考.md` - 1处更新
 - ✅ `04_Pin与Unsafe参考.md` - 1处更新
 
 #### tier_04_advanced 文档（6个，含README）
+
 - ✅ `README.md` - 1处更新
 - ✅ `01_异步并发模式.md` - 1处更新
 - ✅ `02_异步系统架构.md` - 1处更新

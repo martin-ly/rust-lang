@@ -138,6 +138,7 @@ match result.performance_gain {
 ```
 
 **优化策略**：
+
 - **内存压力 > 90%**: 激进优化（清理未使用缓存、强制垃圾回收、减少内存分配）
 - **内存压力 > 70%**: 中等优化（清理过期缓存、优化内存布局）
 - **内存压力 > 50%**: 轻度优化（压缩内存）
@@ -308,6 +309,7 @@ pub struct PerformanceConfig {
 ### 推荐配置
 
 **开发环境**:
+
 ```rust
 PerformanceConfig {
     memory_threshold: 0.9,
@@ -322,6 +324,7 @@ PerformanceConfig {
 ```
 
 **生产环境**:
+
 ```rust
 PerformanceConfig {
     memory_threshold: 0.8,

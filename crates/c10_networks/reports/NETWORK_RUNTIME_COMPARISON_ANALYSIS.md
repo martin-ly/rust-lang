@@ -54,7 +54,7 @@
 ### 1.1 Tokio vs async-std 详细对比
 
 | 特性维度 | Tokio | async-std | 本项目选择 | 理由 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' ------------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' ------------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **性能** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ✅ Tokio | 生产环境验证，高性能 |
 | **生态系统** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ✅ Tokio | 丰富的第三方库支持 |
 | **学习曲线** | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ✅ Tokio | 虽然复杂但功能强大 |

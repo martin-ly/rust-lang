@@ -67,6 +67,7 @@ fn main() {
 ```
 
 运行:
+
 ```bash
 cargo run
 # 输出:
@@ -219,18 +220,23 @@ cargo bench --bench glommio_benchmarks
 ## ⚠️ 常见问题
 
 ### Q: 为什么我的程序无法编译?
+
 A: 确保你在 Linux 5.1+ 上，并安装了 `liburing-dev`。
 
 ### Q: 如何选择核心数量?
+
 A: 一般等于 CPU 核心数，可通过 `num_cpus::get()` 获取。
 
 ### Q: 为什么延迟仍然高?
+
 A: 确保:
+
 - 使用 CPU pinning
 - 避免跨核心通信
 - 使用 release 模式编译
 
 ### Q: 能在 Windows/macOS 上运行吗?
+
 A: 不能。Glommio 依赖 Linux 的 io_uring。
 
 ## 🎓 下一步

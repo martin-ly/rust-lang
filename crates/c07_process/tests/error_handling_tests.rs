@@ -2,7 +2,7 @@
 //!
 //! 测试各种错误场景和错误处理机制
 
-use c07_process::error::{ProcessError, IpcError, SyncError, ChildProcessError};
+use c07_process::error::{ProcessError, IpcError, SyncError};
 use c07_process::types::{ProcessConfig, ResourceLimits};
 use std::collections::HashMap;
 

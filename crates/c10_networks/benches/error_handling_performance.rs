@@ -80,7 +80,7 @@ fn bench_error_recovery(c: &mut Criterion) {
     group.bench_function("should_retry", |b| {
         let error = NetworkError::Timeout(Duration::from_secs(5));
         b.iter(|| {
-            let should_retry = black_box(&error).is_retryable() && 
+            let should_retry = black_box(&error).is_retryable() &&
                 black_box(&error).max_retries().map_or(false, |max| 3 < max);
             black_box(should_retry)
         })
@@ -103,7 +103,7 @@ fn bench_error_stats(c: &mut Criterion) {
     group.bench_function("stats_record", |b| {
         let mut stats = ErrorStats::default();
         let error = NetworkError::Timeout(Duration::from_secs(5));
-        
+
         b.iter(|| {
             stats.record_error(black_box(&error));
         })
@@ -113,7 +113,7 @@ fn bench_error_stats(c: &mut Criterion) {
         let mut stats = ErrorStats::default();
         let error = NetworkError::Timeout(Duration::from_secs(5));
         stats.record_error(&error);
-        
+
         b.iter(|| {
             let count = stats.timeout_errors;
             black_box(count)
@@ -124,7 +124,7 @@ fn bench_error_stats(c: &mut Criterion) {
         let mut stats = ErrorStats::default();
         let error = NetworkError::Timeout(Duration::from_secs(5));
         stats.record_error(&error);
-        
+
         b.iter(|| {
             let total = stats.total_errors;
             black_box(total)
@@ -135,7 +135,7 @@ fn bench_error_stats(c: &mut Criterion) {
         let mut stats = ErrorStats::default();
         let error = NetworkError::Timeout(Duration::from_secs(5));
         stats.record_error(&error);
-        
+
         b.iter(|| {
             stats = ErrorStats::default();
         })
@@ -157,7 +157,7 @@ fn bench_error_propagation(c: &mut Criterion) {
 
     group.bench_function("result_match", |b| {
         let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
-        
+
         b.iter(|| {
             match black_box(&result) {
                 Ok(_) => black_box(0),
@@ -168,7 +168,7 @@ fn bench_error_propagation(c: &mut Criterion) {
 
     group.bench_function("result_map", |b| {
         let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
-        
+
         b.iter(|| {
             let mapped = black_box(&result).as_ref().map_err(|e| e.max_retries().unwrap_or(0));
             black_box(mapped)
@@ -177,7 +177,7 @@ fn bench_error_propagation(c: &mut Criterion) {
 
     group.bench_function("result_and_then", |b| {
         let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
-        
+
         b.iter(|| {
             let chained = black_box(&result).as_ref().map(|_| ());
             black_box(chained)
@@ -194,12 +194,12 @@ fn bench_error_handling_chain(c: &mut Criterion) {
     group.bench_function("simple_chain", |b| {
         b.iter(|| {
             let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
-            
+
             let processed = result
                 .map_err(|e| e.max_retries().unwrap_or(0))
                 .and_then(|_| Ok(()))
                 .map_err(|retries| NetworkError::Timeout(Duration::from_secs(retries as u64)));
-            
+
             black_box(processed)
         })
     });
@@ -207,14 +207,14 @@ fn bench_error_handling_chain(c: &mut Criterion) {
     group.bench_function("complex_chain", |b| {
         b.iter(|| {
             let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
-            
+
             let processed = result
                 .map_err(|e| e.max_retries().unwrap_or(0))
                 .and_then(|_| Ok(()))
                 .map_err(|retries| NetworkError::Timeout(Duration::from_secs(retries as u64)))
                 .and_then(|_| Ok(()))
                 .map_err(|e| e.retry_delay().unwrap_or(Duration::from_millis(100)));
-            
+
             black_box(processed)
         })
     });
@@ -222,7 +222,7 @@ fn bench_error_handling_chain(c: &mut Criterion) {
     group.bench_function("nested_chain", |b| {
         b.iter(|| {
             let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
-            
+
             let processed = result
                 .map_err(|e| e.max_retries().unwrap_or(0))
                 .and_then(|_| {
@@ -230,7 +230,7 @@ fn bench_error_handling_chain(c: &mut Criterion) {
                     inner_result.map_err(|e| e.max_retries().unwrap_or(0))
                 })
                 .map_err(|retries| NetworkError::Timeout(Duration::from_secs(retries as u64)));
-            
+
             black_box(processed)
         })
     });
@@ -244,7 +244,7 @@ fn bench_error_logging(c: &mut Criterion) {
 
     group.bench_function("error_to_string", |b| {
         let error = NetworkError::Timeout(Duration::from_secs(5));
-        
+
         b.iter(|| {
             let error_str = black_box(&error).to_string();
             black_box(error_str)
@@ -253,7 +253,7 @@ fn bench_error_logging(c: &mut Criterion) {
 
     group.bench_function("error_debug", |b| {
         let error = NetworkError::Timeout(Duration::from_secs(5));
-        
+
         b.iter(|| {
             let debug_str = format!("{:?}", black_box(&error));
             black_box(debug_str)
@@ -262,7 +262,7 @@ fn bench_error_logging(c: &mut Criterion) {
 
     group.bench_function("error_display", |b| {
         let error = NetworkError::Timeout(Duration::from_secs(5));
-        
+
         b.iter(|| {
             let display_str = format!("{}", black_box(&error));
             black_box(display_str)
@@ -278,7 +278,7 @@ fn bench_error_serialization(c: &mut Criterion) {
 
     group.bench_function("error_to_string", |b| {
         let error = NetworkError::Timeout(Duration::from_secs(5));
-        
+
         b.iter(|| {
             let serialized = black_box(&error).to_string();
             black_box(serialized)
@@ -287,7 +287,7 @@ fn bench_error_serialization(c: &mut Criterion) {
 
     group.bench_function("error_debug_format", |b| {
         let error = NetworkError::Timeout(Duration::from_secs(5));
-        
+
         b.iter(|| {
             let debug_str = format!("{:?}", black_box(&error));
             black_box(debug_str)
@@ -296,7 +296,7 @@ fn bench_error_serialization(c: &mut Criterion) {
 
     group.bench_function("error_display_format", |b| {
         let error = NetworkError::Timeout(Duration::from_secs(5));
-        
+
         b.iter(|| {
             let display_str = format!("{}", black_box(&error));
             black_box(display_str)
@@ -313,7 +313,7 @@ fn bench_error_handling_performance(c: &mut Criterion) {
     group.bench_function("error_handling_overhead", |b| {
         b.iter(|| {
             let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
-            
+
             match result {
                 Ok(_) => black_box(0),
                 Err(e) => {
@@ -328,10 +328,10 @@ fn bench_error_handling_performance(c: &mut Criterion) {
 
     group.bench_function("error_handling_with_stats", |b| {
         let mut stats = ErrorStats::default();
-        
+
         b.iter(|| {
             let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
-            
+
             match result {
                 Ok(_) => black_box(0),
                 Err(e) => {
@@ -348,7 +348,7 @@ fn bench_error_handling_performance(c: &mut Criterion) {
     group.bench_function("error_handling_with_recovery", |b| {
         b.iter(|| {
             let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
-            
+
             match result {
                 Ok(_) => black_box(0),
                 Err(e) => {
@@ -373,7 +373,7 @@ fn bench_error_handling_concurrency(c: &mut Criterion) {
 
     group.bench_function("concurrent_error_stats", |b| {
         let stats = Arc::new(Mutex::new(ErrorStats::default()));
-        
+
         b.iter(|| {
             let mut handles = Vec::new();
 
@@ -392,7 +392,7 @@ fn bench_error_handling_concurrency(c: &mut Criterion) {
             for handle in handles {
                 total += handle.join().unwrap();
             }
-            
+
             black_box(total)
         })
     });
@@ -416,7 +416,7 @@ fn bench_error_handling_concurrency(c: &mut Criterion) {
             for handle in handles {
                 total += handle.join().unwrap();
             }
-            
+
             black_box(total)
         })
     });

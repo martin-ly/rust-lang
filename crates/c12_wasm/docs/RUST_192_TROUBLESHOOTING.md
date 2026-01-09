@@ -13,7 +13,7 @@
   - [📋 目录](#-目录)
   - [🎯 概述](#-概述)
   - [🔧 编译问题](#-编译问题)
-    - [问题 1: 找不到 rust_192_features 模块](#问题-1-找不到-rust_192_features-模块)
+    - [问题 1: 找不到 rust\_192\_features 模块](#问题-1-找不到-rust_192_features-模块)
     - [问题 2: 类型推断失败](#问题-2-类型推断失败)
     - [问题 3: 编译错误 "unresolved import"](#问题-3-编译错误-unresolved-import)
   - [⚡ 性能问题](#-性能问题)
@@ -40,6 +40,7 @@
 ### 问题 1: 找不到 rust_192_features 模块
 
 **错误信息**:
+
 ```
 error[E0432]: unresolved import `c12_wasm::rust_192_features`
 ```
@@ -47,19 +48,22 @@ error[E0432]: unresolved import `c12_wasm::rust_192_features`
 **解决方案**:
 
 1. **检查依赖配置**:
+
 ```toml
 # Cargo.toml
 [dependencies]
 c12_wasm = { path = "../c12_wasm" }  # 或使用 git 路径
 ```
 
-2. **检查模块导出**:
+1. **检查模块导出**:
+
 ```rust
 // 确保 lib.rs 中导出了模块
 pub mod rust_192_features;
 ```
 
-3. **重新构建**:
+1. **重新构建**:
+
 ```bash
 cargo clean
 cargo build
@@ -70,6 +74,7 @@ cargo build
 ### 问题 2: 类型推断失败
 
 **错误信息**:
+
 ```
 error[E0283]: type annotations needed for `WasmCircularBuffer<_>`
 ```
@@ -89,6 +94,7 @@ let mut buffer: WasmCircularBuffer<i32> = WasmCircularBuffer::new(10);
 ### 问题 3: 编译错误 "unresolved import"
 
 **错误信息**:
+
 ```
 error[E0432]: unresolved import `std::num::NonZeroUsize`
 ```
@@ -110,6 +116,7 @@ rustc --version  // 应该显示 1.92.0 或更高
 ### 问题 4: 性能没有提升
 
 **可能原因**:
+
 1. 使用 debug 模式编译
 2. 未启用 LTO
 3. 未使用 wasm-opt 优化
@@ -117,23 +124,27 @@ rustc --version  // 应该显示 1.92.0 或更高
 **解决方案**:
 
 1. **使用 release 模式**:
+
 ```bash
 cargo build --release
 ```
 
-2. **启用 LTO**:
+1. **启用 LTO**:
+
 ```toml
 # Cargo.toml
 [profile.release]
 lto = true
 ```
 
-3. **使用 wasm-opt**:
+1. **使用 wasm-opt**:
+
 ```bash
 wasm-opt -O3 input.wasm -o output.wasm
 ```
 
-4. **验证优化**:
+1. **验证优化**:
+
 ```bash
 # 检查二进制大小
 ls -lh pkg/*.wasm
@@ -147,6 +158,7 @@ cargo bench
 ### 问题 5: 二进制大小没有减小
 
 **可能原因**:
+
 1. 未使用大小优化选项
 2. 包含未使用的代码
 3. 未使用 wasm-opt
@@ -154,6 +166,7 @@ cargo bench
 **解决方案**:
 
 1. **使用大小优化**:
+
 ```toml
 # Cargo.toml
 [profile.release]
@@ -163,12 +176,14 @@ codegen-units = 1
 strip = true
 ```
 
-2. **使用 wasm-opt**:
+1. **使用 wasm-opt**:
+
 ```bash
 wasm-opt -Oz -o output.wasm input.wasm
 ```
 
-3. **检查依赖**:
+1. **检查依赖**:
+
 ```toml
 # 移除未使用的依赖
 # 使用 default-features = false
@@ -183,6 +198,7 @@ some-crate = { version = "1.0", default-features = false }
 ### 问题 6: unsafe 块警告
 
 **警告信息**:
+
 ```
 warning: unnecessary unsafe block
 ```
@@ -231,6 +247,7 @@ unsafe {
 ### 问题 8: JavaScript 调用失败
 
 **错误信息**:
+
 ```
 TypeError: wasm function is not a function
 ```
@@ -238,6 +255,7 @@ TypeError: wasm function is not a function
 **解决方案**:
 
 1. **确保正确初始化**:
+
 ```javascript
 // ✅ 正确：先初始化
 import init, { add } from './pkg/c12_wasm.js';
@@ -250,7 +268,8 @@ import { add } from './pkg/c12_wasm.js';
 const result = add(2, 3); // 错误
 ```
 
-2. **检查 wasm-bindgen 版本**:
+1. **检查 wasm-bindgen 版本**:
+
 ```toml
 # Cargo.toml
 [dependencies]
@@ -262,6 +281,7 @@ wasm-bindgen = "0.2"  # 确保使用最新版本
 ### 问题 9: 类型转换错误
 
 **错误信息**:
+
 ```
 TypeError: Cannot convert undefined to number
 ```

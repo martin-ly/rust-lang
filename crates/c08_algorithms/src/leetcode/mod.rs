@@ -345,7 +345,6 @@ pub fn get_all_problems_by_tag(tag: LeetCodeTag) -> Vec<LeetCodeProblem> {
         LeetCodeTag::Backtracking => backtracking::get_all_problems(),
         LeetCodeTag::Trie => trie::get_all_problems(),
         LeetCodeTag::BitManipulation => bit_manipulation::get_all_problems(),
-        LeetCodeTag::DynamicProgramming => dynamic_programming::get_all_problems(),
         _ => vec![], // 其他分类待实现
     }
 }
@@ -359,4 +358,3 @@ pub fn get_problem_implementation(
     // 暂时返回 None，待具体实现
     None
 }
-

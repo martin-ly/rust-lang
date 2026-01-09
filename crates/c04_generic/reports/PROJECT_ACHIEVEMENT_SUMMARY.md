@@ -89,7 +89,7 @@
 ### 代码统计
 
 | 指标 | 数量 | 状态 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | 总代码行数 | ~15,000+ | ✅ 完成 |
 | 主要模块 | 8 | ✅ 完成 |
 | 子模块 | 20+ | ✅ 完成 |
@@ -191,7 +191,7 @@ test result: ok. 90 passed; 0 failed; 0 ignored; 0 measured
 ### 文档类型完整性
 
 | 文档类型 | 状态 | 质量 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | API 文档 | ✅ 完成 | 优秀 |
 | 使用示例 | ✅ 完成 | 优秀 |
 | 最佳实践 | ✅ 完成 | 优秀 |

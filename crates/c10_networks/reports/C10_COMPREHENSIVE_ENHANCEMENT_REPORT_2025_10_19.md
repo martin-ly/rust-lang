@@ -677,7 +677,7 @@ fn process_packet<const N: usize>(data: [u8; N]) -> u32 {
 ## 📊 文档质量评估
 
 | 维度 | 评分 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **完整性** | ⭐⭐⭐⭐⭐ | 覆盖所有主要概念和协议 |
 | **准确性** | ⭐⭐⭐⭐⭐ | 所有代码经过测试 |
 | **可读性** | ⭐⭐⭐⭐⭐ | 结构清晰，注释丰富 |

@@ -707,7 +707,7 @@ cargo test --doc -p C11_macro_system  # ✅ 文档测试通过
 ### 12.2 质量指标
 
 | 指标 | 评分 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **内容准确性** | ⭐⭐⭐⭐⭐ | 技术内容准确可靠 |
 | **文档完整性** | ⭐⭐⭐⭐⭐ | 覆盖所有核心知识 |
 | **实用性** | ⭐⭐⭐⭐⭐ | 可直接应用 |

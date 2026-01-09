@@ -79,7 +79,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("⚡ 执行CPU优化...");
     let cpu_result = manager.optimize_cpu(|usage| async move {
         println!("  - 当前CPU使用率: {:.1}%", usage * 100.0);
-        
+
         if usage > 0.8 {
             OptimizationResult {
                 success: true,
@@ -136,24 +136,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     println!();
 
-    // 获取性能统计
-    println!("📈 获取性能统计...");
-    let stats = manager.get_performance_stats().await;
-    println!("性能统计:");
-    println!("  - 内存压力: {:.1}%", stats.memory_pressure * 100.0);
-    println!("  - CPU使用率: {:.1}%", stats.cpu_usage * 100.0);
-    println!("  - I/O使用率: {:.1}%", stats.io_usage * 100.0);
-    println!("  - 缓存命中率: {:.1}%", stats.cache_hit_rate * 100.0);
-    println!();
-
-    // 获取性能快照
-    println!("📸 获取性能快照...");
-    let snapshot = manager.get_performance_snapshot().await;
-    println!("性能快照:");
-    println!("  - 时间戳: {:?}", snapshot.timestamp);
-    println!("  - 内存使用: {:.1}%", snapshot.memory_pressure * 100.0);
-    println!("  - CPU使用: {:.1}%", snapshot.cpu_usage * 100.0);
-    println!("  - I/O使用: {:.1}%", snapshot.io_usage * 100.0);
+    // 获取性能报告
+    println!("📈 获取性能报告...");
+    let report = manager.get_performance_report().await;
+    println!("性能报告:");
+    println!("  - 时间戳: {:?}", report.timestamp);
+    println!("  - 性能分数: {:.2}", report.performance_score);
+    println!("  - 内存压力: {:.1}%", report.memory_stats.memory_pressure * 100.0);
+    println!("  - CPU使用率: {:.1}%", report.cpu_stats.cpu_usage * 100.0);
+    println!("  - I/O使用率: {:.1}%", report.io_stats.io_utilization * 100.0);
+    println!("  - 缓存命中率: {:.1}%", report.cache_stats.hit_ratio * 100.0);
     println!();
 
     // 等待一段时间以收集监控数据
@@ -161,17 +153,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     tokio::time::sleep(Duration::from_secs(10)).await;
     println!("✅ 监控数据收集完成\n");
 
-    // 获取性能历史
-    println!("📊 获取性能历史（最近10秒）...");
-    let history = manager.get_performance_history(Duration::from_secs(10)).await;
-    println!("性能历史记录数: {}", history.len());
-    if !history.is_empty() {
-        println!("最近 5 条记录:");
-        for (i, entry) in history.iter().rev().take(5).enumerate() {
-            println!("  {}. 时间: {:?}, 内存: {:.1}%, CPU: {:.1}%", 
-                i + 1, entry.timestamp, entry.memory_pressure * 100.0, entry.cpu_usage * 100.0);
-        }
-    }
+    // 再次获取性能报告以查看变化
+    println!("📊 获取更新后的性能报告...");
+    let updated_report = manager.get_performance_report().await;
+    println!("更新后的性能报告:");
+    println!("  - 时间戳: {:?}", updated_report.timestamp);
+    println!("  - 性能分数: {:.2}", updated_report.performance_score);
+    println!("  - 内存压力: {:.1}%", updated_report.memory_stats.memory_pressure * 100.0);
+    println!("  - CPU使用率: {:.1}%", updated_report.cpu_stats.cpu_usage * 100.0);
+    println!("  - I/O使用率: {:.1}%", updated_report.io_stats.io_utilization * 100.0);
+    println!("  - 缓存命中率: {:.1}%", updated_report.cache_stats.hit_ratio * 100.0);
     println!();
 
     println!("✅ 性能优化演示完成！");

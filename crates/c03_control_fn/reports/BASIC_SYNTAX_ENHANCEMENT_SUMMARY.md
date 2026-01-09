@@ -131,7 +131,7 @@
 ## 📊 代码统计
 
 | 类别 | 文件数量 | 代码行数 | 文档行数 | 总计 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- '
 | 基础语法模块 | 1 | 1,200+ | 300+ | 1,500+ |
 | Rust 1.89 特性模块 | 1 | 1,000+ | 200+ | 1,200+ |
 | 综合示例 | 2 | 1,400+ | 100+ | 1,500+ |

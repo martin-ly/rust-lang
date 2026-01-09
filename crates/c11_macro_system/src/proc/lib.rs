@@ -57,19 +57,19 @@ use syn::{parse_macro_input, DeriveInput, ItemFn};
 #[proc_macro_derive(Builder)]
 pub fn derive_builder(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
-    
+
     let name = &input.ident;
     let builder_name = syn::Ident::new(&format!("{}Builder", name), name.span());
-    
+
     // 提取字段信息
     let fields = match &input.data {
         syn::Data::Struct(syn::DataStruct { fields, .. }) => fields,
         _ => panic!("Builder宏只支持结构体"),
     };
-    
+
     let field_names: Vec<_> = fields.iter().map(|f| &f.ident).collect();
     let field_types: Vec<_> = fields.iter().map(|f| &f.ty).collect();
-    
+
     // 生成Builder结构体
     let builder_struct = quote! {
         pub struct #builder_name {
@@ -78,7 +78,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
             )*
         }
     };
-    
+
     // 生成Builder实现
     let builder_impl = quote! {
         impl #builder_name {
@@ -89,14 +89,14 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
                     )*
                 }
             }
-            
+
             #(
                 pub fn #field_names(mut self, #field_names: #field_types) -> Self {
                     self.#field_names = Some(#field_names);
                     self
                 }
             )*
-            
+
             pub fn build(self) -> Result<#name, String> {
                 Ok(#name {
                     #(
@@ -106,7 +106,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
             }
         }
     };
-    
+
     // 生成原结构体的builder方法
     let original_impl = quote! {
         impl #name {
@@ -115,13 +115,13 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
             }
         }
     };
-    
+
     let expanded = quote! {
         #builder_struct
         #builder_impl
         #original_impl
     };
-    
+
     TokenStream::from(expanded)
 }
 
@@ -142,7 +142,7 @@ pub fn debug_print(_attr: TokenStream, item: TokenStream) -> TokenStream {
     let input_fn = parse_macro_input!(item as ItemFn);
     let fn_name = &input_fn.sig.ident;
     let fn_block = &input_fn.block;
-    
+
     let expanded = quote! {
         fn #fn_name() {
             println!("[DEBUG] 调用函数: {}", stringify!(#fn_name));
@@ -150,7 +150,7 @@ pub fn debug_print(_attr: TokenStream, item: TokenStream) -> TokenStream {
             println!("[DEBUG] 函数 {} 执行完成", stringify!(#fn_name));
         }
     };
-    
+
     TokenStream::from(expanded)
 }
 
@@ -171,7 +171,7 @@ pub fn timed(_attr: TokenStream, item: TokenStream) -> TokenStream {
     let mut input_fn = parse_macro_input!(item as ItemFn);
     let fn_name = &input_fn.sig.ident;
     let fn_block = &input_fn.block;
-    
+
     // 包装函数体
     let wrapped_block = quote! {
         {
@@ -182,9 +182,9 @@ pub fn timed(_attr: TokenStream, item: TokenStream) -> TokenStream {
             result
         }
     };
-    
+
     input_fn.block = syn::parse2(wrapped_block).unwrap();
-    
+
     TokenStream::from(quote! { #input_fn })
 }
 
@@ -198,7 +198,7 @@ pub fn timed(_attr: TokenStream, item: TokenStream) -> TokenStream {
 /// conditional! {
 ///     #[cfg(debug_assertions)]
 ///     println!("调试模式");
-///     
+///
 ///     #[cfg(not(debug_assertions))]
 ///     println!("发布模式");
 /// }
@@ -206,14 +206,14 @@ pub fn timed(_attr: TokenStream, item: TokenStream) -> TokenStream {
 #[proc_macro]
 pub fn conditional(input: TokenStream) -> TokenStream {
     let input_str = input.to_string();
-    
+
     // 简单的条件编译实现
     let expanded = quote! {
         {
             #input
         }
     };
-    
+
     TokenStream::from(expanded)
 }
 
@@ -234,17 +234,17 @@ pub fn conditional(input: TokenStream) -> TokenStream {
 pub fn derive_auto_clone(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let name = &input.ident;
-    
+
     let fields = match &input.data {
         syn::Data::Struct(syn::DataStruct { fields, .. }) => fields,
         _ => panic!("AutoClone宏只支持结构体"),
     };
-    
+
     let field_clones: Vec<_> = fields.iter().map(|f| {
         let field_name = &f.ident;
         quote! { #field_name: self.#field_name.clone() }
     }).collect();
-    
+
     let expanded = quote! {
         impl Clone for #name {
             fn clone(&self) -> Self {
@@ -254,7 +254,7 @@ pub fn derive_auto_clone(input: TokenStream) -> TokenStream {
             }
         }
     };
-    
+
     TokenStream::from(expanded)
 }
 
@@ -276,12 +276,12 @@ pub fn derive_auto_clone(input: TokenStream) -> TokenStream {
 #[proc_macro]
 pub fn serializable(input: TokenStream) -> TokenStream {
     let input_str = input.to_string();
-    
+
     // 这里可以实现更复杂的序列化逻辑
     let expanded = quote! {
         // 序列化实现
         #input
     };
-    
+
     TokenStream::from(expanded)
 }

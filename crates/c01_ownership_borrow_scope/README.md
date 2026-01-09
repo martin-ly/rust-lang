@@ -234,7 +234,7 @@
   - **11大技术领域全面对比** | 所有权/借用/生命周期/智能指针/内存管理
   - **25+ 性能对比表格** | 实测数据（10万次操作级别）
   - **技术选型决策矩阵** | 按需求/性能目标精准选择
-  - **Rust 1.90 优化建议** | 最新特性升级指南
+  - **Rust 1.92.0 优化建议** | 最新特性升级指南
   - **适合**: 技术选型、性能优化、深度对比
 
 - **🗺️ [思维导图（ASCII艺术）](./docs/RUST_190_COMPREHENSIVE_MINDMAP.md)** (NEW!)
@@ -244,11 +244,11 @@
   - **问题诊断思维导图** | 常见错误快速定位
   - **适合**: 学习规划、知识导航、快速查找
 
-- **💻 [Rust 1.90 实战示例集 Part 1](./docs/RUST_190_EXAMPLES_COLLECTION.md)** (NEW!)
+- **💻 [Rust 1.92.0 实战示例集 Part 1](./docs/RUST_192_EXAMPLES_COLLECTION.md)** (NEW!)
   - **~1000行可运行代码** | 9大主题 × 40+示例
   - **所有权/借用/生命周期/智能指针** 完整覆盖
   - **综合实战项目** | 链表实现 + 缓存系统
-  - **Rust 1.90 新特性** | NLL改进、编译器优化
+  - **Rust 1.92.0 新特性** | MaybeUninit文档化、原始引用安全访问
   - **适合**: 动手实践、代码参考、测试验证
 
 ### 📈 增强统计
@@ -268,7 +268,7 @@
   - 12周完整课程规划
   - 按问题和场景的快速查找
 
-- **📚 Rust 1.90丰富示例集**: 新增 [RUST_190_RICH_EXAMPLES_INTEGRATION.md](./docs/RUST_190_RICH_EXAMPLES_INTEGRATION.md)
+- **📚 Rust 1.92.0丰富示例集**: 新增 [RUST_192_RICH_EXAMPLES_INTEGRATION.md](./docs/RUST_192_RICH_EXAMPLES_INTEGRATION.md)
   - **115+ 可运行示例**
   - **6000+ 行详细注释代码**
   - **知识图谱 × 多维矩阵 × 实战代码** 深度整合
@@ -401,7 +401,7 @@ cargo test --example rust_190_rich_practical_examples
 
 - ✅ **三大规则**: 唯一所有者、单一所有权、作用域释放
 - ✅ **移动语义**: 零成本的所有权转移
-- ✅ **Rust 1.90**: 更智能的移动推断
+- ✅ **Rust 1.92.0**: MaybeUninit文档化、原始引用安全访问、改进的Lint
 
 #### 借用系统 (Borrowing)
 
