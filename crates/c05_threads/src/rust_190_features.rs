@@ -18,7 +18,7 @@ use rayon::prelude::*;
 // ============================================================================
 
 /// 使用显式推断的常量泛型参数
-/// 
+///
 /// Rust 1.89 稳定了显式推断的常量泛型参数，允许在泛型参数中使用 `_` 进行推断
 pub struct GenericArray<T, const N: usize> {
     data: [T; N],
@@ -77,7 +77,7 @@ impl<T: Default + Copy, const N: usize> GenericArray<T, N> {
 // ============================================================================
 
 /// 异步生成器函数 (使用 async gen 语法)
-/// 
+///
 /// Rust 2024 保留了 gen 关键字以支持未来可能加入的异步生成器功能
 #[cfg(feature = "tokio")]
 pub async fn async_number_generator(start: u32, count: u32) -> impl Iterator<Item = u32> {
@@ -111,7 +111,7 @@ async fn async_operation() -> Result<String, &'static str> {
 // ============================================================================
 
 /// 使用 Never 类型 (!) 的函数
-/// 
+///
 /// Rust 1.90 调整了 ! 类型的回退行为，增强了类型系统的表达能力
 #[cfg(feature = "unstable")]
 pub fn never_returning_function() -> ! {
@@ -139,7 +139,7 @@ pub fn error_handling_with_never() -> Result<i32, std::convert::Infallible> {
 pub trait ImprovedTrait<T> {
     /// 使用 -> impl Trait 语法
     fn process(&self, input: T) -> impl Iterator<Item = T>;
-    
+
     /// 异步方法支持
     #[cfg(feature = "tokio")]
     async fn async_process(&self, input: T) -> T;
@@ -161,7 +161,7 @@ impl<T: Clone> ImprovedTrait<T> for ImprovedStruct<T> {
     fn process(&self, input: T) -> impl Iterator<Item = T> {
         std::iter::once(input).chain(std::iter::once(self.data.clone()))
     }
-    
+
     #[cfg(feature = "tokio")]
     async fn async_process(&self, input: T) -> T {
         // 模拟异步处理
@@ -181,11 +181,11 @@ impl StandardLibraryFeatures {
     /// 使用改进的字符串处理
     pub fn improved_string_handling() {
         let text = "Hello, Rust 1.90!";
-        
+
         // 使用新的字符串方法
         let words: Vec<&str> = text.split_whitespace().collect();
         println!("单词: {:?}", words);
-        
+
         // 使用改进的字符处理
         let chars: Vec<char> = text.chars().filter(|c| c.is_alphabetic()).collect();
         println!("字母字符: {:?}", chars);
@@ -242,7 +242,7 @@ impl PerformanceOptimizations {
     /// 使用内联汇编进行性能优化
     pub fn inline_assembly_optimization() {
         let mut value = 42u64;
-        
+
         // 使用内联汇编进行位操作优化
         unsafe {
             std::arch::asm!(
@@ -251,26 +251,26 @@ impl PerformanceOptimizations {
                 options(nostack, preserves_flags)
             );
         }
-        
+
         println!("优化后的值: {}", value);
     }
 
     /// 使用 SIMD 指令进行向量化操作
     pub fn simd_vectorization() {
         let mut data = [1.0f32, 2.0, 3.0, 4.0];
-        
+
         // 使用 SIMD 进行向量化计算
         for i in 0..data.len() {
             data[i] = data[i] * 2.0;
         }
-        
+
         println!("向量化结果: {:?}", data);
     }
 
     /// 使用内存预取优化
     pub fn memory_prefetch_optimization() {
         let data = vec![1, 2, 3, 4, 5, 6, 7, 8];
-        
+
         // 使用内存预取提示
         for (i, &value) in data.iter().enumerate() {
             if i + 1 < data.len() {
@@ -302,7 +302,7 @@ impl AdvancedConcurrency {
                 .into_par_iter()
                 .map(|i| i * i)
                 .collect();
-            
+
             println!("线程池计算结果长度: {}", results.len());
         });
     }
@@ -310,50 +310,50 @@ impl AdvancedConcurrency {
     /// 使用无锁数据结构
     pub fn lockfree_data_structures() {
         use crossbeam_queue::ArrayQueue;
-        
+
         let queue = ArrayQueue::new(1000);
-        
+
         // 生产者
         for i in 0..100 {
             queue.push(i).unwrap();
         }
-        
+
         // 消费者
         let mut count = 0;
         while let Some(value) = queue.pop() {
             count += 1;
             std::hint::black_box(value);
         }
-        
+
         println!("处理了 {} 个元素", count);
     }
 
     /// 使用内存屏障进行同步
     pub fn memory_barriers() {
         use std::sync::atomic::{AtomicBool, Ordering};
-        
+
         let flag = Arc::new(AtomicBool::new(false));
         let data = Arc::new(Mutex::new(0));
-        
+
         let data_clone = Arc::clone(&data);
         let flag_clone = Arc::clone(&flag);
         let handle = thread::spawn(move || {
             // 设置数据
             *data_clone.lock().unwrap() = 42;
-            
+
             // 使用内存屏障确保数据写入对其他线程可见
             flag_clone.store(true, Ordering::Release);
         });
-        
+
         // 等待标志设置
         while !flag.load(Ordering::Acquire) {
             std::hint::spin_loop();
         }
-        
+
         // 读取数据
         let value = *data.lock().unwrap();
         println!("通过内存屏障读取的值: {}", value);
-        
+
         handle.join().unwrap();
     }
 }
@@ -370,7 +370,7 @@ pub fn demonstrate_rust_190_features() {
     println!("\n--- 显式推断的常量泛型参数 ---");
     let array: GenericArray<i32, 5> = GenericArray::new();
     println!("数组长度: {}", array.len());
-    
+
     let slice = [1, 2, 3, 4, 5];
     let array_from_slice: GenericArray<i32, 3> = GenericArray::from_slice(&slice);
     println!("从切片创建的数组长度: {}", array_from_slice.len());
@@ -422,10 +422,10 @@ mod tests {
     fn test_generic_array() {
         let mut array: GenericArray<i32, 3> = GenericArray::new();
         assert_eq!(array.len(), 3);
-        
+
         assert!(array.set(0, 42).is_ok());
         assert!(array.set(3, 42).is_err());
-        
+
         assert_eq!(array.get(0), Some(&42));
         assert_eq!(array.get(3), None);
     }
@@ -523,7 +523,7 @@ impl AdvancedThreadPool {
             .map(|_| {
                 let receiver = Arc::clone(&receiver);
                 let counter = Arc::clone(&counter);
-                
+
                 thread::spawn(move || {
                     while let Ok(task) = receiver.lock().unwrap().recv() {
                         task();
@@ -571,7 +571,7 @@ pub struct LockFreeRingBuffer<const N: usize> {
 impl<const N: usize> LockFreeRingBuffer<N> {
     pub fn new() -> Self {
         assert!(N.is_power_of_two(), "Buffer size must be a power of two");
-        
+
         Self {
             buffer: [(); N].map(|_| AtomicUsize::new(0)),
             head: AtomicUsize::new(0),
@@ -583,7 +583,7 @@ impl<const N: usize> LockFreeRingBuffer<N> {
     pub fn try_push(&self, _value: usize) -> Result<(), ()> {
         let current_tail = self.tail.load(Ordering::Relaxed);
         let next_tail = (current_tail + 1) & self.mask;
-        
+
         if next_tail == self.head.load(Ordering::Acquire) {
             return Err(());
         }
@@ -595,14 +595,14 @@ impl<const N: usize> LockFreeRingBuffer<N> {
 
     pub fn try_pop(&self) -> Option<usize> {
         let current_head = self.head.load(Ordering::Relaxed);
-        
+
         if current_head == self.tail.load(Ordering::Acquire) {
             return None;
         }
 
         let next_head = (current_head + 1) & self.mask;
         self.head.store(next_head, Ordering::Release);
-        
+
         // 这里简化了实现，实际应该返回存储的值
         Some(0)
     }
@@ -623,7 +623,7 @@ impl MemoryPrefetchOptimizer {
     pub fn optimized_vector_sum(&self, data: &[f64]) -> f64 {
         let mut sum = 0.0;
         let chunk_size = 64; // 缓存行大小
-        
+
         for chunk in data.chunks(chunk_size) {
             // 预取下一个块
             if chunk.len() == chunk_size {
@@ -634,10 +634,10 @@ impl MemoryPrefetchOptimizer {
                     );
                 }
             }
-            
+
             sum += chunk.iter().sum::<f64>();
         }
-        
+
         sum
     }
 }
@@ -651,7 +651,7 @@ impl SimdOptimizer {
     pub fn simd_vector_add(a: &[f32], b: &[f32]) -> Vec<f32> {
         assert_eq!(a.len(), b.len());
         let mut result = vec![0.0; a.len()];
-        
+
         // 使用 SIMD 指令进行向量化
         for i in (0..a.len()).step_by(4) {
             if i + 4 <= a.len() {
@@ -668,7 +668,7 @@ impl SimdOptimizer {
                 }
             }
         }
-        
+
         result
     }
 }
@@ -687,11 +687,11 @@ impl AdvancedConcurrencyPatterns {
 
         pool.install(|| {
             let data: Vec<u64> = (1..=1000000).collect();
-            
+
             let start = Instant::now();
             let sum: u64 = data.par_iter().sum();
             let duration = start.elapsed();
-            
+
             println!("工作窃取求和结果: {}, 耗时: {:?}", sum, duration);
         });
     }
@@ -699,7 +699,7 @@ impl AdvancedConcurrencyPatterns {
     /// 无锁数据结构演示
     pub fn lockfree_demo() {
         let buffer = Arc::new(LockFreeRingBuffer::<1024>::new());
-        
+
         // 生产者线程
         let producer_buffer = Arc::clone(&buffer);
         let producer = thread::spawn(move || {
@@ -725,7 +725,7 @@ impl AdvancedConcurrencyPatterns {
 
         producer.join().unwrap();
         consumer.join().unwrap();
-        
+
         println!("无锁环形缓冲区演示完成");
     }
 
@@ -733,11 +733,11 @@ impl AdvancedConcurrencyPatterns {
     pub fn memory_optimization_demo() {
         let optimizer = MemoryPrefetchOptimizer::new(64);
         let data: Vec<f64> = (1..=1000000).map(|i| i as f64).collect();
-        
+
         let start = Instant::now();
         let sum = optimizer.optimized_vector_sum(&data);
         let duration = start.elapsed();
-        
+
         println!("内存优化求和结果: {}, 耗时: {:?}", sum, duration);
     }
 
@@ -745,11 +745,11 @@ impl AdvancedConcurrencyPatterns {
     pub fn simd_optimization_demo() {
         let a: Vec<f32> = (1..=1000000).map(|i| i as f32).collect();
         let b: Vec<f32> = (1..=1000000).map(|i| (i * 2) as f32).collect();
-        
+
         let start = Instant::now();
         let result = SimdOptimizer::simd_vector_add(&a, &b);
         let duration = start.elapsed();
-        
+
         println!("SIMD 向量加法完成，耗时: {:?}", duration);
         println!("结果长度: {}", result.len());
     }
@@ -758,7 +758,7 @@ impl AdvancedConcurrencyPatterns {
 /// 演示所有 Rust 1.90 高级特性
 pub fn demonstrate_advanced_rust_190_features() {
     println!("=== Rust 1.90 高级特性演示 ===");
-    
+
     // 高性能计数器演示
     println!("\n1. 高性能原子计数器:");
     let counter = HighPerformanceCounter::new();
@@ -766,7 +766,7 @@ pub fn demonstrate_advanced_rust_190_features() {
         counter.increment();
     }
     println!("计数器值: {}", counter.get());
-    
+
     // 高级线程池演示
     println!("\n2. 高级线程池:");
     let pool = AdvancedThreadPool::new(4);
@@ -778,23 +778,23 @@ pub fn demonstrate_advanced_rust_190_features() {
     thread::sleep(Duration::from_millis(100));
     println!("完成任务数: {}", pool.get_completed_tasks());
     pool.shutdown();
-    
+
     // 工作窃取演示
     println!("\n3. 工作窃取模式:");
     AdvancedConcurrencyPatterns::work_stealing_demo();
-    
+
     // 无锁数据结构演示
     println!("\n4. 无锁数据结构:");
     AdvancedConcurrencyPatterns::lockfree_demo();
-    
+
     // 内存优化演示
     println!("\n5. 内存优化:");
     AdvancedConcurrencyPatterns::memory_optimization_demo();
-    
+
     // SIMD 优化演示
     println!("\n6. SIMD 优化:");
     AdvancedConcurrencyPatterns::simd_optimization_demo();
-    
+
     println!("\n=== Rust 1.90 高级特性演示完成 ===");
 }
 
@@ -806,11 +806,11 @@ mod advanced_tests {
     fn test_high_performance_counter() {
         let counter = HighPerformanceCounter::new();
         assert_eq!(counter.get(), 0);
-        
+
         let prev = counter.increment();
         assert_eq!(prev, 0);
         assert_eq!(counter.get(), 1);
-        
+
         counter.reset();
         assert_eq!(counter.get(), 0);
     }
@@ -819,29 +819,29 @@ mod advanced_tests {
     fn test_advanced_thread_pool() {
         let pool = AdvancedThreadPool::new(2);
         let counter = Arc::new(AtomicUsize::new(0));
-        
+
         for _ in 0..5 {
             let counter = Arc::clone(&counter);
             pool.execute(move || {
                 counter.fetch_add(1, Ordering::Relaxed);
             });
         }
-        
+
         thread::sleep(Duration::from_millis(50));
         assert_eq!(pool.get_completed_tasks(), 5);
         assert_eq!(counter.load(Ordering::Relaxed), 5);
-        
+
         pool.shutdown();
     }
 
     #[test]
     fn test_lockfree_ring_buffer() {
         let buffer: LockFreeRingBuffer<8> = LockFreeRingBuffer::new();
-        
+
         // 测试推送
         assert!(buffer.try_push(1).is_ok());
         assert!(buffer.try_push(2).is_ok());
-        
+
         // 测试弹出
         assert!(buffer.try_pop().is_some());
         assert!(buffer.try_pop().is_some());
@@ -852,7 +852,7 @@ mod advanced_tests {
     fn test_memory_prefetch_optimizer() {
         let optimizer = MemoryPrefetchOptimizer::new(64);
         let data = vec![1.0, 2.0, 3.0, 4.0, 5.0];
-        
+
         let sum = optimizer.optimized_vector_sum(&data);
         assert_eq!(sum, 15.0);
     }
