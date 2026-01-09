@@ -87,6 +87,13 @@ impl ThreadPoolQueue {
     }
 
     /// 获取任务（需要外部同步）
+    ///
+    /// # Safety
+    ///
+    /// 调用者必须确保：
+    /// - 在单线程环境中调用，或已提供外部同步机制
+    /// - `initialized_count` 正确反映了已初始化任务的数量
+    /// - 不会并发调用此方法
     pub unsafe fn pop(&mut self) -> Option<ThreadTask> {
         if self.initialized_count > 0 {
             self.initialized_count -= 1;
@@ -135,6 +142,10 @@ impl ThreadPoolTaskQueue {
 
     pub fn len(&self) -> usize {
         self.tasks.len()
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.tasks.is_empty()
     }
 }
 

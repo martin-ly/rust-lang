@@ -1,5 +1,5 @@
 //! 并发和异步高级特性演示模块
-//! 
+//!
 //! 本模块演示了 Rust 1.90 中的各种并发和异步高级特性，包括：
 //! - 高级异步编程模式
 //! - 并发数据结构和算法
@@ -54,7 +54,7 @@ pub mod async_patterns {
         pub async fn transition_to(&self, new_state: AsyncState) -> Result<(), String> {
             let mut state = self.state.lock().await;
             let old_state = std::mem::replace(&mut *state, new_state.clone());
-            
+
             // 验证状态转换的合法性
             match (&old_state, &new_state) {
                 (AsyncState::Idle, AsyncState::Processing) => {},
@@ -118,7 +118,7 @@ pub mod async_patterns {
 
             loop {
                 attempt += 1;
-                
+
                 match operation().await {
                     Ok(result) => return Ok(result),
                     Err(error) => {
@@ -240,7 +240,7 @@ pub mod async_patterns {
                 let mut interval = interval(flush_interval);
                 loop {
                     interval.tick().await;
-                    
+
                     let mut items_guard = items.lock().await;
                     if !items_guard.is_empty() {
                         let batch = std::mem::take(&mut *items_guard);
@@ -300,7 +300,7 @@ pub mod concurrent_data_structures {
 
         pub fn pop(&self) -> Option<T> {
             let current_head = self.head.load(Ordering::Relaxed);
-            
+
             if current_head == self.tail.load(Ordering::Relaxed) {
                 return None;
             }
@@ -321,7 +321,7 @@ pub mod concurrent_data_structures {
         pub fn len(&self) -> usize {
             let head = self.head.load(Ordering::Relaxed);
             let tail = self.tail.load(Ordering::Relaxed);
-            
+
             if tail >= head {
                 tail - head
             } else {
@@ -347,7 +347,7 @@ pub mod concurrent_data_structures {
 
     impl<T> Drop for LockFreeRingBuffer<T> {
         fn drop(&mut self) {
-            while let Some(_) = self.pop() {}
+            while self.pop().is_some() {}
         }
     }
 
@@ -409,6 +409,10 @@ pub mod concurrent_data_structures {
             }
             total
         }
+
+        pub fn is_empty(&self) -> bool {
+            self.len() == 0
+        }
     }
 
     /// 工作窃取队列
@@ -423,6 +427,12 @@ pub mod concurrent_data_structures {
                 tasks: Arc::new(Mutex::new(VecDeque::new())),
                 stealers: Arc::new(Mutex::new(Vec::new())),
             }
+        }
+    }
+
+    impl<T> Default for WorkStealingQueue<T> {
+        fn default() -> Self {
+            Self::new()
         }
 
         pub fn push(&self, task: T) {
@@ -612,7 +622,7 @@ pub mod async_streams {
                 let mut interval = interval(window_size);
                 loop {
                     interval.tick().await;
-                    
+
                     let now = Instant::now();
                     let current_window = (now.elapsed().as_millis() / window_size.as_millis()) as u64;
                     let old_window = current_window - 1;
@@ -1039,13 +1049,13 @@ pub mod async_error_handling {
             F: Fn() -> std::pin::Pin<Box<dyn Future<Output = Result<T, String>> + Send>>,
         {
             let mut last_error = String::new();
-            
+
             for attempt in 0..=self.max_retries {
                 match operation().await {
                     Ok(result) => return Ok(result),
                     Err(error) => {
                         last_error = error.clone();
-                        
+
                         if attempt < self.max_retries {
                             // 尝试恢复
                             if let Some(strategy) = self.recovery_strategies.get(&error) {
@@ -1056,7 +1066,7 @@ pub mod async_error_handling {
                                     }
                                 }
                             }
-                            
+
                             // 等待后重试
                             sleep(self.retry_delay).await;
                         }
@@ -1085,7 +1095,7 @@ pub mod async_error_handling {
         pub async fn add_error(&self, error: String) {
             let mut errors = self.errors.lock().await;
             errors.push(error);
-            
+
             if errors.len() > self.max_errors {
                 errors.remove(0);
             }
@@ -1245,11 +1255,11 @@ pub mod performance_monitoring {
 pub async fn demonstrate_concurrent_async_advanced() {
     println!("🚀 Rust 1.90 并发和异步高级特性演示");
     println!("=====================================");
-    
+
     // 1. 异步状态机演示
     println!("\n=== 异步状态机演示 ===");
     let state_machine = async_patterns::AsyncStateMachine::new();
-    
+
     // 监听状态变化
     let mut state_receiver = state_machine.subscribe_to_changes();
     tokio::spawn(async move {
@@ -1257,15 +1267,15 @@ pub async fn demonstrate_concurrent_async_advanced() {
             println!("状态变化: {:?}", state);
         }
     });
-    
+
     state_machine.transition_to(async_patterns::AsyncState::Processing).await.unwrap();
     sleep(Duration::from_millis(100)).await;
     state_machine.transition_to(async_patterns::AsyncState::Completed).await.unwrap();
-    
+
     // 2. 异步重试机制演示
     println!("\n=== 异步重试机制演示 ===");
     let retry = async_patterns::AsyncRetry::new(3, Duration::from_millis(100));
-    
+
     let mut attempt_count = 0;
     let result = retry.execute(|| {
         attempt_count += 1;
@@ -1277,13 +1287,13 @@ pub async fn demonstrate_concurrent_async_advanced() {
             }
         })
     }).await;
-    
+
     println!("重试结果: {:?}", result);
-    
+
     // 3. 并发数据结构演示
     println!("\n=== 并发数据结构演示 ===");
     let concurrent_map = concurrent_data_structures::ConcurrentHashMap::new(4);
-    
+
     // 并发插入
     let handles: Vec<_> = (0..10).map(|i| {
         let map = concurrent_map.clone();
@@ -1291,10 +1301,10 @@ pub async fn demonstrate_concurrent_async_advanced() {
             map.insert(format!("key_{}", i), format!("value_{}", i));
         })
     }).collect();
-    
+
     join_all(handles).await;
     println!("并发哈希表大小: {}", concurrent_map.len());
-    
+
     // 4. 异步流处理演示
     println!("\n=== 异步流处理演示 ===");
     let stream_processor = async_streams::AsyncStreamProcessor::new(
@@ -1307,16 +1317,16 @@ pub async fn demonstrate_concurrent_async_advanced() {
             })
         }
     );
-    
+
     let stream = futures::stream::iter(0..10);
     let results = stream_processor.process_stream(stream).await.unwrap();
     println!("流处理结果: {:?}", results);
-    
+
     // 5. 工作窃取调度器演示
     println!("\n=== 工作窃取调度器演示 ===");
     let scheduler = work_stealing_scheduler::WorkStealingScheduler::new(4);
     scheduler.start();
-    
+
     for i in 0..20 {
         let task_id = i;
         scheduler.submit(move || {
@@ -1324,14 +1334,14 @@ pub async fn demonstrate_concurrent_async_advanced() {
             thread::sleep(Duration::from_millis(10));
         });
     }
-    
+
     sleep(Duration::from_millis(500)).await;
     scheduler.shutdown();
-    
+
     // 6. 性能监控演示
     println!("\n=== 性能监控演示 ===");
     let profiler = performance_monitoring::AsyncTaskProfiler::new();
-    
+
     for i in 0..5 {
         let profiler = profiler.clone();
         profiler.profile_task(format!("task_{}", i), async {
@@ -1339,11 +1349,11 @@ pub async fn demonstrate_concurrent_async_advanced() {
             format!("Task {} completed", i)
         }).await;
     }
-    
+
     let stats = profiler.get_all_task_stats().await;
     for stat in stats {
         println!("任务统计: {:?}", stat);
     }
-    
+
     println!("\n✅ 并发和异步高级特性演示完成！");
 }

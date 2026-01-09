@@ -477,6 +477,7 @@ pub mod wasm_bindgen_optimizations {
         pub const TARGET_REF: &str = Self::DEFAULT_TARGET;
 
         /// 创建默认配置
+        #[allow(clippy::should_implement_trait)]
         pub fn default() -> Self {
             Self {
                 debug: false,

@@ -70,8 +70,9 @@ impl WasmBuffer {
     pub unsafe fn read(&self, len: usize) -> Vec<u8> {
         let read_len = len.min(self.initialized_len);
         let mut result = Vec::with_capacity(read_len);
-        for i in 0..read_len {
-            result.push(unsafe { self.buffer[i].assume_init_read() });
+        // Use iterator to avoid index-based loop warning
+        for item in self.buffer[..read_len].iter() {
+            result.push(unsafe { item.assume_init_read() });
         }
         result
     }
@@ -134,6 +135,12 @@ impl<T> WasmObjectPool<T> {
 /// 使用 NonZero::div_ceil 计算 WASM 缓冲区块数
 ///
 /// Rust 1.92.0: 新增的 `div_ceil` 方法可以安全地计算向上取整除法
+///
+/// # Note
+///
+/// This function uses Rust 1.92.0 feature `div_ceil`. MSRV warnings are expected
+/// since clippy.toml specifies MSRV 1.90.0, but this crate requires Rust 1.92.0+.
+#[allow(clippy::min_ident_chars)] // MSRV difference: using Rust 1.92.0 feature
 pub fn calculate_buffer_chunks(
     total_size: usize,
     chunk_size: NonZeroUsize,
@@ -144,6 +151,8 @@ pub fn calculate_buffer_chunks(
 
     let total = NonZeroUsize::new(total_size).unwrap();
     // Rust 1.92.0: 使用 div_ceil 计算需要的块数
+    // Note: div_ceil requires Rust 1.92.0+, but MSRV in clippy.toml is 1.90.0
+    #[allow(clippy::min_ident_chars)]
     total.div_ceil(chunk_size).get()
 }
 
@@ -162,11 +171,14 @@ impl WasmAllocatorConfig {
     }
 
     /// 计算需要的 WASM 页面数
+    #[allow(clippy::min_ident_chars)] // MSRV difference: using Rust 1.92.0 feature
     pub fn calculate_pages(&self, total_bytes: usize) -> usize {
         if total_bytes == 0 {
             return 0;
         }
         let total = NonZeroUsize::new(total_bytes).unwrap();
+        // Note: div_ceil requires Rust 1.92.0+, but MSRV in clippy.toml is 1.90.0
+        #[allow(clippy::min_ident_chars)]
         total.div_ceil(self.page_size).get().min(self.max_pages)
     }
 }
@@ -182,11 +194,18 @@ impl WasmTransferConfig {
     }
 
     /// 计算需要的数据包数量
+    ///
+    /// # Note
+    ///
+    /// This function uses Rust 1.92.0 feature `div_ceil`. MSRV warnings are expected.
+    #[allow(clippy::min_ident_chars)] // MSRV difference: using Rust 1.92.0 feature
     pub fn calculate_packets(&self, data_size: usize) -> usize {
         if data_size == 0 {
             return 0;
         }
         let total = NonZeroUsize::new(data_size).unwrap();
+        // Note: div_ceil requires Rust 1.92.0+, but MSRV in clippy.toml is 1.90.0
+        #[allow(clippy::min_ident_chars)]
         total.div_ceil(self.packet_size).get()
     }
 }
