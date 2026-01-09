@@ -1,5 +1,5 @@
 //! Rust 1.90 真正的语言特性实现
-//! 
+//!
 //! 本模块实现了Rust 1.90版本中真正可用的语言特性，包括：
 //! - 改进的const generics
 //! - 更好的生命周期推断
@@ -13,7 +13,7 @@ use tokio::time::sleep;
 use anyhow::Result;
 
 /// 利用Rust 1.90改进的const generics
-/// 
+///
 /// 在Rust 1.90中，const generics得到了显著改进
 pub struct ConstGenericArray<T, const N: usize> {
     data: [T; N],
@@ -32,7 +32,7 @@ impl<T: Default + Copy, const N: usize> ConstGenericArray<T, N> {
         if self.current_index >= N {
             return Err(anyhow::anyhow!("数组已满"));
         }
-        
+
         self.data[self.current_index] = value;
         self.current_index += 1;
         Ok(())
@@ -56,7 +56,7 @@ impl<T: Default + Copy, const N: usize> ConstGenericArray<T, N> {
 }
 
 /// 利用Rust 1.90改进的生命周期推断
-/// 
+///
 /// 在Rust 1.90中，生命周期推断得到了显著改进
 pub struct LifetimeOptimized<'a, T> {
     data: &'a T,
@@ -72,36 +72,36 @@ impl<'a, T> LifetimeOptimized<'a, T> {
     }
 
     /// 演示改进的生命周期推断
-    /// 
+    ///
     /// 在Rust 1.90中，编译器能够更好地推断生命周期
     pub fn process_with_improved_lifetimes(&self, key: &str, value: &str) -> Result<&'a T> {
         // Rust 1.90能够更好地理解这里的生命周期关系
         let result = {
             let mut metadata = self.metadata.clone();
             metadata.insert(key.to_string(), value.to_string());
-            
+
             // 编译器能够更好地推断这里的生命周期
             self.data
         };
-        
+
         Ok(result)
     }
 
     /// 演示更智能的生命周期分析
     pub fn smart_lifetime_analysis(&self, inputs: &[&str]) -> Vec<&'a T> {
         let mut results = Vec::new();
-        
+
         // Rust 1.90能够更好地理解这种模式
         for _ in inputs {
             results.push(self.data);
         }
-        
+
         results
     }
 }
 
 /// 利用Rust 1.90优化的trait求解器
-/// 
+///
 /// 在Rust 1.90中，trait求解器得到了显著优化
 pub trait OptimizedTrait<T> {
     type Output;
@@ -123,7 +123,7 @@ impl<T: std::fmt::Display + Clone> OptimizedTrait<T> for LifetimeOptimized<'_, T
 }
 
 /// 利用Rust 1.90改进的错误处理
-/// 
+///
 /// 在Rust 1.90中，错误处理得到了显著改进
 pub struct ErrorHandling190 {
     error_count: std::sync::atomic::AtomicUsize,
@@ -169,12 +169,12 @@ impl ErrorHandling190 {
         F: Fn(T) -> Result<R>,
     {
         let mut results = Vec::new();
-        
+
         for input in inputs {
             let result = self.process_with_improved_error_handling(input, &processor).await;
             results.push(result);
         }
-        
+
         results
     }
 
@@ -187,7 +187,7 @@ impl ErrorHandling190 {
 }
 
 /// 利用Rust 1.90新的标准库特性
-/// 
+///
 /// 在Rust 1.90中，标准库得到了许多新特性
 pub struct StandardLibrary190 {
     data: HashMap<String, Vec<u8>>,
@@ -207,16 +207,16 @@ impl StandardLibrary190 {
         // 使用Rust 1.90的新特性
         let hash = self.compute_hash(&value);
         let hash_str = format!("{:x}", hash);
-        
+
         // 存储数据
         self.data.insert(key.clone(), value);
-        
+
         // 更新缓存
         self.cache.insert(key.clone(), hash_str.clone());
-        
+
         // 模拟异步处理
         sleep(Duration::from_millis(10)).await;
-        
+
         Ok(hash_str)
     }
 
@@ -224,7 +224,7 @@ impl StandardLibrary190 {
     fn compute_hash(&self, data: &[u8]) -> u64 {
         use std::collections::hash_map::DefaultHasher;
         use std::hash::{Hash, Hasher};
-        
+
         let mut hasher = DefaultHasher::new();
         data.hash(&mut hasher);
         hasher.finish()
@@ -258,7 +258,7 @@ pub async fn demonstrate_rust_190_real_implementation() -> Result<()> {
     let lifetime_opt = LifetimeOptimized::new(&data);
     let result = lifetime_opt.process_with_improved_lifetimes("key", "value")?;
     println!("  生命周期优化结果: {}", result);
-    
+
     let inputs = ["input1", "input2", "input3"];
     let smart_results = lifetime_opt.smart_lifetime_analysis(&inputs);
     println!("  智能生命周期分析结果数量: {}", smart_results.len());
@@ -271,10 +271,10 @@ pub async fn demonstrate_rust_190_real_implementation() -> Result<()> {
     // 4. 改进的错误处理演示
     println!("\n4. 改进的错误处理演示:");
     let error_handler = ErrorHandling190::new();
-    
+
     let success_result = error_handler.process_with_improved_error_handling(42, |x| Ok(x * 2)).await?;
     println!("  成功处理结果: {}", success_result);
-    
+
     let error_result = error_handler.process_with_improved_error_handling(-1, |x| {
         if x < 0 {
             Err(anyhow::anyhow!("负数不被允许"))
@@ -283,7 +283,7 @@ pub async fn demonstrate_rust_190_real_implementation() -> Result<()> {
         }
     }).await;
     println!("  错误处理结果: {:?}", error_result);
-    
+
     let (success_count, error_count) = error_handler.get_stats();
     println!("  统计 - 成功: {}, 错误: {}", success_count, error_count);
 
@@ -292,7 +292,7 @@ pub async fn demonstrate_rust_190_real_implementation() -> Result<()> {
     let mut stdlib_demo = StandardLibrary190::new();
     let hash_result = stdlib_demo.process_with_new_stdlib_features("test_key".to_string(), b"test_data".to_vec()).await?;
     println!("  标准库特性处理结果: {}", hash_result);
-    
+
     let (data_count, cache_count) = stdlib_demo.get_cache_stats();
     println!("  缓存统计 - 数据: {}, 缓存: {}", data_count, cache_count);
 
@@ -309,16 +309,16 @@ mod tests {
         let mut array: ConstGenericArray<i32, 3> = ConstGenericArray::new();
         assert_eq!(array.len(), 0);
         assert_eq!(array.capacity(), 3);
-        
+
         array.push(1).unwrap();
         array.push(2).unwrap();
         array.push(3).unwrap();
-        
+
         assert_eq!(array.len(), 3);
         assert_eq!(array.get(0), Some(&1));
         assert_eq!(array.get(1), Some(&2));
         assert_eq!(array.get(2), Some(&3));
-        
+
         assert!(array.push(4).is_err());
     }
 
@@ -341,10 +341,10 @@ mod tests {
     #[tokio::test]
     async fn test_error_handling_190() {
         let error_handler = ErrorHandling190::new();
-        
+
         let success_result = error_handler.process_with_improved_error_handling(42, |x| Ok(x * 2)).await.unwrap();
         assert_eq!(success_result, 84);
-        
+
         let error_result = error_handler.process_with_improved_error_handling(-1, |x| {
             if x < 0 {
                 Err(anyhow::anyhow!("负数不被允许"))
@@ -353,7 +353,7 @@ mod tests {
             }
         }).await;
         assert!(error_result.is_err());
-        
+
         let (success_count, error_count) = error_handler.get_stats();
         assert_eq!(success_count, 1);
         assert_eq!(error_count, 1);
@@ -364,7 +364,7 @@ mod tests {
         let mut stdlib_demo = StandardLibrary190::new();
         let hash_result = stdlib_demo.process_with_new_stdlib_features("test_key".to_string(), b"test_data".to_vec()).await.unwrap();
         assert!(!hash_result.is_empty());
-        
+
         let (data_count, cache_count) = stdlib_demo.get_cache_stats();
         assert_eq!(data_count, 1);
         assert_eq!(cache_count, 1);

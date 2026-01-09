@@ -1,5 +1,5 @@
 //! # 算法正确性验证模块
-//! 
+//!
 //! 本模块提供算法正确性验证的工具和方法。
 
 use serde::{Serialize, Deserialize};
@@ -47,12 +47,12 @@ impl CorrectnessVerifier {
         for test_case in test_cases {
             let mut data = test_case.clone();
             sort_fn(&mut data);
-            
+
             // 检查是否已排序
             if !Self::is_sorted(&data) {
                 return false;
             }
-            
+
             // 检查元素是否保持不变
             if !Self::has_same_elements(test_case, &data) {
                 return false;
@@ -85,12 +85,12 @@ impl CorrectnessVerifier {
         if arr1.len() != arr2.len() {
             return false;
         }
-        
+
         let mut sorted1 = arr1.to_vec();
         let mut sorted2 = arr2.to_vec();
         sorted1.sort();
         sorted2.sort();
-        
+
         sorted1 == sorted2
     }
 }

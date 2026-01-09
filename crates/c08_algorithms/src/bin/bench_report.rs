@@ -134,7 +134,7 @@ fn main() {
             for _ in 0..args.repeat {
                 let (_r, us) = time_it(|| {
                     sort_sync(&mut v, SortingAlgo::Quick);
-                    
+
                 });
                 best = best.min(us);
             }
@@ -145,7 +145,7 @@ fn main() {
             for _ in 0..args.repeat {
                 let (_r, us) = time_it(|| {
                     sort_parallel(&mut v, SortingAlgo::Quick);
-                    
+
                 });
                 best = best.min(us);
             }

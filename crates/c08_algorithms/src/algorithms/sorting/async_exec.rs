@@ -1,5 +1,5 @@
 //! # 异步排序算法实现
-//! 
+//!
 //! 本模块实现了各种异步排序算法。
 
 use super::*;
@@ -20,7 +20,7 @@ impl AsyncAlgorithm<Vec<i32>, Vec<i32>> for AsyncQuickSort {
                 if input.len() <= 1 {
                     return input;
                 }
-                
+
                 let mut data = input;
                 let len = data.len();
                 if len > 0 {
@@ -55,7 +55,7 @@ impl AsyncAlgorithm<Vec<i32>, Vec<i32>> for AsyncMergeSort {
                 if input.len() <= 1 {
                     return input;
                 }
-                
+
                 let mut data = input;
                 merge_sort_recursive(&mut data);
                 data
@@ -180,14 +180,14 @@ fn quick_sort_recursive(arr: &mut [i32], low: usize, high: usize) {
 fn partition(arr: &mut [i32], low: usize, high: usize) -> usize {
     let pivot = arr[high];
     let mut i = low;
-    
+
     for j in low..high {
         if arr[j] <= pivot {
             arr.swap(i, j);
             i += 1;
         }
     }
-    
+
     arr.swap(i, high);
     i
 }
@@ -197,13 +197,13 @@ fn merge_sort_recursive(arr: &mut [i32]) {
     if arr.len() <= 1 {
         return;
     }
-    
+
     let mid = arr.len() / 2;
     let (left, right) = arr.split_at_mut(mid);
-    
+
     merge_sort_recursive(left);
     merge_sort_recursive(right);
-    
+
     merge(arr, mid);
 }
 
@@ -211,11 +211,11 @@ fn merge_sort_recursive(arr: &mut [i32]) {
 fn merge(arr: &mut [i32], mid: usize) {
     let left = arr[..mid].to_vec();
     let right = arr[mid..].to_vec();
-    
+
     let mut i = 0;
     let mut j = 0;
     let mut k = 0;
-    
+
     while i < left.len() && j < right.len() {
         if left[i] <= right[j] {
             arr[k] = left[i];
@@ -226,13 +226,13 @@ fn merge(arr: &mut [i32], mid: usize) {
         }
         k += 1;
     }
-    
+
     while i < left.len() {
         arr[k] = left[i];
         i += 1;
         k += 1;
     }
-    
+
     while j < right.len() {
         arr[k] = right[j];
         j += 1;

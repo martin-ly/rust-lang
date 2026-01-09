@@ -31,13 +31,13 @@ pub async fn run() {
     // Test various async control flow patterns
     let result1 = process_with_match(1).await;
     println!("{}", result1);
-    
+
     let result2 = process_with_if_let(2).await;
     println!("{}", result2);
-    
+
     let result3 = process_with_match(0).await;
     println!("{}", result3);
-    
+
     // Demonstrate async loop control flow
     for i in 1..=3 {
         let data = fetch_data(i).await;
@@ -46,4 +46,3 @@ pub async fn run() {
         }
     }
 }
-

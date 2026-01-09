@@ -38,5 +38,3 @@ pub fn range_even_iter(start: i32, end: i32) -> impl Iterator<Item = i32> {
 pub fn abort_with(message: &str) -> ! {
     panic!("fatal: {}", message)
 }
-
-

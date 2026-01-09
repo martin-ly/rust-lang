@@ -1,5 +1,5 @@
 //! # 搜索算法模块
-//! 
+//!
 //! 本模块实现了各种搜索算法。
 
 use serde::{Serialize, Deserialize};
@@ -30,7 +30,7 @@ impl SearchingAlgorithms {
     pub fn linear_search<T: PartialEq>(arr: &[T], target: &T) -> SearchResult {
         let start = std::time::Instant::now();
         let mut comparisons = 0;
-        
+
         for (i, item) in arr.iter().enumerate() {
             comparisons += 1;
             if item == target {
@@ -42,7 +42,7 @@ impl SearchingAlgorithms {
                 };
             }
         }
-        
+
         SearchResult {
             found: false,
             index: None,
@@ -57,11 +57,11 @@ impl SearchingAlgorithms {
         let mut comparisons = 0;
         let mut left = 0;
         let mut right = arr.len();
-        
+
         while left < right {
             let mid = left + (right - left) / 2;
             comparisons += 1;
-            
+
             match arr[mid].cmp(target) {
                 std::cmp::Ordering::Equal => {
                     return SearchResult {
@@ -75,7 +75,7 @@ impl SearchingAlgorithms {
                 std::cmp::Ordering::Greater => right = mid,
             }
         }
-        
+
         SearchResult {
             found: false,
             index: None,

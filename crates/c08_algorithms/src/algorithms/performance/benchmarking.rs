@@ -1,5 +1,5 @@
 //! # 基准测试模块
-//! 
+//!
 //! 本模块提供算法基准测试的工具和方法。
 
 use serde::{Serialize, Deserialize};
@@ -30,13 +30,13 @@ impl Benchmarker {
         F: Fn() -> std::time::Duration,
     {
         let mut total_time = std::time::Duration::ZERO;
-        
+
         for _ in 0..iterations {
             total_time += algorithm_fn();
         }
-        
+
         let avg_time = total_time / iterations as u32;
-        
+
         BenchmarkResult {
             algorithm_name: algorithm_name.to_string(),
             input_size,

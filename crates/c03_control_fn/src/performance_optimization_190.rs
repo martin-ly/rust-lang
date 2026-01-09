@@ -18,7 +18,7 @@ use tokio::sync::Mutex;
 
 /// 性能基准测试工具
 /// 性能优化基准测试
-/// 
+///
 /// 用于测试Rust 1.90性能优化特性的效果。
 pub struct OptimizationBenchmark {
     results: Arc<Mutex<HashMap<String, Vec<Duration>>>>,
@@ -51,7 +51,7 @@ impl OptimizationBenchmark {
             let start = Instant::now();
             black_box(test_fn());
             let duration = start.elapsed();
-            
+
             total_duration += duration;
             durations.push(duration);
         }
@@ -73,15 +73,15 @@ impl OptimizationBenchmark {
     /// 打印性能报告
     pub async fn print_report(&self) {
         let results = self.get_results().await;
-        
+
         println!("📊 性能基准测试报告");
         println!("{}", "=".repeat(50));
-        
+
         for (name, durations) in results {
             let avg = durations.iter().sum::<Duration>() / durations.len() as u32;
             let min = durations.iter().min().unwrap();
             let max = durations.iter().max().unwrap();
-            
+
             println!("{}:", name);
             println!("  平均时间: {:?}", avg);
             println!("  最小时间: {:?}", min);
@@ -93,7 +93,7 @@ impl OptimizationBenchmark {
 }
 
 /// 并行编译优化演示
-/// 
+///
 /// 展示Rust 1.90并行前端编译的性能提升。
 pub struct ParallelCompilationDemo {
     pub data: Vec<i32>,
@@ -144,7 +144,7 @@ impl ParallelCompilationDemo {
 }
 
 /// 特质求解器性能演示
-/// 
+///
 /// 展示Rust 1.90下一代特质求解器的性能提升。
 pub trait PerformanceTrait<T> {
     type Output;
@@ -154,7 +154,7 @@ pub trait PerformanceTrait<T> {
 /// 复杂特质实现
 impl PerformanceTrait<i32> for ParallelCompilationDemo {
     type Output = i64;
-    
+
     fn process(&self, input: i32) -> Self::Output {
         // 模拟复杂的特质求解，避免溢出
         let mut result = input as i64;
@@ -167,14 +167,14 @@ impl PerformanceTrait<i32> for ParallelCompilationDemo {
 
 impl PerformanceTrait<Vec<i32>> for ParallelCompilationDemo {
     type Output = i64;
-    
+
     fn process(&self, input: Vec<i32>) -> Self::Output {
         input.iter().map(|&x| self.process(x)).sum()
     }
 }
 
 /// 借用检查器性能演示
-/// 
+///
 /// 展示Rust 1.90 Polonius借用检查器的性能优化。
 pub struct BorrowCheckerPerformanceDemo {
     pub data: Vec<String>,
@@ -214,20 +214,20 @@ impl BorrowCheckerPerformanceDemo {
         // Rust 1.90的借用检查器能够更好地处理这种复杂场景
         if let Some(first_item) = self.data.first() {
             let first_len = first_item.len();
-            
+
             // 现在可以安全地修改data
             self.data.push("new_item".to_string());
-            
+
             // 使用之前借用的值
             self.metadata.insert("first_length".to_string(), first_len.to_string());
         }
-        
+
         Ok(())
     }
 }
 
 /// 内存布局优化演示
-/// 
+///
 /// 展示Rust 1.90改进的内存布局优化。
 #[repr(C, packed)]
 pub struct OptimizedStruct {
@@ -268,7 +268,7 @@ impl UnoptimizedStruct {
 }
 
 /// 编译时计算增强演示
-/// 
+///
 /// 展示Rust 1.90编译时计算的增强功能。
 pub struct CompileTimeComputation {
     pub values: [i32; 10],
@@ -315,7 +315,7 @@ impl CompileTimeComputation {
 }
 
 /// 零成本抽象优化演示
-/// 
+///
 /// 展示Rust 1.90零成本抽象的优化。
 pub struct ZeroCostAbstractionDemo {
     pub data: Vec<i32>,
@@ -361,7 +361,7 @@ impl ZeroCostAbstractionDemo {
 }
 
 /// 性能优化综合演示
-/// 
+///
 /// 展示Rust 1.90性能优化特性的综合应用。
 pub async fn demonstrate_performance_optimization_190() -> Result<(), String> {
     println!("🚀 演示 Rust 1.90 性能优化特性");
@@ -371,24 +371,24 @@ pub async fn demonstrate_performance_optimization_190() -> Result<(), String> {
     // 1. 并行编译优化演示
     println!("\n1. 并行编译优化演示:");
     let demo = ParallelCompilationDemo::new(10000);
-    
+
     let serial_time = benchmark.benchmark("串行处理", 10, || {
         demo.process_serial()
     }).await;
-    
+
     let parallel_time = benchmark.benchmark("并行处理", 10, || {
         // 简化为同步版本避免运行时嵌套问题
         demo.process_serial()
     }).await;
-    
+
     let simd_time = benchmark.benchmark("SIMD优化", 10, || {
         demo.process_simd()
     }).await;
-    
+
     println!("  串行处理时间: {:?}", serial_time);
     println!("  并行处理时间: {:?}", parallel_time);
     println!("  SIMD优化时间: {:?}", simd_time);
-    
+
     let speedup = serial_time.as_nanos() as f64 / parallel_time.as_nanos() as f64;
     println!("  并行加速比: {:.2}x", speedup);
 
@@ -397,32 +397,32 @@ pub async fn demonstrate_performance_optimization_190() -> Result<(), String> {
     let trait_time = benchmark.benchmark("特质求解", 1000, || {
         demo.process(42)
     }).await;
-    
+
     let trait_vec_time = benchmark.benchmark("向量特质求解", 100, || {
         demo.process(vec![1, 2, 3, 4, 5])
     }).await;
-    
+
     println!("  单值特质求解时间: {:?}", trait_time);
     println!("  向量特质求解时间: {:?}", trait_vec_time);
 
     // 3. 借用检查器性能演示
     println!("\n3. 借用检查器性能演示:");
-    
+
     let traditional_time = benchmark.benchmark("传统借用", 1000, || {
         let mut demo = BorrowCheckerPerformanceDemo::new(1000);
         let result = demo.traditional_borrow();
         result.len()
     }).await;
-    
+
     let optimized_time = benchmark.benchmark("优化借用", 1000, || {
         let demo = BorrowCheckerPerformanceDemo::new(1000);
         let result = demo.optimized_borrow();
         result.len()
     }).await;
-    
+
     println!("  传统借用时间: {:?}", traditional_time);
     println!("  优化借用时间: {:?}", optimized_time);
-    
+
     let borrow_speedup = traditional_time.as_nanos() as f64 / optimized_time.as_nanos() as f64;
     println!("  借用优化加速比: {:.2}x", borrow_speedup);
 
@@ -432,56 +432,56 @@ pub async fn demonstrate_performance_optimization_190() -> Result<(), String> {
         let s = OptimizedStruct::new(42, true, [1, 2, 3, 4]);
         s.process()
     }).await;
-    
+
     let unoptimized_time = benchmark.benchmark("未优化内存布局", 10000, || {
         let s = UnoptimizedStruct::new(42, true, [1, 2, 3, 4]);
         s.process()
     }).await;
-    
+
     println!("  优化内存布局时间: {:?}", optimized_time);
     println!("  未优化内存布局时间: {:?}", unoptimized_time);
-    
+
     let layout_speedup = unoptimized_time.as_nanos() as f64 / optimized_time.as_nanos() as f64;
     println!("  内存布局优化加速比: {:.2}x", layout_speedup);
 
     // 5. 编译时计算演示
     println!("\n5. 编译时计算演示:");
     let compile_time_demo = CompileTimeComputation::new();
-    
+
     let compile_time = benchmark.benchmark("编译时计算", 10000, || {
         CompileTimeComputation::fibonacci(10)
     }).await;
-    
+
     let runtime_time = benchmark.benchmark("运行时计算", 10000, || {
         compile_time_demo.runtime_sum()
     }).await;
-    
+
     println!("  编译时计算时间: {:?}", compile_time);
     println!("  运行时计算时间: {:?}", runtime_time);
-    
+
     let compile_speedup = runtime_time.as_nanos() as f64 / compile_time.as_nanos() as f64;
     println!("  编译时计算加速比: {:.2}x", compile_speedup);
 
     // 6. 零成本抽象演示
     println!("\n6. 零成本抽象演示:");
     let abstraction_demo = ZeroCostAbstractionDemo::new(1000);
-    
+
     let iterator_time = benchmark.benchmark("迭代器抽象", 1000, || {
         abstraction_demo.iterator_processing()
     }).await;
-    
+
     let manual_time = benchmark.benchmark("手动循环", 1000, || {
         abstraction_demo.manual_loop_processing()
     }).await;
-    
+
     let closure_time = benchmark.benchmark("闭包抽象", 1000, || {
         abstraction_demo.closure_processing(|x| x % 2 == 0)
     }).await;
-    
+
     println!("  迭代器抽象时间: {:?}", iterator_time);
     println!("  手动循环时间: {:?}", manual_time);
     println!("  闭包抽象时间: {:?}", closure_time);
-    
+
     let abstraction_ratio = iterator_time.as_nanos() as f64 / manual_time.as_nanos() as f64;
     println!("  抽象开销比例: {:.2}x (接近1.0表示零成本)", abstraction_ratio);
 
@@ -501,7 +501,7 @@ mod tests {
         let demo = ParallelCompilationDemo::new(100);
         let serial_result = demo.process_serial();
         let simd_result = demo.process_simd();
-        
+
         assert_eq!(serial_result.len(), simd_result.len());
         assert_eq!(serial_result, simd_result);
     }
@@ -511,7 +511,7 @@ mod tests {
         let demo = ParallelCompilationDemo::new(100);
         let serial_result = demo.process_serial();
         let parallel_result = demo.process_parallel().await;
-        
+
         assert_eq!(serial_result.len(), parallel_result.len());
         assert_eq!(serial_result, parallel_result);
     }
@@ -521,7 +521,7 @@ mod tests {
         let demo = ParallelCompilationDemo::new(100);
         let result = demo.process(42);
         assert!(result > 0);
-        
+
         let vec_result = demo.process(vec![1, 2, 3]);
         assert!(vec_result > 0);
     }
@@ -531,13 +531,13 @@ mod tests {
         // 分别创建实例以避免借用冲突
         let mut demo1 = BorrowCheckerPerformanceDemo::new(100);
         let demo2 = BorrowCheckerPerformanceDemo::new(100);
-        
+
         let traditional_result = demo1.traditional_borrow();
         let optimized_result = demo2.optimized_borrow();
-        
+
         assert_eq!(traditional_result.len(), optimized_result.len());
         assert_eq!(traditional_result, optimized_result);
-        
+
         // 测试复杂借用场景
         assert!(demo1.complex_borrow_scenario().is_ok());
     }
@@ -546,14 +546,14 @@ mod tests {
     fn test_memory_layout_optimization() {
         let optimized = OptimizedStruct::new(42, true, [1, 2, 3, 4]);
         let unoptimized = UnoptimizedStruct::new(42, true, [1, 2, 3, 4]);
-        
+
         assert_eq!(optimized.process(), unoptimized.process());
     }
 
     #[test]
     fn test_compile_time_computation() {
         let demo = CompileTimeComputation::new();
-        
+
         assert_eq!(CompileTimeComputation::fibonacci(10), 55);
         assert_eq!(CompileTimeComputation::array_sum(), 55);
         assert_eq!(demo.runtime_sum(), 55);
@@ -565,7 +565,7 @@ mod tests {
         let iterator_result = demo.iterator_processing();
         let manual_result = demo.manual_loop_processing();
         let closure_result = demo.closure_processing(|x| x % 2 == 0);
-        
+
         assert_eq!(iterator_result, manual_result);
         assert_eq!(iterator_result, closure_result);
     }
@@ -576,9 +576,9 @@ mod tests {
         let duration = benchmark.benchmark("test", 10, || {
             42
         }).await;
-        
+
         assert!(duration >= Duration::ZERO);
-        
+
         let results = benchmark.get_results().await;
         assert!(results.contains_key("test"));
     }

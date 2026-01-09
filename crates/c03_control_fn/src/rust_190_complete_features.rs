@@ -45,13 +45,13 @@ impl AsyncClosureDemo {
         Fut: std::future::Future<Output = Result<String>>,
     {
         let mut results = Vec::new();
-        
+
         for item in self.data.clone() {
             // 使用异步闭包处理每个项目
             let processed = processor(item).await?;
             results.push(processed);
         }
-        
+
         Ok(results)
     }
 
@@ -62,7 +62,7 @@ impl AsyncClosureDemo {
         Fut: std::future::Future<Output = Result<String>> + Send,
     {
         let mut handles = Vec::new();
-        
+
         for item in self.data.clone() {
             let processor = processor.clone();
             let handle = tokio::spawn(async move {
@@ -70,13 +70,13 @@ impl AsyncClosureDemo {
             });
             handles.push(handle);
         }
-        
+
         let mut results = Vec::new();
         for handle in handles {
             let result = handle.await??;
             results.push(result);
         }
-        
+
         Ok(results)
     }
 
@@ -89,11 +89,11 @@ impl AsyncClosureDemo {
         if let Some(cached) = self.cache.get(&key) {
             return Ok(cached.clone());
         }
-        
+
         // 使用异步闭包生成值
         let value = generator().await?;
         self.cache.insert(key.clone(), value.clone());
-        
+
         Ok(value)
     }
 }
@@ -115,43 +115,43 @@ impl TupleCollectionDemo {
     /// 演示元组的 FromIterator 实现
     pub fn demonstrate_tuple_from_iterator(&self) -> Result<()> {
         println!("演示元组的 FromIterator 实现:");
-        
+
         // 双元素元组 - 分别处理奇数和偶数
         let (evens, odds): (Vec<i32>, Vec<i32>) = self.data
             .iter()
             .partition(|&&x| x % 2 == 0);
         println!("  双元素元组 - 偶数: {}, 奇数: {}", evens.len(), odds.len());
-        
+
         // 演示元组的 collect 功能 - 使用正确的语法
         let doubled: Vec<i32> = self.data.iter().map(|&x| x * 2).collect();
         println!("  数据翻倍: {:?}", doubled.len());
-        
+
         // 按范围分组
         let small: Vec<i32> = self.data.iter().filter(|&&x| x < 10).cloned().collect();
         let medium: Vec<i32> = self.data.iter().filter(|&&x| x >= 10 && x <= 20).cloned().collect();
         let large: Vec<i32> = self.data.iter().filter(|&&x| x > 20).cloned().collect();
         println!("  按范围分组 - 小: {}, 中: {}, 大: {}", small.len(), medium.len(), large.len());
-        
+
         // 按余数分组
         let mod0: Vec<i32> = self.data.iter().filter(|&&x| x % 4 == 0).cloned().collect();
         let mod1: Vec<i32> = self.data.iter().filter(|&&x| x % 4 == 1).cloned().collect();
         let mod2: Vec<i32> = self.data.iter().filter(|&&x| x % 4 == 2).cloned().collect();
         let mod3: Vec<i32> = self.data.iter().filter(|&&x| x % 4 == 3).cloned().collect();
-        println!("  按余数分组 - 余0: {}, 余1: {}, 余2: {}, 余3: {}", 
+        println!("  按余数分组 - 余0: {}, 余1: {}, 余2: {}, 余3: {}",
                 mod0.len(), mod1.len(), mod2.len(), mod3.len());
-        
+
         Ok(())
     }
 
     /// 演示元组的 Extend 实现
     pub fn demonstrate_tuple_extend(&mut self, new_data: Vec<i32>) -> Result<()> {
         println!("演示元组的 Extend 实现:");
-        
+
         // 创建多个集合
         let mut evens = Vec::new();
         let mut odds = Vec::new();
         let mut primes = Vec::new();
-        
+
         // 分别处理新数据
         for &x in &new_data {
             if x % 2 == 0 {
@@ -159,14 +159,14 @@ impl TupleCollectionDemo {
             } else {
                 odds.push(x);
             }
-            
+
             if self.is_prime(x) {
                 primes.push(x);
             }
         }
-        
+
         println!("  扩展后 - 偶数: {}, 奇数: {}, 素数: {}", evens.len(), odds.len(), primes.len());
-        
+
         Ok(())
     }
 
@@ -191,10 +191,10 @@ impl TupleCollectionDemo {
 pub trait AsyncProcessor {
     /// 异步处理数据 - 使用 Box<dyn Future> 来支持动态分发
     fn process(&self, data: Vec<u8>) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<Vec<u8>>> + Send>>;
-    
+
     /// 异步验证数据
     fn validate(&self, input: String) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<bool>> + Send>>;
-    
+
     /// 异步批量处理
     fn batch_process(&self, items: Vec<String>) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<Vec<String>>> + Send>>;
 }
@@ -221,38 +221,38 @@ impl AsyncProcessor for DataProcessor {
         Box::pin(async move {
             // 模拟异步处理
             sleep(Duration::from_millis(10)).await;
-            
+
             // 简单的数据处理：反转字节
             let processed: Vec<u8> = data.iter().rev().cloned().collect();
-            
+
             println!("  处理器 {} 处理了 {} 字节", id, data.len());
             Ok(processed)
         })
     }
-    
+
     fn validate(&self, input: String) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<bool>> + Send>> {
         let id = self.id.clone();
         Box::pin(async move {
             // 模拟异步验证
             sleep(Duration::from_millis(5)).await;
-            
+
             let is_valid = !input.is_empty() && input.len() < 1000;
             println!("  处理器 {} 验证输入: {} -> {}", id, input, is_valid);
             Ok(is_valid)
         })
     }
-    
+
     fn batch_process(&self, items: Vec<String>) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<Vec<String>>> + Send>> {
         let id = self.id.clone();
         Box::pin(async move {
             // 模拟异步批量处理
             sleep(Duration::from_millis(20)).await;
-            
+
             let processed: Vec<String> = items
                 .iter()
                 .map(|item| format!("processed_{}", item))
                 .collect();
-            
+
             println!("  处理器 {} 批量处理了 {} 个项目", id, items.len());
             Ok(processed)
         })
@@ -284,7 +284,7 @@ impl AsyncProcessor for CompleteAdvancedDataProcessor {
         Box::pin(async move {
             // 模拟高级异步处理
             sleep(Duration::from_millis(50)).await;
-            
+
             // 模拟压缩处理
             let compressed: Vec<u8> = data
                 .chunks(2)
@@ -296,34 +296,34 @@ impl AsyncProcessor for CompleteAdvancedDataProcessor {
                     }
                 })
                 .collect();
-            
-            println!("  高级处理器 {} 压缩了 {} -> {} 字节", 
+
+            println!("  高级处理器 {} 压缩了 {} -> {} 字节",
                     id, data.len(), compressed.len());
             Ok(compressed)
         })
     }
-    
+
     fn validate(&self, input: String) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<bool>> + Send>> {
         let id = self.id.clone();
         Box::pin(async move {
             // 模拟高级异步验证
             sleep(Duration::from_millis(15)).await;
-            
-            let is_valid = !input.is_empty() 
-                && input.len() < 1000 
+
+            let is_valid = !input.is_empty()
+                && input.len() < 1000
                 && input.chars().all(|c| c.is_alphanumeric() || c.is_whitespace());
-            
+
             println!("  高级处理器 {} 高级验证输入: {} -> {}", id, input, is_valid);
             Ok(is_valid)
         })
     }
-    
+
     fn batch_process(&self, items: Vec<String>) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<Vec<String>>> + Send>> {
         let id = self.id.clone();
         Box::pin(async move {
             // 模拟高级异步批量处理
             sleep(Duration::from_millis(100)).await;
-            
+
             let processed: Vec<String> = items
                 .iter()
                 .enumerate()
@@ -331,7 +331,7 @@ impl AsyncProcessor for CompleteAdvancedDataProcessor {
                     format!("advanced_processed_{}_{}", i, item)
                 })
                 .collect();
-            
+
             println!("  高级处理器 {} 高级批量处理了 {} 个项目", id, items.len());
             Ok(processed)
         })
@@ -356,35 +356,35 @@ impl AsyncProcessorManager {
             processors: Vec::new(),
         }
     }
-    
+
     pub fn add_processor(&mut self, processor: Box<dyn AsyncProcessor + Send + Sync>) {
         self.processors.push(processor);
     }
-    
+
     /// 使用动态分发的异步处理器
     pub async fn process_with_dynamic_dispatch(&self, data: Vec<u8>) -> Result<Vec<Vec<u8>>> {
         let mut results = Vec::new();
-        
+
         for processor in &self.processors {
             let result = processor.process(data.clone()).await?;
             results.push(result);
         }
-        
+
         Ok(results)
     }
-    
+
     /// 并发处理 - 使用简化的方法避免生命周期问题
     pub async fn process_concurrent(&self, data: Vec<u8>) -> Result<Vec<Vec<u8>>> {
         // 由于 trait 对象不能直接克隆，我们使用一个简化的并发处理方式
         // 在实际应用中，你可能需要重新设计 AsyncProcessor trait 来支持克隆
-        
+
         let mut handles = Vec::new();
-        
+
         // 为每个处理器创建一个新的处理器实例来避免生命周期问题
         for (i, _) in self.processors.iter().enumerate() {
             let data_clone = data.clone();
             let processor_id = format!("concurrent_processor_{}", i);
-            
+
             let handle = tokio::spawn(async move {
                 // 创建一个新的处理器实例
                 let processor = DataProcessor::new(processor_id);
@@ -392,13 +392,13 @@ impl AsyncProcessorManager {
             });
             handles.push(handle);
         }
-        
+
         let mut results = Vec::new();
         for handle in handles {
             let result = handle.await??;
             results.push(result);
         }
-        
+
         Ok(results)
     }
 }
@@ -440,26 +440,26 @@ impl DatabaseConnection {
             query_count: 0,
         }
     }
-    
+
     pub fn get_id(&self) -> &str {
         &self.id
     }
-    
+
     pub async fn query(&mut self, sql: &str) -> Result<Vec<HashMap<String, String>>> {
         if !self.is_connected {
             return Err(anyhow::anyhow!("连接已关闭"));
         }
-        
+
         // 模拟异步查询
         sleep(Duration::from_millis(10)).await;
-        
+
         let mut result = HashMap::new();
         result.insert("query".to_string(), sql.to_string());
         result.insert("id".to_string(), self.id.clone());
         result.insert("count".to_string(), self.query_count.to_string());
-        
+
         self.query_count += 1;
-        
+
         Ok(vec![result])
     }
 }
@@ -472,7 +472,7 @@ impl CompleteAsyncResource {
             CompleteAsyncResource::File(file) => &file.id,
         }
     }
-    
+
     /// 获取资源类型
     pub fn get_type(&self) -> &str {
         match self {
@@ -480,21 +480,21 @@ impl CompleteAsyncResource {
             CompleteAsyncResource::File(_) => "file",
         }
     }
-    
+
     /// 异步清理资源
     pub async fn cleanup(&mut self) -> Result<()> {
         match self {
             CompleteAsyncResource::Database(db) => {
                 if db.is_connected {
                     println!("  异步清理数据库连接: {}", db.id);
-                    
+
                     // 模拟异步清理操作
                     sleep(Duration::from_millis(50)).await;
-                    
+
                     // 发送关闭通知
                     println!("  发送关闭通知到: {}", db.connection_string);
                     sleep(Duration::from_millis(20)).await;
-                    
+
                     db.is_connected = false;
                     println!("  数据库连接 {} 已关闭", db.id);
                 }
@@ -502,14 +502,14 @@ impl CompleteAsyncResource {
             CompleteAsyncResource::File(file) => {
                 if file.is_open {
                     println!("  异步清理文件资源: {}", file.id);
-                    
+
                     // 模拟异步清理操作
                     sleep(Duration::from_millis(30)).await;
-                    
+
                     // 同步文件缓冲区
                     println!("  同步文件缓冲区: {}", file.file_path);
                     sleep(Duration::from_millis(10)).await;
-                    
+
                     file.is_open = false;
                     println!("  文件资源 {} 已关闭", file.id);
                 }
@@ -538,18 +538,18 @@ impl FileResource {
             read_count: 0,
         }
     }
-    
+
     pub async fn read(&mut self, size: usize) -> Result<Vec<u8>> {
         if !self.is_open {
             return Err(anyhow::anyhow!("文件已关闭"));
         }
-        
+
         // 模拟异步读取
         sleep(Duration::from_millis(5)).await;
-        
+
         let data = vec![0u8; size];
         self.read_count += 1;
-        
+
         Ok(data)
     }
 }
@@ -563,23 +563,23 @@ impl CompleteAsyncResourceManager {
             cleanup_tasks: Vec::new(),
         }
     }
-    
+
     pub async fn add_resource(&mut self, resource: CompleteAsyncResource) -> Result<()> {
         let id = resource.get_id().to_string();
         self.resources.insert(id.clone(), resource);
         println!("  添加资源: {}", id);
         Ok(())
     }
-    
+
     pub async fn get_resource_info(&self, id: &str) -> Option<(String, String)> {
         self.resources.get(id).map(|r| (r.get_id().to_string(), r.get_type().to_string()))
     }
-    
+
     pub async fn cleanup_all(&mut self) -> Result<()> {
         println!("  开始异步清理所有资源...");
-        
+
         let mut cleanup_tasks = Vec::new();
-        
+
         for (id, mut resource) in self.resources.drain() {
             let cleanup_task = tokio::spawn(async move {
                 if let Err(e) = resource.cleanup().await {
@@ -588,14 +588,14 @@ impl CompleteAsyncResourceManager {
             });
             cleanup_tasks.push(cleanup_task);
         }
-        
+
         // 等待所有清理任务完成
         for task in cleanup_tasks {
             if let Err(e) = task.await {
                 eprintln!("  清理任务失败: {}", e);
             }
         }
-        
+
         println!("  所有资源清理完成");
         Ok(())
     }
@@ -606,13 +606,13 @@ impl CompleteAsyncResourceManager {
 impl Drop for CompleteAsyncResourceManager {
     fn drop(&mut self) {
         println!("  开始同步清理资源管理器...");
-        
+
         // 在实际的 AsyncDrop 中，这里会使用 .await
         // 目前使用同步方式模拟
         for (id, _) in &self.resources {
             println!("  同步清理资源: {}", id);
         }
-        
+
         println!("  资源管理器同步清理完成");
     }
 }
@@ -625,29 +625,29 @@ pub async fn demonstrate_rust_190_complete_features() -> Result<()> {
     // 1. 异步闭包演示
     println!("\n1. 异步闭包演示:");
     let mut async_closure_demo = AsyncClosureDemo::new();
-    
+
     // 使用异步闭包进行数据处理
     let results = async_closure_demo.process_with_async_closure(|item| async move {
         sleep(Duration::from_millis(10)).await;
         Ok(format!("processed_{}", item))
     }).await?;
-    
+
     println!("  异步闭包处理结果: {:?}", results);
-    
+
     // 使用异步闭包进行并发处理
     let concurrent_results = async_closure_demo.process_concurrent_with_async_closure(|item| async move {
         sleep(Duration::from_millis(20)).await;
         Ok(format!("concurrent_{}", item))
     }).await?;
-    
+
     println!("  并发异步闭包处理结果: {:?}", concurrent_results);
-    
+
     // 使用异步闭包进行缓存操作
     let cached_result = async_closure_demo.cache_with_async_closure("test_key".to_string(), || async {
         sleep(Duration::from_millis(30)).await;
         Ok("generated_value".to_string())
     }).await?;
-    
+
     println!("  缓存结果: {}", cached_result);
 
     // 2. 元组集合演示
@@ -659,18 +659,18 @@ pub async fn demonstrate_rust_190_complete_features() -> Result<()> {
     // 3. 改进的 async fn trait 演示
     println!("\n3. 改进的 async fn trait 演示:");
     let mut processor_manager = AsyncProcessorManager::new();
-    
+
     // 添加不同类型的处理器
     processor_manager.add_processor(Box::new(DataProcessor::new("basic_1".to_string())));
     processor_manager.add_processor(Box::new(DataProcessor::new("basic_2".to_string())));
     processor_manager.add_processor(Box::new(CompleteAdvancedDataProcessor::new("advanced_1".to_string(), 5)));
-    
+
     let test_data = b"Hello, Rust 1.90!";
-    
+
     // 使用动态分发的异步处理器
     let dynamic_results = processor_manager.process_with_dynamic_dispatch(test_data.to_vec()).await?;
     println!("  动态分发处理结果数量: {}", dynamic_results.len());
-    
+
     // 并发处理
     let concurrent_results = processor_manager.process_concurrent(test_data.to_vec()).await?;
     println!("  并发处理结果数量: {}", concurrent_results.len());
@@ -679,31 +679,31 @@ pub async fn demonstrate_rust_190_complete_features() -> Result<()> {
     println!("\n4. 异步 Drop 演示:");
     {
         let mut resource_manager = CompleteAsyncResourceManager::new();
-        
+
         // 添加资源
         resource_manager.add_resource(CompleteAsyncResource::Database(DatabaseConnection::new(
             "db1".to_string(),
             "postgresql://localhost:5432/test".to_string(),
         ))).await?;
-        
+
         resource_manager.add_resource(CompleteAsyncResource::File(FileResource::new(
             "file1".to_string(),
             "/tmp/test.txt".to_string(),
         ))).await?;
-        
+
         resource_manager.add_resource(CompleteAsyncResource::Database(DatabaseConnection::new(
             "db2".to_string(),
             "postgresql://localhost:5432/prod".to_string(),
         ))).await?;
-        
+
         // 使用资源
         if let Some((id, resource_type)) = resource_manager.get_resource_info("db1").await {
             println!("  使用资源: {} (类型: {})", id, resource_type);
         }
-        
+
         // 异步清理所有资源
         resource_manager.cleanup_all().await?;
-        
+
         // 当 resource_manager 离开作用域时，会自动调用 Drop::drop
     }
 
@@ -718,11 +718,11 @@ mod tests {
     #[tokio::test]
     async fn test_async_closure_demo() {
         let mut demo = AsyncClosureDemo::new();
-        
+
         let results = demo.process_with_async_closure(|item| async move {
             Ok(format!("test_{}", item))
         }).await.unwrap();
-        
+
         assert_eq!(results.len(), 3);
         assert!(results[0].starts_with("test_"));
     }
@@ -737,10 +737,10 @@ mod tests {
     async fn test_async_processor_manager() {
         let mut manager = AsyncProcessorManager::new();
         manager.add_processor(Box::new(DataProcessor::new("test".to_string())));
-        
+
         let test_data = b"test data";
         let results = manager.process_with_dynamic_dispatch(test_data.to_vec()).await.unwrap();
-        
+
         assert_eq!(results.len(), 1);
         assert_eq!(results[0].len(), test_data.len());
     }
@@ -748,15 +748,15 @@ mod tests {
     #[tokio::test]
     async fn test_async_resource_manager() {
         let mut manager = CompleteAsyncResourceManager::new();
-        
+
         manager.add_resource(CompleteAsyncResource::Database(DatabaseConnection::new(
             "test_db".to_string(),
             "test://localhost".to_string(),
         ))).await.unwrap();
-        
+
         assert!(manager.get_resource_info("test_db").await.is_some());
         assert!(manager.get_resource_info("nonexistent").await.is_none());
-        
+
         manager.cleanup_all().await.unwrap();
     }
 

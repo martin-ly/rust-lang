@@ -1,5 +1,5 @@
 //! # 性能分析模块
-//! 
+//!
 //! 本模块提供算法性能分析的工具和方法。
 
 use serde::{Serialize, Deserialize};
@@ -28,7 +28,7 @@ impl Profiler {
         F: Fn() -> std::time::Duration,
     {
         let execution_time = algorithm_fn();
-        
+
         ProfilingResult {
             algorithm_name: algorithm_name.to_string(),
             execution_time,

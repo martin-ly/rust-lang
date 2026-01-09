@@ -1,5 +1,5 @@
 //! # 排序算法模块
-//! 
+//!
 //! 本模块实现了各种排序算法，包括同步、异步、并行、分布式四个版本。
 //! 充分利用 Rust 1.90 的新特性，提供高性能、类型安全的排序实现。
 
@@ -44,7 +44,7 @@ pub trait SortingAlgorithmTrait<T> {
     fn sort(&self, data: &mut [T]) -> SortingResult<T>
     where
         T: Clone + Ord;
-    
+
     fn sort_by<F>(&self, data: &mut [T], compare: F) -> SortingResult<T>
     where
         T: Clone,
@@ -184,7 +184,7 @@ impl SortingBenchmarker {
 
         for size in &data_sizes {
             let test_data = Self::generate_test_data(*size);
-            
+
             for algorithm in &algorithms {
                 // 同步基准测试
                 let _sync_algorithm = SortingAlgorithmFactory::create_sync(*algorithm);
@@ -192,7 +192,7 @@ impl SortingBenchmarker {
                 let start = std::time::Instant::now();
                 sync_data.sort(); // 使用标准库排序作为示例
                 let sync_execution_time = start.elapsed();
-                
+
                 sync_results.push(SortingBenchmarkResult {
                     algorithm: *algorithm,
                     data_size: *size,
@@ -211,7 +211,7 @@ impl SortingBenchmarker {
                 let start = std::time::Instant::now();
                 async_data.sort(); // 使用标准库排序作为示例
                 let async_execution_time = start.elapsed();
-                
+
                 async_results.push(SortingBenchmarkResult {
                     algorithm: *algorithm,
                     data_size: *size,
@@ -230,7 +230,7 @@ impl SortingBenchmarker {
                 let start = std::time::Instant::now();
                 parallel_data.sort(); // 使用标准库排序作为示例
                 let parallel_execution_time = start.elapsed();
-                
+
                 parallel_results.push(SortingBenchmarkResult {
                     algorithm: *algorithm,
                     data_size: *size,
@@ -249,7 +249,7 @@ impl SortingBenchmarker {
                 let start = std::time::Instant::now();
                 distributed_data.sort(); // 使用标准库排序作为示例
                 let distributed_execution_time = start.elapsed();
-                
+
                 distributed_results.push(SortingBenchmarkResult {
                     algorithm: *algorithm,
                     data_size: *size,
@@ -329,7 +329,7 @@ impl ComprehensiveSortingBenchmark {
 
         for algorithm in &algorithms {
             report.push_str(&format!("=== {:?} ===\n", algorithm));
-            
+
             // 分析不同执行模式的性能
             let sync_perf = self.get_best_performance(*algorithm, ExecutionMode::Sync);
             let async_perf = self.get_best_performance(*algorithm, ExecutionMode::Async);
@@ -348,7 +348,7 @@ impl ComprehensiveSortingBenchmark {
             if let Some(perf) = distributed_perf {
                 report.push_str(&format!("  分布式执行: {:?} (数据大小: {})\n", perf.result.execution_time, perf.data_size));
             }
-            
+
             report.push('\n');
         }
 

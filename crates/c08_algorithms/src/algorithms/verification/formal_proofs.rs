@@ -1,5 +1,5 @@
 //! # 形式化证明模块
-//! 
+//!
 //! 本模块提供算法的形式化证明框架和具体证明实现。
 
 use serde::{Serialize, Deserialize};

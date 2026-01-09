@@ -157,7 +157,7 @@ impl ControlFlowOptimizer {
             .map(|&x| {
                 // 使用位运算避免分支
                 let _is_positive = (x >> 31) & 1;
-                
+
                 (x ^ (x >> 31)) - (x >> 31)
             })
             .collect()
