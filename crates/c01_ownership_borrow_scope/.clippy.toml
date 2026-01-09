@@ -1,0 +1,5 @@
+# Clippy 配置 - 针对示例和测试放宽一些规则
+msrv = "1.92.0"
+
+# 允许文档注释后的空行（这些主要是示例代码，格式灵活）
+# Empty lines after doc comments are acceptable in examples

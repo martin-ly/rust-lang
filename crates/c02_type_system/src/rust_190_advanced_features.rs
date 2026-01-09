@@ -1,4 +1,8 @@
-//! Rust 1.90 高级特性演示模块
+//! Rust 1.90 高级特性演示模块 (历史版本)
+//!
+//! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//!
+//! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
 //!
 //! 本模块展示了 Rust 1.90 中的高级语言特性，包括：
 //! - 高级生命周期管理
@@ -22,7 +26,7 @@ use std::time::Duration;
 // ==================== 1. 高级生命周期管理 ====================
 
 /// 高级生命周期组合类型
-/// 
+///
 /// 展示了 Rust 1.90 中复杂的生命周期约束和组合
 pub struct AdvancedLifetimeComposition<'a, 'b, 'c, T>
 where
@@ -74,18 +78,18 @@ where
             },
         }
     }
-    
+
     /// 获取组合数据
     pub fn get_combined_data(&self) -> (T, T) {
         (self.primary_data.clone(), self.secondary_data.clone())
     }
-    
+
     /// 验证生命周期约束
     pub fn validate_lifetimes(&self) -> bool {
         // 这里可以添加生命周期验证逻辑
         true
     }
-    
+
     /// 生命周期转换
     pub fn transform_lifetimes<F, R>(&self, transformer: F) -> R
     where
@@ -98,14 +102,14 @@ where
 // ==================== 2. 复杂类型约束 ====================
 
 /// 高级类型约束 trait
-/// 
+///
 /// 展示了 Rust 1.90 中复杂的类型约束和关联类型
 pub trait AdvancedTypeConstraints {
     /// 关联类型约束
     type Item: Clone + std::fmt::Debug + PartialEq;
     type Container: std::iter::IntoIterator<Item = Self::Item>;
     type Error: std::error::Error + Send + Sync + 'static;
-    
+
     /// 复杂约束方法
     fn process_with_constraints<F, R>(
         &self,
@@ -114,7 +118,7 @@ pub trait AdvancedTypeConstraints {
     where
         F: FnOnce(Self::Container) -> R,
         R: std::fmt::Display + Send + Sync;
-    
+
     /// 类型转换约束
     fn convert_with_bounds<T>(&self, value: T) -> Result<Self::Item, Self::Error>
     where
@@ -142,7 +146,7 @@ where
     type Item = T;
     type Container = Vec<T>;
     type Error = ProcessingError;
-    
+
     fn process_with_constraints<F, R>(
         &self,
         processor: F,
@@ -154,7 +158,7 @@ where
         let result = processor(self.data.clone());
         Ok(result)
     }
-    
+
     fn convert_with_bounds<U>(&self, value: U) -> Result<Self::Item, Self::Error>
     where
         U: Into<Self::Item> + Clone + std::fmt::Debug,
@@ -180,7 +184,7 @@ impl std::error::Error for ProcessingError {}
 // ==================== 3. 高级宏系统 ====================
 
 /// 高级宏定义
-/// 
+///
 /// 展示了 Rust 1.90 中宏系统的高级用法
 #[macro_export]
 macro_rules! advanced_type_builder {
@@ -190,45 +194,45 @@ macro_rules! advanced_type_builder {
         pub struct $name {
             $(pub $field: $type),*
         }
-        
+
         impl $name {
             pub fn new($($field: $type),*) -> Self {
                 Self { $($field),* }
             }
         }
     };
-    
+
     // 带默认值的类型构建
     ($name:ident { $($field:ident: $type:ty = $default:expr),* }) => {
         #[derive(Debug, Clone, PartialEq)]
         pub struct $name {
             $(pub $field: $type),*
         }
-        
+
         impl $name {
             pub fn new() -> Self {
                 Self { $($field: $default),* }
             }
-            
+
             pub fn with_values($($field: $type),*) -> Self {
                 Self { $($field),* }
             }
         }
-        
+
         impl Default for $name {
             fn default() -> Self {
                 Self::new()
             }
         }
     };
-    
+
     // 泛型类型构建
     ($name:ident<$($param:ident: $bound:tt),*> { $($field:ident: $type:ty),* }) => {
         #[derive(Debug, Clone, PartialEq)]
         pub struct $name<$($param: $bound),*> {
             $(pub $field: $type),*
         }
-        
+
         impl<$($param: $bound),*> $name<$($param),*> {
             pub fn new($($field: $type),*) -> Self {
                 Self { $($field),* }
@@ -270,7 +274,7 @@ impl<T: Clone + std::fmt::Debug> GenericStruct<T> {
 // ==================== 4. 内存安全高级特性 ====================
 
 /// 高级内存安全类型
-/// 
+///
 /// 展示了 Rust 1.90 中的高级内存安全特性
 pub struct AdvancedMemorySafe<T> {
     /// 使用 Arc 确保线程安全
@@ -293,27 +297,27 @@ where
             metadata: Arc::new(RwLock::new(HashMap::new())),
         }
     }
-    
+
     /// 安全访问数据
     pub fn get_data(&self) -> Arc<T> {
         let mut count = self.access_count.lock().unwrap();
         *count += 1;
         self.data.clone()
     }
-    
+
     /// 安全更新元数据
     pub fn update_metadata(&self, key: String, value: String) -> Result<(), String> {
         let mut metadata = self.metadata.write().map_err(|_| "Failed to acquire write lock")?;
         metadata.insert(key, value);
         Ok(())
     }
-    
+
     /// 安全读取元数据
     pub fn get_metadata(&self, key: &str) -> Result<Option<String>, String> {
         let metadata = self.metadata.read().map_err(|_| "Failed to acquire read lock")?;
         Ok(metadata.get(key).cloned())
     }
-    
+
     /// 获取访问计数
     pub fn get_access_count(&self) -> usize {
         *self.access_count.lock().unwrap()
@@ -333,7 +337,7 @@ impl<T> Clone for AdvancedMemorySafe<T> {
 // ==================== 5. 并发编程高级模式 ====================
 
 /// 高级并发处理器
-/// 
+///
 /// 展示了 Rust 1.90 中的高级并发编程模式
 pub struct AdvancedConcurrentProcessor<T> {
     /// 工作线程池
@@ -364,29 +368,29 @@ where
         let task_queue = Arc::new(Mutex::new(Vec::new()));
         let results = Arc::new(Mutex::new(Vec::new()));
         let stop_signal = Arc::new(Mutex::new(false));
-        
+
         let mut workers = Vec::new();
-        
+
         for worker_id in 0..worker_count {
             let task_queue = task_queue.clone();
             let results = results.clone();
             let stop_signal = stop_signal.clone();
-            
+
             let handle = thread::spawn(move || {
                 let mut local_results = Vec::new();
-                
+
                 loop {
                     // 检查停止信号
                     if *stop_signal.lock().unwrap() {
                         break;
                     }
-                    
+
                     // 获取任务
                     let task = {
                         let mut queue = task_queue.lock().unwrap();
                         queue.pop()
                     };
-                    
+
                     if let Some(task) = task {
                         // 处理任务
                         let result = Self::process_task(worker_id as u64, task);
@@ -396,15 +400,15 @@ where
                         thread::sleep(Duration::from_millis(10));
                     }
                 }
-                
+
                 // 将本地结果添加到全局结果
                 let mut global_results = results.lock().unwrap();
                 global_results.extend(local_results);
             });
-            
+
             workers.push(handle);
         }
-        
+
         Self {
             workers,
             task_queue,
@@ -412,19 +416,19 @@ where
             stop_signal,
         }
     }
-    
+
     /// 添加任务
     pub fn add_task(&self, task: T) {
         let mut queue = self.task_queue.lock().unwrap();
         queue.push(task);
     }
-    
+
     /// 获取结果
     pub fn get_results(&self) -> Vec<ProcessingResult> {
         let results = self.results.lock().unwrap();
         results.clone()
     }
-    
+
     /// 停止处理器
     pub fn stop(self) -> Vec<ProcessingResult> {
         // 发送停止信号
@@ -432,22 +436,22 @@ where
             let mut signal = self.stop_signal.lock().unwrap();
             *signal = true;
         }
-        
+
         // 等待所有工作线程完成
         for worker in self.workers {
             let _ = worker.join();
         }
-        
+
         // 返回最终结果
         let results = self.results.lock().unwrap();
         results.clone()
     }
-    
+
     /// 处理单个任务
     fn process_task(worker_id: u64, _task: T) -> ProcessingResult {
         // 模拟任务处理
         thread::sleep(Duration::from_millis(100));
-        
+
         ProcessingResult {
             id: worker_id,
             success: true,
@@ -460,7 +464,7 @@ where
 // ==================== 6. 高级错误处理 ====================
 
 /// 高级错误类型
-/// 
+///
 /// 展示了 Rust 1.90 中的高级错误处理模式
 #[derive(Debug, Clone)]
 pub enum AdvancedError {
@@ -508,19 +512,19 @@ impl ErrorHandler {
             error_log: Arc::new(Mutex::new(Vec::new())),
         }
     }
-    
+
     /// 记录错误
     pub fn log_error(&self, error: AdvancedError) {
         let mut log = self.error_log.lock().unwrap();
         log.push(error);
     }
-    
+
     /// 获取错误日志
     pub fn get_errors(&self) -> Vec<AdvancedError> {
         let log = self.error_log.lock().unwrap();
         log.clone()
     }
-    
+
     /// 清空错误日志
     pub fn clear_errors(&self) {
         let mut log = self.error_log.lock().unwrap();
@@ -539,24 +543,24 @@ impl Default for ErrorHandler {
 /// 演示所有高级特性
 pub fn demonstrate_advanced_features() {
     println!("=== Rust 1.90 高级特性演示 ===\n");
-    
+
     // 1. 高级生命周期管理演示
     println!("1. 高级生命周期管理演示:");
     let primary_data = String::from("Primary data");
     let secondary_data = String::from("Secondary data");
     let metadata = "Combined metadata";
-    
+
     let composition = AdvancedLifetimeComposition::new(&primary_data, &secondary_data, metadata);
     let (p, s) = composition.get_combined_data();
     println!("  组合数据: ({}, {})", p, s);
     println!("  生命周期验证: {}", composition.validate_lifetimes());
-    
+
     let result = composition.transform_lifetimes(|p, s, m| {
         format!("Transformed: {} + {} + {}", p, s, m)
     });
     println!("  转换结果: {}", result);
     println!();
-    
+
     // 2. 复杂类型约束演示
     println!("2. 复杂类型约束演示:");
     let processor = ConstrainedProcessor::new(vec![1, 2, 3, 4, 5]);
@@ -564,11 +568,11 @@ pub fn demonstrate_advanced_features() {
         format!("Processed {} items", data.len())
     });
     println!("  处理结果: {:?}", result);
-    
+
     let converted = processor.convert_with_bounds(42i32);
     println!("  转换结果: {:?}", converted);
     println!();
-    
+
     // 3. 高级宏系统演示
     println!("3. 高级宏系统演示:");
     let advanced_struct = AdvancedStruct::new(
@@ -577,64 +581,64 @@ pub fn demonstrate_advanced_features() {
         HashMap::new(),
     );
     println!("  高级结构体: {:?}", advanced_struct);
-    
+
     let configurable = ConfigurableStruct::new();
     println!("  可配置结构体: {:?}", configurable);
-    
+
     let generic_struct = GenericStruct::new("Hello", 5);
     println!("  泛型结构体: {:?}", generic_struct);
     println!();
-    
+
     // 4. 内存安全高级特性演示
     println!("4. 内存安全高级特性演示:");
     let memory_safe = AdvancedMemorySafe::new("Safe data".to_string());
     let data = memory_safe.get_data();
     println!("  安全数据: {:?}", data);
-    
+
     let _ = memory_safe.update_metadata("key1".to_string(), "value1".to_string());
     let metadata = memory_safe.get_metadata("key1");
     println!("  元数据: {:?}", metadata);
     println!("  访问计数: {}", memory_safe.get_access_count());
     println!();
-    
+
     // 5. 并发编程高级模式演示
     println!("5. 并发编程高级模式演示:");
     let processor = AdvancedConcurrentProcessor::new(2);
-    
+
     // 添加一些任务
     for i in 0..5 {
         processor.add_task(format!("Task {}", i));
     }
-    
+
     // 等待处理完成
     thread::sleep(Duration::from_millis(500));
-    
+
     let results = processor.get_results();
     println!("  处理结果数量: {}", results.len());
     for result in &results {
         println!("    结果: {:?}", result);
     }
-    
+
     // 停止处理器
     let final_results = processor.stop();
     println!("  最终结果数量: {}", final_results.len());
     println!();
-    
+
     // 6. 高级错误处理演示
     println!("6. 高级错误处理演示:");
     let error_handler = ErrorHandler::new();
-    
+
     error_handler.log_error(AdvancedError::Processing(ProcessingError {
         message: "Test processing error".to_string(),
     }));
     error_handler.log_error(AdvancedError::Concurrent("Test concurrent error".to_string()));
-    
+
     let errors = error_handler.get_errors();
     println!("  错误数量: {}", errors.len());
     for error in &errors {
         println!("    错误: {}", error);
     }
-    
+
     println!("\n=== 高级特性演示完成 ===");
 }
 
@@ -643,21 +647,21 @@ pub fn demonstrate_advanced_features() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_advanced_lifetime_composition() {
         let primary = String::from("primary");
         let secondary = String::from("secondary");
         let metadata = "metadata";
-        
+
         let composition = AdvancedLifetimeComposition::new(&primary, &secondary, metadata);
         assert!(composition.validate_lifetimes());
-        
+
         let (p, s) = composition.get_combined_data();
         assert_eq!(p, "primary");
         assert_eq!(s, "secondary");
     }
-    
+
     #[test]
     fn test_constrained_processor() {
         let processor = ConstrainedProcessor::new(vec![1, 2, 3]);
@@ -665,7 +669,7 @@ mod tests {
         assert!(result.is_ok());
         assert_eq!(result.unwrap(), "3");
     }
-    
+
     #[test]
     fn test_advanced_memory_safe() {
         let memory_safe = AdvancedMemorySafe::new("test".to_string());
@@ -673,14 +677,14 @@ mod tests {
         assert_eq!(*data, "test");
         assert_eq!(memory_safe.get_access_count(), 1);
     }
-    
+
     #[test]
     fn test_error_handler() {
         let handler = ErrorHandler::new();
         handler.log_error(AdvancedError::Processing(ProcessingError {
             message: "test".to_string(),
         }));
-        
+
         let errors = handler.get_errors();
         assert_eq!(errors.len(), 1);
     }

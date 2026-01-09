@@ -1,4 +1,8 @@
-//! # Rust 1.90 全面特性示例 / Rust 1.90 Comprehensive Features Examples
+//! # Rust 1.90 全面特性示例 / Rust 1.90 Comprehensive Features Examples (历史版本)
+//!
+//! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//!
+//! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features_demo.rs`
 //!
 //! 本示例全面展示 Rust 1.90 版本的所有语言特性，包括：
 //! This example comprehensively demonstrates all language features in Rust 1.90, including:
@@ -274,10 +278,10 @@ pub mod optimized_scope_management {
         // Use block scope for precise control
         let final_result = {
             let temp_data = String::from("temporary");
-            let processed = process_data(&temp_data);
+            
             // temp_data 在这里自动释放
             // temp_data is automatically released here
-            processed
+            process_data(&temp_data)
         };
 
         println!("Final result: {}", final_result);

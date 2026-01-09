@@ -339,7 +339,7 @@ fn test_scope_error_display() {
     for error in errors {
         let error_string = error.to_string();
         assert!(!error_string.is_empty());
-        assert!(error_string.len() > 0);
+        assert!(!error_string.is_empty());
     }
 }
 

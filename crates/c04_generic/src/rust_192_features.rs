@@ -7,13 +7,17 @@
 //! - 增强的高阶生命周期区域处理 / Enhanced Higher-Ranked Region Handling
 //! - 改进的自动特征和 `Sized` 边界处理 / Improved Auto-Trait and `Sized` Bounds Handling
 //! - 泛型约束优化 / Generic Constraint Optimization
+//! - 错误处理和验证 / Error Handling and Validation
+//! - 高级泛型特性 / Advanced Generic Features (Mapper, Combinator, Filter)
 //!
 //! # 文件信息
 //! - 文件: rust_192_features.rs
 //! - 创建日期: 2025-12-11
-//! - 版本: 1.0
+//! - 版本: 1.4
 //! - Rust版本: 1.92.0
 //! - Edition: 2024
+//! - 最后更新: 2025-12-11
+//! - 最后更新: 2025-12-11
 
 use std::marker::PhantomData;
 use std::num::NonZeroUsize;
@@ -47,8 +51,27 @@ pub trait GenericContainer {
 }
 
 /// 泛型向量容器实现
+#[derive(Debug, Clone)]
 pub struct GenericVector<T> {
     items: Vec<T>,
+}
+
+impl<T> GenericVector<T> {
+    /// 创建新的泛型向量容器
+    pub fn new() -> Self {
+        GenericVector { items: vec![] }
+    }
+
+    /// 从向量创建泛型向量容器
+    pub fn from_vec(items: Vec<T>) -> Self {
+        GenericVector { items }
+    }
+}
+
+impl<T> Default for GenericVector<T> {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl<T> GenericContainer for GenericVector<T>
@@ -76,6 +99,57 @@ where
     }
 }
 
+impl<T> GenericVector<T>
+where
+    T: Clone + Send + Sync + 'static,
+{
+    /// 检查容器是否为空
+    pub fn is_empty(&self) -> bool {
+        self.items.is_empty()
+    }
+
+    /// 清空容器
+    pub fn clear(&mut self) {
+        self.items.clear();
+    }
+
+    /// 添加项目到容器末尾
+    pub fn push(&mut self, item: T) {
+        self.items.push(item);
+    }
+
+    /// 移除并返回容器末尾的项目
+    pub fn pop(&mut self) -> Option<T> {
+        self.items.pop()
+    }
+
+    /// 获取容器的迭代器
+    pub fn iter(&self) -> impl Iterator<Item = &T> {
+        self.items.iter()
+    }
+
+    /// 获取容器的可变迭代器
+    pub fn iter_mut(&mut self) -> impl Iterator<Item = &mut T> {
+        self.items.iter_mut()
+    }
+
+    /// 移除指定索引的项目
+    pub fn remove(&mut self, index: usize) -> Option<T> {
+        if index < self.items.len() {
+            Some(self.items.remove(index))
+        } else {
+            None
+        }
+    }
+
+    /// 在指定位置插入项目
+    pub fn insert(&mut self, index: usize, item: T) {
+        if index <= self.items.len() {
+            self.items.insert(index, item);
+        }
+    }
+}
+
 /// 泛型转换器 Trait
 pub trait GenericTransformer<Input> {
     /// 输出类型 - 多个边界约束
@@ -89,6 +163,7 @@ pub trait GenericTransformer<Input> {
 }
 
 /// 字符串转数字转换器
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub struct StringToNumberTransformer;
 
 impl GenericTransformer<String> for StringToNumberTransformer {
@@ -125,6 +200,7 @@ pub trait GenericLifetimeProcessor<T: ?Sized> {
 }
 
 /// 恒等生命周期处理器
+#[derive(Debug)]
 pub struct IdentityProcessor<T: ?Sized> {
     _phantom: PhantomData<T>,
 }
@@ -173,6 +249,7 @@ where
 /// 改进的泛型自动特征推断
 ///
 /// Rust 1.92.0: 更智能的自动特征推断
+#[derive(Debug, Clone)]
 pub struct ImprovedAutoTraitGeneric<T> {
     data: T,
 }
@@ -208,6 +285,7 @@ pub trait ImprovedSizedBound {
 }
 
 /// 泛型 Sized 边界处理器实现
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub struct SizedBoundProcessor;
 
 impl ImprovedSizedBound for SizedBoundProcessor {
@@ -219,6 +297,20 @@ impl ImprovedSizedBound for SizedBoundProcessor {
         value
     }
 }
+
+impl SizedBoundProcessor {
+    /// 创建新的处理器
+    pub fn new() -> Self {
+        SizedBoundProcessor
+    }
+
+    /// 批量处理 Sized 类型
+    pub fn process_batch_sized<T: Sized>(&self, values: Vec<T>) -> Vec<T> {
+        values.into_iter().map(|v| self.process_sized(v)).collect()
+    }
+}
+
+// Default 已通过 derive 提供，无需手动实现
 
 // ==================== 4. 泛型约束优化 ====================
 
@@ -240,6 +332,7 @@ where
 }
 
 /// 复杂约束泛型结构
+#[derive(Debug, Clone)]
 pub struct ComplexConstraintGeneric<T, U>
 where
     T: Clone + Send + Sync + 'static,
@@ -263,6 +356,43 @@ where
         F: FnOnce(&T, &U) -> R,
     {
         combiner(&self.primary, &self.secondary)
+    }
+
+    /// 获取主要值
+    pub fn primary(&self) -> &T {
+        &self.primary
+    }
+
+    /// 获取次要值
+    pub fn secondary(&self) -> &U {
+        &self.secondary
+    }
+
+    /// 获取主要值的可变引用
+    pub fn primary_mut(&mut self) -> &mut T {
+        &mut self.primary
+    }
+
+    /// 获取次要值的可变引用
+    pub fn secondary_mut(&mut self) -> &mut U {
+        &mut self.secondary
+    }
+
+    /// 克隆并交换主要值和次要值（创建新实例）
+    pub fn swapped(&self) -> ComplexConstraintGeneric<U, T>
+    where
+        T: Clone + Send + Sync + 'static,
+        U: Clone + Send + Sync + 'static,
+    {
+        ComplexConstraintGeneric {
+            primary: self.secondary.clone(),
+            secondary: self.primary.clone(),
+        }
+    }
+
+    /// 转换为元组
+    pub fn into_tuple(self) -> (T, U) {
+        (self.primary, self.secondary)
     }
 }
 
@@ -294,6 +424,7 @@ pub fn calculate_generic_aligned_size<T>(count: usize, alignment: NonZeroUsize) 
 }
 
 /// 泛型内存分配器
+#[derive(Debug, Clone)]
 pub struct GenericMemoryAllocator {
     block_size: NonZeroUsize,
 }
@@ -320,6 +451,26 @@ impl GenericMemoryAllocator {
         // Rust 1.92.0: 使用 div_ceil 计算块数
         total.div_ceil(self.block_size).get()
     }
+
+    /// 获取块大小
+    pub fn block_size(&self) -> NonZeroUsize {
+        self.block_size
+    }
+
+    /// 计算给定类型和数量的总内存大小
+    pub fn calculate_total_size<T>(&self, count: usize) -> usize {
+        count * std::mem::size_of::<T>()
+    }
+
+    /// 计算对齐后的总内存大小
+    pub fn calculate_aligned_total_size<T>(&self, count: usize) -> usize {
+        let total_size = self.calculate_total_size::<T>(count);
+        if total_size == 0 {
+            return 0;
+        }
+        let blocks = self.calculate_blocks::<T>(count);
+        blocks * self.block_size.get()
+    }
 }
 
 // ==================== 6. 迭代器方法特化在泛型数据处理中的应用 ====================
@@ -338,6 +489,7 @@ pub fn compare_generic_collections<T: PartialEq>(col1: &[T], col2: &[T]) -> bool
 }
 
 /// 泛型集合验证器
+#[derive(Debug, Clone)]
 pub struct GenericCollectionValidator<T> {
     expected: Vec<T>,
 }
@@ -353,9 +505,533 @@ impl<T: PartialEq> GenericCollectionValidator<T> {
     pub fn validate(&self, actual: &[T]) -> bool {
         actual.iter().eq(self.expected.iter())
     }
+
+    /// 获取期望的集合
+    pub fn expected(&self) -> &[T] {
+        &self.expected
+    }
+
+    /// 更新期望的集合
+    pub fn update_expected(&mut self, new_expected: Vec<T>) {
+        self.expected = new_expected;
+    }
+
+    /// 检查集合是否为空
+    pub fn is_empty(&self) -> bool {
+        self.expected.is_empty()
+    }
 }
 
-// ==================== 7. 综合应用示例 ====================
+// ==================== 7. 便利函数和工具方法 ====================
+
+/// 创建默认的泛型内存分配器
+///
+/// # 示例
+/// ```
+/// use c04_generic::rust_192_features::create_default_memory_allocator;
+///
+/// let allocator = create_default_memory_allocator();
+/// let blocks = allocator.calculate_blocks::<u32>(100);
+/// ```
+pub fn create_default_memory_allocator() -> GenericMemoryAllocator {
+    GenericMemoryAllocator::new(NonZeroUsize::new(16).unwrap())
+}
+
+/// 批量创建泛型向量容器
+///
+/// # 示例
+/// ```
+/// use c04_generic::rust_192_features::create_generic_vectors;
+///
+/// let vectors = create_generic_vectors(vec![
+///     vec!["a", "b", "c"],
+///     vec!["d", "e", "f"],
+/// ]);
+/// assert_eq!(vectors.len(), 2);
+/// ```
+pub fn create_generic_vectors<T>(data: Vec<Vec<T>>) -> Vec<GenericVector<T>>
+where
+    T: Clone + Send + Sync + 'static,
+{
+    data.into_iter().map(|items| GenericVector::from_vec(items)).collect()
+}
+
+/// 从多个转换器创建转换器链
+///
+/// # 示例
+/// ```
+/// use c04_generic::rust_192_features::{create_transformer_chain, StringToNumberTransformer};
+///
+/// let transformers = create_transformer_chain(3);
+/// assert_eq!(transformers.len(), 3);
+/// ```
+pub fn create_transformer_chain(count: usize) -> Vec<StringToNumberTransformer> {
+    (0..count).map(|_| StringToNumberTransformer).collect()
+}
+
+// ==================== 8. 错误处理和验证 ====================
+
+/// 泛型结果类型，用于泛型操作的结果
+pub type GenericResult<T, E> = Result<T, E>;
+
+/// 验证泛型类型是否满足特定约束
+pub trait GenericValidator<T> {
+    fn validate(&self, value: &T) -> bool;
+}
+
+/// 简单的泛型验证器实现
+#[derive(Debug, Clone)]
+pub struct SimpleGenericValidator<T, F>
+where
+    F: Fn(&T) -> bool,
+{
+    validator: F,
+    _phantom: PhantomData<T>,
+}
+
+impl<T, F> SimpleGenericValidator<T, F>
+where
+    F: Fn(&T) -> bool,
+{
+    pub fn new(validator: F) -> Self {
+        Self {
+            validator,
+            _phantom: PhantomData,
+        }
+    }
+}
+
+impl<T, F> GenericValidator<T> for SimpleGenericValidator<T, F>
+where
+    F: Fn(&T) -> bool,
+{
+    fn validate(&self, value: &T) -> bool {
+        (self.validator)(value)
+    }
+}
+
+/// 批量验证泛型值
+pub fn validate_batch<T, V: GenericValidator<T>>(validator: &V, values: &[T]) -> Vec<bool> {
+    values.iter().map(|v| validator.validate(v)).collect()
+}
+
+// ==================== 9. 高级泛型特性 ====================
+
+/// 泛型映射器 trait
+pub trait GenericMapper<T, U> {
+    fn map(&self, value: &T) -> U;
+}
+
+/// 简单的泛型映射器实现
+#[derive(Debug, Clone)]
+pub struct SimpleGenericMapper<T, U, F>
+where
+    F: Fn(&T) -> U,
+{
+    mapper: F,
+    _phantom: PhantomData<(T, U)>,
+}
+
+impl<T, U, F> SimpleGenericMapper<T, U, F>
+where
+    F: Fn(&T) -> U,
+{
+    pub fn new(mapper: F) -> Self {
+        Self {
+            mapper,
+            _phantom: PhantomData,
+        }
+    }
+}
+
+impl<T, U, F> GenericMapper<T, U> for SimpleGenericMapper<T, U, F>
+where
+    F: Fn(&T) -> U,
+{
+    fn map(&self, value: &T) -> U {
+        (self.mapper)(value)
+    }
+}
+
+/// 批量映射泛型值
+pub fn map_batch<T, U, M: GenericMapper<T, U>>(mapper: &M, values: &[T]) -> Vec<U> {
+    values.iter().map(|v| mapper.map(v)).collect()
+}
+
+/// 泛型组合器 trait
+pub trait GenericCombinator<T, U, R> {
+    fn combine(&self, a: &T, b: &U) -> R;
+}
+
+/// 简单的泛型组合器实现
+#[derive(Debug, Clone)]
+pub struct SimpleGenericCombinator<T, U, R, F>
+where
+    F: Fn(&T, &U) -> R,
+{
+    combiner: F,
+    _phantom: PhantomData<(T, U, R)>,
+}
+
+impl<T, U, R, F> SimpleGenericCombinator<T, U, R, F>
+where
+    F: Fn(&T, &U) -> R,
+{
+    pub fn new(combiner: F) -> Self {
+        Self {
+            combiner,
+            _phantom: PhantomData,
+        }
+    }
+}
+
+impl<T, U, R, F> GenericCombinator<T, U, R> for SimpleGenericCombinator<T, U, R, F>
+where
+    F: Fn(&T, &U) -> R,
+{
+    fn combine(&self, a: &T, b: &U) -> R {
+        (self.combiner)(a, b)
+    }
+}
+
+/// 泛型过滤器 trait
+pub trait GenericFilter<T> {
+    fn filter(&self, value: &T) -> bool;
+}
+
+/// 简单的泛型过滤器实现
+#[derive(Debug, Clone)]
+pub struct SimpleGenericFilter<T, F>
+where
+    F: Fn(&T) -> bool,
+{
+    filter: F,
+    _phantom: PhantomData<T>,
+}
+
+impl<T, F> SimpleGenericFilter<T, F>
+where
+    F: Fn(&T) -> bool,
+{
+    pub fn new(filter: F) -> Self {
+        Self {
+            filter,
+            _phantom: PhantomData,
+        }
+    }
+}
+
+impl<T, F> GenericFilter<T> for SimpleGenericFilter<T, F>
+where
+    F: Fn(&T) -> bool,
+{
+    fn filter(&self, value: &T) -> bool {
+        (self.filter)(value)
+    }
+}
+
+/// 批量过滤泛型值
+pub fn filter_batch<T, F: GenericFilter<T>>(filter: &F, values: &[T]) -> Vec<T>
+where
+    T: Clone,
+{
+    values.iter().filter(|v| filter.filter(v)).cloned().collect()
+}
+
+// ==================== 10. 泛型组合和链式操作 ====================
+
+/// 泛型函数组合器
+pub struct GenericFunctionComposer<F1, F2> {
+    f1: F1,
+    f2: F2,
+}
+
+impl<F1, F2> GenericFunctionComposer<F1, F2> {
+    pub fn new(f1: F1, f2: F2) -> Self {
+        Self { f1, f2 }
+    }
+
+    pub fn compose<T, U, V>(self, value: T) -> V
+    where
+        F1: Fn(T) -> U,
+        F2: Fn(U) -> V,
+    {
+        (self.f2)((self.f1)(value))
+    }
+}
+
+/// 链式泛型操作构建器
+#[derive(Debug, Clone)]
+pub struct GenericChainBuilder<T> {
+    value: T,
+}
+
+impl<T> GenericChainBuilder<T> {
+    pub fn new(value: T) -> Self {
+        Self { value }
+    }
+
+    pub fn map<U, F: FnOnce(T) -> U>(self, f: F) -> GenericChainBuilder<U> {
+        GenericChainBuilder::new(f(self.value))
+    }
+
+    pub fn filter<F: FnOnce(&T) -> bool>(self, f: F) -> Option<GenericChainBuilder<T>> {
+        if f(&self.value) {
+            Some(self)
+        } else {
+            None
+        }
+    }
+
+    pub fn unwrap(self) -> T {
+        self.value
+    }
+
+    pub fn unwrap_or(self, _default: T) -> T {
+        self.value
+    }
+}
+
+impl<T> GenericChainBuilder<T> {
+    pub fn and_then<U, F: FnOnce(T) -> GenericChainBuilder<U>>(self, f: F) -> GenericChainBuilder<U> {
+        f(self.value)
+    }
+
+    pub fn or_else<F: FnOnce() -> GenericChainBuilder<T>>(self, _f: F) -> GenericChainBuilder<T> {
+        self
+    }
+}
+
+// ==================== 11. 泛型缓存和优化 ====================
+
+/// 泛型缓存 trait
+pub trait GenericCache<K, V> {
+    fn get(&self, key: &K) -> Option<&V>;
+    fn insert(&mut self, key: K, value: V);
+    fn remove(&mut self, key: &K) -> Option<V>;
+    fn clear(&mut self);
+    fn len(&self) -> usize;
+    fn is_empty(&self) -> bool;
+}
+
+/// 简单的泛型缓存实现
+#[derive(Debug, Clone)]
+pub struct SimpleGenericCache<K, V>
+where
+    K: std::hash::Hash + Eq,
+{
+    data: std::collections::HashMap<K, V>,
+}
+
+impl<K, V> SimpleGenericCache<K, V>
+where
+    K: std::hash::Hash + Eq,
+{
+    pub fn new() -> Self {
+        Self {
+            data: std::collections::HashMap::new(),
+        }
+    }
+
+    pub fn with_capacity(capacity: usize) -> Self {
+        Self {
+            data: std::collections::HashMap::with_capacity(capacity),
+        }
+    }
+}
+
+impl<K, V> Default for SimpleGenericCache<K, V>
+where
+    K: std::hash::Hash + Eq,
+{
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl<K, V> GenericCache<K, V> for SimpleGenericCache<K, V>
+where
+    K: std::hash::Hash + Eq,
+{
+    fn get(&self, key: &K) -> Option<&V> {
+        self.data.get(key)
+    }
+
+    fn insert(&mut self, key: K, value: V) {
+        self.data.insert(key, value);
+    }
+
+    fn remove(&mut self, key: &K) -> Option<V> {
+        self.data.remove(key)
+    }
+
+    fn clear(&mut self) {
+        self.data.clear();
+    }
+
+    fn len(&self) -> usize {
+        self.data.len()
+    }
+
+    fn is_empty(&self) -> bool {
+        self.data.is_empty()
+    }
+}
+
+/// 泛型优化器 trait
+pub trait GenericOptimizer<T> {
+    fn optimize(&mut self, value: T) -> T;
+}
+
+/// 简单的泛型优化器实现
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+pub struct SimpleGenericOptimizer<T, F>
+where
+    F: Fn(T) -> T,
+{
+    optimizer: F,
+    _phantom: PhantomData<T>,
+}
+
+impl<T, F> SimpleGenericOptimizer<T, F>
+where
+    F: Fn(T) -> T,
+{
+    pub fn new(optimizer: F) -> Self {
+        Self {
+            optimizer,
+            _phantom: PhantomData,
+        }
+    }
+}
+
+impl<T, F> GenericOptimizer<T> for SimpleGenericOptimizer<T, F>
+where
+    F: Fn(T) -> T,
+{
+    fn optimize(&mut self, value: T) -> T {
+        (self.optimizer)(value)
+    }
+}
+
+// ==================== 12. 泛型转换和适配器 ====================
+
+/// 泛型适配器 trait
+pub trait GenericAdapter<T, U> {
+    fn adapt(&self, value: &T) -> U;
+}
+
+/// 简单的泛型适配器实现
+#[derive(Debug, Clone)]
+pub struct SimpleGenericAdapter<T, U, F>
+where
+    F: Fn(&T) -> U,
+{
+    adapter: F,
+    _phantom: PhantomData<(T, U)>,
+}
+
+impl<T, U, F> SimpleGenericAdapter<T, U, F>
+where
+    F: Fn(&T) -> U,
+{
+    pub fn new(adapter: F) -> Self {
+        Self {
+            adapter,
+            _phantom: PhantomData,
+        }
+    }
+}
+
+impl<T, U, F> GenericAdapter<T, U> for SimpleGenericAdapter<T, U, F>
+where
+    F: Fn(&T) -> U,
+{
+    fn adapt(&self, value: &T) -> U {
+        (self.adapter)(value)
+    }
+}
+
+/// 批量适配泛型值
+pub fn adapt_batch<T, U, A: GenericAdapter<T, U>>(adapter: &A, values: &[T]) -> Vec<U> {
+    values.iter().map(|v| adapter.adapt(v)).collect()
+}
+
+// ==================== 13. 泛型归约和聚合 ====================
+
+/// 泛型归约器 trait
+pub trait GenericReducer<T, R> {
+    fn reduce(&self, values: &[T]) -> R;
+}
+
+/// 简单的泛型归约器实现
+#[derive(Debug, Clone)]
+pub struct SimpleGenericReducer<T, R, F>
+where
+    F: Fn(&[T]) -> R,
+{
+    reducer: F,
+    _phantom: PhantomData<(T, R)>,
+}
+
+impl<T, R, F> SimpleGenericReducer<T, R, F>
+where
+    F: Fn(&[T]) -> R,
+{
+    pub fn new(reducer: F) -> Self {
+        Self {
+            reducer,
+            _phantom: PhantomData,
+        }
+    }
+}
+
+impl<T, R, F> GenericReducer<T, R> for SimpleGenericReducer<T, R, F>
+where
+    F: Fn(&[T]) -> R,
+{
+    fn reduce(&self, values: &[T]) -> R {
+        (self.reducer)(values)
+    }
+}
+
+/// 泛型聚合器 trait
+pub trait GenericAggregator<T, R> {
+    fn aggregate(&self, values: &[T]) -> R;
+}
+
+/// 简单的泛型聚合器实现
+#[derive(Debug, Clone)]
+pub struct SimpleGenericAggregator<T, R, F>
+where
+    F: Fn(&[T]) -> R,
+{
+    aggregator: F,
+    _phantom: PhantomData<(T, R)>,
+}
+
+impl<T, R, F> SimpleGenericAggregator<T, R, F>
+where
+    F: Fn(&[T]) -> R,
+{
+    pub fn new(aggregator: F) -> Self {
+        Self {
+            aggregator,
+            _phantom: PhantomData,
+        }
+    }
+}
+
+impl<T, R, F> GenericAggregator<T, R> for SimpleGenericAggregator<T, R, F>
+where
+    F: Fn(&[T]) -> R,
+{
+    fn aggregate(&self, values: &[T]) -> R {
+        (self.aggregator)(values)
+    }
+}
+
+// ==================== 14. 综合应用示例 ====================
 
 /// 演示 Rust 1.92.0 泛型编程特性
 pub fn demonstrate_rust_192_generic_features() {
@@ -363,7 +1039,7 @@ pub fn demonstrate_rust_192_generic_features() {
 
     // 1. 关联项的多个边界
     println!("1. 关联项的多个边界:");
-    let mut vec_container: GenericVector<String> = GenericVector { items: vec![] };
+    let mut vec_container: GenericVector<String> = GenericVector::new();
     vec_container.set(0, String::from("item1"));
     vec_container.set(1, String::from("item2"));
     println!("   容器大小: {}", vec_container.size());
@@ -418,7 +1094,7 @@ mod tests {
 
     #[test]
     fn test_generic_container() {
-        let mut container: GenericVector<String> = GenericVector { items: vec![] };
+        let mut container: GenericVector<String> = GenericVector::new();
         container.set(0, String::from("test"));
         assert_eq!(container.size(), 1);
         assert_eq!(container.get(0), Some(&String::from("test")));

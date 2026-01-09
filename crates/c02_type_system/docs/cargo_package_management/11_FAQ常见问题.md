@@ -260,7 +260,7 @@ my-project/         ← Package
 name = "my-project"
 version = "1.0.0"
 edition = "2024"        # 🎯 使用最新 Edition
-rust-version = "1.90"   # 指定最低 Rust 版本
+rust-version = "1.92"   # 指定最低 Rust 版本
 ```
 
 ---
@@ -940,7 +940,7 @@ cargo yank --vers 1.0.0 --undo
 [package]
 name = "my-package"
 version = "1.0.0"
-rust-version = "1.90"  # 指定最低 Rust 版本
+rust-version = "1.92"  # 指定最低 Rust 版本
 ```
 
 **作用**:
@@ -957,7 +957,7 @@ rust-version = "1.90"  # 指定最低 Rust 版本
 rust-version = "1.70"  # 支持更多用户
 
 # 应用: 使用最新
-rust-version = "1.90"  # 使用最新特性
+rust-version = "1.92"  # 使用最新特性
 ```
 
 ---

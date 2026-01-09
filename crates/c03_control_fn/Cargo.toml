@@ -111,10 +111,22 @@ path = "examples/rust_189_basic_syntax_comprehensive.rs"
 name = "rust_189_new_features_showcase"
 path = "examples/rust_189_new_features_showcase.rs"
 
+[[example]]
+name = "rust_192_features_demo"
+path = "examples/rust_192_features_demo.rs"
+
 [[bin]]
 name = "c03_control_fn"
 path = "src/bin/main.rs"
 
+[[test]]
+name = "rust_192_comprehensive_tests"
+path = "tests/rust_192_comprehensive_tests.rs"
+
 [[bench]]
 name = "rust_189_benchmarks"
+harness = false
+
+[[bench]]
+name = "rust_192_benchmarks"
 harness = false

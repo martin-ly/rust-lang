@@ -56,3 +56,7 @@ harness = false
 [[bench]]
 name = "backpressure_bench"
 harness = false
+
+[[bench]]
+name = "rust_192_benchmarks"
+harness = false

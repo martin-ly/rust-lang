@@ -113,7 +113,7 @@ exclude = [
 [workspace.package]
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.90"
+rust-version = "1.92"
 license = "MIT"
 authors = ["Workspace Team <team@example.com>"]
 repository = "https://github.com/user/workspace-project"

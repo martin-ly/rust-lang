@@ -78,6 +78,45 @@ impl<T> AsyncTaskQueue<T> {
     pub fn len(&self) -> usize {
         self.tasks.len()
     }
+
+    /// 检查队列是否为空
+    pub fn is_empty(&self) -> bool {
+        self.tasks.is_empty()
+    }
+
+    /// 清空队列
+    pub fn clear(&mut self) {
+        self.tasks.clear();
+    }
+
+    /// 查看队列头部的任务（不移除）
+    pub fn peek(&self) -> Option<&TaskItem<T>> {
+        self.tasks.front()
+    }
+
+    /// 查看队列头部的任务（可变引用）
+    pub fn peek_mut(&mut self) -> Option<&mut TaskItem<T>> {
+        self.tasks.front_mut()
+    }
+
+    /// 批量添加任务
+    pub fn push_batch(&mut self, tasks: impl IntoIterator<Item = TaskItem<T>>) {
+        for task in tasks {
+            self.tasks.push_back(task);
+        }
+    }
+
+    /// 按优先级排序任务（高优先级在前）
+    pub fn sort_by_priority(&mut self) {
+        let mut vec: Vec<TaskItem<T>> = self.tasks.drain(..).collect();
+        vec.sort_by(|a, b| b.priority.cmp(&a.priority));
+        self.tasks = vec.into_iter().collect();
+    }
+
+    /// 获取队列容量（如果使用 VecDeque 的容量）
+    pub fn capacity(&self) -> usize {
+        self.tasks.capacity()
+    }
 }
 
 impl<T> Default for AsyncTaskQueue<T> {
@@ -106,7 +145,7 @@ impl<T> AsyncTaskScheduler<T> {
         let mut queue = self.queue.lock().await;
 
         // Rust 1.92.0: 使用 rotate_right 实现时间片轮转
-        if queue.tasks.len() > 1 {
+        if queue.len() > 1 {
             queue.rotate(1);
         }
     }
@@ -121,6 +160,36 @@ impl<T> AsyncTaskScheduler<T> {
     pub async fn next_task(&self) -> Option<TaskItem<T>> {
         let mut queue = self.queue.lock().await;
         queue.pop()
+    }
+
+    /// 获取队列中的任务数量（异步）
+    pub async fn task_count(&self) -> usize {
+        let queue = self.queue.lock().await;
+        queue.len()
+    }
+
+    /// 检查队列是否为空（异步）
+    pub async fn is_empty(&self) -> bool {
+        let queue = self.queue.lock().await;
+        queue.is_empty()
+    }
+
+    /// 清空队列（异步）
+    pub async fn clear(&self) {
+        let mut queue = self.queue.lock().await;
+        queue.clear();
+    }
+
+    /// 批量添加任务（异步）
+    pub async fn add_tasks_batch(&self, tasks: impl IntoIterator<Item = TaskItem<T>>) {
+        let mut queue = self.queue.lock().await;
+        queue.push_batch(tasks);
+    }
+
+    /// 按优先级排序任务（异步）
+    pub async fn sort_by_priority(&self) {
+        let mut queue = self.queue.lock().await;
+        queue.sort_by_priority();
     }
 }
 

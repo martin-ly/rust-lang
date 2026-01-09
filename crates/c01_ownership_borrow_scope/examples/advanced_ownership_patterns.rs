@@ -239,7 +239,7 @@ pub mod complex_lifetime_management {
     }
 
     /// 使用约束处理数据 / Process data with constraints
-    fn process_with_constraints<'a>(data: &'a [i32]) -> Vec<&'a i32> {
+    fn process_with_constraints(data: &[i32]) -> Vec<&i32> {
         data.iter().filter(|&&x| x > 2).collect()
     }
 
@@ -454,7 +454,7 @@ pub mod performance_optimization_patterns {
 
     /// 零成本抽象优化示例 / Zero-cost Abstraction Optimization Example
     pub fn zero_cost_abstraction_optimization() {
-        let numbers = vec![1, 2, 3, 4, 5];
+        let numbers = [1, 2, 3, 4, 5];
         
         // 使用迭代器链进行零成本抽象
         // Use iterator chains for zero-cost abstractions

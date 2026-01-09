@@ -1,4 +1,8 @@
-//! Rust 1.90 丰富实战示例集
+//! Rust 1.90 丰富实战示例集 (历史版本)
+//!
+//! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//!
+//! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features_demo.rs`
 //!
 //! 本文件包含所有可运行的实战代码示例
 //! 对应文档：RUST_190_RICH_EXAMPLES_INTEGRATION.md
@@ -186,7 +190,7 @@ fn immutable_borrowing_example() {
     println!("s: {}", s);
 
     // 函数借用
-    fn calculate_length(s: &String) -> usize {
+    fn calculate_length(s: &str) -> usize {
         s.len()
     }
 
@@ -208,7 +212,7 @@ fn mutable_borrowing_example() {
 
     // 现在可以创建新的可变借用
     let r2 = &mut s;
-    r2.push_str("!");
+    r2.push('!');
     println!("r2: {}", r2);
 
     println!("最终: {}", s);
@@ -255,7 +259,7 @@ fn borrowing_rules_complete_example() {
     // r1最后使用
 
     let r2 = &mut s;
-    r2.push_str("!");
+    r2.push('!');
     println!("可变: {}", r2);
 }
 

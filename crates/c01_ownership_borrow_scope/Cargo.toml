@@ -10,6 +10,9 @@ tokio = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 
+[dev-dependencies]
+criterion = { workspace = true }
+
 [lib]
 name = "c01_ownership_borrow_scope"
 path = "src/lib.rs"
@@ -17,3 +20,7 @@ path = "src/lib.rs"
 [[bin]]
 name = "obs"
 path = "src/bin/main.rs"
+
+[[bench]]
+name = "rust_192_benchmarks"
+harness = false

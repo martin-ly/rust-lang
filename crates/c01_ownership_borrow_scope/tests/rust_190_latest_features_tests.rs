@@ -132,7 +132,7 @@ fn test_performance_analyzer() {
     let mut analyzer = Rust190PerformanceAnalyzer::new(base_generator);
     
     let mut results = Vec::new();
-    while let Some(value) = analyzer.next() {
+    for value in analyzer.by_ref() {
         results.push(value);
     }
     
@@ -152,7 +152,7 @@ fn test_cached_generator() {
     // 第一次迭代
     // First iteration
     let mut first_results = Vec::new();
-    while let Some(value) = cached_gen.next() {
+    for value in cached_gen.by_ref() {
         first_results.push(value);
     }
     
@@ -167,7 +167,7 @@ fn test_cached_generator() {
     // 第二次迭代（从缓存）
     // Second iteration (from cache)
     let mut second_results = Vec::new();
-    while let Some(value) = cached_gen.next() {
+    for value in cached_gen {
         second_results.push(value);
     }
     

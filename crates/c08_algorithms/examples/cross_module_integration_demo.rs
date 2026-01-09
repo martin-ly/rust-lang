@@ -30,8 +30,6 @@
 //! 本示例展示如何将多个模块（C01-C12）的功能整合在一起，
 //! 构建一个完整的 Rust 应用程序。
 
-use std::collections::HashMap;
-use std::sync::Arc;
 use std::time::Duration;
 
 /// 跨模块集成演示
@@ -98,7 +96,7 @@ fn demonstrate_ownership() {
 /// C02: 演示类型系统
 fn demonstrate_type_system() {
     // 泛型函数
-    fn find_max<T: PartialOrd>(items: &[T]) -> Option<&T> {
+    fn find_max<T: Ord>(items: &[T]) -> Option<&T> {
         items.iter().max()
     }
 

@@ -1,4 +1,8 @@
-//! # Rust 1.90 最新特性实现模块 / Rust 1.90 Latest Features Implementation Module
+//! # Rust 1.90 最新特性实现模块 / Rust 1.90 Latest Features Implementation Module (历史版本)
+//!
+//! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//!
+//! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
 //!
 //! 本模块实现了 Rust 1.90 版本的最新特性，包括：
 //! This module implements the latest features in Rust 1.90, including:
@@ -28,7 +32,7 @@ pub fn sync_generator_example() {
     
     // 使用标准库的迭代器创建生成器
     // Use standard library iterators to create generators
-    let numbers = (1..=5).into_iter();
+    let numbers = 1..=5;
     
     // 迭代生成器
     // Iterate over generator
@@ -44,7 +48,7 @@ pub async fn async_generator_example() {
     
     // 使用标准库的异步迭代器创建生成器
     // Use standard library async iterators to create generators
-    let async_numbers = (1..=5).into_iter();
+    let async_numbers = 1..=5;
     
     // 异步迭代生成器
     // Async iterate over generator
@@ -62,7 +66,7 @@ pub fn advanced_generator_patterns() {
     
     // 条件生成器
     // Conditional generator
-    let filtered_numbers = (1..=10).into_iter().filter(|&i| i % 2 == 0);
+    let filtered_numbers = (1..=10).filter(|&i| i % 2 == 0);
     
     println!("Even numbers:");
     for num in filtered_numbers {
@@ -552,7 +556,7 @@ impl AsyncGenerator<i32> for CustomAsyncGenerator {
 /// 生成器工具函数 / Generator Utility Functions
 /// 创建数字生成器 / Create number generator
 pub fn create_number_generator(max: i32) -> impl Iterator<Item = i32> {
-    (0..max).into_iter()
+    0..max
 }
 
 /// 创建过滤生成器 / Create filtered generator
@@ -560,7 +564,7 @@ pub fn create_filtered_generator<F>(max: i32, filter: F) -> impl Iterator<Item =
 where
     F: FnMut(&i32) -> bool,
 {
-    (0..max).into_iter().filter(filter)
+    (0..max).filter(filter)
 }
 
 /// 创建转换生成器 / Create transformed generator
@@ -568,7 +572,7 @@ pub fn create_transformed_generator<F>(max: i32, transform: F) -> impl Iterator<
 where
     F: Fn(i32) -> i32,
 {
-    (0..max).into_iter().map(transform)
+    (0..max).map(transform)
 }
 
 /// 生成器组合器 / Generator Combinators
@@ -592,7 +596,7 @@ where
 
 /// 生成器性能分析 / Generator Performance Analysis
 /// 生成器性能指标 / Generator Performance Metrics
-#[derive(Debug)]
+#[derive(Debug, Default)]
 pub struct GeneratorMetrics {
     pub items_generated: usize,
     pub generation_time: Duration,
@@ -601,11 +605,7 @@ pub struct GeneratorMetrics {
 
 impl GeneratorMetrics {
     pub fn new() -> Self {
-        Self {
-            items_generated: 0,
-            generation_time: Duration::from_secs(0),
-            memory_usage: 0,
-        }
+        Self::default()
     }
     
     pub fn add_item(&mut self) {

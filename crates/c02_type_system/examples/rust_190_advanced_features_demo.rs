@@ -1,4 +1,8 @@
-//! Rust 1.90 高级特性演示
+//! Rust 1.90 高级特性演示 (历史版本)
+//!
+//! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//!
+//! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features_demo.rs`
 //!
 //! 本示例展示了 Rust 1.90 中的高级语言特性，包括：
 //! - 高级生命周期管理
@@ -250,4 +254,3 @@ fn interactive_error_handling_demo() {
     let cleared_errors = error_handler.get_errors();
     println!("  清空后错误数量: {}", cleared_errors.len());
 }
-

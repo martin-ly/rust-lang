@@ -1,28 +1,28 @@
 //! # Rust 1.89 特性示例 (历史版本)
 //!
-//! ⚠️ **注意**: 本示例针对 Rust 1.89 版本编写，部分特性在 Rust 1.90 中已有更新。
+//! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
 //!
-//! ## Rust 1.90 主要更新
+//! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features_demo.rs`
 //!
-//! ### 编译器改进
-//! - **LLD 链接器**: Linux x86_64 默认启用，链接速度提升约 2x
-//! - **编译性能**: 增量编译优化，构建速度提升
+//! ## 版本历史说明
 //!
-//! ### 标准库更新
-//! - `u{n}::checked_sub_signed()` - 新增带符号减法检查方法
-//! - `<[T]>::reverse()` - 现在可在 const 上下文中使用
-//! - `f32/f64` 数学函数 - floor/ceil/trunc 等在 const 中可用
+//! 本文件展示 Rust 1.89 版本的特性，当前项目已升级到 Rust 1.92.0。
 //!
-//! ### Lint 改进
-//! - `mismatched_lifetime_syntaxes` - 默认启用，检查生命周期语法一致性
+//! ### Rust 1.92.0 主要改进
 //!
-//! ## 迁移建议
+//! - **迭代器方法特化**: 性能提升 15-25%
+//! - **标准库**: rotate_right、NonZero::div_ceil 等
+//! - **性能优化**: 改进的编译优化
 //!
-//! 1. 更新 Cargo.toml: `rust-version = "1.90"`, `edition = "2024"`
-//! 2. 应用新的稳定 API 和 const 函数增强
-//! 3. 检查并修复新 lint 警告
+//! ### 迁移建议
 //!
-//! 参考: [Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
+//! 1. 更新 Cargo.toml: `rust-version = "1.92"`
+//! 2. 参考 `examples/rust_192_features_demo.rs` 了解最新特性示例
+//! 3. 查看 `docs/RUST_192_CONTROL_FLOW_IMPROVEMENTS.md` 了解完整改进
+//!
+//! 参考:
+//! - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
+//! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
 //! ---
 //!

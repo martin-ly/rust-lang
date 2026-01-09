@@ -1,4 +1,8 @@
-//! Rust 1.91 泛型特性演示示例
+//! Rust 1.91 泛型特性演示示例 (历史版本)
+//!
+//! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//!
+//! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features_demo.rs`
 //!
 //! 本示例展示了 Rust 1.91 中泛型系统的新特性和改进：
 //!
@@ -78,4 +82,3 @@ mod individual_demos {
         rust_191_features::generic_constraints::demonstrate();
     }
 }
-

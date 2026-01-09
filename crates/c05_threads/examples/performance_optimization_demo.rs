@@ -89,7 +89,7 @@ impl LockFreeQueueBenchmark {
 
     pub fn benchmark_push_pop(&self, num_operations: usize) -> Duration {
         let start = Instant::now();
-        
+
         // 生产者线程
         let producer = {
             let queue = Arc::clone(&self.queue);
@@ -135,7 +135,7 @@ impl LockedQueueBenchmark {
     pub fn benchmark_push_pop(&self, num_operations: usize) -> Duration {
         let start = Instant::now();
         let queue = Arc::clone(&self.queue);
-        
+
         // 生产者线程
         let producer = {
             let queue = Arc::clone(&queue);
@@ -177,7 +177,7 @@ impl ThreadPoolBenchmark {
             .unwrap();
 
         let start = Instant::now();
-        
+
         pool.install(|| {
             (0..num_tasks).into_par_iter().for_each(|i| {
                 // 模拟计算密集型任务
@@ -262,7 +262,7 @@ impl NumaAwareBenchmark {
         let data = Arc::new(vec![0u64; SIZE]);
 
         let start = Instant::now();
-        
+
         let handles: Vec<_> = (0..4).map(|thread_id| {
             let data = Arc::clone(&data);
             thread::spawn(move || {
@@ -270,7 +270,7 @@ impl NumaAwareBenchmark {
                 let chunk_size = SIZE / 4;
                 let start = thread_id * chunk_size;
                 let end = if thread_id == 3 { SIZE } else { (thread_id + 1) * chunk_size };
-                
+
                 for i in start..end {
                     sum += data[i];
                 }
@@ -301,10 +301,10 @@ impl WorkStealingAnalysis {
 
         pool.install(|| {
             let task_durations = Arc::clone(&task_durations);
-            
+
             (0..num_tasks).into_par_iter().for_each(|i| {
                 let start = Instant::now();
-                
+
                 // 模拟不同计算量的任务
                 let workload = 1000 + (i % 100) * 10;
                 let mut sum = 0;
@@ -312,7 +312,7 @@ impl WorkStealingAnalysis {
                     sum += i * j;
                 }
                 std::hint::black_box(sum);
-                
+
                 let duration = start.elapsed();
                 task_durations.lock().unwrap().push(duration);
             });
@@ -324,17 +324,17 @@ impl WorkStealingAnalysis {
     pub fn calculate_load_balance_metrics(durations: &[Duration]) -> (Duration, Duration, f64) {
         let total: Duration = durations.iter().sum();
         let avg = total / durations.len() as u32;
-        
+
         let max = durations.iter().max().unwrap().clone();
         let min = durations.iter().min().unwrap().clone();
-        
+
         let variance = durations.iter()
             .map(|d| {
                 let diff = if *d > avg { *d - avg } else { avg - *d };
                 diff.as_nanos() as f64
             })
             .sum::<f64>() / durations.len() as f64;
-        
+
         (min, max, variance)
     }
 }
@@ -345,29 +345,29 @@ pub struct MemoryAllocationBenchmark;
 impl MemoryAllocationBenchmark {
     pub fn benchmark_vec_growth() -> Duration {
         let start = Instant::now();
-        
+
         let mut vec = Vec::new();
         for i in 0..100000 {
             vec.push(i);
         }
-        
+
         start.elapsed()
     }
 
     pub fn benchmark_vec_with_capacity() -> Duration {
         let start = Instant::now();
-        
+
         let mut vec = Vec::with_capacity(100000);
         for i in 0..100000 {
             vec.push(i);
         }
-        
+
         start.elapsed()
     }
 
     pub fn benchmark_parallel_allocation() -> Duration {
         let start = Instant::now();
-        
+
         let handles: Vec<_> = (0..4).map(|_| {
             thread::spawn(|| {
                 let mut vec = Vec::new();
@@ -381,7 +381,7 @@ impl MemoryAllocationBenchmark {
         for handle in handles {
             handle.join().unwrap();
         }
-        
+
         start.elapsed()
     }
 }
@@ -402,11 +402,11 @@ fn main() {
     println!("2. 无锁 vs 有锁队列性能对比:");
     let lockfree_queue = LockFreeQueueBenchmark::new();
     let locked_queue = LockedQueueBenchmark::new();
-    
+
     let num_ops = 100000;
     let lockfree_time = lockfree_queue.benchmark_push_pop(num_ops);
     let locked_time = locked_queue.benchmark_push_pop(num_ops);
-    
+
     println!("无锁队列 {} 次操作耗时: {:?}", num_ops, lockfree_time);
     println!("有锁队列 {} 次操作耗时: {:?}", num_ops, locked_time);
     println!("性能提升: {:.2}x", locked_time.as_nanos() as f64 / lockfree_time.as_nanos() as f64);
@@ -416,10 +416,10 @@ fn main() {
     println!("3. 线程池性能对比:");
     let num_tasks = 10000;
     let num_threads = 4;
-    
+
     let rayon_time = ThreadPoolBenchmark::benchmark_rayon_pool(num_tasks, num_threads);
     let std_time = ThreadPoolBenchmark::benchmark_std_threads(num_tasks, num_threads);
-    
+
     println!("Rayon 线程池 {} 个任务耗时: {:?}", num_tasks, rayon_time);
     println!("标准线程 {} 个任务耗时: {:?}", num_tasks, std_time);
     println!("性能提升: {:.2}x", std_time.as_nanos() as f64 / rayon_time.as_nanos() as f64);
@@ -429,7 +429,7 @@ fn main() {
     println!("4. NUMA 感知优化:");
     let (sequential_time, random_time) = NumaAwareBenchmark::benchmark_memory_access_pattern();
     let parallel_time = NumaAwareBenchmark::benchmark_parallel_memory_access();
-    
+
     println!("顺序内存访问耗时: {:?}", sequential_time);
     println!("随机内存访问耗时: {:?}", random_time);
     println!("并行内存访问耗时: {:?}", parallel_time);
@@ -440,7 +440,7 @@ fn main() {
     println!("5. 工作窃取负载均衡分析:");
     let durations = WorkStealingAnalysis::analyze_load_balancing(1000, 4);
     let (min, max, variance) = WorkStealingAnalysis::calculate_load_balance_metrics(&durations);
-    
+
     println!("任务执行时间统计:");
     println!("  最短: {:?}", min);
     println!("  最长: {:?}", max);
@@ -453,7 +453,7 @@ fn main() {
     let growth_time = MemoryAllocationBenchmark::benchmark_vec_growth();
     let capacity_time = MemoryAllocationBenchmark::benchmark_vec_with_capacity();
     let parallel_time = MemoryAllocationBenchmark::benchmark_parallel_allocation();
-    
+
     println!("动态增长 Vec 耗时: {:?}", growth_time);
     println!("预分配容量 Vec 耗时: {:?}", capacity_time);
     println!("并行分配耗时: {:?}", parallel_time);

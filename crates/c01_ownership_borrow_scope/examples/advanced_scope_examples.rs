@@ -171,7 +171,7 @@ fn async_scope_examples() {
     use std::future::Future;
     use std::pin::Pin;
 
-    let data = vec![1, 2, 3, 4, 5];
+    let data = [1, 2, 3, 4, 5];
 
     // 异步闭包（简化版本）
     let _async_closure: Pin<Box<dyn Future<Output = ()>>> = Box::pin(async move {
@@ -273,7 +273,7 @@ fn scope_performance_optimization() {
 
     // 使用代码块限制变量作用域
     let result = {
-        let temp_data = vec![1, 2, 3, 4, 5];
+        let temp_data = [1, 2, 3, 4, 5];
         temp_data.iter().sum::<i32>()
     }; // temp_data 在这里被销毁
 
@@ -286,7 +286,7 @@ fn error_handling_and_scope() {
 
     // 使用 Result 和 ? 操作符
     fn process_data() -> Result<i32, Box<dyn std::error::Error>> {
-        let data = vec![1, 2, 3, 4, 5];
+        let data = [1, 2, 3, 4, 5];
 
         // 在作用域内处理错误
         let result: Result<i32, Box<dyn std::error::Error>> = {

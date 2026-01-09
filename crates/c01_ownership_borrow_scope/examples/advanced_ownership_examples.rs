@@ -149,11 +149,10 @@ pub mod ownership_sharing_patterns {
         
         /// 获取根节点 / Get root node
         pub fn get_root(&self) -> Option<Rc<RefCell<Self>>> {
-            if let Some(parent_weak) = &self.parent {
-                if let Some(parent_strong) = parent_weak.upgrade() {
+            if let Some(parent_weak) = &self.parent
+                && let Some(parent_strong) = parent_weak.upgrade() {
                     return parent_strong.borrow().get_root();
                 }
-            }
             None
         }
     }
@@ -720,8 +719,8 @@ pub mod dynamic_scope {
         }
         
         /// 获取变量 / Get variable
-        pub fn get_variable(&self, name: &str) -> Option<&String> {
-            self.variables.get(name)
+        pub fn get_variable(&self, name: &str) -> Option<&str> {
+            self.variables.get(name).map(|s| s.as_str())
         }
         
         /// 添加子作用域 / Add child scope
@@ -802,12 +801,12 @@ pub mod dynamic_scope {
         }
         
         /// 查找变量 / Find variable
-        pub fn find_variable(&self, name: &str) -> Option<(u32, &String)> {
+        pub fn find_variable(&self, name: &str) -> Option<(u32, String)> {
             // 从当前作用域开始向上查找 / Start from current scope and search upward
             for &scope_id in self.scope_stack.iter().rev() {
                 if let Some(scope) = self.scopes.get(&scope_id) {
-                    if let Some(value) = scope.get_variable(name) {
-                        return Some((scope_id, value));
+                    if let Some(value) = scope.variables.get(name) {
+                        return Some((scope_id, value.clone()));
                     }
                 }
             }

@@ -42,5 +42,3 @@ fn bench_dummy(c: &mut Criterion) {
 
 criterion_group!(benches, bench_dummy);
 criterion_main!(benches);
-
-

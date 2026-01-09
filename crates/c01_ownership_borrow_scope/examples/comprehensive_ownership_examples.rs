@@ -40,8 +40,8 @@ fn takes_ownership(some_string: String) {
 
 /// 返回所有权的函数 / Function that returns ownership
 fn gives_ownership() -> String {
-    let some_string = String::from("yours");
-    some_string // 返回所有权 / return ownership
+    
+    String::from("yours") // 返回所有权 / return ownership
 }
 
 /// 获取并返回所有权的函数 / Function that takes and returns ownership
@@ -76,7 +76,7 @@ fn borrowing_basics() {
 }
 
 /// 计算字符串长度的函数 / Function to calculate string length
-fn calculate_length(s: &String) -> usize {
+fn calculate_length(s: &str) -> usize {
     s.len()
 } // s 离开作用域，但因为它不拥有所有权，所以不会丢弃任何内容 / s goes out of scope, but since it doesn't own the value, nothing is dropped
 
@@ -289,13 +289,13 @@ fn error_handling_examples() {
     }
     
     // 示例 2：Option 类型 / Example 2: Option Type
-    let option = safe_get_first(&vec![1, 2, 3]);
+    let option = safe_get_first(&[1, 2, 3]);
     match option {
         Some(value) => println!("First element: {}", value),
         None => println!("No elements"),
     }
     
-    let option2 = safe_get_first(&vec![]);
+    let option2 = safe_get_first(&[]);
     match option2 {
         Some(value) => println!("First element: {}", value),
         None => println!("No elements"),

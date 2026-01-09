@@ -84,7 +84,7 @@ feature-lib/
 name = "feature-lib"
 version = "0.2.0"
 edition = "2024"
-rust-version = "1.90"
+rust-version = "1.92"
 
 # 包元数据
 description = "A library demonstrating Cargo features"

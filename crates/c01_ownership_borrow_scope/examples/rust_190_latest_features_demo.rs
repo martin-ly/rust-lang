@@ -1,4 +1,8 @@
-//! # Rust 1.90 最新特性演示 / Rust 1.90 Latest Features Demo
+//! # Rust 1.90 最新特性演示 / Rust 1.90 Latest Features Demo (历史版本)
+//!
+//! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//!
+//! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features_demo.rs`
 //!
 //! 本示例展示 Rust 1.90 版本的最新特性，包括：
 //! This example demonstrates the latest features in Rust 1.90, including:
@@ -139,7 +143,7 @@ fn demonstrate_performance_analysis() {
 
     // 消耗所有项目 / Consume all items
     let mut count = 0;
-    while let Some(_value) = analyzer.next() {
+    for _value in analyzer.by_ref() {
         count += 1;
     }
 

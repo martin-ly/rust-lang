@@ -1,4 +1,8 @@
-//! 针对 Rust 1.90 示例的基础断言测试
+//! 针对 Rust 1.90 示例的基础断言测试 (历史版本)
+//!
+//! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//!
+//! **当前推荐版本**: Rust 1.92.0+ | 最新测试请参考 `rust_192_comprehensive_tests.rs`
 
 fn sum_array<const N: usize>(arr: [i32; N]) -> i32 { arr.iter().sum() }
 
@@ -26,5 +30,3 @@ fn test_lifetime_passthrough() {
     let r = lifetime_passthrough(&v);
     assert_eq!(*r, 10);
 }
-
-

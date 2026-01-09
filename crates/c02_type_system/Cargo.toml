@@ -74,6 +74,86 @@ path = "examples/rust_190_advanced_macros_demo.rs"
 name = "rust_191_features_demo"
 path = "examples/rust_191_features_demo.rs"
 
+[[example]]
+name = "rust_192_features_demo"
+path = "examples/rust_192_features_demo.rs"
+
+[[example]]
+name = "rust_192_comprehensive_demo"
+path = "examples/rust_192_comprehensive_demo.rs"
+
+[[example]]
+name = "rust_192_advanced_integration_demo"
+path = "examples/rust_192_advanced_integration_demo.rs"
+
+[[example]]
+name = "rust_192_practical_use_cases"
+path = "examples/rust_192_practical_use_cases.rs"
+
+[[example]]
+name = "const_eval_assoc_consts"
+path = "examples/const_eval_assoc_consts.rs"
+
+[[example]]
+name = "ffi_abi_repr"
+path = "examples/ffi_abi_repr.rs"
+
+[[example]]
+name = "generics_where_performance"
+path = "examples/generics_where_performance.rs"
+
+[[example]]
+name = "iterators_zero_cost"
+path = "examples/iterators_zero_cost.rs"
+
+[[example]]
+name = "maybeuninit_manuallydrop"
+path = "examples/maybeuninit_manuallydrop.rs"
+
+[[example]]
+name = "never_type_control_flow"
+path = "examples/never_type_control_flow.rs"
+
+[[example]]
+name = "non_exhaustive_compat"
+path = "examples/non_exhaustive_compat.rs"
+
+[[example]]
+name = "nonnull_raw_pointers"
+path = "examples/nonnull_raw_pointers.rs"
+
+[[example]]
+name = "pattern_matching_advanced"
+path = "examples/pattern_matching_advanced.rs"
+
+[[example]]
+name = "pin_self_referential_basics"
+path = "examples/pin_self_referential_basics.rs"
+
+[[example]]
+name = "repr_packed_safety"
+path = "examples/repr_packed_safety.rs"
+
+[[example]]
+name = "trait_objects_safety"
+path = "examples/trait_objects_safety.rs"
+
+[[example]]
+name = "type_definition_examples"
+path = "examples/type_definition_examples.rs"
+
+[[example]]
+name = "type_equivalence_newtype_examples"
+path = "examples/type_equivalence_newtype_examples.rs"
+
+[[example]]
+name = "unsafe_cell_interior_mutability"
+path = "examples/unsafe_cell_interior_mutability.rs"
+
+[[example]]
+name = "variance_examples"
+path = "examples/variance_examples.rs"
+
 [[bin]]
 name = "ts"
 path = "src/bin/main.rs"
@@ -97,4 +177,8 @@ criterion = { workspace = true }
 
 [[bench]]
 name = "rust_190_simple_benchmarks"
+harness = false
+
+[[bench]]
+name = "rust_192_benchmarks"
 harness = false

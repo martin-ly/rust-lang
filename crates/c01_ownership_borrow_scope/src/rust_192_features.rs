@@ -116,10 +116,16 @@ pub union Rust192Union {
     pub bytes: [u8; 4],
 }
 
+impl Default for Rust192Union {
+    fn default() -> Self {
+        Self { integer: 0 }
+    }
+}
+
 impl Rust192Union {
     /// 创建新的联合体 / Create new union
     pub fn new() -> Self {
-        Self { integer: 0 }
+        Self::default()
     }
 
     /// Rust 1.92.0: 使用原始引用安全访问联合体字段
@@ -302,7 +308,7 @@ where
 /// Rust 1.92.0 refines `unused_must_use` lint, no longer warning on `Result<(), Uninhabited>` or `ControlFlow<Uninhabited, ()>`:
 ///
 /// 改进的 `unused_must_use` 示例 / Refined `unused_must_use` Example
-#[must_use]
+#[must_use = "This function returns a Result that should be checked"]
 pub fn rust_192_must_use_result() -> Result<(), std::convert::Infallible> {
     // Rust 1.92.0: 不再对 `Result<(), Uninhabited>` 发出警告
     // Rust 1.92.0: No longer warns on `Result<(), Uninhabited>`
@@ -357,8 +363,8 @@ pub fn rust_192_rotate_right_example() {
 ///
 /// 迭代器比较示例 / Iterator Comparison Example
 pub fn rust_192_iterator_eq_example() {
-    let vec1 = vec![1, 2, 3, 4, 5];
-    let vec2 = vec![1, 2, 3, 4, 5];
+    let vec1 = [1, 2, 3, 4, 5];
+    let vec2 = [1, 2, 3, 4, 5];
 
     // Rust 1.92.0: 特化的迭代器比较方法
     // Rust 1.92.0: Specialized iterator comparison methods
@@ -393,7 +399,7 @@ pub fn rust_192_tuple_extend_example() {
 ///
 /// Rust 1.92.0 增强了 `EncodeWide` 的 `Debug` 实现，包含更多详细信息：
 /// Rust 1.92.0 enhances the `Debug` implementation for `EncodeWide` with additional details:
-
+///
 /// `EncodeWide` 示例 / `EncodeWide` Example
 pub fn rust_192_encode_wide_example() {
     use std::ffi::OsStr;

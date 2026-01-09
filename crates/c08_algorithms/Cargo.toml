@@ -12,6 +12,7 @@ rust-version = "1.92"
 # 并行与并发 - 使用工作区统一版本
 rayon = { workspace = true }
 tokio = { workspace = true }
+tokio-stream = { workspace = true }
 futures = { workspace = true }
 
 # 随机数 - 更新到最新版本

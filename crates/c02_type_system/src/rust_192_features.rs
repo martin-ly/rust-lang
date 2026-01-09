@@ -7,7 +7,8 @@
 //! - 增强的高阶生命周期区域处理 / Enhanced Higher-Ranked Region Handling
 //! - 改进的自动特征和 `Sized` 边界处理 / Improved Auto-Trait and `Sized` Bounds Handling
 //! - `MaybeUninit` 在类型系统中的应用 / `MaybeUninit` Application in Type System
-//! - 改进的类型推断 / Improved Type Inference
+//! - `NonZero::div_ceil` 在类型大小计算中的应用 / `NonZero::div_ceil` in Type Size Calculation
+//! - 迭代器方法特化在类型处理中的应用 / Iterator Method Specialization in Type Processing
 //!
 //! # 文件信息
 //! - 文件: rust_192_features.rs
@@ -15,6 +16,36 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.92.0
 //! - Edition: 2024
+//!
+//! # 使用示例
+//!
+//! ```rust
+//! use c02_type_system::rust_192_features::*;
+//!
+//! // 1. 关联项的多个边界
+//! let converter = StringConverter;
+//! let output = converter.convert(String::from("hello"));
+//!
+//! // 2. 高阶生命周期
+//! let processed = process_strings("test", |s| s);
+//!
+//! // 3. MaybeUninit 应用
+//! let mut manager = TypeSafeUninitManager::<String>::new();
+//! manager.initialize(String::from("value"));
+//!
+//! // 4. 类型大小计算
+//! let calculator = TypeSizeCalculator::new(NonZeroUsize::new(8).unwrap());
+//! let size = calculator.calculate_aligned::<u64>(10);
+//!
+//! // 5. 迭代器特化
+//! let result = compare_type_lists(&[1, 2, 3], &[1, 2, 3]);
+//! ```
+//!
+//! # 相关文档
+//!
+//! - [特性完整指南](../docs/RUST_192_FEATURES_GUIDE.md)
+//! - [示例代码集合](../docs/RUST_192_EXAMPLES_COLLECTION.md)
+//! - [测试用例](../tests/rust_192_features_tests.rs)
 
 use std::mem::MaybeUninit;
 use std::marker::PhantomData;
@@ -58,6 +89,22 @@ impl TypeConverter for StringConverter {
 pub struct GenericTypeConverter<T, U> {
     _input_phantom: PhantomData<T>,
     _output_phantom: PhantomData<U>,
+}
+
+impl<T, U> GenericTypeConverter<T, U> {
+    /// 创建新的泛型类型转换器
+    pub fn new() -> Self {
+        Self {
+            _input_phantom: PhantomData,
+            _output_phantom: PhantomData,
+        }
+    }
+}
+
+impl<T, U> Default for GenericTypeConverter<T, U> {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl<T, U> TypeConverter for GenericTypeConverter<T, U>

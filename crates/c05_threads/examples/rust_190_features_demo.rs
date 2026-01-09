@@ -1,4 +1,8 @@
-//! Rust 1.90 Edition 2024 特性演示示例
+//! Rust 1.90 Edition 2024 特性演示示例 (历史版本)
+//!
+//! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//!
+//! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features_demo.rs`
 //!
 //! 本示例展示了 Rust 1.90 和 Edition 2024 的最新特性在实际应用中的使用
 
@@ -33,17 +37,17 @@ fn demonstrate_scoped_threads_with_190_features() {
     println!("\n=== 作用域线程与 Rust 1.90 特性结合演示 ===");
 
     let data = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    
+
     // 使用作用域线程进行并行处理
     let data_len = data.len();
     thread::scope(|s| {
         // 将数据分成多个部分进行并行处理
         let chunk_size = data_len / 4;
-        
+
         for i in 0..4 {
             let start = i * chunk_size;
             let end = if i == 3 { data_len } else { (i + 1) * chunk_size };
-            
+
             s.spawn(move || {
                 // 模拟一些计算密集型工作
                 for j in start..end {
@@ -67,7 +71,7 @@ fn demonstrate_async_with_190_features() {
 
     // 使用 tokio 运行时
     let rt = tokio::runtime::Runtime::new().unwrap();
-    
+
     rt.block_on(async {
         // 演示异步生成器
         let numbers = rust_190_features::async_number_generator(0, 10).await;
@@ -114,9 +118,9 @@ fn demonstrate_generic_arrays() {
 
     // 从切片创建数组
     let slice = [1, 2, 3, 4, 5];
-    let array_from_slice: rust_190_features::GenericArray<i32, 3> = 
+    let array_from_slice: rust_190_features::GenericArray<i32, 3> =
         rust_190_features::GenericArray::from_slice(&slice);
-    
+
     println!("从切片创建的数组长度: {}", array_from_slice.len());
 }
 
@@ -125,7 +129,7 @@ fn demonstrate_improved_traits() {
     println!("\n=== 改进的 Trait 演示 ===");
 
     let struct_instance = rust_190_features::ImprovedStruct::new(42);
-    
+
     // 使用 -> impl Trait 语法
     let result: Vec<i32> = struct_instance.process(10).collect();
     println!("Trait 处理结果: {:?}", result);

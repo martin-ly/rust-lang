@@ -9,6 +9,7 @@ use std::sync::{Arc, Mutex};
 ///
 /// 将普通迭代器转换为并行迭代器
 pub struct ParallelIteratorAdapter<I> {
+    #[allow(dead_code)]
     iter: I,
     chunk_size: usize,
 }

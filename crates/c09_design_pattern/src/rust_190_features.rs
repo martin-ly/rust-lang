@@ -1,4 +1,8 @@
-//! Rust 1.90 / Edition 2024 特性示例入口
+//! Rust 1.90 / Edition 2024 特性示例入口 (历史版本)
+//!
+//! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//!
+//! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
 
 pub mod highlights {
     /// 展示 never 类型在不可达终止函数中的使用
@@ -129,5 +133,3 @@ pub mod dyn_upcasting_demo {
         }
     }
 }
-
-

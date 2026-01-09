@@ -1,6 +1,8 @@
 //! # Rust 1.91 特性实现模块 / Rust 1.91 Features Implementation Module (历史版本)
 //!
-//! > **注意**: 当前版本为 Rust 1.92.0，请参考 `rust_192_features.rs` 了解最新特性。
+//! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//!
+//! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
 //!
 //! 本模块实现了 Rust 1.91 版本中与所有权、借用、生命周期相关的新特性和改进，包括：
 //! This module implements new features and improvements in Rust 1.91 related to ownership, borrowing, and lifetimes, including:
@@ -492,8 +494,8 @@ impl OptimizedMemoryManager191 {
 
         if uses_small_pool {
             // 尝试从池中获取 / Try to get from pool
-            if let Some(pool) = self.small_object_pool.get_mut(&size) {
-                if let Some(reused_id) = pool.pop() {
+            if let Some(pool) = self.small_object_pool.get_mut(&size)
+                && let Some(reused_id) = pool.pop() {
                     // 复用已有对象 / Reuse existing object
                     self.statistics.small_pool_hits += 1;
                     if let Some(record) = self.allocation_records.get_mut(&reused_id) {
@@ -503,7 +505,6 @@ impl OptimizedMemoryManager191 {
                         return;
                     }
                 }
-            }
             self.small_object_pool.entry(size).or_default();
             self.statistics.small_object_allocations += 1;
         }
@@ -537,11 +538,10 @@ impl OptimizedMemoryManager191 {
 
             // Rust 1.91 优化：小对象归还到池中
             // Rust 1.91 optimization: Small objects returned to pool
-            if allocation_record.uses_small_pool {
-                if let Some(pool) = self.small_object_pool.get_mut(&allocation_record.size) {
+            if allocation_record.uses_small_pool
+                && let Some(pool) = self.small_object_pool.get_mut(&allocation_record.size) {
                     pool.push(id.to_string());
                 }
-            }
 
             Ok(())
         } else {

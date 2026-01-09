@@ -1,4 +1,8 @@
-//! # Rust 1.90 特性示例 / Rust 1.90 Features Examples
+//! # Rust 1.90 特性示例 / Rust 1.90 Features Examples (历史版本)
+//!
+//! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//!
+//! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features_demo.rs`
 //!
 //! 本示例展示了 Rust 1.90 版本的新特性和改进，包括：
 //! This example demonstrates new features and improvements in Rust 1.90, including:

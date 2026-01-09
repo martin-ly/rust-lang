@@ -18,7 +18,7 @@ impl Builder {
 
     // 添加换行符并返回自身以支持链式调用
     fn newline(mut self) -> Self {
-        self.value.push_str("\n");
+        self.value.push('\n');
         self // 移动 self
     }
 

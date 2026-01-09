@@ -45,15 +45,15 @@ where
         let state_clone = Arc::clone(&state);
         let receiver_clone = receiver.clone();
         let name_clone = name.clone();
-        
+
         thread::spawn(move || {
             println!("Actor '{}' 启动", name_clone);
-            
+
             while let Ok(message) = receiver_clone.recv() {
                 let mut state = state_clone.lock().unwrap();
                 handler(message, &mut state);
             }
-            
+
             println!("Actor '{}' 停止", name_clone);
         });
 
@@ -94,7 +94,7 @@ where
         let subscribers = Arc::new(Mutex::new(HashMap::<String, Sender<T>>::new()));
 
         let subscribers_clone = Arc::clone(&subscribers);
-        
+
         thread::spawn(move || {
             while let Ok(message) = receiver.recv() {
                 let subs = subscribers_clone.lock().unwrap();
@@ -207,42 +207,42 @@ impl FanOutFanIn {
         for i in 0..num_workers {
             let (sender, worker_receiver) = unbounded();
             let input_receiver = receiver.clone();
-            
+
             let sender_clone = sender.clone();
             worker_outputs.push(sender);
             worker_receivers.push(worker_receiver);
 
             thread::spawn(move || {
                 println!("扇出工作者 {} 启动", i);
-                
+
                 while let Ok(data) = input_receiver.recv() {
                     // 模拟处理
                     thread::sleep(Duration::from_millis(10));
                     let processed = format!("Worker-{}: {}", i, data);
-                    
+
                     if sender_clone.send(processed).is_err() {
                         break;
                     }
                 }
-                
+
                 println!("扇出工作者 {} 停止", i);
             });
         }
 
         // 聚合器
         let (final_sender, final_output) = unbounded();
-        
+
         thread::spawn(move || {
             println!("扇入聚合器启动");
-            
+
             let mut results = Vec::new();
             let active_workers = num_workers;
-            
+
             while active_workers > 0 {
                 for (_i, receiver) in worker_receivers.iter().enumerate() {
                     if let Ok(result) = receiver.try_recv() {
                         results.push(result);
-                        
+
                         if results.len() == num_workers {
                             let aggregated = format!("聚合结果: {:?}", results);
                             if final_sender.send(aggregated).is_err() {
@@ -254,7 +254,7 @@ impl FanOutFanIn {
                 }
                 thread::sleep(Duration::from_millis(1));
             }
-            
+
             println!("扇入聚合器停止");
         });
 
@@ -307,7 +307,7 @@ impl CircuitBreaker {
         F: FnOnce() -> Result<R, String>,
     {
         let state = self.state.lock().unwrap();
-        
+
         match *state {
             CircuitState::Open => {
                 let last_failure = self.last_failure_time.lock().unwrap();
@@ -399,7 +399,7 @@ impl RateLimiter {
 
     pub fn try_acquire(&self) -> bool {
         self.refill_tokens();
-        
+
         let current = self.tokens.load(Ordering::Relaxed);
         if current > 0 {
             self.tokens.fetch_sub(1, Ordering::Relaxed);
@@ -412,7 +412,7 @@ impl RateLimiter {
     fn refill_tokens(&self) {
         let mut last_refill = self.last_refill.lock().unwrap();
         let now = Instant::now();
-        
+
         if now - *last_refill >= self.refill_rate {
             let tokens_to_add = ((now - *last_refill).as_nanos() / self.refill_rate.as_nanos()) as usize;
             let current = self.tokens.load(Ordering::Relaxed);
@@ -431,22 +431,22 @@ impl RateLimiter {
 /// 演示 Actor 模型
 fn demo_actor_model() {
     println!("=== Actor 模型演示 ===");
-    
+
     let actor = Actor::new("TestActor".to_string(), |message: String, state| {
         state.message_count += 1;
         state.last_message_time = Some(Instant::now());
         println!("Actor 收到消息: {}", message);
     });
-    
+
     // 发送消息
     for i in 0..5 {
         actor.send(format!("消息 {}", i)).unwrap();
         thread::sleep(Duration::from_millis(100));
     }
-    
+
     let state = actor.get_state();
     println!("Actor 状态: {:?}", state);
-    
+
     actor.shutdown();
     println!();
 }
@@ -454,19 +454,19 @@ fn demo_actor_model() {
 /// 演示发布-订阅模式
 fn demo_pub_sub() {
     println!("=== 发布-订阅模式演示 ===");
-    
+
     let pubsub = PubSub::new();
-    
+
     // 创建订阅者
     let sub1 = pubsub.subscribe("订阅者1".to_string());
     let sub2 = pubsub.subscribe("订阅者2".to_string());
-    
+
     // 发布消息
     for i in 0..3 {
         pubsub.publish(format!("消息 {}", i)).unwrap();
         thread::sleep(Duration::from_millis(100));
     }
-    
+
     // 接收消息
     for _ in 0..3 {
         if let Ok(msg) = sub1.try_recv() {
@@ -476,7 +476,7 @@ fn demo_pub_sub() {
             println!("订阅者2 收到: {}", msg);
         }
     }
-    
+
     println!("订阅者数量: {}", pubsub.get_subscriber_count());
     println!();
 }
@@ -484,14 +484,14 @@ fn demo_pub_sub() {
 /// 演示管道模式
 fn demo_pipeline() {
     println!("=== 管道模式演示 ===");
-    
+
     let pipeline = Pipeline::new();
-    
+
     // 发送数据
     for i in 0..3 {
         pipeline.send(format!("数据 {}", i)).unwrap();
     }
-    
+
     // 接收处理结果
     for _ in 0..3 {
         if let Ok(result) = pipeline.recv() {
@@ -504,14 +504,14 @@ fn demo_pipeline() {
 /// 演示扇出-扇入模式
 fn demo_fan_out_fan_in() {
     println!("=== 扇出-扇入模式演示 ===");
-    
+
     let fan_out_fan_in = FanOutFanIn::new(3);
-    
+
     // 发送数据
     for i in 0..5 {
         fan_out_fan_in.send(format!("任务 {}", i)).unwrap();
     }
-    
+
     // 接收聚合结果
     for _ in 0..5 {
         if let Ok(result) = fan_out_fan_in.recv() {
@@ -524,9 +524,9 @@ fn demo_fan_out_fan_in() {
 /// 演示熔断器模式
 fn demo_circuit_breaker() {
     println!("=== 熔断器模式演示 ===");
-    
+
     let circuit_breaker = CircuitBreaker::new(3, Duration::from_millis(500));
-    
+
     // 模拟成功调用
     for i in 0..2 {
         let result: Result<String, String> = circuit_breaker.call(|| {
@@ -535,7 +535,7 @@ fn demo_circuit_breaker() {
         });
         println!("结果: {:?}", result);
     }
-    
+
     // 模拟失败调用
     for i in 2..5 {
         let result: Result<String, String> = circuit_breaker.call(|| {
@@ -545,10 +545,10 @@ fn demo_circuit_breaker() {
         println!("结果: {:?}", result);
         println!("熔断器状态: {:?}", circuit_breaker.get_state());
     }
-    
+
     // 等待超时
     thread::sleep(Duration::from_millis(600));
-    
+
     // 尝试恢复
     let result: Result<String, String> = circuit_breaker.call(|| {
         println!("执行恢复操作");
@@ -562,9 +562,9 @@ fn demo_circuit_breaker() {
 /// 演示限流器模式
 fn demo_rate_limiter() {
     println!("=== 限流器模式演示 ===");
-    
+
     let rate_limiter = RateLimiter::new(3, Duration::from_millis(1000));
-    
+
     // 尝试获取令牌
     for i in 0..10 {
         if rate_limiter.try_acquire() {
@@ -574,20 +574,20 @@ fn demo_rate_limiter() {
         }
         thread::sleep(Duration::from_millis(200));
     }
-    
+
     println!("可用令牌: {}", rate_limiter.get_available_tokens());
     println!();
 }
 
 fn main() {
     println!("=== 高级并发模式示例 ===\n");
-    
+
     demo_actor_model();
     demo_pub_sub();
     demo_pipeline();
     demo_fan_out_fan_in();
     demo_circuit_breaker();
     demo_rate_limiter();
-    
+
     println!("=== 高级并发模式示例完成 ===");
 }

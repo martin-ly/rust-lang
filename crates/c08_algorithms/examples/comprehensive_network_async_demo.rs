@@ -33,10 +33,14 @@
 
 use std::time::Duration;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
-use tokio::net::{TcpListener, TcpStream};
+use tokio::net::TcpListener;
 use tokio::time::{sleep, Instant};
 
 /// 异步 TCP 服务器
+///
+/// 注意：此函数用于演示目的，在实际运行中会阻塞主线程
+/// 如需使用，请单独启动服务器线程
+#[allow(dead_code)]
 async fn async_tcp_server() -> Result<(), Box<dyn std::error::Error>> {
     println!("🚀 启动异步 TCP 服务器...");
 
@@ -124,21 +128,21 @@ async fn concurrent_requests() -> Result<(), Box<dyn std::error::Error>> {
 async fn select_example() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n🎯 使用 select! 处理多个任务...");
 
-    let mut task1 = async {
+    let task1 = async {
         sleep(Duration::from_secs(2)).await;
         "任务1完成"
     };
 
-    let mut task2 = async {
+    let task2 = async {
         sleep(Duration::from_secs(1)).await;
         "任务2完成"
     };
 
     tokio::select! {
-        result = &mut task1 => {
+        result = task1 => {
             println!("  ✅ {}", result);
         }
-        result = &mut task2 => {
+        result = task2 => {
             println!("  ✅ {}", result);
         }
     }
@@ -150,9 +154,9 @@ async fn select_example() -> Result<(), Box<dyn std::error::Error>> {
 async fn stream_processing() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n🌊 流式处理数据...");
 
-    use tokio_stream::{self as stream, StreamExt};
+    use tokio_stream::StreamExt;
 
-    let mut stream = stream::iter(1..=10)
+    let mut stream = tokio_stream::iter(1..=10)
         .map(|x| x * 2)
         .filter(|&x| x > 5);
 

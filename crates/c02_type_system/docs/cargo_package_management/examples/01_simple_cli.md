@@ -69,7 +69,7 @@ simple-cli/
 name = "simple-cli"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.90"
+rust-version = "1.92"
 
 # 包元数据
 description = "A simple CLI tool example"

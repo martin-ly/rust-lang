@@ -13,8 +13,8 @@ pub mod r#unsafe;
 
 // 导出 Rust 1.89 基础语法模块
 pub mod rust_189_simple_demo;
-// pub mod rust_189_basic_syntax; // 暂时注释掉，因为有编译错误
-// pub mod rust_189_basic_syntax_simple; // 暂时注释掉，因为有编译错误
+// pub mod rust_189_basic_syntax; // 暂时注释掉，需要修复编译错误
+// pub mod rust_189_basic_syntax_simple; // 暂时注释掉，需要修复编译错误
 
 // 重新导出Rust 1.89增强特性
 pub use performance::*;

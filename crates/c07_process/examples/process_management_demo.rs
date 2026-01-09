@@ -16,7 +16,7 @@ fn main() -> Result<()> {
 
     // 1. 创建进程管理器
     println!("📦 创建进程管理器...");
-    let pm = ProcessManager::new();
+    let _pm = ProcessManager::new();
     println!("✅ 进程管理器创建成功\n");
 
     // 2. 创建进程配置
@@ -42,7 +42,7 @@ fn main() -> Result<()> {
 
     // 3. 使用 ProcessBuilder 创建进程
     println!("🔨 使用 ProcessBuilder 创建进程...");
-    let builder = ProcessBuilder::new("echo")
+    let _builder = ProcessBuilder::new("echo")
         .args(vec!["ProcessBuilder", "Demo"])
         .env("DEMO_VAR", "demo_value");
 
@@ -52,9 +52,9 @@ fn main() -> Result<()> {
 
     // 4. 进程组管理示例
     println!("👥 进程组管理示例...");
-    let pgm = ProcessGroupManager::new();
+    let _pgm = ProcessGroupManager::new();
 
-    let group_config = ProcessConfig {
+    let _group_config = ProcessConfig {
         program: "echo".to_string(),
         args: vec!["Group".to_string(), "Demo".to_string()],
         env: HashMap::new(),

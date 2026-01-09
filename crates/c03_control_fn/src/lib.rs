@@ -1,9 +1,11 @@
-//! Rust 1.90 控制流与函数特性研究项目
+//! Rust 1.92.0 控制流与函数特性研究项目
 //!
 //! 本项目专注于控制流与函数系统的深度分析和实践应用，
 //! 涵盖了异步编程增强、类型系统增强、性能优化特性等核心新特性。
 //!
-//! ## Rust 1.90 新特性
+//! **当前版本**: Rust 1.92.0+
+//!
+//! ## Rust 1.92.0 新特性
 //!
 //! - **异步Drop**: 异步资源清理支持
 //! - **异步生成器**: 原生异步迭代器支持
@@ -33,6 +35,22 @@ pub mod rust_191_features;
 
 // 导出Rust 1.92.0新特性模块
 pub mod rust_192_features;
+
+// 重新导出Rust 1.92.0新特性
+pub use rust_192_features::{
+    control_flow_check, control_flow_branch, control_flow_loop, control_flow_match,
+    control_flow_with_never, LocatedError, ErrorContext,
+    ControlFlowAnalyzer, ControlFlowOptimizer,
+    ControlFlowMatcher, ControlFlowCombinator, ControlFlowProfiler, ControlFlowValidator,
+    ControlFlowStateMachine, ControlFlowState,
+    IteratorControlFlow,
+    ControlFlowVisualization,
+    ControlFlowUtils, ControlFlowDecorator,
+    get_rust_192_control_flow_info, demonstrate_rust_192_control_flow,
+};
+
+// 注意：async_control_flow 和 parallel_control_flow 是模块，已在 rust_192_features 中定义
+// 可以通过 rust_192_features::async_control_flow 和 rust_192_features::parallel_control_flow 访问
 
 // 重新导出Rust 1.91新特性
 pub use rust_191_features::{
@@ -95,7 +113,7 @@ pub use rust_189_basic_syntax::*;
 
 // 版本信息
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
-pub const RUST_VERSION: &str = "1.91.0";
+pub const RUST_VERSION: &str = "1.92.0";
 
 /// 项目信息
 pub struct ProjectInfo;
@@ -113,7 +131,7 @@ impl ProjectInfo {
 
     /// 获取项目描述
     pub fn description() -> &'static str {
-        "Rust 1.91 控制流与函数特性研究项目"
+        "Rust 1.92 控制流与函数特性研究项目"
     }
 }
 

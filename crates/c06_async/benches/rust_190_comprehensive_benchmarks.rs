@@ -1,5 +1,9 @@
-//! Rust 1.90.0 综合性能基准测试套件
-//! 
+//! Rust 1.90.0 综合性能基准测试套件 (历史版本)
+//!
+//! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//!
+//! **当前推荐版本**: Rust 1.92.0+ | 最新基准测试请参考 `rust_192_benchmarks.rs`
+//!
 //! 本模块提供全面的性能基准测试，包括：
 //! - 基础异步操作性能
 //! - 高级特性性能对比
@@ -21,17 +25,17 @@ use c06_async::rust_190_advanced_features::AdvancedAsyncFeatures190;
 /// 基础异步操作基准测试
 fn bench_basic_async_operations(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
-    
+
     let mut group = c.benchmark_group("basic_async_operations");
     group.throughput(Throughput::Elements(1));
-    
+
     // 异步睡眠基准测试
     group.bench_function("async_sleep_1ms", |b| {
         b.to_async(&rt).iter(|| async {
             sleep(Duration::from_millis(1)).await;
         });
     });
-    
+
     // 异步计算基准测试
     group.bench_function("async_computation", |b| {
         b.to_async(&rt).iter(|| async {
@@ -42,7 +46,7 @@ fn bench_basic_async_operations(c: &mut Criterion) {
             std::hint::black_box(sum);
         });
     });
-    
+
     // 异步任务创建基准测试
     group.bench_function("async_task_creation", |b| {
         b.to_async(&rt).iter(|| async {
@@ -54,16 +58,16 @@ fn bench_basic_async_operations(c: &mut Criterion) {
             std::hint::black_box(result);
         });
     });
-    
+
     group.finish();
 }
 
 /// 并发处理基准测试
 fn bench_concurrent_processing(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
-    
+
     let mut group = c.benchmark_group("concurrent_processing");
-    
+
     for &task_count in &[10, 50, 100, 500, 1000] {
         group.throughput(Throughput::Elements(task_count));
         group.bench_with_input(
@@ -79,23 +83,23 @@ fn bench_concurrent_processing(c: &mut Criterion) {
                             })
                         })
                         .collect();
-                    
+
                     let results = futures::future::join_all(handles).await;
                     std::hint::black_box(results);
                 });
             },
         );
     }
-    
+
     group.finish();
 }
 
 /// 资源池性能基准测试
 fn bench_resource_pool_performance(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
-    
+
     let mut group = c.benchmark_group("resource_pool_performance");
-    
+
     for &pool_size in &[10, 50, 100, 500] {
         group.throughput(Throughput::Elements(pool_size));
         group.bench_with_input(
@@ -104,7 +108,7 @@ fn bench_resource_pool_performance(c: &mut Criterion) {
             |b, &pool_size| {
                 b.to_async(&rt).iter(|| async {
                     let pool = Arc::new(AdvancedAsyncFeatures190::new());
-                    
+
                     let handles: Vec<_> = (0..pool_size)
                         .map(|_| {
                             let pool = Arc::clone(&pool);
@@ -113,23 +117,23 @@ fn bench_resource_pool_performance(c: &mut Criterion) {
                             })
                         })
                         .collect();
-                    
+
                     let results = futures::future::join_all(handles).await;
                     std::hint::black_box(results);
                 });
             },
         );
     }
-    
+
     group.finish();
 }
 
 /// 缓存性能基准测试
 fn bench_cache_performance(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
-    
+
     let mut group = c.benchmark_group("cache_performance");
-    
+
     for &cache_size in &[100, 1000, 10000] {
         group.throughput(Throughput::Elements(cache_size));
         group.bench_with_input(
@@ -138,7 +142,7 @@ fn bench_cache_performance(c: &mut Criterion) {
             |b, &cache_size| {
                 b.to_async(&rt).iter(|| async {
                     let features = AdvancedAsyncFeatures190::new();
-                    
+
                     // 模拟缓存操作
                     for i in 0..cache_size {
                         features.demo_smart_async_cache().await.unwrap();
@@ -151,16 +155,16 @@ fn bench_cache_performance(c: &mut Criterion) {
             },
         );
     }
-    
+
     group.finish();
 }
 
 /// 流处理性能基准测试
 fn bench_stream_processing(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
-    
+
     let mut group = c.benchmark_group("stream_processing");
-    
+
     for &item_count in &[100, 500, 1000, 5000] {
         group.throughput(Throughput::Elements(item_count));
         group.bench_with_input(
@@ -169,7 +173,7 @@ fn bench_stream_processing(c: &mut Criterion) {
             |b, &item_count| {
                 b.to_async(&rt).iter(|| async {
                     let features = AdvancedAsyncFeatures190::new();
-                    
+
                     // 模拟流处理
                     for i in 0..item_count {
                         features.demo_advanced_async_streams().await.unwrap();
@@ -181,16 +185,16 @@ fn bench_stream_processing(c: &mut Criterion) {
             },
         );
     }
-    
+
     group.finish();
 }
 
 /// 批处理性能基准测试
 fn bench_batch_processing(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
-    
+
     let mut group = c.benchmark_group("batch_processing");
-    
+
     for &batch_size in &[10, 50, 100, 500] {
         group.throughput(Throughput::Elements(batch_size));
         group.bench_with_input(
@@ -199,7 +203,7 @@ fn bench_batch_processing(c: &mut Criterion) {
             |b, &batch_size| {
                 b.to_async(&rt).iter(|| async {
                     let features = AdvancedAsyncFeatures190::new();
-                    
+
                     // 模拟批处理
                     for _ in 0..batch_size {
                         features.demo_async_batch_processing().await.unwrap();
@@ -208,17 +212,17 @@ fn bench_batch_processing(c: &mut Criterion) {
             },
         );
     }
-    
+
     group.finish();
 }
 
 /// Rust 1.90.0 特性性能对比基准测试
 fn bench_rust_190_features_comparison(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
-    
+
     let mut group = c.benchmark_group("rust_190_features_comparison");
     group.throughput(Throughput::Elements(1));
-    
+
     // 基础特性 vs 高级特性对比
     group.bench_function("basic_features", |b| {
         b.to_async(&rt).iter(|| async {
@@ -226,23 +230,23 @@ fn bench_rust_190_features_comparison(c: &mut Criterion) {
             features.demo_enhanced_async_resource_management().await.unwrap();
         });
     });
-    
+
     group.bench_function("advanced_features", |b| {
         b.to_async(&rt).iter(|| async {
             let features = AdvancedAsyncFeatures190::new();
             features.demo_advanced_resource_pool().await.unwrap();
         });
     });
-    
+
     group.finish();
 }
 
 /// 内存使用效率基准测试
 fn bench_memory_efficiency(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
-    
+
     let mut group = c.benchmark_group("memory_efficiency");
-    
+
     for &allocation_count in &[100, 1000, 10000] {
         group.throughput(Throughput::Elements(allocation_count));
         group.bench_with_input(
@@ -251,31 +255,31 @@ fn bench_memory_efficiency(c: &mut Criterion) {
             |b, &allocation_count| {
                 b.to_async(&rt).iter(|| async {
                     let mut data = Vec::with_capacity(allocation_count as usize);
-                    
+
                     for i in 0..allocation_count as usize {
                         data.push(vec![i as u8; 1024]);
-                        
+
                         if i % 100 == 0 {
                             // 模拟内存清理
                             data.truncate(data.len() / 2);
                         }
                     }
-                    
+
                     std::hint::black_box(data);
                 });
             },
         );
     }
-    
+
     group.finish();
 }
 
 /// 错误处理性能基准测试
 fn bench_error_handling_performance(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
-    
+
     let mut group = c.benchmark_group("error_handling_performance");
-    
+
     for &error_rate in &[0.1, 0.2, 0.5] {
         group.throughput(Throughput::Elements(1000));
         group.bench_with_input(
@@ -284,7 +288,7 @@ fn bench_error_handling_performance(c: &mut Criterion) {
             |b, &error_rate| {
                 b.to_async(&rt).iter(|| async {
                     let features = Rust190AsyncFeatures::new();
-                    
+
                     // 模拟不同错误率的处理
                     for i in 0..1000 {
                         if (i as f64 / 1000.0) < error_rate {
@@ -299,17 +303,17 @@ fn bench_error_handling_performance(c: &mut Criterion) {
             },
         );
     }
-    
+
     group.finish();
 }
 
 /// 综合性能基准测试
 fn bench_comprehensive_performance(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
-    
+
     let mut group = c.benchmark_group("comprehensive_performance");
     group.throughput(Throughput::Elements(1));
-    
+
     // 完整特性演示基准测试
     group.bench_function("complete_basic_demo", |b| {
         b.to_async(&rt).iter(|| async {
@@ -317,23 +321,23 @@ fn bench_comprehensive_performance(c: &mut Criterion) {
             features.run_all_demos().await.unwrap();
         });
     });
-    
+
     group.bench_function("complete_advanced_demo", |b| {
         b.to_async(&rt).iter(|| async {
             let features = AdvancedAsyncFeatures190::new();
             features.demo_advanced_features().await.unwrap();
         });
     });
-    
+
     group.finish();
 }
 
 /// 压力测试基准测试
 fn bench_stress_test(c: &mut Criterion) {
     let rt = Runtime::new().unwrap();
-    
+
     let mut group = c.benchmark_group("stress_test");
-    
+
     for &concurrent_level in &[100, 500, 1000, 2000] {
         group.throughput(Throughput::Elements(concurrent_level));
         group.bench_with_input(
@@ -343,32 +347,32 @@ fn bench_stress_test(c: &mut Criterion) {
                 b.to_async(&rt).iter(|| async {
                     let semaphore = Arc::new(Semaphore::new(concurrent_level as usize));
                     let counter = Arc::new(AtomicUsize::new(0));
-                    
+
                     let handles: Vec<_> = (0..concurrent_level as usize)
                         .map(|_| {
                             let semaphore = Arc::clone(&semaphore);
                             let counter = Arc::clone(&counter);
-                            
+
                             tokio::spawn(async move {
                                 let _permit = semaphore.acquire().await.unwrap();
-                                
+
                                 // 模拟一些工作
                                 sleep(Duration::from_micros(100)).await;
-                                
+
                                 counter.fetch_add(1, Ordering::Relaxed);
                             })
                         })
                         .collect();
-                    
+
                     futures::future::join_all(handles).await;
-                    
+
                     let final_count = counter.load(Ordering::Relaxed);
                     std::hint::black_box(final_count);
                 });
             },
         );
     }
-    
+
     group.finish();
 }
 

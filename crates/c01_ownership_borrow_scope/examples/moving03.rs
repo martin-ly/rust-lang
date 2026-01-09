@@ -1,6 +1,6 @@
 fn transfer_elements<T>(source: &mut Vec<T>, destination: &mut Vec<T>) {
     // 使用 drain 方法转移元素
-    destination.extend(source.drain(..));
+    destination.append(source);
 }
 
 fn main() {

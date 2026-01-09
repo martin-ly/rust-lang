@@ -27,11 +27,11 @@ fn main() {
     // 1. 高性能原子计数器演示
     println!("1. 高性能原子计数器演示:");
     let counter = HighPerformanceCounter::new();
-    
+
     // 多线程递增测试
     let counter = Arc::new(counter);
     let mut handles = vec![];
-    
+
     for i in 0..4 {
         let counter = Arc::clone(&counter);
         let handle = thread::spawn(move || {
@@ -42,18 +42,18 @@ fn main() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     println!("最终计数值: {}", counter.get());
     println!("预期值: 100000\n");
 
     // 2. 高级线程池演示
     println!("2. 高级线程池演示:");
     let pool = AdvancedThreadPool::new(4);
-    
+
     // 提交多个任务
     for i in 0..20 {
         pool.execute(move || {
@@ -61,7 +61,7 @@ fn main() {
             thread::sleep(Duration::from_millis(10));
         });
     }
-    
+
     // 等待任务完成
     thread::sleep(Duration::from_millis(200));
     println!("完成任务数: {}", pool.get_completed_tasks());
@@ -71,7 +71,7 @@ fn main() {
     // 3. 无锁环形缓冲区演示
     println!("3. 无锁环形缓冲区演示:");
     let buffer = Arc::new(LockFreeRingBuffer::<1024>::new());
-    
+
     // 生产者线程
     let producer_buffer = Arc::clone(&buffer);
     let producer = thread::spawn(move || {
@@ -111,11 +111,11 @@ fn main() {
     println!("4. 内存预取优化演示:");
     let optimizer = MemoryPrefetchOptimizer::new(64);
     let data: Vec<f64> = (1..=1000000).map(|i| i as f64).collect();
-    
+
     let start = std::time::Instant::now();
     let sum = optimizer.optimized_vector_sum(&data);
     let duration = start.elapsed();
-    
+
     println!("内存优化求和结果: {}", sum);
     println!("耗时: {:?}", duration);
     println!();
@@ -124,11 +124,11 @@ fn main() {
     println!("5. SIMD 优化演示:");
     let a: Vec<f32> = (1..=1000000).map(|i| i as f32).collect();
     let b: Vec<f32> = (1..=1000000).map(|i| (i * 2) as f32).collect();
-    
+
     let start = std::time::Instant::now();
     let result = SimdOptimizer::simd_vector_add(&a, &b);
     let duration = start.elapsed();
-    
+
     println!("SIMD 向量加法完成");
     println!("结果长度: {}", result.len());
     println!("前5个结果: {:?}", &result[..5]);
@@ -143,6 +143,6 @@ fn main() {
     // 7. 综合演示
     println!("7. 综合演示:");
     demonstrate_advanced_rust_190_features();
-    
+
     println!("\n=== Rust 1.90 Edition 2024 高级特性演示完成 ===");
 }

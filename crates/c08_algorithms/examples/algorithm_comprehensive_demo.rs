@@ -61,7 +61,7 @@ fn sorting_demo() {
     println!("📊 排序算法演示");
     println!("================");
 
-    let mut data = vec![64, 34, 25, 12, 22, 11, 90, 5];
+    let data = vec![64, 34, 25, 12, 22, 11, 90, 5];
     println!("原始数据: {:?}", data);
 
     // 快速排序
@@ -214,9 +214,21 @@ fn quicksort<T: Ord + Clone>(arr: &mut [T]) {
     quicksort(&mut less);
     quicksort(&mut greater);
 
-    arr[..less.len()].copy_from_slice(&less);
-    arr[less.len()..less.len() + equal.len()].copy_from_slice(&equal);
-    arr[less.len() + equal.len()..].copy_from_slice(&greater);
+    // 使用更安全的方式复制数据
+    let mut idx = 0;
+    for item in less {
+        arr[idx] = item;
+        idx += 1;
+    }
+    for item in equal {
+        arr[idx] = item;
+        idx += 1;
+    }
+    for item in greater {
+        arr[idx] = item;
+        idx += 1;
+    }
+    // idx 在循环中被修改，必须为 mut
 }
 
 fn mergesort<T: Ord + Clone>(arr: &[T]) -> Vec<T> {

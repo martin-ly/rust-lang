@@ -106,6 +106,8 @@
 - 📚 **历史文档**: [Rust 1.91 异步改进文档](./docs/RUST_191_ASYNC_IMPROVEMENTS.md) (历史参考，已更新至 1.92.0)
 - 💻 **新增示例**: [Rust 1.92.0 特性演示示例](./examples/rust_192_features_demo.rs) ⭐ NEW!
 - 💻 **历史示例**: [Rust 1.91 特性演示示例](./examples/rust_191_features_demo.rs) (历史参考，已更新至 1.92.0)
+- 🧪 **新增测试**: [Rust 1.92.0 综合测试套件](./tests/rust_192_comprehensive_tests.rs) ⭐ NEW!
+- ⚡ **新增基准测试**: [Rust 1.92.0 性能基准测试](./benches/rust_192_comprehensive_benchmarks.rs) ⭐ NEW!
 
 ## 🎉 **NEW! 2025-10-22 标准化架构升级**
 
@@ -855,9 +857,28 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 # 运行所有基准（默认）
 cargo bench -p c06_async
 
+# 运行 Rust 1.92.0 特性基准测试
+cargo bench --bench rust_192_comprehensive_benchmarks
+
+# 运行 Rust 1.90 特性基准测试
+cargo bench --bench rust_190_comprehensive_benchmarks
+
 # 可选：在浏览器查看指标（如使用 bench_with_metrics）
 # http://127.0.0.1:9900/metrics
 ```
+
+### Rust 1.92.0 特性基准测试 ⭐ NEW
+
+新增的 `rust_192_comprehensive_benchmarks` 基准测试套件包括：
+
+- **rotate_right 性能测试**: 测试不同队列大小的轮转性能
+- **NonZero::div_ceil 性能测试**: 测试池大小计算的性能
+- **资源分配器性能测试**: 测试不同配置的资源分配器性能
+- **迭代器方法特化性能测试**: 测试迭代器比较的性能提升
+- **异步任务调度器性能测试**: 测试不同任务数量的调度性能
+- **并发队列操作性能测试**: 测试并发添加和轮转的性能
+- **完整工作流程性能测试**: 测试完整的异步任务处理流程
+- **rotate_right vs 手动实现对比**: 对比新特性的性能优势
 
 ### 异步操作性能对比
 
@@ -1016,7 +1037,7 @@ kubectl get pods -n rust-async-190
 
 ### 短期目标 (3-6 个月)
 
-- [ ] Rust 1.92.0 正式发布后的 API 适配（已完成）
+- [x] Rust 1.92.0 正式发布后的 API 适配（已完成 ✅）
 - [ ] 更多异步运行时支持
 - [ ] 性能优化和基准测试
 
@@ -1043,7 +1064,7 @@ kubectl get pods -n rust-async-190
 ---
 
 **项目状态**: ✅ 已完成
-**最后更新**: 2025年11月15日
+**最后更新**: 2025年12月11日
 **适用版本**: Rust 1.92.0+
 **下一步**: 跟踪 Rust 新版本特性，持续优化和更新
 

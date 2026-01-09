@@ -1,4 +1,8 @@
-//! # Rust 1.90 特性测试 / Rust 1.90 Features Tests
+//! # Rust 1.90 特性测试 / Rust 1.90 Features Tests (历史版本)
+//!
+//! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//!
+//! **当前推荐版本**: Rust 1.92.0+ | 最新测试请参考 `rust_192_comprehensive_tests.rs`
 //!
 //! 本测试文件全面测试 Rust 1.90 版本的所有新特性和改进。
 //! This test file comprehensively tests all new features and improvements in Rust 1.90.

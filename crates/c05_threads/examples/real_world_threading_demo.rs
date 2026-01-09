@@ -54,7 +54,7 @@ impl MultiThreadFileProcessor {
 
                 thread::spawn(move || {
                     println!("文件处理工作线程 {} 启动", worker_id);
-                    
+
                     loop {
                         let task = {
                             let receiver = task_receiver.lock().unwrap();
@@ -64,15 +64,15 @@ impl MultiThreadFileProcessor {
                         match task {
                             Ok(task) => {
                                 let start = Instant::now();
-                                
+
                                 // 模拟文件处理（根据文件大小计算处理时间）
                                 let processing_time = Duration::from_millis(task.size as u64 / 100);
                                 thread::sleep(processing_time);
-                                
+
                                 let duration = start.elapsed();
-                                println!("工作线程 {} 处理文件 {} 完成，耗时 {:?}", 
+                                println!("工作线程 {} 处理文件 {} 完成，耗时 {:?}",
                                     worker_id, task.filename, duration);
-                                
+
                                 result_sender.send((task.id, duration)).unwrap();
                                 completed_count.fetch_add(1, Ordering::Relaxed);
                             }
@@ -172,7 +172,7 @@ impl RealTimeDataProcessor {
 
                 thread::spawn(move || {
                     println!("数据处理器 {} 启动", processor_id);
-                    
+
                     loop {
                         let data = {
                             let receiver = data_receiver.lock().unwrap();
@@ -183,17 +183,17 @@ impl RealTimeDataProcessor {
                             Ok(value) => {
                                 // 处理数据（例如：计算移动平均）
                                 let processed_value = value * 1.1;
-                                
+
                                 let mut buf = buffer.lock().unwrap();
                                 buf.push_back(processed_value);
-                                
+
                                 // 保持缓冲区大小
                                 if buf.len() > 1000 {
                                     buf.pop_front();
                                 }
-                                
+
                                 if processor_id == 0 {
-                                    println!("处理器 {} 处理数据: {:.2} -> {:.2}", 
+                                    println!("处理器 {} 处理数据: {:.2} -> {:.2}",
                                         processor_id, value, processed_value);
                                 }
                             }
@@ -249,7 +249,7 @@ impl TaskScheduler {
             let tasks = Arc::clone(&tasks);
             thread::spawn(move || {
                 println!("任务调度器启动");
-                
+
                 loop {
                     // 检查停止信号
                     if stop_receiver.try_recv().is_ok() {
@@ -260,7 +260,7 @@ impl TaskScheduler {
                     // 检查待执行任务
                     let now = Instant::now();
                     let mut tasks_guard = tasks.lock().unwrap();
-                    
+
                     while let Some((scheduled_time, task)) = tasks_guard.front() {
                         if *scheduled_time <= now {
                             let (_scheduled_time, task): (Instant, Box<dyn FnOnce() + Send + 'static>) = tasks_guard.pop_front().unwrap();
@@ -271,7 +271,7 @@ impl TaskScheduler {
                             break;
                         }
                     }
-                    
+
                     drop(tasks_guard);
                     thread::sleep(Duration::from_millis(10));
                 }
@@ -310,7 +310,7 @@ pub struct ResourcePool<T> {
 impl<T> ResourcePool<T> {
     pub fn new(resources: Vec<T>) -> Self {
         let available_indices: Vec<usize> = (0..resources.len()).collect();
-        
+
         Self {
             resources: Arc::new(Mutex::new(resources)),
             available: Arc::new(Mutex::new(available_indices)),
@@ -321,7 +321,7 @@ impl<T> ResourcePool<T> {
     pub fn acquire(&self) -> Option<usize> {
         let mut available = self.available.lock().unwrap();
         let mut in_use = self.in_use.lock().unwrap();
-        
+
         if let Some(index) = available.pop() {
             in_use.push(index);
             Some(index)
@@ -333,7 +333,7 @@ impl<T> ResourcePool<T> {
     pub fn release(&self, index: usize) {
         let mut available = self.available.lock().unwrap();
         let mut in_use = self.in_use.lock().unwrap();
-        
+
         if let Some(pos) = in_use.iter().position(|&i| i == index) {
             in_use.remove(pos);
             available.push(index);
@@ -357,9 +357,9 @@ impl<T> ResourcePool<T> {
 #[allow(dead_code)]
 fn demo_file_processing() {
     println!("=== 多线程文件处理演示 ===");
-    
+
     let processor = MultiThreadFileProcessor::new(3);
-    
+
     // 提交文件处理任务
     let files = vec![
         FileTask::new(1, "document1.pdf".to_string(), 5000, 1),
@@ -368,15 +368,15 @@ fn demo_file_processing() {
         FileTask::new(4, "archive.zip".to_string(), 8000, 3),
         FileTask::new(5, "code.rs".to_string(), 1000, 2),
     ];
-    
+
     for file in files {
         processor.submit_task(file).unwrap();
     }
-    
+
     // 等待处理完成
     thread::sleep(Duration::from_millis(2000));
     println!("处理完成，共处理 {} 个文件", processor.get_completed_count());
-    
+
     processor.shutdown();
     println!();
 }
@@ -385,7 +385,7 @@ fn demo_file_processing() {
 #[allow(dead_code)]
 fn demo_concurrent_requests() {
     println!("=== 并发网络请求演示 ===");
-    
+
     let client = ConcurrentHttpClient::new(3);
     let urls = vec![
         "https://api.example.com/users".to_string(),
@@ -394,9 +394,9 @@ fn demo_concurrent_requests() {
         "https://api.example.com/categories".to_string(),
         "https://api.example.com/reviews".to_string(),
     ];
-    
+
     let start = Instant::now();
-    
+
     // 使用 rayon 并行处理请求
     let results: Vec<_> = urls.into_par_iter()
         .map(|url| {
@@ -409,7 +409,7 @@ fn demo_concurrent_requests() {
             }).join().unwrap()
         })
         .collect();
-    
+
     let duration = start.elapsed();
     println!("并发请求完成，耗时: {:?}", duration);
     println!("收到 {} 个响应", results.len());
@@ -420,19 +420,19 @@ fn demo_concurrent_requests() {
 #[allow(dead_code)]
 fn demo_real_time_processing() {
     println!("=== 实时数据处理演示 ===");
-    
+
     let processor = RealTimeDataProcessor::new(2);
-    
+
     // 模拟数据流
     for i in 0..50 {
         let value = (i as f64) * 0.1 + (i % 10) as f64;
         processor.send_data(value).unwrap();
         thread::sleep(Duration::from_millis(50));
     }
-    
+
     thread::sleep(Duration::from_millis(1000));
     println!("缓冲区大小: {}", processor.get_buffer_size());
-    
+
     processor.shutdown();
     println!();
 }
@@ -441,25 +441,25 @@ fn demo_real_time_processing() {
 #[allow(dead_code)]
 fn demo_task_scheduling() {
     println!("=== 任务调度演示 ===");
-    
+
     let scheduler = TaskScheduler::new();
-    
+
     // 调度多个任务
     scheduler.schedule_task(Duration::from_millis(100), || {
         println!("任务 1 执行");
     });
-    
+
     scheduler.schedule_task(Duration::from_millis(200), || {
         println!("任务 2 执行");
     });
-    
+
     scheduler.schedule_task(Duration::from_millis(300), || {
         println!("任务 3 执行");
     });
-    
+
     // 等待任务执行
     thread::sleep(Duration::from_millis(500));
-    
+
     scheduler.shutdown();
     println!();
 }
@@ -468,12 +468,12 @@ fn demo_task_scheduling() {
 #[allow(dead_code)]
 fn demo_resource_pool() {
     println!("=== 资源池管理演示 ===");
-    
+
     let resources: Vec<String> = (1..=5).map(|i| format!("Resource-{}", i)).collect();
     let pool = Arc::new(ResourcePool::new(resources));
-    
+
     let mut handles = vec![];
-    
+
     // 模拟多个线程使用资源
     for i in 0..10 {
         let pool = Arc::clone(&pool);
@@ -489,11 +489,11 @@ fn demo_resource_pool() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     let (available, in_use) = pool.get_stats();
     println!("资源池状态: 可用 {}, 使用中 {}", available, in_use);
     println!();
@@ -501,13 +501,13 @@ fn demo_resource_pool() {
 
 fn main() {
     println!("=== 真实世界线程编程示例 ===\n");
-    
+
     // 运行各种演示
     demo_file_processing();
     demo_concurrent_requests();
     demo_real_time_processing();
     demo_task_scheduling();
     demo_resource_pool();
-    
+
     println!("=== 所有演示完成 ===");
 }

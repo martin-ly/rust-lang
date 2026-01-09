@@ -1,7 +1,16 @@
 //! Rust 1.89 功能 (历史版本)
 //!
-//! ⚠️ 本文件针对 Rust 1.89。Rust 1.90 主要更新: LLD 链接器、新 API、const 增强。
-//! 参考: [Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
+//! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//!
+//! **当前推荐版本**: Rust 1.92.0+ | 最新基准测试请参考 `rust_192_benchmarks.rs`
+//!
+//! ## 版本历史说明
+//!
+//! 本文件展示 Rust 1.89 版本的基准测试，当前项目已升级到 Rust 1.92.0。
+//!
+//! 参考:
+//! - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
+//! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 
 use c03_control_fn::async_control_flow_189::AsyncControlFlowExecutor189;
 use c03_control_fn::performance_optimization_189::{

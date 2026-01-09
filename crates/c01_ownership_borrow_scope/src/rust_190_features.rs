@@ -1,4 +1,8 @@
-//! # Rust 1.90 特性实现模块 / Rust 1.90 Features Implementation Module
+//! # Rust 1.90 特性实现模块 / Rust 1.90 Features Implementation Module (历史版本)
+//!
+//! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//!
+//! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
 //!
 //! 本模块实现了 Rust 1.90 版本的新特性和改进，包括：
 //! This module implements new features and improvements in Rust 1.90, including:

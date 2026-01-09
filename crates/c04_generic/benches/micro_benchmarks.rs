@@ -1,5 +1,5 @@
 //! 微基准测试：迭代器管道与锁策略对比
-//! 
+//!
 //! 本文件提供可运行的基准测试，对比不同实现的性能特征。
 
 use criterion::{criterion_group, criterion_main, Criterion};
@@ -11,7 +11,7 @@ use c04_generic::rust_190_features::*;
 
 fn bench_iterator_pipelines(c: &mut Criterion) {
     let data = (1..=1000).collect::<Vec<i32>>();
-    
+
     c.bench_function("unboxed_pipeline", |b| {
         b.iter(|| {
             let d = Data::new(black_box(data.clone()));
@@ -19,7 +19,7 @@ fn bench_iterator_pipelines(c: &mut Criterion) {
             black_box(result)
         })
     });
-    
+
     c.bench_function("boxed_pipeline", |b| {
         b.iter(|| {
             let result: Vec<i32> = boxed_pipeline(black_box(&data)).collect();

@@ -151,7 +151,7 @@ default-members = ["crates/cli"]    # 默认构建目标
 [workspace.package]
 version = "1.0.0"
 edition = "2024"
-rust-version = "1.90"
+rust-version = "1.92"
 license = "MIT"
 authors = ["Your Name <you@example.com>"]
 repository = "https://github.com/user/my-workspace"
